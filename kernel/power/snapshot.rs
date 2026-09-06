@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -50,43 +300,44 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     static bool hibernate_restore_protection_active;
 #[no_mangle]
 pub unsafe extern "C" fn enable_restore_image_protection() {
-    void enable_restore_image_protection(void)
-    {
     hibernate_restore_protection = true;
     }
 #[no_mangle]
 pub unsafe extern "C" fn hibernate_restore_protection_begin() {
-    static inline void hibernate_restore_protection_begin(void)
-    {
     hibernate_restore_protection_active = hibernate_restore_protection;
     }
 #[no_mangle]
 pub unsafe extern "C" fn hibernate_restore_protection_end() {
-    static inline void hibernate_restore_protection_end(void)
-    {
     hibernate_restore_protection_active = false;
     }
 #[no_mangle]
 pub unsafe extern "C" fn hibernate_restore_protect_page(page_address: *mut c_void) -> int __must_check {
-    static inline int __must_check hibernate_restore_protect_page(void *page_address)
-    {
-    if (hibernate_restore_protection_active)
+    if (hibernate_restore_protection_active) {
     return set_memory_ro((unsigned long)page_address, 1);
+    }
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn hibernate_restore_unprotect_page(page_address: *mut c_void) -> c_int {
-    static inline int hibernate_restore_unprotect_page(void *page_address)
-    {
-    if (hibernate_restore_protection_active)
+    if (hibernate_restore_protection_active) {
     return set_memory_rw((unsigned long)page_address, 1);
+    }
     return 0;
     }
 
-    static inline void hibernate_restore_protection_begin(void) {}
-    static inline void hibernate_restore_protection_end(void) {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: hibernate_restore_protection_begin
+pub unsafe extern "C" fn hibernate_restore_protection_begin_dup() {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: hibernate_restore_protection_end
+pub unsafe extern "C" fn hibernate_restore_protection_end_dup() {}
     static inline int __must_check hibernate_restore_protect_page(void *page_address) {return 0; }
-    static inline int hibernate_restore_unprotect_page(void *page_address) {return 0; }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: hibernate_restore_unprotect_page
+pub unsafe extern "C" fn hibernate_restore_unprotect_page_dup(page_address: *mut c_void) -> c_int {return 0; }
 
 //
 // The calls to set_direct_map_*() should not fail because remapping a page
@@ -96,43 +347,39 @@ pub unsafe extern "C" fn hibernate_restore_unprotect_page(page_address: *mut c_v
 //
 #[no_mangle]
 pub unsafe extern "C" fn hibernate_map_page(page: *mut page) {
-    static inline void hibernate_map_page(struct page *page)
-    {
-    if (IS_ENABLED(CONFIG_ARCH_HAS_SET_DIRECT_MAP)) {
-    let mut ret: c_int = set_direct_map_default_noflush(page);
-    if (ret)
+    if (IS_ENABLED!(CONFIG_ARCH_HAS_SET_DIRECT_MAP)) {
+pub static mut ret: c_int = 0;
+    if (ret) {
     pr_warn_once("Failed to remap page\n");
+    }
     } else {
     debug_pagealloc_map_pages(page, 1);
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn hibernate_unmap_page(page: *mut page) {
-    static inline void hibernate_unmap_page(struct page *page)
-    {
-    if (IS_ENABLED(CONFIG_ARCH_HAS_SET_DIRECT_MAP)) {
-    let mut addr: c_ulong = (unsigned long)page_address(page);
-    let mut ret: c_int = set_direct_map_invalid_noflush(page);
-    if (ret)
+    if (IS_ENABLED!(CONFIG_ARCH_HAS_SET_DIRECT_MAP)) {
+pub static mut addr: c_ulong = 0;
+pub static mut ret: c_int = 0;
+    if (ret) {
     pr_warn_once("Failed to remap page\n");
+    }
     flush_tlb_kernel_range(addr, addr + PAGE_SIZE);
     } else {
     debug_pagealloc_unmap_pages(page, 1);
     }
     }
-    static int swsusp_page_is_free(struct page *);
-    static void swsusp_set_page_forbidden(struct page *);
-    static void swsusp_unset_page_forbidden(struct page *);
+// forward_decl: swsusp_page_is_free;
+// forward_decl: swsusp_set_page_forbidden;
+// forward_decl: swsusp_unset_page_forbidden;
 //
 // Number of bytes to reserve for memory allocations made by device drivers
 // from their ->freeze() and ->freeze_noirq() callbacks so that they don't
 // cause image creation to fail (tunable via /sys/power/reserved_size).
 //
-    unsigned long reserved_size;
+    let mut reserved_size = 0;
 #[no_mangle]
-pub unsafe extern "C" fn hibernate_reserved_size_init() -> void __init {
-    void __init hibernate_reserved_size_init(void)
-    {
+pub unsafe extern "C" fn hibernate_reserved_size_init()  {
     reserved_size = SPARE_PAGES * PAGE_SIZE;
     }
 //
@@ -141,11 +388,9 @@ pub unsafe extern "C" fn hibernate_reserved_size_init() -> void __init {
 // size will not exceed N bytes, but if that is impossible, it will
 // try to create the smallest image possible.
 //
-    unsigned long image_size;
+    let mut image_size = 0;
 #[no_mangle]
-pub unsafe extern "C" fn hibernate_image_size_init() -> void __init {
-    void __init hibernate_image_size_init(void)
-    {
+pub unsafe extern "C" fn hibernate_image_size_init()  {
     image_size = ((totalram_pages() * 2) / 5) * PAGE_SIZE;
     }
 //
@@ -154,7 +399,7 @@ pub unsafe extern "C" fn hibernate_image_size_init() -> void __init {
 // allocated by the "resume" kernel, so their contents cannot be written
 // directly to their "original" page frames.
 //
-    struct pbe *restore_pblist;
+pub static mut restore_pblist: *mut c_void = core::ptr::null_mut();
 // struct linked_page is used to build chains of pages
 
 #[repr(C)]
@@ -169,13 +414,13 @@ pub struct linked_page {
 // memory contents.
 //
     pub safe_pages_list: *mut static struct linked_page,
-// Pointer to an auxiliary buffer (1 page)
+Pointer to an auxiliary buffer (1 page)
     pub buffer: *mut static void,
 pub const PG_ANY: c_int = 0;
 pub const PG_SAFE: c_int = 1;
 pub const PG_UNSAFE_CLEAR: c_int = 1;
 pub const PG_UNSAFE_KEEP: c_int = 0;
-    pub allocated_unsafe_pages: static unsigned int,
+    pub allocated_unsafe_pages: unsigned int,
 //
 // get_image_page - Allocate a page for a hibernation image.
 // @gfp_mask: GFP mask for the allocation.
@@ -189,12 +434,13 @@ pub const PG_UNSAFE_KEEP: c_int = 0;
 // Each allocated image page is marked as PageNosave and PageNosaveFree so that
 // swsusp_free() can release it.
 //
-    static void *get_image_page(gfp_t gfp_mask, int safe_needed)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn get_image_page(gfp_mask: gfp_t, safe_needed: c_int) -> *mut c_void {
     pub res: *mut c_void,
     pub )get_zeroed_page(gfp_mask): *mut res = (void,
-    if (safe_needed)
+    if (safe_needed) {
     while (res && swsusp_page_is_free(virt_to_page(res))) {
+    }
 // The page is unsafe, mark it for swsusp_free()
     pub )get_zeroed_page(gfp_mask): *mut res = (void,
     }
@@ -202,10 +448,10 @@ pub const PG_UNSAFE_KEEP: c_int = 0;
     }
     pub res: return,
     }
-    static void *__get_safe_page(gfp_t gfp_mask)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __get_safe_page(gfp_mask: gfp_t) -> *mut c_void {
     if (safe_pages_list) {
-    pub safe_pages_list: *mut *mut void ret =,
+    pub safe_pages_list: *mut *mut c_void ret =,
     pub safe_pages_list->next: safe_pages_list =,
     pub PAGE_SIZE): memset(ret, 0,,
     pub ret: return,
@@ -214,12 +460,10 @@ pub const PG_UNSAFE_KEEP: c_int = 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn get_safe_page(gfp_mask: gfp_t) -> c_ulong {
-    unsigned long get_safe_page(gfp_t gfp_mask)
-    {
     pub long)__get_safe_page(gfp_mask): return (unsigned,
     }
-    static struct page *alloc_image_page(gfp_t gfp_mask)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn alloc_image_page(gfp_mask: gfp_t) -> *mut c_void {
     pub page: *mut page,
     pub alloc_page(gfp_mask): page =,
     if (page) {
@@ -228,8 +472,6 @@ pub unsafe extern "C" fn get_safe_page(gfp_mask: gfp_t) -> c_ulong {
     }
 #[no_mangle]
 unsafe extern "C" fn recycle_safe_page(page_address: *mut c_void) {
-    static void recycle_safe_page(void *page_address)
-    {
     pub page_address: *mut *mut linked_page lp =,
     pub safe_pages_list: lp->next =,
     pub lp: safe_pages_list =,
@@ -244,15 +486,13 @@ unsafe extern "C" fn recycle_safe_page(page_address: *mut c_void) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn free_image_page(addr: *mut c_void, clear_nosave_free: c_int) {
-    static inline void free_image_page(void *addr, int clear_nosave_free)
-    {
     pub page: *mut page,
     pub virt_to_page(addr): page =,
-    if (clear_nosave_free)
+    if (clear_nosave_free) {
     }
-    static inline void free_list_of_pages(struct linked_page *list,
-    int clear_page_nosave)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn free_list_of_pages(list: *mut linked_page, clear_page_nosave: c_int) {
+    }
     while (list) {
     pub list->next: *mut *mut linked_page lp =,
     pub clear_page_nosave): free_image_page(list,,
@@ -274,30 +514,30 @@ pub unsafe extern "C" fn free_image_page(addr: *mut c_void, clear_nosave_free: c
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct chain_allocator {
-    pub /: *mut *mut *mut linked_page chain; / the chain,
+//     pub /: *mut *mut *mut linked_page chain; / the chain,
     pub out: *mut *mut unsigned int used_space; / total size of objects allocated,
     of the current page */
-    pub /: *mut *mut gfp_t gfp_mask; / mask for allocating pages,
-    pub /: *mut *mut int safe_needed; / if set, only "safe" pages are allocated,
+//     pub /: *mut *mut gfp_t gfp_mask; / mask for allocating pages,
+//     pub /: *mut *mut int safe_needed; / if set, only "safe" pages are allocated,
 }
 
-    static void chain_init(struct chain_allocator *ca, gfp_t gfp_mask,
-    int safe_needed)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn chain_init(ca: *mut chain_allocator, gfp_mask: gfp_t, safe_needed: c_int) {
     ca.chain = core::ptr::null_mut();
     ca.used_space = LINKED_PAGE_DATA_SIZE;
     ca.gfp_mask = gfp_mask;
     ca.safe_needed = safe_needed;
     }
-    static void *chain_alloc(struct chain_allocator *ca, unsigned int size)
-    {
-    void *ret;
+#[no_mangle]
+pub unsafe extern "C" fn chain_alloc(ca: *mut chain_allocator, size: c_uint) -> *mut c_void {
+pub static mut ret: *mut c_void = core::ptr::null_mut();
     if (LINKED_PAGE_DATA_SIZE - ca.used_space < size) {
-    struct linked_page *lp;
+pub static mut lp: *mut c_void = core::ptr::null_mut();
     lp = ca.safe_needed ? __get_safe_page(ca.gfp_mask) :
     get_image_page(ca.gfp_mask, PG_ANY);
-    if (!lp)
+    if (!lp) {
     return core::ptr::null_mut();
+    }
     lp.next = ca.chain;
     ca.chain = lp;
     ca.used_space = 0;
@@ -366,14 +606,14 @@ pub struct rtree_node {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct mem_zone_bm_rtree {
-    pub /: *mut *mut list_head list; / Link Zones together,
-    pub /: *mut *mut list_head nodes; / Radix Tree inner nodes,
-    pub /: *mut *mut list_head leaves; / Radix Tree leaves,
-    pub /: *mut *mut unsigned long start_pfn; / Zone start page frame,
-    pub /: *mut *mut unsigned long end_pfn; / Zone end page frame + 1,
-    pub /: *mut *mut *mut rtree_node rtree; / Radix Tree Root,
-    pub /: *mut *mut int levels; / Number of Radix Tree Levels,
-    pub /: *mut *mut unsigned int blocks; / Number of Bitmap Blocks,
+//     pub /: *mut *mut list_head list; / Link Zones together,
+//     pub /: *mut *mut list_head nodes; / Radix Tree inner nodes,
+//     pub /: *mut *mut list_head leaves; / Radix Tree leaves,
+//     pub /: *mut *mut unsigned long start_pfn; / Zone start page frame,
+//     pub /: *mut *mut unsigned long end_pfn; / Zone end page frame + 1,
+//     pub /: *mut *mut *mut rtree_node rtree; / Radix Tree Root,
+//     pub /: *mut *mut int levels; / Number of Radix Tree Levels,
+//     pub /: *mut *mut unsigned int blocks; / Number of Bitmap Blocks,
 }
 
 // struct bm_position is used for browsing memory bitmaps
@@ -394,7 +634,7 @@ pub struct memory_bitmap {
     pub zone: *mut *mut *mut linked_page p_list; / list of pages used to store,
     bitmap objects and bitmap block
     objects */
-    pub /: *mut *mut bm_position cur; / most recently used bit position,
+//     pub /: *mut *mut bm_position cur; / most recently used bit position,
 }
 
 // Functions that operate on memory bitmaps
@@ -410,17 +650,17 @@ pub struct memory_bitmap {
 // leave nodes of the radix tree. It also adds the node to the
 // corresponding linked list passed in by the *list parameter.
 //
-    static struct rtree_node *alloc_rtree_node(gfp_t gfp_mask, int safe_needed,
-    struct chain_allocator *ca,
-    struct list_head *list)
-    {
-    struct rtree_node *node;
-    node = chain_alloc(ca, sizeof(struct rtree_node));
-    if (!node)
+#[no_mangle]
+pub unsafe extern "C" fn alloc_rtree_node(gfp_mask: gfp_t, safe_needed: c_int, ca: *mut chain_allocator, list: *mut list_head) -> *mut c_void {
+pub static mut node: *mut c_void = core::ptr::null_mut();
+    node = chain_alloc(ca, sizeof!(rtree_node));
+    if (!node) {
     return core::ptr::null_mut();
+    }
     node.data = get_image_page(gfp_mask, safe_needed);
-    if (!node.data)
+    if (!node.data) {
     return core::ptr::null_mut();
+    }
     list_add_tail(&node.list, list);
     return node;
     }
@@ -431,12 +671,14 @@ pub struct memory_bitmap {
 // linked list in order. This is guaranteed by the zone->blocks
 // counter.
 //
-    static int add_rtree_block(struct mem_zone_bm_rtree *zone, gfp_t gfp_mask,
-    int safe_needed, struct chain_allocator *ca)
-    {
-    struct rtree_node *node, *block, **dst;
-    unsigned int levels_needed, block_nr;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn add_rtree_block(zone: *mut mem_zone_bm_rtree, gfp_mask: gfp_t, safe_needed: c_int, ca: *mut chain_allocator) -> c_int {
+    let mut node = core::ptr::null_mut();
+    let mut block = core::ptr::null_mut();
+    let mut dst = core::ptr::null_mut();
+    let mut levels_needed = 0;
+    let mut block_nr = 0;
+    let mut i = 0;
     block_nr = zone.blocks;
     levels_needed = 0;
 // How many levels do we need for this block nr?
@@ -445,43 +687,45 @@ pub struct memory_bitmap {
     block_nr >>= BM_RTREE_LEVEL_SHIFT;
     }
 // Make sure the rtree has enough levels
-    for (i = zone.levels; i < levels_needed; i++) {
+    while (i < levels_needed) {
     node = alloc_rtree_node(gfp_mask, safe_needed, ca,
     &zone.nodes);
-    if (!node)
+    if (!node) {
     return -ENOMEM;
+    }
     node.data[0] = (unsigned long)zone.rtree;
     zone.rtree = node;
     zone.levels += 1;
     }
 // Allocate new block
     block = alloc_rtree_node(gfp_mask, safe_needed, ca, &zone.leaves);
-    if (!block)
+    if (!block) {
     return -ENOMEM;
+    }
 // Now walk the rtree to insert the block
     node = zone.rtree;
     dst = &zone.rtree;
     block_nr = zone.blocks;
-    for (i = zone.levels; i > 0; i--) {
-    int index;
+    while (i > 0) {
+    let mut index = 0;
     if (!node) {
     node = alloc_rtree_node(gfp_mask, safe_needed, ca,
     &zone.nodes);
-    if (!node)
+    if (!node) {
     return -ENOMEM;
+    }
 // dst = node;
     }
     index = block_nr >> ((i - 1) * BM_RTREE_LEVEL_SHIFT);
     index &= BM_RTREE_LEVEL_MASK;
-    dst = (struct rtree_node **)&((*dst).data[index]);
+    dst = &((*dst).data[index]);
     node = *dst;
     }
     zone.blocks += 1;
 // dst = block;
     return 0;
     }
-    static void free_zone_bm_rtree(struct mem_zone_bm_rtree *zone,
-    int clear_nosave_free);
+// forward_decl: free_zone_bm_rtree;
 //
 // create_zone_bm_rtree - Create a radix tree for one zone.
 //
@@ -489,25 +733,23 @@ pub struct memory_bitmap {
 // This function also allocated and builds the radix tree for the
 // zone.
 //
-    static struct mem_zone_bm_rtree *create_zone_bm_rtree(gfp_t gfp_mask,
-    int safe_needed,
-    struct chain_allocator *ca,
-    unsigned long start,
-    unsigned long end)
-    {
-    struct mem_zone_bm_rtree *zone;
-    unsigned int i, nr_blocks;
-    unsigned long pages;
+#[no_mangle]
+pub unsafe extern "C" fn create_zone_bm_rtree(gfp_mask: gfp_t, safe_needed: c_int, ca: *mut chain_allocator, start: c_ulong, end: c_ulong) -> *mut c_void {
+pub static mut zone: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    let mut nr_blocks = 0;
+    let mut pages = 0;
     pages = end - start;
-    zone  = chain_alloc(ca, sizeof(struct mem_zone_bm_rtree));
-    if (!zone)
+    zone  = chain_alloc(ca, sizeof!(mem_zone_bm_rtree));
+    if (!zone) {
     return core::ptr::null_mut();
+    }
     INIT_LIST_HEAD(&zone.nodes);
     INIT_LIST_HEAD(&zone.leaves);
     zone.start_pfn = start;
     zone.end_pfn = end;
     nr_blocks = DIV_ROUND_UP(pages, BM_BITS_PER_BLOCK);
-    for (i = 0; i < nr_blocks; i++) {
+    while (i < nr_blocks) {
     if (add_rtree_block(zone, gfp_mask, safe_needed, ca)) {
     free_zone_bm_rtree(zone, PG_UNSAFE_CLEAR);
     return core::ptr::null_mut();
@@ -522,28 +764,26 @@ pub struct memory_bitmap {
 // structure itself is not freed here nor are the rtree_node
 // structs.
 //
-    static void free_zone_bm_rtree(struct mem_zone_bm_rtree *zone,
-    int clear_nosave_free)
-    {
-    struct rtree_node *node;
-    list_for_each_entry(node, &zone.nodes, list)
+#[no_mangle]
+pub unsafe extern "C" fn free_zone_bm_rtree(zone: *mut mem_zone_bm_rtree, clear_nosave_free: c_int) {
+pub static mut node: *mut c_void = core::ptr::null_mut();
+    list_for_each_entry(node, &zone.nodes, list) {
     free_image_page(node.data, clear_nosave_free);
-    list_for_each_entry(node, &zone.leaves, list)
+    }
+    list_for_each_entry(node, &zone.leaves, list) {
     free_image_page(node.data, clear_nosave_free);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn memory_bm_position_reset(bm: *mut memory_bitmap) {
-    static void memory_bm_position_reset(struct memory_bitmap *bm)
-    {
-    bm.cur.zone = list_entry(bm.zones.next, struct mem_zone_bm_rtree,
+    bm.cur.zone = list_entry(bm.zones.next, mem_zone_bm_rtree,
     list);
-    bm.cur.node = list_entry(bm.cur.zone.leaves.next,
-    struct rtree_node, list);
+    bm.cur.node = list_entry(bm.cur.zone.leaves.next, rtree_node, list);
     bm.cur.node_pfn = 0;
     bm.cur.cur_pfn = BM_END_OF_MAP;
     bm.cur.node_bit = 0;
     }
-    static void memory_bm_free(struct memory_bitmap *bm, int clear_nosave_free);
+// forward_decl: memory_bm_free;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct mem_extent {
@@ -558,9 +798,8 @@ pub struct mem_extent {
 //
 #[no_mangle]
 unsafe extern "C" fn free_mem_extents(list: *mut list_head) {
-    static void free_mem_extents(struct list_head *list)
-    {
-    struct mem_extent *ext, *aux;
+    let mut ext = core::ptr::null_mut();
+    let mut aux = core::ptr::null_mut();
     list_for_each_entry_safe(ext, aux, list, hook) {
     list_del(&ext.hook);
     kfree(ext);
@@ -575,22 +814,23 @@ unsafe extern "C" fn free_mem_extents(list: *mut list_head) {
 //
 #[no_mangle]
 unsafe extern "C" fn create_mem_extents(list: *mut list_head, gfp_mask: gfp_t) -> c_int {
-    static int create_mem_extents(struct list_head *list, gfp_t gfp_mask)
-    {
-    struct zone *zone;
+pub static mut zone: *mut c_void = core::ptr::null_mut();
     INIT_LIST_HEAD(list);
     for_each_populated_zone(zone) {
     unsigned long zone_start, zone_end;
-    struct mem_extent *ext, *cur, *aux;
+    let mut ext = core::ptr::null_mut();
+    let mut cur = core::ptr::null_mut();
+    let mut aux = core::ptr::null_mut();
     zone_start = zone.zone_start_pfn;
     zone_end = zone_end_pfn(zone);
-    list_for_each_entry(ext, list, hook)
+    list_for_each_entry(ext, list, hook) {
     if (zone_start <= ext.end)
     break;
+    }
     if (&ext.hook == list || zone_end < ext.start) {
 // New extent is necessary
-    struct mem_extent *new_ext;
-    new_ext = kzalloc_obj(struct mem_extent, gfp_mask);
+pub static mut new_ext: *mut c_void = core::ptr::null_mut();
+    new_ext = kzalloc_obj(mem_extent, gfp_mask);
     if (!new_ext) {
     free_mem_extents(list);
     return -ENOMEM;
@@ -601,17 +841,21 @@ unsafe extern "C" fn create_mem_extents(list: *mut list_head, gfp_mask: gfp_t) -
     continue;
     }
 // Merge this zone's range of PFNs with the existing one
-    if (zone_start < ext.start)
+    if (zone_start < ext.start) {
     ext.start = zone_start;
-    if (zone_end > ext.end)
+    }
+    if (zone_end > ext.end) {
     ext.end = zone_end;
+    }
 // More merging may be possible
     cur = ext;
     list_for_each_entry_safe_continue(cur, aux, list, hook) {
-    if (zone_end < cur.start)
+    if (zone_end < cur.start) {
     break;
-    if (zone_end < cur.end)
+    }
+    if (zone_end < cur.end) {
     ext.end = cur.end;
+    }
     list_del(&cur.hook);
     kfree(cur);
     }
@@ -621,37 +865,37 @@ unsafe extern "C" fn create_mem_extents(list: *mut list_head, gfp_mask: gfp_t) -
 //
 // memory_bm_create - Allocate memory for a memory bitmap.
 //
-    static int memory_bm_create(struct memory_bitmap *bm, gfp_t gfp_mask,
-    int safe_needed)
-    {
-    struct chain_allocator ca;
-    struct list_head mem_extents;
-    struct mem_extent *ext;
-    int error;
+#[no_mangle]
+pub unsafe extern "C" fn memory_bm_create(bm: *mut memory_bitmap, gfp_mask: gfp_t, safe_needed: c_int) -> c_int {
+pub static mut ca: usize = 0;
+pub static mut mem_extents: usize = 0;
+pub static mut ext: *mut c_void = core::ptr::null_mut();
+    let mut error = 0;
     chain_init(&ca, gfp_mask, safe_needed);
     INIT_LIST_HEAD(&bm.zones);
     error = create_mem_extents(&mem_extents, gfp_mask);
-    if (error)
+    if (error) {
     return error;
+    }
     list_for_each_entry(ext, &mem_extents, hook) {
-    struct mem_zone_bm_rtree *zone;
+pub static mut zone: *mut c_void = core::ptr::null_mut();
     zone = create_zone_bm_rtree(gfp_mask, safe_needed, &ca,
     ext.start, ext.end);
     if (!zone) {
     error = -ENOMEM;
-    goto Error;
+// goto;
     }
     list_add_tail(&zone.list, &bm.zones);
     }
     bm.p_list = ca.chain;
     memory_bm_position_reset(bm);
-    Exit:
+// label;
     free_mem_extents(&mem_extents);
     return error;
-    Error:
+// label;
     bm.p_list = ca.chain;
     memory_bm_free(bm, PG_UNSAFE_CLEAR);
-    goto Exit;
+// goto;
     }
 //
 // memory_bm_free - Free memory occupied by the memory bitmap.
@@ -659,11 +903,10 @@ unsafe extern "C" fn create_mem_extents(list: *mut list_head, gfp_mask: gfp_t) -
 //
 #[no_mangle]
 unsafe extern "C" fn memory_bm_free(bm: *mut memory_bitmap, clear_nosave_free: c_int) {
-    static void memory_bm_free(struct memory_bitmap *bm, int clear_nosave_free)
-    {
-    struct mem_zone_bm_rtree *zone;
-    list_for_each_entry(zone, &bm.zones, list)
+pub static mut zone: *mut c_void = core::ptr::null_mut();
+    list_for_each_entry(zone, &bm.zones, list) {
     free_zone_bm_rtree(zone, clear_nosave_free);
+    }
     free_list_of_pages(bm.p_list, clear_nosave_free);
     INIT_LIST_HEAD(&bm.zones);
     }
@@ -676,15 +919,17 @@ unsafe extern "C" fn memory_bm_free(bm: *mut memory_bitmap, clear_nosave_free: c
 // Walk the radix tree to find the page containing the bit that represents @pfn
 // and return the position of the bit in @addr and @bit_nr.
 //
-    static int memory_bm_find_bit(struct memory_bitmap *bm, unsigned long pfn,
-    void **addr, unsigned int *bit_nr)
-    {
-    struct mem_zone_bm_rtree *curr, *zone;
-    struct rtree_node *node;
-    int i, block_nr;
+#[no_mangle]
+pub unsafe extern "C" fn memory_bm_find_bit(bm: *mut memory_bitmap, pfn: c_ulong, addr: *mut *mut c_void, bit_nr: *mut c_uint) -> c_int {
+    let mut curr = core::ptr::null_mut();
+    let mut zone = core::ptr::null_mut();
+pub static mut node: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    let mut block_nr = 0;
     zone = bm.cur.zone;
-    if (pfn >= zone.start_pfn && pfn < zone.end_pfn)
-    goto zone_found;
+    if (pfn >= zone.start_pfn && pfn < zone.end_pfn) {
+// goto;
+    }
     zone = core::ptr::null_mut();
 // Find the right zone
     list_for_each_entry(curr, &bm.zones, list) {
@@ -693,9 +938,10 @@ unsafe extern "C" fn memory_bm_free(bm: *mut memory_bitmap, clear_nosave_free: c
     break;
     }
     }
-    if (!zone)
+    if (!zone) {
     return -EFAULT;
-    zone_found:
+    }
+// label;
 //
 // We have found the zone. Now walk the radix tree to find the leaf node
 // for our PFN.
@@ -706,18 +952,19 @@ unsafe extern "C" fn memory_bm_free(bm: *mut memory_bitmap, clear_nosave_free: c
 //
     node = bm.cur.node;
     if (zone == bm.cur.zone &&
-    ((pfn - zone.start_pfn) & ~BM_BLOCK_MASK) == bm.cur.node_pfn)
-    goto node_found;
+    ((pfn - zone.start_pfn) & ~BM_BLOCK_MASK) == bm.cur.node_pfn) {
+// goto;
+    }
     node      = zone.rtree;
     block_nr  = (pfn - zone.start_pfn) >> BM_BLOCK_SHIFT;
-    for (i = zone.levels; i > 0; i--) {
-    int index;
+    while (i > 0) {
+    let mut index = 0;
     index = block_nr >> ((i - 1) * BM_RTREE_LEVEL_SHIFT);
     index &= BM_RTREE_LEVEL_MASK;
-    BUG_ON(node.data[index] == 0);
-    node = (struct rtree_node *)node.data[index];
+    BUG_ON!(node.data[index] == 0);
+    node = node.data[index];
     }
-    node_found:
+// label;
 // Update last position
     bm.cur.zone = zone;
     bm.cur.node = node;
@@ -730,69 +977,56 @@ unsafe extern "C" fn memory_bm_free(bm: *mut memory_bitmap, clear_nosave_free: c
     }
 #[no_mangle]
 unsafe extern "C" fn memory_bm_set_bit(bm: *mut memory_bitmap, pfn: c_ulong) {
-    static void memory_bm_set_bit(struct memory_bitmap *bm, unsigned long pfn)
-    {
-    void *addr;
-    unsigned int bit;
-    int error;
+pub static mut addr: *mut c_void = core::ptr::null_mut();
+    let mut bit = 0;
+    let mut error = 0;
     error = memory_bm_find_bit(bm, pfn, &addr, &bit);
-    BUG_ON(error);
+    BUG_ON!(error);
     set_bit(bit, addr);
     }
 #[no_mangle]
 unsafe extern "C" fn mem_bm_set_bit_check(bm: *mut memory_bitmap, pfn: c_ulong) -> c_int {
-    static int mem_bm_set_bit_check(struct memory_bitmap *bm, unsigned long pfn)
-    {
-    void *addr;
-    unsigned int bit;
-    int error;
+pub static mut addr: *mut c_void = core::ptr::null_mut();
+    let mut bit = 0;
+    let mut error = 0;
     error = memory_bm_find_bit(bm, pfn, &addr, &bit);
-    if (!error)
+    if (!error) {
     set_bit(bit, addr);
+    }
     return error;
     }
 #[no_mangle]
 unsafe extern "C" fn memory_bm_clear_bit(bm: *mut memory_bitmap, pfn: c_ulong) {
-    static void memory_bm_clear_bit(struct memory_bitmap *bm, unsigned long pfn)
-    {
-    void *addr;
-    unsigned int bit;
-    int error;
+pub static mut addr: *mut c_void = core::ptr::null_mut();
+    let mut bit = 0;
+    let mut error = 0;
     error = memory_bm_find_bit(bm, pfn, &addr, &bit);
-    BUG_ON(error);
+    BUG_ON!(error);
     clear_bit(bit, addr);
     }
 #[no_mangle]
 unsafe extern "C" fn memory_bm_clear_current(bm: *mut memory_bitmap) {
-    static void memory_bm_clear_current(struct memory_bitmap *bm)
-    {
-    int bit;
+    let mut bit = 0;
     bit = max(bm.cur.node_bit - 1, 0);
     clear_bit(bit, bm.cur.node.data);
     }
 #[no_mangle]
 unsafe extern "C" fn memory_bm_get_current(bm: *mut memory_bitmap) -> c_ulong {
-    static unsigned long memory_bm_get_current(struct memory_bitmap *bm)
-    {
     return bm.cur.cur_pfn;
     }
 #[no_mangle]
 unsafe extern "C" fn memory_bm_test_bit(bm: *mut memory_bitmap, pfn: c_ulong) -> c_int {
-    static int memory_bm_test_bit(struct memory_bitmap *bm, unsigned long pfn)
-    {
-    void *addr;
-    unsigned int bit;
-    int error;
+pub static mut addr: *mut c_void = core::ptr::null_mut();
+    let mut bit = 0;
+    let mut error = 0;
     error = memory_bm_find_bit(bm, pfn, &addr, &bit);
-    BUG_ON(error);
+    BUG_ON!(error);
     return test_bit(bit, addr);
     }
 #[no_mangle]
 unsafe extern "C" fn memory_bm_pfn_present(bm: *mut memory_bitmap, pfn: c_ulong) -> bool {
-    static bool memory_bm_pfn_present(struct memory_bitmap *bm, unsigned long pfn)
-    {
-    void *addr;
-    unsigned int bit;
+pub static mut addr: *mut c_void = core::ptr::null_mut();
+    let mut bit = 0;
     return !memory_bm_find_bit(bm, pfn, &addr, &bit);
     }
 //
@@ -807,11 +1041,8 @@ unsafe extern "C" fn memory_bm_pfn_present(bm: *mut memory_bitmap, pfn: c_ulong)
 //
 #[no_mangle]
 unsafe extern "C" fn rtree_next_node(bm: *mut memory_bitmap) -> bool {
-    static bool rtree_next_node(struct memory_bitmap *bm)
-    {
     if (!list_is_last(&bm.cur.node.list, &bm.cur.zone.leaves)) {
-    bm.cur.node = list_entry(bm.cur.node.list.next,
-    struct rtree_node, list);
+    bm.cur.node = list_entry(bm.cur.node.list.next, rtree_node, list);
     bm.cur.node_pfn += BM_BITS_PER_BLOCK;
     bm.cur.node_bit  = 0;
     touch_softlockup_watchdog();
@@ -819,10 +1050,8 @@ unsafe extern "C" fn rtree_next_node(bm: *mut memory_bitmap) -> bool {
     }
 // No more nodes, goto next zone
     if (!list_is_last(&bm.cur.zone.list, &bm.zones)) {
-    bm.cur.zone = list_entry(bm.cur.zone.list.next,
-    struct mem_zone_bm_rtree, list);
-    bm.cur.node = list_entry(bm.cur.zone.leaves.next,
-    struct rtree_node, list);
+    bm.cur.zone = list_entry(bm.cur.zone.list.next, mem_zone_bm_rtree, list);
+    bm.cur.node = list_entry(bm.cur.zone.leaves.next, rtree_node, list);
     bm.cur.node_pfn = 0;
     bm.cur.node_bit = 0;
     return true;
@@ -843,10 +1072,8 @@ unsafe extern "C" fn rtree_next_node(bm: *mut memory_bitmap) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn memory_bm_next_pfn(bm: *mut memory_bitmap) -> c_ulong {
-    static unsigned long memory_bm_next_pfn(struct memory_bitmap *bm)
-    {
     unsigned long bits, pfn, pages;
-    int bit;
+    let mut bit = 0;
     do {
     pages	  = bm.cur.zone.end_pfn - bm.cur.zone.start_pfn;
     bits      = min(pages - bm.cur.node_pfn, BM_BITS_PER_BLOCK);
@@ -874,28 +1101,27 @@ pub struct nosave_region {
     pub end_pfn: c_ulong,
 }
 
-    static LIST_HEAD(nosave_regions);
+pub static mut nosave_regions: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn recycle_zone_bm_rtree(zone: *mut mem_zone_bm_rtree) {
-    static void recycle_zone_bm_rtree(struct mem_zone_bm_rtree *zone)
-    {
-    struct rtree_node *node;
-    list_for_each_entry(node, &zone.nodes, list)
+pub static mut node: *mut c_void = core::ptr::null_mut();
+    list_for_each_entry(node, &zone.nodes, list) {
     recycle_safe_page(node.data);
-    list_for_each_entry(node, &zone.leaves, list)
+    }
+    list_for_each_entry(node, &zone.leaves, list) {
     recycle_safe_page(node.data);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn memory_bm_recycle(bm: *mut memory_bitmap) {
-    static void memory_bm_recycle(struct memory_bitmap *bm)
-    {
-    struct mem_zone_bm_rtree *zone;
-    struct linked_page *p_list;
-    list_for_each_entry(zone, &bm.zones, list)
+pub static mut zone: *mut c_void = core::ptr::null_mut();
+pub static mut p_list: *mut c_void = core::ptr::null_mut();
+    list_for_each_entry(zone, &bm.zones, list) {
     recycle_zone_bm_rtree(zone);
+    }
     p_list = bm.p_list;
     while (p_list) {
-    struct linked_page *lp = p_list;
+    let mut lp = p_list;
     p_list = lp.next;
     recycle_safe_page(lp);
     }
@@ -907,29 +1133,27 @@ unsafe extern "C" fn memory_bm_recycle(bm: *mut memory_bitmap) {
 // during hibernation (to be used in the early initialization code).
 //
 #[no_mangle]
-pub unsafe extern "C" fn register_nosave_region(start_pfn: c_ulong, end_pfn: c_ulong) -> void __init {
-    void __init register_nosave_region(unsigned long start_pfn, unsigned long end_pfn)
-    {
-    struct nosave_region *region;
-    if (start_pfn >= end_pfn)
+pub unsafe extern "C" fn register_nosave_region(start_pfn: c_ulong, end_pfn: c_ulong)  {
+pub static mut region: *mut c_void = core::ptr::null_mut();
+    if (start_pfn >= end_pfn) {
     return;
+    }
     if (!list_empty(&nosave_regions)) {
 // Try to extend the previous region (they should be sorted)
-    region = list_entry(nosave_regions.prev,
-    struct nosave_region, list);
+    region = list_entry(nosave_regions.prev, nosave_region, list);
     if (region.end_pfn == start_pfn) {
     region.end_pfn = end_pfn;
-    goto Report;
+// goto;
     }
     }
 // This allocation cannot fail
-    region = memblock_alloc_or_panic(sizeof(struct nosave_region),
+    region = memblock_alloc_or_panic(sizeof!(nosave_region),
     SMP_CACHE_BYTES);
     region.start_pfn = start_pfn;
     region.end_pfn = end_pfn;
     list_add_tail(&region.list, &nosave_regions);
-    Report:
-    pr_info("Registered nosave memory: [mem %#010llx-%#010llx]\n",
+// label;
+    pr_info!("Registered nosave memory: [mem %#010llx-%#010llx]\n",
     (unsigned long long) start_pfn << PAGE_SHIFT,
     ((unsigned long long) end_pfn << PAGE_SHIFT) - 1);
     }
@@ -937,54 +1161,46 @@ pub unsafe extern "C" fn register_nosave_region(start_pfn: c_ulong, end_pfn: c_u
 // Set bits in this map correspond to the page frames the contents of which
 // should not be saved during the suspend.
 //
-    static struct memory_bitmap *forbidden_pages_map;
+pub static mut forbidden_pages_map: *mut c_void = core::ptr::null_mut();
 // Set bits in this map correspond to free page frames.
-    static struct memory_bitmap *free_pages_map;
+pub static mut free_pages_map: *mut c_void = core::ptr::null_mut();
 //
 // Each page frame allocated for creating the image is marked by setting the
 // corresponding bits in forbidden_pages_map and free_pages_map simultaneously
 //
 #[no_mangle]
 pub unsafe extern "C" fn swsusp_set_page_free(page: *mut page) {
-    void swsusp_set_page_free(struct page *page)
-    {
-    if (free_pages_map)
+    if (free_pages_map) {
     memory_bm_set_bit(free_pages_map, page_to_pfn(page));
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn swsusp_page_is_free(page: *mut page) -> c_int {
-    static int swsusp_page_is_free(struct page *page)
-    {
     return free_pages_map ?
     memory_bm_test_bit(free_pages_map, page_to_pfn(page)) : 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn swsusp_unset_page_free(page: *mut page) {
-    void swsusp_unset_page_free(struct page *page)
-    {
-    if (free_pages_map)
+    if (free_pages_map) {
     memory_bm_clear_bit(free_pages_map, page_to_pfn(page));
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn swsusp_set_page_forbidden(page: *mut page) {
-    static void swsusp_set_page_forbidden(struct page *page)
-    {
-    if (forbidden_pages_map)
+    if (forbidden_pages_map) {
     memory_bm_set_bit(forbidden_pages_map, page_to_pfn(page));
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn swsusp_page_is_forbidden(page: *mut page) -> c_int {
-    int swsusp_page_is_forbidden(struct page *page)
-    {
     return forbidden_pages_map ?
     memory_bm_test_bit(forbidden_pages_map, page_to_pfn(page)) : 0;
     }
 #[no_mangle]
 unsafe extern "C" fn swsusp_unset_page_forbidden(page: *mut page) {
-    static void swsusp_unset_page_forbidden(struct page *page)
-    {
-    if (forbidden_pages_map)
+    if (forbidden_pages_map) {
     memory_bm_clear_bit(forbidden_pages_map, page_to_pfn(page));
+    }
     }
 //
 // mark_nosave_pages - Mark pages that should not be saved.
@@ -995,14 +1211,13 @@ unsafe extern "C" fn swsusp_unset_page_forbidden(page: *mut page) {
 //
 #[no_mangle]
 unsafe extern "C" fn mark_nosave_pages(bm: *mut memory_bitmap) {
-    static void mark_nosave_pages(struct memory_bitmap *bm)
-    {
-    struct nosave_region *region;
-    if (list_empty(&nosave_regions))
+pub static mut region: *mut c_void = core::ptr::null_mut();
+    if (list_empty(&nosave_regions)) {
     return;
+    }
     list_for_each_entry(region, &nosave_regions, list) {
-    unsigned long pfn;
-    pr_debug("Marking nosave pages: [mem %#010llx-%#010llx]\n",
+    let mut pfn = 0;
+    pr_debug!("Marking nosave pages: [mem %#010llx-%#010llx]\n",
     (unsigned long long) region.start_pfn << PAGE_SHIFT,
     ((unsigned long long) region.end_pfn << PAGE_SHIFT)
     - 1);
@@ -1027,36 +1242,41 @@ unsafe extern "C" fn mark_nosave_pages(bm: *mut memory_bitmap) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn create_basic_memory_bitmaps() -> c_int {
-    int create_basic_memory_bitmaps(void)
-    {
-    struct memory_bitmap *bm1, *bm2;
-    int error;
-    if (forbidden_pages_map && free_pages_map)
+    let mut bm1 = core::ptr::null_mut();
+    let mut bm2 = core::ptr::null_mut();
+    let mut error = 0;
+    if (forbidden_pages_map && free_pages_map) {
     return 0;
-    else
-    BUG_ON(forbidden_pages_map || free_pages_map);
-    bm1 = kzalloc_obj(struct memory_bitmap);
-    if (!bm1)
+    }
+    else {
+    BUG_ON!(forbidden_pages_map || free_pages_map);
+    }
+    bm1 = kzalloc_obj(memory_bitmap);
+    if (!bm1) {
     return -ENOMEM;
+    }
     error = memory_bm_create(bm1, GFP_KERNEL, PG_ANY);
-    if (error)
-    goto Free_first_object;
-    bm2 = kzalloc_obj(struct memory_bitmap);
-    if (!bm2)
-    goto Free_first_bitmap;
+    if (error) {
+// goto;
+    }
+    bm2 = kzalloc_obj(memory_bitmap);
+    if (!bm2) {
+// goto;
+    }
     error = memory_bm_create(bm2, GFP_KERNEL, PG_ANY);
-    if (error)
-    goto Free_second_object;
+    if (error) {
+// goto;
+    }
     forbidden_pages_map = bm1;
     free_pages_map = bm2;
     mark_nosave_pages(forbidden_pages_map);
-    pr_debug("Basic memory bitmaps created\n");
+    pr_debug!("Basic memory bitmaps created\n");
     return 0;
-    Free_second_object:
+// label;
     kfree(bm2);
-    Free_first_bitmap:
+// label;
     memory_bm_free(bm1, PG_UNSAFE_CLEAR);
-    Free_first_object:
+// label;
     kfree(bm1);
     return -ENOMEM;
     }
@@ -1069,11 +1289,11 @@ pub unsafe extern "C" fn create_basic_memory_bitmaps() -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn free_basic_memory_bitmaps() {
-    void free_basic_memory_bitmaps(void)
-    {
-    struct memory_bitmap *bm1, *bm2;
-    if (WARN_ON(!(forbidden_pages_map && free_pages_map)))
+    let mut bm1 = core::ptr::null_mut();
+    let mut bm2 = core::ptr::null_mut();
+    if (WARN_ON!(!(forbidden_pages_map && free_pages_map))) {
     return;
+    }
     bm1 = forbidden_pages_map;
     bm2 = free_pages_map;
     forbidden_pages_map = core::ptr::null_mut();
@@ -1082,37 +1302,36 @@ pub unsafe extern "C" fn free_basic_memory_bitmaps() {
     kfree(bm1);
     memory_bm_free(bm2, PG_UNSAFE_CLEAR);
     kfree(bm2);
-    pr_debug("Basic memory bitmaps freed\n");
+    pr_debug!("Basic memory bitmaps freed\n");
     }
 #[no_mangle]
 unsafe extern "C" fn clear_or_poison_free_page(page: *mut page) {
-    static void clear_or_poison_free_page(struct page *page)
-    {
-    if (page_poisoning_enabled_static())
+    if (page_poisoning_enabled_static()) {
     __kernel_poison_pages(page, 1);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: want_init_on_free()) -> else {
-    else if (want_init_on_free())
+    }
+
+    else if (want_init_on_free()) {
     clear_highpage(page);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn clear_or_poison_free_pages() {
-    void clear_or_poison_free_pages(void)
-    {
-    struct memory_bitmap *bm = free_pages_map;
-    unsigned long pfn;
-    if (WARN_ON(!(free_pages_map)))
+    let mut bm = free_pages_map;
+    let mut pfn = 0;
+    if (WARN_ON!(!(free_pages_map))) {
     return;
+    }
     if (page_poisoning_enabled() || want_init_on_free()) {
     memory_bm_position_reset(bm);
     pfn = memory_bm_next_pfn(bm);
     while (pfn != BM_END_OF_MAP) {
-    if (pfn_valid(pfn))
+    if (pfn_valid(pfn)) {
     clear_or_poison_free_page(pfn_to_page(pfn));
+    }
     pfn = memory_bm_next_pfn(bm);
     }
     memory_bm_position_reset(bm);
-    pr_info("free pages cleared after restore\n");
+    pr_info!("free pages cleared after restore\n");
     }
     }
 //
@@ -1125,11 +1344,10 @@ pub unsafe extern "C" fn clear_or_poison_free_pages() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn snapshot_additional_pages(zone: *mut zone) -> c_uint {
-    unsigned int snapshot_additional_pages(struct zone *zone)
-    {
-    unsigned int rtree, nodes;
+    let mut rtree = 0;
+    let mut nodes = 0;
     rtree = nodes = DIV_ROUND_UP(zone.spanned_pages, BM_BITS_PER_BLOCK);
-    rtree += DIV_ROUND_UP(rtree * sizeof(struct rtree_node),
+    rtree += DIV_ROUND_UP(rtree * sizeof!(rtree_node),
     LINKED_PAGE_DATA_SIZE);
     while (nodes > 1) {
     nodes = DIV_ROUND_UP(nodes, BM_ENTRIES_PER_LEVEL);
@@ -1143,15 +1361,14 @@ pub unsafe extern "C" fn snapshot_additional_pages(zone: *mut zone) -> c_uint {
 
 #[no_mangle]
 unsafe extern "C" fn mark_free_pages(zone: *mut zone) {
-    static void mark_free_pages(struct zone *zone)
-    {
     unsigned long pfn, max_zone_pfn, page_count = WD_PAGE_COUNT;
-    struct list_head *free_list;
-    unsigned long flags;
-    unsigned int order;
-    struct page *page;
-    if (zone_is_empty(zone))
+pub static mut free_list: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut order = 0;
+pub static mut page: *mut c_void = core::ptr::null_mut();
+    if (zone_is_empty(zone)) {
     return;
+    }
     spin_lock_irqsave(&zone.lock, flags);
     max_zone_pfn = zone_end_pfn(zone);
     for_each_valid_pfn(pfn, zone.zone_start_pfn, max_zone_pfn) {
@@ -1160,16 +1377,18 @@ unsafe extern "C" fn mark_free_pages(zone: *mut zone) {
     touch_nmi_watchdog();
     page_count = WD_PAGE_COUNT;
     }
-    if (page_zone(page) != zone)
+    if (page_zone(page) != zone) {
     continue;
-    if (!swsusp_page_is_forbidden(page))
+    }
+    if (!swsusp_page_is_forbidden(page)) {
     swsusp_unset_page_free(page);
+    }
     }
     for_each_free_list(free_list, zone, order) {
     list_for_each_entry(page, free_list, buddy_list) {
-    unsigned long i;
+    let mut i = 0;
     pfn = page_to_pfn(page);
-    for (i = 0; i < (1UL << order); i++) {
+    while (i < (1UL << order)) {
     if (!--page_count) {
     touch_nmi_watchdog();
     page_count = WD_PAGE_COUNT;
@@ -1188,13 +1407,12 @@ unsafe extern "C" fn mark_free_pages(zone: *mut zone) {
 //
 #[no_mangle]
 unsafe extern "C" fn count_free_highmem_pages() -> c_uint {
-    static unsigned int count_free_highmem_pages(void)
-    {
-    struct zone *zone;
-    let mut cnt: c_uint = 0;
-    for_each_populated_zone(zone)
+pub static mut zone: *mut c_void = core::ptr::null_mut();
+pub static mut cnt: c_uint = 0;
+    for_each_populated_zone(zone) {
     if (is_highmem(zone))
     cnt += zone_page_state(zone, NR_FREE_PAGES);
+    }
     return cnt;
     }
 //
@@ -1205,21 +1423,26 @@ unsafe extern "C" fn count_free_highmem_pages() -> c_uint {
 // We should save the page if it isn't Nosave or NosaveFree, or Reserved,
 // and it isn't part of a free chunk of pages.
 //
-    static struct page *saveable_highmem_page(struct zone *zone, unsigned long pfn)
-    {
-    struct page *page;
-    if (!pfn_valid(pfn))
+#[no_mangle]
+pub unsafe extern "C" fn saveable_highmem_page(zone: *mut zone, pfn: c_ulong) -> *mut c_void {
+pub static mut page: *mut c_void = core::ptr::null_mut();
+    if (!pfn_valid(pfn)) {
     return core::ptr::null_mut();
+    }
     page = pfn_to_online_page(pfn);
-    if (!page || page_zone(page) != zone)
+    if (!page || page_zone(page) != zone) {
     return core::ptr::null_mut();
-    BUG_ON(!PageHighMem(page));
-    if (swsusp_page_is_forbidden(page) ||  swsusp_page_is_free(page))
+    }
+    BUG_ON!(!PageHighMem(page));
+    if (swsusp_page_is_forbidden(page) ||  swsusp_page_is_free(page)) {
     return core::ptr::null_mut();
-    if (PageReserved(page) || PageOffline(page))
+    }
+    if (PageReserved(page) || PageOffline(page)) {
     return core::ptr::null_mut();
-    if (page_is_guard(page))
+    }
+    if (page_is_guard(page)) {
     return core::ptr::null_mut();
+    }
     return page;
     }
 //
@@ -1227,19 +1450,19 @@ unsafe extern "C" fn count_free_highmem_pages() -> c_uint {
 //
 #[no_mangle]
 unsafe extern "C" fn count_highmem_pages() -> c_uint {
-    static unsigned int count_highmem_pages(void)
-    {
-    struct zone *zone;
-    let mut n: c_uint = 0;
+pub static mut zone: *mut c_void = core::ptr::null_mut();
+pub static mut n: c_uint = 0;
     for_each_populated_zone(zone) {
     unsigned long pfn, max_zone_pfn;
-    if (!is_highmem(zone))
+    if (!is_highmem(zone)) {
     continue;
+    }
     mark_free_pages(zone);
     max_zone_pfn = zone_end_pfn(zone);
-    for (pfn = zone.zone_start_pfn; pfn < max_zone_pfn; pfn++)
+    for (pfn = zone.zone_start_pfn; pfn < max_zone_pfn; pfn++) {
     if (saveable_highmem_page(zone, pfn))
-    n++;
+    n += 1;
+    }
     }
     return n;
     }
@@ -1254,24 +1477,30 @@ unsafe extern "C" fn count_highmem_pages() -> c_uint {
 // of pages statically defined as 'unsaveable', and it isn't part of
 // a free chunk of pages.
 //
-    static struct page *saveable_page(struct zone *zone, unsigned long pfn)
-    {
-    struct page *page;
-    if (!pfn_valid(pfn))
+#[no_mangle]
+pub unsafe extern "C" fn saveable_page(zone: *mut zone, pfn: c_ulong) -> *mut c_void {
+pub static mut page: *mut c_void = core::ptr::null_mut();
+    if (!pfn_valid(pfn)) {
     return core::ptr::null_mut();
+    }
     page = pfn_to_online_page(pfn);
-    if (!page || page_zone(page) != zone)
+    if (!page || page_zone(page) != zone) {
     return core::ptr::null_mut();
-    BUG_ON(PageHighMem(page));
-    if (swsusp_page_is_forbidden(page) || swsusp_page_is_free(page))
+    }
+    BUG_ON!(PageHighMem(page));
+    if (swsusp_page_is_forbidden(page) || swsusp_page_is_free(page)) {
     return core::ptr::null_mut();
-    if (PageOffline(page))
+    }
+    if (PageOffline(page)) {
     return core::ptr::null_mut();
+    }
     if (PageReserved(page)
-    && (!kernel_page_present(page) || pfn_is_nosave(pfn)))
+    && (!kernel_page_present(page) || pfn_is_nosave(pfn))) {
     return core::ptr::null_mut();
-    if (page_is_guard(page))
+    }
+    if (page_is_guard(page)) {
     return core::ptr::null_mut();
+    }
     return page;
     }
 //
@@ -1279,19 +1508,19 @@ unsafe extern "C" fn count_highmem_pages() -> c_uint {
 //
 #[no_mangle]
 unsafe extern "C" fn count_data_pages() -> c_uint {
-    static unsigned int count_data_pages(void)
-    {
-    struct zone *zone;
+pub static mut zone: *mut c_void = core::ptr::null_mut();
     unsigned long pfn, max_zone_pfn;
-    let mut n: c_uint = 0;
+pub static mut n: c_uint = 0;
     for_each_populated_zone(zone) {
-    if (is_highmem(zone))
+    if (is_highmem(zone)) {
     continue;
+    }
     mark_free_pages(zone);
     max_zone_pfn = zone_end_pfn(zone);
-    for (pfn = zone.zone_start_pfn; pfn < max_zone_pfn; pfn++)
+    for (pfn = zone.zone_start_pfn; pfn < max_zone_pfn; pfn++) {
     if (saveable_page(zone, pfn))
-    n++;
+    n += 1;
+    }
     }
     return n;
     }
@@ -1302,13 +1531,11 @@ unsafe extern "C" fn count_data_pages() -> c_uint {
 //
 #[no_mangle]
 pub unsafe extern "C" fn do_copy_page(dst: *mut c_long, src: *mut c_long) -> bool {
-    static inline bool do_copy_page(long *dst, long *src)
-    {
-    let mut z: c_long = 0;
-    int n;
-    for (n = PAGE_SIZE / sizeof(long); n; n--) {
+pub static mut z: c_long = 0;
+    let mut n = 0;
+    while (n) {
     z |= *src;
-// dst++ = *src++;
+// dst++ = *src += 1;
     }
     return !z;
     }
@@ -1323,9 +1550,7 @@ pub unsafe extern "C" fn do_copy_page(dst: *mut c_long, src: *mut c_long) -> boo
 //
 #[no_mangle]
 unsafe extern "C" fn safe_copy_page(dst: *mut c_void, s_page: *mut page) -> bool {
-    static bool safe_copy_page(void *dst, struct page *s_page)
-    {
-    bool zeros_only;
+    let mut zeros_only = 0;
     if (kernel_page_present(s_page)) {
     zeros_only = do_copy_page(dst, page_address(s_page));
     } else {
@@ -1336,18 +1561,18 @@ unsafe extern "C" fn safe_copy_page(dst: *mut c_void, s_page: *mut page) -> bool
     return zeros_only;
     }
 
-    static inline struct page *page_is_saveable(struct zone *zone, unsigned long pfn)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn page_is_saveable(zone: *mut zone, pfn: c_ulong) -> *mut c_void {
     return is_highmem(zone) ?
     saveable_highmem_page(zone, pfn) : saveable_page(zone, pfn);
     }
 #[no_mangle]
 unsafe extern "C" fn copy_data_page(dst_pfn: c_ulong, src_pfn: c_ulong) -> bool {
-    static bool copy_data_page(unsigned long dst_pfn, unsigned long src_pfn)
-    {
-    struct page *s_page, *d_page;
-    void *src, *dst;
-    bool zeros_only;
+    let mut s_page = core::ptr::null_mut();
+    let mut d_page = core::ptr::null_mut();
+    let mut src = core::ptr::null_mut();
+    let mut dst = core::ptr::null_mut();
+    let mut zeros_only = 0;
     s_page = pfn_to_page(src_pfn);
     d_page = pfn_to_page(dst_pfn);
     if (PageHighMem(s_page)) {
@@ -1375,8 +1600,6 @@ unsafe extern "C" fn copy_data_page(dst_pfn: c_ulong, src_pfn: c_ulong) -> bool 
 
 #[no_mangle]
 pub unsafe extern "C" fn copy_data_page(dst_pfn: c_ulong, src_pfn: c_ulong) -> c_int {
-    static inline int copy_data_page(unsigned long dst_pfn, unsigned long src_pfn)
-    {
     return safe_copy_page(page_address(pfn_to_page(dst_pfn)),
     pfn_to_page(src_pfn));
     }
@@ -1387,34 +1610,34 @@ pub unsafe extern "C" fn copy_data_page(dst_pfn: c_ulong, src_pfn: c_ulong) -> c
 //
 // Returns the number of pages copied.
 //
-    static unsigned long copy_data_pages(struct memory_bitmap *copy_bm,
-    struct memory_bitmap *orig_bm,
-    struct memory_bitmap *zero_bm)
-    {
-    let mut copied_pages: c_ulong = 0;
-    struct zone *zone;
+#[no_mangle]
+pub unsafe extern "C" fn copy_data_pages(copy_bm: *mut memory_bitmap, orig_bm: *mut memory_bitmap, zero_bm: *mut memory_bitmap) -> c_ulong {
+pub static mut copied_pages: c_ulong = 0;
+pub static mut zone: *mut c_void = core::ptr::null_mut();
     unsigned long pfn, copy_pfn;
     for_each_populated_zone(zone) {
-    unsigned long max_zone_pfn;
+    let mut max_zone_pfn = 0;
     mark_free_pages(zone);
     max_zone_pfn = zone_end_pfn(zone);
-    for (pfn = zone.zone_start_pfn; pfn < max_zone_pfn; pfn++)
+    for (pfn = zone.zone_start_pfn; pfn < max_zone_pfn; pfn++) {
     if (page_is_saveable(zone, pfn))
     memory_bm_set_bit(orig_bm, pfn);
+    }
     }
     memory_bm_position_reset(orig_bm);
     memory_bm_position_reset(copy_bm);
     copy_pfn = memory_bm_next_pfn(copy_bm);
     for (;;) {
     pfn = memory_bm_next_pfn(orig_bm);
-    if (unlikely(pfn == BM_END_OF_MAP))
+    if (unlikely(pfn == BM_END_OF_MAP)) {
     break;
+    }
     if (copy_data_page(copy_pfn, pfn)) {
     memory_bm_set_bit(zero_bm, pfn);
 // Use this copy_pfn for a page that is not full of zeros
     continue;
     }
-    copied_pages++;
+    copied_pages += 1;
     copy_pfn = memory_bm_next_pfn(copy_bm);
     }
     return copied_pages;
@@ -1434,7 +1657,7 @@ pub unsafe extern "C" fn copy_data_page(dst_pfn: c_ulong, src_pfn: c_ulong) -> c
 // Memory bitmap used for marking saveable pages (during hibernation) or
 // hibernation image pages (during restore)
 //
-    static struct memory_bitmap orig_bm;
+pub static mut orig_bm: usize = 0;
 //
 // Memory bitmap used during hibernation for marking allocated page frames that
 // will contain copies of saveable pages.  During restore it is initially used
@@ -1443,9 +1666,9 @@ pub unsafe extern "C" fn copy_data_page(dst_pfn: c_ulong, src_pfn: c_ulong) -> c
 // used for marking "safe" highmem pages, but it has to be reinitialized for
 // this purpose.
 //
-    static struct memory_bitmap copy_bm;
+pub static mut copy_bm: usize = 0;
 // Memory bitmap which tracks which saveable pages were zero filled.
-    static struct memory_bitmap zero_bm;
+pub static mut zero_bm: usize = 0;
 //
 // swsusp_free - Free pages allocated for hibernation image.
 //
@@ -1454,14 +1677,13 @@ pub unsafe extern "C" fn copy_data_page(dst_pfn: c_ulong, src_pfn: c_ulong) -> c
 //
 #[no_mangle]
 pub unsafe extern "C" fn swsusp_free() {
-    void swsusp_free(void)
-    {
     unsigned long fb_pfn, fr_pfn;
-    if (!forbidden_pages_map || !free_pages_map)
-    goto out;
+    if (!forbidden_pages_map || !free_pages_map) {
+// goto;
+    }
     memory_bm_position_reset(forbidden_pages_map);
     memory_bm_position_reset(free_pages_map);
-    loop:
+// label;
     fr_pfn = memory_bm_next_pfn(free_pages_map);
     fb_pfn = memory_bm_next_pfn(forbidden_pages_map);
 //
@@ -1469,20 +1691,22 @@ pub unsafe extern "C" fn swsusp_free() {
 // terminate when fb_pfn == fr_pfn == BM_END_OF_MAP.
 //
     do {
-    if (fb_pfn < fr_pfn)
+    if (fb_pfn < fr_pfn) {
     fb_pfn = memory_bm_next_pfn(forbidden_pages_map);
-    if (fr_pfn < fb_pfn)
+    }
+    if (fr_pfn < fb_pfn) {
     fr_pfn = memory_bm_next_pfn(free_pages_map);
+    }
     } while (fb_pfn != fr_pfn);
     if (fr_pfn != BM_END_OF_MAP && pfn_valid(fr_pfn)) {
-    struct page *page = pfn_to_page(fr_pfn);
+    let mut page = pfn_to_page(fr_pfn);
     memory_bm_clear_current(forbidden_pages_map);
     memory_bm_clear_current(free_pages_map);
     hibernate_restore_unprotect_page(page_address(page));
     __free_page(page);
-    goto loop;
+// goto;
     }
-    out:
+// label;
     nr_copy_pages = 0;
     nr_meta_pages = 0;
     nr_zero_pages = 0;
@@ -1503,40 +1727,40 @@ pub unsafe extern "C" fn swsusp_free() {
 //
 #[no_mangle]
 unsafe extern "C" fn preallocate_image_pages(nr_pages: c_ulong, mask: gfp_t) -> c_ulong {
-    static unsigned long preallocate_image_pages(unsigned long nr_pages, gfp_t mask)
-    {
-    let mut nr_alloc: c_ulong = 0;
+pub static mut nr_alloc: c_ulong = 0;
     while (nr_pages > 0) {
-    struct page *page;
+pub static mut page: *mut c_void = core::ptr::null_mut();
     page = alloc_image_page(mask);
-    if (!page)
+    if (!page) {
     break;
+    }
     memory_bm_set_bit(&copy_bm, page_to_pfn(page));
-    if (PageHighMem(page))
-    alloc_highmem++;
-    else
-    alloc_normal++;
-    nr_pages--;
-    nr_alloc++;
+    if (PageHighMem(page)) {
+    alloc_highmem += 1;
+    }
+    else {
+    alloc_normal += 1;
+    }
+    nr_pages -= 1;
+    nr_alloc += 1;
     }
     return nr_alloc;
     }
-    static unsigned long preallocate_image_memory(unsigned long nr_pages,
-    unsigned long avail_normal)
-    {
-    unsigned long alloc;
-    if (avail_normal <= alloc_normal)
+#[no_mangle]
+pub unsafe extern "C" fn preallocate_image_memory(nr_pages: c_ulong, avail_normal: c_ulong) -> c_ulong {
+    let mut alloc = 0;
+    if (avail_normal <= alloc_normal) {
     return 0;
+    }
     alloc = avail_normal - alloc_normal;
-    if (nr_pages < alloc)
+    if (nr_pages < alloc) {
     alloc = nr_pages;
+    }
     return preallocate_image_pages(alloc, GFP_IMAGE);
     }
 
 #[no_mangle]
 unsafe extern "C" fn preallocate_image_highmem(nr_pages: c_ulong) -> c_ulong {
-    static unsigned long preallocate_image_highmem(unsigned long nr_pages)
-    {
     return preallocate_image_pages(nr_pages, GFP_IMAGE | __GFP_HIGHMEM);
     }
 //
@@ -1544,28 +1768,22 @@ unsafe extern "C" fn preallocate_image_highmem(nr_pages: c_ulong) -> c_ulong {
 //
 #[no_mangle]
 unsafe extern "C" fn __fraction(x: u64, multiplier: u64, base: u64) -> c_ulong {
-    static unsigned long __fraction(u64 x, u64 multiplier, u64 base)
-    {
     return div64_u64(x * multiplier, base);
     }
-    static unsigned long preallocate_highmem_fraction(unsigned long nr_pages,
-    unsigned long highmem,
-    unsigned long total)
-    {
-    let mut alloc: c_ulong = __fraction(nr_pages, highmem, total);
+#[no_mangle]
+pub unsafe extern "C" fn preallocate_highmem_fraction(nr_pages: c_ulong, highmem: c_ulong, total: c_ulong) -> c_ulong {
+pub static mut alloc: c_ulong = 0;
     return preallocate_image_pages(alloc, GFP_IMAGE | __GFP_HIGHMEM);
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn preallocate_image_highmem(nr_pages: c_ulong) -> c_ulong {
-    static inline unsigned long preallocate_image_highmem(unsigned long nr_pages)
-    {
     return 0;
     }
-    static inline unsigned long preallocate_highmem_fraction(unsigned long nr_pages,
-    unsigned long highmem,
-    unsigned long total)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: preallocate_highmem_fraction
+pub unsafe extern "C" fn preallocate_highmem_fraction_dup(nr_pages: c_ulong, highmem: c_ulong, total: c_ulong) -> c_ulong {
     return 0;
     }
 
@@ -1574,8 +1792,6 @@ pub unsafe extern "C" fn preallocate_image_highmem(nr_pages: c_ulong) -> c_ulong
 //
 #[no_mangle]
 unsafe extern "C" fn free_unnecessary_pages() -> c_ulong {
-    static unsigned long free_unnecessary_pages(void)
-    {
     unsigned long save, to_free_normal, to_free_highmem, free;
     save = count_data_pages();
     if (alloc_normal >= save) {
@@ -1591,26 +1807,30 @@ unsafe extern "C" fn free_unnecessary_pages() -> c_ulong {
     } else {
     to_free_highmem = 0;
     save -= alloc_highmem;
-    if (to_free_normal > save)
+    if (to_free_normal > save) {
     to_free_normal -= save;
-    else
+    }
+    else {
     to_free_normal = 0;
+    }
     }
     free = to_free_normal + to_free_highmem;
     memory_bm_position_reset(&copy_bm);
     while (to_free_normal > 0 || to_free_highmem > 0) {
-    let mut pfn: c_ulong = memory_bm_next_pfn(&copy_bm);
-    struct page *page = pfn_to_page(pfn);
+pub static mut pfn: c_ulong = 0;
+    let mut page = pfn_to_page(pfn);
     if (PageHighMem(page)) {
-    if (!to_free_highmem)
+    if (!to_free_highmem) {
     continue;
-    to_free_highmem--;
-    alloc_highmem--;
+    }
+    to_free_highmem -= 1;
+    alloc_highmem -= 1;
     } else {
-    if (!to_free_normal)
+    if (!to_free_normal) {
     continue;
-    to_free_normal--;
-    alloc_normal--;
+    }
+    to_free_normal -= 1;
+    alloc_normal -= 1;
     }
     memory_bm_clear_bit(&copy_bm, pfn);
     swsusp_unset_page_forbidden(page);
@@ -1636,9 +1856,7 @@ unsafe extern "C" fn free_unnecessary_pages() -> c_ulong {
 //
 #[no_mangle]
 unsafe extern "C" fn minimum_image_size(saveable: c_ulong) -> c_ulong {
-    static unsigned long minimum_image_size(unsigned long saveable)
-    {
-    unsigned long size;
+    let mut size = 0;
     size = global_node_page_state_pages(NR_SLAB_RECLAIMABLE_B)
     + global_node_page_state(NR_ACTIVE_ANON)
     + global_node_page_state(NR_INACTIVE_ANON)
@@ -1670,29 +1888,27 @@ unsafe extern "C" fn minimum_image_size(saveable: c_ulong) -> c_ulong {
 //
 #[no_mangle]
 pub unsafe extern "C" fn hibernate_preallocate_memory() -> c_int {
-    int hibernate_preallocate_memory(void)
-    {
-    struct zone *zone;
+pub static mut zone: *mut c_void = core::ptr::null_mut();
     unsigned long saveable, size, max_size, count, highmem, pages = 0;
     unsigned long alloc, save_highmem, pages_highmem, avail_normal;
     ktime_t start, stop;
-    int error;
-    pr_info("Preallocating image memory\n");
+    let mut error = 0;
+    pr_info!("Preallocating image memory\n");
     start = ktime_get();
     error = memory_bm_create(&orig_bm, GFP_IMAGE, PG_ANY);
     if (error) {
-    pr_err("Cannot allocate original bitmap\n");
-    goto err_out;
+    pr_err!("Cannot allocate original bitmap\n");
+// goto;
     }
     error = memory_bm_create(&copy_bm, GFP_IMAGE, PG_ANY);
     if (error) {
-    pr_err("Cannot allocate copy bitmap\n");
-    goto err_out;
+    pr_err!("Cannot allocate copy bitmap\n");
+// goto;
     }
     error = memory_bm_create(&zero_bm, GFP_IMAGE, PG_ANY);
     if (error) {
-    pr_err("Cannot allocate zero bitmap\n");
-    goto err_out;
+    pr_err!("Cannot allocate zero bitmap\n");
+// goto;
     }
     alloc_normal = 0;
     alloc_highmem = 0;
@@ -1710,10 +1926,12 @@ pub unsafe extern "C" fn hibernate_preallocate_memory() -> c_int {
     size = 0;
     for_each_populated_zone(zone) {
     size += snapshot_additional_pages(zone);
-    if (is_highmem(zone))
+    if (is_highmem(zone)) {
     highmem += zone_page_state(zone, NR_FREE_PAGES);
-    else
+    }
+    else {
     count += zone_page_state(zone, NR_FREE_PAGES);
+    }
     }
     avail_normal = count;
     count += highmem;
@@ -1723,8 +1941,9 @@ pub unsafe extern "C" fn hibernate_preallocate_memory() -> c_int {
     - 2 * DIV_ROUND_UP(reserved_size, PAGE_SIZE);
 // Compute the desired number of image pages specified by image_size.
     size = DIV_ROUND_UP(image_size, PAGE_SIZE);
-    if (size > max_size)
+    if (size > max_size) {
     size = max_size;
+    }
 //
 // If the desired number of image pages is at least as large as the
 // current number of saveable pages in memory, allocate page frames for
@@ -1733,7 +1952,7 @@ pub unsafe extern "C" fn hibernate_preallocate_memory() -> c_int {
     if (size >= saveable) {
     pages = preallocate_image_highmem(save_highmem);
     pages += preallocate_image_memory(saveable - pages, avail_normal);
-    goto out;
+// goto;
     }
 // Estimate the minimum size of the image.
     pages = minimum_image_size(saveable);
@@ -1742,12 +1961,15 @@ pub unsafe extern "C" fn hibernate_preallocate_memory() -> c_int {
 // accommodate an image of the minimum size (unless it's already too
 // small, in which case don't preallocate pages from it at all).
 //
-    if (avail_normal > pages)
+    if (avail_normal > pages) {
     avail_normal -= pages;
-    else
+    }
+    else {
     avail_normal = 0;
-    if (size < pages)
+    }
+    if (size < pages) {
     size = min_t(unsigned long, pages, max_size);
+    }
 //
 // Let the memory management subsystem know that we're going to need a
 // large number of page frames to allocate and make it free some memory.
@@ -1764,10 +1986,12 @@ pub unsafe extern "C" fn hibernate_preallocate_memory() -> c_int {
 //
     pages_highmem = preallocate_image_highmem(highmem / 2);
     alloc = count - max_size;
-    if (alloc > pages_highmem)
+    if (alloc > pages_highmem) {
     alloc -= pages_highmem;
-    else
+    }
+    else {
     alloc = 0;
+    }
     pages = preallocate_image_memory(alloc, avail_normal);
     if (pages < alloc) {
 // We have exhausted non-highmem pages, try highmem.
@@ -1775,9 +1999,9 @@ pub unsafe extern "C" fn hibernate_preallocate_memory() -> c_int {
     pages += pages_highmem;
     pages_highmem = preallocate_image_highmem(alloc);
     if (pages_highmem < alloc) {
-    pr_err("Image allocation is %lu pages short\n",
+    pr_err!("Image allocation is %lu pages short\n",
     alloc - pages_highmem);
-    goto err_out;
+// goto;
     }
     pages += pages_highmem;
 //
@@ -1805,12 +2029,12 @@ pub unsafe extern "C" fn hibernate_preallocate_memory() -> c_int {
 // ones now.
 //
     pages -= free_unnecessary_pages();
-    out:
+// label;
     stop = ktime_get();
-    pr_info("Allocated %lu pages for snapshot\n", pages);
+    pr_info!("Allocated %lu pages for snapshot\n", pages);
     swsusp_show_speed(start, stop, pages, "Allocated");
     return 0;
-    err_out:
+// label;
     swsusp_free();
     return -ENOMEM;
     }
@@ -1823,32 +2047,32 @@ pub unsafe extern "C" fn hibernate_preallocate_memory() -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn count_pages_for_highmem(nr_highmem: c_uint) -> c_uint {
-    static unsigned int count_pages_for_highmem(unsigned int nr_highmem)
-    {
-    let mut free_highmem: c_uint = count_free_highmem_pages() + alloc_highmem;
-    if (free_highmem >= nr_highmem)
+pub static mut free_highmem: c_uint = 0;
+    if (free_highmem >= nr_highmem) {
     nr_highmem = 0;
-    else
+    }
+    else {
     nr_highmem -= free_highmem;
+    }
     return nr_highmem;
     }
 
-    static unsigned int count_pages_for_highmem(unsigned int nr_highmem) { return 0; }
+#[no_mangle]
+pub unsafe extern "C" fn count_pages_for_highmem(nr_highmem: c_uint) -> c_uint { return 0; }
 
 //
 // enough_free_mem - Check if there is enough free memory for the image.
 //
 #[no_mangle]
 unsafe extern "C" fn enough_free_mem(nr_pages: c_uint, nr_highmem: c_uint) -> c_int {
-    static int enough_free_mem(unsigned int nr_pages, unsigned int nr_highmem)
-    {
-    struct zone *zone;
-    let mut free: c_uint = alloc_normal;
-    for_each_populated_zone(zone)
+pub static mut zone: *mut c_void = core::ptr::null_mut();
+pub static mut free: c_uint = 0;
+    for_each_populated_zone(zone) {
     if (!is_highmem(zone))
     free += zone_page_state(zone, NR_FREE_PAGES);
+    }
     nr_pages += count_pages_for_highmem(nr_highmem);
-    pr_debug("Normal pages needed: %u + %u, available pages: %u\n",
+    pr_debug!("Normal pages needed: %u + %u, available pages: %u\n",
     nr_pages, PAGES_FOR_IO, free);
     return free > nr_pages + PAGES_FOR_IO;
     }
@@ -1861,8 +2085,6 @@ unsafe extern "C" fn enough_free_mem(nr_pages: c_uint, nr_highmem: c_uint) -> c_
 //
 #[no_mangle]
 pub unsafe extern "C" fn get_highmem_buffer(safe_needed: c_int) -> c_int {
-    static inline int get_highmem_buffer(int safe_needed)
-    {
     buffer = get_image_page(GFP_ATOMIC, safe_needed);
     return buffer ? 0 : -ENOMEM;
     }
@@ -1872,24 +2094,29 @@ pub unsafe extern "C" fn get_highmem_buffer(safe_needed: c_int) -> c_int {
 // Try to allocate as many pages as needed, but if the number of free highmem
 // pages is less than that, allocate them all.
 //
-    static inline unsigned int alloc_highmem_pages(struct memory_bitmap *bm,
-    unsigned int nr_highmem)
-    {
-    let mut to_alloc: c_uint = count_free_highmem_pages();
-    if (to_alloc > nr_highmem)
+#[no_mangle]
+pub unsafe extern "C" fn alloc_highmem_pages(bm: *mut memory_bitmap, nr_highmem: c_uint) -> c_uint {
+pub static mut to_alloc: c_uint = 0;
+    if (to_alloc > nr_highmem) {
     to_alloc = nr_highmem;
+    }
     nr_highmem -= to_alloc;
     while (to_alloc-- > 0) {
-    struct page *page;
+pub static mut page: *mut c_void = core::ptr::null_mut();
     page = alloc_image_page(__GFP_HIGHMEM|__GFP_KSWAPD_RECLAIM);
     memory_bm_set_bit(bm, page_to_pfn(page));
     }
     return nr_highmem;
     }
 
-    static inline int get_highmem_buffer(int safe_needed) { return 0; }
-    static inline unsigned int alloc_highmem_pages(struct memory_bitmap *bm,
-    unsigned int n) { return 0; }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: get_highmem_buffer
+pub unsafe extern "C" fn get_highmem_buffer_dup(safe_needed: c_int) -> c_int { return 0; }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: alloc_highmem_pages
+pub unsafe extern "C" fn alloc_highmem_pages_dup(bm: *mut memory_bitmap, n: c_uint) -> c_uint { return 0; }
 
 //
 // swsusp_alloc - Allocate memory for hibernation image.
@@ -1902,12 +2129,12 @@ pub unsafe extern "C" fn get_highmem_buffer(safe_needed: c_int) -> c_int {
 // also be located in the high memory, because of the way in which
 // copy_data_pages() works.
 //
-    static int swsusp_alloc(struct memory_bitmap *copy_bm,
-    unsigned int nr_pages, unsigned int nr_highmem)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn swsusp_alloc(copy_bm: *mut memory_bitmap, nr_pages: c_uint, nr_highmem: c_uint) -> c_int {
     if (nr_highmem > 0) {
-    if (get_highmem_buffer(PG_ANY))
-    goto err_out;
+    if (get_highmem_buffer(PG_ANY)) {
+// goto;
+    }
     if (nr_highmem > alloc_highmem) {
     nr_highmem -= alloc_highmem;
     nr_pages += alloc_highmem_pages(copy_bm, nr_highmem);
@@ -1916,23 +2143,23 @@ pub unsafe extern "C" fn get_highmem_buffer(safe_needed: c_int) -> c_int {
     if (nr_pages > alloc_normal) {
     nr_pages -= alloc_normal;
     while (nr_pages-- > 0) {
-    struct page *page;
+pub static mut page: *mut c_void = core::ptr::null_mut();
     page = alloc_image_page(GFP_ATOMIC);
-    if (!page)
-    goto err_out;
+    if (!page) {
+// goto;
+    }
     memory_bm_set_bit(copy_bm, page_to_pfn(page));
     }
     }
     return 0;
-    err_out:
+// label;
     swsusp_free();
     return -ENOMEM;
     }
 #[no_mangle]
 pub unsafe extern "C" fn swsusp_save() -> asmlinkage __visible int {
-    asmlinkage __visible int swsusp_save(void)
-    {
-    unsigned int nr_pages, nr_highmem;
+    let mut nr_pages = 0;
+    let mut nr_highmem = 0;
     pm_deferred_pr_dbg("Creating image\n");
     drain_local_pages(core::ptr::null_mut());
     nr_pages = count_data_pages();
@@ -1942,8 +2169,9 @@ pub unsafe extern "C" fn swsusp_save() -> asmlinkage __visible int {
     pm_deferred_pr_dbg("Not enough free memory for image creation\n");
     return -ENOMEM;
     }
-    if (swsusp_alloc(&copy_bm, nr_pages, nr_highmem))
+    if (swsusp_alloc(&copy_bm, nr_pages, nr_highmem)) {
     return -ENOMEM;
+    }
 //
 // During allocating of suspend pagedir, new cold pages may appear.
 // Kill them.
@@ -1958,7 +2186,7 @@ pub unsafe extern "C" fn swsusp_save() -> asmlinkage __visible int {
     nr_pages += nr_highmem;
 // We don't actually copy the zero pages
     nr_zero_pages = nr_pages - nr_copy_pages;
-    nr_meta_pages = DIV_ROUND_UP(nr_pages * sizeof(long), PAGE_SIZE);
+    nr_meta_pages = DIV_ROUND_UP(nr_pages * sizeof!(long), PAGE_SIZE);
     pm_deferred_pr_dbg("Image created (%d pages copied, %d zero pages)\n",
     nr_copy_pages, nr_zero_pages);
     return 0;
@@ -1966,38 +2194,37 @@ pub unsafe extern "C" fn swsusp_save() -> asmlinkage __visible int {
 
 #[no_mangle]
 unsafe extern "C" fn init_header_complete(info: *mut swsusp_info) -> c_int {
-    static int init_header_complete(struct swsusp_info *info)
-    {
-    memcpy(&info.uts, init_utsname(), sizeof(struct new_utsname));
+    memcpy(&info.uts, init_utsname(), sizeof!(new_utsname));
     info.version_code = LINUX_VERSION_CODE;
     return 0;
     }
-    static const char *check_image_kernel(struct swsusp_info *info)
+    static const char *check_image_kernel(swsusp_info *info)
     {
-    if (info.version_code != LINUX_VERSION_CODE)
+    if (info.version_code != LINUX_VERSION_CODE) {
     return "kernel version";
-    if (strcmp(info.uts.sysname, init_utsname().sysname))
+    }
+    if (strcmp(info.uts.sysname, init_utsname().sysname)) {
     return "system type";
-    if (strcmp(info.uts.release, init_utsname().release))
+    }
+    if (strcmp(info.uts.release, init_utsname().release)) {
     return "kernel release";
-    if (strcmp(info.uts.version, init_utsname().version))
+    }
+    if (strcmp(info.uts.version, init_utsname().version)) {
     return "version";
-    if (strcmp(info.uts.machine, init_utsname().machine))
+    }
+    if (strcmp(info.uts.machine, init_utsname().machine)) {
     return "machine";
+    }
     return core::ptr::null_mut();
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn snapshot_get_image_size() -> c_ulong {
-    unsigned long snapshot_get_image_size(void)
-    {
     return nr_copy_pages + nr_meta_pages + 1;
     }
 #[no_mangle]
 unsafe extern "C" fn init_header(info: *mut swsusp_info) -> c_int {
-    static int init_header(struct swsusp_info *info)
-    {
-    memset(info, 0, sizeof(struct swsusp_info));
+    memset(info, 0, sizeof!(swsusp_info));
     info.num_physpages = get_num_physpages();
     info.image_pages = nr_copy_pages;
     info.pages = snapshot_get_image_size();
@@ -2017,16 +2244,17 @@ unsafe extern "C" fn init_header(info: *mut swsusp_info) -> c_int {
 // zeros will have the highest bit set in the packed format to distinguish
 // them from PFNs which will be contained in the image file.
 //
-    static inline void pack_pfns(unsigned long *buf, struct memory_bitmap *bm,
-    struct memory_bitmap *zero_bm)
-    {
-    int j;
-    for (j = 0; j < PAGE_SIZE / sizeof(long); j++) {
+#[no_mangle]
+pub unsafe extern "C" fn pack_pfns(buf: *mut c_ulong, bm: *mut memory_bitmap, zero_bm: *mut memory_bitmap) {
+    let mut j = 0;
+    while (j < PAGE_SIZE / sizeof!(long)) {
     buf[j] = memory_bm_next_pfn(bm);
-    if (unlikely(buf[j] == BM_END_OF_MAP))
+    if (unlikely(buf[j] == BM_END_OF_MAP)) {
     break;
-    if (memory_bm_test_bit(zero_bm, buf[j]))
+    }
+    if (memory_bm_test_bit(zero_bm, buf[j])) {
     buf[j] |= ENCODED_PFN_ZERO_FLAG;
+    }
     }
     }
 //
@@ -2047,21 +2275,22 @@ unsafe extern "C" fn init_header(info: *mut swsusp_info) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn snapshot_read_next(handle: *mut snapshot_handle) -> c_int {
-    int snapshot_read_next(struct snapshot_handle *handle)
-    {
-    if (handle.cur > nr_meta_pages + nr_copy_pages)
+    if (handle.cur > nr_meta_pages + nr_copy_pages) {
     return 0;
+    }
     if (!buffer) {
 // This makes the buffer be freed by swsusp_free()
     buffer = get_image_page(GFP_ATOMIC, PG_ANY);
-    if (!buffer)
+    if (!buffer) {
     return -ENOMEM;
     }
+    }
     if (!handle.cur) {
-    int error;
-    error = init_header((struct swsusp_info *)buffer);
-    if (error)
+    let mut error = 0;
+    error = init_header(buffer);
+    if (error) {
     return error;
+    }
     handle.buffer = buffer;
     memory_bm_position_reset(&orig_bm);
     memory_bm_position_reset(&copy_bm);
@@ -2069,7 +2298,7 @@ pub unsafe extern "C" fn snapshot_read_next(handle: *mut snapshot_handle) -> c_i
     clear_page(buffer);
     pack_pfns(buffer, &orig_bm, &zero_bm);
     } else {
-    struct page *page;
+pub static mut page: *mut c_void = core::ptr::null_mut();
     page = pfn_to_page(memory_bm_next_pfn(&copy_bm));
     if (PageHighMem(page)) {
 //
@@ -2077,7 +2306,7 @@ pub unsafe extern "C" fn snapshot_read_next(handle: *mut snapshot_handle) -> c_i
 // because we can't return with a kmapped
 // highmem page (we may not be called again).
 //
-    void *kaddr;
+pub static mut kaddr: *mut c_void = core::ptr::null_mut();
     kaddr = kmap_local_page(page);
     copy_page(buffer, kaddr);
     kunmap_local(kaddr);
@@ -2086,13 +2315,12 @@ pub unsafe extern "C" fn snapshot_read_next(handle: *mut snapshot_handle) -> c_i
     handle.buffer = page_address(page);
     }
     }
-    handle.cur++;
+    handle.cur += 1;
     return PAGE_SIZE;
     }
-    static void duplicate_memory_bitmap(struct memory_bitmap *dst,
-    struct memory_bitmap *src)
-    {
-    unsigned long pfn;
+#[no_mangle]
+pub unsafe extern "C" fn duplicate_memory_bitmap(dst: *mut memory_bitmap, src: *mut memory_bitmap) {
+    let mut pfn = 0;
     memory_bm_position_reset(src);
     pfn = memory_bm_next_pfn(src);
     while (pfn != BM_END_OF_MAP) {
@@ -2108,9 +2336,7 @@ pub unsafe extern "C" fn snapshot_read_next(handle: *mut snapshot_handle) -> c_i
 //
 #[no_mangle]
 unsafe extern "C" fn mark_unsafe_pages(bm: *mut memory_bitmap) {
-    static void mark_unsafe_pages(struct memory_bitmap *bm)
-    {
-    unsigned long pfn;
+    let mut pfn = 0;
 // Clear the "free"/"unsafe" bit for all PFNs
     memory_bm_position_reset(free_pages_map);
     pfn = memory_bm_next_pfn(free_pages_map);
@@ -2124,14 +2350,13 @@ unsafe extern "C" fn mark_unsafe_pages(bm: *mut memory_bitmap) {
     }
 #[no_mangle]
 unsafe extern "C" fn check_header(info: *mut swsusp_info) -> c_int {
-    static int check_header(struct swsusp_info *info)
-    {
-    const char *reason;
+pub static mut reason: *mut c_void = core::ptr::null_mut();
     reason = check_image_kernel(info);
-    if (!reason && info.num_physpages != get_num_physpages())
+    if (!reason && info.num_physpages != get_num_physpages()) {
     reason = "memory size";
+    }
     if (reason) {
-    pr_err("Image mismatch: %s\n", reason);
+    pr_err!("Image mismatch: %s\n", reason);
     return -EPERM;
     }
     return 0;
@@ -2141,9 +2366,7 @@ unsafe extern "C" fn check_header(info: *mut swsusp_info) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn load_header(info: *mut swsusp_info) -> c_int {
-    static int load_header(struct swsusp_info *info)
-    {
-    int error;
+    let mut error = 0;
     restore_pblist = core::ptr::null_mut();
     error = check_header(info);
     if (!error) {
@@ -2162,27 +2385,28 @@ unsafe extern "C" fn load_header(info: *mut swsusp_info) -> c_int {
 // corresponding bit in @bm. If the page was originally populated with only
 // zeros then a corresponding bit will also be set in @zero_bm.
 //
-    static int unpack_orig_pfns(unsigned long *buf, struct memory_bitmap *bm,
-    struct memory_bitmap *zero_bm)
-    {
-    unsigned long decoded_pfn;
-    bool zero;
-    int j;
-    for (j = 0; j < PAGE_SIZE / sizeof(long); j++) {
-    if (unlikely(buf[j] == BM_END_OF_MAP))
+#[no_mangle]
+pub unsafe extern "C" fn unpack_orig_pfns(buf: *mut c_ulong, bm: *mut memory_bitmap, zero_bm: *mut memory_bitmap) -> c_int {
+    let mut decoded_pfn = 0;
+    let mut zero = 0;
+    let mut j = 0;
+    while (j < PAGE_SIZE / sizeof!(long)) {
+    if (unlikely(buf[j] == BM_END_OF_MAP)) {
     break;
+    }
     zero = !!(buf[j] & ENCODED_PFN_ZERO_FLAG);
     decoded_pfn = buf[j] & ENCODED_PFN_MASK;
     if (pfn_valid(decoded_pfn) && memory_bm_pfn_present(bm, decoded_pfn)) {
     memory_bm_set_bit(bm, decoded_pfn);
     if (zero) {
     memory_bm_set_bit(zero_bm, decoded_pfn);
-    nr_zero_pages++;
+    nr_zero_pages += 1;
     }
     } else {
-    if (!pfn_valid(decoded_pfn))
-    pr_err(FW_BUG "Memory map mismatch at 0x%llx after hibernation\n",
+    if (!pfn_valid(decoded_pfn)) {
+    pr_err!(FW_BUG "Memory map mismatch at 0x%llx after hibernation\n",
     (unsigned long long)PFN_PHYS(decoded_pfn));
+    }
     return -EFAULT;
     }
     }
@@ -2197,8 +2421,8 @@ unsafe extern "C" fn load_header(info: *mut swsusp_info) -> c_int {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct highmem_pbe {
-    pub /: *mut *mut *mut page copy_page; / data is here now,
-    pub /: *mut *mut *mut page orig_page; / data was here before the suspend,
+//     pub /: *mut *mut *mut page copy_page; / data is here now,
+//     pub /: *mut *mut *mut page orig_page; / data was here before the suspend,
     pub next: *mut highmem_pbe,
 }
 
@@ -2208,7 +2432,7 @@ pub struct highmem_pbe {
 // also been allocated by the "resume" kernel, so their contents cannot be
 // written directly to their "original" page frames.
 //
-    static struct highmem_pbe *highmem_pblist;
+pub static mut highmem_pblist: *mut c_void = core::ptr::null_mut();
 //
 // count_highmem_image_pages - Compute the number of highmem pages in the image.
 // @bm: Memory bitmap.
@@ -2217,21 +2441,20 @@ pub struct highmem_pbe {
 //
 #[no_mangle]
 unsafe extern "C" fn count_highmem_image_pages(bm: *mut memory_bitmap) -> c_uint {
-    static unsigned int count_highmem_image_pages(struct memory_bitmap *bm)
-    {
-    unsigned long pfn;
-    let mut cnt: c_uint = 0;
+    let mut pfn = 0;
+pub static mut cnt: c_uint = 0;
     memory_bm_position_reset(bm);
     pfn = memory_bm_next_pfn(bm);
     while (pfn != BM_END_OF_MAP) {
-    if (PageHighMem(pfn_to_page(pfn)))
-    cnt++;
+    if (PageHighMem(pfn_to_page(pfn))) {
+    cnt += 1;
+    }
     pfn = memory_bm_next_pfn(bm);
     }
     return cnt;
     }
     static unsigned int safe_highmem_pages;
-    static struct memory_bitmap *safe_highmem_bm;
+pub static mut safe_highmem_bm: *mut c_void = core::ptr::null_mut();
 //
 // prepare_highmem_image - Allocate memory for loading highmem data from image.
 // @bm: Pointer to an uninitialized memory bitmap structure.
@@ -2245,27 +2468,30 @@ unsafe extern "C" fn count_highmem_image_pages(bm: *mut memory_bitmap) -> c_uint
 //
 // NOTE: This function should not be called if there are no highmem image pages.
 //
-    static int prepare_highmem_image(struct memory_bitmap *bm,
-    unsigned int *nr_highmem_p)
-    {
-    unsigned int to_alloc;
-    if (memory_bm_create(bm, GFP_ATOMIC, PG_SAFE))
+#[no_mangle]
+pub unsafe extern "C" fn prepare_highmem_image(bm: *mut memory_bitmap, nr_highmem_p: *mut c_uint) -> c_int {
+    let mut to_alloc = 0;
+    if (memory_bm_create(bm, GFP_ATOMIC, PG_SAFE)) {
     return -ENOMEM;
-    if (get_highmem_buffer(PG_SAFE))
+    }
+    if (get_highmem_buffer(PG_SAFE)) {
     return -ENOMEM;
+    }
     to_alloc = count_free_highmem_pages();
-    if (to_alloc > *nr_highmem_p)
+    if (to_alloc > *nr_highmem_p) {
     to_alloc = *nr_highmem_p;
-    else
+    }
+    else {
 // nr_highmem_p = to_alloc;
+    }
     safe_highmem_pages = 0;
     while (to_alloc-- > 0) {
-    struct page *page;
+pub static mut page: *mut c_void = core::ptr::null_mut();
     page = alloc_page(__GFP_HIGHMEM);
     if (!swsusp_page_is_free(page)) {
 // The page is "safe", set its bit the bitmap
     memory_bm_set_bit(bm, page_to_pfn(page));
-    safe_highmem_pages++;
+    safe_highmem_pages += 1;
     }
 // Mark the page as allocated
     swsusp_set_page_forbidden(page);
@@ -2275,7 +2501,7 @@ unsafe extern "C" fn count_highmem_image_pages(bm: *mut memory_bitmap) -> c_uint
     safe_highmem_bm = bm;
     return 0;
     }
-    static struct page *last_highmem_page;
+pub static mut last_highmem_page: *mut c_void = core::ptr::null_mut();
 //
 // get_highmem_page_buffer - Prepare a buffer to store a highmem image page.
 //
@@ -2294,11 +2520,10 @@ unsafe extern "C" fn count_highmem_image_pages(bm: *mut memory_bitmap) -> c_uint
 // @buffer is returned, @last_highmem_page is set to the page to which
 // the data will have to be copied from @buffer.
 //
-    static void *get_highmem_page_buffer(struct page *page,
-    struct chain_allocator *ca)
-    {
-    struct highmem_pbe *pbe;
-    void *kaddr;
+#[no_mangle]
+pub unsafe extern "C" fn get_highmem_page_buffer(page: *mut page, ca: *mut chain_allocator) -> *mut c_void {
+pub static mut pbe: *mut c_void = core::ptr::null_mut();
+pub static mut kaddr: *mut c_void = core::ptr::null_mut();
     if (swsusp_page_is_forbidden(page) && swsusp_page_is_free(page)) {
 //
 // We have allocated the "original" page frame and we can
@@ -2311,25 +2536,26 @@ unsafe extern "C" fn count_highmem_image_pages(bm: *mut memory_bitmap) -> c_uint
 // The "original" page frame has not been allocated and we have to
 // use a "safe" page frame to store the loaded page.
 //
-    pbe = chain_alloc(ca, sizeof(struct highmem_pbe));
+    pbe = chain_alloc(ca, sizeof!(highmem_pbe));
     if (!pbe) {
     swsusp_free();
     return ERR_PTR(-ENOMEM);
     }
     pbe.orig_page = page;
     if (safe_highmem_pages > 0) {
-    struct page *tmp;
+pub static mut tmp: *mut c_void = core::ptr::null_mut();
 // Copy of the page will be stored in high memory
     kaddr = buffer;
     tmp = pfn_to_page(memory_bm_next_pfn(safe_highmem_bm));
-    safe_highmem_pages--;
+    safe_highmem_pages -= 1;
     last_highmem_page = tmp;
     pbe.copy_page = tmp;
     } else {
 // Copy of the page will be stored in normal memory
     kaddr = __get_safe_page(ca.gfp_mask);
-    if (!kaddr)
+    if (!kaddr) {
     return ERR_PTR(-ENOMEM);
+    }
     pbe.copy_page = virt_to_page(kaddr);
     }
     pbe.next = highmem_pblist;
@@ -2345,10 +2571,8 @@ unsafe extern "C" fn count_highmem_image_pages(bm: *mut memory_bitmap) -> c_uint
 //
 #[no_mangle]
 unsafe extern "C" fn copy_last_highmem_page() {
-    static void copy_last_highmem_page(void)
-    {
     if (last_highmem_page) {
-    void *dst;
+pub static mut dst: *mut c_void = core::ptr::null_mut();
     dst = kmap_local_page(last_highmem_page);
     copy_page(dst, buffer);
     kunmap_local(dst);
@@ -2357,31 +2581,40 @@ unsafe extern "C" fn copy_last_highmem_page() {
     }
 #[no_mangle]
 pub unsafe extern "C" fn last_highmem_page_copied() -> c_int {
-    static inline int last_highmem_page_copied(void)
-    {
     return !last_highmem_page;
     }
 #[no_mangle]
 pub unsafe extern "C" fn free_highmem_data() {
-    static inline void free_highmem_data(void)
-    {
-    if (safe_highmem_bm)
+    if (safe_highmem_bm) {
     memory_bm_free(safe_highmem_bm, PG_UNSAFE_CLEAR);
-    if (buffer)
+    }
+    if (buffer) {
     free_image_page(buffer, PG_UNSAFE_CLEAR);
     }
+    }
 
-    static unsigned int count_highmem_image_pages(struct memory_bitmap *bm) { return 0; }
-    static inline int prepare_highmem_image(struct memory_bitmap *bm,
-    unsigned int *nr_highmem_p) { return 0; }
-    static inline void *get_highmem_page_buffer(struct page *page,
-    struct chain_allocator *ca)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn count_highmem_image_pages(bm: *mut memory_bitmap) -> c_uint { return 0; }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: prepare_highmem_image
+pub unsafe extern "C" fn prepare_highmem_image_dup(bm: *mut memory_bitmap, nr_highmem_p: *mut c_uint) -> c_int { return 0; }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: get_highmem_page_buffer
+pub unsafe extern "C" fn get_highmem_page_buffer_dup(page: *mut page, ca: *mut chain_allocator) -> *mut c_void {
     return ERR_PTR(-EINVAL);
     }
-    static inline void copy_last_highmem_page(void) {}
-    static inline int last_highmem_page_copied(void) { return 1; }
-    static inline void free_highmem_data(void) {}
+#[no_mangle]
+pub unsafe extern "C" fn copy_last_highmem_page() {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: last_highmem_page_copied
+pub unsafe extern "C" fn last_highmem_page_copied_dup() -> c_int { return 1; }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: free_highmem_data
+pub unsafe extern "C" fn free_highmem_data_dup() {}
 
 //
 // prepare_image - Make room for loading hibernation image.
@@ -2402,40 +2635,44 @@ pub unsafe extern "C" fn free_highmem_data() {
 // Because it was not known which pages were unsafe when @zero_bm was created,
 // make a copy of it and recreate it within safe pages.
 //
-    static int prepare_image(struct memory_bitmap *new_bm, struct memory_bitmap *bm,
-    struct memory_bitmap *zero_bm)
-    {
-    unsigned int nr_pages, nr_highmem;
-    struct memory_bitmap tmp;
-    struct linked_page *lp;
-    int error;
+#[no_mangle]
+pub unsafe extern "C" fn prepare_image(new_bm: *mut memory_bitmap, bm: *mut memory_bitmap, zero_bm: *mut memory_bitmap) -> c_int {
+    let mut nr_pages = 0;
+    let mut nr_highmem = 0;
+pub static mut tmp: usize = 0;
+pub static mut lp: *mut c_void = core::ptr::null_mut();
+    let mut error = 0;
 // If there is no highmem, the buffer will not be necessary
     free_image_page(buffer, PG_UNSAFE_CLEAR);
     buffer = core::ptr::null_mut();
     nr_highmem = count_highmem_image_pages(bm);
     mark_unsafe_pages(bm);
     error = memory_bm_create(new_bm, GFP_ATOMIC, PG_SAFE);
-    if (error)
-    goto Free;
+    if (error) {
+// goto;
+    }
     duplicate_memory_bitmap(new_bm, bm);
     memory_bm_free(bm, PG_UNSAFE_KEEP);
 // Make a copy of zero_bm so it can be created in safe pages
     error = memory_bm_create(&tmp, GFP_ATOMIC, PG_SAFE);
-    if (error)
-    goto Free;
+    if (error) {
+// goto;
+    }
     duplicate_memory_bitmap(&tmp, zero_bm);
     memory_bm_free(zero_bm, PG_UNSAFE_KEEP);
 // Recreate zero_bm in safe pages
     error = memory_bm_create(zero_bm, GFP_ATOMIC, PG_SAFE);
-    if (error)
-    goto Free;
+    if (error) {
+// goto;
+    }
     duplicate_memory_bitmap(zero_bm, &tmp);
     memory_bm_free(&tmp, PG_UNSAFE_CLEAR);
 // At this point zero_bm is in safe pages and it can be used for restoring.
     if (nr_highmem > 0) {
     error = prepare_highmem_image(bm, &nr_highmem);
-    if (error)
-    goto Free;
+    if (error) {
+// goto;
+    }
     }
 //
 // Reserve some safe pages for potential later use.
@@ -2452,19 +2689,19 @@ pub unsafe extern "C" fn free_highmem_data() {
     lp = get_image_page(GFP_ATOMIC, PG_SAFE);
     if (!lp) {
     error = -ENOMEM;
-    goto Free;
+// goto;
     }
     lp.next = safe_pages_list;
     safe_pages_list = lp;
-    nr_pages--;
+    nr_pages -= 1;
     }
 // Preallocate memory for the image
     nr_pages = (nr_zero_pages + nr_copy_pages) - nr_highmem - allocated_unsafe_pages;
     while (nr_pages > 0) {
-    lp = (struct linked_page *)get_zeroed_page(GFP_ATOMIC);
+    lp = get_zeroed_page(GFP_ATOMIC);
     if (!lp) {
     error = -ENOMEM;
-    goto Free;
+// goto;
     }
     if (!swsusp_page_is_free(virt_to_page(lp))) {
 // The page is "safe", add it to the list
@@ -2474,10 +2711,10 @@ pub unsafe extern "C" fn free_highmem_data() {
 // Mark the page as allocated
     swsusp_set_page_forbidden(virt_to_page(lp));
     swsusp_set_page_free(virt_to_page(lp));
-    nr_pages--;
+    nr_pages -= 1;
     }
     return 0;
-    Free:
+// label;
     swsusp_free();
     return error;
     }
@@ -2487,35 +2724,39 @@ pub unsafe extern "C" fn free_highmem_data() {
 // Get the address that snapshot_write_next() should return to its caller to
 // write to.
 //
-    static void *get_buffer(struct memory_bitmap *bm, struct chain_allocator *ca)
-    {
-    struct pbe *pbe;
-    struct page *page;
-    let mut pfn: c_ulong = memory_bm_next_pfn(bm);
-    if (pfn == BM_END_OF_MAP)
+#[no_mangle]
+pub unsafe extern "C" fn get_buffer(bm: *mut memory_bitmap, ca: *mut chain_allocator) -> *mut c_void {
+pub static mut pbe: *mut c_void = core::ptr::null_mut();
+pub static mut page: *mut c_void = core::ptr::null_mut();
+pub static mut pfn: c_ulong = 0;
+    if (pfn == BM_END_OF_MAP) {
     return ERR_PTR(-EFAULT);
+    }
     page = pfn_to_page(pfn);
-    if (PageHighMem(page))
+    if (PageHighMem(page)) {
     return get_highmem_page_buffer(page, ca);
-    if (swsusp_page_is_forbidden(page) && swsusp_page_is_free(page))
+    }
+    if (swsusp_page_is_forbidden(page) && swsusp_page_is_free(page)) {
 //
 // We have allocated the "original" page frame and we can
 // use it directly to store the loaded page.
 //
     return page_address(page);
+    }
 //
 // The "original" page frame has not been allocated and we have to
 // use a "safe" page frame to store the loaded page.
 //
-    pbe = chain_alloc(ca, sizeof(struct pbe));
+    pbe = chain_alloc(ca, sizeof!(pbe));
     if (!pbe) {
     swsusp_free();
     return ERR_PTR(-ENOMEM);
     }
     pbe.orig_address = page_address(page);
     pbe.address = __get_safe_page(ca.gfp_mask);
-    if (!pbe.address)
+    if (!pbe.address) {
     return ERR_PTR(-ENOMEM);
+    }
     pbe.next = restore_pblist;
     restore_pblist = pbe;
     return pbe.address;
@@ -2538,29 +2779,32 @@ pub unsafe extern "C" fn free_highmem_data() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn snapshot_write_next(handle: *mut snapshot_handle) -> c_int {
-    int snapshot_write_next(struct snapshot_handle *handle)
-    {
-    static struct chain_allocator ca;
-    int error;
-    next:
+pub static mut ca: usize = 0;
+    let mut error = 0;
+// label;
 // Check if we have already loaded the entire image
-    if (handle.cur > 1 && handle.cur > nr_meta_pages + nr_copy_pages + nr_zero_pages)
+    if (handle.cur > 1 && handle.cur > nr_meta_pages + nr_copy_pages + nr_zero_pages) {
     return 0;
+    }
     if (!handle.cur) {
-    if (!buffer)
+    if (!buffer) {
 // This makes the buffer be freed by swsusp_free()
     buffer = get_image_page(GFP_ATOMIC, PG_ANY);
-    if (!buffer)
+    }
+    if (!buffer) {
     return -ENOMEM;
+    }
     handle.buffer = buffer;
     } else if (handle.cur == 1) {
     error = load_header(buffer);
-    if (error)
+    if (error) {
     return error;
+    }
     safe_pages_list = core::ptr::null_mut();
     error = memory_bm_create(&copy_bm, GFP_ATOMIC, PG_ANY);
-    if (error)
+    if (error) {
     return error;
+    }
     error = memory_bm_create(&zero_bm, GFP_ATOMIC, PG_ANY);
     if (error) {
     memory_bm_free(&copy_bm, PG_UNSAFE_CLEAR);
@@ -2570,36 +2814,41 @@ pub unsafe extern "C" fn snapshot_write_next(handle: *mut snapshot_handle) -> c_
     hibernate_restore_protection_begin();
     } else if (handle.cur <= nr_meta_pages + 1) {
     error = unpack_orig_pfns(buffer, &copy_bm, &zero_bm);
-    if (error)
+    if (error) {
     return error;
+    }
     if (handle.cur == nr_meta_pages + 1) {
     error = prepare_image(&orig_bm, &copy_bm, &zero_bm);
-    if (error)
+    if (error) {
     return error;
+    }
     chain_init(&ca, GFP_ATOMIC, PG_SAFE);
     memory_bm_position_reset(&orig_bm);
     memory_bm_position_reset(&zero_bm);
     restore_pblist = core::ptr::null_mut();
     handle.buffer = get_buffer(&orig_bm, &ca);
-    if (IS_ERR(handle.buffer))
+    if (IS_ERR(handle.buffer)) {
     return PTR_ERR(handle.buffer);
+    }
     }
     } else {
     copy_last_highmem_page();
     error = hibernate_restore_protect_page(handle.buffer);
-    if (error)
+    if (error) {
     return error;
+    }
     handle.buffer = get_buffer(&orig_bm, &ca);
-    if (IS_ERR(handle.buffer))
+    if (IS_ERR(handle.buffer)) {
     return PTR_ERR(handle.buffer);
     }
+    }
     handle.sync_read = (handle.buffer == buffer);
-    handle.cur++;
+    handle.cur += 1;
 // Zero pages were not included in the image, memset it and move on.
     if (handle.cur > nr_meta_pages + 1 &&
     memory_bm_test_bit(&zero_bm, memory_bm_get_current(&orig_bm))) {
     memset(handle.buffer, 0, PAGE_SIZE);
-    goto next;
+// goto;
     }
     return PAGE_SIZE;
     }
@@ -2613,9 +2862,7 @@ pub unsafe extern "C" fn snapshot_write_next(handle: *mut snapshot_handle) -> c_
 //
 #[no_mangle]
 pub unsafe extern "C" fn snapshot_write_finalize(handle: *mut snapshot_handle) -> c_int {
-    int snapshot_write_finalize(struct snapshot_handle *handle)
-    {
-    int error;
+    let mut error = 0;
 //
 // Call snapshot_write_next() to drain any trailing zero pages,
 // but make sure we're in the data page region first.
@@ -2624,8 +2871,9 @@ pub unsafe extern "C" fn snapshot_write_finalize(handle: *mut snapshot_handle) -
 //
     if (handle.cur > nr_meta_pages + 1) {
     error = snapshot_write_next(handle);
-    if (error)
+    if (error) {
     return error > 0 ? -ENODATA : error;
+    }
     }
     copy_last_highmem_page();
     error = hibernate_restore_protect_page(handle.buffer);
@@ -2638,17 +2886,15 @@ pub unsafe extern "C" fn snapshot_write_finalize(handle: *mut snapshot_handle) -
     }
 #[no_mangle]
 pub unsafe extern "C" fn snapshot_image_loaded(handle: *mut snapshot_handle) -> c_int {
-    int snapshot_image_loaded(struct snapshot_handle *handle)
-    {
     return !(!nr_copy_pages || !last_highmem_page_copied() ||
     handle.cur <= nr_meta_pages + nr_copy_pages + nr_zero_pages);
     }
 
 // Assumes that @buf is ready and points to a "safe" page
-    static inline void swap_two_pages_data(struct page *p1, struct page *p2,
-    void *buf)
-    {
-    void *kaddr1, *kaddr2;
+#[no_mangle]
+pub unsafe extern "C" fn swap_two_pages_data(p1: *mut page, p2: *mut page, buf: *mut c_void) {
+    let mut kaddr1 = core::ptr::null_mut();
+    let mut kaddr2 = core::ptr::null_mut();
     kaddr1 = kmap_local_page(p1);
     kaddr2 = kmap_local_page(p2);
     copy_page(buf, kaddr1);
@@ -2669,15 +2915,15 @@ pub unsafe extern "C" fn snapshot_image_loaded(handle: *mut snapshot_handle) -> 
 //
 #[no_mangle]
 pub unsafe extern "C" fn restore_highmem() -> c_int {
-    int restore_highmem(void)
-    {
-    struct highmem_pbe *pbe = highmem_pblist;
-    void *buf;
-    if (!pbe)
+    let mut pbe = highmem_pblist;
+pub static mut buf: *mut c_void = core::ptr::null_mut();
+    if (!pbe) {
     return 0;
+    }
     buf = get_image_page(GFP_ATOMIC, PG_SAFE);
-    if (!buf)
+    if (!buf) {
     return -ENOMEM;
+    }
     while (pbe) {
     swap_two_pages_data(pbe.copy_page, pbe.orig_page, buf);
     pbe = pbe.next;

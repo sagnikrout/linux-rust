@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -47,44 +297,41 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
     static bool need_wait;
     static struct snapshot_data {
-    struct snapshot_handle handle;
-    int swap;
-    int mode;
-    bool frozen;
-    bool ready;
-    bool platform_support;
-    bool free_bitmaps;
-    dev_t dev;
+pub static mut handle: usize = 0;
+    let mut swap = 0;
+    let mut mode = 0;
+    let mut frozen = 0;
+    let mut ready = 0;
+    let mut platform_support = 0;
+    let mut free_bitmaps = 0;
+    let mut dev;
     } snapshot_state;
 #[no_mangle]
 pub unsafe extern "C" fn is_hibernate_resume_dev(dev: dev_t) -> c_int {
-    int is_hibernate_resume_dev(dev_t dev)
-    {
     return hibernation_available() && snapshot_state.dev == dev;
     }
 #[no_mangle]
 unsafe extern "C" fn snapshot_open(inode: *mut inode, filp: *mut file) -> c_int {
-    static int snapshot_open(struct inode *inode, struct file *filp)
-    {
-    struct snapshot_data *data;
-    unsigned int sleep_flags;
-    int error;
-    if (!hibernation_available())
+pub static mut data: *mut c_void = core::ptr::null_mut();
+    let mut sleep_flags = 0;
+    let mut error = 0;
+    if (!hibernation_available()) {
     return -EPERM;
+    }
     sleep_flags = lock_system_sleep();
     if (!hibernate_acquire()) {
     error = -EBUSY;
-    goto Unlock;
+// goto;
     }
     if ((filp.f_flags & O_ACCMODE) == O_RDWR) {
     hibernate_release();
     error = -ENOSYS;
-    goto Unlock;
+// goto;
     }
     nonseekable_open(inode, filp);
     data = &snapshot_state;
     filp.private_data = data;
-    memset(&data.handle, 0, sizeof(struct snapshot_handle));
+    memset(&data.handle, 0, sizeof!(snapshot_handle));
     if ((filp.f_flags & O_ACCMODE) == O_RDONLY) {
 // Hibernating.  The image device should be accessible.
     data.swap = pin_hibernation_swap_type(swsusp_resume_device, 0);
@@ -113,16 +360,14 @@ unsafe extern "C" fn snapshot_open(inode: *mut inode, filp: *mut file) -> c_int 
     data.ready = false;
     data.platform_support = false;
     data.dev = 0;
-    Unlock:
+// label;
     unlock_system_sleep(sleep_flags);
     return error;
     }
 #[no_mangle]
 unsafe extern "C" fn snapshot_release(inode: *mut inode, filp: *mut file) -> c_int {
-    static int snapshot_release(struct inode *inode, struct file *filp)
-    {
-    struct snapshot_data *data;
-    unsigned int sleep_flags;
+pub static mut data: *mut c_void = core::ptr::null_mut();
+    let mut sleep_flags = 0;
     sleep_flags = lock_system_sleep();
     swsusp_free();
     data = filp.private_data;
@@ -142,41 +387,42 @@ unsafe extern "C" fn snapshot_release(inode: *mut inode, filp: *mut file) -> c_i
     unlock_system_sleep(sleep_flags);
     return 0;
     }
-    static ssize_t snapshot_read(struct file *filp, char __user *buf,
-    size_t count, loff_t *offp)
-    {
-    let mut pg_offp: loff_t = *offp & ~PAGE_MASK;
-    struct snapshot_data *data;
-    unsigned int sleep_flags;
-    ssize_t res;
+#[no_mangle]
+pub unsafe extern "C" fn snapshot_read(filp: *mut file, buf: *mut c_char, count: size_t, offp: *mut loff_t) -> ssize_t {
+pub static mut pg_offp: loff_t = 0;
+pub static mut data: *mut c_void = core::ptr::null_mut();
+    let mut sleep_flags = 0;
+    let mut res = 0;
     sleep_flags = lock_system_sleep();
     data = filp.private_data;
     if (!data.ready) {
     res = -ENODATA;
-    goto Unlock;
+// goto;
     }
-    if (!pg_offp) { /* on page boundary? */
+    if (!pg_offp) { /* on page boundary? */ {
     res = snapshot_read_next(&data.handle);
-    if (res <= 0)
-    goto Unlock;
+    }
+    if (res <= 0) {
+// goto;
+    }
     } else {
     res = PAGE_SIZE - pg_offp;
     }
     res = simple_read_from_buffer(buf, count, &pg_offp,
     data_of(data.handle), res);
-    if (res > 0)
+    if (res > 0) {
 // offp += res;
-    Unlock:
+    }
+// label;
     unlock_system_sleep(sleep_flags);
     return res;
     }
-    static ssize_t snapshot_write(struct file *filp, const char __user *buf,
-    size_t count, loff_t *offp)
-    {
-    let mut pg_offp: loff_t = *offp & ~PAGE_MASK;
-    struct snapshot_data *data;
-    unsigned long sleep_flags;
-    ssize_t res;
+#[no_mangle]
+pub unsafe extern "C" fn snapshot_write(filp: *mut file, buf: *mut c_char, count: size_t, offp: *mut loff_t) -> ssize_t {
+pub static mut pg_offp: loff_t = 0;
+pub static mut data: *mut c_void = core::ptr::null_mut();
+    let mut sleep_flags = 0;
+    let mut res = 0;
     if (need_wait) {
     wait_for_device_probe();
     need_wait = false;
@@ -185,20 +431,22 @@ unsafe extern "C" fn snapshot_release(inode: *mut inode, filp: *mut file) -> c_i
     data = filp.private_data;
     if (!pg_offp) {
     res = snapshot_write_next(&data.handle);
-    if (res <= 0)
-    goto unlock;
+    if (res <= 0) {
+// goto;
+    }
     } else {
     res = PAGE_SIZE;
     }
     if (!data_of(data.handle)) {
     res = -EINVAL;
-    goto unlock;
+// goto;
     }
     res = simple_write_to_buffer(data_of(data.handle), res, &pg_offp,
     buf, count);
-    if (res > 0)
+    if (res > 0) {
 // offp += res;
-    unlock:
+    }
+// label;
     unlock_system_sleep(sleep_flags);
     return res;
     }
@@ -208,22 +456,23 @@ pub struct compat_resume_swap_area {
     pub offset: compat_loff_t,
     pub dev: u32,
     pub __packed: },
-    static int snapshot_set_swap_area(struct snapshot_data *data,
-    void __user *argp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn snapshot_set_swap_area(data: *mut snapshot_data, argp: *mut c_void) -> c_int {
     pub offset: sector_t,
     pub swdev: dev_t,
-    if (swsusp_swap_in_use())
+    if (swsusp_swap_in_use()) {
     pub -EPERM: return,
     if (in_compat_syscall()) {
+    }
     pub swap_area: compat_resume_swap_area,
-    if (copy_from_user(&swap_area, argp, sizeof(swap_area)))
+    if (copy_from_user(&swap_area, argp, sizeof!(swap_area))) {
     pub -EFAULT: return,
     pub new_decode_dev(swap_area.dev): swdev =,
     pub swap_area.offset: offset =,
     } else {
+    }
     pub swap_area: resume_swap_area,
-    if (copy_from_user(&swap_area, argp, sizeof(swap_area)))
+    if (copy_from_user(&swap_area, argp, sizeof!(swap_area))) {
     pub -EFAULT: return,
     pub new_decode_dev(swap_area.dev): swdev =,
     pub swap_area.offset: offset =,
@@ -241,9 +490,9 @@ pub struct compat_resume_swap_area {
     pub swdev: data->dev =,
     pub 0: return,
     }
-    static long snapshot_ioctl(struct file *filp, unsigned int cmd,
-    unsigned long arg)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn snapshot_ioctl(filp: *mut file, cmd: c_uint, arg: c_ulong) -> c_long {
+    }
     pub 0: int error =,
     pub data: *mut snapshot_data,
     pub size: loff_t,
@@ -251,7 +500,7 @@ pub struct compat_resume_swap_area {
     if (need_wait) {
     pub false: need_wait =,
     }
-    if (_IOC_TYPE(cmd) != SNAPSHOT_IOC_MAGIC)
+    if (_IOC_TYPE(cmd) != SNAPSHOT_IOC_MAGIC) {
     pub -ENOTTY: return,
     if (_IOC_NR(cmd) > SNAPSHOT_IOC_MAXNR)
     pub -ENOTTY: return,
@@ -260,9 +509,10 @@ pub struct compat_resume_swap_area {
     if (!mutex_trylock(&system_transition_mutex))
     pub -EBUSY: return,
     pub filp->private_data: data =,
-    switch (cmd) {
-    case SNAPSHOT_FREEZE:
-    if (data.frozen)
+    match (cmd) {
+    }
+    SNAPSHOT_FREEZE => {
+    if (data.frozen) {
     pub pm_sleep_fs_sync(): error =,
     if (error)
     pub freeze_processes(): error =,
@@ -271,32 +521,39 @@ pub struct compat_resume_swap_area {
     if (error)
     else
     pub true: data->frozen =,
-    case SNAPSHOT_UNFREEZE:
-    if (!data.frozen || data.ready)
+    }
+    SNAPSHOT_UNFREEZE => {
+    }
+    if (!data.frozen || data.ready) {
     pub false: data->free_bitmaps =,
     pub false: data->frozen =,
-    case SNAPSHOT_CREATE_IMAGE:
+    }
+    SNAPSHOT_CREATE_IMAGE => {
+    }
     if (data.mode != O_RDONLY || !data.frozen  || data.ready) {
     pub -EPERM: error =,
     }
     pub hibernation_snapshot(data->platform_support): error =,
     if (!error) {
-    pub )arg): *mut error = put_user(in_suspend, (int __user,
+    pub )arg): *mut error = put_user(in_suspend, (int ,
     pub !error: data->ready = !freezer_test_done &&,
     pub false: freezer_test_done =,
     }
-    case SNAPSHOT_ATOMIC_RESTORE:
+    }
+    SNAPSHOT_ATOMIC_RESTORE => {
     pub snapshot_write_finalize(&data->handle): error =,
-    if (error)
+    if (error) {
     if (data.mode != O_WRONLY || !data.frozen) {
+    }
     pub -EPERM: error =,
     }
     if (!snapshot_image_loaded(&data.handle)) {
     pub -ENODATA: error =,
     }
     pub hibernation_restore(data->platform_support): error =,
-    case SNAPSHOT_FREE:
-    pub snapshot_handle)): memset(&data->handle, 0, sizeof(struct,
+    }
+    SNAPSHOT_FREE => {
+    pub snapshot_handle)): memset(&data->handle, 0, sizeof!(struct,
     pub false: data->ready =,
 //
 // It is necessary to thaw kernel threads here, because
@@ -306,35 +563,41 @@ pub struct compat_resume_swap_area {
 // hibernation_snapshot() might run into problems (i.e. it
 // might fail or even deadlock).
 //
-    case SNAPSHOT_PREF_IMAGE_SIZE:
+    }
+    SNAPSHOT_PREF_IMAGE_SIZE => {
     pub arg: image_size =,
-    case SNAPSHOT_GET_IMAGE_SIZE:
+    }
+    SNAPSHOT_GET_IMAGE_SIZE => {
     if (!data.ready) {
     pub -ENODATA: error =,
     }
     pub snapshot_get_image_size(): size =,
     pub PAGE_SHIFT: size <<=,
-    pub )arg): *mut error = put_user(size, (loff_t __user,
-    case SNAPSHOT_AVAIL_SWAP_SIZE:
+    pub )arg): *mut error = put_user(size, (loff_t ,
+    }
+    SNAPSHOT_AVAIL_SWAP_SIZE => {
     pub 1): size = count_swap_pages(data->swap,,
     pub PAGE_SHIFT: size <<=,
-    pub )arg): *mut error = put_user(size, (loff_t __user,
-    case SNAPSHOT_ALLOC_SWAP_PAGE:
+    pub )arg): *mut error = put_user(size, (loff_t ,
+    }
+    SNAPSHOT_ALLOC_SWAP_PAGE => {
     if (data.swap < 0 || data.swap >= MAX_SWAPFILES) {
     pub -ENODEV: error =,
     }
     pub alloc_swapdev_block(data->swap): offset =,
     if (offset) {
     pub PAGE_SHIFT: offset <<=,
-    pub )arg): *mut error = put_user(offset, (loff_t __user,
+    pub )arg): *mut error = put_user(offset, (loff_t ,
     } else {
     pub -ENOSPC: error =,
     }
-    case SNAPSHOT_FREE_SWAP_PAGES:
+    }
+    SNAPSHOT_FREE_SWAP_PAGES => {
     if (data.swap < 0 || data.swap >= MAX_SWAPFILES) {
     pub -ENODEV: error =,
     }
-    case SNAPSHOT_S2RAM:
+    }
+    SNAPSHOT_S2RAM => {
     if (!data.frozen) {
     pub -EPERM: error =,
     }
@@ -344,56 +607,50 @@ pub struct compat_resume_swap_area {
 //
     pub suspend_devices_and_enter(PM_SUSPEND_MEM): error =,
     pub false: data->ready =,
-    case SNAPSHOT_PLATFORM_SUPPORT:
+    }
+    SNAPSHOT_PLATFORM_SUPPORT => {
     pub !!arg: data->platform_support =,
-    case SNAPSHOT_POWER_OFF:
-    if (data.platform_support)
+    }
+    SNAPSHOT_POWER_OFF => {
+    if (data.platform_support) {
     pub hibernation_platform_enter(): error =,
-    case SNAPSHOT_SET_SWAP_AREA:
-    pub )arg): *mut error = snapshot_set_swap_area(data, (void __user,
-    default:
+    }
+    SNAPSHOT_SET_SWAP_AREA => {
+    }
+    pub )arg): *mut error = snapshot_set_swap_area(data, (void ,
+    }
+    _ => {
     pub -ENOTTY: error =,
+    }
     }
     pub error: return,
     }
 
-    static long
-    snapshot_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
-    {
-    pub sizeof(compat_loff_t)): BUILD_BUG_ON(sizeof(loff_t) !=,
-    switch (cmd) {
-    case SNAPSHOT_GET_IMAGE_SIZE:
-    case SNAPSHOT_AVAIL_SWAP_SIZE:
-    case SNAPSHOT_ALLOC_SWAP_PAGE:
-    case SNAPSHOT_CREATE_IMAGE:
-    case SNAPSHOT_SET_SWAP_AREA:
+#[no_mangle]
+pub unsafe extern "C" fn snapshot_compat_ioctl(file: *mut file, cmd: c_uint, arg: c_ulong) -> c_long {
+    pub sizeof!(compat_loff_t)): BUILD_BUG_ON!(sizeof!(loff_t) !=,
+    match (cmd) {
+    SNAPSHOT_GET_IMAGE_SIZE => {
+    }
+    SNAPSHOT_AVAIL_SWAP_SIZE => {
+    }
+    SNAPSHOT_ALLOC_SWAP_PAGE => {
+    }
+    SNAPSHOT_CREATE_IMAGE => {
+    }
+    SNAPSHOT_SET_SWAP_AREA => {
     return snapshot_ioctl(file, cmd,
     pub compat_ptr(arg)): (unsigned long),
-    default:
+    }
+    _ => {
     pub arg): return snapshot_ioctl(file, cmd,,
     }
     }
+    }
 
-    static const struct file_operations snapshot_fops = {
-    .open = snapshot_open,
-    .release = snapshot_release,
-    .read = snapshot_read,
-    .write = snapshot_write,
-    .unlocked_ioctl = snapshot_ioctl,
-
-    .compat_ioctl = snapshot_compat_ioctl,
-
-}
-
-    static struct miscdevice snapshot_device = {
-    .minor = SNAPSHOT_MINOR,
-    .name = "snapshot",
-    .fops = &snapshot_fops,
-    };
+pub static mut file_operations: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn snapshot_device_init() -> int __init {
-    static int __init snapshot_device_init(void)
-    {
+unsafe extern "C" fn snapshot_device_init() -> c_int {
     return misc_register(&snapshot_device);
     };
-    device_initcall(snapshot_device_init);
+    device_initcall!(snapshot_device_init);

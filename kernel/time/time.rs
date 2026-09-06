@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -64,12 +314,12 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
 pub const __WANT_OLD_TIME_TYPE_SYSCALL: c_int = 1;
 
-    static_assert(sizeof(__kernel_old_time_t) == 8 ? IS_ENABLED(__WANT_OLD_TIME_TYPE_SYSCALL) : true);
+    static_assert(sizeof!(__kernel_old_time_t) == 8 ? IS_ENABLED!(__WANT_OLD_TIME_TYPE_SYSCALL) : true);
 //
 // The timezone where the local system is located.  Used as a default by some
 // programs who obtain this value by using gettimeofday.
 //
-    struct timezone sys_tz;
+pub static mut sys_tz: usize = 0;
     EXPORT_SYMBOL(sys_tz);
 
 //
@@ -78,12 +328,13 @@ pub const __WANT_OLD_TIME_TYPE_SYSCALL: c_int = 1;
 // why not move it into the appropriate arch directory (for those
 // architectures that need it).
 //
-    SYSCALL_DEFINE1(time, __kernel_old_time_t __user *, tloc)
-    {
-    let mut i: __kernel_old_time_t = (__kernel_old_time_t)ktime_get_real_seconds();
+#[no_mangle]
+pub unsafe extern "C" fn sys_time(tloc: usize) -> c_long {
+pub static mut i: __kernel_old_time_t = 0;
     if (tloc) {
-    if (put_user(i,tloc))
+    if (put_user(i,tloc)) {
     return -EFAULT;
+    }
     }
     force_successful_syscall_return();
     return i;
@@ -94,59 +345,65 @@ pub const __WANT_OLD_TIME_TYPE_SYSCALL: c_int = 1;
 // why not move it into the appropriate arch directory (for those
 // architectures that need it).
 //
-    SYSCALL_DEFINE1(stime, __kernel_old_time_t __user *, tptr)
-    {
-    struct timespec64 tv;
-    int err;
-    if (get_user(tv.tv_sec, tptr))
+#[no_mangle]
+pub unsafe extern "C" fn sys_stime(tptr: usize) -> c_long {
+pub static mut tv: usize = 0;
+    let mut err = 0;
+    if (get_user(tv.tv_sec, tptr)) {
     return -EFAULT;
+    }
     tv.tv_nsec = 0;
     err = security_settime64(&tv, core::ptr::null_mut());
-    if (err)
+    if (err) {
     return err;
+    }
     do_settimeofday64(&tv);
     return 0;
     }
 
 // old_time32_t is a 32 bit "long" and needs to get converted.
-    SYSCALL_DEFINE1(time32, old_time32_t __user *, tloc)
-    {
-    old_time32_t i;
+#[no_mangle]
+pub unsafe extern "C" fn sys_time32(tloc: usize) -> c_long {
+    let mut i;
     i = (old_time32_t)ktime_get_real_seconds();
     if (tloc) {
-    if (put_user(i,tloc))
+    if (put_user(i,tloc)) {
     return -EFAULT;
+    }
     }
     force_successful_syscall_return();
     return i;
     }
-    SYSCALL_DEFINE1(stime32, old_time32_t __user *, tptr)
-    {
-    struct timespec64 tv;
-    int err;
-    if (get_user(tv.tv_sec, tptr))
+#[no_mangle]
+pub unsafe extern "C" fn sys_stime32(tptr: usize) -> c_long {
+pub static mut tv: usize = 0;
+    let mut err = 0;
+    if (get_user(tv.tv_sec, tptr)) {
     return -EFAULT;
+    }
     tv.tv_nsec = 0;
     err = security_settime64(&tv, core::ptr::null_mut());
-    if (err)
+    if (err) {
     return err;
+    }
     do_settimeofday64(&tv);
     return 0;
     }
 
-    SYSCALL_DEFINE2(gettimeofday, struct __kernel_old_timeval __user *, tv,
-    struct timezone __user *, tz)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_gettimeofday(tv: usize, tz: usize) -> c_long {
     if (likely(tv != core::ptr::null_mut())) {
-    struct timespec64 ts;
+pub static mut ts: usize = 0;
     ktime_get_real_ts64(&ts);
     if (put_user(ts.tv_sec, &tv.tv_sec) ||
-    put_user(ts.tv_nsec / 1000, &tv.tv_usec))
+    put_user(ts.tv_nsec / 1000, &tv.tv_usec)) {
     return -EFAULT;
     }
+    }
     if (unlikely(tz != core::ptr::null_mut())) {
-    if (copy_to_user(tz, &sys_tz, sizeof(sys_tz)))
+    if (copy_to_user(tz, &sys_tz, sizeof!(sys_tz))) {
     return -EFAULT;
+    }
     }
     return 0;
     }
@@ -163,114 +420,128 @@ pub const __WANT_OLD_TIME_TYPE_SYSCALL: c_int = 1;
 //
 #[no_mangle]
 pub unsafe extern "C" fn do_sys_settimeofday64(tv: *const timespec64, tz: *const timezone) -> c_int {
-    int do_sys_settimeofday64(const struct timespec64 *tv, const struct timezone *tz)
-    {
-    let mut firsttime: static int = 1;
-    let mut error: c_int = 0;
-    if (tv && !timespec64_valid_settod(tv))
+pub static mut firsttime: int = 1;
+pub static mut error: c_int = 0;
+    if (tv && !timespec64_valid_settod(tv)) {
     return -EINVAL;
+    }
     error = security_settime64(tv, tz);
-    if (error)
+    if (error) {
     return error;
+    }
     if (tz) {
 // Verify we're within the +-15 hrs range
-    if (tz.tz_minuteswest > 15*60 || tz.tz_minuteswest < -15*60)
+    if (tz.tz_minuteswest > 15*60 || tz.tz_minuteswest < -15*60) {
     return -EINVAL;
+    }
     sys_tz = *tz;
     update_vsyscall_tz();
     if (firsttime) {
     firsttime = 0;
-    if (!tv)
+    if (!tv) {
     timekeeping_warp_clock();
     }
     }
-    if (tv)
+    }
+    if (tv) {
     return do_settimeofday64(tv);
+    }
     return 0;
     }
-    SYSCALL_DEFINE2(settimeofday, struct __kernel_old_timeval __user *, tv,
-    struct timezone __user *, tz)
-    {
-    struct timespec64 new_ts;
-    struct timezone new_tz;
+#[no_mangle]
+pub unsafe extern "C" fn sys_settimeofday(tv: usize, tz: usize) -> c_long {
+pub static mut new_ts: usize = 0;
+pub static mut new_tz: usize = 0;
     if (tv) {
-    if (!IS_ENABLED(__WANT_OLD_TIME_TYPE_SYSCALL))
+    if (!IS_ENABLED!(__WANT_OLD_TIME_TYPE_SYSCALL)) {
     return -EINVAL;
+    }
     if (get_user(new_ts.tv_sec, &tv.tv_sec) ||
-    get_user(new_ts.tv_nsec, &tv.tv_usec))
+    get_user(new_ts.tv_nsec, &tv.tv_usec)) {
     return -EFAULT;
-    if (new_ts.tv_nsec >= USEC_PER_SEC || new_ts.tv_nsec < 0)
+    }
+    if (new_ts.tv_nsec >= USEC_PER_SEC || new_ts.tv_nsec < 0) {
     return -EINVAL;
+    }
     new_ts.tv_nsec *= NSEC_PER_USEC;
     }
     if (tz) {
-    if (copy_from_user(&new_tz, tz, sizeof(*tz)))
+    if (copy_from_user(&new_tz, tz, sizeof!(*tz))) {
     return -EFAULT;
+    }
     }
     return do_sys_settimeofday64(tv ? &new_ts : core::ptr::null_mut(), tz ? &new_tz : core::ptr::null_mut());
     }
 
-    COMPAT_SYSCALL_DEFINE2(gettimeofday, struct old_timeval32 __user *, tv,
-    struct timezone __user *, tz)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sys_gettimeofday
+pub unsafe extern "C" fn sys_gettimeofday_dup(tv: usize, tz: usize) -> c_long {
     if (tv) {
-    struct timespec64 ts;
+pub static mut ts: usize = 0;
     ktime_get_real_ts64(&ts);
     if (put_user(ts.tv_sec, &tv.tv_sec) ||
-    put_user(ts.tv_nsec / 1000, &tv.tv_usec))
+    put_user(ts.tv_nsec / 1000, &tv.tv_usec)) {
     return -EFAULT;
     }
+    }
     if (tz) {
-    if (copy_to_user(tz, &sys_tz, sizeof(sys_tz)))
+    if (copy_to_user(tz, &sys_tz, sizeof!(sys_tz))) {
     return -EFAULT;
+    }
     }
     return 0;
     }
 
-    COMPAT_SYSCALL_DEFINE2(settimeofday, struct old_timeval32 __user *, tv,
-    struct timezone __user *, tz)
-    {
-    struct timespec64 new_ts;
-    struct timezone new_tz;
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sys_settimeofday
+pub unsafe extern "C" fn sys_settimeofday_dup(tv: usize, tz: usize) -> c_long {
+pub static mut new_ts: usize = 0;
+pub static mut new_tz: usize = 0;
     if (tv) {
-    if (!IS_ENABLED(CONFIG_COMPAT_32BIT_TIME))
+    if (!IS_ENABLED!(CONFIG_COMPAT_32BIT_TIME)) {
     return -EINVAL;
+    }
     if (get_user(new_ts.tv_sec, &tv.tv_sec) ||
-    get_user(new_ts.tv_nsec, &tv.tv_usec))
+    get_user(new_ts.tv_nsec, &tv.tv_usec)) {
     return -EFAULT;
-    if (new_ts.tv_nsec >= USEC_PER_SEC || new_ts.tv_nsec < 0)
+    }
+    if (new_ts.tv_nsec >= USEC_PER_SEC || new_ts.tv_nsec < 0) {
     return -EINVAL;
+    }
     new_ts.tv_nsec *= NSEC_PER_USEC;
     }
     if (tz) {
-    if (copy_from_user(&new_tz, tz, sizeof(*tz)))
+    if (copy_from_user(&new_tz, tz, sizeof!(*tz))) {
     return -EFAULT;
+    }
     }
     return do_sys_settimeofday64(tv ? &new_ts : core::ptr::null_mut(), tz ? &new_tz : core::ptr::null_mut());
     }
 
-    SYSCALL_DEFINE1(adjtimex, struct __kernel_timex __user *, txc_p)
-    {
-    struct __kernel_timex txc;		/* Local copy of parameter */
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn sys_adjtimex(txc_p: usize) -> c_long {
+pub static mut txc: usize = 0;		/* Local copy of parameter */
+    let mut ret = 0;
 // Copy the user data space into the kernel copy
 // structure. But bear in mind that the structures
 // may change
 //
-    if (copy_from_user(&txc, txc_p, sizeof(struct __kernel_timex)))
+    if (copy_from_user(&txc, txc_p, sizeof!(__kernel_timex))) {
     return -EFAULT;
+    }
     ret = do_adjtimex(&txc);
-    return copy_to_user(txc_p, &txc, sizeof(struct __kernel_timex)) ? -EFAULT : ret;
+    return copy_to_user(txc_p, &txc, sizeof!(__kernel_timex)) ? -EFAULT : ret;
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn get_old_timex32(txc: *mut __kernel_timex, utp: *const old_timex32 __user) -> c_int {
-    int get_old_timex32(struct __kernel_timex *txc, const struct old_timex32 __user *utp)
-    {
-    struct old_timex32 tx32;
-    memset(txc, 0, sizeof(struct __kernel_timex));
-    if (copy_from_user(&tx32, utp, sizeof(struct old_timex32)))
+pub unsafe extern "C" fn get_old_timex32(txc: *mut __kernel_timex, utp: *const old_timex32 ) -> c_int {
+pub static mut tx32: usize = 0;
+    memset(txc, 0, sizeof!(__kernel_timex));
+    if (copy_from_user(&tx32, utp, sizeof!(old_timex32))) {
     return -EFAULT;
+    }
     txc.modes = tx32.modes;
     txc.offset = tx32.offset;
     txc.freq = tx32.freq;
@@ -294,11 +565,9 @@ pub unsafe extern "C" fn get_old_timex32(txc: *mut __kernel_timex, utp: *const o
     return 0;
     }
 #[no_mangle]
-pub unsafe extern "C" fn put_old_timex32(utp: *mut old_timex32 __user, txc: *const __kernel_timex) -> c_int {
-    int put_old_timex32(struct old_timex32 __user *utp, const struct __kernel_timex *txc)
-    {
-    struct old_timex32 tx32;
-    memset(&tx32, 0, sizeof(struct old_timex32));
+pub unsafe extern "C" fn put_old_timex32(utp: *mut old_timex32 , txc: *const __kernel_timex) -> c_int {
+pub static mut tx32: usize = 0;
+    memset(&tx32, 0, sizeof!(old_timex32));
     tx32.modes = txc.modes;
     tx32.offset = txc.offset;
     tx32.freq = txc.freq;
@@ -320,21 +589,25 @@ pub unsafe extern "C" fn put_old_timex32(utp: *mut old_timex32 __user, txc: *con
     tx32.errcnt = txc.errcnt;
     tx32.stbcnt = txc.stbcnt;
     tx32.tai = txc.tai;
-    if (copy_to_user(utp, &tx32, sizeof(struct old_timex32)))
+    if (copy_to_user(utp, &tx32, sizeof!(old_timex32))) {
     return -EFAULT;
+    }
     return 0;
     }
-    SYSCALL_DEFINE1(adjtimex_time32, struct old_timex32 __user *, utp)
-    {
-    struct __kernel_timex txc;
-    int err, ret;
+#[no_mangle]
+pub unsafe extern "C" fn sys_adjtimex_time32(utp: usize) -> c_long {
+pub static mut txc: usize = 0;
+    let mut err = 0;
+    let mut ret = 0;
     err = get_old_timex32(&txc, utp);
-    if (err)
+    if (err) {
     return err;
+    }
     ret = do_adjtimex(&txc);
     err = put_old_timex32(utp, &txc);
-    if (err)
+    if (err) {
     return err;
+    }
     return ret;
     }
 
@@ -346,8 +619,6 @@ pub unsafe extern "C" fn put_old_timex32(utp: *mut old_timex32 __user, txc: *con
 //
 #[no_mangle]
 pub unsafe extern "C" fn jiffies_to_msecs(j: c_ulong) -> c_uint {
-    unsigned int jiffies_to_msecs(const unsigned long j)
-    {
 
     return (j + (HZ / MSEC_PER_SEC) - 1)/(HZ / MSEC_PER_SEC);
 
@@ -367,13 +638,11 @@ pub unsafe extern "C" fn jiffies_to_msecs(j: c_ulong) -> c_uint {
 //
 #[no_mangle]
 pub unsafe extern "C" fn jiffies_to_usecs(j: c_ulong) -> c_uint {
-    unsigned int jiffies_to_usecs(const unsigned long j)
-    {
 //
 // Hz usually doesn't go much further MSEC_PER_SEC.
 // jiffies_to_usecs() and usecs_to_jiffies() depend on that.
 //
-    BUILD_BUG_ON(HZ > USEC_PER_SEC);
+    BUILD_BUG_ON!(HZ > USEC_PER_SEC);
 
     return (HZ_TO_USEC_MUL32 * j) >> HZ_TO_USEC_SHR32;
 
@@ -415,7 +684,7 @@ pub unsafe extern "C" fn jiffies_to_usecs(j: c_ulong) -> c_uint {
     const unsigned int day, const unsigned int hour,
     const unsigned int min, const unsigned int sec)
     {
-    let mut mon: c_uint = mon0, year = year0;
+pub static mut mon: c_uint = 0;
 // 1..12 -> 11,12,1..10
     if (0 >= (int) (mon -= 2)) {
     mon += 12;	/* Puts Feb last since it has leap day */
@@ -431,10 +700,8 @@ pub unsafe extern "C" fn jiffies_to_usecs(j: c_ulong) -> c_uint {
     EXPORT_SYMBOL(mktime64);
 #[no_mangle]
 pub unsafe extern "C" fn ns_to_kernel_old_timeval(nsec: i64) -> __kernel_old_timeval {
-    struct __kernel_old_timeval ns_to_kernel_old_timeval(s64 nsec)
-    {
-    let mut ts: timespec64 = ns_to_timespec64(nsec);
-    struct __kernel_old_timeval tv;
+pub static mut ts: timespec64 = 0;
+pub static mut tv: usize = 0;
     tv.tv_sec = ts.tv_sec;
     tv.tv_usec = (suseconds_t)ts.tv_nsec / 1000;
     return tv;
@@ -455,8 +722,6 @@ pub unsafe extern "C" fn ns_to_kernel_old_timeval(nsec: i64) -> __kernel_old_tim
 //
 #[no_mangle]
 pub unsafe extern "C" fn set_normalized_timespec64(ts: *mut timespec64, sec: time64_t, nsec: i64) {
-    void set_normalized_timespec64(struct timespec64 *ts, time64_t sec, s64 nsec)
-    {
     while (nsec >= NSEC_PER_SEC) {
 //
 // The following asm() prevents the compiler from
@@ -465,12 +730,12 @@ pub unsafe extern "C" fn set_normalized_timespec64(ts: *mut timespec64, sec: tim
 //
     asm("" : "+rm"(nsec));
     nsec -= NSEC_PER_SEC;
-    ++sec;
+    sec += 1;
     }
     while (nsec < 0) {
     asm("" : "+rm"(nsec));
     nsec += NSEC_PER_SEC;
-    --sec;
+    sec -= 1;
     }
     ts.tv_sec = sec;
     ts.tv_nsec = nsec;
@@ -484,10 +749,8 @@ pub unsafe extern "C" fn set_normalized_timespec64(ts: *mut timespec64, sec: tim
 //
 #[no_mangle]
 pub unsafe extern "C" fn ns_to_timespec64(nsec: i64) -> timespec64 {
-    struct timespec64 ns_to_timespec64(s64 nsec)
-    {
-    let mut ts: timespec64 = { 0, 0 };
-    s32 rem;
+pub static mut ts: timespec64 = 0;
+    let mut rem = 0;
     if (likely(nsec > 0)) {
     ts.tv_sec = div_u64_rem(nsec, NSEC_PER_SEC, &rem);
     ts.tv_nsec = rem;
@@ -531,13 +794,12 @@ pub unsafe extern "C" fn ns_to_timespec64(nsec: i64) -> timespec64 {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __msecs_to_jiffies(m: c_uint) -> c_ulong {
-    unsigned long __msecs_to_jiffies(const unsigned int m)
-    {
 //
 // Negative value, means infinite timeout:
 //
-    if ((int)m < 0)
+    if ((int)m < 0) {
     return MAX_JIFFY_OFFSET;
+    }
     return _msecs_to_jiffies(m);
     }
     EXPORT_SYMBOL(__msecs_to_jiffies);
@@ -549,10 +811,9 @@ pub unsafe extern "C" fn __msecs_to_jiffies(m: c_uint) -> c_ulong {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __usecs_to_jiffies(u: c_uint) -> c_ulong {
-    unsigned long __usecs_to_jiffies(const unsigned int u)
-    {
-    if (u > jiffies_to_usecs(MAX_JIFFY_OFFSET))
+    if (u > jiffies_to_usecs(MAX_JIFFY_OFFSET)) {
     return MAX_JIFFY_OFFSET;
+    }
     return _usecs_to_jiffies(u);
     }
     EXPORT_SYMBOL(__usecs_to_jiffies);
@@ -576,11 +837,10 @@ pub unsafe extern "C" fn __usecs_to_jiffies(u: c_uint) -> c_ulong {
 //
 // Return: jiffies value
 //
-    unsigned long
-    timespec64_to_jiffies(const struct timespec64 *value)
-    {
-    let mut sec: u64 = value.tv_sec;
-    let mut nsec: c_long = value.tv_nsec + TICK_NSEC - 1;
+#[no_mangle]
+pub unsafe extern "C" fn timespec64_to_jiffies(value: *mut timespec64) -> c_ulong {
+pub static mut sec: u64 = 0;
+pub static mut nsec: c_long = 0;
     if (sec >= MAX_SEC_IN_JIFFIES){
     sec = MAX_SEC_IN_JIFFIES;
     nsec = 0;
@@ -595,14 +855,13 @@ pub unsafe extern "C" fn __usecs_to_jiffies(u: c_uint) -> c_ulong {
 // @jiffies: jiffies value
 // @value: pointer to &struct timespec64
 //
-    void
-    jiffies_to_timespec64(const unsigned long jiffies, struct timespec64 *value)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn jiffies_to_timespec64(jiffies: c_ulong, value: *mut timespec64) {
 //
 // Convert jiffies to nanoseconds and separate with
 // one divide.
 //
-    u32 rem;
+    let mut rem = 0;
     value.tv_sec = div_u64_rem((u64)jiffies * TICK_NSEC,
     NSEC_PER_SEC, &rem);
     value.tv_nsec = rem;
@@ -618,8 +877,6 @@ pub unsafe extern "C" fn __usecs_to_jiffies(u: c_uint) -> c_ulong {
 //
 #[no_mangle]
 pub unsafe extern "C" fn jiffies_to_clock_t(x: c_ulong) -> clock_t {
-    clock_t jiffies_to_clock_t(unsigned long x)
-    {
 
     return x * (USER_HZ / HZ);
 
@@ -637,16 +894,16 @@ pub unsafe extern "C" fn jiffies_to_clock_t(x: c_ulong) -> clock_t {
 //
 #[no_mangle]
 pub unsafe extern "C" fn clock_t_to_jiffies(x: c_ulong) -> c_ulong {
-    unsigned long clock_t_to_jiffies(unsigned long x)
-    {
 
-    if (x >= ~0UL / (HZ / USER_HZ))
+    if (x >= ~0UL / (HZ / USER_HZ)) {
     return ~0UL;
+    }
     return x * (HZ / USER_HZ);
 
 // Don't worry about loss of precision here ..
-    if (x >= ~0UL / HZ * USER_HZ)
+    if (x >= ~0UL / HZ * USER_HZ) {
     return ~0UL;
+    }
 // .. but do try to contain it here
     return div_u64((u64)x * HZ, USER_HZ);
 
@@ -660,8 +917,6 @@ pub unsafe extern "C" fn clock_t_to_jiffies(x: c_ulong) -> c_ulong {
 //
 #[no_mangle]
 pub unsafe extern "C" fn jiffies_64_to_clock_t(x: u64) -> notrace u64 {
-    notrace u64 jiffies_64_to_clock_t(u64 x)
-    {
 
     x = div_u64(x * USER_HZ, HZ);
 
@@ -687,8 +942,6 @@ pub unsafe extern "C" fn jiffies_64_to_clock_t(x: u64) -> notrace u64 {
 //
 #[no_mangle]
 pub unsafe extern "C" fn nsec_to_clock_t(x: u64) -> u64 {
-    u64 nsec_to_clock_t(u64 x)
-    {
 
     return div_u64(x, NSEC_PER_SEC / USER_HZ);
 
@@ -710,8 +963,6 @@ pub unsafe extern "C" fn nsec_to_clock_t(x: u64) -> u64 {
 //
 #[no_mangle]
 pub unsafe extern "C" fn jiffies64_to_nsecs(j: u64) -> u64 {
-    u64 jiffies64_to_nsecs(u64 j)
-    {
 
     return (NSEC_PER_SEC / HZ) * j;
 
@@ -727,8 +978,6 @@ pub unsafe extern "C" fn jiffies64_to_nsecs(j: u64) -> u64 {
 //
 #[no_mangle]
 pub unsafe extern "C" fn jiffies64_to_msecs(j: u64) -> u64 {
-    u64 jiffies64_to_msecs(const u64 j)
-    {
 
     return (MSEC_PER_SEC / HZ) * j;
 
@@ -753,8 +1002,6 @@ pub unsafe extern "C" fn jiffies64_to_msecs(j: u64) -> u64 {
 //
 #[no_mangle]
 pub unsafe extern "C" fn nsecs_to_jiffies64(n: u64) -> u64 {
-    u64 nsecs_to_jiffies64(u64 n)
-    {
 
 // Common case, HZ = 100, 128, 200, 250, 256, 500, 512, 1000 etc.
     return div_u64(n, NSEC_PER_SEC / HZ);
@@ -787,8 +1034,6 @@ pub unsafe extern "C" fn nsecs_to_jiffies64(n: u64) -> u64 {
 //
 #[no_mangle]
 pub unsafe extern "C" fn nsecs_to_jiffies(n: u64) -> c_ulong {
-    unsigned long nsecs_to_jiffies(u64 n)
-    {
     return (unsigned long)nsecs_to_jiffies64(n);
     }
     EXPORT_SYMBOL_GPL(nsecs_to_jiffies);
@@ -803,10 +1048,9 @@ pub unsafe extern "C" fn nsecs_to_jiffies(n: u64) -> c_ulong {
 //
 // Return: sum of @lhs + @rhs
 //
-    struct timespec64 timespec64_add_safe(const struct timespec64 lhs,
-    const struct timespec64 rhs)
-    {
-    struct timespec64 res;
+#[no_mangle]
+pub unsafe extern "C" fn timespec64_add_safe(lhs: timespec64, rhs: timespec64) {
+pub static mut res: usize = 0;
     set_normalized_timespec64(&res, (timeu64_t) lhs.tv_sec + rhs.tv_sec,
     lhs.tv_nsec + rhs.tv_nsec);
     if (unlikely(res.tv_sec < lhs.tv_sec || res.tv_sec < rhs.tv_sec)) {
@@ -825,18 +1069,19 @@ pub unsafe extern "C" fn nsecs_to_jiffies(n: u64) -> c_ulong {
 //
 // Return: 0 on success or negative errno on error
 //
-    int get_timespec64(struct timespec64 *ts,
-    const struct __kernel_timespec __user *uts)
-    {
-    struct __kernel_timespec kts;
-    int ret;
-    ret = copy_from_user(&kts, uts, sizeof(kts));
-    if (ret)
+#[no_mangle]
+pub unsafe extern "C" fn get_timespec64(ts: *mut timespec64, uts: *mut __kernel_timespec) -> c_int {
+pub static mut kts: usize = 0;
+    let mut ret = 0;
+    ret = copy_from_user(&kts, uts, sizeof!(kts));
+    if (ret) {
     return -EFAULT;
+    }
     ts.tv_sec = kts.tv_sec;
 // Zero out the padding in compat mode
-    if (in_compat_syscall())
+    if (in_compat_syscall()) {
     kts.tv_nsec &= 0xFFFFFFFFUL;
+    }
 // In 32-bit mode, this drops the padding
     ts.tv_nsec = kts.tv_nsec;
     return 0;
@@ -850,36 +1095,28 @@ pub unsafe extern "C" fn nsecs_to_jiffies(n: u64) -> c_ulong {
 //
 // Return: 0 on success or negative errno on error
 //
-    int put_timespec64(const struct timespec64 *ts,
-    struct __kernel_timespec __user *uts)
-    {
-    struct __kernel_timespec kts = {
-    .tv_sec = ts.tv_sec,
-    .tv_nsec = ts.tv_nsec
-    };
-    return copy_to_user(uts, &kts, sizeof(kts)) ? -EFAULT : 0;
+#[no_mangle]
+pub unsafe extern "C" fn put_timespec64(ts: *mut timespec64, uts: *mut __kernel_timespec) -> c_int {
+pub static mut __kernel_timespec: usize = 0;
+    return copy_to_user(uts, &kts, sizeof!(kts)) ? -EFAULT : 0;
     }
     EXPORT_SYMBOL_GPL(put_timespec64);
-    static int __get_old_timespec32(struct timespec64 *ts64,
-    const struct old_timespec32 __user *cts)
-    {
-    struct old_timespec32 ts;
-    int ret;
-    ret = copy_from_user(&ts, cts, sizeof(ts));
-    if (ret)
+#[no_mangle]
+pub unsafe extern "C" fn __get_old_timespec32(ts64: *mut timespec64, cts: *mut old_timespec32) -> c_int {
+pub static mut ts: usize = 0;
+    let mut ret = 0;
+    ret = copy_from_user(&ts, cts, sizeof!(ts));
+    if (ret) {
     return -EFAULT;
+    }
     ts64.tv_sec = ts.tv_sec;
     ts64.tv_nsec = ts.tv_nsec;
     return 0;
     }
-    static int __put_old_timespec32(const struct timespec64 *ts64,
-    struct old_timespec32 __user *cts)
-    {
-    struct old_timespec32 ts = {
-    .tv_sec = ts64.tv_sec,
-    .tv_nsec = ts64.tv_nsec
-    };
-    return copy_to_user(cts, &ts, sizeof(ts)) ? -EFAULT : 0;
+#[no_mangle]
+pub unsafe extern "C" fn __put_old_timespec32(ts64: *mut timespec64, cts: *mut old_timespec32) -> c_int {
+pub static mut old_timespec32: usize = 0;
+    return copy_to_user(cts, &ts, sizeof!(ts)) ? -EFAULT : 0;
     }
 //
 // get_old_timespec32 - get user's old-format time value into kernel space
@@ -891,13 +1128,13 @@ pub unsafe extern "C" fn nsecs_to_jiffies(n: u64) -> c_ulong {
 // Return: 0 on success or negative errno on error
 //
 #[no_mangle]
-pub unsafe extern "C" fn get_old_timespec32(ts: *mut timespec64, uts: *const void __user) -> c_int {
-    int get_old_timespec32(struct timespec64 *ts, const void __user *uts)
-    {
-    if (COMPAT_USE_64BIT_TIME)
-    return copy_from_user(ts, uts, sizeof(*ts)) ? -EFAULT : 0;
-    else
+pub unsafe extern "C" fn get_old_timespec32(ts: *mut timespec64, uts: *const c_void ) -> c_int {
+    if (COMPAT_USE_64BIT_TIME) {
+    return copy_from_user(ts, uts, sizeof!(*ts)) ? -EFAULT : 0;
+    }
+    else {
     return __get_old_timespec32(ts, uts);
+    }
     }
     EXPORT_SYMBOL_GPL(get_old_timespec32);
 //
@@ -911,13 +1148,13 @@ pub unsafe extern "C" fn get_old_timespec32(ts: *mut timespec64, uts: *const voi
 // Return: 0 on success or negative errno on error
 //
 #[no_mangle]
-pub unsafe extern "C" fn put_old_timespec32(ts: *const timespec64, uts: *mut void __user) -> c_int {
-    int put_old_timespec32(const struct timespec64 *ts, void __user *uts)
-    {
-    if (COMPAT_USE_64BIT_TIME)
-    return copy_to_user(uts, ts, sizeof(*ts)) ? -EFAULT : 0;
-    else
+pub unsafe extern "C" fn put_old_timespec32(ts: *const timespec64, uts: *mut c_void ) -> c_int {
+    if (COMPAT_USE_64BIT_TIME) {
+    return copy_to_user(uts, ts, sizeof!(*ts)) ? -EFAULT : 0;
+    }
+    else {
     return __put_old_timespec32(ts, uts);
+    }
     }
     EXPORT_SYMBOL_GPL(put_old_timespec32);
 //
@@ -927,13 +1164,13 @@ pub unsafe extern "C" fn put_old_timespec32(ts: *const timespec64, uts: *mut voi
 //
 // Return: 0 on success or negative errno on error
 //
-    int get_itimerspec64(struct itimerspec64 *it,
-    const struct __kernel_itimerspec __user *uit)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn get_itimerspec64(it: *mut itimerspec64, uit: *mut __kernel_itimerspec) -> c_int {
+    let mut ret = 0;
     ret = get_timespec64(&it.it_interval, &uit.it_interval);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     ret = get_timespec64(&it.it_value, &uit.it_value);
     return ret;
     }
@@ -946,13 +1183,13 @@ pub unsafe extern "C" fn put_old_timespec32(ts: *const timespec64, uts: *mut voi
 //
 // Return: 0 on success or negative errno on error
 //
-    int put_itimerspec64(const struct itimerspec64 *it,
-    struct __kernel_itimerspec __user *uit)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn put_itimerspec64(it: *mut itimerspec64, uit: *mut __kernel_itimerspec) -> c_int {
+    let mut ret = 0;
     ret = put_timespec64(&it.it_interval, &uit.it_interval);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     ret = put_timespec64(&it.it_value, &uit.it_value);
     return ret;
     }
@@ -964,12 +1201,12 @@ pub unsafe extern "C" fn put_old_timespec32(ts: *const timespec64, uts: *mut voi
 //
 // Return: 0 on success or negative errno on error
 //
-    int get_old_itimerspec32(struct itimerspec64 *its,
-    const struct old_itimerspec32 __user *uits)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn get_old_itimerspec32(its: *mut itimerspec64, uits: *mut old_itimerspec32) -> c_int {
     if (__get_old_timespec32(&its.it_interval, &uits.it_interval) ||
-    __get_old_timespec32(&its.it_value, &uits.it_value))
+    __get_old_timespec32(&its.it_value, &uits.it_value)) {
     return -EFAULT;
+    }
     return 0;
     }
     EXPORT_SYMBOL_GPL(get_old_itimerspec32);
@@ -981,12 +1218,12 @@ pub unsafe extern "C" fn put_old_timespec32(ts: *const timespec64, uts: *mut voi
 //
 // Return: 0 on success or negative errno on error
 //
-    int put_old_itimerspec32(const struct itimerspec64 *its,
-    struct old_itimerspec32 __user *uits)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn put_old_itimerspec32(its: *mut itimerspec64, uits: *mut old_itimerspec32) -> c_int {
     if (__put_old_timespec32(&its.it_interval, &uits.it_interval) ||
-    __put_old_timespec32(&its.it_value, &uits.it_value))
+    __put_old_timespec32(&its.it_value, &uits.it_value)) {
     return -EFAULT;
+    }
     return 0;
     }
     EXPORT_SYMBOL_GPL(put_old_itimerspec32);

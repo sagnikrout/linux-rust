@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -50,14 +300,13 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 
 pub const ENABLE_NUMA_STAT: c_int = 1;
-    let mut sysctl_vm_numa_stat: static int = ENABLE_NUMA_STAT;
+pub static mut sysctl_vm_numa_stat: int = 0;
 // zero numa counters within a zone
 #[no_mangle]
 unsafe extern "C" fn zero_zone_numa_counters(zone: *mut zone) {
-    static void zero_zone_numa_counters(struct zone *zone)
-    {
-    int item, cpu;
-    for (item = 0; item < NR_VM_NUMA_EVENT_ITEMS; item++) {
+    let mut item = 0;
+    let mut cpu = 0;
+    while (item < NR_VM_NUMA_EVENT_ITEMS) {
     atomic_long_set(&zone.vm_numa_event[item], 0);
     for_each_online_cpu(cpu) {
     per_cpu_ptr(zone.per_cpu_zonestats, cpu).vm_numa_event[item]
@@ -68,68 +317,65 @@ unsafe extern "C" fn zero_zone_numa_counters(zone: *mut zone) {
 // zero numa counters of all the populated zones
 #[no_mangle]
 unsafe extern "C" fn zero_zones_numa_counters() {
-    static void zero_zones_numa_counters(void)
-    {
-    struct zone *zone;
-    for_each_populated_zone(zone)
+pub static mut zone: *mut c_void = core::ptr::null_mut();
+    for_each_populated_zone(zone) {
     zero_zone_numa_counters(zone);
+    }
     }
 // zero global numa counters
 #[no_mangle]
 unsafe extern "C" fn zero_global_numa_counters() {
-    static void zero_global_numa_counters(void)
-    {
-    int item;
-    for (item = 0; item < NR_VM_NUMA_EVENT_ITEMS; item++)
+    let mut item = 0;
+    for (item = 0; item < NR_VM_NUMA_EVENT_ITEMS; item++) {
     atomic_long_set(&vm_numa_event[item], 0);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn invalid_numa_statistics() {
-    static void invalid_numa_statistics(void)
-    {
     zero_zones_numa_counters();
     zero_global_numa_counters();
     }
-    static DEFINE_MUTEX(vm_numa_stat_lock);
-    static int sysctl_vm_numa_stat_handler(const struct ctl_table *table, int write,
-    void *buffer, size_t *length, loff_t *ppos)
-    {
-    int ret, oldval;
-    mutex_lock(&vm_numa_stat_lock);
-    if (write)
-    oldval = sysctl_vm_numa_stat;
-    ret = proc_dointvec_minmax(table, write, buffer, length, ppos);
-    if (ret || !write)
-    goto out;
-    if (oldval == sysctl_vm_numa_stat)
-    goto out;
+pub static mut vm_numa_stat_lock: usize = 0;
 #[no_mangle]
-pub unsafe extern "C" fn if(ENABLE_NUMA_STAT: sysctl_vm_numa_stat ==) -> else {
+pub unsafe extern "C" fn sysctl_vm_numa_stat_handler(table: *mut ctl_table, write: c_int, buffer: *mut c_void, length: *mut size_t, ppos: *mut loff_t) -> c_int {
+    let mut ret = 0;
+    let mut oldval = 0;
+    mutex_lock(&vm_numa_stat_lock);
+    if (write) {
+    oldval = sysctl_vm_numa_stat;
+    }
+    ret = proc_dointvec_minmax(table, write, buffer, length, ppos);
+    if (ret || !write) {
+// goto;
+    }
+    if (oldval == sysctl_vm_numa_stat) {
+// goto;
+    }
+if true {
     static_branch_enable(&vm_numa_stat_key);
-    pr_info("enable numa statistics\n");
+    pr_info!("enable numa statistics\n");
     } else {
     static_branch_disable(&vm_numa_stat_key);
     invalid_numa_statistics();
-    pr_info("disable numa statistics, and clear numa counters\n");
+    pr_info!("disable numa statistics, and clear numa counters\n");
     }
-    out:
+// label;
     mutex_unlock(&vm_numa_stat_lock);
     return ret;
     }
 
-    DEFINE_PER_CPU(struct vm_event_state, vm_event_states) = {{0}};
+    DEFINE_PER_CPU(vm_event_state, vm_event_states) = {{0}};
     EXPORT_PER_CPU_SYMBOL(vm_event_states);
 #[no_mangle]
 unsafe extern "C" fn sum_vm_events(ret: *mut c_ulong) {
-    static void sum_vm_events(unsigned long *ret)
-    {
-    int cpu;
-    int i;
-    memset(ret, 0, NR_VM_EVENT_ITEMS * sizeof(unsigned long));
+    let mut cpu = 0;
+    let mut i = 0;
+    memset(ret, 0, NR_VM_EVENT_ITEMS * sizeof!(unsigned long));
     for_each_online_cpu(cpu) {
-    struct vm_event_state *this = &per_cpu(vm_event_states, cpu);
-    for (i = 0; i < NR_VM_EVENT_ITEMS; i++)
+    let mut this = &per_cpu(vm_event_states, cpu);
+    for (i = 0; i < NR_VM_EVENT_ITEMS; i++) {
     ret[i] += this.event[i];
+    }
     }
     }
 //
@@ -139,8 +385,6 @@ unsafe extern "C" fn sum_vm_events(ret: *mut c_ulong) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn all_vm_events(ret: *mut c_ulong) {
-    void all_vm_events(unsigned long *ret)
-    {
     cpus_read_lock();
     sum_vm_events(ret);
     cpus_read_unlock();
@@ -154,11 +398,9 @@ pub unsafe extern "C" fn all_vm_events(ret: *mut c_ulong) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn vm_events_fold_cpu(cpu: c_int) {
-    void vm_events_fold_cpu(int cpu)
-    {
-    struct vm_event_state *fold_state = &per_cpu(vm_event_states, cpu);
-    int i;
-    for (i = 0; i < NR_VM_EVENT_ITEMS; i++) {
+    let mut fold_state = &per_cpu(vm_event_states, cpu);
+    let mut i = 0;
+    while (i < NR_VM_EVENT_ITEMS) {
     count_vm_events(i, fold_state.event[i]);
     fold_state.event[i] = 0;
     }
@@ -177,35 +419,32 @@ pub unsafe extern "C" fn vm_events_fold_cpu(cpu: c_int) {
 
 #[no_mangle]
 unsafe extern "C" fn fold_vm_zone_numa_events(zone: *mut zone) {
-    static void fold_vm_zone_numa_events(struct zone *zone)
-    {
     unsigned long zone_numa_events[NR_VM_NUMA_EVENT_ITEMS] = { 0, };
-    int cpu;
+    let mut cpu = 0;
     enum numa_stat_item item;
     for_each_online_cpu(cpu) {
-    struct per_cpu_zonestat *pzstats;
+pub static mut pzstats: *mut c_void = core::ptr::null_mut();
     pzstats = per_cpu_ptr(zone.per_cpu_zonestats, cpu);
-    for (item = 0; item < NR_VM_NUMA_EVENT_ITEMS; item++)
+    for (item = 0; item < NR_VM_NUMA_EVENT_ITEMS; item++) {
     zone_numa_events[item] += xchg(&pzstats.vm_numa_event[item], 0);
     }
-    for (item = 0; item < NR_VM_NUMA_EVENT_ITEMS; item++)
+    }
+    for (item = 0; item < NR_VM_NUMA_EVENT_ITEMS; item++) {
     zone_numa_event_add(zone_numa_events[item], zone, item);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn fold_vm_numa_events() {
-    void fold_vm_numa_events(void)
-    {
-    struct zone *zone;
-    for_each_populated_zone(zone)
+pub static mut zone: *mut c_void = core::ptr::null_mut();
+    for_each_populated_zone(zone) {
     fold_vm_zone_numa_events(zone);
+    }
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn calculate_pressure_threshold(zone: *mut zone) -> c_int {
-    int calculate_pressure_threshold(struct zone *zone)
-    {
-    int threshold;
-    int watermark_distance;
+    let mut threshold = 0;
+    let mut watermark_distance = 0;
 //
 // As vmstats are not up to date, there is drift between the estimated
 // and real values. For high thresholds and a high number of CPUs, it
@@ -224,10 +463,8 @@ pub unsafe extern "C" fn calculate_pressure_threshold(zone: *mut zone) -> c_int 
     }
 #[no_mangle]
 pub unsafe extern "C" fn calculate_normal_threshold(zone: *mut zone) -> c_int {
-    int calculate_normal_threshold(struct zone *zone)
-    {
-    int threshold;
-    int mem;	/* memory in 128 MB units */
+    let mut threshold = 0;
+    let mut mem = 0;	/* memory in 128 MB units */
 //
 // The threshold scales with the number of processors and the amount
 // of memory per zone. More memory means that we can defer updates for
@@ -270,12 +507,10 @@ pub unsafe extern "C" fn calculate_normal_threshold(zone: *mut zone) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn refresh_zone_stat_thresholds() {
-    void refresh_zone_stat_thresholds(void)
-    {
-    struct pglist_data *pgdat;
-    struct zone *zone;
-    int cpu;
-    int threshold;
+pub static mut pgdat: *mut c_void = core::ptr::null_mut();
+pub static mut zone: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
+    let mut threshold = 0;
 // Zero current pgdat thresholds
     for_each_online_pgdat(pgdat) {
     for_each_online_cpu(cpu) {
@@ -283,11 +518,11 @@ pub unsafe extern "C" fn refresh_zone_stat_thresholds() {
     }
     }
     for_each_populated_zone(zone) {
-    struct pglist_data *pgdat = zone.zone_pgdat;
+    let mut pgdat = zone.zone_pgdat;
     unsigned long max_drift, tolerate_drift;
     threshold = calculate_normal_threshold(zone);
     for_each_online_cpu(cpu) {
-    int pgdat_threshold;
+    let mut pgdat_threshold = 0;
     per_cpu_ptr(zone.per_cpu_zonestats, cpu).stat_threshold
     = threshold;
 // Base nodestat threshold on the largest populated zone.
@@ -302,26 +537,28 @@ pub unsafe extern "C" fn refresh_zone_stat_thresholds() {
 //
     tolerate_drift = low_wmark_pages(zone) - min_wmark_pages(zone);
     max_drift = num_online_cpus() * threshold;
-    if (max_drift > tolerate_drift)
+    if (max_drift > tolerate_drift) {
     zone.percpu_drift_mark = high_wmark_pages(zone) +
     max_drift;
     }
     }
-    void set_pgdat_percpu_threshold(pg_data_t *pgdat,
-    int (*calculate_pressure)(struct zone *))
-    {
-    struct zone *zone;
-    int cpu;
-    int threshold;
-    int i;
-    for (i = 0; i < pgdat.nr_zones; i++) {
+    }
+#[no_mangle]
+pub unsafe extern "C" fn set_pgdat_percpu_threshold(pgdat: *mut pg_data_t) {
+pub static mut zone: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
+    let mut threshold = 0;
+    let mut i = 0;
+    while (i < pgdat.nr_zones) {
     zone = &pgdat.node_zones[i];
-    if (!zone.percpu_drift_mark)
+    if (!zone.percpu_drift_mark) {
     continue;
+    }
     threshold = (*calculate_pressure)(zone);
-    for_each_online_cpu(cpu)
+    for_each_online_cpu(cpu) {
     per_cpu_ptr(zone.per_cpu_zonestats, cpu).stat_threshold
     = threshold;
+    }
     }
     }
 //
@@ -329,13 +566,12 @@ pub unsafe extern "C" fn refresh_zone_stat_thresholds() {
 // or when we know that preemption is disabled and that
 // particular counter cannot be updated from interrupt context.
 //
-    void __mod_zone_page_state(struct zone *zone, enum zone_stat_item item,
-    long delta)
-    {
-    struct per_cpu_zonestat __percpu *pcp = zone.per_cpu_zonestats;
-    s8 __percpu *p = pcp.vm_stat_diff + item;
-    long x;
-    long t;
+#[no_mangle]
+pub unsafe extern "C" fn __mod_zone_page_state(zone: *mut zone, item: zone_stat_item, delta: c_long) {
+    let mut pcp = zone.per_cpu_zonestats;
+    let mut p = pcp.vm_stat_diff + item;
+    let mut x = 0;
+    let mut t = 0;
 //
 // Accurate vmstat updates require a RMW. On !PREEMPT_RT kernels,
 // atomicity is provided by IRQs being disabled -- either explicitly
@@ -354,13 +590,12 @@ pub unsafe extern "C" fn refresh_zone_stat_thresholds() {
     preempt_enable_nested();
     }
     EXPORT_SYMBOL(__mod_zone_page_state);
-    void __mod_node_page_state(struct pglist_data *pgdat, enum node_stat_item item,
-    long delta)
-    {
-    struct per_cpu_nodestat __percpu *pcp = pgdat.per_cpu_nodestats;
-    s8 __percpu *p = pcp.vm_node_stat_diff + item;
-    long x;
-    long t;
+#[no_mangle]
+pub unsafe extern "C" fn __mod_node_page_state(pgdat: *mut pglist_data, item: node_stat_item, delta: c_long) {
+    let mut pcp = pgdat.per_cpu_nodestats;
+    let mut p = pcp.vm_node_stat_diff + item;
+    let mut x = 0;
+    let mut t = 0;
     if (vmstat_item_in_bytes(item)) {
 //
 // Only cgroups use subpage accounting right now; at
@@ -407,29 +642,25 @@ pub unsafe extern "C" fn refresh_zone_stat_thresholds() {
 // in a useful way here.
 //
 #[no_mangle]
-pub unsafe extern "C" fn __inc_zone_state(zone: *mut zone, item: enum zone_stat_item) {
-    void __inc_zone_state(struct zone *zone, enum zone_stat_item item)
-    {
-    struct per_cpu_zonestat __percpu *pcp = zone.per_cpu_zonestats;
-    s8 __percpu *p = pcp.vm_stat_diff + item;
+pub unsafe extern "C" fn __inc_zone_state(zone: *mut zone, item: zone_stat_item) {
+    let mut pcp = zone.per_cpu_zonestats;
+    let mut p = pcp.vm_stat_diff + item;
     s8 v, t;
 // See __mod_zone_page_state()
     preempt_disable_nested();
     v = __this_cpu_inc_return(*p);
     t = __this_cpu_read(pcp.stat_threshold);
     if (unlikely(v > t)) {
-    let mut overstep: i8 = t >> 1;
+pub static mut overstep: i8 = 0;
     zone_page_state_add(v + overstep, zone, item);
     __this_cpu_write(*p, -overstep);
     }
     preempt_enable_nested();
     }
 #[no_mangle]
-pub unsafe extern "C" fn __inc_node_state(pgdat: *mut pglist_data, item: enum node_stat_item) {
-    void __inc_node_state(struct pglist_data *pgdat, enum node_stat_item item)
-    {
-    struct per_cpu_nodestat __percpu *pcp = pgdat.per_cpu_nodestats;
-    s8 __percpu *p = pcp.vm_node_stat_diff + item;
+pub unsafe extern "C" fn __inc_node_state(pgdat: *mut pglist_data, item: node_stat_item) {
+    let mut pcp = pgdat.per_cpu_nodestats;
+    let mut p = pcp.vm_node_stat_diff + item;
     s8 v, t;
     VM_WARN_ON_ONCE(vmstat_item_in_bytes(item));
 // See __mod_zone_page_state()
@@ -437,50 +668,42 @@ pub unsafe extern "C" fn __inc_node_state(pgdat: *mut pglist_data, item: enum no
     v = __this_cpu_inc_return(*p);
     t = __this_cpu_read(pcp.stat_threshold);
     if (unlikely(v > t)) {
-    let mut overstep: i8 = t >> 1;
+pub static mut overstep: i8 = 0;
     node_page_state_add(v + overstep, pgdat, item);
     __this_cpu_write(*p, -overstep);
     }
     preempt_enable_nested();
     }
 #[no_mangle]
-pub unsafe extern "C" fn __inc_zone_page_state(page: *mut page, item: enum zone_stat_item) {
-    void __inc_zone_page_state(struct page *page, enum zone_stat_item item)
-    {
+pub unsafe extern "C" fn __inc_zone_page_state(page: *mut page, item: zone_stat_item) {
     __inc_zone_state(page_zone(page), item);
     }
     EXPORT_SYMBOL(__inc_zone_page_state);
 #[no_mangle]
-pub unsafe extern "C" fn __inc_node_page_state(page: *mut page, item: enum node_stat_item) {
-    void __inc_node_page_state(struct page *page, enum node_stat_item item)
-    {
+pub unsafe extern "C" fn __inc_node_page_state(page: *mut page, item: node_stat_item) {
     __inc_node_state(page_pgdat(page), item);
     }
     EXPORT_SYMBOL(__inc_node_page_state);
 #[no_mangle]
-pub unsafe extern "C" fn __dec_zone_state(zone: *mut zone, item: enum zone_stat_item) {
-    void __dec_zone_state(struct zone *zone, enum zone_stat_item item)
-    {
-    struct per_cpu_zonestat __percpu *pcp = zone.per_cpu_zonestats;
-    s8 __percpu *p = pcp.vm_stat_diff + item;
+pub unsafe extern "C" fn __dec_zone_state(zone: *mut zone, item: zone_stat_item) {
+    let mut pcp = zone.per_cpu_zonestats;
+    let mut p = pcp.vm_stat_diff + item;
     s8 v, t;
 // See __mod_zone_page_state()
     preempt_disable_nested();
     v = __this_cpu_dec_return(*p);
     t = __this_cpu_read(pcp.stat_threshold);
     if (unlikely(v < - t)) {
-    let mut overstep: i8 = t >> 1;
+pub static mut overstep: i8 = 0;
     zone_page_state_add(v - overstep, zone, item);
     __this_cpu_write(*p, overstep);
     }
     preempt_enable_nested();
     }
 #[no_mangle]
-pub unsafe extern "C" fn __dec_node_state(pgdat: *mut pglist_data, item: enum node_stat_item) {
-    void __dec_node_state(struct pglist_data *pgdat, enum node_stat_item item)
-    {
-    struct per_cpu_nodestat __percpu *pcp = pgdat.per_cpu_nodestats;
-    s8 __percpu *p = pcp.vm_node_stat_diff + item;
+pub unsafe extern "C" fn __dec_node_state(pgdat: *mut pglist_data, item: node_stat_item) {
+    let mut pcp = pgdat.per_cpu_nodestats;
+    let mut p = pcp.vm_node_stat_diff + item;
     s8 v, t;
     VM_WARN_ON_ONCE(vmstat_item_in_bytes(item));
 // See __mod_zone_page_state()
@@ -488,23 +711,19 @@ pub unsafe extern "C" fn __dec_node_state(pgdat: *mut pglist_data, item: enum no
     v = __this_cpu_dec_return(*p);
     t = __this_cpu_read(pcp.stat_threshold);
     if (unlikely(v < - t)) {
-    let mut overstep: i8 = t >> 1;
+pub static mut overstep: i8 = 0;
     node_page_state_add(v - overstep, pgdat, item);
     __this_cpu_write(*p, overstep);
     }
     preempt_enable_nested();
     }
 #[no_mangle]
-pub unsafe extern "C" fn __dec_zone_page_state(page: *mut page, item: enum zone_stat_item) {
-    void __dec_zone_page_state(struct page *page, enum zone_stat_item item)
-    {
+pub unsafe extern "C" fn __dec_zone_page_state(page: *mut page, item: zone_stat_item) {
     __dec_zone_state(page_zone(page), item);
     }
     EXPORT_SYMBOL(__dec_zone_page_state);
 #[no_mangle]
-pub unsafe extern "C" fn __dec_node_page_state(page: *mut page, item: enum node_stat_item) {
-    void __dec_node_page_state(struct page *page, enum node_stat_item item)
-    {
+pub unsafe extern "C" fn __dec_node_page_state(page: *mut page, item: node_stat_item) {
     __dec_node_state(page_pgdat(page), item);
     }
     EXPORT_SYMBOL(__dec_node_page_state);
@@ -521,13 +740,14 @@ pub unsafe extern "C" fn __dec_node_page_state(page: *mut page, item: enum node_
 // 1       Overstepping half of threshold
 // -1      Overstepping minus half of threshold
 //
-    static inline void mod_zone_state(struct zone *zone,
-    enum zone_stat_item item, long delta, int overstep_mode)
-    {
-    struct per_cpu_zonestat __percpu *pcp = zone.per_cpu_zonestats;
-    s8 __percpu *p = pcp.vm_stat_diff + item;
-    long n, t, z;
-    s8 o;
+#[no_mangle]
+pub unsafe extern "C" fn mod_zone_state(zone: *mut zone, item: zone_stat_item, delta: c_long, overstep_mode: c_int) {
+    let mut pcp = zone.per_cpu_zonestats;
+    let mut p = pcp.vm_stat_diff + item;
+    let mut n = 0;
+    let mut t = 0;
+    let mut z = 0;
+    let mut o = 0;
     o = this_cpu_read(*p);
     do {
     z = 0;  /* overflow to zone counters */
@@ -544,42 +764,39 @@ pub unsafe extern "C" fn __dec_node_page_state(page: *mut page, item: enum node_
     t = this_cpu_read(pcp.stat_threshold);
     n = delta + (long)o;
     if (abs(n) > t) {
-    let mut os: c_int = overstep_mode * (t >> 1) ;
+pub static mut os: c_int = 0;
 // Overflow must be added to zone counters
     z = n + os;
     n = -os;
     }
     } while (!this_cpu_try_cmpxchg(*p, &o, n));
-    if (z)
+    if (z) {
     zone_page_state_add(z, zone, item);
     }
-    void mod_zone_page_state(struct zone *zone, enum zone_stat_item item,
-    long delta)
-    {
+    }
+#[no_mangle]
+pub unsafe extern "C" fn mod_zone_page_state(zone: *mut zone, item: zone_stat_item, delta: c_long) {
     mod_zone_state(zone, item, delta, 0);
     }
     EXPORT_SYMBOL(mod_zone_page_state);
 #[no_mangle]
-pub unsafe extern "C" fn inc_zone_page_state(page: *mut page, item: enum zone_stat_item) {
-    void inc_zone_page_state(struct page *page, enum zone_stat_item item)
-    {
+pub unsafe extern "C" fn inc_zone_page_state(page: *mut page, item: zone_stat_item) {
     mod_zone_state(page_zone(page), item, 1, 1);
     }
     EXPORT_SYMBOL(inc_zone_page_state);
 #[no_mangle]
-pub unsafe extern "C" fn dec_zone_page_state(page: *mut page, item: enum zone_stat_item) {
-    void dec_zone_page_state(struct page *page, enum zone_stat_item item)
-    {
+pub unsafe extern "C" fn dec_zone_page_state(page: *mut page, item: zone_stat_item) {
     mod_zone_state(page_zone(page), item, -1, -1);
     }
     EXPORT_SYMBOL(dec_zone_page_state);
-    static inline void mod_node_state(struct pglist_data *pgdat,
-    enum node_stat_item item, int delta, int overstep_mode)
-    {
-    struct per_cpu_nodestat __percpu *pcp = pgdat.per_cpu_nodestats;
-    s8 __percpu *p = pcp.vm_node_stat_diff + item;
-    long n, t, z;
-    s8 o;
+#[no_mangle]
+pub unsafe extern "C" fn mod_node_state(pgdat: *mut pglist_data, item: node_stat_item, delta: c_int, overstep_mode: c_int) {
+    let mut pcp = pgdat.per_cpu_nodestats;
+    let mut p = pcp.vm_node_stat_diff + item;
+    let mut n = 0;
+    let mut t = 0;
+    let mut z = 0;
+    let mut o = 0;
     if (vmstat_item_in_bytes(item)) {
 //
 // Only cgroups use subpage accounting right now; at
@@ -606,32 +823,28 @@ pub unsafe extern "C" fn dec_zone_page_state(page: *mut page, item: enum zone_st
     t = this_cpu_read(pcp.stat_threshold);
     n = delta + (long)o;
     if (abs(n) > t) {
-    let mut os: c_int = overstep_mode * (t >> 1) ;
+pub static mut os: c_int = 0;
 // Overflow must be added to node counters
     z = n + os;
     n = -os;
     }
     } while (!this_cpu_try_cmpxchg(*p, &o, n));
-    if (z)
+    if (z) {
     node_page_state_add(z, pgdat, item);
     }
-    void mod_node_page_state(struct pglist_data *pgdat, enum node_stat_item item,
-    long delta)
-    {
+    }
+#[no_mangle]
+pub unsafe extern "C" fn mod_node_page_state(pgdat: *mut pglist_data, item: node_stat_item, delta: c_long) {
     mod_node_state(pgdat, item, delta, 0);
     }
     EXPORT_SYMBOL(mod_node_page_state);
 #[no_mangle]
-pub unsafe extern "C" fn inc_node_page_state(page: *mut page, item: enum node_stat_item) {
-    void inc_node_page_state(struct page *page, enum node_stat_item item)
-    {
+pub unsafe extern "C" fn inc_node_page_state(page: *mut page, item: node_stat_item) {
     mod_node_state(page_pgdat(page), item, 1, 1);
     }
     EXPORT_SYMBOL(inc_node_page_state);
 #[no_mangle]
-pub unsafe extern "C" fn dec_node_page_state(page: *mut page, item: enum node_stat_item) {
-    void dec_node_page_state(struct page *page, enum node_stat_item item)
-    {
+pub unsafe extern "C" fn dec_node_page_state(page: *mut page, item: node_stat_item) {
     mod_node_state(page_pgdat(page), item, -1, -1);
     }
     EXPORT_SYMBOL(dec_node_page_state);
@@ -639,21 +852,22 @@ pub unsafe extern "C" fn dec_node_page_state(page: *mut page, item: enum node_st
 //
 // Use interrupt disable to serialize counter updates
 //
-    void mod_zone_page_state(struct zone *zone, enum zone_stat_item item,
-    long delta)
-    {
-    unsigned long flags;
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: mod_zone_page_state
+pub unsafe extern "C" fn mod_zone_page_state_dup(zone: *mut zone, item: zone_stat_item, delta: c_long) {
+    let mut flags = 0;
     local_irq_save(flags);
     __mod_zone_page_state(zone, item, delta);
     local_irq_restore(flags);
     }
     EXPORT_SYMBOL(mod_zone_page_state);
 #[no_mangle]
-pub unsafe extern "C" fn inc_zone_page_state(page: *mut page, item: enum zone_stat_item) {
-    void inc_zone_page_state(struct page *page, enum zone_stat_item item)
-    {
-    unsigned long flags;
-    struct zone *zone;
+#[no_mangle]
+// duplicate fn: inc_zone_page_state
+pub unsafe extern "C" fn inc_zone_page_state_dup(page: *mut page, item: zone_stat_item) {
+    let mut flags = 0;
+pub static mut zone: *mut c_void = core::ptr::null_mut();
     zone = page_zone(page);
     local_irq_save(flags);
     __inc_zone_state(zone, item);
@@ -661,30 +875,31 @@ pub unsafe extern "C" fn inc_zone_page_state(page: *mut page, item: enum zone_st
     }
     EXPORT_SYMBOL(inc_zone_page_state);
 #[no_mangle]
-pub unsafe extern "C" fn dec_zone_page_state(page: *mut page, item: enum zone_stat_item) {
-    void dec_zone_page_state(struct page *page, enum zone_stat_item item)
-    {
-    unsigned long flags;
+#[no_mangle]
+// duplicate fn: dec_zone_page_state
+pub unsafe extern "C" fn dec_zone_page_state_dup(page: *mut page, item: zone_stat_item) {
+    let mut flags = 0;
     local_irq_save(flags);
     __dec_zone_page_state(page, item);
     local_irq_restore(flags);
     }
     EXPORT_SYMBOL(dec_zone_page_state);
-    void mod_node_page_state(struct pglist_data *pgdat, enum node_stat_item item,
-    long delta)
-    {
-    unsigned long flags;
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: mod_node_page_state
+pub unsafe extern "C" fn mod_node_page_state_dup(pgdat: *mut pglist_data, item: node_stat_item, delta: c_long) {
+    let mut flags = 0;
     local_irq_save(flags);
     __mod_node_page_state(pgdat, item, delta);
     local_irq_restore(flags);
     }
     EXPORT_SYMBOL(mod_node_page_state);
 #[no_mangle]
-pub unsafe extern "C" fn inc_node_page_state(page: *mut page, item: enum node_stat_item) {
-    void inc_node_page_state(struct page *page, enum node_stat_item item)
-    {
-    unsigned long flags;
-    struct pglist_data *pgdat;
+#[no_mangle]
+// duplicate fn: inc_node_page_state
+pub unsafe extern "C" fn inc_node_page_state_dup(page: *mut page, item: node_stat_item) {
+    let mut flags = 0;
+pub static mut pgdat: *mut c_void = core::ptr::null_mut();
     pgdat = page_pgdat(page);
     local_irq_save(flags);
     __inc_node_state(pgdat, item);
@@ -692,10 +907,10 @@ pub unsafe extern "C" fn inc_node_page_state(page: *mut page, item: enum node_st
     }
     EXPORT_SYMBOL(inc_node_page_state);
 #[no_mangle]
-pub unsafe extern "C" fn dec_node_page_state(page: *mut page, item: enum node_stat_item) {
-    void dec_node_page_state(struct page *page, enum node_stat_item item)
-    {
-    unsigned long flags;
+#[no_mangle]
+// duplicate fn: dec_node_page_state
+pub unsafe extern "C" fn dec_node_page_state_dup(page: *mut page, item: node_stat_item) {
+    let mut flags = 0;
     local_irq_save(flags);
     __dec_node_page_state(page, item);
     local_irq_restore(flags);
@@ -708,17 +923,15 @@ pub unsafe extern "C" fn dec_node_page_state(page: *mut page, item: enum node_st
 //
 #[no_mangle]
 unsafe extern "C" fn fold_diff(zone_diff: *mut c_int, node_diff: *mut c_int) -> c_int {
-    static int fold_diff(int *zone_diff, int *node_diff)
-    {
-    int i;
-    let mut changed: bool = false;
-    for (i = 0; i < NR_VM_ZONE_STAT_ITEMS; i++) {
+    let mut i = 0;
+pub static mut changed: bool = false;
+    while (i < NR_VM_ZONE_STAT_ITEMS) {
     if (zone_diff[i]) {
     atomic_long_add(zone_diff[i], &vm_zone_stat[i]);
     changed = true;
     }
     }
-    for (i = 0; i < NR_VM_NODE_STAT_ITEMS; i++) {
+    while (i < NR_VM_NODE_STAT_ITEMS) {
     if (node_diff[i]) {
     atomic_long_add(node_diff[i], &vm_node_stat[i]);
     changed = true;
@@ -744,19 +957,17 @@ unsafe extern "C" fn fold_diff(zone_diff: *mut c_int, node_diff: *mut c_int) -> 
 //
 #[no_mangle]
 unsafe extern "C" fn refresh_cpu_vm_stats(do_pagesets: bool) -> bool {
-    static bool refresh_cpu_vm_stats(bool do_pagesets)
-    {
-    struct pglist_data *pgdat;
-    struct zone *zone;
-    int i;
+pub static mut pgdat: *mut c_void = core::ptr::null_mut();
+pub static mut zone: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
     int global_zone_diff[NR_VM_ZONE_STAT_ITEMS] = { 0, };
     int global_node_diff[NR_VM_NODE_STAT_ITEMS] = { 0, };
-    let mut changed: bool = false;
+pub static mut changed: bool = false;
     for_each_populated_zone(zone) {
-    struct per_cpu_zonestat __percpu *pzstats = zone.per_cpu_zonestats;
-    struct per_cpu_pages __percpu *pcp = zone.per_cpu_pageset;
-    for (i = 0; i < NR_VM_ZONE_STAT_ITEMS; i++) {
-    int v;
+    let mut pzstats = zone.per_cpu_zonestats;
+    let mut pcp = zone.per_cpu_pageset;
+    while (i < NR_VM_ZONE_STAT_ITEMS) {
+    let mut v = 0;
     v = this_cpu_xchg(pzstats.vm_stat_diff[i], 0);
     if (v) {
     atomic_long_add(v, &zone.vm_stat[i]);
@@ -769,8 +980,9 @@ unsafe extern "C" fn refresh_cpu_vm_stats(do_pagesets: bool) -> bool {
     }
     if (do_pagesets) {
     cond_resched();
-    if (decay_pcp_high(zone, this_cpu_ptr(pcp)))
+    if (decay_pcp_high(zone, this_cpu_ptr(pcp))) {
     changed = true;
+    }
 
 //
 // Deal with draining the remote pageset of this
@@ -780,8 +992,9 @@ unsafe extern "C" fn refresh_cpu_vm_stats(do_pagesets: bool) -> bool {
 // if not then there is nothing to expire.
 //
     if (!__this_cpu_read(pcp.expire) ||
-    !__this_cpu_read(pcp.count))
+    !__this_cpu_read(pcp.count)) {
     continue;
+    }
 //
 // We never drain zones local to this processor.
 //
@@ -801,9 +1014,9 @@ unsafe extern "C" fn refresh_cpu_vm_stats(do_pagesets: bool) -> bool {
     }
     }
     for_each_online_pgdat(pgdat) {
-    struct per_cpu_nodestat __percpu *p = pgdat.per_cpu_nodestats;
-    for (i = 0; i < NR_VM_NODE_STAT_ITEMS; i++) {
-    int v;
+    let mut p = pgdat.per_cpu_nodestats;
+    while (i < NR_VM_NODE_STAT_ITEMS) {
+    let mut v = 0;
     v = this_cpu_xchg(p.vm_node_stat_diff[i], 0);
     if (v) {
     atomic_long_add(v, &pgdat.vm_stat[i]);
@@ -811,8 +1024,9 @@ unsafe extern "C" fn refresh_cpu_vm_stats(do_pagesets: bool) -> bool {
     }
     }
     }
-    if (fold_diff(global_zone_diff, global_node_diff))
+    if (fold_diff(global_zone_diff, global_node_diff)) {
     changed = true;
+    }
     return changed;
     }
 //
@@ -822,19 +1036,17 @@ unsafe extern "C" fn refresh_cpu_vm_stats(do_pagesets: bool) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpu_vm_stats_fold(cpu: c_int) {
-    void cpu_vm_stats_fold(int cpu)
-    {
-    struct pglist_data *pgdat;
-    struct zone *zone;
-    int i;
+pub static mut pgdat: *mut c_void = core::ptr::null_mut();
+pub static mut zone: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
     int global_zone_diff[NR_VM_ZONE_STAT_ITEMS] = { 0, };
     int global_node_diff[NR_VM_NODE_STAT_ITEMS] = { 0, };
     for_each_populated_zone(zone) {
-    struct per_cpu_zonestat *pzstats;
+pub static mut pzstats: *mut c_void = core::ptr::null_mut();
     pzstats = per_cpu_ptr(zone.per_cpu_zonestats, cpu);
-    for (i = 0; i < NR_VM_ZONE_STAT_ITEMS; i++) {
+    while (i < NR_VM_ZONE_STAT_ITEMS) {
     if (pzstats.vm_stat_diff[i]) {
-    int v;
+    let mut v = 0;
     v = pzstats.vm_stat_diff[i];
     pzstats.vm_stat_diff[i] = 0;
     atomic_long_add(v, &zone.vm_stat[i]);
@@ -842,9 +1054,9 @@ pub unsafe extern "C" fn cpu_vm_stats_fold(cpu: c_int) {
     }
     }
 
-    for (i = 0; i < NR_VM_NUMA_EVENT_ITEMS; i++) {
+    while (i < NR_VM_NUMA_EVENT_ITEMS) {
     if (pzstats.vm_numa_event[i]) {
-    unsigned long v;
+    let mut v = 0;
     v = pzstats.vm_numa_event[i];
     pzstats.vm_numa_event[i] = 0;
     zone_numa_event_add(v, zone, i);
@@ -853,11 +1065,12 @@ pub unsafe extern "C" fn cpu_vm_stats_fold(cpu: c_int) {
 
     }
     for_each_online_pgdat(pgdat) {
-    struct per_cpu_nodestat *p;
+pub static mut p: *mut c_void = core::ptr::null_mut();
     p = per_cpu_ptr(pgdat.per_cpu_nodestats, cpu);
-    for (i = 0; i < NR_VM_NODE_STAT_ITEMS; i++)
+    for (i = 0; i < NR_VM_NODE_STAT_ITEMS; i++) {
     if (p.vm_node_stat_diff[i]) {
-    int v;
+    }
+    let mut v = 0;
     v = p.vm_node_stat_diff[i];
     p.vm_node_stat_diff[i] = 0;
     atomic_long_add(v, &pgdat.vm_stat[i]);
@@ -872,11 +1085,9 @@ pub unsafe extern "C" fn cpu_vm_stats_fold(cpu: c_int) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn drain_zonestat(zone: *mut zone, pzstats: *mut per_cpu_zonestat) {
-    void drain_zonestat(struct zone *zone, struct per_cpu_zonestat *pzstats)
-    {
-    unsigned long v;
-    int i;
-    for (i = 0; i < NR_VM_ZONE_STAT_ITEMS; i++) {
+    let mut v = 0;
+    let mut i = 0;
+    while (i < NR_VM_ZONE_STAT_ITEMS) {
     if (pzstats.vm_stat_diff[i]) {
     v = pzstats.vm_stat_diff[i];
     pzstats.vm_stat_diff[i] = 0;
@@ -884,7 +1095,7 @@ pub unsafe extern "C" fn drain_zonestat(zone: *mut zone, pzstats: *mut per_cpu_z
     }
     }
 
-    for (i = 0; i < NR_VM_NUMA_EVENT_ITEMS; i++) {
+    while (i < NR_VM_NUMA_EVENT_ITEMS) {
     if (pzstats.vm_numa_event[i]) {
     v = pzstats.vm_numa_event[i];
     pzstats.vm_numa_event[i] = 0;
@@ -899,43 +1110,42 @@ pub unsafe extern "C" fn drain_zonestat(zone: *mut zone, pzstats: *mut per_cpu_z
 // is called frequently in a NUMA machine, so try to be as
 // frugal as possible.
 //
-    unsigned long sum_zone_node_page_state(int node,
-    enum zone_stat_item item)
-    {
-    struct zone *zones = NODE_DATA(node).node_zones;
-    int i;
-    let mut count: c_ulong = 0;
-    for (i = 0; i < MAX_NR_ZONES; i++)
+#[no_mangle]
+pub unsafe extern "C" fn sum_zone_node_page_state(node: c_int, item: zone_stat_item) -> c_ulong {
+    let mut zones = NODE_DATA(node).node_zones;
+    let mut i = 0;
+pub static mut count: c_ulong = 0;
+    for (i = 0; i < MAX_NR_ZONES; i++) {
     count += zone_page_state(zones + i, item);
+    }
     return count;
     }
 // Determine the per node value of a numa stat item.
-    unsigned long sum_zone_numa_event_state(int node,
-    enum numa_stat_item item)
-    {
-    struct zone *zones = NODE_DATA(node).node_zones;
-    let mut count: c_ulong = 0;
-    int i;
-    for (i = 0; i < MAX_NR_ZONES; i++)
+#[no_mangle]
+pub unsafe extern "C" fn sum_zone_numa_event_state(node: c_int, item: numa_stat_item) -> c_ulong {
+    let mut zones = NODE_DATA(node).node_zones;
+pub static mut count: c_ulong = 0;
+    let mut i = 0;
+    for (i = 0; i < MAX_NR_ZONES; i++) {
     count += zone_numa_event_state(zones + i, item);
+    }
     return count;
     }
 //
 // Determine the per node value of a stat item.
 //
-    unsigned long node_page_state_pages(struct pglist_data *pgdat,
-    enum node_stat_item item)
-    {
-    let mut x: c_long = atomic_long_read(&pgdat.vm_stat[item]);
+#[no_mangle]
+pub unsafe extern "C" fn node_page_state_pages(pgdat: *mut pglist_data, item: node_stat_item) -> c_ulong {
+pub static mut x: c_long = 0;
 
-    if (x < 0)
+    if (x < 0) {
     x = 0;
+    }
 
     return x;
     }
-    unsigned long node_page_state(struct pglist_data *pgdat,
-    enum node_stat_item item)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn node_page_state(pgdat: *mut pglist_data, item: node_stat_item) -> c_ulong {
     VM_WARN_ON_ONCE(vmstat_item_in_bytes(item));
     return node_page_state_pages(pgdat, item);
     }
@@ -944,9 +1154,8 @@ pub unsafe extern "C" fn drain_zonestat(zone: *mut zone, pzstats: *mut per_cpu_z
 // snapshot a monotonically-incremented counter and subtract two samples.
 // See global_node_page_state_monotonic() for the rationale.
 //
-    unsigned long node_page_state_monotonic(struct pglist_data *pgdat,
-    enum node_stat_item item)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn node_page_state_monotonic(pgdat: *mut pglist_data, item: node_stat_item) -> c_ulong {
     return (unsigned long)atomic_long_read(&pgdat.vm_stat[item]);
     }
 
@@ -955,18 +1164,14 @@ pub unsafe extern "C" fn drain_zonestat(zone: *mut zone, pzstats: *mut per_cpu_z
 // nr_memmap_boot_pages: # of pages allocated by boot allocator
 // nr_memmap_pages: # of pages that were allocated by buddy allocator
 //
-    let mut nr_memmap_boot_pages: static atomic_long_t = ATOMIC_LONG_INIT(0);
-    let mut nr_memmap_pages: static atomic_long_t = ATOMIC_LONG_INIT(0);
+pub static mut nr_memmap_boot_pages: atomic_long_t = 0;
+pub static mut nr_memmap_pages: atomic_long_t = 0;
 #[no_mangle]
 pub unsafe extern "C" fn memmap_boot_pages_add(delta: c_long) {
-    void memmap_boot_pages_add(long delta)
-    {
     atomic_long_add(delta, &nr_memmap_boot_pages);
     }
 #[no_mangle]
 pub unsafe extern "C" fn memmap_pages_add(delta: c_long) {
-    void memmap_pages_add(long delta)
-    {
     atomic_long_add(delta, &nr_memmap_pages);
     }
 
@@ -986,16 +1191,14 @@ pub struct contig_page_info {
 // migrated. Calculating that is possible, but expensive and can be
 // figured out from userspace
 //
-    static void fill_contig_page_info(struct zone *zone,
-    unsigned int suitable_order,
-    struct contig_page_info *info)
-    {
-    unsigned int order;
+#[no_mangle]
+pub unsafe extern "C" fn fill_contig_page_info(zone: *mut zone, suitable_order: c_uint, info: *mut contig_page_info) {
+    let mut order = 0;
     info.free_pages = 0;
     info.free_blocks_total = 0;
     info.free_blocks_suitable = 0;
-    for (order = 0; order < NR_PAGE_ORDERS; order++) {
-    unsigned long blocks;
+    while (order < NR_PAGE_ORDERS) {
+    let mut blocks = 0;
 //
 // Count number of free blocks.
 //
@@ -1007,9 +1210,10 @@ pub struct contig_page_info {
 // Count free base pages
     info.free_pages += blocks << order;
 // Count the suitable free blocks
-    if (order >= suitable_order)
+    if (order >= suitable_order) {
     info.free_blocks_suitable += blocks <<
     (order - suitable_order);
+    }
     }
     }
 //
@@ -1021,16 +1225,17 @@ pub struct contig_page_info {
 //
 #[no_mangle]
 unsafe extern "C" fn __fragmentation_index(order: c_uint, info: *mut contig_page_info) -> c_int {
-    static int __fragmentation_index(unsigned int order, struct contig_page_info *info)
-    {
-    let mut requested: c_ulong = 1UL << order;
-    if (WARN_ON_ONCE(order > MAX_PAGE_ORDER))
+pub static mut requested: c_ulong = 0;
+    if (WARN_ON_ONCE!(order > MAX_PAGE_ORDER)) {
     return 0;
-    if (!info.free_blocks_total)
+    }
+    if (!info.free_blocks_total) {
     return 0;
+    }
 // Fragmentation index only makes sense when a request would fail
-    if (info.free_blocks_suitable)
+    if (info.free_blocks_suitable) {
     return -1000;
+    }
 //
 // Index is between 0 and 1 so return within 3 decimal places
 //
@@ -1046,12 +1251,11 @@ unsafe extern "C" fn __fragmentation_index(order: c_uint, info: *mut contig_page
 //
 #[no_mangle]
 pub unsafe extern "C" fn extfrag_for_order(zone: *mut zone, order: c_uint) -> c_uint {
-    unsigned int extfrag_for_order(struct zone *zone, unsigned int order)
-    {
-    struct contig_page_info info;
+pub static mut info: usize = 0;
     fill_contig_page_info(zone, order, &info);
-    if (info.free_pages == 0)
+    if (info.free_pages == 0) {
     return 0;
+    }
     return div_u64((info.free_pages -
     (info.free_blocks_suitable << order)) * 100,
     info.free_pages);
@@ -1059,20 +1263,18 @@ pub unsafe extern "C" fn extfrag_for_order(zone: *mut zone, order: c_uint) -> c_
 // Same as __fragmentation index but allocs contig_page_info on stack
 #[no_mangle]
 pub unsafe extern "C" fn fragmentation_index(zone: *mut zone, order: c_uint) -> c_int {
-    int fragmentation_index(struct zone *zone, unsigned int order)
-    {
-    struct contig_page_info info;
+pub static mut info: usize = 0;
     fill_contig_page_info(zone, order, &info);
     return __fragmentation_index(order, &info);
     }
 
     defined(CONFIG_NUMA) || defined(CONFIG_MEMCG)
 
-    TEXT_FOR_DMA(xx, yy)			\
-    TEXT_FOR_DMA32(xx, yy)			\
-    [xx##_NORMAL] = yy "_normal",		\
-    TEXT_FOR_HIGHMEM(xx, yy)		\
-    [xx##_MOVABLE] = yy "_movable",		\
+    TEXT_FOR_DMA(xx, yy)			
+    TEXT_FOR_DMA32(xx, yy)			
+    [xx##_NORMAL] = yy "_normal",		
+    TEXT_FOR_HIGHMEM(xx, yy)		
+    [xx##_MOVABLE] = yy "_movable",		
     TEXT_FOR_DEVICE(xx, yy)
     const char * const vmstat_text[] = {
 // enum zone_stat_item counters
@@ -1344,60 +1546,60 @@ pub unsafe extern "C" fn fragmentation_index(zone: *mut zone, order: c_uint) -> 
     };
 
     defined(CONFIG_PROC_FS)
-    static void *frag_start(struct seq_file *m, loff_t *pos)
-    {
-    pg_data_t *pgdat;
-    let mut node: loff_t = *pos;
+#[no_mangle]
+pub unsafe extern "C" fn frag_start(m: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
+pub static mut pgdat: *mut c_void = core::ptr::null_mut();
+pub static mut node: loff_t = 0;
     for (pgdat = first_online_pgdat();
     pgdat && node;
-    pgdat = next_online_pgdat(pgdat))
-    --node;
+    pgdat = next_online_pgdat(pgdat)) {
+    node -= 1;
+    }
     return pgdat;
     }
-    static void *frag_next(struct seq_file *m, void *arg, loff_t *pos)
-    {
-    pg_data_t *pgdat = (pg_data_t *)arg;
+#[no_mangle]
+pub unsafe extern "C" fn frag_next(m: *mut seq_file, arg: *mut c_void, pos: *mut loff_t) -> *mut c_void {
+    let mut pgdat = arg;
     (*pos)++;
     return next_online_pgdat(pgdat);
     }
 #[no_mangle]
 unsafe extern "C" fn frag_stop(m: *mut seq_file, arg: *mut c_void) {
-    static void frag_stop(struct seq_file *m, void *arg)
-    {
     }
 //
 // Walk zones in a node and print using a callback.
 // If @assert_populated is true, only use callback for zones that are populated.
 //
-    static void walk_zones_in_node(struct seq_file *m, pg_data_t *pgdat,
-    bool assert_populated, bool nolock,
-    void (*print)(struct seq_file *m, pg_data_t *, struct zone *))
-    {
-    struct zone *zone;
-    struct zone *node_zones = pgdat.node_zones;
-    unsigned long flags;
-    for (zone = node_zones; zone - node_zones < MAX_NR_ZONES; ++zone) {
-    if (assert_populated && !populated_zone(zone))
+#[no_mangle]
+pub unsafe extern "C" fn walk_zones_in_node(m: *mut seq_file, pgdat: *mut pg_data_t, assert_populated: bool, nolock: bool, m: *mut *mut c_void (print)( seq_file) {
+pub static mut zone: *mut c_void = core::ptr::null_mut();
+    let mut node_zones = pgdat.node_zones;
+    let mut flags = 0;
+    while (zone - node_zones < MAX_NR_ZONES) {
+    if (assert_populated && !populated_zone(zone)) {
     continue;
-    if (!nolock)
+    }
+    if (!nolock) {
     spin_lock_irqsave(&zone.lock, flags);
+    }
     print(m, pgdat, zone);
-    if (!nolock)
+    if (!nolock) {
     spin_unlock_irqrestore(&zone.lock, flags);
     }
     }
+    }
 
-    static void frag_show_print(struct seq_file *m, pg_data_t *pgdat,
-    struct zone *zone)
-    {
-    int order;
+#[no_mangle]
+pub unsafe extern "C" fn frag_show_print(m: *mut seq_file, pgdat: *mut pg_data_t, zone: *mut zone) {
+    let mut order = 0;
     seq_printf(m, "Node %d, zone %8s ", pgdat.node_id, zone.name);
-    for (order = 0; order < NR_PAGE_ORDERS; ++order)
+    for (order = 0; order < NR_PAGE_ORDERS; ++order) {
 //
 // Access to nr_free is lockless as nr_free is used only for
 // printing purposes. Use data_race to avoid KCSAN warning.
 //
     seq_printf(m, "%6lu ", data_race(zone.free_area[order].nr_free));
+    }
     seq_putc(m, '\n');
     }
 //
@@ -1405,26 +1607,24 @@ unsafe extern "C" fn frag_stop(m: *mut seq_file, arg: *mut c_void) {
 //
 #[no_mangle]
 unsafe extern "C" fn frag_show(m: *mut seq_file, arg: *mut c_void) -> c_int {
-    static int frag_show(struct seq_file *m, void *arg)
-    {
-    pg_data_t *pgdat = (pg_data_t *)arg;
+    let mut pgdat = arg;
     walk_zones_in_node(m, pgdat, true, true, frag_show_print);
     return 0;
     }
-    static void pagetypeinfo_showfree_print(struct seq_file *m,
-    pg_data_t *pgdat, struct zone *zone)
-    {
-    int order, mtype;
-    for (mtype = 0; mtype < MIGRATE_TYPES; mtype++) {
+#[no_mangle]
+pub unsafe extern "C" fn pagetypeinfo_showfree_print(m: *mut seq_file, pgdat: *mut pg_data_t, zone: *mut zone) {
+    let mut order = 0;
+    let mut mtype = 0;
+    while (mtype < MIGRATE_TYPES) {
     seq_printf(m, "Node %4d, zone %8s, type %12s ",
     pgdat.node_id,
     zone.name,
     migratetype_names[mtype]);
-    for (order = 0; order < NR_PAGE_ORDERS; ++order) {
-    let mut freecount: c_ulong = 0;
-    struct free_area *area;
-    struct list_head *curr;
-    let mut overflow: bool = false;
+    while (order < NR_PAGE_ORDERS) {
+pub static mut freecount: c_ulong = 0;
+pub static mut area: *mut c_void = core::ptr::null_mut();
+pub static mut curr: *mut c_void = core::ptr::null_mut();
+pub static mut overflow: bool = false;
     area = &(zone.free_area[order]);
     list_for_each(curr, &area.free_list[mtype]) {
 //
@@ -1452,52 +1652,53 @@ unsafe extern "C" fn frag_show(m: *mut seq_file, arg: *mut c_void) -> c_int {
 // Print out the free pages at each order for each migratetype
 #[no_mangle]
 unsafe extern "C" fn pagetypeinfo_showfree(m: *mut seq_file, arg: *mut c_void) {
-    static void pagetypeinfo_showfree(struct seq_file *m, void *arg)
-    {
-    int order;
-    pg_data_t *pgdat = (pg_data_t *)arg;
+    let mut order = 0;
+    let mut pgdat = arg;
 // Print header
     seq_printf(m, "%-43s ", "Free pages count per migrate type at order");
-    for (order = 0; order < NR_PAGE_ORDERS; ++order)
+    for (order = 0; order < NR_PAGE_ORDERS; ++order) {
     seq_printf(m, "%6d ", order);
+    }
     seq_putc(m, '\n');
     walk_zones_in_node(m, pgdat, true, false, pagetypeinfo_showfree_print);
     }
-    static void pagetypeinfo_showblockcount_print(struct seq_file *m,
-    pg_data_t *pgdat, struct zone *zone)
-    {
-    int mtype;
-    unsigned long pfn;
-    let mut start_pfn: c_ulong = zone.zone_start_pfn;
-    let mut end_pfn: c_ulong = zone_end_pfn(zone);
+#[no_mangle]
+pub unsafe extern "C" fn pagetypeinfo_showblockcount_print(m: *mut seq_file, pgdat: *mut pg_data_t, zone: *mut zone) {
+    let mut mtype = 0;
+    let mut pfn = 0;
+pub static mut start_pfn: c_ulong = 0;
+pub static mut end_pfn: c_ulong = 0;
     unsigned long count[MIGRATE_TYPES] = { 0, };
-    for (pfn = start_pfn; pfn < end_pfn; pfn += pageblock_nr_pages) {
-    struct page *page;
+    while (pfn < end_pfn) {
+pub static mut page: *mut c_void = core::ptr::null_mut();
     page = pfn_to_online_page(pfn);
-    if (!page)
+    if (!page) {
     continue;
-    if (page_zone(page) != zone)
+    }
+    if (page_zone(page) != zone) {
     continue;
+    }
     mtype = get_pageblock_migratetype(page);
-    if (mtype < MIGRATE_TYPES)
+    if (mtype < MIGRATE_TYPES) {
     count[mtype]++;
+    }
     }
 // Print counts
     seq_printf(m, "Node %d, zone %8s ", pgdat.node_id, zone.name);
-    for (mtype = 0; mtype < MIGRATE_TYPES; mtype++)
+    for (mtype = 0; mtype < MIGRATE_TYPES; mtype++) {
     seq_printf(m, "%12lu ", count[mtype]);
+    }
     seq_putc(m, '\n');
     }
 // Print out the number of pageblocks for each migratetype
 #[no_mangle]
 unsafe extern "C" fn pagetypeinfo_showblockcount(m: *mut seq_file, arg: *mut c_void) {
-    static void pagetypeinfo_showblockcount(struct seq_file *m, void *arg)
-    {
-    int mtype;
-    pg_data_t *pgdat = (pg_data_t *)arg;
+    let mut mtype = 0;
+    let mut pgdat = arg;
     seq_printf(m, "\n%-23s", "Number of blocks type ");
-    for (mtype = 0; mtype < MIGRATE_TYPES; mtype++)
+    for (mtype = 0; mtype < MIGRATE_TYPES; mtype++) {
     seq_printf(m, "%12s ", migratetype_names[mtype]);
+    }
     seq_putc(m, '\n');
     walk_zones_in_node(m, pgdat, true, false,
     pagetypeinfo_showblockcount_print);
@@ -1510,16 +1711,16 @@ unsafe extern "C" fn pagetypeinfo_showblockcount(m: *mut seq_file, arg: *mut c_v
 //
 #[no_mangle]
 unsafe extern "C" fn pagetypeinfo_showmixedcount(m: *mut seq_file, pgdat: *mut pg_data_t) {
-    static void pagetypeinfo_showmixedcount(struct seq_file *m, pg_data_t *pgdat)
-    {
 
-    int mtype;
-    if (!static_branch_unlikely(&page_owner_inited))
+    let mut mtype = 0;
+    if (!static_branch_unlikely(&page_owner_inited)) {
     return;
+    }
     drain_all_pages(core::ptr::null_mut());
     seq_printf(m, "\n%-23s", "Number of mixed blocks ");
-    for (mtype = 0; mtype < MIGRATE_TYPES; mtype++)
+    for (mtype = 0; mtype < MIGRATE_TYPES; mtype++) {
     seq_printf(m, "%12s ", migratetype_names[mtype]);
+    }
     seq_putc(m, '\n');
     walk_zones_in_node(m, pgdat, true, true,
     pagetypeinfo_showmixedcount_print);
@@ -1531,12 +1732,11 @@ unsafe extern "C" fn pagetypeinfo_showmixedcount(m: *mut seq_file, pgdat: *mut p
 //
 #[no_mangle]
 unsafe extern "C" fn pagetypeinfo_show(m: *mut seq_file, arg: *mut c_void) -> c_int {
-    static int pagetypeinfo_show(struct seq_file *m, void *arg)
-    {
-    pg_data_t *pgdat = (pg_data_t *)arg;
+    let mut pgdat = arg;
 // check memoryless node
-    if (!node_state(pgdat.node_id, N_MEMORY))
+    if (!node_state(pgdat.node_id, N_MEMORY)) {
     return 0;
+    }
     seq_printf(m, "Page block order: %d\n", pageblock_order);
     seq_printf(m, "Pages per block:  %lu\n", pageblock_nr_pages);
     seq_putc(m, '\n');
@@ -1545,41 +1745,30 @@ unsafe extern "C" fn pagetypeinfo_show(m: *mut seq_file, arg: *mut c_void) -> c_
     pagetypeinfo_showmixedcount(m, pgdat);
     return 0;
     }
-    static const struct seq_operations fragmentation_op = {
-    .start	= frag_start,
-    .next	= frag_next,
-    .stop	= frag_stop,
-    .show	= frag_show,
-    };
-    static const struct seq_operations pagetypeinfo_op = {
-    .start	= frag_start,
-    .next	= frag_next,
-    .stop	= frag_stop,
-    .show	= pagetypeinfo_show,
-    };
+pub static mut seq_operations: usize = 0;
+pub static mut seq_operations: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn is_zone_first_populated(pgdat: *mut pg_data_t, zone: *mut zone) -> bool {
-    static bool is_zone_first_populated(pg_data_t *pgdat, struct zone *zone)
-    {
-    int zid;
-    for (zid = 0; zid < MAX_NR_ZONES; zid++) {
-    struct zone *compare = &pgdat.node_zones[zid];
-    if (populated_zone(compare))
-    let mut zone: return = = compare;
+    let mut zid = 0;
+    while (zid < MAX_NR_ZONES) {
+    let mut compare = &pgdat.node_zones[zid];
+    if (populated_zone(compare)) {
+pub static mut zone: return = 0;
+    }
     }
     return false;
     }
-    static void zoneinfo_show_print(struct seq_file *m, pg_data_t *pgdat,
-    struct zone *zone)
-    {
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn zoneinfo_show_print(m: *mut seq_file, pgdat: *mut pg_data_t, zone: *mut zone) {
+    let mut i = 0;
     seq_printf(m, "Node %d, zone %8s", pgdat.node_id, zone.name);
     if (is_zone_first_populated(pgdat, zone)) {
     seq_printf(m, "\n  per-node stats");
-    for (i = 0; i < NR_VM_NODE_STAT_ITEMS; i++) {
-    let mut pages: c_ulong = node_page_state_pages(pgdat, i);
-    if (vmstat_item_print_in_thp(i))
+    while (i < NR_VM_NODE_STAT_ITEMS) {
+pub static mut pages: c_ulong = 0;
+    if (vmstat_item_print_in_thp(i)) {
     pages /= HPAGE_PMD_NR;
+    }
     seq_printf(m, "\n      %-12s %lu", node_stat_name(i),
     pages);
     }
@@ -1608,26 +1797,29 @@ unsafe extern "C" fn is_zone_first_populated(pgdat: *mut pg_data_t, zone: *mut z
     seq_printf(m,
     "\n        protection: (%ld",
     zone.lowmem_reserve[0]);
-    for (i = 1; i < ARRAY_SIZE(zone.lowmem_reserve); i++)
+    for (i = 1; i < ARRAY_SIZE!(zone.lowmem_reserve); i++) {
     seq_printf(m, ", %ld", zone.lowmem_reserve[i]);
+    }
     seq_putc(m, ')');
 // If unpopulated, no other information is useful
     if (!populated_zone(zone)) {
     seq_putc(m, '\n');
     return;
     }
-    for (i = 0; i < NR_VM_ZONE_STAT_ITEMS; i++)
+    for (i = 0; i < NR_VM_ZONE_STAT_ITEMS; i++) {
     seq_printf(m, "\n      %-12s %lu", zone_stat_name(i),
     zone_page_state(zone, i));
+    }
 
     fold_vm_zone_numa_events(zone);
-    for (i = 0; i < NR_VM_NUMA_EVENT_ITEMS; i++)
+    for (i = 0; i < NR_VM_NUMA_EVENT_ITEMS; i++) {
     seq_printf(m, "\n      %-12s %lu", numa_stat_name(i),
     zone_numa_event_state(zone, i));
+    }
 
     seq_printf(m, "\n  pagesets");
     for_each_online_cpu(i) {
-    struct per_cpu_pages *pcp;
+pub static mut pcp: *mut c_void = core::ptr::null_mut();
     struct per_cpu_zonestat __maybe_unused *pzstats;
     pcp = per_cpu_ptr(zone.per_cpu_pageset, i);
     seq_printf(m,
@@ -1668,49 +1860,46 @@ unsafe extern "C" fn is_zone_first_populated(pgdat: *mut pg_data_t, zone: *mut z
 //
 #[no_mangle]
 unsafe extern "C" fn zoneinfo_show(m: *mut seq_file, arg: *mut c_void) -> c_int {
-    static int zoneinfo_show(struct seq_file *m, void *arg)
-    {
-    pg_data_t *pgdat = (pg_data_t *)arg;
+    let mut pgdat = arg;
     walk_zones_in_node(m, pgdat, false, false, zoneinfo_show_print);
     return 0;
     }
-    static const struct seq_operations zoneinfo_op = {
-    .start	= frag_start, /* iterate over all zones. The same as in
-// fragmentation.
-    .next	= frag_next,
-    .stop	= frag_stop,
-    .show	= zoneinfo_show,
-    };
+pub static mut seq_operations: usize = 0;
 
-    NR_VM_NUMA_EVENT_ITEMS + \
-    NR_VM_NODE_STAT_ITEMS + \
-    NR_VM_STAT_ITEMS + \
-    (IS_ENABLED(CONFIG_VM_EVENT_COUNTERS) ? \
+    NR_VM_NUMA_EVENT_ITEMS + 
+    NR_VM_NODE_STAT_ITEMS + 
+    NR_VM_STAT_ITEMS + 
+    (IS_ENABLED!(CONFIG_VM_EVENT_COUNTERS) ? 
     NR_VM_EVENT_ITEMS : 0))
-    static void *vmstat_start(struct seq_file *m, loff_t *pos)
-    {
-    unsigned long *v;
-    int i;
-    if (*pos >= NR_VMSTAT_ITEMS)
+#[no_mangle]
+pub unsafe extern "C" fn vmstat_start(m: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
+pub static mut v: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    if (*pos >= NR_VMSTAT_ITEMS) {
     return core::ptr::null_mut();
-    BUILD_BUG_ON(ARRAY_SIZE(vmstat_text) != NR_VMSTAT_ITEMS);
+    }
+    BUILD_BUG_ON!(ARRAY_SIZE!(vmstat_text) != NR_VMSTAT_ITEMS);
     fold_vm_numa_events();
-    v = kmalloc_array(NR_VMSTAT_ITEMS, sizeof(unsigned long), GFP_KERNEL);
+    v = kmalloc_array(NR_VMSTAT_ITEMS, sizeof!(unsigned long), GFP_KERNEL);
     m.private = v;
-    if (!v)
+    if (!v) {
     return ERR_PTR(-ENOMEM);
-    for (i = 0; i < NR_VM_ZONE_STAT_ITEMS; i++)
+    }
+    for (i = 0; i < NR_VM_ZONE_STAT_ITEMS; i++) {
     v[i] = global_zone_page_state(i);
+    }
     v += NR_VM_ZONE_STAT_ITEMS;
 
-    for (i = 0; i < NR_VM_NUMA_EVENT_ITEMS; i++)
+    for (i = 0; i < NR_VM_NUMA_EVENT_ITEMS; i++) {
     v[i] = global_numa_event_state(i);
+    }
     v += NR_VM_NUMA_EVENT_ITEMS;
 
-    for (i = 0; i < NR_VM_NODE_STAT_ITEMS; i++) {
+    while (i < NR_VM_NODE_STAT_ITEMS) {
     v[i] = global_node_page_state_pages(i);
-    if (vmstat_item_print_in_thp(i))
+    if (vmstat_item_print_in_thp(i)) {
     v[i] /= HPAGE_PMD_NR;
+    }
     }
     v += NR_VM_NODE_STAT_ITEMS;
     global_dirty_limits(v + NR_DIRTY_BG_THRESHOLD,
@@ -1723,21 +1912,20 @@ unsafe extern "C" fn zoneinfo_show(m: *mut seq_file, arg: *mut c_void) -> c_int 
     v[PGPGIN] /= 2;		/* sectors . kbytes */
     v[PGPGOUT] /= 2;
 
-    return (unsigned long *)m.private + *pos;
+    return m.private + *pos;
     }
-    static void *vmstat_next(struct seq_file *m, void *arg, loff_t *pos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn vmstat_next(m: *mut seq_file, arg: *mut c_void, pos: *mut loff_t) -> *mut c_void {
     (*pos)++;
-    if (*pos >= NR_VMSTAT_ITEMS)
+    if (*pos >= NR_VMSTAT_ITEMS) {
     return core::ptr::null_mut();
-    return (unsigned long *)m.private + *pos;
+    }
+    return m.private + *pos;
     }
 #[no_mangle]
 unsafe extern "C" fn vmstat_show(m: *mut seq_file, arg: *mut c_void) -> c_int {
-    static int vmstat_show(struct seq_file *m, void *arg)
-    {
-    unsigned long *l = arg;
-    let mut off: c_ulong = l - (unsigned long *)m.private;
+    let mut l = arg;
+pub static mut off: c_ulong = 0;
     seq_puts(m, vmstat_text[off]);
     seq_put_decimal_ull(m, " ", *l);
     seq_putc(m, '\n');
@@ -1752,34 +1940,24 @@ unsafe extern "C" fn vmstat_show(m: *mut seq_file, arg: *mut c_void) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn vmstat_stop(m: *mut seq_file, arg: *mut c_void) {
-    static void vmstat_stop(struct seq_file *m, void *arg)
-    {
     kfree(m.private);
     m.private = core::ptr::null_mut();
     }
-    static const struct seq_operations vmstat_op = {
-    .start	= vmstat_start,
-    .next	= vmstat_next,
-    .stop	= vmstat_stop,
-    .show	= vmstat_show,
-    };
+pub static mut seq_operations: usize = 0;
 
-    static DEFINE_PER_CPU(struct delayed_work, vmstat_work);
-    let mut __read_mostly: static int sysctl_stat_interval = HZ;
+pub static mut struct delayed_work: usize = 0;
+pub static mut : int sysctl_stat_interval = 0;
     static int vmstat_late_init_done;
 
 #[no_mangle]
 unsafe extern "C" fn refresh_vm_stats(work: *mut work_struct) {
-    static void refresh_vm_stats(struct work_struct *work)
-    {
     refresh_cpu_vm_stats(true);
     }
-    static int vmstat_refresh(const struct ctl_table *table, int write,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
-    long val;
-    int err;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn vmstat_refresh(table: *mut ctl_table, write: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
+    let mut val = 0;
+    let mut err = 0;
+    let mut i = 0;
 //
 // The regular update, every sysctl_stat_interval, may come later
 // than expected: leaving a significant amount in per_cpu buckets.
@@ -1793,48 +1971,52 @@ unsafe extern "C" fn refresh_vm_stats(work: *mut work_struct) {
 // the stats is negative, so we know to go looking for imbalance.
 //
     err = schedule_on_each_cpu(refresh_vm_stats);
-    if (err)
+    if (err) {
     return err;
-    for (i = 0; i < NR_VM_ZONE_STAT_ITEMS; i++) {
+    }
+    while (i < NR_VM_ZONE_STAT_ITEMS) {
 //
 // Skip checking stats known to go negative occasionally.
 //
-    switch (i) {
-    case NR_ZONE_WRITE_PENDING:
-    case NR_FREE_CMA_PAGES:
+    match (i) {
+    NR_ZONE_WRITE_PENDING => {
+    }
+    NR_FREE_CMA_PAGES => {
     continue;
+    }
     }
     val = atomic_long_read(&vm_zone_stat[i]);
     if (val < 0) {
-    pr_warn("%s: %s %ld\n",
+    pr_warn!("%s: %s %ld\n",
     __func__, zone_stat_name(i), val);
     }
     }
-    for (i = 0; i < NR_VM_NODE_STAT_ITEMS; i++) {
+    while (i < NR_VM_NODE_STAT_ITEMS) {
 //
 // Skip checking stats known to go negative occasionally.
 //
-    switch (i) {
-    case NR_WRITEBACK:
+    match (i) {
+    NR_WRITEBACK => {
     continue;
+    }
     }
     val = atomic_long_read(&vm_node_stat[i]);
     if (val < 0) {
-    pr_warn("%s: %s %ld\n",
+    pr_warn!("%s: %s %ld\n",
     __func__, node_stat_name(i), val);
     }
     }
-    if (write)
+    if (write) {
 // ppos += *lenp;
-    else
+    }
+    else {
 // lenp = 0;
+    }
     return 0;
     }
 
 #[no_mangle]
 unsafe extern "C" fn vmstat_update(w: *mut work_struct) {
-    static void vmstat_update(struct work_struct *w)
-    {
     if (refresh_cpu_vm_stats(true)) {
 //
 // Counters were updated so we expect more updates
@@ -1852,24 +2034,25 @@ unsafe extern "C" fn vmstat_update(w: *mut work_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn need_update(cpu: c_int) -> bool {
-    static bool need_update(int cpu)
-    {
-    pg_data_t *last_pgdat = core::ptr::null_mut();
-    struct zone *zone;
+    let mut last_pgdat = core::ptr::null_mut();
+pub static mut zone: *mut c_void = core::ptr::null_mut();
     for_each_populated_zone(zone) {
-    struct per_cpu_zonestat *pzstats = per_cpu_ptr(zone.per_cpu_zonestats, cpu);
-    struct per_cpu_nodestat *n;
+    let mut pzstats = per_cpu_ptr(zone.per_cpu_zonestats, cpu);
+pub static mut n: *mut c_void = core::ptr::null_mut();
 //
 // The fast way of checking if there are any vmstat diffs.
 //
-    if (memchr_inv(pzstats.vm_stat_diff, 0, sizeof(pzstats.vm_stat_diff)))
+    if (memchr_inv(pzstats.vm_stat_diff, 0, sizeof!(pzstats.vm_stat_diff))) {
     return true;
-    if (last_pgdat == zone.zone_pgdat)
+    }
+    if (last_pgdat == zone.zone_pgdat) {
     continue;
+    }
     last_pgdat = zone.zone_pgdat;
     n = per_cpu_ptr(zone.zone_pgdat.per_cpu_nodestats, cpu);
-    if (memchr_inv(n.vm_node_stat_diff, 0, sizeof(n.vm_node_stat_diff)))
+    if (memchr_inv(n.vm_node_stat_diff, 0, sizeof!(n.vm_node_stat_diff))) {
     return true;
+    }
     }
     return false;
     }
@@ -1880,14 +2063,15 @@ unsafe extern "C" fn need_update(cpu: c_int) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn quiet_vmstat() {
-    void quiet_vmstat(void)
-    {
-    if (system_state != SYSTEM_RUNNING)
+    if (system_state != SYSTEM_RUNNING) {
     return;
-    if (!delayed_work_pending(this_cpu_ptr(&vmstat_work)))
+    }
+    if (!delayed_work_pending(this_cpu_ptr(&vmstat_work))) {
     return;
-    if (!need_update(smp_processor_id()))
+    }
+    if (!need_update(smp_processor_id())) {
     return;
+    }
 //
 // Just refresh counters and do not care about the pending delayed
 // vmstat_update. It doesn't fire that often to matter and canceling
@@ -1902,23 +2086,19 @@ pub unsafe extern "C" fn quiet_vmstat() {
 // threads for vm statistics updates disabled because of
 // inactivity.
 //
-    static void vmstat_shepherd(struct work_struct *w);
-    static DECLARE_DEFERRABLE_WORK(shepherd, vmstat_shepherd);
+// forward_decl: vmstat_shepherd;
+pub static mut shepherd: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn vmstat_flush_workqueue() {
-    void vmstat_flush_workqueue(void)
-    {
     flush_workqueue(mm_percpu_wq);
     }
 #[no_mangle]
 unsafe extern "C" fn vmstat_shepherd(w: *mut work_struct) {
-    static void vmstat_shepherd(struct work_struct *w)
-    {
-    int cpu;
+    let mut cpu = 0;
     cpus_read_lock();
 // Check processors whose vmstat worker threads have been disabled
     for_each_online_cpu(cpu) {
-    struct delayed_work *dw = &per_cpu(vmstat_work, cpu);
+    let mut dw = &per_cpu(vmstat_work, cpu);
 //
 // In kernel users of vmstat counters either require the precise value and
 // they are using zone_page_state_snapshot interface or they can live with
@@ -1931,10 +2111,12 @@ unsafe extern "C" fn vmstat_shepherd(w: *mut work_struct) {
 // for all isolated CPUs to avoid interference with the isolated workload.
 //
     scoped_guard(rcu) {
-    if (cpu_is_isolated(cpu))
+    if (cpu_is_isolated(cpu)) {
     continue;
-    if (!work_busy(&dw.work) && need_update(cpu))
+    }
+    if (!work_busy(&dw.work) && need_update(cpu)) {
     queue_delayed_work_on(cpu, mm_percpu_wq, dw, 0);
+    }
     }
     cond_resched();
     }
@@ -1943,10 +2125,8 @@ unsafe extern "C" fn vmstat_shepherd(w: *mut work_struct) {
     round_jiffies_relative(sysctl_stat_interval));
     }
 #[no_mangle]
-unsafe extern "C" fn start_shepherd_timer() -> void __init {
-    static void __init start_shepherd_timer(void)
-    {
-    int cpu;
+unsafe extern "C" fn start_shepherd_timer()  {
+    let mut cpu = 0;
     for_each_possible_cpu(cpu) {
     INIT_DEFERRABLE_WORK(per_cpu_ptr(&vmstat_work, cpu),
     vmstat_update);
@@ -1956,28 +2136,27 @@ unsafe extern "C" fn start_shepherd_timer() -> void __init {
 // mm/vmstat:online enables and disables vmstat_work
 // symmetrically during CPU hotplug events.
 //
-    if (!cpu_online(cpu))
+    if (!cpu_online(cpu)) {
     disable_delayed_work_sync(&per_cpu(vmstat_work, cpu));
+    }
     }
     schedule_delayed_work(&shepherd,
     round_jiffies_relative(sysctl_stat_interval));
     }
 #[no_mangle]
-unsafe extern "C" fn init_cpu_node_state() -> void __init {
-    static void __init init_cpu_node_state(void)
-    {
-    int node;
+unsafe extern "C" fn init_cpu_node_state()  {
+    let mut node = 0;
     for_each_online_node(node) {
-    if (!cpumask_empty(cpumask_of_node(node)))
+    if (!cpumask_empty(cpumask_of_node(node))) {
     node_set_state(node, N_CPU);
+    }
     }
     }
 #[no_mangle]
 unsafe extern "C" fn vmstat_cpu_online(cpu: c_uint) -> c_int {
-    static int vmstat_cpu_online(unsigned int cpu)
-    {
-    if (vmstat_late_init_done)
+    if (vmstat_late_init_done) {
     refresh_zone_stat_thresholds();
+    }
     if (!node_state(cpu_to_node(cpu), N_CPU)) {
     node_set_state(cpu_to_node(cpu), N_CPU);
     }
@@ -1986,82 +2165,50 @@ unsafe extern "C" fn vmstat_cpu_online(cpu: c_uint) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn vmstat_cpu_down_prep(cpu: c_uint) -> c_int {
-    static int vmstat_cpu_down_prep(unsigned int cpu)
-    {
     disable_delayed_work_sync(&per_cpu(vmstat_work, cpu));
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn vmstat_cpu_dead(cpu: c_uint) -> c_int {
-    static int vmstat_cpu_dead(unsigned int cpu)
-    {
-    const struct cpumask *node_cpus;
-    int node;
+pub static mut node_cpus: *mut c_void = core::ptr::null_mut();
+    let mut node = 0;
     node = cpu_to_node(cpu);
     refresh_zone_stat_thresholds();
     node_cpus = cpumask_of_node(node);
-    if (!cpumask_empty(node_cpus))
+    if (!cpumask_empty(node_cpus)) {
     return 0;
+    }
     node_clear_state(node, N_CPU);
     return 0;
     }
 #[no_mangle]
-unsafe extern "C" fn vmstat_late_init() -> int __init {
-    static int __init vmstat_late_init(void)
-    {
+unsafe extern "C" fn vmstat_late_init() -> c_int {
     refresh_zone_stat_thresholds();
     vmstat_late_init_done = 1;
     return 0;
     }
-    late_initcall(vmstat_late_init);
+    late_initcall!(vmstat_late_init);
 
-    static const struct ctl_table vmstat_table[] = {
+pub static mut ctl_table: usize = 0;
 
-    {
-    .procname	= "stat_interval",
-    .data		= &sysctl_stat_interval,
-    .maxlen		= sizeof(sysctl_stat_interval),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec_jiffies,
-    },
-    {
-    .procname	= "stat_refresh",
-    .data		= core::ptr::null_mut(),
-    .maxlen		= 0,
-    .mode		= 0600,
-    .proc_handler	= vmstat_refresh,
-    },
-
-    {
-    .procname	= "numa_stat",
-    .data		= &sysctl_vm_numa_stat,
-    .maxlen		= sizeof(int),
-    .mode		= 0644,
-    .proc_handler	= sysctl_vm_numa_stat_handler,
-    .extra1		= SYSCTL_ZERO,
-    .extra2		= SYSCTL_ONE,
-    },
-
-    };
-
-    struct workqueue_struct *mm_percpu_wq;
+pub static mut mm_percpu_wq: *mut c_void = core::ptr::null_mut();
 #[no_mangle]
-pub unsafe extern "C" fn init_mm_internals() -> void __init {
-    void __init init_mm_internals(void)
-    {
+pub unsafe extern "C" fn init_mm_internals()  {
     int ret __maybe_unused;
     mm_percpu_wq = alloc_workqueue("mm_percpu_wq",
     WQ_MEM_RECLAIM | WQ_PERCPU, 0);
 
     ret = cpuhp_setup_state_nocalls(CPUHP_MM_VMSTAT_DEAD, "mm/vmstat:dead",
     core::ptr::null_mut(), vmstat_cpu_dead);
-    if (ret < 0)
-    pr_err("vmstat: failed to register 'dead' hotplug state\n");
+    if (ret < 0) {
+    pr_err!("vmstat: failed to register 'dead' hotplug state\n");
+    }
     ret = cpuhp_setup_state_nocalls(CPUHP_AP_ONLINE_DYN, "mm/vmstat:online",
     vmstat_cpu_online,
     vmstat_cpu_down_prep);
-    if (ret < 0)
-    pr_err("vmstat: failed to register 'online' hotplug state\n");
+    if (ret < 0) {
+    pr_err!("vmstat: failed to register 'online' hotplug state\n");
+    }
     cpus_read_lock();
     init_cpu_node_state();
     cpus_read_unlock();
@@ -2079,12 +2226,12 @@ pub unsafe extern "C" fn init_mm_internals() -> void __init {
 // Return an index indicating how much of the available free memory is
 // unusable for an allocation of the requested size.
 //
-    static int unusable_free_index(unsigned int order,
-    struct contig_page_info *info)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn unusable_free_index(order: c_uint, info: *mut contig_page_info) -> c_int {
 // No free memory is interpreted as all free memory is unusable
-    if (info.free_pages == 0)
+    if (info.free_pages == 0) {
     return 1000;
+    }
 //
 // Index should be a value between 0 and 1. Return a value to 3
 // decimal places.
@@ -2094,16 +2241,15 @@ pub unsafe extern "C" fn init_mm_internals() -> void __init {
 //
     return div_u64((info.free_pages - (info.free_blocks_suitable << order)) * 1000ULL, info.free_pages);
     }
-    static void unusable_show_print(struct seq_file *m,
-    pg_data_t *pgdat, struct zone *zone)
-    {
-    unsigned int order;
-    int index;
-    struct contig_page_info info;
+#[no_mangle]
+pub unsafe extern "C" fn unusable_show_print(m: *mut seq_file, pgdat: *mut pg_data_t, zone: *mut zone) {
+    let mut order = 0;
+    let mut index = 0;
+pub static mut info: usize = 0;
     seq_printf(m, "Node %d, zone %8s ",
     pgdat.node_id,
     zone.name);
-    for (order = 0; order < NR_PAGE_ORDERS; ++order) {
+    while (order < NR_PAGE_ORDERS) {
     fill_contig_page_info(zone, order, &info);
     index = unusable_free_index(order, &info);
     seq_printf(m, "%d.%03d ", index / 1000, index % 1000);
@@ -2121,33 +2267,26 @@ pub unsafe extern "C" fn init_mm_internals() -> void __init {
 //
 #[no_mangle]
 unsafe extern "C" fn unusable_show(m: *mut seq_file, arg: *mut c_void) -> c_int {
-    static int unusable_show(struct seq_file *m, void *arg)
-    {
-    pg_data_t *pgdat = (pg_data_t *)arg;
+    let mut pgdat = arg;
 // check memoryless node
-    if (!node_state(pgdat.node_id, N_MEMORY))
+    if (!node_state(pgdat.node_id, N_MEMORY)) {
     return 0;
+    }
     walk_zones_in_node(m, pgdat, true, false, unusable_show_print);
     return 0;
     }
-    static const struct seq_operations unusable_sops = {
-    .start	= frag_start,
-    .next	= frag_next,
-    .stop	= frag_stop,
-    .show	= unusable_show,
-    };
-    DEFINE_SEQ_ATTRIBUTE(unusable);
-    static void extfrag_show_print(struct seq_file *m,
-    pg_data_t *pgdat, struct zone *zone)
-    {
-    unsigned int order;
-    int index;
+pub static mut seq_operations: usize = 0;
+pub static mut unusable: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn extfrag_show_print(m: *mut seq_file, pgdat: *mut pg_data_t, zone: *mut zone) {
+    let mut order = 0;
+    let mut index = 0;
 // Alloc on stack as interrupts are disabled for zone walk
-    struct contig_page_info info;
+pub static mut info: usize = 0;
     seq_printf(m, "Node %d, zone %8s ",
     pgdat.node_id,
     zone.name);
-    for (order = 0; order < NR_PAGE_ORDERS; ++order) {
+    while (order < NR_PAGE_ORDERS) {
     fill_contig_page_info(zone, order, &info);
     index = __fragmentation_index(order, &info);
     seq_printf(m, "%2d.%03d ", index / 1000, index % 1000);
@@ -2159,24 +2298,15 @@ unsafe extern "C" fn unusable_show(m: *mut seq_file, arg: *mut c_void) -> c_int 
 //
 #[no_mangle]
 unsafe extern "C" fn extfrag_show(m: *mut seq_file, arg: *mut c_void) -> c_int {
-    static int extfrag_show(struct seq_file *m, void *arg)
-    {
-    pg_data_t *pgdat = (pg_data_t *)arg;
+    let mut pgdat = arg;
     walk_zones_in_node(m, pgdat, true, false, extfrag_show_print);
     return 0;
     }
-    static const struct seq_operations extfrag_sops = {
-    .start	= frag_start,
-    .next	= frag_next,
-    .stop	= frag_stop,
-    .show	= extfrag_show,
-    };
-    DEFINE_SEQ_ATTRIBUTE(extfrag);
+pub static mut seq_operations: usize = 0;
+pub static mut extfrag: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn extfrag_debug_init() -> int __init {
-    static int __init extfrag_debug_init(void)
-    {
-    struct dentry *extfrag_debug_root;
+unsafe extern "C" fn extfrag_debug_init() -> c_int {
+pub static mut extfrag_debug_root: *mut c_void = core::ptr::null_mut();
     extfrag_debug_root = debugfs_create_dir("extfrag", core::ptr::null_mut());
     debugfs_create_file("unusable_index", 0444, extfrag_debug_root, core::ptr::null_mut(),
     &unusable_fops);
@@ -2184,4 +2314,4 @@ unsafe extern "C" fn extfrag_debug_init() -> int __init {
     &extfrag_fops);
     return 0;
     }
-    module_init(extfrag_debug_init);
+    module_init!(extfrag_debug_init);

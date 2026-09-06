@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -68,12 +318,12 @@ pub const RATELIMIT_CALC_SHIFT: c_int = 10;
 // After a CPU has dirtied this many pages, balance_dirty_pages_ratelimited
 // will look to see if it needs to force writeback or throttling.
 //
-    let mut ratelimit_pages: static long = 32;
+pub static mut ratelimit_pages: long = 32;
 // The following parameters are exported via /proc/sys/vm
 //
 // Start background writeback (via writeback threads) at this percentage
 //
-    let mut dirty_background_ratio: static int = 10;
+pub static mut dirty_background_ratio: int = 10;
 //
 // dirty_background_bytes starts at 0 (disabled) so that it is a function of
 // dirty_background_ratio * the amount of dirtyable memory
@@ -87,7 +337,7 @@ pub const RATELIMIT_CALC_SHIFT: c_int = 10;
 //
 // The generator of dirty data starts writeback at this percentage
 //
-    let mut vm_dirty_ratio: static int = 20;
+pub static mut vm_dirty_ratio: int = 20;
 //
 // vm_dirty_bytes starts at 0 (disabled) so that it is a function of
 // vm_dirty_ratio * the amount of dirtyable memory
@@ -96,51 +346,48 @@ pub const RATELIMIT_CALC_SHIFT: c_int = 10;
 //
 // The interval between `kupdate'-style writebacks
 //
-    unsigned int dirty_writeback_interval = 5 * 100; /* centiseconds */
+    let mut dirty_writeback_interval = 5 * 100; /* centiseconds */
     EXPORT_SYMBOL_GPL(dirty_writeback_interval);
 //
 // The longest time for which data is allowed to remain dirty
 //
-    unsigned int dirty_expire_interval = 30 * 100; /* centiseconds */
+    let mut dirty_expire_interval = 30 * 100; /* centiseconds */
 // End of sysctl-exported parameters
-    struct wb_domain global_wb_domain;
+pub static mut global_wb_domain: usize = 0;
 //
 // Length of period for aging writeout fractions of bdis. This is an
 // arbitrarily chosen number. The longer the period, the slower fractions will
 // reflect changes in current writeout rate.
 //
 
-    .dom = &global_wb_domain,		\
+    .dom = &global_wb_domain,		
     .wb_completions = &(__wb).completions
 
-    .dom = mem_cgroup_wb_domain(__wb),	\
-    .wb_completions = &(__wb).memcg_completions, \
+    .dom = mem_cgroup_wb_domain(__wb),	
+    .wb_completions = &(__wb).memcg_completions, 
     .gdtc = __gdtc
 #[no_mangle]
 unsafe extern "C" fn mdtc_valid(dtc: *mut dirty_throttle_control) -> bool {
-    static bool mdtc_valid(struct dirty_throttle_control *dtc)
-    {
     return dtc.dom;
     }
-    static struct wb_domain *dtc_dom(struct dirty_throttle_control *dtc)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn dtc_dom(dtc: *mut dirty_throttle_control) -> *mut c_void {
     return dtc.dom;
     }
-    static struct dirty_throttle_control *mdtc_gdtc(struct dirty_throttle_control *mdtc)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn mdtc_gdtc(mdtc: *mut dirty_throttle_control) -> *mut c_void {
     return mdtc.gdtc;
     }
-    static struct fprop_local_percpu *wb_memcg_completions(struct bdi_writeback *wb)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn wb_memcg_completions(wb: *mut bdi_writeback) -> *mut c_void {
     return &wb.memcg_completions;
     }
-    static void wb_min_max_ratio(struct bdi_writeback *wb,
-    unsigned long *minp, unsigned long *maxp)
-    {
-    let mut this_bw: c_ulong = READ_ONCE(wb.avg_write_bandwidth);
-    let mut tot_bw: c_ulong = atomic_long_read(&wb.bdi.tot_write_bandwidth);
-    let mut min: c_ulonglong = wb.bdi.min_ratio;
-    let mut max: c_ulonglong = wb.bdi.max_ratio;
+#[no_mangle]
+pub unsafe extern "C" fn wb_min_max_ratio(wb: *mut bdi_writeback, minp: *mut c_ulong, maxp: *mut c_ulong) {
+pub static mut this_bw: c_ulong = 0;
+pub static mut tot_bw: c_ulong = 0;
+pub static mut min: c_ulonglong = 0;
+pub static mut max: c_ulonglong = 0;
 //
 // @wb may already be clean by the time control reaches here and
 // the total may not include its bw.
@@ -164,25 +411,30 @@ unsafe extern "C" fn mdtc_valid(dtc: *mut dirty_throttle_control) -> bool {
 
 #[no_mangle]
 unsafe extern "C" fn mdtc_valid(dtc: *mut dirty_throttle_control) -> bool {
-    static bool mdtc_valid(struct dirty_throttle_control *dtc)
-    {
     return false;
     }
-    static struct wb_domain *dtc_dom(struct dirty_throttle_control *dtc)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: dtc_dom
+pub unsafe extern "C" fn dtc_dom_dup(dtc: *mut dirty_throttle_control) -> *mut c_void {
     return &global_wb_domain;
     }
-    static struct dirty_throttle_control *mdtc_gdtc(struct dirty_throttle_control *mdtc)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: mdtc_gdtc
+pub unsafe extern "C" fn mdtc_gdtc_dup(mdtc: *mut dirty_throttle_control) -> *mut c_void {
     return core::ptr::null_mut();
     }
-    static struct fprop_local_percpu *wb_memcg_completions(struct bdi_writeback *wb)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: wb_memcg_completions
+pub unsafe extern "C" fn wb_memcg_completions_dup(wb: *mut bdi_writeback) -> *mut c_void {
     return core::ptr::null_mut();
     }
-    static void wb_min_max_ratio(struct bdi_writeback *wb,
-    unsigned long *minp, unsigned long *maxp)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: wb_min_max_ratio
+pub unsafe extern "C" fn wb_min_max_ratio_dup(wb: *mut bdi_writeback, minp: *mut c_ulong, maxp: *mut c_ulong) {
 // minp = wb->bdi->min_ratio;
 // maxp = wb->bdi->max_ratio;
     }
@@ -212,14 +464,13 @@ unsafe extern "C" fn mdtc_valid(dtc: *mut dirty_throttle_control) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn node_dirtyable_memory(pgdat: *mut pglist_data) -> c_ulong {
-    static unsigned long node_dirtyable_memory(struct pglist_data *pgdat)
-    {
-    let mut nr_pages: c_ulong = 0;
-    int z;
-    for (z = 0; z < MAX_NR_ZONES; z++) {
-    struct zone *zone = pgdat.node_zones + z;
-    if (!populated_zone(zone))
+pub static mut nr_pages: c_ulong = 0;
+    let mut z = 0;
+    while (z < MAX_NR_ZONES) {
+    let mut zone = pgdat.node_zones + z;
+    if (!populated_zone(zone)) {
     continue;
+    }
     nr_pages += zone_page_state(zone, NR_FREE_PAGES);
     }
 //
@@ -234,21 +485,21 @@ unsafe extern "C" fn node_dirtyable_memory(pgdat: *mut pglist_data) -> c_ulong {
     }
 #[no_mangle]
 unsafe extern "C" fn highmem_dirtyable_memory(total: c_ulong) -> c_ulong {
-    static unsigned long highmem_dirtyable_memory(unsigned long total)
-    {
 
-    int node;
-    let mut x: c_ulong = 0;
-    int i;
+    let mut node = 0;
+pub static mut x: c_ulong = 0;
+    let mut i = 0;
     for_each_node_state(node, N_HIGH_MEMORY) {
-    for (i = ZONE_NORMAL + 1; i < MAX_NR_ZONES; i++) {
-    struct zone *z;
-    unsigned long nr_pages;
-    if (!is_highmem_idx(i))
+    while (i < MAX_NR_ZONES) {
+pub static mut z: *mut c_void = core::ptr::null_mut();
+    let mut nr_pages = 0;
+    if (!is_highmem_idx(i)) {
     continue;
+    }
     z = &NODE_DATA(node).node_zones[i];
-    if (!populated_zone(z))
+    if (!populated_zone(z)) {
     continue;
+    }
     nr_pages = zone_page_state(z, NR_FREE_PAGES);
 // watch for underflows
     nr_pages -= min(nr_pages, high_wmark_pages(z));
@@ -276,9 +527,7 @@ unsafe extern "C" fn highmem_dirtyable_memory(total: c_ulong) -> c_ulong {
 //
 #[no_mangle]
 unsafe extern "C" fn global_dirtyable_memory() -> c_ulong {
-    static unsigned long global_dirtyable_memory(void)
-    {
-    unsigned long x;
+    let mut x = 0;
     x = global_zone_page_state(NR_FREE_PAGES);
 //
 // Pages reserved for the kernel should not be considered
@@ -288,8 +537,9 @@ unsafe extern "C" fn global_dirtyable_memory() -> c_ulong {
     x -= min(x, totalreserve_pages);
     x += global_node_page_state(NR_INACTIVE_FILE);
     x += global_node_page_state(NR_ACTIVE_FILE);
-    if (!vm_highmem_is_dirtyable)
+    if (!vm_highmem_is_dirtyable) {
     x -= highmem_dirtyable_memory(x);
+    }
     return x + 1;	/* Ensure that we never return 0 */
     }
 //
@@ -303,21 +553,19 @@ unsafe extern "C" fn global_dirtyable_memory() -> c_ulong {
 //
 #[no_mangle]
 unsafe extern "C" fn domain_dirty_limits(dtc: *mut dirty_throttle_control) {
-    static void domain_dirty_limits(struct dirty_throttle_control *dtc)
-    {
-    let mut available_memory: c_ulong = dtc.avail;
-    struct dirty_throttle_control *gdtc = mdtc_gdtc(dtc);
-    let mut bytes: c_ulong = vm_dirty_bytes;
-    let mut bg_bytes: c_ulong = dirty_background_bytes;
+pub static mut available_memory: c_ulong = 0;
+    let mut gdtc = mdtc_gdtc(dtc);
+pub static mut bytes: c_ulong = 0;
+pub static mut bg_bytes: c_ulong = 0;
 // convert ratios to per-PAGE_SIZE for higher precision
-    let mut ratio: c_ulong = (vm_dirty_ratio * PAGE_SIZE) / 100;
-    let mut bg_ratio: c_ulong = (dirty_background_ratio * PAGE_SIZE) / 100;
-    unsigned long thresh;
-    unsigned long bg_thresh;
-    struct task_struct *tsk;
+pub static mut ratio: c_ulong = 0;
+pub static mut bg_ratio: c_ulong = 0;
+    let mut thresh = 0;
+    let mut bg_thresh = 0;
+pub static mut tsk: *mut c_void = core::ptr::null_mut();
 // gdtc is !NULL iff @dtc is for memcg domain
     if (gdtc) {
-    let mut global_avail: c_ulong = gdtc.avail;
+pub static mut global_avail: c_ulong = 0;
 //
 // The byte settings can't be applied directly to memcg
 // domains.  Convert them to ratios by scaling against
@@ -325,22 +573,28 @@ unsafe extern "C" fn domain_dirty_limits(dtc: *mut dirty_throttle_control) {
 // per-PAGE_SIZE, they can be obtained by dividing bytes by
 // number of pages.
 //
-    if (bytes)
+    if (bytes) {
     ratio = min(DIV_ROUND_UP(bytes, global_avail),
     PAGE_SIZE);
-    if (bg_bytes)
+    }
+    if (bg_bytes) {
     bg_ratio = min(DIV_ROUND_UP(bg_bytes, global_avail),
     PAGE_SIZE);
+    }
     bytes = bg_bytes = 0;
     }
-    if (bytes)
+    if (bytes) {
     thresh = DIV_ROUND_UP(bytes, PAGE_SIZE);
-    else
+    }
+    else {
     thresh = (ratio * available_memory) / PAGE_SIZE;
-    if (bg_bytes)
+    }
+    if (bg_bytes) {
     bg_thresh = DIV_ROUND_UP(bg_bytes, PAGE_SIZE);
-    else
+    }
+    else {
     bg_thresh = (bg_ratio * available_memory) / PAGE_SIZE;
+    }
     tsk = current;
     if (rt_or_dl_task(tsk)) {
     bg_thresh += bg_thresh / 4 + global_wb_domain.dirty_limit / 32;
@@ -350,16 +604,19 @@ unsafe extern "C" fn domain_dirty_limits(dtc: *mut dirty_throttle_control) {
 // Dirty throttling logic assumes the limits in page units fit into
 // 32-bits. This gives 16TB dirty limits max which is hopefully enough.
 //
-    if (thresh > UINT_MAX)
+    if (thresh > UINT_MAX) {
     thresh = UINT_MAX;
+    }
 // This makes sure bg_thresh is within 32-bits as well
-    if (bg_thresh >= thresh)
+    if (bg_thresh >= thresh) {
     bg_thresh = thresh / 2;
+    }
     dtc.thresh = thresh;
     dtc.bg_thresh = bg_thresh;
 // we should eventually report the domain in the TP
-    if (!gdtc)
+    if (!gdtc) {
     trace_global_dirty_state(bg_thresh, thresh);
+    }
     }
 //
 // global_dirty_limits - background-writeback and dirty-throttling thresholds
@@ -371,9 +628,7 @@ unsafe extern "C" fn domain_dirty_limits(dtc: *mut dirty_throttle_control) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn global_dirty_limits(pbackground: *mut c_ulong, pdirty: *mut c_ulong) {
-    void global_dirty_limits(unsigned long *pbackground, unsigned long *pdirty)
-    {
-    let mut gdtc: dirty_throttle_control = { GDTC_INIT_NO_WB };
+pub static mut gdtc: dirty_throttle_control = 0;
     gdtc.avail = global_dirtyable_memory();
     domain_dirty_limits(&gdtc);
 // pbackground = gdtc.bg_thresh;
@@ -388,18 +643,19 @@ pub unsafe extern "C" fn global_dirty_limits(pbackground: *mut c_ulong, pdirty: 
 //
 #[no_mangle]
 unsafe extern "C" fn node_dirty_limit(pgdat: *mut pglist_data) -> c_ulong {
-    static unsigned long node_dirty_limit(struct pglist_data *pgdat)
-    {
-    let mut node_memory: c_ulong = node_dirtyable_memory(pgdat);
-    struct task_struct *tsk = current;
-    unsigned long dirty;
-    if (vm_dirty_bytes)
+pub static mut node_memory: c_ulong = 0;
+    let mut tsk = current;
+    let mut dirty = 0;
+    if (vm_dirty_bytes) {
     dirty = DIV_ROUND_UP(vm_dirty_bytes, PAGE_SIZE) *
     node_memory / global_dirtyable_memory();
-    else
+    }
+    else {
     dirty = vm_dirty_ratio * node_memory / 100;
-    if (rt_or_dl_task(tsk))
+    }
+    if (rt_or_dl_task(tsk)) {
     dirty += dirty / 4;
+    }
 //
 // Dirty throttling logic assumes the limits in page units fit into
 // 32-bits. This gives 16TB dirty limits max which is hopefully enough.
@@ -415,29 +671,26 @@ unsafe extern "C" fn node_dirty_limit(pgdat: *mut pglist_data) -> c_ulong {
 //
 #[no_mangle]
 pub unsafe extern "C" fn node_dirty_ok(pgdat: *mut pglist_data) -> bool {
-    bool node_dirty_ok(struct pglist_data *pgdat)
-    {
-    let mut limit: c_ulong = node_dirty_limit(pgdat);
-    let mut nr_pages: c_ulong = 0;
+pub static mut limit: c_ulong = 0;
+pub static mut nr_pages: c_ulong = 0;
     nr_pages += node_page_state(pgdat, NR_FILE_DIRTY);
     nr_pages += node_page_state(pgdat, NR_WRITEBACK);
     return nr_pages <= limit;
     }
 
-    static int dirty_background_ratio_handler(const struct ctl_table *table, int write,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn dirty_background_ratio_handler(table: *mut ctl_table, write: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
+    let mut ret = 0;
     ret = proc_dointvec_minmax(table, write, buffer, lenp, ppos);
-    if (ret == 0 && write)
+    if (ret == 0 && write) {
     dirty_background_bytes = 0;
+    }
     return ret;
     }
-    static int dirty_background_bytes_handler(const struct ctl_table *table, int write,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
-    int ret;
-    let mut old_bytes: c_ulong = dirty_background_bytes;
+#[no_mangle]
+pub unsafe extern "C" fn dirty_background_bytes_handler(table: *mut ctl_table, write: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
+    let mut ret = 0;
+pub static mut old_bytes: c_ulong = 0;
     ret = proc_doulongvec_minmax(table, write, buffer, lenp, ppos);
     if (ret == 0 && write) {
     if (DIV_ROUND_UP(dirty_background_bytes, PAGE_SIZE) >
@@ -449,11 +702,10 @@ pub unsafe extern "C" fn node_dirty_ok(pgdat: *mut pglist_data) -> bool {
     }
     return ret;
     }
-    static int dirty_ratio_handler(const struct ctl_table *table, int write, void *buffer,
-    size_t *lenp, loff_t *ppos)
-    {
-    let mut old_ratio: c_int = vm_dirty_ratio;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn dirty_ratio_handler(table: *mut ctl_table, write: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
+pub static mut old_ratio: c_int = 0;
+    let mut ret = 0;
     ret = proc_dointvec_minmax(table, write, buffer, lenp, ppos);
     if (ret == 0 && write && vm_dirty_ratio != old_ratio) {
     vm_dirty_bytes = 0;
@@ -461,11 +713,10 @@ pub unsafe extern "C" fn node_dirty_ok(pgdat: *mut pglist_data) -> bool {
     }
     return ret;
     }
-    static int dirty_bytes_handler(const struct ctl_table *table, int write,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
-    let mut old_bytes: c_ulong = vm_dirty_bytes;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn dirty_bytes_handler(table: *mut ctl_table, write: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
+pub static mut old_bytes: c_ulong = 0;
+    let mut ret = 0;
     ret = proc_doulongvec_minmax(table, write, buffer, lenp, ppos);
     if (ret == 0 && write && vm_dirty_bytes != old_bytes) {
     if (DIV_ROUND_UP(vm_dirty_bytes, PAGE_SIZE) > UINT_MAX) {
@@ -480,18 +731,15 @@ pub unsafe extern "C" fn node_dirty_ok(pgdat: *mut pglist_data) -> bool {
 
 #[no_mangle]
 unsafe extern "C" fn wp_next_time(cur_time: c_ulong) -> c_ulong {
-    static unsigned long wp_next_time(unsigned long cur_time)
-    {
     cur_time += VM_COMPLETIONS_PERIOD_LEN;
 // 0 has a special meaning...
-    if (!cur_time)
+    if (!cur_time) {
     return 1;
+    }
     return cur_time;
     }
-    static void wb_domain_writeout_add(struct wb_domain *dom,
-    struct fprop_local_percpu *completions,
-    unsigned int max_prop_frac, long nr)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn wb_domain_writeout_add(dom: *mut wb_domain, completions: *mut fprop_local_percpu, max_prop_frac: c_uint, nr: c_long) {
     __fprop_add_percpu_max(&dom.completions, completions,
     max_prop_frac, nr);
 // First event after period switching was turned off?
@@ -512,16 +760,15 @@ unsafe extern "C" fn wp_next_time(cur_time: c_ulong) -> c_ulong {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __wb_writeout_add(wb: *mut bdi_writeback, nr: c_long) {
-    static inline void __wb_writeout_add(struct bdi_writeback *wb, long nr)
-    {
-    struct wb_domain *cgdom;
+pub static mut cgdom: *mut c_void = core::ptr::null_mut();
     wb_stat_mod(wb, WB_WRITTEN, nr);
     wb_domain_writeout_add(&global_wb_domain, &wb.completions,
     wb.bdi.max_prop_frac, nr);
     cgdom = mem_cgroup_wb_domain(wb);
-    if (cgdom)
+    if (cgdom) {
     wb_domain_writeout_add(cgdom, wb_memcg_completions(wb),
     wb.bdi.max_prop_frac, nr);
+    }
     }
 //
 // On idle system, we can be called long after we scheduled because we use
@@ -529,10 +776,8 @@ pub unsafe extern "C" fn __wb_writeout_add(wb: *mut bdi_writeback, nr: c_long) {
 //
 #[no_mangle]
 unsafe extern "C" fn writeout_period(t: *mut timer_list) {
-    static void writeout_period(struct timer_list *t)
-    {
-    struct wb_domain *dom = timer_container_of(dom, t, period_timer);
-    int miss_periods = (jiffies - dom.period_time) /
+    let mut dom = timer_container_of(dom, t, period_timer);
+    let mut miss_periods = (jiffies - dom.period_time) /
     VM_COMPLETIONS_PERIOD_LEN;
     if (fprop_new_period(&dom.completions, miss_periods + 1)) {
     dom.period_time = wp_next_time(dom.period_time +
@@ -548,9 +793,7 @@ unsafe extern "C" fn writeout_period(t: *mut timer_list) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn wb_domain_init(dom: *mut wb_domain, gfp: gfp_t) -> c_int {
-    int wb_domain_init(struct wb_domain *dom, gfp_t gfp)
-    {
-    memset(dom, 0, sizeof(*dom));
+    memset(dom, 0, sizeof!(*dom));
     spin_lock_init(&dom.lock);
     timer_setup(&dom.period_timer, writeout_period, TIMER_DEFERRABLE);
     dom.dirty_limit_tstamp = jiffies;
@@ -559,8 +802,6 @@ pub unsafe extern "C" fn wb_domain_init(dom: *mut wb_domain, gfp: gfp_t) -> c_in
 
 #[no_mangle]
 pub unsafe extern "C" fn wb_domain_exit(dom: *mut wb_domain) {
-    void wb_domain_exit(struct wb_domain *dom)
-    {
     timer_delete_sync(&dom.period_timer);
     fprop_global_destroy(&dom.completions);
     }
@@ -573,45 +814,40 @@ pub unsafe extern "C" fn wb_domain_exit(dom: *mut wb_domain) {
     static unsigned int bdi_min_ratio;
 #[no_mangle]
 unsafe extern "C" fn bdi_check_pages_limit(pages: c_ulong) -> c_int {
-    static int bdi_check_pages_limit(unsigned long pages)
-    {
-    let mut max_dirty_pages: c_ulong = global_dirtyable_memory();
-    if (pages > max_dirty_pages)
+pub static mut max_dirty_pages: c_ulong = 0;
+    if (pages > max_dirty_pages) {
     return -EINVAL;
+    }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn bdi_ratio_from_pages(pages: c_ulong) -> c_ulong {
-    static unsigned long bdi_ratio_from_pages(unsigned long pages)
-    {
-    unsigned long background_thresh;
-    unsigned long dirty_thresh;
-    unsigned long ratio;
+    let mut background_thresh = 0;
+    let mut dirty_thresh = 0;
+    let mut ratio = 0;
     global_dirty_limits(&background_thresh, &dirty_thresh);
-    if (!dirty_thresh)
+    if (!dirty_thresh) {
     return -EINVAL;
+    }
     ratio = div64_u64(pages * 100ULL * BDI_RATIO_SCALE, dirty_thresh);
     return ratio;
     }
 #[no_mangle]
 unsafe extern "C" fn bdi_get_bytes(ratio: c_uint) -> u64 {
-    static u64 bdi_get_bytes(unsigned int ratio)
-    {
-    unsigned long background_thresh;
-    unsigned long dirty_thresh;
-    u64 bytes;
+    let mut background_thresh = 0;
+    let mut dirty_thresh = 0;
+    let mut bytes = 0;
     global_dirty_limits(&background_thresh, &dirty_thresh);
     bytes = (dirty_thresh * PAGE_SIZE * ratio) / BDI_RATIO_SCALE / 100;
     return bytes;
     }
 #[no_mangle]
 unsafe extern "C" fn __bdi_set_min_ratio(bdi: *mut backing_dev_info, min_ratio: c_uint) -> c_int {
-    static int __bdi_set_min_ratio(struct backing_dev_info *bdi, unsigned int min_ratio)
-    {
-    unsigned int delta;
-    let mut ret: c_int = 0;
-    if (min_ratio > 100 * BDI_RATIO_SCALE)
+    let mut delta = 0;
+pub static mut ret: c_int = 0;
+    if (min_ratio > 100 * BDI_RATIO_SCALE) {
     return -EINVAL;
+    }
     spin_lock_bh(&bdi_lock);
     if (min_ratio > bdi.max_ratio) {
     ret = -EINVAL;
@@ -635,11 +871,10 @@ unsafe extern "C" fn __bdi_set_min_ratio(bdi: *mut backing_dev_info, min_ratio: 
     }
 #[no_mangle]
 unsafe extern "C" fn __bdi_set_max_ratio(bdi: *mut backing_dev_info, max_ratio: c_uint) -> c_int {
-    static int __bdi_set_max_ratio(struct backing_dev_info *bdi, unsigned int max_ratio)
-    {
-    let mut ret: c_int = 0;
-    if (max_ratio > 100 * BDI_RATIO_SCALE)
+pub static mut ret: c_int = 0;
+    if (max_ratio > 100 * BDI_RATIO_SCALE) {
     return -EINVAL;
+    }
     spin_lock_bh(&bdi_lock);
     if (bdi.min_ratio > max_ratio) {
     ret = -EINVAL;
@@ -653,132 +888,117 @@ unsafe extern "C" fn __bdi_set_max_ratio(bdi: *mut backing_dev_info, max_ratio: 
     }
 #[no_mangle]
 pub unsafe extern "C" fn bdi_set_min_ratio_no_scale(bdi: *mut backing_dev_info, min_ratio: c_uint) -> c_int {
-    int bdi_set_min_ratio_no_scale(struct backing_dev_info *bdi, unsigned int min_ratio)
-    {
     return __bdi_set_min_ratio(bdi, min_ratio);
     }
 #[no_mangle]
 pub unsafe extern "C" fn bdi_set_max_ratio_no_scale(bdi: *mut backing_dev_info, max_ratio: c_uint) -> c_int {
-    int bdi_set_max_ratio_no_scale(struct backing_dev_info *bdi, unsigned int max_ratio)
-    {
     return __bdi_set_max_ratio(bdi, max_ratio);
     }
 #[no_mangle]
 pub unsafe extern "C" fn bdi_set_min_ratio(bdi: *mut backing_dev_info, min_ratio: c_uint) -> c_int {
-    int bdi_set_min_ratio(struct backing_dev_info *bdi, unsigned int min_ratio)
-    {
     return __bdi_set_min_ratio(bdi, min_ratio * BDI_RATIO_SCALE);
     }
 #[no_mangle]
 pub unsafe extern "C" fn bdi_set_max_ratio(bdi: *mut backing_dev_info, max_ratio: c_uint) -> c_int {
-    int bdi_set_max_ratio(struct backing_dev_info *bdi, unsigned int max_ratio)
-    {
     return __bdi_set_max_ratio(bdi, max_ratio * BDI_RATIO_SCALE);
     }
     EXPORT_SYMBOL(bdi_set_max_ratio);
 #[no_mangle]
 pub unsafe extern "C" fn bdi_get_min_bytes(bdi: *mut backing_dev_info) -> u64 {
-    u64 bdi_get_min_bytes(struct backing_dev_info *bdi)
-    {
     return bdi_get_bytes(bdi.min_ratio);
     }
 #[no_mangle]
 pub unsafe extern "C" fn bdi_set_min_bytes(bdi: *mut backing_dev_info, min_bytes: u64) -> c_int {
-    int bdi_set_min_bytes(struct backing_dev_info *bdi, u64 min_bytes)
-    {
-    int ret;
-    let mut pages: c_ulong = min_bytes >> PAGE_SHIFT;
-    long min_ratio;
+    let mut ret = 0;
+pub static mut pages: c_ulong = 0;
+    let mut min_ratio = 0;
     ret = bdi_check_pages_limit(pages);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     min_ratio = bdi_ratio_from_pages(pages);
-    if (min_ratio < 0)
+    if (min_ratio < 0) {
     return min_ratio;
+    }
     return __bdi_set_min_ratio(bdi, min_ratio);
     }
 #[no_mangle]
 pub unsafe extern "C" fn bdi_get_max_bytes(bdi: *mut backing_dev_info) -> u64 {
-    u64 bdi_get_max_bytes(struct backing_dev_info *bdi)
-    {
     return bdi_get_bytes(bdi.max_ratio);
     }
 #[no_mangle]
 pub unsafe extern "C" fn bdi_set_max_bytes(bdi: *mut backing_dev_info, max_bytes: u64) -> c_int {
-    int bdi_set_max_bytes(struct backing_dev_info *bdi, u64 max_bytes)
-    {
-    int ret;
-    let mut pages: c_ulong = max_bytes >> PAGE_SHIFT;
-    long max_ratio;
+    let mut ret = 0;
+pub static mut pages: c_ulong = 0;
+    let mut max_ratio = 0;
     ret = bdi_check_pages_limit(pages);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     max_ratio = bdi_ratio_from_pages(pages);
-    if (max_ratio < 0)
+    if (max_ratio < 0) {
     return max_ratio;
+    }
     return __bdi_set_max_ratio(bdi, max_ratio);
     }
 #[no_mangle]
 pub unsafe extern "C" fn bdi_set_strict_limit(bdi: *mut backing_dev_info, strict_limit: c_uint) -> c_int {
-    int bdi_set_strict_limit(struct backing_dev_info *bdi, unsigned int strict_limit)
-    {
-    if (strict_limit > 1)
+    if (strict_limit > 1) {
     return -EINVAL;
+    }
     spin_lock_bh(&bdi_lock);
-    if (strict_limit)
+    if (strict_limit) {
     bdi.capabilities |= BDI_CAP_STRICTLIMIT;
-    else
+    }
+    else {
     bdi.capabilities &= ~BDI_CAP_STRICTLIMIT;
+    }
     spin_unlock_bh(&bdi_lock);
     return 0;
     }
-    static unsigned long dirty_freerun_ceiling(unsigned long thresh,
-    unsigned long bg_thresh)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn dirty_freerun_ceiling(thresh: c_ulong, bg_thresh: c_ulong) -> c_ulong {
     return (thresh + bg_thresh) / 2;
     }
-    static unsigned long hard_dirty_limit(struct wb_domain *dom,
-    unsigned long thresh)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hard_dirty_limit(dom: *mut wb_domain, thresh: c_ulong) -> c_ulong {
     return max(thresh, dom.dirty_limit);
     }
 //
 // Memory which can be further allocated to a memcg domain is capped by
 // system-wide clean memory excluding the amount being used in the domain.
 //
-    static void mdtc_calc_avail(struct dirty_throttle_control *mdtc,
-    unsigned long filepages, unsigned long headroom)
-    {
-    struct dirty_throttle_control *gdtc = mdtc_gdtc(mdtc);
-    let mut clean: c_ulong = filepages - min(filepages, mdtc.dirty);
-    let mut global_clean: c_ulong = gdtc.avail - min(gdtc.avail, gdtc.dirty);
-    let mut other_clean: c_ulong = global_clean - min(global_clean, clean);
+#[no_mangle]
+pub unsafe extern "C" fn mdtc_calc_avail(mdtc: *mut dirty_throttle_control, filepages: c_ulong, headroom: c_ulong) {
+    let mut gdtc = mdtc_gdtc(mdtc);
+pub static mut clean: c_ulong = 0;
+pub static mut global_clean: c_ulong = 0;
+pub static mut other_clean: c_ulong = 0;
     mdtc.avail = filepages + min(headroom, other_clean);
     }
 #[no_mangle]
 pub unsafe extern "C" fn dtc_is_global(dtc: *mut dirty_throttle_control) -> bool {
-    static inline bool dtc_is_global(struct dirty_throttle_control *dtc)
-    {
     return mdtc_gdtc(dtc) == core::ptr::null_mut();
     }
 //
 // Dirty background will ignore pages being written as we're trying to
 // decide whether to put more under writeback.
 //
-    static void domain_dirty_avail(struct dirty_throttle_control *dtc,
-    bool include_writeback)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn domain_dirty_avail(dtc: *mut dirty_throttle_control, include_writeback: bool) {
     if (dtc_is_global(dtc)) {
     dtc.avail = global_dirtyable_memory();
     dtc.dirty = global_node_page_state(NR_FILE_DIRTY);
-    if (include_writeback)
+    if (include_writeback) {
     dtc.dirty += global_node_page_state(NR_WRITEBACK);
+    }
     } else {
-    let mut filepages: c_ulong = 0, headroom = 0, writeback = 0;
+pub static mut filepages: c_ulong = 0;
     mem_cgroup_wb_stats(dtc.wb, &filepages, &headroom, &dtc.dirty,
     &writeback);
-    if (include_writeback)
+    if (include_writeback) {
     dtc.dirty += writeback;
+    }
     mdtc_calc_avail(dtc, filepages, headroom);
     }
     }
@@ -806,13 +1026,12 @@ pub unsafe extern "C" fn dtc_is_global(dtc: *mut dirty_throttle_control) -> bool
 // "dirty" in the context of dirty balancing includes all PG_dirty and
 // PG_writeback pages.
 //
-    static unsigned long __wb_calc_thresh(struct dirty_throttle_control *dtc,
-    unsigned long thresh)
-    {
-    struct wb_domain *dom = dtc_dom(dtc);
-    struct bdi_writeback *wb = dtc.wb;
-    u64 wb_thresh;
-    u64 wb_max_thresh;
+#[no_mangle]
+pub unsafe extern "C" fn __wb_calc_thresh(dtc: *mut dirty_throttle_control, thresh: c_ulong) -> c_ulong {
+    let mut dom = dtc_dom(dtc);
+    let mut wb = dtc.wb;
+    let mut wb_thresh = 0;
+    let mut wb_max_thresh = 0;
     unsigned long numerator, denominator;
     unsigned long wb_min_ratio, wb_max_ratio;
 //
@@ -833,30 +1052,29 @@ pub unsafe extern "C" fn dtc_is_global(dtc: *mut dirty_throttle_control) -> bool
 // writes can rampup the threshold quickly.
 //
     if (thresh > dtc.dirty) {
-    if (unlikely(wb.bdi.capabilities & BDI_CAP_STRICTLIMIT))
+    if (unlikely(wb.bdi.capabilities & BDI_CAP_STRICTLIMIT)) {
     wb_thresh = max(wb_thresh, (thresh - dtc.dirty) / 100);
-    else
+    }
+    else {
     wb_thresh = max(wb_thresh, (thresh - dtc.dirty) / 8);
     }
+    }
     wb_max_thresh = thresh * wb_max_ratio / (100 * BDI_RATIO_SCALE);
-    if (wb_thresh > wb_max_thresh)
+    if (wb_thresh > wb_max_thresh) {
     wb_thresh = wb_max_thresh;
+    }
     return wb_thresh;
     }
 #[no_mangle]
 pub unsafe extern "C" fn wb_calc_thresh(wb: *mut bdi_writeback, thresh: c_ulong) -> c_ulong {
-    unsigned long wb_calc_thresh(struct bdi_writeback *wb, unsigned long thresh)
-    {
-    let mut gdtc: dirty_throttle_control = { GDTC_INIT(wb) };
+pub static mut gdtc: dirty_throttle_control = 0;
     domain_dirty_avail(&gdtc, true);
     return __wb_calc_thresh(&gdtc, thresh);
     }
 #[no_mangle]
 pub unsafe extern "C" fn cgwb_calc_thresh(wb: *mut bdi_writeback) -> c_ulong {
-    unsigned long cgwb_calc_thresh(struct bdi_writeback *wb)
-    {
-    let mut gdtc: dirty_throttle_control = { GDTC_INIT_NO_WB };
-    let mut mdtc: dirty_throttle_control = { MDTC_INIT(wb, &gdtc) };
+pub static mut gdtc: dirty_throttle_control = 0;
+pub static mut mdtc: dirty_throttle_control = 0;
     domain_dirty_avail(&gdtc, true);
     domain_dirty_avail(&mdtc, true);
     domain_dirty_limits(&mdtc);
@@ -881,7 +1099,7 @@ pub unsafe extern "C" fn cgwb_calc_thresh(wb: *mut bdi_writeback) -> c_ulong {
     unsigned long limit)
     {
     long long pos_ratio;
-    long x;
+    let mut x = 0;
     x = div64_s64(((s64)setpoint - (s64)dirty) << RATELIMIT_CALC_SHIFT,
     (limit - setpoint) | 1);
     pos_ratio = x;
@@ -944,22 +1162,21 @@ pub unsafe extern "C" fn cgwb_calc_thresh(wb: *mut bdi_writeback) -> c_ulong {
 //
 #[no_mangle]
 unsafe extern "C" fn wb_position_ratio(dtc: *mut dirty_throttle_control) {
-    static void wb_position_ratio(struct dirty_throttle_control *dtc)
-    {
-    struct bdi_writeback *wb = dtc.wb;
-    let mut write_bw: c_ulong = READ_ONCE(wb.avg_write_bandwidth);
-    let mut freerun: c_ulong = dirty_freerun_ceiling(dtc.thresh, dtc.bg_thresh);
-    let mut limit: c_ulong = dtc.limit = hard_dirty_limit(dtc_dom(dtc), dtc.thresh);
-    let mut wb_thresh: c_ulong = dtc.wb_thresh;
-    unsigned long x_intercept;
-    unsigned long setpoint;		/* dirty pages' target balance point */
-    unsigned long wb_setpoint;
-    unsigned long span;
+    let mut wb = dtc.wb;
+pub static mut write_bw: c_ulong = 0;
+pub static mut freerun: c_ulong = 0;
+pub static mut limit: c_ulong = 0;
+pub static mut wb_thresh: c_ulong = 0;
+    let mut x_intercept = 0;
+    let mut setpoint = 0;		/* dirty pages' target balance point */
+    let mut wb_setpoint = 0;
+    let mut span = 0;
     long long pos_ratio;		/* for scaling up/down the rate limit */
-    long x;
+    let mut x = 0;
     dtc.pos_ratio = 0;
-    if (unlikely(dtc.dirty >= limit))
+    if (unlikely(dtc.dirty >= limit)) {
     return;
+    }
 //
 // global setpoint
 //
@@ -992,12 +1209,14 @@ unsafe extern "C" fn wb_position_ratio(dtc: *mut dirty_throttle_control) {
 //
     if (unlikely(wb.bdi.capabilities & BDI_CAP_STRICTLIMIT)) {
     long long wb_pos_ratio;
-    if (dtc.wb_dirty >= wb_thresh)
+    if (dtc.wb_dirty >= wb_thresh) {
     return;
+    }
     wb_setpoint = dirty_freerun_ceiling(wb_thresh,
     dtc.wb_bg_thresh);
-    if (wb_setpoint == 0 || wb_setpoint == wb_thresh)
+    if (wb_setpoint == 0 || wb_setpoint == wb_thresh) {
     return;
+    }
     wb_pos_ratio = pos_ratio_polynom(wb_setpoint, dtc.wb_dirty,
     wb_thresh);
 //
@@ -1053,8 +1272,9 @@ unsafe extern "C" fn wb_position_ratio(dtc: *mut dirty_throttle_control) {
 // own size, so move the slope over accordingly and choose a slope that
 // yields 100% pos_ratio fluctuation on suddenly doubled wb_thresh.
 //
-    if (unlikely(wb_thresh > dtc.thresh))
+    if (unlikely(wb_thresh > dtc.thresh)) {
     wb_thresh = dtc.thresh;
+    }
 //
 // scale global setpoint to wb's:
 // wb_setpoint = setpoint * wb_thresh / thresh
@@ -1074,8 +1294,9 @@ unsafe extern "C" fn wb_position_ratio(dtc: *mut dirty_throttle_control) {
     if (dtc.wb_dirty < x_intercept - span / 4) {
     pos_ratio = div64_u64(pos_ratio * (x_intercept - dtc.wb_dirty),
     (x_intercept - wb_setpoint) | 1);
-    } else
+    } else {
     pos_ratio /= 4;
+    }
 //
 // wb reserve area, safeguard against dirty pool underrun and disk idle
 // It may push the desired control point of global dirty pages higher
@@ -1083,22 +1304,22 @@ unsafe extern "C" fn wb_position_ratio(dtc: *mut dirty_throttle_control) {
 //
     x_intercept = wb_thresh / 2;
     if (dtc.wb_dirty < x_intercept) {
-    if (dtc.wb_dirty > x_intercept / 8)
+    if (dtc.wb_dirty > x_intercept / 8) {
     pos_ratio = div_u64(pos_ratio * x_intercept,
     dtc.wb_dirty);
-    else
+    }
+    else {
     pos_ratio *= 8;
+    }
     }
     dtc.pos_ratio = pos_ratio;
     }
-    static void wb_update_write_bandwidth(struct bdi_writeback *wb,
-    unsigned long elapsed,
-    unsigned long written)
-    {
-    let mut period: c_ulong = roundup_pow_of_two(3 * HZ);
-    let mut avg: c_ulong = wb.avg_write_bandwidth;
-    let mut old: c_ulong = wb.write_bandwidth;
-    u64 bw;
+#[no_mangle]
+pub unsafe extern "C" fn wb_update_write_bandwidth(wb: *mut bdi_writeback, elapsed: c_ulong, written: c_ulong) {
+pub static mut period: c_ulong = 0;
+pub static mut avg: c_ulong = 0;
+pub static mut old: c_ulong = 0;
+    let mut bw = 0;
 //
 // bw = written * HZ / elapsed
 //
@@ -1114,23 +1335,25 @@ unsafe extern "C" fn wb_position_ratio(dtc: *mut dirty_throttle_control) {
     if (unlikely(elapsed > period)) {
     bw = div64_ul(bw, elapsed);
     avg = bw;
-    goto out;
+// goto;
     }
     bw += (u64)wb.write_bandwidth * (period - elapsed);
     bw >>= ilog2(period);
 //
 // one more level of smoothing, for filtering out sudden spikes
 //
-    if (avg > old && old >= (unsigned long)bw)
+    if (avg > old && old >= (unsigned long)bw) {
     avg -= (avg - old) >> 3;
-    if (avg < old && old <= (unsigned long)bw)
+    }
+    if (avg < old && old <= (unsigned long)bw) {
     avg += (old - avg) >> 3;
-    out:
+    }
+// label;
 // keep avg > 0 to guarantee that tot > 0 if there are dirty wbs
     avg = max(avg, 1LU);
     if (wb_has_dirty_io(wb)) {
-    let mut delta: c_long = avg - wb.avg_write_bandwidth;
-    WARN_ON_ONCE(atomic_long_add_return(delta,
+pub static mut delta: c_long = 0;
+    WARN_ON_ONCE!(atomic_long_add_return(delta,
     &wb.bdi.tot_write_bandwidth) <= 0);
     }
     wb.write_bandwidth = bw;
@@ -1138,17 +1361,15 @@ unsafe extern "C" fn wb_position_ratio(dtc: *mut dirty_throttle_control) {
     }
 #[no_mangle]
 unsafe extern "C" fn update_dirty_limit(dtc: *mut dirty_throttle_control) {
-    static void update_dirty_limit(struct dirty_throttle_control *dtc)
-    {
-    struct wb_domain *dom = dtc_dom(dtc);
-    let mut thresh: c_ulong = dtc.thresh;
-    let mut limit: c_ulong = dom.dirty_limit;
+    let mut dom = dtc_dom(dtc);
+pub static mut thresh: c_ulong = 0;
+pub static mut limit: c_ulong = 0;
 //
 // Follow up in one step.
 //
     if (limit < thresh) {
     limit = thresh;
-    goto update;
+// goto;
     }
 //
 // Follow down slowly. Use the higher one as the target, because thresh
@@ -1158,21 +1379,21 @@ unsafe extern "C" fn update_dirty_limit(dtc: *mut dirty_throttle_control) {
     thresh = max(thresh, dtc.dirty);
     if (limit > thresh) {
     limit -= (limit - thresh) >> 5;
-    goto update;
+// goto;
     }
     return;
-    update:
+// label;
     dom.dirty_limit = limit;
     }
-    static void domain_update_dirty_limit(struct dirty_throttle_control *dtc,
-    unsigned long now)
-    {
-    struct wb_domain *dom = dtc_dom(dtc);
+#[no_mangle]
+pub unsafe extern "C" fn domain_update_dirty_limit(dtc: *mut dirty_throttle_control, now: c_ulong) {
+    let mut dom = dtc_dom(dtc);
 //
 // check locklessly first to optimize away locking for the most time
 //
-    if (time_before(now, dom.dirty_limit_tstamp + BANDWIDTH_INTERVAL))
+    if (time_before(now, dom.dirty_limit_tstamp + BANDWIDTH_INTERVAL)) {
     return;
+    }
     spin_lock(&dom.lock);
     if (time_after_eq(now, dom.dirty_limit_tstamp + BANDWIDTH_INTERVAL)) {
     update_dirty_limit(dtc);
@@ -1186,23 +1407,21 @@ unsafe extern "C" fn update_dirty_limit(dtc: *mut dirty_throttle_control) {
 // Normal wb tasks will be curbed at or below it in long term.
 // Obviously it should be around (write_bw / N) when there are N dd tasks.
 //
-    static void wb_update_dirty_ratelimit(struct dirty_throttle_control *dtc,
-    unsigned long dirtied,
-    unsigned long elapsed)
-    {
-    struct bdi_writeback *wb = dtc.wb;
-    let mut dirty: c_ulong = dtc.dirty;
-    let mut freerun: c_ulong = dirty_freerun_ceiling(dtc.thresh, dtc.bg_thresh);
-    let mut limit: c_ulong = hard_dirty_limit(dtc_dom(dtc), dtc.thresh);
-    let mut setpoint: c_ulong = (freerun + limit) / 2;
-    let mut write_bw: c_ulong = wb.avg_write_bandwidth;
-    let mut dirty_ratelimit: c_ulong = wb.dirty_ratelimit;
-    unsigned long dirty_rate;
-    unsigned long task_ratelimit;
-    unsigned long balanced_dirty_ratelimit;
-    unsigned long step;
-    unsigned long x;
-    unsigned long shift;
+#[no_mangle]
+pub unsafe extern "C" fn wb_update_dirty_ratelimit(dtc: *mut dirty_throttle_control, dirtied: c_ulong, elapsed: c_ulong) {
+    let mut wb = dtc.wb;
+pub static mut dirty: c_ulong = 0;
+pub static mut freerun: c_ulong = 0;
+pub static mut limit: c_ulong = 0;
+pub static mut setpoint: c_ulong = 0;
+pub static mut write_bw: c_ulong = 0;
+pub static mut dirty_ratelimit: c_ulong = 0;
+    let mut dirty_rate = 0;
+    let mut task_ratelimit = 0;
+    let mut balanced_dirty_ratelimit = 0;
+    let mut step = 0;
+    let mut x = 0;
+    let mut shift = 0;
 //
 // The dirty rate will match the writeout rate in long term, except
 // when dirty pages are truncated by userspace or re-dirtied by FS.
@@ -1213,7 +1432,7 @@ unsafe extern "C" fn update_dirty_limit(dtc: *mut dirty_throttle_control) {
 //
     task_ratelimit = (u64)dirty_ratelimit *
     dtc.pos_ratio >> RATELIMIT_CALC_SHIFT;
-    task_ratelimit++; /* it helps rampup dirty_ratelimit from tiny values */
+    task_ratelimit += 1; /* it helps rampup dirty_ratelimit from tiny values */
 //
 // A linear estimation of the "balanced" throttle rate. The theory is,
 // if there are N dd tasks, each throttled at task_ratelimit, the wb's
@@ -1249,8 +1468,9 @@ unsafe extern "C" fn update_dirty_limit(dtc: *mut dirty_throttle_control) {
 //
 // balanced_dirty_ratelimit ~= (write_bw / N) <= write_bw
 //
-    if (unlikely(balanced_dirty_ratelimit > write_bw))
+    if (unlikely(balanced_dirty_ratelimit > write_bw)) {
     balanced_dirty_ratelimit = write_bw;
+    }
 //
 // We could safely do this and return immediately:
 //
@@ -1298,13 +1518,15 @@ unsafe extern "C" fn update_dirty_limit(dtc: *mut dirty_throttle_control) {
     if (dirty < setpoint) {
     x = min3(wb.balanced_dirty_ratelimit,
     balanced_dirty_ratelimit, task_ratelimit);
-    if (dirty_ratelimit < x)
+    if (dirty_ratelimit < x) {
     step = x - dirty_ratelimit;
+    }
     } else {
     x = max3(wb.balanced_dirty_ratelimit,
     balanced_dirty_ratelimit, task_ratelimit);
-    if (dirty_ratelimit > x)
+    if (dirty_ratelimit > x) {
     step = dirty_ratelimit - x;
+    }
     }
 //
 // Don't pursue 100% rate matching. It's impossible since the balanced
@@ -1312,27 +1534,29 @@ unsafe extern "C" fn update_dirty_limit(dtc: *mut dirty_throttle_control) {
 // when it gets close to the target. Helps eliminate pointless tremors.
 //
     shift = dirty_ratelimit / (2 * step + 1);
-    if (shift < BITS_PER_LONG)
+    if (shift < BITS_PER_LONG) {
     step = DIV_ROUND_UP(step >> shift, 8);
-    else
+    }
+    else {
     step = 0;
-    if (dirty_ratelimit < balanced_dirty_ratelimit)
+    }
+    if (dirty_ratelimit < balanced_dirty_ratelimit) {
     dirty_ratelimit += step;
-    else
+    }
+    else {
     dirty_ratelimit -= step;
+    }
     WRITE_ONCE(wb.dirty_ratelimit, max(dirty_ratelimit, 1UL));
     wb.balanced_dirty_ratelimit = balanced_dirty_ratelimit;
     trace_bdi_dirty_ratelimit(wb, dirty_rate, task_ratelimit);
     }
-    static void __wb_update_bandwidth(struct dirty_throttle_control *gdtc,
-    struct dirty_throttle_control *mdtc,
-    bool update_ratelimit)
-    {
-    struct bdi_writeback *wb = gdtc.wb;
-    let mut now: c_ulong = jiffies;
-    unsigned long elapsed;
-    unsigned long dirtied;
-    unsigned long written;
+#[no_mangle]
+pub unsafe extern "C" fn __wb_update_bandwidth(gdtc: *mut dirty_throttle_control, mdtc: *mut dirty_throttle_control, update_ratelimit: bool) {
+    let mut wb = gdtc.wb;
+pub static mut now: c_ulong = 0;
+    let mut elapsed = 0;
+    let mut dirtied = 0;
+    let mut written = 0;
     spin_lock(&wb.list_lock);
 //
 // Lockless checks for elapsed time are racy and delayed update after
@@ -1350,7 +1574,7 @@ unsafe extern "C" fn update_dirty_limit(dtc: *mut dirty_throttle_control) {
 // @mdtc is always NULL if !CGROUP_WRITEBACK but the
 // compiler has no way to figure that out.  Help it.
 //
-    if (IS_ENABLED(CONFIG_CGROUP_WRITEBACK) && mdtc) {
+    if (IS_ENABLED!(CONFIG_CGROUP_WRITEBACK) && mdtc) {
     domain_update_dirty_limit(mdtc, now);
     wb_update_dirty_ratelimit(mdtc, dirtied, elapsed);
     }
@@ -1363,19 +1587,15 @@ unsafe extern "C" fn update_dirty_limit(dtc: *mut dirty_throttle_control) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn wb_update_bandwidth(wb: *mut bdi_writeback) {
-    void wb_update_bandwidth(struct bdi_writeback *wb)
-    {
-    let mut gdtc: dirty_throttle_control = { GDTC_INIT(wb) };
+pub static mut gdtc: dirty_throttle_control = 0;
     __wb_update_bandwidth(&gdtc, core::ptr::null_mut(), false);
     }
 // Interval after which we consider wb idle and don't estimate bandwidth
 
 #[no_mangle]
 unsafe extern "C" fn wb_bandwidth_estimate_start(wb: *mut bdi_writeback) {
-    static void wb_bandwidth_estimate_start(struct bdi_writeback *wb)
-    {
-    let mut now: c_ulong = jiffies;
-    let mut elapsed: c_ulong = now - READ_ONCE(wb.bw_time_stamp);
+pub static mut now: c_ulong = 0;
+pub static mut elapsed: c_ulong = 0;
     if (elapsed > WB_BANDWIDTH_IDLE_JIF &&
     !atomic_read(&wb.writeback_inodes)) {
     spin_lock(&wb.list_lock);
@@ -1393,18 +1613,17 @@ unsafe extern "C" fn wb_bandwidth_estimate_start(wb: *mut bdi_writeback) {
 // global_zone_page_state() too often. So scale it near-sqrt to the safety margin
 // (the number of pages we may dirty without exceeding the dirty limits).
 //
-    static unsigned long dirty_poll_interval(unsigned long dirty,
-    unsigned long thresh)
-    {
-    if (thresh > dirty)
+#[no_mangle]
+pub unsafe extern "C" fn dirty_poll_interval(dirty: c_ulong, thresh: c_ulong) -> c_ulong {
+    if (thresh > dirty) {
     return 1UL << (ilog2(thresh - dirty) >> 1);
+    }
     return 1;
     }
-    static unsigned long wb_max_pause(struct bdi_writeback *wb,
-    unsigned long wb_dirty)
-    {
-    let mut bw: c_ulong = READ_ONCE(wb.avg_write_bandwidth);
-    unsigned long t;
+#[no_mangle]
+pub unsafe extern "C" fn wb_max_pause(wb: *mut bdi_writeback, wb_dirty: c_ulong) -> c_ulong {
+pub static mut bw: c_ulong = 0;
+    let mut t = 0;
 //
 // Limit pause time for small memory systems. If sleeping for too long
 // time, a small pool of dirty/writeback pages may go empty and disk go
@@ -1413,20 +1632,16 @@ unsafe extern "C" fn wb_bandwidth_estimate_start(wb: *mut bdi_writeback) {
 // 8 serves as the safety ratio.
 //
     t = wb_dirty / (1 + bw / roundup_pow_of_two(1 + HZ / 8));
-    t++;
+    t += 1;
     return min_t(unsigned long, t, MAX_PAUSE);
     }
-    static long wb_min_pause(struct bdi_writeback *wb,
-    long max_pause,
-    unsigned long task_ratelimit,
-    unsigned long dirty_ratelimit,
-    int *nr_dirtied_pause)
-    {
-    let mut hi: c_long = ilog2(READ_ONCE(wb.avg_write_bandwidth));
-    let mut lo: c_long = ilog2(READ_ONCE(wb.dirty_ratelimit));
-    long t;		/* target pause */
-    long pause;	/* estimated next pause */
-    int pages;	/* target nr_dirtied_pause */
+#[no_mangle]
+pub unsafe extern "C" fn wb_min_pause(wb: *mut bdi_writeback, max_pause: c_long, task_ratelimit: c_ulong, dirty_ratelimit: c_ulong, nr_dirtied_pause: *mut c_int) -> c_long {
+pub static mut hi: c_long = 0;
+pub static mut lo: c_long = 0;
+    let mut t = 0;		/* target pause */
+    let mut pause = 0;	/* estimated next pause */
+    let mut pages = 0;	/* target nr_dirtied_pause */
 // target for 10ms pause on 1-dd case
     t = max(1, HZ / 100);
 //
@@ -1435,8 +1650,9 @@ unsafe extern "C" fn wb_bandwidth_estimate_start(wb: *mut bdi_writeback) {
 //
 // (N * 10ms) on 2^N concurrent tasks.
 //
-    if (hi > lo)
+    if (hi > lo) {
     t += (hi - lo) * (10 * HZ) / 1024;
+    }
 //
 // This is a bit convoluted. We try to base the next nr_dirtied_pause
 // on the much more stable dirty_ratelimit. However the next pause time
@@ -1486,10 +1702,8 @@ unsafe extern "C" fn wb_bandwidth_estimate_start(wb: *mut bdi_writeback) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn wb_dirty_limits(dtc: *mut dirty_throttle_control) {
-    static inline void wb_dirty_limits(struct dirty_throttle_control *dtc)
-    {
-    struct bdi_writeback *wb = dtc.wb;
-    unsigned long wb_reclaimable;
+    let mut wb = dtc.wb;
+    let mut wb_reclaimable = 0;
 //
 // wb_thresh is not treated as some limiting factor as
 // dirty_thresh, due to reasons
@@ -1524,9 +1738,8 @@ pub unsafe extern "C" fn wb_dirty_limits(dtc: *mut dirty_throttle_control) {
     dtc.wb_dirty = wb_reclaimable + wb_stat(wb, WB_WRITEBACK);
     }
     }
-    static unsigned long domain_poll_intv(struct dirty_throttle_control *dtc,
-    bool strictlimit)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn domain_poll_intv(dtc: *mut dirty_throttle_control, strictlimit: bool) -> c_ulong {
     unsigned long dirty, thresh;
     if (strictlimit) {
     dirty = dtc.wb_dirty;
@@ -1546,9 +1759,8 @@ pub unsafe extern "C" fn wb_dirty_limits(dtc: *mut dirty_throttle_control) {
 // writeouts when the wb limits are ramping up are the price we consciously pay
 // for strictlimit-ing.
 //
-    static void domain_dirty_freerun(struct dirty_throttle_control *dtc,
-    bool strictlimit)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn domain_dirty_freerun(dtc: *mut dirty_throttle_control, strictlimit: bool) {
     unsigned long dirty, thresh, bg_thresh;
     if (unlikely(strictlimit)) {
     wb_dirty_limits(dtc);
@@ -1562,33 +1774,32 @@ pub unsafe extern "C" fn wb_dirty_limits(dtc: *mut dirty_throttle_control) {
     }
     dtc.freerun = dirty <= dirty_freerun_ceiling(thresh, bg_thresh);
     }
-    static void balance_domain_limits(struct dirty_throttle_control *dtc,
-    bool strictlimit)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn balance_domain_limits(dtc: *mut dirty_throttle_control, strictlimit: bool) {
     domain_dirty_avail(dtc, true);
     domain_dirty_limits(dtc);
     domain_dirty_freerun(dtc, strictlimit);
     }
-    static void wb_dirty_freerun(struct dirty_throttle_control *dtc,
-    bool strictlimit)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn wb_dirty_freerun(dtc: *mut dirty_throttle_control, strictlimit: bool) {
     dtc.freerun = false;
 // was already handled in domain_dirty_freerun
-    if (strictlimit)
+    if (strictlimit) {
     return;
+    }
     wb_dirty_limits(dtc);
 //
 // LOCAL_THROTTLE tasks must not be throttled when below the per-wb
 // freerun ceiling.
 //
-    if (!(current.flags & PF_LOCAL_THROTTLE))
+    if (!(current.flags & PF_LOCAL_THROTTLE)) {
     return;
+    }
     dtc.freerun = dtc.wb_dirty <
     dirty_freerun_ceiling(dtc.wb_thresh, dtc.wb_bg_thresh);
     }
-    static inline void wb_dirty_exceeded(struct dirty_throttle_control *dtc,
-    bool strictlimit)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn wb_dirty_exceeded(dtc: *mut dirty_throttle_control, strictlimit: bool) {
     dtc.dirty_exceeded = (dtc.wb_dirty > dtc.wb_thresh) &&
     ((dtc.dirty > dtc.thresh) || strictlimit);
     }
@@ -1596,12 +1807,12 @@ pub unsafe extern "C" fn wb_dirty_limits(dtc: *mut dirty_throttle_control) {
 // The limits fields dirty_exceeded and pos_ratio won't be updated if wb is
 // in freerun state. Please don't use these invalid fields in freerun case.
 //
-    static void balance_wb_limits(struct dirty_throttle_control *dtc,
-    bool strictlimit)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn balance_wb_limits(dtc: *mut dirty_throttle_control, strictlimit: bool) {
     wb_dirty_freerun(dtc, strictlimit);
-    if (dtc.freerun)
+    if (dtc.freerun) {
     return;
+    }
     wb_dirty_exceeded(dtc, strictlimit);
     wb_position_ratio(dtc);
     }
@@ -1612,29 +1823,28 @@ pub unsafe extern "C" fn wb_dirty_limits(dtc: *mut dirty_throttle_control) {
 // If we're over `background_thresh' then the writeback threads are woken to
 // perform some writeout.
 //
-    static int balance_dirty_pages(struct bdi_writeback *wb,
-    unsigned long pages_dirtied, unsigned int flags)
-    {
-    let mut gdtc_stor: dirty_throttle_control = { GDTC_INIT(wb) };
-    let mut mdtc_stor: dirty_throttle_control = { MDTC_INIT(wb, &gdtc_stor) };
-    let mut gdtc: *mut dirty_throttle_control  const = &gdtc_stor;
+#[no_mangle]
+pub unsafe extern "C" fn balance_dirty_pages(wb: *mut bdi_writeback, pages_dirtied: c_ulong, flags: c_uint) -> c_int {
+pub static mut gdtc_stor: dirty_throttle_control = 0;
+pub static mut mdtc_stor: dirty_throttle_control = 0;
+pub static mut gdtc: *mut dirty_throttle_control  const = core::ptr::null_mut();
     struct dirty_throttle_control * const mdtc = mdtc_valid(&mdtc_stor) ?
     &mdtc_stor : core::ptr::null_mut();
-    struct dirty_throttle_control *sdtc;
-    unsigned long nr_dirty;
-    long period;
-    long pause;
-    long max_pause;
-    long min_pause;
-    int nr_dirtied_pause;
-    unsigned long task_ratelimit;
-    unsigned long dirty_ratelimit;
-    struct backing_dev_info *bdi = wb.bdi;
-    let mut strictlimit: bool = bdi.capabilities & BDI_CAP_STRICTLIMIT;
-    let mut start_time: c_ulong = jiffies;
-    let mut ret: c_int = 0;
+pub static mut sdtc: *mut c_void = core::ptr::null_mut();
+    let mut nr_dirty = 0;
+    let mut period = 0;
+    let mut pause = 0;
+    let mut max_pause = 0;
+    let mut min_pause = 0;
+    let mut nr_dirtied_pause = 0;
+    let mut task_ratelimit = 0;
+    let mut dirty_ratelimit = 0;
+    let mut bdi = wb.bdi;
+pub static mut strictlimit: bool = false;
+pub static mut start_time: c_ulong = 0;
+pub static mut ret: c_int = 0;
     for (;;) {
-    let mut now: c_ulong = jiffies;
+pub static mut now: c_ulong = 0;
     nr_dirty = global_node_page_state(NR_FILE_DIRTY);
     balance_domain_limits(gdtc, strictlimit);
     if (mdtc) {
@@ -1646,22 +1856,24 @@ pub unsafe extern "C" fn wb_dirty_limits(dtc: *mut dirty_throttle_control) {
     }
     if (!writeback_in_progress(wb) &&
     (nr_dirty > gdtc.bg_thresh ||
-    (strictlimit && gdtc.wb_dirty > gdtc.wb_bg_thresh)))
+    (strictlimit && gdtc.wb_dirty > gdtc.wb_bg_thresh))) {
     wb_start_background_writeback(wb);
+    }
 //
 // If memcg domain is in effect, @dirty should be under
 // both global and memcg freerun ceilings.
 //
     if (gdtc.freerun && (!mdtc || mdtc.freerun)) {
-    unsigned long intv;
-    unsigned long m_intv;
-    free_running:
+    let mut intv = 0;
+    let mut m_intv = 0;
+// label;
     intv = domain_poll_intv(gdtc, strictlimit);
     m_intv = ULONG_MAX;
     current.dirty_paused_when = now;
     current.nr_dirtied = 0;
-    if (mdtc)
+    if (mdtc) {
     m_intv = domain_poll_intv(mdtc, strictlimit);
+    }
     current.nr_dirtied_pause = min(intv, m_intv);
     break;
     }
@@ -1677,16 +1889,18 @@ pub unsafe extern "C" fn wb_dirty_limits(dtc: *mut dirty_throttle_control) {
 // throttle loop waiting for dirty pages to be written back
 // while no writeback is running.
 //
-    if (unlikely(!writeback_in_progress(wb)))
+    if (unlikely(!writeback_in_progress(wb))) {
     wb_start_background_writeback(wb);
+    }
     mem_cgroup_flush_foreign(wb);
 //
 // Calculate global domain's pos_ratio and select the
 // global dtc by default.
 //
     balance_wb_limits(gdtc, strictlimit);
-    if (gdtc.freerun)
-    goto free_running;
+    if (gdtc.freerun) {
+// goto;
+    }
     sdtc = gdtc;
     if (mdtc) {
 //
@@ -1696,16 +1910,19 @@ pub unsafe extern "C" fn wb_dirty_limits(dtc: *mut dirty_throttle_control) {
 // w/ lower pos_ratio.
 //
     balance_wb_limits(mdtc, strictlimit);
-    if (mdtc.freerun)
-    goto free_running;
-    if (mdtc.pos_ratio < gdtc.pos_ratio)
+    if (mdtc.freerun) {
+// goto;
+    }
+    if (mdtc.pos_ratio < gdtc.pos_ratio) {
     sdtc = mdtc;
+    }
     }
     wb.dirty_exceeded = gdtc.dirty_exceeded ||
     (mdtc && mdtc.dirty_exceeded);
     if (time_is_before_jiffies(READ_ONCE(wb.bw_time_stamp) +
-    BANDWIDTH_INTERVAL))
+    BANDWIDTH_INTERVAL)) {
     __wb_update_bandwidth(gdtc, mdtc, true);
+    }
 // throttle according to the chosen dtc
     dirty_ratelimit = READ_ONCE(wb.dirty_ratelimit);
     task_ratelimit = ((u64)dirty_ratelimit * sdtc.pos_ratio) >>
@@ -1717,12 +1934,13 @@ pub unsafe extern "C" fn wb_dirty_limits(dtc: *mut dirty_throttle_control) {
     if (unlikely(task_ratelimit == 0)) {
     period = max_pause;
     pause = max_pause;
-    goto pause;
+// goto;
     }
     period = HZ * pages_dirtied / task_ratelimit;
     pause = period;
-    if (current.dirty_paused_when)
+    if (current.dirty_paused_when) {
     pause -= now - current.dirty_paused_when;
+    }
 //
 // For less than 1s think time (ext3/4 may block the dirtier
 // for up to 800ms from time to time on 1-HDD; so does xfs,
@@ -1745,8 +1963,9 @@ pub unsafe extern "C" fn wb_dirty_limits(dtc: *mut dirty_throttle_control) {
     } else if (period) {
     current.dirty_paused_when += period;
     current.nr_dirtied = 0;
-    } else if (current.nr_dirtied_pause <= pages_dirtied)
+    } else if (current.nr_dirtied_pause <= pages_dirtied) {
     current.nr_dirtied_pause += pages_dirtied;
+    }
     break;
     }
     if (unlikely(pause > max_pause)) {
@@ -1754,7 +1973,7 @@ pub unsafe extern "C" fn wb_dirty_limits(dtc: *mut dirty_throttle_control) {
     now += min(pause - max_pause, max_pause);
     pause = max_pause;
     }
-    pause:
+// label;
     trace_balance_dirty_pages(wb,
     sdtc,
     dirty_ratelimit,
@@ -1777,8 +1996,9 @@ pub unsafe extern "C" fn wb_dirty_limits(dtc: *mut dirty_throttle_control) {
 // This is typically equal to (dirty < thresh) and can also
 // keep "1000+ dd on a slow USB stick" under control.
 //
-    if (task_ratelimit)
+    if (task_ratelimit) {
     break;
+    }
 //
 // In the case of an unresponsive NFS server and the NFS dirty
 // pages exceeds dirty_thresh, give the other good wb's a pipe
@@ -1789,14 +2009,16 @@ pub unsafe extern "C" fn wb_dirty_limits(dtc: *mut dirty_throttle_control) {
 // more page. However wb_dirty has accounting errors.  So use
 // the larger and more IO friendly wb_stat_error.
 //
-    if (sdtc.wb_dirty <= wb_stat_error())
+    if (sdtc.wb_dirty <= wb_stat_error()) {
     break;
-    if (fatal_signal_pending(current))
+    }
+    if (fatal_signal_pending(current)) {
     break;
+    }
     }
     return ret;
     }
-    static DEFINE_PER_CPU(int, bdp_ratelimits);
+pub static mut int: usize = 0;
 //
 // Normal tasks are throttled by
 // loop {
@@ -1829,24 +2051,27 @@ pub unsafe extern "C" fn wb_dirty_limits(dtc: *mut dirty_throttle_control) {
 // that either memory was already in balance, or it was able to sleep
 // until the amount of dirty memory returned to balance.
 //
-    int balance_dirty_pages_ratelimited_flags(struct address_space *mapping,
-    unsigned int flags)
-    {
-    struct inode *inode = mapping.host;
-    struct backing_dev_info *bdi = inode_to_bdi(inode);
-    struct bdi_writeback *wb = core::ptr::null_mut();
-    int ratelimit;
-    let mut ret: c_int = 0;
-    int *p;
-    if (!(bdi.capabilities & BDI_CAP_WRITEBACK))
+#[no_mangle]
+pub unsafe extern "C" fn balance_dirty_pages_ratelimited_flags(mapping: *mut address_space, flags: c_uint) -> c_int {
+    let mut inode = mapping.host;
+    let mut bdi = inode_to_bdi(inode);
+    let mut wb = core::ptr::null_mut();
+    let mut ratelimit = 0;
+pub static mut ret: c_int = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    if (!(bdi.capabilities & BDI_CAP_WRITEBACK)) {
     return ret;
-    if (inode_cgwb_enabled(inode))
+    }
+    if (inode_cgwb_enabled(inode)) {
     wb = wb_get_create_current(bdi, GFP_KERNEL);
-    if (!wb)
+    }
+    if (!wb) {
     wb = &bdi.wb;
+    }
     ratelimit = current.nr_dirtied_pause;
-    if (wb.dirty_exceeded)
+    if (wb.dirty_exceeded) {
     ratelimit = min(ratelimit, 32 >> (PAGE_SHIFT - 10));
+    }
     preempt_disable();
 //
 // This prevents one CPU to accumulate too many dirtied pages without
@@ -1855,10 +2080,10 @@ pub unsafe extern "C" fn wb_dirty_limits(dtc: *mut dirty_throttle_control) {
 // time, hence all honoured too large initial task->nr_dirtied_pause.
 //
     p =  this_cpu_ptr(&bdp_ratelimits);
-    if (unlikely(current.nr_dirtied >= ratelimit))
+    if (unlikely(current.nr_dirtied >= ratelimit)) {
 // p = 0;
-#[no_mangle]
-pub unsafe extern "C" fn if(ratelimit_pages): *mut *mut unlikely(p >=) -> else {
+    }
+if true {
 // p = 0;
     ratelimit = 0;
     }
@@ -1869,14 +2094,15 @@ pub unsafe extern "C" fn if(ratelimit_pages): *mut *mut unlikely(p >=) -> else {
 //
     p = this_cpu_ptr(&dirty_throttle_leaks);
     if (*p > 0 && current.nr_dirtied < ratelimit) {
-    unsigned long nr_pages_dirtied;
+    let mut nr_pages_dirtied = 0;
     nr_pages_dirtied = min(*p, ratelimit - current.nr_dirtied);
 // p -= nr_pages_dirtied;
     current.nr_dirtied += nr_pages_dirtied;
     }
     preempt_enable();
-    if (unlikely(current.nr_dirtied >= ratelimit))
+    if (unlikely(current.nr_dirtied >= ratelimit)) {
     ret = balance_dirty_pages(wb, current.nr_dirtied, flags);
+    }
     wb_put(wb);
     return ret;
     }
@@ -1895,8 +2121,6 @@ pub unsafe extern "C" fn if(ratelimit_pages): *mut *mut unlikely(p >=) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn balance_dirty_pages_ratelimited(mapping: *mut address_space) {
-    void balance_dirty_pages_ratelimited(struct address_space *mapping)
-    {
     balance_dirty_pages_ratelimited_flags(mapping, 0);
     }
     EXPORT_SYMBOL(balance_dirty_pages_ratelimited);
@@ -1906,26 +2130,26 @@ pub unsafe extern "C" fn balance_dirty_pages_ratelimited(mapping: *mut address_s
 //
 #[no_mangle]
 unsafe extern "C" fn wb_bg_dirty_limits(dtc: *mut dirty_throttle_control) {
-    static void wb_bg_dirty_limits(struct dirty_throttle_control *dtc)
-    {
-    struct bdi_writeback *wb = dtc.wb;
+    let mut wb = dtc.wb;
     dtc.wb_bg_thresh = __wb_calc_thresh(dtc, dtc.bg_thresh);
-    if (dtc.wb_bg_thresh < 2 * wb_stat_error())
+    if (dtc.wb_bg_thresh < 2 * wb_stat_error()) {
     dtc.wb_dirty = wb_stat_sum(wb, WB_RECLAIMABLE);
-    else
+    }
+    else {
     dtc.wb_dirty = wb_stat(wb, WB_RECLAIMABLE);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn domain_over_bg_thresh(dtc: *mut dirty_throttle_control) -> bool {
-    static bool domain_over_bg_thresh(struct dirty_throttle_control *dtc)
-    {
     domain_dirty_avail(dtc, false);
     domain_dirty_limits(dtc);
-    if (dtc.dirty > dtc.bg_thresh)
+    if (dtc.dirty > dtc.bg_thresh) {
     return true;
+    }
     wb_bg_dirty_limits(dtc);
-    if (dtc.wb_dirty > dtc.wb_bg_thresh)
+    if (dtc.wb_dirty > dtc.wb_bg_thresh) {
     return true;
+    }
     return false;
     }
 //
@@ -1939,25 +2163,24 @@ unsafe extern "C" fn domain_over_bg_thresh(dtc: *mut dirty_throttle_control) -> 
 //
 #[no_mangle]
 pub unsafe extern "C" fn wb_over_bg_thresh(wb: *mut bdi_writeback) -> bool {
-    bool wb_over_bg_thresh(struct bdi_writeback *wb)
-    {
-    let mut gdtc: dirty_throttle_control = { GDTC_INIT(wb) };
-    let mut mdtc: dirty_throttle_control = { MDTC_INIT(wb, &gdtc) };
-    if (domain_over_bg_thresh(&gdtc))
+pub static mut gdtc: dirty_throttle_control = 0;
+pub static mut mdtc: dirty_throttle_control = 0;
+    if (domain_over_bg_thresh(&gdtc)) {
     return true;
-    if (mdtc_valid(&mdtc))
+    }
+    if (mdtc_valid(&mdtc)) {
     return domain_over_bg_thresh(&mdtc);
+    }
     return false;
     }
 
 //
 // sysctl handler for /proc/sys/vm/dirty_writeback_centisecs
 //
-    static int dirty_writeback_centisecs_handler(const struct ctl_table *table, int write,
-    void *buffer, size_t *length, loff_t *ppos)
-    {
-    let mut old_interval: c_uint = dirty_writeback_interval;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn dirty_writeback_centisecs_handler(table: *mut ctl_table, write: c_int, buffer: *mut c_void, length: *mut size_t, ppos: *mut loff_t) -> c_int {
+pub static mut old_interval: c_uint = 0;
+    let mut ret = 0;
     ret = proc_dointvec(table, write, buffer, length, ppos);
 //
 // Writing 0 to dirty_writeback_interval will disable periodic writeback
@@ -1967,8 +2190,9 @@ pub unsafe extern "C" fn wb_over_bg_thresh(wb: *mut bdi_writeback) -> bool {
 // The reason we do this is to make the change take effect immediately.
 //
     if (!ret && write && dirty_writeback_interval &&
-    dirty_writeback_interval != old_interval)
+    dirty_writeback_interval != old_interval) {
     wakeup_flusher_threads(WB_REASON_PERIODIC);
+    }
     return ret;
     }
 
@@ -1982,106 +2206,35 @@ pub unsafe extern "C" fn wb_over_bg_thresh(wb: *mut bdi_writeback) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn writeback_set_ratelimit() {
-    void writeback_set_ratelimit(void)
-    {
-    struct wb_domain *dom = &global_wb_domain;
-    unsigned long background_thresh;
-    unsigned long dirty_thresh;
+    let mut dom = &global_wb_domain;
+    let mut background_thresh = 0;
+    let mut dirty_thresh = 0;
     global_dirty_limits(&background_thresh, &dirty_thresh);
     dom.dirty_limit = dirty_thresh;
     ratelimit_pages = dirty_thresh / (num_online_cpus() * 32);
-    if (ratelimit_pages < 16)
+    if (ratelimit_pages < 16) {
     ratelimit_pages = 16;
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn page_writeback_cpu_online(cpu: c_uint) -> c_int {
-    static int page_writeback_cpu_online(unsigned int cpu)
-    {
     writeback_set_ratelimit();
     return 0;
     }
 
     static int laptop_mode;
-    static int laptop_mode_handler(const struct ctl_table *table, int write,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
-    let mut ret: c_int = proc_dointvec_jiffies(table, write, buffer, lenp, ppos);
-    if (!ret && write)
-    pr_warn("%s: vm.laptop_mode is deprecated. Ignoring setting.\n",
+#[no_mangle]
+pub unsafe extern "C" fn laptop_mode_handler(table: *mut ctl_table, write: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
+pub static mut ret: c_int = 0;
+    if (!ret && write) {
+    pr_warn!("%s: vm.laptop_mode is deprecated. Ignoring setting.\n",
     current.comm);
+    }
     return ret;
     }
 // this is needed for the proc_doulongvec_minmax of vm_dirty_bytes
-    let mut dirty_bytes_min: static unsigned long = 2 * PAGE_SIZE;
-    static const struct ctl_table vm_page_writeback_sysctls[] = {
-    {
-    .procname   = "dirty_background_ratio",
-    .data       = &dirty_background_ratio,
-    .maxlen     = sizeof(dirty_background_ratio),
-    .mode       = 0644,
-    .proc_handler   = dirty_background_ratio_handler,
-    .extra1     = SYSCTL_ZERO,
-    .extra2     = SYSCTL_ONE_HUNDRED,
-    },
-    {
-    .procname   = "dirty_background_bytes",
-    .data       = &dirty_background_bytes,
-    .maxlen     = sizeof(dirty_background_bytes),
-    .mode       = 0644,
-    .proc_handler   = dirty_background_bytes_handler,
-    .extra1     = SYSCTL_LONG_ONE,
-    },
-    {
-    .procname   = "dirty_ratio",
-    .data       = &vm_dirty_ratio,
-    .maxlen     = sizeof(vm_dirty_ratio),
-    .mode       = 0644,
-    .proc_handler   = dirty_ratio_handler,
-    .extra1     = SYSCTL_ZERO,
-    .extra2     = SYSCTL_ONE_HUNDRED,
-    },
-    {
-    .procname   = "dirty_bytes",
-    .data       = &vm_dirty_bytes,
-    .maxlen     = sizeof(vm_dirty_bytes),
-    .mode       = 0644,
-    .proc_handler   = dirty_bytes_handler,
-    .extra1     = (void *)&dirty_bytes_min,
-    },
-    {
-    .procname   = "dirty_writeback_centisecs",
-    .data       = &dirty_writeback_interval,
-    .maxlen     = sizeof(dirty_writeback_interval),
-    .mode       = 0644,
-    .proc_handler   = dirty_writeback_centisecs_handler,
-    },
-    {
-    .procname   = "dirty_expire_centisecs",
-    .data       = &dirty_expire_interval,
-    .maxlen     = sizeof(dirty_expire_interval),
-    .mode       = 0644,
-    .proc_handler   = proc_dointvec_minmax,
-    .extra1     = SYSCTL_ZERO,
-    },
-
-    {
-    .procname	= "highmem_is_dirtyable",
-    .data		= &vm_highmem_is_dirtyable,
-    .maxlen		= sizeof(vm_highmem_is_dirtyable),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec_minmax,
-    .extra1		= SYSCTL_ZERO,
-    .extra2		= SYSCTL_ONE,
-    },
-
-    {
-    .procname	= "laptop_mode",
-    .data		= &laptop_mode,
-    .maxlen		= sizeof(laptop_mode),
-    .mode		= 0644,
-    .proc_handler	= laptop_mode_handler,
-    },
-    };
+pub static mut dirty_bytes_min: unsigned long = 0;
+pub static mut ctl_table: usize = 0;
 
 //
 // Called early on to tune the page writeback dirty limits.
@@ -2100,10 +2253,8 @@ unsafe extern "C" fn page_writeback_cpu_online(cpu: c_uint) -> c_int {
 // much memory the box has..
 //
 #[no_mangle]
-pub unsafe extern "C" fn page_writeback_init() -> void __init {
-    void __init page_writeback_init(void)
-    {
-    BUG_ON(wb_domain_init(&global_wb_domain, GFP_KERNEL));
+pub unsafe extern "C" fn page_writeback_init()  {
+    BUG_ON!(wb_domain_init(&global_wb_domain, GFP_KERNEL));
     cpuhp_setup_state(CPUHP_AP_ONLINE_DYN, "mm/writeback:online",
     page_writeback_cpu_online, core::ptr::null_mut());
     cpuhp_setup_state(CPUHP_MM_WRITEBACK_DEAD, "mm/writeback:dead", core::ptr::null_mut(),
@@ -2126,17 +2277,17 @@ pub unsafe extern "C" fn page_writeback_init() -> void __init {
 // function to be quick so that it can tag pages faster than a dirtying process
 // can create them).
 //
-    void tag_pages_for_writeback(struct address_space *mapping,
-    pgoff_t start, pgoff_t end)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn tag_pages_for_writeback(mapping: *mut address_space, start: pgoff_t, end: pgoff_t) {
     XA_STATE(xas, &mapping.i_pages, start);
-    let mut tagged: c_uint = 0;
-    void *page;
+pub static mut tagged: c_uint = 0;
+pub static mut page: *mut c_void = core::ptr::null_mut();
     xas_lock_irq(&xas);
     xas_for_each_marked(&xas, page, end, PAGECACHE_TAG_DIRTY) {
     xas_set_mark(&xas, PAGECACHE_TAG_TOWRITE);
-    if (++tagged % XA_CHECK_SCHED)
+    if (++tagged % XA_CHECK_SCHED) {
     continue;
+    }
     xas_pause(&xas);
     xas_unlock_irq(&xas);
     cond_resched();
@@ -2145,9 +2296,8 @@ pub unsafe extern "C" fn page_writeback_init() -> void __init {
     xas_unlock_irq(&xas);
     }
     EXPORT_SYMBOL(tag_pages_for_writeback);
-    static bool folio_prepare_writeback(struct address_space *mapping,
-    struct writeback_control *wbc, struct folio *folio)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn folio_prepare_writeback(mapping: *mut address_space, wbc: *mut writeback_control, folio: *mut folio) -> bool {
 //
 // Folio truncated or invalidated. We can freely skip it then,
 // even for data integrity operations: the folio has disappeared
@@ -2155,36 +2305,38 @@ pub unsafe extern "C" fn page_writeback_init() -> void __init {
 // data integrity operation even if there is now a new, dirty
 // folio at the same pagecache index.
 //
-    if (unlikely(folio.mapping != mapping))
+    if (unlikely(folio.mapping != mapping)) {
     return false;
+    }
 //
 // Did somebody else write it for us?
 //
-    if (!folio_test_dirty(folio))
+    if (!folio_test_dirty(folio)) {
     return false;
+    }
     if (folio_test_writeback(folio)) {
-    if (wbc.sync_mode == WB_SYNC_NONE)
+    if (wbc.sync_mode == WB_SYNC_NONE) {
     return false;
+    }
     folio_wait_writeback(folio);
     }
-    BUG_ON(folio_test_writeback(folio));
-    if (!folio_clear_dirty_for_io(folio))
+    BUG_ON!(folio_test_writeback(folio));
+    if (!folio_clear_dirty_for_io(folio)) {
     return false;
+    }
     return true;
     }
 #[no_mangle]
 unsafe extern "C" fn wbc_end(wbc: *mut writeback_control) -> pgoff_t {
-    static pgoff_t wbc_end(struct writeback_control *wbc)
-    {
-    if (wbc.range_cyclic)
+    if (wbc.range_cyclic) {
     return -1;
+    }
     return wbc.range_end >> PAGE_SHIFT;
     }
-    static struct folio *writeback_get_folio(struct address_space *mapping,
-    struct writeback_control *wbc)
-    {
-    struct folio *folio;
-    retry:
+#[no_mangle]
+pub unsafe extern "C" fn writeback_get_folio(mapping: *mut address_space, wbc: *mut writeback_control) -> *mut c_void {
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+// label;
     folio = folio_batch_next(&wbc.fbatch);
     if (!folio) {
     folio_batch_release(&wbc.fbatch);
@@ -2192,13 +2344,14 @@ unsafe extern "C" fn wbc_end(wbc: *mut writeback_control) -> pgoff_t {
     filemap_get_folios_tag(mapping, &wbc.index, wbc_end(wbc),
     wbc_to_tag(wbc), &wbc.fbatch);
     folio = folio_batch_next(&wbc.fbatch);
-    if (!folio)
+    if (!folio) {
     return core::ptr::null_mut();
+    }
     }
     folio_lock(folio);
     if (unlikely(!folio_prepare_writeback(mapping, wbc, folio))) {
     folio_unlock(folio);
-    goto retry;
+// goto;
     }
     trace_wbc_writepage(wbc, inode_to_bdi(mapping.host));
     return folio;
@@ -2229,9 +2382,8 @@ unsafe extern "C" fn wbc_end(wbc: *mut writeback_control) -> pgoff_t {
 //
 // Return: the folio to write or %NULL if the loop is done.
 //
-    struct folio *writeback_iter(struct address_space *mapping,
-    struct writeback_control *wbc, struct folio *folio, int *error)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn writeback_iter(mapping: *mut address_space, wbc: *mut writeback_control, folio: *mut folio, error: *mut c_int) -> *mut c_void {
     if (!folio) {
     folio_batch_init(&wbc.fbatch);
     wbc.saved_err = *error = 0;
@@ -2242,10 +2394,12 @@ unsafe extern "C" fn wbc_end(wbc: *mut writeback_control) -> pgoff_t {
 // For non-cyclic writeback we always start at the beginning of
 // the passed in range.
 //
-    if (wbc.range_cyclic)
+    if (wbc.range_cyclic) {
     wbc.index = mapping.writeback_index;
-    else
+    }
+    else {
     wbc.index = wbc.range_start >> PAGE_SHIFT;
+    }
 //
 // To avoid livelocks when other processes dirty new pages, we
 // first tag pages which should be written back and only then
@@ -2257,12 +2411,13 @@ unsafe extern "C" fn wbc_end(wbc: *mut writeback_control) -> pgoff_t {
 // TOWRITE tag can be cleared only by the process clearing the
 // DIRTY tag (and submitting the page for I/O).
 //
-    if (wbc.sync_mode == WB_SYNC_ALL || wbc.tagged_writepages)
+    if (wbc.sync_mode == WB_SYNC_ALL || wbc.tagged_writepages) {
     tag_pages_for_writeback(mapping, wbc.index,
     wbc_end(wbc));
+    }
     } else {
     wbc.nr_to_write -= folio_nr_pages(folio);
-    WARN_ON_ONCE(*error > 0);
+    WARN_ON_ONCE!(*error > 0);
 //
 // For integrity writeback we have to keep going until we have
 // written all the folios we tagged for writeback above, even if
@@ -2275,11 +2430,13 @@ unsafe extern "C" fn wbc_end(wbc: *mut writeback_control) -> pgoff_t {
 // wbc->nr_to_write or encounter the first error.
 //
     if (wbc.sync_mode == WB_SYNC_ALL) {
-    if (*error && !wbc.saved_err)
+    if (*error && !wbc.saved_err) {
     wbc.saved_err = *error;
+    }
     } else {
-    if (*error || wbc.nr_to_write <= 0)
-    goto done;
+    if (*error || wbc.nr_to_write <= 0) {
+// goto;
+    }
     }
     }
     folio = writeback_get_folio(mapping, wbc);
@@ -2294,8 +2451,9 @@ unsafe extern "C" fn wbc_end(wbc: *mut writeback_control) -> pgoff_t {
 // back to the start of the file violates that rule and causes
 // deadlocks.
 //
-    if (wbc.range_cyclic)
+    if (wbc.range_cyclic) {
     mapping.writeback_index = 0;
+    }
 //
 // Return the first error we encountered (if there was any) to
 // the caller.
@@ -2303,31 +2461,34 @@ unsafe extern "C" fn wbc_end(wbc: *mut writeback_control) -> pgoff_t {
 // error = wbc->saved_err;
     }
     return folio;
-    done:
-    if (wbc.range_cyclic)
+// label;
+    if (wbc.range_cyclic) {
     mapping.writeback_index = folio_next_index(folio);
+    }
     folio_batch_release(&wbc.fbatch);
     return core::ptr::null_mut();
     }
     EXPORT_SYMBOL_GPL(writeback_iter);
 #[no_mangle]
 pub unsafe extern "C" fn do_writepages(mapping: *mut address_space, wbc: *mut writeback_control) -> c_int {
-    int do_writepages(struct address_space *mapping, struct writeback_control *wbc)
-    {
-    int ret;
-    struct bdi_writeback *wb;
-    if (wbc.nr_to_write <= 0)
+    let mut ret = 0;
+pub static mut wb: *mut c_void = core::ptr::null_mut();
+    if (wbc.nr_to_write <= 0) {
     return 0;
+    }
     wb = inode_to_wb_wbc(mapping.host, wbc);
     wb_bandwidth_estimate_start(wb);
     while (1) {
-    if (mapping.a_ops.writepages)
+    if (mapping.a_ops.writepages) {
     ret = mapping.a_ops.writepages(mapping, wbc);
-    else
+    }
+    else {
 // deal with chardevs and other special files
     ret = 0;
-    if (ret != -ENOMEM || wbc.sync_mode != WB_SYNC_ALL)
+    }
+    if (ret != -ENOMEM || wbc.sync_mode != WB_SYNC_ALL) {
     break;
+    }
 //
 // Lacking an allocation context or the locality or writeback
 // state of any of the inode's pages, throttle based on
@@ -2343,8 +2504,9 @@ pub unsafe extern "C" fn do_writepages(mapping: *mut address_space, wbc: *mut wr
 // writeback bandwidth is updated once in a while.
 //
     if (time_is_before_jiffies(READ_ONCE(wb.bw_time_stamp) +
-    BANDWIDTH_INTERVAL))
+    BANDWIDTH_INTERVAL)) {
     wb_update_bandwidth(wb);
+    }
     return ret;
     }
 //
@@ -2352,10 +2514,9 @@ pub unsafe extern "C" fn do_writepages(mapping: *mut address_space, wbc: *mut wr
 //
 #[no_mangle]
 pub unsafe extern "C" fn noop_dirty_folio(mapping: *mut address_space, folio: *mut folio) -> bool {
-    bool noop_dirty_folio(struct address_space *mapping, struct folio *folio)
-    {
-    if (!folio_test_dirty(folio))
+    if (!folio_test_dirty(folio)) {
     return !folio_test_set_dirty(folio);
+    }
     return false;
     }
     EXPORT_SYMBOL(noop_dirty_folio);
@@ -2364,19 +2525,19 @@ pub unsafe extern "C" fn noop_dirty_folio(mapping: *mut address_space, folio: *m
 //
 // NOTE: This relies on being atomic wrt interrupts.
 //
-    static void folio_account_dirtied(struct folio *folio,
-    struct address_space *mapping)
-    {
-    struct inode *inode = mapping.host;
+#[no_mangle]
+pub unsafe extern "C" fn folio_account_dirtied(folio: *mut folio, mapping: *mut address_space) {
+    let mut inode = mapping.host;
     trace_writeback_dirty_folio(folio, mapping);
     if (mapping_can_writeback(mapping)) {
-    struct bdi_writeback *wb;
-    let mut nr: c_long = folio_nr_pages(folio);
+pub static mut wb: *mut c_void = core::ptr::null_mut();
+pub static mut nr: c_long = 0;
     inode_attach_wb(inode, folio);
     wb = inode_to_wb(inode);
     lruvec_stat_mod_folio(folio, NR_FILE_DIRTY, nr);
-    if (folio_test_dropbehind(folio))
+    if (folio_test_dropbehind(folio)) {
     wb_stat_mod(wb, WB_DONTCACHE_DIRTY, nr);
+    }
     __zone_stat_mod_folio(folio, NR_ZONE_WRITE_PENDING, nr);
     __node_stat_mod_folio(folio, NR_DIRTIED, nr);
     wb_stat_mod(wb, WB_RECLAIMABLE, nr);
@@ -2392,12 +2553,11 @@ pub unsafe extern "C" fn noop_dirty_folio(mapping: *mut address_space, folio: *m
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_account_cleaned(folio: *mut folio, wb: *mut bdi_writeback) {
-    void folio_account_cleaned(struct folio *folio, struct bdi_writeback *wb)
-    {
-    let mut nr: c_long = folio_nr_pages(folio);
+pub static mut nr: c_long = 0;
     lruvec_stat_mod_folio(folio, NR_FILE_DIRTY, -nr);
-    if (folio_test_dropbehind(folio))
+    if (folio_test_dropbehind(folio)) {
     wb_stat_mod(wb, WB_DONTCACHE_DIRTY, -nr);
+    }
     zone_stat_mod_folio(folio, NR_ZONE_WRITE_PENDING, -nr);
     wb_stat_mod(wb, WB_RECLAIMABLE, -nr);
     task_io_account_cancelled_write(nr * PAGE_SIZE);
@@ -2417,18 +2577,18 @@ pub unsafe extern "C" fn folio_account_cleaned(folio: *mut folio, wb: *mut bdi_w
 // reference to the buffer_head that is being marked dirty, which causes
 // try_to_free_buffers() to fail.
 //
-    void __folio_mark_dirty(struct folio *folio, struct address_space *mapping,
-    int warn)
-    {
-    unsigned long flags;
+#[no_mangle]
+pub unsafe extern "C" fn __folio_mark_dirty(folio: *mut folio, mapping: *mut address_space, warn: c_int) {
+    let mut flags = 0;
 //
 // Shmem writeback relies on swap, and swap writeback is LRU based,
 // not using the dirty mark.
 //
     VM_WARN_ON_ONCE(folio_test_swapcache(folio) || shmem_mapping(mapping));
     xa_lock_irqsave(&mapping.i_pages, flags);
-    if (folio.mapping) {	/* Race with truncate? */
-    WARN_ON_ONCE(warn && !folio_test_uptodate(folio));
+    if (folio.mapping) {	/* Race with truncate? */ {
+    WARN_ON_ONCE!(warn && !folio_test_uptodate(folio));
+    }
     folio_account_dirtied(folio, mapping);
     __xa_set_mark(&mapping.i_pages, folio.index,
     PAGECACHE_TAG_DIRTY);
@@ -2456,10 +2616,9 @@ pub unsafe extern "C" fn folio_account_cleaned(folio: *mut folio, wb: *mut bdi_w
 //
 #[no_mangle]
 pub unsafe extern "C" fn filemap_dirty_folio(mapping: *mut address_space, folio: *mut folio) -> bool {
-    bool filemap_dirty_folio(struct address_space *mapping, struct folio *folio)
-    {
-    if (folio_test_set_dirty(folio))
+    if (folio_test_set_dirty(folio)) {
     return false;
+    }
     __folio_mark_dirty(folio, mapping, !folio_test_private(folio));
     if (mapping.host) {
 // !PageAnon && !swapper_space
@@ -2480,18 +2639,17 @@ pub unsafe extern "C" fn filemap_dirty_folio(mapping: *mut address_space, folio:
 // Return: True if we redirtied the folio.  False if someone else dirtied
 // it first.
 //
-    bool folio_redirty_for_writepage(struct writeback_control *wbc,
-    struct folio *folio)
-    {
-    struct address_space *mapping = folio.mapping;
-    let mut nr: c_long = folio_nr_pages(folio);
-    bool ret;
+#[no_mangle]
+pub unsafe extern "C" fn folio_redirty_for_writepage(wbc: *mut writeback_control, folio: *mut folio) -> bool {
+    let mut mapping = folio.mapping;
+pub static mut nr: c_long = 0;
+    let mut ret = 0;
     wbc.pages_skipped += nr;
     ret = filemap_dirty_folio(mapping, folio);
     if (mapping && mapping_can_writeback(mapping)) {
-    struct inode *inode = mapping.host;
-    struct bdi_writeback *wb;
-    let mut cookie: wb_lock_cookie = {};
+    let mut inode = mapping.host;
+pub static mut wb: *mut c_void = core::ptr::null_mut();
+pub static mut cookie: wb_lock_cookie = 0;
     wb = unlocked_inode_to_wb_begin(inode, &cookie);
     current.nr_dirtied -= nr;
     node_stat_mod_folio(folio, NR_DIRTIED, -nr);
@@ -2521,9 +2679,7 @@ pub unsafe extern "C" fn filemap_dirty_folio(mapping: *mut address_space, folio:
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_mark_dirty(folio: *mut folio) -> bool {
-    bool folio_mark_dirty(struct folio *folio)
-    {
-    struct address_space *mapping = folio_mapping(folio);
+    let mut mapping = folio_mapping(folio);
     if (likely(mapping)) {
 //
 // readahead/folio_deactivate could remain
@@ -2536,8 +2692,9 @@ pub unsafe extern "C" fn folio_mark_dirty(folio: *mut folio) -> bool {
 // and make it restart the size rampup process. But it's
 // a trivial problem.
 //
-    if (folio_test_reclaim(folio))
+    if (folio_test_reclaim(folio)) {
     folio_clear_reclaim(folio);
+    }
     return mapping.a_ops.dirty_folio(mapping, folio);
     }
     return noop_dirty_folio(mapping, folio);
@@ -2555,9 +2712,7 @@ pub unsafe extern "C" fn folio_mark_dirty(folio: *mut folio) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_mark_dirty_lock(folio: *mut folio) -> bool {
-    bool folio_mark_dirty_lock(struct folio *folio)
-    {
-    bool ret;
+    let mut ret = 0;
     folio_lock(folio);
     ret = folio_mark_dirty(folio);
     folio_unlock(folio);
@@ -2579,16 +2734,15 @@ pub unsafe extern "C" fn folio_mark_dirty_lock(folio: *mut folio) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __folio_cancel_dirty(folio: *mut folio) {
-    void __folio_cancel_dirty(struct folio *folio)
-    {
-    struct address_space *mapping = folio_mapping(folio);
+    let mut mapping = folio_mapping(folio);
     if (mapping_can_writeback(mapping)) {
-    struct inode *inode = mapping.host;
-    struct bdi_writeback *wb;
-    let mut cookie: wb_lock_cookie = {};
+    let mut inode = mapping.host;
+pub static mut wb: *mut c_void = core::ptr::null_mut();
+pub static mut cookie: wb_lock_cookie = 0;
     wb = unlocked_inode_to_wb_begin(inode, &cookie);
-    if (folio_test_clear_dirty(folio))
+    if (folio_test_clear_dirty(folio)) {
     folio_account_cleaned(folio, wb);
+    }
     unlocked_inode_to_wb_end(inode, &cookie);
     } else {
     folio_clear_dirty(folio);
@@ -2611,15 +2765,13 @@ pub unsafe extern "C" fn __folio_cancel_dirty(folio: *mut folio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_clear_dirty_for_io(folio: *mut folio) -> bool {
-    bool folio_clear_dirty_for_io(struct folio *folio)
-    {
-    struct address_space *mapping = folio_mapping(folio);
-    let mut ret: bool = false;
+    let mut mapping = folio_mapping(folio);
+pub static mut ret: bool = false;
     VM_BUG_ON_FOLIO(!folio_test_locked(folio), folio);
     if (mapping && mapping_can_writeback(mapping)) {
-    struct inode *inode = mapping.host;
-    struct bdi_writeback *wb;
-    let mut cookie: wb_lock_cookie = {};
+    let mut inode = mapping.host;
+pub static mut wb: *mut c_void = core::ptr::null_mut();
+pub static mut cookie: wb_lock_cookie = 0;
 //
 // Yes, Virginia, this is indeed insane.
 //
@@ -2645,8 +2797,9 @@ pub unsafe extern "C" fn folio_clear_dirty_for_io(folio: *mut folio) -> bool {
 // as a serialization point for all the different
 // threads doing their things.
 //
-    if (folio_mkclean(folio))
+    if (folio_mkclean(folio)) {
     folio_mark_dirty(folio);
+    }
 //
 // We carefully synchronise fault handlers against
 // installing a dirty pte and marking the folio dirty
@@ -2657,10 +2810,11 @@ pub unsafe extern "C" fn folio_clear_dirty_for_io(folio: *mut folio) -> bool {
 //
     wb = unlocked_inode_to_wb_begin(inode, &cookie);
     if (folio_test_clear_dirty(folio)) {
-    let mut nr: c_long = folio_nr_pages(folio);
+pub static mut nr: c_long = 0;
     lruvec_stat_mod_folio(folio, NR_FILE_DIRTY, -nr);
-    if (folio_test_dropbehind(folio))
+    if (folio_test_dropbehind(folio)) {
     wb_stat_mod(wb, WB_DONTCACHE_DIRTY, -nr);
+    }
     zone_stat_mod_folio(folio, NR_ZONE_WRITE_PENDING, -nr);
     wb_stat_mod(wb, WB_RECLAIMABLE, -nr);
     ret = true;
@@ -2673,15 +2827,11 @@ pub unsafe extern "C" fn folio_clear_dirty_for_io(folio: *mut folio) -> bool {
     EXPORT_SYMBOL(folio_clear_dirty_for_io);
 #[no_mangle]
 unsafe extern "C" fn wb_inode_writeback_start(wb: *mut bdi_writeback) {
-    static void wb_inode_writeback_start(struct bdi_writeback *wb)
-    {
     atomic_inc(&wb.writeback_inodes);
     }
 #[no_mangle]
 unsafe extern "C" fn wb_inode_writeback_end(wb: *mut bdi_writeback) {
-    static void wb_inode_writeback_end(struct bdi_writeback *wb)
-    {
-    unsigned long flags;
+    let mut flags = 0;
     atomic_dec(&wb.writeback_inodes);
 //
 // Make sure estimate of writeback throughput gets updated after
@@ -2691,21 +2841,20 @@ unsafe extern "C" fn wb_inode_writeback_end(wb: *mut bdi_writeback) {
 // batched into one bandwidth update.
 //
     spin_lock_irqsave(&wb.work_lock, flags);
-    if (test_bit(WB_registered, &wb.state))
+    if (test_bit(WB_registered, &wb.state)) {
     queue_delayed_work(bdi_wq, &wb.bw_dwork, BANDWIDTH_INTERVAL);
+    }
     spin_unlock_irqrestore(&wb.work_lock, flags);
     }
 #[no_mangle]
 pub unsafe extern "C" fn __folio_end_writeback(folio: *mut folio) -> bool {
-    bool __folio_end_writeback(struct folio *folio)
-    {
-    let mut nr: c_long = folio_nr_pages(folio);
-    struct address_space *mapping = folio_mapping(folio);
-    bool ret;
+pub static mut nr: c_long = 0;
+    let mut mapping = folio_mapping(folio);
+    let mut ret = 0;
     if (mapping && mapping_use_writeback_tags(mapping)) {
-    struct inode *inode = mapping.host;
-    struct bdi_writeback *wb;
-    unsigned long flags;
+    let mut inode = mapping.host;
+pub static mut wb: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
     xa_lock_irqsave(&mapping.i_pages, flags);
     ret = folio_xor_flags_has_waiters(folio, 1 << PG_writeback);
     __xa_clear_mark(&mapping.i_pages, folio.index,
@@ -2715,8 +2864,9 @@ pub unsafe extern "C" fn __folio_end_writeback(folio: *mut folio) -> bool {
     __wb_writeout_add(wb, nr);
     if (!mapping_tagged(mapping, PAGECACHE_TAG_WRITEBACK)) {
     wb_inode_writeback_end(wb);
-    if (mapping.host)
+    if (mapping.host) {
     sb_clear_inode_writeback(mapping.host);
+    }
     }
     xa_unlock_irqrestore(&mapping.i_pages, flags);
     } else {
@@ -2729,19 +2879,17 @@ pub unsafe extern "C" fn __folio_end_writeback(folio: *mut folio) -> bool {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __folio_start_writeback(folio: *mut folio, keep_write: bool) {
-    void __folio_start_writeback(struct folio *folio, bool keep_write)
-    {
-    let mut nr: c_long = folio_nr_pages(folio);
-    struct address_space *mapping = folio_mapping(folio);
-    int access_ret;
+pub static mut nr: c_long = 0;
+    let mut mapping = folio_mapping(folio);
+    let mut access_ret = 0;
     VM_BUG_ON_FOLIO(folio_test_writeback(folio), folio);
     VM_BUG_ON_FOLIO(!folio_test_locked(folio), folio);
     if (mapping && mapping_use_writeback_tags(mapping)) {
     XA_STATE(xas, &mapping.i_pages, folio.index);
-    struct inode *inode = mapping.host;
-    struct bdi_writeback *wb;
-    unsigned long flags;
-    bool on_wblist;
+    let mut inode = mapping.host;
+pub static mut wb: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut on_wblist = 0;
     xas_lock_irqsave(&xas, flags);
     xas_load(&xas);
     folio_test_set_writeback(folio);
@@ -2756,13 +2904,16 @@ pub unsafe extern "C" fn __folio_start_writeback(folio: *mut folio, keep_write: 
 // folios, so we don't necessarily have an inode to
 // track for sync.
 //
-    if (mapping.host)
+    if (mapping.host) {
     sb_mark_inode_writeback(mapping.host);
     }
-    if (!folio_test_dirty(folio))
+    }
+    if (!folio_test_dirty(folio)) {
     xas_clear_mark(&xas, PAGECACHE_TAG_DIRTY);
-    if (!keep_write)
+    }
+    if (!keep_write) {
     xas_clear_mark(&xas, PAGECACHE_TAG_TOWRITE);
+    }
     xas_unlock_irqrestore(&xas, flags);
     } else {
     folio_test_set_writeback(folio);
@@ -2791,8 +2942,6 @@ pub unsafe extern "C" fn __folio_start_writeback(folio: *mut folio, keep_write: 
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_wait_writeback(folio: *mut folio) {
-    void folio_wait_writeback(struct folio *folio)
-    {
     while (folio_test_writeback(folio)) {
     trace_folio_wait_writeback(folio, folio_mapping(folio));
     folio_wait_bit(folio, PG_writeback);
@@ -2814,12 +2963,11 @@ pub unsafe extern "C" fn folio_wait_writeback(folio: *mut folio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_wait_writeback_killable(folio: *mut folio) -> c_int {
-    int folio_wait_writeback_killable(struct folio *folio)
-    {
     while (folio_test_writeback(folio)) {
     trace_folio_wait_writeback(folio, folio_mapping(folio));
-    if (folio_wait_bit_killable(folio, PG_writeback))
+    if (folio_wait_bit_killable(folio, PG_writeback)) {
     return -EINTR;
+    }
     }
     return 0;
     }
@@ -2839,9 +2987,8 @@ pub unsafe extern "C" fn folio_wait_writeback_killable(folio: *mut folio) -> c_i
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_wait_stable(folio: *mut folio) {
-    void folio_wait_stable(struct folio *folio)
-    {
-    if (mapping_stable_writes(folio_mapping(folio)))
+    if (mapping_stable_writes(folio_mapping(folio))) {
     folio_wait_writeback(folio);
+    }
     }
     EXPORT_SYMBOL_GPL(folio_wait_stable);

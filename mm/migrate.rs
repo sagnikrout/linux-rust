@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -51,34 +301,37 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Christoph Lameter
 //
 
-    static const struct movable_operations *offline_movable_ops;
-    static const struct movable_operations *zsmalloc_movable_ops;
+pub static mut offline_movable_ops: *mut c_void = core::ptr::null_mut();
+pub static mut zsmalloc_movable_ops: *mut c_void = core::ptr::null_mut();
 #[no_mangle]
-pub unsafe extern "C" fn set_movable_ops(ops: *const movable_operations, type: enum pagetype) -> c_int {
-    int set_movable_ops(const struct movable_operations *ops, enum pagetype type)
-    {
+pub unsafe extern "C" fn set_movable_ops(ops: *const movable_operations, type: pagetype) -> c_int {
 //
 // We only allow for selected types and don't handle concurrent
 // registration attempts yet.
 //
-    switch (type) {
-    case PGTY_offline:
-    if (offline_movable_ops && ops)
+    match (type) {
+    PGTY_offline => {
+    if (offline_movable_ops && ops) {
     return -EBUSY;
+    }
     offline_movable_ops = ops;
-    break;
-    case PGTY_zsmalloc:
-    if (zsmalloc_movable_ops && ops)
+    // break;
+    }
+    PGTY_zsmalloc => {
+    if (zsmalloc_movable_ops && ops) {
     return -EBUSY;
+    }
     zsmalloc_movable_ops = ops;
-    break;
-    default:
+    // break;
+    }
+    _ => {
     return -EINVAL;
+    }
     }
     return 0;
     }
     EXPORT_SYMBOL_GPL(set_movable_ops);
-    static const struct movable_operations *page_movable_ops(struct page *page)
+    static const struct movable_operations *page_movable_ops(page *page)
     {
     VM_WARN_ON_ONCE_PAGE(!page_has_movable_ops(page), page);
 //
@@ -86,11 +339,13 @@ pub unsafe extern "C" fn set_movable_ops(ops: *const movable_operations, type: e
 // it as movable, the page type must be sticky until the page gets freed
 // back to the buddy.
 //
-    if (PageOffline(page))
+    if (PageOffline(page)) {
 // Only balloon page migration sets PageOffline pages movable.
     return offline_movable_ops;
-    if (PageZsmalloc(page))
+    }
+    if (PageZsmalloc(page)) {
     return zsmalloc_movable_ops;
+    }
     return core::ptr::null_mut();
     }
 //
@@ -109,14 +364,12 @@ pub unsafe extern "C" fn set_movable_ops(ops: *const movable_operations, type: e
 //
 #[no_mangle]
 pub unsafe extern "C" fn isolate_movable_ops_page(page: *mut page, mode: isolate_mode_t) -> bool {
-    bool isolate_movable_ops_page(struct page *page, isolate_mode_t mode)
-    {
 //
 // TODO: these pages will not be folios in the future. All
 // folio dependencies will have to be removed.
 //
-    struct folio *folio = folio_get_nontail_page(page);
-    const struct movable_operations *mops;
+    let mut folio = folio_get_nontail_page(page);
+pub static mut mops: *mut c_void = core::ptr::null_mut();
 //
 // Avoid burning cycles with pages that are yet under __free_pages(),
 // or just got freed under us.
@@ -126,8 +379,9 @@ pub unsafe extern "C" fn isolate_movable_ops_page(page: *mut page, mode: isolate
 // the put_page() at the end of this block will take care of
 // release this page, thus avoiding a nasty leakage.
 //
-    if (!folio)
-    goto out;
+    if (!folio) {
+// goto;
+    }
 //
 // Check for movable_ops pages before taking the page lock because
 // we use non-atomic bitops on newly allocated page flags so
@@ -136,8 +390,9 @@ pub unsafe extern "C" fn isolate_movable_ops_page(page: *mut page, mode: isolate
 // Note that once a page has movable_ops, it will stay that way
 // until the page was freed.
 //
-    if (unlikely(!page_has_movable_ops(page)))
-    goto out_putfolio;
+    if (unlikely(!page_has_movable_ops(page))) {
+// goto;
+    }
 //
 // As movable pages are not isolated from LRU lists, concurrent
 // compaction threads can race against page migration functions
@@ -149,26 +404,30 @@ pub unsafe extern "C" fn isolate_movable_ops_page(page: *mut page, mode: isolate
 // lets be sure we have the page lock
 // before proceeding with the movable page isolation steps.
 //
-    if (unlikely(!folio_trylock(folio)))
-    goto out_putfolio;
+    if (unlikely(!folio_trylock(folio))) {
+// goto;
+    }
     VM_WARN_ON_ONCE_PAGE(!page_has_movable_ops(page), page);
-    if (PageMovableOpsIsolated(page))
-    goto out_no_isolated;
+    if (PageMovableOpsIsolated(page)) {
+// goto;
+    }
     mops = page_movable_ops(page);
-    if (WARN_ON_ONCE(!mops))
-    goto out_no_isolated;
-    if (!mops.isolate_page(page, mode))
-    goto out_no_isolated;
+    if (WARN_ON_ONCE!(!mops)) {
+// goto;
+    }
+    if (!mops.isolate_page(page, mode)) {
+// goto;
+    }
 // Driver shouldn't use the isolated flag
     VM_WARN_ON_ONCE_PAGE(PageMovableOpsIsolated(page), page);
     SetPageMovableOpsIsolated(page);
     folio_unlock(folio);
     return true;
-    out_no_isolated:
+// label;
     folio_unlock(folio);
-    out_putfolio:
+// label;
     folio_put(folio);
-    out:
+// label;
     return false;
     }
 //
@@ -181,13 +440,11 @@ pub unsafe extern "C" fn isolate_movable_ops_page(page: *mut page, mode: isolate
 //
 #[no_mangle]
 unsafe extern "C" fn putback_movable_ops_page(page: *mut page) {
-    static void putback_movable_ops_page(struct page *page)
-    {
 //
 // TODO: these pages will not be folios in the future. All
 // folio dependencies will have to be removed.
 //
-    struct folio *folio = page_folio(page);
+    let mut folio = page_folio(page);
     VM_WARN_ON_ONCE_PAGE(!page_has_movable_ops(page), page);
     VM_WARN_ON_ONCE_PAGE(!PageMovableOpsIsolated(page), page);
     folio_lock(folio);
@@ -222,15 +479,15 @@ unsafe extern "C" fn putback_movable_ops_page(page: *mut page) {
 //
 // Returns 0 on success, otherwise a negative error code.
 //
-    static int migrate_movable_ops_page(struct page *dst, struct page *src,
-    enum migrate_mode mode)
-    {
-    int rc;
+#[no_mangle]
+pub unsafe extern "C" fn migrate_movable_ops_page(dst: *mut page, src: *mut page, mode: migrate_mode) -> c_int {
+    let mut rc = 0;
     VM_WARN_ON_ONCE_PAGE(!page_has_movable_ops(src), src);
     VM_WARN_ON_ONCE_PAGE(!PageMovableOpsIsolated(src), src);
     rc = page_movable_ops(src).migrate_page(dst, src, mode);
-    if (!rc)
+    if (!rc) {
     ClearPageMovableOpsIsolated(src);
+    }
     return rc;
     }
 //
@@ -243,10 +500,8 @@ unsafe extern "C" fn putback_movable_ops_page(page: *mut page) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn putback_movable_pages(l: *mut list_head) {
-    void putback_movable_pages(struct list_head *l)
-    {
-    struct folio *folio;
-    struct folio *folio2;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut folio2: *mut c_void = core::ptr::null_mut();
     list_for_each_entry_safe(folio, folio2, l, lru) {
     if (unlikely(folio_test_hugetlb(folio))) {
     folio_putback_hugetlb(folio);
@@ -265,53 +520,59 @@ pub unsafe extern "C" fn putback_movable_pages(l: *mut list_head) {
 // Must be called with an elevated refcount on the non-hugetlb folio
 #[no_mangle]
 pub unsafe extern "C" fn isolate_folio_to_list(folio: *mut folio, list: *mut list_head) -> bool {
-    bool isolate_folio_to_list(struct folio *folio, struct list_head *list)
-    {
-    if (folio_test_hugetlb(folio))
+    if (folio_test_hugetlb(folio)) {
     return folio_isolate_hugetlb(folio, list);
+    }
     if (page_has_movable_ops(&folio.page)) {
     if (!isolate_movable_ops_page(&folio.page,
-    ISOLATE_UNEVICTABLE))
+    ISOLATE_UNEVICTABLE)) {
     return false;
+    }
     } else {
-    if (!folio_isolate_lru(folio))
+    if (!folio_isolate_lru(folio)) {
     return false;
+    }
     node_stat_add_folio(folio, NR_ISOLATED_ANON +
     folio_is_file_lru(folio));
     }
     list_add(&folio.lru, list);
     return true;
     }
-    static bool try_to_map_unused_to_zeropage(struct page_vma_mapped_walk *pvmw,
-    struct folio *folio, pte_t old_pte, unsigned long idx)
-    {
-    struct page *page = folio_page(folio, idx);
-    pte_t newpte;
-    if (PageCompound(page) || PageHWPoison(page))
+#[no_mangle]
+pub unsafe extern "C" fn try_to_map_unused_to_zeropage(pvmw: *mut page_vma_mapped_walk, folio: *mut folio, old_pte: pte_t, idx: c_ulong) -> bool {
+    let mut page = folio_page(folio, idx);
+    let mut newpte;
+    if (PageCompound(page) || PageHWPoison(page)) {
     return false;
+    }
     VM_BUG_ON_PAGE(!PageAnon(page), page);
     VM_BUG_ON_PAGE(!PageLocked(page), page);
     VM_BUG_ON_PAGE(pte_present(old_pte), page);
     VM_WARN_ON_ONCE_FOLIO(folio_is_device_private(folio), folio);
     if (folio_test_mlocked(folio) || (pvmw.vma.vm_flags & VM_LOCKED) ||
-    mm_forbids_zeropage(pvmw.vma.vm_mm))
+    mm_forbids_zeropage(pvmw.vma.vm_mm)) {
     return false;
+    }
 //
 // The pmd entry mapping the old thp was flushed and the pte mapping
 // this subpage has been non present. If the subpage is only zero-filled
 // then map it to the shared zeropage.
 //
-    if (!pages_identical(page, ZERO_PAGE(0)))
+    if (!pages_identical(page, ZERO_PAGE(0))) {
     return false;
+    }
     newpte = pte_mkspecial(pfn_pte(zero_pfn(pvmw.address),
     pvmw.vma.vm_page_prot));
-    if (pte_swp_soft_dirty(old_pte))
+    if (pte_swp_soft_dirty(old_pte)) {
     newpte = pte_mksoft_dirty(newpte);
-    if (pte_swp_uffd(old_pte))
+    }
+    if (pte_swp_uffd(old_pte)) {
     newpte = pte_mkuffd(newpte);
+    }
 // See remove_migration_pte(): restore PAGE_NONE for RWP
-    if (pte_swp_uffd(old_pte) && userfaultfd_rwp(pvmw.vma))
+    if (pte_swp_uffd(old_pte) && userfaultfd_rwp(pvmw.vma)) {
     newpte = pte_modify(newpte, PAGE_NONE);
+    }
     set_pte_at(pvmw.vma.vm_mm, pvmw.address, pvmw.pte, newpte);
     dec_mm_counter(pvmw.vma.vm_mm, mm_counter(folio));
     return true;
@@ -326,18 +587,17 @@ pub struct rmap_walk_arg {
 //
 // Restore a potential migration pte to a working pte entry
 //
-    static bool remove_migration_pte(struct folio *folio,
-    struct vm_area_struct *vma, unsigned long addr, void *arg)
-    {
-    struct rmap_walk_arg *rmap_walk_arg = arg;
-    DEFINE_FOLIO_VMA_WALK(pvmw, rmap_walk_arg.folio, vma, addr, PVMW_SYNC | PVMW_MIGRATION);
+#[no_mangle]
+pub unsafe extern "C" fn remove_migration_pte(folio: *mut folio, vma: *mut vm_area_struct, addr: c_ulong, arg: *mut c_void) -> bool {
+    let mut rmap_walk_arg = arg;
+pub static mut pvmw: usize = 0;
     while (page_vma_mapped_walk(&pvmw)) {
-    let mut rmap_flags: rmap_t = RMAP_NONE;
-    let mut idx: c_ulong = 0;
-    softleaf_t entry;
-    struct page *new;
-    pte_t old_pte;
-    pte_t pte;
+pub static mut rmap_flags: rmap_t = 0;
+pub static mut idx: c_ulong = 0;
+    let mut entry;
+pub static mut new: *mut c_void = core::ptr::null_mut();
+    let mut old_pte;
+    let mut pte;
 
 // PMD-mapped THP migration entry
     if (!pvmw.pte) {
@@ -347,77 +607,98 @@ pub struct rmap_walk_arg {
     continue;
     }
 
-    if (folio_test_hugetlb(folio))
+    if (folio_test_hugetlb(folio)) {
     old_pte = huge_ptep_get(vma.vm_mm, pvmw.address,
     pvmw.pte);
-    else
+    }
+    else {
     old_pte = ptep_get(pvmw.pte);
+    }
     entry = softleaf_from_pte(old_pte);
-    if (folio_test_large(folio) && !folio_test_hugetlb(folio))
+    if (folio_test_large(folio) && !folio_test_hugetlb(folio)) {
     idx = softleaf_to_pfn(entry) - pvmw.pfn;
+    }
     if (rmap_walk_arg.map_unused_to_zeropage &&
-    try_to_map_unused_to_zeropage(&pvmw, folio, old_pte, idx))
+    try_to_map_unused_to_zeropage(&pvmw, folio, old_pte, idx)) {
     continue;
+    }
     folio_get(folio);
     new = folio_page(folio, idx);
     pte = mk_pte(new, READ_ONCE(vma.vm_page_prot));
-    if (!softleaf_is_migration_young(entry))
+    if (!softleaf_is_migration_young(entry)) {
     pte = pte_mkold(pte);
-    if (folio_test_dirty(folio) && softleaf_is_migration_dirty(entry))
+    }
+    if (folio_test_dirty(folio) && softleaf_is_migration_dirty(entry)) {
     pte = pte_mkdirty(pte);
-    if (pte_swp_soft_dirty(old_pte))
+    }
+    if (pte_swp_soft_dirty(old_pte)) {
     pte = pte_mksoft_dirty(pte);
-    else
+    }
+    else {
     pte = pte_clear_soft_dirty(pte);
-    if (softleaf_is_migration_write(entry))
+    }
+    if (softleaf_is_migration_write(entry)) {
     pte = pte_mkwrite(pte, vma);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: pte_swp_uffd(old_pte)) -> else {
-    else if (pte_swp_uffd(old_pte))
+    }
+
+    else if (pte_swp_uffd(old_pte)) {
     pte = pte_mkuffd(pte);
+    }
 // See do_swap_page(): restore PAGE_NONE for RWP
-    if (pte_swp_uffd(old_pte) && userfaultfd_rwp(vma))
+    if (pte_swp_uffd(old_pte) && userfaultfd_rwp(vma)) {
     pte = pte_modify(pte, PAGE_NONE);
-    if (folio_test_anon(folio) && !softleaf_is_migration_read(entry))
+    }
+    if (folio_test_anon(folio) && !softleaf_is_migration_read(entry)) {
     rmap_flags |= RMAP_EXCLUSIVE;
+    }
     if (unlikely(is_device_private_page(new))) {
-    if (pte_write(pte))
+    if (pte_write(pte)) {
     entry = make_writable_device_private_entry(
     page_to_pfn(new));
-    else
+    }
+    else {
     entry = make_readable_device_private_entry(
     page_to_pfn(new));
+    }
     pte = softleaf_to_pte(entry);
-    if (pte_swp_soft_dirty(old_pte))
+    if (pte_swp_soft_dirty(old_pte)) {
     pte = pte_swp_mksoft_dirty(pte);
-    if (pte_swp_uffd(old_pte))
+    }
+    if (pte_swp_uffd(old_pte)) {
     pte = pte_swp_mkuffd(pte);
+    }
     }
 
     if (folio_test_hugetlb(folio)) {
-    struct hstate *h = hstate_vma(vma);
-    let mut shift: c_uint = huge_page_shift(h);
-    let mut psize: c_ulong = huge_page_size(h);
+    let mut h = hstate_vma(vma);
+pub static mut shift: c_uint = 0;
+pub static mut psize: c_ulong = 0;
     pte = arch_make_huge_pte(pte, shift, vma.vm_flags);
-    if (folio_test_anon(folio))
+    if (folio_test_anon(folio)) {
     hugetlb_add_anon_rmap(folio, vma, pvmw.address,
     rmap_flags);
-    else
+    }
+    else {
     hugetlb_add_file_rmap(folio);
+    }
     set_huge_pte_at(vma.vm_mm, pvmw.address, pvmw.pte, pte,
     psize);
-    } else
+    } else {
 
     {
-    if (folio_test_anon(folio))
+    }
+    if (folio_test_anon(folio)) {
     folio_add_anon_rmap_pte(folio, new, vma,
     pvmw.address, rmap_flags);
-    else
+    }
+    else {
     folio_add_file_rmap_pte(folio, new, vma);
+    }
     set_pte_at(vma.vm_mm, pvmw.address, pvmw.pte, pte);
     }
-    if (READ_ONCE(vma.vm_flags) & VM_LOCKED)
+    if (READ_ONCE(vma.vm_flags) & VM_LOCKED) {
     mlock_drain_local();
+    }
     trace_remove_migration_pte(pvmw.address, pte_val(pte),
     compound_order(new));
 // No need to invalidate - it was non-present before
@@ -429,48 +710,45 @@ pub unsafe extern "C" fn if(_arg: pte_swp_uffd(old_pte)) -> else {
 // Get rid of all migration entries and replace them by
 // references to the indicated page.
 //
-    void remove_migration_ptes(struct folio *src, struct folio *dst,
-    enum ttu_flags flags)
-    {
-    struct rmap_walk_arg rmap_walk_arg = {
-    .folio = src,
-    .map_unused_to_zeropage = flags & TTU_USE_SHARED_ZEROPAGE,
-    };
-    struct rmap_walk_control rwc = {
-    .rmap_one = remove_migration_pte,
-    .arg = &rmap_walk_arg,
-    };
+#[no_mangle]
+pub unsafe extern "C" fn remove_migration_ptes(src: *mut folio, dst: *mut folio, flags: ttu_flags) {
+pub static mut rmap_walk_arg: usize = 0;
+pub static mut rmap_walk_control: usize = 0;
     VM_BUG_ON_FOLIO((flags & TTU_USE_SHARED_ZEROPAGE) && (src != dst), src);
-    if (flags & TTU_RMAP_LOCKED)
+    if (flags & TTU_RMAP_LOCKED) {
     rmap_walk_locked(dst, &rwc);
-    else
+    }
+    else {
     rmap_walk(dst, &rwc);
+    }
     }
 //
 // Something used the pte of a page under migration. We need to
 // get to the page and wait until migration is finished.
 // When we return from this function the fault will be retried.
 //
-    void migration_entry_wait(struct mm_struct *mm, pmd_t *pmd,
-    unsigned long address)
-    {
-    spinlock_t *ptl;
-    pte_t *ptep;
-    pte_t pte;
-    softleaf_t entry;
+#[no_mangle]
+pub unsafe extern "C" fn migration_entry_wait(mm: *mut mm_struct, pmd: *mut pmd_t, address: c_ulong) {
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
+pub static mut ptep: *mut c_void = core::ptr::null_mut();
+    let mut pte;
+    let mut entry;
     ptep = pte_offset_map_lock(mm, pmd, address, &ptl);
-    if (!ptep)
+    if (!ptep) {
     return;
+    }
     pte = ptep_get(ptep);
     pte_unmap(ptep);
-    if (pte_none(pte) || pte_present(pte))
-    goto out;
+    if (pte_none(pte) || pte_present(pte)) {
+// goto;
+    }
     entry = softleaf_from_pte(pte);
-    if (!softleaf_is_migration(entry))
-    goto out;
+    if (!softleaf_is_migration(entry)) {
+// goto;
+    }
     softleaf_entry_wait_on_locked(entry, ptl);
     return;
-    out:
+// label;
     spin_unlock(ptl);
     }
 
@@ -482,16 +760,15 @@ pub unsafe extern "C" fn if(_arg: pte_swp_uffd(old_pte)) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn migration_entry_wait_huge(vma: *mut vm_area_struct, addr: c_ulong, ptep: *mut pte_t) {
-    void migration_entry_wait_huge(struct vm_area_struct *vma, unsigned long addr, pte_t *ptep)
-    {
-    spinlock_t *ptl = huge_pte_lockptr(hstate_vma(vma), vma.vm_mm, ptep);
-    softleaf_t entry;
-    pte_t pte;
+    let mut ptl = huge_pte_lockptr(hstate_vma(vma), vma.vm_mm, ptep);
+    let mut entry;
+    let mut pte;
     hugetlb_vma_assert_locked(vma);
     spin_lock(ptl);
     pte = huge_ptep_get(vma.vm_mm, addr, ptep);
-    if (huge_pte_none(pte))
-    goto fail;
+    if (huge_pte_none(pte)) {
+// goto;
+    }
     entry = softleaf_from_pte(pte);
     if (softleaf_is_migration(entry)) {
 //
@@ -504,22 +781,21 @@ pub unsafe extern "C" fn migration_entry_wait_huge(vma: *mut vm_area_struct, add
     softleaf_entry_wait_on_locked(entry, ptl);
     return;
     }
-    fail:
+// label;
     spin_unlock(ptl);
     hugetlb_vma_unlock_read(vma);
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn pmd_migration_entry_wait(mm: *mut mm_struct, pmd: *mut pmd_t) {
-    void pmd_migration_entry_wait(struct mm_struct *mm, pmd_t *pmd)
-    {
-    spinlock_t *ptl;
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
     ptl = pmd_lock(mm, pmd);
-    if (!pmd_is_migration_entry(*pmd))
-    goto unlock;
+    if (!pmd_is_migration_entry(*pmd)) {
+// goto;
+    }
     softleaf_entry_wait_on_locked(softleaf_from_pmd(*pmd), ptl);
     return;
-    unlock:
+// label;
     spin_unlock(ptl);
     }
 
@@ -531,20 +807,21 @@ pub unsafe extern "C" fn pmd_migration_entry_wait(mm: *mut mm_struct, pmd: *mut 
 // 2 for folios with a mapping
 // 3 for folios with a mapping and the private flag set.
 //
-    static int __folio_migrate_mapping(struct address_space *mapping,
-    struct folio *newfolio, struct folio *folio, int expected_count)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __folio_migrate_mapping(mapping: *mut address_space, newfolio: *mut folio, folio: *mut folio, expected_count: c_int) -> c_int {
     XA_STATE(xas, &mapping.i_pages, folio.index);
-    struct swap_cluster_info *ci = core::ptr::null_mut();
-    struct zone *oldzone, *newzone;
-    int dirty;
-    let mut nr: c_long = folio_nr_pages(folio);
+    let mut ci = core::ptr::null_mut();
+    let mut oldzone = core::ptr::null_mut();
+    let mut newzone = core::ptr::null_mut();
+    let mut dirty = 0;
+pub static mut nr: c_long = 0;
     if (!mapping) {
 // Take off deferred split queue while frozen and memcg set
     if (folio_test_large(folio) &&
     folio_test_large_rmappable(folio)) {
-    if (!folio_ref_freeze(folio, expected_count))
+    if (!folio_ref_freeze(folio, expected_count)) {
     return -EAGAIN;
+    }
     folio_unqueue_deferred_split(folio);
     folio_ref_unfreeze(folio, expected_count);
     }
@@ -552,23 +829,29 @@ pub unsafe extern "C" fn pmd_migration_entry_wait(mm: *mut mm_struct, pmd: *mut 
     newfolio.index = folio.index;
     newfolio.mapping = folio.mapping;
     if (folio_test_anon(folio) && folio_test_large(folio) &&
-    !folio_test_hugetlb(folio))
+    !folio_test_hugetlb(folio)) {
     mod_mthp_stat(folio_order(folio), MTHP_STAT_NR_ANON, 1);
-    if (folio_test_swapbacked(folio))
+    }
+    if (folio_test_swapbacked(folio)) {
     __folio_set_swapbacked(newfolio);
+    }
     return 0;
     }
     oldzone = folio_zone(folio);
     newzone = folio_zone(newfolio);
-    if (folio_test_swapcache(folio))
+    if (folio_test_swapcache(folio)) {
     ci = swap_cluster_get_and_lock_irq(folio);
-    else
+    }
+    else {
     xas_lock_irq(&xas);
+    }
     if (!folio_ref_freeze(folio, expected_count)) {
-    if (ci)
+    if (ci) {
     swap_cluster_unlock_irq(ci);
-    else
+    }
+    else {
     xas_unlock_irq(&xas);
+    }
     return -EAGAIN;
     }
 // Take off deferred split queue while frozen and memcg set
@@ -579,11 +862,13 @@ pub unsafe extern "C" fn pmd_migration_entry_wait(mm: *mut mm_struct, pmd: *mut 
 //
     newfolio.index = folio.index;
     newfolio.mapping = folio.mapping;
-    if (folio_test_anon(folio) && folio_test_large(folio))
+    if (folio_test_anon(folio) && folio_test_large(folio)) {
     mod_mthp_stat(folio_order(folio), MTHP_STAT_NR_ANON, 1);
+    }
     folio_ref_add(newfolio, nr); /* add cache reference */
-    if (folio_test_swapbacked(folio))
+    if (folio_test_swapbacked(folio)) {
     __folio_set_swapbacked(newfolio);
+    }
     if (folio_test_swapcache(folio)) {
     folio_set_swapcache(newfolio);
     newfolio.private = folio_get_private(folio);
@@ -594,10 +879,12 @@ pub unsafe extern "C" fn pmd_migration_entry_wait(mm: *mut mm_struct, pmd: *mut 
     folio_clear_dirty(folio);
     folio_set_dirty(newfolio);
     }
-    if (folio_test_swapcache(folio))
+    if (folio_test_swapcache(folio)) {
     __swap_cache_replace_folio(ci, folio, newfolio);
-    else
+    }
+    else {
     xas_store(&xas, newfolio);
+    }
 //
 // Drop cache reference from old folio by unfreezing
 // to one less reference.
@@ -605,10 +892,12 @@ pub unsafe extern "C" fn pmd_migration_entry_wait(mm: *mut mm_struct, pmd: *mut 
 //
     folio_ref_unfreeze(folio, expected_count - nr);
 // Leave irq disabled to prevent preemption while updating stats
-    if (ci)
+    if (ci) {
     swap_cluster_unlock(ci);
-    else
+    }
+    else {
     xas_unlock(&xas);
+    }
 //
 // If moved to a different zone then also account
 // the folio for that zone. Other VM counters will be
@@ -620,8 +909,9 @@ pub unsafe extern "C" fn pmd_migration_entry_wait(mm: *mut mm_struct, pmd: *mut 
 // are mapped to swap space.
 //
     if (newzone != oldzone) {
-    struct lruvec *old_lruvec, *new_lruvec;
-    struct mem_cgroup *memcg;
+    let mut old_lruvec = core::ptr::null_mut();
+    let mut new_lruvec = core::ptr::null_mut();
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     memcg = folio_memcg(folio);
     old_lruvec = mem_cgroup_lruvec(memcg, oldzone.zone_pgdat);
@@ -653,12 +943,12 @@ pub unsafe extern "C" fn pmd_migration_entry_wait(mm: *mut mm_struct, pmd: *mut 
     local_irq_enable();
     return 0;
     }
-    int folio_migrate_mapping(struct address_space *mapping,
-    struct folio *newfolio, struct folio *folio, int extra_count)
-    {
-    let mut expected_count: c_int = folio_expected_ref_count(folio) + extra_count + 1;
-    if (folio_ref_count(folio) != expected_count)
+#[no_mangle]
+pub unsafe extern "C" fn folio_migrate_mapping(mapping: *mut address_space, newfolio: *mut folio, folio: *mut folio, extra_count: c_int) -> c_int {
+pub static mut expected_count: c_int = 0;
+    if (folio_ref_count(folio) != expected_count) {
     return -EAGAIN;
+    }
     return __folio_migrate_mapping(mapping, newfolio, folio, expected_count);
     }
     EXPORT_SYMBOL(folio_migrate_mapping);
@@ -666,16 +956,17 @@ pub unsafe extern "C" fn pmd_migration_entry_wait(mm: *mut mm_struct, pmd: *mut 
 // The expected number of remaining references is the same as that
 // of folio_migrate_mapping().
 //
-    int migrate_huge_page_move_mapping(struct address_space *mapping,
-    struct folio *dst, struct folio *src)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn migrate_huge_page_move_mapping(mapping: *mut address_space, dst: *mut folio, src: *mut folio) -> c_int {
     XA_STATE(xas, &mapping.i_pages, src.index);
     int rc, expected_count = folio_expected_ref_count(src) + 1;
-    if (folio_ref_count(src) != expected_count)
+    if (folio_ref_count(src) != expected_count) {
     return -EAGAIN;
+    }
     rc = folio_mc_copy(dst, src);
-    if (unlikely(rc))
+    if (unlikely(rc)) {
     return rc;
+    }
     xas_lock_irq(&xas);
     if (!folio_ref_freeze(src, expected_count)) {
     xas_unlock_irq(&xas);
@@ -694,37 +985,44 @@ pub unsafe extern "C" fn pmd_migration_entry_wait(mm: *mut mm_struct, pmd: *mut 
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_migrate_flags(newfolio: *mut folio, folio: *mut folio) {
-    void folio_migrate_flags(struct folio *newfolio, struct folio *folio)
-    {
-    int cpupid;
-    if (folio_test_referenced(folio))
+    let mut cpupid = 0;
+    if (folio_test_referenced(folio)) {
     folio_set_referenced(newfolio);
-    if (folio_test_uptodate(folio))
+    }
+    if (folio_test_uptodate(folio)) {
     folio_mark_uptodate(newfolio);
+    }
     if (folio_test_clear_active(folio)) {
     VM_BUG_ON_FOLIO(folio_test_unevictable(folio), folio);
     folio_set_active(newfolio);
-    } else if (folio_test_clear_unevictable(folio))
+    } else if (folio_test_clear_unevictable(folio)) {
     folio_set_unevictable(newfolio);
-    if (folio_test_workingset(folio))
+    }
+    if (folio_test_workingset(folio)) {
     folio_set_workingset(newfolio);
-    if (folio_test_checked(folio))
+    }
+    if (folio_test_checked(folio)) {
     folio_set_checked(newfolio);
+    }
 //
 // PG_anon_exclusive (-> PG_mappedtodisk) is always migrated via
 // migration entries. We can still have PG_anon_exclusive set on an
 // effectively unmapped and unreferenced first sub-pages of an
 // anonymous THP: we can simply copy it here via PG_mappedtodisk.
 //
-    if (folio_test_mappedtodisk(folio))
+    if (folio_test_mappedtodisk(folio)) {
     folio_set_mappedtodisk(newfolio);
+    }
 // Move dirty on pages not done by folio_migrate_mapping()
-    if (folio_test_dirty(folio))
+    if (folio_test_dirty(folio)) {
     folio_set_dirty(newfolio);
-    if (folio_test_young(folio))
+    }
+    if (folio_test_young(folio)) {
     folio_set_young(newfolio);
-    if (folio_test_idle(folio))
+    }
+    if (folio_test_idle(folio)) {
     folio_set_idle(newfolio);
+    }
     folio_migrate_refs(newfolio, folio);
 //
 // Copy NUMA information to the new page, to prevent over-eager
@@ -737,10 +1035,11 @@ pub unsafe extern "C" fn folio_migrate_flags(newfolio: *mut folio, folio: *mut f
 // page access time in slow memory node.
 //
     if (sysctl_numa_balancing_mode & NUMA_BALANCING_MEMORY_TIERING) {
-    let mut f_toptier: bool = node_is_toptier(folio_nid(folio));
-    let mut t_toptier: bool = node_is_toptier(folio_nid(newfolio));
-    if (f_toptier != t_toptier)
+pub static mut f_toptier: bool = false;
+pub static mut t_toptier: bool = false;
+    if (f_toptier != t_toptier) {
     cpupid = -1;
+    }
     }
     folio_xchg_last_cpupid(newfolio, cpupid);
     folio_migrate_ksm(newfolio, folio);
@@ -749,25 +1048,29 @@ pub unsafe extern "C" fn folio_migrate_flags(newfolio: *mut folio, folio: *mut f
 // ksm_get_folio() depends upon ksm_migrate_page() and the
 // swapcache flag.
 //
-    if (folio_test_swapcache(folio))
+    if (folio_test_swapcache(folio)) {
     folio_clear_swapcache(folio);
+    }
     folio_clear_private(folio);
 // page->private contains hugetlb specific flags
-    if (!folio_test_hugetlb(folio))
+    if (!folio_test_hugetlb(folio)) {
     folio.private = core::ptr::null_mut();
+    }
 //
 // If any waiters have accumulated on the new page then
 // wake them up.
 //
-    if (folio_test_writeback(newfolio))
+    if (folio_test_writeback(newfolio)) {
     folio_end_writeback(newfolio);
+    }
 //
 // PG_readahead shares the same bit with PG_reclaim.  The above
 // end_page_writeback() may clear PG_readahead mistakenly, so set the
 // bit after that.
 //
-    if (folio_test_readahead(folio))
+    if (folio_test_readahead(folio)) {
     folio_set_readahead(newfolio);
+    }
     folio_copy_owner(newfolio, folio);
     pgalloc_tag_swap(newfolio, folio);
     mem_cgroup_migrate(folio, newfolio);
@@ -776,22 +1079,24 @@ pub unsafe extern "C" fn folio_migrate_flags(newfolio: *mut folio, folio: *mut f
 //
 // Migration functions
 //
-    static int __migrate_folio(struct address_space *mapping, struct folio *dst,
-    struct folio *src, void *src_private,
-    enum migrate_mode mode)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __migrate_folio(mapping: *mut address_space, dst: *mut folio, src: *mut folio, src_private: *mut c_void, mode: migrate_mode) -> c_int {
     int rc, expected_count = folio_expected_ref_count(src) + 1;
 // Check whether src does not have extra refs before we do more work
-    if (folio_ref_count(src) != expected_count)
+    if (folio_ref_count(src) != expected_count) {
     return -EAGAIN;
+    }
     rc = folio_mc_copy(dst, src);
-    if (unlikely(rc))
+    if (unlikely(rc)) {
     return rc;
+    }
     rc = __folio_migrate_mapping(mapping, dst, src, expected_count);
-    if (rc)
+    if (rc) {
     return rc;
-    if (src_private)
+    }
+    if (src_private) {
     folio_attach_private(dst, folio_detach_private(src));
+    }
     folio_migrate_flags(dst, src);
     return 0;
     }
@@ -807,32 +1112,32 @@ pub unsafe extern "C" fn folio_migrate_flags(newfolio: *mut folio, folio: *mut f
 //
 // Folios are locked upon entry and exit.
 //
-    int migrate_folio(struct address_space *mapping, struct folio *dst,
-    struct folio *src, enum migrate_mode mode)
-    {
-    BUG_ON(folio_test_writeback(src));	/* Writeback must be complete */
+#[no_mangle]
+pub unsafe extern "C" fn migrate_folio(mapping: *mut address_space, dst: *mut folio, src: *mut folio, mode: migrate_mode) -> c_int {
+    BUG_ON!(folio_test_writeback(src));	/* Writeback must be complete */
     return __migrate_folio(mapping, dst, src, core::ptr::null_mut(), mode);
     }
     EXPORT_SYMBOL(migrate_folio);
 
 // Returns true if all buffers are successfully locked
-    static bool buffer_migrate_lock_buffers(struct buffer_head *head,
-    enum migrate_mode mode)
-    {
-    struct buffer_head *bh = head;
-    struct buffer_head *failed_bh;
+#[no_mangle]
+pub unsafe extern "C" fn buffer_migrate_lock_buffers(head: *mut buffer_head, mode: migrate_mode) -> bool {
+    let mut bh = head;
+pub static mut failed_bh: *mut c_void = core::ptr::null_mut();
     do {
     if (!trylock_buffer(bh)) {
-    if (mode == MIGRATE_ASYNC)
-    goto unlock;
-    if (mode == MIGRATE_SYNC_LIGHT && !buffer_uptodate(bh))
-    goto unlock;
+    if (mode == MIGRATE_ASYNC) {
+// goto;
+    }
+    if (mode == MIGRATE_SYNC_LIGHT && !buffer_uptodate(bh)) {
+// goto;
+    }
     lock_buffer(bh);
     }
     bh = bh.b_this_page;
     } while (bh != head);
     return true;
-    unlock:
+// label;
 // We failed to lock the buffer and cannot stall.
     failed_bh = bh;
     bh = head;
@@ -842,28 +1147,31 @@ pub unsafe extern "C" fn folio_migrate_flags(newfolio: *mut folio, folio: *mut f
     }
     return false;
     }
-    static int __buffer_migrate_folio(struct address_space *mapping,
-    struct folio *dst, struct folio *src, enum migrate_mode mode,
-    bool check_refs)
-    {
-    struct buffer_head *bh, *head;
-    int rc;
-    int expected_count;
+#[no_mangle]
+pub unsafe extern "C" fn __buffer_migrate_folio(mapping: *mut address_space, dst: *mut folio, src: *mut folio, mode: migrate_mode, check_refs: bool) -> c_int {
+    let mut bh = core::ptr::null_mut();
+    let mut head = core::ptr::null_mut();
+    let mut rc = 0;
+    let mut expected_count = 0;
     head = folio_buffers(src);
-    if (!head)
+    if (!head) {
     return migrate_folio(mapping, dst, src, mode);
+    }
 // Check whether page does not have extra refs before we do more work
     expected_count = folio_expected_ref_count(src) + 1;
-    if (folio_ref_count(src) != expected_count)
+    if (folio_ref_count(src) != expected_count) {
     return -EAGAIN;
-    if (!buffer_migrate_lock_buffers(head, mode))
+    }
+    if (!buffer_migrate_lock_buffers(head, mode)) {
     return -EAGAIN;
+    }
     if (check_refs) {
-    bool busy, migrating;
-    let mut invalidated: bool = false;
+    let mut busy = 0;
+    let mut migrating = 0;
+pub static mut invalidated: bool = false;
     migrating = test_and_set_bit_lock(BH_Migrate, &head.b_state);
     VM_WARN_ON_ONCE(migrating);
-    recheck_buffers:
+// label;
     busy = false;
     spin_lock(&mapping.i_private_lock);
     bh = head;
@@ -878,24 +1186,26 @@ pub unsafe extern "C" fn folio_migrate_flags(newfolio: *mut folio, folio: *mut f
     if (busy) {
     if (invalidated) {
     rc = -EAGAIN;
-    goto unlock_buffers;
+// goto;
     }
     invalidate_bh_lrus();
     invalidated = true;
-    goto recheck_buffers;
+// goto;
     }
     }
     rc = filemap_migrate_folio(mapping, dst, src, mode);
-    if (rc)
-    goto unlock_buffers;
+    if (rc) {
+// goto;
+    }
     bh = head;
     do {
     folio_set_bh(bh, dst, bh_offset(bh));
     bh = bh.b_this_page;
     } while (bh != head);
-    unlock_buffers:
-    if (check_refs)
+// label;
+    if (check_refs) {
     clear_bit_unlock(BH_Migrate, &head.b_state);
+    }
     bh = head;
     do {
     unlock_buffer(bh);
@@ -918,9 +1228,8 @@ pub unsafe extern "C" fn folio_migrate_flags(newfolio: *mut folio, folio: *mut f
 //
 // Return: 0 on success or a negative errno on failure.
 //
-    int buffer_migrate_folio(struct address_space *mapping,
-    struct folio *dst, struct folio *src, enum migrate_mode mode)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn buffer_migrate_folio(mapping: *mut address_space, dst: *mut folio, src: *mut folio, mode: migrate_mode) -> c_int {
     return __buffer_migrate_folio(mapping, dst, src, mode, false);
     }
     EXPORT_SYMBOL(buffer_migrate_folio);
@@ -938,36 +1247,35 @@ pub unsafe extern "C" fn folio_migrate_flags(newfolio: *mut folio, folio: *mut f
 //
 // Return: 0 on success or a negative errno on failure.
 //
-    int buffer_migrate_folio_norefs(struct address_space *mapping,
-    struct folio *dst, struct folio *src, enum migrate_mode mode)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn buffer_migrate_folio_norefs(mapping: *mut address_space, dst: *mut folio, src: *mut folio, mode: migrate_mode) -> c_int {
     return __buffer_migrate_folio(mapping, dst, src, mode, true);
     }
     EXPORT_SYMBOL_GPL(buffer_migrate_folio_norefs);
 
-    int filemap_migrate_folio(struct address_space *mapping,
-    struct folio *dst, struct folio *src, enum migrate_mode mode)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn filemap_migrate_folio(mapping: *mut address_space, dst: *mut folio, src: *mut folio, mode: migrate_mode) -> c_int {
     return __migrate_folio(mapping, dst, src, folio_get_private(src), mode);
     }
     EXPORT_SYMBOL_GPL(filemap_migrate_folio);
 //
 // Default handling if a filesystem does not provide a migration function.
 //
-    static int fallback_migrate_folio(struct address_space *mapping,
-    struct folio *dst, struct folio *src, enum migrate_mode mode)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn fallback_migrate_folio(mapping: *mut address_space, dst: *mut folio, src: *mut folio, mode: migrate_mode) -> c_int {
     WARN_ONCE(mapping.a_ops.writepages,
     "%ps does not implement migrate_folio\n",
     mapping.a_ops);
-    if (folio_test_dirty(src))
+    if (folio_test_dirty(src)) {
     return -EBUSY;
+    }
 //
 // Filesystem may have private data at folio->private that we
 // can't migrate automatically.
 //
-    if (!filemap_release_folio(src, GFP_KERNEL))
-    let mut mode: return = = MIGRATE_SYNC ? -EAGAIN : -EBUSY;
+    if (!filemap_release_folio(src, GFP_KERNEL)) {
+pub static mut mode: return = 0;
+    }
     return migrate_folio(mapping, dst, src, mode);
     }
 //
@@ -982,22 +1290,21 @@ pub unsafe extern "C" fn folio_migrate_flags(newfolio: *mut folio, folio: *mut f
 // < 0 - error code
 // 0 - success
 //
-    static int move_to_new_folio(struct folio *dst, struct folio *src,
-    enum migrate_mode mode)
-    {
-    struct address_space *mapping = folio_mapping(src);
-    let mut rc: c_int = -EAGAIN;
+#[no_mangle]
+pub unsafe extern "C" fn move_to_new_folio(dst: *mut folio, src: *mut folio, mode: migrate_mode) -> c_int {
+    let mut mapping = folio_mapping(src);
+pub static mut rc: c_int = 0;
     VM_BUG_ON_FOLIO(!folio_test_locked(src), src);
     VM_BUG_ON_FOLIO(!folio_test_locked(dst), dst);
-    if (!mapping)
+    if (!mapping) {
     rc = migrate_folio(mapping, dst, src, mode);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: mapping_inaccessible(mapping)) -> else {
-    else if (mapping_inaccessible(mapping))
+    }
+
+    else if (mapping_inaccessible(mapping)) {
     rc = -EOPNOTSUPP;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: mapping->a_ops->migrate_folio) -> else {
-    else if (mapping.a_ops.migrate_folio)
+    }
+
+    else if (mapping.a_ops.migrate_folio) {
 //
 // Most folios have a mapping and most filesystems
 // provide a migrate_folio callback. Anonymous folios
@@ -1007,17 +1314,21 @@ pub unsafe extern "C" fn if(_arg: mapping->a_ops->migrate_folio) -> else {
 //
     rc = mapping.a_ops.migrate_folio(mapping, dst, src,
     mode);
-    else
+    }
+    else {
     rc = fallback_migrate_folio(mapping, dst, src, mode);
+    }
     if (!rc) {
 //
 // For pagecache folios, src->mapping must be cleared before src
 // is freed. Anonymous folios must stay anonymous until freed.
 //
-    if (!folio_test_anon(src))
+    if (!folio_test_anon(src)) {
     src.mapping = core::ptr::null_mut();
-    if (likely(!folio_is_zone_device(dst)))
+    }
+    if (likely(!folio_is_zone_device(dst))) {
     flush_dcache_folio(dst);
+    }
     }
     return rc;
     }
@@ -1031,75 +1342,78 @@ pub unsafe extern "C" fn if(_arg: mapping->a_ops->migrate_folio) -> else {
     FOLIO_WAS_MLOCKED = BIT(1),
     FOLIO_OLD_STATES = FOLIO_WAS_MAPPED | FOLIO_WAS_MLOCKED,
     };
-    static void __migrate_folio_record(struct folio *dst,
-    int old_folio_state, struct anon_vma *anon_vma)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __migrate_folio_record(dst: *mut folio, old_folio_state: c_int, anon_vma: *mut anon_vma) {
     dst.migrate_info = (unsigned long)anon_vma | old_folio_state;
     }
-    static void __migrate_folio_extract(struct folio *dst,
-    int *old_folio_state, struct anon_vma **anon_vmap)
-    {
-    let mut info: c_ulong = dst.migrate_info;
-// anon_vmap = (struct anon_vma *)(info & ~FOLIO_OLD_STATES);
+#[no_mangle]
+pub unsafe extern "C" fn __migrate_folio_extract(dst: *mut folio, old_folio_state: *mut c_int, anon_vmap: *mut *mut anon_vma) {
+pub static mut info: c_ulong = 0;
+// anon_vmap = (info & ~FOLIO_OLD_STATES);
 // old_folio_state = info & FOLIO_OLD_STATES;
     dst.migrate_info = 0;
     }
 // Restore the source folio to the original state upon failure
-    static void migrate_folio_undo_src(struct folio *src, int was_mapped,
-    struct anon_vma *anon_vma, bool locked, struct list_head *ret)
-    {
-    if (was_mapped)
+#[no_mangle]
+pub unsafe extern "C" fn migrate_folio_undo_src(src: *mut folio, was_mapped: c_int, anon_vma: *mut anon_vma, locked: bool, ret: *mut list_head) {
+    if (was_mapped) {
     remove_migration_ptes(src, src, 0);
+    }
 // Drop an anon_vma reference if we took one
-    if (anon_vma)
+    if (anon_vma) {
     put_anon_vma(anon_vma);
-    if (locked)
+    }
+    if (locked) {
     folio_unlock(src);
-    if (ret)
+    }
+    if (ret) {
     list_move_tail(&src.lru, ret);
     }
+    }
 // Restore the destination folio to the original state upon failure
-    static void migrate_folio_undo_dst(struct folio *dst, bool locked,
-    free_folio_t put_new_folio, unsigned long private)
-    {
-    if (locked)
+#[no_mangle]
+pub unsafe extern "C" fn migrate_folio_undo_dst(dst: *mut folio, locked: bool, put_new_folio: free_folio_t, private: c_ulong) {
+    if (locked) {
     folio_unlock(dst);
-    if (put_new_folio)
+    }
+    if (put_new_folio) {
     put_new_folio(dst, private);
-    else
+    }
+    else {
     folio_put(dst);
     }
+    }
 // Cleanup src folio upon migration success
-    static void migrate_folio_done(struct folio *src,
-    enum migrate_reason reason)
-    {
-    if (likely(!page_has_movable_ops(&src.page)) && reason != MR_DEMOTION)
+#[no_mangle]
+pub unsafe extern "C" fn migrate_folio_done(src: *mut folio, reason: migrate_reason) {
+    if (likely(!page_has_movable_ops(&src.page)) && reason != MR_DEMOTION) {
     mod_node_page_state(folio_pgdat(src), NR_ISOLATED_ANON +
     folio_is_file_lru(src), -folio_nr_pages(src));
-    if (reason != MR_MEMORY_FAILURE)
+    }
+    if (reason != MR_MEMORY_FAILURE) {
 // We release the page in page_handle_poison.
     folio_put(src);
     }
+    }
 // Obtain the lock on page, remove all ptes.
-    static int migrate_folio_unmap(new_folio_t get_new_folio,
-    free_folio_t put_new_folio, unsigned long private,
-    struct folio *src, struct folio **dstp, enum migrate_mode mode,
-    struct list_head *ret)
-    {
-    struct folio *dst;
-    let mut rc: c_int = -EAGAIN;
-    let mut old_folio_state: c_int = 0;
-    struct anon_vma *anon_vma = core::ptr::null_mut();
-    let mut locked: bool = false;
-    let mut dst_locked: bool = false;
+#[no_mangle]
+pub unsafe extern "C" fn migrate_folio_unmap(get_new_folio: new_folio_t, put_new_folio: free_folio_t, private: c_ulong, src: *mut folio, dstp: *mut *mut folio, mode: migrate_mode, ret: *mut list_head) -> c_int {
+pub static mut dst: *mut c_void = core::ptr::null_mut();
+pub static mut rc: c_int = 0;
+pub static mut old_folio_state: c_int = 0;
+    let mut anon_vma = core::ptr::null_mut();
+pub static mut locked: bool = false;
+pub static mut dst_locked: bool = false;
     dst = get_new_folio(src, private);
-    if (!dst)
+    if (!dst) {
     return -ENOMEM;
+    }
 // dstp = dst;
     dst.migrate_info = 0;
     if (!folio_trylock(src)) {
-    if (mode == MIGRATE_ASYNC)
-    goto out;
+    if (mode == MIGRATE_ASYNC) {
+// goto;
+    }
 //
 // It's not safe for direct compaction to call lock_page.
 // For example, during page readahead pages are added locked
@@ -1113,20 +1427,23 @@ pub unsafe extern "C" fn if(_arg: mapping->a_ops->migrate_folio) -> else {
 // avoid the use of lock_page for direct compaction
 // altogether.
 //
-    if (current.flags & PF_MEMALLOC)
-    goto out;
+    if (current.flags & PF_MEMALLOC) {
+// goto;
+    }
 //
 // In "light" mode, we can wait for transient locks (eg
 // inserting a page into the page table), but it's not
 // worth waiting for I/O.
 //
-    if (mode == MIGRATE_SYNC_LIGHT && !folio_test_uptodate(src))
-    goto out;
+    if (mode == MIGRATE_SYNC_LIGHT && !folio_test_uptodate(src)) {
+// goto;
+    }
     folio_lock(src);
     }
     locked = true;
-    if (folio_test_mlocked(src))
+    if (folio_test_mlocked(src)) {
     old_folio_state |= FOLIO_WAS_MLOCKED;
+    }
     if (folio_test_writeback(src)) {
 //
 // Only in the case of a full synchronous migration is it
@@ -1134,12 +1451,14 @@ pub unsafe extern "C" fn if(_arg: mapping->a_ops->migrate_folio) -> else {
 // the retry loop is too short and in the sync-light case,
 // the overhead of stalling is too much
 //
-    switch (mode) {
-    case MIGRATE_SYNC:
-    break;
-    default:
+    match (mode) {
+    MIGRATE_SYNC => {
+    // break;
+    }
+    _ => {
     rc = -EBUSY;
-    goto out;
+// goto;
+    }
     }
     folio_wait_writeback(src);
     }
@@ -1157,8 +1476,9 @@ pub unsafe extern "C" fn if(_arg: mapping->a_ops->migrate_folio) -> else {
 // because that implies that the anon page is no longer mapped
 // (and cannot be remapped so long as we hold the page lock).
 //
-    if (folio_test_anon(src) && !folio_test_ksm(src))
+    if (folio_test_anon(src) && !folio_test_ksm(src)) {
     anon_vma = folio_get_anon_vma(src);
+    }
 //
 // Block others from accessing the new page when we get around to
 // establishing additional references. We are usually the only one
@@ -1167,8 +1487,9 @@ pub unsafe extern "C" fn if(_arg: mapping->a_ops->migrate_folio) -> else {
 // cases where there might be a race with the previous use of dst.
 // This is much like races on refcount of oldpage: just don't BUG().
 //
-    if (unlikely(!folio_trylock(dst)))
-    goto out;
+    if (unlikely(!folio_trylock(dst))) {
+// goto;
+    }
     dst_locked = true;
     if (unlikely(page_has_movable_ops(&src.page))) {
     __migrate_folio_record(dst, old_folio_state, anon_vma);
@@ -1189,7 +1510,7 @@ pub unsafe extern "C" fn if(_arg: mapping->a_ops->migrate_folio) -> else {
     if (!src.mapping) {
     if (folio_test_private(src)) {
     try_to_free_buffers(src);
-    goto out;
+// goto;
     }
     } else if (folio_mapped(src)) {
 // Establish migration ptes
@@ -1202,38 +1523,37 @@ pub unsafe extern "C" fn if(_arg: mapping->a_ops->migrate_folio) -> else {
     __migrate_folio_record(dst, old_folio_state, anon_vma);
     return 0;
     }
-    out:
+// label;
 //
 // A folio that has not been unmapped will be restored to
 // right list unless we want to retry.
 //
-    if (rc == -EAGAIN)
+    if (rc == -EAGAIN) {
     ret = core::ptr::null_mut();
+    }
     migrate_folio_undo_src(src, old_folio_state & FOLIO_WAS_MAPPED,
     anon_vma, locked, ret);
     migrate_folio_undo_dst(dst, dst_locked, put_new_folio, private);
     return rc;
     }
 // Migrate the folio to the newly allocated folio in dst.
-    static int migrate_folio_move(free_folio_t put_new_folio, unsigned long private,
-    struct folio *src, struct folio *dst,
-    enum migrate_mode mode, enum migrate_reason reason,
-    struct list_head *ret)
-    {
-    int rc;
-    let mut old_folio_state: c_int = 0;
-    struct anon_vma *anon_vma = core::ptr::null_mut();
-    let mut src_deferred_split: bool = false;
-    let mut src_partially_mapped: bool = false;
-    struct list_head *prev;
+#[no_mangle]
+pub unsafe extern "C" fn migrate_folio_move(put_new_folio: free_folio_t, private: c_ulong, src: *mut folio, dst: *mut folio, mode: migrate_mode, reason: migrate_reason, ret: *mut list_head) -> c_int {
+    let mut rc = 0;
+pub static mut old_folio_state: c_int = 0;
+    let mut anon_vma = core::ptr::null_mut();
+pub static mut src_deferred_split: bool = false;
+pub static mut src_partially_mapped: bool = false;
+pub static mut prev: *mut c_void = core::ptr::null_mut();
     __migrate_folio_extract(dst, &old_folio_state, &anon_vma);
     prev = dst.lru.prev;
     list_del(&dst.lru);
     if (unlikely(page_has_movable_ops(&src.page))) {
     rc = migrate_movable_ops_page(&dst.page, &src.page, mode);
-    if (rc)
-    goto out;
-    goto out_unlock_both;
+    if (rc) {
+// goto;
+    }
+// goto;
     }
     if (folio_order(src) > 1 &&
     !data_race(list_empty(&src._deferred_list))) {
@@ -1241,16 +1561,18 @@ pub unsafe extern "C" fn if(_arg: mapping->a_ops->migrate_folio) -> else {
     src_partially_mapped = folio_test_partially_mapped(src);
     }
     rc = move_to_new_folio(dst, src, mode);
-    if (rc)
-    goto out;
+    if (rc) {
+// goto;
+    }
 //
 // Requeue the destination folio on the deferred split queue if
 // the source was on the queue.  The source is unqueued in
 // __folio_migrate_mapping(), so we recorded the state from
 // before move_to_new_folio().
 //
-    if (src_deferred_split)
+    if (src_deferred_split) {
     deferred_split_folio(dst, src_partially_mapped);
+    }
 //
 // When successful, push dst to LRU immediately: so that if it
 // turns out to be an mlocked page, remove_migration_ptes() will
@@ -1261,11 +1583,13 @@ pub unsafe extern "C" fn if(_arg: mapping->a_ops->migrate_folio) -> else {
 // isolated from the unevictable LRU: but this case is the easiest.
 //
     folio_add_lru(dst);
-    if (old_folio_state & FOLIO_WAS_MLOCKED)
+    if (old_folio_state & FOLIO_WAS_MLOCKED) {
     lru_add_drain();
-    if (old_folio_state & FOLIO_WAS_MAPPED)
+    }
+    if (old_folio_state & FOLIO_WAS_MAPPED) {
     remove_migration_ptes(src, dst, 0);
-    out_unlock_both:
+    }
+// label;
     folio_unlock(dst);
     folio_set_owner_migrate_reason(dst, reason);
 //
@@ -1280,12 +1604,13 @@ pub unsafe extern "C" fn if(_arg: mapping->a_ops->migrate_folio) -> else {
 //
     list_del(&src.lru);
 // Drop an anon_vma reference if we took one
-    if (anon_vma)
+    if (anon_vma) {
     put_anon_vma(anon_vma);
+    }
     folio_unlock(src);
     migrate_folio_done(src, reason);
     return rc;
-    out:
+// label;
 //
 // A folio that has not been migrated will be restored to
 // right list unless we want to retry.
@@ -1319,33 +1644,34 @@ pub unsafe extern "C" fn if(_arg: mapping->a_ops->migrate_folio) -> else {
 // because then pte is replaced with migration swap entry and direct I/O code
 // will wait in the page fault for migration to complete.
 //
-    static int unmap_and_move_hugetlb_folio(new_folio_t get_new_folio,
-    free_folio_t put_new_folio, unsigned long private,
-    struct folio *src, int force, enum migrate_mode mode,
-    enum migrate_reason reason, struct list_head *ret)
-    {
-    struct folio *dst;
-    let mut rc: c_int = -EAGAIN;
-    let mut was_mapped: c_int = 0;
-    struct anon_vma *anon_vma = core::ptr::null_mut();
-    struct address_space *mapping = core::ptr::null_mut();
-    let mut ttu: enum ttu_flags = 0;
+#[no_mangle]
+pub unsafe extern "C" fn unmap_and_move_hugetlb_folio(get_new_folio: new_folio_t, put_new_folio: free_folio_t, private: c_ulong, src: *mut folio, force: c_int, mode: migrate_mode, reason: migrate_reason, ret: *mut list_head) -> c_int {
+pub static mut dst: *mut c_void = core::ptr::null_mut();
+pub static mut rc: c_int = 0;
+pub static mut was_mapped: c_int = 0;
+    let mut anon_vma = core::ptr::null_mut();
+    let mut mapping = core::ptr::null_mut();
+pub static mut ttu: ttu_flags = 0;
     if (folio_ref_count(src) == 1) {
 // folio was freed from under us. So we are done.
     folio_putback_hugetlb(src);
     return 0;
     }
     dst = get_new_folio(src, private);
-    if (!dst)
+    if (!dst) {
     return -ENOMEM;
+    }
     if (!folio_trylock(src)) {
-    if (!force)
-    goto out;
-    switch (mode) {
-    case MIGRATE_SYNC:
-    break;
-    default:
-    goto out;
+    if (!force) {
+// goto;
+    }
+    match (mode) {
+    MIGRATE_SYNC => {
+    // break;
+    }
+    _ => {
+// goto;
+    }
     }
     folio_lock(src);
     }
@@ -1356,12 +1682,14 @@ pub unsafe extern "C" fn if(_arg: mapping->a_ops->migrate_folio) -> else {
 //
     if (hugetlb_folio_subpool(src) && !folio_mapping(src)) {
     rc = -EBUSY;
-    goto out_unlock;
+// goto;
     }
-    if (folio_test_anon(src))
+    if (folio_test_anon(src)) {
     anon_vma = folio_get_anon_vma(src);
-    if (unlikely(!folio_trylock(dst)))
-    goto put_anon;
+    }
+    if (unlikely(!folio_trylock(dst))) {
+// goto;
+    }
     if (folio_mapped(src)) {
     if (!folio_test_anon(src)) {
 //
@@ -1371,62 +1699,71 @@ pub unsafe extern "C" fn if(_arg: mapping->a_ops->migrate_folio) -> else {
 // to let lower levels know we have taken the lock.
 //
     mapping = hugetlb_folio_mapping_lock_write(src);
-    if (unlikely(!mapping))
-    goto unlock_put_anon;
+    if (unlikely(!mapping)) {
+// goto;
+    }
     ttu = TTU_RMAP_LOCKED;
     }
     try_to_migrate(src, ttu);
     was_mapped = 1;
     }
-    if (!folio_mapped(src))
+    if (!folio_mapped(src)) {
     rc = move_to_new_folio(dst, src, mode);
-    if (was_mapped)
+    }
+    if (was_mapped) {
     remove_migration_ptes(src, !rc ? dst : src, ttu);
-    if (ttu & TTU_RMAP_LOCKED)
+    }
+    if (ttu & TTU_RMAP_LOCKED) {
     i_mmap_unlock_write(mapping);
-    unlock_put_anon:
+    }
+// label;
     folio_unlock(dst);
-    put_anon:
-    if (anon_vma)
+// label;
+    if (anon_vma) {
     put_anon_vma(anon_vma);
+    }
     if (!rc) {
     move_hugetlb_state(src, dst, reason);
     put_new_folio = core::ptr::null_mut();
     }
-    out_unlock:
+// label;
     folio_unlock(src);
-    out:
-    if (!rc)
+// label;
+    if (!rc) {
     folio_putback_hugetlb(src);
-#[no_mangle]
-pub unsafe extern "C" fn if(-EAGAIN: rc !=) -> else {
-    else if (rc != -EAGAIN)
+    }
+
+    else if (rc != -EAGAIN) {
     list_move_tail(&src.lru, ret);
+    }
 //
 // If migration was not successful and there's a freeing callback,
 // return the folio to that special allocator. Otherwise, simply drop
 // our additional reference.
 //
-    if (put_new_folio)
+    if (put_new_folio) {
     put_new_folio(dst, private);
-    else
+    }
+    else {
     folio_put(dst);
+    }
     return rc;
     }
-    static inline int try_split_folio(struct folio *folio, struct list_head *split_folios,
-    enum migrate_mode mode)
-    {
-    int rc;
+#[no_mangle]
+pub unsafe extern "C" fn try_split_folio(folio: *mut folio, split_folios: *mut list_head, mode: migrate_mode) -> c_int {
+    let mut rc = 0;
     if (mode == MIGRATE_ASYNC) {
-    if (!folio_trylock(folio))
+    if (!folio_trylock(folio)) {
     return -EAGAIN;
+    }
     } else {
     folio_lock(folio);
     }
     rc = split_folio_to_list(folio, split_folios);
     folio_unlock(folio);
-    if (!rc)
+    if (!rc) {
     list_move_tail(&folio.lru, split_folios);
+    }
     return rc;
     }
 
@@ -1443,10 +1780,10 @@ pub struct migrate_pages_stats {
     units of base pages */
     pub in: *mut *mut int nr_failed_pages; / Normal and large folios failed to be migrated,,
     units of base pages.  Untried folios aren't counted */
-    pub /: *mut *mut int nr_thp_succeeded; / THP migrated successfully,
-    pub /: *mut *mut int nr_thp_failed; / THP failed to be migrated,
-    pub /: *mut *mut int nr_thp_split; / THP split before migrating,
-    pub /: *mut *mut int nr_split; / Large folio (include THP) split before migrating,
+//     pub /: *mut *mut int nr_thp_succeeded; / THP migrated successfully,
+//     pub /: *mut *mut int nr_thp_failed; / THP failed to be migrated,
+//     pub /: *mut *mut int nr_thp_split; / THP split before migrating,
+//     pub /: *mut *mut int nr_split; / Large folio (include THP) split before migrating,
 }
 
 //
@@ -1456,24 +1793,23 @@ pub struct migrate_pages_stats {
 // exist any more. It is caller's responsibility to call putback_movable_pages()
 // only if ret != 0.
 //
-    static int migrate_hugetlbs(struct list_head *from, new_folio_t get_new_folio,
-    free_folio_t put_new_folio, unsigned long private,
-    enum migrate_mode mode, enum migrate_reason reason,
-    struct migrate_pages_stats *stats,
-    struct list_head *ret_folios)
-    {
-    let mut retry: c_int = 1;
-    let mut nr_failed: c_int = 0;
-    let mut nr_retry_pages: c_int = 0;
-    let mut pass: c_int = 0;
-    struct folio *folio, *folio2;
-    int rc, nr_pages;
-    for (pass = 0; pass < NR_MAX_MIGRATE_PAGES_RETRY && retry; pass++) {
+#[no_mangle]
+pub unsafe extern "C" fn migrate_hugetlbs(from: *mut list_head, get_new_folio: new_folio_t, put_new_folio: free_folio_t, private: c_ulong, mode: migrate_mode, reason: migrate_reason, stats: *mut migrate_pages_stats, ret_folios: *mut list_head) -> c_int {
+pub static mut retry: c_int = 1;
+pub static mut nr_failed: c_int = 0;
+pub static mut nr_retry_pages: c_int = 0;
+pub static mut pass: c_int = 0;
+    let mut folio = core::ptr::null_mut();
+    let mut folio2 = core::ptr::null_mut();
+    let mut rc = 0;
+    let mut nr_pages = 0;
+    while (pass < NR_MAX_MIGRATE_PAGES_RETRY && retry) {
     retry = 0;
     nr_retry_pages = 0;
     list_for_each_entry_safe(folio, folio2, from, lru) {
-    if (!folio_test_hugetlb(folio))
+    if (!folio_test_hugetlb(folio)) {
     continue;
+    }
     nr_pages = folio_nr_pages(folio);
     cond_resched();
 //
@@ -1484,7 +1820,7 @@ pub struct migrate_pages_stats {
 // the hugepage is pmd-based or not before kicking migration.
 //
     if (!hugepage_migration_supported(folio_hstate(folio))) {
-    nr_failed++;
+    nr_failed += 1;
     stats.nr_failed_pages += nr_pages;
     list_move_tail(&folio.lru, ret_folios);
     continue;
@@ -1500,31 +1836,35 @@ pub struct migrate_pages_stats {
 // -ENOMEM: stay on the from list
 // Other errno: put on ret_folios list
 //
-    switch(rc) {
-    case -ENOMEM:
+    match (rc) {
+    -ENOMEM => {
 //
 // When memory is low, don't bother to try to migrate
 // other folios, just exit.
 //
     stats.nr_failed_pages += nr_pages + nr_retry_pages;
     return -ENOMEM;
-    case -EAGAIN:
-    retry++;
+    }
+    -EAGAIN => {
+    retry += 1;
     nr_retry_pages += nr_pages;
-    break;
-    case 0:
+    // break;
+    }
+    0 => {
     stats.nr_succeeded += nr_pages;
-    break;
-    default:
+    // break;
+    }
+    _ => {
 //
 // Permanent failure (-EBUSY, etc.):
 // unlike -EAGAIN case, the failed folio is
 // removed from migration folio list and not
 // retried in the next outer loop.
 //
-    nr_failed++;
+    nr_failed += 1;
     stats.nr_failed_pages += nr_pages;
-    break;
+    // break;
+    }
     }
     }
     }
@@ -1537,20 +1877,16 @@ pub struct migrate_pages_stats {
     stats.nr_failed_pages += nr_retry_pages;
     return nr_failed;
     }
-    static void migrate_folios_move(struct list_head *src_folios,
-    struct list_head *dst_folios,
-    free_folio_t put_new_folio, unsigned long private,
-    enum migrate_mode mode, enum migrate_reason reason,
-    struct list_head *ret_folios,
-    struct migrate_pages_stats *stats,
-    int *retry, int *thp_retry, int *nr_failed,
-    int *nr_retry_pages)
-    {
-    struct folio *folio, *folio2, *dst, *dst2;
-    bool is_thp;
-    int nr_pages;
-    int rc;
-    dst = list_first_entry(dst_folios, struct folio, lru);
+#[no_mangle]
+pub unsafe extern "C" fn migrate_folios_move(src_folios: *mut list_head, dst_folios: *mut list_head, put_new_folio: free_folio_t, private: c_ulong, mode: migrate_mode, reason: migrate_reason, ret_folios: *mut list_head, stats: *mut migrate_pages_stats, retry: *mut c_int, thp_retry: *mut c_int, nr_failed: *mut c_int, nr_retry_pages: *mut c_int) {
+    let mut folio = core::ptr::null_mut();
+    let mut folio2 = core::ptr::null_mut();
+    let mut dst = core::ptr::null_mut();
+    let mut dst2 = core::ptr::null_mut();
+    let mut is_thp = 0;
+    let mut nr_pages = 0;
+    let mut rc = 0;
+    dst = list_first_entry(dst_folios, folio, lru);
     dst2 = list_next_entry(dst, lru);
     list_for_each_entry_safe(folio, folio2, src_folios, lru) {
     is_thp = folio_test_large(folio) && folio_test_pmd_mappable(folio);
@@ -1565,37 +1901,40 @@ pub struct migrate_pages_stats {
 // -EAGAIN: stay on the src_folios list
 // Other errno: put on ret_folios list
 //
-    switch (rc) {
-    case -EAGAIN:
+    match (rc) {
+    -EAGAIN => {
 // retry += 1;
 // thp_retry += is_thp;
 // nr_retry_pages += nr_pages;
-    break;
-    case 0:
+    // break;
+    }
+    0 => {
     stats.nr_succeeded += nr_pages;
     stats.nr_thp_succeeded += is_thp;
-    break;
-    default:
+    // break;
+    }
+    _ => {
 // nr_failed += 1;
     stats.nr_thp_failed += is_thp;
     stats.nr_failed_pages += nr_pages;
-    break;
+    // break;
+    }
     }
     dst = dst2;
     dst2 = list_next_entry(dst, lru);
     }
     }
-    static void migrate_folios_undo(struct list_head *src_folios,
-    struct list_head *dst_folios,
-    free_folio_t put_new_folio, unsigned long private,
-    struct list_head *ret_folios)
-    {
-    struct folio *folio, *folio2, *dst, *dst2;
-    dst = list_first_entry(dst_folios, struct folio, lru);
+#[no_mangle]
+pub unsafe extern "C" fn migrate_folios_undo(src_folios: *mut list_head, dst_folios: *mut list_head, put_new_folio: free_folio_t, private: c_ulong, ret_folios: *mut list_head) {
+    let mut folio = core::ptr::null_mut();
+    let mut folio2 = core::ptr::null_mut();
+    let mut dst = core::ptr::null_mut();
+    let mut dst2 = core::ptr::null_mut();
+    dst = list_first_entry(dst_folios, folio, lru);
     dst2 = list_next_entry(dst, lru);
     list_for_each_entry_safe(folio, folio2, src_folios, lru) {
-    let mut old_folio_state: c_int = 0;
-    struct anon_vma *anon_vma = core::ptr::null_mut();
+pub static mut old_folio_state: c_int = 0;
+    let mut anon_vma = core::ptr::null_mut();
     __migrate_folio_extract(dst, &old_folio_state, &anon_vma);
     migrate_folio_undo_src(folio, old_folio_state & FOLIO_WAS_MAPPED,
     anon_vma, true, ret_folios);
@@ -1614,27 +1953,23 @@ pub struct migrate_pages_stats {
 // deadlock (e.g., for loop device).  So, if mode != MIGRATE_ASYNC, the
 // length of the from list must be <= 1.
 //
-    static int migrate_pages_batch(struct list_head *from,
-    new_folio_t get_new_folio, free_folio_t put_new_folio,
-    unsigned long private, enum migrate_mode mode, enum migrate_reason reason,
-    struct list_head *ret_folios, struct list_head *split_folios,
-    struct migrate_pages_stats *stats, int nr_pass)
-    {
-    let mut retry: c_int = 1;
-    let mut thp_retry: c_int = 1;
-    let mut nr_failed: c_int = 0;
-    let mut nr_retry_pages: c_int = 0;
-    let mut pass: c_int = 0;
-    let mut is_thp: bool = false;
-    let mut is_large: bool = false;
+#[no_mangle]
+pub unsafe extern "C" fn migrate_pages_batch(from: *mut list_head, get_new_folio: new_folio_t, put_new_folio: free_folio_t, private: c_ulong, mode: migrate_mode, reason: migrate_reason, ret_folios: *mut list_head, split_folios: *mut list_head, stats: *mut migrate_pages_stats, nr_pass: c_int) -> c_int {
+pub static mut retry: c_int = 1;
+pub static mut thp_retry: c_int = 1;
+pub static mut nr_failed: c_int = 0;
+pub static mut nr_retry_pages: c_int = 0;
+pub static mut pass: c_int = 0;
+pub static mut is_thp: bool = false;
+pub static mut is_large: bool = false;
     struct folio *folio, *folio2, *dst = core::ptr::null_mut();
     int rc, rc_saved = 0, nr_pages;
-    LIST_HEAD(unmap_folios);
-    LIST_HEAD(dst_folios);
-    let mut nosplit: bool = (reason == MR_NUMA_MISPLACED);
+pub static mut unmap_folios: usize = 0;
+pub static mut dst_folios: usize = 0;
+pub static mut nosplit: bool = false;
     VM_WARN_ON_ONCE(mode != MIGRATE_ASYNC &&
     !list_empty(from) && !list_is_singular(from));
-    for (pass = 0; pass < nr_pass && retry; pass++) {
+    while (pass < nr_pass && retry) {
     retry = 0;
     thp_retry = 0;
     nr_retry_pages = 0;
@@ -1670,10 +2005,10 @@ pub struct migrate_pages_stats {
     !list_empty(&folio._deferred_list) &&
     folio_test_partially_mapped(folio)) {
     if (!try_split_folio(folio, split_folios, mode)) {
-    nr_failed++;
+    nr_failed += 1;
     stats.nr_thp_failed += is_thp;
     stats.nr_thp_split += is_thp;
-    stats.nr_split++;
+    stats.nr_split += 1;
     continue;
     }
     }
@@ -1688,11 +2023,11 @@ pub struct migrate_pages_stats {
 // list is processed.
 //
     if (!thp_migration_supported() && is_thp) {
-    nr_failed++;
-    stats.nr_thp_failed++;
+    nr_failed += 1;
+    stats.nr_thp_failed += 1;
     if (!try_split_folio(folio, split_folios, mode)) {
-    stats.nr_thp_split++;
-    stats.nr_split++;
+    stats.nr_thp_split += 1;
+    stats.nr_split += 1;
     continue;
     }
     stats.nr_failed_pages += nr_pages;
@@ -1723,75 +2058,81 @@ pub struct migrate_pages_stats {
 // -ENOMEM: stay on the from list
 // Other errno: put on ret_folios list
 //
-    switch(rc) {
-    case -ENOMEM:
+    match (rc) {
+    -ENOMEM => {
 //
 // When memory is low, don't bother to try to migrate
 // other folios, move unmapped folios, then exit.
 //
-    nr_failed++;
+    nr_failed += 1;
     stats.nr_thp_failed += is_thp;
 // Large folio NUMA faulting doesn't split to retry.
     if (is_large && !nosplit) {
-    let mut ret: c_int = try_split_folio(folio, split_folios, mode);
+pub static mut ret: c_int = 0;
     if (!ret) {
     stats.nr_thp_split += is_thp;
-    stats.nr_split++;
-    break;
+    stats.nr_split += 1;
+    // break;
     } else if (reason == MR_LONGTERM_PIN &&
     ret == -EAGAIN) {
 //
 // Try again to split large folio to
 // mitigate the failure of longterm pinning.
 //
-    retry++;
+    retry += 1;
     thp_retry += is_thp;
     nr_retry_pages += nr_pages;
 // Undo duplicated failure counting.
-    nr_failed--;
+    nr_failed -= 1;
     stats.nr_thp_failed -= is_thp;
-    break;
+    // break;
     }
     }
     stats.nr_failed_pages += nr_pages + nr_retry_pages;
 // nr_failed isn't updated for not used
     stats.nr_thp_failed += thp_retry;
     rc_saved = rc;
-    if (list_empty(&unmap_folios))
-    goto out;
-    else
-    goto move;
-    case -EAGAIN:
-    retry++;
+    if (list_empty(&unmap_folios)) {
+// goto;
+    }
+    else {
+// goto;
+    }
+    }
+    -EAGAIN => {
+    retry += 1;
     thp_retry += is_thp;
     nr_retry_pages += nr_pages;
-    break;
-    case 0:
+    // break;
+    }
+    0 => {
     list_move_tail(&folio.lru, &unmap_folios);
     list_add_tail(&dst.lru, &dst_folios);
-    break;
-    default:
+    // break;
+    }
+    _ => {
 //
 // Permanent failure (-EBUSY, etc.):
 // unlike -EAGAIN case, the failed folio is
 // removed from migration folio list and not
 // retried in the next outer loop.
 //
-    nr_failed++;
+    nr_failed += 1;
     stats.nr_thp_failed += is_thp;
     stats.nr_failed_pages += nr_pages;
-    break;
+    // break;
+    }
     }
     }
     }
     nr_failed += retry;
     stats.nr_thp_failed += thp_retry;
     stats.nr_failed_pages += nr_retry_pages;
-    move:
+// label;
 // Flush TLBs for all unmapped folios
     try_to_unmap_flush();
     retry = 1;
-    for (pass = 0; pass < nr_pass && retry; pass++) {
+    while (pass < nr_pass && retry) {
     retry = 0;
     thp_retry = 0;
     nr_retry_pages = 0;
@@ -1805,22 +2146,18 @@ pub struct migrate_pages_stats {
     stats.nr_thp_failed += thp_retry;
     stats.nr_failed_pages += nr_retry_pages;
     rc = rc_saved ? : nr_failed;
-    out:
+// label;
 // Cleanup remaining folios
     migrate_folios_undo(&unmap_folios, &dst_folios,
     put_new_folio, private, ret_folios);
     return rc;
     }
-    static int migrate_pages_sync(struct list_head *from, new_folio_t get_new_folio,
-    free_folio_t put_new_folio, unsigned long private,
-    enum migrate_mode mode, enum migrate_reason reason,
-    struct list_head *ret_folios, struct list_head *split_folios,
-    struct migrate_pages_stats *stats)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn migrate_pages_sync(from: *mut list_head, get_new_folio: new_folio_t, put_new_folio: free_folio_t, private: c_ulong, mode: migrate_mode, reason: migrate_reason, ret_folios: *mut list_head, split_folios: *mut list_head, stats: *mut migrate_pages_stats) -> c_int {
     int rc, nr_failed = 0;
-    LIST_HEAD(folios);
-    struct migrate_pages_stats astats;
-    memset(&astats, 0, sizeof(astats));
+pub static mut folios: usize = 0;
+pub static mut astats: usize = 0;
+    memset(&astats, 0, sizeof!(astats));
 // Try to migrate in batch with MIGRATE_ASYNC mode firstly
     rc = migrate_pages_batch(from, get_new_folio, put_new_folio, private, MIGRATE_ASYNC,
     reason, &folios, split_folios, &astats,
@@ -1853,8 +2190,9 @@ pub struct migrate_pages_stats {
     private, mode, reason, ret_folios,
     split_folios, stats, NR_MAX_MIGRATE_SYNC_RETRY);
     list_splice_tail_init(&folios, ret_folios);
-    if (rc < 0)
+    if (rc < 0) {
     return rc;
+    }
     nr_failed += rc;
     }
     return nr_failed;
@@ -1885,24 +2223,25 @@ pub struct migrate_pages_stats {
 // considered as the number of non-migrated large folio, no matter how many
 // split folios of the large folio are migrated successfully.
 //
-    int migrate_pages(struct list_head *from, new_folio_t get_new_folio,
-    free_folio_t put_new_folio, unsigned long private,
-    enum migrate_mode mode, enum migrate_reason reason, unsigned int *ret_succeeded)
-    {
-    int rc, rc_gather;
-    int nr_pages;
-    struct folio *folio, *folio2;
-    LIST_HEAD(folios);
-    LIST_HEAD(ret_folios);
-    LIST_HEAD(split_folios);
-    struct migrate_pages_stats stats;
+#[no_mangle]
+pub unsafe extern "C" fn migrate_pages(from: *mut list_head, get_new_folio: new_folio_t, put_new_folio: free_folio_t, private: c_ulong, mode: migrate_mode, reason: migrate_reason, ret_succeeded: *mut c_uint) -> c_int {
+    let mut rc = 0;
+    let mut rc_gather = 0;
+    let mut nr_pages = 0;
+    let mut folio = core::ptr::null_mut();
+    let mut folio2 = core::ptr::null_mut();
+pub static mut folios: usize = 0;
+pub static mut ret_folios: usize = 0;
+pub static mut split_folios: usize = 0;
+pub static mut stats: usize = 0;
     trace_mm_migrate_pages_start(mode, reason);
-    memset(&stats, 0, sizeof(stats));
+    memset(&stats, 0, sizeof!(stats));
     rc_gather = migrate_hugetlbs(from, get_new_folio, put_new_folio, private,
     mode, reason, &stats, &ret_folios);
-    if (rc_gather < 0)
-    goto out;
-    again:
+    if (rc_gather < 0) {
+// goto;
+    }
+// label;
     nr_pages = 0;
     list_for_each_entry_safe(folio, folio2, from, lru) {
 // Retried hugetlb folios will be kept in list
@@ -1911,27 +2250,32 @@ pub struct migrate_pages_stats {
     continue;
     }
     nr_pages += folio_nr_pages(folio);
-    if (nr_pages >= NR_MAX_BATCHED_MIGRATION)
+    if (nr_pages >= NR_MAX_BATCHED_MIGRATION) {
     break;
     }
-    if (nr_pages >= NR_MAX_BATCHED_MIGRATION)
+    }
+    if (nr_pages >= NR_MAX_BATCHED_MIGRATION) {
     list_cut_before(&folios, from, &folio2.lru);
-    else
+    }
+    else {
     list_splice_init(from, &folios);
-    if (mode == MIGRATE_ASYNC)
+    }
+    if (mode == MIGRATE_ASYNC) {
     rc = migrate_pages_batch(&folios, get_new_folio, put_new_folio,
     private, mode, reason, &ret_folios,
     &split_folios, &stats,
     NR_MAX_MIGRATE_PAGES_RETRY);
-    else
+    }
+    else {
     rc = migrate_pages_sync(&folios, get_new_folio, put_new_folio,
     private, mode, reason, &ret_folios,
     &split_folios, &stats);
+    }
     list_splice_tail_init(&folios, &ret_folios);
     if (rc < 0) {
     rc_gather = rc;
     list_splice_tail(&split_folios, &ret_folios);
-    goto out;
+// goto;
     }
     if (!list_empty(&split_folios)) {
 //
@@ -1945,9 +2289,10 @@ pub struct migrate_pages_stats {
     list_splice_tail_init(&split_folios, &ret_folios);
     }
     rc_gather += rc;
-    if (!list_empty(from))
-    goto again;
-    out:
+    if (!list_empty(from)) {
+// goto;
+    }
+// label;
 //
 // Put the permanent failure folio back to migration list, they
 // will be put back to the right list by the caller.
@@ -1957,8 +2302,9 @@ pub struct migrate_pages_stats {
 // Return 0 in case all split folios of fail-to-migrate large folios
 // are migrated successfully.
 //
-    if (list_empty(from))
+    if (list_empty(from)) {
     rc_gather = 0;
+    }
     count_vm_events(PGMIGRATE_SUCCESS, stats.nr_succeeded);
     count_vm_events(PGMIGRATE_FAIL, stats.nr_failed_pages);
     count_vm_events(THP_MIGRATION_SUCCESS, stats.nr_thp_succeeded);
@@ -1968,24 +2314,26 @@ pub struct migrate_pages_stats {
     stats.nr_thp_succeeded, stats.nr_thp_failed,
     stats.nr_thp_split, stats.nr_split, mode,
     reason);
-    if (ret_succeeded)
+    if (ret_succeeded) {
 // ret_succeeded = stats.nr_succeeded;
+    }
     return rc_gather;
     }
-    struct folio *alloc_migration_target(struct folio *src, unsigned long private)
-    {
-    struct migration_target_control *mtc;
-    gfp_t gfp_mask;
-    let mut order: c_uint = 0;
-    int nid;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_migration_target(src: *mut folio, private: c_ulong) -> *mut c_void {
+pub static mut mtc: *mut c_void = core::ptr::null_mut();
+    let mut gfp_mask;
+pub static mut order: c_uint = 0;
+    let mut nid = 0;
     enum zone_type zidx;
-    mtc = (struct migration_target_control *)private;
+    mtc = private;
     gfp_mask = mtc.gfp_mask;
     nid = mtc.nid;
-    if (nid == NUMA_NO_NODE)
+    if (nid == NUMA_NO_NODE) {
     nid = folio_nid(src);
+    }
     if (folio_test_hugetlb(src)) {
-    struct hstate *h = folio_hstate(src);
+    let mut h = folio_hstate(src);
     gfp_mask = htlb_modify_alloc_mask(h, gfp_mask);
     return alloc_hugetlb_folio_nodemask(h, nid,
     mtc.nmask, gfp_mask,
@@ -2001,52 +2349,51 @@ pub struct migrate_pages_stats {
     order = folio_order(src);
     }
     zidx = folio_zonenum(src);
-    if (is_highmem_idx(zidx) || zidx == ZONE_MOVABLE)
+    if (is_highmem_idx(zidx) || zidx == ZONE_MOVABLE) {
     gfp_mask |= __GFP_HIGHMEM;
+    }
     return __folio_alloc(gfp_mask, order, nid, mtc.nmask);
     }
 
 #[no_mangle]
-unsafe extern "C" fn store_status(status: *mut int __user, start: c_int, value: c_int, nr: c_int) -> c_int {
-    static int store_status(int __user *status, int start, int value, int nr)
-    {
+unsafe extern "C" fn store_status(status: *mut int , start: c_int, value: c_int, nr: c_int) -> c_int {
     while (nr-- > 0) {
-    if (put_user(value, status + start))
+    if (put_user(value, status + start)) {
     return -EFAULT;
-    start++;
+    }
+    start += 1;
     }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn do_move_pages_to_node(pagelist: *mut list_head, node: c_int) -> c_int {
-    static int do_move_pages_to_node(struct list_head *pagelist, int node)
-    {
-    int err;
-    struct migration_target_control mtc = {
-    .nid = node,
-    .gfp_mask = GFP_HIGHUSER_MOVABLE | __GFP_THISNODE,
-    .reason = MR_SYSCALL,
-    };
+    let mut err = 0;
+pub static mut migration_target_control: usize = 0;
     err = migrate_pages(pagelist, alloc_migration_target, core::ptr::null_mut(),
     (unsigned long)&mtc, MIGRATE_SYNC, MR_SYSCALL, core::ptr::null_mut());
-    if (err)
+    if (err) {
     putback_movable_pages(pagelist);
+    }
     return err;
     }
-    static int __add_folio_for_migration(struct folio *folio, int node,
-    struct list_head *pagelist, bool migrate_all)
-    {
-    if (is_zero_folio(folio) || is_huge_zero_folio(folio))
+#[no_mangle]
+pub unsafe extern "C" fn __add_folio_for_migration(folio: *mut folio, node: c_int, pagelist: *mut list_head, migrate_all: bool) -> c_int {
+    if (is_zero_folio(folio) || is_huge_zero_folio(folio)) {
     return -EFAULT;
-    if (folio_is_zone_device(folio))
+    }
+    if (folio_is_zone_device(folio)) {
     return -ENOENT;
-    if (folio_nid(folio) == node)
+    }
+    if (folio_nid(folio) == node) {
     return 0;
-    if (folio_maybe_mapped_shared(folio) && !migrate_all)
+    }
+    if (folio_maybe_mapped_shared(folio) && !migrate_all) {
     return -EACCES;
+    }
     if (folio_test_hugetlb(folio)) {
-    if (folio_isolate_hugetlb(folio, pagelist))
+    if (folio_isolate_hugetlb(folio, pagelist)) {
     return 1;
+    }
     } else if (folio_isolate_lru(folio)) {
     list_add_tail(&folio.lru, pagelist);
     node_stat_mod_folio(folio,
@@ -2065,14 +2412,13 @@ unsafe extern "C" fn do_move_pages_to_node(pagelist: *mut list_head, node: c_int
 // target node
 // 1 - when it has been queued
 //
-    static int add_folio_for_migration(struct mm_struct *mm, const void __user *p,
-    int node, struct list_head *pagelist, bool migrate_all)
-    {
-    struct vm_area_struct *vma;
-    struct folio_walk fw;
-    struct folio *folio;
-    unsigned long addr;
-    let mut err: c_int = -EFAULT;
+#[no_mangle]
+pub unsafe extern "C" fn add_folio_for_migration(mm: *mut mm_struct, p: *mut c_void, node: c_int, pagelist: *mut list_head, migrate_all: bool) -> c_int {
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+pub static mut fw: usize = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut addr = 0;
+pub static mut err: c_int = 0;
     mmap_read_lock(mm);
     addr = (unsigned long)untagged_addr_remote(mm, p);
     vma = vma_lookup(mm, addr);
@@ -2089,13 +2435,12 @@ unsafe extern "C" fn do_move_pages_to_node(pagelist: *mut list_head, node: c_int
     mmap_read_unlock(mm);
     return err;
     }
-    static int move_pages_and_store_status(int node,
-    struct list_head *pagelist, int __user *status,
-    int start, int i, unsigned long nr_pages)
-    {
-    int err;
-    if (list_empty(pagelist))
+#[no_mangle]
+pub unsafe extern "C" fn move_pages_and_store_status(node: c_int, pagelist: *mut list_head, status: *mut c_int, start: c_int, i: c_int, nr_pages: c_ulong) -> c_int {
+    let mut err = 0;
+    if (list_empty(pagelist)) {
     return 0;
+    }
     err = do_move_pages_to_node(pagelist, node);
     if (err) {
 //
@@ -2106,8 +2451,9 @@ unsafe extern "C" fn do_move_pages_to_node(pagelist: *mut list_head, node: c_int
 // nr_pages that have not been attempted as
 // well.
 //
-    if (err > 0)
+    if (err > 0) {
     err += nr_pages - i;
+    }
     return err;
     }
     return store_status(status, start, node, i - start);
@@ -2116,49 +2462,53 @@ unsafe extern "C" fn do_move_pages_to_node(pagelist: *mut list_head, node: c_int
 // Migrate an array of page address onto an array of nodes and fill
 // the corresponding array of status.
 //
-    static int do_pages_move(struct mm_struct *mm, nodemask_t task_nodes,
-    unsigned long nr_pages,
-    const void __user * __user *pages,
-    const int __user *nodes,
-    int __user *status, int flags)
-    {
-    compat_uptr_t __user *compat_pages = (void __user *)pages;
-    let mut current_node: c_int = NUMA_NO_NODE;
-    LIST_HEAD(pagelist);
-    int start, i;
-    let mut err: c_int = 0, err1;
+#[no_mangle]
+pub unsafe extern "C" fn do_pages_move(mm: *mut mm_struct, task_nodes: nodemask_t, nr_pages: c_ulong, pages: *mut *mut c_void, nodes: *mut c_int, status: *mut c_int, flags: c_int) -> c_int {
+    let mut compat_pages = pages;
+pub static mut current_node: c_int = 0;
+pub static mut pagelist: usize = 0;
+    let mut start = 0;
+    let mut i = 0;
+pub static mut err: c_int = 0;
     lru_cache_disable();
-    for (i = start = 0; i < nr_pages; i++) {
-    const void __user *p;
-    int node;
+    while (i < nr_pages) {
+    let mut p = core::ptr::null_mut();
+    let mut node = 0;
     err = -EFAULT;
     if (in_compat_syscall()) {
-    compat_uptr_t cp;
-    if (get_user(cp, compat_pages + i))
-    goto out_flush;
+    let mut cp;
+    if (get_user(cp, compat_pages + i)) {
+// goto;
+    }
     p = compat_ptr(cp);
     } else {
-    if (get_user(p, pages + i))
-    goto out_flush;
+    if (get_user(p, pages + i)) {
+// goto;
     }
-    if (get_user(node, nodes + i))
-    goto out_flush;
+    }
+    if (get_user(node, nodes + i)) {
+// goto;
+    }
     err = -ENODEV;
-    if (node < 0 || node >= MAX_NUMNODES)
-    goto out_flush;
-    if (!node_state(node, N_MEMORY))
-    goto out_flush;
+    if (node < 0 || node >= MAX_NUMNODES) {
+// goto;
+    }
+    if (!node_state(node, N_MEMORY)) {
+// goto;
+    }
     err = -EACCES;
-    if (!node_isset(node, task_nodes))
-    goto out_flush;
+    if (!node_isset(node, task_nodes)) {
+// goto;
+    }
     if (current_node == NUMA_NO_NODE) {
     current_node = node;
     start = i;
     } else if (node != current_node) {
     err = move_pages_and_store_status(current_node,
     &pagelist, status, start, i, nr_pages);
-    if (err)
-    goto out;
+    if (err) {
+// goto;
+    }
     start = i;
     current_node = node;
     }
@@ -2177,77 +2527,80 @@ unsafe extern "C" fn do_move_pages_to_node(pagelist: *mut list_head, node: c_int
 // node, otherwise, store the err.
 //
     err = store_status(status, i, err ? : current_node, 1);
-    if (err)
-    goto out_flush;
+    if (err) {
+// goto;
+    }
     err = move_pages_and_store_status(current_node, &pagelist,
     status, start, i, nr_pages);
     if (err) {
 // We have accounted for page i
-    if (err > 0)
-    err--;
-    goto out;
+    if (err > 0) {
+    err -= 1;
+    }
+// goto;
     }
     current_node = NUMA_NO_NODE;
     }
-    out_flush:
+// label;
 // Make sure we do not overwrite the existing error
     err1 = move_pages_and_store_status(current_node, &pagelist,
     status, start, i, nr_pages);
-    if (err >= 0)
+    if (err >= 0) {
     err = err1;
-    out:
+    }
+// label;
     lru_cache_enable();
     return err;
     }
 //
 // Determine the nodes of an array of pages and store it in an array of status.
 //
-    static void do_pages_stat_array(struct mm_struct *mm, unsigned long nr_pages,
-    const void __user **pages, int *status)
-    {
-    unsigned long i;
+#[no_mangle]
+pub unsafe extern "C" fn do_pages_stat_array(mm: *mut mm_struct, nr_pages: c_ulong, pages: *mut *mut c_void, status: *mut c_int) {
+    let mut i = 0;
     mmap_read_lock(mm);
-    for (i = 0; i < nr_pages; i++) {
-    let mut addr: c_ulong = (unsigned long)(*pages);
-    struct vm_area_struct *vma;
-    struct folio_walk fw;
-    struct folio *folio;
-    let mut err: c_int = -EFAULT;
+    while (i < nr_pages) {
+pub static mut addr: c_ulong = 0;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+pub static mut fw: usize = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut err: c_int = 0;
     vma = vma_lookup(mm, addr);
-    if (!vma)
-    goto set_status;
+    if (!vma) {
+// goto;
+    }
     folio = folio_walk_start(&fw, vma, addr, FW_ZEROPAGE);
     if (folio) {
-    if (is_zero_folio(folio) || is_huge_zero_folio(folio))
+    if (is_zero_folio(folio) || is_huge_zero_folio(folio)) {
     err = -EFAULT;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: folio_is_zone_device(folio)) -> else {
-    else if (folio_is_zone_device(folio))
+    }
+
+    else if (folio_is_zone_device(folio)) {
     err = -ENOENT;
-    else
+    }
+    else {
     err = folio_nid(folio);
+    }
     folio_walk_end(&fw, vma);
     } else {
     err = -ENOENT;
     }
-    set_status:
+// label;
 // status = err;
-    pages++;
-    status++;
+    pages += 1;
+    status += 1;
     }
     mmap_read_unlock(mm);
     }
-    static int get_compat_pages_array(const void __user *chunk_pages[],
-    const void __user * __user *pages,
-    unsigned long chunk_offset,
-    unsigned long chunk_nr)
-    {
-    compat_uptr_t __user *pages32 = (compat_uptr_t __user *)pages;
-    compat_uptr_t p;
-    int i;
-    for (i = 0; i < chunk_nr; i++) {
-    if (get_user(p, pages32 + chunk_offset + i))
+#[no_mangle]
+pub unsafe extern "C" fn get_compat_pages_array(pages: *mut *mut c_void, chunk_offset: c_ulong, chunk_nr: c_ulong) -> c_int {
+    let mut pages32 = pages;
+    let mut p;
+    let mut i = 0;
+    while (i < chunk_nr) {
+    if (get_user(p, pages32 + chunk_offset + i)) {
     return -EFAULT;
+    }
     chunk_pages[i] = compat_ptr(p);
     }
     return 0;
@@ -2256,42 +2609,41 @@ pub unsafe extern "C" fn if(_arg: folio_is_zone_device(folio)) -> else {
 // Determine the nodes of a user array of pages and store it in
 // a user array of status.
 //
-    static int do_pages_stat(struct mm_struct *mm, unsigned long nr_pages,
-    const void __user * __user *pages,
-    int __user *status)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn do_pages_stat(mm: *mut mm_struct, nr_pages: c_ulong, pages: *mut *mut c_void, status: *mut c_int) -> c_int {
 
-    const void __user *chunk_pages[DO_PAGES_STAT_CHUNK_NR];
+    const void  *chunk_pages[DO_PAGES_STAT_CHUNK_NR];
     int chunk_status[DO_PAGES_STAT_CHUNK_NR];
-    let mut chunk_offset: c_ulong = 0;
+pub static mut chunk_offset: c_ulong = 0;
     while (nr_pages) {
-    let mut chunk_nr: c_ulong = min(nr_pages, DO_PAGES_STAT_CHUNK_NR);
+pub static mut chunk_nr: c_ulong = 0;
     if (in_compat_syscall()) {
     if (get_compat_pages_array(chunk_pages, pages,
-    chunk_offset, chunk_nr))
+    chunk_offset, chunk_nr)) {
     break;
+    }
     } else {
     if (copy_from_user(chunk_pages, pages + chunk_offset,
 #[no_mangle]
-pub unsafe extern "C" fn sizeof(_arg: *mut chunk_pages))) -> *mut chunk_nr {
-    chunk_nr * sizeof(*chunk_pages)))
+pub unsafe extern "C" fn sizeof!(_arg: *mut chunk_pages))) -> *mut chunk_nr {
+    chunk_nr * sizeof!(*chunk_pages)))
     break;
     }
     do_pages_stat_array(mm, chunk_nr, chunk_pages, chunk_status);
     if (copy_to_user(status + chunk_offset, chunk_status,
 #[no_mangle]
-pub unsafe extern "C" fn sizeof(_arg: *mut status))) -> *mut chunk_nr {
-    chunk_nr * sizeof(*status)))
+pub unsafe extern "C" fn sizeof!(_arg: *mut status))) -> *mut chunk_nr {
+    chunk_nr * sizeof!(*status)))
     break;
     chunk_offset += chunk_nr;
     nr_pages -= chunk_nr;
     }
     return nr_pages ? -EFAULT : 0;
     }
-    static struct mm_struct *find_mm_struct(pid_t pid, nodemask_t *mem_nodes)
-    {
-    struct task_struct *task;
-    struct mm_struct *mm;
+#[no_mangle]
+pub unsafe extern "C" fn find_mm_struct(pid: pid_t, mem_nodes: *mut nodemask_t) -> *mut c_void {
+pub static mut task: *mut c_void = core::ptr::null_mut();
+pub static mut mm: *mut c_void = core::ptr::null_mut();
 //
 // There is no need to check if current process has the right to modify
 // the specified process when they are same.
@@ -2302,11 +2654,12 @@ pub unsafe extern "C" fn sizeof(_arg: *mut status))) -> *mut chunk_nr {
     return current.mm;
     }
     task = find_get_task_by_vpid(pid);
-    if (!task)
+    if (!task) {
     return ERR_PTR(-ESRCH);
+    }
     if (down_read_killable(&task.signal.exec_update_lock)) {
     mm = ERR_PTR(-EINTR);
-    goto out;
+// goto;
     }
 //
 // Check if this process has the right to modify the specified
@@ -2314,54 +2667,55 @@ pub unsafe extern "C" fn sizeof(_arg: *mut status))) -> *mut chunk_nr {
 //
     if (!ptrace_may_access(task, PTRACE_MODE_READ_REALCREDS)) {
     mm = ERR_PTR(-EPERM);
-    goto unlock;
+// goto;
     }
     mm = ERR_PTR(security_task_movememory(task));
-    if (IS_ERR(mm))
-    goto unlock;
+    if (IS_ERR(mm)) {
+// goto;
+    }
 // mem_nodes = cpuset_mems_allowed(task);
     mm = get_task_mm(task);
-    unlock:
+// label;
     up_read(&task.signal.exec_update_lock);
-    out:
+// label;
     put_task_struct(task);
-    if (!mm)
+    if (!mm) {
     mm = ERR_PTR(-EINVAL);
+    }
     return mm;
     }
 //
 // Move a list of pages in the address space of the currently executing
 // process.
 //
-    static int kernel_move_pages(pid_t pid, unsigned long nr_pages,
-    const void __user * __user *pages,
-    const int __user *nodes,
-    int __user *status, int flags)
-    {
-    struct mm_struct *mm;
-    int err;
-    nodemask_t task_nodes;
+#[no_mangle]
+pub unsafe extern "C" fn kernel_move_pages(pid: pid_t, nr_pages: c_ulong, pages: *mut *mut c_void, nodes: *mut c_int, status: *mut c_int, flags: c_int) -> c_int {
+pub static mut mm: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
+    let mut task_nodes;
 // Check flags
-    if (flags & ~(MPOL_MF_MOVE|MPOL_MF_MOVE_ALL))
+    if (flags & ~(MPOL_MF_MOVE|MPOL_MF_MOVE_ALL)) {
     return -EINVAL;
-    if ((flags & MPOL_MF_MOVE_ALL) && !capable(CAP_SYS_NICE))
+    }
+    if ((flags & MPOL_MF_MOVE_ALL) && !capable(CAP_SYS_NICE)) {
     return -EPERM;
+    }
     mm = find_mm_struct(pid, &task_nodes);
-    if (IS_ERR(mm))
+    if (IS_ERR(mm)) {
     return PTR_ERR(mm);
-    if (nodes)
+    }
+    if (nodes) {
     err = do_pages_move(mm, task_nodes, nr_pages, pages,
     nodes, status, flags);
-    else
+    }
+    else {
     err = do_pages_stat(mm, nr_pages, pages, status);
+    }
     mmput(mm);
     return err;
     }
-    SYSCALL_DEFINE6(move_pages, pid_t, pid, unsigned long, nr_pages,
-    const void __user * __user *, pages,
-    const int __user *, nodes,
-    int __user *, status, int, flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_move_pages(pid: usize, nr_pages: usize, pages: usize, nodes: usize, status: usize, flags: usize) -> c_long {
     return kernel_move_pages(pid, nr_pages, pages, nodes, status, flags);
     }
 
@@ -2369,32 +2723,33 @@ pub unsafe extern "C" fn sizeof(_arg: *mut status))) -> *mut chunk_nr {
 // Returns true if this is a safe migration target node for misplaced NUMA
 // pages. Currently it only checks the watermarks which is crude.
 //
-    static bool migrate_balanced_pgdat(struct pglist_data *pgdat,
-    unsigned long nr_migrate_pages)
-    {
-    int z;
-    for (z = pgdat.nr_zones - 1; z >= 0; z--) {
-    struct zone *zone = pgdat.node_zones + z;
-    if (!managed_zone(zone))
+#[no_mangle]
+pub unsafe extern "C" fn migrate_balanced_pgdat(pgdat: *mut pglist_data, nr_migrate_pages: c_ulong) -> bool {
+    let mut z = 0;
+    while (z >= 0) {
+    let mut zone = pgdat.node_zones + z;
+    if (!managed_zone(zone)) {
     continue;
+    }
 // Avoid waking kswapd by allocating pages_to_migrate pages.
     if (!zone_watermark_ok(zone, 0,
     high_wmark_pages(zone) +
     nr_migrate_pages,
-    ZONE_MOVABLE, ALLOC_CMA))
+    ZONE_MOVABLE, ALLOC_CMA)) {
     continue;
+    }
     return true;
     }
     return false;
     }
-    static struct folio *alloc_misplaced_dst_folio(struct folio *src,
-    unsigned long data)
-    {
-    let mut nid: c_int = (int) data;
-    let mut order: c_int = folio_order(src);
-    let mut gfp: gfp_t = __GFP_THISNODE;
-    if (order > 0)
+#[no_mangle]
+pub unsafe extern "C" fn alloc_misplaced_dst_folio(src: *mut folio, data: c_ulong) -> *mut c_void {
+pub static mut nid: c_int = 0;
+pub static mut order: c_int = 0;
+pub static mut gfp: gfp_t = 0;
+    if (order > 0) {
     gfp |= GFP_TRANSHUGE_LIGHT;
+    }
     else {
     gfp |= GFP_HIGHUSER_MOVABLE | __GFP_NOMEMALLOC | __GFP_NORETRY |
     __GFP_NOWARN;
@@ -2406,11 +2761,10 @@ pub unsafe extern "C" fn sizeof(_arg: *mut status))) -> *mut chunk_nr {
 // Prepare for calling migrate_misplaced_folio() by isolating the folio if
 // permitted. Must be called with the PTL still held.
 //
-    int migrate_misplaced_folio_prepare(struct folio *folio,
-    struct vm_area_struct *vma, int node)
-    {
-    let mut nr_pages: c_int = folio_nr_pages(folio);
-    pg_data_t *pgdat = NODE_DATA(node);
+#[no_mangle]
+pub unsafe extern "C" fn migrate_misplaced_folio_prepare(folio: *mut folio, vma: *mut vm_area_struct, node: c_int) -> c_int {
+pub static mut nr_pages: c_int = 0;
+    let mut pgdat = NODE_DATA(node);
     if (folio_is_file_lru(folio)) {
 //
 // Do not migrate file folios that are mapped in multiple
@@ -2420,37 +2774,43 @@ pub unsafe extern "C" fn sizeof(_arg: *mut status))) -> *mut chunk_nr {
 // See folio_maybe_mapped_shared() on possible imprecision
 // when we cannot easily detect if a folio is shared.
 //
-    if ((vma.vm_flags & VM_EXEC) && folio_maybe_mapped_shared(folio))
+    if ((vma.vm_flags & VM_EXEC) && folio_maybe_mapped_shared(folio)) {
     return -EACCES;
+    }
 //
 // Do not migrate dirty folios as not all filesystems can move
 // dirty folios in MIGRATE_ASYNC mode which is a waste of
 // cycles.
 //
-    if (folio_test_dirty(folio))
+    if (folio_test_dirty(folio)) {
     return -EAGAIN;
+    }
     }
 // Avoid migrating to a node that is nearly full
     if (!migrate_balanced_pgdat(pgdat, nr_pages)) {
-    int z;
-    if (!(sysctl_numa_balancing_mode & NUMA_BALANCING_MEMORY_TIERING))
+    let mut z = 0;
+    if (!(sysctl_numa_balancing_mode & NUMA_BALANCING_MEMORY_TIERING)) {
     return -EAGAIN;
-    for (z = pgdat.nr_zones - 1; z >= 0; z--) {
-    if (managed_zone(pgdat.node_zones + z))
+    }
+    while (z >= 0) {
+    if (managed_zone(pgdat.node_zones + z)) {
     break;
+    }
     }
 //
 // If there are no managed zones, it should not proceed
 // further.
 //
-    if (z < 0)
+    if (z < 0) {
     return -EAGAIN;
+    }
     wakeup_kswapd(pgdat.node_zones + z, 0,
     folio_order(folio), ZONE_MOVABLE);
     return -EAGAIN;
     }
-    if (!folio_isolate_lru(folio))
+    if (!folio_isolate_lru(folio)) {
     return -EAGAIN;
+    }
     node_stat_mod_folio(folio, NR_ISOLATED_ANON + folio_is_file_lru(folio),
     nr_pages);
     return 0;
@@ -2464,29 +2824,31 @@ pub unsafe extern "C" fn sizeof(_arg: *mut status))) -> *mut chunk_nr {
 //
 #[no_mangle]
 pub unsafe extern "C" fn migrate_misplaced_folio(folio: *mut folio, node: c_int) -> c_int {
-    int migrate_misplaced_folio(struct folio *folio, int node)
-    {
-    pg_data_t *pgdat = NODE_DATA(node);
-    int nr_remaining;
-    unsigned int nr_succeeded;
-    LIST_HEAD(migratepages);
-    struct mem_cgroup *memcg = get_mem_cgroup_from_folio(folio);
-    struct lruvec *lruvec = mem_cgroup_lruvec(memcg, pgdat);
+    let mut pgdat = NODE_DATA(node);
+    let mut nr_remaining = 0;
+    let mut nr_succeeded = 0;
+pub static mut migratepages: usize = 0;
+    let mut memcg = get_mem_cgroup_from_folio(folio);
+    let mut lruvec = mem_cgroup_lruvec(memcg, pgdat);
     list_add(&folio.lru, &migratepages);
     nr_remaining = migrate_pages(&migratepages, alloc_misplaced_dst_folio,
     core::ptr::null_mut(), node, MIGRATE_ASYNC,
     MR_NUMA_MISPLACED, &nr_succeeded);
-    if (nr_remaining && !list_empty(&migratepages))
+    if (nr_remaining && !list_empty(&migratepages)) {
     putback_movable_pages(&migratepages);
+    }
     if (nr_succeeded) {
     count_vm_numa_events(NUMA_PAGE_MIGRATE, nr_succeeded);
     count_memcg_events(memcg, NUMA_PAGE_MIGRATE, nr_succeeded);
     if ((sysctl_numa_balancing_mode & NUMA_BALANCING_MEMORY_TIERING)
     && !node_is_toptier(folio_nid(folio))
-    && node_is_toptier(node))
+    && node_is_toptier(node)) {
     mod_lruvec_state(lruvec, PGPROMOTE_SUCCESS, nr_succeeded);
     }
+    }
     mem_cgroup_put(memcg);
-    BUG_ON(!list_empty(&migratepages));
+    BUG_ON!(!list_empty(&migratepages));
     return nr_remaining ? -EAGAIN : 0;
     }
+}
+}

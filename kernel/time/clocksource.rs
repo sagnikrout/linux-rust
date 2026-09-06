@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0+
@@ -43,14 +293,13 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Copyright (C) 2004, 2005 IBM, John Stultz (johnstul@us.ibm.com)
 //
 
-    static void clocksource_enqueue(struct clocksource *cs);
+// forward_decl: clocksource_enqueue;
 #[no_mangle]
 unsafe extern "C" fn cycles_to_nsec_safe(cs: *mut clocksource, start: u64, end: u64) -> noinline u64 {
-    static noinline u64 cycles_to_nsec_safe(struct clocksource *cs, u64 start, u64 end)
-    {
-    let mut delta: u64 = clocksource_delta(end, start, cs.mask, cs.max_raw_delta);
-    if (likely(delta < cs.max_cycles))
+pub static mut delta: u64 = 0;
+    if (likely(delta < cs.max_cycles)) {
     return clocksource_cyc2ns(delta, cs.mult, cs.shift);
+    }
     return mul_u64_u32_shr(delta, cs.mult, cs.shift);
     }
 //
@@ -76,10 +325,9 @@ unsafe extern "C" fn cycles_to_nsec_safe(cs: *mut clocksource, start: u64, end: 
 // reduce the conversion accuracy by choosing smaller mult and shift
 // factors.
 //
-    void
-    clocks_calc_mult_shift(u32 *mult, u32 *shift, u32 from, u32 to, u32 maxsec)
-    {
-    u64 tmp;
+#[no_mangle]
+pub unsafe extern "C" fn clocks_calc_mult_shift(mult: *mut u32, shift: *mut u32, from: u32, to: u32, maxsec: u32) {
+    let mut tmp = 0;
     u32 sft, sftacc= 32;
 //
 // Calculate the shift factor which is limiting the conversion
@@ -88,18 +336,19 @@ unsafe extern "C" fn cycles_to_nsec_safe(cs: *mut clocksource, start: u64, end: 
     tmp = ((u64)maxsec * from) >> 32;
     while (tmp) {
     tmp >>=1;
-    sftacc--;
+    sftacc -= 1;
     }
 //
 // Find the conversion shift/mult pair which has the best
 // accuracy and fits the maxsec conversion range:
 //
-    for (sft = 32; sft > 0; sft--) {
+    while (sft > 0) {
     tmp = (u64) to << sft;
     tmp += from / 2;
     do_div(tmp, from);
-    if ((tmp >> sftacc) == 0)
+    if ((tmp >> sftacc) == 0) {
     break;
+    }
     }
 // mult = tmp;
 // shift = sft;
@@ -117,21 +366,21 @@ unsafe extern "C" fn cycles_to_nsec_safe(cs: *mut clocksource, start: u64, end: 
 // override_name:
 // Name of the user-specified clocksource.
 //
-    static struct clocksource *curr_clocksource;
-    static struct clocksource *suspend_clocksource;
-    static LIST_HEAD(clocksource_list);
-    static DEFINE_MUTEX(clocksource_mutex);
+pub static mut curr_clocksource: *mut c_void = core::ptr::null_mut();
+pub static mut suspend_clocksource: *mut c_void = core::ptr::null_mut();
+pub static mut clocksource_list: usize = 0;
+pub static mut clocksource_mutex: usize = 0;
     static char override_name[CS_NAME_LEN];
     static int finished_booting;
     static u64 suspend_start;
 
-    static void clocksource_watchdog_work(struct work_struct *work);
-    static void clocksource_select(void);
-    static LIST_HEAD(watchdog_list);
-    static struct clocksource *watchdog;
-    static struct timer_list watchdog_timer;
-    static DECLARE_WORK(watchdog_work, clocksource_watchdog_work);
-    static DEFINE_SPINLOCK(watchdog_lock);
+// forward_decl: clocksource_watchdog_work;
+// forward_decl: clocksource_select;
+pub static mut watchdog_list: usize = 0;
+pub static mut watchdog: *mut c_void = core::ptr::null_mut();
+pub static mut watchdog_timer: usize = 0;
+pub static mut watchdog_work: usize = 0;
+pub static mut watchdog_lock: usize = 0;
     static int watchdog_running;
     static atomic_t watchdog_reset_pending;
 // Watchdog interval: 0.5sec.
@@ -163,21 +412,15 @@ pub const WATCHDOG_FREQ_RETRIES: c_int = 3;
 pub const WATCHDOG_REMOTE_MAX_SEQ: c_int = 10;
 #[no_mangle]
 pub unsafe extern "C" fn clocksource_watchdog_lock(flags: *mut c_ulong) {
-    static inline void clocksource_watchdog_lock(unsigned long *flags)
-    {
     spin_lock_irqsave(&watchdog_lock, *flags);
     }
 #[no_mangle]
 pub unsafe extern "C" fn clocksource_watchdog_unlock(flags: *mut c_ulong) {
-    static inline void clocksource_watchdog_unlock(unsigned long *flags)
-    {
     spin_unlock_irqrestore(&watchdog_lock, *flags);
     }
-    static int clocksource_watchdog_kthread(void *data);
+// forward_decl: clocksource_watchdog_kthread;
 #[no_mangle]
 unsafe extern "C" fn clocksource_watchdog_work(work: *mut work_struct) {
-    static void clocksource_watchdog_work(struct work_struct *work)
-    {
 //
 // We cannot directly run clocksource_watchdog_kthread() here, because
 // clocksource_select() calls timekeeping_notify() which uses
@@ -195,16 +438,12 @@ unsafe extern "C" fn clocksource_watchdog_work(work: *mut work_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn clocksource_change_rating(cs: *mut clocksource, rating: c_int) {
-    static void clocksource_change_rating(struct clocksource *cs, int rating)
-    {
     list_del(&cs.list);
     cs.rating = rating;
     clocksource_enqueue(cs);
     }
 #[no_mangle]
 unsafe extern "C" fn __clocksource_unstable(cs: *mut clocksource) {
-    static void __clocksource_unstable(struct clocksource *cs)
-    {
     cs.flags &= ~(CLOCK_SOURCE_VALID_FOR_HRES | CLOCK_SOURCE_WATCHDOG);
     cs.flags |= CLOCK_SOURCE_UNSTABLE;
 //
@@ -215,11 +454,13 @@ unsafe extern "C" fn __clocksource_unstable(cs: *mut clocksource) {
     cs.rating = 0;
     return;
     }
-    if (cs.mark_unstable)
+    if (cs.mark_unstable) {
     cs.mark_unstable(cs);
+    }
 // kick clocksource_watchdog_kthread()
-    if (finished_booting)
+    if (finished_booting) {
     schedule_work(&watchdog_work);
+    }
     }
 //
 // clocksource_mark_unstable - mark clocksource unstable via watchdog
@@ -230,24 +471,22 @@ unsafe extern "C" fn __clocksource_unstable(cs: *mut clocksource) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn clocksource_mark_unstable(cs: *mut clocksource) {
-    void clocksource_mark_unstable(struct clocksource *cs)
-    {
-    unsigned long flags;
+    let mut flags = 0;
     spin_lock_irqsave(&watchdog_lock, flags);
     if (!(cs.flags & CLOCK_SOURCE_UNSTABLE)) {
-    if (!list_empty(&cs.list) && list_empty(&cs.wd_list))
+    if (!list_empty(&cs.list) && list_empty(&cs.wd_list)) {
     list_add(&cs.wd_list, &watchdog_list);
+    }
     __clocksource_unstable(cs);
     }
     spin_unlock_irqrestore(&watchdog_lock, flags);
     }
 #[no_mangle]
 pub unsafe extern "C" fn clocksource_reset_watchdog() {
-    static inline void clocksource_reset_watchdog(void)
-    {
-    struct clocksource *cs;
-    list_for_each_entry(cs, &watchdog_list, wd_list)
+pub static mut cs: *mut c_void = core::ptr::null_mut();
+    list_for_each_entry(cs, &watchdog_list, wd_list) {
     cs.flags &= ~CLOCK_SOURCE_WATCHDOG;
+    }
     }
     enum wd_result {
     WD_SUCCESS,
@@ -264,7 +503,7 @@ pub struct watchdog_cpu_data {
 // Keep first as it is 32 byte aligned
     pub csd: call_single_data_t,
     pub remote_inprogress: core::sync::atomic::AtomicI32,
-    pub result: enum wd_result,
+    pub result: wd_result,
     pub cpu_ts: [u64; 2],
     pub cs: *mut clocksource,
 // Ensure that the sequence is in a separate cache line
@@ -277,25 +516,21 @@ pub struct watchdog_cpu_data {
 #[derive(Copy, Clone)]
 pub struct watchdog_data {
     pub lock: raw_spinlock_t,
-    pub result: enum wd_result,
+    pub result: wd_result,
     pub wd_seq: u64,
     pub wd_delta: u64,
     pub cs_delta: u64,
     pub cpu_ts: [u64; 2],
     pub curr_cpu: c_uint,
-    pub ____cacheline_aligned_in_smp: },
+}
     pub unused): *mut static void watchdog_check_skew_remote(void,
-    static DEFINE_PER_CPU_ALIGNED(struct watchdog_cpu_data, watchdog_cpu_data) = {
+    static DEFINE_PER_CPU_ALIGNED(watchdog_cpu_data, watchdog_cpu_data) = {
     .csd	= CSD_INIT(watchdog_check_skew_remote, core::ptr::null_mut()),
 }
 
-    static struct watchdog_data watchdog_data = {
-    .lock	= __RAW_SPIN_LOCK_UNLOCKED(watchdog_data.lock),
-    };
+pub static mut watchdog_data: usize = 0;
 #[no_mangle]
-pub unsafe extern "C" fn watchdog_set_result(wd: *mut watchdog_cpu_data, result: enum wd_result) {
-    static inline void watchdog_set_result(struct watchdog_cpu_data *wd, enum wd_result result)
-    {
+pub unsafe extern "C" fn watchdog_set_result(wd: *mut watchdog_cpu_data, result: wd_result) {
     guard(raw_spinlock)(&watchdog_data.lock);
     if (!wd.result) {
     atomic_set(&wd.seq, WATCHDOG_REMOTE_MAX_SEQ);
@@ -305,15 +540,14 @@ pub unsafe extern "C" fn watchdog_set_result(wd: *mut watchdog_cpu_data, result:
 // Wait for the sequence number to hand over control.
 #[no_mangle]
 unsafe extern "C" fn watchdog_wait_seq(wd: *mut watchdog_cpu_data, start: u64, seq: c_int) -> bool {
-    static bool watchdog_wait_seq(struct watchdog_cpu_data *wd, u64 start, int seq)
-    {
-    for(int cnt = 0; atomic_read(&wd.seq) < seq; cnt++) {
+    while (atomic_read(&wd.seq) < seq) {
 // Bail if the other side set an error result
-    if (READ_ONCE(wd.result) != WD_SUCCESS)
+    if (READ_ONCE(wd.result) != WD_SUCCESS) {
     return false;
+    }
 // Prevent endless loops if the other CPU does not react.
     if (cnt == 5000) {
-    let mut nsecs: u64 = ktime_get_raw_fast_ns();
+pub static mut nsecs: u64 = 0;
     if (nsecs - start >=wd.timeout_ns) {
     watchdog_set_result(wd, WD_CPU_TIMEOUT);
     return false;
@@ -326,18 +560,17 @@ unsafe extern "C" fn watchdog_wait_seq(wd: *mut watchdog_cpu_data, start: u64, s
     }
 #[no_mangle]
 unsafe extern "C" fn watchdog_check_skew(wd: *mut watchdog_cpu_data, index: c_int) {
-    static void watchdog_check_skew(struct watchdog_cpu_data *wd, int index)
-    {
     u64 prev, now, delta, start = ktime_get_raw_fast_ns();
-    let mut local: c_int = index, remote = (index + 1) & 0x1;
-    struct clocksource *cs = wd.cs;
+pub static mut local: c_int = 0;
+    let mut cs = wd.cs;
 // Set the local timestamp so that the first iteration works correctly
     wd.cpu_ts[local] = cs.read(cs);
 // Signal arrival
     atomic_inc(&wd.seq);
-    for (int seq = local + 2; seq < WATCHDOG_REMOTE_MAX_SEQ; seq += 2) {
-    if (!watchdog_wait_seq(wd, start, seq))
+    while (seq < WATCHDOG_REMOTE_MAX_SEQ) {
+    if (!watchdog_wait_seq(wd, start, seq)) {
     return;
+    }
 // Capture local timestamp before possible non-local coherency overhead
     now = cs.read(cs);
 // Store local timestamp before reading remote to limit coherency stalls
@@ -354,17 +587,13 @@ unsafe extern "C" fn watchdog_check_skew(wd: *mut watchdog_cpu_data, index: c_in
     }
 #[no_mangle]
 unsafe extern "C" fn watchdog_check_skew_remote(unused: *mut c_void) {
-    static void watchdog_check_skew_remote(void *unused)
-    {
-    struct watchdog_cpu_data *wd = this_cpu_ptr(&watchdog_cpu_data);
+    let mut wd = this_cpu_ptr(&watchdog_cpu_data);
     atomic_inc(&wd.remote_inprogress);
     watchdog_check_skew(wd, 1);
     atomic_dec(&wd.remote_inprogress);
     }
 #[no_mangle]
 pub unsafe extern "C" fn wd_csd_locked(wd: *mut watchdog_cpu_data) -> bool {
-    static inline bool wd_csd_locked(struct watchdog_cpu_data *wd)
-    {
     return READ_ONCE(wd.csd.node.u_flags) & CSD_FLAG_LOCK;
     }
 //
@@ -372,12 +601,12 @@ pub unsafe extern "C" fn wd_csd_locked(wd: *mut watchdog_cpu_data) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn wd_get_remote_timeout(remote_cpu: c_uint) -> u64 {
-    static inline u64 wd_get_remote_timeout(unsigned int remote_cpu)
-    {
-    unsigned int n1, n2;
-    u64 ns;
-    if (nr_node_ids == 1)
+    let mut n1 = 0;
+    let mut n2 = 0;
+    let mut ns = 0;
+    if (nr_node_ids == 1) {
     return WATCHDOG_DEFAULT_TIMEOUT_NS;
+    }
     n1 = cpu_to_node(smp_processor_id());
     n2 = cpu_to_node(remote_cpu);
     ns = WATCHDOG_NUMA_MULTIPLIER_NS * node_distance(n1, n2);
@@ -385,9 +614,7 @@ pub unsafe extern "C" fn wd_get_remote_timeout(remote_cpu: c_uint) -> u64 {
     }
 #[no_mangle]
 unsafe extern "C" fn __watchdog_check_cpu_skew(cs: *mut clocksource, cpu: c_uint) {
-    static void __watchdog_check_cpu_skew(struct clocksource *cs, unsigned int cpu)
-    {
-    struct watchdog_cpu_data *wd;
+pub static mut wd: *mut c_void = core::ptr::null_mut();
     wd = per_cpu_ptr(&watchdog_cpu_data, cpu);
     if (atomic_read(&wd.remote_inprogress) || wd_csd_locked(wd)) {
     watchdog_data.result = WD_CPU_TIMEOUT;
@@ -400,7 +627,7 @@ unsafe extern "C" fn __watchdog_check_cpu_skew(cs: *mut clocksource, cpu: c_uint
     cs.wd_cpu = smp_processor_id();
     wd.timeout_ns = wd_get_remote_timeout(cpu);
 // Kick the remote CPU into the watchdog function
-    if (WARN_ON_ONCE(smp_call_function_single_async(cpu, &wd.csd))) {
+    if (WARN_ON_ONCE!(smp_call_function_single_async(cpu, &wd.csd))) {
     watchdog_data.result = WD_CPU_TIMEOUT;
     return;
     }
@@ -408,46 +635,46 @@ unsafe extern "C" fn __watchdog_check_cpu_skew(cs: *mut clocksource, cpu: c_uint
     watchdog_check_skew(wd, 0);
     scoped_guard(raw_spinlock_irq, &watchdog_data.lock) {
     watchdog_data.result = wd.result;
-    memcpy(watchdog_data.cpu_ts, wd.cpu_ts, sizeof(wd.cpu_ts));
+    memcpy(watchdog_data.cpu_ts, wd.cpu_ts, sizeof!(wd.cpu_ts));
     }
     }
 #[no_mangle]
 unsafe extern "C" fn watchdog_check_cpu_skew(cs: *mut clocksource) {
-    static void watchdog_check_cpu_skew(struct clocksource *cs)
-    {
-    let mut cpu: c_uint = watchdog_data.curr_cpu;
+pub static mut cpu: c_uint = 0;
     cpu = cpumask_next_wrap(cpu, cpu_online_mask);
     watchdog_data.curr_cpu = cpu;
 // Skip the current CPU. Handles num_online_cpus() == 1 as well
-    if (cpu == smp_processor_id())
+    if (cpu == smp_processor_id()) {
     return;
+    }
 // Don't interfere with the test mechanics
-    if ((cs.flags & CLOCK_SOURCE_WDTEST) && !(cs.flags & CLOCK_SOURCE_WDTEST_PERCPU))
+    if ((cs.flags & CLOCK_SOURCE_WDTEST) && !(cs.flags & CLOCK_SOURCE_WDTEST_PERCPU)) {
     return;
+    }
     __watchdog_check_cpu_skew(cs, cpu);
     }
 #[no_mangle]
 unsafe extern "C" fn watchdog_check_freq(cs: *mut clocksource, reset_pending: bool) -> bool {
-    static bool watchdog_check_freq(struct clocksource *cs, bool reset_pending)
-    {
-    let mut ppm_shift: c_uint = SHIFT_4000PPM;
+pub static mut ppm_shift: c_uint = 0;
     u64 wd_ts0, wd_ts1, cs_ts;
     watchdog_data.result = WD_SUCCESS;
     if (!watchdog) {
     watchdog_data.result = WD_FREQ_NO_WATCHDOG;
     return false;
     }
-    if (cs.flags & CLOCK_SOURCE_WDTEST_PERCPU)
+    if (cs.flags & CLOCK_SOURCE_WDTEST_PERCPU) {
     return true;
+    }
 //
 // If both the clocksource and the watchdog claim they are
 // calibrated use 500ppm limit. Uncalibrated clocksources need a
 // larger allowance because thefirmware supplied frequencies can be
 // way off.
 //
-    if (watchdog.flags & CLOCK_SOURCE_CALIBRATED && cs.flags & CLOCK_SOURCE_CALIBRATED)
+    if (watchdog.flags & CLOCK_SOURCE_CALIBRATED && cs.flags & CLOCK_SOURCE_CALIBRATED) {
     ppm_shift = SHIFT_500PPM;
-    for (int retries = 0; retries < WATCHDOG_FREQ_RETRIES; retries++) {
+    }
+    while (retries < WATCHDOG_FREQ_RETRIES) {
     s64 wd_last, cs_last, wd_seq, wd_delta, cs_delta, max_delta;
     scoped_guard(irq) {
     wd_ts0 = watchdog.read(watchdog);
@@ -467,8 +694,9 @@ unsafe extern "C" fn watchdog_check_freq(cs: *mut clocksource, reset_pending: bo
     cs.wd_last = wd_ts0;
     cs.cs_last = cs_ts;
 // First round or reset pending?
-    if (!(cs.flags & CLOCK_SOURCE_WATCHDOG) || reset_pending)
-    goto reset;
+    if (!(cs.flags & CLOCK_SOURCE_WATCHDOG) || reset_pending) {
+// goto;
+    }
 // Calculate the nanosecond deltas from the last invocation
     wd_delta = cycles_to_nsec_safe(watchdog, wd_last, wd_ts0);
     cs_delta = cycles_to_nsec_safe(cs, cs_last, cs_ts);
@@ -480,21 +708,23 @@ unsafe extern "C" fn watchdog_check_freq(cs: *mut clocksource, reset_pending: bo
 // clocksources to overflow.
 //
     max_delta = max(wd_delta, cs_delta);
-    if (max_delta > cs.max_idle_ns || max_delta > watchdog.max_idle_ns)
-    goto reset;
+    if (max_delta > cs.max_idle_ns || max_delta > watchdog.max_idle_ns) {
+// goto;
+    }
 //
 // Calculate and validate the skew against the allowed PPM
 // value of the maximum delta plus the watchdog readout
 // time.
 //
-    if (abs(wd_delta - cs_delta) < (max_delta >> ppm_shift) + wd_seq)
+    if (abs(wd_delta - cs_delta) < (max_delta >> ppm_shift) + wd_seq) {
     return true;
+    }
     watchdog_data.result = WD_FREQ_SKEWED;
     return false;
     }
     watchdog_data.result = WD_FREQ_TIMEOUT;
     return false;
-    reset:
+// label;
     cs.flags |= CLOCK_SOURCE_WATCHDOG;
     watchdog_data.result = WD_FREQ_RESET;
     return false;
@@ -502,30 +732,30 @@ unsafe extern "C" fn watchdog_check_freq(cs: *mut clocksource, reset_pending: bo
 // Synchronization for sched clock
 #[no_mangle]
 unsafe extern "C" fn clocksource_tick_stable(cs: *mut clocksource) {
-    static void clocksource_tick_stable(struct clocksource *cs)
-    {
-    if (cs == curr_clocksource && cs.tick_stable)
+    if (cs == curr_clocksource && cs.tick_stable) {
     cs.tick_stable(cs);
+    }
     }
 // Conditionaly enable high resolution mode
 #[no_mangle]
 unsafe extern "C" fn clocksource_enable_highres(cs: *mut clocksource) {
-    static void clocksource_enable_highres(struct clocksource *cs)
-    {
     if ((cs.flags & CLOCK_SOURCE_VALID_FOR_HRES) ||
     !(cs.flags & CLOCK_SOURCE_IS_CONTINUOUS) ||
-    !watchdog || !(watchdog.flags & CLOCK_SOURCE_IS_CONTINUOUS))
+    !watchdog || !(watchdog.flags & CLOCK_SOURCE_IS_CONTINUOUS)) {
     return;
+    }
 // Mark it valid for high-res.
     cs.flags |= CLOCK_SOURCE_VALID_FOR_HRES;
 //
 // Can't schedule work before finished_booting is
 // true. clocksource_done_booting will take care of it.
 //
-    if (!finished_booting)
+    if (!finished_booting) {
     return;
-    if (cs.flags & CLOCK_SOURCE_WDTEST)
+    }
+    if (cs.flags & CLOCK_SOURCE_WDTEST) {
     return;
+    }
 //
 // If this is not the current clocksource let the watchdog thread
 // reselect it. Due to the change to high res this clocksource
@@ -539,92 +769,90 @@ unsafe extern "C" fn clocksource_enable_highres(cs: *mut clocksource) {
     tick_clock_notify();
     }
     }
-    static DEFINE_RATELIMIT_STATE(ratelimit_state, 5 * HZ, 2);
+pub static mut ratelimit_state: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn watchdog_print_freq_timeout(cs: *mut clocksource) {
-    static void watchdog_print_freq_timeout(struct clocksource *cs)
-    {
-    if (!__ratelimit(&ratelimit_state))
+    if (!__ratelimit(&ratelimit_state)) {
     return;
-    pr_info("Watchdog %s read timed out. Readout sequence took: %lluns\n",
+    }
+    pr_info!("Watchdog %s read timed out. Readout sequence took: %lluns\n",
     watchdog.name, watchdog_data.wd_seq);
     }
 #[no_mangle]
 unsafe extern "C" fn watchdog_print_freq_skew(cs: *mut clocksource) {
-    static void watchdog_print_freq_skew(struct clocksource *cs)
-    {
-    pr_warn("Marking clocksource %s unstable due to frequency skew\n", cs.name);
-    pr_warn("Watchdog    %20s interval: %16lluns\n", watchdog.name, watchdog_data.wd_delta);
-    pr_warn("Clocksource %20s interval: %16lluns\n", cs.name, watchdog_data.cs_delta);
+    pr_warn!("Marking clocksource %s unstable due to frequency skew\n", cs.name);
+    pr_warn!("Watchdog    %20s interval: %16lluns\n", watchdog.name, watchdog_data.wd_delta);
+    pr_warn!("Clocksource %20s interval: %16lluns\n", cs.name, watchdog_data.cs_delta);
     }
 #[no_mangle]
 unsafe extern "C" fn watchdog_handle_remote_timeout(cs: *mut clocksource) {
-    static void watchdog_handle_remote_timeout(struct clocksource *cs)
-    {
-    pr_info_once("Watchdog remote CPU %u read timed out\n", watchdog_data.curr_cpu);
+    pr_info_once!("Watchdog remote CPU %u read timed out\n", watchdog_data.curr_cpu);
     }
 #[no_mangle]
 unsafe extern "C" fn watchdog_print_remote_skew(cs: *mut clocksource) {
-    static void watchdog_print_remote_skew(struct clocksource *cs)
-    {
-    pr_warn("Marking clocksource %s unstable due to inter CPU skew\n", cs.name);
+    pr_warn!("Marking clocksource %s unstable due to inter CPU skew\n", cs.name);
     if (watchdog_data.cpu_ts[0] < watchdog_data.cpu_ts[1]) {
-    pr_warn("CPU%u %16llu < CPU%u %16llu (cycles)\n", smp_processor_id(),
+    pr_warn!("CPU%u %16llu < CPU%u %16llu (cycles)\n", smp_processor_id(),
     watchdog_data.cpu_ts[0], watchdog_data.curr_cpu, watchdog_data.cpu_ts[1]);
     } else {
-    pr_warn("CPU%u %16llu < CPU%u %16llu (cycles)\n", watchdog_data.curr_cpu,
+    pr_warn!("CPU%u %16llu < CPU%u %16llu (cycles)\n", watchdog_data.curr_cpu,
     watchdog_data.cpu_ts[1], smp_processor_id(), watchdog_data.cpu_ts[0]);
     }
     }
 #[no_mangle]
 unsafe extern "C" fn watchdog_check_result(cs: *mut clocksource) {
-    static void watchdog_check_result(struct clocksource *cs)
-    {
-    switch (watchdog_data.result) {
-    case WD_SUCCESS:
+    match (watchdog_data.result) {
+    WD_SUCCESS => {
     clocksource_tick_stable(cs);
     clocksource_enable_highres(cs);
     return;
-    case WD_FREQ_TIMEOUT:
+    }
+    WD_FREQ_TIMEOUT => {
     watchdog_print_freq_timeout(cs);
 // Try again later and invalidate the reference timestamps.
     cs.flags &= ~CLOCK_SOURCE_WATCHDOG;
     return;
-    case WD_FREQ_NO_WATCHDOG:
-    case WD_FREQ_RESET:
+    }
+    WD_FREQ_NO_WATCHDOG => {
+    }
+    WD_FREQ_RESET => {
 //
 // Nothing to do when the reference timestamps were reset
 // or no watchdog clocksource registered.
 //
     return;
-    case WD_FREQ_SKEWED:
+    }
+    WD_FREQ_SKEWED => {
     watchdog_print_freq_skew(cs);
-    break;
-    case WD_CPU_TIMEOUT:
+    // break;
+    }
+    WD_CPU_TIMEOUT => {
 // Remote check timed out. Try again next cycle.
     watchdog_handle_remote_timeout(cs);
     return;
-    case WD_CPU_SKEWED:
+    }
+    WD_CPU_SKEWED => {
     watchdog_print_remote_skew(cs);
-    break;
+    // break;
+    }
     }
     __clocksource_unstable(cs);
     }
 #[no_mangle]
 unsafe extern "C" fn clocksource_watchdog(unused: *mut timer_list) {
-    static void clocksource_watchdog(struct timer_list *unused)
-    {
-    struct clocksource *cs;
-    bool reset_pending;
+pub static mut cs: *mut c_void = core::ptr::null_mut();
+    let mut reset_pending = 0;
     guard(spinlock)(&watchdog_lock);
-    if (!watchdog_running)
+    if (!watchdog_running) {
     return;
+    }
     reset_pending = atomic_read(&watchdog_reset_pending);
     list_for_each_entry(cs, &watchdog_list, wd_list) {
 // Clocksource already marked unstable?
     if (cs.flags & CLOCK_SOURCE_UNSTABLE) {
-    if (finished_booting)
+    if (finished_booting) {
     schedule_work(&watchdog_work);
+    }
     continue;
     }
 // Compare against watchdog clocksource if available
@@ -635,8 +863,9 @@ unsafe extern "C" fn clocksource_watchdog(unused: *mut timer_list) {
     watchdog_check_result(cs);
     }
 // Clear after the full clocksource walk
-    if (reset_pending)
+    if (reset_pending) {
     atomic_dec(&watchdog_reset_pending);
+    }
 // Could have been rearmed by a stop/start cycle
     if (!timer_pending(&watchdog_timer)) {
     watchdog_timer.expires += WATCHDOG_INTERVAL;
@@ -645,10 +874,9 @@ unsafe extern "C" fn clocksource_watchdog(unused: *mut timer_list) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn clocksource_start_watchdog() {
-    static inline void clocksource_start_watchdog(void)
-    {
-    if (watchdog_running || list_empty(&watchdog_list))
+    if (watchdog_running || list_empty(&watchdog_list)) {
     return;
+    }
     timer_setup(&watchdog_timer, clocksource_watchdog, TIMER_PINNED);
     watchdog_timer.expires = jiffies + WATCHDOG_INTERVAL;
     add_timer_on(&watchdog_timer, get_boot_cpu_id());
@@ -656,23 +884,18 @@ pub unsafe extern "C" fn clocksource_start_watchdog() {
     }
 #[no_mangle]
 pub unsafe extern "C" fn clocksource_stop_watchdog() {
-    static inline void clocksource_stop_watchdog(void)
-    {
-    if (!watchdog_running || !list_empty(&watchdog_list))
+    if (!watchdog_running || !list_empty(&watchdog_list)) {
     return;
+    }
     timer_delete(&watchdog_timer);
     watchdog_running = 0;
     }
 #[no_mangle]
 unsafe extern "C" fn clocksource_resume_watchdog() {
-    static void clocksource_resume_watchdog(void)
-    {
     atomic_inc(&watchdog_reset_pending);
     }
 #[no_mangle]
 unsafe extern "C" fn clocksource_enqueue_watchdog(cs: *mut clocksource) {
-    static void clocksource_enqueue_watchdog(struct clocksource *cs)
-    {
     INIT_LIST_HEAD(&cs.wd_list);
     if (cs.flags & CLOCK_SOURCE_MUST_VERIFY) {
 // cs is a clocksource to be watched.
@@ -680,52 +903,57 @@ unsafe extern "C" fn clocksource_enqueue_watchdog(cs: *mut clocksource) {
     cs.flags &= ~CLOCK_SOURCE_WATCHDOG;
     } else {
 // cs is a watchdog.
-    if (cs.flags & CLOCK_SOURCE_IS_CONTINUOUS)
+    if (cs.flags & CLOCK_SOURCE_IS_CONTINUOUS) {
     cs.flags |= CLOCK_SOURCE_VALID_FOR_HRES;
+    }
     }
     }
 #[no_mangle]
 unsafe extern "C" fn clocksource_select_watchdog(fallback: bool) {
-    static void clocksource_select_watchdog(bool fallback)
-    {
-    struct clocksource *cs, *old_wd;
-    unsigned long flags;
+    let mut cs = core::ptr::null_mut();
+    let mut old_wd = core::ptr::null_mut();
+    let mut flags = 0;
     spin_lock_irqsave(&watchdog_lock, flags);
 // save current watchdog
     old_wd = watchdog;
-    if (fallback)
+    if (fallback) {
     watchdog = core::ptr::null_mut();
+    }
     list_for_each_entry(cs, &clocksource_list, list) {
 // cs is a clocksource to be watched.
-    if (cs.flags & CLOCK_SOURCE_MUST_VERIFY)
+    if (cs.flags & CLOCK_SOURCE_MUST_VERIFY) {
     continue;
+    }
 //
 // If it's not continuous, don't put the fox in charge of
 // the henhouse.
 //
-    if (!(cs.flags & CLOCK_SOURCE_IS_CONTINUOUS))
+    if (!(cs.flags & CLOCK_SOURCE_IS_CONTINUOUS)) {
     continue;
+    }
 // Skip current if we were requested for a fallback.
-    if (fallback && cs == old_wd)
+    if (fallback && cs == old_wd) {
     continue;
+    }
 // Pick the best watchdog.
-    if (!watchdog || cs.rating > watchdog.rating)
+    if (!watchdog || cs.rating > watchdog.rating) {
     watchdog = cs;
     }
+    }
 // If we failed to find a fallback restore the old one.
-    if (!watchdog)
+    if (!watchdog) {
     watchdog = old_wd;
+    }
 // If we changed the watchdog we need to reset cycles.
-    if (watchdog != old_wd)
+    if (watchdog != old_wd) {
     clocksource_reset_watchdog();
+    }
 // Check if the watchdog timer needs to be started.
     clocksource_start_watchdog();
     spin_unlock_irqrestore(&watchdog_lock, flags);
     }
 #[no_mangle]
 unsafe extern "C" fn clocksource_dequeue_watchdog(cs: *mut clocksource) {
-    static void clocksource_dequeue_watchdog(struct clocksource *cs)
-    {
     if (cs != watchdog) {
     if (cs.flags & CLOCK_SOURCE_MUST_VERIFY) {
 // cs is a watched clocksource.
@@ -737,11 +965,10 @@ unsafe extern "C" fn clocksource_dequeue_watchdog(cs: *mut clocksource) {
     }
 #[no_mangle]
 unsafe extern "C" fn __clocksource_watchdog_kthread() -> c_int {
-    static int __clocksource_watchdog_kthread(void)
-    {
-    struct clocksource *cs, *tmp;
-    unsigned long flags;
-    let mut select: c_int = 0;
+    let mut cs = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
+    let mut flags = 0;
+pub static mut select: c_int = 0;
     spin_lock_irqsave(&watchdog_lock, flags);
     list_for_each_entry_safe(cs, tmp, &watchdog_list, wd_list) {
     if (cs.flags & CLOCK_SOURCE_UNSTABLE) {
@@ -761,64 +988,72 @@ unsafe extern "C" fn __clocksource_watchdog_kthread() -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn clocksource_watchdog_kthread(data: *mut c_void) -> c_int {
-    static int clocksource_watchdog_kthread(void *data)
-    {
     mutex_lock(&clocksource_mutex);
-    if (__clocksource_watchdog_kthread())
+    if (__clocksource_watchdog_kthread()) {
     clocksource_select();
+    }
     mutex_unlock(&clocksource_mutex);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn clocksource_is_watchdog(cs: *mut clocksource) -> bool {
-    static bool clocksource_is_watchdog(struct clocksource *cs)
-    {
-    let mut cs: return = = watchdog;
+pub static mut cs: return = 0;
     }
 
 #[no_mangle]
 unsafe extern "C" fn clocksource_enqueue_watchdog(cs: *mut clocksource) {
-    static void clocksource_enqueue_watchdog(struct clocksource *cs)
-    {
-    if (cs.flags & CLOCK_SOURCE_IS_CONTINUOUS)
+    if (cs.flags & CLOCK_SOURCE_IS_CONTINUOUS) {
     cs.flags |= CLOCK_SOURCE_VALID_FOR_HRES;
     }
-    static void clocksource_select_watchdog(bool fallback) { }
-    static inline void clocksource_dequeue_watchdog(struct clocksource *cs) { }
-    static inline void clocksource_resume_watchdog(void) { }
-    static inline int __clocksource_watchdog_kthread(void) { return 0; }
-    static bool clocksource_is_watchdog(struct clocksource *cs) { return false; }
-    void clocksource_mark_unstable(struct clocksource *cs) { }
-    static inline void clocksource_watchdog_lock(unsigned long *flags) { }
-    static inline void clocksource_watchdog_unlock(unsigned long *flags) { }
+    }
+#[no_mangle]
+pub unsafe extern "C" fn clocksource_select_watchdog(fallback: bool) { }
+#[no_mangle]
+pub unsafe extern "C" fn clocksource_dequeue_watchdog(cs: *mut clocksource) { }
+#[no_mangle]
+pub unsafe extern "C" fn clocksource_resume_watchdog() { }
+#[no_mangle]
+pub unsafe extern "C" fn __clocksource_watchdog_kthread() -> c_int { return 0; }
+#[no_mangle]
+pub unsafe extern "C" fn clocksource_is_watchdog(cs: *mut clocksource) -> bool { return false; }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: clocksource_mark_unstable
+pub unsafe extern "C" fn clocksource_mark_unstable_dup(cs: *mut clocksource) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: clocksource_watchdog_lock
+pub unsafe extern "C" fn clocksource_watchdog_lock_dup(flags: *mut c_ulong) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: clocksource_watchdog_unlock
+pub unsafe extern "C" fn clocksource_watchdog_unlock_dup(flags: *mut c_ulong) { }
 
 #[no_mangle]
 unsafe extern "C" fn clocksource_is_suspend(cs: *mut clocksource) -> bool {
-    static bool clocksource_is_suspend(struct clocksource *cs)
-    {
-    let mut cs: return = = suspend_clocksource;
+pub static mut cs: return = 0;
     }
 #[no_mangle]
 unsafe extern "C" fn __clocksource_suspend_select(cs: *mut clocksource) {
-    static void __clocksource_suspend_select(struct clocksource *cs)
-    {
 //
 // Skip the clocksource which will be stopped in suspend state.
 //
-    if (!(cs.flags & CLOCK_SOURCE_SUSPEND_NONSTOP))
+    if (!(cs.flags & CLOCK_SOURCE_SUSPEND_NONSTOP)) {
     return;
+    }
 //
 // The nonstop clocksource can be selected as the suspend clocksource to
 // calculate the suspend time, so it should not supply suspend/resume
 // interfaces to suspend the nonstop clocksource when system suspends.
 //
     if (cs.suspend || cs.resume) {
-    pr_warn("Nonstop clocksource %s should not supply suspend/resume interfaces\n",
+    pr_warn!("Nonstop clocksource %s should not supply suspend/resume interfaces\n",
     cs.name);
     }
 // Pick the best rating.
-    if (!suspend_clocksource || cs.rating > suspend_clocksource.rating)
+    if (!suspend_clocksource || cs.rating > suspend_clocksource.rating) {
     suspend_clocksource = cs;
+    }
     }
 //
 // clocksource_suspend_select - Select the best clocksource for suspend timing
@@ -826,16 +1061,17 @@ unsafe extern "C" fn __clocksource_suspend_select(cs: *mut clocksource) {
 //
 #[no_mangle]
 unsafe extern "C" fn clocksource_suspend_select(fallback: bool) {
-    static void clocksource_suspend_select(bool fallback)
-    {
-    struct clocksource *cs, *old_suspend;
+    let mut cs = core::ptr::null_mut();
+    let mut old_suspend = core::ptr::null_mut();
     old_suspend = suspend_clocksource;
-    if (fallback)
+    if (fallback) {
     suspend_clocksource = core::ptr::null_mut();
+    }
     list_for_each_entry(cs, &clocksource_list, list) {
 // Skip current if we were requested for a fallback.
-    if (fallback && cs == old_suspend)
+    if (fallback && cs == old_suspend) {
     continue;
+    }
     __clocksource_suspend_select(cs);
     }
     }
@@ -854,10 +1090,9 @@ unsafe extern "C" fn clocksource_suspend_select(fallback: bool) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn clocksource_start_suspend_timing(cs: *mut clocksource, start_cycles: u64) {
-    void clocksource_start_suspend_timing(struct clocksource *cs, u64 start_cycles)
-    {
-    if (!suspend_clocksource)
+    if (!suspend_clocksource) {
     return;
+    }
 //
 // If current clocksource is the suspend timer, we should use the
 // tkr_mono.cycle_last value as suspend_start to avoid same reading
@@ -890,28 +1125,31 @@ pub unsafe extern "C" fn clocksource_start_suspend_timing(cs: *mut clocksource, 
 //
 #[no_mangle]
 pub unsafe extern "C" fn clocksource_stop_suspend_timing(cs: *mut clocksource, cycle_now: u64) -> u64 {
-    u64 clocksource_stop_suspend_timing(struct clocksource *cs, u64 cycle_now)
-    {
     u64 now, nsec = 0;
-    if (!suspend_clocksource)
+    if (!suspend_clocksource) {
     return 0;
+    }
 //
 // If current clocksource is the suspend timer, we should use the
 // tkr_mono.cycle_last value from timekeeping as current cycle to
 // avoid same reading from suspend timer.
 //
-    if (clocksource_is_suspend(cs))
+    if (clocksource_is_suspend(cs)) {
     now = cycle_now;
-    else
+    }
+    else {
     now = suspend_clocksource.read(suspend_clocksource);
-    if (now > suspend_start)
+    }
+    if (now > suspend_start) {
     nsec = cycles_to_nsec_safe(suspend_clocksource, suspend_start, now);
+    }
 //
 // Disable the suspend timer to save power if current clocksource is
 // not the suspend timer.
 //
-    if (!clocksource_is_suspend(cs) && suspend_clocksource.disable)
+    if (!clocksource_is_suspend(cs) && suspend_clocksource.disable) {
     suspend_clocksource.disable(suspend_clocksource);
+    }
     return nsec;
     }
 //
@@ -919,24 +1157,22 @@ pub unsafe extern "C" fn clocksource_stop_suspend_timing(cs: *mut clocksource, c
 //
 #[no_mangle]
 pub unsafe extern "C" fn clocksource_suspend() {
-    void clocksource_suspend(void)
-    {
-    struct clocksource *cs;
-    list_for_each_entry_reverse(cs, &clocksource_list, list)
+pub static mut cs: *mut c_void = core::ptr::null_mut();
+    list_for_each_entry_reverse(cs, &clocksource_list, list) {
     if (cs.suspend)
     cs.suspend(cs);
+    }
     }
 //
 // clocksource_resume - resume the clocksource(s)
 //
 #[no_mangle]
 pub unsafe extern "C" fn clocksource_resume() {
-    void clocksource_resume(void)
-    {
-    struct clocksource *cs;
-    list_for_each_entry(cs, &clocksource_list, list)
+pub static mut cs: *mut c_void = core::ptr::null_mut();
+    list_for_each_entry(cs, &clocksource_list, list) {
     if (cs.resume)
     cs.resume(cs);
+    }
     clocksource_resume_watchdog();
     }
 //
@@ -948,8 +1184,6 @@ pub unsafe extern "C" fn clocksource_resume() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn clocksource_touch_watchdog() {
-    void clocksource_touch_watchdog(void)
-    {
     clocksource_resume_watchdog();
     }
 //
@@ -958,9 +1192,7 @@ pub unsafe extern "C" fn clocksource_touch_watchdog() {
 //
 #[no_mangle]
 unsafe extern "C" fn clocksource_max_adjustment(cs: *mut clocksource) -> u32 {
-    static u32 clocksource_max_adjustment(struct clocksource *cs)
-    {
-    u64 ret;
+    let mut ret = 0;
 //
 // We won't try to correct for more than 11% adjustments (110,000 ppm),
 //
@@ -985,8 +1217,6 @@ unsafe extern "C" fn clocksource_max_adjustment(cs: *mut clocksource) -> u32 {
 //
 #[no_mangle]
 pub unsafe extern "C" fn clocks_calc_max_nsecs(mult: u32, shift: u32, maxadj: u32, mask: u64, max_cyc: *mut u64) -> u64 {
-    u64 clocks_calc_max_nsecs(u32 mult, u32 shift, u32 maxadj, u64 mask, u64 *max_cyc)
-    {
     u64 max_nsecs, max_cycles;
 //
 // Calculate the maximum number of cycles that we can pass to the
@@ -1003,8 +1233,9 @@ pub unsafe extern "C" fn clocks_calc_max_nsecs(mult: u32, shift: u32, maxadj: u3
     max_cycles = min(max_cycles, mask);
     max_nsecs = clocksource_cyc2ns(max_cycles, mult - maxadj, shift);
 // return the max_cycles value as well if requested
-    if (max_cyc)
+    if (max_cyc) {
 // max_cyc = max_cycles;
+    }
 // Return 50% of the actual maximum, so we can detect bad values
     max_nsecs >>= 1;
     return max_nsecs;
@@ -1015,8 +1246,6 @@ pub unsafe extern "C" fn clocks_calc_max_nsecs(mult: u32, shift: u32, maxadj: u3
 //
 #[no_mangle]
 pub unsafe extern "C" fn clocksource_update_max_deferment(cs: *mut clocksource) {
-    static inline void clocksource_update_max_deferment(struct clocksource *cs)
-    {
     cs.max_idle_ns = clocks_calc_max_nsecs(cs.mult, cs.shift,
     cs.maxadj, cs.mask,
     &cs.max_cycles);
@@ -1029,47 +1258,55 @@ pub unsafe extern "C" fn clocksource_update_max_deferment(cs: *mut clocksource) 
 //
     cs.max_raw_delta = (cs.mask >> 1) + (cs.mask >> 2) + (cs.mask >> 3);
     }
-    static struct clocksource *clocksource_find_best(bool oneshot, bool skipcur)
-    {
-    struct clocksource *cs;
-    if (!finished_booting || list_empty(&clocksource_list))
+#[no_mangle]
+pub unsafe extern "C" fn clocksource_find_best(oneshot: bool, skipcur: bool) -> *mut c_void {
+pub static mut cs: *mut c_void = core::ptr::null_mut();
+    if (!finished_booting || list_empty(&clocksource_list)) {
     return core::ptr::null_mut();
+    }
 //
 // We pick the clocksource with the highest rating. If oneshot
 // mode is active, we pick the highres valid clocksource with
 // the best rating.
 //
     list_for_each_entry(cs, &clocksource_list, list) {
-    if (skipcur && cs == curr_clocksource)
+    if (skipcur && cs == curr_clocksource) {
     continue;
-    if (oneshot && !(cs.flags & CLOCK_SOURCE_VALID_FOR_HRES))
+    }
+    if (oneshot && !(cs.flags & CLOCK_SOURCE_VALID_FOR_HRES)) {
     continue;
-    if (cs.flags & CLOCK_SOURCE_WDTEST)
+    }
+    if (cs.flags & CLOCK_SOURCE_WDTEST) {
     continue;
+    }
     return cs;
     }
     return core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn __clocksource_select(skipcur: bool) {
-    static void __clocksource_select(bool skipcur)
-    {
-    let mut oneshot: bool = tick_oneshot_mode_active();
-    struct clocksource *best, *cs;
+pub static mut oneshot: bool = false;
+    let mut best = core::ptr::null_mut();
+    let mut cs = core::ptr::null_mut();
 // Find the best suitable clocksource
     best = clocksource_find_best(oneshot, skipcur);
-    if (!best)
+    if (!best) {
     return;
-    if (!strlen(override_name))
-    goto found;
+    }
+    if (!strlen(override_name)) {
+// goto;
+    }
 // Check for the override clocksource.
     list_for_each_entry(cs, &clocksource_list, list) {
-    if (skipcur && cs == curr_clocksource)
+    if (skipcur && cs == curr_clocksource) {
     continue;
-    if (strcmp(cs.name, override_name) != 0)
+    }
+    if (strcmp(cs.name, override_name) != 0) {
     continue;
-    if (cs.flags & CLOCK_SOURCE_WDTEST)
+    }
+    if (cs.flags & CLOCK_SOURCE_WDTEST) {
     continue;
+    }
 //
 // Check to make sure we don't switch to a non-highres
 // capable clocksource if the tick code is in oneshot
@@ -1078,7 +1315,7 @@ unsafe extern "C" fn __clocksource_select(skipcur: bool) {
     if (!(cs.flags & CLOCK_SOURCE_VALID_FOR_HRES) && oneshot) {
 // Override clocksource cannot be used.
     if (cs.flags & CLOCK_SOURCE_UNSTABLE) {
-    pr_warn("Override clocksource %s is unstable and not HRT compatible - cannot switch while in HRT/NOHZ mode\n",
+    pr_warn!("Override clocksource %s is unstable and not HRT compatible - cannot switch while in HRT/NOHZ mode\n",
     cs.name);
     override_name[0] = 0;
     } else {
@@ -1086,17 +1323,18 @@ unsafe extern "C" fn __clocksource_select(skipcur: bool) {
 // The override cannot be currently verified.
 // Deferring to let the watchdog check.
 //
-    pr_info("Override clocksource %s is not currently HRT compatible - deferring\n",
+    pr_info!("Override clocksource %s is not currently HRT compatible - deferring\n",
     cs.name);
     }
-    } else
+    } else {
 // Override clocksource can be used.
     best = cs;
+    }
     break;
     }
-    found:
+// label;
     if (curr_clocksource != best && !timekeeping_notify(best)) {
-    pr_info("Switched to clocksource %s\n", best.name);
+    pr_info!("Switched to clocksource %s\n", best.name);
     curr_clocksource = best;
     }
     }
@@ -1110,14 +1348,10 @@ unsafe extern "C" fn __clocksource_select(skipcur: bool) {
 //
 #[no_mangle]
 unsafe extern "C" fn clocksource_select() {
-    static void clocksource_select(void)
-    {
     __clocksource_select(false);
     }
 #[no_mangle]
 unsafe extern "C" fn clocksource_select_fallback() {
-    static void clocksource_select_fallback(void)
-    {
     __clocksource_select(true);
     }
 //
@@ -1128,9 +1362,7 @@ unsafe extern "C" fn clocksource_select_fallback() {
 // device_initcall but after subsys_initcall.
 //
 #[no_mangle]
-unsafe extern "C" fn clocksource_done_booting() -> int __init {
-    static int __init clocksource_done_booting(void)
-    {
+unsafe extern "C" fn clocksource_done_booting() -> c_int {
     mutex_lock(&clocksource_mutex);
     curr_clocksource = clocksource_default_clock();
     finished_booting = 1;
@@ -1142,20 +1374,19 @@ unsafe extern "C" fn clocksource_done_booting() -> int __init {
     mutex_unlock(&clocksource_mutex);
     return 0;
     }
-    fs_initcall(clocksource_done_booting);
+    fs_initcall!(clocksource_done_booting);
 //
 // Enqueue the clocksource sorted by rating
 //
 #[no_mangle]
 unsafe extern "C" fn clocksource_enqueue(cs: *mut clocksource) {
-    static void clocksource_enqueue(struct clocksource *cs)
-    {
-    struct list_head *entry = &clocksource_list;
-    struct clocksource *tmp;
+    let mut entry = &clocksource_list;
+pub static mut tmp: *mut c_void = core::ptr::null_mut();
     list_for_each_entry(tmp, &clocksource_list, list) {
 // Keep track of the place, where to insert
-    if (tmp.rating < cs.rating)
+    if (tmp.rating < cs.rating) {
     break;
+    }
     entry = &tmp.list;
     }
     list_add(&cs.list, entry);
@@ -1168,9 +1399,7 @@ unsafe extern "C" fn clocksource_enqueue(cs: *mut clocksource) {
 //
 #[no_mangle]
 unsafe extern "C" fn __clocksource_update_freq_scale(cs: *mut clocksource, scale: u32, freq: u32) {
-    static void __clocksource_update_freq_scale(struct clocksource *cs, u32 scale, u32 freq)
-    {
-    u64 sec;
+    let mut sec = 0;
 //
 // Default clocksources are *special* and self-define their mult/shift.
 // But, you're not special, so you should specify a freq value.
@@ -1188,12 +1417,13 @@ unsafe extern "C" fn __clocksource_update_freq_scale(cs: *mut clocksource, scale
     sec = cs.mask;
     do_div(sec, freq);
     do_div(sec, scale);
-    if (!sec)
+    if (!sec) {
     sec = 1;
-#[no_mangle]
-pub unsafe extern "C" fn if(UINT_MAX: sec > 600 && cs->mask >) -> else {
-    else if (sec > 600 && cs.mask > UINT_MAX)
+    }
+
+    else if (sec > 600 && cs.mask > UINT_MAX) {
     sec = 600;
+    }
     clocks_calc_mult_shift(&cs.mult, &cs.shift, freq,
     NSEC_PER_SEC / scale, sec * scale);
 // Update cs::freq_khz
@@ -1207,7 +1437,7 @@ pub unsafe extern "C" fn if(UINT_MAX: sec > 600 && cs->mask >) -> else {
     while (freq && ((cs.mult + cs.maxadj < cs.mult)
     || (cs.mult - cs.maxadj > cs.mult))) {
     cs.mult >>= 1;
-    cs.shift--;
+    cs.shift -= 1;
     cs.maxadj = clocksource_max_adjustment(cs);
     }
 //
@@ -1218,7 +1448,7 @@ pub unsafe extern "C" fn if(UINT_MAX: sec > 600 && cs->mask >) -> else {
     "timekeeping: Clocksource %s might overflow on 11%% adjustment\n",
     cs.name);
     clocksource_update_max_deferment(cs);
-    pr_info("%s: mask: 0x%llx max_cycles: 0x%llx, max_idle_ns: %lld ns\n",
+    pr_info!("%s: mask: 0x%llx max_cycles: 0x%llx, max_idle_ns: %lld ns\n",
     cs.name, cs.mask, cs.max_cycles, cs.max_idle_ns);
     }
 //
@@ -1234,17 +1464,17 @@ pub unsafe extern "C" fn if(UINT_MAX: sec > 600 && cs->mask >) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __clocksource_register_scale(cs: *mut clocksource, scale: u32, freq: u32) -> c_int {
-    int __clocksource_register_scale(struct clocksource *cs, u32 scale, u32 freq)
-    {
-    unsigned long flags;
+    let mut flags = 0;
     clocksource_arch_init(cs);
-    if (WARN_ON_ONCE((unsigned int)cs.id >= CSID_MAX))
+    if (WARN_ON_ONCE!((unsigned int)cs.id >= CSID_MAX)) {
     cs.id = CSID_GENERIC;
-    if (WARN_ON_ONCE(!freq && cs.flags & CLOCK_SOURCE_HAS_COUPLED_CLOCK_EVENT))
+    }
+    if (WARN_ON_ONCE!(!freq && cs.flags & CLOCK_SOURCE_HAS_COUPLED_CLOCK_EVENT)) {
     cs.flags &= ~CLOCK_SOURCE_HAS_COUPLED_CLOCK_EVENT;
+    }
     if (cs.vdso_clock_mode < 0 ||
     cs.vdso_clock_mode >= VDSO_CLOCKMODE_MAX) {
-    pr_warn("clocksource %s registered with invalid VDSO mode %d. Disabling VDSO support.\n",
+    pr_warn!("clocksource %s registered with invalid VDSO mode %d. Disabling VDSO support.\n",
     cs.name, cs.vdso_clock_mode);
     cs.vdso_clock_mode = VDSO_CLOCKMODE_NONE;
     }
@@ -1265,18 +1495,16 @@ pub unsafe extern "C" fn __clocksource_register_scale(cs: *mut clocksource, scal
     EXPORT_SYMBOL_GPL(__clocksource_register_scale);
 #[no_mangle]
 unsafe extern "C" fn __devm_clocksource_unregister(data: *mut c_void) {
-    static void __devm_clocksource_unregister(void *data)
-    {
-    struct clocksource *cs = data;
+    let mut cs = data;
     clocksource_unregister(cs);
     }
-    int __devm_clocksource_register_scale(struct device *dev, struct clocksource *cs,
-    u32 scale, u32 freq)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn __devm_clocksource_register_scale(dev: *mut device, cs: *mut clocksource, scale: u32, freq: u32) -> c_int {
+    let mut ret = 0;
     ret = __clocksource_register_scale(cs, scale, freq);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     return devm_add_action_or_reset(dev, __devm_clocksource_unregister, cs);
     }
     EXPORT_SYMBOL_GPL(__devm_clocksource_register_scale);
@@ -1285,20 +1513,20 @@ unsafe extern "C" fn __devm_clocksource_unregister(data: *mut c_void) {
 //
 #[no_mangle]
 unsafe extern "C" fn clocksource_unbind(cs: *mut clocksource) -> c_int {
-    static int clocksource_unbind(struct clocksource *cs)
-    {
-    unsigned long flags;
+    let mut flags = 0;
     if (clocksource_is_watchdog(cs)) {
 // Select and try to install a replacement watchdog.
     clocksource_select_watchdog(true);
-    if (clocksource_is_watchdog(cs))
+    if (clocksource_is_watchdog(cs)) {
     return -EBUSY;
+    }
     }
     if (cs == curr_clocksource) {
 // Select and try to install a replacement clock source
     clocksource_select_fallback();
-    if (curr_clocksource == cs)
+    if (curr_clocksource == cs) {
     return -EBUSY;
+    }
     }
     if (clocksource_is_suspend(cs)) {
 //
@@ -1320,12 +1548,11 @@ unsafe extern "C" fn clocksource_unbind(cs: *mut clocksource) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn clocksource_unregister(cs: *mut clocksource) -> c_int {
-    int clocksource_unregister(struct clocksource *cs)
-    {
-    let mut ret: c_int = 0;
+pub static mut ret: c_int = 0;
     mutex_lock(&clocksource_mutex);
-    if (!list_empty(&cs.list))
+    if (!list_empty(&cs.list)) {
     ret = clocksource_unbind(cs);
+    }
     mutex_unlock(&clocksource_mutex);
     return ret;
     }
@@ -1339,11 +1566,9 @@ pub unsafe extern "C" fn clocksource_unregister(cs: *mut clocksource) -> c_int {
 //
 // Provides sysfs interface for listing current clocksource.
 //
-    static ssize_t current_clocksource_show(struct device *dev,
-    struct device_attribute *attr,
-    char *buf)
-    {
-    let mut count: isize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn current_clocksource_show(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char) -> ssize_t {
+pub static mut count: isize = 0;
     mutex_lock(&clocksource_mutex);
     count = sysfs_emit(buf, "%s\n", curr_clocksource.name);
     mutex_unlock(&clocksource_mutex);
@@ -1351,17 +1576,18 @@ pub unsafe extern "C" fn clocksource_unregister(cs: *mut clocksource) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn sysfs_get_uname(buf: *const c_char, dst: *mut c_char, cnt: usize) -> isize {
-    ssize_t sysfs_get_uname(const char *buf, char *dst, size_t cnt)
-    {
-    let mut ret: usize = cnt;
+pub static mut ret: usize = 0;
 // strings from sysfs write are not 0 terminated!
-    if (!cnt || cnt >= CS_NAME_LEN)
+    if (!cnt || cnt >= CS_NAME_LEN) {
     return -EINVAL;
+    }
 // strip of \n:
-    if (buf[cnt-1] == '\n')
-    cnt--;
-    if (cnt > 0)
+    if (buf[cnt-1] == '\n') {
+    cnt -= 1;
+    }
+    if (cnt > 0) {
     memcpy(dst, buf, cnt);
+    }
     dst[cnt] = 0;
     return ret;
     }
@@ -1375,15 +1601,14 @@ pub unsafe extern "C" fn sysfs_get_uname(buf: *const c_char, dst: *mut c_char, c
 // Takes input from sysfs interface for manually overriding the default
 // clocksource selection.
 //
-    static ssize_t current_clocksource_store(struct device *dev,
-    struct device_attribute *attr,
-    const char *buf, size_t count)
-    {
-    ssize_t ret;
+#[no_mangle]
+pub unsafe extern "C" fn current_clocksource_store(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut ret = 0;
     mutex_lock(&clocksource_mutex);
     ret = sysfs_get_uname(buf, override_name, count);
-    if (ret >= 0)
+    if (ret >= 0) {
     clocksource_select();
+    }
     mutex_unlock(&clocksource_mutex);
     return ret;
     }
@@ -1397,21 +1622,21 @@ pub unsafe extern "C" fn sysfs_get_uname(buf: *const c_char, dst: *mut c_char, c
 //
 // Takes input from sysfs interface for manually unbinding a clocksource.
 //
-    static ssize_t unbind_clocksource_store(struct device *dev,
-    struct device_attribute *attr,
-    const char *buf, size_t count)
-    {
-    struct clocksource *cs;
+#[no_mangle]
+pub unsafe extern "C" fn unbind_clocksource_store(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+pub static mut cs: *mut c_void = core::ptr::null_mut();
     char name[CS_NAME_LEN];
-    ssize_t ret;
+    let mut ret = 0;
     ret = sysfs_get_uname(buf, name, count);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     ret = -ENODEV;
     mutex_lock(&clocksource_mutex);
     list_for_each_entry(cs, &clocksource_list, list) {
-    if (strcmp(cs.name, name))
+    if (strcmp(cs.name, name)) {
     continue;
+    }
     ret = clocksource_unbind(cs);
     break;
     }
@@ -1427,12 +1652,10 @@ pub unsafe extern "C" fn sysfs_get_uname(buf: *const c_char, dst: *mut c_char, c
 //
 // Provides sysfs interface for listing registered clocksources
 //
-    static ssize_t available_clocksource_show(struct device *dev,
-    struct device_attribute *attr,
-    char *buf)
-    {
-    struct clocksource *src;
-    let mut count: isize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn available_clocksource_show(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char) -> ssize_t {
+pub static mut src: *mut c_void = core::ptr::null_mut();
+pub static mut count: isize = 0;
     mutex_lock(&clocksource_mutex);
     list_for_each_entry(src, &clocksource_list, list) {
 //
@@ -1440,10 +1663,11 @@ pub unsafe extern "C" fn sysfs_get_uname(buf: *const c_char, dst: *mut c_char, c
 // in one shot mode (highres=on or nohz=on)
 //
     if (!tick_oneshot_mode_active() ||
-    (src.flags & CLOCK_SOURCE_VALID_FOR_HRES))
+    (src.flags & CLOCK_SOURCE_VALID_FOR_HRES)) {
     count += snprintf(buf + count,
     max((ssize_t)PAGE_SIZE - count, (ssize_t)0),
     "%s ", src.name);
+    }
     }
     mutex_unlock(&clocksource_mutex);
     count += snprintf(buf + count,
@@ -1458,28 +1682,21 @@ pub unsafe extern "C" fn sysfs_get_uname(buf: *const c_char, dst: *mut c_char, c
     core::ptr::null_mut()
     };
     ATTRIBUTE_GROUPS(clocksource);
-    static const struct bus_type clocksource_subsys = {
-    .name = "clocksource",
-    .dev_name = "clocksource",
-    };
-    static struct device device_clocksource = {
-    .id	= 0,
-    .bus	= &clocksource_subsys,
-    .groups	= clocksource_groups,
-    };
+pub static mut bus_type: usize = 0;
+pub static mut device: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn init_clocksource_sysfs() -> int __init {
-    static int __init init_clocksource_sysfs(void)
-    {
-    let mut error: c_int = subsys_system_register(&clocksource_subsys, core::ptr::null_mut());
-    if (error)
-    return error;
-    error = device_register(&device_clocksource);
-    if (error)
-    bus_unregister(&clocksource_subsys);
+unsafe extern "C" fn init_clocksource_sysfs() -> c_int {
+pub static mut error: c_int = 0;
+    if (error) {
     return error;
     }
-    device_initcall(init_clocksource_sysfs);
+    error = device_register(&device_clocksource);
+    if (error) {
+    bus_unregister(&clocksource_subsys);
+    }
+    return error;
+    }
+    device_initcall!(init_clocksource_sysfs);
 
 //
 // boot_override_clocksource - boot clock override
@@ -1489,16 +1706,15 @@ unsafe extern "C" fn init_clocksource_sysfs() -> int __init {
 // as the clocksource override name.
 //
 #[no_mangle]
-unsafe extern "C" fn boot_override_clocksource(str: *mut *mut c_char) -> int __init {
-    static int __init boot_override_clocksource(char* str)
-    {
+unsafe extern "C" fn boot_override_clocksource(str: *mut *mut c_char) -> c_int {
     mutex_lock(&clocksource_mutex);
-    if (str)
+    if (str) {
     strscpy(override_name, str);
+    }
     mutex_unlock(&clocksource_mutex);
     return 1;
     }
-    __setup("clocksource=", boot_override_clocksource);
+    __setup!("clocksource=", boot_override_clocksource);
 //
 // boot_override_clock - Compatibility layer for deprecated boot option
 // @str:	override name
@@ -1507,14 +1723,12 @@ unsafe extern "C" fn boot_override_clocksource(str: *mut *mut c_char) -> int __i
 // as the clocksource override name
 //
 #[no_mangle]
-unsafe extern "C" fn boot_override_clock(str: *mut *mut c_char) -> int __init {
-    static int __init boot_override_clock(char* str)
-    {
+unsafe extern "C" fn boot_override_clock(str: *mut *mut c_char) -> c_int {
     if (!strcmp(str, "pmtmr")) {
-    pr_warn("clock=pmtmr is deprecated - use clocksource=acpi_pm\n");
+    pr_warn!("clock=pmtmr is deprecated - use clocksource=acpi_pm\n");
     return boot_override_clocksource("acpi_pm");
     }
-    pr_warn("clock= boot option is deprecated - use clocksource=xyz\n");
+    pr_warn!("clock= boot option is deprecated - use clocksource=xyz\n");
     return boot_override_clocksource(str);
     }
-    __setup("clock=", boot_override_clock);
+    __setup!("clock=", boot_override_clock);

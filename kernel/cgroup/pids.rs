@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -91,40 +341,37 @@ pub struct pids_cgroup {
     pub events_local: [core::sync::atomic::AtomicI64; NR_PIDCG_EVENTS],
 }
 
-    static struct pids_cgroup *css_pids(struct cgroup_subsys_state *css)
-    {
-    return container_of(css, struct pids_cgroup, css);
+#[no_mangle]
+pub unsafe extern "C" fn css_pids(css: *mut cgroup_subsys_state) -> *mut c_void {
+    return container_of!(css, pids_cgroup, css);
     }
-    static struct pids_cgroup *parent_pids(struct pids_cgroup *pids)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn parent_pids(pids: *mut pids_cgroup) -> *mut c_void {
     return css_pids(pids.css.parent);
     }
-    static struct cgroup_subsys_state *
-    pids_css_alloc(struct cgroup_subsys_state *parent)
-    {
-    struct pids_cgroup *pids;
-    pids = kzalloc_obj(struct pids_cgroup);
-    if (!pids)
+#[no_mangle]
+pub unsafe extern "C" fn pids_css_alloc(parent: *mut cgroup_subsys_state) -> *mut c_void {
+pub static mut pids: *mut c_void = core::ptr::null_mut();
+    pids = kzalloc_obj(pids_cgroup);
+    if (!pids) {
     return ERR_PTR(-ENOMEM);
+    }
     atomic64_set(&pids.limit, PIDS_MAX);
     return &pids.css;
     }
 #[no_mangle]
 unsafe extern "C" fn pids_css_free(css: *mut cgroup_subsys_state) {
-    static void pids_css_free(struct cgroup_subsys_state *css)
-    {
     kfree(css_pids(css));
     }
 #[no_mangle]
 unsafe extern "C" fn pids_update_watermark(p: *mut pids_cgroup, nr_pids: i64) {
-    static void pids_update_watermark(struct pids_cgroup *p, int64_t nr_pids)
-    {
 //
 // This is racy, but we don't need perfectly accurate tallying of
 // the watermark, and this lets us avoid extra atomic overhead.
 //
-    if (nr_pids > READ_ONCE(p.watermark))
+    if (nr_pids > READ_ONCE(p.watermark)) {
     WRITE_ONCE(p.watermark, nr_pids);
+    }
     }
 //
 // pids_cancel - uncharge the local pid count
@@ -136,13 +383,11 @@ unsafe extern "C" fn pids_update_watermark(p: *mut pids_cgroup, nr_pids: i64) {
 //
 #[no_mangle]
 unsafe extern "C" fn pids_cancel(pids: *mut pids_cgroup, num: c_int) {
-    static void pids_cancel(struct pids_cgroup *pids, int num)
-    {
 //
 // A negative count (or overflow for that matter) is invalid,
 // and indicates a bug in the `pids` controller proper.
 //
-    WARN_ON_ONCE(atomic64_add_negative(-num, &pids.counter));
+    WARN_ON_ONCE!(atomic64_add_negative(-num, &pids.counter));
     }
 //
 // pids_uncharge - hierarchically uncharge the pid count
@@ -151,11 +396,10 @@ unsafe extern "C" fn pids_cancel(pids: *mut pids_cgroup, num: c_int) {
 //
 #[no_mangle]
 unsafe extern "C" fn pids_uncharge(pids: *mut pids_cgroup, num: c_int) {
-    static void pids_uncharge(struct pids_cgroup *pids, int num)
-    {
-    struct pids_cgroup *p;
-    for (p = pids; parent_pids(p); p = parent_pids(p))
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    for (p = pids; parent_pids(p); p = parent_pids(p)) {
     pids_cancel(p, num);
+    }
     }
 //
 // pids_charge - hierarchically charge the pid count
@@ -168,11 +412,9 @@ unsafe extern "C" fn pids_uncharge(pids: *mut pids_cgroup, num: c_int) {
 //
 #[no_mangle]
 unsafe extern "C" fn pids_charge(pids: *mut pids_cgroup, num: c_int) {
-    static void pids_charge(struct pids_cgroup *pids, int num)
-    {
-    struct pids_cgroup *p;
+pub static mut p: *mut c_void = core::ptr::null_mut();
     for (p = pids; parent_pids(p); p = parent_pids(p)) {
-    let mut new: i64 = atomic64_add_return(num, &p.counter);
+pub static mut new: i64 = 0;
     pids_update_watermark(p, new);
     }
     }
@@ -188,12 +430,11 @@ unsafe extern "C" fn pids_charge(pids: *mut pids_cgroup, num: c_int) {
 //
 #[no_mangle]
 unsafe extern "C" fn pids_try_charge(pids: *mut pids_cgroup, num: c_int, fail: *mut pids_cgroup) -> c_int {
-    static int pids_try_charge(struct pids_cgroup *pids, int num, struct pids_cgroup **fail)
-    {
-    struct pids_cgroup *p, *q;
+    let mut p = core::ptr::null_mut();
+    let mut q = core::ptr::null_mut();
     for (p = pids; parent_pids(p); p = parent_pids(p)) {
-    let mut new: i64 = atomic64_add_return(num, &p.counter);
-    let mut limit: i64 = atomic64_read(&p.limit);
+pub static mut new: i64 = 0;
+pub static mut limit: i64 = 0;
 //
 // Since new is capped to the maximum number of pid_t, if
 // p->limit is %PIDS_MAX then we know that this test will never
@@ -201,7 +442,7 @@ unsafe extern "C" fn pids_try_charge(pids: *mut pids_cgroup, num: c_int, fail: *
 //
     if (new > limit) {
 // fail = p;
-    goto revert;
+// goto;
     }
 //
 // Not technically accurate if we go over limit somewhere up
@@ -210,22 +451,21 @@ unsafe extern "C" fn pids_try_charge(pids: *mut pids_cgroup, num: c_int, fail: *
     pids_update_watermark(p, new);
     }
     return 0;
-    revert:
-    for (q = pids; q != p; q = parent_pids(q))
+// label;
+    for (q = pids; q != p; q = parent_pids(q)) {
     pids_cancel(q, num);
+    }
     pids_cancel(p, num);
     return -EAGAIN;
     }
 #[no_mangle]
 unsafe extern "C" fn pids_can_attach(tset: *mut cgroup_taskset) -> c_int {
-    static int pids_can_attach(struct cgroup_taskset *tset)
-    {
-    struct task_struct *task;
-    struct cgroup_subsys_state *dst_css;
+pub static mut task: *mut c_void = core::ptr::null_mut();
+pub static mut dst_css: *mut c_void = core::ptr::null_mut();
     cgroup_taskset_for_each(task, dst_css, tset) {
-    struct pids_cgroup *pids = css_pids(dst_css);
-    struct cgroup_subsys_state *old_css;
-    struct pids_cgroup *old_pids;
+    let mut pids = css_pids(dst_css);
+pub static mut old_css: *mut c_void = core::ptr::null_mut();
+pub static mut old_pids: *mut c_void = core::ptr::null_mut();
 //
 // No need to pin @old_css between here and cancel_attach()
 // because cgroup core protects it from being freed before
@@ -240,27 +480,24 @@ unsafe extern "C" fn pids_can_attach(tset: *mut cgroup_taskset) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn pids_cancel_attach(tset: *mut cgroup_taskset) {
-    static void pids_cancel_attach(struct cgroup_taskset *tset)
-    {
-    struct task_struct *task;
-    struct cgroup_subsys_state *dst_css;
+pub static mut task: *mut c_void = core::ptr::null_mut();
+pub static mut dst_css: *mut c_void = core::ptr::null_mut();
     cgroup_taskset_for_each(task, dst_css, tset) {
-    struct pids_cgroup *pids = css_pids(dst_css);
-    struct cgroup_subsys_state *old_css;
-    struct pids_cgroup *old_pids;
+    let mut pids = css_pids(dst_css);
+pub static mut old_css: *mut c_void = core::ptr::null_mut();
+pub static mut old_pids: *mut c_void = core::ptr::null_mut();
     old_css = task_css(task, pids_cgrp_id);
     old_pids = css_pids(old_css);
     pids_charge(old_pids, 1);
     pids_uncharge(pids, 1);
     }
     }
-    static void pids_event(struct pids_cgroup *pids_forking,
-    struct pids_cgroup *pids_over_limit)
-    {
-    struct pids_cgroup *p = pids_forking;
+#[no_mangle]
+pub unsafe extern "C" fn pids_event(pids_forking: *mut pids_cgroup, pids_over_limit: *mut pids_cgroup) {
+    let mut p = pids_forking;
 // Only log the first time limit is hit.
     if (atomic64_inc_return(&p.events_local[PIDCG_FORKFAIL]) == 1) {
-    pr_info("cgroup: fork rejected by pids controller in ");
+    pr_info!("cgroup: fork rejected by pids controller in ");
     pr_cont_cgroup_path(p.css.cgroup);
     pr_cont("\n");
     }
@@ -282,49 +519,46 @@ unsafe extern "C" fn pids_cancel_attach(tset: *mut cgroup_taskset) {
 //
 #[no_mangle]
 unsafe extern "C" fn pids_can_fork(task: *mut task_struct, cset: *mut css_set) -> c_int {
-    static int pids_can_fork(struct task_struct *task, struct css_set *cset)
-    {
-    struct pids_cgroup *pids, *pids_over_limit;
-    int err;
+    let mut pids = core::ptr::null_mut();
+    let mut pids_over_limit = core::ptr::null_mut();
+    let mut err = 0;
     pids = css_pids(cset.subsys[pids_cgrp_id]);
     err = pids_try_charge(pids, 1, &pids_over_limit);
-    if (err)
+    if (err) {
     pids_event(pids, pids_over_limit);
+    }
     return err;
     }
 #[no_mangle]
 unsafe extern "C" fn pids_cancel_fork(task: *mut task_struct, cset: *mut css_set) {
-    static void pids_cancel_fork(struct task_struct *task, struct css_set *cset)
-    {
-    struct pids_cgroup *pids;
+pub static mut pids: *mut c_void = core::ptr::null_mut();
     pids = css_pids(cset.subsys[pids_cgrp_id]);
     pids_uncharge(pids, 1);
     }
 #[no_mangle]
 unsafe extern "C" fn pids_release(task: *mut task_struct) {
-    static void pids_release(struct task_struct *task)
-    {
-    struct pids_cgroup *pids = css_pids(task_css(task, pids_cgrp_id));
+    let mut pids = css_pids(task_css(task, pids_cgrp_id));
     pids_uncharge(pids, 1);
     }
-    static ssize_t pids_max_write(struct kernfs_open_file *of, char *buf,
-    size_t nbytes, loff_t off)
-    {
-    struct cgroup_subsys_state *css = of_css(of);
-    struct pids_cgroup *pids = css_pids(css);
-    int64_t limit;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn pids_max_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+    let mut css = of_css(of);
+    let mut pids = css_pids(css);
+    let mut limit;
+    let mut err = 0;
     buf = strstrip(buf);
     if (!strcmp(buf, PIDS_MAX_STR)) {
     limit = PIDS_MAX;
-    goto set_limit;
+// goto;
     }
     err = kstrtoll(buf, 0, &limit);
-    if (err)
+    if (err) {
     return err;
-    if (limit < 0 || limit >= PIDS_MAX)
+    }
+    if (limit < 0 || limit >= PIDS_MAX) {
     return -EINVAL;
-    set_limit:
+    }
+// label;
 //
 // Limit updates don't need to be mutex'd, since it isn't
 // critical that any racing fork()s follow the new limit.
@@ -334,36 +568,32 @@ unsafe extern "C" fn pids_release(task: *mut task_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn pids_max_show(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int pids_max_show(struct seq_file *sf, void *v)
-    {
-    struct cgroup_subsys_state *css = seq_css(sf);
-    struct pids_cgroup *pids = css_pids(css);
-    let mut limit: i64 = atomic64_read(&pids.limit);
-    if (limit >= PIDS_MAX)
+    let mut css = seq_css(sf);
+    let mut pids = css_pids(css);
+pub static mut limit: i64 = 0;
+    if (limit >= PIDS_MAX) {
     seq_printf(sf, "%s\n", PIDS_MAX_STR);
-    else
+    }
+    else {
     seq_printf(sf, "%lld\n", limit);
+    }
     return 0;
     }
-    static s64 pids_current_read(struct cgroup_subsys_state *css,
-    struct cftype *cft)
-    {
-    struct pids_cgroup *pids = css_pids(css);
+#[no_mangle]
+pub unsafe extern "C" fn pids_current_read(css: *mut cgroup_subsys_state, cft: *mut cftype) -> s64 {
+    let mut pids = css_pids(css);
     return atomic64_read(&pids.counter);
     }
-    static s64 pids_peak_read(struct cgroup_subsys_state *css,
-    struct cftype *cft)
-    {
-    struct pids_cgroup *pids = css_pids(css);
+#[no_mangle]
+pub unsafe extern "C" fn pids_peak_read(css: *mut cgroup_subsys_state, cft: *mut cftype) -> s64 {
+    let mut pids = css_pids(css);
     return READ_ONCE(pids.watermark);
     }
 #[no_mangle]
 unsafe extern "C" fn __pids_events_show(sf: *mut seq_file, local: bool) -> c_int {
-    static int __pids_events_show(struct seq_file *sf, bool local)
-    {
-    struct pids_cgroup *pids = css_pids(seq_css(sf));
-    let mut pe: enum pidcg_event = PIDCG_MAX;
-    atomic64_t *events;
+    let mut pids = css_pids(seq_css(sf));
+pub static mut pe: pidcg_event = 0;
+pub static mut events: *mut c_void = core::ptr::null_mut();
     if (!cgroup_subsys_on_dfl(pids_cgrp_subsys) ||
     cgrp_dfl_root.flags & CGRP_ROOT_PIDS_LOCAL_EVENTS) {
     pe = PIDCG_FORKFAIL;
@@ -375,83 +605,14 @@ unsafe extern "C" fn __pids_events_show(sf: *mut seq_file, local: bool) -> c_int
     }
 #[no_mangle]
 unsafe extern "C" fn pids_events_show(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int pids_events_show(struct seq_file *sf, void *v)
-    {
     __pids_events_show(sf, false);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn pids_events_local_show(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int pids_events_local_show(struct seq_file *sf, void *v)
-    {
     __pids_events_show(sf, true);
     return 0;
     }
-    static struct cftype pids_files[] = {
-    {
-    .name = "max",
-    .write = pids_max_write,
-    .seq_show = pids_max_show,
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    {
-    .name = "current",
-    .read_s64 = pids_current_read,
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    {
-    .name = "peak",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .read_s64 = pids_peak_read,
-    },
-    {
-    .name = "events",
-    .seq_show = pids_events_show,
-    .file_offset = offsetof(struct pids_cgroup, events_file),
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    {
-    .name = "events.local",
-    .seq_show = pids_events_local_show,
-    .file_offset = offsetof(struct pids_cgroup, events_local_file),
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    { }	/* terminate */
-    };
-    static struct cftype pids_files_legacy[] = {
-    {
-    .name = "max",
-    .write = pids_max_write,
-    .seq_show = pids_max_show,
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    {
-    .name = "current",
-    .read_s64 = pids_current_read,
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    {
-    .name = "peak",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .read_s64 = pids_peak_read,
-    },
-    {
-    .name = "events",
-    .seq_show = pids_events_show,
-    .file_offset = offsetof(struct pids_cgroup, events_file),
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    { }	/* terminate */
-    };
-    struct cgroup_subsys pids_cgrp_subsys = {
-    .css_alloc	= pids_css_alloc,
-    .css_free	= pids_css_free,
-    .can_attach 	= pids_can_attach,
-    .cancel_attach 	= pids_cancel_attach,
-    .can_fork	= pids_can_fork,
-    .cancel_fork	= pids_cancel_fork,
-    .release	= pids_release,
-    .legacy_cftypes = pids_files_legacy,
-    .dfl_cftypes	= pids_files,
-    .threaded	= true,
-    };
+pub static mut cftype: usize = 0;
+pub static mut cftype: usize = 0;
+pub static mut cgroup_subsys: usize = 0;

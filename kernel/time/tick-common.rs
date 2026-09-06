@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -49,13 +299,13 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 // Tick devices
 //
-    DEFINE_PER_CPU(struct tick_device, tick_cpu_device);
+pub static mut struct tick_device: usize = 0;
 //
 // Tick next event: keeps track of the tick time. It's updated by the
 // CPU which handles the tick and protected by jiffies_lock. There is
 // no requirement to write hold the jiffies seqcount for it.
 //
-    ktime_t tick_next_period;
+    let mut tick_next_period;
 //
 // tick_do_timer_cpu is a timer core internal variable which holds the CPU NR
 // which is responsible for calling do_timer(), i.e. the timekeeping stuff. This
@@ -70,20 +320,20 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // at it will take over and keep the time keeping alive.  The handover
 // procedure also covers cpu hotplug.
 //
-    let mut __read_mostly: int tick_do_timer_cpu = TICK_DO_TIMER_BOOT;
+pub static mut : int tick_do_timer_cpu = 0;
 
 //
 // tick_do_timer_boot_cpu indicates the boot CPU temporarily owns
 // tick_do_timer_cpu and it should be taken over by an eligible secondary
 // when one comes online.
 //
-    let mut __read_mostly: static int tick_do_timer_boot_cpu = -1;
+pub static mut : int tick_do_timer_boot_cpu = 0;
 
 //
 // Debugging: see timer_list.c
 //
-    struct tick_device *tick_get_device(int cpu)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn tick_get_device(cpu: c_int) -> *mut c_void {
     return &per_cpu(tick_cpu_device, cpu);
     }
 //
@@ -91,13 +341,13 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 #[no_mangle]
 pub unsafe extern "C" fn tick_is_oneshot_available() -> c_int {
-    int tick_is_oneshot_available(void)
-    {
-    struct clock_event_device *dev = __this_cpu_read(tick_cpu_device.evtdev);
-    if (!dev || !(dev.features & CLOCK_EVT_FEAT_ONESHOT))
+    let mut dev = __this_cpu_read(tick_cpu_device.evtdev);
+    if (!dev || !(dev.features & CLOCK_EVT_FEAT_ONESHOT)) {
     return 0;
-    if (!(dev.features & CLOCK_EVT_FEAT_C3STOP))
+    }
+    if (!(dev.features & CLOCK_EVT_FEAT_C3STOP)) {
     return 1;
+    }
     return tick_broadcast_oneshot_available();
     }
 //
@@ -105,8 +355,6 @@ pub unsafe extern "C" fn tick_is_oneshot_available() -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn tick_periodic(cpu: c_int) {
-    static void tick_periodic(int cpu)
-    {
     if (READ_ONCE(tick_do_timer_cpu) == cpu) {
     raw_spin_lock(&jiffies_lock);
     write_seqcount_begin(&jiffies_seq);
@@ -125,10 +373,8 @@ unsafe extern "C" fn tick_periodic(cpu: c_int) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn tick_handle_periodic(dev: *mut clock_event_device) {
-    void tick_handle_periodic(struct clock_event_device *dev)
-    {
-    let mut cpu: c_int = smp_processor_id();
-    let mut next: ktime_t = dev.next_event;
+pub static mut cpu: c_int = 0;
+pub static mut next: ktime_t = 0;
     dev.next_event_forced = 0;
     tick_periodic(cpu);
 //
@@ -136,18 +382,21 @@ pub unsafe extern "C" fn tick_handle_periodic(dev: *mut clock_event_device) {
 // update_process_times() -> run_local_timers() ->
 // hrtimer_run_queues().
 //
-    if (IS_ENABLED(CONFIG_TICK_ONESHOT) && dev.event_handler != tick_handle_periodic)
+    if (IS_ENABLED!(CONFIG_TICK_ONESHOT) && dev.event_handler != tick_handle_periodic) {
     return;
-    if (!clockevent_state_oneshot(dev))
+    }
+    if (!clockevent_state_oneshot(dev)) {
     return;
+    }
     for (;;) {
 //
 // Setup the next period for devices, which do not have
 // periodic mode:
 //
     next = ktime_add_ns(next, TICK_NSEC);
-    if (!clockevents_program_event(dev, next, false))
+    if (!clockevents_program_event(dev, next, false)) {
     return;
+    }
 //
 // Have to be careful here. If we're in oneshot mode,
 // before we call tick_periodic() in a loop, we need
@@ -157,8 +406,9 @@ pub unsafe extern "C" fn tick_handle_periodic(dev: *mut clock_event_device) {
 // which then will increment time, possibly causing
 // the loop to trigger again and again.
 //
-    if (timekeeping_valid_for_hres())
+    if (timekeeping_valid_for_hres()) {
     tick_periodic(cpu);
+    }
     }
     }
 //
@@ -166,26 +416,26 @@ pub unsafe extern "C" fn tick_handle_periodic(dev: *mut clock_event_device) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn tick_setup_periodic(dev: *mut clock_event_device, broadcast: c_int) {
-    void tick_setup_periodic(struct clock_event_device *dev, int broadcast)
-    {
     tick_set_periodic_handler(dev, broadcast);
 // Broadcast setup ?
-    if (!tick_device_is_functional(dev))
+    if (!tick_device_is_functional(dev)) {
     return;
+    }
     if ((dev.features & CLOCK_EVT_FEAT_PERIODIC) &&
     !tick_broadcast_oneshot_active()) {
     clockevents_switch_state(dev, CLOCK_EVT_STATE_PERIODIC);
     } else {
-    unsigned int seq;
-    ktime_t next;
+    let mut seq = 0;
+    let mut next;
     do {
     seq = read_seqcount_begin(&jiffies_seq);
     next = tick_next_period;
     } while (read_seqcount_retry(&jiffies_seq, seq));
     clockevents_switch_state(dev, CLOCK_EVT_STATE_ONESHOT);
     for (;;) {
-    if (!clockevents_program_event(dev, next, false))
+    if (!clockevents_program_event(dev, next, false)) {
     return;
+    }
     next = ktime_add_ns(next, TICK_NSEC);
     }
     }
@@ -193,12 +443,10 @@ pub unsafe extern "C" fn tick_setup_periodic(dev: *mut clock_event_device, broad
 //
 // Setup the tick device
 //
-    static void tick_setup_device(struct tick_device *td,
-    struct clock_event_device *newdev, int cpu,
-    const struct cpumask *cpumask)
-    {
-    void (*handler)(struct clock_event_device *) = core::ptr::null_mut();
-    let mut next_event: ktime_t = 0;
+#[no_mangle]
+pub unsafe extern "C" fn tick_setup_device(td: *mut tick_device, newdev: *mut clock_event_device, cpu: c_int, cpumask: *mut cpumask) {
+    void (*handler) = core::ptr::null_mut();
+pub static mut next_event: ktime_t = 0;
 //
 // First device setup ?
 //
@@ -216,8 +464,9 @@ pub unsafe extern "C" fn tick_setup_periodic(dev: *mut clock_event_device, broad
 // first housekeeping secondary will take do_timer()
 // from it.
 //
-    if (tick_nohz_full_cpu(cpu))
+    if (tick_nohz_full_cpu(cpu)) {
     tick_do_timer_boot_cpu = cpu;
+    }
     } else if (tick_do_timer_boot_cpu != -1 && !tick_nohz_full_cpu(cpu)) {
     tick_do_timer_boot_cpu = -1;
 //
@@ -246,8 +495,9 @@ pub unsafe extern "C" fn tick_setup_periodic(dev: *mut clock_event_device, broad
 // When the device is not per cpu, pin the interrupt to the
 // current cpu:
 //
-    if (!cpumask_equal(newdev.cpumask, cpumask))
+    if (!cpumask_equal(newdev.cpumask, cpumask)) {
     irq_set_affinity(newdev.irq, cpumask);
+    }
 //
 // When global broadcasting is active, check if the current
 // device is registered as a placeholder for broadcast mode.
@@ -255,48 +505,54 @@ pub unsafe extern "C" fn tick_setup_periodic(dev: *mut clock_event_device, broad
 // way. This function also returns !=0 when we keep the
 // current active broadcast state for this CPU.
 //
-    if (tick_device_uses_broadcast(newdev, cpu))
+    if (tick_device_uses_broadcast(newdev, cpu)) {
     return;
-    if (td.mode == TICKDEV_MODE_PERIODIC)
+    }
+    if (td.mode == TICKDEV_MODE_PERIODIC) {
     tick_setup_periodic(newdev, 0);
-    else
+    }
+    else {
     tick_setup_oneshot(newdev, handler, next_event);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn tick_install_replacement(newdev: *mut clock_event_device) {
-    void tick_install_replacement(struct clock_event_device *newdev)
-    {
-    struct tick_device *td = this_cpu_ptr(&tick_cpu_device);
-    let mut cpu: c_int = smp_processor_id();
+    let mut td = this_cpu_ptr(&tick_cpu_device);
+pub static mut cpu: c_int = 0;
     clockevents_exchange_device(td.evtdev, newdev);
     tick_setup_device(td, newdev, cpu, cpumask_of(cpu));
-    if (newdev.features & CLOCK_EVT_FEAT_ONESHOT)
+    if (newdev.features & CLOCK_EVT_FEAT_ONESHOT) {
     tick_oneshot_notify();
     }
-    static bool tick_check_percpu(struct clock_event_device *curdev,
-    struct clock_event_device *newdev, int cpu)
-    {
-    if (!cpumask_test_cpu(cpu, newdev.cpumask))
+    }
+#[no_mangle]
+pub unsafe extern "C" fn tick_check_percpu(curdev: *mut clock_event_device, newdev: *mut clock_event_device, cpu: c_int) -> bool {
+    if (!cpumask_test_cpu(cpu, newdev.cpumask)) {
     return false;
-    if (cpumask_equal(newdev.cpumask, cpumask_of(cpu)))
-    return true;
-// Check if irq affinity can be set
-    if (newdev.irq >= 0 && !irq_can_set_affinity(newdev.irq))
-    return false;
-// Prefer an existing cpu local device
-    if (curdev && cpumask_equal(curdev.cpumask, cpumask_of(cpu)))
-    return false;
+    }
+    if (cpumask_equal(newdev.cpumask, cpumask_of(cpu))) {
     return true;
     }
-    static bool tick_check_preferred(struct clock_event_device *curdev,
-    struct clock_event_device *newdev)
-    {
+// Check if irq affinity can be set
+    if (newdev.irq >= 0 && !irq_can_set_affinity(newdev.irq)) {
+    return false;
+    }
+// Prefer an existing cpu local device
+    if (curdev && cpumask_equal(curdev.cpumask, cpumask_of(cpu))) {
+    return false;
+    }
+    return true;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn tick_check_preferred(curdev: *mut clock_event_device, newdev: *mut clock_event_device) -> bool {
 // Prefer oneshot capable device
     if (!(newdev.features & CLOCK_EVT_FEAT_ONESHOT)) {
-    if (curdev && (curdev.features & CLOCK_EVT_FEAT_ONESHOT))
+    if (curdev && (curdev.features & CLOCK_EVT_FEAT_ONESHOT)) {
     return false;
-    if (tick_oneshot_mode_active())
+    }
+    if (tick_oneshot_mode_active()) {
     return false;
+    }
     }
 //
 // Use the higher rated one, but prefer a CPU local device with a lower
@@ -310,11 +566,11 @@ pub unsafe extern "C" fn tick_install_replacement(newdev: *mut clock_event_devic
 // Check whether the new device is a better fit than curdev. curdev
 // can be NULL !
 //
-    bool tick_check_replacement(struct clock_event_device *curdev,
-    struct clock_event_device *newdev)
-    {
-    if (!tick_check_percpu(curdev, newdev, smp_processor_id()))
+#[no_mangle]
+pub unsafe extern "C" fn tick_check_replacement(curdev: *mut clock_event_device, newdev: *mut clock_event_device) -> bool {
+    if (!tick_check_percpu(curdev, newdev, smp_processor_id())) {
     return false;
+    }
     return tick_check_preferred(curdev, newdev);
     }
 //
@@ -323,18 +579,18 @@ pub unsafe extern "C" fn tick_install_replacement(newdev: *mut clock_event_devic
 //
 #[no_mangle]
 pub unsafe extern "C" fn tick_check_new_device(newdev: *mut clock_event_device) {
-    void tick_check_new_device(struct clock_event_device *newdev)
-    {
-    struct clock_event_device *curdev;
-    struct tick_device *td;
-    int cpu;
+pub static mut curdev: *mut c_void = core::ptr::null_mut();
+pub static mut td: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
     cpu = smp_processor_id();
     td = &per_cpu(tick_cpu_device, cpu);
     curdev = td.evtdev;
-    if (!tick_check_replacement(curdev, newdev))
-    goto out_bc;
-    if (!try_module_get(newdev.owner))
+    if (!tick_check_replacement(curdev, newdev)) {
+// goto;
+    }
+    if (!try_module_get(newdev.owner)) {
     return;
+    }
 //
 // Replace the eventually existing device by the new
 // device. If the current device is the broadcast device, do
@@ -346,10 +602,11 @@ pub unsafe extern "C" fn tick_check_new_device(newdev: *mut clock_event_device) 
     }
     clockevents_exchange_device(curdev, newdev);
     tick_setup_device(td, newdev, cpu, cpumask_of(cpu));
-    if (newdev.features & CLOCK_EVT_FEAT_ONESHOT)
+    if (newdev.features & CLOCK_EVT_FEAT_ONESHOT) {
     tick_oneshot_notify();
+    }
     return;
-    out_bc:
+// label;
 //
 // Can the new device be used as a broadcast device ?
 //
@@ -367,37 +624,33 @@ pub unsafe extern "C" fn tick_check_new_device(newdev: *mut clock_event_device) 
 // under us.
 //
 #[no_mangle]
-pub unsafe extern "C" fn tick_broadcast_oneshot_control(state: enum tick_broadcast_state) -> c_int {
-    int tick_broadcast_oneshot_control(enum tick_broadcast_state state)
-    {
-    struct tick_device *td = this_cpu_ptr(&tick_cpu_device);
-    if (!(td.evtdev.features & CLOCK_EVT_FEAT_C3STOP))
+pub unsafe extern "C" fn tick_broadcast_oneshot_control(state: tick_broadcast_state) -> c_int {
+    let mut td = this_cpu_ptr(&tick_cpu_device);
+    if (!(td.evtdev.features & CLOCK_EVT_FEAT_C3STOP)) {
     return 0;
+    }
     return __tick_broadcast_oneshot_control(state);
     }
     EXPORT_SYMBOL_GPL(tick_broadcast_oneshot_control);
 
 #[no_mangle]
 pub unsafe extern "C" fn tick_assert_timekeeping_handover() {
-    void tick_assert_timekeeping_handover(void)
-    {
-    WARN_ON_ONCE(tick_do_timer_cpu == smp_processor_id());
+    WARN_ON_ONCE!(tick_do_timer_cpu == smp_processor_id());
     }
 //
 // Stop the tick and transfer the timekeeping job away from a dying cpu.
 //
 #[no_mangle]
 pub unsafe extern "C" fn tick_cpu_dying(dying_cpu: c_uint) -> c_int {
-    int tick_cpu_dying(unsigned int dying_cpu)
-    {
 //
 // If the current CPU is the timekeeper, it's the only one that can
 // safely hand over its duty. Also all online CPUs are in stop
 // machine, guaranteed not to be idle, therefore there is no
 // concurrency and it's safe to pick any online successor.
 //
-    if (tick_do_timer_cpu == dying_cpu)
+    if (tick_do_timer_cpu == dying_cpu) {
     tick_do_timer_cpu = cpumask_first(cpu_online_mask);
+    }
 // Make sure the CPU won't try to retake the timekeeping duty
     tick_sched_timer_dying(dying_cpu);
 // Remove CPU from timer broadcasting
@@ -412,10 +665,8 @@ pub unsafe extern "C" fn tick_cpu_dying(dying_cpu: c_uint) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn tick_shutdown() {
-    void tick_shutdown(void)
-    {
-    struct tick_device *td = this_cpu_ptr(&tick_cpu_device);
-    struct clock_event_device *dev = td.evtdev;
+    let mut td = this_cpu_ptr(&tick_cpu_device);
+    let mut dev = td.evtdev;
     td.mode = TICKDEV_MODE_PERIODIC;
     if (dev) {
     clockevents_exchange_device(dev, core::ptr::null_mut());
@@ -433,9 +684,7 @@ pub unsafe extern "C" fn tick_shutdown() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn tick_suspend_local() {
-    void tick_suspend_local(void)
-    {
-    struct tick_device *td = this_cpu_ptr(&tick_cpu_device);
+    let mut td = this_cpu_ptr(&tick_cpu_device);
     clockevents_shutdown(td.evtdev);
     }
 //
@@ -447,16 +696,16 @@ pub unsafe extern "C" fn tick_suspend_local() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn tick_resume_local() {
-    void tick_resume_local(void)
-    {
-    struct tick_device *td = this_cpu_ptr(&tick_cpu_device);
-    let mut broadcast: bool = tick_resume_check_broadcast();
+    let mut td = this_cpu_ptr(&tick_cpu_device);
+pub static mut broadcast: bool = false;
     clockevents_tick_resume(td.evtdev);
     if (!broadcast) {
-    if (td.mode == TICKDEV_MODE_PERIODIC)
+    if (td.mode == TICKDEV_MODE_PERIODIC) {
     tick_setup_periodic(td.evtdev, 0);
-    else
+    }
+    else {
     tick_resume_oneshot();
+    }
     }
 //
 // Ensure that hrtimers are up to date and the clockevents device
@@ -476,8 +725,6 @@ pub unsafe extern "C" fn tick_resume_local() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn tick_suspend() {
-    void tick_suspend(void)
-    {
     tick_suspend_local();
     tick_suspend_broadcast();
     }
@@ -491,14 +738,12 @@ pub unsafe extern "C" fn tick_suspend() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn tick_resume() {
-    void tick_resume(void)
-    {
     tick_resume_broadcast();
     tick_resume_local();
     }
 
-    static DEFINE_RAW_SPINLOCK(tick_freeze_lock);
-    static DEFINE_WAIT_OVERRIDE_MAP(tick_freeze_map, LD_WAIT_SLEEP);
+pub static mut tick_freeze_lock: usize = 0;
+pub static mut tick_freeze_map: usize = 0;
     static unsigned int tick_freeze_depth;
 //
 // tick_freeze - Suspend the local tick and (possibly) timekeeping.
@@ -511,10 +756,8 @@ pub unsafe extern "C" fn tick_resume() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn tick_freeze() {
-    void tick_freeze(void)
-    {
     raw_spin_lock(&tick_freeze_lock);
-    tick_freeze_depth++;
+    tick_freeze_depth += 1;
     if (tick_freeze_depth == num_online_cpus()) {
     trace_suspend_resume(TPS("timekeeping_freeze"),
     smp_processor_id(), true);
@@ -550,8 +793,6 @@ pub unsafe extern "C" fn tick_freeze() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn tick_unfreeze() {
-    void tick_unfreeze(void)
-    {
     raw_spin_lock(&tick_freeze_lock);
     if (tick_freeze_depth == num_online_cpus()) {
 //
@@ -570,7 +811,7 @@ pub unsafe extern "C" fn tick_unfreeze() {
     touch_softlockup_watchdog();
     tick_resume_local();
     }
-    tick_freeze_depth--;
+    tick_freeze_depth -= 1;
     raw_spin_unlock(&tick_freeze_lock);
     }
 
@@ -578,9 +819,7 @@ pub unsafe extern "C" fn tick_unfreeze() {
 // tick_init - initialize the tick control
 //
 #[no_mangle]
-pub unsafe extern "C" fn tick_init() -> void __init {
-    void __init tick_init(void)
-    {
+pub unsafe extern "C" fn tick_init()  {
     tick_broadcast_init();
     tick_nohz_init();
     }

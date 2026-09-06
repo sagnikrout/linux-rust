@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
 macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
@@ -72,44 +322,25 @@ macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
 // this is where the system-wide overflow UID and GID are defined, for
 // architectures that now have 32-bit UID/GID but didn't in the past
 //
-    let mut overflowuid: c_int = DEFAULT_OVERFLOWUID;
-    let mut overflowgid: c_int = DEFAULT_OVERFLOWGID;
+pub static mut overflowuid: c_int = 0;
+pub static mut overflowgid: c_int = 0;
     EXPORT_SYMBOL(overflowuid);
     EXPORT_SYMBOL(overflowgid);
 //
 // the same as above, but for filesystems which can only store a 16-bit
 // UID and GID. as such, this is needed on all architectures
 //
-    let mut fs_overflowuid: c_int = DEFAULT_FS_OVERFLOWUID;
-    let mut fs_overflowgid: c_int = DEFAULT_FS_OVERFLOWGID;
+pub static mut fs_overflowuid: c_int = 0;
+pub static mut fs_overflowgid: c_int = 0;
     EXPORT_SYMBOL(fs_overflowuid);
     EXPORT_SYMBOL(fs_overflowgid);
-    static const struct ctl_table overflow_sysctl_table[] = {
-    {
-    .procname	= "overflowuid",
-    .data		= &overflowuid,
-    .maxlen		= sizeof(int),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec_minmax,
-    .extra1		= SYSCTL_ZERO,
-    .extra2		= SYSCTL_MAXOLDUID,
-    },
-    {
-    .procname	= "overflowgid",
-    .data		= &overflowgid,
-    .maxlen		= sizeof(int),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec_minmax,
-    .extra1		= SYSCTL_ZERO,
-    .extra2		= SYSCTL_MAXOLDUID,
-    },
-    };
+pub static mut ctl_table: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn init_overflow_sysctl() -> c_int {
     register_sysctl_init("kernel", overflow_sysctl_table);
     return 0;
     }
-    postcore_initcall(init_overflow_sysctl);
+    postcore_initcall!(init_overflow_sysctl);
 //
 // Returns true if current's euid is same as p's uid or euid,
 // or has CAP_SYS_NICE to p's user_ns.
@@ -118,12 +349,14 @@ unsafe extern "C" fn init_overflow_sysctl() -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn set_one_prio_perm(p: *mut task_struct) -> bool {
-    const struct cred *cred = current_cred(), *pcred = __task_cred(p);
+    let mut cred = current_cred(), *pcred = __task_cred(p);
     if (uid_eq(pcred.uid,  cred.euid) ||
-    uid_eq(pcred.euid, cred.euid))
+    uid_eq(pcred.euid, cred.euid)) {
     return true;
-    if (ns_capable(pcred.user_ns, CAP_SYS_NICE))
+    }
+    if (ns_capable(pcred.user_ns, CAP_SYS_NICE)) {
     return true;
+    }
     return false;
     }
 //
@@ -132,85 +365,101 @@ unsafe extern "C" fn set_one_prio_perm(p: *mut task_struct) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn set_one_prio(p: *mut task_struct, niceval: c_int, error: c_int) -> c_int {
-    int no_nice;
+    let mut no_nice = 0;
     if (!set_one_prio_perm(p)) {
     error = -EPERM;
-    goto out;
+// goto;
     }
     if (niceval < task_nice(p) && !can_nice(p, niceval)) {
     error = -EACCES;
-    goto out;
+// goto;
     }
     no_nice = security_task_setnice(p, niceval);
     if (no_nice) {
     error = no_nice;
-    goto out;
+// goto;
     }
-    if (error == -ESRCH)
+    if (error == -ESRCH) {
     error = 0;
+    }
     set_user_nice(p, niceval);
-    out:
+// label;
     return error;
     }
-    SYSCALL_DEFINE3(setpriority, int, which, int, who, int, niceval)
-    {
-    struct task_struct *g, *p;
-    struct user_struct *user;
-    const struct cred *cred = current_cred();
-    let mut error: c_int = -EINVAL;
-    struct pid *pgrp;
-    kuid_t uid;
-    if (which > PRIO_USER || which < PRIO_PROCESS)
-    goto out;
+#[no_mangle]
+pub unsafe extern "C" fn sys_setpriority(which: usize, who: usize, niceval: usize) -> c_long {
+    let mut g = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
+pub static mut user: *mut c_void = core::ptr::null_mut();
+    let mut cred = current_cred();
+pub static mut error: c_int = 0;
+pub static mut pgrp: *mut c_void = core::ptr::null_mut();
+    let mut uid;
+    if (which > PRIO_USER || which < PRIO_PROCESS) {
+// goto;
+    }
 // normalize: avoid signed division (rounding problems)
     error = -ESRCH;
-    if (niceval < MIN_NICE)
+    if (niceval < MIN_NICE) {
     niceval = MIN_NICE;
-    if (niceval > MAX_NICE)
+    }
+    if (niceval > MAX_NICE) {
     niceval = MAX_NICE;
+    }
     rcu_read_lock();
-    switch (which) {
-    case PRIO_PROCESS:
-    if (who)
+    match (which) {
+    PRIO_PROCESS => {
+    if (who) {
     p = find_task_by_vpid(who);
-    else
+    }
+    else {
     p = current;
-    if (p)
+    }
+    if (p) {
     error = set_one_prio(p, niceval, error);
-    break;
-    case PRIO_PGRP:
-    if (who)
+    }
+    // break;
+    }
+    PRIO_PGRP => {
+    if (who) {
     pgrp = find_vpid(who);
-    else
+    }
+    else {
     pgrp = task_pgrp(current);
+    }
     read_lock(&tasklist_lock);
     do_each_pid_thread(pgrp, PIDTYPE_PGID, p) {
     error = set_one_prio(p, niceval, error);
     } while_each_pid_thread(pgrp, PIDTYPE_PGID, p);
     read_unlock(&tasklist_lock);
-    break;
-    case PRIO_USER:
+    // break;
+    }
+    PRIO_USER => {
     uid = make_kuid(cred.user_ns, who);
     user = cred.user;
-    if (!who)
+    if (!who) {
     uid = cred.uid;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !uid_eq(uid, _arg: cred->uid)) -> else {
+    }
+if true {
     user = find_user(uid);
-    if (!user)
-    goto out_unlock;	/* No processes for this user */
+    if (!user) {
+// goto;	/* No processes for this user */
+    }
     }
     for_each_process_thread(g, p) {
-    if (uid_eq(task_uid(p), uid) && task_pid_vnr(p))
+    if (uid_eq(task_uid(p), uid) && task_pid_vnr(p)) {
     error = set_one_prio(p, niceval, error);
     }
-    if (!uid_eq(uid, cred.uid))
-    free_uid(user);		/* For find_user() */
-    break;
     }
-    out_unlock:
+    if (!uid_eq(uid, cred.uid)) {
+    free_uid(user);		/* For find_user() */
+    }
+    // break;
+    }
+    }
+// label;
     rcu_read_unlock();
-    out:
+// label;
     return error;
     }
 //
@@ -219,65 +468,79 @@ pub unsafe extern "C" fn if(_arg: !uid_eq(uid, _arg: cred->uid)) -> else {
 // has been offset by 20 (ie it returns 40..1 instead of -20..19)
 // to stay compatible.
 //
-    SYSCALL_DEFINE2(getpriority, int, which, int, who)
-    {
-    struct task_struct *g, *p;
-    struct user_struct *user;
-    const struct cred *cred = current_cred();
+#[no_mangle]
+pub unsafe extern "C" fn sys_getpriority(which: usize, who: usize) -> c_long {
+    let mut g = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
+pub static mut user: *mut c_void = core::ptr::null_mut();
+    let mut cred = current_cred();
     long niceval, retval = -ESRCH;
-    struct pid *pgrp;
-    kuid_t uid;
-    if (which > PRIO_USER || which < PRIO_PROCESS)
+pub static mut pgrp: *mut c_void = core::ptr::null_mut();
+    let mut uid;
+    if (which > PRIO_USER || which < PRIO_PROCESS) {
     return -EINVAL;
+    }
     rcu_read_lock();
-    switch (which) {
-    case PRIO_PROCESS:
-    if (who)
+    match (which) {
+    PRIO_PROCESS => {
+    if (who) {
     p = find_task_by_vpid(who);
-    else
+    }
+    else {
     p = current;
+    }
     if (p) {
     niceval = nice_to_rlimit(task_nice(p));
-    if (niceval > retval)
+    if (niceval > retval) {
     retval = niceval;
     }
-    break;
-    case PRIO_PGRP:
-    if (who)
+    }
+    // break;
+    }
+    PRIO_PGRP => {
+    if (who) {
     pgrp = find_vpid(who);
-    else
+    }
+    else {
     pgrp = task_pgrp(current);
+    }
     read_lock(&tasklist_lock);
     do_each_pid_thread(pgrp, PIDTYPE_PGID, p) {
     niceval = nice_to_rlimit(task_nice(p));
-    if (niceval > retval)
+    if (niceval > retval) {
     retval = niceval;
+    }
     } while_each_pid_thread(pgrp, PIDTYPE_PGID, p);
     read_unlock(&tasklist_lock);
-    break;
-    case PRIO_USER:
+    // break;
+    }
+    PRIO_USER => {
     uid = make_kuid(cred.user_ns, who);
     user = cred.user;
-    if (!who)
+    if (!who) {
     uid = cred.uid;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !uid_eq(uid, _arg: cred->uid)) -> else {
+    }
+if true {
     user = find_user(uid);
-    if (!user)
-    goto out_unlock;	/* No processes for this user */
+    if (!user) {
+// goto;	/* No processes for this user */
+    }
     }
     for_each_process_thread(g, p) {
     if (uid_eq(task_uid(p), uid) && task_pid_vnr(p)) {
     niceval = nice_to_rlimit(task_nice(p));
-    if (niceval > retval)
+    if (niceval > retval) {
     retval = niceval;
     }
     }
-    if (!uid_eq(uid, cred.uid))
-    free_uid(user);		/* for find_user() */
-    break;
     }
-    out_unlock:
+    if (!uid_eq(uid, cred.uid)) {
+    free_uid(user);		/* for find_user() */
+    }
+    // break;
+    }
+    }
+// label;
     rcu_read_unlock();
     return retval;
     }
@@ -302,53 +565,62 @@ pub unsafe extern "C" fn if(_arg: !uid_eq(uid, _arg: cred->uid)) -> else {
 
 #[no_mangle]
 pub unsafe extern "C" fn __sys_setregid(rgid: gid_t, egid: gid_t) -> c_long {
-    struct user_namespace *ns = current_user_ns();
-    const struct cred *old;
-    struct cred *new;
-    int retval;
+    let mut ns = current_user_ns();
+pub static mut old: *mut c_void = core::ptr::null_mut();
+pub static mut new: *mut c_void = core::ptr::null_mut();
+    let mut retval = 0;
     kgid_t krgid, kegid;
     krgid = make_kgid(ns, rgid);
     kegid = make_kgid(ns, egid);
-    if ((rgid != (gid_t) -1) && !gid_valid(krgid))
+    if ((rgid != (gid_t) -1) && !gid_valid(krgid)) {
     return -EINVAL;
-    if ((egid != (gid_t) -1) && !gid_valid(kegid))
+    }
+    if ((egid != (gid_t) -1) && !gid_valid(kegid)) {
     return -EINVAL;
+    }
     new = prepare_creds();
-    if (!new)
+    if (!new) {
     return -ENOMEM;
+    }
     old = current_cred();
     retval = -EPERM;
     if (rgid != (gid_t) -1) {
     if (gid_eq(old.gid, krgid) ||
     gid_eq(old.egid, krgid) ||
-    ns_capable_setid(old.user_ns, CAP_SETGID))
+    ns_capable_setid(old.user_ns, CAP_SETGID)) {
     new.gid = krgid;
-    else
-    goto error;
+    }
+    else {
+// goto;
+    }
     }
     if (egid != (gid_t) -1) {
     if (gid_eq(old.gid, kegid) ||
     gid_eq(old.egid, kegid) ||
     gid_eq(old.sgid, kegid) ||
-    ns_capable_setid(old.user_ns, CAP_SETGID))
+    ns_capable_setid(old.user_ns, CAP_SETGID)) {
     new.egid = kegid;
-    else
-    goto error;
+    }
+    else {
+// goto;
+    }
     }
     if (rgid != (gid_t) -1 ||
-    (egid != (gid_t) -1 && !gid_eq(kegid, old.gid)))
+    (egid != (gid_t) -1 && !gid_eq(kegid, old.gid))) {
     new.sgid = new.egid;
+    }
     new.fsgid = new.egid;
     retval = security_task_fix_setgid(new, old, LSM_SETID_RE);
-    if (retval < 0)
-    goto error;
+    if (retval < 0) {
+// goto;
+    }
     return commit_creds(new);
-    error:
+// label;
     abort_creds(new);
     return retval;
     }
-    SYSCALL_DEFINE2(setregid, gid_t, rgid, gid_t, egid)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_setregid(rgid: usize, egid: usize) -> c_long {
     return __sys_setregid(rgid, egid);
     }
 //
@@ -358,37 +630,42 @@ pub unsafe extern "C" fn __sys_setregid(rgid: gid_t, egid: gid_t) -> c_long {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __sys_setgid(gid: gid_t) -> c_long {
-    struct user_namespace *ns = current_user_ns();
-    const struct cred *old;
-    struct cred *new;
-    int retval;
-    kgid_t kgid;
+    let mut ns = current_user_ns();
+pub static mut old: *mut c_void = core::ptr::null_mut();
+pub static mut new: *mut c_void = core::ptr::null_mut();
+    let mut retval = 0;
+    let mut kgid;
     kgid = make_kgid(ns, gid);
-    if (!gid_valid(kgid))
+    if (!gid_valid(kgid)) {
     return -EINVAL;
+    }
     new = prepare_creds();
-    if (!new)
+    if (!new) {
     return -ENOMEM;
+    }
     old = current_cred();
     retval = -EPERM;
-    if (ns_capable_setid(old.user_ns, CAP_SETGID))
+    if (ns_capable_setid(old.user_ns, CAP_SETGID)) {
     new.gid = new.egid = new.sgid = new.fsgid = kgid;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: gid_eq(kgid, gid_eq(kgid: old->gid) ||, _arg: old->sgid)) -> else {
-    else if (gid_eq(kgid, old.gid) || gid_eq(kgid, old.sgid))
+    }
+
+    else if (gid_eq(kgid, old.gid) || gid_eq(kgid, old.sgid)) {
     new.egid = new.fsgid = kgid;
-    else
-    goto error;
+    }
+    else {
+// goto;
+    }
     retval = security_task_fix_setgid(new, old, LSM_SETID_ID);
-    if (retval < 0)
-    goto error;
+    if (retval < 0) {
+// goto;
+    }
     return commit_creds(new);
-    error:
+// label;
     abort_creds(new);
     return retval;
     }
-    SYSCALL_DEFINE1(setgid, gid_t, gid)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_setgid(gid: usize) -> c_long {
     return __sys_setgid(gid);
     }
 //
@@ -396,18 +673,20 @@ pub unsafe extern "C" fn if(_arg: gid_eq(kgid, gid_eq(kgid: old->gid) ||, _arg: 
 //
 #[no_mangle]
 unsafe extern "C" fn set_user(new: *mut cred) -> c_int {
-    struct user_struct *new_user;
+pub static mut new_user: *mut c_void = core::ptr::null_mut();
     new_user = alloc_uid(new.uid);
-    if (!new_user)
+    if (!new_user) {
     return -EAGAIN;
+    }
     free_uid(new.user);
     new.user = new_user;
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn flag_nproc_exceeded(new: *mut cred) {
-    if (new.ucounts == current_ucounts())
+    if (new.ucounts == current_ucounts()) {
     return;
+    }
 //
 // We don't fail in case of NPROC limit excess here because too many
 // poorly written programs don't check set*uid() return code, assuming
@@ -416,10 +695,12 @@ unsafe extern "C" fn flag_nproc_exceeded(new: *mut cred) {
 // failure to the execve() stage.
 //
     if (is_rlimit_overlimit(new.ucounts, UCOUNT_RLIMIT_NPROC, rlimit(RLIMIT_NPROC)) &&
-    new.user != INIT_USER)
+    new.user != INIT_USER) {
     current.flags |= PF_NPROC_EXCEEDED;
-    else
+    }
+    else {
     current.flags &= ~PF_NPROC_EXCEEDED;
+    }
     }
 //
 // Unprivileged users may change the real uid to the effective uid
@@ -438,60 +719,69 @@ unsafe extern "C" fn flag_nproc_exceeded(new: *mut cred) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __sys_setreuid(ruid: uid_t, euid: uid_t) -> c_long {
-    struct user_namespace *ns = current_user_ns();
-    const struct cred *old;
-    struct cred *new;
-    int retval;
+    let mut ns = current_user_ns();
+pub static mut old: *mut c_void = core::ptr::null_mut();
+pub static mut new: *mut c_void = core::ptr::null_mut();
+    let mut retval = 0;
     kuid_t kruid, keuid;
     kruid = make_kuid(ns, ruid);
     keuid = make_kuid(ns, euid);
-    if ((ruid != (uid_t) -1) && !uid_valid(kruid))
+    if ((ruid != (uid_t) -1) && !uid_valid(kruid)) {
     return -EINVAL;
-    if ((euid != (uid_t) -1) && !uid_valid(keuid))
+    }
+    if ((euid != (uid_t) -1) && !uid_valid(keuid)) {
     return -EINVAL;
+    }
     new = prepare_creds();
-    if (!new)
+    if (!new) {
     return -ENOMEM;
+    }
     old = current_cred();
     retval = -EPERM;
     if (ruid != (uid_t) -1) {
     new.uid = kruid;
     if (!uid_eq(old.uid, kruid) &&
     !uid_eq(old.euid, kruid) &&
-    !ns_capable_setid(old.user_ns, CAP_SETUID))
-    goto error;
+    !ns_capable_setid(old.user_ns, CAP_SETUID)) {
+// goto;
+    }
     }
     if (euid != (uid_t) -1) {
     new.euid = keuid;
     if (!uid_eq(old.uid, keuid) &&
     !uid_eq(old.euid, keuid) &&
     !uid_eq(old.suid, keuid) &&
-    !ns_capable_setid(old.user_ns, CAP_SETUID))
-    goto error;
+    !ns_capable_setid(old.user_ns, CAP_SETUID)) {
+// goto;
+    }
     }
     if (!uid_eq(new.uid, old.uid)) {
     retval = set_user(new);
-    if (retval < 0)
-    goto error;
+    if (retval < 0) {
+// goto;
+    }
     }
     if (ruid != (uid_t) -1 ||
-    (euid != (uid_t) -1 && !uid_eq(keuid, old.uid)))
+    (euid != (uid_t) -1 && !uid_eq(keuid, old.uid))) {
     new.suid = new.euid;
+    }
     new.fsuid = new.euid;
     retval = security_task_fix_setuid(new, old, LSM_SETID_RE);
-    if (retval < 0)
-    goto error;
+    if (retval < 0) {
+// goto;
+    }
     retval = set_cred_ucounts(new);
-    if (retval < 0)
-    goto error;
+    if (retval < 0) {
+// goto;
+    }
     flag_nproc_exceeded(new);
     return commit_creds(new);
-    error:
+// label;
     abort_creds(new);
     return retval;
     }
-    SYSCALL_DEFINE2(setreuid, uid_t, ruid, uid_t, euid)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_setreuid(ruid: usize, euid: usize) -> c_long {
     return __sys_setreuid(ruid, euid);
     }
 //
@@ -507,44 +797,49 @@ pub unsafe extern "C" fn __sys_setreuid(ruid: uid_t, euid: uid_t) -> c_long {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __sys_setuid(uid: uid_t) -> c_long {
-    struct user_namespace *ns = current_user_ns();
-    const struct cred *old;
-    struct cred *new;
-    int retval;
-    kuid_t kuid;
+    let mut ns = current_user_ns();
+pub static mut old: *mut c_void = core::ptr::null_mut();
+pub static mut new: *mut c_void = core::ptr::null_mut();
+    let mut retval = 0;
+    let mut kuid;
     kuid = make_kuid(ns, uid);
-    if (!uid_valid(kuid))
+    if (!uid_valid(kuid)) {
     return -EINVAL;
+    }
     new = prepare_creds();
-    if (!new)
+    if (!new) {
     return -ENOMEM;
+    }
     old = current_cred();
     retval = -EPERM;
     if (ns_capable_setid(old.user_ns, CAP_SETUID)) {
     new.suid = new.uid = kuid;
     if (!uid_eq(kuid, old.uid)) {
     retval = set_user(new);
-    if (retval < 0)
-    goto error;
+    if (retval < 0) {
+// goto;
+    }
     }
     } else if (!uid_eq(kuid, old.uid) && !uid_eq(kuid, new.suid)) {
-    goto error;
+// goto;
     }
     new.fsuid = new.euid = kuid;
     retval = security_task_fix_setuid(new, old, LSM_SETID_ID);
-    if (retval < 0)
-    goto error;
+    if (retval < 0) {
+// goto;
+    }
     retval = set_cred_ucounts(new);
-    if (retval < 0)
-    goto error;
+    if (retval < 0) {
+// goto;
+    }
     flag_nproc_exceeded(new);
     return commit_creds(new);
-    error:
+// label;
     abort_creds(new);
     return retval;
     }
-    SYSCALL_DEFINE1(setuid, uid_t, uid)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_setuid(uid: usize) -> c_long {
     return __sys_setuid(uid);
     }
 //
@@ -553,28 +848,34 @@ pub unsafe extern "C" fn __sys_setuid(uid: uid_t) -> c_long {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __sys_setresuid(ruid: uid_t, euid: uid_t, suid: uid_t) -> c_long {
-    struct user_namespace *ns = current_user_ns();
-    const struct cred *old;
-    struct cred *new;
-    int retval;
+    let mut ns = current_user_ns();
+pub static mut old: *mut c_void = core::ptr::null_mut();
+pub static mut new: *mut c_void = core::ptr::null_mut();
+    let mut retval = 0;
     kuid_t kruid, keuid, ksuid;
-    bool ruid_new, euid_new, suid_new;
+    let mut ruid_new = 0;
+    let mut euid_new = 0;
+    let mut suid_new = 0;
     kruid = make_kuid(ns, ruid);
     keuid = make_kuid(ns, euid);
     ksuid = make_kuid(ns, suid);
-    if ((ruid != (uid_t) -1) && !uid_valid(kruid))
+    if ((ruid != (uid_t) -1) && !uid_valid(kruid)) {
     return -EINVAL;
-    if ((euid != (uid_t) -1) && !uid_valid(keuid))
+    }
+    if ((euid != (uid_t) -1) && !uid_valid(keuid)) {
     return -EINVAL;
-    if ((suid != (uid_t) -1) && !uid_valid(ksuid))
+    }
+    if ((suid != (uid_t) -1) && !uid_valid(ksuid)) {
     return -EINVAL;
+    }
     old = current_cred();
 // check for no-op
     if ((ruid == (uid_t) -1 || uid_eq(kruid, old.uid)) &&
     (euid == (uid_t) -1 || (uid_eq(keuid, old.euid) &&
     uid_eq(keuid, old.fsuid))) &&
-    (suid == (uid_t) -1 || uid_eq(ksuid, old.suid)))
+    (suid == (uid_t) -1 || uid_eq(ksuid, old.suid))) {
     return 0;
+    }
     ruid_new = ruid != (uid_t) -1        && !uid_eq(kruid, old.uid) &&
     !uid_eq(kruid, old.euid) && !uid_eq(kruid, old.suid);
     euid_new = euid != (uid_t) -1        && !uid_eq(keuid, old.uid) &&
@@ -582,44 +883,51 @@ pub unsafe extern "C" fn __sys_setresuid(ruid: uid_t, euid: uid_t, suid: uid_t) 
     suid_new = suid != (uid_t) -1        && !uid_eq(ksuid, old.uid) &&
     !uid_eq(ksuid, old.euid) && !uid_eq(ksuid, old.suid);
     if ((ruid_new || euid_new || suid_new) &&
-    !ns_capable_setid(old.user_ns, CAP_SETUID))
+    !ns_capable_setid(old.user_ns, CAP_SETUID)) {
     return -EPERM;
+    }
     new = prepare_creds();
-    if (!new)
+    if (!new) {
     return -ENOMEM;
+    }
     if (ruid != (uid_t) -1) {
     new.uid = kruid;
     if (!uid_eq(kruid, old.uid)) {
     retval = set_user(new);
-    if (retval < 0)
-    goto error;
+    if (retval < 0) {
+// goto;
     }
     }
-    if (euid != (uid_t) -1)
+    }
+    if (euid != (uid_t) -1) {
     new.euid = keuid;
-    if (suid != (uid_t) -1)
+    }
+    if (suid != (uid_t) -1) {
     new.suid = ksuid;
+    }
     new.fsuid = new.euid;
     retval = security_task_fix_setuid(new, old, LSM_SETID_RES);
-    if (retval < 0)
-    goto error;
+    if (retval < 0) {
+// goto;
+    }
     retval = set_cred_ucounts(new);
-    if (retval < 0)
-    goto error;
+    if (retval < 0) {
+// goto;
+    }
     flag_nproc_exceeded(new);
     return commit_creds(new);
-    error:
+// label;
     abort_creds(new);
     return retval;
     }
-    SYSCALL_DEFINE3(setresuid, uid_t, ruid, uid_t, euid, uid_t, suid)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_setresuid(ruid: usize, euid: usize, suid: usize) -> c_long {
     return __sys_setresuid(ruid, euid, suid);
     }
-    SYSCALL_DEFINE3(getresuid, uid_t __user *, ruidp, uid_t __user *, euidp, uid_t __user *, suidp)
-    {
-    const struct cred *cred = current_cred();
-    int retval;
+#[no_mangle]
+pub unsafe extern "C" fn sys_getresuid(ruidp: usize, euidp: usize, suidp: usize) -> c_long {
+    let mut cred = current_cred();
+    let mut retval = 0;
     uid_t ruid, euid, suid;
     ruid = from_kuid_munged(cred.user_ns, cred.uid);
     euid = from_kuid_munged(cred.user_ns, cred.euid);
@@ -627,8 +935,9 @@ pub unsafe extern "C" fn __sys_setresuid(ruid: uid_t, euid: uid_t, suid: uid_t) 
     retval = put_user(ruid, ruidp);
     if (!retval) {
     retval = put_user(euid, euidp);
-    if (!retval)
+    if (!retval) {
     return put_user(suid, suidp);
+    }
     }
     return retval;
     }
@@ -637,28 +946,34 @@ pub unsafe extern "C" fn __sys_setresuid(ruid: uid_t, euid: uid_t, suid: uid_t) 
 //
 #[no_mangle]
 pub unsafe extern "C" fn __sys_setresgid(rgid: gid_t, egid: gid_t, sgid: gid_t) -> c_long {
-    struct user_namespace *ns = current_user_ns();
-    const struct cred *old;
-    struct cred *new;
-    int retval;
+    let mut ns = current_user_ns();
+pub static mut old: *mut c_void = core::ptr::null_mut();
+pub static mut new: *mut c_void = core::ptr::null_mut();
+    let mut retval = 0;
     kgid_t krgid, kegid, ksgid;
-    bool rgid_new, egid_new, sgid_new;
+    let mut rgid_new = 0;
+    let mut egid_new = 0;
+    let mut sgid_new = 0;
     krgid = make_kgid(ns, rgid);
     kegid = make_kgid(ns, egid);
     ksgid = make_kgid(ns, sgid);
-    if ((rgid != (gid_t) -1) && !gid_valid(krgid))
+    if ((rgid != (gid_t) -1) && !gid_valid(krgid)) {
     return -EINVAL;
-    if ((egid != (gid_t) -1) && !gid_valid(kegid))
+    }
+    if ((egid != (gid_t) -1) && !gid_valid(kegid)) {
     return -EINVAL;
-    if ((sgid != (gid_t) -1) && !gid_valid(ksgid))
+    }
+    if ((sgid != (gid_t) -1) && !gid_valid(ksgid)) {
     return -EINVAL;
+    }
     old = current_cred();
 // check for no-op
     if ((rgid == (gid_t) -1 || gid_eq(krgid, old.gid)) &&
     (egid == (gid_t) -1 || (gid_eq(kegid, old.egid) &&
     gid_eq(kegid, old.fsgid))) &&
-    (sgid == (gid_t) -1 || gid_eq(ksgid, old.sgid)))
+    (sgid == (gid_t) -1 || gid_eq(ksgid, old.sgid))) {
     return 0;
+    }
     rgid_new = rgid != (gid_t) -1        && !gid_eq(krgid, old.gid) &&
     !gid_eq(krgid, old.egid) && !gid_eq(krgid, old.sgid);
     egid_new = egid != (gid_t) -1        && !gid_eq(kegid, old.gid) &&
@@ -666,34 +981,40 @@ pub unsafe extern "C" fn __sys_setresgid(rgid: gid_t, egid: gid_t, sgid: gid_t) 
     sgid_new = sgid != (gid_t) -1        && !gid_eq(ksgid, old.gid) &&
     !gid_eq(ksgid, old.egid) && !gid_eq(ksgid, old.sgid);
     if ((rgid_new || egid_new || sgid_new) &&
-    !ns_capable_setid(old.user_ns, CAP_SETGID))
+    !ns_capable_setid(old.user_ns, CAP_SETGID)) {
     return -EPERM;
+    }
     new = prepare_creds();
-    if (!new)
+    if (!new) {
     return -ENOMEM;
-    if (rgid != (gid_t) -1)
+    }
+    if (rgid != (gid_t) -1) {
     new.gid = krgid;
-    if (egid != (gid_t) -1)
+    }
+    if (egid != (gid_t) -1) {
     new.egid = kegid;
-    if (sgid != (gid_t) -1)
+    }
+    if (sgid != (gid_t) -1) {
     new.sgid = ksgid;
+    }
     new.fsgid = new.egid;
     retval = security_task_fix_setgid(new, old, LSM_SETID_RES);
-    if (retval < 0)
-    goto error;
+    if (retval < 0) {
+// goto;
+    }
     return commit_creds(new);
-    error:
+// label;
     abort_creds(new);
     return retval;
     }
-    SYSCALL_DEFINE3(setresgid, gid_t, rgid, gid_t, egid, gid_t, sgid)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_setresgid(rgid: usize, egid: usize, sgid: usize) -> c_long {
     return __sys_setresgid(rgid, egid, sgid);
     }
-    SYSCALL_DEFINE3(getresgid, gid_t __user *, rgidp, gid_t __user *, egidp, gid_t __user *, sgidp)
-    {
-    const struct cred *cred = current_cred();
-    int retval;
+#[no_mangle]
+pub unsafe extern "C" fn sys_getresgid(rgidp: usize, egidp: usize, sgidp: usize) -> c_long {
+    let mut cred = current_cred();
+    let mut retval = 0;
     gid_t rgid, egid, sgid;
     rgid = from_kgid_munged(cred.user_ns, cred.gid);
     egid = from_kgid_munged(cred.user_ns, cred.egid);
@@ -701,8 +1022,9 @@ pub unsafe extern "C" fn __sys_setresgid(rgid: gid_t, egid: gid_t, sgid: gid_t) 
     retval = put_user(rgid, rgidp);
     if (!retval) {
     retval = put_user(egid, egidp);
-    if (!retval)
+    if (!retval) {
     retval = put_user(sgid, sgidp);
+    }
     }
     return retval;
     }
@@ -714,35 +1036,38 @@ pub unsafe extern "C" fn __sys_setresgid(rgid: gid_t, egid: gid_t, sgid: gid_t) 
 //
 #[no_mangle]
 pub unsafe extern "C" fn __sys_setfsuid(uid: uid_t) -> c_long {
-    const struct cred *old;
-    struct cred *new;
-    uid_t old_fsuid;
-    kuid_t kuid;
+pub static mut old: *mut c_void = core::ptr::null_mut();
+pub static mut new: *mut c_void = core::ptr::null_mut();
+    let mut old_fsuid = 0;
+    let mut kuid;
     old = current_cred();
     old_fsuid = from_kuid_munged(old.user_ns, old.fsuid);
     kuid = make_kuid(old.user_ns, uid);
-    if (!uid_valid(kuid))
+    if (!uid_valid(kuid)) {
     return old_fsuid;
+    }
     new = prepare_creds();
-    if (!new)
+    if (!new) {
     return old_fsuid;
+    }
     if (uid_eq(kuid, old.uid)  || uid_eq(kuid, old.euid)  ||
     uid_eq(kuid, old.suid) || uid_eq(kuid, old.fsuid) ||
     ns_capable_setid(old.user_ns, CAP_SETUID)) {
     if (!uid_eq(kuid, old.fsuid)) {
     new.fsuid = kuid;
-    if (security_task_fix_setuid(new, old, LSM_SETID_FS) == 0)
-    goto change_okay;
+    if (security_task_fix_setuid(new, old, LSM_SETID_FS) == 0) {
+// goto;
+    }
     }
     }
     abort_creds(new);
     return old_fsuid;
-    change_okay:
+// label;
     commit_creds(new);
     return old_fsuid;
     }
-    SYSCALL_DEFINE1(setfsuid, uid_t, uid)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_setfsuid(uid: usize) -> c_long {
     return __sys_setfsuid(uid);
     }
 //
@@ -750,35 +1075,38 @@ pub unsafe extern "C" fn __sys_setfsuid(uid: uid_t) -> c_long {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __sys_setfsgid(gid: gid_t) -> c_long {
-    const struct cred *old;
-    struct cred *new;
-    gid_t old_fsgid;
-    kgid_t kgid;
+pub static mut old: *mut c_void = core::ptr::null_mut();
+pub static mut new: *mut c_void = core::ptr::null_mut();
+    let mut old_fsgid = 0;
+    let mut kgid;
     old = current_cred();
     old_fsgid = from_kgid_munged(old.user_ns, old.fsgid);
     kgid = make_kgid(old.user_ns, gid);
-    if (!gid_valid(kgid))
+    if (!gid_valid(kgid)) {
     return old_fsgid;
+    }
     new = prepare_creds();
-    if (!new)
+    if (!new) {
     return old_fsgid;
+    }
     if (gid_eq(kgid, old.gid)  || gid_eq(kgid, old.egid)  ||
     gid_eq(kgid, old.sgid) || gid_eq(kgid, old.fsgid) ||
     ns_capable_setid(old.user_ns, CAP_SETGID)) {
     if (!gid_eq(kgid, old.fsgid)) {
     new.fsgid = kgid;
-    if (security_task_fix_setgid(new,old,LSM_SETID_FS) == 0)
-    goto change_okay;
+    if (security_task_fix_setgid(new,old,LSM_SETID_FS) == 0) {
+// goto;
+    }
     }
     }
     abort_creds(new);
     return old_fsgid;
-    change_okay:
+// label;
     commit_creds(new);
     return old_fsgid;
     }
-    SYSCALL_DEFINE1(setfsgid, gid_t, gid)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_setfsgid(gid: usize) -> c_long {
     return __sys_setfsgid(gid);
     }
 
@@ -791,13 +1119,13 @@ pub unsafe extern "C" fn __sys_setfsgid(gid: gid_t) -> c_long {
 //
 // This is SMP safe as current->tgid does not change.
 //
-    SYSCALL_DEFINE0(getpid)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_getpid() -> c_long {
     return task_tgid_vnr(current);
     }
 // Thread ID - the internal kernel "pid"
-    SYSCALL_DEFINE0(gettid)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_gettid() -> c_long {
     return task_pid_vnr(current);
     }
 //
@@ -806,31 +1134,31 @@ pub unsafe extern "C" fn __sys_setfsgid(gid: gid_t) -> c_long {
 // value of ->real_parent under rcu_read_lock(), see
 // release_task()->call_rcu(delayed_put_task_struct).
 //
-    SYSCALL_DEFINE0(getppid)
-    {
-    int pid;
+#[no_mangle]
+pub unsafe extern "C" fn sys_getppid() -> c_long {
+    let mut pid = 0;
     rcu_read_lock();
     pid = task_tgid_vnr(rcu_dereference(current.real_parent));
     rcu_read_unlock();
     return pid;
     }
-    SYSCALL_DEFINE0(getuid)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_getuid() -> c_long {
 // Only we change this so SMP safe
     return from_kuid_munged(current_user_ns(), current_uid());
     }
-    SYSCALL_DEFINE0(geteuid)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_geteuid() -> c_long {
 // Only we change this so SMP safe
     return from_kuid_munged(current_user_ns(), current_euid());
     }
-    SYSCALL_DEFINE0(getgid)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_getgid() -> c_long {
 // Only we change this so SMP safe
     return from_kgid_munged(current_user_ns(), current_gid());
     }
-    SYSCALL_DEFINE0(getegid)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_getegid() -> c_long {
 // Only we change this so SMP safe
     return from_kgid_munged(current_user_ns(), current_egid());
     }
@@ -845,13 +1173,14 @@ unsafe extern "C" fn do_sys_times(tms: *mut tms) {
     tms.tms_cutime = nsec_to_clock_t(cutime);
     tms.tms_cstime = nsec_to_clock_t(cstime);
     }
-    SYSCALL_DEFINE1(times, struct tms __user *, tbuf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_times(tbuf: usize) -> c_long {
     if (tbuf) {
-    struct tms tmp;
+pub static mut tmp: usize = 0;
     do_sys_times(&tmp);
-    if (copy_to_user(tbuf, &tmp, sizeof(struct tms)))
+    if (copy_to_user(tbuf, &tmp, sizeof!(tms))) {
     return -EFAULT;
+    }
     }
     force_successful_syscall_return();
     return (long) jiffies_64_to_clock_t(get_jiffies_64());
@@ -861,19 +1190,22 @@ unsafe extern "C" fn do_sys_times(tms: *mut tms) {
 unsafe extern "C" fn clock_t_to_compat_clock_t(x: clock_t) -> compat_clock_t {
     return compat_jiffies_to_clock_t(clock_t_to_jiffies(x));
     }
-    COMPAT_SYSCALL_DEFINE1(times, struct compat_tms __user *, tbuf)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sys_times
+pub unsafe extern "C" fn sys_times_dup(tbuf: usize) -> c_long {
     if (tbuf) {
-    struct tms tms;
-    struct compat_tms tmp;
+pub static mut tms: usize = 0;
+pub static mut tmp: usize = 0;
     do_sys_times(&tms);
 // Convert our struct tms to the compat version.
     tmp.tms_utime = clock_t_to_compat_clock_t(tms.tms_utime);
     tmp.tms_stime = clock_t_to_compat_clock_t(tms.tms_stime);
     tmp.tms_cutime = clock_t_to_compat_clock_t(tms.tms_cutime);
     tmp.tms_cstime = clock_t_to_compat_clock_t(tms.tms_cstime);
-    if (copy_to_user(tbuf, &tmp, sizeof(tmp)))
+    if (copy_to_user(tbuf, &tmp, sizeof!(tmp))) {
     return -EFAULT;
+    }
     }
     force_successful_syscall_return();
     return compat_jiffies_to_clock_t(jiffies);
@@ -890,19 +1222,22 @@ unsafe extern "C" fn clock_t_to_compat_clock_t(x: clock_t) -> compat_clock_t {
 //
 // !PF_FORKNOEXEC check to conform completely to POSIX.
 //
-    SYSCALL_DEFINE2(setpgid, pid_t, pid, pid_t, pgid)
-    {
-    struct task_struct *p;
-    struct task_struct *group_leader = current.group_leader;
+#[no_mangle]
+pub unsafe extern "C" fn sys_setpgid(pid: usize, pgid: usize) -> c_long {
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    let mut group_leader = current.group_leader;
     struct pid *pids[PIDTYPE_MAX] = { 0 };
-    struct pid *pgrp;
-    int err;
-    if (!pid)
+pub static mut pgrp: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
+    if (!pid) {
     pid = task_pid_vnr(group_leader);
-    if (!pgid)
+    }
+    if (!pgid) {
     pgid = pid;
-    if (pgid < 0)
+    }
+    if (pgid < 0) {
     return -EINVAL;
+    }
     rcu_read_lock();
 // From this point forward we keep holding onto the tasklist lock
 // so that our parent does not change from under us. -DaveM
@@ -910,41 +1245,50 @@ unsafe extern "C" fn clock_t_to_compat_clock_t(x: clock_t) -> compat_clock_t {
     write_lock_irq(&tasklist_lock);
     err = -ESRCH;
     p = find_task_by_vpid(pid);
-    if (!p)
-    goto out;
+    if (!p) {
+// goto;
+    }
     err = -EINVAL;
-    if (!thread_group_leader(p))
-    goto out;
+    if (!thread_group_leader(p)) {
+// goto;
+    }
     if (same_thread_group(p.real_parent, group_leader)) {
     err = -EPERM;
-    if (task_session(p) != task_session(group_leader))
-    goto out;
+    if (task_session(p) != task_session(group_leader)) {
+// goto;
+    }
     err = -EACCES;
-    if (!(p.flags & PF_FORKNOEXEC))
-    goto out;
+    if (!(p.flags & PF_FORKNOEXEC)) {
+// goto;
+    }
     } else {
     err = -ESRCH;
-    if (p != group_leader)
-    goto out;
+    if (p != group_leader) {
+// goto;
+    }
     }
     err = -EPERM;
-    if (p.signal.leader)
-    goto out;
+    if (p.signal.leader) {
+// goto;
+    }
     pgrp = task_pid(p);
     if (pgid != pid) {
-    struct task_struct *g;
+pub static mut g: *mut c_void = core::ptr::null_mut();
     pgrp = find_vpid(pgid);
     g = pid_task(pgrp, PIDTYPE_PGID);
-    if (!g || task_session(g) != task_session(group_leader))
-    goto out;
+    if (!g || task_session(g) != task_session(group_leader)) {
+// goto;
+    }
     }
     err = security_task_setpgid(p, pgid);
-    if (err)
-    goto out;
-    if (task_pgrp(p) != pgrp)
+    if (err) {
+// goto;
+    }
+    if (task_pgrp(p) != pgrp) {
     change_pid(pids, p, PIDTYPE_PGID, pgrp);
+    }
     err = 0;
-    out:
+// label;
 // All paths lead to here, thus we are safe. -DaveM
     write_unlock_irq(&tasklist_lock);
     rcu_read_unlock();
@@ -953,93 +1297,105 @@ unsafe extern "C" fn clock_t_to_compat_clock_t(x: clock_t) -> compat_clock_t {
     }
 #[no_mangle]
 unsafe extern "C" fn do_getpgid(pid: pid_t) -> c_int {
-    struct task_struct *p;
-    struct pid *grp;
-    int retval;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut grp: *mut c_void = core::ptr::null_mut();
+    let mut retval = 0;
     rcu_read_lock();
-    if (!pid)
+    if (!pid) {
     grp = task_pgrp(current);
+    }
     else {
     retval = -ESRCH;
     p = find_task_by_vpid(pid);
-    if (!p)
-    goto out;
+    if (!p) {
+// goto;
+    }
     grp = task_pgrp(p);
-    if (!grp)
-    goto out;
+    if (!grp) {
+// goto;
+    }
     retval = security_task_getpgid(p);
-    if (retval)
-    goto out;
+    if (retval) {
+// goto;
+    }
     }
     retval = pid_vnr(grp);
-    out:
+// label;
     rcu_read_unlock();
     return retval;
     }
-    SYSCALL_DEFINE1(getpgid, pid_t, pid)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_getpgid(pid: usize) -> c_long {
     return do_getpgid(pid);
     }
 
-    SYSCALL_DEFINE0(getpgrp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_getpgrp() -> c_long {
     return do_getpgid(0);
     }
 
-    SYSCALL_DEFINE1(getsid, pid_t, pid)
-    {
-    struct task_struct *p;
-    struct pid *sid;
-    int retval;
+#[no_mangle]
+pub unsafe extern "C" fn sys_getsid(pid: usize) -> c_long {
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut sid: *mut c_void = core::ptr::null_mut();
+    let mut retval = 0;
     rcu_read_lock();
-    if (!pid)
+    if (!pid) {
     sid = task_session(current);
+    }
     else {
     retval = -ESRCH;
     p = find_task_by_vpid(pid);
-    if (!p)
-    goto out;
+    if (!p) {
+// goto;
+    }
     sid = task_session(p);
-    if (!sid)
-    goto out;
+    if (!sid) {
+// goto;
+    }
     retval = security_task_getsid(p);
-    if (retval)
-    goto out;
+    if (retval) {
+// goto;
+    }
     }
     retval = pid_vnr(sid);
-    out:
+// label;
     rcu_read_unlock();
     return retval;
     }
 #[no_mangle]
 unsafe extern "C" fn set_special_pids(pids: *mut pid, pid: *mut pid) {
-    struct task_struct *curr = current.group_leader;
-    if (task_session(curr) != pid)
+    let mut curr = current.group_leader;
+    if (task_session(curr) != pid) {
     change_pid(pids, curr, PIDTYPE_SID, pid);
-    if (task_pgrp(curr) != pid)
+    }
+    if (task_pgrp(curr) != pid) {
     change_pid(pids, curr, PIDTYPE_PGID, pid);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn ksys_setsid() -> c_int {
-    struct task_struct *group_leader = current.group_leader;
-    struct pid *sid = task_pid(group_leader);
+    let mut group_leader = current.group_leader;
+    let mut sid = task_pid(group_leader);
     struct pid *pids[PIDTYPE_MAX] = { 0 };
-    let mut session: pid_t = pid_vnr(sid);
-    let mut err: c_int = -EPERM;
+pub static mut session: pid_t = 0;
+pub static mut err: c_int = 0;
     write_lock_irq(&tasklist_lock);
 // Fail if I am already a session leader
-    if (group_leader.signal.leader)
-    goto out;
+    if (group_leader.signal.leader) {
+// goto;
+    }
 // Fail if a process group id already exists that equals the
 // proposed session id.
 //
-    if (pid_task(sid, PIDTYPE_PGID))
-    goto out;
+    if (pid_task(sid, PIDTYPE_PGID)) {
+// goto;
+    }
     group_leader.signal.leader = 1;
     set_special_pids(pids, sid);
     proc_clear_tty(group_leader);
     err = session;
-    out:
+// label;
     write_unlock_irq(&tasklist_lock);
     free_pids(pids);
     if (err > 0) {
@@ -1048,15 +1404,15 @@ pub unsafe extern "C" fn ksys_setsid() -> c_int {
     }
     return err;
     }
-    SYSCALL_DEFINE0(setsid)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_setsid() -> c_long {
     return ksys_setsid();
     }
-    DECLARE_RWSEM(uts_sem);
+pub static mut uts_sem: usize = 0;
 
-    (personality(current.personality) == PER_LINUX32 && \
-    copy_to_user(name.machine, COMPAT_UTS_MACHINE, \
-    sizeof(COMPAT_UTS_MACHINE)))
+    (personality(current.personality) == PER_LINUX32 && 
+    copy_to_user(name.machine, COMPAT_UTS_MACHINE, 
+    sizeof!(COMPAT_UTS_MACHINE)))
 
 pub const override_architecture(name): c_int = 0;
 
@@ -1067,68 +1423,78 @@ pub const override_architecture(name): c_int = 0;
 // 2.6.60.
 //
 #[no_mangle]
-unsafe extern "C" fn override_release(release: *mut char __user, len: usize) -> c_int {
-    let mut ret: c_int = 0;
+unsafe extern "C" fn override_release(release: *mut char , len: usize) -> c_int {
+pub static mut ret: c_int = 0;
     if (current.personality & UNAME26) {
-    const char *rest = UTS_RELEASE;
+    let mut rest = UTS_RELEASE;
     char buf[65] = { 0 };
-    let mut ndots: c_int = 0;
-    unsigned v;
-    size_t copy;
+pub static mut ndots: c_int = 0;
+    let mut v: c_uint = 0;
+    let mut copy = 0;
     while (*rest) {
-    if (*rest == '.' && ++ndots >= 3)
+    if (*rest == '.' && ++ndots >= 3) {
     break;
-    if (!isdigit(*rest) && *rest != '.')
+    }
+    if (!isdigit(*rest) && *rest != '.') {
     break;
-    rest++;
+    }
+    rest += 1;
     }
     v = LINUX_VERSION_PATCHLEVEL + 60;
-    copy = clamp_t(size_t, len, 1, sizeof(buf));
+    copy = clamp_t(size_t, len, 1, sizeof!(buf));
     copy = scnprintf(buf, copy, "2.6.%u%s", v, rest);
     ret = copy_to_user(release, buf, copy + 1);
     }
     return ret;
     }
-    SYSCALL_DEFINE1(newuname, struct new_utsname __user *, name)
-    {
-    struct new_utsname tmp;
+#[no_mangle]
+pub unsafe extern "C" fn sys_newuname(name: usize) -> c_long {
+pub static mut tmp: usize = 0;
     down_read(&uts_sem);
-    memcpy(&tmp, utsname(), sizeof(tmp));
+    memcpy(&tmp, utsname(), sizeof!(tmp));
     up_read(&uts_sem);
-    if (copy_to_user(name, &tmp, sizeof(tmp)))
+    if (copy_to_user(name, &tmp, sizeof!(tmp))) {
     return -EFAULT;
-    if (override_release(name.release, sizeof(name.release)))
+    }
+    if (override_release(name.release, sizeof!(name.release))) {
     return -EFAULT;
-    if (override_architecture(name))
+    }
+    if (override_architecture(name)) {
     return -EFAULT;
+    }
     return 0;
     }
 
 //
 // Old cruft
 //
-    SYSCALL_DEFINE1(uname, struct old_utsname __user *, name)
-    {
-    struct old_utsname tmp;
-    if (!name)
+#[no_mangle]
+pub unsafe extern "C" fn sys_uname(name: usize) -> c_long {
+pub static mut tmp: usize = 0;
+    if (!name) {
     return -EFAULT;
+    }
     down_read(&uts_sem);
-    memcpy(&tmp, utsname(), sizeof(tmp));
+    memcpy(&tmp, utsname(), sizeof!(tmp));
     up_read(&uts_sem);
-    if (copy_to_user(name, &tmp, sizeof(tmp)))
+    if (copy_to_user(name, &tmp, sizeof!(tmp))) {
     return -EFAULT;
-    if (override_release(name.release, sizeof(name.release)))
+    }
+    if (override_release(name.release, sizeof!(name.release))) {
     return -EFAULT;
-    if (override_architecture(name))
+    }
+    if (override_architecture(name)) {
     return -EFAULT;
+    }
     return 0;
     }
-    SYSCALL_DEFINE1(olduname, struct oldold_utsname __user *, name)
-    {
-    struct oldold_utsname tmp;
-    if (!name)
+#[no_mangle]
+pub unsafe extern "C" fn sys_olduname(name: usize) -> c_long {
+pub static mut tmp: usize = 0;
+    if (!name) {
     return -EFAULT;
-    memset(&tmp, 0, sizeof(tmp));
+    }
+    memset(&tmp, 0, sizeof!(tmp));
     down_read(&uts_sem);
     memcpy(&tmp.sysname, &utsname().sysname, __OLD_UTS_LEN);
     memcpy(&tmp.nodename, &utsname().nodename, __OLD_UTS_LEN);
@@ -1136,31 +1502,36 @@ unsafe extern "C" fn override_release(release: *mut char __user, len: usize) -> 
     memcpy(&tmp.version, &utsname().version, __OLD_UTS_LEN);
     memcpy(&tmp.machine, &utsname().machine, __OLD_UTS_LEN);
     up_read(&uts_sem);
-    if (copy_to_user(name, &tmp, sizeof(tmp)))
+    if (copy_to_user(name, &tmp, sizeof!(tmp))) {
     return -EFAULT;
-    if (override_architecture(name))
+    }
+    if (override_architecture(name)) {
     return -EFAULT;
-    if (override_release(name.release, sizeof(name.release)))
+    }
+    if (override_release(name.release, sizeof!(name.release))) {
     return -EFAULT;
+    }
     return 0;
     }
 
-    SYSCALL_DEFINE2(sethostname, char __user *, name, int, len)
-    {
-    int errno;
+#[no_mangle]
+pub unsafe extern "C" fn sys_sethostname(name: usize, len: usize) -> c_long {
+    let mut errno = 0;
     char tmp[__NEW_UTS_LEN];
-    if (!ns_capable(current.nsproxy.uts_ns.user_ns, CAP_SYS_ADMIN))
+    if (!ns_capable(current.nsproxy.uts_ns.user_ns, CAP_SYS_ADMIN)) {
     return -EPERM;
-    if (len < 0 || len > __NEW_UTS_LEN)
+    }
+    if (len < 0 || len > __NEW_UTS_LEN) {
     return -EINVAL;
+    }
     errno = -EFAULT;
     if (!copy_from_user(tmp, name, len)) {
-    struct new_utsname *u;
+pub static mut u: *mut c_void = core::ptr::null_mut();
     add_device_randomness(tmp, len);
     down_write(&uts_sem);
     u = utsname();
     memcpy(u.nodename, tmp, len);
-    memset(u.nodename + len, 0, sizeof(u.nodename) - len);
+    memset(u.nodename + len, 0, sizeof!(u.nodename) - len);
     errno = 0;
     uts_proc_notify(UTS_PROC_HOSTNAME);
     up_write(&uts_sem);
@@ -1168,22 +1539,25 @@ unsafe extern "C" fn override_release(release: *mut char __user, len: usize) -> 
     return errno;
     }
 
-    SYSCALL_DEFINE2(gethostname, char __user *, name, int, len)
-    {
-    int i;
-    struct new_utsname *u;
+#[no_mangle]
+pub unsafe extern "C" fn sys_gethostname(name: usize, len: usize) -> c_long {
+    let mut i = 0;
+pub static mut u: *mut c_void = core::ptr::null_mut();
     char tmp[__NEW_UTS_LEN + 1];
-    if (len < 0)
+    if (len < 0) {
     return -EINVAL;
+    }
     down_read(&uts_sem);
     u = utsname();
     i = 1 + strlen(u.nodename);
-    if (i > len)
+    if (i > len) {
     i = len;
+    }
     memcpy(tmp, u.nodename, i);
     up_read(&uts_sem);
-    if (copy_to_user(name, tmp, i))
+    if (copy_to_user(name, tmp, i)) {
     return -EFAULT;
+    }
     return 0;
     }
 
@@ -1191,22 +1565,24 @@ unsafe extern "C" fn override_release(release: *mut char __user, len: usize) -> 
 // Only setdomainname; getdomainname can be implemented by calling
 // uname()
 //
-    SYSCALL_DEFINE2(setdomainname, char __user *, name, int, len)
-    {
-    int errno;
+#[no_mangle]
+pub unsafe extern "C" fn sys_setdomainname(name: usize, len: usize) -> c_long {
+    let mut errno = 0;
     char tmp[__NEW_UTS_LEN];
-    if (!ns_capable(current.nsproxy.uts_ns.user_ns, CAP_SYS_ADMIN))
+    if (!ns_capable(current.nsproxy.uts_ns.user_ns, CAP_SYS_ADMIN)) {
     return -EPERM;
-    if (len < 0 || len > __NEW_UTS_LEN)
+    }
+    if (len < 0 || len > __NEW_UTS_LEN) {
     return -EINVAL;
+    }
     errno = -EFAULT;
     if (!copy_from_user(tmp, name, len)) {
-    struct new_utsname *u;
+pub static mut u: *mut c_void = core::ptr::null_mut();
     add_device_randomness(tmp, len);
     down_write(&uts_sem);
     u = utsname();
     memcpy(u.domainname, tmp, len);
-    memset(u.domainname + len, 0, sizeof(u.domainname) - len);
+    memset(u.domainname + len, 0, sizeof!(u.domainname) - len);
     errno = 0;
     uts_proc_notify(UTS_PROC_DOMAINNAME);
     up_write(&uts_sem);
@@ -1214,20 +1590,22 @@ unsafe extern "C" fn override_release(release: *mut char __user, len: usize) -> 
     return errno;
     }
 // make sure you are allowed to change @tsk limits before calling this
-    static int do_prlimit(struct task_struct *tsk, unsigned int resource,
-    struct rlimit *new_rlim, struct rlimit *old_rlim)
-    {
-    struct rlimit *rlim;
-    let mut retval: c_int = 0;
-    if (resource >= RLIM_NLIMITS)
+#[no_mangle]
+pub unsafe extern "C" fn do_prlimit(tsk: *mut task_struct, resource: c_uint, new_rlim: *mut rlimit, old_rlim: *mut rlimit) -> c_int {
+pub static mut rlim: *mut c_void = core::ptr::null_mut();
+pub static mut retval: c_int = 0;
+    if (resource >= RLIM_NLIMITS) {
     return -EINVAL;
+    }
     resource = array_index_nospec(resource, RLIM_NLIMITS);
     if (new_rlim) {
-    if (new_rlim.rlim_cur > new_rlim.rlim_max)
+    if (new_rlim.rlim_cur > new_rlim.rlim_max) {
     return -EINVAL;
+    }
     if (resource == RLIMIT_NOFILE &&
-    new_rlim.rlim_max > sysctl_nr_open)
+    new_rlim.rlim_max > sysctl_nr_open) {
     return -EPERM;
+    }
     }
 // Holding a refcount on tsk protects tsk->signal from disappearing.
     rlim = tsk.signal.rlim + resource;
@@ -1238,16 +1616,20 @@ unsafe extern "C" fn override_release(release: *mut char __user, len: usize) -> 
 // contain all limits.
 //
     if (new_rlim.rlim_max > rlim.rlim_max &&
-    !capable(CAP_SYS_RESOURCE))
+    !capable(CAP_SYS_RESOURCE)) {
     retval = -EPERM;
-    if (!retval)
-    retval = security_task_setrlimit(tsk, resource, new_rlim);
     }
     if (!retval) {
-    if (old_rlim)
+    retval = security_task_setrlimit(tsk, resource, new_rlim);
+    }
+    }
+    if (!retval) {
+    if (old_rlim) {
 // old_rlim = *rlim;
-    if (new_rlim)
+    }
+    if (new_rlim) {
 // rlim = *new_rlim;
+    }
     }
     task_unlock(tsk.group_leader);
 //
@@ -1257,7 +1639,7 @@ unsafe extern "C" fn override_release(release: *mut char __user, len: usize) -> 
 //
     if (!retval && new_rlim && resource == RLIMIT_CPU &&
     new_rlim.rlim_cur != RLIM_INFINITY &&
-    IS_ENABLED(CONFIG_POSIX_TIMERS)) {
+    IS_ENABLED!(CONFIG_POSIX_TIMERS)) {
 //
 // update_rlimit_cpu can fail if the task is exiting, but there
 // may be other tasks in the thread group that are not exiting,
@@ -1271,51 +1653,62 @@ unsafe extern "C" fn override_release(release: *mut char __user, len: usize) -> 
     }
     return retval;
     }
-    SYSCALL_DEFINE2(getrlimit, unsigned int, resource, struct rlimit __user *, rlim)
-    {
-    struct rlimit value;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn sys_getrlimit(resource: usize, rlim: usize) -> c_long {
+pub static mut value: usize = 0;
+    let mut ret = 0;
     ret = do_prlimit(current, resource, core::ptr::null_mut(), &value);
-    if (!ret)
-    ret = copy_to_user(rlim, &value, sizeof(*rlim)) ? -EFAULT : 0;
+    if (!ret) {
+    ret = copy_to_user(rlim, &value, sizeof!(*rlim)) ? -EFAULT : 0;
+    }
     return ret;
     }
 
-    COMPAT_SYSCALL_DEFINE2(setrlimit, unsigned int, resource,
-    struct compat_rlimit __user *, rlim)
-    {
-    struct rlimit r;
-    struct compat_rlimit r32;
-    if (copy_from_user(&r32, rlim, sizeof(struct compat_rlimit)))
+#[no_mangle]
+pub unsafe extern "C" fn sys_setrlimit(resource: usize, rlim: usize) -> c_long {
+pub static mut r: usize = 0;
+pub static mut r32: usize = 0;
+    if (copy_from_user(&r32, rlim, sizeof!(compat_rlimit))) {
     return -EFAULT;
-    if (r32.rlim_cur == COMPAT_RLIM_INFINITY)
+    }
+    if (r32.rlim_cur == COMPAT_RLIM_INFINITY) {
     r.rlim_cur = RLIM_INFINITY;
-    else
+    }
+    else {
     r.rlim_cur = r32.rlim_cur;
-    if (r32.rlim_max == COMPAT_RLIM_INFINITY)
+    }
+    if (r32.rlim_max == COMPAT_RLIM_INFINITY) {
     r.rlim_max = RLIM_INFINITY;
-    else
+    }
+    else {
     r.rlim_max = r32.rlim_max;
+    }
     return do_prlimit(current, resource, &r, core::ptr::null_mut());
     }
-    COMPAT_SYSCALL_DEFINE2(getrlimit, unsigned int, resource,
-    struct compat_rlimit __user *, rlim)
-    {
-    struct rlimit r;
-    int ret;
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sys_getrlimit
+pub unsafe extern "C" fn sys_getrlimit_dup(resource: usize, rlim: usize) -> c_long {
+pub static mut r: usize = 0;
+    let mut ret = 0;
     ret = do_prlimit(current, resource, core::ptr::null_mut(), &r);
     if (!ret) {
-    struct compat_rlimit r32;
-    if (r.rlim_cur > COMPAT_RLIM_INFINITY)
+pub static mut r32: usize = 0;
+    if (r.rlim_cur > COMPAT_RLIM_INFINITY) {
     r32.rlim_cur = COMPAT_RLIM_INFINITY;
-    else
+    }
+    else {
     r32.rlim_cur = r.rlim_cur;
-    if (r.rlim_max > COMPAT_RLIM_INFINITY)
+    }
+    if (r.rlim_max > COMPAT_RLIM_INFINITY) {
     r32.rlim_max = COMPAT_RLIM_INFINITY;
-    else
+    }
+    else {
     r32.rlim_max = r.rlim_max;
-    if (copy_to_user(rlim, &r32, sizeof(struct compat_rlimit)))
+    }
+    if (copy_to_user(rlim, &r32, sizeof!(compat_rlimit))) {
     return -EFAULT;
+    }
     }
     return ret;
     }
@@ -1323,40 +1716,47 @@ unsafe extern "C" fn override_release(release: *mut char __user, len: usize) -> 
 //
 // Back compatibility for getrlimit. Needed for some apps.
 //
-    SYSCALL_DEFINE2(old_getrlimit, unsigned int, resource,
-    struct rlimit __user *, rlim)
-    {
-    struct rlimit x;
-    if (resource >= RLIM_NLIMITS)
+#[no_mangle]
+pub unsafe extern "C" fn sys_old_getrlimit(resource: usize, rlim: usize) -> c_long {
+pub static mut x: usize = 0;
+    if (resource >= RLIM_NLIMITS) {
     return -EINVAL;
+    }
     resource = array_index_nospec(resource, RLIM_NLIMITS);
     task_lock(current.group_leader);
     x = current.signal.rlim[resource];
     task_unlock(current.group_leader);
-    if (x.rlim_cur > 0x7FFFFFFF)
+    if (x.rlim_cur > 0x7FFFFFFF) {
     x.rlim_cur = 0x7FFFFFFF;
-    if (x.rlim_max > 0x7FFFFFFF)
+    }
+    if (x.rlim_max > 0x7FFFFFFF) {
     x.rlim_max = 0x7FFFFFFF;
-    return copy_to_user(rlim, &x, sizeof(x)) ? -EFAULT : 0;
+    }
+    return copy_to_user(rlim, &x, sizeof!(x)) ? -EFAULT : 0;
     }
 
-    COMPAT_SYSCALL_DEFINE2(old_getrlimit, unsigned int, resource,
-    struct compat_rlimit __user *, rlim)
-    {
-    struct rlimit r;
-    if (resource >= RLIM_NLIMITS)
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sys_old_getrlimit
+pub unsafe extern "C" fn sys_old_getrlimit_dup(resource: usize, rlim: usize) -> c_long {
+pub static mut r: usize = 0;
+    if (resource >= RLIM_NLIMITS) {
     return -EINVAL;
+    }
     resource = array_index_nospec(resource, RLIM_NLIMITS);
     task_lock(current.group_leader);
     r = current.signal.rlim[resource];
     task_unlock(current.group_leader);
-    if (r.rlim_cur > 0x7FFFFFFF)
+    if (r.rlim_cur > 0x7FFFFFFF) {
     r.rlim_cur = 0x7FFFFFFF;
-    if (r.rlim_max > 0x7FFFFFFF)
+    }
+    if (r.rlim_max > 0x7FFFFFFF) {
     r.rlim_max = 0x7FFFFFFF;
+    }
     if (put_user(r.rlim_cur, &rlim.rlim_cur) ||
-    put_user(r.rlim_max, &rlim.rlim_max))
+    put_user(r.rlim_max, &rlim.rlim_max)) {
     return -EFAULT;
+    }
     return 0;
     }
 
@@ -1365,39 +1765,47 @@ pub unsafe extern "C" fn rlim64_is_infinity(rlim64: __u64) -> bool {
 
     return rlim64 >= ULONG_MAX;
 
-    let mut rlim64: return = = RLIM64_INFINITY;
+pub static mut rlim64: return = 0;
 
     }
 #[no_mangle]
 unsafe extern "C" fn rlim_to_rlim64(rlim: *const rlimit, rlim64: *mut rlimit64) {
-    if (rlim.rlim_cur == RLIM_INFINITY)
+    if (rlim.rlim_cur == RLIM_INFINITY) {
     rlim64.rlim_cur = RLIM64_INFINITY;
-    else
+    }
+    else {
     rlim64.rlim_cur = rlim.rlim_cur;
-    if (rlim.rlim_max == RLIM_INFINITY)
+    }
+    if (rlim.rlim_max == RLIM_INFINITY) {
     rlim64.rlim_max = RLIM64_INFINITY;
-    else
+    }
+    else {
     rlim64.rlim_max = rlim.rlim_max;
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn rlim64_to_rlim(rlim64: *const rlimit64, rlim: *mut rlimit) {
-    if (rlim64_is_infinity(rlim64.rlim_cur))
+    if (rlim64_is_infinity(rlim64.rlim_cur)) {
     rlim.rlim_cur = RLIM_INFINITY;
-    else
+    }
+    else {
     rlim.rlim_cur = (unsigned long)rlim64.rlim_cur;
-    if (rlim64_is_infinity(rlim64.rlim_max))
+    }
+    if (rlim64_is_infinity(rlim64.rlim_max)) {
     rlim.rlim_max = RLIM_INFINITY;
-    else
+    }
+    else {
     rlim.rlim_max = (unsigned long)rlim64.rlim_max;
     }
+    }
 // rcu lock must be held
-    static int check_prlimit_permission(struct task_struct *task,
-    unsigned int flags)
-    {
-    const struct cred *cred = current_cred(), *tcred;
-    bool id_match;
-    if (current == task)
+#[no_mangle]
+pub unsafe extern "C" fn check_prlimit_permission(task: *mut task_struct, flags: c_uint) -> c_int {
+    let mut cred = current_cred(), *tcred;
+    let mut id_match = 0;
+    if (current == task) {
     return 0;
+    }
     tcred = __task_cred(task);
     id_match = (uid_eq(cred.uid, tcred.euid) &&
     uid_eq(cred.uid, tcred.suid) &&
@@ -1405,25 +1813,26 @@ unsafe extern "C" fn rlim64_to_rlim(rlim64: *const rlimit64, rlim: *mut rlimit) 
     gid_eq(cred.gid, tcred.egid) &&
     gid_eq(cred.gid, tcred.sgid) &&
     gid_eq(cred.gid, tcred.gid));
-    if (!id_match && !ns_capable(tcred.user_ns, CAP_SYS_RESOURCE))
+    if (!id_match && !ns_capable(tcred.user_ns, CAP_SYS_RESOURCE)) {
     return -EPERM;
+    }
     return security_task_prlimit(cred, tcred, flags);
     }
-    SYSCALL_DEFINE4(prlimit64, pid_t, pid, unsigned int, resource,
-    const struct rlimit64 __user *, new_rlim,
-    struct rlimit64 __user *, old_rlim)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_prlimit64(pid: usize, resource: usize, new_rlim: usize, old_rlim: usize) -> c_long {
     struct rlimit64 old64, new64;
     struct rlimit old, new;
-    struct task_struct *tsk;
-    let mut checkflags: c_uint = 0;
-    bool need_tasklist;
-    int ret;
-    if (old_rlim)
+pub static mut tsk: *mut c_void = core::ptr::null_mut();
+pub static mut checkflags: c_uint = 0;
+    let mut need_tasklist = 0;
+    let mut ret = 0;
+    if (old_rlim) {
     checkflags |= LSM_PRLIMIT_READ;
+    }
     if (new_rlim) {
-    if (copy_from_user(&new64, new_rlim, sizeof(new64)))
+    if (copy_from_user(&new64, new_rlim, sizeof!(new64))) {
     return -EFAULT;
+    }
     rlim64_to_rlim(&new64, &new);
     checkflags |= LSM_PRLIMIT_WRITE;
     }
@@ -1448,28 +1857,34 @@ unsafe extern "C" fn rlim64_to_rlim(rlim64: *const rlimit64, rlim: *mut rlimit) 
 // read_unlock(tasklist_lock) below.
 //
     read_lock(&tasklist_lock);
-    if (!pid_alive(tsk))
+    if (!pid_alive(tsk)) {
     ret = -ESRCH;
+    }
     }
     if (!ret) {
     ret = do_prlimit(tsk, resource, new_rlim ? &new : core::ptr::null_mut(),
     old_rlim ? &old : core::ptr::null_mut());
     }
-    if (need_tasklist)
+    if (need_tasklist) {
     read_unlock(&tasklist_lock);
+    }
     if (!ret && old_rlim) {
     rlim_to_rlim64(&old, &old64);
-    if (copy_to_user(old_rlim, &old64, sizeof(old64)))
+    if (copy_to_user(old_rlim, &old64, sizeof!(old64))) {
     ret = -EFAULT;
+    }
     }
     put_task_struct(tsk);
     return ret;
     }
-    SYSCALL_DEFINE2(setrlimit, unsigned int, resource, struct rlimit __user *, rlim)
-    {
-    struct rlimit new_rlim;
-    if (copy_from_user(&new_rlim, rlim, sizeof(*rlim)))
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sys_setrlimit
+pub unsafe extern "C" fn sys_setrlimit_dup(resource: usize, rlim: usize) -> c_long {
+pub static mut new_rlim: usize = 0;
+    if (copy_from_user(&new_rlim, rlim, sizeof!(*rlim))) {
     return -EFAULT;
+    }
     return do_prlimit(current, resource, &new_rlim, core::ptr::null_mut());
     }
 //
@@ -1514,27 +1929,28 @@ unsafe extern "C" fn accumulate_thread_rusage(t: *mut task_struct, r: *mut rusag
     }
 #[no_mangle]
 pub unsafe extern "C" fn getrusage(p: *mut task_struct, who: c_int, r: *mut rusage) {
-    struct task_struct *t;
-    unsigned long flags;
+pub static mut t: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
     u64 tgutime, tgstime, utime, stime;
-    unsigned long maxrss;
-    struct mm_struct *mm;
-    struct signal_struct *sig = p.signal;
-    let mut seq: c_uint = 0;
-    retry:
-    memset(r, 0, sizeof(*r));
+    let mut maxrss = 0;
+pub static mut mm: *mut c_void = core::ptr::null_mut();
+    let mut sig = p.signal;
+pub static mut seq: c_uint = 0;
+// label;
+    memset(r, 0, sizeof!(*r));
     utime = stime = 0;
     maxrss = 0;
     if (who == RUSAGE_THREAD) {
     task_cputime_adjusted(current, &utime, &stime);
     accumulate_thread_rusage(p, r);
     maxrss = sig.maxrss;
-    goto out_thread;
+// goto;
     }
     flags = read_seqbegin_or_lock_irqsave(&sig.stats_lock, &seq);
-    switch (who) {
-    case RUSAGE_BOTH:
-    case RUSAGE_CHILDREN:
+    match (who) {
+    RUSAGE_BOTH => {
+    }
+    RUSAGE_CHILDREN => {
     utime = sig.cutime;
     stime = sig.cstime;
     r.ru_nvcsw = sig.cnvcsw;
@@ -1544,90 +1960,103 @@ pub unsafe extern "C" fn getrusage(p: *mut task_struct, who: c_int, r: *mut rusa
     r.ru_inblock = sig.cinblock;
     r.ru_oublock = sig.coublock;
     maxrss = sig.cmaxrss;
-    if (who == RUSAGE_CHILDREN)
-    break;
+    if (who == RUSAGE_CHILDREN) {
+    // break;
+    }
     fallthrough;
-    case RUSAGE_SELF:
+    }
+    RUSAGE_SELF => {
     r.ru_nvcsw += sig.nvcsw;
     r.ru_nivcsw += sig.nivcsw;
     r.ru_minflt += sig.min_flt;
     r.ru_majflt += sig.maj_flt;
     r.ru_inblock += sig.inblock;
     r.ru_oublock += sig.oublock;
-    if (maxrss < sig.maxrss)
+    if (maxrss < sig.maxrss) {
     maxrss = sig.maxrss;
+    }
     rcu_read_lock();
     __for_each_thread(sig, t)
     accumulate_thread_rusage(t, r);
     rcu_read_unlock();
-    break;
-    default:
+    // break;
+    }
+    _ => {
     BUG();
+    }
     }
     if (need_seqretry(&sig.stats_lock, seq)) {
     seq = 1;
-    goto retry;
+// goto;
     }
     done_seqretry_irqrestore(&sig.stats_lock, seq, flags);
-    if (who == RUSAGE_CHILDREN)
-    goto out_children;
+    if (who == RUSAGE_CHILDREN) {
+// goto;
+    }
     thread_group_cputime_adjusted(p, &tgutime, &tgstime);
     utime += tgutime;
     stime += tgstime;
-    out_thread:
+// label;
     mm = get_task_mm(p);
     if (mm) {
     setmax_mm_hiwater_rss(&maxrss, mm);
     mmput(mm);
     }
-    out_children:
+// label;
     r.ru_maxrss = maxrss * (PAGE_SIZE / 1024); /* convert pages to KBs */
     r.ru_utime = ns_to_kernel_old_timeval(utime);
     r.ru_stime = ns_to_kernel_old_timeval(stime);
     }
-    SYSCALL_DEFINE2(getrusage, int, who, struct rusage __user *, ru)
-    {
-    struct rusage r;
+#[no_mangle]
+pub unsafe extern "C" fn sys_getrusage(who: usize, ru: usize) -> c_long {
+pub static mut r: usize = 0;
     if (who != RUSAGE_SELF && who != RUSAGE_CHILDREN &&
-    who != RUSAGE_THREAD)
+    who != RUSAGE_THREAD) {
     return -EINVAL;
+    }
     getrusage(current, who, &r);
-    return copy_to_user(ru, &r, sizeof(r)) ? -EFAULT : 0;
+    return copy_to_user(ru, &r, sizeof!(r)) ? -EFAULT : 0;
     }
 
-    COMPAT_SYSCALL_DEFINE2(getrusage, int, who, struct compat_rusage __user *, ru)
-    {
-    struct rusage r;
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sys_getrusage
+pub unsafe extern "C" fn sys_getrusage_dup(who: usize, ru: usize) -> c_long {
+pub static mut r: usize = 0;
     if (who != RUSAGE_SELF && who != RUSAGE_CHILDREN &&
-    who != RUSAGE_THREAD)
+    who != RUSAGE_THREAD) {
     return -EINVAL;
+    }
     getrusage(current, who, &r);
     return put_compat_rusage(&r, ru);
     }
 
-    SYSCALL_DEFINE1(umask, int, mask)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_umask(mask: usize) -> c_long {
     mask = xchg(&current.fs.umask, mask & S_IRWXUGO);
     return mask;
     }
 #[no_mangle]
 unsafe extern "C" fn prctl_set_mm_exe_file(mm: *mut mm_struct, fd: c_uint) -> c_int {
     CLASS(fd, exe)(fd);
-    struct inode *inode;
-    int err;
-    if (fd_empty(exe))
+pub static mut inode: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
+    if (fd_empty(exe)) {
     return -EBADF;
+    }
     inode = file_inode(fd_file(exe));
 //
 // Because the original mm->exe_file points to executable file, make
 // sure that this one is executable as well, to avoid breaking an
 // overall picture.
 //
-    if (!S_ISREG(inode.i_mode) || path_noexec(&fd_file(exe).f_path))
+    if (!S_ISREG(inode.i_mode) || path_noexec(&fd_file(exe).f_path)) {
     return -EACCES;
+    }
     err = file_permission(fd_file(exe), MAY_EXEC);
-    if (err)
+    if (err) {
     return err;
+    }
     return replace_mm_exe_file(mm, fd_file(exe));
     }
 //
@@ -1638,44 +2067,46 @@ unsafe extern "C" fn prctl_set_mm_exe_file(mm: *mut mm_struct, fd: c_uint) -> c_
 //
 #[no_mangle]
 unsafe extern "C" fn validate_prctl_map_addr(prctl_map: *mut prctl_mm_map) -> c_int {
-    let mut mmap_max_addr: c_ulong = TASK_SIZE;
-    let mut error: c_int = -EINVAL, i;
+pub static mut mmap_max_addr: c_ulong = 0;
+pub static mut error: c_int = 0;
     static const unsigned char offsets[] = {
-    offsetof(struct prctl_mm_map, start_code),
-    offsetof(struct prctl_mm_map, end_code),
-    offsetof(struct prctl_mm_map, start_data),
-    offsetof(struct prctl_mm_map, end_data),
-    offsetof(struct prctl_mm_map, start_brk),
-    offsetof(struct prctl_mm_map, brk),
-    offsetof(struct prctl_mm_map, start_stack),
-    offsetof(struct prctl_mm_map, arg_start),
-    offsetof(struct prctl_mm_map, arg_end),
-    offsetof(struct prctl_mm_map, env_start),
-    offsetof(struct prctl_mm_map, env_end),
+    offsetof(prctl_mm_map, start_code),
+    offsetof(prctl_mm_map, end_code),
+    offsetof(prctl_mm_map, start_data),
+    offsetof(prctl_mm_map, end_data),
+    offsetof(prctl_mm_map, start_brk),
+    offsetof(prctl_mm_map, brk),
+    offsetof(prctl_mm_map, start_stack),
+    offsetof(prctl_mm_map, arg_start),
+    offsetof(prctl_mm_map, arg_end),
+    offsetof(prctl_mm_map, env_start),
+    offsetof(prctl_mm_map, env_end),
     };
 //
 // Make sure the members are not somewhere outside
 // of allowed address space.
 //
-    for (i = 0; i < ARRAY_SIZE(offsets); i++) {
-    let mut val: u64 = *(u64 *)((char *)prctl_map + offsets[i]);
+    while (i < ARRAY_SIZE!(offsets)) {
+pub static mut val: u64 = 0;
     if ((unsigned long)val >= mmap_max_addr ||
-    (unsigned long)val < mmap_min_addr)
-    goto out;
+    (unsigned long)val < mmap_min_addr) {
+// goto;
+    }
     }
 //
 // Make sure the pairs are ordered.
 //
 
-    ((unsigned long)prctl_map.__m1 __op				\
+    ((unsigned long)prctl_map.__m1 __op				
     (unsigned long)prctl_map.__m2) ? 0 : -EINVAL
     error  = __prctl_check_order(start_code, <, end_code);
     error |= __prctl_check_order(start_data,<=, end_data);
     error |= __prctl_check_order(start_brk, <=, brk);
     error |= __prctl_check_order(arg_start, <=, arg_end);
     error |= __prctl_check_order(env_start, <=, env_end);
-    if (error)
-    goto out;
+    if (error) {
+// goto;
+    }
 
     error = -EINVAL;
 //
@@ -1683,43 +2114,50 @@ unsafe extern "C" fn validate_prctl_map_addr(prctl_map: *mut prctl_mm_map) -> c_
 //
     if (check_data_rlimit(rlimit(RLIMIT_DATA), prctl_map.brk,
     prctl_map.start_brk, prctl_map.end_data,
-    prctl_map.start_data))
-    goto out;
+    prctl_map.start_data)) {
+// goto;
+    }
     error = 0;
-    out:
+// label;
     return error;
     }
 
 #[no_mangle]
-unsafe extern "C" fn prctl_set_mm_map(opt: c_int, addr: *const void __user, data_size: c_ulong) -> c_int {
-    let mut prctl_map: prctl_mm_map = { .exe_fd = (u32)-1, };
+unsafe extern "C" fn prctl_set_mm_map(opt: c_int, addr: *const c_void , data_size: c_ulong) -> c_int {
+pub static mut prctl_map: prctl_mm_map = 0;
     unsigned long user_auxv[AT_VECTOR_SIZE];
-    struct mm_struct *mm = current.mm;
-    int error;
-    BUILD_BUG_ON(sizeof(user_auxv) != sizeof(mm.saved_auxv));
-    BUILD_BUG_ON(sizeof(struct prctl_mm_map) > 256);
-    if (opt == PR_SET_MM_MAP_SIZE)
-    return put_user((unsigned int)sizeof(prctl_map),
-    (unsigned int __user *)addr);
-    if (data_size != sizeof(prctl_map))
+    let mut mm = current.mm;
+    let mut error = 0;
+    BUILD_BUG_ON!(sizeof!(user_auxv) != sizeof!(mm.saved_auxv));
+    BUILD_BUG_ON!(sizeof!(prctl_mm_map) > 256);
+    if (opt == PR_SET_MM_MAP_SIZE) {
+    return put_user((unsigned int)sizeof!(prctl_map),
+    addr);
+    }
+    if (data_size != sizeof!(prctl_map)) {
     return -EINVAL;
-    if (copy_from_user(&prctl_map, addr, sizeof(prctl_map)))
+    }
+    if (copy_from_user(&prctl_map, addr, sizeof!(prctl_map))) {
     return -EFAULT;
+    }
     error = validate_prctl_map_addr(&prctl_map);
-    if (error)
+    if (error) {
     return error;
+    }
     if (prctl_map.auxv_size) {
 //
 // Someone is trying to cheat the auxv vector.
 //
     if (!prctl_map.auxv ||
-    prctl_map.auxv_size > sizeof(mm.saved_auxv))
+    prctl_map.auxv_size > sizeof!(mm.saved_auxv)) {
     return -EINVAL;
-    memset(user_auxv, 0, sizeof(user_auxv));
+    }
+    memset(user_auxv, 0, sizeof!(user_auxv));
     if (copy_from_user(user_auxv,
-    (const void __user *)prctl_map.auxv,
-    prctl_map.auxv_size))
+    prctl_map.auxv,
+    prctl_map.auxv_size)) {
     return -EFAULT;
+    }
 // Last entry must be AT_NULL as specification requires
     user_auxv[AT_VECTOR_SIZE - 2] = AT_NULL;
     user_auxv[AT_VECTOR_SIZE - 1] = AT_NULL;
@@ -1733,11 +2171,13 @@ unsafe extern "C" fn prctl_set_mm_map(opt: c_int, addr: *const void __user, data
 // arbitrary program as any executable, even setuid ones.
 // This may have implications in the tomoyo subsystem.
 //
-    if (!checkpoint_restore_ns_capable(current_user_ns()))
+    if (!checkpoint_restore_ns_capable(current_user_ns())) {
     return -EPERM;
+    }
     error = prctl_set_mm_exe_file(mm, prctl_map.exe_fd);
-    if (error)
+    if (error) {
     return error;
+    }
     }
 //
 // arg_lock protects concurrent updates but we still need mmap_lock for
@@ -1776,15 +2216,15 @@ unsafe extern "C" fn prctl_set_mm_map(opt: c_int, addr: *const void __user, data
 // not introduce additional locks here making the kernel
 // more complex.
 //
-    if (prctl_map.auxv_size)
-    memcpy(mm.saved_auxv, user_auxv, sizeof(user_auxv));
+    if (prctl_map.auxv_size) {
+    memcpy(mm.saved_auxv, user_auxv, sizeof!(user_auxv));
+    }
     mmap_read_unlock(mm);
     return 0;
     }
 
-    static int prctl_set_auxv(struct mm_struct *mm, unsigned long addr,
-    unsigned long len)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn prctl_set_auxv(mm: *mut mm_struct, addr: c_ulong, len: c_ulong) -> c_int {
 //
 // This doesn't move the auxiliary vector itself since it's pinned to
 // mm_struct, but it permits filling the vector with new values.  It's
@@ -1792,46 +2232,49 @@ unsafe extern "C" fn prctl_set_mm_map(opt: c_int, addr: *const void __user, data
 // tools which use this vector might be unhappy.
 //
     unsigned long user_auxv[AT_VECTOR_SIZE] = {};
-    if (len > sizeof(user_auxv))
+    if (len > sizeof!(user_auxv)) {
     return -EINVAL;
-    if (copy_from_user(user_auxv, (const void __user *)addr, len))
+    }
+    if (copy_from_user(user_auxv, addr, len)) {
     return -EFAULT;
+    }
 // Make sure the last entry is always AT_NULL
     user_auxv[AT_VECTOR_SIZE - 2] = 0;
     user_auxv[AT_VECTOR_SIZE - 1] = 0;
-    BUILD_BUG_ON(sizeof(user_auxv) != sizeof(mm.saved_auxv));
+    BUILD_BUG_ON!(sizeof!(user_auxv) != sizeof!(mm.saved_auxv));
     task_lock(current);
-    memcpy(mm.saved_auxv, user_auxv, sizeof(user_auxv));
+    memcpy(mm.saved_auxv, user_auxv, sizeof!(user_auxv));
     task_unlock(current);
     return 0;
     }
-    static int prctl_set_mm(int opt, unsigned long addr,
-    unsigned long arg4, unsigned long arg5)
-    {
-    struct mm_struct *mm = current.mm;
-    struct prctl_mm_map prctl_map = {
-    .auxv = core::ptr::null_mut(),
-    .auxv_size = 0,
-    .exe_fd = -1,
-    };
-    struct vm_area_struct *vma;
-    int error;
+#[no_mangle]
+pub unsafe extern "C" fn prctl_set_mm(opt: c_int, addr: c_ulong, arg4: c_ulong, arg5: c_ulong) -> c_int {
+    let mut mm = current.mm;
+pub static mut prctl_mm_map: usize = 0;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+    let mut error = 0;
     if (arg5 || (arg4 && (opt != PR_SET_MM_AUXV &&
     opt != PR_SET_MM_MAP &&
-    opt != PR_SET_MM_MAP_SIZE)))
+    opt != PR_SET_MM_MAP_SIZE))) {
     return -EINVAL;
+    }
 
-    if (opt == PR_SET_MM_MAP || opt == PR_SET_MM_MAP_SIZE)
-    return prctl_set_mm_map(opt, (const void __user *)addr, arg4);
+    if (opt == PR_SET_MM_MAP || opt == PR_SET_MM_MAP_SIZE) {
+    return prctl_set_mm_map(opt, addr, arg4);
+    }
 
-    if (!capable(CAP_SYS_RESOURCE))
+    if (!capable(CAP_SYS_RESOURCE)) {
     return -EPERM;
-    if (opt == PR_SET_MM_EXE_FILE)
+    }
+    if (opt == PR_SET_MM_EXE_FILE) {
     return prctl_set_mm_exe_file(mm, (unsigned int)addr);
-    if (opt == PR_SET_MM_AUXV)
+    }
+    if (opt == PR_SET_MM_AUXV) {
     return prctl_set_auxv(mm, addr, arg4);
-    if (addr >= TASK_SIZE || addr < mmap_min_addr)
+    }
+    if (addr >= TASK_SIZE || addr < mmap_min_addr) {
     return -EINVAL;
+    }
     error = -EINVAL;
 //
 // arg_lock protects concurrent updates of arg boundaries, we need
@@ -1852,47 +2295,60 @@ unsafe extern "C" fn prctl_set_mm_map(opt: c_int, addr: *const void __user, data
     prctl_map.arg_end	= mm.arg_end;
     prctl_map.env_start	= mm.env_start;
     prctl_map.env_end	= mm.env_end;
-    switch (opt) {
-    case PR_SET_MM_START_CODE:
+    match (opt) {
+    PR_SET_MM_START_CODE => {
     prctl_map.start_code = addr;
-    break;
-    case PR_SET_MM_END_CODE:
+    // break;
+    }
+    PR_SET_MM_END_CODE => {
     prctl_map.end_code = addr;
-    break;
-    case PR_SET_MM_START_DATA:
+    // break;
+    }
+    PR_SET_MM_START_DATA => {
     prctl_map.start_data = addr;
-    break;
-    case PR_SET_MM_END_DATA:
+    // break;
+    }
+    PR_SET_MM_END_DATA => {
     prctl_map.end_data = addr;
-    break;
-    case PR_SET_MM_START_STACK:
+    // break;
+    }
+    PR_SET_MM_START_STACK => {
     prctl_map.start_stack = addr;
-    break;
-    case PR_SET_MM_START_BRK:
+    // break;
+    }
+    PR_SET_MM_START_BRK => {
     prctl_map.start_brk = addr;
-    break;
-    case PR_SET_MM_BRK:
+    // break;
+    }
+    PR_SET_MM_BRK => {
     prctl_map.brk = addr;
-    break;
-    case PR_SET_MM_ARG_START:
+    // break;
+    }
+    PR_SET_MM_ARG_START => {
     prctl_map.arg_start = addr;
-    break;
-    case PR_SET_MM_ARG_END:
+    // break;
+    }
+    PR_SET_MM_ARG_END => {
     prctl_map.arg_end = addr;
-    break;
-    case PR_SET_MM_ENV_START:
+    // break;
+    }
+    PR_SET_MM_ENV_START => {
     prctl_map.env_start = addr;
-    break;
-    case PR_SET_MM_ENV_END:
+    // break;
+    }
+    PR_SET_MM_ENV_END => {
     prctl_map.env_end = addr;
-    break;
-    default:
-    goto out;
+    // break;
+    }
+    _ => {
+// goto;
+    }
     }
     error = validate_prctl_map_addr(&prctl_map);
-    if (error)
-    goto out;
-    switch (opt) {
+    if (error) {
+// goto;
+    }
+    match (opt) {
 //
 // If command line arguments and environment
 // are placed somewhere else on stack, we can
@@ -1900,14 +2356,19 @@ unsafe extern "C" fn prctl_set_mm_map(opt: c_int, addr: *const void __user, data
 // command line arguments and ENV_START/END
 // for environment.
 //
-    case PR_SET_MM_START_STACK:
-    case PR_SET_MM_ARG_START:
-    case PR_SET_MM_ARG_END:
-    case PR_SET_MM_ENV_START:
-    case PR_SET_MM_ENV_END:
+    PR_SET_MM_START_STACK => {
+    }
+    PR_SET_MM_ARG_START => {
+    }
+    PR_SET_MM_ARG_END => {
+    }
+    PR_SET_MM_ENV_START => {
+    }
+    PR_SET_MM_ENV_END => {
     if (!vma) {
     error = -EFAULT;
-    goto out;
+// goto;
+    }
     }
     }
     mm.start_code	= prctl_map.start_code;
@@ -1922,19 +2383,19 @@ unsafe extern "C" fn prctl_set_mm_map(opt: c_int, addr: *const void __user, data
     mm.env_start	= prctl_map.env_start;
     mm.env_end	= prctl_map.env_end;
     error = 0;
-    out:
+// label;
     spin_unlock(&mm.arg_lock);
     mmap_read_unlock(mm);
     return error;
     }
 
 #[no_mangle]
-unsafe extern "C" fn prctl_get_tid_address(me: *mut task_struct, tid_addr: *mut *mut int __user  __user) -> c_int {
+unsafe extern "C" fn prctl_get_tid_address(me: *mut task_struct, tid_addr: *mut *mut int   ) -> c_int {
     return put_user(me.clear_child_tid, tid_addr);
     }
 
 #[no_mangle]
-unsafe extern "C" fn prctl_get_tid_address(me: *mut task_struct, tid_addr: *mut *mut int __user  __user) -> c_int {
+unsafe extern "C" fn prctl_get_tid_address(me: *mut task_struct, tid_addr: *mut *mut int   ) -> c_int {
     return -EINVAL;
     }
 
@@ -1949,8 +2410,9 @@ unsafe extern "C" fn propagate_has_child_subreaper(p: *mut task_struct, data: *m
 // it's subtree as they will never get out pidns.
 //
     if (p.signal.has_child_subreaper ||
-    is_child_reaper(task_pid(p)))
+    is_child_reaper(task_pid(p))) {
     return 0;
+    }
     p.signal.has_child_subreaper = 1;
     return 1;
     }
@@ -1958,13 +2420,13 @@ unsafe extern "C" fn propagate_has_child_subreaper(p: *mut task_struct, data: *m
 pub unsafe extern "C" fn arch_prctl_spec_ctrl_get(t: *mut task_struct, which: c_ulong) -> int __weak {
     return -EINVAL;
     }
-    int __weak arch_prctl_spec_ctrl_set(struct task_struct *t, unsigned long which,
+    int __weak arch_prctl_spec_ctrl_set(task_struct *t, unsigned long which,
     unsigned long ctrl)
     {
     return -EINVAL;
     }
 #[no_mangle]
-pub unsafe extern "C" fn arch_get_shadow_stack_status(t: *mut task_struct, status: *mut unsigned long __user) -> int __weak {
+pub unsafe extern "C" fn arch_get_shadow_stack_status(t: *mut task_struct, status: *mut unsigned long ) -> int __weak {
     return -EINVAL;
     }
 #[no_mangle]
@@ -1975,8 +2437,8 @@ pub unsafe extern "C" fn arch_set_shadow_stack_status(t: *mut task_struct, statu
 pub unsafe extern "C" fn arch_lock_shadow_stack_status(t: *mut task_struct, status: c_ulong) -> int __weak {
     return -EINVAL;
     }
-    int __weak arch_prctl_get_branch_landing_pad_state(struct task_struct *t,
-    unsigned long __user *state)
+    int __weak arch_prctl_get_branch_landing_pad_state(task_struct *t,
+    unsigned long  *state)
     {
     return -EINVAL;
     }
@@ -1989,95 +2451,108 @@ pub unsafe extern "C" fn arch_prctl_lock_branch_landing_pad_state(t: *mut task_s
     return -EINVAL;
     }
 
-    static int prctl_set_vma(unsigned long opt, unsigned long addr,
-    unsigned long size, unsigned long arg)
-    {
-    int error;
-    switch (opt) {
-    case PR_SET_VMA_ANON_NAME:
-    error = set_anon_vma_name(addr, size, (const char __user *)arg);
-    break;
-    default:
+#[no_mangle]
+pub unsafe extern "C" fn prctl_set_vma(opt: c_ulong, addr: c_ulong, size: c_ulong, arg: c_ulong) -> c_int {
+    let mut error = 0;
+    match (opt) {
+    PR_SET_VMA_ANON_NAME => {
+    error = set_anon_vma_name(addr, size, arg);
+    // break;
+    }
+    _ => {
     error = -EINVAL;
+    }
     }
     return error;
     }
 #[no_mangle]
 pub unsafe extern "C" fn get_current_mdwe() -> c_ulong {
-    let mut ret: c_ulong = 0;
-    if (mm_flags_test(MMF_HAS_MDWE, current.mm))
+pub static mut ret: c_ulong = 0;
+    if (mm_flags_test(MMF_HAS_MDWE, current.mm)) {
     ret |= PR_MDWE_REFUSE_EXEC_GAIN;
-    if (mm_flags_test(MMF_HAS_MDWE_NO_INHERIT, current.mm))
+    }
+    if (mm_flags_test(MMF_HAS_MDWE_NO_INHERIT, current.mm)) {
     ret |= PR_MDWE_NO_INHERIT;
+    }
     return ret;
     }
-    static inline int prctl_set_mdwe(unsigned long bits, unsigned long arg3,
-    unsigned long arg4, unsigned long arg5)
-    {
-    unsigned long current_bits;
-    if (arg3 || arg4 || arg5)
+#[no_mangle]
+pub unsafe extern "C" fn prctl_set_mdwe(bits: c_ulong, arg3: c_ulong, arg4: c_ulong, arg5: c_ulong) -> c_int {
+    let mut current_bits = 0;
+    if (arg3 || arg4 || arg5) {
     return -EINVAL;
-    if (bits & ~(PR_MDWE_REFUSE_EXEC_GAIN | PR_MDWE_NO_INHERIT))
+    }
+    if (bits & ~(PR_MDWE_REFUSE_EXEC_GAIN | PR_MDWE_NO_INHERIT)) {
     return -EINVAL;
+    }
 // NO_INHERIT only makes sense with REFUSE_EXEC_GAIN
-    if (bits & PR_MDWE_NO_INHERIT && !(bits & PR_MDWE_REFUSE_EXEC_GAIN))
+    if (bits & PR_MDWE_NO_INHERIT && !(bits & PR_MDWE_REFUSE_EXEC_GAIN)) {
     return -EINVAL;
+    }
 //
 // EOPNOTSUPP might be more appropriate here in principle, but
 // existing userspace depends on EINVAL specifically.
 //
-    if (!arch_memory_deny_write_exec_supported())
+    if (!arch_memory_deny_write_exec_supported()) {
     return -EINVAL;
+    }
     current_bits = get_current_mdwe();
-    if (current_bits && current_bits != bits)
+    if (current_bits && current_bits != bits) {
     return -EPERM; /* Cannot unset the flags */
-    if (bits & PR_MDWE_NO_INHERIT)
+    }
+    if (bits & PR_MDWE_NO_INHERIT) {
     mm_flags_set(MMF_HAS_MDWE_NO_INHERIT, current.mm);
-    if (bits & PR_MDWE_REFUSE_EXEC_GAIN)
+    }
+    if (bits & PR_MDWE_REFUSE_EXEC_GAIN) {
     mm_flags_set(MMF_HAS_MDWE, current.mm);
+    }
     return 0;
     }
-    static inline int prctl_get_mdwe(unsigned long arg2, unsigned long arg3,
-    unsigned long arg4, unsigned long arg5)
-    {
-    if (arg2 || arg3 || arg4 || arg5)
+#[no_mangle]
+pub unsafe extern "C" fn prctl_get_mdwe(arg2: c_ulong, arg3: c_ulong, arg4: c_ulong, arg5: c_ulong) -> c_int {
+    if (arg2 || arg3 || arg4 || arg5) {
     return -EINVAL;
+    }
     return get_current_mdwe();
     }
 #[no_mangle]
-unsafe extern "C" fn prctl_get_auxv(addr: *mut void __user, len: c_ulong) -> c_int {
-    struct mm_struct *mm = current.mm;
-    let mut size: c_ulong = min_t(unsigned long, sizeof(mm.saved_auxv), len);
-    if (size && copy_to_user(addr, mm.saved_auxv, size))
+unsafe extern "C" fn prctl_get_auxv(addr: *mut c_void , len: c_ulong) -> c_int {
+    let mut mm = current.mm;
+pub static mut size: c_ulong = 0;
+    if (size && copy_to_user(addr, mm.saved_auxv, size)) {
     return -EFAULT;
-    return sizeof(mm.saved_auxv);
     }
-    static int prctl_get_thp_disable(unsigned long arg2, unsigned long arg3,
-    unsigned long arg4, unsigned long arg5)
-    {
-    struct mm_struct *mm = current.mm;
-    if (arg2 || arg3 || arg4 || arg5)
-    return -EINVAL;
-// If disabled, we return "1 | flags", otherwise 0.
-    if (mm_flags_test(MMF_DISABLE_THP_COMPLETELY, mm))
-    return 1;
+    return sizeof!(mm.saved_auxv);
+    }
 #[no_mangle]
-pub unsafe extern "C" fn if(_arg: mm_flags_test(MMF_DISABLE_THP_EXCEPT_ADVISED, _arg: mm)) -> else {
-    else if (mm_flags_test(MMF_DISABLE_THP_EXCEPT_ADVISED, mm))
+pub unsafe extern "C" fn prctl_get_thp_disable(arg2: c_ulong, arg3: c_ulong, arg4: c_ulong, arg5: c_ulong) -> c_int {
+    let mut mm = current.mm;
+    if (arg2 || arg3 || arg4 || arg5) {
+    return -EINVAL;
+    }
+// If disabled, we return "1 | flags", otherwise 0.
+    if (mm_flags_test(MMF_DISABLE_THP_COMPLETELY, mm)) {
+    return 1;
+    }
+
+    else if (mm_flags_test(MMF_DISABLE_THP_EXCEPT_ADVISED, mm)) {
     return 1 | PR_THP_DISABLE_EXCEPT_ADVISED;
+    }
     return 0;
     }
-    static int prctl_set_thp_disable(bool thp_disable, unsigned long flags,
-    unsigned long arg4, unsigned long arg5)
-    {
-    struct mm_struct *mm = current.mm;
-    if (arg4 || arg5)
+#[no_mangle]
+pub unsafe extern "C" fn prctl_set_thp_disable(thp_disable: bool, flags: c_ulong, arg4: c_ulong, arg5: c_ulong) -> c_int {
+    let mut mm = current.mm;
+    if (arg4 || arg5) {
     return -EINVAL;
+    }
 // Flags are only allowed when disabling.
-    if ((!thp_disable && flags) || (flags & ~PR_THP_DISABLE_EXCEPT_ADVISED))
+    if ((!thp_disable && flags) || (flags & ~PR_THP_DISABLE_EXCEPT_ADVISED)) {
     return -EINVAL;
-    if (mmap_write_lock_killable(current.mm))
+    }
+    if (mmap_write_lock_killable(current.mm)) {
     return -EINTR;
+    }
     if (thp_disable) {
     if (flags & PR_THP_DISABLE_EXCEPT_ADVISED) {
     mm_flags_clear(MMF_DISABLE_THP_COMPLETELY, mm);
@@ -2093,21 +2568,21 @@ pub unsafe extern "C" fn if(_arg: mm_flags_test(MMF_DISABLE_THP_EXCEPT_ADVISED, 
     mmap_write_unlock(current.mm);
     return 0;
     }
-    SYSCALL_DEFINE5(prctl, int, option, unsigned long, arg2, unsigned long, arg3,
-    unsigned long, arg4, unsigned long, arg5)
-    {
-    struct task_struct *me = current;
-    unsigned char comm[sizeof(me.comm)];
-    long error;
+#[no_mangle]
+pub unsafe extern "C" fn sys_prctl(option: usize, arg2: usize, arg3: usize, arg4: usize, arg5: usize) -> c_long {
+    let mut me = current;
+    unsigned char comm[sizeof!(me.comm)];
+    let mut error = 0;
     error = security_task_prctl(option, arg2, arg3, arg4, arg5);
-    if (error != -ENOSYS)
+    if (error != -ENOSYS) {
     return error;
+    }
     error = 0;
-    switch (option) {
-    case PR_SET_PDEATHSIG:
+    match (option) {
+    PR_SET_PDEATHSIG => {
     if (!valid_signal(arg2)) {
     error = -EINVAL;
-    break;
+    // break;
     }
 //
 // Ensure that either:
@@ -2120,365 +2595,442 @@ pub unsafe extern "C" fn if(_arg: mm_flags_test(MMF_DISABLE_THP_EXCEPT_ADVISED, 
     read_lock(&tasklist_lock);
     me.pdeath_signal = arg2;
     read_unlock(&tasklist_lock);
-    break;
-    case PR_GET_PDEATHSIG:
-    error = put_user(me.pdeath_signal, (int __user *)arg2);
-    break;
-    case PR_GET_DUMPABLE:
+    // break;
+    }
+    PR_GET_PDEATHSIG => {
+    error = put_user(me.pdeath_signal, arg2);
+    // break;
+    }
+    PR_GET_DUMPABLE => {
     error = task_exec_state_get_dumpable(me);
-    break;
-    case PR_SET_DUMPABLE:
+    // break;
+    }
+    PR_SET_DUMPABLE => {
     if (arg2 != TASK_DUMPABLE_OFF && arg2 != TASK_DUMPABLE_OWNER) {
     error = -EINVAL;
-    break;
+    // break;
     }
     task_exec_state_set_dumpable(arg2);
-    break;
-    case PR_SET_UNALIGN:
+    // break;
+    }
+    PR_SET_UNALIGN => {
     error = SET_UNALIGN_CTL(me, arg2);
-    break;
-    case PR_GET_UNALIGN:
+    // break;
+    }
+    PR_GET_UNALIGN => {
     error = GET_UNALIGN_CTL(me, arg2);
-    break;
-    case PR_SET_FPEMU:
+    // break;
+    }
+    PR_SET_FPEMU => {
     error = SET_FPEMU_CTL(me, arg2);
-    break;
-    case PR_GET_FPEMU:
+    // break;
+    }
+    PR_GET_FPEMU => {
     error = GET_FPEMU_CTL(me, arg2);
-    break;
-    case PR_SET_FPEXC:
+    // break;
+    }
+    PR_SET_FPEXC => {
     error = SET_FPEXC_CTL(me, arg2);
-    break;
-    case PR_GET_FPEXC:
+    // break;
+    }
+    PR_GET_FPEXC => {
     error = GET_FPEXC_CTL(me, arg2);
-    break;
-    case PR_GET_TIMING:
+    // break;
+    }
+    PR_GET_TIMING => {
     error = PR_TIMING_STATISTICAL;
-    break;
-    case PR_SET_TIMING:
-    if (arg2 != PR_TIMING_STATISTICAL)
+    // break;
+    }
+    PR_SET_TIMING => {
+    if (arg2 != PR_TIMING_STATISTICAL) {
     error = -EINVAL;
-    break;
-    case PR_SET_NAME:
-    comm[sizeof(me.comm) - 1] = 0;
-    if (strncpy_from_user(comm, (char __user *)arg2,
-    sizeof(me.comm) - 1) < 0)
+    }
+    // break;
+    }
+    PR_SET_NAME => {
+    comm[sizeof!(me.comm) - 1] = 0;
+    if (strncpy_from_user(comm, arg2,
+    sizeof!(me.comm) - 1) < 0) {
     return -EFAULT;
+    }
     set_task_comm(me, comm);
     proc_comm_connector(me);
-    break;
-    case PR_GET_NAME:
+    // break;
+    }
+    PR_GET_NAME => {
     get_task_comm(comm, me);
-    if (copy_to_user((char __user *)arg2, comm, sizeof(comm)))
+    if (copy_to_user(arg2, comm, sizeof!(comm))) {
     return -EFAULT;
-    break;
-    case PR_GET_ENDIAN:
+    }
+    // break;
+    }
+    PR_GET_ENDIAN => {
     error = GET_ENDIAN(me, arg2);
-    break;
-    case PR_SET_ENDIAN:
+    // break;
+    }
+    PR_SET_ENDIAN => {
     error = SET_ENDIAN(me, arg2);
-    break;
-    case PR_GET_SECCOMP:
+    // break;
+    }
+    PR_GET_SECCOMP => {
     error = prctl_get_seccomp();
-    break;
-    case PR_SET_SECCOMP:
-    error = prctl_set_seccomp(arg2, (char __user *)arg3);
-    break;
-    case PR_GET_TSC:
+    // break;
+    }
+    PR_SET_SECCOMP => {
+    error = prctl_set_seccomp(arg2, arg3);
+    // break;
+    }
+    PR_GET_TSC => {
     error = GET_TSC_CTL(arg2);
-    break;
-    case PR_SET_TSC:
+    // break;
+    }
+    PR_SET_TSC => {
     error = SET_TSC_CTL(arg2);
-    break;
-    case PR_TASK_PERF_EVENTS_DISABLE:
+    // break;
+    }
+    PR_TASK_PERF_EVENTS_DISABLE => {
     error = perf_event_task_disable();
-    break;
-    case PR_TASK_PERF_EVENTS_ENABLE:
+    // break;
+    }
+    PR_TASK_PERF_EVENTS_ENABLE => {
     error = perf_event_task_enable();
-    break;
-    case PR_GET_TIMERSLACK:
-    if (current.timer_slack_ns > ULONG_MAX)
+    // break;
+    }
+    PR_GET_TIMERSLACK => {
+    if (current.timer_slack_ns > ULONG_MAX) {
     error = ULONG_MAX;
-    else
+    }
+    else {
     error = current.timer_slack_ns;
-    break;
-    case PR_SET_TIMERSLACK:
-    if (rt_or_dl_task_policy(current))
-    break;
-    if (arg2 <= 0)
+    }
+    // break;
+    }
+    PR_SET_TIMERSLACK => {
+    if (rt_or_dl_task_policy(current)) {
+    // break;
+    }
+    if (arg2 <= 0) {
     current.timer_slack_ns =
     current.default_timer_slack_ns;
-    else
+    }
+    else {
     current.timer_slack_ns = arg2;
-    break;
-    case PR_MCE_KILL:
-    if (arg4 | arg5)
-    return -EINVAL;
-    switch (arg2) {
-    case PR_MCE_KILL_CLEAR:
-    if (arg3 != 0)
-    return -EINVAL;
-    current.flags &= ~PF_MCE_PROCESS;
-    break;
-    case PR_MCE_KILL_SET:
-    current.flags |= PF_MCE_PROCESS;
-    if (arg3 == PR_MCE_KILL_EARLY)
-    current.flags |= PF_MCE_EARLY;
-#[no_mangle]
-pub unsafe extern "C" fn if(PR_MCE_KILL_LATE: arg3 ==) -> else {
-    else if (arg3 == PR_MCE_KILL_LATE)
-    current.flags &= ~PF_MCE_EARLY;
-#[no_mangle]
-pub unsafe extern "C" fn if(PR_MCE_KILL_DEFAULT: arg3 ==) -> else {
-    else if (arg3 == PR_MCE_KILL_DEFAULT)
-    current.flags &=
-    ~(PF_MCE_EARLY|PF_MCE_PROCESS);
-    else
-    return -EINVAL;
-    break;
-    default:
+    }
+    // break;
+    }
+    PR_MCE_KILL => {
+    if (arg4 | arg5) {
     return -EINVAL;
     }
-    break;
-    case PR_MCE_KILL_GET:
-    if (arg2 | arg3 | arg4 | arg5)
+    match (arg2) {
+    PR_MCE_KILL_CLEAR => {
+    if (arg3 != 0) {
     return -EINVAL;
-    if (current.flags & PF_MCE_PROCESS)
+    }
+    current.flags &= ~PF_MCE_PROCESS;
+    // break;
+    }
+    PR_MCE_KILL_SET => {
+    current.flags |= PF_MCE_PROCESS;
+    if (arg3 == PR_MCE_KILL_EARLY) {
+    current.flags |= PF_MCE_EARLY;
+    }
+
+    else if (arg3 == PR_MCE_KILL_LATE) {
+    current.flags &= ~PF_MCE_EARLY;
+    }
+
+    else if (arg3 == PR_MCE_KILL_DEFAULT) {
+    current.flags &=
+    ~(PF_MCE_EARLY|PF_MCE_PROCESS);
+    }
+    else {
+    return -EINVAL;
+    }
+    // break;
+// label;
+    return -EINVAL;
+    }
+    // break;
+    case PR_MCE_KILL_GET:
+    if (arg2 | arg3 | arg4 | arg5) {
+    return -EINVAL;
+    }
+    if (current.flags & PF_MCE_PROCESS) {
     error = (current.flags & PF_MCE_EARLY) ?
     PR_MCE_KILL_EARLY : PR_MCE_KILL_LATE;
-    else
+    }
+    else {
     error = PR_MCE_KILL_DEFAULT;
-    break;
+    }
+    // break;
     case PR_SET_MM:
     error = prctl_set_mm(arg2, arg3, arg4, arg5);
-    break;
+    // break;
     case PR_GET_TID_ADDRESS:
-    error = prctl_get_tid_address(me, (int __user * __user *)arg2);
-    break;
+    error = prctl_get_tid_address(me, (int  *  *)arg2);
+    // break;
     case PR_SET_CHILD_SUBREAPER:
     me.signal.is_child_subreaper = !!arg2;
-    if (!arg2)
-    break;
+    if (!arg2) {
+    // break;
+    }
     walk_process_tree(me, propagate_has_child_subreaper, core::ptr::null_mut());
-    break;
+    // break;
     case PR_GET_CHILD_SUBREAPER:
     error = put_user(me.signal.is_child_subreaper,
-    (int __user *)arg2);
-    break;
+    arg2);
+    // break;
     case PR_SET_NO_NEW_PRIVS:
-    if (arg2 != 1 || arg3 || arg4 || arg5)
+    if (arg2 != 1 || arg3 || arg4 || arg5) {
     return -EINVAL;
+    }
     task_set_no_new_privs(current);
-    break;
+    // break;
     case PR_GET_NO_NEW_PRIVS:
-    if (arg2 || arg3 || arg4 || arg5)
+    if (arg2 || arg3 || arg4 || arg5) {
     return -EINVAL;
+    }
     return task_no_new_privs(current) ? 1 : 0;
     case PR_GET_THP_DISABLE:
     error = prctl_get_thp_disable(arg2, arg3, arg4, arg5);
-    break;
+    // break;
     case PR_SET_THP_DISABLE:
     error = prctl_set_thp_disable(arg2, arg3, arg4, arg5);
-    break;
+    // break;
     case PR_MPX_ENABLE_MANAGEMENT:
     case PR_MPX_DISABLE_MANAGEMENT:
 // No longer implemented:
     return -EINVAL;
     case PR_SET_FP_MODE:
     error = SET_FP_MODE(me, arg2);
-    break;
+    // break;
     case PR_GET_FP_MODE:
     error = GET_FP_MODE(me);
-    break;
+    // break;
     case PR_SVE_SET_VL:
     error = SVE_SET_VL(arg2);
-    break;
+    // break;
     case PR_SVE_GET_VL:
     error = SVE_GET_VL();
-    break;
+    // break;
     case PR_SME_SET_VL:
     error = SME_SET_VL(arg2);
-    break;
+    // break;
     case PR_SME_GET_VL:
     error = SME_GET_VL();
-    break;
+    // break;
     case PR_GET_SPECULATION_CTRL:
-    if (arg3 || arg4 || arg5)
+    if (arg3 || arg4 || arg5) {
     return -EINVAL;
+    }
     error = arch_prctl_spec_ctrl_get(me, arg2);
-    break;
+    // break;
     case PR_SET_SPECULATION_CTRL:
-    if (arg4 || arg5)
+    if (arg4 || arg5) {
     return -EINVAL;
+    }
     error = arch_prctl_spec_ctrl_set(me, arg2, arg3);
-    break;
+    // break;
     case PR_PAC_RESET_KEYS:
-    if (arg3 || arg4 || arg5)
+    if (arg3 || arg4 || arg5) {
     return -EINVAL;
+    }
     error = PAC_RESET_KEYS(me, arg2);
-    break;
+    // break;
     case PR_PAC_SET_ENABLED_KEYS:
-    if (arg4 || arg5)
+    if (arg4 || arg5) {
     return -EINVAL;
+    }
     error = PAC_SET_ENABLED_KEYS(me, arg2, arg3);
-    break;
+    // break;
     case PR_PAC_GET_ENABLED_KEYS:
-    if (arg2 || arg3 || arg4 || arg5)
+    if (arg2 || arg3 || arg4 || arg5) {
     return -EINVAL;
+    }
     error = PAC_GET_ENABLED_KEYS(me);
-    break;
+    // break;
     case PR_SET_TAGGED_ADDR_CTRL:
-    if (arg3 || arg4 || arg5)
+    if (arg3 || arg4 || arg5) {
     return -EINVAL;
+    }
     error = SET_TAGGED_ADDR_CTRL(arg2);
-    break;
+    // break;
     case PR_GET_TAGGED_ADDR_CTRL:
-    if (arg2 || arg3 || arg4 || arg5)
+    if (arg2 || arg3 || arg4 || arg5) {
     return -EINVAL;
+    }
     error = GET_TAGGED_ADDR_CTRL();
-    break;
+    // break;
     case PR_SET_IO_FLUSHER:
-    if (!capable(CAP_SYS_RESOURCE))
+    if (!capable(CAP_SYS_RESOURCE)) {
     return -EPERM;
-    if (arg3 || arg4 || arg5)
+    }
+    if (arg3 || arg4 || arg5) {
     return -EINVAL;
-    if (arg2 == 1)
+    }
+    if (arg2 == 1) {
     current.flags |= PR_IO_FLUSHER;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !arg2) -> else {
-    else if (!arg2)
+    }
+
+    else if (!arg2) {
     current.flags &= ~PR_IO_FLUSHER;
-    else
+    }
+    else {
     return -EINVAL;
-    break;
+    }
+    // break;
     case PR_GET_IO_FLUSHER:
-    if (!capable(CAP_SYS_RESOURCE))
+    if (!capable(CAP_SYS_RESOURCE)) {
     return -EPERM;
-    if (arg2 || arg3 || arg4 || arg5)
+    }
+    if (arg2 || arg3 || arg4 || arg5) {
     return -EINVAL;
+    }
     error = (current.flags & PR_IO_FLUSHER) == PR_IO_FLUSHER;
-    break;
+    // break;
     case PR_SET_SYSCALL_USER_DISPATCH:
     error = set_syscall_user_dispatch(arg2, arg3, arg4,
-    (char __user *) arg5);
-    break;
+     arg5);
+    // break;
 
     case PR_SCHED_CORE:
     error = sched_core_share_pid(arg2, arg3, arg4, arg5);
-    break;
+    // break;
 
     case PR_SET_MDWE:
     error = prctl_set_mdwe(arg2, arg3, arg4, arg5);
-    break;
+    // break;
     case PR_GET_MDWE:
     error = prctl_get_mdwe(arg2, arg3, arg4, arg5);
-    break;
+    // break;
     case PR_PPC_GET_DEXCR:
-    if (arg3 || arg4 || arg5)
+    if (arg3 || arg4 || arg5) {
     return -EINVAL;
+    }
     error = PPC_GET_DEXCR_ASPECT(me, arg2);
-    break;
+    // break;
     case PR_PPC_SET_DEXCR:
-    if (arg4 || arg5)
+    if (arg4 || arg5) {
     return -EINVAL;
+    }
     error = PPC_SET_DEXCR_ASPECT(me, arg2, arg3);
-    break;
+    // break;
     case PR_SET_VMA:
     error = prctl_set_vma(arg2, arg3, arg4, arg5);
-    break;
+    // break;
     case PR_GET_AUXV:
-    if (arg4 || arg5)
+    if (arg4 || arg5) {
     return -EINVAL;
-    error = prctl_get_auxv((void __user *)arg2, arg3);
-    break;
+    }
+    error = prctl_get_auxv(arg2, arg3);
+    // break;
 
     case PR_SET_MEMORY_MERGE:
-    if (arg3 || arg4 || arg5)
+    if (arg3 || arg4 || arg5) {
     return -EINVAL;
-    if (mmap_write_lock_killable(me.mm))
+    }
+    if (mmap_write_lock_killable(me.mm)) {
     return -EINTR;
-    if (arg2)
+    }
+    if (arg2) {
     error = ksm_enable_merge_any(me.mm);
-    else
+    }
+    else {
     error = ksm_disable_merge_any(me.mm);
+    }
     mmap_write_unlock(me.mm);
-    break;
+    // break;
     case PR_GET_MEMORY_MERGE:
-    if (arg2 || arg3 || arg4 || arg5)
+    if (arg2 || arg3 || arg4 || arg5) {
     return -EINVAL;
+    }
     error = !!mm_flags_test(MMF_VM_MERGE_ANY, me.mm);
-    break;
+    // break;
 
     case PR_RISCV_V_SET_CONTROL:
     error = RISCV_V_SET_CONTROL(arg2);
-    break;
+    // break;
     case PR_RISCV_V_GET_CONTROL:
     error = RISCV_V_GET_CONTROL();
-    break;
+    // break;
     case PR_RISCV_SET_ICACHE_FLUSH_CTX:
     error = RISCV_SET_ICACHE_FLUSH_CTX(arg2, arg3);
-    break;
+    // break;
     case PR_GET_SHADOW_STACK_STATUS:
-    if (arg3 || arg4 || arg5)
+    if (arg3 || arg4 || arg5) {
     return -EINVAL;
-    error = arch_get_shadow_stack_status(me, (unsigned long __user *) arg2);
-    break;
+    }
+    error = arch_get_shadow_stack_status(me,  arg2);
+    // break;
     case PR_SET_SHADOW_STACK_STATUS:
-    if (arg3 || arg4 || arg5)
+    if (arg3 || arg4 || arg5) {
     return -EINVAL;
+    }
     error = arch_set_shadow_stack_status(me, arg2);
-    break;
+    // break;
     case PR_LOCK_SHADOW_STACK_STATUS:
-    if (arg3 || arg4 || arg5)
+    if (arg3 || arg4 || arg5) {
     return -EINVAL;
+    }
     error = arch_lock_shadow_stack_status(me, arg2);
-    break;
+    // break;
     case PR_TIMER_CREATE_RESTORE_IDS:
-    if (arg3 || arg4 || arg5)
+    if (arg3 || arg4 || arg5) {
     return -EINVAL;
+    }
     error = posixtimer_create_prctl(arg2);
-    break;
+    // break;
     case PR_FUTEX_HASH:
     error = futex_hash_prctl(arg2, arg3, arg4);
-    break;
+    // break;
     case PR_RSEQ_SLICE_EXTENSION:
-    if (arg4 || arg5)
+    if (arg4 || arg5) {
     return -EINVAL;
+    }
     error = rseq_slice_extension_prctl(arg2, arg3);
-    break;
+    // break;
     case PR_GET_CFI:
-    if (arg2 != PR_CFI_BRANCH_LANDING_PADS)
+    if (arg2 != PR_CFI_BRANCH_LANDING_PADS) {
     return -EINVAL;
-    if (arg4 || arg5)
+    }
+    if (arg4 || arg5) {
     return -EINVAL;
-    error = arch_prctl_get_branch_landing_pad_state(me, (unsigned long __user *)arg3);
-    break;
+    }
+    error = arch_prctl_get_branch_landing_pad_state(me, arg3);
+    // break;
     case PR_SET_CFI:
-    if (arg2 != PR_CFI_BRANCH_LANDING_PADS)
+    if (arg2 != PR_CFI_BRANCH_LANDING_PADS) {
     return -EINVAL;
-    if (arg4 || arg5)
+    }
+    if (arg4 || arg5) {
     return -EINVAL;
+    }
     error = arch_prctl_set_branch_landing_pad_state(me, arg3);
-    if (error)
-    break;
-    if (arg3 & PR_CFI_LOCK && !(arg3 & PR_CFI_DISABLE))
+    if (error) {
+    // break;
+    }
+    if (arg3 & PR_CFI_LOCK && !(arg3 & PR_CFI_DISABLE)) {
     error = arch_prctl_lock_branch_landing_pad_state(me);
-    break;
-    default:
+    }
+    // break;
+// label;
     trace_task_prctl_unknown(option, arg2, arg3, arg4, arg5);
     error = -EINVAL;
-    break;
+    // break;
     }
     return error;
     }
-    SYSCALL_DEFINE3(getcpu, unsigned __user *, cpup, unsigned __user *, nodep, void __user *, unused)
-    {
-    let mut err: c_int = 0;
-    let mut cpu: c_int = raw_smp_processor_id();
-    if (cpup)
+#[no_mangle]
+pub unsafe extern "C" fn sys_getcpu(cpup: usize, nodep: usize, unused: usize) -> c_long {
+pub static mut err: c_int = 0;
+pub static mut cpu: c_int = 0;
+    if (cpup) {
     err |= put_user(cpu, cpup);
-    if (nodep)
+    }
+    if (nodep) {
     err |= put_user(cpu_to_node(cpu), nodep);
+    }
     return err ? -EFAULT : 0;
     }
 //
@@ -2488,9 +3040,10 @@ pub unsafe extern "C" fn if(_arg: !arg2) -> else {
 #[no_mangle]
 unsafe extern "C" fn do_sysinfo(info: *mut sysinfo) -> c_int {
     unsigned long mem_total, sav_total;
-    unsigned int mem_unit, bitcount;
-    struct timespec64 tp;
-    memset(info, 0, sizeof(struct sysinfo));
+    let mut mem_unit = 0;
+    let mut bitcount = 0;
+pub static mut tp: usize = 0;
+    memset(info, 0, sizeof!(sysinfo));
     ktime_get_boottime_ts64(&tp);
     timens_add_boottime(&tp);
     info.uptime = tp.tv_sec + (tp.tv_nsec ? 1 : 0);
@@ -2507,17 +3060,19 @@ unsafe extern "C" fn do_sysinfo(info: *mut sysinfo) -> c_int {
 // -Erik Andersen <andersee@debian.org>
 //
     mem_total = info.totalram + info.totalswap;
-    if (mem_total < info.totalram || mem_total < info.totalswap)
-    goto out;
+    if (mem_total < info.totalram || mem_total < info.totalswap) {
+// goto;
+    }
     bitcount = 0;
     mem_unit = info.mem_unit;
     while (mem_unit > 1) {
-    bitcount++;
+    bitcount += 1;
     mem_unit >>= 1;
     sav_total = mem_total;
     mem_total <<= 1;
-    if (mem_total < sav_total)
-    goto out;
+    if (mem_total < sav_total) {
+// goto;
+    }
     }
 //
 // If mem_total did not overflow, multiply all memory values by
@@ -2534,15 +3089,16 @@ unsafe extern "C" fn do_sysinfo(info: *mut sysinfo) -> c_int {
     info.freeswap <<= bitcount;
     info.totalhigh <<= bitcount;
     info.freehigh <<= bitcount;
-    out:
+// label;
     return 0;
     }
-    SYSCALL_DEFINE1(sysinfo, struct sysinfo __user *, info)
-    {
-    struct sysinfo val;
+#[no_mangle]
+pub unsafe extern "C" fn sys_sysinfo(info: usize) -> c_long {
+pub static mut val: usize = 0;
     do_sysinfo(&val);
-    if (copy_to_user(info, &val, sizeof(struct sysinfo)))
+    if (copy_to_user(info, &val, sizeof!(sysinfo))) {
     return -EFAULT;
+    }
     return 0;
     }
 
@@ -2562,22 +3118,24 @@ pub struct compat_sysinfo {
     pub totalhigh: u32,
     pub freehigh: u32,
     pub mem_unit: u32,
-    pub _f: [*mut c_char; 20-2*sizeof(u32)-sizeof(int)],
+    pub _f: [*mut c_char; 20-2*sizeof!(u32)-sizeof!(int)],
 }
 
-    COMPAT_SYSCALL_DEFINE1(sysinfo, struct compat_sysinfo __user *, info)
-    {
-    struct sysinfo s;
-    struct compat_sysinfo s_32;
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sys_sysinfo
+pub unsafe extern "C" fn sys_sysinfo_dup(info: usize) -> c_long {
+pub static mut s: usize = 0;
+pub static mut s_32: usize = 0;
     do_sysinfo(&s);
 // Check to see if any memory value is too large for 32-bit and scale
 // down if needed
 //
     if (upper_32_bits(s.totalram) || upper_32_bits(s.totalswap)) {
-    let mut bitcount: c_int = 0;
+pub static mut bitcount: c_int = 0;
     while (s.mem_unit < PAGE_SIZE) {
     s.mem_unit <<= 1;
-    bitcount++;
+    bitcount += 1;
     }
     s.totalram >>= bitcount;
     s.freeram >>= bitcount;
@@ -2588,7 +3146,7 @@ pub struct compat_sysinfo {
     s.totalhigh >>= bitcount;
     s.freehigh >>= bitcount;
     }
-    memset(&s_32, 0, sizeof(s_32));
+    memset(&s_32, 0, sizeof!(s_32));
     s_32.uptime = s.uptime;
     s_32.loads[0] = s.loads[0];
     s_32.loads[1] = s.loads[1];
@@ -2603,13 +3161,11 @@ pub struct compat_sysinfo {
     s_32.totalhigh = s.totalhigh;
     s_32.freehigh = s.freehigh;
     s_32.mem_unit = s.mem_unit;
-    if (copy_to_user(info, &s_32, sizeof(s_32)))
+    if (copy_to_user(info, &s_32, sizeof!(s_32))) {
     return -EFAULT;
+    }
     return 0;
     }
 
-}
-}
-}
 }
 }

@@ -34,6 +34,216 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
 macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
@@ -167,13 +377,13 @@ unsafe extern "C" fn setup_dmcryptkeys(arg: *mut c_char) -> c_int {
     dm_crypt_keys_addr = 0;
     return -EINVAL;
     }
-    early_param("dmcryptkeys", setup_dmcryptkeys);
+    early_param!("dmcryptkeys", setup_dmcryptkeys);
 //
 // Architectures may override this function to read dm crypt keys
 //
 #[no_mangle]
 pub unsafe extern "C" fn dm_crypt_keys_read(buf: *mut c_char, count: usize, ppos: *mut u64) -> ssize_t __weak {
-pub static mut kvec: kvec = { .iov_base = buf, .iov_len = count };
+pub static mut kvec: kvec = 0;
     let mut iter;
     iov_iter_kvec(&iter, READ, &kvec, 1, count);
     return read_from_oldmem(&iter, count, ppos, cc_platform_has(CC_ATTR_MEM_ENCRYPT));
@@ -221,11 +431,11 @@ pub static mut ret: c_int = 0;
     return PTR_ERR(keyring_ref);
     }
     addr = dm_crypt_keys_addr;
-    dm_crypt_keys_read(&key_count, sizeof(key_count), &addr);
+    dm_crypt_keys_read(&key_count, sizeof!(key_count), &addr);
     if (key_count > KEY_NUM_MAX) {
     kexec_dprintk("Failed to read the number of dm-crypt keys\n");
     ret = -1;
-    goto out;
+// goto;
     }
     kexec_dprintk("There are %u keys\n", key_count);
     addr = dm_crypt_keys_addr;
@@ -233,15 +443,15 @@ pub static mut ret: c_int = 0;
     keys_header = kzalloc(keys_header_size, GFP_KERNEL);
     if (!keys_header) {
     ret = -ENOMEM;
-    goto out;
+// goto;
     }
     dm_crypt_keys_read(keys_header, keys_header_size, &addr);
-    for (int i = 0; i < keys_header.total_keys; i++) {
+    while (i < keys_header.total_keys) {
     key = &keys_header.keys[i];
     kexec_dprintk("Get key (size=%u)\n", key.key_size);
     add_key_to_keyring(key, keyring_ref);
     }
-    out:
+// label;
     key_ref_put(keyring_ref);
     return ret;
     }
@@ -253,25 +463,25 @@ pub static mut ret: c_int = 0;
     kexec_dprintk("Requesting logon key %s", dm_key.key_desc);
     key = request_key(&key_type_logon, dm_key.key_desc, core::ptr::null_mut());
     if (IS_ERR(key)) {
-    pr_warn("No such logon key %s\n", dm_key.key_desc);
+    pr_warn!("No such logon key %s\n", dm_key.key_desc);
     return PTR_ERR(key);
     }
     down_read(&key.sem);
     ukp = user_key_payload_locked(key);
     if (!ukp) {
     ret = -EKEYREVOKED;
-    goto out;
+// goto;
     }
     if (ukp.datalen > KEY_SIZE_MAX) {
-    pr_err("Key size %u exceeds maximum (%u)\n", ukp.datalen, KEY_SIZE_MAX);
+    pr_err!("Key size %u exceeds maximum (%u)\n", ukp.datalen, KEY_SIZE_MAX);
     ret = -EINVAL;
-    goto out;
+// goto;
     }
     memcpy(dm_key.data, ukp.data, ukp.datalen);
     dm_key.key_size = ukp.datalen;
     kexec_dprintk("Get dm crypt key (size=%u) %s\n", dm_key.key_size,
     dm_key.key_desc);
-    out:
+// label;
     up_read(&key.sem);
     key_put(key);
     return ret;
@@ -285,7 +495,7 @@ pub struct config_key {
 
 #[no_mangle]
 pub unsafe extern "C" fn to_config_key() {
-    return container_of(item, struct config_key, item);
+    return container_of!(item, config_key, item);
     }
 #[no_mangle]
 unsafe extern "C" fn config_key_description_show(item: *mut config_item, page: *mut c_char) -> isize {
@@ -293,13 +503,13 @@ unsafe extern "C" fn config_key_description_show(item: *mut config_item, page: *
     }
 #[no_mangle]
 pub unsafe extern "C" fn config_key_description_store() {
-    struct config_key *config_key = to_config_key(item);
+    let mut config_key = to_config_key(item);
     let mut len = 0;
     let mut ret = 0;
     ret = -EINVAL;
     len = strcspn(page, "\n");
     if (len > KEY_DESC_MAX_LEN) {
-    pr_err("The key description shouldn't exceed %u characters", KEY_DESC_MAX_LEN);
+    pr_err!("The key description shouldn't exceed %u characters", KEY_DESC_MAX_LEN);
     return ret;
     }
     if (!len) {
@@ -321,7 +531,7 @@ pub unsafe extern "C" fn config_key_description_store() {
 #[no_mangle]
 unsafe extern "C" fn config_key_release(item: *mut config_item) {
     kfree(to_config_key(item));
-    key_count--;
+    key_count -= 1;
     }
 pub static mut configfs_item_operations: usize = 0;
 pub static mut config_item_type: usize = 0;
@@ -329,15 +539,15 @@ pub static mut config_item_type: usize = 0;
 pub unsafe extern "C" fn config_keys_make_item() {
     let mut config_key = core::ptr::null_mut();
     if (key_count > KEY_NUM_MAX) {
-    pr_err("Only %u keys at maximum to be created\n", KEY_NUM_MAX);
+    pr_err!("Only %u keys at maximum to be created\n", KEY_NUM_MAX);
     return ERR_PTR(-EINVAL);
     }
-    config_key = kzalloc_obj(struct config_key);
+    config_key = kzalloc_obj(config_key);
     if (!config_key) {
     return ERR_PTR(-ENOMEM);
     }
     config_item_init_type_name(&config_key.item, name, &config_key_type);
-    key_count++;
+    key_count += 1;
     return &config_key.item;
     }
 #[no_mangle]
@@ -401,9 +611,10 @@ pub static mut config_item_type: usize = 0;
 pub static mut configfs_subsystem: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn build_keys_header() -> c_int {
-    struct config_item *item = core::ptr::null_mut();
+    let mut item = core::ptr::null_mut();
     let mut key = core::ptr::null_mut();
-    int i, r;
+    let mut i = 0;
+    let mut r = 0;
     if (keys_header != core::ptr::null_mut()) {
     kvfree(keys_header);
     }
@@ -420,7 +631,7 @@ unsafe extern "C" fn build_keys_header() -> c_int {
     }
     key = to_config_key(item);
     if (!key.description) {
-    pr_warn("No key description for key %s\n", item.ci_name);
+    pr_warn!("No key description for key %s\n", item.ci_name);
     return -EINVAL;
     }
     strscpy(keys_header.keys[i].key_desc, key.description,
@@ -431,20 +642,14 @@ unsafe extern "C" fn build_keys_header() -> c_int {
     keys_header.keys[i].key_desc);
     return r;
     }
-    i++;
+    i += 1;
     kexec_dprintk("Found key: %s\n", item.ci_name);
     }
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn crash_load_dm_crypt_keys(image: *mut kimage) -> c_int {
-    struct kexec_buf kbuf = {
-    .image = image,
-    .buf_min = 0,
-    .buf_max = ULONG_MAX,
-    .top_down = false,
-    .random = true,
-    };
+pub static mut kexec_buf: usize = 0;
     let mut r = 0;
     if (key_count <= 0) {
     kexec_dprintk("No dm-crypt keys\n");
@@ -454,7 +659,7 @@ pub unsafe extern "C" fn crash_load_dm_crypt_keys(image: *mut kimage) -> c_int {
     image.dm_crypt_keys_addr = 0;
     r = build_keys_header();
     if (r) {
-    pr_err("Failed to build dm-crypt keys header, ret=%d\n", r);
+    pr_err!("Failed to build dm-crypt keys header, ret=%d\n", r);
     return r;
     }
     }
@@ -465,7 +670,7 @@ pub unsafe extern "C" fn crash_load_dm_crypt_keys(image: *mut kimage) -> c_int {
     kbuf.mem = KEXEC_BUF_MEM_UNKNOWN;
     r = kexec_add_buffer(&kbuf);
     if (r) {
-    pr_err("Failed to call kexec_add_buffer, ret=%d\n", r);
+    pr_err!("Failed to call kexec_add_buffer, ret=%d\n", r);
     kvfree(kbuf.buffer);
     return r;
     }
@@ -487,12 +692,12 @@ unsafe extern "C" fn configfs_dmcrypt_keys_init() -> c_int {
     mutex_init(&config_keys_subsys.su_mutex);
     ret = configfs_register_subsystem(&config_keys_subsys);
     if (ret) {
-    pr_err("Error %d while registering subsystem %s\n", ret,
+    pr_err!("Error %d while registering subsystem %s\n", ret,
     config_keys_subsys.su_group.cg_item.ci_namebuf);
-    goto out_unregister;
+// goto;
     }
     return 0;
-    out_unregister:
+// label;
     configfs_unregister_subsystem(&config_keys_subsys);
     return ret;
     }

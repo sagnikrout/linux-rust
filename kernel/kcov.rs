@@ -34,6 +34,216 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
 macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
@@ -168,7 +378,7 @@ pub struct kcov {
 // Size of arena (in long's).
     pub __guarded_by(&lock): unsigned int size,
 // Coverage buffer shared with user space.
-    pub __guarded_by(&lock): *mut *mut void area,
+    pub __guarded_by(&lock): *mut *mut c_void area,
 // Task for which we collect coverage, or NULL.
     pub __guarded_by(&lock): *mut *mut task_t,
 // Collecting coverage from remote (background) threads.
@@ -205,7 +415,7 @@ pub struct kcov_percpu_data {
     pub lock: local_lock_t,
 }
 
-    static DEFINE_PER_CPU(struct kcov_percpu_data, kcov_percpu_data) = {
+    static DEFINE_PER_CPU(kcov_percpu_data, kcov_percpu_data) = {
     .lock = INIT_LOCAL_LOCK(lock),
     };
 // Must be called with kcov_remote_lock locked.
@@ -240,9 +450,9 @@ pub unsafe extern "C" fn kcov_remote_add() {
 pub unsafe extern "C" fn kcov_remote_area_get() {
     let mut area = core::ptr::null_mut();
     let mut pos = core::ptr::null_mut();
-    struct list_head *list = &kcov_remote_areas[irq];
+    let mut list = &kcov_remote_areas[irq];
     list_for_each(pos, list) {
-    area = list_entry(pos, struct kcov_remote_area, list);
+    area = list_entry(pos, kcov_remote_area, list);
     if (area.size == size) {
     list_del(&area.list);
     return area;
@@ -261,7 +471,7 @@ pub unsafe extern "C" fn kcov_remote_area_put() {
 // is initialized. Unpoison it explicitly to avoid reports in
 // kcov_remote_area_get().
 //
-    kmsan_unpoison_memory(&area.list, sizeof(area.list));
+    kmsan_unpoison_memory(&area.list, sizeof!(area.list));
     }
 //
 // Unlike in_serving_softirq(), this function returns false when called during
@@ -291,7 +501,7 @@ unsafe extern "C" fn check_kcov_mode(needed_mode: kcov_mode, t: *mut task_struct
 // kcov_start().
 //
     barrier();
-pub static mut mode: return = = needed_mode;
+pub static mut mode: return = 0;
     }
 #[no_mangle]
 unsafe extern "C" fn canonicalize_ip(ip: c_ulong) -> notrace unsigned long {
@@ -307,8 +517,8 @@ unsafe extern "C" fn canonicalize_ip(ip: c_ulong) -> notrace unsigned long {
 #[no_mangle]
 pub unsafe extern "C" fn __sanitizer_cov_trace_pc() -> void notrace {
     let mut t = core::ptr::null_mut();
-    unsigned long *area;
-pub static mut ip: c_ulong = canonicalize_ip(_RET_IP_);
+pub static mut area: *mut c_void = core::ptr::null_mut();
+pub static mut ip: c_ulong = 0;
     let mut pos = 0;
     t = current;
     if (!check_kcov_mode(KCOV_MODE_TRACE_PC, t)) {
@@ -347,11 +557,11 @@ unsafe extern "C" fn write_comp_data(type: u64, arg1: u64, arg2: u64, ip: u64) -
 // The buffer was allocated for t->kcov_size unsigned longs.
 //
     area = t.kcov_area;
-    max_pos = t.kcov_size * sizeof(unsigned long);
+    max_pos = t.kcov_size * sizeof!(unsigned long);
     count = READ_ONCE(area[0]);
 // Every record is KCOV_WORDS_PER_CMP 64-bit words.
     start_index = 1 + count * KCOV_WORDS_PER_CMP;
-    end_pos = (start_index + KCOV_WORDS_PER_CMP) * sizeof(u64);
+    end_pos = (start_index + KCOV_WORDS_PER_CMP) * sizeof!(u64);
     if (likely(end_pos <= max_pos)) {
 // See comment in __sanitizer_cov_trace_pc().
 // WRITE_ONCE;
@@ -409,28 +619,34 @@ pub unsafe extern "C" fn __sanitizer_cov_trace_const_cmp8(arg1: kcov_u64, arg2: 
 #[no_mangle]
 pub unsafe extern "C" fn __sanitizer_cov_trace_switch(val: kcov_u64, arg: *mut c_void) -> void notrace {
     let mut i = 0;
-    u64 *cases = arg;
-pub static mut count: u64 = cases[0];
-pub static mut size: u64 = cases[1];
-pub static mut type: u64 = KCOV_CMP_CONST;
+    let mut cases = arg;
+pub static mut count: u64 = 0;
+pub static mut size: u64 = 0;
+pub static mut type: u64 = 0;
     match (size) {
     8 => {
     type |= KCOV_CMP_SIZE(0);
-    break;
+    // break;
+    }
     16 => {
     type |= KCOV_CMP_SIZE(1);
-    break;
+    // break;
+    }
     32 => {
     type |= KCOV_CMP_SIZE(2);
-    break;
+    // break;
+    }
     64 => {
     type |= KCOV_CMP_SIZE(3);
-    break;
+    // break;
+    }
     _ => {
     return;
     }
-    for (i = 0; i < count; i++)
+    }
+    for (i = 0; i < count; i++) {
     write_comp_data(type, cases[i + 2], val, _RET_IP_);
+    }
     }
 // EXPORT_SYMBOL;
 
@@ -479,7 +695,7 @@ unsafe extern "C" fn kcov_reset(kcov: *mut kcov) {
     kcov.mode = KCOV_MODE_INIT;
     kcov.remote = false;
     kcov.remote_size = 0;
-    kcov.sequence++;
+    kcov.sequence += 1;
     }
 #[no_mangle]
 unsafe extern "C" fn kcov_remote_reset(kcov: *mut kcov) {
@@ -544,7 +760,7 @@ pub unsafe extern "C" fn kcov_task_exit(t: *mut task_struct) {
 // kcov instance and hasn't called KCOV_DISABLE.
 // Make sure that t->kcov->t is consistent.
 //
-    if (WARN_ON(kcov.remote) || WARN_ON(kcov.t != t)) {
+    if (WARN_ON!(kcov.remote) || WARN_ON!(kcov.t != t)) {
     spin_unlock_irqrestore(&kcov.lock, flags);
     return;
     }
@@ -562,7 +778,7 @@ pub unsafe extern "C" fn kcov_task_exit(t: *mut task_struct) {
 // user task which has requested remote coverage collection.
 // Make sure that t->kcov->t is consistent.
 //
-    if (WARN_ON(!kcov.remote) || WARN_ON(kcov.t != t)) {
+    if (WARN_ON!(!kcov.remote) || WARN_ON!(kcov.t != t)) {
     spin_unlock_irqrestore(&kcov.lock, flags);
     return;
     }
@@ -575,22 +791,22 @@ pub unsafe extern "C" fn kcov_task_exit(t: *mut task_struct) {
 #[no_mangle]
 unsafe extern "C" fn kcov_mmap(filep: *mut file, vma: *mut vm_area_struct) -> c_int {
 pub static mut res: c_int = 0;
-    struct kcov *kcov = vma.vm_file.private_data;
+    let mut kcov = vma.vm_file.private_data;
     unsigned long size, off;
     let mut page = core::ptr::null_mut();
     let mut flags = 0;
     let mut area = core::ptr::null_mut();
     spin_lock_irqsave(&kcov.lock, flags);
-    size = kcov.size * sizeof(unsigned long);
+    size = kcov.size * sizeof!(unsigned long);
     if (kcov.area == core::ptr::null_mut() || vma_start_pgoff(vma) ||
     vma.vm_end - vma.vm_start != size) {
     res = -EINVAL;
-    goto exit;
+// goto;
     }
     area = kcov.area;
     spin_unlock_irqrestore(&kcov.lock, flags);
     vm_flags_set(vma, VM_DONTEXPAND);
-    for (off = 0; off < size; off += PAGE_SIZE) {
+    while (off < size) {
     page = vmalloc_to_page(area + off);
     res = vm_insert_page(vma, vma.vm_start + off, page);
     if (res) {
@@ -599,7 +815,7 @@ pub static mut res: c_int = 0;
     }
     }
     return 0;
-    exit:
+// label;
     spin_unlock_irqrestore(&kcov.lock, flags);
     return res;
     }
@@ -627,11 +843,11 @@ unsafe extern "C" fn kcov_get_mode(arg: c_ulong) -> c_int {
     if (arg == KCOV_TRACE_PC) {
     return KCOV_MODE_TRACE_PC;
     }
-#[no_mangle]
-pub unsafe extern "C" fn if(KCOV_TRACE_CMP: arg ==) -> else {
-    else if (arg == KCOV_TRACE_CMP)
+
+    else if (arg == KCOV_TRACE_CMP) {
 
     return KCOV_MODE_TRACE_CMP;
+    }
 
     return -ENOTSUPP;
 
@@ -646,11 +862,12 @@ pub unsafe extern "C" fn if(KCOV_TRACE_CMP: arg ==) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn kcov_fault_in_area(kcov: *mut kcov) {
-pub static mut stride: c_ulong = PAGE_SIZE / sizeof(unsigned long);
-    unsigned long *area = kcov.area;
+pub static mut stride: c_ulong = 0;
+    let mut area = kcov.area;
     let mut offset = 0;
-    for (offset = 0; offset < kcov.size; offset += stride)
+    for (offset = 0; offset < kcov.size; offset += stride) {
 // READ_ONCE;
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn kcov_check_handle() {
@@ -661,10 +878,13 @@ pub unsafe extern "C" fn kcov_check_handle() {
     KCOV_SUBSYSTEM_COMMON => {
     return (handle & KCOV_INSTANCE_MASK) ?
     common_valid : zero_valid;
+    }
     KCOV_SUBSYSTEM_USB => {
     return uncommon_valid;
+    }
     _ => {
     return false;
+    }
     }
     return false;
     }
@@ -672,7 +892,8 @@ pub unsafe extern "C" fn kcov_check_handle() {
 pub unsafe extern "C" fn kcov_ioctl_locked() {
     let mut t = core::ptr::null_mut();
     unsigned long flags, unused;
-    int mode, i;
+    let mut mode = 0;
+    let mut i = 0;
     let mut remote_arg = core::ptr::null_mut();
     let mut remote = core::ptr::null_mut();
     match (cmd) {
@@ -703,6 +924,7 @@ pub unsafe extern "C" fn kcov_ioctl_locked() {
 // Put either in kcov_task_exit() or in KCOV_DISABLE.
     kcov_get(kcov);
     return 0;
+    }
     KCOV_DISABLE => {
 // Disable coverage for the current task.
     unused = arg;
@@ -710,12 +932,13 @@ pub unsafe extern "C" fn kcov_ioctl_locked() {
     if (unused != 0 || (kcov != t.kcov && kcov != t.kcov_remote)) {
     return -EINVAL;
     }
-    if (WARN_ON(kcov.t != t)) {
+    if (WARN_ON!(kcov.t != t)) {
     return -EINVAL;
     }
     kcov_disable(t, kcov);
     kcov_put(kcov);
     return 0;
+    }
     KCOV_REMOTE_ENABLE => {
     if (kcov.mode != KCOV_MODE_INIT || !kcov.area) {
     return -EINVAL;
@@ -730,15 +953,16 @@ pub unsafe extern "C" fn kcov_ioctl_locked() {
     return mode;
     }
     if ((unsigned long)remote_arg.area_size >
-    LONG_MAX / sizeof(unsigned long))
+    LONG_MAX / sizeof!(unsigned long)) {
     return -EINVAL;
+    }
     kcov.mode = mode;
     t.kcov_remote = kcov;
     kcov.t = t;
     kcov.remote = true;
     kcov.remote_size = remote_arg.area_size;
     spin_lock_irqsave(&kcov_remote_lock, flags);
-    for (i = 0; i < remote_arg.num_handles; i++) {
+    while (i < remote_arg.num_handles) {
     if (!kcov_check_handle(remote_arg.handles[i],
     false, true, false)) {
     spin_unlock_irqrestore(&kcov_remote_lock,
@@ -776,15 +1000,17 @@ pub unsafe extern "C" fn kcov_ioctl_locked() {
 // Put either in kcov_task_exit() or in KCOV_DISABLE.
     kcov_get(kcov);
     return 0;
+    }
     _ => {
     return -ENOTTY;
+    }
     }
     }
 #[no_mangle]
 unsafe extern "C" fn kcov_ioctl(filep: *mut file, cmd: c_uint, arg: c_ulong) -> c_long {
     let mut kcov = core::ptr::null_mut();
     let mut res = 0;
-    struct kcov_remote_arg *remote_arg = core::ptr::null_mut();
+    let mut remote_arg = core::ptr::null_mut();
     let mut remote_num_handles = 0;
     let mut remote_arg_size = 0;
     unsigned long size, flags;
@@ -800,10 +1026,10 @@ unsafe extern "C" fn kcov_ioctl(filep: *mut file, cmd: c_uint, arg: c_ulong) -> 
 // to hold the current position and one PC.
 //
     size = arg;
-    if (size < 2 || size > INT_MAX / sizeof(unsigned long)) {
+    if (size < 2 || size > INT_MAX / sizeof!(unsigned long)) {
     return -EINVAL;
     }
-    area = vmalloc_user(size * sizeof(unsigned long));
+    area = vmalloc_user(size * sizeof!(unsigned long));
     if (area == core::ptr::null_mut()) {
     return -ENOMEM;
     }
@@ -818,16 +1044,18 @@ unsafe extern "C" fn kcov_ioctl(filep: *mut file, cmd: c_uint, arg: c_ulong) -> 
     kcov.mode = KCOV_MODE_INIT;
     spin_unlock_irqrestore(&kcov.lock, flags);
     return 0;
+    }
     KCOV_REMOTE_ENABLE => {
     if (get_user(remote_num_handles, (arg +
-    offsetof(struct kcov_remote_arg, num_handles))))
+    offsetof(kcov_remote_arg, num_handles)))) {
     return -EFAULT;
+    }
     if (remote_num_handles > KCOV_REMOTE_MAX_HANDLES) {
     return -EINVAL;
     }
     remote_arg_size = struct_size(remote_arg, handles,
     remote_num_handles);
-    remote_arg = memdup_user((void __user *)arg, remote_arg_size);
+    remote_arg = memdup_user(arg, remote_arg_size);
     if (IS_ERR(remote_arg)) {
     return PTR_ERR(remote_arg);
     }
@@ -837,6 +1065,7 @@ unsafe extern "C" fn kcov_ioctl(filep: *mut file, cmd: c_uint, arg: c_ulong) -> 
     }
     arg = (unsigned long)remote_arg;
     fallthrough;
+    }
     _ => {
 //
 // All other commands can be normally executed under a spin lock, so we
@@ -847,6 +1076,7 @@ unsafe extern "C" fn kcov_ioctl(filep: *mut file, cmd: c_uint, arg: c_ulong) -> 
     spin_unlock_irqrestore(&kcov.lock, flags);
     kfree(remote_arg);
     return res;
+    }
     }
     }
 pub static mut file_operations: usize = 0;
@@ -925,7 +1155,7 @@ unsafe extern "C" fn kcov_remote_softirq_stop(t: *mut task_struct) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn kcov_remote_start(handle: u64) {
-    struct task_struct *t = current;
+    let mut t = current;
     let mut remote = core::ptr::null_mut();
     let mut kcov = core::ptr::null_mut();
     let mut mode = 0;
@@ -933,7 +1163,7 @@ pub unsafe extern "C" fn kcov_remote_start(handle: u64) {
     let mut size = 0;
     let mut sequence = 0;
     let mut flags = 0;
-    if (WARN_ON(!kcov_check_handle(handle, true, true, true))) {
+    if (WARN_ON!(!kcov_check_handle(handle, true, true, true))) {
     return;
     }
     if (!in_task() && !in_softirq_really()) {
@@ -945,7 +1175,7 @@ pub unsafe extern "C" fn kcov_remote_start(handle: u64) {
 // threads nor called by user tasks (with enabled kcov).
 //
     mode = READ_ONCE(t.kcov_mode);
-    if (WARN_ON(in_task() && kcov_mode_enabled(mode))) {
+    if (WARN_ON!(in_task() && kcov_mode_enabled(mode))) {
     local_unlock_irqrestore(&kcov_percpu_data.lock, flags);
     return;
     }
@@ -954,7 +1184,7 @@ pub unsafe extern "C" fn kcov_remote_start(handle: u64) {
 // Note, that kcov_remote_start() can be called from a softirq that
 // happened while collecting coverage from a background thread.
 //
-    if (WARN_ON(in_serving_softirq() && t.kcov_softirq)) {
+    if (WARN_ON!(in_serving_softirq() && t.kcov_softirq)) {
     local_unlock_irqrestore(&kcov_percpu_data.lock, flags);
     return;
     }
@@ -989,7 +1219,7 @@ pub unsafe extern "C" fn kcov_remote_start(handle: u64) {
 // Allocate new buffer if we can sleep.
     if (!area) {
     local_unlock_irqrestore(&kcov_percpu_data.lock, flags);
-    area = in_task() ? vmalloc(size * sizeof(unsigned long)) : core::ptr::null_mut();
+    area = in_task() ? vmalloc(size * sizeof!(unsigned long)) : core::ptr::null_mut();
     if (!area) {
     kcov_put(kcov);
     return;
@@ -1008,10 +1238,11 @@ pub unsafe extern "C" fn kcov_remote_start(handle: u64) {
 // EXPORT_SYMBOL;
 #[no_mangle]
 pub unsafe extern "C" fn kcov_move_area() {
-pub static mut word_size: u64 = sizeof(unsigned long);
+pub static mut word_size: u64 = 0;
     u64 count_size, entry_size_log;
     u64 dst_len, src_len;
-    void *dst_entries, *src_entries;
+    let mut dst_entries = core::ptr::null_mut();
+    let mut src_entries = core::ptr::null_mut();
     u64 dst_occupied, dst_free, bytes_to_move, entries_moved;
     kcov_debug("%px %u <= %px %lu\n",
     dst_area, dst_area_size, src_area, *src_area);
@@ -1019,24 +1250,28 @@ pub static mut word_size: u64 = sizeof(unsigned long);
     KCOV_MODE_TRACE_PC => {
     dst_len = READ_ONCE(*dst_area);
     src_len = *src_area;
-    count_size = sizeof(unsigned long);
-    entry_size_log = __ilog2_u64(sizeof(unsigned long));
-    break;
+    count_size = sizeof!(unsigned long);
+    entry_size_log = __ilog2_u64(sizeof!(unsigned long));
+    // break;
+    }
     KCOV_MODE_TRACE_CMP => {
     dst_len = READ_ONCE(*dst_area);
     src_len = *src_area;
-    count_size = sizeof(u64);
+    count_size = sizeof!(u64);
 // BUILD_BUG_ON;
-    entry_size_log = __ilog2_u64(sizeof(u64) * KCOV_WORDS_PER_CMP);
-    break;
+    entry_size_log = __ilog2_u64(sizeof!(u64) * KCOV_WORDS_PER_CMP);
+    // break;
+    }
     _ => {
 // WARN_ON;
     return;
     }
+    }
 // As arm can't divide u64 integers use log of entry size.
     if (dst_len > ((dst_area_size * word_size - count_size) >>
-    entry_size_log))
+    entry_size_log)) {
     return;
+    }
     dst_occupied = count_size + (dst_len << entry_size_log);
     dst_free = dst_area_size * word_size - dst_occupied;
     bytes_to_move = min(dst_free, src_len << entry_size_log);
@@ -1055,18 +1290,21 @@ pub static mut word_size: u64 = sizeof(unsigned long);
     match (mode) {
     KCOV_MODE_TRACE_PC => {
 // WRITE_ONCE;
-    break;
+    // break;
+    }
     KCOV_MODE_TRACE_CMP => {
 // WRITE_ONCE;
-    break;
+    // break;
+    }
     _ => {
-    break;
+    // break;
+    }
     }
     }
 // See the comment before kcov_remote_start() for usage details.
 #[no_mangle]
 pub unsafe extern "C" fn kcov_remote_stop() {
-    struct task_struct *t = current;
+    let mut t = current;
     let mut kcov = core::ptr::null_mut();
     let mut mode = 0;
     let mut area = core::ptr::null_mut();
@@ -1092,7 +1330,7 @@ pub unsafe extern "C" fn kcov_remote_stop() {
     return;
     }
 // Make sure that kcov_softirq is only set when in softirq.
-    if (WARN_ON(!in_serving_softirq() && t.kcov_softirq)) {
+    if (WARN_ON!(!in_serving_softirq() && t.kcov_softirq)) {
     local_unlock_irqrestore(&kcov_percpu_data.lock, flags);
     return;
     }
@@ -1126,16 +1364,16 @@ pub unsafe extern "C" fn kcov_remote_stop() {
 #[no_mangle]
 pub unsafe extern "C" fn kcov_common_handle() -> kcov_common_handle_id {
     if (!in_task()) {
-    return (struct kcov_common_handle_id){ .val = 0 };
+    return (kcov_common_handle_id){ .val = 0 };
     }
-    return (struct kcov_common_handle_id){ .val = current.kcov_handle };
+    return (kcov_common_handle_id){ .val = current.kcov_handle };
     }
 // EXPORT_SYMBOL;
 
 #[no_mangle]
 unsafe extern "C" fn selftest() -> c_int {
     let mut start = 0;
-    pr_err("running self test\n");
+    pr_err!("running self test\n");
 //
 // Test that interrupts don't produce spurious coverage.
 // The coverage callback filters out interrupt code, but only
@@ -1149,21 +1387,22 @@ unsafe extern "C" fn selftest() -> c_int {
 //
     start = jiffies;
 // WRITE_ONCE;
-    while ((jiffies - start) * MSEC_PER_SEC / HZ < 300)
+    while ((jiffies - start) * MSEC_PER_SEC / HZ < 300) {
     ;
+    }
 // WRITE_ONCE;
-    pr_err("done running self test\n");
+    pr_err!("done running self test\n");
     }
 
 #[no_mangle]
 unsafe extern "C" fn kcov_init() -> c_int {
-pub static mut cpu: c_int = num_possible_cpus();
+pub static mut cpu: c_int = 0;
 
 // Allocate some extra buffers in order to prepare for softirq preemption.
     cpu = cpu >= 4 ? cpu * 2 : cpu + 4;
 
     while (cpu--) {
-    void *area = vmalloc(CONFIG_KCOV_IRQ_AREA_SIZE * sizeof(unsigned long));
+    let mut area = vmalloc(CONFIG_KCOV_IRQ_AREA_SIZE * sizeof!(unsigned long));
     let mut flags = 0;
     if (!area) {
     return -ENOMEM;
@@ -1184,26 +1423,3 @@ pub static mut cpu: c_int = num_possible_cpus();
     return 0;
     }
 // device_initcall;
-
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}

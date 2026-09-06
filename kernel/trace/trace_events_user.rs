@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -77,9 +327,9 @@ pub struct user_event_group {
 }
 
 // Group for init_user_ns mapping, top-most group
-    static struct user_event_group *init_group;
+pub static mut init_group: *mut c_void = core::ptr::null_mut();
 // Max allowed events for the whole system
-    let mut max_user_events: static unsigned int = 32768;
+pub static mut max_user_events: unsigned int = 32768;
 // Current number of events on the whole system
     static unsigned int current_user_events;
 //
@@ -146,10 +396,10 @@ pub struct user_event_enabler_fault {
     pub attempt: c_int,
 }
 
-    static struct kmem_cache *fault_cache;
+pub static mut fault_cache: *mut c_void = core::ptr::null_mut();
 // Global list of memory descriptors using user_events
-    static LIST_HEAD(user_event_mms);
-    static DEFINE_SPINLOCK(user_event_mms_lock);
+pub static mut user_event_mms: usize = 0;
+pub static mut user_event_mms_lock: usize = 0;
 //
 // Stores per-file events references, as users register events
 // within a file this structure is modified and freed via RCU.
@@ -179,18 +429,18 @@ pub struct user_event_validator {
     pub flags: c_int,
 }
 
-    static inline void align_addr_bit(unsigned long *addr, int *bit,
-    unsigned long *flags)
-    {
-    if (IS_ALIGNED(*addr, sizeof(long))) {
+#[no_mangle]
+pub unsafe extern "C" fn align_addr_bit(addr: *mut c_ulong, bit: *mut c_int, flags: *mut c_ulong) {
+    if (IS_ALIGNED(*addr, sizeof!(long))) {
 
 // 32 bit on BE 64 bit requires a 32 bit offset when aligned.
-    if (test_bit(ENABLE_VAL_32_ON_64_BIT, flags))
+    if (test_bit(ENABLE_VAL_32_ON_64_BIT, flags)) {
 // bit += 32;
+    }
 
     return;
     }
-// addr = ALIGN_DOWN(*addr, sizeof(long));
+// addr = ALIGN_DOWN(*addr, sizeof!(long));
 //
 // We only support 32 and 64 bit values. The only time we need
 // to align is a 32 bit value on a 64 bit kernel, which on LE
@@ -200,48 +450,40 @@ pub struct user_event_validator {
 // bit += 32;
 
     }
-    typedef void (*user_event_func_t) (struct user_event *user, struct iov_iter *i,
+    typedef void (*user_event_func_t) (user_event *user, iov_iter *i,
     void *tpdata, bool *faulted);
-    static int user_event_parse(struct user_event_group *group, char *name,
-    char *args, char *flags,
-    struct user_event **newuser, int reg_flags);
-    static struct user_event_mm *user_event_mm_get(struct user_event_mm *mm);
-    static struct user_event_mm *user_event_mm_get_all(struct user_event *user);
-    static void user_event_mm_put(struct user_event_mm *mm);
-    static int destroy_user_event(struct user_event *user);
-    static bool user_fields_match(struct user_event *user, int argc,
-    const char **argv);
+// forward_decl: user_event_parse;
+// forward_decl: user_event_mm_get;
+// forward_decl: user_event_mm_get_all;
+// forward_decl: user_event_mm_put;
+// forward_decl: destroy_user_event;
+// forward_decl: user_fields_match;
 #[no_mangle]
 unsafe extern "C" fn user_event_key(name: *mut c_char) -> u32 {
-    static u32 user_event_key(char *name)
-    {
     return jhash(name, strlen(name), 0);
     }
 #[no_mangle]
 unsafe extern "C" fn user_event_capable(reg_flags: u16) -> bool {
-    static bool user_event_capable(u16 reg_flags)
-    {
 // Persistent events require CAP_PERFMON / CAP_SYS_ADMIN
     if (reg_flags & USER_EVENT_REG_PERSIST) {
-    if (!perfmon_capable())
+    if (!perfmon_capable()) {
     return false;
+    }
     }
     return true;
     }
-    static struct user_event *user_event_get(struct user_event *user)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn user_event_get(user: *mut user_event) -> *mut c_void {
     refcount_inc(&user.refcnt);
     return user;
     }
 #[no_mangle]
 unsafe extern "C" fn delayed_destroy_user_event(work: *mut work_struct) {
-    static void delayed_destroy_user_event(struct work_struct *work)
-    {
-    struct user_event *user = container_of(
-    work, struct user_event, put_work);
+    let mut user = container_of!(work, user_event, put_work);
     mutex_lock(&event_mutex);
-    if (!refcount_dec_and_test(&user.refcnt))
-    goto out;
+    if (!refcount_dec_and_test(&user.refcnt)) {
+// goto;
+    }
     if (destroy_user_event(user)) {
 //
 // The only reason this would fail here is if we cannot
@@ -249,19 +491,18 @@ unsafe extern "C" fn delayed_destroy_user_event(work: *mut work_struct) {
 // event stays in the hashtable, waiting for someone to
 // attempt to delete it later.
 //
-    pr_warn("user_events: Unable to delete event\n");
+    pr_warn!("user_events: Unable to delete event\n");
     refcount_set(&user.refcnt, 1);
     }
-    out:
+// label;
     mutex_unlock(&event_mutex);
     }
 #[no_mangle]
 unsafe extern "C" fn user_event_put(user: *mut user_event, locked: bool) {
-    static void user_event_put(struct user_event *user, bool locked)
-    {
-    bool delete;
-    if (unlikely(!user))
+    let mut delete = 0;
+    if (unlikely(!user)) {
     return;
+    }
 //
 // When the event is not enabled for auto-delete there will always
 // be at least 1 reference to the event. During the event creation
@@ -280,8 +521,9 @@ unsafe extern "C" fn user_event_put(user: *mut user_event, locked: bool) {
     lockdep_assert_held(&event_mutex);
     delete = refcount_dec_and_test(&user.refcnt);
     }
-    if (!delete)
+    if (!delete) {
     return;
+    }
 //
 // We now have the event_mutex in all cases, which ensures that
 // no new references will be taken until event_mutex is released.
@@ -291,7 +533,7 @@ unsafe extern "C" fn user_event_put(user: *mut user_event, locked: bool) {
     if (user.reg_flags & USER_EVENT_REG_PERSIST) {
 // We should not get here when persist flag is set
     pr_alert("BUG: Auto-delete engaged on persistent event\n");
-    goto out;
+// goto;
     }
 //
 // Unfortunately we have to attempt the actual destroy in a work
@@ -311,70 +553,71 @@ unsafe extern "C" fn user_event_put(user: *mut user_event, locked: bool) {
 // register would fail in the tracing layers.
 //
     refcount_set(&user.refcnt, 1);
-    if (WARN_ON_ONCE(!schedule_work(&user.put_work))) {
+    if (WARN_ON_ONCE!(!schedule_work(&user.put_work))) {
 //
 // If we fail we must wait for an admin to attempt delete or
 // another register/close of the event, whichever is first.
 //
-    pr_warn("user_events: Unable to queue delayed destroy\n");
+    pr_warn!("user_events: Unable to queue delayed destroy\n");
     }
-    out:
+// label;
 // Ensure if we didn't have event_mutex before we unlock it
-    if (!locked)
+    if (!locked) {
     mutex_unlock(&event_mutex);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn user_event_group_destroy(group: *mut user_event_group) {
-    static void user_event_group_destroy(struct user_event_group *group)
-    {
     kfree(group.system_name);
     kfree(group.system_multi_name);
     kfree(group);
     }
-    static char *user_event_group_system_name(void)
-    {
-    char *system_name;
-    let mut len: c_int = sizeof(USER_EVENTS_SYSTEM) + 1;
+#[no_mangle]
+pub unsafe extern "C" fn user_event_group_system_name() -> *mut c_void {
+pub static mut system_name: *mut c_void = core::ptr::null_mut();
+pub static mut len: c_int = 0;
     system_name = kmalloc(len, GFP_KERNEL);
-    if (!system_name)
+    if (!system_name) {
     return core::ptr::null_mut();
+    }
     snprintf(system_name, len, "%s", USER_EVENTS_SYSTEM);
     return system_name;
     }
-    static char *user_event_group_system_multi_name(void)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn user_event_group_system_multi_name() -> *mut c_void {
     return kstrdup(USER_EVENTS_MULTI_SYSTEM, GFP_KERNEL);
     }
-    static struct user_event_group *current_user_event_group(void)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn current_user_event_group() -> *mut c_void {
     return init_group;
     }
-    static struct user_event_group *user_event_group_create(void)
-    {
-    struct user_event_group *group;
+#[no_mangle]
+pub unsafe extern "C" fn user_event_group_create() -> *mut c_void {
+pub static mut group: *mut c_void = core::ptr::null_mut();
     group = kzalloc_obj(*group);
-    if (!group)
+    if (!group) {
     return core::ptr::null_mut();
+    }
     group.system_name = user_event_group_system_name();
-    if (!group.system_name)
-    goto error;
+    if (!group.system_name) {
+// goto;
+    }
     group.system_multi_name = user_event_group_system_multi_name();
-    if (!group.system_multi_name)
-    goto error;
+    if (!group.system_multi_name) {
+// goto;
+    }
     mutex_init(&group.reg_mutex);
     hash_init(group.register_table);
     return group;
-    error:
-    if (group)
+// label;
+    if (group) {
     user_event_group_destroy(group);
+    }
     return core::ptr::null_mut();
     };
 #[no_mangle]
 unsafe extern "C" fn delayed_user_event_enabler_put(work: *mut work_struct) {
-    static void delayed_user_event_enabler_put(struct work_struct *work)
-    {
-    struct user_event_enabler *enabler = container_of(to_rcu_work(work),
-    struct user_event_enabler, put_rwork);
+    let mut enabler = container_of!(to_rcu_work(work), user_event_enabler, put_rwork);
 // No longer tracking the event via the enabler
     user_event_put(enabler.event, false);
 // Run from queue_rcu_work(), the RCU grace period has elapsed
@@ -382,8 +625,6 @@ unsafe extern "C" fn delayed_user_event_enabler_put(work: *mut work_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn user_event_enabler_destroy(enabler: *mut user_event_enabler) {
-    static void user_event_enabler_destroy(struct user_event_enabler *enabler)
-    {
     list_del_rcu(&enabler.mm_enablers_link);
 //
 // The enabler is removed from an RCU-traversed list
@@ -401,47 +642,42 @@ unsafe extern "C" fn user_event_enabler_destroy(enabler: *mut user_event_enabler
     INIT_RCU_WORK(&enabler.put_rwork, delayed_user_event_enabler_put);
     queue_rcu_work(system_percpu_wq, &enabler.put_rwork);
     }
-    static int user_event_mm_fault_in(struct user_event_mm *mm, unsigned long uaddr,
-    int attempt)
-    {
-    bool unlocked;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn user_event_mm_fault_in(mm: *mut user_event_mm, uaddr: c_ulong, attempt: c_int) -> c_int {
+    let mut unlocked = 0;
+    let mut ret = 0;
 //
 // Normally this is low, ensure that it cannot be taken advantage of by
 // bad user processes to cause excessive looping.
 //
-    if (attempt > 10)
+    if (attempt > 10) {
     return -EFAULT;
+    }
     mmap_read_lock(mm.mm);
 // Ensure MM has tasks, cannot use after exit_mm()
     if (refcount_read(&mm.tasks) == 0) {
     ret = -ENOENT;
-    goto out;
+// goto;
     }
     ret = fixup_user_fault(mm.mm, uaddr, FAULT_FLAG_WRITE | FAULT_FLAG_REMOTE,
     &unlocked);
-    out:
+// label;
     mmap_read_unlock(mm.mm);
     return ret;
     }
-    static int user_event_enabler_write(struct user_event_mm *mm,
-    struct user_event_enabler *enabler,
-    bool fixup_fault, int *attempt);
+// forward_decl: user_event_enabler_write;
 #[no_mangle]
 unsafe extern "C" fn user_event_enabler_fault_fixup(work: *mut work_struct) {
-    static void user_event_enabler_fault_fixup(struct work_struct *work)
-    {
-    struct user_event_enabler_fault *fault = container_of(
-    work, struct user_event_enabler_fault, work);
-    struct user_event_enabler *enabler = fault.enabler;
-    struct user_event_mm *mm = fault.mm;
-    let mut uaddr: c_ulong = enabler.addr;
-    let mut attempt: c_int = fault.attempt;
-    int ret;
+    let mut fault = container_of!(work, user_event_enabler_fault, work);
+    let mut enabler = fault.enabler;
+    let mut mm = fault.mm;
+pub static mut uaddr: c_ulong = 0;
+pub static mut attempt: c_int = 0;
+    let mut ret = 0;
     ret = user_event_mm_fault_in(mm, uaddr, attempt);
     if (ret && ret != -ENOENT) {
-    struct user_event *user = enabler.event;
-    pr_warn("user_events: Fault for mm: 0x%p @ 0x%llx event: %s\n",
+    let mut user = enabler.event;
+    pr_warn!("user_events: Fault for mm: 0x%p @ 0x%llx event: %s\n",
     mm.mm, (unsigned long long)uaddr, EVENT_NAME(user));
     }
 // Prevent state changes from racing
@@ -449,7 +685,7 @@ unsafe extern "C" fn user_event_enabler_fault_fixup(work: *mut work_struct) {
 // User asked for enabler to be removed during fault
     if (test_bit(ENABLE_VAL_FREEING_BIT, ENABLE_BITOPS(enabler))) {
     user_event_enabler_destroy(enabler);
-    goto out;
+// goto;
     }
 //
 // If we managed to get the page, re-issue the write. We do not
@@ -464,20 +700,19 @@ unsafe extern "C" fn user_event_enabler_fault_fixup(work: *mut work_struct) {
     user_event_enabler_write(mm, enabler, true, &attempt);
     mmap_read_unlock(mm.mm);
     }
-    out:
+// label;
     mutex_unlock(&event_mutex);
 // In all cases we no longer need the mm or fault
     user_event_mm_put(mm);
     kmem_cache_free(fault_cache, fault);
     }
-    static bool user_event_enabler_queue_fault(struct user_event_mm *mm,
-    struct user_event_enabler *enabler,
-    int attempt)
-    {
-    struct user_event_enabler_fault *fault;
+#[no_mangle]
+pub unsafe extern "C" fn user_event_enabler_queue_fault(mm: *mut user_event_mm, enabler: *mut user_event_enabler, attempt: c_int) -> bool {
+pub static mut fault: *mut c_void = core::ptr::null_mut();
     fault = kmem_cache_zalloc(fault_cache, GFP_NOWAIT);
-    if (!fault)
+    if (!fault) {
     return false;
+    }
     INIT_WORK(&fault.work, user_event_enabler_fault_fixup);
     fault.mm = user_event_mm_get(mm);
     fault.enabler = enabler;
@@ -493,64 +728,66 @@ unsafe extern "C" fn user_event_enabler_fault_fixup(work: *mut work_struct) {
     }
     return true;
     }
-    static int user_event_enabler_write(struct user_event_mm *mm,
-    struct user_event_enabler *enabler,
-    bool fixup_fault, int *attempt)
-    {
-    let mut uaddr: c_ulong = enabler.addr;
-    unsigned long *ptr;
-    struct page *page;
-    void *kaddr;
-    let mut bit: c_int = ENABLE_BIT(enabler);
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn user_event_enabler_write(mm: *mut user_event_mm, enabler: *mut user_event_enabler, fixup_fault: bool, attempt: *mut c_int) -> c_int {
+pub static mut uaddr: c_ulong = 0;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut page: *mut c_void = core::ptr::null_mut();
+pub static mut kaddr: *mut c_void = core::ptr::null_mut();
+pub static mut bit: c_int = 0;
+    let mut ret = 0;
     lockdep_assert_held(&event_mutex);
     mmap_assert_locked(mm.mm);
 // attempt += 1;
 // Ensure MM has tasks, cannot use after exit_mm()
-    if (refcount_read(&mm.tasks) == 0)
+    if (refcount_read(&mm.tasks) == 0) {
     return -ENOENT;
+    }
     if (unlikely(test_bit(ENABLE_VAL_FAULTING_BIT, ENABLE_BITOPS(enabler)) ||
-    test_bit(ENABLE_VAL_FREEING_BIT, ENABLE_BITOPS(enabler))))
+    test_bit(ENABLE_VAL_FREEING_BIT, ENABLE_BITOPS(enabler)))) {
     return -EBUSY;
+    }
     align_addr_bit(&uaddr, &bit, ENABLE_BITOPS(enabler));
     ret = pin_user_pages_remote(mm.mm, uaddr, 1, FOLL_WRITE | FOLL_NOFAULT,
     &page, core::ptr::null_mut());
     if (unlikely(ret <= 0)) {
-    if (!fixup_fault)
+    if (!fixup_fault) {
     return -EFAULT;
-    if (!user_event_enabler_queue_fault(mm, enabler, *attempt))
-    pr_warn("user_events: Unable to queue fault handler\n");
+    }
+    if (!user_event_enabler_queue_fault(mm, enabler, *attempt)) {
+    pr_warn!("user_events: Unable to queue fault handler\n");
+    }
     return -EFAULT;
     }
     kaddr = kmap_local_page(page);
     ptr = kaddr + (uaddr & ~PAGE_MASK);
 // Update bit atomically, user tracers must be atomic as well
-    if (enabler.event && enabler.event.status)
+    if (enabler.event && enabler.event.status) {
     set_bit(bit, ptr);
-    else
+    }
+    else {
     clear_bit(bit, ptr);
+    }
     kunmap_local(kaddr);
     unpin_user_pages_dirty_lock(&page, 1, true);
     return 0;
     }
-    static bool user_event_enabler_exists(struct user_event_mm *mm,
-    unsigned long uaddr, unsigned char bit)
-    {
-    struct user_event_enabler *enabler;
+#[no_mangle]
+pub unsafe extern "C" fn user_event_enabler_exists(mm: *mut user_event_mm, uaddr: c_ulong, bit: c_uchar) -> bool {
+pub static mut enabler: *mut c_void = core::ptr::null_mut();
     list_for_each_entry(enabler, &mm.enablers, mm_enablers_link) {
-    if (enabler.addr == uaddr && ENABLE_BIT(enabler) == bit)
+    if (enabler.addr == uaddr && ENABLE_BIT(enabler) == bit) {
     return true;
+    }
     }
     return false;
     }
 #[no_mangle]
 unsafe extern "C" fn user_event_enabler_update(user: *mut user_event) {
-    static void user_event_enabler_update(struct user_event *user)
-    {
-    struct user_event_enabler *enabler;
-    struct user_event_mm *next;
-    struct user_event_mm *mm;
-    int attempt;
+pub static mut enabler: *mut c_void = core::ptr::null_mut();
+pub static mut next: *mut c_void = core::ptr::null_mut();
+pub static mut mm: *mut c_void = core::ptr::null_mut();
+    let mut attempt = 0;
     lockdep_assert_held(&event_mutex);
 //
 // We need to build a one-shot list of all the mms that have an
@@ -578,16 +815,17 @@ unsafe extern "C" fn user_event_enabler_update(user: *mut user_event) {
     mm = next;
     }
     }
-    static bool user_event_enabler_dup(struct user_event_enabler *orig,
-    struct user_event_mm *mm)
-    {
-    struct user_event_enabler *enabler;
+#[no_mangle]
+pub unsafe extern "C" fn user_event_enabler_dup(orig: *mut user_event_enabler, mm: *mut user_event_mm) -> bool {
+pub static mut enabler: *mut c_void = core::ptr::null_mut();
 // Skip pending frees
-    if (unlikely(test_bit(ENABLE_VAL_FREEING_BIT, ENABLE_BITOPS(orig))))
+    if (unlikely(test_bit(ENABLE_VAL_FREEING_BIT, ENABLE_BITOPS(orig)))) {
     return true;
+    }
     enabler = kzalloc_obj(*enabler, GFP_NOWAIT | __GFP_ACCOUNT);
-    if (!enabler)
+    if (!enabler) {
     return false;
+    }
     enabler.event = user_event_get(orig.event);
     enabler.addr = orig.addr;
 // Only dup part of value (ignore future flags, etc)
@@ -596,16 +834,16 @@ unsafe extern "C" fn user_event_enabler_update(user: *mut user_event) {
     list_add(&enabler.mm_enablers_link, &mm.enablers);
     return true;
     }
-    static struct user_event_mm *user_event_mm_get(struct user_event_mm *mm)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn user_event_mm_get(mm: *mut user_event_mm) -> *mut c_void {
     refcount_inc(&mm.refcnt);
     return mm;
     }
-    static struct user_event_mm *user_event_mm_get_all(struct user_event *user)
-    {
-    struct user_event_mm *found = core::ptr::null_mut();
-    struct user_event_enabler *enabler;
-    struct user_event_mm *mm;
+#[no_mangle]
+pub unsafe extern "C" fn user_event_mm_get_all(user: *mut user_event) -> *mut c_void {
+    let mut found = core::ptr::null_mut();
+pub static mut enabler: *mut c_void = core::ptr::null_mut();
+pub static mut mm: *mut c_void = core::ptr::null_mut();
 //
 // We use the mm->next field to build a one-shot list from the global
 // RCU protected list. To build this list the event_mutex must be held.
@@ -636,12 +874,13 @@ unsafe extern "C" fn user_event_enabler_update(user: *mut user_event) {
     rcu_read_unlock();
     return found;
     }
-    static struct user_event_mm *user_event_mm_alloc(struct task_struct *t)
-    {
-    struct user_event_mm *user_mm;
+#[no_mangle]
+pub unsafe extern "C" fn user_event_mm_alloc(t: *mut task_struct) -> *mut c_void {
+pub static mut user_mm: *mut c_void = core::ptr::null_mut();
     user_mm = kzalloc_obj(*user_mm, GFP_KERNEL_ACCOUNT);
-    if (!user_mm)
+    if (!user_mm) {
     return core::ptr::null_mut();
+    }
     user_mm.mm = t.mm;
     INIT_LIST_HEAD(&user_mm.enablers);
     refcount_set(&user_mm.refcnt, 1);
@@ -659,65 +898,61 @@ unsafe extern "C" fn user_event_enabler_update(user: *mut user_event) {
     }
 #[no_mangle]
 unsafe extern "C" fn user_event_mm_attach(user_mm: *mut user_event_mm, t: *mut task_struct) {
-    static void user_event_mm_attach(struct user_event_mm *user_mm, struct task_struct *t)
-    {
-    unsigned long flags;
+    let mut flags = 0;
     spin_lock_irqsave(&user_event_mms_lock, flags);
     list_add_rcu(&user_mm.mms_link, &user_event_mms);
     spin_unlock_irqrestore(&user_event_mms_lock, flags);
     t.user_event_mm = user_mm;
     }
-    static struct user_event_mm *current_user_event_mm(void)
-    {
-    struct user_event_mm *user_mm = current.user_event_mm;
-    if (user_mm)
-    goto inc;
+#[no_mangle]
+pub unsafe extern "C" fn current_user_event_mm() -> *mut c_void {
+    let mut user_mm = current.user_event_mm;
+    if (user_mm) {
+// goto;
+    }
     user_mm = user_event_mm_alloc(current);
-    if (!user_mm)
-    goto error;
+    if (!user_mm) {
+// goto;
+    }
     user_event_mm_attach(user_mm, current);
-    inc:
+// label;
     refcount_inc(&user_mm.refcnt);
-    error:
+// label;
     return user_mm;
     }
 #[no_mangle]
 unsafe extern "C" fn user_event_mm_destroy(mm: *mut user_event_mm) {
-    static void user_event_mm_destroy(struct user_event_mm *mm)
-    {
-    struct user_event_enabler *enabler, *next;
-    list_for_each_entry_safe(enabler, next, &mm.enablers, mm_enablers_link)
+    let mut enabler = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+    list_for_each_entry_safe(enabler, next, &mm.enablers, mm_enablers_link) {
     user_event_enabler_destroy(enabler);
+    }
     mmdrop(mm.mm);
     kfree(mm);
     }
 #[no_mangle]
 unsafe extern "C" fn user_event_mm_put(mm: *mut user_event_mm) {
-    static void user_event_mm_put(struct user_event_mm *mm)
-    {
-    if (mm && refcount_dec_and_test(&mm.refcnt))
+    if (mm && refcount_dec_and_test(&mm.refcnt)) {
     user_event_mm_destroy(mm);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn delayed_user_event_mm_put(work: *mut work_struct) {
-    static void delayed_user_event_mm_put(struct work_struct *work)
-    {
-    struct user_event_mm *mm;
-    mm = container_of(to_rcu_work(work), struct user_event_mm, put_rwork);
+pub static mut mm: *mut c_void = core::ptr::null_mut();
+    mm = container_of!(to_rcu_work(work), user_event_mm, put_rwork);
     user_event_mm_put(mm);
     }
 #[no_mangle]
 pub unsafe extern "C" fn user_event_mm_remove(t: *mut task_struct) {
-    void user_event_mm_remove(struct task_struct *t)
-    {
-    struct user_event_mm *mm;
-    unsigned long flags;
+pub static mut mm: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
     might_sleep();
     mm = t.user_event_mm;
     t.user_event_mm = core::ptr::null_mut();
 // Clone will increment the tasks, only remove if last clone
-    if (!refcount_dec_and_test(&mm.tasks))
+    if (!refcount_dec_and_test(&mm.tasks)) {
     return;
+    }
 // Remove the mm from the list, so it can no longer be enabled
     spin_lock_irqsave(&user_event_mms_lock, flags);
     list_del_rcu(&mm.mms_link);
@@ -757,59 +992,62 @@ pub unsafe extern "C" fn user_event_mm_remove(t: *mut task_struct) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn user_event_mm_dup(t: *mut task_struct, old_mm: *mut user_event_mm) {
-    void user_event_mm_dup(struct task_struct *t, struct user_event_mm *old_mm)
-    {
-    struct user_event_mm *mm = user_event_mm_alloc(t);
-    struct user_event_enabler *enabler;
+    let mut mm = user_event_mm_alloc(t);
+pub static mut enabler: *mut c_void = core::ptr::null_mut();
 // On failure, do not free parent's copy
     t.user_event_mm = core::ptr::null_mut();
-    if (!mm)
+    if (!mm) {
     return;
+    }
     rcu_read_lock();
     list_for_each_entry_rcu(enabler, &old_mm.enablers, mm_enablers_link) {
-    if (!user_event_enabler_dup(enabler, mm))
-    goto error;
+    if (!user_event_enabler_dup(enabler, mm)) {
+// goto;
+    }
     }
     rcu_read_unlock();
     user_event_mm_attach(mm, t);
     return;
-    error:
+// label;
     rcu_read_unlock();
     user_event_mm_destroy(mm);
     }
-    static bool current_user_event_enabler_exists(unsigned long uaddr,
-    unsigned char bit)
-    {
-    struct user_event_mm *user_mm = current_user_event_mm();
-    bool exists;
-    if (!user_mm)
+#[no_mangle]
+pub unsafe extern "C" fn current_user_event_enabler_exists(uaddr: c_ulong, bit: c_uchar) -> bool {
+    let mut user_mm = current_user_event_mm();
+    let mut exists = 0;
+    if (!user_mm) {
     return false;
+    }
     exists = user_event_enabler_exists(user_mm, uaddr, bit);
     user_event_mm_put(user_mm);
     return exists;
     }
     static struct user_event_enabler
-// user_event_enabler_create(struct user_reg *reg, struct user_event *user,
+// user_event_enabler_create(user_reg *reg, user_event *user,
     int *write_result)
     {
-    struct user_event_enabler *enabler;
-    struct user_event_mm *user_mm;
-    let mut uaddr: c_ulong = (unsigned long)reg.enable_addr;
-    let mut attempt: c_int = 0;
+pub static mut enabler: *mut c_void = core::ptr::null_mut();
+pub static mut user_mm: *mut c_void = core::ptr::null_mut();
+pub static mut uaddr: c_ulong = 0;
+pub static mut attempt: c_int = 0;
     user_mm = current_user_event_mm();
-    if (!user_mm)
+    if (!user_mm) {
     return core::ptr::null_mut();
+    }
     enabler = kzalloc_obj(*enabler, GFP_KERNEL_ACCOUNT);
-    if (!enabler)
-    goto out;
+    if (!enabler) {
+// goto;
+    }
     enabler.event = user;
     enabler.addr = uaddr;
     enabler.values = reg.enable_bit;
 
-    if (reg.enable_size == 4)
+    if (reg.enable_size == 4) {
     set_bit(ENABLE_VAL_32_ON_64_BIT, ENABLE_BITOPS(enabler));
+    }
 
-    retry:
+// label;
 // Prevents state changes from racing with new enablers
     mutex_lock(&event_mutex);
 // Attempt to reflect the current state within the process
@@ -832,39 +1070,37 @@ pub unsafe extern "C" fn user_event_mm_dup(t: *mut task_struct, old_mm: *mut use
     mutex_unlock(&event_mutex);
     if (*write_result) {
 // Attempt to fault-in and retry if it worked
-    if (!user_event_mm_fault_in(user_mm, uaddr, attempt))
-    goto retry;
+    if (!user_event_mm_fault_in(user_mm, uaddr, attempt)) {
+// goto;
+    }
     kfree(enabler);
     enabler = core::ptr::null_mut();
     }
-    out:
+// label;
     user_event_mm_put(user_mm);
     return enabler;
     }
     static __always_inline __must_check
 #[no_mangle]
 pub unsafe extern "C" fn user_event_last_ref(user: *mut user_event) -> bool {
-    bool user_event_last_ref(struct user_event *user)
-    {
-    let mut last: c_int = 0;
-    if (user.reg_flags & USER_EVENT_REG_PERSIST)
+pub static mut last: c_int = 0;
+    if (user.reg_flags & USER_EVENT_REG_PERSIST) {
     last = 1;
+    }
     return refcount_read(&user.refcnt) == last;
     }
     static __always_inline __must_check
 #[no_mangle]
 pub unsafe extern "C" fn copy_nofault(addr: *mut c_void, bytes: usize, i: *mut iov_iter) -> usize {
-    size_t copy_nofault(void *addr, size_t bytes, struct iov_iter *i)
-    {
-    size_t ret;
+    let mut ret = 0;
     pagefault_disable();
     ret = copy_from_iter_nocache(addr, bytes, i);
     pagefault_enable();
     return ret;
     }
-    static struct list_head *user_event_get_fields(struct trace_event_call *call)
-    {
-    struct user_event *user = (struct user_event *)call.data;
+#[no_mangle]
+pub unsafe extern "C" fn user_event_get_fields(call: *mut trace_event_call) -> *mut c_void {
+    let mut user = call.data;
     return &user.fields;
     }
 //
@@ -881,92 +1117,110 @@ pub unsafe extern "C" fn copy_nofault(addr: *mut c_void, bytes: usize, i: *mut i
 //
 // Upon success user_event has its ref count increased by 1.
 //
-    static int user_event_parse_cmd(struct user_event_group *group,
-    char *raw_command, struct user_event **newuser,
-    int reg_flags)
-    {
-    char *name = raw_command;
-    char *args = strpbrk(name, " ");
-    char *flags;
-    if (args)
+#[no_mangle]
+pub unsafe extern "C" fn user_event_parse_cmd(group: *mut user_event_group, raw_command: *mut c_char, newuser: *mut *mut user_event, reg_flags: c_int) -> c_int {
+    let mut name = raw_command;
+    let mut args = strpbrk(name, " ");
+pub static mut flags: *mut c_void = core::ptr::null_mut();
+    if (args) {
 // args++ = '\0';
+    }
     flags = strpbrk(name, ":");
-    if (flags)
+    if (flags) {
 // flags++ = '\0';
+    }
     return user_event_parse(group, name, args, flags, newuser, reg_flags);
     }
 #[no_mangle]
 unsafe extern "C" fn user_field_array_size(type: *const c_char) -> c_int {
-    static int user_field_array_size(const char *type)
-    {
-    const char *start = strchr(type, '[');
+    let mut start = strchr(type, '[');
     char val[8];
-    char *bracket;
-    let mut size: c_int = 0;
-    if (start == core::ptr::null_mut())
+pub static mut bracket: *mut c_void = core::ptr::null_mut();
+pub static mut size: c_int = 0;
+    if (start == core::ptr::null_mut()) {
     return -EINVAL;
-    if (strscpy(val, start + 1, sizeof(val)) <= 0)
+    }
+    if (strscpy(val, start + 1, sizeof!(val)) <= 0) {
     return -EINVAL;
+    }
     bracket = strchr(val, ']');
-    if (!bracket)
+    if (!bracket) {
     return -EINVAL;
+    }
 // bracket = '\0';
-    if (kstrtouint(val, 0, &size))
+    if (kstrtouint(val, 0, &size)) {
     return -EINVAL;
-    if (size > MAX_FIELD_ARRAY_SIZE)
+    }
+    if (size > MAX_FIELD_ARRAY_SIZE) {
     return -EINVAL;
+    }
     return size;
     }
 #[no_mangle]
 unsafe extern "C" fn user_field_size(type: *const c_char) -> c_int {
-    static int user_field_size(const char *type)
-    {
 // long is not allowed from a user, since it's ambiguous in size
-    if (strcmp(type, "s64") == 0)
-    return sizeof(s64);
-    if (strcmp(type, "u64") == 0)
-    return sizeof(u64);
-    if (strcmp(type, "s32") == 0)
-    return sizeof(s32);
-    if (strcmp(type, "u32") == 0)
-    return sizeof(u32);
-    if (strcmp(type, "int") == 0)
-    return sizeof(int);
-    if (strcmp(type, "unsigned int") == 0)
-    return sizeof(unsigned int);
-    if (strcmp(type, "s16") == 0)
-    return sizeof(s16);
-    if (strcmp(type, "u16") == 0)
-    return sizeof(u16);
-    if (strcmp(type, "short") == 0)
-    return sizeof(short);
-    if (strcmp(type, "unsigned short") == 0)
-    return sizeof(unsigned short);
-    if (strcmp(type, "s8") == 0)
-    return sizeof(s8);
-    if (strcmp(type, "u8") == 0)
-    return sizeof(u8);
-    if (strcmp(type, "char") == 0)
-    return sizeof(char);
-    if (strcmp(type, "unsigned char") == 0)
-    return sizeof(unsigned char);
-    if (str_has_prefix(type, "char["))
+    if (strcmp(type, "s64") == 0) {
+    return sizeof!(s64);
+    }
+    if (strcmp(type, "u64") == 0) {
+    return sizeof!(u64);
+    }
+    if (strcmp(type, "s32") == 0) {
+    return sizeof!(s32);
+    }
+    if (strcmp(type, "u32") == 0) {
+    return sizeof!(u32);
+    }
+    if (strcmp(type, "int") == 0) {
+    return sizeof!(int);
+    }
+    if (strcmp(type, "unsigned int") == 0) {
+    return sizeof!(unsigned int);
+    }
+    if (strcmp(type, "s16") == 0) {
+    return sizeof!(s16);
+    }
+    if (strcmp(type, "u16") == 0) {
+    return sizeof!(u16);
+    }
+    if (strcmp(type, "short") == 0) {
+    return sizeof!(short);
+    }
+    if (strcmp(type, "unsigned short") == 0) {
+    return sizeof!(unsigned short);
+    }
+    if (strcmp(type, "s8") == 0) {
+    return sizeof!(s8);
+    }
+    if (strcmp(type, "u8") == 0) {
+    return sizeof!(u8);
+    }
+    if (strcmp(type, "char") == 0) {
+    return sizeof!(char);
+    }
+    if (strcmp(type, "unsigned char") == 0) {
+    return sizeof!(unsigned char);
+    }
+    if (str_has_prefix(type, "char[")) {
     return user_field_array_size(type);
-    if (str_has_prefix(type, "unsigned char["))
+    }
+    if (str_has_prefix(type, "unsigned char[")) {
     return user_field_array_size(type);
-    if (str_has_prefix(type, "__data_loc "))
-    return sizeof(u32);
-    if (str_has_prefix(type, "__rel_loc "))
-    return sizeof(u32);
+    }
+    if (str_has_prefix(type, "__data_loc ")) {
+    return sizeof!(u32);
+    }
+    if (str_has_prefix(type, "__rel_loc ")) {
+    return sizeof!(u32);
+    }
 // Unknown basic type, error
     return -EINVAL;
     }
 #[no_mangle]
 unsafe extern "C" fn user_event_destroy_validators(user: *mut user_event) {
-    static void user_event_destroy_validators(struct user_event *user)
-    {
-    struct user_event_validator *validator, *next;
-    struct list_head *head = &user.validators;
+    let mut validator = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+    let mut head = &user.validators;
     list_for_each_entry_safe(validator, next, head, user_event_link) {
     list_del(&validator.user_event_link);
     kfree(validator);
@@ -974,35 +1228,35 @@ unsafe extern "C" fn user_event_destroy_validators(user: *mut user_event) {
     }
 #[no_mangle]
 unsafe extern "C" fn user_event_destroy_fields(user: *mut user_event) {
-    static void user_event_destroy_fields(struct user_event *user)
-    {
-    struct ftrace_event_field *field, *next;
-    struct list_head *head = &user.fields;
+    let mut field = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+    let mut head = &user.fields;
     list_for_each_entry_safe(field, next, head, link) {
     list_del(&field.link);
     kfree(field);
     }
     }
-    static int user_event_add_field(struct user_event *user, const char *type,
-    const char *name, int offset, int size,
-    int is_signed, int filter_type)
-    {
-    struct user_event_validator *validator;
-    struct ftrace_event_field *field;
-    let mut validator_flags: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn user_event_add_field(user: *mut user_event, type: *mut c_char, name: *mut c_char, offset: c_int, size: c_int, is_signed: c_int, filter_type: c_int) -> c_int {
+pub static mut validator: *mut c_void = core::ptr::null_mut();
+pub static mut field: *mut c_void = core::ptr::null_mut();
+pub static mut validator_flags: c_int = 0;
     field = kmalloc_obj(*field, GFP_KERNEL_ACCOUNT);
-    if (!field)
+    if (!field) {
     return -ENOMEM;
-    if (str_has_prefix(type, "__data_loc "))
-    goto add_validator;
+    }
+    if (str_has_prefix(type, "__data_loc ")) {
+// goto;
+    }
     if (str_has_prefix(type, "__rel_loc ")) {
     validator_flags |= VALIDATOR_REL;
-    goto add_validator;
+// goto;
     }
-    goto add_field;
-    add_validator:
-    if (strstr(type, "char") != core::ptr::null_mut())
+// goto;
+// label;
+    if (strstr(type, "char") != core::ptr::null_mut()) {
     validator_flags |= VALIDATOR_ENSURE_NULL;
+    }
     validator = kmalloc_obj(*validator, GFP_KERNEL_ACCOUNT);
     if (!validator) {
     kfree(field);
@@ -1012,258 +1266,288 @@ unsafe extern "C" fn user_event_destroy_fields(user: *mut user_event) {
     validator.offset = offset;
 // Want sequential access when validating
     list_add_tail(&validator.user_event_link, &user.validators);
-    add_field:
+// label;
     field.type = type;
     field.name = name;
     field.offset = offset;
     field.size = size;
     field.is_signed = is_signed;
     field.filter_type = filter_type;
-    if (filter_type == FILTER_OTHER)
+    if (filter_type == FILTER_OTHER) {
     field.filter_type = filter_assign_type(type);
+    }
     list_add(&field.link, &user.fields);
 //
 // Min size from user writes that are required, this does not include
 // the size of trace_entry (common fields).
 //
-    user.min_size = (offset + size) - sizeof(struct trace_entry);
+    user.min_size = (offset + size) - sizeof!(trace_entry);
     return 0;
     }
 //
 // Parses the values of a field within the description
 // Format: type name [size]
 //
-    static int user_event_parse_field(char *field, struct user_event *user,
-    u32 *offset)
-    {
-    char *part, *type, *name;
-    let mut depth: u32 = 0, saved_offset = *offset;
+#[no_mangle]
+pub unsafe extern "C" fn user_event_parse_field(field: *mut c_char, user: *mut user_event, offset: *mut u32) -> c_int {
+    let mut part = core::ptr::null_mut();
+    let mut type = core::ptr::null_mut();
+    let mut name = core::ptr::null_mut();
+pub static mut depth: u32 = 0;
     int len, size = -EINVAL;
-    let mut is_struct: bool = false;
+pub static mut is_struct: bool = false;
     field = skip_spaces(field);
-    if (*field == '\0')
+    if (*field == '\0') {
     return 0;
+    }
 // Handle types that have a space within
     len = str_has_prefix(field, "unsigned ");
-    if (len)
-    goto skip_next;
+    if (len) {
+// goto;
+    }
     len = str_has_prefix(field, "struct ");
     if (len) {
     is_struct = true;
-    goto skip_next;
+// goto;
     }
     len = str_has_prefix(field, "__data_loc unsigned ");
-    if (len)
-    goto skip_next;
+    if (len) {
+// goto;
+    }
     len = str_has_prefix(field, "__data_loc ");
-    if (len)
-    goto skip_next;
+    if (len) {
+// goto;
+    }
     len = str_has_prefix(field, "__rel_loc unsigned ");
-    if (len)
-    goto skip_next;
+    if (len) {
+// goto;
+    }
     len = str_has_prefix(field, "__rel_loc ");
-    if (len)
-    goto skip_next;
-    goto parse;
-    skip_next:
+    if (len) {
+// goto;
+    }
+// goto;
+// label;
     type = field;
     field = strpbrk(field + len, " ");
-    if (field == core::ptr::null_mut())
+    if (field == core::ptr::null_mut()) {
     return -EINVAL;
+    }
 // field++ = '\0';
-    depth++;
-    parse:
+    depth += 1;
+// label;
     name = core::ptr::null_mut();
     while ((part = strsep(&field, " ")) != core::ptr::null_mut()) {
-    switch (depth++) {
-    case FIELD_DEPTH_TYPE:
+    match (depth++) {
+    FIELD_DEPTH_TYPE => {
     type = part;
-    break;
-    case FIELD_DEPTH_NAME:
+    // break;
+    }
+    FIELD_DEPTH_NAME => {
     name = part;
-    break;
-    case FIELD_DEPTH_SIZE:
-    if (!is_struct)
+    // break;
+    }
+    FIELD_DEPTH_SIZE => {
+    if (!is_struct) {
     return -EINVAL;
-    if (kstrtou32(part, 10, &size))
+    }
+    if (kstrtou32(part, 10, &size)) {
     return -EINVAL;
-    break;
-    default:
+    }
+    // break;
+    }
+    _ => {
     return -EINVAL;
     }
     }
-    if (depth < FIELD_DEPTH_SIZE || !name)
+    }
+    if (depth < FIELD_DEPTH_SIZE || !name) {
     return -EINVAL;
-    if (depth == FIELD_DEPTH_SIZE)
+    }
+    if (depth == FIELD_DEPTH_SIZE) {
     size = user_field_size(type);
-    if (size == 0)
+    }
+    if (size == 0) {
     return -EINVAL;
-    if (size < 0)
+    }
+    if (size < 0) {
     return size;
+    }
 // offset = saved_offset + size;
     return user_event_add_field(user, type, name, saved_offset, size,
     type[0] != 'u', FILTER_OTHER);
     }
 #[no_mangle]
 unsafe extern "C" fn user_event_parse_fields(user: *mut user_event, args: *mut c_char) -> c_int {
-    static int user_event_parse_fields(struct user_event *user, char *args)
-    {
-    char *field;
-    let mut offset: u32 = sizeof(struct trace_entry);
-    let mut ret: c_int = -EINVAL;
-    if (args == core::ptr::null_mut())
+pub static mut field: *mut c_void = core::ptr::null_mut();
+pub static mut offset: u32 = 0;
+pub static mut ret: c_int = 0;
+    if (args == core::ptr::null_mut()) {
     return 0;
+    }
     while ((field = strsep(&args, ";")) != core::ptr::null_mut()) {
     ret = user_event_parse_field(field, user, &offset);
-    if (ret)
+    if (ret) {
     break;
+    }
     }
     return ret;
     }
     static struct trace_event_fields user_event_fields_array[1];
     static const char *user_field_format(const char *type)
     {
-    if (strcmp(type, "s64") == 0)
+    if (strcmp(type, "s64") == 0) {
     return "%lld";
-    if (strcmp(type, "u64") == 0)
+    }
+    if (strcmp(type, "u64") == 0) {
     return "%llu";
-    if (strcmp(type, "s32") == 0)
+    }
+    if (strcmp(type, "s32") == 0) {
     return "%d";
-    if (strcmp(type, "u32") == 0)
+    }
+    if (strcmp(type, "u32") == 0) {
     return "%u";
-    if (strcmp(type, "int") == 0)
+    }
+    if (strcmp(type, "int") == 0) {
     return "%d";
-    if (strcmp(type, "unsigned int") == 0)
+    }
+    if (strcmp(type, "unsigned int") == 0) {
     return "%u";
-    if (strcmp(type, "s16") == 0)
+    }
+    if (strcmp(type, "s16") == 0) {
     return "%d";
-    if (strcmp(type, "u16") == 0)
+    }
+    if (strcmp(type, "u16") == 0) {
     return "%u";
-    if (strcmp(type, "short") == 0)
+    }
+    if (strcmp(type, "short") == 0) {
     return "%d";
-    if (strcmp(type, "unsigned short") == 0)
+    }
+    if (strcmp(type, "unsigned short") == 0) {
     return "%u";
-    if (strcmp(type, "s8") == 0)
+    }
+    if (strcmp(type, "s8") == 0) {
     return "%d";
-    if (strcmp(type, "u8") == 0)
+    }
+    if (strcmp(type, "u8") == 0) {
     return "%u";
-    if (strcmp(type, "char") == 0)
+    }
+    if (strcmp(type, "char") == 0) {
     return "%d";
-    if (strcmp(type, "unsigned char") == 0)
+    }
+    if (strcmp(type, "unsigned char") == 0) {
     return "%u";
-    if (strstr(type, "char[") != core::ptr::null_mut())
+    }
+    if (strstr(type, "char[") != core::ptr::null_mut()) {
     return "%s";
+    }
 // Unknown, likely struct, allowed treat as 64-bit
     return "%llu";
     }
 #[no_mangle]
 unsafe extern "C" fn user_field_is_dyn_string(type: *const c_char, str_func: *const c_char) -> bool {
-    static bool user_field_is_dyn_string(const char *type, const char **str_func)
-    {
     if (str_has_prefix(type, "__data_loc ")) {
 // str_func = "__get_str";
-    goto check;
+// goto;
     }
     if (str_has_prefix(type, "__rel_loc ")) {
 // str_func = "__get_rel_str";
-    goto check;
+// goto;
     }
     return false;
-    check:
+// label;
     return strstr(type, "char") != core::ptr::null_mut();
     }
 
-    static int user_dyn_field_set_string(int argc, const char **argv, int *iout,
-    char *buf, int len, bool *colon)
-    {
-    let mut pos: c_int = 0, i = *iout;
+#[no_mangle]
+pub unsafe extern "C" fn user_dyn_field_set_string(argc: c_int, argv: *mut *mut c_char, iout: *mut c_int, buf: *mut c_char, len: c_int, colon: *mut bool) -> c_int {
+pub static mut pos: c_int = 0;
 // colon = false;
-    for (; i < argc; ++i) {
-    if (i != *iout)
+    while (i < argc) {
+    if (i != *iout) {
     pos += snprintf(buf + pos, LEN_OR_ZERO, " ");
+    }
     pos += snprintf(buf + pos, LEN_OR_ZERO, "%s", argv[i]);
     if (strchr(argv[i], ';')) {
-    ++i;
+    i += 1;
 // colon = true;
     break;
     }
     }
 // Actual set, advance i
-    if (len != 0)
+    if (len != 0) {
 // iout = i;
+    }
     return pos + 1;
     }
-    static int user_field_set_string(struct ftrace_event_field *field,
-    char *buf, int len, bool colon)
-    {
-    let mut pos: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn user_field_set_string(field: *mut ftrace_event_field, buf: *mut c_char, len: c_int, colon: bool) -> c_int {
+pub static mut pos: c_int = 0;
     pos += snprintf(buf + pos, LEN_OR_ZERO, "%s", field.type);
     pos += snprintf(buf + pos, LEN_OR_ZERO, " ");
     pos += snprintf(buf + pos, LEN_OR_ZERO, "%s", field.name);
-    if (str_has_prefix(field.type, "struct "))
+    if (str_has_prefix(field.type, "struct ")) {
     pos += snprintf(buf + pos, LEN_OR_ZERO, " %d", field.size);
-    if (colon)
+    }
+    if (colon) {
     pos += snprintf(buf + pos, LEN_OR_ZERO, ";");
+    }
     return pos + 1;
     }
 #[no_mangle]
 unsafe extern "C" fn user_event_set_print_fmt(user: *mut user_event, buf: *mut c_char, len: c_int) -> c_int {
-    static int user_event_set_print_fmt(struct user_event *user, char *buf, int len)
-    {
-    struct ftrace_event_field *field;
-    struct list_head *head = &user.fields;
-    let mut pos: c_int = 0, depth = 0;
-    const char *str_func;
+pub static mut field: *mut c_void = core::ptr::null_mut();
+    let mut head = &user.fields;
+pub static mut pos: c_int = 0;
+pub static mut str_func: *mut c_void = core::ptr::null_mut();
     pos += snprintf(buf + pos, LEN_OR_ZERO, "\"");
     list_for_each_entry_reverse(field, head, link) {
-    if (depth != 0)
+    if (depth != 0) {
     pos += snprintf(buf + pos, LEN_OR_ZERO, " ");
+    }
     pos += snprintf(buf + pos, LEN_OR_ZERO, "%s=%s",
     field.name, user_field_format(field.type));
-    depth++;
+    depth += 1;
     }
     pos += snprintf(buf + pos, LEN_OR_ZERO, "\"");
     list_for_each_entry_reverse(field, head, link) {
-    if (user_field_is_dyn_string(field.type, &str_func))
+    if (user_field_is_dyn_string(field.type, &str_func)) {
     pos += snprintf(buf + pos, LEN_OR_ZERO,
     ", %s(%s)", str_func, field.name);
-    else
+    }
+    else {
     pos += snprintf(buf + pos, LEN_OR_ZERO,
     ", REC.%s", field.name);
+    }
     }
     return pos + 1;
     }
 
 #[no_mangle]
 unsafe extern "C" fn user_event_create_print_fmt(user: *mut user_event) -> c_int {
-    static int user_event_create_print_fmt(struct user_event *user)
-    {
-    char *print_fmt;
-    int len;
+pub static mut print_fmt: *mut c_void = core::ptr::null_mut();
+    let mut len = 0;
     len = user_event_set_print_fmt(user, core::ptr::null_mut(), 0);
     print_fmt = kmalloc(len, GFP_KERNEL_ACCOUNT);
-    if (!print_fmt)
+    if (!print_fmt) {
     return -ENOMEM;
+    }
     user_event_set_print_fmt(user, print_fmt, len);
     user.call.print_fmt = print_fmt;
     return 0;
     }
-    static enum print_line_t user_event_print_trace(struct trace_iterator *iter,
-    int flags,
-    struct trace_event *event)
+    static enum print_line_t user_event_print_trace(trace_iterator *iter,
+    int flags, trace_event *event)
     {
     return print_event_fields(iter, event);
     }
-    static struct trace_event_functions user_event_funcs = {
-    .trace = user_event_print_trace,
-    };
+pub static mut trace_event_functions: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn user_event_set_call_visible(user: *mut user_event, visible: bool) -> c_int {
-    static int user_event_set_call_visible(struct user_event *user, bool visible)
-    {
     CLASS(prepare_creds, cred)();
-    if (!cred)
+    if (!cred) {
     return -ENOMEM;
+    }
 //
 // While by default tracefs is locked down, systems can be configured
 // to allow user_event files to be less locked down. The extreme case
@@ -1275,43 +1559,44 @@ unsafe extern "C" fn user_event_set_call_visible(user: *mut user_event, visible:
 //
     cred.fsuid = GLOBAL_ROOT_UID;
     scoped_with_creds(cred) {
-    if (visible)
+    if (visible) {
     return trace_add_event_call(&user.call);
+    }
     return trace_remove_event_call(&user.call);
     }
     }
 #[no_mangle]
 unsafe extern "C" fn destroy_user_event(user: *mut user_event) -> c_int {
-    static int destroy_user_event(struct user_event *user)
-    {
-    let mut ret: c_int = 0;
+pub static mut ret: c_int = 0;
     lockdep_assert_held(&event_mutex);
 // Must destroy fields before call removal
     user_event_destroy_fields(user);
     ret = user_event_set_call_visible(user, false);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     dyn_event_remove(&user.devent);
     hash_del(&user.node);
     user_event_destroy_validators(user);
 // If we have different names, both must be freed
-    if (EVENT_NAME(user) != EVENT_TP_NAME(user))
+    if (EVENT_NAME(user) != EVENT_TP_NAME(user)) {
     kfree(EVENT_TP_NAME(user));
+    }
     kfree(user.call.print_fmt);
     kfree(EVENT_NAME(user));
     kfree(user);
-    if (current_user_events > 0)
-    current_user_events--;
-    else
+    if (current_user_events > 0) {
+    current_user_events -= 1;
+    }
+    else {
     pr_alert("BUG: Bad current_user_events\n");
+    }
     return ret;
     }
-    static struct user_event *find_user_event(struct user_event_group *group,
-    char *name, int argc, const char **argv,
-    u32 flags, u32 *outkey)
-    {
-    struct user_event *user;
-    let mut key: u32 = user_event_key(name);
+#[no_mangle]
+pub unsafe extern "C" fn find_user_event(group: *mut user_event_group, name: *mut c_char, argc: c_int, argv: *mut *mut c_char, flags: u32, outkey: *mut u32) -> *mut c_void {
+pub static mut user: *mut c_void = core::ptr::null_mut();
+pub static mut key: u32 = 0;
 // outkey = key;
     hash_for_each_possible(group.register_table, user, node, key) {
 //
@@ -1319,73 +1604,82 @@ unsafe extern "C" fn destroy_user_event(user: *mut user_event) -> c_int {
 // events. Callers expect the underlying tracepoint to match
 // the name exactly in these cases. Only check like-formats.
 //
-    if (EVENT_MULTI_FORMAT(flags) != EVENT_MULTI_FORMAT(user.reg_flags))
+    if (EVENT_MULTI_FORMAT(flags) != EVENT_MULTI_FORMAT(user.reg_flags)) {
     continue;
-    if (strcmp(EVENT_NAME(user), name))
+    }
+    if (strcmp(EVENT_NAME(user), name)) {
     continue;
-    if (user_fields_match(user, argc, argv))
+    }
+    if (user_fields_match(user, argc, argv)) {
     return user_event_get(user);
+    }
 // Scan others if this is a multi-format event
-    if (EVENT_MULTI_FORMAT(flags))
+    if (EVENT_MULTI_FORMAT(flags)) {
     continue;
+    }
     return ERR_PTR(-EADDRINUSE);
     }
     return core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn user_event_validate(user: *mut user_event, data: *mut c_void, len: c_int) -> c_int {
-    static int user_event_validate(struct user_event *user, void *data, int len)
-    {
-    struct list_head *head = &user.validators;
-    struct user_event_validator *validator;
+    let mut head = &user.validators;
+pub static mut validator: *mut c_void = core::ptr::null_mut();
     void *pos, *end = data + len;
     u32 loc, offset, size;
     list_for_each_entry(validator, head, user_event_link) {
     pos = data + validator.offset;
 // Already done min_size check, no bounds check here
-    loc = *(u32 *)pos;
+    loc = *pos;
     offset = loc & 0xffff;
     size = loc >> 16;
-    if (likely(validator.flags & VALIDATOR_REL))
-    pos += offset + sizeof(loc);
-    else
+    if (likely(validator.flags & VALIDATOR_REL)) {
+    pos += offset + sizeof!(loc);
+    }
+    else {
     pos = data + offset;
+    }
     pos += size;
-    if (unlikely(pos > end))
+    if (unlikely(pos > end)) {
     return -EFAULT;
-    if (likely(validator.flags & VALIDATOR_ENSURE_NULL))
-    if (unlikely(*(char *)(pos - 1) != '\0'))
+    }
+    if (likely(validator.flags & VALIDATOR_ENSURE_NULL)) {
+    if (unlikely(*(pos - 1) != '\0'))
     return -EFAULT;
+    }
     }
     return 0;
     }
 //
 // Writes the user supplied payload out to a trace file.
 //
-    static void user_event_ftrace(struct user_event *user, struct iov_iter *i,
-    void *tpdata, bool *faulted)
-    {
-    struct trace_event_file *file;
-    struct trace_entry *entry;
-    struct trace_event_buffer event_buffer;
-    let mut size: usize = sizeof(*entry) + i.count;
-    file = (struct trace_event_file *)tpdata;
+#[no_mangle]
+pub unsafe extern "C" fn user_event_ftrace(user: *mut user_event, i: *mut iov_iter, tpdata: *mut c_void, faulted: *mut bool) {
+pub static mut file: *mut c_void = core::ptr::null_mut();
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut event_buffer: usize = 0;
+pub static mut size: usize = 0;
+    file = tpdata;
     if (!file ||
     !(file.flags & EVENT_FILE_FL_ENABLED) ||
-    trace_trigger_soft_disabled(file))
+    trace_trigger_soft_disabled(file)) {
     return;
+    }
 // Allocates and fills trace_entry, + 1 of this is data payload
     entry = trace_event_buffer_reserve(&event_buffer, file, size);
-    if (unlikely(!entry))
+    if (unlikely(!entry)) {
     return;
-    if (unlikely(i.count != 0 && !copy_nofault(entry + 1, i.count, i)))
-    goto discard;
+    }
+    if (unlikely(i.count != 0 && !copy_nofault(entry + 1, i.count, i))) {
+// goto;
+    }
     if (!list_empty(&user.validators) &&
-    unlikely(user_event_validate(user, entry, size)))
-    goto discard;
+    unlikely(user_event_validate(user, entry, size))) {
+// goto;
+    }
     trace_event_buffer_commit(&event_buffer);
     return;
-    discard:
+// label;
 // faulted = true;
     __trace_event_discard_commit(event_buffer.buffer,
     event_buffer.event);
@@ -1394,31 +1688,33 @@ unsafe extern "C" fn user_event_validate(user: *mut user_event, data: *mut c_voi
 //
 // Writes the user supplied payload out to perf ring buffer.
 //
-    static void user_event_perf(struct user_event *user, struct iov_iter *i,
-    void *tpdata, bool *faulted)
-    {
-    struct hlist_head *perf_head;
+#[no_mangle]
+pub unsafe extern "C" fn user_event_perf(user: *mut user_event, i: *mut iov_iter, tpdata: *mut c_void, faulted: *mut bool) {
+pub static mut perf_head: *mut c_void = core::ptr::null_mut();
     perf_head = this_cpu_ptr(user.call.perf_events);
     if (perf_head && !hlist_empty(perf_head)) {
-    struct trace_entry *perf_entry;
-    struct pt_regs *regs;
-    let mut size: usize = sizeof(*perf_entry) + i.count;
-    int context;
+pub static mut perf_entry: *mut c_void = core::ptr::null_mut();
+pub static mut regs: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 0;
+    let mut context = 0;
     perf_entry = perf_trace_buf_alloc(ALIGN(size, 8),
     &regs, &context);
-    if (unlikely(!perf_entry))
+    if (unlikely(!perf_entry)) {
     return;
+    }
     perf_fetch_caller_regs(regs);
-    if (unlikely(i.count != 0 && !copy_nofault(perf_entry + 1, i.count, i)))
-    goto discard;
+    if (unlikely(i.count != 0 && !copy_nofault(perf_entry + 1, i.count, i))) {
+// goto;
+    }
     if (!list_empty(&user.validators) &&
-    unlikely(user_event_validate(user, perf_entry, size)))
-    goto discard;
+    unlikely(user_event_validate(user, perf_entry, size))) {
+// goto;
+    }
     perf_trace_buf_submit(perf_entry, size, context,
     user.call.event.type, 1, regs,
     perf_head, core::ptr::null_mut());
     return;
-    discard:
+// label;
 // faulted = true;
     perf_swevent_put_recursion_context(context);
     }
@@ -1429,28 +1725,28 @@ unsafe extern "C" fn user_event_validate(user: *mut user_event, data: *mut c_voi
 //
 #[no_mangle]
 unsafe extern "C" fn update_enable_bit_for(user: *mut user_event) {
-    static void update_enable_bit_for(struct user_event *user)
-    {
-    struct tracepoint *tp = &user.tracepoint;
-    let mut status: c_char = 0;
+    let mut tp = &user.tracepoint;
+pub static mut status: c_char = 0;
     if (static_key_enabled(&tp.key)) {
-    struct tracepoint_func *probe_func_ptr;
-    user_event_func_t probe_func;
+pub static mut probe_func_ptr: *mut c_void = core::ptr::null_mut();
+    let mut probe_func;
     rcu_read_lock_sched();
     probe_func_ptr = rcu_dereference_sched(tp.funcs);
     if (probe_func_ptr) {
     do {
     probe_func = probe_func_ptr.func;
-    if (probe_func == user_event_ftrace)
+    if (probe_func == user_event_ftrace) {
     status |= EVENT_STATUS_FTRACE;
+    }
 
-#[no_mangle]
-pub unsafe extern "C" fn if(user_event_perf: probe_func ==) -> else {
-    else if (probe_func == user_event_perf)
+
+    else if (probe_func == user_event_perf) {
     status |= EVENT_STATUS_PERF;
+    }
 
-    else
+    else {
     status |= EVENT_STATUS_OTHER;
+    }
     } while ((++probe_func_ptr).func);
     }
     rcu_read_unlock_sched();
@@ -1461,72 +1757,81 @@ pub unsafe extern "C" fn if(user_event_perf: probe_func ==) -> else {
 //
 // Register callback for our events from tracing sub-systems.
 //
-    static int user_event_reg(struct trace_event_call *call,
-    enum trace_reg type,
-    void *data)
-    {
-    struct user_event *user = (struct user_event *)call.data;
-    let mut ret: c_int = 0;
-    if (!user)
+#[no_mangle]
+pub unsafe extern "C" fn user_event_reg(call: *mut trace_event_call, type: trace_reg, data: *mut c_void) -> c_int {
+    let mut user = call.data;
+pub static mut ret: c_int = 0;
+    if (!user) {
     return -ENOENT;
-    switch (type) {
-    case TRACE_REG_REGISTER:
+    }
+    match (type) {
+    TRACE_REG_REGISTER => {
     ret = tracepoint_probe_register(call.tp,
     call.class.probe,
     data);
-    if (!ret)
-    goto inc;
-    break;
-    case TRACE_REG_UNREGISTER:
+    if (!ret) {
+// goto;
+    }
+    // break;
+    }
+    TRACE_REG_UNREGISTER => {
     tracepoint_probe_unregister(call.tp,
     call.class.probe,
     data);
-    goto dec;
-
-    case TRACE_REG_PERF_REGISTER:
-    ret = tracepoint_probe_register(call.tp,
-    call.class.perf_probe,
-    data);
-    if (!ret)
-    goto inc;
-    break;
-    case TRACE_REG_PERF_UNREGISTER:
-    tracepoint_probe_unregister(call.tp,
-    call.class.perf_probe,
-    data);
-    goto dec;
-    case TRACE_REG_PERF_OPEN:
-    case TRACE_REG_PERF_CLOSE:
-    case TRACE_REG_PERF_ADD:
-    case TRACE_REG_PERF_DEL:
-    break;
+// goto;
 
     }
+    TRACE_REG_PERF_REGISTER => {
+    ret = tracepoint_probe_register(call.tp,
+    call.class.perf_probe,
+    data);
+    if (!ret) {
+// goto;
+    }
+    // break;
+    }
+    TRACE_REG_PERF_UNREGISTER => {
+    tracepoint_probe_unregister(call.tp,
+    call.class.perf_probe,
+    data);
+// goto;
+    }
+    TRACE_REG_PERF_OPEN => {
+    }
+    TRACE_REG_PERF_CLOSE => {
+    }
+    TRACE_REG_PERF_ADD => {
+    }
+    TRACE_REG_PERF_DEL => {
+    // break;
+
+    }
+    }
     return ret;
-    inc:
+// label;
     user_event_get(user);
     update_enable_bit_for(user);
     return 0;
-    dec:
+// label;
     update_enable_bit_for(user);
     user_event_put(user, true);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn user_event_create(raw_command: *const c_char) -> c_int {
-    static int user_event_create(const char *raw_command)
-    {
-    struct user_event_group *group;
-    struct user_event *user;
-    char *name;
-    int ret;
-    if (!str_has_prefix(raw_command, USER_EVENTS_PREFIX))
+pub static mut group: *mut c_void = core::ptr::null_mut();
+pub static mut user: *mut c_void = core::ptr::null_mut();
+pub static mut name: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (!str_has_prefix(raw_command, USER_EVENTS_PREFIX)) {
     return -ECANCELED;
+    }
     raw_command += USER_EVENTS_PREFIX_LEN;
     raw_command = skip_spaces(raw_command);
     name = kstrdup(raw_command, GFP_KERNEL_ACCOUNT);
-    if (!name)
+    if (!name) {
     return -ENOMEM;
+    }
     group = current_user_event_group();
     if (!group) {
     kfree(name);
@@ -1535,145 +1840,144 @@ unsafe extern "C" fn user_event_create(raw_command: *const c_char) -> c_int {
     mutex_lock(&group.reg_mutex);
 // Dyn events persist, otherwise they would cleanup immediately
     ret = user_event_parse_cmd(group, name, &user, USER_EVENT_REG_PERSIST);
-    if (!ret)
+    if (!ret) {
     user_event_put(user, false);
+    }
     mutex_unlock(&group.reg_mutex);
-    if (ret)
+    if (ret) {
     kfree(name);
+    }
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn user_event_show(m: *mut seq_file, ev: *mut dyn_event) -> c_int {
-    static int user_event_show(struct seq_file *m, struct dyn_event *ev)
-    {
-    struct user_event *user = container_of(ev, struct user_event, devent);
-    struct ftrace_event_field *field;
-    struct list_head *head;
-    let mut depth: c_int = 0;
+    let mut user = container_of!(ev, user_event, devent);
+pub static mut field: *mut c_void = core::ptr::null_mut();
+pub static mut head: *mut c_void = core::ptr::null_mut();
+pub static mut depth: c_int = 0;
     seq_printf(m, "%s%s", USER_EVENTS_PREFIX, EVENT_NAME(user));
     head = trace_get_fields(&user.call);
     list_for_each_entry_reverse(field, head, link) {
-    if (depth == 0)
+    if (depth == 0) {
     seq_putc(m, ' ');
-    else
+    }
+    else {
     seq_puts(m, "; ");
+    }
     seq_printf(m, "%s %s", field.type, field.name);
-    if (str_has_prefix(field.type, "struct "))
+    if (str_has_prefix(field.type, "struct ")) {
     seq_printf(m, " %d", field.size);
-    depth++;
+    }
+    depth += 1;
     }
     seq_putc(m, '\n');
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn user_event_is_busy(ev: *mut dyn_event) -> bool {
-    static bool user_event_is_busy(struct dyn_event *ev)
-    {
-    struct user_event *user = container_of(ev, struct user_event, devent);
+    let mut user = container_of!(ev, user_event, devent);
     return !user_event_last_ref(user);
     }
 #[no_mangle]
 unsafe extern "C" fn user_event_free(ev: *mut dyn_event) -> c_int {
-    static int user_event_free(struct dyn_event *ev)
-    {
-    struct user_event *user = container_of(ev, struct user_event, devent);
-    if (!user_event_last_ref(user))
+    let mut user = container_of!(ev, user_event, devent);
+    if (!user_event_last_ref(user)) {
     return -EBUSY;
-    if (!user_event_capable(user.reg_flags))
+    }
+    if (!user_event_capable(user.reg_flags)) {
     return -EPERM;
+    }
     return destroy_user_event(user);
     }
-    static bool user_field_match(struct ftrace_event_field *field, int argc,
-    const char **argv, int *iout)
-    {
-    char *field_name = core::ptr::null_mut(), *dyn_field_name = core::ptr::null_mut();
-    let mut colon: bool = false, match = false;
-    int dyn_len, len;
-    if (*iout >= argc)
+#[no_mangle]
+pub unsafe extern "C" fn user_field_match(field: *mut ftrace_event_field, argc: c_int, argv: *mut *mut c_char, iout: *mut c_int) -> bool {
+    let mut field_name = core::ptr::null_mut(), *dyn_field_name = core::ptr::null_mut();
+pub static mut colon: bool = false;
+    let mut dyn_len = 0;
+    let mut len = 0;
+    if (*iout >= argc) {
     return false;
+    }
     dyn_len = user_dyn_field_set_string(argc, argv, iout, dyn_field_name,
     0, &colon);
     len = user_field_set_string(field, field_name, 0, colon);
-    if (dyn_len != len)
+    if (dyn_len != len) {
     return false;
+    }
     dyn_field_name = kmalloc(dyn_len, GFP_KERNEL);
     field_name = kmalloc(len, GFP_KERNEL);
-    if (!dyn_field_name || !field_name)
-    goto out;
+    if (!dyn_field_name || !field_name) {
+// goto;
+    }
     user_dyn_field_set_string(argc, argv, iout, dyn_field_name,
     dyn_len, &colon);
     user_field_set_string(field, field_name, len, colon);
     match = strcmp(dyn_field_name, field_name) == 0;
-    out:
+// label;
     kfree(dyn_field_name);
     kfree(field_name);
     return match;
     }
-    static bool user_fields_match(struct user_event *user, int argc,
-    const char **argv)
-    {
-    struct ftrace_event_field *field;
-    struct list_head *head = &user.fields;
-    let mut i: c_int = 0;
-    if (argc == 0)
+#[no_mangle]
+pub unsafe extern "C" fn user_fields_match(user: *mut user_event, argc: c_int, argv: *mut *mut c_char) -> bool {
+pub static mut field: *mut c_void = core::ptr::null_mut();
+    let mut head = &user.fields;
+pub static mut i: c_int = 0;
+    if (argc == 0) {
     return list_empty(head);
+    }
     list_for_each_entry_reverse(field, head, link) {
-    if (!user_field_match(field, argc, argv, &i))
+    if (!user_field_match(field, argc, argv, &i)) {
     return false;
     }
-    if (i != argc)
+    }
+    if (i != argc) {
     return false;
+    }
     return true;
     }
-    static bool user_event_match(const char *system, const char *event,
-    int argc, const char **argv, struct dyn_event *ev)
-    {
-    struct user_event *user = container_of(ev, struct user_event, devent);
-    bool match;
+#[no_mangle]
+pub unsafe extern "C" fn user_event_match(system: *mut c_char, event: *mut c_char, argc: c_int, argv: *mut *mut c_char, ev: *mut dyn_event) -> bool {
+    let mut user = container_of!(ev, user_event, devent);
+    let mut match = 0;
     match = strcmp(EVENT_NAME(user), event) == 0;
     if (match && system) {
     match = strcmp(system, user.group.system_name) == 0 ||
     strcmp(system, user.group.system_multi_name) == 0;
     }
-    if (match)
+    if (match) {
     match = user_fields_match(user, argc, argv);
+    }
     return match;
     }
-    static struct dyn_event_operations user_event_dops = {
-    .create = user_event_create,
-    .show = user_event_show,
-    .is_busy = user_event_is_busy,
-    .free = user_event_free,
-    .match = user_event_match,
-    };
+pub static mut dyn_event_operations: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn user_event_trace_register(user: *mut user_event) -> c_int {
-    static int user_event_trace_register(struct user_event *user)
-    {
-    int ret;
+    let mut ret = 0;
     ret = register_trace_event(&user.call.event);
-    if (!ret)
+    if (!ret) {
     return -ENODEV;
+    }
     ret = user_event_set_call_visible(user, true);
-    if (ret)
+    if (ret) {
     unregister_trace_event(&user.call.event);
+    }
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn user_event_set_tp_name(user: *mut user_event) -> c_int {
-    static int user_event_set_tp_name(struct user_event *user)
-    {
     lockdep_assert_held(&user.group.reg_mutex);
     if (EVENT_MULTI_FORMAT(user.reg_flags)) {
-    char *multi_name;
+pub static mut multi_name: *mut c_void = core::ptr::null_mut();
     multi_name = kasprintf(GFP_KERNEL_ACCOUNT, "%s.%llx",
     user.reg_name, user.group.multi_id);
-    if (!multi_name)
+    if (!multi_name) {
     return -ENOMEM;
+    }
     user.call.name = multi_name;
     user.tracepoint.name = multi_name;
 // Inc to ensure unique multi-event name next time
-    user.group.multi_id++;
+    user.group.multi_id += 1;
     } else {
 // Non Multi-format uses register name
     user.call.name = user.reg_name;
@@ -1686,51 +1990,55 @@ unsafe extern "C" fn user_event_set_tp_name(user: *mut user_event) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn count_semis_no_space(args: *mut c_char) -> c_int {
-    static int count_semis_no_space(char *args)
-    {
-    let mut count: c_int = 0;
+pub static mut count: c_int = 0;
     while ((args = strchr(args, ';'))) {
-    args++;
-    if (!isspace(*args))
-    count++;
+    args += 1;
+    if (!isspace(*args)) {
+    count += 1;
+    }
     }
     return count;
     }
 //
 // Copies the arguments while ensuring all ';' have a trailing space.
 //
-    static char *insert_space_after_semis(char *args, int count)
-    {
-    char *fixed, *pos;
-    int len;
+#[no_mangle]
+pub unsafe extern "C" fn insert_space_after_semis(args: *mut c_char, count: c_int) -> *mut c_void {
+    let mut fixed = core::ptr::null_mut();
+    let mut pos = core::ptr::null_mut();
+    let mut len = 0;
     len = strlen(args) + count;
     fixed = kmalloc(len + 1, GFP_KERNEL);
-    if (!fixed)
+    if (!fixed) {
     return core::ptr::null_mut();
+    }
     pos = fixed;
 // Insert a space after ';' if there is no trailing space.
     while (*args) {
-// pos = *args++;
-    if (*pos++ == ';' && !isspace(*args))
+// pos = *args += 1;
+    if (*pos++ == ';' && !isspace(*args)) {
 // pos++ = ' ';
+    }
     }
 // pos = '\0';
     return fixed;
     }
     static char **user_event_argv_split(char *args, int *argc)
     {
-    char **split;
-    char *fixed;
-    int count;
+pub static mut split: *mut c_void = core::ptr::null_mut();
+pub static mut fixed: *mut c_void = core::ptr::null_mut();
+    let mut count = 0;
 // Count how many ';' without a trailing space
     count = count_semis_no_space(args);
 // No fixup is required
-    if (!count)
+    if (!count) {
     return argv_split(GFP_KERNEL, args, argc);
+    }
 // We must fixup 'field;field' to 'field; field'
     fixed = insert_space_after_semis(args, count);
-    if (!fixed)
+    if (!fixed) {
     return core::ptr::null_mut();
+    }
 // We do a normal split afterwards
     split = argv_split(GFP_KERNEL, fixed, argc);
 // We can free since argv_split makes a copy
@@ -1742,34 +2050,37 @@ unsafe extern "C" fn count_semis_no_space(args: *mut c_char) -> c_int {
 // The name buffer lifetime is owned by this method for success cases only.
 // Upon success the returned user_event has its ref count increased by 1.
 //
-    static int user_event_parse(struct user_event_group *group, char *name,
-    char *args, char *flags,
-    struct user_event **newuser, int reg_flags)
-    {
-    struct user_event *user;
-    char **argv = core::ptr::null_mut();
-    let mut argc: c_int = 0;
-    int ret;
-    u32 key;
+#[no_mangle]
+pub unsafe extern "C" fn user_event_parse(group: *mut user_event_group, name: *mut c_char, args: *mut c_char, flags: *mut c_char, newuser: *mut *mut user_event, reg_flags: c_int) -> c_int {
+pub static mut user: *mut c_void = core::ptr::null_mut();
+    let mut argv = core::ptr::null_mut();
+pub static mut argc: c_int = 0;
+    let mut ret = 0;
+    let mut key = 0;
 // Currently don't support any text based flags
-    if (flags != core::ptr::null_mut())
+    if (flags != core::ptr::null_mut()) {
     return -EINVAL;
-    if (!user_event_capable(reg_flags))
+    }
+    if (!user_event_capable(reg_flags)) {
     return -EPERM;
+    }
     if (args) {
     argv = user_event_argv_split(args, &argc);
-    if (!argv)
+    if (!argv) {
     return -ENOMEM;
+    }
     }
 // Prevent dyn_event from racing
     mutex_lock(&event_mutex);
-    user = find_user_event(group, name, argc, (const char **)argv,
+    user = find_user_event(group, name, argc, argv,
     reg_flags, &key);
     mutex_unlock(&event_mutex);
-    if (argv)
+    if (argv) {
     argv_free(argv);
-    if (IS_ERR(user))
+    }
+    if (IS_ERR(user)) {
     return PTR_ERR(user);
+    }
     if (user) {
 // newuser = user;
 //
@@ -1780,8 +2091,9 @@ unsafe extern "C" fn count_semis_no_space(args: *mut c_char) -> c_int {
     return 0;
     }
     user = kzalloc_obj(*user, GFP_KERNEL_ACCOUNT);
-    if (!user)
+    if (!user) {
     return -ENOMEM;
+    }
     INIT_LIST_HEAD(&user.class.fields);
     INIT_LIST_HEAD(&user.fields);
     INIT_LIST_HEAD(&user.validators);
@@ -1789,23 +2101,28 @@ unsafe extern "C" fn count_semis_no_space(args: *mut c_char) -> c_int {
     user.reg_name = name;
     user.reg_flags = reg_flags;
     ret = user_event_set_tp_name(user);
-    if (ret)
-    goto put_user;
+    if (ret) {
+// goto;
+    }
     ret = user_event_parse_fields(user, args);
-    if (ret)
-    goto put_user;
+    if (ret) {
+// goto;
+    }
     ret = user_event_create_print_fmt(user);
-    if (ret)
-    goto put_user;
+    if (ret) {
+// goto;
+    }
     user.call.data = user;
     user.call.class = &user.class;
     user.call.flags = TRACE_EVENT_FL_TRACEPOINT;
     user.call.tp = &user.tracepoint;
     user.call.event.funcs = &user_event_funcs;
-    if (EVENT_MULTI_FORMAT(user.reg_flags))
+    if (EVENT_MULTI_FORMAT(user.reg_flags)) {
     user.class.system = group.system_multi_name;
-    else
+    }
+    else {
     user.class.system = group.system_name;
+    }
     user.class.fields_array = user_event_fields_array;
     user.class.get_fields = user_event_get_fields;
     user.class.reg = user_event_reg;
@@ -1816,11 +2133,12 @@ unsafe extern "C" fn count_semis_no_space(args: *mut c_char) -> c_int {
     mutex_lock(&event_mutex);
     if (current_user_events >= max_user_events) {
     ret = -EMFILE;
-    goto put_user_lock;
+// goto;
     }
     ret = user_event_trace_register(user);
-    if (ret)
-    goto put_user_lock;
+    if (ret) {
+// goto;
+    }
     if (user.reg_flags & USER_EVENT_REG_PERSIST) {
 // Ensure we track self ref and caller ref (2)
     refcount_set(&user.refcnt, 2);
@@ -1831,19 +2149,20 @@ unsafe extern "C" fn count_semis_no_space(args: *mut c_char) -> c_int {
     dyn_event_init(&user.devent, &user_event_dops);
     dyn_event_add(&user.devent, &user.call);
     hash_add(group.register_table, &user.node, key);
-    current_user_events++;
+    current_user_events += 1;
     mutex_unlock(&event_mutex);
 // newuser = user;
     return 0;
-    put_user_lock:
+// label;
     mutex_unlock(&event_mutex);
-    put_user:
+// label;
     user_event_destroy_fields(user);
     user_event_destroy_validators(user);
     kfree(user.call.print_fmt);
 // Caller frees reg_name on error, but not multi-name
-    if (EVENT_NAME(user) != EVENT_TP_NAME(user))
+    if (EVENT_NAME(user) != EVENT_TP_NAME(user)) {
     kfree(EVENT_TP_NAME(user));
+    }
     kfree(user);
     return ret;
     }
@@ -1852,25 +2171,27 @@ unsafe extern "C" fn count_semis_no_space(args: *mut c_char) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn delete_user_event(group: *mut user_event_group, name: *mut c_char) -> c_int {
-    static int delete_user_event(struct user_event_group *group, char *name)
-    {
-    struct user_event *user;
-    struct hlist_node *tmp;
-    let mut key: u32 = user_event_key(name);
-    let mut ret: c_int = -ENOENT;
+pub static mut user: *mut c_void = core::ptr::null_mut();
+pub static mut tmp: *mut c_void = core::ptr::null_mut();
+pub static mut key: u32 = 0;
+pub static mut ret: c_int = 0;
 // Attempt to delete all event(s) with the name passed in
     hash_for_each_possible_safe(group.register_table, user, tmp, node, key) {
-    if (strcmp(EVENT_NAME(user), name))
+    if (strcmp(EVENT_NAME(user), name)) {
     continue;
-    if (!user_event_last_ref(user))
-    return -EBUSY;
-    if (!user_event_capable(user.reg_flags))
-    return -EPERM;
-    ret = destroy_user_event(user);
-    if (ret)
-    goto out;
     }
-    out:
+    if (!user_event_last_ref(user)) {
+    return -EBUSY;
+    }
+    if (!user_event_capable(user.reg_flags)) {
+    return -EPERM;
+    }
+    ret = destroy_user_event(user);
+    if (ret) {
+// goto;
+    }
+    }
+// label;
     return ret;
     }
 //
@@ -1878,18 +2199,18 @@ unsafe extern "C" fn delete_user_event(group: *mut user_event_group, name: *mut 
 //
 #[no_mangle]
 unsafe extern "C" fn user_events_write_core(file: *mut file, i: *mut iov_iter) -> isize {
-    static ssize_t user_events_write_core(struct file *file, struct iov_iter *i)
-    {
-    struct user_event_file_info *info = file.private_data;
-    struct user_event_refs *refs;
-    struct user_event *user = core::ptr::null_mut();
-    struct tracepoint *tp;
-    let mut ret: isize = i.count;
-    int idx;
-    if (unlikely(copy_from_iter(&idx, sizeof(idx), i) != sizeof(idx)))
+    let mut info = file.private_data;
+pub static mut refs: *mut c_void = core::ptr::null_mut();
+    let mut user = core::ptr::null_mut();
+pub static mut tp: *mut c_void = core::ptr::null_mut();
+pub static mut ret: isize = 0;
+    let mut idx = 0;
+    if (unlikely(copy_from_iter(&idx, sizeof!(idx), i) != sizeof!(idx))) {
     return -EFAULT;
-    if (idx < 0)
+    }
+    if (idx < 0) {
     return -EINVAL;
+    }
     rcu_read_lock_sched();
     refs = rcu_dereference_sched(info.refs);
 //
@@ -1897,26 +2218,30 @@ unsafe extern "C" fn user_events_write_core(file: *mut file, i: *mut iov_iter) -
 // added. But the user retrieved from indexing into the events array
 // shall be immutable while the file is opened.
 //
-    if (likely(refs && idx < refs.count))
+    if (likely(refs && idx < refs.count)) {
     user = refs.events[idx];
+    }
     rcu_read_unlock_sched();
-    if (unlikely(user == core::ptr::null_mut()))
+    if (unlikely(user == core::ptr::null_mut())) {
     return -ENOENT;
-    if (unlikely(i.count < user.min_size))
+    }
+    if (unlikely(i.count < user.min_size)) {
     return -EINVAL;
+    }
     tp = &user.tracepoint;
 //
 // It's possible key.enabled disables after this check, however
 // we don't mind if a few events are included in this condition.
 //
     if (likely(static_key_enabled(&tp.key))) {
-    struct tracepoint_func *probe_func_ptr;
-    user_event_func_t probe_func;
-    struct iov_iter copy;
-    void *tpdata;
-    bool faulted;
-    if (unlikely(fault_in_iov_iter_readable(i, i.count)))
+pub static mut probe_func_ptr: *mut c_void = core::ptr::null_mut();
+    let mut probe_func;
+pub static mut copy: usize = 0;
+pub static mut tpdata: *mut c_void = core::ptr::null_mut();
+    let mut faulted = 0;
+    if (unlikely(fault_in_iov_iter_readable(i, i.count))) {
     return -EFAULT;
+    }
     faulted = false;
     rcu_read_lock_sched();
     probe_func_ptr = rcu_dereference_sched(tp.funcs);
@@ -1929,132 +2254,146 @@ unsafe extern "C" fn user_events_write_core(file: *mut file, i: *mut iov_iter) -
     } while ((++probe_func_ptr).func);
     }
     rcu_read_unlock_sched();
-    if (unlikely(faulted))
+    if (unlikely(faulted)) {
     return -EFAULT;
-    } else
+    }
+    } else {
     return -EBADF;
+    }
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn user_events_open(node: *mut inode, file: *mut file) -> c_int {
-    static int user_events_open(struct inode *node, struct file *file)
-    {
-    struct user_event_group *group;
-    struct user_event_file_info *info;
+pub static mut group: *mut c_void = core::ptr::null_mut();
+pub static mut info: *mut c_void = core::ptr::null_mut();
     group = current_user_event_group();
-    if (!group)
+    if (!group) {
     return -ENOENT;
+    }
     info = kzalloc_obj(*info, GFP_KERNEL_ACCOUNT);
-    if (!info)
+    if (!info) {
     return -ENOMEM;
+    }
     info.group = group;
     file.private_data = info;
     return 0;
     }
-    static ssize_t user_events_write(struct file *file, const char __user *ubuf,
-    size_t count, loff_t *ppos)
-    {
-    struct iov_iter i;
-    if (unlikely(*ppos != 0))
+#[no_mangle]
+pub unsafe extern "C" fn user_events_write(file: *mut file, ubuf: *mut c_char, count: size_t, ppos: *mut loff_t) -> ssize_t {
+pub static mut i: usize = 0;
+    if (unlikely(*ppos != 0)) {
     return -EFAULT;
-    if (unlikely(import_ubuf(ITER_SOURCE, (char __user *)ubuf, count, &i)))
+    }
+    if (unlikely(import_ubuf(ITER_SOURCE, ubuf, count, &i))) {
     return -EFAULT;
+    }
     return user_events_write_core(file, &i);
     }
 #[no_mangle]
 unsafe extern "C" fn user_events_write_iter(kp: *mut kiocb, i: *mut iov_iter) -> isize {
-    static ssize_t user_events_write_iter(struct kiocb *kp, struct iov_iter *i)
-    {
     return user_events_write_core(kp.ki_filp, i);
     }
-    static int user_events_ref_add(struct user_event_file_info *info,
-    struct user_event *user)
-    {
-    struct user_event_group *group = info.group;
-    struct user_event_refs *refs, *new_refs;
+#[no_mangle]
+pub unsafe extern "C" fn user_events_ref_add(info: *mut user_event_file_info, user: *mut user_event) -> c_int {
+    let mut group = info.group;
+    let mut refs = core::ptr::null_mut();
+    let mut new_refs = core::ptr::null_mut();
     int i, size, count = 0;
     refs = rcu_dereference_protected(info.refs,
     lockdep_is_held(&group.reg_mutex));
     if (refs) {
     count = refs.count;
-    for (i = 0; i < count; ++i)
+    for (i = 0; i < count; ++i) {
     if (refs.events[i] == user)
     return i;
     }
+    }
     size = struct_size(refs, events, count + 1);
     new_refs = kzalloc(size, GFP_KERNEL_ACCOUNT);
-    if (!new_refs)
+    if (!new_refs) {
     return -ENOMEM;
+    }
     new_refs.count = count + 1;
-    for (i = 0; i < count; ++i)
+    for (i = 0; i < count; ++i) {
     new_refs.events[i] = refs.events[i];
+    }
     new_refs.events[i] = user_event_get(user);
     rcu_assign_pointer(info.refs, new_refs);
-    if (refs)
+    if (refs) {
     kfree_rcu(refs, rcu);
+    }
     return i;
     }
 #[no_mangle]
-unsafe extern "C" fn user_reg_get(ureg: *mut user_reg __user, kreg: *mut user_reg) -> c_long {
-    static long user_reg_get(struct user_reg __user *ureg, struct user_reg *kreg)
-    {
-    u32 size;
-    long ret;
+unsafe extern "C" fn user_reg_get(ureg: *mut user_reg , kreg: *mut user_reg) -> c_long {
+    let mut size = 0;
+    let mut ret = 0;
     ret = get_user(size, &ureg.size);
-    if (ret)
+    if (ret) {
     return ret;
-    if (size > PAGE_SIZE)
+    }
+    if (size > PAGE_SIZE) {
     return -E2BIG;
-    if (size < offsetofend(struct user_reg, write_index))
-    return -EINVAL;
-    ret = copy_struct_from_user(kreg, sizeof(*kreg), ureg, size);
-    if (ret)
-    return ret;
-// Ensure only valid flags
-    if (kreg.flags & ~(USER_EVENT_REG_MAX-1))
-    return -EINVAL;
-// Ensure supported size
-    switch (kreg.enable_size) {
-    case 4:
-// 32-bit
-    break;
-
-    case 8:
-// 64-bit
-    break;
-
-    default:
+    }
+    if (size < offsetofend(user_reg, write_index)) {
     return -EINVAL;
     }
+    ret = copy_struct_from_user(kreg, sizeof!(*kreg), ureg, size);
+    if (ret) {
+    return ret;
+    }
+// Ensure only valid flags
+    if (kreg.flags & ~(USER_EVENT_REG_MAX-1)) {
+    return -EINVAL;
+    }
+// Ensure supported size
+    match (kreg.enable_size) {
+    4 => {
+// 32-bit
+    // break;
+
+    }
+    8 => {
+// 64-bit
+    // break;
+
+    }
+    _ => {
+    return -EINVAL;
+    }
+    }
 // Ensure natural alignment
-    if (kreg.enable_addr % kreg.enable_size)
+    if (kreg.enable_addr % kreg.enable_size) {
     return -EINVAL;
+    }
 // Ensure bit range for size
-    if (kreg.enable_bit > (kreg.enable_size * BITS_PER_BYTE) - 1)
+    if (kreg.enable_bit > (kreg.enable_size * BITS_PER_BYTE) - 1) {
     return -EINVAL;
+    }
 // Ensure accessible
-    if (!access_ok((const void __user *)(uintptr_t)kreg.enable_addr,
-    kreg.enable_size))
+    if (!access_ok((uintptr_t)kreg.enable_addr,
+    kreg.enable_size)) {
     return -EFAULT;
+    }
     kreg.size = size;
     return 0;
     }
 //
 // Registers a user_event on behalf of a user process.
 //
-    static long user_events_ioctl_reg(struct user_event_file_info *info,
-    unsigned long uarg)
-    {
-    struct user_reg __user *ureg = (struct user_reg __user *)uarg;
-    struct user_reg reg;
-    struct user_event *user;
-    struct user_event_enabler *enabler;
-    char *name;
-    long ret;
-    int write_result;
+#[no_mangle]
+pub unsafe extern "C" fn user_events_ioctl_reg(info: *mut user_event_file_info, uarg: c_ulong) -> c_long {
+    let mut ureg = uarg;
+pub static mut reg: usize = 0;
+pub static mut user: *mut c_void = core::ptr::null_mut();
+pub static mut enabler: *mut c_void = core::ptr::null_mut();
+pub static mut name: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    let mut write_result = 0;
     ret = user_reg_get(ureg, &reg);
-    if (ret)
+    if (ret) {
     return ret;
+    }
 //
 // Prevent users from using the same address and bit multiple times
 // within the same mm address space. This can cause unexpected behavior
@@ -2062,9 +2401,10 @@ unsafe extern "C" fn user_reg_get(ureg: *mut user_reg __user, kreg: *mut user_re
 // an error upon registering.
 //
     if (current_user_event_enabler_exists((unsigned long)reg.enable_addr,
-    reg.enable_bit))
+    reg.enable_bit)) {
     return -EADDRINUSE;
-    name = strndup_user((const char __user *)(uintptr_t)reg.name_args,
+    }
+    name = strndup_user((uintptr_t)reg.name_args,
     MAX_EVENT_DESC);
     if (IS_ERR(name)) {
     ret = PTR_ERR(name);
@@ -2079,8 +2419,9 @@ unsafe extern "C" fn user_reg_get(ureg: *mut user_reg __user, kreg: *mut user_re
 // No longer need parse ref, ref_add either worked or not
     user_event_put(user, false);
 // Positive number is index and valid
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
 //
 // user_events_ref_add succeeded:
 // At this point we have a user_event, it's lifetime is bound by the
@@ -2094,26 +2435,28 @@ unsafe extern "C" fn user_reg_get(ureg: *mut user_reg __user, kreg: *mut user_re
 // will be destroyed and the ref to the event will be decremented.
 //
     enabler = user_event_enabler_create(&reg, user, &write_result);
-    if (!enabler)
+    if (!enabler) {
     return -ENOMEM;
+    }
 // Write failed/faulted, give error back to caller
-    if (write_result)
+    if (write_result) {
     return write_result;
+    }
     put_user((u32)ret, &ureg.write_index);
     return 0;
     }
 //
 // Deletes a user_event on behalf of a user process.
 //
-    static long user_events_ioctl_del(struct user_event_file_info *info,
-    unsigned long uarg)
-    {
-    void __user *ubuf = (void __user *)uarg;
-    char *name;
-    long ret;
+#[no_mangle]
+pub unsafe extern "C" fn user_events_ioctl_del(info: *mut user_event_file_info, uarg: c_ulong) -> c_long {
+    let mut ubuf = uarg;
+pub static mut name: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     name = strndup_user(ubuf, MAX_EVENT_DESC);
-    if (IS_ERR(name))
+    if (IS_ERR(name)) {
     return PTR_ERR(name);
+    }
 // event_mutex prevents dyn_event from racing
     mutex_lock(&event_mutex);
     ret = delete_user_event(info.group, name);
@@ -2121,35 +2464,36 @@ unsafe extern "C" fn user_reg_get(ureg: *mut user_reg __user, kreg: *mut user_re
     kfree(name);
     return ret;
     }
-    static long user_unreg_get(struct user_unreg __user *ureg,
-    struct user_unreg *kreg)
-    {
-    u32 size;
-    long ret;
+#[no_mangle]
+pub unsafe extern "C" fn user_unreg_get(ureg: *mut user_unreg, kreg: *mut user_unreg) -> c_long {
+    let mut size = 0;
+    let mut ret = 0;
     ret = get_user(size, &ureg.size);
-    if (ret)
-    return ret;
-    if (size > PAGE_SIZE)
-    return -E2BIG;
-    if (size < offsetofend(struct user_unreg, disable_addr))
-    return -EINVAL;
-    ret = copy_struct_from_user(kreg, sizeof(*kreg), ureg, size);
-// Ensure no reserved values, since we don't support any yet
-    if (kreg.__reserved || kreg.__reserved2)
-    return -EINVAL;
+    if (ret) {
     return ret;
     }
-    static int user_event_mm_clear_bit(struct user_event_mm *user_mm,
-    unsigned long uaddr, unsigned char bit,
-    unsigned long flags)
-    {
-    struct user_event_enabler enabler;
-    int result;
-    let mut attempt: c_int = 0;
-    memset(&enabler, 0, sizeof(enabler));
+    if (size > PAGE_SIZE) {
+    return -E2BIG;
+    }
+    if (size < offsetofend(user_unreg, disable_addr)) {
+    return -EINVAL;
+    }
+    ret = copy_struct_from_user(kreg, sizeof!(*kreg), ureg, size);
+// Ensure no reserved values, since we don't support any yet
+    if (kreg.__reserved || kreg.__reserved2) {
+    return -EINVAL;
+    }
+    return ret;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn user_event_mm_clear_bit(user_mm: *mut user_event_mm, uaddr: c_ulong, bit: c_uchar, flags: c_ulong) -> c_int {
+pub static mut enabler: usize = 0;
+    let mut result = 0;
+pub static mut attempt: c_int = 0;
+    memset(&enabler, 0, sizeof!(enabler));
     enabler.addr = uaddr;
     enabler.values = bit | flags;
-    retry:
+// label;
 // Prevents state changes from racing with new enablers
     mutex_lock(&event_mutex);
 // Force the bit to be cleared, since no event is attached
@@ -2159,8 +2503,9 @@ unsafe extern "C" fn user_reg_get(ureg: *mut user_reg __user, kreg: *mut user_re
     mutex_unlock(&event_mutex);
     if (result) {
 // Attempt to fault-in and retry if it worked
-    if (!user_event_mm_fault_in(user_mm, uaddr, attempt))
-    goto retry;
+    if (!user_event_mm_fault_in(user_mm, uaddr, attempt)) {
+// goto;
+    }
     }
     return result;
     }
@@ -2169,19 +2514,20 @@ unsafe extern "C" fn user_reg_get(ureg: *mut user_reg __user, kreg: *mut user_re
 //
 #[no_mangle]
 unsafe extern "C" fn user_events_ioctl_unreg(uarg: c_ulong) -> c_long {
-    static long user_events_ioctl_unreg(unsigned long uarg)
-    {
-    struct user_unreg __user *ureg = (struct user_unreg __user *)uarg;
-    struct user_event_mm *mm = current.user_event_mm;
-    struct user_event_enabler *enabler, *next;
-    struct user_unreg reg;
-    unsigned long flags;
-    long ret;
+    let mut ureg = uarg;
+    let mut mm = current.user_event_mm;
+    let mut enabler = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+pub static mut reg: usize = 0;
+    let mut flags = 0;
+    let mut ret = 0;
     ret = user_unreg_get(ureg, &reg);
-    if (ret)
+    if (ret) {
     return ret;
-    if (!mm)
+    }
+    if (!mm) {
     return -ENOENT;
+    }
     flags = 0;
     ret = -ENOENT;
 //
@@ -2198,44 +2544,48 @@ unsafe extern "C" fn user_events_ioctl_unreg(uarg: c_ulong) -> c_long {
     set_bit(ENABLE_VAL_FREEING_BIT, ENABLE_BITOPS(enabler));
 // We must keep compat flags for the clear
     flags |= enabler.values & ENABLE_VAL_COMPAT_MASK;
-    if (!test_bit(ENABLE_VAL_FAULTING_BIT, ENABLE_BITOPS(enabler)))
+    if (!test_bit(ENABLE_VAL_FAULTING_BIT, ENABLE_BITOPS(enabler))) {
     user_event_enabler_destroy(enabler);
+    }
 // Removed at least one
     ret = 0;
     }
     }
     mutex_unlock(&event_mutex);
 // Ensure bit is now cleared for user, regardless of event status
-    if (!ret)
+    if (!ret) {
     ret = user_event_mm_clear_bit(mm, reg.disable_addr,
     reg.disable_bit, flags);
+    }
     return ret;
     }
 //
 // Handles the ioctl from user mode to register or alter operations.
 //
-    static long user_events_ioctl(struct file *file, unsigned int cmd,
-    unsigned long uarg)
-    {
-    struct user_event_file_info *info = file.private_data;
-    struct user_event_group *group = info.group;
-    let mut ret: c_long = -ENOTTY;
-    switch (cmd) {
-    case DIAG_IOCSREG:
+#[no_mangle]
+pub unsafe extern "C" fn user_events_ioctl(file: *mut file, cmd: c_uint, uarg: c_ulong) -> c_long {
+    let mut info = file.private_data;
+    let mut group = info.group;
+pub static mut ret: c_long = 0;
+    match (cmd) {
+    DIAG_IOCSREG => {
     mutex_lock(&group.reg_mutex);
     ret = user_events_ioctl_reg(info, uarg);
     mutex_unlock(&group.reg_mutex);
-    break;
-    case DIAG_IOCSDEL:
+    // break;
+    }
+    DIAG_IOCSDEL => {
     mutex_lock(&group.reg_mutex);
     ret = user_events_ioctl_del(info, uarg);
     mutex_unlock(&group.reg_mutex);
-    break;
-    case DIAG_IOCSUNREG:
+    // break;
+    }
+    DIAG_IOCSUNREG => {
     mutex_lock(&group.reg_mutex);
     ret = user_events_ioctl_unreg(uarg);
     mutex_unlock(&group.reg_mutex);
-    break;
+    // break;
+    }
     }
     return ret;
     }
@@ -2244,14 +2594,13 @@ unsafe extern "C" fn user_events_ioctl_unreg(uarg: c_ulong) -> c_long {
 //
 #[no_mangle]
 unsafe extern "C" fn user_events_release(node: *mut inode, file: *mut file) -> c_int {
-    static int user_events_release(struct inode *node, struct file *file)
-    {
-    struct user_event_file_info *info = file.private_data;
-    struct user_event_group *group;
-    struct user_event_refs *refs;
-    int i;
-    if (!info)
+    let mut info = file.private_data;
+pub static mut group: *mut c_void = core::ptr::null_mut();
+pub static mut refs: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    if (!info) {
     return -EINVAL;
+    }
     group = info.group;
 //
 // Ensure refs cannot change under any situation by taking the
@@ -2259,71 +2608,68 @@ unsafe extern "C" fn user_events_release(node: *mut inode, file: *mut file) -> c
 //
     mutex_lock(&group.reg_mutex);
     refs = info.refs;
-    if (!refs)
-    goto out;
+    if (!refs) {
+// goto;
+    }
 //
 // The lifetime of refs has reached an end, it's tied to this file.
 // The underlying user_events are ref counted, and cannot be freed.
 // After this decrement, the user_events may be freed elsewhere.
 //
-    for (i = 0; i < refs.count; ++i)
+    for (i = 0; i < refs.count; ++i) {
     user_event_put(refs.events[i], false);
-    out:
+    }
+// label;
     file.private_data = core::ptr::null_mut();
     mutex_unlock(&group.reg_mutex);
     kfree(refs);
     kfree(info);
     return 0;
     }
-    static const struct file_operations user_data_fops = {
-    .open		= user_events_open,
-    .write		= user_events_write,
-    .write_iter	= user_events_write_iter,
-    .unlocked_ioctl	= user_events_ioctl,
-    .release	= user_events_release,
-    };
-    static void *user_seq_start(struct seq_file *m, loff_t *pos)
-    {
-    if (*pos)
+pub static mut file_operations: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn user_seq_start(m: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
+    if (*pos) {
     return core::ptr::null_mut();
-    return (void *)1;
     }
-    static void *user_seq_next(struct seq_file *m, void *p, loff_t *pos)
-    {
+    return 1;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn user_seq_next(m: *mut seq_file, p: *mut c_void, pos: *mut loff_t) -> *mut c_void {
     ++*pos;
     return core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn user_seq_stop(m: *mut seq_file, p: *mut c_void) {
-    static void user_seq_stop(struct seq_file *m, void *p)
-    {
     }
 #[no_mangle]
 unsafe extern "C" fn user_seq_show(m: *mut seq_file, p: *mut c_void) -> c_int {
-    static int user_seq_show(struct seq_file *m, void *p)
-    {
-    struct user_event_group *group = m.private;
-    struct user_event *user;
-    char status;
+    let mut group = m.private;
+pub static mut user: *mut c_void = core::ptr::null_mut();
+    let mut status = 0;
     int i, active = 0, busy = 0;
-    if (!group)
+    if (!group) {
     return -EINVAL;
+    }
     mutex_lock(&group.reg_mutex);
     hash_for_each(group.register_table, i, user, node) {
     status = user.status;
     seq_puts(m, EVENT_TP_NAME(user));
     if (status != 0) {
     seq_puts(m, " # Used by");
-    if (status & EVENT_STATUS_FTRACE)
+    if (status & EVENT_STATUS_FTRACE) {
     seq_puts(m, " ftrace");
-    if (status & EVENT_STATUS_PERF)
+    }
+    if (status & EVENT_STATUS_PERF) {
     seq_puts(m, " perf");
-    if (status & EVENT_STATUS_OTHER)
+    }
+    if (status & EVENT_STATUS_OTHER) {
     seq_puts(m, " other");
-    busy++;
+    }
+    busy += 1;
     }
     seq_putc(m, '\n');
-    active++;
+    active += 1;
     }
     mutex_unlock(&group.reg_mutex);
     seq_putc(m, '\n');
@@ -2331,86 +2677,64 @@ unsafe extern "C" fn user_seq_show(m: *mut seq_file, p: *mut c_void) -> c_int {
     seq_printf(m, "Busy: %d\n", busy);
     return 0;
     }
-    static const struct seq_operations user_seq_ops = {
-    .start	= user_seq_start,
-    .next	= user_seq_next,
-    .stop	= user_seq_stop,
-    .show	= user_seq_show,
-    };
+pub static mut seq_operations: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn user_status_open(node: *mut inode, file: *mut file) -> c_int {
-    static int user_status_open(struct inode *node, struct file *file)
-    {
-    struct user_event_group *group;
-    int ret;
+pub static mut group: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     group = current_user_event_group();
-    if (!group)
+    if (!group) {
     return -ENOENT;
+    }
     ret = seq_open(file, &user_seq_ops);
     if (!ret) {
 // Chain group to seq_file
-    struct seq_file *m = file.private_data;
+    let mut m = file.private_data;
     m.private = group;
     }
     return ret;
     }
-    static const struct file_operations user_status_fops = {
-    .open		= user_status_open,
-    .read		= seq_read,
-    .llseek		= seq_lseek,
-    .release	= seq_release,
-    };
+pub static mut file_operations: usize = 0;
 //
 // Creates a set of tracefs files to allow user mode interactions.
 //
 #[no_mangle]
 unsafe extern "C" fn create_user_tracefs() -> c_int {
-    static int create_user_tracefs(void)
-    {
-    struct dentry *edata, *emmap;
+    let mut edata = core::ptr::null_mut();
+    let mut emmap = core::ptr::null_mut();
     edata = tracefs_create_file("user_events_data", TRACE_MODE_WRITE,
     core::ptr::null_mut(), core::ptr::null_mut(), &user_data_fops);
     if (!edata) {
-    pr_warn("Could not create tracefs 'user_events_data' entry\n");
-    goto err;
+    pr_warn!("Could not create tracefs 'user_events_data' entry\n");
+// goto;
     }
     emmap = tracefs_create_file("user_events_status", TRACE_MODE_READ,
     core::ptr::null_mut(), core::ptr::null_mut(), &user_status_fops);
     if (!emmap) {
     tracefs_remove(edata);
-    pr_warn("Could not create tracefs 'user_events_mmap' entry\n");
-    goto err;
+    pr_warn!("Could not create tracefs 'user_events_mmap' entry\n");
+// goto;
     }
     return 0;
-    err:
+// label;
     return -ENODEV;
     }
-    static int set_max_user_events_sysctl(const struct ctl_table *table, int write,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn set_max_user_events_sysctl(table: *mut ctl_table, write: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
+    let mut ret = 0;
     mutex_lock(&event_mutex);
     ret = proc_douintvec(table, write, buffer, lenp, ppos);
     mutex_unlock(&event_mutex);
     return ret;
     }
-    static const struct ctl_table user_event_sysctls[] = {
-    {
-    .procname	= "user_events_max",
-    .data		= &max_user_events,
-    .maxlen		= sizeof(unsigned int),
-    .mode		= 0644,
-    .proc_handler	= set_max_user_events_sysctl,
-    },
-    };
+pub static mut ctl_table: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn trace_events_user_init() -> int __init {
-    static int __init trace_events_user_init(void)
-    {
-    int ret;
+unsafe extern "C" fn trace_events_user_init() -> c_int {
+    let mut ret = 0;
     fault_cache = KMEM_CACHE(user_event_enabler_fault, 0);
-    if (!fault_cache)
+    if (!fault_cache) {
     return -ENOMEM;
+    }
     init_group = user_event_group_create();
     if (!init_group) {
     kmem_cache_destroy(fault_cache);
@@ -2418,15 +2742,16 @@ unsafe extern "C" fn trace_events_user_init() -> int __init {
     }
     ret = create_user_tracefs();
     if (ret) {
-    pr_warn("user_events could not register with tracefs\n");
+    pr_warn!("user_events could not register with tracefs\n");
     user_event_group_destroy(init_group);
     kmem_cache_destroy(fault_cache);
     init_group = core::ptr::null_mut();
     return ret;
     }
-    if (dyn_event_register(&user_event_dops))
-    pr_warn("user_events could not register with dyn_events\n");
+    if (dyn_event_register(&user_event_dops)) {
+    pr_warn!("user_events could not register with dyn_events\n");
+    }
     register_sysctl_init("kernel", user_event_sysctls);
     return 0;
     }
-    fs_initcall(trace_events_user_init);
+    fs_initcall!(trace_events_user_init);

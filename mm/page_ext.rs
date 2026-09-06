@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -89,8 +339,6 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
 #[no_mangle]
 unsafe extern "C" fn need_page_idle() -> bool {
-    static bool need_page_idle(void)
-    {
     return true;
     }
     static struct page_ext_operations page_idle_ops __initdata = {
@@ -111,7 +359,7 @@ unsafe extern "C" fn need_page_idle() -> bool {
     &page_iommu_debug_ops,
 
     };
-    unsigned long page_ext_size;
+    let mut page_ext_size = 0;
     static unsigned long total_usage;
 
 //
@@ -119,34 +367,30 @@ unsafe extern "C" fn need_page_idle() -> bool {
 // before the first page allocation. Otherwise early task stacks will be
 // allocated before page_ext initialization and missing tags will be flagged.
 //
-    let mut __meminitdata: bool early_page_ext = true;
+pub static mut __meminitdata: bool early_page_ext = true;
 
     bool early_page_ext __meminitdata;
 
 #[no_mangle]
-unsafe extern "C" fn setup_early_page_ext(str: *mut c_char) -> int __init {
-    static int __init setup_early_page_ext(char *str)
-    {
+unsafe extern "C" fn setup_early_page_ext(str: *mut c_char) -> c_int {
     early_page_ext = true;
     return 0;
     }
-    early_param("early_page_ext", setup_early_page_ext);
+    early_param!("early_page_ext", setup_early_page_ext);
 #[no_mangle]
 unsafe extern "C" fn invoke_need_callbacks() -> bool __init {
-    static bool __init invoke_need_callbacks(void)
-    {
-    int i;
-    let mut entries: c_int = ARRAY_SIZE(page_ext_ops);
-    let mut need: bool = false;
-    for (i = 0; i < entries; i++) {
+    let mut i = 0;
+pub static mut entries: c_int = 0;
+pub static mut need: bool = false;
+    while (i < entries) {
     if (page_ext_ops[i].need()) {
     if (page_ext_ops[i].need_shared_flags) {
-    page_ext_size = sizeof(struct page_ext);
+    page_ext_size = sizeof!(page_ext);
     break;
     }
     }
     }
-    for (i = 0; i < entries; i++) {
+    while (i < entries) {
     if (page_ext_ops[i].need()) {
     page_ext_ops[i].offset = page_ext_size;
     page_ext_size += page_ext_ops[i].size;
@@ -156,33 +400,30 @@ unsafe extern "C" fn invoke_need_callbacks() -> bool __init {
     return need;
     }
 #[no_mangle]
-unsafe extern "C" fn invoke_init_callbacks() -> void __init {
-    static void __init invoke_init_callbacks(void)
-    {
-    int i;
-    let mut entries: c_int = ARRAY_SIZE(page_ext_ops);
-    for (i = 0; i < entries; i++) {
-    if (page_ext_ops[i].init)
+unsafe extern "C" fn invoke_init_callbacks()  {
+    let mut i = 0;
+pub static mut entries: c_int = 0;
+    while (i < entries) {
+    if (page_ext_ops[i].init) {
     page_ext_ops[i].init();
     }
     }
-    static inline struct page_ext *get_entry(void *base, unsigned long index)
-    {
+    }
+#[no_mangle]
+pub unsafe extern "C" fn get_entry(base: *mut c_void, index: c_ulong) -> *mut c_void {
     return base + page_ext_size * index;
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn page_ext_init_flatmem_late() -> void __init {
-    void __init page_ext_init_flatmem_late(void)
-    {
+pub unsafe extern "C" fn page_ext_init_flatmem_late()  {
     invoke_init_callbacks();
     }
-    static struct page_ext *lookup_page_ext(const struct page *page)
-    {
-    let mut pfn: c_ulong = page_to_pfn(page);
-    unsigned long index;
-    struct page_ext *base;
-    WARN_ON_ONCE(!rcu_read_lock_held());
+#[no_mangle]
+pub unsafe extern "C" fn lookup_page_ext(page: *mut page) -> *mut c_void {
+pub static mut pfn: c_ulong = 0;
+    let mut index = 0;
+pub static mut base: *mut c_void = core::ptr::null_mut();
+    WARN_ON_ONCE!(!rcu_read_lock_held());
     base = NODE_DATA(page_to_nid(page)).node_page_ext;
 //
 // The sanity checks the page allocator does upon freeing a
@@ -190,107 +431,111 @@ pub unsafe extern "C" fn page_ext_init_flatmem_late() -> void __init {
 // allocated when feeding a range of pages to the allocator
 // for the first time during bootup or memory hotplug.
 //
-    if (unlikely(!base))
+    if (unlikely(!base)) {
     return core::ptr::null_mut();
+    }
     index = pfn - round_down(node_start_pfn(page_to_nid(page)),
     MAX_ORDER_NR_PAGES);
     return get_entry(base, index);
     }
 #[no_mangle]
-unsafe extern "C" fn alloc_node_page_ext(nid: c_int) -> int __init {
-    static int __init alloc_node_page_ext(int nid)
-    {
-    struct page_ext *base;
-    unsigned long table_size;
-    unsigned long nr_pages;
+unsafe extern "C" fn alloc_node_page_ext(nid: c_int) -> c_int {
+pub static mut base: *mut c_void = core::ptr::null_mut();
+    let mut table_size = 0;
+    let mut nr_pages = 0;
     nr_pages = NODE_DATA(nid).node_spanned_pages;
-    if (!nr_pages)
+    if (!nr_pages) {
     return 0;
+    }
 //
 // Need extra space if node range is not aligned with
 // MAX_ORDER_NR_PAGES. When page allocator's buddy algorithm
 // checks buddy's status, range could be out of exact node range.
 //
     if (!IS_ALIGNED(node_start_pfn(nid), MAX_ORDER_NR_PAGES) ||
-    !IS_ALIGNED(node_end_pfn(nid), MAX_ORDER_NR_PAGES))
+    !IS_ALIGNED(node_end_pfn(nid), MAX_ORDER_NR_PAGES)) {
     nr_pages += MAX_ORDER_NR_PAGES;
+    }
     table_size = page_ext_size * nr_pages;
     base = memblock_alloc_try_nid(
     table_size, PAGE_SIZE, __pa(MAX_DMA_ADDRESS),
     MEMBLOCK_ALLOC_ACCESSIBLE, nid);
-    if (!base)
+    if (!base) {
     return -ENOMEM;
+    }
     NODE_DATA(nid).node_page_ext = base;
     total_usage += table_size;
     memmap_boot_pages_add(DIV_ROUND_UP(table_size, PAGE_SIZE));
     return 0;
     }
 #[no_mangle]
-pub unsafe extern "C" fn page_ext_init_flatmem() -> void __init {
-    void __init page_ext_init_flatmem(void)
-    {
-    int nid, fail;
-    if (!invoke_need_callbacks())
+pub unsafe extern "C" fn page_ext_init_flatmem()  {
+    let mut nid = 0;
+    let mut fail = 0;
+    if (!invoke_need_callbacks()) {
     return;
+    }
     for_each_online_node(nid)  {
     fail = alloc_node_page_ext(nid);
-    if (fail)
-    goto fail;
+    if (fail) {
+// goto;
     }
-    pr_info("allocated %ld bytes of page_ext\n", total_usage);
+    }
+    pr_info!("allocated %ld bytes of page_ext\n", total_usage);
     return;
-    fail:
+// label;
     pr_crit("allocation of page_ext failed.\n");
     panic("Out of memory");
     }
 
 #[no_mangle]
 unsafe extern "C" fn page_ext_invalid(page_ext: *mut page_ext) -> bool {
-    static bool page_ext_invalid(struct page_ext *page_ext)
-    {
     return !page_ext || (((unsigned long)page_ext & PAGE_EXT_INVALID) == PAGE_EXT_INVALID);
     }
-    static struct page_ext *lookup_page_ext(const struct page *page)
-    {
-    let mut pfn: c_ulong = page_to_pfn(page);
-    struct mem_section *section = __pfn_to_section(pfn);
-    struct page_ext *page_ext = READ_ONCE(section.page_ext);
-    WARN_ON_ONCE(!rcu_read_lock_held());
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: lookup_page_ext
+pub unsafe extern "C" fn lookup_page_ext_dup(page: *mut page) -> *mut c_void {
+pub static mut pfn: c_ulong = 0;
+    let mut section = __pfn_to_section(pfn);
+    let mut page_ext = READ_ONCE(section.page_ext);
+    WARN_ON_ONCE!(!rcu_read_lock_held());
 //
 // The sanity checks the page allocator does upon freeing a
 // page can reach here before the page_ext arrays are
 // allocated when feeding a range of pages to the allocator
 // for the first time during bootup or memory hotplug.
 //
-    if (page_ext_invalid(page_ext))
+    if (page_ext_invalid(page_ext)) {
     return core::ptr::null_mut();
+    }
     return get_entry(page_ext, pfn);
     }
 #[no_mangle]
-unsafe extern "C" fn alloc_page_ext(size: usize, nid: c_int) -> *mut void __meminit {
-    static void *__meminit alloc_page_ext(size_t size, int nid)
-    {
-    let mut flags: gfp_t = GFP_KERNEL | __GFP_ZERO | __GFP_NOWARN;
-    void *addr = core::ptr::null_mut();
+unsafe extern "C" fn alloc_page_ext(size: usize, nid: c_int) -> *mut c_void {
+pub static mut flags: gfp_t = 0;
+    let mut addr = core::ptr::null_mut();
     addr = alloc_pages_exact_nid(nid, size, flags);
-    if (addr)
+    if (addr) {
     kmemleak_alloc(addr, size, 1, flags);
-    else
+    }
+    else {
     addr = vzalloc_node(size, nid);
-    if (addr)
+    }
+    if (addr) {
     memmap_pages_add(DIV_ROUND_UP(size, PAGE_SIZE));
+    }
     return addr;
     }
 #[no_mangle]
 unsafe extern "C" fn init_section_page_ext(pfn: c_ulong, nid: c_int) -> int __meminit {
-    static int __meminit init_section_page_ext(unsigned long pfn, int nid)
-    {
-    struct mem_section *section;
-    struct page_ext *base;
-    unsigned long table_size;
+pub static mut section: *mut c_void = core::ptr::null_mut();
+pub static mut base: *mut c_void = core::ptr::null_mut();
+    let mut table_size = 0;
     section = __pfn_to_section(pfn);
-    if (section.page_ext)
+    if (section.page_ext) {
     return 0;
+    }
     table_size = page_ext_size * PAGES_PER_SECTION;
     base = alloc_page_ext(table_size, nid);
 //
@@ -300,7 +545,7 @@ unsafe extern "C" fn init_section_page_ext(pfn: c_ulong, nid: c_int) -> int __me
 //
     kmemleak_not_leak(base);
     if (!base) {
-    pr_err("page ext allocation failure\n");
+    pr_err!("page ext allocation failure\n");
     return -ENOMEM;
     }
 //
@@ -308,75 +553,75 @@ unsafe extern "C" fn init_section_page_ext(pfn: c_ulong, nid: c_int) -> int __me
 // we need to apply a mask.
 //
     pfn &= PAGE_SECTION_MASK;
-    section.page_ext = (void *)base - page_ext_size * pfn;
+    section.page_ext = base - page_ext_size * pfn;
     total_usage += table_size;
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn free_page_ext(addr: *mut c_void) {
-    static void free_page_ext(void *addr)
-    {
-    size_t table_size;
-    struct page *page;
+    let mut table_size = 0;
+pub static mut page: *mut c_void = core::ptr::null_mut();
     table_size = page_ext_size * PAGES_PER_SECTION;
     memmap_pages_add(-1L * (DIV_ROUND_UP(table_size, PAGE_SIZE)));
     if (is_vmalloc_addr(addr)) {
     vfree(addr);
     } else {
     page = virt_to_page(addr);
-    BUG_ON(PageReserved(page));
+    BUG_ON!(PageReserved(page));
     kmemleak_free(addr);
     free_pages_exact(addr, table_size);
     }
     }
 #[no_mangle]
 unsafe extern "C" fn __free_page_ext(pfn: c_ulong) {
-    static void __free_page_ext(unsigned long pfn)
-    {
-    struct mem_section *ms;
-    struct page_ext *base;
+pub static mut ms: *mut c_void = core::ptr::null_mut();
+pub static mut base: *mut c_void = core::ptr::null_mut();
     ms = __pfn_to_section(pfn);
-    if (!ms || !ms.page_ext)
+    if (!ms || !ms.page_ext) {
     return;
+    }
     base = READ_ONCE(ms.page_ext);
 //
 // page_ext here can be valid while doing the roll back
 // operation in online_page_ext().
 //
-    if (page_ext_invalid(base))
-    base = (void *)base - PAGE_EXT_INVALID;
+    if (page_ext_invalid(base)) {
+    base = base - PAGE_EXT_INVALID;
+    }
     WRITE_ONCE(ms.page_ext, core::ptr::null_mut());
     base = get_entry(base, pfn);
     free_page_ext(base);
     }
 #[no_mangle]
 unsafe extern "C" fn __invalidate_page_ext(pfn: c_ulong) {
-    static void __invalidate_page_ext(unsigned long pfn)
-    {
-    struct mem_section *ms;
-    void *val;
+pub static mut ms: *mut c_void = core::ptr::null_mut();
+pub static mut val: *mut c_void = core::ptr::null_mut();
     ms = __pfn_to_section(pfn);
-    if (!ms || !ms.page_ext)
+    if (!ms || !ms.page_ext) {
     return;
-    val = (void *)ms.page_ext + PAGE_EXT_INVALID;
+    }
+    val = ms.page_ext + PAGE_EXT_INVALID;
     WRITE_ONCE(ms.page_ext, val);
     }
     static int __meminit online_page_ext(unsigned long start_pfn,
     unsigned long nr_pages)
     {
-    let mut nid: c_int = pfn_to_nid(start_pfn);
+pub static mut nid: c_int = 0;
     unsigned long start, end, pfn;
-    let mut fail: c_int = 0;
+pub static mut fail: c_int = 0;
     start = SECTION_ALIGN_DOWN(start_pfn);
     end = SECTION_ALIGN_UP(start_pfn + nr_pages);
-    for (pfn = start; !fail && pfn < end; pfn += PAGES_PER_SECTION)
+    for (pfn = start; !fail && pfn < end; pfn += PAGES_PER_SECTION) {
     fail = init_section_page_ext(pfn, nid);
-    if (!fail)
+    }
+    if (!fail) {
     return 0;
+    }
 // rollback
     end = pfn - PAGES_PER_SECTION;
-    for (pfn = start; pfn < end; pfn += PAGES_PER_SECTION)
+    for (pfn = start; pfn < end; pfn += PAGES_PER_SECTION) {
     __free_page_ext(pfn);
+    }
     return -ENOMEM;
     }
     static void __meminit offline_page_ext(unsigned long start_pfn,
@@ -394,45 +639,52 @@ unsafe extern "C" fn __invalidate_page_ext(pfn: c_ulong) {
 // started before invalidation to finish.
 // 3) Free the page_ext.
 //
-    for (pfn = start; pfn < end; pfn += PAGES_PER_SECTION)
+    for (pfn = start; pfn < end; pfn += PAGES_PER_SECTION) {
     __invalidate_page_ext(pfn);
+    }
     synchronize_rcu();
-    for (pfn = start; pfn < end; pfn += PAGES_PER_SECTION)
+    for (pfn = start; pfn < end; pfn += PAGES_PER_SECTION) {
     __free_page_ext(pfn);
     }
-    static int __meminit page_ext_callback(struct notifier_block *self,
+    }
+    static int __meminit page_ext_callback(notifier_block *self,
     unsigned long action, void *arg)
     {
-    struct memory_notify *mn = arg;
-    let mut ret: c_int = 0;
-    switch (action) {
-    case MEM_GOING_ONLINE:
+    let mut mn = arg;
+pub static mut ret: c_int = 0;
+    match (action) {
+    MEM_GOING_ONLINE => {
     ret = online_page_ext(mn.start_pfn, mn.nr_pages);
-    break;
-    case MEM_OFFLINE:
+    // break;
+    }
+    MEM_OFFLINE => {
     offline_page_ext(mn.start_pfn,
     mn.nr_pages);
-    break;
-    case MEM_CANCEL_ONLINE:
+    // break;
+    }
+    MEM_CANCEL_ONLINE => {
     offline_page_ext(mn.start_pfn,
     mn.nr_pages);
-    break;
-    case MEM_GOING_OFFLINE:
-    break;
-    case MEM_ONLINE:
-    case MEM_CANCEL_OFFLINE:
-    break;
+    // break;
+    }
+    MEM_GOING_OFFLINE => {
+    // break;
+    }
+    MEM_ONLINE => {
+    }
+    MEM_CANCEL_OFFLINE => {
+    // break;
+    }
     }
     return notifier_from_errno(ret);
     }
 #[no_mangle]
-pub unsafe extern "C" fn page_ext_init() -> void __init {
-    void __init page_ext_init(void)
-    {
-    unsigned long pfn;
-    int nid;
-    if (!invoke_need_callbacks())
+pub unsafe extern "C" fn page_ext_init()  {
+    let mut pfn = 0;
+    let mut nid = 0;
+    if (!invoke_need_callbacks()) {
     return;
+    }
     for_each_node_state(nid, N_MEMORY) {
     unsigned long start_pfn, end_pfn;
     start_pfn = node_start_pfn(nid);
@@ -444,26 +696,29 @@ pub unsafe extern "C" fn page_ext_init() -> void __init {
 //
     for (pfn = start_pfn; pfn < end_pfn;
     pfn = ALIGN(pfn + 1, PAGES_PER_SECTION)) {
-    if (!pfn_valid(pfn))
+    if (!pfn_valid(pfn)) {
     continue;
+    }
 //
 // Nodes's pfns can be overlapping.
 // We know some arch can have a nodes layout such as
 // -------------pfn-------------->
 // N0 | N1 | N2 | N0 | N1 | N2|....
 //
-    if (pfn_to_nid(pfn) != nid)
+    if (pfn_to_nid(pfn) != nid) {
     continue;
-    if (init_section_page_ext(pfn, nid))
-    goto oom;
+    }
+    if (init_section_page_ext(pfn, nid)) {
+// goto;
+    }
     cond_resched();
     }
     }
     hotplug_memory_notifier(page_ext_callback, DEFAULT_CALLBACK_PRI);
-    pr_info("allocated %ld bytes of page_ext\n", total_usage);
+    pr_info!("allocated %ld bytes of page_ext\n", total_usage);
     invoke_init_callbacks();
     return;
-    oom:
+// label;
     panic("Out of memory");
     }
 
@@ -475,8 +730,8 @@ pub unsafe extern "C" fn page_ext_init() -> void __init {
 //
 // Return: NULL if no page_ext exists for this page.
 //
-    struct page_ext *page_ext_lookup(unsigned long pfn)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn page_ext_lookup(pfn: c_ulong) -> *mut c_void {
     return lookup_page_ext(pfn_to_page(pfn));
     }
 //
@@ -490,9 +745,9 @@ pub unsafe extern "C" fn page_ext_init() -> void __init {
 // Context: Any context.  Caller may not sleep until they have called
 // page_ext_put().
 //
-    struct page_ext *page_ext_get(const struct page *page)
-    {
-    struct page_ext *page_ext;
+#[no_mangle]
+pub unsafe extern "C" fn page_ext_get(page: *mut page) -> *mut c_void {
+pub static mut page_ext: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     page_ext = lookup_page_ext(page);
     if (!page_ext) {
@@ -514,11 +769,12 @@ pub unsafe extern "C" fn page_ext_init() -> void __init {
 // Context: Any context.  Caller may not sleep until they have called
 // page_ext_put().
 //
-    struct page_ext *page_ext_from_phys(phys_addr_t phys)
-    {
-    struct page *page = pfn_to_online_page(__phys_to_pfn(phys));
-    if (!page)
+#[no_mangle]
+pub unsafe extern "C" fn page_ext_from_phys(phys: phys_addr_t) -> *mut c_void {
+    let mut page = pfn_to_online_page(__phys_to_pfn(phys));
+    if (!page) {
     return core::ptr::null_mut();
+    }
     return page_ext_get(page);
     }
 //
@@ -533,9 +789,8 @@ pub unsafe extern "C" fn page_ext_init() -> void __init {
 //
 #[no_mangle]
 pub unsafe extern "C" fn page_ext_put(page_ext: *mut page_ext) {
-    void page_ext_put(struct page_ext *page_ext)
-    {
-    if (unlikely(!page_ext))
+    if (unlikely(!page_ext)) {
     return;
+    }
     rcu_read_unlock();
     }

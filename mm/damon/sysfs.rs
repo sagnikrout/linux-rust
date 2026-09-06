@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -51,45 +301,35 @@ pub struct damon_sysfs_region {
     pub ar: damon_addr_range,
 }
 
-    static struct damon_sysfs_region *damon_sysfs_region_alloc(void)
-    {
-    return kzalloc_obj(struct damon_sysfs_region);
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_region_alloc() -> *mut c_void {
+    return kzalloc_obj(damon_sysfs_region);
     }
-    static ssize_t start_show(struct kobject *kobj, struct kobj_attribute *attr,
-    char *buf)
-    {
-    struct damon_sysfs_region *region = container_of(kobj,
-    struct damon_sysfs_region, kobj);
+#[no_mangle]
+pub unsafe extern "C" fn start_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut region = container_of!(kobj, damon_sysfs_region, kobj);
     return sysfs_emit(buf, "%lu\n", region.ar.start);
     }
-    static ssize_t start_store(struct kobject *kobj, struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
-    struct damon_sysfs_region *region = container_of(kobj,
-    struct damon_sysfs_region, kobj);
-    let mut err: c_int = kstrtoul(buf, 0, &region.ar.start);
+#[no_mangle]
+pub unsafe extern "C" fn start_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut region = container_of!(kobj, damon_sysfs_region, kobj);
+pub static mut err: c_int = 0;
     return err ? err : count;
     }
-    static ssize_t end_show(struct kobject *kobj, struct kobj_attribute *attr,
-    char *buf)
-    {
-    struct damon_sysfs_region *region = container_of(kobj,
-    struct damon_sysfs_region, kobj);
+#[no_mangle]
+pub unsafe extern "C" fn end_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut region = container_of!(kobj, damon_sysfs_region, kobj);
     return sysfs_emit(buf, "%lu\n", region.ar.end);
     }
-    static ssize_t end_store(struct kobject *kobj, struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
-    struct damon_sysfs_region *region = container_of(kobj,
-    struct damon_sysfs_region, kobj);
-    let mut err: c_int = kstrtoul(buf, 0, &region.ar.end);
+#[no_mangle]
+pub unsafe extern "C" fn end_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut region = container_of!(kobj, damon_sysfs_region, kobj);
+pub static mut err: c_int = 0;
     return err ? err : count;
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_region_release(kobj: *mut kobject) {
-    static void damon_sysfs_region_release(struct kobject *kobj)
-    {
-    kfree(container_of(kobj, struct damon_sysfs_region, kobj));
+    kfree(container_of!(kobj, damon_sysfs_region, kobj));
     }
     static struct kobj_attribute damon_sysfs_region_start_attr =
     __ATTR_RW_MODE(start, 0600);
@@ -101,11 +341,7 @@ unsafe extern "C" fn damon_sysfs_region_release(kobj: *mut kobject) {
     core::ptr::null_mut(),
     };
     ATTRIBUTE_GROUPS(damon_sysfs_region);
-    static const struct kobj_type damon_sysfs_region_ktype = {
-    .release = damon_sysfs_region_release,
-    .sysfs_ops = &kobj_sysfs_ops,
-    .default_groups = damon_sysfs_region_groups,
-    };
+pub static mut kobj_type: usize = 0;
 //
 // init_regions directory
 //
@@ -117,17 +353,15 @@ pub struct damon_sysfs_regions {
     pub nr: c_int,
 }
 
-    static struct damon_sysfs_regions *damon_sysfs_regions_alloc(void)
-    {
-    return kzalloc_obj(struct damon_sysfs_regions);
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_regions_alloc() -> *mut c_void {
+    return kzalloc_obj(damon_sysfs_regions);
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_regions_rm_dirs(regions: *mut damon_sysfs_regions) {
-    static void damon_sysfs_regions_rm_dirs(struct damon_sysfs_regions *regions)
-    {
-    struct damon_sysfs_region **regions_arr = regions.regions_arr;
-    int i;
-    for (i = 0; i < regions.nr; i++) {
+    let mut regions_arr = regions.regions_arr;
+    let mut i = 0;
+    while (i < regions.nr) {
     kobject_del(&regions_arr[i].kobj);
     kobject_put(&regions_arr[i].kobj);
     }
@@ -135,20 +369,23 @@ unsafe extern "C" fn damon_sysfs_regions_rm_dirs(regions: *mut damon_sysfs_regio
     kfree(regions_arr);
     regions.regions_arr = core::ptr::null_mut();
     }
-    static int damon_sysfs_regions_add_dirs(struct damon_sysfs_regions *regions,
-    int nr_regions)
-    {
-    struct damon_sysfs_region **regions_arr, *region;
-    int err, i;
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_regions_add_dirs(regions: *mut damon_sysfs_regions, nr_regions: c_int) -> c_int {
+    let mut regions_arr = core::ptr::null_mut();
+    let mut region = core::ptr::null_mut();
+    let mut err = 0;
+    let mut i = 0;
     damon_sysfs_regions_rm_dirs(regions);
-    if (!nr_regions)
+    if (!nr_regions) {
     return 0;
+    }
     regions_arr = kmalloc_objs(*regions_arr, nr_regions,
     GFP_KERNEL | __GFP_NOWARN);
-    if (!regions_arr)
+    if (!regions_arr) {
     return -ENOMEM;
+    }
     regions.regions_arr = regions_arr;
-    for (i = 0; i < nr_regions; i++) {
+    while (i < nr_regions) {
     region = damon_sysfs_region_alloc();
     if (!region) {
     damon_sysfs_regions_rm_dirs(regions);
@@ -163,40 +400,39 @@ unsafe extern "C" fn damon_sysfs_regions_rm_dirs(regions: *mut damon_sysfs_regio
     return err;
     }
     regions_arr[i] = region;
-    regions.nr++;
+    regions.nr += 1;
     }
     return 0;
     }
-    static ssize_t nr_regions_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    struct damon_sysfs_regions *regions = container_of(kobj,
-    struct damon_sysfs_regions, kobj);
+#[no_mangle]
+pub unsafe extern "C" fn nr_regions_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut regions = container_of!(kobj, damon_sysfs_regions, kobj);
     return sysfs_emit(buf, "%d\n", regions.nr);
     }
-    static ssize_t nr_regions_store(struct kobject *kobj,
-    struct kobj_attribute *attr, const char *buf, size_t count)
-    {
-    struct damon_sysfs_regions *regions;
+#[no_mangle]
+pub unsafe extern "C" fn nr_regions_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+pub static mut regions: *mut c_void = core::ptr::null_mut();
     int nr, err = kstrtoint(buf, 0, &nr);
-    if (err)
+    if (err) {
     return err;
-    if (nr < 0)
+    }
+    if (nr < 0) {
     return -EINVAL;
-    regions = container_of(kobj, struct damon_sysfs_regions, kobj);
-    if (!mutex_trylock(&damon_sysfs_lock))
+    }
+    regions = container_of!(kobj, damon_sysfs_regions, kobj);
+    if (!mutex_trylock(&damon_sysfs_lock)) {
     return -EBUSY;
+    }
     err = damon_sysfs_regions_add_dirs(regions, nr);
     mutex_unlock(&damon_sysfs_lock);
-    if (err)
+    if (err) {
     return err;
+    }
     return count;
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_regions_release(kobj: *mut kobject) {
-    static void damon_sysfs_regions_release(struct kobject *kobj)
-    {
-    kfree(container_of(kobj, struct damon_sysfs_regions, kobj));
+    kfree(container_of!(kobj, damon_sysfs_regions, kobj));
     }
     static struct kobj_attribute damon_sysfs_regions_nr_attr =
     __ATTR_RW_MODE(nr_regions, 0600);
@@ -205,11 +441,7 @@ unsafe extern "C" fn damon_sysfs_regions_release(kobj: *mut kobject) {
     core::ptr::null_mut(),
     };
     ATTRIBUTE_GROUPS(damon_sysfs_regions);
-    static const struct kobj_type damon_sysfs_regions_ktype = {
-    .release = damon_sysfs_regions_release,
-    .sysfs_ops = &kobj_sysfs_ops,
-    .default_groups = damon_sysfs_regions_groups,
-    };
+pub static mut kobj_type: usize = 0;
 //
 // target directory
 //
@@ -222,74 +454,65 @@ pub struct damon_sysfs_target {
     pub obsolete: bool,
 }
 
-    static struct damon_sysfs_target *damon_sysfs_target_alloc(void)
-    {
-    return kzalloc_obj(struct damon_sysfs_target);
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_target_alloc() -> *mut c_void {
+    return kzalloc_obj(damon_sysfs_target);
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_target_add_dirs(target: *mut damon_sysfs_target) -> c_int {
-    static int damon_sysfs_target_add_dirs(struct damon_sysfs_target *target)
-    {
-    struct damon_sysfs_regions *regions = damon_sysfs_regions_alloc();
-    int err;
-    if (!regions)
+    let mut regions = damon_sysfs_regions_alloc();
+    let mut err = 0;
+    if (!regions) {
     return -ENOMEM;
+    }
     err = kobject_init_and_add(&regions.kobj, &damon_sysfs_regions_ktype,
     &target.kobj, "regions");
-    if (err)
+    if (err) {
     kobject_put(&regions.kobj);
-    else
+    }
+    else {
     target.regions = regions;
+    }
     return err;
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_target_rm_dirs(target: *mut damon_sysfs_target) {
-    static void damon_sysfs_target_rm_dirs(struct damon_sysfs_target *target)
-    {
     damon_sysfs_regions_rm_dirs(target.regions);
     kobject_put(&target.regions.kobj);
     }
-    static ssize_t pid_target_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    struct damon_sysfs_target *target = container_of(kobj,
-    struct damon_sysfs_target, kobj);
+#[no_mangle]
+pub unsafe extern "C" fn pid_target_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut target = container_of!(kobj, damon_sysfs_target, kobj);
     return sysfs_emit(buf, "%d\n", target.pid);
     }
-    static ssize_t pid_target_store(struct kobject *kobj,
-    struct kobj_attribute *attr, const char *buf, size_t count)
-    {
-    struct damon_sysfs_target *target = container_of(kobj,
-    struct damon_sysfs_target, kobj);
-    let mut err: c_int = kstrtoint(buf, 0, &target.pid);
-    if (err)
+#[no_mangle]
+pub unsafe extern "C" fn pid_target_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut target = container_of!(kobj, damon_sysfs_target, kobj);
+pub static mut err: c_int = 0;
+    if (err) {
     return -EINVAL;
+    }
     return count;
     }
-    static ssize_t obsolete_target_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    struct damon_sysfs_target *target = container_of(kobj,
-    struct damon_sysfs_target, kobj);
+#[no_mangle]
+pub unsafe extern "C" fn obsolete_target_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut target = container_of!(kobj, damon_sysfs_target, kobj);
     return sysfs_emit(buf, "%c\n", target.obsolete ? 'Y' : 'N');
     }
-    static ssize_t obsolete_target_store(struct kobject *kobj,
-    struct kobj_attribute *attr, const char *buf, size_t count)
-    {
-    struct damon_sysfs_target *target = container_of(kobj,
-    struct damon_sysfs_target, kobj);
-    bool obsolete;
-    let mut err: c_int = kstrtobool(buf, &obsolete);
-    if (err)
+#[no_mangle]
+pub unsafe extern "C" fn obsolete_target_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut target = container_of!(kobj, damon_sysfs_target, kobj);
+    let mut obsolete = 0;
+pub static mut err: c_int = 0;
+    if (err) {
     return err;
+    }
     target.obsolete = obsolete;
     return count;
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_target_release(kobj: *mut kobject) {
-    static void damon_sysfs_target_release(struct kobject *kobj)
-    {
-    kfree(container_of(kobj, struct damon_sysfs_target, kobj));
+    kfree(container_of!(kobj, damon_sysfs_target, kobj));
     }
     static struct kobj_attribute damon_sysfs_target_pid_attr =
     __ATTR_RW_MODE(pid_target, 0600);
@@ -301,11 +524,7 @@ unsafe extern "C" fn damon_sysfs_target_release(kobj: *mut kobject) {
     core::ptr::null_mut(),
     };
     ATTRIBUTE_GROUPS(damon_sysfs_target);
-    static const struct kobj_type damon_sysfs_target_ktype = {
-    .release = damon_sysfs_target_release,
-    .sysfs_ops = &kobj_sysfs_ops,
-    .default_groups = damon_sysfs_target_groups,
-    };
+pub static mut kobj_type: usize = 0;
 //
 // targets directory
 //
@@ -317,17 +536,15 @@ pub struct damon_sysfs_targets {
     pub nr: c_int,
 }
 
-    static struct damon_sysfs_targets *damon_sysfs_targets_alloc(void)
-    {
-    return kzalloc_obj(struct damon_sysfs_targets);
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_targets_alloc() -> *mut c_void {
+    return kzalloc_obj(damon_sysfs_targets);
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_targets_rm_dirs(targets: *mut damon_sysfs_targets) {
-    static void damon_sysfs_targets_rm_dirs(struct damon_sysfs_targets *targets)
-    {
-    struct damon_sysfs_target **targets_arr = targets.targets_arr;
-    int i;
-    for (i = 0; i < targets.nr; i++) {
+    let mut targets_arr = targets.targets_arr;
+    let mut i = 0;
+    while (i < targets.nr) {
     damon_sysfs_target_rm_dirs(targets_arr[i]);
     kobject_del(&targets_arr[i].kobj);
     kobject_put(&targets_arr[i].kobj);
@@ -336,20 +553,23 @@ unsafe extern "C" fn damon_sysfs_targets_rm_dirs(targets: *mut damon_sysfs_targe
     kfree(targets_arr);
     targets.targets_arr = core::ptr::null_mut();
     }
-    static int damon_sysfs_targets_add_dirs(struct damon_sysfs_targets *targets,
-    int nr_targets)
-    {
-    struct damon_sysfs_target **targets_arr, *target;
-    int err, i;
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_targets_add_dirs(targets: *mut damon_sysfs_targets, nr_targets: c_int) -> c_int {
+    let mut targets_arr = core::ptr::null_mut();
+    let mut target = core::ptr::null_mut();
+    let mut err = 0;
+    let mut i = 0;
     damon_sysfs_targets_rm_dirs(targets);
-    if (!nr_targets)
+    if (!nr_targets) {
     return 0;
+    }
     targets_arr = kmalloc_objs(*targets_arr, nr_targets,
     GFP_KERNEL | __GFP_NOWARN);
-    if (!targets_arr)
+    if (!targets_arr) {
     return -ENOMEM;
+    }
     targets.targets_arr = targets_arr;
-    for (i = 0; i < nr_targets; i++) {
+    while (i < nr_targets) {
     target = damon_sysfs_target_alloc();
     if (!target) {
     damon_sysfs_targets_rm_dirs(targets);
@@ -358,52 +578,53 @@ unsafe extern "C" fn damon_sysfs_targets_rm_dirs(targets: *mut damon_sysfs_targe
     err = kobject_init_and_add(&target.kobj,
     &damon_sysfs_target_ktype, &targets.kobj,
     "%d", i);
-    if (err)
-    goto out;
+    if (err) {
+// goto;
+    }
     err = damon_sysfs_target_add_dirs(target);
-    if (err)
-    goto del_out;
+    if (err) {
+// goto;
+    }
     targets_arr[i] = target;
-    targets.nr++;
+    targets.nr += 1;
     }
     return 0;
-    del_out:
+// label;
     kobject_del(&target.kobj);
-    out:
+// label;
     damon_sysfs_targets_rm_dirs(targets);
     kobject_put(&target.kobj);
     return err;
     }
-    static ssize_t nr_targets_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    struct damon_sysfs_targets *targets = container_of(kobj,
-    struct damon_sysfs_targets, kobj);
+#[no_mangle]
+pub unsafe extern "C" fn nr_targets_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut targets = container_of!(kobj, damon_sysfs_targets, kobj);
     return sysfs_emit(buf, "%d\n", targets.nr);
     }
-    static ssize_t nr_targets_store(struct kobject *kobj,
-    struct kobj_attribute *attr, const char *buf, size_t count)
-    {
-    struct damon_sysfs_targets *targets;
+#[no_mangle]
+pub unsafe extern "C" fn nr_targets_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+pub static mut targets: *mut c_void = core::ptr::null_mut();
     int nr, err = kstrtoint(buf, 0, &nr);
-    if (err)
+    if (err) {
     return err;
-    if (nr < 0)
+    }
+    if (nr < 0) {
     return -EINVAL;
-    targets = container_of(kobj, struct damon_sysfs_targets, kobj);
-    if (!mutex_trylock(&damon_sysfs_lock))
+    }
+    targets = container_of!(kobj, damon_sysfs_targets, kobj);
+    if (!mutex_trylock(&damon_sysfs_lock)) {
     return -EBUSY;
+    }
     err = damon_sysfs_targets_add_dirs(targets, nr);
     mutex_unlock(&damon_sysfs_lock);
-    if (err)
+    if (err) {
     return err;
+    }
     return count;
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_targets_release(kobj: *mut kobject) {
-    static void damon_sysfs_targets_release(struct kobject *kobj)
-    {
-    kfree(container_of(kobj, struct damon_sysfs_targets, kobj));
+    kfree(container_of!(kobj, damon_sysfs_targets, kobj));
     }
     static struct kobj_attribute damon_sysfs_targets_nr_attr =
     __ATTR_RW_MODE(nr_targets, 0600);
@@ -412,11 +633,7 @@ unsafe extern "C" fn damon_sysfs_targets_release(kobj: *mut kobject) {
     core::ptr::null_mut(),
     };
     ATTRIBUTE_GROUPS(damon_sysfs_targets);
-    static const struct kobj_type damon_sysfs_targets_ktype = {
-    .release = damon_sysfs_targets_release,
-    .sysfs_ops = &kobj_sysfs_ops,
-    .default_groups = damon_sysfs_targets_groups,
-    };
+pub static mut kobj_type: usize = 0;
 //
 // intervals goal directory
 //
@@ -430,101 +647,86 @@ pub struct damon_sysfs_intervals_goal {
     pub max_sample_us: c_ulong,
 }
 
-    static struct damon_sysfs_intervals_goal *damon_sysfs_intervals_goal_alloc(
-    unsigned long access_bp, unsigned long aggrs,
-    unsigned long min_sample_us, unsigned long max_sample_us)
-    {
-    struct damon_sysfs_intervals_goal *goal = kmalloc_obj(*goal);
-    if (!goal)
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_intervals_goal_alloc(access_bp: c_ulong, aggrs: c_ulong, min_sample_us: c_ulong, max_sample_us: c_ulong) -> *mut c_void {
+    let mut goal = kmalloc_obj(*goal);
+    if (!goal) {
     return core::ptr::null_mut();
-    goal.kobj = (struct kobject){};
+    }
+    goal.kobj = (kobject){};
     goal.access_bp = access_bp;
     goal.aggrs = aggrs;
     goal.min_sample_us = min_sample_us;
     goal.max_sample_us = max_sample_us;
     return goal;
     }
-    static ssize_t access_bp_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    struct damon_sysfs_intervals_goal *goal = container_of(kobj,
-    struct damon_sysfs_intervals_goal, kobj);
+#[no_mangle]
+pub unsafe extern "C" fn access_bp_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut goal = container_of!(kobj, damon_sysfs_intervals_goal, kobj);
     return sysfs_emit(buf, "%lu\n", goal.access_bp);
     }
-    static ssize_t access_bp_store(struct kobject *kobj,
-    struct kobj_attribute *attr, const char *buf, size_t count)
-    {
-    struct damon_sysfs_intervals_goal *goal = container_of(kobj,
-    struct damon_sysfs_intervals_goal, kobj);
-    unsigned long nr;
-    let mut err: c_int = kstrtoul(buf, 0, &nr);
-    if (err)
+#[no_mangle]
+pub unsafe extern "C" fn access_bp_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut goal = container_of!(kobj, damon_sysfs_intervals_goal, kobj);
+    let mut nr = 0;
+pub static mut err: c_int = 0;
+    if (err) {
     return err;
+    }
     goal.access_bp = nr;
     return count;
     }
-    static ssize_t aggrs_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    struct damon_sysfs_intervals_goal *goal = container_of(kobj,
-    struct damon_sysfs_intervals_goal, kobj);
+#[no_mangle]
+pub unsafe extern "C" fn aggrs_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut goal = container_of!(kobj, damon_sysfs_intervals_goal, kobj);
     return sysfs_emit(buf, "%lu\n", goal.aggrs);
     }
-    static ssize_t aggrs_store(struct kobject *kobj,
-    struct kobj_attribute *attr, const char *buf, size_t count)
-    {
-    struct damon_sysfs_intervals_goal *goal = container_of(kobj,
-    struct damon_sysfs_intervals_goal, kobj);
-    unsigned long nr;
-    let mut err: c_int = kstrtoul(buf, 0, &nr);
-    if (err)
+#[no_mangle]
+pub unsafe extern "C" fn aggrs_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut goal = container_of!(kobj, damon_sysfs_intervals_goal, kobj);
+    let mut nr = 0;
+pub static mut err: c_int = 0;
+    if (err) {
     return err;
+    }
     goal.aggrs = nr;
     return count;
     }
-    static ssize_t min_sample_us_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    struct damon_sysfs_intervals_goal *goal = container_of(kobj,
-    struct damon_sysfs_intervals_goal, kobj);
+#[no_mangle]
+pub unsafe extern "C" fn min_sample_us_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut goal = container_of!(kobj, damon_sysfs_intervals_goal, kobj);
     return sysfs_emit(buf, "%lu\n", goal.min_sample_us);
     }
-    static ssize_t min_sample_us_store(struct kobject *kobj,
-    struct kobj_attribute *attr, const char *buf, size_t count)
-    {
-    struct damon_sysfs_intervals_goal *goal = container_of(kobj,
-    struct damon_sysfs_intervals_goal, kobj);
-    unsigned long nr;
-    let mut err: c_int = kstrtoul(buf, 0, &nr);
-    if (err)
+#[no_mangle]
+pub unsafe extern "C" fn min_sample_us_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut goal = container_of!(kobj, damon_sysfs_intervals_goal, kobj);
+    let mut nr = 0;
+pub static mut err: c_int = 0;
+    if (err) {
     return err;
+    }
     goal.min_sample_us = nr;
     return count;
     }
-    static ssize_t max_sample_us_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    struct damon_sysfs_intervals_goal *goal = container_of(kobj,
-    struct damon_sysfs_intervals_goal, kobj);
+#[no_mangle]
+pub unsafe extern "C" fn max_sample_us_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut goal = container_of!(kobj, damon_sysfs_intervals_goal, kobj);
     return sysfs_emit(buf, "%lu\n", goal.max_sample_us);
     }
-    static ssize_t max_sample_us_store(struct kobject *kobj,
-    struct kobj_attribute *attr, const char *buf, size_t count)
-    {
-    struct damon_sysfs_intervals_goal *goal = container_of(kobj,
-    struct damon_sysfs_intervals_goal, kobj);
-    unsigned long nr;
-    let mut err: c_int = kstrtoul(buf, 0, &nr);
-    if (err)
+#[no_mangle]
+pub unsafe extern "C" fn max_sample_us_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut goal = container_of!(kobj, damon_sysfs_intervals_goal, kobj);
+    let mut nr = 0;
+pub static mut err: c_int = 0;
+    if (err) {
     return err;
+    }
     goal.max_sample_us = nr;
     return count;
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_intervals_goal_release(kobj: *mut kobject) {
-    static void damon_sysfs_intervals_goal_release(struct kobject *kobj)
-    {
-    kfree(container_of(kobj, struct damon_sysfs_intervals_goal, kobj));
+    kfree(container_of!(kobj, damon_sysfs_intervals_goal, kobj));
     }
     static struct kobj_attribute damon_sysfs_intervals_goal_access_bp_attr =
     __ATTR_RW_MODE(access_bp, 0600);
@@ -542,11 +744,7 @@ unsafe extern "C" fn damon_sysfs_intervals_goal_release(kobj: *mut kobject) {
     core::ptr::null_mut(),
     };
     ATTRIBUTE_GROUPS(damon_sysfs_intervals_goal);
-    static const struct kobj_type damon_sysfs_intervals_goal_ktype = {
-    .release = damon_sysfs_intervals_goal_release,
-    .sysfs_ops = &kobj_sysfs_ops,
-    .default_groups = damon_sysfs_intervals_goal_groups,
-    };
+pub static mut kobj_type: usize = 0;
 //
 // intervals directory
 //
@@ -560,14 +758,13 @@ pub struct damon_sysfs_intervals {
     pub intervals_goal: *mut damon_sysfs_intervals_goal,
 }
 
-    static struct damon_sysfs_intervals *damon_sysfs_intervals_alloc(
-    unsigned long sample_us, unsigned long aggr_us,
-    unsigned long update_us)
-    {
-    struct damon_sysfs_intervals *intervals = kmalloc_obj(*intervals);
-    if (!intervals)
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_intervals_alloc(sample_us: c_ulong, aggr_us: c_ulong, update_us: c_ulong) -> *mut c_void {
+    let mut intervals = kmalloc_obj(*intervals);
+    if (!intervals) {
     return core::ptr::null_mut();
-    intervals.kobj = (struct kobject){};
+    }
+    intervals.kobj = (kobject){};
     intervals.sample_us = sample_us;
     intervals.aggr_us = aggr_us;
     intervals.update_us = update_us;
@@ -575,13 +772,12 @@ pub struct damon_sysfs_intervals {
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_intervals_add_dirs(intervals: *mut damon_sysfs_intervals) -> c_int {
-    static int damon_sysfs_intervals_add_dirs(struct damon_sysfs_intervals *intervals)
-    {
-    struct damon_sysfs_intervals_goal *goal;
-    int err;
+pub static mut goal: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
     goal = damon_sysfs_intervals_goal_alloc(0, 0, 0, 0);
-    if (!goal)
+    if (!goal) {
     return -ENOMEM;
+    }
     err = kobject_init_and_add(&goal.kobj,
     &damon_sysfs_intervals_goal_ktype, &intervals.kobj,
     "intervals_goal");
@@ -595,72 +791,59 @@ unsafe extern "C" fn damon_sysfs_intervals_add_dirs(intervals: *mut damon_sysfs_
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_intervals_rm_dirs(intervals: *mut damon_sysfs_intervals) {
-    static void damon_sysfs_intervals_rm_dirs(struct damon_sysfs_intervals *intervals)
-    {
     kobject_put(&intervals.intervals_goal.kobj);
     }
-    static ssize_t sample_us_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    struct damon_sysfs_intervals *intervals = container_of(kobj,
-    struct damon_sysfs_intervals, kobj);
+#[no_mangle]
+pub unsafe extern "C" fn sample_us_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut intervals = container_of!(kobj, damon_sysfs_intervals, kobj);
     return sysfs_emit(buf, "%lu\n", intervals.sample_us);
     }
-    static ssize_t sample_us_store(struct kobject *kobj,
-    struct kobj_attribute *attr, const char *buf, size_t count)
-    {
-    struct damon_sysfs_intervals *intervals = container_of(kobj,
-    struct damon_sysfs_intervals, kobj);
-    unsigned long us;
-    let mut err: c_int = kstrtoul(buf, 0, &us);
-    if (err)
+#[no_mangle]
+pub unsafe extern "C" fn sample_us_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut intervals = container_of!(kobj, damon_sysfs_intervals, kobj);
+    let mut us = 0;
+pub static mut err: c_int = 0;
+    if (err) {
     return err;
+    }
     intervals.sample_us = us;
     return count;
     }
-    static ssize_t aggr_us_show(struct kobject *kobj, struct kobj_attribute *attr,
-    char *buf)
-    {
-    struct damon_sysfs_intervals *intervals = container_of(kobj,
-    struct damon_sysfs_intervals, kobj);
+#[no_mangle]
+pub unsafe extern "C" fn aggr_us_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut intervals = container_of!(kobj, damon_sysfs_intervals, kobj);
     return sysfs_emit(buf, "%lu\n", intervals.aggr_us);
     }
-    static ssize_t aggr_us_store(struct kobject *kobj, struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
-    struct damon_sysfs_intervals *intervals = container_of(kobj,
-    struct damon_sysfs_intervals, kobj);
-    unsigned long us;
-    let mut err: c_int = kstrtoul(buf, 0, &us);
-    if (err)
+#[no_mangle]
+pub unsafe extern "C" fn aggr_us_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut intervals = container_of!(kobj, damon_sysfs_intervals, kobj);
+    let mut us = 0;
+pub static mut err: c_int = 0;
+    if (err) {
     return err;
+    }
     intervals.aggr_us = us;
     return count;
     }
-    static ssize_t update_us_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    struct damon_sysfs_intervals *intervals = container_of(kobj,
-    struct damon_sysfs_intervals, kobj);
+#[no_mangle]
+pub unsafe extern "C" fn update_us_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut intervals = container_of!(kobj, damon_sysfs_intervals, kobj);
     return sysfs_emit(buf, "%lu\n", intervals.update_us);
     }
-    static ssize_t update_us_store(struct kobject *kobj,
-    struct kobj_attribute *attr, const char *buf, size_t count)
-    {
-    struct damon_sysfs_intervals *intervals = container_of(kobj,
-    struct damon_sysfs_intervals, kobj);
-    unsigned long us;
-    let mut err: c_int = kstrtoul(buf, 0, &us);
-    if (err)
+#[no_mangle]
+pub unsafe extern "C" fn update_us_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut intervals = container_of!(kobj, damon_sysfs_intervals, kobj);
+    let mut us = 0;
+pub static mut err: c_int = 0;
+    if (err) {
     return err;
+    }
     intervals.update_us = us;
     return count;
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_intervals_release(kobj: *mut kobject) {
-    static void damon_sysfs_intervals_release(struct kobject *kobj)
-    {
-    kfree(container_of(kobj, struct damon_sysfs_intervals, kobj));
+    kfree(container_of!(kobj, damon_sysfs_intervals, kobj));
     }
     static struct kobj_attribute damon_sysfs_intervals_sample_us_attr =
     __ATTR_RW_MODE(sample_us, 0600);
@@ -675,11 +858,7 @@ unsafe extern "C" fn damon_sysfs_intervals_release(kobj: *mut kobject) {
     core::ptr::null_mut(),
     };
     ATTRIBUTE_GROUPS(damon_sysfs_intervals);
-    static const struct kobj_type damon_sysfs_intervals_ktype = {
-    .release = damon_sysfs_intervals_release,
-    .sysfs_ops = &kobj_sysfs_ops,
-    .default_groups = damon_sysfs_intervals_groups,
-    };
+pub static mut kobj_type: usize = 0;
 //
 // filter directory
 //
@@ -687,57 +866,44 @@ unsafe extern "C" fn damon_sysfs_intervals_release(kobj: *mut kobject) {
 #[derive(Copy, Clone)]
 pub struct damon_sysfs_filter {
     pub kobj: kobject,
-    pub type: enum damon_filter_type,
+    pub type: damon_filter_type,
     pub matching: bool,
     pub allow: bool,
     pub path: *mut c_char,
 }
 
-    static struct damon_sysfs_filter *damon_sysfs_filter_alloc(void)
-    {
-    return kzalloc_obj(struct damon_sysfs_filter);
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_filter_alloc() -> *mut c_void {
+    return kzalloc_obj(damon_sysfs_filter);
     }
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct damon_sysfs_filter_type_name {
-    pub type: enum damon_filter_type,
+    pub type: damon_filter_type,
     pub name: *mut c_char,
 }
 
-    static const struct damon_sysfs_filter_type_name
-    damon_sysfs_filter_type_names[] = {
-    {
-    .type = DAMON_FILTER_TYPE_ANON,
-    .name = "anon",
-    },
-    {
-    .type = DAMON_FILTER_TYPE_MEMCG,
-    .name = "memcg",
-    },
-    };
-    static ssize_t type_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    struct damon_sysfs_filter *filter = container_of(kobj,
-    struct damon_sysfs_filter, kobj);
-    int i;
-    for (i = 0; i < ARRAY_SIZE(damon_sysfs_filter_type_names); i++) {
-    const struct damon_sysfs_filter_type_name *type_name;
+pub static mut damon_sysfs_filter_type_name: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn type_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut filter = container_of!(kobj, damon_sysfs_filter, kobj);
+    let mut i = 0;
+    while (i < ARRAY_SIZE!(damon_sysfs_filter_type_names)) {
+pub static mut type_name: *mut c_void = core::ptr::null_mut();
     type_name = &damon_sysfs_filter_type_names[i];
-    if (type_name.type == filter.type)
+    if (type_name.type == filter.type) {
     return sysfs_emit(buf, "%s\n", type_name.name);
+    }
     }
     return -EINVAL;
     }
-    static ssize_t type_store(struct kobject *kobj,
-    struct kobj_attribute *attr, const char *buf, size_t count)
-    {
-    struct damon_sysfs_filter *filter = container_of(kobj,
-    struct damon_sysfs_filter, kobj);
-    let mut ret: isize = -EINVAL;
-    int i;
-    for (i = 0; i < ARRAY_SIZE(damon_sysfs_filter_type_names); i++) {
-    const struct damon_sysfs_filter_type_name *type_name;
+#[no_mangle]
+pub unsafe extern "C" fn type_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut filter = container_of!(kobj, damon_sysfs_filter, kobj);
+pub static mut ret: isize = 0;
+    let mut i = 0;
+    while (i < ARRAY_SIZE!(damon_sysfs_filter_type_names)) {
+pub static mut type_name: *mut c_void = core::ptr::null_mut();
     type_name = &damon_sysfs_filter_type_names[i];
     if (sysfs_streq(buf, type_name.name)) {
     filter.type = type_name.type;
@@ -747,64 +913,56 @@ pub struct damon_sysfs_filter_type_name {
     }
     return ret;
     }
-    static ssize_t matching_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    struct damon_sysfs_filter *filter = container_of(kobj,
-    struct damon_sysfs_filter, kobj);
+#[no_mangle]
+pub unsafe extern "C" fn matching_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut filter = container_of!(kobj, damon_sysfs_filter, kobj);
     return sysfs_emit(buf, "%c\n", filter.matching ? 'Y' : 'N');
     }
-    static ssize_t matching_store(struct kobject *kobj,
-    struct kobj_attribute *attr, const char *buf, size_t count)
-    {
-    struct damon_sysfs_filter *filter = container_of(kobj,
-    struct damon_sysfs_filter, kobj);
-    bool matching;
-    let mut err: c_int = kstrtobool(buf, &matching);
-    if (err)
+#[no_mangle]
+pub unsafe extern "C" fn matching_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut filter = container_of!(kobj, damon_sysfs_filter, kobj);
+    let mut matching = 0;
+pub static mut err: c_int = 0;
+    if (err) {
     return err;
+    }
     filter.matching = matching;
     return count;
     }
-    static ssize_t allow_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    struct damon_sysfs_filter *filter = container_of(kobj,
-    struct damon_sysfs_filter, kobj);
+#[no_mangle]
+pub unsafe extern "C" fn allow_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut filter = container_of!(kobj, damon_sysfs_filter, kobj);
     return sysfs_emit(buf, "%c\n", filter.allow ? 'Y' : 'N');
     }
-    static ssize_t allow_store(struct kobject *kobj,
-    struct kobj_attribute *attr, const char *buf, size_t count)
-    {
-    struct damon_sysfs_filter *filter = container_of(kobj,
-    struct damon_sysfs_filter, kobj);
-    bool allow;
-    let mut err: c_int = kstrtobool(buf, &allow);
-    if (err)
+#[no_mangle]
+pub unsafe extern "C" fn allow_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut filter = container_of!(kobj, damon_sysfs_filter, kobj);
+    let mut allow = 0;
+pub static mut err: c_int = 0;
+    if (err) {
     return err;
+    }
     filter.allow = allow;
     return count;
     }
-    static ssize_t path_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    struct damon_sysfs_filter *filter = container_of(kobj,
-    struct damon_sysfs_filter, kobj);
-    int len;
-    if (!mutex_trylock(&damon_sysfs_lock))
+#[no_mangle]
+pub unsafe extern "C" fn path_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut filter = container_of!(kobj, damon_sysfs_filter, kobj);
+    let mut len = 0;
+    if (!mutex_trylock(&damon_sysfs_lock)) {
     return -EBUSY;
+    }
     len = sysfs_emit(buf, "%s\n", filter.path ? filter.path : "");
     mutex_unlock(&damon_sysfs_lock);
     return len;
     }
-    static ssize_t path_store(struct kobject *kobj,
-    struct kobj_attribute *attr, const char *buf, size_t count)
-    {
-    struct damon_sysfs_filter *filter = container_of(kobj,
-    struct damon_sysfs_filter, kobj);
-    char *path = kmalloc_objs(*path, size_add(count, 1));
-    if (!path)
+#[no_mangle]
+pub unsafe extern "C" fn path_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut filter = container_of!(kobj, damon_sysfs_filter, kobj);
+    let mut path = kmalloc_objs(*path, size_add(count, 1));
+    if (!path) {
     return -ENOMEM;
+    }
     strscpy(path, buf, size_add(count, 1));
     if (!mutex_trylock(&damon_sysfs_lock)) {
     kfree(path);
@@ -817,10 +975,7 @@ pub struct damon_sysfs_filter_type_name {
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_filter_release(kobj: *mut kobject) {
-    static void damon_sysfs_filter_release(struct kobject *kobj)
-    {
-    struct damon_sysfs_filter *filter = container_of(kobj,
-    struct damon_sysfs_filter, kobj);
+    let mut filter = container_of!(kobj, damon_sysfs_filter, kobj);
     kfree(filter.path);
     kfree(filter);
     }
@@ -840,11 +995,7 @@ unsafe extern "C" fn damon_sysfs_filter_release(kobj: *mut kobject) {
     core::ptr::null_mut(),
     };
     ATTRIBUTE_GROUPS(damon_sysfs_filter);
-    static const struct kobj_type damon_sysfs_filter_ktype = {
-    .release = damon_sysfs_filter_release,
-    .sysfs_ops = &kobj_sysfs_ops,
-    .default_groups = damon_sysfs_filter_groups,
-    };
+pub static mut kobj_type: usize = 0;
 //
 // filters directory
 //
@@ -856,17 +1007,15 @@ pub struct damon_sysfs_filters {
     pub nr: c_int,
 }
 
-    static struct damon_sysfs_filters *damon_sysfs_filters_alloc(void)
-    {
-    return kzalloc_obj(struct damon_sysfs_filters);
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_filters_alloc() -> *mut c_void {
+    return kzalloc_obj(damon_sysfs_filters);
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_filters_rm_dirs(filters: *mut damon_sysfs_filters) {
-    static void damon_sysfs_filters_rm_dirs(struct damon_sysfs_filters *filters)
-    {
-    struct damon_sysfs_filter **filters_arr = filters.filters_arr;
-    int i;
-    for (i = 0; i < filters.nr; i++) {
+    let mut filters_arr = filters.filters_arr;
+    let mut i = 0;
+    while (i < filters.nr) {
     kobject_del(&filters_arr[i].kobj);
     kobject_put(&filters_arr[i].kobj);
     }
@@ -874,20 +1023,23 @@ unsafe extern "C" fn damon_sysfs_filters_rm_dirs(filters: *mut damon_sysfs_filte
     kfree(filters_arr);
     filters.filters_arr = core::ptr::null_mut();
     }
-    static int damon_sysfs_filters_add_dirs(
-    struct damon_sysfs_filters *filters, int nr_filters)
-    {
-    struct damon_sysfs_filter **filters_arr, *filter;
-    int err, i;
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_filters_add_dirs(filters: *mut damon_sysfs_filters, nr_filters: c_int) -> c_int {
+    let mut filters_arr = core::ptr::null_mut();
+    let mut filter = core::ptr::null_mut();
+    let mut err = 0;
+    let mut i = 0;
     damon_sysfs_filters_rm_dirs(filters);
-    if (!nr_filters)
+    if (!nr_filters) {
     return 0;
+    }
     filters_arr = kmalloc_objs(*filters_arr, nr_filters,
     GFP_KERNEL | __GFP_NOWARN);
-    if (!filters_arr)
+    if (!filters_arr) {
     return -ENOMEM;
+    }
     filters.filters_arr = filters_arr;
-    for (i = 0; i < nr_filters; i++) {
+    while (i < nr_filters) {
     filter = damon_sysfs_filter_alloc();
     if (!filter) {
     damon_sysfs_filters_rm_dirs(filters);
@@ -902,40 +1054,39 @@ unsafe extern "C" fn damon_sysfs_filters_rm_dirs(filters: *mut damon_sysfs_filte
     return err;
     }
     filters_arr[i] = filter;
-    filters.nr++;
+    filters.nr += 1;
     }
     return 0;
     }
-    static ssize_t nr_filters_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    struct damon_sysfs_filters *filters = container_of(kobj,
-    struct damon_sysfs_filters, kobj);
+#[no_mangle]
+pub unsafe extern "C" fn nr_filters_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut filters = container_of!(kobj, damon_sysfs_filters, kobj);
     return sysfs_emit(buf, "%d\n", filters.nr);
     }
-    static ssize_t nr_filters_store(struct kobject *kobj,
-    struct kobj_attribute *attr, const char *buf, size_t count)
-    {
-    struct damon_sysfs_filters *filters;
+#[no_mangle]
+pub unsafe extern "C" fn nr_filters_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+pub static mut filters: *mut c_void = core::ptr::null_mut();
     int nr, err = kstrtoint(buf, 0, &nr);
-    if (err)
+    if (err) {
     return err;
-    if (nr < 0)
+    }
+    if (nr < 0) {
     return -EINVAL;
-    filters = container_of(kobj, struct damon_sysfs_filters, kobj);
-    if (!mutex_trylock(&damon_sysfs_lock))
+    }
+    filters = container_of!(kobj, damon_sysfs_filters, kobj);
+    if (!mutex_trylock(&damon_sysfs_lock)) {
     return -EBUSY;
+    }
     err = damon_sysfs_filters_add_dirs(filters, nr);
     mutex_unlock(&damon_sysfs_lock);
-    if (err)
+    if (err) {
     return err;
+    }
     return count;
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_filters_release(kobj: *mut kobject) {
-    static void damon_sysfs_filters_release(struct kobject *kobj)
-    {
-    kfree(container_of(kobj, struct damon_sysfs_filters, kobj));
+    kfree(container_of!(kobj, damon_sysfs_filters, kobj));
     }
     static struct kobj_attribute damon_sysfs_filters_nr_attr =
     __ATTR_RW_MODE(nr_filters, 0600);
@@ -944,11 +1095,7 @@ unsafe extern "C" fn damon_sysfs_filters_release(kobj: *mut kobject) {
     core::ptr::null_mut(),
     };
     ATTRIBUTE_GROUPS(damon_sysfs_filters);
-    static const struct kobj_type damon_sysfs_filters_ktype = {
-    .release = damon_sysfs_filters_release,
-    .sysfs_ops = &kobj_sysfs_ops,
-    .default_groups = damon_sysfs_filters_groups,
-    };
+pub static mut kobj_type: usize = 0;
 //
 // probe directory
 //
@@ -960,19 +1107,18 @@ pub struct damon_sysfs_probe {
     pub filters: *mut damon_sysfs_filters,
 }
 
-    static struct damon_sysfs_probe *damon_sysfs_probe_alloc(void)
-    {
-    return kzalloc_obj(struct damon_sysfs_probe);
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_probe_alloc() -> *mut c_void {
+    return kzalloc_obj(damon_sysfs_probe);
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_probe_add_dirs(probe: *mut damon_sysfs_probe) -> c_int {
-    static int damon_sysfs_probe_add_dirs(struct damon_sysfs_probe *probe)
-    {
-    struct damon_sysfs_filters *filters;
-    int err;
+pub static mut filters: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
     filters = damon_sysfs_filters_alloc();
-    if (!filters)
+    if (!filters) {
     return -ENOMEM;
+    }
     probe.filters = filters;
     err = kobject_init_and_add(&filters.kobj, &damon_sysfs_filters_ktype,
     &probe.kobj, "filters");
@@ -984,33 +1130,25 @@ unsafe extern "C" fn damon_sysfs_probe_add_dirs(probe: *mut damon_sysfs_probe) -
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_probe_rm_dirs(probe: *mut damon_sysfs_probe) {
-    static void damon_sysfs_probe_rm_dirs(struct damon_sysfs_probe *probe)
-    {
     if (probe.filters) {
     damon_sysfs_filters_rm_dirs(probe.filters);
     kobject_put(&probe.filters.kobj);
     }
     }
-    static ssize_t weight_show(struct kobject *kobj, struct kobj_attribute *attr,
-    char *buf)
-    {
-    struct damon_sysfs_probe *probe = container_of(kobj,
-    struct damon_sysfs_probe, kobj);
+#[no_mangle]
+pub unsafe extern "C" fn weight_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut probe = container_of!(kobj, damon_sysfs_probe, kobj);
     return sysfs_emit(buf, "%u\n", probe.weight);
     }
-    static ssize_t weight_store(struct kobject *kobj,
-    struct kobj_attribute *attr, const char *buf, size_t count)
-    {
-    struct damon_sysfs_probe *probe = container_of(kobj,
-    struct damon_sysfs_probe, kobj);
-    let mut err: c_int = kstrtouint(buf, 0, &probe.weight);
+#[no_mangle]
+pub unsafe extern "C" fn weight_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut probe = container_of!(kobj, damon_sysfs_probe, kobj);
+pub static mut err: c_int = 0;
     return err ? err : count;
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_probe_release(kobj: *mut kobject) {
-    static void damon_sysfs_probe_release(struct kobject *kobj)
-    {
-    kfree(container_of(kobj, struct damon_sysfs_probe, kobj));
+    kfree(container_of!(kobj, damon_sysfs_probe, kobj));
     }
     static struct kobj_attribute damon_sysfs_probe_weight_attr =
     __ATTR_RW_MODE(weight, 0600);
@@ -1019,11 +1157,7 @@ unsafe extern "C" fn damon_sysfs_probe_release(kobj: *mut kobject) {
     core::ptr::null_mut(),
     };
     ATTRIBUTE_GROUPS(damon_sysfs_probe);
-    static const struct kobj_type damon_sysfs_probe_ktype = {
-    .release = damon_sysfs_probe_release,
-    .sysfs_ops = &kobj_sysfs_ops,
-    .default_groups = damon_sysfs_probe_groups,
-    };
+pub static mut kobj_type: usize = 0;
 //
 // probes directory
 //
@@ -1035,16 +1169,15 @@ pub struct damon_sysfs_probes {
     pub nr: c_int,
 }
 
-    static struct damon_sysfs_probes *damon_sysfs_probes_alloc(void)
-    {
-    return kzalloc_obj(struct damon_sysfs_probes);
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_probes_alloc() -> *mut c_void {
+    return kzalloc_obj(damon_sysfs_probes);
     }
-    static void damon_sysfs_probes_rm_dirs(
-    struct damon_sysfs_probes *probes)
-    {
-    struct damon_sysfs_probe **probes_arr = probes.probes_arr;
-    int i;
-    for (i = 0; i < probes.nr; i++) {
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_probes_rm_dirs(probes: *mut damon_sysfs_probes) {
+    let mut probes_arr = probes.probes_arr;
+    let mut i = 0;
+    while (i < probes.nr) {
     damon_sysfs_probe_rm_dirs(probes_arr[i]);
     kobject_del(&probes_arr[i].kobj);
     kobject_put(&probes_arr[i].kobj);
@@ -1053,20 +1186,23 @@ pub struct damon_sysfs_probes {
     kfree(probes_arr);
     probes.probes_arr = core::ptr::null_mut();
     }
-    static int damon_sysfs_probes_add_dirs(
-    struct damon_sysfs_probes *probes, int nr_probes)
-    {
-    struct damon_sysfs_probe **probes_arr, *probe;
-    int err, i;
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_probes_add_dirs(probes: *mut damon_sysfs_probes, nr_probes: c_int) -> c_int {
+    let mut probes_arr = core::ptr::null_mut();
+    let mut probe = core::ptr::null_mut();
+    let mut err = 0;
+    let mut i = 0;
     damon_sysfs_probes_rm_dirs(probes);
-    if (!nr_probes)
+    if (!nr_probes) {
     return 0;
+    }
     probes_arr = kmalloc_objs(*probes_arr, nr_probes,
     GFP_KERNEL | __GFP_NOWARN);
-    if (!probes_arr)
+    if (!probes_arr) {
     return -ENOMEM;
+    }
     probes.probes_arr = probes_arr;
-    for (i = 0; i < nr_probes; i++) {
+    while (i < nr_probes) {
     probe = damon_sysfs_probe_alloc();
     if (!probe) {
     damon_sysfs_probes_rm_dirs(probes);
@@ -1088,40 +1224,39 @@ pub struct damon_sysfs_probes {
     return err;
     }
     probes_arr[i] = probe;
-    probes.nr++;
+    probes.nr += 1;
     }
     return 0;
     }
-    static ssize_t nr_probes_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    struct damon_sysfs_probes *probes = container_of(kobj,
-    struct damon_sysfs_probes, kobj);
+#[no_mangle]
+pub unsafe extern "C" fn nr_probes_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut probes = container_of!(kobj, damon_sysfs_probes, kobj);
     return sysfs_emit(buf, "%d\n", probes.nr);
     }
-    static ssize_t nr_probes_store(struct kobject *kobj,
-    struct kobj_attribute *attr, const char *buf, size_t count)
-    {
-    struct damon_sysfs_probes *probes;
+#[no_mangle]
+pub unsafe extern "C" fn nr_probes_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+pub static mut probes: *mut c_void = core::ptr::null_mut();
     int nr, err = kstrtoint(buf, 0, &nr);
-    if (err)
+    if (err) {
     return err;
-    if (nr < 0 || nr > DAMON_MAX_PROBES)
+    }
+    if (nr < 0 || nr > DAMON_MAX_PROBES) {
     return -EINVAL;
-    probes = container_of(kobj, struct damon_sysfs_probes, kobj);
-    if (!mutex_trylock(&damon_sysfs_lock))
+    }
+    probes = container_of!(kobj, damon_sysfs_probes, kobj);
+    if (!mutex_trylock(&damon_sysfs_lock)) {
     return -EBUSY;
+    }
     err = damon_sysfs_probes_add_dirs(probes, nr);
     mutex_unlock(&damon_sysfs_lock);
-    if (err)
+    if (err) {
     return err;
+    }
     return count;
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_probes_release(kobj: *mut kobject) {
-    static void damon_sysfs_probes_release(struct kobject *kobj)
-    {
-    kfree(container_of(kobj, struct damon_sysfs_probes, kobj));
+    kfree(container_of!(kobj, damon_sysfs_probes, kobj));
     }
     static struct kobj_attribute damon_sysfs_probes_nr_probes =
     __ATTR_RW_MODE(nr_probes, 0600);
@@ -1130,11 +1265,7 @@ unsafe extern "C" fn damon_sysfs_probes_release(kobj: *mut kobject) {
     core::ptr::null_mut(),
     };
     ATTRIBUTE_GROUPS(damon_sysfs_probes);
-    static const struct kobj_type damon_sysfs_probes_ktype = {
-    .release = damon_sysfs_probes_release,
-    .sysfs_ops = &kobj_sysfs_ops,
-    .default_groups = damon_sysfs_probes_groups,
-    };
+pub static mut kobj_type: usize = 0;
 //
 // monitoring_attrs directory
 //
@@ -1147,73 +1278,75 @@ pub struct damon_sysfs_attrs {
     pub probes: *mut damon_sysfs_probes,
 }
 
-    static struct damon_sysfs_attrs *damon_sysfs_attrs_alloc(void)
-    {
-    struct damon_sysfs_attrs *attrs = kmalloc_obj(*attrs);
-    if (!attrs)
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_attrs_alloc() -> *mut c_void {
+    let mut attrs = kmalloc_obj(*attrs);
+    if (!attrs) {
     return core::ptr::null_mut();
-    attrs.kobj = (struct kobject){};
+    }
+    attrs.kobj = (kobject){};
     return attrs;
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_attrs_add_dirs(attrs: *mut damon_sysfs_attrs) -> c_int {
-    static int damon_sysfs_attrs_add_dirs(struct damon_sysfs_attrs *attrs)
-    {
-    struct damon_sysfs_intervals *intervals;
-    struct damon_sysfs_ul_range *nr_regions_range;
-    struct damon_sysfs_probes *probes;
-    int err;
+pub static mut intervals: *mut c_void = core::ptr::null_mut();
+pub static mut nr_regions_range: *mut c_void = core::ptr::null_mut();
+pub static mut probes: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
     intervals = damon_sysfs_intervals_alloc(5000, 100000, 60000000);
-    if (!intervals)
+    if (!intervals) {
     return -ENOMEM;
+    }
     err = kobject_init_and_add(&intervals.kobj,
     &damon_sysfs_intervals_ktype, &attrs.kobj,
     "intervals");
-    if (err)
-    goto put_intervals_out;
+    if (err) {
+// goto;
+    }
     err = damon_sysfs_intervals_add_dirs(intervals);
-    if (err)
-    goto put_intervals_out;
+    if (err) {
+// goto;
+    }
     attrs.intervals = intervals;
     nr_regions_range = damon_sysfs_ul_range_alloc(10, 1000);
     if (!nr_regions_range) {
     err = -ENOMEM;
-    goto rmdir_put_intervals_out;
+// goto;
     }
     err = kobject_init_and_add(&nr_regions_range.kobj,
     &damon_sysfs_ul_range_ktype, &attrs.kobj,
     "nr_regions");
-    if (err)
-    goto put_nr_regions_intervals_out;
+    if (err) {
+// goto;
+    }
     attrs.nr_regions_range = nr_regions_range;
     probes = damon_sysfs_probes_alloc();
     if (!probes) {
     err = -ENOMEM;
-    goto put_nr_regions_intervals_out;
+// goto;
     }
     err = kobject_init_and_add(&probes.kobj,
     &damon_sysfs_probes_ktype, &attrs.kobj, "probes");
-    if (err)
-    goto put_probes_out;
+    if (err) {
+// goto;
+    }
     attrs.probes = probes;
     return 0;
-    put_probes_out:
+// label;
     kobject_put(&probes.kobj);
     attrs.probes = core::ptr::null_mut();
-    put_nr_regions_intervals_out:
+// label;
     kobject_put(&nr_regions_range.kobj);
     attrs.nr_regions_range = core::ptr::null_mut();
-    rmdir_put_intervals_out:
+// label;
     damon_sysfs_intervals_rm_dirs(intervals);
-    put_intervals_out:
+// label;
     kobject_put(&intervals.kobj);
     attrs.intervals = core::ptr::null_mut();
     return err;
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_attrs_rm_dirs(attrs: *mut damon_sysfs_attrs) {
-    static void damon_sysfs_attrs_rm_dirs(struct damon_sysfs_attrs *attrs)
-    {
     kobject_put(&attrs.nr_regions_range.kobj);
     damon_sysfs_intervals_rm_dirs(attrs.intervals);
     kobject_put(&attrs.intervals.kobj);
@@ -1222,48 +1355,29 @@ unsafe extern "C" fn damon_sysfs_attrs_rm_dirs(attrs: *mut damon_sysfs_attrs) {
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_attrs_release(kobj: *mut kobject) {
-    static void damon_sysfs_attrs_release(struct kobject *kobj)
-    {
-    kfree(container_of(kobj, struct damon_sysfs_attrs, kobj));
+    kfree(container_of!(kobj, damon_sysfs_attrs, kobj));
     }
     static struct attribute *damon_sysfs_attrs_attrs[] = {
     core::ptr::null_mut(),
     };
     ATTRIBUTE_GROUPS(damon_sysfs_attrs);
-    static const struct kobj_type damon_sysfs_attrs_ktype = {
-    .release = damon_sysfs_attrs_release,
-    .sysfs_ops = &kobj_sysfs_ops,
-    .default_groups = damon_sysfs_attrs_groups,
-    };
+pub static mut kobj_type: usize = 0;
 //
 // context directory
 //
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct damon_sysfs_ops_name {
-    pub ops_id: enum damon_ops_id,
+    pub ops_id: damon_ops_id,
     pub name: *mut c_char,
 }
 
-    static const struct damon_sysfs_ops_name damon_sysfs_ops_names[] = {
-    {
-    .ops_id = DAMON_OPS_VADDR,
-    .name = "vaddr",
-    },
-    {
-    .ops_id = DAMON_OPS_FVADDR,
-    .name = "fvaddr",
-    },
-    {
-    .ops_id = DAMON_OPS_PADDR,
-    .name = "paddr",
-    },
-    };
+pub static mut damon_sysfs_ops_name: usize = 0;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct damon_sysfs_context {
     pub kobj: kobject,
-    pub ops_id: enum damon_ops_id,
+    pub ops_id: damon_ops_id,
     pub addr_unit: c_ulong,
     pub attrs: *mut damon_sysfs_attrs,
     pub targets: *mut damon_sysfs_targets,
@@ -1271,13 +1385,13 @@ pub struct damon_sysfs_context {
     pub pause: bool,
 }
 
-    static struct damon_sysfs_context *damon_sysfs_context_alloc(
-    enum damon_ops_id ops_id)
-    {
-    struct damon_sysfs_context *context = kmalloc_obj(*context);
-    if (!context)
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_context_alloc(ops_id: damon_ops_id) -> *mut c_void {
+    let mut context = kmalloc_obj(*context);
+    if (!context) {
     return core::ptr::null_mut();
-    context.kobj = (struct kobject){};
+    }
+    context.kobj = (kobject){};
     context.ops_id = ops_id;
     context.addr_unit = 1;
     context.pause = false;
@@ -1285,33 +1399,33 @@ pub struct damon_sysfs_context {
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_context_set_attrs(context: *mut damon_sysfs_context) -> c_int {
-    static int damon_sysfs_context_set_attrs(struct damon_sysfs_context *context)
-    {
-    struct damon_sysfs_attrs *attrs = damon_sysfs_attrs_alloc();
-    int err;
-    if (!attrs)
+    let mut attrs = damon_sysfs_attrs_alloc();
+    let mut err = 0;
+    if (!attrs) {
     return -ENOMEM;
+    }
     err = kobject_init_and_add(&attrs.kobj, &damon_sysfs_attrs_ktype,
     &context.kobj, "monitoring_attrs");
-    if (err)
-    goto out;
+    if (err) {
+// goto;
+    }
     err = damon_sysfs_attrs_add_dirs(attrs);
-    if (err)
-    goto out;
+    if (err) {
+// goto;
+    }
     context.attrs = attrs;
     return 0;
-    out:
+// label;
     kobject_put(&attrs.kobj);
     return err;
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_context_set_targets(context: *mut damon_sysfs_context) -> c_int {
-    static int damon_sysfs_context_set_targets(struct damon_sysfs_context *context)
-    {
-    struct damon_sysfs_targets *targets = damon_sysfs_targets_alloc();
-    int err;
-    if (!targets)
+    let mut targets = damon_sysfs_targets_alloc();
+    let mut err = 0;
+    if (!targets) {
     return -ENOMEM;
+    }
     err = kobject_init_and_add(&targets.kobj, &damon_sysfs_targets_ktype,
     &context.kobj, "targets");
     if (err) {
@@ -1323,12 +1437,11 @@ unsafe extern "C" fn damon_sysfs_context_set_targets(context: *mut damon_sysfs_c
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_context_set_schemes(context: *mut damon_sysfs_context) -> c_int {
-    static int damon_sysfs_context_set_schemes(struct damon_sysfs_context *context)
-    {
-    struct damon_sysfs_schemes *schemes = damon_sysfs_schemes_alloc();
-    int err;
-    if (!schemes)
+    let mut schemes = damon_sysfs_schemes_alloc();
+    let mut err = 0;
+    if (!schemes) {
     return -ENOMEM;
+    }
     err = kobject_init_and_add(&schemes.kobj, &damon_sysfs_schemes_ktype,
     &context.kobj, "schemes");
     if (err) {
@@ -1340,23 +1453,24 @@ unsafe extern "C" fn damon_sysfs_context_set_schemes(context: *mut damon_sysfs_c
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_context_add_dirs(context: *mut damon_sysfs_context) -> c_int {
-    static int damon_sysfs_context_add_dirs(struct damon_sysfs_context *context)
-    {
-    int err;
+    let mut err = 0;
     err = damon_sysfs_context_set_attrs(context);
-    if (err)
+    if (err) {
     return err;
+    }
     err = damon_sysfs_context_set_targets(context);
-    if (err)
-    goto rmdir_put_attrs_out;
+    if (err) {
+// goto;
+    }
     err = damon_sysfs_context_set_schemes(context);
-    if (err)
-    goto put_targets_attrs_out;
+    if (err) {
+// goto;
+    }
     return 0;
-    put_targets_attrs_out:
+// label;
     kobject_put(&context.targets.kobj);
     context.targets = core::ptr::null_mut();
-    rmdir_put_attrs_out:
+// label;
     damon_sysfs_attrs_rm_dirs(context.attrs);
     kobject_put(&context.attrs.kobj);
     context.attrs = core::ptr::null_mut();
@@ -1364,8 +1478,6 @@ unsafe extern "C" fn damon_sysfs_context_add_dirs(context: *mut damon_sysfs_cont
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_context_rm_dirs(context: *mut damon_sysfs_context) {
-    static void damon_sysfs_context_rm_dirs(struct damon_sysfs_context *context)
-    {
     damon_sysfs_attrs_rm_dirs(context.attrs);
     kobject_put(&context.attrs.kobj);
     damon_sysfs_targets_rm_dirs(context.targets);
@@ -1373,42 +1485,39 @@ unsafe extern "C" fn damon_sysfs_context_rm_dirs(context: *mut damon_sysfs_conte
     damon_sysfs_schemes_rm_dirs(context.schemes);
     kobject_put(&context.schemes.kobj);
     }
-    static ssize_t avail_operations_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    let mut len: c_int = 0;
-    int i;
-    for (i = 0; i < ARRAY_SIZE(damon_sysfs_ops_names); i++) {
-    const struct damon_sysfs_ops_name *ops_name;
+#[no_mangle]
+pub unsafe extern "C" fn avail_operations_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+pub static mut len: c_int = 0;
+    let mut i = 0;
+    while (i < ARRAY_SIZE!(damon_sysfs_ops_names)) {
+pub static mut ops_name: *mut c_void = core::ptr::null_mut();
     ops_name = &damon_sysfs_ops_names[i];
-    if (!damon_is_registered_ops(ops_name.ops_id))
+    if (!damon_is_registered_ops(ops_name.ops_id)) {
     continue;
+    }
     len += sysfs_emit_at(buf, len, "%s\n", ops_name.name);
     }
     return len;
     }
-    static ssize_t operations_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    struct damon_sysfs_context *context = container_of(kobj,
-    struct damon_sysfs_context, kobj);
-    int i;
-    for (i = 0; i < ARRAY_SIZE(damon_sysfs_ops_names); i++) {
-    const struct damon_sysfs_ops_name *ops_name;
+#[no_mangle]
+pub unsafe extern "C" fn operations_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut context = container_of!(kobj, damon_sysfs_context, kobj);
+    let mut i = 0;
+    while (i < ARRAY_SIZE!(damon_sysfs_ops_names)) {
+pub static mut ops_name: *mut c_void = core::ptr::null_mut();
     ops_name = &damon_sysfs_ops_names[i];
-    if (ops_name.ops_id == context.ops_id)
+    if (ops_name.ops_id == context.ops_id) {
     return sysfs_emit(buf, "%s\n", ops_name.name);
+    }
     }
     return -EINVAL;
     }
-    static ssize_t operations_store(struct kobject *kobj,
-    struct kobj_attribute *attr, const char *buf, size_t count)
-    {
-    struct damon_sysfs_context *context = container_of(kobj,
-    struct damon_sysfs_context, kobj);
-    int i;
-    for (i = 0; i < ARRAY_SIZE(damon_sysfs_ops_names); i++) {
-    const struct damon_sysfs_ops_name *ops_name;
+#[no_mangle]
+pub unsafe extern "C" fn operations_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut context = container_of!(kobj, damon_sysfs_context, kobj);
+    let mut i = 0;
+    while (i < ARRAY_SIZE!(damon_sysfs_ops_names)) {
+pub static mut ops_name: *mut c_void = core::ptr::null_mut();
     ops_name = &damon_sysfs_ops_names[i];
     if (sysfs_streq(buf, ops_name.name)) {
     context.ops_id = ops_name.ops_id;
@@ -1417,51 +1526,44 @@ unsafe extern "C" fn damon_sysfs_context_rm_dirs(context: *mut damon_sysfs_conte
     }
     return -EINVAL;
     }
-    static ssize_t addr_unit_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    struct damon_sysfs_context *context = container_of(kobj,
-    struct damon_sysfs_context, kobj);
+#[no_mangle]
+pub unsafe extern "C" fn addr_unit_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut context = container_of!(kobj, damon_sysfs_context, kobj);
     return sysfs_emit(buf, "%lu\n", context.addr_unit);
     }
-    static ssize_t addr_unit_store(struct kobject *kobj,
-    struct kobj_attribute *attr, const char *buf, size_t count)
-    {
-    struct damon_sysfs_context *context = container_of(kobj,
-    struct damon_sysfs_context, kobj);
-    unsigned long input_addr_unit;
-    let mut err: c_int = kstrtoul(buf, 0, &input_addr_unit);
-    if (err)
+#[no_mangle]
+pub unsafe extern "C" fn addr_unit_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut context = container_of!(kobj, damon_sysfs_context, kobj);
+    let mut input_addr_unit = 0;
+pub static mut err: c_int = 0;
+    if (err) {
     return err;
-    if (!input_addr_unit)
+    }
+    if (!input_addr_unit) {
     return -EINVAL;
+    }
     context.addr_unit = input_addr_unit;
     return count;
     }
-    static ssize_t pause_show(struct kobject *kobj, struct kobj_attribute *attr,
-    char *buf)
-    {
-    struct damon_sysfs_context *context = container_of(kobj,
-    struct damon_sysfs_context, kobj);
+#[no_mangle]
+pub unsafe extern "C" fn pause_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut context = container_of!(kobj, damon_sysfs_context, kobj);
     return sysfs_emit(buf, "%c\n", context.pause ? 'Y' : 'N');
     }
-    static ssize_t pause_store(struct kobject *kobj, struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
-    struct damon_sysfs_context *context = container_of(kobj,
-    struct damon_sysfs_context, kobj);
-    bool pause;
-    let mut err: c_int = kstrtobool(buf, &pause);
-    if (err)
+#[no_mangle]
+pub unsafe extern "C" fn pause_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut context = container_of!(kobj, damon_sysfs_context, kobj);
+    let mut pause = 0;
+pub static mut err: c_int = 0;
+    if (err) {
     return err;
+    }
     context.pause = pause;
     return count;
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_context_release(kobj: *mut kobject) {
-    static void damon_sysfs_context_release(struct kobject *kobj)
-    {
-    kfree(container_of(kobj, struct damon_sysfs_context, kobj));
+    kfree(container_of!(kobj, damon_sysfs_context, kobj));
     }
     static struct kobj_attribute damon_sysfs_context_avail_operations_attr =
     __ATTR_RO_MODE(avail_operations, 0400);
@@ -1479,11 +1581,7 @@ unsafe extern "C" fn damon_sysfs_context_release(kobj: *mut kobject) {
     core::ptr::null_mut(),
     };
     ATTRIBUTE_GROUPS(damon_sysfs_context);
-    static const struct kobj_type damon_sysfs_context_ktype = {
-    .release = damon_sysfs_context_release,
-    .sysfs_ops = &kobj_sysfs_ops,
-    .default_groups = damon_sysfs_context_groups,
-    };
+pub static mut kobj_type: usize = 0;
 //
 // contexts directory
 //
@@ -1495,17 +1593,15 @@ pub struct damon_sysfs_contexts {
     pub nr: c_int,
 }
 
-    static struct damon_sysfs_contexts *damon_sysfs_contexts_alloc(void)
-    {
-    return kzalloc_obj(struct damon_sysfs_contexts);
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_contexts_alloc() -> *mut c_void {
+    return kzalloc_obj(damon_sysfs_contexts);
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_contexts_rm_dirs(contexts: *mut damon_sysfs_contexts) {
-    static void damon_sysfs_contexts_rm_dirs(struct damon_sysfs_contexts *contexts)
-    {
-    struct damon_sysfs_context **contexts_arr = contexts.contexts_arr;
-    int i;
-    for (i = 0; i < contexts.nr; i++) {
+    let mut contexts_arr = contexts.contexts_arr;
+    let mut i = 0;
+    while (i < contexts.nr) {
     damon_sysfs_context_rm_dirs(contexts_arr[i]);
     kobject_del(&contexts_arr[i].kobj);
     kobject_put(&contexts_arr[i].kobj);
@@ -1514,20 +1610,23 @@ unsafe extern "C" fn damon_sysfs_contexts_rm_dirs(contexts: *mut damon_sysfs_con
     kfree(contexts_arr);
     contexts.contexts_arr = core::ptr::null_mut();
     }
-    static int damon_sysfs_contexts_add_dirs(struct damon_sysfs_contexts *contexts,
-    int nr_contexts)
-    {
-    struct damon_sysfs_context **contexts_arr, *context;
-    int err, i;
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_contexts_add_dirs(contexts: *mut damon_sysfs_contexts, nr_contexts: c_int) -> c_int {
+    let mut contexts_arr = core::ptr::null_mut();
+    let mut context = core::ptr::null_mut();
+    let mut err = 0;
+    let mut i = 0;
     damon_sysfs_contexts_rm_dirs(contexts);
-    if (!nr_contexts)
+    if (!nr_contexts) {
     return 0;
+    }
     contexts_arr = kmalloc_objs(*contexts_arr, nr_contexts,
     GFP_KERNEL | __GFP_NOWARN);
-    if (!contexts_arr)
+    if (!contexts_arr) {
     return -ENOMEM;
+    }
     contexts.contexts_arr = contexts_arr;
-    for (i = 0; i < nr_contexts; i++) {
+    while (i < nr_contexts) {
     context = damon_sysfs_context_alloc(DAMON_OPS_VADDR);
     if (!context) {
     damon_sysfs_contexts_rm_dirs(contexts);
@@ -1536,54 +1635,56 @@ unsafe extern "C" fn damon_sysfs_contexts_rm_dirs(contexts: *mut damon_sysfs_con
     err = kobject_init_and_add(&context.kobj,
     &damon_sysfs_context_ktype, &contexts.kobj,
     "%d", i);
-    if (err)
-    goto out;
+    if (err) {
+// goto;
+    }
     err = damon_sysfs_context_add_dirs(context);
-    if (err)
-    goto del_out;
+    if (err) {
+// goto;
+    }
     contexts_arr[i] = context;
-    contexts.nr++;
+    contexts.nr += 1;
     }
     return 0;
-    del_out:
+// label;
     kobject_del(&context.kobj);
-    out:
+// label;
     damon_sysfs_contexts_rm_dirs(contexts);
     kobject_put(&context.kobj);
     return err;
     }
-    static ssize_t nr_contexts_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    struct damon_sysfs_contexts *contexts = container_of(kobj,
-    struct damon_sysfs_contexts, kobj);
+#[no_mangle]
+pub unsafe extern "C" fn nr_contexts_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut contexts = container_of!(kobj, damon_sysfs_contexts, kobj);
     return sysfs_emit(buf, "%d\n", contexts.nr);
     }
-    static ssize_t nr_contexts_store(struct kobject *kobj,
-    struct kobj_attribute *attr, const char *buf, size_t count)
-    {
-    struct damon_sysfs_contexts *contexts;
-    int nr, err;
+#[no_mangle]
+pub unsafe extern "C" fn nr_contexts_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+pub static mut contexts: *mut c_void = core::ptr::null_mut();
+    let mut nr = 0;
+    let mut err = 0;
     err = kstrtoint(buf, 0, &nr);
-    if (err)
+    if (err) {
     return err;
+    }
 // TODO: support multiple contexts per kdamond
-    if (nr < 0 || 1 < nr)
+    if (nr < 0 || 1 < nr) {
     return -EINVAL;
-    contexts = container_of(kobj, struct damon_sysfs_contexts, kobj);
-    if (!mutex_trylock(&damon_sysfs_lock))
+    }
+    contexts = container_of!(kobj, damon_sysfs_contexts, kobj);
+    if (!mutex_trylock(&damon_sysfs_lock)) {
     return -EBUSY;
+    }
     err = damon_sysfs_contexts_add_dirs(contexts, nr);
     mutex_unlock(&damon_sysfs_lock);
-    if (err)
+    if (err) {
     return err;
+    }
     return count;
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_contexts_release(kobj: *mut kobject) {
-    static void damon_sysfs_contexts_release(struct kobject *kobj)
-    {
-    kfree(container_of(kobj, struct damon_sysfs_contexts, kobj));
+    kfree(container_of!(kobj, damon_sysfs_contexts, kobj));
     }
     static struct kobj_attribute damon_sysfs_contexts_nr_attr
     = __ATTR_RW_MODE(nr_contexts, 0600);
@@ -1592,11 +1693,7 @@ unsafe extern "C" fn damon_sysfs_contexts_release(kobj: *mut kobject) {
     core::ptr::null_mut(),
     };
     ATTRIBUTE_GROUPS(damon_sysfs_contexts);
-    static const struct kobj_type damon_sysfs_contexts_ktype = {
-    .release = damon_sysfs_contexts_release,
-    .sysfs_ops = &kobj_sysfs_ops,
-    .default_groups = damon_sysfs_contexts_groups,
-    };
+pub static mut kobj_type: usize = 0;
 //
 // kdamond directory
 //
@@ -1609,19 +1706,18 @@ pub struct damon_sysfs_kdamond {
     pub refresh_ms: c_uint,
 }
 
-    static struct damon_sysfs_kdamond *damon_sysfs_kdamond_alloc(void)
-    {
-    return kzalloc_obj(struct damon_sysfs_kdamond);
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_kdamond_alloc() -> *mut c_void {
+    return kzalloc_obj(damon_sysfs_kdamond);
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_kdamond_add_dirs(kdamond: *mut damon_sysfs_kdamond) -> c_int {
-    static int damon_sysfs_kdamond_add_dirs(struct damon_sysfs_kdamond *kdamond)
-    {
-    struct damon_sysfs_contexts *contexts;
-    int err;
+pub static mut contexts: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
     contexts = damon_sysfs_contexts_alloc();
-    if (!contexts)
+    if (!contexts) {
     return -ENOMEM;
+    }
     err = kobject_init_and_add(&contexts.kobj,
     &damon_sysfs_contexts_ktype, &kdamond.kobj,
     "contexts");
@@ -1634,8 +1730,6 @@ unsafe extern "C" fn damon_sysfs_kdamond_add_dirs(kdamond: *mut damon_sysfs_kdam
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_kdamond_rm_dirs(kdamond: *mut damon_sysfs_kdamond) {
-    static void damon_sysfs_kdamond_rm_dirs(struct damon_sysfs_kdamond *kdamond)
-    {
     damon_sysfs_contexts_rm_dirs(kdamond.contexts);
     kobject_put(&kdamond.contexts.kobj);
     }
@@ -1702,60 +1796,45 @@ unsafe extern "C" fn damon_sysfs_kdamond_rm_dirs(kdamond: *mut damon_sysfs_kdamo
     "update_schemes_effective_quotas",
     "update_tuned_intervals",
     };
-    static ssize_t state_show(struct kobject *kobj, struct kobj_attribute *attr,
-    char *buf)
-    {
-    struct damon_sysfs_kdamond *kdamond = container_of(kobj,
-    struct damon_sysfs_kdamond, kobj);
-    struct damon_ctx *ctx;
-    let mut running: bool = false;
-    if (!mutex_trylock(&damon_sysfs_lock))
+#[no_mangle]
+pub unsafe extern "C" fn state_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut kdamond = container_of!(kobj, damon_sysfs_kdamond, kobj);
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+pub static mut running: bool = false;
+    if (!mutex_trylock(&damon_sysfs_lock)) {
     return -EBUSY;
+    }
     ctx = kdamond.damon_ctx;
-    if (ctx)
+    if (ctx) {
     running = damon_is_running(ctx);
+    }
     mutex_unlock(&damon_sysfs_lock);
     return sysfs_emit(buf, "%s\n", running ?
     damon_sysfs_cmd_strs[DAMON_SYSFS_CMD_ON] :
     damon_sysfs_cmd_strs[DAMON_SYSFS_CMD_OFF]);
     }
-    static int damon_sysfs_set_attrs(struct damon_ctx *ctx,
-    struct damon_sysfs_attrs *sys_attrs)
-    {
-    struct damon_sysfs_intervals *sys_intervals = sys_attrs.intervals;
-    struct damon_sysfs_intervals_goal *sys_goal =
-    sys_intervals.intervals_goal;
-    struct damon_sysfs_ul_range *sys_nr_regions =
-    sys_attrs.nr_regions_range;
-    struct damon_attrs attrs = {
-    .sample_interval = sys_intervals.sample_us,
-    .aggr_interval = sys_intervals.aggr_us,
-    .intervals_goal = {
-    .access_bp = sys_goal.access_bp,
-    .aggrs = sys_goal.aggrs,
-    .min_sample_us = sys_goal.min_sample_us,
-    .max_sample_us = sys_goal.max_sample_us},
-    .ops_update_interval = sys_intervals.update_us,
-    .min_nr_regions = sys_nr_regions.min,
-    .max_nr_regions = sys_nr_regions.max,
-    };
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_set_attrs(ctx: *mut damon_ctx, sys_attrs: *mut damon_sysfs_attrs) -> c_int {
+    let mut sys_intervals = sys_attrs.intervals;
+    let mut sys_goal = sys_intervals.intervals_goal;
+    let mut sys_nr_regions = sys_attrs.nr_regions_range;
+pub static mut damon_attrs: usize = 0;
     return damon_set_attrs(ctx, &attrs);
     }
-    static int damon_sysfs_set_filters(struct damon_probe *probe,
-    struct damon_sysfs_filters *sys_filters)
-    {
-    int i;
-    for (i = 0; i < sys_filters.nr; i++) {
-    struct damon_sysfs_filter *sys_filter =
-    sys_filters.filters_arr[i];
-    struct damon_filter *filter;
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_set_filters(probe: *mut damon_probe, sys_filters: *mut damon_sysfs_filters) -> c_int {
+    let mut i = 0;
+    while (i < sys_filters.nr) {
+    let mut sys_filter = sys_filters.filters_arr[i];
+pub static mut filter: *mut c_void = core::ptr::null_mut();
     filter = damon_new_filter(sys_filter.type,
     sys_filter.matching,
     sys_filter.allow);
-    if (!filter)
+    if (!filter) {
     return -ENOMEM;
+    }
     if (filter.type == DAMON_FILTER_TYPE_MEMCG) {
-    int err;
+    let mut err = 0;
     err = damon_sysfs_memcg_path_to_id(
     sys_filter.path,
     &filter.memcg_id);
@@ -1768,88 +1847,93 @@ unsafe extern "C" fn damon_sysfs_kdamond_rm_dirs(kdamond: *mut damon_sysfs_kdamo
     }
     return 0;
     }
-    static int damon_sysfs_set_probe(struct damon_probe *probe,
-    struct damon_sysfs_probe *sys_probe)
-    {
-    struct damon_sysfs_filters *sys_filters;
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_set_probe(probe: *mut damon_probe, sys_probe: *mut damon_sysfs_probe) -> c_int {
+pub static mut sys_filters: *mut c_void = core::ptr::null_mut();
     sys_filters = sys_probe.filters;
-    if (!sys_filters)
+    if (!sys_filters) {
     return 0;
+    }
     return damon_sysfs_set_filters(probe, sys_filters);
     }
-    static int damon_sysfs_set_probes(struct damon_ctx *ctx,
-    struct damon_sysfs_probes *sys_probes)
-    {
-    int i, err;
-    for (i = 0; i < sys_probes.nr; i++) {
-    struct damon_sysfs_probe *sys_probe;
-    struct damon_probe *p;
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_set_probes(ctx: *mut damon_ctx, sys_probes: *mut damon_sysfs_probes) -> c_int {
+    let mut i = 0;
+    let mut err = 0;
+    while (i < sys_probes.nr) {
+pub static mut sys_probe: *mut c_void = core::ptr::null_mut();
+pub static mut p: *mut c_void = core::ptr::null_mut();
     p = damon_new_probe();
-    if (!p)
+    if (!p) {
     return -ENOMEM;
+    }
     damon_add_probe(ctx, p);
     sys_probe = sys_probes.probes_arr[i];
     p.weight = sys_probe.weight;
     err = damon_sysfs_set_probe(p, sys_probe);
-    if (err)
+    if (err) {
     return err;
+    }
     }
     return 0;
     }
-    static int damon_sysfs_set_regions(struct damon_target *t,
-    struct damon_sysfs_regions *sysfs_regions,
-    unsigned long min_region_sz)
-    {
-    struct damon_addr_range *ranges = kmalloc_objs(*ranges,
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_set_regions(t: *mut damon_target, sysfs_regions: *mut damon_sysfs_regions, min_region_sz: c_ulong) -> c_int {
+    let mut ranges = kmalloc_objs(*ranges,
     sysfs_regions.nr,
     GFP_KERNEL | __GFP_NOWARN);
     int i, err = -EINVAL;
-    if (!ranges)
+    if (!ranges) {
     return -ENOMEM;
-    for (i = 0; i < sysfs_regions.nr; i++) {
-    struct damon_sysfs_region *sys_region =
-    sysfs_regions.regions_arr[i];
+    }
+    while (i < sysfs_regions.nr) {
+    let mut sys_region = sysfs_regions.regions_arr[i];
     ranges[i].start = sys_region.ar.start;
     ranges[i].end = sys_region.ar.end;
-    if (i == 0)
+    if (i == 0) {
     continue;
-    if (ranges[i - 1].end > ranges[i].start)
-    goto out;
+    }
+    if (ranges[i - 1].end > ranges[i].start) {
+// goto;
+    }
     }
     err = damon_set_regions(t, ranges, sysfs_regions.nr, min_region_sz);
-    out:
+// label;
     kfree(ranges);
     return err;
     }
-    static int damon_sysfs_add_target(struct damon_sysfs_target *sys_target,
-    struct damon_ctx *ctx)
-    {
-    struct damon_target *t = damon_new_target();
-    if (!t)
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_add_target(sys_target: *mut damon_sysfs_target, ctx: *mut damon_ctx) -> c_int {
+    let mut t = damon_new_target();
+    if (!t) {
     return -ENOMEM;
+    }
     damon_add_target(ctx, t);
     if (damon_target_has_pid(ctx)) {
     t.pid = find_get_pid(sys_target.pid);
-    if (!t.pid)
+    if (!t.pid) {
 // caller will destroy targets
     return -EINVAL;
+    }
     }
     t.obsolete = sys_target.obsolete;
     return damon_sysfs_set_regions(t, sys_target.regions,
     ctx.min_region_sz);
     }
-    static int damon_sysfs_add_targets(struct damon_ctx *ctx,
-    struct damon_sysfs_targets *sysfs_targets)
-    {
-    int i, err;
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_add_targets(ctx: *mut damon_ctx, sysfs_targets: *mut damon_sysfs_targets) -> c_int {
+    let mut i = 0;
+    let mut err = 0;
 // Multiple physical address space monitoring targets makes no sense
-    if (!damon_target_has_pid(ctx) && sysfs_targets.nr > 1)
+    if (!damon_target_has_pid(ctx) && sysfs_targets.nr > 1) {
     return -EINVAL;
-    for (i = 0; i < sysfs_targets.nr; i++) {
-    struct damon_sysfs_target *st = sysfs_targets.targets_arr[i];
+    }
+    while (i < sysfs_targets.nr) {
+    let mut st = sysfs_targets.targets_arr[i];
     err = damon_sysfs_add_target(st, ctx);
-    if (err)
+    if (err) {
     return err;
+    }
     }
     return 0;
     }
@@ -1865,48 +1949,48 @@ unsafe extern "C" fn damon_sysfs_kdamond_rm_dirs(kdamond: *mut damon_sysfs_kdamo
 //
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_upd_schemes_stats(data: *mut c_void) -> c_int {
-    static int damon_sysfs_upd_schemes_stats(void *data)
-    {
-    struct damon_sysfs_kdamond *kdamond = data;
-    struct damon_ctx *ctx = kdamond.damon_ctx;
+    let mut kdamond = data;
+    let mut ctx = kdamond.damon_ctx;
     damon_sysfs_schemes_update_stats(
     kdamond.contexts.contexts_arr[0].schemes, ctx);
     return 0;
     }
-    static inline bool damon_sysfs_kdamond_running(
-    struct damon_sysfs_kdamond *kdamond)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_kdamond_running(kdamond: *mut damon_sysfs_kdamond) -> bool {
     return kdamond.damon_ctx &&
     damon_is_running(kdamond.damon_ctx);
     }
-    static int damon_sysfs_apply_inputs(struct damon_ctx *ctx,
-    struct damon_sysfs_context *sys_ctx)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_apply_inputs(ctx: *mut damon_ctx, sys_ctx: *mut damon_sysfs_context) -> c_int {
     enum damon_ops_id ops_id;
-    int err;
+    let mut err = 0;
     ops_id = READ_ONCE(sys_ctx.ops_id);
     err = damon_select_ops(ctx, ops_id);
-    if (err)
+    if (err) {
     return err;
+    }
     ctx.addr_unit = READ_ONCE(sys_ctx.addr_unit);
 // addr_unit is respected by only DAMON_OPS_PADDR
-    if (ops_id == DAMON_OPS_PADDR)
+    if (ops_id == DAMON_OPS_PADDR) {
     ctx.min_region_sz = max(
     DAMON_MIN_REGION_SZ / ctx.addr_unit, 1);
+    }
     ctx.pause = sys_ctx.pause;
     err = damon_sysfs_set_attrs(ctx, sys_ctx.attrs);
-    if (err)
+    if (err) {
     return err;
+    }
     err = damon_sysfs_set_probes(ctx, sys_ctx.attrs.probes);
-    if (err)
+    if (err) {
     return err;
+    }
     err = damon_sysfs_add_targets(ctx, sys_ctx.targets);
-    if (err)
+    if (err) {
     return err;
+    }
     return damon_sysfs_add_schemes(ctx, sys_ctx.schemes);
     }
-    static struct damon_ctx *damon_sysfs_build_ctx(
-    struct damon_sysfs_context *sys_ctx);
+// forward_decl: damon_sysfs_build_ctx;
 //
 // damon_sysfs_commit_input() - Commit user inputs to a running kdamond.
 // @kdamond:	The kobject wrapper for the associated kdamond.
@@ -1915,35 +1999,36 @@ unsafe extern "C" fn damon_sysfs_upd_schemes_stats(data: *mut c_void) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_commit_input(data: *mut c_void) -> c_int {
-    static int damon_sysfs_commit_input(void *data)
-    {
-    struct damon_sysfs_kdamond *kdamond = data;
-    struct damon_ctx *param_ctx;
-    int err;
-    if (!damon_sysfs_kdamond_running(kdamond))
+    let mut kdamond = data;
+pub static mut param_ctx: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
+    if (!damon_sysfs_kdamond_running(kdamond)) {
     return -EINVAL;
+    }
 // TODO: Support multiple contexts per kdamond
-    if (kdamond.contexts.nr != 1)
+    if (kdamond.contexts.nr != 1) {
     return -EINVAL;
+    }
     param_ctx = damon_sysfs_build_ctx(kdamond.contexts.contexts_arr[0]);
-    if (IS_ERR(param_ctx))
+    if (IS_ERR(param_ctx)) {
     return PTR_ERR(param_ctx);
+    }
     err = damon_commit_ctx(kdamond.damon_ctx, param_ctx);
     damon_destroy_ctx(param_ctx);
     return err;
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_commit_schemes_quota_goals(data: *mut c_void) -> c_int {
-    static int damon_sysfs_commit_schemes_quota_goals(void *data)
-    {
-    struct damon_sysfs_kdamond *sysfs_kdamond = data;
-    struct damon_ctx *ctx;
-    struct damon_sysfs_context *sysfs_ctx;
-    if (!damon_sysfs_kdamond_running(sysfs_kdamond))
+    let mut sysfs_kdamond = data;
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+pub static mut sysfs_ctx: *mut c_void = core::ptr::null_mut();
+    if (!damon_sysfs_kdamond_running(sysfs_kdamond)) {
     return -EINVAL;
+    }
 // TODO: Support multiple contexts per kdamond
-    if (sysfs_kdamond.contexts.nr != 1)
+    if (sysfs_kdamond.contexts.nr != 1) {
     return -EINVAL;
+    }
     ctx = sysfs_kdamond.damon_ctx;
     sysfs_ctx = sysfs_kdamond.contexts.contexts_arr[0];
     return damos_sysfs_set_quota_scores(sysfs_ctx.schemes, ctx);
@@ -1960,33 +2045,29 @@ unsafe extern "C" fn damon_sysfs_commit_schemes_quota_goals(data: *mut c_void) -
 //
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_upd_schemes_effective_quotas(data: *mut c_void) -> c_int {
-    static int damon_sysfs_upd_schemes_effective_quotas(void *data)
-    {
-    struct damon_sysfs_kdamond *kdamond = data;
-    struct damon_ctx *ctx = kdamond.damon_ctx;
+    let mut kdamond = data;
+    let mut ctx = kdamond.damon_ctx;
     damos_sysfs_update_effective_quotas(
     kdamond.contexts.contexts_arr[0].schemes, ctx);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_upd_tuned_intervals(data: *mut c_void) -> c_int {
-    static int damon_sysfs_upd_tuned_intervals(void *data)
-    {
-    struct damon_sysfs_kdamond *kdamond = data;
-    struct damon_ctx *ctx = kdamond.damon_ctx;
+    let mut kdamond = data;
+    let mut ctx = kdamond.damon_ctx;
     kdamond.contexts.contexts_arr[0].attrs.intervals.sample_us =
     ctx.attrs.sample_interval;
     kdamond.contexts.contexts_arr[0].attrs.intervals.aggr_us =
     ctx.attrs.aggr_interval;
     return 0;
     }
-    static struct damon_ctx *damon_sysfs_build_ctx(
-    struct damon_sysfs_context *sys_ctx)
-    {
-    struct damon_ctx *ctx = damon_new_ctx();
-    int err;
-    if (!ctx)
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_build_ctx(sys_ctx: *mut damon_sysfs_context) -> *mut c_void {
+    let mut ctx = damon_new_ctx();
+    let mut err = 0;
+    if (!ctx) {
     return ERR_PTR(-ENOMEM);
+    }
     err = damon_sysfs_apply_inputs(ctx, sys_ctx);
     if (err) {
     damon_destroy_ctx(ctx);
@@ -1997,44 +2078,48 @@ unsafe extern "C" fn damon_sysfs_upd_tuned_intervals(data: *mut c_void) -> c_int
     static unsigned long damon_sysfs_next_update_jiffies;
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_repeat_call_fn(data: *mut c_void) -> c_int {
-    static int damon_sysfs_repeat_call_fn(void *data)
-    {
-    struct damon_sysfs_kdamond *sysfs_kdamond = data;
-    if (!sysfs_kdamond.refresh_ms)
+    let mut sysfs_kdamond = data;
+    if (!sysfs_kdamond.refresh_ms) {
     return 0;
-    if (time_before(jiffies, damon_sysfs_next_update_jiffies))
+    }
+    if (time_before(jiffies, damon_sysfs_next_update_jiffies)) {
     return 0;
+    }
     damon_sysfs_next_update_jiffies = jiffies +
     msecs_to_jiffies(sysfs_kdamond.refresh_ms);
-    if (!mutex_trylock(&damon_sysfs_lock))
+    if (!mutex_trylock(&damon_sysfs_lock)) {
     return 0;
-    if (sysfs_kdamond.contexts.nr != 1)
-    goto out;
+    }
+    if (sysfs_kdamond.contexts.nr != 1) {
+// goto;
+    }
     damon_sysfs_upd_tuned_intervals(sysfs_kdamond);
     damon_sysfs_upd_schemes_stats(sysfs_kdamond);
     damon_sysfs_upd_schemes_effective_quotas(sysfs_kdamond);
-    out:
+// label;
     mutex_unlock(&damon_sysfs_lock);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_turn_damon_on(kdamond: *mut damon_sysfs_kdamond) -> c_int {
-    static int damon_sysfs_turn_damon_on(struct damon_sysfs_kdamond *kdamond)
-    {
-    struct damon_ctx *ctx;
-    struct damon_call_control *repeat_call_control;
-    int err;
-    if (damon_sysfs_kdamond_running(kdamond))
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+pub static mut repeat_call_control: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
+    if (damon_sysfs_kdamond_running(kdamond)) {
     return -EBUSY;
+    }
 // TODO: support multiple contexts per kdamond
-    if (kdamond.contexts.nr != 1)
+    if (kdamond.contexts.nr != 1) {
     return -EINVAL;
-    if (kdamond.damon_ctx)
+    }
+    if (kdamond.damon_ctx) {
     damon_destroy_ctx(kdamond.damon_ctx);
+    }
     kdamond.damon_ctx = core::ptr::null_mut();
     repeat_call_control = kmalloc_obj(*repeat_call_control);
-    if (!repeat_call_control)
+    if (!repeat_call_control) {
     return -ENOMEM;
+    }
     ctx = damon_sysfs_build_ctx(kdamond.contexts.contexts_arr[0]);
     if (IS_ERR(ctx)) {
     kfree(repeat_call_control);
@@ -2053,16 +2138,16 @@ unsafe extern "C" fn damon_sysfs_turn_damon_on(kdamond: *mut damon_sysfs_kdamond
     repeat_call_control.data = kdamond;
     repeat_call_control.repeat = true;
     repeat_call_control.dealloc_on_cancel = true;
-    if (damon_call(ctx, repeat_call_control))
+    if (damon_call(ctx, repeat_call_control)) {
     kfree(repeat_call_control);
+    }
     return err;
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_turn_damon_off(kdamond: *mut damon_sysfs_kdamond) -> c_int {
-    static int damon_sysfs_turn_damon_off(struct damon_sysfs_kdamond *kdamond)
-    {
-    if (!kdamond.damon_ctx)
+    if (!kdamond.damon_ctx) {
     return -EINVAL;
+    }
     damon_stop(&kdamond.damon_ctx, 1);
 //
 // To allow users show final monitoring results of already turned-off
@@ -2071,13 +2156,13 @@ unsafe extern "C" fn damon_sysfs_turn_damon_off(kdamond: *mut damon_sysfs_kdamon
 //
     return 0;
     }
-    static int damon_sysfs_damon_call(int (*fn)(void *data),
-    struct damon_sysfs_kdamond *kdamond)
-    {
-    let mut call_control: damon_call_control = {};
-    int err;
-    if (!kdamond.damon_ctx)
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_damon_call(kdamond: *mut damon_sysfs_kdamond) -> c_int {
+pub static mut call_control: damon_call_control = 0;
+    let mut err = 0;
+    if (!kdamond.damon_ctx) {
     return -EINVAL;
+    }
     call_control.fn = fn;
     call_control.data = kdamond;
     err = damon_call(kdamond.damon_ctx, &call_control);
@@ -2091,31 +2176,23 @@ pub struct damon_sysfs_schemes_walk_data {
 }
 
 // populate the region directory
-    static void damon_sysfs_schemes_tried_regions_upd_one(void *data, struct damon_ctx *ctx,
-    struct damon_target *t, struct damon_region *r,
-    struct damos *s, unsigned long sz_filter_passed)
-    {
-    struct damon_sysfs_schemes_walk_data *walk_data = data;
-    struct damon_sysfs_kdamond *sysfs_kdamond = walk_data.sysfs_kdamond;
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_schemes_tried_regions_upd_one(data: *mut c_void, ctx: *mut damon_ctx, t: *mut damon_target, r: *mut damon_region, s: *mut damos, sz_filter_passed: c_ulong) {
+    let mut walk_data = data;
+    let mut sysfs_kdamond = walk_data.sysfs_kdamond;
     damos_sysfs_populate_region_dir(
     sysfs_kdamond.contexts.contexts_arr[0].schemes,
     ctx, t, r, s, walk_data.total_bytes_only,
     sz_filter_passed);
     }
-    static int damon_sysfs_update_schemes_tried_regions(
-    struct damon_sysfs_kdamond *sysfs_kdamond, bool total_bytes_only)
-    {
-    struct damon_sysfs_schemes_walk_data walk_data = {
-    .sysfs_kdamond = sysfs_kdamond,
-    .total_bytes_only = total_bytes_only,
-    };
-    struct damos_walk_control control = {
-    .walk_fn = damon_sysfs_schemes_tried_regions_upd_one,
-    .data = &walk_data,
-    };
-    struct damon_ctx *ctx = sysfs_kdamond.damon_ctx;
-    if (!ctx)
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_update_schemes_tried_regions(sysfs_kdamond: *mut damon_sysfs_kdamond, total_bytes_only: bool) -> c_int {
+pub static mut damon_sysfs_schemes_walk_data: usize = 0;
+pub static mut damos_walk_control: usize = 0;
+    let mut ctx = sysfs_kdamond.damon_ctx;
+    if (!ctx) {
     return -EINVAL;
+    }
     damon_sysfs_schemes_clear_regions(
     sysfs_kdamond.contexts.contexts_arr[0].schemes);
     return damos_walk(ctx, &control);
@@ -2129,110 +2206,117 @@ pub struct damon_sysfs_schemes_walk_data {
 //
 // Return: 0 on success, negative error code otherwise.
 //
-    static int damon_sysfs_handle_cmd(enum damon_sysfs_cmd cmd,
-    struct damon_sysfs_kdamond *kdamond)
-    {
-    if (cmd != DAMON_SYSFS_CMD_OFF && kdamond.contexts.nr != 1)
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_handle_cmd(cmd: damon_sysfs_cmd, kdamond: *mut damon_sysfs_kdamond) -> c_int {
+    if (cmd != DAMON_SYSFS_CMD_OFF && kdamond.contexts.nr != 1) {
     return -EINVAL;
-    switch (cmd) {
-    case DAMON_SYSFS_CMD_ON:
+    }
+    match (cmd) {
+    DAMON_SYSFS_CMD_ON => {
     return damon_sysfs_turn_damon_on(kdamond);
-    case DAMON_SYSFS_CMD_OFF:
+    }
+    DAMON_SYSFS_CMD_OFF => {
     return damon_sysfs_turn_damon_off(kdamond);
-    case DAMON_SYSFS_CMD_COMMIT:
+    }
+    DAMON_SYSFS_CMD_COMMIT => {
     return damon_sysfs_damon_call(
     damon_sysfs_commit_input, kdamond);
-    case DAMON_SYSFS_CMD_COMMIT_SCHEMES_QUOTA_GOALS:
+    }
+    DAMON_SYSFS_CMD_COMMIT_SCHEMES_QUOTA_GOALS => {
     return damon_sysfs_damon_call(
     damon_sysfs_commit_schemes_quota_goals,
     kdamond);
-    case DAMON_SYSFS_CMD_UPDATE_SCHEMES_STATS:
+    }
+    DAMON_SYSFS_CMD_UPDATE_SCHEMES_STATS => {
     return damon_sysfs_damon_call(
     damon_sysfs_upd_schemes_stats, kdamond);
-    case DAMON_SYSFS_CMD_UPDATE_SCHEMES_TRIED_BYTES:
+    }
+    DAMON_SYSFS_CMD_UPDATE_SCHEMES_TRIED_BYTES => {
     return damon_sysfs_update_schemes_tried_regions(kdamond, true);
-    case DAMON_SYSFS_CMD_UPDATE_SCHEMES_TRIED_REGIONS:
+    }
+    DAMON_SYSFS_CMD_UPDATE_SCHEMES_TRIED_REGIONS => {
     return damon_sysfs_update_schemes_tried_regions(kdamond, false);
-    case DAMON_SYSFS_CMD_CLEAR_SCHEMES_TRIED_REGIONS:
+    }
+    DAMON_SYSFS_CMD_CLEAR_SCHEMES_TRIED_REGIONS => {
     return damon_sysfs_schemes_clear_regions(
     kdamond.contexts.contexts_arr[0].schemes);
-    case DAMON_SYSFS_CMD_UPDATE_SCHEMES_EFFECTIVE_QUOTAS:
+    }
+    DAMON_SYSFS_CMD_UPDATE_SCHEMES_EFFECTIVE_QUOTAS => {
     return damon_sysfs_damon_call(
     damon_sysfs_upd_schemes_effective_quotas,
     kdamond);
-    case DAMON_SYSFS_CMD_UPDATE_TUNED_INTERVALS:
+    }
+    DAMON_SYSFS_CMD_UPDATE_TUNED_INTERVALS => {
     return damon_sysfs_damon_call(
     damon_sysfs_upd_tuned_intervals, kdamond);
-    default:
+    }
+    _ => {
     return -EINVAL;
     }
     }
-    static ssize_t state_store(struct kobject *kobj, struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
-    struct damon_sysfs_kdamond *kdamond = container_of(kobj,
-    struct damon_sysfs_kdamond, kobj);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn state_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut kdamond = container_of!(kobj, damon_sysfs_kdamond, kobj);
     enum damon_sysfs_cmd cmd;
-    let mut ret: isize = -EINVAL;
-    if (!mutex_trylock(&damon_sysfs_lock))
+pub static mut ret: isize = 0;
+    if (!mutex_trylock(&damon_sysfs_lock)) {
     return -EBUSY;
-    for (cmd = 0; cmd < NR_DAMON_SYSFS_CMDS; cmd++) {
+    }
+    while (cmd < NR_DAMON_SYSFS_CMDS) {
     if (sysfs_streq(buf, damon_sysfs_cmd_strs[cmd])) {
     ret = damon_sysfs_handle_cmd(cmd, kdamond);
     break;
     }
     }
     mutex_unlock(&damon_sysfs_lock);
-    if (!ret)
+    if (!ret) {
     ret = count;
+    }
     return ret;
     }
-    static ssize_t pid_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    struct damon_sysfs_kdamond *kdamond = container_of(kobj,
-    struct damon_sysfs_kdamond, kobj);
-    struct damon_ctx *ctx;
-    let mut pid: c_int = -1;
-    if (!mutex_trylock(&damon_sysfs_lock))
+#[no_mangle]
+pub unsafe extern "C" fn pid_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut kdamond = container_of!(kobj, damon_sysfs_kdamond, kobj);
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+pub static mut pid: c_int = 0;
+    if (!mutex_trylock(&damon_sysfs_lock)) {
     return -EBUSY;
+    }
     ctx = kdamond.damon_ctx;
-    if (!ctx)
-    goto out;
+    if (!ctx) {
+// goto;
+    }
     pid = damon_kdamond_pid(ctx);
-    if (pid < 0)
+    if (pid < 0) {
     pid = -1;
-    out:
+    }
+// label;
     mutex_unlock(&damon_sysfs_lock);
     return sysfs_emit(buf, "%d\n", pid);
     }
-    static ssize_t refresh_ms_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    struct damon_sysfs_kdamond *kdamond = container_of(kobj,
-    struct damon_sysfs_kdamond, kobj);
+#[no_mangle]
+pub unsafe extern "C" fn refresh_ms_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut kdamond = container_of!(kobj, damon_sysfs_kdamond, kobj);
     return sysfs_emit(buf, "%u\n", kdamond.refresh_ms);
     }
-    static ssize_t refresh_ms_store(struct kobject *kobj,
-    struct kobj_attribute *attr, const char *buf, size_t count)
-    {
-    struct damon_sysfs_kdamond *kdamond = container_of(kobj,
-    struct damon_sysfs_kdamond, kobj);
-    unsigned int nr;
-    let mut err: c_int = kstrtouint(buf, 0, &nr);
-    if (err)
+#[no_mangle]
+pub unsafe extern "C" fn refresh_ms_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut kdamond = container_of!(kobj, damon_sysfs_kdamond, kobj);
+    let mut nr = 0;
+pub static mut err: c_int = 0;
+    if (err) {
     return err;
+    }
     kdamond.refresh_ms = nr;
     return count;
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_kdamond_release(kobj: *mut kobject) {
-    static void damon_sysfs_kdamond_release(struct kobject *kobj)
-    {
-    struct damon_sysfs_kdamond *kdamond = container_of(kobj,
-    struct damon_sysfs_kdamond, kobj);
-    if (kdamond.damon_ctx)
+    let mut kdamond = container_of!(kobj, damon_sysfs_kdamond, kobj);
+    if (kdamond.damon_ctx) {
     damon_destroy_ctx(kdamond.damon_ctx);
+    }
     kfree(kdamond);
     }
     static struct kobj_attribute damon_sysfs_kdamond_state_attr =
@@ -2248,11 +2332,7 @@ unsafe extern "C" fn damon_sysfs_kdamond_release(kobj: *mut kobject) {
     core::ptr::null_mut(),
     };
     ATTRIBUTE_GROUPS(damon_sysfs_kdamond);
-    static const struct kobj_type damon_sysfs_kdamond_ktype = {
-    .release = damon_sysfs_kdamond_release,
-    .sysfs_ops = &kobj_sysfs_ops,
-    .default_groups = damon_sysfs_kdamond_groups,
-    };
+pub static mut kobj_type: usize = 0;
 //
 // kdamonds directory
 //
@@ -2264,17 +2344,15 @@ pub struct damon_sysfs_kdamonds {
     pub nr: c_int,
 }
 
-    static struct damon_sysfs_kdamonds *damon_sysfs_kdamonds_alloc(void)
-    {
-    return kzalloc_obj(struct damon_sysfs_kdamonds);
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_kdamonds_alloc() -> *mut c_void {
+    return kzalloc_obj(damon_sysfs_kdamonds);
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_kdamonds_rm_dirs(kdamonds: *mut damon_sysfs_kdamonds) {
-    static void damon_sysfs_kdamonds_rm_dirs(struct damon_sysfs_kdamonds *kdamonds)
-    {
-    struct damon_sysfs_kdamond **kdamonds_arr = kdamonds.kdamonds_arr;
-    int i;
-    for (i = 0; i < kdamonds.nr; i++) {
+    let mut kdamonds_arr = kdamonds.kdamonds_arr;
+    let mut i = 0;
+    while (i < kdamonds.nr) {
     damon_sysfs_kdamond_rm_dirs(kdamonds_arr[i]);
     kobject_del(&kdamonds_arr[i].kobj);
     kobject_put(&kdamonds_arr[i].kobj);
@@ -2283,32 +2361,36 @@ unsafe extern "C" fn damon_sysfs_kdamonds_rm_dirs(kdamonds: *mut damon_sysfs_kda
     kfree(kdamonds_arr);
     kdamonds.kdamonds_arr = core::ptr::null_mut();
     }
-    static bool damon_sysfs_kdamonds_busy(struct damon_sysfs_kdamond **kdamonds,
-    int nr_kdamonds)
-    {
-    int i;
-    for (i = 0; i < nr_kdamonds; i++) {
-    if (damon_sysfs_kdamond_running(kdamonds[i]))
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_kdamonds_busy(kdamonds: *mut *mut damon_sysfs_kdamond, nr_kdamonds: c_int) -> bool {
+    let mut i = 0;
+    while (i < nr_kdamonds) {
+    if (damon_sysfs_kdamond_running(kdamonds[i])) {
     return true;
+    }
     }
     return false;
     }
-    static int damon_sysfs_kdamonds_add_dirs(struct damon_sysfs_kdamonds *kdamonds,
-    int nr_kdamonds)
-    {
-    struct damon_sysfs_kdamond **kdamonds_arr, *kdamond;
-    int err, i;
-    if (damon_sysfs_kdamonds_busy(kdamonds.kdamonds_arr, kdamonds.nr))
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_kdamonds_add_dirs(kdamonds: *mut damon_sysfs_kdamonds, nr_kdamonds: c_int) -> c_int {
+    let mut kdamonds_arr = core::ptr::null_mut();
+    let mut kdamond = core::ptr::null_mut();
+    let mut err = 0;
+    let mut i = 0;
+    if (damon_sysfs_kdamonds_busy(kdamonds.kdamonds_arr, kdamonds.nr)) {
     return -EBUSY;
+    }
     damon_sysfs_kdamonds_rm_dirs(kdamonds);
-    if (!nr_kdamonds)
+    if (!nr_kdamonds) {
     return 0;
+    }
     kdamonds_arr = kmalloc_objs(*kdamonds_arr, nr_kdamonds,
     GFP_KERNEL | __GFP_NOWARN);
-    if (!kdamonds_arr)
+    if (!kdamonds_arr) {
     return -ENOMEM;
+    }
     kdamonds.kdamonds_arr = kdamonds_arr;
-    for (i = 0; i < nr_kdamonds; i++) {
+    while (i < nr_kdamonds) {
     kdamond = damon_sysfs_kdamond_alloc();
     if (!kdamond) {
     damon_sysfs_kdamonds_rm_dirs(kdamonds);
@@ -2317,53 +2399,55 @@ unsafe extern "C" fn damon_sysfs_kdamonds_rm_dirs(kdamonds: *mut damon_sysfs_kda
     err = kobject_init_and_add(&kdamond.kobj,
     &damon_sysfs_kdamond_ktype, &kdamonds.kobj,
     "%d", i);
-    if (err)
-    goto out;
+    if (err) {
+// goto;
+    }
     err = damon_sysfs_kdamond_add_dirs(kdamond);
-    if (err)
-    goto del_out;
+    if (err) {
+// goto;
+    }
     kdamonds_arr[i] = kdamond;
-    kdamonds.nr++;
+    kdamonds.nr += 1;
     }
     return 0;
-    del_out:
+// label;
     kobject_del(&kdamond.kobj);
-    out:
+// label;
     damon_sysfs_kdamonds_rm_dirs(kdamonds);
     kobject_put(&kdamond.kobj);
     return err;
     }
-    static ssize_t nr_kdamonds_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    struct damon_sysfs_kdamonds *kdamonds = container_of(kobj,
-    struct damon_sysfs_kdamonds, kobj);
+#[no_mangle]
+pub unsafe extern "C" fn nr_kdamonds_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut kdamonds = container_of!(kobj, damon_sysfs_kdamonds, kobj);
     return sysfs_emit(buf, "%d\n", kdamonds.nr);
     }
-    static ssize_t nr_kdamonds_store(struct kobject *kobj,
-    struct kobj_attribute *attr, const char *buf, size_t count)
-    {
-    struct damon_sysfs_kdamonds *kdamonds;
-    int nr, err;
+#[no_mangle]
+pub unsafe extern "C" fn nr_kdamonds_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+pub static mut kdamonds: *mut c_void = core::ptr::null_mut();
+    let mut nr = 0;
+    let mut err = 0;
     err = kstrtoint(buf, 0, &nr);
-    if (err)
+    if (err) {
     return err;
-    if (nr < 0)
+    }
+    if (nr < 0) {
     return -EINVAL;
-    kdamonds = container_of(kobj, struct damon_sysfs_kdamonds, kobj);
-    if (!mutex_trylock(&damon_sysfs_lock))
+    }
+    kdamonds = container_of!(kobj, damon_sysfs_kdamonds, kobj);
+    if (!mutex_trylock(&damon_sysfs_lock)) {
     return -EBUSY;
+    }
     err = damon_sysfs_kdamonds_add_dirs(kdamonds, nr);
     mutex_unlock(&damon_sysfs_lock);
-    if (err)
+    if (err) {
     return err;
+    }
     return count;
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_kdamonds_release(kobj: *mut kobject) {
-    static void damon_sysfs_kdamonds_release(struct kobject *kobj)
-    {
-    kfree(container_of(kobj, struct damon_sysfs_kdamonds, kobj));
+    kfree(container_of!(kobj, damon_sysfs_kdamonds, kobj));
     }
     static struct kobj_attribute damon_sysfs_kdamonds_nr_attr =
     __ATTR_RW_MODE(nr_kdamonds, 0600);
@@ -2372,11 +2456,7 @@ unsafe extern "C" fn damon_sysfs_kdamonds_release(kobj: *mut kobject) {
     core::ptr::null_mut(),
     };
     ATTRIBUTE_GROUPS(damon_sysfs_kdamonds);
-    static const struct kobj_type damon_sysfs_kdamonds_ktype = {
-    .release = damon_sysfs_kdamonds_release,
-    .sysfs_ops = &kobj_sysfs_ops,
-    .default_groups = damon_sysfs_kdamonds_groups,
-    };
+pub static mut kobj_type: usize = 0;
 //
 // damon user interface directory
 //
@@ -2387,19 +2467,18 @@ pub struct damon_sysfs_ui_dir {
     pub kdamonds: *mut damon_sysfs_kdamonds,
 }
 
-    static struct damon_sysfs_ui_dir *damon_sysfs_ui_dir_alloc(void)
-    {
-    return kzalloc_obj(struct damon_sysfs_ui_dir);
+#[no_mangle]
+pub unsafe extern "C" fn damon_sysfs_ui_dir_alloc() -> *mut c_void {
+    return kzalloc_obj(damon_sysfs_ui_dir);
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_ui_dir_add_dirs(ui_dir: *mut damon_sysfs_ui_dir) -> c_int {
-    static int damon_sysfs_ui_dir_add_dirs(struct damon_sysfs_ui_dir *ui_dir)
-    {
-    struct damon_sysfs_kdamonds *kdamonds;
-    int err;
+pub static mut kdamonds: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
     kdamonds = damon_sysfs_kdamonds_alloc();
-    if (!kdamonds)
+    if (!kdamonds) {
     return -ENOMEM;
+    }
     err = kobject_init_and_add(&kdamonds.kobj,
     &damon_sysfs_kdamonds_ktype, &ui_dir.kobj,
     "kdamonds");
@@ -2412,29 +2491,22 @@ unsafe extern "C" fn damon_sysfs_ui_dir_add_dirs(ui_dir: *mut damon_sysfs_ui_dir
     }
 #[no_mangle]
 unsafe extern "C" fn damon_sysfs_ui_dir_release(kobj: *mut kobject) {
-    static void damon_sysfs_ui_dir_release(struct kobject *kobj)
-    {
-    kfree(container_of(kobj, struct damon_sysfs_ui_dir, kobj));
+    kfree(container_of!(kobj, damon_sysfs_ui_dir, kobj));
     }
     static struct attribute *damon_sysfs_ui_dir_attrs[] = {
     core::ptr::null_mut(),
     };
     ATTRIBUTE_GROUPS(damon_sysfs_ui_dir);
-    static const struct kobj_type damon_sysfs_ui_dir_ktype = {
-    .release = damon_sysfs_ui_dir_release,
-    .sysfs_ops = &kobj_sysfs_ops,
-    .default_groups = damon_sysfs_ui_dir_groups,
-    };
+pub static mut kobj_type: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn damon_sysfs_init() -> int __init {
-    static int __init damon_sysfs_init(void)
-    {
-    struct kobject *damon_sysfs_root;
-    struct damon_sysfs_ui_dir *admin;
-    int err;
+unsafe extern "C" fn damon_sysfs_init() -> c_int {
+pub static mut damon_sysfs_root: *mut c_void = core::ptr::null_mut();
+pub static mut admin: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
     damon_sysfs_root = kobject_create_and_add("damon", mm_kobj);
-    if (!damon_sysfs_root)
+    if (!damon_sysfs_root) {
     return -ENOMEM;
+    }
     admin = damon_sysfs_ui_dir_alloc();
     if (!admin) {
     kobject_put(damon_sysfs_root);
@@ -2442,15 +2514,17 @@ unsafe extern "C" fn damon_sysfs_init() -> int __init {
     }
     err = kobject_init_and_add(&admin.kobj, &damon_sysfs_ui_dir_ktype,
     damon_sysfs_root, "admin");
-    if (err)
-    goto out;
+    if (err) {
+// goto;
+    }
     err = damon_sysfs_ui_dir_add_dirs(admin);
-    if (err)
-    goto out;
+    if (err) {
+// goto;
+    }
     return 0;
-    out:
+// label;
     kobject_put(&admin.kobj);
     kobject_put(damon_sysfs_root);
     return err;
     }
-    subsys_initcall(damon_sysfs_init);
+    subsys_initcall!(damon_sysfs_init);

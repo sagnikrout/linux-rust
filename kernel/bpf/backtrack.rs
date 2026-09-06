@@ -34,18 +34,267 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
 // Copyright (c) 2026 Meta Platforms, Inc. and affiliates.
 
 // for any branch, call, exit record the history of jmps in the given state
-    int bpf_push_jmp_history(struct bpf_verifier_env *env, struct bpf_verifier_state *cur,
-    int insn_flags, int spi, int frame, u64 linked_regs)
-    {
-    let mut cnt: u32 = cur.jmp_history_cnt;
-    struct bpf_jmp_history_entry *p;
-    size_t alloc_size;
+#[no_mangle]
+pub unsafe extern "C" fn bpf_push_jmp_history(env: *mut bpf_verifier_env, cur: *mut bpf_verifier_state, insn_flags: c_int, spi: c_int, frame: c_int, linked_regs: u64) -> c_int {
+pub static mut cnt: u32 = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    let mut alloc_size = 0;
 // combine instruction flags if we already recorded this instruction
     if (env.cur_hist_ent) {
 // atomic instructions push insn_flags twice, for READ and
@@ -64,11 +313,12 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     env.cur_hist_ent.linked_regs = linked_regs;
     return 0;
     }
-    cnt++;
-    alloc_size = kmalloc_size_roundup(size_mul(cnt, sizeof(*p)));
+    cnt += 1;
+    alloc_size = kmalloc_size_roundup(size_mul(cnt, sizeof!(*p)));
     p = krealloc(cur.jmp_history, alloc_size, GFP_KERNEL_ACCOUNT);
-    if (!p)
+    if (!p) {
     return -ENOMEM;
+    }
     cur.jmp_history = p;
     p = &cur.jmp_history[cnt - 1];
     p.idx = env.insn_idx;
@@ -83,16 +333,12 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     }
 #[no_mangle]
 unsafe extern "C" fn is_atomic_load_insn(insn: *const bpf_insn) -> bool {
-    static bool is_atomic_load_insn(const struct bpf_insn *insn)
-    {
     return BPF_CLASS(insn.code) == BPF_STX &&
     BPF_MODE(insn.code) == BPF_ATOMIC &&
     insn.imm == BPF_LOAD_ACQ;
     }
 #[no_mangle]
 unsafe extern "C" fn is_atomic_fetch_insn(insn: *const bpf_insn) -> bool {
-    static bool is_atomic_fetch_insn(const struct bpf_insn *insn)
-    {
     return BPF_CLASS(insn.code) == BPF_STX &&
     BPF_MODE(insn.code) == BPF_ATOMIC &&
     (insn.imm & BPF_FETCH);
@@ -110,157 +356,124 @@ unsafe extern "C" fn is_atomic_fetch_insn(insn: *const bpf_insn) -> bool {
 // history entry recording a jump from last instruction of parent state and
 // first instruction of given state.
 //
-    static int get_prev_insn_idx(struct bpf_verifier_state *st, int i,
-    u32 *history)
-    {
-    let mut cnt: u32 = *history;
+#[no_mangle]
+pub unsafe extern "C" fn get_prev_insn_idx(st: *mut bpf_verifier_state, i: c_int, history: *mut u32) -> c_int {
+pub static mut cnt: u32 = 0;
     if (i == st.first_insn_idx) {
-    if (cnt == 0)
+    if (cnt == 0) {
     return -ENOENT;
-    if (cnt == 1 && st.jmp_history[0].idx == i)
+    }
+    if (cnt == 1 && st.jmp_history[0].idx == i) {
     return -ENOENT;
+    }
     }
     if (cnt && st.jmp_history[cnt - 1].idx == i) {
     i = st.jmp_history[cnt - 1].prev_idx;
     (*history)--;
     } else {
-    i--;
+    i -= 1;
     }
     return i;
     }
-    static struct bpf_jmp_history_entry *get_jmp_hist_entry(struct bpf_verifier_state *st,
-    u32 hist_end, int insn_idx)
-    {
-    if (hist_end > 0 && st.jmp_history[hist_end - 1].idx == insn_idx)
+#[no_mangle]
+pub unsafe extern "C" fn get_jmp_hist_entry(st: *mut bpf_verifier_state, hist_end: u32, insn_idx: c_int) -> *mut c_void {
+    if (hist_end > 0 && st.jmp_history[hist_end - 1].idx == insn_idx) {
     return &st.jmp_history[hist_end - 1];
+    }
     return core::ptr::null_mut();
     }
 #[no_mangle]
 pub unsafe extern "C" fn bt_init(bt: *mut backtrack_state, frame: u32) {
-    static inline void bt_init(struct backtrack_state *bt, u32 frame)
-    {
     bt.frame = frame;
     }
 #[no_mangle]
 pub unsafe extern "C" fn bt_reset(bt: *mut backtrack_state) {
-    static inline void bt_reset(struct backtrack_state *bt)
-    {
-    struct bpf_verifier_env *env = bt.env;
-    memset(bt, 0, sizeof(*bt));
+    let mut env = bt.env;
+    memset(bt, 0, sizeof!(*bt));
     bt.env = env;
     }
 #[no_mangle]
 pub unsafe extern "C" fn bt_empty(bt: *mut backtrack_state) -> u32 {
-    static inline u32 bt_empty(struct backtrack_state *bt)
-    {
-    let mut mask: u64 = 0;
-    int i;
-    for (i = 0; i <= bt.frame; i++)
+pub static mut mask: u64 = 0;
+    let mut i = 0;
+    for (i = 0; i <= bt.frame; i++) {
     mask |= bt.reg_masks[i] | bt.stack_masks[i] | bt.stack_arg_masks[i];
-    let mut mask: return = = 0;
+    }
+pub static mut mask: return = 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn bt_clear_frame_stack_arg_slot(bt: *mut backtrack_state, frame: u32, slot: u32) {
-    static inline void bt_clear_frame_stack_arg_slot(struct backtrack_state *bt, u32 frame, u32 slot)
-    {
     bt.stack_arg_masks[frame] &= ~(1 << slot);
     }
 #[no_mangle]
 pub unsafe extern "C" fn bt_is_frame_stack_arg_slot_set(bt: *mut backtrack_state, frame: u32, slot: u32) -> bool {
-    static inline bool bt_is_frame_stack_arg_slot_set(struct backtrack_state *bt, u32 frame, u32 slot)
-    {
     return bt.stack_arg_masks[frame] & (1 << slot);
     }
 #[no_mangle]
 pub unsafe extern "C" fn bt_subprog_enter(bt: *mut backtrack_state) -> c_int {
-    static inline int bt_subprog_enter(struct backtrack_state *bt)
-    {
     if (bt.frame == MAX_CALL_FRAMES - 1) {
     verifier_bug(bt.env, "subprog enter from frame %d", bt.frame);
     return -EFAULT;
     }
-    bt.frame++;
+    bt.frame += 1;
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn bt_subprog_exit(bt: *mut backtrack_state) -> c_int {
-    static inline int bt_subprog_exit(struct backtrack_state *bt)
-    {
     if (bt.frame == 0) {
     verifier_bug(bt.env, "subprog exit from frame 0");
     return -EFAULT;
     }
-    bt.frame--;
+    bt.frame -= 1;
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn bt_clear_frame_reg(bt: *mut backtrack_state, frame: u32, reg: u32) {
-    static inline void bt_clear_frame_reg(struct backtrack_state *bt, u32 frame, u32 reg)
-    {
     bt.reg_masks[frame] &= ~(1 << reg);
     }
 #[no_mangle]
 pub unsafe extern "C" fn bt_set_reg(bt: *mut backtrack_state, reg: u32) {
-    static inline void bt_set_reg(struct backtrack_state *bt, u32 reg)
-    {
     bpf_bt_set_frame_reg(bt, bt.frame, reg);
     }
 #[no_mangle]
 pub unsafe extern "C" fn bt_clear_reg(bt: *mut backtrack_state, reg: u32) {
-    static inline void bt_clear_reg(struct backtrack_state *bt, u32 reg)
-    {
     bt_clear_frame_reg(bt, bt.frame, reg);
     }
 #[no_mangle]
 pub unsafe extern "C" fn bt_clear_frame_slot(bt: *mut backtrack_state, frame: u32, slot: u32) {
-    static inline void bt_clear_frame_slot(struct backtrack_state *bt, u32 frame, u32 slot)
-    {
     bt.stack_masks[frame] &= ~(1ull << slot);
     }
 #[no_mangle]
 pub unsafe extern "C" fn bt_frame_reg_mask(bt: *mut backtrack_state, frame: u32) -> u32 {
-    static inline u32 bt_frame_reg_mask(struct backtrack_state *bt, u32 frame)
-    {
     return bt.reg_masks[frame];
     }
 #[no_mangle]
 pub unsafe extern "C" fn bt_reg_mask(bt: *mut backtrack_state) -> u32 {
-    static inline u32 bt_reg_mask(struct backtrack_state *bt)
-    {
     return bt.reg_masks[bt.frame];
     }
 #[no_mangle]
 pub unsafe extern "C" fn bt_frame_stack_mask(bt: *mut backtrack_state, frame: u32) -> u64 {
-    static inline u64 bt_frame_stack_mask(struct backtrack_state *bt, u32 frame)
-    {
     return bt.stack_masks[frame];
     }
 #[no_mangle]
 pub unsafe extern "C" fn bt_stack_mask(bt: *mut backtrack_state) -> u64 {
-    static inline u64 bt_stack_mask(struct backtrack_state *bt)
-    {
     return bt.stack_masks[bt.frame];
     }
 #[no_mangle]
 pub unsafe extern "C" fn bt_stack_arg_mask(bt: *mut backtrack_state) -> u8 {
-    static inline u8 bt_stack_arg_mask(struct backtrack_state *bt)
-    {
     return bt.stack_arg_masks[bt.frame];
     }
 #[no_mangle]
 pub unsafe extern "C" fn bt_is_reg_set(bt: *mut backtrack_state, reg: u32) -> bool {
-    static inline bool bt_is_reg_set(struct backtrack_state *bt, u32 reg)
-    {
     return bt.reg_masks[bt.frame] & (1 << reg);
     }
 // format registers bitmask, e.g., "r0,r2,r4" for 0x15 mask
 #[no_mangle]
 unsafe extern "C" fn fmt_reg_mask(buf: *mut c_char, buf_sz: isize, reg_mask: u32) {
-    static void fmt_reg_mask(char *buf, ssize_t buf_sz, u32 reg_mask)
-    {
-    DECLARE_BITMAP(mask, 64);
-    let mut first: bool = true;
-    int i, n;
+pub static mut mask: usize = 0;
+pub static mut first: bool = true;
+    let mut i = 0;
+    let mut n = 0;
     buf[0] = '\0';
     bitmap_from_u64(mask, reg_mask);
     for_each_set_bit(i, mask, 32) {
@@ -268,18 +481,18 @@ unsafe extern "C" fn fmt_reg_mask(buf: *mut c_char, buf_sz: isize, reg_mask: u32
     first = false;
     buf += n;
     buf_sz -= n;
-    if (buf_sz < 0)
+    if (buf_sz < 0) {
     break;
+    }
     }
     }
 // format stack slots bitmask, e.g., "-8,-24,-40" for 0x15 mask
 #[no_mangle]
 pub unsafe extern "C" fn bpf_fmt_stack_mask(buf: *mut c_char, buf_sz: isize, stack_mask: u64) {
-    void bpf_fmt_stack_mask(char *buf, ssize_t buf_sz, u64 stack_mask)
-    {
-    DECLARE_BITMAP(mask, 64);
-    let mut first: bool = true;
-    int i, n;
+pub static mut mask: usize = 0;
+pub static mut first: bool = true;
+    let mut i = 0;
+    let mut n = 0;
     buf[0] = '\0';
     bitmap_from_u64(mask, stack_mask);
     for_each_set_bit(i, mask, 64) {
@@ -287,8 +500,9 @@ pub unsafe extern "C" fn bpf_fmt_stack_mask(buf: *mut c_char, buf_sz: isize, sta
     first = false;
     buf += n;
     buf_sz -= n;
-    if (buf_sz < 0)
+    if (buf_sz < 0) {
     break;
+    }
     }
     }
 // For given verifier state backtrack_insn() is called from the last insn to
@@ -300,18 +514,18 @@ pub unsafe extern "C" fn bpf_fmt_stack_mask(buf: *mut c_char, buf_sz: isize, sta
 // - *would be* executed next, if jump history is viewed in forward order;
 // - *was* processed previously during backtracking.
 //
-    static int backtrack_insn(struct bpf_verifier_env *env, int idx, int subseq_idx,
-    struct bpf_jmp_history_entry *hist, struct backtrack_state *bt)
-    {
-    struct bpf_insn *insn = env.prog.insnsi + idx;
-    let mut class: u8 = BPF_CLASS(insn.code);
-    let mut opcode: u8 = BPF_OP(insn.code);
-    let mut mode: u8 = BPF_MODE(insn.code);
-    let mut dreg: u32 = insn.dst_reg;
-    let mut sreg: u32 = insn.src_reg;
+#[no_mangle]
+pub unsafe extern "C" fn backtrack_insn(env: *mut bpf_verifier_env, idx: c_int, subseq_idx: c_int, hist: *mut bpf_jmp_history_entry, bt: *mut backtrack_state) -> c_int {
+    let mut insn = env.prog.insnsi + idx;
+pub static mut class: u8 = 0;
+pub static mut opcode: u8 = 0;
+pub static mut mode: u8 = 0;
+pub static mut dreg: u32 = 0;
+pub static mut sreg: u32 = 0;
     u32 spi, i, fr;
-    if (insn.code == 0)
+    if (insn.code == 0) {
     return 0;
+    }
     if (env.log.level & BPF_LOG_LEVEL2) {
     fmt_reg_mask(env.tmp_str_buf, TMP_STR_BUF_LEN, bt_reg_mask(bt));
     verbose(env, "mark_precise: frame%d: regs=%s ",
@@ -323,13 +537,14 @@ pub unsafe extern "C" fn bpf_fmt_stack_mask(buf: *mut c_char, buf_sz: isize, sta
     verbose(env, "\n");
     }
 // If there is a history record that some registers gained range at this insn,
-// propagate precision marks to those registers, so that bt_is_reg_set()
+propagate precision marks to those registers, so that bt_is_reg_set()
 // accounts for these registers.
 //
     bpf_bt_sync_linked_regs(bt, hist);
     if (class == BPF_ALU || class == BPF_ALU64) {
-    if (!bt_is_reg_set(bt, dreg))
+    if (!bt_is_reg_set(bt, dreg)) {
     return 0;
+    }
     if (opcode == BPF_END || opcode == BPF_NEG) {
 // sreg is reserved and unused
 // dreg still need precision before this insn
@@ -342,8 +557,9 @@ pub unsafe extern "C" fn bpf_fmt_stack_mask(buf: *mut c_char, buf_sz: isize, sta
 // sreg needs precision before this insn
 //
     bt_clear_reg(bt, dreg);
-    if (sreg != BPF_REG_FP)
+    if (sreg != BPF_REG_FP) {
     bt_set_reg(bt, sreg);
+    }
     } else {
 // dreg = K
 // dreg needs precision after this insn.
@@ -359,27 +575,30 @@ pub unsafe extern "C" fn bpf_fmt_stack_mask(buf: *mut c_char, buf_sz: isize, sta
 // both dreg and sreg need precision
 // before this insn
 //
-    if (sreg != BPF_REG_FP)
+    if (sreg != BPF_REG_FP) {
     bt_set_reg(bt, sreg);
-    } /* else dreg += K
+    }
+    } // else dreg += K
 // dreg still needs precision before this insn
 //
     }
     } else if (class == BPF_LDX ||
     is_atomic_load_insn(insn) ||
     is_atomic_fetch_insn(insn)) {
-    let mut load_reg: u32 = dreg;
+pub static mut load_reg: u32 = 0;
 //
 // Atomic fetch operation writes the old value into
 // a register (sreg or r0) and if it was tracked for
 // precision, propagate to the stack slot like we do
 // in regular ldx.
 //
-    if (is_atomic_fetch_insn(insn))
+    if (is_atomic_fetch_insn(insn)) {
     load_reg = insn.imm == BPF_CMPXCHG ?
     BPF_REG_0 : sreg;
-    if (!bt_is_reg_set(bt, load_reg))
+    }
+    if (!bt_is_reg_set(bt, load_reg)) {
     return 0;
+    }
     bt_clear_reg(bt, load_reg);
     if (hist && hist.flags & INSN_F_STACK_ARG_ACCESS) {
     spi = hist.spi;
@@ -399,9 +618,10 @@ pub unsafe extern "C" fn bpf_fmt_stack_mask(buf: *mut c_char, buf_sz: isize, sta
 // by 'precise' mark in corresponding register of this state.
 // No further tracking necessary.
 //
-    if (!hist || !(hist.flags & INSN_F_STACK_ACCESS))
+    if (!hist || !(hist.flags & INSN_F_STACK_ACCESS)) {
     return 0;
-// dreg = *(u64 *)[fp - off] was a fill from the stack.
+    }
+// dreg = *[fp - off] was a fill from the stack.
 // that [fp - off] slot contains scalar that needs to be
 // tracked with precision
 //
@@ -409,38 +629,46 @@ pub unsafe extern "C" fn bpf_fmt_stack_mask(buf: *mut c_char, buf_sz: isize, sta
     fr = hist.frame;
     bpf_bt_set_frame_slot(bt, fr, spi);
     } else if (class == BPF_STX || class == BPF_ST) {
-    if (bt_is_reg_set(bt, dreg))
+    if (bt_is_reg_set(bt, dreg)) {
 // stx & st shouldn't be using _scalar_ dst_reg
 // to access memory. It means backtracking
 // encountered a case of pointer subtraction.
 //
     return -ENOTSUPP;
+    }
     if (hist && hist.flags & INSN_F_STACK_ARG_ACCESS) {
     spi = hist.spi;
-    if (!bt_is_frame_stack_arg_slot_set(bt, bt.frame, spi))
+    if (!bt_is_frame_stack_arg_slot_set(bt, bt.frame, spi)) {
     return 0;
+    }
     bt_clear_frame_stack_arg_slot(bt, bt.frame, spi);
-    if (class == BPF_STX)
+    if (class == BPF_STX) {
     bt_set_reg(bt, sreg);
+    }
     return 0;
     }
 // scalars can only be spilled into stack
-    if (!hist || !(hist.flags & INSN_F_STACK_ACCESS))
+    if (!hist || !(hist.flags & INSN_F_STACK_ACCESS)) {
     return 0;
+    }
     spi = hist.spi;
     fr = hist.frame;
-    if (!bt_is_frame_slot_set(bt, fr, spi))
+    if (!bt_is_frame_slot_set(bt, fr, spi)) {
     return 0;
+    }
     bt_clear_frame_slot(bt, fr, spi);
-    if (class == BPF_STX)
+    if (class == BPF_STX) {
     bt_set_reg(bt, sreg);
+    }
     } else if (class == BPF_JMP || class == BPF_JMP32) {
     if (bpf_pseudo_call(insn)) {
-    int subprog_insn_idx, subprog;
+    let mut subprog_insn_idx = 0;
+    let mut subprog = 0;
     subprog_insn_idx = idx + insn.imm + 1;
     subprog = bpf_find_subprog(env, subprog_insn_idx);
-    if (subprog < 0)
+    if (subprog < 0) {
     return -EFAULT;
+    }
     if (bpf_subprog_is_global(env, subprog)) {
 // check that jump history doesn't have any
 // extra instructions from subprog; the next
@@ -484,7 +712,7 @@ pub unsafe extern "C" fn bpf_fmt_stack_mask(buf: *mut c_char, buf_sz: isize, sta
     return -EFAULT;
     }
 // propagate r1-r5 to the caller
-    for (i = BPF_REG_1; i <= BPF_REG_5; i++) {
+    while (i <= BPF_REG_5) {
     if (bt_is_reg_set(bt, i)) {
     bt_clear_reg(bt, i);
     bpf_bt_set_frame_reg(bt, bt.frame - 1, i);
@@ -496,8 +724,9 @@ pub unsafe extern "C" fn bpf_fmt_stack_mask(buf: *mut c_char, buf_sz: isize, sta
     bt_stack_arg_mask(bt));
     return -EFAULT;
     }
-    if (bt_subprog_exit(bt))
+    if (bt_subprog_exit(bt)) {
     return -EFAULT;
+    }
     return 0;
     }
     } else if (bpf_is_sync_callback_calling_insn(insn) && idx != subseq_idx - 1) {
@@ -519,18 +748,21 @@ pub unsafe extern "C" fn bpf_fmt_stack_mask(buf: *mut c_char, buf_sz: isize, sta
     return -EFAULT;
     }
 // clear r1-r5 in callback subprog's mask
-    for (i = BPF_REG_1; i <= BPF_REG_5; i++)
+    for (i = BPF_REG_1; i <= BPF_REG_5; i++) {
     bt_clear_reg(bt, i);
-    if (bt_subprog_exit(bt))
+    }
+    if (bt_subprog_exit(bt)) {
     return -EFAULT;
+    }
     return 0;
     } else if (opcode == BPF_CALL) {
 // kfunc with imm==0 is invalid and fixup_kfunc_call will
 // catch this error later. Make backtracking conservative
 // with ENOTSUPP.
 //
-    if (insn.src_reg == BPF_PSEUDO_KFUNC_CALL && insn.imm == 0)
+    if (insn.src_reg == BPF_PSEUDO_KFUNC_CALL && insn.imm == 0) {
     return -ENOTSUPP;
+    }
 // regular helper call sets R0
     bt_clear_reg(bt, BPF_REG_0);
     if (bt_reg_mask(bt) & BPF_REGMASK_ARGS) {
@@ -543,11 +775,12 @@ pub unsafe extern "C" fn bpf_fmt_stack_mask(buf: *mut c_char, buf_sz: isize, sta
     }
     if (insn.src_reg == BPF_REG_0 && insn.imm == BPF_FUNC_tail_call
     && subseq_idx - idx != 1) {
-    if (bt_subprog_enter(bt))
+    if (bt_subprog_enter(bt)) {
     return -EFAULT;
     }
+    }
     } else if (opcode == BPF_EXIT) {
-    bool r0_precise;
+    let mut r0_precise = 0;
 // Backtracking to a nested function call, 'idx' is a part of
 // the inner frame 'subseq_idx' is a part of the outer frame.
 // In case of a regular function call, instructions giving
@@ -556,8 +789,9 @@ pub unsafe extern "C" fn bpf_fmt_stack_mask(buf: *mut c_char, buf_sz: isize, sta
 // backtracking, as these registers are set by the function
 // invoking callback.
 //
-    if (subseq_idx >= 0 && bpf_calls_callback(env, subseq_idx))
+    if (subseq_idx >= 0 && bpf_calls_callback(env, subseq_idx)) {
     for (i = BPF_REG_1; i <= BPF_REG_5; i++)
+    }
     bt_clear_reg(bt, i);
     if (bt_reg_mask(bt) & BPF_REGMASK_ARGS) {
     verifier_bug(env, "backtracking exit unexpected regs %x",
@@ -576,27 +810,32 @@ pub unsafe extern "C" fn bpf_fmt_stack_mask(buf: *mut c_char, buf_sz: isize, sta
     bpf_pseudo_call(&env.prog.insnsi[subseq_idx - 1]) &&
     bt_is_reg_set(bt, BPF_REG_0);
     bt_clear_reg(bt, BPF_REG_0);
-    if (bt_subprog_enter(bt))
+    if (bt_subprog_enter(bt)) {
     return -EFAULT;
-    if (r0_precise)
+    }
+    if (r0_precise) {
     bt_set_reg(bt, BPF_REG_0);
+    }
 // r6-r9 and stack slots will stay set in caller frame
 // bitmasks until we return back from callee(s)
 //
     return 0;
     } else if (BPF_SRC(insn.code) == BPF_X) {
-    if (!bt_is_reg_set(bt, dreg) && !bt_is_reg_set(bt, sreg))
+    if (!bt_is_reg_set(bt, dreg) && !bt_is_reg_set(bt, sreg)) {
     return 0;
+    }
 // dreg <cond> sreg
 // Both dreg and sreg need precision before
 // this insn. If only sreg was marked precise
 // before it would be equally necessary to
 // propagate it to dreg.
 //
-    if (!hist || !(hist.flags & INSN_F_SRC_REG_STACK))
+    if (!hist || !(hist.flags & INSN_F_SRC_REG_STACK)) {
     bt_set_reg(bt, sreg);
-    if (!hist || !(hist.flags & INSN_F_DST_REG_STACK))
+    }
+    if (!hist || !(hist.flags & INSN_F_DST_REG_STACK)) {
     bt_set_reg(bt, dreg);
+    }
     } else if (BPF_SRC(insn.code) == BPF_K) {
 // dreg <cond> K
 // Only dreg still needs precision before
@@ -605,16 +844,18 @@ pub unsafe extern "C" fn bpf_fmt_stack_mask(buf: *mut c_char, buf_sz: isize, sta
 //
     }
     } else if (class == BPF_LD) {
-    if (!bt_is_reg_set(bt, dreg))
+    if (!bt_is_reg_set(bt, dreg)) {
     return 0;
+    }
     bt_clear_reg(bt, dreg);
 // It's ld_imm64 or ld_abs or ld_ind.
 // For ld_imm64 no further tracking of precision
 // into parent is necessary
 //
-    if (mode == BPF_IND || mode == BPF_ABS)
+    if (mode == BPF_IND || mode == BPF_ABS) {
 // to be analyzed
     return -ENOTSUPP;
+    }
     }
 // Propagate precision marks to linked registers, to account for
 // registers marked as precise in this function.
@@ -674,12 +915,12 @@ pub unsafe extern "C" fn bpf_fmt_stack_mask(buf: *mut c_char, buf_sz: isize, sta
 //
 // For now backtracking falls back into conservative marking.
 //
-    void bpf_mark_all_scalars_precise(struct bpf_verifier_env *env,
-    struct bpf_verifier_state *st)
-    {
-    struct bpf_func_state *func;
-    struct bpf_reg_state *reg;
-    int i, j;
+#[no_mangle]
+pub unsafe extern "C" fn bpf_mark_all_scalars_precise(env: *mut bpf_verifier_env, st: *mut bpf_verifier_state) {
+pub static mut func: *mut c_void = core::ptr::null_mut();
+pub static mut reg: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    let mut j = 0;
     if (env.log.level & BPF_LOG_LEVEL2) {
     verbose(env, "mark_precise: frame%d: falling back to forcing all scalars precise\n",
     st.curframe);
@@ -690,25 +931,28 @@ pub unsafe extern "C" fn bpf_fmt_stack_mask(buf: *mut c_char, buf_sz: isize, sta
 // because precision markings in current non-checkpointed state are
 // not needed. See why in the comment in __mark_chain_precision below.
 //
-    for (st = st.parent; st; st = st.parent) {
-    for (i = 0; i <= st.curframe; i++) {
+    while (st) {
+    while (i <= st.curframe) {
     func = st.frame[i];
-    for (j = 0; j < BPF_REG_FP; j++) {
+    while (j < BPF_REG_FP) {
     reg = &func.regs[j];
-    if (reg.type != SCALAR_VALUE || reg.precise)
+    if (reg.type != SCALAR_VALUE || reg.precise) {
     continue;
+    }
     reg.precise = true;
     if (env.log.level & BPF_LOG_LEVEL2) {
     verbose(env, "force_precise: frame%d: forcing r%d to be precise\n",
     i, j);
     }
     }
-    for (j = 0; j < func.allocated_stack / BPF_REG_SIZE; j++) {
-    if (!bpf_is_spilled_reg(&func.stack[j]))
+    while (j < func.allocated_stack / BPF_REG_SIZE) {
+    if (!bpf_is_spilled_reg(&func.stack[j])) {
     continue;
+    }
     reg = &func.stack[j].spilled_ptr;
-    if (reg.type != SCALAR_VALUE || reg.precise)
+    if (reg.type != SCALAR_VALUE || reg.precise) {
     continue;
+    }
     reg.precise = true;
     if (env.log.level & BPF_LOG_LEVEL2) {
     verbose(env, "force_precise: frame%d: forcing fp%d to be precise\n",
@@ -805,22 +1049,22 @@ pub unsafe extern "C" fn bpf_fmt_stack_mask(buf: *mut c_char, buf_sz: isize, sta
 // mark_all_scalars_imprecise() to hopefully get more permissive and generic
 // finalized states which help in short circuiting more future states.
 //
-    int bpf_mark_chain_precision(struct bpf_verifier_env *env,
-    struct bpf_verifier_state *starting_state,
-    int regno,
-    bool *changed)
-    {
-    struct bpf_verifier_state *st = starting_state;
-    struct backtrack_state *bt = &env.bt;
-    let mut first_idx: c_int = st.first_insn_idx;
-    let mut last_idx: c_int = starting_state.insn_idx;
-    let mut subseq_idx: c_int = -1;
-    struct bpf_func_state *func;
+#[no_mangle]
+pub unsafe extern "C" fn bpf_mark_chain_precision(env: *mut bpf_verifier_env, starting_state: *mut bpf_verifier_state, regno: c_int, changed: *mut bool) -> c_int {
+    let mut st = starting_state;
+    let mut bt = &env.bt;
+pub static mut first_idx: c_int = 0;
+pub static mut last_idx: c_int = 0;
+pub static mut subseq_idx: c_int = 0;
+pub static mut func: *mut c_void = core::ptr::null_mut();
     bool tmp, skip_first = true;
-    struct bpf_reg_state *reg;
-    int i, fr, err;
-    if (!env.bpf_capable)
+pub static mut reg: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    let mut fr = 0;
+    let mut err = 0;
+    if (!env.bpf_capable) {
     return 0;
+    }
     changed = changed ?: &tmp;
 // set frame number from which we are starting to backtrack
     bt_init(bt, starting_state.curframe);
@@ -837,12 +1081,13 @@ pub unsafe extern "C" fn bpf_fmt_stack_mask(buf: *mut c_char, buf_sz: isize, sta
     }
     bt_set_reg(bt, regno);
     }
-    if (bt_empty(bt))
+    if (bt_empty(bt)) {
     return 0;
+    }
     for (;;) {
-    DECLARE_BITMAP(mask, 64);
-    let mut history: u32 = st.jmp_history_cnt;
-    struct bpf_jmp_history_entry *hist;
+pub static mut mask: usize = 0;
+pub static mut history: u32 = 0;
+pub static mut hist: *mut c_void = core::ptr::null_mut();
     if (env.log.level & BPF_LOG_LEVEL2) {
     verbose(env, "mark_precise: frame%d: last_idx %d first_idx %d subseq_idx %d \n",
     bt.frame, last_idx, first_idx, subseq_idx);
@@ -888,16 +1133,18 @@ pub unsafe extern "C" fn bpf_fmt_stack_mask(buf: *mut c_char, buf_sz: isize, sta
     } else if (err) {
     return err;
     }
-    if (bt_empty(bt))
+    if (bt_empty(bt)) {
 // Found assignment(s) into tracked register in this state.
 // Since this state is already marked, just return.
 // Nothing to be tracked further in the parent state.
 //
     return 0;
+    }
     subseq_idx = i;
     i = get_prev_insn_idx(st, i, &history);
-    if (i == -ENOENT)
+    if (i == -ENOENT) {
     break;
+    }
     if (i >= env.prog.len) {
 // This can happen if backtracking reached insn 0
 // and there are still reg_mask or stack_mask
@@ -910,9 +1157,10 @@ pub unsafe extern "C" fn bpf_fmt_stack_mask(buf: *mut c_char, buf_sz: isize, sta
     }
     }
     st = st.parent;
-    if (!st)
+    if (!st) {
     break;
-    for (fr = bt.frame; fr >= 0; fr--) {
+    }
+    while (fr >= 0) {
     func = st.frame[fr];
     bitmap_from_u64(mask, bt_frame_reg_mask(bt, fr));
     for_each_set_bit(i, mask, 32) {
@@ -932,8 +1180,9 @@ pub unsafe extern "C" fn bpf_fmt_stack_mask(buf: *mut c_char, buf_sz: isize, sta
     for_each_set_bit(i, mask, 64) {
     if (verifier_bug_if(i >= func.allocated_stack / BPF_REG_SIZE,
     env, "stack slot %d, total slots %d",
-    i, func.allocated_stack / BPF_REG_SIZE))
+    i, func.allocated_stack / BPF_REG_SIZE)) {
     return -EFAULT;
+    }
     if (!bpf_is_spilled_scalar_reg(&func.stack[i])) {
     bt_clear_frame_slot(bt, fr, i);
     continue;
@@ -946,9 +1195,10 @@ pub unsafe extern "C" fn bpf_fmt_stack_mask(buf: *mut c_char, buf_sz: isize, sta
 // changed = true;
     }
     }
-    for (i = 0; i < func.out_stack_arg_cnt; i++) {
-    if (!bt_is_frame_stack_arg_slot_set(bt, fr, i))
+    while (i < func.out_stack_arg_cnt) {
+    if (!bt_is_frame_stack_arg_slot_set(bt, fr, i)) {
     continue;
+    }
     reg = &func.stack_arg_regs[i];
     if (reg.type != SCALAR_VALUE || reg.precise) {
     bt_clear_frame_stack_arg_slot(bt, fr, i);
@@ -968,8 +1218,9 @@ pub unsafe extern "C" fn bpf_fmt_stack_mask(buf: *mut c_char, buf_sz: isize, sta
     print_verifier_state(env, st, fr, true);
     }
     }
-    if (bt_empty(bt))
+    if (bt_empty(bt)) {
     return 0;
+    }
     subseq_idx = first_idx;
     last_idx = st.last_insn_idx;
     first_idx = st.first_insn_idx;

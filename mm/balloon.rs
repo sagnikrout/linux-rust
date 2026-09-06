@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -48,7 +298,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Lock protecting the balloon_dev_info of all devices. We don't really
 // expect more than one device.
 //
-    static DEFINE_SPINLOCK(balloon_pages_lock);
+pub static mut balloon_pages_lock: usize = 0;
 //
 // balloon_page_insert - insert a page into the balloon's page list and make
 // the page->private assignment accordingly.
@@ -57,12 +307,11 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 // Caller must ensure the balloon_pages_lock is held.
 //
-    static void balloon_page_insert(struct balloon_dev_info *balloon,
-    struct page *page)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn balloon_page_insert(balloon: *mut balloon_dev_info, page: *mut page) {
     lockdep_assert_held(&balloon_pages_lock);
     __SetPageOffline(page);
-    if (IS_ENABLED(CONFIG_BALLOON_MIGRATION)) {
+    if (IS_ENABLED!(CONFIG_BALLOON_MIGRATION)) {
     SetPageMovableOps(page);
     set_page_private(page, (unsigned long)balloon);
     }
@@ -77,19 +326,18 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 #[no_mangle]
 unsafe extern "C" fn balloon_page_finalize(page: *mut page) {
-    static void balloon_page_finalize(struct page *page)
-    {
     lockdep_assert_held(&balloon_pages_lock);
-    if (IS_ENABLED(CONFIG_BALLOON_MIGRATION))
+    if (IS_ENABLED!(CONFIG_BALLOON_MIGRATION)) {
     set_page_private(page, 0);
+    }
 // PageOffline is sticky until the page is freed to the buddy.
     }
-    static void balloon_page_enqueue_one(struct balloon_dev_info *b_dev_info,
-    struct page *page)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn balloon_page_enqueue_one(b_dev_info: *mut balloon_dev_info, page: *mut page) {
     balloon_page_insert(b_dev_info, page);
-    if (b_dev_info.adjust_managed_page_count)
+    if (b_dev_info.adjust_managed_page_count) {
     adjust_managed_page_count(page, -1);
+    }
     __count_vm_event(BALLOON_INFLATE);
     inc_node_page_state(page, NR_BALLOON_PAGES);
     }
@@ -104,17 +352,17 @@ unsafe extern "C" fn balloon_page_finalize(page: *mut page) {
 //
 // Return: number of pages that were enqueued.
 //
-    size_t balloon_page_list_enqueue(struct balloon_dev_info *b_dev_info,
-    struct list_head *pages)
-    {
-    struct page *page, *tmp;
-    unsigned long flags;
-    let mut n_pages: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn balloon_page_list_enqueue(b_dev_info: *mut balloon_dev_info, pages: *mut list_head) -> size_t {
+    let mut page = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
+    let mut flags = 0;
+pub static mut n_pages: usize = 0;
     spin_lock_irqsave(&balloon_pages_lock, flags);
     list_for_each_entry_safe(page, tmp, pages, lru) {
     list_del(&page.lru);
     balloon_page_enqueue_one(b_dev_info, page);
-    n_pages++;
+    n_pages += 1;
     }
     spin_unlock_irqrestore(&balloon_pages_lock, flags);
     return n_pages;
@@ -138,24 +386,26 @@ unsafe extern "C" fn balloon_page_finalize(page: *mut page) {
 //
 // Return: number of pages that were added to the @pages list.
 //
-    size_t balloon_page_list_dequeue(struct balloon_dev_info *b_dev_info,
-    struct list_head *pages, size_t n_req_pages)
-    {
-    struct page *page, *tmp;
-    unsigned long flags;
-    let mut n_pages: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn balloon_page_list_dequeue(b_dev_info: *mut balloon_dev_info, pages: *mut list_head, n_req_pages: size_t) -> size_t {
+    let mut page = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
+    let mut flags = 0;
+pub static mut n_pages: usize = 0;
     spin_lock_irqsave(&balloon_pages_lock, flags);
     list_for_each_entry_safe(page, tmp, &b_dev_info.pages, lru) {
-    if (n_pages == n_req_pages)
+    if (n_pages == n_req_pages) {
     break;
+    }
     list_del(&page.lru);
-    if (b_dev_info.adjust_managed_page_count)
+    if (b_dev_info.adjust_managed_page_count) {
     adjust_managed_page_count(page, 1);
+    }
     balloon_page_finalize(page);
     __count_vm_event(BALLOON_DEFLATE);
     list_add(&page.lru, pages);
     dec_node_page_state(page, NR_BALLOON_PAGES);
-    n_pages++;
+    n_pages += 1;
     }
     spin_unlock_irqrestore(&balloon_pages_lock, flags);
     return n_pages;
@@ -169,15 +419,17 @@ unsafe extern "C" fn balloon_page_finalize(page: *mut page) {
 // Driver must call balloon_page_enqueue before definitively removing the page
 // from the guest system.
 //
-// Return: struct page for the allocated page or NULL on allocation failure.
+// Return: page for the allocated page or NULL on allocation failure.
 //
-    struct page *balloon_page_alloc(void)
-    {
-    let mut gfp_flags: gfp_t = __GFP_NOMEMALLOC | __GFP_NORETRY | __GFP_NOWARN;
-    if (IS_ENABLED(CONFIG_BALLOON_MIGRATION))
+#[no_mangle]
+pub unsafe extern "C" fn balloon_page_alloc() -> *mut c_void {
+pub static mut gfp_flags: gfp_t = 0;
+    if (IS_ENABLED!(CONFIG_BALLOON_MIGRATION)) {
     gfp_flags |= GFP_HIGHUSER_MOVABLE;
-    else
+    }
+    else {
     gfp_flags |= GFP_HIGHUSER;
+    }
     return alloc_page(gfp_flags);
     }
     EXPORT_SYMBOL_GPL(balloon_page_alloc);
@@ -193,10 +445,9 @@ unsafe extern "C" fn balloon_page_finalize(page: *mut page) {
 // Drivers must not enqueue pages while page->lru is still in
 // use, and must not use page->lru until a page was unqueued again.
 //
-    void balloon_page_enqueue(struct balloon_dev_info *b_dev_info,
-    struct page *page)
-    {
-    unsigned long flags;
+#[no_mangle]
+pub unsafe extern "C" fn balloon_page_enqueue(b_dev_info: *mut balloon_dev_info, page: *mut page) {
+    let mut flags = 0;
     spin_lock_irqsave(&balloon_pages_lock, flags);
     balloon_page_enqueue_one(b_dev_info, page);
     spin_unlock_irqrestore(&balloon_pages_lock, flags);
@@ -220,13 +471,13 @@ unsafe extern "C" fn balloon_page_finalize(page: *mut page) {
 // TODO: remove the caller accounting requirements, and allow caller to wait
 // until all pages can be dequeued.
 //
-// Return: struct page for the dequeued page, or NULL if no page was dequeued.
+// Return: page for the dequeued page, or NULL if no page was dequeued.
 //
-    struct page *balloon_page_dequeue(struct balloon_dev_info *b_dev_info)
-    {
-    unsigned long flags;
-    LIST_HEAD(pages);
-    int n_pages;
+#[no_mangle]
+pub unsafe extern "C" fn balloon_page_dequeue(b_dev_info: *mut balloon_dev_info) -> *mut c_void {
+    let mut flags = 0;
+pub static mut pages: usize = 0;
+    let mut n_pages = 0;
     n_pages = balloon_page_list_dequeue(b_dev_info, &pages, 1);
     if (n_pages != 1) {
 //
@@ -238,25 +489,24 @@ unsafe extern "C" fn balloon_page_finalize(page: *mut page) {
 //
     spin_lock_irqsave(&balloon_pages_lock, flags);
     if (unlikely(list_empty(&b_dev_info.pages) &&
-    !b_dev_info.isolated_pages))
+    !b_dev_info.isolated_pages)) {
     BUG();
+    }
     spin_unlock_irqrestore(&balloon_pages_lock, flags);
     return core::ptr::null_mut();
     }
-    return list_first_entry(&pages, struct page, lru);
+    return list_first_entry(&pages, page, lru);
     }
     EXPORT_SYMBOL_GPL(balloon_page_dequeue);
 
-    static struct balloon_dev_info *balloon_page_device(struct page *page)
-    {
-    return (struct balloon_dev_info *)page_private(page);
+#[no_mangle]
+pub unsafe extern "C" fn balloon_page_device(page: *mut page) -> *mut c_void {
+    return page_private(page);
     }
 #[no_mangle]
 unsafe extern "C" fn balloon_page_isolate(page: *mut page, mode: isolate_mode_t) -> bool {
-    static bool balloon_page_isolate(struct page *page, isolate_mode_t mode)
-    {
-    struct balloon_dev_info *b_dev_info;
-    unsigned long flags;
+pub static mut b_dev_info: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
     spin_lock_irqsave(&balloon_pages_lock, flags);
     b_dev_info = balloon_page_device(page);
     if (!b_dev_info) {
@@ -268,44 +518,44 @@ unsafe extern "C" fn balloon_page_isolate(page: *mut page, mode: isolate_mode_t)
     return false;
     }
     list_del(&page.lru);
-    b_dev_info.isolated_pages++;
+    b_dev_info.isolated_pages += 1;
     spin_unlock_irqrestore(&balloon_pages_lock, flags);
     return true;
     }
 #[no_mangle]
 unsafe extern "C" fn balloon_page_putback(page: *mut page) {
-    static void balloon_page_putback(struct page *page)
-    {
-    struct balloon_dev_info *b_dev_info = balloon_page_device(page);
-    unsigned long flags;
+    let mut b_dev_info = balloon_page_device(page);
+    let mut flags = 0;
 //
 // When we isolated the page, the page was still inflated in a balloon
 // device. As isolated balloon pages cannot get deflated, we still have
 // a balloon device here.
 //
-    if (WARN_ON_ONCE(!b_dev_info))
+    if (WARN_ON_ONCE!(!b_dev_info)) {
     return;
+    }
     spin_lock_irqsave(&balloon_pages_lock, flags);
     list_add(&page.lru, &b_dev_info.pages);
-    b_dev_info.isolated_pages--;
+    b_dev_info.isolated_pages -= 1;
     spin_unlock_irqrestore(&balloon_pages_lock, flags);
     }
-    static int balloon_page_migrate(struct page *newpage, struct page *page,
-    enum migrate_mode mode)
-    {
-    struct balloon_dev_info *b_dev_info = balloon_page_device(page);
-    unsigned long flags;
-    int rc;
+#[no_mangle]
+pub unsafe extern "C" fn balloon_page_migrate(newpage: *mut page, page: *mut page, mode: migrate_mode) -> c_int {
+    let mut b_dev_info = balloon_page_device(page);
+    let mut flags = 0;
+    let mut rc = 0;
 //
 // When we isolated the page, the page was still inflated in a balloon
 // device. As isolated balloon pages cannot get deflated, we still have
 // a balloon device here.
 //
-    if (WARN_ON_ONCE(!b_dev_info))
+    if (WARN_ON_ONCE!(!b_dev_info)) {
     return -EAGAIN;
+    }
     rc = b_dev_info.migratepage(b_dev_info, newpage, page, mode);
-    if (rc < 0 && rc != -ENOENT)
+    if (rc < 0 && rc != -ENOENT) {
     return rc;
+    }
     spin_lock_irqsave(&balloon_pages_lock, flags);
     if (!rc) {
 // Insert the new page into the balloon list.
@@ -324,25 +574,20 @@ unsafe extern "C" fn balloon_page_putback(page: *mut page) {
     } else {
 // Old page was deflated but new page not inflated.
     __count_vm_event(BALLOON_DEFLATE);
-    if (b_dev_info.adjust_managed_page_count)
+    if (b_dev_info.adjust_managed_page_count) {
     adjust_managed_page_count(page, 1);
     }
-    b_dev_info.isolated_pages--;
+    }
+    b_dev_info.isolated_pages -= 1;
 // Free the now-deflated page we isolated in balloon_page_isolate().
     balloon_page_finalize(page);
     spin_unlock_irqrestore(&balloon_pages_lock, flags);
     put_page(page);
     return 0;
     }
-    static const struct movable_operations balloon_mops = {
-    .migrate_page = balloon_page_migrate,
-    .isolate_page = balloon_page_isolate,
-    .putback_page = balloon_page_putback,
-    };
+pub static mut movable_operations: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn balloon_init() -> int __init {
-    static int __init balloon_init(void)
-    {
+unsafe extern "C" fn balloon_init() -> c_int {
     return set_movable_ops(&balloon_mops, PGTY_offline);
     }
-    core_initcall(balloon_init);
+    core_initcall!(balloon_init);

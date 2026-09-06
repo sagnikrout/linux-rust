@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -175,70 +425,56 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // sampling of the aggregate task states would be.
 //
 
-    static int psi_bug __read_mostly;
-    DEFINE_STATIC_KEY_FALSE(psi_disabled);
-    static DEFINE_STATIC_KEY_TRUE(psi_cgroups_enabled);
+    static int psi_bug ;
+pub static mut psi_disabled: usize = 0;
+pub static mut psi_cgroups_enabled: usize = 0;
 
     static bool psi_enable;
 
-    let mut psi_enable: static bool = true;
+pub static mut psi_enable: bool = true;
 
 #[no_mangle]
-unsafe extern "C" fn setup_psi(str: *mut c_char) -> int __init {
-    static int __init setup_psi(char *str)
-    {
+unsafe extern "C" fn setup_psi(str: *mut c_char) -> c_int {
     return kstrtobool(str, &psi_enable) == 0;
     }
-    __setup("psi=", setup_psi);
+    __setup!("psi=", setup_psi);
 // Running averages - we need to be higher-res than loadavg
 
 // PSI trigger definitions
 
 // Sampling frequency in nanoseconds
-    static u64 psi_period __read_mostly;
+    static u64 psi_period ;
 // System-level pressure and stall tracking
-    static DEFINE_PER_CPU(struct psi_group_cpu, system_group_pcpu);
-    struct psi_group psi_system = {
-    .pcpu = &system_group_pcpu,
-    };
+pub static mut struct psi_group_cpu: usize = 0;
+pub static mut psi_group: usize = 0;
     static DEFINE_PER_CPU(seqcount_t, psi_seq) = SEQCNT_ZERO(psi_seq);
 #[no_mangle]
 pub unsafe extern "C" fn psi_write_begin(cpu: c_int) {
-    static inline void psi_write_begin(int cpu)
-    {
     write_seqcount_begin(per_cpu_ptr(&psi_seq, cpu));
     }
 #[no_mangle]
 pub unsafe extern "C" fn psi_write_end(cpu: c_int) {
-    static inline void psi_write_end(int cpu)
-    {
     write_seqcount_end(per_cpu_ptr(&psi_seq, cpu));
     }
 #[no_mangle]
 pub unsafe extern "C" fn psi_read_begin(cpu: c_int) -> u32 {
-    static inline u32 psi_read_begin(int cpu)
-    {
     return read_seqcount_begin(per_cpu_ptr(&psi_seq, cpu));
     }
 #[no_mangle]
 pub unsafe extern "C" fn psi_read_retry(cpu: c_int, seq: u32) -> bool {
-    static inline bool psi_read_retry(int cpu, u32 seq)
-    {
     return read_seqcount_retry(per_cpu_ptr(&psi_seq, cpu), seq);
     }
-    static void psi_avgs_work(struct work_struct *work);
-    static void poll_timer_fn(struct timer_list *t);
+// forward_decl: psi_avgs_work;
+// forward_decl: poll_timer_fn;
 #[no_mangle]
 unsafe extern "C" fn group_init(group: *mut psi_group) {
-    static void group_init(struct psi_group *group)
-    {
     group.enabled = true;
     group.avg_last_update = sched_clock();
     group.avg_next_update = group.avg_last_update + psi_period;
     mutex_init(&group.avgs_lock);
 // Init avg trigger-related members
     INIT_LIST_HEAD(&group.avg_triggers);
-    memset(group.avg_nr_triggers, 0, sizeof(group.avg_nr_triggers));
+    memset(group.avg_nr_triggers, 0, sizeof!(group.avg_nr_triggers));
     INIT_DELAYED_WORK(&group.avgs_work, psi_avgs_work);
 // Init rtpoll trigger-related members
     atomic_set(&group.rtpoll_scheduled, 0);
@@ -251,67 +487,68 @@ unsafe extern "C" fn group_init(group: *mut psi_group) {
     rcu_assign_pointer(group.rtpoll_task, core::ptr::null_mut());
     }
 #[no_mangle]
-pub unsafe extern "C" fn psi_init() -> void __init {
-    void __init psi_init(void)
-    {
+pub unsafe extern "C" fn psi_init()  {
     if (!psi_enable) {
     static_branch_enable(&psi_disabled);
     static_branch_disable(&psi_cgroups_enabled);
     return;
     }
-    if (!cgroup_psi_enabled())
+    if (!cgroup_psi_enabled()) {
     static_branch_disable(&psi_cgroups_enabled);
+    }
     psi_period = jiffies_to_nsecs(PSI_FREQ);
     group_init(&psi_system);
     }
 #[no_mangle]
 unsafe extern "C" fn test_states(tasks: *mut c_uint, state_mask: u32) -> u32 {
-    static u32 test_states(unsigned int *tasks, u32 state_mask)
-    {
-    let mut oncpu: bool = state_mask & PSI_ONCPU;
+pub static mut oncpu: bool = false;
     if (tasks[NR_IOWAIT]) {
     state_mask |= BIT(PSI_IO_SOME);
-    if (!tasks[NR_RUNNING])
+    if (!tasks[NR_RUNNING]) {
     state_mask |= BIT(PSI_IO_FULL);
+    }
     }
     if (tasks[NR_MEMSTALL]) {
     state_mask |= BIT(PSI_MEM_SOME);
-    if (tasks[NR_RUNNING] == tasks[NR_MEMSTALL_RUNNING])
+    if (tasks[NR_RUNNING] == tasks[NR_MEMSTALL_RUNNING]) {
     state_mask |= BIT(PSI_MEM_FULL);
     }
-    if (tasks[NR_RUNNING] > oncpu)
+    }
+    if (tasks[NR_RUNNING] > oncpu) {
     state_mask |= BIT(PSI_CPU_SOME);
-    if (tasks[NR_RUNNING] && !oncpu)
+    }
+    if (tasks[NR_RUNNING] && !oncpu) {
     state_mask |= BIT(PSI_CPU_FULL);
-    if (tasks[NR_IOWAIT] || tasks[NR_MEMSTALL] || tasks[NR_RUNNING])
+    }
+    if (tasks[NR_IOWAIT] || tasks[NR_MEMSTALL] || tasks[NR_RUNNING]) {
     state_mask |= BIT(PSI_NONIDLE);
+    }
     return state_mask;
     }
-    static void get_recent_times(struct psi_group *group, int cpu,
-    enum psi_aggregators aggregator, u32 *times,
-    u32 *pchanged_states)
-    {
-    struct psi_group_cpu *groupc = per_cpu_ptr(group.pcpu, cpu);
-    let mut current_cpu: c_int = raw_smp_processor_id();
+#[no_mangle]
+pub unsafe extern "C" fn get_recent_times(group: *mut psi_group, cpu: c_int, aggregator: psi_aggregators, times: *mut u32, pchanged_states: *mut u32) {
+    let mut groupc = per_cpu_ptr(group.pcpu, cpu);
+pub static mut current_cpu: c_int = 0;
     unsigned int tasks[NR_PSI_TASK_COUNTS];
     u64 now, state_start;
     enum psi_states s;
-    unsigned int seq;
-    u32 state_mask;
+    let mut seq = 0;
+    let mut state_mask = 0;
 // pchanged_states = 0;
 // Snapshot a coherent view of the CPU state
     do {
     seq = psi_read_begin(cpu);
     now = cpu_clock(cpu);
-    memcpy(times, groupc.times, sizeof(groupc.times));
+    memcpy(times, groupc.times, sizeof!(groupc.times));
     state_mask = groupc.state_mask;
     state_start = groupc.state_start;
-    if (cpu == current_cpu)
-    memcpy(tasks, groupc.tasks, sizeof(groupc.tasks));
+    if (cpu == current_cpu) {
+    memcpy(tasks, groupc.tasks, sizeof!(groupc.tasks));
+    }
     } while (psi_read_retry(cpu, seq));
 // Calculate state time deltas against the previous snapshot
-    for (s = 0; s < NR_PSI_STATES; s++) {
-    u32 delta;
+    while (s < NR_PSI_STATES) {
+    let mut delta = 0;
 //
 // In addition to already concluded states, we also
 // incorporate currently active states on the CPU,
@@ -321,13 +558,15 @@ unsafe extern "C" fn test_states(tasks: *mut c_uint, state_mask: u32) -> u32 {
 // (u32) and our reported pressure close to what's
 // actually happening.
 //
-    if (state_mask & (1 << s))
+    if (state_mask & (1 << s)) {
     times[s] += now - state_start;
+    }
     delta = times[s] - groupc.times_prev[aggregator][s];
     groupc.times_prev[aggregator][s] = times[s];
     times[s] = delta;
-    if (delta)
+    if (delta) {
 // pchanged_states |= (1 << s);
+    }
     }
 //
 // When collect_percpu_times() from the avgs_work, we don't want to
@@ -338,21 +577,23 @@ unsafe extern "C" fn test_states(tasks: *mut c_uint, state_mask: u32) -> u32 {
 // we can just check PSI_NONIDLE delta.
 //
     if (current_work() == &group.avgs_work.work) {
-    bool reschedule;
-    if (cpu == current_cpu)
+    let mut reschedule = 0;
+    if (cpu == current_cpu) {
     reschedule = tasks[NR_RUNNING] +
     tasks[NR_IOWAIT] +
     tasks[NR_MEMSTALL] > 1;
-    else
+    }
+    else {
     reschedule = *pchanged_states & (1 << PSI_NONIDLE);
-    if (reschedule)
+    }
+    if (reschedule) {
 // pchanged_states |= PSI_STATE_RESCHEDULE;
     }
     }
-    static void calc_avgs(unsigned long avg[3], int missed_periods,
-    u64 time, u64 period)
-    {
-    unsigned long pct;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn calc_avgs(missed_periods: c_int, time: u64, period: u64) {
+    let mut pct = 0;
 // Fill in zeroes for periods of no activity
     if (missed_periods) {
     avg[0] = calc_load_n(avg[0], EXP_10s, 0, missed_periods);
@@ -366,15 +607,13 @@ unsafe extern "C" fn test_states(tasks: *mut c_uint, state_mask: u32) -> u32 {
     avg[1] = calc_load(avg[1], EXP_60s, pct);
     avg[2] = calc_load(avg[2], EXP_300s, pct);
     }
-    static void collect_percpu_times(struct psi_group *group,
-    enum psi_aggregators aggregator,
-    u32 *pchanged_states)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn collect_percpu_times(group: *mut psi_group, aggregator: psi_aggregators, pchanged_states: *mut u32) {
     u64 deltas[NR_PSI_STATES - 1] = { 0, };
-    let mut nonidle_total: c_ulong = 0;
-    let mut changed_states: u32 = 0;
-    int cpu;
-    int s;
+pub static mut nonidle_total: c_ulong = 0;
+pub static mut changed_states: u32 = 0;
+    let mut cpu = 0;
+    let mut s = 0;
 //
 // Collect the per-cpu time buckets and average them into a
 // single time sample that is normalized to wall clock time.
@@ -385,15 +624,16 @@ unsafe extern "C" fn test_states(tasks: *mut c_uint, state_mask: u32) -> u32 {
 //
     for_each_possible_cpu(cpu) {
     u32 times[NR_PSI_STATES];
-    u32 nonidle;
-    u32 cpu_changed_states;
+    let mut nonidle = 0;
+    let mut cpu_changed_states = 0;
     get_recent_times(group, cpu, aggregator, times,
     &cpu_changed_states);
     changed_states |= cpu_changed_states;
     nonidle = nsecs_to_jiffies(times[PSI_NONIDLE]);
     nonidle_total += nonidle;
-    for (s = 0; s < PSI_NONIDLE; s++)
+    for (s = 0; s < PSI_NONIDLE; s++) {
     deltas[s] += (u64)times[s] * nonidle;
+    }
     }
 //
 // Integrate the sample into the running statistics that are
@@ -407,16 +647,17 @@ unsafe extern "C" fn test_states(tasks: *mut c_uint, state_mask: u32) -> u32 {
 // below handles both.
 //
 // total=
-    for (s = 0; s < NR_PSI_STATES - 1; s++)
+    for (s = 0; s < NR_PSI_STATES - 1; s++) {
     group.total[aggregator][s] +=
     div_u64(deltas[s], max(nonidle_total, 1UL));
-    if (pchanged_states)
+    }
+    if (pchanged_states) {
 // pchanged_states = changed_states;
     }
+    }
 // Trigger tracking window manipulations
-    static void window_reset(struct psi_window *win, u64 now, u64 value,
-    u64 prev_growth)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn window_reset(win: *mut psi_window, now: u64, value: u64, prev_growth: u64) {
     win.start_time = now;
     win.start_value = value;
     win.prev_growth = prev_growth;
@@ -434,10 +675,8 @@ unsafe extern "C" fn test_states(tasks: *mut c_uint, state_mask: u32) -> u32 {
 //
 #[no_mangle]
 unsafe extern "C" fn window_update(win: *mut psi_window, now: u64, value: u64) -> u64 {
-    static u64 window_update(struct psi_window *win, u64 now, u64 value)
-    {
-    u64 elapsed;
-    u64 growth;
+    let mut elapsed = 0;
+    let mut growth = 0;
     elapsed = now - win.start_time;
     growth = value - win.start_value;
 //
@@ -447,22 +686,22 @@ unsafe extern "C" fn window_update(win: *mut psi_window, now: u64, value: u64) -
 // win->prev_growth is then used to interpolate additional
 // growth from the previous window assuming it was linear.
 //
-    if (elapsed > win.size)
+    if (elapsed > win.size) {
     window_reset(win, now, value, growth);
+    }
     else {
-    u32 remaining;
+    let mut remaining = 0;
     remaining = win.size - elapsed;
     growth += div64_u64(win.prev_growth * remaining, win.size);
     }
     return growth;
     }
-    static void update_triggers(struct psi_group *group, u64 now,
-    enum psi_aggregators aggregator)
-    {
-    struct psi_trigger *t;
-    u64 *total = group.total[aggregator];
-    struct list_head *triggers;
-    u64 *aggregator_total;
+#[no_mangle]
+pub unsafe extern "C" fn update_triggers(group: *mut psi_group, now: u64, aggregator: psi_aggregators) {
+pub static mut t: *mut c_void = core::ptr::null_mut();
+    let mut total = group.total[aggregator];
+pub static mut triggers: *mut c_void = core::ptr::null_mut();
+pub static mut aggregator_total: *mut c_void = core::ptr::null_mut();
     if (aggregator == PSI_AVGS) {
     triggers = &group.avg_triggers;
     aggregator_total = group.avg_total;
@@ -475,12 +714,13 @@ unsafe extern "C" fn window_update(win: *mut psi_window, now: u64, value: u64) -
 // watchers know when their specified thresholds are exceeded.
 //
     list_for_each_entry(t, triggers, node) {
-    u64 growth;
-    bool new_stall;
+    let mut growth = 0;
+    let mut new_stall = 0;
     new_stall = aggregator_total[t.state] != total[t.state];
 // Check for stall activity or a previous threshold breach
-    if (!new_stall && !t.pending_event)
+    if (!new_stall && !t.pending_event) {
     continue;
+    }
 //
 // Check for new stall activity, as well as deferred
 // events that occurred in the last window after the
@@ -491,20 +731,24 @@ unsafe extern "C" fn window_update(win: *mut psi_window, now: u64, value: u64) -
 // Calculate growth since last update
     growth = window_update(&t.win, now, total[t.state]);
     if (!t.pending_event) {
-    if (growth < t.threshold)
+    if (growth < t.threshold) {
     continue;
+    }
     t.pending_event = true;
     }
     }
 // Limit event signaling to once per window
-    if (now < t.last_event_time + t.win.size)
+    if (now < t.last_event_time + t.win.size) {
     continue;
+    }
 // Generate an event
     if (cmpxchg(&t.event, 0, 1) == 0) {
-    if (t.of)
+    if (t.of) {
     kernfs_notify(t.of.kn);
-    else
+    }
+    else {
     wake_up_interruptible(&t.event_wait);
+    }
     }
     t.last_event_time = now;
 // Reset threshold breach flag once event got generated
@@ -513,16 +757,15 @@ unsafe extern "C" fn window_update(win: *mut psi_window, now: u64, value: u64) -
     }
 #[no_mangle]
 unsafe extern "C" fn update_averages(group: *mut psi_group, now: u64) -> u64 {
-    static u64 update_averages(struct psi_group *group, u64 now)
-    {
-    let mut missed_periods: c_ulong = 0;
+pub static mut missed_periods: c_ulong = 0;
     u64 expires, period;
-    u64 avg_next_update;
-    int s;
+    let mut avg_next_update = 0;
+    let mut s = 0;
 // avgX=
     expires = group.avg_next_update;
-    if (now - expires >= psi_period)
+    if (now - expires >= psi_period) {
     missed_periods = div_u64(now - expires, psi_period);
+    }
 //
 // The periodic clock tick can get delayed for various
 // reasons, especially on loaded systems. To avoid clock
@@ -533,8 +776,8 @@ unsafe extern "C" fn update_averages(group: *mut psi_group, now: u64) -> u64 {
     avg_next_update = expires + ((1 + missed_periods) * psi_period);
     period = now - (group.avg_last_update + (missed_periods * psi_period));
     group.avg_last_update = now;
-    for (s = 0; s < NR_PSI_STATES - 1; s++) {
-    u32 sample;
+    while (s < NR_PSI_STATES - 1) {
+    let mut sample = 0;
     sample = group.total[PSI_AVGS][s] - group.avg_total[s];
 //
 // Due to the lockless sampling of the time buckets,
@@ -553,8 +796,9 @@ unsafe extern "C" fn update_averages(group: *mut psi_group, now: u64) -> u64 {
 // delta slips from a period P to P+1, by definition
 // it frees up its time T in P.
 //
-    if (sample > period)
+    if (sample > period) {
     sample = period;
+    }
     group.avg_total[s] += sample;
     calc_avgs(group.avg[s], missed_periods, sample, period);
     }
@@ -562,14 +806,12 @@ unsafe extern "C" fn update_averages(group: *mut psi_group, now: u64) -> u64 {
     }
 #[no_mangle]
 unsafe extern "C" fn psi_avgs_work(work: *mut work_struct) {
-    static void psi_avgs_work(struct work_struct *work)
-    {
-    struct delayed_work *dwork;
-    struct psi_group *group;
-    u32 changed_states;
-    u64 now;
+pub static mut dwork: *mut c_void = core::ptr::null_mut();
+pub static mut group: *mut c_void = core::ptr::null_mut();
+    let mut changed_states = 0;
+    let mut now = 0;
     dwork = to_delayed_work(work);
-    group = container_of(dwork, struct psi_group, avgs_work);
+    group = container_of!(dwork, psi_group, avgs_work);
     mutex_lock(&group.avgs_lock);
     now = sched_clock();
     collect_percpu_times(group, PSI_AVGS, &changed_states);
@@ -592,46 +834,45 @@ unsafe extern "C" fn psi_avgs_work(work: *mut work_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn init_rtpoll_triggers(group: *mut psi_group, now: u64) {
-    static void init_rtpoll_triggers(struct psi_group *group, u64 now)
-    {
-    struct psi_trigger *t;
-    list_for_each_entry(t, &group.rtpoll_triggers, node)
+pub static mut t: *mut c_void = core::ptr::null_mut();
+    list_for_each_entry(t, &group.rtpoll_triggers, node) {
     window_reset(&t.win, now,
     group.total[PSI_POLL][t.state], 0);
+    }
     memcpy(group.rtpoll_total, group.total[PSI_POLL],
-    sizeof(group.rtpoll_total));
+    sizeof!(group.rtpoll_total));
     group.rtpoll_next_update = now + group.rtpoll_min_period;
     }
 // Schedule rtpolling if it's not already scheduled or forced.
-    static void psi_schedule_rtpoll_work(struct psi_group *group, unsigned long delay,
-    bool force)
-    {
-    struct task_struct *task;
+#[no_mangle]
+pub unsafe extern "C" fn psi_schedule_rtpoll_work(group: *mut psi_group, delay: c_ulong, force: bool) {
+pub static mut task: *mut c_void = core::ptr::null_mut();
 //
 // atomic_xchg should be called even when !force to provide a
 // full memory barrier (see the comment inside psi_rtpoll_work).
 //
-    if (atomic_xchg(&group.rtpoll_scheduled, 1) && !force)
+    if (atomic_xchg(&group.rtpoll_scheduled, 1) && !force) {
     return;
+    }
     rcu_read_lock();
     task = rcu_dereference(group.rtpoll_task);
 //
 // kworker might be NULL in case psi_trigger_destroy races with
 // psi_task_change (hotpath) which can't use locks
 //
-    if (likely(task))
+    if (likely(task)) {
     mod_timer(&group.rtpoll_timer, jiffies + delay);
-    else
+    }
+    else {
     atomic_set(&group.rtpoll_scheduled, 0);
+    }
     rcu_read_unlock();
     }
 #[no_mangle]
 unsafe extern "C" fn psi_rtpoll_work(group: *mut psi_group) {
-    static void psi_rtpoll_work(struct psi_group *group)
-    {
-    let mut force_reschedule: bool = false;
-    u32 changed_states;
-    u64 now;
+pub static mut force_reschedule: bool = false;
+    let mut changed_states = 0;
+    let mut now = 0;
     mutex_lock(&group.rtpoll_trigger_lock);
     now = sched_clock();
     if (now > group.rtpoll_until) {
@@ -672,8 +913,9 @@ unsafe extern "C" fn psi_rtpoll_work(group: *mut psi_group) {
     collect_percpu_times(group, PSI_POLL, &changed_states);
     if (changed_states & group.rtpoll_states) {
 // Initialize trigger windows when entering rtpolling mode
-    if (now > group.rtpoll_until)
+    if (now > group.rtpoll_until) {
     init_rtpoll_triggers(group, now);
+    }
 //
 // Keep the monitor active for at least the duration of the
 // minimum tracking window as long as monitor states are
@@ -684,80 +926,79 @@ unsafe extern "C" fn psi_rtpoll_work(group: *mut psi_group) {
     }
     if (now > group.rtpoll_until) {
     group.rtpoll_next_update = ULLONG_MAX;
-    goto out;
+// goto;
     }
     if (now >= group.rtpoll_next_update) {
     if (changed_states & group.rtpoll_states) {
     update_triggers(group, now, PSI_POLL);
     memcpy(group.rtpoll_total, group.total[PSI_POLL],
-    sizeof(group.rtpoll_total));
+    sizeof!(group.rtpoll_total));
     }
     group.rtpoll_next_update = now + group.rtpoll_min_period;
     }
     psi_schedule_rtpoll_work(group,
     nsecs_to_jiffies(group.rtpoll_next_update - now) + 1,
     force_reschedule);
-    out:
+// label;
     mutex_unlock(&group.rtpoll_trigger_lock);
     }
 #[no_mangle]
 unsafe extern "C" fn psi_rtpoll_worker(data: *mut c_void) -> c_int {
-    static int psi_rtpoll_worker(void *data)
-    {
-    struct psi_group *group = (struct psi_group *)data;
+    let mut group = data;
     sched_set_fifo_low(current);
     while (true) {
     wait_event_interruptible(group.rtpoll_wait,
     atomic_cmpxchg(&group.rtpoll_wakeup, 1, 0) ||
     kthread_should_stop());
-    if (kthread_should_stop())
+    if (kthread_should_stop()) {
     break;
+    }
     psi_rtpoll_work(group);
     }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn poll_timer_fn(t: *mut timer_list) {
-    static void poll_timer_fn(struct timer_list *t)
-    {
-    struct psi_group *group = timer_container_of(group, t, rtpoll_timer);
+    let mut group = timer_container_of(group, t, rtpoll_timer);
     atomic_set(&group.rtpoll_wakeup, 1);
     wake_up_interruptible(&group.rtpoll_wait);
     }
 #[no_mangle]
 unsafe extern "C" fn record_times(groupc: *mut psi_group_cpu, now: u64) {
-    static void record_times(struct psi_group_cpu *groupc, u64 now)
-    {
-    u32 delta;
+    let mut delta = 0;
     delta = now - groupc.state_start;
     groupc.state_start = now;
     if (groupc.state_mask & (1 << PSI_IO_SOME)) {
     groupc.times[PSI_IO_SOME] += delta;
-    if (groupc.state_mask & (1 << PSI_IO_FULL))
+    if (groupc.state_mask & (1 << PSI_IO_FULL)) {
     groupc.times[PSI_IO_FULL] += delta;
+    }
     }
     if (groupc.state_mask & (1 << PSI_MEM_SOME)) {
     groupc.times[PSI_MEM_SOME] += delta;
-    if (groupc.state_mask & (1 << PSI_MEM_FULL))
+    if (groupc.state_mask & (1 << PSI_MEM_FULL)) {
     groupc.times[PSI_MEM_FULL] += delta;
+    }
     }
     if (groupc.state_mask & (1 << PSI_CPU_SOME)) {
     groupc.times[PSI_CPU_SOME] += delta;
-    if (groupc.state_mask & (1 << PSI_CPU_FULL))
+    if (groupc.state_mask & (1 << PSI_CPU_FULL)) {
     groupc.times[PSI_CPU_FULL] += delta;
     }
-    if (groupc.state_mask & (1 << PSI_NONIDLE))
+    }
+    if (groupc.state_mask & (1 << PSI_NONIDLE)) {
     groupc.times[PSI_NONIDLE] += delta;
     }
+    }
 
-    for (typeof(group) iter = group; iter; iter = iter.parent)
-    static void psi_group_change(struct psi_group *group, int cpu,
-    unsigned int clear, unsigned int set,
-    u64 now, bool wake_clock)
-    {
-    struct psi_group_cpu *groupc;
-    unsigned int t, m;
-    u32 state_mask;
+    for (typeof(group) iter = group; iter; iter = iter.parent) {
+#[no_mangle]
+pub unsafe extern "C" fn psi_group_change(group: *mut psi_group, cpu: c_int, clear: c_uint, set: c_uint, now: u64, wake_clock: bool) {
+    }
+pub static mut groupc: *mut c_void = core::ptr::null_mut();
+    let mut t = 0;
+    let mut m = 0;
+    let mut state_mask = 0;
     lockdep_assert_rq_held(cpu_rq(cpu));
     groupc = per_cpu_ptr(group.pcpu, cpu);
 //
@@ -780,21 +1021,23 @@ unsafe extern "C" fn record_times(groupc: *mut psi_group_cpu, now: u64) {
 // counts. Update those first, then construct the mask.
 //
     for (t = 0, m = clear; m; m &= ~(1 << t), t++) {
-    if (!(m & (1 << t)))
+    if (!(m & (1 << t))) {
     continue;
+    }
     if (groupc.tasks[t]) {
     groupc.tasks[t]--;
     } else if (!psi_bug) {
-    printk_deferred(KERN_ERR "psi: task underflow! cpu=%d t=%d tasks=[%u %u %u %u] clear=%x set=%x\n",
+    printk_deferred("psi: task underflow! cpu=%d t=%d tasks=[%u %u %u %u] clear=%x set=%x\n",
     cpu, t, groupc.tasks[0],
     groupc.tasks[1], groupc.tasks[2],
     groupc.tasks[3], clear, set);
     psi_bug = 1;
     }
     }
-    for (t = 0; set; set &= ~(1 << t), t++)
+    for (t = 0; set; set &= ~(1 << t), t++) {
     if (set & (1 << t))
     groupc.tasks[t]++;
+    }
     if (!group.enabled) {
 //
 // On the first group change after disabling PSI, conclude
@@ -803,8 +1046,9 @@ unsafe extern "C" fn record_times(groupc: *mut psi_group_cpu, now: u64) {
 // may have already incorporated the live state into times_prev;
 // avoid a delta sample underflow when PSI is later re-enabled.
 //
-    if (unlikely(groupc.state_mask & (1 << PSI_NONIDLE)))
+    if (unlikely(groupc.state_mask & (1 << PSI_NONIDLE))) {
     record_times(groupc, now);
+    }
     groupc.state_mask = state_mask;
     return;
     }
@@ -817,31 +1061,33 @@ unsafe extern "C" fn record_times(groupc: *mut psi_group_cpu, now: u64) {
 // task in a cgroup is in_memstall, the corresponding groupc
 // on that cpu is in PSI_MEM_FULL state.
 //
-    if (unlikely((state_mask & PSI_ONCPU) && cpu_curr(cpu).in_memstall))
+    if (unlikely((state_mask & PSI_ONCPU) && cpu_curr(cpu).in_memstall)) {
     state_mask |= (1 << PSI_MEM_FULL);
+    }
     record_times(groupc, now);
     groupc.state_mask = state_mask;
-    if (state_mask & group.rtpoll_states)
+    if (state_mask & group.rtpoll_states) {
     psi_schedule_rtpoll_work(group, 1, false);
-    if (wake_clock && !delayed_work_pending(&group.avgs_work))
+    }
+    if (wake_clock && !delayed_work_pending(&group.avgs_work)) {
     schedule_delayed_work(&group.avgs_work, PSI_FREQ);
     }
-    static inline struct psi_group *task_psi_group(struct task_struct *task)
-    {
+    }
+#[no_mangle]
+pub unsafe extern "C" fn task_psi_group(task: *mut task_struct) -> *mut c_void {
 
-    if (static_branch_likely(&psi_cgroups_enabled))
+    if (static_branch_likely(&psi_cgroups_enabled)) {
     return cgroup_psi(task_dfl_cgroup(task));
+    }
 
     return &psi_system;
     }
 #[no_mangle]
 unsafe extern "C" fn psi_flags_change(task: *mut task_struct, clear: c_int, set: c_int) {
-    static void psi_flags_change(struct task_struct *task, int clear, int set)
-    {
     if (((task.psi_flags & set) ||
     (task.psi_flags & clear) != clear) &&
     !psi_bug) {
-    printk_deferred(KERN_ERR "psi: inconsistent task state! task=%d:%s cpu=%d psi_flags=%x clear=%x set=%x\n",
+    printk_deferred("psi: inconsistent task state! task=%d:%s cpu=%d psi_flags=%x clear=%x set=%x\n",
     task.pid, task.comm, task_cpu(task),
     task.psi_flags, clear, set);
     psi_bug = 1;
@@ -851,25 +1097,24 @@ unsafe extern "C" fn psi_flags_change(task: *mut task_struct, clear: c_int, set:
     }
 #[no_mangle]
 pub unsafe extern "C" fn psi_task_change(task: *mut task_struct, clear: c_int, set: c_int) {
-    void psi_task_change(struct task_struct *task, int clear, int set)
-    {
-    let mut cpu: c_int = task_cpu(task);
-    u64 now;
-    if (!task.pid)
+pub static mut cpu: c_int = 0;
+    let mut now = 0;
+    if (!task.pid) {
     return;
+    }
     psi_flags_change(task, clear, set);
     psi_write_begin(cpu);
     now = cpu_clock(cpu);
-    for_each_group(group, task_psi_group(task))
+    for_each_group(group, task_psi_group(task)) {
     psi_group_change(group, cpu, clear, set, now, true);
+    }
     psi_write_end(cpu);
     }
-    void psi_task_switch(struct task_struct *prev, struct task_struct *next,
-    bool sleep)
-    {
-    struct psi_group *common = core::ptr::null_mut();
-    let mut cpu: c_int = task_cpu(prev);
-    u64 now;
+#[no_mangle]
+pub unsafe extern "C" fn psi_task_switch(prev: *mut task_struct, next: *mut task_struct, sleep: bool) {
+    let mut common = core::ptr::null_mut();
+pub static mut cpu: c_int = 0;
+    let mut now = 0;
     psi_write_begin(cpu);
     now = cpu_clock(cpu);
     if (next.pid) {
@@ -880,7 +1125,7 @@ pub unsafe extern "C" fn psi_task_change(task: *mut task_struct, clear: c_int, s
 // TSK_ONCPU bit set, and we can stop the iteration there.
 //
     for_each_group(group, task_psi_group(next)) {
-    struct psi_group_cpu *groupc = per_cpu_ptr(group.pcpu, cpu);
+    let mut groupc = per_cpu_ptr(group.pcpu, cpu);
     if (groupc.state_mask & PSI_ONCPU) {
     common = group;
     break;
@@ -889,8 +1134,8 @@ pub unsafe extern "C" fn psi_task_change(task: *mut task_struct, clear: c_int, s
     }
     }
     if (prev.pid) {
-    let mut clear: c_int = TSK_ONCPU, set = 0;
-    let mut wake_clock: bool = true;
+pub static mut clear: c_int = 0;
+pub static mut wake_clock: bool = true;
 //
 // When we're going to sleep, psi_dequeue() lets us
 // handle TSK_RUNNING, TSK_MEMSTALL_RUNNING and
@@ -899,10 +1144,12 @@ pub unsafe extern "C" fn psi_task_change(task: *mut task_struct, clear: c_int, s
 //
     if (sleep) {
     clear |= TSK_RUNNING;
-    if (prev.in_memstall)
+    if (prev.in_memstall) {
     clear |= TSK_MEMSTALL_RUNNING;
-    if (prev.in_iowait)
+    }
+    if (prev.in_iowait) {
     set |= TSK_IOWAIT;
+    }
 //
 // Periodic aggregation shuts off if there is a period of no
 // task changes, so we wake it back up if necessary. However,
@@ -910,13 +1157,15 @@ pub unsafe extern "C" fn psi_task_change(task: *mut task_struct, clear: c_int, s
 // itself going to sleep, or we'll ping-pong forever.
 //
     if (unlikely((prev.flags & PF_WQ_WORKER) &&
-    wq_worker_last_func(prev) == psi_avgs_work))
+    wq_worker_last_func(prev) == psi_avgs_work)) {
     wake_clock = false;
+    }
     }
     psi_flags_change(prev, clear, set);
     for_each_group(group, task_psi_group(prev)) {
-    if (group == common)
+    if (group == common) {
     break;
+    }
     psi_group_change(group, cpu, clear, set, now, wake_clock);
     }
 //
@@ -927,8 +1176,9 @@ pub unsafe extern "C" fn psi_task_change(task: *mut task_struct, clear: c_int, s
 //
     if ((prev.psi_flags ^ next.psi_flags) & ~TSK_ONCPU) {
     clear &= ~TSK_ONCPU;
-    for_each_group(group, common)
+    for_each_group(group, common) {
     psi_group_change(group, cpu, clear, set, now, wake_clock);
+    }
     }
     }
     psi_write_end(cpu);
@@ -936,35 +1186,39 @@ pub unsafe extern "C" fn psi_task_change(task: *mut task_struct, clear: c_int, s
 
 #[no_mangle]
 pub unsafe extern "C" fn psi_account_irqtime(rq: *mut rq, curr: *mut task_struct, prev: *mut task_struct) {
-    void psi_account_irqtime(struct rq *rq, struct task_struct *curr, struct task_struct *prev)
-    {
-    let mut cpu: c_int = task_cpu(curr);
-    struct psi_group_cpu *groupc;
-    s64 delta;
-    u64 irq;
-    u64 now;
-    if (static_branch_likely(&psi_disabled) || !irqtime_enabled())
+pub static mut cpu: c_int = 0;
+pub static mut groupc: *mut c_void = core::ptr::null_mut();
+    let mut delta = 0;
+    let mut irq = 0;
+    let mut now = 0;
+    if (static_branch_likely(&psi_disabled) || !irqtime_enabled()) {
     return;
-    if (!curr.pid)
+    }
+    if (!curr.pid) {
     return;
+    }
     lockdep_assert_rq_held(rq);
-    if (prev && task_psi_group(prev) == task_psi_group(curr))
+    if (prev && task_psi_group(prev) == task_psi_group(curr)) {
     return;
+    }
     irq = irq_time_read(cpu);
     delta = (s64)(irq - rq.psi_irq_time);
-    if (delta <= 0)
+    if (delta <= 0) {
     return;
+    }
     rq.psi_irq_time = irq;
     psi_write_begin(cpu);
     now = cpu_clock(cpu);
     for_each_group(group, task_psi_group(curr)) {
-    if (!group.enabled)
+    if (!group.enabled) {
     continue;
+    }
     groupc = per_cpu_ptr(group.pcpu, cpu);
     record_times(groupc, now);
     groupc.times[PSI_IRQ_FULL] += delta;
-    if (group.rtpoll_states & (1 << PSI_IRQ_FULL))
+    if (group.rtpoll_states & (1 << PSI_IRQ_FULL)) {
     psi_schedule_rtpoll_work(group, 1, false);
+    }
     }
     psi_write_end(cpu);
     }
@@ -978,15 +1232,15 @@ pub unsafe extern "C" fn psi_account_irqtime(rq: *mut rq, curr: *mut task_struct
 //
 #[no_mangle]
 pub unsafe extern "C" fn psi_memstall_enter(flags: *mut c_ulong) {
-    void psi_memstall_enter(unsigned long *flags)
-    {
-    struct rq_flags rf;
-    struct rq *rq;
-    if (static_branch_likely(&psi_disabled))
+pub static mut rf: usize = 0;
+pub static mut rq: *mut c_void = core::ptr::null_mut();
+    if (static_branch_likely(&psi_disabled)) {
     return;
+    }
 // flags = current->in_memstall;
-    if (*flags)
+    if (*flags) {
     return;
+    }
 //
 // in_memstall setting & accounting needs to be atomic wrt
 // changes to the task's scheduling state, otherwise we can
@@ -1006,14 +1260,14 @@ pub unsafe extern "C" fn psi_memstall_enter(flags: *mut c_ulong) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn psi_memstall_leave(flags: *mut c_ulong) {
-    void psi_memstall_leave(unsigned long *flags)
-    {
-    struct rq_flags rf;
-    struct rq *rq;
-    if (static_branch_likely(&psi_disabled))
+pub static mut rf: usize = 0;
+pub static mut rq: *mut c_void = core::ptr::null_mut();
+    if (static_branch_likely(&psi_disabled)) {
     return;
-    if (*flags)
+    }
+    if (*flags) {
     return;
+    }
 //
 // in_memstall clearing & accounting needs to be atomic wrt
 // changes to the task's scheduling state, otherwise we could
@@ -1028,14 +1282,14 @@ pub unsafe extern "C" fn psi_memstall_leave(flags: *mut c_ulong) {
 
 #[no_mangle]
 pub unsafe extern "C" fn psi_cgroup_alloc(cgroup: *mut cgroup) -> c_int {
-    int psi_cgroup_alloc(struct cgroup *cgroup)
-    {
-    if (!static_branch_likely(&psi_cgroups_enabled))
+    if (!static_branch_likely(&psi_cgroups_enabled)) {
     return 0;
-    cgroup.psi = kzalloc_obj(struct psi_group);
-    if (!cgroup.psi)
+    }
+    cgroup.psi = kzalloc_obj(psi_group);
+    if (!cgroup.psi) {
     return -ENOMEM;
-    cgroup.psi.pcpu = alloc_percpu(struct psi_group_cpu);
+    }
+    cgroup.psi.pcpu = alloc_percpu(psi_group_cpu);
     if (!cgroup.psi.pcpu) {
     kfree(cgroup.psi);
     return -ENOMEM;
@@ -1046,10 +1300,9 @@ pub unsafe extern "C" fn psi_cgroup_alloc(cgroup: *mut cgroup) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn psi_cgroup_free(cgroup: *mut cgroup) {
-    void psi_cgroup_free(struct cgroup *cgroup)
-    {
-    if (!static_branch_likely(&psi_cgroups_enabled))
+    if (!static_branch_likely(&psi_cgroups_enabled)) {
     return;
+    }
     cancel_delayed_work_sync(&cgroup.psi.avgs_work);
 //
 // A psi_schedule_rtpoll_work() call racing the last trigger's
@@ -1076,11 +1329,9 @@ pub unsafe extern "C" fn psi_cgroup_free(cgroup: *mut cgroup) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_move_task(task: *mut task_struct, to: *mut css_set) {
-    void cgroup_move_task(struct task_struct *task, struct css_set *to)
-    {
-    unsigned int task_flags;
-    struct rq_flags rf;
-    struct rq *rq;
+    let mut task_flags = 0;
+pub static mut rf: usize = 0;
+pub static mut rq: *mut c_void = core::ptr::null_mut();
     if (!static_branch_likely(&psi_cgroups_enabled)) {
 //
 // Lame to do this here, but the scheduler cannot be locked
@@ -1115,23 +1366,23 @@ pub unsafe extern "C" fn cgroup_move_task(task: *mut task_struct, to: *mut css_s
 // Don't rely on the scheduling state. Use psi_flags instead.
 //
     task_flags = task.psi_flags;
-    if (task_flags)
+    if (task_flags) {
     psi_task_change(task, task_flags, 0);
+    }
 // See comment above
     rcu_assign_pointer(task.cgroups, to);
-    if (task_flags)
+    if (task_flags) {
     psi_task_change(task, 0, task_flags);
+    }
     task_rq_unlock(rq, task, &rf);
     }
 #[no_mangle]
 pub unsafe extern "C" fn psi_cgroup_restart(group: *mut psi_group) {
-    void psi_cgroup_restart(struct psi_group *group)
-    {
-    int cpu;
+    let mut cpu = 0;
 //
 // After we disable psi_group->enabled, we don't actually
 // stop percpu tasks accounting in each psi_group_cpu,
-// instead only stop test_states() loop, record_times()
+instead only stop test_states() loop, record_times()
 // and averaging worker, see psi_group_change() for details.
 //
 // When disable cgroup PSI, this function has nothing to sync
@@ -1143,10 +1394,11 @@ pub unsafe extern "C" fn psi_cgroup_restart(group: *mut psi_group) {
 // and restart groupc->state_start from now, use .clear = .set = 0
 // here since no task status really changed.
 //
-    if (!group.enabled)
+    if (!group.enabled) {
     return;
+    }
     for_each_possible_cpu(cpu) {
-    u64 now;
+    let mut now = 0;
     guard(rq_lock_irq)(cpu_rq(cpu));
     psi_write_begin(cpu);
     now = cpu_clock(cpu);
@@ -1156,36 +1408,38 @@ pub unsafe extern "C" fn psi_cgroup_restart(group: *mut psi_group) {
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn psi_show(m: *mut seq_file, group: *mut psi_group, res: enum psi_res) -> c_int {
-    int psi_show(struct seq_file *m, struct psi_group *group, enum psi_res res)
-    {
-    let mut only_full: bool = false;
-    int full;
-    u64 now;
-    if (static_branch_likely(&psi_disabled))
+pub unsafe extern "C" fn psi_show(m: *mut seq_file, group: *mut psi_group, res: psi_res) -> c_int {
+pub static mut only_full: bool = false;
+    let mut full = 0;
+    let mut now = 0;
+    if (static_branch_likely(&psi_disabled)) {
     return -EOPNOTSUPP;
+    }
 
-    if (!irqtime_enabled() && res == PSI_IRQ)
+    if (!irqtime_enabled() && res == PSI_IRQ) {
     return -EOPNOTSUPP;
+    }
 
 // Update averages before reporting them
     mutex_lock(&group.avgs_lock);
     now = sched_clock();
     collect_percpu_times(group, PSI_AVGS, core::ptr::null_mut());
-    if (now >= group.avg_next_update)
+    if (now >= group.avg_next_update) {
     group.avg_next_update = update_averages(group, now);
+    }
     mutex_unlock(&group.avgs_lock);
 
     only_full = res == PSI_IRQ;
 
-    for (full = 0; full < 2 - only_full; full++) {
+    while (full < 2 - only_full) {
     unsigned long avg[3] = { 0, };
-    let mut total: u64 = 0;
-    int w;
+pub static mut total: u64 = 0;
+    let mut w = 0;
 // CPU FULL is undefined at the system level
     if (!(group == &psi_system && res == PSI_CPU && full)) {
-    for (w = 0; w < 3; w++)
+    for (w = 0; w < 3; w++) {
     avg[w] = group.avg[res * 2 + full][w];
+    }
     total = div_u64(group.total[PSI_AVGS][res * 2 + full],
     NSEC_PER_USEC);
     }
@@ -1207,12 +1461,11 @@ pub unsafe extern "C" fn psi_show(m: *mut seq_file, group: *mut psi_group, res: 
 //
 #[no_mangle]
 pub unsafe extern "C" fn psi_trigger_create_rtpoll_worker(group: *mut psi_group) -> c_int {
-    int psi_trigger_create_rtpoll_worker(struct psi_group *group)
-    {
-    struct task_struct *task;
+pub static mut task: *mut c_void = core::ptr::null_mut();
     task = kthread_create(psi_rtpoll_worker, group, "psimon");
-    if (IS_ERR(task))
+    if (IS_ERR(task)) {
     return PTR_ERR(task);
+    }
     scoped_guard(mutex, &group.rtpoll_trigger_lock) {
     if (!rcu_access_pointer(group.rtpoll_task)) {
     atomic_set(&group.rtpoll_wakeup, 0);
@@ -1229,52 +1482,58 @@ pub unsafe extern "C" fn psi_trigger_create_rtpoll_worker(group: *mut psi_group)
     kthread_stop(task);
     return 0;
     }
-    struct psi_trigger *psi_trigger_create(struct psi_group *group, char *buf,
-    enum psi_res res, struct file *file,
-    struct kernfs_open_file *of,
-    bool *need_rtpoll_worker)
-    {
-    struct psi_trigger *t;
+#[no_mangle]
+pub unsafe extern "C" fn psi_trigger_create(group: *mut psi_group, buf: *mut c_char, res: psi_res, file: *mut file, of: *mut kernfs_open_file, need_rtpoll_worker: *mut bool) -> *mut c_void {
+pub static mut t: *mut c_void = core::ptr::null_mut();
     enum psi_states state;
-    u32 threshold_us;
-    bool privileged;
-    u32 window_us;
+    let mut threshold_us = 0;
+    let mut privileged = 0;
+    let mut window_us = 0;
 // need_rtpoll_worker = false;
-    if (static_branch_likely(&psi_disabled))
+    if (static_branch_likely(&psi_disabled)) {
     return ERR_PTR(-EOPNOTSUPP);
+    }
 //
 // Checking the privilege here on file->f_cred implies that a privileged user
 // could open the file and delegate the write to an unprivileged one.
 //
     privileged = cap_raised(file.f_cred.cap_effective, CAP_SYS_RESOURCE);
-    if (sscanf(buf, "some %u %u", &threshold_us, &window_us) == 2)
+    if (sscanf(buf, "some %u %u", &threshold_us, &window_us) == 2) {
     state = PSI_IO_SOME + res * 2;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: sscanf(buf, %u": "full %u, _arg: &threshold_us, 2: &window_us) ==) -> else {
-    else if (sscanf(buf, "full %u %u", &threshold_us, &window_us) == 2)
+    }
+
+    else if (sscanf(buf, "full %u %u", &threshold_us, &window_us) == 2) {
     state = PSI_IO_FULL + res * 2;
-    else
+    }
+    else {
     return ERR_PTR(-EINVAL);
+    }
 
-    if (res == PSI_IRQ && --state != PSI_IRQ_FULL)
+    if (res == PSI_IRQ && --state != PSI_IRQ_FULL) {
     return ERR_PTR(-EINVAL);
+    }
 
-    if (state >= PSI_NONIDLE)
+    if (state >= PSI_NONIDLE) {
     return ERR_PTR(-EINVAL);
-    if (window_us == 0 || window_us > WINDOW_MAX_US)
+    }
+    if (window_us == 0 || window_us > WINDOW_MAX_US) {
     return ERR_PTR(-EINVAL);
+    }
 //
 // Unprivileged users can only use 2s windows so that averages aggregation
 // work is used, and no RT threads need to be spawned.
 //
-    if (!privileged && window_us % 2000000)
+    if (!privileged && window_us % 2000000) {
     return ERR_PTR(-EINVAL);
+    }
 // Check threshold
-    if (threshold_us == 0 || threshold_us > window_us)
+    if (threshold_us == 0 || threshold_us > window_us) {
     return ERR_PTR(-EINVAL);
+    }
     t = kmalloc_obj(*t);
-    if (!t)
+    if (!t) {
     return ERR_PTR(-ENOMEM);
+    }
     t.group = group;
     t.state = state;
     t.threshold = threshold_us * NSEC_PER_USEC;
@@ -1284,8 +1543,9 @@ pub unsafe extern "C" fn if(_arg: sscanf(buf, %u": "full %u, _arg: &threshold_us
     t.event = 0;
     t.last_event_time = 0;
     t.of = of;
-    if (!of)
+    if (!of) {
     init_waitqueue_head(&t.event_wait);
+    }
     t.pending_event = false;
     t.aggregator = privileged ? PSI_POLL : PSI_AVGS;
     if (privileged) {
@@ -1307,26 +1567,27 @@ pub unsafe extern "C" fn if(_arg: sscanf(buf, %u": "full %u, _arg: &threshold_us
     }
 #[no_mangle]
 pub unsafe extern "C" fn psi_trigger_destroy(t: *mut psi_trigger) {
-    void psi_trigger_destroy(struct psi_trigger *t)
-    {
-    struct psi_group *group;
-    struct task_struct *task_to_destroy = core::ptr::null_mut();
+pub static mut group: *mut c_void = core::ptr::null_mut();
+    let mut task_to_destroy = core::ptr::null_mut();
 //
 // We do not check psi_disabled since it might have been disabled after
 // the trigger got created.
 //
-    if (!t)
+    if (!t) {
     return;
+    }
     group = t.group;
 //
 // Wakeup waiters to stop polling and clear the queue to prevent it from
 // being accessed later. Can happen if cgroup is deleted from under a
 // polling process.
 //
-    if (t.of)
+    if (t.of) {
     kernfs_notify(t.of.kn);
-    else
+    }
+    else {
     wake_up_interruptible(&t.event_wait);
+    }
     if (t.aggregator == PSI_AVGS) {
     mutex_lock(&group.avgs_lock);
     if (!list_empty(&t.node)) {
@@ -1337,20 +1598,22 @@ pub unsafe extern "C" fn psi_trigger_destroy(t: *mut psi_trigger) {
     } else {
     mutex_lock(&group.rtpoll_trigger_lock);
     if (!list_empty(&t.node)) {
-    struct psi_trigger *tmp;
-    let mut period: u64 = ULLONG_MAX;
+pub static mut tmp: *mut c_void = core::ptr::null_mut();
+pub static mut period: u64 = 0;
     list_del(&t.node);
     group.rtpoll_nr_triggers[t.state]--;
-    if (!group.rtpoll_nr_triggers[t.state])
+    if (!group.rtpoll_nr_triggers[t.state]) {
     group.rtpoll_states &= ~(1 << t.state);
+    }
 //
 // Reset min update period for the remaining triggers
 // iff the destroying trigger had the min window size.
 //
     if (group.rtpoll_min_period == div_u64(t.win.size, UPDATES_PER_WINDOW)) {
-    list_for_each_entry(tmp, &group.rtpoll_triggers, node)
+    list_for_each_entry(tmp, &group.rtpoll_triggers, node) {
     period = min(period, div_u64(tmp.win.size,
     UPDATES_PER_WINDOW));
+    }
     group.rtpoll_min_period = period;
     }
 // Destroy rtpoll_task when the last trigger is destroyed
@@ -1386,77 +1649,71 @@ pub unsafe extern "C" fn psi_trigger_destroy(t: *mut psi_trigger) {
     }
     kfree(t);
     }
-    __poll_t psi_trigger_poll(void **trigger_ptr,
-    struct file *file, poll_table *wait)
+    __poll_t psi_trigger_poll(void **trigger_ptr, file *file, poll_table *wait)
     {
-    let mut ret: __poll_t = DEFAULT_POLLMASK;
-    struct psi_trigger *t;
-    if (static_branch_likely(&psi_disabled))
+pub static mut ret: __poll_t = 0;
+pub static mut t: *mut c_void = core::ptr::null_mut();
+    if (static_branch_likely(&psi_disabled)) {
     return DEFAULT_POLLMASK | EPOLLERR | EPOLLPRI;
+    }
     t = smp_load_acquire(trigger_ptr);
-    if (!t)
+    if (!t) {
     return DEFAULT_POLLMASK | EPOLLERR | EPOLLPRI;
-    if (t.of)
+    }
+    if (t.of) {
     kernfs_generic_poll(t.of, wait);
-    else
+    }
+    else {
     poll_wait(file, &t.event_wait, wait);
-    if (cmpxchg(&t.event, 1, 0) == 1)
+    }
+    if (cmpxchg(&t.event, 1, 0) == 1) {
     ret |= EPOLLPRI;
+    }
     return ret;
     }
 
 #[no_mangle]
 unsafe extern "C" fn psi_io_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int psi_io_show(struct seq_file *m, void *v)
-    {
     return psi_show(m, &psi_system, PSI_IO);
     }
 #[no_mangle]
 unsafe extern "C" fn psi_memory_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int psi_memory_show(struct seq_file *m, void *v)
-    {
     return psi_show(m, &psi_system, PSI_MEM);
     }
 #[no_mangle]
 unsafe extern "C" fn psi_cpu_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int psi_cpu_show(struct seq_file *m, void *v)
-    {
     return psi_show(m, &psi_system, PSI_CPU);
     }
 #[no_mangle]
 unsafe extern "C" fn psi_io_open(inode: *mut inode, file: *mut file) -> c_int {
-    static int psi_io_open(struct inode *inode, struct file *file)
-    {
     return single_open(file, psi_io_show, core::ptr::null_mut());
     }
 #[no_mangle]
 unsafe extern "C" fn psi_memory_open(inode: *mut inode, file: *mut file) -> c_int {
-    static int psi_memory_open(struct inode *inode, struct file *file)
-    {
     return single_open(file, psi_memory_show, core::ptr::null_mut());
     }
 #[no_mangle]
 unsafe extern "C" fn psi_cpu_open(inode: *mut inode, file: *mut file) -> c_int {
-    static int psi_cpu_open(struct inode *inode, struct file *file)
-    {
     return single_open(file, psi_cpu_show, core::ptr::null_mut());
     }
-    static ssize_t psi_write(struct file *file, const char __user *user_buf,
-    size_t nbytes, enum psi_res res)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn psi_write(file: *mut file, user_buf: *mut c_char, nbytes: size_t, res: psi_res) -> ssize_t {
     char buf[32];
-    size_t buf_size;
-    struct seq_file *seq;
-    struct psi_trigger *new;
-    bool need_rtpoll_worker;
-    int ret;
-    if (static_branch_likely(&psi_disabled))
+    let mut buf_size = 0;
+pub static mut seq: *mut c_void = core::ptr::null_mut();
+pub static mut new: *mut c_void = core::ptr::null_mut();
+    let mut need_rtpoll_worker = 0;
+    let mut ret = 0;
+    if (static_branch_likely(&psi_disabled)) {
     return -EOPNOTSUPP;
-    if (!nbytes)
+    }
+    if (!nbytes) {
     return -EINVAL;
-    buf_size = min(nbytes, sizeof(buf));
-    if (copy_from_user(buf, user_buf, buf_size))
+    }
+    buf_size = min(nbytes, sizeof!(buf));
+    if (copy_from_user(buf, user_buf, buf_size)) {
     return -EFAULT;
+    }
     buf[buf_size - 1] = '\0';
     seq = file.private_data;
 // Take seq->lock to protect seq->private from concurrent writes
@@ -1484,91 +1741,49 @@ unsafe extern "C" fn psi_cpu_open(inode: *mut inode, file: *mut file) -> c_int {
     mutex_unlock(&seq.lock);
     return nbytes;
     }
-    static ssize_t psi_io_write(struct file *file, const char __user *user_buf,
-    size_t nbytes, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn psi_io_write(file: *mut file, user_buf: *mut c_char, nbytes: size_t, ppos: *mut loff_t) -> ssize_t {
     return psi_write(file, user_buf, nbytes, PSI_IO);
     }
-    static ssize_t psi_memory_write(struct file *file, const char __user *user_buf,
-    size_t nbytes, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn psi_memory_write(file: *mut file, user_buf: *mut c_char, nbytes: size_t, ppos: *mut loff_t) -> ssize_t {
     return psi_write(file, user_buf, nbytes, PSI_MEM);
     }
-    static ssize_t psi_cpu_write(struct file *file, const char __user *user_buf,
-    size_t nbytes, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn psi_cpu_write(file: *mut file, user_buf: *mut c_char, nbytes: size_t, ppos: *mut loff_t) -> ssize_t {
     return psi_write(file, user_buf, nbytes, PSI_CPU);
     }
 #[no_mangle]
 unsafe extern "C" fn psi_fop_poll(file: *mut file, wait: *mut poll_table) -> __poll_t {
-    static __poll_t psi_fop_poll(struct file *file, poll_table *wait)
-    {
-    struct seq_file *seq = file.private_data;
+    let mut seq = file.private_data;
     return psi_trigger_poll(&seq.private, file, wait);
     }
 #[no_mangle]
 unsafe extern "C" fn psi_fop_release(inode: *mut inode, file: *mut file) -> c_int {
-    static int psi_fop_release(struct inode *inode, struct file *file)
-    {
-    struct seq_file *seq = file.private_data;
+    let mut seq = file.private_data;
     psi_trigger_destroy(seq.private);
     return single_release(inode, file);
     }
-    static const struct proc_ops psi_io_proc_ops = {
-    .proc_open	= psi_io_open,
-    .proc_read	= seq_read,
-    .proc_lseek	= seq_lseek,
-    .proc_write	= psi_io_write,
-    .proc_poll	= psi_fop_poll,
-    .proc_release	= psi_fop_release,
-    };
-    static const struct proc_ops psi_memory_proc_ops = {
-    .proc_open	= psi_memory_open,
-    .proc_read	= seq_read,
-    .proc_lseek	= seq_lseek,
-    .proc_write	= psi_memory_write,
-    .proc_poll	= psi_fop_poll,
-    .proc_release	= psi_fop_release,
-    };
-    static const struct proc_ops psi_cpu_proc_ops = {
-    .proc_open	= psi_cpu_open,
-    .proc_read	= seq_read,
-    .proc_lseek	= seq_lseek,
-    .proc_write	= psi_cpu_write,
-    .proc_poll	= psi_fop_poll,
-    .proc_release	= psi_fop_release,
-    };
+pub static mut proc_ops: usize = 0;
+pub static mut proc_ops: usize = 0;
+pub static mut proc_ops: usize = 0;
 
 #[no_mangle]
 unsafe extern "C" fn psi_irq_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int psi_irq_show(struct seq_file *m, void *v)
-    {
     return psi_show(m, &psi_system, PSI_IRQ);
     }
 #[no_mangle]
 unsafe extern "C" fn psi_irq_open(inode: *mut inode, file: *mut file) -> c_int {
-    static int psi_irq_open(struct inode *inode, struct file *file)
-    {
     return single_open(file, psi_irq_show, core::ptr::null_mut());
     }
-    static ssize_t psi_irq_write(struct file *file, const char __user *user_buf,
-    size_t nbytes, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn psi_irq_write(file: *mut file, user_buf: *mut c_char, nbytes: size_t, ppos: *mut loff_t) -> ssize_t {
     return psi_write(file, user_buf, nbytes, PSI_IRQ);
     }
-    static const struct proc_ops psi_irq_proc_ops = {
-    .proc_open	= psi_irq_open,
-    .proc_read	= seq_read,
-    .proc_lseek	= seq_lseek,
-    .proc_write	= psi_irq_write,
-    .proc_poll	= psi_fop_poll,
-    .proc_release	= psi_fop_release,
-    };
+pub static mut proc_ops: usize = 0;
 
 #[no_mangle]
-unsafe extern "C" fn psi_proc_init() -> int __init {
-    static int __init psi_proc_init(void)
-    {
+unsafe extern "C" fn psi_proc_init() -> c_int {
     if (psi_enable) {
     proc_mkdir("pressure", core::ptr::null_mut());
     proc_create("pressure/io", 0666, core::ptr::null_mut(), &psi_io_proc_ops);
@@ -1580,4 +1795,4 @@ unsafe extern "C" fn psi_proc_init() -> int __init {
     }
     return 0;
     }
-    module_init(psi_proc_init);
+    module_init!(psi_proc_init);

@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -66,56 +316,37 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 // Macro flag: #define DISABLE_BRANCH_PROFILING
 
-    let mut prove_locking: static int = 1;
-    module_param(prove_locking, int, 0644);
+pub static mut prove_locking: int = 1;
+    module_param!(prove_locking, int, 0644);
 
 pub const prove_locking: c_int = 0;
 
-    let mut lock_stat: static int = 1;
-    module_param(lock_stat, int, 0644);
+pub static mut lock_stat: int = 1;
+    module_param!(lock_stat, int, 0644);
 
 pub const lock_stat: c_int = 0;
 
-    static const struct ctl_table kern_lockdep_table[] = {
-
-    {
-    .procname       = "prove_locking",
-    .data           = &prove_locking,
-    .maxlen         = sizeof(int),
-    .mode           = 0644,
-    .proc_handler   = proc_dointvec,
-    },
-
-    {
-    .procname       = "lock_stat",
-    .data           = &lock_stat,
-    .maxlen         = sizeof(int),
-    .mode           = 0644,
-    .proc_handler   = proc_dointvec,
-    },
-
-    };
+pub static mut ctl_table: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn kernel_lockdep_sysctls_init() -> __init int {
-    static __init int kernel_lockdep_sysctls_init(void)
-    {
     register_sysctl_init("kernel", kern_lockdep_table);
     return 0;
     }
-    late_initcall(kernel_lockdep_sysctls_init);
+    late_initcall!(kernel_lockdep_sysctls_init);
 
-    DEFINE_PER_CPU(unsigned int, lockdep_recursion);
+pub static mut unsigned int: usize = 0;
     EXPORT_PER_CPU_SYMBOL_GPL(lockdep_recursion);
 #[no_mangle]
 unsafe extern "C" fn lockdep_enabled() -> __always_inline bool {
-    static __always_inline bool lockdep_enabled(void)
-    {
-    if (!debug_locks)
+    if (!debug_locks) {
     return false;
-    if (this_cpu_read(lockdep_recursion))
+    }
+    if (this_cpu_read(lockdep_recursion)) {
     return false;
-    if (current.lockdep_recursion)
+    }
+    if (current.lockdep_recursion) {
     return false;
+    }
     return true;
     }
 //
@@ -126,12 +357,10 @@ unsafe extern "C" fn lockdep_enabled() -> __always_inline bool {
 // to use a raw spinlock - we really dont want the spinlock
 // code to recurse back into the lockdep code...
 //
-    let mut __lock: static arch_spinlock_t = (arch_spinlock_t)__ARCH_SPIN_LOCK_UNLOCKED;
-    static struct task_struct *__owner;
+pub static mut __lock: arch_spinlock_t = 0;
+pub static mut __owner: *mut c_void = core::ptr::null_mut();
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_lock() {
-    static inline void lockdep_lock(void)
-    {
     DEBUG_LOCKS_WARN_ON(!irqs_disabled());
     __this_cpu_inc(lockdep_recursion);
     arch_spin_lock(&__lock);
@@ -139,11 +368,10 @@ pub unsafe extern "C" fn lockdep_lock() {
     }
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_unlock() {
-    static inline void lockdep_unlock(void)
-    {
     DEBUG_LOCKS_WARN_ON(!irqs_disabled());
-    if (debug_locks && DEBUG_LOCKS_WARN_ON(__owner != current))
+    if (debug_locks && DEBUG_LOCKS_WARN_ON(__owner != current)) {
     return;
+    }
     __owner = core::ptr::null_mut();
     arch_spin_unlock(&__lock);
     __this_cpu_dec(lockdep_recursion);
@@ -151,16 +379,12 @@ pub unsafe extern "C" fn lockdep_unlock() {
 
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_assert_locked() -> bool {
-    static inline bool lockdep_assert_locked(void)
-    {
     return DEBUG_LOCKS_WARN_ON(__owner != current);
     }
 
-    static struct task_struct *lockdep_selftest_task_struct;
+pub static mut lockdep_selftest_task_struct: *mut c_void = core::ptr::null_mut();
 #[no_mangle]
 unsafe extern "C" fn graph_lock() -> c_int {
-    static int graph_lock(void)
-    {
     lockdep_lock();
     lockevent_inc(lockdep_lock);
 //
@@ -177,8 +401,6 @@ unsafe extern "C" fn graph_lock() -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn graph_unlock() {
-    static inline void graph_unlock(void)
-    {
     lockdep_unlock();
     }
 //
@@ -187,15 +409,13 @@ pub unsafe extern "C" fn graph_unlock() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn debug_locks_off_graph_unlock() -> c_int {
-    static inline int debug_locks_off_graph_unlock(void)
-    {
-    let mut ret: c_int = debug_locks_off();
+pub static mut ret: c_int = 0;
     lockdep_unlock();
     return ret;
     }
-    unsigned long nr_list_entries;
+    let mut nr_list_entries = 0;
     static struct lock_list list_entries[MAX_LOCKDEP_ENTRIES];
-    static DECLARE_BITMAP(list_entries_in_use, MAX_LOCKDEP_ENTRIES);
+pub static mut list_entries_in_use: usize = 0;
 //
 // All data structures here are protected by the global debug_lock.
 //
@@ -204,15 +424,15 @@ pub unsafe extern "C" fn debug_locks_off_graph_unlock() -> c_int {
 //
 
     static struct hlist_head lock_keys_hash[KEYHASH_SIZE];
-    unsigned long nr_lock_classes;
-    unsigned long nr_zapped_classes;
-    unsigned long nr_dynamic_keys;
-    unsigned long max_lock_class_idx;
+    let mut nr_lock_classes = 0;
+    let mut nr_zapped_classes = 0;
+    let mut nr_dynamic_keys = 0;
+    let mut max_lock_class_idx = 0;
     struct lock_class lock_classes[MAX_LOCKDEP_KEYS];
-    DECLARE_BITMAP(lock_classes_in_use, MAX_LOCKDEP_KEYS);
-    static inline struct lock_class *hlock_class(struct held_lock *hlock)
-    {
-    let mut class_idx: c_uint = hlock.class_idx;
+pub static mut lock_classes_in_use: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn hlock_class(hlock: *mut held_lock) -> *mut c_void {
+pub static mut class_idx: c_uint = 0;
 // Don't re-read hlock->class_idx, can't use READ_ONCE() on bitfield
     barrier();
     if (!test_bit(class_idx, lock_classes_in_use)) {
@@ -229,110 +449,105 @@ pub unsafe extern "C" fn debug_locks_off_graph_unlock() -> c_int {
     return lock_classes + class_idx;
     }
 
-    static DEFINE_PER_CPU(struct lock_class_stats[MAX_LOCKDEP_KEYS], cpu_lock_stats);
+pub static mut struct lock_class_stats[MAX_LOCKDEP_KEYS]: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn lockstat_clock() -> u64 {
-    static inline u64 lockstat_clock(void)
-    {
     return local_clock();
     }
 #[no_mangle]
 unsafe extern "C" fn lock_point(points[]: c_ulong, ip: c_ulong) -> c_int {
-    static int lock_point(unsigned long points[], unsigned long ip)
-    {
-    int i;
-    for (i = 0; i < LOCKSTAT_POINTS; i++) {
+    let mut i = 0;
+    while (i < LOCKSTAT_POINTS) {
     if (points[i] == 0) {
     points[i] = ip;
     break;
     }
-    if (points[i] == ip)
+    if (points[i] == ip) {
     break;
+    }
     }
     return i;
     }
 #[no_mangle]
 unsafe extern "C" fn lock_time_inc(lt: *mut lock_time, time: u64) {
-    static void lock_time_inc(struct lock_time *lt, u64 time)
-    {
-    if (time > lt.max)
+    if (time > lt.max) {
     lt.max = time;
-    if (time < lt.min || !lt.nr)
+    }
+    if (time < lt.min || !lt.nr) {
     lt.min = time;
+    }
     lt.total += time;
-    lt.nr++;
+    lt.nr += 1;
     }
 #[no_mangle]
 pub unsafe extern "C" fn lock_time_add(src: *mut lock_time, dst: *mut lock_time) {
-    static inline void lock_time_add(struct lock_time *src, struct lock_time *dst)
-    {
-    if (!src.nr)
+    if (!src.nr) {
     return;
-    if (src.max > dst.max)
+    }
+    if (src.max > dst.max) {
     dst.max = src.max;
-    if (src.min < dst.min || !dst.nr)
+    }
+    if (src.min < dst.min || !dst.nr) {
     dst.min = src.min;
+    }
     dst.total += src.total;
     dst.nr += src.nr;
     }
 #[no_mangle]
 pub unsafe extern "C" fn lock_stats(class: *mut lock_class, stats: *mut lock_class_stats) {
-    void lock_stats(struct lock_class *class, struct lock_class_stats *stats)
-    {
-    int cpu, i;
-    memset(stats, 0, sizeof(struct lock_class_stats));
+    let mut cpu = 0;
+    let mut i = 0;
+    memset(stats, 0, sizeof!(lock_class_stats));
     for_each_possible_cpu(cpu) {
-    struct lock_class_stats *pcs =
-    &per_cpu(cpu_lock_stats, cpu)[class - lock_classes];
-    for (i = 0; i < ARRAY_SIZE(stats.contention_point); i++)
+    let mut pcs = &per_cpu(cpu_lock_stats, cpu)[class - lock_classes];
+    for (i = 0; i < ARRAY_SIZE!(stats.contention_point); i++) {
     stats.contention_point[i] += pcs.contention_point[i];
-    for (i = 0; i < ARRAY_SIZE(stats.contending_point); i++)
+    }
+    for (i = 0; i < ARRAY_SIZE!(stats.contending_point); i++) {
     stats.contending_point[i] += pcs.contending_point[i];
+    }
     lock_time_add(&pcs.read_waittime, &stats.read_waittime);
     lock_time_add(&pcs.write_waittime, &stats.write_waittime);
     lock_time_add(&pcs.read_holdtime, &stats.read_holdtime);
     lock_time_add(&pcs.write_holdtime, &stats.write_holdtime);
-    for (i = 0; i < ARRAY_SIZE(stats.bounces); i++)
+    for (i = 0; i < ARRAY_SIZE!(stats.bounces); i++) {
     stats.bounces[i] += pcs.bounces[i];
+    }
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn clear_lock_stats(class: *mut lock_class) {
-    void clear_lock_stats(struct lock_class *class)
-    {
-    int cpu;
+    let mut cpu = 0;
     for_each_possible_cpu(cpu) {
-    struct lock_class_stats *cpu_stats =
-    &per_cpu(cpu_lock_stats, cpu)[class - lock_classes];
-    memset(cpu_stats, 0, sizeof(struct lock_class_stats));
+    let mut cpu_stats = &per_cpu(cpu_lock_stats, cpu)[class - lock_classes];
+    memset(cpu_stats, 0, sizeof!(lock_class_stats));
     }
-    memset(class.contention_point, 0, sizeof(class.contention_point));
-    memset(class.contending_point, 0, sizeof(class.contending_point));
+    memset(class.contention_point, 0, sizeof!(class.contention_point));
+    memset(class.contending_point, 0, sizeof!(class.contending_point));
     }
-    static struct lock_class_stats *get_lock_stats(struct lock_class *class)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn get_lock_stats(class: *mut lock_class) -> *mut c_void {
     return &this_cpu_ptr(cpu_lock_stats)[class - lock_classes];
     }
 #[no_mangle]
 unsafe extern "C" fn lock_release_holdtime(hlock: *mut held_lock) {
-    static void lock_release_holdtime(struct held_lock *hlock)
-    {
-    struct lock_class_stats *stats;
-    u64 holdtime;
-    if (!lock_stat)
+pub static mut stats: *mut c_void = core::ptr::null_mut();
+    let mut holdtime = 0;
+    if (!lock_stat) {
     return;
+    }
     holdtime = lockstat_clock() - hlock.holdtime_stamp;
     stats = get_lock_stats(hlock_class(hlock));
-    if (hlock.read)
+    if (hlock.read) {
     lock_time_inc(&stats.read_holdtime, holdtime);
-    else
+    }
+    else {
     lock_time_inc(&stats.write_holdtime, holdtime);
+    }
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn lock_release_holdtime(hlock: *mut held_lock) {
-    static inline void lock_release_holdtime(struct held_lock *hlock)
-    {
     }
 
 //
@@ -341,8 +556,8 @@ pub unsafe extern "C" fn lock_release_holdtime(hlock: *mut held_lock) {
 // elements. These elements are linked together by the lock_entry member in
 // struct lock_class.
 //
-    static LIST_HEAD(all_lock_classes);
-    static LIST_HEAD(free_lock_classes);
+pub static mut all_lock_classes: usize = 0;
+pub static mut free_lock_classes: usize = 0;
 //
 // struct pending_free - information about data structures about to be freed
 // @zapped: Head of a list with struct lock_class elements.
@@ -368,9 +583,9 @@ pub struct pending_free {
 // @pf:        Array with information about data structures about to be freed.
 //
     static struct delayed_free {
-    struct rcu_head		rcu_head;
-    int			index;
-    int			scheduled;
+pub static mut rcu_head: usize = 0;
+    let mut index = 0;
+    let mut scheduled = 0;
     struct pending_free	pf[2];
     } delayed_free;
 //
@@ -389,15 +604,11 @@ pub struct pending_free {
 //
 #[no_mangle]
 pub unsafe extern "C" fn hlock_id(hlock: *mut held_lock) -> u16 {
-    static inline u16 hlock_id(struct held_lock *hlock)
-    {
-    BUILD_BUG_ON(MAX_LOCKDEP_KEYS_BITS + 2 > 16);
+    BUILD_BUG_ON!(MAX_LOCKDEP_KEYS_BITS + 2 > 16);
     return (hlock.class_idx | (hlock.read << MAX_LOCKDEP_KEYS_BITS));
     }
 #[no_mangle]
 pub unsafe extern "C" fn chain_hlock_class_idx(hlock_id: u16) -> __maybe_unused unsigned int {
-    static inline __maybe_unused unsigned int chain_hlock_class_idx(u16 hlock_id)
-    {
     return hlock_id & (MAX_LOCKDEP_KEYS - 1);
     }
 //
@@ -408,37 +619,28 @@ pub unsafe extern "C" fn chain_hlock_class_idx(hlock_id: u16) -> __maybe_unused 
 //
 #[no_mangle]
 pub unsafe extern "C" fn iterate_chain_key(key: u64, idx: u32) -> u64 {
-    static inline u64 iterate_chain_key(u64 key, u32 idx)
-    {
-    let mut k0: u32 = key, k1 = key >> 32;
+pub static mut k0: u32 = 0;
     __jhash_mix(idx, k0, k1); /* Macro that modifies arguments! */
     return k0 | (u64)k1 << 32;
     }
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_init_task(task: *mut task_struct) {
-    void lockdep_init_task(struct task_struct *task)
-    {
     task.lockdep_depth = 0; /* no locks held yet */
     task.curr_chain_key = INITIAL_CHAIN_KEY;
     task.lockdep_recursion = 0;
     }
 #[no_mangle]
 unsafe extern "C" fn lockdep_recursion_inc() -> __always_inline void {
-    static __always_inline void lockdep_recursion_inc(void)
-    {
     __this_cpu_inc(lockdep_recursion);
     }
 #[no_mangle]
 unsafe extern "C" fn lockdep_recursion_finish() -> __always_inline void {
-    static __always_inline void lockdep_recursion_finish(void)
-    {
-    if (WARN_ON_ONCE(__this_cpu_dec_return(lockdep_recursion)))
+    if (WARN_ON_ONCE!(__this_cpu_dec_return(lockdep_recursion))) {
     __this_cpu_write(lockdep_recursion, 0);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_set_selftest_task(task: *mut task_struct) {
-    void lockdep_set_selftest_task(struct task_struct *task)
-    {
     lockdep_selftest_task_struct = task;
     }
 //
@@ -452,16 +654,16 @@ pub const VERY_VERBOSE: c_int = 0;
 //
 #[no_mangle]
 unsafe extern "C" fn class_filter(class: *mut lock_class) -> c_int {
-    static int class_filter(struct lock_class *class)
-    {
 
 // Example
     if (class.name_version == 1 &&
-    !strcmp(class.name, "lockname"))
+    !strcmp(class.name, "lockname")) {
     return 1;
+    }
     if (class.name_version == 1 &&
-    !strcmp(class.name, "&struct.lockfield"))
+    !strcmp(class.name, "&struct.lockfield")) {
     return 1;
+    }
 
 // Filter everything else. 1 would be to allow everything else
     return 0;
@@ -469,8 +671,6 @@ unsafe extern "C" fn class_filter(class: *mut lock_class) -> c_int {
 
 #[no_mangle]
 unsafe extern "C" fn verbose(class: *mut lock_class) -> c_int {
-    static int verbose(struct lock_class *class)
-    {
 
     return class_filter(class);
 
@@ -478,15 +678,13 @@ unsafe extern "C" fn verbose(class: *mut lock_class) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn print_lockdep_off(bug_msg: *const c_char) {
-    static void print_lockdep_off(const char *bug_msg)
-    {
-    printk(KERN_DEBUG "%s\n", bug_msg);
-    printk(KERN_DEBUG "turning off the locking correctness validator.\n");
+    printk("%s\n", bug_msg);
+    printk("turning off the locking correctness validator.\n");
 
-    printk(KERN_DEBUG "Please attach the output of /proc/lock_stat to the bug report\n");
+    printk("Please attach the output of /proc/lock_stat to the bug report\n");
 
     }
-    unsigned long nr_stack_trace_entries;
+    let mut nr_stack_trace_entries = 0;
 
 //
 // struct lock_trace - single stack backtrace
@@ -501,10 +699,10 @@ pub struct lock_trace {
     pub hash_entry: hlist_node,
     pub hash: u32,
     pub nr_entries: u32,
-    pub long)): unsigned long entries[] __aligned(sizeof(unsigned,
+    pub long)): unsigned long entries[] __aligned(sizeof!(unsigned,
 }
 
-    (sizeof(struct lock_trace) / sizeof(unsigned long))
+    (sizeof!(lock_trace) / sizeof!(unsigned long))
 //
 // Stack-trace: sequence of lock_trace structures. Protected by the graph_lock.
 //
@@ -512,26 +710,26 @@ pub struct lock_trace {
     static struct hlist_head stack_trace_hash[STACK_TRACE_HASH_SIZE];
 #[no_mangle]
 unsafe extern "C" fn traces_identical(t1: *mut lock_trace, t2: *mut lock_trace) -> bool {
-    static bool traces_identical(struct lock_trace *t1, struct lock_trace *t2)
-    {
     return t1.hash == t2.hash && t1.nr_entries == t2.nr_entries &&
     memcmp(t1.entries, t2.entries,
-    t1.nr_entries * sizeof(t1.entries[0])) == 0;
+    t1.nr_entries * sizeof!(t1.entries[0])) == 0;
     }
-    static struct lock_trace *save_trace(void)
-    {
-    struct lock_trace *trace, *t2;
-    struct hlist_head *hash_head;
-    u32 hash;
-    int max_entries;
+#[no_mangle]
+pub unsafe extern "C" fn save_trace() -> *mut c_void {
+    let mut trace = core::ptr::null_mut();
+    let mut t2 = core::ptr::null_mut();
+pub static mut hash_head: *mut c_void = core::ptr::null_mut();
+    let mut hash = 0;
+    let mut max_entries = 0;
     BUILD_BUG_ON_NOT_POWER_OF_2(STACK_TRACE_HASH_SIZE);
-    BUILD_BUG_ON(LOCK_TRACE_SIZE_IN_LONGS >= MAX_STACK_TRACE_ENTRIES);
-    trace = (struct lock_trace *)(stack_trace + nr_stack_trace_entries);
+    BUILD_BUG_ON!(LOCK_TRACE_SIZE_IN_LONGS >= MAX_STACK_TRACE_ENTRIES);
+    trace = (stack_trace + nr_stack_trace_entries);
     max_entries = MAX_STACK_TRACE_ENTRIES - nr_stack_trace_entries -
     LOCK_TRACE_SIZE_IN_LONGS;
     if (max_entries <= 0) {
-    if (!debug_locks_off_graph_unlock())
+    if (!debug_locks_off_graph_unlock()) {
     return core::ptr::null_mut();
+    }
     nbcon_cpu_emergency_enter();
     print_lockdep_off("BUG: MAX_STACK_TRACE_ENTRIES too low!");
     dump_stack();
@@ -540,12 +738,13 @@ unsafe extern "C" fn traces_identical(t1: *mut lock_trace, t2: *mut lock_trace) 
     }
     trace.nr_entries = stack_trace_save(trace.entries, max_entries, 3);
     hash = jhash(trace.entries, trace.nr_entries *
-    sizeof(trace.entries[0]), 0);
+    sizeof!(trace.entries[0]), 0);
     trace.hash = hash;
     hash_head = stack_trace_hash + (hash & (STACK_TRACE_HASH_SIZE - 1));
     hlist_for_each_entry(t2, hash_head, hash_entry) {
-    if (traces_identical(trace, t2))
+    if (traces_identical(trace, t2)) {
     return t2;
+    }
     }
     nr_stack_trace_entries += LOCK_TRACE_SIZE_IN_LONGS + trace.nr_entries;
     hlist_add_head(&trace.hash_entry, hash_head);
@@ -554,14 +753,12 @@ unsafe extern "C" fn traces_identical(t1: *mut lock_trace, t2: *mut lock_trace) 
 // Return the number of stack traces in the stack_trace[] array.
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_stack_trace_count() -> u64 {
-    u64 lockdep_stack_trace_count(void)
-    {
-    struct lock_trace *trace;
-    let mut c: u64 = 0;
-    int i;
-    for (i = 0; i < ARRAY_SIZE(stack_trace_hash); i++) {
+pub static mut trace: *mut c_void = core::ptr::null_mut();
+pub static mut c: u64 = 0;
+    let mut i = 0;
+    while (i < ARRAY_SIZE!(stack_trace_hash)) {
     hlist_for_each_entry(trace, &stack_trace_hash[i], hash_entry) {
-    c++;
+    c += 1;
     }
     }
     return c;
@@ -569,40 +766,39 @@ pub unsafe extern "C" fn lockdep_stack_trace_count() -> u64 {
 // Return the number of stack hash chains that have at least one stack trace.
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_stack_hash_count() -> u64 {
-    u64 lockdep_stack_hash_count(void)
-    {
-    let mut c: u64 = 0;
-    int i;
-    for (i = 0; i < ARRAY_SIZE(stack_trace_hash); i++)
+pub static mut c: u64 = 0;
+    let mut i = 0;
+    for (i = 0; i < ARRAY_SIZE!(stack_trace_hash); i++) {
     if (!hlist_empty(&stack_trace_hash[i]))
-    c++;
+    c += 1;
+    }
     return c;
     }
 
-    unsigned int nr_hardirq_chains;
-    unsigned int nr_softirq_chains;
-    unsigned int nr_process_chains;
-    unsigned int max_lockdep_depth;
+    let mut nr_hardirq_chains = 0;
+    let mut nr_softirq_chains = 0;
+    let mut nr_process_chains = 0;
+    let mut max_lockdep_depth = 0;
 
 //
 // Various lockdep statistics:
 //
-    DEFINE_PER_CPU(struct lockdep_stats, lockdep_stats);
+pub static mut struct lockdep_stats: usize = 0;
 
 //
 // Locking printouts:
 //
 
-    [LOCK_USED_IN_##__STATE] = "IN-"__stringify(__STATE)"-W",	\
-    [LOCK_ENABLED_##__STATE] = __stringify(__STATE)"-ON-W",		\
-    [LOCK_USED_IN_##__STATE##_READ] = "IN-"__stringify(__STATE)"-R",\
+    [LOCK_USED_IN_##__STATE] = "IN-"__stringify(__STATE)"-W",	
+    [LOCK_ENABLED_##__STATE] = __stringify(__STATE)"-ON-W",		
+    [LOCK_USED_IN_##__STATE##_READ] = "IN-"__stringify(__STATE)"-R",
     [LOCK_ENABLED_##__STATE##_READ] = __stringify(__STATE)"-ON-R",
     static const char *usage_str[] =
     {
 
     [LOCK_USED] = "INITIAL USE",
     [LOCK_USED_READ] = "INITIAL READ USE",
-// abused as string storage for verify_lock_unused()
+abused as string storage for verify_lock_unused()
     [LOCK_USAGE_STATES] = "IN-NMI",
     };
 
@@ -611,20 +807,16 @@ pub unsafe extern "C" fn lockdep_stack_hash_count() -> u64 {
     return kallsyms_lookup((unsigned long)key, core::ptr::null_mut(), core::ptr::null_mut(), core::ptr::null_mut(), str);
     }
 #[no_mangle]
-pub unsafe extern "C" fn lock_flag(bit: enum lock_usage_bit) -> c_ulong {
-    static inline unsigned long lock_flag(enum lock_usage_bit bit)
-    {
+pub unsafe extern "C" fn lock_flag(bit: lock_usage_bit) -> c_ulong {
     return 1UL << bit;
     }
 #[no_mangle]
-unsafe extern "C" fn get_usage_char(class: *mut lock_class, bit: enum lock_usage_bit) -> c_char {
-    static char get_usage_char(struct lock_class *class, enum lock_usage_bit bit)
-    {
+unsafe extern "C" fn get_usage_char(class: *mut lock_class, bit: lock_usage_bit) -> c_char {
 //
 // The usage character defaults to '.' (i.e., irqs disabled and not in
 // irq context), which is the safest usage category.
 //
-    let mut c: c_char = '.';
+pub static mut c: c_char = '.';
 //
 // The order of the following usage checks matters, which will
 // result in the outcome character as follows:
@@ -635,70 +827,66 @@ unsafe extern "C" fn get_usage_char(class: *mut lock_class, bit: enum lock_usage
 //
     if (class.usage_mask & lock_flag(bit + LOCK_USAGE_DIR_MASK)) {
     c = '+';
-    if (class.usage_mask & lock_flag(bit))
+    if (class.usage_mask & lock_flag(bit)) {
     c = '?';
-    } else if (class.usage_mask & lock_flag(bit))
+    }
+    } else if (class.usage_mask & lock_flag(bit)) {
     c = '-';
+    }
     return c;
     }
 #[no_mangle]
 pub unsafe extern "C" fn get_usage_chars(class: *mut lock_class, usage[LOCK_USAGE_CHARS]: c_char) {
-    void get_usage_chars(struct lock_class *class, char usage[LOCK_USAGE_CHARS])
-    {
-    let mut i: c_int = 0;
+pub static mut i: c_int = 0;
 
-    usage[i++] = get_usage_char(class, LOCK_USED_IN_##__STATE);	\
+    usage[i++] = get_usage_char(class, LOCK_USED_IN_##__STATE);	
     usage[i++] = get_usage_char(class, LOCK_USED_IN_##__STATE##_READ);
 
     usage[i] = '\0';
     }
 #[no_mangle]
 unsafe extern "C" fn __print_lock_name(hlock: *mut held_lock, class: *mut lock_class) {
-    static void __print_lock_name(struct held_lock *hlock, struct lock_class *class)
-    {
     char str[KSYM_NAME_LEN];
-    const char *name;
+pub static mut name: *mut c_void = core::ptr::null_mut();
     name = class.name;
     if (!name) {
     name = __get_key_name(class.key, str);
-    printk(KERN_CONT "%s", name);
+    printk("%s", name);
     } else {
-    printk(KERN_CONT "%s", name);
-    if (class.name_version > 1)
-    printk(KERN_CONT "#%d", class.name_version);
-    if (class.subclass)
-    printk(KERN_CONT "/%d", class.subclass);
-    if (hlock && class.print_fn)
+    printk("%s", name);
+    if (class.name_version > 1) {
+    printk("#%d", class.name_version);
+    }
+    if (class.subclass) {
+    printk("/%d", class.subclass);
+    }
+    if (hlock && class.print_fn) {
     class.print_fn(hlock.instance);
+    }
     }
     }
 #[no_mangle]
 unsafe extern "C" fn print_lock_name(hlock: *mut held_lock, class: *mut lock_class) {
-    static void print_lock_name(struct held_lock *hlock, struct lock_class *class)
-    {
     char usage[LOCK_USAGE_CHARS];
     get_usage_chars(class, usage);
-    printk(KERN_CONT " (");
+    printk(" (");
     __print_lock_name(hlock, class);
-    printk(KERN_CONT "){%s}-{%d:%d}", usage,
+    printk("){%s}-{%d:%d}", usage,
     class.wait_type_outer ?: class.wait_type_inner,
     class.wait_type_inner);
     }
 #[no_mangle]
 unsafe extern "C" fn print_lockdep_cache(lock: *mut lockdep_map) {
-    static void print_lockdep_cache(struct lockdep_map *lock)
-    {
-    const char *name;
+pub static mut name: *mut c_void = core::ptr::null_mut();
     char str[KSYM_NAME_LEN];
     name = lock.name;
-    if (!name)
+    if (!name) {
     name = __get_key_name(lock.key.subkeys, str);
-    printk(KERN_CONT "%s", name);
+    }
+    printk("%s", name);
     }
 #[no_mangle]
 unsafe extern "C" fn print_lock(hlock: *mut held_lock) {
-    static void print_lock(struct held_lock *hlock)
-    {
 //
 // We can be called locklessly through debug_show_all_locks() so be
 // extra careful, the hlock might have been released and cleared.
@@ -709,19 +897,17 @@ unsafe extern "C" fn print_lock(hlock: *mut held_lock) {
 // to distinguish whether we are in this situation, if it just
 // happened we can't count on class_idx to tell either.
 //
-    struct lock_class *lock = hlock_class(hlock);
+    let mut lock = hlock_class(hlock);
     if (!lock) {
-    printk(KERN_CONT "<RELEASED>\n");
+    printk("<RELEASED>\n");
     return;
     }
-    printk(KERN_CONT "%px", hlock.instance);
+    printk("%px", hlock.instance);
     print_lock_name(hlock, lock);
-    printk(KERN_CONT ", at: %pS\n", (void *)hlock.acquire_ip);
+    printk(", at: %pS\n", hlock.acquire_ip);
     }
 #[no_mangle]
 unsafe extern "C" fn lockdep_print_held_locks(p: *mut task_struct) {
-    static void lockdep_print_held_locks(struct task_struct *p)
-    {
     int i, depth = READ_ONCE(p.lockdep_depth);
 //
 // Note that it's always somewhat unreliable to print held locks
@@ -749,15 +935,13 @@ unsafe extern "C" fn lockdep_print_held_locks(p: *mut task_struct) {
     p.comm, task_pid_nr(p), depth,
     task_is_running(p) ? "last" : "on", task_cpu(p),
     depth > 0 ? ":" : "");
-    for (i = 0; i < depth; i++) {
+    while (i < depth) {
     printk(" #%d: ", i);
     print_lock(p.held_locks + i);
     }
     }
 #[no_mangle]
 unsafe extern "C" fn print_kernel_ident() {
-    static void print_kernel_ident(void)
-    {
     printk("%s %.*s %s\n", init_utsname().release,
     (int)strcspn(init_utsname().version, " "),
     init_utsname().version,
@@ -765,8 +949,6 @@ unsafe extern "C" fn print_kernel_ident() {
     }
 #[no_mangle]
 unsafe extern "C" fn very_verbose(class: *mut lock_class) -> c_int {
-    static int very_verbose(struct lock_class *class)
-    {
 
     return class_filter(class);
 
@@ -778,29 +960,31 @@ unsafe extern "C" fn very_verbose(class: *mut lock_class) -> c_int {
 
 #[no_mangle]
 unsafe extern "C" fn static_obj(obj: *const c_void) -> c_int {
-    static int static_obj(const void *obj)
-    {
-    let mut addr: c_ulong = (unsigned long) obj;
-    if (is_kernel_core_data(addr))
+pub static mut addr: c_ulong = 0;
+    if (is_kernel_core_data(addr)) {
     return 1;
+    }
 //
 // keys are allowed in the __ro_after_init section.
 //
-    if (is_kernel_rodata(addr))
+    if (is_kernel_rodata(addr)) {
     return 1;
+    }
 //
 // in initdata section and used during bootup only?
 // NOTE: On some platforms the initdata section is
 // outside of the _stext ... _end range.
 //
     if (system_state < SYSTEM_FREEING_INITMEM &&
-    init_section_contains((void *)addr, 1))
+    init_section_contains(addr, 1)) {
     return 1;
+    }
 //
 // in-kernel percpu var?
 //
-    if (is_kernel_percpu_address(addr))
+    if (is_kernel_percpu_address(addr)) {
     return 1;
+    }
 //
 // module static or percpu var?
 //
@@ -814,17 +998,18 @@ unsafe extern "C" fn static_obj(obj: *const c_void) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn count_matching_names(new_class: *mut lock_class) -> c_int {
-    static int count_matching_names(struct lock_class *new_class)
-    {
-    struct lock_class *class;
-    let mut count: c_int = 0;
-    if (!new_class.name)
+pub static mut class: *mut c_void = core::ptr::null_mut();
+pub static mut count: c_int = 0;
+    if (!new_class.name) {
     return 0;
+    }
     list_for_each_entry(class, &all_lock_classes, lock_entry) {
-    if (new_class.key - new_class.subclass == class.key)
+    if (new_class.key - new_class.subclass == class.key) {
     return class.name_version;
-    if (class.name && !strcmp(class.name, new_class.name))
+    }
+    if (class.name && !strcmp(class.name, new_class.name)) {
     count = max(count, class.name_version);
+    }
     }
     return count + 1;
     }
@@ -832,17 +1017,15 @@ unsafe extern "C" fn count_matching_names(new_class: *mut lock_class) -> c_int {
     static noinstr struct lock_class *
     look_up_lock_class(const struct lockdep_map *lock, unsigned int subclass)
     {
-    struct lockdep_subclass_key *key;
-    struct hlist_head *hash_head;
-    struct lock_class *class;
+pub static mut key: *mut c_void = core::ptr::null_mut();
+pub static mut hash_head: *mut c_void = core::ptr::null_mut();
+pub static mut class: *mut c_void = core::ptr::null_mut();
     if (unlikely(subclass >= MAX_LOCKDEP_SUBCLASSES)) {
     instrumentation_begin();
     debug_locks_off();
     nbcon_cpu_emergency_enter();
-    printk(KERN_ERR
-    "BUG: looking up invalid subclass: %u\n", subclass);
-    printk(KERN_ERR
-    "turning off the locking correctness validator.\n");
+    printk("BUG: looking up invalid subclass: %u\n", subclass);
+    printk("turning off the locking correctness validator.\n");
     dump_stack();
     nbcon_cpu_emergency_exit();
     instrumentation_end();
@@ -852,23 +1035,25 @@ unsafe extern "C" fn count_matching_names(new_class: *mut lock_class) -> c_int {
 // If it is not initialised then it has never been locked,
 // so it won't be present in the hash table.
 //
-    if (unlikely(!lock.key))
+    if (unlikely(!lock.key)) {
     return core::ptr::null_mut();
+    }
 //
 // NOTE: the class-key must be unique. For dynamic locks, a static
 // lock_class_key variable is passed in through the mutex_init()
 // (or spin_lock_init()) call - which acts as the key. For static
 // locks we use the lock object itself as the key.
 //
-    BUILD_BUG_ON(sizeof(struct lock_class_key) >
-    sizeof(struct lockdep_map));
+    BUILD_BUG_ON!(sizeof!(lock_class_key) >
+    sizeof!(lockdep_map));
     key = lock.key.subkeys + subclass;
     hash_head = classhashentry(key);
 //
 // We do an RCU walk of the hash, see lockdep_free_key_range().
 //
-    if (DEBUG_LOCKS_WARN_ON(!irqs_disabled()))
+    if (DEBUG_LOCKS_WARN_ON(!irqs_disabled())) {
     return core::ptr::null_mut();
+    }
     hlist_for_each_entry_rcu_notrace(class, hash_head, hash_entry) {
     if (class.key == key) {
 //
@@ -891,8 +1076,6 @@ unsafe extern "C" fn count_matching_names(new_class: *mut lock_class) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn assign_lock_key(lock: *mut lockdep_map) -> bool {
-    static bool assign_lock_key(struct lockdep_map *lock)
-    {
     unsigned long can_addr, addr = (unsigned long)lock;
 
 //
@@ -902,26 +1085,27 @@ unsafe extern "C" fn assign_lock_key(lock: *mut lockdep_map) -> bool {
 // size of lock_class_key objects does not exceed the size of
 // the smallest lock object.
 //
-    BUILD_BUG_ON(sizeof(struct lock_class_key) > sizeof(raw_spinlock_t));
+    BUILD_BUG_ON!(sizeof!(lock_class_key) > sizeof!(raw_spinlock_t));
 
-    if (__is_kernel_percpu_address(addr, &can_addr))
-    lock.key = (void *)can_addr;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: __is_module_percpu_address(addr, _arg: &can_addr)) -> else {
-    else if (__is_module_percpu_address(addr, &can_addr))
-    lock.key = (void *)can_addr;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: static_obj(lock)) -> else {
-    else if (static_obj(lock))
-    lock.key = (void *)lock;
+    if (__is_kernel_percpu_address(addr, &can_addr)) {
+    lock.key = can_addr;
+    }
+
+    else if (__is_module_percpu_address(addr, &can_addr)) {
+    lock.key = can_addr;
+    }
+
+    else if (static_obj(lock)) {
+    lock.key = lock;
+    }
     else {
 // Debug-check: all keys must be persistent!
     debug_locks_off();
     nbcon_cpu_emergency_enter();
-    pr_err("INFO: trying to register non-static key.\n");
-    pr_err("The code is fine but needs lockdep annotation, or maybe\n");
-    pr_err("you didn't initialize this object before use?\n");
-    pr_err("turning off the locking correctness validator.\n");
+    pr_err!("INFO: trying to register non-static key.\n");
+    pr_err!("The code is fine but needs lockdep annotation, or maybe\n");
+    pr_err!("you didn't initialize this object before use?\n");
+    pr_err!("turning off the locking correctness validator.\n");
     dump_stack();
     nbcon_cpu_emergency_exit();
     return false;
@@ -932,12 +1116,11 @@ pub unsafe extern "C" fn if(_arg: static_obj(lock)) -> else {
 // Check whether element @e occurs in list @h
 #[no_mangle]
 unsafe extern "C" fn in_list(e: *mut list_head, h: *mut list_head) -> bool {
-    static bool in_list(struct list_head *e, struct list_head *h)
-    {
-    struct list_head *f;
+pub static mut f: *mut c_void = core::ptr::null_mut();
     list_for_each(f, h) {
-    if (e == f)
+    if (e == f) {
     return true;
+    }
     }
     return false;
     }
@@ -947,26 +1130,23 @@ unsafe extern "C" fn in_list(e: *mut list_head, h: *mut list_head) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn in_any_class_list(e: *mut list_head) -> bool {
-    static bool in_any_class_list(struct list_head *e)
-    {
-    struct lock_class *class;
-    int i;
-    for (i = 0; i < ARRAY_SIZE(lock_classes); i++) {
+pub static mut class: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    while (i < ARRAY_SIZE!(lock_classes)) {
     class = &lock_classes[i];
     if (in_list(e, &class.locks_after) ||
-    in_list(e, &class.locks_before))
+    in_list(e, &class.locks_before)) {
     return true;
+    }
     }
     return false;
     }
 #[no_mangle]
 unsafe extern "C" fn class_lock_list_valid(c: *mut lock_class, h: *mut list_head) -> bool {
-    static bool class_lock_list_valid(struct lock_class *c, struct list_head *h)
-    {
-    struct lock_list *e;
+pub static mut e: *mut c_void = core::ptr::null_mut();
     list_for_each_entry(e, h, entry) {
     if (e.links_to != c) {
-    printk(KERN_INFO "class %s: mismatch for lock entry %ld; class %s <> %s",
+    printk("class %s: mismatch for lock entry %ld; class %s <> %s",
     c.name ? : "(?)",
     (unsigned long)(e - list_entries),
     e.links_to && e.links_to.name ?
@@ -983,19 +1163,18 @@ unsafe extern "C" fn class_lock_list_valid(c: *mut lock_class, h: *mut list_head
 
 #[no_mangle]
 unsafe extern "C" fn check_lock_chain_key(chain: *mut lock_chain) -> bool {
-    static bool check_lock_chain_key(struct lock_chain *chain)
-    {
 
-    let mut chain_key: u64 = INITIAL_CHAIN_KEY;
-    int i;
-    for (i = chain.base; i < chain.base + chain.depth; i++)
+pub static mut chain_key: u64 = 0;
+    let mut i = 0;
+    for (i = chain.base; i < chain.base + chain.depth; i++) {
     chain_key = iterate_chain_key(chain_key, chain_hlocks[i]);
+    }
 //
 // The 'unsigned long long' casts avoid that a compiler warning
 // is reported when building tools/lib/lockdep.
 //
     if (chain.chain_key != chain_key) {
-    printk(KERN_INFO "chain %lld: key %#llx <> %#llx\n",
+    printk("chain %lld: key %#llx <> %#llx\n",
     (unsigned long long)(chain - lock_chains),
     (unsigned long long)chain.chain_key,
     (unsigned long long)chain_key);
@@ -1006,60 +1185,60 @@ unsafe extern "C" fn check_lock_chain_key(chain: *mut lock_chain) -> bool {
     }
 #[no_mangle]
 unsafe extern "C" fn in_any_zapped_class_list(class: *mut lock_class) -> bool {
-    static bool in_any_zapped_class_list(struct lock_class *class)
-    {
-    struct pending_free *pf;
-    int i;
-    for (i = 0, pf = delayed_free.pf; i < ARRAY_SIZE(delayed_free.pf); i++, pf++) {
-    if (in_list(&class.lock_entry, &pf.zapped))
+pub static mut pf: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    while (i < ARRAY_SIZE!(delayed_free.pf)) {
+    if (in_list(&class.lock_entry, &pf.zapped)) {
     return true;
+    }
     }
     return false;
     }
 #[no_mangle]
 unsafe extern "C" fn __check_data_structures() -> bool {
-    static bool __check_data_structures(void)
-    {
-    struct lock_class *class;
-    struct lock_chain *chain;
-    struct hlist_head *head;
-    struct lock_list *e;
-    int i;
+pub static mut class: *mut c_void = core::ptr::null_mut();
+pub static mut chain: *mut c_void = core::ptr::null_mut();
+pub static mut head: *mut c_void = core::ptr::null_mut();
+pub static mut e: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
 // Check whether all classes occur in a lock list.
-    for (i = 0; i < ARRAY_SIZE(lock_classes); i++) {
+    while (i < ARRAY_SIZE!(lock_classes)) {
     class = &lock_classes[i];
     if (!in_list(&class.lock_entry, &all_lock_classes) &&
     !in_list(&class.lock_entry, &free_lock_classes) &&
     !in_any_zapped_class_list(class)) {
-    printk(KERN_INFO "class %px/%s is not in any class list\n",
+    printk("class %px/%s is not in any class list\n",
     class, class.name ? : "(?)");
     return false;
     }
     }
 // Check whether all classes have valid lock lists.
-    for (i = 0; i < ARRAY_SIZE(lock_classes); i++) {
+    while (i < ARRAY_SIZE!(lock_classes)) {
     class = &lock_classes[i];
-    if (!class_lock_list_valid(class, &class.locks_before))
-    return false;
-    if (!class_lock_list_valid(class, &class.locks_after))
+    if (!class_lock_list_valid(class, &class.locks_before)) {
     return false;
     }
+    if (!class_lock_list_valid(class, &class.locks_after)) {
+    return false;
+    }
+    }
 // Check the chain_key of all lock chains.
-    for (i = 0; i < ARRAY_SIZE(chainhash_table); i++) {
+    while (i < ARRAY_SIZE!(chainhash_table)) {
     head = chainhash_table + i;
     hlist_for_each_entry_rcu(chain, head, entry) {
-    if (!check_lock_chain_key(chain))
+    if (!check_lock_chain_key(chain)) {
     return false;
+    }
     }
     }
 //
 // Check whether all list entries that are in use occur in a class
 // lock list.
 //
-    for_each_set_bit(i, list_entries_in_use, ARRAY_SIZE(list_entries)) {
+    for_each_set_bit(i, list_entries_in_use, ARRAY_SIZE!(list_entries)) {
     e = list_entries + i;
     if (!in_any_class_list(&e.entry)) {
-    printk(KERN_INFO "list entry %d is not in any class list; class %s <> %s\n",
+    printk("list entry %d is not in any class list; class %s <> %s\n",
     (unsigned int)(e - list_entries),
     e.class.name ? : "(?)",
     e.links_to.name ? : "(?)");
@@ -1070,10 +1249,10 @@ unsafe extern "C" fn __check_data_structures() -> bool {
 // Check whether all list entries that are not in use do not occur in
 // a class lock list.
 //
-    for_each_clear_bit(i, list_entries_in_use, ARRAY_SIZE(list_entries)) {
+    for_each_clear_bit(i, list_entries_in_use, ARRAY_SIZE!(list_entries)) {
     e = list_entries + i;
     if (in_any_class_list(&e.entry)) {
-    printk(KERN_INFO "list entry %d occurs in a class list; class %s <> %s\n",
+    printk("list entry %d occurs in a class list; class %s <> %s\n",
     (unsigned int)(e - list_entries),
     e.class && e.class.name ? e.class.name :
     "(?)",
@@ -1084,100 +1263,100 @@ unsafe extern "C" fn __check_data_structures() -> bool {
     }
     return true;
     }
-    let mut check_consistency: c_int = 0;
-    module_param(check_consistency, int, 0644);
+pub static mut check_consistency: c_int = 0;
+    module_param!(check_consistency, int, 0644);
 #[no_mangle]
 unsafe extern "C" fn check_data_structures() {
-    static void check_data_structures(void)
-    {
-    let mut once: static bool = false;
+pub static mut once: bool = false;
     if (check_consistency && !once) {
     if (!__check_data_structures()) {
     once = true;
-    WARN_ON(once);
+    WARN_ON!(once);
     }
     }
     }
 
-    static inline void check_data_structures(void) { }
+#[no_mangle]
+pub unsafe extern "C" fn check_data_structures() { }
 
-    static void init_chain_block_buckets(void);
+// forward_decl: init_chain_block_buckets;
 //
 // Initialize the lock_classes[] array elements, the free_lock_classes list
 // and also the delayed_free structure.
 //
 #[no_mangle]
 unsafe extern "C" fn init_data_structures_once() {
-    static void init_data_structures_once(void)
-    {
-    static bool __read_mostly ds_initialized, rcu_head_initialized;
-    int i;
-    if (likely(rcu_head_initialized))
+    static bool  ds_initialized, rcu_head_initialized;
+    let mut i = 0;
+    if (likely(rcu_head_initialized)) {
     return;
+    }
     if (system_state >= SYSTEM_SCHEDULING) {
     init_rcu_head(&delayed_free.rcu_head);
     rcu_head_initialized = true;
     }
-    if (ds_initialized)
+    if (ds_initialized) {
     return;
+    }
     ds_initialized = true;
     INIT_LIST_HEAD(&delayed_free.pf[0].zapped);
     INIT_LIST_HEAD(&delayed_free.pf[1].zapped);
-    for (i = 0; i < ARRAY_SIZE(lock_classes); i++) {
+    while (i < ARRAY_SIZE!(lock_classes)) {
     list_add_tail(&lock_classes[i].lock_entry, &free_lock_classes);
     INIT_LIST_HEAD(&lock_classes[i].locks_after);
     INIT_LIST_HEAD(&lock_classes[i].locks_before);
     }
     init_chain_block_buckets();
     }
-    static inline struct hlist_head *keyhashentry(const struct lock_class_key *key)
-    {
-    let mut hash: c_ulong = hash_long((uintptr_t)key, KEYHASH_BITS);
+#[no_mangle]
+pub unsafe extern "C" fn keyhashentry(key: *mut lock_class_key) -> *mut c_void {
+pub static mut hash: c_ulong = 0;
     return lock_keys_hash + hash;
     }
 // Register a dynamically allocated key.
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_register_key(key: *mut lock_class_key) {
-    void lockdep_register_key(struct lock_class_key *key)
-    {
-    struct hlist_head *hash_head;
-    struct lock_class_key *k;
-    unsigned long flags;
-    if (WARN_ON_ONCE(static_obj(key)))
+pub static mut hash_head: *mut c_void = core::ptr::null_mut();
+pub static mut k: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    if (WARN_ON_ONCE!(static_obj(key))) {
     return;
+    }
     hash_head = keyhashentry(key);
     raw_local_irq_save(flags);
-    if (!graph_lock())
-    goto restore_irqs;
+    if (!graph_lock()) {
+// goto;
+    }
     hlist_for_each_entry_rcu(k, hash_head, hash_entry) {
-    if (WARN_ON_ONCE(k == key))
-    goto out_unlock;
+    if (WARN_ON_ONCE!(k == key)) {
+// goto;
+    }
     }
     hlist_add_head_rcu(&key.hash_entry, hash_head);
-    nr_dynamic_keys++;
-    out_unlock:
+    nr_dynamic_keys += 1;
+// label;
     graph_unlock();
-    restore_irqs:
+// label;
     raw_local_irq_restore(flags);
     }
     EXPORT_SYMBOL_GPL(lockdep_register_key);
 // Check whether a key has been registered as a dynamic key.
 #[no_mangle]
 unsafe extern "C" fn is_dynamic_key(key: *const lock_class_key) -> bool {
-    static bool is_dynamic_key(const struct lock_class_key *key)
-    {
-    struct hlist_head *hash_head;
-    struct lock_class_key *k;
-    let mut found: bool = false;
-    if (WARN_ON_ONCE(static_obj(key)))
+pub static mut hash_head: *mut c_void = core::ptr::null_mut();
+pub static mut k: *mut c_void = core::ptr::null_mut();
+pub static mut found: bool = false;
+    if (WARN_ON_ONCE!(static_obj(key))) {
     return false;
+    }
 //
 // If lock debugging is disabled lock_keys_hash[] may contain
 // pointers to memory that has already been freed. Avoid triggering
 // a use-after-free in that case by returning early.
 //
-    if (!debug_locks)
+    if (!debug_locks) {
     return true;
+    }
     hash_head = keyhashentry(key);
     rcu_read_lock();
     hlist_for_each_entry_rcu(k, hash_head, hash_entry) {
@@ -1194,20 +1373,21 @@ unsafe extern "C" fn is_dynamic_key(key: *const lock_class_key) -> bool {
 // yet. Otherwise we look it up. We cache the result in the lock object
 // itself, so actual lookup of the hash should be once per lock object.
 //
-    static struct lock_class *
-    register_lock_class(struct lockdep_map *lock, unsigned int subclass, int force)
-    {
-    struct lockdep_subclass_key *key;
-    struct hlist_head *hash_head;
-    struct lock_class *class;
-    int idx;
+#[no_mangle]
+pub unsafe extern "C" fn register_lock_class(lock: *mut lockdep_map, subclass: c_uint, force: c_int) -> *mut c_void {
+pub static mut key: *mut c_void = core::ptr::null_mut();
+pub static mut hash_head: *mut c_void = core::ptr::null_mut();
+pub static mut class: *mut c_void = core::ptr::null_mut();
+    let mut idx = 0;
     DEBUG_LOCKS_WARN_ON(!irqs_disabled());
     class = look_up_lock_class(lock, subclass);
-    if (likely(class))
-    goto out_set_class_cache;
+    if (likely(class)) {
+// goto;
+    }
     if (!lock.key) {
-    if (!assign_lock_key(lock))
+    if (!assign_lock_key(lock)) {
     return core::ptr::null_mut();
+    }
     } else if (!static_obj(lock.key) && !is_dynamic_key(lock.key)) {
     return core::ptr::null_mut();
     }
@@ -1221,8 +1401,9 @@ unsafe extern "C" fn is_dynamic_key(key: *const lock_class_key) -> bool {
 // with another CPU:
 //
     hlist_for_each_entry_rcu(class, hash_head, hash_entry) {
-    if (class.key == key)
-    goto out_unlock_set;
+    if (class.key == key) {
+// goto;
+    }
     }
     init_data_structures_once();
 // Allocate a new lock class and add it to the hash.
@@ -1238,14 +1419,14 @@ unsafe extern "C" fn is_dynamic_key(key: *const lock_class_key) -> bool {
     nbcon_cpu_emergency_exit();
     return core::ptr::null_mut();
     }
-    nr_lock_classes++;
+    nr_lock_classes += 1;
     __set_bit(class - lock_classes, lock_classes_in_use);
     debug_atomic_inc(nr_unused_locks);
     class.key = key;
     class.name = lock.name;
     class.subclass = subclass;
-    WARN_ON_ONCE(!list_empty(&class.locks_before));
-    WARN_ON_ONCE(!list_empty(&class.locks_after));
+    WARN_ON_ONCE!(!list_empty(&class.locks_before));
+    WARN_ON_ONCE!(!list_empty(&class.locks_after));
     class.name_version = count_matching_names(class);
     class.wait_type_inner = lock.wait_type_inner;
     class.wait_type_outer = lock.wait_type_outer;
@@ -1261,36 +1442,40 @@ unsafe extern "C" fn is_dynamic_key(key: *const lock_class_key) -> bool {
 //
     list_move_tail(&class.lock_entry, &all_lock_classes);
     idx = class - lock_classes;
-    if (idx > max_lock_class_idx)
+    if (idx > max_lock_class_idx) {
     max_lock_class_idx = idx;
+    }
     if (verbose(class)) {
     graph_unlock();
     nbcon_cpu_emergency_enter();
     printk("\nnew class %px: %s", class.key, class.name);
-    if (class.name_version > 1)
-    printk(KERN_CONT "#%d", class.name_version);
-    printk(KERN_CONT "\n");
+    if (class.name_version > 1) {
+    printk("#%d", class.name_version);
+    }
+    printk("\n");
     dump_stack();
     nbcon_cpu_emergency_exit();
     if (!graph_lock()) {
     return core::ptr::null_mut();
     }
     }
-    out_unlock_set:
+// label;
     graph_unlock();
-    out_set_class_cache:
-    if (!subclass || force)
+// label;
+    if (!subclass || force) {
     lock.class_cache[0] = class;
-#[no_mangle]
-pub unsafe extern "C" fn if(NR_LOCKDEP_CACHING_CLASSES: subclass <) -> else {
-    else if (subclass < NR_LOCKDEP_CACHING_CLASSES)
+    }
+
+    else if (subclass < NR_LOCKDEP_CACHING_CLASSES) {
     lock.class_cache[subclass] = class;
+    }
 //
 // Hash collision, did we smoke some? We found a class with a matching
 // hash but the subclass -- which is hashed in -- didn't match.
 //
-    if (DEBUG_LOCKS_WARN_ON(class.subclass != subclass))
+    if (DEBUG_LOCKS_WARN_ON(class.subclass != subclass)) {
     return core::ptr::null_mut();
+    }
     return class;
     }
 
@@ -1298,39 +1483,38 @@ pub unsafe extern "C" fn if(NR_LOCKDEP_CACHING_CLASSES: subclass <) -> else {
 // Allocate a lockdep entry. (assumes the graph_lock held, returns
 // with NULL on failure)
 //
-    static struct lock_list *alloc_list_entry(void)
-    {
-    int idx = find_first_zero_bit(list_entries_in_use,
-    ARRAY_SIZE(list_entries));
-    if (idx >= ARRAY_SIZE(list_entries)) {
-    if (!debug_locks_off_graph_unlock())
+#[no_mangle]
+pub unsafe extern "C" fn alloc_list_entry() -> *mut c_void {
+    let mut idx = find_first_zero_bit(list_entries_in_use,
+    ARRAY_SIZE!(list_entries));
+    if (idx >= ARRAY_SIZE!(list_entries)) {
+    if (!debug_locks_off_graph_unlock()) {
     return core::ptr::null_mut();
+    }
     nbcon_cpu_emergency_enter();
     print_lockdep_off("BUG: MAX_LOCKDEP_ENTRIES too low!");
     dump_stack();
     nbcon_cpu_emergency_exit();
     return core::ptr::null_mut();
     }
-    nr_list_entries++;
+    nr_list_entries += 1;
     __set_bit(idx, list_entries_in_use);
     return list_entries + idx;
     }
 //
 // Add a new dependency to the head of the list:
 //
-    static int add_lock_to_list(struct lock_class *this,
-    struct lock_class *links_to, struct list_head *head,
-    u16 distance, u8 dep,
-    const struct lock_trace *trace)
-    {
-    struct lock_list *entry;
+#[no_mangle]
+pub unsafe extern "C" fn add_lock_to_list(this: *mut lock_class, links_to: *mut lock_class, head: *mut list_head, distance: u16, dep: u8, trace: *mut lock_trace) -> c_int {
+pub static mut entry: *mut c_void = core::ptr::null_mut();
 //
 // Lock not present yet - get a new dependency struct and
 // add it to the list:
 //
     entry = alloc_list_entry();
-    if (!entry)
+    if (!entry) {
     return 0;
+    }
     entry.class = this;
     entry.links_to = links_to;
     entry.dep = dep;
@@ -1365,34 +1549,27 @@ pub struct circular_queue {
     pub rear: unsigned int front,,
 }
 
-    static struct circular_queue lock_cq;
-    unsigned int max_bfs_queue_depth;
+pub static mut lock_cq: usize = 0;
+    let mut max_bfs_queue_depth = 0;
     static unsigned int lockdep_dependency_gen_id;
 #[no_mangle]
 pub unsafe extern "C" fn __cq_init(cq: *mut circular_queue) {
-    static inline void __cq_init(struct circular_queue *cq)
-    {
     cq.front = cq.rear = 0;
-    lockdep_dependency_gen_id++;
+    lockdep_dependency_gen_id += 1;
     }
 #[no_mangle]
 pub unsafe extern "C" fn __cq_empty(cq: *mut circular_queue) -> c_int {
-    static inline int __cq_empty(struct circular_queue *cq)
-    {
     return (cq.front == cq.rear);
     }
 #[no_mangle]
 pub unsafe extern "C" fn __cq_full(cq: *mut circular_queue) -> c_int {
-    static inline int __cq_full(struct circular_queue *cq)
-    {
     return ((cq.rear + 1) & CQ_MASK) == cq.front;
     }
 #[no_mangle]
 pub unsafe extern "C" fn __cq_enqueue(cq: *mut circular_queue, elem: *mut lock_list) -> c_int {
-    static inline int __cq_enqueue(struct circular_queue *cq, struct lock_list *elem)
-    {
-    if (__cq_full(cq))
+    if (__cq_full(cq)) {
     return -1;
+    }
     cq.element[cq.rear] = elem;
     cq.rear = (cq.rear + 1) & CQ_MASK;
     return 0;
@@ -1403,51 +1580,41 @@ pub unsafe extern "C" fn __cq_enqueue(cq: *mut circular_queue, elem: *mut lock_l
 //
 #[no_mangle]
 pub unsafe extern "C" fn __cq_dequeue(cq: *mut circular_queue) -> *mut lock_list {
-    static inline struct lock_list * __cq_dequeue(struct circular_queue *cq)
-    {
     struct lock_list * lock;
-    if (__cq_empty(cq))
+    if (__cq_empty(cq)) {
     return core::ptr::null_mut();
+    }
     lock = cq.element[cq.front];
     cq.front = (cq.front + 1) & CQ_MASK;
     return lock;
     }
 #[no_mangle]
 pub unsafe extern "C" fn __cq_get_elem_count(cq: *mut circular_queue) -> c_uint {
-    static inline unsigned int  __cq_get_elem_count(struct circular_queue *cq)
-    {
     return (cq.rear - cq.front) & CQ_MASK;
     }
 #[no_mangle]
 pub unsafe extern "C" fn mark_lock_accessed(lock: *mut lock_list) {
-    static inline void mark_lock_accessed(struct lock_list *lock)
-    {
     lock.class.dep_gen_id = lockdep_dependency_gen_id;
     }
-    static inline void visit_lock_entry(struct lock_list *lock,
-    struct lock_list *parent)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn visit_lock_entry(lock: *mut lock_list, parent: *mut lock_list) {
     lock.parent = parent;
     }
 #[no_mangle]
 pub unsafe extern "C" fn lock_accessed(lock: *mut lock_list) -> c_ulong {
-    static inline unsigned long lock_accessed(struct lock_list *lock)
-    {
     return lock.class.dep_gen_id == lockdep_dependency_gen_id;
     }
-    static inline struct lock_list *get_lock_parent(struct lock_list *child)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn get_lock_parent(child: *mut lock_list) -> *mut c_void {
     return child.parent;
     }
 #[no_mangle]
 pub unsafe extern "C" fn get_lock_depth(child: *mut lock_list) -> c_int {
-    static inline int get_lock_depth(struct lock_list *child)
-    {
-    let mut depth: c_int = 0;
-    struct lock_list *parent;
+pub static mut depth: c_int = 0;
+pub static mut parent: *mut c_void = core::ptr::null_mut();
     while ((parent = get_lock_parent(child))) {
     child = parent;
-    depth++;
+    depth += 1;
     }
     return depth;
     }
@@ -1458,9 +1625,9 @@ pub unsafe extern "C" fn get_lock_depth(child: *mut lock_list) -> c_int {
 // @offset: the offset to struct lock_class to determine whether it is
 // locks_after or locks_before
 //
-    static inline struct list_head *get_dep_list(struct lock_list *lock, int offset)
-    {
-    void *lock_class = lock.class;
+#[no_mangle]
+pub unsafe extern "C" fn get_dep_list(lock: *mut lock_list, offset: c_int) -> *mut c_void {
+    let mut lock_class = lock.class;
     return lock_class + offset;
     }
 //
@@ -1489,9 +1656,7 @@ pub unsafe extern "C" fn get_lock_depth(child: *mut lock_list) -> c_int {
 // bfs_result < 0 means error
 //
 #[no_mangle]
-pub unsafe extern "C" fn bfs_error(res: enum bfs_result) -> bool {
-    static inline bool bfs_error(enum bfs_result res)
-    {
+pub unsafe extern "C" fn bfs_error(res: bfs_result) -> bool {
     return res < 0;
     }
 //
@@ -1510,39 +1675,32 @@ pub unsafe extern "C" fn bfs_error(res: enum bfs_result) -> bool {
 // bit1 is next->read != 2
 //
 
-    static inline unsigned int
-    __calc_dep_bit(struct held_lock *prev, struct held_lock *next)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __calc_dep_bit(prev: *mut held_lock, next: *mut held_lock) -> c_uint {
     return (prev.read == 0) + ((next.read != 2) << 1);
     }
 #[no_mangle]
 pub unsafe extern "C" fn calc_dep(prev: *mut held_lock, next: *mut held_lock) -> u8 {
-    static inline u8 calc_dep(struct held_lock *prev, struct held_lock *next)
-    {
     return 1U << __calc_dep_bit(prev, next);
     }
 //
 // calculate the dep_bit for backwards edges. We care about whether @prev is
 // shared and whether @next is recursive.
 //
-    static inline unsigned int
-    __calc_dep_bitb(struct held_lock *prev, struct held_lock *next)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __calc_dep_bitb(prev: *mut held_lock, next: *mut held_lock) -> c_uint {
     return (next.read != 2) + ((prev.read == 0) << 1);
     }
 #[no_mangle]
 pub unsafe extern "C" fn calc_depb(prev: *mut held_lock, next: *mut held_lock) -> u8 {
-    static inline u8 calc_depb(struct held_lock *prev, struct held_lock *next)
-    {
     return 1U << __calc_dep_bitb(prev, next);
     }
 //
 // Initialize a lock_list entry @lock belonging to @class as the root for a BFS
 // search.
 //
-    static inline void __bfs_init_root(struct lock_list *lock,
-    struct lock_class *class)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __bfs_init_root(lock: *mut lock_list, class: *mut lock_class) {
     lock.class = class;
     lock.parent = core::ptr::null_mut();
     lock.only_xr = 0;
@@ -1555,9 +1713,8 @@ pub unsafe extern "C" fn calc_depb(prev: *mut held_lock, next: *mut held_lock) -
 // that <prev> -> @hlock and @hlock -> <whatever __bfs() found> is not -(*R)->
 // and -(S*)->.
 //
-    static inline void bfs_init_root(struct lock_list *lock,
-    struct held_lock *hlock)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn bfs_init_root(lock: *mut lock_list, hlock: *mut held_lock) {
     __bfs_init_root(lock, hlock_class(hlock));
     lock.only_xr = (hlock.read == 2);
     }
@@ -1568,18 +1725,18 @@ pub unsafe extern "C" fn calc_depb(prev: *mut held_lock, next: *mut held_lock) -
 // that <next> -> @hlock and @hlock -> <whatever backwards BFS found> is not
 // -(*S)-> and -(R*)-> (reverse order of -(*R)-> and -(S*)->).
 //
-    static inline void bfs_init_rootb(struct lock_list *lock,
-    struct held_lock *hlock)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn bfs_init_rootb(lock: *mut lock_list, hlock: *mut held_lock) {
     __bfs_init_root(lock, hlock_class(hlock));
     lock.only_xr = (hlock.read != 0);
     }
-    static inline struct lock_list *__bfs_next(struct lock_list *lock, int offset)
-    {
-    if (!lock || !lock.parent)
+#[no_mangle]
+pub unsafe extern "C" fn __bfs_next(lock: *mut lock_list, offset: c_int) -> *mut c_void {
+    if (!lock || !lock.parent) {
     return core::ptr::null_mut();
+    }
     return list_next_or_null_rcu(get_dep_list(lock.parent, offset),
-    &lock.entry, struct lock_list, entry);
+    &lock.entry, lock_list, entry);
     }
 //
 // Breadth-First Search to find a strong path in the dependency graph.
@@ -1608,25 +1765,25 @@ pub unsafe extern "C" fn calc_depb(prev: *mut held_lock, next: *mut held_lock) -
 // filter out any -(S*)-> in the current dependency and after that, the
 // ->only_xr is set according to whether we only have -(*R)-> left.
 //
-    static enum bfs_result __bfs(struct lock_list *source_entry,
+    static enum bfs_result __bfs(lock_list *source_entry,
     void *data,
-    bool (*match)(struct lock_list *entry, void *data),
-    bool (*skip)(struct lock_list *entry, void *data),
-    struct lock_list **target_entry,
+    bool (*match)(lock_list *entry, void *data),
+    bool (*skip)(lock_list *entry, void *data), lock_list **target_entry,
     int offset)
     {
-    struct circular_queue *cq = &lock_cq;
-    struct lock_list *lock = core::ptr::null_mut();
-    struct lock_list *entry;
-    struct list_head *head;
-    unsigned int cq_depth;
-    bool first;
+    let mut cq = &lock_cq;
+    let mut lock = core::ptr::null_mut();
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut head: *mut c_void = core::ptr::null_mut();
+    let mut cq_depth = 0;
+    let mut first = 0;
     lockdep_assert_locked();
     __cq_init(cq);
     __cq_enqueue(cq, source_entry);
     while ((lock = __bfs_next(lock, offset)) || (lock = __cq_dequeue(cq))) {
-    if (!lock.class)
+    if (!lock.class) {
     return BFS_EINVALIDNODE;
+    }
 //
 // Step 1: check whether we already finish on this one.
 //
@@ -1636,27 +1793,32 @@ pub unsafe extern "C" fn calc_depb(prev: *mut held_lock, next: *mut held_lock) -
 // and visit all the dependencies in the list and mark this
 // list accessed.
 //
-    if (lock_accessed(lock))
+    if (lock_accessed(lock)) {
     continue;
-    else
+    }
+    else {
     mark_lock_accessed(lock);
+    }
 //
 // Step 2: check whether prev dependency and this form a strong
 // dependency path.
 //
-    if (lock.parent) { /* Parent exists, check prev dependency */
-    let mut dep: u8 = lock.dep;
-    let mut prev_only_xr: bool = lock.parent.only_xr;
+    if (lock.parent) { /* Parent exists, check prev dependency */ {
+pub static mut dep: u8 = 0;
+    }
+pub static mut prev_only_xr: bool = false;
 //
 // Mask out all -(S*)-> if we only have *R in previous
 // step, because -(*R)-> -(S*)-> don't make up a strong
 // dependency.
 //
-    if (prev_only_xr)
+    if (prev_only_xr) {
     dep &= ~(DEP_SR_MASK | DEP_SN_MASK);
+    }
 // If nothing left, we skip
-    if (!dep)
+    if (!dep) {
     continue;
+    }
 // If there are only -(*R)-> left, set that for the next step
     lock.only_xr = !(dep & (DEP_SN_MASK | DEP_EN_MASK));
     }
@@ -1666,8 +1828,9 @@ pub unsafe extern "C" fn calc_depb(prev: *mut held_lock, next: *mut held_lock) -
 // If @skip is provide and returns true, we skip this
 // lock (and any path this lock is in).
 //
-    if (skip && skip(lock, data))
+    if (skip && skip(lock, data)) {
     continue;
+    }
     if (match(lock, data)) {
 // target_entry = lock;
     return BFS_RMATCH;
@@ -1686,41 +1849,41 @@ pub unsafe extern "C" fn calc_depb(prev: *mut held_lock, next: *mut held_lock) -
 // dependency from one (see __bfs_next()), as a result
 // the space of queue is saved.
 //
-    if (!first)
+    if (!first) {
     continue;
+    }
     first = false;
-    if (__cq_enqueue(cq, entry))
+    if (__cq_enqueue(cq, entry)) {
     return BFS_EQUEUEFULL;
+    }
     cq_depth = __cq_get_elem_count(cq);
-    if (max_bfs_queue_depth < cq_depth)
+    if (max_bfs_queue_depth < cq_depth) {
     max_bfs_queue_depth = cq_depth;
+    }
     }
     }
     return BFS_RNOMATCH;
     }
     static inline enum bfs_result
-    __bfs_forwards(struct lock_list *src_entry,
+    __bfs_forwards(lock_list *src_entry,
     void *data,
-    bool (*match)(struct lock_list *entry, void *data),
-    bool (*skip)(struct lock_list *entry, void *data),
-    struct lock_list **target_entry)
+    bool (*match)(lock_list *entry, void *data),
+    bool (*skip)(lock_list *entry, void *data), lock_list **target_entry)
     {
     return __bfs(src_entry, data, match, skip, target_entry,
-    offsetof(struct lock_class, locks_after));
+    offsetof(lock_class, locks_after));
     }
     static inline enum bfs_result
-    __bfs_backwards(struct lock_list *src_entry,
+    __bfs_backwards(lock_list *src_entry,
     void *data,
-    bool (*match)(struct lock_list *entry, void *data),
-    bool (*skip)(struct lock_list *entry, void *data),
-    struct lock_list **target_entry)
+    bool (*match)(lock_list *entry, void *data),
+    bool (*skip)(lock_list *entry, void *data), lock_list **target_entry)
     {
     return __bfs(src_entry, data, match, skip, target_entry,
-    offsetof(struct lock_class, locks_before));
+    offsetof(lock_class, locks_before));
     }
-    static void print_lock_trace(const struct lock_trace *trace,
-    unsigned int spaces)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn print_lock_trace(trace: *mut lock_trace, spaces: c_uint) {
     stack_trace_print(trace.entries, trace.nr_entries, spaces);
     }
 //
@@ -1728,25 +1891,23 @@ pub unsafe extern "C" fn calc_depb(prev: *mut held_lock, next: *mut held_lock) -
 // has been detected):
 //
     static noinline void
-    print_circular_bug_entry(struct lock_list *target, int depth)
+    print_circular_bug_entry(lock_list *target, int depth)
     {
-    if (debug_locks_silent)
+    if (debug_locks_silent) {
     return;
+    }
     printk("\n. #%u", depth);
     print_lock_name(core::ptr::null_mut(), target.class);
-    printk(KERN_CONT ":\n");
+    printk(":\n");
     print_lock_trace(target.trace, 6);
     }
-    static void
-    print_circular_lock_scenario(struct held_lock *src,
-    struct held_lock *tgt,
-    struct lock_list *prt)
-    {
-    struct lock_class *source = hlock_class(src);
-    struct lock_class *target = hlock_class(tgt);
-    struct lock_class *parent = prt.class;
-    let mut src_read: c_int = src.read;
-    let mut tgt_read: c_int = tgt.read;
+#[no_mangle]
+pub unsafe extern "C" fn print_circular_lock_scenario(src: *mut held_lock, tgt: *mut held_lock, prt: *mut lock_list) {
+    let mut source = hlock_class(src);
+    let mut target = hlock_class(tgt);
+    let mut parent = prt.class;
+pub static mut src_read: c_int = 0;
+pub static mut tgt_read: c_int = 0;
 //
 // A direct locking problem where unsafe_class lock is taken
 // directly by safe_class lock, then all we need to show
@@ -1763,37 +1924,41 @@ pub unsafe extern "C" fn calc_depb(prev: *mut held_lock, next: *mut held_lock) -
     if (parent != source) {
     printk("Chain exists of:\n  ");
     __print_lock_name(src, source);
-    printk(KERN_CONT " -. ");
+    printk(" -. ");
     __print_lock_name(core::ptr::null_mut(), parent);
-    printk(KERN_CONT " -. ");
+    printk(" -. ");
     __print_lock_name(tgt, target);
-    printk(KERN_CONT "\n\n");
+    printk("\n\n");
     }
     printk(" Possible unsafe locking scenario:\n\n");
     printk("       CPU0                    CPU1\n");
     printk("       ----                    ----\n");
-    if (tgt_read != 0)
+    if (tgt_read != 0) {
     printk("  rlock(");
-    else
+    }
+    else {
     printk("  lock(");
+    }
     __print_lock_name(tgt, target);
-    printk(KERN_CONT ");\n");
+    printk(");\n");
     printk("                               lock(");
     __print_lock_name(core::ptr::null_mut(), parent);
-    printk(KERN_CONT ");\n");
+    printk(");\n");
     printk("                               lock(");
     __print_lock_name(tgt, target);
-    printk(KERN_CONT ");\n");
-    if (src_read != 0)
+    printk(");\n");
+    if (src_read != 0) {
     printk("  rlock(");
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: src->sync) -> else {
-    else if (src.sync)
+    }
+
+    else if (src.sync) {
     printk("  sync(");
-    else
+    }
+    else {
     printk("  lock(");
+    }
     __print_lock_name(src, source);
-    printk(KERN_CONT ");\n");
+    printk(");\n");
     printk("\n *** DEADLOCK ***\n\n");
     }
 //
@@ -1801,25 +1966,24 @@ pub unsafe extern "C" fn if(_arg: src->sync) -> else {
 // header first:
 //
     static noinline void
-    print_circular_bug_header(struct lock_list *entry, unsigned int depth,
-    struct held_lock *check_src,
-    struct held_lock *check_tgt)
+    print_circular_bug_header(lock_list *entry, unsigned int depth, held_lock *check_src, held_lock *check_tgt)
     {
-    struct task_struct *curr = current;
-    if (debug_locks_silent)
+    let mut curr = current;
+    if (debug_locks_silent) {
     return;
-    pr_warn("\n");
-    pr_warn("======================================================\n");
-    pr_warn("WARNING: possible circular locking dependency detected\n");
+    }
+    pr_warn!("\n");
+    pr_warn!("======================================================\n");
+    pr_warn!("WARNING: possible circular locking dependency detected\n");
     print_kernel_ident();
-    pr_warn("------------------------------------------------------\n");
-    pr_warn("%s/%d is trying to acquire lock:\n",
+    pr_warn!("------------------------------------------------------\n");
+    pr_warn!("%s/%d is trying to acquire lock:\n",
     curr.comm, task_pid_nr(curr));
     print_lock(check_src);
-    pr_warn("\nbut task is already holding lock:\n");
+    pr_warn!("\nbut task is already holding lock:\n");
     print_lock(check_tgt);
-    pr_warn("\nwhich lock already depends on the new lock.\n\n");
-    pr_warn("\nthe existing dependency chain (in reverse order) is:\n");
+    pr_warn!("\nwhich lock already depends on the new lock.\n\n");
+    pr_warn!("\nthe existing dependency chain (in reverse order) is:\n");
     print_circular_bug_entry(entry, depth);
     }
 //
@@ -1842,27 +2006,24 @@ pub unsafe extern "C" fn if(_arg: src->sync) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn hlock_conflict(entry: *mut lock_list, data: *mut c_void) -> bool {
-    static inline bool hlock_conflict(struct lock_list *entry, void *data)
-    {
-    struct held_lock *hlock = (struct held_lock *)data;
+    let mut hlock = data;
     return hlock_class(hlock) == entry.class && /* Found A . .. . B */
     (hlock.read == 0 || /* B . A is -(E*). */
     !entry.only_xr); /* A . .. . B is -(*N). */
     }
-    static noinline void print_circular_bug(struct lock_list *this,
-    struct lock_list *target,
-    struct held_lock *check_src,
-    struct held_lock *check_tgt)
+    static noinline void print_circular_bug(lock_list *this, lock_list *target, held_lock *check_src, held_lock *check_tgt)
     {
-    struct task_struct *curr = current;
-    struct lock_list *parent;
-    struct lock_list *first_parent;
-    int depth;
-    if (!debug_locks_off_graph_unlock() || debug_locks_silent)
+    let mut curr = current;
+pub static mut parent: *mut c_void = core::ptr::null_mut();
+pub static mut first_parent: *mut c_void = core::ptr::null_mut();
+    let mut depth = 0;
+    if (!debug_locks_off_graph_unlock() || debug_locks_silent) {
     return;
+    }
     this.trace = save_trace();
-    if (!this.trace)
+    if (!this.trace) {
     return;
+    }
     depth = get_lock_depth(target);
     nbcon_cpu_emergency_enter();
     print_circular_bug_header(target, depth, check_src, check_tgt);
@@ -1882,39 +2043,33 @@ pub unsafe extern "C" fn hlock_conflict(entry: *mut lock_list, data: *mut c_void
     }
 #[no_mangle]
 unsafe extern "C" fn print_bfs_bug(ret: c_int) -> noinline void {
-    static noinline void print_bfs_bug(int ret)
-    {
-    if (!debug_locks_off_graph_unlock())
+    if (!debug_locks_off_graph_unlock()) {
     return;
+    }
 //
 // Breadth-first-search failed, graph got corrupted?
 //
-    if (ret == BFS_EQUEUEFULL)
-    pr_warn("Increase LOCKDEP_CIRCULAR_QUEUE_BITS to avoid this warning:\n");
+    if (ret == BFS_EQUEUEFULL) {
+    pr_warn!("Increase LOCKDEP_CIRCULAR_QUEUE_BITS to avoid this warning:\n");
+    }
     WARN(1, "lockdep bfs error:%d\n", ret);
     }
 #[no_mangle]
 unsafe extern "C" fn noop_count(entry: *mut lock_list, data: *mut c_void) -> bool {
-    static bool noop_count(struct lock_list *entry, void *data)
-    {
-    (*(unsigned long *)data)++;
+    (*data)++;
     return false;
     }
 #[no_mangle]
 unsafe extern "C" fn __lockdep_count_forward_deps(this: *mut lock_list) -> c_ulong {
-    static unsigned long __lockdep_count_forward_deps(struct lock_list *this)
-    {
-    let mut count: c_ulong = 0;
-    struct lock_list *target_entry;
-    __bfs_forwards(this, (void *)&count, noop_count, core::ptr::null_mut(), &target_entry);
+pub static mut count: c_ulong = 0;
+pub static mut target_entry: *mut c_void = core::ptr::null_mut();
+    __bfs_forwards(this, &count, noop_count, core::ptr::null_mut(), &target_entry);
     return count;
     }
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_count_forward_deps(class: *mut lock_class) -> c_ulong {
-    unsigned long lockdep_count_forward_deps(struct lock_class *class)
-    {
     unsigned long ret, flags;
-    struct lock_list this;
+pub static mut this: usize = 0;
     __bfs_init_root(&this, class);
     raw_local_irq_save(flags);
     lockdep_lock();
@@ -1925,19 +2080,15 @@ pub unsafe extern "C" fn lockdep_count_forward_deps(class: *mut lock_class) -> c
     }
 #[no_mangle]
 unsafe extern "C" fn __lockdep_count_backward_deps(this: *mut lock_list) -> c_ulong {
-    static unsigned long __lockdep_count_backward_deps(struct lock_list *this)
-    {
-    let mut count: c_ulong = 0;
-    struct lock_list *target_entry;
-    __bfs_backwards(this, (void *)&count, noop_count, core::ptr::null_mut(), &target_entry);
+pub static mut count: c_ulong = 0;
+pub static mut target_entry: *mut c_void = core::ptr::null_mut();
+    __bfs_backwards(this, &count, noop_count, core::ptr::null_mut(), &target_entry);
     return count;
     }
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_count_backward_deps(class: *mut lock_class) -> c_ulong {
-    unsigned long lockdep_count_backward_deps(struct lock_class *class)
-    {
     unsigned long ret, flags;
-    struct lock_list this;
+pub static mut this: usize = 0;
     __bfs_init_root(&this, class);
     raw_local_irq_save(flags);
     lockdep_lock();
@@ -1951,18 +2102,18 @@ pub unsafe extern "C" fn lockdep_count_backward_deps(class: *mut lock_class) -> 
 // <target> or not.
 //
     static noinline enum bfs_result
-    check_path(struct held_lock *target, struct lock_list *src_entry,
-    bool (*match)(struct lock_list *entry, void *data),
-    bool (*skip)(struct lock_list *entry, void *data),
-    struct lock_list **target_entry)
+    check_path(held_lock *target, lock_list *src_entry,
+    bool (*match)(lock_list *entry, void *data),
+    bool (*skip)(lock_list *entry, void *data), lock_list **target_entry)
     {
     enum bfs_result ret;
     ret = __bfs_forwards(src_entry, target, match, skip, target_entry);
-    if (unlikely(bfs_error(ret)))
+    if (unlikely(bfs_error(ret))) {
     print_bfs_bug(ret);
+    }
     return ret;
     }
-    static void print_deadlock_bug(struct task_struct *, struct held_lock *, struct held_lock *);
+// forward_decl: print_deadlock_bug;
 //
 // Prove that the dependency graph starting at <src> can not
 // lead to <target>. If it can, there is a circle when adding
@@ -1971,12 +2122,11 @@ pub unsafe extern "C" fn lockdep_count_backward_deps(class: *mut lock_class) -> 
 // Print an error and return BFS_RMATCH if it does.
 //
     static noinline enum bfs_result
-    check_noncircular(struct held_lock *src, struct held_lock *target,
-    struct lock_trace **const trace)
+    check_noncircular(held_lock *src, held_lock *target, lock_trace **const trace)
     {
     enum bfs_result ret;
-    struct lock_list *target_entry;
-    struct lock_list src_entry;
+pub static mut target_entry: *mut c_void = core::ptr::null_mut();
+pub static mut src_entry: usize = 0;
     bfs_init_root(&src_entry, src);
     debug_atomic_inc(nr_cyclic_checks);
     ret = check_path(target, &src_entry, hlock_conflict, core::ptr::null_mut(), &target_entry);
@@ -1989,10 +2139,12 @@ pub unsafe extern "C" fn lockdep_count_backward_deps(class: *mut lock_class) -> 
 //
 // trace = save_trace();
     }
-    if (src.class_idx == target.class_idx)
+    if (src.class_idx == target.class_idx) {
     print_deadlock_bug(current, src, target);
-    else
+    }
+    else {
     print_circular_bug(&src_entry, target_entry, src, target);
+    }
     }
     return ret;
     }
@@ -2038,12 +2190,11 @@ pub unsafe extern "C" fn lockdep_count_backward_deps(class: *mut lock_class) -> 
 //
 #[no_mangle]
 pub unsafe extern "C" fn usage_accumulate(entry: *mut lock_list, mask: *mut c_void) -> bool {
-    static inline bool usage_accumulate(struct lock_list *entry, void *mask)
-    {
-    if (!entry.only_xr)
-// (unsigned long *)mask |= entry->class->usage_mask;
+    if (!entry.only_xr) {
+// mask |= entry->class->usage_mask;
+    }
     else /* Mask out _READ usage bits */
-// (unsigned long *)mask |= (entry->class->usage_mask & LOCKF_IRQ);
+// mask |= (entry->class->usage_mask & LOCKF_IRQ);
     return false;
     }
 //
@@ -2057,19 +2208,17 @@ pub unsafe extern "C" fn usage_accumulate(entry: *mut lock_list, mask: *mut c_vo
 //
 #[no_mangle]
 pub unsafe extern "C" fn usage_match(entry: *mut lock_list, mask: *mut c_void) -> bool {
-    static inline bool usage_match(struct lock_list *entry, void *mask)
-    {
-    if (!entry.only_xr)
-    return !!(entry.class.usage_mask & *(unsigned long *)mask);
+    if (!entry.only_xr) {
+    return !!(entry.class.usage_mask & *mask);
+    }
     else /* Mask out _READ usage bits */
-    return !!((entry.class.usage_mask & LOCKF_IRQ) & *(unsigned long *)mask);
+    return !!((entry.class.usage_mask & LOCKF_IRQ) & *mask);
     }
 #[no_mangle]
 pub unsafe extern "C" fn usage_skip(entry: *mut lock_list, mask: *mut c_void) -> bool {
-    static inline bool usage_skip(struct lock_list *entry, void *mask)
-    {
-    if (entry.class.lock_type == LD_LOCK_NORMAL)
+    if (entry.class.lock_type == LD_LOCK_NORMAL) {
     return false;
+    }
 //
 // Skip local_lock() for irq inversion detection.
 //
@@ -2097,8 +2246,9 @@ pub unsafe extern "C" fn usage_skip(entry: *mut lock_list, mask: *mut c_void) ->
 // inversion bugs.
 //
     if (entry.class.lock_type == LD_LOCK_PERCPU &&
-    DEBUG_LOCKS_WARN_ON(entry.class.wait_type_inner < LD_WAIT_CONFIG))
+    DEBUG_LOCKS_WARN_ON(entry.class.wait_type_inner < LD_WAIT_CONFIG)) {
     return false;
+    }
 //
 // Skip WAIT_OVERRIDE for irq inversion detection -- it's not actually
 // a lock and only used to override the wait_type.
@@ -2113,8 +2263,7 @@ pub unsafe extern "C" fn usage_skip(entry: *mut lock_list, mask: *mut c_void) ->
 // into *@target_entry.
 //
     static enum bfs_result
-    find_usage_forwards(struct lock_list *root, unsigned long usage_mask,
-    struct lock_list **target_entry)
+    find_usage_forwards(lock_list *root, unsigned long usage_mask, lock_list **target_entry)
     {
     enum bfs_result result;
     debug_atomic_inc(nr_find_usage_forwards_checks);
@@ -2126,8 +2275,7 @@ pub unsafe extern "C" fn usage_skip(entry: *mut lock_list, mask: *mut c_void) ->
 // at @root->class that matches @bit.
 //
     static enum bfs_result
-    find_usage_backwards(struct lock_list *root, unsigned long usage_mask,
-    struct lock_list **target_entry)
+    find_usage_backwards(lock_list *root, unsigned long usage_mask, lock_list **target_entry)
     {
     enum bfs_result result;
     debug_atomic_inc(nr_find_usage_backwards_checks);
@@ -2136,20 +2284,18 @@ pub unsafe extern "C" fn usage_skip(entry: *mut lock_list, mask: *mut c_void) ->
     }
 #[no_mangle]
 unsafe extern "C" fn print_lock_class_header(class: *mut lock_class, depth: c_int) {
-    static void print_lock_class_header(struct lock_class *class, int depth)
-    {
-    int bit;
+    let mut bit = 0;
     printk("%*s.", depth, "");
     print_lock_name(core::ptr::null_mut(), class);
 
-    printk(KERN_CONT " ops: %lu", debug_class_ops_read(class));
+    printk(" ops: %lu", debug_class_ops_read(class));
 
-    printk(KERN_CONT " {\n");
-    for (bit = 0; bit < LOCK_TRACE_STATES; bit++) {
+    printk(" {\n");
+    while (bit < LOCK_TRACE_STATES) {
     if (class.usage_mask & (1 << bit)) {
-    let mut len: c_int = depth;
+pub static mut len: c_int = 0;
     len += printk("%*s   %s", depth, "", usage_str[bit]);
-    len += printk(KERN_CONT " at:\n");
+    len += printk(" at:\n");
     print_lock_trace(class.usage_traces[bit], len);
     }
     }
@@ -2208,11 +2354,10 @@ unsafe extern "C" fn print_lock_class_header(class: *mut lock_class, depth: c_in
 // ->trace until we reach the @root.
 //
     static void __used
-    print_shortest_lock_dependencies(struct lock_list *leaf,
-    struct lock_list *root)
+    print_shortest_lock_dependencies(lock_list *leaf, lock_list *root)
     {
-    struct lock_list *entry = leaf;
-    int depth;
+    let mut entry = leaf;
+    let mut depth = 0;
 // compute depth from generated tree by BFS
     depth = get_lock_depth(leaf);
     do {
@@ -2225,7 +2370,7 @@ unsafe extern "C" fn print_lock_class_header(class: *mut lock_class, depth: c_in
     break;
     }
     entry = get_lock_parent(entry);
-    depth--;
+    depth -= 1;
     } while (entry && (depth >= 0));
     }
 //
@@ -2249,12 +2394,11 @@ unsafe extern "C" fn print_lock_class_header(class: *mut lock_class, depth: c_in
 // time we can figure out where L1 is held from the call trace of L2.
 //
     static void __used
-    print_shortest_lock_dependencies_backwards(struct lock_list *leaf,
-    struct lock_list *root)
+    print_shortest_lock_dependencies_backwards(lock_list *leaf, lock_list *root)
     {
-    struct lock_list *entry = leaf;
-    const struct lock_trace *trace = core::ptr::null_mut();
-    int depth;
+    let mut entry = leaf;
+    let mut trace = core::ptr::null_mut();
+    let mut depth = 0;
 // compute depth from generated tree by BFS
     depth = get_lock_depth(leaf);
     do {
@@ -2274,20 +2418,17 @@ unsafe extern "C" fn print_lock_class_header(class: *mut lock_class, depth: c_in
     break;
     }
     entry = get_lock_parent(entry);
-    depth--;
+    depth -= 1;
     } while (entry && (depth >= 0));
     }
-    static void
-    print_irq_lock_scenario(struct lock_list *safe_entry,
-    struct lock_list *unsafe_entry,
-    struct lock_class *prev_class,
-    struct lock_class *next_class)
-    {
-    struct lock_class *safe_class = safe_entry.class;
-    struct lock_class *unsafe_class = unsafe_entry.class;
-    struct lock_class *middle_class = prev_class;
-    if (middle_class == safe_class)
+#[no_mangle]
+pub unsafe extern "C" fn print_irq_lock_scenario(safe_entry: *mut lock_list, unsafe_entry: *mut lock_list, prev_class: *mut lock_class, next_class: *mut lock_class) {
+    let mut safe_class = safe_entry.class;
+    let mut unsafe_class = unsafe_entry.class;
+    let mut middle_class = prev_class;
+    if (middle_class == safe_class) {
     middle_class = next_class;
+    }
 //
 // A direct locking problem where unsafe_class lock is taken
 // directly by safe_class lock, then all we need to show
@@ -2304,91 +2445,83 @@ unsafe extern "C" fn print_lock_class_header(class: *mut lock_class, depth: c_in
     if (middle_class != unsafe_class) {
     printk("Chain exists of:\n  ");
     __print_lock_name(core::ptr::null_mut(), safe_class);
-    printk(KERN_CONT " -. ");
+    printk(" -. ");
     __print_lock_name(core::ptr::null_mut(), middle_class);
-    printk(KERN_CONT " -. ");
+    printk(" -. ");
     __print_lock_name(core::ptr::null_mut(), unsafe_class);
-    printk(KERN_CONT "\n\n");
+    printk("\n\n");
     }
     printk(" Possible interrupt unsafe locking scenario:\n\n");
     printk("       CPU0                    CPU1\n");
     printk("       ----                    ----\n");
     printk("  lock(");
     __print_lock_name(core::ptr::null_mut(), unsafe_class);
-    printk(KERN_CONT ");\n");
+    printk(");\n");
     printk("                               local_irq_disable();\n");
     printk("                               lock(");
     __print_lock_name(core::ptr::null_mut(), safe_class);
-    printk(KERN_CONT ");\n");
+    printk(");\n");
     printk("                               lock(");
     __print_lock_name(core::ptr::null_mut(), middle_class);
-    printk(KERN_CONT ");\n");
+    printk(");\n");
     printk("  <Interrupt>\n");
     printk("    lock(");
     __print_lock_name(core::ptr::null_mut(), safe_class);
-    printk(KERN_CONT ");\n");
+    printk(");\n");
     printk("\n *** DEADLOCK ***\n\n");
     }
-    static void
-    print_bad_irq_dependency(struct task_struct *curr,
-    struct lock_list *prev_root,
-    struct lock_list *next_root,
-    struct lock_list *backwards_entry,
-    struct lock_list *forwards_entry,
-    struct held_lock *prev,
-    struct held_lock *next,
-    enum lock_usage_bit bit1,
-    enum lock_usage_bit bit2,
-    const char *irqclass)
-    {
-    if (!debug_locks_off_graph_unlock() || debug_locks_silent)
+#[no_mangle]
+pub unsafe extern "C" fn print_bad_irq_dependency(curr: *mut task_struct, prev_root: *mut lock_list, next_root: *mut lock_list, backwards_entry: *mut lock_list, forwards_entry: *mut lock_list, prev: *mut held_lock, next: *mut held_lock, bit1: lock_usage_bit, bit2: lock_usage_bit, irqclass: *mut c_char) {
+    if (!debug_locks_off_graph_unlock() || debug_locks_silent) {
     return;
+    }
     nbcon_cpu_emergency_enter();
-    pr_warn("\n");
-    pr_warn("=====================================================\n");
-    pr_warn("WARNING: %s-safe . %s-unsafe lock order detected\n",
+    pr_warn!("\n");
+    pr_warn!("=====================================================\n");
+    pr_warn!("WARNING: %s-safe . %s-unsafe lock order detected\n",
     irqclass, irqclass);
     print_kernel_ident();
-    pr_warn("-----------------------------------------------------\n");
-    pr_warn("%s/%d [HC%u[%lu]:SC%u[%lu]:HE%u:SE%u] is trying to acquire:\n",
+    pr_warn!("-----------------------------------------------------\n");
+    pr_warn!("%s/%d [HC%u[%lu]:SC%u[%lu]:HE%u:SE%u] is trying to acquire:\n",
     curr.comm, task_pid_nr(curr),
     lockdep_hardirq_context(), hardirq_count() >> HARDIRQ_SHIFT,
     curr.softirq_context, softirq_count() >> SOFTIRQ_SHIFT,
     lockdep_hardirqs_enabled(),
     curr.softirqs_enabled);
     print_lock(next);
-    pr_warn("\nand this task is already holding:\n");
+    pr_warn!("\nand this task is already holding:\n");
     print_lock(prev);
-    pr_warn("which would create a new lock dependency:\n");
+    pr_warn!("which would create a new lock dependency:\n");
     print_lock_name(prev, hlock_class(prev));
     pr_cont(" .");
     print_lock_name(next, hlock_class(next));
     pr_cont("\n");
-    pr_warn("\nbut this new dependency connects a %s-irq-safe lock:\n",
+    pr_warn!("\nbut this new dependency connects a %s-irq-safe lock:\n",
     irqclass);
     print_lock_name(core::ptr::null_mut(), backwards_entry.class);
-    pr_warn("\n... which became %s-irq-safe at:\n", irqclass);
+    pr_warn!("\n... which became %s-irq-safe at:\n", irqclass);
     print_lock_trace(backwards_entry.class.usage_traces[bit1], 1);
-    pr_warn("\nto a %s-irq-unsafe lock:\n", irqclass);
+    pr_warn!("\nto a %s-irq-unsafe lock:\n", irqclass);
     print_lock_name(core::ptr::null_mut(), forwards_entry.class);
-    pr_warn("\n... which became %s-irq-unsafe at:\n", irqclass);
-    pr_warn("...");
+    pr_warn!("\n... which became %s-irq-unsafe at:\n", irqclass);
+    pr_warn!("...");
     print_lock_trace(forwards_entry.class.usage_traces[bit2], 1);
-    pr_warn("\nother info that might help us debug this:\n\n");
+    pr_warn!("\nother info that might help us debug this:\n\n");
     print_irq_lock_scenario(backwards_entry, forwards_entry,
     hlock_class(prev), hlock_class(next));
     lockdep_print_held_locks(curr);
-    pr_warn("\nthe dependencies between %s-irq-safe lock and the holding lock:\n", irqclass);
+    pr_warn!("\nthe dependencies between %s-irq-safe lock and the holding lock:\n", irqclass);
     print_shortest_lock_dependencies_backwards(backwards_entry, prev_root);
-    pr_warn("\nthe dependencies between the lock to be acquired");
-    pr_warn(" and %s-irq-unsafe lock:\n", irqclass);
+    pr_warn!("\nthe dependencies between the lock to be acquired");
+    pr_warn!(" and %s-irq-unsafe lock:\n", irqclass);
     next_root.trace = save_trace();
-    if (!next_root.trace)
-    goto out;
+    if (!next_root.trace) {
+// goto;
+    }
     print_shortest_lock_dependencies(forwards_entry, next_root);
-    pr_warn("\nstack backtrace:\n");
+    pr_warn!("\nstack backtrace:\n");
     dump_stack();
-    out:
+// label;
     nbcon_cpu_emergency_exit();
     }
     static const char *state_names[] = {
@@ -2403,10 +2536,12 @@ unsafe extern "C" fn print_lock_class_header(class: *mut lock_class, depth: c_in
     };
     static inline const char *state_name(enum lock_usage_bit bit)
     {
-    if (bit & LOCK_USAGE_READ_MASK)
+    if (bit & LOCK_USAGE_READ_MASK) {
     return state_rnames[bit >> LOCK_USAGE_DIR_MASK];
-    else
+    }
+    else {
     return state_names[bit >> LOCK_USAGE_DIR_MASK];
+    }
     }
 //
 // The bit number is encoded like:
@@ -2417,10 +2552,8 @@ unsafe extern "C" fn print_lock_class_header(class: *mut lock_class, depth: c_in
 //
 #[no_mangle]
 unsafe extern "C" fn exclusive_bit(new_bit: c_int) -> c_int {
-    static int exclusive_bit(int new_bit)
-    {
-    let mut state: c_int = new_bit & LOCK_USAGE_STATE_MASK;
-    let mut dir: c_int = new_bit & LOCK_USAGE_DIR_MASK;
+pub static mut state: c_int = 0;
+pub static mut dir: c_int = 0;
 //
 // keep state, bit flip the direction and strip read.
 //
@@ -2442,9 +2575,7 @@ unsafe extern "C" fn exclusive_bit(new_bit: c_int) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn invert_dir_mask(mask: c_ulong) -> c_ulong {
-    static unsigned long invert_dir_mask(unsigned long mask)
-    {
-    let mut excl: c_ulong = 0;
+pub static mut excl: c_ulong = 0;
 // Invert dir
     excl |= (mask & LOCKF_ENABLED_IRQ_ALL) >> LOCK_USAGE_DIR_MASK;
     excl |= (mask & LOCKF_USED_IN_IRQ_ALL) << LOCK_USAGE_DIR_MASK;
@@ -2480,9 +2611,7 @@ unsafe extern "C" fn invert_dir_mask(mask: c_ulong) -> c_ulong {
 //
 #[no_mangle]
 unsafe extern "C" fn exclusive_mask(mask: c_ulong) -> c_ulong {
-    static unsigned long exclusive_mask(unsigned long mask)
-    {
-    let mut excl: c_ulong = invert_dir_mask(mask);
+pub static mut excl: c_ulong = 0;
     excl |= (excl & LOCKF_IRQ_READ) >> LOCK_USAGE_READ_MASK;
     excl |= (excl & LOCKF_IRQ) << LOCK_USAGE_READ_MASK;
     return excl;
@@ -2496,9 +2625,7 @@ unsafe extern "C" fn exclusive_mask(mask: c_ulong) -> c_ulong {
 //
 #[no_mangle]
 unsafe extern "C" fn original_mask(mask: c_ulong) -> c_ulong {
-    static unsigned long original_mask(unsigned long mask)
-    {
-    let mut excl: c_ulong = invert_dir_mask(mask);
+pub static mut excl: c_ulong = 0;
 // Include read in existing usages
     excl |= (excl & LOCKF_IRQ_READ) >> LOCK_USAGE_READ_MASK;
     excl |= (excl & LOCKF_IRQ) << LOCK_USAGE_READ_MASK;
@@ -2508,12 +2635,11 @@ unsafe extern "C" fn original_mask(mask: c_ulong) -> c_ulong {
 // Find the first pair of bit match between an original
 // usage mask and an exclusive usage mask.
 //
-    static int find_exclusive_match(unsigned long mask,
-    unsigned long excl_mask,
-    enum lock_usage_bit *bitp,
-    enum lock_usage_bit *excl_bitp)
-    {
-    int bit, excl, excl_read;
+#[no_mangle]
+pub unsafe extern "C" fn find_exclusive_match(mask: c_ulong, excl_mask: c_ulong, bitp: *mut lock_usage_bit, excl_bitp: *mut lock_usage_bit) -> c_int {
+    let mut bit = 0;
+    let mut excl = 0;
+    let mut excl_read = 0;
     for_each_set_bit(bit, &mask, LOCK_USED) {
 //
 // exclusive_bit() strips the read bit, however,
@@ -2540,13 +2666,12 @@ unsafe extern "C" fn original_mask(mask: c_ulong) -> c_ulong {
 // the backwards-subgraph starting at <prev>, and the
 // forwards-subgraph starting at <next>:
 //
-    static int check_irq_usage(struct task_struct *curr, struct held_lock *prev,
-    struct held_lock *next)
-    {
-    let mut usage_mask: c_ulong = 0, forward_mask, backward_mask;
-    let mut forward_bit: enum lock_usage_bit = 0, backward_bit = 0;
-    struct lock_list *target_entry1;
-    struct lock_list *target_entry;
+#[no_mangle]
+pub unsafe extern "C" fn check_irq_usage(curr: *mut task_struct, prev: *mut held_lock, next: *mut held_lock) -> c_int {
+pub static mut usage_mask: c_ulong = 0;
+pub static mut forward_bit: lock_usage_bit = 0;
+pub static mut target_entry1: *mut c_void = core::ptr::null_mut();
+pub static mut target_entry: *mut c_void = core::ptr::null_mut();
     struct lock_list this, that;
     enum bfs_result ret;
 //
@@ -2560,8 +2685,9 @@ unsafe extern "C" fn original_mask(mask: c_ulong) -> c_ulong {
     return 0;
     }
     usage_mask &= LOCKF_USED_IN_IRQ_ALL;
-    if (!usage_mask)
+    if (!usage_mask) {
     return 1;
+    }
 //
 // Step 2: find exclusive uses forward that match the previous
 // backward accumulated mask.
@@ -2573,8 +2699,9 @@ unsafe extern "C" fn original_mask(mask: c_ulong) -> c_ulong {
     print_bfs_bug(ret);
     return 0;
     }
-    if (ret == BFS_RNOMATCH)
+    if (ret == BFS_RNOMATCH) {
     return 1;
+    }
 //
 // Step 3: we found a bad match! Now retrieve a lock from the backward
 // list whose usage mask matches the exclusive usage mask from the
@@ -2596,8 +2723,9 @@ unsafe extern "C" fn original_mask(mask: c_ulong) -> c_ulong {
     print_bfs_bug(ret);
     return 0;
     }
-    if (DEBUG_LOCKS_WARN_ON(ret == BFS_RNOMATCH))
+    if (DEBUG_LOCKS_WARN_ON(ret == BFS_RNOMATCH)) {
     return 1;
+    }
 //
 // Step 4: narrow down to a pair of incompatible usage bits
 // and report it.
@@ -2605,8 +2733,9 @@ unsafe extern "C" fn original_mask(mask: c_ulong) -> c_ulong {
     ret = find_exclusive_match(target_entry.class.usage_mask,
     target_entry1.class.usage_mask,
     &backward_bit, &forward_bit);
-    if (DEBUG_LOCKS_WARN_ON(ret == -1))
+    if (DEBUG_LOCKS_WARN_ON(ret == -1)) {
     return 1;
+    }
     print_bad_irq_dependency(curr, &this, &that,
     target_entry, target_entry1,
     prev, next,
@@ -2615,15 +2744,16 @@ unsafe extern "C" fn original_mask(mask: c_ulong) -> c_ulong {
     return 0;
     }
 
-    static inline int check_irq_usage(struct task_struct *curr,
-    struct held_lock *prev, struct held_lock *next)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: check_irq_usage
+pub unsafe extern "C" fn check_irq_usage_dup(curr: *mut task_struct, prev: *mut held_lock, next: *mut held_lock) -> c_int {
     return 1;
     }
 #[no_mangle]
-pub unsafe extern "C" fn usage_skip(entry: *mut lock_list, mask: *mut c_void) -> bool {
-    static inline bool usage_skip(struct lock_list *entry, void *mask)
-    {
+#[no_mangle]
+// duplicate fn: usage_skip
+pub unsafe extern "C" fn usage_skip_dup(entry: *mut lock_list, mask: *mut c_void) -> bool {
     return false;
     }
 
@@ -2654,9 +2784,7 @@ pub unsafe extern "C" fn usage_skip(entry: *mut lock_list, mask: *mut c_void) ->
 //
 #[no_mangle]
 pub unsafe extern "C" fn hlock_equal(entry: *mut lock_list, data: *mut c_void) -> bool {
-    static inline bool hlock_equal(struct lock_list *entry, void *data)
-    {
-    struct held_lock *hlock = (struct held_lock *)data;
+    let mut hlock = data;
     return hlock_class(hlock) == entry.class && /* Found A . .. . B */
     (hlock.read == 2 ||  /* A . B is -(*R). */
     !entry.only_xr); /* A . .. . B is -(*N). */
@@ -2670,11 +2798,11 @@ pub unsafe extern "C" fn hlock_equal(entry: *mut lock_list, data: *mut c_void) -
 // any error appears in the bfs search.
 //
     static noinline enum bfs_result
-    check_redundant(struct held_lock *src, struct held_lock *target)
+    check_redundant(held_lock *src, held_lock *target)
     {
     enum bfs_result ret;
-    struct lock_list *target_entry;
-    struct lock_list src_entry;
+pub static mut target_entry: *mut c_void = core::ptr::null_mut();
+pub static mut src_entry: usize = 0;
     bfs_init_root(&src_entry, src);
 //
 // Special setup for check_redundant().
@@ -2694,86 +2822,85 @@ pub unsafe extern "C" fn hlock_equal(entry: *mut lock_list, data: *mut c_void) -
 // the same.
 //
     ret = check_path(target, &src_entry, hlock_equal, usage_skip, &target_entry);
-    if (ret == BFS_RMATCH)
+    if (ret == BFS_RMATCH) {
     debug_atomic_inc(nr_redundant);
+    }
     return ret;
     }
 
     static inline enum bfs_result
-    check_redundant(struct held_lock *src, struct held_lock *target)
+    check_redundant(held_lock *src, held_lock *target)
     {
     return BFS_RNOMATCH;
     }
 
 #[no_mangle]
 unsafe extern "C" fn inc_chains(irq_context: c_int) {
-    static void inc_chains(int irq_context)
-    {
-    if (irq_context & LOCK_CHAIN_HARDIRQ_CONTEXT)
-    nr_hardirq_chains++;
-#[no_mangle]
-pub unsafe extern "C" fn if(LOCK_CHAIN_SOFTIRQ_CONTEXT: irq_context &) -> else {
-    else if (irq_context & LOCK_CHAIN_SOFTIRQ_CONTEXT)
-    nr_softirq_chains++;
-    else
-    nr_process_chains++;
+    if (irq_context & LOCK_CHAIN_HARDIRQ_CONTEXT) {
+    nr_hardirq_chains += 1;
+    }
+
+    else if (irq_context & LOCK_CHAIN_SOFTIRQ_CONTEXT) {
+    nr_softirq_chains += 1;
+    }
+    else {
+    nr_process_chains += 1;
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn dec_chains(irq_context: c_int) {
-    static void dec_chains(int irq_context)
-    {
-    if (irq_context & LOCK_CHAIN_HARDIRQ_CONTEXT)
-    nr_hardirq_chains--;
-#[no_mangle]
-pub unsafe extern "C" fn if(LOCK_CHAIN_SOFTIRQ_CONTEXT: irq_context &) -> else {
-    else if (irq_context & LOCK_CHAIN_SOFTIRQ_CONTEXT)
-    nr_softirq_chains--;
-    else
-    nr_process_chains--;
+    if (irq_context & LOCK_CHAIN_HARDIRQ_CONTEXT) {
+    nr_hardirq_chains -= 1;
     }
-    static void
-    print_deadlock_scenario(struct held_lock *nxt, struct held_lock *prv)
-    {
-    struct lock_class *next = hlock_class(nxt);
-    struct lock_class *prev = hlock_class(prv);
+
+    else if (irq_context & LOCK_CHAIN_SOFTIRQ_CONTEXT) {
+    nr_softirq_chains -= 1;
+    }
+    else {
+    nr_process_chains -= 1;
+    }
+    }
+#[no_mangle]
+pub unsafe extern "C" fn print_deadlock_scenario(nxt: *mut held_lock, prv: *mut held_lock) {
+    let mut next = hlock_class(nxt);
+    let mut prev = hlock_class(prv);
     printk(" Possible unsafe locking scenario:\n\n");
     printk("       CPU0\n");
     printk("       ----\n");
     printk("  lock(");
     __print_lock_name(prv, prev);
-    printk(KERN_CONT ");\n");
+    printk(");\n");
     printk("  lock(");
     __print_lock_name(nxt, next);
-    printk(KERN_CONT ");\n");
+    printk(");\n");
     printk("\n *** DEADLOCK ***\n\n");
     printk(" May be due to missing lock nesting notation\n\n");
     }
-    static void
-    print_deadlock_bug(struct task_struct *curr, struct held_lock *prev,
-    struct held_lock *next)
-    {
-    struct lock_class *class = hlock_class(prev);
-    if (!debug_locks_off_graph_unlock() || debug_locks_silent)
+#[no_mangle]
+pub unsafe extern "C" fn print_deadlock_bug(curr: *mut task_struct, prev: *mut held_lock, next: *mut held_lock) {
+    let mut class = hlock_class(prev);
+    if (!debug_locks_off_graph_unlock() || debug_locks_silent) {
     return;
+    }
     nbcon_cpu_emergency_enter();
-    pr_warn("\n");
-    pr_warn("============================================\n");
-    pr_warn("WARNING: possible recursive locking detected\n");
+    pr_warn!("\n");
+    pr_warn!("============================================\n");
+    pr_warn!("WARNING: possible recursive locking detected\n");
     print_kernel_ident();
-    pr_warn("--------------------------------------------\n");
-    pr_warn("%s/%d is trying to acquire lock:\n",
+    pr_warn!("--------------------------------------------\n");
+    pr_warn!("%s/%d is trying to acquire lock:\n",
     curr.comm, task_pid_nr(curr));
     print_lock(next);
-    pr_warn("\nbut task is already holding lock:\n");
+    pr_warn!("\nbut task is already holding lock:\n");
     print_lock(prev);
     if (class.cmp_fn) {
-    pr_warn("and the lock comparison function returns %i:\n",
+    pr_warn!("and the lock comparison function returns %i:\n",
     class.cmp_fn(prev.instance, next.instance));
     }
-    pr_warn("\nother info that might help us debug this:\n");
+    pr_warn!("\nother info that might help us debug this:\n");
     print_deadlock_scenario(next, prev);
     lockdep_print_held_locks(curr);
-    pr_warn("\nstack backtrace:\n");
+    pr_warn!("\nstack backtrace:\n");
     dump_stack();
     nbcon_cpu_emergency_exit();
     }
@@ -2787,35 +2914,39 @@ pub unsafe extern "C" fn if(LOCK_CHAIN_SOFTIRQ_CONTEXT: irq_context &) -> else {
 // lock class is held but nest_lock is also held, i.e. we rely on the
 // nest_lock to avoid the deadlock.
 //
-    static int
-    check_deadlock(struct task_struct *curr, struct held_lock *next)
-    {
-    struct lock_class *class;
-    struct held_lock *prev;
-    struct held_lock *nest = core::ptr::null_mut();
-    int i;
-    for (i = 0; i < curr.lockdep_depth; i++) {
+#[no_mangle]
+pub unsafe extern "C" fn check_deadlock(curr: *mut task_struct, next: *mut held_lock) -> c_int {
+pub static mut class: *mut c_void = core::ptr::null_mut();
+pub static mut prev: *mut c_void = core::ptr::null_mut();
+    let mut nest = core::ptr::null_mut();
+    let mut i = 0;
+    while (i < curr.lockdep_depth) {
     prev = curr.held_locks + i;
-    if (prev.instance == next.nest_lock)
+    if (prev.instance == next.nest_lock) {
     nest = prev;
-    if (hlock_class(prev) != hlock_class(next))
+    }
+    if (hlock_class(prev) != hlock_class(next)) {
     continue;
+    }
 //
 // Allow read-after-read recursion of the same
 // lock class (i.e. read_lock(lock)+read_lock(lock)):
 //
-    if ((next.read == 2) && prev.read)
+    if ((next.read == 2) && prev.read) {
     continue;
+    }
     class = hlock_class(prev);
     if (class.cmp_fn &&
-    class.cmp_fn(prev.instance, next.instance) < 0)
+    class.cmp_fn(prev.instance, next.instance) < 0) {
     continue;
+    }
 //
 // We're holding the nest_lock, which serializes this lock's
 // nesting behaviour.
 //
-    if (nest)
+    if (nest) {
     return 2;
+    }
     print_deadlock_bug(curr, prev, next);
     return 0;
     }
@@ -2843,12 +2974,9 @@ pub unsafe extern "C" fn if(LOCK_CHAIN_SOFTIRQ_CONTEXT: irq_context &) -> else {
 // Then if all the validations pass, we add the forwards and backwards
 // dependency.
 //
-    static int
-    check_prev_add(struct task_struct *curr, struct held_lock *prev,
-    struct held_lock *next, u16 distance,
-    struct lock_trace **const trace)
-    {
-    struct lock_list *entry;
+#[no_mangle]
+pub unsafe extern "C" fn check_prev_add(curr: *mut task_struct, prev: *mut held_lock, next: *mut held_lock, distance: u16, trace: *mut *mut lock_trace) -> c_int {
+pub static mut entry: *mut c_void = core::ptr::null_mut();
     enum bfs_result ret;
     if (!hlock_class(prev).key || !hlock_class(next).key) {
 //
@@ -2868,26 +2996,29 @@ pub unsafe extern "C" fn if(LOCK_CHAIN_SOFTIRQ_CONTEXT: irq_context &) -> else {
     return 2;
     }
     if (prev.class_idx == next.class_idx) {
-    struct lock_class *class = hlock_class(prev);
+    let mut class = hlock_class(prev);
     if (class.cmp_fn &&
-    class.cmp_fn(prev.instance, next.instance) < 0)
+    class.cmp_fn(prev.instance, next.instance) < 0) {
     return 2;
+    }
     }
 //
 // Prove that the new <prev> -> <next> dependency would not
 // create a circular dependency in the graph. (We do this by
 // a breadth-first search into the graph starting at <next>,
-// and check whether we can reach <prev>.)
+and check whether we can reach <prev>.)
 //
 // The search is limited by the size of the circular queue (i.e.,
 // MAX_CIRCULAR_QUEUE_SIZE) which keeps track of a breadth of nodes
 // in the graph whose neighbours are to be checked.
 //
     ret = check_noncircular(next, prev, trace);
-    if (unlikely(bfs_error(ret) || ret == BFS_RMATCH))
+    if (unlikely(bfs_error(ret) || ret == BFS_RMATCH)) {
     return 0;
-    if (!check_irq_usage(curr, prev, next))
+    }
+    if (!check_irq_usage(curr, prev, next)) {
     return 0;
+    }
 //
 // Is the <prev> -> <next> dependency already present?
 //
@@ -2898,8 +3029,9 @@ pub unsafe extern "C" fn if(LOCK_CHAIN_SOFTIRQ_CONTEXT: irq_context &) -> else {
 //
     list_for_each_entry(entry, &hlock_class(prev).locks_after, entry) {
     if (entry.class == hlock_class(next)) {
-    if (distance == 1)
+    if (distance == 1) {
     entry.distance = 1;
+    }
     entry.dep |= calc_dep(prev, next);
 //
 // Also, update the reverse dependency in @next's
@@ -2919,8 +3051,9 @@ pub unsafe extern "C" fn if(LOCK_CHAIN_SOFTIRQ_CONTEXT: irq_context &) -> else {
 //
     list_for_each_entry(entry, &hlock_class(next).locks_before, entry) {
     if (entry.class == hlock_class(prev)) {
-    if (distance == 1)
+    if (distance == 1) {
     entry.distance = 1;
+    }
     entry.dep |= calc_depb(prev, next);
     return 1;
     }
@@ -2933,16 +3066,18 @@ pub unsafe extern "C" fn if(LOCK_CHAIN_SOFTIRQ_CONTEXT: irq_context &) -> else {
 // Is the <prev> -> <next> link redundant?
 //
     ret = check_redundant(prev, next);
-    if (bfs_error(ret))
+    if (bfs_error(ret)) {
     return 0;
-#[no_mangle]
-pub unsafe extern "C" fn if(BFS_RMATCH: ret ==) -> else {
-    else if (ret == BFS_RMATCH)
+    }
+
+    else if (ret == BFS_RMATCH) {
     return 2;
+    }
     if (!*trace) {
 // trace = save_trace();
-    if (!*trace)
+    if (!*trace) {
     return 0;
+    }
     }
 //
 // Ok, all validations passed, add the new lock
@@ -2951,13 +3086,15 @@ pub unsafe extern "C" fn if(BFS_RMATCH: ret ==) -> else {
     ret = add_lock_to_list(hlock_class(next), hlock_class(prev),
     &hlock_class(prev).locks_after, distance,
     calc_dep(prev, next), *trace);
-    if (!ret)
+    if (!ret) {
     return 0;
+    }
     ret = add_lock_to_list(hlock_class(prev), hlock_class(next),
     &hlock_class(next).locks_before, distance,
     calc_depb(prev, next), *trace);
-    if (!ret)
+    if (!ret) {
     return 0;
+    }
     return 2;
     }
 //
@@ -2966,74 +3103,80 @@ pub unsafe extern "C" fn if(BFS_RMATCH: ret ==) -> else {
 // all consecutive trylock entries and the final non-trylock entry - or
 // the end of this context's lock-chain - whichever comes first.
 //
-    static int
-    check_prevs_add(struct task_struct *curr, struct held_lock *next)
-    {
-    struct lock_trace *trace = core::ptr::null_mut();
-    let mut depth: c_int = curr.lockdep_depth;
-    struct held_lock *hlock;
+#[no_mangle]
+pub unsafe extern "C" fn check_prevs_add(curr: *mut task_struct, next: *mut held_lock) -> c_int {
+    let mut trace = core::ptr::null_mut();
+pub static mut depth: c_int = 0;
+pub static mut hlock: *mut c_void = core::ptr::null_mut();
 //
 // Debugging checks.
 //
 // Depth must not be zero for a non-head lock:
 //
-    if (!depth)
-    goto out_bug;
+    if (!depth) {
+// goto;
+    }
 //
 // At least two relevant locks must exist for this
 // to be a head:
 //
     if (curr.held_locks[depth].irq_context !=
-    curr.held_locks[depth-1].irq_context)
-    goto out_bug;
+    curr.held_locks[depth-1].irq_context) {
+// goto;
+    }
     for (;;) {
-    let mut distance: u16 = curr.lockdep_depth - depth + 1;
+pub static mut distance: u16 = 0;
     hlock = curr.held_locks + depth - 1;
     if (hlock.check) {
-    let mut ret: c_int = check_prev_add(curr, hlock, next, distance, &trace);
-    if (!ret)
+pub static mut ret: c_int = 0;
+    if (!ret) {
     return 0;
+    }
 //
 // Stop after the first non-trylock entry,
 // as non-trylock entries have added their
 // own direct dependencies already, so this
 // lock is connected to them indirectly:
 //
-    if (!hlock.trylock)
+    if (!hlock.trylock) {
     break;
     }
-    depth--;
+    }
+    depth -= 1;
 //
 // End of lock-stack?
 //
-    if (!depth)
+    if (!depth) {
     break;
+    }
 //
 // Stop the search if we cross into another context:
 //
     if (curr.held_locks[depth].irq_context !=
-    curr.held_locks[depth-1].irq_context)
+    curr.held_locks[depth-1].irq_context) {
     break;
     }
+    }
     return 1;
-    out_bug:
-    if (!debug_locks_off_graph_unlock())
+// label;
+    if (!debug_locks_off_graph_unlock()) {
     return 0;
+    }
 //
 // Clearly we all shouldn't be here, but since we made it we
 // can reliable say we messed up our state. See the above two
 // gotos for reasons why we could possibly end up here.
 //
-    WARN_ON(1);
+    WARN_ON!(1);
     return 0;
     }
     struct lock_chain lock_chains[MAX_LOCKDEP_CHAINS];
-    static DECLARE_BITMAP(lock_chains_in_use, MAX_LOCKDEP_CHAINS);
+pub static mut lock_chains_in_use: usize = 0;
     static u16 chain_hlocks[MAX_LOCKDEP_CHAIN_HLOCKS];
-    unsigned long nr_zapped_lock_chains;
-    unsigned int nr_free_chain_hlocks;	/* Free chain_hlocks in buckets */
-    unsigned int nr_lost_chain_hlocks;	/* Lost chain_hlocks */
-    unsigned int nr_large_chain_blocks;	/* size > MAX_CHAIN_BUCKETS */
+    let mut nr_zapped_lock_chains = 0;
+    let mut nr_free_chain_hlocks = 0;	/* Free chain_hlocks in buckets */
+    let mut nr_lost_chain_hlocks = 0;	/* Lost chain_hlocks */
+    let mut nr_large_chain_blocks = 0;	/* size > MAX_CHAIN_BUCKETS */
 //
 // The first 2 chain_hlocks entries in the chain block in the bucket
 // list contains the following meta data:
@@ -3057,30 +3200,29 @@ pub const CHAIN_BLK_LIST_END: c_uint = 0xFFFFU;
     static int chain_block_buckets[MAX_CHAIN_BUCKETS];
 #[no_mangle]
 pub unsafe extern "C" fn size_to_bucket(size: c_int) -> c_int {
-    static inline int size_to_bucket(int size)
-    {
-    if (size > MAX_CHAIN_BUCKETS)
+    if (size > MAX_CHAIN_BUCKETS) {
     return 0;
+    }
     return size - 1;
     }
 //
 // Iterate all the chain blocks in a bucket.
 //
 
-    for ((prev) = -1, (curr) = chain_block_buckets[bucket];	\
-    (curr) >= 0;					\
-    (prev) = (curr), (curr) = chain_block_next(curr))
+    for ((prev) = -1, (curr) = chain_block_buckets[bucket];	
+    (curr) >= 0;					
+    (prev) = (curr), (curr) = chain_block_next(curr)) {
 //
 // next block or -1
 //
 #[no_mangle]
 pub unsafe extern "C" fn chain_block_next(offset: c_int) -> c_int {
-    static inline int chain_block_next(int offset)
-    {
-    let mut next: c_int = chain_hlocks[offset];
-    WARN_ON_ONCE(!(next & CHAIN_BLK_FLAG));
-    if (next == CHAIN_BLK_LIST_END)
+    }
+pub static mut next: c_int = 0;
+    WARN_ON_ONCE!(!(next & CHAIN_BLK_FLAG));
+    if (next == CHAIN_BLK_LIST_END) {
     return -1;
+    }
     next &= ~CHAIN_BLK_FLAG;
     next <<= 16;
     next |= chain_hlocks[offset + 1];
@@ -3091,14 +3233,10 @@ pub unsafe extern "C" fn chain_block_next(offset: c_int) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn chain_block_size(offset: c_int) -> c_int {
-    static inline int chain_block_size(int offset)
-    {
     return (chain_hlocks[offset + 2] << 16) | chain_hlocks[offset + 3];
     }
 #[no_mangle]
 pub unsafe extern "C" fn init_chain_block(offset: c_int, next: c_int, bucket: c_int, size: c_int) {
-    static inline void init_chain_block(int offset, int next, int bucket, int size)
-    {
     chain_hlocks[offset] = (next >> 16) | CHAIN_BLK_FLAG;
     chain_hlocks[offset + 1] = (u16)next;
     if (size && !bucket) {
@@ -3108,11 +3246,10 @@ pub unsafe extern "C" fn init_chain_block(offset: c_int, next: c_int, bucket: c_
     }
 #[no_mangle]
 pub unsafe extern "C" fn add_chain_block(offset: c_int, size: c_int) {
-    static inline void add_chain_block(int offset, int size)
-    {
-    let mut bucket: c_int = size_to_bucket(size);
-    let mut next: c_int = chain_block_buckets[bucket];
-    int prev, curr;
+pub static mut bucket: c_int = 0;
+pub static mut next: c_int = 0;
+    let mut prev = 0;
+    let mut curr = 0;
     if (unlikely(size < 2)) {
 //
 // We can't store single entries on the freelist. Leak them.
@@ -3121,25 +3258,29 @@ pub unsafe extern "C" fn add_chain_block(offset: c_int, size: c_int) {
 // than with CHAIN_BLK_FLAG, such that we can recover them when
 // the block before it is re-added.
 //
-    if (size)
-    nr_lost_chain_hlocks++;
+    if (size) {
+    nr_lost_chain_hlocks += 1;
+    }
     return;
     }
     nr_free_chain_hlocks += size;
     if (!bucket) {
-    nr_large_chain_blocks++;
+    nr_large_chain_blocks += 1;
 //
 // Variable sized, sort large to small.
 //
     for_each_chain_block(0, prev, curr) {
-    if (size >= chain_block_size(curr))
+    if (size >= chain_block_size(curr)) {
     break;
     }
+    }
     init_chain_block(offset, curr, 0, size);
-    if (prev < 0)
+    if (prev < 0) {
     chain_block_buckets[0] = offset;
-    else
+    }
+    else {
     init_chain_block(prev, offset, 0, 0);
+    }
     return;
     }
 //
@@ -3161,21 +3302,19 @@ pub unsafe extern "C" fn add_chain_block(offset: c_int, size: c_int) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn del_chain_block(bucket: c_int, size: c_int, next: c_int) {
-    static inline void del_chain_block(int bucket, int size, int next)
-    {
     nr_free_chain_hlocks -= size;
     chain_block_buckets[bucket] = next;
-    if (!bucket)
-    nr_large_chain_blocks--;
+    if (!bucket) {
+    nr_large_chain_blocks -= 1;
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn init_chain_block_buckets() {
-    static void init_chain_block_buckets(void)
-    {
-    int i;
-    for (i = 0; i < MAX_CHAIN_BUCKETS; i++)
+    let mut i = 0;
+    for (i = 0; i < MAX_CHAIN_BUCKETS; i++) {
     chain_block_buckets[i] = -1;
-    add_chain_block(0, ARRAY_SIZE(chain_hlocks));
+    }
+    add_chain_block(0, ARRAY_SIZE!(chain_hlocks));
     }
 //
 // Return offset of a chain block of the right size or -1 if not found.
@@ -3185,17 +3324,18 @@ unsafe extern "C" fn init_chain_block_buckets() {
 //
 #[no_mangle]
 unsafe extern "C" fn alloc_chain_hlocks(req: c_int) -> c_int {
-    static int alloc_chain_hlocks(int req)
-    {
-    int bucket, curr, size;
+    let mut bucket = 0;
+    let mut curr = 0;
+    let mut size = 0;
 //
 // We rely on the MSB to act as an escape bit to denote freelist
 // pointers. Make sure this bit isn't set in 'normal' class_idx usage.
 //
-    BUILD_BUG_ON((MAX_LOCKDEP_KEYS-1) & CHAIN_BLK_FLAG);
+    BUILD_BUG_ON!((MAX_LOCKDEP_KEYS-1) & CHAIN_BLK_FLAG);
     init_data_structures_once();
-    if (nr_free_chain_hlocks < req)
+    if (nr_free_chain_hlocks < req) {
     return -1;
+    }
 //
 // We require a minimum of 2 (u16) entries to encode a freelist
 // 'pointer'.
@@ -3219,19 +3359,21 @@ unsafe extern "C" fn alloc_chain_hlocks(req: c_int) -> c_int {
     size = chain_block_size(curr);
     if (likely(size >= req)) {
     del_chain_block(0, size, chain_block_next(curr));
-    if (size > req)
+    if (size > req) {
     add_chain_block(curr + req, size - req);
+    }
     return curr;
     }
     }
 //
 // Last resort, split a block in a larger sized bucket.
 //
-    for (size = MAX_CHAIN_BUCKETS; size > req; size--) {
+    while (size > req) {
     bucket = size_to_bucket(size);
     curr = chain_block_buckets[bucket];
-    if (curr < 0)
+    if (curr < 0) {
     continue;
+    }
     del_chain_block(bucket, size, chain_block_next(curr));
     add_chain_block(curr + req, size - req);
     return curr;
@@ -3240,30 +3382,28 @@ unsafe extern "C" fn alloc_chain_hlocks(req: c_int) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn free_chain_hlocks(base: c_int, size: c_int) {
-    static inline void free_chain_hlocks(int base, int size)
-    {
     add_chain_block(base, max(size, 2));
     }
-    struct lock_class *lock_chain_get_class(struct lock_chain *chain, int i)
-    {
-    let mut chain_hlock: u16 = chain_hlocks[chain.base + i];
-    let mut class_idx: c_uint = chain_hlock_class_idx(chain_hlock);
+#[no_mangle]
+pub unsafe extern "C" fn lock_chain_get_class(chain: *mut lock_chain, i: c_int) -> *mut c_void {
+pub static mut chain_hlock: u16 = 0;
+pub static mut class_idx: c_uint = 0;
     return lock_classes + class_idx;
     }
 //
 // Returns the index of the first held_lock of the current chain
 //
-    static inline int get_first_held_lock(struct task_struct *curr,
-    struct held_lock *hlock)
-    {
-    int i;
-    struct held_lock *hlock_curr;
-    for (i = curr.lockdep_depth - 1; i >= 0; i--) {
+#[no_mangle]
+pub unsafe extern "C" fn get_first_held_lock(curr: *mut task_struct, hlock: *mut held_lock) -> c_int {
+    let mut i = 0;
+pub static mut hlock_curr: *mut c_void = core::ptr::null_mut();
+    while (i >= 0) {
     hlock_curr = curr.held_locks + i;
-    if (hlock_curr.irq_context != hlock.irq_context)
+    if (hlock_curr.irq_context != hlock.irq_context) {
     break;
     }
-    return ++i;
+    }
+    return i += 1;
     }
 
 //
@@ -3271,24 +3411,21 @@ pub unsafe extern "C" fn free_chain_hlocks(base: c_int, size: c_int) {
 //
 #[no_mangle]
 unsafe extern "C" fn print_chain_key_iteration(hlock_id: u16, chain_key: u64) -> u64 {
-    static u64 print_chain_key_iteration(u16 hlock_id, u64 chain_key)
-    {
-    let mut new_chain_key: u64 = iterate_chain_key(chain_key, hlock_id);
+pub static mut new_chain_key: u64 = 0;
     printk(" hlock_id:%d . chain_key:%016Lx",
     (unsigned int)hlock_id,
     (unsigned long long)new_chain_key);
     return new_chain_key;
     }
-    static void
-    print_chain_keys_held_locks(struct task_struct *curr, struct held_lock *hlock_next)
-    {
-    struct held_lock *hlock;
-    let mut chain_key: u64 = INITIAL_CHAIN_KEY;
-    let mut depth: c_int = curr.lockdep_depth;
-    let mut i: c_int = get_first_held_lock(curr, hlock_next);
+#[no_mangle]
+pub unsafe extern "C" fn print_chain_keys_held_locks(curr: *mut task_struct, hlock_next: *mut held_lock) {
+pub static mut hlock: *mut c_void = core::ptr::null_mut();
+pub static mut chain_key: u64 = 0;
+pub static mut depth: c_int = 0;
+pub static mut i: c_int = 0;
     printk("depth: %u (irq_context %u)\n", depth - i + 1,
     hlock_next.irq_context);
-    for (; i < depth; i++) {
+    while (i < depth) {
     hlock = curr.held_locks + i;
     chain_key = print_chain_key_iteration(hlock_id(hlock), chain_key);
     print_lock(hlock);
@@ -3298,36 +3435,32 @@ unsafe extern "C" fn print_chain_key_iteration(hlock_id: u16, chain_key: u64) ->
     }
 #[no_mangle]
 unsafe extern "C" fn print_chain_keys_chain(chain: *mut lock_chain) {
-    static void print_chain_keys_chain(struct lock_chain *chain)
-    {
-    int i;
-    let mut chain_key: u64 = INITIAL_CHAIN_KEY;
-    u16 hlock_id;
+    let mut i = 0;
+pub static mut chain_key: u64 = 0;
+    let mut hlock_id = 0;
     printk("depth: %u\n", chain.depth);
-    for (i = 0; i < chain.depth; i++) {
+    while (i < chain.depth) {
     hlock_id = chain_hlocks[chain.base + i];
     chain_key = print_chain_key_iteration(hlock_id, chain_key);
     print_lock_name(core::ptr::null_mut(), lock_classes + chain_hlock_class_idx(hlock_id));
     printk("\n");
     }
     }
-    static void print_collision(struct task_struct *curr,
-    struct held_lock *hlock_next,
-    struct lock_chain *chain)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn print_collision(curr: *mut task_struct, hlock_next: *mut held_lock, chain: *mut lock_chain) {
     nbcon_cpu_emergency_enter();
-    pr_warn("\n");
-    pr_warn("============================\n");
-    pr_warn("WARNING: chain_key collision\n");
+    pr_warn!("\n");
+    pr_warn!("============================\n");
+    pr_warn!("WARNING: chain_key collision\n");
     print_kernel_ident();
-    pr_warn("----------------------------\n");
-    pr_warn("%s/%d: ", current.comm, task_pid_nr(current));
-    pr_warn("Hash chain already cached but the contents don't match!\n");
-    pr_warn("Held locks:");
+    pr_warn!("----------------------------\n");
+    pr_warn!("%s/%d: ", current.comm, task_pid_nr(current));
+    pr_warn!("Hash chain already cached but the contents don't match!\n");
+    pr_warn!("Held locks:");
     print_chain_keys_held_locks(curr, hlock_next);
-    pr_warn("Locks in cached chain:");
+    pr_warn!("Locks in cached chain:");
     print_chain_keys_chain(chain);
-    pr_warn("\nstack backtrace:\n");
+    pr_warn!("\nstack backtrace:\n");
     dump_stack();
     nbcon_cpu_emergency_exit();
     }
@@ -3338,18 +3471,18 @@ unsafe extern "C" fn print_chain_keys_chain(chain: *mut lock_chain) {
 // that there was a collision during the calculation of the chain_key.
 // Returns: 0 not passed, 1 passed
 //
-    static int check_no_collision(struct task_struct *curr,
-    struct held_lock *hlock,
-    struct lock_chain *chain)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn check_no_collision(curr: *mut task_struct, hlock: *mut held_lock, chain: *mut lock_chain) -> c_int {
 
-    int i, j, id;
+    let mut i = 0;
+    let mut j = 0;
+    let mut id = 0;
     i = get_first_held_lock(curr, hlock);
     if (DEBUG_LOCKS_WARN_ON(chain.depth != curr.lockdep_depth - (i - 1))) {
     print_collision(curr, hlock, chain);
     return 0;
     }
-    for (j = 0; j < chain.depth - 1; j++, i++) {
+    while (j < chain.depth - 1) {
     id = hlock_id(&curr.held_locks[i]);
     if (DEBUG_LOCKS_WARN_ON(chain_hlocks[chain.base + j] != id)) {
     print_collision(curr, hlock, chain);
@@ -3365,24 +3498,21 @@ unsafe extern "C" fn print_chain_keys_chain(chain: *mut lock_chain) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_next_lockchain(i: c_long) -> c_long {
-    long lockdep_next_lockchain(long i)
-    {
-    i = find_next_bit(lock_chains_in_use, ARRAY_SIZE(lock_chains), i + 1);
-    return i < ARRAY_SIZE(lock_chains) ? i : -2;
+    i = find_next_bit(lock_chains_in_use, ARRAY_SIZE!(lock_chains), i + 1);
+    return i < ARRAY_SIZE!(lock_chains) ? i : -2;
     }
 #[no_mangle]
 pub unsafe extern "C" fn lock_chain_count() -> c_ulong {
-    unsigned long lock_chain_count(void)
-    {
-    return bitmap_weight(lock_chains_in_use, ARRAY_SIZE(lock_chains));
+    return bitmap_weight(lock_chains_in_use, ARRAY_SIZE!(lock_chains));
     }
 // Must be called with the graph lock held.
-    static struct lock_chain *alloc_lock_chain(void)
-    {
-    int idx = find_first_zero_bit(lock_chains_in_use,
-    ARRAY_SIZE(lock_chains));
-    if (unlikely(idx >= ARRAY_SIZE(lock_chains)))
+#[no_mangle]
+pub unsafe extern "C" fn alloc_lock_chain() -> *mut c_void {
+    let mut idx = find_first_zero_bit(lock_chains_in_use,
+    ARRAY_SIZE!(lock_chains));
+    if (unlikely(idx >= ARRAY_SIZE!(lock_chains))) {
     return core::ptr::null_mut();
+    }
     __set_bit(idx, lock_chains_in_use);
     return lock_chains + idx;
     }
@@ -3393,24 +3523,25 @@ pub unsafe extern "C" fn lock_chain_count() -> c_ulong {
 // Return 0 if fail, and graph_lock is released.
 // Return 1 if succeed, with graph_lock held.
 //
-    static inline int add_chain_cache(struct task_struct *curr,
-    struct held_lock *hlock,
-    u64 chain_key)
-    {
-    struct hlist_head *hash_head = chainhashentry(chain_key);
-    struct lock_chain *chain;
-    int i, j;
+#[no_mangle]
+pub unsafe extern "C" fn add_chain_cache(curr: *mut task_struct, hlock: *mut held_lock, chain_key: u64) -> c_int {
+    let mut hash_head = chainhashentry(chain_key);
+pub static mut chain: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    let mut j = 0;
 //
 // The caller must hold the graph lock, ensure we've got IRQs
 // disabled to make this an IRQ-safe lock.. for recursion reasons
 // lockdep won't complain about its own locking errors.
 //
-    if (lockdep_assert_locked())
+    if (lockdep_assert_locked()) {
     return 0;
+    }
     chain = alloc_lock_chain();
     if (!chain) {
-    if (!debug_locks_off_graph_unlock())
+    if (!debug_locks_off_graph_unlock()) {
     return 0;
+    }
     nbcon_cpu_emergency_enter();
     print_lockdep_off("BUG: MAX_LOCKDEP_CHAINS too low!");
     dump_stack();
@@ -3421,13 +3552,14 @@ pub unsafe extern "C" fn lock_chain_count() -> c_ulong {
     chain.irq_context = hlock.irq_context;
     i = get_first_held_lock(curr, hlock);
     chain.depth = curr.lockdep_depth + 1 - i;
-    BUILD_BUG_ON((1UL << 24) <= ARRAY_SIZE(chain_hlocks));
-    BUILD_BUG_ON((1UL << 6)  <= ARRAY_SIZE(curr.held_locks));
-    BUILD_BUG_ON((1UL << 8*sizeof(chain_hlocks[0])) <= ARRAY_SIZE(lock_classes));
+    BUILD_BUG_ON!((1UL << 24) <= ARRAY_SIZE!(chain_hlocks));
+    BUILD_BUG_ON!((1UL << 6)  <= ARRAY_SIZE!(curr.held_locks));
+    BUILD_BUG_ON!((1UL << 8*sizeof!(chain_hlocks[0])) <= ARRAY_SIZE!(lock_classes));
     j = alloc_chain_hlocks(chain.depth);
     if (j < 0) {
-    if (!debug_locks_off_graph_unlock())
+    if (!debug_locks_off_graph_unlock()) {
     return 0;
+    }
     nbcon_cpu_emergency_enter();
     print_lockdep_off("BUG: MAX_LOCKDEP_CHAIN_HLOCKS too low!");
     dump_stack();
@@ -3435,8 +3567,8 @@ pub unsafe extern "C" fn lock_chain_count() -> c_ulong {
     return 0;
     }
     chain.base = j;
-    for (j = 0; j < chain.depth - 1; j++, i++) {
-    let mut lock_id: c_int = hlock_id(curr.held_locks + i);
+    while (j < chain.depth - 1) {
+pub static mut lock_id: c_int = 0;
     chain_hlocks[chain.base + j] = lock_id;
     }
     chain_hlocks[chain.base + j] = hlock_id(hlock);
@@ -3449,10 +3581,10 @@ pub unsafe extern "C" fn lock_chain_count() -> c_ulong {
 // Look up a dependency chain. Must be called with either the graph lock or
 // the RCU read lock held.
 //
-    static inline struct lock_chain *lookup_chain_cache(u64 chain_key)
-    {
-    struct hlist_head *hash_head = chainhashentry(chain_key);
-    struct lock_chain *chain;
+#[no_mangle]
+pub unsafe extern "C" fn lookup_chain_cache(chain_key: u64) -> *mut c_void {
+    let mut hash_head = chainhashentry(chain_key);
+pub static mut chain: *mut c_void = core::ptr::null_mut();
     hlist_for_each_entry_rcu(chain, hash_head, entry) {
     if (READ_ONCE(chain.chain_key) == chain_key) {
     debug_atomic_inc(chain_lookup_hits);
@@ -3467,16 +3599,15 @@ pub unsafe extern "C" fn lock_chain_count() -> c_ulong {
 // validated. If the key is already hashed, return 0.
 // (On return with 1 graph_lock is held.)
 //
-    static inline int lookup_chain_cache_add(struct task_struct *curr,
-    struct held_lock *hlock,
-    u64 chain_key)
-    {
-    struct lock_class *class = hlock_class(hlock);
-    struct lock_chain *chain = lookup_chain_cache(chain_key);
+#[no_mangle]
+pub unsafe extern "C" fn lookup_chain_cache_add(curr: *mut task_struct, hlock: *mut held_lock, chain_key: u64) -> c_int {
+    let mut class = hlock_class(hlock);
+    let mut chain = lookup_chain_cache(chain_key);
     if (chain) {
-    cache_hit:
-    if (!check_no_collision(curr, hlock, chain))
+// label;
+    if (!check_no_collision(curr, hlock, chain)) {
     return 0;
+    }
     if (very_verbose(class)) {
     printk("\nhash chain already cached, key: "
     "%016Lx tail class: [%px] %s\n",
@@ -3489,24 +3620,24 @@ pub unsafe extern "C" fn lock_chain_count() -> c_ulong {
     printk("\nnew hash chain, key: %016Lx tail class: [%px] %s\n",
     (unsigned long long)chain_key, class.key, class.name);
     }
-    if (!graph_lock())
+    if (!graph_lock()) {
     return 0;
+    }
 //
 // We have to walk the chain again locked - to avoid duplicates:
 //
     chain = lookup_chain_cache(chain_key);
     if (chain) {
     graph_unlock();
-    goto cache_hit;
+// goto;
     }
-    if (!add_chain_cache(curr, hlock, chain_key))
+    if (!add_chain_cache(curr, hlock, chain_key)) {
     return 0;
+    }
     return 1;
     }
-    static int validate_chain(struct task_struct *curr,
-    struct held_lock *hlock,
-    int chain_head, u64 chain_key)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn validate_chain(curr: *mut task_struct, hlock: *mut held_lock, chain_head: c_int, chain_key: u64) -> c_int {
 //
 // Trylock needs to maintain the stack of held locks, but it
 // does not add new dependencies, because trylock can be done
@@ -3536,9 +3667,10 @@ pub unsafe extern "C" fn lock_chain_count() -> c_ulong {
 // The simple case: does the current hold the same lock
 // already?
 //
-    let mut ret: c_int = check_deadlock(curr, hlock);
-    if (!ret)
+pub static mut ret: c_int = 0;
+    if (!ret) {
     return 0;
+    }
 //
 // Add dependency only if this lock is not the head
 // of the chain, and if the new lock introduces no more
@@ -3548,25 +3680,28 @@ pub unsafe extern "C" fn lock_chain_count() -> c_ulong {
 // check_deadlock().
 //
     if (!chain_head && ret != 2) {
-    if (!check_prevs_add(curr, hlock))
+    if (!check_prevs_add(curr, hlock)) {
     return 0;
+    }
     }
     graph_unlock();
     } else {
 // after lookup_chain_cache_add():
-    if (unlikely(!debug_locks))
+    if (unlikely(!debug_locks)) {
     return 0;
+    }
     }
     return 1;
     }
 
-    static inline int validate_chain(struct task_struct *curr,
-    struct held_lock *hlock,
-    int chain_head, u64 chain_key)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: validate_chain
+pub unsafe extern "C" fn validate_chain_dup(curr: *mut task_struct, hlock: *mut held_lock, chain_head: c_int, chain_key: u64) -> c_int {
     return 1;
     }
-    static void init_chain_block_buckets(void)	{ }
+#[no_mangle]
+pub unsafe extern "C" fn init_chain_block_buckets() { }
 
 //
 // We are building curr_chain_key incrementally, so double-check
@@ -3574,13 +3709,11 @@ pub unsafe extern "C" fn lock_chain_count() -> c_ulong {
 //
 #[no_mangle]
 unsafe extern "C" fn check_chain_key(curr: *mut task_struct) {
-    static void check_chain_key(struct task_struct *curr)
-    {
 
     struct held_lock *hlock, *prev_hlock = core::ptr::null_mut();
-    unsigned int i;
-    let mut chain_key: u64 = INITIAL_CHAIN_KEY;
-    for (i = 0; i < curr.lockdep_depth; i++) {
+    let mut i = 0;
+pub static mut chain_key: u64 = 0;
+    while (i < curr.lockdep_depth) {
     hlock = curr.held_locks + i;
     if (chain_key != hlock.prev_chain_key) {
     debug_locks_off();
@@ -3598,11 +3731,13 @@ unsafe extern "C" fn check_chain_key(curr: *mut task_struct) {
 // hlock->class_idx can't go beyond MAX_LOCKDEP_KEYS, but is
 // it registered lock class index?
 //
-    if (DEBUG_LOCKS_WARN_ON(!test_bit(hlock.class_idx, lock_classes_in_use)))
+    if (DEBUG_LOCKS_WARN_ON(!test_bit(hlock.class_idx, lock_classes_in_use))) {
     return;
+    }
     if (prev_hlock && (prev_hlock.irq_context !=
-    hlock.irq_context))
+    hlock.irq_context)) {
     chain_key = INITIAL_CHAIN_KEY;
+    }
     chain_key = iterate_chain_key(chain_key, hlock_id(hlock));
     prev_hlock = hlock;
     }
@@ -3620,63 +3755,57 @@ unsafe extern "C" fn check_chain_key(curr: *mut task_struct) {
 
     }
 
-    static int mark_lock(struct task_struct *curr, struct held_lock *this,
-    enum lock_usage_bit new_bit);
+// forward_decl: mark_lock;
 #[no_mangle]
 unsafe extern "C" fn print_usage_bug_scenario(lock: *mut held_lock) {
-    static void print_usage_bug_scenario(struct held_lock *lock)
-    {
-    struct lock_class *class = hlock_class(lock);
+    let mut class = hlock_class(lock);
     printk(" Possible unsafe locking scenario:\n\n");
     printk("       CPU0\n");
     printk("       ----\n");
     printk("  lock(");
     __print_lock_name(lock, class);
-    printk(KERN_CONT ");\n");
+    printk(");\n");
     printk("  <Interrupt>\n");
     printk("    lock(");
     __print_lock_name(lock, class);
-    printk(KERN_CONT ");\n");
+    printk(");\n");
     printk("\n *** DEADLOCK ***\n\n");
     }
-    static void
-    print_usage_bug(struct task_struct *curr, struct held_lock *this,
-    enum lock_usage_bit prev_bit, enum lock_usage_bit new_bit)
-    {
-    if (!debug_locks_off() || debug_locks_silent)
+#[no_mangle]
+pub unsafe extern "C" fn print_usage_bug(curr: *mut task_struct, this: *mut held_lock, prev_bit: lock_usage_bit, new_bit: lock_usage_bit) {
+    if (!debug_locks_off() || debug_locks_silent) {
     return;
+    }
     nbcon_cpu_emergency_enter();
-    pr_warn("\n");
-    pr_warn("================================\n");
-    pr_warn("WARNING: inconsistent lock state\n");
+    pr_warn!("\n");
+    pr_warn!("================================\n");
+    pr_warn!("WARNING: inconsistent lock state\n");
     print_kernel_ident();
-    pr_warn("--------------------------------\n");
-    pr_warn("inconsistent {%s} . {%s} usage.\n",
+    pr_warn!("--------------------------------\n");
+    pr_warn!("inconsistent {%s} . {%s} usage.\n",
     usage_str[prev_bit], usage_str[new_bit]);
-    pr_warn("%s/%d [HC%u[%lu]:SC%u[%lu]:HE%u:SE%u] takes:\n",
+    pr_warn!("%s/%d [HC%u[%lu]:SC%u[%lu]:HE%u:SE%u] takes:\n",
     curr.comm, task_pid_nr(curr),
     lockdep_hardirq_context(), hardirq_count() >> HARDIRQ_SHIFT,
     lockdep_softirq_context(curr), softirq_count() >> SOFTIRQ_SHIFT,
     lockdep_hardirqs_enabled(),
     lockdep_softirqs_enabled(curr));
     print_lock(this);
-    pr_warn("{%s} state was registered at:\n", usage_str[prev_bit]);
+    pr_warn!("{%s} state was registered at:\n", usage_str[prev_bit]);
     print_lock_trace(hlock_class(this).usage_traces[prev_bit], 1);
     print_irqtrace_events(curr);
-    pr_warn("\nother info that might help us debug this:\n");
+    pr_warn!("\nother info that might help us debug this:\n");
     print_usage_bug_scenario(this);
     lockdep_print_held_locks(curr);
-    pr_warn("\nstack backtrace:\n");
+    pr_warn!("\nstack backtrace:\n");
     dump_stack();
     nbcon_cpu_emergency_exit();
     }
 //
 // Print out an error if an invalid bit is set:
 //
-    static inline int
-    valid_state(struct task_struct *curr, struct held_lock *this,
-    enum lock_usage_bit new_bit, enum lock_usage_bit bad_bit)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn valid_state(curr: *mut task_struct, this: *mut held_lock, new_bit: lock_usage_bit, bad_bit: lock_usage_bit) -> c_int {
     if (unlikely(hlock_class(this).usage_mask & (1 << bad_bit))) {
     graph_unlock();
     print_usage_bug(curr, this, bad_bit, new_bit);
@@ -3687,82 +3816,83 @@ unsafe extern "C" fn print_usage_bug_scenario(lock: *mut held_lock) {
 //
 // print irq inversion bug:
 //
-    static void
-    print_irq_inversion_bug(struct task_struct *curr,
-    struct lock_list *root, struct lock_list *other,
-    struct held_lock *this, int forwards,
-    const char *irqclass)
-    {
-    struct lock_list *entry = other;
-    struct lock_list *middle = core::ptr::null_mut();
-    int depth;
-    if (!debug_locks_off_graph_unlock() || debug_locks_silent)
+#[no_mangle]
+pub unsafe extern "C" fn print_irq_inversion_bug(curr: *mut task_struct, root: *mut lock_list, other: *mut lock_list, this: *mut held_lock, forwards: c_int, irqclass: *mut c_char) {
+    let mut entry = other;
+    let mut middle = core::ptr::null_mut();
+    let mut depth = 0;
+    if (!debug_locks_off_graph_unlock() || debug_locks_silent) {
     return;
+    }
     nbcon_cpu_emergency_enter();
-    pr_warn("\n");
-    pr_warn("========================================================\n");
-    pr_warn("WARNING: possible irq lock inversion dependency detected\n");
+    pr_warn!("\n");
+    pr_warn!("========================================================\n");
+    pr_warn!("WARNING: possible irq lock inversion dependency detected\n");
     print_kernel_ident();
-    pr_warn("--------------------------------------------------------\n");
-    pr_warn("%s/%d just changed the state of lock:\n",
+    pr_warn!("--------------------------------------------------------\n");
+    pr_warn!("%s/%d just changed the state of lock:\n",
     curr.comm, task_pid_nr(curr));
     print_lock(this);
-    if (forwards)
-    pr_warn("but this lock took another, %s-unsafe lock in the past:\n", irqclass);
-    else
-    pr_warn("but this lock was taken by another, %s-safe lock in the past:\n", irqclass);
+    if (forwards) {
+    pr_warn!("but this lock took another, %s-unsafe lock in the past:\n", irqclass);
+    }
+    else {
+    pr_warn!("but this lock was taken by another, %s-safe lock in the past:\n", irqclass);
+    }
     print_lock_name(core::ptr::null_mut(), other.class);
-    pr_warn("\n\nand interrupts could create inverse lock ordering between them.\n\n");
-    pr_warn("\nother info that might help us debug this:\n");
+    pr_warn!("\n\nand interrupts could create inverse lock ordering between them.\n\n");
+    pr_warn!("\nother info that might help us debug this:\n");
 // Find a middle lock (if one exists)
     depth = get_lock_depth(other);
     do {
     if (depth == 0 && (entry != root)) {
-    pr_warn("lockdep:%s bad path found in chain graph\n", __func__);
+    pr_warn!("lockdep:%s bad path found in chain graph\n", __func__);
     break;
     }
     middle = entry;
     entry = get_lock_parent(entry);
-    depth--;
+    depth -= 1;
     } while (entry && entry != root && (depth >= 0));
-    if (forwards)
+    if (forwards) {
     print_irq_lock_scenario(root, other,
     middle ? middle.class : root.class, other.class);
-    else
+    }
+    else {
     print_irq_lock_scenario(other, root,
     middle ? middle.class : other.class, root.class);
+    }
     lockdep_print_held_locks(curr);
-    pr_warn("\nthe shortest dependencies between 2nd lock and 1st lock:\n");
+    pr_warn!("\nthe shortest dependencies between 2nd lock and 1st lock:\n");
     root.trace = save_trace();
-    if (!root.trace)
-    goto out;
+    if (!root.trace) {
+// goto;
+    }
     print_shortest_lock_dependencies(other, root);
-    pr_warn("\nstack backtrace:\n");
+    pr_warn!("\nstack backtrace:\n");
     dump_stack();
-    out:
+// label;
     nbcon_cpu_emergency_exit();
     }
 //
 // Prove that in the forwards-direction subgraph starting at <this>
 // there is no lock matching <mask>:
 //
-    static int
-    check_usage_forwards(struct task_struct *curr, struct held_lock *this,
-    enum lock_usage_bit bit)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn check_usage_forwards(curr: *mut task_struct, this: *mut held_lock, bit: lock_usage_bit) -> c_int {
     enum bfs_result ret;
-    struct lock_list root;
-    struct lock_list *target_entry;
-    let mut read_bit: enum lock_usage_bit = bit + LOCK_USAGE_READ_MASK;
-    let mut usage_mask: unsigned = lock_flag(bit) | lock_flag(read_bit);
+pub static mut root: usize = 0;
+pub static mut target_entry: *mut c_void = core::ptr::null_mut();
+pub static mut read_bit: lock_usage_bit = 0;
+pub static mut usage_mask: unsigned = 0;
     bfs_init_root(&root, this);
     ret = find_usage_forwards(&root, usage_mask, &target_entry);
     if (bfs_error(ret)) {
     print_bfs_bug(ret);
     return 0;
     }
-    if (ret == BFS_RNOMATCH)
+    if (ret == BFS_RNOMATCH) {
     return 1;
+    }
 // Check whether write or read usage is the match
     if (target_entry.class.usage_mask & lock_flag(bit)) {
     print_irq_inversion_bug(curr, &root, target_entry,
@@ -3777,23 +3907,22 @@ unsafe extern "C" fn print_usage_bug_scenario(lock: *mut held_lock) {
 // Prove that in the backwards-direction subgraph starting at <this>
 // there is no lock matching <mask>:
 //
-    static int
-    check_usage_backwards(struct task_struct *curr, struct held_lock *this,
-    enum lock_usage_bit bit)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn check_usage_backwards(curr: *mut task_struct, this: *mut held_lock, bit: lock_usage_bit) -> c_int {
     enum bfs_result ret;
-    struct lock_list root;
-    struct lock_list *target_entry;
-    let mut read_bit: enum lock_usage_bit = bit + LOCK_USAGE_READ_MASK;
-    let mut usage_mask: unsigned = lock_flag(bit) | lock_flag(read_bit);
+pub static mut root: usize = 0;
+pub static mut target_entry: *mut c_void = core::ptr::null_mut();
+pub static mut read_bit: lock_usage_bit = 0;
+pub static mut usage_mask: unsigned = 0;
     bfs_init_rootb(&root, this);
     ret = find_usage_backwards(&root, usage_mask, &target_entry);
     if (bfs_error(ret)) {
     print_bfs_bug(ret);
     return 0;
     }
-    if (ret == BFS_RNOMATCH)
+    if (ret == BFS_RNOMATCH) {
     return 1;
+    }
 // Check whether write or read usage is the match
     if (target_entry.class.usage_mask & lock_flag(bit)) {
     print_irq_inversion_bug(curr, &root, target_entry,
@@ -3806,29 +3935,25 @@ unsafe extern "C" fn print_usage_bug_scenario(lock: *mut held_lock) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn print_irqtrace_events(curr: *mut task_struct) {
-    void print_irqtrace_events(struct task_struct *curr)
-    {
-    const struct irqtrace_events *trace = &curr.irqtrace;
+    let mut trace = &curr.irqtrace;
     nbcon_cpu_emergency_enter();
     printk("irq event stamp: %u\n", trace.irq_events);
     printk("hardirqs last  enabled at (%u): [<%px>] %pS\n",
-    trace.hardirq_enable_event, (void *)trace.hardirq_enable_ip,
-    (void *)trace.hardirq_enable_ip);
+    trace.hardirq_enable_event, trace.hardirq_enable_ip,
+    trace.hardirq_enable_ip);
     printk("hardirqs last disabled at (%u): [<%px>] %pS\n",
-    trace.hardirq_disable_event, (void *)trace.hardirq_disable_ip,
-    (void *)trace.hardirq_disable_ip);
+    trace.hardirq_disable_event, trace.hardirq_disable_ip,
+    trace.hardirq_disable_ip);
     printk("softirqs last  enabled at (%u): [<%px>] %pS\n",
-    trace.softirq_enable_event, (void *)trace.softirq_enable_ip,
-    (void *)trace.softirq_enable_ip);
+    trace.softirq_enable_event, trace.softirq_enable_ip,
+    trace.softirq_enable_ip);
     printk("softirqs last disabled at (%u): [<%px>] %pS\n",
-    trace.softirq_disable_event, (void *)trace.softirq_disable_ip,
-    (void *)trace.softirq_disable_ip);
+    trace.softirq_disable_event, trace.softirq_disable_ip,
+    trace.softirq_disable_ip);
     nbcon_cpu_emergency_exit();
     }
 #[no_mangle]
 unsafe extern "C" fn HARDIRQ_verbose(class: *mut lock_class) -> c_int {
-    static int HARDIRQ_verbose(struct lock_class *class)
-    {
 
     return class_filter(class);
 
@@ -3836,44 +3961,41 @@ unsafe extern "C" fn HARDIRQ_verbose(class: *mut lock_class) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn SOFTIRQ_verbose(class: *mut lock_class) -> c_int {
-    static int SOFTIRQ_verbose(struct lock_class *class)
-    {
 
     return class_filter(class);
 
     return 0;
     }
-    static int (*state_verbose_f[])(struct lock_class *class) = {
+    static int (*state_verbose_f[])(lock_class *class) = {
 
     __STATE##_verbose,
 
     };
-    static inline int state_verbose(enum lock_usage_bit bit,
-    struct lock_class *class)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn state_verbose(bit: lock_usage_bit, class: *mut lock_class) -> c_int {
     return state_verbose_f[bit >> LOCK_USAGE_DIR_MASK](class);
     }
-    typedef int (*check_usage_f)(struct task_struct *, struct held_lock *,
+    typedef int (*check_usage_f)(task_struct *, held_lock *,
     enum lock_usage_bit bit, const char *name);
-    static int
-    mark_lock_irq(struct task_struct *curr, struct held_lock *this,
-    enum lock_usage_bit new_bit)
-    {
-    let mut excl_bit: c_int = exclusive_bit(new_bit);
-    let mut read: c_int = new_bit & LOCK_USAGE_READ_MASK;
-    let mut dir: c_int = new_bit & LOCK_USAGE_DIR_MASK;
+#[no_mangle]
+pub unsafe extern "C" fn mark_lock_irq(curr: *mut task_struct, this: *mut held_lock, new_bit: lock_usage_bit) -> c_int {
+pub static mut excl_bit: c_int = 0;
+pub static mut read: c_int = 0;
+pub static mut dir: c_int = 0;
 //
 // Validate that this particular lock does not have conflicting
 // usage states.
 //
-    if (!valid_state(curr, this, new_bit, excl_bit))
+    if (!valid_state(curr, this, new_bit, excl_bit)) {
     return 0;
+    }
 //
 // Check for read in write conflicts
 //
     if (!read && !valid_state(curr, this, new_bit,
-    excl_bit + LOCK_USAGE_READ_MASK))
+    excl_bit + LOCK_USAGE_READ_MASK)) {
     return 0;
+    }
 //
 // Validate that the lock dependencies don't have conflicting usage
 // states.
@@ -3883,38 +4005,43 @@ unsafe extern "C" fn SOFTIRQ_verbose(class: *mut lock_class) -> c_int {
 // mark ENABLED has to look backwards -- to ensure no dependee
 // has USED_IN state, which, again, would allow  recursion deadlocks.
 //
-    if (!check_usage_backwards(curr, this, excl_bit))
+    if (!check_usage_backwards(curr, this, excl_bit)) {
     return 0;
+    }
     } else {
 //
 // mark USED_IN has to look forwards -- to ensure no dependency
 // has ENABLED state, which would allow recursion deadlocks.
 //
-    if (!check_usage_forwards(curr, this, excl_bit))
+    if (!check_usage_forwards(curr, this, excl_bit)) {
     return 0;
     }
-    if (state_verbose(new_bit, hlock_class(this)))
+    }
+    if (state_verbose(new_bit, hlock_class(this))) {
     return 2;
+    }
     return 1;
     }
 //
 // Mark all held locks with a usage bit:
 //
-    static int
-    mark_held_locks(struct task_struct *curr, enum lock_usage_bit base_bit)
-    {
-    struct held_lock *hlock;
-    int i;
-    for (i = 0; i < curr.lockdep_depth; i++) {
-    let mut hlock_bit: enum lock_usage_bit = base_bit;
+#[no_mangle]
+pub unsafe extern "C" fn mark_held_locks(curr: *mut task_struct, base_bit: lock_usage_bit) -> c_int {
+pub static mut hlock: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    while (i < curr.lockdep_depth) {
+pub static mut hlock_bit: lock_usage_bit = 0;
     hlock = curr.held_locks + i;
-    if (hlock.read)
+    if (hlock.read) {
     hlock_bit += LOCK_USAGE_READ_MASK;
-    BUG_ON(hlock_bit >= LOCK_USAGE_STATES);
-    if (!hlock.check)
+    }
+    BUG_ON!(hlock_bit >= LOCK_USAGE_STATES);
+    if (!hlock.check) {
     continue;
-    if (!mark_lock(curr, hlock, hlock_bit))
+    }
+    if (!mark_lock(curr, hlock, hlock_bit)) {
     return 0;
+    }
     }
     return 1;
     }
@@ -3923,22 +4050,22 @@ unsafe extern "C" fn SOFTIRQ_verbose(class: *mut lock_class) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn __trace_hardirqs_on_caller() {
-    static void __trace_hardirqs_on_caller(void)
-    {
-    struct task_struct *curr = current;
+    let mut curr = current;
 //
 // We are going to turn hardirqs on, so set the
 // usage bit for all held locks:
 //
-    if (!mark_held_locks(curr, LOCK_ENABLED_HARDIRQ))
+    if (!mark_held_locks(curr, LOCK_ENABLED_HARDIRQ)) {
     return;
+    }
 //
 // If we have softirqs enabled, then set the usage
 // bit for all held locks. (disabled hardirqs prevented
 // this bit from being set before)
 //
-    if (curr.softirqs_enabled)
+    if (curr.softirqs_enabled) {
     mark_held_locks(curr, LOCK_ENABLED_SOFTIRQ);
+    }
     }
 //
 // lockdep_hardirqs_on_prepare - Prepare for enabling interrupts
@@ -3950,17 +4077,18 @@ unsafe extern "C" fn __trace_hardirqs_on_caller() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_hardirqs_on_prepare() {
-    void lockdep_hardirqs_on_prepare(void)
-    {
-    if (unlikely(!debug_locks))
+    if (unlikely(!debug_locks)) {
     return;
+    }
 //
 // NMIs do not (and cannot) track lock dependencies, nothing to do.
 //
-    if (unlikely(in_nmi()))
+    if (unlikely(in_nmi())) {
     return;
-    if (unlikely(this_cpu_read(lockdep_recursion)))
+    }
+    if (unlikely(this_cpu_read(lockdep_recursion))) {
     return;
+    }
     if (unlikely(lockdep_hardirqs_enabled())) {
 //
 // Neither irq nor preemption are disabled here
@@ -3975,19 +4103,22 @@ pub unsafe extern "C" fn lockdep_hardirqs_on_prepare() {
 // already enabled, yet we find the hardware thinks they are in fact
 // enabled.. someone messed up their IRQ state tracing.
 //
-    if (DEBUG_LOCKS_WARN_ON(!irqs_disabled()))
+    if (DEBUG_LOCKS_WARN_ON(!irqs_disabled())) {
     return;
+    }
 //
 // See the fine text that goes along with this variable definition.
 //
-    if (DEBUG_LOCKS_WARN_ON(early_boot_irqs_disabled))
+    if (DEBUG_LOCKS_WARN_ON(early_boot_irqs_disabled)) {
     return;
+    }
 //
 // Can't allow enabling interrupts while in an interrupt handler,
 // that's general bad form and such. Recursion, limited stack etc..
 //
-    if (DEBUG_LOCKS_WARN_ON(lockdep_hardirq_context()))
+    if (DEBUG_LOCKS_WARN_ON(lockdep_hardirq_context())) {
     return;
+    }
     current.hardirq_chain_key = current.curr_chain_key;
     lockdep_recursion_inc();
     __trace_hardirqs_on_caller();
@@ -3996,11 +4127,10 @@ pub unsafe extern "C" fn lockdep_hardirqs_on_prepare() {
     EXPORT_SYMBOL_GPL(lockdep_hardirqs_on_prepare);
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_hardirqs_on(ip: c_ulong) -> void noinstr {
-    void noinstr lockdep_hardirqs_on(unsigned long ip)
-    {
-    struct irqtrace_events *trace = &current.irqtrace;
-    if (unlikely(!debug_locks))
+    let mut trace = &current.irqtrace;
+    if (unlikely(!debug_locks)) {
     return;
+    }
 //
 // NMIs can happen in the middle of local_irq_{en,dis}able() where the
 // tracking state and hardware state are out of sync.
@@ -4009,18 +4139,20 @@ pub unsafe extern "C" fn lockdep_hardirqs_on(ip: c_ulong) -> void noinstr {
 // and not rely on hardware state like normal interrupts.
 //
     if (unlikely(in_nmi())) {
-    if (!IS_ENABLED(CONFIG_TRACE_IRQFLAGS_NMI))
+    if (!IS_ENABLED!(CONFIG_TRACE_IRQFLAGS_NMI)) {
     return;
+    }
 //
 // Skip:
 // - recursion check, because NMI can hit lockdep;
 // - hardware state check, because above;
 // - chain_key check, see lockdep_hardirqs_on_prepare().
 //
-    goto skip_checks;
+// goto;
     }
-    if (unlikely(this_cpu_read(lockdep_recursion)))
+    if (unlikely(this_cpu_read(lockdep_recursion))) {
     return;
+    }
     if (lockdep_hardirqs_enabled()) {
 //
 // Neither irq nor preemption are disabled here
@@ -4035,15 +4167,16 @@ pub unsafe extern "C" fn lockdep_hardirqs_on(ip: c_ulong) -> void noinstr {
 // already enabled, yet we find the hardware thinks they are in fact
 // enabled.. someone messed up their IRQ state tracing.
 //
-    if (DEBUG_LOCKS_WARN_ON(!irqs_disabled()))
+    if (DEBUG_LOCKS_WARN_ON(!irqs_disabled())) {
     return;
+    }
 //
 // Ensure the lock stack remained unchanged between
 // lockdep_hardirqs_on_prepare() and lockdep_hardirqs_on().
 //
     DEBUG_LOCKS_WARN_ON(current.hardirq_chain_key !=
     current.curr_chain_key);
-    skip_checks:
+// label;
 // we'll do an OFF -> ON transition:
     __this_cpu_write(hardirqs_enabled, 1);
     trace.hardirq_enable_ip = ip;
@@ -4056,28 +4189,30 @@ pub unsafe extern "C" fn lockdep_hardirqs_on(ip: c_ulong) -> void noinstr {
 //
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_hardirqs_off(ip: c_ulong) -> void noinstr {
-    void noinstr lockdep_hardirqs_off(unsigned long ip)
-    {
-    if (unlikely(!debug_locks))
+    if (unlikely(!debug_locks)) {
     return;
+    }
 //
 // Matching lockdep_hardirqs_on(), allow NMIs in the middle of lockdep;
 // they will restore the software state. This ensures the software
 // state is consistent inside NMIs as well.
 //
     if (in_nmi()) {
-    if (!IS_ENABLED(CONFIG_TRACE_IRQFLAGS_NMI))
+    if (!IS_ENABLED!(CONFIG_TRACE_IRQFLAGS_NMI)) {
     return;
-    } else if (__this_cpu_read(lockdep_recursion))
+    }
+    } else if (__this_cpu_read(lockdep_recursion)) {
     return;
+    }
 //
 // So we're supposed to get called after you mask local IRQs, but for
 // some reason the hardware doesn't quite think you did a proper job.
 //
-    if (DEBUG_LOCKS_WARN_ON(!irqs_disabled()))
+    if (DEBUG_LOCKS_WARN_ON(!irqs_disabled())) {
     return;
+    }
     if (lockdep_hardirqs_enabled()) {
-    struct irqtrace_events *trace = &current.irqtrace;
+    let mut trace = &current.irqtrace;
 //
 // We have done an ON -> OFF transition:
 //
@@ -4095,17 +4230,17 @@ pub unsafe extern "C" fn lockdep_hardirqs_off(ip: c_ulong) -> void noinstr {
 //
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_softirqs_on(ip: c_ulong) {
-    void lockdep_softirqs_on(unsigned long ip)
-    {
-    struct irqtrace_events *trace = &current.irqtrace;
-    if (unlikely(!lockdep_enabled()))
+    let mut trace = &current.irqtrace;
+    if (unlikely(!lockdep_enabled())) {
     return;
+    }
 //
 // We fancy IRQs being disabled here, see softirq.c, avoids
 // funny state and nesting things.
 //
-    if (DEBUG_LOCKS_WARN_ON(!irqs_disabled()))
+    if (DEBUG_LOCKS_WARN_ON(!irqs_disabled())) {
     return;
+    }
     if (current.softirqs_enabled) {
     debug_atomic_inc(redundant_softirqs_on);
     return;
@@ -4123,8 +4258,9 @@ pub unsafe extern "C" fn lockdep_softirqs_on(ip: c_ulong) {
 // usage bit for all held locks, if hardirqs are
 // enabled too:
 //
-    if (lockdep_hardirqs_enabled())
+    if (lockdep_hardirqs_enabled()) {
     mark_held_locks(current, LOCK_ENABLED_SOFTIRQ);
+    }
     lockdep_recursion_finish();
     }
 //
@@ -4132,17 +4268,17 @@ pub unsafe extern "C" fn lockdep_softirqs_on(ip: c_ulong) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_softirqs_off(ip: c_ulong) {
-    void lockdep_softirqs_off(unsigned long ip)
-    {
-    if (unlikely(!lockdep_enabled()))
+    if (unlikely(!lockdep_enabled())) {
     return;
+    }
 //
 // We fancy IRQs being disabled here, see softirq.c
 //
-    if (DEBUG_LOCKS_WARN_ON(!irqs_disabled()))
+    if (DEBUG_LOCKS_WARN_ON(!irqs_disabled())) {
     return;
+    }
     if (current.softirqs_enabled) {
-    struct irqtrace_events *trace = &current.irqtrace;
+    let mut trace = &current.irqtrace;
 //
 // We have done an ON -> OFF transition:
 //
@@ -4154,8 +4290,9 @@ pub unsafe extern "C" fn lockdep_softirqs_off(ip: c_ulong) {
 // Whoops, we wanted softirqs off, so why aren't they?
 //
     DEBUG_LOCKS_WARN_ON(!softirq_count());
-    } else
+    } else {
     debug_atomic_inc(redundant_softirqs_off);
+    }
     }
 //
 // lockdep_cleanup_dead_cpu - Ensure CPU lockdep state is cleanly stopped
@@ -4169,44 +4306,48 @@ pub unsafe extern "C" fn lockdep_softirqs_off(ip: c_ulong) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_cleanup_dead_cpu(cpu: c_uint, idle: *mut task_struct) {
-    void lockdep_cleanup_dead_cpu(unsigned int cpu, struct task_struct *idle)
-    {
-    if (unlikely(!debug_locks))
+    if (unlikely(!debug_locks)) {
     return;
+    }
     if (unlikely(per_cpu(hardirqs_enabled, cpu))) {
-    pr_warn("CPU %u left hardirqs enabled!", cpu);
-    if (idle)
+    pr_warn!("CPU %u left hardirqs enabled!", cpu);
+    if (idle) {
     print_irqtrace_events(idle);
+    }
 // Clean it up for when the CPU comes online again.
     per_cpu(hardirqs_enabled, cpu) = 0;
     }
     }
-    static int
-    mark_usage(struct task_struct *curr, struct held_lock *hlock, int check)
-    {
-    if (!check)
-    goto lock_used;
+#[no_mangle]
+pub unsafe extern "C" fn mark_usage(curr: *mut task_struct, hlock: *mut held_lock, check: c_int) -> c_int {
+    if (!check) {
+// goto;
+    }
 //
 // If non-trylock use in a hardirq or softirq context, then
 // mark the lock as used in these contexts:
 //
     if (!hlock.trylock) {
     if (hlock.read) {
-    if (lockdep_hardirq_context())
+    if (lockdep_hardirq_context()) {
     if (!mark_lock(curr, hlock,
     LOCK_USED_IN_HARDIRQ_READ))
     return 0;
-    if (curr.softirq_context)
+    }
+    if (curr.softirq_context) {
     if (!mark_lock(curr, hlock,
     LOCK_USED_IN_SOFTIRQ_READ))
     return 0;
+    }
     } else {
-    if (lockdep_hardirq_context())
+    if (lockdep_hardirq_context()) {
     if (!mark_lock(curr, hlock, LOCK_USED_IN_HARDIRQ))
     return 0;
-    if (curr.softirq_context)
+    }
+    if (curr.softirq_context) {
     if (!mark_lock(curr, hlock, LOCK_USED_IN_SOFTIRQ))
     return 0;
+    }
     }
     }
 //
@@ -4217,95 +4358,104 @@ pub unsafe extern "C" fn lockdep_cleanup_dead_cpu(cpu: c_uint, idle: *mut task_s
     if (!hlock.hardirqs_off && !hlock.sync) {
     if (hlock.read) {
     if (!mark_lock(curr, hlock,
-    LOCK_ENABLED_HARDIRQ_READ))
+    LOCK_ENABLED_HARDIRQ_READ)) {
     return 0;
-    if (curr.softirqs_enabled)
+    }
+    if (curr.softirqs_enabled) {
     if (!mark_lock(curr, hlock,
     LOCK_ENABLED_SOFTIRQ_READ))
     return 0;
+    }
     } else {
     if (!mark_lock(curr, hlock,
-    LOCK_ENABLED_HARDIRQ))
+    LOCK_ENABLED_HARDIRQ)) {
     return 0;
-    if (curr.softirqs_enabled)
+    }
+    if (curr.softirqs_enabled) {
     if (!mark_lock(curr, hlock,
     LOCK_ENABLED_SOFTIRQ))
     return 0;
     }
     }
-    lock_used:
+    }
+// label;
 // mark it as used:
-    if (!mark_lock(curr, hlock, LOCK_USED))
+    if (!mark_lock(curr, hlock, LOCK_USED)) {
     return 0;
+    }
     return 1;
     }
 #[no_mangle]
 pub unsafe extern "C" fn task_irq_context(task: *mut task_struct) -> c_uint {
-    static inline unsigned int task_irq_context(struct task_struct *task)
-    {
     return LOCK_CHAIN_HARDIRQ_CONTEXT * !!lockdep_hardirq_context() +
     LOCK_CHAIN_SOFTIRQ_CONTEXT * !!task.softirq_context;
     }
-    static int separate_irq_context(struct task_struct *curr,
-    struct held_lock *hlock)
-    {
-    let mut depth: c_uint = curr.lockdep_depth;
+#[no_mangle]
+pub unsafe extern "C" fn separate_irq_context(curr: *mut task_struct, hlock: *mut held_lock) -> c_int {
+pub static mut depth: c_uint = 0;
 //
 // Keep track of points where we cross into an interrupt context:
 //
     if (depth) {
-    struct held_lock *prev_hlock;
+pub static mut prev_hlock: *mut c_void = core::ptr::null_mut();
     prev_hlock = curr.held_locks + depth-1;
 //
 // If we cross into another context, reset the
 // hash key (this also prevents the checking and the
 // adding of the dependency to 'prev'):
 //
-    if (prev_hlock.irq_context != hlock.irq_context)
+    if (prev_hlock.irq_context != hlock.irq_context) {
     return 1;
+    }
     }
     return 0;
     }
 //
 // Mark a lock with a usage bit, and validate the state transition:
 //
-    static int mark_lock(struct task_struct *curr, struct held_lock *this,
-    enum lock_usage_bit new_bit)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn mark_lock(curr: *mut task_struct, this: *mut held_lock, new_bit: lock_usage_bit) -> c_int {
     unsigned int new_mask, ret = 1;
     if (new_bit >= LOCK_USAGE_STATES) {
     DEBUG_LOCKS_WARN_ON(1);
     return 0;
     }
-    if (new_bit == LOCK_USED && this.read)
+    if (new_bit == LOCK_USED && this.read) {
     new_bit = LOCK_USED_READ;
+    }
     new_mask = 1 << new_bit;
 //
 // If already set then do not dirty the cacheline,
 // nor do any checks:
 //
-    if (likely(hlock_class(this).usage_mask & new_mask))
+    if (likely(hlock_class(this).usage_mask & new_mask)) {
     return 1;
-    if (!graph_lock())
+    }
+    if (!graph_lock()) {
     return 0;
+    }
 //
 // Make sure we didn't race:
 //
-    if (unlikely(hlock_class(this).usage_mask & new_mask))
-    goto unlock;
-    if (!hlock_class(this).usage_mask)
+    if (unlikely(hlock_class(this).usage_mask & new_mask)) {
+// goto;
+    }
+    if (!hlock_class(this).usage_mask) {
     debug_atomic_dec(nr_unused_locks);
+    }
     hlock_class(this).usage_mask |= new_mask;
     if (new_bit < LOCK_TRACE_STATES) {
-    if (!(hlock_class(this).usage_traces[new_bit] = save_trace()))
+    if (!(hlock_class(this).usage_traces[new_bit] = save_trace())) {
     return 0;
+    }
     }
     if (new_bit < LOCK_USED) {
     ret = mark_lock_irq(curr, this, new_bit);
-    if (!ret)
+    if (!ret) {
     return 0;
     }
-    unlock:
+    }
+// label;
     graph_unlock();
 //
 // We must printk outside of the graph_lock:
@@ -4322,8 +4472,6 @@ pub unsafe extern "C" fn task_irq_context(task: *mut task_struct) -> c_uint {
     }
 #[no_mangle]
 pub unsafe extern "C" fn task_wait_context(curr: *mut task_struct) -> c_short {
-    static inline short task_wait_context(struct task_struct *curr)
-    {
 //
 // Set appropriate wait type for the context; for IRQs we have to take
 // into account force_irqthread as that is implied by PREEMPT_RT.
@@ -4332,8 +4480,9 @@ pub unsafe extern "C" fn task_wait_context(curr: *mut task_struct) -> c_short {
 //
 // Check if force_irqthreads will run us threaded.
 //
-    if (curr.hardirq_threaded || curr.irq_config)
+    if (curr.hardirq_threaded || curr.irq_config) {
     return LD_WAIT_CONFIG;
+    }
     return LD_WAIT_SPIN;
     } else if (curr.softirq_context) {
 //
@@ -4343,28 +4492,28 @@ pub unsafe extern "C" fn task_wait_context(curr: *mut task_struct) -> c_short {
     }
     return LD_WAIT_MAX;
     }
-    static int
-    print_lock_invalid_wait_context(struct task_struct *curr,
-    struct held_lock *hlock)
-    {
-    short curr_inner;
-    if (!debug_locks_off())
+#[no_mangle]
+pub unsafe extern "C" fn print_lock_invalid_wait_context(curr: *mut task_struct, hlock: *mut held_lock) -> c_int {
+    let mut curr_inner = 0;
+    if (!debug_locks_off()) {
     return 0;
-    if (debug_locks_silent)
+    }
+    if (debug_locks_silent) {
     return 0;
+    }
     nbcon_cpu_emergency_enter();
-    pr_warn("\n");
-    pr_warn("=============================\n");
-    pr_warn("[ BUG: Invalid wait context ]\n");
+    pr_warn!("\n");
+    pr_warn!("=============================\n");
+    pr_warn!("[ BUG: Invalid wait context ]\n");
     print_kernel_ident();
-    pr_warn("-----------------------------\n");
-    pr_warn("%s/%d is trying to lock:\n", curr.comm, task_pid_nr(curr));
+    pr_warn!("-----------------------------\n");
+    pr_warn!("%s/%d is trying to lock:\n", curr.comm, task_pid_nr(curr));
     print_lock(hlock);
-    pr_warn("other info that might help us debug this:\n");
+    pr_warn!("other info that might help us debug this:\n");
     curr_inner = task_wait_context(curr);
-    pr_warn("context-{%d:%d}\n", curr_inner, curr_inner);
+    pr_warn!("context-{%d:%d}\n", curr_inner, curr_inner);
     lockdep_print_held_locks(curr);
-    pr_warn("stack backtrace:\n");
+    pr_warn!("stack backtrace:\n");
     dump_stack();
     nbcon_cpu_emergency_exit();
     return 0;
@@ -4386,30 +4535,31 @@ pub unsafe extern "C" fn task_wait_context(curr: *mut task_struct) -> c_short {
 //
 #[no_mangle]
 unsafe extern "C" fn check_wait_context(curr: *mut task_struct, next: *mut held_lock) -> c_int {
-    static int check_wait_context(struct task_struct *curr, struct held_lock *next)
-    {
-    let mut next_inner: u8 = hlock_class(next).wait_type_inner;
-    let mut next_outer: u8 = hlock_class(next).wait_type_outer;
-    u8 curr_inner;
-    int depth;
-    if (!next_inner || next.trylock)
+pub static mut next_inner: u8 = 0;
+pub static mut next_outer: u8 = 0;
+    let mut curr_inner = 0;
+    let mut depth = 0;
+    if (!next_inner || next.trylock) {
     return 0;
-    if (!next_outer)
+    }
+    if (!next_outer) {
     next_outer = next_inner;
+    }
 //
 // Find start of current irq_context..
 //
-    for (depth = curr.lockdep_depth - 1; depth >= 0; depth--) {
-    struct held_lock *prev = curr.held_locks + depth;
-    if (prev.irq_context != next.irq_context)
+    while (depth >= 0) {
+    let mut prev = curr.held_locks + depth;
+    if (prev.irq_context != next.irq_context) {
     break;
     }
-    depth++;
+    }
+    depth += 1;
     curr_inner = task_wait_context(curr);
-    for (; depth < curr.lockdep_depth; depth++) {
-    struct held_lock *prev = curr.held_locks + depth;
-    struct lock_class *class = hlock_class(prev);
-    let mut prev_inner: u8 = class.wait_type_inner;
+    while (depth < curr.lockdep_depth) {
+    let mut prev = curr.held_locks + depth;
+    let mut class = hlock_class(prev);
+pub static mut prev_inner: u8 = 0;
     if (prev_inner) {
 //
 // We can have a bigger inner than a previous one
@@ -4423,47 +4573,49 @@ unsafe extern "C" fn check_wait_context(curr: *mut task_struct, next: *mut held_
 // only valid/needed for code that only exists when
 // CONFIG_PREEMPT_RT=n.
 //
-    if (unlikely(class.lock_type == LD_LOCK_WAIT_OVERRIDE))
+    if (unlikely(class.lock_type == LD_LOCK_WAIT_OVERRIDE)) {
     curr_inner = prev_inner;
     }
     }
-    if (next_outer > curr_inner)
+    }
+    if (next_outer > curr_inner) {
     return print_lock_invalid_wait_context(curr, next);
+    }
     return 0;
     }
 
-    static inline int
-    mark_usage(struct task_struct *curr, struct held_lock *hlock, int check)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: mark_usage
+pub unsafe extern "C" fn mark_usage_dup(curr: *mut task_struct, hlock: *mut held_lock, check: c_int) -> c_int {
     return 1;
     }
 #[no_mangle]
-pub unsafe extern "C" fn task_irq_context(task: *mut task_struct) -> c_uint {
-    static inline unsigned int task_irq_context(struct task_struct *task)
-    {
+#[no_mangle]
+// duplicate fn: task_irq_context
+pub unsafe extern "C" fn task_irq_context_dup(task: *mut task_struct) -> c_uint {
     return 0;
     }
-    static inline int separate_irq_context(struct task_struct *curr,
-    struct held_lock *hlock)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: separate_irq_context
+pub unsafe extern "C" fn separate_irq_context_dup(curr: *mut task_struct, hlock: *mut held_lock) -> c_int {
     return 0;
     }
-    static inline int check_wait_context(struct task_struct *curr,
-    struct held_lock *next)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn check_wait_context(curr: *mut task_struct, next: *mut held_lock) -> c_int {
     return 0;
     }
 
 //
 // Initialize a lock instance's lock-class mapping info:
 //
-    void lockdep_init_map_type(struct lockdep_map *lock, const char *name,
-    struct lock_class_key *key, int subclass,
-    u8 inner, u8 outer, u8 lock_type)
-    {
-    int i;
-    for (i = 0; i < NR_LOCKDEP_CACHING_CLASSES; i++)
+#[no_mangle]
+pub unsafe extern "C" fn lockdep_init_map_type(lock: *mut lockdep_map, name: *mut c_char, key: *mut lock_class_key, subclass: c_int, inner: u8, outer: u8, lock_type: u8) {
+    let mut i = 0;
+    for (i = 0; i < NR_LOCKDEP_CACHING_CLASSES; i++) {
     lock.class_cache[i] = core::ptr::null_mut();
+    }
 
     lock.cpu = raw_smp_processor_id();
 
@@ -4481,25 +4633,29 @@ pub unsafe extern "C" fn task_irq_context(task: *mut task_struct) -> c_uint {
 //
 // No key, no joy, we need to hash something.
 //
-    if (DEBUG_LOCKS_WARN_ON(!key))
+    if (DEBUG_LOCKS_WARN_ON(!key)) {
     return;
+    }
 //
 // Sanity check, the lock-class key must either have been allocated
 // statically or must have been registered as a dynamic key.
 //
     if (!static_obj(key) && !is_dynamic_key(key)) {
-    if (debug_locks)
-    printk(KERN_ERR "BUG: key %px has not been registered!\n", key);
+    if (debug_locks) {
+    printk("BUG: key %px has not been registered!\n", key);
+    }
     DEBUG_LOCKS_WARN_ON(1);
     return;
     }
     lock.key = key;
-    if (unlikely(!debug_locks))
+    if (unlikely(!debug_locks)) {
     return;
+    }
     if (subclass) {
-    unsigned long flags;
-    if (DEBUG_LOCKS_WARN_ON(!lockdep_enabled()))
+    let mut flags = 0;
+    if (DEBUG_LOCKS_WARN_ON(!lockdep_enabled())) {
     return;
+    }
     raw_local_irq_save(flags);
     lockdep_recursion_inc();
     register_lock_class(lock, subclass, 1);
@@ -4508,23 +4664,23 @@ pub unsafe extern "C" fn task_irq_context(task: *mut task_struct) -> c_uint {
     }
     }
     EXPORT_SYMBOL_GPL(lockdep_init_map_type);
-    struct lock_class_key __lockdep_no_validate__;
+pub static mut __lockdep_no_validate__: usize = 0;
     EXPORT_SYMBOL_GPL(__lockdep_no_validate__);
-    struct lock_class_key __lockdep_no_track__;
+pub static mut __lockdep_no_track__: usize = 0;
     EXPORT_SYMBOL_GPL(__lockdep_no_track__);
 
-    void lockdep_set_lock_cmp_fn(struct lockdep_map *lock, lock_cmp_fn cmp_fn,
-    lock_print_fn print_fn)
-    {
-    struct lock_class *class = lock.class_cache[0];
-    unsigned long flags;
+#[no_mangle]
+pub unsafe extern "C" fn lockdep_set_lock_cmp_fn(lock: *mut lockdep_map, cmp_fn: lock_cmp_fn, print_fn: lock_print_fn) {
+    let mut class = lock.class_cache[0];
+    let mut flags = 0;
     raw_local_irq_save(flags);
     lockdep_recursion_inc();
-    if (!class)
+    if (!class) {
     class = register_lock_class(lock, 0, 0);
+    }
     if (class) {
-    WARN_ON(class.cmp_fn	&& class.cmp_fn != cmp_fn);
-    WARN_ON(class.print_fn && class.print_fn != print_fn);
+    WARN_ON!(class.cmp_fn	&& class.cmp_fn != cmp_fn);
+    WARN_ON!(class.print_fn && class.print_fn != print_fn);
     class.cmp_fn	= cmp_fn;
     class.print_fn = print_fn;
     }
@@ -4533,33 +4689,33 @@ pub unsafe extern "C" fn task_irq_context(task: *mut task_struct) -> c_uint {
     }
     EXPORT_SYMBOL_GPL(lockdep_set_lock_cmp_fn);
 
-    static void
-    print_lock_nested_lock_not_held(struct task_struct *curr,
-    struct held_lock *hlock)
-    {
-    if (!debug_locks_off())
+#[no_mangle]
+pub unsafe extern "C" fn print_lock_nested_lock_not_held(curr: *mut task_struct, hlock: *mut held_lock) {
+    if (!debug_locks_off()) {
     return;
-    if (debug_locks_silent)
+    }
+    if (debug_locks_silent) {
     return;
+    }
     nbcon_cpu_emergency_enter();
-    pr_warn("\n");
-    pr_warn("==================================\n");
-    pr_warn("WARNING: Nested lock was not taken\n");
+    pr_warn!("\n");
+    pr_warn!("==================================\n");
+    pr_warn!("WARNING: Nested lock was not taken\n");
     print_kernel_ident();
-    pr_warn("----------------------------------\n");
-    pr_warn("%s/%d is trying to lock:\n", curr.comm, task_pid_nr(curr));
+    pr_warn!("----------------------------------\n");
+    pr_warn!("%s/%d is trying to lock:\n", curr.comm, task_pid_nr(curr));
     print_lock(hlock);
-    pr_warn("\nbut this task is not holding:\n");
-    pr_warn("%s\n", hlock.nest_lock.name);
-    pr_warn("\nstack backtrace:\n");
+    pr_warn!("\nbut this task is not holding:\n");
+    pr_warn!("%s\n", hlock.nest_lock.name);
+    pr_warn!("\nstack backtrace:\n");
     dump_stack();
-    pr_warn("\nother info that might help us debug this:\n");
+    pr_warn!("\nother info that might help us debug this:\n");
     lockdep_print_held_locks(curr);
-    pr_warn("\nstack backtrace:\n");
+    pr_warn!("\nstack backtrace:\n");
     dump_stack();
     nbcon_cpu_emergency_exit();
     }
-    static int __lock_is_held(const struct lockdep_map *lock, int read);
+// forward_decl: __lock_is_held;
 //
 // This gets called for every mutex_lock*()/spin_lock*() operation.
 // We maintain the dependency maps and validate the locking attempt:
@@ -4568,46 +4724,49 @@ pub unsafe extern "C" fn task_irq_context(task: *mut task_struct) -> c_uint {
 // otherwise we could get an interrupt which would want to take locks,
 // which would end up in lockdep again.
 //
-    static int __lock_acquire(struct lockdep_map *lock, unsigned int subclass,
-    int trylock, int read, int check, int hardirqs_off,
-    struct lockdep_map *nest_lock, unsigned long ip,
-    int references, int pin_count, int sync, int seq)
-    {
-    struct task_struct *curr = current;
-    struct lock_class *class = core::ptr::null_mut();
-    struct held_lock *hlock;
-    unsigned int depth;
-    let mut chain_head: c_int = 0;
-    int class_idx;
-    u64 chain_key;
-    if (unlikely(!debug_locks))
+#[no_mangle]
+pub unsafe extern "C" fn __lock_acquire(lock: *mut lockdep_map, subclass: c_uint, trylock: c_int, read: c_int, check: c_int, hardirqs_off: c_int, nest_lock: *mut lockdep_map, ip: c_ulong, references: c_int, pin_count: c_int, sync: c_int, seq: c_int) -> c_int {
+    let mut curr = current;
+    let mut class = core::ptr::null_mut();
+pub static mut hlock: *mut c_void = core::ptr::null_mut();
+    let mut depth = 0;
+pub static mut chain_head: c_int = 0;
+    let mut class_idx = 0;
+    let mut chain_key = 0;
+    if (unlikely(!debug_locks)) {
     return 0;
-    if (unlikely(lock.key == &__lockdep_no_track__))
+    }
+    if (unlikely(lock.key == &__lockdep_no_track__)) {
     return 0;
+    }
     lockevent_inc(lockdep_acquire);
     if (!prove_locking || lock.key == &__lockdep_no_validate__) {
     check = 0;
     lockevent_inc(lockdep_nocheck);
     }
-    if (DEBUG_LOCKS_WARN_ON(subclass >= MAX_LOCKDEP_SUBCLASSES))
+    if (DEBUG_LOCKS_WARN_ON(subclass >= MAX_LOCKDEP_SUBCLASSES)) {
     return 0;
-    if (subclass < NR_LOCKDEP_CACHING_CLASSES)
+    }
+    if (subclass < NR_LOCKDEP_CACHING_CLASSES) {
     class = lock.class_cache[subclass];
+    }
 //
 // Not cached?
 //
     if (unlikely(!class)) {
     class = register_lock_class(lock, subclass, 0);
-    if (!class)
+    if (!class) {
     return 0;
+    }
     }
     debug_class_ops_inc(class);
     if (very_verbose(class)) {
     nbcon_cpu_emergency_enter();
     printk("\nacquire class [%px] %s", class.key, class.name);
-    if (class.name_version > 1)
-    printk(KERN_CONT "#%d", class.name_version);
-    printk(KERN_CONT "\n");
+    if (class.name_version > 1) {
+    printk("#%d", class.name_version);
+    }
+    printk("\n");
     dump_stack();
     nbcon_cpu_emergency_exit();
     }
@@ -4620,21 +4779,25 @@ pub unsafe extern "C" fn task_irq_context(task: *mut task_struct) -> c_uint {
 //
 // Ran out of static storage for our per-task lock stack again have we?
 //
-    if (DEBUG_LOCKS_WARN_ON(depth >= MAX_LOCK_DEPTH))
+    if (DEBUG_LOCKS_WARN_ON(depth >= MAX_LOCK_DEPTH)) {
     return 0;
+    }
     class_idx = class - lock_classes;
     if (depth && !sync) {
 // we're holding locks and the new held lock is not a sync
     hlock = curr.held_locks + depth - 1;
     if (hlock.class_idx == class_idx && nest_lock) {
-    if (!references)
-    references++;
-    if (!hlock.references)
-    hlock.references++;
+    if (!references) {
+    references += 1;
+    }
+    if (!hlock.references) {
+    hlock.references += 1;
+    }
     hlock.references += references;
 // Overflow
-    if (DEBUG_LOCKS_WARN_ON(hlock.references < references))
+    if (DEBUG_LOCKS_WARN_ON(hlock.references < references)) {
     return 0;
+    }
     return 2;
     }
     }
@@ -4643,8 +4806,9 @@ pub unsafe extern "C" fn task_irq_context(task: *mut task_struct) -> c_uint {
 // Plain impossible, we just registered it and checked it weren't no
 // NULL like.. I bet this mushroom I ate was good!
 //
-    if (DEBUG_LOCKS_WARN_ON(!class))
+    if (DEBUG_LOCKS_WARN_ON(!class)) {
     return 0;
+    }
     hlock.class_idx = class_idx;
     hlock.acquire_ip = ip;
     hlock.instance = lock;
@@ -4662,11 +4826,13 @@ pub unsafe extern "C" fn task_irq_context(task: *mut task_struct) -> c_uint {
 
     hlock.pin_count = pin_count;
     hlock.seq_count = seq;
-    if (check_wait_context(curr, hlock))
+    if (check_wait_context(curr, hlock)) {
     return 0;
+    }
 // Initialize the lock usage bit
-    if (!mark_usage(curr, hlock, check))
+    if (!mark_usage(curr, hlock, check)) {
     return 0;
+    }
 //
 // Calculate the chain hash: it's the combined hash of all the
 // lock keys along the dependency chain. We save the hash value
@@ -4679,15 +4845,17 @@ pub unsafe extern "C" fn task_irq_context(task: *mut task_struct) -> c_uint {
 //
 // Whoops, we did it again.. class_idx is invalid.
 //
-    if (DEBUG_LOCKS_WARN_ON(!test_bit(class_idx, lock_classes_in_use)))
+    if (DEBUG_LOCKS_WARN_ON(!test_bit(class_idx, lock_classes_in_use))) {
     return 0;
+    }
     chain_key = curr.curr_chain_key;
     if (!depth) {
 //
 // How can we have a chain hash when we ain't got no keys?!
 //
-    if (DEBUG_LOCKS_WARN_ON(chain_key != INITIAL_CHAIN_KEY))
+    if (DEBUG_LOCKS_WARN_ON(chain_key != INITIAL_CHAIN_KEY)) {
     return 0;
+    }
     chain_head = 1;
     }
     hlock.prev_chain_key = chain_key;
@@ -4701,26 +4869,29 @@ pub unsafe extern "C" fn task_irq_context(task: *mut task_struct) -> c_uint {
     return 0;
     }
     if (!debug_locks_silent) {
-    WARN_ON_ONCE(depth && !hlock_class(hlock - 1).key);
-    WARN_ON_ONCE(!hlock_class(hlock).key);
+    WARN_ON_ONCE!(depth && !hlock_class(hlock - 1).key);
+    WARN_ON_ONCE!(!hlock_class(hlock).key);
     }
-    if (!validate_chain(curr, hlock, chain_head, chain_key))
+    if (!validate_chain(curr, hlock, chain_head, chain_key)) {
     return 0;
+    }
 // For lock_sync(), we are done here since no actual critical section
-    if (hlock.sync)
+    if (hlock.sync) {
     return 1;
+    }
     curr.curr_chain_key = chain_key;
-    curr.lockdep_depth++;
+    curr.lockdep_depth += 1;
     check_chain_key(curr);
 
-    if (unlikely(!debug_locks))
+    if (unlikely(!debug_locks)) {
     return 0;
+    }
 
     if (unlikely(curr.lockdep_depth >= MAX_LOCK_DEPTH)) {
     debug_locks_off();
     nbcon_cpu_emergency_enter();
     print_lockdep_off("BUG: MAX_LOCK_DEPTH too low!");
-    printk(KERN_DEBUG "depth: %i  max: %lu!\n",
+    printk("depth: %i  max: %lu!\n",
     curr.lockdep_depth, MAX_LOCK_DEPTH);
     lockdep_print_held_locks(current);
     debug_show_all_locks();
@@ -4728,81 +4899,86 @@ pub unsafe extern "C" fn task_irq_context(task: *mut task_struct) -> c_uint {
     nbcon_cpu_emergency_exit();
     return 0;
     }
-    if (unlikely(curr.lockdep_depth > max_lockdep_depth))
+    if (unlikely(curr.lockdep_depth > max_lockdep_depth)) {
     max_lockdep_depth = curr.lockdep_depth;
+    }
     return 1;
     }
-    static void print_unlock_imbalance_bug(struct task_struct *curr,
-    struct lockdep_map *lock,
-    unsigned long ip)
-    {
-    if (!debug_locks_off())
+#[no_mangle]
+pub unsafe extern "C" fn print_unlock_imbalance_bug(curr: *mut task_struct, lock: *mut lockdep_map, ip: c_ulong) {
+    if (!debug_locks_off()) {
     return;
-    if (debug_locks_silent)
+    }
+    if (debug_locks_silent) {
     return;
+    }
     nbcon_cpu_emergency_enter();
-    pr_warn("\n");
-    pr_warn("=====================================\n");
-    pr_warn("WARNING: bad unlock balance detected!\n");
+    pr_warn!("\n");
+    pr_warn!("=====================================\n");
+    pr_warn!("WARNING: bad unlock balance detected!\n");
     print_kernel_ident();
-    pr_warn("-------------------------------------\n");
-    pr_warn("%s/%d is trying to release lock (",
+    pr_warn!("-------------------------------------\n");
+    pr_warn!("%s/%d is trying to release lock (",
     curr.comm, task_pid_nr(curr));
     print_lockdep_cache(lock);
     pr_cont(") at:\n");
     print_ip_sym(KERN_WARNING, ip);
-    pr_warn("but there are no more locks to release!\n");
-    pr_warn("\nother info that might help us debug this:\n");
+    pr_warn!("but there are no more locks to release!\n");
+    pr_warn!("\nother info that might help us debug this:\n");
     lockdep_print_held_locks(curr);
-    pr_warn("\nstack backtrace:\n");
+    pr_warn!("\nstack backtrace:\n");
     dump_stack();
     nbcon_cpu_emergency_exit();
     }
     static noinstr int match_held_lock(const struct held_lock *hlock,
     const struct lockdep_map *lock)
     {
-    if (hlock.instance == lock)
+    if (hlock.instance == lock) {
     return 1;
+    }
     if (hlock.references) {
-    const struct lock_class *class = lock.class_cache[0];
-    if (!class)
+    let mut class = lock.class_cache[0];
+    if (!class) {
     class = look_up_lock_class(lock, 0);
+    }
 //
 // If look_up_lock_class() failed to find a class, we're trying
 // to test if we hold a lock that has never yet been acquired.
 // Clearly if the lock hasn't been acquired _ever_, we're not
 // holding it either, so report failure.
 //
-    if (!class)
+    if (!class) {
     return 0;
+    }
 //
 // References, but not a lock we're actually ref-counting?
 // State got messed up, follow the sites that change ->references
 // and try to make sense of it.
 //
-    if (DEBUG_LOCKS_WARN_ON(!hlock.nest_lock))
+    if (DEBUG_LOCKS_WARN_ON(!hlock.nest_lock)) {
     return 0;
-    if (hlock.class_idx == class - lock_classes)
+    }
+    if (hlock.class_idx == class - lock_classes) {
     return 1;
+    }
     }
     return 0;
     }
 // @depth must not be zero
-    static struct held_lock *find_held_lock(struct task_struct *curr,
-    struct lockdep_map *lock,
-    unsigned int depth, int *idx)
-    {
-    struct held_lock *ret, *hlock, *prev_hlock;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn find_held_lock(curr: *mut task_struct, lock: *mut lockdep_map, depth: c_uint, idx: *mut c_int) -> *mut c_void {
+    let mut ret = core::ptr::null_mut();
+    let mut hlock = core::ptr::null_mut();
+    let mut prev_hlock = core::ptr::null_mut();
+    let mut i = 0;
     i = depth - 1;
     hlock = curr.held_locks + i;
     ret = hlock;
-    if (match_held_lock(hlock, lock))
-    goto out;
+    if (match_held_lock(hlock, lock)) {
+// goto;
+    }
     ret = core::ptr::null_mut();
-    for (i--, prev_hlock = hlock--;
-    i >= 0;
-    i--, prev_hlock = hlock--) {
+    while (i >= 0) {
 //
 // We must not cross into another context:
 //
@@ -4815,18 +4991,18 @@ pub unsafe extern "C" fn task_irq_context(task: *mut task_struct) -> c_uint {
     break;
     }
     }
-    out:
+// label;
 // idx = i;
     return ret;
     }
-    static int reacquire_held_locks(struct task_struct *curr, unsigned int depth,
-    int idx, unsigned int *merged)
-    {
-    struct held_lock *hlock;
-    let mut first_idx: c_int = idx;
-    if (DEBUG_LOCKS_WARN_ON(!irqs_disabled()))
+#[no_mangle]
+pub unsafe extern "C" fn reacquire_held_locks(curr: *mut task_struct, depth: c_uint, idx: c_int, merged: *mut c_uint) -> c_int {
+pub static mut hlock: *mut c_void = core::ptr::null_mut();
+pub static mut first_idx: c_int = 0;
+    if (DEBUG_LOCKS_WARN_ON(!irqs_disabled())) {
     return 0;
-    for (hlock = curr.held_locks + idx; idx < depth; idx++, hlock++) {
+    }
+    while (idx < depth) {
     switch (__lock_acquire(hlock.instance,
     hlock_class(hlock).subclass,
     hlock.trylock,
@@ -4841,32 +5017,31 @@ pub unsafe extern "C" fn task_irq_context(task: *mut task_struct) -> c_uint {
     case 2:
 // merged += (idx == first_idx);
     break;
-    default:
-    WARN_ON(1);
+// label;
+    WARN_ON!(1);
     return 0;
     }
     }
     return 0;
     }
-    static int
-    __lock_set_class(struct lockdep_map *lock, const char *name,
-    struct lock_class_key *key, unsigned int subclass,
-    unsigned long ip)
-    {
-    struct task_struct *curr = current;
+#[no_mangle]
+pub unsafe extern "C" fn __lock_set_class(lock: *mut lockdep_map, name: *mut c_char, key: *mut lock_class_key, subclass: c_uint, ip: c_ulong) -> c_int {
+    let mut curr = current;
     unsigned int depth, merged = 0;
-    struct held_lock *hlock;
-    struct lock_class *class;
-    int i;
-    if (unlikely(!debug_locks))
+pub static mut hlock: *mut c_void = core::ptr::null_mut();
+pub static mut class: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    if (unlikely(!debug_locks)) {
     return 0;
+    }
     depth = curr.lockdep_depth;
 //
 // This function is about (re)setting the class of a held lock,
 // yet we're not actually holding any locks. Naughty user!
 //
-    if (DEBUG_LOCKS_WARN_ON(!depth))
+    if (DEBUG_LOCKS_WARN_ON(!depth)) {
     return 0;
+    }
     hlock = find_held_lock(curr, lock, depth, &i);
     if (!hlock) {
     print_unlock_imbalance_bug(curr, lock, ip);
@@ -4877,38 +5052,41 @@ pub unsafe extern "C" fn task_irq_context(task: *mut task_struct) -> c_uint {
     lock.wait_type_outer,
     lock.lock_type);
     class = register_lock_class(lock, subclass, 0);
-    if (!class)
+    if (!class) {
     return 0;
+    }
     hlock.class_idx = class - lock_classes;
     curr.lockdep_depth = i;
     curr.curr_chain_key = hlock.prev_chain_key;
-    if (reacquire_held_locks(curr, depth, i, &merged))
+    if (reacquire_held_locks(curr, depth, i, &merged)) {
     return 0;
+    }
 //
 // I took it apart and put it back together again, except now I have
 // these 'spare' parts.. where shall I put them.
 //
-    if (DEBUG_LOCKS_WARN_ON(curr.lockdep_depth != depth - merged))
+    if (DEBUG_LOCKS_WARN_ON(curr.lockdep_depth != depth - merged)) {
     return 0;
+    }
     return 1;
     }
 #[no_mangle]
 unsafe extern "C" fn __lock_downgrade(lock: *mut lockdep_map, ip: c_ulong) -> c_int {
-    static int __lock_downgrade(struct lockdep_map *lock, unsigned long ip)
-    {
-    struct task_struct *curr = current;
+    let mut curr = current;
     unsigned int depth, merged = 0;
-    struct held_lock *hlock;
-    int i;
-    if (unlikely(!debug_locks))
+pub static mut hlock: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    if (unlikely(!debug_locks)) {
     return 0;
+    }
     depth = curr.lockdep_depth;
 //
 // This function is about (re)setting the class of a held lock,
 // yet we're not actually holding any locks. Naughty user!
 //
-    if (DEBUG_LOCKS_WARN_ON(!depth))
+    if (DEBUG_LOCKS_WARN_ON(!depth)) {
     return 0;
+    }
     hlock = find_held_lock(curr, lock, depth, &i);
     if (!hlock) {
     print_unlock_imbalance_bug(curr, lock, ip);
@@ -4919,17 +5097,20 @@ unsafe extern "C" fn __lock_downgrade(lock: *mut lockdep_map, ip: c_ulong) -> c_
     WARN(hlock.read, "downgrading a read lock");
     hlock.read = 1;
     hlock.acquire_ip = ip;
-    if (reacquire_held_locks(curr, depth, i, &merged))
+    if (reacquire_held_locks(curr, depth, i, &merged)) {
     return 0;
+    }
 // Merging can't happen with unchanged classes..
-    if (DEBUG_LOCKS_WARN_ON(merged))
+    if (DEBUG_LOCKS_WARN_ON(merged)) {
     return 0;
+    }
 //
 // I took it apart and put it back together again, except now I have
 // these 'spare' parts.. where shall I put them.
 //
-    if (DEBUG_LOCKS_WARN_ON(curr.lockdep_depth != depth))
+    if (DEBUG_LOCKS_WARN_ON(curr.lockdep_depth != depth)) {
     return 0;
+    }
     return 1;
     }
 //
@@ -4937,15 +5118,15 @@ unsafe extern "C" fn __lock_downgrade(lock: *mut lockdep_map, ip: c_ulong) -> c_
 // called on mutex_unlock()/spin_unlock*() (or on a failed
 // mutex_lock_interruptible()).
 //
-    static int
-    __lock_release(struct lockdep_map *lock, unsigned long ip)
-    {
-    struct task_struct *curr = current;
+#[no_mangle]
+pub unsafe extern "C" fn __lock_release(lock: *mut lockdep_map, ip: c_ulong) -> c_int {
+    let mut curr = current;
     unsigned int depth, merged = 1;
-    struct held_lock *hlock;
-    int i;
-    if (unlikely(!debug_locks))
+pub static mut hlock: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    if (unlikely(!debug_locks)) {
     return 0;
+    }
     depth = curr.lockdep_depth;
 //
 // So we're all set to release this lock.. wait what lock? We don't
@@ -4964,11 +5145,12 @@ unsafe extern "C" fn __lock_downgrade(lock: *mut lockdep_map, ip: c_ulong) -> c_
     print_unlock_imbalance_bug(curr, lock, ip);
     return 0;
     }
-    if (hlock.instance == lock)
+    if (hlock.instance == lock) {
     lock_release_holdtime(hlock);
+    }
     WARN(hlock.pin_count, "releasing a pinned lock\n");
     if (hlock.references) {
-    hlock.references--;
+    hlock.references -= 1;
     if (hlock.references) {
 //
 // We had, and after removing one, still have
@@ -4989,10 +5171,12 @@ unsafe extern "C" fn __lock_downgrade(lock: *mut lockdep_map, ip: c_ulong) -> c_
 // The most likely case is when the unlock is on the innermost
 // lock. In this case, we are done!
 //
-    if (i == depth-1)
+    if (i == depth-1) {
     return 1;
-    if (reacquire_held_locks(curr, depth, i + 1, &merged))
+    }
+    if (reacquire_held_locks(curr, depth, i + 1, &merged)) {
     return 0;
+    }
 //
 // We had N bottles of beer on the wall, we drank one, but now
 // there's not N-1 bottles of beer left on the wall...
@@ -5009,15 +5193,14 @@ unsafe extern "C" fn __lock_downgrade(lock: *mut lockdep_map, ip: c_ulong) -> c_
     static __always_inline
 #[no_mangle]
 pub unsafe extern "C" fn __lock_is_held(lock: *const lockdep_map, read: c_int) -> c_int {
-    int __lock_is_held(const struct lockdep_map *lock, int read)
-    {
-    struct task_struct *curr = current;
-    int i;
-    for (i = 0; i < curr.lockdep_depth; i++) {
-    struct held_lock *hlock = curr.held_locks + i;
+    let mut curr = current;
+    let mut i = 0;
+    while (i < curr.lockdep_depth) {
+    let mut hlock = curr.held_locks + i;
     if (match_held_lock(hlock, lock)) {
-    if (read == -1 || !!hlock.read == read)
+    if (read == -1 || !!hlock.read == read) {
     return LOCK_STATE_HELD;
+    }
     return LOCK_STATE_NOT_HELD;
     }
     }
@@ -5025,15 +5208,14 @@ pub unsafe extern "C" fn __lock_is_held(lock: *const lockdep_map, read: c_int) -
     }
 #[no_mangle]
 unsafe extern "C" fn __lock_pin_lock(lock: *mut lockdep_map) -> pin_cookie {
-    static struct pin_cookie __lock_pin_lock(struct lockdep_map *lock)
-    {
-    let mut cookie: pin_cookie = NIL_COOKIE;
-    struct task_struct *curr = current;
-    int i;
-    if (unlikely(!debug_locks))
+pub static mut cookie: pin_cookie = 0;
+    let mut curr = current;
+    let mut i = 0;
+    if (unlikely(!debug_locks)) {
     return cookie;
-    for (i = 0; i < curr.lockdep_depth; i++) {
-    struct held_lock *hlock = curr.held_locks + i;
+    }
+    while (i < curr.lockdep_depth) {
+    let mut hlock = curr.held_locks + i;
     if (match_held_lock(hlock, lock)) {
 //
 // Grab 16bits of randomness; this is sufficient to not
@@ -5050,14 +5232,13 @@ unsafe extern "C" fn __lock_pin_lock(lock: *mut lockdep_map) -> pin_cookie {
     }
 #[no_mangle]
 unsafe extern "C" fn __lock_repin_lock(lock: *mut lockdep_map, cookie: pin_cookie) {
-    static void __lock_repin_lock(struct lockdep_map *lock, struct pin_cookie cookie)
-    {
-    struct task_struct *curr = current;
-    int i;
-    if (unlikely(!debug_locks))
+    let mut curr = current;
+    let mut i = 0;
+    if (unlikely(!debug_locks)) {
     return;
-    for (i = 0; i < curr.lockdep_depth; i++) {
-    struct held_lock *hlock = curr.held_locks + i;
+    }
+    while (i < curr.lockdep_depth) {
+    let mut hlock = curr.held_locks + i;
     if (match_held_lock(hlock, lock)) {
     hlock.pin_count += cookie.val;
     return;
@@ -5067,21 +5248,22 @@ unsafe extern "C" fn __lock_repin_lock(lock: *mut lockdep_map, cookie: pin_cooki
     }
 #[no_mangle]
 unsafe extern "C" fn __lock_unpin_lock(lock: *mut lockdep_map, cookie: pin_cookie) {
-    static void __lock_unpin_lock(struct lockdep_map *lock, struct pin_cookie cookie)
-    {
-    struct task_struct *curr = current;
-    int i;
-    if (unlikely(!debug_locks))
+    let mut curr = current;
+    let mut i = 0;
+    if (unlikely(!debug_locks)) {
     return;
-    for (i = 0; i < curr.lockdep_depth; i++) {
-    struct held_lock *hlock = curr.held_locks + i;
+    }
+    while (i < curr.lockdep_depth) {
+    let mut hlock = curr.held_locks + i;
     if (match_held_lock(hlock, lock)) {
-    int pin_count;
-    if (WARN(!hlock.pin_count, "unpinning an unpinned lock\n"))
+    let mut pin_count = 0;
+    if (WARN(!hlock.pin_count, "unpinning an unpinned lock\n")) {
     return;
+    }
     pin_count = hlock.pin_count - cookie.val;
-    if (WARN(pin_count < 0, "pin count corrupted\n"))
+    if (WARN(pin_count < 0, "pin count corrupted\n")) {
     pin_count = 0;
+    }
     hlock.pin_count = pin_count;
     return;
     }
@@ -5090,16 +5272,16 @@ unsafe extern "C" fn __lock_unpin_lock(lock: *mut lockdep_map, cookie: pin_cooki
     }
 #[no_mangle]
 unsafe extern "C" fn __lock_sequence(lock: *mut lockdep_map) -> u32 {
-    static u32 __lock_sequence(struct lockdep_map *lock)
-    {
-    struct task_struct *curr = current;
-    int i;
-    if (unlikely(!debug_locks))
+    let mut curr = current;
+    let mut i = 0;
+    if (unlikely(!debug_locks)) {
     return ~0;
-    for (i = 0; i < curr.lockdep_depth; i++) {
-    struct held_lock *hlock = curr.held_locks + i;
-    if (match_held_lock(hlock, lock))
+    }
+    while (i < curr.lockdep_depth) {
+    let mut hlock = curr.held_locks + i;
+    if (match_held_lock(hlock, lock)) {
     return hlock.seq_count;
+    }
     }
     return ~0;
     }
@@ -5108,11 +5290,10 @@ unsafe extern "C" fn __lock_sequence(lock: *mut lockdep_map) -> u32 {
 //
 #[no_mangle]
 unsafe extern "C" fn check_flags(flags: c_ulong) -> noinstr void {
-    static noinstr void check_flags(unsigned long flags)
-    {
 
-    if (!debug_locks)
+    if (!debug_locks) {
     return;
+    }
 // Get the warning out..
     instrumentation_begin();
     if (irqs_disabled_flags(flags)) {
@@ -5140,39 +5321,40 @@ unsafe extern "C" fn check_flags(flags: c_ulong) -> noinstr void {
     }
     }
 
-    if (!debug_locks)
+    if (!debug_locks) {
     print_irqtrace_events(current);
+    }
     instrumentation_end();
 
     }
-    void lock_set_class(struct lockdep_map *lock, const char *name,
-    struct lock_class_key *key, unsigned int subclass,
-    unsigned long ip)
-    {
-    unsigned long flags;
-    if (unlikely(!lockdep_enabled()))
+#[no_mangle]
+pub unsafe extern "C" fn lock_set_class(lock: *mut lockdep_map, name: *mut c_char, key: *mut lock_class_key, subclass: c_uint, ip: c_ulong) {
+    let mut flags = 0;
+    if (unlikely(!lockdep_enabled())) {
     return;
+    }
     raw_local_irq_save(flags);
     lockdep_recursion_inc();
     check_flags(flags);
-    if (__lock_set_class(lock, name, key, subclass, ip))
+    if (__lock_set_class(lock, name, key, subclass, ip)) {
     check_chain_key(current);
+    }
     lockdep_recursion_finish();
     raw_local_irq_restore(flags);
     }
     EXPORT_SYMBOL_GPL(lock_set_class);
 #[no_mangle]
 pub unsafe extern "C" fn lock_downgrade(lock: *mut lockdep_map, ip: c_ulong) {
-    void lock_downgrade(struct lockdep_map *lock, unsigned long ip)
-    {
-    unsigned long flags;
-    if (unlikely(!lockdep_enabled()))
+    let mut flags = 0;
+    if (unlikely(!lockdep_enabled())) {
     return;
+    }
     raw_local_irq_save(flags);
     lockdep_recursion_inc();
     check_flags(flags);
-    if (__lock_downgrade(lock, ip))
+    if (__lock_downgrade(lock, ip)) {
     check_chain_key(current);
+    }
     lockdep_recursion_finish();
     raw_local_irq_restore(flags);
     }
@@ -5180,34 +5362,35 @@ pub unsafe extern "C" fn lock_downgrade(lock: *mut lockdep_map, ip: c_ulong) {
 // NMI context !!!
 #[no_mangle]
 unsafe extern "C" fn verify_lock_unused(lock: *mut lockdep_map, hlock: *mut held_lock, subclass: c_int) {
-    static void verify_lock_unused(struct lockdep_map *lock, struct held_lock *hlock, int subclass)
-    {
 
-    struct lock_class *class = look_up_lock_class(lock, subclass);
-    let mut mask: c_ulong = LOCKF_USED;
+    let mut class = look_up_lock_class(lock, subclass);
+pub static mut mask: c_ulong = 0;
 // if it doesn't have a class (yet), it certainly hasn't been used yet
-    if (!class)
+    if (!class) {
     return;
+    }
 //
 // READ locks only conflict with USED, such that if we only ever use
 // READ locks, there is no deadlock possible -- RCU.
 //
-    if (!hlock.read)
+    if (!hlock.read) {
     mask |= LOCKF_USED_READ;
-    if (!(class.usage_mask & mask))
+    }
+    if (!(class.usage_mask & mask)) {
     return;
+    }
     hlock.class_idx = class - lock_classes;
     print_usage_bug(current, hlock, LOCK_USED, LOCK_USAGE_STATES);
 
     }
 #[no_mangle]
 unsafe extern "C" fn lockdep_nmi() -> bool {
-    static bool lockdep_nmi(void)
-    {
-    if (raw_cpu_read(lockdep_recursion))
+    if (raw_cpu_read(lockdep_recursion)) {
     return false;
-    if (!in_nmi())
+    }
+    if (!in_nmi()) {
     return false;
+    }
     return true;
     }
 //
@@ -5218,10 +5401,8 @@ unsafe extern "C" fn lockdep_nmi() -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn read_lock_is_recursive() -> bool {
-    bool read_lock_is_recursive(void)
-    {
     return force_read_lock_recursive ||
-    !IS_ENABLED(CONFIG_QUEUED_RWLOCKS) ||
+    !IS_ENABLED!(CONFIG_QUEUED_RWLOCKS) ||
     in_interrupt();
     }
     EXPORT_SYMBOL_GPL(read_lock_is_recursive);
@@ -5229,14 +5410,13 @@ pub unsafe extern "C" fn read_lock_is_recursive() -> bool {
 // We are not always called with irqs disabled - do that here,
 // and also avoid lockdep recursion:
 //
-    void lock_acquire(struct lockdep_map *lock, unsigned int subclass,
-    int trylock, int read, int check,
-    struct lockdep_map *nest_lock, unsigned long ip)
-    {
-    unsigned long flags;
+#[no_mangle]
+pub unsafe extern "C" fn lock_acquire(lock: *mut lockdep_map, subclass: c_uint, trylock: c_int, read: c_int, check: c_int, nest_lock: *mut lockdep_map, ip: c_ulong) {
+    let mut flags = 0;
     trace_lock_acquire(lock, subclass, trylock, read, check, nest_lock, ip);
-    if (!debug_locks)
+    if (!debug_locks) {
     return;
+    }
 //
 // As KASAN instrumentation is disabled and lock_acquire() is usually
 // the first lockdep call when a task tries to acquire a lock, add
@@ -5247,7 +5427,7 @@ pub unsafe extern "C" fn read_lock_is_recursive() -> bool {
     if (unlikely(!lockdep_enabled())) {
 // XXX allow trylock from NMI ?!?
     if (lockdep_nmi() && !trylock) {
-    struct held_lock hlock;
+pub static mut hlock: usize = 0;
     hlock.acquire_ip = ip;
     hlock.instance = lock;
     hlock.nest_lock = nest_lock;
@@ -5273,18 +5453,18 @@ pub unsafe extern "C" fn read_lock_is_recursive() -> bool {
     EXPORT_SYMBOL_GPL(lock_acquire);
 #[no_mangle]
 pub unsafe extern "C" fn lock_release(lock: *mut lockdep_map, ip: c_ulong) {
-    void lock_release(struct lockdep_map *lock, unsigned long ip)
-    {
-    unsigned long flags;
+    let mut flags = 0;
     trace_lock_release(lock, ip);
     if (unlikely(!lockdep_enabled() ||
-    lock.key == &__lockdep_no_track__))
+    lock.key == &__lockdep_no_track__)) {
     return;
+    }
     raw_local_irq_save(flags);
     check_flags(flags);
     lockdep_recursion_inc();
-    if (__lock_release(lock, ip))
+    if (__lock_release(lock, ip)) {
     check_chain_key(current);
+    }
     lockdep_recursion_finish();
     raw_local_irq_restore(flags);
     }
@@ -5297,12 +5477,12 @@ pub unsafe extern "C" fn lock_release(lock: *mut lockdep_map, ip: c_ulong) {
 // or threads), and it means that calling these APIs inside these critical
 // sections is potential deadlock.
 //
-    void lock_sync(struct lockdep_map *lock, unsigned subclass, int read,
-    int check, struct lockdep_map *nest_lock, unsigned long ip)
-    {
-    unsigned long flags;
-    if (unlikely(!lockdep_enabled()))
+#[no_mangle]
+pub unsafe extern "C" fn lock_sync(lock: *mut lockdep_map, subclass: c_uint, read: c_int, check: c_int, nest_lock: *mut lockdep_map, ip: c_ulong) {
+    let mut flags = 0;
+    if (unlikely(!lockdep_enabled())) {
     return;
+    }
     raw_local_irq_save(flags);
     check_flags(flags);
     lockdep_recursion_inc();
@@ -5316,16 +5496,15 @@ pub unsafe extern "C" fn lock_release(lock: *mut lockdep_map, ip: c_ulong) {
     EXPORT_SYMBOL_GPL(lock_sync);
 #[no_mangle]
 pub unsafe extern "C" fn lock_is_held_type(lock: *const lockdep_map, read: c_int) -> noinstr int {
-    noinstr int lock_is_held_type(const struct lockdep_map *lock, int read)
-    {
-    unsigned long flags;
-    let mut ret: c_int = LOCK_STATE_NOT_HELD;
+    let mut flags = 0;
+pub static mut ret: c_int = 0;
 //
 // Avoid false negative lockdep_assert_held() and
 // lockdep_assert_not_held().
 //
-    if (unlikely(!lockdep_enabled()))
+    if (unlikely(!lockdep_enabled())) {
     return LOCK_STATE_UNKNOWN;
+    }
     raw_local_irq_save(flags);
     check_flags(flags);
     lockdep_recursion_inc();
@@ -5338,12 +5517,11 @@ pub unsafe extern "C" fn lock_is_held_type(lock: *const lockdep_map, read: c_int
     NOKPROBE_SYMBOL(lock_is_held_type);
 #[no_mangle]
 pub unsafe extern "C" fn lock_pin_lock(lock: *mut lockdep_map) -> pin_cookie {
-    struct pin_cookie lock_pin_lock(struct lockdep_map *lock)
-    {
-    let mut cookie: pin_cookie = NIL_COOKIE;
-    unsigned long flags;
-    if (unlikely(!lockdep_enabled()))
+pub static mut cookie: pin_cookie = 0;
+    let mut flags = 0;
+    if (unlikely(!lockdep_enabled())) {
     return cookie;
+    }
     raw_local_irq_save(flags);
     check_flags(flags);
     lockdep_recursion_inc();
@@ -5355,11 +5533,10 @@ pub unsafe extern "C" fn lock_pin_lock(lock: *mut lockdep_map) -> pin_cookie {
     EXPORT_SYMBOL_GPL(lock_pin_lock);
 #[no_mangle]
 pub unsafe extern "C" fn lock_repin_lock(lock: *mut lockdep_map, cookie: pin_cookie) {
-    void lock_repin_lock(struct lockdep_map *lock, struct pin_cookie cookie)
-    {
-    unsigned long flags;
-    if (unlikely(!lockdep_enabled()))
+    let mut flags = 0;
+    if (unlikely(!lockdep_enabled())) {
     return;
+    }
     raw_local_irq_save(flags);
     check_flags(flags);
     lockdep_recursion_inc();
@@ -5370,11 +5547,10 @@ pub unsafe extern "C" fn lock_repin_lock(lock: *mut lockdep_map, cookie: pin_coo
     EXPORT_SYMBOL_GPL(lock_repin_lock);
 #[no_mangle]
 pub unsafe extern "C" fn lock_unpin_lock(lock: *mut lockdep_map, cookie: pin_cookie) {
-    void lock_unpin_lock(struct lockdep_map *lock, struct pin_cookie cookie)
-    {
-    unsigned long flags;
-    if (unlikely(!lockdep_enabled()))
+    let mut flags = 0;
+    if (unlikely(!lockdep_enabled())) {
     return;
+    }
     raw_local_irq_save(flags);
     check_flags(flags);
     lockdep_recursion_inc();
@@ -5385,12 +5561,11 @@ pub unsafe extern "C" fn lock_unpin_lock(lock: *mut lockdep_map, cookie: pin_coo
     EXPORT_SYMBOL_GPL(lock_unpin_lock);
 #[no_mangle]
 pub unsafe extern "C" fn lock_sequence(lock: *mut lockdep_map) -> u32 {
-    u32 lock_sequence(struct lockdep_map *lock)
-    {
-    unsigned long flags;
-    let mut seq: u32 = ~0;
-    if (unlikely(!lockdep_enabled()))
+    let mut flags = 0;
+pub static mut seq: u32 = 0;
+    if (unlikely(!lockdep_enabled())) {
     return seq;
+    }
     raw_local_irq_save(flags);
     check_flags(flags);
     lockdep_recursion_inc();
@@ -5401,93 +5576,103 @@ pub unsafe extern "C" fn lock_sequence(lock: *mut lockdep_map) -> u32 {
     }
     EXPORT_SYMBOL_GPL(lock_sequence);
 
-    static void print_lock_contention_bug(struct task_struct *curr,
-    struct lockdep_map *lock,
-    unsigned long ip)
-    {
-    if (!debug_locks_off())
+#[no_mangle]
+pub unsafe extern "C" fn print_lock_contention_bug(curr: *mut task_struct, lock: *mut lockdep_map, ip: c_ulong) {
+    if (!debug_locks_off()) {
     return;
-    if (debug_locks_silent)
+    }
+    if (debug_locks_silent) {
     return;
+    }
     nbcon_cpu_emergency_enter();
-    pr_warn("\n");
-    pr_warn("=================================\n");
-    pr_warn("WARNING: bad contention detected!\n");
+    pr_warn!("\n");
+    pr_warn!("=================================\n");
+    pr_warn!("WARNING: bad contention detected!\n");
     print_kernel_ident();
-    pr_warn("---------------------------------\n");
-    pr_warn("%s/%d is trying to contend lock (",
+    pr_warn!("---------------------------------\n");
+    pr_warn!("%s/%d is trying to contend lock (",
     curr.comm, task_pid_nr(curr));
     print_lockdep_cache(lock);
     pr_cont(") at:\n");
     print_ip_sym(KERN_WARNING, ip);
-    pr_warn("but there are no locks held!\n");
-    pr_warn("\nother info that might help us debug this:\n");
+    pr_warn!("but there are no locks held!\n");
+    pr_warn!("\nother info that might help us debug this:\n");
     lockdep_print_held_locks(curr);
-    pr_warn("\nstack backtrace:\n");
+    pr_warn!("\nstack backtrace:\n");
     dump_stack();
     nbcon_cpu_emergency_exit();
     }
-    static void
-    __lock_contended(struct lockdep_map *lock, unsigned long ip)
-    {
-    struct task_struct *curr = current;
-    struct held_lock *hlock;
-    struct lock_class_stats *stats;
-    unsigned int depth;
-    int i, contention_point, contending_point;
+#[no_mangle]
+pub unsafe extern "C" fn __lock_contended(lock: *mut lockdep_map, ip: c_ulong) {
+    let mut curr = current;
+pub static mut hlock: *mut c_void = core::ptr::null_mut();
+pub static mut stats: *mut c_void = core::ptr::null_mut();
+    let mut depth = 0;
+    let mut i = 0;
+    let mut contention_point = 0;
+    let mut contending_point = 0;
     depth = curr.lockdep_depth;
 //
 // Whee, we contended on this lock, except it seems we're not
 // actually trying to acquire anything much at all..
 //
-    if (DEBUG_LOCKS_WARN_ON(!depth))
+    if (DEBUG_LOCKS_WARN_ON(!depth)) {
     return;
-    if (unlikely(lock.key == &__lockdep_no_track__))
+    }
+    if (unlikely(lock.key == &__lockdep_no_track__)) {
     return;
+    }
     hlock = find_held_lock(curr, lock, depth, &i);
     if (!hlock) {
     print_lock_contention_bug(curr, lock, ip);
     return;
     }
-    if (hlock.instance != lock)
+    if (hlock.instance != lock) {
     return;
+    }
     hlock.waittime_stamp = lockstat_clock();
     contention_point = lock_point(hlock_class(hlock).contention_point, ip);
     contending_point = lock_point(hlock_class(hlock).contending_point,
     lock.ip);
     stats = get_lock_stats(hlock_class(hlock));
-    if (contention_point < LOCKSTAT_POINTS)
+    if (contention_point < LOCKSTAT_POINTS) {
     stats.contention_point[contention_point]++;
-    if (contending_point < LOCKSTAT_POINTS)
+    }
+    if (contending_point < LOCKSTAT_POINTS) {
     stats.contending_point[contending_point]++;
-    if (lock.cpu != smp_processor_id())
+    }
+    if (lock.cpu != smp_processor_id()) {
     stats.bounces[bounce_contended + !!hlock.read]++;
     }
-    static void
-    __lock_acquired(struct lockdep_map *lock, unsigned long ip)
-    {
-    struct task_struct *curr = current;
-    struct held_lock *hlock;
-    struct lock_class_stats *stats;
-    unsigned int depth;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn __lock_acquired(lock: *mut lockdep_map, ip: c_ulong) {
+    let mut curr = current;
+pub static mut hlock: *mut c_void = core::ptr::null_mut();
+pub static mut stats: *mut c_void = core::ptr::null_mut();
+    let mut depth = 0;
     u64 now, waittime = 0;
-    int i, cpu;
+    let mut i = 0;
+    let mut cpu = 0;
     depth = curr.lockdep_depth;
 //
 // Yay, we acquired ownership of this lock we didn't try to
 // acquire, how the heck did that happen?
 //
-    if (DEBUG_LOCKS_WARN_ON(!depth))
+    if (DEBUG_LOCKS_WARN_ON(!depth)) {
     return;
-    if (unlikely(lock.key == &__lockdep_no_track__))
+    }
+    if (unlikely(lock.key == &__lockdep_no_track__)) {
     return;
+    }
     hlock = find_held_lock(curr, lock, depth, &i);
     if (!hlock) {
     print_lock_contention_bug(curr, lock, _RET_IP_);
     return;
     }
-    if (hlock.instance != lock)
+    if (hlock.instance != lock) {
     return;
+    }
     cpu = smp_processor_id();
     if (hlock.waittime_stamp) {
     now = lockstat_clock();
@@ -5496,24 +5681,26 @@ pub unsafe extern "C" fn lock_sequence(lock: *mut lockdep_map) -> u32 {
     }
     stats = get_lock_stats(hlock_class(hlock));
     if (waittime) {
-    if (hlock.read)
+    if (hlock.read) {
     lock_time_inc(&stats.read_waittime, waittime);
-    else
+    }
+    else {
     lock_time_inc(&stats.write_waittime, waittime);
     }
-    if (lock.cpu != cpu)
+    }
+    if (lock.cpu != cpu) {
     stats.bounces[bounce_acquired + !!hlock.read]++;
+    }
     lock.cpu = cpu;
     lock.ip = ip;
     }
 #[no_mangle]
 pub unsafe extern "C" fn lock_contended(lock: *mut lockdep_map, ip: c_ulong) {
-    void lock_contended(struct lockdep_map *lock, unsigned long ip)
-    {
-    unsigned long flags;
+    let mut flags = 0;
     trace_lock_contended(lock, ip);
-    if (unlikely(!lock_stat || !lockdep_enabled()))
+    if (unlikely(!lock_stat || !lockdep_enabled())) {
     return;
+    }
     raw_local_irq_save(flags);
     check_flags(flags);
     lockdep_recursion_inc();
@@ -5524,12 +5711,11 @@ pub unsafe extern "C" fn lock_contended(lock: *mut lockdep_map, ip: c_ulong) {
     EXPORT_SYMBOL_GPL(lock_contended);
 #[no_mangle]
 pub unsafe extern "C" fn lock_acquired(lock: *mut lockdep_map, ip: c_ulong) {
-    void lock_acquired(struct lockdep_map *lock, unsigned long ip)
-    {
-    unsigned long flags;
+    let mut flags = 0;
     trace_lock_acquired(lock, ip);
-    if (unlikely(!lock_stat || !lockdep_enabled()))
+    if (unlikely(!lock_stat || !lockdep_enabled())) {
     return;
+    }
     raw_local_irq_save(flags);
     check_flags(flags);
     lockdep_recursion_inc();
@@ -5545,40 +5731,38 @@ pub unsafe extern "C" fn lock_acquired(lock: *mut lockdep_map, ip: c_ulong) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_reset() {
-    void lockdep_reset(void)
-    {
-    unsigned long flags;
-    int i;
+    let mut flags = 0;
+    let mut i = 0;
     raw_local_irq_save(flags);
     lockdep_init_task(current);
-    memset(current.held_locks, 0, MAX_LOCK_DEPTH*sizeof(struct held_lock));
+    memset(current.held_locks, 0, MAX_LOCK_DEPTH*sizeof!(held_lock));
     nr_hardirq_chains = 0;
     nr_softirq_chains = 0;
     nr_process_chains = 0;
     debug_locks = 1;
-    for (i = 0; i < CHAINHASH_SIZE; i++)
+    for (i = 0; i < CHAINHASH_SIZE; i++) {
     INIT_HLIST_HEAD(chainhash_table + i);
+    }
     raw_local_irq_restore(flags);
     }
 // Remove a class from a lock chain. Must be called with the graph lock held.
-    static void remove_class_from_lock_chain(struct pending_free *pf,
-    struct lock_chain *chain,
-    struct lock_class *class)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn remove_class_from_lock_chain(pf: *mut pending_free, chain: *mut lock_chain, class: *mut lock_class) {
 
-    int i;
-    for (i = chain.base; i < chain.base + chain.depth; i++) {
-    if (chain_hlock_class_idx(chain_hlocks[i]) != class - lock_classes)
+    let mut i = 0;
+    while (i < chain.base + chain.depth) {
+    if (chain_hlock_class_idx(chain_hlocks[i]) != class - lock_classes) {
     continue;
+    }
 //
 // Each lock class occurs at most once in a lock chain so once
 // we found a match we can break out of this loop.
 //
-    goto free_lock_chain;
+// goto;
     }
 // Since the chain has not been modified, return.
     return;
-    free_lock_chain:
+// label;
     free_chain_hlocks(chain.base, chain.depth);
 // Overwrite the chain key for concurrent RCU readers.
     WRITE_ONCE(chain.chain_key, INITIAL_CHAIN_KEY);
@@ -5589,17 +5773,16 @@ pub unsafe extern "C" fn lockdep_reset() {
 //
     hlist_del_rcu(&chain.entry);
     __set_bit(chain - lock_chains, pf.lock_chains_being_freed);
-    nr_zapped_lock_chains++;
+    nr_zapped_lock_chains += 1;
 
     }
 // Must be called with the graph lock held.
-    static void remove_class_from_lock_chains(struct pending_free *pf,
-    struct lock_class *class)
-    {
-    struct lock_chain *chain;
-    struct hlist_head *head;
-    int i;
-    for (i = 0; i < ARRAY_SIZE(chainhash_table); i++) {
+#[no_mangle]
+pub unsafe extern "C" fn remove_class_from_lock_chains(pf: *mut pending_free, class: *mut lock_class) {
+pub static mut chain: *mut c_void = core::ptr::null_mut();
+pub static mut head: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    while (i < ARRAY_SIZE!(chainhash_table)) {
     head = chainhash_table + i;
     hlist_for_each_entry_rcu(chain, head, entry) {
     remove_class_from_lock_chain(pf, chain, class);
@@ -5611,21 +5794,20 @@ pub unsafe extern "C" fn lockdep_reset() {
 //
 #[no_mangle]
 unsafe extern "C" fn zap_class(pf: *mut pending_free, class: *mut lock_class) {
-    static void zap_class(struct pending_free *pf, struct lock_class *class)
-    {
-    struct lock_list *entry;
-    int i;
-    WARN_ON_ONCE(!class.key);
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    WARN_ON_ONCE!(!class.key);
 //
 // Remove all dependencies this lock is
 // involved in:
 //
-    for_each_set_bit(i, list_entries_in_use, ARRAY_SIZE(list_entries)) {
+    for_each_set_bit(i, list_entries_in_use, ARRAY_SIZE!(list_entries)) {
     entry = list_entries + i;
-    if (entry.class != class && entry.links_to != class)
+    if (entry.class != class && entry.links_to != class) {
     continue;
+    }
     __clear_bit(i, list_entries_in_use);
-    nr_list_entries--;
+    nr_list_entries -= 1;
     list_del_rcu(&entry.entry);
     }
     if (list_empty(&class.locks_after) &&
@@ -5635,49 +5817,45 @@ unsafe extern "C" fn zap_class(pf: *mut pending_free, class: *mut lock_class) {
     WRITE_ONCE(class.key, core::ptr::null_mut());
     WRITE_ONCE(class.name, core::ptr::null_mut());
 // Class allocated but not used, -1 in nr_unused_locks
-    if (class.usage_mask == 0)
+    if (class.usage_mask == 0) {
     debug_atomic_dec(nr_unused_locks);
-    nr_lock_classes--;
+    }
+    nr_lock_classes -= 1;
     __clear_bit(class - lock_classes, lock_classes_in_use);
-    if (class - lock_classes == max_lock_class_idx)
-    max_lock_class_idx--;
+    if (class - lock_classes == max_lock_class_idx) {
+    max_lock_class_idx -= 1;
+    }
     } else {
     WARN_ONCE(true, "%s() failed for class %s\n", __func__,
     class.name);
     }
     remove_class_from_lock_chains(pf, class);
-    nr_zapped_classes++;
+    nr_zapped_classes += 1;
     }
 #[no_mangle]
 unsafe extern "C" fn reinit_class(class: *mut lock_class) {
-    static void reinit_class(struct lock_class *class)
-    {
-    WARN_ON_ONCE(!class.lock_entry.next);
-    WARN_ON_ONCE(!list_empty(&class.locks_after));
-    WARN_ON_ONCE(!list_empty(&class.locks_before));
+    WARN_ON_ONCE!(!class.lock_entry.next);
+    WARN_ON_ONCE!(!list_empty(&class.locks_after));
+    WARN_ON_ONCE!(!list_empty(&class.locks_before));
     memset_startat(class, 0, key);
-    WARN_ON_ONCE(!class.lock_entry.next);
-    WARN_ON_ONCE(!list_empty(&class.locks_after));
-    WARN_ON_ONCE(!list_empty(&class.locks_before));
+    WARN_ON_ONCE!(!class.lock_entry.next);
+    WARN_ON_ONCE!(!list_empty(&class.locks_after));
+    WARN_ON_ONCE!(!list_empty(&class.locks_before));
     }
 #[no_mangle]
 pub unsafe extern "C" fn within(addr: *const c_void, start: *mut c_void, size: c_ulong) -> c_int {
-    static inline int within(const void *addr, void *start, unsigned long size)
-    {
     return addr >= start && addr < start + size;
     }
 #[no_mangle]
 unsafe extern "C" fn inside_selftest() -> bool {
-    static bool inside_selftest(void)
-    {
-    let mut current: return = = lockdep_selftest_task_struct;
+pub static mut current: return = 0;
     }
 // The caller must hold the graph lock.
-    static struct pending_free *get_pending_free(void)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn get_pending_free() -> *mut c_void {
     return delayed_free.pf + delayed_free.index;
     }
-    static void free_zapped_rcu(struct rcu_head *cb);
+// forward_decl: free_zapped_rcu;
 //
 // See if we need to queue an RCU callback, must called with
 // the lockdep lock held, returns false if either we don't have
@@ -5686,43 +5864,41 @@ unsafe extern "C" fn inside_selftest() -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn prepare_call_rcu_zapped(pf: *mut pending_free) -> bool {
-    static bool prepare_call_rcu_zapped(struct pending_free *pf)
-    {
-    WARN_ON_ONCE(inside_selftest());
-    if (list_empty(&pf.zapped))
+    WARN_ON_ONCE!(inside_selftest());
+    if (list_empty(&pf.zapped)) {
     return false;
-    if (delayed_free.scheduled)
+    }
+    if (delayed_free.scheduled) {
     return false;
+    }
     delayed_free.scheduled = true;
-    WARN_ON_ONCE(delayed_free.pf + delayed_free.index != pf);
+    WARN_ON_ONCE!(delayed_free.pf + delayed_free.index != pf);
     delayed_free.index ^= 1;
     return true;
     }
 // The caller must hold the graph lock. May be called from RCU context.
 #[no_mangle]
 unsafe extern "C" fn __free_zapped_classes(pf: *mut pending_free) {
-    static void __free_zapped_classes(struct pending_free *pf)
-    {
-    struct lock_class *class;
+pub static mut class: *mut c_void = core::ptr::null_mut();
     check_data_structures();
-    list_for_each_entry(class, &pf.zapped, lock_entry)
+    list_for_each_entry(class, &pf.zapped, lock_entry) {
     reinit_class(class);
+    }
     list_splice_init(&pf.zapped, &free_lock_classes);
 
     bitmap_andnot(lock_chains_in_use, lock_chains_in_use,
-    pf.lock_chains_being_freed, ARRAY_SIZE(lock_chains));
-    bitmap_clear(pf.lock_chains_being_freed, 0, ARRAY_SIZE(lock_chains));
+    pf.lock_chains_being_freed, ARRAY_SIZE!(lock_chains));
+    bitmap_clear(pf.lock_chains_being_freed, 0, ARRAY_SIZE!(lock_chains));
 
     }
 #[no_mangle]
 unsafe extern "C" fn free_zapped_rcu(ch: *mut rcu_head) {
-    static void free_zapped_rcu(struct rcu_head *ch)
-    {
-    struct pending_free *pf;
-    unsigned long flags;
-    bool need_callback;
-    if (WARN_ON_ONCE(ch != &delayed_free.rcu_head))
+pub static mut pf: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut need_callback = 0;
+    if (WARN_ON_ONCE!(ch != &delayed_free.rcu_head)) {
     return;
+    }
     raw_local_irq_save(flags);
     lockdep_lock();
 // closed head
@@ -5737,8 +5913,9 @@ unsafe extern "C" fn free_zapped_rcu(ch: *mut rcu_head) {
 // If there's pending free and its callback has not been scheduled,
 // queue an RCU callback.
 //
-    if (need_callback)
+    if (need_callback) {
     call_rcu(&delayed_free.rcu_head, free_zapped_rcu);
+    }
     }
 //
 // Remove all lock classes from the class hash table and from the
@@ -5746,19 +5923,19 @@ unsafe extern "C" fn free_zapped_rcu(ch: *mut rcu_head) {
 // start + size). Move these lock classes to the zapped_classes list. Must
 // be called with the graph lock held.
 //
-    static void __lockdep_free_key_range(struct pending_free *pf, void *start,
-    unsigned long size)
-    {
-    struct lock_class *class;
-    struct hlist_head *head;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn __lockdep_free_key_range(pf: *mut pending_free, start: *mut c_void, size: c_ulong) {
+pub static mut class: *mut c_void = core::ptr::null_mut();
+pub static mut head: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
 // Unhash all classes that were created by a module.
-    for (i = 0; i < CLASSHASH_SIZE; i++) {
+    while (i < CLASSHASH_SIZE) {
     head = classhash_table + i;
     hlist_for_each_entry_rcu(class, head, hash_entry) {
     if (!within(class.key, start, size) &&
-    !within(class.name, start, size))
+    !within(class.name, start, size)) {
     continue;
+    }
     zap_class(pf, class);
     }
     }
@@ -5773,11 +5950,9 @@ unsafe extern "C" fn free_zapped_rcu(ch: *mut rcu_head) {
 //
 #[no_mangle]
 unsafe extern "C" fn lockdep_free_key_range_reg(start: *mut c_void, size: c_ulong) {
-    static void lockdep_free_key_range_reg(void *start, unsigned long size)
-    {
-    struct pending_free *pf;
-    unsigned long flags;
-    bool need_callback;
+pub static mut pf: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut need_callback = 0;
     init_data_structures_once();
     raw_local_irq_save(flags);
     lockdep_lock();
@@ -5786,8 +5961,9 @@ unsafe extern "C" fn lockdep_free_key_range_reg(start: *mut c_void, size: c_ulon
     need_callback = prepare_call_rcu_zapped(pf);
     lockdep_unlock();
     raw_local_irq_restore(flags);
-    if (need_callback)
+    if (need_callback) {
     call_rcu(&delayed_free.rcu_head, free_zapped_rcu);
+    }
 //
 // Wait for any possible iterators from look_up_lock_class() to pass
 // before continuing to free the memory they refer to.
@@ -5800,10 +5976,8 @@ unsafe extern "C" fn lockdep_free_key_range_reg(start: *mut c_void, size: c_ulon
 //
 #[no_mangle]
 unsafe extern "C" fn lockdep_free_key_range_imm(start: *mut c_void, size: c_ulong) {
-    static void lockdep_free_key_range_imm(void *start, unsigned long size)
-    {
-    struct pending_free *pf = delayed_free.pf;
-    unsigned long flags;
+    let mut pf = delayed_free.pf;
+    let mut flags = 0;
     init_data_structures_once();
     raw_local_irq_save(flags);
     lockdep_lock();
@@ -5814,13 +5988,13 @@ unsafe extern "C" fn lockdep_free_key_range_imm(start: *mut c_void, size: c_ulon
     }
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_free_key_range(start: *mut c_void, size: c_ulong) {
-    void lockdep_free_key_range(void *start, unsigned long size)
-    {
     init_data_structures_once();
-    if (inside_selftest())
+    if (inside_selftest()) {
     lockdep_free_key_range_imm(start, size);
-    else
+    }
+    else {
     lockdep_free_key_range_reg(start, size);
+    }
     }
 //
 // Check whether any element of the @lock->class_cache[] array refers to a
@@ -5829,44 +6003,45 @@ pub unsafe extern "C" fn lockdep_free_key_range(start: *mut c_void, size: c_ulon
 //
 #[no_mangle]
 unsafe extern "C" fn lock_class_cache_is_registered(lock: *mut lockdep_map) -> bool {
-    static bool lock_class_cache_is_registered(struct lockdep_map *lock)
-    {
-    struct lock_class *class;
-    struct hlist_head *head;
-    int i, j;
-    for (i = 0; i < CLASSHASH_SIZE; i++) {
+pub static mut class: *mut c_void = core::ptr::null_mut();
+pub static mut head: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    let mut j = 0;
+    while (i < CLASSHASH_SIZE) {
     head = classhash_table + i;
     hlist_for_each_entry_rcu(class, head, hash_entry) {
-    for (j = 0; j < NR_LOCKDEP_CACHING_CLASSES; j++)
+    for (j = 0; j < NR_LOCKDEP_CACHING_CLASSES; j++) {
     if (lock.class_cache[j] == class)
     return true;
+    }
     }
     }
     return false;
     }
 // The caller must hold the graph lock. Does not sleep.
-    static void __lockdep_reset_lock(struct pending_free *pf,
-    struct lockdep_map *lock)
-    {
-    struct lock_class *class;
-    int j;
+#[no_mangle]
+pub unsafe extern "C" fn __lockdep_reset_lock(pf: *mut pending_free, lock: *mut lockdep_map) {
+pub static mut class: *mut c_void = core::ptr::null_mut();
+    let mut j = 0;
 //
 // Remove all classes this lock might have:
 //
-    for (j = 0; j < MAX_LOCKDEP_SUBCLASSES; j++) {
+    while (j < MAX_LOCKDEP_SUBCLASSES) {
 //
 // If the class exists we look it up and zap it:
 //
     class = look_up_lock_class(lock, j);
-    if (class)
+    if (class) {
     zap_class(pf, class);
+    }
     }
 //
 // Debug check: in the end all mapped classes should
 // be gone.
 //
-    if (WARN_ON_ONCE(lock_class_cache_is_registered(lock)))
+    if (WARN_ON_ONCE!(lock_class_cache_is_registered(lock))) {
     debug_locks_off();
+    }
     }
 //
 // Remove all information lockdep has about a lock if debug_locks == 1. Free
@@ -5874,24 +6049,24 @@ unsafe extern "C" fn lock_class_cache_is_registered(lock: *mut lockdep_map) -> b
 //
 #[no_mangle]
 unsafe extern "C" fn lockdep_reset_lock_reg(lock: *mut lockdep_map) {
-    static void lockdep_reset_lock_reg(struct lockdep_map *lock)
-    {
-    struct pending_free *pf;
-    unsigned long flags;
-    int locked;
-    let mut need_callback: bool = false;
+pub static mut pf: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut locked = 0;
+pub static mut need_callback: bool = false;
     raw_local_irq_save(flags);
     locked = graph_lock();
-    if (!locked)
-    goto out_irq;
+    if (!locked) {
+// goto;
+    }
     pf = get_pending_free();
     __lockdep_reset_lock(pf, lock);
     need_callback = prepare_call_rcu_zapped(pf);
     graph_unlock();
-    out_irq:
+// label;
     raw_local_irq_restore(flags);
-    if (need_callback)
+    if (need_callback) {
     call_rcu(&delayed_free.rcu_head, free_zapped_rcu);
+    }
     }
 //
 // Reset a lock. Does not sleep. Ignores debug_locks. Must only be used by the
@@ -5899,10 +6074,8 @@ unsafe extern "C" fn lockdep_reset_lock_reg(lock: *mut lockdep_map) {
 //
 #[no_mangle]
 unsafe extern "C" fn lockdep_reset_lock_imm(lock: *mut lockdep_map) {
-    static void lockdep_reset_lock_imm(struct lockdep_map *lock)
-    {
-    struct pending_free *pf = delayed_free.pf;
-    unsigned long flags;
+    let mut pf = delayed_free.pf;
+    let mut flags = 0;
     raw_local_irq_save(flags);
     lockdep_lock();
     __lockdep_reset_lock(pf, lock);
@@ -5912,13 +6085,13 @@ unsafe extern "C" fn lockdep_reset_lock_imm(lock: *mut lockdep_map) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_reset_lock(lock: *mut lockdep_map) {
-    void lockdep_reset_lock(struct lockdep_map *lock)
-    {
     init_data_structures_once();
-    if (inside_selftest())
+    if (inside_selftest()) {
     lockdep_reset_lock_imm(lock);
-    else
+    }
+    else {
     lockdep_reset_lock_reg(lock);
+    }
     }
 //
 // Unregister a dynamically allocated key.
@@ -5929,17 +6102,16 @@ pub unsafe extern "C" fn lockdep_reset_lock(lock: *mut lockdep_map) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_unregister_key(key: *mut lock_class_key) {
-    void lockdep_unregister_key(struct lock_class_key *key)
-    {
-    struct hlist_head *hash_head = keyhashentry(key);
-    struct lock_class_key *k;
-    struct pending_free *pf;
-    unsigned long flags;
-    let mut found: bool = false;
-    let mut need_callback: bool = false;
+    let mut hash_head = keyhashentry(key);
+pub static mut k: *mut c_void = core::ptr::null_mut();
+pub static mut pf: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+pub static mut found: bool = false;
+pub static mut need_callback: bool = false;
     might_sleep();
-    if (WARN_ON_ONCE(static_obj(key)))
+    if (WARN_ON_ONCE!(static_obj(key))) {
     return;
+    }
     raw_local_irq_save(flags);
     lockdep_lock();
     hlist_for_each_entry_rcu(k, hash_head, hash_entry) {
@@ -5949,17 +6121,18 @@ pub unsafe extern "C" fn lockdep_unregister_key(key: *mut lock_class_key) {
     break;
     }
     }
-    WARN_ON_ONCE(!found && debug_locks);
+    WARN_ON_ONCE!(!found && debug_locks);
     if (found) {
     pf = get_pending_free();
     __lockdep_free_key_range(pf, key, 1);
     need_callback = prepare_call_rcu_zapped(pf);
-    nr_dynamic_keys--;
+    nr_dynamic_keys -= 1;
     }
     lockdep_unlock();
     raw_local_irq_restore(flags);
-    if (need_callback)
+    if (need_callback) {
     call_rcu(&delayed_free.rcu_head, free_zapped_rcu);
+    }
 //
 // Wait until is_dynamic_key() has finished accessing k->hash_entry.
 //
@@ -5973,66 +6146,63 @@ pub unsafe extern "C" fn lockdep_unregister_key(key: *mut lock_class_key) {
     }
     EXPORT_SYMBOL_GPL(lockdep_unregister_key);
 #[no_mangle]
-pub unsafe extern "C" fn lockdep_init() -> void __init {
-    void __init lockdep_init(void)
-    {
-    pr_info("Lock dependency validator: Copyright (c) 2006 Red Hat, Inc., Ingo Molnar\n");
-    pr_info("... MAX_LOCKDEP_SUBCLASSES:  %lu\n", MAX_LOCKDEP_SUBCLASSES);
-    pr_info("... MAX_LOCK_DEPTH:          %lu\n", MAX_LOCK_DEPTH);
-    pr_info("... MAX_LOCKDEP_KEYS:        %lu\n", MAX_LOCKDEP_KEYS);
-    pr_info("... CLASSHASH_SIZE:          %lu\n", CLASSHASH_SIZE);
-    pr_info("... MAX_LOCKDEP_ENTRIES:     %lu\n", MAX_LOCKDEP_ENTRIES);
-    pr_info("... MAX_LOCKDEP_CHAINS:      %lu\n", MAX_LOCKDEP_CHAINS);
-    pr_info("... CHAINHASH_SIZE:          %lu\n", CHAINHASH_SIZE);
-    pr_info(" memory used by lock dependency info: %zu kB\n",
-    (sizeof(lock_classes) +
-    sizeof(lock_classes_in_use) +
-    sizeof(classhash_table) +
-    sizeof(list_entries) +
-    sizeof(list_entries_in_use) +
-    sizeof(chainhash_table) +
-    sizeof(delayed_free)
+pub unsafe extern "C" fn lockdep_init()  {
+    pr_info!("Lock dependency validator: Copyright (c) 2006 Red Hat, Inc., Ingo Molnar\n");
+    pr_info!("... MAX_LOCKDEP_SUBCLASSES:  %lu\n", MAX_LOCKDEP_SUBCLASSES);
+    pr_info!("... MAX_LOCK_DEPTH:          %lu\n", MAX_LOCK_DEPTH);
+    pr_info!("... MAX_LOCKDEP_KEYS:        %lu\n", MAX_LOCKDEP_KEYS);
+    pr_info!("... CLASSHASH_SIZE:          %lu\n", CLASSHASH_SIZE);
+    pr_info!("... MAX_LOCKDEP_ENTRIES:     %lu\n", MAX_LOCKDEP_ENTRIES);
+    pr_info!("... MAX_LOCKDEP_CHAINS:      %lu\n", MAX_LOCKDEP_CHAINS);
+    pr_info!("... CHAINHASH_SIZE:          %lu\n", CHAINHASH_SIZE);
+    pr_info!(" memory used by lock dependency info: %zu kB\n",
+    (sizeof!(lock_classes) +
+    sizeof!(lock_classes_in_use) +
+    sizeof!(classhash_table) +
+    sizeof!(list_entries) +
+    sizeof!(list_entries_in_use) +
+    sizeof!(chainhash_table) +
+    sizeof!(delayed_free)
 
-    + sizeof(lock_cq)
-    + sizeof(lock_chains)
-    + sizeof(lock_chains_in_use)
-    + sizeof(chain_hlocks)
+    + sizeof!(lock_cq)
+    + sizeof!(lock_chains)
+    + sizeof!(lock_chains_in_use)
+    + sizeof!(chain_hlocks)
 
     ) / 1024
     );
 
-    pr_info(" memory used for stack traces: %zu kB\n",
-    (sizeof(stack_trace) + sizeof(stack_trace_hash)) / 1024
+    pr_info!(" memory used for stack traces: %zu kB\n",
+    (sizeof!(stack_trace) + sizeof!(stack_trace_hash)) / 1024
     );
 
-    pr_info(" per task-struct memory footprint: %zu bytes\n",
-    sizeof(((struct task_struct *)core::ptr::null_mut()).held_locks));
+    pr_info!(" per task-struct memory footprint: %zu bytes\n",
+    sizeof!((core::ptr::null_mut()).held_locks));
     }
-    static void
-    print_freed_lock_bug(struct task_struct *curr, const void *mem_from,
-    const void *mem_to, struct held_lock *hlock)
-    {
-    if (!debug_locks_off())
+#[no_mangle]
+pub unsafe extern "C" fn print_freed_lock_bug(curr: *mut task_struct, mem_from: *mut c_void, mem_to: *mut c_void, hlock: *mut held_lock) {
+    if (!debug_locks_off()) {
     return;
-    if (debug_locks_silent)
+    }
+    if (debug_locks_silent) {
     return;
+    }
     nbcon_cpu_emergency_enter();
-    pr_warn("\n");
-    pr_warn("=========================\n");
-    pr_warn("WARNING: held lock freed!\n");
+    pr_warn!("\n");
+    pr_warn!("=========================\n");
+    pr_warn!("WARNING: held lock freed!\n");
     print_kernel_ident();
-    pr_warn("-------------------------\n");
-    pr_warn("%s/%d is freeing memory %px-%px, with a lock still held there!\n",
+    pr_warn!("-------------------------\n");
+    pr_warn!("%s/%d is freeing memory %px-%px, with a lock still held there!\n",
     curr.comm, task_pid_nr(curr), mem_from, mem_to-1);
     print_lock(hlock);
     lockdep_print_held_locks(curr);
-    pr_warn("\nstack backtrace:\n");
+    pr_warn!("\nstack backtrace:\n");
     dump_stack();
     nbcon_cpu_emergency_exit();
     }
-    static inline int not_in_range(const void* mem_from, unsigned long mem_len,
-    const void* lock_from, unsigned long lock_len)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn not_in_range(mem_from: *mut c_void, mem_len: c_ulong, lock_from: *mut c_void, lock_len: c_ulong) -> c_int {
     return lock_from + lock_len <= mem_from ||
     mem_from + mem_len <= lock_from;
     }
@@ -6043,20 +6213,20 @@ pub unsafe extern "C" fn lockdep_init() -> void __init {
 //
 #[no_mangle]
 pub unsafe extern "C" fn debug_check_no_locks_freed(mem_from: *const c_void, mem_len: c_ulong) {
-    void debug_check_no_locks_freed(const void *mem_from, unsigned long mem_len)
-    {
-    struct task_struct *curr = current;
-    struct held_lock *hlock;
-    unsigned long flags;
-    int i;
-    if (unlikely(!debug_locks))
+    let mut curr = current;
+pub static mut hlock: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut i = 0;
+    if (unlikely(!debug_locks)) {
     return;
+    }
     raw_local_irq_save(flags);
-    for (i = 0; i < curr.lockdep_depth; i++) {
+    while (i < curr.lockdep_depth) {
     hlock = curr.held_locks + i;
     if (not_in_range(mem_from, mem_len, hlock.instance,
-    sizeof(*hlock.instance)))
+    sizeof!(*hlock.instance))) {
     continue;
+    }
     print_freed_lock_bug(curr, mem_from, mem_from + mem_len, hlock);
     break;
     }
@@ -6065,54 +6235,53 @@ pub unsafe extern "C" fn debug_check_no_locks_freed(mem_from: *const c_void, mem
     EXPORT_SYMBOL_GPL(debug_check_no_locks_freed);
 #[no_mangle]
 unsafe extern "C" fn print_held_locks_bug() {
-    static void print_held_locks_bug(void)
-    {
-    if (!debug_locks_off())
+    if (!debug_locks_off()) {
     return;
-    if (debug_locks_silent)
+    }
+    if (debug_locks_silent) {
     return;
+    }
     nbcon_cpu_emergency_enter();
-    pr_warn("\n");
-    pr_warn("====================================\n");
-    pr_warn("WARNING: %s/%d still has locks held!\n",
+    pr_warn!("\n");
+    pr_warn!("====================================\n");
+    pr_warn!("WARNING: %s/%d still has locks held!\n",
     current.comm, task_pid_nr(current));
     print_kernel_ident();
-    pr_warn("------------------------------------\n");
+    pr_warn!("------------------------------------\n");
     lockdep_print_held_locks(current);
-    pr_warn("\nstack backtrace:\n");
+    pr_warn!("\nstack backtrace:\n");
     dump_stack();
     nbcon_cpu_emergency_exit();
     }
 #[no_mangle]
 pub unsafe extern "C" fn debug_check_no_locks_held() {
-    void debug_check_no_locks_held(void)
-    {
-    if (unlikely(current.lockdep_depth > 0))
+    if (unlikely(current.lockdep_depth > 0)) {
     print_held_locks_bug();
+    }
     }
     EXPORT_SYMBOL_GPL(debug_check_no_locks_held);
 
 #[no_mangle]
 pub unsafe extern "C" fn debug_show_all_locks() {
-    void debug_show_all_locks(void)
-    {
-    struct task_struct *g, *p;
+    let mut g = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
     if (unlikely(!debug_locks)) {
-    pr_warn("INFO: lockdep is turned off.\n");
+    pr_warn!("INFO: lockdep is turned off.\n");
     return;
     }
-    pr_warn("\nShowing all locks held in the system:\n");
+    pr_warn!("\nShowing all locks held in the system:\n");
     rcu_read_lock();
     for_each_process_thread(g, p) {
-    if (!p.lockdep_depth)
+    if (!p.lockdep_depth) {
     continue;
+    }
     lockdep_print_held_locks(p);
     touch_nmi_watchdog();
     touch_all_softlockup_watchdogs();
     }
     rcu_read_unlock();
-    pr_warn("\n");
-    pr_warn("=============================================\n\n");
+    pr_warn!("\n");
+    pr_warn!("=============================================\n\n");
     }
     EXPORT_SYMBOL_GPL(debug_show_all_locks);
 
@@ -6122,8 +6291,6 @@ pub unsafe extern "C" fn debug_show_all_locks() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn debug_show_held_locks(task: *mut task_struct) {
-    void debug_show_held_locks(struct task_struct *task)
-    {
     if (unlikely(!debug_locks)) {
     printk("INFO: lockdep is turned off.\n");
     return;
@@ -6133,19 +6300,18 @@ pub unsafe extern "C" fn debug_show_held_locks(task: *mut task_struct) {
     EXPORT_SYMBOL_GPL(debug_show_held_locks);
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_sys_exit() -> asmlinkage __visible void {
-    asmlinkage __visible void lockdep_sys_exit(void)
-    {
-    struct task_struct *curr = current;
+    let mut curr = current;
     if (unlikely(curr.lockdep_depth)) {
-    if (!debug_locks_off())
+    if (!debug_locks_off()) {
     return;
+    }
     nbcon_cpu_emergency_enter();
-    pr_warn("\n");
-    pr_warn("================================================\n");
-    pr_warn("WARNING: lock held when returning to user space!\n");
+    pr_warn!("\n");
+    pr_warn!("================================================\n");
+    pr_warn!("WARNING: lock held when returning to user space!\n");
     print_kernel_ident();
-    pr_warn("------------------------------------------------\n");
-    pr_warn("%s/%d is leaving the kernel with locks still held!\n",
+    pr_warn!("------------------------------------------------\n");
+    pr_warn!("%s/%d is leaving the kernel with locks still held!\n",
     curr.comm, curr.pid);
     lockdep_print_held_locks(curr);
     nbcon_cpu_emergency_exit();
@@ -6158,21 +6324,19 @@ pub unsafe extern "C" fn lockdep_sys_exit() -> asmlinkage __visible void {
     }
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_rcu_suspicious(file: *const c_char, line: c_int, s: *const c_char) {
-    void lockdep_rcu_suspicious(const char *file, const int line, const char *s)
-    {
-    struct task_struct *curr = current;
-    let mut dl: c_int = READ_ONCE(debug_locks);
-    let mut rcu: bool = warn_rcu_enter();
+    let mut curr = current;
+pub static mut dl: c_int = 0;
+pub static mut rcu: bool = false;
 // Note: the following can be executed concurrently, so be careful.
     nbcon_cpu_emergency_enter();
-    pr_warn("\n");
-    pr_warn("=============================\n");
-    pr_warn("WARNING: suspicious RCU usage\n");
+    pr_warn!("\n");
+    pr_warn!("=============================\n");
+    pr_warn!("WARNING: suspicious RCU usage\n");
     print_kernel_ident();
-    pr_warn("-----------------------------\n");
-    pr_warn("%s:%d %s!\n", file, line, s);
-    pr_warn("\nother info that might help us debug this:\n\n");
-    pr_warn("\n%srcu_scheduler_active = %d, debug_locks = %d\n%s",
+    pr_warn!("-----------------------------\n");
+    pr_warn!("%s:%d %s!\n", file, line, s);
+    pr_warn!("\nother info that might help us debug this:\n\n");
+    pr_warn!("\n%srcu_scheduler_active = %d, debug_locks = %d\n%s",
     !rcu_lockdep_current_cpu_online()
     ? "RCU used illegally from offline CPU!\n"
     : "",
@@ -6196,10 +6360,11 @@ pub unsafe extern "C" fn lockdep_rcu_suspicious(file: *const c_char, line: c_int
 // So complain bitterly if someone does call rcu_read_lock(),
 // rcu_read_lock_bh() and so on from extended quiescent states.
 //
-    if (!rcu_is_watching())
-    pr_warn("RCU used illegally from extended quiescent state!\n");
+    if (!rcu_is_watching()) {
+    pr_warn!("RCU used illegally from extended quiescent state!\n");
+    }
     lockdep_print_held_locks(curr);
-    pr_warn("\nstack backtrace:\n");
+    pr_warn!("\nstack backtrace:\n");
     dump_stack();
     nbcon_cpu_emergency_exit();
     warn_rcu_exit(rcu);

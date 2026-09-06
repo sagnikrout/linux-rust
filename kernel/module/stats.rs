@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -121,7 +371,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // is not empty it is a reflection of possible work or optimizations possible
 // either in-kernel or in userspace.
 //
-    static LIST_HEAD(dup_failed_modules);
+pub static mut dup_failed_modules: usize = 0;
 //
 // DOC: module statistics debugfs counters
 //
@@ -158,7 +408,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // which it does not yet see loaded. The first module to succeed in
 // add_unformed_module() will add a module to our &modules list and
 // subsequent loads of modules with the same name will error out at the
-// end of early_mod_check(). The check for module_patient_check_exists()
+// end of early_mod_check(). The check for module_patient_check_exists!()
 // at the end of early_mod_check() prevents duplicate allocations
 // on layout_and_allocate() for modules already being processed. These
 // duplicate failed modules are non-fatal, however they typically are
@@ -173,7 +423,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // freed bytes in kernel_read_file_from_fd() calls for these type of
 // failures. These failures can occur because:
 //
-// * module_sig_check() - module signature checks
+// * module_sig_check!() - module signature checks
 // * elf_validity_cache_copy() - some ELF validation issue
 // * early_mod_check():
 //
@@ -215,71 +465,71 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // requests incurred for frequency modules, a separate module request was
 // being issued for each CPU on a system.
 //
-    atomic_long_t total_mod_size;
-    atomic_long_t total_text_size;
-    atomic_long_t invalid_kread_bytes;
-    atomic_long_t invalid_decompress_bytes;
+    let mut total_mod_size;
+    let mut total_text_size;
+    let mut invalid_kread_bytes;
+    let mut invalid_decompress_bytes;
     static atomic_long_t invalid_becoming_bytes;
     static atomic_long_t invalid_mod_bytes;
-    atomic_t modcount;
-    atomic_t failed_kreads;
-    atomic_t failed_decompress;
+    let mut modcount;
+    let mut failed_kreads;
+    let mut failed_decompress;
     static atomic_t failed_becoming;
     static atomic_t failed_load_modules;
-    static const char *mod_fail_to_str(struct mod_fail_load *mod_fail)
+    static const char *mod_fail_to_str(mod_fail_load *mod_fail)
     {
     if (test_bit(FAIL_DUP_MOD_BECOMING, &mod_fail.dup_fail_mask) &&
-    test_bit(FAIL_DUP_MOD_LOAD, &mod_fail.dup_fail_mask))
+    test_bit(FAIL_DUP_MOD_LOAD, &mod_fail.dup_fail_mask)) {
     return "Becoming & Load";
-    if (test_bit(FAIL_DUP_MOD_BECOMING, &mod_fail.dup_fail_mask))
+    }
+    if (test_bit(FAIL_DUP_MOD_BECOMING, &mod_fail.dup_fail_mask)) {
     return "Becoming";
-    if (test_bit(FAIL_DUP_MOD_LOAD, &mod_fail.dup_fail_mask))
+    }
+    if (test_bit(FAIL_DUP_MOD_LOAD, &mod_fail.dup_fail_mask)) {
     return "Load";
+    }
     return "Bug-on-stats";
     }
 #[no_mangle]
 pub unsafe extern "C" fn mod_stat_bump_invalid(info: *mut load_info, flags: c_int) {
-    void mod_stat_bump_invalid(struct load_info *info, int flags)
-    {
     atomic_long_add(info.len * 2, &invalid_mod_bytes);
     atomic_inc(&failed_load_modules);
 
-    if (flags & MODULE_INIT_COMPRESSED_FILE)
+    if (flags & MODULE_INIT_COMPRESSED_FILE) {
     atomic_long_add(info.compressed_len, &invalid_mod_bytes);
+    }
 
     }
 #[no_mangle]
 pub unsafe extern "C" fn mod_stat_bump_becoming(info: *mut load_info, flags: c_int) {
-    void mod_stat_bump_becoming(struct load_info *info, int flags)
-    {
     atomic_inc(&failed_becoming);
     atomic_long_add(info.len, &invalid_becoming_bytes);
 
-    if (flags & MODULE_INIT_COMPRESSED_FILE)
+    if (flags & MODULE_INIT_COMPRESSED_FILE) {
     atomic_long_add(info.compressed_len, &invalid_becoming_bytes);
+    }
 
     }
 #[no_mangle]
-pub unsafe extern "C" fn try_add_failed_module(name: *const c_char, reason: enum fail_dup_mod_reason) -> c_int {
-    int try_add_failed_module(const char *name, enum fail_dup_mod_reason reason)
-    {
-    struct mod_fail_load *mod_fail;
+pub unsafe extern "C" fn try_add_failed_module(name: *const c_char, reason: fail_dup_mod_reason) -> c_int {
+pub static mut mod_fail: *mut c_void = core::ptr::null_mut();
     list_for_each_entry_rcu(mod_fail, &dup_failed_modules, list,
     lockdep_is_held(&module_mutex)) {
     if (!strcmp(mod_fail.name, name)) {
     atomic_long_inc(&mod_fail.count);
     __set_bit(reason, &mod_fail.dup_fail_mask);
-    goto out;
+// goto;
     }
     }
     mod_fail = kzalloc_obj(*mod_fail);
-    if (!mod_fail)
+    if (!mod_fail) {
     return -ENOMEM;
+    }
     strscpy(mod_fail.name, name);
     __set_bit(reason, &mod_fail.dup_fail_mask);
     atomic_long_inc(&mod_fail.count);
     list_add_rcu(&mod_fail.list, &dup_failed_modules);
-    out:
+// label;
     return 0;
     }
 //
@@ -291,13 +541,12 @@ pub unsafe extern "C" fn try_add_failed_module(name: *const c_char, reason: enum
 pub const MAX_PREAMBLE: c_int = 1024;
 pub const MAX_FAILED_MOD_PRINT: c_int = 112;
 pub const MAX_BYTES_PER_MOD: c_int = 64;
-    static ssize_t read_file_mod_stats(struct file *file, char __user *user_buf,
-    size_t count, loff_t *ppos)
-    {
-    struct mod_fail_load *mod_fail;
+#[no_mangle]
+pub unsafe extern "C" fn read_file_mod_stats(file: *mut file, user_buf: *mut c_char, count: size_t, ppos: *mut loff_t) -> ssize_t {
+pub static mut mod_fail: *mut c_void = core::ptr::null_mut();
     unsigned int len, size, count_failed = 0;
-    char *buf;
-    int ret;
+pub static mut buf: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     u32 live_mod_count, fkreads, fdecompress, fbecoming, floads;
     unsigned long total_size, text_size, ikread_bytes, ibecoming_bytes,
     idecompress_bytes, imod_bytes, total_virtual_lost;
@@ -316,8 +565,9 @@ pub const MAX_BYTES_PER_MOD: c_int = 64;
     size = MAX_PREAMBLE + min((unsigned int)(floads + fbecoming),
     (unsigned int)MAX_FAILED_MOD_PRINT) * MAX_BYTES_PER_MOD;
     buf = kzalloc(size, GFP_KERNEL);
-    if (buf == core::ptr::null_mut())
+    if (buf == core::ptr::null_mut()) {
     return -ENOMEM;
+    }
 // The beginning of our debug preamble
     len = scnprintf(buf, size, "%25s\t%u\n", "Mods ever loaded", live_mod_count);
     len += scnprintf(buf + len, size - len, "%25s\t%u\n", "Mods failed on kread", fkreads);
@@ -342,65 +592,60 @@ pub const MAX_BYTES_PER_MOD: c_int = 64;
     DIV_ROUND_UP(text_size, live_mod_count));
     }
 //
-// We use WARN_ON_ONCE() for the counters to ensure we always have parity
+// We use WARN_ON_ONCE!() for the counters to ensure we always have parity
 // for keeping tabs on a type of failure with one type of byte counter.
 // The counters for imod_bytes does not increase for fkreads failures
 // for example, and so on.
 //
-    WARN_ON_ONCE(ikread_bytes && !fkreads);
+    WARN_ON_ONCE!(ikread_bytes && !fkreads);
     if (fkreads && ikread_bytes) {
     len += scnprintf(buf + len, size - len, "%25s\t%lu\n", "Avg fail kread bytes",
     DIV_ROUND_UP(ikread_bytes, fkreads));
     }
-    WARN_ON_ONCE(ibecoming_bytes && !fbecoming);
+    WARN_ON_ONCE!(ibecoming_bytes && !fbecoming);
     if (fbecoming && ibecoming_bytes) {
     len += scnprintf(buf + len, size - len, "%25s\t%lu\n", "Avg fail becoming bytes",
     DIV_ROUND_UP(ibecoming_bytes, fbecoming));
     }
-    WARN_ON_ONCE(idecompress_bytes && !fdecompress);
+    WARN_ON_ONCE!(idecompress_bytes && !fdecompress);
     if (fdecompress && idecompress_bytes) {
     len += scnprintf(buf + len, size - len, "%25s\t%lu\n", "Avg fail decomp bytes",
     DIV_ROUND_UP(idecompress_bytes, fdecompress));
     }
-    WARN_ON_ONCE(imod_bytes && !floads);
+    WARN_ON_ONCE!(imod_bytes && !floads);
     if (floads && imod_bytes) {
     len += scnprintf(buf + len, size - len, "%25s\t%lu\n", "Average fail load bytes",
     DIV_ROUND_UP(imod_bytes, floads));
     }
 // End of our debug preamble header.
 // Catch when we've gone beyond our expected preamble
-    WARN_ON_ONCE(len >= MAX_PREAMBLE);
-    if (list_empty(&dup_failed_modules))
-    goto out;
+    WARN_ON_ONCE!(len >= MAX_PREAMBLE);
+    if (list_empty(&dup_failed_modules)) {
+// goto;
+    }
     len += scnprintf(buf + len, size - len, "Duplicate failed modules:\n");
     len += scnprintf(buf + len, size - len, "%25s\t%15s\t%25s\n",
     "Module-name", "How-many-times", "Reason");
     mutex_lock(&module_mutex);
     list_for_each_entry_rcu(mod_fail, &dup_failed_modules, list) {
-    if (WARN_ON_ONCE(++count_failed >= MAX_FAILED_MOD_PRINT))
-    goto out_unlock;
+    if (WARN_ON_ONCE!(++count_failed >= MAX_FAILED_MOD_PRINT)) {
+// goto;
+    }
     len += scnprintf(buf + len, size - len, "%25s\t%15lu\t%25s\n", mod_fail.name,
     atomic_long_read(&mod_fail.count), mod_fail_to_str(mod_fail));
     }
-    out_unlock:
+// label;
     mutex_unlock(&module_mutex);
-    out:
+// label;
     ret = simple_read_from_buffer(user_buf, count, ppos, buf, len);
     kfree(buf);
     return ret;
     }
 
-    static const struct file_operations fops_mod_stats = {
-    .read = read_file_mod_stats,
-    .open = simple_open,
-    .owner = THIS_MODULE,
-    .llseek = default_llseek,
-    };
+pub static mut file_operations: usize = 0;
 
 #[no_mangle]
-unsafe extern "C" fn module_stats_init() -> int __init {
-    static int __init module_stats_init(void)
-    {
+unsafe extern "C" fn module_stats_init!() -> c_int {
     mod_debug_add_ulong(total_mod_size);
     mod_debug_add_ulong(total_text_size);
     mod_debug_add_ulong(invalid_kread_bytes);
@@ -416,4 +661,4 @@ unsafe extern "C" fn module_stats_init() -> int __init {
     return 0;
     }
 
-    module_init(module_stats_init);
+    module_init!(module_stats_init);

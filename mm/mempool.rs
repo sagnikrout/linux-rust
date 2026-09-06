@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -46,61 +296,56 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // debugging by David Rientjes, Copyright (C) 2015
 //
 
-    static DECLARE_FAULT_ATTR(fail_mempool_alloc);
-    static DECLARE_FAULT_ATTR(fail_mempool_alloc_bulk);
+pub static mut fail_mempool_alloc: usize = 0;
+pub static mut fail_mempool_alloc_bulk: usize = 0;
 //
 // Debugging support for mempool using static key.
 //
 // This allows enabling mempool debug at boot time via:
 // mempool_debug
 //
-    static DEFINE_STATIC_KEY_FALSE(mempool_debug_enabled);
+pub static mut mempool_debug_enabled: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn mempool_debug_setup(str: *mut c_char) -> int __init {
-    static int __init mempool_debug_setup(char *str)
-    {
+unsafe extern "C" fn mempool_debug_setup(str: *mut c_char) -> c_int {
     static_branch_enable(&mempool_debug_enabled);
     return 1;
     }
-    __setup("mempool_debug", mempool_debug_setup);
+    __setup!("mempool_debug", mempool_debug_setup);
 #[no_mangle]
-unsafe extern "C" fn mempool_faul_inject_init() -> int __init {
-    static int __init mempool_faul_inject_init(void)
-    {
-    int error;
+unsafe extern "C" fn mempool_faul_inject_init() -> c_int {
+    let mut error = 0;
     error = PTR_ERR_OR_ZERO(fault_create_debugfs_attr("fail_mempool_alloc",
     core::ptr::null_mut(), &fail_mempool_alloc));
-    if (error)
+    if (error) {
     return error;
+    }
 // booting will fail on error return here, don't bother to cleanup
     return PTR_ERR_OR_ZERO(
     fault_create_debugfs_attr("fail_mempool_alloc_bulk", core::ptr::null_mut(),
     &fail_mempool_alloc_bulk));
     }
-    late_initcall(mempool_faul_inject_init);
-    static void poison_error(struct mempool *pool, void *element, size_t size,
-    size_t byte)
-    {
-    let mut nr: c_int = pool.curr_nr;
-    let mut start: c_int = max_t(int, byte - (BITS_PER_LONG / 8), 0);
-    let mut end: c_int = min_t(int, byte + (BITS_PER_LONG / 8), size);
-    int i;
-    pr_err("BUG: mempool element poison mismatch\n");
-    pr_err("Mempool %p size %zu\n", pool, size);
-    pr_err(" nr=%d @ %p: %s0x", nr, element, start > 0 ? "... " : "");
-    for (i = start; i < end; i++)
-    pr_cont("%x ", *(u8 *)(element + i));
+    late_initcall!(mempool_faul_inject_init);
+#[no_mangle]
+pub unsafe extern "C" fn poison_error(pool: *mut mempool, element: *mut c_void, size: size_t, byte: size_t) {
+pub static mut nr: c_int = 0;
+pub static mut start: c_int = 0;
+pub static mut end: c_int = 0;
+    let mut i = 0;
+    pr_err!("BUG: mempool element poison mismatch\n");
+    pr_err!("Mempool %p size %zu\n", pool, size);
+    pr_err!(" nr=%d @ %p: %s0x", nr, element, start > 0 ? "... " : "");
+    for (i = start; i < end; i++) {
+    pr_cont("%x ", *(element + i));
+    }
     pr_cont("%s\n", end < size ? "..." : "");
     dump_stack();
     }
 #[no_mangle]
 unsafe extern "C" fn __check_element(pool: *mut mempool, element: *mut c_void, size: usize) {
-    static void __check_element(struct mempool *pool, void *element, size_t size)
-    {
-    u8 *obj = element;
-    size_t i;
-    for (i = 0; i < size; i++) {
-    let mut exp: u8 = (i < size - 1) ? POISON_FREE : POISON_END;
+    let mut obj = element;
+    let mut i = 0;
+    while (i < size) {
+pub static mut exp: u8 = 0;
     if (obj[i] != exp) {
     poison_error(pool, element, size, i);
     return;
@@ -110,11 +355,10 @@ unsafe extern "C" fn __check_element(pool: *mut mempool, element: *mut c_void, s
     }
 #[no_mangle]
 unsafe extern "C" fn check_element(pool: *mut mempool, element: *mut c_void) {
-    static void check_element(struct mempool *pool, void *element)
-    {
 // Skip checking: KASAN might save its metadata in the element.
-    if (kasan_enabled())
+    if (kasan_enabled()) {
     return;
+    }
 // Mempools backed by slab allocator
     if (pool.free == mempool_kfree) {
     __check_element(pool, element, (size_t)pool.pool_data);
@@ -122,35 +366,32 @@ unsafe extern "C" fn check_element(pool: *mut mempool, element: *mut c_void) {
     __check_element(pool, element, kmem_cache_size(pool.pool_data));
     } else if (pool.free == mempool_free_pages) {
 // Mempools backed by page allocator
-    let mut order: c_int = (int)(long)pool.pool_data;
+pub static mut order: c_int = 0;
 
-    for (int i = 0; i < (1 << order); i++) {
-    struct page *page = (struct page *)element;
-    void *addr = kmap_local_page(page + i);
+    while (i < (1 << order)) {
+    let mut page = element;
+    let mut addr = kmap_local_page(page + i);
     __check_element(pool, addr, PAGE_SIZE);
     kunmap_local(addr);
     }
 
-    void *addr = page_address((struct page *)element);
+    let mut addr = page_address(element);
     __check_element(pool, addr, PAGE_SIZE << order);
 
     }
     }
 #[no_mangle]
 unsafe extern "C" fn __poison_element(element: *mut c_void, size: usize) {
-    static void __poison_element(void *element, size_t size)
-    {
-    u8 *obj = element;
+    let mut obj = element;
     memset(obj, POISON_FREE, size - 1);
     obj[size - 1] = POISON_END;
     }
 #[no_mangle]
 unsafe extern "C" fn poison_element(pool: *mut mempool, element: *mut c_void) {
-    static void poison_element(struct mempool *pool, void *element)
-    {
 // Skip poisoning: KASAN might save its metadata in the element.
-    if (kasan_enabled())
+    if (kasan_enabled()) {
     return;
+    }
 // Mempools backed by slab allocator
     if (pool.alloc == mempool_kmalloc) {
     __poison_element(element, (size_t)pool.pool_data);
@@ -158,66 +399,67 @@ unsafe extern "C" fn poison_element(pool: *mut mempool, element: *mut c_void) {
     __poison_element(element, kmem_cache_size(pool.pool_data));
     } else if (pool.alloc == mempool_alloc_pages) {
 // Mempools backed by page allocator
-    let mut order: c_int = (int)(long)pool.pool_data;
+pub static mut order: c_int = 0;
 
-    for (int i = 0; i < (1 << order); i++) {
-    struct page *page = (struct page *)element;
-    void *addr = kmap_local_page(page + i);
+    while (i < (1 << order)) {
+    let mut page = element;
+    let mut addr = kmap_local_page(page + i);
     __poison_element(addr, PAGE_SIZE);
     kunmap_local(addr);
     }
 
-    void *addr = page_address((struct page *)element);
+    let mut addr = page_address(element);
     __poison_element(addr, PAGE_SIZE << order);
 
     }
     }
-    static __always_inline bool kasan_poison_element(struct mempool *pool,
+    static __always_inline bool kasan_poison_element(mempool *pool,
     void *element)
     {
-    if (pool.alloc == mempool_alloc_slab || pool.alloc == mempool_kmalloc)
+    if (pool.alloc == mempool_alloc_slab || pool.alloc == mempool_kmalloc) {
     return kasan_mempool_poison_object(element);
-#[no_mangle]
-pub unsafe extern "C" fn if(mempool_alloc_pages: pool->alloc ==) -> else {
-    else if (pool.alloc == mempool_alloc_pages)
+    }
+
+    else if (pool.alloc == mempool_alloc_pages) {
     return kasan_mempool_poison_pages(element,
     (unsigned long)pool.pool_data);
+    }
     return true;
     }
 #[no_mangle]
 unsafe extern "C" fn kasan_unpoison_element(pool: *mut mempool, element: *mut c_void) {
-    static void kasan_unpoison_element(struct mempool *pool, void *element)
-    {
-    if (pool.alloc == mempool_kmalloc)
+    if (pool.alloc == mempool_kmalloc) {
     kasan_mempool_unpoison_object(element, (size_t)pool.pool_data);
-#[no_mangle]
-pub unsafe extern "C" fn if(mempool_alloc_slab: pool->alloc ==) -> else {
-    else if (pool.alloc == mempool_alloc_slab)
+    }
+
+    else if (pool.alloc == mempool_alloc_slab) {
     kasan_mempool_unpoison_object(element,
     kmem_cache_size(pool.pool_data));
-#[no_mangle]
-pub unsafe extern "C" fn if(mempool_alloc_pages: pool->alloc ==) -> else {
-    else if (pool.alloc == mempool_alloc_pages)
+    }
+
+    else if (pool.alloc == mempool_alloc_pages) {
     kasan_mempool_unpoison_pages(element,
     (unsigned long)pool.pool_data);
     }
+    }
 #[no_mangle]
 unsafe extern "C" fn add_element(pool: *mut mempool, element: *mut c_void) -> __always_inline void {
-    static __always_inline void add_element(struct mempool *pool, void *element)
-    {
-    BUG_ON(pool.min_nr != 0 && pool.curr_nr >= pool.min_nr);
-    if (static_branch_unlikely(&mempool_debug_enabled))
+    BUG_ON!(pool.min_nr != 0 && pool.curr_nr >= pool.min_nr);
+    if (static_branch_unlikely(&mempool_debug_enabled)) {
     poison_element(pool, element);
-    if (kasan_poison_element(pool, element))
+    }
+    if (kasan_poison_element(pool, element)) {
     pool.elements[pool.curr_nr++] = element;
     }
-    static void *remove_element(struct mempool *pool)
-    {
-    void *element = pool.elements[--pool.curr_nr];
-    BUG_ON(pool.curr_nr < 0);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn remove_element(pool: *mut mempool) -> *mut c_void {
+    let mut element = pool.elements[--pool.curr_nr];
+    BUG_ON!(pool.curr_nr < 0);
     kasan_unpoison_element(pool, element);
-    if (static_branch_unlikely(&mempool_debug_enabled))
+    if (static_branch_unlikely(&mempool_debug_enabled)) {
     check_element(pool, element);
+    }
     return element;
     }
 //
@@ -233,10 +475,8 @@ unsafe extern "C" fn add_element(pool: *mut mempool, element: *mut c_void) -> __
 //
 #[no_mangle]
 pub unsafe extern "C" fn mempool_exit(pool: *mut mempool) {
-    void mempool_exit(struct mempool *pool)
-    {
     while (pool.curr_nr) {
-    void *element = remove_element(pool);
+    let mut element = remove_element(pool);
     pool.free(element, pool.pool_data);
     }
     kfree(pool.elements);
@@ -253,18 +493,15 @@ pub unsafe extern "C" fn mempool_exit(pool: *mut mempool) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn mempool_destroy(pool: *mut mempool) {
-    void mempool_destroy(struct mempool *pool)
-    {
-    if (unlikely(!pool))
+    if (unlikely(!pool)) {
     return;
+    }
     mempool_exit(pool);
     kfree(pool);
     }
     EXPORT_SYMBOL(mempool_destroy);
-    int mempool_init_node(struct mempool *pool, int min_nr,
-    mempool_alloc_t *alloc_fn, mempool_free_t *free_fn,
-    void *pool_data, gfp_t gfp_mask, int node_id)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn mempool_init_node(pool: *mut mempool, min_nr: c_int, alloc_fn: *mut mempool_alloc_t, free_fn: *mut mempool_free_t, pool_data: *mut c_void, gfp_mask: gfp_t, node_id: c_int) -> c_int {
     spin_lock_init(&pool.lock);
     pool.min_nr	= min_nr;
     pool.pool_data = pool_data;
@@ -275,16 +512,17 @@ pub unsafe extern "C" fn mempool_destroy(pool: *mut mempool) {
 // max() used here to ensure storage for at least 1 element to support
 // zero minimum pool
 //
-    pool.elements = kmalloc_array_node(max(1, min_nr), sizeof(void *),
+    pool.elements = kmalloc_array_node(max(1, min_nr), sizeof!,
     gfp_mask, node_id);
-    if (!pool.elements)
+    if (!pool.elements) {
     return -ENOMEM;
+    }
 //
 // First pre-allocate the guaranteed number of buffers,
 // also pre-allocate 1 element for zero minimum pool.
 //
     while (pool.curr_nr < max(1, pool.min_nr)) {
-    void *element;
+pub static mut element: *mut c_void = core::ptr::null_mut();
     element = pool.alloc(gfp_mask, pool.pool_data);
     if (unlikely(!element)) {
     mempool_exit(pool);
@@ -309,10 +547,8 @@ pub unsafe extern "C" fn mempool_destroy(pool: *mut mempool) {
 //
 // Return: %0 on success, negative error code otherwise.
 //
-    int mempool_init_noprof(struct mempool *pool, int min_nr,
-    mempool_alloc_t *alloc_fn, mempool_free_t *free_fn,
-    void *pool_data)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn mempool_init_noprof(pool: *mut mempool, min_nr: c_int, alloc_fn: *mut mempool_alloc_t, free_fn: *mut mempool_free_t, pool_data: *mut c_void) -> c_int {
     return mempool_init_node(pool, min_nr, alloc_fn, free_fn,
     pool_data, GFP_KERNEL, NUMA_NO_NODE);
     }
@@ -335,14 +571,13 @@ pub unsafe extern "C" fn mempool_destroy(pool: *mut mempool) {
 //
 // Return: pointer to the created memory pool object or %NULL on error.
 //
-    struct mempool *mempool_create_node_noprof(int min_nr,
-    mempool_alloc_t *alloc_fn, mempool_free_t *free_fn,
-    void *pool_data, gfp_t gfp_mask, int node_id)
-    {
-    struct mempool *pool;
-    pool = kmalloc_node_noprof(sizeof(*pool), gfp_mask | __GFP_ZERO, node_id);
-    if (!pool)
+#[no_mangle]
+pub unsafe extern "C" fn mempool_create_node_noprof(min_nr: c_int, alloc_fn: *mut mempool_alloc_t, free_fn: *mut mempool_free_t, pool_data: *mut c_void, gfp_mask: gfp_t, node_id: c_int) -> *mut c_void {
+pub static mut pool: *mut c_void = core::ptr::null_mut();
+    pool = kmalloc_node_noprof(sizeof!(*pool), gfp_mask | __GFP_ZERO, node_id);
+    if (!pool) {
     return core::ptr::null_mut();
+    }
     if (mempool_init_node(pool, min_nr, alloc_fn, free_fn, pool_data,
     gfp_mask, node_id)) {
     kfree(pool);
@@ -371,12 +606,10 @@ pub unsafe extern "C" fn mempool_destroy(pool: *mut mempool) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn mempool_resize(pool: *mut mempool, new_min_nr: c_int) -> c_int {
-    int mempool_resize(struct mempool *pool, int new_min_nr)
-    {
-    void *element;
-    void **new_elements;
-    unsigned long flags;
-    BUG_ON(new_min_nr <= 0);
+pub static mut element: *mut c_void = core::ptr::null_mut();
+pub static mut new_elements: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    BUG_ON!(new_min_nr <= 0);
     might_sleep();
     spin_lock_irqsave(&pool.lock, flags);
     if (new_min_nr <= pool.min_nr) {
@@ -387,56 +620,58 @@ pub unsafe extern "C" fn mempool_resize(pool: *mut mempool, new_min_nr: c_int) -
     spin_lock_irqsave(&pool.lock, flags);
     }
     pool.min_nr = new_min_nr;
-    goto out_unlock;
+// goto;
     }
     spin_unlock_irqrestore(&pool.lock, flags);
 // Grow the pool
     new_elements = kmalloc_objs(*new_elements, new_min_nr);
-    if (!new_elements)
+    if (!new_elements) {
     return -ENOMEM;
+    }
     spin_lock_irqsave(&pool.lock, flags);
     if (unlikely(new_min_nr <= pool.min_nr)) {
 // Raced, other resize will do our work
     spin_unlock_irqrestore(&pool.lock, flags);
     kfree(new_elements);
-    goto out;
+// goto;
     }
     memcpy(new_elements, pool.elements,
-    pool.curr_nr * sizeof(*new_elements));
+    pool.curr_nr * sizeof!(*new_elements));
     kfree(pool.elements);
     pool.elements = new_elements;
     pool.min_nr = new_min_nr;
     while (pool.curr_nr < pool.min_nr) {
     spin_unlock_irqrestore(&pool.lock, flags);
     element = pool.alloc(GFP_KERNEL, pool.pool_data);
-    if (!element)
-    goto out;
+    if (!element) {
+// goto;
+    }
     spin_lock_irqsave(&pool.lock, flags);
     if (pool.curr_nr < pool.min_nr) {
     add_element(pool, element);
     } else {
     spin_unlock_irqrestore(&pool.lock, flags);
     pool.free(element, pool.pool_data);	/* Raced */
-    goto out;
+// goto;
     }
     }
-    out_unlock:
+// label;
     spin_unlock_irqrestore(&pool.lock, flags);
-    out:
+// label;
     return 0;
     }
     EXPORT_SYMBOL(mempool_resize);
-    static unsigned int mempool_alloc_from_pool(struct mempool *pool, void **elems,
-    unsigned int count, unsigned int allocated,
-    gfp_t gfp_mask)
-    {
-    unsigned long flags;
-    unsigned int i;
+#[no_mangle]
+pub unsafe extern "C" fn mempool_alloc_from_pool(pool: *mut mempool, elems: *mut *mut c_void, count: c_uint, allocated: c_uint, gfp_mask: gfp_t) -> c_uint {
+    let mut flags = 0;
+    let mut i = 0;
     spin_lock_irqsave(&pool.lock, flags);
-    if (unlikely(pool.curr_nr < count - allocated))
-    goto fail;
-    while (allocated < count)
+    if (unlikely(pool.curr_nr < count - allocated)) {
+// goto;
+    }
+    while (allocated < count) {
     elems[allocated++] = remove_element(pool);
+    }
     spin_unlock_irqrestore(&pool.lock, flags);
 // Paired with rmb in mempool_free(), read comment there.
     smp_wmb();
@@ -444,12 +679,13 @@ pub unsafe extern "C" fn mempool_resize(pool: *mut mempool, new_min_nr: c_int) -
 // Update the allocation stack trace as this is more useful for
 // debugging.
 //
-    for (i = 0; i < count; i++)
+    for (i = 0; i < count; i++) {
     kmemleak_update_trace(elems[i]);
+    }
     return allocated;
-    fail:
+// label;
     if (gfp_mask & __GFP_DIRECT_RECLAIM) {
-    DEFINE_WAIT(wait);
+pub static mut wait: usize = 0;
     prepare_to_wait(&pool.wait, &wait, TASK_UNINTERRUPTIBLE);
     spin_unlock_irqrestore(&pool.lock, flags);
 //
@@ -475,8 +711,6 @@ pub unsafe extern "C" fn mempool_resize(pool: *mut mempool, new_min_nr: c_int) -
 //
 #[no_mangle]
 pub unsafe extern "C" fn mempool_adjust_gfp(gfp_mask: *mut gfp_t) -> gfp_t {
-    static inline gfp_t mempool_adjust_gfp(gfp_t *gfp_mask)
-    {
 // gfp_mask |= __GFP_NOMEMALLOC | __GFP_NORETRY | __GFP_NOWARN;
     return *gfp_mask & ~(__GFP_DIRECT_RECLAIM | __GFP_IO);
     }
@@ -494,12 +728,11 @@ pub unsafe extern "C" fn mempool_adjust_gfp(gfp_mask: *mut gfp_t) -> gfp_t {
 //
 // Return: Always 0.  If it wasn't for %$#^$ alloc tags, it would return void.
 //
-    int mempool_alloc_bulk_noprof(struct mempool *pool, void **elems,
-    unsigned int count)
-    {
-    let mut gfp_mask: gfp_t = GFP_KERNEL;
-    let mut gfp_temp: gfp_t = mempool_adjust_gfp(&gfp_mask);
-    let mut allocated: c_uint = 0;
+#[no_mangle]
+pub unsafe extern "C" fn mempool_alloc_bulk_noprof(pool: *mut mempool, elems: *mut *mut c_void, count: c_uint) -> c_int {
+pub static mut gfp_mask: gfp_t = 0;
+pub static mut gfp_temp: gfp_t = 0;
+pub static mut allocated: c_uint = 0;
     VM_WARN_ON_ONCE(count > pool.min_nr);
     might_alloc(gfp_mask);
 //
@@ -507,27 +740,28 @@ pub unsafe extern "C" fn mempool_adjust_gfp(gfp_mask: *mut gfp_t) -> gfp_t {
 // that we stress the multiple elements missing path.
 //
     if (should_fail_ex(&fail_mempool_alloc_bulk, 1, FAULT_NOWARN)) {
-    pr_info("forcing mempool usage for %pS\n",
-    (void *)_RET_IP_);
-    goto use_pool;
+    pr_info!("forcing mempool usage for %pS\n",
+    _RET_IP_);
+// goto;
     }
-    repeat_alloc:
+// label;
 //
 // Try to allocate the elements using the allocation callback first as
 // that might succeed even when the caller's bulk allocation did not.
 //
     while (allocated < count) {
     elems[allocated] = pool.alloc(gfp_temp, pool.pool_data);
-    if (unlikely(!elems[allocated]))
-    goto use_pool;
-    allocated++;
+    if (unlikely(!elems[allocated])) {
+// goto;
+    }
+    allocated += 1;
     }
     return 0;
-    use_pool:
+// label;
     allocated = mempool_alloc_from_pool(pool, elems, count, allocated,
     gfp_temp);
     gfp_temp = gfp_mask;
-    goto repeat_alloc;
+// goto;
     }
     EXPORT_SYMBOL_GPL(mempool_alloc_bulk_noprof);
 //
@@ -546,16 +780,16 @@ pub unsafe extern "C" fn mempool_adjust_gfp(gfp_mask: *mut gfp_t) -> gfp_t {
 // an element.  Allocation failure can only happen when @gfp_mask does not
 // include %__GFP_DIRECT_RECLAIM.
 //
-    void *mempool_alloc_noprof(struct mempool *pool, gfp_t gfp_mask)
-    {
-    let mut gfp_temp: gfp_t = mempool_adjust_gfp(&gfp_mask);
-    void *element;
+#[no_mangle]
+pub unsafe extern "C" fn mempool_alloc_noprof(pool: *mut mempool, gfp_mask: gfp_t) -> *mut c_void {
+pub static mut gfp_temp: gfp_t = 0;
+pub static mut element: *mut c_void = core::ptr::null_mut();
     VM_WARN_ON_ONCE(gfp_mask & __GFP_ZERO);
     might_alloc(gfp_mask);
-    repeat_alloc:
+// label;
     if (should_fail_ex(&fail_mempool_alloc, 1, FAULT_NOWARN)) {
-    pr_info("forcing mempool usage for %pS\n",
-    (void *)_RET_IP_);
+    pr_info!("forcing mempool usage for %pS\n",
+    _RET_IP_);
     element = core::ptr::null_mut();
     } else {
     element = pool.alloc(gfp_temp, pool.pool_data);
@@ -571,10 +805,10 @@ pub unsafe extern "C" fn mempool_adjust_gfp(gfp_mask: *mut gfp_t) -> gfp_t {
     if (!mempool_alloc_from_pool(pool, &element, 1, 0, gfp_temp)) {
     if (gfp_temp != gfp_mask) {
     gfp_temp = gfp_mask;
-    goto repeat_alloc;
+// goto;
     }
     if (gfp_mask & __GFP_DIRECT_RECLAIM) {
-    goto repeat_alloc;
+// goto;
     }
     }
     }
@@ -593,9 +827,9 @@ pub unsafe extern "C" fn mempool_adjust_gfp(gfp_mask: *mut gfp_t) -> gfp_t {
 // Return: pointer to the allocated element or %NULL if no elements are
 // available.
 //
-    void *mempool_alloc_preallocated(struct mempool *pool)
-    {
-    void *element = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn mempool_alloc_preallocated(pool: *mut mempool) -> *mut c_void {
+    let mut element = core::ptr::null_mut();
     mempool_alloc_from_pool(pool, &element, 1, 0, GFP_NOWAIT);
     return element;
     }
@@ -614,12 +848,11 @@ pub unsafe extern "C" fn mempool_adjust_gfp(gfp_mask: *mut gfp_t) -> gfp_t {
 // transferred from the beginning of @elem, so the return value can be used as
 // an offset into @elem for the freeing the remaining elements in the caller.
 //
-    unsigned int mempool_free_bulk(struct mempool *pool, void **elems,
-    unsigned int count)
-    {
-    unsigned long flags;
-    let mut freed: c_uint = 0;
-    let mut added: bool = false;
+#[no_mangle]
+pub unsafe extern "C" fn mempool_free_bulk(pool: *mut mempool, elems: *mut *mut c_void, count: c_uint) -> c_uint {
+    let mut flags = 0;
+pub static mut freed: c_uint = 0;
+pub static mut added: bool = false;
 //
 // Paired with the wmb in mempool_alloc().  The preceding read is
 // for @element and the following @pool->curr_nr.  This ensures
@@ -675,8 +908,9 @@ pub unsafe extern "C" fn mempool_adjust_gfp(gfp_mask: *mut gfp_t) -> gfp_t {
     }
     spin_unlock_irqrestore(&pool.lock, flags);
     }
-    if (unlikely(added) && wq_has_sleeper(&pool.wait))
+    if (unlikely(added) && wq_has_sleeper(&pool.wait)) {
     wake_up(&pool.wait);
+    }
     return freed;
     }
     EXPORT_SYMBOL_GPL(mempool_free_bulk);
@@ -692,27 +926,24 @@ pub unsafe extern "C" fn mempool_adjust_gfp(gfp_mask: *mut gfp_t) -> gfp_t {
 //
 #[no_mangle]
 pub unsafe extern "C" fn mempool_free(element: *mut c_void, pool: *mut mempool) {
-    void mempool_free(void *element, struct mempool *pool)
-    {
-    if (likely(element) && !mempool_free_bulk(pool, &element, 1))
+    if (likely(element) && !mempool_free_bulk(pool, &element, 1)) {
     pool.free(element, pool.pool_data);
+    }
     }
     EXPORT_SYMBOL(mempool_free);
 //
 // A commonly used alloc and free fn.
 //
-    void *mempool_alloc_slab(gfp_t gfp_mask, void *pool_data)
-    {
-    struct kmem_cache *mem = pool_data;
+#[no_mangle]
+pub unsafe extern "C" fn mempool_alloc_slab(gfp_mask: gfp_t, pool_data: *mut c_void) -> *mut c_void {
+    let mut mem = pool_data;
     VM_BUG_ON(mem.ctor);
     return kmem_cache_alloc_noprof(mem, gfp_mask);
     }
     EXPORT_SYMBOL(mempool_alloc_slab);
 #[no_mangle]
 pub unsafe extern "C" fn mempool_free_slab(element: *mut c_void, pool_data: *mut c_void) {
-    void mempool_free_slab(void *element, void *pool_data)
-    {
-    struct kmem_cache *mem = pool_data;
+    let mut mem = pool_data;
     kmem_cache_free(mem, element);
     }
     EXPORT_SYMBOL(mempool_free_slab);
@@ -720,16 +951,14 @@ pub unsafe extern "C" fn mempool_free_slab(element: *mut c_void, pool_data: *mut
 // A commonly used alloc and free fn that kmalloc/kfrees the amount of memory
 // specified by pool_data
 //
-    void *mempool_kmalloc(gfp_t gfp_mask, void *pool_data)
-    {
-    let mut size: usize = (size_t)pool_data;
+#[no_mangle]
+pub unsafe extern "C" fn mempool_kmalloc(gfp_mask: gfp_t, pool_data: *mut c_void) -> *mut c_void {
+pub static mut size: usize = 0;
     return kmalloc_noprof(size, gfp_mask);
     }
     EXPORT_SYMBOL(mempool_kmalloc);
 #[no_mangle]
 pub unsafe extern "C" fn mempool_kfree(element: *mut c_void, pool_data: *mut c_void) {
-    void mempool_kfree(void *element, void *pool_data)
-    {
     kfree(element);
     }
     EXPORT_SYMBOL(mempool_kfree);
@@ -737,17 +966,15 @@ pub unsafe extern "C" fn mempool_kfree(element: *mut c_void, pool_data: *mut c_v
 // A simple mempool-backed page allocator that allocates pages
 // of the order specified by pool_data.
 //
-    void *mempool_alloc_pages(gfp_t gfp_mask, void *pool_data)
-    {
-    let mut order: c_int = (int)(long)pool_data;
+#[no_mangle]
+pub unsafe extern "C" fn mempool_alloc_pages(gfp_mask: gfp_t, pool_data: *mut c_void) -> *mut c_void {
+pub static mut order: c_int = 0;
     return alloc_pages_noprof(gfp_mask, order);
     }
     EXPORT_SYMBOL(mempool_alloc_pages);
 #[no_mangle]
 pub unsafe extern "C" fn mempool_free_pages(element: *mut c_void, pool_data: *mut c_void) {
-    void mempool_free_pages(void *element, void *pool_data)
-    {
-    let mut order: c_int = (int)(long)pool_data;
+pub static mut order: c_int = 0;
     __free_pages(element, order);
     }
     EXPORT_SYMBOL(mempool_free_pages);

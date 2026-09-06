@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -62,7 +312,7 @@ pub struct asym_cap_data {
     pub link: list_head,
     pub rcu: rcu_head,
     pub capacity: c_ulong,
-    pub cpus: [c_ulong; ],
+    pub cpus: [c_ulong; 0],
 }
 
 //
@@ -154,7 +404,7 @@ extern "C" {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct rt_prio_array {
-    pub /: *mut *mut DECLARE_BITMAP(bitmap, MAX_RT_PRIO+1); / include 1 bit for delimiter,
+//     pub /: *mut *mut DECLARE_BITMAP(bitmap, MAX_RT_PRIO+1); / include 1 bit for delimiter,
     pub queue: [list_head; MAX_RT_PRIO],
 }
 
@@ -346,7 +596,7 @@ pub struct task_group {
     pub idle: c_int,
 
 // runqueue "owned" by this group on each CPU
-    pub cfs_rq: *mut cfs_rq __percpu,
+    pub cfs_rq: *mut cfs_rq ,
     pub shares: c_ulong,
 //
 // load_avg can be heavily contended at clock tick time, so put
@@ -380,7 +630,7 @@ pub struct task_group {
 }
 
 extern "C" {
-    pub fn int(: *mut *mut tg_visitor)(struct task_group, : *mut c_void) -> typedef;
+    pub fn int(: *mut *mut tg_visitor)(task_group, : *mut c_void) -> typedef;
 }
 //
 // Iterate the full tree, calling @down when first entering a node and @up when
@@ -461,7 +711,7 @@ extern "C" {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct cfs_bandwidth {
-    pub }: *mut *mut static inline bool cfs_task_bw_constrained(struct task_struct p) { return false;,
+    pub }: *mut *mut static inline bool cfs_task_bw_constrained(task_struct p) { return false;,
 
 //
 // A weight of 0 or 1 can cause arithmetics problems.
@@ -472,9 +722,9 @@ pub struct cfs_bandwidth {
 // limitation from this.)
 //
 
-    pub tg): *mut extern void unregister_rt_sched_group(struct task_group,
-    pub tg): *mut extern void free_rt_sched_group(struct task_group,
-    pub parent): *mut *mut extern int alloc_rt_sched_group(struct task_group tg, struct task_group,
+    pub tg): *mut extern void unregister_rt_sched_group(task_group,
+    pub tg): *mut extern void free_rt_sched_group(task_group,
+    pub parent): *mut *mut extern int alloc_rt_sched_group(task_group tg, task_group,
 //
 // u64_u32_load/u64_u32_store
 //
@@ -484,10 +734,10 @@ pub struct cfs_bandwidth {
 
     pub \: u64 __val, __val_copy;,
     pub \: __val_copy = copy;,
-// \
-// paired with u64_u32_store_copy(), ordering access	\
-// to var and copy.					\
-// \
+// 
+// paired with u64_u32_store_copy(), ordering access	
+// to var and copy.					
+// 
     pub \: smp_rmb();,
     pub \: __val = var;,
     pub \: } while (__val != __val_copy);,
@@ -495,10 +745,10 @@ pub struct cfs_bandwidth {
 
     pub \: typeof(val) __val = (val);,
     pub \: var = __val;,
-// \
-// paired with u64_u32_load_copy(), ordering access to var and	\
-// copy.							\
-// \
+// 
+// paired with u64_u32_load_copy(), ordering access to var and	
+// copy.							
+// 
     pub \: smp_wmb();,
     pub \: copy = __val;,
 
@@ -515,9 +765,9 @@ pub struct balance_callback {
 pub struct cfs_rq {
     pub load: load_weight,
     pub nr_queued: c_uint,
-    pub /: *mut *mut unsigned int h_nr_queued; / SCHED_{NORMAL,BATCH,IDLE},
-    pub /: *mut *mut unsigned int h_nr_runnable; / SCHED_{NORMAL,BATCH,IDLE},
-    pub /: *mut *mut unsigned int h_nr_idle; / SCHED_IDLE,
+//     pub /: *mut *mut unsigned int h_nr_queued; / SCHED_{NORMAL,BATCH,IDLE},
+//     pub /: *mut *mut unsigned int h_nr_runnable; / SCHED_{NORMAL,BATCH,IDLE},
+//     pub /: *mut *mut unsigned int h_nr_idle; / SCHED_IDLE,
     pub sum_w_vruntime: i64,
     pub sum_weight: u64,
     pub zero_vruntime: u64,
@@ -562,7 +812,7 @@ pub struct cfs_rq {
     pub h_load: c_ulong,
     pub last_h_load_update: u64,
     pub h_load_next: *mut sched_entity,
-    pub /: *mut *mut *mut rq rq; / CPU runqueue to which this cfs_rq is attached,
+//     pub /: *mut *mut *mut rq rq; / CPU runqueue to which this cfs_rq is attached,
 //
 // leaf cfs_rqs are those that hold tasks (lowest schedulable entity in
 // a hierarchy). Non-leaf lrqs hold other higher schedulable entities
@@ -573,7 +823,7 @@ pub struct cfs_rq {
 //
     pub on_list: c_int,
     pub leaf_cfs_rq_list: list_head,
-    pub /: *mut *mut *mut task_group tg; / Group that "owns" this runqueue,
+//     pub /: *mut *mut *mut task_group tg; / Group that "owns" this runqueue,
 // Locally cached copy of our task_group's idle value
     pub idle: c_int,
 
@@ -621,14 +871,14 @@ pub enum scx_rq_flags {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct scx_rq_rescue {
-    pub /: *mut *mut scx_dispatch_q dsq; / stranded tasks awaiting rescue,
-    pub /: *mut *mut s64 budget; / execution token bucket, ns,
-    pub /: *mut *mut u64 clock; / last budget accrual timestamp,
-    pub /: *mut *mut *mut task_curr; / task being rescued, one at a time,
-    pub /: *mut *mut s64 slice; / curr's admitted slice,
-    pub /: *mut *mut u64 exec_snap; / sum_exec_runtime at admission,
-    pub /: *mut *mut timer_list timer; / paces admission and escalation,
-    pub /: *mut *mut u64 kill_at; / last ejection, init before any,
+//     pub /: *mut *mut scx_dispatch_q dsq; / stranded tasks awaiting rescue,
+//     pub /: *mut *mut s64 budget; / execution token bucket, ns,
+//     pub /: *mut *mut u64 clock; / last budget accrual timestamp,
+//     pub /: *mut *mut *mut task_curr; / task being rescued, one at a time,
+//     pub /: *mut *mut s64 slice; / curr's admitted slice,
+//     pub /: *mut *mut u64 exec_snap; / sum_exec_runtime at admission,
+//     pub /: *mut *mut timer_list timer; / paces admission and escalation,
+//     pub /: *mut *mut u64 kill_at; / last ejection, init before any,
 }
 
 #[repr(C)]
@@ -636,36 +886,36 @@ pub struct scx_rq_rescue {
 pub struct scx_rq {
     pub local_dsq: scx_dispatch_q,
 
-    pub /: *mut *mut scx_dispatch_q reject_dsq; / staging for cap-rejected tasks,
+//     pub /: *mut *mut scx_dispatch_q reject_dsq; / staging for cap-rejected tasks,
     pub rescue: scx_rq_rescue,
 
-    pub /: *mut *mut list_head runnable_list; / runnable tasks on this rq,
-    pub /: *mut *mut list_head ddsp_deferred_locals; / deferred ddsps from enq,
+//     pub /: *mut *mut list_head runnable_list; / runnable tasks on this rq,
+//     pub /: *mut *mut list_head ddsp_deferred_locals; / deferred ddsps from enq,
     pub ops_qseq: c_ulong,
-// both stashed across the activate_task() in move_remote_task_to_local_dsq()
+both stashed across the activate_task() in move_remote_task_to_local_dsq()
     pub remote_activate_enq_flags: u64,
     pub remote_activate_sch: *mut scx_sched,
     pub nr_running: u32,
-    pub /: *mut *mut u32 cpuperf_target; / [0, SCHED_CAPACITY_SCALE],
+//     pub /: *mut *mut u32 cpuperf_target; / [0, SCHED_CAPACITY_SCALE],
     pub in_select_cpu: bool,
     pub cpu_released: bool,
     pub flags: u32,
-    pub /: *mut *mut u32 nr_immed; / ENQ_IMMED tasks on local_dsq,
+//     pub /: *mut *mut u32 nr_immed; / ENQ_IMMED tasks on local_dsq,
 
-    pub /: *mut *mut u32 lock_drop_seq; / nr dispatch lock releases,
+//     pub /: *mut *mut u32 lock_drop_seq; / nr dispatch lock releases,
 
-    pub /: *mut *mut u64 clock; / current per-rq clock -- see scx_bpf_now(),
+//     pub /: *mut *mut u64 clock; / current per-rq clock -- see scx_bpf_now(),
 
-    pub /: *mut *mut llist_head ecaps_to_sync; / pending ecaps syncs,
+//     pub /: *mut *mut llist_head ecaps_to_sync; / pending ecaps syncs,
     pub sub_dispatch_prev: *mut task_struct,
 
     pub cpus_to_sync: cpumask_var_t,
     pub kick_sync_pending: bool,
     pub kick_sync: c_ulong,
-    pub /: *mut *mut list_head sched_pcpus_to_kick; / see kick_cpus_irq_workfn(),
+//     pub /: *mut *mut list_head sched_pcpus_to_kick; / see kick_cpus_irq_workfn(),
     pub deferred_reenq_lock: raw_spinlock_t,
-    pub /: *mut *mut list_head deferred_reenq_locals; / scheds requesting reenq of local DSQ,
-    pub /: *mut *mut list_head deferred_reenq_users; / user DSQs requesting reenq,
+//     pub /: *mut *mut list_head deferred_reenq_locals; / scheds requesting reenq of local DSQ,
+//     pub /: *mut *mut list_head deferred_reenq_users; / user DSQs requesting reenq,
     pub deferred_bal_cb: balance_callback,
     pub kick_sync_bal_cb: balance_callback,
     pub deferred_irq_work: irq_work,
@@ -681,22 +931,22 @@ pub struct rt_rq {
     pub active: rt_prio_array,
     pub rt_nr_running: c_uint,
     pub rr_nr_running: c_uint,
-    pub /: *mut *mut int curr; / highest queued rt task prio,
-    pub /: *mut *mut int next; / next highest,
+//     pub /: *mut *mut int curr; / highest queued rt task prio,
+//     pub /: *mut *mut int next; / next highest,
     pub highest_prio: },
     pub overloaded: bool,
     pub pushable_tasks: plist_head,
     pub rt_queued: c_int,
 
     pub rt_throttled: c_int,
-    pub /: *mut *mut u64 rt_time; / consumed RT time, goes up in update_curr_rt,
-    pub /: *mut *mut u64 rt_runtime; / allotted RT time, "slice" from rt_bandwidth, RT sharing/balancing,
+//     pub /: *mut *mut u64 rt_time; / consumed RT time, goes up in update_curr_rt,
+//     pub /: *mut *mut u64 rt_runtime; / allotted RT time, "slice" from rt_bandwidth, RT sharing/balancing,
 // Nests inside the rq lock:
     pub rt_runtime_lock: raw_spinlock_t,
     pub rt_nr_boosted: c_uint,
-    pub /: *mut *mut *mut rq rq; / this is always top-level rq, cache?,
+//     pub /: *mut *mut *mut rq rq; / this is always top-level rq, cache?,
 
-    pub /: *mut *mut *mut task_group tg; / this tg has "this" rt_rq on given CPU for runnable entities,
+//     pub /: *mut *mut *mut task_group tg; / this tg has "this" rt_rq on given CPU for runnable entities,
 
 }
 
@@ -797,7 +1047,7 @@ pub struct root_domain {
 // - Running task is misfit
 //
     pub overloaded: bool,
-// Indicate one or more CPUs over-utilized (tipping point)
+Indicate one or more CPUs over-utilized (tipping point)
     pub overutilized: bool,
 //
 // The bit corresponding to a CPU gets set here if such CPU has more
@@ -838,7 +1088,7 @@ pub struct root_domain {
 // NULL-terminated list of performance domains intersecting with the
 // CPUs of the rd. Protected by RCU.
 //
-    pub pd: *mut perf_domain __rcu,
+    pub pd: *mut perf_domain ,
 }
 
 extern "C" {
@@ -934,11 +1184,11 @@ pub struct rq {
     pub ttwu_pending: c_uint,
     pub cpu_capacity: c_ulong,
 
-    pub /: *mut *mut *mut task___rcu donor; / Scheduling context,
-    pub /: *mut *mut *mut task___rcu curr; / Execution context,
+//     pub /: *mut *mut *mut task___rcu donor; / Scheduling context,
+//     pub /: *mut *mut *mut task___rcu curr; / Execution context,
 
-    pub /: *mut *mut *mut task___rcu donor; / Scheduler context,
-    pub /: *mut *mut *mut task___rcu curr; / Execution context,
+//     pub /: *mut *mut *mut task___rcu donor; / Scheduler context,
+//     pub /: *mut *mut *mut task___rcu curr; / Execution context,
 }
 
 // padding left here deliberately
@@ -985,7 +1235,7 @@ pub const UCLAMP_FLAG_IDLE: c_uint = 0x01;
 // CPU runqueue to which this cfs_rq is attached
 
 extern "C" {
-    pub fn container_of(_arg: cfs_rq, rq: struct, _arg: cfs) -> return;
+    pub fn container_of!(_arg: cfs_rq, rq: struct, _arg: cfs) -> return;
 }
 
 pub const MDF_PUSH: c_uint = 0x01;
@@ -1050,7 +1300,7 @@ extern "C" {
 }
 
 extern "C" {
-    pub fn container_of(_arg: se, task_struct: struct, _arg: se) -> return;
+    pub fn container_of!(_arg: se, task_struct: struct, _arg: se) -> return;
 }
 // runqueue on which this entity is (to be) queued
 // runqueue "owned" by this group
@@ -1221,32 +1471,32 @@ pub struct sched_group_capacity {
 // for a single CPU.
 //
     pub capacity: c_ulong,
-    pub /: *mut *mut unsigned long min_capacity; / Min per-CPU capacity in group,
-    pub /: *mut *mut unsigned long max_capacity; / Max per-CPU capacity in group,
+//     pub /: *mut *mut unsigned long min_capacity; / Min per-CPU capacity in group,
+//     pub /: *mut *mut unsigned long max_capacity; / Max per-CPU capacity in group,
     pub next_update: c_ulong,
-    pub /: *mut *mut int imbalance; / XXX unrelated to capacity but shared group state,
+//     pub /: *mut *mut int imbalance; / XXX unrelated to capacity but shared group state,
     pub id: c_int,
-    pub /: *mut *mut unsigned long cpumask[]; / Balance mask,
+//     pub /: *mut *mut unsigned long cpumask[]; / Balance mask,
 }
 
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct sched_group {
-    pub /: *mut *mut *mut sched_group next; / Must be a circular list,
+//     pub /: *mut *mut *mut sched_group next; / Must be a circular list,
     pub ref: core::sync::atomic::AtomicI32,
     pub group_weight: c_uint,
     pub cores: c_uint,
     pub sgc: *mut sched_group_capacity,
-    pub /: *mut *mut int asym_prefer_cpu; / CPU of highest priority in group,
+//     pub /: *mut *mut int asym_prefer_cpu; / CPU of highest priority in group,
     pub flags: c_int,
 //
 // The CPUs this group covers.
 //
 // NOTE: this field is variable length. (Allocated dynamically
 // by attaching extra space to the end of the structure,
-// depending on how many CPUs the kernel has booted up with)
+depending on how many CPUs the kernel has booted up with)
 //
-    pub cpumask: [c_ulong; ],
+    pub cpumask: [c_ulong; 0],
 }
 
 extern "C" {
@@ -1300,11 +1550,11 @@ pub struct cfs_tg_state {
     pub cpu): return per_cpu_ptr(tg->cfs_rq,,
     pub state: *mut cfs_tg_state,
     pub NULL: return,
-    pub cfs_rq): state = container_of(tg_cfs_rq(tg, cpu), struct cfs_tg_state,,
+    pub cfs_rq): state = container_of!(tg_cfs_rq(tg, cpu), cfs_tg_state,,
     pub &state->se: return,
     pub state: *mut cfs_tg_state,
     pub NULL: return,
-    pub cfs_rq): state = container_of(cfs_rq, struct cfs_tg_state,,
+    pub cfs_rq): state = container_of!(cfs_rq, cfs_tg_state,,
     pub &state->se: return,
 
 // Change a task's cfs_rq and parent entity if it moves across CPUs/groups
@@ -1452,7 +1702,7 @@ pub struct sched_class {
 // proxy_task_current: rq->lock
 // sched_change_end
 //
-    pub flags): *mut *mut *mut *mut void (enqueue_task) (struct rq rq, struct task_struct p, int,
+    pub flags): *mut *mut *mut *mut c_void (enqueue_task) (rq rq, task_struct p, int,
 //
 // move_queued_task/deactivate_task/dequeue_task: rq->lock
 // __schedule/block_task/dequeue_task: rq->lock
@@ -1460,15 +1710,15 @@ pub struct sched_class {
 // wait_task_inactive: task_rq_lock
 // sched_change_begin
 //
-    pub flags): *mut *mut *mut *mut bool (dequeue_task) (struct rq rq, struct task_struct p, int,
+    pub flags): *mut *mut *mut *mut bool (dequeue_task) (rq rq, task_struct p, int,
 //
 // do_sched_yield: rq->lock
 //
-    pub rq): *mut *mut void (yield_task) (struct rq,
+    pub rq): *mut *mut c_void (yield_task) (rq,
 //
 // yield_to: rq->lock (double)
 //
-    pub p): *mut *mut *mut bool (yield_to_task)(struct rq rq, struct task_struct,
+    pub p): *mut *mut *mut bool (yield_to_task)(rq rq, task_struct,
 //
 // move_queued_task: rq->lock
 // __migrate_swap_task: rq->lock
@@ -1476,11 +1726,11 @@ pub struct sched_class {
 // ttwu_runnable: task_rq_lock
 // wake_up_new_task: task_rq_lock
 //
-    pub flags): *mut *mut *mut *mut void (wakeup_preempt)(struct rq rq, struct task_struct p, int,
+    pub flags): *mut *mut *mut *mut c_void (wakeup_preempt)(rq rq, task_struct p, int,
 //
 // schedule/pick_next_task/prev_balance: rq->lock
 //
-    pub rf): *mut *mut *mut int (balance)(struct rq rq, struct rq_flags,
+    pub rf): *mut *mut *mut int (balance)(rq rq, rq_flags,
 //
 // schedule/pick_next_task: rq->lock
 //
@@ -1489,31 +1739,31 @@ pub struct sched_class {
 // sched_change:
 // __schedule: rq->lock
 //
-    pub next): *mut *mut *mut *mut void (put_prev_task)(struct rq rq, struct task_struct p, struct task_struct,
-    pub first): *mut *mut *mut *mut void (set_next_task)(struct rq rq, struct task_struct p, bool,
+    pub next): *mut *mut *mut *mut c_void (put_prev_task)(rq rq, task_struct p, task_struct,
+    pub first): *mut *mut *mut *mut c_void (set_next_task)(rq rq, task_struct p, bool,
 //
 // select_task_rq: p->pi_lock
 // sched_exec: p->pi_lock
 //
-    pub flags): *mut *mut *mut int (select_task_rq)(struct task_struct p, int task_cpu, int,
+    pub flags): *mut *mut *mut int (select_task_rq)(task_struct p, int task_cpu, int,
 //
 // set_task_cpu: p->pi_lock || rq->lock (ttwu like)
 //
-    pub new_cpu): *mut *mut *mut void (migrate_task_rq)(struct task_struct p, int,
+    pub new_cpu): *mut *mut *mut c_void (migrate_task_rq)(task_struct p, int,
 //
 // ttwu_do_activate: rq->lock
 // wake_up_new_task: task_rq_lock
 //
-    pub task): *mut *mut *mut void (task_woken)(struct rq this_rq, struct task_struct,
+    pub task): *mut *mut *mut c_void (task_woken)(rq this_rq, task_struct,
 //
 // do_set_cpus_allowed: task_rq_lock + sched_change
 //
-    pub ctx): *mut *mut *mut void (set_cpus_allowed)(struct task_struct p, struct affinity_context,
+    pub ctx): *mut *mut *mut c_void (set_cpus_allowed)(task_struct p, affinity_context,
 //
 // sched_set_rq_{on,off}line: rq->lock
 //
-    pub rq): *mut *mut void (rq_online)(struct rq,
-    pub rq): *mut *mut void (rq_offline)(struct rq,
+    pub rq): *mut *mut c_void (rq_online)(rq,
+    pub rq): *mut *mut c_void (rq_offline)(rq,
 //
 // push_cpu_stop: p->pi_lock && rq->lock
 //
@@ -1523,23 +1773,23 @@ pub struct sched_class {
 // sched_tick: rq->lock
 // sched_tick_remote: rq->lock
 //
-    pub queued): *mut *mut *mut *mut void (task_tick)(struct rq rq, struct task_struct p, int,
+    pub queued): *mut *mut *mut *mut c_void (task_tick)(rq rq, task_struct p, int,
 //
 // sched_cgroup_fork: p->pi_lock
 //
-    pub p): *mut *mut void (task_fork)(struct task_struct,
+    pub p): *mut *mut c_void (task_fork)(task_struct,
 //
 // finish_task_switch: no locks
 //
-    pub p): *mut *mut void (task_dead)(struct task_struct,
+    pub p): *mut *mut c_void (task_dead)(task_struct,
 //
 // sched_change
 //
-    pub task): *mut *mut *mut void (switching_from)(struct rq this_rq, struct task_struct,
-    pub task): *mut *mut *mut void (switched_from) (struct rq this_rq, struct task_struct,
-    pub task): *mut *mut *mut void (switching_to) (struct rq this_rq, struct task_struct,
-    pub task): *mut *mut *mut void (switched_to) (struct rq this_rq, struct task_struct,
-    pub task): *mut *mut *mut u64 (get_prio) (struct rq this_rq, struct task_struct,
+    pub task): *mut *mut *mut c_void (switching_from)(rq this_rq, task_struct,
+    pub task): *mut *mut *mut c_void (switched_from) (rq this_rq, task_struct,
+    pub task): *mut *mut *mut c_void (switching_to) (rq this_rq, task_struct,
+    pub task): *mut *mut *mut c_void (switched_to) (rq this_rq, task_struct,
+    pub task): *mut *mut *mut u64 (get_prio) (rq this_rq, task_struct,
     pub oldprio): u64,
 //
 // set_load_weight: task_rq_lock + sched_change
@@ -1553,18 +1803,18 @@ pub struct sched_class {
 //
 // task_sched_runtime: task_rq_lock
 //
-    pub rq): *mut *mut void (update_curr)(struct rq,
+    pub rq): *mut *mut c_void (update_curr)(rq,
 
 //
 // sched_change_group: task_rq_lock + sched_change
 //
-    pub p): *mut *mut void (task_change_group)(struct task_struct,
+    pub p): *mut *mut c_void (task_change_group)(task_struct,
 
 //
 // pick_next_task: rq->lock
 // try_steal_cookie: rq->lock (double)
 //
-    pub cpu): *mut *mut *mut int (task_is_throttled)(struct task_struct p, int,
+    pub cpu): *mut *mut *mut int (task_is_throttled)(task_struct p, int,
 
 }
 
@@ -1682,7 +1932,7 @@ extern "C" {
     pub fn sched_can_stop_tick(rq: *mut rq) -> bool;
 }
 extern "C" {
-    pub fn sched_tick_offload_init() -> int __init;
+    pub fn sched_tick_offload_init() -> c_int;
 }
 //
 // Tick may be needed by tasks in the runqueue depending on their policy and
@@ -1774,8 +2024,8 @@ extern "C" {
 // rq->clock_update_flags to avoid the WARN_DOUBLE_CLOCK warning.
 //
 
-// __UNIQUE_ID(unlock1) __cleanup(__class_##_name##_cleanup_ctx1) = (void *)(_T1),\
-// __UNIQUE_ID(unlock2) __cleanup(__class_##_name##_cleanup_ctx2) = (void *)(_T2)
+// __UNIQUE_ID(unlock1) __cleanup(__class_##_name##_cleanup_ctx1) = (_T1),
+__UNIQUE_ID(unlock2) __cleanup(__class_##_name##_cleanup_ctx2) = (_T2)
 
 //
 // In order to not have {0,2},{1,3} turn into into an AB-BA,
@@ -2119,5 +2369,3 @@ pub struct sched_change_ctx {
 
 extern "C" {
     pub fn sched_change_end(ctx: *mut sched_change_ctx);
-}
-

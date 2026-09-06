@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -118,12 +368,12 @@ pub const PCPU_EMPTY_POP_PAGES_HIGH: c_int = 4;
 
 // default addr <-> pcpu_ptr mapping, override in asm/percpu.h if necessary
 
-    (void __percpu *)((unsigned long)(addr) -			\
-    (unsigned long)pcpu_base_addr	+		\
+    ((unsigned long)(addr) -			
+    (unsigned long)pcpu_base_addr	+		
     (unsigned long)__per_cpu_start)
 
-    (void  *)((unsigned long)(ptr) +				\
-    (unsigned long)pcpu_base_addr -		\
+    ((unsigned long)(ptr) +				
+    (unsigned long)pcpu_base_addr -		
     (unsigned long)__per_cpu_start)
 
 // on UP, it's always identity mapped
@@ -141,33 +391,33 @@ pub const PCPU_EMPTY_POP_PAGES_HIGH: c_int = 4;
     static unsigned int pcpu_low_unit_cpu __ro_after_init;
     static unsigned int pcpu_high_unit_cpu __ro_after_init;
 // the address of the first chunk which starts with the kernel static area
-    void *pcpu_base_addr __ro_after_init;
-    static const int *pcpu_unit_map __ro_after_init;		/* cpu . unit */
-    const unsigned long *pcpu_unit_offsets __ro_after_init;	/* cpu . unit offset */
+pub static mut pcpu_base_addr: *mut c_void = core::ptr::null_mut();
+pub static mut pcpu_unit_map: *mut c_void = core::ptr::null_mut();		/* cpu . unit */
+pub static mut pcpu_unit_offsets: *mut c_void = core::ptr::null_mut();	/* cpu . unit offset */
 // group information, used for vm allocation
     static int pcpu_nr_groups __ro_after_init;
-    static const unsigned long *pcpu_group_offsets __ro_after_init;
-    static const size_t *pcpu_group_sizes __ro_after_init;
+pub static mut pcpu_group_offsets: *mut c_void = core::ptr::null_mut();
+pub static mut pcpu_group_sizes: *mut c_void = core::ptr::null_mut();
 //
 // The first chunk which always exists.  Note that unlike other
 // chunks, this one can be allocated and mapped in several different
 // ways and thus often doesn't live in the vmalloc area.
 //
-    struct pcpu_chunk *pcpu_first_chunk __ro_after_init;
+pub static mut pcpu_first_chunk: *mut c_void = core::ptr::null_mut();
 //
 // Optional reserved chunk.  This chunk reserves part of the first
 // chunk and serves it for reserved allocations.  When the reserved
 // region doesn't exist, the following variable is NULL.
 //
-    struct pcpu_chunk *pcpu_reserved_chunk __ro_after_init;
-    DEFINE_SPINLOCK(pcpu_lock);	/* all internal data structures */
-    static DEFINE_MUTEX(pcpu_alloc_mutex);	/* chunk create/destroy, [de]pop, map ext */
-    struct list_head *pcpu_chunk_lists __ro_after_init; /* chunk list slots */
+pub static mut pcpu_reserved_chunk: *mut c_void = core::ptr::null_mut();
+pub static mut pcpu_lock: usize = 0;	/* all internal data structures */
+pub static mut pcpu_alloc_mutex: usize = 0;	/* chunk create/destroy, [de]pop, map ext */
+pub static mut pcpu_chunk_lists: *mut c_void = core::ptr::null_mut(); /* chunk list slots */
 //
 // The number of empty populated pages, protected by pcpu_lock.
 // The reserved chunk doesn't contribute to the count.
 //
-    int pcpu_nr_empty_pop_pages;
+    let mut pcpu_nr_empty_pop_pages = 0;
 //
 // The number of populated pages in use by the allocator, protected by
 // pcpu_lock.  This number is kept per a unit per chunk (i.e. when a page gets
@@ -181,16 +431,15 @@ pub const PCPU_EMPTY_POP_PAGES_HIGH: c_int = 4;
 // PCPU_EMPTY_POP_PAGES_LOW and HIGH for atomic allocations and at most one
 // empty chunk.
 //
-    static void pcpu_balance_workfn(struct work_struct *work);
-    static DECLARE_WORK(pcpu_balance_work, pcpu_balance_workfn);
-    static bool pcpu_async_enabled __read_mostly;
+// forward_decl: pcpu_balance_workfn;
+pub static mut pcpu_balance_work: usize = 0;
+    static bool pcpu_async_enabled ;
     static bool pcpu_atomic_alloc_failed;
 #[no_mangle]
 unsafe extern "C" fn pcpu_schedule_balance_work() {
-    static void pcpu_schedule_balance_work(void)
-    {
-    if (pcpu_async_enabled)
+    if (pcpu_async_enabled) {
     schedule_work(&pcpu_balance_work);
+    }
     }
 //
 // pcpu_addr_in_chunk - check if the address is served from this chunk
@@ -202,11 +451,11 @@ unsafe extern "C" fn pcpu_schedule_balance_work() {
 //
 #[no_mangle]
 unsafe extern "C" fn pcpu_addr_in_chunk(chunk: *mut pcpu_chunk, addr: *mut c_void) -> bool {
-    static bool pcpu_addr_in_chunk(struct pcpu_chunk *chunk, void *addr)
-    {
-    void *start_addr, *end_addr;
-    if (!chunk)
+    let mut start_addr = core::ptr::null_mut();
+    let mut end_addr = core::ptr::null_mut();
+    if (!chunk) {
     return false;
+    }
     start_addr = chunk.base_addr + chunk.start_offset;
     end_addr = chunk.base_addr + chunk.nr_pages * PAGE_SIZE -
     chunk.end_offset;
@@ -214,56 +463,45 @@ unsafe extern "C" fn pcpu_addr_in_chunk(chunk: *mut pcpu_chunk, addr: *mut c_voi
     }
 #[no_mangle]
 unsafe extern "C" fn __pcpu_size_to_slot(size: c_int) -> c_int {
-    static int __pcpu_size_to_slot(int size)
-    {
-    int highbit = fls(size);	/* size is in bytes */
+    let mut highbit = fls(size);	/* size is in bytes */
     return max(highbit - PCPU_SLOT_BASE_SHIFT + 2, 1);
     }
 #[no_mangle]
 unsafe extern "C" fn pcpu_size_to_slot(size: c_int) -> c_int {
-    static int pcpu_size_to_slot(int size)
-    {
-    if (size == pcpu_unit_size)
+    if (size == pcpu_unit_size) {
     return pcpu_free_slot;
+    }
     return __pcpu_size_to_slot(size);
     }
 #[no_mangle]
 unsafe extern "C" fn pcpu_chunk_slot(chunk: *const pcpu_chunk) -> c_int {
-    static int pcpu_chunk_slot(const struct pcpu_chunk *chunk)
-    {
-    const struct pcpu_block_md *chunk_md = &chunk.chunk_md;
+    let mut chunk_md = &chunk.chunk_md;
     if (chunk.free_bytes < PCPU_MIN_ALLOC_SIZE ||
-    chunk_md.contig_hint == 0)
+    chunk_md.contig_hint == 0) {
     return 0;
+    }
     return pcpu_size_to_slot(chunk_md.contig_hint * PCPU_MIN_ALLOC_SIZE);
     }
 // set the pointer to a chunk in a page struct
 #[no_mangle]
 unsafe extern "C" fn pcpu_set_page_chunk(page: *mut page, pcpu: *mut pcpu_chunk) {
-    static void pcpu_set_page_chunk(struct page *page, struct pcpu_chunk *pcpu)
-    {
     page.private = (unsigned long)pcpu;
     }
 // obtain pointer to a chunk from a page struct
-    static struct pcpu_chunk *pcpu_get_page_chunk(struct page *page)
-    {
-    return (struct pcpu_chunk *)page.private;
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_get_page_chunk(page: *mut page) -> *mut c_void {
+    return page.private;
     }
 #[no_mangle]
 unsafe extern "C" fn pcpu_page_idx(cpu: c_uint, page_idx: c_int) -> int __maybe_unused {
-    static int __maybe_unused pcpu_page_idx(unsigned int cpu, int page_idx)
-    {
     return pcpu_unit_map[cpu] * pcpu_unit_pages + page_idx;
     }
 #[no_mangle]
 unsafe extern "C" fn pcpu_unit_page_offset(cpu: c_uint, page_idx: c_int) -> c_ulong {
-    static unsigned long pcpu_unit_page_offset(unsigned int cpu, int page_idx)
-    {
     return pcpu_unit_offsets[cpu] + (page_idx << PAGE_SHIFT);
     }
-    static unsigned long pcpu_chunk_addr(struct pcpu_chunk *chunk,
-    unsigned int cpu, int page_idx)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_chunk_addr(chunk: *mut pcpu_chunk, cpu: c_uint, page_idx: c_int) -> c_ulong {
     return (unsigned long)chunk.base_addr +
     pcpu_unit_page_offset(cpu, page_idx);
     }
@@ -271,27 +509,21 @@ unsafe extern "C" fn pcpu_unit_page_offset(cpu: c_uint, page_idx: c_int) -> c_ul
 // The following are helper functions to help access bitmaps and convert
 // between bitmap offsets to address offsets.
 //
-    static unsigned long *pcpu_index_alloc_map(struct pcpu_chunk *chunk, int index)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_index_alloc_map(chunk: *mut pcpu_chunk, index: c_int) -> *mut c_void {
     return chunk.alloc_map +
     (index * PCPU_BITMAP_BLOCK_BITS / BITS_PER_LONG);
     }
 #[no_mangle]
 unsafe extern "C" fn pcpu_off_to_block_index(off: c_int) -> c_ulong {
-    static unsigned long pcpu_off_to_block_index(int off)
-    {
     return off / PCPU_BITMAP_BLOCK_BITS;
     }
 #[no_mangle]
 unsafe extern "C" fn pcpu_off_to_block_off(off: c_int) -> c_ulong {
-    static unsigned long pcpu_off_to_block_off(int off)
-    {
     return off & (PCPU_BITMAP_BLOCK_BITS - 1);
     }
 #[no_mangle]
 unsafe extern "C" fn pcpu_block_off_to_off(index: c_int, off: c_int) -> c_ulong {
-    static unsigned long pcpu_block_off_to_off(int index, int off)
-    {
     return index * PCPU_BITMAP_BLOCK_BITS + off;
     }
 //
@@ -304,10 +536,9 @@ unsafe extern "C" fn pcpu_block_off_to_off(index: c_int, off: c_int) -> c_ulong 
 // Note, a chunk uses the same hints as a block so this can also check against
 // the chunk's contig hint.
 //
-    static bool pcpu_check_block_hint(struct pcpu_block_md *block, int bits,
-    size_t align)
-    {
-    int bit_off = ALIGN(block.contig_hint_start, align) -
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_check_block_hint(block: *mut pcpu_block_md, bits: c_int, align: size_t) -> bool {
+    let mut bit_off = ALIGN(block.contig_hint_start, align) -
     block.contig_hint_start;
     return bit_off + bits <= block.contig_hint;
     }
@@ -324,8 +555,6 @@ unsafe extern "C" fn pcpu_block_off_to_off(index: c_int, off: c_int) -> c_ulong 
 //
 #[no_mangle]
 unsafe extern "C" fn pcpu_next_hint(block: *mut pcpu_block_md, alloc_bits: c_int) -> c_int {
-    static int pcpu_next_hint(struct pcpu_block_md *block, int alloc_bits)
-    {
 //
 // The three conditions below determine if we can skip past the
 // scan_hint.  First, does the scan hint exist.  Second, is the
@@ -335,8 +564,9 @@ unsafe extern "C" fn pcpu_next_hint(block: *mut pcpu_block_md, alloc_bits: c_int
 //
     if (block.scan_hint &&
     block.contig_hint_start > block.scan_hint_start &&
-    alloc_bits > block.scan_hint)
+    alloc_bits > block.scan_hint) {
     return block.scan_hint_start + block.scan_hint;
+    }
     return block.first_free;
     }
 //
@@ -350,20 +580,19 @@ unsafe extern "C" fn pcpu_next_hint(block: *mut pcpu_block_md, alloc_bits: c_int
 // next hint.  It modifies bit_off and bits in-place to be consumed in the
 // loop.
 //
-    static void pcpu_next_md_free_region(struct pcpu_chunk *chunk, int *bit_off,
-    int *bits)
-    {
-    let mut i: c_int = pcpu_off_to_block_index(*bit_off);
-    let mut block_off: c_int = pcpu_off_to_block_off(*bit_off);
-    struct pcpu_block_md *block;
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_next_md_free_region(chunk: *mut pcpu_chunk, bit_off: *mut c_int, bits: *mut c_int) {
+pub static mut i: c_int = 0;
+pub static mut block_off: c_int = 0;
+pub static mut block: *mut c_void = core::ptr::null_mut();
 // bits = 0;
-    for (block = chunk.md_blocks + i; i < pcpu_chunk_nr_blocks(chunk);
-    block++, i++) {
+    while (i < pcpu_chunk_nr_blocks(chunk)) {
 // handles contig area across blocks
     if (*bits) {
 // bits += block->left_free;
-    if (block.left_free == PCPU_BITMAP_BLOCK_BITS)
+    if (block.left_free == PCPU_BITMAP_BLOCK_BITS) {
     continue;
+    }
     return;
     }
 //
@@ -376,7 +605,7 @@ unsafe extern "C" fn pcpu_next_hint(block: *mut pcpu_block_md, alloc_bits: c_int
 //
 // bits = block->contig_hint;
     if (*bits && block.contig_hint_start >= block_off &&
-// bits + block->contig_hint_start < PCPU_BITMAP_BLOCK_BITS) {
+bits + block.contig_hint_start < PCPU_BITMAP_BLOCK_BITS) {
 // bit_off = pcpu_block_off_to_off(i,
     block.contig_hint_start);
     return;
@@ -401,22 +630,22 @@ unsafe extern "C" fn pcpu_next_hint(block: *mut pcpu_block_md, alloc_bits: c_int
 // within the block to see if the request can be fulfilled prior to the contig
 // hint.
 //
-    static void pcpu_next_fit_region(struct pcpu_chunk *chunk, int alloc_bits,
-    int align, int *bit_off, int *bits)
-    {
-    let mut i: c_int = pcpu_off_to_block_index(*bit_off);
-    let mut block_off: c_int = pcpu_off_to_block_off(*bit_off);
-    struct pcpu_block_md *block;
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_next_fit_region(chunk: *mut pcpu_chunk, alloc_bits: c_int, align: c_int, bit_off: *mut c_int, bits: *mut c_int) {
+pub static mut i: c_int = 0;
+pub static mut block_off: c_int = 0;
+pub static mut block: *mut c_void = core::ptr::null_mut();
 // bits = 0;
-    for (block = chunk.md_blocks + i; i < pcpu_chunk_nr_blocks(chunk);
-    block++, i++) {
+    while (i < pcpu_chunk_nr_blocks(chunk)) {
 // handles contig area across blocks
     if (*bits) {
 // bits += block->left_free;
-    if (*bits >= alloc_bits)
+    if (*bits >= alloc_bits) {
     return;
-    if (block.left_free == PCPU_BITMAP_BLOCK_BITS)
+    }
+    if (block.left_free == PCPU_BITMAP_BLOCK_BITS) {
     continue;
+    }
     }
 // check block->contig_hint
 // bits = ALIGN(block->contig_hint_start, align) -
@@ -428,7 +657,7 @@ unsafe extern "C" fn pcpu_next_hint(block: *mut pcpu_block_md, alloc_bits: c_int
     if (block.contig_hint &&
     block.contig_hint_start >= block_off &&
     block.contig_hint >= *bits + alloc_bits) {
-    let mut start: c_int = pcpu_next_hint(block, alloc_bits);
+pub static mut start: c_int = 0;
 // bits += alloc_bits + block->contig_hint_start -
     start;
 // bit_off = pcpu_block_off_to_off(i, start);
@@ -440,8 +669,9 @@ unsafe extern "C" fn pcpu_next_hint(block: *mut pcpu_block_md, alloc_bits: c_int
     align);
 // bits = PCPU_BITMAP_BLOCK_BITS - *bit_off;
 // bit_off = pcpu_block_off_to_off(i, *bit_off);
-    if (*bits >= alloc_bits)
+    if (*bits >= alloc_bits) {
     return;
+    }
     }
 // no valid offsets were found - fail condition
 // bit_off = pcpu_chunk_map_bits(chunk);
@@ -453,16 +683,17 @@ unsafe extern "C" fn pcpu_next_hint(block: *mut pcpu_block_md, alloc_bits: c_int
 // a fit is found for the allocation request.
 //
 
-    for (pcpu_next_md_free_region((chunk), &(bit_off), &(bits));	\
-    (bit_off) < pcpu_chunk_map_bits((chunk));			\
-    (bit_off) += (bits) + 1,					\
-    pcpu_next_md_free_region((chunk), &(bit_off), &(bits)))
+    for (pcpu_next_md_free_region((chunk), &(bit_off), &(bits));	
+    (bit_off) < pcpu_chunk_map_bits((chunk));			
+    (bit_off) += (bits) + 1,					
+    pcpu_next_md_free_region((chunk), &(bit_off), &(bits))) {
 
-    for (pcpu_next_fit_region((chunk), (alloc_bits), (align), &(bit_off), \
-    &(bits));				      \
-    (bit_off) < pcpu_chunk_map_bits((chunk));			      \
-    (bit_off) += (bits),					      \
-    pcpu_next_fit_region((chunk), (alloc_bits), (align), &(bit_off), \
+    for (pcpu_next_fit_region((chunk), (alloc_bits), (align), &(bit_off), 
+    &(bits));				      
+    }
+    (bit_off) < pcpu_chunk_map_bits((chunk));			      
+    (bit_off) += (bits),					      
+    pcpu_next_fit_region((chunk), (alloc_bits), (align), &(bit_off), 
     &(bits)))
 //
 // pcpu_mem_zalloc - allocate memory
@@ -477,14 +708,17 @@ unsafe extern "C" fn pcpu_next_hint(block: *mut pcpu_block_md, alloc_bits: c_int
 // RETURNS:
 // Pointer to the allocated area on success, NULL on failure.
 //
-    static void *pcpu_mem_zalloc(size_t size, gfp_t gfp)
-    {
-    if (WARN_ON_ONCE(!slab_is_available()))
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_mem_zalloc(size: size_t, gfp: gfp_t) -> *mut c_void {
+    if (WARN_ON_ONCE!(!slab_is_available())) {
     return core::ptr::null_mut();
-    if (size <= PAGE_SIZE)
+    }
+    if (size <= PAGE_SIZE) {
     return kzalloc(size, gfp);
-    else
+    }
+    else {
     return __vmalloc(size, gfp | __GFP_ZERO);
+    }
     }
 //
 // pcpu_mem_free - free memory
@@ -494,24 +728,21 @@ unsafe extern "C" fn pcpu_next_hint(block: *mut pcpu_block_md, alloc_bits: c_int
 //
 #[no_mangle]
 unsafe extern "C" fn pcpu_mem_free(ptr: *mut c_void) {
-    static void pcpu_mem_free(void *ptr)
-    {
     kvfree(ptr);
     }
-    static void __pcpu_chunk_move(struct pcpu_chunk *chunk, int slot,
-    bool move_front)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __pcpu_chunk_move(chunk: *mut pcpu_chunk, slot: c_int, move_front: bool) {
     if (chunk != pcpu_reserved_chunk) {
-    if (move_front)
+    if (move_front) {
     list_move(&chunk.list, &pcpu_chunk_lists[slot]);
-    else
+    }
+    else {
     list_move_tail(&chunk.list, &pcpu_chunk_lists[slot]);
+    }
     }
     }
 #[no_mangle]
 unsafe extern "C" fn pcpu_chunk_move(chunk: *mut pcpu_chunk, slot: c_int) {
-    static void pcpu_chunk_move(struct pcpu_chunk *chunk, int slot)
-    {
     __pcpu_chunk_move(chunk, slot, true);
     }
 //
@@ -529,19 +760,17 @@ unsafe extern "C" fn pcpu_chunk_move(chunk: *mut pcpu_chunk, slot: c_int) {
 //
 #[no_mangle]
 unsafe extern "C" fn pcpu_chunk_relocate(chunk: *mut pcpu_chunk, oslot: c_int) {
-    static void pcpu_chunk_relocate(struct pcpu_chunk *chunk, int oslot)
-    {
-    let mut nslot: c_int = pcpu_chunk_slot(chunk);
+pub static mut nslot: c_int = 0;
 // leave isolated chunks in-place
-    if (chunk.isolated)
+    if (chunk.isolated) {
     return;
-    if (oslot != nslot)
+    }
+    if (oslot != nslot) {
     __pcpu_chunk_move(chunk, nslot, oslot < nslot);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn pcpu_isolate_chunk(chunk: *mut pcpu_chunk) {
-    static void pcpu_isolate_chunk(struct pcpu_chunk *chunk)
-    {
     lockdep_assert_held(&pcpu_lock);
     if (!chunk.isolated) {
     chunk.isolated = true;
@@ -551,8 +780,6 @@ unsafe extern "C" fn pcpu_isolate_chunk(chunk: *mut pcpu_chunk) {
     }
 #[no_mangle]
 unsafe extern "C" fn pcpu_reintegrate_chunk(chunk: *mut pcpu_chunk) {
-    static void pcpu_reintegrate_chunk(struct pcpu_chunk *chunk)
-    {
     lockdep_assert_held(&pcpu_lock);
     if (chunk.isolated) {
     chunk.isolated = false;
@@ -571,11 +798,10 @@ unsafe extern "C" fn pcpu_reintegrate_chunk(chunk: *mut pcpu_chunk) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn pcpu_update_empty_pages(chunk: *mut pcpu_chunk, nr: c_int) {
-    static inline void pcpu_update_empty_pages(struct pcpu_chunk *chunk, int nr)
-    {
     chunk.nr_empty_pop_pages += nr;
-    if (chunk != pcpu_reserved_chunk && !chunk.isolated)
+    if (chunk != pcpu_reserved_chunk && !chunk.isolated) {
     pcpu_nr_empty_pop_pages += nr;
+    }
     }
 //
 // pcpu_region_overlap - determines if two regions overlap
@@ -589,8 +815,6 @@ pub unsafe extern "C" fn pcpu_update_empty_pages(chunk: *mut pcpu_chunk, nr: c_i
 //
 #[no_mangle]
 pub unsafe extern "C" fn pcpu_region_overlap(a: c_int, b: c_int, x: c_int, y: c_int) -> bool {
-    static inline bool pcpu_region_overlap(int a, int b, int x, int y)
-    {
     return (a < y) && (x < b);
     }
 //
@@ -605,14 +829,14 @@ pub unsafe extern "C" fn pcpu_region_overlap(a: c_int, b: c_int, x: c_int, y: c_
 //
 #[no_mangle]
 unsafe extern "C" fn pcpu_block_update(block: *mut pcpu_block_md, start: c_int, end: c_int) {
-    static void pcpu_block_update(struct pcpu_block_md *block, int start, int end)
-    {
-    let mut contig: c_int = end - start;
+pub static mut contig: c_int = 0;
     block.first_free = min(block.first_free, start);
-    if (start == 0)
+    if (start == 0) {
     block.left_free = contig;
-    if (end == block.nr_bits)
+    }
+    if (end == block.nr_bits) {
     block.right_free = contig;
+    }
     if (contig > block.contig_hint) {
 // promote the old contig_hint to be the new scan_hint
     if (start > block.contig_hint_start) {
@@ -640,8 +864,9 @@ unsafe extern "C" fn pcpu_block_update(block: *mut pcpu_block_md, start: c_int, 
 // start has a better alignment so use it
     block.contig_hint_start = start;
     if (start < block.scan_hint_start &&
-    block.contig_hint > block.scan_hint)
+    block.contig_hint > block.scan_hint) {
     block.scan_hint = 0;
+    }
     } else if (start > block.scan_hint_start ||
     block.contig_hint > block.scan_hint) {
 //
@@ -683,15 +908,16 @@ unsafe extern "C" fn pcpu_block_update(block: *mut pcpu_block_md, start: c_int, 
 // scan_hint.  We need to scan backwards to ensure we don't miss free bits
 // from alignment.
 //
-    static void pcpu_block_update_scan(struct pcpu_chunk *chunk, int bit_off,
-    int bits)
-    {
-    let mut s_off: c_int = pcpu_off_to_block_off(bit_off);
-    let mut e_off: c_int = s_off + bits;
-    int s_index, l_bit;
-    struct pcpu_block_md *block;
-    if (e_off > PCPU_BITMAP_BLOCK_BITS)
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_block_update_scan(chunk: *mut pcpu_chunk, bit_off: c_int, bits: c_int) {
+pub static mut s_off: c_int = 0;
+pub static mut e_off: c_int = 0;
+    let mut s_index = 0;
+    let mut l_bit = 0;
+pub static mut block: *mut c_void = core::ptr::null_mut();
+    if (e_off > PCPU_BITMAP_BLOCK_BITS) {
     return;
+    }
     s_index = pcpu_off_to_block_index(bit_off);
     block = chunk.md_blocks + s_index;
 // scan backwards in case of alignment skipping free bits
@@ -713,10 +939,9 @@ unsafe extern "C" fn pcpu_block_update(block: *mut pcpu_block_md, start: c_int, 
 //
 #[no_mangle]
 unsafe extern "C" fn pcpu_chunk_refresh_hint(chunk: *mut pcpu_chunk, full_scan: bool) {
-    static void pcpu_chunk_refresh_hint(struct pcpu_chunk *chunk, bool full_scan)
-    {
-    struct pcpu_block_md *chunk_md = &chunk.chunk_md;
-    int bit_off, bits;
+    let mut chunk_md = &chunk.chunk_md;
+    let mut bit_off = 0;
+    let mut bits = 0;
 // promote scan_hint to contig_hint
     if (!full_scan && chunk_md.scan_hint) {
     bit_off = chunk_md.scan_hint_start + chunk_md.scan_hint;
@@ -741,11 +966,10 @@ unsafe extern "C" fn pcpu_chunk_refresh_hint(chunk: *mut pcpu_chunk, full_scan: 
 //
 #[no_mangle]
 unsafe extern "C" fn pcpu_block_refresh_hint(chunk: *mut pcpu_chunk, index: c_int) {
-    static void pcpu_block_refresh_hint(struct pcpu_chunk *chunk, int index)
-    {
-    struct pcpu_block_md *block = chunk.md_blocks + index;
-    unsigned long *alloc_map = pcpu_index_alloc_map(chunk, index);
-    unsigned int start, end;	/* region start, region end */
+    let mut block = chunk.md_blocks + index;
+    let mut alloc_map = pcpu_index_alloc_map(chunk, index);
+    let mut start = 0;
+    let mut end = 0;	/* region start, region end */
 // promote scan_hint to contig_hint
     if (block.scan_hint) {
     start = block.scan_hint_start + block.scan_hint;
@@ -758,8 +982,9 @@ unsafe extern "C" fn pcpu_block_refresh_hint(chunk: *mut pcpu_chunk, index: c_in
     }
     block.right_free = 0;
 // iterate over free areas and update the contig hints
-    for_each_clear_bitrange_from(start, end, alloc_map, PCPU_BITMAP_BLOCK_BITS)
+    for_each_clear_bitrange_from(start, end, alloc_map, PCPU_BITMAP_BLOCK_BITS) {
     pcpu_block_update(block, start, end);
+    }
     }
 //
 // pcpu_block_update_hint_alloc - update hint on allocation path
@@ -771,14 +996,17 @@ unsafe extern "C" fn pcpu_block_refresh_hint(chunk: *mut pcpu_chunk, index: c_in
 // refreshed by a full scan iff the chunk's contig hint is broken.  Block level
 // scans are required if the block's contig hint is broken.
 //
-    static void pcpu_block_update_hint_alloc(struct pcpu_chunk *chunk, int bit_off,
-    int bits)
-    {
-    struct pcpu_block_md *chunk_md = &chunk.chunk_md;
-    let mut nr_empty_pages: c_int = 0;
-    struct pcpu_block_md *s_block, *e_block, *block;
-    int s_index, e_index;	/* block indexes of the freed allocation */
-    int s_off, e_off;	/* block offsets of the freed allocation */
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_block_update_hint_alloc(chunk: *mut pcpu_chunk, bit_off: c_int, bits: c_int) {
+    let mut chunk_md = &chunk.chunk_md;
+pub static mut nr_empty_pages: c_int = 0;
+    let mut s_block = core::ptr::null_mut();
+    let mut e_block = core::ptr::null_mut();
+    let mut block = core::ptr::null_mut();
+    let mut s_index = 0;
+    let mut e_index = 0;	/* block indexes of the freed allocation */
+    let mut s_off = 0;
+    let mut e_off = 0;	/* block offsets of the freed allocation */
 //
 // Calculate per block offsets.
 // The calculation uses an inclusive range, but the resulting offsets
@@ -794,47 +1022,54 @@ unsafe extern "C" fn pcpu_block_refresh_hint(chunk: *mut pcpu_chunk, index: c_in
 //
 // Update s_block.
 //
-    if (s_block.contig_hint == PCPU_BITMAP_BLOCK_BITS)
-    nr_empty_pages++;
+    if (s_block.contig_hint == PCPU_BITMAP_BLOCK_BITS) {
+    nr_empty_pages += 1;
+    }
 //
 // block->first_free must be updated if the allocation takes its place.
 // If the allocation breaks the contig_hint, a scan is required to
 // restore this hint.
 //
-    if (s_off == s_block.first_free)
+    if (s_off == s_block.first_free) {
     s_block.first_free = find_next_zero_bit(
     pcpu_index_alloc_map(chunk, s_index),
     PCPU_BITMAP_BLOCK_BITS,
     s_off + bits);
+    }
     if (pcpu_region_overlap(s_block.scan_hint_start,
     s_block.scan_hint_start + s_block.scan_hint,
     s_off,
-    s_off + bits))
+    s_off + bits)) {
     s_block.scan_hint = 0;
+    }
     if (pcpu_region_overlap(s_block.contig_hint_start,
     s_block.contig_hint_start +
     s_block.contig_hint,
     s_off,
     s_off + bits)) {
 // block contig hint is broken - scan to fix it
-    if (!s_off)
+    if (!s_off) {
     s_block.left_free = 0;
+    }
     pcpu_block_refresh_hint(chunk, s_index);
     } else {
 // update left and right contig manually
     s_block.left_free = min(s_block.left_free, s_off);
-    if (s_index == e_index)
+    if (s_index == e_index) {
     s_block.right_free = min_t(int, s_block.right_free,
     PCPU_BITMAP_BLOCK_BITS - e_off);
-    else
+    }
+    else {
     s_block.right_free = 0;
+    }
     }
 //
 // Update e_block.
 //
     if (s_index != e_index) {
-    if (e_block.contig_hint == PCPU_BITMAP_BLOCK_BITS)
-    nr_empty_pages++;
+    if (e_block.contig_hint == PCPU_BITMAP_BLOCK_BITS) {
+    nr_empty_pages += 1;
+    }
 //
 // When the allocation is across blocks, the end is along
 // the left part of the e_block.
@@ -844,10 +1079,11 @@ unsafe extern "C" fn pcpu_block_refresh_hint(chunk: *mut pcpu_chunk, index: c_in
     PCPU_BITMAP_BLOCK_BITS, e_off);
     if (e_off == PCPU_BITMAP_BLOCK_BITS) {
 // reset the block
-    e_block++;
+    e_block += 1;
     } else {
-    if (e_off > e_block.scan_hint_start)
+    if (e_off > e_block.scan_hint_start) {
     e_block.scan_hint = 0;
+    }
     e_block.left_free = 0;
     if (e_off > e_block.contig_hint_start) {
 // contig hint is broken - scan to fix it
@@ -860,7 +1096,7 @@ unsafe extern "C" fn pcpu_block_refresh_hint(chunk: *mut pcpu_chunk, index: c_in
     }
 // update in-between md_blocks
     nr_empty_pages += (e_index - s_index - 1);
-    for (block = s_block + 1; block < e_block; block++) {
+    while (block < e_block) {
     block.scan_hint = 0;
     block.contig_hint = 0;
     block.left_free = 0;
@@ -873,14 +1109,16 @@ unsafe extern "C" fn pcpu_block_refresh_hint(chunk: *mut pcpu_chunk, index: c_in
 // of pages will be added back with pcpu_chunk_populated()
 // when populating pages.
 //
-    if (nr_empty_pages)
+    if (nr_empty_pages) {
     pcpu_update_empty_pages(chunk, -nr_empty_pages);
+    }
     if (pcpu_region_overlap(chunk_md.scan_hint_start,
     chunk_md.scan_hint_start +
     chunk_md.scan_hint,
     bit_off,
-    bit_off + bits))
+    bit_off + bits)) {
     chunk_md.scan_hint = 0;
+    }
 //
 // The only time a full chunk scan is required is if the chunk
 // contig hint is broken.  Otherwise, it means a smaller space
@@ -890,8 +1128,9 @@ unsafe extern "C" fn pcpu_block_refresh_hint(chunk: *mut pcpu_chunk, index: c_in
     chunk_md.contig_hint_start +
     chunk_md.contig_hint,
     bit_off,
-    bit_off + bits))
+    bit_off + bits)) {
     pcpu_chunk_refresh_hint(chunk, false);
+    }
     }
 //
 // pcpu_block_update_hint_free - updates the block hints on the free path
@@ -911,14 +1150,18 @@ unsafe extern "C" fn pcpu_block_refresh_hint(chunk: *mut pcpu_chunk, index: c_in
 // than the available space.  If the contig hint is contained in one block, it
 // will be accurate.
 //
-    static void pcpu_block_update_hint_free(struct pcpu_chunk *chunk, int bit_off,
-    int bits)
-    {
-    let mut nr_empty_pages: c_int = 0;
-    struct pcpu_block_md *s_block, *e_block, *block;
-    int s_index, e_index;	/* block indexes of the freed allocation */
-    int s_off, e_off;	/* block offsets of the freed allocation */
-    int start, end;		/* start and end of the whole free area */
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_block_update_hint_free(chunk: *mut pcpu_chunk, bit_off: c_int, bits: c_int) {
+pub static mut nr_empty_pages: c_int = 0;
+    let mut s_block = core::ptr::null_mut();
+    let mut e_block = core::ptr::null_mut();
+    let mut block = core::ptr::null_mut();
+    let mut s_index = 0;
+    let mut e_index = 0;	/* block indexes of the freed allocation */
+    let mut s_off = 0;
+    let mut e_off = 0;	/* block offsets of the freed allocation */
+    let mut start = 0;
+    let mut end = 0;		/* start and end of the whole free area */
 //
 // Calculate per block offsets.
 // The calculation uses an inclusive range, but the resulting offsets
@@ -951,30 +1194,34 @@ unsafe extern "C" fn pcpu_block_refresh_hint(chunk: *mut pcpu_chunk, index: c_in
 // is returned, that means there was no last bit and the
 // remainder of the chunk is free.
 //
-    int l_bit = find_last_bit(pcpu_index_alloc_map(chunk, s_index),
+    let mut l_bit = find_last_bit(pcpu_index_alloc_map(chunk, s_index),
     start);
     start = (start == l_bit) ? 0 : l_bit + 1;
     }
     end = e_off;
-    if (e_off == e_block.contig_hint_start)
+    if (e_off == e_block.contig_hint_start) {
     end = e_block.contig_hint_start + e_block.contig_hint;
-    else
+    }
+    else {
     end = find_next_bit(pcpu_index_alloc_map(chunk, e_index),
     PCPU_BITMAP_BLOCK_BITS, end);
+    }
 // update s_block
     e_off = (s_index == e_index) ? end : PCPU_BITMAP_BLOCK_BITS;
-    if (!start && e_off == PCPU_BITMAP_BLOCK_BITS)
-    nr_empty_pages++;
+    if (!start && e_off == PCPU_BITMAP_BLOCK_BITS) {
+    nr_empty_pages += 1;
+    }
     pcpu_block_update(s_block, start, e_off);
 // freeing in the same block
     if (s_index != e_index) {
 // update e_block
-    if (end == PCPU_BITMAP_BLOCK_BITS)
-    nr_empty_pages++;
+    if (end == PCPU_BITMAP_BLOCK_BITS) {
+    nr_empty_pages += 1;
+    }
     pcpu_block_update(e_block, 0, end);
 // reset md_blocks in the middle
     nr_empty_pages += (e_index - s_index - 1);
-    for (block = s_block + 1; block < e_block; block++) {
+    while (block < e_block) {
     block.first_free = 0;
     block.scan_hint = 0;
     block.contig_hint_start = 0;
@@ -983,20 +1230,23 @@ unsafe extern "C" fn pcpu_block_refresh_hint(chunk: *mut pcpu_chunk, index: c_in
     block.right_free = PCPU_BITMAP_BLOCK_BITS;
     }
     }
-    if (nr_empty_pages)
+    if (nr_empty_pages) {
     pcpu_update_empty_pages(chunk, nr_empty_pages);
+    }
 //
 // Refresh chunk metadata when the free makes a block free or spans
 // across blocks.  The contig_hint may be off by up to a page, but if
 // the contig_hint is contained in a block, it will be accurate with
 // the else condition below.
 //
-    if (((end - start) >= PCPU_BITMAP_BLOCK_BITS) || s_index != e_index)
+    if (((end - start) >= PCPU_BITMAP_BLOCK_BITS) || s_index != e_index) {
     pcpu_chunk_refresh_hint(chunk, true);
-    else
+    }
+    else {
     pcpu_block_update(&chunk.chunk_md,
     pcpu_block_off_to_off(s_index, start),
     end);
+    }
     }
 //
 // pcpu_is_populated - determines if the region is populated
@@ -1011,15 +1261,16 @@ unsafe extern "C" fn pcpu_block_refresh_hint(chunk: *mut pcpu_chunk, index: c_in
 // Bool if the backing pages are populated.
 // next_index is to skip over unpopulated blocks in pcpu_find_block_fit.
 //
-    static bool pcpu_is_populated(struct pcpu_chunk *chunk, int bit_off, int bits,
-    int *next_off)
-    {
-    unsigned int start, end;
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_is_populated(chunk: *mut pcpu_chunk, bit_off: c_int, bits: c_int, next_off: *mut c_int) -> bool {
+    let mut start = 0;
+    let mut end = 0;
     start = PFN_DOWN(bit_off * PCPU_MIN_ALLOC_SIZE);
     end = PFN_UP((bit_off + bits) * PCPU_MIN_ALLOC_SIZE);
     start = find_next_zero_bit(chunk.populated, end, start);
-    if (start >= end)
+    if (start >= end) {
     return true;
+    }
     end = find_next_bit(chunk.populated, end, start + 1);
 // next_off = end * PAGE_SIZE / PCPU_MIN_ALLOC_SIZE;
     return false;
@@ -1043,29 +1294,33 @@ unsafe extern "C" fn pcpu_block_refresh_hint(chunk: *mut pcpu_chunk, index: c_in
 // The offset in the bitmap to begin searching.
 // -1 if no offset is found.
 //
-    static int pcpu_find_block_fit(struct pcpu_chunk *chunk, int alloc_bits,
-    size_t align, bool pop_only)
-    {
-    struct pcpu_block_md *chunk_md = &chunk.chunk_md;
-    int bit_off, bits, next_off;
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_find_block_fit(chunk: *mut pcpu_chunk, alloc_bits: c_int, align: size_t, pop_only: bool) -> c_int {
+    let mut chunk_md = &chunk.chunk_md;
+    let mut bit_off = 0;
+    let mut bits = 0;
+    let mut next_off = 0;
 //
 // This is an optimization to prevent scanning by assuming if the
 // allocation cannot fit in the global hint, there is memory pressure
 // and creating a new chunk would happen soon.
 //
-    if (!pcpu_check_block_hint(chunk_md, alloc_bits, align))
+    if (!pcpu_check_block_hint(chunk_md, alloc_bits, align)) {
     return -1;
+    }
     bit_off = pcpu_next_hint(chunk_md, alloc_bits);
     bits = 0;
     pcpu_for_each_fit_region(chunk, alloc_bits, align, bit_off, bits) {
     if (!pop_only || pcpu_is_populated(chunk, bit_off, bits,
-    &next_off))
+    &next_off)) {
     break;
+    }
     bit_off = next_off;
     bits = 0;
     }
-    if (bit_off == pcpu_chunk_map_bits(chunk))
+    if (bit_off == pcpu_chunk_map_bits(chunk)) {
     return -1;
+    }
     return bit_off;
     }
 //
@@ -1088,23 +1343,18 @@ unsafe extern "C" fn pcpu_block_refresh_hint(chunk: *mut pcpu_chunk, index: c_in
 // lost to alignment.  While this can cause scanning to miss earlier possible
 // free areas, smaller allocations will eventually fill those holes.
 //
-    static unsigned long pcpu_find_zero_area(unsigned long *map,
-    unsigned long size,
-    unsigned long start,
-    unsigned long nr,
-    unsigned long align_mask,
-    unsigned long *largest_off,
-    unsigned long *largest_bits)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_find_zero_area(map: *mut c_ulong, size: c_ulong, start: c_ulong, nr: c_ulong, align_mask: c_ulong, largest_off: *mut c_ulong, largest_bits: *mut c_ulong) -> c_ulong {
     unsigned long index, end, i, area_off, area_bits;
-    again:
+// label;
     index = find_next_zero_bit(map, size, start);
 // Align allocation
     index = __ALIGN_MASK(index, align_mask);
     area_off = index;
     end = index + nr;
-    if (end > size)
+    if (end > size) {
     return end;
+    }
     i = find_next_bit(map, end, index);
     if (i < end) {
     area_bits = i - area_off;
@@ -1116,7 +1366,7 @@ unsafe extern "C" fn pcpu_block_refresh_hint(chunk: *mut pcpu_chunk, index: c_in
 // largest_bits = area_bits;
     }
     start = i + 1;
-    goto again;
+// goto;
     }
     return index;
     }
@@ -1139,13 +1389,14 @@ unsafe extern "C" fn pcpu_block_refresh_hint(chunk: *mut pcpu_chunk, index: c_in
 // Allocated addr offset in @chunk on success.
 // -1 if no matching area is found.
 //
-    static int pcpu_alloc_area(struct pcpu_chunk *chunk, int alloc_bits,
-    size_t align, int start)
-    {
-    struct pcpu_block_md *chunk_md = &chunk.chunk_md;
-    let mut align_mask: usize = (align) ? (align - 1) : 0;
-    let mut area_off: c_ulong = 0, area_bits = 0;
-    int bit_off, end, oslot;
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_alloc_area(chunk: *mut pcpu_chunk, alloc_bits: c_int, align: size_t, start: c_int) -> c_int {
+    let mut chunk_md = &chunk.chunk_md;
+pub static mut align_mask: usize = 0;
+pub static mut area_off: c_ulong = 0;
+    let mut bit_off = 0;
+    let mut end = 0;
+    let mut oslot = 0;
     lockdep_assert_held(&pcpu_lock);
     oslot = pcpu_chunk_slot(chunk);
 //
@@ -1155,10 +1406,12 @@ unsafe extern "C" fn pcpu_block_refresh_hint(chunk: *mut pcpu_chunk, index: c_in
     pcpu_chunk_map_bits(chunk));
     bit_off = pcpu_find_zero_area(chunk.alloc_map, end, start, alloc_bits,
     align_mask, &area_off, &area_bits);
-    if (bit_off >= end)
+    if (bit_off >= end) {
     return -1;
-    if (area_bits)
+    }
+    if (area_bits) {
     pcpu_block_update_scan(chunk, area_off, area_bits);
+    }
 // update alloc map
     bitmap_set(chunk.alloc_map, bit_off, alloc_bits);
 // update boundary map
@@ -1167,11 +1420,12 @@ unsafe extern "C" fn pcpu_block_refresh_hint(chunk: *mut pcpu_chunk, index: c_in
     set_bit(bit_off + alloc_bits, chunk.bound_map);
     chunk.free_bytes -= alloc_bits * PCPU_MIN_ALLOC_SIZE;
 // update first free bit
-    if (bit_off == chunk_md.first_free)
+    if (bit_off == chunk_md.first_free) {
     chunk_md.first_free = find_next_zero_bit(
     chunk.alloc_map,
     pcpu_chunk_map_bits(chunk),
     bit_off + alloc_bits);
+    }
     pcpu_block_update_hint_alloc(chunk, bit_off, alloc_bits);
     pcpu_chunk_relocate(chunk, oslot);
     return bit_off * PCPU_MIN_ALLOC_SIZE;
@@ -1189,17 +1443,20 @@ unsafe extern "C" fn pcpu_block_refresh_hint(chunk: *mut pcpu_chunk, index: c_in
 //
 #[no_mangle]
 unsafe extern "C" fn pcpu_free_area(chunk: *mut pcpu_chunk, off: c_int) -> c_int {
-    static int pcpu_free_area(struct pcpu_chunk *chunk, int off)
-    {
-    struct pcpu_block_md *chunk_md = &chunk.chunk_md;
-    int bit_off, bits, end, oslot, freed;
+    let mut chunk_md = &chunk.chunk_md;
+    let mut bit_off = 0;
+    let mut bits = 0;
+    let mut end = 0;
+    let mut oslot = 0;
+    let mut freed = 0;
     lockdep_assert_held(&pcpu_lock);
     oslot = pcpu_chunk_slot(chunk);
     bit_off = off / PCPU_MIN_ALLOC_SIZE;
 // check invalid free
     if (!test_bit(bit_off, chunk.alloc_map) ||
-    !test_bit(bit_off, chunk.bound_map))
+    !test_bit(bit_off, chunk.bound_map)) {
     return 0;
+    }
 // find end index
     end = find_next_bit(chunk.bound_map, pcpu_chunk_map_bits(chunk),
     bit_off + 1);
@@ -1217,8 +1474,6 @@ unsafe extern "C" fn pcpu_free_area(chunk: *mut pcpu_chunk, off: c_int) -> c_int
     }
 #[no_mangle]
 unsafe extern "C" fn pcpu_init_md_block(block: *mut pcpu_block_md, nr_bits: c_int) {
-    static void pcpu_init_md_block(struct pcpu_block_md *block, int nr_bits)
-    {
     block.scan_hint = 0;
     block.contig_hint = nr_bits;
     block.left_free = nr_bits;
@@ -1228,15 +1483,14 @@ unsafe extern "C" fn pcpu_init_md_block(block: *mut pcpu_block_md, nr_bits: c_in
     }
 #[no_mangle]
 unsafe extern "C" fn pcpu_init_md_blocks(chunk: *mut pcpu_chunk) {
-    static void pcpu_init_md_blocks(struct pcpu_chunk *chunk)
-    {
-    struct pcpu_block_md *md_block;
+pub static mut md_block: *mut c_void = core::ptr::null_mut();
 // init the chunk's block
     pcpu_init_md_block(&chunk.chunk_md, pcpu_chunk_map_bits(chunk));
     for (md_block = chunk.md_blocks;
     md_block != chunk.md_blocks + pcpu_chunk_nr_blocks(chunk);
-    md_block++)
+    md_block++) {
     pcpu_init_md_block(md_block, PCPU_BITMAP_BLOCK_BITS);
+    }
     }
 //
 // pcpu_alloc_first_chunk - creates chunks that serve the first chunk
@@ -1254,10 +1508,13 @@ unsafe extern "C" fn pcpu_init_md_blocks(chunk: *mut pcpu_chunk) {
     static struct pcpu_chunk * __init pcpu_alloc_first_chunk(unsigned long tmp_addr,
     int map_size)
     {
-    struct pcpu_chunk *chunk;
-    unsigned long aligned_addr;
-    int start_offset, offset_bits, region_size, region_bits;
-    size_t alloc_size;
+pub static mut chunk: *mut c_void = core::ptr::null_mut();
+    let mut aligned_addr = 0;
+    let mut start_offset = 0;
+    let mut offset_bits = 0;
+    let mut region_size = 0;
+    let mut region_bits = 0;
+    let mut alloc_size = 0;
 // region calculations
     aligned_addr = tmp_addr & PAGE_MASK;
     start_offset = tmp_addr - aligned_addr;
@@ -1267,17 +1524,17 @@ unsafe extern "C" fn pcpu_init_md_blocks(chunk: *mut pcpu_chunk) {
     BITS_TO_LONGS(region_size >> PAGE_SHIFT));
     chunk = memblock_alloc_or_panic(alloc_size, SMP_CACHE_BYTES);
     INIT_LIST_HEAD(&chunk.list);
-    chunk.base_addr = (void *)aligned_addr;
+    chunk.base_addr = aligned_addr;
     chunk.start_offset = start_offset;
     chunk.end_offset = region_size - chunk.start_offset - map_size;
     chunk.nr_pages = region_size >> PAGE_SHIFT;
     region_bits = pcpu_chunk_map_bits(chunk);
-    alloc_size = BITS_TO_LONGS(region_bits) * sizeof(chunk.alloc_map[0]);
+    alloc_size = BITS_TO_LONGS(region_bits) * sizeof!(chunk.alloc_map[0]);
     chunk.alloc_map = memblock_alloc_or_panic(alloc_size, SMP_CACHE_BYTES);
     alloc_size =
-    BITS_TO_LONGS(region_bits + 1) * sizeof(chunk.bound_map[0]);
+    BITS_TO_LONGS(region_bits + 1) * sizeof!(chunk.bound_map[0]);
     chunk.bound_map = memblock_alloc_or_panic(alloc_size, SMP_CACHE_BYTES);
-    alloc_size = pcpu_chunk_nr_blocks(chunk) * sizeof(chunk.md_blocks[0]);
+    alloc_size = pcpu_chunk_nr_blocks(chunk) * sizeof!(chunk.md_blocks[0]);
     chunk.md_blocks = memblock_alloc_or_panic(alloc_size, SMP_CACHE_BYTES);
 
 // first chunk is free to use
@@ -1313,35 +1570,40 @@ unsafe extern "C" fn pcpu_init_md_blocks(chunk: *mut pcpu_chunk) {
     }
     return chunk;
     }
-    static struct pcpu_chunk *pcpu_alloc_chunk(gfp_t gfp)
-    {
-    struct pcpu_chunk *chunk;
-    int region_bits;
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_alloc_chunk(gfp: gfp_t) -> *mut c_void {
+pub static mut chunk: *mut c_void = core::ptr::null_mut();
+    let mut region_bits = 0;
     chunk = pcpu_mem_zalloc(pcpu_chunk_struct_size, gfp);
-    if (!chunk)
+    if (!chunk) {
     return core::ptr::null_mut();
+    }
     INIT_LIST_HEAD(&chunk.list);
     chunk.nr_pages = pcpu_unit_pages;
     region_bits = pcpu_chunk_map_bits(chunk);
     chunk.alloc_map = pcpu_mem_zalloc(BITS_TO_LONGS(region_bits) *
-    sizeof(chunk.alloc_map[0]), gfp);
-    if (!chunk.alloc_map)
-    goto alloc_map_fail;
+    sizeof!(chunk.alloc_map[0]), gfp);
+    if (!chunk.alloc_map) {
+// goto;
+    }
     chunk.bound_map = pcpu_mem_zalloc(BITS_TO_LONGS(region_bits + 1) *
-    sizeof(chunk.bound_map[0]), gfp);
-    if (!chunk.bound_map)
-    goto bound_map_fail;
+    sizeof!(chunk.bound_map[0]), gfp);
+    if (!chunk.bound_map) {
+// goto;
+    }
     chunk.md_blocks = pcpu_mem_zalloc(pcpu_chunk_nr_blocks(chunk) *
-    sizeof(chunk.md_blocks[0]), gfp);
-    if (!chunk.md_blocks)
-    goto md_blocks_fail;
+    sizeof!(chunk.md_blocks[0]), gfp);
+    if (!chunk.md_blocks) {
+// goto;
+    }
 
     if (need_pcpuobj_ext()) {
     chunk.obj_exts =
     pcpu_mem_zalloc(pcpu_chunk_map_bits(chunk) *
-    sizeof(struct pcpuobj_ext), gfp);
-    if (!chunk.obj_exts)
-    goto objcg_fail;
+    sizeof!(pcpuobj_ext), gfp);
+    if (!chunk.obj_exts) {
+// goto;
+    }
     }
 
     pcpu_init_md_blocks(chunk);
@@ -1349,23 +1611,22 @@ unsafe extern "C" fn pcpu_init_md_blocks(chunk: *mut pcpu_chunk) {
     chunk.free_bytes = chunk.nr_pages * PAGE_SIZE;
     return chunk;
 
-    objcg_fail:
+// label;
     pcpu_mem_free(chunk.md_blocks);
 
-    md_blocks_fail:
+// label;
     pcpu_mem_free(chunk.bound_map);
-    bound_map_fail:
+// label;
     pcpu_mem_free(chunk.alloc_map);
-    alloc_map_fail:
+// label;
     pcpu_mem_free(chunk);
     return core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn pcpu_free_chunk(chunk: *mut pcpu_chunk) {
-    static void pcpu_free_chunk(struct pcpu_chunk *chunk)
-    {
-    if (!chunk)
+    if (!chunk) {
     return;
+    }
 
     pcpu_mem_free(chunk.obj_exts);
 
@@ -1384,10 +1645,9 @@ unsafe extern "C" fn pcpu_free_chunk(chunk: *mut pcpu_chunk) {
 // the bookkeeping information accordingly.  Must be called after each
 // successful population.
 //
-    static void pcpu_chunk_populated(struct pcpu_chunk *chunk, int page_start,
-    int page_end)
-    {
-    let mut nr: c_int = page_end - page_start;
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_chunk_populated(chunk: *mut pcpu_chunk, page_start: c_int, page_end: c_int) {
+pub static mut nr: c_int = 0;
     lockdep_assert_held(&pcpu_lock);
     bitmap_set(chunk.populated, page_start, nr);
     chunk.nr_populated += nr;
@@ -1404,10 +1664,9 @@ unsafe extern "C" fn pcpu_free_chunk(chunk: *mut pcpu_chunk) {
 // Update the bookkeeping information accordingly.  Must be called after
 // each successful depopulation.
 //
-    static void pcpu_chunk_depopulated(struct pcpu_chunk *chunk,
-    int page_start, int page_end)
-    {
-    let mut nr: c_int = page_end - page_start;
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_chunk_depopulated(chunk: *mut pcpu_chunk, page_start: c_int, page_end: c_int) {
+pub static mut nr: c_int = 0;
     lockdep_assert_held(&pcpu_lock);
     bitmap_clear(chunk.populated, page_start, nr);
     chunk.nr_populated -= nr;
@@ -1430,15 +1689,12 @@ unsafe extern "C" fn pcpu_free_chunk(chunk: *mut pcpu_chunk) {
 // pcpu_addr_to_page		- translate address to physical address
 // pcpu_verify_alloc_info	- check alloc_info is acceptable during init
 //
-    static int pcpu_populate_chunk(struct pcpu_chunk *chunk,
-    int page_start, int page_end, gfp_t gfp);
-    static void pcpu_depopulate_chunk(struct pcpu_chunk *chunk,
-    int page_start, int page_end);
-    static void pcpu_post_unmap_tlb_flush(struct pcpu_chunk *chunk,
-    int page_start, int page_end);
-    static struct pcpu_chunk *pcpu_create_chunk(gfp_t gfp);
-    static void pcpu_destroy_chunk(struct pcpu_chunk *chunk);
-    static struct page *pcpu_addr_to_page(void *addr);
+// forward_decl: pcpu_populate_chunk;
+// forward_decl: pcpu_depopulate_chunk;
+// forward_decl: pcpu_post_unmap_tlb_flush;
+// forward_decl: pcpu_create_chunk;
+// forward_decl: pcpu_destroy_chunk;
+// forward_decl: pcpu_addr_to_page;
     static int __init pcpu_verify_alloc_info(const struct pcpu_alloc_info *ai);
 
 //
@@ -1451,14 +1707,16 @@ unsafe extern "C" fn pcpu_free_chunk(chunk: *mut pcpu_chunk) {
 // RETURNS:
 // The address of the found chunk.
 //
-    static struct pcpu_chunk *pcpu_chunk_addr_search(void *addr)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_chunk_addr_search(addr: *mut c_void) -> *mut c_void {
 // is it in the dynamic region (first chunk)?
-    if (pcpu_addr_in_chunk(pcpu_first_chunk, addr))
+    if (pcpu_addr_in_chunk(pcpu_first_chunk, addr)) {
     return pcpu_first_chunk;
+    }
 // is it in the reserved region?
-    if (pcpu_addr_in_chunk(pcpu_reserved_chunk, addr))
+    if (pcpu_addr_in_chunk(pcpu_reserved_chunk, addr)) {
     return pcpu_reserved_chunk;
+    }
 //
 // The address is relative to unit0 which might be unused and
 // thus unmapped.  Offset the address to the unit space of the
@@ -1470,26 +1728,27 @@ unsafe extern "C" fn pcpu_free_chunk(chunk: *mut pcpu_chunk) {
     return pcpu_get_page_chunk(pcpu_addr_to_page(addr));
     }
 
-    static bool pcpu_memcg_pre_alloc_hook(size_t size, gfp_t gfp,
-    struct obj_cgroup **objcgp)
-    {
-    struct obj_cgroup *objcg;
-    if (!memcg_kmem_online() || !(gfp & __GFP_ACCOUNT))
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_memcg_pre_alloc_hook(size: size_t, gfp: gfp_t, objcgp: *mut *mut obj_cgroup) -> bool {
+pub static mut objcg: *mut c_void = core::ptr::null_mut();
+    if (!memcg_kmem_online() || !(gfp & __GFP_ACCOUNT)) {
     return true;
+    }
     objcg = current_obj_cgroup();
-    if (!objcg || obj_cgroup_is_root(objcg))
+    if (!objcg || obj_cgroup_is_root(objcg)) {
     return true;
-    if (obj_cgroup_charge(objcg, gfp, pcpu_obj_full_size(size)))
+    }
+    if (obj_cgroup_charge(objcg, gfp, pcpu_obj_full_size(size))) {
     return false;
+    }
 // objcgp = objcg;
     return true;
     }
-    static void pcpu_memcg_post_alloc_hook(struct obj_cgroup *objcg,
-    struct pcpu_chunk *chunk, int off,
-    size_t size)
-    {
-    if (!objcg)
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_memcg_post_alloc_hook(objcg: *mut obj_cgroup, chunk: *mut pcpu_chunk, off: c_int, size: size_t) {
+    if (!objcg) {
     return;
+    }
     if (likely(chunk && chunk.obj_exts)) {
     obj_cgroup_get(objcg);
     chunk.obj_exts[off >> PCPU_MIN_ALLOC_SHIFT].cgroup = objcg;
@@ -1503,14 +1762,14 @@ unsafe extern "C" fn pcpu_free_chunk(chunk: *mut pcpu_chunk) {
     }
 #[no_mangle]
 unsafe extern "C" fn pcpu_memcg_free_hook(chunk: *mut pcpu_chunk, off: c_int, size: usize) {
-    static void pcpu_memcg_free_hook(struct pcpu_chunk *chunk, int off, size_t size)
-    {
-    struct obj_cgroup *objcg;
-    if (unlikely(!chunk.obj_exts))
+pub static mut objcg: *mut c_void = core::ptr::null_mut();
+    if (unlikely(!chunk.obj_exts)) {
     return;
+    }
     objcg = chunk.obj_exts[off >> PCPU_MIN_ALLOC_SHIFT].cgroup;
-    if (!objcg)
+    if (!objcg) {
     return;
+    }
     chunk.obj_exts[off >> PCPU_MIN_ALLOC_SHIFT].cgroup = core::ptr::null_mut();
     obj_cgroup_uncharge(objcg, pcpu_obj_full_size(size));
     rcu_read_lock();
@@ -1520,25 +1779,23 @@ unsafe extern "C" fn pcpu_memcg_free_hook(chunk: *mut pcpu_chunk, off: c_int, si
     obj_cgroup_put(objcg);
     }
 
-    static bool
-    pcpu_memcg_pre_alloc_hook(size_t size, gfp_t gfp, struct obj_cgroup **objcgp)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: pcpu_memcg_pre_alloc_hook
+pub unsafe extern "C" fn pcpu_memcg_pre_alloc_hook_dup(size: size_t, gfp: gfp_t, objcgp: *mut *mut obj_cgroup) -> bool {
     return true;
     }
-    static void pcpu_memcg_post_alloc_hook(struct obj_cgroup *objcg,
-    struct pcpu_chunk *chunk, int off,
-    size_t size)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: pcpu_memcg_post_alloc_hook
+pub unsafe extern "C" fn pcpu_memcg_post_alloc_hook_dup(objcg: *mut obj_cgroup, chunk: *mut pcpu_chunk, off: c_int, size: size_t) {
     }
 #[no_mangle]
 unsafe extern "C" fn pcpu_memcg_free_hook(chunk: *mut pcpu_chunk, off: c_int, size: usize) {
-    static void pcpu_memcg_free_hook(struct pcpu_chunk *chunk, int off, size_t size)
-    {
     }
 
-    static void pcpu_alloc_tag_alloc_hook(struct pcpu_chunk *chunk, int off,
-    size_t size)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_alloc_tag_alloc_hook(chunk: *mut pcpu_chunk, off: c_int, size: size_t) {
     if (mem_alloc_profiling_enabled() && likely(chunk.obj_exts)) {
     alloc_tag_add(&chunk.obj_exts[off >> PCPU_MIN_ALLOC_SHIFT].tag,
     current.alloc_tag, size);
@@ -1546,20 +1803,18 @@ unsafe extern "C" fn pcpu_memcg_free_hook(chunk: *mut pcpu_chunk, off: c_int, si
     }
 #[no_mangle]
 unsafe extern "C" fn pcpu_alloc_tag_free_hook(chunk: *mut pcpu_chunk, off: c_int, size: usize) {
-    static void pcpu_alloc_tag_free_hook(struct pcpu_chunk *chunk, int off, size_t size)
-    {
-    if (mem_alloc_profiling_enabled() && likely(chunk.obj_exts))
+    if (mem_alloc_profiling_enabled() && likely(chunk.obj_exts)) {
     alloc_tag_sub(&chunk.obj_exts[off >> PCPU_MIN_ALLOC_SHIFT].tag, size);
     }
+    }
 
-    static void pcpu_alloc_tag_alloc_hook(struct pcpu_chunk *chunk, int off,
-    size_t size)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: pcpu_alloc_tag_alloc_hook
+pub unsafe extern "C" fn pcpu_alloc_tag_alloc_hook_dup(chunk: *mut pcpu_chunk, off: c_int, size: size_t) {
     }
 #[no_mangle]
 unsafe extern "C" fn pcpu_alloc_tag_free_hook(chunk: *mut pcpu_chunk, off: c_int, size: usize) {
-    static void pcpu_alloc_tag_free_hook(struct pcpu_chunk *chunk, int off, size_t size)
-    {
     }
 
 //
@@ -1576,19 +1831,23 @@ unsafe extern "C" fn pcpu_alloc_tag_free_hook(chunk: *mut pcpu_chunk, off: c_int
 // RETURNS:
 // Percpu pointer to the allocated area on success, NULL on failure.
 //
-    void __percpu *pcpu_alloc_noprof(size_t size, size_t align, bool reserved,
+    void  *pcpu_alloc_noprof(size_t size, size_t align, bool reserved,
     gfp_t gfp)
     {
-    gfp_t pcpu_gfp;
-    bool is_atomic;
-    bool do_warn;
-    struct obj_cgroup *objcg = core::ptr::null_mut();
-    let mut warn_limit: static atomic_t = ATOMIC_INIT(10);
-    struct pcpu_chunk *chunk, *next;
-    const char *err;
-    int slot, off, cpu, ret;
-    unsigned long flags;
-    void __percpu *ptr;
+    let mut pcpu_gfp;
+    let mut is_atomic = 0;
+    let mut do_warn = 0;
+    let mut objcg = core::ptr::null_mut();
+pub static mut warn_limit: atomic_t = 0;
+    let mut chunk = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+pub static mut err: *mut c_void = core::ptr::null_mut();
+    let mut slot = 0;
+    let mut off = 0;
+    let mut cpu = 0;
+    let mut ret = 0;
+    let mut flags = 0;
+    let mut ptr = core::ptr::null_mut();
     size_t bits, bit_align;
     gfp = current_gfp_context(gfp);
 //
@@ -1610,8 +1869,9 @@ unsafe extern "C" fn pcpu_alloc_tag_free_hook(chunk: *mut pcpu_chunk, off: c_int
 // An allocation may have internal fragmentation from rounding up
 // of up to PCPU_MIN_ALLOC_SIZE - 1 bytes.
 //
-    if (unlikely(align < PCPU_MIN_ALLOC_SIZE))
+    if (unlikely(align < PCPU_MIN_ALLOC_SIZE)) {
     align = PCPU_MIN_ALLOC_SIZE;
+    }
     size = ALIGN(size, PCPU_MIN_ALLOC_SIZE);
     bits = size >> PCPU_MIN_ALLOC_SHIFT;
     bit_align = align >> PCPU_MIN_ALLOC_SHIFT;
@@ -1621,8 +1881,9 @@ unsafe extern "C" fn pcpu_alloc_tag_free_hook(chunk: *mut pcpu_chunk, off: c_int
     size, align);
     return core::ptr::null_mut();
     }
-    if (unlikely(!pcpu_memcg_pre_alloc_hook(size, gfp, &objcg)))
+    if (unlikely(!pcpu_memcg_pre_alloc_hook(size, gfp, &objcg))) {
     return core::ptr::null_mut();
+    }
     if (!is_atomic) {
 //
 // pcpu_balance_workfn() allocates memory under this mutex,
@@ -1643,69 +1904,74 @@ unsafe extern "C" fn pcpu_alloc_tag_free_hook(chunk: *mut pcpu_chunk, off: c_int
     off = pcpu_find_block_fit(chunk, bits, bit_align, is_atomic);
     if (off < 0) {
     err = "alloc from reserved chunk failed";
-    goto fail_unlock;
+// goto;
     }
     off = pcpu_alloc_area(chunk, bits, bit_align, off);
-    if (off >= 0)
-    goto area_found;
-    err = "alloc from reserved chunk failed";
-    goto fail_unlock;
+    if (off >= 0) {
+// goto;
     }
-    restart:
+    err = "alloc from reserved chunk failed";
+// goto;
+    }
+// label;
 // search through normal chunks
-    for (slot = pcpu_size_to_slot(size); slot <= pcpu_free_slot; slot++) {
+    while (slot <= pcpu_free_slot) {
     list_for_each_entry_safe(chunk, next, &pcpu_chunk_lists[slot],
     list) {
     off = pcpu_find_block_fit(chunk, bits, bit_align,
     is_atomic);
     if (off < 0) {
-    if (slot < PCPU_SLOT_FAIL_THRESHOLD)
+    if (slot < PCPU_SLOT_FAIL_THRESHOLD) {
     pcpu_chunk_move(chunk, 0);
+    }
     continue;
     }
     off = pcpu_alloc_area(chunk, bits, bit_align, off);
     if (off >= 0) {
     pcpu_reintegrate_chunk(chunk);
-    goto area_found;
+// goto;
     }
     }
     }
     spin_unlock_irqrestore(&pcpu_lock, flags);
     if (is_atomic) {
     err = "atomic alloc failed, no space left";
-    goto fail;
+// goto;
     }
 // No space left.  Create a new chunk.
     if (list_empty(&pcpu_chunk_lists[pcpu_free_slot])) {
     chunk = pcpu_create_chunk(pcpu_gfp);
     if (!chunk) {
     err = "failed to allocate new chunk";
-    goto fail;
+// goto;
     }
     spin_lock_irqsave(&pcpu_lock, flags);
     pcpu_chunk_relocate(chunk, -1);
     } else {
     spin_lock_irqsave(&pcpu_lock, flags);
     }
-    goto restart;
-    area_found:
+// goto;
+// label;
     pcpu_stats_area_alloc(chunk, size);
-    if (pcpu_nr_empty_pop_pages < PCPU_EMPTY_POP_PAGES_LOW)
+    if (pcpu_nr_empty_pop_pages < PCPU_EMPTY_POP_PAGES_LOW) {
     pcpu_schedule_balance_work();
+    }
     spin_unlock_irqrestore(&pcpu_lock, flags);
 // populate if not all pages are already there
     if (!is_atomic) {
-    unsigned int page_end, rs, re;
+    let mut page_end = 0;
+    let mut rs = 0;
+    let mut re = 0;
     rs = PFN_DOWN(off);
     page_end = PFN_UP(off + size);
     for_each_clear_bitrange_from(rs, re, chunk.populated, page_end) {
-    WARN_ON(chunk.immutable);
+    WARN_ON!(chunk.immutable);
     ret = pcpu_populate_chunk(chunk, rs, re, pcpu_gfp);
     spin_lock_irqsave(&pcpu_lock, flags);
     if (ret) {
     pcpu_free_area(chunk, off);
     err = "failed to populate";
-    goto fail_unlock;
+// goto;
     }
     pcpu_chunk_populated(chunk, rs, re);
     spin_unlock_irqrestore(&pcpu_lock, flags);
@@ -1713,8 +1979,9 @@ unsafe extern "C" fn pcpu_alloc_tag_free_hook(chunk: *mut pcpu_chunk, off: c_int
     mutex_unlock(&pcpu_alloc_mutex);
     }
 // clear the areas and return address relative to base address
-    for_each_possible_cpu(cpu)
-    memset((void *)pcpu_chunk_addr(chunk, cpu, 0) + off, 0, size);
+    for_each_possible_cpu(cpu) {
+    memset(pcpu_chunk_addr(chunk, cpu, 0) + off, 0, size);
+    }
     ptr = __addr_to_pcpu_ptr(chunk.base_addr + off);
     kmemleak_alloc_percpu(ptr, size, gfp);
     trace_percpu_alloc_percpu(_RET_IP_, reserved, is_atomic, size, align,
@@ -1723,19 +1990,21 @@ unsafe extern "C" fn pcpu_alloc_tag_free_hook(chunk: *mut pcpu_chunk, off: c_int
     pcpu_memcg_post_alloc_hook(objcg, chunk, off, size);
     pcpu_alloc_tag_alloc_hook(chunk, off, size);
     return ptr;
-    fail_unlock:
+// label;
     spin_unlock_irqrestore(&pcpu_lock, flags);
-    fail:
+// label;
     trace_percpu_alloc_percpu_fail(reserved, is_atomic, size, align);
     if (do_warn) {
-    let mut remaining: c_int = atomic_dec_if_positive(&warn_limit);
+pub static mut remaining: c_int = 0;
     if (remaining >= 0) {
-    pr_warn("allocation failed, size=%zu align=%zu atomic=%d, %s\n",
+    pr_warn!("allocation failed, size=%zu align=%zu atomic=%d, %s\n",
     size, align, is_atomic, err);
-    if (!is_atomic)
+    if (!is_atomic) {
     dump_stack();
-    if (remaining == 0)
-    pr_info("limit reached, disable warning\n");
+    }
+    if (remaining == 0) {
+    pr_info!("limit reached, disable warning\n");
+    }
     }
     }
     if (is_atomic) {
@@ -1762,29 +2031,32 @@ unsafe extern "C" fn pcpu_alloc_tag_free_hook(chunk: *mut pcpu_chunk, off: c_int
 //
 #[no_mangle]
 unsafe extern "C" fn pcpu_balance_free(empty_only: bool) {
-    static void pcpu_balance_free(bool empty_only)
-    {
-    LIST_HEAD(to_free);
-    struct list_head *free_head = &pcpu_chunk_lists[pcpu_free_slot];
-    struct pcpu_chunk *chunk, *next;
+pub static mut to_free: usize = 0;
+    let mut free_head = &pcpu_chunk_lists[pcpu_free_slot];
+    let mut chunk = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
     lockdep_assert_held(&pcpu_lock);
 //
 // There's no reason to keep around multiple unused chunks and VM
 // areas can be scarce.  Destroy all free chunks except for one.
 //
     list_for_each_entry_safe(chunk, next, free_head, list) {
-    WARN_ON(chunk.immutable);
+    WARN_ON!(chunk.immutable);
 // spare the first one
-    if (chunk == list_first_entry(free_head, struct pcpu_chunk, list))
+    if (chunk == list_first_entry(free_head, pcpu_chunk, list)) {
     continue;
-    if (!empty_only || chunk.nr_empty_pop_pages == 0)
+    }
+    if (!empty_only || chunk.nr_empty_pop_pages == 0) {
     list_move(&chunk.list, &to_free);
     }
-    if (list_empty(&to_free))
+    }
+    if (list_empty(&to_free)) {
     return;
+    }
     spin_unlock_irq(&pcpu_lock);
     list_for_each_entry_safe(chunk, next, &to_free, list) {
-    unsigned int rs, re;
+    let mut rs = 0;
+    let mut re = 0;
     for_each_set_bitrange(rs, re, chunk.populated, chunk.nr_pages) {
     pcpu_depopulate_chunk(chunk, rs, re);
     spin_lock_irq(&pcpu_lock);
@@ -1810,12 +2082,12 @@ unsafe extern "C" fn pcpu_balance_free(empty_only: bool) {
 //
 #[no_mangle]
 unsafe extern "C" fn pcpu_balance_populated() {
-    static void pcpu_balance_populated(void)
-    {
 // gfp flags passed to underlying allocators
-    let mut gfp: gfp_t = GFP_KERNEL | __GFP_NORETRY | __GFP_NOWARN;
-    struct pcpu_chunk *chunk;
-    int slot, nr_to_pop, ret;
+pub static mut gfp: gfp_t = 0;
+pub static mut chunk: *mut c_void = core::ptr::null_mut();
+    let mut slot = 0;
+    let mut nr_to_pop = 0;
+    let mut ret = 0;
     lockdep_assert_held(&pcpu_lock);
 //
 // Ensure there are certain number of free populated pages for
@@ -1827,7 +2099,7 @@ unsafe extern "C" fn pcpu_balance_populated() {
 // something we support properly and can be highly unreliable and
 // inefficient.
 //
-    retry_pop:
+// label;
     if (pcpu_atomic_alloc_failed) {
     nr_to_pop = PCPU_EMPTY_POP_PAGES_HIGH;
 // best effort anyway, don't worry about synchronization
@@ -1837,20 +2109,23 @@ unsafe extern "C" fn pcpu_balance_populated() {
     pcpu_nr_empty_pop_pages,
     0, PCPU_EMPTY_POP_PAGES_HIGH);
     }
-    for (slot = pcpu_size_to_slot(PAGE_SIZE); slot <= pcpu_free_slot; slot++) {
-    let mut nr_unpop: c_uint = 0, rs, re;
-    if (!nr_to_pop)
-    break;
-    list_for_each_entry(chunk, &pcpu_chunk_lists[slot], list) {
-    nr_unpop = chunk.nr_pages - chunk.nr_populated;
-    if (nr_unpop)
+    while (slot <= pcpu_free_slot) {
+pub static mut nr_unpop: c_uint = 0;
+    if (!nr_to_pop) {
     break;
     }
-    if (!nr_unpop)
+    list_for_each_entry(chunk, &pcpu_chunk_lists[slot], list) {
+    nr_unpop = chunk.nr_pages - chunk.nr_populated;
+    if (nr_unpop) {
+    break;
+    }
+    }
+    if (!nr_unpop) {
     continue;
+    }
 // @chunk can't go away while pcpu_alloc_mutex is held
     for_each_clear_bitrange(rs, re, chunk.populated, chunk.nr_pages) {
-    let mut nr: c_int = min_t(int, re - rs, nr_to_pop);
+pub static mut nr: c_int = 0;
     spin_unlock_irq(&pcpu_lock);
     ret = pcpu_populate_chunk(chunk, rs, rs + nr, gfp);
     cond_resched();
@@ -1861,8 +2136,9 @@ unsafe extern "C" fn pcpu_balance_populated() {
     } else {
     nr_to_pop = 0;
     }
-    if (!nr_to_pop)
+    if (!nr_to_pop) {
     break;
+    }
     }
     }
     if (nr_to_pop) {
@@ -1873,7 +2149,7 @@ unsafe extern "C" fn pcpu_balance_populated() {
     spin_lock_irq(&pcpu_lock);
     if (chunk) {
     pcpu_chunk_relocate(chunk, -1);
-    goto retry_pop;
+// goto;
     }
     }
     }
@@ -1893,13 +2169,13 @@ unsafe extern "C" fn pcpu_balance_populated() {
 //
 #[no_mangle]
 unsafe extern "C" fn pcpu_reclaim_populated() {
-    static void pcpu_reclaim_populated(void)
-    {
-    struct pcpu_chunk *chunk;
-    struct pcpu_block_md *block;
-    int freed_page_start, freed_page_end;
-    int i, end;
-    bool reintegrate;
+pub static mut chunk: *mut c_void = core::ptr::null_mut();
+pub static mut block: *mut c_void = core::ptr::null_mut();
+    let mut freed_page_start = 0;
+    let mut freed_page_end = 0;
+    let mut i = 0;
+    let mut end = 0;
+    let mut reintegrate = 0;
     lockdep_assert_held(&pcpu_lock);
 //
 // Once a chunk is isolated to the to_depopulate list, the chunk is no
@@ -1908,9 +2184,8 @@ unsafe extern "C" fn pcpu_reclaim_populated() {
 // allocator not touching the populated bitmap.
 //
     while ((chunk = list_first_entry_or_null(
-    &pcpu_chunk_lists[pcpu_to_depopulate_slot],
-    struct pcpu_chunk, list))) {
-    WARN_ON(chunk.immutable);
+    &pcpu_chunk_lists[pcpu_to_depopulate_slot], pcpu_chunk, list))) {
+    WARN_ON!(chunk.immutable);
 //
 // Scan chunk's pages in the reverse order to keep populated
 // pages close to the beginning of the chunk.
@@ -1918,10 +2193,11 @@ unsafe extern "C" fn pcpu_reclaim_populated() {
     freed_page_start = chunk.nr_pages;
     freed_page_end = 0;
     reintegrate = false;
-    for (i = chunk.nr_pages - 1, end = -1; i >= 0; i--) {
+    while (i >= 0) {
 // no more work to do
-    if (chunk.nr_empty_pop_pages == 0)
+    if (chunk.nr_empty_pop_pages == 0) {
     break;
+    }
 // reintegrate chunk to prevent atomic alloc failures
     if (pcpu_nr_empty_pop_pages < PCPU_EMPTY_POP_PAGES_HIGH) {
     reintegrate = true;
@@ -1936,15 +2212,18 @@ unsafe extern "C" fn pcpu_reclaim_populated() {
     block = chunk.md_blocks + i;
     if (block.contig_hint == PCPU_BITMAP_BLOCK_BITS &&
     test_bit(i, chunk.populated)) {
-    if (end == -1)
+    if (end == -1) {
     end = i;
-    if (i > 0)
+    }
+    if (i > 0) {
     continue;
-    i--;
+    }
+    i -= 1;
     }
 // depopulate if there is an active range
-    if (end == -1)
+    if (end == -1) {
     continue;
+    }
     spin_unlock_irq(&pcpu_lock);
     pcpu_depopulate_chunk(chunk, i + 1, end + 1);
     cond_resched();
@@ -1964,11 +2243,13 @@ unsafe extern "C" fn pcpu_reclaim_populated() {
     cond_resched();
     spin_lock_irq(&pcpu_lock);
     }
-    if (reintegrate || chunk.free_bytes == pcpu_unit_size)
+    if (reintegrate || chunk.free_bytes == pcpu_unit_size) {
     pcpu_reintegrate_chunk(chunk);
-    else
+    }
+    else {
     list_move_tail(&chunk.list,
     &pcpu_chunk_lists[pcpu_sidelined_slot]);
+    }
     }
     }
 //
@@ -1981,8 +2262,6 @@ unsafe extern "C" fn pcpu_reclaim_populated() {
 //
 #[no_mangle]
 unsafe extern "C" fn pcpu_balance_workfn(work: *mut work_struct) {
-    static void pcpu_balance_workfn(struct work_struct *work)
-    {
 //
 // pcpu_balance_free() is called twice because the first time we may
 // trim pages in the active pcpu_nr_empty_pop_pages which may cause us
@@ -1994,7 +2273,7 @@ unsafe extern "C" fn pcpu_balance_workfn(work: *mut work_struct) {
 // constrained to GFP_NOIO/NOFS contexts and they could form lock
 // dependency through pcpu_alloc_mutex
 //
-    let mut flags: c_uint = memalloc_noio_save();
+pub static mut flags: c_uint = 0;
     mutex_lock(&pcpu_alloc_mutex);
     spin_lock_irq(&pcpu_lock);
     pcpu_balance_free(false);
@@ -2015,16 +2294,16 @@ unsafe extern "C" fn pcpu_balance_workfn(work: *mut work_struct) {
 // Can be called from atomic context.
 //
 #[no_mangle]
-pub unsafe extern "C" fn free_percpu(ptr: *mut void __percpu) {
-    void free_percpu(void __percpu *ptr)
-    {
-    void *addr;
-    struct pcpu_chunk *chunk;
-    unsigned long flags;
-    int size, off;
-    let mut need_balance: bool = false;
-    if (!ptr)
+pub unsafe extern "C" fn free_percpu(ptr: *mut c_void ) {
+pub static mut addr: *mut c_void = core::ptr::null_mut();
+pub static mut chunk: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut size = 0;
+    let mut off = 0;
+pub static mut need_balance: bool = false;
+    if (!ptr) {
     return;
+    }
     kmemleak_free_percpu(ptr);
     addr = __pcpu_ptr_to_addr(ptr);
     chunk = pcpu_chunk_addr_search(addr);
@@ -2034,7 +2313,7 @@ pub unsafe extern "C" fn free_percpu(ptr: *mut void __percpu) {
     if (size == 0) {
     spin_unlock_irqrestore(&pcpu_lock, flags);
 // invalid percpu free
-    WARN_ON_ONCE(1);
+    WARN_ON_ONCE!(1);
     return;
     }
     pcpu_alloc_tag_free_hook(chunk, off, size);
@@ -2045,9 +2324,10 @@ pub unsafe extern "C" fn free_percpu(ptr: *mut void __percpu) {
 // reclaimed.  Let reclaim manage cleaning up of that chunk.
 //
     if (!chunk.isolated && chunk.free_bytes == pcpu_unit_size) {
-    struct pcpu_chunk *pos;
-    list_for_each_entry(pos, &pcpu_chunk_lists[pcpu_free_slot], list)
+pub static mut pos: *mut c_void = core::ptr::null_mut();
+    list_for_each_entry(pos, &pcpu_chunk_lists[pcpu_free_slot], list) {
     if (pos != chunk) {
+    }
     need_balance = true;
     break;
     }
@@ -2057,21 +2337,20 @@ pub unsafe extern "C" fn free_percpu(ptr: *mut void __percpu) {
     }
     trace_percpu_free_percpu(chunk.base_addr, off, ptr);
     spin_unlock_irqrestore(&pcpu_lock, flags);
-    if (need_balance)
+    if (need_balance) {
     pcpu_schedule_balance_work();
+    }
     }
     EXPORT_SYMBOL_GPL(free_percpu);
 #[no_mangle]
 pub unsafe extern "C" fn __is_kernel_percpu_address(addr: c_ulong, can_addr: *mut c_ulong) -> bool {
-    bool __is_kernel_percpu_address(unsigned long addr, unsigned long *can_addr)
-    {
 
-    let mut static_size: usize = __per_cpu_end - __per_cpu_start;
-    void __percpu *base = __addr_to_pcpu_ptr(pcpu_base_addr);
-    unsigned int cpu;
+pub static mut static_size: usize = 0;
+    let mut base = __addr_to_pcpu_ptr(pcpu_base_addr);
+    let mut cpu = 0;
     for_each_possible_cpu(cpu) {
-    void *start = per_cpu_ptr(base, cpu);
-    void *va = (void *)addr;
+    let mut start = per_cpu_ptr(base, cpu);
+    let mut va = addr;
     if (va >= start && va < start + static_size) {
     if (can_addr) {
 // can_addr = (unsigned long) (va - start);
@@ -2098,8 +2377,6 @@ pub unsafe extern "C" fn __is_kernel_percpu_address(addr: c_ulong, can_addr: *mu
 //
 #[no_mangle]
 pub unsafe extern "C" fn is_kernel_percpu_address(addr: c_ulong) -> bool {
-    bool is_kernel_percpu_address(unsigned long addr)
-    {
     return __is_kernel_percpu_address(addr, core::ptr::null_mut());
     }
 //
@@ -2127,12 +2404,10 @@ pub unsafe extern "C" fn is_kernel_percpu_address(addr: c_ulong) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn per_cpu_ptr_to_phys(addr: *mut c_void) -> phys_addr_t {
-    phys_addr_t per_cpu_ptr_to_phys(void *addr)
-    {
-    void __percpu *base = __addr_to_pcpu_ptr(pcpu_base_addr);
-    let mut in_first_chunk: bool = false;
+    let mut base = __addr_to_pcpu_ptr(pcpu_base_addr);
+pub static mut in_first_chunk: bool = false;
     unsigned long first_low, first_high;
-    unsigned int cpu;
+    let mut cpu = 0;
 //
 // The following test on unit_low/high isn't strictly
 // necessary but will speed up lookups of addresses which
@@ -2150,7 +2425,7 @@ pub unsafe extern "C" fn per_cpu_ptr_to_phys(addr: *mut c_void) -> phys_addr_t {
     if ((unsigned long)addr >= first_low &&
     (unsigned long)addr < first_high) {
     for_each_possible_cpu(cpu) {
-    void *start = per_cpu_ptr(base, cpu);
+    let mut start = per_cpu_ptr(base, cpu);
     if (addr >= start && addr < start + pcpu_unit_size) {
     in_first_chunk = true;
     break;
@@ -2158,14 +2433,17 @@ pub unsafe extern "C" fn per_cpu_ptr_to_phys(addr: *mut c_void) -> phys_addr_t {
     }
     }
     if (in_first_chunk) {
-    if (!is_vmalloc_addr(addr))
+    if (!is_vmalloc_addr(addr)) {
     return __pa(addr);
-    else
+    }
+    else {
     return page_to_phys(vmalloc_to_page(addr)) +
     offset_in_page(addr);
-    } else
+    }
+    } else {
     return page_to_phys(pcpu_addr_to_page(addr)) +
     offset_in_page(addr);
+    }
     }
 //
 // pcpu_alloc_alloc_info - allocate percpu allocation info
@@ -2185,21 +2463,23 @@ pub unsafe extern "C" fn per_cpu_ptr_to_phys(addr: *mut c_void) -> phys_addr_t {
     struct pcpu_alloc_info * __init pcpu_alloc_alloc_info(int nr_groups,
     int nr_units)
     {
-    struct pcpu_alloc_info *ai;
+pub static mut ai: *mut c_void = core::ptr::null_mut();
     size_t base_size, ai_size;
-    void *ptr;
-    int unit;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+    let mut unit = 0;
     base_size = ALIGN(struct_size(ai, groups, nr_groups),
     __alignof__(ai.groups[0].cpu_map[0]));
-    ai_size = base_size + nr_units * sizeof(ai.groups[0].cpu_map[0]);
+    ai_size = base_size + nr_units * sizeof!(ai.groups[0].cpu_map[0]);
     ptr = memblock_alloc(PFN_ALIGN(ai_size), PAGE_SIZE);
-    if (!ptr)
+    if (!ptr) {
     return core::ptr::null_mut();
+    }
     ai = ptr;
     ptr += base_size;
     ai.groups[0].cpu_map = ptr;
-    for (unit = 0; unit < nr_units; unit++)
+    for (unit = 0; unit < nr_units; unit++) {
     ai.groups[0].cpu_map[unit] = NR_CPUS;
+    }
     ai.nr_groups = nr_groups;
     ai.__ai_size = PFN_ALIGN(ai_size);
     return ai;
@@ -2211,9 +2491,7 @@ pub unsafe extern "C" fn per_cpu_ptr_to_phys(addr: *mut c_void) -> phys_addr_t {
 // Free @ai which was allocated by pcpu_alloc_alloc_info().
 //
 #[no_mangle]
-pub unsafe extern "C" fn pcpu_free_alloc_info(ai: *mut pcpu_alloc_info) -> void __init {
-    void __init pcpu_free_alloc_info(struct pcpu_alloc_info *ai)
-    {
+pub unsafe extern "C" fn pcpu_free_alloc_info(ai: *mut pcpu_alloc_info)  {
     memblock_free(ai, ai.__ai_size);
     }
 //
@@ -2223,44 +2501,48 @@ pub unsafe extern "C" fn pcpu_free_alloc_info(ai: *mut pcpu_alloc_info) -> void 
 //
 // Print out information about @ai using loglevel @lvl.
 //
-    static void pcpu_dump_alloc_info(const char *lvl,
-    const struct pcpu_alloc_info *ai)
-    {
-    let mut group_width: c_int = 1, cpu_width = 1, width;
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_dump_alloc_info(lvl: *mut c_char, ai: *mut pcpu_alloc_info) {
+pub static mut group_width: c_int = 0;
     char empty_str[] = "--------";
-    let mut alloc: c_int = 0, alloc_end = 0;
-    int group, v;
-    int upa, apl;	/* units per alloc, allocs per line */
+pub static mut alloc: c_int = 0;
+    let mut group = 0;
+    let mut v = 0;
+    let mut upa = 0;
+    let mut apl = 0;	/* units per alloc, allocs per line */
     v = ai.nr_groups;
-    while (v /= 10)
-    group_width++;
+    while (v /= 10) {
+    group_width += 1;
+    }
     v = num_possible_cpus();
-    while (v /= 10)
-    cpu_width++;
-    empty_str[min_t(int, cpu_width, sizeof(empty_str) - 1)] = '\0';
+    while (v /= 10) {
+    cpu_width += 1;
+    }
+    empty_str[min_t(int, cpu_width, sizeof!(empty_str) - 1)] = '\0';
     upa = ai.alloc_size / ai.unit_size;
     width = upa * (cpu_width + 1) + group_width + 3;
     apl = rounddown_pow_of_two(max(60 / width, 1));
     printk("%spcpu-alloc: s%zu r%zu d%zu u%zu alloc=%zu*%zu",
     lvl, ai.static_size, ai.reserved_size, ai.dyn_size,
     ai.unit_size, ai.alloc_size / ai.atom_size, ai.atom_size);
-    for (group = 0; group < ai.nr_groups; group++) {
-    const struct pcpu_group_info *gi = &ai.groups[group];
-    let mut unit: c_int = 0, unit_end = 0;
-    BUG_ON(gi.nr_units % upa);
-    for (alloc_end += gi.nr_units / upa;
-    alloc < alloc_end; alloc++) {
+    while (group < ai.nr_groups) {
+    let mut gi = &ai.groups[group];
+pub static mut unit: c_int = 0;
+    BUG_ON!(gi.nr_units % upa);
+    while (alloc < alloc_end) {
     if (!(alloc % apl)) {
     pr_cont("\n");
     printk("%spcpu-alloc: ", lvl);
     }
     pr_cont("[%0*d] ", group_width, group);
-    for (unit_end += upa; unit < unit_end; unit++)
+    for (unit_end += upa; unit < unit_end; unit++) {
     if (gi.cpu_map[unit] != NR_CPUS)
     pr_cont("%0*d ",
     cpu_width, gi.cpu_map[unit]);
-    else
+    }
+    else {
     pr_cont("%s ", empty_str);
+    }
     }
     }
     pr_cont("\n");
@@ -2322,24 +2604,26 @@ pub unsafe extern "C" fn pcpu_free_alloc_info(ai: *mut pcpu_alloc_info) -> void 
     void __init pcpu_setup_first_chunk(const struct pcpu_alloc_info *ai,
     void *base_addr)
     {
-    let mut size_sum: usize = ai.static_size + ai.reserved_size + ai.dyn_size;
+pub static mut size_sum: usize = 0;
     size_t static_size, dyn_size;
-    unsigned long *group_offsets;
-    size_t *group_sizes;
-    unsigned long *unit_off;
-    unsigned int cpu;
-    int *unit_map;
-    int group, unit, i;
-    unsigned long tmp_addr;
-    size_t alloc_size;
+pub static mut group_offsets: *mut c_void = core::ptr::null_mut();
+pub static mut group_sizes: *mut c_void = core::ptr::null_mut();
+pub static mut unit_off: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
+pub static mut unit_map: *mut c_void = core::ptr::null_mut();
+    let mut group = 0;
+    let mut unit = 0;
+    let mut i = 0;
+    let mut tmp_addr = 0;
+    let mut alloc_size = 0;
 
-    if (unlikely(cond)) {						\
-    pr_emerg("failed to initialize, %s\n", #cond);		\
-    pr_emerg("cpu_possible_mask=%*pb\n",			\
-    cpumask_pr_args(cpu_possible_mask));		\
-    pcpu_dump_alloc_info(KERN_EMERG, ai);			\
-    BUG();							\
-    }								\
+    if (unlikely(cond)) {						
+    pr_emerg("failed to initialize, %s\n", #cond);		
+    pr_emerg("cpu_possible_mask=%*pb\n",			
+    cpumask_pr_args(cpu_possible_mask));		
+    pcpu_dump_alloc_info(KERN_EMERG, ai);			
+    BUG();							
+    }								
     } while (0)
 // sanity checks
     PCPU_SETUP_BUG_ON(ai.nr_groups <= 0);
@@ -2359,26 +2643,28 @@ pub unsafe extern "C" fn pcpu_free_alloc_info(ai: *mut pcpu_alloc_info) -> void 
     IS_ALIGNED(PAGE_SIZE, PCPU_BITMAP_BLOCK_SIZE)));
     PCPU_SETUP_BUG_ON(pcpu_verify_alloc_info(ai) < 0);
 // process group information and build config tables accordingly
-    alloc_size = ai.nr_groups * sizeof(group_offsets[0]);
+    alloc_size = ai.nr_groups * sizeof!(group_offsets[0]);
     group_offsets = memblock_alloc_or_panic(alloc_size, SMP_CACHE_BYTES);
-    alloc_size = ai.nr_groups * sizeof(group_sizes[0]);
+    alloc_size = ai.nr_groups * sizeof!(group_sizes[0]);
     group_sizes = memblock_alloc_or_panic(alloc_size, SMP_CACHE_BYTES);
-    alloc_size = nr_cpu_ids * sizeof(unit_map[0]);
+    alloc_size = nr_cpu_ids * sizeof!(unit_map[0]);
     unit_map = memblock_alloc_or_panic(alloc_size, SMP_CACHE_BYTES);
-    alloc_size = nr_cpu_ids * sizeof(unit_off[0]);
+    alloc_size = nr_cpu_ids * sizeof!(unit_off[0]);
     unit_off = memblock_alloc_or_panic(alloc_size, SMP_CACHE_BYTES);
-    for (cpu = 0; cpu < nr_cpu_ids; cpu++)
+    for (cpu = 0; cpu < nr_cpu_ids; cpu++) {
     unit_map[cpu] = UINT_MAX;
+    }
     pcpu_low_unit_cpu = NR_CPUS;
     pcpu_high_unit_cpu = NR_CPUS;
-    for (group = 0, unit = 0; group < ai.nr_groups; group++, unit += i) {
-    const struct pcpu_group_info *gi = &ai.groups[group];
+    while (group < ai.nr_groups) {
+    let mut gi = &ai.groups[group];
     group_offsets[group] = gi.base_offset;
     group_sizes[group] = gi.nr_units * ai.unit_size;
-    for (i = 0; i < gi.nr_units; i++) {
+    while (i < gi.nr_units) {
     cpu = gi.cpu_map[i];
-    if (cpu == NR_CPUS)
+    if (cpu == NR_CPUS) {
     continue;
+    }
     PCPU_SETUP_BUG_ON(cpu >= nr_cpu_ids);
     PCPU_SETUP_BUG_ON(!cpu_possible(cpu));
     PCPU_SETUP_BUG_ON(unit_map[cpu] != UINT_MAX);
@@ -2386,16 +2672,19 @@ pub unsafe extern "C" fn pcpu_free_alloc_info(ai: *mut pcpu_alloc_info) -> void 
     unit_off[cpu] = gi.base_offset + i * ai.unit_size;
 // determine low/high unit_cpu
     if (pcpu_low_unit_cpu == NR_CPUS ||
-    unit_off[cpu] < unit_off[pcpu_low_unit_cpu])
+    unit_off[cpu] < unit_off[pcpu_low_unit_cpu]) {
     pcpu_low_unit_cpu = cpu;
+    }
     if (pcpu_high_unit_cpu == NR_CPUS ||
-    unit_off[cpu] > unit_off[pcpu_high_unit_cpu])
+    unit_off[cpu] > unit_off[pcpu_high_unit_cpu]) {
     pcpu_high_unit_cpu = cpu;
     }
     }
+    }
     pcpu_nr_units = unit;
-    for_each_possible_cpu(cpu)
+    for_each_possible_cpu(cpu) {
     PCPU_SETUP_BUG_ON(unit_map[cpu] == UINT_MAX);
+    }
 // we're done parsing the input, undefine BUG macro and dump config
 
     pcpu_dump_alloc_info(KERN_DEBUG, ai);
@@ -2408,7 +2697,7 @@ pub unsafe extern "C" fn pcpu_free_alloc_info(ai: *mut pcpu_alloc_info) -> void 
     pcpu_unit_pages = ai.unit_size >> PAGE_SHIFT;
     pcpu_unit_size = pcpu_unit_pages << PAGE_SHIFT;
     pcpu_atom_size = ai.atom_size;
-    pcpu_chunk_struct_size = struct_size((struct pcpu_chunk *)0, populated,
+    pcpu_chunk_struct_size = struct_size(0, populated,
     BITS_TO_LONGS(pcpu_unit_pages));
     pcpu_stats_save_ai(ai);
 //
@@ -2422,10 +2711,11 @@ pub unsafe extern "C" fn pcpu_free_alloc_info(ai: *mut pcpu_alloc_info) -> void 
     pcpu_to_depopulate_slot = pcpu_free_slot + 1;
     pcpu_nr_slots = pcpu_to_depopulate_slot + 1;
     pcpu_chunk_lists = memblock_alloc_or_panic(pcpu_nr_slots *
-    sizeof(pcpu_chunk_lists[0]),
+    sizeof!(pcpu_chunk_lists[0]),
     SMP_CACHE_BYTES);
-    for (i = 0; i < pcpu_nr_slots; i++)
+    for (i = 0; i < pcpu_nr_slots; i++) {
     INIT_LIST_HEAD(&pcpu_chunk_lists[i]);
+    }
 //
 // The end of the static region needs to be aligned with the
 // minimum allocation size as this offsets the reserved and
@@ -2448,9 +2738,10 @@ pub unsafe extern "C" fn pcpu_free_alloc_info(ai: *mut pcpu_alloc_info) -> void 
 // chunk.
 //
     tmp_addr = (unsigned long)base_addr + static_size;
-    if (ai.reserved_size)
+    if (ai.reserved_size) {
     pcpu_reserved_chunk = pcpu_alloc_first_chunk(tmp_addr,
     ai.reserved_size);
+    }
     tmp_addr = (unsigned long)base_addr + static_size + ai.reserved_size;
     pcpu_first_chunk = pcpu_alloc_first_chunk(tmp_addr, dyn_size);
     pcpu_nr_empty_pop_pages = pcpu_first_chunk.nr_empty_pop_pages;
@@ -2468,31 +2759,32 @@ pub unsafe extern "C" fn pcpu_free_alloc_info(ai: *mut pcpu_alloc_info) -> void 
     [PCPU_FC_EMBED]	= "embed",
     [PCPU_FC_PAGE]	= "page",
     };
-    let mut __initdata: enum pcpu_fc pcpu_chosen_fc = PCPU_FC_AUTO;
+pub static mut __initdata: pcpu_fc pcpu_chosen_fc = 0;
 #[no_mangle]
-unsafe extern "C" fn percpu_alloc_setup(str: *mut c_char) -> int __init {
-    static int __init percpu_alloc_setup(char *str)
-    {
-    if (!str)
+unsafe extern "C" fn percpu_alloc_setup(str: *mut c_char) -> c_int {
+    if (!str) {
     return -EINVAL;
-    if (0)
+    }
+    if (0) {
 // nada */;
+    }
 
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !strcmp(str, _arg: "embed")) -> else {
-    else if (!strcmp(str, "embed"))
+
+    else if (!strcmp(str, "embed")) {
     pcpu_chosen_fc = PCPU_FC_EMBED;
+    }
 
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !strcmp(str, _arg: "page")) -> else {
-    else if (!strcmp(str, "page"))
+
+    else if (!strcmp(str, "page")) {
     pcpu_chosen_fc = PCPU_FC_PAGE;
+    }
 
-    else
-    pr_warn("unknown allocator %s specified\n", str);
+    else {
+    pr_warn!("unknown allocator %s specified\n", str);
+    }
     return 0;
     }
-    early_param("percpu_alloc", percpu_alloc_setup);
+    early_param!("percpu_alloc", percpu_alloc_setup);
 //
 // pcpu_embed_first_chunk() is used by the generic percpu setup.
 // Build it if needed by the arch config or the generic setup is going
@@ -2537,17 +2829,22 @@ pub unsafe extern "C" fn if(_arg: !strcmp(str, _arg: "page")) -> else {
     static int group_map[NR_CPUS] __initdata;
     static int group_cnt[NR_CPUS] __initdata;
     static struct cpumask mask __initdata;
-    let mut static_size: usize = __per_cpu_end - __per_cpu_start;
-    let mut nr_groups: c_int = 1, nr_units = 0;
+pub static mut static_size: usize = 0;
+pub static mut nr_groups: c_int = 0;
     size_t size_sum, min_unit_size, alloc_size;
-    int upa, max_upa, best_upa;	/* units_per_alloc */
-    int last_allocs, group, unit;
-    unsigned int cpu, tcpu;
-    struct pcpu_alloc_info *ai;
-    unsigned int *cpu_map;
+    let mut upa = 0;
+    let mut max_upa = 0;
+    let mut best_upa = 0;	/* units_per_alloc */
+    let mut last_allocs = 0;
+    let mut group = 0;
+    let mut unit = 0;
+    let mut cpu = 0;
+    let mut tcpu = 0;
+pub static mut ai: *mut c_void = core::ptr::null_mut();
+pub static mut cpu_map: *mut c_void = core::ptr::null_mut();
 // this function may be called multiple times
-    memset(group_map, 0, sizeof(group_map));
-    memset(group_cnt, 0, sizeof(group_cnt));
+    memset(group_map, 0, sizeof!(group_map));
+    memset(group_cnt, 0, sizeof!(group_cnt));
     cpumask_clear(&mask);
 // calculate size_sum and ensure dyn_size is enough for early alloc
     size_sum = PFN_ALIGN(static_size + reserved_size +
@@ -2563,12 +2860,13 @@ pub unsafe extern "C" fn if(_arg: !strcmp(str, _arg: "page")) -> else {
 // determine the maximum # of units that can fit in an allocation
     alloc_size = roundup(min_unit_size, atom_size);
     upa = alloc_size / min_unit_size;
-    while (alloc_size % upa || (offset_in_page(alloc_size / upa)))
-    upa--;
+    while (alloc_size % upa || (offset_in_page(alloc_size / upa))) {
+    upa -= 1;
+    }
     max_upa = upa;
     cpumask_copy(&mask, cpu_possible_mask);
 // group cpus according to their proximity
-    for (group = 0; !cpumask_empty(&mask); group++) {
+    while (!cpumask_empty(&mask)) {
 // pop the group's first cpu
     cpu = cpumask_first(&mask);
     group_map[cpu] = group;
@@ -2592,12 +2890,13 @@ pub unsafe extern "C" fn if(_arg: !strcmp(str, _arg: "page")) -> else {
 //
     last_allocs = INT_MAX;
     best_upa = 0;
-    for (upa = max_upa; upa; upa--) {
-    let mut allocs: c_int = 0, wasted = 0;
-    if (alloc_size % upa || (offset_in_page(alloc_size / upa)))
+    while (upa) {
+pub static mut allocs: c_int = 0;
+    if (alloc_size % upa || (offset_in_page(alloc_size / upa))) {
     continue;
-    for (group = 0; group < nr_groups; group++) {
-    let mut this_allocs: c_int = DIV_ROUND_UP(group_cnt[group], upa);
+    }
+    while (group < nr_groups) {
+pub static mut this_allocs: c_int = 0;
     allocs += this_allocs;
     wasted += this_allocs * upa - group_cnt[group];
     }
@@ -2606,24 +2905,28 @@ pub unsafe extern "C" fn if(_arg: !strcmp(str, _arg: "page")) -> else {
 // greater-than comparison ensures upa==1 always
 // passes the following check.
 //
-    if (wasted > num_possible_cpus() / 3)
+    if (wasted > num_possible_cpus() / 3) {
     continue;
+    }
 // and then don't consume more memory
-    if (allocs > last_allocs)
+    if (allocs > last_allocs) {
     break;
+    }
     last_allocs = allocs;
     best_upa = upa;
     }
-    BUG_ON(!best_upa);
+    BUG_ON!(!best_upa);
     upa = best_upa;
 // allocate and fill alloc_info
-    for (group = 0; group < nr_groups; group++)
-    nr_units += roundup(group_cnt[group], upa);
-    ai = pcpu_alloc_alloc_info(nr_groups, nr_units);
-    if (!ai)
-    return ERR_PTR(-ENOMEM);
-    cpu_map = ai.groups[0].cpu_map;
     for (group = 0; group < nr_groups; group++) {
+    nr_units += roundup(group_cnt[group], upa);
+    }
+    ai = pcpu_alloc_alloc_info(nr_groups, nr_units);
+    if (!ai) {
+    return ERR_PTR(-ENOMEM);
+    }
+    cpu_map = ai.groups[0].cpu_map;
+    while (group < nr_groups) {
     ai.groups[group].cpu_map = cpu_map;
     cpu_map += roundup(group_cnt[group], upa);
     }
@@ -2633,43 +2936,45 @@ pub unsafe extern "C" fn if(_arg: !strcmp(str, _arg: "page")) -> else {
     ai.unit_size = alloc_size / upa;
     ai.atom_size = atom_size;
     ai.alloc_size = alloc_size;
-    for (group = 0, unit = 0; group < nr_groups; group++) {
-    struct pcpu_group_info *gi = &ai.groups[group];
+    while (group < nr_groups) {
+    let mut gi = &ai.groups[group];
 //
 // Initialize base_offset as if all groups are located
 // back-to-back.  The caller should update this to
 // reflect actual allocation.
 //
     gi.base_offset = unit * ai.unit_size;
-    for_each_possible_cpu(cpu)
+    for_each_possible_cpu(cpu) {
     if (group_map[cpu] == group)
     gi.cpu_map[gi.nr_units++] = cpu;
+    }
     gi.nr_units = roundup(gi.nr_units, upa);
     unit += gi.nr_units;
     }
-    BUG_ON(unit != nr_units);
+    BUG_ON!(unit != nr_units);
     return ai;
     }
     static void * __init pcpu_fc_alloc(unsigned int cpu, size_t size, size_t align,
     pcpu_fc_cpu_to_node_fn_t cpu_to_nd_fn)
     {
-    let mut goal: c_ulong = __pa(MAX_DMA_ADDRESS);
+pub static mut goal: c_ulong = 0;
 
-    let mut node: c_int = NUMA_NO_NODE;
-    void *ptr;
-    if (cpu_to_nd_fn)
+pub static mut node: c_int = 0;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+    if (cpu_to_nd_fn) {
     node = cpu_to_nd_fn(cpu);
+    }
     if (node == NUMA_NO_NODE || !node_online(node) || !NODE_DATA(node)) {
     ptr = memblock_alloc_from(size, align, goal);
-    pr_info("cpu %d has no node %d or node-local memory\n",
+    pr_info!("cpu %d has no node %d or node-local memory\n",
     cpu, node);
-    pr_debug("per cpu data for cpu%d %zu bytes at 0x%llx\n",
+    pr_debug!("per cpu data for cpu%d %zu bytes at 0x%llx\n",
     cpu, size, (u64)__pa(ptr));
     } else {
     ptr = memblock_alloc_try_nid(size, align, goal,
     MEMBLOCK_ALLOC_ACCESSIBLE,
     node);
-    pr_debug("per cpu data for cpu%d %zu bytes on node%d at 0x%llx\n",
+    pr_debug!("per cpu data for cpu%d %zu bytes on node%d at 0x%llx\n",
     cpu, size, node, (u64)__pa(ptr));
     }
     return ptr;
@@ -2678,9 +2983,7 @@ pub unsafe extern "C" fn if(_arg: !strcmp(str, _arg: "page")) -> else {
 
     }
 #[no_mangle]
-unsafe extern "C" fn pcpu_fc_free(ptr: *mut c_void, size: usize) -> void __init {
-    static void __init pcpu_fc_free(void *ptr, size_t size)
-    {
+unsafe extern "C" fn pcpu_fc_free(ptr: *mut c_void, size: usize)  {
     memblock_free(ptr, size);
     }
 
@@ -2720,55 +3023,58 @@ unsafe extern "C" fn pcpu_fc_free(ptr: *mut c_void, size: usize) -> void __init 
     pcpu_fc_cpu_distance_fn_t cpu_distance_fn,
     pcpu_fc_cpu_to_node_fn_t cpu_to_nd_fn)
     {
-    void *base = (void *)ULONG_MAX;
-    void **areas = core::ptr::null_mut();
-    struct pcpu_alloc_info *ai;
+    let mut base = ULONG_MAX;
+    let mut areas = core::ptr::null_mut();
+pub static mut ai: *mut c_void = core::ptr::null_mut();
     size_t size_sum, areas_size;
-    unsigned long max_distance;
+    let mut max_distance = 0;
     int group, i, highest_group, rc = 0;
     ai = pcpu_build_alloc_info(reserved_size, dyn_size, atom_size,
     cpu_distance_fn);
-    if (IS_ERR(ai))
+    if (IS_ERR(ai)) {
     return PTR_ERR(ai);
+    }
     size_sum = ai.static_size + ai.reserved_size + ai.dyn_size;
-    areas_size = PFN_ALIGN(ai.nr_groups * sizeof(void *));
+    areas_size = PFN_ALIGN(ai.nr_groups * sizeof!);
     areas = memblock_alloc(areas_size, SMP_CACHE_BYTES);
     if (!areas) {
     rc = -ENOMEM;
-    goto out_free;
+// goto;
     }
 // allocate, copy and determine base address & max_distance
     highest_group = 0;
-    for (group = 0; group < ai.nr_groups; group++) {
-    struct pcpu_group_info *gi = &ai.groups[group];
-    let mut cpu: c_uint = NR_CPUS;
-    void *ptr;
-    for (i = 0; i < gi.nr_units && cpu == NR_CPUS; i++)
+    while (group < ai.nr_groups) {
+    let mut gi = &ai.groups[group];
+pub static mut cpu: c_uint = 0;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+    for (i = 0; i < gi.nr_units && cpu == NR_CPUS; i++) {
     cpu = gi.cpu_map[i];
-    BUG_ON(cpu == NR_CPUS);
+    }
+    BUG_ON!(cpu == NR_CPUS);
 // allocate space for the whole group
     ptr = pcpu_fc_alloc(cpu, gi.nr_units * ai.unit_size, atom_size, cpu_to_nd_fn);
     if (!ptr) {
     rc = -ENOMEM;
-    goto out_free_areas;
+// goto;
     }
 // kmemleak tracks the percpu allocations separately
     kmemleak_ignore_phys(__pa(ptr));
     areas[group] = ptr;
     base = min(ptr, base);
-    if (ptr > areas[highest_group])
+    if (ptr > areas[highest_group]) {
     highest_group = group;
+    }
     }
     max_distance = areas[highest_group] - base;
     max_distance += ai.unit_size * ai.groups[highest_group].nr_units;
 // warn if maximum distance is further than 75% of vmalloc space
     if (max_distance > VMALLOC_TOTAL * 3 / 4) {
-    pr_warn("max_distance=0x%lx too large for vmalloc space 0x%lx\n",
+    pr_warn!("max_distance=0x%lx too large for vmalloc space 0x%lx\n",
     max_distance, VMALLOC_TOTAL);
 
 // and fail if we have fallback
     rc = -EINVAL;
-    goto out_free_areas;
+// goto;
 
     }
 //
@@ -2776,10 +3082,10 @@ unsafe extern "C" fn pcpu_fc_free(ptr: *mut c_void, size: usize) -> void __init 
 // allocations are complete; otherwise, we may end up with
 // overlapping groups.
 //
-    for (group = 0; group < ai.nr_groups; group++) {
-    struct pcpu_group_info *gi = &ai.groups[group];
-    void *ptr = areas[group];
-    for (i = 0; i < gi.nr_units; i++, ptr += ai.unit_size) {
+    while (group < ai.nr_groups) {
+    let mut gi = &ai.groups[group];
+    let mut ptr = areas[group];
+    while (i < gi.nr_units) {
     if (gi.cpu_map[i] == NR_CPUS) {
 // unused unit, free whole
     pcpu_fc_free(ptr, ai.unit_size);
@@ -2791,34 +3097,34 @@ unsafe extern "C" fn pcpu_fc_free(ptr: *mut c_void, size: usize) -> void __init 
     }
     }
 // base address is now known, determine group base offsets
-    for (group = 0; group < ai.nr_groups; group++) {
+    while (group < ai.nr_groups) {
     ai.groups[group].base_offset = areas[group] - base;
     }
-    pr_info("Embedded %zu pages/cpu s%zu r%zu d%zu u%zu\n",
+    pr_info!("Embedded %zu pages/cpu s%zu r%zu d%zu u%zu\n",
     PFN_DOWN(size_sum), ai.static_size, ai.reserved_size,
     ai.dyn_size, ai.unit_size);
     pcpu_setup_first_chunk(ai, base);
-    goto out_free;
-    out_free_areas:
-    for (group = 0; group < ai.nr_groups; group++)
+// goto;
+// label;
+    for (group = 0; group < ai.nr_groups; group++) {
     if (areas[group])
     pcpu_fc_free(areas[group],
     ai.groups[group].nr_units * ai.unit_size);
-    out_free:
+    }
+// label;
     pcpu_free_alloc_info(ai);
-    if (areas)
+    if (areas) {
     memblock_free(areas, areas_size);
+    }
     return rc;
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn pcpu_populate_pte(addr: c_ulong) -> void __init __weak {
-    void __init __weak pcpu_populate_pte(unsigned long addr)
-    {
-    pgd_t *pgd = pgd_offset_k(addr);
-    p4d_t *p4d;
-    pud_t *pud;
-    pmd_t *pmd;
+pub unsafe extern "C" fn pcpu_populate_pte(addr: c_ulong)  __weak {
+    let mut pgd = pgd_offset_k(addr);
+pub static mut p4d: *mut c_void = core::ptr::null_mut();
+pub static mut pud: *mut c_void = core::ptr::null_mut();
+pub static mut pmd: *mut c_void = core::ptr::null_mut();
     if (pgd_none(*pgd)) {
     p4d = memblock_alloc_or_panic(P4D_TABLE_SIZE, P4D_TABLE_SIZE);
     pgd_populate_kernel(addr, pgd, p4d);
@@ -2835,7 +3141,7 @@ pub unsafe extern "C" fn pcpu_populate_pte(addr: c_ulong) -> void __init __weak 
     }
     pmd = pmd_offset(pud, addr);
     if (!pmd_present(*pmd)) {
-    pte_t *new;
+pub static mut new: *mut c_void = core::ptr::null_mut();
     new = memblock_alloc_or_panic(PTE_TABLE_SIZE, PTE_TABLE_SIZE);
     pmd_populate_kernel(&init_mm, pmd, new);
     }
@@ -2856,45 +3162,44 @@ pub unsafe extern "C" fn pcpu_populate_pte(addr: c_ulong) -> void __init __weak 
 // 0 on success, -errno on failure.
 //
 #[no_mangle]
-pub unsafe extern "C" fn pcpu_page_first_chunk(reserved_size: usize, cpu_to_nd_fn: pcpu_fc_cpu_to_node_fn_t) -> int __init {
-    int __init pcpu_page_first_chunk(size_t reserved_size, pcpu_fc_cpu_to_node_fn_t cpu_to_nd_fn)
-    {
-    static struct vm_struct vm;
-    struct pcpu_alloc_info *ai;
+pub unsafe extern "C" fn pcpu_page_first_chunk(reserved_size: usize, cpu_to_nd_fn: pcpu_fc_cpu_to_node_fn_t) -> c_int {
+pub static mut vm: usize = 0;
+pub static mut ai: *mut c_void = core::ptr::null_mut();
     char psize_str[16];
-    int unit_pages;
-    size_t pages_size;
-    struct page **pages;
+    let mut unit_pages = 0;
+    let mut pages_size = 0;
+pub static mut pages: *mut c_void = core::ptr::null_mut();
     int unit, i, j, rc = 0;
-    int upa;
-    int nr_g0_units;
-    snprintf(psize_str, sizeof(psize_str), "%luK", PAGE_SIZE >> 10);
+    let mut upa = 0;
+    let mut nr_g0_units = 0;
+    snprintf(psize_str, sizeof!(psize_str), "%luK", PAGE_SIZE >> 10);
     ai = pcpu_build_alloc_info(reserved_size, 0, PAGE_SIZE, core::ptr::null_mut());
-    if (IS_ERR(ai))
+    if (IS_ERR(ai)) {
     return PTR_ERR(ai);
-    BUG_ON(ai.nr_groups != 1);
+    }
+    BUG_ON!(ai.nr_groups != 1);
     upa = ai.alloc_size/ai.unit_size;
     nr_g0_units = roundup(num_possible_cpus(), upa);
-    if (WARN_ON(ai.groups[0].nr_units != nr_g0_units)) {
+    if (WARN_ON!(ai.groups[0].nr_units != nr_g0_units)) {
     pcpu_free_alloc_info(ai);
     return -EINVAL;
     }
     unit_pages = ai.unit_size >> PAGE_SHIFT;
 // unaligned allocations can't be freed, round up to page size
     pages_size = PFN_ALIGN(unit_pages * num_possible_cpus() *
-    sizeof(pages[0]));
+    sizeof!(pages[0]));
     pages = memblock_alloc_or_panic(pages_size, SMP_CACHE_BYTES);
 // allocate pages
     j = 0;
-    for (unit = 0; unit < num_possible_cpus(); unit++) {
-    let mut cpu: c_uint = ai.groups[0].cpu_map[unit];
-    for (i = 0; i < unit_pages; i++) {
-    void *ptr;
+    while (unit < num_possible_cpus()) {
+pub static mut cpu: c_uint = 0;
+    while (i < unit_pages) {
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
     ptr = pcpu_fc_alloc(cpu, PAGE_SIZE, PAGE_SIZE, cpu_to_nd_fn);
     if (!ptr) {
-    pr_warn("failed to allocate %s page for cpu%u\n",
+    pr_warn!("failed to allocate %s page for cpu%u\n",
     psize_str, cpu);
-    goto enomem;
+// goto;
     }
 // kmemleak tracks the percpu allocations separately
     kmemleak_ignore_phys(__pa(ptr));
@@ -2905,31 +3210,33 @@ pub unsafe extern "C" fn pcpu_page_first_chunk(reserved_size: usize, cpu_to_nd_f
     vm.flags = VM_ALLOC;
     vm.size = num_possible_cpus() * ai.unit_size;
     vm_area_register_early(&vm, PAGE_SIZE);
-    for (unit = 0; unit < num_possible_cpus(); unit++) {
-    unsigned long unit_addr =
-    (unsigned long)vm.addr + unit * ai.unit_size;
-    for (i = 0; i < unit_pages; i++)
+    while (unit < num_possible_cpus()) {
+    let mut unit_addr = (unsigned long)vm.addr + unit * ai.unit_size;
+    for (i = 0; i < unit_pages; i++) {
     pcpu_populate_pte(unit_addr + (i << PAGE_SHIFT));
+    }
 // pte already populated, the following shouldn't fail
     rc = __pcpu_map_pages(unit_addr, &pages[unit * unit_pages],
     unit_pages, GFP_KERNEL);
-    if (rc < 0)
+    if (rc < 0) {
     panic("failed to map percpu area, err=%d\n", rc);
+    }
     flush_cache_vmap_early(unit_addr, unit_addr + ai.unit_size);
 // copy static data
-    memcpy((void *)unit_addr, __per_cpu_start, ai.static_size);
+    memcpy(unit_addr, __per_cpu_start, ai.static_size);
     }
 // we're ready, commit
-    pr_info("%d %s pages/cpu s%zu r%zu d%zu\n",
+    pr_info!("%d %s pages/cpu s%zu r%zu d%zu\n",
     unit_pages, psize_str, ai.static_size,
     ai.reserved_size, ai.dyn_size);
     pcpu_setup_first_chunk(ai, vm.addr);
-    goto out_free_ar;
-    enomem:
-    while (--j >= 0)
+// goto;
+// label;
+    while (--j >= 0) {
     pcpu_fc_free(page_address(pages[j]), PAGE_SIZE);
+    }
     rc = -ENOMEM;
-    out_free_ar:
+// label;
     memblock_free(pages, pages_size);
     pcpu_free_alloc_info(ai);
     return rc;
@@ -2947,26 +3254,26 @@ pub unsafe extern "C" fn pcpu_page_first_chunk(reserved_size: usize, cpu_to_nd_f
 // on the physical linear memory mapping which uses large page
 // mappings on applicable archs.
 //
-    unsigned long __per_cpu_offset[NR_CPUS] __read_mostly;
+    unsigned long __per_cpu_offset[NR_CPUS] ;
     EXPORT_SYMBOL(__per_cpu_offset);
 #[no_mangle]
-pub unsafe extern "C" fn setup_per_cpu_areas() -> void __init {
-    void __init setup_per_cpu_areas(void)
-    {
-    unsigned long delta;
-    unsigned int cpu;
-    int rc;
+pub unsafe extern "C" fn setup_per_cpu_areas()  {
+    let mut delta = 0;
+    let mut cpu = 0;
+    let mut rc = 0;
 //
 // Always reserve area for module percpu variables.  That's
 // what the legacy allocator did.
 //
     rc = pcpu_embed_first_chunk(PERCPU_MODULE_RESERVE, PERCPU_DYNAMIC_RESERVE,
     PAGE_SIZE, core::ptr::null_mut(), core::ptr::null_mut());
-    if (rc < 0)
+    if (rc < 0) {
     panic("Failed to initialize percpu areas.");
+    }
     delta = (unsigned long)pcpu_base_addr - (unsigned long)__per_cpu_start;
-    for_each_possible_cpu(cpu)
+    for_each_possible_cpu(cpu) {
     __per_cpu_offset[cpu] = delta + pcpu_unit_offsets[cpu];
+    }
     }
 
 //
@@ -2977,18 +3284,19 @@ pub unsafe extern "C" fn setup_per_cpu_areas() -> void __init {
 // variables and don't require any special preparation.
 //
 #[no_mangle]
-pub unsafe extern "C" fn setup_per_cpu_areas() -> void __init {
-    void __init setup_per_cpu_areas(void)
-    {
+#[no_mangle]
+// duplicate fn: setup_per_cpu_areas
+pub unsafe extern "C" fn setup_per_cpu_areas_dup()  {
     const size_t unit_size =
     roundup_pow_of_two(max_t(size_t, PCPU_MIN_UNIT_SIZE,
     PERCPU_DYNAMIC_RESERVE));
-    struct pcpu_alloc_info *ai;
-    void *fc;
+pub static mut ai: *mut c_void = core::ptr::null_mut();
+pub static mut fc: *mut c_void = core::ptr::null_mut();
     ai = pcpu_alloc_alloc_info(1, 1);
     fc = memblock_alloc_from(unit_size, PAGE_SIZE, __pa(MAX_DMA_ADDRESS));
-    if (!ai || !fc)
+    if (!ai || !fc) {
     panic("Failed to allocate memory for percpu areas.");
+    }
 // kmemleak tracks the percpu allocations separately
     kmemleak_ignore_phys(__pa(fc));
     ai.dyn_size = unit_size;
@@ -3014,8 +3322,6 @@ pub unsafe extern "C" fn setup_per_cpu_areas() -> void __init {
 //
 #[no_mangle]
 pub unsafe extern "C" fn pcpu_nr_pages() -> c_ulong {
-    unsigned long pcpu_nr_pages(void)
-    {
     return data_race(READ_ONCE(pcpu_nr_populated)) * pcpu_nr_units;
     }
 //
@@ -3024,10 +3330,8 @@ pub unsafe extern "C" fn pcpu_nr_pages() -> c_ulong {
 // and running.
 //
 #[no_mangle]
-unsafe extern "C" fn percpu_enable_async() -> int __init {
-    static int __init percpu_enable_async(void)
-    {
+unsafe extern "C" fn percpu_enable_async() -> c_int {
     pcpu_async_enabled = true;
     return 0;
     }
-    subsys_initcall(percpu_enable_async);
+    subsys_initcall!(percpu_enable_async);

@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -45,20 +295,21 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 
     static int cpu_to_node_map[NR_CPUS] = { [0 ... NR_CPUS-1] = NUMA_NO_NODE };
-    bool numa_off;
+    let mut numa_off = 0;
 #[no_mangle]
 unsafe extern "C" fn numa_parse_early_param(opt: *mut c_char) -> __init int {
-    static __init int numa_parse_early_param(char *opt)
-    {
-    if (!opt)
+    if (!opt) {
     return -EINVAL;
-    if (str_has_prefix(opt, "off"))
+    }
+    if (str_has_prefix(opt, "off")) {
     numa_off = true;
-    if (!strncmp(opt, "fake=", 5))
+    }
+    if (!strncmp(opt, "fake=", 5)) {
     return numa_emu_cmdline(opt + 5);
+    }
     return 0;
     }
-    early_param("numa", numa_parse_early_param);
+    early_param!("numa", numa_parse_early_param);
     cpumask_var_t node_to_cpumask_map[MAX_NUMNODES];
     EXPORT_SYMBOL(node_to_cpumask_map);
 
@@ -67,45 +318,43 @@ unsafe extern "C" fn numa_parse_early_param(opt: *mut c_char) -> __init int {
 //
     const struct cpumask *cpumask_of_node(int node)
     {
-    if (node == NUMA_NO_NODE)
+    if (node == NUMA_NO_NODE) {
     return cpu_all_mask;
-    if (WARN_ON(node < 0 || node >= nr_node_ids))
+    }
+    if (WARN_ON!(node < 0 || node >= nr_node_ids)) {
     return cpu_none_mask;
-    if (WARN_ON(node_to_cpumask_map[node] == core::ptr::null_mut()))
+    }
+    if (WARN_ON!(node_to_cpumask_map[node] == core::ptr::null_mut())) {
     return cpu_online_mask;
+    }
     return node_to_cpumask_map[node];
     }
     EXPORT_SYMBOL(cpumask_of_node);
 
 #[no_mangle]
 unsafe extern "C" fn numa_update_cpu(cpu: c_uint, remove: bool) {
-    static void numa_update_cpu(unsigned int cpu, bool remove)
-    {
-    let mut nid: c_int = cpu_to_node(cpu);
-    if (nid == NUMA_NO_NODE)
+pub static mut nid: c_int = 0;
+    if (nid == NUMA_NO_NODE) {
     return;
-    if (remove)
+    }
+    if (remove) {
     cpumask_clear_cpu(cpu, node_to_cpumask_map[nid]);
-    else
+    }
+    else {
     cpumask_set_cpu(cpu, node_to_cpumask_map[nid]);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn numa_add_cpu(cpu: c_uint) {
-    void numa_add_cpu(unsigned int cpu)
-    {
     numa_update_cpu(cpu, false);
     }
 #[no_mangle]
 pub unsafe extern "C" fn numa_remove_cpu(cpu: c_uint) {
-    void numa_remove_cpu(unsigned int cpu)
-    {
     numa_update_cpu(cpu, true);
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn numa_clear_node(cpu: c_uint) {
-    void numa_clear_node(unsigned int cpu)
-    {
     numa_remove_cpu(cpu);
     set_cpu_numa_node(cpu, NUMA_NO_NODE);
     }
@@ -117,13 +366,12 @@ pub unsafe extern "C" fn numa_clear_node(cpu: c_uint) {
 // (Use CONFIG_DEBUG_PER_CPU_MAPS to check this.)
 //
 #[no_mangle]
-unsafe extern "C" fn setup_node_to_cpumask_map() -> void __init {
-    static void __init setup_node_to_cpumask_map(void)
-    {
-    int node;
+unsafe extern "C" fn setup_node_to_cpumask_map()  {
+    let mut node = 0;
 // setup nr_node_ids if not done yet
-    if (nr_node_ids == MAX_NUMNODES)
+    if (nr_node_ids == MAX_NUMNODES) {
     setup_nr_node_ids();
+    }
 //
 // This check should never be true but it makes it clear to compilers
 // that node_to_cpumask_map is bound by nr_node_ids, avoiding false
@@ -131,65 +379,57 @@ unsafe extern "C" fn setup_node_to_cpumask_map() -> void __init {
 // for loop below.
 //
     if (unlikely(nr_node_ids > MAX_NUMNODES)) {
-    pr_err("nr_node_ids (%u) is larger than MAX_NUMNODES (%u)\n",
+    pr_err!("nr_node_ids (%u) is larger than MAX_NUMNODES (%u)\n",
     nr_node_ids, MAX_NUMNODES);
     return;
     }
 // allocate and clear the mapping
-    for (node = 0; node < nr_node_ids; node++) {
+    while (node < nr_node_ids) {
     alloc_bootmem_cpumask_var(&node_to_cpumask_map[node]);
     cpumask_clear(node_to_cpumask_map[node]);
     }
 // cpumask_of_node() will now work
-    pr_debug("Node to cpumask map for %u nodes\n", nr_node_ids);
+    pr_debug!("Node to cpumask map for %u nodes\n", nr_node_ids);
     }
 //
 // Set the cpu to node and mem mapping
 //
 #[no_mangle]
 pub unsafe extern "C" fn numa_store_cpu_info(cpu: c_uint) {
-    void numa_store_cpu_info(unsigned int cpu)
-    {
     set_cpu_numa_node(cpu, cpu_to_node_map[cpu]);
     }
 #[no_mangle]
-pub unsafe extern "C" fn early_map_cpu_to_node(cpu: c_uint, nid: c_int) -> void __init {
-    void __init early_map_cpu_to_node(unsigned int cpu, int nid)
-    {
+pub unsafe extern "C" fn early_map_cpu_to_node(cpu: c_uint, nid: c_int)  {
 // fallback to node 0
-    if (nid < 0 || nid >= MAX_NUMNODES || numa_off)
+    if (nid < 0 || nid >= MAX_NUMNODES || numa_off) {
     nid = 0;
+    }
     cpu_to_node_map[cpu] = nid;
 //
 // We should set the numa node of cpu0 as soon as possible, because it
 // has already been set up online before. cpu_to_node(0) will soon be
 // called.
 //
-    if (!cpu)
+    if (!cpu) {
     set_cpu_numa_node(cpu, nid);
     }
+    }
 
-    unsigned long __per_cpu_offset[NR_CPUS] __read_mostly;
+    unsigned long __per_cpu_offset[NR_CPUS] ;
     EXPORT_SYMBOL(__per_cpu_offset);
 #[no_mangle]
 pub unsafe extern "C" fn early_cpu_to_node(cpu: c_int) -> c_int {
-    int early_cpu_to_node(int cpu)
-    {
     return cpu_to_node_map[cpu];
     }
 #[no_mangle]
-unsafe extern "C" fn pcpu_cpu_distance(from: c_uint, to: c_uint) -> int __init {
-    static int __init pcpu_cpu_distance(unsigned int from, unsigned int to)
-    {
+unsafe extern "C" fn pcpu_cpu_distance(from: c_uint, to: c_uint) -> c_int {
     return node_distance(early_cpu_to_node(from), early_cpu_to_node(to));
     }
 #[no_mangle]
-pub unsafe extern "C" fn setup_per_cpu_areas() -> void __init {
-    void __init setup_per_cpu_areas(void)
-    {
-    unsigned long delta;
-    unsigned int cpu;
-    let mut rc: c_int = -EINVAL;
+pub unsafe extern "C" fn setup_per_cpu_areas()  {
+    let mut delta = 0;
+    let mut cpu = 0;
+pub static mut rc: c_int = 0;
     if (pcpu_chosen_fc != PCPU_FC_PAGE) {
 //
 // Always reserve area for module percpu variables.  That's
@@ -200,44 +440,46 @@ pub unsafe extern "C" fn setup_per_cpu_areas() -> void __init {
     pcpu_cpu_distance,
     early_cpu_to_node);
 
-    if (rc < 0)
-    pr_warn("PERCPU: %s allocator failed (%d), falling back to page size\n",
+    if (rc < 0) {
+    pr_warn!("PERCPU: %s allocator failed (%d), falling back to page size\n",
     pcpu_fc_names[pcpu_chosen_fc], rc);
+    }
 
     }
 
-    if (rc < 0)
+    if (rc < 0) {
     rc = pcpu_page_first_chunk(PERCPU_MODULE_RESERVE, early_cpu_to_node);
+    }
 
-    if (rc < 0)
+    if (rc < 0) {
     panic("Failed to initialize percpu areas (err=%d).", rc);
+    }
     delta = (unsigned long)pcpu_base_addr - (unsigned long)__per_cpu_start;
-    for_each_possible_cpu(cpu)
+    for_each_possible_cpu(cpu) {
     __per_cpu_offset[cpu] = delta + pcpu_unit_offsets[cpu];
+    }
     }
 
 //
 // Initialize NODE_DATA for a node on the local memory
 //
 #[no_mangle]
-unsafe extern "C" fn setup_node_data(nid: c_int, start_pfn: u64, end_pfn: u64) -> void __init {
-    static void __init setup_node_data(int nid, u64 start_pfn, u64 end_pfn)
-    {
-    if (start_pfn >= end_pfn)
-    pr_info("Initmem setup node %d [<memory-less node>]\n", nid);
+unsafe extern "C" fn setup_node_data(nid: c_int, start_pfn: u64, end_pfn: u64)  {
+    if (start_pfn >= end_pfn) {
+    pr_info!("Initmem setup node %d [<memory-less node>]\n", nid);
+    }
     alloc_node_data(nid);
     NODE_DATA(nid).node_id = nid;
     NODE_DATA(nid).node_start_pfn = start_pfn;
     NODE_DATA(nid).node_spanned_pages = end_pfn - start_pfn;
     }
 #[no_mangle]
-unsafe extern "C" fn numa_register_nodes() -> int __init {
-    static int __init numa_register_nodes(void)
-    {
-    int nid;
+unsafe extern "C" fn numa_register_nodes() -> c_int {
+    let mut nid = 0;
 // Check the validity of the memblock/node mapping
-    if (!memblock_validate_numa_coverage(0))
+    if (!memblock_validate_numa_coverage(0)) {
     return -EINVAL;
+    }
 // Finally register nodes.
     for_each_node_mask(nid, numa_nodes_parsed) {
     unsigned long start_pfn, end_pfn;
@@ -248,24 +490,26 @@ unsafe extern "C" fn numa_register_nodes() -> int __init {
     return 0;
     }
 #[no_mangle]
-unsafe extern "C" fn numa_init((*init_func)(void): *mut c_int) -> int __init {
+unsafe extern "C" fn numa_init((*init_func)(void): *mut c_int) -> c_int {
     static int __init numa_init(int (*init_func)(void))
     {
-    int ret;
+    let mut ret = 0;
     ret = numa_memblks_init(init_func, /* memblock_force_top_down */ false);
-    if (ret < 0)
-    goto out_free_distance;
+    if (ret < 0) {
+// goto;
+    }
     if (nodes_empty(numa_nodes_parsed)) {
-    pr_info("No NUMA configuration found\n");
+    pr_info!("No NUMA configuration found\n");
     ret = -EINVAL;
-    goto out_free_distance;
+// goto;
     }
     ret = numa_register_nodes();
-    if (ret < 0)
-    goto out_free_distance;
+    if (ret < 0) {
+// goto;
+    }
     setup_node_to_cpumask_map();
     return 0;
-    out_free_distance:
+// label;
     numa_reset_distance();
     return ret;
     }
@@ -281,18 +525,17 @@ unsafe extern "C" fn numa_init((*init_func)(void): *mut c_int) -> int __init {
 // Return: 0 on success, -errno on failure.
 //
 #[no_mangle]
-unsafe extern "C" fn dummy_numa_init() -> int __init {
-    static int __init dummy_numa_init(void)
-    {
-    let mut start: phys_addr_t = memblock_start_of_DRAM();
-    let mut end: phys_addr_t = memblock_end_of_DRAM() - 1;
-    int ret;
-    if (numa_off)
-    pr_info("NUMA disabled\n"); /* Forced off on command line. */
-    pr_info("Faking a node at [mem %pap-%pap]\n", &start, &end);
+unsafe extern "C" fn dummy_numa_init() -> c_int {
+pub static mut start: phys_addr_t = 0;
+pub static mut end: phys_addr_t = 0;
+    let mut ret = 0;
+    if (numa_off) {
+    pr_info!("NUMA disabled\n"); /* Forced off on command line. */
+    }
+    pr_info!("Faking a node at [mem %pap-%pap]\n", &start, &end);
     ret = numa_add_memblk(0, start, end + 1);
     if (ret) {
-    pr_err("NUMA init failed\n");
+    pr_err!("NUMA init failed\n");
     return ret;
     }
     numa_off = true;
@@ -300,22 +543,18 @@ unsafe extern "C" fn dummy_numa_init() -> int __init {
     }
 
 #[no_mangle]
-unsafe extern "C" fn arch_acpi_numa_init() -> int __init {
-    static int __init arch_acpi_numa_init(void)
-    {
-    int ret;
+unsafe extern "C" fn arch_acpi_numa_init() -> c_int {
+    let mut ret = 0;
     ret = acpi_numa_init();
     if (ret) {
-    pr_debug("Failed to initialise from firmware\n");
+    pr_debug!("Failed to initialise from firmware\n");
     return ret;
     }
     return srat_disabled() ? -EINVAL : 0;
     }
 
 #[no_mangle]
-unsafe extern "C" fn arch_acpi_numa_init() -> int __init {
-    static int __init arch_acpi_numa_init(void)
-    {
+unsafe extern "C" fn arch_acpi_numa_init() -> c_int {
     return -EOPNOTSUPP;
     }
 
@@ -326,14 +565,14 @@ unsafe extern "C" fn arch_acpi_numa_init() -> int __init {
 // last fallback is dummy single node config encompassing whole memory.
 //
 #[no_mangle]
-pub unsafe extern "C" fn arch_numa_init() -> void __init {
-    void __init arch_numa_init(void)
-    {
+pub unsafe extern "C" fn arch_numa_init()  {
     if (!numa_off) {
-    if (!acpi_disabled && !numa_init(arch_acpi_numa_init))
+    if (!acpi_disabled && !numa_init(arch_acpi_numa_init)) {
     return;
-    if (acpi_disabled && !numa_init(of_numa_init))
+    }
+    if (acpi_disabled && !numa_init(of_numa_init)) {
     return;
+    }
     }
     numa_init(dummy_numa_init);
     }
@@ -341,45 +580,48 @@ pub unsafe extern "C" fn arch_numa_init() -> void __init {
     void __init numa_emu_update_cpu_to_node(int *emu_nid_to_phys,
     unsigned int nr_emu_nids)
     {
-    int i, j;
+    let mut i = 0;
+    let mut j = 0;
 //
 // Transform cpu_to_node_map table to use emulated nids by
 // reverse-mapping phys_nid.  The maps should always exist but fall
 // back to zero just in case.
 //
-    for (i = 0; i < ARRAY_SIZE(cpu_to_node_map); i++) {
-    if (cpu_to_node_map[i] == NUMA_NO_NODE)
+    while (i < ARRAY_SIZE!(cpu_to_node_map)) {
+    if (cpu_to_node_map[i] == NUMA_NO_NODE) {
     continue;
-    for (j = 0; j < nr_emu_nids; j++)
+    }
+    for (j = 0; j < nr_emu_nids; j++) {
     if (cpu_to_node_map[i] == emu_nid_to_phys[j])
     break;
+    }
     cpu_to_node_map[i] = j < nr_emu_nids ? j : 0;
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn numa_emu_dma_end() -> u64 __init {
-    u64 __init numa_emu_dma_end(void)
-    {
     return memblock_start_of_DRAM() + SZ_4G;
     }
 #[no_mangle]
 pub unsafe extern "C" fn debug_cpumask_set_cpu(cpu: c_uint, node: c_int, enable: bool) {
-    void debug_cpumask_set_cpu(unsigned int cpu, int node, bool enable)
-    {
-    struct cpumask *mask;
-    if (node == NUMA_NO_NODE)
+pub static mut mask: *mut c_void = core::ptr::null_mut();
+    if (node == NUMA_NO_NODE) {
     return;
+    }
     mask = node_to_cpumask_map[node];
     if (!cpumask_available(mask)) {
-    pr_err("node_to_cpumask_map[%i] core::ptr::null_mut()\n", node);
+    pr_err!("node_to_cpumask_map[%i] core::ptr::null_mut()\n", node);
     dump_stack();
     return;
     }
-    if (enable)
+    if (enable) {
     cpumask_set_cpu(cpu, mask);
-    else
+    }
+    else {
     cpumask_clear_cpu(cpu, mask);
-    pr_debug("%s cpu %d node %d: mask now %*pbl\n",
+    }
+    pr_debug!("%s cpu %d node %d: mask now %*pbl\n",
     enable ? "numa_add_cpu" : "numa_remove_cpu",
     cpu, node, cpumask_pr_args(mask));
     }
+}

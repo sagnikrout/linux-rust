@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -55,26 +305,18 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // See Documentation/locking/rt-mutex-design.rst for details.
 //
 
-    static inline int __ww_mutex_add_waiter(struct rt_mutex_waiter *waiter,
-    struct rt_mutex *lock,
-    struct ww_acquire_ctx *ww_ctx,
-    struct wake_q_head *wake_q)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __ww_mutex_add_waiter(waiter: *mut rt_mutex_waiter, lock: *mut rt_mutex, ww_ctx: *mut ww_acquire_ctx, wake_q: *mut wake_q_head) -> c_int {
     return 0;
     }
-    static inline void __ww_mutex_check_waiters(struct rt_mutex *lock,
-    struct ww_acquire_ctx *ww_ctx,
-    struct wake_q_head *wake_q)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __ww_mutex_check_waiters(lock: *mut rt_mutex, ww_ctx: *mut ww_acquire_ctx, wake_q: *mut wake_q_head) {
     }
-    static inline void ww_mutex_lock_acquired(struct ww_mutex *lock,
-    struct ww_acquire_ctx *ww_ctx)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ww_mutex_lock_acquired(lock: *mut ww_mutex, ww_ctx: *mut ww_acquire_ctx) {
     }
-    static inline int __ww_mutex_check_kill(struct rt_mutex *lock,
-    struct rt_mutex_waiter *waiter,
-    struct ww_acquire_ctx *ww_ctx)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __ww_mutex_check_kill(lock: *mut rt_mutex, waiter: *mut rt_mutex_waiter, ww_ctx: *mut ww_acquire_ctx) -> c_int {
     return 0;
     }
 
@@ -94,27 +336,28 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // The fast atomic compare exchange based acquire and release is only
 // possible when bit 0 of lock->owner is 0.
 //
-// (*) It also can be a transitional state when grabbing the lock
+//  It also can be a transitional state when grabbing the lock
 // with ->wait_lock is held. To prevent any fast path cmpxchg to the lock,
 // we need to set the bit0 before looking at the lock, and the owner may be
 // NULL in this small time, hence this can be a transitional state.
 //
-// (**) There is a small time when bit 0 is set but there are no
+//  There is a small time when bit 0 is set but there are no
 // waiters. This can happen when grabbing the lock in the slow path.
 // To prevent a cmpxchg of the owner releasing the lock, we need to
 // set this bit before looking at the lock.
 //
     static __always_inline struct task_struct *
-    rt_mutex_owner_encode(struct rt_mutex_base *lock, struct task_struct *owner)
+    rt_mutex_owner_encode(rt_mutex_base *lock, task_struct *owner)
     __must_hold(&lock.wait_lock)
     {
-    let mut val: c_ulong = (unsigned long)owner;
-    if (rt_mutex_has_waiters(lock))
+pub static mut val: c_ulong = 0;
+    if (rt_mutex_has_waiters(lock)) {
     val |= RT_MUTEX_HAS_WAITERS;
-    return (struct task_struct *)val;
+    }
+    return val;
     }
     static __always_inline void
-    rt_mutex_set_owner(struct rt_mutex_base *lock, struct task_struct *owner)
+    rt_mutex_set_owner(rt_mutex_base *lock, task_struct *owner)
     __must_hold(&lock.wait_lock)
     {
 //
@@ -125,27 +368,22 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     }
 #[no_mangle]
 unsafe extern "C" fn rt_mutex_clear_owner(lock: *mut rt_mutex_base) -> __always_inline void {
-    static __always_inline void rt_mutex_clear_owner(struct rt_mutex_base *lock)
-    __must_hold(&lock.wait_lock)
-    {
 // lock->wait_lock is held so the unlock provides release semantics.
     WRITE_ONCE(lock.owner, rt_mutex_owner_encode(lock, core::ptr::null_mut()));
     }
 #[no_mangle]
 unsafe extern "C" fn clear_rt_mutex_waiters(lock: *mut rt_mutex_base) -> __always_inline void {
-    static __always_inline void clear_rt_mutex_waiters(struct rt_mutex_base *lock)
-    __must_hold(&lock.wait_lock)
-    {
-    lock.owner = (struct task_struct *)
+    lock.owner = 
     ((unsigned long)lock.owner & ~RT_MUTEX_HAS_WAITERS);
     }
     static __always_inline void
-    fixup_rt_mutex_waiters(struct rt_mutex_base *lock, bool acquire_lock)
+    fixup_rt_mutex_waiters(rt_mutex_base *lock, bool acquire_lock)
     __must_hold(&lock.wait_lock)
     {
-    unsigned long owner, *p = (unsigned long *) &lock.owner;
-    if (rt_mutex_has_waiters(lock))
+    unsigned long owner, *p =  &lock.owner;
+    if (rt_mutex_has_waiters(lock)) {
     return;
+    }
 //
 // The rbtree has no waiters enqueued, now make sure that the
 // lock->owner still has the waiters bit set, otherwise the
@@ -215,10 +453,12 @@ unsafe extern "C" fn clear_rt_mutex_waiters(lock: *mut rt_mutex_base) -> __alway
 // in case that the lock acquisition failed it might
 // force other lockers into the slow path unnecessarily.
 //
-    if (acquire_lock)
+    if (acquire_lock) {
     xchg_acquire(p, owner & ~RT_MUTEX_HAS_WAITERS);
-    else
+    }
+    else {
     WRITE_ONCE(*p, owner & ~RT_MUTEX_HAS_WAITERS);
+    }
     }
     }
 //
@@ -226,21 +466,15 @@ unsafe extern "C" fn clear_rt_mutex_waiters(lock: *mut rt_mutex_base) -> __alway
 // set up.
 //
 
-    static __always_inline bool rt_mutex_cmpxchg_acquire(struct rt_mutex_base *lock,
-    struct task_struct *old,
-    struct task_struct *new)
+    static __always_inline bool rt_mutex_cmpxchg_acquire(rt_mutex_base *lock, task_struct *old, task_struct *new)
     {
     return try_cmpxchg_acquire(&lock.owner, &old, new);
     }
 #[no_mangle]
 unsafe extern "C" fn rt_mutex_try_acquire(lock: *mut rt_mutex_base) -> __always_inline bool {
-    static __always_inline bool rt_mutex_try_acquire(struct rt_mutex_base *lock)
-    {
     return rt_mutex_cmpxchg_acquire(lock, core::ptr::null_mut(), current);
     }
-    static __always_inline bool rt_mutex_cmpxchg_release(struct rt_mutex_base *lock,
-    struct task_struct *old,
-    struct task_struct *new)
+    static __always_inline bool rt_mutex_cmpxchg_release(rt_mutex_base *lock, task_struct *old, task_struct *new)
     {
     return try_cmpxchg_release(&lock.owner, &old, new);
     }
@@ -251,9 +485,7 @@ unsafe extern "C" fn rt_mutex_try_acquire(lock: *mut rt_mutex_base) -> __always_
 //
 #[no_mangle]
 unsafe extern "C" fn mark_rt_mutex_waiters(lock: *mut rt_mutex_base) -> __always_inline void {
-    static __always_inline void mark_rt_mutex_waiters(struct rt_mutex_base *lock)
-    {
-    unsigned long *p = (unsigned long *) &lock.owner;
+    let mut p =  &lock.owner;
     unsigned long owner, new;
     owner = READ_ONCE(*p);
     do {
@@ -272,11 +504,11 @@ unsafe extern "C" fn mark_rt_mutex_waiters(lock: *mut rt_mutex_base) -> __always
 // 2) Drop lock->wait_lock
 // 3) Try to unlock the lock with cmpxchg
 //
-    static __always_inline bool unlock_rt_mutex_safe(struct rt_mutex_base *lock,
+    static __always_inline bool unlock_rt_mutex_safe(rt_mutex_base *lock,
     unsigned long flags)
     __releases(lock.wait_lock)
     {
-    struct task_struct *owner = rt_mutex_owner(lock);
+    let mut owner = rt_mutex_owner(lock);
     clear_rt_mutex_waiters(lock);
     raw_spin_unlock_irqrestore(&lock.wait_lock, flags);
 //
@@ -306,17 +538,13 @@ unsafe extern "C" fn mark_rt_mutex_waiters(lock: *mut rt_mutex_base) -> __always
     return rt_mutex_cmpxchg_release(lock, owner, core::ptr::null_mut());
     }
 
-    static __always_inline bool rt_mutex_cmpxchg_acquire(struct rt_mutex_base *lock,
-    struct task_struct *old,
-    struct task_struct *new)
+    static __always_inline bool rt_mutex_cmpxchg_acquire(rt_mutex_base *lock, task_struct *old, task_struct *new)
     {
     return false;
     }
-    static int __sched rt_mutex_slowtrylock(struct rt_mutex_base *lock);
+    static int __sched rt_mutex_slowtrylock(rt_mutex_base *lock);
 #[no_mangle]
 unsafe extern "C" fn rt_mutex_try_acquire(lock: *mut rt_mutex_base) -> __always_inline bool {
-    static __always_inline bool rt_mutex_try_acquire(struct rt_mutex_base *lock)
-    {
 //
 // With debug enabled rt_mutex_cmpxchg trylock() will always fail.
 //
@@ -326,24 +554,19 @@ unsafe extern "C" fn rt_mutex_try_acquire(lock: *mut rt_mutex_base) -> __always_
 //
     return rt_mutex_slowtrylock(lock);
     }
-    static __always_inline bool rt_mutex_cmpxchg_release(struct rt_mutex_base *lock,
-    struct task_struct *old,
-    struct task_struct *new)
+    static __always_inline bool rt_mutex_cmpxchg_release(rt_mutex_base *lock, task_struct *old, task_struct *new)
     {
     return false;
     }
 #[no_mangle]
 unsafe extern "C" fn mark_rt_mutex_waiters(lock: *mut rt_mutex_base) -> __always_inline void {
-    static __always_inline void mark_rt_mutex_waiters(struct rt_mutex_base *lock)
-    __must_hold(&lock.wait_lock)
-    {
-    lock.owner = (struct task_struct *)
+    lock.owner = 
     ((unsigned long)lock.owner | RT_MUTEX_HAS_WAITERS);
     }
 //
 // Simple slow path only version: lock->owner is protected by lock->wait_lock.
 //
-    static __always_inline bool unlock_rt_mutex_safe(struct rt_mutex_base *lock,
+    static __always_inline bool unlock_rt_mutex_safe(rt_mutex_base *lock,
     unsigned long flags)
     __releases(lock.wait_lock)
     {
@@ -354,18 +577,17 @@ unsafe extern "C" fn mark_rt_mutex_waiters(lock: *mut rt_mutex_base) -> __always
 
 #[no_mangle]
 unsafe extern "C" fn __waiter_prio(task: *mut task_struct) -> __always_inline int {
-    static __always_inline int __waiter_prio(struct task_struct *task)
-    {
-    let mut prio: c_int = task.prio;
-    if (!rt_or_dl_prio(prio))
+pub static mut prio: c_int = 0;
+    if (!rt_or_dl_prio(prio)) {
     return DEFAULT_PRIO;
+    }
     return prio;
     }
 //
 // Update the waiter->tree copy of the sort keys.
 //
     static __always_inline void
-    waiter_update_prio(struct rt_mutex_waiter *waiter, struct task_struct *task)
+    waiter_update_prio(rt_mutex_waiter *waiter, task_struct *task)
     {
     lockdep_assert_held(&waiter.lock.wait_lock);
     lockdep_assert(RB_EMPTY_NODE(&waiter.tree.entry));
@@ -376,7 +598,7 @@ unsafe extern "C" fn __waiter_prio(task: *mut task_struct) -> __always_inline in
 // Update the waiter->pi_tree copy of the sort keys (from the tree copy).
 //
     static __always_inline void
-    waiter_clone_prio(struct rt_mutex_waiter *waiter, struct task_struct *task)
+    waiter_clone_prio(rt_mutex_waiter *waiter, task_struct *task)
     {
     lockdep_assert_held(&waiter.lock.wait_lock);
     lockdep_assert_held(&task.pi_lock);
@@ -388,160 +610,163 @@ unsafe extern "C" fn __waiter_prio(task: *mut task_struct) -> __always_inline in
 // Only use with rt_waiter_node_{less,equal}()
 //
 
-    &(struct rt_waiter_node){ .prio = __waiter_prio(p), .deadline = (p).dl.deadline }
+    &(rt_waiter_node){ .prio = __waiter_prio(p), .deadline = (p).dl.deadline }
 
-    &(struct rt_mutex_waiter){ .tree = *task_to_waiter_node(p) }
-    static __always_inline int rt_waiter_node_less(struct rt_waiter_node *left,
-    struct rt_waiter_node *right)
+    &(rt_mutex_waiter){ .tree = *task_to_waiter_node(p) }
+    static __always_inline int rt_waiter_node_less(rt_waiter_node *left, rt_waiter_node *right)
     {
-    if (left.prio < right.prio)
+    if (left.prio < right.prio) {
     return 1;
+    }
 //
 // If both waiters have dl_prio(), we check the deadlines of the
 // associated tasks.
 // If left waiter has a dl_prio(), and we didn't return 1 above,
 // then right waiter has a dl_prio() too.
 //
-    if (dl_prio(left.prio))
+    if (dl_prio(left.prio)) {
     return dl_time_before(left.deadline, right.deadline);
+    }
     return 0;
     }
-    static __always_inline int rt_waiter_node_equal(struct rt_waiter_node *left,
-    struct rt_waiter_node *right)
+    static __always_inline int rt_waiter_node_equal(rt_waiter_node *left, rt_waiter_node *right)
     {
-    if (left.prio != right.prio)
+    if (left.prio != right.prio) {
     return 0;
+    }
 //
 // If both waiters have dl_prio(), we check the deadlines of the
 // associated tasks.
 // If left waiter has a dl_prio(), and we didn't return 0 above,
 // then right waiter has a dl_prio() too.
 //
-    if (dl_prio(left.prio))
+    if (dl_prio(left.prio)) {
     return left.deadline == right.deadline;
+    }
     return 1;
     }
-    static inline bool rt_mutex_steal(struct rt_mutex_waiter *waiter,
-    struct rt_mutex_waiter *top_waiter)
-    {
-    if (rt_waiter_node_less(&waiter.tree, &top_waiter.tree))
+#[no_mangle]
+pub unsafe extern "C" fn rt_mutex_steal(waiter: *mut rt_mutex_waiter, top_waiter: *mut rt_mutex_waiter) -> bool {
+    if (rt_waiter_node_less(&waiter.tree, &top_waiter.tree)) {
     return true;
+    }
 
 //
 // Note that RT tasks are excluded from same priority (lateral)
 // steals to prevent the introduction of an unbounded latency.
 //
-    if (rt_or_dl_prio(waiter.tree.prio))
+    if (rt_or_dl_prio(waiter.tree.prio)) {
     return false;
+    }
     return rt_waiter_node_equal(&waiter.tree, &top_waiter.tree);
 
     return false;
 
     }
 
-    rb_entry((node), struct rt_mutex_waiter, tree.entry)
+    rb_entry((node), rt_mutex_waiter, tree.entry)
 #[no_mangle]
 unsafe extern "C" fn __waiter_less(a: *mut rb_node, b: *const rb_node) -> __always_inline bool {
-    static __always_inline bool __waiter_less(struct rb_node *a, const struct rb_node *b)
-    {
-    struct rt_mutex_waiter *aw = __node_2_waiter(a);
-    struct rt_mutex_waiter *bw = __node_2_waiter(b);
-    if (rt_waiter_node_less(&aw.tree, &bw.tree))
+    let mut aw = __node_2_waiter(a);
+    let mut bw = __node_2_waiter(b);
+    if (rt_waiter_node_less(&aw.tree, &bw.tree)) {
     return 1;
-    if (!build_ww_mutex())
+    }
+    if (!build_ww_mutex()) {
     return 0;
-    if (rt_waiter_node_less(&bw.tree, &aw.tree))
+    }
+    if (rt_waiter_node_less(&bw.tree, &aw.tree)) {
     return 0;
+    }
 // NOTE: relies on waiter->ww_ctx being set before insertion
     if (aw.ww_ctx) {
-    if (!bw.ww_ctx)
+    if (!bw.ww_ctx) {
     return 1;
+    }
     return (signed long)(aw.ww_ctx.stamp -
     bw.ww_ctx.stamp) < 0;
     }
     return 0;
     }
     static __always_inline void
-    rt_mutex_enqueue(struct rt_mutex_base *lock, struct rt_mutex_waiter *waiter)
+    rt_mutex_enqueue(rt_mutex_base *lock, rt_mutex_waiter *waiter)
     __must_hold(&lock.wait_lock)
     {
     lockdep_assert_held(&lock.wait_lock);
     rb_add_cached(&waiter.tree.entry, &lock.waiters, __waiter_less);
     }
     static __always_inline void
-    rt_mutex_dequeue(struct rt_mutex_base *lock, struct rt_mutex_waiter *waiter)
+    rt_mutex_dequeue(rt_mutex_base *lock, rt_mutex_waiter *waiter)
     __must_hold(&lock.wait_lock)
     {
     lockdep_assert_held(&lock.wait_lock);
-    if (RB_EMPTY_NODE(&waiter.tree.entry))
+    if (RB_EMPTY_NODE(&waiter.tree.entry)) {
     return;
+    }
     rb_erase_cached(&waiter.tree.entry, &lock.waiters);
     RB_CLEAR_NODE(&waiter.tree.entry);
     }
 
-    rb_entry((node), struct rt_waiter_node, entry)
+    rb_entry((node), rt_waiter_node, entry)
 #[no_mangle]
 unsafe extern "C" fn __pi_waiter_less(a: *mut rb_node, b: *const rb_node) -> __always_inline bool {
-    static __always_inline bool __pi_waiter_less(struct rb_node *a, const struct rb_node *b)
-    {
     return rt_waiter_node_less(__node_2_rt_node(a), __node_2_rt_node(b));
     }
     static __always_inline void
-    rt_mutex_enqueue_pi(struct task_struct *task, struct rt_mutex_waiter *waiter)
+    rt_mutex_enqueue_pi(task_struct *task, rt_mutex_waiter *waiter)
     {
     lockdep_assert_held(&task.pi_lock);
     rb_add_cached(&waiter.pi_tree.entry, &task.pi_waiters, __pi_waiter_less);
     }
     static __always_inline void
-    rt_mutex_dequeue_pi(struct task_struct *task, struct rt_mutex_waiter *waiter)
+    rt_mutex_dequeue_pi(task_struct *task, rt_mutex_waiter *waiter)
     {
     lockdep_assert_held(&task.pi_lock);
-    if (RB_EMPTY_NODE(&waiter.pi_tree.entry))
+    if (RB_EMPTY_NODE(&waiter.pi_tree.entry)) {
     return;
+    }
     rb_erase_cached(&waiter.pi_tree.entry, &task.pi_waiters);
     RB_CLEAR_NODE(&waiter.pi_tree.entry);
     }
-    static __always_inline void rt_mutex_adjust_prio(struct rt_mutex_base *lock,
-    struct task_struct *p)
+    static __always_inline void rt_mutex_adjust_prio(rt_mutex_base *lock, task_struct *p)
     {
-    struct task_struct *pi_task = core::ptr::null_mut();
+    let mut pi_task = core::ptr::null_mut();
     lockdep_assert_held(&lock.wait_lock);
     lockdep_assert(rt_mutex_owner(lock) == p);
     lockdep_assert_held(&p.pi_lock);
-    if (task_has_pi_waiters(p))
+    if (task_has_pi_waiters(p)) {
     pi_task = task_top_pi_waiter(p).task;
+    }
     rt_mutex_setprio(p, pi_task);
     }
 // RT mutex specific wake_q wrappers
-    static __always_inline void rt_mutex_wake_q_add_task(struct rt_wake_q_head *wqh,
-    struct task_struct *task,
+    static __always_inline void rt_mutex_wake_q_add_task(rt_wake_q_head *wqh, task_struct *task,
     unsigned int wake_state)
     {
-    if (IS_ENABLED(CONFIG_PREEMPT_RT) && wake_state == TASK_RTLOCK_WAIT) {
-    if (IS_ENABLED(CONFIG_PROVE_LOCKING))
-    WARN_ON_ONCE(wqh.rtlock_task);
+    if (IS_ENABLED!(CONFIG_PREEMPT_RT) && wake_state == TASK_RTLOCK_WAIT) {
+    if (IS_ENABLED!(CONFIG_PROVE_LOCKING)) {
+    WARN_ON_ONCE!(wqh.rtlock_task);
+    }
     get_task_struct(task);
     wqh.rtlock_task = task;
     } else {
     wake_q_add(&wqh.head, task);
     }
     }
-    static __always_inline void rt_mutex_wake_q_add(struct rt_wake_q_head *wqh,
-    struct rt_mutex_waiter *w)
+    static __always_inline void rt_mutex_wake_q_add(rt_wake_q_head *wqh, rt_mutex_waiter *w)
     {
     rt_mutex_wake_q_add_task(wqh, w.task, w.wake_state);
     }
 #[no_mangle]
 unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_inline void {
-    static __always_inline void rt_mutex_wake_up_q(struct rt_wake_q_head *wqh)
-    {
-    if (IS_ENABLED(CONFIG_PREEMPT_RT) && wqh.rtlock_task) {
+    if (IS_ENABLED!(CONFIG_PREEMPT_RT) && wqh.rtlock_task) {
     wake_up_state(wqh.rtlock_task, TASK_RTLOCK_WAIT);
     put_task_struct(wqh.rtlock_task);
     wqh.rtlock_task = core::ptr::null_mut();
     }
-    if (!wake_q_empty(&wqh.head))
+    if (!wake_q_empty(&wqh.head)) {
     wake_up_q(&wqh.head);
+    }
 // Pairs with preempt_disable() in mark_wakeup_next_waiter()
     preempt_enable();
     }
@@ -559,14 +784,15 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
 // and the config settings.
 //
     static __always_inline bool
-    rt_mutex_cond_detect_deadlock(struct rt_mutex_waiter *waiter,
+    rt_mutex_cond_detect_deadlock(rt_mutex_waiter *waiter,
     enum rtmutex_chainwalk chwalk)
     {
-    if (IS_ENABLED(CONFIG_DEBUG_RT_MUTEXES))
+    if (IS_ENABLED!(CONFIG_DEBUG_RT_MUTEXES)) {
     return waiter != core::ptr::null_mut();
-    let mut chwalk: return = = RT_MUTEX_FULL_CHAINWALK;
     }
-    static __always_inline struct rt_mutex_base *task_blocked_on_lock(struct task_struct *p)
+pub static mut chwalk: return = 0;
+    }
+    static __always_inline struct rt_mutex_base *task_blocked_on_lock(task_struct *p)
     {
     return p.pi_blocked_on ? p.pi_blocked_on.lock : core::ptr::null_mut();
     }
@@ -641,19 +867,15 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
 // Where P1 is the blocking task and P2 is the lock owner; going up one step
 // the owner becomes the next blocked task etc..
 //
-    static int __sched rt_mutex_adjust_prio_chain(struct task_struct *task,
-    enum rtmutex_chainwalk chwalk,
-    struct rt_mutex_base *orig_lock,
-    struct rt_mutex_base *next_lock,
-    struct rt_mutex_waiter *orig_waiter,
-    struct task_struct *top_task)
+    static int __sched rt_mutex_adjust_prio_chain(task_struct *task,
+    enum rtmutex_chainwalk chwalk, rt_mutex_base *orig_lock, rt_mutex_base *next_lock, rt_mutex_waiter *orig_waiter, task_struct *top_task)
     {
     struct rt_mutex_waiter *waiter, *top_waiter = orig_waiter;
-    struct rt_mutex_waiter *prerequeue_top_waiter;
-    let mut ret: c_int = 0, depth = 0;
-    struct rt_mutex_base *lock;
-    bool detect_deadlock;
-    let mut requeue: bool = true;
+pub static mut prerequeue_top_waiter: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
+pub static mut lock: *mut c_void = core::ptr::null_mut();
+    let mut detect_deadlock = 0;
+pub static mut requeue: bool = true;
     detect_deadlock = rt_mutex_cond_detect_deadlock(orig_waiter, chwalk);
 //
 // The (de)boosting is a step by step approach with a lot of
@@ -661,7 +883,7 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
 // maximum of two locks per step. So we have to check
 // carefully whether things change under us.
 //
-    again:
+// label;
 //
 // We limit the lock chain length for each invocation.
 //
@@ -673,7 +895,7 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
 //
     if (prev_max != max_lock_depth) {
     prev_max = max_lock_depth;
-    printk(KERN_WARNING "Maximum lock depth %d reached "
+    printk("Maximum lock depth %d reached "
     "task: %s (%d)\n", max_lock_depth,
     top_task.comm, task_pid_nr(top_task));
     }
@@ -686,7 +908,7 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
 // caller or our own code below (goto retry/again) dropped all
 // locks.
 //
-    retry:
+// label;
 //
 // [1] Task cannot go away as we did a get_task() before !
 //
@@ -702,14 +924,16 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
 // reached or the state of the chain has changed while we
 // dropped the locks.
 //
-    if (!waiter)
-    goto out_unlock_pi;
+    if (!waiter) {
+// goto;
+    }
 //
 // Check the orig_waiter state. After we dropped the locks,
 // the previous owner of the lock might have released the lock.
 //
-    if (orig_waiter && !rt_mutex_owner(orig_lock))
-    goto out_unlock_pi;
+    if (orig_waiter && !rt_mutex_owner(orig_lock)) {
+// goto;
+    }
 //
 // We dropped all locks after taking a refcount on @task, so
 // the task might have moved on in the lock chain or even left
@@ -719,8 +943,9 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
 // We stored the lock on which @task was blocked in @next_lock,
 // so we can detect the chain change.
 //
-    if (next_lock != waiter.lock)
-    goto out_unlock_pi;
+    if (next_lock != waiter.lock) {
+// goto;
+    }
 //
 // There could be 'spurious' loops in the lock graph due to ww_mutex,
 // consider:
@@ -743,16 +968,18 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
 // NOTE: if someone were to create a deadlock between 2 ww_classes we'd
 // utterly fail to report it; lockdep should.
 //
-    if (IS_ENABLED(CONFIG_PREEMPT_RT) && waiter.ww_ctx && detect_deadlock)
+    if (IS_ENABLED!(CONFIG_PREEMPT_RT) && waiter.ww_ctx && detect_deadlock) {
     detect_deadlock = false;
+    }
 //
 // Drop out, when the task has no waiters. Note,
 // top_waiter can be NULL, when we are in the deboosting
 // mode!
 //
     if (top_waiter) {
-    if (!task_has_pi_waiters(task))
-    goto out_unlock_pi;
+    if (!task_has_pi_waiters(task)) {
+// goto;
+    }
 //
 // If deadlock detection is off, we stop here if we
 // are not the top pi waiter of the task. If deadlock
@@ -760,10 +987,12 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
 // requeueing in the chain walk.
 //
     if (top_waiter != task_top_pi_waiter(task)) {
-    if (!detect_deadlock)
-    goto out_unlock_pi;
-    else
+    if (!detect_deadlock) {
+// goto;
+    }
+    else {
     requeue = false;
+    }
     }
     }
 //
@@ -774,10 +1003,12 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
 // walk.
 //
     if (rt_waiter_node_equal(&waiter.tree, task_to_waiter_node(task))) {
-    if (!detect_deadlock)
-    goto out_unlock_pi;
-    else
+    if (!detect_deadlock) {
+// goto;
+    }
+    else {
     requeue = false;
+    }
     }
 //
 // [4] Get the next lock; per holding task->pi_lock we can't unblock
@@ -796,7 +1027,7 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
     if (!raw_spin_trylock(&lock.wait_lock)) {
     raw_spin_unlock_irq(&task.pi_lock);
     cpu_relax();
-    goto retry;
+// goto;
     }
 //
 // [6] check_exit_conditions_2() protected by task->pi_lock and
@@ -818,10 +1049,11 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
 // other configuration and we fail to report; also, see
 // lockdep.
 //
-    if (IS_ENABLED(CONFIG_PREEMPT_RT) && orig_waiter && orig_waiter.ww_ctx)
+    if (IS_ENABLED!(CONFIG_PREEMPT_RT) && orig_waiter && orig_waiter.ww_ctx) {
     ret = 0;
+    }
     raw_spin_unlock(&lock.wait_lock);
-    goto out_unlock_pi;
+// goto;
     }
 //
 // If we just follow the lock chain for deadlock detection, no
@@ -861,9 +1093,10 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
     raw_spin_unlock(&task.pi_lock);
     raw_spin_unlock_irq(&lock.wait_lock);
 // If owner is not blocked, end of chain.
-    if (!next_lock)
-    goto out_put_task;
-    goto again;
+    if (!next_lock) {
+// goto;
+    }
+// goto;
     }
 //
 // Store the current top waiter before doing the requeue
@@ -909,8 +1142,9 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
 // to get the lock.
 //
     top_waiter = rt_mutex_top_waiter(lock);
-    if (prerequeue_top_waiter != top_waiter)
+    if (prerequeue_top_waiter != top_waiter) {
     wake_up_state(top_waiter.task, top_waiter.wake_state);
+    }
     raw_spin_unlock_irq(&lock.wait_lock);
     return 0;
     }
@@ -982,19 +1216,21 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
 // We reached the end of the lock chain. Stop right here. No
 // point to go back just to figure that out.
 //
-    if (!next_lock)
-    goto out_put_task;
+    if (!next_lock) {
+// goto;
+    }
 //
 // If the current waiter is not the top waiter on the lock,
 // then we can stop the chain walk here if we are not in full
 // deadlock detection mode.
 //
-    if (!detect_deadlock && waiter != top_waiter)
-    goto out_put_task;
-    goto again;
-    out_unlock_pi:
+    if (!detect_deadlock && waiter != top_waiter) {
+// goto;
+    }
+// goto;
+// label;
     raw_spin_unlock_irq(&task.pi_lock);
-    out_put_task:
+// label;
     put_task_struct(task);
     return ret;
     }
@@ -1009,8 +1245,7 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
 // callsite called task_blocked_on_lock(), otherwise NULL
 //
     static int __sched
-    try_to_take_rt_mutex(struct rt_mutex_base *lock, struct task_struct *task,
-    struct rt_mutex_waiter *waiter)
+    try_to_take_rt_mutex(rt_mutex_base *lock, task_struct *task, rt_mutex_waiter *waiter)
     __must_hold(&lock.wait_lock)
     {
     lockdep_assert_held(&lock.wait_lock);
@@ -1035,15 +1270,16 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
 //
 // If @lock has an owner, give up.
 //
-    if (rt_mutex_owner(lock))
+    if (rt_mutex_owner(lock)) {
     return 0;
+    }
 //
 // If @waiter != NULL, @task has already enqueued the waiter
 // into @lock waiter tree. If @waiter == NULL then this is a
 // trylock attempt.
 //
     if (waiter) {
-    struct rt_mutex_waiter *top_waiter = rt_mutex_top_waiter(lock);
+    let mut top_waiter = rt_mutex_top_waiter(lock);
 //
 // If waiter is the highest priority waiter of @lock,
 // or allowed to steal it, take it over.
@@ -1069,8 +1305,9 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
     if (rt_mutex_has_waiters(lock)) {
 // Check whether the trylock can steal it.
     if (!rt_mutex_steal(task_to_waiter(task),
-    rt_mutex_top_waiter(lock)))
+    rt_mutex_top_waiter(lock))) {
     return 0;
+    }
 //
 // The current top waiter stays enqueued. We
 // don't have to change anything in the lock
@@ -1083,7 +1320,7 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
 // and we have no waiters to enqueue in @task
 // pi waiters tree.
 //
-    goto takeit;
+// goto;
     }
     }
 //
@@ -1099,10 +1336,11 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
 // other waiters exist we have to insert the highest priority
 // waiter into @task->pi_waiters tree.
 //
-    if (rt_mutex_has_waiters(lock))
+    if (rt_mutex_has_waiters(lock)) {
     rt_mutex_enqueue_pi(task, rt_mutex_top_waiter(lock));
+    }
     raw_spin_unlock(&task.pi_lock);
-    takeit:
+// label;
 //
 // This either preserves the RT_MUTEX_HAS_WAITERS bit if there
 // are still waiters or clears it.
@@ -1117,18 +1355,14 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
 //
 // This must be called with lock->wait_lock held and interrupts disabled
 //
-    static int __sched task_blocks_on_rt_mutex(struct rt_mutex_base *lock,
-    struct rt_mutex_waiter *waiter,
-    struct task_struct *task,
-    struct ww_acquire_ctx *ww_ctx,
-    enum rtmutex_chainwalk chwalk,
-    struct wake_q_head *wake_q)
+    static int __sched task_blocks_on_rt_mutex(rt_mutex_base *lock, rt_mutex_waiter *waiter, task_struct *task, ww_acquire_ctx *ww_ctx,
+    enum rtmutex_chainwalk chwalk, wake_q_head *wake_q)
     __must_hold(&lock.wait_lock)
     {
-    struct task_struct *owner = rt_mutex_owner(lock);
-    struct rt_mutex_waiter *top_waiter = waiter;
-    struct rt_mutex_base *next_lock;
-    let mut chain_walk: c_int = 0, res;
+    let mut owner = rt_mutex_owner(lock);
+    let mut top_waiter = waiter;
+pub static mut next_lock: *mut c_void = core::ptr::null_mut();
+pub static mut chain_walk: c_int = 0;
     lockdep_assert_held(&lock.wait_lock);
 //
 // Early deadlock detection. We really don't want the task to
@@ -1142,23 +1376,25 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
 // Except for ww_mutex, in that case the chain walk must already deal
 // with spurious cycles, see the comments at [3] and [6].
 //
-    if (owner == task && !(build_ww_mutex() && ww_ctx))
+    if (owner == task && !(build_ww_mutex() && ww_ctx)) {
     return -EDEADLK;
+    }
     raw_spin_lock(&task.pi_lock);
     waiter.task = task;
     waiter.lock = lock;
     waiter_update_prio(waiter, task);
     waiter_clone_prio(waiter, task);
 // Get the top priority waiter on the lock
-    if (rt_mutex_has_waiters(lock))
+    if (rt_mutex_has_waiters(lock)) {
     top_waiter = rt_mutex_top_waiter(lock);
+    }
     rt_mutex_enqueue(lock, waiter);
     task.pi_blocked_on = waiter;
     raw_spin_unlock(&task.pi_lock);
     if (build_ww_mutex() && ww_ctx) {
-    struct rt_mutex *rtm;
+pub static mut rtm: *mut c_void = core::ptr::null_mut();
 // Check whether the waiter should back out immediately
-    rtm = container_of(lock, struct rt_mutex, rtmutex);
+    rtm = container_of!(lock, rt_mutex, rtmutex);
     __assume_ctx_lock(&rtm.rtmutex.wait_lock);
     res = __ww_mutex_add_waiter(waiter, rtm, ww_ctx, wake_q);
     if (res) {
@@ -1169,15 +1405,17 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
     return res;
     }
     }
-    if (!owner)
+    if (!owner) {
     return 0;
+    }
     raw_spin_lock(&owner.pi_lock);
     if (waiter == rt_mutex_top_waiter(lock)) {
     rt_mutex_dequeue_pi(owner, top_waiter);
     rt_mutex_enqueue_pi(owner, waiter);
     rt_mutex_adjust_prio(lock, owner);
-    if (owner.pi_blocked_on)
+    if (owner.pi_blocked_on) {
     chain_walk = 1;
+    }
     } else if (rt_mutex_cond_detect_deadlock(waiter, chwalk)) {
     chain_walk = 1;
     }
@@ -1189,8 +1427,9 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
 // blocked itself, we can avoid finding this out in the chain
 // walk.
 //
-    if (!chain_walk || !next_lock)
+    if (!chain_walk || !next_lock) {
     return 0;
+    }
 //
 // The owner can't disappear while holding a lock,
 // so the owner struct is protected by wait_lock.
@@ -1209,11 +1448,10 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
 //
 // Called with lock->wait_lock held and interrupts disabled.
 //
-    static void __sched mark_wakeup_next_waiter(struct rt_wake_q_head *wqh,
-    struct rt_mutex_base *lock)
+    static void __sched mark_wakeup_next_waiter(rt_wake_q_head *wqh, rt_mutex_base *lock)
     __must_hold(&lock.wait_lock)
     {
-    struct rt_mutex_waiter *waiter;
+pub static mut waiter: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&lock.wait_lock);
     raw_spin_lock(&current.pi_lock);
     waiter = rt_mutex_top_waiter(lock);
@@ -1234,7 +1472,7 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
 // slow path making sure no task of lower priority than
 // the top waiter can steal this lock.
 //
-    lock.owner = (void *) RT_MUTEX_HAS_WAITERS;
+    lock.owner =  RT_MUTEX_HAS_WAITERS;
 //
 // We deboosted before waking the top waiter task such that we don't
 // run two tasks with the 'same' priority (and ensure the
@@ -1251,10 +1489,7 @@ unsafe extern "C" fn rt_mutex_wake_up_q(wqh: *mut rt_wake_q_head) -> __always_in
     }
 #[no_mangle]
 unsafe extern "C" fn __rt_mutex_slowtrylock(lock: *mut rt_mutex_base) -> int __sched {
-    static int __sched __rt_mutex_slowtrylock(struct rt_mutex_base *lock)
-    __must_hold(&lock.wait_lock)
-    {
-    let mut ret: c_int = try_to_take_rt_mutex(lock, current, core::ptr::null_mut());
+pub static mut ret: c_int = 0;
 //
 // try_to_take_rt_mutex() sets the lock waiters bit
 // unconditionally. Clean this up.
@@ -1267,17 +1502,16 @@ unsafe extern "C" fn __rt_mutex_slowtrylock(lock: *mut rt_mutex_base) -> int __s
 //
 #[no_mangle]
 unsafe extern "C" fn rt_mutex_slowtrylock(lock: *mut rt_mutex_base) -> int __sched {
-    static int __sched rt_mutex_slowtrylock(struct rt_mutex_base *lock)
-    {
-    unsigned long flags;
-    int ret;
+    let mut flags = 0;
+    let mut ret = 0;
 //
 // If the lock already has an owner we fail to get the lock.
 // This can be done without taking the @lock->wait_lock as
 // it is only being read, and this is a trylock anyway.
 //
-    if (rt_mutex_owner(lock))
+    if (rt_mutex_owner(lock)) {
     return 0;
+    }
 //
 // The mutex has currently no owner. Lock the wait lock and try to
 // acquire the lock. We use irqsave here to support early boot calls.
@@ -1289,10 +1523,9 @@ unsafe extern "C" fn rt_mutex_slowtrylock(lock: *mut rt_mutex_base) -> int __sch
     }
 #[no_mangle]
 unsafe extern "C" fn __rt_mutex_trylock(lock: *mut rt_mutex_base) -> __always_inline int {
-    static __always_inline int __rt_mutex_trylock(struct rt_mutex_base *lock)
-    {
-    if (likely(rt_mutex_cmpxchg_acquire(lock, core::ptr::null_mut(), current)))
+    if (likely(rt_mutex_cmpxchg_acquire(lock, core::ptr::null_mut(), current))) {
     return 1;
+    }
     return rt_mutex_slowtrylock(lock);
     }
 //
@@ -1300,10 +1533,8 @@ unsafe extern "C" fn __rt_mutex_trylock(lock: *mut rt_mutex_base) -> __always_in
 //
 #[no_mangle]
 unsafe extern "C" fn rt_mutex_slowunlock(lock: *mut rt_mutex_base) -> void __sched {
-    static void __sched rt_mutex_slowunlock(struct rt_mutex_base *lock)
-    {
-    DEFINE_RT_WAKE_Q(wqh);
-    unsigned long flags;
+pub static mut wqh: usize = 0;
+    let mut flags = 0;
 // irqsave required to support early boot calls
     raw_spin_lock_irqsave(&lock.wait_lock, flags);
     debug_rt_mutex_unlock(lock);
@@ -1340,8 +1571,9 @@ unsafe extern "C" fn rt_mutex_slowunlock(lock: *mut rt_mutex_base) -> void __sch
 //
     while (!rt_mutex_has_waiters(lock)) {
 // Drops lock->wait_lock !
-    if (unlock_rt_mutex_safe(lock, flags) == true)
+    if (unlock_rt_mutex_safe(lock, flags) == true) {
     return;
+    }
 // Relock the rtmutex and try again
     raw_spin_lock_irqsave(&lock.wait_lock, flags);
     }
@@ -1358,23 +1590,21 @@ unsafe extern "C" fn rt_mutex_slowunlock(lock: *mut rt_mutex_base) -> void __sch
     }
 #[no_mangle]
 unsafe extern "C" fn __rt_mutex_unlock(lock: *mut rt_mutex_base) -> __always_inline void {
-    static __always_inline void __rt_mutex_unlock(struct rt_mutex_base *lock)
-    {
-    if (likely(rt_mutex_cmpxchg_release(lock, current, core::ptr::null_mut())))
+    if (likely(rt_mutex_cmpxchg_release(lock, current, core::ptr::null_mut()))) {
     return;
+    }
     rt_mutex_slowunlock(lock);
     }
 
-    static bool rtmutex_spin_on_owner(struct rt_mutex_base *lock,
-    struct rt_mutex_waiter *waiter,
-    struct task_struct *owner)
-    {
-    let mut res: bool = true;
+#[no_mangle]
+pub unsafe extern "C" fn rtmutex_spin_on_owner(lock: *mut rt_mutex_base, waiter: *mut rt_mutex_waiter, owner: *mut task_struct) -> bool {
+pub static mut res: bool = true;
     rcu_read_lock();
     for (;;) {
 // If owner changed, trylock again.
-    if (owner != rt_mutex_owner(lock))
+    if (owner != rt_mutex_owner(lock)) {
     break;
+    }
 //
 // Ensure that @owner is dereferenced after checking that
 // the lock owner still matches @owner. If that fails,
@@ -1401,10 +1631,10 @@ unsafe extern "C" fn __rt_mutex_unlock(lock: *mut rt_mutex_base) -> __always_inl
     return res;
     }
 
-    static bool rtmutex_spin_on_owner(struct rt_mutex_base *lock,
-    struct rt_mutex_waiter *waiter,
-    struct task_struct *owner)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: rtmutex_spin_on_owner
+pub unsafe extern "C" fn rtmutex_spin_on_owner_dup(lock: *mut rt_mutex_base, waiter: *mut rt_mutex_waiter, owner: *mut task_struct) -> bool {
     return false;
     }
 
@@ -1420,17 +1650,17 @@ unsafe extern "C" fn __rt_mutex_unlock(lock: *mut rt_mutex_base) -> __always_inl
 //
 // When invoked from rt_mutex_start_proxy_lock() waiter::task != current !
 //
-    static void __sched remove_waiter(struct rt_mutex_base *lock,
-    struct rt_mutex_waiter *waiter)
+    static void __sched remove_waiter(rt_mutex_base *lock, rt_mutex_waiter *waiter)
     __must_hold(&lock.wait_lock)
     {
-    let mut is_top_waiter: bool = (waiter == rt_mutex_top_waiter(lock));
-    struct task_struct *owner = rt_mutex_owner(lock);
-    struct task_struct *waiter_task = waiter.task;
-    struct rt_mutex_base *next_lock;
+pub static mut is_top_waiter: bool = false;
+    let mut owner = rt_mutex_owner(lock);
+    let mut waiter_task = waiter.task;
+pub static mut next_lock: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&lock.wait_lock);
-    if (!waiter_task) /* never enqueued */
+    if (!waiter_task) /* never enqueued */ {
     return;
+    }
     scoped_guard(raw_spinlock, &waiter_task.pi_lock) {
     rt_mutex_dequeue(lock, waiter);
     waiter_task.pi_blocked_on = core::ptr::null_mut();
@@ -1439,12 +1669,14 @@ unsafe extern "C" fn __rt_mutex_unlock(lock: *mut rt_mutex_base) -> __always_inl
 // Only update priority if the waiter was the highest priority
 // waiter of the lock and there is an owner to update.
 //
-    if (!owner || !is_top_waiter)
+    if (!owner || !is_top_waiter) {
     return;
+    }
     raw_spin_lock(&owner.pi_lock);
     rt_mutex_dequeue_pi(owner, waiter);
-    if (rt_mutex_has_waiters(lock))
+    if (rt_mutex_has_waiters(lock)) {
     rt_mutex_enqueue_pi(owner, rt_mutex_top_waiter(lock));
+    }
     rt_mutex_adjust_prio(lock, owner);
 // Store the lock on which owner is blocked or NULL
     next_lock = task_blocked_on_lock(owner);
@@ -1453,8 +1685,9 @@ unsafe extern "C" fn __rt_mutex_unlock(lock: *mut rt_mutex_base) -> __always_inl
 // Don't walk the chain, if the owner task is not blocked
 // itself.
 //
-    if (!next_lock)
+    if (!next_lock) {
     return;
+    }
 // gets dropped in rt_mutex_adjust_prio_chain()!
     get_task_struct(owner);
     raw_spin_unlock_irq(&lock.wait_lock);
@@ -1474,17 +1707,13 @@ unsafe extern "C" fn __rt_mutex_unlock(lock: *mut rt_mutex_base) -> __always_inl
 //
 // Must be called with lock->wait_lock held and interrupts disabled
 //
-    static int __sched rt_mutex_slowlock_block(struct rt_mutex_base *lock,
-    struct ww_acquire_ctx *ww_ctx,
-    unsigned int state,
-    struct hrtimer_sleeper *timeout,
-    struct rt_mutex_waiter *waiter,
-    struct wake_q_head *wake_q)
+    static int __sched rt_mutex_slowlock_block(rt_mutex_base *lock, ww_acquire_ctx *ww_ctx,
+    unsigned int state, hrtimer_sleeper *timeout, rt_mutex_waiter *waiter, wake_q_head *wake_q)
     __releases(&lock.wait_lock) __acquires(&lock.wait_lock)
     {
-    struct rt_mutex *rtm = container_of(lock, struct rt_mutex, rtmutex);
-    struct task_struct *owner;
-    let mut ret: c_int = 0;
+    let mut rtm = container_of!(lock, rt_mutex, rtmutex);
+pub static mut owner: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     __assume_ctx_lock(&rtm.rtmutex.wait_lock);
     lockevent_inc(rtmutex_slow_block);
     for (;;) {
@@ -1503,13 +1732,16 @@ unsafe extern "C" fn __rt_mutex_unlock(lock: *mut rt_mutex_base) -> __always_inl
     }
     if (build_ww_mutex() && ww_ctx) {
     ret = __ww_mutex_check_kill(rtm, waiter, ww_ctx);
-    if (ret)
+    if (ret) {
     break;
     }
-    if (waiter == rt_mutex_top_waiter(lock))
+    }
+    if (waiter == rt_mutex_top_waiter(lock)) {
     owner = rt_mutex_owner(lock);
-    else
+    }
+    else {
     owner = core::ptr::null_mut();
+    }
     raw_spin_unlock_irq_wake(&lock.wait_lock, wake_q);
     if (!owner || !rtmutex_spin_on_owner(lock, waiter, owner)) {
     lockevent_inc(rtmutex_slow_sleep);
@@ -1521,19 +1753,19 @@ unsafe extern "C" fn __rt_mutex_unlock(lock: *mut rt_mutex_base) -> __always_inl
     __set_current_state(TASK_RUNNING);
     return ret;
     }
-    static void __sched rt_mutex_handle_deadlock(int res, int detect_deadlock,
-    struct rt_mutex_base *lock,
-    struct rt_mutex_waiter *w)
+    static void __sched rt_mutex_handle_deadlock(int res, int detect_deadlock, rt_mutex_base *lock, rt_mutex_waiter *w)
     __must_hold(&lock.wait_lock)
     {
 //
 // If the result is not -EDEADLOCK or the caller requested
 // deadlock detection, nothing to do here.
 //
-    if (res != -EDEADLOCK || detect_deadlock)
+    if (res != -EDEADLOCK || detect_deadlock) {
     return;
-    if (build_ww_mutex() && w.ww_ctx)
+    }
+    if (build_ww_mutex() && w.ww_ctx) {
     return;
+    }
     raw_spin_unlock_irq(&lock.wait_lock);
     WARN(1, "rtmutex deadlock detected\n");
     while (1) {
@@ -1550,17 +1782,14 @@ unsafe extern "C" fn __rt_mutex_unlock(lock: *mut rt_mutex_base) -> __always_inl
 // @waiter:	Initializer waiter for blocking
 // @wake_q:	The wake_q to wake tasks after we release the wait_lock
 //
-    static int __sched __rt_mutex_slowlock(struct rt_mutex_base *lock,
-    struct ww_acquire_ctx *ww_ctx,
+    static int __sched __rt_mutex_slowlock(rt_mutex_base *lock, ww_acquire_ctx *ww_ctx,
     unsigned int state,
-    enum rtmutex_chainwalk chwalk,
-    struct rt_mutex_waiter *waiter,
-    struct wake_q_head *wake_q)
+    enum rtmutex_chainwalk chwalk, rt_mutex_waiter *waiter, wake_q_head *wake_q)
     __must_hold(&lock.wait_lock)
     {
-    struct rt_mutex *rtm = container_of(lock, struct rt_mutex, rtmutex);
-    struct ww_mutex *ww = ww_container_of(rtm);
-    int ret;
+    let mut rtm = container_of!(lock, rt_mutex, rtmutex);
+    let mut ww = ww_container_of(rtm);
+    let mut ret = 0;
     __assume_ctx_lock(&rtm.rtmutex.wait_lock);
     lockdep_assert_held(&lock.wait_lock);
     lockevent_inc(rtmutex_slowlock);
@@ -1576,13 +1805,15 @@ unsafe extern "C" fn __rt_mutex_unlock(lock: *mut rt_mutex_base) -> __always_inl
     set_current_state(state);
     trace_contention_begin(lock, LCB_F_RT);
     ret = task_blocks_on_rt_mutex(lock, waiter, current, ww_ctx, chwalk, wake_q);
-    if (likely(!ret))
+    if (likely(!ret)) {
     ret = rt_mutex_slowlock_block(lock, ww_ctx, state, core::ptr::null_mut(), waiter, wake_q);
+    }
     if (likely(!ret)) {
 // acquired the lock
     if (build_ww_mutex() && ww_ctx) {
-    if (!ww_ctx.is_wait_die)
+    if (!ww_ctx.is_wait_die) {
     __ww_mutex_check_waiters(rtm, ww_ctx, wake_q);
+    }
     ww_mutex_lock_acquired(ww, ww_ctx);
     }
     lockevent_inc(rtmutex_slow_acq2);
@@ -1600,14 +1831,11 @@ unsafe extern "C" fn __rt_mutex_unlock(lock: *mut rt_mutex_base) -> __always_inl
     trace_contention_end(lock, ret);
     return ret;
     }
-    static inline int __rt_mutex_slowlock_locked(struct rt_mutex_base *lock,
-    struct ww_acquire_ctx *ww_ctx,
-    unsigned int state,
-    struct wake_q_head *wake_q)
-    __must_hold(&lock.wait_lock)
-    {
-    struct rt_mutex_waiter waiter;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn __rt_mutex_slowlock_locked(lock: *mut rt_mutex_base, ww_ctx: *mut ww_acquire_ctx, state: c_uint, wait_lock: *mut wake_q_headwake_q)
+    __must_hold(&lock.) -> c_int {
+pub static mut waiter: usize = 0;
+    let mut ret = 0;
     rt_mutex_init_waiter(&waiter);
     waiter.ww_ctx = ww_ctx;
     ret = __rt_mutex_slowlock(lock, ww_ctx, state, RT_MUTEX_MIN_CHAINWALK,
@@ -1622,13 +1850,12 @@ unsafe extern "C" fn __rt_mutex_unlock(lock: *mut rt_mutex_base) -> __always_inl
 // @ww_ctx:	WW mutex context pointer
 // @state:	The task state for sleeping
 //
-    static int __sched rt_mutex_slowlock(struct rt_mutex_base *lock,
-    struct ww_acquire_ctx *ww_ctx,
+    static int __sched rt_mutex_slowlock(rt_mutex_base *lock, ww_acquire_ctx *ww_ctx,
     unsigned int state)
     {
-    DEFINE_WAKE_Q(wake_q);
-    unsigned long flags;
-    int ret;
+pub static mut wake_q: usize = 0;
+    let mut flags = 0;
+    let mut ret = 0;
 //
 // Do all pre-schedule work here, before we queue a waiter and invoke
 // PI -- any such work that trips on rtlock (PREEMPT_RT spinlock) would
@@ -1651,12 +1878,13 @@ unsafe extern "C" fn __rt_mutex_unlock(lock: *mut rt_mutex_base) -> __always_inl
     rt_mutex_post_schedule();
     return ret;
     }
-    static __always_inline int __rt_mutex_lock(struct rt_mutex_base *lock,
+    static __always_inline int __rt_mutex_lock(rt_mutex_base *lock,
     unsigned int state)
     {
     lockdep_assert(!current.pi_blocked_on);
-    if (likely(rt_mutex_try_acquire(lock)))
+    if (likely(rt_mutex_try_acquire(lock))) {
     return 0;
+    }
     return rt_mutex_slowlock(lock, core::ptr::null_mut(), state);
     }
 
@@ -1667,12 +1895,11 @@ unsafe extern "C" fn __rt_mutex_unlock(lock: *mut rt_mutex_base) -> __always_inl
 // @lock:	The underlying RT mutex
 // @wake_q:	The wake_q to wake tasks after we release the wait_lock
 //
-    static void __sched rtlock_slowlock_locked(struct rt_mutex_base *lock,
-    struct wake_q_head *wake_q)
+    static void __sched rtlock_slowlock_locked(rt_mutex_base *lock, wake_q_head *wake_q)
     __releases(&lock.wait_lock) __acquires(&lock.wait_lock)
     {
-    struct rt_mutex_waiter waiter;
-    struct task_struct *owner;
+pub static mut waiter: usize = 0;
+pub static mut owner: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&lock.wait_lock);
     lockevent_inc(rtlock_slowlock);
     if (try_to_take_rt_mutex(lock, current, core::ptr::null_mut())) {
@@ -1690,10 +1917,12 @@ unsafe extern "C" fn __rt_mutex_unlock(lock: *mut rt_mutex_base) -> __always_inl
     lockevent_inc(rtlock_slow_acq2);
     break;
     }
-    if (&waiter == rt_mutex_top_waiter(lock))
+    if (&waiter == rt_mutex_top_waiter(lock)) {
     owner = rt_mutex_owner(lock);
-    else
+    }
+    else {
     owner = core::ptr::null_mut();
+    }
     raw_spin_unlock_irq_wake(&lock.wait_lock, wake_q);
     if (!owner || !rtmutex_spin_on_owner(lock, &waiter, owner)) {
     lockevent_inc(rtlock_slow_sleep);
@@ -1715,10 +1944,8 @@ unsafe extern "C" fn __rt_mutex_unlock(lock: *mut rt_mutex_base) -> __always_inl
     }
 #[no_mangle]
 unsafe extern "C" fn rtlock_slowlock(lock: *mut rt_mutex_base) -> __always_inline void __sched {
-    static __always_inline void __sched rtlock_slowlock(struct rt_mutex_base *lock)
-    {
-    unsigned long flags;
-    DEFINE_WAKE_Q(wake_q);
+    let mut flags = 0;
+pub static mut wake_q: usize = 0;
     raw_spin_lock_irqsave(&lock.wait_lock, flags);
     rtlock_slowlock_locked(lock, &wake_q);
     raw_spin_unlock_irqrestore_wake(&lock.wait_lock, flags, &wake_q);

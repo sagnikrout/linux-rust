@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -51,22 +301,17 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Author: Marco Elver <elver@google.com>
 //
 
-    if (!(cond))						\
-    kunit_skip((test), "Test requires: " #cond);	\
+    if (!(cond))						 {
+    kunit_skip((test), "Test requires: " #cond);	
+    }
     } while (0)
 
 // Points to current test-case memory access "kernels".
     static void (*access_kernels[2])(void);
-    static struct task_struct **threads; /* Lists of threads. */
+pub static mut threads: *mut c_void = core::ptr::null_mut(); /* Lists of threads. */
     static unsigned long end_time;       /* End time of test. */
 // Report as observed from console.
-    static struct {
-    spinlock_t lock;
-    int nlines;
-    char lines[3][512];
-    } observed = {
-    .lock = __SPIN_LOCK_UNLOCKED(observed.lock),
-    };
+pub static mut observed: usize = 0;
 // Setup test checking loop.
     static __no_kcsan inline void
     begin_test_checks(void (*func1)(void), void (*func2)(void))
@@ -100,10 +345,8 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn probe_console(ignore: *mut c_void, buf: *const c_char, len: usize) {
-    static void probe_console(void *ignore, const char *buf, size_t len)
-    {
-    unsigned long flags;
-    int nlines;
+    let mut flags = 0;
+    let mut nlines = 0;
 //
 // Note that KCSAN reports under a global lock, so we do not risk the
 // possibility of having multiple reports interleaved. If that were the
@@ -118,18 +361,19 @@ unsafe extern "C" fn probe_console(ignore: *mut c_void, buf: *const c_char, len:
 // The provided @buf is not NUL-terminated; copy no more than
 // @len bytes and let strscpy() add the missing NUL-terminator.
 //
-    strscpy(observed.lines[0], buf, min(len + 1, sizeof(observed.lines[0])));
+    strscpy(observed.lines[0], buf, min(len + 1, sizeof!(observed.lines[0])));
     nlines = 1;
     } else if ((nlines == 1 || nlines == 2) && strnstr(buf, "bytes by", len)) {
-    strscpy(observed.lines[nlines++], buf, min(len + 1, sizeof(observed.lines[0])));
+    strscpy(observed.lines[nlines++], buf, min(len + 1, sizeof!(observed.lines[0])));
     if (strnstr(buf, "race at unknown origin", len)) {
-    if (WARN_ON(nlines != 2))
-    goto out;
+    if (WARN_ON!(nlines != 2)) {
+// goto;
+    }
 // No second line of interest.
     strscpy(observed.lines[nlines++], "<none>");
     }
     }
-    out:
+// label;
     WRITE_ONCE(observed.nlines, nlines); /* Publish new nlines. */
     spin_unlock_irqrestore(&observed.lock, flags);
     }
@@ -137,9 +381,7 @@ unsafe extern "C" fn probe_console(ignore: *mut c_void, buf: *const c_char, len:
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn report_available() -> bool {
-    static bool report_available(void)
-    {
-    return READ_ONCE(observed.nlines) == ARRAY_SIZE(observed.lines);
+    return READ_ONCE(observed.nlines) == ARRAY_SIZE!(observed.lines);
     }
 // Report information we expect in a report.
 #[repr(C)]
@@ -147,10 +389,10 @@ unsafe extern "C" fn report_available() -> bool {
 pub struct expect_report {
 // Access information of both accesses.
     struct {
-    pub /: *mut *mut *mut void fn; / Function pointer to expected function of top frame.,
-    pub /: *mut *mut *mut void addr; / Address of access; unchecked if NULL.,
-    pub /: *mut *mut size_t size; / Size of access; unchecked if @addr is NULL.,
-    pub /: *mut *mut int type; / Access type, see KCSAN_ACCESS definitions.,
+//     pub /: *mut *mut *mut c_void fn; / Function pointer to expected function of top frame.,
+//     pub /: *mut *mut *mut c_void addr; / Address of access; unchecked if NULL.,
+//     pub /: *mut *mut size_t size; / Size of access; unchecked if @addr is NULL.,
+//     pub /: *mut *mut int type; / Access type, see KCSAN_ACCESS definitions.,
     pub access: [}; 2],
 }
 
@@ -158,21 +400,21 @@ pub struct expect_report {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn __report_matches(r: *const expect_report) -> bool {
-    static bool __report_matches(const struct expect_report *r)
-    {
-    let mut is_assert: bool = (r.access[0].type | r.access[1].type) & KCSAN_ACCESS_ASSERT;
-    let mut ret: bool = false;
-    unsigned long flags;
+pub static mut is_assert: bool = false;
+pub static mut ret: bool = false;
+    let mut flags = 0;
     typeof(*observed.lines) *expect;
-    const char *end;
-    char *cur;
-    int i;
+pub static mut end: *mut c_void = core::ptr::null_mut();
+pub static mut cur: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
 // Doubled-checked locking.
-    if (!report_available())
+    if (!report_available()) {
     return false;
+    }
     expect = (typeof(expect))kmalloc_obj(observed.lines);
-    if (WARN_ON(!expect))
+    if (WARN_ON!(!expect)) {
     return false;
+    }
 // Generate expected report contents.
 // Title
     cur = expect[0];
@@ -181,10 +423,10 @@ unsafe extern "C" fn __report_matches(r: *const expect_report) -> bool {
     is_assert ? "assert: race" : "data-race");
     if (r.access[1].fn) {
     char tmp[2][64];
-    int cmp;
+    let mut cmp = 0;
 // Expect lexographically sorted function names in title.
-    scnprintf(tmp[0], sizeof(tmp[0]), "%pS", r.access[0].fn);
-    scnprintf(tmp[1], sizeof(tmp[1]), "%pS", r.access[1].fn);
+    scnprintf(tmp[0], sizeof!(tmp[0]), "%pS", r.access[0].fn);
+    scnprintf(tmp[1], sizeof!(tmp[1]), "%pS", r.access[1].fn);
     cmp = strcmp(tmp[0], tmp[1]);
     cur += scnprintf(cur, end - cur, "%ps / %ps",
     cmp < 0 ? r.access[0].fn : r.access[1].fn,
@@ -193,17 +435,19 @@ unsafe extern "C" fn __report_matches(r: *const expect_report) -> bool {
     scnprintf(cur, end - cur, "%pS", r.access[0].fn);
 // The exact offset won't match, remove it.
     cur = strchr(expect[0], '+');
-    if (cur)
+    if (cur) {
 // cur = '\0';
+    }
     }
 // Access 1
     cur = expect[1];
     end = ARRAY_END(expect[1]);
-    if (!r.access[1].fn)
+    if (!r.access[1].fn) {
     cur += scnprintf(cur, end - cur, "race at unknown origin, with ");
+    }
 // Access 1 & 2
-    for (i = 0; i < 2; ++i) {
-    let mut ty: c_int = r.access[i].type;
+    while (i < 2) {
+pub static mut ty: c_int = 0;
     const char *const access_type =
     (ty & KCSAN_ACCESS_ASSERT) ?
     ((ty & KCSAN_ACCESS_WRITE) ?
@@ -214,8 +458,8 @@ unsafe extern "C" fn __report_matches(r: *const expect_report) -> bool {
     "read-write" :
     "write") :
     "read");
-    let mut is_atomic: bool = (ty & KCSAN_ACCESS_ATOMIC);
-    let mut is_scoped: bool = (ty & KCSAN_ACCESS_SCOPED);
+pub static mut is_atomic: bool = false;
+pub static mut is_scoped: bool = false;
     const char *const access_type_aux =
     (is_atomic && is_scoped)	? " (marked, reordered)"
     : (is_atomic			? " (marked)"
@@ -223,7 +467,7 @@ unsafe extern "C" fn __report_matches(r: *const expect_report) -> bool {
     if (i == 1) {
 // Access 2
     cur = expect[2];
-    end = &expect[2][sizeof(expect[2]) - 1];
+    end = &expect[2][sizeof!(expect[2]) - 1];
     if (!r.access[1].fn) {
 // Dummy string if no second access is available.
     strscpy(expect[2], "<none>");
@@ -232,13 +476,15 @@ unsafe extern "C" fn __report_matches(r: *const expect_report) -> bool {
     }
     cur += scnprintf(cur, end - cur, "%s%s to ", access_type,
     access_type_aux);
-    if (r.access[i].addr) /* Address is optional. */
+    if (r.access[i].addr) /* Address is optional. */ {
     cur += scnprintf(cur, end - cur, "0x%px of %zu bytes",
     r.access[i].addr, r.access[i].size);
     }
+    }
     spin_lock_irqsave(&observed.lock, flags);
-    if (!report_available())
-    goto out; /* A new report is being captured. */
+    if (!report_available()) {
+// goto; /* A new report is being captured. */
+    }
 // Finally match expected output to what we actually observed.
     ret = strstr(observed.lines[0], expect[0]) &&
 // Access info may appear in any order.
@@ -246,30 +492,32 @@ unsafe extern "C" fn __report_matches(r: *const expect_report) -> bool {
     strstr(observed.lines[2], expect[2])) ||
     (strstr(observed.lines[1], expect[2]) &&
     strstr(observed.lines[2], expect[1])));
-    out:
+// label;
     spin_unlock_irqrestore(&observed.lock, flags);
     kfree(expect);
     return ret;
     }
     static __always_inline const struct expect_report *
-    __report_set_scoped(struct expect_report *r, int accesses)
+    __report_set_scoped(expect_report *r, int accesses)
     {
-    BUILD_BUG_ON(accesses > 3);
-    if (accesses & 1)
+    BUILD_BUG_ON!(accesses > 3);
+    if (accesses & 1) {
     r.access[0].type |= KCSAN_ACCESS_SCOPED;
-    else
+    }
+    else {
     r.access[0].type &= ~KCSAN_ACCESS_SCOPED;
-    if (accesses & 2)
+    }
+    if (accesses & 2) {
     r.access[1].type |= KCSAN_ACCESS_SCOPED;
-    else
+    }
+    else {
     r.access[1].type &= ~KCSAN_ACCESS_SCOPED;
+    }
     return r;
     }
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn report_matches_any_reordered(r: *mut expect_report) -> bool {
-    static bool report_matches_any_reordered(struct expect_report *r)
-    {
     return __report_matches(__report_set_scoped(r, 0)) ||
     __report_matches(__report_set_scoped(r, 1)) ||
     __report_matches(__report_set_scoped(r, 2)) ||
@@ -282,14 +530,14 @@ unsafe extern "C" fn report_matches_any_reordered(r: *mut expect_report) -> bool
     static long test_sink;
     static long test_var;
 // @test_array should be large enough to fall into multiple watchpoint slots.
-    static long test_array[3 * PAGE_SIZE / sizeof(long)];
+    static long test_array[3 * PAGE_SIZE / sizeof!(long)];
     static struct {
     long val[8];
     } test_struct;
     static long __data_racy test_data_racy;
-    static DEFINE_SEQLOCK(test_seqlock);
-    static DEFINE_SPINLOCK(test_spinlock);
-    static DEFINE_MUTEX(test_mutex);
+pub static mut test_seqlock: usize = 0;
+pub static mut test_spinlock: usize = 0;
+pub static mut test_mutex: usize = 0;
 //
 // Helper to avoid compiler optimizing out reads, and to generate source values
 // for writes.
@@ -302,16 +550,13 @@ unsafe extern "C" fn report_matches_any_reordered(r: *mut expect_report) -> bool
 //
 #[no_mangle]
 unsafe extern "C" fn test_delay(iter: c_int) -> noinline void {
-    static noinline void test_delay(int iter)
-    {
-    while (iter--)
+    while (iter--) {
     sink_value(READ_ONCE(test_sink));
+    }
     }
     static noinline void test_kernel_read(void) { sink_value(test_var); }
 #[no_mangle]
 unsafe extern "C" fn test_kernel_write() -> noinline void {
-    static noinline void test_kernel_write(void)
-    {
     test_var = READ_ONCE_NOCHECK(test_sink) + 1;
     }
     static noinline void test_kernel_write_nochange(void) { test_var = 42; }
@@ -319,45 +564,33 @@ unsafe extern "C" fn test_kernel_write() -> noinline void {
     static noinline void test_kernel_write_nochange_rcu(void) { test_var = 42; }
 #[no_mangle]
 unsafe extern "C" fn test_kernel_read_atomic() -> noinline void {
-    static noinline void test_kernel_read_atomic(void)
-    {
     sink_value(READ_ONCE(test_var));
     }
 #[no_mangle]
 unsafe extern "C" fn test_kernel_write_atomic() -> noinline void {
-    static noinline void test_kernel_write_atomic(void)
-    {
     WRITE_ONCE(test_var, READ_ONCE_NOCHECK(test_sink) + 1);
     }
 #[no_mangle]
 unsafe extern "C" fn test_kernel_atomic_rmw() -> noinline void {
-    static noinline void test_kernel_atomic_rmw(void)
-    {
 // Use builtin, so we can set up the "bad" atomic/non-atomic scenario.
     __atomic_fetch_add(&test_var, 1, __ATOMIC_RELAXED);
     }
     __no_kcsan
-    static noinline void test_kernel_write_uninstrumented(void) { test_var++; }
+    static noinline void test_kernel_write_uninstrumented(void) { test_var += 1; }
     static noinline void test_kernel_data_race(void) { data_race(test_var++); }
-    static noinline void test_kernel_data_racy_qualifier(void) { test_data_racy++; }
+    static noinline void test_kernel_data_racy_qualifier(void) { test_data_racy += 1; }
 #[no_mangle]
 unsafe extern "C" fn test_kernel_assert_writer() -> noinline void {
-    static noinline void test_kernel_assert_writer(void)
-    {
     ASSERT_EXCLUSIVE_WRITER(test_var);
     }
 #[no_mangle]
 unsafe extern "C" fn test_kernel_assert_access() -> noinline void {
-    static noinline void test_kernel_assert_access(void)
-    {
     ASSERT_EXCLUSIVE_ACCESS(test_var);
     }
 pub const TEST_CHANGE_BITS: c_uint = 0xff00ff00;
 #[no_mangle]
 unsafe extern "C" fn test_kernel_change_bits() -> noinline void {
-    static noinline void test_kernel_change_bits(void)
-    {
-    if (IS_ENABLED(CONFIG_KCSAN_IGNORE_ATOMICS)) {
+    if (IS_ENABLED!(CONFIG_KCSAN_IGNORE_ATOMICS)) {
 //
 // Avoid race of unknown origin for this test, just pretend they
 // are atomic.
@@ -365,19 +598,16 @@ unsafe extern "C" fn test_kernel_change_bits() -> noinline void {
     kcsan_nestable_atomic_begin();
     test_var ^= TEST_CHANGE_BITS;
     kcsan_nestable_atomic_end();
-    } else
+    } else {
     WRITE_ONCE(test_var, READ_ONCE(test_var) ^ TEST_CHANGE_BITS);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn test_kernel_assert_bits_change() -> noinline void {
-    static noinline void test_kernel_assert_bits_change(void)
-    {
     ASSERT_EXCLUSIVE_BITS(test_var, TEST_CHANGE_BITS);
     }
 #[no_mangle]
 unsafe extern "C" fn test_kernel_assert_bits_nochange() -> noinline void {
-    static noinline void test_kernel_assert_bits_nochange(void)
-    {
     ASSERT_EXCLUSIVE_BITS(test_var, ~TEST_CHANGE_BITS);
     }
 //
@@ -386,67 +616,50 @@ unsafe extern "C" fn test_kernel_assert_bits_nochange() -> noinline void {
 //
 #[no_mangle]
 unsafe extern "C" fn test_enter_scope() -> noinline void {
-    static noinline void test_enter_scope(void)
-    {
-    let mut x: c_int = 0;
+pub static mut x: c_int = 0;
 // Unrelated accesses to scoped assert.
     READ_ONCE(test_sink);
-    kcsan_check_read(&x, sizeof(x));
+    kcsan_check_read(&x, sizeof!(x));
     }
 #[no_mangle]
 unsafe extern "C" fn test_kernel_assert_writer_scoped() -> noinline void {
-    static noinline void test_kernel_assert_writer_scoped(void)
-    {
     ASSERT_EXCLUSIVE_WRITER_SCOPED(test_var);
     test_enter_scope();
     }
 #[no_mangle]
 unsafe extern "C" fn test_kernel_assert_access_scoped() -> noinline void {
-    static noinline void test_kernel_assert_access_scoped(void)
-    {
     ASSERT_EXCLUSIVE_ACCESS_SCOPED(test_var);
     test_enter_scope();
     }
 #[no_mangle]
 unsafe extern "C" fn test_kernel_rmw_array() -> noinline void {
-    static noinline void test_kernel_rmw_array(void)
-    {
-    int i;
-    for (i = 0; i < ARRAY_SIZE(test_array); ++i)
+    let mut i = 0;
+    for (i = 0; i < ARRAY_SIZE!(test_array); ++i) {
     test_array[i]++;
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn test_kernel_write_struct() -> noinline void {
-    static noinline void test_kernel_write_struct(void)
-    {
-    kcsan_check_write(&test_struct, sizeof(test_struct));
+    kcsan_check_write(&test_struct, sizeof!(test_struct));
     kcsan_disable_current();
     test_struct.val[3]++; /* induce value change */
     kcsan_enable_current();
     }
 #[no_mangle]
 unsafe extern "C" fn test_kernel_write_struct_part() -> noinline void {
-    static noinline void test_kernel_write_struct_part(void)
-    {
     test_struct.val[3] = 42;
     }
 #[no_mangle]
 unsafe extern "C" fn test_kernel_read_struct_zero_size() -> noinline void {
-    static noinline void test_kernel_read_struct_zero_size(void)
-    {
     kcsan_check_read(&test_struct.val[3], 0);
     }
 #[no_mangle]
 unsafe extern "C" fn test_kernel_jiffies_reader() -> noinline void {
-    static noinline void test_kernel_jiffies_reader(void)
-    {
     sink_value((long)jiffies);
     }
 #[no_mangle]
 unsafe extern "C" fn test_kernel_seqlock_reader() -> noinline void {
-    static noinline void test_kernel_seqlock_reader(void)
-    {
-    unsigned int seq;
+    let mut seq = 0;
     do {
     seq = read_seqbegin(&test_seqlock);
     sink_value(test_var);
@@ -454,17 +667,13 @@ unsafe extern "C" fn test_kernel_seqlock_reader() -> noinline void {
     }
 #[no_mangle]
 unsafe extern "C" fn test_kernel_seqlock_writer() -> noinline void {
-    static noinline void test_kernel_seqlock_writer(void)
-    {
-    unsigned long flags;
+    let mut flags = 0;
     write_seqlock_irqsave(&test_seqlock, flags);
-    test_var++;
+    test_var += 1;
     write_sequnlock_irqrestore(&test_seqlock, flags);
     }
 #[no_mangle]
 unsafe extern "C" fn test_kernel_atomic_builtins() -> noinline void {
-    static noinline void test_kernel_atomic_builtins(void)
-    {
 //
 // Generate concurrent accesses, expecting no reports, ensuring KCSAN
 // treats builtin atomics as actually atomic.
@@ -473,26 +682,25 @@ unsafe extern "C" fn test_kernel_atomic_builtins() -> noinline void {
     }
 #[no_mangle]
 unsafe extern "C" fn test_kernel_xor_1bit() -> noinline void {
-    static noinline void test_kernel_xor_1bit(void)
-    {
 // Do not report data races between the read-writes.
     kcsan_nestable_atomic_begin();
     test_var ^= 0x10000;
     kcsan_nestable_atomic_end();
     }
 
-    static noinline void test_kernel_##name(void)		\
-    {							\
-    long *flag = &test_struct.val[0];		\
-    long v = 0;					\
-    if (!(acquire))					\
-    return;					\
-    while (v++ < 100) {				\
-    test_var++;				\
-    barrier();				\
-    }						\
-    release;					\
-    test_delay(10);					\
+    static noinline void test_kernel_##name(void)		
+    {							
+    let mut flag = &test_struct.val[0];		
+    let mut v = 0;					
+    if (!(acquire))					 {
+    return;					
+    }
+    while (v++ < 100) {				
+    test_var += 1;				
+    barrier();				
+    }						
+    release;					
+    test_delay(10);					
     }
     TEST_KERNEL_LOCKED(with_memorder,
     cmpxchg_acquire(flag, 0, 1) == 0,
@@ -515,25 +723,23 @@ unsafe extern "C" fn test_kernel_xor_1bit() -> noinline void {
 //
 #[no_mangle]
 unsafe extern "C" fn test_barrier_nothreads(test: *mut kunit) {
-    static void test_barrier_nothreads(struct kunit *test)
-    {
 
-    struct kcsan_scoped_access *reorder_access = &current.kcsan_ctx.reorder_access;
+    let mut reorder_access = &current.kcsan_ctx.reorder_access;
 
-    struct kcsan_scoped_access *reorder_access = core::ptr::null_mut();
+    let mut reorder_access = core::ptr::null_mut();
 
-    let mut arch_spinlock: arch_spinlock_t = __ARCH_SPIN_LOCK_UNLOCKED;
-    let mut dummy: core::sync::atomic::AtomicI32 = ATOMIC_INIT(0);
+pub static mut arch_spinlock: arch_spinlock_t = 0;
+pub static mut dummy: core::sync::atomic::AtomicI32 = 0;
     KCSAN_TEST_REQUIRES(test, reorder_access != core::ptr::null_mut());
-    KCSAN_TEST_REQUIRES(test, IS_ENABLED(CONFIG_SMP));
+    KCSAN_TEST_REQUIRES(test, IS_ENABLED!(CONFIG_SMP));
 
-    do {											\
-    reorder_access.type = (access_type) | KCSAN_ACCESS_SCOPED;			\
-    reorder_access.size = sizeof(test_var);					\
-    barrier;									\
-    KUNIT_EXPECT_EQ_MSG(test, reorder_access.size,					\
-    order_before ? 0 : sizeof(test_var),			\
-    "improperly instrumented type=(" #access_type "): " name);	\
+    do {											
+    reorder_access.type = (access_type) | KCSAN_ACCESS_SCOPED;			
+    reorder_access.size = sizeof!(test_var);					
+    barrier;									
+    KUNIT_EXPECT_EQ_MSG(test, reorder_access.size,					
+    order_before ? 0 : sizeof!(test_var),			
+    "improperly instrumented type=(" #access_type "): " name);	
     } while (0)
 
 //
@@ -546,9 +752,10 @@ unsafe extern "C" fn test_barrier_nothreads(test: *mut kunit) {
     mutex_unlock(&test_mutex);
 // Force creating a valid entry in reorder_access first.
     test_var = 0;
-    while (test_var++ < 1000000 && reorder_access.size != sizeof(test_var))
-    __kcsan_check_read(&test_var, sizeof(test_var));
-    KUNIT_ASSERT_EQ(test, reorder_access.size, sizeof(test_var));
+    while (test_var++ < 1000000 && reorder_access.size != sizeof!(test_var)) {
+    __kcsan_check_read(&test_var, sizeof!(test_var));
+    }
+    KUNIT_ASSERT_EQ(test, reorder_access.size, sizeof!(test_var));
     kcsan_nestable_atomic_begin(); /* No watchpoints in called functions. */
     KCSAN_EXPECT_READ_BARRIER(mb(), true);
     KCSAN_EXPECT_READ_BARRIER(wmb(), false);
@@ -691,22 +898,10 @@ unsafe extern "C" fn test_barrier_nothreads(test: *mut kunit) {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_basic(test: *mut kunit) {
-    static void test_basic(struct kunit *test)
-    {
-    struct expect_report expect = {
-    .access = {
-    { test_kernel_write, &test_var, sizeof(test_var), KCSAN_ACCESS_WRITE },
-    { test_kernel_read, &test_var, sizeof(test_var), 0 },
-    },
-    };
-    struct expect_report never = {
-    .access = {
-    { test_kernel_read, &test_var, sizeof(test_var), 0 },
-    { test_kernel_read, &test_var, sizeof(test_var), 0 },
-    },
-    };
-    let mut match_expect: bool = false;
-    let mut match_never: bool = false;
+pub static mut expect_report: usize = 0;
+pub static mut expect_report: usize = 0;
+pub static mut match_expect: bool = false;
+pub static mut match_never: bool = false;
     begin_test_checks(test_kernel_write, test_kernel_read);
     do {
     match_expect |= report_matches(&expect);
@@ -722,23 +917,10 @@ unsafe extern "C" fn test_basic(test: *mut kunit) {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_concurrent_races(test: *mut kunit) {
-    static void test_concurrent_races(struct kunit *test)
-    {
-    struct expect_report expect = {
-    .access = {
-// NULL will match any address.
-    { test_kernel_rmw_array, core::ptr::null_mut(), 0, __KCSAN_ACCESS_RW(KCSAN_ACCESS_WRITE) },
-    { test_kernel_rmw_array, core::ptr::null_mut(), 0, __KCSAN_ACCESS_RW(0) },
-    },
-    };
-    struct expect_report never = {
-    .access = {
-    { test_kernel_rmw_array, core::ptr::null_mut(), 0, 0 },
-    { test_kernel_rmw_array, core::ptr::null_mut(), 0, 0 },
-    },
-    };
-    let mut match_expect: bool = false;
-    let mut match_never: bool = false;
+pub static mut expect_report: usize = 0;
+pub static mut expect_report: usize = 0;
+pub static mut match_expect: bool = false;
+pub static mut match_never: bool = false;
     begin_test_checks(test_kernel_rmw_array, test_kernel_rmw_array);
     do {
     match_expect |= report_matches(&expect);
@@ -751,30 +933,20 @@ unsafe extern "C" fn test_concurrent_races(test: *mut kunit) {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_novalue_change(test: *mut kunit) {
-    static void test_novalue_change(struct kunit *test)
-    {
-    struct expect_report expect_rw = {
-    .access = {
-    { test_kernel_write_nochange, &test_var, sizeof(test_var), KCSAN_ACCESS_WRITE },
-    { test_kernel_read, &test_var, sizeof(test_var), 0 },
-    },
-    };
-    struct expect_report expect_ww = {
-    .access = {
-    { test_kernel_write_nochange, &test_var, sizeof(test_var), KCSAN_ACCESS_WRITE },
-    { test_kernel_write_nochange, &test_var, sizeof(test_var), KCSAN_ACCESS_WRITE },
-    },
-    };
-    let mut match_expect: bool = false;
+pub static mut expect_report: usize = 0;
+pub static mut expect_report: usize = 0;
+pub static mut match_expect: bool = false;
     test_kernel_write_nochange(); /* Reset value. */
     begin_test_checks(test_kernel_write_nochange, test_kernel_read);
     do {
     match_expect = report_matches(&expect_rw) || report_matches(&expect_ww);
     } while (!end_test_checks(match_expect));
-    if (IS_ENABLED(CONFIG_KCSAN_REPORT_VALUE_CHANGE_ONLY))
+    if (IS_ENABLED!(CONFIG_KCSAN_REPORT_VALUE_CHANGE_ONLY)) {
     KUNIT_EXPECT_FALSE(test, match_expect);
-    else
+    }
+    else {
     KUNIT_EXPECT_TRUE(test, match_expect);
+    }
     }
 //
 // Test that the rules where the KCSAN_REPORT_VALUE_CHANGE_ONLY option should
@@ -783,21 +955,9 @@ unsafe extern "C" fn test_novalue_change(test: *mut kunit) {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_novalue_change_exception(test: *mut kunit) {
-    static void test_novalue_change_exception(struct kunit *test)
-    {
-    struct expect_report expect_rw = {
-    .access = {
-    { test_kernel_write_nochange_rcu, &test_var, sizeof(test_var), KCSAN_ACCESS_WRITE },
-    { test_kernel_read, &test_var, sizeof(test_var), 0 },
-    },
-    };
-    struct expect_report expect_ww = {
-    .access = {
-    { test_kernel_write_nochange_rcu, &test_var, sizeof(test_var), KCSAN_ACCESS_WRITE },
-    { test_kernel_write_nochange_rcu, &test_var, sizeof(test_var), KCSAN_ACCESS_WRITE },
-    },
-    };
-    let mut match_expect: bool = false;
+pub static mut expect_report: usize = 0;
+pub static mut expect_report: usize = 0;
+pub static mut match_expect: bool = false;
     test_kernel_write_nochange_rcu(); /* Reset value. */
     begin_test_checks(test_kernel_write_nochange_rcu, test_kernel_read);
     do {
@@ -809,46 +969,36 @@ unsafe extern "C" fn test_novalue_change_exception(test: *mut kunit) {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_unknown_origin(test: *mut kunit) {
-    static void test_unknown_origin(struct kunit *test)
-    {
-    struct expect_report expect = {
-    .access = {
-    { test_kernel_read, &test_var, sizeof(test_var), 0 },
-    { core::ptr::null_mut() },
-    },
-    };
-    let mut match_expect: bool = false;
+pub static mut expect_report: usize = 0;
+pub static mut match_expect: bool = false;
     begin_test_checks(test_kernel_write_uninstrumented, test_kernel_read);
     do {
     match_expect = report_matches(&expect);
     } while (!end_test_checks(match_expect));
-    if (IS_ENABLED(CONFIG_KCSAN_REPORT_RACE_UNKNOWN_ORIGIN))
+    if (IS_ENABLED!(CONFIG_KCSAN_REPORT_RACE_UNKNOWN_ORIGIN)) {
     KUNIT_EXPECT_TRUE(test, match_expect);
-    else
+    }
+    else {
     KUNIT_EXPECT_FALSE(test, match_expect);
+    }
     }
 // Test KCSAN_ASSUME_PLAIN_WRITES_ATOMIC if it is selected.
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_write_write_assume_atomic(test: *mut kunit) {
-    static void test_write_write_assume_atomic(struct kunit *test)
-    {
-    struct expect_report expect = {
-    .access = {
-    { test_kernel_write, &test_var, sizeof(test_var), KCSAN_ACCESS_WRITE },
-    { test_kernel_write, &test_var, sizeof(test_var), KCSAN_ACCESS_WRITE },
-    },
-    };
-    let mut match_expect: bool = false;
+pub static mut expect_report: usize = 0;
+pub static mut match_expect: bool = false;
     begin_test_checks(test_kernel_write, test_kernel_write);
     do {
     sink_value(READ_ONCE(test_var)); /* induce value-change */
     match_expect = report_matches(&expect);
     } while (!end_test_checks(match_expect));
-    if (IS_ENABLED(CONFIG_KCSAN_ASSUME_PLAIN_WRITES_ATOMIC))
+    if (IS_ENABLED!(CONFIG_KCSAN_ASSUME_PLAIN_WRITES_ATOMIC)) {
     KUNIT_EXPECT_FALSE(test, match_expect);
-    else
+    }
+    else {
     KUNIT_EXPECT_TRUE(test, match_expect);
+    }
     }
 //
 // Test that data races with writes larger than word-size are always reported,
@@ -857,15 +1007,8 @@ unsafe extern "C" fn test_write_write_assume_atomic(test: *mut kunit) {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_write_write_struct(test: *mut kunit) {
-    static void test_write_write_struct(struct kunit *test)
-    {
-    struct expect_report expect = {
-    .access = {
-    { test_kernel_write_struct, &test_struct, sizeof(test_struct), KCSAN_ACCESS_WRITE },
-    { test_kernel_write_struct, &test_struct, sizeof(test_struct), KCSAN_ACCESS_WRITE },
-    },
-    };
-    let mut match_expect: bool = false;
+pub static mut expect_report: usize = 0;
+pub static mut match_expect: bool = false;
     begin_test_checks(test_kernel_write_struct, test_kernel_write_struct);
     do {
     match_expect = report_matches(&expect);
@@ -879,15 +1022,8 @@ unsafe extern "C" fn test_write_write_struct(test: *mut kunit) {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_write_write_struct_part(test: *mut kunit) {
-    static void test_write_write_struct_part(struct kunit *test)
-    {
-    struct expect_report expect = {
-    .access = {
-    { test_kernel_write_struct, &test_struct, sizeof(test_struct), KCSAN_ACCESS_WRITE },
-    { test_kernel_write_struct_part, &test_struct.val[3], sizeof(test_struct.val[3]), KCSAN_ACCESS_WRITE },
-    },
-    };
-    let mut match_expect: bool = false;
+pub static mut expect_report: usize = 0;
+pub static mut match_expect: bool = false;
     begin_test_checks(test_kernel_write_struct, test_kernel_write_struct_part);
     do {
     match_expect = report_matches(&expect);
@@ -898,9 +1034,7 @@ unsafe extern "C" fn test_write_write_struct_part(test: *mut kunit) {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_read_atomic_write_atomic(test: *mut kunit) {
-    static void test_read_atomic_write_atomic(struct kunit *test)
-    {
-    let mut match_never: bool = false;
+pub static mut match_never: bool = false;
     begin_test_checks(test_kernel_read_atomic, test_kernel_write_atomic);
     do {
     match_never = report_available();
@@ -911,16 +1045,9 @@ unsafe extern "C" fn test_read_atomic_write_atomic(test: *mut kunit) {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_read_plain_atomic_write(test: *mut kunit) {
-    static void test_read_plain_atomic_write(struct kunit *test)
-    {
-    struct expect_report expect = {
-    .access = {
-    { test_kernel_read, &test_var, sizeof(test_var), 0 },
-    { test_kernel_write_atomic, &test_var, sizeof(test_var), KCSAN_ACCESS_WRITE | KCSAN_ACCESS_ATOMIC },
-    },
-    };
-    let mut match_expect: bool = false;
-    KCSAN_TEST_REQUIRES(test, !IS_ENABLED(CONFIG_KCSAN_IGNORE_ATOMICS));
+pub static mut expect_report: usize = 0;
+pub static mut match_expect: bool = false;
+    KCSAN_TEST_REQUIRES(test, !IS_ENABLED!(CONFIG_KCSAN_IGNORE_ATOMICS));
     begin_test_checks(test_kernel_read, test_kernel_write_atomic);
     do {
     match_expect = report_matches(&expect);
@@ -931,17 +1058,9 @@ unsafe extern "C" fn test_read_plain_atomic_write(test: *mut kunit) {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_read_plain_atomic_rmw(test: *mut kunit) {
-    static void test_read_plain_atomic_rmw(struct kunit *test)
-    {
-    struct expect_report expect = {
-    .access = {
-    { test_kernel_read, &test_var, sizeof(test_var), 0 },
-    { test_kernel_atomic_rmw, &test_var, sizeof(test_var),
-    KCSAN_ACCESS_COMPOUND | KCSAN_ACCESS_WRITE | KCSAN_ACCESS_ATOMIC },
-    },
-    };
-    let mut match_expect: bool = false;
-    KCSAN_TEST_REQUIRES(test, !IS_ENABLED(CONFIG_KCSAN_IGNORE_ATOMICS));
+pub static mut expect_report: usize = 0;
+pub static mut match_expect: bool = false;
+    KCSAN_TEST_REQUIRES(test, !IS_ENABLED!(CONFIG_KCSAN_IGNORE_ATOMICS));
     begin_test_checks(test_kernel_read, test_kernel_atomic_rmw);
     do {
     match_expect = report_matches(&expect);
@@ -952,22 +1071,10 @@ unsafe extern "C" fn test_read_plain_atomic_rmw(test: *mut kunit) {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_zero_size_access(test: *mut kunit) {
-    static void test_zero_size_access(struct kunit *test)
-    {
-    struct expect_report expect = {
-    .access = {
-    { test_kernel_write_struct, &test_struct, sizeof(test_struct), KCSAN_ACCESS_WRITE },
-    { test_kernel_write_struct, &test_struct, sizeof(test_struct), KCSAN_ACCESS_WRITE },
-    },
-    };
-    struct expect_report never = {
-    .access = {
-    { test_kernel_write_struct, &test_struct, sizeof(test_struct), KCSAN_ACCESS_WRITE },
-    { test_kernel_read_struct_zero_size, &test_struct.val[3], 0, 0 },
-    },
-    };
-    let mut match_expect: bool = false;
-    let mut match_never: bool = false;
+pub static mut expect_report: usize = 0;
+pub static mut expect_report: usize = 0;
+pub static mut match_expect: bool = false;
+pub static mut match_never: bool = false;
     begin_test_checks(test_kernel_write_struct, test_kernel_read_struct_zero_size);
     do {
     match_expect |= report_matches(&expect);
@@ -980,9 +1087,7 @@ unsafe extern "C" fn test_zero_size_access(test: *mut kunit) {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_data_race(test: *mut kunit) {
-    static void test_data_race(struct kunit *test)
-    {
-    let mut match_never: bool = false;
+pub static mut match_never: bool = false;
     begin_test_checks(test_kernel_data_race, test_kernel_data_race);
     do {
     match_never = report_available();
@@ -993,9 +1098,7 @@ unsafe extern "C" fn test_data_race(test: *mut kunit) {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_data_racy_qualifier(test: *mut kunit) {
-    static void test_data_racy_qualifier(struct kunit *test)
-    {
-    let mut match_never: bool = false;
+pub static mut match_never: bool = false;
     begin_test_checks(test_kernel_data_racy_qualifier, test_kernel_data_racy_qualifier);
     do {
     match_never = report_available();
@@ -1005,15 +1108,8 @@ unsafe extern "C" fn test_data_racy_qualifier(test: *mut kunit) {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_assert_exclusive_writer(test: *mut kunit) {
-    static void test_assert_exclusive_writer(struct kunit *test)
-    {
-    struct expect_report expect = {
-    .access = {
-    { test_kernel_assert_writer, &test_var, sizeof(test_var), KCSAN_ACCESS_ASSERT },
-    { test_kernel_write_nochange, &test_var, sizeof(test_var), KCSAN_ACCESS_WRITE },
-    },
-    };
-    let mut match_expect: bool = false;
+pub static mut expect_report: usize = 0;
+pub static mut match_expect: bool = false;
     begin_test_checks(test_kernel_assert_writer, test_kernel_write_nochange);
     do {
     match_expect = report_matches(&expect);
@@ -1023,15 +1119,8 @@ unsafe extern "C" fn test_assert_exclusive_writer(test: *mut kunit) {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_assert_exclusive_access(test: *mut kunit) {
-    static void test_assert_exclusive_access(struct kunit *test)
-    {
-    struct expect_report expect = {
-    .access = {
-    { test_kernel_assert_access, &test_var, sizeof(test_var), KCSAN_ACCESS_ASSERT | KCSAN_ACCESS_WRITE },
-    { test_kernel_read, &test_var, sizeof(test_var), 0 },
-    },
-    };
-    let mut match_expect: bool = false;
+pub static mut expect_report: usize = 0;
+pub static mut match_expect: bool = false;
     begin_test_checks(test_kernel_assert_access, test_kernel_read);
     do {
     match_expect = report_matches(&expect);
@@ -1041,29 +1130,12 @@ unsafe extern "C" fn test_assert_exclusive_access(test: *mut kunit) {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_assert_exclusive_access_writer(test: *mut kunit) {
-    static void test_assert_exclusive_access_writer(struct kunit *test)
-    {
-    struct expect_report expect_access_writer = {
-    .access = {
-    { test_kernel_assert_access, &test_var, sizeof(test_var), KCSAN_ACCESS_ASSERT | KCSAN_ACCESS_WRITE },
-    { test_kernel_assert_writer, &test_var, sizeof(test_var), KCSAN_ACCESS_ASSERT },
-    },
-    };
-    struct expect_report expect_access_access = {
-    .access = {
-    { test_kernel_assert_access, &test_var, sizeof(test_var), KCSAN_ACCESS_ASSERT | KCSAN_ACCESS_WRITE },
-    { test_kernel_assert_access, &test_var, sizeof(test_var), KCSAN_ACCESS_ASSERT | KCSAN_ACCESS_WRITE },
-    },
-    };
-    struct expect_report never = {
-    .access = {
-    { test_kernel_assert_writer, &test_var, sizeof(test_var), KCSAN_ACCESS_ASSERT },
-    { test_kernel_assert_writer, &test_var, sizeof(test_var), KCSAN_ACCESS_ASSERT },
-    },
-    };
-    let mut match_expect_access_writer: bool = false;
-    let mut match_expect_access_access: bool = false;
-    let mut match_never: bool = false;
+pub static mut expect_report: usize = 0;
+pub static mut expect_report: usize = 0;
+pub static mut expect_report: usize = 0;
+pub static mut match_expect_access_writer: bool = false;
+pub static mut match_expect_access_access: bool = false;
+pub static mut match_never: bool = false;
     begin_test_checks(test_kernel_assert_access, test_kernel_assert_writer);
     do {
     match_expect_access_writer |= report_matches(&expect_access_writer);
@@ -1077,16 +1149,8 @@ unsafe extern "C" fn test_assert_exclusive_access_writer(test: *mut kunit) {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_assert_exclusive_bits_change(test: *mut kunit) {
-    static void test_assert_exclusive_bits_change(struct kunit *test)
-    {
-    struct expect_report expect = {
-    .access = {
-    { test_kernel_assert_bits_change, &test_var, sizeof(test_var), KCSAN_ACCESS_ASSERT },
-    { test_kernel_change_bits, &test_var, sizeof(test_var),
-    KCSAN_ACCESS_WRITE | (IS_ENABLED(CONFIG_KCSAN_IGNORE_ATOMICS) ? 0 : KCSAN_ACCESS_ATOMIC) },
-    },
-    };
-    let mut match_expect: bool = false;
+pub static mut expect_report: usize = 0;
+pub static mut match_expect: bool = false;
     begin_test_checks(test_kernel_assert_bits_change, test_kernel_change_bits);
     do {
     match_expect = report_matches(&expect);
@@ -1096,9 +1160,7 @@ unsafe extern "C" fn test_assert_exclusive_bits_change(test: *mut kunit) {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_assert_exclusive_bits_nochange(test: *mut kunit) {
-    static void test_assert_exclusive_bits_nochange(struct kunit *test)
-    {
-    let mut match_never: bool = false;
+pub static mut match_never: bool = false;
     begin_test_checks(test_kernel_assert_bits_nochange, test_kernel_change_bits);
     do {
     match_never = report_available();
@@ -1108,22 +1170,10 @@ unsafe extern "C" fn test_assert_exclusive_bits_nochange(test: *mut kunit) {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_assert_exclusive_writer_scoped(test: *mut kunit) {
-    static void test_assert_exclusive_writer_scoped(struct kunit *test)
-    {
-    struct expect_report expect_start = {
-    .access = {
-    { test_kernel_assert_writer_scoped, &test_var, sizeof(test_var), KCSAN_ACCESS_ASSERT | KCSAN_ACCESS_SCOPED },
-    { test_kernel_write_nochange, &test_var, sizeof(test_var), KCSAN_ACCESS_WRITE },
-    },
-    };
-    struct expect_report expect_inscope = {
-    .access = {
-    { test_enter_scope, &test_var, sizeof(test_var), KCSAN_ACCESS_ASSERT | KCSAN_ACCESS_SCOPED },
-    { test_kernel_write_nochange, &test_var, sizeof(test_var), KCSAN_ACCESS_WRITE },
-    },
-    };
-    let mut match_expect_start: bool = false;
-    let mut match_expect_inscope: bool = false;
+pub static mut expect_report: usize = 0;
+pub static mut expect_report: usize = 0;
+pub static mut match_expect_start: bool = false;
+pub static mut match_expect_inscope: bool = false;
     begin_test_checks(test_kernel_assert_writer_scoped, test_kernel_write_nochange);
     do {
     match_expect_start |= report_matches(&expect_start);
@@ -1135,25 +1185,11 @@ unsafe extern "C" fn test_assert_exclusive_writer_scoped(test: *mut kunit) {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_assert_exclusive_access_scoped(test: *mut kunit) {
-    static void test_assert_exclusive_access_scoped(struct kunit *test)
-    {
-    struct expect_report expect_start1 = {
-    .access = {
-    { test_kernel_assert_access_scoped, &test_var, sizeof(test_var), KCSAN_ACCESS_ASSERT | KCSAN_ACCESS_WRITE | KCSAN_ACCESS_SCOPED },
-    { test_kernel_read, &test_var, sizeof(test_var), 0 },
-    },
-    };
-    struct expect_report expect_start2 = {
-    .access = { expect_start1.access[0], expect_start1.access[0] },
-    };
-    struct expect_report expect_inscope = {
-    .access = {
-    { test_enter_scope, &test_var, sizeof(test_var), KCSAN_ACCESS_ASSERT | KCSAN_ACCESS_WRITE | KCSAN_ACCESS_SCOPED },
-    { test_kernel_read, &test_var, sizeof(test_var), 0 },
-    },
-    };
-    let mut match_expect_start: bool = false;
-    let mut match_expect_inscope: bool = false;
+pub static mut expect_report: usize = 0;
+pub static mut expect_report: usize = 0;
+pub static mut expect_report: usize = 0;
+pub static mut match_expect_start: bool = false;
+pub static mut match_expect_inscope: bool = false;
     begin_test_checks(test_kernel_assert_access_scoped, test_kernel_read);
     end_time += msecs_to_jiffies(1000); /* This test requires a bit more time. */
     do {
@@ -1171,9 +1207,7 @@ unsafe extern "C" fn test_assert_exclusive_access_scoped(test: *mut kunit) {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_jiffies_noreport(test: *mut kunit) {
-    static void test_jiffies_noreport(struct kunit *test)
-    {
-    let mut match_never: bool = false;
+pub static mut match_never: bool = false;
     begin_test_checks(test_kernel_jiffies_reader, test_kernel_jiffies_reader);
     do {
     match_never = report_available();
@@ -1184,9 +1218,7 @@ unsafe extern "C" fn test_jiffies_noreport(test: *mut kunit) {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_seqlock_noreport(test: *mut kunit) {
-    static void test_seqlock_noreport(struct kunit *test)
-    {
-    let mut match_never: bool = false;
+pub static mut match_never: bool = false;
     begin_test_checks(test_kernel_seqlock_reader, test_kernel_seqlock_writer);
     do {
     match_never = report_available();
@@ -1202,12 +1234,10 @@ unsafe extern "C" fn test_seqlock_noreport(test: *mut kunit) {
 //
 #[no_mangle]
 unsafe extern "C" fn test_atomic_builtins(test: *mut kunit) {
-    static void test_atomic_builtins(struct kunit *test)
-    {
-    let mut match_never: bool = false;
+pub static mut match_never: bool = false;
     begin_test_checks(test_kernel_atomic_builtins, test_kernel_atomic_builtins);
     do {
-    long tmp;
+    let mut tmp = 0;
     kcsan_enable_current();
     __atomic_store_n(&test_var, 42L, __ATOMIC_RELAXED);
     KUNIT_EXPECT_EQ(test, 42L, __atomic_load_n(&test_var, __ATOMIC_RELAXED));
@@ -1241,38 +1271,26 @@ unsafe extern "C" fn test_atomic_builtins(test: *mut kunit) {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_1bit_value_change(test: *mut kunit) {
-    static void test_1bit_value_change(struct kunit *test)
-    {
-    struct expect_report expect = {
-    .access = {
-    { test_kernel_read, &test_var, sizeof(test_var), 0 },
-    { test_kernel_xor_1bit, &test_var, sizeof(test_var), __KCSAN_ACCESS_RW(KCSAN_ACCESS_WRITE) },
-    },
-    };
-    let mut match: bool = false;
+pub static mut expect_report: usize = 0;
+pub static mut match: bool = false;
     begin_test_checks(test_kernel_read, test_kernel_xor_1bit);
     do {
-    match = IS_ENABLED(CONFIG_KCSAN_PERMISSIVE)
+    match = IS_ENABLED!(CONFIG_KCSAN_PERMISSIVE)
     ? report_available()
     : report_matches(&expect);
     } while (!end_test_checks(match));
-    if (IS_ENABLED(CONFIG_KCSAN_PERMISSIVE))
+    if (IS_ENABLED!(CONFIG_KCSAN_PERMISSIVE)) {
     KUNIT_EXPECT_FALSE(test, match);
-    else
+    }
+    else {
     KUNIT_EXPECT_TRUE(test, match);
+    }
     }
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_correct_barrier(test: *mut kunit) {
-    static void test_correct_barrier(struct kunit *test)
-    {
-    struct expect_report expect = {
-    .access = {
-    { test_kernel_with_memorder, &test_var, sizeof(test_var), __KCSAN_ACCESS_RW(KCSAN_ACCESS_WRITE) },
-    { test_kernel_with_memorder, &test_var, sizeof(test_var), __KCSAN_ACCESS_RW(0) },
-    },
-    };
-    let mut match_expect: bool = false;
+pub static mut expect_report: usize = 0;
+pub static mut match_expect: bool = false;
     test_struct.val[0] = 0; /* init unlocked */
     begin_test_checks(test_kernel_with_memorder, test_kernel_with_memorder);
     do {
@@ -1283,37 +1301,25 @@ unsafe extern "C" fn test_correct_barrier(test: *mut kunit) {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_missing_barrier(test: *mut kunit) {
-    static void test_missing_barrier(struct kunit *test)
-    {
-    struct expect_report expect = {
-    .access = {
-    { test_kernel_wrong_memorder, &test_var, sizeof(test_var), __KCSAN_ACCESS_RW(KCSAN_ACCESS_WRITE) },
-    { test_kernel_wrong_memorder, &test_var, sizeof(test_var), __KCSAN_ACCESS_RW(0) },
-    },
-    };
-    let mut match_expect: bool = false;
+pub static mut expect_report: usize = 0;
+pub static mut match_expect: bool = false;
     test_struct.val[0] = 0; /* init unlocked */
     begin_test_checks(test_kernel_wrong_memorder, test_kernel_wrong_memorder);
     do {
     match_expect = report_matches_any_reordered(&expect);
     } while (!end_test_checks(match_expect));
-    if (IS_ENABLED(CONFIG_KCSAN_WEAK_MEMORY))
+    if (IS_ENABLED!(CONFIG_KCSAN_WEAK_MEMORY)) {
     KUNIT_EXPECT_TRUE(test, match_expect);
-    else
+    }
+    else {
     KUNIT_EXPECT_FALSE(test, match_expect);
+    }
     }
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_atomic_builtins_correct_barrier(test: *mut kunit) {
-    static void test_atomic_builtins_correct_barrier(struct kunit *test)
-    {
-    struct expect_report expect = {
-    .access = {
-    { test_kernel_atomic_builtin_with_memorder, &test_var, sizeof(test_var), __KCSAN_ACCESS_RW(KCSAN_ACCESS_WRITE) },
-    { test_kernel_atomic_builtin_with_memorder, &test_var, sizeof(test_var), __KCSAN_ACCESS_RW(0) },
-    },
-    };
-    let mut match_expect: bool = false;
+pub static mut expect_report: usize = 0;
+pub static mut match_expect: bool = false;
     test_struct.val[0] = 0; /* init unlocked */
     begin_test_checks(test_kernel_atomic_builtin_with_memorder,
     test_kernel_atomic_builtin_with_memorder);
@@ -1325,25 +1331,20 @@ unsafe extern "C" fn test_atomic_builtins_correct_barrier(test: *mut kunit) {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_atomic_builtins_missing_barrier(test: *mut kunit) {
-    static void test_atomic_builtins_missing_barrier(struct kunit *test)
-    {
-    struct expect_report expect = {
-    .access = {
-    { test_kernel_atomic_builtin_wrong_memorder, &test_var, sizeof(test_var), __KCSAN_ACCESS_RW(KCSAN_ACCESS_WRITE) },
-    { test_kernel_atomic_builtin_wrong_memorder, &test_var, sizeof(test_var), __KCSAN_ACCESS_RW(0) },
-    },
-    };
-    let mut match_expect: bool = false;
+pub static mut expect_report: usize = 0;
+pub static mut match_expect: bool = false;
     test_struct.val[0] = 0; /* init unlocked */
     begin_test_checks(test_kernel_atomic_builtin_wrong_memorder,
     test_kernel_atomic_builtin_wrong_memorder);
     do {
     match_expect = report_matches_any_reordered(&expect);
     } while (!end_test_checks(match_expect));
-    if (IS_ENABLED(CONFIG_KCSAN_WEAK_MEMORY))
+    if (IS_ENABLED!(CONFIG_KCSAN_WEAK_MEMORY)) {
     KUNIT_EXPECT_TRUE(test, match_expect);
-    else
+    }
+    else {
     KUNIT_EXPECT_FALSE(test, match_expect);
+    }
     }
 //
 // Generate thread counts for all test cases. Values generated are in interval
@@ -1352,34 +1353,36 @@ unsafe extern "C" fn test_atomic_builtins_missing_barrier(test: *mut kunit) {
 // The thread counts are chosen to cover potentially interesting boundaries and
 // corner cases (2 to 5), and then stress the system with larger counts.
 //
-    static const void *nthreads_gen_params(struct kunit *test, const void *prev, char *desc)
+    static const void *nthreads_gen_params(kunit *test, const void *prev, char *desc)
     {
-    let mut nthreads: c_long = (long)prev;
-    if (nthreads < 0 || nthreads >= 32)
+pub static mut nthreads: c_long = 0;
+    if (nthreads < 0 || nthreads >= 32) {
     nthreads = 0; /* stop */
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !nthreads) -> else {
-    else if (!nthreads)
+    }
+
+    else if (!nthreads) {
     nthreads = 2; /* initial value */
-#[no_mangle]
-pub unsafe extern "C" fn if(5: nthreads <) -> else {
-    else if (nthreads < 5)
-    nthreads++;
-#[no_mangle]
-pub unsafe extern "C" fn if(5: nthreads ==) -> else {
-    else if (nthreads == 5)
+    }
+
+    else if (nthreads < 5) {
+    nthreads += 1;
+    }
+
+    else if (nthreads == 5) {
     nthreads = 8;
-    else
+    }
+    else {
     nthreads *= 2;
+    }
     if (!preempt_model_preemptible() ||
-    !IS_ENABLED(CONFIG_KCSAN_INTERRUPT_WATCHER)) {
+    !IS_ENABLED!(CONFIG_KCSAN_INTERRUPT_WATCHER)) {
 //
 // Without any preemption, keep 2 CPUs free for other tasks, one
 // of which is the main test case function checking for
 // completion or failure.
 //
-    let mut min_unused_cpus: c_long = preempt_model_none() ? 2 : 0;
-    let mut min_required_cpus: c_long = 2 + min_unused_cpus;
+pub static mut min_unused_cpus: c_long = 0;
+pub static mut min_required_cpus: c_long = 0;
     if (num_online_cpus() < min_required_cpus) {
     pr_err_once("Too few online CPUs (%u < %ld) for test\n",
     num_online_cpus(), min_required_cpus);
@@ -1392,80 +1395,47 @@ pub unsafe extern "C" fn if(5: nthreads ==) -> else {
     }
     }
     snprintf(desc, KUNIT_PARAM_DESC_SIZE, "threads=%ld", abs(nthreads));
-    return (void *)nthreads;
+    return nthreads;
     }
 
-    static struct kunit_case kcsan_test_cases[] = {
-    KUNIT_CASE(test_barrier_nothreads),
-    KCSAN_KUNIT_CASE(test_basic),
-    KCSAN_KUNIT_CASE(test_concurrent_races),
-    KCSAN_KUNIT_CASE(test_novalue_change),
-    KCSAN_KUNIT_CASE(test_novalue_change_exception),
-    KCSAN_KUNIT_CASE(test_unknown_origin),
-    KCSAN_KUNIT_CASE(test_write_write_assume_atomic),
-    KCSAN_KUNIT_CASE(test_write_write_struct),
-    KCSAN_KUNIT_CASE(test_write_write_struct_part),
-    KCSAN_KUNIT_CASE(test_read_atomic_write_atomic),
-    KCSAN_KUNIT_CASE(test_read_plain_atomic_write),
-    KCSAN_KUNIT_CASE(test_read_plain_atomic_rmw),
-    KCSAN_KUNIT_CASE(test_zero_size_access),
-    KCSAN_KUNIT_CASE(test_data_race),
-    KCSAN_KUNIT_CASE(test_data_racy_qualifier),
-    KCSAN_KUNIT_CASE(test_assert_exclusive_writer),
-    KCSAN_KUNIT_CASE(test_assert_exclusive_access),
-    KCSAN_KUNIT_CASE(test_assert_exclusive_access_writer),
-    KCSAN_KUNIT_CASE(test_assert_exclusive_bits_change),
-    KCSAN_KUNIT_CASE(test_assert_exclusive_bits_nochange),
-    KCSAN_KUNIT_CASE(test_assert_exclusive_writer_scoped),
-    KCSAN_KUNIT_CASE(test_assert_exclusive_access_scoped),
-    KCSAN_KUNIT_CASE(test_jiffies_noreport),
-    KCSAN_KUNIT_CASE(test_seqlock_noreport),
-    KCSAN_KUNIT_CASE(test_atomic_builtins),
-    KCSAN_KUNIT_CASE(test_1bit_value_change),
-    KCSAN_KUNIT_CASE(test_correct_barrier),
-    KCSAN_KUNIT_CASE(test_missing_barrier),
-    KCSAN_KUNIT_CASE(test_atomic_builtins_correct_barrier),
-    KCSAN_KUNIT_CASE(test_atomic_builtins_missing_barrier),
-    {},
-    };
+pub static mut kunit_case: usize = 0;
 // ===== End test cases =====
 // Concurrent accesses from interrupts.
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn access_thread_timer(timer: *mut timer_list) {
-    static void access_thread_timer(struct timer_list *timer)
-    {
-    let mut cnt: static atomic_t = ATOMIC_INIT(0);
-    unsigned int idx;
+pub static mut cnt: atomic_t = 0;
+    let mut idx = 0;
     void (*func)(void);
-    idx = (unsigned int)atomic_inc_return(&cnt) % ARRAY_SIZE(access_kernels);
+    idx = (unsigned int)atomic_inc_return(&cnt) % ARRAY_SIZE!(access_kernels);
 // Acquire potential initialization.
     func = smp_load_acquire(&access_kernels[idx]);
-    if (func)
+    if (func) {
     func();
+    }
     }
 // The main loop for each thread.
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn access_thread(arg: *mut c_void) -> c_int {
-    static int access_thread(void *arg)
-    {
-    struct timer_list timer;
-    let mut cnt: c_uint = 0;
-    unsigned int idx;
+pub static mut timer: usize = 0;
+pub static mut cnt: c_uint = 0;
+    let mut idx = 0;
     void (*func)(void);
     timer_setup_on_stack(&timer, access_thread_timer, 0);
     do {
     might_sleep();
-    if (!timer_pending(&timer))
+    if (!timer_pending(&timer)) {
     mod_timer(&timer, jiffies + 1);
+    }
     else {
 // Iterate through all kernels.
-    idx = cnt++ % ARRAY_SIZE(access_kernels);
+    idx = cnt++ % ARRAY_SIZE!(access_kernels);
 // Acquire potential initialization.
     func = smp_load_acquire(&access_kernels[idx]);
-    if (func)
+    if (func) {
     func();
+    }
     }
     } while (!torture_must_stop());
     timer_delete_sync(&timer);
@@ -1476,40 +1446,46 @@ unsafe extern "C" fn access_thread(arg: *mut c_void) -> c_int {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_init(test: *mut kunit) -> c_int {
-    static int test_init(struct kunit *test)
-    {
-    unsigned long flags;
-    int nthreads;
-    int i;
+    let mut flags = 0;
+    let mut nthreads = 0;
+    let mut i = 0;
     spin_lock_irqsave(&observed.lock, flags);
-    for (i = 0; i < ARRAY_SIZE(observed.lines); ++i)
+    for (i = 0; i < ARRAY_SIZE!(observed.lines); ++i) {
     observed.lines[i][0] = '\0';
+    }
     observed.nlines = 0;
     spin_unlock_irqrestore(&observed.lock, flags);
-    if (strstr(test.name, "nothreads"))
+    if (strstr(test.name, "nothreads")) {
     return 0;
-    if (!torture_init_begin((char *)test.name, 1))
+    }
+    if (!torture_init_begin(test.name, 1)) {
     return -EBUSY;
-    if (WARN_ON(threads))
-    goto err;
-    for (i = 0; i < ARRAY_SIZE(access_kernels); ++i) {
-    if (WARN_ON(access_kernels[i]))
-    goto err;
+    }
+    if (WARN_ON!(threads)) {
+// goto;
+    }
+    while (i < ARRAY_SIZE!(access_kernels)) {
+    if (WARN_ON!(access_kernels[i])) {
+// goto;
+    }
     }
     nthreads = abs((long)test.param_value);
-    if (WARN_ON(!nthreads))
-    goto err;
-    threads = kzalloc_objs(struct task_struct *, nthreads + 1);
-    if (WARN_ON(!threads))
-    goto err;
+    if (WARN_ON!(!nthreads)) {
+// goto;
+    }
+    threads = kzalloc_objs(task_struct *, nthreads + 1);
+    if (WARN_ON!(!threads)) {
+// goto;
+    }
     threads[nthreads] = core::ptr::null_mut();
-    for (i = 0; i < nthreads; ++i) {
-    if (torture_create_kthread(access_thread, core::ptr::null_mut(), threads[i]))
-    goto err;
+    while (i < nthreads) {
+    if (torture_create_kthread(access_thread, core::ptr::null_mut(), threads[i])) {
+// goto;
+    }
     }
     torture_init_end();
     return 0;
-    err:
+// label;
     kfree(threads);
     threads = core::ptr::null_mut();
     torture_init_end();
@@ -1518,19 +1494,21 @@ unsafe extern "C" fn test_init(test: *mut kunit) -> c_int {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn test_exit(test: *mut kunit) {
-    static void test_exit(struct kunit *test)
-    {
-    struct task_struct **stop_thread;
-    int i;
-    if (strstr(test.name, "nothreads"))
+pub static mut stop_thread: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    if (strstr(test.name, "nothreads")) {
     return;
-    if (torture_cleanup_begin())
+    }
+    if (torture_cleanup_begin()) {
     return;
-    for (i = 0; i < ARRAY_SIZE(access_kernels); ++i)
+    }
+    for (i = 0; i < ARRAY_SIZE!(access_kernels); ++i) {
     WRITE_ONCE(access_kernels[i], core::ptr::null_mut());
+    }
     if (threads) {
-    for (stop_thread = threads; *stop_thread; stop_thread++)
+    for (stop_thread = threads; *stop_thread; stop_thread++) {
     torture_stop_kthread(reader_thread, *stop_thread);
+    }
     kfree(threads);
     threads = core::ptr::null_mut();
     }
@@ -1539,39 +1517,24 @@ unsafe extern "C" fn test_exit(test: *mut kunit) {
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn register_tracepoints() {
-    static void register_tracepoints(void)
-    {
     register_trace_console(probe_console, core::ptr::null_mut());
     }
     __no_kcsan
 #[no_mangle]
 unsafe extern "C" fn unregister_tracepoints() {
-    static void unregister_tracepoints(void)
-    {
     unregister_trace_console(probe_console, core::ptr::null_mut());
     }
 #[no_mangle]
 unsafe extern "C" fn kcsan_suite_init(suite: *mut kunit_suite) -> c_int {
-    static int kcsan_suite_init(struct kunit_suite *suite)
-    {
     register_tracepoints();
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn kcsan_suite_exit(suite: *mut kunit_suite) {
-    static void kcsan_suite_exit(struct kunit_suite *suite)
-    {
     unregister_tracepoints();
     tracepoint_synchronize_unregister();
     }
-    static struct kunit_suite kcsan_test_suite = {
-    .name = "kcsan",
-    .test_cases = kcsan_test_cases,
-    .init = test_init,
-    .exit = test_exit,
-    .suite_init = kcsan_suite_init,
-    .suite_exit = kcsan_suite_exit,
-    };
+pub static mut kunit_suite: usize = 0;
     kunit_test_suites(&kcsan_test_suite);
     MODULE_DESCRIPTION("KCSAN test suite");
     MODULE_LICENSE("GPL v2");

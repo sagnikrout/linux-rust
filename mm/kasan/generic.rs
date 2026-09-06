@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -52,11 +302,9 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // This should be called from arch kasan_init() once shadow memory is ready.
 //
 #[no_mangle]
-pub unsafe extern "C" fn kasan_init_generic() -> void __init {
-    void __init kasan_init_generic(void)
-    {
+pub unsafe extern "C" fn kasan_init_generic()  {
     kasan_enable();
-    pr_info("KernelAddressSanitizer initialized (generic)\n");
+    pr_info!("KernelAddressSanitizer initialized (generic)\n");
     }
 //
 // All functions below always inlined so compiler could
@@ -65,11 +313,9 @@ pub unsafe extern "C" fn kasan_init_generic() -> void __init {
 //
 #[no_mangle]
 unsafe extern "C" fn memory_is_poisoned_1(addr: *const c_void) -> __always_inline bool {
-    static __always_inline bool memory_is_poisoned_1(const void *addr)
-    {
-    let mut shadow_value: i8 = *(s8 *)kasan_mem_to_shadow(addr);
+pub static mut shadow_value: i8 = 0;
     if (unlikely(shadow_value)) {
-    let mut last_accessible_byte: i8 = (unsigned long)addr & KASAN_GRANULE_MASK;
+pub static mut last_accessible_byte: i8 = 0;
     return unlikely(last_accessible_byte >= shadow_value);
     }
     return false;
@@ -77,93 +323,100 @@ unsafe extern "C" fn memory_is_poisoned_1(addr: *const c_void) -> __always_inlin
     static __always_inline bool memory_is_poisoned_2_4_8(const void *addr,
     unsigned long size)
     {
-    u8 *shadow_addr = (u8 *)kasan_mem_to_shadow(addr);
+    let mut shadow_addr = kasan_mem_to_shadow(addr);
 //
 // Access crosses 8(shadow size)-byte boundary. Such access maps
 // into 2 shadow bytes, so we need to check them both.
 //
-    if (unlikely((((unsigned long)addr + size - 1) & KASAN_GRANULE_MASK) < size - 1))
+    if (unlikely((((unsigned long)addr + size - 1) & KASAN_GRANULE_MASK) < size - 1)) {
     return *shadow_addr || memory_is_poisoned_1(addr + size - 1);
+    }
     return memory_is_poisoned_1(addr + size - 1);
     }
 #[no_mangle]
 unsafe extern "C" fn memory_is_poisoned_16(addr: *const c_void) -> __always_inline bool {
-    static __always_inline bool memory_is_poisoned_16(const void *addr)
-    {
-    u16 *shadow_addr = (u16 *)kasan_mem_to_shadow(addr);
+    let mut shadow_addr = kasan_mem_to_shadow(addr);
 // Unaligned 16-bytes access maps into 3 shadow bytes.
-    if (unlikely(!IS_ALIGNED((unsigned long)addr, KASAN_GRANULE_SIZE)))
+    if (unlikely(!IS_ALIGNED((unsigned long)addr, KASAN_GRANULE_SIZE))) {
     return *shadow_addr || memory_is_poisoned_1(addr + 15);
-    return *shadow_addr;
+    }
+pub static mut shadow_addr: *mut c_void = core::ptr::null_mut();
     }
     static __always_inline unsigned long bytes_is_nonzero(const u8 *start,
     size_t size)
     {
     while (size) {
-    if (unlikely(*start))
+    if (unlikely(*start)) {
     return (unsigned long)start;
-    start++;
-    size--;
+    }
+    start += 1;
+    size -= 1;
     }
     return 0;
     }
     static __always_inline unsigned long memory_is_nonzero(const void *start,
     const void *end)
     {
-    unsigned int words;
-    unsigned long ret;
-    let mut prefix: c_uint = (unsigned long)start % 8;
-    if (end - start <= 16)
+    let mut words = 0;
+    let mut ret = 0;
+pub static mut prefix: c_uint = 0;
+    if (end - start <= 16) {
     return bytes_is_nonzero(start, end - start);
+    }
     if (prefix) {
     prefix = 8 - prefix;
     ret = bytes_is_nonzero(start, prefix);
-    if (unlikely(ret))
+    if (unlikely(ret)) {
     return ret;
+    }
     start += prefix;
     }
     words = (end - start) / 8;
     while (words) {
-    if (unlikely(*(u64 *)start))
+    if (unlikely(*start)) {
     return bytes_is_nonzero(start, 8);
+    }
     start += 8;
-    words--;
+    words -= 1;
     }
     return bytes_is_nonzero(start, (end - start) % 8);
     }
 #[no_mangle]
 unsafe extern "C" fn memory_is_poisoned_n(addr: *const c_void, size: usize) -> __always_inline bool {
-    static __always_inline bool memory_is_poisoned_n(const void *addr, size_t size)
-    {
-    unsigned long ret;
+    let mut ret = 0;
     ret = memory_is_nonzero(kasan_mem_to_shadow(addr),
     kasan_mem_to_shadow(addr + size - 1) + 1);
     if (unlikely(ret)) {
-    const void *last_byte = addr + size - 1;
-    s8 *last_shadow = (s8 *)kasan_mem_to_shadow(last_byte);
-    let mut last_accessible_byte: i8 = (unsigned long)last_byte & KASAN_GRANULE_MASK;
+    let mut last_byte = addr + size - 1;
+    let mut last_shadow = kasan_mem_to_shadow(last_byte);
+pub static mut last_accessible_byte: i8 = 0;
     if (unlikely(ret != (unsigned long)last_shadow ||
-    last_accessible_byte >= *last_shadow))
+    last_accessible_byte >= *last_shadow)) {
     return true;
+    }
     }
     return false;
     }
 #[no_mangle]
 unsafe extern "C" fn memory_is_poisoned(addr: *const c_void, size: usize) -> __always_inline bool {
-    static __always_inline bool memory_is_poisoned(const void *addr, size_t size)
-    {
     if (__builtin_constant_p(size)) {
-    switch (size) {
-    case 1:
+    match (size) {
+    1 => {
     return memory_is_poisoned_1(addr);
-    case 2:
-    case 4:
-    case 8:
+    }
+    2 => {
+    }
+    4 => {
+    }
+    8 => {
     return memory_is_poisoned_2_4_8(addr, size);
-    case 16:
+    }
+    16 => {
     return memory_is_poisoned_16(addr);
-    default:
+    }
+    _ => {
     BUILD_BUG();
+    }
     }
     }
     return memory_is_poisoned_n(addr, size);
@@ -172,51 +425,49 @@ unsafe extern "C" fn memory_is_poisoned(addr: *const c_void, size: usize) -> __a
     size_t size, bool write,
     unsigned long ret_ip)
     {
-    if (!kasan_enabled())
+    if (!kasan_enabled()) {
     return true;
-    if (unlikely(size == 0))
+    }
+    if (unlikely(size == 0)) {
     return true;
-    if (unlikely(addr + size < addr))
-    return !kasan_report(addr, size, write, ret_ip);
-    if (unlikely(!addr_has_metadata(addr)))
-    return !kasan_report(addr, size, write, ret_ip);
-    if (likely(!memory_is_poisoned(addr, size)))
-    return true;
+    }
+    if (unlikely(addr + size < addr)) {
     return !kasan_report(addr, size, write, ret_ip);
     }
-    bool kasan_check_range(const void *addr, size_t size, bool write,
-    unsigned long ret_ip)
-    {
+    if (unlikely(!addr_has_metadata(addr))) {
+    return !kasan_report(addr, size, write, ret_ip);
+    }
+    if (likely(!memory_is_poisoned(addr, size))) {
+    return true;
+    }
+    return !kasan_report(addr, size, write, ret_ip);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn kasan_check_range(addr: *mut c_void, size: size_t, write: bool, ret_ip: c_ulong) -> bool {
     return check_region_inline(addr, size, write, ret_ip);
     }
 #[no_mangle]
 pub unsafe extern "C" fn kasan_byte_accessible(addr: *const c_void) -> bool {
-    bool kasan_byte_accessible(const void *addr)
-    {
-    s8 shadow_byte;
-    if (!kasan_enabled())
+    let mut shadow_byte = 0;
+    if (!kasan_enabled()) {
     return true;
-    shadow_byte = READ_ONCE(*(s8 *)kasan_mem_to_shadow(addr));
+    }
+    shadow_byte = READ_ONCE(*kasan_mem_to_shadow(addr));
     return shadow_byte >= 0 && shadow_byte < KASAN_GRANULE_SIZE;
     }
 #[no_mangle]
 pub unsafe extern "C" fn kasan_cache_shrink(cache: *mut kmem_cache) {
-    void kasan_cache_shrink(struct kmem_cache *cache)
-    {
     kasan_quarantine_remove_cache(cache);
     }
 #[no_mangle]
 pub unsafe extern "C" fn kasan_cache_shutdown(cache: *mut kmem_cache) {
-    void kasan_cache_shutdown(struct kmem_cache *cache)
-    {
-    if (!__kmem_cache_empty(cache))
+    if (!__kmem_cache_empty(cache)) {
     kasan_quarantine_remove_cache(cache);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn register_global(global: *mut kasan_global) {
-    static void register_global(struct kasan_global *global)
-    {
-    let mut aligned_size: usize = round_up(global.size, KASAN_GRANULE_SIZE);
+pub static mut aligned_size: usize = 0;
     kasan_unpoison(global.beg, global.size, false);
     kasan_poison(global.beg + aligned_size,
     global.size_with_redzone - aligned_size,
@@ -224,79 +475,71 @@ unsafe extern "C" fn register_global(global: *mut kasan_global) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __asan_register_globals(ptr: *mut c_void, size: isize) {
-    void __asan_register_globals(void *ptr, ssize_t size)
-    {
-    int i;
-    struct kasan_global *globals = ptr;
-    for (i = 0; i < size; i++)
+    let mut i = 0;
+    let mut globals = ptr;
+    for (i = 0; i < size; i++) {
     register_global(&globals[i]);
+    }
     }
     EXPORT_SYMBOL(__asan_register_globals);
 #[no_mangle]
 pub unsafe extern "C" fn __asan_unregister_globals(ptr: *mut c_void, size: isize) {
-    void __asan_unregister_globals(void *ptr, ssize_t size)
-    {
     }
     EXPORT_SYMBOL(__asan_unregister_globals);
 
-    void __asan_load##size(void *addr)				\
-    {								\
-    check_region_inline(addr, size, false, _RET_IP_);	\
-    }								\
-    EXPORT_SYMBOL(__asan_load##size);				\
-    __alias(__asan_load##size)					\
-    void __asan_load##size##_noabort(void *);			\
-    EXPORT_SYMBOL(__asan_load##size##_noabort);			\
-    void __asan_store##size(void *addr)				\
-    {								\
-    check_region_inline(addr, size, true, _RET_IP_);	\
-    }								\
-    EXPORT_SYMBOL(__asan_store##size);				\
-    __alias(__asan_store##size)					\
-    void __asan_store##size##_noabort(void *);			\
+    void __asan_load##size(void *addr)				
+    {								
+    check_region_inline(addr, size, false, _RET_IP_);	
+    }								
+    EXPORT_SYMBOL(__asan_load##size);				
+    __alias(__asan_load##size)					
+    void __asan_load##size##_noabort;			
+    EXPORT_SYMBOL(__asan_load##size##_noabort);			
+    void __asan_store##size(void *addr)				
+    {								
+    check_region_inline(addr, size, true, _RET_IP_);	
+    }								
+    EXPORT_SYMBOL(__asan_store##size);				
+    __alias(__asan_store##size)					
+    void __asan_store##size##_noabort;			
     EXPORT_SYMBOL(__asan_store##size##_noabort)
-    DEFINE_ASAN_LOAD_STORE(1);
-    DEFINE_ASAN_LOAD_STORE(2);
-    DEFINE_ASAN_LOAD_STORE(4);
-    DEFINE_ASAN_LOAD_STORE(8);
-    DEFINE_ASAN_LOAD_STORE(16);
+pub static mut 1: usize = 0;
+pub static mut 2: usize = 0;
+pub static mut 4: usize = 0;
+pub static mut 8: usize = 0;
+pub static mut 16: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn __asan_loadN(addr: *mut c_void, size: isize) {
-    void __asan_loadN(void *addr, ssize_t size)
-    {
     kasan_check_range(addr, size, false, _RET_IP_);
     }
     EXPORT_SYMBOL(__asan_loadN);
     __alias(__asan_loadN)
-    void __asan_loadN_noabort(void *, ssize_t);
+// forward_decl: __asan_loadN_noabort;
     EXPORT_SYMBOL(__asan_loadN_noabort);
 #[no_mangle]
 pub unsafe extern "C" fn __asan_storeN(addr: *mut c_void, size: isize) {
-    void __asan_storeN(void *addr, ssize_t size)
-    {
     kasan_check_range(addr, size, true, _RET_IP_);
     }
     EXPORT_SYMBOL(__asan_storeN);
     __alias(__asan_storeN)
-    void __asan_storeN_noabort(void *, ssize_t);
+// forward_decl: __asan_storeN_noabort;
     EXPORT_SYMBOL(__asan_storeN_noabort);
 // to shut up compiler complaints
-    void __asan_handle_no_return(void) {}
+#[no_mangle]
+pub unsafe extern "C" fn __asan_handle_no_return() {}
     EXPORT_SYMBOL(__asan_handle_no_return);
 // Emitted by compiler to poison alloca()ed objects.
 #[no_mangle]
 pub unsafe extern "C" fn __asan_alloca_poison(addr: *mut c_void, size: isize) {
-    void __asan_alloca_poison(void *addr, ssize_t size)
-    {
-    let mut rounded_up_size: usize = round_up(size, KASAN_GRANULE_SIZE);
+pub static mut rounded_up_size: usize = 0;
     size_t padding_size = round_up(size, KASAN_ALLOCA_REDZONE_SIZE) -
     rounded_up_size;
-    let mut rounded_down_size: usize = round_down(size, KASAN_GRANULE_SIZE);
-    const void *left_redzone = (const void *)(addr -
+pub static mut rounded_down_size: usize = 0;
+    let mut left_redzone = (addr -
     KASAN_ALLOCA_REDZONE_SIZE);
-    const void *right_redzone = (const void *)(addr + rounded_up_size);
-    WARN_ON(!IS_ALIGNED((unsigned long)addr, KASAN_ALLOCA_REDZONE_SIZE));
-    kasan_unpoison((const void *)(addr + rounded_down_size),
+    let mut right_redzone = (addr + rounded_up_size);
+    WARN_ON!(!IS_ALIGNED((unsigned long)addr, KASAN_ALLOCA_REDZONE_SIZE));
+    kasan_unpoison((addr + rounded_down_size),
     size - rounded_down_size, false);
     kasan_poison(left_redzone, KASAN_ALLOCA_REDZONE_SIZE,
     KASAN_ALLOCA_LEFT, false);
@@ -307,34 +550,31 @@ pub unsafe extern "C" fn __asan_alloca_poison(addr: *mut c_void, size: isize) {
 // Emitted by compiler to unpoison alloca()ed areas when the stack unwinds.
 #[no_mangle]
 pub unsafe extern "C" fn __asan_allocas_unpoison(stack_top: *mut c_void, stack_bottom: isize) {
-    void __asan_allocas_unpoison(void *stack_top, ssize_t stack_bottom)
-    {
-    if (unlikely(!stack_top || stack_top > (void *)stack_bottom))
+    if (unlikely(!stack_top || stack_top > stack_bottom)) {
     return;
-    kasan_unpoison(stack_top, (void *)stack_bottom - stack_top, false);
+    }
+    kasan_unpoison(stack_top, stack_bottom - stack_top, false);
     }
     EXPORT_SYMBOL(__asan_allocas_unpoison);
 // Emitted by the compiler to [un]poison local variables.
 
-    void __asan_set_shadow_##byte(const void *addr, ssize_t size)	\
-    {								\
-    __memset((void *)addr, 0x##byte, size);			\
-    }								\
+    void __asan_set_shadow_##byte(const void *addr, ssize_t size)	
+    {								
+    __memset(addr, 0x##byte, size);			
+    }								
     EXPORT_SYMBOL(__asan_set_shadow_##byte)
-    DEFINE_ASAN_SET_SHADOW(00);
-    DEFINE_ASAN_SET_SHADOW(f1);
-    DEFINE_ASAN_SET_SHADOW(f2);
-    DEFINE_ASAN_SET_SHADOW(f3);
-    DEFINE_ASAN_SET_SHADOW(f5);
-    DEFINE_ASAN_SET_SHADOW(f8);
+pub static mut 00: usize = 0;
+pub static mut f1: usize = 0;
+pub static mut f2: usize = 0;
+pub static mut f3: usize = 0;
+pub static mut f5: usize = 0;
+pub static mut f8: usize = 0;
 //
 // Adaptive redzone policy taken from the userspace AddressSanitizer runtime.
 // For larger allocations larger redzones are used.
 //
 #[no_mangle]
 pub unsafe extern "C" fn optimal_redzone(object_size: c_uint) -> c_uint {
-    static inline unsigned int optimal_redzone(unsigned int object_size)
-    {
     return
     object_size <= 64        - 16   ? 16 :
     object_size <= 128       - 32   ? 32 :
@@ -344,15 +584,15 @@ pub unsafe extern "C" fn optimal_redzone(object_size: c_uint) -> c_uint {
     object_size <= (1 << 15) - 512  ? 512 :
     object_size <= (1 << 16) - 1024 ? 1024 : 2048;
     }
-    void kasan_cache_create(struct kmem_cache *cache, unsigned int *size,
-    slab_flags_t *flags)
-    {
-    unsigned int ok_size;
-    unsigned int optimal_size;
-    unsigned int rem_free_meta_size;
-    unsigned int orig_alloc_meta_offset;
-    if (!kasan_requires_meta())
+#[no_mangle]
+pub unsafe extern "C" fn kasan_cache_create(cache: *mut kmem_cache, size: *mut c_uint, flags: *mut slab_flags_t) {
+    let mut ok_size = 0;
+    let mut optimal_size = 0;
+    let mut rem_free_meta_size = 0;
+    let mut orig_alloc_meta_offset = 0;
+    if (!kasan_requires_meta()) {
     return;
+    }
 //
 // SLAB_KASAN is used to mark caches that are sanitized by KASAN and
 // that thus have per-object metadata. Currently, this flag is used in
@@ -364,7 +604,7 @@ pub unsafe extern "C" fn optimal_redzone(object_size: c_uint) -> c_uint {
     ok_size = *size;
 // Add alloc meta into the redzone.
     cache.kasan_info.alloc_meta_offset = *size;
-// size += sizeof(struct kasan_alloc_meta);
+// size += sizeof!(kasan_alloc_meta);
 // If alloc meta doesn't fit, don't add it.
     if (*size > KMALLOC_MAX_SIZE) {
     cache.kasan_info.alloc_meta_offset = 0;
@@ -386,16 +626,16 @@ pub unsafe extern "C" fn optimal_redzone(object_size: c_uint) -> c_uint {
     if ((cache.flags & SLAB_TYPESAFE_BY_RCU) || cache.ctor ||
     slub_debug_orig_size(cache)) {
     cache.kasan_info.free_meta_offset = *size;
-// size += sizeof(struct kasan_free_meta);
-    goto free_meta_added;
+// size += sizeof!(kasan_free_meta);
+// goto;
     }
 //
 // Otherwise, if the object is large enough to contain free meta,
 // store it within the object.
 //
-    if (sizeof(struct kasan_free_meta) <= cache.object_size) {
+    if (sizeof!(kasan_free_meta) <= cache.object_size) {
 // cache->kasan_info.free_meta_offset = 0 is implied.
-    goto free_meta_added;
+// goto;
     }
 //
 // For smaller objects, store the beginning of free meta within the
@@ -405,20 +645,21 @@ pub unsafe extern "C" fn optimal_redzone(object_size: c_uint) -> c_uint {
 // the end of free meta will overlap with slub_debug metadata.
 //
     if (!__slub_debug_enabled()) {
-    rem_free_meta_size = sizeof(struct kasan_free_meta) -
+    rem_free_meta_size = sizeof!(kasan_free_meta) -
     cache.object_size;
 // size += rem_free_meta_size;
-    if (cache.kasan_info.alloc_meta_offset != 0)
+    if (cache.kasan_info.alloc_meta_offset != 0) {
     cache.kasan_info.alloc_meta_offset += rem_free_meta_size;
-    goto free_meta_added;
+    }
+// goto;
     }
 //
 // If the object is small and slub_debug is enabled, store free meta
 // in the redzone after alloc meta.
 //
     cache.kasan_info.free_meta_offset = *size;
-// size += sizeof(struct kasan_free_meta);
-    free_meta_added:
+// size += sizeof!(kasan_free_meta);
+// label;
 // If free meta doesn't fit, don't add it.
     if (*size > KMALLOC_MAX_SIZE) {
     cache.kasan_info.free_meta_offset = KASAN_NO_FREE_META;
@@ -428,36 +669,36 @@ pub unsafe extern "C" fn optimal_redzone(object_size: c_uint) -> c_uint {
 // Calculate size with optimal redzone.
     optimal_size = cache.object_size + optimal_redzone(cache.object_size);
 // Limit it with KMALLOC_MAX_SIZE.
-    if (optimal_size > KMALLOC_MAX_SIZE)
+    if (optimal_size > KMALLOC_MAX_SIZE) {
     optimal_size = KMALLOC_MAX_SIZE;
+    }
 // Use optimal size if the size with added metas is not large enough.
-    if (*size < optimal_size)
+    if (*size < optimal_size) {
 // size = optimal_size;
     }
-    struct kasan_alloc_meta *kasan_get_alloc_meta(struct kmem_cache *cache,
-    const void *object)
-    {
-    if (!cache.kasan_info.alloc_meta_offset)
-    return core::ptr::null_mut();
-    return (void *)object + cache.kasan_info.alloc_meta_offset;
     }
-    struct kasan_free_meta *kasan_get_free_meta(struct kmem_cache *cache,
-    const void *object)
-    {
-    BUILD_BUG_ON(sizeof(struct kasan_free_meta) > 32);
-    if (cache.kasan_info.free_meta_offset == KASAN_NO_FREE_META)
+#[no_mangle]
+pub unsafe extern "C" fn kasan_get_alloc_meta(cache: *mut kmem_cache, object: *mut c_void) -> *mut c_void {
+    if (!cache.kasan_info.alloc_meta_offset) {
     return core::ptr::null_mut();
-    return (void *)object + cache.kasan_info.free_meta_offset;
+    }
+    return object + cache.kasan_info.alloc_meta_offset;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn kasan_get_free_meta(cache: *mut kmem_cache, object: *mut c_void) -> *mut c_void {
+    BUILD_BUG_ON!(sizeof!(kasan_free_meta) > 32);
+    if (cache.kasan_info.free_meta_offset == KASAN_NO_FREE_META) {
+    return core::ptr::null_mut();
+    }
+    return object + cache.kasan_info.free_meta_offset;
     }
 #[no_mangle]
 pub unsafe extern "C" fn kasan_init_object_meta(cache: *mut kmem_cache, object: *const c_void) {
-    void kasan_init_object_meta(struct kmem_cache *cache, const void *object)
-    {
-    struct kasan_alloc_meta *alloc_meta;
+pub static mut alloc_meta: *mut c_void = core::ptr::null_mut();
     alloc_meta = kasan_get_alloc_meta(cache, object);
     if (alloc_meta) {
 // Zero out alloc meta to mark it as invalid.
-    __memset(alloc_meta, 0, sizeof(*alloc_meta));
+    __memset(alloc_meta, 0, sizeof!(*alloc_meta));
     }
 //
 // Explicitly marking free meta as invalid is not required: the shadow
@@ -467,37 +708,35 @@ pub unsafe extern "C" fn kasan_init_object_meta(cache: *mut kmem_cache, object: 
     }
 #[no_mangle]
 unsafe extern "C" fn release_alloc_meta(meta: *mut kasan_alloc_meta) {
-    static void release_alloc_meta(struct kasan_alloc_meta *meta)
-    {
 // Zero out alloc meta to mark it as invalid.
-    __memset(meta, 0, sizeof(*meta));
+    __memset(meta, 0, sizeof!(*meta));
     }
 #[no_mangle]
 unsafe extern "C" fn release_free_meta(object: *const c_void, meta: *mut kasan_free_meta) {
-    static void release_free_meta(const void *object, struct kasan_free_meta *meta)
-    {
 // Check if free meta is valid.
-    if (*(u8 *)kasan_mem_to_shadow(object) != KASAN_SLAB_FREE_META)
+    if (*kasan_mem_to_shadow(object) != KASAN_SLAB_FREE_META) {
     return;
+    }
 // Mark free meta as invalid.
-// (u8 *)kasan_mem_to_shadow(object) = KASAN_SLAB_FREE;
+// kasan_mem_to_shadow(object) = KASAN_SLAB_FREE;
     }
 #[no_mangle]
 pub unsafe extern "C" fn kasan_metadata_size(cache: *mut kmem_cache, in_object: bool) -> usize {
-    size_t kasan_metadata_size(struct kmem_cache *cache, bool in_object)
-    {
-    struct kasan_cache *info = &cache.kasan_info;
-    if (!kasan_requires_meta())
+    let mut info = &cache.kasan_info;
+    if (!kasan_requires_meta()) {
     return 0;
-    if (in_object)
+    }
+    if (in_object) {
     return (info.free_meta_offset ?
-    0 : sizeof(struct kasan_free_meta));
-    else
+    0 : sizeof!(kasan_free_meta));
+    }
+    else {
     return (info.alloc_meta_offset ?
-    sizeof(struct kasan_alloc_meta) : 0) +
+    sizeof!(kasan_alloc_meta) : 0) +
     ((info.free_meta_offset &&
     info.free_meta_offset != KASAN_NO_FREE_META) ?
-    sizeof(struct kasan_free_meta) : 0);
+    sizeof!(kasan_free_meta) : 0);
+    }
     }
 //
 // This function avoids dynamic memory allocations and thus can be called from
@@ -505,45 +744,43 @@ pub unsafe extern "C" fn kasan_metadata_size(cache: *mut kmem_cache, in_object: 
 //
 #[no_mangle]
 pub unsafe extern "C" fn kasan_record_aux_stack(addr: *mut c_void) {
-    void kasan_record_aux_stack(void *addr)
-    {
-    struct slab *slab = kasan_addr_to_slab(addr);
-    struct kmem_cache *cache;
-    struct kasan_alloc_meta *alloc_meta;
-    void *object;
-    if (is_kfence_address(addr) || !slab)
+    let mut slab = kasan_addr_to_slab(addr);
+pub static mut cache: *mut c_void = core::ptr::null_mut();
+pub static mut alloc_meta: *mut c_void = core::ptr::null_mut();
+pub static mut object: *mut c_void = core::ptr::null_mut();
+    if (is_kfence_address(addr) || !slab) {
     return;
+    }
     cache = slab.slab_cache;
     object = nearest_obj(cache, slab, addr);
     alloc_meta = kasan_get_alloc_meta(cache, object);
-    if (!alloc_meta)
+    if (!alloc_meta) {
     return;
+    }
     alloc_meta.aux_stack[1] = alloc_meta.aux_stack[0];
     alloc_meta.aux_stack[0] = kasan_save_stack(0, 0);
     }
 #[no_mangle]
 pub unsafe extern "C" fn kasan_save_alloc_info(cache: *mut kmem_cache, object: *mut c_void, flags: gfp_t) {
-    void kasan_save_alloc_info(struct kmem_cache *cache, void *object, gfp_t flags)
-    {
-    struct kasan_alloc_meta *alloc_meta;
+pub static mut alloc_meta: *mut c_void = core::ptr::null_mut();
     alloc_meta = kasan_get_alloc_meta(cache, object);
-    if (!alloc_meta)
+    if (!alloc_meta) {
     return;
+    }
 // Invalidate previous stack traces (might exist for krealloc or mempool).
     release_alloc_meta(alloc_meta);
     kasan_save_track(&alloc_meta.alloc_track, flags);
     }
 #[no_mangle]
 pub unsafe extern "C" fn kasan_save_free_info(cache: *mut kmem_cache, object: *mut c_void) {
-    void kasan_save_free_info(struct kmem_cache *cache, void *object)
-    {
-    struct kasan_free_meta *free_meta;
+pub static mut free_meta: *mut c_void = core::ptr::null_mut();
     free_meta = kasan_get_free_meta(cache, object);
-    if (!free_meta)
+    if (!free_meta) {
     return;
+    }
 // Invalidate previous stack trace (might exist for mempool).
     release_free_meta(object, free_meta);
     kasan_save_track(&free_meta.free_track, 0);
 // Mark free meta as valid.
-// (u8 *)kasan_mem_to_shadow(object) = KASAN_SLAB_FREE_META;
+// kasan_mem_to_shadow(object) = KASAN_SLAB_FREE_META;
     }

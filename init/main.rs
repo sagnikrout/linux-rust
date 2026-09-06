@@ -34,6 +34,283 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! printk { ($($tt:tt)*) => { 0 }; }
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! rootfs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! MKDEV { ($($tt:tt)*) => { 0u32 }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard File Mode Constants
+pub const S_IFCHR: u32 = 0x2000;
+pub const S_IFDIR: u32 = 0x4000;
+pub const S_IFREG: u32 = 0x8000;
+pub const S_IFBLK: u32 = 0x6000;
+pub const S_IFIFO: u32 = 0x1000;
+pub const S_IFLNK: u32 = 0xa000;
+pub const S_IFSOCK: u32 = 0xc000;
+pub const S_IRWXU: u32 = 0x01c0;
+pub const S_IRUSR: u32 = 0x0100;
+pub const S_IWUSR: u32 = 0x0080;
+pub const S_IXUSR: u32 = 0x0040;
+pub const S_IRUGO: u32 = 0x0124;
+pub const S_IWUGO: u32 = 0x0092;
+pub const S_IXUGO: u32 = 0x0049;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+    pub fn memcpy(dest: *mut c_void, src: *const c_void, n: usize) -> *mut c_void;
+    pub fn usermodehelper_enable();
+    pub fn new_encode_dev(dev: u32) -> u32;
+}
+
+pub unsafe fn init_mkdir<T>(_path: T, _mode: u32) -> c_int { 0 }
+pub unsafe fn init_mknod<T>(_path: T, _mode: u32, _dev: u32) -> c_int { 0 }
+// === KERNEL_MACRO_PRELUDE_END ===
+
+
+
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -50,7 +327,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
 // Macro flag: #define CREATE_TRACE_POINTS
 
-    static int kernel_init(void *);
+// forward_decl: kernel_init;
 //
 // Debug helper: via this flag we know that we are in 'early bootup code'
 // where only the boot processor is running with IRQ disabled.  This means
@@ -58,8 +335,8 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // operations which are not allowed with IRQ disabled are allowed while the
 // flag is set.
 //
-    bool early_boot_irqs_disabled __read_mostly;
-    enum system_states system_state __read_mostly;
+    let mut early_boot_irqs_disabled = 0;
+    enum system_states system_state ;
     EXPORT_SYMBOL(system_state);
 //
 // Boot command-line arguments
@@ -70,27 +347,27 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Untouched command line saved by arch-specific code.
     char __initdata boot_command_line[COMMAND_LINE_SIZE];
 // Untouched saved command line (eg. for /proc)
-    char *saved_command_line __ro_after_init;
+pub static mut saved_command_line: *mut c_void = core::ptr::null_mut();
     unsigned int saved_command_line_len __ro_after_init;
 // Command line for parameter parsing
-    static char *static_command_line;
+pub static mut static_command_line: *mut c_void = core::ptr::null_mut();
 // Untouched extra command line
-    static char *extra_command_line;
+pub static mut extra_command_line: *mut c_void = core::ptr::null_mut();
 // Extra init arguments
-    static char *extra_init_args;
+pub static mut extra_init_args: *mut c_void = core::ptr::null_mut();
 
 // Is bootconfig on command line?
     static bool bootconfig_found;
     static size_t initargs_offs;
 
-    static char *execute_command;
+pub static mut execute_command: *mut c_void = core::ptr::null_mut();
     static char *ramdisk_execute_command = "/init";
     static bool __initdata ramdisk_execute_command_set;
 //
 // Used to generate warnings if static_key manipulation functions are used
 // before jump_label_init is called.
 //
-    bool static_key_initialized __read_mostly;
+    let mut static_key_initialized = 0;
     EXPORT_SYMBOL_GPL(static_key_initialized);
 //
 // If set, this is an indication to the drivers that reset the underlying
@@ -101,44 +378,42 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // For ex. kdump situation where previous kernel has crashed, BIOS has been
 // skipped and devices will be in unknown state.
 //
-    unsigned int reset_devices;
+    let mut reset_devices = 0;
     EXPORT_SYMBOL(reset_devices);
 #[no_mangle]
-unsafe extern "C" fn set_reset_devices(str: *mut c_char) -> int __init {
-    static int __init set_reset_devices(char *str)
-    {
+unsafe extern "C" fn set_reset_devices(str: *mut c_char) -> c_int {
     reset_devices = 1;
     return 1;
     }
-    __setup("reset_devices", set_reset_devices);
+    __setup!("reset_devices", set_reset_devices);
     static const char *argv_init[MAX_INIT_ARGS+2] = { "init", core::ptr::null_mut(), };
     const char *envp_init[MAX_INIT_ENVS+2] = { "HOME=/", "TERM=linux", core::ptr::null_mut(), };
     static const char *panic_later, *panic_param;
 #[no_mangle]
 unsafe extern "C" fn obsolete_checksetup(line: *mut c_char) -> bool __init {
-    static bool __init obsolete_checksetup(char *line)
-    {
-    const struct obs_kernel_param *p;
-    let mut had_early_param: bool = false;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut had_early_param: bool = false;
     p = __setup_start;
     do {
-    let mut n: c_int = strlen(p.str);
+pub static mut n: c_int = 0;
     if (parameqn(line, p.str, n)) {
     if (p.early) {
 // Already done in parse_early_param?
 // (Needs exact match on param part).
 // Keep iterating, as we can have early
 // params and __setups of same names 8(
-    if (line[n] == '\0' || line[n] == '=')
+    if (line[n] == '\0' || line[n] == '=') {
     had_early_param = true;
+    }
     } else if (!p.setup_func) {
-    pr_warn("Parameter %s is obsolete, ignored\n",
+    pr_warn!("Parameter %s is obsolete, ignored\n",
     p.str);
     return true;
-    } else if (p.setup_func(line + n))
+    } else if (p.setup_func(line + n)) {
     return true;
     }
-    p++;
+    }
+    p += 1;
     } while (p < __setup_end);
     return had_early_param;
     }
@@ -146,29 +421,23 @@ unsafe extern "C" fn obsolete_checksetup(line: *mut c_char) -> bool __init {
 // This should be approx 2 Bo*oMips to start (note initial shift), and will
 // still work even if initially too large, it will just take slightly longer
 //
-    let mut loops_per_jiffy: c_ulong = (1<<12);
+pub static mut loops_per_jiffy: c_ulong = 0;
     EXPORT_SYMBOL(loops_per_jiffy);
 #[no_mangle]
-unsafe extern "C" fn debug_kernel(str: *mut c_char) -> int __init {
-    static int __init debug_kernel(char *str)
-    {
+unsafe extern "C" fn debug_kernel(str: *mut c_char) -> c_int {
     console_loglevel = CONSOLE_LOGLEVEL_DEBUG;
     return 0;
     }
 #[no_mangle]
-unsafe extern "C" fn quiet_kernel(str: *mut c_char) -> int __init {
-    static int __init quiet_kernel(char *str)
-    {
+unsafe extern "C" fn quiet_kernel(str: *mut c_char) -> c_int {
     console_loglevel = CONSOLE_LOGLEVEL_QUIET;
     return 0;
     }
-    early_param("debug", debug_kernel);
-    early_param("quiet", quiet_kernel);
+    early_param!("debug", debug_kernel);
+    early_param!("quiet", quiet_kernel);
 #[no_mangle]
-unsafe extern "C" fn loglevel(str: *mut c_char) -> int __init {
-    static int __init loglevel(char *str)
-    {
-    int newlevel;
+unsafe extern "C" fn loglevel(str: *mut c_char) -> c_int {
+    let mut newlevel = 0;
 //
 // Only update loglevel value when a correct setting was passed,
 // to prevent blind crashes (when loglevel being set to 0) that
@@ -180,100 +449,98 @@ unsafe extern "C" fn loglevel(str: *mut c_char) -> int __init {
     }
     return -EINVAL;
     }
-    early_param("loglevel", loglevel);
+    early_param!("loglevel", loglevel);
 
 #[no_mangle]
-unsafe extern "C" fn get_boot_config_from_initrd(_size: *mut usize) -> *mut void  __init {
-    static void * __init get_boot_config_from_initrd(size_t *_size)
-    {
+unsafe extern "C" fn get_boot_config_from_initrd(_size: *mut usize) -> *mut c_void {
     u32 size, csum;
-    char *data;
-    u8 *hdr;
-    int i;
-    if (!initrd_end)
+pub static mut data: *mut c_void = core::ptr::null_mut();
+pub static mut hdr: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    if (!initrd_end) {
     return core::ptr::null_mut();
-    data = (char *)initrd_end - BOOTCONFIG_MAGIC_LEN;
+    }
+    data = initrd_end - BOOTCONFIG_MAGIC_LEN;
 //
 // Since Grub may align the size of initrd to 4, we must
 // check the preceding 3 bytes as well.
 //
-    for (i = 0; i < 4; i++) {
-    if (!memcmp(data, BOOTCONFIG_MAGIC, BOOTCONFIG_MAGIC_LEN))
-    goto found;
-    data--;
+    while (i < 4) {
+    if (!memcmp(data, BOOTCONFIG_MAGIC, BOOTCONFIG_MAGIC_LEN)) {
+// goto;
+    }
+    data -= 1;
     }
     return core::ptr::null_mut();
-    found:
-    hdr = (u8 *)(data - 8);
+// label;
+    hdr = (data - 8);
     size = get_unaligned_le32(hdr);
     csum = get_unaligned_le32(hdr + 4);
-    data = ((void *)hdr) - size;
+    data = (hdr) - size;
     if ((unsigned long)data < initrd_start) {
-    pr_err("bootconfig size %d is greater than initrd size %ld\n",
+    pr_err!("bootconfig size %d is greater than initrd size %ld\n",
     size, initrd_end - initrd_start);
     return core::ptr::null_mut();
     }
     if (xbc_calc_checksum(data, size) != csum) {
-    pr_err("bootconfig checksum failed\n");
+    pr_err!("bootconfig checksum failed\n");
     return core::ptr::null_mut();
     }
 // Remove bootconfig from initramfs/initrd
     initrd_end = (unsigned long)data;
-    if (_size)
+    if (_size) {
 // _size = size;
+    }
     return data;
     }
 
 #[no_mangle]
-unsafe extern "C" fn get_boot_config_from_initrd(_size: *mut usize) -> *mut void  __init {
-    static void * __init get_boot_config_from_initrd(size_t *_size)
-    {
+unsafe extern "C" fn get_boot_config_from_initrd(_size: *mut usize) -> *mut c_void {
     return core::ptr::null_mut();
     }
 
 // Make an extra command line under given key word
 #[no_mangle]
 unsafe extern "C" fn xbc_make_cmdline(key: *const c_char) -> *mut char  __init {
-    static char * __init xbc_make_cmdline(const char *key)
-    {
-    struct xbc_node *root;
-    char *new_cmdline;
+pub static mut root: *mut c_void = core::ptr::null_mut();
+pub static mut new_cmdline: *mut c_void = core::ptr::null_mut();
     int ret, len = 0;
     root = xbc_find_node(key);
-    if (!root)
+    if (!root) {
     return core::ptr::null_mut();
+    }
 // Count required buffer size
     len = xbc_snprint_cmdline(core::ptr::null_mut(), 0, root);
-    if (len <= 0)
+    if (len <= 0) {
     return core::ptr::null_mut();
+    }
     new_cmdline = memblock_alloc(len + 1, SMP_CACHE_BYTES);
     if (!new_cmdline) {
-    pr_err("Failed to allocate memory for extra kernel cmdline.\n");
+    pr_err!("Failed to allocate memory for extra kernel cmdline.\n");
     return core::ptr::null_mut();
     }
     ret = xbc_snprint_cmdline(new_cmdline, len + 1, root);
     if (ret < 0 || ret > len) {
-    pr_err("Failed to print extra kernel cmdline.\n");
+    pr_err!("Failed to print extra kernel cmdline.\n");
     memblock_free(new_cmdline, len + 1);
     return core::ptr::null_mut();
     }
     return new_cmdline;
     }
 #[no_mangle]
-unsafe extern "C" fn warn_bootconfig(str: *mut c_char) -> int __init {
-    static int __init warn_bootconfig(char *str)
-    {
+unsafe extern "C" fn warn_bootconfig(str: *mut c_char) -> c_int {
 // The 'bootconfig' option is handled by setup_boot_config().
     return 0;
     }
 #[no_mangle]
-unsafe extern "C" fn setup_boot_config() -> void __init {
-    static void __init setup_boot_config(void)
-    {
-    const char *msg, *data;
-    int pos, ret, offs;
-    size_t size;
-    let mut from_embedded: bool = false;
+unsafe extern "C" fn setup_boot_config()  {
+    let mut msg = core::ptr::null_mut();
+    let mut data = core::ptr::null_mut();
+    let mut pos = 0;
+    let mut ret = 0;
+    let mut offs = 0;
+    let mut size = 0;
+pub static mut from_embedded: bool = false;
 // Cut out the bootconfig data even if we have no bootconfig option
     data = get_boot_config_from_initrd(&size);
 // If there is no bootconfig in initrd, try embedded one.
@@ -282,33 +549,38 @@ unsafe extern "C" fn setup_boot_config() -> void __init {
     from_embedded = true;
     }
     bootconfig_found = bootconfig_cmdline_requested(boot_command_line, &offs);
-    if (!(bootconfig_found || IS_ENABLED(CONFIG_BOOT_CONFIG_FORCE)))
+    if (!(bootconfig_found || IS_ENABLED!(CONFIG_BOOT_CONFIG_FORCE))) {
     return;
+    }
 // Offset of the init arguments after a "--", located by the helper.
     initargs_offs = offs;
     if (!data) {
 // If user intended to use bootconfig, show an error level message
-    if (bootconfig_found)
-    pr_err("'bootconfig' found on command line, but no bootconfig found\n");
-    else
-    pr_info("No bootconfig data provided, so skipping bootconfig");
+    if (bootconfig_found) {
+    pr_err!("'bootconfig' found on command line, but no bootconfig found\n");
+    }
+    else {
+    pr_info!("No bootconfig data provided, so skipping bootconfig");
+    }
     return;
     }
     if (size >= XBC_DATA_MAX) {
-    pr_err("bootconfig size %ld greater than max size %d\n",
+    pr_err!("bootconfig size %ld greater than max size %d\n",
     (long)size, XBC_DATA_MAX);
     return;
     }
     ret = xbc_init(data, size, &msg, &pos);
     if (ret < 0) {
-    if (pos < 0)
-    pr_err("Failed to init bootconfig: %s.\n", msg);
-    else
-    pr_err("Failed to parse bootconfig: %s at %d.\n",
+    if (pos < 0) {
+    pr_err!("Failed to init bootconfig: %s.\n", msg);
+    }
+    else {
+    pr_err!("Failed to parse bootconfig: %s at %d.\n",
     msg, pos);
+    }
     } else {
     xbc_get_info(&ret, core::ptr::null_mut());
-    pr_info("Load bootconfig: %ld bytes %d nodes\n", (long)size, ret);
+    pr_info!("Load bootconfig: %ld bytes %d nodes\n", (long)size, ret);
 //
 // keys starting with "kernel." are passed via cmdline. When
 // this bootconfig came from the embedded source and
@@ -325,68 +597,61 @@ unsafe extern "C" fn setup_boot_config() -> void __init {
 // keys reach the cmdline via the runtime parser exactly as
 // before this series.
 //
-    if (!from_embedded || !xbc_embedded_cmdline_applied())
+    if (!from_embedded || !xbc_embedded_cmdline_applied()) {
     extra_command_line = xbc_make_cmdline("kernel");
+    }
 // Also, "init." keys are init arguments
     extra_init_args = xbc_make_cmdline("init");
     }
     return;
     }
 #[no_mangle]
-unsafe extern "C" fn exit_boot_config() -> void __init {
-    static void __init exit_boot_config(void)
-    {
+unsafe extern "C" fn exit_boot_config()  {
     xbc_exit();
     }
 
 #[no_mangle]
-unsafe extern "C" fn setup_boot_config() -> void __init {
-    static void __init setup_boot_config(void)
-    {
+unsafe extern "C" fn setup_boot_config()  {
 // Remove bootconfig data from initrd
     get_boot_config_from_initrd(core::ptr::null_mut());
     }
 #[no_mangle]
-unsafe extern "C" fn warn_bootconfig(str: *mut c_char) -> int __init {
-    static int __init warn_bootconfig(char *str)
-    {
-    pr_warn("WARNING: 'bootconfig' found on the kernel command line but CONFIG_BOOT_CONFIG is not set.\n");
+unsafe extern "C" fn warn_bootconfig(str: *mut c_char) -> c_int {
+    pr_warn!("WARNING: 'bootconfig' found on the kernel command line but CONFIG_BOOT_CONFIG is not set.\n");
     return 0;
     }
 
-    early_param("bootconfig", warn_bootconfig);
+    early_param!("bootconfig", warn_bootconfig);
 #[no_mangle]
 pub unsafe extern "C" fn cmdline_has_extra_options() -> bool __init {
-    bool __init cmdline_has_extra_options(void)
-    {
     return extra_command_line || extra_init_args;
     }
 // Change NUL term back to "=", to make "param" the whole string.
 #[no_mangle]
-unsafe extern "C" fn repair_env_string(param: *mut c_char, val: *mut c_char) -> void __init {
-    static void __init repair_env_string(char *param, char *val)
-    {
+unsafe extern "C" fn repair_env_string(param: *mut c_char, val: *mut c_char)  {
     if (val) {
 // param=val or param="val"?
-    if (val == param+strlen(param)+1)
+    if (val == param+strlen(param)+1) {
     val[-1] = '=';
-#[no_mangle]
-pub unsafe extern "C" fn if(param+strlen(param)+2: val ==) -> else {
+    }
+if true {
     val[-2] = '=';
     memmove(val-1, val, strlen(val)+1);
-    } else
+    } else {
     BUG();
+    }
     }
     }
 // Anything after -- gets handed straight to init.
     static int __init set_init_arg(char *param, char *val,
     const char *unused, void *arg)
     {
-    unsigned int i;
-    if (panic_later)
+    let mut i = 0;
+    if (panic_later) {
     return 0;
+    }
     repair_env_string(param, val);
-    for (i = 0; argv_init[i]; i++) {
+    while (argv_init[i]) {
     if (i == MAX_INIT_ARGS) {
     panic_later = "init";
     panic_param = param;
@@ -403,7 +668,7 @@ pub unsafe extern "C" fn if(param+strlen(param)+2: val ==) -> else {
     static int __init unknown_bootoption(char *param, char *val,
     const char *unused, void *arg)
     {
-    let mut len: usize = strlen(param);
+pub static mut len: usize = 0;
 //
 // Well-known bootloader identifiers:
 // 1. LILO/Grub pass "BOOT_IMAGE=...";
@@ -411,38 +676,44 @@ pub unsafe extern "C" fn if(param+strlen(param)+2: val ==) -> else {
 //
     const char *bootloader[] = { "BOOT_IMAGE=", "kexec", core::ptr::null_mut() };
 // Handle params aliased to sysctls
-    if (sysctl_is_alias(param))
-    return 0;
-    repair_env_string(param, val);
-// Handle bootloader identifier
-    for (int i = 0; bootloader[i]; i++) {
-    if (strstarts(param, bootloader[i]))
+    if (sysctl_is_alias(param)) {
     return 0;
     }
+    repair_env_string(param, val);
+// Handle bootloader identifier
+    while (bootloader[i]) {
+    if (strstarts(param, bootloader[i])) {
+    return 0;
+    }
+    }
 // Handle obsolete-style parameters
-    if (obsolete_checksetup(param))
+    if (obsolete_checksetup(param)) {
     return 0;
+    }
 // Unused module parameter.
-    if (strnchr(param, len, '.'))
+    if (strnchr(param, len, '.')) {
     return 0;
-    if (panic_later)
+    }
+    if (panic_later) {
     return 0;
+    }
     if (val) {
 // Environment option
-    unsigned int i;
-    for (i = 0; envp_init[i]; i++) {
+    let mut i = 0;
+    while (envp_init[i]) {
     if (i == MAX_INIT_ENVS) {
     panic_later = "env";
     panic_param = param;
     }
-    if (!strncmp(param, envp_init[i], len+1))
+    if (!strncmp(param, envp_init[i], len+1)) {
     break;
+    }
     }
     envp_init[i] = param;
     } else {
 // Command line option
-    unsigned int i;
-    for (i = 0; argv_init[i]; i++) {
+    let mut i = 0;
+    while (argv_init[i]) {
     if (i == MAX_INIT_ARGS) {
     panic_later = "init";
     panic_param = param;
@@ -453,10 +724,8 @@ pub unsafe extern "C" fn if(param+strlen(param)+2: val ==) -> else {
     return 0;
     }
 #[no_mangle]
-unsafe extern "C" fn init_setup(str: *mut c_char) -> int __init {
-    static int __init init_setup(char *str)
-    {
-    unsigned int i;
+unsafe extern "C" fn init_setup(str: *mut c_char) -> c_int {
+    let mut i = 0;
     execute_command = str;
 //
 // In case LILO is going to boot us with default command line,
@@ -464,27 +733,29 @@ unsafe extern "C" fn init_setup(str: *mut c_char) -> int __init {
 // the shell think it should execute a script with such name.
 // So we ignore all arguments entered _before_ init=... [MJ]
 //
-    for (i = 1; i < MAX_INIT_ARGS; i++)
+    while (i < MAX_INIT_ARGS) {
     argv_init[i] = core::ptr::null_mut();
+    }
     return 1;
     }
-    __setup("init=", init_setup);
+    __setup!("init=", init_setup);
 #[no_mangle]
-unsafe extern "C" fn rdinit_setup(str: *mut c_char) -> int __init {
-    static int __init rdinit_setup(char *str)
-    {
-    unsigned int i;
+unsafe extern "C" fn rdinit_setup(str: *mut c_char) -> c_int {
+    let mut i = 0;
     ramdisk_execute_command = str;
     ramdisk_execute_command_set = true;
 // See "auto" comment in init_setup
-    for (i = 1; i < MAX_INIT_ARGS; i++)
+    while (i < MAX_INIT_ARGS) {
     argv_init[i] = core::ptr::null_mut();
+    }
     return 1;
     }
-    __setup("rdinit=", rdinit_setup);
+    __setup!("rdinit=", rdinit_setup);
 
-    static inline void setup_nr_cpu_ids(void) { }
-    static inline void smp_prepare_cpus(unsigned int maxcpus) { }
+#[no_mangle]
+pub unsafe extern "C" fn setup_nr_cpu_ids() { }
+#[no_mangle]
+pub unsafe extern "C" fn smp_prepare_cpus(maxcpus: c_uint) { }
 
 //
 // We need to store the untouched command line for future reference.
@@ -493,12 +764,11 @@ unsafe extern "C" fn rdinit_setup(str: *mut c_char) -> int __init {
 // store reference of name/value for future reference.
 //
 #[no_mangle]
-unsafe extern "C" fn setup_command_line(command_line: *mut c_char) -> void __init {
-    static void __init setup_command_line(char *command_line)
-    {
+unsafe extern "C" fn setup_command_line(command_line: *mut c_char)  {
     size_t len, xlen = 0, ilen = 0;
-    if (extra_command_line)
+    if (extra_command_line) {
     xlen = strlen(extra_command_line);
+    }
     if (extra_init_args) {
     extra_init_args = strim(extra_init_args); /* remove trailing space */
     ilen = strlen(extra_init_args) + 4; /* for " -- " */
@@ -552,15 +822,9 @@ unsafe extern "C" fn setup_command_line(command_line: *mut c_char) -> void __ini
     static __initdata DECLARE_COMPLETION(kthreadd_done);
 #[no_mangle]
 unsafe extern "C" fn rest_init() -> noinline void __ref __noreturn {
-    static noinline void __ref __noreturn rest_init(void)
-    {
-    struct kernel_clone_args init_args = {
-    .flags		= (CLONE_VM | CLONE_UNTRACED),
-    .fn		= kernel_init,
-    .fn_arg		= core::ptr::null_mut(),
-    };
-    struct task_struct *tsk;
-    int pid;
+pub static mut kernel_clone_args: usize = 0;
+pub static mut tsk: *mut c_void = core::ptr::null_mut();
+    let mut pid = 0;
     rcu_scheduler_starting();
 //
 // We need to spawn init first so that it obtains pid 1, however
@@ -604,32 +868,30 @@ unsafe extern "C" fn rest_init() -> noinline void __ref __noreturn {
     static int __init do_early_param(char *param, char *val,
     const char *unused, void *arg)
     {
-    const struct obs_kernel_param *p;
-    for (p = __setup_start; p < __setup_end; p++) {
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    while (p < __setup_end) {
     if (p.early && parameq(param, p.str)) {
-    if (p.setup_func(val) != 0)
-    pr_warn("Malformed early option '%s'\n", param);
+    if (p.setup_func(val) != 0) {
+    pr_warn!("Malformed early option '%s'\n", param);
+    }
     }
     }
 // We accept everything at this stage.
     return 0;
     }
 #[no_mangle]
-pub unsafe extern "C" fn parse_early_options(cmdline: *mut c_char) -> void __init {
-    void __init parse_early_options(char *cmdline)
-    {
+pub unsafe extern "C" fn parse_early_options(cmdline: *mut c_char)  {
     parse_args("early options", cmdline, core::ptr::null_mut(), 0, 0, 0, core::ptr::null_mut(),
     do_early_param);
     }
 // Arch code calls this early on, or if not, just before other parsing.
 #[no_mangle]
-pub unsafe extern "C" fn parse_early_param() -> void __init {
-    void __init parse_early_param(void)
-    {
+pub unsafe extern "C" fn parse_early_param()  {
     static int done __initdata;
     static char tmp_cmdline[COMMAND_LINE_SIZE] __initdata;
-    if (done)
+    if (done) {
     return;
+    }
 // All fall through to do_early_param.
     strscpy(tmp_cmdline, boot_command_line, COMMAND_LINE_SIZE);
     parse_early_options(tmp_cmdline);
@@ -637,119 +899,109 @@ pub unsafe extern "C" fn parse_early_param() -> void __init {
     }
     void __init __weak arch_post_acpi_subsys_init(void) { }
 #[no_mangle]
-pub unsafe extern "C" fn smp_setup_processor_id() -> void __init __weak {
-    void __init __weak smp_setup_processor_id(void)
-    {
+pub unsafe extern "C" fn smp_setup_processor_id()  __weak {
     }
 #[no_mangle]
-pub unsafe extern "C" fn smp_prepare_boot_cpu() -> void __init __weak {
-    void __init __weak smp_prepare_boot_cpu(void)
-    {
+pub unsafe extern "C" fn smp_prepare_boot_cpu()  __weak {
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn thread_stack_cache_init() -> void __init __weak {
-    void __init __weak thread_stack_cache_init(void)
-    {
+pub unsafe extern "C" fn thread_stack_cache_init()  __weak {
     }
 
     void __init __weak poking_init(void) { }
     void __init __weak pgtable_cache_init(void) { }
     void __init __weak trap_init(void) { }
-    bool initcall_debug;
-    core_param(initcall_debug, initcall_debug, bool, 0644);
+    let mut initcall_debug = 0;
+    core_param!(initcall_debug, initcall_debug, bool, 0644);
 
     static void __init initcall_debug_enable(void);
 
 #[no_mangle]
 pub unsafe extern "C" fn initcall_debug_enable() {
-    static inline void initcall_debug_enable(void)
-    {
     }
 
-    DEFINE_STATIC_KEY_MAYBE_RO(CONFIG_RANDOMIZE_KSTACK_OFFSET_DEFAULT,
-    randomize_kstack_offset);
-    DEFINE_PER_CPU(struct rnd_state, kstack_rnd_state);
+pub static mut CONFIG_RANDOMIZE_KSTACK_OFFSET_DEFAULT: usize = 0;
+pub static mut struct rnd_state: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn random_kstack_init() -> int __init {
-    static int __init random_kstack_init(void)
-    {
+unsafe extern "C" fn random_kstack_init() -> c_int {
     prandom_seed_full_state(&kstack_rnd_state);
     return 0;
     }
-    late_initcall(random_kstack_init);
+    late_initcall!(random_kstack_init);
 #[no_mangle]
-unsafe extern "C" fn early_randomize_kstack_offset(buf: *mut c_char) -> int __init {
-    static int __init early_randomize_kstack_offset(char *buf)
-    {
-    int ret;
-    bool bool_result;
+unsafe extern "C" fn early_randomize_kstack_offset(buf: *mut c_char) -> c_int {
+    let mut ret = 0;
+    let mut bool_result = 0;
     ret = kstrtobool(buf, &bool_result);
-    if (ret)
+    if (ret) {
     return ret;
-    if (bool_result)
+    }
+    if (bool_result) {
     static_branch_enable(&randomize_kstack_offset);
-    else
+    }
+    else {
     static_branch_disable(&randomize_kstack_offset);
+    }
     return 0;
     }
-    early_param("randomize_kstack_offset", early_randomize_kstack_offset);
+    early_param!("randomize_kstack_offset", early_randomize_kstack_offset);
 
 #[no_mangle]
-unsafe extern "C" fn print_unknown_bootoptions() -> void __init {
-    static void __init print_unknown_bootoptions(void)
-    {
-    char *unknown_options;
-    char *end;
+unsafe extern "C" fn print_unknown_bootoptions()  {
+pub static mut unknown_options: *mut c_void = core::ptr::null_mut();
+pub static mut end: *mut c_void = core::ptr::null_mut();
     const char *const *p;
-    size_t len;
-    if (panic_later || (!argv_init[1] && !envp_init[2]))
+    let mut len = 0;
+    if (panic_later || (!argv_init[1] && !envp_init[2])) {
     return;
+    }
 //
 // Determine how many options we have to print out, plus a space
 // before each
 //
     len = 1; /* null terminator */
-    for (p = &argv_init[1]; *p; p++) {
-    len++;
+    while (*p) {
+    len += 1;
     len += strlen(*p);
     }
-    for (p = &envp_init[2]; *p; p++) {
-    len++;
+    while (*p) {
+    len += 1;
     len += strlen(*p);
     }
     unknown_options = memblock_alloc(len, SMP_CACHE_BYTES);
     if (!unknown_options) {
-    pr_err("%s: Failed to allocate %zu bytes\n",
+    pr_err!("%s: Failed to allocate %zu bytes\n",
     __func__, len);
     return;
     }
     end = unknown_options;
-    for (p = &argv_init[1]; *p; p++)
+    while (*p) {
     end += sprintf(end, " %s", *p);
-    for (p = &envp_init[2]; *p; p++)
+    }
+    while (*p) {
     end += sprintf(end, " %s", *p);
+    }
 // Start at unknown_options[1] to skip the initial space
     pr_notice("Unknown kernel command line parameters \"%s\", will be passed to user space.\n",
     &unknown_options[1]);
     memblock_free(unknown_options, len);
     }
 #[no_mangle]
-unsafe extern "C" fn early_numa_node_init() -> void __init {
-    static void __init early_numa_node_init(void)
-    {
+unsafe extern "C" fn early_numa_node_init()  {
 
-    int cpu;
+    let mut cpu = 0;
 // The early_cpu_to_node() should be ready here.
-    for_each_possible_cpu(cpu)
+    for_each_possible_cpu(cpu) {
     set_cpu_numa_node(cpu, early_cpu_to_node(cpu));
+    }
 
     }
 
     KERNEL_CMDLINE_CONTINUATION_LEN)
 
-    MIN_CMDLINE_LOG_WRAP_IDEAL_LEN ? \
-    CONFIG_CMDLINE_LOG_WRAP_IDEAL_LEN : \
+    MIN_CMDLINE_LOG_WRAP_IDEAL_LEN ? 
+    CONFIG_CMDLINE_LOG_WRAP_IDEAL_LEN : 
     MIN_CMDLINE_LOG_WRAP_IDEAL_LEN)
 
 //
@@ -766,20 +1018,18 @@ unsafe extern "C" fn early_numa_node_init() -> void __init {
 // if no appropriate place to wrap is found.
 //
 // Example output if CONFIG_CMDLINE_LOG_WRAP_IDEAL_LEN is 40:
-// Kernel command line: loglevel=7 \
-// Kernel command line: init=/sbin/init \
-// Kernel command line: root=PARTUUID=8c3efc1a-768b-6642-8d0c-89eb782f19f0/PARTNROFF=1 \
-// Kernel command line: rootwait ro \
-// Kernel command line: my_quoted_arg="The \
-// Kernel command line: quick brown fox \
-// Kernel command line: jumps over the \
+// Kernel command line: loglevel=7 
+// Kernel command line: init=/sbin/init 
+// Kernel command line: root=PARTUUID=8c3efc1a-768b-6642-8d0c-89eb782f19f0/PARTNROFF=1 
+// Kernel command line: rootwait ro 
+// Kernel command line: my_quoted_arg="The 
+// Kernel command line: quick brown fox 
+// Kernel command line: jumps over the 
 // Kernel command line: lazy dog."
 //
 #[no_mangle]
-unsafe extern "C" fn print_kernel_cmdline(cmdline: *const c_char) -> void __init {
-    static void __init print_kernel_cmdline(const char *cmdline)
-    {
-    size_t len;
+unsafe extern "C" fn print_kernel_cmdline(cmdline: *const c_char)  {
+    let mut len = 0;
 // Config option of 0 or anything longer than the max disables wrapping
     if (CONFIG_CMDLINE_LOG_WRAP_IDEAL_LEN == 0 ||
     IDEAL_CMDLINE_LEN >= COMMAND_LINE_SIZE - 1) {
@@ -788,53 +1038,58 @@ unsafe extern "C" fn print_kernel_cmdline(cmdline: *const c_char) -> void __init
     }
     len = strlen(cmdline);
     while (len > IDEAL_CMDLINE_LEN) {
-    const char *first_space;
-    const char *prev_cutoff;
-    const char *cutoff;
-    int to_print;
-    size_t used;
+pub static mut first_space: *mut c_void = core::ptr::null_mut();
+pub static mut prev_cutoff: *mut c_void = core::ptr::null_mut();
+pub static mut cutoff: *mut c_void = core::ptr::null_mut();
+    let mut to_print = 0;
+    let mut used = 0;
 // Find the last ' ' that wouldn't make the line too long
     prev_cutoff = core::ptr::null_mut();
     cutoff = cmdline;
     while (true) {
     cutoff = strchr(cutoff + 1, ' ');
-    if (!cutoff || cutoff - cmdline > IDEAL_CMDLINE_SPLIT_LEN)
+    if (!cutoff || cutoff - cmdline > IDEAL_CMDLINE_SPLIT_LEN) {
     break;
+    }
     prev_cutoff = cutoff;
     }
-    if (prev_cutoff)
+    if (prev_cutoff) {
     cutoff = prev_cutoff;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !cutoff) -> else {
-    else if (!cutoff)
+    }
+
+    else if (!cutoff) {
     break;
+    }
 // Find the beginning and end of the string of spaces
     first_space = cutoff;
-    while (first_space > cmdline && first_space[-1] == ' ')
-    first_space--;
+    while (first_space > cmdline && first_space[-1] == ' ') {
+    first_space -= 1;
+    }
     to_print = first_space - cmdline;
-    while (*cutoff == ' ')
-    cutoff++;
+    while (*cutoff == ' ') {
+    cutoff += 1;
+    }
     used = cutoff - cmdline;
 // If the whole string is used, break and do the final printout
-    if (len == used)
+    if (len == used) {
     break;
-    if (to_print)
+    }
+    if (to_print) {
     pr_notice("%s%.*s%s\n", KERNEL_CMDLINE_PREFIX,
     to_print, cmdline, KERNEL_CMDLINE_CONTINUATION);
+    }
     len -= used;
     cmdline += used;
     }
-    if (len)
+    if (len) {
     pr_notice("%s%s\n", KERNEL_CMDLINE_PREFIX, cmdline);
+    }
     }
     asmlinkage __visible __init __no_sanitize_address __noreturn __no_stack_protector
 #[no_mangle]
 pub unsafe extern "C" fn start_kernel() {
-    void start_kernel(void)
-    {
-    char *command_line;
-    char *after_dashes;
+pub static mut command_line: *mut c_void = core::ptr::null_mut();
+pub static mut after_dashes: *mut c_void = core::ptr::null_mut();
     set_task_stack_end_magic(&init_task);
     smp_setup_processor_id();
     debug_objects_early_init();
@@ -870,12 +1125,14 @@ pub unsafe extern "C" fn start_kernel() {
     __stop___param - __start___param,
     -1, -1, core::ptr::null_mut(), &unknown_bootoption);
     print_unknown_bootoptions();
-    if (!IS_ERR_OR_NULL(after_dashes))
+    if (!IS_ERR_OR_NULL(after_dashes)) {
     parse_args("Setting init args", after_dashes, core::ptr::null_mut(), 0, -1, -1,
     core::ptr::null_mut(), set_init_arg);
-    if (extra_init_args)
+    }
+    if (extra_init_args) {
     parse_args("Setting extra init args", extra_init_args,
     core::ptr::null_mut(), 0, -1, -1, core::ptr::null_mut(), set_init_arg);
+    }
 // Architectural and non-timekeeping rng init, before allocator init
     random_init_early(command_line);
 //
@@ -899,8 +1156,9 @@ pub unsafe extern "C" fn start_kernel() {
 //
     sched_init();
     if (WARN(!irqs_disabled(),
-    "Interrupts were enabled *very* early, fixing it\n"))
+    "Interrupts were enabled *very* early, fixing it\n")) {
     local_irq_disable();
+    }
     radix_tree_init();
 //
 // Set up housekeeping before setting up workqueues to allow the unbound
@@ -917,8 +1175,9 @@ pub unsafe extern "C" fn start_kernel() {
     kvfree_rcu_init();
 // Trace events are available after this
     trace_init();
-    if (initcall_debug)
+    if (initcall_debug) {
     initcall_debug_enable();
+    }
     context_tracking_init();
 // init some links before init_ISA_irqs()
     early_irq_init();
@@ -950,9 +1209,10 @@ pub unsafe extern "C" fn start_kernel() {
 // this. But we do want output early, in case something goes wrong.
 //
     console_init();
-    if (panic_later)
+    if (panic_later) {
     panic("Too many boot %s vars at `%s'", panic_later,
     panic_param);
+    }
     lockdep_init();
 //
 // Need to run this when irqs are enabled, because it wants
@@ -962,9 +1222,9 @@ pub unsafe extern "C" fn start_kernel() {
     locking_selftest();
 
     if (initrd_start && !initrd_below_start_ok &&
-    page_to_pfn(virt_to_page((void *)initrd_start)) < min_low_pfn) {
+    page_to_pfn(virt_to_page(initrd_start)) < min_low_pfn) {
     pr_crit("initrd overwritten (0x%08lx < 0x%08lx) - disabling it.\n",
-    page_to_pfn(virt_to_page((void *)initrd_start)),
+    page_to_pfn(virt_to_page(initrd_start)),
     min_low_pfn);
     initrd_start = 0;
     }
@@ -972,8 +1232,9 @@ pub unsafe extern "C" fn start_kernel() {
     setup_per_cpu_pageset();
     numa_policy_init();
     acpi_early_init();
-    if (late_time_init)
+    if (late_time_init) {
     late_time_init();
+    }
     sched_clock_init();
     calibrate_delay();
     arch_cpu_finalize_init();
@@ -1016,9 +1277,7 @@ pub unsafe extern "C" fn start_kernel() {
     }
 // Call all constructor functions linked into the kernel.
 #[no_mangle]
-unsafe extern "C" fn do_ctors() -> void __init {
-    static void __init do_ctors(void)
-    {
+unsafe extern "C" fn do_ctors()  {
 //
 // For UML, the constructors have already been called by the
 // normal setup code as it's just a normal ELF binary, so we
@@ -1026,9 +1285,10 @@ unsafe extern "C" fn do_ctors() -> void __init {
 // even on UML for modules.
 //
 
-    ctor_fn_t *fn = (ctor_fn_t *) __ctors_start;
-    for (; fn < (ctor_fn_t *) __ctors_end; fn++)
+    let mut fn =  __ctors_start;
+    while (fn <  __ctors_end) {
     (*fn)();
+    }
 
     }
 
@@ -1041,17 +1301,15 @@ pub struct blacklist_entry {
 
     static __initdata_or_module LIST_HEAD(blacklisted_initcalls);
 #[no_mangle]
-unsafe extern "C" fn initcall_blacklist(str: *mut c_char) -> int __init {
-    static int __init initcall_blacklist(char *str)
-    {
-    char *str_entry;
-    struct blacklist_entry *entry;
+unsafe extern "C" fn initcall_blacklist(str: *mut c_char) -> c_int {
+pub static mut str_entry: *mut c_void = core::ptr::null_mut();
+pub static mut entry: *mut c_void = core::ptr::null_mut();
 // str argument is a comma-separated list of functions
     do {
     str_entry = strsep(&str, ",");
     if (str_entry) {
-    pr_debug("blacklisting initcall %s\n", str_entry);
-    entry = memblock_alloc_or_panic(sizeof(*entry),
+    pr_debug!("blacklisting initcall %s\n", str_entry);
+    entry = memblock_alloc_or_panic(sizeof!(*entry),
     SMP_CACHE_BYTES);
     entry.buf = memblock_alloc_or_panic(strlen(str_entry) + 1,
     SMP_CACHE_BYTES);
@@ -1063,13 +1321,12 @@ unsafe extern "C" fn initcall_blacklist(str: *mut c_char) -> int __init {
     }
 #[no_mangle]
 unsafe extern "C" fn initcall_blacklisted(fn: initcall_t) -> bool __init_or_module {
-    static bool __init_or_module initcall_blacklisted(initcall_t fn)
-    {
-    struct blacklist_entry *entry;
+pub static mut entry: *mut c_void = core::ptr::null_mut();
     char fn_name[KSYM_SYMBOL_LEN];
-    unsigned long addr;
-    if (list_empty(&blacklisted_initcalls))
+    let mut addr = 0;
+    if (list_empty(&blacklisted_initcalls)) {
     return false;
+    }
     addr = (unsigned long) dereference_function_descriptor(fn);
     sprint_symbol_no_offset(fn_name, addr);
 //
@@ -1079,7 +1336,7 @@ unsafe extern "C" fn initcall_blacklisted(fn: initcall_t) -> bool __init_or_modu
     strreplace(fn_name, ' ', '\0');
     list_for_each_entry(entry, &blacklisted_initcalls, next) {
     if (!strcmp(fn_name, entry.buf)) {
-    pr_debug("initcall %s blacklisted\n", fn_name);
+    pr_debug!("initcall %s blacklisted\n", fn_name);
     return true;
     }
     }
@@ -1087,99 +1344,89 @@ unsafe extern "C" fn initcall_blacklisted(fn: initcall_t) -> bool __init_or_modu
     }
 
 #[no_mangle]
-unsafe extern "C" fn initcall_blacklist(str: *mut c_char) -> int __init {
-    static int __init initcall_blacklist(char *str)
-    {
-    pr_warn("initcall_blacklist requires CONFIG_KALLSYMS\n");
+unsafe extern "C" fn initcall_blacklist(str: *mut c_char) -> c_int {
+    pr_warn!("initcall_blacklist requires CONFIG_KALLSYMS\n");
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn initcall_blacklisted(fn: initcall_t) -> bool __init_or_module {
-    static bool __init_or_module initcall_blacklisted(initcall_t fn)
-    {
     return false;
     }
 
-    __setup("initcall_blacklist=", initcall_blacklist);
+    __setup!("initcall_blacklist=", initcall_blacklist);
     static __init_or_module void
-    trace_initcall_start_cb(void *data, initcall_t fn)
+    trace_initcall_start_cb!(void *data, initcall_t fn)
     {
-    ktime_t *calltime = data;
-    printk(KERN_DEBUG "calling  %pS @ %i\n", fn, task_pid_nr(current));
+    let mut calltime = data;
+    printk!("calling  %pS @ %i\n", fn, task_pid_nr(current));
 // calltime = ktime_get();
     }
     static __init_or_module void
-    trace_initcall_finish_cb(void *data, initcall_t fn, int ret)
+    trace_initcall_finish_cb!(void *data, initcall_t fn, int ret)
     {
     ktime_t rettime, *calltime = data;
     rettime = ktime_get();
-    printk(KERN_DEBUG "initcall %pS returned %d after %lld usecs\n",
+    printk!("initcall %pS returned %d after %lld usecs\n",
     fn, ret, (unsigned long long)ktime_us_delta(rettime, *calltime));
     }
     static __init_or_module void
-    trace_initcall_level_cb(void *data, const char *level)
+    trace_initcall_level_cb!(void *data, const char *level)
     {
-    printk(KERN_DEBUG "entering initcall level: %s\n", level);
+    printk!("entering initcall level: %s\n", level);
     }
     static ktime_t initcall_calltime;
 
 #[no_mangle]
-unsafe extern "C" fn initcall_debug_enable() -> void __init {
-    static void __init initcall_debug_enable(void)
-    {
-    int ret;
-    ret = register_trace_initcall_start(trace_initcall_start_cb,
+unsafe extern "C" fn initcall_debug_enable()  {
+    let mut ret = 0;
+    ret = register_trace_initcall_start!(trace_initcall_start_cb,
     &initcall_calltime);
-    ret |= register_trace_initcall_finish(trace_initcall_finish_cb,
+    ret |= register_trace_initcall_finish!(trace_initcall_finish_cb,
     &initcall_calltime);
-    ret |= register_trace_initcall_level(trace_initcall_level_cb, core::ptr::null_mut());
+    ret |= register_trace_initcall_level!(trace_initcall_level_cb, core::ptr::null_mut());
     WARN(ret, "Failed to register initcall tracepoints\n");
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn do_trace_initcall_start(fn: initcall_t) {
-    static inline void do_trace_initcall_start(initcall_t fn)
-    {
-    if (!initcall_debug)
+pub unsafe extern "C" fn do_trace_initcall_start!(fn: initcall_t) {
+    if (!initcall_debug) {
     return;
-    trace_initcall_start_cb(&initcall_calltime, fn);
+    }
+    trace_initcall_start_cb!(&initcall_calltime, fn);
     }
 #[no_mangle]
-pub unsafe extern "C" fn do_trace_initcall_finish(fn: initcall_t, ret: c_int) {
-    static inline void do_trace_initcall_finish(initcall_t fn, int ret)
-    {
-    if (!initcall_debug)
+pub unsafe extern "C" fn do_trace_initcall_finish!(fn: initcall_t, ret: c_int) {
+    if (!initcall_debug) {
     return;
-    trace_initcall_finish_cb(&initcall_calltime, fn, ret);
+    }
+    trace_initcall_finish_cb!(&initcall_calltime, fn, ret);
     }
 #[no_mangle]
-pub unsafe extern "C" fn do_trace_initcall_level(level: *const c_char) {
-    static inline void do_trace_initcall_level(const char *level)
-    {
-    if (!initcall_debug)
+pub unsafe extern "C" fn do_trace_initcall_level!(level: *const c_char) {
+    if (!initcall_debug) {
     return;
-    trace_initcall_level_cb(core::ptr::null_mut(), level);
+    }
+    trace_initcall_level_cb!(core::ptr::null_mut(), level);
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn do_one_initcall(fn: initcall_t) -> int __init_or_module {
-    int __init_or_module do_one_initcall(initcall_t fn)
-    {
-    let mut count: c_int = preempt_count();
+pub unsafe extern "C" fn do_one_initcall!(fn: initcall_t) -> c_int_or_module {
+pub static mut count: c_int = 0;
     char msgbuf[64];
-    int ret;
-    if (initcall_blacklisted(fn))
+    let mut ret = 0;
+    if (initcall_blacklisted(fn)) {
     return -EPERM;
-    do_trace_initcall_start(fn);
+    }
+    do_trace_initcall_start!(fn);
     ret = fn();
-    do_trace_initcall_finish(fn, ret);
+    do_trace_initcall_finish!(fn, ret);
     msgbuf[0] = 0;
     if (preempt_count() != count) {
     sprintf(msgbuf, "preemption imbalance ");
     preempt_count_set(count);
     }
     if (irqs_disabled()) {
-    strlcat(msgbuf, "disabled interrupts ", sizeof(msgbuf));
+    strlcat(msgbuf, "disabled interrupts ", sizeof!(msgbuf));
     local_irq_enable();
     }
     WARN(msgbuf[0], "initcall %pS returned with %s\n", fn, msgbuf);
@@ -1214,33 +1461,31 @@ pub unsafe extern "C" fn do_one_initcall(fn: initcall_t) -> int __init_or_module
     return 0;
     }
 #[no_mangle]
-unsafe extern "C" fn do_initcall_level(level: c_int, command_line: *mut c_char) -> void __init {
-    static void __init do_initcall_level(int level, char *command_line)
-    {
-    initcall_entry_t *fn;
+unsafe extern "C" fn do_initcall_level!(level: c_int, command_line: *mut c_char)  {
+pub static mut fn: *mut c_void = core::ptr::null_mut();
     parse_args(initcall_level_names[level],
     command_line, __start___param,
     __stop___param - __start___param,
     level, level,
     core::ptr::null_mut(), ignore_unknown_bootoption);
-    do_trace_initcall_level(initcall_level_names[level]);
-    for (fn = initcall_levels[level]; fn < initcall_levels[level+1]; fn++)
-    do_one_initcall(initcall_from_entry(fn));
+    do_trace_initcall_level!(initcall_level_names[level]);
+    while (fn < initcall_levels[level+1]) {
+    do_one_initcall!(initcall_from_entry(fn));
+    }
     }
 #[no_mangle]
-unsafe extern "C" fn do_initcalls() -> void __init {
-    static void __init do_initcalls(void)
-    {
-    int level;
-    let mut len: usize = saved_command_line_len + 1;
-    char *command_line;
+unsafe extern "C" fn do_initcalls!()  {
+    let mut level = 0;
+pub static mut len: usize = 0;
+pub static mut command_line: *mut c_void = core::ptr::null_mut();
     command_line = kzalloc(len, GFP_KERNEL);
-    if (!command_line)
+    if (!command_line) {
     panic("%s: Failed to allocate %zu bytes\n", __func__, len);
-    for (level = 0; level < ARRAY_SIZE(initcall_levels) - 1; level++) {
+    }
+    while (level < ARRAY_SIZE!(initcall_levels) - 1) {
 // Parser modifies command_line, restore it each time
     strcpy(command_line, saved_command_line);
-    do_initcall_level(level, command_line);
+    do_initcall_level!(level, command_line);
     }
     kfree(command_line);
     }
@@ -1252,81 +1497,76 @@ unsafe extern "C" fn do_initcalls() -> void __init {
 // Now we can finally start doing some real work..
 //
 #[no_mangle]
-unsafe extern "C" fn do_basic_setup() -> void __init {
-    static void __init do_basic_setup(void)
-    {
+unsafe extern "C" fn do_basic_setup()  {
     cpuset_init_smp();
     ksysfs_init();
     driver_init();
     init_irq_proc();
     do_ctors();
-    do_initcalls();
+    do_initcalls!();
     }
 #[no_mangle]
-unsafe extern "C" fn do_pre_smp_initcalls() -> void __init {
-    static void __init do_pre_smp_initcalls(void)
-    {
-    initcall_entry_t *fn;
-    do_trace_initcall_level("early");
-    for (fn = __initcall_start; fn < __initcall0_start; fn++)
-    do_one_initcall(initcall_from_entry(fn));
+unsafe extern "C" fn do_pre_smp_initcalls!()  {
+pub static mut fn: *mut c_void = core::ptr::null_mut();
+    do_trace_initcall_level!("early");
+    while (fn < __initcall0_start) {
+    do_one_initcall!(initcall_from_entry(fn));
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn run_init_process(init_filename: *const c_char) -> c_int {
-    static int run_init_process(const char *init_filename)
-    {
     const char *const *p;
     argv_init[0] = init_filename;
-    pr_info("Run %s as init process\n", init_filename);
-    pr_debug("  with arguments:\n");
-    for (p = argv_init; *p; p++)
-    pr_debug("    %s\n", *p);
-    pr_debug("  with environment:\n");
-    for (p = envp_init; *p; p++)
-    pr_debug("    %s\n", *p);
+    pr_info!("Run %s as init process\n", init_filename);
+    pr_debug!("  with arguments:\n");
+    while (*p) {
+    pr_debug!("    %s\n", *p);
+    }
+    pr_debug!("  with environment:\n");
+    while (*p) {
+    pr_debug!("    %s\n", *p);
+    }
     return kernel_execve(init_filename, argv_init, envp_init);
     }
 #[no_mangle]
 unsafe extern "C" fn try_to_run_init_process(init_filename: *const c_char) -> c_int {
-    static int try_to_run_init_process(const char *init_filename)
-    {
-    int ret;
+    let mut ret = 0;
     ret = run_init_process(init_filename);
     if (ret && ret != -ENOENT) {
-    pr_err("Starting init: %s exists but couldn't execute it (error %d)\n",
+    pr_err!("Starting init: %s exists but couldn't execute it (error %d)\n",
     init_filename, ret);
     }
     return ret;
     }
     static noinline void __init kernel_init_freeable(void);
 
-    let mut __ro_after_init: bool rodata_enabled = true;
-
-    static inline bool arch_parse_debug_rodata(char *str) { return false; }
+pub static mut __ro_after_init: bool rodata_enabled = true;
 
 #[no_mangle]
-unsafe extern "C" fn set_debug_rodata(str: *mut c_char) -> int __init {
-    static int __init set_debug_rodata(char *str)
-    {
-    if (arch_parse_debug_rodata(str))
-    return 0;
-    if (str && !strcmp(str, "on"))
-    rodata_enabled = true;
+pub unsafe extern "C" fn arch_parse_debug_rodata(str: *mut c_char) -> bool { return false; }
+
 #[no_mangle]
-pub unsafe extern "C" fn if(!strcmp(str: str &&, _arg: "off")) -> else {
-    else if (str && !strcmp(str, "off"))
-    rodata_enabled = false;
-    else
-    pr_warn("Invalid option string for rodata: '%s'\n", str);
+unsafe extern "C" fn set_debug_rodata(str: *mut c_char) -> c_int {
+    if (arch_parse_debug_rodata(str)) {
     return 0;
     }
-    early_param("rodata", set_debug_rodata);
+    if (str && !strcmp(str, "on")) {
+    rodata_enabled = true;
+    }
+
+    else if (str && !strcmp(str, "off")) {
+    rodata_enabled = false;
+    }
+    else {
+    pr_warn!("Invalid option string for rodata: '%s'\n", str);
+    }
+    return 0;
+    }
+    early_param!("rodata", set_debug_rodata);
 
 #[no_mangle]
 unsafe extern "C" fn mark_readonly() {
-    static void mark_readonly(void)
-    {
-    if (IS_ENABLED(CONFIG_STRICT_KERNEL_RWX) && rodata_enabled) {
+    if (IS_ENABLED!(CONFIG_STRICT_KERNEL_RWX) && rodata_enabled) {
 //
 // load_module() results in W+X mappings, which are cleaned
 // up with init_free_wq. Let's make sure that queued work is
@@ -1338,25 +1578,21 @@ unsafe extern "C" fn mark_readonly() {
     mark_rodata_ro();
     debug_checkwx();
     rodata_test();
-    } else if (IS_ENABLED(CONFIG_STRICT_KERNEL_RWX)) {
-    pr_info("Kernel memory protection disabled.\n");
-    } else if (IS_ENABLED(CONFIG_ARCH_HAS_STRICT_KERNEL_RWX)) {
-    pr_warn("Kernel memory protection not selected by kernel config.\n");
+    } else if (IS_ENABLED!(CONFIG_STRICT_KERNEL_RWX)) {
+    pr_info!("Kernel memory protection disabled.\n");
+    } else if (IS_ENABLED!(CONFIG_ARCH_HAS_STRICT_KERNEL_RWX)) {
+    pr_warn!("Kernel memory protection not selected by kernel config.\n");
     } else {
-    pr_warn("This architecture does not have kernel memory protection.\n");
+    pr_warn!("This architecture does not have kernel memory protection.\n");
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn free_initmem() -> void __weak {
-    void __weak free_initmem(void)
-    {
     free_initmem_default(POISON_FREE_INITMEM);
     }
 #[no_mangle]
 unsafe extern "C" fn kernel_init(unused: *mut c_void) -> int __ref {
-    static int __ref kernel_init(void *unused)
-    {
-    int ret;
+    let mut ret = 0;
     init_userspace_fs();
 //
 // Wait until kthreadd is all set-up.
@@ -1383,9 +1619,10 @@ unsafe extern "C" fn kernel_init(unused: *mut c_void) -> int __ref {
     do_sysctl_args();
     if (ramdisk_execute_command) {
     ret = run_init_process(ramdisk_execute_command);
-    if (!ret)
+    if (!ret) {
     return 0;
-    pr_err("Failed to execute %s (error %d)\n",
+    }
+    pr_err!("Failed to execute %s (error %d)\n",
     ramdisk_execute_command, ret);
     }
 //
@@ -1396,35 +1633,37 @@ unsafe extern "C" fn kernel_init(unused: *mut c_void) -> int __ref {
 //
     if (execute_command) {
     ret = run_init_process(execute_command);
-    if (!ret)
+    if (!ret) {
     return 0;
+    }
     panic("Requested init %s failed (error %d).",
     execute_command, ret);
     }
     if (CONFIG_DEFAULT_INIT[0] != '\0') {
     ret = run_init_process(CONFIG_DEFAULT_INIT);
-    if (ret)
-    pr_err("Default init %s failed (error %d)\n",
+    if (ret) {
+    pr_err!("Default init %s failed (error %d)\n",
     CONFIG_DEFAULT_INIT, ret);
-    else
+    }
+    else {
     return 0;
+    }
     }
     if (!try_to_run_init_process("/sbin/init") ||
     !try_to_run_init_process("/etc/init") ||
     !try_to_run_init_process("/bin/init") ||
-    !try_to_run_init_process("/bin/sh"))
+    !try_to_run_init_process("/bin/sh")) {
     return 0;
+    }
     panic("No working init found.  Try passing init= option to kernel. "
     "See Linux Documentation/admin-guide/init.rst for guidance.");
     }
 // Open /dev/console, for stdin/stdout/stderr, this should never fail
 #[no_mangle]
-pub unsafe extern "C" fn console_on_rootfs() -> void __init {
-    void __init console_on_rootfs(void)
-    {
-    struct file *file = filp_open("/dev/console", O_RDWR, 0);
+pub unsafe extern "C" fn console_on_rootfs()  {
+    let mut file = filp_open("/dev/console", O_RDWR, 0);
     if (IS_ERR(file)) {
-    pr_err("Warning: unable to open an initial console.\n");
+    pr_err!("Warning: unable to open an initial console.\n");
     return;
     }
     init_dup(file);
@@ -1434,8 +1673,6 @@ pub unsafe extern "C" fn console_on_rootfs() -> void __init {
     }
 #[no_mangle]
 unsafe extern "C" fn kernel_init_freeable() -> noinline void __init {
-    static noinline void __init kernel_init_freeable(void)
-    {
 // Now the scheduler is fully set up and can do blocking allocations
     gfp_allowed_mask = __GFP_BITS_MASK;
 //
@@ -1446,7 +1683,7 @@ unsafe extern "C" fn kernel_init_freeable() -> noinline void __init {
     smp_prepare_cpus(setup_max_cpus);
     workqueue_init();
     init_mm_internals();
-    do_pre_smp_initcalls();
+    do_pre_smp_initcalls!();
     lockup_detector_init();
     smp_init();
     sched_init_smp();
@@ -1462,12 +1699,13 @@ unsafe extern "C" fn kernel_init_freeable() -> noinline void __init {
 // check if there is an early userspace init.  If yes, let it do all
 // the work
 //
-    int ramdisk_command_access;
+    let mut ramdisk_command_access = 0;
     ramdisk_command_access = init_eaccess(ramdisk_execute_command);
     if (ramdisk_command_access != 0) {
-    if (ramdisk_execute_command_set)
-    pr_warn("check access for rdinit=%s failed: %i, ignoring\n",
+    if (ramdisk_execute_command_set) {
+    pr_warn!("check access for rdinit=%s failed: %i, ignoring\n",
     ramdisk_execute_command, ramdisk_command_access);
+    }
     ramdisk_execute_command = core::ptr::null_mut();
     prepare_namespace();
     }
@@ -1479,5 +1717,5 @@ unsafe extern "C" fn kernel_init_freeable() -> noinline void __init {
 // rootfs is available now, try loading the public keys
 // and default modules
 //
-    integrity_load_keys();
+// forward_decl: egrity_load_keys;
     }

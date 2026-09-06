@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -57,22 +307,19 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     static gfp_t saved_gfp_mask;
 #[no_mangle]
 pub unsafe extern "C" fn pm_restore_gfp_mask() {
-    void pm_restore_gfp_mask(void)
-    {
-    WARN_ON(!mutex_is_locked(&system_transition_mutex));
-    if (!saved_gfp_count || --saved_gfp_count)
+    WARN_ON!(!mutex_is_locked(&system_transition_mutex));
+    if (!saved_gfp_count || --saved_gfp_count) {
     return;
+    }
     gfp_allowed_mask = saved_gfp_mask;
     saved_gfp_mask = 0;
     pm_pr_dbg("GFP mask restored\n");
     }
 #[no_mangle]
 pub unsafe extern "C" fn pm_restrict_gfp_mask() {
-    void pm_restrict_gfp_mask(void)
-    {
-    WARN_ON(!mutex_is_locked(&system_transition_mutex));
+    WARN_ON!(!mutex_is_locked(&system_transition_mutex));
     if (saved_gfp_count++) {
-    WARN_ON((saved_gfp_mask & ~(__GFP_IO | __GFP_FS)) != gfp_allowed_mask);
+    WARN_ON!((saved_gfp_mask & ~(__GFP_IO | __GFP_FS)) != gfp_allowed_mask);
     return;
     }
     saved_gfp_mask = gfp_allowed_mask;
@@ -81,9 +328,7 @@ pub unsafe extern "C" fn pm_restrict_gfp_mask() {
     }
 #[no_mangle]
 pub unsafe extern "C" fn lock_system_sleep() -> c_uint {
-    unsigned int lock_system_sleep(void)
-    {
-    let mut flags: c_uint = current.flags;
+pub static mut flags: c_uint = 0;
     current.flags |= PF_NOFREEZE;
     mutex_lock(&system_transition_mutex);
     return flags;
@@ -91,47 +336,41 @@ pub unsafe extern "C" fn lock_system_sleep() -> c_uint {
     EXPORT_SYMBOL_GPL(lock_system_sleep);
 #[no_mangle]
 pub unsafe extern "C" fn unlock_system_sleep(flags: c_uint) {
-    void unlock_system_sleep(unsigned int flags)
-    {
-    if (!(flags & PF_NOFREEZE))
+    if (!(flags & PF_NOFREEZE)) {
     current.flags &= ~PF_NOFREEZE;
+    }
     mutex_unlock(&system_transition_mutex);
     }
     EXPORT_SYMBOL_GPL(unlock_system_sleep);
 #[no_mangle]
 pub unsafe extern "C" fn ksys_sync_helper() {
-    void ksys_sync_helper(void)
-    {
-    ktime_t start;
-    long elapsed_msecs;
+    let mut start;
+    let mut elapsed_msecs = 0;
     start = ktime_get();
     ksys_sync();
     elapsed_msecs = ktime_to_ms(ktime_sub(ktime_get(), start));
-    pr_info("Filesystems sync: %ld.%03ld seconds\n",
+    pr_info!("Filesystems sync: %ld.%03ld seconds\n",
     elapsed_msecs / MSEC_PER_SEC, elapsed_msecs % MSEC_PER_SEC);
     }
     EXPORT_SYMBOL_GPL(ksys_sync_helper);
 
 // Wakeup events handling resolution while syncing file systems in jiffies
 pub const PM_FS_SYNC_WAKEUP_RESOLUTION: c_int = 5;
-    let mut pm_fs_sync_count: static atomic_t = ATOMIC_INIT(0);
-    static struct workqueue_struct *pm_fs_sync_wq;
-    static DECLARE_WAIT_QUEUE_HEAD(pm_fs_sync_wait);
+pub static mut pm_fs_sync_count: atomic_t = 0;
+pub static mut pm_fs_sync_wq: *mut c_void = core::ptr::null_mut();
+pub static mut pm_fs_sync_wait: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn pm_fs_sync_completed() -> bool {
-    static bool pm_fs_sync_completed(void)
-    {
     return atomic_read(&pm_fs_sync_count) == 0;
     }
 #[no_mangle]
 unsafe extern "C" fn pm_fs_sync_work_fn(work: *mut work_struct) {
-    static void pm_fs_sync_work_fn(struct work_struct *work)
-    {
     ksys_sync_helper();
-    if (atomic_dec_and_test(&pm_fs_sync_count))
+    if (atomic_dec_and_test(&pm_fs_sync_count)) {
     wake_up(&pm_fs_sync_wait);
     }
-    static DECLARE_WORK(pm_fs_sync_work, pm_fs_sync_work_fn);
+    }
+pub static mut pm_fs_sync_work: usize = 0;
 //
 // pm_sleep_fs_sync() - Sync file systems in an interruptible way
 //
@@ -140,8 +379,6 @@ unsafe extern "C" fn pm_fs_sync_work_fn(work: *mut work_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn pm_sleep_fs_sync() -> c_int {
-    int pm_sleep_fs_sync(void)
-    {
     pm_wakeup_clear(0);
 //
 // Take back-to-back sleeps into account by queuing a subsequent fs sync
@@ -154,8 +391,9 @@ pub unsafe extern "C" fn pm_sleep_fs_sync() -> c_int {
     queue_work(pm_fs_sync_wq, &pm_fs_sync_work);
     }
     while (!pm_fs_sync_completed()) {
-    if (pm_wakeup_pending())
+    if (pm_wakeup_pending()) {
     return -EBUSY;
+    }
     wait_event_timeout(pm_fs_sync_wait, pm_fs_sync_completed(),
     PM_FS_SYNC_WAKEUP_RESOLUTION);
     }
@@ -166,116 +404,111 @@ pub unsafe extern "C" fn pm_sleep_fs_sync() -> c_int {
     static BLOCKING_NOTIFIER_HEAD(pm_chain_head);
 #[no_mangle]
 pub unsafe extern "C" fn register_pm_notifier(nb: *mut notifier_block) -> c_int {
-    int register_pm_notifier(struct notifier_block *nb)
-    {
     return blocking_notifier_chain_register(&pm_chain_head, nb);
     }
     EXPORT_SYMBOL_GPL(register_pm_notifier);
 #[no_mangle]
 pub unsafe extern "C" fn unregister_pm_notifier(nb: *mut notifier_block) -> c_int {
-    int unregister_pm_notifier(struct notifier_block *nb)
-    {
     return blocking_notifier_chain_unregister(&pm_chain_head, nb);
     }
     EXPORT_SYMBOL_GPL(unregister_pm_notifier);
 #[no_mangle]
 pub unsafe extern "C" fn pm_notifier_call_chain_robust(val_up: c_ulong, val_down: c_ulong) -> c_int {
-    int pm_notifier_call_chain_robust(unsigned long val_up, unsigned long val_down)
-    {
-    int ret;
+    let mut ret = 0;
     ret = blocking_notifier_call_chain_robust(&pm_chain_head, val_up, val_down, core::ptr::null_mut());
     return notifier_to_errno(ret);
     }
 #[no_mangle]
 pub unsafe extern "C" fn pm_notifier_call_chain(val: c_ulong) -> c_int {
-    int pm_notifier_call_chain(unsigned long val)
-    {
     return blocking_notifier_call_chain(&pm_chain_head, val, core::ptr::null_mut());
     }
 // If set, devices may be suspended and resumed asynchronously.
-    let mut pm_async_enabled: c_int = 1;
+pub static mut pm_async_enabled: c_int = 1;
 #[no_mangle]
-unsafe extern "C" fn pm_async_setup(str: *mut c_char) -> int __init {
-    static int __init pm_async_setup(char *str)
-    {
-    if (!strcmp(str, "off"))
+unsafe extern "C" fn pm_async_setup(str: *mut c_char) -> c_int {
+    if (!strcmp(str, "off")) {
     pm_async_enabled = 0;
+    }
     return 1;
     }
-    __setup("pm_async=", pm_async_setup);
-    static ssize_t pm_async_show(struct kobject *kobj, struct kobj_attribute *attr,
-    char *buf)
-    {
+    __setup!("pm_async=", pm_async_setup);
+#[no_mangle]
+pub unsafe extern "C" fn pm_async_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%d\n", pm_async_enabled);
     }
-    static ssize_t pm_async_store(struct kobject *kobj, struct kobj_attribute *attr,
-    const char *buf, size_t n)
-    {
-    unsigned long val;
-    if (kstrtoul(buf, 10, &val))
+#[no_mangle]
+pub unsafe extern "C" fn pm_async_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, n: size_t) -> ssize_t {
+    let mut val = 0;
+    if (kstrtoul(buf, 10, &val)) {
     return -EINVAL;
-    if (val > 1)
+    }
+    if (val > 1) {
     return -EINVAL;
+    }
     pm_async_enabled = val;
     return n;
     }
     power_attr(pm_async);
 
-    static ssize_t mem_sleep_show(struct kobject *kobj, struct kobj_attribute *attr,
-    char *buf)
-    {
-    let mut count: isize = 0;
-    suspend_state_t i;
-    for (i = PM_SUSPEND_MIN; i < PM_SUSPEND_MAX; i++) {
-    if (i >= PM_SUSPEND_MEM && cxl_mem_active())
+#[no_mangle]
+pub unsafe extern "C" fn mem_sleep_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+pub static mut count: isize = 0;
+    let mut i;
+    while (i < PM_SUSPEND_MAX) {
+    if (i >= PM_SUSPEND_MEM && cxl_mem_active()) {
     continue;
+    }
     if (mem_sleep_states[i]) {
-    const char *label = mem_sleep_states[i];
-    if (mem_sleep_current == i)
+    let mut label = mem_sleep_states[i];
+    if (mem_sleep_current == i) {
     count += sysfs_emit_at(buf, count, "[%s] ", label);
-    else
+    }
+    else {
     count += sysfs_emit_at(buf, count, "%s ", label);
     }
     }
+    }
 // Convert the last space to a newline if needed.
-    if (count > 0)
+    if (count > 0) {
     buf[count - 1] = '\n';
+    }
     return count;
     }
 #[no_mangle]
 unsafe extern "C" fn decode_suspend_state(buf: *const c_char, n: usize) -> suspend_state_t {
-    static suspend_state_t decode_suspend_state(const char *buf, size_t n)
-    {
-    suspend_state_t state;
-    char *p;
-    int len;
+    let mut state;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    let mut len = 0;
     p = memchr(buf, '\n', n);
     len = p ? p - buf : n;
-    for (state = PM_SUSPEND_MIN; state < PM_SUSPEND_MAX; state++) {
-    const char *label = mem_sleep_states[state];
-    if (label && len == strlen(label) && !strncmp(buf, label, len))
+    while (state < PM_SUSPEND_MAX) {
+    let mut label = mem_sleep_states[state];
+    if (label && len == strlen(label) && !strncmp(buf, label, len)) {
     return state;
+    }
     }
     return PM_SUSPEND_ON;
     }
-    static ssize_t mem_sleep_store(struct kobject *kobj, struct kobj_attribute *attr,
-    const char *buf, size_t n)
-    {
-    suspend_state_t state;
-    int error;
+#[no_mangle]
+pub unsafe extern "C" fn mem_sleep_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, n: size_t) -> ssize_t {
+    let mut state;
+    let mut error = 0;
     error = pm_autosleep_lock();
-    if (error)
+    if (error) {
     return error;
+    }
     if (pm_autosleep_state() > PM_SUSPEND_ON) {
     error = -EBUSY;
-    goto out;
+// goto;
     }
     state = decode_suspend_state(buf, n);
-    if (state < PM_SUSPEND_MAX && state > PM_SUSPEND_ON)
+    if (state < PM_SUSPEND_MAX && state > PM_SUSPEND_ON) {
     mem_sleep_current = state;
-    else
+    }
+    else {
     error = -EINVAL;
-    out:
+    }
+// label;
     pm_autosleep_unlock();
     return error ? error : n;
     }
@@ -286,27 +519,26 @@ unsafe extern "C" fn decode_suspend_state(buf: *const c_char, n: usize) -> suspe
 // show() returns whether file systems sync before suspend is enabled.
 // store() accepts 0 or 1.  0 disables file systems sync and 1 enables it.
 //
-    let mut sync_on_suspend_enabled: bool = !IS_ENABLED(CONFIG_SUSPEND_SKIP_SYNC);
-    static ssize_t sync_on_suspend_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+pub static mut sync_on_suspend_enabled: bool = false;
+#[no_mangle]
+pub unsafe extern "C" fn sync_on_suspend_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%d\n", sync_on_suspend_enabled);
     }
-    static ssize_t sync_on_suspend_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t n)
-    {
-    unsigned long val;
-    if (kstrtoul(buf, 10, &val))
+#[no_mangle]
+pub unsafe extern "C" fn sync_on_suspend_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, n: size_t) -> ssize_t {
+    let mut val = 0;
+    if (kstrtoul(buf, 10, &val)) {
     return -EINVAL;
-    if (val > 1)
+    }
+    if (val > 1) {
     return -EINVAL;
+    }
     sync_on_suspend_enabled = !!val;
     return n;
     }
     power_attr(sync_on_suspend);
 
-    let mut pm_test_level: c_int = TEST_NONE;
+pub static mut pm_test_level: c_int = 0;
     static const char * const pm_tests[__TEST_AFTER_LAST] = {
     [TEST_NONE] = "none",
     [TEST_CORE] = "core",
@@ -315,38 +547,41 @@ unsafe extern "C" fn decode_suspend_state(buf: *const c_char, n: usize) -> suspe
     [TEST_DEVICES] = "devices",
     [TEST_FREEZER] = "freezer",
     };
-    static ssize_t pm_test_show(struct kobject *kobj, struct kobj_attribute *attr,
-    char *buf)
-    {
-    let mut count: isize = 0;
-    int level;
-    for (level = TEST_FIRST; level <= TEST_MAX; level++)
+#[no_mangle]
+pub unsafe extern "C" fn pm_test_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+pub static mut count: isize = 0;
+    let mut level = 0;
+    for (level = TEST_FIRST; level <= TEST_MAX; level++) {
     if (pm_tests[level]) {
-    if (level == pm_test_level)
+    }
+    if (level == pm_test_level) {
     count += sysfs_emit_at(buf, count, "[%s] ", pm_tests[level]);
-    else
+    }
+    else {
     count += sysfs_emit_at(buf, count, "%s ", pm_tests[level]);
     }
+    }
 // Convert the last space to a newline if needed.
-    if (count > 0)
+    if (count > 0) {
     buf[count - 1] = '\n';
+    }
     return count;
     }
-    static ssize_t pm_test_store(struct kobject *kobj, struct kobj_attribute *attr,
-    const char *buf, size_t n)
-    {
-    unsigned int sleep_flags;
+#[no_mangle]
+pub unsafe extern "C" fn pm_test_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, n: size_t) -> ssize_t {
+    let mut sleep_flags = 0;
     const char * const *s;
-    let mut error: c_int = -EINVAL;
-    int level;
-    char *p;
-    int len;
+pub static mut error: c_int = 0;
+    let mut level = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    let mut len = 0;
     p = memchr(buf, '\n', n);
     len = p ? p - buf : n;
     sleep_flags = lock_system_sleep();
     level = TEST_FIRST;
-    for (s = &pm_tests[level]; level <= TEST_MAX; s++, level++)
+    for (s = &pm_tests[level]; level <= TEST_MAX; s++, level++) {
     if (*s && len == strlen(*s) && !strncmp(buf, *s, len)) {
+    }
     pm_test_level = level;
     error = 0;
     break;
@@ -374,53 +609,43 @@ pub struct suspend_stats {
     pub failed_steps: [enum suspend_stat_step; REC_FAILED_NUM],
 }
 
-    static struct suspend_stats suspend_stats;
-    static DEFINE_MUTEX(suspend_stats_lock);
+pub static mut suspend_stats: usize = 0;
+pub static mut suspend_stats_lock: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn dpm_save_failed_dev(name: *const c_char) {
-    void dpm_save_failed_dev(const char *name)
-    {
     mutex_lock(&suspend_stats_lock);
     strscpy(suspend_stats.failed_devs[suspend_stats.last_failed_dev],
-    name, sizeof(suspend_stats.failed_devs[0]));
-    suspend_stats.last_failed_dev++;
+    name, sizeof!(suspend_stats.failed_devs[0]));
+    suspend_stats.last_failed_dev += 1;
     suspend_stats.last_failed_dev %= REC_FAILED_NUM;
     mutex_unlock(&suspend_stats_lock);
     }
 #[no_mangle]
-pub unsafe extern "C" fn dpm_save_failed_step(step: enum suspend_stat_step) {
-    void dpm_save_failed_step(enum suspend_stat_step step)
-    {
+pub unsafe extern "C" fn dpm_save_failed_step(step: suspend_stat_step) {
     suspend_stats.step_failures[step-1]++;
     suspend_stats.failed_steps[suspend_stats.last_failed_step] = step;
-    suspend_stats.last_failed_step++;
+    suspend_stats.last_failed_step += 1;
     suspend_stats.last_failed_step %= REC_FAILED_NUM;
     }
 #[no_mangle]
 pub unsafe extern "C" fn dpm_save_errno(err: c_int) {
-    void dpm_save_errno(int err)
-    {
     if (!err) {
-    suspend_stats.success++;
+    suspend_stats.success += 1;
     return;
     }
-    suspend_stats.fail++;
+    suspend_stats.fail += 1;
     suspend_stats.errno[suspend_stats.last_failed_errno] = err;
-    suspend_stats.last_failed_errno++;
+    suspend_stats.last_failed_errno += 1;
     suspend_stats.last_failed_errno %= REC_FAILED_NUM;
     }
 #[no_mangle]
 pub unsafe extern "C" fn pm_report_hw_sleep_time(t: u64) {
-    void pm_report_hw_sleep_time(u64 t)
-    {
     suspend_stats.last_hw_sleep = t;
     suspend_stats.total_hw_sleep += t;
     }
     EXPORT_SYMBOL_GPL(pm_report_hw_sleep_time);
 #[no_mangle]
 pub unsafe extern "C" fn pm_report_max_hw_sleep(t: u64) {
-    void pm_report_max_hw_sleep(u64 t)
-    {
     suspend_stats.max_hw_sleep = t;
     }
     EXPORT_SYMBOL_GPL(pm_report_max_hw_sleep);
@@ -436,11 +661,10 @@ pub unsafe extern "C" fn pm_report_max_hw_sleep(t: u64) {
     [SUSPEND_RESUME] = "resume",
     };
 
-    static ssize_t _name##_show(struct kobject *kobj,		\
-    struct kobj_attribute *attr, char *buf)		\
-    {								\
-    return sysfs_emit(buf, format_str, suspend_stats._name);\
-    }								\
+    static ssize_t _name##_show(kobject *kobj, kobj_attribute *attr, char *buf)		
+    {								
+    return sysfs_emit(buf, format_str, suspend_stats._name);
+    }								
     static struct kobj_attribute _name = __ATTR_RO(_name)
     suspend_attr(success, "%u\n");
     suspend_attr(fail, "%u\n");
@@ -448,12 +672,11 @@ pub unsafe extern "C" fn pm_report_max_hw_sleep(t: u64) {
     suspend_attr(total_hw_sleep, "%llu\n");
     suspend_attr(max_hw_sleep, "%llu\n");
 
-    static ssize_t _name##_show(struct kobject *kobj,		\
-    struct kobj_attribute *attr, char *buf)		\
-    {								\
-    return sysfs_emit(buf, "%u\n",				\
-    suspend_stats.step_failures[step-1]);	\
-    }								\
+    static ssize_t _name##_show(kobject *kobj, kobj_attribute *attr, char *buf)		
+    {								
+    return sysfs_emit(buf, "%u\n",				
+    suspend_stats.step_failures[step-1]);	
+    }								
     static struct kobj_attribute _name = __ATTR_RO(_name)
     suspend_step_attr(failed_freeze, SUSPEND_FREEZE);
     suspend_step_attr(failed_prepare, SUSPEND_PREPARE);
@@ -463,39 +686,36 @@ pub unsafe extern "C" fn pm_report_max_hw_sleep(t: u64) {
     suspend_step_attr(failed_resume, SUSPEND_RESUME);
     suspend_step_attr(failed_resume_early, SUSPEND_RESUME_EARLY);
     suspend_step_attr(failed_resume_noirq, SUSPEND_RESUME_NOIRQ);
-    static ssize_t last_failed_dev_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    int index;
-    char *last_failed_dev = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn last_failed_dev_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut index = 0;
+    let mut last_failed_dev = core::ptr::null_mut();
     index = suspend_stats.last_failed_dev + REC_FAILED_NUM - 1;
     index %= REC_FAILED_NUM;
     last_failed_dev = suspend_stats.failed_devs[index];
     return sysfs_emit(buf, "%s\n", last_failed_dev);
     }
-    let mut last_failed_dev: static struct kobj_attribute = __ATTR_RO(last_failed_dev);
-    static ssize_t last_failed_errno_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    int index;
-    int last_failed_errno;
+pub static mut last_failed_dev: kobj_attribute = 0;
+#[no_mangle]
+pub unsafe extern "C" fn last_failed_errno_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut index = 0;
+    let mut last_failed_errno = 0;
     index = suspend_stats.last_failed_errno + REC_FAILED_NUM - 1;
     index %= REC_FAILED_NUM;
     last_failed_errno = suspend_stats.errno[index];
     return sysfs_emit(buf, "%d\n", last_failed_errno);
     }
-    let mut last_failed_errno: static struct kobj_attribute = __ATTR_RO(last_failed_errno);
-    static ssize_t last_failed_step_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+pub static mut last_failed_errno: kobj_attribute = 0;
+#[no_mangle]
+pub unsafe extern "C" fn last_failed_step_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     enum suspend_stat_step step;
-    int index;
+    let mut index = 0;
     index = suspend_stats.last_failed_step + REC_FAILED_NUM - 1;
     index %= REC_FAILED_NUM;
     step = suspend_stats.failed_steps[index];
     return sysfs_emit(buf, "%s\n", suspend_step_names[step]);
     }
-    let mut last_failed_step: static struct kobj_attribute = __ATTR_RO(last_failed_step);
+pub static mut last_failed_step: kobj_attribute = 0;
     static struct attribute *suspend_attrs[] = {
     &success.attr,
     &fail.attr,
@@ -517,29 +737,27 @@ pub unsafe extern "C" fn pm_report_max_hw_sleep(t: u64) {
     };
 #[no_mangle]
 unsafe extern "C" fn suspend_attr_is_visible(kobj: *mut kobject, attr: *mut attribute, idx: c_int) -> umode_t {
-    static umode_t suspend_attr_is_visible(struct kobject *kobj, struct attribute *attr, int idx)
-    {
     if (attr != &last_hw_sleep.attr &&
     attr != &total_hw_sleep.attr &&
-    attr != &max_hw_sleep.attr)
+    attr != &max_hw_sleep.attr) {
     return 0444;
+    }
 
-    if (acpi_gbl_FADT.flags & ACPI_FADT_LOW_POWER_S0)
+    if (acpi_gbl_FADT.flags & ACPI_FADT_LOW_POWER_S0) {
     return 0444;
+    }
 
     return 0;
     }
-    static const struct attribute_group suspend_attr_group = {
-    .name = "suspend_stats",
-    .attrs = suspend_attrs,
-    .is_visible = suspend_attr_is_visible,
-    };
+pub static mut attribute_group: usize = 0;
 
 #[no_mangle]
 unsafe extern "C" fn suspend_stats_show(s: *mut seq_file, unused: *mut c_void) -> c_int {
-    static int suspend_stats_show(struct seq_file *s, void *unused)
-    {
-    int i, index, last_dev, last_errno, last_step;
+    let mut i = 0;
+    let mut index = 0;
+    let mut last_dev = 0;
+    let mut last_errno = 0;
+    let mut last_step = 0;
     enum suspend_stat_step step;
     last_dev = suspend_stats.last_failed_dev + REC_FAILED_NUM - 1;
     last_dev %= REC_FAILED_NUM;
@@ -549,26 +767,27 @@ unsafe extern "C" fn suspend_stats_show(s: *mut seq_file, unused: *mut c_void) -
     last_step %= REC_FAILED_NUM;
     seq_printf(s, "success: %u\nfail: %u\n",
     suspend_stats.success, suspend_stats.fail);
-    for (step = SUSPEND_FREEZE; step <= SUSPEND_NR_STEPS; step++)
+    for (step = SUSPEND_FREEZE; step <= SUSPEND_NR_STEPS; step++) {
     seq_printf(s, "failed_%s: %u\n", suspend_step_names[step],
     suspend_stats.step_failures[step-1]);
+    }
     seq_printf(s,	"failures:\n  last_failed_dev:\t%-s\n",
     suspend_stats.failed_devs[last_dev]);
-    for (i = 1; i < REC_FAILED_NUM; i++) {
+    while (i < REC_FAILED_NUM) {
     index = last_dev + REC_FAILED_NUM - i;
     index %= REC_FAILED_NUM;
     seq_printf(s, "\t\t\t%-s\n", suspend_stats.failed_devs[index]);
     }
     seq_printf(s,	"  last_failed_errno:\t%-d\n",
     suspend_stats.errno[last_errno]);
-    for (i = 1; i < REC_FAILED_NUM; i++) {
+    while (i < REC_FAILED_NUM) {
     index = last_errno + REC_FAILED_NUM - i;
     index %= REC_FAILED_NUM;
     seq_printf(s, "\t\t\t%-d\n", suspend_stats.errno[index]);
     }
     seq_printf(s,	"  last_failed_step:\t%-s\n",
     suspend_step_names[suspend_stats.failed_steps[last_step]]);
-    for (i = 1; i < REC_FAILED_NUM; i++) {
+    while (i < REC_FAILED_NUM) {
     index = last_step + REC_FAILED_NUM - i;
     index %= REC_FAILED_NUM;
     seq_printf(s, "\t\t\t%-s\n",
@@ -576,21 +795,17 @@ unsafe extern "C" fn suspend_stats_show(s: *mut seq_file, unused: *mut c_void) -
     }
     return 0;
     }
-    DEFINE_SHOW_ATTRIBUTE(suspend_stats);
+pub static mut suspend_stats: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn pm_debugfs_init() -> int __init {
-    static int __init pm_debugfs_init(void)
-    {
+unsafe extern "C" fn pm_debugfs_init() -> c_int {
     debugfs_create_file("suspend_stats", S_IFREG | S_IRUGO,
     core::ptr::null_mut(), core::ptr::null_mut(), &suspend_stats_fops);
     return 0;
     }
-    late_initcall(pm_debugfs_init);
+    late_initcall!(pm_debugfs_init);
 
 #[no_mangle]
 pub unsafe extern "C" fn pm_sleep_transition_in_progress() -> bool {
-    bool pm_sleep_transition_in_progress(void)
-    {
     return pm_suspend_in_progress() || hibernation_in_progress();
     }
 
@@ -600,78 +815,72 @@ pub unsafe extern "C" fn pm_sleep_transition_in_progress() -> bool {
 // show() returns whether printing of suspend and resume times is enabled.
 // store() accepts 0 or 1.  0 disables printing and 1 enables it.
 //
-    bool pm_print_times_enabled;
-    static ssize_t pm_print_times_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+    let mut pm_print_times_enabled = 0;
+#[no_mangle]
+pub unsafe extern "C" fn pm_print_times_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%d\n", pm_print_times_enabled);
     }
-    static ssize_t pm_print_times_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t n)
-    {
-    unsigned long val;
-    if (kstrtoul(buf, 10, &val))
+#[no_mangle]
+pub unsafe extern "C" fn pm_print_times_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, n: size_t) -> ssize_t {
+    let mut val = 0;
+    if (kstrtoul(buf, 10, &val)) {
     return -EINVAL;
-    if (val > 1)
+    }
+    if (val > 1) {
     return -EINVAL;
+    }
     pm_print_times_enabled = !!val;
     return n;
     }
     power_attr(pm_print_times);
 #[no_mangle]
 pub unsafe extern "C" fn pm_print_times_init() {
-    static inline void pm_print_times_init(void)
-    {
     pm_print_times_enabled = initcall_debug;
     }
-    static ssize_t pm_wakeup_irq_show(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    char *buf)
-    {
-    if (!pm_wakeup_irq())
+#[no_mangle]
+pub unsafe extern "C" fn pm_wakeup_irq_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    if (!pm_wakeup_irq()) {
     return -ENODATA;
+    }
     return sysfs_emit(buf, "%u\n", pm_wakeup_irq());
     }
     power_attr_ro(pm_wakeup_irq);
-    bool pm_debug_messages_on __read_mostly;
+    let mut pm_debug_messages_on = 0;
 #[no_mangle]
 pub unsafe extern "C" fn pm_debug_messages_should_print() -> bool {
-    bool pm_debug_messages_should_print(void)
-    {
     return pm_debug_messages_on && pm_sleep_transition_in_progress();
     }
     EXPORT_SYMBOL_GPL(pm_debug_messages_should_print);
-    static ssize_t pm_debug_messages_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pm_debug_messages_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%d\n", pm_debug_messages_on);
     }
-    static ssize_t pm_debug_messages_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t n)
-    {
-    unsigned long val;
-    if (kstrtoul(buf, 10, &val))
+#[no_mangle]
+pub unsafe extern "C" fn pm_debug_messages_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, n: size_t) -> ssize_t {
+    let mut val = 0;
+    if (kstrtoul(buf, 10, &val)) {
     return -EINVAL;
-    if (val > 1)
+    }
+    if (val > 1) {
     return -EINVAL;
+    }
     pm_debug_messages_on = !!val;
     return n;
     }
     power_attr(pm_debug_messages);
 #[no_mangle]
-unsafe extern "C" fn pm_debug_messages_setup(str: *mut c_char) -> int __init {
-    static int __init pm_debug_messages_setup(char *str)
-    {
+unsafe extern "C" fn pm_debug_messages_setup(str: *mut c_char) -> c_int {
     pm_debug_messages_on = true;
     return 1;
     }
-    __setup("pm_debug_messages", pm_debug_messages_setup);
+    __setup!("pm_debug_messages", pm_debug_messages_setup);
 
-    static inline void pm_print_times_init(void) {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: pm_print_times_init
+pub unsafe extern "C" fn pm_print_times_init_dup() {}
 
-    struct kobject *power_kobj;
+pub static mut power_kobj: *mut c_void = core::ptr::null_mut();
 //
 // state - control system sleep states.
 //
@@ -683,69 +892,72 @@ unsafe extern "C" fn pm_debug_messages_setup(str: *mut c_char) -> int __init {
 // store() accepts one of those strings, translates it into the proper
 // enumerated value, and initiates a suspend transition.
 //
-    static ssize_t state_show(struct kobject *kobj, struct kobj_attribute *attr,
-    char *buf)
-    {
-    let mut count: isize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn state_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+pub static mut count: isize = 0;
 
-    suspend_state_t i;
-    for (i = PM_SUSPEND_MIN; i < PM_SUSPEND_MAX; i++)
+    let mut i;
+    for (i = PM_SUSPEND_MIN; i < PM_SUSPEND_MAX; i++) {
     if (pm_states[i])
     count += sysfs_emit_at(buf, count, "%s ", pm_states[i]);
+    }
 
-    if (hibernation_available())
+    if (hibernation_available()) {
     count += sysfs_emit_at(buf, count, "disk ");
+    }
 // Convert the last space to a newline if needed.
-    if (count > 0)
+    if (count > 0) {
     buf[count - 1] = '\n';
+    }
     return count;
     }
 #[no_mangle]
 unsafe extern "C" fn decode_state(buf: *const c_char, n: usize) -> suspend_state_t {
-    static suspend_state_t decode_state(const char *buf, size_t n)
-    {
 
-    suspend_state_t state;
+    let mut state;
 
-    char *p;
-    int len;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    let mut len = 0;
     p = memchr(buf, '\n', n);
     len = p ? p - buf : n;
 // Check hibernation first.
-    if (len == 4 && str_has_prefix(buf, "disk"))
+    if (len == 4 && str_has_prefix(buf, "disk")) {
     return PM_SUSPEND_MAX;
+    }
 
-    for (state = PM_SUSPEND_MIN; state < PM_SUSPEND_MAX; state++) {
-    const char *label = pm_states[state];
-    if (label && len == strlen(label) && !strncmp(buf, label, len))
+    while (state < PM_SUSPEND_MAX) {
+    let mut label = pm_states[state];
+    if (label && len == strlen(label) && !strncmp(buf, label, len)) {
     return state;
+    }
     }
 
     return PM_SUSPEND_ON;
     }
-    static ssize_t state_store(struct kobject *kobj, struct kobj_attribute *attr,
-    const char *buf, size_t n)
-    {
-    suspend_state_t state;
-    int error;
+#[no_mangle]
+pub unsafe extern "C" fn state_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, n: size_t) -> ssize_t {
+    let mut state;
+    let mut error = 0;
     error = pm_autosleep_lock();
-    if (error)
+    if (error) {
     return error;
+    }
     if (pm_autosleep_state() > PM_SUSPEND_ON) {
     error = -EBUSY;
-    goto out;
+// goto;
     }
     state = decode_state(buf, n);
     if (state < PM_SUSPEND_MAX) {
-    if (state == PM_SUSPEND_MEM)
+    if (state == PM_SUSPEND_MEM) {
     state = mem_sleep_current;
+    }
     error = pm_suspend(state);
     } else if (state == PM_SUSPEND_MAX) {
     error = hibernate();
     } else {
     error = -EINVAL;
     }
-    out:
+// label;
     pm_autosleep_unlock();
     return error ? error : n;
     }
@@ -778,117 +990,105 @@ unsafe extern "C" fn decode_state(buf: *const c_char, n: usize) -> suspend_state
 // is allowed to write to 'state', but the transition will be aborted if there
 // are any wakeup events detected after 'wakeup_count' was written to.
 //
-    static ssize_t wakeup_count_show(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    char *buf)
-    {
-    unsigned int val;
+#[no_mangle]
+pub unsafe extern "C" fn wakeup_count_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut val = 0;
     return pm_get_wakeup_count(&val, true) ?
     sysfs_emit(buf, "%u\n", val) : -EINTR;
     }
-    static ssize_t wakeup_count_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t n)
-    {
-    unsigned int val;
-    int error;
+#[no_mangle]
+pub unsafe extern "C" fn wakeup_count_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, n: size_t) -> ssize_t {
+    let mut val = 0;
+    let mut error = 0;
     error = pm_autosleep_lock();
-    if (error)
+    if (error) {
     return error;
+    }
     if (pm_autosleep_state() > PM_SUSPEND_ON) {
     error = -EBUSY;
-    goto out;
+// goto;
     }
     error = -EINVAL;
     if (sscanf(buf, "%u", &val) == 1) {
-    if (pm_save_wakeup_count(val))
+    if (pm_save_wakeup_count(val)) {
     error = n;
-    else
+    }
+    else {
     pm_print_active_wakeup_sources();
     }
-    out:
+    }
+// label;
     pm_autosleep_unlock();
     return error;
     }
     power_attr(wakeup_count);
 
-    static ssize_t autosleep_show(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    char *buf)
-    {
-    let mut state: suspend_state_t = pm_autosleep_state();
-    if (state == PM_SUSPEND_ON)
+#[no_mangle]
+pub unsafe extern "C" fn autosleep_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+pub static mut state: suspend_state_t = 0;
+    if (state == PM_SUSPEND_ON) {
     return sysfs_emit(buf, "off\n");
+    }
 
-    if (state < PM_SUSPEND_MAX)
+    if (state < PM_SUSPEND_MAX) {
     return sysfs_emit(buf, "%s\n", pm_states[state] ?
     pm_states[state] : "error");
+    }
 
     return sysfs_emit(buf, "disk\n");
 
     return sysfs_emit(buf, "error\n");
 
     }
-    static ssize_t autosleep_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t n)
-    {
-    let mut state: suspend_state_t = decode_state(buf, n);
-    int error;
+#[no_mangle]
+pub unsafe extern "C" fn autosleep_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, n: size_t) -> ssize_t {
+pub static mut state: suspend_state_t = 0;
+    let mut error = 0;
     if (state == PM_SUSPEND_ON
-    && strcmp(buf, "off") && strcmp(buf, "off\n"))
+    && strcmp(buf, "off") && strcmp(buf, "off\n")) {
     return -EINVAL;
-    if (state == PM_SUSPEND_MEM)
+    }
+    if (state == PM_SUSPEND_MEM) {
     state = mem_sleep_current;
+    }
     error = pm_autosleep_set_state(state);
     return error ? error : n;
     }
     power_attr(autosleep);
 
-    static ssize_t wake_lock_show(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn wake_lock_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return pm_show_wakelocks(buf, true);
     }
-    static ssize_t wake_lock_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t n)
-    {
-    let mut error: c_int = pm_wake_lock(buf);
+#[no_mangle]
+pub unsafe extern "C" fn wake_lock_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, n: size_t) -> ssize_t {
+pub static mut error: c_int = 0;
     return error ? error : n;
     }
     power_attr(wake_lock);
-    static ssize_t wake_unlock_show(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn wake_unlock_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return pm_show_wakelocks(buf, false);
     }
-    static ssize_t wake_unlock_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t n)
-    {
-    let mut error: c_int = pm_wake_unlock(buf);
+#[no_mangle]
+pub unsafe extern "C" fn wake_unlock_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, n: size_t) -> ssize_t {
+pub static mut error: c_int = 0;
     return error ? error : n;
     }
     power_attr(wake_unlock);
 
-    int pm_trace_enabled;
-    static ssize_t pm_trace_show(struct kobject *kobj, struct kobj_attribute *attr,
-    char *buf)
-    {
+    let mut pm_trace_enabled = 0;
+#[no_mangle]
+pub unsafe extern "C" fn pm_trace_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%d\n", pm_trace_enabled);
     }
-    static ssize_t
-    pm_trace_store(struct kobject *kobj, struct kobj_attribute *attr,
-    const char *buf, size_t n)
-    {
-    int val;
+#[no_mangle]
+pub unsafe extern "C" fn pm_trace_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, n: size_t) -> ssize_t {
+    let mut val = 0;
     if (sscanf(buf, "%d", &val) == 1) {
     pm_trace_enabled = !!val;
     if (pm_trace_enabled) {
-    pr_warn("PM: Enabling pm_trace changes system date and time during resume.\n"
+    pr_warn!("PM: Enabling pm_trace changes system date and time during resume.\n"
     "PM: Correct system time has to be restored manually after resume.\n");
     }
     return n;
@@ -896,46 +1096,41 @@ unsafe extern "C" fn decode_state(buf: *const c_char, n: usize) -> suspend_state
     return -EINVAL;
     }
     power_attr(pm_trace);
-    static ssize_t pm_trace_dev_match_show(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pm_trace_dev_match_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return show_trace_dev_match(buf, PAGE_SIZE);
     }
     power_attr_ro(pm_trace_dev_match);
 
-    static ssize_t pm_freeze_timeout_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pm_freeze_timeout_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%u\n", freeze_timeout_msecs);
     }
-    static ssize_t pm_freeze_timeout_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t n)
-    {
-    unsigned long val;
-    if (kstrtoul(buf, 10, &val))
+#[no_mangle]
+pub unsafe extern "C" fn pm_freeze_timeout_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, n: size_t) -> ssize_t {
+    let mut val = 0;
+    if (kstrtoul(buf, 10, &val)) {
     return -EINVAL;
+    }
     freeze_timeout_msecs = val;
     return n;
     }
     power_attr(pm_freeze_timeout);
 
-    let mut filesystem_freeze_enabled: bool = false;
-    static ssize_t freeze_filesystems_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+pub static mut filesystem_freeze_enabled: bool = false;
+#[no_mangle]
+pub unsafe extern "C" fn freeze_filesystems_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%d\n", filesystem_freeze_enabled);
     }
-    static ssize_t freeze_filesystems_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t n)
-    {
-    unsigned long val;
-    if (kstrtoul(buf, 10, &val))
+#[no_mangle]
+pub unsafe extern "C" fn freeze_filesystems_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, n: size_t) -> ssize_t {
+    let mut val = 0;
+    if (kstrtoul(buf, 10, &val)) {
     return -EINVAL;
-    if (val > 1)
+    }
+    if (val > 1) {
     return -EINVAL;
+    }
     filesystem_freeze_enabled = !!val;
     return n;
     }
@@ -969,9 +1164,7 @@ unsafe extern "C" fn decode_state(buf: *const c_char, n: usize) -> suspend_state
 
     core::ptr::null_mut(),
     };
-    static const struct attribute_group attr_group = {
-    .attrs = g,
-    };
+pub static mut attribute_group: usize = 0;
     static const struct attribute_group *attr_groups[] = {
     &attr_group,
 
@@ -979,15 +1172,14 @@ unsafe extern "C" fn decode_state(buf: *const c_char, n: usize) -> suspend_state
 
     core::ptr::null_mut(),
     };
-    struct workqueue_struct *pm_wq;
+pub static mut pm_wq: *mut c_void = core::ptr::null_mut();
     EXPORT_SYMBOL_GPL(pm_wq);
 #[no_mangle]
-unsafe extern "C" fn pm_start_workqueues() -> int __init {
-    static int __init pm_start_workqueues(void)
-    {
+unsafe extern "C" fn pm_start_workqueues() -> c_int {
     pm_wq = alloc_workqueue("pm", WQ_UNBOUND, 0);
-    if (!pm_wq)
+    if (!pm_wq) {
     return -ENOMEM;
+    }
 
     pm_fs_sync_wq = alloc_ordered_workqueue("pm_fs_sync", 0);
     if (!pm_fs_sync_wq) {
@@ -998,22 +1190,23 @@ unsafe extern "C" fn pm_start_workqueues() -> int __init {
     return 0;
     }
 #[no_mangle]
-unsafe extern "C" fn pm_init() -> int __init {
-    static int __init pm_init(void)
-    {
-    let mut error: c_int = pm_start_workqueues();
-    if (error)
+unsafe extern "C" fn pm_init() -> c_int {
+pub static mut error: c_int = 0;
+    if (error) {
     return error;
+    }
     hibernate_image_size_init();
     hibernate_reserved_size_init();
     pm_states_init();
     power_kobj = kobject_create_and_add("power", core::ptr::null_mut());
-    if (!power_kobj)
+    if (!power_kobj) {
     return -ENOMEM;
+    }
     error = sysfs_create_groups(power_kobj, attr_groups);
-    if (error)
+    if (error) {
     return error;
+    }
     pm_print_times_init();
     return pm_autosleep_init();
     }
-    core_initcall(pm_init);
+    core_initcall!(pm_init);

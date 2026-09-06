@@ -34,6 +34,216 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
 macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
@@ -140,7 +350,7 @@ pub type atomic_long_t = core::sync::atomic::AtomicI64;
 //
 
 // Per cpu memory for storing cpu states in case of system crash.
-    note_buf_t __percpu *crash_notes;
+    let mut crash_notes = core::ptr::null_mut();
 // time to wait for possible DMA to finish before starting the kdump kernel
 // when a CMA reservation is used
 //
@@ -150,12 +360,13 @@ pub const CMA_DMA_TIMEOUT_SEC: c_int = 10;
 pub unsafe extern "C" fn kimage_crash_copy_vmcoreinfo(image: *mut kimage) -> c_int {
     let mut vmcoreinfo_base = core::ptr::null_mut();
     struct page *vmcoreinfo_pages[DIV_ROUND_UP(VMCOREINFO_BYTES, PAGE_SIZE)];
-    unsigned int order, nr_pages;
+    let mut order = 0;
+    let mut nr_pages = 0;
     let mut i = 0;
     let mut safecopy = core::ptr::null_mut();
     nr_pages = DIV_ROUND_UP(VMCOREINFO_BYTES, PAGE_SIZE);
     order = get_order(VMCOREINFO_BYTES);
-    if (!IS_ENABLED(CONFIG_CRASH_DUMP)) {
+    if (!IS_ENABLED!(CONFIG_CRASH_DUMP)) {
     return 0;
     }
     if (image.type != KEXEC_TYPE_CRASH) {
@@ -172,14 +383,15 @@ pub unsafe extern "C" fn kimage_crash_copy_vmcoreinfo(image: *mut kimage) -> c_i
 //
     vmcoreinfo_base = kimage_alloc_control_pages(image, order);
     if (!vmcoreinfo_base) {
-    pr_warn("Could not allocate vmcoreinfo buffer\n");
+    pr_warn!("Could not allocate vmcoreinfo buffer\n");
     return -ENOMEM;
     }
-    for (i = 0; i < nr_pages; i++)
+    for (i = 0; i < nr_pages; i++) {
     vmcoreinfo_pages[i] = vmcoreinfo_base + i;
+    }
     safecopy = vmap(vmcoreinfo_pages, nr_pages, VM_MAP, PAGE_KERNEL);
     if (!safecopy) {
-    pr_warn("Could not vmap vmcoreinfo buffer\n");
+    pr_warn!("Could not vmap vmcoreinfo buffer\n");
     return -ENOMEM;
     }
     image.vmcoreinfo_data_copy = safecopy;
@@ -265,9 +477,10 @@ pub unsafe extern "C" fn crash_resource_size(res: *const resource) -> resource_s
 pub unsafe extern "C" fn crash_prepare_elf64_headers() {
     let mut ehdr = core::ptr::null_mut();
     let mut phdr = core::ptr::null_mut();
-pub static mut nr_cpus: c_ulong = num_possible_cpus(), nr_phdr, elf_sz;
-    unsigned char *buf;
-    unsigned int cpu, i;
+pub static mut nr_cpus: c_ulong = 0;
+pub static mut buf: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
+    let mut i = 0;
     unsigned long long notes_addr;
     unsigned long mstart, mend;
 // extra phdr for vmcoreinfo ELF note
@@ -280,8 +493,8 @@ pub static mut nr_cpus: c_ulong = num_possible_cpus(), nr_phdr, elf_sz;
 // memory will be mapped in two ELF headers. One will contain kernel
 // text virtual addresses and other will have __va(physical) addresses.
 //
-    nr_phdr++;
-    elf_sz = sizeof(Elf64_Ehdr) + nr_phdr * sizeof(Elf64_Phdr);
+    nr_phdr += 1;
+    elf_sz = sizeof!(Elf64_Ehdr) + nr_phdr * sizeof!(Elf64_Phdr);
     elf_sz = ALIGN(elf_sz, ELF_CORE_HEADER_ALIGN);
     buf = vzalloc(elf_sz);
     if (!buf) {
@@ -298,24 +511,24 @@ pub static mut nr_cpus: c_ulong = num_possible_cpus(), nr_phdr, elf_sz;
     ehdr.e_type = ET_CORE;
     ehdr.e_machine = ELF_ARCH;
     ehdr.e_version = EV_CURRENT;
-    ehdr.e_phoff = sizeof(Elf64_Ehdr);
-    ehdr.e_ehsize = sizeof(Elf64_Ehdr);
-    ehdr.e_phentsize = sizeof(Elf64_Phdr);
+    ehdr.e_phoff = sizeof!(Elf64_Ehdr);
+    ehdr.e_ehsize = sizeof!(Elf64_Ehdr);
+    ehdr.e_phentsize = sizeof!(Elf64_Phdr);
 // Prepare one phdr of type PT_NOTE for each possible CPU
     for_each_possible_cpu(cpu) {
     phdr.p_type = PT_NOTE;
     notes_addr = per_cpu_ptr_to_phys(per_cpu_ptr(crash_notes, cpu));
     phdr.p_offset = phdr.p_paddr = notes_addr;
-    phdr.p_filesz = phdr.p_memsz = sizeof(note_buf_t);
+    phdr.p_filesz = phdr.p_memsz = sizeof!(note_buf_t);
     (ehdr.e_phnum)++;
-    phdr++;
+    phdr += 1;
     }
 // Prepare one PT_NOTE header for vmcoreinfo
     phdr.p_type = PT_NOTE;
     phdr.p_offset = phdr.p_paddr = paddr_vmcoreinfo_note();
     phdr.p_filesz = phdr.p_memsz = VMCOREINFO_NOTE_SIZE;
     (ehdr.e_phnum)++;
-    phdr++;
+    phdr += 1;
 // Prepare PT_LOAD type program header for kernel text region
     if (need_kernel_map) {
     phdr.p_type = PT_LOAD;
@@ -323,11 +536,11 @@ pub static mut nr_cpus: c_ulong = num_possible_cpus(), nr_phdr, elf_sz;
     phdr.p_vaddr = (unsigned long) _text;
     phdr.p_filesz = phdr.p_memsz = _end - _text;
     phdr.p_offset = phdr.p_paddr = __pa_symbol(_text);
-    ehdr.e_phnum++;
-    phdr++;
+    ehdr.e_phnum += 1;
+    phdr += 1;
     }
 // Go through all the ranges in mem->ranges[] and prepare phdr
-    for (i = 0; i < mem.nr_ranges; i++) {
+    while (i < mem.nr_ranges) {
     mstart = mem.ranges[i].start;
     mend = mem.ranges[i].end;
     phdr.p_type = PT_LOAD;
@@ -337,13 +550,13 @@ pub static mut nr_cpus: c_ulong = num_possible_cpus(), nr_phdr, elf_sz;
     phdr.p_vaddr = (unsigned long) __va(mstart);
     phdr.p_filesz = phdr.p_memsz = mend - mstart + 1;
     phdr.p_align = 0;
-    ehdr.e_phnum++;
+    ehdr.e_phnum += 1;
 
     kexec_dprintk("Crash PT_LOAD ELF header. phdr=%p vaddr=0x%llx, paddr=0x%llx, sz=0x%llx e_phnum=%d p_offset=0x%llx\n",
     phdr, phdr.p_vaddr, phdr.p_paddr, phdr.p_filesz,
     ehdr.e_phnum, phdr.p_offset);
 
-    phdr++;
+    phdr += 1;
     }
 // addr = buf;
 // sz = elf_sz;
@@ -360,9 +573,9 @@ pub unsafe extern "C" fn alloc_cmem() {
     return cmem;
     }
     unsigned int __weak arch_get_system_nr_ranges(void) { return 0; }
-    int __weak arch_crash_populate_cmem(struct crash_mem *cmem) { return -1; }
-    int __weak arch_crash_exclude_ranges(struct crash_mem *cmem) { return 0; }
-    int __weak arch_crash_exclude_mem_range(struct crash_mem **mem,
+    int __weak arch_crash_populate_cmem(crash_mem *cmem) { return -1; }
+    int __weak arch_crash_exclude_ranges(crash_mem *cmem) { return 0; }
+    int __weak arch_crash_exclude_mem_range(crash_mem **mem,
     unsigned long long mstart,
     unsigned long long mend)
     {
@@ -370,7 +583,8 @@ pub unsafe extern "C" fn alloc_cmem() {
     }
 #[no_mangle]
 pub unsafe extern "C" fn crash_exclude_core_ranges(cmem: *mut crash_mem) -> c_int {
-    int ret, i;
+    let mut ret = 0;
+    let mut i = 0;
 // Exclude crashkernel region
     ret = arch_crash_exclude_mem_range(cmem, crashk_res.start, crashk_res.end);
     if (ret) {
@@ -382,7 +596,7 @@ pub unsafe extern "C" fn crash_exclude_core_ranges(cmem: *mut crash_mem) -> c_in
     return ret;
     }
     }
-    for (i = 0; i < crashk_cma_cnt; ++i) {
+    while (i < crashk_cma_cnt) {
     ret = arch_crash_exclude_mem_range(cmem, crashk_cma_ranges[i].start,
     crashk_cma_ranges[i].end);
     if (ret) {
@@ -406,22 +620,22 @@ pub unsafe extern "C" fn crash_prepare_headers() {
     }
     ret = arch_crash_populate_cmem(cmem);
     if (ret) {
-    goto out;
+// goto;
     }
     ret = crash_exclude_core_ranges(&cmem);
     if (ret) {
-    goto out;
+// goto;
     }
     ret = arch_crash_exclude_ranges(cmem);
     if (ret) {
-    goto out;
+// goto;
     }
 // Return the computed number of memory ranges, for hotplug usage
     if (nr_mem_ranges) {
 // nr_mem_ranges = cmem->nr_ranges;
     }
     ret = crash_prepare_elf64_headers(cmem, need_kernel_map, addr, sz);
-    out:
+// label;
     kvfree(cmem);
     return ret;
     }
@@ -443,7 +657,7 @@ pub unsafe extern "C" fn crash_prepare_headers() {
 pub unsafe extern "C" fn crash_exclude_mem_range() {
     let mut i = 0;
     unsigned long long start, end, p_start, p_end;
-    for (i = 0; i < mem.nr_ranges; i++) {
+    while (i < mem.nr_ranges) {
     start = mem.ranges[i].start;
     end = mem.ranges[i].end;
     p_start = mstart;
@@ -471,23 +685,24 @@ pub unsafe extern "C" fn crash_exclude_mem_range() {
 // Found completely overlapping range
     if (p_start == start && p_end == end) {
     memmove(&mem.ranges[i], &mem.ranges[i + 1],
-    (mem.nr_ranges - (i + 1)) * sizeof(mem.ranges[i]));
-    i--;
-    mem.nr_ranges--;
+    (mem.nr_ranges - (i + 1)) * sizeof!(mem.ranges[i]));
+    i -= 1;
+    mem.nr_ranges -= 1;
     } else if (p_start > start && p_end < end) {
 // Split original range
     if (mem.nr_ranges >= mem.max_nr_ranges) {
     return -ENOMEM;
     }
     memmove(&mem.ranges[i + 2], &mem.ranges[i + 1],
-    (mem.nr_ranges - (i + 1)) * sizeof(mem.ranges[i]));
+    (mem.nr_ranges - (i + 1)) * sizeof!(mem.ranges[i]));
     mem.ranges[i].end = p_start - 1;
     mem.ranges[i + 1].start = p_end + 1;
     mem.ranges[i + 1].end = end;
-    i++;
-    mem.nr_ranges++;
-    } else if (p_start != start)
+    i += 1;
+    mem.nr_ranges += 1;
+    } else if (p_start != start) {
     mem.ranges[i].end = p_start - 1;
+    }
     else {
     mem.ranges[i].start = p_end + 1;
     }
@@ -537,14 +752,14 @@ pub static mut ret: c_int = 0;
     }
     if (kexec_crash_image) {
     ret = -ENOENT;
-    goto unlock;
+// goto;
     }
     low_size = crash_resource_size(&crashk_low_res);
     old_size = crash_resource_size(&crashk_res) + low_size;
     new_size = roundup(new_size, KEXEC_CRASH_MEM_ALIGN);
     if (new_size >= old_size) {
     ret = (new_size == old_size) ? 0 : -EINVAL;
-    goto unlock;
+// goto;
     }
 //
 // (low_size > new_size) implies that low_size is greater than zero.
@@ -557,7 +772,7 @@ pub static mut ret: c_int = 0;
     if (low_size > new_size) {
     ret = __crash_shrink_memory(&crashk_res, 0);
     if (ret) {
-    goto unlock;
+// goto;
     }
     ret = __crash_shrink_memory(&crashk_low_res, new_size);
     } else {
@@ -572,7 +787,7 @@ pub static mut ret: c_int = 0;
     crashk_low_res.end   = 0;
     insert_resource(&iomem_resource, &crashk_res);
     }
-    unlock:
+// label;
     kexec_unlock();
     return ret;
     }
@@ -594,11 +809,11 @@ pub unsafe extern "C" fn crash_save_cpu(regs: *mut pt_regs, cpu: c_int) {
     if (!buf) {
     return;
     }
-    memset(&prstatus, 0, sizeof(prstatus));
+    memset(&prstatus, 0, sizeof!(prstatus));
     prstatus.common.pr_pid = current.pid;
     elf_core_copy_regs(&prstatus.pr_reg, regs);
     buf = append_elf_note(buf, NN_PRSTATUS, NT_PRSTATUS,
-    &prstatus, sizeof(prstatus));
+    &prstatus, sizeof!(prstatus));
     final_note(buf);
     }
 #[no_mangle]
@@ -615,8 +830,8 @@ unsafe extern "C" fn crash_notes_memory_init() -> c_int {
 // and pass it to __alloc_percpu as align value. This can make sure
 // crash_notes is allocated inside one physical page.
 //
-    size = sizeof(note_buf_t);
-    align = min(roundup_pow_of_two(sizeof(note_buf_t)), PAGE_SIZE);
+    size = sizeof!(note_buf_t);
+    align = min(roundup_pow_of_two(sizeof!(note_buf_t)), PAGE_SIZE);
 //
 // Break compile if size is bigger than PAGE_SIZE since crash_notes
 // definitely will be in 2 pages with that.
@@ -624,7 +839,7 @@ unsafe extern "C" fn crash_notes_memory_init() -> c_int {
 // BUILD_BUG_ON;
     crash_notes = __alloc_percpu(size, align);
     if (!crash_notes) {
-    pr_warn("Memory allocation for saving cpu register states failed\n");
+    pr_warn!("Memory allocation for saving cpu register states failed\n");
     return -ENOMEM;
     }
     return 0;
@@ -652,7 +867,7 @@ pub static mut rc: c_int = 0;
 // Obtain lock while reading crash information
     if (!kexec_trylock()) {
     if (!kexec_in_progress) {
-    pr_info("kexec_trylock() failed, kdump image may be inaccurate\n");
+    pr_info!("kexec_trylock() failed, kdump image may be inaccurate\n");
     }
     crash_hotplug_unlock();
     return 0;
@@ -693,25 +908,26 @@ unsafe extern "C" fn crash_handle_hotplug_event(hp_action: c_uint, cpu: c_uint, 
 // Obtain lock while changing crash information
     if (!kexec_trylock()) {
     if (!kexec_in_progress) {
-    pr_info("kexec_trylock() failed, kdump image may be inaccurate\n");
+    pr_info!("kexec_trylock() failed, kdump image may be inaccurate\n");
     }
     crash_hotplug_unlock();
     return;
     }
 // Check kdump is not loaded
     if (!kexec_crash_image) {
-    goto out;
+// goto;
     }
     image = kexec_crash_image;
 // Check that kexec segments update is permitted
     if (!image.hotplug_support) {
-    goto out;
+// goto;
     }
     if (hp_action == KEXEC_CRASH_HP_ADD_CPU ||
-    hp_action == KEXEC_CRASH_HP_REMOVE_CPU)
-    pr_debug("hp_action %u, cpu %u\n", hp_action, cpu);
+    hp_action == KEXEC_CRASH_HP_REMOVE_CPU) {
+    pr_debug!("hp_action %u, cpu %u\n", hp_action, cpu);
+    }
     else {
-    pr_debug("hp_action %u\n", hp_action);
+    pr_debug!("hp_action %u\n", hp_action);
     }
 //
 // The elfcorehdr_index is set to -1 when the struct kimage
@@ -720,9 +936,9 @@ unsafe extern "C" fn crash_handle_hotplug_event(hp_action: c_uint, cpu: c_uint, 
 //
     if (image.elfcorehdr_index < 0) {
     let mut mem = 0;
-    unsigned char *ptr;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
     let mut n = 0;
-    for (n = 0; n < image.nr_segments; n++) {
+    while (n < image.nr_segments) {
     mem = image.segment[n].mem;
     ptr = kmap_local_page(pfn_to_page(mem >> PAGE_SHIFT));
     if (ptr) {
@@ -735,8 +951,8 @@ unsafe extern "C" fn crash_handle_hotplug_event(hp_action: c_uint, cpu: c_uint, 
     }
     }
     if (image.elfcorehdr_index < 0) {
-    pr_err("unable to locate elfcorehdr segment");
-    goto out;
+    pr_err!("unable to locate elfcorehdr segment");
+// goto;
     }
 // Needed in order for the segments to be updated
     arch_kexec_unprotect_crashkres();
@@ -750,7 +966,7 @@ unsafe extern "C" fn crash_handle_hotplug_event(hp_action: c_uint, cpu: c_uint, 
 // Change back to read-only
     arch_kexec_protect_crashkres();
 // Errors in the callback is not a reason to rollback state
-    out:
+// label;
 // Release lock now that update complete
     kexec_unlock();
     crash_hotplug_unlock();
@@ -761,11 +977,13 @@ unsafe extern "C" fn crash_memhp_notifier(nb: *mut notifier_block, val: c_ulong,
     MEM_ONLINE => {
     crash_handle_hotplug_event(KEXEC_CRASH_HP_ADD_MEMORY,
     KEXEC_CRASH_HP_INVALID_CPU, arg);
-    break;
+    // break;
+    }
     MEM_OFFLINE => {
     crash_handle_hotplug_event(KEXEC_CRASH_HP_REMOVE_MEMORY,
     KEXEC_CRASH_HP_INVALID_CPU, arg);
-    break;
+    // break;
+    }
     }
     return NOTIFY_OK;
     }
@@ -783,15 +1001,13 @@ unsafe extern "C" fn crash_cpuhp_offline(cpu: c_uint) -> c_int {
 #[no_mangle]
 unsafe extern "C" fn crash_hotplug_init() -> c_int {
 pub static mut result: c_int = 0;
-    if (IS_ENABLED(CONFIG_MEMORY_HOTPLUG)) {
+    if (IS_ENABLED!(CONFIG_MEMORY_HOTPLUG)) {
     register_memory_notifier(&crash_memhp_nb);
     }
-    if (IS_ENABLED(CONFIG_HOTPLUG_CPU)) {
+    if (IS_ENABLED!(CONFIG_HOTPLUG_CPU)) {
     result = cpuhp_setup_state_nocalls(CPUHP_BP_PREPARE_DYN,
     "crash/cpuhp", crash_cpuhp_online, crash_cpuhp_offline);
     }
     return result;
     }
 // subsys_initcall;
-}
-}

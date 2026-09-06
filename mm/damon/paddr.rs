@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -46,40 +296,36 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     {
     return (phys_addr_t)addr * addr_unit;
     }
-    static unsigned long damon_pa_core_addr(
-    phys_addr_t pa, unsigned long addr_unit)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn damon_pa_core_addr(pa: phys_addr_t, addr_unit: c_ulong) -> c_ulong {
 //
 // Use div_u64() for avoiding linking errors related with __udivdi3,
 // __aeabi_uldivmod, or similar problems.  This should also improve the
 // performance optimization (read div_u64() comment for the detail).
 //
-    if (sizeof(pa) == 8 && sizeof(addr_unit) == 4)
+    if (sizeof!(pa) == 8 && sizeof!(addr_unit) == 4) {
     return div_u64(pa, addr_unit);
+    }
     return pa / addr_unit;
     }
 #[no_mangle]
 unsafe extern "C" fn damon_pa_mkold(paddr: phys_addr_t) {
-    static void damon_pa_mkold(phys_addr_t paddr)
-    {
-    struct folio *folio = damon_get_folio(PHYS_PFN(paddr));
-    if (!folio)
+    let mut folio = damon_get_folio(PHYS_PFN(paddr));
+    if (!folio) {
     return;
+    }
     damon_folio_mkold(folio);
     folio_put(folio);
     }
-    static void __damon_pa_prepare_access_check(struct damon_region *r,
-    struct damon_ctx *ctx)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __damon_pa_prepare_access_check(r: *mut damon_region, ctx: *mut damon_ctx) {
     r.sampling_addr = damon_rand(ctx, r.ar.start, r.ar.end);
     damon_pa_mkold(damon_pa_phys_addr(r.sampling_addr, ctx.addr_unit));
     }
 #[no_mangle]
 unsafe extern "C" fn damon_pa_prepare_access_checks(ctx: *mut damon_ctx) {
-    static void damon_pa_prepare_access_checks(struct damon_ctx *ctx)
-    {
-    struct damon_target *t;
-    struct damon_region *r;
+pub static mut t: *mut c_void = core::ptr::null_mut();
+pub static mut r: *mut c_void = core::ptr::null_mut();
     damon_for_each_target(t, ctx) {
     damon_for_each_region(r, t)
     __damon_pa_prepare_access_check(r, ctx);
@@ -87,20 +333,18 @@ unsafe extern "C" fn damon_pa_prepare_access_checks(ctx: *mut damon_ctx) {
     }
 #[no_mangle]
 unsafe extern "C" fn damon_pa_young(paddr: phys_addr_t) -> bool {
-    static bool damon_pa_young(phys_addr_t paddr)
-    {
-    struct folio *folio = damon_get_folio(PHYS_PFN(paddr));
-    bool accessed;
-    if (!folio)
+    let mut folio = damon_get_folio(PHYS_PFN(paddr));
+    let mut accessed = 0;
+    if (!folio) {
     return false;
+    }
     accessed = damon_folio_young(folio);
     folio_put(folio);
     return accessed;
     }
-    static void __damon_pa_check_access(struct damon_region *r,
-    unsigned long addr_unit)
-    {
-    bool accessed;
+#[no_mangle]
+pub unsafe extern "C" fn __damon_pa_check_access(r: *mut damon_region, addr_unit: c_ulong) {
+    let mut accessed = 0;
     phys_addr_t sampling_addr = damon_pa_phys_addr(
     r.sampling_addr, addr_unit);
     accessed = damon_pa_young(sampling_addr);
@@ -108,11 +352,9 @@ unsafe extern "C" fn damon_pa_young(paddr: phys_addr_t) -> bool {
     }
 #[no_mangle]
 unsafe extern "C" fn damon_pa_check_accesses(ctx: *mut damon_ctx) -> c_uint {
-    static unsigned int damon_pa_check_accesses(struct damon_ctx *ctx)
-    {
-    struct damon_target *t;
-    struct damon_region *r;
-    let mut max_nr_accesses: c_uint = 0;
+pub static mut t: *mut c_void = core::ptr::null_mut();
+pub static mut r: *mut c_void = core::ptr::null_mut();
+pub static mut max_nr_accesses: c_uint = 0;
     damon_for_each_target(t, ctx) {
     damon_for_each_region(r, t) {
     __damon_pa_check_access(r, ctx.addr_unit);
@@ -121,42 +363,45 @@ unsafe extern "C" fn damon_pa_check_accesses(ctx: *mut damon_ctx) -> c_uint {
     }
     return max_nr_accesses;
     }
-    static bool damon_pa_filter_match(struct damon_filter *filter,
-    struct folio *folio)
-    {
-    let mut matched: bool = false;
-    struct mem_cgroup *memcg;
-    switch (filter.type) {
-    case DAMON_FILTER_TYPE_ANON:
+#[no_mangle]
+pub unsafe extern "C" fn damon_pa_filter_match(filter: *mut damon_filter, folio: *mut folio) -> bool {
+pub static mut matched: bool = false;
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+    match (filter.type) {
+    DAMON_FILTER_TYPE_ANON => {
     if (!folio) {
     matched = false;
-    break;
+    // break;
     }
     matched = folio_test_anon(folio);
-    break;
-    case DAMON_FILTER_TYPE_MEMCG:
+    // break;
+    }
+    DAMON_FILTER_TYPE_MEMCG => {
     if (!folio) {
     matched = false;
-    break;
+    // break;
     }
     rcu_read_lock();
     memcg = folio_memcg_check(folio);
-    if (!memcg)
+    if (!memcg) {
     matched = false;
-    else
+    }
+    else {
     matched = filter.memcg_id == mem_cgroup_id(memcg);
+    }
     rcu_read_unlock();
-    break;
-    default:
-    break;
+    // break;
     }
-    let mut matched: return = = filter.matching;
+    _ => {
+    // break;
     }
-    static bool damon_pa_filter_pass(phys_addr_t pa, struct folio *folio,
-    struct damon_probe *p)
-    {
-    struct damon_filter *f;
-    let mut pass: bool = true;
+    }
+pub static mut matched: return = 0;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn damon_pa_filter_pass(pa: phys_addr_t, folio: *mut folio, p: *mut damon_probe) -> bool {
+pub static mut f: *mut c_void = core::ptr::null_mut();
+pub static mut pass: bool = true;
     damon_for_each_filter(f, p) {
     if (damon_pa_filter_match(f, folio)) {
     pass = f.allow;
@@ -166,34 +411,37 @@ unsafe extern "C" fn damon_pa_check_accesses(ctx: *mut damon_ctx) -> c_uint {
     }
     return pass;
     }
-    static unsigned int damon_pa_apply_probes(struct damon_ctx *ctx,
-    bool set_samples, bool return_max_wsum)
-    {
-    struct damon_target *t;
-    struct damon_region *r;
-    struct damon_probe *p;
-    let mut max_wsum: c_uint = 0;
+#[no_mangle]
+pub unsafe extern "C" fn damon_pa_apply_probes(ctx: *mut damon_ctx, set_samples: bool, return_max_wsum: bool) -> c_uint {
+pub static mut t: *mut c_void = core::ptr::null_mut();
+pub static mut r: *mut c_void = core::ptr::null_mut();
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut max_wsum: c_uint = 0;
     damon_for_each_target(t, ctx) {
     damon_for_each_region(r, t) {
-    let mut i: c_int = 0;
-    phys_addr_t pa;
-    struct folio *folio;
-    if (set_samples)
+pub static mut i: c_int = 0;
+    let mut pa;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    if (set_samples) {
     r.sampling_addr = damon_rand(ctx, r.ar.start,
     r.ar.end);
+    }
     pa = damon_pa_phys_addr(r.sampling_addr,
     ctx.addr_unit);
     folio = damon_get_folio(PHYS_PFN(pa));
     damon_for_each_probe(p, ctx) {
-    if (damon_pa_filter_pass(pa, folio, p))
+    if (damon_pa_filter_pass(pa, folio, p)) {
     r.probe_hits[i]++;
-    i++;
     }
-    if (folio)
+    i += 1;
+    }
+    if (folio) {
     folio_put(folio);
-    if (return_max_wsum)
+    }
+    if (return_max_wsum) {
     max_wsum = max(damon_probe_hits_wsum(r, false,
     ctx), max_wsum);
+    }
     }
     }
     return max_wsum;
@@ -203,38 +451,35 @@ unsafe extern "C" fn damon_pa_check_accesses(ctx: *mut damon_ctx) -> c_uint {
 //
 #[no_mangle]
 unsafe extern "C" fn damos_pa_filter_out(scheme: *mut damos, folio: *mut folio) -> bool {
-    static bool damos_pa_filter_out(struct damos *scheme, struct folio *folio)
-    {
-    struct damos_filter *filter;
-    if (scheme.core_filters_allowed)
+pub static mut filter: *mut c_void = core::ptr::null_mut();
+    if (scheme.core_filters_allowed) {
     return false;
+    }
     damos_for_each_ops_filter(filter, scheme) {
-    if (damos_folio_filter_match(filter, folio))
+    if (damos_folio_filter_match(filter, folio)) {
     return !filter.allow;
+    }
     }
     return scheme.ops_filters_default_reject;
     }
 #[no_mangle]
 unsafe extern "C" fn damon_pa_invalid_damos_folio(folio: *mut folio, s: *mut damos) -> bool {
-    static bool damon_pa_invalid_damos_folio(struct folio *folio, struct damos *s)
-    {
-    if (!folio)
+    if (!folio) {
     return true;
+    }
     if (folio == s.last_applied) {
     folio_put(folio);
     return true;
     }
     return false;
     }
-    static unsigned long damon_pa_pageout(struct damon_region *r,
-    unsigned long addr_unit, struct damos *s,
-    unsigned long *sz_filter_passed)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn damon_pa_pageout(r: *mut damon_region, addr_unit: c_ulong, s: *mut damos, sz_filter_passed: *mut c_ulong) -> c_ulong {
     phys_addr_t addr, applied;
-    LIST_HEAD(folio_list);
-    let mut install_young_filter: bool = true;
-    struct damos_filter *filter;
-    struct folio *folio = core::ptr::null_mut();
+pub static mut folio_list: usize = 0;
+pub static mut install_young_filter: bool = true;
+pub static mut filter: *mut c_void = core::ptr::null_mut();
+    let mut folio = core::ptr::null_mut();
 // check access in page level again by default
     damos_for_each_ops_filter(filter, s) {
     if (filter.type == DAMOS_FILTER_TYPE_YOUNG) {
@@ -245,8 +490,9 @@ unsafe extern "C" fn damon_pa_invalid_damos_folio(folio: *mut folio, s: *mut dam
     if (install_young_filter) {
     filter = damos_new_filter(
     DAMOS_FILTER_TYPE_YOUNG, true, false);
-    if (!filter)
+    if (!filter) {
     return 0;
+    }
     damos_add_filter(s, filter);
     }
     addr = damon_pa_phys_addr(r.ar.start, addr_unit);
@@ -256,36 +502,39 @@ unsafe extern "C" fn damon_pa_invalid_damos_folio(folio: *mut folio, s: *mut dam
     addr += PAGE_SIZE;
     continue;
     }
-    if (damos_pa_filter_out(s, folio))
-    goto put_folio;
-    else
+    if (damos_pa_filter_out(s, folio)) {
+// goto;
+    }
+    else {
 // sz_filter_passed += folio_size(folio) / addr_unit;
+    }
     folio_clear_referenced(folio);
     folio_test_clear_young(folio);
-    if (!folio_isolate_lru(folio))
-    goto put_folio;
-    if (folio_test_unevictable(folio))
+    if (!folio_isolate_lru(folio)) {
+// goto;
+    }
+    if (folio_test_unevictable(folio)) {
     folio_putback_lru(folio);
-    else
+    }
+    else {
     list_add(&folio.lru, &folio_list);
-    put_folio:
+    }
+// label;
     addr += folio_size(folio);
     folio_put(folio);
     }
-    if (install_young_filter)
+    if (install_young_filter) {
     damos_destroy_filter(filter);
+    }
     applied = reclaim_pages(&folio_list);
     cond_resched();
     s.last_applied = folio;
     return damon_pa_core_addr(applied * PAGE_SIZE, addr_unit);
     }
-    static inline unsigned long damon_pa_de_activate(
-    struct damon_region *r, unsigned long addr_unit,
-    struct damos *s, bool activate,
-    unsigned long *sz_filter_passed)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn damon_pa_de_activate(r: *mut damon_region, addr_unit: c_ulong, s: *mut damos, activate: bool, sz_filter_passed: *mut c_ulong) -> c_ulong {
     phys_addr_t addr, applied = 0;
-    struct folio *folio = core::ptr::null_mut();
+    let mut folio = core::ptr::null_mut();
     addr = damon_pa_phys_addr(r.ar.start, addr_unit);
     while (addr < damon_pa_phys_addr(r.ar.end, addr_unit)) {
     folio = damon_get_folio(PHYS_PFN(addr));
@@ -293,41 +542,39 @@ unsafe extern "C" fn damon_pa_invalid_damos_folio(folio: *mut folio, s: *mut dam
     addr += PAGE_SIZE;
     continue;
     }
-    if (damos_pa_filter_out(s, folio))
-    goto put_folio;
-    else
+    if (damos_pa_filter_out(s, folio)) {
+// goto;
+    }
+    else {
 // sz_filter_passed += folio_size(folio) / addr_unit;
-    if (activate)
+    }
+    if (activate) {
     folio_activate(folio);
-    else
+    }
+    else {
     folio_deactivate(folio);
+    }
     applied += folio_nr_pages(folio);
-    put_folio:
+// label;
     addr += folio_size(folio);
     folio_put(folio);
     }
     s.last_applied = folio;
     return damon_pa_core_addr(applied * PAGE_SIZE, addr_unit);
     }
-    static unsigned long damon_pa_activate_pages(struct damon_region *r,
-    unsigned long addr_unit, struct damos *s,
-    unsigned long *sz_filter_passed)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn damon_pa_activate_pages(r: *mut damon_region, addr_unit: c_ulong, s: *mut damos, sz_filter_passed: *mut c_ulong) -> c_ulong {
     return damon_pa_de_activate(r, addr_unit, s, true, sz_filter_passed);
     }
-    static unsigned long damon_pa_deactivate_pages(struct damon_region *r,
-    unsigned long addr_unit, struct damos *s,
-    unsigned long *sz_filter_passed)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn damon_pa_deactivate_pages(r: *mut damon_region, addr_unit: c_ulong, s: *mut damos, sz_filter_passed: *mut c_ulong) -> c_ulong {
     return damon_pa_de_activate(r, addr_unit, s, false, sz_filter_passed);
     }
-    static unsigned long damon_pa_migrate(struct damon_region *r,
-    unsigned long addr_unit, struct damos *s,
-    unsigned long *sz_filter_passed)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn damon_pa_migrate(r: *mut damon_region, addr_unit: c_ulong, s: *mut damos, sz_filter_passed: *mut c_ulong) -> c_ulong {
     phys_addr_t addr, applied;
-    LIST_HEAD(folio_list);
-    struct folio *folio = core::ptr::null_mut();
+pub static mut folio_list: usize = 0;
+    let mut folio = core::ptr::null_mut();
     addr = damon_pa_phys_addr(r.ar.start, addr_unit);
     while (addr < damon_pa_phys_addr(r.ar.end, addr_unit)) {
     folio = damon_get_folio(PHYS_PFN(addr));
@@ -335,16 +582,19 @@ unsafe extern "C" fn damon_pa_invalid_damos_folio(folio: *mut folio, s: *mut dam
     addr += PAGE_SIZE;
     continue;
     }
-    if (damos_pa_filter_out(s, folio))
-    goto put_folio;
-    else
+    if (damos_pa_filter_out(s, folio)) {
+// goto;
+    }
+    else {
 // sz_filter_passed += folio_size(folio) / addr_unit;
-    if (!folio_isolate_lru(folio))
-    goto put_folio;
+    }
+    if (!folio_isolate_lru(folio)) {
+// goto;
+    }
     node_stat_add_folio(folio, NR_ISOLATED_ANON +
     folio_is_file_lru(folio));
     list_add(&folio.lru, &folio_list);
-    put_folio:
+// label;
     addr += folio_size(folio);
     folio_put(folio);
     }
@@ -353,14 +603,13 @@ unsafe extern "C" fn damon_pa_invalid_damos_folio(folio: *mut folio, s: *mut dam
     s.last_applied = folio;
     return damon_pa_core_addr(applied * PAGE_SIZE, addr_unit);
     }
-    static unsigned long damon_pa_stat(struct damon_region *r,
-    unsigned long addr_unit, struct damos *s,
-    unsigned long *sz_filter_passed)
-    {
-    phys_addr_t addr;
-    struct folio *folio = core::ptr::null_mut();
-    if (!damos_ops_has_filter(s))
+#[no_mangle]
+pub unsafe extern "C" fn damon_pa_stat(r: *mut damon_region, addr_unit: c_ulong, s: *mut damos, sz_filter_passed: *mut c_ulong) -> c_ulong {
+    let mut addr;
+    let mut folio = core::ptr::null_mut();
+    if (!damos_ops_has_filter(s)) {
     return 0;
+    }
     addr = damon_pa_phys_addr(r.ar.start, addr_unit);
     while (addr < damon_pa_phys_addr(r.ar.end, addr_unit)) {
     folio = damon_get_folio(PHYS_PFN(addr));
@@ -368,73 +617,72 @@ unsafe extern "C" fn damon_pa_invalid_damos_folio(folio: *mut folio, s: *mut dam
     addr += PAGE_SIZE;
     continue;
     }
-    if (!damos_pa_filter_out(s, folio))
+    if (!damos_pa_filter_out(s, folio)) {
 // sz_filter_passed += folio_size(folio) / addr_unit;
+    }
     addr += folio_size(folio);
     folio_put(folio);
     }
     s.last_applied = folio;
     return 0;
     }
-    static unsigned long damon_pa_apply_scheme(struct damon_ctx *ctx,
-    struct damon_target *t, struct damon_region *r,
-    struct damos *scheme, unsigned long *sz_filter_passed)
-    {
-    let mut aunit: c_ulong = ctx.addr_unit;
-    switch (scheme.action) {
-    case DAMOS_PAGEOUT:
+#[no_mangle]
+pub unsafe extern "C" fn damon_pa_apply_scheme(ctx: *mut damon_ctx, t: *mut damon_target, r: *mut damon_region, scheme: *mut damos, sz_filter_passed: *mut c_ulong) -> c_ulong {
+pub static mut aunit: c_ulong = 0;
+    match (scheme.action) {
+    DAMOS_PAGEOUT => {
     return damon_pa_pageout(r, aunit, scheme, sz_filter_passed);
-    case DAMOS_LRU_PRIO:
+    }
+    DAMOS_LRU_PRIO => {
     return damon_pa_activate_pages(r, aunit, scheme,
     sz_filter_passed);
-    case DAMOS_LRU_DEPRIO:
+    }
+    DAMOS_LRU_DEPRIO => {
     return damon_pa_deactivate_pages(r, aunit, scheme,
     sz_filter_passed);
-    case DAMOS_MIGRATE_HOT:
-    case DAMOS_MIGRATE_COLD:
+    }
+    DAMOS_MIGRATE_HOT => {
+    }
+    DAMOS_MIGRATE_COLD => {
     return damon_pa_migrate(r, aunit, scheme, sz_filter_passed);
-    case DAMOS_STAT:
+    }
+    DAMOS_STAT => {
     return damon_pa_stat(r, aunit, scheme, sz_filter_passed);
-    default:
+    }
+    _ => {
 // DAMOS actions that not yet supported by 'paddr'.
-    break;
+    // break;
+    }
     }
     return 0;
     }
-    static int damon_pa_scheme_score(struct damon_ctx *context,
-    struct damon_region *r, struct damos *scheme)
-    {
-    switch (scheme.action) {
-    case DAMOS_PAGEOUT:
+#[no_mangle]
+pub unsafe extern "C" fn damon_pa_scheme_score(context: *mut damon_ctx, r: *mut damon_region, scheme: *mut damos) -> c_int {
+    match (scheme.action) {
+    DAMOS_PAGEOUT => {
     return damon_cold_score(context, r, scheme);
-    case DAMOS_LRU_PRIO:
+    }
+    DAMOS_LRU_PRIO => {
     return damon_hot_score(context, r, scheme);
-    case DAMOS_LRU_DEPRIO:
+    }
+    DAMOS_LRU_DEPRIO => {
     return damon_cold_score(context, r, scheme);
-    case DAMOS_MIGRATE_HOT:
+    }
+    DAMOS_MIGRATE_HOT => {
     return damon_hot_score(context, r, scheme);
-    case DAMOS_MIGRATE_COLD:
+    }
+    DAMOS_MIGRATE_COLD => {
     return damon_cold_score(context, r, scheme);
-    default:
-    break;
+    }
+    _ => {
+    // break;
+    }
     }
     return DAMOS_MAX_SCORE;
     }
 #[no_mangle]
-unsafe extern "C" fn damon_pa_initcall() -> int __init {
-    static int __init damon_pa_initcall(void)
-    {
-    struct damon_operations ops = {
-    .id = DAMON_OPS_PADDR,
-    .init = core::ptr::null_mut(),
-    .update = core::ptr::null_mut(),
-    .prepare_access_checks = damon_pa_prepare_access_checks,
-    .check_accesses = damon_pa_check_accesses,
-    .apply_probes = damon_pa_apply_probes,
-    .target_valid = core::ptr::null_mut(),
-    .apply_scheme = damon_pa_apply_scheme,
-    .get_scheme_score = damon_pa_scheme_score,
-    };
+unsafe extern "C" fn damon_pa_initcall!() -> c_int {
+pub static mut damon_operations: usize = 0;
     return damon_register_ops(&ops);
     }
-    subsys_initcall(damon_pa_initcall);
+    subsys_initcall!(damon_pa_initcall);

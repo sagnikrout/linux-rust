@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
 macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
@@ -69,43 +319,16 @@ macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
     DEFINE_LOCK_GUARD_0(ns_tree_locked_reader,
     read_seqlock_excl(&ns_tree_lock),
     read_sequnlock_excl(&ns_tree_lock))
-    static struct ns_tree_root ns_unified_root = { /* protected by ns_tree_lock */
-    .ns_rb = RB_ROOT,
-    .ns_list_head = LIST_HEAD_INIT(ns_unified_root.ns_list_head),
-    };
-    struct ns_tree_root mnt_ns_tree = {
-    .ns_rb = RB_ROOT,
-    .ns_list_head = LIST_HEAD_INIT(mnt_ns_tree.ns_list_head),
-    };
-    struct ns_tree_root net_ns_tree = {
-    .ns_rb = RB_ROOT,
-    .ns_list_head = LIST_HEAD_INIT(net_ns_tree.ns_list_head),
-    };
+pub static mut ns_tree_root: usize = 0;
+pub static mut ns_tree_root: usize = 0;
+pub static mut ns_tree_root: usize = 0;
     EXPORT_SYMBOL_GPL(net_ns_tree);
-    struct ns_tree_root uts_ns_tree = {
-    .ns_rb = RB_ROOT,
-    .ns_list_head = LIST_HEAD_INIT(uts_ns_tree.ns_list_head),
-    };
-    struct ns_tree_root user_ns_tree = {
-    .ns_rb = RB_ROOT,
-    .ns_list_head = LIST_HEAD_INIT(user_ns_tree.ns_list_head),
-    };
-    struct ns_tree_root ipc_ns_tree = {
-    .ns_rb = RB_ROOT,
-    .ns_list_head = LIST_HEAD_INIT(ipc_ns_tree.ns_list_head),
-    };
-    struct ns_tree_root pid_ns_tree = {
-    .ns_rb = RB_ROOT,
-    .ns_list_head = LIST_HEAD_INIT(pid_ns_tree.ns_list_head),
-    };
-    struct ns_tree_root cgroup_ns_tree = {
-    .ns_rb = RB_ROOT,
-    .ns_list_head = LIST_HEAD_INIT(cgroup_ns_tree.ns_list_head),
-    };
-    struct ns_tree_root time_ns_tree = {
-    .ns_rb = RB_ROOT,
-    .ns_list_head = LIST_HEAD_INIT(time_ns_tree.ns_list_head),
-    };
+pub static mut ns_tree_root: usize = 0;
+pub static mut ns_tree_root: usize = 0;
+pub static mut ns_tree_root: usize = 0;
+pub static mut ns_tree_root: usize = 0;
+pub static mut ns_tree_root: usize = 0;
+pub static mut ns_tree_root: usize = 0;
 //
 // ns_tree_node_init - Initialize a namespace tree node
 // @node: The node to initialize
@@ -150,11 +373,10 @@ pub unsafe extern "C" fn ns_tree_node_empty(node: *const ns_tree_node) -> bool {
 //
 // Returns: NULL if insertion succeeded, existing node if duplicate found
 //
-    struct rb_node *ns_tree_node_add(struct ns_tree_node *node,
-    struct ns_tree_root *root,
-    int (*cmp)(struct rb_node *, const struct rb_node *))
-    {
-    struct rb_node *ret, *prev;
+#[no_mangle]
+pub unsafe extern "C" fn ns_tree_node_add(node: *mut ns_tree_node, root: *mut ns_tree_root) -> *mut c_void {
+    let mut ret = core::ptr::null_mut();
+    let mut prev = core::ptr::null_mut();
 // Add to rbtree
     ret = rb_find_add_rcu(&node.ns_node, &root.ns_rb, cmp);
 // Add to list in sorted order
@@ -164,8 +386,8 @@ pub unsafe extern "C" fn ns_tree_node_empty(node: *const ns_tree_node) -> bool {
     list_add_rcu(&node.ns_list_entry, &root.ns_list_head);
     } else {
 // Add after previous node
-    struct ns_tree_node *prev_node;
-    prev_node = rb_entry(prev, struct ns_tree_node, ns_node);
+pub static mut prev_node: *mut c_void = core::ptr::null_mut();
+    prev_node = rb_entry(prev, ns_tree_node, ns_node);
     list_add_rcu(&node.ns_list_entry, &prev_node.ns_list_entry);
     }
     return ret;
@@ -183,30 +405,35 @@ pub unsafe extern "C" fn ns_tree_node_del(node: *mut ns_tree_node, root: *mut ns
     RB_CLEAR_NODE(&node.ns_node);
     list_bidir_del_rcu(&node.ns_list_entry);
     }
-    static inline struct ns_common *node_to_ns(const struct rb_node *node)
-    {
-    if (!node)
+#[no_mangle]
+pub unsafe extern "C" fn node_to_ns(node: *mut rb_node) -> *mut c_void {
+    if (!node) {
     return core::ptr::null_mut();
-    return rb_entry(node, struct ns_common, ns_tree_node.ns_node);
     }
-    static inline struct ns_common *node_to_ns_unified(const struct rb_node *node)
-    {
-    if (!node)
-    return core::ptr::null_mut();
-    return rb_entry(node, struct ns_common, ns_unified_node.ns_node);
+    return rb_entry(node, ns_common, ns_tree_node.ns_node);
     }
-    static inline struct ns_common *node_to_ns_owner(const struct rb_node *node)
-    {
-    if (!node)
+#[no_mangle]
+pub unsafe extern "C" fn node_to_ns_unified(node: *mut rb_node) -> *mut c_void {
+    if (!node) {
     return core::ptr::null_mut();
-    return rb_entry(node, struct ns_common, ns_owner_node.ns_node);
+    }
+    return rb_entry(node, ns_common, ns_unified_node.ns_node);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn node_to_ns_owner(node: *mut rb_node) -> *mut c_void {
+    if (!node) {
+    return core::ptr::null_mut();
+    }
+    return rb_entry(node, ns_common, ns_owner_node.ns_node);
     }
 #[no_mangle]
 unsafe extern "C" fn ns_id_cmp(id_a: u64, id_b: u64) -> c_int {
-    if (id_a < id_b)
+    if (id_a < id_b) {
     return -1;
-    if (id_a > id_b)
+    }
+    if (id_a > id_b) {
     return 1;
+    }
     return 0;
     }
 #[no_mangle]
@@ -223,8 +450,8 @@ unsafe extern "C" fn ns_cmp_owner(a: *mut rb_node, b: *const rb_node) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __ns_tree_add_raw(ns: *mut ns_common, ns_tree: *mut ns_tree_root) {
-    struct rb_node *node;
-    const struct proc_ns_operations *ops = ns.ops;
+pub static mut node: *mut c_void = core::ptr::null_mut();
+    let mut ops = ns.ops;
     VFS_WARN_ON_ONCE(!ns.ns_id);
     guard(ns_tree_writer)();
 // Add to per-type tree and list
@@ -233,11 +460,11 @@ pub unsafe extern "C" fn __ns_tree_add_raw(ns: *mut ns_common, ns_tree: *mut ns_
     ns_tree_node_add(&ns.ns_unified_node, &ns_unified_root, ns_cmp_unified);
 // Add to owner's tree if applicable
     if (ops) {
-    struct user_namespace *user_ns;
+pub static mut user_ns: *mut c_void = core::ptr::null_mut();
     VFS_WARN_ON_ONCE(!ops.owner);
     user_ns = ops.owner(ns);
     if (user_ns) {
-    struct ns_common *owner = &user_ns.ns;
+    let mut owner = &user_ns.ns;
     VFS_WARN_ON_ONCE(owner.ns_type != CLONE_NEWUSER);
 // Insert into owner's tree and list
     ns_tree_node_add(&ns.ns_owner_node, &owner.ns_owner_root, ns_cmp_owner);
@@ -250,8 +477,8 @@ pub unsafe extern "C" fn __ns_tree_add_raw(ns: *mut ns_common, ns_tree: *mut ns_
     }
 #[no_mangle]
 pub unsafe extern "C" fn __ns_tree_remove(ns: *mut ns_common, ns_tree: *mut ns_tree_root) {
-    const struct proc_ns_operations *ops = ns.ops;
-    struct user_namespace *user_ns;
+    let mut ops = ns.ops;
+pub static mut user_ns: *mut c_void = core::ptr::null_mut();
     VFS_WARN_ON_ONCE(ns_tree_node_empty(&ns.ns_tree_node));
     VFS_WARN_ON_ONCE(list_empty(&ns.ns_tree_node.ns_list_entry));
     write_seqlock(&ns_tree_lock);
@@ -263,7 +490,7 @@ pub unsafe extern "C" fn __ns_tree_remove(ns: *mut ns_common, ns_tree: *mut ns_t
     if (ops) {
     user_ns = ops.owner(ns);
     if (user_ns) {
-    struct ns_common *owner = &user_ns.ns;
+    let mut owner = &user_ns.ns;
     ns_tree_node_del(&ns.ns_owner_node, &owner.ns_owner_root);
     }
     }
@@ -272,79 +499,95 @@ pub unsafe extern "C" fn __ns_tree_remove(ns: *mut ns_common, ns_tree: *mut ns_t
     EXPORT_SYMBOL_GPL(__ns_tree_remove);
 #[no_mangle]
 unsafe extern "C" fn ns_find(key: *const c_void, node: *const rb_node) -> c_int {
-    let mut ns_id: u64 = *(u64 *)key;
-    const struct ns_common *ns = node_to_ns(node);
-    if (ns_id < ns.ns_id)
+pub static mut ns_id: u64 = 0;
+    let mut ns = node_to_ns(node);
+    if (ns_id < ns.ns_id) {
     return -1;
-    if (ns_id > ns.ns_id)
+    }
+    if (ns_id > ns.ns_id) {
     return 1;
+    }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn ns_find_unified(key: *const c_void, node: *const rb_node) -> c_int {
-    let mut ns_id: u64 = *(u64 *)key;
-    const struct ns_common *ns = node_to_ns_unified(node);
-    if (ns_id < ns.ns_id)
+pub static mut ns_id: u64 = 0;
+    let mut ns = node_to_ns_unified(node);
+    if (ns_id < ns.ns_id) {
     return -1;
-    if (ns_id > ns.ns_id)
+    }
+    if (ns_id > ns.ns_id) {
     return 1;
+    }
     return 0;
     }
-    static struct ns_tree_root *ns_tree_from_type(int ns_type)
-    {
-    switch (ns_type) {
-    case CLONE_NEWCGROUP:
+#[no_mangle]
+pub unsafe extern "C" fn ns_tree_from_type(ns_type: c_int) -> *mut c_void {
+    match (ns_type) {
+    CLONE_NEWCGROUP => {
     return &cgroup_ns_tree;
-    case CLONE_NEWIPC:
+    }
+    CLONE_NEWIPC => {
     return &ipc_ns_tree;
-    case CLONE_NEWNS:
+    }
+    CLONE_NEWNS => {
     return &mnt_ns_tree;
-    case CLONE_NEWNET:
+    }
+    CLONE_NEWNET => {
     return &net_ns_tree;
-    case CLONE_NEWPID:
+    }
+    CLONE_NEWPID => {
     return &pid_ns_tree;
-    case CLONE_NEWUSER:
+    }
+    CLONE_NEWUSER => {
     return &user_ns_tree;
-    case CLONE_NEWUTS:
+    }
+    CLONE_NEWUTS => {
     return &uts_ns_tree;
-    case CLONE_NEWTIME:
+    }
+    CLONE_NEWTIME => {
     return &time_ns_tree;
+    }
     }
     return core::ptr::null_mut();
     }
-    static struct ns_common *__ns_unified_tree_lookup_rcu(u64 ns_id)
-    {
-    struct rb_node *node;
-    unsigned int seq;
+#[no_mangle]
+pub unsafe extern "C" fn __ns_unified_tree_lookup_rcu(ns_id: u64) -> *mut c_void {
+pub static mut node: *mut c_void = core::ptr::null_mut();
+    let mut seq = 0;
     do {
     seq = read_seqbegin(&ns_tree_lock);
     node = rb_find_rcu(&ns_id, &ns_unified_root.ns_rb, ns_find_unified);
-    if (node)
+    if (node) {
     break;
+    }
     } while (read_seqretry(&ns_tree_lock, seq));
     return node_to_ns_unified(node);
     }
-    static struct ns_common *__ns_tree_lookup_rcu(u64 ns_id, int ns_type)
-    {
-    struct ns_tree_root *ns_tree;
-    struct rb_node *node;
-    unsigned int seq;
+#[no_mangle]
+pub unsafe extern "C" fn __ns_tree_lookup_rcu(ns_id: u64, ns_type: c_int) -> *mut c_void {
+pub static mut ns_tree: *mut c_void = core::ptr::null_mut();
+pub static mut node: *mut c_void = core::ptr::null_mut();
+    let mut seq = 0;
     ns_tree = ns_tree_from_type(ns_type);
-    if (!ns_tree)
+    if (!ns_tree) {
     return core::ptr::null_mut();
+    }
     do {
     seq = read_seqbegin(&ns_tree_lock);
     node = rb_find_rcu(&ns_id, &ns_tree.ns_rb, ns_find);
-    if (node)
+    if (node) {
     break;
+    }
     } while (read_seqretry(&ns_tree_lock, seq));
     return node_to_ns(node);
     }
-    struct ns_common *ns_tree_lookup_rcu(u64 ns_id, int ns_type)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ns_tree_lookup_rcu(ns_id: u64, ns_type: c_int) -> *mut c_void {
     RCU_LOCKDEP_WARN(!rcu_read_lock_held(), "suspicious ns_tree_lookup_rcu() usage");
-    if (ns_type)
+    if (ns_type) {
     return __ns_tree_lookup_rcu(ns_id, ns_type);
+    }
     return __ns_unified_tree_lookup_rcu(ns_id);
     }
 //
@@ -357,18 +600,20 @@ unsafe extern "C" fn ns_find_unified(key: *const c_void, node: *const rb_node) -
 // Find the next or previous namespace in the same tree as @ns. If
 // there is no next/previous namespace, -ENOENT is returned.
 //
-    struct ns_common *__ns_tree_adjoined_rcu(struct ns_common *ns,
-    struct ns_tree_root *ns_tree, bool previous)
-    {
-    struct list_head *list;
+#[no_mangle]
+pub unsafe extern "C" fn __ns_tree_adjoined_rcu(ns: *mut ns_common, ns_tree: *mut ns_tree_root, previous: bool) -> *mut c_void {
+pub static mut list: *mut c_void = core::ptr::null_mut();
     RCU_LOCKDEP_WARN(!rcu_read_lock_held(), "suspicious ns_tree_adjoined_rcu() usage");
-    if (previous)
+    if (previous) {
     list = rcu_dereference(list_bidir_prev_rcu(&ns.ns_tree_node.ns_list_entry));
-    else
+    }
+    else {
     list = rcu_dereference(list_next_rcu(&ns.ns_tree_node.ns_list_entry));
-    if (list_is_head(list, &ns_tree.ns_list_head))
+    }
+    if (list_is_head(list, &ns_tree.ns_list_head)) {
     return ERR_PTR(-ENOENT);
-    return list_entry_rcu(list, struct ns_common, ns_tree_node.ns_list_entry);
+    }
+    return list_entry_rcu(list, ns_common, ns_tree_node.ns_list_entry);
     }
 //
 // __ns_tree_gen_id - generate a new namespace id
@@ -382,17 +627,19 @@ unsafe extern "C" fn ns_find_unified(key: *const c_void, node: *const rb_node) -
 //
 #[no_mangle]
 pub unsafe extern "C" fn __ns_tree_gen_id(ns: *mut ns_common, id: u64) -> u64 {
-    let mut namespace_cookie: static atomic64_t = ATOMIC64_INIT(NS_LAST_INIT_ID + 1);
-    if (id)
+pub static mut namespace_cookie: atomic64_t = 0;
+    if (id) {
     ns.ns_id = id;
-    else
+    }
+    else {
     ns.ns_id = atomic64_inc_return(&namespace_cookie);
+    }
     return ns.ns_id;
     }
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct klistns {
-    pub uns_ids: *mut u64 __user,
+    pub uns_ids: *mut u64 ,
     pub nr_ns_ids: u32,
     pub last_ns_id: u64,
     pub user_ns_id: u64,
@@ -404,38 +651,44 @@ pub struct klistns {
 
 #[no_mangle]
 unsafe extern "C" fn __free_klistns_free(kls: *const klistns) {
-    if (kls.user_ns_id != LISTNS_CURRENT_USER)
+    if (kls.user_ns_id != LISTNS_CURRENT_USER) {
     put_user_ns(kls.user_ns);
-    if (kls.first_ns && kls.first_ns.ops)
+    }
+    if (kls.first_ns && kls.first_ns.ops) {
     kls.first_ns.ops.put(kls.first_ns);
     }
+    }
 
-    static int copy_ns_id_req(const struct ns_id_req __user *req,
-    struct ns_id_req *kreq)
-    {
-    int ret;
-    size_t usize;
-    BUILD_BUG_ON(sizeof(struct ns_id_req) != NS_ID_REQ_SIZE_VER0);
+#[no_mangle]
+pub unsafe extern "C" fn copy_ns_id_req(req: *mut ns_id_req, kreq: *mut ns_id_req) -> c_int {
+    let mut ret = 0;
+    let mut usize = 0;
+    BUILD_BUG_ON!(sizeof!(ns_id_req) != NS_ID_REQ_SIZE_VER0);
     ret = get_user(usize, &req.size);
-    if (ret)
+    if (ret) {
     return -EFAULT;
-    if (unlikely(usize > PAGE_SIZE))
+    }
+    if (unlikely(usize > PAGE_SIZE)) {
     return -E2BIG;
-    if (unlikely(usize < NS_ID_REQ_SIZE_VER0))
+    }
+    if (unlikely(usize < NS_ID_REQ_SIZE_VER0)) {
     return -EINVAL;
-    memset(kreq, 0, sizeof(*kreq));
-    ret = copy_struct_from_user(kreq, sizeof(*kreq), req, usize);
-    if (ret)
+    }
+    memset(kreq, 0, sizeof!(*kreq));
+    ret = copy_struct_from_user(kreq, sizeof!(*kreq), req, usize);
+    if (ret) {
     return ret;
-    if (kreq.spare != 0)
+    }
+    if (kreq.spare != 0) {
     return -EINVAL;
-    if (kreq.ns_type & ~NS_ALL)
+    }
+    if (kreq.ns_type & ~NS_ALL) {
     return -EOPNOTSUPP;
+    }
     return 0;
     }
-    static inline int prepare_klistns(struct klistns *kls, struct ns_id_req *kreq,
-    u64 __user *ns_ids, size_t nr_ns_ids)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn prepare_klistns(kls: *mut klistns, kreq: *mut ns_id_req, ns_ids: *mut u64, nr_ns_ids: size_t) -> c_int {
     kls.last_ns_id = kreq.ns_id;
     kls.user_ns_id = kreq.user_ns_id;
     kls.nr_ns_ids	= nr_ns_ids;
@@ -447,38 +700,42 @@ unsafe extern "C" fn __free_klistns_free(kls: *const klistns) {
 // Lookup a namespace owned by owner with id >= ns_id.
 // Returns the namespace with the smallest id that is >= ns_id.
 //
-    static struct ns_common *lookup_ns_owner_at(u64 ns_id, struct ns_common *owner)
-    {
-    struct ns_common *ret = core::ptr::null_mut();
-    struct rb_node *node;
+#[no_mangle]
+pub unsafe extern "C" fn lookup_ns_owner_at(ns_id: u64, owner: *mut ns_common) -> *mut c_void {
+    let mut ret = core::ptr::null_mut();
+pub static mut node: *mut c_void = core::ptr::null_mut();
     VFS_WARN_ON_ONCE(owner.ns_type != CLONE_NEWUSER);
     guard(ns_tree_locked_reader)();
     node = owner.ns_owner_root.ns_rb.rb_node;
     while (node) {
-    struct ns_common *ns;
+pub static mut ns: *mut c_void = core::ptr::null_mut();
     ns = node_to_ns_owner(node);
     if (ns_id <= ns.ns_id) {
     ret = ns;
-    if (ns_id == ns.ns_id)
+    if (ns_id == ns.ns_id) {
     break;
+    }
     node = node.rb_left;
     } else {
     node = node.rb_right;
     }
     }
-    if (ret)
+    if (ret) {
     ret = ns_get_unless_inactive(ret);
+    }
     return ret;
     }
-    static struct ns_common *lookup_ns_id(u64 mnt_ns_id, int ns_type)
-    {
-    struct ns_common *ns;
+#[no_mangle]
+pub unsafe extern "C" fn lookup_ns_id(mnt_ns_id: u64, ns_type: c_int) -> *mut c_void {
+pub static mut ns: *mut c_void = core::ptr::null_mut();
     guard(rcu)();
     ns = ns_tree_lookup_rcu(mnt_ns_id, ns_type);
-    if (!ns)
+    if (!ns) {
     return core::ptr::null_mut();
-    if (!ns_get_unless_inactive(ns))
+    }
+    if (!ns_get_unless_inactive(ns)) {
     return core::ptr::null_mut();
+    }
     return ns;
     }
     static inline bool __must_check ns_requested(const struct klistns *kls,
@@ -486,50 +743,56 @@ unsafe extern "C" fn __free_klistns_free(kls: *const klistns) {
     {
     return !kls.ns_type || (kls.ns_type & ns.ns_type);
     }
-    static inline bool __must_check may_list_ns(const struct klistns *kls,
-    struct ns_common *ns)
+    static inline bool __must_check may_list_ns(const struct klistns *kls, ns_common *ns)
     {
-    if (kls.user_ns && kls.userns_capable)
+    if (kls.user_ns && kls.userns_capable) {
     return true;
-    if (is_current_namespace(ns))
+    }
+    if (is_current_namespace(ns)) {
     return true;
+    }
     return may_see_all_namespaces();
     }
 #[no_mangle]
 pub unsafe extern "C" fn ns_put(ns: *mut ns_common) {
-    if (ns && ns.ops)
+    if (ns && ns.ops) {
     ns.ops.put(ns);
     }
-    DEFINE_FREE(ns_put, struct ns_common *, if (!IS_ERR_OR_NULL(_T)) ns_put(_T))
-    static inline struct ns_common *__must_check legitimize_ns(const struct klistns *kls,
-    struct ns_common *candidate)
+    }
+    DEFINE_FREE(ns_put, ns_common *, if (!IS_ERR_OR_NULL(_T)) ns_put(_T))
+    static inline struct ns_common *__must_check legitimize_ns(const struct klistns *kls, ns_common *candidate)
     {
     struct ns_common *ns __free(ns_put) = core::ptr::null_mut();
-    if (!ns_requested(kls, candidate))
+    if (!ns_requested(kls, candidate)) {
     return core::ptr::null_mut();
+    }
     ns = ns_get_unless_inactive(candidate);
-    if (!ns)
+    if (!ns) {
     return core::ptr::null_mut();
-    if (!may_list_ns(kls, ns))
+    }
+    if (!may_list_ns(kls, ns)) {
     return core::ptr::null_mut();
+    }
     return no_free_ptr(ns);
     }
 #[no_mangle]
 unsafe extern "C" fn do_listns_userns(kls: *mut klistns) -> isize {
-    u64 __user *ns_ids = kls.uns_ids;
-    let mut nr_ns_ids: usize = kls.nr_ns_ids;
-    struct ns_common *ns = core::ptr::null_mut(), *first_ns = core::ptr::null_mut(), *prev = core::ptr::null_mut();
-    const struct list_head *head;
-    ssize_t ret;
+    let mut ns_ids = kls.uns_ids;
+pub static mut nr_ns_ids: usize = 0;
+    let mut ns = core::ptr::null_mut(), *first_ns = core::ptr::null_mut(), *prev = core::ptr::null_mut();
+pub static mut head: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     VFS_WARN_ON_ONCE(!kls.user_ns_id);
-    if (kls.user_ns_id == LISTNS_CURRENT_USER)
+    if (kls.user_ns_id == LISTNS_CURRENT_USER) {
     ns = to_ns_common(current_user_ns());
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: kls->user_ns_id) -> else {
-    else if (kls.user_ns_id)
+    }
+
+    else if (kls.user_ns_id) {
     ns = lookup_ns_id(kls.user_ns_id, CLONE_NEWUSER);
-    if (!ns)
+    }
+    if (!ns) {
     return -EINVAL;
+    }
     kls.user_ns = to_user_ns(ns);
 //
 // Use the rbtree to find the first namespace we care about and
@@ -537,24 +800,28 @@ pub unsafe extern "C" fn if(_arg: kls->user_ns_id) -> else {
 //
     if (kls.last_ns_id) {
     kls.first_ns = lookup_ns_owner_at(kls.last_ns_id + 1, ns);
-    if (!kls.first_ns)
+    if (!kls.first_ns) {
     return -ENOENT;
+    }
     first_ns = kls.first_ns;
     }
     ret = 0;
     head = &to_ns_common(kls.user_ns).ns_owner_root.ns_list_head;
     kls.userns_capable = may_see_all_namespaces();
     rcu_read_lock();
-    if (!first_ns)
+    if (!first_ns) {
     first_ns = list_entry_rcu(head.next, typeof(*first_ns), ns_owner_node.ns_list_entry);
+    }
     ns = first_ns;
     list_for_each_entry_from_rcu(ns, head, ns_owner_node.ns_list_entry) {
-    struct ns_common *valid;
-    if (!nr_ns_ids)
+pub static mut valid: *mut c_void = core::ptr::null_mut();
+    if (!nr_ns_ids) {
     break;
+    }
     valid = legitimize_ns(kls, ns);
-    if (!valid)
+    if (!valid) {
     continue;
+    }
     rcu_read_unlock();
     ns_put(prev);
     prev = valid;
@@ -562,8 +829,8 @@ pub unsafe extern "C" fn if(_arg: kls->user_ns_id) -> else {
     ns_put(prev);
     return -EFAULT;
     }
-    nr_ns_ids--;
-    ret++;
+    nr_ns_ids -= 1;
+    ret += 1;
     rcu_read_lock();
     }
     rcu_read_unlock();
@@ -574,103 +841,119 @@ pub unsafe extern "C" fn if(_arg: kls->user_ns_id) -> else {
 // Lookup a namespace with id >= ns_id in either the unified tree or a type-specific tree.
 // Returns the namespace with the smallest id that is >= ns_id.
 //
-    static struct ns_common *lookup_ns_id_at(u64 ns_id, int ns_type)
-    {
-    struct ns_common *ret = core::ptr::null_mut();
-    struct ns_tree_root *ns_tree = core::ptr::null_mut();
-    struct rb_node *node;
+#[no_mangle]
+pub unsafe extern "C" fn lookup_ns_id_at(ns_id: u64, ns_type: c_int) -> *mut c_void {
+    let mut ret = core::ptr::null_mut();
+    let mut ns_tree = core::ptr::null_mut();
+pub static mut node: *mut c_void = core::ptr::null_mut();
     if (ns_type) {
     ns_tree = ns_tree_from_type(ns_type);
-    if (!ns_tree)
+    if (!ns_tree) {
     return core::ptr::null_mut();
     }
+    }
     guard(ns_tree_locked_reader)();
-    if (ns_tree)
+    if (ns_tree) {
     node = ns_tree.ns_rb.rb_node;
-    else
+    }
+    else {
     node = ns_unified_root.ns_rb.rb_node;
+    }
     while (node) {
-    struct ns_common *ns;
-    if (ns_type)
+pub static mut ns: *mut c_void = core::ptr::null_mut();
+    if (ns_type) {
     ns = node_to_ns(node);
-    else
+    }
+    else {
     ns = node_to_ns_unified(node);
+    }
     if (ns_id <= ns.ns_id) {
-    if (ns_type)
+    if (ns_type) {
     ret = node_to_ns(node);
-    else
+    }
+    else {
     ret = node_to_ns_unified(node);
-    if (ns_id == ns.ns_id)
+    }
+    if (ns_id == ns.ns_id) {
     break;
+    }
     node = node.rb_left;
     } else {
     node = node.rb_right;
     }
     }
-    if (ret)
+    if (ret) {
     ret = ns_get_unless_inactive(ret);
+    }
     return ret;
     }
-    static inline struct ns_common *first_ns_common(const struct list_head *head,
-    struct ns_tree_root *ns_tree)
-    {
-    if (ns_tree)
-    return list_entry_rcu(head.next, struct ns_common, ns_tree_node.ns_list_entry);
-    return list_entry_rcu(head.next, struct ns_common, ns_unified_node.ns_list_entry);
+#[no_mangle]
+pub unsafe extern "C" fn first_ns_common(head: *mut list_head, ns_tree: *mut ns_tree_root) -> *mut c_void {
+    if (ns_tree) {
+    return list_entry_rcu(head.next, ns_common, ns_tree_node.ns_list_entry);
     }
-    static inline struct ns_common *next_ns_common(struct ns_common *ns,
-    struct ns_tree_root *ns_tree)
-    {
-    if (ns_tree)
-    return list_entry_rcu(ns.ns_tree_node.ns_list_entry.next, struct ns_common, ns_tree_node.ns_list_entry);
-    return list_entry_rcu(ns.ns_unified_node.ns_list_entry.next, struct ns_common, ns_unified_node.ns_list_entry);
+    return list_entry_rcu(head.next, ns_common, ns_unified_node.ns_list_entry);
     }
-    static inline bool ns_common_is_head(struct ns_common *ns,
-    const struct list_head *head,
-    struct ns_tree_root *ns_tree)
-    {
-    if (ns_tree)
+#[no_mangle]
+pub unsafe extern "C" fn next_ns_common(ns: *mut ns_common, ns_tree: *mut ns_tree_root) -> *mut c_void {
+    if (ns_tree) {
+    return list_entry_rcu(ns.ns_tree_node.ns_list_entry.next, ns_common, ns_tree_node.ns_list_entry);
+    }
+    return list_entry_rcu(ns.ns_unified_node.ns_list_entry.next, ns_common, ns_unified_node.ns_list_entry);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn ns_common_is_head(ns: *mut ns_common, head: *mut list_head, ns_tree: *mut ns_tree_root) -> bool {
+    if (ns_tree) {
     return &ns.ns_tree_node.ns_list_entry == head;
+    }
     return &ns.ns_unified_node.ns_list_entry == head;
     }
 #[no_mangle]
 unsafe extern "C" fn do_listns(kls: *mut klistns) -> isize {
-    u64 __user *ns_ids = kls.uns_ids;
-    let mut nr_ns_ids: usize = kls.nr_ns_ids;
+    let mut ns_ids = kls.uns_ids;
+pub static mut nr_ns_ids: usize = 0;
     struct ns_common *ns, *first_ns = core::ptr::null_mut(), *prev = core::ptr::null_mut();
-    struct ns_tree_root *ns_tree = core::ptr::null_mut();
-    const struct list_head *head;
-    u32 ns_type;
-    ssize_t ret;
-    if (hweight32(kls.ns_type) == 1)
+    let mut ns_tree = core::ptr::null_mut();
+pub static mut head: *mut c_void = core::ptr::null_mut();
+    let mut ns_type = 0;
+    let mut ret = 0;
+    if (hweight32(kls.ns_type) == 1) {
     ns_type = kls.ns_type;
-    else
+    }
+    else {
     ns_type = 0;
+    }
     if (ns_type) {
     ns_tree = ns_tree_from_type(ns_type);
-    if (!ns_tree)
+    if (!ns_tree) {
     return -EINVAL;
+    }
     }
     if (kls.last_ns_id) {
     kls.first_ns = lookup_ns_id_at(kls.last_ns_id + 1, ns_type);
-    if (!kls.first_ns)
+    if (!kls.first_ns) {
     return -ENOENT;
+    }
     first_ns = kls.first_ns;
     }
     ret = 0;
-    if (ns_tree)
+    if (ns_tree) {
     head = &ns_tree.ns_list_head;
-    else
+    }
+    else {
     head = &ns_unified_root.ns_list_head;
+    }
     rcu_read_lock();
-    if (!first_ns)
+    if (!first_ns) {
     first_ns = first_ns_common(head, ns_tree);
+    }
     for (ns = first_ns; !ns_common_is_head(ns, head, ns_tree) && nr_ns_ids;
     ns = next_ns_common(ns, ns_tree)) {
-    struct ns_common *valid;
+pub static mut valid: *mut c_void = core::ptr::null_mut();
     valid = legitimize_ns(kls, ns);
-    if (!valid)
+    if (!valid) {
     continue;
+    }
     rcu_read_unlock();
     ns_put(prev);
     prev = valid;
@@ -678,36 +961,39 @@ unsafe extern "C" fn do_listns(kls: *mut klistns) -> isize {
     ns_put(prev);
     return -EFAULT;
     }
-    nr_ns_ids--;
-    ret++;
+    nr_ns_ids -= 1;
+    ret += 1;
     rcu_read_lock();
     }
     rcu_read_unlock();
     ns_put(prev);
     return ret;
     }
-    SYSCALL_DEFINE4(listns, const struct ns_id_req __user *, req,
-    u64 __user *, ns_ids, size_t, nr_ns_ids, unsigned int, flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_listns(req: usize, ns_ids: usize, nr_ns_ids: usize, flags: usize) -> c_long {
     struct klistns klns __free(klistns_free) = {};
-    let mut maxcount: usize = 1000000;
-    struct ns_id_req kreq;
-    ssize_t ret;
-    if (flags)
+pub static mut maxcount: usize = 1000000;
+pub static mut kreq: usize = 0;
+    let mut ret = 0;
+    if (flags) {
     return -EINVAL;
-    if (unlikely(nr_ns_ids > maxcount))
+    }
+    if (unlikely(nr_ns_ids > maxcount)) {
     return -EOVERFLOW;
-    if (!access_ok(ns_ids, nr_ns_ids * sizeof(*ns_ids)))
+    }
+    if (!access_ok(ns_ids, nr_ns_ids * sizeof!(*ns_ids))) {
     return -EFAULT;
+    }
     ret = copy_ns_id_req(req, &kreq);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     ret = prepare_klistns(&klns, &kreq, ns_ids, nr_ns_ids);
-    if (ret)
+    if (ret) {
     return ret;
-    if (kreq.user_ns_id)
+    }
+    if (kreq.user_ns_id) {
     return do_listns_userns(&klns);
+    }
     return do_listns(&klns);
     }
-
-}

@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0+
@@ -77,9 +327,9 @@ pub struct bp_cpuinfo {
     pub tsk_pinned: bp_slots_histogram,
 }
 
-    static DEFINE_PER_CPU(struct bp_cpuinfo, bp_cpuinfo[TYPE_MAX]);
-    static struct bp_cpuinfo *get_bp_info(int cpu, enum bp_type_idx type)
-    {
+pub static mut struct bp_cpuinfo: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn get_bp_info(cpu: c_int, type: bp_type_idx) -> *mut c_void {
     return per_cpu_ptr(bp_cpuinfo + type, cpu);
     }
 // Number of pinned CPU breakpoints globally.
@@ -87,13 +337,8 @@ pub struct bp_cpuinfo {
 // Number of pinned CPU-independent task breakpoints.
     static struct bp_slots_histogram tsk_pinned_all[TYPE_MAX];
 // Keep track of the breakpoints attached to tasks
-    static struct rhltable task_bps_ht;
-    static const struct rhashtable_params task_bps_ht_params = {
-    .head_offset = offsetof(struct hw_perf_event, bp_list),
-    .key_offset = offsetof(struct hw_perf_event, target),
-    .key_len = sizeof_field(struct hw_perf_event, target),
-    .automatic_shrinking = true,
-    };
+pub static mut task_bps_ht: usize = 0;
+pub static mut rhashtable_params: usize = 0;
     static bool constraints_initialized __ro_after_init;
 //
 // Synchronizes accesses to the per-CPU constraints; the locking rules are:
@@ -107,7 +352,7 @@ pub struct bp_cpuinfo {
 // 3. In all other cases, non-atomic accesses require the appropriately held
 // lock (read-lock for read-only accesses; write-lock for reads/writes).
 //
-    DEFINE_STATIC_PERCPU_RWSEM(bp_cpuinfo_sem);
+pub static mut bp_cpuinfo_sem: usize = 0;
 //
 // Return mutex to serialize accesses to per-task lists in task_bps_ht. Since
 // rhltable synchronizes concurrent insertions/deletions, independent tasks may
@@ -119,14 +364,14 @@ pub struct bp_cpuinfo {
 // assumption is that perf usecases involving hw_breakpoints are very unlikely
 // to result in unnecessary contention.
 //
-    static inline struct mutex *get_task_bps_mutex(struct perf_event *bp)
-    {
-    struct task_struct *tsk = bp.hw.target;
+#[no_mangle]
+pub unsafe extern "C" fn get_task_bps_mutex(bp: *mut perf_event) -> *mut c_void {
+    let mut tsk = bp.hw.target;
     return tsk ? &tsk.perf_event_mutex : core::ptr::null_mut();
     }
-    static struct mutex *bp_constraints_lock(struct perf_event *bp)
-    {
-    struct mutex *tsk_mtx = get_task_bps_mutex(bp);
+#[no_mangle]
+pub unsafe extern "C" fn bp_constraints_lock(bp: *mut perf_event) -> *mut c_void {
+    let mut tsk_mtx = get_task_bps_mutex(bp);
     if (tsk_mtx) {
 //
 // Fully analogous to the perf_try_init_event() nesting
@@ -147,8 +392,6 @@ pub struct bp_cpuinfo {
     }
 #[no_mangle]
 unsafe extern "C" fn bp_constraints_unlock(tsk_mtx: *mut mutex) {
-    static void bp_constraints_unlock(struct mutex *tsk_mtx)
-    {
     if (tsk_mtx) {
     percpu_up_read(&bp_cpuinfo_sem);
     mutex_unlock(tsk_mtx);
@@ -158,20 +401,17 @@ unsafe extern "C" fn bp_constraints_unlock(tsk_mtx: *mut mutex) {
     }
 #[no_mangle]
 unsafe extern "C" fn bp_constraints_is_locked(bp: *mut perf_event) -> bool {
-    static bool bp_constraints_is_locked(struct perf_event *bp)
-    {
-    struct mutex *tsk_mtx = get_task_bps_mutex(bp);
+    let mut tsk_mtx = get_task_bps_mutex(bp);
     return percpu_is_write_locked(&bp_cpuinfo_sem) ||
     (tsk_mtx ? mutex_is_locked(tsk_mtx) :
     percpu_is_read_locked(&bp_cpuinfo_sem));
     }
 #[no_mangle]
 pub unsafe extern "C" fn assert_bp_constraints_lock_held(bp: *mut perf_event) {
-    static inline void assert_bp_constraints_lock_held(struct perf_event *bp)
-    {
-    struct mutex *tsk_mtx = get_task_bps_mutex(bp);
-    if (tsk_mtx)
+    let mut tsk_mtx = get_task_bps_mutex(bp);
+    if (tsk_mtx) {
     lockdep_assert_held(tsk_mtx);
+    }
     lockdep_assert_held(&bp_cpuinfo_sem);
     }
 
@@ -179,102 +419,107 @@ pub unsafe extern "C" fn assert_bp_constraints_lock_held(bp: *mut perf_event) {
 // Number of breakpoint slots is constant, and the same for all types.
 //
     static_assert(hw_breakpoint_slots(TYPE_INST) == hw_breakpoint_slots(TYPE_DATA));
-    static inline int hw_breakpoint_slots_cached(int type)	{ return hw_breakpoint_slots(type); }
-    static inline int init_breakpoint_slots(void)		{ return 0; }
+#[no_mangle]
+pub unsafe extern "C" fn hw_breakpoint_slots_cached(type: c_int) -> c_int { return hw_breakpoint_slots(type); }
+#[no_mangle]
+pub unsafe extern "C" fn init_breakpoint_slots() -> c_int { return 0; }
 
 //
 // Dynamic number of breakpoint slots.
 //
     static int __nr_bp_slots[TYPE_MAX] __ro_after_init;
 #[no_mangle]
-pub unsafe extern "C" fn hw_breakpoint_slots_cached(type: c_int) -> c_int {
-    static inline int hw_breakpoint_slots_cached(int type)
-    {
+#[no_mangle]
+// duplicate fn: hw_breakpoint_slots_cached
+pub unsafe extern "C" fn hw_breakpoint_slots_cached_dup(type: c_int) -> c_int {
     return __nr_bp_slots[type];
     }
-    static __init bool
-    bp_slots_histogram_alloc(struct bp_slots_histogram *hist, enum bp_type_idx type)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn bp_slots_histogram_alloc(hist: *mut bp_slots_histogram, type: bp_type_idx) -> bool {
     hist.count = kzalloc_objs(*hist.count,
     hw_breakpoint_slots_cached(type));
     return hist.count;
     }
 #[no_mangle]
 unsafe extern "C" fn bp_slots_histogram_free(hist: *mut bp_slots_histogram) -> __init void {
-    static __init void bp_slots_histogram_free(struct bp_slots_histogram *hist)
-    {
     kfree(hist.count);
     }
 #[no_mangle]
 unsafe extern "C" fn init_breakpoint_slots() -> __init int {
-    static __init int init_breakpoint_slots(void)
-    {
-    int i, cpu, err_cpu;
-    for (i = 0; i < TYPE_MAX; i++)
+    let mut i = 0;
+    let mut cpu = 0;
+    let mut err_cpu = 0;
+    for (i = 0; i < TYPE_MAX; i++) {
     __nr_bp_slots[i] = hw_breakpoint_slots(i);
+    }
     for_each_possible_cpu(cpu) {
-    for (i = 0; i < TYPE_MAX; i++) {
-    struct bp_cpuinfo *info = get_bp_info(cpu, i);
-    if (!bp_slots_histogram_alloc(&info.tsk_pinned, i))
-    goto err;
+    while (i < TYPE_MAX) {
+    let mut info = get_bp_info(cpu, i);
+    if (!bp_slots_histogram_alloc(&info.tsk_pinned, i)) {
+// goto;
     }
     }
-    for (i = 0; i < TYPE_MAX; i++) {
-    if (!bp_slots_histogram_alloc(&cpu_pinned[i], i))
-    goto err;
-    if (!bp_slots_histogram_alloc(&tsk_pinned_all[i], i))
-    goto err;
+    }
+    while (i < TYPE_MAX) {
+    if (!bp_slots_histogram_alloc(&cpu_pinned[i], i)) {
+// goto;
+    }
+    if (!bp_slots_histogram_alloc(&tsk_pinned_all[i], i)) {
+// goto;
+    }
     }
     return 0;
-    err:
+// label;
     for_each_possible_cpu(err_cpu) {
-    for (i = 0; i < TYPE_MAX; i++)
+    for (i = 0; i < TYPE_MAX; i++) {
     bp_slots_histogram_free(&get_bp_info(err_cpu, i).tsk_pinned);
-    if (err_cpu == cpu)
+    }
+    if (err_cpu == cpu) {
     break;
     }
-    for (i = 0; i < TYPE_MAX; i++) {
+    }
+    while (i < TYPE_MAX) {
     bp_slots_histogram_free(&cpu_pinned[i]);
     bp_slots_histogram_free(&tsk_pinned_all[i]);
     }
     return -ENOMEM;
     }
 
-    static inline void
-    bp_slots_histogram_add(struct bp_slots_histogram *hist, int old, int val)
-    {
-    let mut old_idx: c_int = old - 1;
-    let mut new_idx: c_int = old_idx + val;
-    if (old_idx >= 0)
-    WARN_ON(atomic_dec_return_relaxed(&hist.count[old_idx]) < 0);
-    if (new_idx >= 0)
-    WARN_ON(atomic_inc_return_relaxed(&hist.count[new_idx]) < 0);
+#[no_mangle]
+pub unsafe extern "C" fn bp_slots_histogram_add(hist: *mut bp_slots_histogram, old: c_int, val: c_int) {
+pub static mut old_idx: c_int = 0;
+pub static mut new_idx: c_int = 0;
+    if (old_idx >= 0) {
+    WARN_ON!(atomic_dec_return_relaxed(&hist.count[old_idx]) < 0);
     }
-    static int
-    bp_slots_histogram_max(struct bp_slots_histogram *hist, enum bp_type_idx type)
-    {
-    for (int i = hw_breakpoint_slots_cached(type) - 1; i >= 0; i--) {
-    let mut count: c_int = atomic_read(&hist.count[i]);
+    if (new_idx >= 0) {
+    WARN_ON!(atomic_inc_return_relaxed(&hist.count[new_idx]) < 0);
+    }
+    }
+#[no_mangle]
+pub unsafe extern "C" fn bp_slots_histogram_max(hist: *mut bp_slots_histogram, type: bp_type_idx) -> c_int {
+    while (i >= 0) {
+pub static mut count: c_int = 0;
 // Catch unexpected writers; we want a stable snapshot.
     ASSERT_EXCLUSIVE_WRITER(hist.count[i]);
-    if (count > 0)
+    if (count > 0) {
     return i + 1;
+    }
     WARN(count < 0, "inconsistent breakpoint slots histogram");
     }
     return 0;
     }
-    static int
-    bp_slots_histogram_max_merge(struct bp_slots_histogram *hist1, struct bp_slots_histogram *hist2,
-    enum bp_type_idx type)
-    {
-    for (int i = hw_breakpoint_slots_cached(type) - 1; i >= 0; i--) {
-    let mut count1: c_int = atomic_read(&hist1.count[i]);
-    let mut count2: c_int = atomic_read(&hist2.count[i]);
+#[no_mangle]
+pub unsafe extern "C" fn bp_slots_histogram_max_merge(hist1: *mut bp_slots_histogram, hist2: *mut bp_slots_histogram, type: bp_type_idx) -> c_int {
+    while (i >= 0) {
+pub static mut count1: c_int = 0;
+pub static mut count2: c_int = 0;
 // Catch unexpected writers; we want a stable snapshot.
     ASSERT_EXCLUSIVE_WRITER(hist1.count[i]);
     ASSERT_EXCLUSIVE_WRITER(hist2.count[i]);
-    if (count1 + count2 > 0)
+    if (count1 + count2 > 0) {
     return i + 1;
+    }
     WARN(count1 < 0, "inconsistent breakpoint slots histogram");
     WARN(count2 < 0, "inconsistent breakpoint slots histogram");
     }
@@ -283,27 +528,22 @@ unsafe extern "C" fn init_breakpoint_slots() -> __init int {
 
 #[no_mangle]
 pub unsafe extern "C" fn hw_breakpoint_weight(bp: *mut perf_event) -> c_int {
-    static inline int hw_breakpoint_weight(struct perf_event *bp)
-    {
     return 1;
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn find_slot_idx(bp_type: u64) -> enum bp_type_idx {
-    static inline enum bp_type_idx find_slot_idx(u64 bp_type)
-    {
-    if (bp_type & HW_BREAKPOINT_RW)
+    if (bp_type & HW_BREAKPOINT_RW) {
     return TYPE_DATA;
+    }
     return TYPE_INST;
     }
 //
 // Return the maximum number of pinned breakpoints a task has in this CPU.
 //
 #[no_mangle]
-unsafe extern "C" fn max_task_bp_pinned(cpu: c_int, type: enum bp_type_idx) -> c_uint {
-    static unsigned int max_task_bp_pinned(int cpu, enum bp_type_idx type)
-    {
-    struct bp_slots_histogram *tsk_pinned = &get_bp_info(cpu, type).tsk_pinned;
+unsafe extern "C" fn max_task_bp_pinned(cpu: c_int, type: bp_type_idx) -> c_uint {
+    let mut tsk_pinned = &get_bp_info(cpu, type).tsk_pinned;
 //
 // At this point we want to have acquired the bp_cpuinfo_sem as a
 // writer to ensure that there are no concurrent writers in
@@ -320,54 +560,56 @@ unsafe extern "C" fn max_task_bp_pinned(cpu: c_int, type: enum bp_type_idx) -> c
 // returns a negative value.
 //
 #[no_mangle]
-unsafe extern "C" fn task_bp_pinned(cpu: c_int, bp: *mut perf_event, type: enum bp_type_idx) -> c_int {
-    static int task_bp_pinned(int cpu, struct perf_event *bp, enum bp_type_idx type)
-    {
-    struct rhlist_head *head, *pos;
-    struct perf_event *iter;
-    let mut count: c_int = 0;
+unsafe extern "C" fn task_bp_pinned(cpu: c_int, bp: *mut perf_event, type: bp_type_idx) -> c_int {
+    let mut head = core::ptr::null_mut();
+    let mut pos = core::ptr::null_mut();
+pub static mut iter: *mut c_void = core::ptr::null_mut();
+pub static mut count: c_int = 0;
 //
 // We need a stable snapshot of the per-task breakpoint list.
 //
     assert_bp_constraints_lock_held(bp);
     rcu_read_lock();
     head = rhltable_lookup(&task_bps_ht, &bp.hw.target, task_bps_ht_params);
-    if (!head)
-    goto out;
+    if (!head) {
+// goto;
+    }
     rhl_for_each_entry_rcu(iter, pos, head, hw.bp_list) {
-    if (find_slot_idx(iter.attr.bp_type) != type)
+    if (find_slot_idx(iter.attr.bp_type) != type) {
     continue;
+    }
     if (iter.cpu >= 0) {
     if (cpu == -1) {
     count = -1;
-    goto out;
-    } else if (cpu != iter.cpu)
+// goto;
+    } else if (cpu != iter.cpu) {
     continue;
+    }
     }
     count += hw_breakpoint_weight(iter);
     }
-    out:
+// label;
     rcu_read_unlock();
     return count;
     }
-    static const struct cpumask *cpumask_of_bp(struct perf_event *bp)
+    static const struct cpumask *cpumask_of_bp(perf_event *bp)
     {
-    if (bp.cpu >= 0)
+    if (bp.cpu >= 0) {
     return cpumask_of(bp.cpu);
+    }
     return cpu_possible_mask;
     }
 //
 // Returns the max pinned breakpoint slots in a given
 // CPU (cpu > -1) or across all of them (cpu = -1).
 //
-    static int
-    max_bp_pinned_slots(struct perf_event *bp, enum bp_type_idx type)
-    {
-    const struct cpumask *cpumask = cpumask_of_bp(bp);
-    let mut pinned_slots: c_int = 0;
-    int cpu;
+#[no_mangle]
+pub unsafe extern "C" fn max_bp_pinned_slots(bp: *mut perf_event, type: bp_type_idx) -> c_int {
+    let mut cpumask = cpumask_of_bp(bp);
+pub static mut pinned_slots: c_int = 0;
+    let mut cpu = 0;
     if (bp.hw.target && bp.cpu < 0) {
-    let mut max_pinned: c_int = task_bp_pinned(-1, bp, type);
+pub static mut max_pinned: c_int = 0;
     if (max_pinned >= 0) {
 //
 // Fast path: task_bp_pinned() is CPU-independent and
@@ -378,13 +620,15 @@ unsafe extern "C" fn task_bp_pinned(cpu: c_int, bp: *mut perf_event, type: enum 
     }
     }
     for_each_cpu(cpu, cpumask) {
-    struct bp_cpuinfo *info = get_bp_info(cpu, type);
-    int nr;
+    let mut info = get_bp_info(cpu, type);
+    let mut nr = 0;
     nr = info.cpu_pinned;
-    if (!bp.hw.target)
+    if (!bp.hw.target) {
     nr += max_task_bp_pinned(cpu, type);
-    else
+    }
+    else {
     nr += task_bp_pinned(cpu, bp, type);
+    }
     pinned_slots = max(nr, pinned_slots);
     }
     return pinned_slots;
@@ -392,18 +636,19 @@ unsafe extern "C" fn task_bp_pinned(cpu: c_int, bp: *mut perf_event, type: enum 
 //
 // Add/remove the given breakpoint in our constraint table
 //
-    static int
-    toggle_bp_slot(struct perf_event *bp, bool enable, enum bp_type_idx type, int weight)
-    {
-    int cpu, next_tsk_pinned;
-    if (!enable)
+#[no_mangle]
+pub unsafe extern "C" fn toggle_bp_slot(bp: *mut perf_event, enable: bool, type: bp_type_idx, weight: c_int) -> c_int {
+    let mut cpu = 0;
+    let mut next_tsk_pinned = 0;
+    if (!enable) {
     weight = -weight;
+    }
     if (!bp.hw.target) {
 //
 // Update the pinned CPU slots, in per-CPU bp_cpuinfo and in the
 // global histogram.
 //
-    struct bp_cpuinfo *info = get_bp_info(bp.cpu, type);
+    let mut info = get_bp_info(bp.cpu, type);
     lockdep_assert_held_write(&bp_cpuinfo_sem);
     bp_slots_histogram_add(&cpu_pinned[type], info.cpu_pinned, weight);
     info.cpu_pinned += weight;
@@ -442,22 +687,25 @@ unsafe extern "C" fn task_bp_pinned(cpu: c_int, bp: *mut perf_event, type: enum 
 // Remove before updating histograms so we can determine if this
 // was the last task breakpoint for a specific CPU.
 //
-    let mut ret: c_int = rhltable_remove(&task_bps_ht, &bp.hw.bp_list, task_bps_ht_params);
-    if (ret)
+pub static mut ret: c_int = 0;
+    if (ret) {
     return ret;
+    }
     }
 //
 // Note: If !enable, next_tsk_pinned will not count the to-be-removed breakpoint.
 //
     next_tsk_pinned = task_bp_pinned(-1, bp, type);
     if (next_tsk_pinned >= 0) {
-    if (bp.cpu < 0) { /* Case 1: fast path */
+    if (bp.cpu < 0) { /* Case 1: fast path */ {
     if (!enable)
     next_tsk_pinned += hw_breakpoint_weight(bp);
+    }
     bp_slots_histogram_add(&tsk_pinned_all[type], next_tsk_pinned, weight);
-    } else if (enable) { /* Case 2.a: slow path */
+    } else if (enable) { /* Case 2.a: slow path */ {
 // Add existing to per-CPU histograms.
     for_each_possible_cpu(cpu) {
+    }
     bp_slots_histogram_add(&get_bp_info(cpu, type).tsk_pinned,
     0, next_tsk_pinned);
     }
@@ -480,11 +728,12 @@ unsafe extern "C" fn task_bp_pinned(cpu: c_int, bp: *mut perf_event, type: enum 
     bp_slots_histogram_add(&tsk_pinned_all[type], 0, next_tsk_pinned);
     }
     } else { /* Case 3: slow path */
-    const struct cpumask *cpumask = cpumask_of_bp(bp);
+    let mut cpumask = cpumask_of_bp(bp);
     for_each_cpu(cpu, cpumask) {
     next_tsk_pinned = task_bp_pinned(cpu, bp, type);
-    if (!enable)
+    if (!enable) {
     next_tsk_pinned += hw_breakpoint_weight(bp);
+    }
     bp_slots_histogram_add(&get_bp_info(cpu, type).tsk_pinned,
     next_tsk_pinned, weight);
     }
@@ -493,8 +742,9 @@ unsafe extern "C" fn task_bp_pinned(cpu: c_int, bp: *mut perf_event, type: enum 
 // Readers want a stable snapshot of the per-task breakpoint list.
 //
     assert_bp_constraints_lock_held(bp);
-    if (enable)
+    if (enable) {
     return rhltable_insert(&task_bps_ht, &bp.hw.bp_list, task_bps_ht_params);
+    }
     return 0;
     }
 //
@@ -544,58 +794,51 @@ unsafe extern "C" fn task_bp_pinned(cpu: c_int, bp: *mut perf_event, type: enum 
 //
 #[no_mangle]
 unsafe extern "C" fn __reserve_bp_slot(bp: *mut perf_event, bp_type: u64) -> c_int {
-    static int __reserve_bp_slot(struct perf_event *bp, u64 bp_type)
-    {
     enum bp_type_idx type;
-    int max_pinned_slots;
-    int weight;
+    let mut max_pinned_slots = 0;
+    let mut weight = 0;
 // We couldn't initialize breakpoint constraints on boot
-    if (!constraints_initialized)
+    if (!constraints_initialized) {
     return -ENOMEM;
+    }
 // Basic checks
     if (bp_type == HW_BREAKPOINT_EMPTY ||
-    bp_type == HW_BREAKPOINT_INVALID)
+    bp_type == HW_BREAKPOINT_INVALID) {
     return -EINVAL;
+    }
     type = find_slot_idx(bp_type);
     weight = hw_breakpoint_weight(bp);
 // Check if this new breakpoint can be satisfied across all CPUs.
     max_pinned_slots = max_bp_pinned_slots(bp, type) + weight;
-    if (max_pinned_slots > hw_breakpoint_slots_cached(type))
+    if (max_pinned_slots > hw_breakpoint_slots_cached(type)) {
     return -ENOSPC;
+    }
     return toggle_bp_slot(bp, true, type, weight);
     }
 #[no_mangle]
 pub unsafe extern "C" fn reserve_bp_slot(bp: *mut perf_event) -> c_int {
-    int reserve_bp_slot(struct perf_event *bp)
-    {
-    struct mutex *mtx = bp_constraints_lock(bp);
-    let mut ret: c_int = __reserve_bp_slot(bp, bp.attr.bp_type);
+    let mut mtx = bp_constraints_lock(bp);
+pub static mut ret: c_int = 0;
     bp_constraints_unlock(mtx);
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn __release_bp_slot(bp: *mut perf_event, bp_type: u64) {
-    static void __release_bp_slot(struct perf_event *bp, u64 bp_type)
-    {
     enum bp_type_idx type;
-    int weight;
+    let mut weight = 0;
     type = find_slot_idx(bp_type);
     weight = hw_breakpoint_weight(bp);
-    WARN_ON(toggle_bp_slot(bp, false, type, weight));
+    WARN_ON!(toggle_bp_slot(bp, false, type, weight));
     }
 #[no_mangle]
 pub unsafe extern "C" fn release_bp_slot(bp: *mut perf_event) {
-    void release_bp_slot(struct perf_event *bp)
-    {
-    struct mutex *mtx = bp_constraints_lock(bp);
+    let mut mtx = bp_constraints_lock(bp);
     __release_bp_slot(bp, bp.attr.bp_type);
     bp_constraints_unlock(mtx);
     }
 #[no_mangle]
 unsafe extern "C" fn __modify_bp_slot(bp: *mut perf_event, old_type: u64, new_type: u64) -> c_int {
-    static int __modify_bp_slot(struct perf_event *bp, u64 old_type, u64 new_type)
-    {
-    int err;
+    let mut err = 0;
     __release_bp_slot(bp, old_type);
     err = __reserve_bp_slot(bp, new_type);
     if (err) {
@@ -607,16 +850,14 @@ unsafe extern "C" fn __modify_bp_slot(bp: *mut perf_event, old_type: u64, new_ty
 // the old_type slot in the __release_bp_slot
 // call above. If not, something is broken.
 //
-    WARN_ON(__reserve_bp_slot(bp, old_type));
+    WARN_ON!(__reserve_bp_slot(bp, old_type));
     }
     return err;
     }
 #[no_mangle]
 unsafe extern "C" fn modify_bp_slot(bp: *mut perf_event, old_type: u64, new_type: u64) -> c_int {
-    static int modify_bp_slot(struct perf_event *bp, u64 old_type, u64 new_type)
-    {
-    struct mutex *mtx = bp_constraints_lock(bp);
-    let mut ret: c_int = __modify_bp_slot(bp, old_type, new_type);
+    let mut mtx = bp_constraints_lock(bp);
+pub static mut ret: c_int = 0;
     bp_constraints_unlock(mtx);
     return ret;
     }
@@ -627,11 +868,10 @@ unsafe extern "C" fn modify_bp_slot(bp: *mut perf_event, old_type: u64, new_type
 //
 #[no_mangle]
 pub unsafe extern "C" fn dbg_reserve_bp_slot(bp: *mut perf_event) -> c_int {
-    int dbg_reserve_bp_slot(struct perf_event *bp)
-    {
-    int ret;
-    if (bp_constraints_is_locked(bp))
+    let mut ret = 0;
+    if (bp_constraints_is_locked(bp)) {
     return -1;
+    }
 // Locks aren't held; disable lockdep assert checking.
     lockdep_off();
     ret = __reserve_bp_slot(bp, bp.attr.bp_type);
@@ -640,45 +880,44 @@ pub unsafe extern "C" fn dbg_reserve_bp_slot(bp: *mut perf_event) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn dbg_release_bp_slot(bp: *mut perf_event) -> c_int {
-    int dbg_release_bp_slot(struct perf_event *bp)
-    {
-    if (bp_constraints_is_locked(bp))
+    if (bp_constraints_is_locked(bp)) {
     return -1;
+    }
 // Locks aren't held; disable lockdep assert checking.
     lockdep_off();
     __release_bp_slot(bp, bp.attr.bp_type);
     lockdep_on();
     return 0;
     }
-    static int hw_breakpoint_parse(struct perf_event *bp,
-    const struct perf_event_attr *attr,
-    struct arch_hw_breakpoint *hw)
-    {
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn hw_breakpoint_parse(bp: *mut perf_event, attr: *mut perf_event_attr, hw: *mut arch_hw_breakpoint) -> c_int {
+    let mut err = 0;
     err = hw_breakpoint_arch_parse(bp, attr, hw);
-    if (err)
+    if (err) {
     return err;
+    }
     if (arch_check_bp_in_kernelspace(hw)) {
-    if (attr.exclude_kernel)
+    if (attr.exclude_kernel) {
     return -EINVAL;
+    }
 //
 // Don't let unprivileged users set a breakpoint in the trap
 // path to avoid trap recursion attacks.
 //
-    if (!capable(CAP_SYS_ADMIN))
+    if (!capable(CAP_SYS_ADMIN)) {
     return -EPERM;
+    }
     }
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn register_perf_hw_breakpoint(bp: *mut perf_event) -> c_int {
-    int register_perf_hw_breakpoint(struct perf_event *bp)
-    {
-    let mut hw: arch_hw_breakpoint = { };
-    int err;
+pub static mut hw: arch_hw_breakpoint = 0;
+    let mut err = 0;
     err = reserve_bp_slot(bp);
-    if (err)
+    if (err) {
     return err;
+    }
     err = hw_breakpoint_parse(bp, &bp.attr, &hw);
     if (err) {
     release_bp_slot(bp);
@@ -694,44 +933,40 @@ pub unsafe extern "C" fn register_perf_hw_breakpoint(bp: *mut perf_event) -> c_i
 // @context: context data could be used in the triggered callback
 // @tsk: pointer to 'task_struct' of the process to which the address belongs
 //
-    struct perf_event *
-    register_user_hw_breakpoint(struct perf_event_attr *attr,
-    perf_overflow_handler_t triggered,
-    void *context,
-    struct task_struct *tsk)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn register_user_hw_breakpoint(attr: *mut perf_event_attr, triggered: perf_overflow_handler_t, context: *mut c_void, tsk: *mut task_struct) -> *mut c_void {
     return perf_event_create_kernel_counter(attr, -1, tsk, triggered,
     context);
     }
     EXPORT_SYMBOL_GPL(register_user_hw_breakpoint);
-    static void hw_breakpoint_copy_attr(struct perf_event_attr *to,
-    struct perf_event_attr *from)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hw_breakpoint_copy_attr(to: *mut perf_event_attr, from: *mut perf_event_attr) {
     to.bp_addr = from.bp_addr;
     to.bp_type = from.bp_type;
     to.bp_len  = from.bp_len;
     to.disabled = from.disabled;
     }
-    int
-    modify_user_hw_breakpoint_check(struct perf_event *bp, struct perf_event_attr *attr,
-    bool check)
-    {
-    let mut hw: arch_hw_breakpoint = { };
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn modify_user_hw_breakpoint_check(bp: *mut perf_event, attr: *mut perf_event_attr, check: bool) -> c_int {
+pub static mut hw: arch_hw_breakpoint = 0;
+    let mut err = 0;
     err = hw_breakpoint_parse(bp, attr, &hw);
-    if (err)
+    if (err) {
     return err;
+    }
     if (check) {
-    struct perf_event_attr old_attr;
+pub static mut old_attr: usize = 0;
     old_attr = bp.attr;
     hw_breakpoint_copy_attr(&old_attr, attr);
-    if (memcmp(&old_attr, attr, sizeof(*attr)))
+    if (memcmp(&old_attr, attr, sizeof!(*attr))) {
     return -EINVAL;
+    }
     }
     if (bp.attr.bp_type != attr.bp_type) {
     err = modify_bp_slot(bp, bp.attr.bp_type, attr.bp_type);
-    if (err)
+    if (err) {
     return err;
+    }
     }
     hw_breakpoint_copy_attr(&bp.attr, attr);
     bp.hw.info = hw;
@@ -744,22 +979,23 @@ pub unsafe extern "C" fn register_perf_hw_breakpoint(bp: *mut perf_event) -> c_i
 //
 #[no_mangle]
 pub unsafe extern "C" fn modify_user_hw_breakpoint(bp: *mut perf_event, attr: *mut perf_event_attr) -> c_int {
-    int modify_user_hw_breakpoint(struct perf_event *bp, struct perf_event_attr *attr)
-    {
-    int err;
+    let mut err = 0;
 //
 // modify_user_hw_breakpoint can be invoked with IRQs disabled and hence it
 // will not be possible to raise IPIs that invoke __perf_event_disable.
 // So call the function directly after making sure we are targeting the
 // current task.
 //
-    if (irqs_disabled() && bp.ctx && bp.ctx.task == current)
+    if (irqs_disabled() && bp.ctx && bp.ctx.task == current) {
     perf_event_disable_local(bp);
-    else
+    }
+    else {
     perf_event_disable(bp);
+    }
     err = modify_user_hw_breakpoint_check(bp, attr, false);
-    if (!bp.attr.disabled)
+    if (!bp.attr.disabled) {
     perf_event_enable(bp);
+    }
     return err;
     }
     EXPORT_SYMBOL_GPL(modify_user_hw_breakpoint);
@@ -769,10 +1005,9 @@ pub unsafe extern "C" fn modify_user_hw_breakpoint(bp: *mut perf_event, attr: *m
 //
 #[no_mangle]
 pub unsafe extern "C" fn unregister_hw_breakpoint(bp: *mut perf_event) {
-    void unregister_hw_breakpoint(struct perf_event *bp)
-    {
-    if (!bp)
+    if (!bp) {
     return;
+    }
     perf_event_release_kernel(bp);
     }
     EXPORT_SYMBOL_GPL(unregister_hw_breakpoint);
@@ -784,17 +1019,18 @@ pub unsafe extern "C" fn unregister_hw_breakpoint(bp: *mut perf_event) {
 //
 // @return a set of per_cpu pointers to perf events
 //
-    struct perf_event * __percpu *
-    register_wide_hw_breakpoint(struct perf_event_attr *attr,
+    struct perf_event *  *
+    register_wide_hw_breakpoint(perf_event_attr *attr,
     perf_overflow_handler_t triggered,
     void *context)
     {
-    struct perf_event * __percpu *cpu_events, *bp;
-    let mut err: c_long = 0;
-    int cpu;
+    struct perf_event *  *cpu_events, *bp;
+pub static mut err: c_long = 0;
+    let mut cpu = 0;
     cpu_events = alloc_percpu(typeof(*cpu_events));
-    if (!cpu_events)
+    if (!cpu_events) {
     return ERR_PTR_PCPU(-ENOMEM);
+    }
     cpus_read_lock();
     for_each_online_cpu(cpu) {
     bp = perf_event_create_kernel_counter(attr, cpu, core::ptr::null_mut(),
@@ -806,8 +1042,9 @@ pub unsafe extern "C" fn unregister_hw_breakpoint(bp: *mut perf_event) {
     per_cpu(*cpu_events, cpu) = bp;
     }
     cpus_read_unlock();
-    if (likely(!err))
+    if (likely(!err)) {
     return cpu_events;
+    }
     unregister_wide_hw_breakpoint(cpu_events);
     return ERR_PTR_PCPU(err);
     }
@@ -817,12 +1054,11 @@ pub unsafe extern "C" fn unregister_hw_breakpoint(bp: *mut perf_event) {
 // @cpu_events: the per cpu set of events to unregister
 //
 #[no_mangle]
-pub unsafe extern "C" fn unregister_wide_hw_breakpoint(cpu_events: *mut *mut perf_event  __percpu) {
-    void unregister_wide_hw_breakpoint(struct perf_event * __percpu *cpu_events)
-    {
-    int cpu;
-    for_each_possible_cpu(cpu)
+pub unsafe extern "C" fn unregister_wide_hw_breakpoint(cpu_events: *mut *mut perf_event  ) {
+    let mut cpu = 0;
+    for_each_possible_cpu(cpu) {
     unregister_hw_breakpoint(per_cpu(*cpu_events, cpu));
+    }
     free_percpu(cpu_events);
     }
     EXPORT_SYMBOL_GPL(unregister_wide_hw_breakpoint);
@@ -833,73 +1069,70 @@ pub unsafe extern "C" fn unregister_wide_hw_breakpoint(cpu_events: *mut *mut per
 //
 #[no_mangle]
 pub unsafe extern "C" fn hw_breakpoint_is_used() -> bool {
-    bool hw_breakpoint_is_used(void)
-    {
-    int cpu;
-    if (!constraints_initialized)
+    let mut cpu = 0;
+    if (!constraints_initialized) {
     return false;
+    }
     for_each_possible_cpu(cpu) {
-    for (int type = 0; type < TYPE_MAX; ++type) {
-    struct bp_cpuinfo *info = get_bp_info(cpu, type);
-    if (info.cpu_pinned)
-    return true;
-    for (int slot = 0; slot < hw_breakpoint_slots_cached(type); ++slot) {
-    if (atomic_read(&info.tsk_pinned.count[slot]))
+    while (type < TYPE_MAX) {
+    let mut info = get_bp_info(cpu, type);
+    if (info.cpu_pinned) {
     return true;
     }
+    while (slot < hw_breakpoint_slots_cached(type)) {
+    if (atomic_read(&info.tsk_pinned.count[slot])) {
+    return true;
     }
     }
-    for (int type = 0; type < TYPE_MAX; ++type) {
-    for (int slot = 0; slot < hw_breakpoint_slots_cached(type); ++slot) {
+    }
+    }
+    while (type < TYPE_MAX) {
+    while (slot < hw_breakpoint_slots_cached(type)) {
 //
 // Warn, because if there are CPU pinned counters,
 // should never get here; bp_cpuinfo::cpu_pinned should
 // be consistent with the global cpu_pinned histogram.
 //
-    if (WARN_ON(atomic_read(&cpu_pinned[type].count[slot])))
+    if (WARN_ON!(atomic_read(&cpu_pinned[type].count[slot]))) {
     return true;
-    if (atomic_read(&tsk_pinned_all[type].count[slot]))
+    }
+    if (atomic_read(&tsk_pinned_all[type].count[slot])) {
     return true;
+    }
     }
     }
     return false;
     }
-    static struct notifier_block hw_breakpoint_exceptions_nb = {
-    .notifier_call = hw_breakpoint_exceptions_notify,
-// we need to be notified first
-    .priority = 0x7fffffff
-    };
+pub static mut notifier_block: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn bp_perf_event_destroy(event: *mut perf_event) {
-    static void bp_perf_event_destroy(struct perf_event *event)
-    {
     release_bp_slot(event);
     }
 #[no_mangle]
 unsafe extern "C" fn hw_breakpoint_event_init(bp: *mut perf_event) -> c_int {
-    static int hw_breakpoint_event_init(struct perf_event *bp)
-    {
-    int err;
-    if (bp.attr.type != PERF_TYPE_BREAKPOINT)
+    let mut err = 0;
+    if (bp.attr.type != PERF_TYPE_BREAKPOINT) {
     return -ENOENT;
+    }
 //
 // Check if breakpoint type is supported before proceeding.
 // Also, no branch sampling for breakpoint events.
 //
-    if (!hw_breakpoint_slots_cached(find_slot_idx(bp.attr.bp_type)) || has_branch_stack(bp))
+    if (!hw_breakpoint_slots_cached(find_slot_idx(bp.attr.bp_type)) || has_branch_stack(bp)) {
     return -EOPNOTSUPP;
+    }
     err = register_perf_hw_breakpoint(bp);
-    if (err)
+    if (err) {
     return err;
+    }
     bp.destroy = bp_perf_event_destroy;
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn hw_breakpoint_add(bp: *mut perf_event, flags: c_int) -> c_int {
-    static int hw_breakpoint_add(struct perf_event *bp, int flags)
-    {
-    if (!(flags & PERF_EF_START))
+    if (!(flags & PERF_EF_START)) {
     bp.hw.state = PERF_HES_STOPPED;
+    }
     if (is_sampling_event(bp)) {
     bp.hw.last_period = bp.hw.sample_period;
     perf_swevent_set_period(bp);
@@ -908,42 +1141,28 @@ unsafe extern "C" fn hw_breakpoint_add(bp: *mut perf_event, flags: c_int) -> c_i
     }
 #[no_mangle]
 unsafe extern "C" fn hw_breakpoint_del(bp: *mut perf_event, flags: c_int) {
-    static void hw_breakpoint_del(struct perf_event *bp, int flags)
-    {
     arch_uninstall_hw_breakpoint(bp);
     }
 #[no_mangle]
 unsafe extern "C" fn hw_breakpoint_start(bp: *mut perf_event, flags: c_int) {
-    static void hw_breakpoint_start(struct perf_event *bp, int flags)
-    {
     bp.hw.state = 0;
     }
 #[no_mangle]
 unsafe extern "C" fn hw_breakpoint_stop(bp: *mut perf_event, flags: c_int) {
-    static void hw_breakpoint_stop(struct perf_event *bp, int flags)
-    {
     bp.hw.state = PERF_HES_STOPPED;
     }
-    static struct pmu perf_breakpoint = {
-    .task_ctx_nr	= perf_sw_context, /* could eventually get its own */
-    .event_init	= hw_breakpoint_event_init,
-    .add		= hw_breakpoint_add,
-    .del		= hw_breakpoint_del,
-    .start		= hw_breakpoint_start,
-    .stop		= hw_breakpoint_stop,
-    .read		= hw_breakpoint_pmu_read,
-    };
+pub static mut pmu: usize = 0;
 #[no_mangle]
-pub unsafe extern "C" fn init_hw_breakpoint() -> int __init {
-    int __init init_hw_breakpoint(void)
-    {
-    int ret;
+pub unsafe extern "C" fn init_hw_breakpoint() -> c_int {
+    let mut ret = 0;
     ret = rhltable_init(&task_bps_ht, &task_bps_ht_params);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     ret = init_breakpoint_slots();
-    if (ret)
+    if (ret) {
     return ret;
+    }
     constraints_initialized = true;
     perf_pmu_register(&perf_breakpoint, "breakpoint", PERF_TYPE_BREAKPOINT);
     return register_die_notifier(&hw_breakpoint_exceptions_nb);

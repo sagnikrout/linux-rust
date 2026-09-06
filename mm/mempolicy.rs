@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -116,18 +366,15 @@ pub unsafe extern "C" fn memory(policy: currently ignored for the) -> handle mre
 
 // Internal flags
 
-    static struct kmem_cache *policy_cache;
-    static struct kmem_cache *sn_cache;
+pub static mut policy_cache: *mut c_void = core::ptr::null_mut();
+pub static mut sn_cache: *mut c_void = core::ptr::null_mut();
 // Highest zone. An specific allocation for a zone below that is not
     policied. */
-    let mut policy_zone: enum zone_type = 0;
+pub static mut policy_zone: zone_type = 0;
 //
 // run-time system-wide default policy => local allocation
 //
-    static struct mempolicy default_policy = {
-    .refcnt = ATOMIC_INIT(1), /* never free it */
-    .mode = MPOL_LOCAL,
-    };
+pub static mut mempolicy: usize = 0;
     static struct mempolicy preferred_node_policy[MAX_NUMNODES];
 //
 // weightiness balances the tradeoff between small weights (cycles through nodes
@@ -135,7 +382,7 @@ pub unsafe extern "C" fn memory(policy: currently ignored for the) -> handle mre
 // between actual bandwidth ratios and weight ratios). 32 is a number that has
 // been found to perform at a reasonable compromise between the two goals.
 //
-    let mut weightiness: static int = 32;
+pub static mut weightiness: int = 32;
 //
 // A null weighted_interleave_state is interpreted as having .mode="auto",
 // and .iw_table is interpreted as an array of 1s with length nr_node_ids.
@@ -144,26 +391,25 @@ pub unsafe extern "C" fn memory(policy: currently ignored for the) -> handle mre
 #[derive(Copy, Clone)]
 pub struct weighted_interleave_state {
     pub mode_auto: bool,
-    pub iw_table: [u8; ],
+    pub iw_table: [u8; 0],
 }
 
-    static struct weighted_interleave_state __rcu *wi_state;
-    static unsigned int *node_bw_table;
+    static struct weighted_interleave_state  *wi_state;
+pub static mut node_bw_table: *mut c_void = core::ptr::null_mut();
 //
 // wi_state_lock protects both wi_state and node_bw_table.
 // node_bw_table is only used by writers to update wi_state.
 //
-    static DEFINE_MUTEX(wi_state_lock);
+pub static mut wi_state_lock: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn get_il_weight(node: c_int) -> u8 {
-    static u8 get_il_weight(int node)
-    {
-    struct weighted_interleave_state *state;
-    let mut weight: u8 = 1;
+pub static mut state: *mut c_void = core::ptr::null_mut();
+pub static mut weight: u8 = 1;
     rcu_read_lock();
     state = rcu_dereference(wi_state);
-    if (state)
+    if (state) {
     weight = state.iw_table[node];
+    }
     rcu_read_unlock();
     return weight;
     }
@@ -173,13 +419,12 @@ unsafe extern "C" fn get_il_weight(node: c_int) -> u8 {
 //
 #[no_mangle]
 unsafe extern "C" fn reduce_interleave_weights(bw: *mut c_uint, new_iw: *mut u8) {
-    static void reduce_interleave_weights(unsigned int *bw, u8 *new_iw)
-    {
-    let mut sum_bw: u64 = 0;
+pub static mut sum_bw: u64 = 0;
     unsigned int cast_sum_bw, scaling_factor = 1, iw_gcd = 0;
-    int nid;
-    for_each_node_state(nid, N_MEMORY)
+    let mut nid = 0;
+    for_each_node_state(nid, N_MEMORY) {
     sum_bw += bw[nid];
+    }
 // Scale bandwidths to whole numbers in the range [1, weightiness]
     for_each_node_state(nid, N_MEMORY) {
 //
@@ -194,34 +439,36 @@ unsafe extern "C" fn reduce_interleave_weights(bw: *mut c_uint, new_iw: *mut u8)
     } else {
     new_iw[nid] = 1;
     }
-    if (!iw_gcd)
+    if (!iw_gcd) {
     iw_gcd = new_iw[nid];
+    }
     iw_gcd = gcd(iw_gcd, new_iw[nid]);
     }
 // 1:2 is strictly better than 16:32. Reduce by the weights' GCD.
-    for_each_node_state(nid, N_MEMORY)
+    for_each_node_state(nid, N_MEMORY) {
     new_iw[nid] /= iw_gcd;
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn mempolicy_set_node_perf(node: c_uint, coords: *mut access_coordinate) -> c_int {
-    int mempolicy_set_node_perf(unsigned int node, struct access_coordinate *coords)
-    {
     struct weighted_interleave_state *new_wi_state, *old_wi_state = core::ptr::null_mut();
     unsigned int *old_bw, *new_bw;
-    unsigned int bw_val;
-    int i;
+    let mut bw_val = 0;
+    let mut i = 0;
     bw_val = min(coords.read_bandwidth, coords.write_bandwidth);
-    new_bw = kcalloc(nr_node_ids, sizeof(unsigned int), GFP_KERNEL);
-    if (!new_bw)
+    new_bw = kcalloc(nr_node_ids, sizeof!(unsigned int), GFP_KERNEL);
+    if (!new_bw) {
     return -ENOMEM;
+    }
     new_wi_state = kmalloc_flex(*new_wi_state, iw_table, nr_node_ids);
     if (!new_wi_state) {
     kfree(new_bw);
     return -ENOMEM;
     }
     new_wi_state.mode_auto = true;
-    for (i = 0; i < nr_node_ids; i++)
+    for (i = 0; i < nr_node_ids; i++) {
     new_wi_state.iw_table[i] = 1;
+    }
 //
 // Update bandwidth info, even in manual mode. That way, when switching
 // to auto mode in the future, iw_table can be overwritten using
@@ -229,8 +476,9 @@ pub unsafe extern "C" fn mempolicy_set_node_perf(node: c_uint, coords: *mut acce
 //
     mutex_lock(&wi_state_lock);
     old_bw = node_bw_table;
-    if (old_bw)
-    memcpy(new_bw, old_bw, nr_node_ids * sizeof(*old_bw));
+    if (old_bw) {
+    memcpy(new_bw, old_bw, nr_node_ids * sizeof!(*old_bw));
+    }
     new_bw[node] = bw_val;
     node_bw_table = new_bw;
     old_wi_state = rcu_dereference_protected(wi_state,
@@ -239,7 +487,7 @@ pub unsafe extern "C" fn mempolicy_set_node_perf(node: c_uint, coords: *mut acce
 // Manual mode; skip reducing weights and updating wi_state
     mutex_unlock(&wi_state_lock);
     kfree(new_wi_state);
-    goto out;
+// goto;
     }
 // NULL wi_state assumes auto=true; reduce weights and update wi_state
     reduce_interleave_weights(new_bw, new_wi_state.iw_table);
@@ -249,7 +497,7 @@ pub unsafe extern "C" fn mempolicy_set_node_perf(node: c_uint, coords: *mut acce
     synchronize_rcu();
     kfree(old_wi_state);
     }
-    out:
+// label;
     kfree(old_bw);
     return 0;
     }
@@ -264,13 +512,13 @@ pub unsafe extern "C" fn mempolicy_set_node_perf(node: c_uint, coords: *mut acce
 //
 #[no_mangle]
 pub unsafe extern "C" fn numa_nearest_node(node: c_int, state: c_uint) -> c_int {
-    int numa_nearest_node(int node, unsigned int state)
-    {
-    let mut min_dist: c_int = INT_MAX, dist, n, min_node;
-    if (state >= NR_NODE_STATES)
+pub static mut min_dist: c_int = 0;
+    if (state >= NR_NODE_STATES) {
     return -EINVAL;
-    if (node == NUMA_NO_NODE || node_state(node, state))
+    }
+    if (node == NUMA_NO_NODE || node_state(node, state)) {
     return node;
+    }
     min_node = node;
     for_each_node_state(n, state) {
     dist = node_distance(node, n);
@@ -299,8 +547,6 @@ pub unsafe extern "C" fn numa_nearest_node(node: c_int, state: c_uint) -> c_int 
 //
 #[no_mangle]
 pub unsafe extern "C" fn nearest_node_nodemask(node: c_int, mask: *mut nodemask_t) -> c_int {
-    int nearest_node_nodemask(int node, nodemask_t *mask)
-    {
     int dist, n, min_dist = INT_MAX, min_node = MAX_NUMNODES;
     for_each_node_mask(n, *mask) {
     dist = node_distance(node, n);
@@ -312,54 +558,51 @@ pub unsafe extern "C" fn nearest_node_nodemask(node: c_int, mask: *mut nodemask_
     return min_node;
     }
     EXPORT_SYMBOL_GPL(nearest_node_nodemask);
-    struct mempolicy *get_task_policy(struct task_struct *p)
-    {
-    struct mempolicy *pol = p.mempolicy;
-    int node;
-    if (pol)
+#[no_mangle]
+pub unsafe extern "C" fn get_task_policy(p: *mut task_struct) -> *mut c_void {
+    let mut pol = p.mempolicy;
+    let mut node = 0;
+    if (pol) {
     return pol;
+    }
     node = numa_node_id();
     if (node != NUMA_NO_NODE) {
     pol = &preferred_node_policy[node];
 // preferred_node_policy is not initialised early in boot
-    if (pol.mode)
+    if (pol.mode) {
     return pol;
+    }
     }
     return &default_policy;
     }
     EXPORT_SYMBOL_FOR_MODULES(get_task_policy, "kvm");
     static const struct mempolicy_operations {
-    int (*create)(struct mempolicy *pol, const nodemask_t *nodes);
-    void (*rebind)(struct mempolicy *pol, const nodemask_t *nodes);
+    int (*create)(mempolicy *pol, const nodemask_t *nodes);
+    void (*rebind)(mempolicy *pol, const nodemask_t *nodes);
     } mpol_ops[MPOL_MAX];
 #[no_mangle]
 pub unsafe extern "C" fn mpol_store_user_nodemask(pol: *const mempolicy) -> c_int {
-    static inline int mpol_store_user_nodemask(const struct mempolicy *pol)
-    {
     return pol.flags & MPOL_USER_NODEMASK_FLAGS;
     }
-    static void mpol_relative_nodemask(nodemask_t *ret, const nodemask_t *orig,
-    const nodemask_t *rel)
-    {
-    nodemask_t tmp;
+#[no_mangle]
+pub unsafe extern "C" fn mpol_relative_nodemask(ret: *mut nodemask_t, orig: *mut nodemask_t, rel: *mut nodemask_t) {
+    let mut tmp;
     nodes_fold(tmp, *orig, nodes_weight(*rel));
     nodes_onto(*ret, tmp, *rel);
     }
 #[no_mangle]
 unsafe extern "C" fn mpol_new_nodemask(pol: *mut mempolicy, nodes: *const nodemask_t) -> c_int {
-    static int mpol_new_nodemask(struct mempolicy *pol, const nodemask_t *nodes)
-    {
-    if (nodes_empty(*nodes))
+    if (nodes_empty(*nodes)) {
     return -EINVAL;
+    }
     pol.nodes = *nodes;
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn mpol_new_preferred(pol: *mut mempolicy, nodes: *const nodemask_t) -> c_int {
-    static int mpol_new_preferred(struct mempolicy *pol, const nodemask_t *nodes)
-    {
-    if (nodes_empty(*nodes))
+    if (nodes_empty(*nodes)) {
     return -EINVAL;
+    }
     nodes_clear(pol.nodes);
     node_set(first_node(*nodes), pol.nodes);
     return 0;
@@ -372,29 +615,33 @@ unsafe extern "C" fn mpol_new_preferred(pol: *mut mempolicy, nodes: *const nodem
 // Must be called holding task's alloc_lock to protect task's mems_allowed
 // and mempolicy.  May also be called holding the mmap_lock for write.
 //
-    static int mpol_set_nodemask(struct mempolicy *pol,
-    const nodemask_t *nodes, struct nodemask_scratch *nsc)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn mpol_set_nodemask(pol: *mut mempolicy, nodes: *mut nodemask_t, nsc: *mut nodemask_scratch) -> c_int {
+    let mut ret = 0;
 //
 // Default (pol==NULL) resp. local memory policies are not a
 // subject of any remapping. They also do not need any special
 // constructor.
 //
-    if (!pol || pol.mode == MPOL_LOCAL)
+    if (!pol || pol.mode == MPOL_LOCAL) {
     return 0;
+    }
 // Check N_MEMORY
     nodes_and(nsc.mask1,
     cpuset_current_mems_allowed, node_states[N_MEMORY]);
     VM_BUG_ON(!nodes);
-    if (pol.flags & MPOL_F_RELATIVE_NODES)
+    if (pol.flags & MPOL_F_RELATIVE_NODES) {
     mpol_relative_nodemask(&nsc.mask2, nodes, &nsc.mask1);
-    else
+    }
+    else {
     nodes_and(nsc.mask2, *nodes, nsc.mask1);
-    if (mpol_store_user_nodemask(pol))
+    }
+    if (mpol_store_user_nodemask(pol)) {
     pol.w.user_nodemask = *nodes;
-    else
+    }
+    else {
     pol.w.cpuset_mems_allowed = cpuset_current_mems_allowed;
+    }
     ret = mpol_ops[pol.mode].create(pol, &nsc.mask2);
     return ret;
     }
@@ -402,13 +649,13 @@ unsafe extern "C" fn mpol_new_preferred(pol: *mut mempolicy, nodes: *const nodem
 // This function just creates a new policy, does some check and simple
 // initialization. You must invoke mpol_set_nodemask() to set nodes.
 //
-    static struct mempolicy *mpol_new(unsigned short mode, unsigned short flags,
-    nodemask_t *nodes)
-    {
-    struct mempolicy *policy;
+#[no_mangle]
+pub unsafe extern "C" fn mpol_new(mode: c_ushort, flags: c_ushort, nodes: *mut nodemask_t) -> *mut c_void {
+pub static mut policy: *mut c_void = core::ptr::null_mut();
     if (mode == MPOL_DEFAULT) {
-    if (nodes && !nodes_empty(*nodes))
+    if (nodes && !nodes_empty(*nodes)) {
     return ERR_PTR(-EINVAL);
+    }
     return core::ptr::null_mut();
     }
     VM_BUG_ON(!nodes);
@@ -420,20 +667,24 @@ unsafe extern "C" fn mpol_new_preferred(pol: *mut mempolicy, nodes: *const nodem
     if (mode == MPOL_PREFERRED) {
     if (nodes_empty(*nodes)) {
     if (((flags & MPOL_F_STATIC_NODES) ||
-    (flags & MPOL_F_RELATIVE_NODES)))
+    (flags & MPOL_F_RELATIVE_NODES))) {
     return ERR_PTR(-EINVAL);
+    }
     mode = MPOL_LOCAL;
     }
     } else if (mode == MPOL_LOCAL) {
     if (!nodes_empty(*nodes) ||
     (flags & MPOL_F_STATIC_NODES) ||
-    (flags & MPOL_F_RELATIVE_NODES))
+    (flags & MPOL_F_RELATIVE_NODES)) {
     return ERR_PTR(-EINVAL);
-    } else if (nodes_empty(*nodes))
+    }
+    } else if (nodes_empty(*nodes)) {
     return ERR_PTR(-EINVAL);
+    }
     policy = kmem_cache_alloc(policy_cache, GFP_KERNEL);
-    if (!policy)
+    if (!policy) {
     return ERR_PTR(-ENOMEM);
+    }
     atomic_set(&policy.refcnt, 1);
     policy.mode = mode;
     policy.flags = flags;
@@ -443,10 +694,9 @@ unsafe extern "C" fn mpol_new_preferred(pol: *mut mempolicy, nodes: *const nodem
 // Slow path of a mpol destructor.
 #[no_mangle]
 pub unsafe extern "C" fn __mpol_put(pol: *mut mempolicy) {
-    void __mpol_put(struct mempolicy *pol)
-    {
-    if (!atomic_dec_and_test(&pol.refcnt))
+    if (!atomic_dec_and_test(&pol.refcnt)) {
     return;
+    }
 //
 // Required to allow mmap_lock_speculative*() access, see for example
 // futex_key_to_node_opt(). All accesses are serialized by mmap_lock,
@@ -458,32 +708,29 @@ pub unsafe extern "C" fn __mpol_put(pol: *mut mempolicy) {
     EXPORT_SYMBOL_FOR_MODULES(__mpol_put, "kvm");
 #[no_mangle]
 unsafe extern "C" fn mpol_rebind_default(pol: *mut mempolicy, nodes: *const nodemask_t) {
-    static void mpol_rebind_default(struct mempolicy *pol, const nodemask_t *nodes)
-    {
     }
 #[no_mangle]
 unsafe extern "C" fn mpol_rebind_nodemask(pol: *mut mempolicy, nodes: *const nodemask_t) {
-    static void mpol_rebind_nodemask(struct mempolicy *pol, const nodemask_t *nodes)
-    {
-    nodemask_t tmp;
-    if (pol.flags & MPOL_F_STATIC_NODES)
+    let mut tmp;
+    if (pol.flags & MPOL_F_STATIC_NODES) {
     nodes_and(tmp, pol.w.user_nodemask, *nodes);
-#[no_mangle]
-pub unsafe extern "C" fn if(MPOL_F_RELATIVE_NODES: pol->flags &) -> else {
-    else if (pol.flags & MPOL_F_RELATIVE_NODES)
+    }
+
+    else if (pol.flags & MPOL_F_RELATIVE_NODES) {
     mpol_relative_nodemask(&tmp, &pol.w.user_nodemask, nodes);
+    }
     else {
     nodes_remap(tmp, pol.nodes, pol.w.cpuset_mems_allowed,
 // nodes);
     pol.w.cpuset_mems_allowed = *nodes;
     }
-    if (nodes_empty(tmp))
+    if (nodes_empty(tmp)) {
     tmp = *nodes;
+    }
     pol.nodes = tmp;
     }
-    static void mpol_rebind_preferred(struct mempolicy *pol,
-    const nodemask_t *nodes)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn mpol_rebind_preferred(pol: *mut mempolicy, nodes: *mut nodemask_t) {
     pol.w.cpuset_mems_allowed = *nodes;
     }
 //
@@ -495,13 +742,13 @@ pub unsafe extern "C" fn if(MPOL_F_RELATIVE_NODES: pol->flags &) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn mpol_rebind_policy(pol: *mut mempolicy, newmask: *const nodemask_t) {
-    static void mpol_rebind_policy(struct mempolicy *pol, const nodemask_t *newmask)
-    {
-    if (!pol || pol.mode == MPOL_LOCAL)
+    if (!pol || pol.mode == MPOL_LOCAL) {
     return;
+    }
     if (!mpol_store_user_nodemask(pol) &&
-    nodes_equal(pol.w.cpuset_mems_allowed, *newmask))
+    nodes_equal(pol.w.cpuset_mems_allowed, *newmask)) {
     return;
+    }
     mpol_ops[pol.mode].rebind(pol, newmask);
     }
 //
@@ -512,8 +759,6 @@ unsafe extern "C" fn mpol_rebind_policy(pol: *mut mempolicy, newmask: *const nod
 //
 #[no_mangle]
 pub unsafe extern "C" fn mpol_rebind_task(tsk: *mut task_struct, new: *const nodemask_t) {
-    void mpol_rebind_task(struct task_struct *tsk, const nodemask_t *new)
-    {
     mpol_rebind_policy(tsk.mempolicy, new);
     }
 //
@@ -523,9 +768,7 @@ pub unsafe extern "C" fn mpol_rebind_task(tsk: *mut task_struct, new: *const nod
 //
 #[no_mangle]
 pub unsafe extern "C" fn mpol_rebind_mm(mm: *mut mm_struct, new: *mut nodemask_t) {
-    void mpol_rebind_mm(struct mm_struct *mm, nodemask_t *new)
-    {
-    struct vm_area_struct *vma;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
     VMA_ITERATOR(vmi, mm, 0);
     mmap_write_lock(mm);
     for_each_vma(vmi, vma) {
@@ -534,42 +777,12 @@ pub unsafe extern "C" fn mpol_rebind_mm(mm: *mut mm_struct, new: *mut nodemask_t
     }
     mmap_write_unlock(mm);
     }
-    static const struct mempolicy_operations mpol_ops[MPOL_MAX] = {
-    [MPOL_DEFAULT] = {
-    .rebind = mpol_rebind_default,
-    },
-    [MPOL_INTERLEAVE] = {
-    .create = mpol_new_nodemask,
-    .rebind = mpol_rebind_nodemask,
-    },
-    [MPOL_PREFERRED] = {
-    .create = mpol_new_preferred,
-    .rebind = mpol_rebind_preferred,
-    },
-    [MPOL_BIND] = {
-    .create = mpol_new_nodemask,
-    .rebind = mpol_rebind_nodemask,
-    },
-    [MPOL_LOCAL] = {
-    .rebind = mpol_rebind_default,
-    },
-    [MPOL_PREFERRED_MANY] = {
-    .create = mpol_new_nodemask,
-    .rebind = mpol_rebind_preferred,
-    },
-    [MPOL_WEIGHTED_INTERLEAVE] = {
-    .create = mpol_new_nodemask,
-    .rebind = mpol_rebind_nodemask,
-    },
-    };
-    static bool migrate_folio_add(struct folio *folio, struct list_head *foliolist,
-    unsigned long flags);
-    static nodemask_t *policy_nodemask(gfp_t gfp, struct mempolicy *pol,
+pub static mut mempolicy_operations: usize = 0;
+// forward_decl: migrate_folio_add;
+    static nodemask_t *policy_nodemask(gfp_t gfp, mempolicy *pol,
     pgoff_t ilx, int *nid);
 #[no_mangle]
 unsafe extern "C" fn strictly_unmovable(flags: c_ulong) -> bool {
-    static bool strictly_unmovable(unsigned long flags)
-    {
 //
 // STRICT without MOVE flags lets do_mbind() fail immediately with -EIO
 // if any misplaced page is found.
@@ -593,8 +806,8 @@ pub struct queue_pages {
     pub start: c_ulong,
     pub end: c_ulong,
     pub first: *mut vm_area_struct,
-    pub /: *mut *mut *mut folio large; / note last large folio encountered,
-    pub /: *mut *mut long nr_failed; / could not be isolated at this time,
+//     pub /: *mut *mut *mut folio large; / note last large folio encountered,
+//     pub /: *mut *mut long nr_failed; / could not be isolated at this time,
 }
 
 //
@@ -603,23 +816,21 @@ pub struct queue_pages {
 // If MPOL_MF_INVERT is set in qp->flags, check if the nid is
 // in the invert of qp->nmask.
 //
-    static inline bool queue_folio_required(struct folio *folio,
-    struct queue_pages *qp)
-    {
-    let mut nid: c_int = folio_nid(folio);
-    let mut flags: c_ulong = qp.flags;
+#[no_mangle]
+pub unsafe extern "C" fn queue_folio_required(folio: *mut folio, qp: *mut queue_pages) -> bool {
+pub static mut nid: c_int = 0;
+pub static mut flags: c_ulong = 0;
     return node_isset(nid, *qp.nmask) == !(flags & MPOL_MF_INVERT);
     }
 #[no_mangle]
 unsafe extern "C" fn queue_folios_pmd(pmd: *mut pmd_t, walk: *mut mm_walk) {
-    static void queue_folios_pmd(pmd_t *pmd, struct mm_walk *walk)
-    {
-    struct folio *folio;
-    struct queue_pages *qp = walk.private;
-    let mut pmdval: pmd_t = pmdp_get(pmd);
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut qp = walk.private;
+pub static mut pmdval: pmd_t = 0;
     if (unlikely(!pmd_present(pmdval))) {
-    if (pmd_is_migration_entry(pmdval))
-    qp.nr_failed++;
+    if (pmd_is_migration_entry(pmdval)) {
+    qp.nr_failed += 1;
+    }
     return;
     }
     folio = pmd_folio(pmdval);
@@ -627,12 +838,14 @@ unsafe extern "C" fn queue_folios_pmd(pmd: *mut pmd_t, walk: *mut mm_walk) {
     walk.action = ACTION_CONTINUE;
     return;
     }
-    if (!queue_folio_required(folio, qp))
+    if (!queue_folio_required(folio, qp)) {
     return;
+    }
     if (!(qp.flags & (MPOL_MF_MOVE | MPOL_MF_MOVE_ALL)) ||
     !vma_migratable(walk.vma) ||
-    !migrate_folio_add(folio, qp.pagelist, qp.flags))
-    qp.nr_failed++;
+    !migrate_folio_add(folio, qp.pagelist, qp.flags)) {
+    qp.nr_failed += 1;
+    }
     }
 //
 // Scan through folios, checking if they satisfy the required conditions,
@@ -644,53 +857,60 @@ unsafe extern "C" fn queue_folios_pmd(pmd: *mut pmd_t, walk: *mut mm_walk) {
 // -EIO - only MPOL_MF_STRICT was specified, without MPOL_MF_MOVE or ..._ALL,
 // and an existing folio was on a node that does not follow the policy.
 //
-    static int queue_folios_pte_range(pmd_t *pmd, unsigned long addr,
-    unsigned long end, struct mm_walk *walk)
-    {
-    struct vm_area_struct *vma = walk.vma;
-    struct folio *folio;
-    struct queue_pages *qp = walk.private;
-    let mut flags: c_ulong = qp.flags;
-    pte_t *pte, *mapped_pte;
-    pte_t ptent;
-    spinlock_t *ptl;
-    int max_nr, nr;
+#[no_mangle]
+pub unsafe extern "C" fn queue_folios_pte_range(pmd: *mut pmd_t, addr: c_ulong, end: c_ulong, walk: *mut mm_walk) -> c_int {
+    let mut vma = walk.vma;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut qp = walk.private;
+pub static mut flags: c_ulong = 0;
+    let mut pte = core::ptr::null_mut();
+    let mut mapped_pte = core::ptr::null_mut();
+    let mut ptent;
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
+    let mut max_nr = 0;
+    let mut nr = 0;
     ptl = pmd_trans_huge_lock(pmd, vma);
     if (ptl) {
     queue_folios_pmd(pmd, walk);
     spin_unlock(ptl);
-    goto out;
+// goto;
     }
     mapped_pte = pte = pte_offset_map_lock(walk.mm, pmd, addr, &ptl);
     if (!pte) {
     walk.action = ACTION_AGAIN;
     return 0;
     }
-    for (; addr != end; pte += nr, addr += nr * PAGE_SIZE) {
+    while (addr != end) {
     max_nr = (end - addr) >> PAGE_SHIFT;
     nr = 1;
     ptent = ptep_get(pte);
-    if (pte_none(ptent))
+    if (pte_none(ptent)) {
     continue;
+    }
     if (!pte_present(ptent)) {
-    let mut entry: softleaf_t = softleaf_from_pte(ptent);
-    if (softleaf_is_migration(entry))
-    qp.nr_failed++;
+pub static mut entry: softleaf_t = 0;
+    if (softleaf_is_migration(entry)) {
+    qp.nr_failed += 1;
+    }
     continue;
     }
     folio = vm_normal_folio(vma, addr, ptent);
-    if (!folio || folio_is_zone_device(folio))
+    if (!folio || folio_is_zone_device(folio)) {
     continue;
-    if (folio_test_large(folio) && max_nr != 1)
+    }
+    if (folio_test_large(folio) && max_nr != 1) {
     nr = folio_pte_batch(folio, pte, ptent, max_nr);
+    }
 //
 // vm_normal_folio() filters out zero pages, but there might
 // still be reserved folios to skip, perhaps in a VDSO.
 //
-    if (folio_test_reserved(folio))
+    if (folio_test_reserved(folio)) {
     continue;
-    if (!queue_folio_required(folio, qp))
+    }
+    if (!queue_folio_required(folio, qp)) {
     continue;
+    }
     if (folio_test_large(folio)) {
 //
 // A large folio can only be isolated from LRU once,
@@ -708,52 +928,55 @@ unsafe extern "C" fn queue_folios_pmd(pmd: *mut pmd_t, walk: *mut mm_walk) {
 // at its first PTE, later PTEs will not give it another
 // chance of isolation; but keeps the accounting simple.
 //
-    if (folio == qp.large)
+    if (folio == qp.large) {
     continue;
+    }
     qp.large = folio;
     }
     if (!(flags & (MPOL_MF_MOVE | MPOL_MF_MOVE_ALL)) ||
     !vma_migratable(vma) ||
     !migrate_folio_add(folio, qp.pagelist, flags)) {
     qp.nr_failed += nr;
-    if (strictly_unmovable(flags))
+    if (strictly_unmovable(flags)) {
     break;
+    }
     }
     }
     pte_unmap_unlock(mapped_pte, ptl);
     cond_resched();
-    out:
-    if (qp.nr_failed && strictly_unmovable(flags))
+// label;
+    if (qp.nr_failed && strictly_unmovable(flags)) {
     return -EIO;
+    }
     return 0;
     }
-    static int queue_folios_hugetlb(pte_t *pte, unsigned long hmask,
-    unsigned long addr, unsigned long end,
-    struct mm_walk *walk)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn queue_folios_hugetlb(pte: *mut pte_t, hmask: c_ulong, addr: c_ulong, end: c_ulong, walk: *mut mm_walk) -> c_int {
 
-    struct queue_pages *qp = walk.private;
-    let mut flags: c_ulong = qp.flags;
-    struct folio *folio;
-    spinlock_t *ptl;
-    pte_t ptep;
+    let mut qp = walk.private;
+pub static mut flags: c_ulong = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
+    let mut ptep;
     ptl = huge_pte_lock(hstate_vma(walk.vma), walk.mm, pte);
     ptep = huge_ptep_get(walk.mm, addr, pte);
     if (!pte_present(ptep)) {
     if (!huge_pte_none(ptep)) {
-    let mut entry: softleaf_t = softleaf_from_pte(ptep);
-    if (unlikely(softleaf_is_migration(entry)))
-    qp.nr_failed++;
+pub static mut entry: softleaf_t = 0;
+    if (unlikely(softleaf_is_migration(entry))) {
+    qp.nr_failed += 1;
     }
-    goto unlock;
+    }
+// goto;
     }
     folio = pfn_folio(pte_pfn(ptep));
-    if (!queue_folio_required(folio, qp))
-    goto unlock;
+    if (!queue_folio_required(folio, qp)) {
+// goto;
+    }
     if (!(flags & (MPOL_MF_MOVE | MPOL_MF_MOVE_ALL)) ||
     !vma_migratable(walk.vma)) {
-    qp.nr_failed++;
-    goto unlock;
+    qp.nr_failed += 1;
+// goto;
     }
 //
 // Unless MPOL_MF_MOVE_ALL, we try to avoid migrating a shared folio.
@@ -763,13 +986,15 @@ unsafe extern "C" fn queue_folios_pmd(pmd: *mut pmd_t, walk: *mut mm_walk) {
 // cannot easily detect if a folio is shared.
 //
     if ((flags & MPOL_MF_MOVE_ALL) ||
-    (!folio_maybe_mapped_shared(folio) && !hugetlb_pmd_shared(pte)))
+    (!folio_maybe_mapped_shared(folio) && !hugetlb_pmd_shared(pte))) {
     if (!folio_isolate_hugetlb(folio, qp.pagelist))
-    qp.nr_failed++;
-    unlock:
+    qp.nr_failed += 1;
+    }
+// label;
     spin_unlock(ptl);
-    if (qp.nr_failed && strictly_unmovable(flags))
+    if (qp.nr_failed && strictly_unmovable(flags)) {
     return -EIO;
+    }
 
     return 0;
     }
@@ -787,41 +1012,47 @@ unsafe extern "C" fn queue_folios_pmd(pmd: *mut pmd_t, walk: *mut mm_walk) {
 //
 // Return: True if the mapping of the folio needs to be changed, false otherwise.
 //
-    bool folio_can_map_prot_numa(struct folio *folio, struct vm_area_struct *vma,
-    bool is_private_single_threaded)
-    {
-    int nid;
-    if (!folio || folio_is_zone_device(folio) || folio_test_ksm(folio))
+#[no_mangle]
+pub unsafe extern "C" fn folio_can_map_prot_numa(folio: *mut folio, vma: *mut vm_area_struct, is_private_single_threaded: bool) -> bool {
+    let mut nid = 0;
+    if (!folio || folio_is_zone_device(folio) || folio_test_ksm(folio)) {
     return false;
+    }
 // Also skip shared copy-on-write folios
-    if (vma_is_cow_mapping(vma) && folio_maybe_mapped_shared(folio))
+    if (vma_is_cow_mapping(vma) && folio_maybe_mapped_shared(folio)) {
     return false;
+    }
 // Folios are pinned and can't be migrated
-    if (folio_maybe_dma_pinned(folio))
+    if (folio_maybe_dma_pinned(folio)) {
     return false;
+    }
 //
 // While migration can move some dirty folios,
 // it cannot move them all from MIGRATE_ASYNC
 // context.
 //
-    if (folio_is_file_lru(folio) && folio_test_dirty(folio))
+    if (folio_is_file_lru(folio) && folio_test_dirty(folio)) {
     return false;
+    }
 //
 // Don't mess with PTEs if folio is already on the node
 // a single-threaded process is running on.
 //
     nid = folio_nid(folio);
-    if (is_private_single_threaded && (nid == numa_node_id()))
+    if (is_private_single_threaded && (nid == numa_node_id())) {
     return false;
+    }
 //
 // Skip scanning top tier node if normal numa
 // balancing is disabled
 //
     if (!(sysctl_numa_balancing_mode & NUMA_BALANCING_NORMAL) &&
-    node_is_toptier(nid))
+    node_is_toptier(nid)) {
     return false;
-    if (folio_use_access_time(folio))
+    }
+    if (folio_use_access_time(folio)) {
     folio_xchg_access_time(folio, jiffies_to_msecs(jiffies));
+    }
     return true;
     }
 //
@@ -833,11 +1064,10 @@ unsafe extern "C" fn queue_folios_pmd(pmd: *mut pmd_t, walk: *mut mm_walk) {
 // an architecture makes a different choice, it will need further
 // changes to the core.
 //
-    unsigned long change_prot_numa(struct vm_area_struct *vma,
-    unsigned long addr, unsigned long end)
-    {
-    struct mmu_gather tlb;
-    long nr_updated;
+#[no_mangle]
+pub unsafe extern "C" fn change_prot_numa(vma: *mut vm_area_struct, addr: c_ulong, end: c_ulong) -> c_ulong {
+pub static mut tlb: usize = 0;
+    let mut nr_updated = 0;
     tlb_gather_mmu(&tlb, vma.vm_mm);
     nr_updated = change_protection(&tlb, vma, addr, end, MM_CP_PROT_NUMA);
     if (nr_updated > 0) {
@@ -848,54 +1078,47 @@ unsafe extern "C" fn queue_folios_pmd(pmd: *mut pmd_t, walk: *mut mm_walk) {
     return nr_updated;
     }
 
-    static int queue_pages_test_walk(unsigned long start, unsigned long end,
-    struct mm_walk *walk)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn queue_pages_test_walk(start: c_ulong, end: c_ulong, walk: *mut mm_walk) -> c_int {
     struct vm_area_struct *next, *vma = walk.vma;
-    struct queue_pages *qp = walk.private;
-    let mut flags: c_ulong = qp.flags;
+    let mut qp = walk.private;
+pub static mut flags: c_ulong = 0;
 // range check first
     VM_BUG_ON_VMA(!range_in_vma(vma, start, end), vma);
     if (!qp.first) {
     qp.first = vma;
     if (!(flags & MPOL_MF_DISCONTIG_OK) &&
-    (qp.start < vma.vm_start))
+    (qp.start < vma.vm_start)) {
 // hole at head side of range
     return -EFAULT;
+    }
     }
     next = find_vma(vma.vm_mm, vma.vm_end);
     if (!(flags & MPOL_MF_DISCONTIG_OK) &&
     ((vma.vm_end < qp.end) &&
-    (!next || vma.vm_end < next.vm_start)))
+    (!next || vma.vm_end < next.vm_start))) {
 // hole at middle or tail of range
     return -EFAULT;
+    }
 //
 // Need check MPOL_MF_STRICT to return -EIO if possible
 // regardless of vma_migratable
 //
     if (!vma_migratable(vma) &&
-    !(flags & MPOL_MF_STRICT))
+    !(flags & MPOL_MF_STRICT)) {
     return 1;
+    }
 //
 // Check page nodes, and queue pages to move, in the current vma.
 // But if no moving, and no strict checking, the scan can be skipped.
 //
-    if (flags & (MPOL_MF_STRICT | MPOL_MF_MOVE | MPOL_MF_MOVE_ALL))
+    if (flags & (MPOL_MF_STRICT | MPOL_MF_MOVE | MPOL_MF_MOVE_ALL)) {
     return 0;
+    }
     return 1;
     }
-    static const struct mm_walk_ops queue_pages_walk_ops = {
-    .hugetlb_entry		= queue_folios_hugetlb,
-    .pmd_entry		= queue_folios_pte_range,
-    .test_walk		= queue_pages_test_walk,
-    .walk_lock		= PGWALK_RDLOCK,
-    };
-    static const struct mm_walk_ops queue_pages_lock_vma_walk_ops = {
-    .hugetlb_entry		= queue_folios_hugetlb,
-    .pmd_entry		= queue_folios_pte_range,
-    .test_walk		= queue_pages_test_walk,
-    .walk_lock		= PGWALK_WRLOCK,
-    };
+pub static mut mm_walk_ops: usize = 0;
+pub static mut mm_walk_ops: usize = 0;
 //
 // Walk through page tables and collect pages to be migrated.
 //
@@ -910,60 +1133,50 @@ unsafe extern "C" fn queue_folios_pmd(pmd: *mut pmd_t, walk: *mut mm_walk) {
 // -EIO - a misplaced page found, when MPOL_MF_STRICT specified without MOVEs.
 // -EFAULT - a hole in the memory range, when MPOL_MF_DISCONTIG_OK unspecified.
 //
-    static long
-    queue_pages_range(struct mm_struct *mm, unsigned long start, unsigned long end,
-    nodemask_t *nodes, unsigned long flags,
-    struct list_head *pagelist)
-    {
-    int err;
-    struct queue_pages qp = {
-    .pagelist = pagelist,
-    .flags = flags,
-    .nmask = nodes,
-    .start = start,
-    .end = end,
-    .first = core::ptr::null_mut(),
-    };
-    const struct mm_walk_ops *ops = (flags & MPOL_MF_WRLOCK) ?
+#[no_mangle]
+pub unsafe extern "C" fn queue_pages_range(mm: *mut mm_struct, start: c_ulong, end: c_ulong, nodes: *mut nodemask_t, flags: c_ulong, pagelist: *mut list_head) -> c_long {
+    let mut err = 0;
+pub static mut queue_pages: usize = 0;
+    let mut ops = (flags & MPOL_MF_WRLOCK) ?
     &queue_pages_lock_vma_walk_ops : &queue_pages_walk_ops;
     err = walk_page_range(mm, start, end, ops, &qp);
-    if (!qp.first)
+    if (!qp.first) {
 // whole range in hole
     err = -EFAULT;
+    }
     return err ? : qp.nr_failed;
     }
 //
 // Apply policy to a single VMA
 // This must be called with the mmap_lock held for writing.
 //
-    static int vma_replace_policy(struct vm_area_struct *vma,
-    struct mempolicy *pol)
-    {
-    int err;
-    struct mempolicy *old;
-    struct mempolicy *new;
+#[no_mangle]
+pub unsafe extern "C" fn vma_replace_policy(vma: *mut vm_area_struct, pol: *mut mempolicy) -> c_int {
+    let mut err = 0;
+pub static mut old: *mut c_void = core::ptr::null_mut();
+pub static mut new: *mut c_void = core::ptr::null_mut();
     vma_assert_write_locked(vma);
     new = mpol_dup(pol);
-    if (IS_ERR(new))
+    if (IS_ERR(new)) {
     return PTR_ERR(new);
+    }
     if (vma.vm_ops && vma.vm_ops.set_policy) {
     err = vma.vm_ops.set_policy(vma, new);
-    if (err)
-    goto err_out;
+    if (err) {
+// goto;
+    }
     }
     old = vma.vm_policy;
     WRITE_ONCE(vma.vm_policy, new); /* protected by mmap_lock */
     mpol_put(old);
     return 0;
-    err_out:
+// label;
     mpol_put(new);
     return err;
     }
 // Split or merge the VMA (if required) and apply the new policy
-    static int mbind_range(struct vma_iterator *vmi, struct vm_area_struct *vma,
-    struct vm_area_struct **prev, unsigned long start,
-    unsigned long end, struct mempolicy *new_pol)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn mbind_range(vmi: *mut vma_iterator, vma: *mut vm_area_struct, prev: *mut *mut vm_area_struct, start: c_ulong, end: c_ulong, new_pol: *mut mempolicy) -> c_int {
     unsigned long vmstart, vmend;
     vmend = min(end, vma.vm_end);
     if (start > vma.vm_start) {
@@ -977,31 +1190,33 @@ unsafe extern "C" fn queue_folios_pmd(pmd: *mut pmd_t, walk: *mut mm_walk) {
     return 0;
     }
     vma =  vma_modify_policy(vmi, *prev, vma, vmstart, vmend, new_pol);
-    if (IS_ERR(vma))
+    if (IS_ERR(vma)) {
     return PTR_ERR(vma);
+    }
 // prev = vma;
     return vma_replace_policy(vma, new_pol);
     }
 // Set the process memory policy
-    static long do_set_mempolicy(unsigned short mode, unsigned short flags,
-    nodemask_t *nodes)
-    {
-    struct mempolicy *new, *old;
+#[no_mangle]
+pub unsafe extern "C" fn do_set_mempolicy(mode: c_ushort, flags: c_ushort, nodes: *mut nodemask_t) -> c_long {
+    let mut new = core::ptr::null_mut();
+    let mut old = core::ptr::null_mut();
     NODEMASK_SCRATCH(scratch);
-    int ret;
-    if (!scratch)
+    let mut ret = 0;
+    if (!scratch) {
     return -ENOMEM;
+    }
     new = mpol_new(mode, flags, nodes);
     if (IS_ERR(new)) {
     ret = PTR_ERR(new);
-    goto out;
+// goto;
     }
     task_lock(current);
     ret = mpol_set_nodemask(new, nodes, scratch);
     if (ret) {
     task_unlock(current);
     mpol_put(new);
-    goto out;
+// goto;
     }
     old = current.mempolicy;
     current.mempolicy = new;
@@ -1013,7 +1228,7 @@ unsafe extern "C" fn queue_folios_pmd(pmd: *mut pmd_t, walk: *mut mm_walk) {
     task_unlock(current);
     mpol_put(old);
     ret = 0;
-    out:
+// label;
     NODEMASK_SCRATCH_FREE(scratch);
     return ret;
     }
@@ -1024,32 +1239,36 @@ unsafe extern "C" fn queue_folios_pmd(pmd: *mut pmd_t, walk: *mut mm_walk) {
 //
 #[no_mangle]
 unsafe extern "C" fn get_policy_nodemask(pol: *mut mempolicy, nodes: *mut nodemask_t) {
-    static void get_policy_nodemask(struct mempolicy *pol, nodemask_t *nodes)
-    {
     nodes_clear(*nodes);
-    if (pol == &default_policy)
+    if (pol == &default_policy) {
     return;
-    switch (pol.mode) {
-    case MPOL_BIND:
-    case MPOL_INTERLEAVE:
-    case MPOL_PREFERRED:
-    case MPOL_PREFERRED_MANY:
-    case MPOL_WEIGHTED_INTERLEAVE:
+    }
+    match (pol.mode) {
+    MPOL_BIND => {
+    }
+    MPOL_INTERLEAVE => {
+    }
+    MPOL_PREFERRED => {
+    }
+    MPOL_PREFERRED_MANY => {
+    }
+    MPOL_WEIGHTED_INTERLEAVE => {
 // nodes = pol->nodes;
-    break;
-    case MPOL_LOCAL:
+    // break;
+    }
+    MPOL_LOCAL => {
 // return empty node mask for local allocation
-    break;
-    default:
+    // break;
+    }
+    _ => {
     BUG();
+    }
     }
     }
 #[no_mangle]
 unsafe extern "C" fn lookup_node(mm: *mut mm_struct, addr: c_ulong) -> c_int {
-    static int lookup_node(struct mm_struct *mm, unsigned long addr)
-    {
-    struct page *p = core::ptr::null_mut();
-    int ret;
+    let mut p = core::ptr::null_mut();
+    let mut ret = 0;
     ret = get_user_pages_fast(addr & PAGE_MASK, 1, 0, &p);
     if (ret > 0) {
     ret = page_to_nid(p);
@@ -1058,27 +1277,28 @@ unsafe extern "C" fn lookup_node(mm: *mut mm_struct, addr: c_ulong) -> c_int {
     return ret;
     }
 // Retrieve NUMA policy
-    static long do_get_mempolicy(int *policy, nodemask_t *nmask,
-    unsigned long addr, unsigned long flags)
-    {
-    int err;
-    struct mm_struct *mm = current.mm;
-    struct vm_area_struct *vma = core::ptr::null_mut();
-    struct mempolicy *pol = current.mempolicy, *pol_refcount = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn do_get_mempolicy(policy: *mut c_int, nmask: *mut nodemask_t, addr: c_ulong, flags: c_ulong) -> c_long {
+    let mut err = 0;
+    let mut mm = current.mm;
+    let mut vma = core::ptr::null_mut();
+    let mut pol = current.mempolicy, *pol_refcount = core::ptr::null_mut();
     if (flags &
-    ~(unsigned long)(MPOL_F_NODE|MPOL_F_ADDR|MPOL_F_MEMS_ALLOWED))
+    ~(unsigned long)(MPOL_F_NODE|MPOL_F_ADDR|MPOL_F_MEMS_ALLOWED)) {
     return -EINVAL;
+    }
     if (flags & MPOL_F_MEMS_ALLOWED) {
-    if (flags & (MPOL_F_NODE|MPOL_F_ADDR))
+    if (flags & (MPOL_F_NODE|MPOL_F_ADDR)) {
     return -EINVAL;
-// policy = 0;	/* just so it's initialized
+    }
+// policy = 0;	// just so it's initialized
     task_lock(current);
 // nmask  = cpuset_current_mems_allowed;
     task_unlock(current);
     return 0;
     }
     if (flags & MPOL_F_ADDR) {
-    pgoff_t ilx;		/* ignored here */
+    let mut ilx;		/* ignored here */
 //
 // Do NOT fall back to task policy if the
 // vma/shared policy at addr is NULL.  We
@@ -1091,10 +1311,12 @@ unsafe extern "C" fn lookup_node(mm: *mut mm_struct, addr: c_ulong) -> c_int {
     return -EFAULT;
     }
     pol = __get_vma_policy(vma, addr, &ilx);
-    } else if (addr)
+    } else if (addr) {
     return -EINVAL;
-    if (!pol)
+    }
+    if (!pol) {
     pol = &default_policy;	/* indicates default behavior */
+    }
     if (flags & MPOL_F_NODE) {
     if (flags & MPOL_F_ADDR) {
 //
@@ -1107,22 +1329,25 @@ unsafe extern "C" fn lookup_node(mm: *mut mm_struct, addr: c_ulong) -> c_int {
     mpol_get(pol);
     mmap_read_unlock(mm);
     err = lookup_node(mm, addr);
-    if (err < 0)
-    goto out;
+    if (err < 0) {
+// goto;
+    }
 // policy = err;
     } else if (pol == current.mempolicy &&
     pol.mode == MPOL_INTERLEAVE) {
 // policy = next_node_in(current->il_prev, pol->nodes);
     } else if (pol == current.mempolicy &&
     pol.mode == MPOL_WEIGHTED_INTERLEAVE) {
-    if (current.il_weight)
+    if (current.il_weight) {
 // policy = current->il_prev;
-    else
+    }
+    else {
 // policy = next_node_in(current->il_prev,
     pol.nodes);
+    }
     } else {
     err = -EINVAL;
-    goto out;
+// goto;
     }
     } else {
 // policy = pol == &default_policy ? MPOL_DEFAULT :
@@ -1143,18 +1368,19 @@ unsafe extern "C" fn lookup_node(mm: *mut mm_struct, addr: c_ulong) -> c_int {
     task_unlock(current);
     }
     }
-    out:
+// label;
     mpol_cond_put(pol);
-    if (vma)
+    if (vma) {
     mmap_read_unlock(mm);
-    if (pol_refcount)
+    }
+    if (pol_refcount) {
     mpol_put(pol_refcount);
+    }
     return err;
     }
 
-    static bool migrate_folio_add(struct folio *folio, struct list_head *foliolist,
-    unsigned long flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn migrate_folio_add(folio: *mut folio, foliolist: *mut list_head, flags: c_ulong) -> bool {
 //
 // Unless MPOL_MF_MOVE_ALL, we try to avoid migrating a shared folio.
 // Choosing not to migrate a shared folio is not counted as a failure.
@@ -1184,19 +1410,14 @@ unsafe extern "C" fn lookup_node(mm: *mut mm_struct, addr: c_ulong) -> c_int {
 // Migrate pages from one node to a target node.
 // Returns error or the number of pages not migrated.
 //
-    static long migrate_to_node(struct mm_struct *mm, int source, int dest,
-    int flags)
-    {
-    nodemask_t nmask;
-    struct vm_area_struct *vma;
-    LIST_HEAD(pagelist);
-    long nr_failed;
-    let mut err: c_long = 0;
-    struct migration_target_control mtc = {
-    .nid = dest,
-    .gfp_mask = GFP_HIGHUSER_MOVABLE | __GFP_THISNODE,
-    .reason = MR_SYSCALL,
-    };
+#[no_mangle]
+pub unsafe extern "C" fn migrate_to_node(mm: *mut mm_struct, source: c_int, dest: c_int, flags: c_int) -> c_long {
+    let mut nmask;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+pub static mut pagelist: usize = 0;
+    let mut nr_failed = 0;
+pub static mut err: c_long = 0;
+pub static mut migration_target_control: usize = 0;
     nodes_clear(nmask);
     node_set(source, nmask);
     VM_BUG_ON(!(flags & (MPOL_MF_MOVE | MPOL_MF_MOVE_ALL)));
@@ -1218,11 +1439,13 @@ unsafe extern "C" fn lookup_node(mm: *mut mm_struct, addr: c_ulong) -> c_int {
     if (!list_empty(&pagelist)) {
     err = migrate_pages(&pagelist, alloc_migration_target, core::ptr::null_mut(),
     (unsigned long)&mtc, MIGRATE_SYNC, MR_SYSCALL, core::ptr::null_mut());
-    if (err)
+    if (err) {
     putback_movable_pages(&pagelist);
     }
-    if (err >= 0)
+    }
+    if (err >= 0) {
     err += nr_failed;
+    }
     return err;
     }
 //
@@ -1231,12 +1454,11 @@ unsafe extern "C" fn lookup_node(mm: *mut mm_struct, addr: c_ulong) -> c_int {
 //
 // Returns the number of page that could not be moved.
 //
-    int do_migrate_pages(struct mm_struct *mm, const nodemask_t *from,
-    const nodemask_t *to, int flags)
-    {
-    let mut nr_failed: c_long = 0;
-    let mut err: c_long = 0;
-    nodemask_t tmp;
+#[no_mangle]
+pub unsafe extern "C" fn do_migrate_pages(mm: *mut mm_struct, from: *mut nodemask_t, to: *mut nodemask_t, flags: c_int) -> c_int {
+pub static mut nr_failed: c_long = 0;
+pub static mut err: c_long = 0;
+    let mut tmp;
     lru_cache_disable();
 //
 // Find a 'source' bit set in 'tmp' whose corresponding 'dest'
@@ -1270,9 +1492,10 @@ unsafe extern "C" fn lookup_node(mm: *mut mm_struct, addr: c_ulong) -> c_int {
 //
     tmp = *from;
     while (!nodes_empty(tmp)) {
-    int s, d;
-    let mut source: c_int = NUMA_NO_NODE;
-    let mut dest: c_int = 0;
+    let mut s = 0;
+    let mut d = 0;
+pub static mut source: c_int = 0;
+pub static mut dest: c_int = 0;
     for_each_node_mask(s, tmp) {
 //
 // do_migrate_pages() tries to maintain the relative
@@ -1289,128 +1512,150 @@ unsafe extern "C" fn lookup_node(mm: *mut mm_struct, addr: c_ulong) -> c_int {
 // [0-7] - > [3,4,5] moves only 0,1,2,6,7.
 //
     if ((nodes_weight(*from) != nodes_weight(*to)) &&
-    (node_isset(s, *to)))
+    (node_isset(s, *to))) {
     continue;
+    }
     d = node_remap(s, *from, *to);
-    if (s == d)
+    if (s == d) {
     continue;
+    }
     source = s;	/* Node moved. Memorize */
     dest = d;
 // dest not in remaining from nodes?
-    if (!node_isset(dest, tmp))
+    if (!node_isset(dest, tmp)) {
     break;
     }
-    if (source == NUMA_NO_NODE)
+    }
+    if (source == NUMA_NO_NODE) {
     break;
+    }
     node_clear(source, tmp);
     err = migrate_to_node(mm, source, dest, flags);
-    if (err > 0)
+    if (err > 0) {
     nr_failed += err;
-    if (err < 0)
+    }
+    if (err < 0) {
     break;
     }
+    }
     lru_cache_enable();
-    if (err < 0)
+    if (err < 0) {
     return err;
+    }
     return (nr_failed < INT_MAX) ? nr_failed : INT_MAX;
     }
 //
 // Allocate a new folio for page migration, according to NUMA mempolicy.
 //
-    static struct folio *alloc_migration_target_by_mpol(struct folio *src,
-    unsigned long private)
-    {
-    struct migration_mpol *mmpol = (struct migration_mpol *)private;
-    struct mempolicy *pol = mmpol.pol;
-    let mut ilx: pgoff_t = mmpol.ilx;
-    unsigned int order;
-    let mut nid: c_int = numa_node_id();
-    gfp_t gfp;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_migration_target_by_mpol(src: *mut folio, private: c_ulong) -> *mut c_void {
+    let mut mmpol = private;
+    let mut pol = mmpol.pol;
+pub static mut ilx: pgoff_t = 0;
+    let mut order = 0;
+pub static mut nid: c_int = 0;
+    let mut gfp;
     order = folio_order(src);
     ilx += src.index >> order;
     if (folio_test_hugetlb(src)) {
-    nodemask_t *nodemask;
-    struct hstate *h;
+pub static mut nodemask: *mut c_void = core::ptr::null_mut();
+pub static mut h: *mut c_void = core::ptr::null_mut();
     h = folio_hstate(src);
     gfp = htlb_alloc_mask(h);
     nodemask = policy_nodemask(gfp, pol, ilx, &nid);
     return alloc_hugetlb_folio_nodemask(h, nid, nodemask, gfp,
     htlb_allow_alloc_fallback(MR_MEMPOLICY_MBIND));
     }
-    if (folio_test_large(src))
+    if (folio_test_large(src)) {
     gfp = GFP_TRANSHUGE;
-    else
+    }
+    else {
     gfp = GFP_HIGHUSER_MOVABLE | __GFP_RETRY_MAYFAIL | __GFP_COMP;
+    }
     return folio_alloc_mpol(gfp, order, pol, ilx, nid);
     }
 
-    static bool migrate_folio_add(struct folio *folio, struct list_head *foliolist,
-    unsigned long flags)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: migrate_folio_add
+pub unsafe extern "C" fn migrate_folio_add_dup(folio: *mut folio, foliolist: *mut list_head, flags: c_ulong) -> bool {
     return false;
     }
-    int do_migrate_pages(struct mm_struct *mm, const nodemask_t *from,
-    const nodemask_t *to, int flags)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: do_migrate_pages
+pub unsafe extern "C" fn do_migrate_pages_dup(mm: *mut mm_struct, from: *mut nodemask_t, to: *mut nodemask_t, flags: c_int) -> c_int {
     return -ENOSYS;
     }
-    static struct folio *alloc_migration_target_by_mpol(struct folio *src,
-    unsigned long private)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: alloc_migration_target_by_mpol
+pub unsafe extern "C" fn alloc_migration_target_by_mpol_dup(src: *mut folio, private: c_ulong) -> *mut c_void {
     return core::ptr::null_mut();
     }
 
-    static long do_mbind(unsigned long start, unsigned long len,
-    unsigned short mode, unsigned short mode_flags,
-    nodemask_t *nmask, unsigned long flags)
-    {
-    struct mm_struct *mm = current.mm;
-    struct vm_area_struct *vma, *prev;
-    struct vma_iterator vmi;
-    struct migration_mpol mmpol;
-    struct mempolicy *new;
-    unsigned long end;
-    long err;
-    long nr_failed;
-    LIST_HEAD(pagelist);
-    if (flags & ~(unsigned long)MPOL_MF_VALID)
+#[no_mangle]
+pub unsafe extern "C" fn do_mbind(start: c_ulong, len: c_ulong, mode: c_ushort, mode_flags: c_ushort, nmask: *mut nodemask_t, flags: c_ulong) -> c_long {
+    let mut mm = current.mm;
+    let mut vma = core::ptr::null_mut();
+    let mut prev = core::ptr::null_mut();
+pub static mut vmi: usize = 0;
+pub static mut mmpol: usize = 0;
+pub static mut new: *mut c_void = core::ptr::null_mut();
+    let mut end = 0;
+    let mut err = 0;
+    let mut nr_failed = 0;
+pub static mut pagelist: usize = 0;
+    if (flags & ~(unsigned long)MPOL_MF_VALID) {
     return -EINVAL;
-    if ((flags & MPOL_MF_MOVE_ALL) && !capable(CAP_SYS_NICE))
+    }
+    if ((flags & MPOL_MF_MOVE_ALL) && !capable(CAP_SYS_NICE)) {
     return -EPERM;
-    if (start & ~PAGE_MASK)
+    }
+    if (start & ~PAGE_MASK) {
     return -EINVAL;
-    if (mode == MPOL_DEFAULT)
+    }
+    if (mode == MPOL_DEFAULT) {
     flags &= ~MPOL_MF_STRICT;
+    }
     len = PAGE_ALIGN(len);
     end = start + len;
-    if (end < start)
+    if (end < start) {
     return -EINVAL;
-    if (end == start)
+    }
+    if (end == start) {
     return 0;
+    }
     new = mpol_new(mode, mode_flags, nmask);
-    if (IS_ERR(new))
+    if (IS_ERR(new)) {
     return PTR_ERR(new);
+    }
 //
 // If we are using the default policy then operation
 // on discontinuous address spaces is okay after all
 //
-    if (!new)
+    if (!new) {
     flags |= MPOL_MF_DISCONTIG_OK;
-    if (flags & (MPOL_MF_MOVE | MPOL_MF_MOVE_ALL))
+    }
+    if (flags & (MPOL_MF_MOVE | MPOL_MF_MOVE_ALL)) {
     lru_cache_disable();
+    }
     {
     NODEMASK_SCRATCH(scratch);
     if (scratch) {
     mmap_write_lock(mm);
     err = mpol_set_nodemask(new, nmask, scratch);
-    if (err)
+    if (err) {
     mmap_write_unlock(mm);
-    } else
+    }
+    } else {
     err = -ENOMEM;
+    }
     NODEMASK_SCRATCH_FREE(scratch);
     }
-    if (err)
-    goto mpol_out;
+    if (err) {
+// goto;
+    }
 //
 // Lock the VMAs before scanning for pages to migrate,
 // to ensure we don't miss a concurrently inserted page.
@@ -1425,8 +1670,9 @@ unsafe extern "C" fn lookup_node(mm: *mut mm_struct, addr: c_ulong) -> c_int {
     prev = vma_prev(&vmi);
     for_each_vma_range(vmi, vma, end) {
     err = mbind_range(&vmi, vma, &prev, start, end, new);
-    if (err)
+    if (err) {
     break;
+    }
     }
     }
     if (!err && !list_empty(&pagelist)) {
@@ -1445,20 +1691,22 @@ unsafe extern "C" fn lookup_node(mm: *mut mm_struct, addr: c_ulong) -> c_int {
 //
     if (new.mode == MPOL_INTERLEAVE ||
     new.mode == MPOL_WEIGHTED_INTERLEAVE) {
-    struct folio *folio;
-    unsigned int order;
-    let mut addr: c_ulong = -EFAULT;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut order = 0;
+pub static mut addr: c_ulong = 0;
     list_for_each_entry(folio, &pagelist, lru) {
-    if (!folio_test_ksm(folio))
+    if (!folio_test_ksm(folio)) {
     break;
+    }
     }
     if (!list_entry_is_head(folio, &pagelist, lru)) {
     vma_iter_init(&vmi, mm, start);
     for_each_vma_range(vmi, vma, end) {
     addr = page_address_in_vma(folio,
     folio_page(folio, 0), vma);
-    if (addr != -EFAULT)
+    if (addr != -EFAULT) {
     break;
+    }
     }
     }
     if (addr != -EFAULT) {
@@ -1478,155 +1726,175 @@ unsafe extern "C" fn lookup_node(mm: *mut mm_struct, addr: c_ulong) -> c_int {
     (unsigned long)&mmpol, MIGRATE_SYNC,
     MR_MEMPOLICY_MBIND, core::ptr::null_mut());
     }
-    if (nr_failed && (flags & MPOL_MF_STRICT))
+    if (nr_failed && (flags & MPOL_MF_STRICT)) {
     err = -EIO;
-    if (!list_empty(&pagelist))
+    }
+    if (!list_empty(&pagelist)) {
     putback_movable_pages(&pagelist);
-    mpol_out:
+    }
+// label;
     mpol_put(new);
-    if (flags & (MPOL_MF_MOVE | MPOL_MF_MOVE_ALL))
+    if (flags & (MPOL_MF_MOVE | MPOL_MF_MOVE_ALL)) {
     lru_cache_enable();
+    }
     return err;
     }
 //
 // User space interface with variable sized bitmaps for nodelists.
 //
-    static int get_bitmap(unsigned long *mask, const unsigned long __user *nmask,
-    unsigned long maxnode)
-    {
-    let mut nlongs: c_ulong = BITS_TO_LONGS(maxnode);
-    int ret;
-    if (in_compat_syscall())
+#[no_mangle]
+pub unsafe extern "C" fn get_bitmap(mask: *mut c_ulong, nmask: *mut c_ulong, maxnode: c_ulong) -> c_int {
+pub static mut nlongs: c_ulong = 0;
+    let mut ret = 0;
+    if (in_compat_syscall()) {
     ret = compat_get_bitmap(mask,
-    (const compat_ulong_t __user *)nmask,
+    nmask,
     maxnode);
-    else
+    }
+    else {
     ret = copy_from_user(mask, nmask,
-    nlongs * sizeof(unsigned long));
-    if (ret)
+    nlongs * sizeof!(unsigned long));
+    }
+    if (ret) {
     return -EFAULT;
-    if (maxnode % BITS_PER_LONG)
+    }
+    if (maxnode % BITS_PER_LONG) {
     mask[nlongs - 1] &= (1UL << (maxnode % BITS_PER_LONG)) - 1;
+    }
     return 0;
     }
 // Copy a node mask from user space.
-    static int get_nodes(nodemask_t *nodes, const unsigned long __user *nmask,
-    unsigned long maxnode)
-    {
-    --maxnode;
+#[no_mangle]
+pub unsafe extern "C" fn get_nodes(nodes: *mut nodemask_t, nmask: *mut c_ulong, maxnode: c_ulong) -> c_int {
+    maxnode -= 1;
     nodes_clear(*nodes);
-    if (maxnode == 0 || !nmask)
+    if (maxnode == 0 || !nmask) {
     return 0;
-    if (maxnode > PAGE_SIZE*BITS_PER_BYTE)
+    }
+    if (maxnode > PAGE_SIZE*BITS_PER_BYTE) {
     return -EINVAL;
+    }
 //
 // When the user specified more nodes than supported just check
 // if the non supported part is all zero, one word at a time,
 // starting at the end.
 //
     while (maxnode > MAX_NUMNODES) {
-    let mut bits: c_ulong = min_t(unsigned long, maxnode, BITS_PER_LONG);
-    unsigned long t;
-    if (get_bitmap(&t, &nmask[(maxnode - 1) / BITS_PER_LONG], bits))
+pub static mut bits: c_ulong = 0;
+    let mut t = 0;
+    if (get_bitmap(&t, &nmask[(maxnode - 1) / BITS_PER_LONG], bits)) {
     return -EFAULT;
+    }
     if (maxnode - bits >= MAX_NUMNODES) {
     maxnode -= bits;
     } else {
     maxnode = MAX_NUMNODES;
     t &= ~((1UL << (MAX_NUMNODES % BITS_PER_LONG)) - 1);
     }
-    if (t)
+    if (t) {
     return -EINVAL;
+    }
     }
     return get_bitmap(nodes_addr(*nodes), nmask, maxnode);
     }
 // Copy a kernel node mask to user space
-    static int copy_nodes_to_user(unsigned long __user *mask, unsigned long maxnode,
-    nodemask_t *nodes)
-    {
-    let mut copy: c_ulong = ALIGN(maxnode-1, 64) / 8;
-    let mut nbytes: c_uint = BITS_TO_LONGS(nr_node_ids) * sizeof(long);
-    let mut compat: bool = in_compat_syscall();
-    if (compat)
-    nbytes = BITS_TO_COMPAT_LONGS(nr_node_ids) * sizeof(compat_long_t);
+#[no_mangle]
+pub unsafe extern "C" fn copy_nodes_to_user(mask: *mut c_ulong, maxnode: c_ulong, nodes: *mut nodemask_t) -> c_int {
+pub static mut copy: c_ulong = 0;
+pub static mut nbytes: c_uint = 0;
+pub static mut compat: bool = false;
+    if (compat) {
+    nbytes = BITS_TO_COMPAT_LONGS(nr_node_ids) * sizeof!(compat_long_t);
+    }
     if (copy > nbytes) {
-    if (copy > PAGE_SIZE)
+    if (copy > PAGE_SIZE) {
     return -EINVAL;
-    if (clear_user((char __user *)mask + nbytes, copy - nbytes))
+    }
+    if (clear_user(mask + nbytes, copy - nbytes)) {
     return -EFAULT;
+    }
     copy = nbytes;
     maxnode = nr_node_ids;
     }
-    if (compat)
-    return compat_put_bitmap((compat_ulong_t __user *)mask,
+    if (compat) {
+    return compat_put_bitmap(mask,
     nodes_addr(*nodes), maxnode);
+    }
     return copy_to_user(mask, nodes_addr(*nodes), copy) ? -EFAULT : 0;
     }
 // Basic parameter sanity check used by both mbind() and set_mempolicy()
 #[no_mangle]
 pub unsafe extern "C" fn sanitize_mpol_flags(mode: *mut c_int, flags: *mut c_ushort) -> c_int {
-    static inline int sanitize_mpol_flags(int *mode, unsigned short *flags)
-    {
 // flags = *mode & MPOL_MODE_FLAGS;
 // mode &= ~MPOL_MODE_FLAGS;
-    if ((unsigned int)(*mode) >=  MPOL_MAX)
+    if ((unsigned int)(*mode) >=  MPOL_MAX) {
     return -EINVAL;
-    if ((*flags & MPOL_F_STATIC_NODES) && (*flags & MPOL_F_RELATIVE_NODES))
+    }
+    if ((*flags & MPOL_F_STATIC_NODES) && (*flags & MPOL_F_RELATIVE_NODES)) {
     return -EINVAL;
+    }
     if (*flags & MPOL_F_NUMA_BALANCING) {
-    if (*mode == MPOL_BIND || *mode == MPOL_PREFERRED_MANY)
+    if (*mode == MPOL_BIND || *mode == MPOL_PREFERRED_MANY) {
 // flags |= (MPOL_F_MOF | MPOL_F_MORON);
-    else
+    }
+    else {
     return -EINVAL;
+    }
     }
     return 0;
     }
-    static long kernel_mbind(unsigned long start, unsigned long len,
-    unsigned long mode, const unsigned long __user *nmask,
-    unsigned long maxnode, unsigned int flags)
-    {
-    unsigned short mode_flags;
-    nodemask_t nodes;
-    let mut lmode: c_int = mode;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn kernel_mbind(start: c_ulong, len: c_ulong, mode: c_ulong, nmask: *mut c_ulong, maxnode: c_ulong, flags: c_uint) -> c_long {
+    let mut mode_flags = 0;
+    let mut nodes;
+pub static mut lmode: c_int = 0;
+    let mut err = 0;
     start = untagged_addr(start);
     err = sanitize_mpol_flags(&lmode, &mode_flags);
-    if (err)
+    if (err) {
     return err;
+    }
     err = get_nodes(&nodes, nmask, maxnode);
-    if (err)
+    if (err) {
     return err;
+    }
     return do_mbind(start, len, lmode, mode_flags, &nodes, flags);
     }
-    SYSCALL_DEFINE4(set_mempolicy_home_node, unsigned long, start, unsigned long, len,
-    unsigned long, home_node, unsigned long, flags)
-    {
-    struct mm_struct *mm = current.mm;
-    struct vm_area_struct *vma, *prev;
-    struct mempolicy *new, *old;
-    unsigned long end;
-    let mut err: c_int = -ENOENT;
+#[no_mangle]
+pub unsafe extern "C" fn sys_set_mempolicy_home_node(start: usize, len: usize, home_node: usize, flags: usize) -> c_long {
+    let mut mm = current.mm;
+    let mut vma = core::ptr::null_mut();
+    let mut prev = core::ptr::null_mut();
+    let mut new = core::ptr::null_mut();
+    let mut old = core::ptr::null_mut();
+    let mut end = 0;
+pub static mut err: c_int = 0;
     VMA_ITERATOR(vmi, mm, start);
     start = untagged_addr(start);
-    if (start & ~PAGE_MASK)
+    if (start & ~PAGE_MASK) {
     return -EINVAL;
+    }
 //
 // flags is used for future extension if any.
 //
-    if (flags != 0)
+    if (flags != 0) {
     return -EINVAL;
+    }
 //
 // Check home_node is online to avoid accessing uninitialized
 // NODE_DATA.
 //
-    if (home_node >= MAX_NUMNODES || !node_online(home_node))
+    if (home_node >= MAX_NUMNODES || !node_online(home_node)) {
     return -EINVAL;
+    }
     len = PAGE_ALIGN(len);
     end = start + len;
-    if (end < start)
+    if (end < start) {
     return -EINVAL;
-    if (end == start)
+    }
+    if (end == start) {
     return 0;
+    }
     mmap_write_lock(mm);
     prev = vma_prev(&vmi);
     for_each_vma_range(vmi, vma, end) {
@@ -1653,67 +1921,67 @@ pub unsafe extern "C" fn sanitize_mpol_flags(mode: *mut c_int, flags: *mut c_ush
     new.home_node = home_node;
     err = mbind_range(&vmi, vma, &prev, start, end, new);
     mpol_put(new);
-    if (err)
+    if (err) {
     break;
+    }
     }
     mmap_write_unlock(mm);
     return err;
     }
-    SYSCALL_DEFINE6(mbind, unsigned long, start, unsigned long, len,
-    unsigned long, mode, const unsigned long __user *, nmask,
-    unsigned long, maxnode, unsigned int, flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_mbind(start: usize, len: usize, mode: usize, nmask: usize, maxnode: usize, flags: usize) -> c_long {
     return kernel_mbind(start, len, mode, nmask, maxnode, flags);
     }
 // Set the process memory policy
-    static long kernel_set_mempolicy(int mode, const unsigned long __user *nmask,
-    unsigned long maxnode)
-    {
-    unsigned short mode_flags;
-    nodemask_t nodes;
-    let mut lmode: c_int = mode;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn kernel_set_mempolicy(mode: c_int, nmask: *mut c_ulong, maxnode: c_ulong) -> c_long {
+    let mut mode_flags = 0;
+    let mut nodes;
+pub static mut lmode: c_int = 0;
+    let mut err = 0;
     err = sanitize_mpol_flags(&lmode, &mode_flags);
-    if (err)
+    if (err) {
     return err;
+    }
     err = get_nodes(&nodes, nmask, maxnode);
-    if (err)
+    if (err) {
     return err;
+    }
     return do_set_mempolicy(lmode, mode_flags, &nodes);
     }
-    SYSCALL_DEFINE3(set_mempolicy, int, mode, const unsigned long __user *, nmask,
-    unsigned long, maxnode)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_set_mempolicy(mode: usize, nmask: usize, maxnode: usize) -> c_long {
     return kernel_set_mempolicy(mode, nmask, maxnode);
     }
-    static int kernel_migrate_pages(pid_t pid, unsigned long maxnode,
-    const unsigned long __user *old_nodes,
-    const unsigned long __user *new_nodes)
-    {
-    struct mm_struct *mm = core::ptr::null_mut();
-    struct task_struct *task;
-    nodemask_t task_nodes;
-    int err;
-    nodemask_t *old;
-    nodemask_t *new;
+#[no_mangle]
+pub unsafe extern "C" fn kernel_migrate_pages(pid: pid_t, maxnode: c_ulong, old_nodes: *mut c_ulong, new_nodes: *mut c_ulong) -> c_int {
+    let mut mm = core::ptr::null_mut();
+pub static mut task: *mut c_void = core::ptr::null_mut();
+    let mut task_nodes;
+    let mut err = 0;
+pub static mut old: *mut c_void = core::ptr::null_mut();
+pub static mut new: *mut c_void = core::ptr::null_mut();
     NODEMASK_SCRATCH(scratch);
-    if (!scratch)
+    if (!scratch) {
     return -ENOMEM;
+    }
     old = &scratch.mask1;
     new = &scratch.mask2;
     err = get_nodes(old, old_nodes, maxnode);
-    if (err)
-    goto out;
+    if (err) {
+// goto;
+    }
     err = get_nodes(new, new_nodes, maxnode);
-    if (err)
-    goto out;
+    if (err) {
+// goto;
+    }
 // Find the mm_struct
     rcu_read_lock();
     task = pid ? find_task_by_vpid(pid) : current;
     if (!task) {
     rcu_read_unlock();
     err = -ESRCH;
-    goto out;
+// goto;
     }
     get_task_struct(task);
     err = -EINVAL;
@@ -1724,86 +1992,85 @@ pub unsafe extern "C" fn sanitize_mpol_flags(mode: *mut c_int, flags: *mut c_ush
     if (!ptrace_may_access(task, PTRACE_MODE_READ_REALCREDS)) {
     rcu_read_unlock();
     err = -EPERM;
-    goto out_put;
+// goto;
     }
     rcu_read_unlock();
     task_nodes = cpuset_mems_allowed(task);
 // Is the user allowed to access the target nodes?
     if (!nodes_subset(*new, task_nodes) && !capable(CAP_SYS_NICE)) {
     err = -EPERM;
-    goto out_put;
+// goto;
     }
     task_nodes = cpuset_mems_allowed(current);
-    if (!nodes_and(*new, *new, task_nodes))
-    goto out_put;
+    if (!nodes_and(*new, *new, task_nodes)) {
+// goto;
+    }
     err = security_task_movememory(task);
-    if (err)
-    goto out_put;
+    if (err) {
+// goto;
+    }
     mm = get_task_mm(task);
     put_task_struct(task);
     if (!mm) {
     err = -EINVAL;
-    goto out;
+// goto;
     }
     err = do_migrate_pages(mm, old, new,
     capable(CAP_SYS_NICE) ? MPOL_MF_MOVE_ALL : MPOL_MF_MOVE);
     mmput(mm);
-    out:
+// label;
     NODEMASK_SCRATCH_FREE(scratch);
     return err;
-    out_put:
+// label;
     put_task_struct(task);
-    goto out;
+// goto;
     }
-    SYSCALL_DEFINE4(migrate_pages, pid_t, pid, unsigned long, maxnode,
-    const unsigned long __user *, old_nodes,
-    const unsigned long __user *, new_nodes)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_migrate_pages(pid: usize, maxnode: usize, old_nodes: usize, new_nodes: usize) -> c_long {
     return kernel_migrate_pages(pid, maxnode, old_nodes, new_nodes);
     }
 // Retrieve NUMA policy
-    static int kernel_get_mempolicy(int __user *policy,
-    unsigned long __user *nmask,
-    unsigned long maxnode,
-    unsigned long addr,
-    unsigned long flags)
-    {
-    int err;
-    int pval;
-    nodemask_t nodes;
-    if (nmask != core::ptr::null_mut() && maxnode < nr_node_ids)
+#[no_mangle]
+pub unsafe extern "C" fn kernel_get_mempolicy(policy: *mut c_int, nmask: *mut c_ulong, maxnode: c_ulong, addr: c_ulong, flags: c_ulong) -> c_int {
+    let mut err = 0;
+    let mut pval = 0;
+    let mut nodes;
+    if (nmask != core::ptr::null_mut() && maxnode < nr_node_ids) {
     return -EINVAL;
+    }
     addr = untagged_addr(addr);
     err = do_get_mempolicy(&pval, &nodes, addr, flags);
-    if (err)
-    return err;
-    if (policy && put_user(pval, policy))
-    return -EFAULT;
-    if (nmask)
-    err = copy_nodes_to_user(nmask, maxnode, &nodes);
+    if (err) {
     return err;
     }
-    SYSCALL_DEFINE5(get_mempolicy, int __user *, policy,
-    unsigned long __user *, nmask, unsigned long, maxnode,
-    unsigned long, addr, unsigned long, flags)
-    {
+    if (policy && put_user(pval, policy)) {
+    return -EFAULT;
+    }
+    if (nmask) {
+    err = copy_nodes_to_user(nmask, maxnode, &nodes);
+    }
+    return err;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn sys_get_mempolicy(policy: usize, nmask: usize, maxnode: usize, addr: usize, flags: usize) -> c_long {
     return kernel_get_mempolicy(policy, nmask, maxnode, addr, flags);
     }
 #[no_mangle]
 pub unsafe extern "C" fn vma_migratable(vma: *mut vm_area_struct) -> bool {
-    bool vma_migratable(struct vm_area_struct *vma)
-    {
-    if (vma.vm_flags & (VM_IO | VM_PFNMAP))
+    if (vma.vm_flags & (VM_IO | VM_PFNMAP)) {
     return false;
+    }
 //
 // DAX device mappings require predictable access latency, so avoid
 // incurring periodic faults.
 //
-    if (vma_is_dax(vma))
+    if (vma_is_dax(vma)) {
     return false;
+    }
     if (is_vm_hugetlb_page(vma) &&
-    !hugepage_migration_supported(hstate_vma(vma)))
+    !hugepage_migration_supported(hstate_vma(vma))) {
     return false;
+    }
 //
 // Migration allocates pages in the highest zone. If we cannot
 // do so then migration (at least from node to node) is not
@@ -1811,13 +2078,13 @@ pub unsafe extern "C" fn vma_migratable(vma: *mut vm_area_struct) -> bool {
 //
     if (vma.vm_file &&
     gfp_zone(mapping_gfp_mask(vma.vm_file.f_mapping))
-    < policy_zone)
+    < policy_zone) {
     return false;
+    }
     return true;
     }
-    struct mempolicy *__get_vma_policy(struct vm_area_struct *vma,
-    unsigned long addr, pgoff_t *ilx)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __get_vma_policy(vma: *mut vm_area_struct, addr: c_ulong, ilx: *mut pgoff_t) -> *mut c_void {
 // ilx = 0;
     return (vma.vm_ops && vma.vm_ops.get_policy) ?
     vma.vm_ops.get_policy(vma, addr, ilx) : vma.vm_policy;
@@ -1837,13 +2104,13 @@ pub unsafe extern "C" fn vma_migratable(vma: *mut vm_area_struct) -> bool {
 // freeing by another task.  It is the caller's responsibility to free the
 // extra reference for shared policies.
 //
-    struct mempolicy *get_vma_policy(struct vm_area_struct *vma,
-    unsigned long addr, int order, pgoff_t *ilx)
-    {
-    struct mempolicy *pol;
+#[no_mangle]
+pub unsafe extern "C" fn get_vma_policy(vma: *mut vm_area_struct, addr: c_ulong, order: c_int, ilx: *mut pgoff_t) -> *mut c_void {
+pub static mut pol: *mut c_void = core::ptr::null_mut();
     pol = __get_vma_policy(vma, addr, ilx);
-    if (!pol)
+    if (!pol) {
     pol = get_task_policy(current);
+    }
     if (pol.mode == MPOL_INTERLEAVE ||
     pol.mode == MPOL_WEIGHTED_INTERLEAVE) {
 // ilx += vma_start_pgoff(vma) >> order;
@@ -1853,24 +2120,21 @@ pub unsafe extern "C" fn vma_migratable(vma: *mut vm_area_struct) -> bool {
     }
 #[no_mangle]
 pub unsafe extern "C" fn vma_policy_mof(vma: *mut vm_area_struct) -> bool {
-    bool vma_policy_mof(struct vm_area_struct *vma)
-    {
-    struct mempolicy *pol;
-    pgoff_t ilx;
-    bool mof;
+pub static mut pol: *mut c_void = core::ptr::null_mut();
+    let mut ilx;
+    let mut mof = 0;
     pol = __get_vma_policy(vma, vma.vm_start, &ilx);
-    if (!pol)
+    if (!pol) {
     pol = get_task_policy(current);
+    }
     mof = pol.flags & MPOL_F_MOF;
     mpol_cond_put(pol);
     return mof;
     }
 #[no_mangle]
-pub unsafe extern "C" fn apply_policy_zone(policy: *mut mempolicy, zone: enum zone_type) -> bool {
-    bool apply_policy_zone(struct mempolicy *policy, enum zone_type zone)
-    {
-    let mut dynamic_policy_zone: enum zone_type = policy_zone;
-    BUG_ON(dynamic_policy_zone == ZONE_MOVABLE);
+pub unsafe extern "C" fn apply_policy_zone(policy: *mut mempolicy, zone: zone_type) -> bool {
+pub static mut dynamic_policy_zone: zone_type = 0;
+    BUG_ON!(dynamic_policy_zone == ZONE_MOVABLE);
 //
 // if policy->nodes has movable memory only,
 // we apply policy when gfp_zone(gfp) = ZONE_MOVABLE only.
@@ -1879,46 +2143,46 @@ pub unsafe extern "C" fn apply_policy_zone(policy: *mut mempolicy, zone: enum zo
 // so if the following test fails, it implies
 // policy->nodes has movable memory only.
 //
-    if (!nodes_intersects(policy.nodes, node_states[N_HIGH_MEMORY]))
+    if (!nodes_intersects(policy.nodes, node_states[N_HIGH_MEMORY])) {
     dynamic_policy_zone = ZONE_MOVABLE;
+    }
     return zone >= dynamic_policy_zone;
     }
 #[no_mangle]
 unsafe extern "C" fn weighted_interleave_nodes(policy: *mut mempolicy) -> c_uint {
-    static unsigned int weighted_interleave_nodes(struct mempolicy *policy)
-    {
-    unsigned int node;
-    unsigned int cpuset_mems_cookie;
-    retry:
+    let mut node = 0;
+    let mut cpuset_mems_cookie = 0;
+// label;
 // to prevent miscount use tsk->mems_allowed_seq to detect rebind
     cpuset_mems_cookie = read_mems_allowed_begin();
     node = current.il_prev;
     if (!current.il_weight || !node_isset(node, policy.nodes)) {
     node = next_node_in(node, policy.nodes);
-    if (read_mems_allowed_retry(cpuset_mems_cookie))
-    goto retry;
-    if (node == MAX_NUMNODES)
+    if (read_mems_allowed_retry(cpuset_mems_cookie)) {
+// goto;
+    }
+    if (node == MAX_NUMNODES) {
     return node;
+    }
     current.il_prev = node;
     current.il_weight = get_il_weight(node);
     }
-    current.il_weight--;
+    current.il_weight -= 1;
     return node;
     }
 // Do dynamic interleaving for a process
 #[no_mangle]
 unsafe extern "C" fn interleave_nodes(policy: *mut mempolicy) -> c_uint {
-    static unsigned int interleave_nodes(struct mempolicy *policy)
-    {
-    unsigned int nid;
-    unsigned int cpuset_mems_cookie;
+    let mut nid = 0;
+    let mut cpuset_mems_cookie = 0;
 // to prevent miscount, use tsk->mems_allowed_seq to detect rebind
     do {
     cpuset_mems_cookie = read_mems_allowed_begin();
     nid = next_node_in(current.il_prev, policy.nodes);
     } while (read_mems_allowed_retry(cpuset_mems_cookie));
-    if (nid < MAX_NUMNODES)
+    if (nid < MAX_NUMNODES) {
     current.il_prev = nid;
+    }
     return nid;
     }
 //
@@ -1927,86 +2191,95 @@ unsafe extern "C" fn interleave_nodes(policy: *mut mempolicy) -> c_uint {
 //
 #[no_mangle]
 pub unsafe extern "C" fn mempolicy_slab_node() -> c_uint {
-    unsigned int mempolicy_slab_node(void)
-    {
-    struct mempolicy *policy;
-    let mut node: c_int = numa_mem_id();
-    if (!in_task())
+pub static mut policy: *mut c_void = core::ptr::null_mut();
+pub static mut node: c_int = 0;
+    if (!in_task()) {
     return node;
+    }
     policy = current.mempolicy;
-    if (!policy)
+    if (!policy) {
     return node;
-    switch (policy.mode) {
-    case MPOL_PREFERRED:
+    }
+    match (policy.mode) {
+    MPOL_PREFERRED => {
     return first_node(policy.nodes);
-    case MPOL_INTERLEAVE:
+    }
+    MPOL_INTERLEAVE => {
     return interleave_nodes(policy);
-    case MPOL_WEIGHTED_INTERLEAVE:
+    }
+    MPOL_WEIGHTED_INTERLEAVE => {
     return weighted_interleave_nodes(policy);
-    case MPOL_BIND:
-    case MPOL_PREFERRED_MANY:
+    }
+    MPOL_BIND => {
+    }
+    MPOL_PREFERRED_MANY => {
     {
-    struct zoneref *z;
+pub static mut z: *mut c_void = core::ptr::null_mut();
 //
 // Follow bind policy behavior and start allocation at the
 // first node.
 //
-    struct zonelist *zonelist;
-    let mut highest_zoneidx: enum zone_type = gfp_zone(GFP_KERNEL);
+pub static mut zonelist: *mut c_void = core::ptr::null_mut();
+pub static mut highest_zoneidx: zone_type = 0;
     zonelist = &NODE_DATA(node).node_zonelists[ZONELIST_FALLBACK];
     z = first_zones_zonelist(zonelist, highest_zoneidx,
     &policy.nodes);
     return zonelist_zone(z) ? zonelist_node_idx(z) : node;
     }
-    case MPOL_LOCAL:
+    }
+    MPOL_LOCAL => {
     return node;
-    default:
+    }
+    _ => {
     BUG();
     }
     }
-    static unsigned int read_once_policy_nodemask(struct mempolicy *pol,
-    nodemask_t *mask)
-    {
+    }
+#[no_mangle]
+pub unsafe extern "C" fn read_once_policy_nodemask(pol: *mut mempolicy, mask: *mut nodemask_t) -> c_uint {
 //
 // barrier stabilizes the nodemask locally so that it can be iterated
 // over safely without concern for changes. Allocators validate node
 // selection does not violate mems_allowed, so this is safe.
 //
     barrier();
-    memcpy(mask, &pol.nodes, sizeof(nodemask_t));
+    memcpy(mask, &pol.nodes, sizeof!(nodemask_t));
     barrier();
     return nodes_weight(*mask);
     }
 #[no_mangle]
 unsafe extern "C" fn weighted_interleave_nid(pol: *mut mempolicy, ilx: pgoff_t) -> c_uint {
-    static unsigned int weighted_interleave_nid(struct mempolicy *pol, pgoff_t ilx)
-    {
-    struct weighted_interleave_state *state;
-    nodemask_t nodemask;
-    unsigned int target, nr_nodes;
-    u8 *table = core::ptr::null_mut();
-    let mut weight_total: c_uint = 0;
-    u8 weight;
-    let mut nid: c_int = 0;
+pub static mut state: *mut c_void = core::ptr::null_mut();
+    let mut nodemask;
+    let mut target = 0;
+    let mut nr_nodes = 0;
+    let mut table = core::ptr::null_mut();
+pub static mut weight_total: c_uint = 0;
+    let mut weight = 0;
+pub static mut nid: c_int = 0;
     nr_nodes = read_once_policy_nodemask(pol, &nodemask);
-    if (!nr_nodes)
+    if (!nr_nodes) {
     return numa_node_id();
+    }
     rcu_read_lock();
     state = rcu_dereference(wi_state);
 // Uninitialized wi_state means we should assume all weights are 1
-    if (state)
+    if (state) {
     table = state.iw_table;
+    }
 // calculate the total weight
-    for_each_node_mask(nid, nodemask)
+    for_each_node_mask(nid, nodemask) {
     weight_total += table ? table[nid] : 1;
+    }
 // Calculate the node offset based on totals
     target = ilx % weight_total;
     nid = first_node(nodemask);
     while (target) {
 // detect system default usage
     weight = table ? table[nid] : 1;
-    if (target < weight)
+    if (target < weight) {
     break;
+    }
     target -= weight;
     nid = next_node_in(nid, nodemask);
     }
@@ -2020,63 +2293,72 @@ unsafe extern "C" fn weighted_interleave_nid(pol: *mut mempolicy, ilx: pgoff_t) 
 //
 #[no_mangle]
 unsafe extern "C" fn interleave_nid(pol: *mut mempolicy, ilx: pgoff_t) -> c_uint {
-    static unsigned int interleave_nid(struct mempolicy *pol, pgoff_t ilx)
-    {
-    nodemask_t nodemask;
-    unsigned int target, nnodes;
-    int i;
-    int nid;
+    let mut nodemask;
+    let mut target = 0;
+    let mut nnodes = 0;
+    let mut i = 0;
+    let mut nid = 0;
     nnodes = read_once_policy_nodemask(pol, &nodemask);
-    if (!nnodes)
+    if (!nnodes) {
     return numa_node_id();
+    }
     target = ilx % nnodes;
     nid = first_node(nodemask);
-    for (i = 0; i < target; i++)
+    for (i = 0; i < target; i++) {
     nid = next_node(nid, nodemask);
+    }
     return nid;
     }
 //
 // Return a nodemask representing a mempolicy for filtering nodes for
 // page allocation, together with preferred node id (or the input node id).
 //
-    static nodemask_t *policy_nodemask(gfp_t gfp, struct mempolicy *pol,
+    static nodemask_t *policy_nodemask(gfp_t gfp, mempolicy *pol,
     pgoff_t ilx, int *nid)
     {
-    nodemask_t *nodemask = core::ptr::null_mut();
-    switch (pol.mode) {
-    case MPOL_PREFERRED:
+    let mut nodemask = core::ptr::null_mut();
+    match (pol.mode) {
+    MPOL_PREFERRED => {
 // Override input node id
 // nid = first_node(pol->nodes);
-    break;
-    case MPOL_PREFERRED_MANY:
+    // break;
+    }
+    MPOL_PREFERRED_MANY => {
     nodemask = &pol.nodes;
-    if (pol.home_node != NUMA_NO_NODE)
+    if (pol.home_node != NUMA_NO_NODE) {
 // nid = pol->home_node;
-    break;
-    case MPOL_BIND:
+    }
+    // break;
+    }
+    MPOL_BIND => {
 // Restrict to nodemask (but not on lower zones)
     if (apply_policy_zone(pol, gfp_zone(gfp)) &&
-    cpuset_nodemask_valid_mems_allowed(&pol.nodes))
+    cpuset_nodemask_valid_mems_allowed(&pol.nodes)) {
     nodemask = &pol.nodes;
-    if (pol.home_node != NUMA_NO_NODE)
+    }
+    if (pol.home_node != NUMA_NO_NODE) {
 // nid = pol->home_node;
+    }
 //
 // __GFP_THISNODE shouldn't even be used with the bind policy
 // because we might easily break the expectation to stay on the
 // requested node and not break the policy.
 //
-    WARN_ON_ONCE(gfp & __GFP_THISNODE);
-    break;
-    case MPOL_INTERLEAVE:
+    WARN_ON_ONCE!(gfp & __GFP_THISNODE);
+    // break;
+    }
+    MPOL_INTERLEAVE => {
 // Override input node id
 // nid = (ilx == NO_INTERLEAVE_INDEX) ?
-    interleave_nodes(pol) : interleave_nid(pol, ilx);
-    break;
-    case MPOL_WEIGHTED_INTERLEAVE:
+// forward_decl: erleave_nodes;
+    // break;
+    }
+    MPOL_WEIGHTED_INTERLEAVE => {
 // nid = (ilx == NO_INTERLEAVE_INDEX) ?
     weighted_interleave_nodes(pol) :
     weighted_interleave_nid(pol, ilx);
-    break;
+    // break;
+    }
     }
     return nodemask;
     }
@@ -2094,11 +2376,10 @@ unsafe extern "C" fn interleave_nid(pol: *mut mempolicy, ilx: pgoff_t) -> c_uint
 // If the effective policy is 'bind' or 'prefer-many', returns a pointer
 // to the mempolicy's @nodemask for filtering the zonelist.
 //
-    int huge_node(struct vm_area_struct *vma, unsigned long addr, gfp_t gfp_flags,
-    struct mempolicy **mpol, nodemask_t **nodemask)
-    {
-    pgoff_t ilx;
-    int nid;
+#[no_mangle]
+pub unsafe extern "C" fn huge_node(vma: *mut vm_area_struct, addr: c_ulong, gfp_flags: gfp_t, mpol: *mut *mut mempolicy, nodemask: *mut *mut nodemask_t) -> c_int {
+    let mut ilx;
+    let mut nid = 0;
     nid = numa_node_id();
 // mpol = get_vma_policy(vma, addr, hstate_vma(vma)->order, &ilx);
 // nodemask = policy_nodemask(gfp_flags, *mpol, ilx, &nid);
@@ -2122,26 +2403,32 @@ unsafe extern "C" fn interleave_nid(pol: *mut mempolicy, ilx: pgoff_t) -> c_uint
 //
 #[no_mangle]
 pub unsafe extern "C" fn init_nodemask_of_mempolicy(mask: *mut nodemask_t) -> bool {
-    bool init_nodemask_of_mempolicy(nodemask_t *mask)
-    {
-    struct mempolicy *mempolicy;
-    if (!(mask && current.mempolicy))
+pub static mut mempolicy: *mut c_void = core::ptr::null_mut();
+    if (!(mask && current.mempolicy)) {
     return false;
+    }
     task_lock(current);
     mempolicy = current.mempolicy;
-    switch (mempolicy.mode) {
-    case MPOL_PREFERRED:
-    case MPOL_PREFERRED_MANY:
-    case MPOL_BIND:
-    case MPOL_INTERLEAVE:
-    case MPOL_WEIGHTED_INTERLEAVE:
+    match (mempolicy.mode) {
+    MPOL_PREFERRED => {
+    }
+    MPOL_PREFERRED_MANY => {
+    }
+    MPOL_BIND => {
+    }
+    MPOL_INTERLEAVE => {
+    }
+    MPOL_WEIGHTED_INTERLEAVE => {
 // mask = mempolicy->nodes;
-    break;
-    case MPOL_LOCAL:
+    // break;
+    }
+    MPOL_LOCAL => {
     init_nodemask_of_node(mask, numa_node_id());
-    break;
-    default:
+    // break;
+    }
+    _ => {
     BUG();
+    }
     }
     task_unlock(current);
     return true;
@@ -2157,25 +2444,25 @@ pub unsafe extern "C" fn init_nodemask_of_mempolicy(mask: *mut nodemask_t) -> bo
 //
 // Takes task_lock(tsk) to prevent freeing of its mempolicy.
 //
-    bool mempolicy_in_oom_domain(struct task_struct *tsk,
-    const nodemask_t *mask)
-    {
-    struct mempolicy *mempolicy;
-    let mut ret: bool = true;
-    if (!mask)
+#[no_mangle]
+pub unsafe extern "C" fn mempolicy_in_oom_domain(tsk: *mut task_struct, mask: *mut nodemask_t) -> bool {
+pub static mut mempolicy: *mut c_void = core::ptr::null_mut();
+pub static mut ret: bool = true;
+    if (!mask) {
     return ret;
+    }
     task_lock(tsk);
     mempolicy = tsk.mempolicy;
-    if (mempolicy && mempolicy.mode == MPOL_BIND)
+    if (mempolicy && mempolicy.mode == MPOL_BIND) {
     ret = nodes_intersects(mempolicy.nodes, *mask);
+    }
     task_unlock(tsk);
     return ret;
     }
-    static struct page *alloc_pages_preferred_many(gfp_t gfp, unsigned int order,
-    int nid, nodemask_t *nodemask)
-    {
-    struct page *page;
-    gfp_t preferred_gfp;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_pages_preferred_many(gfp: gfp_t, order: c_uint, nid: c_int, nodemask: *mut nodemask_t) -> *mut c_void {
+pub static mut page: *mut c_void = core::ptr::null_mut();
+    let mut preferred_gfp;
 //
 // This is a two pass approach. The first pass will only try the
 // preferred nodes but skip the direct reclaim and allow the
@@ -2186,9 +2473,10 @@ pub unsafe extern "C" fn init_nodemask_of_mempolicy(mask: *mut nodemask_t) -> bo
     preferred_gfp &= ~(__GFP_DIRECT_RECLAIM | __GFP_NOFAIL);
     page = __alloc_frozen_pages_noprof(preferred_gfp, order, nid, nodemask,
     ALLOC_DEFAULT);
-    if (!page)
+    if (!page) {
     page = __alloc_frozen_pages_noprof(gfp, order, nid, core::ptr::null_mut(),
     ALLOC_DEFAULT);
+    }
     return page;
     }
 //
@@ -2201,16 +2489,16 @@ pub unsafe extern "C" fn init_nodemask_of_mempolicy(mask: *mut nodemask_t) -> bo
 //
 // Return: The page on success or NULL if allocation fails.
 //
-    static struct page *alloc_pages_mpol(gfp_t gfp, unsigned int order,
-    struct mempolicy *pol, pgoff_t ilx, int nid)
-    {
-    nodemask_t *nodemask;
-    struct page *page;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_pages_mpol(gfp: gfp_t, order: c_uint, pol: *mut mempolicy, ilx: pgoff_t, nid: c_int) -> *mut c_void {
+pub static mut nodemask: *mut c_void = core::ptr::null_mut();
+pub static mut page: *mut c_void = core::ptr::null_mut();
     nodemask = policy_nodemask(gfp, pol, ilx, &nid);
-    if (pol.mode == MPOL_PREFERRED_MANY)
+    if (pol.mode == MPOL_PREFERRED_MANY) {
     return alloc_pages_preferred_many(gfp, order, nid, nodemask);
-    if (IS_ENABLED(CONFIG_TRANSPARENT_HUGEPAGE) &&
-// filter "hugepage" allocation, unless from alloc_pages()
+    }
+    if (IS_ENABLED!(CONFIG_TRANSPARENT_HUGEPAGE) &&
+filter "hugepage" allocation, unless from alloc_pages()
     is_pmd_order(order) && ilx != NO_INTERLEAVE_INDEX) {
 //
 // For hugepage allocation and non-interleave policy which
@@ -2232,8 +2520,9 @@ pub unsafe extern "C" fn init_nodemask_of_mempolicy(mask: *mut nodemask_t) -> bo
     page = __alloc_frozen_pages_noprof(
     gfp | __GFP_THISNODE | __GFP_NORETRY, order,
     nid, core::ptr::null_mut(), ALLOC_DEFAULT);
-    if (page || !(gfp & __GFP_DIRECT_RECLAIM))
+    if (page || !(gfp & __GFP_DIRECT_RECLAIM)) {
     return page;
+    }
 //
 // If hugepage allocations are configured to always
 // synchronous compact or the vma has been madvised
@@ -2255,13 +2544,13 @@ pub unsafe extern "C" fn init_nodemask_of_mempolicy(mask: *mut nodemask_t) -> bo
     }
     return page;
     }
-    struct folio *folio_alloc_mpol_noprof(gfp_t gfp, unsigned int order,
-    struct mempolicy *pol, pgoff_t ilx, int nid)
-    {
-    struct page *page = alloc_pages_mpol(gfp | __GFP_COMP, order, pol,
+#[no_mangle]
+pub unsafe extern "C" fn folio_alloc_mpol_noprof(gfp: gfp_t, order: c_uint, pol: *mut mempolicy, ilx: pgoff_t, nid: c_int) -> *mut c_void {
+    let mut page = alloc_pages_mpol(gfp | __GFP_COMP, order, pol,
     ilx, nid);
-    if (!page)
+    if (!page) {
     return core::ptr::null_mut();
+    }
     set_page_refcounted(page);
     return page_rmappable_folio(page);
     }
@@ -2280,29 +2569,30 @@ pub unsafe extern "C" fn init_nodemask_of_mempolicy(mask: *mut nodemask_t) -> bo
 //
 // Return: The folio on success or NULL if allocation fails.
 //
-    struct folio *vma_alloc_folio_noprof(gfp_t gfp, int order, struct vm_area_struct *vma,
-    unsigned long addr)
-    {
-    struct mempolicy *pol;
-    pgoff_t ilx;
-    struct folio *folio;
-    if (vma.vm_flags & VM_DROPPABLE)
+#[no_mangle]
+pub unsafe extern "C" fn vma_alloc_folio_noprof(gfp: gfp_t, order: c_int, vma: *mut vm_area_struct, addr: c_ulong) -> *mut c_void {
+pub static mut pol: *mut c_void = core::ptr::null_mut();
+    let mut ilx;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    if (vma.vm_flags & VM_DROPPABLE) {
     gfp |= __GFP_NOWARN;
+    }
     pol = get_vma_policy(vma, addr, order, &ilx);
     folio = folio_alloc_mpol_noprof(gfp, order, pol, ilx, numa_node_id());
     mpol_cond_put(pol);
     return folio;
     }
     EXPORT_SYMBOL(vma_alloc_folio_noprof);
-    struct page *alloc_frozen_pages_noprof(gfp_t gfp, unsigned order)
-    {
-    struct mempolicy *pol = &default_policy;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_frozen_pages_noprof(gfp: gfp_t, order: c_uint) -> *mut c_void {
+    let mut pol = &default_policy;
 //
 // No reference counting needed for current->mempolicy
 // nor system default_policy
 //
-    if (!in_interrupt() && !(gfp & __GFP_THISNODE))
+    if (!in_interrupt() && !(gfp & __GFP_THISNODE)) {
     pol = get_task_policy(current);
+    }
     return alloc_pages_mpol(gfp, order, pol, NO_INTERLEAVE_INDEX,
     numa_node_id());
     }
@@ -2320,79 +2610,76 @@ pub unsafe extern "C" fn init_nodemask_of_mempolicy(mask: *mut nodemask_t) -> bo
 // flags are used.
 // Return: The page on success or NULL if allocation fails.
 //
-    struct page *alloc_pages_noprof(gfp_t gfp, unsigned int order)
-    {
-    struct page *page = alloc_frozen_pages_noprof(gfp, order);
-    if (page)
+#[no_mangle]
+pub unsafe extern "C" fn alloc_pages_noprof(gfp: gfp_t, order: c_uint) -> *mut c_void {
+    let mut page = alloc_frozen_pages_noprof(gfp, order);
+    if (page) {
     set_page_refcounted(page);
+    }
     return page;
     }
     EXPORT_SYMBOL(alloc_pages_noprof);
-    struct folio *folio_alloc_noprof(gfp_t gfp, unsigned int order)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn folio_alloc_noprof(gfp: gfp_t, order: c_uint) -> *mut c_void {
     return page_rmappable_folio(alloc_pages_noprof(gfp | __GFP_COMP, order));
     }
     EXPORT_SYMBOL(folio_alloc_noprof);
-    static unsigned long alloc_pages_bulk_interleave(gfp_t gfp,
-    struct mempolicy *pol, unsigned long nr_pages,
-    struct page **page_array)
-    {
-    int nodes;
-    unsigned long nr_pages_per_node;
-    int delta;
-    int i;
-    unsigned long nr_allocated;
-    let mut total_allocated: c_ulong = 0;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_pages_bulk_interleave(gfp: gfp_t, pol: *mut mempolicy, nr_pages: c_ulong, page_array: *mut *mut page) -> c_ulong {
+    let mut nodes = 0;
+    let mut nr_pages_per_node = 0;
+    let mut delta = 0;
+    let mut i = 0;
+    let mut nr_allocated = 0;
+pub static mut total_allocated: c_ulong = 0;
     nodes = nodes_weight(pol.nodes);
     nr_pages_per_node = nr_pages / nodes;
     delta = nr_pages - nodes * nr_pages_per_node;
-    for (i = 0; i < nodes; i++) {
+    while (i < nodes) {
     if (delta) {
     nr_allocated = alloc_pages_bulk_noprof(gfp,
-    interleave_nodes(pol), core::ptr::null_mut(),
-    nr_pages_per_node + 1,
-    page_array);
-    delta--;
+// forward_decl: erleave_nodes;
+    delta -= 1;
     } else {
     nr_allocated = alloc_pages_bulk_noprof(gfp,
-    interleave_nodes(pol), core::ptr::null_mut(),
-    nr_pages_per_node, page_array);
+// forward_decl: erleave_nodes;
     }
     page_array += nr_allocated;
     total_allocated += nr_allocated;
     }
     return total_allocated;
     }
-    static unsigned long alloc_pages_bulk_weighted_interleave(gfp_t gfp,
-    struct mempolicy *pol, unsigned long nr_pages,
-    struct page **page_array)
-    {
-    struct weighted_interleave_state *state;
-    struct task_struct *me = current;
-    unsigned int cpuset_mems_cookie;
-    let mut total_allocated: c_ulong = 0;
-    let mut nr_allocated: c_ulong = 0;
-    unsigned long rounds;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_pages_bulk_weighted_interleave(gfp: gfp_t, pol: *mut mempolicy, nr_pages: c_ulong, page_array: *mut *mut page) -> c_ulong {
+pub static mut state: *mut c_void = core::ptr::null_mut();
+    let mut me = current;
+    let mut cpuset_mems_cookie = 0;
+pub static mut total_allocated: c_ulong = 0;
+pub static mut nr_allocated: c_ulong = 0;
+    let mut rounds = 0;
     unsigned long node_pages, delta;
     u8 *weights, weight;
-    let mut weight_total: c_uint = 0;
-    let mut rem_pages: c_ulong = nr_pages;
-    nodemask_t nodes;
-    int nnodes, node;
-    let mut resume_node: c_int = MAX_NUMNODES - 1;
-    let mut resume_weight: u8 = 0;
-    int prev_node;
-    int i;
-    if (!nr_pages)
+pub static mut weight_total: c_uint = 0;
+pub static mut rem_pages: c_ulong = 0;
+    let mut nodes;
+    let mut nnodes = 0;
+    let mut node = 0;
+pub static mut resume_node: c_int = 0;
+pub static mut resume_weight: u8 = 0;
+    let mut prev_node = 0;
+    let mut i = 0;
+    if (!nr_pages) {
     return 0;
+    }
 // read the nodes onto the stack, retry if done during rebind
     do {
     cpuset_mems_cookie = read_mems_allowed_begin();
     nnodes = read_once_policy_nodemask(pol, &nodes);
     } while (read_mems_allowed_retry(cpuset_mems_cookie));
 // if the nodemask has become invalid, we cannot do anything
-    if (!nnodes)
+    if (!nnodes) {
     return 0;
+    }
 // Continue allocating from most recent node and adjust the nr_pages
     node = me.il_prev;
     weight = me.il_weight;
@@ -2415,21 +2702,24 @@ pub unsafe extern "C" fn init_nodemask_of_mempolicy(mask: *mut nodemask_t) -> bo
     prev_node = node;
 // create a local copy of node weights to operate on outside rcu
     weights = kmalloc(nr_node_ids, gfp & GFP_RECLAIM_MASK);
-    if (!weights)
+    if (!weights) {
     return total_allocated;
+    }
     rcu_read_lock();
     state = rcu_dereference(wi_state);
     if (state) {
-    memcpy(weights, state.iw_table, nr_node_ids * sizeof(u8));
+    memcpy(weights, state.iw_table, nr_node_ids * sizeof!(u8));
     rcu_read_unlock();
     } else {
     rcu_read_unlock();
-    for (i = 0; i < nr_node_ids; i++)
+    for (i = 0; i < nr_node_ids; i++) {
     weights[i] = 1;
     }
+    }
 // calculate total, detect system default usage
-    for_each_node_mask(node, nodes)
+    for_each_node_mask(node, nodes) {
     weight_total += weights[node];
+    }
 //
 // Calculate rounds/partial rounds to minimize __alloc_pages_bulk calls.
 // Track which node weighted interleave should resume from.
@@ -2441,7 +2731,7 @@ pub unsafe extern "C" fn init_nodemask_of_mempolicy(mask: *mut nodemask_t) -> bo
     delta = rem_pages % weight_total;
     resume_node = next_node_in(prev_node, nodes);
     resume_weight = weights[resume_node];
-    for (i = 0; i < nnodes; i++) {
+    while (i < nnodes) {
     node = next_node_in(prev_node, nodes);
     weight = weights[node];
     node_pages = weight * rounds;
@@ -2457,14 +2747,16 @@ pub unsafe extern "C" fn init_nodemask_of_mempolicy(mask: *mut nodemask_t) -> bo
     delta = 0;
     }
 // node_pages can be 0 if an allocation fails and rounds == 0
-    if (!node_pages)
+    if (!node_pages) {
     break;
+    }
     nr_allocated = __alloc_pages_bulk(gfp, node, core::ptr::null_mut(), node_pages,
     page_array);
     page_array += nr_allocated;
     total_allocated += nr_allocated;
-    if (total_allocated == nr_pages)
+    if (total_allocated == nr_pages) {
     break;
+    }
     prev_node = node;
     }
     me.il_prev = resume_node;
@@ -2472,20 +2764,19 @@ pub unsafe extern "C" fn init_nodemask_of_mempolicy(mask: *mut nodemask_t) -> bo
     kfree(weights);
     return total_allocated;
     }
-    static unsigned long alloc_pages_bulk_preferred_many(gfp_t gfp, int nid,
-    struct mempolicy *pol, unsigned long nr_pages,
-    struct page **page_array)
-    {
-    gfp_t preferred_gfp;
-    let mut nr_allocated: c_ulong = 0;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_pages_bulk_preferred_many(gfp: gfp_t, nid: c_int, pol: *mut mempolicy, nr_pages: c_ulong, page_array: *mut *mut page) -> c_ulong {
+    let mut preferred_gfp;
+pub static mut nr_allocated: c_ulong = 0;
     preferred_gfp = gfp | __GFP_NOWARN;
     preferred_gfp &= ~(__GFP_DIRECT_RECLAIM | __GFP_NOFAIL);
     nr_allocated  = alloc_pages_bulk_noprof(preferred_gfp, nid, &pol.nodes,
     nr_pages, page_array);
-    if (nr_allocated < nr_pages)
+    if (nr_allocated < nr_pages) {
     nr_allocated += alloc_pages_bulk_noprof(gfp, numa_node_id(), core::ptr::null_mut(),
     nr_pages - nr_allocated,
     page_array + nr_allocated);
+    }
     return nr_allocated;
     }
 // alloc pages bulk and mempolicy should be considered at the
@@ -2494,23 +2785,26 @@ pub unsafe extern "C" fn init_nodemask_of_mempolicy(mask: *mut nodemask_t) -> bo
 // It can accelerate memory allocation especially interleaving
 // allocate memory.
 //
-    unsigned long alloc_pages_bulk_mempolicy_noprof(gfp_t gfp,
-    unsigned long nr_pages, struct page **page_array)
-    {
-    struct mempolicy *pol = &default_policy;
-    nodemask_t *nodemask;
-    int nid;
-    if (!in_interrupt() && !(gfp & __GFP_THISNODE))
+#[no_mangle]
+pub unsafe extern "C" fn alloc_pages_bulk_mempolicy_noprof(gfp: gfp_t, nr_pages: c_ulong, page_array: *mut *mut page) -> c_ulong {
+    let mut pol = &default_policy;
+pub static mut nodemask: *mut c_void = core::ptr::null_mut();
+    let mut nid = 0;
+    if (!in_interrupt() && !(gfp & __GFP_THISNODE)) {
     pol = get_task_policy(current);
-    if (pol.mode == MPOL_INTERLEAVE)
+    }
+    if (pol.mode == MPOL_INTERLEAVE) {
     return alloc_pages_bulk_interleave(gfp, pol,
     nr_pages, page_array);
-    if (pol.mode == MPOL_WEIGHTED_INTERLEAVE)
+    }
+    if (pol.mode == MPOL_WEIGHTED_INTERLEAVE) {
     return alloc_pages_bulk_weighted_interleave(
     gfp, pol, nr_pages, page_array);
-    if (pol.mode == MPOL_PREFERRED_MANY)
+    }
+    if (pol.mode == MPOL_PREFERRED_MANY) {
     return alloc_pages_bulk_preferred_many(gfp,
     numa_node_id(), pol, nr_pages, page_array);
+    }
     nid = numa_node_id();
     nodemask = policy_nodemask(gfp, pol, NO_INTERLEAVE_INDEX, &nid);
     return alloc_pages_bulk_noprof(gfp, nid, nodemask,
@@ -2518,11 +2812,10 @@ pub unsafe extern "C" fn init_nodemask_of_mempolicy(mask: *mut nodemask_t) -> bo
     }
 #[no_mangle]
 pub unsafe extern "C" fn vma_dup_policy(src: *mut vm_area_struct, dst: *mut vm_area_struct) -> c_int {
-    int vma_dup_policy(struct vm_area_struct *src, struct vm_area_struct *dst)
-    {
-    struct mempolicy *pol = mpol_dup(src.vm_policy);
-    if (IS_ERR(pol))
+    let mut pol = mpol_dup(src.vm_policy);
+    if (IS_ERR(pol)) {
     return PTR_ERR(pol);
+    }
     dst.vm_policy = pol;
     return 0;
     }
@@ -2537,20 +2830,22 @@ pub unsafe extern "C" fn vma_dup_policy(src: *mut vm_area_struct, dst: *mut vm_a
 // cpuset's mems), so we needn't do rebind work for current task.
 //
 // Slow path of a mempolicy duplicate
-    struct mempolicy *__mpol_dup(struct mempolicy *old)
-    {
-    struct mempolicy *new = kmem_cache_alloc(policy_cache, GFP_KERNEL);
-    if (!new)
+#[no_mangle]
+pub unsafe extern "C" fn __mpol_dup(old: *mut mempolicy) -> *mut c_void {
+    let mut new = kmem_cache_alloc(policy_cache, GFP_KERNEL);
+    if (!new) {
     return ERR_PTR(-ENOMEM);
+    }
 // task's mempolicy is protected by alloc_lock
     if (old == current.mempolicy) {
     task_lock(current);
 // new = *old;
     task_unlock(current);
-    } else
+    } else {
 // new = *old;
+    }
     if (current_cpuset_is_being_rebound()) {
-    let mut mems: nodemask_t = cpuset_mems_allowed(current);
+pub static mut mems: nodemask_t = 0;
     mpol_rebind_policy(new, &mems);
     }
     atomic_set(&new.refcnt, 1);
@@ -2559,31 +2854,41 @@ pub unsafe extern "C" fn vma_dup_policy(src: *mut vm_area_struct, dst: *mut vm_a
 // Slow path of a mempolicy comparison
 #[no_mangle]
 pub unsafe extern "C" fn __mpol_equal(a: *mut mempolicy, b: *mut mempolicy) -> bool {
-    bool __mpol_equal(struct mempolicy *a, struct mempolicy *b)
-    {
-    if (!a || !b)
+    if (!a || !b) {
     return false;
-    if (a.mode != b.mode)
+    }
+    if (a.mode != b.mode) {
     return false;
-    if (a.flags != b.flags)
+    }
+    if (a.flags != b.flags) {
     return false;
-    if (a.home_node != b.home_node)
+    }
+    if (a.home_node != b.home_node) {
     return false;
-    if (mpol_store_user_nodemask(a))
+    }
+    if (mpol_store_user_nodemask(a)) {
     if (!nodes_equal(a.w.user_nodemask, b.w.user_nodemask))
     return false;
-    switch (a.mode) {
-    case MPOL_BIND:
-    case MPOL_INTERLEAVE:
-    case MPOL_PREFERRED:
-    case MPOL_PREFERRED_MANY:
-    case MPOL_WEIGHTED_INTERLEAVE:
+    }
+    match (a.mode) {
+    MPOL_BIND => {
+    }
+    MPOL_INTERLEAVE => {
+    }
+    MPOL_PREFERRED => {
+    }
+    MPOL_PREFERRED_MANY => {
+    }
+    MPOL_WEIGHTED_INTERLEAVE => {
     return nodes_equal(a.nodes, b.nodes);
-    case MPOL_LOCAL:
+    }
+    MPOL_LOCAL => {
     return true;
-    default:
+    }
+    _ => {
     BUG();
     return false;
+    }
     }
     }
 //
@@ -2597,34 +2902,38 @@ pub unsafe extern "C" fn __mpol_equal(a: *mut mempolicy, b: *mut mempolicy) -> b
 // lookup first element intersecting start-end.  Caller holds sp->lock for
 // reading or for writing
 //
-    static struct sp_node *sp_lookup(struct shared_policy *sp,
-    pgoff_t start, pgoff_t end)
-    {
-    struct rb_node *n = sp.root.rb_node;
-    while (n) {
-    struct sp_node *p = rb_entry(n, struct sp_node, nd);
-    if (start >= p.end)
-    n = n.rb_right;
 #[no_mangle]
-pub unsafe extern "C" fn if(p->start: end <=) -> else {
-    else if (end <= p.start)
+pub unsafe extern "C" fn sp_lookup(sp: *mut shared_policy, start: pgoff_t, end: pgoff_t) -> *mut c_void {
+    let mut n = sp.root.rb_node;
+    while (n) {
+    let mut p = rb_entry(n, sp_node, nd);
+    if (start >= p.end) {
+    n = n.rb_right;
+    }
+
+    else if (end <= p.start) {
     n = n.rb_left;
-    else
+    }
+    else {
     break;
     }
-    if (!n)
+    }
+    if (!n) {
     return core::ptr::null_mut();
+    }
     for (;;) {
-    struct sp_node *w = core::ptr::null_mut();
-    struct rb_node *prev = rb_prev(n);
-    if (!prev)
+    let mut w = core::ptr::null_mut();
+    let mut prev = rb_prev(n);
+    if (!prev) {
     break;
-    w = rb_entry(prev, struct sp_node, nd);
-    if (w.end <= start)
+    }
+    w = rb_entry(prev, sp_node, nd);
+    if (w.end <= start) {
     break;
+    }
     n = prev;
     }
-    return rb_entry(n, struct sp_node, nd);
+    return rb_entry(n, sp_node, nd);
     }
 //
 // Insert a new shared policy into the list.  Caller holds sp->lock for
@@ -2632,34 +2941,34 @@ pub unsafe extern "C" fn if(p->start: end <=) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn sp_insert(sp: *mut shared_policy, new: *mut sp_node) {
-    static void sp_insert(struct shared_policy *sp, struct sp_node *new)
-    {
-    struct rb_node **p = &sp.root.rb_node;
-    struct rb_node *parent = core::ptr::null_mut();
-    struct sp_node *nd;
+    let mut p = &sp.root.rb_node;
+    let mut parent = core::ptr::null_mut();
+pub static mut nd: *mut c_void = core::ptr::null_mut();
     while (*p) {
     parent = *p;
-    nd = rb_entry(parent, struct sp_node, nd);
-    if (new.start < nd.start)
+    nd = rb_entry(parent, sp_node, nd);
+    if (new.start < nd.start) {
     p = &(*p).rb_left;
-#[no_mangle]
-pub unsafe extern "C" fn if(nd->end: new->end >) -> else {
-    else if (new.end > nd.end)
+    }
+
+    else if (new.end > nd.end) {
     p = &(*p).rb_right;
-    else
+    }
+    else {
     BUG();
+    }
     }
     rb_link_node(&new.nd, parent, p);
     rb_insert_color(&new.nd, &sp.root);
     }
 // Find shared policy intersecting idx
-    struct mempolicy *mpol_shared_policy_lookup(struct shared_policy *sp,
-    pgoff_t idx)
-    {
-    struct mempolicy *pol = core::ptr::null_mut();
-    struct sp_node *sn;
-    if (!sp.root.rb_node)
+#[no_mangle]
+pub unsafe extern "C" fn mpol_shared_policy_lookup(sp: *mut shared_policy, idx: pgoff_t) -> *mut c_void {
+    let mut pol = core::ptr::null_mut();
+pub static mut sn: *mut c_void = core::ptr::null_mut();
+    if (!sp.root.rb_node) {
     return core::ptr::null_mut();
+    }
     read_lock(&sp.lock);
     sn = sp_lookup(sp, idx, idx+1);
     if (sn) {
@@ -2672,8 +2981,6 @@ pub unsafe extern "C" fn if(nd->end: new->end >) -> else {
     EXPORT_SYMBOL_FOR_MODULES(mpol_shared_policy_lookup, "kvm");
 #[no_mangle]
 unsafe extern "C" fn sp_free(n: *mut sp_node) {
-    static void sp_free(struct sp_node *n)
-    {
     mpol_put(n.policy);
     kmem_cache_free(sn_cache, n);
     }
@@ -2691,43 +2998,49 @@ unsafe extern "C" fn sp_free(n: *mut sp_node) {
 // Return: NUMA_NO_NODE if the page is in a node that is valid for this
 // policy, or a suitable node ID to allocate a replacement folio from.
 //
-    int mpol_misplaced(struct folio *folio, struct vm_fault *vmf,
-    unsigned long addr)
-    {
-    struct mempolicy *pol;
-    pgoff_t ilx;
-    struct zoneref *z;
-    let mut curnid: c_int = folio_nid(folio);
-    struct vm_area_struct *vma = vmf.vma;
-    let mut thiscpu: c_int = raw_smp_processor_id();
-    let mut thisnid: c_int = numa_node_id();
-    let mut polnid: c_int = NUMA_NO_NODE;
-    let mut ret: c_int = NUMA_NO_NODE;
+#[no_mangle]
+pub unsafe extern "C" fn mpol_misplaced(folio: *mut folio, vmf: *mut vm_fault, addr: c_ulong) -> c_int {
+pub static mut pol: *mut c_void = core::ptr::null_mut();
+    let mut ilx;
+pub static mut z: *mut c_void = core::ptr::null_mut();
+pub static mut curnid: c_int = 0;
+    let mut vma = vmf.vma;
+pub static mut thiscpu: c_int = 0;
+pub static mut thisnid: c_int = 0;
+pub static mut polnid: c_int = 0;
+pub static mut ret: c_int = 0;
 //
 // Make sure ptl is held so that we don't preempt and we
 // have a stable smp processor id
 //
     lockdep_assert_held(vmf.ptl);
     pol = get_vma_policy(vma, addr, folio_order(folio), &ilx);
-    if (!(pol.flags & MPOL_F_MOF))
-    goto out;
-    switch (pol.mode) {
-    case MPOL_INTERLEAVE:
+    if (!(pol.flags & MPOL_F_MOF)) {
+// goto;
+    }
+    match (pol.mode) {
+    MPOL_INTERLEAVE => {
     polnid = interleave_nid(pol, ilx);
-    break;
-    case MPOL_WEIGHTED_INTERLEAVE:
+    // break;
+    }
+    MPOL_WEIGHTED_INTERLEAVE => {
     polnid = weighted_interleave_nid(pol, ilx);
-    break;
-    case MPOL_PREFERRED:
-    if (node_isset(curnid, pol.nodes))
-    goto out;
+    // break;
+    }
+    MPOL_PREFERRED => {
+    if (node_isset(curnid, pol.nodes)) {
+// goto;
+    }
     polnid = first_node(pol.nodes);
-    break;
-    case MPOL_LOCAL:
+    // break;
+    }
+    MPOL_LOCAL => {
     polnid = numa_node_id();
-    break;
-    case MPOL_BIND:
-    case MPOL_PREFERRED_MANY:
+    // break;
+    }
+    MPOL_BIND => {
+    }
+    MPOL_PREFERRED_MANY => {
 //
 // Even though MPOL_PREFERRED_MANY can allocate pages outside
 // policy nodemask we don't allow numa migration to nodes
@@ -2742,36 +3055,42 @@ unsafe extern "C" fn sp_free(n: *mut sp_node) {
 // Optimize placement among multiple nodes
 // via NUMA balancing
 //
-    if (node_isset(thisnid, pol.nodes))
-    break;
-    goto out;
+    if (node_isset(thisnid, pol.nodes)) {
+    // break;
+    }
+// goto;
     }
 //
 // use current page if in policy nodemask,
 // else select nearest allowed node, if any.
 // If no allowed nodes, use current [!misplaced].
 //
-    if (node_isset(curnid, pol.nodes))
-    goto out;
+    if (node_isset(curnid, pol.nodes)) {
+// goto;
+    }
     z = first_zones_zonelist(
     node_zonelist(thisnid, GFP_HIGHUSER),
     gfp_zone(GFP_HIGHUSER),
     &pol.nodes);
     polnid = zonelist_node_idx(z);
-    break;
-    default:
+    // break;
+    }
+    _ => {
     BUG();
+    }
     }
 // Migrate the folio towards the node whose CPU is referencing it
     if (pol.flags & MPOL_F_MORON) {
     polnid = thisnid;
     if (!should_numa_migrate_memory(current, folio, curnid,
-    thiscpu))
-    goto out;
+    thiscpu)) {
+// goto;
     }
-    if (curnid != polnid)
+    }
+    if (curnid != polnid) {
     ret = polnid;
-    out:
+    }
+// label;
     mpol_cond_put(pol);
     return ret;
     }
@@ -2783,9 +3102,7 @@ unsafe extern "C" fn sp_free(n: *mut sp_node) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn mpol_put_task_policy(task: *mut task_struct) {
-    void mpol_put_task_policy(struct task_struct *task)
-    {
-    struct mempolicy *pol;
+pub static mut pol: *mut c_void = core::ptr::null_mut();
     task_lock(task);
     pol = task.mempolicy;
     task.mempolicy = core::ptr::null_mut();
@@ -2794,26 +3111,23 @@ pub unsafe extern "C" fn mpol_put_task_policy(task: *mut task_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn sp_delete(sp: *mut shared_policy, n: *mut sp_node) {
-    static void sp_delete(struct shared_policy *sp, struct sp_node *n)
-    {
     rb_erase(&n.nd, &sp.root);
     sp_free(n);
     }
-    static void sp_node_init(struct sp_node *node, unsigned long start,
-    unsigned long end, struct mempolicy *pol)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sp_node_init(node: *mut sp_node, start: c_ulong, end: c_ulong, pol: *mut mempolicy) {
     node.start = start;
     node.end = end;
     node.policy = pol;
     }
-    static struct sp_node *sp_alloc(unsigned long start, unsigned long end,
-    struct mempolicy *pol)
-    {
-    struct sp_node *n;
-    struct mempolicy *newpol;
+#[no_mangle]
+pub unsafe extern "C" fn sp_alloc(start: c_ulong, end: c_ulong, pol: *mut mempolicy) -> *mut c_void {
+pub static mut n: *mut c_void = core::ptr::null_mut();
+pub static mut newpol: *mut c_void = core::ptr::null_mut();
     n = kmem_cache_alloc(sn_cache, GFP_KERNEL);
-    if (!n)
+    if (!n) {
     return core::ptr::null_mut();
+    }
     newpol = mpol_dup(pol);
     if (IS_ERR(newpol)) {
     kmem_cache_free(sn_cache, n);
@@ -2824,29 +3138,31 @@ unsafe extern "C" fn sp_delete(sp: *mut shared_policy, n: *mut sp_node) {
     return n;
     }
 // Replace a policy range.
-    static int shared_policy_replace(struct shared_policy *sp, pgoff_t start,
-    pgoff_t end, struct sp_node *new)
-    {
-    struct sp_node *n;
-    struct sp_node *n_new = core::ptr::null_mut();
-    struct mempolicy *mpol_new = core::ptr::null_mut();
-    let mut ret: c_int = 0;
-    restart:
+#[no_mangle]
+pub unsafe extern "C" fn shared_policy_replace(sp: *mut shared_policy, start: pgoff_t, end: pgoff_t, new: *mut sp_node) -> c_int {
+pub static mut n: *mut c_void = core::ptr::null_mut();
+    let mut n_new = core::ptr::null_mut();
+    let mut mpol_new = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
+// label;
     write_lock(&sp.lock);
     n = sp_lookup(sp, start, end);
 // Take care of old policies in the same range.
     while (n && n.start < end) {
-    struct rb_node *next = rb_next(&n.nd);
+    let mut next = rb_next(&n.nd);
     if (n.start >= start) {
-    if (n.end <= end)
+    if (n.end <= end) {
     sp_delete(sp, n);
-    else
+    }
+    else {
     n.start = end;
+    }
     } else {
 // Old policy spanning whole new range.
     if (n.end > end) {
-    if (!n_new)
-    goto alloc_new;
+    if (!n_new) {
+// goto;
+    }
 // mpol_new = *n->policy;
     atomic_set(&mpol_new.refcnt, 1);
     sp_node_init(n_new, end, n.end, mpol_new);
@@ -2855,39 +3171,46 @@ unsafe extern "C" fn sp_delete(sp: *mut shared_policy, n: *mut sp_node) {
     n_new = core::ptr::null_mut();
     mpol_new = core::ptr::null_mut();
     break;
-    } else
+    } else {
     n.end = start;
     }
-    if (!next)
-    break;
-    n = rb_entry(next, struct sp_node, nd);
     }
-    if (new)
+    if (!next) {
+    break;
+    }
+    n = rb_entry(next, sp_node, nd);
+    }
+    if (new) {
     sp_insert(sp, new);
+    }
     write_unlock(&sp.lock);
     ret = 0;
-    err_out:
-    if (mpol_new)
+// label;
+    if (mpol_new) {
     mpol_put(mpol_new);
-    if (n_new)
+    }
+    if (n_new) {
     kmem_cache_free(sn_cache, n_new);
+    }
     return ret;
-    alloc_new:
+// label;
     write_unlock(&sp.lock);
     ret = -ENOMEM;
     n_new = kmem_cache_alloc(sn_cache, GFP_KERNEL);
-    if (!n_new)
-    goto err_out;
+    if (!n_new) {
+// goto;
+    }
     mpol_new = kmem_cache_alloc(policy_cache, GFP_KERNEL);
-    if (!mpol_new)
-    goto err_out;
+    if (!mpol_new) {
+// goto;
+    }
     atomic_set(&mpol_new.refcnt, 1);
-    goto restart;
+// goto;
     }
 //
 // mpol_shared_policy_init - initialize shared policy for inode
 // @sp: pointer to inode shared policy
-// @mpol:  struct mempolicy to install
+// @mpol: mempolicy to install
 //
 // Install non-NULL @mpol in inode's shared policy rb-tree.
 // On entry, the current task has a reference on a non-NULL @mpol.
@@ -2896,70 +3219,72 @@ unsafe extern "C" fn sp_delete(sp: *mut shared_policy, n: *mut sp_node) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn mpol_shared_policy_init(sp: *mut shared_policy, mpol: *mut mempolicy) {
-    void mpol_shared_policy_init(struct shared_policy *sp, struct mempolicy *mpol)
-    {
-    int ret;
+    let mut ret = 0;
     sp.root = RB_ROOT;		/* empty tree == default mempolicy */
     rwlock_init(&sp.lock);
     if (mpol) {
-    struct sp_node *sn;
-    struct mempolicy *npol;
+pub static mut sn: *mut c_void = core::ptr::null_mut();
+pub static mut npol: *mut c_void = core::ptr::null_mut();
     NODEMASK_SCRATCH(scratch);
-    if (!scratch)
-    goto put_mpol;
+    if (!scratch) {
+// goto;
+    }
 // contextualize the tmpfs mount point mempolicy to this file
     npol = mpol_new(mpol.mode, mpol.flags, &mpol.w.user_nodemask);
-    if (IS_ERR(npol))
-    goto free_scratch; /* no valid nodemask intersection */
+    if (IS_ERR(npol)) {
+// goto; /* no valid nodemask intersection */
+    }
     task_lock(current);
     ret = mpol_set_nodemask(npol, &mpol.w.user_nodemask, scratch);
     task_unlock(current);
-    if (ret)
-    goto put_npol;
+    if (ret) {
+// goto;
+    }
 // alloc node covering entire file; adds ref to file's npol
     sn = sp_alloc(0, MAX_LFS_FILESIZE >> PAGE_SHIFT, npol);
-    if (sn)
+    if (sn) {
     sp_insert(sp, sn);
-    put_npol:
+    }
+// label;
     mpol_put(npol);	/* drop initial ref on file's npol */
-    free_scratch:
+// label;
     NODEMASK_SCRATCH_FREE(scratch);
-    put_mpol:
+// label;
     mpol_put(mpol);	/* drop our incoming ref on sb mpol */
     }
     }
     EXPORT_SYMBOL_FOR_MODULES(mpol_shared_policy_init, "kvm");
-    int mpol_set_shared_policy(struct shared_policy *sp,
-    struct vm_area_struct *vma, struct mempolicy *pol)
-    {
-    let mut pgoff: pgoff_t = vma_start_pgoff(vma);
-    let mut pgoff_end: pgoff_t = vma_end_pgoff(vma);
-    struct sp_node *new = core::ptr::null_mut();
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn mpol_set_shared_policy(sp: *mut shared_policy, vma: *mut vm_area_struct, pol: *mut mempolicy) -> c_int {
+pub static mut pgoff: pgoff_t = 0;
+pub static mut pgoff_end: pgoff_t = 0;
+    let mut new = core::ptr::null_mut();
+    let mut err = 0;
     if (pol) {
     new = sp_alloc(pgoff, pgoff_end, pol);
-    if (!new)
+    if (!new) {
     return -ENOMEM;
     }
+    }
     err = shared_policy_replace(sp, pgoff, pgoff_end, new);
-    if (err && new)
+    if (err && new) {
     sp_free(new);
+    }
     return err;
     }
     EXPORT_SYMBOL_FOR_MODULES(mpol_set_shared_policy, "kvm");
 // Free a backing policy store on inode delete.
 #[no_mangle]
 pub unsafe extern "C" fn mpol_free_shared_policy(sp: *mut shared_policy) {
-    void mpol_free_shared_policy(struct shared_policy *sp)
-    {
-    struct sp_node *n;
-    struct rb_node *next;
-    if (!sp.root.rb_node)
+pub static mut n: *mut c_void = core::ptr::null_mut();
+pub static mut next: *mut c_void = core::ptr::null_mut();
+    if (!sp.root.rb_node) {
     return;
+    }
     write_lock(&sp.lock);
     next = rb_first(&sp.root);
     while (next) {
-    n = rb_entry(next, struct sp_node, nd);
+    n = rb_entry(next, sp_node, nd);
     next = rb_next(&n.nd);
     sp_delete(sp, n);
     }
@@ -2969,28 +3294,27 @@ pub unsafe extern "C" fn mpol_free_shared_policy(sp: *mut shared_policy) {
 
     static int __initdata numabalancing_override;
 #[no_mangle]
-unsafe extern "C" fn check_numabalancing_enable() -> void __init {
-    static void __init check_numabalancing_enable(void)
-    {
-    let mut numabalancing_default: bool = false;
-    if (IS_ENABLED(CONFIG_NUMA_BALANCING_DEFAULT_ENABLED))
+unsafe extern "C" fn check_numabalancing_enable()  {
+pub static mut numabalancing_default: bool = false;
+    if (IS_ENABLED!(CONFIG_NUMA_BALANCING_DEFAULT_ENABLED)) {
     numabalancing_default = true;
+    }
 // Parsed by setup_numabalancing. override == 1 enables, -1 disables
-    if (numabalancing_override)
+    if (numabalancing_override) {
     set_numabalancing_state(numabalancing_override == 1);
+    }
     if (num_online_nodes() > 1 && !numabalancing_override) {
-    pr_info("%s automatic NUMA balancing. Configure with numa_balancing= or the kernel.numa_balancing sysctl\n",
+    pr_info!("%s automatic NUMA balancing. Configure with numa_balancing= or the kernel.numa_balancing sysctl\n",
     numabalancing_default ? "Enabling" : "Disabling");
     set_numabalancing_state(numabalancing_default);
     }
     }
 #[no_mangle]
-unsafe extern "C" fn setup_numabalancing(str: *mut c_char) -> int __init {
-    static int __init setup_numabalancing(char *str)
-    {
-    let mut ret: c_int = 0;
-    if (!str)
-    goto out;
+unsafe extern "C" fn setup_numabalancing(str: *mut c_char) -> c_int {
+pub static mut ret: c_int = 0;
+    if (!str) {
+// goto;
+    }
     if (!strcmp(str, "enable")) {
     numabalancing_override = 1;
     ret = 1;
@@ -2998,34 +3322,31 @@ unsafe extern "C" fn setup_numabalancing(str: *mut c_char) -> int __init {
     numabalancing_override = -1;
     ret = 1;
     }
-    out:
-    if (!ret)
-    pr_warn("Unable to parse numa_balancing=\n");
+// label;
+    if (!ret) {
+    pr_warn!("Unable to parse numa_balancing=\n");
+    }
     return ret;
     }
-    __setup("numa_balancing=", setup_numabalancing);
+    __setup!("numa_balancing=", setup_numabalancing);
 
 #[no_mangle]
-pub unsafe extern "C" fn check_numabalancing_enable() -> void __init {
-    static inline void __init check_numabalancing_enable(void)
-    {
+pub unsafe extern "C" fn check_numabalancing_enable()  {
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn numa_policy_init() -> void __init {
-    void __init numa_policy_init(void)
-    {
-    nodemask_t interleave_nodes;
-    let mut largest: c_ulong = 0;
+pub unsafe extern "C" fn numa_policy_init()  {
+    let mut interleave_nodes;
+pub static mut largest: c_ulong = 0;
     int nid, prefer = 0;
     policy_cache = kmem_cache_create("numa_policy",
-    sizeof(struct mempolicy),
+    sizeof!(mempolicy),
     0, SLAB_PANIC, core::ptr::null_mut());
     sn_cache = kmem_cache_create("shared_policy_node",
-    sizeof(struct sp_node),
+    sizeof!(sp_node),
     0, SLAB_PANIC, core::ptr::null_mut());
     for_each_node(nid) {
-    preferred_node_policy[nid] = (struct mempolicy) {
+    preferred_node_policy[nid] = (mempolicy) {
     .refcnt = ATOMIC_INIT(1),
     .mode = MPOL_PREFERRED,
     .flags = MPOL_F_MOF | MPOL_F_MORON,
@@ -3039,28 +3360,29 @@ pub unsafe extern "C" fn numa_policy_init() -> void __init {
 //
     nodes_clear(interleave_nodes);
     for_each_node_state(nid, N_MEMORY) {
-    let mut total_pages: c_ulong = node_present_pages(nid);
+pub static mut total_pages: c_ulong = 0;
 // Preserve the largest node
     if (largest < total_pages) {
     largest = total_pages;
     prefer = nid;
     }
 // Interleave this node?
-    if ((total_pages << PAGE_SHIFT) >= (16 << 20))
+    if ((total_pages << PAGE_SHIFT) >= (16 << 20)) {
     node_set(nid, interleave_nodes);
     }
+    }
 // All too small, use the largest
-    if (unlikely(nodes_empty(interleave_nodes)))
+    if (unlikely(nodes_empty(interleave_nodes))) {
     node_set(prefer, interleave_nodes);
-    if (do_set_mempolicy(MPOL_INTERLEAVE, 0, &interleave_nodes))
-    pr_err("%s: interleaving failed\n", __func__);
+    }
+    if (do_set_mempolicy(MPOL_INTERLEAVE, 0, &interleave_nodes)) {
+    pr_err!("%s: interleaving failed\n", __func__);
+    }
     check_numabalancing_enable();
     }
 // Reset policy of current process to default
 #[no_mangle]
 pub unsafe extern "C" fn numa_default_policy() {
-    void numa_default_policy(void)
-    {
     do_set_mempolicy(MPOL_DEFAULT, 0, core::ptr::null_mut());
     }
 //
@@ -3089,74 +3411,91 @@ pub unsafe extern "C" fn numa_default_policy() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn mpol_parse_str(str: *mut c_char, mpol: *mut mempolicy) -> c_int {
-    int mpol_parse_str(char *str, struct mempolicy **mpol)
-    {
-    struct mempolicy *new = core::ptr::null_mut();
-    unsigned short mode_flags;
-    nodemask_t nodes;
-    char *nodelist = strchr(str, ':');
-    char *flags = strchr(str, '=');
-    let mut err: c_int = 1, mode;
-    if (flags)
-// flags++ = '\0';	/* terminate mode string
+    let mut new = core::ptr::null_mut();
+    let mut mode_flags = 0;
+    let mut nodes;
+    let mut nodelist = strchr(str, ':');
+    let mut flags = strchr(str, '=');
+pub static mut err: c_int = 0;
+    if (flags) {
+// flags++ = '\0';	// terminate mode string
+    }
     if (nodelist) {
 // NUL-terminate mode or flags string
 // nodelist++ = '\0';
-    if (nodelist_parse(nodelist, nodes))
-    goto out;
-    if (!nodes_subset(nodes, node_states[N_MEMORY]))
-    goto out;
-    } else
+    if (nodelist_parse(nodelist, nodes)) {
+// goto;
+    }
+    if (!nodes_subset(nodes, node_states[N_MEMORY])) {
+// goto;
+    }
+    } else {
     nodes_clear(nodes);
+    }
     mode = match_string(policy_modes, MPOL_MAX, str);
-    if (mode < 0)
-    goto out;
-    switch (mode) {
-    case MPOL_PREFERRED:
+    if (mode < 0) {
+// goto;
+    }
+    match (mode) {
+    MPOL_PREFERRED => {
 //
 // Insist on a nodelist of one node only, although later
 // we use first_node(nodes) to grab a single node, so here
 // nodelist (or nodes) cannot be empty.
 //
     if (nodelist) {
-    char *rest = nodelist;
-    while (isdigit(*rest))
-    rest++;
-    if (*rest)
-    goto out;
-    if (nodes_empty(nodes))
-    goto out;
+    let mut rest = nodelist;
+    while (isdigit(*rest)) {
+    rest += 1;
     }
-    break;
-    case MPOL_INTERLEAVE:
-    case MPOL_WEIGHTED_INTERLEAVE:
+    if (*rest) {
+// goto;
+    }
+    if (nodes_empty(nodes)) {
+// goto;
+    }
+    }
+    // break;
+    }
+    MPOL_INTERLEAVE => {
+    }
+    MPOL_WEIGHTED_INTERLEAVE => {
 //
 // Default to online nodes with memory if no nodelist
 //
-    if (!nodelist)
+    if (!nodelist) {
     nodes = node_states[N_MEMORY];
-    break;
-    case MPOL_LOCAL:
+    }
+    // break;
+    }
+    MPOL_LOCAL => {
 //
 // Don't allow a nodelist;  mpol_new() checks flags
 //
-    if (nodelist)
-    goto out;
-    break;
-    case MPOL_DEFAULT:
+    if (nodelist) {
+// goto;
+    }
+    // break;
+    }
+    MPOL_DEFAULT => {
 //
 // Insist on a empty nodelist
 //
-    if (!nodelist)
+    if (!nodelist) {
     err = 0;
-    goto out;
-    case MPOL_PREFERRED_MANY:
-    case MPOL_BIND:
+    }
+// goto;
+    }
+    MPOL_PREFERRED_MANY => {
+    }
+    MPOL_BIND => {
 //
 // Insist on a nodelist
 //
-    if (!nodelist)
-    goto out;
+    if (!nodelist) {
+// goto;
+    }
+    }
     }
     mode_flags = 0;
     if (flags) {
@@ -3164,18 +3503,21 @@ pub unsafe extern "C" fn mpol_parse_str(str: *mut c_char, mpol: *mut mempolicy) 
 // Currently, we only support two mutually exclusive
 // mode flags.
 //
-    if (!strcmp(flags, "static"))
+    if (!strcmp(flags, "static")) {
     mode_flags |= MPOL_F_STATIC_NODES;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !strcmp(flags, _arg: "relative")) -> else {
-    else if (!strcmp(flags, "relative"))
+    }
+
+    else if (!strcmp(flags, "relative")) {
     mode_flags |= MPOL_F_RELATIVE_NODES;
-    else
-    goto out;
+    }
+    else {
+// goto;
+    }
     }
     new = mpol_new(mode, mode_flags, &nodes);
-    if (IS_ERR(new))
-    goto out;
+    if (IS_ERR(new)) {
+// goto;
+    }
 //
 // Save nodes for mpol_to_str() to show the tmpfs mount options
 // for /proc/mounts, /proc/pid/mounts and /proc/pid/mountinfo.
@@ -3194,14 +3536,17 @@ pub unsafe extern "C" fn if(_arg: !strcmp(flags, _arg: "relative")) -> else {
 //
     new.w.user_nodemask = nodes;
     err = 0;
-    out:
+// label;
 // Restore string for error message
-    if (nodelist)
+    if (nodelist) {
 // --nodelist = ':';
-    if (flags)
+    }
+    if (flags) {
 // --flags = '=';
-    if (!err)
+    }
+    if (!err) {
 // mpol = new;
+    }
     return err;
     }
 
@@ -3218,34 +3563,40 @@ pub unsafe extern "C" fn if(_arg: !strcmp(flags, _arg: "relative")) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn mpol_to_str(buffer: *mut c_char, maxlen: c_int, pol: *mut mempolicy) {
-    void mpol_to_str(char *buffer, int maxlen, struct mempolicy *pol)
-    {
-    char *p = buffer;
-    let mut nodes: nodemask_t = NODE_MASK_NONE;
-    let mut mode: c_ushort = MPOL_DEFAULT;
-    let mut flags: c_ushort = 0;
+    let mut p = buffer;
+pub static mut nodes: nodemask_t = 0;
+pub static mut mode: c_ushort = 0;
+pub static mut flags: c_ushort = 0;
     if (pol &&
     pol != &default_policy &&
     !(pol >= &preferred_node_policy[0] &&
-    pol <= &preferred_node_policy[ARRAY_SIZE(preferred_node_policy) - 1])) {
+    pol <= &preferred_node_policy[ARRAY_SIZE!(preferred_node_policy) - 1])) {
     mode = pol.mode;
     flags = pol.flags;
     }
-    switch (mode) {
-    case MPOL_DEFAULT:
-    case MPOL_LOCAL:
-    break;
-    case MPOL_PREFERRED:
-    case MPOL_PREFERRED_MANY:
-    case MPOL_BIND:
-    case MPOL_INTERLEAVE:
-    case MPOL_WEIGHTED_INTERLEAVE:
+    match (mode) {
+    MPOL_DEFAULT => {
+    }
+    MPOL_LOCAL => {
+    // break;
+    }
+    MPOL_PREFERRED => {
+    }
+    MPOL_PREFERRED_MANY => {
+    }
+    MPOL_BIND => {
+    }
+    MPOL_INTERLEAVE => {
+    }
+    MPOL_WEIGHTED_INTERLEAVE => {
     nodes = pol.nodes;
-    break;
-    default:
-    WARN_ON_ONCE(1);
+    // break;
+    }
+    _ => {
+    WARN_ON_ONCE!(1);
     snprintf(p, maxlen, "unknown");
     return;
+    }
     }
     p += snprintf(p, maxlen, "%s", policy_modes[mode]);
     if (flags & MPOL_MODE_FLAGS) {
@@ -3253,21 +3604,24 @@ pub unsafe extern "C" fn mpol_to_str(buffer: *mut c_char, maxlen: c_int, pol: *m
 //
 // Static and relative are mutually exclusive.
 //
-    if (flags & MPOL_F_STATIC_NODES)
+    if (flags & MPOL_F_STATIC_NODES) {
     p += snprintf(p, buffer + maxlen - p, "static");
-#[no_mangle]
-pub unsafe extern "C" fn if(MPOL_F_RELATIVE_NODES: flags &) -> else {
-    else if (flags & MPOL_F_RELATIVE_NODES)
+    }
+
+    else if (flags & MPOL_F_RELATIVE_NODES) {
     p += snprintf(p, buffer + maxlen - p, "relative");
+    }
     if (flags & MPOL_F_NUMA_BALANCING) {
-    if (!is_power_of_2(flags & MPOL_MODE_FLAGS))
+    if (!is_power_of_2(flags & MPOL_MODE_FLAGS)) {
     p += snprintf(p, buffer + maxlen - p, "|");
+    }
     p += snprintf(p, buffer + maxlen - p, "balancing");
     }
     }
-    if (!nodes_empty(nodes))
+    if (!nodes_empty(nodes)) {
     p += scnprintf(p, buffer + maxlen - p, ":%*pbl",
     nodemask_pr_args(&nodes));
+    }
     }
 
 #[repr(C)]
@@ -3285,39 +3639,40 @@ pub struct sysfs_wi_group {
     pub nattrs: [*mut iw_node_attr; ],
 }
 
-    static struct sysfs_wi_group *wi_group;
-    static ssize_t node_show(struct kobject *kobj, struct kobj_attribute *attr,
-    char *buf)
-    {
-    struct iw_node_attr *node_attr;
-    u8 weight;
-    node_attr = container_of(attr, struct iw_node_attr, kobj_attr);
+pub static mut wi_group: *mut c_void = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn node_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+pub static mut node_attr: *mut c_void = core::ptr::null_mut();
+    let mut weight = 0;
+    node_attr = container_of!(attr, iw_node_attr, kobj_attr);
     weight = get_il_weight(node_attr.nid);
     return sysfs_emit(buf, "%d\n", weight);
     }
-    static ssize_t node_store(struct kobject *kobj, struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn node_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
     struct weighted_interleave_state *new_wi_state, *old_wi_state = core::ptr::null_mut();
-    struct iw_node_attr *node_attr;
-    let mut weight: u8 = 0;
-    int i;
-    node_attr = container_of(attr, struct iw_node_attr, kobj_attr);
+pub static mut node_attr: *mut c_void = core::ptr::null_mut();
+pub static mut weight: u8 = 0;
+    let mut i = 0;
+    node_attr = container_of!(attr, iw_node_attr, kobj_attr);
     if (count == 0 || sysfs_streq(buf, "") ||
-    kstrtou8(buf, 0, &weight) || weight == 0)
+    kstrtou8(buf, 0, &weight) || weight == 0) {
     return -EINVAL;
+    }
     new_wi_state = kzalloc_flex(*new_wi_state, iw_table, nr_node_ids);
-    if (!new_wi_state)
+    if (!new_wi_state) {
     return -ENOMEM;
+    }
     mutex_lock(&wi_state_lock);
     old_wi_state = rcu_dereference_protected(wi_state,
     lockdep_is_held(&wi_state_lock));
     if (old_wi_state) {
     memcpy(new_wi_state.iw_table, old_wi_state.iw_table,
-    nr_node_ids * sizeof(u8));
+    nr_node_ids * sizeof!(u8));
     } else {
-    for (i = 0; i < nr_node_ids; i++)
+    for (i = 0; i < nr_node_ids; i++) {
     new_wi_state.iw_table[i] = 1;
+    }
     }
     new_wi_state.iw_table[node_attr.nid] = weight;
     new_wi_state.mode_auto = false;
@@ -3329,32 +3684,34 @@ pub struct sysfs_wi_group {
     }
     return count;
     }
-    static ssize_t weighted_interleave_auto_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    struct weighted_interleave_state *state;
-    let mut wi_auto: bool = true;
+#[no_mangle]
+pub unsafe extern "C" fn weighted_interleave_auto_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+pub static mut state: *mut c_void = core::ptr::null_mut();
+pub static mut wi_auto: bool = true;
     rcu_read_lock();
     state = rcu_dereference(wi_state);
-    if (state)
+    if (state) {
     wi_auto = state.mode_auto;
+    }
     rcu_read_unlock();
     return sysfs_emit(buf, "%s\n", str_true_false(wi_auto));
     }
-    static ssize_t weighted_interleave_auto_store(struct kobject *kobj,
-    struct kobj_attribute *attr, const char *buf, size_t count)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn weighted_interleave_auto_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
     struct weighted_interleave_state *new_wi_state, *old_wi_state = core::ptr::null_mut();
-    unsigned int *bw;
-    bool input;
-    int i;
-    if (kstrtobool(buf, &input))
+pub static mut bw: *mut c_void = core::ptr::null_mut();
+    let mut input = 0;
+    let mut i = 0;
+    if (kstrtobool(buf, &input)) {
     return -EINVAL;
+    }
     new_wi_state = kzalloc_flex(*new_wi_state, iw_table, nr_node_ids);
-    if (!new_wi_state)
+    if (!new_wi_state) {
     return -ENOMEM;
-    for (i = 0; i < nr_node_ids; i++)
+    }
+    for (i = 0; i < nr_node_ids; i++) {
     new_wi_state.iw_table[i] = 1;
+    }
     mutex_lock(&wi_state_lock);
     old_wi_state = rcu_dereference_protected(wi_state,
     lockdep_is_held(&wi_state_lock));
@@ -3364,10 +3721,11 @@ pub struct sysfs_wi_group {
     return count;
     }
     if (!input) {
-    if (old_wi_state)
+    if (old_wi_state) {
     memcpy(new_wi_state.iw_table, old_wi_state.iw_table,
-    nr_node_ids * sizeof(u8));
-    goto update_wi_state;
+    nr_node_ids * sizeof!(u8));
+    }
+// goto;
     }
     bw = node_bw_table;
     if (!bw) {
@@ -3377,7 +3735,7 @@ pub struct sysfs_wi_group {
     }
     new_wi_state.mode_auto = true;
     reduce_interleave_weights(bw, new_wi_state.iw_table);
-    update_wi_state:
+// label;
     rcu_assign_pointer(wi_state, new_wi_state);
     mutex_unlock(&wi_state_lock);
     if (old_wi_state) {
@@ -3388,11 +3746,10 @@ pub struct sysfs_wi_group {
     }
 #[no_mangle]
 unsafe extern "C" fn sysfs_wi_node_delete(nid: c_int) {
-    static void sysfs_wi_node_delete(int nid)
-    {
-    struct iw_node_attr *attr;
-    if (nid < 0 || nid >= nr_node_ids)
+pub static mut attr: *mut c_void = core::ptr::null_mut();
+    if (nid < 0 || nid >= nr_node_ids) {
     return;
+    }
     mutex_lock(&wi_group.kobj_lock);
     attr = wi_group.nattrs[nid];
     if (!attr) {
@@ -3407,17 +3764,14 @@ unsafe extern "C" fn sysfs_wi_node_delete(nid: c_int) {
     }
 #[no_mangle]
 unsafe extern "C" fn sysfs_wi_node_delete_all() {
-    static void sysfs_wi_node_delete_all(void)
-    {
-    int nid;
-    for (nid = 0; nid < nr_node_ids; nid++)
+    let mut nid = 0;
+    for (nid = 0; nid < nr_node_ids; nid++) {
     sysfs_wi_node_delete(nid);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn wi_state_free() {
-    static void wi_state_free(void)
-    {
-    struct weighted_interleave_state *old_wi_state;
+pub static mut old_wi_state: *mut c_void = core::ptr::null_mut();
     mutex_lock(&wi_state_lock);
     old_wi_state = rcu_dereference_protected(wi_state,
     lockdep_is_held(&wi_state_lock));
@@ -3428,11 +3782,7 @@ unsafe extern "C" fn wi_state_free() {
     kfree(old_wi_state);
     }
     }
-    static struct kobj_attribute wi_auto_attr = {
-    .attr = { .name = "auto", .mode = 0664 },
-    .show = weighted_interleave_auto_show,
-    .store = weighted_interleave_auto_store,
-    };
+pub static mut kobj_attribute: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn wi_cleanup() {
     sysfs_remove_file(&wi_group.wi_kobj, &wi_auto_attr.attr);
@@ -3441,28 +3791,22 @@ unsafe extern "C" fn wi_cleanup() {
     }
 #[no_mangle]
 unsafe extern "C" fn wi_kobj_release(wi_kobj: *mut kobject) {
-    static void wi_kobj_release(struct kobject *wi_kobj)
-    {
     kfree(wi_group);
     }
-    static const struct kobj_type wi_ktype = {
-    .sysfs_ops = &kobj_sysfs_ops,
-    .release = wi_kobj_release,
-    };
+pub static mut kobj_type: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn sysfs_wi_node_add(nid: c_int) -> c_int {
-    static int sysfs_wi_node_add(int nid)
-    {
-    int ret;
-    char *name;
-    struct iw_node_attr *new_attr;
+    let mut ret = 0;
+pub static mut name: *mut c_void = core::ptr::null_mut();
+pub static mut new_attr: *mut c_void = core::ptr::null_mut();
     if (nid < 0 || nid >= nr_node_ids) {
-    pr_err("invalid node id: %d\n", nid);
+    pr_err!("invalid node id: %d\n", nid);
     return -EINVAL;
     }
     new_attr = kzalloc_obj(*new_attr);
-    if (!new_attr)
+    if (!new_attr) {
     return -ENOMEM;
+    }
     name = kasprintf(GFP_KERNEL, "node%d", nid);
     if (!name) {
     kfree(new_attr);
@@ -3478,91 +3822,97 @@ unsafe extern "C" fn sysfs_wi_node_add(nid: c_int) -> c_int {
     if (wi_group.nattrs[nid]) {
     mutex_unlock(&wi_group.kobj_lock);
     ret = -EEXIST;
-    goto out;
+// goto;
     }
     ret = sysfs_create_file(&wi_group.wi_kobj, &new_attr.kobj_attr.attr);
     if (ret) {
     mutex_unlock(&wi_group.kobj_lock);
-    goto out;
+// goto;
     }
     wi_group.nattrs[nid] = new_attr;
     mutex_unlock(&wi_group.kobj_lock);
     return 0;
-    out:
+// label;
     kfree(new_attr.kobj_attr.attr.name);
     kfree(new_attr);
     return ret;
     }
-    static int wi_node_notifier(struct notifier_block *nb,
-    unsigned long action, void *data)
-    {
-    int err;
-    struct node_notify *nn = data;
-    let mut nid: c_int = nn.nid;
-    switch (action) {
-    case NODE_ADDED_FIRST_MEMORY:
+#[no_mangle]
+pub unsafe extern "C" fn wi_node_notifier(nb: *mut notifier_block, action: c_ulong, data: *mut c_void) -> c_int {
+    let mut err = 0;
+    let mut nn = data;
+pub static mut nid: c_int = 0;
+    match (action) {
+    NODE_ADDED_FIRST_MEMORY => {
     err = sysfs_wi_node_add(nid);
-    if (err)
-    pr_err("failed to add sysfs for node%d during hotplug: %d\n",
+    if (err) {
+    pr_err!("failed to add sysfs for node%d during hotplug: %d\n",
     nid, err);
-    break;
-    case NODE_REMOVED_LAST_MEMORY:
+    }
+    // break;
+    }
+    NODE_REMOVED_LAST_MEMORY => {
     sysfs_wi_node_delete(nid);
-    break;
+    // break;
+    }
     }
     return NOTIFY_OK;
     }
 #[no_mangle]
-unsafe extern "C" fn add_weighted_interleave_group(mempolicy_kobj: *mut kobject) -> int __init {
-    static int __init add_weighted_interleave_group(struct kobject *mempolicy_kobj)
-    {
-    int nid, err;
+unsafe extern "C" fn add_weighted_interleave_group(mempolicy_kobj: *mut kobject) -> c_int {
+    let mut nid = 0;
+    let mut err = 0;
     wi_group = kzalloc_flex(*wi_group, nattrs, nr_node_ids);
-    if (!wi_group)
+    if (!wi_group) {
     return -ENOMEM;
+    }
     mutex_init(&wi_group.kobj_lock);
     err = kobject_init_and_add(&wi_group.wi_kobj, &wi_ktype, mempolicy_kobj,
     "weighted_interleave");
-    if (err)
-    goto err_put_kobj;
+    if (err) {
+// goto;
+    }
     err = sysfs_create_file(&wi_group.wi_kobj, &wi_auto_attr.attr);
-    if (err)
-    goto err_put_kobj;
+    if (err) {
+// goto;
+    }
     for_each_online_node(nid) {
-    if (!node_state(nid, N_MEMORY))
+    if (!node_state(nid, N_MEMORY)) {
     continue;
+    }
     err = sysfs_wi_node_add(nid);
     if (err) {
-    pr_err("failed to add sysfs for node%d during init: %d\n",
+    pr_err!("failed to add sysfs for node%d during init: %d\n",
     nid, err);
-    goto err_cleanup_kobj;
+// goto;
     }
     }
     hotplug_node_notifier(wi_node_notifier, DEFAULT_CALLBACK_PRI);
     return 0;
-    err_cleanup_kobj:
+// label;
     wi_cleanup();
     kobject_del(&wi_group.wi_kobj);
-    err_put_kobj:
+// label;
     kobject_put(&wi_group.wi_kobj);
     return err;
     }
 #[no_mangle]
-unsafe extern "C" fn mempolicy_sysfs_init() -> int __init {
-    static int __init mempolicy_sysfs_init(void)
-    {
-    int err;
-    static struct kobject *mempolicy_kobj;
+unsafe extern "C" fn mempolicy_sysfs_init() -> c_int {
+    let mut err = 0;
+pub static mut mempolicy_kobj: *mut c_void = core::ptr::null_mut();
     mempolicy_kobj = kobject_create_and_add("mempolicy", mm_kobj);
-    if (!mempolicy_kobj)
+    if (!mempolicy_kobj) {
     return -ENOMEM;
+    }
     err = add_weighted_interleave_group(mempolicy_kobj);
-    if (err)
-    goto err_kobj;
+    if (err) {
+// goto;
+    }
     return 0;
-    err_kobj:
+// label;
     kobject_del(mempolicy_kobj);
     kobject_put(mempolicy_kobj);
     return err;
     }
-    late_initcall(mempolicy_sysfs_init);
+    late_initcall!(mempolicy_sysfs_init);
+}

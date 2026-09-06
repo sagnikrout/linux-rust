@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -92,7 +342,7 @@ pub const HIGH_RES_NSEC: c_int = 1;
 // cpu_base->active
 //
 
-    static void retrigger_next_event(void *arg);
+// forward_decl: retrigger_next_event;
     static ktime_t __hrtimer_cb_get_time(clockid_t clock_id);
 //
 // The timer bases:
@@ -104,7 +354,7 @@ pub const HIGH_RES_NSEC: c_int = 1;
 //
 
     [idx] = { .index = idx, .clockid = cid }
-    DEFINE_PER_CPU(struct hrtimer_cpu_base, hrtimer_bases) =
+    DEFINE_PER_CPU(hrtimer_cpu_base, hrtimer_bases) =
     {
     .lock = __RAW_SPIN_LOCK_UNLOCKED(hrtimer_bases.lock),
     .clock_base = {
@@ -121,31 +371,31 @@ pub const HIGH_RES_NSEC: c_int = 1;
     };
 #[no_mangle]
 pub unsafe extern "C" fn hrtimer_base_is_online(base: *mut hrtimer_cpu_base) -> bool {
-    static inline bool hrtimer_base_is_online(struct hrtimer_cpu_base *base)
-    {
-    if (!IS_ENABLED(CONFIG_HOTPLUG_CPU))
+    if (!IS_ENABLED!(CONFIG_HOTPLUG_CPU)) {
     return true;
-    else
+    }
+    else {
     return likely(base.online);
     }
+    }
 
-    DEFINE_STATIC_KEY_FALSE(hrtimer_highres_enabled_key);
+pub static mut hrtimer_highres_enabled_key: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn hrtimer_hres_workfn(work: *mut work_struct) {
-    static void hrtimer_hres_workfn(struct work_struct *work)
-    {
     static_branch_enable(&hrtimer_highres_enabled_key);
     }
-    static DECLARE_WORK(hrtimer_hres_work, hrtimer_hres_workfn);
+pub static mut hrtimer_hres_work: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn hrtimer_schedule_hres_work() {
-    static inline void hrtimer_schedule_hres_work(void)
-    {
-    if (!hrtimer_highres_enabled())
+    if (!hrtimer_highres_enabled()) {
     schedule_work(&hrtimer_hres_work);
     }
+    }
 
-    static inline void hrtimer_schedule_hres_work(void) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: hrtimer_schedule_hres_work
+pub unsafe extern "C" fn hrtimer_schedule_hres_work_dup() { }
 
 //
 // Functions and macros which are different for UP/SMP systems are kept in a
@@ -157,15 +407,7 @@ pub unsafe extern "C" fn hrtimer_schedule_hres_work() {
 // such that hrtimer_callback_running() can unconditionally dereference
 // timer->base->cpu_base
 //
-    static struct hrtimer_cpu_base migration_cpu_base = {
-    .clock_base = {
-    [0] = {
-    .cpu_base = &migration_cpu_base,
-    .seq      = SEQCNT_RAW_SPINLOCK_ZERO(migration_cpu_base.seq,
-    &migration_cpu_base.lock),
-    },
-    },
-    };
+pub static mut hrtimer_cpu_base: usize = 0;
 
 //
 // We are using hashed locking: holding per_cpu(hrtimer_bases)[n].lock
@@ -179,16 +421,16 @@ pub unsafe extern "C" fn hrtimer_schedule_hres_work() {
 // possible to set timer->base = &migration_base and drop the lock: the timer
 // remains locked.
 //
-    static struct hrtimer_clock_base *lock_hrtimer_base(const struct hrtimer *timer,
-    unsigned long *flags)
-    __acquires(&timer.base.lock)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn lock_hrtimer_base(timer: *mut hrtimer, lock: *mut unsigned longflags)
+    __acquires(&timer.base.) -> *mut c_void {
     for (;;) {
-    struct hrtimer_clock_base *base = READ_ONCE(timer.base);
+    let mut base = READ_ONCE(timer.base);
     if (likely(base != &migration_base)) {
     raw_spin_lock_irqsave(&base.cpu_base.lock, *flags);
-    if (likely(base == timer.base))
+    if (likely(base == timer.base)) {
     return base;
+    }
 // The timer has migrated to another CPU:
     raw_spin_unlock_irqrestore(&base.cpu_base.lock, *flags);
     }
@@ -209,37 +451,38 @@ pub unsafe extern "C" fn hrtimer_schedule_hres_work() {
 //
 // Called with cpu_base->lock of target cpu held.
 //
-    static bool hrtimer_suitable_target(struct hrtimer *timer, struct hrtimer_clock_base *new_base,
-    struct hrtimer_cpu_base *new_cpu_base,
-    struct hrtimer_cpu_base *this_cpu_base)
-    {
-    ktime_t expires;
+#[no_mangle]
+pub unsafe extern "C" fn hrtimer_suitable_target(timer: *mut hrtimer, new_base: *mut hrtimer_clock_base, new_cpu_base: *mut hrtimer_cpu_base, this_cpu_base: *mut hrtimer_cpu_base) -> bool {
+    let mut expires;
 //
 // The local CPU clockevent can be reprogrammed. Also get_target_base()
 // guarantees it is online.
 //
-    if (new_cpu_base == this_cpu_base)
+    if (new_cpu_base == this_cpu_base) {
     return true;
+    }
 //
 // The offline local CPU can't be the default target if the
 // next remote target event is after this timer. Keep the
 // elected new base. An IPI will be issued to reprogram
 // it as a last resort.
 //
-    if (!hrtimer_base_is_online(this_cpu_base))
+    if (!hrtimer_base_is_online(this_cpu_base)) {
     return true;
+    }
     expires = ktime_sub(hrtimer_get_expires(timer), new_base.offset);
     return expires >= new_base.cpu_base.expires_next;
     }
-    static inline struct hrtimer_cpu_base *get_target_base(struct hrtimer_cpu_base *base, bool pinned)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn get_target_base(base: *mut hrtimer_cpu_base, pinned: bool) -> *mut c_void {
     if (!hrtimer_base_is_online(base)) {
-    let mut cpu: c_int = cpumask_any_and(cpu_online_mask, housekeeping_cpumask(HK_TYPE_TIMER));
+pub static mut cpu: c_int = 0;
     return &per_cpu(hrtimer_bases, cpu);
     }
 
-    if (static_branch_likely(&timers_migration_enabled) && !pinned)
+    if (static_branch_likely(&timers_migration_enabled) && !pinned) {
     return &per_cpu(hrtimer_bases, get_nohz_timer_target());
+    }
 
     return base;
     }
@@ -255,15 +498,15 @@ pub unsafe extern "C" fn hrtimer_schedule_hres_work() {
 // to the current CPU or leave it on the previously assigned CPU if
 // the timer callback is currently running.
 //
-    static inline struct hrtimer_clock_base *
-    switch_hrtimer_base(struct hrtimer *timer, struct hrtimer_clock_base *base, bool pinned)
-    {
-    struct hrtimer_cpu_base *new_cpu_base, *this_cpu_base;
-    struct hrtimer_clock_base *new_base;
-    let mut basenum: c_int = base.index;
+#[no_mangle]
+pub unsafe extern "C" fn switch_hrtimer_base(timer: *mut hrtimer, base: *mut hrtimer_clock_base, pinned: bool) -> *mut c_void {
+    let mut new_cpu_base = core::ptr::null_mut();
+    let mut this_cpu_base = core::ptr::null_mut();
+pub static mut new_base: *mut c_void = core::ptr::null_mut();
+pub static mut basenum: c_int = 0;
     this_cpu_base = this_cpu_ptr(&hrtimer_bases);
     new_cpu_base = get_target_base(this_cpu_base, pinned);
-    again:
+// label;
     new_base = &new_cpu_base.clock_base[basenum];
     if (base != new_base) {
 //
@@ -274,8 +517,9 @@ pub unsafe extern "C" fn hrtimer_schedule_hres_work() {
 // of this when the timer function has completed. There is no
 // conflict as we hold the lock until the timer is enqueued.
 //
-    if (unlikely(hrtimer_callback_running(timer)))
+    if (unlikely(hrtimer_callback_running(timer))) {
     return base;
+    }
 // See the comment in lock_hrtimer_base()
     WRITE_ONCE(timer.base, &migration_base);
     raw_spin_unlock(&base.cpu_base.lock);
@@ -285,23 +529,24 @@ pub unsafe extern "C" fn hrtimer_schedule_hres_work() {
     raw_spin_lock(&base.cpu_base.lock);
     new_cpu_base = this_cpu_base;
     WRITE_ONCE(timer.base, base);
-    goto again;
+// goto;
     }
     WRITE_ONCE(timer.base, new_base);
     } else {
     if (!hrtimer_suitable_target(timer, new_base,  new_cpu_base, this_cpu_base)) {
     new_cpu_base = this_cpu_base;
-    goto again;
+// goto;
     }
     }
     return new_base;
     }
 
-    static inline struct hrtimer_clock_base *lock_hrtimer_base(const struct hrtimer *timer,
-    unsigned long *flags)
-    __acquires(&timer.base.cpu_base.lock)
-    {
-    struct hrtimer_clock_base *base = timer.base;
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: lock_hrtimer_base
+pub unsafe extern "C" fn lock_hrtimer_base_dup(timer: *mut hrtimer, lock: *mut unsigned longflags)
+    __acquires(&timer.base.cpu_base.) -> *mut c_void {
+    let mut base = timer.base;
     raw_spin_lock_irqsave(&base.cpu_base.lock, *flags);
     return base;
     }
@@ -316,16 +561,14 @@ pub unsafe extern "C" fn hrtimer_schedule_hres_work() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __ktime_divns(kt: ktime_t, div: i64) -> i64 {
-    s64 __ktime_divns(const ktime_t kt, s64 div)
-    {
-    let mut sft: c_int = 0;
-    s64 dclc;
-    u64 tmp;
+pub static mut sft: c_int = 0;
+    let mut dclc = 0;
+    let mut tmp = 0;
     dclc = ktime_to_ns(kt);
     tmp = dclc < 0 ? -dclc : dclc;
 // Make sure the divisor is less than 2^32:
     while (div >> 32) {
-    sft++;
+    sft += 1;
     div >>= 1;
     }
     tmp >>= sft;
@@ -339,40 +582,39 @@ pub unsafe extern "C" fn __ktime_divns(kt: ktime_t, div: i64) -> i64 {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ktime_add_safe(lhs: ktime_t, rhs: ktime_t) -> ktime_t {
-    ktime_t ktime_add_safe(const ktime_t lhs, const ktime_t rhs)
-    {
-    let mut res: ktime_t = ktime_add_unsafe(lhs, rhs);
+pub static mut res: ktime_t = 0;
 //
 // We use KTIME_SEC_MAX here, the maximum timeout which we can
 // return to user space in a timespec:
 //
-    if (res < 0 || res < lhs || res < rhs)
+    if (res < 0 || res < lhs || res < rhs) {
     res = ktime_set(KTIME_SEC_MAX, 0);
+    }
     return res;
     }
     EXPORT_SYMBOL_GPL(ktime_add_safe);
 
-    static const struct debug_obj_descr hrtimer_debug_descr;
-    static void *hrtimer_debug_hint(void *addr)
-    {
-    return ACCESS_PRIVATE((struct hrtimer *)addr, function);
+pub static mut hrtimer_debug_descr: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn hrtimer_debug_hint(addr: *mut c_void) -> *mut c_void {
+    return ACCESS_PRIVATE(addr, function);
     }
 //
 // fixup_init is called when:
 // - an active object is initialized
 //
 #[no_mangle]
-unsafe extern "C" fn hrtimer_fixup_init(addr: *mut c_void, state: enum debug_obj_state) -> bool {
-    static bool hrtimer_fixup_init(void *addr, enum debug_obj_state state)
-    {
-    struct hrtimer *timer = addr;
-    switch (state) {
-    case ODEBUG_STATE_ACTIVE:
+unsafe extern "C" fn hrtimer_fixup_init(addr: *mut c_void, state: debug_obj_state) -> bool {
+    let mut timer = addr;
+    match (state) {
+    ODEBUG_STATE_ACTIVE => {
     hrtimer_cancel(timer);
     debug_object_init(timer, &hrtimer_debug_descr);
     return true;
-    default:
+    }
+    _ => {
     return false;
+    }
     }
     }
 //
@@ -381,15 +623,15 @@ unsafe extern "C" fn hrtimer_fixup_init(addr: *mut c_void, state: enum debug_obj
 // - an unknown non-static object is activated
 //
 #[no_mangle]
-unsafe extern "C" fn hrtimer_fixup_activate(addr: *mut c_void, state: enum debug_obj_state) -> bool {
-    static bool hrtimer_fixup_activate(void *addr, enum debug_obj_state state)
-    {
-    switch (state) {
-    case ODEBUG_STATE_ACTIVE:
-    WARN_ON(1);
+unsafe extern "C" fn hrtimer_fixup_activate(addr: *mut c_void, state: debug_obj_state) -> bool {
+    match (state) {
+    ODEBUG_STATE_ACTIVE => {
+    WARN_ON!(1);
     fallthrough;
-    default:
+    }
+    _ => {
     return false;
+    }
     }
     }
 //
@@ -397,25 +639,23 @@ unsafe extern "C" fn hrtimer_fixup_activate(addr: *mut c_void, state: enum debug
 // - an active object is freed
 //
 #[no_mangle]
-unsafe extern "C" fn hrtimer_fixup_free(addr: *mut c_void, state: enum debug_obj_state) -> bool {
-    static bool hrtimer_fixup_free(void *addr, enum debug_obj_state state)
-    {
-    struct hrtimer *timer = addr;
-    switch (state) {
-    case ODEBUG_STATE_ACTIVE:
+unsafe extern "C" fn hrtimer_fixup_free(addr: *mut c_void, state: debug_obj_state) -> bool {
+    let mut timer = addr;
+    match (state) {
+    ODEBUG_STATE_ACTIVE => {
     hrtimer_cancel(timer);
     debug_object_free(timer, &hrtimer_debug_descr);
     return true;
-    default:
+    }
+    _ => {
     return false;
+    }
     }
     }
 // Stub timer callback for improperly used timers.
 #[no_mangle]
 unsafe extern "C" fn stub_timer(unused: *mut hrtimer) -> enum hrtimer_restart {
-    static enum hrtimer_restart stub_timer(struct hrtimer *unused)
-    {
-    WARN_ON_ONCE(1);
+    WARN_ON_ONCE!(1);
     return HRTIMER_NORESTART;
     }
 //
@@ -423,122 +663,118 @@ unsafe extern "C" fn stub_timer(unused: *mut hrtimer) -> enum hrtimer_restart {
 // - an untracked/uninit-ed object is found
 //
 #[no_mangle]
-unsafe extern "C" fn hrtimer_fixup_assert_init(addr: *mut c_void, state: enum debug_obj_state) -> bool {
-    static bool hrtimer_fixup_assert_init(void *addr, enum debug_obj_state state)
-    {
-    struct hrtimer *timer = addr;
-    switch (state) {
-    case ODEBUG_STATE_NOTAVAILABLE:
+unsafe extern "C" fn hrtimer_fixup_assert_init(addr: *mut c_void, state: debug_obj_state) -> bool {
+    let mut timer = addr;
+    match (state) {
+    ODEBUG_STATE_NOTAVAILABLE => {
     hrtimer_setup(timer, stub_timer, CLOCK_MONOTONIC, 0);
     return true;
-    default:
+    }
+    _ => {
     return false;
     }
     }
-    static const struct debug_obj_descr hrtimer_debug_descr = {
-    .name			= "hrtimer",
-    .debug_hint		= hrtimer_debug_hint,
-    .fixup_init		= hrtimer_fixup_init,
-    .fixup_activate		= hrtimer_fixup_activate,
-    .fixup_free		= hrtimer_fixup_free,
-    .fixup_assert_init	= hrtimer_fixup_assert_init,
-    };
+    }
+pub static mut debug_obj_descr: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn debug_hrtimer_init(timer: *mut hrtimer) {
-    static inline void debug_hrtimer_init(struct hrtimer *timer)
-    {
     debug_object_init(timer, &hrtimer_debug_descr);
     }
 #[no_mangle]
 pub unsafe extern "C" fn debug_hrtimer_init_on_stack(timer: *mut hrtimer) {
-    static inline void debug_hrtimer_init_on_stack(struct hrtimer *timer)
-    {
     debug_object_init_on_stack(timer, &hrtimer_debug_descr);
     }
 #[no_mangle]
-pub unsafe extern "C" fn debug_hrtimer_activate(timer: *mut hrtimer, mode: enum hrtimer_mode) {
-    static inline void debug_hrtimer_activate(struct hrtimer *timer, enum hrtimer_mode mode)
-    {
+pub unsafe extern "C" fn debug_hrtimer_activate(timer: *mut hrtimer, mode: hrtimer_mode) {
     debug_object_activate(timer, &hrtimer_debug_descr);
     }
 #[no_mangle]
 pub unsafe extern "C" fn debug_hrtimer_deactivate(timer: *mut hrtimer) {
-    static inline void debug_hrtimer_deactivate(struct hrtimer *timer)
-    {
     debug_object_deactivate(timer, &hrtimer_debug_descr);
     }
 #[no_mangle]
 pub unsafe extern "C" fn debug_hrtimer_assert_init(timer: *mut hrtimer) {
-    static inline void debug_hrtimer_assert_init(struct hrtimer *timer)
-    {
     debug_object_assert_init(timer, &hrtimer_debug_descr);
     }
 #[no_mangle]
 pub unsafe extern "C" fn destroy_hrtimer_on_stack(timer: *mut hrtimer) {
-    void destroy_hrtimer_on_stack(struct hrtimer *timer)
-    {
     debug_object_free(timer, &hrtimer_debug_descr);
     }
     EXPORT_SYMBOL_GPL(destroy_hrtimer_on_stack);
 
-    static inline void debug_hrtimer_init(struct hrtimer *timer) { }
-    static inline void debug_hrtimer_init_on_stack(struct hrtimer *timer) { }
-    static inline void debug_hrtimer_activate(struct hrtimer *timer, enum hrtimer_mode mode) { }
-    static inline void debug_hrtimer_deactivate(struct hrtimer *timer) { }
-    static inline void debug_hrtimer_assert_init(struct hrtimer *timer) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: debug_hrtimer_init
+pub unsafe extern "C" fn debug_hrtimer_init_dup(timer: *mut hrtimer) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: debug_hrtimer_init_on_stack
+pub unsafe extern "C" fn debug_hrtimer_init_on_stack_dup(timer: *mut hrtimer) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: debug_hrtimer_activate
+pub unsafe extern "C" fn debug_hrtimer_activate_dup(timer: *mut hrtimer, mode: hrtimer_mode) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: debug_hrtimer_deactivate
+pub unsafe extern "C" fn debug_hrtimer_deactivate_dup(timer: *mut hrtimer) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: debug_hrtimer_assert_init
+pub unsafe extern "C" fn debug_hrtimer_assert_init_dup(timer: *mut hrtimer) { }
 
 #[no_mangle]
-pub unsafe extern "C" fn debug_setup(timer: *mut hrtimer, clockid: clockid_t, mode: enum hrtimer_mode) {
-    static inline void debug_setup(struct hrtimer *timer, clockid_t clockid, enum hrtimer_mode mode)
-    {
+pub unsafe extern "C" fn debug_setup(timer: *mut hrtimer, clockid: clockid_t, mode: hrtimer_mode) {
     debug_hrtimer_init(timer);
     trace_hrtimer_setup(timer, clockid, mode);
     }
-    static inline void debug_setup_on_stack(struct hrtimer *timer, clockid_t clockid,
-    enum hrtimer_mode mode)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn debug_setup_on_stack(timer: *mut hrtimer, clockid: clockid_t, mode: hrtimer_mode) {
     debug_hrtimer_init_on_stack(timer);
     trace_hrtimer_setup(timer, clockid, mode);
     }
 #[no_mangle]
-pub unsafe extern "C" fn debug_activate(timer: *mut hrtimer, mode: enum hrtimer_mode, was_armed: bool) {
-    static inline void debug_activate(struct hrtimer *timer, enum hrtimer_mode mode, bool was_armed)
-    {
+pub unsafe extern "C" fn debug_activate(timer: *mut hrtimer, mode: hrtimer_mode, was_armed: bool) {
     debug_hrtimer_activate(timer, mode);
     trace_hrtimer_start(timer, mode, was_armed);
     }
 
-    for (unsigned int idx = ffs(active); idx--; idx = ffs((active)))		\
-    for (bool done = false; !done; active &= ~(1U << idx))			\
-    for (base = &cpu_base.clock_base[idx]; !done; done = true)
+    for (unsigned int idx = ffs(active); idx -= 1; idx = ffs((active)))		 {
+    for (bool done = false; !done; active &= ~(1U << idx))			
+    }
+    for (base = &cpu_base.clock_base[idx]; !done; done = true) {
 
 //
 // Same as hrtimer_bases_next_event() below, but skips the excluded timer and
 // does not update cpu_base->next_timer/expires.
 //
-    static ktime_t hrtimer_bases_next_event_without(struct hrtimer_cpu_base *cpu_base,
+    static ktime_t hrtimer_bases_next_event_without(hrtimer_cpu_base *cpu_base,
     const struct hrtimer *exclude,
     unsigned int active, ktime_t expires_next)
     {
-    struct hrtimer_clock_base *base;
-    ktime_t expires;
+    }
+pub static mut base: *mut c_void = core::ptr::null_mut();
+    let mut expires;
     lockdep_assert_held(&cpu_base.lock);
     for_each_active_base(base, cpu_base, active) {
     expires = ktime_sub(base.expires_next, base.offset);
-    if (expires >= expires_next)
+    if (expires >= expires_next) {
     continue;
+    }
 //
 // If the excluded timer is the first on this base evaluate the
 // next timer.
 //
-    struct timerqueue_linked_node *node = timerqueue_linked_first(&base.active);
+    let mut node = timerqueue_linked_first(&base.active);
     if (unlikely(&exclude.node == node)) {
     node = timerqueue_linked_next(node);
-    if (!node)
+    if (!node) {
     continue;
+    }
     expires = ktime_sub(node.expires, base.offset);
-    if (expires >= expires_next)
+    if (expires >= expires_next) {
     continue;
+    }
     }
     expires_next = expires;
     }
@@ -546,17 +782,16 @@ pub unsafe extern "C" fn debug_activate(timer: *mut hrtimer, mode: enum hrtimer_
     return max(expires_next, 0);
     }
 
-    static __always_inline struct hrtimer *clock_base_next_timer(struct hrtimer_clock_base *base)
+    static __always_inline struct hrtimer *clock_base_next_timer(hrtimer_clock_base *base)
     {
-    struct timerqueue_linked_node *next = timerqueue_linked_first(&base.active);
+    let mut next = timerqueue_linked_first(&base.active);
     return hrtimer_from_timerqueue_node(next);
     }
 // Find the base with the earliest expiry
-    static void hrtimer_bases_first(struct hrtimer_cpu_base *cpu_base,unsigned int active,
-    ktime_t *expires_next, struct hrtimer **next_timer)
-    {
-    struct hrtimer_clock_base *base;
-    ktime_t expires;
+#[no_mangle]
+pub unsafe extern "C" fn hrtimer_bases_first(cpu_base: *mut hrtimer_cpu_base, active: c_uint, expires_next: *mut ktime_t, next_timer: *mut *mut hrtimer) {
+pub static mut base: *mut c_void = core::ptr::null_mut();
+    let mut expires;
     for_each_active_base(base, cpu_base, active) {
     expires = ktime_sub(base.expires_next, base.offset);
     if (expires < *expires_next) {
@@ -587,30 +822,28 @@ pub unsafe extern "C" fn debug_activate(timer: *mut hrtimer, mode: enum hrtimer_
 //
 #[no_mangle]
 unsafe extern "C" fn __hrtimer_get_next_event(cpu_base: *mut hrtimer_cpu_base, active_mask: c_uint) -> ktime_t {
-    static ktime_t __hrtimer_get_next_event(struct hrtimer_cpu_base *cpu_base, unsigned int active_mask)
-    {
-    struct hrtimer *next_timer = core::ptr::null_mut();
-    let mut expires_next: ktime_t = KTIME_MAX;
-    unsigned int active;
+    let mut next_timer = core::ptr::null_mut();
+pub static mut expires_next: ktime_t = 0;
+    let mut active = 0;
     lockdep_assert_held(&cpu_base.lock);
     if (!cpu_base.softirq_activated && (active_mask & HRTIMER_ACTIVE_SOFT)) {
     active = cpu_base.active_bases & HRTIMER_ACTIVE_SOFT;
-    if (active)
+    if (active) {
     hrtimer_bases_first(cpu_base, active, &expires_next, &next_timer);
+    }
     cpu_base.softirq_next_timer = next_timer;
     }
     if (active_mask & HRTIMER_ACTIVE_HARD) {
     active = cpu_base.active_bases & HRTIMER_ACTIVE_HARD;
-    if (active)
+    if (active) {
     hrtimer_bases_first(cpu_base, active, &expires_next, &next_timer);
+    }
     cpu_base.next_timer = next_timer;
     }
     return max(expires_next, 0);
     }
 #[no_mangle]
 unsafe extern "C" fn hrtimer_update_next_event(cpu_base: *mut hrtimer_cpu_base) -> ktime_t {
-    static ktime_t hrtimer_update_next_event(struct hrtimer_cpu_base *cpu_base)
-    {
     ktime_t expires_next, soft = KTIME_MAX;
 //
 // If the soft interrupt has already been activated, ignore the
@@ -638,12 +871,10 @@ unsafe extern "C" fn hrtimer_update_next_event(cpu_base: *mut hrtimer_cpu_base) 
     }
 #[no_mangle]
 pub unsafe extern "C" fn hrtimer_update_base(base: *mut hrtimer_cpu_base) -> ktime_t {
-    static inline ktime_t hrtimer_update_base(struct hrtimer_cpu_base *base)
-    {
     lockdep_assert_held(&base.lock);
-    ktime_t *offs_real = &base.clock_base[HRTIMER_BASE_REALTIME].offset;
-    ktime_t *offs_boot = &base.clock_base[HRTIMER_BASE_BOOTTIME].offset;
-    ktime_t *offs_tai = &base.clock_base[HRTIMER_BASE_TAI].offset;
+    let mut offs_real = &base.clock_base[HRTIMER_BASE_REALTIME].offset;
+    let mut offs_boot = &base.clock_base[HRTIMER_BASE_BOOTTIME].offset;
+    let mut offs_tai = &base.clock_base[HRTIMER_BASE_TAI].offset;
     ktime_t now = ktime_get_update_offsets_now(&base.clock_was_set_seq, offs_real,
     offs_boot, offs_tai);
     base.clock_base[HRTIMER_BASE_REALTIME_SOFT].offset = *offs_real;
@@ -658,21 +889,16 @@ pub unsafe extern "C" fn hrtimer_update_base(base: *mut hrtimer_cpu_base) -> kti
 //
 #[no_mangle]
 pub unsafe extern "C" fn hrtimer_hres_active(cpu_base: *mut hrtimer_cpu_base) -> c_int {
-    static inline int hrtimer_hres_active(struct hrtimer_cpu_base *cpu_base)
-    {
-    return IS_ENABLED(CONFIG_HIGH_RES_TIMERS) ?
+    return IS_ENABLED!(CONFIG_HIGH_RES_TIMERS) ?
     cpu_base.hres_active : 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn hrtimer_rearm_event(expires_next: ktime_t, deferred: bool) {
-    static inline void hrtimer_rearm_event(ktime_t expires_next, bool deferred)
-    {
     trace_hrtimer_rearm(expires_next, deferred);
     tick_program_event(expires_next, 1);
     }
-    static void __hrtimer_reprogram(struct hrtimer_cpu_base *cpu_base,
-    ktime_t expires_next)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __hrtimer_reprogram(cpu_base: *mut hrtimer_cpu_base, expires_next: ktime_t) {
     cpu_base.expires_next = expires_next;
 //
 // If hres is not active, hardware does not have to be
@@ -691,49 +917,43 @@ pub unsafe extern "C" fn hrtimer_rearm_event(expires_next: ktime_t, deferred: bo
 // set. So we'd effectively block all timers until the T2 event
 // fires.
 //
-    if (!hrtimer_hres_active(cpu_base) || cpu_base.hang_detected)
+    if (!hrtimer_hres_active(cpu_base) || cpu_base.hang_detected) {
     return;
+    }
     hrtimer_rearm_event(expires_next, false);
     }
 // Reprogram the event source with a evaluation of all clock bases
 #[no_mangle]
 unsafe extern "C" fn hrtimer_force_reprogram(cpu_base: *mut hrtimer_cpu_base, skip_equal: bool) {
-    static void hrtimer_force_reprogram(struct hrtimer_cpu_base *cpu_base, bool skip_equal)
-    {
-    let mut expires_next: ktime_t = hrtimer_update_next_event(cpu_base);
-    if (skip_equal && expires_next == cpu_base.expires_next)
+pub static mut expires_next: ktime_t = 0;
+    if (skip_equal && expires_next == cpu_base.expires_next) {
     return;
+    }
     __hrtimer_reprogram(cpu_base, expires_next);
     }
 // High resolution timer related functions
 
 // High resolution timer enabled ?
-    let mut __read_mostly: static bool hrtimer_hres_enabled = true;
-    let mut __read_mostly: unsigned int hrtimer_resolution = LOW_RES_NSEC;
+pub static mut : bool hrtimer_hres_enabled = true;
+pub static mut : unsigned int hrtimer_resolution = 0;
     EXPORT_SYMBOL_GPL(hrtimer_resolution);
 // Enable / Disable high resolution mode
 #[no_mangle]
-unsafe extern "C" fn setup_hrtimer_hres(str: *mut c_char) -> int __init {
-    static int __init setup_hrtimer_hres(char *str)
-    {
+unsafe extern "C" fn setup_hrtimer_hres(str: *mut c_char) -> c_int {
     return (kstrtobool(str, &hrtimer_hres_enabled) == 0);
     }
-    __setup("highres=", setup_hrtimer_hres);
+    __setup!("highres=", setup_hrtimer_hres);
 // hrtimer_high_res_enabled - query, if the highres mode is enabled
 #[no_mangle]
 pub unsafe extern "C" fn hrtimer_is_hres_enabled() -> bool {
-    static inline bool hrtimer_is_hres_enabled(void)
-    {
     return hrtimer_hres_enabled;
     }
 // Switch to high resolution mode
 #[no_mangle]
 unsafe extern "C" fn hrtimer_switch_to_hres() {
-    static void hrtimer_switch_to_hres(void)
-    {
-    struct hrtimer_cpu_base *base = this_cpu_ptr(&hrtimer_bases);
+    let mut base = this_cpu_ptr(&hrtimer_bases);
     if (tick_init_highres()) {
-    pr_warn("Could not switch to high resolution mode on CPU %u\n",	base.cpu);
+    pr_warn!("Could not switch to high resolution mode on CPU %u\n",	base.cpu);
     return;
     }
     base.hres_active = true;
@@ -744,8 +964,12 @@ unsafe extern "C" fn hrtimer_switch_to_hres() {
     hrtimer_schedule_hres_work();
     }
 
-    static inline bool hrtimer_is_hres_enabled(void) { return 0; }
-    static inline void hrtimer_switch_to_hres(void) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: hrtimer_is_hres_enabled
+pub unsafe extern "C" fn hrtimer_is_hres_enabled_dup() -> bool { return 0; }
+#[no_mangle]
+pub unsafe extern "C" fn hrtimer_switch_to_hres() { }
 
 //
 // Retrigger next event is called after clock was set with interrupts
@@ -762,9 +986,7 @@ unsafe extern "C" fn hrtimer_switch_to_hres() {
 //
 #[no_mangle]
 unsafe extern "C" fn retrigger_next_event(arg: *mut c_void) {
-    static void retrigger_next_event(void *arg)
-    {
-    struct hrtimer_cpu_base *base = this_cpu_ptr(&hrtimer_bases);
+    let mut base = this_cpu_ptr(&hrtimer_bases);
 //
 // When high resolution mode or nohz is active, then the offsets of
 // CLOCK_REALTIME/TAI/BOOTTIME have to be updated. Otherwise the
@@ -784,10 +1006,12 @@ unsafe extern "C" fn retrigger_next_event(arg: *mut c_void) {
 //
     guard(raw_spinlock)(&base.lock);
     hrtimer_update_base(base);
-    if (hrtimer_hres_active(base))
+    if (hrtimer_hres_active(base)) {
     hrtimer_force_reprogram(base, /* skip_equal */ false);
-    else
+    }
+    else {
     hrtimer_update_next_event(base);
+    }
     }
 //
 // When a timer is enqueued and expires earlier than the already enqueued
@@ -798,19 +1022,18 @@ unsafe extern "C" fn retrigger_next_event(arg: *mut c_void) {
 //
 #[no_mangle]
 unsafe extern "C" fn hrtimer_reprogram(timer: *mut hrtimer, reprogram: bool) {
-    static void hrtimer_reprogram(struct hrtimer *timer, bool reprogram)
-    {
-    struct hrtimer_cpu_base *cpu_base = this_cpu_ptr(&hrtimer_bases);
-    struct hrtimer_clock_base *base = timer.base;
-    let mut expires: ktime_t = hrtimer_get_expires(timer);
-    WARN_ON_ONCE(expires < 0);
+    let mut cpu_base = this_cpu_ptr(&hrtimer_bases);
+    let mut base = timer.base;
+pub static mut expires: ktime_t = 0;
+    WARN_ON_ONCE!(expires < 0);
     expires = ktime_sub(expires, base.offset);
 //
 // CLOCK_REALTIME timer might be requested with an absolute
 // expiry time which is less than base->offset. Set it to 0.
 //
-    if (expires < 0)
+    if (expires < 0) {
     expires = 0;
+    }
     if (timer.is_soft) {
 //
 // soft hrtimer could be started on a remote CPU. In this
@@ -819,37 +1042,41 @@ unsafe extern "C" fn hrtimer_reprogram(timer: *mut hrtimer, reprogram: bool) {
 // first hard hrtimer on the remote CPU -
 // hrtimer_check_target() prevents this case.
 //
-    struct hrtimer_cpu_base *timer_cpu_base = base.cpu_base;
-    if (timer_cpu_base.softirq_activated)
+    let mut timer_cpu_base = base.cpu_base;
+    if (timer_cpu_base.softirq_activated) {
     return;
-    if (!ktime_before(expires, timer_cpu_base.softirq_expires_next))
+    }
+    if (!ktime_before(expires, timer_cpu_base.softirq_expires_next)) {
     return;
+    }
     timer_cpu_base.softirq_next_timer = timer;
     timer_cpu_base.softirq_expires_next = expires;
-    if (!ktime_before(expires, timer_cpu_base.expires_next) || !reprogram)
+    if (!ktime_before(expires, timer_cpu_base.expires_next) || !reprogram) {
     return;
+    }
     }
 //
 // If the timer is not on the current cpu, we cannot reprogram
 // the other cpus clock event device.
 //
-    if (base.cpu_base != cpu_base)
+    if (base.cpu_base != cpu_base) {
     return;
-    if (expires >= cpu_base.expires_next)
+    }
+    if (expires >= cpu_base.expires_next) {
     return;
+    }
 // If a deferred rearm is pending skip reprogramming the device
-    if (cpu_base.deferred_rearm)
+    if (cpu_base.deferred_rearm) {
     return;
+    }
     cpu_base.next_timer = timer;
     __hrtimer_reprogram(cpu_base, expires);
     }
 #[no_mangle]
 unsafe extern "C" fn update_needs_ipi(cpu_base: *mut hrtimer_cpu_base, active: c_uint) -> bool {
-    static bool update_needs_ipi(struct hrtimer_cpu_base *cpu_base, unsigned int active)
-    {
-    struct hrtimer_clock_base *base;
-    ktime_t expires;
-    u32 seq;
+pub static mut base: *mut c_void = core::ptr::null_mut();
+    let mut expires;
+    let mut seq = 0;
 //
 // Update the base offsets unconditionally so the following
 // checks whether the SMP function call is required works.
@@ -866,8 +1093,9 @@ unsafe extern "C" fn update_needs_ipi(cpu_base: *mut hrtimer_cpu_base, active: c
 // If the sequence did not change over the update then the
 // remote CPU already handled it.
 //
-    if (seq == cpu_base.clock_was_set_seq)
+    if (seq == cpu_base.clock_was_set_seq) {
     return false;
+    }
 // If a deferred rearm is pending the remote CPU will take care of it
     if (cpu_base.deferred_rearm) {
     cpu_base.deferred_needs_update = true;
@@ -881,18 +1109,22 @@ unsafe extern "C" fn update_needs_ipi(cpu_base: *mut hrtimer_cpu_base, active: c
 //
     active &= cpu_base.active_bases;
     for_each_active_base(base, cpu_base, active) {
-    struct timerqueue_linked_node *next;
+pub static mut next: *mut c_void = core::ptr::null_mut();
     next = timerqueue_linked_first(&base.active);
     expires = ktime_sub(next.expires, base.offset);
-    if (expires < cpu_base.expires_next)
+    if (expires < cpu_base.expires_next) {
     return true;
+    }
 // Extra check for softirq clock bases
-    if (base.index < HRTIMER_BASE_MONOTONIC_SOFT)
+    if (base.index < HRTIMER_BASE_MONOTONIC_SOFT) {
     continue;
-    if (cpu_base.softirq_activated)
+    }
+    if (cpu_base.softirq_activated) {
     continue;
-    if (expires < cpu_base.softirq_expires_next)
+    }
+    if (expires < cpu_base.softirq_expires_next) {
     return true;
+    }
     }
     return false;
     }
@@ -912,46 +1144,42 @@ unsafe extern "C" fn update_needs_ipi(cpu_base: *mut hrtimer_cpu_base, active: c
 //
 #[no_mangle]
 pub unsafe extern "C" fn clock_was_set(bases: c_uint) {
-    void clock_was_set(unsigned int bases)
-    {
-    cpumask_var_t mask;
-    if (!hrtimer_highres_enabled() && !tick_nohz_is_active())
-    goto out_timerfd;
+    let mut mask;
+    if (!hrtimer_highres_enabled() && !tick_nohz_is_active()) {
+// goto;
+    }
     if (!zalloc_cpumask_var(&mask, GFP_KERNEL)) {
     on_each_cpu(retrigger_next_event, core::ptr::null_mut(), 1);
-    goto out_timerfd;
+// goto;
     }
 // Avoid interrupting CPUs if possible
     scoped_guard(cpus_read_lock) {
-    int cpu;
+    let mut cpu = 0;
     for_each_online_cpu(cpu) {
-    struct hrtimer_cpu_base *cpu_base = &per_cpu(hrtimer_bases, cpu);
+    let mut cpu_base = &per_cpu(hrtimer_bases, cpu);
     guard(raw_spinlock_irqsave)(&cpu_base.lock);
-    if (update_needs_ipi(cpu_base, bases))
+    if (update_needs_ipi(cpu_base, bases)) {
     cpumask_set_cpu(cpu, mask);
+    }
     }
     scoped_guard(preempt)
     smp_call_function_many(mask, retrigger_next_event, core::ptr::null_mut(), 1);
     }
     free_cpumask_var(mask);
-    out_timerfd:
+// label;
     timerfd_clock_was_set();
     }
 #[no_mangle]
 unsafe extern "C" fn clock_was_set_work(work: *mut work_struct) {
-    static void clock_was_set_work(struct work_struct *work)
-    {
     clock_was_set(CLOCK_SET_WALL);
     }
-    static DECLARE_WORK(hrtimer_work, clock_was_set_work);
+pub static mut hrtimer_work: usize = 0;
 //
 // Called from timekeeping code to reprogram the hrtimer interrupt device
 // on all cpus and to notify timerfd.
 //
 #[no_mangle]
 pub unsafe extern "C" fn clock_was_set_delayed() {
-    void clock_was_set_delayed(void)
-    {
     schedule_work(&hrtimer_work);
     }
 //
@@ -961,8 +1189,6 @@ pub unsafe extern "C" fn clock_was_set_delayed() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn hrtimers_resume_local() {
-    void hrtimers_resume_local(void)
-    {
     lockdep_assert_irqs_disabled();
 // Retrigger on the local CPU
     retrigger_next_event(core::ptr::null_mut());
@@ -970,9 +1196,6 @@ pub unsafe extern "C" fn hrtimers_resume_local() {
 // Counterpart to lock_hrtimer_base above
 #[no_mangle]
 pub unsafe extern "C" fn unlock_hrtimer_base(timer: *const hrtimer, flags: *mut c_ulong) {
-    static inline void unlock_hrtimer_base(const struct hrtimer *timer, unsigned long *flags)
-    __releases(&timer.base.cpu_base.lock)
-    {
     raw_spin_unlock_irqrestore(&timer.base.cpu_base.lock, *flags);
     }
 //
@@ -983,17 +1206,19 @@ pub unsafe extern "C" fn unlock_hrtimer_base(timer: *const hrtimer, flags: *mut 
 // Only safe to call if the timer is not enqueued. Can be called in the callback function if the
 // timer is not enqueued at the same time (see the comments above HRTIMER_STATE_ENQUEUED).
 //
-    void hrtimer_update_function(struct hrtimer *timer,
+    void hrtimer_update_function(hrtimer *timer,
 #[no_mangle]
-pub unsafe extern "C" fn hrtimer_restart(): *mut *mut function)(struct hrtimer) -> enum {
-    enum hrtimer_restart (*function)(struct hrtimer *))
+pub unsafe extern "C" fn hrtimer_restart(): *mut *mut function)(hrtimer) -> enum {
+    enum hrtimer_restart (*function))
     {
 
     guard(raw_spinlock_irqsave)(&timer.base.cpu_base.lock);
-    if (WARN_ON_ONCE(hrtimer_is_queued(timer)))
+    if (WARN_ON_ONCE!(hrtimer_is_queued(timer))) {
     return;
-    if (WARN_ON_ONCE(!function))
+    }
+    if (WARN_ON_ONCE!(!function)) {
     return;
+    }
 
     ACCESS_PRIVATE(timer, function) = function;
     }
@@ -1019,28 +1244,30 @@ pub unsafe extern "C" fn hrtimer_restart(): *mut *mut function)(struct hrtimer) 
 //
 #[no_mangle]
 pub unsafe extern "C" fn hrtimer_forward(timer: *mut hrtimer, now: ktime_t, interval: ktime_t) -> u64 {
-    u64 hrtimer_forward(struct hrtimer *timer, ktime_t now, ktime_t interval)
-    {
-    ktime_t delta;
-    let mut orun: u64 = 1;
+    let mut delta;
+pub static mut orun: u64 = 1;
     delta = ktime_sub(now, hrtimer_get_expires(timer));
-    if (delta < 0)
+    if (delta < 0) {
     return 0;
-    if (WARN_ON(timer.is_queued))
+    }
+    if (WARN_ON!(timer.is_queued)) {
     return 0;
-    if (interval < hrtimer_resolution)
+    }
+    if (interval < hrtimer_resolution) {
     interval = hrtimer_resolution;
+    }
     if (unlikely(delta >= interval)) {
-    let mut incr: i64 = ktime_to_ns(interval);
+pub static mut incr: i64 = 0;
     orun = ktime_divns(delta, incr);
     hrtimer_add_expires_ns(timer, incr * orun);
-    if (hrtimer_get_expires(timer) > now)
+    if (hrtimer_get_expires(timer) > now) {
     return orun;
+    }
 //
 // This (and the ktime_add() below) is the
 // correction for exact:
 //
-    orun++;
+    orun += 1;
     }
     hrtimer_add_expires(timer, interval);
     return orun;
@@ -1054,25 +1281,23 @@ pub unsafe extern "C" fn hrtimer_forward(timer: *mut hrtimer, now: ktime_t, inte
 //
 // Returns true when the new timer is the leftmost timer in the tree.
 //
-    static bool enqueue_hrtimer(struct hrtimer *timer, struct hrtimer_clock_base *base,
-    enum hrtimer_mode mode, bool was_armed)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn enqueue_hrtimer(timer: *mut hrtimer, base: *mut hrtimer_clock_base, mode: hrtimer_mode, was_armed: bool) -> bool {
     lockdep_assert_held(&base.cpu_base.lock);
     debug_activate(timer, mode, was_armed);
-    WARN_ON_ONCE(!base.cpu_base.online);
+    WARN_ON_ONCE!(!base.cpu_base.online);
     base.cpu_base.active_bases |= 1 << base.index;
 // Pairs with the lockless read in hrtimer_is_queued()
     WRITE_ONCE(timer.is_queued, HRTIMER_STATE_ENQUEUED);
-    if (!timerqueue_linked_add(&base.active, &timer.node))
+    if (!timerqueue_linked_add(&base.active, &timer.node)) {
     return false;
+    }
     base.expires_next = hrtimer_get_expires(timer);
     return true;
     }
 #[no_mangle]
 pub unsafe extern "C" fn base_update_next_timer(base: *mut hrtimer_clock_base) {
-    static inline void base_update_next_timer(struct hrtimer_clock_base *base)
-    {
-    struct timerqueue_linked_node *next = timerqueue_linked_first(&base.active);
+    let mut next = timerqueue_linked_first(&base.active);
     base.expires_next = next ? next.expires : KTIME_MAX;
     }
 //
@@ -1083,22 +1308,24 @@ pub unsafe extern "C" fn base_update_next_timer(base: *mut hrtimer_clock_base) {
 // reprogram to zero. This is useful, when the context does a reprogramming
 // anyway (e.g. timer interrupt)
 //
-    static void __remove_hrtimer(struct hrtimer *timer, struct hrtimer_clock_base *base,
-    bool newstate, bool reprogram)
-    {
-    struct hrtimer_cpu_base *cpu_base = base.cpu_base;
-    bool was_first;
+#[no_mangle]
+pub unsafe extern "C" fn __remove_hrtimer(timer: *mut hrtimer, base: *mut hrtimer_clock_base, newstate: bool, reprogram: bool) {
+    let mut cpu_base = base.cpu_base;
+    let mut was_first = 0;
     lockdep_assert_held(&cpu_base.lock);
-    if (!timer.is_queued)
+    if (!timer.is_queued) {
     return;
+    }
 // Pairs with the lockless read in hrtimer_is_queued()
     WRITE_ONCE(timer.is_queued, newstate);
     was_first = !timerqueue_linked_prev(&timer.node);
-    if (!timerqueue_linked_del(&base.active, &timer.node))
+    if (!timerqueue_linked_del(&base.active, &timer.node)) {
     cpu_base.active_bases &= ~(1 << base.index);
+    }
 // Nothing to update if this was not the first timer in the base
-    if (!was_first)
+    if (!was_first) {
     return;
+    }
     base_update_next_timer(base);
 //
 // If reprogram is false don't update cpu_base->next_timer and do not
@@ -1109,19 +1336,21 @@ pub unsafe extern "C" fn base_update_next_timer(base: *mut hrtimer_clock_base) {
 // a local timer is removed to be immediately restarted. That's handled
 // at the call site.
 //
-    if (!reprogram || timer != cpu_base.next_timer || timer.is_lazy)
+    if (!reprogram || timer != cpu_base.next_timer || timer.is_lazy) {
     return;
-    if (cpu_base.deferred_rearm)
+    }
+    if (cpu_base.deferred_rearm) {
     cpu_base.deferred_needs_update = true;
-    else
+    }
+    else {
     hrtimer_force_reprogram(cpu_base, /* skip_equal */ true);
     }
-    static inline bool remove_hrtimer(struct hrtimer *timer, struct hrtimer_clock_base *base,
-    bool newstate)
-    {
+    }
+#[no_mangle]
+pub unsafe extern "C" fn remove_hrtimer(timer: *mut hrtimer, base: *mut hrtimer_clock_base, newstate: bool) -> bool {
     lockdep_assert_held(&base.cpu_base.lock);
     if (timer.is_queued) {
-    bool reprogram;
+    let mut reprogram = 0;
     debug_hrtimer_deactivate(timer);
 //
 // Remove the timer and force reprogramming when high
@@ -1144,25 +1373,24 @@ pub unsafe extern "C" fn base_update_next_timer(base: *mut hrtimer_clock_base) {
 // when the dequeue/enqueue can be avoided because the RB tree does not
 // have to be rebalanced twice.
 //
-    static inline bool
-    hrtimer_can_update_in_place(struct hrtimer *timer, struct hrtimer_clock_base *base, ktime_t expires)
-    {
-    struct timerqueue_linked_node *next = timerqueue_linked_next(&timer.node);
-    struct timerqueue_linked_node *prev = timerqueue_linked_prev(&timer.node);
+#[no_mangle]
+pub unsafe extern "C" fn hrtimer_can_update_in_place(timer: *mut hrtimer, base: *mut hrtimer_clock_base, expires: ktime_t) -> bool {
+    let mut next = timerqueue_linked_next(&timer.node);
+    let mut prev = timerqueue_linked_prev(&timer.node);
 // If the new expiry goes behind the next timer, requeue is required
-    if (next && expires > next.expires)
+    if (next && expires > next.expires) {
     return false;
+    }
 // If this is the first timer, update in place
-    if (!prev)
+    if (!prev) {
     return true;
+    }
 // Update in place when it does not go ahead of the previous one
     return expires >= prev.expires;
     }
-    static inline bool
-    remove_and_enqueue_same_base(struct hrtimer *timer, struct hrtimer_clock_base *base,
-    const enum hrtimer_mode mode, ktime_t expires, u64 delta_ns)
-    {
-    let mut was_first: bool = false;
+#[no_mangle]
+pub unsafe extern "C" fn remove_and_enqueue_same_base(timer: *mut hrtimer, base: *mut hrtimer_clock_base, mode: hrtimer_mode, expires: ktime_t, delta_ns: u64) -> bool {
+pub static mut was_first: bool = false;
 // Remove it from the timer queue if active
     if (timer.is_queued) {
     was_first = !timerqueue_linked_prev(&timer.node);
@@ -1170,8 +1398,9 @@ pub unsafe extern "C" fn base_update_next_timer(base: *mut hrtimer_clock_base) {
     if (hrtimer_can_update_in_place(timer, base, expires)) {
     hrtimer_set_expires_range_ns(timer, expires, delta_ns);
     trace_hrtimer_start(timer, mode, true);
-    if (was_first)
+    if (was_first) {
     base.expires_next = expires;
+    }
     return was_first;
     }
     debug_hrtimer_deactivate(timer);
@@ -1188,11 +1417,12 @@ pub unsafe extern "C" fn base_update_next_timer(base: *mut hrtimer_clock_base) {
     base.expires_next = expires;
     return true;
     }
-    if (was_first)
+    if (was_first) {
     base_update_next_timer(base);
+    }
     return false;
     }
-    static inline ktime_t hrtimer_update_lowres(struct hrtimer *timer, ktime_t tim,
+    static inline ktime_t hrtimer_update_lowres(hrtimer *timer, ktime_t tim,
     const enum hrtimer_mode mode)
     {
 
@@ -1202,23 +1432,23 @@ pub unsafe extern "C" fn base_update_next_timer(base: *mut hrtimer_clock_base) {
 // (i.e. one jiffy) to prevent short timeouts.
 //
     timer.is_rel = mode & HRTIMER_MODE_REL;
-    if (timer.is_rel)
+    if (timer.is_rel) {
     tim = ktime_add_safe(tim, hrtimer_resolution);
+    }
 
     return tim;
     }
 #[no_mangle]
 unsafe extern "C" fn hrtimer_update_softirq_timer(cpu_base: *mut hrtimer_cpu_base, reprogram: bool) {
-    static void hrtimer_update_softirq_timer(struct hrtimer_cpu_base *cpu_base, bool reprogram)
-    {
-    let mut expires: ktime_t = __hrtimer_get_next_event(cpu_base, HRTIMER_ACTIVE_SOFT);
+pub static mut expires: ktime_t = 0;
 //
 // Reprogramming needs to be triggered, even if the next soft
 // hrtimer expires at the same time as the next hard
 // hrtimer. cpu_base->softirq_expires_next needs to be updated!
 //
-    if (expires == KTIME_MAX)
+    if (expires == KTIME_MAX) {
     return;
+    }
 //
 // cpu_base->next_timer is recomputed by __hrtimer_get_next_event()
 // cpu_base->expires_next is only set by hrtimer_reprogram()
@@ -1228,21 +1458,22 @@ unsafe extern "C" fn hrtimer_update_softirq_timer(cpu_base: *mut hrtimer_cpu_bas
 
 #[no_mangle]
 unsafe extern "C" fn hrtimer_prefer_local(is_local: bool, is_first: bool, is_pinned: bool) -> __always_inline bool {
-    static __always_inline bool hrtimer_prefer_local(bool is_local, bool is_first, bool is_pinned)
-    {
     if (static_branch_likely(&timers_migration_enabled)) {
 //
 // If it is local and the first expiring timer keep it on the local
 // CPU to optimize reprogramming of the clockevent device. Also
 // avoid switch_hrtimer_base() overhead when local and pinned.
 //
-    if (!is_local)
+    if (!is_local) {
     return false;
-    if (is_first || is_pinned)
+    }
+    if (is_first || is_pinned) {
     return true;
+    }
 // Honour the NOHZ full restrictions
-    if (!housekeeping_cpu(smp_processor_id(), HK_TYPE_KERNEL_NOISE))
+    if (!housekeeping_cpu(smp_processor_id(), HK_TYPE_KERNEL_NOISE)) {
     return false;
+    }
 //
 // If the tick is not stopped or need_resched() is set, then
 // there is no point in moving the timer somewhere else.
@@ -1254,17 +1485,15 @@ unsafe extern "C" fn hrtimer_prefer_local(is_local: bool, is_first: bool, is_pin
 
 #[no_mangle]
 unsafe extern "C" fn hrtimer_prefer_local(is_local: bool, is_first: bool, is_pinned: bool) -> __always_inline bool {
-    static __always_inline bool hrtimer_prefer_local(bool is_local, bool is_first, bool is_pinned)
-    {
     return is_local;
     }
 
-    static inline bool hrtimer_keep_base(struct hrtimer *timer, bool is_local, bool is_first,
-    bool is_pinned)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hrtimer_keep_base(timer: *mut hrtimer, is_local: bool, is_first: bool, is_pinned: bool) -> bool {
 // If the timer is running the callback it has to stay on its CPU base.
-    if (unlikely(timer.base.running == timer))
+    if (unlikely(timer.base.running == timer)) {
     return true;
+    }
     return hrtimer_prefer_local(is_local, is_first, is_pinned);
     }
     enum {
@@ -1272,12 +1501,11 @@ unsafe extern "C" fn hrtimer_prefer_local(is_local: bool, is_first: bool, is_pin
     HRTIMER_REPROGRAM,
     HRTIMER_REPROGRAM_FORCE,
     };
-    static int __hrtimer_start_range_ns(struct hrtimer *timer, ktime_t tim, u64 delta_ns,
-    const enum hrtimer_mode mode, struct hrtimer_clock_base *base)
-    {
-    struct hrtimer_cpu_base *this_cpu_base = this_cpu_ptr(&hrtimer_bases);
+#[no_mangle]
+pub unsafe extern "C" fn __hrtimer_start_range_ns(timer: *mut hrtimer, tim: ktime_t, delta_ns: u64, mode: hrtimer_mode, base: *mut hrtimer_clock_base) -> c_int {
+    let mut this_cpu_base = this_cpu_ptr(&hrtimer_bases);
     bool is_pinned, first, was_first, keep_base = false;
-    struct hrtimer_cpu_base *cpu_base = base.cpu_base;
+    let mut cpu_base = base.cpu_base;
     was_first = cpu_base.next_timer == timer;
     is_pinned = !!(mode & HRTIMER_MODE_PINNED);
 //
@@ -1285,12 +1513,13 @@ unsafe extern "C" fn hrtimer_prefer_local(is_local: bool, is_first: bool, is_pin
 // after hrtimer_cpu_dying() has been invoked.
 //
     if (likely(this_cpu_base.online)) {
-    let mut is_local: bool = cpu_base == this_cpu_base;
+pub static mut is_local: bool = false;
     keep_base = hrtimer_keep_base(timer, is_local, was_first, is_pinned);
     }
 // Calculate absolute expiry time for relative timers
-    if (mode & HRTIMER_MODE_REL)
+    if (mode & HRTIMER_MODE_REL) {
     tim = ktime_add_safe(tim, __hrtimer_cb_get_time(base.clockid));
+    }
 // Compensate for low resolution granularity
     tim = hrtimer_update_lowres(timer, tim, mode);
 //
@@ -1311,7 +1540,7 @@ unsafe extern "C" fn hrtimer_prefer_local(is_local: bool, is_first: bool, is_pin
     first = remove_and_enqueue_same_base(timer, base, mode, tim, delta_ns);
     } else {
 // Keep the ENQUEUED state in case it is queued
-    let mut was_armed: bool = remove_hrtimer(timer, base, HRTIMER_STATE_ENQUEUED);
+pub static mut was_armed: bool = false;
     hrtimer_set_expires_range_ns(timer, tim, delta_ns);
 // Switch the timer base, if necessary:
     base = switch_hrtimer_base(timer, base, is_pinned);
@@ -1332,15 +1561,17 @@ unsafe extern "C" fn hrtimer_prefer_local(is_local: bool, is_first: bool, is_pin
 // re-evaluate the first expiring timer after completing the
 // callbacks.
 //
-    if (likely(hrtimer_base_is_online(this_cpu_base)))
+    if (likely(hrtimer_base_is_online(this_cpu_base))) {
     return first ? HRTIMER_REPROGRAM : HRTIMER_REPROGRAM_NONE;
+    }
 //
 // Timer was enqueued remote because the current base is
 // already offline. If the timer is the first to expire,
 // kick the remote CPU to reprogram the clock event.
 //
-    if (first)
+    if (first) {
     smp_call_function_single_async(cpu_base.cpu, &cpu_base.csd);
+    }
     return HRTIMER_REPROGRAM_NONE;
     }
 //
@@ -1353,8 +1584,9 @@ unsafe extern "C" fn hrtimer_prefer_local(is_local: bool, is_first: bool, is_pin
 // required.
 //
     if (timer.is_lazy) {
-    if (cpu_base.expires_next <= hrtimer_get_expires(timer))
+    if (cpu_base.expires_next <= hrtimer_get_expires(timer)) {
     return HRTIMER_REPROGRAM_NONE;
+    }
     }
 //
 // Timer was the first expiring timer and forced to stay on the
@@ -1364,19 +1596,19 @@ unsafe extern "C" fn hrtimer_prefer_local(is_local: bool, is_first: bool, is_pin
 //
     return HRTIMER_REPROGRAM_FORCE;
     }
-    static int hrtimer_start_range_ns_common(struct hrtimer *timer, ktime_t tim,
-    u64 delta_ns, const enum hrtimer_mode mode,
-    struct hrtimer_clock_base *base)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hrtimer_start_range_ns_common(timer: *mut hrtimer, tim: ktime_t, delta_ns: u64, mode: hrtimer_mode, base: *mut hrtimer_clock_base) -> c_int {
 //
 // Check whether the HRTIMER_MODE_SOFT bit and hrtimer.is_soft
 // match on CONFIG_PREEMPT_RT = n. With PREEMPT_RT check the hard
 // expiry mode because unmarked timers are moved to softirq expiry.
 //
-    if (!IS_ENABLED(CONFIG_PREEMPT_RT))
-    WARN_ON_ONCE(!(mode & HRTIMER_MODE_SOFT) ^ !timer.is_soft);
-    else
-    WARN_ON_ONCE(!(mode & HRTIMER_MODE_HARD) ^ !timer.is_hard);
+    if (!IS_ENABLED!(CONFIG_PREEMPT_RT)) {
+    WARN_ON_ONCE!(!(mode & HRTIMER_MODE_SOFT) ^ !timer.is_soft);
+    }
+    else {
+    WARN_ON_ONCE!(!(mode & HRTIMER_MODE_HARD) ^ !timer.is_hard);
+    }
     return __hrtimer_start_range_ns(timer, tim, delta_ns, mode, base);
     }
 //
@@ -1388,11 +1620,10 @@ unsafe extern "C" fn hrtimer_prefer_local(is_local: bool, is_first: bool, is_pin
 // relative (HRTIMER_MODE_REL), and pinned (HRTIMER_MODE_PINNED);
 // softirq based mode is considered for debug purpose only!
 //
-    void hrtimer_start_range_ns(struct hrtimer *timer, ktime_t tim, u64 delta_ns,
-    const enum hrtimer_mode mode)
-    {
-    struct hrtimer_clock_base *base;
-    unsigned long flags;
+#[no_mangle]
+pub unsafe extern "C" fn hrtimer_start_range_ns(timer: *mut hrtimer, tim: ktime_t, delta_ns: u64, mode: hrtimer_mode) {
+pub static mut base: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
     debug_hrtimer_assert_init(timer);
     base = lock_hrtimer_base(timer, &flags);
     switch (hrtimer_start_range_ns_common(timer, tim, delta_ns, mode, base)) {
@@ -1410,10 +1641,8 @@ unsafe extern "C" fn hrtimer_prefer_local(is_local: bool, is_first: bool, is_pin
     EXPORT_SYMBOL_GPL(hrtimer_start_range_ns);
 #[no_mangle]
 pub unsafe extern "C" fn hrtimer_check_user_timer(timer: *mut hrtimer) -> bool {
-    static inline bool hrtimer_check_user_timer(struct hrtimer *timer)
-    {
-    struct hrtimer_cpu_base *cpu_base = timer.base.cpu_base;
-    ktime_t expires;
+    let mut cpu_base = timer.base.cpu_base;
+    let mut expires;
 //
 // This uses soft expires because that's the user provided
 // expiry time, while expires can be further in the past
@@ -1427,11 +1656,13 @@ pub unsafe extern "C" fn hrtimer_check_user_timer(timer: *mut hrtimer) -> bool {
 // the CPU base. If not, no further checks required as it's then
 // guaranteed to expire in the future.
 //
-    if (expires >= cpu_base.expires_next)
+    if (expires >= cpu_base.expires_next) {
     return true;
+    }
 // Validate that the expiry time is in the future.
-    if (expires > ktime_get())
+    if (expires > ktime_get()) {
     return true;
+    }
     debug_hrtimer_deactivate(timer);
     __remove_hrtimer(timer, timer.base, HRTIMER_STATE_INACTIVE, false);
     trace_hrtimer_start_expired(timer);
@@ -1452,19 +1683,19 @@ pub unsafe extern "C" fn hrtimer_check_user_timer(timer: *mut hrtimer) -> bool {
 // be called under a lock which the timer callback needs to acquire. So the
 // caller has to handle that case.
 //
-    bool hrtimer_start_range_ns_user(struct hrtimer *timer, ktime_t tim,
-    u64 delta_ns, const enum hrtimer_mode mode)
-    {
-    struct hrtimer_clock_base *base;
-    unsigned long flags;
-    let mut ret: bool = true;
+#[no_mangle]
+pub unsafe extern "C" fn hrtimer_start_range_ns_user(timer: *mut hrtimer, tim: ktime_t, delta_ns: u64, mode: hrtimer_mode) -> bool {
+pub static mut base: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+pub static mut ret: bool = true;
     debug_hrtimer_assert_init(timer);
     base = lock_hrtimer_base(timer, &flags);
     switch (hrtimer_start_range_ns_common(timer, tim, delta_ns, mode, base)) {
     case HRTIMER_REPROGRAM:
     ret = hrtimer_check_user_timer(timer);
-    if (ret)
+    if (ret) {
     hrtimer_reprogram(timer, true);
+    }
     break;
     case HRTIMER_REPROGRAM_FORCE:
     ret = hrtimer_check_user_timer(timer);
@@ -1494,24 +1725,24 @@ pub unsafe extern "C" fn hrtimer_check_user_timer(timer: *mut hrtimer) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn hrtimer_try_to_cancel(timer: *mut hrtimer) -> c_int {
-    int hrtimer_try_to_cancel(struct hrtimer *timer)
-    {
-    struct hrtimer_clock_base *base;
-    unsigned long flags;
-    let mut ret: c_int = -1;
+pub static mut base: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+pub static mut ret: c_int = 0;
 //
 // Check lockless first. If the timer is not active (neither
 // enqueued nor running the callback, nothing to do here.  The
 // base lock does not serialize against a concurrent enqueue,
 // so we can avoid taking it.
 //
-    if (!hrtimer_active(timer))
+    if (!hrtimer_active(timer)) {
     return 0;
+    }
     base = lock_hrtimer_base(timer, &flags);
     if (!hrtimer_callback_running(timer)) {
     ret = remove_hrtimer(timer, base, HRTIMER_STATE_INACTIVE);
-    if (ret)
+    if (ret) {
     trace_hrtimer_cancel(timer);
+    }
     }
     unlock_hrtimer_base(timer, &flags);
     return ret;
@@ -1520,22 +1751,14 @@ pub unsafe extern "C" fn hrtimer_try_to_cancel(timer: *mut hrtimer) -> c_int {
 
 #[no_mangle]
 unsafe extern "C" fn hrtimer_cpu_base_init_expiry_lock(base: *mut hrtimer_cpu_base) {
-    static void hrtimer_cpu_base_init_expiry_lock(struct hrtimer_cpu_base *base)
-    {
     spin_lock_init(&base.softirq_expiry_lock);
     }
 #[no_mangle]
 unsafe extern "C" fn hrtimer_cpu_base_lock_expiry(base: *mut hrtimer_cpu_base) {
-    static void hrtimer_cpu_base_lock_expiry(struct hrtimer_cpu_base *base)
-    __acquires(&base.softirq_expiry_lock)
-    {
     spin_lock(&base.softirq_expiry_lock);
     }
 #[no_mangle]
 unsafe extern "C" fn hrtimer_cpu_base_unlock_expiry(base: *mut hrtimer_cpu_base) {
-    static void hrtimer_cpu_base_unlock_expiry(struct hrtimer_cpu_base *base)
-    __releases(&base.softirq_expiry_lock)
-    {
     spin_unlock(&base.softirq_expiry_lock);
     }
 //
@@ -1547,8 +1770,6 @@ unsafe extern "C" fn hrtimer_cpu_base_unlock_expiry(base: *mut hrtimer_cpu_base)
 //
 #[no_mangle]
 unsafe extern "C" fn hrtimer_sync_wait_running(cpu_base: *mut hrtimer_cpu_base, flags: c_ulong) {
-    static void hrtimer_sync_wait_running(struct hrtimer_cpu_base *cpu_base, unsigned long flags)
-    {
     if (atomic_read(&cpu_base.timer_waiters)) {
     raw_spin_unlock_irqrestore(&cpu_base.lock, flags);
     spin_unlock(&cpu_base.softirq_expiry_lock);
@@ -1559,15 +1780,11 @@ unsafe extern "C" fn hrtimer_sync_wait_running(cpu_base: *mut hrtimer_cpu_base, 
 
 #[no_mangle]
 unsafe extern "C" fn is_migration_base(base: *mut hrtimer_clock_base) -> __always_inline bool {
-    static __always_inline bool is_migration_base(struct hrtimer_clock_base *base)
-    {
-    let mut base: return = = &migration_base;
+pub static mut base: return = 0;
     }
 
 #[no_mangle]
 unsafe extern "C" fn is_migration_base(base: *mut hrtimer_clock_base) -> __always_inline bool {
-    static __always_inline bool is_migration_base(struct hrtimer_clock_base *base)
-    {
     return false;
     }
 
@@ -1589,10 +1806,8 @@ unsafe extern "C" fn is_migration_base(base: *mut hrtimer_clock_base) -> __alway
 //
 #[no_mangle]
 pub unsafe extern "C" fn hrtimer_cancel_wait_running(timer: *const hrtimer) {
-    void hrtimer_cancel_wait_running(const struct hrtimer *timer)
-    {
 // Lockless read. Prevent the compiler from reloading it below
-    struct hrtimer_clock_base *base = READ_ONCE(timer.base);
+    let mut base = READ_ONCE(timer.base);
 //
 // Just relax if the timer expires in hard interrupt context or if
 // it is currently on the migration base.
@@ -1614,10 +1829,14 @@ pub unsafe extern "C" fn hrtimer_cancel_wait_running(timer: *const hrtimer) {
     spin_unlock_bh(&base.cpu_base.softirq_expiry_lock);
     }
 
-    static inline void hrtimer_cpu_base_init_expiry_lock(struct hrtimer_cpu_base *base) { }
-    static inline void hrtimer_cpu_base_lock_expiry(struct hrtimer_cpu_base *base) { }
-    static inline void hrtimer_cpu_base_unlock_expiry(struct hrtimer_cpu_base *base) { }
-    static inline void hrtimer_sync_wait_running(struct hrtimer_cpu_base *base, unsigned long fl) { }
+#[no_mangle]
+pub unsafe extern "C" fn hrtimer_cpu_base_init_expiry_lock(base: *mut hrtimer_cpu_base) { }
+#[no_mangle]
+pub unsafe extern "C" fn hrtimer_cpu_base_lock_expiry(base: *mut hrtimer_cpu_base) { }
+#[no_mangle]
+pub unsafe extern "C" fn hrtimer_cpu_base_unlock_expiry(base: *mut hrtimer_cpu_base) { }
+#[no_mangle]
+pub unsafe extern "C" fn hrtimer_sync_wait_running(base: *mut hrtimer_cpu_base, fl: c_ulong) { }
 
 //
 // hrtimer_cancel - cancel a timer and wait for the handler to finish.
@@ -1629,13 +1848,12 @@ pub unsafe extern "C" fn hrtimer_cancel_wait_running(timer: *const hrtimer) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn hrtimer_cancel(timer: *mut hrtimer) -> c_int {
-    int hrtimer_cancel(struct hrtimer *timer)
-    {
-    int ret;
+    let mut ret = 0;
     do {
     ret = hrtimer_try_to_cancel(timer);
-    if (ret < 0)
+    if (ret < 0) {
     hrtimer_cancel_wait_running(timer);
+    }
     } while (ret < 0);
     return ret;
     }
@@ -1647,15 +1865,15 @@ pub unsafe extern "C" fn hrtimer_cancel(timer: *mut hrtimer) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __hrtimer_get_remaining(timer: *const hrtimer, adjust: bool) -> ktime_t {
-    ktime_t __hrtimer_get_remaining(const struct hrtimer *timer, bool adjust)
-    {
-    unsigned long flags;
-    ktime_t rem;
+    let mut flags = 0;
+    let mut rem;
     lock_hrtimer_base(timer, &flags);
-    if (IS_ENABLED(CONFIG_TIME_LOW_RES) && adjust)
+    if (IS_ENABLED!(CONFIG_TIME_LOW_RES) && adjust) {
     rem = hrtimer_expires_remaining_adjusted(timer);
-    else
+    }
+    else {
     rem = hrtimer_expires_remaining(timer);
+    }
     unlock_hrtimer_base(timer, &flags);
     return rem;
     }
@@ -1668,9 +1886,7 @@ pub unsafe extern "C" fn __hrtimer_get_remaining(timer: *const hrtimer, adjust: 
 //
 #[no_mangle]
 pub unsafe extern "C" fn hrtimer_get_next_event() -> ktime_t {
-    ktime_t hrtimer_get_next_event(void)
-    {
-    struct hrtimer_cpu_base *cpu_base = this_cpu_ptr(&hrtimer_bases);
+    let mut cpu_base = this_cpu_ptr(&hrtimer_bases);
 //
 // When HRES is active cmp_next_hrtimer_event() expects KTIME_MAX.
 //
@@ -1680,8 +1896,9 @@ pub unsafe extern "C" fn hrtimer_get_next_event() -> ktime_t {
 // this with interrupts disabled on the same CPU, so an unlocked read is
 // stable without holding the lock.
 //
-    if (hrtimer_hres_active(cpu_base))
+    if (hrtimer_hres_active(cpu_base)) {
     return KTIME_MAX;
+    }
     guard(raw_spinlock_irqsave)(&cpu_base.lock);
     return __hrtimer_get_next_event(cpu_base, HRTIMER_ACTIVE_ALL);
     }
@@ -1694,89 +1911,95 @@ pub unsafe extern "C" fn hrtimer_get_next_event() -> ktime_t {
 //
 #[no_mangle]
 pub unsafe extern "C" fn hrtimer_next_event_without(exclude: *const hrtimer) -> ktime_t {
-    ktime_t hrtimer_next_event_without(const struct hrtimer *exclude)
-    {
-    struct hrtimer_cpu_base *cpu_base = this_cpu_ptr(&hrtimer_bases);
-    let mut expires: ktime_t = KTIME_MAX;
-    unsigned int active;
+    let mut cpu_base = this_cpu_ptr(&hrtimer_bases);
+pub static mut expires: ktime_t = 0;
+    let mut active = 0;
     guard(raw_spinlock_irqsave)(&cpu_base.lock);
-    if (!hrtimer_hres_active(cpu_base))
+    if (!hrtimer_hres_active(cpu_base)) {
     return expires;
+    }
     active = cpu_base.active_bases & HRTIMER_ACTIVE_SOFT;
-    if (active && !cpu_base.softirq_activated)
+    if (active && !cpu_base.softirq_activated) {
     expires = hrtimer_bases_next_event_without(cpu_base, exclude, active, KTIME_MAX);
+    }
     active = cpu_base.active_bases & HRTIMER_ACTIVE_HARD;
-    if (!active)
+    if (!active) {
     return expires;
+    }
     return hrtimer_bases_next_event_without(cpu_base, exclude, active, expires);
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn hrtimer_clockid_to_base(clock_id: clockid_t) -> c_int {
-    static inline int hrtimer_clockid_to_base(clockid_t clock_id)
-    {
-    switch (clock_id) {
-    case CLOCK_MONOTONIC:
+    match (clock_id) {
+    CLOCK_MONOTONIC => {
     return HRTIMER_BASE_MONOTONIC;
-    case CLOCK_REALTIME:
+    }
+    CLOCK_REALTIME => {
     return HRTIMER_BASE_REALTIME;
-    case CLOCK_BOOTTIME:
+    }
+    CLOCK_BOOTTIME => {
     return HRTIMER_BASE_BOOTTIME;
-    case CLOCK_TAI:
+    }
+    CLOCK_TAI => {
     return HRTIMER_BASE_TAI;
-    default:
+    }
+    _ => {
     WARN(1, "Invalid clockid %d. Using MONOTONIC\n", clock_id);
     return HRTIMER_BASE_MONOTONIC;
+    }
     }
     }
 #[no_mangle]
 unsafe extern "C" fn __hrtimer_cb_get_time(clock_id: clockid_t) -> ktime_t {
-    static ktime_t __hrtimer_cb_get_time(clockid_t clock_id)
-    {
-    switch (clock_id) {
-    case CLOCK_MONOTONIC:
+    match (clock_id) {
+    CLOCK_MONOTONIC => {
     return ktime_get();
-    case CLOCK_REALTIME:
+    }
+    CLOCK_REALTIME => {
     return ktime_get_real();
-    case CLOCK_BOOTTIME:
+    }
+    CLOCK_BOOTTIME => {
     return ktime_get_boottime();
-    case CLOCK_TAI:
+    }
+    CLOCK_TAI => {
     return ktime_get_clocktai();
-    default:
+    }
+    _ => {
     WARN(1, "Invalid clockid %d. Using MONOTONIC\n", clock_id);
     return ktime_get();
     }
     }
+    }
 #[no_mangle]
 pub unsafe extern "C" fn hrtimer_cb_get_time(timer: *const hrtimer) -> ktime_t {
-    ktime_t hrtimer_cb_get_time(const struct hrtimer *timer)
-    {
     return __hrtimer_cb_get_time(timer.base.clockid);
     }
     EXPORT_SYMBOL_GPL(hrtimer_cb_get_time);
-    static void __hrtimer_setup(struct hrtimer *timer, enum hrtimer_restart (*fn)(struct hrtimer *),
-    clockid_t clock_id, enum hrtimer_mode mode)
-    {
-    let mut softtimer: bool = !!(mode & HRTIMER_MODE_SOFT);
-    struct hrtimer_cpu_base *cpu_base;
-    int base;
+#[no_mangle]
+pub unsafe extern "C" fn __hrtimer_setup(timer: *mut hrtimer, clock_id: clockid_t, mode: hrtimer_mode) {
+pub static mut softtimer: bool = false;
+pub static mut cpu_base: *mut c_void = core::ptr::null_mut();
+    let mut base = 0;
 //
 // On PREEMPT_RT enabled kernels hrtimers which are not explicitly
 // marked for hard interrupt expiry mode are moved into soft
 // interrupt context for latency reasons and because the callbacks
 // can invoke functions which might sleep on RT, e.g. spin_lock().
 //
-    if (IS_ENABLED(CONFIG_PREEMPT_RT) && !(mode & HRTIMER_MODE_HARD))
+    if (IS_ENABLED!(CONFIG_PREEMPT_RT) && !(mode & HRTIMER_MODE_HARD)) {
     softtimer = true;
-    memset(timer, 0, sizeof(struct hrtimer));
+    }
+    memset(timer, 0, sizeof!(hrtimer));
     cpu_base = raw_cpu_ptr(&hrtimer_bases);
 //
 // POSIX magic: Relative CLOCK_REALTIME timers are not affected by
 // clock modifications, so they needs to become CLOCK_MONOTONIC to
 // ensure POSIX compliance.
 //
-    if (clock_id == CLOCK_REALTIME && mode & HRTIMER_MODE_REL)
+    if (clock_id == CLOCK_REALTIME && mode & HRTIMER_MODE_REL) {
     clock_id = CLOCK_MONOTONIC;
+    }
     base = softtimer ? HRTIMER_MAX_CLOCK_BASES / 2 : 0;
     base += hrtimer_clockid_to_base(clock_id);
     timer.is_soft = softtimer;
@@ -1784,10 +2007,12 @@ pub unsafe extern "C" fn hrtimer_cb_get_time(timer: *const hrtimer) -> ktime_t {
     timer.is_lazy = !!(mode & HRTIMER_MODE_LAZY_REARM);
     timer.base = &cpu_base.clock_base[base];
     timerqueue_linked_init(&timer.node);
-    if (WARN_ON_ONCE(!fn))
+    if (WARN_ON_ONCE!(!fn)) {
     ACCESS_PRIVATE(timer, function) = hrtimer_dummy_timeout;
-    else
+    }
+    else {
     ACCESS_PRIVATE(timer, function) = fn;
+    }
     }
 //
 // hrtimer_setup - initialize a timer to the given clock
@@ -1802,9 +2027,8 @@ pub unsafe extern "C" fn hrtimer_cb_get_time(timer: *const hrtimer) -> ktime_t {
 // but the PINNED bit is ignored as pinning happens
 // when the hrtimer is started
 //
-    void hrtimer_setup(struct hrtimer *timer, enum hrtimer_restart (*function)(struct hrtimer *),
-    clockid_t clock_id, enum hrtimer_mode mode)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hrtimer_setup(timer: *mut hrtimer, clock_id: clockid_t, mode: hrtimer_mode) {
     debug_setup(timer, clock_id, mode);
     __hrtimer_setup(timer, function, clock_id, mode);
     }
@@ -1819,10 +2043,8 @@ pub unsafe extern "C" fn hrtimer_cb_get_time(timer: *const hrtimer) -> ktime_t {
 // Similar to hrtimer_setup(), except that this one must be used if struct hrtimer is in stack
 // memory.
 //
-    void hrtimer_setup_on_stack(struct hrtimer *timer,
-    enum hrtimer_restart (*function)(struct hrtimer *),
-    clockid_t clock_id, enum hrtimer_mode mode)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hrtimer_setup_on_stack(timer: *mut hrtimer, clock_id: clockid_t, mode: hrtimer_mode) {
     debug_setup_on_stack(timer, clock_id, mode);
     __hrtimer_setup(timer, function, clock_id, mode);
     }
@@ -1836,15 +2058,14 @@ pub unsafe extern "C" fn hrtimer_cb_get_time(timer: *const hrtimer) -> ktime_t {
 //
 #[no_mangle]
 pub unsafe extern "C" fn hrtimer_active(timer: *const hrtimer) -> bool {
-    bool hrtimer_active(const struct hrtimer *timer)
-    {
-    struct hrtimer_clock_base *base;
-    unsigned int seq;
+pub static mut base: *mut c_void = core::ptr::null_mut();
+    let mut seq = 0;
     do {
     base = READ_ONCE(timer.base);
     seq = raw_read_seqcount_begin(&base.seq);
-    if (timer.is_queued || base.running == timer)
+    if (timer.is_queued || base.running == timer) {
     return true;
+    }
     } while (read_seqcount_retry(&base.seq, seq) || base != READ_ONCE(timer.base));
     return false;
     }
@@ -1866,13 +2087,12 @@ pub unsafe extern "C" fn hrtimer_active(timer: *const hrtimer) -> bool {
 // a false negative if the read side got smeared over multiple consecutive
 // __run_hrtimer() invocations.
 //
-    static void __run_hrtimer(struct hrtimer_cpu_base *cpu_base, struct hrtimer_clock_base *base,
-    struct hrtimer *timer, ktime_t now, unsigned long flags)
-    __must_hold(&cpu_base.lock)
-    {
-    enum hrtimer_restart (*fn)(struct hrtimer *);
-    bool expires_in_hardirq;
-    int restart;
+#[no_mangle]
+pub unsafe extern "C" fn __run_hrtimer(cpu_base: *mut hrtimer_cpu_base, base: *mut hrtimer_clock_base, timer: *mut hrtimer, now: ktime_t, lock: unsigned long flags)
+    __must_hold(&cpu_base.) {
+    enum hrtimer_restart (*fn);
+    let mut expires_in_hardirq = 0;
+    let mut restart = 0;
     lockdep_assert_held(&cpu_base.lock);
     debug_hrtimer_deactivate(timer);
     base.running = timer;
@@ -1891,8 +2111,9 @@ pub unsafe extern "C" fn hrtimer_active(timer: *const hrtimer) -> bool {
 // timer is restarted with a period then it becomes an absolute
 // timer. If its not restarted it does not matter.
 //
-    if (IS_ENABLED(CONFIG_TIME_LOW_RES))
+    if (IS_ENABLED!(CONFIG_TIME_LOW_RES)) {
     timer.is_rel = false;
+    }
 //
 // The timer is marked as running in the CPU base, so it is
 // protected against migration to a different CPU even if the lock
@@ -1914,8 +2135,9 @@ pub unsafe extern "C" fn hrtimer_active(timer: *const hrtimer) -> bool {
 // hrtimer_start_range_ns() can have popped in and enqueued the timer
 // for us already.
 //
-    if (restart == HRTIMER_RESTART && !timer.is_queued)
+    if (restart == HRTIMER_RESTART && !timer.is_queued) {
     enqueue_hrtimer(timer, base, HRTIMER_MODE_ABS, false);
+    }
 //
 // Separate the ->running assignment from the ->is_queued assignment.
 //
@@ -1924,17 +2146,16 @@ pub unsafe extern "C" fn hrtimer_active(timer: *const hrtimer) -> bool {
 // timer->is_queued == INACTIVE.
 //
     raw_write_seqcount_barrier(&base.seq);
-    WARN_ON_ONCE(base.running != timer);
+    WARN_ON_ONCE!(base.running != timer);
     base.running = core::ptr::null_mut();
     }
-    static void __hrtimer_run_queues(struct hrtimer_cpu_base *cpu_base, ktime_t now,
-    unsigned long flags, unsigned int active_mask)
-    {
-    let mut active: c_uint = cpu_base.active_bases & active_mask;
-    struct hrtimer_clock_base *base;
+#[no_mangle]
+pub unsafe extern "C" fn __hrtimer_run_queues(cpu_base: *mut hrtimer_cpu_base, now: ktime_t, flags: c_ulong, active_mask: c_uint) {
+pub static mut active: c_uint = 0;
+pub static mut base: *mut c_void = core::ptr::null_mut();
     for_each_active_base(base, cpu_base, active) {
-    let mut basenow: ktime_t = ktime_add(now, base.offset);
-    struct hrtimer *timer;
+pub static mut basenow: ktime_t = 0;
+pub static mut timer: *mut c_void = core::ptr::null_mut();
     while ((timer = clock_base_next_timer(base))) {
 //
 // The immediate goal for using the softexpires is
@@ -1948,21 +2169,21 @@ pub unsafe extern "C" fn hrtimer_active(timer: *const hrtimer) -> bool {
 // are right-of a not yet expired timer, because that
 // timer will have to trigger a wakeup anyway.
 //
-    if (basenow < hrtimer_get_softexpires(timer))
+    if (basenow < hrtimer_get_softexpires(timer)) {
     break;
+    }
     __run_hrtimer(cpu_base, base, timer, basenow, flags);
-    if (active_mask == HRTIMER_ACTIVE_SOFT)
+    if (active_mask == HRTIMER_ACTIVE_SOFT) {
     hrtimer_sync_wait_running(cpu_base, flags);
+    }
     }
     }
     }
 #[no_mangle]
 unsafe extern "C" fn hrtimer_run_softirq() -> __latent_entropy void {
-    static __latent_entropy void hrtimer_run_softirq(void)
-    {
-    struct hrtimer_cpu_base *cpu_base = this_cpu_ptr(&hrtimer_bases);
-    unsigned long flags;
-    ktime_t now;
+    let mut cpu_base = this_cpu_ptr(&hrtimer_bases);
+    let mut flags = 0;
+    let mut now;
     hrtimer_cpu_base_lock_expiry(cpu_base);
     raw_spin_lock_irqsave(&cpu_base.lock, flags);
     now = hrtimer_update_base(cpu_base);
@@ -1979,8 +2200,6 @@ unsafe extern "C" fn hrtimer_run_softirq() -> __latent_entropy void {
 //
 #[no_mangle]
 unsafe extern "C" fn hrtimer_rearm(cpu_base: *mut hrtimer_cpu_base, expires_next: ktime_t, deferred: bool) {
-    static void hrtimer_rearm(struct hrtimer_cpu_base *cpu_base, ktime_t expires_next, bool deferred)
-    {
     cpu_base.expires_next = expires_next;
     cpu_base.deferred_rearm = false;
     if (unlikely(cpu_base.hang_detected)) {
@@ -1996,12 +2215,11 @@ unsafe extern "C" fn hrtimer_rearm(cpu_base: *mut hrtimer_cpu_base, expires_next
 
 #[no_mangle]
 pub unsafe extern "C" fn __hrtimer_rearm_deferred() {
-    void __hrtimer_rearm_deferred(void)
-    {
-    struct hrtimer_cpu_base *cpu_base = this_cpu_ptr(&hrtimer_bases);
-    ktime_t expires_next;
-    if (!cpu_base.deferred_rearm)
+    let mut cpu_base = this_cpu_ptr(&hrtimer_bases);
+    let mut expires_next;
+    if (!cpu_base.deferred_rearm) {
     return;
+    }
     guard(raw_spinlock)(&cpu_base.lock);
     if (cpu_base.deferred_needs_update) {
     hrtimer_update_base(cpu_base);
@@ -2013,7 +2231,7 @@ pub unsafe extern "C" fn __hrtimer_rearm_deferred() {
     hrtimer_rearm(cpu_base, expires_next, true);
     }
     static __always_inline void
-    hrtimer_interrupt_rearm(struct hrtimer_cpu_base *cpu_base, ktime_t expires_next)
+    hrtimer_interrupt_rearm(hrtimer_cpu_base *cpu_base, ktime_t expires_next)
     {
 // hrtimer_interrupt() just re-evaluated the first expiring timer
     cpu_base.deferred_needs_update = false;
@@ -2023,7 +2241,7 @@ pub unsafe extern "C" fn __hrtimer_rearm_deferred() {
     }
 
     static __always_inline void
-    hrtimer_interrupt_rearm(struct hrtimer_cpu_base *cpu_base, ktime_t expires_next)
+    hrtimer_interrupt_rearm(hrtimer_cpu_base *cpu_base, ktime_t expires_next)
     {
     hrtimer_rearm(cpu_base, expires_next, false);
     }
@@ -2034,19 +2252,17 @@ pub unsafe extern "C" fn __hrtimer_rearm_deferred() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn hrtimer_interrupt(dev: *mut clock_event_device) {
-    void hrtimer_interrupt(struct clock_event_device *dev)
-    {
-    struct hrtimer_cpu_base *cpu_base = this_cpu_ptr(&hrtimer_bases);
+    let mut cpu_base = this_cpu_ptr(&hrtimer_bases);
     ktime_t expires_next, now, entry_time, delta;
-    unsigned long flags;
-    let mut retries: c_int = 0;
-    BUG_ON(!cpu_base.hres_active);
-    cpu_base.nr_events++;
+    let mut flags = 0;
+pub static mut retries: c_int = 0;
+    BUG_ON!(!cpu_base.hres_active);
+    cpu_base.nr_events += 1;
     dev.next_event = KTIME_MAX;
     dev.next_event_forced = 0;
     raw_spin_lock_irqsave(&cpu_base.lock, flags);
     entry_time = now = hrtimer_update_base(cpu_base);
-    retry:
+// label;
     cpu_base.deferred_rearm = true;
 //
 // Set expires_next to KTIME_MAX, which prevents that remote CPUs queue
@@ -2076,12 +2292,12 @@ pub unsafe extern "C" fn hrtimer_interrupt(dev: *mut clock_event_device) {
     cpu_base.hang_detected = false;
     if (expires_next < now) {
     if (++retries < 3) {
-    cpu_base.nr_retries++;
-    goto retry;
+    cpu_base.nr_retries += 1;
+// goto;
     }
     delta = ktime_sub(now, entry_time);
     cpu_base.max_hang_time = max_t(unsigned int, cpu_base.max_hang_time, delta);
-    cpu_base.nr_hangs++;
+    cpu_base.nr_hangs += 1;
     cpu_base.hang_detected = true;
     }
     hrtimer_interrupt_rearm(cpu_base, expires_next);
@@ -2093,13 +2309,12 @@ pub unsafe extern "C" fn hrtimer_interrupt(dev: *mut clock_event_device) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn hrtimer_run_queues() {
-    void hrtimer_run_queues(void)
-    {
-    struct hrtimer_cpu_base *cpu_base = this_cpu_ptr(&hrtimer_bases);
-    unsigned long flags;
-    ktime_t now;
-    if (hrtimer_hres_active(cpu_base))
+    let mut cpu_base = this_cpu_ptr(&hrtimer_bases);
+    let mut flags = 0;
+    let mut now;
+    if (hrtimer_hres_active(cpu_base)) {
     return;
+    }
 //
 // This _is_ ugly: We have to check periodically, whether we
 // can switch to highres and / or nohz mode. The clocksource
@@ -2126,13 +2341,12 @@ pub unsafe extern "C" fn hrtimer_run_queues() {
 //
 #[no_mangle]
 unsafe extern "C" fn hrtimer_wakeup(timer: *mut hrtimer) -> enum hrtimer_restart {
-    static enum hrtimer_restart hrtimer_wakeup(struct hrtimer *timer)
-    {
-    struct hrtimer_sleeper *t = container_of(timer, struct hrtimer_sleeper, timer);
-    struct task_struct *task = t.task;
+    let mut t = container_of!(timer, hrtimer_sleeper, timer);
+    let mut task = t.task;
     t.task = core::ptr::null_mut();
-    if (task)
+    if (task) {
     wake_up_process(task);
+    }
     return HRTIMER_NORESTART;
     }
 //
@@ -2144,9 +2358,7 @@ unsafe extern "C" fn hrtimer_wakeup(timer: *mut hrtimer) -> enum hrtimer_restart
 // to allow PREEMPT_RT to tweak the delivery mode (soft/hardirq context)
 //
 #[no_mangle]
-pub unsafe extern "C" fn hrtimer_sleeper_start_expires(sl: *mut hrtimer_sleeper, mode: enum hrtimer_mode) {
-    void hrtimer_sleeper_start_expires(struct hrtimer_sleeper *sl, enum hrtimer_mode mode)
-    {
+pub unsafe extern "C" fn hrtimer_sleeper_start_expires(sl: *mut hrtimer_sleeper, mode: hrtimer_mode) {
 //
 // Make the enqueue delivery mode check work on RT. If the sleeper
 // was initialized for hard interrupt delivery, force the mode bit.
@@ -2154,8 +2366,9 @@ pub unsafe extern "C" fn hrtimer_sleeper_start_expires(sl: *mut hrtimer_sleeper,
 // __hrtimer_setup_sleeper() determines the delivery mode on RT so the
 // fiddling with this decision is avoided at the call sites.
 //
-    if (IS_ENABLED(CONFIG_PREEMPT_RT) && sl.timer.is_hard)
+    if (IS_ENABLED!(CONFIG_PREEMPT_RT) && sl.timer.is_hard) {
     mode |= HRTIMER_MODE_HARD;
+    }
 // If already expired, clear the task pointer and set current state to running
     if (!hrtimer_start_expires_user(&sl.timer, mode)) {
     sl.task = core::ptr::null_mut();
@@ -2163,9 +2376,8 @@ pub unsafe extern "C" fn hrtimer_sleeper_start_expires(sl: *mut hrtimer_sleeper,
     }
     }
     EXPORT_SYMBOL_GPL(hrtimer_sleeper_start_expires);
-    static void __hrtimer_setup_sleeper(struct hrtimer_sleeper *sl, clockid_t clock_id,
-    enum hrtimer_mode mode)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __hrtimer_setup_sleeper(sl: *mut hrtimer_sleeper, clock_id: clockid_t, mode: hrtimer_mode) {
 //
 // On PREEMPT_RT enabled kernels hrtimers which are not explicitly
 // marked for hard interrupt expiry mode are moved into soft
@@ -2185,9 +2397,10 @@ pub unsafe extern "C" fn hrtimer_sleeper_start_expires(sl: *mut hrtimer_sleeper,
 // a real-time scheduling class, mark the mode for hard interrupt
 // expiry.
 //
-    if (IS_ENABLED(CONFIG_PREEMPT_RT)) {
-    if (rt_or_dl_task_policy(current) && !(mode & HRTIMER_MODE_SOFT))
+    if (IS_ENABLED!(CONFIG_PREEMPT_RT)) {
+    if (rt_or_dl_task_policy(current) && !(mode & HRTIMER_MODE_SOFT)) {
     mode |= HRTIMER_MODE_HARD;
+    }
     }
     __hrtimer_setup(&sl.timer, hrtimer_wakeup, clock_id, mode);
     sl.task = current;
@@ -2198,55 +2411,58 @@ pub unsafe extern "C" fn hrtimer_sleeper_start_expires(sl: *mut hrtimer_sleeper,
 // @clock_id:	the clock to be used
 // @mode:	timer mode abs/rel
 //
-    void hrtimer_setup_sleeper_on_stack(struct hrtimer_sleeper *sl, clockid_t clock_id,
-    enum hrtimer_mode mode)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hrtimer_setup_sleeper_on_stack(sl: *mut hrtimer_sleeper, clock_id: clockid_t, mode: hrtimer_mode) {
     debug_setup_on_stack(&sl.timer, clock_id, mode);
     __hrtimer_setup_sleeper(sl, clock_id, mode);
     }
     EXPORT_SYMBOL_GPL(hrtimer_setup_sleeper_on_stack);
 #[no_mangle]
 pub unsafe extern "C" fn nanosleep_copyout(restart: *mut restart_block, ts: *mut timespec64) -> c_int {
-    int nanosleep_copyout(struct restart_block *restart, struct timespec64 *ts)
-    {
-    switch(restart.nanosleep.type) {
+    match (restart.nanosleep.type) {
 
-    case TT_COMPAT:
-    if (put_old_timespec32(ts, restart.nanosleep.compat_rmtp))
+    TT_COMPAT => {
+    if (put_old_timespec32(ts, restart.nanosleep.compat_rmtp)) {
     return -EFAULT;
-    break;
+    }
+    // break;
 
-    case TT_NATIVE:
-    if (put_timespec64(ts, restart.nanosleep.rmtp))
+    }
+    TT_NATIVE => {
+    if (put_timespec64(ts, restart.nanosleep.rmtp)) {
     return -EFAULT;
-    break;
-    default:
+    }
+    // break;
+    }
+    _ => {
     BUG();
+    }
     }
     return -ERESTART_RESTARTBLOCK;
     }
 #[no_mangle]
-unsafe extern "C" fn do_nanosleep(t: *mut hrtimer_sleeper, mode: enum hrtimer_mode) -> int __sched {
-    static int __sched do_nanosleep(struct hrtimer_sleeper *t, enum hrtimer_mode mode)
-    {
-    struct restart_block *restart;
+unsafe extern "C" fn do_nanosleep(t: *mut hrtimer_sleeper, mode: hrtimer_mode) -> int __sched {
+pub static mut restart: *mut c_void = core::ptr::null_mut();
     do {
     set_current_state(TASK_INTERRUPTIBLE|TASK_FREEZABLE);
     hrtimer_sleeper_start_expires(t, mode);
-    if (likely(t.task))
+    if (likely(t.task)) {
     schedule();
+    }
     hrtimer_cancel(&t.timer);
     mode = HRTIMER_MODE_ABS;
     } while (t.task && !signal_pending(current));
     __set_current_state(TASK_RUNNING);
-    if (!t.task)
+    if (!t.task) {
     return 0;
+    }
     restart = &current.restart_block;
     if (restart.nanosleep.type != TT_NONE) {
-    let mut rem: ktime_t = hrtimer_expires_remaining(&t.timer);
-    struct timespec64 rmt;
-    if (rem <= 0)
+pub static mut rem: ktime_t = 0;
+pub static mut rmt: usize = 0;
+    if (rem <= 0) {
     return 0;
+    }
     rmt = ktime_to_timespec64(rem);
     return nanosleep_copyout(restart, &rmt);
     }
@@ -2254,10 +2470,8 @@ unsafe extern "C" fn do_nanosleep(t: *mut hrtimer_sleeper, mode: enum hrtimer_mo
     }
 #[no_mangle]
 unsafe extern "C" fn hrtimer_nanosleep_restart(restart: *mut restart_block) -> long __sched {
-    static long __sched hrtimer_nanosleep_restart(struct restart_block *restart)
-    {
-    struct hrtimer_sleeper t;
-    int ret;
+pub static mut t: usize = 0;
+    let mut ret = 0;
     hrtimer_setup_sleeper_on_stack(&t, restart.nanosleep.clockid, HRTIMER_MODE_ABS);
     hrtimer_set_expires(&t.timer, restart.nanosleep.expires);
     ret = do_nanosleep(&t, HRTIMER_MODE_ABS);
@@ -2265,53 +2479,54 @@ unsafe extern "C" fn hrtimer_nanosleep_restart(restart: *mut restart_block) -> l
     return ret;
     }
 #[no_mangle]
-pub unsafe extern "C" fn hrtimer_nanosleep(rqtp: ktime_t, mode: enum hrtimer_mode, clockid: clockid_t) -> c_long {
-    long hrtimer_nanosleep(ktime_t rqtp, const enum hrtimer_mode mode, const clockid_t clockid)
-    {
-    struct restart_block *restart;
-    struct hrtimer_sleeper t;
-    int ret;
+pub unsafe extern "C" fn hrtimer_nanosleep(rqtp: ktime_t, mode: hrtimer_mode, clockid: clockid_t) -> c_long {
+pub static mut restart: *mut c_void = core::ptr::null_mut();
+pub static mut t: usize = 0;
+    let mut ret = 0;
     hrtimer_setup_sleeper_on_stack(&t, clockid, mode);
     hrtimer_set_expires_range_ns(&t.timer, rqtp, current.timer_slack_ns);
     ret = do_nanosleep(&t, mode);
-    if (ret != -ERESTART_RESTARTBLOCK)
-    goto out;
+    if (ret != -ERESTART_RESTARTBLOCK) {
+// goto;
+    }
 // Absolute timers do not update the rmtp value and restart:
     if (mode == HRTIMER_MODE_ABS) {
     ret = -ERESTARTNOHAND;
-    goto out;
+// goto;
     }
     restart = &current.restart_block;
     restart.nanosleep.clockid = t.timer.base.clockid;
     restart.nanosleep.expires = hrtimer_get_expires(&t.timer);
     set_restart_fn(restart, hrtimer_nanosleep_restart);
-    out:
+// label;
     destroy_hrtimer_on_stack(&t.timer);
     return ret;
     }
 
-    SYSCALL_DEFINE2(nanosleep, struct __kernel_timespec __user *, rqtp,
-    struct __kernel_timespec __user *, rmtp)
-    {
-    struct timespec64 tu;
-    if (get_timespec64(&tu, rqtp))
+#[no_mangle]
+pub unsafe extern "C" fn sys_nanosleep(rqtp: usize, rmtp: usize) -> c_long {
+pub static mut tu: usize = 0;
+    if (get_timespec64(&tu, rqtp)) {
     return -EFAULT;
-    if (!timespec64_valid(&tu))
+    }
+    if (!timespec64_valid(&tu)) {
     return -EINVAL;
+    }
     current.restart_block.fn = do_no_restart_syscall;
     current.restart_block.nanosleep.type = rmtp ? TT_NATIVE : TT_NONE;
     current.restart_block.nanosleep.rmtp = rmtp;
     return hrtimer_nanosleep(timespec64_to_ktime(tu), HRTIMER_MODE_REL, CLOCK_MONOTONIC);
     }
 
-    SYSCALL_DEFINE2(nanosleep_time32, struct old_timespec32 __user *, rqtp,
-    struct old_timespec32 __user *, rmtp)
-    {
-    struct timespec64 tu;
-    if (get_old_timespec32(&tu, rqtp))
+#[no_mangle]
+pub unsafe extern "C" fn sys_nanosleep_time32(rqtp: usize, rmtp: usize) -> c_long {
+pub static mut tu: usize = 0;
+    if (get_old_timespec32(&tu, rqtp)) {
     return -EFAULT;
-    if (!timespec64_valid(&tu))
+    }
+    if (!timespec64_valid(&tu)) {
     return -EINVAL;
+    }
     current.restart_block.fn = do_no_restart_syscall;
     current.restart_block.nanosleep.type = rmtp ? TT_COMPAT : TT_NONE;
     current.restart_block.nanosleep.compat_rmtp = rmtp;
@@ -2323,11 +2538,9 @@ pub unsafe extern "C" fn hrtimer_nanosleep(rqtp: ktime_t, mode: enum hrtimer_mod
 //
 #[no_mangle]
 pub unsafe extern "C" fn hrtimers_prepare_cpu(cpu: c_uint) -> c_int {
-    int hrtimers_prepare_cpu(unsigned int cpu)
-    {
-    struct hrtimer_cpu_base *cpu_base = &per_cpu(hrtimer_bases, cpu);
-    for (int i = 0; i < HRTIMER_MAX_CLOCK_BASES; i++) {
-    struct hrtimer_clock_base *clock_b = &cpu_base.clock_base[i];
+    let mut cpu_base = &per_cpu(hrtimer_bases, cpu);
+    while (i < HRTIMER_MAX_CLOCK_BASES) {
+    let mut clock_b = &cpu_base.clock_base[i];
     clock_b.cpu_base = cpu_base;
     seqcount_raw_spinlock_init(&clock_b.seq, &cpu_base.lock);
     timerqueue_linked_init_head(&clock_b.active);
@@ -2338,9 +2551,7 @@ pub unsafe extern "C" fn hrtimers_prepare_cpu(cpu: c_uint) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn hrtimers_cpu_starting(cpu: c_uint) -> c_int {
-    int hrtimers_cpu_starting(unsigned int cpu)
-    {
-    struct hrtimer_cpu_base *cpu_base = this_cpu_ptr(&hrtimer_bases);
+    let mut cpu_base = this_cpu_ptr(&hrtimer_bases);
 // Clear out any left over state from a CPU down operation
     cpu_base.active_bases = 0;
     cpu_base.hres_active = false;
@@ -2354,14 +2565,13 @@ pub unsafe extern "C" fn hrtimers_cpu_starting(cpu: c_uint) -> c_int {
     return 0;
     }
 
-    static void migrate_hrtimer_list(struct hrtimer_clock_base *old_base,
-    struct hrtimer_clock_base *new_base)
-    {
-    struct timerqueue_linked_node *node;
-    struct hrtimer *timer;
+#[no_mangle]
+pub unsafe extern "C" fn migrate_hrtimer_list(old_base: *mut hrtimer_clock_base, new_base: *mut hrtimer_clock_base) {
+pub static mut node: *mut c_void = core::ptr::null_mut();
+pub static mut timer: *mut c_void = core::ptr::null_mut();
     while ((node = timerqueue_linked_first(&old_base.active))) {
     timer = hrtimer_from_timerqueue_node(node);
-    BUG_ON(hrtimer_callback_running(timer));
+    BUG_ON!(hrtimer_callback_running(timer));
     debug_hrtimer_deactivate(timer);
 //
 // Mark it as ENQUEUED not INACTIVE otherwise the
@@ -2383,10 +2593,9 @@ pub unsafe extern "C" fn hrtimers_cpu_starting(cpu: c_uint) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn hrtimers_cpu_dying(dying_cpu: c_uint) -> c_int {
-    int hrtimers_cpu_dying(unsigned int dying_cpu)
-    {
-    let mut ncpu: c_int = cpumask_any_and(cpu_active_mask, housekeeping_cpumask(HK_TYPE_TIMER));
-    struct hrtimer_cpu_base *old_base, *new_base;
+pub static mut ncpu: c_int = 0;
+    let mut old_base = core::ptr::null_mut();
+    let mut new_base = core::ptr::null_mut();
     old_base = this_cpu_ptr(&hrtimer_bases);
     new_base = &per_cpu(hrtimer_bases, ncpu);
 //
@@ -2395,8 +2604,9 @@ pub unsafe extern "C" fn hrtimers_cpu_dying(dying_cpu: c_uint) -> c_int {
 //
     raw_spin_lock(&old_base.lock);
     raw_spin_lock_nested(&new_base.lock, SINGLE_DEPTH_NESTING);
-    for (int i = 0; i < HRTIMER_MAX_CLOCK_BASES; i++)
+    for (int i = 0; i < HRTIMER_MAX_CLOCK_BASES; i++) {
     migrate_hrtimer_list(&old_base.clock_base[i], &new_base.clock_base[i]);
+    }
 // Tell the other CPU to retrigger the next event
     smp_call_function_single(ncpu, retrigger_next_event, core::ptr::null_mut(), 0);
     raw_spin_unlock(&new_base.lock);
@@ -2406,10 +2616,9 @@ pub unsafe extern "C" fn hrtimers_cpu_dying(dying_cpu: c_uint) -> c_int {
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn hrtimers_init() -> void __init {
-    void __init hrtimers_init(void)
-    {
+pub unsafe extern "C" fn hrtimers_init()  {
     hrtimers_prepare_cpu(smp_processor_id());
     hrtimers_cpu_starting(smp_processor_id());
     open_softirq(HRTIMER_SOFTIRQ, hrtimer_run_softirq);
     }
+}

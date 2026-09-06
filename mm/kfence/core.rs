@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -45,94 +295,90 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
 // Disables KFENCE on the first warning assuming an irrecoverable error.
 
-    ({                                                                     \
-    const bool __cond = WARN_ON(cond);                             \
-    if (unlikely(__cond)) {                                        \
-    WRITE_ONCE(kfence_enabled, false);                     \
-    disabled_by_warn = true;                               \
-    }                                                              \
-    __cond;                                                        \
+    ({                                                                     
+    let mut __cond = WARN_ON!(cond);                             
+    if (unlikely(__cond)) {                                        
+    WRITE_ONCE(kfence_enabled, false);                     
+    disabled_by_warn = true;                               
+    }                                                              
+    __cond;                                                        
     })
 // === Data =================================================================
-    bool kfence_enabled __read_mostly;
-    static bool disabled_by_warn __read_mostly;
-    let mut __read_mostly: unsigned long kfence_sample_interval = CONFIG_KFENCE_SAMPLE_INTERVAL;
+    let mut kfence_enabled = 0;
+    static bool disabled_by_warn ;
+pub static mut : unsigned long kfence_sample_interval = 0;
     EXPORT_SYMBOL_GPL(kfence_sample_interval); /* Export for test modules. */
 
-    static int kfence_enable_late(void);
+// forward_decl: kfence_enable_late;
 #[no_mangle]
 unsafe extern "C" fn param_set_sample_interval(val: *const c_char, kp: *const kernel_param) -> c_int {
-    static int param_set_sample_interval(const char *val, const struct kernel_param *kp)
-    {
-    unsigned long num;
-    let mut ret: c_int = kstrtoul(val, 0, &num);
-    if (ret < 0)
+    let mut num = 0;
+pub static mut ret: c_int = 0;
+    if (ret < 0) {
     return ret;
+    }
 // Using 0 to indicate KFENCE is disabled.
     if (!num && READ_ONCE(kfence_enabled)) {
-    pr_info("disabled\n");
+    pr_info!("disabled\n");
     WRITE_ONCE(kfence_enabled, false);
     }
     if (num && kasan_hw_tags_enabled()) {
-    pr_info("disabled as KASAN HW tags are enabled\n");
+    pr_info!("disabled as KASAN HW tags are enabled\n");
     return -EINVAL;
     }
-// ((unsigned long *)kp->arg) = num;
-    if (num && !READ_ONCE(kfence_enabled) && system_state != SYSTEM_BOOTING)
+// (kp->arg) = num;
+    if (num && !READ_ONCE(kfence_enabled) && system_state != SYSTEM_BOOTING) {
     return disabled_by_warn ? -EINVAL : kfence_enable_late();
+    }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn param_get_sample_interval(buffer: *mut c_char, kp: *const kernel_param) -> c_int {
-    static int param_get_sample_interval(char *buffer, const struct kernel_param *kp)
-    {
-    if (!READ_ONCE(kfence_enabled))
+    if (!READ_ONCE(kfence_enabled)) {
     return sprintf(buffer, "0\n");
+    }
     return param_get_ulong(buffer, kp);
     }
-    static const struct kernel_param_ops sample_interval_param_ops = {
-    .set = param_set_sample_interval,
-    .get = param_get_sample_interval,
-    };
-    module_param_cb(sample_interval, &sample_interval_param_ops, &kfence_sample_interval, 0600);
+pub static mut kernel_param_ops: usize = 0;
+    module_param_cb!(sample_interval, &sample_interval_param_ops, &kfence_sample_interval, 0600);
 // Pool usage% threshold when currently covered allocations are skipped.
-    let mut __read_mostly: static unsigned long kfence_skip_covered_thresh = 75;
-    module_param_named(skip_covered_thresh, kfence_skip_covered_thresh, ulong, 0644);
+pub static mut : unsigned long kfence_skip_covered_thresh = 75;
+    module_param_named!(skip_covered_thresh, kfence_skip_covered_thresh, ulong, 0644);
 // Allocation burst count: number of excess KFENCE allocations per sample.
-    static unsigned int kfence_burst __read_mostly;
-    module_param_named(burst, kfence_burst, uint, 0644);
+    static unsigned int kfence_burst ;
+    module_param_named!(burst, kfence_burst, uint, 0644);
 // If true, use a deferrable timer.
-    let mut __read_mostly: static bool kfence_deferrable = IS_ENABLED(CONFIG_KFENCE_DEFERRABLE);
-    module_param_named(deferrable, kfence_deferrable, bool, 0444);
+pub static mut : bool kfence_deferrable = 0;
+    module_param_named!(deferrable, kfence_deferrable, bool, 0444);
 // If true, check all canary bytes on panic.
-    static bool kfence_check_on_panic __read_mostly;
-    module_param_named(check_on_panic, kfence_check_on_panic, bool, 0444);
+    static bool kfence_check_on_panic ;
+    module_param_named!(check_on_panic, kfence_check_on_panic, bool, 0444);
 // The pool of pages used for guard pages and objects.
-    char *__kfence_pool __read_mostly;
+pub static mut __kfence_pool: *mut c_void = core::ptr::null_mut();
     EXPORT_SYMBOL(__kfence_pool); /* Export for test modules. */
 //
 // Per-object metadata, with one-to-one mapping of object metadata to
 // backing pages (in __kfence_pool).
 //
     static_assert(CONFIG_KFENCE_NUM_OBJECTS > 0);
-    struct kfence_metadata *kfence_metadata __read_mostly;
+pub static mut kfence_metadata: *mut c_void = core::ptr::null_mut();
 //
 // If kfence_metadata is not NULL, it may be accessed by kfence_shutdown_cache().
 // So introduce kfence_metadata_init to initialize metadata, and then make
 // kfence_metadata visible after initialization is successful. This prevents
 // potential UAF or access to uninitialized metadata.
 //
-    static struct kfence_metadata *kfence_metadata_init __read_mostly;
+pub static mut kfence_metadata_init: *mut c_void = core::ptr::null_mut();
 // Freelist with available objects.
-    DEFINE_RAW_SPINLOCK(kfence_freelist_lock); /* Lock protecting freelist. */
+pub static mut kfence_freelist_lock: usize = 0; /* Lock protecting freelist. */
     static struct list_head kfence_freelist __guarded_by(&kfence_freelist_lock) = LIST_HEAD_INIT(kfence_freelist);
 //
 // The static key to set up a KFENCE allocation; or if static keys are not used
 // to gate allocations, to avoid a load and compare if KFENCE is disabled.
 //
-    DEFINE_STATIC_KEY_FALSE(kfence_allocation_key);
+pub static mut kfence_allocation_key: usize = 0;
 // Gates the allocation, ensuring only one succeeds in a given period.
-    let mut kfence_allocation_gate: core::sync::atomic::AtomicI32 = ATOMIC_INIT(1);
+pub static mut kfence_allocation_gate: core::sync::atomic::AtomicI32 = 0;
 //
 // A Counting Bloom filter of allocation coverage: limits currently covered
 // allocations of the same source filling up the pool.
@@ -176,22 +422,18 @@ pub const ALLOC_COVERED_HNUM: c_int = 2;
     [KFENCE_COUNTER_SKIP_CAPACITY]	= "skipped allocations (capacity)",
     [KFENCE_COUNTER_SKIP_COVERED]	= "skipped allocations (covered)",
     };
-    static_assert(ARRAY_SIZE(counter_names) == KFENCE_COUNTER_COUNT);
+    static_assert(ARRAY_SIZE!(counter_names) == KFENCE_COUNTER_COUNT);
 // === Internals ============================================================
 #[no_mangle]
 pub unsafe extern "C" fn should_skip_covered() -> bool {
-    static inline bool should_skip_covered(void)
-    {
-    let mut thresh: c_ulong = (CONFIG_KFENCE_NUM_OBJECTS * kfence_skip_covered_thresh) / 100;
+pub static mut thresh: c_ulong = 0;
     return atomic_long_read(&counters[KFENCE_COUNTER_ALLOCATED]) > thresh;
     }
 #[no_mangle]
 unsafe extern "C" fn get_alloc_stack_hash(stack_entries: *mut c_ulong, num_entries: usize) -> u32 {
-    static u32 get_alloc_stack_hash(unsigned long *stack_entries, size_t num_entries)
-    {
     num_entries = min(num_entries, UNIQUE_ALLOC_STACK_DEPTH);
     num_entries = filter_irq_stacks(stack_entries, num_entries);
-    return jhash(stack_entries, num_entries * sizeof(stack_entries[0]), stack_hash_seed);
+    return jhash(stack_entries, num_entries * sizeof!(stack_entries[0]), stack_hash_seed);
     }
 //
 // Adds (or subtracts) count @val for allocation stack trace hash
@@ -199,10 +441,8 @@ unsafe extern "C" fn get_alloc_stack_hash(stack_entries: *mut c_ulong, num_entri
 //
 #[no_mangle]
 unsafe extern "C" fn alloc_covered_add(alloc_stack_hash: u32, val: c_int) {
-    static void alloc_covered_add(u32 alloc_stack_hash, int val)
-    {
-    int i;
-    for (i = 0; i < ALLOC_COVERED_HNUM; i++) {
+    let mut i = 0;
+    while (i < ALLOC_COVERED_HNUM) {
     atomic_add(val, &alloc_covered[alloc_stack_hash & ALLOC_COVERED_MASK]);
     alloc_stack_hash = ALLOC_COVERED_HNEXT(alloc_stack_hash);
     }
@@ -213,73 +453,65 @@ unsafe extern "C" fn alloc_covered_add(alloc_stack_hash: u32, val: c_int) {
 //
 #[no_mangle]
 unsafe extern "C" fn alloc_covered_contains(alloc_stack_hash: u32) -> bool {
-    static bool alloc_covered_contains(u32 alloc_stack_hash)
-    {
-    int i;
-    for (i = 0; i < ALLOC_COVERED_HNUM; i++) {
-    if (!atomic_read(&alloc_covered[alloc_stack_hash & ALLOC_COVERED_MASK]))
+    let mut i = 0;
+    while (i < ALLOC_COVERED_HNUM) {
+    if (!atomic_read(&alloc_covered[alloc_stack_hash & ALLOC_COVERED_MASK])) {
     return false;
+    }
     alloc_stack_hash = ALLOC_COVERED_HNEXT(alloc_stack_hash);
     }
     return true;
     }
 #[no_mangle]
 unsafe extern "C" fn kfence_protect(addr: c_ulong) -> bool {
-    static bool kfence_protect(unsigned long addr)
-    {
     return !KFENCE_WARN_ON(!kfence_protect_page(ALIGN_DOWN(addr, PAGE_SIZE), true));
     }
 #[no_mangle]
 unsafe extern "C" fn kfence_unprotect(addr: c_ulong) -> bool {
-    static bool kfence_unprotect(unsigned long addr)
-    {
     return !KFENCE_WARN_ON(!kfence_protect_page(ALIGN_DOWN(addr, PAGE_SIZE), false));
     }
 #[no_mangle]
 pub unsafe extern "C" fn metadata_to_pageaddr(meta: *const kfence_metadata) -> c_ulong {
-    static inline unsigned long metadata_to_pageaddr(const struct kfence_metadata *meta)
-    __must_hold(&meta.lock)
-    {
-    let mut offset: c_ulong = (meta - kfence_metadata + 1) * PAGE_SIZE * 2;
-    let mut pageaddr: c_ulong = (unsigned long)&__kfence_pool[offset];
+pub static mut offset: c_ulong = 0;
+pub static mut pageaddr: c_ulong = 0;
 // The checks do not affect performance; only called from slow-paths.
 // Only call with a pointer into kfence_metadata.
     if (KFENCE_WARN_ON(meta < kfence_metadata ||
-    meta >= kfence_metadata + CONFIG_KFENCE_NUM_OBJECTS))
+    meta >= kfence_metadata + CONFIG_KFENCE_NUM_OBJECTS)) {
     return 0;
+    }
 //
 // This metadata object only ever maps to 1 page; verify that the stored
 // address is in the expected range.
 //
-    if (KFENCE_WARN_ON(ALIGN_DOWN(meta.addr, PAGE_SIZE) != pageaddr))
+    if (KFENCE_WARN_ON(ALIGN_DOWN(meta.addr, PAGE_SIZE) != pageaddr)) {
     return 0;
+    }
     return pageaddr;
     }
 #[no_mangle]
 pub unsafe extern "C" fn kfence_obj_allocated(meta: *const kfence_metadata) -> bool {
-    static inline bool kfence_obj_allocated(const struct kfence_metadata *meta)
-    {
-    let mut state: enum kfence_object_state = READ_ONCE(meta.state);
-    let mut state: return = = KFENCE_OBJECT_ALLOCATED || state == KFENCE_OBJECT_RCU_FREEING;
+pub static mut state: kfence_object_state = 0;
+pub static mut state: return = 0;
     }
 //
 // Update the object's metadata state, including updating the alloc/free stacks
 // depending on the state transition.
 //
     static noinline void
-    metadata_update_state(struct kfence_metadata *meta, enum kfence_object_state next,
+    metadata_update_state(kfence_metadata *meta, enum kfence_object_state next,
     unsigned long *stack_entries, size_t num_stack_entries)
     __must_hold(&meta.lock)
     {
-    struct kfence_track *track =
-    next == KFENCE_OBJECT_ALLOCATED ? &meta.alloc_track : &meta.free_track;
+    let mut track = next == KFENCE_OBJECT_ALLOCATED ? &meta.alloc_track : &meta.free_track;
     lockdep_assert_held(&meta.lock);
 // Stack has been saved when calling rcu, skip.
-    if (READ_ONCE(meta.state) == KFENCE_OBJECT_RCU_FREEING)
-    goto out;
+    if (READ_ONCE(meta.state) == KFENCE_OBJECT_RCU_FREEING) {
+// goto;
+    }
     if (stack_entries) {
     memcpy(track.stack_entries, stack_entries,
-    num_stack_entries * sizeof(stack_entries[0]));
+    num_stack_entries * sizeof!(stack_entries[0]));
     } else {
 //
 // Skip over 1 (this) functions; noinline ensures we do not
@@ -291,7 +523,7 @@ pub unsafe extern "C" fn kfence_obj_allocated(meta: *const kfence_metadata) -> b
     track.pid = task_pid_nr(current);
     track.cpu = raw_smp_processor_id();
     track.ts_nsec = local_clock(); /* Same source as printk timestamps. */
-    out:
+// label;
 //
 // Pairs with READ_ONCE() in
 // kfence_shutdown_cache(),
@@ -303,13 +535,12 @@ pub unsafe extern "C" fn kfence_obj_allocated(meta: *const kfence_metadata) -> b
 // Check canary byte at @addr.
 #[no_mangle]
 unsafe extern "C" fn check_canary_byte(addr: *mut u8) -> check_canary_attributes bool {
-    static check_canary_attributes bool check_canary_byte(u8 *addr)
-    {
-    struct kfence_metadata *meta;
+pub static mut meta: *mut c_void = core::ptr::null_mut();
     enum kfence_fault fault;
-    unsigned long flags;
-    if (likely(*addr == KFENCE_CANARY_PATTERN_U8(addr)))
+    let mut flags = 0;
+    if (likely(*addr == KFENCE_CANARY_PATTERN_U8(addr))) {
     return true;
+    }
     atomic_long_inc(&counters[KFENCE_COUNTER_BUGS]);
     meta = addr_to_metadata((unsigned long)addr);
     raw_spin_lock_irqsave(&meta.lock, flags);
@@ -320,25 +551,25 @@ unsafe extern "C" fn check_canary_byte(addr: *mut u8) -> check_canary_attributes
     }
 #[no_mangle]
 pub unsafe extern "C" fn set_canary(meta: *const kfence_metadata) {
-    static inline void set_canary(const struct kfence_metadata *meta)
-    {
-    let mut pageaddr: c_ulong = ALIGN_DOWN(meta.addr, PAGE_SIZE);
-    let mut addr: c_ulong = pageaddr;
+pub static mut pageaddr: c_ulong = 0;
+pub static mut addr: c_ulong = 0;
 //
 // The canary may be written to part of the object memory, but it does
 // not affect it. The user should initialize the object before using it.
 //
-    for (; addr < meta.addr; addr += sizeof(u64))
-// ((u64 *)addr) = KFENCE_CANARY_PATTERN_U64;
-    addr = ALIGN_DOWN(meta.addr + meta.size, sizeof(u64));
-    for (; addr - pageaddr < PAGE_SIZE; addr += sizeof(u64))
-// ((u64 *)addr) = KFENCE_CANARY_PATTERN_U64;
+    for (; addr < meta.addr; addr += sizeof!(u64)) {
+// (addr) = KFENCE_CANARY_PATTERN_U64;
+    }
+    addr = ALIGN_DOWN(meta.addr + meta.size, sizeof!(u64));
+    for (; addr - pageaddr < PAGE_SIZE; addr += sizeof!(u64)) {
+// (addr) = KFENCE_CANARY_PATTERN_U64;
+    }
     }
     static check_canary_attributes void
     check_canary(const struct kfence_metadata *meta)
     {
-    let mut pageaddr: c_ulong = ALIGN_DOWN(meta.addr, PAGE_SIZE);
-    let mut addr: c_ulong = pageaddr;
+pub static mut pageaddr: c_ulong = 0;
+pub static mut addr: c_ulong = 0;
 //
 // We'll iterate over each canary byte per-side until a corrupted byte
 // is found. However, we'll still iterate over the canary bytes to the
@@ -348,48 +579,50 @@ pub unsafe extern "C" fn set_canary(meta: *const kfence_metadata) {
 // what the error is about when displaying which bytes were corrupted.
 //
 // Apply to left of object.
-    for (; meta.addr - addr >= sizeof(u64); addr += sizeof(u64)) {
-    if (unlikely(*((u64 *)addr) != KFENCE_CANARY_PATTERN_U64))
+    for (; meta.addr - addr >= sizeof!(u64); addr += sizeof!(u64)) {
+    if (unlikely(*(addr) != KFENCE_CANARY_PATTERN_U64)) {
     break;
+    }
     }
 //
 // If the canary is corrupted in a certain 64 bytes, or the canary
 // memory cannot be completely covered by multiple consecutive 64 bytes,
 // it needs to be checked one by one.
 //
-    for (; addr < meta.addr; addr++) {
-    if (unlikely(!check_canary_byte((u8 *)addr)))
+    while (addr < meta.addr) {
+    if (unlikely(!check_canary_byte(addr))) {
     break;
     }
+    }
 // Apply to right of object.
-    for (addr = meta.addr + meta.size; addr % sizeof(u64) != 0; addr++) {
-    if (unlikely(!check_canary_byte((u8 *)addr)))
-    return;
-    }
-    for (; addr - pageaddr < PAGE_SIZE; addr += sizeof(u64)) {
-    if (unlikely(*((u64 *)addr) != KFENCE_CANARY_PATTERN_U64)) {
-    for (; addr - pageaddr < PAGE_SIZE; addr++) {
-    if (!check_canary_byte((u8 *)addr))
+    while (addr % sizeof!(u64) != 0) {
+    if (unlikely(!check_canary_byte(addr))) {
     return;
     }
     }
+    for (; addr - pageaddr < PAGE_SIZE; addr += sizeof!(u64)) {
+    if (unlikely(*(addr) != KFENCE_CANARY_PATTERN_U64)) {
+    while (addr - pageaddr < PAGE_SIZE) {
+    if (!check_canary_byte(addr)) {
+    return;
     }
     }
-    static void *kfence_guarded_alloc(struct kmem_cache *cache, size_t size, gfp_t gfp,
-    unsigned long *stack_entries, size_t num_stack_entries,
-    u32 alloc_stack_hash)
-    {
-    struct kfence_metadata *meta = core::ptr::null_mut();
-    unsigned long flags;
-    struct slab *slab;
-    void *addr;
-    let mut random_right_allocate: bool = get_random_u32_below(2);
-    const bool random_fault = CONFIG_KFENCE_STRESS_TEST_FAULTS &&
+    }
+    }
+    }
+#[no_mangle]
+pub unsafe extern "C" fn kfence_guarded_alloc(cache: *mut kmem_cache, size: size_t, gfp: gfp_t, stack_entries: *mut c_ulong, num_stack_entries: size_t, alloc_stack_hash: u32) -> *mut c_void {
+    let mut meta = core::ptr::null_mut();
+    let mut flags = 0;
+pub static mut slab: *mut c_void = core::ptr::null_mut();
+pub static mut addr: *mut c_void = core::ptr::null_mut();
+pub static mut random_right_allocate: bool = false;
+    let mut random_fault = CONFIG_KFENCE_STRESS_TEST_FAULTS &&
     !get_random_u32_below(CONFIG_KFENCE_STRESS_TEST_FAULTS);
 // Try to obtain a free object.
     raw_spin_lock_irqsave(&kfence_freelist_lock, flags);
     if (!list_empty(&kfence_freelist)) {
-    meta = list_entry(kfence_freelist.next, struct kfence_metadata, list);
+    meta = list_entry(kfence_freelist.next, kfence_metadata, list);
     list_del_init(&meta.list);
     }
     raw_spin_unlock_irqrestore(&kfence_freelist_lock, flags);
@@ -415,8 +648,9 @@ pub unsafe extern "C" fn set_canary(meta: *const kfence_metadata) {
     }
     meta.addr = metadata_to_pageaddr(meta);
 // Unprotect if we're reusing this page.
-    if (meta.state == KFENCE_OBJECT_FREED)
+    if (meta.state == KFENCE_OBJECT_FREED) {
     kfence_unprotect(meta.addr);
+    }
 //
 // Note: for allocations made before RNG initialization, will always
 // return zero. We still benefit from enabling KFENCE as early as
@@ -430,7 +664,7 @@ pub unsafe extern "C" fn set_canary(meta: *const kfence_metadata) {
     meta.addr += PAGE_SIZE - size;
     meta.addr = ALIGN_DOWN(meta.addr, cache.align);
     }
-    addr = (void *)meta.addr;
+    addr = meta.addr;
 // Update remaining metadata.
     metadata_update_state(meta, KFENCE_OBJECT_ALLOCATED, stack_entries, num_stack_entries);
 // Pairs with READ_ONCE() in kfence_shutdown_cache().
@@ -450,24 +684,25 @@ pub unsafe extern "C" fn set_canary(meta: *const kfence_metadata) {
 // slab do the initialization, as otherwise it might overwrite KFENCE's
 // redzone.
 //
-    if (unlikely(slab_want_init_on_alloc(gfp, cache)))
+    if (unlikely(slab_want_init_on_alloc(gfp, cache))) {
     memzero_explicit(addr, size);
-    if (cache.ctor)
+    }
+    if (cache.ctor) {
     cache.ctor(addr);
-    if (random_fault)
+    }
+    if (random_fault) {
     kfence_protect(meta.addr); /* Random "faults" by protecting the object. */
+    }
     atomic_long_inc(&counters[KFENCE_COUNTER_ALLOCATED]);
     atomic_long_inc(&counters[KFENCE_COUNTER_ALLOCS]);
     return addr;
     }
 #[no_mangle]
 unsafe extern "C" fn kfence_guarded_free(addr: *mut c_void, meta: *mut kfence_metadata, zombie: bool) {
-    static void kfence_guarded_free(void *addr, struct kfence_metadata *meta, bool zombie)
-    {
-    struct kcsan_scoped_access assert_page_exclusive;
-    u32 alloc_stack_hash;
-    unsigned long flags;
-    bool init;
+pub static mut assert_page_exclusive: usize = 0;
+    let mut alloc_stack_hash = 0;
+    let mut flags = 0;
+    let mut init = 0;
     raw_spin_lock_irqsave(&meta.lock, flags);
     if (!kfence_obj_allocated(meta) || meta.addr != (unsigned long)addr) {
     enum kfence_fault fault;
@@ -480,14 +715,15 @@ unsafe extern "C" fn kfence_guarded_free(addr: *mut c_void, meta: *mut kfence_me
     return;
     }
 // Detect racy use-after-free, or incorrect reallocation of this page by KFENCE.
-    kcsan_begin_scoped_access((void *)ALIGN_DOWN((unsigned long)addr, PAGE_SIZE), PAGE_SIZE,
+    kcsan_begin_scoped_access(ALIGN_DOWN((unsigned long)addr, PAGE_SIZE), PAGE_SIZE,
     KCSAN_ACCESS_SCOPED | KCSAN_ACCESS_WRITE | KCSAN_ACCESS_ASSERT,
     &assert_page_exclusive);
-    if (CONFIG_KFENCE_STRESS_TEST_FAULTS)
+    if (CONFIG_KFENCE_STRESS_TEST_FAULTS) {
     kfence_unprotect((unsigned long)addr); /* To check canary bytes. */
+    }
 // Restore page protection if there was an OOB access.
     if (meta.unprotected_page) {
-    memzero_explicit((void *)ALIGN_DOWN(meta.unprotected_page, PAGE_SIZE), PAGE_SIZE);
+    memzero_explicit(ALIGN_DOWN(meta.unprotected_page, PAGE_SIZE), PAGE_SIZE);
     kfence_protect(meta.unprotected_page);
     meta.unprotected_page = 0;
     }
@@ -504,8 +740,9 @@ unsafe extern "C" fn kfence_guarded_free(addr: *mut c_void, meta: *mut kfence_me
 // data is still there, and after a use-after-free is detected, we
 // unprotect the page, so the data is still accessible.
 //
-    if (!zombie && unlikely(init))
+    if (!zombie && unlikely(init)) {
     memzero_explicit(addr, meta.size);
+    }
 // Protect to detect use-after-frees.
     kfence_protect((unsigned long)addr);
     kcsan_end_scoped_access(&assert_page_exclusive);
@@ -524,10 +761,8 @@ unsafe extern "C" fn kfence_guarded_free(addr: *mut c_void, meta: *mut kfence_me
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_guarded_free(h: *mut rcu_head) {
-    static void rcu_guarded_free(struct rcu_head *h)
-    {
-    struct kfence_metadata *meta = container_of(h, struct kfence_metadata, rcu_head);
-    kfence_guarded_free((void *)meta.addr, meta, false);
+    let mut meta = container_of!(h, kfence_metadata, rcu_head);
+    kfence_guarded_free(meta.addr, meta, false);
     }
 //
 // Initialization of the KFENCE pool after its allocation.
@@ -536,13 +771,12 @@ unsafe extern "C" fn rcu_guarded_free(h: *mut rcu_head) {
 //
 #[no_mangle]
 unsafe extern "C" fn kfence_init_pool() -> c_ulong {
-    static unsigned long kfence_init_pool(void)
-    __context_unsafe(/* constructor */)
-    {
     unsigned long addr, start_pfn;
-    int i, rand;
-    if (!arch_kfence_init_pool())
+    let mut i = 0;
+    let mut rand = 0;
+    if (!arch_kfence_init_pool()) {
     return (unsigned long)__kfence_pool;
+    }
     addr = (unsigned long)__kfence_pool;
     start_pfn = PHYS_PFN(virt_to_phys(__kfence_pool));
 //
@@ -553,10 +787,11 @@ unsafe extern "C" fn kfence_init_pool() -> c_ulong {
 // fast-path in SLUB, and therefore need to ensure kfree() correctly
 // enters __slab_free() slow-path.
 //
-    for (i = 0; i < KFENCE_POOL_SIZE / PAGE_SIZE; i++) {
-    struct page *page;
-    if (!i || (i % 2))
+    while (i < KFENCE_POOL_SIZE / PAGE_SIZE) {
+pub static mut page: *mut c_void = core::ptr::null_mut();
+    if (!i || (i % 2)) {
     continue;
+    }
     page = pfn_to_page(start_pfn + i);
     __SetPageSlab(page);
     }
@@ -566,13 +801,14 @@ unsafe extern "C" fn kfence_init_pool() -> c_ulong {
 // additional page in the beginning gives us an even number of pages,
 // which simplifies the mapping of address to metadata index.
 //
-    for (i = 0; i < 2; i++) {
-    if (unlikely(!kfence_protect(addr)))
+    while (i < 2) {
+    if (unlikely(!kfence_protect(addr))) {
     return addr;
+    }
     addr += PAGE_SIZE;
     }
-    for (i = 0; i < CONFIG_KFENCE_NUM_OBJECTS; i++) {
-    struct kfence_metadata *meta = &kfence_metadata_init[i];
+    while (i < CONFIG_KFENCE_NUM_OBJECTS) {
+    let mut meta = &kfence_metadata_init[i];
 // Initialize metadata.
     INIT_LIST_HEAD(&meta.list);
     raw_spin_lock_init(&meta.lock);
@@ -580,19 +816,20 @@ unsafe extern "C" fn kfence_init_pool() -> c_ulong {
 // Use addr to randomize the freelist.
     meta.addr = i;
 // Protect the right redzone.
-    if (unlikely(!kfence_protect(addr + 2 * i * PAGE_SIZE + PAGE_SIZE)))
-    goto reset_slab;
+    if (unlikely(!kfence_protect(addr + 2 * i * PAGE_SIZE + PAGE_SIZE))) {
+// goto;
     }
-    for (i = CONFIG_KFENCE_NUM_OBJECTS; i > 0; i--) {
+    }
+    while (i > 0) {
     rand = get_random_u32_below(i);
     swap(kfence_metadata_init[i - 1].addr, kfence_metadata_init[rand].addr);
     }
-    for (i = 0; i < CONFIG_KFENCE_NUM_OBJECTS; i++) {
-    struct kfence_metadata *meta_1 = &kfence_metadata_init[i];
-    struct kfence_metadata *meta_2 = &kfence_metadata_init[meta_1.addr];
+    while (i < CONFIG_KFENCE_NUM_OBJECTS) {
+    let mut meta_1 = &kfence_metadata_init[i];
+    let mut meta_2 = &kfence_metadata_init[meta_1.addr];
     list_add_tail(&meta_2.list, &kfence_freelist);
     }
-    for (i = 0; i < CONFIG_KFENCE_NUM_OBJECTS; i++) {
+    while (i < CONFIG_KFENCE_NUM_OBJECTS) {
     kfence_metadata_init[i].addr = addr;
     addr += 2 * PAGE_SIZE;
     }
@@ -603,12 +840,13 @@ unsafe extern "C" fn kfence_init_pool() -> c_ulong {
 //
     smp_store_release(&kfence_metadata, kfence_metadata_init);
     return 0;
-    reset_slab:
+// label;
     addr += 2 * i * PAGE_SIZE;
-    for (i = 0; i < KFENCE_POOL_SIZE / PAGE_SIZE; i++) {
-    struct page *page;
-    if (!i || (i % 2))
+    while (i < KFENCE_POOL_SIZE / PAGE_SIZE) {
+pub static mut page: *mut c_void = core::ptr::null_mut();
+    if (!i || (i % 2)) {
     continue;
+    }
     page = pfn_to_page(start_pfn + i);
     __ClearPageSlab(page);
     }
@@ -616,11 +854,10 @@ unsafe extern "C" fn kfence_init_pool() -> c_ulong {
     }
 #[no_mangle]
 unsafe extern "C" fn kfence_init_pool_early() -> bool __init {
-    static bool __init kfence_init_pool_early(void)
-    {
-    unsigned long addr;
-    if (!__kfence_pool)
+    let mut addr = 0;
+    if (!__kfence_pool) {
     return false;
+    }
     addr = kfence_init_pool();
     if (!addr) {
 //
@@ -639,7 +876,7 @@ unsafe extern "C" fn kfence_init_pool_early() -> bool __init {
 // fails for the first page, and therefore expect addr==__kfence_pool in
 // most failure cases.
 //
-    memblock_free((void *)addr, KFENCE_POOL_SIZE - (addr - (unsigned long)__kfence_pool));
+    memblock_free(addr, KFENCE_POOL_SIZE - (addr - (unsigned long)__kfence_pool));
     __kfence_pool = core::ptr::null_mut();
     memblock_free(kfence_metadata_init, KFENCE_METADATA_SIZE);
     kfence_metadata_init = core::ptr::null_mut();
@@ -648,100 +885,87 @@ unsafe extern "C" fn kfence_init_pool_early() -> bool __init {
 // === DebugFS Interface ====================================================
 #[no_mangle]
 unsafe extern "C" fn stats_show(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int stats_show(struct seq_file *seq, void *v)
-    {
-    int i;
+    let mut i = 0;
     seq_printf(seq, "enabled: %i\n", READ_ONCE(kfence_enabled));
-    for (i = 0; i < KFENCE_COUNTER_COUNT; i++)
+    for (i = 0; i < KFENCE_COUNTER_COUNT; i++) {
     seq_printf(seq, "%s: %ld\n", counter_names[i], atomic_long_read(&counters[i]));
+    }
     return 0;
     }
-    DEFINE_SHOW_ATTRIBUTE(stats);
+pub static mut stats: usize = 0;
 //
 // debugfs seq_file operations for /sys/kernel/debug/kfence/objects.
 // start_object() and next_object() return the object index + 1, because NULL is used
 // to stop iteration.
 //
-    static void *start_object(struct seq_file *seq, loff_t *pos)
-    {
-    if (*pos < CONFIG_KFENCE_NUM_OBJECTS)
-    return (void *)((long)*pos + 1);
+#[no_mangle]
+pub unsafe extern "C" fn start_object(seq: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
+    if (*pos < CONFIG_KFENCE_NUM_OBJECTS) {
+    return ((long)*pos + 1);
+    }
     return core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn stop_object(seq: *mut seq_file, v: *mut c_void) {
-    static void stop_object(struct seq_file *seq, void *v)
-    {
     }
-    static void *next_object(struct seq_file *seq, void *v, loff_t *pos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn next_object(seq: *mut seq_file, v: *mut c_void, pos: *mut loff_t) -> *mut c_void {
     ++*pos;
-    if (*pos < CONFIG_KFENCE_NUM_OBJECTS)
-    return (void *)((long)*pos + 1);
+    if (*pos < CONFIG_KFENCE_NUM_OBJECTS) {
+    return ((long)*pos + 1);
+    }
     return core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn show_object(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int show_object(struct seq_file *seq, void *v)
-    {
-    struct kfence_metadata *meta = &kfence_metadata[(long)v - 1];
-    unsigned long flags;
+    let mut meta = &kfence_metadata[(long)v - 1];
+    let mut flags = 0;
     raw_spin_lock_irqsave(&meta.lock, flags);
     kfence_print_object(seq, meta);
     raw_spin_unlock_irqrestore(&meta.lock, flags);
     seq_puts(seq, "---------------------------------\n");
     return 0;
     }
-    static const struct seq_operations objects_sops = {
-    .start = start_object,
-    .next = next_object,
-    .stop = stop_object,
-    .show = show_object,
-    };
-    DEFINE_SEQ_ATTRIBUTE(objects);
+pub static mut seq_operations: usize = 0;
+pub static mut objects: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn kfence_debugfs_init() -> c_int {
-    static int kfence_debugfs_init(void)
-    {
-    struct dentry *kfence_dir;
-    if (!READ_ONCE(kfence_enabled))
+pub static mut kfence_dir: *mut c_void = core::ptr::null_mut();
+    if (!READ_ONCE(kfence_enabled)) {
     return 0;
+    }
     kfence_dir = debugfs_create_dir("kfence", core::ptr::null_mut());
     debugfs_create_file("stats", 0444, kfence_dir, core::ptr::null_mut(), &stats_fops);
     debugfs_create_file("objects", 0400, kfence_dir, core::ptr::null_mut(), &objects_fops);
     return 0;
     }
-    late_initcall(kfence_debugfs_init);
+    late_initcall!(kfence_debugfs_init);
 // === Panic Notifier ======================================================
 #[no_mangle]
 unsafe extern "C" fn kfence_check_all_canary() {
-    static void kfence_check_all_canary(void)
-    {
-    int i;
-    for (i = 0; i < CONFIG_KFENCE_NUM_OBJECTS; i++) {
-    struct kfence_metadata *meta = &kfence_metadata[i];
-    if (kfence_obj_allocated(meta))
+    let mut i = 0;
+    while (i < CONFIG_KFENCE_NUM_OBJECTS) {
+    let mut meta = &kfence_metadata[i];
+    if (kfence_obj_allocated(meta)) {
     check_canary(meta);
     }
     }
-    static int kfence_check_canary_callback(struct notifier_block *nb,
-    unsigned long reason, void *arg)
-    {
-    if (READ_ONCE(kfence_enabled))
+    }
+#[no_mangle]
+pub unsafe extern "C" fn kfence_check_canary_callback(nb: *mut notifier_block, reason: c_ulong, arg: *mut c_void) -> c_int {
+    if (READ_ONCE(kfence_enabled)) {
     kfence_check_all_canary();
+    }
     return NOTIFY_OK;
     }
-    static struct notifier_block kfence_check_canary_notifier = {
-    .notifier_call = kfence_check_canary_callback,
-    };
+pub static mut notifier_block: usize = 0;
 // === Allocation Gate Timer ================================================
-    static struct delayed_work kfence_timer;
+pub static mut kfence_timer: usize = 0;
 
 // Wait queue to wake up allocation-gate timer task.
-    static DECLARE_WAIT_QUEUE_HEAD(allocation_wait);
-    static int kfence_reboot_callback(struct notifier_block *nb,
-    unsigned long action, void *data)
-    {
+pub static mut allocation_wait: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn kfence_reboot_callback(nb: *mut notifier_block, action: c_ulong, data: *mut c_void) -> c_int {
 //
 // Disable kfence to avoid static keys IPI synchronization during
 // late shutdown/kexec
@@ -756,17 +980,12 @@ unsafe extern "C" fn kfence_check_all_canary() {
     wake_up(&allocation_wait);
     return NOTIFY_OK;
     }
-    static struct notifier_block kfence_reboot_notifier = {
-    .notifier_call = kfence_reboot_callback,
-    .priority = INT_MAX, /* Run early to stop timers ASAP */
-    };
+pub static mut notifier_block: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn wake_up_kfence_timer(work: *mut irq_work) {
-    static void wake_up_kfence_timer(struct irq_work *work)
-    {
     wake_up(&allocation_wait);
     }
-    static DEFINE_IRQ_WORK(wake_up_kfence_timer_work, wake_up_kfence_timer);
+pub static mut wake_up_kfence_timer_work: usize = 0;
 
 //
 // Set up delayed work, which will enable and disable the static key. We need to
@@ -781,10 +1000,9 @@ unsafe extern "C" fn wake_up_kfence_timer(work: *mut irq_work) {
 //
 #[no_mangle]
 unsafe extern "C" fn toggle_allocation_gate(work: *mut work_struct) {
-    static void toggle_allocation_gate(struct work_struct *work)
-    {
-    if (!READ_ONCE(kfence_enabled))
+    if (!READ_ONCE(kfence_enabled)) {
     return;
+    }
     atomic_set(&kfence_allocation_gate, -kfence_burst);
 
 // Enable static key, and await allocation to happen.
@@ -800,17 +1018,16 @@ unsafe extern "C" fn toggle_allocation_gate(work: *mut work_struct) {
     }
 // === Public interface =====================================================
 #[no_mangle]
-pub unsafe extern "C" fn kfence_alloc_pool_and_metadata() -> void __init {
-    void __init kfence_alloc_pool_and_metadata(void)
-    {
-    if (!kfence_sample_interval)
+pub unsafe extern "C" fn kfence_alloc_pool_and_metadata()  {
+    if (!kfence_sample_interval) {
     return;
+    }
 //
 // If KASAN hardware tags are enabled, disable KFENCE, because it
 // does not support MTE yet.
 //
     if (kasan_hw_tags_enabled()) {
-    pr_info("disabled as KASAN HW tags are enabled\n");
+    pr_info!("disabled as KASAN HW tags are enabled\n");
     if (__kfence_pool) {
     memblock_free(__kfence_pool, KFENCE_POOL_SIZE);
     __kfence_pool = core::ptr::null_mut();
@@ -822,90 +1039,94 @@ pub unsafe extern "C" fn kfence_alloc_pool_and_metadata() -> void __init {
 // If the pool has already been initialized by arch, there is no need to
 // re-allocate the memory pool.
 //
-    if (!__kfence_pool)
-    __kfence_pool = memblock_alloc(KFENCE_POOL_SIZE, PAGE_SIZE);
     if (!__kfence_pool) {
-    pr_err("failed to allocate pool\n");
+    __kfence_pool = memblock_alloc(KFENCE_POOL_SIZE, PAGE_SIZE);
+    }
+    if (!__kfence_pool) {
+    pr_err!("failed to allocate pool\n");
     return;
     }
 // The memory allocated by memblock has been zeroed out.
     kfence_metadata_init = memblock_alloc(KFENCE_METADATA_SIZE, PAGE_SIZE);
     if (!kfence_metadata_init) {
-    pr_err("failed to allocate metadata\n");
+    pr_err!("failed to allocate metadata\n");
     memblock_free(__kfence_pool, KFENCE_POOL_SIZE);
     __kfence_pool = core::ptr::null_mut();
     }
     }
 #[no_mangle]
 unsafe extern "C" fn kfence_init_enable() {
-    static void kfence_init_enable(void)
-    {
-    if (!IS_ENABLED(CONFIG_KFENCE_STATIC_KEYS))
+    if (!IS_ENABLED!(CONFIG_KFENCE_STATIC_KEYS)) {
     static_branch_enable(&kfence_allocation_key);
-    if (kfence_deferrable)
+    }
+    if (kfence_deferrable) {
     INIT_DEFERRABLE_WORK(&kfence_timer, toggle_allocation_gate);
-    else
+    }
+    else {
     INIT_DELAYED_WORK(&kfence_timer, toggle_allocation_gate);
-    if (kfence_check_on_panic)
+    }
+    if (kfence_check_on_panic) {
     atomic_notifier_chain_register(&panic_notifier_list, &kfence_check_canary_notifier);
+    }
 
     register_reboot_notifier(&kfence_reboot_notifier);
 
     WRITE_ONCE(kfence_enabled, true);
     queue_delayed_work(system_dfl_wq, &kfence_timer, 0);
-    pr_info("initialized - using %lu bytes for %d objects at 0x%p-0x%p\n", KFENCE_POOL_SIZE,
-    CONFIG_KFENCE_NUM_OBJECTS, (void *)__kfence_pool,
-    (void *)(__kfence_pool + KFENCE_POOL_SIZE));
+    pr_info!("initialized - using %lu bytes for %d objects at 0x%p-0x%p\n", KFENCE_POOL_SIZE,
+    CONFIG_KFENCE_NUM_OBJECTS, __kfence_pool,
+    (__kfence_pool + KFENCE_POOL_SIZE));
     }
 #[no_mangle]
-pub unsafe extern "C" fn kfence_init() -> void __init {
-    void __init kfence_init(void)
-    {
+pub unsafe extern "C" fn kfence_init()  {
     stack_hash_seed = get_random_u32();
 // Setting kfence_sample_interval to 0 on boot disables KFENCE.
-    if (!kfence_sample_interval)
+    if (!kfence_sample_interval) {
     return;
+    }
     if (!kfence_init_pool_early()) {
-    pr_err("%s failed\n", __func__);
+    pr_err!("%s failed\n", __func__);
     return;
     }
     kfence_init_enable();
     }
 #[no_mangle]
 unsafe extern "C" fn kfence_init_late() -> c_int {
-    static int kfence_init_late(void)
-    {
-    let mut nr_pages_pool: c_ulong = KFENCE_POOL_SIZE / PAGE_SIZE;
-    let mut nr_pages_meta: c_ulong = KFENCE_METADATA_SIZE / PAGE_SIZE;
-    let mut addr: c_ulong = (unsigned long)__kfence_pool;
-    let mut free_size: c_ulong = KFENCE_POOL_SIZE;
-    let mut err: c_int = -ENOMEM;
+pub static mut nr_pages_pool: c_ulong = 0;
+pub static mut nr_pages_meta: c_ulong = 0;
+pub static mut addr: c_ulong = 0;
+pub static mut free_size: c_ulong = 0;
+pub static mut err: c_int = 0;
 
-    struct page *pages;
+pub static mut pages: *mut c_void = core::ptr::null_mut();
     pages = alloc_contig_pages(nr_pages_pool, GFP_KERNEL | __GFP_SKIP_KASAN,
     first_online_node, core::ptr::null_mut());
-    if (!pages)
+    if (!pages) {
     return -ENOMEM;
+    }
     __kfence_pool = page_to_virt(pages);
     pages = alloc_contig_pages(nr_pages_meta, GFP_KERNEL | __GFP_SKIP_KASAN,
     first_online_node, core::ptr::null_mut());
-    if (pages)
+    if (pages) {
     kfence_metadata_init = page_to_virt(pages);
+    }
 
     if (nr_pages_pool > MAX_ORDER_NR_PAGES ||
     nr_pages_meta > MAX_ORDER_NR_PAGES) {
-    pr_warn("KFENCE_NUM_OBJECTS too large for buddy allocator\n");
+    pr_warn!("KFENCE_NUM_OBJECTS too large for buddy allocator\n");
     return -EINVAL;
     }
     __kfence_pool = alloc_pages_exact(KFENCE_POOL_SIZE,
     GFP_KERNEL | __GFP_SKIP_KASAN);
-    if (!__kfence_pool)
+    if (!__kfence_pool) {
     return -ENOMEM;
+    }
     kfence_metadata_init = alloc_pages_exact(KFENCE_METADATA_SIZE,
     GFP_KERNEL | __GFP_SKIP_KASAN);
 
-    if (!kfence_metadata_init)
-    goto free_pool;
+    if (!kfence_metadata_init) {
+// goto;
+    }
     memzero_explicit(kfence_metadata_init, KFENCE_METADATA_SIZE);
     addr = kfence_init_pool();
     if (!addr) {
@@ -913,19 +1134,19 @@ unsafe extern "C" fn kfence_init_late() -> c_int {
     kfence_debugfs_init();
     return 0;
     }
-    pr_err("%s failed\n", __func__);
+    pr_err!("%s failed\n", __func__);
     free_size = KFENCE_POOL_SIZE - (addr - (unsigned long)__kfence_pool);
     err = -EBUSY;
 
-    free_contig_range(page_to_pfn(virt_to_page((void *)kfence_metadata_init)),
+    free_contig_range(page_to_pfn(virt_to_page(kfence_metadata_init)),
     nr_pages_meta);
-    free_pool:
-    free_contig_range(page_to_pfn(virt_to_page((void *)addr)),
+// label;
+    free_contig_range(page_to_pfn(virt_to_page(addr)),
     free_size / PAGE_SIZE);
 
-    free_pages_exact((void *)kfence_metadata_init, KFENCE_METADATA_SIZE);
-    free_pool:
-    free_pages_exact((void *)addr, free_size);
+    free_pages_exact(kfence_metadata_init, KFENCE_METADATA_SIZE);
+// label;
+    free_pages_exact(addr, free_size);
 
     kfence_metadata_init = core::ptr::null_mut();
     __kfence_pool = core::ptr::null_mut();
@@ -933,27 +1154,25 @@ unsafe extern "C" fn kfence_init_late() -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn kfence_enable_late() -> c_int {
-    static int kfence_enable_late(void)
-    {
-    if (!__kfence_pool)
+    if (!__kfence_pool) {
     return kfence_init_late();
+    }
     WRITE_ONCE(kfence_enabled, true);
     queue_delayed_work(system_dfl_wq, &kfence_timer, 0);
-    pr_info("re-enabled\n");
+    pr_info!("re-enabled\n");
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn kfence_shutdown_cache(s: *mut kmem_cache) {
-    void kfence_shutdown_cache(struct kmem_cache *s)
-    {
-    unsigned long flags;
-    struct kfence_metadata *meta;
-    int i;
+    let mut flags = 0;
+pub static mut meta: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
 // Pairs with release in kfence_init_pool().
-    if (!smp_load_acquire(&kfence_metadata))
+    if (!smp_load_acquire(&kfence_metadata)) {
     return;
-    for (i = 0; i < CONFIG_KFENCE_NUM_OBJECTS; i++) {
-    bool in_use;
+    }
+    while (i < CONFIG_KFENCE_NUM_OBJECTS) {
+    let mut in_use = 0;
     meta = &kfence_metadata[i];
 //
 // If we observe some inconsistent cache and state pair where we
@@ -962,8 +1181,9 @@ pub unsafe extern "C" fn kfence_shutdown_cache(s: *mut kmem_cache) {
 // the lock will not help, as different critical section
 // serialization will have the same outcome.
 //
-    if (READ_ONCE(meta.cache) != s || !kfence_obj_allocated(meta))
+    if (READ_ONCE(meta.cache) != s || !kfence_obj_allocated(meta)) {
     continue;
+    }
     raw_spin_lock_irqsave(&meta.lock, flags);
     in_use = meta.cache == s && kfence_obj_allocated(meta);
     raw_spin_unlock_irqrestore(&meta.lock, flags);
@@ -982,26 +1202,28 @@ pub unsafe extern "C" fn kfence_shutdown_cache(s: *mut kmem_cache) {
 // traces of the user of the object, the original
 // allocation, and caller to shutdown_cache().
 //
-    kfence_guarded_free((void *)meta.addr, meta, /*zombie=*/true);
+    kfence_guarded_free(meta.addr, meta, /*zombie=*/true);
     }
     }
-    for (i = 0; i < CONFIG_KFENCE_NUM_OBJECTS; i++) {
+    while (i < CONFIG_KFENCE_NUM_OBJECTS) {
     meta = &kfence_metadata[i];
 // See above.
-    if (READ_ONCE(meta.cache) != s || READ_ONCE(meta.state) != KFENCE_OBJECT_FREED)
+    if (READ_ONCE(meta.cache) != s || READ_ONCE(meta.state) != KFENCE_OBJECT_FREED) {
     continue;
+    }
     raw_spin_lock_irqsave(&meta.lock, flags);
-    if (meta.cache == s && meta.state == KFENCE_OBJECT_FREED)
+    if (meta.cache == s && meta.state == KFENCE_OBJECT_FREED) {
     meta.cache = core::ptr::null_mut();
+    }
     raw_spin_unlock_irqrestore(&meta.lock, flags);
     }
     }
-    void *__kfence_alloc(struct kmem_cache *s, size_t size, gfp_t flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __kfence_alloc(s: *mut kmem_cache, size: size_t, flags: gfp_t) -> *mut c_void {
     unsigned long stack_entries[KFENCE_STACK_DEPTH];
-    size_t num_stack_entries;
-    u32 alloc_stack_hash;
-    int allocation_gate;
+    let mut num_stack_entries = 0;
+    let mut alloc_stack_hash = 0;
+    let mut allocation_gate = 0;
 //
 // Perform size check before switching kfence_allocation_gate, so that
 // we don't disable KFENCE without making an allocation.
@@ -1025,11 +1247,13 @@ pub unsafe extern "C" fn kfence_shutdown_cache(s: *mut kmem_cache) {
 // Skip allocations for this slab, if KFENCE has been disabled for
 // this slab.
 //
-    if (s.flags & SLAB_SKIP_KFENCE)
+    if (s.flags & SLAB_SKIP_KFENCE) {
     return core::ptr::null_mut();
+    }
     allocation_gate = atomic_inc_return(&kfence_allocation_gate);
-    if (allocation_gate > 1)
+    if (allocation_gate > 1) {
     return core::ptr::null_mut();
+    }
 
 //
 // waitqueue_active() is fully ordered after the update of
@@ -1043,8 +1267,9 @@ pub unsafe extern "C" fn kfence_shutdown_cache(s: *mut kmem_cache) {
     irq_work_queue(&wake_up_kfence_timer_work);
     }
 
-    if (!READ_ONCE(kfence_enabled))
+    if (!READ_ONCE(kfence_enabled)) {
     return core::ptr::null_mut();
+    }
     num_stack_entries = stack_trace_save(stack_entries, KFENCE_STACK_DEPTH, 0);
 //
 // Do expensive check for coverage of allocation in slow-path after
@@ -1065,29 +1290,25 @@ pub unsafe extern "C" fn kfence_shutdown_cache(s: *mut kmem_cache) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn kfence_ksize(addr: *const c_void) -> usize {
-    size_t kfence_ksize(const void *addr)
-    {
-    const struct kfence_metadata *meta = addr_to_metadata((unsigned long)addr);
+    let mut meta = addr_to_metadata((unsigned long)addr);
 //
 // Read locklessly -- if there is a race with __kfence_alloc(), this is
 // either a use-after-free or invalid access.
 //
     return meta ? meta.size : 0;
     }
-    void *kfence_object_start(const void *addr)
-    {
-    const struct kfence_metadata *meta = addr_to_metadata((unsigned long)addr);
+#[no_mangle]
+pub unsafe extern "C" fn kfence_object_start(addr: *mut c_void) -> *mut c_void {
+    let mut meta = addr_to_metadata((unsigned long)addr);
 //
 // Read locklessly -- if there is a race with __kfence_alloc(), this is
 // either a use-after-free or invalid access.
 //
-    return meta ? (void *)meta.addr : core::ptr::null_mut();
+    return meta ? meta.addr : core::ptr::null_mut();
     }
 #[no_mangle]
 pub unsafe extern "C" fn __kfence_free(addr: *mut c_void) {
-    void __kfence_free(void *addr)
-    {
-    struct kfence_metadata *meta = addr_to_metadata((unsigned long)addr);
+    let mut meta = addr_to_metadata((unsigned long)addr);
 //
 // If the objects of the cache are SLAB_TYPESAFE_BY_RCU, defer freeing
 // the object, as the object page may be recycled for other-typed
@@ -1097,7 +1318,7 @@ pub unsafe extern "C" fn __kfence_free(addr: *mut c_void) {
 // the object.
 //
     if (unlikely(meta.cache && (meta.cache.flags & SLAB_TYPESAFE_BY_RCU))) {
-    unsigned long flags;
+    let mut flags = 0;
     raw_spin_lock_irqsave(&meta.lock, flags);
     metadata_update_state(meta, KFENCE_OBJECT_RCU_FREEING, core::ptr::null_mut(), 0);
     raw_spin_unlock_irqrestore(&meta.lock, flags);
@@ -1108,23 +1329,23 @@ pub unsafe extern "C" fn __kfence_free(addr: *mut c_void) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn kfence_handle_page_fault(addr: c_ulong, is_write: bool, regs: *mut pt_regs) -> bool {
-    bool kfence_handle_page_fault(unsigned long addr, bool is_write, struct pt_regs *regs)
-    {
-    let mut page_index: c_int = (addr - (unsigned long)__kfence_pool) / PAGE_SIZE;
-    struct kfence_metadata *to_report = core::ptr::null_mut();
-    let mut unprotected_page: c_ulong = 0;
+pub static mut page_index: c_int = 0;
+    let mut to_report = core::ptr::null_mut();
+pub static mut unprotected_page: c_ulong = 0;
     enum kfence_error_type error_type;
     enum kfence_fault fault;
-    unsigned long flags;
-    if (!is_kfence_address((void *)addr))
+    let mut flags = 0;
+    if (!is_kfence_address(addr)) {
     return false;
-    if (!READ_ONCE(kfence_enabled)) /* If disabled at runtime ... */
+    }
+    if (!READ_ONCE(kfence_enabled)) /* If disabled at runtime ... */ {
     return kfence_unprotect(addr); /* ... unprotect and proceed. */
+    }
     atomic_long_inc(&counters[KFENCE_COUNTER_BUGS]);
     if (page_index % 2) {
 // This is a redzone, report a buffer overflow.
-    struct kfence_metadata *meta;
-    let mut distance: c_int = 0;
+pub static mut meta: *mut c_void = core::ptr::null_mut();
+pub static mut distance: c_int = 0;
     meta = addr_to_metadata(addr - PAGE_SIZE);
     if (meta && kfence_obj_allocated(meta)) {
     to_report = meta;
@@ -1134,11 +1355,13 @@ pub unsafe extern "C" fn kfence_handle_page_fault(addr: c_ulong, is_write: bool,
     meta = addr_to_metadata(addr + PAGE_SIZE);
     if (meta && kfence_obj_allocated(meta)) {
 // Data race ok; distance calculation approximate.
-    if (!to_report || distance > data_race(meta.addr) - addr)
+    if (!to_report || distance > data_race(meta.addr) - addr) {
     to_report = meta;
     }
-    if (!to_report)
-    goto out;
+    }
+    if (!to_report) {
+// goto;
+    }
     error_type = KFENCE_ERROR_OOB;
     unprotected_page = addr;
 //
@@ -1148,8 +1371,9 @@ pub unsafe extern "C" fn kfence_handle_page_fault(addr: c_ulong, is_write: bool,
 //
     } else {
     to_report = addr_to_metadata(addr);
-    if (!to_report)
-    goto out;
+    if (!to_report) {
+// goto;
+    }
     error_type = KFENCE_ERROR_UAF;
 //
 // We may race with __kfence_alloc(), and it is possible that a
@@ -1158,7 +1382,7 @@ pub unsafe extern "C" fn kfence_handle_page_fault(addr: c_ulong, is_write: bool,
 // the object was re-allocated.
 //
     }
-    out:
+// label;
     if (to_report) {
     raw_spin_lock_irqsave(&to_report.lock, flags);
     to_report.unprotected_page = unprotected_page;

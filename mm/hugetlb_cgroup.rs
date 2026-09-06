@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: LGPL-2.1
@@ -48,69 +298,59 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
 // Use t->m[0] to encode the offset
 
-    static struct hugetlb_cgroup *root_h_cgroup __read_mostly;
-    static struct cftype *dfl_files;
-    static struct cftype *legacy_files;
-    static inline struct page_counter *
-    __hugetlb_cgroup_counter_from_cgroup(struct hugetlb_cgroup *h_cg, int idx,
-    bool rsvd)
-    {
-    if (rsvd)
+pub static mut root_h_cgroup: *mut c_void = core::ptr::null_mut();
+pub static mut dfl_files: *mut c_void = core::ptr::null_mut();
+pub static mut legacy_files: *mut c_void = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn __hugetlb_cgroup_counter_from_cgroup(h_cg: *mut hugetlb_cgroup, idx: c_int, rsvd: bool) -> *mut c_void {
+    if (rsvd) {
     return &h_cg.rsvd_hugepage[idx];
+    }
     return &h_cg.hugepage[idx];
     }
-    static inline struct page_counter *
-    hugetlb_cgroup_counter_from_cgroup(struct hugetlb_cgroup *h_cg, int idx)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_cgroup_counter_from_cgroup(h_cg: *mut hugetlb_cgroup, idx: c_int) -> *mut c_void {
     return __hugetlb_cgroup_counter_from_cgroup(h_cg, idx, false);
     }
-    static inline struct page_counter *
-    hugetlb_cgroup_counter_from_cgroup_rsvd(struct hugetlb_cgroup *h_cg, int idx)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_cgroup_counter_from_cgroup_rsvd(h_cg: *mut hugetlb_cgroup, idx: c_int) -> *mut c_void {
     return __hugetlb_cgroup_counter_from_cgroup(h_cg, idx, true);
     }
-    static inline
-    struct hugetlb_cgroup *hugetlb_cgroup_from_css(struct cgroup_subsys_state *s)
-    {
-    return s ? container_of(s, struct hugetlb_cgroup, css) : core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_cgroup_from_css(s: *mut cgroup_subsys_state) -> *mut c_void {
+    return s ? container_of!(s, hugetlb_cgroup, css) : core::ptr::null_mut();
     }
-    static inline
-    struct hugetlb_cgroup *hugetlb_cgroup_from_task(struct task_struct *task)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_cgroup_from_task(task: *mut task_struct) -> *mut c_void {
     return hugetlb_cgroup_from_css(task_css(task, hugetlb_cgrp_id));
     }
 #[no_mangle]
 pub unsafe extern "C" fn hugetlb_cgroup_is_root(h_cg: *mut hugetlb_cgroup) -> bool {
-    static inline bool hugetlb_cgroup_is_root(struct hugetlb_cgroup *h_cg)
-    {
     return (h_cg == root_h_cgroup);
     }
-    static inline struct hugetlb_cgroup *
-    parent_hugetlb_cgroup(struct hugetlb_cgroup *h_cg)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn parent_hugetlb_cgroup(h_cg: *mut hugetlb_cgroup) -> *mut c_void {
     return hugetlb_cgroup_from_css(h_cg.css.parent);
     }
 #[no_mangle]
 pub unsafe extern "C" fn hugetlb_cgroup_have_usage(h_cg: *mut hugetlb_cgroup) -> bool {
-    static inline bool hugetlb_cgroup_have_usage(struct hugetlb_cgroup *h_cg)
-    {
-    struct hstate *h;
+pub static mut h: *mut c_void = core::ptr::null_mut();
     for_each_hstate(h) {
     if (page_counter_read(
-    hugetlb_cgroup_counter_from_cgroup(h_cg, hstate_index(h))))
+    hugetlb_cgroup_counter_from_cgroup(h_cg, hstate_index(h)))) {
     return true;
+    }
     }
     return false;
     }
-    static void hugetlb_cgroup_init(struct hugetlb_cgroup *h_cgroup,
-    struct hugetlb_cgroup *parent_h_cgroup)
-    {
-    int idx;
-    for (idx = 0; idx < HUGE_MAX_HSTATE; idx++) {
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_cgroup_init(h_cgroup: *mut hugetlb_cgroup, parent_h_cgroup: *mut hugetlb_cgroup) {
+    let mut idx = 0;
+    while (idx < HUGE_MAX_HSTATE) {
     struct page_counter *fault, *fault_parent = core::ptr::null_mut();
     struct page_counter *rsvd, *rsvd_parent = core::ptr::null_mut();
-    unsigned long limit;
-    int ret;
+    let mut limit = 0;
+    let mut ret = 0;
     if (parent_h_cgroup) {
     fault_parent = hugetlb_cgroup_counter_from_cgroup(
     parent_h_cgroup, idx);
@@ -135,24 +375,24 @@ pub unsafe extern "C" fn hugetlb_cgroup_have_usage(h_cg: *mut hugetlb_cgroup) ->
     }
 #[no_mangle]
 unsafe extern "C" fn hugetlb_cgroup_free(h_cgroup: *mut hugetlb_cgroup) {
-    static void hugetlb_cgroup_free(struct hugetlb_cgroup *h_cgroup)
-    {
-    int node;
-    for_each_node(node)
+    let mut node = 0;
+    for_each_node(node) {
     kfree(h_cgroup.nodeinfo[node]);
+    }
     kfree(h_cgroup);
     }
-    static struct cgroup_subsys_state *
-    hugetlb_cgroup_css_alloc(struct cgroup_subsys_state *parent_css)
-    {
-    struct hugetlb_cgroup *parent_h_cgroup = hugetlb_cgroup_from_css(parent_css);
-    struct hugetlb_cgroup *h_cgroup;
-    int node;
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_cgroup_css_alloc(parent_css: *mut cgroup_subsys_state) -> *mut c_void {
+    let mut parent_h_cgroup = hugetlb_cgroup_from_css(parent_css);
+pub static mut h_cgroup: *mut c_void = core::ptr::null_mut();
+    let mut node = 0;
     h_cgroup = kzalloc_flex(*h_cgroup, nodeinfo, nr_node_ids);
-    if (!h_cgroup)
+    if (!h_cgroup) {
     return ERR_PTR(-ENOMEM);
-    if (!parent_h_cgroup)
+    }
+    if (!parent_h_cgroup) {
     root_h_cgroup = h_cgroup;
+    }
 //
 // TODO: this routine can waste much memory for nodes which will
 // never be onlined. It's better to use memory hotplug callback
@@ -160,24 +400,22 @@ unsafe extern "C" fn hugetlb_cgroup_free(h_cgroup: *mut hugetlb_cgroup) {
 //
     for_each_node(node) {
 // Set node_to_alloc to NUMA_NO_NODE for offline nodes.
-    int node_to_alloc =
-    node_state(node, N_NORMAL_MEMORY) ? node : NUMA_NO_NODE;
+    let mut node_to_alloc = node_state(node, N_NORMAL_MEMORY) ? node : NUMA_NO_NODE;
     h_cgroup.nodeinfo[node] =
-    kzalloc_node(sizeof(struct hugetlb_cgroup_per_node),
+    kzalloc_node(sizeof!(hugetlb_cgroup_per_node),
     GFP_KERNEL, node_to_alloc);
-    if (!h_cgroup.nodeinfo[node])
-    goto fail_alloc_nodeinfo;
+    if (!h_cgroup.nodeinfo[node]) {
+// goto;
+    }
     }
     hugetlb_cgroup_init(h_cgroup, parent_h_cgroup);
     return &h_cgroup.css;
-    fail_alloc_nodeinfo:
+// label;
     hugetlb_cgroup_free(h_cgroup);
     return ERR_PTR(-ENOMEM);
     }
 #[no_mangle]
 unsafe extern "C" fn hugetlb_cgroup_css_free(css: *mut cgroup_subsys_state) {
-    static void hugetlb_cgroup_css_free(struct cgroup_subsys_state *css)
-    {
     hugetlb_cgroup_free(hugetlb_cgroup_from_css(css));
     }
 //
@@ -187,21 +425,21 @@ unsafe extern "C" fn hugetlb_cgroup_css_free(css: *mut cgroup_subsys_state) {
 // page reference and test for page active here. This function
 // cannot fail.
 //
-    static void hugetlb_cgroup_move_parent(int idx, struct hugetlb_cgroup *h_cg,
-    struct folio *folio)
-    {
-    unsigned int nr_pages;
-    struct page_counter *counter;
-    struct hugetlb_cgroup *hcg;
-    struct hugetlb_cgroup *parent = parent_hugetlb_cgroup(h_cg);
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_cgroup_move_parent(idx: c_int, h_cg: *mut hugetlb_cgroup, folio: *mut folio) {
+    let mut nr_pages = 0;
+pub static mut counter: *mut c_void = core::ptr::null_mut();
+pub static mut hcg: *mut c_void = core::ptr::null_mut();
+    let mut parent = parent_hugetlb_cgroup(h_cg);
     hcg = hugetlb_cgroup_from_folio(folio);
 //
 // We can have pages in active list without any cgroup
 // ie, hugepage with less than 3 pages. We can safely
 // ignore those pages.
 //
-    if (!hcg || hcg != h_cg)
-    goto out;
+    if (!hcg || hcg != h_cg) {
+// goto;
+    }
     nr_pages = folio_nr_pages(folio);
     if (!parent) {
     parent = root_h_cgroup;
@@ -212,7 +450,7 @@ unsafe extern "C" fn hugetlb_cgroup_css_free(css: *mut cgroup_subsys_state) {
 // Take the pages off the local counter
     page_counter_cancel(counter, nr_pages);
     set_hugetlb_cgroup(folio, parent);
-    out:
+// label;
     return;
     }
 //
@@ -221,24 +459,22 @@ unsafe extern "C" fn hugetlb_cgroup_css_free(css: *mut cgroup_subsys_state) {
 //
 #[no_mangle]
 unsafe extern "C" fn hugetlb_cgroup_css_offline(css: *mut cgroup_subsys_state) {
-    static void hugetlb_cgroup_css_offline(struct cgroup_subsys_state *css)
-    {
-    struct hugetlb_cgroup *h_cg = hugetlb_cgroup_from_css(css);
-    struct hstate *h;
-    struct folio *folio;
+    let mut h_cg = hugetlb_cgroup_from_css(css);
+pub static mut h: *mut c_void = core::ptr::null_mut();
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     do {
     for_each_hstate(h) {
     spin_lock_irq(&hugetlb_lock);
-    list_for_each_entry(folio, &h.hugepage_activelist, lru)
+    list_for_each_entry(folio, &h.hugepage_activelist, lru) {
     hugetlb_cgroup_move_parent(hstate_index(h), h_cg, folio);
+    }
     spin_unlock_irq(&hugetlb_lock);
     }
     cond_resched();
     } while (hugetlb_cgroup_have_usage(h_cg));
     }
-    static inline void hugetlb_event(struct hugetlb_cgroup *hugetlb, int idx,
-    enum hugetlb_memory_event event)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_event(hugetlb: *mut hugetlb_cgroup, idx: c_int, event: hugetlb_memory_event) {
     atomic_long_inc(&hugetlb.events_local[idx][event]);
     cgroup_file_notify(&hugetlb.events_local_file[idx]);
     do {
@@ -247,21 +483,20 @@ unsafe extern "C" fn hugetlb_cgroup_css_offline(css: *mut cgroup_subsys_state) {
     } while ((hugetlb = parent_hugetlb_cgroup(hugetlb)) &&
     !hugetlb_cgroup_is_root(hugetlb));
     }
-    static int __hugetlb_cgroup_charge_cgroup(int idx, unsigned long nr_pages,
-    struct hugetlb_cgroup **ptr,
-    bool rsvd)
-    {
-    let mut ret: c_int = 0;
-    struct page_counter *counter;
-    struct hugetlb_cgroup *h_cg = core::ptr::null_mut();
-    if (hugetlb_cgroup_disabled())
-    goto done;
-    again:
+#[no_mangle]
+pub unsafe extern "C" fn __hugetlb_cgroup_charge_cgroup(idx: c_int, nr_pages: c_ulong, ptr: *mut *mut hugetlb_cgroup, rsvd: bool) -> c_int {
+pub static mut ret: c_int = 0;
+pub static mut counter: *mut c_void = core::ptr::null_mut();
+    let mut h_cg = core::ptr::null_mut();
+    if (hugetlb_cgroup_disabled()) {
+// goto;
+    }
+// label;
     rcu_read_lock();
     h_cg = hugetlb_cgroup_from_task(current);
     if (!css_tryget(&h_cg.css)) {
     rcu_read_unlock();
-    goto again;
+// goto;
     }
     rcu_read_unlock();
     if (!page_counter_try_charge(
@@ -270,39 +505,36 @@ unsafe extern "C" fn hugetlb_cgroup_css_offline(css: *mut cgroup_subsys_state) {
     ret = -ENOMEM;
     hugetlb_event(h_cg, idx, HUGETLB_MAX);
     css_put(&h_cg.css);
-    goto done;
+// goto;
     }
 // Reservations take a reference to the css because they do not get
 // reparented.
 //
-    if (!rsvd)
+    if (!rsvd) {
     css_put(&h_cg.css);
-    done:
+    }
+// label;
 // ptr = h_cg;
     return ret;
     }
-    int hugetlb_cgroup_charge_cgroup(int idx, unsigned long nr_pages,
-    struct hugetlb_cgroup **ptr)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_cgroup_charge_cgroup(idx: c_int, nr_pages: c_ulong, ptr: *mut *mut hugetlb_cgroup) -> c_int {
     return __hugetlb_cgroup_charge_cgroup(idx, nr_pages, ptr, false);
     }
-    int hugetlb_cgroup_charge_cgroup_rsvd(int idx, unsigned long nr_pages,
-    struct hugetlb_cgroup **ptr)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_cgroup_charge_cgroup_rsvd(idx: c_int, nr_pages: c_ulong, ptr: *mut *mut hugetlb_cgroup) -> c_int {
     return __hugetlb_cgroup_charge_cgroup(idx, nr_pages, ptr, true);
     }
 // Should be called with hugetlb_lock held
-    static void __hugetlb_cgroup_commit_charge(int idx, unsigned long nr_pages,
-    struct hugetlb_cgroup *h_cg,
-    struct folio *folio, bool rsvd)
-    {
-    if (hugetlb_cgroup_disabled() || !h_cg)
+#[no_mangle]
+pub unsafe extern "C" fn __hugetlb_cgroup_commit_charge(idx: c_int, nr_pages: c_ulong, h_cg: *mut hugetlb_cgroup, folio: *mut folio, rsvd: bool) {
+    if (hugetlb_cgroup_disabled() || !h_cg) {
     return;
+    }
     lockdep_assert_held(&hugetlb_lock);
     __set_hugetlb_cgroup(folio, h_cg, rsvd);
     if (!rsvd) {
-    unsigned long usage =
-    h_cg.nodeinfo[folio_nid(folio)].usage[idx];
+    let mut usage = h_cg.nodeinfo[folio_nid(folio)].usage[idx];
 //
 // This write is not atomic due to fetching usage and writing
 // to it, but that's fine because we call this with
@@ -312,40 +544,37 @@ unsafe extern "C" fn hugetlb_cgroup_css_offline(css: *mut cgroup_subsys_state) {
     usage + nr_pages);
     }
     }
-    void hugetlb_cgroup_commit_charge(int idx, unsigned long nr_pages,
-    struct hugetlb_cgroup *h_cg,
-    struct folio *folio)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_cgroup_commit_charge(idx: c_int, nr_pages: c_ulong, h_cg: *mut hugetlb_cgroup, folio: *mut folio) {
     __hugetlb_cgroup_commit_charge(idx, nr_pages, h_cg, folio, false);
     }
-    void hugetlb_cgroup_commit_charge_rsvd(int idx, unsigned long nr_pages,
-    struct hugetlb_cgroup *h_cg,
-    struct folio *folio)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_cgroup_commit_charge_rsvd(idx: c_int, nr_pages: c_ulong, h_cg: *mut hugetlb_cgroup, folio: *mut folio) {
     __hugetlb_cgroup_commit_charge(idx, nr_pages, h_cg, folio, true);
     }
 //
 // Should be called with hugetlb_lock held
 //
-    static void __hugetlb_cgroup_uncharge_folio(int idx, unsigned long nr_pages,
-    struct folio *folio, bool rsvd)
-    {
-    struct hugetlb_cgroup *h_cg;
-    if (hugetlb_cgroup_disabled())
+#[no_mangle]
+pub unsafe extern "C" fn __hugetlb_cgroup_uncharge_folio(idx: c_int, nr_pages: c_ulong, folio: *mut folio, rsvd: bool) {
+pub static mut h_cg: *mut c_void = core::ptr::null_mut();
+    if (hugetlb_cgroup_disabled()) {
     return;
+    }
     lockdep_assert_held(&hugetlb_lock);
     h_cg = __hugetlb_cgroup_from_folio(folio, rsvd);
-    if (unlikely(!h_cg))
+    if (unlikely(!h_cg)) {
     return;
+    }
     __set_hugetlb_cgroup(folio, core::ptr::null_mut(), rsvd);
     page_counter_uncharge(__hugetlb_cgroup_counter_from_cgroup(h_cg, idx,
     rsvd),
     nr_pages);
-    if (rsvd)
+    if (rsvd) {
     css_put(&h_cg.css);
+    }
     else {
-    unsigned long usage =
-    h_cg.nodeinfo[folio_nid(folio)].usage[idx];
+    let mut usage = h_cg.nodeinfo[folio_nid(folio)].usage[idx];
 //
 // This write is not atomic due to fetching usage and writing
 // to it, but that's fine because we call this with
@@ -355,55 +584,49 @@ unsafe extern "C" fn hugetlb_cgroup_css_offline(css: *mut cgroup_subsys_state) {
     usage - nr_pages);
     }
     }
-    void hugetlb_cgroup_uncharge_folio(int idx, unsigned long nr_pages,
-    struct folio *folio)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_cgroup_uncharge_folio(idx: c_int, nr_pages: c_ulong, folio: *mut folio) {
     __hugetlb_cgroup_uncharge_folio(idx, nr_pages, folio, false);
     }
-    void hugetlb_cgroup_uncharge_folio_rsvd(int idx, unsigned long nr_pages,
-    struct folio *folio)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_cgroup_uncharge_folio_rsvd(idx: c_int, nr_pages: c_ulong, folio: *mut folio) {
     __hugetlb_cgroup_uncharge_folio(idx, nr_pages, folio, true);
     }
-    static void __hugetlb_cgroup_uncharge_cgroup(int idx, unsigned long nr_pages,
-    struct hugetlb_cgroup *h_cg,
-    bool rsvd)
-    {
-    if (hugetlb_cgroup_disabled() || !h_cg)
+#[no_mangle]
+pub unsafe extern "C" fn __hugetlb_cgroup_uncharge_cgroup(idx: c_int, nr_pages: c_ulong, h_cg: *mut hugetlb_cgroup, rsvd: bool) {
+    if (hugetlb_cgroup_disabled() || !h_cg) {
     return;
+    }
     page_counter_uncharge(__hugetlb_cgroup_counter_from_cgroup(h_cg, idx,
     rsvd),
     nr_pages);
-    if (rsvd)
+    if (rsvd) {
     css_put(&h_cg.css);
     }
-    void hugetlb_cgroup_uncharge_cgroup(int idx, unsigned long nr_pages,
-    struct hugetlb_cgroup *h_cg)
-    {
+    }
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_cgroup_uncharge_cgroup(idx: c_int, nr_pages: c_ulong, h_cg: *mut hugetlb_cgroup) {
     __hugetlb_cgroup_uncharge_cgroup(idx, nr_pages, h_cg, false);
     }
-    void hugetlb_cgroup_uncharge_cgroup_rsvd(int idx, unsigned long nr_pages,
-    struct hugetlb_cgroup *h_cg)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_cgroup_uncharge_cgroup_rsvd(idx: c_int, nr_pages: c_ulong, h_cg: *mut hugetlb_cgroup) {
     __hugetlb_cgroup_uncharge_cgroup(idx, nr_pages, h_cg, true);
     }
-    void hugetlb_cgroup_uncharge_counter(struct resv_map *resv, unsigned long start,
-    unsigned long end)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_cgroup_uncharge_counter(resv: *mut resv_map, start: c_ulong, end: c_ulong) {
     if (hugetlb_cgroup_disabled() || !resv || !resv.reservation_counter ||
-    !resv.css)
+    !resv.css) {
     return;
+    }
     page_counter_uncharge(resv.reservation_counter,
     (end - start) * resv.pages_per_hpage);
     css_put(resv.css);
     }
-    void hugetlb_cgroup_uncharge_file_region(struct resv_map *resv,
-    struct file_region *rg,
-    unsigned long nr_pages,
-    bool region_del)
-    {
-    if (hugetlb_cgroup_disabled() || !resv || !rg || !nr_pages)
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_cgroup_uncharge_file_region(resv: *mut resv_map, rg: *mut file_region, nr_pages: c_ulong, region_del: bool) {
+    if (hugetlb_cgroup_disabled() || !resv || !rg || !nr_pages) {
     return;
+    }
     if (rg.reservation_counter && resv.pages_per_hpage &&
     !resv.reservation_counter) {
     page_counter_uncharge(rg.reservation_counter,
@@ -412,8 +635,9 @@ unsafe extern "C" fn hugetlb_cgroup_css_offline(css: *mut cgroup_subsys_state) {
 // Only do css_put(rg->css) when we delete the entire region
 // because one file_region must hold exactly one css reference.
 //
-    if (region_del)
+    if (region_del) {
     css_put(rg.css);
+    }
     }
     }
     enum {
@@ -428,26 +652,26 @@ unsafe extern "C" fn hugetlb_cgroup_css_offline(css: *mut cgroup_subsys_state) {
     };
 #[no_mangle]
 unsafe extern "C" fn hugetlb_cgroup_read_numa_stat(seq: *mut seq_file, dummy: *mut c_void) -> c_int {
-    static int hugetlb_cgroup_read_numa_stat(struct seq_file *seq, void *dummy)
-    {
-    int nid;
-    struct cftype *cft = seq_cft(seq);
-    let mut idx: c_int = MEMFILE_IDX(cft.private);
-    let mut legacy: bool = !cgroup_subsys_on_dfl(hugetlb_cgrp_subsys);
-    struct hugetlb_cgroup *h_cg = hugetlb_cgroup_from_css(seq_css(seq));
-    struct cgroup_subsys_state *css;
-    unsigned long usage;
+    let mut nid = 0;
+    let mut cft = seq_cft(seq);
+pub static mut idx: c_int = 0;
+pub static mut legacy: bool = false;
+    let mut h_cg = hugetlb_cgroup_from_css(seq_css(seq));
+pub static mut css: *mut c_void = core::ptr::null_mut();
+    let mut usage = 0;
     if (legacy) {
 // Add up usage across all nodes for the non-hierarchical total.
     usage = 0;
-    for_each_node_state(nid, N_MEMORY)
+    for_each_node_state(nid, N_MEMORY) {
     usage += READ_ONCE(h_cg.nodeinfo[nid].usage[idx]);
+    }
     seq_printf(seq, "total=%lu", usage * PAGE_SIZE);
 // Simply print the per-node usage for the non-hierarchical total.
-    for_each_node_state(nid, N_MEMORY)
+    for_each_node_state(nid, N_MEMORY) {
     seq_printf(seq, " N%d=%lu", nid,
     READ_ONCE(h_cg.nodeinfo[nid].usage[idx]) *
     PAGE_SIZE);
+    }
     seq_putc(seq, '\n');
     }
 //
@@ -474,12 +698,11 @@ unsafe extern "C" fn hugetlb_cgroup_read_numa_stat(seq: *mut seq_file, dummy: *m
     seq_putc(seq, '\n');
     return 0;
     }
-    static u64 hugetlb_cgroup_read_u64(struct cgroup_subsys_state *css,
-    struct cftype *cft)
-    {
-    struct page_counter *counter;
-    struct page_counter *rsvd_counter;
-    struct hugetlb_cgroup *h_cg = hugetlb_cgroup_from_css(css);
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_cgroup_read_u64(css: *mut cgroup_subsys_state, cft: *mut cftype) -> u64 {
+pub static mut counter: *mut c_void = core::ptr::null_mut();
+pub static mut rsvd_counter: *mut c_void = core::ptr::null_mut();
+    let mut h_cg = hugetlb_cgroup_from_css(css);
     counter = &h_cg.hugepage[MEMFILE_IDX(cft.private)];
     rsvd_counter = &h_cg.rsvd_hugepage[MEMFILE_IDX(cft.private)];
     switch (MEMFILE_ATTR(cft.private)) {
@@ -499,20 +722,18 @@ unsafe extern "C" fn hugetlb_cgroup_read_numa_stat(seq: *mut seq_file, dummy: *m
     return counter.failcnt;
     case RES_RSVD_FAILCNT:
     return rsvd_counter.failcnt;
-    default:
+// label;
     BUG();
     }
     }
 #[no_mangle]
 unsafe extern "C" fn hugetlb_cgroup_read_u64_max(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int hugetlb_cgroup_read_u64_max(struct seq_file *seq, void *v)
-    {
-    int idx;
-    u64 val;
-    struct cftype *cft = seq_cft(seq);
-    unsigned long limit;
-    struct page_counter *counter;
-    struct hugetlb_cgroup *h_cg = hugetlb_cgroup_from_css(seq_css(seq));
+    let mut idx = 0;
+    let mut val = 0;
+    let mut cft = seq_cft(seq);
+    let mut limit = 0;
+pub static mut counter: *mut c_void = core::ptr::null_mut();
+    let mut h_cg = hugetlb_cgroup_from_css(seq_css(seq));
     idx = MEMFILE_IDX(cft.private);
     counter = &h_cg.hugepage[idx];
     limit = round_down(PAGE_COUNTER_MAX,
@@ -530,31 +751,34 @@ unsafe extern "C" fn hugetlb_cgroup_read_u64_max(seq: *mut seq_file, v: *mut c_v
     fallthrough;
     case RES_LIMIT:
     val = (u64)counter.max;
-    if (val == limit)
+    if (val == limit) {
     seq_puts(seq, "max\n");
-    else
+    }
+    else {
     seq_printf(seq, "%llu\n", val * PAGE_SIZE);
+    }
     break;
-    default:
+// label;
     BUG();
     }
     return 0;
     }
-    static DEFINE_MUTEX(hugetlb_limit_mutex);
-    static ssize_t hugetlb_cgroup_write(struct kernfs_open_file *of,
-    char *buf, size_t nbytes, loff_t off,
-    const char *max)
-    {
-    int ret, idx;
-    unsigned long nr_pages;
-    struct hugetlb_cgroup *h_cg = hugetlb_cgroup_from_css(of_css(of));
-    let mut rsvd: bool = false;
-    if (hugetlb_cgroup_is_root(h_cg)) /* Can't set limit on root */
+pub static mut hugetlb_limit_mutex: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_cgroup_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t, max: *mut c_char) -> ssize_t {
+    let mut ret = 0;
+    let mut idx = 0;
+    let mut nr_pages = 0;
+    let mut h_cg = hugetlb_cgroup_from_css(of_css(of));
+pub static mut rsvd: bool = false;
+    if (hugetlb_cgroup_is_root(h_cg)) /* Can't set limit on root */ {
     return -EINVAL;
+    }
     buf = strstrip(buf);
     ret = page_counter_memparse(buf, max, &nr_pages);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     idx = MEMFILE_IDX(of_cft(of).private);
     nr_pages = round_down(nr_pages, pages_per_huge_page(&hstates[idx]));
     switch (MEMFILE_ATTR(of_cft(of).private)) {
@@ -568,28 +792,26 @@ unsafe extern "C" fn hugetlb_cgroup_read_u64_max(seq: *mut seq_file, v: *mut c_v
     nr_pages);
     mutex_unlock(&hugetlb_limit_mutex);
     break;
-    default:
+// label;
     ret = -EINVAL;
     break;
     }
     return ret ?: nbytes;
     }
-    static ssize_t hugetlb_cgroup_write_legacy(struct kernfs_open_file *of,
-    char *buf, size_t nbytes, loff_t off)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_cgroup_write_legacy(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
     return hugetlb_cgroup_write(of, buf, nbytes, off, "-1");
     }
-    static ssize_t hugetlb_cgroup_write_dfl(struct kernfs_open_file *of,
-    char *buf, size_t nbytes, loff_t off)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_cgroup_write_dfl(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
     return hugetlb_cgroup_write(of, buf, nbytes, off, "max");
     }
-    static ssize_t hugetlb_cgroup_reset(struct kernfs_open_file *of,
-    char *buf, size_t nbytes, loff_t off)
-    {
-    let mut ret: c_int = 0;
-    struct page_counter *counter, *rsvd_counter;
-    struct hugetlb_cgroup *h_cg = hugetlb_cgroup_from_css(of_css(of));
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_cgroup_reset(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+pub static mut ret: c_int = 0;
+    let mut counter = core::ptr::null_mut();
+    let mut rsvd_counter = core::ptr::null_mut();
+    let mut h_cg = hugetlb_cgroup_from_css(of_css(of));
     counter = &h_cg.hugepage[MEMFILE_IDX(of_cft(of).private)];
     rsvd_counter = &h_cg.rsvd_hugepage[MEMFILE_IDX(of_cft(of).private)];
     switch (MEMFILE_ATTR(of_cft(of).private)) {
@@ -605,160 +827,60 @@ unsafe extern "C" fn hugetlb_cgroup_read_u64_max(seq: *mut seq_file, v: *mut c_v
     case RES_RSVD_FAILCNT:
     rsvd_counter.failcnt = 0;
     break;
-    default:
+// label;
     ret = -EINVAL;
     break;
     }
     return ret ?: nbytes;
     }
-    static char *mem_fmt(char *buf, int size, unsigned long hsize)
-    {
-    if (hsize >= SZ_1G)
-    snprintf(buf, size, "%luGB", hsize / SZ_1G);
 #[no_mangle]
-pub unsafe extern "C" fn if(SZ_1M: hsize >=) -> else {
-    else if (hsize >= SZ_1M)
+pub unsafe extern "C" fn mem_fmt(buf: *mut c_char, size: c_int, hsize: c_ulong) -> *mut c_void {
+    if (hsize >= SZ_1G) {
+    snprintf(buf, size, "%luGB", hsize / SZ_1G);
+    }
+
+    else if (hsize >= SZ_1M) {
     snprintf(buf, size, "%luMB", hsize / SZ_1M);
-    else
+    }
+    else {
     snprintf(buf, size, "%luKB", hsize / SZ_1K);
+    }
     return buf;
     }
 #[no_mangle]
 unsafe extern "C" fn __hugetlb_events_show(seq: *mut seq_file, local: bool) -> c_int {
-    static int __hugetlb_events_show(struct seq_file *seq, bool local)
-    {
-    int idx;
-    long max;
-    struct cftype *cft = seq_cft(seq);
-    struct hugetlb_cgroup *h_cg = hugetlb_cgroup_from_css(seq_css(seq));
+    let mut idx = 0;
+    let mut max = 0;
+    let mut cft = seq_cft(seq);
+    let mut h_cg = hugetlb_cgroup_from_css(seq_css(seq));
     idx = MEMFILE_IDX(cft.private);
-    if (local)
+    if (local) {
     max = atomic_long_read(&h_cg.events_local[idx][HUGETLB_MAX]);
-    else
+    }
+    else {
     max = atomic_long_read(&h_cg.events[idx][HUGETLB_MAX]);
+    }
     seq_printf(seq, "max %lu\n", max);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn hugetlb_events_show(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int hugetlb_events_show(struct seq_file *seq, void *v)
-    {
     return __hugetlb_events_show(seq, false);
     }
 #[no_mangle]
 unsafe extern "C" fn hugetlb_events_local_show(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int hugetlb_events_local_show(struct seq_file *seq, void *v)
-    {
     return __hugetlb_events_show(seq, true);
     }
-    static struct cftype hugetlb_dfl_tmpl[] = {
-    {
-    .name = "max",
-    .private = RES_LIMIT,
-    .seq_show = hugetlb_cgroup_read_u64_max,
-    .write = hugetlb_cgroup_write_dfl,
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    {
-    .name = "rsvd.max",
-    .private = RES_RSVD_LIMIT,
-    .seq_show = hugetlb_cgroup_read_u64_max,
-    .write = hugetlb_cgroup_write_dfl,
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    {
-    .name = "current",
-    .private = RES_USAGE,
-    .seq_show = hugetlb_cgroup_read_u64_max,
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    {
-    .name = "rsvd.current",
-    .private = RES_RSVD_USAGE,
-    .seq_show = hugetlb_cgroup_read_u64_max,
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    {
-    .name = "events",
-    .seq_show = hugetlb_events_show,
-    .file_offset = MEMFILE_OFFSET(struct hugetlb_cgroup, events_file[0]),
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    {
-    .name = "events.local",
-    .seq_show = hugetlb_events_local_show,
-    .file_offset = MEMFILE_OFFSET(struct hugetlb_cgroup, events_local_file[0]),
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    {
-    .name = "numa_stat",
-    .seq_show = hugetlb_cgroup_read_numa_stat,
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-// don't need terminator here
-    };
-    static struct cftype hugetlb_legacy_tmpl[] = {
-    {
-    .name = "limit_in_bytes",
-    .private = RES_LIMIT,
-    .read_u64 = hugetlb_cgroup_read_u64,
-    .write = hugetlb_cgroup_write_legacy,
-    },
-    {
-    .name = "rsvd.limit_in_bytes",
-    .private = RES_RSVD_LIMIT,
-    .read_u64 = hugetlb_cgroup_read_u64,
-    .write = hugetlb_cgroup_write_legacy,
-    },
-    {
-    .name = "usage_in_bytes",
-    .private = RES_USAGE,
-    .read_u64 = hugetlb_cgroup_read_u64,
-    },
-    {
-    .name = "rsvd.usage_in_bytes",
-    .private = RES_RSVD_USAGE,
-    .read_u64 = hugetlb_cgroup_read_u64,
-    },
-    {
-    .name = "max_usage_in_bytes",
-    .private = RES_MAX_USAGE,
-    .write = hugetlb_cgroup_reset,
-    .read_u64 = hugetlb_cgroup_read_u64,
-    },
-    {
-    .name = "rsvd.max_usage_in_bytes",
-    .private = RES_RSVD_MAX_USAGE,
-    .write = hugetlb_cgroup_reset,
-    .read_u64 = hugetlb_cgroup_read_u64,
-    },
-    {
-    .name = "failcnt",
-    .private = RES_FAILCNT,
-    .write = hugetlb_cgroup_reset,
-    .read_u64 = hugetlb_cgroup_read_u64,
-    },
-    {
-    .name = "rsvd.failcnt",
-    .private = RES_RSVD_FAILCNT,
-    .write = hugetlb_cgroup_reset,
-    .read_u64 = hugetlb_cgroup_read_u64,
-    },
-    {
-    .name = "numa_stat",
-    .seq_show = hugetlb_cgroup_read_numa_stat,
-    },
-// don't need terminator here
-    };
+pub static mut cftype: usize = 0;
+pub static mut cftype: usize = 0;
     static void __init
-    hugetlb_cgroup_cfttypes_init(struct hstate *h, struct cftype *cft,
-    struct cftype *tmpl, int tmpl_size)
+    hugetlb_cgroup_cfttypes_init(hstate *h, cftype *cft, cftype *tmpl, int tmpl_size)
     {
     char buf[32];
     int i, idx = hstate_index(h);
 // format the size
-    mem_fmt(buf, sizeof(buf), huge_page_size(h));
-    for (i = 0; i < tmpl_size; cft++, tmpl++, i++) {
+    mem_fmt(buf, sizeof!(buf), huge_page_size(h));
+    while (i < tmpl_size) {
 // cft = *tmpl;
 // rebuild the name
     scnprintf(cft.name, MAX_CFTYPE_NAME, "%s.%s", buf, tmpl.name);
@@ -766,7 +888,7 @@ unsafe extern "C" fn hugetlb_events_local_show(seq: *mut seq_file, v: *mut c_voi
     cft.private = MEMFILE_PRIVATE(idx, tmpl.private);
 // rebuild the file_offset
     if (tmpl.file_offset) {
-    let mut offset: c_uint = tmpl.file_offset;
+pub static mut offset: c_uint = 0;
     cft.file_offset = MEMFILE_OFFSET0(offset) +
     MEMFILE_FIELD_SIZE(offset) * idx;
     }
@@ -774,57 +896,46 @@ unsafe extern "C" fn hugetlb_events_local_show(seq: *mut seq_file, v: *mut c_voi
     }
     }
 #[no_mangle]
-unsafe extern "C" fn __hugetlb_cgroup_file_dfl_init(h: *mut hstate) -> void __init {
-    static void __init __hugetlb_cgroup_file_dfl_init(struct hstate *h)
-    {
-    let mut idx: c_int = hstate_index(h);
+unsafe extern "C" fn __hugetlb_cgroup_file_dfl_init(h: *mut hstate)  {
+pub static mut idx: c_int = 0;
     hugetlb_cgroup_cfttypes_init(h, dfl_files + idx * DFL_TMPL_SIZE,
     hugetlb_dfl_tmpl, DFL_TMPL_SIZE);
     }
 #[no_mangle]
-unsafe extern "C" fn __hugetlb_cgroup_file_legacy_init(h: *mut hstate) -> void __init {
-    static void __init __hugetlb_cgroup_file_legacy_init(struct hstate *h)
-    {
-    let mut idx: c_int = hstate_index(h);
+unsafe extern "C" fn __hugetlb_cgroup_file_legacy_init(h: *mut hstate)  {
+pub static mut idx: c_int = 0;
     hugetlb_cgroup_cfttypes_init(h, legacy_files + idx * LEGACY_TMPL_SIZE,
     hugetlb_legacy_tmpl, LEGACY_TMPL_SIZE);
     }
 #[no_mangle]
-unsafe extern "C" fn __hugetlb_cgroup_file_init(h: *mut hstate) -> void __init {
-    static void __init __hugetlb_cgroup_file_init(struct hstate *h)
-    {
+unsafe extern "C" fn __hugetlb_cgroup_file_init(h: *mut hstate)  {
     __hugetlb_cgroup_file_dfl_init(h);
     __hugetlb_cgroup_file_legacy_init(h);
     }
 #[no_mangle]
-unsafe extern "C" fn __hugetlb_cgroup_file_pre_init() -> void __init {
-    static void __init __hugetlb_cgroup_file_pre_init(void)
-    {
-    int cft_count;
+unsafe extern "C" fn __hugetlb_cgroup_file_pre_init()  {
+    let mut cft_count = 0;
     cft_count = hugetlb_max_hstate * DFL_TMPL_SIZE + 1; /* add terminator */
-    dfl_files = kzalloc_objs(struct cftype, cft_count);
-    BUG_ON(!dfl_files);
+    dfl_files = kzalloc_objs(cftype, cft_count);
+    BUG_ON!(!dfl_files);
     cft_count = hugetlb_max_hstate * LEGACY_TMPL_SIZE + 1; /* add terminator */
-    legacy_files = kzalloc_objs(struct cftype, cft_count);
-    BUG_ON(!legacy_files);
+    legacy_files = kzalloc_objs(cftype, cft_count);
+    BUG_ON!(!legacy_files);
     }
 #[no_mangle]
-unsafe extern "C" fn __hugetlb_cgroup_file_post_init() -> void __init {
-    static void __init __hugetlb_cgroup_file_post_init(void)
-    {
-    WARN_ON(cgroup_add_dfl_cftypes(&hugetlb_cgrp_subsys,
+unsafe extern "C" fn __hugetlb_cgroup_file_post_init()  {
+    WARN_ON!(cgroup_add_dfl_cftypes(&hugetlb_cgrp_subsys,
     dfl_files));
-    WARN_ON(cgroup_add_legacy_cftypes(&hugetlb_cgrp_subsys,
+    WARN_ON!(cgroup_add_legacy_cftypes(&hugetlb_cgrp_subsys,
     legacy_files));
     }
 #[no_mangle]
-pub unsafe extern "C" fn hugetlb_cgroup_file_init() -> void __init {
-    void __init hugetlb_cgroup_file_init(void)
-    {
-    struct hstate *h;
+pub unsafe extern "C" fn hugetlb_cgroup_file_init()  {
+pub static mut h: *mut c_void = core::ptr::null_mut();
     __hugetlb_cgroup_file_pre_init();
-    for_each_hstate(h)
+    for_each_hstate(h) {
     __hugetlb_cgroup_file_init(h);
+    }
     __hugetlb_cgroup_file_post_init();
     }
 //
@@ -833,13 +944,12 @@ pub unsafe extern "C" fn hugetlb_cgroup_file_init() -> void __init {
 //
 #[no_mangle]
 pub unsafe extern "C" fn hugetlb_cgroup_migrate(old_folio: *mut folio, new_folio: *mut folio) {
-    void hugetlb_cgroup_migrate(struct folio *old_folio, struct folio *new_folio)
-    {
-    struct hugetlb_cgroup *h_cg;
-    struct hugetlb_cgroup *h_cg_rsvd;
-    struct hstate *h = folio_hstate(old_folio);
-    if (hugetlb_cgroup_disabled())
+pub static mut h_cg: *mut c_void = core::ptr::null_mut();
+pub static mut h_cg_rsvd: *mut c_void = core::ptr::null_mut();
+    let mut h = folio_hstate(old_folio);
+    if (hugetlb_cgroup_disabled()) {
     return;
+    }
     spin_lock_irq(&hugetlb_lock);
     h_cg = hugetlb_cgroup_from_folio(old_folio);
     h_cg_rsvd = hugetlb_cgroup_from_folio_rsvd(old_folio);
@@ -851,13 +961,5 @@ pub unsafe extern "C" fn hugetlb_cgroup_migrate(old_folio: *mut folio, new_folio
     list_move(&new_folio.lru, &h.hugepage_activelist);
     spin_unlock_irq(&hugetlb_lock);
     }
-    static struct cftype hugetlb_files[] = {
-    {} /* terminate */
-    };
-    struct cgroup_subsys hugetlb_cgrp_subsys = {
-    .css_alloc	= hugetlb_cgroup_css_alloc,
-    .css_offline	= hugetlb_cgroup_css_offline,
-    .css_free	= hugetlb_cgroup_css_free,
-    .dfl_cftypes	= hugetlb_files,
-    .legacy_cftypes	= hugetlb_files,
-    };
+pub static mut cftype: usize = 0;
+pub static mut cgroup_subsys: usize = 0;

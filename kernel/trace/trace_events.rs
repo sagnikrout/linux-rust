@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -46,12 +296,12 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // This was based off of work by Tom Zanussi <tzanussi@gmail.com>.
 //
 
-    DEFINE_MUTEX(event_mutex);
-    LIST_HEAD(ftrace_events);
-    static LIST_HEAD(ftrace_generic_fields);
-    static LIST_HEAD(ftrace_common_fields);
+pub static mut event_mutex: usize = 0;
+pub static mut ftrace_events: usize = 0;
+pub static mut ftrace_generic_fields: usize = 0;
+pub static mut ftrace_common_fields: usize = 0;
     static bool eventdir_initialized;
-    static LIST_HEAD(module_strings);
+pub static mut module_strings: usize = 0;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct module_string {
@@ -60,75 +310,72 @@ pub struct module_string {
     pub str: *mut c_char,
 }
 
-    static struct kmem_cache *field_cachep;
-    static struct kmem_cache *file_cachep;
+pub static mut field_cachep: *mut c_void = core::ptr::null_mut();
+pub static mut file_cachep: *mut c_void = core::ptr::null_mut();
 #[no_mangle]
 pub unsafe extern "C" fn system_refcount(system: *mut event_subsystem) -> c_int {
-    static inline int system_refcount(struct event_subsystem *system)
-    {
     return system.ref_count;
     }
 #[no_mangle]
 unsafe extern "C" fn system_refcount_inc(system: *mut event_subsystem) -> c_int {
-    static int system_refcount_inc(struct event_subsystem *system)
-    {
-    return system.ref_count++;
+    return system.ref_count += 1;
     }
 #[no_mangle]
 unsafe extern "C" fn system_refcount_dec(system: *mut event_subsystem) -> c_int {
-    static int system_refcount_dec(struct event_subsystem *system)
-    {
     return --system.ref_count;
     }
 // Double loops, do not use break, only goto's work
 
-    list_for_each_entry(tr, &ftrace_trace_arrays, list) {	\
-    list_for_each_entry(file, &tr.events, list)
+    list_for_each_entry(tr, &ftrace_trace_arrays, list) {	
+    list_for_each_entry(file, &tr.events, list) {
 
-    list_for_each_entry(tr, &ftrace_trace_arrays, list) {	\
-    struct trace_event_file *___n;				\
-    list_for_each_entry_safe(file, ___n, &tr.events, list)
+    list_for_each_entry(tr, &ftrace_trace_arrays, list) {	
+    }
+pub static mut ___n: *mut c_void = core::ptr::null_mut();				
+    list_for_each_entry_safe(file, ___n, &tr.events, list) {
 
     }
-    static struct ftrace_event_field *
-    __find_event_field(struct list_head *head, const char *name)
-    {
-    struct ftrace_event_field *field;
+#[no_mangle]
+pub unsafe extern "C" fn __find_event_field(head: *mut list_head, name: *mut c_char) -> *mut c_void {
+    }
+pub static mut field: *mut c_void = core::ptr::null_mut();
     list_for_each_entry(field, head, link) {
-    if (!strcmp(field.name, name))
+    if (!strcmp(field.name, name)) {
     return field;
+    }
     }
     return core::ptr::null_mut();
     }
-    struct ftrace_event_field *
-    trace_find_event_field(struct trace_event_call *call, char *name)
-    {
-    struct ftrace_event_field *field;
-    struct list_head *head;
+#[no_mangle]
+pub unsafe extern "C" fn trace_find_event_field(call: *mut trace_event_call, name: *mut c_char) -> *mut c_void {
+pub static mut field: *mut c_void = core::ptr::null_mut();
+pub static mut head: *mut c_void = core::ptr::null_mut();
     head = trace_get_fields(call);
     field = __find_event_field(head, name);
-    if (field)
+    if (field) {
     return field;
+    }
     field = __find_event_field(&ftrace_generic_fields, name);
-    if (field)
+    if (field) {
     return field;
+    }
     return __find_event_field(&ftrace_common_fields, name);
     }
-    static int __trace_define_field(struct list_head *head, const char *type,
-    const char *name, int offset, int size,
-    int is_signed, int filter_type, int len,
-    int need_test)
-    {
-    struct ftrace_event_field *field;
+#[no_mangle]
+pub unsafe extern "C" fn __trace_define_field(head: *mut list_head, type: *mut c_char, name: *mut c_char, offset: c_int, size: c_int, is_signed: c_int, filter_type: c_int, len: c_int, need_test: c_int) -> c_int {
+pub static mut field: *mut c_void = core::ptr::null_mut();
     field = kmem_cache_alloc(field_cachep, GFP_TRACE);
-    if (!field)
+    if (!field) {
     return -ENOMEM;
+    }
     field.name = name;
     field.type = type;
-    if (filter_type == FILTER_OTHER)
+    if (filter_type == FILTER_OTHER) {
     field.filter_type = filter_assign_type(type);
-    else
+    }
+    else {
     field.filter_type = filter_type;
+    }
     field.offset = offset;
     field.size = size;
     field.is_signed = is_signed;
@@ -137,49 +384,47 @@ unsafe extern "C" fn system_refcount_dec(system: *mut event_subsystem) -> c_int 
     list_add(&field.link, head);
     return 0;
     }
-    int trace_define_field(struct trace_event_call *call, const char *type,
-    const char *name, int offset, int size, int is_signed,
-    int filter_type)
-    {
-    struct list_head *head;
-    if (WARN_ON(!call.class))
+#[no_mangle]
+pub unsafe extern "C" fn trace_define_field(call: *mut trace_event_call, type: *mut c_char, name: *mut c_char, offset: c_int, size: c_int, is_signed: c_int, filter_type: c_int) -> c_int {
+pub static mut head: *mut c_void = core::ptr::null_mut();
+    if (WARN_ON!(!call.class)) {
     return 0;
+    }
     head = trace_get_fields(call);
     return __trace_define_field(head, type, name, offset, size,
     is_signed, filter_type, 0, 0);
     }
     EXPORT_SYMBOL_GPL(trace_define_field);
-    static int trace_define_field_ext(struct trace_event_call *call, const char *type,
-    const char *name, int offset, int size, int is_signed,
-    int filter_type, int len, int need_test)
-    {
-    struct list_head *head;
-    if (WARN_ON(!call.class))
+#[no_mangle]
+pub unsafe extern "C" fn trace_define_field_ext(call: *mut trace_event_call, type: *mut c_char, name: *mut c_char, offset: c_int, size: c_int, is_signed: c_int, filter_type: c_int, len: c_int, need_test: c_int) -> c_int {
+pub static mut head: *mut c_void = core::ptr::null_mut();
+    if (WARN_ON!(!call.class)) {
     return 0;
+    }
     head = trace_get_fields(call);
     return __trace_define_field(head, type, name, offset, size,
     is_signed, filter_type, len, need_test);
     }
 
-    ret = __trace_define_field(&ftrace_generic_fields, #type,	\
+    ret = __trace_define_field(&ftrace_generic_fields, #type,	
 
-    filter_type, 0, 0);			\
-    if (ret)							\
+    filter_type, 0, 0);			
+    if (ret)							 {
     return ret;
+    }
 
-    ret = __trace_define_field(&ftrace_common_fields, #type,	\
-    "common_" #item,			\
-    offsetof(typeof(ent), item),		\
-    sizeof(ent.item),			\
-    is_signed_type(type), FILTER_OTHER,	\
-    0, 0);				\
-    if (ret)							\
+    ret = __trace_define_field(&ftrace_common_fields, #type,	
+    "common_" #item,			
+    offsetof(typeof(ent), item),		
+    sizeof!(ent.item),			
+    is_signed_type(type), FILTER_OTHER,	
+    0, 0);				
+    if (ret)							 {
     return ret;
+    }
 #[no_mangle]
 unsafe extern "C" fn trace_define_generic_fields() -> c_int {
-    static int trace_define_generic_fields(void)
-    {
-    int ret;
+    let mut ret = 0;
     __generic_field(int, CPU, FILTER_CPU);
     __generic_field(int, cpu, FILTER_CPU);
     __generic_field(int, common_cpu, FILTER_CPU);
@@ -191,10 +436,8 @@ unsafe extern "C" fn trace_define_generic_fields() -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn trace_define_common_fields() -> c_int {
-    static int trace_define_common_fields(void)
-    {
-    int ret;
-    struct trace_entry ent;
+    let mut ret = 0;
+pub static mut ent: usize = 0;
     __common_field(unsigned short, type);
     __common_field(unsigned char, flags);
 // Holds both preempt_count and migrate_disable
@@ -204,10 +447,9 @@ unsafe extern "C" fn trace_define_common_fields() -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn trace_destroy_fields(call: *mut trace_event_call) {
-    static void trace_destroy_fields(struct trace_event_call *call)
-    {
-    struct ftrace_event_field *field, *next;
-    struct list_head *head;
+    let mut field = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+pub static mut head: *mut c_void = core::ptr::null_mut();
     head = trace_get_fields(call);
     list_for_each_entry_safe(field, next, head, link) {
     list_del(&field.link);
@@ -220,35 +462,35 @@ unsafe extern "C" fn trace_destroy_fields(call: *mut trace_event_call) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn trace_event_get_offsets(call: *mut trace_event_call) -> c_int {
-    int trace_event_get_offsets(struct trace_event_call *call)
-    {
-    struct ftrace_event_field *tail;
-    struct list_head *head;
+pub static mut tail: *mut c_void = core::ptr::null_mut();
+pub static mut head: *mut c_void = core::ptr::null_mut();
     head = trace_get_fields(call);
 //
 // head->next points to the last field with the largest offset,
-// since it was added last by trace_define_field()
+since it was added last by trace_define_field()
 //
-    tail = list_first_entry(head, struct ftrace_event_field, link);
+    tail = list_first_entry(head, ftrace_event_field, link);
     return tail.offset + tail.size;
     }
-    static struct trace_event_fields *find_event_field(const char *fmt,
-    struct trace_event_call *call)
-    {
-    struct trace_event_fields *field = call.class.fields_array;
-    const char *p = fmt;
-    int len;
-    if (!(len = str_has_prefix(fmt, "REC.")))
+#[no_mangle]
+pub unsafe extern "C" fn find_event_field(fmt: *mut c_char, call: *mut trace_event_call) -> *mut c_void {
+    let mut field = call.class.fields_array;
+    let mut p = fmt;
+    let mut len = 0;
+    if (!(len = str_has_prefix(fmt, "REC."))) {
     return core::ptr::null_mut();
+    }
     fmt += len;
-    for (p = fmt; *p; p++) {
-    if (!isalnum(*p) && *p != '_')
+    while (*p) {
+    if (!isalnum(*p) && *p != '_') {
     break;
     }
+    }
     len = p - fmt;
-    for (; field.type; field++) {
-    if (strncmp(field.name, fmt, len) || field.name[len])
+    while (field.type) {
+    if (strncmp(field.name, fmt, len) || field.name[len]) {
     continue;
+    }
     return field;
     }
     return core::ptr::null_mut();
@@ -259,30 +501,27 @@ pub unsafe extern "C" fn trace_event_get_offsets(call: *mut trace_event_call) ->
 //
 #[no_mangle]
 unsafe extern "C" fn test_field(fmt: *const c_char, call: *mut trace_event_call) -> bool {
-    static bool test_field(const char *fmt, struct trace_event_call *call)
-    {
-    struct trace_event_fields *field;
+pub static mut field: *mut c_void = core::ptr::null_mut();
     field = find_event_field(fmt, call);
-    if (!field)
+    if (!field) {
     return false;
+    }
 // This is an array and is OK to dereference.
     return strchr(field.type, '[') != core::ptr::null_mut();
     }
 // Look for a string within an argument
 #[no_mangle]
 unsafe extern "C" fn find_print_string(arg: *const c_char, str: *const c_char, end: *const c_char) -> bool {
-    static bool find_print_string(const char *arg, const char *str, const char *end)
-    {
-    const char *r;
+pub static mut r: *mut c_void = core::ptr::null_mut();
     r = strstr(arg, str);
     return r && r < end;
     }
 // Return true if the argument pointer is safe
 #[no_mangle]
 unsafe extern "C" fn process_pointer(fmt: *const c_char, len: c_int, call: *mut trace_event_call) -> bool {
-    static bool process_pointer(const char *fmt, int len, struct trace_event_call *call)
-    {
-    const char *r, *e, *a;
+    let mut r = core::ptr::null_mut();
+    let mut e = core::ptr::null_mut();
+    let mut a = core::ptr::null_mut();
     e = fmt + len;
 // Find the REC-> in the argument
     r = strstr(fmt, "REC.");
@@ -293,8 +532,9 @@ unsafe extern "C" fn process_pointer(fmt: *const c_char, len: c_int, call: *mut 
 // this is to catch common mistakes, not malicious code.
 //
     a = strchr(fmt, '&');
-    if ((a && (a < r)) || test_field(r, call))
+    if ((a && (a < r)) || test_field(r, call)) {
     return true;
+    }
     } else if (find_print_string(fmt, "__get_dynamic_array(", e)) {
     return true;
     } else if (find_print_string(fmt, "__get_rel_dynamic_array(", e)) {
@@ -313,10 +553,10 @@ unsafe extern "C" fn process_pointer(fmt: *const c_char, len: c_int, call: *mut 
 // Return true if the string is safe
 #[no_mangle]
 unsafe extern "C" fn process_string(fmt: *const c_char, len: c_int, call: *mut trace_event_call) -> bool {
-    static bool process_string(const char *fmt, int len, struct trace_event_call *call)
-    {
-    struct trace_event_fields *field;
-    const char *r, *e, *s;
+pub static mut field: *mut c_void = core::ptr::null_mut();
+    let mut r = core::ptr::null_mut();
+    let mut e = core::ptr::null_mut();
+    let mut s = core::ptr::null_mut();
     e = fmt + len;
 //
 // There are several helper functions that return strings.
@@ -327,14 +567,17 @@ unsafe extern "C" fn process_string(fmt: *const c_char, len: c_int, call: *mut t
     s = fmt;
     do {
     r = strstr(s, "(");
-    if (!r || r >= e)
+    if (!r || r >= e) {
     break;
-    for (int i = 1; r - i >= s; i++) {
-    let mut ch: c_char = *(r - i);
-    if (isspace(ch))
+    }
+    while (r - i >= s) {
+pub static mut ch: c_char = 0;
+    if (isspace(ch)) {
     continue;
-    if (isalnum(ch) || ch == '_')
+    }
+    if (isalnum(ch) || ch == '_') {
     return true;
+    }
 // Anything else, this isn't a function
     break;
     }
@@ -349,62 +592,67 @@ unsafe extern "C" fn process_string(fmt: *const c_char, len: c_int, call: *mut t
     r = strstr(s, "[");
     if (r && r < e) {
     r = strstr(r, "REC.");
-    if (r && r < e)
+    if (r && r < e) {
     return true;
+    }
     }
 //
 // If there's any strings in the argument consider this arg OK as it
 // could be: REC->field ? "foo" : "bar" and we don't want to get into
 // verifying that logic here.
 //
-    if (find_print_string(fmt, "\"", e))
+    if (find_print_string(fmt, "\"", e)) {
     return true;
+    }
 // Dereferenced strings are also valid like any other pointer
-    if (process_pointer(fmt, len, call))
+    if (process_pointer(fmt, len, call)) {
     return true;
+    }
 // Make sure the field is found
     field = find_event_field(fmt, call);
-    if (!field)
+    if (!field) {
     return false;
+    }
 // Test this field's string before printing the event
     call.flags |= TRACE_EVENT_FL_TEST_STR;
     field.needs_test = 1;
     return true;
     }
-    static void test_double_dereference(const char *str, int len,
-    struct trace_event_call *call)
-    {
-    const char *ptr;
-    const char *end = str + len;
+#[no_mangle]
+pub unsafe extern "C" fn test_double_dereference(str: *mut c_char, len: c_int, call: *mut trace_event_call) {
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+    let mut end = str + len;
     ptr = strstr(str, "REC.");
     while (ptr && ptr < end) {
     ptr += 5;
-    for (; ptr < end; ptr++) {
+    while (ptr < end) {
     if (ptr[0] == '-' && ptr[1] == '>') {
-    pr_warn("TRACE EVENT ERROR: Event %s has double dereference in TP_printk: %.*s\n",
+    pr_warn!("TRACE EVENT ERROR: Event %s has double dereference in TP_printk: %.*s\n",
     trace_event_name(call), len, str);
     WARN_ONCE(1, "Event %s has double dereference in TP_printk: %.*s\n",
     trace_event_name(call), len, str);
     return;
     }
-    if (!isalnum(*ptr) && *ptr != '_')
+    if (!isalnum(*ptr) && *ptr != '_') {
     break;
+    }
     }
     ptr = strstr(ptr, "REC.");
     }
     }
-    static void handle_dereference_arg(const char *arg_str, u64 string_flags, int len,
-    u64 *dereference_flags, int arg,
-    struct trace_event_call *call)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn handle_dereference_arg(arg_str: *mut c_char, string_flags: u64, len: c_int, dereference_flags: *mut u64, arg: c_int, call: *mut trace_event_call) {
     if (string_flags & (1ULL << arg)) {
-    if (process_string(arg_str, len, call))
+    if (process_string(arg_str, len, call)) {
 // dereference_flags &= ~(1ULL << arg);
-    } else if (process_pointer(arg_str, len, call))
+    }
+    } else if (process_pointer(arg_str, len, call)) {
 // dereference_flags &= ~(1ULL << arg);
-    else
-    pr_warn("TRACE EVENT ERROR: Bad dereference argument: '%.*s'\n",
+    }
+    else {
+    pr_warn!("TRACE EVENT ERROR: Bad dereference argument: '%.*s'\n",
     len, arg_str);
+    }
     }
 //
 // Examine the print fmt of the event looking for unsafe dereference
@@ -414,29 +662,32 @@ unsafe extern "C" fn process_string(fmt: *const c_char, len: c_int, call: *mut t
 //
 #[no_mangle]
 unsafe extern "C" fn test_event_printk(call: *mut trace_event_call) {
-    static void test_event_printk(struct trace_event_call *call)
-    {
-    let mut dereference_flags: u64 = 0;
-    let mut string_flags: u64 = 0;
-    let mut first: bool = true;
-    const char *fmt;
-    let mut parens: c_int = 0;
-    let mut in_quote: c_char = 0;
-    let mut start_arg: c_int = 0;
-    let mut arg: c_int = 0;
-    int i, e;
+pub static mut dereference_flags: u64 = 0;
+pub static mut string_flags: u64 = 0;
+pub static mut first: bool = true;
+pub static mut fmt: *mut c_void = core::ptr::null_mut();
+pub static mut parens: c_int = 0;
+pub static mut in_quote: c_char = 0;
+pub static mut start_arg: c_int = 0;
+pub static mut arg: c_int = 0;
+    let mut i = 0;
+    let mut e = 0;
     fmt = call.print_fmt;
-    if (!fmt)
+    if (!fmt) {
     return;
-    for (i = 0; fmt[i]; i++) {
-    switch (fmt[i]) {
-    case '\\':
-    i++;
-    if (!fmt[i])
+    }
+    while (fmt[i]) {
+    match (fmt[i]) {
+    '\\' => {
+    i += 1;
+    if (!fmt[i]) {
     return;
+    }
     continue;
-    case '"':
-    case '\'':
+    }
+    '"' => {
+    }
+    '\'' => {
 //
 // The print fmt starts with a string that
 // is processed first to find %p* usage,
@@ -445,73 +696,90 @@ unsafe extern "C" fn test_event_printk(call: *mut trace_event_call) {
 // if the dereferenced %p* usage is safe.
 //
     if (first) {
-    if (fmt[i] == '\'')
+    if (fmt[i] == '\'') {
     continue;
+    }
     if (in_quote) {
     arg = 0;
     first = false;
     }
     }
     if (in_quote) {
-    if (in_quote == fmt[i])
+    if (in_quote == fmt[i]) {
     in_quote = 0;
+    }
     } else {
     in_quote = fmt[i];
     }
     continue;
-    case '%':
-    if (!first || !in_quote)
+    }
+    '%' => {
+    if (!first || !in_quote) {
     continue;
-    i++;
-    if (!fmt[i])
+    }
+    i += 1;
+    if (!fmt[i]) {
     return;
-    switch (fmt[i]) {
-    case '%':
+    }
+    match (fmt[i]) {
+    '%' => {
     continue;
-    case 'p':
-    do_pointer:
+    }
+    'p' => {
+// label;
 // Find dereferencing fields
-    switch (fmt[i + 1]) {
-    case 'B': case 'R': case 'r':
-    case 'b': case 'M': case 'm':
-    case 'I': case 'i': case 'E':
-    case 'U': case 'V': case 'N':
-    case 'a': case 'd': case 'D':
-    case 'g': case 't': case 'C':
-    case 'O': case 'f':
+    match (fmt[i + 1]) {
+    'B' => {
+    }
+    'b' => {
+    }
+    'I' => {
+    }
+    'U' => {
+    }
+    'a' => {
+    }
+    'g' => {
+    }
+    'O' => {
     if (WARN_ONCE(arg == 63,
     "Too many args for event: %s",
-    trace_event_name(call)))
+    trace_event_name(call))) {
     return;
+    }
     dereference_flags |= 1ULL << arg;
     }
+    }
     break;
-    default:
+// label;
     {
-    let mut star: bool = false;
-    int j;
+pub static mut star: bool = false;
+    let mut j = 0;
 // Increment arg if %*s exists.
-    for (j = 0; fmt[i + j]; j++) {
+    while (fmt[i + j]) {
     if (isdigit(fmt[i + j]) ||
-    fmt[i + j] == '.')
+    fmt[i + j] == '.') {
     continue;
+    }
     if (fmt[i + j] == '*') {
     star = true;
 // Handle %*pbl case
     if (!j && fmt[i + 1] == 'p') {
-    arg++;
-    i++;
-    goto do_pointer;
+    arg += 1;
+    i += 1;
+// goto;
     }
     continue;
     }
     if ((fmt[i + j] == 's')) {
-    if (star)
-    arg++;
+    if (star) {
+    arg += 1;
+    }
     if (WARN_ONCE(arg == 63,
     "Too many args for event: %s",
-    trace_event_name(call)))
+    trace_event_name(call))) {
     return;
+    }
     dereference_flags |= 1ULL << arg;
     string_flags |= 1ULL << arg;
     }
@@ -520,31 +788,36 @@ unsafe extern "C" fn test_event_printk(call: *mut trace_event_call) {
     break;
     } /* default */
     } /* switch */
-    arg++;
+    arg += 1;
     continue;
     case '(':
-    if (in_quote)
+    if (in_quote) {
     continue;
-    parens++;
+    }
+    parens += 1;
     continue;
     case ')':
-    if (in_quote)
+    if (in_quote) {
     continue;
-    parens--;
+    }
+    parens -= 1;
     if (WARN_ONCE(parens < 0,
     "Paren mismatch for event: %s\narg='%s'\n%*s",
     trace_event_name(call),
     fmt + start_arg,
-    (i - start_arg) + 5, "^"))
+    (i - start_arg) + 5, "^")) {
     return;
+    }
     continue;
     case ',':
-    if (in_quote || parens)
+    if (in_quote || parens) {
     continue;
+    }
     e = i;
-    i++;
-    while (isspace(fmt[i]))
-    i++;
+    i += 1;
+    while (isspace(fmt[i])) {
+    i += 1;
+    }
 //
 // If start_arg is zero, then this is the start of the
 // first argument. The processing of the argument happens
@@ -554,7 +827,7 @@ unsafe extern "C" fn test_event_printk(call: *mut trace_event_call) {
     if (!start_arg) {
     start_arg = i;
 // Balance out the i++ in the for loop
-    i--;
+    i -= 1;
     continue;
     }
     test_double_dereference(fmt + start_arg, e - start_arg, call);
@@ -564,9 +837,9 @@ unsafe extern "C" fn test_event_printk(call: *mut trace_event_call) {
     &dereference_flags, arg, call);
     }
     start_arg = i;
-    arg++;
+    arg += 1;
 // Balance out the i++ in the for loop
-    i--;
+    i -= 1;
     }
     }
     test_double_dereference(fmt + start_arg, i - start_arg, call);
@@ -583,40 +856,38 @@ unsafe extern "C" fn test_event_printk(call: *mut trace_event_call) {
 // unsafe. The source of the dereference must be copied into the
 // event itself, and the dereference must access the copy instead.
 //
-    if (WARN_ON_ONCE(dereference_flags)) {
+    if (WARN_ON_ONCE!(dereference_flags)) {
     arg = 1;
     while (!(dereference_flags & 1)) {
     dereference_flags >>= 1;
-    arg++;
+    arg += 1;
     }
-    pr_warn("event %s has unsafe dereference of argument %d\n",
+    pr_warn!("event %s has unsafe dereference of argument %d\n",
     trace_event_name(call), arg);
-    pr_warn("print_fmt: %s\n", fmt);
+    pr_warn!("print_fmt: %s\n", fmt);
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn trace_event_raw_init(call: *mut trace_event_call) -> c_int {
-    int trace_event_raw_init(struct trace_event_call *call)
-    {
-    int id;
+    let mut id = 0;
     id = register_trace_event(&call.event);
-    if (!id)
+    if (!id) {
     return -ENODEV;
+    }
     test_event_printk(call);
     return 0;
     }
     EXPORT_SYMBOL_GPL(trace_event_raw_init);
 #[no_mangle]
 pub unsafe extern "C" fn trace_event_ignore_this_pid(trace_file: *mut trace_event_file) -> bool {
-    bool trace_event_ignore_this_pid(struct trace_event_file *trace_file)
-    {
-    struct trace_array *tr = trace_file.tr;
-    struct trace_pid_list *no_pid_list;
-    struct trace_pid_list *pid_list;
+    let mut tr = trace_file.tr;
+pub static mut no_pid_list: *mut c_void = core::ptr::null_mut();
+pub static mut pid_list: *mut c_void = core::ptr::null_mut();
     pid_list = rcu_dereference_raw(tr.filtered_pids);
     no_pid_list = rcu_dereference_raw(tr.filtered_no_pids);
-    if (!pid_list && !no_pid_list)
+    if (!pid_list && !no_pid_list) {
     return false;
+    }
 //
 // This is recorded at every sched_switch for this task.
 // Thus, even if the task migrates the ignore value will be the same.
@@ -640,14 +911,13 @@ pub unsafe extern "C" fn trace_event_ignore_this_pid(trace_file: *mut trace_even
 // event was not reserved (event was filtered, too big, or the buffer
 // simply was disabled for write).
 //
-    void *trace_event_buffer_reserve(struct trace_event_buffer *fbuffer,
-    struct trace_event_file *trace_file,
-    unsigned long len)
-    {
-    struct trace_event_call *event_call = trace_file.event_call;
+#[no_mangle]
+pub unsafe extern "C" fn trace_event_buffer_reserve(fbuffer: *mut trace_event_buffer, trace_file: *mut trace_event_file, len: c_ulong) -> *mut c_void {
+    let mut event_call = trace_file.event_call;
     if ((trace_file.flags & EVENT_FILE_FL_PID_FILTER) &&
-    trace_event_ignore_this_pid(trace_file))
+    trace_event_ignore_this_pid(trace_file)) {
     return core::ptr::null_mut();
+    }
 //
 // If CONFIG_PREEMPTION is enabled, then the tracepoint itself disables
 // preemption (adding one to the preempt_count). Since we are
@@ -660,60 +930,68 @@ pub unsafe extern "C" fn trace_event_ignore_this_pid(trace_file: *mut trace_even
     trace_event_buffer_lock_reserve(&fbuffer.buffer, trace_file,
     event_call.event.type, len,
     fbuffer.trace_ctx);
-    if (!fbuffer.event)
+    if (!fbuffer.event) {
     return core::ptr::null_mut();
+    }
     fbuffer.regs = core::ptr::null_mut();
     fbuffer.entry = ring_buffer_event_data(fbuffer.event);
     return fbuffer.entry;
     }
     EXPORT_SYMBOL_GPL(trace_event_buffer_reserve);
-    int trace_event_reg(struct trace_event_call *call,
-    enum trace_reg type, void *data)
-    {
-    struct trace_event_file *file = data;
-    WARN_ON(!(call.flags & TRACE_EVENT_FL_TRACEPOINT));
-    switch (type) {
-    case TRACE_REG_REGISTER:
+#[no_mangle]
+pub unsafe extern "C" fn trace_event_reg(call: *mut trace_event_call, type: trace_reg, data: *mut c_void) -> c_int {
+    let mut file = data;
+    WARN_ON!(!(call.flags & TRACE_EVENT_FL_TRACEPOINT));
+    match (type) {
+    TRACE_REG_REGISTER => {
     return tracepoint_probe_register(call.tp,
     call.class.probe,
     file);
-    case TRACE_REG_UNREGISTER:
+    }
+    TRACE_REG_UNREGISTER => {
     tracepoint_probe_unregister(call.tp,
     call.class.probe,
     file);
     return 0;
 
-    case TRACE_REG_PERF_REGISTER:
-    if (!call.class.perf_probe)
+    }
+    TRACE_REG_PERF_REGISTER => {
+    if (!call.class.perf_probe) {
     return -ENODEV;
+    }
     return tracepoint_probe_register(call.tp,
     call.class.perf_probe,
     call);
-    case TRACE_REG_PERF_UNREGISTER:
+    }
+    TRACE_REG_PERF_UNREGISTER => {
     tracepoint_probe_unregister(call.tp,
     call.class.perf_probe,
     call);
     return 0;
-    case TRACE_REG_PERF_OPEN:
-    case TRACE_REG_PERF_CLOSE:
-    case TRACE_REG_PERF_ADD:
-    case TRACE_REG_PERF_DEL:
+    }
+    TRACE_REG_PERF_OPEN => {
+    }
+    TRACE_REG_PERF_CLOSE => {
+    }
+    TRACE_REG_PERF_ADD => {
+    }
+    TRACE_REG_PERF_DEL => {
     return 0;
 
+    }
     }
     return 0;
     }
     EXPORT_SYMBOL_GPL(trace_event_reg);
 #[no_mangle]
 pub unsafe extern "C" fn trace_event_enable_cmd_record(enable: bool) {
-    void trace_event_enable_cmd_record(bool enable)
-    {
-    struct trace_event_file *file;
-    struct trace_array *tr;
+pub static mut file: *mut c_void = core::ptr::null_mut();
+pub static mut tr: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&event_mutex);
     do_for_each_event_file(tr, file) {
-    if (!(file.flags & EVENT_FILE_FL_ENABLED))
+    if (!(file.flags & EVENT_FILE_FL_ENABLED)) {
     continue;
+    }
     if (enable) {
     tracing_start_cmdline_record();
     set_bit(EVENT_FILE_FL_RECORDED_CMD_BIT, &file.flags);
@@ -725,14 +1003,13 @@ pub unsafe extern "C" fn trace_event_enable_cmd_record(enable: bool) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn trace_event_enable_tgid_record(enable: bool) {
-    void trace_event_enable_tgid_record(bool enable)
-    {
-    struct trace_event_file *file;
-    struct trace_array *tr;
+pub static mut file: *mut c_void = core::ptr::null_mut();
+pub static mut tr: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&event_mutex);
     do_for_each_event_file(tr, file) {
-    if (!(file.flags & EVENT_FILE_FL_ENABLED))
+    if (!(file.flags & EVENT_FILE_FL_ENABLED)) {
     continue;
+    }
     if (enable) {
     tracing_start_tgid_record();
     set_bit(EVENT_FILE_FL_RECORDED_TGID_BIT, &file.flags);
@@ -743,16 +1020,15 @@ pub unsafe extern "C" fn trace_event_enable_tgid_record(enable: bool) {
     }
     } while_for_each_event_file();
     }
-    static int __ftrace_event_enable_disable(struct trace_event_file *file,
-    int enable, int soft_disable)
-    {
-    struct trace_event_call *call = file.event_call;
-    struct trace_array *tr = file.tr;
-    let mut soft_mode: bool = atomic_read(&file.sm_ref) != 0;
-    let mut ret: c_int = 0;
-    int disable;
-    switch (enable) {
-    case 0:
+#[no_mangle]
+pub unsafe extern "C" fn __ftrace_event_enable_disable(file: *mut trace_event_file, enable: c_int, soft_disable: c_int) -> c_int {
+    let mut call = file.event_call;
+    let mut tr = file.tr;
+pub static mut soft_mode: bool = false;
+pub static mut ret: c_int = 0;
+    let mut disable = 0;
+    match (enable) {
+    0 => {
 //
 // When soft_disable is set and enable is cleared, the sm_ref
 // reference counter is decremented. If it reaches 0, we want
@@ -767,14 +1043,16 @@ pub unsafe extern "C" fn trace_event_enable_tgid_record(enable: bool) {
 // "soft enable"s (clearing the SOFT_DISABLED bit) won't work.
 //
     if (soft_disable) {
-    if (atomic_dec_return(&file.sm_ref) > 0)
-    break;
+    if (atomic_dec_return(&file.sm_ref) > 0) {
+    // break;
+    }
     disable = file.flags & EVENT_FILE_FL_SOFT_DISABLED;
     soft_mode = false;
 // Disable use of trace_buffered_event
     trace_buffered_event_disable();
-    } else
+    } else {
     disable = !soft_mode;
+    }
     if (disable && (file.flags & EVENT_FILE_FL_ENABLED)) {
     clear_bit(EVENT_FILE_FL_ENABLED_BIT, &file.flags);
     if (file.flags & EVENT_FILE_FL_RECORDED_CMD) {
@@ -786,15 +1064,18 @@ pub unsafe extern "C" fn trace_event_enable_tgid_record(enable: bool) {
     clear_bit(EVENT_FILE_FL_RECORDED_TGID_BIT, &file.flags);
     }
     ret = call.class.reg(call, TRACE_REG_UNREGISTER, file);
-    WARN_ON_ONCE(ret);
+    WARN_ON_ONCE!(ret);
     }
 // If in soft mode, just set the SOFT_DISABLE_BIT, else clear it
-    if (soft_mode)
+    if (soft_mode) {
     set_bit(EVENT_FILE_FL_SOFT_DISABLED_BIT, &file.flags);
-    else
+    }
+    else {
     clear_bit(EVENT_FILE_FL_SOFT_DISABLED_BIT, &file.flags);
-    break;
-    case 1:
+    }
+    // break;
+    }
+    1 => {
 //
 // When soft_disable is set and enable is set, we want to
 // register the tracepoint for the event, but leave the event
@@ -803,19 +1084,22 @@ pub unsafe extern "C" fn trace_event_enable_tgid_record(enable: bool) {
 // before enabling the event tracepoint, so it still seems
 // to be disabled.
 //
-    if (!soft_disable)
+    if (!soft_disable) {
     clear_bit(EVENT_FILE_FL_SOFT_DISABLED_BIT, &file.flags);
+    }
     else {
-    if (atomic_inc_return(&file.sm_ref) > 1)
-    break;
+    if (atomic_inc_return(&file.sm_ref) > 1) {
+    // break;
+    }
 // Enable use of trace_buffered_event
     trace_buffered_event_enable();
     }
     if (!(file.flags & EVENT_FILE_FL_ENABLED)) {
-    let mut cmd: bool = false, tgid = false;
+pub static mut cmd: bool = false;
 // Keep the event disabled, when going to soft mode.
-    if (soft_disable)
+    if (soft_disable) {
     set_bit(EVENT_FILE_FL_SOFT_DISABLED_BIT, &file.flags);
+    }
     if (tr.trace_flags & TRACE_ITER(RECORD_CMD)) {
     cmd = true;
     tracing_start_cmdline_record();
@@ -828,30 +1112,31 @@ pub unsafe extern "C" fn trace_event_enable_tgid_record(enable: bool) {
     }
     ret = call.class.reg(call, TRACE_REG_REGISTER, file);
     if (ret) {
-    if (cmd)
+    if (cmd) {
     tracing_stop_cmdline_record();
-    if (tgid)
+    }
+    if (tgid) {
     tracing_stop_tgid_record();
-    pr_info("event trace: Could not enable event "
+    }
+    pr_info!("event trace: Could not enable event "
     "%s\n", trace_event_name(call));
-    break;
+    // break;
     }
     set_bit(EVENT_FILE_FL_ENABLED_BIT, &file.flags);
 // WAS_ENABLED gets set but never cleared.
     set_bit(EVENT_FILE_FL_WAS_ENABLED_BIT, &file.flags);
     }
-    break;
+    // break;
+    }
     }
     return ret;
     }
-    int trace_event_enable_disable(struct trace_event_file *file,
-    int enable, int soft_disable)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn trace_event_enable_disable(file: *mut trace_event_file, enable: c_int, soft_disable: c_int) -> c_int {
     return __ftrace_event_enable_disable(file, enable, soft_disable);
     }
-    static int ftrace_event_enable_disable(struct trace_event_file *file,
-    int enable)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_event_enable_disable(file: *mut trace_event_file, enable: c_int) -> c_int {
     return __ftrace_event_enable_disable(file, enable, 0);
     }
 
@@ -867,8 +1152,6 @@ pub struct event_mod_load {
 
 #[no_mangle]
 unsafe extern "C" fn free_event_mod(event_mod: *mut event_mod_load) {
-    static void free_event_mod(struct event_mod_load *event_mod)
-    {
     list_del(&event_mod.list);
     kfree(event_mod.module);
     kfree(event_mod.match);
@@ -878,85 +1161,94 @@ unsafe extern "C" fn free_event_mod(event_mod: *mut event_mod_load) {
     }
 #[no_mangle]
 unsafe extern "C" fn clear_mod_events(tr: *mut trace_array) {
-    static void clear_mod_events(struct trace_array *tr)
-    {
-    struct event_mod_load *event_mod, *n;
+    let mut event_mod = core::ptr::null_mut();
+    let mut n = core::ptr::null_mut();
     list_for_each_entry_safe(event_mod, n, &tr.mod_events, list) {
     free_event_mod(event_mod);
     }
     }
-    static int remove_cache_mod(struct trace_array *tr, const char *mod,
-    const char *match, const char *system, const char *event)
-    {
-    struct event_mod_load *event_mod, *n;
-    let mut ret: c_int = -EINVAL;
+#[no_mangle]
+pub unsafe extern "C" fn remove_cache_mod(tr: *mut trace_array, mod: *mut c_char, match: *mut c_char, system: *mut c_char, event: *mut c_char) -> c_int {
+    let mut event_mod = core::ptr::null_mut();
+    let mut n = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     list_for_each_entry_safe(event_mod, n, &tr.mod_events, list) {
-    if (strcmp(event_mod.module, mod) != 0)
+    if (strcmp(event_mod.module, mod) != 0) {
     continue;
-    if (match && (!event_mod.match || strcmp(event_mod.match, match) != 0))
+    }
+    if (match && (!event_mod.match || strcmp(event_mod.match, match) != 0)) {
     continue;
+    }
     if (system &&
-    (!event_mod.system || strcmp(event_mod.system, system) != 0))
+    (!event_mod.system || strcmp(event_mod.system, system) != 0)) {
     continue;
+    }
     if (event &&
-    (!event_mod.event || strcmp(event_mod.event, event) != 0))
+    (!event_mod.event || strcmp(event_mod.event, event) != 0)) {
     continue;
+    }
     free_event_mod(event_mod);
     ret = 0;
     }
     return ret;
     }
-    static int cache_mod(struct trace_array *tr, const char *mod, int set,
-    const char *match, const char *system, const char *event)
-    {
-    struct event_mod_load *event_mod;
+#[no_mangle]
+pub unsafe extern "C" fn cache_mod(tr: *mut trace_array, mod: *mut c_char, set: c_int, match: *mut c_char, system: *mut c_char, event: *mut c_char) -> c_int {
+pub static mut event_mod: *mut c_void = core::ptr::null_mut();
 // If the module exists, then this just failed to find an event
-    if (module_exists(mod))
+    if (module_exists!(mod)) {
     return -EINVAL;
+    }
 // See if this is to remove a cached filter
-    if (!set)
+    if (!set) {
     return remove_cache_mod(tr, mod, match, system, event);
+    }
     event_mod = kzalloc_obj(*event_mod);
-    if (!event_mod)
+    if (!event_mod) {
     return -ENOMEM;
+    }
     INIT_LIST_HEAD(&event_mod.list);
     event_mod.module = kstrdup(mod, GFP_KERNEL);
-    if (!event_mod.module)
-    goto out_free;
+    if (!event_mod.module) {
+// goto;
+    }
     if (match) {
     event_mod.match = kstrdup(match, GFP_KERNEL);
-    if (!event_mod.match)
-    goto out_free;
+    if (!event_mod.match) {
+// goto;
+    }
     }
     if (system) {
     event_mod.system = kstrdup(system, GFP_KERNEL);
-    if (!event_mod.system)
-    goto out_free;
+    if (!event_mod.system) {
+// goto;
+    }
     }
     if (event) {
     event_mod.event = kstrdup(event, GFP_KERNEL);
-    if (!event_mod.event)
-    goto out_free;
+    if (!event_mod.event) {
+// goto;
+    }
     }
     list_add(&event_mod.list, &tr.mod_events);
     return 0;
-    out_free:
+// label;
     free_event_mod(event_mod);
     return -ENOMEM;
     }
 
-    static inline void clear_mod_events(struct trace_array *tr) { }
-    static int cache_mod(struct trace_array *tr, const char *mod, int set,
-    const char *match, const char *system, const char *event)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn clear_mod_events(tr: *mut trace_array) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: cache_mod
+pub unsafe extern "C" fn cache_mod_dup(tr: *mut trace_array, mod: *mut c_char, set: c_int, match: *mut c_char, system: *mut c_char, event: *mut c_char) -> c_int {
     return -EINVAL;
     }
 
 #[no_mangle]
 unsafe extern "C" fn ftrace_clear_events(tr: *mut trace_array) {
-    static void ftrace_clear_events(struct trace_array *tr)
-    {
-    struct trace_event_file *file;
+pub static mut file: *mut c_void = core::ptr::null_mut();
     mutex_lock(&event_mutex);
     list_for_each_entry(file, &tr.events, list) {
     ftrace_event_enable_disable(file, 0);
@@ -964,24 +1256,20 @@ unsafe extern "C" fn ftrace_clear_events(tr: *mut trace_array) {
     clear_mod_events(tr);
     mutex_unlock(&event_mutex);
     }
-    static void
-    event_filter_pid_sched_process_exit(void *data, struct task_struct *task)
-    {
-    struct trace_pid_list *pid_list;
-    struct trace_array *tr = data;
+#[no_mangle]
+pub unsafe extern "C" fn event_filter_pid_sched_process_exit(data: *mut c_void, task: *mut task_struct) {
+pub static mut pid_list: *mut c_void = core::ptr::null_mut();
+    let mut tr = data;
     guard(preempt)();
     pid_list = rcu_dereference_raw(tr.filtered_pids);
     trace_filter_add_remove_task(pid_list, core::ptr::null_mut(), task);
     pid_list = rcu_dereference_raw(tr.filtered_no_pids);
     trace_filter_add_remove_task(pid_list, core::ptr::null_mut(), task);
     }
-    static void
-    event_filter_pid_sched_process_fork(void *data,
-    struct task_struct *self,
-    struct task_struct *task)
-    {
-    struct trace_pid_list *pid_list;
-    struct trace_array *tr = data;
+#[no_mangle]
+pub unsafe extern "C" fn event_filter_pid_sched_process_fork(data: *mut c_void, self: *mut task_struct, task: *mut task_struct) {
+pub static mut pid_list: *mut c_void = core::ptr::null_mut();
+    let mut tr = data;
     guard(preempt)();
     pid_list = rcu_dereference_sched(tr.filtered_pids);
     trace_filter_add_remove_task(pid_list, self, task);
@@ -990,8 +1278,6 @@ unsafe extern "C" fn ftrace_clear_events(tr: *mut trace_array) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn trace_event_follow_fork(tr: *mut trace_array, enable: bool) {
-    void trace_event_follow_fork(struct trace_array *tr, bool enable)
-    {
     if (enable) {
     register_trace_prio_sched_process_fork(event_filter_pid_sched_process_fork,
     tr, INT_MIN);
@@ -1004,16 +1290,12 @@ pub unsafe extern "C" fn trace_event_follow_fork(tr: *mut trace_array, enable: b
     tr);
     }
     }
-    static void
-    event_filter_pid_sched_switch_probe_pre(void *data, bool preempt,
-    struct task_struct *prev,
-    struct task_struct *next,
-    unsigned int prev_state)
-    {
-    struct trace_array *tr = data;
-    struct trace_pid_list *no_pid_list;
-    struct trace_pid_list *pid_list;
-    bool ret;
+#[no_mangle]
+pub unsafe extern "C" fn event_filter_pid_sched_switch_probe_pre(data: *mut c_void, preempt: bool, prev: *mut task_struct, next: *mut task_struct, prev_state: c_uint) {
+    let mut tr = data;
+pub static mut no_pid_list: *mut c_void = core::ptr::null_mut();
+pub static mut pid_list: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     pid_list = rcu_dereference_sched(tr.filtered_pids);
     no_pid_list = rcu_dereference_sched(tr.filtered_no_pids);
 //
@@ -1026,43 +1308,39 @@ pub unsafe extern "C" fn trace_event_follow_fork(tr: *mut trace_array, enable: b
     (trace_ignore_this_task(pid_list, core::ptr::null_mut(), prev) &&
     trace_ignore_this_task(pid_list, core::ptr::null_mut(), next)));
     }
-    static void
-    event_filter_pid_sched_switch_probe_post(void *data, bool preempt,
-    struct task_struct *prev,
-    struct task_struct *next,
-    unsigned int prev_state)
-    {
-    struct trace_array *tr = data;
-    struct trace_pid_list *no_pid_list;
-    struct trace_pid_list *pid_list;
+#[no_mangle]
+pub unsafe extern "C" fn event_filter_pid_sched_switch_probe_post(data: *mut c_void, preempt: bool, prev: *mut task_struct, next: *mut task_struct, prev_state: c_uint) {
+    let mut tr = data;
+pub static mut no_pid_list: *mut c_void = core::ptr::null_mut();
+pub static mut pid_list: *mut c_void = core::ptr::null_mut();
     pid_list = rcu_dereference_sched(tr.filtered_pids);
     no_pid_list = rcu_dereference_sched(tr.filtered_no_pids);
     this_cpu_write(tr.array_buffer.data.ignore_pid,
     trace_ignore_this_task(pid_list, no_pid_list, next));
     }
-    static void
-    event_filter_pid_sched_wakeup_probe_pre(void *data, struct task_struct *task)
-    {
-    struct trace_array *tr = data;
-    struct trace_pid_list *no_pid_list;
-    struct trace_pid_list *pid_list;
+#[no_mangle]
+pub unsafe extern "C" fn event_filter_pid_sched_wakeup_probe_pre(data: *mut c_void, task: *mut task_struct) {
+    let mut tr = data;
+pub static mut no_pid_list: *mut c_void = core::ptr::null_mut();
+pub static mut pid_list: *mut c_void = core::ptr::null_mut();
 // Nothing to do if we are already tracing
-    if (!this_cpu_read(tr.array_buffer.data.ignore_pid))
+    if (!this_cpu_read(tr.array_buffer.data.ignore_pid)) {
     return;
+    }
     pid_list = rcu_dereference_sched(tr.filtered_pids);
     no_pid_list = rcu_dereference_sched(tr.filtered_no_pids);
     this_cpu_write(tr.array_buffer.data.ignore_pid,
     trace_ignore_this_task(pid_list, no_pid_list, task));
     }
-    static void
-    event_filter_pid_sched_wakeup_probe_post(void *data, struct task_struct *task)
-    {
-    struct trace_array *tr = data;
-    struct trace_pid_list *no_pid_list;
-    struct trace_pid_list *pid_list;
+#[no_mangle]
+pub unsafe extern "C" fn event_filter_pid_sched_wakeup_probe_post(data: *mut c_void, task: *mut task_struct) {
+    let mut tr = data;
+pub static mut no_pid_list: *mut c_void = core::ptr::null_mut();
+pub static mut pid_list: *mut c_void = core::ptr::null_mut();
 // Nothing to do if we are not tracing
-    if (this_cpu_read(tr.array_buffer.data.ignore_pid))
+    if (this_cpu_read(tr.array_buffer.data.ignore_pid)) {
     return;
+    }
     pid_list = rcu_dereference_sched(tr.filtered_pids);
     no_pid_list = rcu_dereference_sched(tr.filtered_no_pids);
 // Set tracing if current is enabled
@@ -1071,8 +1349,6 @@ pub unsafe extern "C" fn trace_event_follow_fork(tr: *mut trace_array, enable: b
     }
 #[no_mangle]
 unsafe extern "C" fn unregister_pid_events(tr: *mut trace_array) {
-    static void unregister_pid_events(struct trace_array *tr)
-    {
     unregister_trace_sched_switch(event_filter_pid_sched_switch_probe_pre, tr);
     unregister_trace_sched_switch(event_filter_pid_sched_switch_probe_post, tr);
     unregister_trace_sched_wakeup(event_filter_pid_sched_wakeup_probe_pre, tr);
@@ -1084,54 +1360,55 @@ unsafe extern "C" fn unregister_pid_events(tr: *mut trace_array) {
     }
 #[no_mangle]
 unsafe extern "C" fn __ftrace_clear_event_pids(tr: *mut trace_array, type: c_int) {
-    static void __ftrace_clear_event_pids(struct trace_array *tr, int type)
-    {
-    struct trace_pid_list *pid_list;
-    struct trace_pid_list *no_pid_list;
-    struct trace_event_file *file;
-    int cpu;
+pub static mut pid_list: *mut c_void = core::ptr::null_mut();
+pub static mut no_pid_list: *mut c_void = core::ptr::null_mut();
+pub static mut file: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
     pid_list = rcu_dereference_protected(tr.filtered_pids,
     lockdep_is_held(&event_mutex));
     no_pid_list = rcu_dereference_protected(tr.filtered_no_pids,
     lockdep_is_held(&event_mutex));
 // Make sure there's something to do
-    if (!pid_type_enabled(type, pid_list, no_pid_list))
+    if (!pid_type_enabled(type, pid_list, no_pid_list)) {
     return;
+    }
     if (!still_need_pid_events(type, pid_list, no_pid_list)) {
     unregister_pid_events(tr);
     list_for_each_entry(file, &tr.events, list) {
     clear_bit(EVENT_FILE_FL_PID_FILTER_BIT, &file.flags);
     }
-    for_each_possible_cpu(cpu)
+    for_each_possible_cpu(cpu) {
     per_cpu_ptr(tr.array_buffer.data, cpu).ignore_pid = false;
     }
-    if (type & TRACE_PIDS)
+    }
+    if (type & TRACE_PIDS) {
     rcu_assign_pointer(tr.filtered_pids, core::ptr::null_mut());
-    if (type & TRACE_NO_PIDS)
+    }
+    if (type & TRACE_NO_PIDS) {
     rcu_assign_pointer(tr.filtered_no_pids, core::ptr::null_mut());
+    }
 // Wait till all users are no longer using pid filtering
     tracepoint_synchronize_unregister();
-    if ((type & TRACE_PIDS) && pid_list)
+    if ((type & TRACE_PIDS) && pid_list) {
     trace_pid_list_free(pid_list);
-    if ((type & TRACE_NO_PIDS) && no_pid_list)
+    }
+    if ((type & TRACE_NO_PIDS) && no_pid_list) {
     trace_pid_list_free(no_pid_list);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_clear_event_pids(tr: *mut trace_array, type: c_int) {
-    static void ftrace_clear_event_pids(struct trace_array *tr, int type)
-    {
     mutex_lock(&event_mutex);
     __ftrace_clear_event_pids(tr, type);
     mutex_unlock(&event_mutex);
     }
 #[no_mangle]
 unsafe extern "C" fn __put_system(system: *mut event_subsystem) {
-    static void __put_system(struct event_subsystem *system)
-    {
-    struct event_filter *filter = system.filter;
-    WARN_ON_ONCE(system_refcount(system) == 0);
-    if (system_refcount_dec(system))
+    let mut filter = system.filter;
+    WARN_ON_ONCE!(system_refcount(system) == 0);
+    if (system_refcount_dec(system)) {
     return;
+    }
     list_del(&system.list);
     if (filter) {
     kfree(filter.filter_string);
@@ -1142,44 +1419,36 @@ unsafe extern "C" fn __put_system(system: *mut event_subsystem) {
     }
 #[no_mangle]
 unsafe extern "C" fn __get_system(system: *mut event_subsystem) {
-    static void __get_system(struct event_subsystem *system)
-    {
-    WARN_ON_ONCE(system_refcount(system) == 0);
+    WARN_ON_ONCE!(system_refcount(system) == 0);
     system_refcount_inc(system);
     }
 #[no_mangle]
 unsafe extern "C" fn __get_system_dir(dir: *mut trace_subsystem_dir) {
-    static void __get_system_dir(struct trace_subsystem_dir *dir)
-    {
-    WARN_ON_ONCE(dir.ref_count == 0);
-    dir.ref_count++;
+    WARN_ON_ONCE!(dir.ref_count == 0);
+    dir.ref_count += 1;
     __get_system(dir.subsystem);
     }
 #[no_mangle]
 unsafe extern "C" fn __put_system_dir(dir: *mut trace_subsystem_dir) {
-    static void __put_system_dir(struct trace_subsystem_dir *dir)
-    {
-    WARN_ON_ONCE(dir.ref_count == 0);
+    WARN_ON_ONCE!(dir.ref_count == 0);
 // If the subsystem is about to be freed, the dir must be too
-    WARN_ON_ONCE(system_refcount(dir.subsystem) == 1 && dir.ref_count != 1);
+    WARN_ON_ONCE!(system_refcount(dir.subsystem) == 1 && dir.ref_count != 1);
     __put_system(dir.subsystem);
-    if (!--dir.ref_count)
+    if (!--dir.ref_count) {
     kfree(dir);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn put_system(dir: *mut trace_subsystem_dir) {
-    static void put_system(struct trace_subsystem_dir *dir)
-    {
     mutex_lock(&event_mutex);
     __put_system_dir(dir);
     mutex_unlock(&event_mutex);
     }
 #[no_mangle]
 unsafe extern "C" fn remove_subsystem(dir: *mut trace_subsystem_dir) {
-    static void remove_subsystem(struct trace_subsystem_dir *dir)
-    {
-    if (!dir)
+    if (!dir) {
     return;
+    }
     if (!--dir.nr_events) {
     eventfs_remove_dir(dir.ei);
     list_del(&dir.list);
@@ -1188,30 +1457,26 @@ unsafe extern "C" fn remove_subsystem(dir: *mut trace_subsystem_dir) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn event_file_get(file: *mut trace_event_file) {
-    void event_file_get(struct trace_event_file *file)
-    {
     refcount_inc(&file.ref);
     }
 #[no_mangle]
 pub unsafe extern "C" fn event_file_put(file: *mut trace_event_file) {
-    void event_file_put(struct trace_event_file *file)
-    {
-    if (WARN_ON_ONCE(!refcount_read(&file.ref))) {
-    if (file.flags & EVENT_FILE_FL_FREED)
+    if (WARN_ON_ONCE!(!refcount_read(&file.ref))) {
+    if (file.flags & EVENT_FILE_FL_FREED) {
     kmem_cache_free(file_cachep, file);
+    }
     return;
     }
     if (refcount_dec_and_test(&file.ref)) {
 // Count should only go to zero when it is freed
-    if (WARN_ON_ONCE(!(file.flags & EVENT_FILE_FL_FREED)))
+    if (WARN_ON_ONCE!(!(file.flags & EVENT_FILE_FL_FREED))) {
     return;
+    }
     kmem_cache_free(file_cachep, file);
     }
     }
 #[no_mangle]
 unsafe extern "C" fn remove_event_file_dir(file: *mut trace_event_file) {
-    static void remove_event_file_dir(struct trace_event_file *file)
-    {
     eventfs_remove_dir(file.ei);
     list_del(&file.list);
     remove_subsystem(file.system);
@@ -1224,71 +1489,77 @@ unsafe extern "C" fn remove_event_file_dir(file: *mut trace_event_file) {
 //
 // __ftrace_set_clr_event(NULL, NULL, NULL, set) will set/unset all events.
 //
-    static int
-    __ftrace_set_clr_event_nolock(struct trace_array *tr, const char *match,
-    const char *sub, const char *event, int set,
-    const char *mod)
-    {
-    struct trace_event_file *file;
-    struct trace_event_call *call;
+#[no_mangle]
+pub unsafe extern "C" fn __ftrace_set_clr_event_nolock(tr: *mut trace_array, match: *mut c_char, sub: *mut c_char, event: *mut c_char, set: c_int, mod: *mut c_char) -> c_int {
+pub static mut file: *mut c_void = core::ptr::null_mut();
+pub static mut call: *mut c_void = core::ptr::null_mut();
     char *module __free(kfree) = core::ptr::null_mut();
-    const char *name;
-    let mut ret: c_int = -EINVAL;
-    let mut eret: c_int = 0;
+pub static mut name: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
+pub static mut eret: c_int = 0;
     if (mod) {
-    char *p;
+pub static mut p: *mut c_void = core::ptr::null_mut();
     module = kstrdup(mod, GFP_KERNEL);
-    if (!module)
+    if (!module) {
     return -ENOMEM;
+    }
 // Replace all '-' with '_' as that's what modules do
-    for (p = strchr(module, '-'); p; p = strchr(p + 1, '-'))
+    for (p = strchr(module, '-'); p; p = strchr(p + 1, '-')) {
 // p = '_';
+    }
     }
     list_for_each_entry(file, &tr.events, list) {
     call = file.event_call;
 // If a module is specified, skip events that are not that module
     if (module &&
     ((call.flags & TRACE_EVENT_FL_DYNAMIC) ||
-    !call.module || strcmp(module_name(call.module), module)))
+    !call.module || strcmp(module_name!(call.module), module))) {
     continue;
+    }
     name = trace_event_name(call);
-    if (!name || !call.class || !call.class.reg)
+    if (!name || !call.class || !call.class.reg) {
     continue;
-    if (call.flags & TRACE_EVENT_FL_IGNORE_ENABLE)
+    }
+    if (call.flags & TRACE_EVENT_FL_IGNORE_ENABLE) {
     continue;
+    }
     if (match &&
     strcmp(match, name) != 0 &&
-    strcmp(match, call.class.system) != 0)
+    strcmp(match, call.class.system) != 0) {
     continue;
-    if (sub && strcmp(sub, call.class.system) != 0)
+    }
+    if (sub && strcmp(sub, call.class.system) != 0) {
     continue;
-    if (event && strcmp(event, name) != 0)
+    }
+    if (event && strcmp(event, name) != 0) {
     continue;
+    }
     ret = ftrace_event_enable_disable(file, set);
 //
 // Save the first error and return that. Some events
 // may still have been enabled, but let the user
 // know that something went wrong.
 //
-    if (ret && !eret)
+    if (ret && !eret) {
     eret = ret;
+    }
     ret = eret;
     }
 //
 // If this is a module setting and nothing was found,
 // check if the module was loaded. If it wasn't cache it.
 //
-    if (module && ret == -EINVAL && !eret)
+    if (module && ret == -EINVAL && !eret) {
     ret = cache_mod(tr, module, set, match, sub, event);
+    }
     return ret;
     }
-    static int __ftrace_set_clr_event(struct trace_array *tr, const char *match,
-    const char *sub, const char *event, int set,
-    const char *mod)
-    {
-    int ret;
-    if (trace_array_is_readonly(tr))
+#[no_mangle]
+pub unsafe extern "C" fn __ftrace_set_clr_event(tr: *mut trace_array, match: *mut c_char, sub: *mut c_char, event: *mut c_char, set: c_int, mod: *mut c_char) -> c_int {
+    let mut ret = 0;
+    if (trace_array_is_readonly(tr)) {
     return -EACCES;
+    }
     mutex_lock(&event_mutex);
     ret = __ftrace_set_clr_event_nolock(tr, match, sub, event, set, mod);
     mutex_unlock(&event_mutex);
@@ -1296,12 +1567,11 @@ unsafe extern "C" fn remove_event_file_dir(file: *mut trace_event_file) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_set_clr_event(tr: *mut trace_array, buf: *mut c_char, set: c_int) -> c_int {
-    int ftrace_set_clr_event(struct trace_array *tr, char *buf, int set)
-    {
-    char *event = core::ptr::null_mut(), *sub = core::ptr::null_mut(), *match, *mod;
-    int ret;
-    if (!tr)
+    let mut event = core::ptr::null_mut(), *sub = core::ptr::null_mut(), *match, *mod;
+    let mut ret = 0;
+    if (!tr) {
     return -ENOENT;
+    }
 // Modules events can be appended with :mod:<module>
     mod = strstr(buf, ":mod:");
     if (mod) {
@@ -1325,19 +1595,23 @@ pub unsafe extern "C" fn ftrace_set_clr_event(tr: *mut trace_array, buf: *mut c_
     sub = match;
     event = buf;
     match = core::ptr::null_mut();
-    if (!strlen(sub) || strcmp(sub, "*") == 0)
+    if (!strlen(sub) || strcmp(sub, "*") == 0) {
     sub = core::ptr::null_mut();
-    if (!strlen(event) || strcmp(event, "*") == 0)
+    }
+    if (!strlen(event) || strcmp(event, "*") == 0) {
     event = core::ptr::null_mut();
+    }
     } else if (mod) {
 // Allow wildcard for no length or star
-    if (!strlen(match) || strcmp(match, "*") == 0)
+    if (!strlen(match) || strcmp(match, "*") == 0) {
     match = core::ptr::null_mut();
+    }
     }
     ret = __ftrace_set_clr_event(tr, match, sub, event, set, mod);
 // Put back the colon to allow this to be called again
-    if (buf)
+    if (buf) {
 // (buf - 1) = ':';
+    }
     return ret;
     }
 //
@@ -1354,11 +1628,10 @@ pub unsafe extern "C" fn ftrace_set_clr_event(tr: *mut trace_array, buf: *mut c_
 //
 #[no_mangle]
 pub unsafe extern "C" fn trace_set_clr_event(system: *const c_char, event: *const c_char, set: c_int) -> c_int {
-    int trace_set_clr_event(const char *system, const char *event, int set)
-    {
-    struct trace_array *tr = top_trace_array();
-    if (!tr)
+    let mut tr = top_trace_array();
+    if (!tr) {
     return -ENODEV;
+    }
     return __ftrace_set_clr_event(tr, core::ptr::null_mut(), system, event, set, core::ptr::null_mut());
     }
     EXPORT_SYMBOL_GPL(trace_set_clr_event);
@@ -1375,53 +1648,55 @@ pub unsafe extern "C" fn trace_set_clr_event(system: *const c_char, event: *cons
 // Returns 0 on success, -EINVAL if the parameters do not match any
 // registered events.
 //
-    int trace_array_set_clr_event(struct trace_array *tr, const char *system,
-    const char *event, bool enable)
-    {
-    int set;
-    if (!tr)
+#[no_mangle]
+pub unsafe extern "C" fn trace_array_set_clr_event(tr: *mut trace_array, system: *mut c_char, event: *mut c_char, enable: bool) -> c_int {
+    let mut set = 0;
+    if (!tr) {
     return -ENOENT;
+    }
     set = (enable == true) ? 1 : 0;
     return __ftrace_set_clr_event(tr, core::ptr::null_mut(), system, event, set, core::ptr::null_mut());
     }
     EXPORT_SYMBOL_GPL(trace_array_set_clr_event);
 // 128 should be much more than enough
 pub const EVENT_BUF_SIZE: c_int = 127;
-    static ssize_t
-    ftrace_event_write(struct file *file, const char __user *ubuf,
-    size_t cnt, loff_t *ppos)
-    {
-    struct trace_parser parser;
-    struct seq_file *m = file.private_data;
-    struct trace_array *tr = m.private;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_event_write(file: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
+pub static mut parser: usize = 0;
+    let mut m = file.private_data;
+    let mut tr = m.private;
     ssize_t read, ret;
-    if (!cnt)
+    if (!cnt) {
     return 0;
+    }
     ret = tracing_update_buffers(tr);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
-    if (trace_parser_get_init(&parser, EVENT_BUF_SIZE + 1))
+    }
+    if (trace_parser_get_init(&parser, EVENT_BUF_SIZE + 1)) {
     return -ENOMEM;
+    }
     read = trace_get_user(&parser, ubuf, cnt, ppos);
     if (read >= 0 && trace_parser_loaded((&parser))) {
-    let mut set: c_int = 1;
-    if (*parser.buffer == '!')
+pub static mut set: c_int = 1;
+    if (*parser.buffer == '!') {
     set = 0;
+    }
     ret = ftrace_set_clr_event(tr, parser.buffer + !set, set);
-    if (ret)
-    goto out_put;
+    if (ret) {
+// goto;
+    }
     }
     ret = read;
-    out_put:
+// label;
     trace_parser_put(&parser);
     return ret;
     }
-    static void *
-    t_next(struct seq_file *m, void *v, loff_t *pos)
-    {
-    struct trace_event_file *file = v;
-    struct trace_event_call *call;
-    struct trace_array *tr = m.private;
+#[no_mangle]
+pub unsafe extern "C" fn t_next(m: *mut seq_file, v: *mut c_void, pos: *mut loff_t) -> *mut c_void {
+    let mut file = v;
+pub static mut call: *mut c_void = core::ptr::null_mut();
+    let mut tr = m.private;
     (*pos)++;
     list_for_each_entry_continue(file, &tr.events, list) {
     call = file.event_call;
@@ -1430,22 +1705,24 @@ pub const EVENT_BUF_SIZE: c_int = 127;
 // They can not be enabled or disabled via the event files.
 //
     if (call.class && call.class.reg &&
-    !(call.flags & TRACE_EVENT_FL_IGNORE_ENABLE))
+    !(call.flags & TRACE_EVENT_FL_IGNORE_ENABLE)) {
     return file;
+    }
     }
     return core::ptr::null_mut();
     }
-    static void *t_start(struct seq_file *m, loff_t *pos)
-    {
-    struct trace_event_file *file;
-    struct trace_array *tr = m.private;
-    loff_t l;
+#[no_mangle]
+pub unsafe extern "C" fn t_start(m: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
+pub static mut file: *mut c_void = core::ptr::null_mut();
+    let mut tr = m.private;
+    let mut l = 0;
     mutex_lock(&event_mutex);
-    file = list_entry(&tr.events, struct trace_event_file, list);
-    for (l = 0; l <= *pos; ) {
+    file = list_entry(&tr.events, trace_event_file, list);
+    while (l <= *pos) {
     file = t_next(m, file, &l);
-    if (!file)
+    if (!file) {
     break;
+    }
     }
     return file;
     }
@@ -1456,19 +1733,18 @@ pub const EVENT_BUF_SIZE: c_int = 127;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct set_event_iter {
-    pub type: enum set_event_iter_type,
+    pub type: set_event_iter_type,
     union {
     pub file: *mut trace_event_file,
     pub event_mod: *mut event_mod_load,
 }
 
     };
-    static void *
-    s_next(struct seq_file *m, void *v, loff_t *pos)
-    {
-    struct set_event_iter *iter = v;
-    struct trace_event_file *file;
-    struct trace_array *tr = m.private;
+#[no_mangle]
+pub unsafe extern "C" fn s_next(m: *mut seq_file, v: *mut c_void, pos: *mut loff_t) -> *mut c_void {
+    let mut iter = v;
+pub static mut file: *mut c_void = core::ptr::null_mut();
+    let mut tr = m.private;
     (*pos)++;
     if (iter.type == SET_EVENT_FILE) {
     file = iter.file;
@@ -1480,12 +1756,13 @@ pub struct set_event_iter {
     }
 
     iter.type = SET_EVENT_MOD;
-    iter.event_mod = list_entry(&tr.mod_events, struct event_mod_load, list);
+    iter.event_mod = list_entry(&tr.mod_events, event_mod_load, list);
 
     }
 
-    list_for_each_entry_continue(iter.event_mod, &tr.mod_events, list)
+    list_for_each_entry_continue(iter.event_mod, &tr.mod_events, list) {
     return iter;
+    }
 
 //
 // The iter is allocated in s_start() and passed via the 'v'
@@ -1496,46 +1773,43 @@ pub struct set_event_iter {
     kfree(iter);
     return core::ptr::null_mut();
     }
-    static void *s_start(struct seq_file *m, loff_t *pos)
-    {
-    struct trace_array *tr = m.private;
-    struct set_event_iter *iter;
-    loff_t l;
+#[no_mangle]
+pub unsafe extern "C" fn s_start(m: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
+    let mut tr = m.private;
+pub static mut iter: *mut c_void = core::ptr::null_mut();
+    let mut l = 0;
     iter = kzalloc_obj(*iter);
     mutex_lock(&event_mutex);
-    if (!iter)
+    if (!iter) {
     return core::ptr::null_mut();
+    }
     iter.type = SET_EVENT_FILE;
-    iter.file = list_entry(&tr.events, struct trace_event_file, list);
-    for (l = 0; l <= *pos; ) {
+    iter.file = list_entry(&tr.events, trace_event_file, list);
+    while (l <= *pos) {
     iter = s_next(m, iter, &l);
-    if (!iter)
+    if (!iter) {
     break;
+    }
     }
     return iter;
     }
 #[no_mangle]
 unsafe extern "C" fn t_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int t_show(struct seq_file *m, void *v)
-    {
-    struct trace_event_file *file = v;
-    struct trace_event_call *call = file.event_call;
-    if (strcmp(call.class.system, TRACE_SYSTEM) != 0)
+    let mut file = v;
+    let mut call = file.event_call;
+    if (strcmp(call.class.system, TRACE_SYSTEM) != 0) {
     seq_printf(m, "%s:", call.class.system);
+    }
     seq_printf(m, "%s\n", trace_event_name(call));
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn t_stop(m: *mut seq_file, p: *mut c_void) {
-    static void t_stop(struct seq_file *m, void *p)
-    {
     mutex_unlock(&event_mutex);
     }
 #[no_mangle]
 unsafe extern "C" fn get_call_len(call: *mut trace_event_call) -> c_int {
-    static int get_call_len(struct trace_event_call *call)
-    {
-    int len;
+    let mut len = 0;
 // Get the length of "<system>:<event>"
     len = strlen(call.class.system) + 1;
     len += strlen(trace_event_name(call));
@@ -1553,16 +1827,15 @@ unsafe extern "C" fn get_call_len(call: *mut trace_event_call) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn t_show_filters(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int t_show_filters(struct seq_file *m, void *v)
-    {
-    struct trace_event_file *file = v;
-    struct trace_event_call *call = file.event_call;
-    struct event_filter *filter;
-    int len;
+    let mut file = v;
+    let mut call = file.event_call;
+pub static mut filter: *mut c_void = core::ptr::null_mut();
+    let mut len = 0;
     guard(rcu)();
     filter = rcu_dereference(file.filter);
-    if (!filter || !filter.filter_string)
+    if (!filter || !filter.filter_string) {
     return 0;
+    }
     len = get_call_len(call);
     seq_printf(m, "%s:%s%*s%s\n", call.class.system,
     trace_event_name(call), len, "", filter.filter_string);
@@ -1579,18 +1852,17 @@ unsafe extern "C" fn t_show_filters(m: *mut seq_file, v: *mut c_void) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn t_show_triggers(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int t_show_triggers(struct seq_file *m, void *v)
-    {
-    struct trace_event_file *file = v;
-    struct trace_event_call *call = file.event_call;
-    struct event_trigger_data *data;
-    int len;
+    let mut file = v;
+    let mut call = file.event_call;
+pub static mut data: *mut c_void = core::ptr::null_mut();
+    let mut len = 0;
 //
 // The event_mutex is held by t_start(), protecting the
 // file->triggers list traversal.
 //
-    if (list_empty(&file.triggers))
+    if (list_empty(&file.triggers)) {
     return 0;
+    }
     len = get_call_len(call);
     list_for_each_entry_rcu(data, &file.triggers, list) {
     seq_printf(m, "%s:%s%*s", call.class.system,
@@ -1602,13 +1874,12 @@ unsafe extern "C" fn t_show_triggers(m: *mut seq_file, v: *mut c_void) -> c_int 
 
 #[no_mangle]
 unsafe extern "C" fn s_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int s_show(struct seq_file *m, void *v)
-    {
-    struct set_event_iter *iter = v;
-    const char *system;
-    const char *event;
-    if (iter.type == SET_EVENT_FILE)
+    let mut iter = v;
+pub static mut system: *mut c_void = core::ptr::null_mut();
+pub static mut event: *mut c_void = core::ptr::null_mut();
+    if (iter.type == SET_EVENT_FILE) {
     return t_show(m, iter.file);
+    }
 // When match is set, system and event are not
     if (iter.event_mod.match) {
     seq_printf(m, "%s:mod:%s\n", iter.event_mod.match,
@@ -1623,45 +1894,40 @@ unsafe extern "C" fn s_show(m: *mut seq_file, v: *mut c_void) -> c_int {
 
 #[no_mangle]
 unsafe extern "C" fn s_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int s_show(struct seq_file *m, void *v)
-    {
-    struct set_event_iter *iter = v;
+    let mut iter = v;
     return t_show(m, iter.file);
     }
 
 #[no_mangle]
 unsafe extern "C" fn s_stop(m: *mut seq_file, v: *mut c_void) {
-    static void s_stop(struct seq_file *m, void *v)
-    {
     kfree(v);
     t_stop(m, core::ptr::null_mut());
     }
-    static void *
-    __next(struct seq_file *m, void *v, loff_t *pos, int type)
-    {
-    struct trace_array *tr = m.private;
-    struct trace_pid_list *pid_list;
-    if (type == TRACE_PIDS)
+#[no_mangle]
+pub unsafe extern "C" fn __next(m: *mut seq_file, v: *mut c_void, pos: *mut loff_t, type: c_int) -> *mut c_void {
+    let mut tr = m.private;
+pub static mut pid_list: *mut c_void = core::ptr::null_mut();
+    if (type == TRACE_PIDS) {
     pid_list = rcu_dereference_sched(tr.filtered_pids);
-    else
+    }
+    else {
     pid_list = rcu_dereference_sched(tr.filtered_no_pids);
+    }
     return trace_pid_next(pid_list, v, pos);
     }
-    static void *
-    p_next(struct seq_file *m, void *v, loff_t *pos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn p_next(m: *mut seq_file, v: *mut c_void, pos: *mut loff_t) -> *mut c_void {
     return __next(m, v, pos, TRACE_PIDS);
     }
-    static void *
-    np_next(struct seq_file *m, void *v, loff_t *pos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn np_next(m: *mut seq_file, v: *mut c_void, pos: *mut loff_t) -> *mut c_void {
     return __next(m, v, pos, TRACE_NO_PIDS);
     }
-    static void *__start(struct seq_file *m, loff_t *pos, int type)
-    __acquires(RCU)
-    {
-    struct trace_pid_list *pid_list;
-    struct trace_array *tr = m.private;
+#[no_mangle]
+pub unsafe extern "C" fn __start(m: *mut seq_file, pos: *mut loff_t, RCU: int type)
+    __acquires() -> *mut c_void {
+pub static mut pid_list: *mut c_void = core::ptr::null_mut();
+    let mut tr = m.private;
 //
 // Grab the mutex, to keep calls to p_next() having the same
 // tr->filtered_pids as p_start() has.
@@ -1670,80 +1936,87 @@ unsafe extern "C" fn s_stop(m: *mut seq_file, v: *mut c_void) {
 //
     mutex_lock(&event_mutex);
     rcu_read_lock_sched();
-    if (type == TRACE_PIDS)
+    if (type == TRACE_PIDS) {
     pid_list = rcu_dereference_sched(tr.filtered_pids);
-    else
+    }
+    else {
     pid_list = rcu_dereference_sched(tr.filtered_no_pids);
-    if (!pid_list)
+    }
+    if (!pid_list) {
     return core::ptr::null_mut();
+    }
     return trace_pid_start(pid_list, pos);
     }
-    static void *p_start(struct seq_file *m, loff_t *pos)
-    __acquires(RCU)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn p_start(m: *mut seq_file, RCU: *mut loff_tpos)
+    __acquires() -> *mut c_void {
     return __start(m, pos, TRACE_PIDS);
     }
-    static void *np_start(struct seq_file *m, loff_t *pos)
-    __acquires(RCU)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn np_start(m: *mut seq_file, RCU: *mut loff_tpos)
+    __acquires() -> *mut c_void {
     return __start(m, pos, TRACE_NO_PIDS);
     }
 #[no_mangle]
 unsafe extern "C" fn p_stop(m: *mut seq_file, p: *mut c_void) {
-    static void p_stop(struct seq_file *m, void *p)
-    __releases(RCU)
-    {
     rcu_read_unlock_sched();
     mutex_unlock(&event_mutex);
     }
-    static ssize_t
-    event_enable_read(struct file *filp, char __user *ubuf, size_t cnt,
-    loff_t *ppos)
-    {
-    struct trace_event_file *file;
-    unsigned long flags;
+#[no_mangle]
+pub unsafe extern "C" fn event_enable_read(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
+pub static mut file: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
     char buf[4] = "0";
     mutex_lock(&event_mutex);
     file = event_file_file(filp);
-    if (likely(file))
+    if (likely(file)) {
     flags = file.flags;
+    }
     mutex_unlock(&event_mutex);
-    if (!file)
+    if (!file) {
     return -ENODEV;
+    }
     if (flags & EVENT_FILE_FL_ENABLED &&
-    !(flags & EVENT_FILE_FL_SOFT_DISABLED))
+    !(flags & EVENT_FILE_FL_SOFT_DISABLED)) {
     strcpy(buf, "1");
-    if (atomic_read(&file.sm_ref) != 0)
+    }
+    if (atomic_read(&file.sm_ref) != 0) {
     strcat(buf, "*");
+    }
     strcat(buf, "\n");
     return simple_read_from_buffer(ubuf, cnt, ppos, buf, strlen(buf));
     }
-    static ssize_t
-    event_enable_write(struct file *filp, const char __user *ubuf, size_t cnt,
-    loff_t *ppos)
-    {
-    struct trace_event_file *file;
-    unsigned long val;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn event_enable_write(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
+pub static mut file: *mut c_void = core::ptr::null_mut();
+    let mut val = 0;
+    let mut ret = 0;
     ret = kstrtoul_from_user(ubuf, cnt, 10, &val);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     guard(mutex)(&event_mutex);
-    switch (val) {
-    case 0:
-    case 1:
+    match (val) {
+    0 => {
+    }
+    1 => {
     file = event_file_file(filp);
-    if (!file)
+    if (!file) {
     return -ENODEV;
+    }
     ret = tracing_update_buffers(file.tr);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     ret = ftrace_event_enable_disable(file, val);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
-    break;
-    default:
+    }
+    // break;
+    }
+    _ => {
     return -EINVAL;
+    }
     }
 // ppos += cnt;
     return cnt;
@@ -1757,19 +2030,19 @@ unsafe extern "C" fn p_stop(m: *mut seq_file, p: *mut c_void) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn trace_events_enabled(tr: *mut trace_array, system: *const c_char) -> c_int {
-    int trace_events_enabled(struct trace_array *tr, const char *system)
-    {
-    struct trace_event_call *call;
-    struct trace_event_file *file;
-    let mut set: c_int = 0;
+pub static mut call: *mut c_void = core::ptr::null_mut();
+pub static mut file: *mut c_void = core::ptr::null_mut();
+pub static mut set: c_int = 0;
     guard(mutex)(&event_mutex);
     list_for_each_entry(file, &tr.events, list) {
     call = file.event_call;
     if ((call.flags & TRACE_EVENT_FL_IGNORE_ENABLE) ||
-    !trace_event_name(call) || !call.class || !call.class.reg)
+    !trace_event_name(call) || !call.class || !call.class.reg) {
     continue;
-    if (system && strcmp(call.class.system, system) != 0)
+    }
+    if (system && strcmp(call.class.system, system) != 0) {
     continue;
+    }
 //
 // We need to find out if all the events are set
 // or if all events or cleared, or if we have
@@ -1779,56 +2052,58 @@ pub unsafe extern "C" fn trace_events_enabled(tr: *mut trace_array, system: *con
 //
 // If we have a mixture, no need to look further.
 //
-    if (set == 3)
+    if (set == 3) {
     break;
+    }
     }
     return set;
     }
-    static ssize_t
-    system_enable_read(struct file *filp, char __user *ubuf, size_t cnt,
-    loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn system_enable_read(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
     const char set_to_char[4] = { '?', '0', '1', 'X' };
-    struct trace_subsystem_dir *dir = filp.private_data;
-    struct event_subsystem *system = dir.subsystem;
-    struct trace_array *tr = dir.tr;
+    let mut dir = filp.private_data;
+    let mut system = dir.subsystem;
+    let mut tr = dir.tr;
     char buf[2];
-    int set;
-    int ret;
+    let mut set = 0;
+    let mut ret = 0;
     set = trace_events_enabled(tr, system ? system.name : core::ptr::null_mut());
     buf[0] = set_to_char[set];
     buf[1] = '\n';
     ret = simple_read_from_buffer(ubuf, cnt, ppos, buf, 2);
     return ret;
     }
-    static ssize_t
-    system_enable_write(struct file *filp, const char __user *ubuf, size_t cnt,
-    loff_t *ppos)
-    {
-    struct trace_subsystem_dir *dir = filp.private_data;
-    struct event_subsystem *system = dir.subsystem;
-    const char *name = core::ptr::null_mut();
-    unsigned long val;
-    ssize_t ret;
+#[no_mangle]
+pub unsafe extern "C" fn system_enable_write(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
+    let mut dir = filp.private_data;
+    let mut system = dir.subsystem;
+    let mut name = core::ptr::null_mut();
+    let mut val = 0;
+    let mut ret = 0;
     ret = kstrtoul_from_user(ubuf, cnt, 10, &val);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     ret = tracing_update_buffers(dir.tr);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
-    if (val != 0 && val != 1)
+    }
+    if (val != 0 && val != 1) {
     return -EINVAL;
+    }
 //
 // Opening of "enable" adds a ref count to system,
 // so the name is safe to use.
 //
-    if (system)
+    if (system) {
     name = system.name;
+    }
     ret = __ftrace_set_clr_event(dir.tr, core::ptr::null_mut(), name, core::ptr::null_mut(), val, core::ptr::null_mut());
-    if (ret)
-    goto out;
+    if (ret) {
+// goto;
+    }
     ret = cnt;
-    out:
+// label;
 // ppos += cnt;
     return ret;
     }
@@ -1837,13 +2112,13 @@ pub unsafe extern "C" fn trace_events_enabled(tr: *mut trace_array, system: *con
     FORMAT_FIELD_SEPERATOR	= 2,
     FORMAT_PRINTFMT		= 3,
     };
-    static void *f_next(struct seq_file *m, void *v, loff_t *pos)
-    {
-    struct trace_event_file *file = event_file_data(m.private);
-    struct trace_event_call *call = file.event_call;
-    struct list_head *common_head = &ftrace_common_fields;
-    struct list_head *head = trace_get_fields(call);
-    struct list_head *node = v;
+#[no_mangle]
+pub unsafe extern "C" fn f_next(m: *mut seq_file, v: *mut c_void, pos: *mut loff_t) -> *mut c_void {
+    let mut file = event_file_data(m.private);
+    let mut call = file.event_call;
+    let mut common_head = &ftrace_common_fields;
+    let mut head = trace_get_fields(call);
+    let mut node = v;
     (*pos)++;
     switch ((unsigned long)v) {
     case FORMAT_HEADER:
@@ -1857,23 +2132,23 @@ pub unsafe extern "C" fn trace_events_enabled(tr: *mut trace_array, system: *con
     return core::ptr::null_mut();
     }
     node = node.prev;
-    if (node == common_head)
-    return (void *)FORMAT_FIELD_SEPERATOR;
-#[no_mangle]
-pub unsafe extern "C" fn if(head: node ==) -> else {
-    else if (node == head)
-    return (void *)FORMAT_PRINTFMT;
-    else
+    if (node == common_head) {
+    return FORMAT_FIELD_SEPERATOR;
+    }
+
+    else if (node == head) {
+    return FORMAT_PRINTFMT;
+    }
+    else {
     return node;
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn f_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int f_show(struct seq_file *m, void *v)
-    {
-    struct trace_event_file *file = event_file_data(m.private);
-    struct trace_event_call *call = file.event_call;
-    struct ftrace_event_field *field;
-    const char *array_descriptor;
+    let mut file = event_file_data(m.private);
+    let mut call = file.event_call;
+pub static mut field: *mut c_void = core::ptr::null_mut();
+pub static mut array_descriptor: *mut c_void = core::ptr::null_mut();
     switch ((unsigned long)v) {
     case FORMAT_HEADER:
     seq_printf(m, "name: %s\n", trace_event_name(call));
@@ -1888,7 +2163,7 @@ unsafe extern "C" fn f_show(m: *mut seq_file, v: *mut c_void) -> c_int {
     call.print_fmt);
     return 0;
     }
-    field = list_entry(v, struct ftrace_event_field, link);
+    field = list_entry(v, ftrace_event_field, link);
 //
 // Smartly shows the array type(except dynamic array).
 // Normal:
@@ -1897,106 +2172,105 @@ unsafe extern "C" fn f_show(m: *mut seq_file, v: *mut c_void) -> c_int {
 // field:TYPE VAR[LEN]
 //
     array_descriptor = strchr(field.type, '[');
-    if (str_has_prefix(field.type, "__data_loc"))
+    if (str_has_prefix(field.type, "__data_loc")) {
     array_descriptor = core::ptr::null_mut();
-    if (!array_descriptor)
+    }
+    if (!array_descriptor) {
     seq_printf(m, "\tfield:%s %s;\toffset:%u;\tsize:%u;\tsigned:%d;\n",
+    }
     field.type, field.name, field.offset,
     field.size, !!field.is_signed);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: field->len) -> else {
-    else if (field.len)
+
+    else if (field.len) {
     seq_printf(m, "\tfield:%.*s %s[%d];\toffset:%u;\tsize:%u;\tsigned:%d;\n",
+    }
     (int)(array_descriptor - field.type),
     field.type, field.name,
     field.len, field.offset,
     field.size, !!field.is_signed);
-    else
+    else {
     seq_printf(m, "\tfield:%.*s %s[];\toffset:%u;\tsize:%u;\tsigned:%d;\n",
+    }
     (int)(array_descriptor - field.type),
     field.type, field.name,
     field.offset, field.size, !!field.is_signed);
     return 0;
     }
-    static void *f_start(struct seq_file *m, loff_t *pos)
-    {
-    struct trace_event_file *file;
-    void *p = (void *)FORMAT_HEADER;
-    let mut l: loff_t = 0;
+#[no_mangle]
+pub unsafe extern "C" fn f_start(m: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
+pub static mut file: *mut c_void = core::ptr::null_mut();
+    let mut p = FORMAT_HEADER;
+pub static mut l: loff_t = 0;
 // ->stop() is called even if ->start() fails
     mutex_lock(&event_mutex);
     file = event_file_file(m.private);
-    if (!file)
+    if (!file) {
     return ERR_PTR(-ENODEV);
-    while (l < *pos && p)
+    }
+    while (l < *pos && p) {
     p = f_next(m, p, &l);
+    }
     return p;
     }
 #[no_mangle]
 unsafe extern "C" fn f_stop(m: *mut seq_file, p: *mut c_void) {
-    static void f_stop(struct seq_file *m, void *p)
-    {
     mutex_unlock(&event_mutex);
     }
-    static const struct seq_operations trace_format_seq_ops = {
-    .start		= f_start,
-    .next		= f_next,
-    .stop		= f_stop,
-    .show		= f_show,
-    };
+pub static mut seq_operations: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn trace_format_open(inode: *mut inode, file: *mut file) -> c_int {
-    static int trace_format_open(struct inode *inode, struct file *file)
-    {
-    struct seq_file *m;
-    int ret;
+pub static mut m: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
 // Do we want to hide event format files on tracefs lockdown?
     ret = seq_open(file, &trace_format_seq_ops);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     m = file.private_data;
     m.private = file;
     return 0;
     }
 
-    static ssize_t
-    event_id_read(struct file *filp, char __user *ubuf, size_t cnt, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn event_id_read(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
 // id is directly in i_private and available for inode's lifetime.
-    let mut id: c_int = (long)file_inode(filp).i_private;
+pub static mut id: c_int = 0;
     char buf[32];
-    int len;
-    WARN_ON(!id);
+    let mut len = 0;
+    WARN_ON!(!id);
     len = sprintf(buf, "%d\n", id);
     return simple_read_from_buffer(ubuf, cnt, ppos, buf, len);
     }
 
-    static ssize_t
-    event_btf_ids_read(struct file *filp, char __user *ubuf, size_t cnt, loff_t *ppos)
-    {
-    struct trace_event_file *file;
-    struct trace_event_call *call;
-    const struct btf_type *t;
-    struct module *mod = core::ptr::null_mut();
-    let mut raw_id: u32 = 0, tp_id = 0, obj_id = 0;
-    const u32 *ids;
-    struct btf *btf;
+#[no_mangle]
+pub unsafe extern "C" fn event_btf_ids_read(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
+pub static mut file: *mut c_void = core::ptr::null_mut();
+pub static mut call: *mut c_void = core::ptr::null_mut();
+pub static mut t: *mut c_void = core::ptr::null_mut();
+    let mut mod = core::ptr::null_mut();
+pub static mut raw_id: u32 = 0;
+pub static mut ids: *mut c_void = core::ptr::null_mut();
+pub static mut btf: *mut c_void = core::ptr::null_mut();
     char buf[128];
-    int len;
+    let mut len = 0;
 // Module unload could free call->class and ids[] mid-read.
     scoped_guard(mutex, &event_mutex) {
     file = event_file_file(filp);
-    if (!file)
+    if (!file) {
     return -ENODEV;
+    }
     call = file.event_call;
     ids = call.class.btf_ids;
-    if (!ids)
+    if (!ids) {
     return -ENOENT;
-    if (!(call.flags & TRACE_EVENT_FL_DYNAMIC))
-    mod = (struct module *)call.module;
+    }
+    if (!(call.flags & TRACE_EVENT_FL_DYNAMIC)) {
+    mod = call.module;
+    }
     btf = btf_get_module_btf(mod);
-    if (IS_ERR_OR_NULL(btf))
+    if (IS_ERR_OR_NULL(btf)) {
     return -ENOENT;
+    }
 // Module-local ids in ids[] need base+local relocation.
     tp_id = btf_relocate_id(btf, ids[1]);
 //
@@ -2011,70 +2285,73 @@ unsafe extern "C" fn trace_format_open(inode: *mut inode, file: *mut file) -> c_
     obj_id = btf_obj_id(btf);
     btf_put(btf);
     }
-    len = scnprintf(buf, sizeof(buf),
+    len = scnprintf(buf, sizeof!(buf),
     "btf_obj_id: %u\nraw_btf_id: %u\ntp_btf_id: %u\n",
     obj_id, raw_id, tp_id);
     return simple_read_from_buffer(ubuf, cnt, ppos, buf, len);
     }
 
-    static ssize_t
-    event_filter_read(struct file *filp, char __user *ubuf, size_t cnt,
-    loff_t *ppos)
-    {
-    struct trace_event_file *file;
-    struct trace_seq *s;
-    let mut r: c_int = -ENODEV;
-    if (*ppos)
+#[no_mangle]
+pub unsafe extern "C" fn event_filter_read(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
+pub static mut file: *mut c_void = core::ptr::null_mut();
+pub static mut s: *mut c_void = core::ptr::null_mut();
+pub static mut r: c_int = 0;
+    if (*ppos) {
     return 0;
+    }
     s = kmalloc_obj(*s);
-    if (!s)
+    if (!s) {
     return -ENOMEM;
+    }
     trace_seq_init(s);
     mutex_lock(&event_mutex);
     file = event_file_file(filp);
-    if (file)
+    if (file) {
     print_event_filter(file, s);
+    }
     mutex_unlock(&event_mutex);
-    if (file)
+    if (file) {
     r = simple_read_from_buffer(ubuf, cnt, ppos,
     s.buffer, trace_seq_used(s));
+    }
     kfree(s);
     return r;
     }
-    static ssize_t
-    event_filter_write(struct file *filp, const char __user *ubuf, size_t cnt,
-    loff_t *ppos)
-    {
-    struct trace_event_file *file;
-    char *buf;
-    let mut err: c_int = -ENODEV;
-    if (cnt >= PAGE_SIZE)
+#[no_mangle]
+pub unsafe extern "C" fn event_filter_write(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
+pub static mut file: *mut c_void = core::ptr::null_mut();
+pub static mut buf: *mut c_void = core::ptr::null_mut();
+pub static mut err: c_int = 0;
+    if (cnt >= PAGE_SIZE) {
     return -EINVAL;
+    }
     buf = memdup_user_nul(ubuf, cnt);
-    if (IS_ERR(buf))
+    if (IS_ERR(buf)) {
     return PTR_ERR(buf);
+    }
     mutex_lock(&event_mutex);
     file = event_file_file(filp);
-    if (file)
+    if (file) {
     err = apply_event_filter(file, buf);
+    }
     mutex_unlock(&event_mutex);
     kfree(buf);
-    if (err < 0)
+    if (err < 0) {
     return err;
+    }
 // ppos += cnt;
     return cnt;
     }
-    static LIST_HEAD(event_subsystems);
+pub static mut event_subsystems: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn subsystem_open(inode: *mut inode, filp: *mut file) -> c_int {
-    static int subsystem_open(struct inode *inode, struct file *filp)
-    {
-    struct trace_subsystem_dir *dir = core::ptr::null_mut(), *iter_dir;
-    struct trace_array *tr = core::ptr::null_mut(), *iter_tr;
-    struct event_subsystem *system = core::ptr::null_mut();
-    int ret;
-    if (unlikely(tracing_disabled))
+    let mut dir = core::ptr::null_mut(), *iter_dir;
+    let mut tr = core::ptr::null_mut(), *iter_tr;
+    let mut system = core::ptr::null_mut();
+    let mut ret = 0;
+    if (unlikely(tracing_disabled)) {
     return -ENODEV;
+    }
 // Make sure the system still exists
     mutex_lock(&event_mutex);
     mutex_lock(&trace_types_lock);
@@ -2088,15 +2365,16 @@ unsafe extern "C" fn subsystem_open(inode: *mut inode, filp: *mut file) -> c_int
     __get_system_dir(dir);
     system = dir.subsystem;
     }
-    goto exit_loop;
+// goto;
     }
     }
     }
-    exit_loop:
+// label;
     mutex_unlock(&trace_types_lock);
     mutex_unlock(&event_mutex);
-    if (!system)
+    if (!system) {
     return -ENODEV;
+    }
 // Still need to increment the ref count of the system
     if (trace_array_get(tr) < 0) {
     put_system(dir);
@@ -2111,15 +2389,14 @@ unsafe extern "C" fn subsystem_open(inode: *mut inode, filp: *mut file) -> c_int
     }
 #[no_mangle]
 unsafe extern "C" fn system_tr_open(inode: *mut inode, filp: *mut file) -> c_int {
-    static int system_tr_open(struct inode *inode, struct file *filp)
-    {
-    struct trace_subsystem_dir *dir;
-    struct trace_array *tr = inode.i_private;
-    int ret;
+pub static mut dir: *mut c_void = core::ptr::null_mut();
+    let mut tr = inode.i_private;
+    let mut ret = 0;
 // Make a temporary dir that has no system but points to tr
     dir = kzalloc_obj(*dir);
-    if (!dir)
+    if (!dir) {
     return -ENOMEM;
+    }
     ret = tracing_open_generic_tr(inode, filp);
     if (ret < 0) {
     kfree(dir);
@@ -2131,34 +2408,34 @@ unsafe extern "C" fn system_tr_open(inode: *mut inode, filp: *mut file) -> c_int
     }
 #[no_mangle]
 unsafe extern "C" fn subsystem_release(inode: *mut inode, file: *mut file) -> c_int {
-    static int subsystem_release(struct inode *inode, struct file *file)
-    {
-    struct trace_subsystem_dir *dir = file.private_data;
+    let mut dir = file.private_data;
     trace_array_put(dir.tr);
 //
 // If dir->subsystem is NULL, then this is a temporary
 // descriptor that was made for a trace_array to enable
 // all subsystems.
 //
-    if (dir.subsystem)
+    if (dir.subsystem) {
     put_system(dir);
-    else
+    }
+    else {
     kfree(dir);
+    }
     return 0;
     }
-    static ssize_t
-    subsystem_filter_read(struct file *filp, char __user *ubuf, size_t cnt,
-    loff_t *ppos)
-    {
-    struct trace_subsystem_dir *dir = filp.private_data;
-    struct event_subsystem *system = dir.subsystem;
-    struct trace_seq *s;
-    int r;
-    if (*ppos)
+#[no_mangle]
+pub unsafe extern "C" fn subsystem_filter_read(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
+    let mut dir = filp.private_data;
+    let mut system = dir.subsystem;
+pub static mut s: *mut c_void = core::ptr::null_mut();
+    let mut r = 0;
+    if (*ppos) {
     return 0;
+    }
     s = kmalloc_obj(*s);
-    if (!s)
+    if (!s) {
     return -ENOMEM;
+    }
     trace_seq_init(s);
     print_subsystem_event_filter(system, s);
     r = simple_read_from_buffer(ubuf, cnt, ppos,
@@ -2166,36 +2443,38 @@ unsafe extern "C" fn subsystem_release(inode: *mut inode, file: *mut file) -> c_
     kfree(s);
     return r;
     }
-    static ssize_t
-    subsystem_filter_write(struct file *filp, const char __user *ubuf, size_t cnt,
-    loff_t *ppos)
-    {
-    struct trace_subsystem_dir *dir = filp.private_data;
-    char *buf;
-    int err;
-    if (cnt >= PAGE_SIZE)
+#[no_mangle]
+pub unsafe extern "C" fn subsystem_filter_write(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
+    let mut dir = filp.private_data;
+pub static mut buf: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
+    if (cnt >= PAGE_SIZE) {
     return -EINVAL;
+    }
     buf = memdup_user_nul(ubuf, cnt);
-    if (IS_ERR(buf))
+    if (IS_ERR(buf)) {
     return PTR_ERR(buf);
+    }
     err = apply_subsystem_event_filter(dir, buf);
     kfree(buf);
-    if (err < 0)
+    if (err < 0) {
     return err;
+    }
 // ppos += cnt;
     return cnt;
     }
-    static ssize_t
-    show_header_page_file(struct file *filp, char __user *ubuf, size_t cnt, loff_t *ppos)
-    {
-    struct trace_array *tr = filp.private_data;
-    struct trace_seq *s;
-    int r;
-    if (*ppos)
+#[no_mangle]
+pub unsafe extern "C" fn show_header_page_file(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
+    let mut tr = filp.private_data;
+pub static mut s: *mut c_void = core::ptr::null_mut();
+    let mut r = 0;
+    if (*ppos) {
     return 0;
+    }
     s = kmalloc_obj(*s);
-    if (!s)
+    if (!s) {
     return -ENOMEM;
+    }
     trace_seq_init(s);
     ring_buffer_print_page_header(tr.array_buffer.buffer, s);
     r = simple_read_from_buffer(ubuf, cnt, ppos,
@@ -2203,16 +2482,17 @@ unsafe extern "C" fn subsystem_release(inode: *mut inode, file: *mut file) -> c_
     kfree(s);
     return r;
     }
-    static ssize_t
-    show_header_event_file(struct file *filp, char __user *ubuf, size_t cnt, loff_t *ppos)
-    {
-    struct trace_seq *s;
-    int r;
-    if (*ppos)
+#[no_mangle]
+pub unsafe extern "C" fn show_header_event_file(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
+pub static mut s: *mut c_void = core::ptr::null_mut();
+    let mut r = 0;
+    if (*ppos) {
     return 0;
+    }
     s = kmalloc_obj(*s);
-    if (!s)
+    if (!s) {
     return -ENOMEM;
+    }
     trace_seq_init(s);
     ring_buffer_print_entry_header(s);
     r = simple_read_from_buffer(ubuf, cnt, ppos,
@@ -2222,11 +2502,9 @@ unsafe extern "C" fn subsystem_release(inode: *mut inode, file: *mut file) -> c_
     }
 #[no_mangle]
 unsafe extern "C" fn ignore_task_cpu(data: *mut c_void) {
-    static void ignore_task_cpu(void *data)
-    {
-    struct trace_array *tr = data;
-    struct trace_pid_list *pid_list;
-    struct trace_pid_list *no_pid_list;
+    let mut tr = data;
+pub static mut pid_list: *mut c_void = core::ptr::null_mut();
+pub static mut no_pid_list: *mut c_void = core::ptr::null_mut();
 //
 // This function is called by on_each_cpu() while the
 // event_mutex is held.
@@ -2240,8 +2518,6 @@ unsafe extern "C" fn ignore_task_cpu(data: *mut c_void) {
     }
 #[no_mangle]
 unsafe extern "C" fn register_pid_events(tr: *mut trace_array) {
-    static void register_pid_events(struct trace_array *tr)
-    {
 //
 // Register a probe that is called before all other probes
 // to set ignore_pid if next or prev do not match.
@@ -2265,22 +2541,22 @@ unsafe extern "C" fn register_pid_events(tr: *mut trace_array) {
     register_trace_prio_sched_waking(event_filter_pid_sched_wakeup_probe_post,
     tr, 0);
     }
-    static ssize_t
-    event_pid_write(struct file *filp, const char __user *ubuf,
-    size_t cnt, loff_t *ppos, int type)
-    {
-    struct seq_file *m = filp.private_data;
-    struct trace_array *tr = m.private;
-    struct trace_pid_list *filtered_pids = core::ptr::null_mut();
-    struct trace_pid_list *other_pids = core::ptr::null_mut();
-    struct trace_pid_list *pid_list;
-    struct trace_event_file *file;
-    ssize_t ret;
-    if (!cnt)
+#[no_mangle]
+pub unsafe extern "C" fn event_pid_write(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t, type: c_int) -> ssize_t {
+    let mut m = filp.private_data;
+    let mut tr = m.private;
+    let mut filtered_pids = core::ptr::null_mut();
+    let mut other_pids = core::ptr::null_mut();
+pub static mut pid_list: *mut c_void = core::ptr::null_mut();
+pub static mut file: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (!cnt) {
     return 0;
+    }
     ret = tracing_update_buffers(tr);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     guard(mutex)(&event_mutex);
     if (type == TRACE_PIDS) {
     filtered_pids = rcu_dereference_protected(tr.filtered_pids,
@@ -2294,12 +2570,15 @@ unsafe extern "C" fn register_pid_events(tr: *mut trace_array) {
     lockdep_is_held(&event_mutex));
     }
     ret = trace_pid_write(filtered_pids, &pid_list, ubuf, cnt);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
-    if (type == TRACE_PIDS)
+    }
+    if (type == TRACE_PIDS) {
     rcu_assign_pointer(tr.filtered_pids, pid_list);
-    else
+    }
+    else {
     rcu_assign_pointer(tr.filtered_no_pids, pid_list);
+    }
     list_for_each_entry(file, &tr.events, list) {
     set_bit(EVENT_FILE_FL_PID_FILTER_BIT, &file.flags);
     }
@@ -2318,176 +2597,58 @@ unsafe extern "C" fn register_pid_events(tr: *mut trace_array) {
 // ppos += ret;
     return ret;
     }
-    static ssize_t
-    ftrace_event_pid_write(struct file *filp, const char __user *ubuf,
-    size_t cnt, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_event_pid_write(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
     return event_pid_write(filp, ubuf, cnt, ppos, TRACE_PIDS);
     }
-    static ssize_t
-    ftrace_event_npid_write(struct file *filp, const char __user *ubuf,
-    size_t cnt, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_event_npid_write(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
     return event_pid_write(filp, ubuf, cnt, ppos, TRACE_NO_PIDS);
     }
-    static int ftrace_event_avail_open(struct inode *inode, struct file *file);
-    static int ftrace_event_set_open(struct inode *inode, struct file *file);
-    static int ftrace_event_show_filters_open(struct inode *inode, struct file *file);
-    static int ftrace_event_show_triggers_open(struct inode *inode, struct file *file);
-    static int ftrace_event_set_pid_open(struct inode *inode, struct file *file);
-    static int ftrace_event_set_npid_open(struct inode *inode, struct file *file);
-    static int ftrace_event_release(struct inode *inode, struct file *file);
-    static const struct seq_operations show_event_seq_ops = {
-    .start = t_start,
-    .next = t_next,
-    .show = t_show,
-    .stop = t_stop,
-    };
-    static const struct seq_operations show_set_event_seq_ops = {
-    .start = s_start,
-    .next = s_next,
-    .show = s_show,
-    .stop = s_stop,
-    };
-    static const struct seq_operations show_show_event_filters_seq_ops = {
-    .start = t_start,
-    .next = t_next,
-    .show = t_show_filters,
-    .stop = t_stop,
-    };
-    static const struct seq_operations show_show_event_triggers_seq_ops = {
-    .start = t_start,
-    .next = t_next,
-    .show = t_show_triggers,
-    .stop = t_stop,
-    };
-    static const struct seq_operations show_set_pid_seq_ops = {
-    .start = p_start,
-    .next = p_next,
-    .show = trace_pid_show,
-    .stop = p_stop,
-    };
-    static const struct seq_operations show_set_no_pid_seq_ops = {
-    .start = np_start,
-    .next = np_next,
-    .show = trace_pid_show,
-    .stop = p_stop,
-    };
-    static const struct file_operations ftrace_avail_fops = {
-    .open = ftrace_event_avail_open,
-    .read = seq_read,
-    .llseek = seq_lseek,
-    .release = seq_release,
-    };
-    static const struct file_operations ftrace_set_event_fops = {
-    .open = ftrace_event_set_open,
-    .read = seq_read,
-    .write = ftrace_event_write,
-    .llseek = seq_lseek,
-    .release = ftrace_event_release,
-    };
-    static const struct file_operations ftrace_show_event_filters_fops = {
-    .open = ftrace_event_show_filters_open,
-    .read = seq_read,
-    .llseek = seq_lseek,
-    .release = seq_release,
-    };
-    static const struct file_operations ftrace_show_event_triggers_fops = {
-    .open = ftrace_event_show_triggers_open,
-    .read = seq_read,
-    .llseek = seq_lseek,
-    .release = seq_release,
-    };
-    static const struct file_operations ftrace_set_event_pid_fops = {
-    .open = ftrace_event_set_pid_open,
-    .read = seq_read,
-    .write = ftrace_event_pid_write,
-    .llseek = seq_lseek,
-    .release = ftrace_event_release,
-    };
-    static const struct file_operations ftrace_set_event_notrace_pid_fops = {
-    .open = ftrace_event_set_npid_open,
-    .read = seq_read,
-    .write = ftrace_event_npid_write,
-    .llseek = seq_lseek,
-    .release = ftrace_event_release,
-    };
-    static const struct file_operations ftrace_enable_fops = {
-    .open = tracing_open_file_tr,
-    .read = event_enable_read,
-    .write = event_enable_write,
-    .release = tracing_release_file_tr,
-    .llseek = default_llseek,
-    };
-    static const struct file_operations ftrace_event_format_fops = {
-    .open = trace_format_open,
-    .read = seq_read,
-    .llseek = seq_lseek,
-    .release = seq_release,
-    };
+// forward_decl: ftrace_event_avail_open;
+// forward_decl: ftrace_event_set_open;
+// forward_decl: ftrace_event_show_filters_open;
+// forward_decl: ftrace_event_show_triggers_open;
+// forward_decl: ftrace_event_set_pid_open;
+// forward_decl: ftrace_event_set_npid_open;
+// forward_decl: ftrace_event_release;
+pub static mut seq_operations: usize = 0;
+pub static mut seq_operations: usize = 0;
+pub static mut seq_operations: usize = 0;
+pub static mut seq_operations: usize = 0;
+pub static mut seq_operations: usize = 0;
+pub static mut seq_operations: usize = 0;
+pub static mut file_operations: usize = 0;
+pub static mut file_operations: usize = 0;
+pub static mut file_operations: usize = 0;
+pub static mut file_operations: usize = 0;
+pub static mut file_operations: usize = 0;
+pub static mut file_operations: usize = 0;
+pub static mut file_operations: usize = 0;
+pub static mut file_operations: usize = 0;
 
-    static const struct file_operations ftrace_event_id_fops = {
-    .read = event_id_read,
-    .llseek = default_llseek,
-    };
+pub static mut file_operations: usize = 0;
 
-    static const struct file_operations ftrace_event_btf_ids_fops = {
-    .read = event_btf_ids_read,
-    .llseek = default_llseek,
-    };
+pub static mut file_operations: usize = 0;
 
-    static const struct file_operations ftrace_event_filter_fops = {
-    .open = tracing_open_file_tr,
-    .read = event_filter_read,
-    .write = event_filter_write,
-    .release = tracing_release_file_tr,
-    .llseek = default_llseek,
-    };
-    static const struct file_operations ftrace_subsystem_filter_fops = {
-    .open = subsystem_open,
-    .read = subsystem_filter_read,
-    .write = subsystem_filter_write,
-    .llseek = default_llseek,
-    .release = subsystem_release,
-    };
-    static const struct file_operations ftrace_system_enable_fops = {
-    .open = subsystem_open,
-    .read = system_enable_read,
-    .write = system_enable_write,
-    .llseek = default_llseek,
-    .release = subsystem_release,
-    };
-    static const struct file_operations ftrace_tr_enable_fops = {
-    .open = system_tr_open,
-    .read = system_enable_read,
-    .write = system_enable_write,
-    .llseek = default_llseek,
-    .release = subsystem_release,
-    };
-    static const struct file_operations ftrace_show_header_page_fops = {
-    .open = tracing_open_generic_tr,
-    .read = show_header_page_file,
-    .llseek = default_llseek,
-    .release = tracing_release_generic_tr,
-    };
-    static const struct file_operations ftrace_show_header_event_fops = {
-    .open = tracing_open_generic_tr,
-    .read = show_header_event_file,
-    .llseek = default_llseek,
-    .release = tracing_release_generic_tr,
-    };
-    static int
-    ftrace_event_open(struct inode *inode, struct file *file,
-    const struct seq_operations *seq_ops)
-    {
-    struct seq_file *m;
-    int ret;
+pub static mut file_operations: usize = 0;
+pub static mut file_operations: usize = 0;
+pub static mut file_operations: usize = 0;
+pub static mut file_operations: usize = 0;
+pub static mut file_operations: usize = 0;
+pub static mut file_operations: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_event_open(inode: *mut inode, file: *mut file, seq_ops: *mut seq_operations) -> c_int {
+pub static mut m: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     ret = security_locked_down(LOCKDOWN_TRACEFS);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     ret = seq_open(file, seq_ops);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     m = file.private_data;
 // copy tr over to seq ops
     m.private = inode.i_private;
@@ -2495,34 +2656,33 @@ unsafe extern "C" fn register_pid_events(tr: *mut trace_array) {
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_event_release(inode: *mut inode, file: *mut file) -> c_int {
-    static int ftrace_event_release(struct inode *inode, struct file *file)
-    {
-    struct trace_array *tr = inode.i_private;
+    let mut tr = inode.i_private;
     trace_array_put(tr);
     return seq_release(inode, file);
     }
-    static int
-    ftrace_event_avail_open(struct inode *inode, struct file *file)
-    {
-    const struct seq_operations *seq_ops = &show_event_seq_ops;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_event_avail_open(inode: *mut inode, file: *mut file) -> c_int {
+    let mut seq_ops = &show_event_seq_ops;
 // Checks for tracefs lockdown
     return ftrace_event_open(inode, file, seq_ops);
     }
-    static int
-    ftrace_event_set_open(struct inode *inode, struct file *file)
-    {
-    const struct seq_operations *seq_ops = &show_set_event_seq_ops;
-    struct trace_array *tr = inode.i_private;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_event_set_open(inode: *mut inode, file: *mut file) -> c_int {
+    let mut seq_ops = &show_set_event_seq_ops;
+    let mut tr = inode.i_private;
+    let mut ret = 0;
     ret = tracing_check_open_get_tr(tr);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     if ((file.f_mode & FMODE_WRITE) &&
-    (file.f_flags & O_TRUNC))
+    (file.f_flags & O_TRUNC)) {
     ftrace_clear_events(tr);
+    }
     ret = ftrace_event_open(inode, file, seq_ops);
-    if (ret < 0)
+    if (ret < 0) {
     trace_array_put(tr);
+    }
     return ret;
     }
 //
@@ -2533,9 +2693,8 @@ unsafe extern "C" fn ftrace_event_release(inode: *mut inode, file: *mut file) ->
 // Connects the set_event_filters file to the sequence operations
 // required to iterate over and display active event filters.
 //
-    static int
-    ftrace_event_show_filters_open(struct inode *inode, struct file *file)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_event_show_filters_open(inode: *mut inode, file: *mut file) -> c_int {
     return ftrace_event_open(inode, file, &show_show_event_filters_seq_ops);
     }
 //
@@ -2546,105 +2705,101 @@ unsafe extern "C" fn ftrace_event_release(inode: *mut inode, file: *mut file) ->
 // Connects the show_event_triggers file to the sequence operations
 // required to iterate over and display active event triggers.
 //
-    static int
-    ftrace_event_show_triggers_open(struct inode *inode, struct file *file)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_event_show_triggers_open(inode: *mut inode, file: *mut file) -> c_int {
     return ftrace_event_open(inode, file, &show_show_event_triggers_seq_ops);
     }
-    static int
-    ftrace_event_set_pid_open(struct inode *inode, struct file *file)
-    {
-    const struct seq_operations *seq_ops = &show_set_pid_seq_ops;
-    struct trace_array *tr = inode.i_private;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_event_set_pid_open(inode: *mut inode, file: *mut file) -> c_int {
+    let mut seq_ops = &show_set_pid_seq_ops;
+    let mut tr = inode.i_private;
+    let mut ret = 0;
     ret = tracing_check_open_get_tr(tr);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     if ((file.f_mode & FMODE_WRITE) &&
-    (file.f_flags & O_TRUNC))
+    (file.f_flags & O_TRUNC)) {
     ftrace_clear_event_pids(tr, TRACE_PIDS);
+    }
     ret = ftrace_event_open(inode, file, seq_ops);
-    if (ret < 0)
+    if (ret < 0) {
     trace_array_put(tr);
+    }
     return ret;
     }
-    static int
-    ftrace_event_set_npid_open(struct inode *inode, struct file *file)
-    {
-    const struct seq_operations *seq_ops = &show_set_no_pid_seq_ops;
-    struct trace_array *tr = inode.i_private;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_event_set_npid_open(inode: *mut inode, file: *mut file) -> c_int {
+    let mut seq_ops = &show_set_no_pid_seq_ops;
+    let mut tr = inode.i_private;
+    let mut ret = 0;
     ret = tracing_check_open_get_tr(tr);
-    if (ret)
-    return ret;
-    if ((file.f_mode & FMODE_WRITE) &&
-    (file.f_flags & O_TRUNC))
-    ftrace_clear_event_pids(tr, TRACE_NO_PIDS);
-    ret = ftrace_event_open(inode, file, seq_ops);
-    if (ret < 0)
-    trace_array_put(tr);
+    if (ret) {
     return ret;
     }
-    static struct event_subsystem *
-    create_new_subsystem(const char *name)
-    {
-    struct event_subsystem *system;
+    if ((file.f_mode & FMODE_WRITE) &&
+    (file.f_flags & O_TRUNC)) {
+    ftrace_clear_event_pids(tr, TRACE_NO_PIDS);
+    }
+    ret = ftrace_event_open(inode, file, seq_ops);
+    if (ret < 0) {
+    trace_array_put(tr);
+    }
+    return ret;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn create_new_subsystem(name: *mut c_char) -> *mut c_void {
+pub static mut system: *mut c_void = core::ptr::null_mut();
 // need to create new entry
     system = kmalloc_obj(*system);
-    if (!system)
+    if (!system) {
     return core::ptr::null_mut();
+    }
     system.ref_count = 1;
 // Only allocate if dynamic (kprobes and modules)
     system.name = kstrdup_const(name, GFP_KERNEL);
-    if (!system.name)
-    goto out_free;
-    system.filter = kzalloc_obj(struct event_filter);
-    if (!system.filter)
-    goto out_free;
+    if (!system.name) {
+// goto;
+    }
+    system.filter = kzalloc_obj(event_filter);
+    if (!system.filter) {
+// goto;
+    }
     list_add(&system.list, &event_subsystems);
     return system;
-    out_free:
+// label;
     kfree_const(system.name);
     kfree(system);
     return core::ptr::null_mut();
     }
-    static int system_callback(const char *name, umode_t *mode, void **data,
-    const struct file_operations **fops)
-    {
-    if (strcmp(name, "filter") == 0)
-// fops = &ftrace_subsystem_filter_fops;
 #[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(name, 0: "enable") ==) -> else {
-    else if (strcmp(name, "enable") == 0)
+pub unsafe extern "C" fn system_callback(name: *mut c_char, mode: *mut umode_t, data: *mut *mut c_void, fops: *mut *mut file_operations) -> c_int {
+    if (strcmp(name, "filter") == 0) {
+// fops = &ftrace_subsystem_filter_fops;
+    }
+
+    else if (strcmp(name, "enable") == 0) {
 // fops = &ftrace_system_enable_fops;
-    else
+    }
+    else {
     return 0;
+    }
 // mode = TRACE_MODE_WRITE;
     return 1;
     }
-    static struct eventfs_inode *
-    event_subsystem_dir(struct trace_array *tr, const char *name,
-    struct trace_event_file *file, struct eventfs_inode *parent)
-    {
-    struct event_subsystem *system, *iter;
-    struct trace_subsystem_dir *dir;
-    struct eventfs_inode *ei;
-    int nr_entries;
-    static struct eventfs_entry system_entries[] = {
-    {
-    .name		= "filter",
-    .callback	= system_callback,
-    },
-    {
-    .name		= "enable",
-    .callback	= system_callback,
-    }
-    };
+#[no_mangle]
+pub unsafe extern "C" fn event_subsystem_dir(tr: *mut trace_array, name: *mut c_char, file: *mut trace_event_file, parent: *mut eventfs_inode) -> *mut c_void {
+    let mut system = core::ptr::null_mut();
+    let mut iter = core::ptr::null_mut();
+pub static mut dir: *mut c_void = core::ptr::null_mut();
+pub static mut ei: *mut c_void = core::ptr::null_mut();
+    let mut nr_entries = 0;
+pub static mut eventfs_entry: usize = 0;
 // First see if we did not already create this dir
     list_for_each_entry(dir, &tr.systems, list) {
     system = dir.subsystem;
     if (strcmp(system.name, name) == 0) {
-    dir.nr_events++;
+    dir.nr_events += 1;
     file.system = dir;
     return dir.ei;
     }
@@ -2658,24 +2813,29 @@ pub unsafe extern "C" fn if(_arg: strcmp(name, 0: "enable") ==) -> else {
     }
     }
     dir = kmalloc_obj(*dir);
-    if (!dir)
-    goto out_fail;
+    if (!dir) {
+// goto;
+    }
     if (!system) {
     system = create_new_subsystem(name);
-    if (!system)
-    goto out_free;
-    } else
+    if (!system) {
+// goto;
+    }
+    } else {
     __get_system(system);
+    }
 // ftrace only has directories no files, readonly instance too.
-    if (strcmp(name, "ftrace") == 0 || trace_array_is_readonly(tr))
+    if (strcmp(name, "ftrace") == 0 || trace_array_is_readonly(tr)) {
     nr_entries = 0;
-    else
-    nr_entries = ARRAY_SIZE(system_entries);
+    }
+    else {
+    nr_entries = ARRAY_SIZE!(system_entries);
+    }
     ei = eventfs_create_dir(name, parent, system_entries, nr_entries, dir);
     if (IS_ERR(ei)) {
-    pr_warn("Failed to create system directory %s\n", name);
+    pr_warn!("Failed to create system directory %s\n", name);
     __put_system(system);
-    goto out_free;
+// goto;
     }
     dir.ei = ei;
     dir.tr = tr;
@@ -2685,28 +2845,28 @@ pub unsafe extern "C" fn if(_arg: strcmp(name, 0: "enable") ==) -> else {
     file.system = dir;
     list_add(&dir.list, &tr.systems);
     return dir.ei;
-    out_free:
+// label;
     kfree(dir);
-    out_fail:
+// label;
 // Only print this message if failed on memory allocation
-    if (!dir || !system)
-    pr_warn("No memory to create event subsystem %s\n", name);
+    if (!dir || !system) {
+    pr_warn!("No memory to create event subsystem %s\n", name);
+    }
     return core::ptr::null_mut();
     }
-    static int
-    event_define_fields(struct trace_event_call *call)
-    {
-    struct list_head *head;
-    let mut ret: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn event_define_fields(call: *mut trace_event_call) -> c_int {
+pub static mut head: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
 //
 // Other events may have the same class. Only update
 // the fields if they are not already defined.
 //
     head = trace_get_fields(call);
     if (list_empty(head)) {
-    struct trace_event_fields *field = call.class.fields_array;
-    let mut offset: c_uint = sizeof(struct trace_entry);
-    for (; field.type; field++) {
+    let mut field = call.class.fields_array;
+pub static mut offset: c_uint = 0;
+    while (field.type) {
     if (field.type == TRACE_FUNCTION_TYPE) {
     field.define_fields(call);
     break;
@@ -2716,8 +2876,8 @@ pub unsafe extern "C" fn if(_arg: strcmp(name, 0: "enable") ==) -> else {
     offset, field.size,
     field.is_signed, field.filter_type,
     field.len, field.needs_test);
-    if (WARN_ON_ONCE(ret)) {
-    pr_err("error code is %d\n", ret);
+    if (WARN_ON_ONCE!(ret)) {
+    pr_err!("error code is %d\n", ret);
     break;
     }
     offset += field.size;
@@ -2725,11 +2885,10 @@ pub unsafe extern "C" fn if(_arg: strcmp(name, 0: "enable") ==) -> else {
     }
     return ret;
     }
-    static int event_callback(const char *name, umode_t *mode, void **data,
-    const struct file_operations **fops)
-    {
-    struct trace_event_file *file = *data;
-    struct trace_event_call *call = file.event_call;
+#[no_mangle]
+pub unsafe extern "C" fn event_callback(name: *mut c_char, mode: *mut umode_t, data: *mut *mut c_void, fops: *mut *mut file_operations) -> c_int {
+    let mut file = *data;
+    let mut call = file.event_call;
     if (strcmp(name, "format") == 0) {
 // mode = TRACE_MODE_READ;
 // fops = &ftrace_event_format_fops;
@@ -2764,7 +2923,7 @@ pub unsafe extern "C" fn if(_arg: strcmp(name, 0: "enable") ==) -> else {
     if (call.event.type && call.class.reg &&
     strcmp(name, "id") == 0) {
 // mode = TRACE_MODE_READ;
-// data = (void *)(long)call->event.type;
+// data = (long)call->event.type;
 // fops = &ftrace_event_id_fops;
     return 1;
     }
@@ -2799,93 +2958,47 @@ pub unsafe extern "C" fn if(_arg: strcmp(name, 0: "enable") ==) -> else {
 // The file is incremented on creation and freeing the enable file decrements it
 #[no_mangle]
 unsafe extern "C" fn event_release(name: *const c_char, data: *mut c_void) {
-    static void event_release(const char *name, void *data)
-    {
-    struct trace_event_file *file = data;
+    let mut file = data;
     event_file_put(file);
     }
-    static int
-    event_create_dir(struct eventfs_inode *parent, struct trace_event_file *file)
-    {
-    struct trace_event_call *call = file.event_call;
-    struct trace_array *tr = file.tr;
-    struct eventfs_inode *e_events;
-    struct eventfs_inode *ei;
-    const char *name;
-    int nr_entries;
-    int ret;
-    static struct eventfs_entry event_entries[] = {
-    {
-    .name		= "format",
-    .callback	= event_callback,
-    },
-
-    {
-    .name		= "id",
-    .callback	= event_callback,
-    },
-
-    {
-    .name		= "btf_ids",
-    .callback	= event_callback,
-    },
-
-    IS_ENABLED(CONFIG_BPF_EVENTS))
-// Readonly files must be above this line and counted by NR_RO_EVENT_ENTRIES.
-    {
-    .name		= "enable",
-    .callback	= event_callback,
-    .release	= event_release,
-    },
-    {
-    .name		= "filter",
-    .callback	= event_callback,
-    },
-    {
-    .name		= "trigger",
-    .callback	= event_callback,
-    },
-
-    {
-    .name		= "hist",
-    .callback	= event_callback,
-    },
-
-    {
-    .name		= "hist_debug",
-    .callback	= event_callback,
-    },
-
-    {
-    .name		= "inject",
-    .callback	= event_callback,
-    },
-
-    };
+#[no_mangle]
+pub unsafe extern "C" fn event_create_dir(parent: *mut eventfs_inode, file: *mut trace_event_file) -> c_int {
+    let mut call = file.event_call;
+    let mut tr = file.tr;
+pub static mut e_events: *mut c_void = core::ptr::null_mut();
+pub static mut ei: *mut c_void = core::ptr::null_mut();
+pub static mut name: *mut c_void = core::ptr::null_mut();
+    let mut nr_entries = 0;
+    let mut ret = 0;
+pub static mut eventfs_entry: usize = 0;
 //
 // If the trace point header did not define TRACE_SYSTEM
 // then the system would be called "TRACE_SYSTEM". This should
 // never happen.
 //
-    if (WARN_ON_ONCE(strcmp(call.class.system, TRACE_SYSTEM) == 0))
+    if (WARN_ON_ONCE!(strcmp(call.class.system, TRACE_SYSTEM) == 0)) {
     return -ENODEV;
+    }
     ret = event_define_fields(call);
     if (ret < 0) {
-    pr_warn("Could not initialize trace point events/%s\n",
+    pr_warn!("Could not initialize trace point events/%s\n",
     trace_event_name(call));
     return ret;
     }
     e_events = event_subsystem_dir(tr, call.class.system, file, parent);
-    if (!e_events)
+    if (!e_events) {
     return -ENOMEM;
-    if (trace_array_is_readonly(tr))
+    }
+    if (trace_array_is_readonly(tr)) {
     nr_entries = NR_RO_EVENT_ENTRIES;
-    else
-    nr_entries = ARRAY_SIZE(event_entries);
+    }
+    else {
+    nr_entries = ARRAY_SIZE!(event_entries);
+    }
     name = trace_event_name(call);
     ei = eventfs_create_dir(name, e_events, event_entries, nr_entries, file);
     if (IS_ERR(ei)) {
-    pr_warn("Could not create tracefs '%s' directory\n", name);
+    pr_warn!("Could not create tracefs '%s' directory\n", name);
     return -1;
     }
     file.ei = ei;
@@ -2895,13 +3008,12 @@ unsafe extern "C" fn event_release(name: *const c_char, data: *mut c_void) {
     }
 #[no_mangle]
 unsafe extern "C" fn remove_event_from_tracers(call: *mut trace_event_call) {
-    static void remove_event_from_tracers(struct trace_event_call *call)
-    {
-    struct trace_event_file *file;
-    struct trace_array *tr;
+pub static mut file: *mut c_void = core::ptr::null_mut();
+pub static mut tr: *mut c_void = core::ptr::null_mut();
     do_for_each_event_file_safe(tr, file) {
-    if (file.event_call != call)
+    if (file.event_call != call) {
     continue;
+    }
     remove_event_file_dir(file);
 //
 // The do_for_each_event_file_safe() is
@@ -2914,15 +3026,15 @@ unsafe extern "C" fn remove_event_from_tracers(call: *mut trace_event_call) {
     }
 #[no_mangle]
 unsafe extern "C" fn event_remove(call: *mut trace_event_call) {
-    static void event_remove(struct trace_event_call *call)
-    {
-    struct trace_array *tr;
-    struct trace_event_file *file;
+pub static mut tr: *mut c_void = core::ptr::null_mut();
+pub static mut file: *mut c_void = core::ptr::null_mut();
     do_for_each_event_file(tr, file) {
-    if (file.event_call != call)
+    if (file.event_call != call) {
     continue;
-    if (file.flags & EVENT_FILE_FL_WAS_ENABLED)
+    }
+    if (file.flags & EVENT_FILE_FL_WAS_ENABLED) {
     tr.clear_trace = true;
+    }
     ftrace_event_enable_disable(file, 0);
 //
 // The do_for_each_event_file() is
@@ -2932,52 +3044,56 @@ unsafe extern "C" fn event_remove(call: *mut trace_event_call) {
 //
     break;
     } while_for_each_event_file();
-    if (call.event.funcs)
+    if (call.event.funcs) {
     __unregister_trace_event(&call.event);
+    }
     remove_event_from_tracers(call);
     list_del(&call.list);
     }
 #[no_mangle]
 unsafe extern "C" fn event_init(call: *mut trace_event_call) -> c_int {
-    static int event_init(struct trace_event_call *call)
-    {
-    let mut ret: c_int = 0;
-    const char *name;
+pub static mut ret: c_int = 0;
+pub static mut name: *mut c_void = core::ptr::null_mut();
     name = trace_event_name(call);
-    if (WARN_ON(!name))
+    if (WARN_ON!(!name)) {
     return -EINVAL;
+    }
     if (call.class.raw_init) {
     ret = call.class.raw_init(call);
-    if (ret < 0 && ret != -ENOSYS)
-    pr_warn("Could not initialize trace events/%s\n", name);
+    if (ret < 0 && ret != -ENOSYS) {
+    pr_warn!("Could not initialize trace events/%s\n", name);
+    }
     }
     return ret;
     }
-    static int
-    __register_event(struct trace_event_call *call, struct module *mod)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn __register_event(call: *mut trace_event_call, mod: *mut module) -> c_int {
+    let mut ret = 0;
     ret = event_init(call);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     down_write(&trace_event_sem);
     list_add(&call.list, &ftrace_events);
     up_write(&trace_event_sem);
-    if (call.flags & TRACE_EVENT_FL_DYNAMIC)
+    if (call.flags & TRACE_EVENT_FL_DYNAMIC) {
     atomic_set(&call.refcnt, 0);
-    else
+    }
+    else {
     call.module = mod;
+    }
     return 0;
     }
-    static char *eval_replace(char *ptr, struct trace_eval_map *map, int len)
-    {
-    int rlen;
-    int elen;
+#[no_mangle]
+pub unsafe extern "C" fn eval_replace(ptr: *mut c_char, map: *mut trace_eval_map, len: c_int) -> *mut c_void {
+    let mut rlen = 0;
+    let mut elen = 0;
 // Find the length of the eval value as a string
     elen = snprintf(ptr, 0, "%ld", map.eval_value);
 // Make sure there's enough room to replace the string with the value
-    if (len < elen)
+    if (len < elen) {
     return core::ptr::null_mut();
+    }
     snprintf(ptr, elen + 1, "%ld", map.eval_value);
 // Get the rest of the string of ptr
     rlen = strlen(ptr + len);
@@ -2986,34 +3102,36 @@ unsafe extern "C" fn event_init(call: *mut trace_event_call) -> c_int {
     ptr[elen + rlen] = 0;
     return ptr + elen;
     }
-    static void update_event_printk(struct trace_event_call *call,
-    struct trace_eval_map *map)
-    {
-    char *ptr;
-    let mut quote: c_int = 0;
-    let mut len: c_int = strlen(map.eval_string);
-    for (ptr = call.print_fmt; *ptr; ptr++) {
+#[no_mangle]
+pub unsafe extern "C" fn update_event_printk(call: *mut trace_event_call, map: *mut trace_eval_map) {
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut quote: c_int = 0;
+pub static mut len: c_int = 0;
+    while (*ptr) {
     if (*ptr == '\\') {
-    ptr++;
+    ptr += 1;
 // paranoid
-    if (!*ptr)
+    if (!*ptr) {
     break;
+    }
     continue;
     }
     if (*ptr == '"') {
     quote ^= 1;
     continue;
     }
-    if (quote)
+    if (quote) {
     continue;
+    }
     if (isdigit(*ptr)) {
 // skip numbers
     do {
-    ptr++;
+    ptr += 1;
 // Check for alpha chars like ULL
     } while (isalnum(*ptr));
-    if (!*ptr)
+    if (!*ptr) {
     break;
+    }
 //
 // A number must have some kind of delimiter after
 // it, and we can ignore that too.
@@ -3025,8 +3143,9 @@ unsafe extern "C" fn event_init(call: *mut trace_event_call) -> c_int {
     !isalnum(ptr[len]) && ptr[len] != '_') {
     ptr = eval_replace(ptr, map, len);
 // enum/sizeof string smaller than value
-    if (WARN_ON_ONCE(!ptr))
+    if (WARN_ON_ONCE!(!ptr)) {
     return;
+    }
 //
 // No need to decrement here, as eval_replace()
 // returns the pointer to the character passed
@@ -3036,21 +3155,23 @@ unsafe extern "C" fn event_init(call: *mut trace_event_call) -> c_int {
 //
     continue;
     }
-    skip_more:
+// label;
     do {
-    ptr++;
+    ptr += 1;
     } while (isalnum(*ptr) || *ptr == '_');
-    if (!*ptr)
+    if (!*ptr) {
     break;
+    }
 //
 // If what comes after this variable is a '.' or
 // '->' then we can continue to ignore that string.
 //
     if (*ptr == '.' || (ptr[0] == '-' && ptr[1] == '>')) {
     ptr += *ptr == '.' ? 1 : 2;
-    if (!*ptr)
+    if (!*ptr) {
     break;
-    goto skip_more;
+    }
+// goto;
     }
 //
 // Once again, we can skip the delimiter that came
@@ -3062,9 +3183,7 @@ unsafe extern "C" fn event_init(call: *mut trace_event_call) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn add_str_to_module(module: *mut module, str: *mut c_char) {
-    static void add_str_to_module(struct module *module, char *str)
-    {
-    struct module_string *modstr;
+pub static mut modstr: *mut c_void = core::ptr::null_mut();
     modstr = kmalloc_obj(*modstr);
 //
 // If we failed to allocate memory here, then we'll just
@@ -3072,19 +3191,20 @@ unsafe extern "C" fn add_str_to_module(module: *mut module, str: *mut c_char) {
 // If this fails to allocate, there's worse problems than
 // a leaked string on module removal.
 //
-    if (WARN_ON_ONCE(!modstr))
+    if (WARN_ON_ONCE!(!modstr)) {
     return;
+    }
     modstr.module = module;
     modstr.str = str;
     list_add(&modstr.next, &module_strings);
     }
 
 // Remove all __attribute__() from @type. Return allocated string or @type.
-    static char *sanitize_field_type(const char *type)
-    {
-    char *attr, *tmp, *next, *ret = (char *)type;
-    int depth;
-    next = (char *)type;
+#[no_mangle]
+pub unsafe extern "C" fn sanitize_field_type(type: *mut c_char) -> *mut c_void {
+    char *attr, *tmp, *next, *ret = type;
+    let mut depth = 0;
+    next = type;
     while ((attr = strstr(next, ATTRIBUTE_STR))) {
 // Retry if "__attribute__(" is a part of another word.
     if (attr != next && !isspace(attr[-1])) {
@@ -3093,8 +3213,9 @@ unsafe extern "C" fn add_str_to_module(module: *mut module, str: *mut c_char) {
     }
     if (ret == type) {
     ret = kstrdup(type, GFP_KERNEL);
-    if (WARN_ON_ONCE(!ret))
+    if (WARN_ON_ONCE!(!ret)) {
     return core::ptr::null_mut();
+    }
     attr = ret + (attr - type);
     }
 // the ATTRIBUTE_STR already has the first '('
@@ -3103,14 +3224,15 @@ unsafe extern "C" fn add_str_to_module(module: *mut module, str: *mut c_char) {
     do {
     tmp = strpbrk(next, "()");
 // There is unbalanced parentheses
-    if (WARN_ON_ONCE(!tmp)) {
+    if (WARN_ON_ONCE!(!tmp)) {
     kfree(ret);
-    return (char *)type;
+    return type;
     }
     if (*tmp == '(')
-    depth++;
-    else
-    depth--;
+    depth += 1;
+    else {
+    depth -= 1;
+    }
     next = tmp + 1;
     } while (depth > 0);
     next = skip_spaces(next);
@@ -3119,34 +3241,37 @@ unsafe extern "C" fn add_str_to_module(module: *mut module, str: *mut c_char) {
     }
     return ret;
     }
-    static char *find_replacable_eval(const char *type, const char *eval_string,
-    int len)
-    {
-    char *ptr;
-    if (!eval_string)
+#[no_mangle]
+pub unsafe extern "C" fn find_replacable_eval(type: *mut c_char, eval_string: *mut c_char, len: c_int) -> *mut c_void {
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+    if (!eval_string) {
     return core::ptr::null_mut();
+    }
     ptr = strchr(type, '[');
-    if (!ptr)
+    if (!ptr) {
     return core::ptr::null_mut();
-    ptr++;
-    if (!isalpha(*ptr) && *ptr != '_')
+    }
+    ptr += 1;
+    if (!isalpha(*ptr) && *ptr != '_') {
     return core::ptr::null_mut();
-    if (strncmp(eval_string, ptr, len) != 0)
+    }
+    if (strncmp(eval_string, ptr, len) != 0) {
     return core::ptr::null_mut();
+    }
     return ptr;
     }
-    static void update_event_fields(struct trace_event_call *call,
-    struct trace_eval_map *map)
-    {
-    struct ftrace_event_field *field;
-    const char *eval_string = core::ptr::null_mut();
-    struct list_head *head;
-    let mut len: c_int = 0;
-    char *ptr;
-    char *str;
+#[no_mangle]
+pub unsafe extern "C" fn update_event_fields(call: *mut trace_event_call, map: *mut trace_eval_map) {
+pub static mut field: *mut c_void = core::ptr::null_mut();
+    let mut eval_string = core::ptr::null_mut();
+pub static mut head: *mut c_void = core::ptr::null_mut();
+pub static mut len: c_int = 0;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut str: *mut c_void = core::ptr::null_mut();
 // Dynamic events should never have field maps
-    if (call.flags & TRACE_EVENT_FL_DYNAMIC)
+    if (call.flags & TRACE_EVENT_FL_DYNAMIC) {
     return;
+    }
     if (map) {
     eval_string = map.eval_string;
     len = strlen(map.eval_string);
@@ -3154,53 +3279,58 @@ unsafe extern "C" fn add_str_to_module(module: *mut module, str: *mut c_char) {
     head = trace_get_fields(call);
     list_for_each_entry(field, head, link) {
     str = sanitize_field_type(field.type);
-    if (!str)
+    if (!str) {
     return;
+    }
     ptr = find_replacable_eval(str, eval_string, len);
     if (ptr) {
     if (str == field.type) {
     str = kstrdup(field.type, GFP_KERNEL);
-    if (WARN_ON_ONCE(!str))
+    if (WARN_ON_ONCE!(!str)) {
     return;
+    }
     ptr = str + (ptr - field.type);
     }
     ptr = eval_replace(ptr, map, len);
 // enum/sizeof string smaller than value
-    if (WARN_ON_ONCE(!ptr)) {
+    if (WARN_ON_ONCE!(!ptr)) {
     kfree(str);
     continue;
     }
     }
-    if (str == field.type)
+    if (str == field.type) {
     continue;
+    }
 //
 // If the event is part of a module, then we need to free the string
 // when the module is removed. Otherwise, it will stay allocated
 // until a reboot.
 //
-    if (call.module)
+    if (call.module) {
     add_str_to_module(call.module, str);
+    }
     field.type = str;
-    if (field.filter_type == FILTER_OTHER)
+    if (field.filter_type == FILTER_OTHER) {
     field.filter_type = filter_assign_type(field.type);
+    }
     }
     }
 // Update all events for replacing eval and sanitizing
 #[no_mangle]
 pub unsafe extern "C" fn trace_event_update_all(map: *mut trace_eval_map, len: c_int, mod: *mut module) {
-    void trace_event_update_all(struct trace_eval_map **map, int len, struct module *mod)
-    {
-    struct trace_event_call *call, *p;
-    const char *last_system = core::ptr::null_mut();
-    let mut first: bool = false;
-    bool updated;
-    int last_i;
-    int i;
+    let mut call = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
+    let mut last_system = core::ptr::null_mut();
+pub static mut first: bool = false;
+    let mut updated = 0;
+    let mut last_i = 0;
+    let mut i = 0;
     mutex_lock(&event_mutex);
     down_write(&trace_event_sem);
     list_for_each_entry_safe(call, p, &ftrace_events, list) {
-    if (mod && call.module != mod)
+    if (mod && call.module != mod) {
     continue;
+    }
 // events are usually grouped together with systems
     if (!last_system || call.class.system != last_system) {
     first = true;
@@ -3218,7 +3348,7 @@ pub unsafe extern "C" fn trace_event_update_all(map: *mut trace_eval_map, len: c
 // will be the index of the first map[] that has a matching
 // system.
 //
-    for (i = last_i; i < len; i++) {
+    while (i < len) {
     if (call.class.system == map[i].system) {
 // Save the first system if need be
     if (first) {
@@ -3231,26 +3361,29 @@ pub unsafe extern "C" fn trace_event_update_all(map: *mut trace_eval_map, len: c
     }
     }
 // If not updated yet, update field for sanitizing.
-    if (!updated)
+    if (!updated) {
     update_event_fields(call, core::ptr::null_mut());
+    }
     cond_resched();
     }
     up_write(&trace_event_sem);
     mutex_unlock(&event_mutex);
     }
-    static bool event_in_systems(struct trace_event_call *call,
-    const char *systems)
-    {
-    const char *system;
-    const char *p;
-    if (!systems)
+#[no_mangle]
+pub unsafe extern "C" fn event_in_systems(call: *mut trace_event_call, systems: *mut c_char) -> bool {
+pub static mut system: *mut c_void = core::ptr::null_mut();
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    if (!systems) {
     return true;
+    }
     system = call.class.system;
     p = strstr(systems, system);
-    if (!p)
+    if (!p) {
     return false;
-    if (p != systems && !isspace(*(p - 1)) && *(p - 1) != ',')
+    }
+    if (p != systems && !isspace(*(p - 1)) && *(p - 1) != ',') {
     return false;
+    }
     p += strlen(system);
     return !*p || isspace(*p) || *p == ',';
     }
@@ -3261,33 +3394,32 @@ pub unsafe extern "C" fn trace_event_update_all(map: *mut trace_eval_map, len: c
 //
 #[no_mangle]
 unsafe extern "C" fn hist_poll_event_irq_work(work: *mut irq_work) {
-    static void hist_poll_event_irq_work(struct irq_work *work)
-    {
     wake_up_all(&hist_poll_wq);
     }
-    DEFINE_IRQ_WORK(hist_poll_work, hist_poll_event_irq_work);
-    DECLARE_WAIT_QUEUE_HEAD(hist_poll_wq);
+pub static mut hist_poll_work: usize = 0;
+pub static mut hist_poll_wq: usize = 0;
 
-    static struct trace_event_file *
-    trace_create_new_event(struct trace_event_call *call,
-    struct trace_array *tr)
-    {
-    struct trace_pid_list *no_pid_list;
-    struct trace_pid_list *pid_list;
-    struct trace_event_file *file;
-    unsigned int first;
-    if (!event_in_systems(call, tr.system_names))
+#[no_mangle]
+pub unsafe extern "C" fn trace_create_new_event(call: *mut trace_event_call, tr: *mut trace_array) -> *mut c_void {
+pub static mut no_pid_list: *mut c_void = core::ptr::null_mut();
+pub static mut pid_list: *mut c_void = core::ptr::null_mut();
+pub static mut file: *mut c_void = core::ptr::null_mut();
+    let mut first = 0;
+    if (!event_in_systems(call, tr.system_names)) {
     return core::ptr::null_mut();
+    }
     file = kmem_cache_alloc(file_cachep, GFP_TRACE);
-    if (!file)
+    if (!file) {
     return ERR_PTR(-ENOMEM);
+    }
     pid_list = rcu_dereference_protected(tr.filtered_pids,
     lockdep_is_held(&event_mutex));
     no_pid_list = rcu_dereference_protected(tr.filtered_no_pids,
     lockdep_is_held(&event_mutex));
     if (!trace_pid_list_first(pid_list, &first) ||
-    !trace_pid_list_first(no_pid_list, &first))
+    !trace_pid_list_first(no_pid_list, &first)) {
     file.flags |= EVENT_FILE_FL_PID_FILTER;
+    }
     file.event_call = call;
     file.tr = tr;
     atomic_set(&file.sm_ref, 0);
@@ -3299,45 +3431,45 @@ unsafe extern "C" fn hist_poll_event_irq_work(work: *mut irq_work) {
     }
 pub const MAX_BOOT_TRIGGERS: c_int = 32;
     static struct boot_triggers {
-    const char		*event;
-    char			*trigger;
+pub static mut event: *mut c_void = core::ptr::null_mut();
+pub static mut trigger: *mut c_void = core::ptr::null_mut();
     } bootup_triggers[MAX_BOOT_TRIGGERS];
     static char bootup_trigger_buf[COMMAND_LINE_SIZE];
     static int boot_trigger_buf_len;
     static int nr_boot_triggers;
 #[no_mangle]
 unsafe extern "C" fn setup_trace_triggers(str: *mut c_char) -> __init int {
-    static __init int setup_trace_triggers(char *str)
-    {
-    char *trigger;
-    char *buf;
-    let mut len: c_int = boot_trigger_buf_len;
-    int i;
-    if (len >= COMMAND_LINE_SIZE)
+pub static mut trigger: *mut c_void = core::ptr::null_mut();
+pub static mut buf: *mut c_void = core::ptr::null_mut();
+pub static mut len: c_int = 0;
+    let mut i = 0;
+    if (len >= COMMAND_LINE_SIZE) {
     return 1;
+    }
     strscpy(bootup_trigger_buf + len, str, COMMAND_LINE_SIZE - len);
     trace_set_ring_buffer_expanded(core::ptr::null_mut());
     disable_tracing_selftest("running event triggers");
     buf = bootup_trigger_buf + len;
     boot_trigger_buf_len += strlen(buf) + 1;
-    for (i = nr_boot_triggers; i < MAX_BOOT_TRIGGERS; i++) {
+    while (i < MAX_BOOT_TRIGGERS) {
     trigger = strsep(&buf, ",");
-    if (!trigger)
+    if (!trigger) {
     break;
+    }
     bootup_triggers[i].event = strsep(&trigger, ".");
     bootup_triggers[i].trigger = trigger;
-    if (!bootup_triggers[i].trigger)
+    if (!bootup_triggers[i].trigger) {
     break;
+    }
     }
     nr_boot_triggers = i;
     return 1;
     }
-    __setup("trace_trigger=", setup_trace_triggers);
+    __setup!("trace_trigger=", setup_trace_triggers);
 // Add an event to a trace directory
-    static int
-    __trace_add_new_event(struct trace_event_call *call, struct trace_array *tr)
-    {
-    struct trace_event_file *file;
+#[no_mangle]
+pub unsafe extern "C" fn __trace_add_new_event(call: *mut trace_event_call, tr: *mut trace_array) -> c_int {
+pub static mut file: *mut c_void = core::ptr::null_mut();
     file = trace_create_new_event(call, tr);
 //
 // trace_create_new_event() returns ERR_PTR(-ENOMEM) if failed
@@ -3345,31 +3477,35 @@ unsafe extern "C" fn setup_trace_triggers(str: *mut c_char) -> __init int {
 // When the event is not part of the tr->system_names, return zero, not
 // an error.
 //
-    if (!file)
+    if (!file) {
     return 0;
-    if (IS_ERR(file))
+    }
+    if (IS_ERR(file)) {
     return PTR_ERR(file);
-    if (eventdir_initialized)
+    }
+    if (eventdir_initialized) {
     return event_create_dir(tr.event_dir, file);
-    else
+    }
+    else {
     return event_define_fields(call);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn trace_early_triggers(file: *mut trace_event_file, name: *const c_char) {
-    static void trace_early_triggers(struct trace_event_file *file, const char *name)
-    {
-    int ret;
-    int i;
-    for (i = 0; i < nr_boot_triggers; i++) {
-    if (strcmp(name, bootup_triggers[i].event))
+    let mut ret = 0;
+    let mut i = 0;
+    while (i < nr_boot_triggers) {
+    if (strcmp(name, bootup_triggers[i].event)) {
     continue;
+    }
     mutex_lock(&event_mutex);
     ret = trigger_process_regex(file, bootup_triggers[i].trigger);
     mutex_unlock(&event_mutex);
-    if (ret)
-    pr_err("Failed to register trigger '%s' on event %s\n",
+    if (ret) {
+    pr_err!("Failed to register trigger '%s' on event %s\n",
     bootup_triggers[i].trigger,
     bootup_triggers[i].event);
+    }
     }
     }
 //
@@ -3377,12 +3513,10 @@ unsafe extern "C" fn trace_early_triggers(file: *mut trace_event_file, name: *co
 // for enabling events at boot. We want to enable events before
 // the filesystem is initialized.
 //
-    static int
-    __trace_early_add_new_event(struct trace_event_call *call,
-    struct trace_array *tr)
-    {
-    struct trace_event_file *file;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn __trace_early_add_new_event(call: *mut trace_event_call, tr: *mut trace_array) -> c_int {
+pub static mut file: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     file = trace_create_new_event(call, tr);
 //
 // trace_create_new_event() returns ERR_PTR(-ENOMEM) if failed
@@ -3390,29 +3524,31 @@ unsafe extern "C" fn trace_early_triggers(file: *mut trace_event_file, name: *co
 // When the event is not part of the tr->system_names, return zero, not
 // an error.
 //
-    if (!file)
+    if (!file) {
     return 0;
-    if (IS_ERR(file))
+    }
+    if (IS_ERR(file)) {
     return PTR_ERR(file);
+    }
     ret = event_define_fields(call);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     trace_early_triggers(file, trace_event_name(call));
     return 0;
     }
-    struct ftrace_module_file_ops;
-    static void __add_event_to_tracers(struct trace_event_call *call);
+    let mut ftrace_module_file_ops;
+// forward_decl: __add_event_to_tracers;
 // Add an additional event_call dynamically
 #[no_mangle]
 pub unsafe extern "C" fn trace_add_event_call(call: *mut trace_event_call) -> c_int {
-    int trace_add_event_call(struct trace_event_call *call)
-    {
-    int ret;
+    let mut ret = 0;
     lockdep_assert_held(&event_mutex);
     guard(mutex)(&trace_types_lock);
     ret = __register_event(call, core::ptr::null_mut());
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     __add_event_to_tracers(call);
     return ret;
     }
@@ -3423,33 +3559,33 @@ pub unsafe extern "C" fn trace_add_event_call(call: *mut trace_event_call) -> c_
 //
 #[no_mangle]
 unsafe extern "C" fn __trace_remove_event_call(call: *mut trace_event_call) {
-    static void __trace_remove_event_call(struct trace_event_call *call)
-    {
     event_remove(call);
     trace_destroy_fields(call);
     }
 #[no_mangle]
 unsafe extern "C" fn probe_remove_event_call(call: *mut trace_event_call) -> c_int {
-    static int probe_remove_event_call(struct trace_event_call *call)
-    {
-    struct trace_array *tr;
-    struct trace_event_file *file;
+pub static mut tr: *mut c_void = core::ptr::null_mut();
+pub static mut file: *mut c_void = core::ptr::null_mut();
 
-    if (call.perf_refcount)
+    if (call.perf_refcount) {
     return -EBUSY;
+    }
 
     do_for_each_event_file(tr, file) {
-    if (file.event_call != call)
+    if (file.event_call != call) {
     continue;
+    }
 //
 // We can't rely on ftrace_event_enable_disable(enable => 0)
 // we are going to do, soft mode can suppress
 // TRACE_REG_UNREGISTER.
 //
-    if (file.flags & EVENT_FILE_FL_ENABLED)
-    goto busy;
-    if (file.flags & EVENT_FILE_FL_WAS_ENABLED)
+    if (file.flags & EVENT_FILE_FL_ENABLED) {
+// goto;
+    }
+    if (file.flags & EVENT_FILE_FL_WAS_ENABLED) {
     tr.clear_trace = true;
+    }
 //
 // The do_for_each_event_file_safe() is
 // a double loop. After finding the call for this
@@ -3460,7 +3596,7 @@ unsafe extern "C" fn probe_remove_event_call(call: *mut trace_event_call) -> c_i
     } while_for_each_event_file();
     __trace_remove_event_call(call);
     return 0;
-    busy:
+// label;
 // No need to clear the trace now
     list_for_each_entry(tr, &ftrace_trace_arrays, list) {
     tr.clear_trace = false;
@@ -3470,9 +3606,7 @@ unsafe extern "C" fn probe_remove_event_call(call: *mut trace_event_call) -> c_i
 // Remove an event_call
 #[no_mangle]
 pub unsafe extern "C" fn trace_remove_event_call(call: *mut trace_event_call) -> c_int {
-    int trace_remove_event_call(struct trace_event_call *call)
-    {
-    int ret;
+    let mut ret = 0;
     lockdep_assert_held(&event_mutex);
     mutex_lock(&trace_types_lock);
     down_write(&trace_event_sem);
@@ -3483,18 +3617,19 @@ pub unsafe extern "C" fn trace_remove_event_call(call: *mut trace_event_call) ->
     }
     EXPORT_SYMBOL_GPL(trace_remove_event_call);
 
-    for (event = start;					\
-    (unsigned long)event < (unsigned long)end;		\
-    event++)
+    for (event = start;					
+    (unsigned long)event < (unsigned long)end;		
+    event++) {
 
 #[no_mangle]
 unsafe extern "C" fn update_mod_cache(tr: *mut trace_array, mod: *mut module) {
-    static void update_mod_cache(struct trace_array *tr, struct module *mod)
-    {
-    struct event_mod_load *event_mod, *n;
+    }
+    let mut event_mod = core::ptr::null_mut();
+    let mut n = core::ptr::null_mut();
     list_for_each_entry_safe(event_mod, n, &tr.mod_events, list) {
-    if (strcmp(event_mod.module, mod.name) != 0)
+    if (strcmp(event_mod.module, mod.name) != 0) {
     continue;
+    }
     __ftrace_set_clr_event_nolock(tr, event_mod.match,
     event_mod.system,
     event_mod.event, 1, mod.name);
@@ -3503,50 +3638,54 @@ unsafe extern "C" fn update_mod_cache(tr: *mut trace_array, mod: *mut module) {
     }
 #[no_mangle]
 unsafe extern "C" fn update_cache_events(mod: *mut module) {
-    static void update_cache_events(struct module *mod)
-    {
-    struct trace_array *tr;
-    list_for_each_entry(tr, &ftrace_trace_arrays, list)
+pub static mut tr: *mut c_void = core::ptr::null_mut();
+    list_for_each_entry(tr, &ftrace_trace_arrays, list) {
     update_mod_cache(tr, mod);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn trace_module_add_events(mod: *mut module) {
-    static void trace_module_add_events(struct module *mod)
-    {
-    struct trace_event_call **call, **start, **end;
-    if (!mod.num_trace_events)
+    let mut call = core::ptr::null_mut();
+    let mut start = core::ptr::null_mut();
+    let mut end = core::ptr::null_mut();
+    if (!mod.num_trace_events) {
     return;
+    }
 // Don't add infrastructure for mods without tracepoints
     if (trace_module_has_bad_taint(mod)) {
-    pr_err("%s: module has bad taint, not creating trace events\n",
+    pr_err!("%s: module has bad taint, not creating trace events\n",
     mod.name);
     return;
     }
     start = mod.trace_events;
     end = mod.trace_events + mod.num_trace_events;
     for_each_event(call, start, end) {
-    if (!__register_event(*call, mod))
+    if (!__register_event(*call, mod)) {
     __add_event_to_tracers(*call);
+    }
     }
     update_cache_events(mod);
     }
 #[no_mangle]
 unsafe extern "C" fn trace_module_remove_events(mod: *mut module) {
-    static void trace_module_remove_events(struct module *mod)
-    {
-    struct trace_event_call *call, *p;
-    struct module_string *modstr, *m;
+    let mut call = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
+    let mut modstr = core::ptr::null_mut();
+    let mut m = core::ptr::null_mut();
     down_write(&trace_event_sem);
     list_for_each_entry_safe(call, p, &ftrace_events, list) {
-    if ((call.flags & TRACE_EVENT_FL_DYNAMIC) || !call.module)
+    if ((call.flags & TRACE_EVENT_FL_DYNAMIC) || !call.module) {
     continue;
-    if (call.module == mod)
+    }
+    if (call.module == mod) {
     __trace_remove_event_call(call);
+    }
     }
 // Check for any strings allocated for this module
     list_for_each_entry_safe(modstr, m, &module_strings, next) {
-    if (modstr.module != mod)
+    if (modstr.module != mod) {
     continue;
+    }
     list_del(&modstr.next);
     kfree(modstr.str);
     kfree(modstr);
@@ -3562,70 +3701,69 @@ unsafe extern "C" fn trace_module_remove_events(mod: *mut module) {
 //
     tracing_reset_all_online_cpus_unlocked();
     }
-    static int trace_module_notify(struct notifier_block *self,
-    unsigned long val, void *data)
-    {
-    struct module *mod = data;
+#[no_mangle]
+pub unsafe extern "C" fn trace_module_notify(self: *mut notifier_block, val: c_ulong, data: *mut c_void) -> c_int {
+    let mut mod = data;
     mutex_lock(&event_mutex);
     mutex_lock(&trace_types_lock);
-    switch (val) {
-    case MODULE_STATE_COMING:
+    match (val) {
+    MODULE_STATE_COMING => {
     trace_module_add_events(mod);
-    break;
-    case MODULE_STATE_GOING:
+    // break;
+    }
+    MODULE_STATE_GOING => {
     trace_module_remove_events(mod);
-    break;
+    // break;
+    }
     }
     mutex_unlock(&trace_types_lock);
     mutex_unlock(&event_mutex);
     return NOTIFY_OK;
     }
-    static struct notifier_block trace_module_nb = {
-    .notifier_call = trace_module_notify,
-    .priority = 1, /* higher than trace.c module notify */
-    };
+pub static mut notifier_block: usize = 0;
 
 // Create a new event directory structure for a trace directory.
-    static void
-    __trace_add_event_dirs(struct trace_array *tr)
-    {
-    struct trace_event_call *call;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn __trace_add_event_dirs(tr: *mut trace_array) {
+pub static mut call: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     lockdep_assert_held(&trace_event_sem);
     list_for_each_entry(call, &ftrace_events, list) {
     ret = __trace_add_new_event(call, tr);
-    if (ret < 0)
-    pr_warn("Could not create directory for event %s\n",
+    if (ret < 0) {
+    pr_warn!("Could not create directory for event %s\n",
     trace_event_name(call));
     }
     }
+    }
 // Returns any file that matches the system and event
-    struct trace_event_file *
-    __find_event_file(struct trace_array *tr, const char *system, const char *event)
-    {
-    struct trace_event_file *file;
-    struct trace_event_call *call;
-    const char *name;
+#[no_mangle]
+pub unsafe extern "C" fn __find_event_file(tr: *mut trace_array, system: *mut c_char, event: *mut c_char) -> *mut c_void {
+pub static mut file: *mut c_void = core::ptr::null_mut();
+pub static mut call: *mut c_void = core::ptr::null_mut();
+pub static mut name: *mut c_void = core::ptr::null_mut();
     list_for_each_entry(file, &tr.events, list) {
     call = file.event_call;
     name = trace_event_name(call);
-    if (!name || !call.class)
+    if (!name || !call.class) {
     continue;
+    }
     if (strcmp(event, name) == 0 &&
-    strcmp(system, call.class.system) == 0)
+    strcmp(system, call.class.system) == 0) {
     return file;
+    }
     }
     return core::ptr::null_mut();
     }
 // Returns valid trace event files that match system and event
-    struct trace_event_file *
-    find_event_file(struct trace_array *tr, const char *system, const char *event)
-    {
-    struct trace_event_file *file;
+#[no_mangle]
+pub unsafe extern "C" fn find_event_file(tr: *mut trace_array, system: *mut c_char, event: *mut c_char) -> *mut c_void {
+pub static mut file: *mut c_void = core::ptr::null_mut();
     file = __find_event_file(tr, system, event);
     if (!file || !file.event_call.class.reg ||
-    file.event_call.flags & TRACE_EVENT_FL_IGNORE_ENABLE)
+    file.event_call.flags & TRACE_EVENT_FL_IGNORE_ENABLE) {
     return core::ptr::null_mut();
+    }
     return file;
     }
 //
@@ -3648,21 +3786,21 @@ unsafe extern "C" fn trace_module_remove_events(mod: *mut module) {
 //
 // Return: The trace event on success, ERR_PTR otherwise.
 //
-    struct trace_event_file *trace_get_event_file(const char *instance,
-    const char *system,
-    const char *event)
-    {
-    struct trace_array *tr = top_trace_array();
-    struct trace_event_file *file = core::ptr::null_mut();
-    let mut ret: c_int = -EINVAL;
+#[no_mangle]
+pub unsafe extern "C" fn trace_get_event_file(instance: *mut c_char, system: *mut c_char, event: *mut c_char) -> *mut c_void {
+    let mut tr = top_trace_array();
+    let mut file = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     if (instance) {
     tr = trace_array_find_get(instance);
-    if (!tr)
+    if (!tr) {
     return ERR_PTR(-ENOENT);
+    }
     } else {
     ret = trace_array_get(tr);
-    if (ret)
+    if (ret) {
     return ERR_PTR(ret);
+    }
     }
     guard(mutex)(&event_mutex);
     file = find_event_file(tr, system, event);
@@ -3690,8 +3828,6 @@ unsafe extern "C" fn trace_module_remove_events(mod: *mut module) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn trace_put_event_file(file: *mut trace_event_file) {
-    void trace_put_event_file(struct trace_event_file *file)
-    {
     mutex_lock(&event_mutex);
     trace_event_put_ref(file.event_call);
     mutex_unlock(&event_mutex);
@@ -3710,95 +3846,93 @@ pub struct event_probe_data {
 
 #[no_mangle]
 unsafe extern "C" fn update_event_probe(data: *mut event_probe_data) {
-    static void update_event_probe(struct event_probe_data *data)
-    {
-    if (data.enable)
+    if (data.enable) {
     clear_bit(EVENT_FILE_FL_SOFT_DISABLED_BIT, &data.file.flags);
-    else
+    }
+    else {
     set_bit(EVENT_FILE_FL_SOFT_DISABLED_BIT, &data.file.flags);
     }
-    static void
-    event_enable_probe(unsigned long ip, unsigned long parent_ip,
-    struct trace_array *tr, struct ftrace_probe_ops *ops,
-    void *data)
-    {
-    struct ftrace_func_mapper *mapper = data;
-    struct event_probe_data *edata;
-    void **pdata;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn event_enable_probe(ip: c_ulong, parent_ip: c_ulong, tr: *mut trace_array, ops: *mut ftrace_probe_ops, data: *mut c_void) {
+    let mut mapper = data;
+pub static mut edata: *mut c_void = core::ptr::null_mut();
+pub static mut pdata: *mut c_void = core::ptr::null_mut();
     pdata = ftrace_func_mapper_find_ip(mapper, ip);
-    if (!pdata || !*pdata)
+    if (!pdata || !*pdata) {
     return;
+    }
     edata = *pdata;
     update_event_probe(edata);
     }
-    static void
-    event_enable_count_probe(unsigned long ip, unsigned long parent_ip,
-    struct trace_array *tr, struct ftrace_probe_ops *ops,
-    void *data)
-    {
-    struct ftrace_func_mapper *mapper = data;
-    struct event_probe_data *edata;
-    void **pdata;
+#[no_mangle]
+pub unsafe extern "C" fn event_enable_count_probe(ip: c_ulong, parent_ip: c_ulong, tr: *mut trace_array, ops: *mut ftrace_probe_ops, data: *mut c_void) {
+    let mut mapper = data;
+pub static mut edata: *mut c_void = core::ptr::null_mut();
+pub static mut pdata: *mut c_void = core::ptr::null_mut();
     pdata = ftrace_func_mapper_find_ip(mapper, ip);
-    if (!pdata || !*pdata)
+    if (!pdata || !*pdata) {
     return;
+    }
     edata = *pdata;
-    if (!edata.count)
+    if (!edata.count) {
     return;
+    }
 // Skip if the event is in a state we want to switch to
-    if (edata.enable == !(edata.file.flags & EVENT_FILE_FL_SOFT_DISABLED))
+    if (edata.enable == !(edata.file.flags & EVENT_FILE_FL_SOFT_DISABLED)) {
     return;
-    if (edata.count != -1)
+    }
+    if (edata.count != -1) {
     (edata.count)--;
+    }
     update_event_probe(edata);
     }
-    static int
-    event_enable_print(struct seq_file *m, unsigned long ip,
-    struct ftrace_probe_ops *ops, void *data)
-    {
-    struct ftrace_func_mapper *mapper = data;
-    struct event_probe_data *edata;
-    void **pdata;
+#[no_mangle]
+pub unsafe extern "C" fn event_enable_print(m: *mut seq_file, ip: c_ulong, ops: *mut ftrace_probe_ops, data: *mut c_void) -> c_int {
+    let mut mapper = data;
+pub static mut edata: *mut c_void = core::ptr::null_mut();
+pub static mut pdata: *mut c_void = core::ptr::null_mut();
     pdata = ftrace_func_mapper_find_ip(mapper, ip);
-    if (WARN_ON_ONCE(!pdata || !*pdata))
+    if (WARN_ON_ONCE!(!pdata || !*pdata)) {
     return 0;
+    }
     edata = *pdata;
-    seq_printf(m, "%ps:", (void *)ip);
+    seq_printf(m, "%ps:", ip);
     seq_printf(m, "%s:%s:%s",
     edata.enable ? ENABLE_EVENT_STR : DISABLE_EVENT_STR,
     edata.file.event_call.class.system,
     trace_event_name(edata.file.event_call));
-    if (edata.count == -1)
+    if (edata.count == -1) {
     seq_puts(m, ":unlimited\n");
-    else
+    }
+    else {
     seq_printf(m, ":count=%ld\n", edata.count);
+    }
     return 0;
     }
-    static int
-    event_enable_init(struct ftrace_probe_ops *ops, struct trace_array *tr,
-    unsigned long ip, void *init_data, void **data)
-    {
-    struct ftrace_func_mapper *mapper = *data;
-    struct event_probe_data *edata = init_data;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn event_enable_init(ops: *mut ftrace_probe_ops, tr: *mut trace_array, ip: c_ulong, init_data: *mut c_void, data: *mut *mut c_void) -> c_int {
+    let mut mapper = *data;
+    let mut edata = init_data;
+    let mut ret = 0;
     if (!mapper) {
     mapper = allocate_ftrace_func_mapper();
-    if (!mapper)
+    if (!mapper) {
     return -ENODEV;
+    }
 // data = mapper;
     }
     ret = ftrace_func_mapper_add_ip(mapper, ip, edata);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
-    edata.ref++;
+    }
+    edata.ref += 1;
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn free_probe_data(data: *mut c_void) -> c_int {
-    static int free_probe_data(void *data)
-    {
-    struct event_probe_data *edata = data;
-    edata.ref--;
+    let mut edata = data;
+    edata.ref -= 1;
     if (!edata.ref) {
 // Remove soft mode
     __ftrace_event_enable_disable(edata.file, 0, 1);
@@ -3807,105 +3941,96 @@ unsafe extern "C" fn free_probe_data(data: *mut c_void) -> c_int {
     }
     return 0;
     }
-    static void
-    event_enable_free(struct ftrace_probe_ops *ops, struct trace_array *tr,
-    unsigned long ip, void *data)
-    {
-    struct ftrace_func_mapper *mapper = data;
-    struct event_probe_data *edata;
+#[no_mangle]
+pub unsafe extern "C" fn event_enable_free(ops: *mut ftrace_probe_ops, tr: *mut trace_array, ip: c_ulong, data: *mut c_void) {
+    let mut mapper = data;
+pub static mut edata: *mut c_void = core::ptr::null_mut();
     if (!ip) {
-    if (!mapper)
+    if (!mapper) {
     return;
+    }
     free_ftrace_func_mapper(mapper, free_probe_data);
     return;
     }
     edata = ftrace_func_mapper_remove_ip(mapper, ip);
-    if (WARN_ON_ONCE(!edata))
+    if (WARN_ON_ONCE!(!edata)) {
     return;
-    if (WARN_ON_ONCE(edata.ref <= 0))
+    }
+    if (WARN_ON_ONCE!(edata.ref <= 0)) {
     return;
+    }
     free_probe_data(edata);
     }
-    static struct ftrace_probe_ops event_enable_probe_ops = {
-    .func			= event_enable_probe,
-    .print			= event_enable_print,
-    .init			= event_enable_init,
-    .free			= event_enable_free,
-    };
-    static struct ftrace_probe_ops event_enable_count_probe_ops = {
-    .func			= event_enable_count_probe,
-    .print			= event_enable_print,
-    .init			= event_enable_init,
-    .free			= event_enable_free,
-    };
-    static struct ftrace_probe_ops event_disable_probe_ops = {
-    .func			= event_enable_probe,
-    .print			= event_enable_print,
-    .init			= event_enable_init,
-    .free			= event_enable_free,
-    };
-    static struct ftrace_probe_ops event_disable_count_probe_ops = {
-    .func			= event_enable_count_probe,
-    .print			= event_enable_print,
-    .init			= event_enable_init,
-    .free			= event_enable_free,
-    };
-    static int
-    event_enable_func(struct trace_array *tr, struct ftrace_hash *hash,
-    char *glob, char *cmd, char *param, int enabled)
-    {
-    struct trace_event_file *file;
-    struct ftrace_probe_ops *ops;
-    struct event_probe_data *data;
-    let mut count: c_ulong = -1;
-    const char *system;
-    const char *event;
-    char *number;
-    bool enable;
-    int ret;
-    if (!tr)
+pub static mut ftrace_probe_ops: usize = 0;
+pub static mut ftrace_probe_ops: usize = 0;
+pub static mut ftrace_probe_ops: usize = 0;
+pub static mut ftrace_probe_ops: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn event_enable_func(tr: *mut trace_array, hash: *mut ftrace_hash, glob: *mut c_char, cmd: *mut c_char, param: *mut c_char, enabled: c_int) -> c_int {
+pub static mut file: *mut c_void = core::ptr::null_mut();
+pub static mut ops: *mut c_void = core::ptr::null_mut();
+pub static mut data: *mut c_void = core::ptr::null_mut();
+pub static mut count: c_ulong = 0;
+pub static mut system: *mut c_void = core::ptr::null_mut();
+pub static mut event: *mut c_void = core::ptr::null_mut();
+pub static mut number: *mut c_void = core::ptr::null_mut();
+    let mut enable = 0;
+    let mut ret = 0;
+    if (!tr) {
     return -ENODEV;
+    }
 // hash funcs only work with set_ftrace_filter
-    if (!enabled || !param)
+    if (!enabled || !param) {
     return -EINVAL;
+    }
     system = strsep(&param, ":");
-    if (!param)
+    if (!param) {
     return -EINVAL;
+    }
     event = strsep(&param, ":");
     guard(mutex)(&event_mutex);
     file = find_event_file(tr, system, event);
-    if (!file)
+    if (!file) {
     return -EINVAL;
+    }
     enable = strcmp(cmd, ENABLE_EVENT_STR) == 0;
-    if (enable)
+    if (enable) {
     ops = param ? &event_enable_count_probe_ops : &event_enable_probe_ops;
-    else
+    }
+    else {
     ops = param ? &event_disable_count_probe_ops : &event_disable_probe_ops;
-    if (glob[0] == '!')
+    }
+    if (glob[0] == '!') {
     return unregister_ftrace_function_probe_func(glob+1, tr, ops);
+    }
     if (param) {
     number = strsep(&param, ":");
-    if (!strlen(number))
+    if (!strlen(number)) {
     return -EINVAL;
+    }
 //
 // We use the callback data field (which is a pointer)
 // as our counter.
 //
     ret = kstrtoul(number, 0, &count);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     }
 // Don't let event modules unload while probe registered
     ret = trace_event_try_get_ref(file.event_call);
-    if (!ret)
+    if (!ret) {
     return -EBUSY;
+    }
     ret = __ftrace_event_enable_disable(file, 1, 1);
-    if (ret < 0)
-    goto out_put;
+    if (ret < 0) {
+// goto;
+    }
     ret = -ENOMEM;
     data = kzalloc_obj(*data);
-    if (!data)
-    goto out_put;
+    if (!data) {
+// goto;
+    }
     data.enable = enable;
     data.count = count;
     data.file = file;
@@ -3916,39 +4041,36 @@ unsafe extern "C" fn free_probe_data(data: *mut c_void) -> c_int {
 // Consider no functions a failure too.
 //
 // Just return zero, not the number of enabled functions
-    if (ret > 0)
+    if (ret > 0) {
     return 0;
+    }
     kfree(data);
-    if (!ret)
+    if (!ret) {
     ret = -ENOENT;
+    }
     __ftrace_event_enable_disable(file, 0, 1);
-    out_put:
+// label;
     trace_event_put_ref(file.event_call);
     return ret;
     }
-    static struct ftrace_func_command event_enable_cmd = {
-    .name			= ENABLE_EVENT_STR,
-    .func			= event_enable_func,
-    };
-    static struct ftrace_func_command event_disable_cmd = {
-    .name			= DISABLE_EVENT_STR,
-    .func			= event_enable_func,
-    };
+pub static mut ftrace_func_command: usize = 0;
+pub static mut ftrace_func_command: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn register_event_cmds() -> __init int {
-    static __init int register_event_cmds(void)
-    {
-    int ret;
+    let mut ret = 0;
     ret = register_ftrace_command(&event_enable_cmd);
-    if (WARN_ON(ret < 0))
+    if (WARN_ON!(ret < 0)) {
     return ret;
+    }
     ret = register_ftrace_command(&event_disable_cmd);
-    if (WARN_ON(ret < 0))
+    if (WARN_ON!(ret < 0)) {
     unregister_ftrace_command(&event_enable_cmd);
+    }
     return ret;
     }
 
-    static inline int register_event_cmds(void) { return 0; }
+#[no_mangle]
+pub unsafe extern "C" fn register_event_cmds() -> c_int { return 0; }
 
 //
 // The top level array and trace arrays created by boot-time tracing
@@ -3959,15 +4081,14 @@ unsafe extern "C" fn register_event_cmds() -> __init int {
 //
 #[no_mangle]
 unsafe extern "C" fn __trace_early_add_event_dirs(tr: *mut trace_array) {
-    static void __trace_early_add_event_dirs(struct trace_array *tr)
-    {
-    struct trace_event_file *file;
-    int ret;
+pub static mut file: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     list_for_each_entry(file, &tr.events, list) {
     ret = event_create_dir(tr.event_dir, file);
-    if (ret < 0)
-    pr_warn("Could not create directory for event %s\n",
+    if (ret < 0) {
+    pr_warn!("Could not create directory for event %s\n",
     trace_event_name(file.event_call));
+    }
     }
     }
 //
@@ -3978,61 +4099,60 @@ unsafe extern "C" fn __trace_early_add_event_dirs(tr: *mut trace_array) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __trace_early_add_events(tr: *mut trace_array) {
-    void __trace_early_add_events(struct trace_array *tr)
-    {
-    struct trace_event_call *call;
-    int ret;
+pub static mut call: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     list_for_each_entry(call, &ftrace_events, list) {
 // Early boot up should not have any modules loaded
     if (!(call.flags & TRACE_EVENT_FL_DYNAMIC) &&
-    WARN_ON_ONCE(call.module))
+    WARN_ON_ONCE!(call.module)) {
     continue;
+    }
     ret = __trace_early_add_new_event(call, tr);
-    if (ret < 0)
-    pr_warn("Could not create early event %s\n",
+    if (ret < 0) {
+    pr_warn!("Could not create early event %s\n",
     trace_event_name(call));
     }
     }
+    }
 // Remove the event directory structure for a trace directory.
-    static void
-    __trace_remove_event_dirs(struct trace_array *tr)
-    {
-    struct trace_event_file *file, *next;
-    list_for_each_entry_safe(file, next, &tr.events, list)
+#[no_mangle]
+pub unsafe extern "C" fn __trace_remove_event_dirs(tr: *mut trace_array) {
+    let mut file = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+    list_for_each_entry_safe(file, next, &tr.events, list) {
     remove_event_file_dir(file);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn __add_event_to_tracers(call: *mut trace_event_call) {
-    static void __add_event_to_tracers(struct trace_event_call *call)
-    {
-    struct trace_array *tr;
-    list_for_each_entry(tr, &ftrace_trace_arrays, list)
+pub static mut tr: *mut c_void = core::ptr::null_mut();
+    list_for_each_entry(tr, &ftrace_trace_arrays, list) {
     __trace_add_new_event(call, tr);
+    }
     }
     extern struct trace_event_call *__start_ftrace_events[];
     extern struct trace_event_call *__stop_ftrace_events[];
     static char bootup_event_buf[COMMAND_LINE_SIZE] __initdata;
     static struct seq_buf bootup_event_seq __initdata = {
     .buffer = bootup_event_buf,
-    .size = sizeof(bootup_event_buf),
+    .size = sizeof!(bootup_event_buf),
     };
 #[no_mangle]
 unsafe extern "C" fn setup_trace_event(str: *mut c_char) -> __init int {
-    static __init int setup_trace_event(char *str)
-    {
-    if (seq_buf_used(&bootup_event_seq) > 0)
+    if (seq_buf_used(&bootup_event_seq) > 0) {
     seq_buf_puts(&bootup_event_seq, ",");
+    }
     seq_buf_puts(&bootup_event_seq, str);
-    if (seq_buf_has_overflowed(&bootup_event_seq))
+    if (seq_buf_has_overflowed(&bootup_event_seq)) {
     return -ENOMEM;
+    }
     trace_set_ring_buffer_expanded(core::ptr::null_mut());
     disable_tracing_selftest("running event tracing");
     return 1;
     }
-    __setup("trace_event=", setup_trace_event);
-    static int events_callback(const char *name, umode_t *mode, void **data,
-    const struct file_operations **fops)
-    {
+    __setup!("trace_event=", setup_trace_event);
+#[no_mangle]
+pub unsafe extern "C" fn events_callback(name: *mut c_char, mode: *mut umode_t, data: *mut *mut c_void, fops: *mut *mut file_operations) -> c_int {
     if (strcmp(name, "enable") == 0) {
 // mode = TRACE_MODE_WRITE;
 // fops = &ftrace_tr_enable_fops;
@@ -4044,38 +4164,24 @@ unsafe extern "C" fn setup_trace_event(str: *mut c_char) -> __init int {
     } else if (strcmp(name, "header_event") == 0) {
 // mode = TRACE_MODE_READ;
 // fops = &ftrace_show_header_event_fops;
-    } else
+    } else {
     return 0;
+    }
     return 1;
     }
 // Expects to have event_mutex held when called
-    static int
-    create_event_toplevel_files(struct dentry *parent, struct trace_array *tr)
-    {
-    struct eventfs_inode *e_events;
-    struct dentry *entry;
-    int nr_entries;
-    static struct eventfs_entry events_entries[] = {
-    {
-    .name		= "header_page",
-    .callback	= events_callback,
-    },
-    {
-    .name		= "header_event",
-    .callback	= events_callback,
-    },
-pub const NR_RO_TOP_ENTRIES: c_int = 2;
-// Readonly files must be above this line and counted by NR_RO_TOP_ENTRIES.
-    {
-    .name		= "enable",
-    .callback	= events_callback,
-    },
-    };
+#[no_mangle]
+pub unsafe extern "C" fn create_event_toplevel_files(parent: *mut dentry, tr: *mut trace_array) -> c_int {
+pub static mut e_events: *mut c_void = core::ptr::null_mut();
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+    let mut nr_entries = 0;
+pub static mut eventfs_entry: usize = 0;
     if (!trace_array_is_readonly(tr)) {
     entry = trace_create_file("set_event", TRACE_MODE_WRITE, parent,
     tr, &ftrace_set_event_fops);
-    if (!entry)
+    if (!entry) {
     return -ENOMEM;
+    }
 // There are not as crucial, just warn if they are not created
     trace_create_file("show_event_filters", TRACE_MODE_READ, parent, tr,
     &ftrace_show_event_filters_fops);
@@ -4086,14 +4192,14 @@ pub const NR_RO_TOP_ENTRIES: c_int = 2;
     trace_create_file("set_event_notrace_pid",
     TRACE_MODE_WRITE, parent, tr,
     &ftrace_set_event_notrace_pid_fops);
-    nr_entries = ARRAY_SIZE(events_entries);
+    nr_entries = ARRAY_SIZE!(events_entries);
     } else {
     nr_entries = NR_RO_TOP_ENTRIES;
     }
     e_events = eventfs_create_events_dir("events", parent, events_entries,
     nr_entries, tr);
     if (IS_ERR(e_events)) {
-    pr_warn("Could not create tracefs 'events' directory\n");
+    pr_warn!("Could not create tracefs 'events' directory\n");
     return -ENOMEM;
     }
     tr.event_dir = e_events;
@@ -4114,35 +4220,36 @@ pub const NR_RO_TOP_ENTRIES: c_int = 2;
 //
 #[no_mangle]
 pub unsafe extern "C" fn event_trace_add_tracer(parent: *mut dentry, tr: *mut trace_array) -> c_int {
-    int event_trace_add_tracer(struct dentry *parent, struct trace_array *tr)
-    {
-    int ret;
+    let mut ret = 0;
     lockdep_assert_held(&event_mutex);
     ret = create_event_toplevel_files(parent, tr);
-    if (ret)
-    goto out;
+    if (ret) {
+// goto;
+    }
     down_write(&trace_event_sem);
 // If tr already has the event list, it is initialized in early boot.
-    if (unlikely(!list_empty(&tr.events)))
+    if (unlikely(!list_empty(&tr.events))) {
     __trace_early_add_event_dirs(tr);
-    else
+    }
+    else {
     __trace_add_event_dirs(tr);
+    }
     up_write(&trace_event_sem);
-    out:
+// label;
     return ret;
     }
 //
 // The top trace array already had its file descriptors created.
 // Now the files themselves need to be created.
 //
-    static __init int
-    early_event_add_tracer(struct dentry *parent, struct trace_array *tr)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn early_event_add_tracer(parent: *mut dentry, tr: *mut trace_array) -> c_int {
+    let mut ret = 0;
     guard(mutex)(&event_mutex);
     ret = create_event_toplevel_files(parent, tr);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     down_write(&trace_event_sem);
     __trace_early_add_event_dirs(tr);
     up_write(&trace_event_sem);
@@ -4151,8 +4258,6 @@ pub unsafe extern "C" fn event_trace_add_tracer(parent: *mut dentry, tr: *mut tr
 // Must be called with event_mutex held
 #[no_mangle]
 pub unsafe extern "C" fn event_trace_del_tracer(tr: *mut trace_array) -> c_int {
-    int event_trace_del_tracer(struct trace_array *tr)
-    {
     lockdep_assert_held(&event_mutex);
 // Disable any event triggers and associated soft-disabled events
     clear_event_triggers(tr);
@@ -4171,8 +4276,6 @@ pub unsafe extern "C" fn event_trace_del_tracer(tr: *mut trace_array) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn event_trace_memsetup() -> __init int {
-    static __init int event_trace_memsetup(void)
-    {
     field_cachep = KMEM_CACHE(ftrace_event_field, SLAB_PANIC);
     file_cachep = KMEM_CACHE(trace_event_file, SLAB_PANIC);
     return 0;
@@ -4183,21 +4286,21 @@ unsafe extern "C" fn event_trace_memsetup() -> __init int {
 //
 #[no_mangle]
 unsafe extern "C" fn __early_set_events(tr: *mut trace_array, buf: *mut c_char, enable: bool) -> __init void {
-    static __init void __early_set_events(struct trace_array *tr, char *buf, bool enable)
-    {
-    char *token;
+pub static mut token: *mut c_void = core::ptr::null_mut();
     while ((token = strsep(&buf, ","))) {
     if (*token) {
     if (enable) {
-    if (ftrace_set_clr_event(tr, token, 1))
-    pr_warn("Failed to enable trace event: %s\n", token);
+    if (ftrace_set_clr_event(tr, token, 1)) {
+    pr_warn!("Failed to enable trace event: %s\n", token);
+    }
     } else {
     ftrace_set_clr_event(tr, token, 0);
     }
     }
 // Put back the comma to allow this to be called again
-    if (buf)
+    if (buf) {
 // (buf - 1) = ',';
+    }
     }
     }
 //
@@ -4217,27 +4320,28 @@ unsafe extern "C" fn __early_set_events(tr: *mut trace_array, buf: *mut c_char, 
 // used, as the refcount will stay above zero. Thus, we need a two-phase
 // approach: disable all, then enable all.
 //
-    __init void
-    early_enable_events(struct trace_array *tr, char *buf, bool disable_first)
-    {
-    if (disable_first)
+#[no_mangle]
+pub unsafe extern "C" fn early_enable_events(tr: *mut trace_array, buf: *mut c_char, disable_first: bool) {
+    if (disable_first) {
     __early_set_events(tr, buf, false);
+    }
     __early_set_events(tr, buf, true);
     }
 #[no_mangle]
 unsafe extern "C" fn event_trace_enable() -> __init int {
-    static __init int event_trace_enable(void)
-    {
-    struct trace_array *tr = top_trace_array();
-    struct trace_event_call **iter, *call;
-    int ret;
-    if (!tr)
+    let mut tr = top_trace_array();
+    let mut iter = core::ptr::null_mut();
+    let mut call = core::ptr::null_mut();
+    let mut ret = 0;
+    if (!tr) {
     return -ENODEV;
+    }
     for_each_event(iter, __start_ftrace_events, __stop_ftrace_events) {
     call = *iter;
     ret = event_init(call);
-    if (!ret)
+    if (!ret) {
     list_add(&call.list, &ftrace_events);
+    }
     }
     register_trigger_cmds();
 //
@@ -4265,67 +4369,63 @@ unsafe extern "C" fn event_trace_enable() -> __init int {
 //
 #[no_mangle]
 unsafe extern "C" fn event_trace_enable_again() -> __init int {
-    static __init int event_trace_enable_again(void)
-    {
-    struct trace_array *tr;
+pub static mut tr: *mut c_void = core::ptr::null_mut();
     tr = top_trace_array();
-    if (!tr)
+    if (!tr) {
     return -ENODEV;
+    }
     seq_buf_str(&bootup_event_seq);
     early_enable_events(tr, bootup_event_buf, true);
     return 0;
     }
-    early_initcall(event_trace_enable_again);
+    early_initcall!(event_trace_enable_again);
 // Init fields which doesn't related to the tracefs
 #[no_mangle]
 unsafe extern "C" fn event_trace_init_fields() -> __init int {
-    static __init int event_trace_init_fields(void)
-    {
-    if (trace_define_generic_fields())
-    pr_warn("tracing: Failed to allocated generic fields");
-    if (trace_define_common_fields())
-    pr_warn("tracing: Failed to allocate common fields");
+    if (trace_define_generic_fields()) {
+    pr_warn!("tracing: Failed to allocated generic fields");
+    }
+    if (trace_define_common_fields()) {
+    pr_warn!("tracing: Failed to allocate common fields");
+    }
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn event_trace_init() -> __init int {
-    __init int event_trace_init(void)
-    {
-    struct trace_array *tr;
-    int ret;
+pub static mut tr: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     tr = top_trace_array();
-    if (!tr)
+    if (!tr) {
     return -ENODEV;
+    }
     trace_create_file("available_events", TRACE_MODE_READ,
     core::ptr::null_mut(), tr, &ftrace_avail_fops);
     ret = early_event_add_tracer(core::ptr::null_mut(), tr);
-    if (ret)
+    if (ret) {
     return ret;
+    }
 
     ret = register_module_notifier(&trace_module_nb);
-    if (ret)
-    pr_warn("Failed to register trace events module notifier\n");
+    if (ret) {
+    pr_warn!("Failed to register trace events module notifier\n");
+    }
 
     eventdir_initialized = true;
     return 0;
     }
 #[no_mangle]
-pub unsafe extern "C" fn trace_event_init() -> void __init {
-    void __init trace_event_init(void)
-    {
+pub unsafe extern "C" fn trace_event_init()  {
     event_trace_memsetup();
     init_ftrace_syscalls();
     event_trace_enable();
     event_trace_init_fields();
     }
 
-    static DEFINE_SPINLOCK(test_spinlock);
-    static DEFINE_SPINLOCK(test_spinlock_irq);
-    static DEFINE_MUTEX(test_mutex);
+pub static mut test_spinlock: usize = 0;
+pub static mut test_spinlock_irq: usize = 0;
+pub static mut test_mutex: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn test_work(dummy: *mut work_struct) -> __init void {
-    static __init void test_work(struct work_struct *dummy)
-    {
     spin_lock(&test_spinlock);
     spin_lock_irq(&test_spinlock_irq);
     udelay(1);
@@ -4337,12 +4437,11 @@ unsafe extern "C" fn test_work(dummy: *mut work_struct) -> __init void {
     }
 #[no_mangle]
 unsafe extern "C" fn event_test_thread(unused: *mut c_void) -> __init int {
-    static __init int event_test_thread(void *unused)
-    {
-    void *test_malloc;
+pub static mut test_malloc: *mut c_void = core::ptr::null_mut();
     test_malloc = kmalloc(1234, GFP_KERNEL);
-    if (!test_malloc)
-    pr_info("failed to kmalloc\n");
+    if (!test_malloc) {
+    pr_info!("failed to kmalloc\n");
+    }
     schedule_on_each_cpu(test_work);
     kfree(test_malloc);
     set_current_state(TASK_INTERRUPTIBLE);
@@ -4358,12 +4457,11 @@ unsafe extern "C" fn event_test_thread(unused: *mut c_void) -> __init int {
 //
 #[no_mangle]
 unsafe extern "C" fn event_test_stuff() -> __init void {
-    static __init void event_test_stuff(void)
-    {
-    struct task_struct *test_thread;
+pub static mut test_thread: *mut c_void = core::ptr::null_mut();
     test_thread = kthread_run(event_test_thread, core::ptr::null_mut(), "test-events");
-    if (WARN_ON(IS_ERR(test_thread)))
+    if (WARN_ON!(IS_ERR(test_thread))) {
     return;
+    }
     msleep(1);
     kthread_stop(test_thread);
     }
@@ -4373,23 +4471,23 @@ unsafe extern "C" fn event_test_stuff() -> __init void {
 //
 #[no_mangle]
 unsafe extern "C" fn event_trace_self_tests() -> __init void {
-    static __init void event_trace_self_tests(void)
-    {
-    struct trace_subsystem_dir *dir;
-    struct trace_event_file *file;
-    struct trace_event_call *call;
-    struct event_subsystem *system;
-    struct trace_array *tr;
-    int ret;
+pub static mut dir: *mut c_void = core::ptr::null_mut();
+pub static mut file: *mut c_void = core::ptr::null_mut();
+pub static mut call: *mut c_void = core::ptr::null_mut();
+pub static mut system: *mut c_void = core::ptr::null_mut();
+pub static mut tr: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     tr = top_trace_array();
-    if (!tr)
+    if (!tr) {
     return;
-    pr_info("Running tests on trace events:\n");
+    }
+    pr_info!("Running tests on trace events:\n");
     list_for_each_entry(file, &tr.events, list) {
     call = file.event_call;
 // Only test those that have a probe
-    if (!call.class || !call.class.probe)
+    if (!call.class || !call.class.probe) {
     continue;
+    }
 //
 // Testing syscall events here is pretty useless, but
 // we still do it if configured. But this is time consuming.
@@ -4398,17 +4496,18 @@ unsafe extern "C" fn event_trace_self_tests() -> __init void {
 //
 
     if (call.class.system &&
-    strcmp(call.class.system, "syscalls") == 0)
+    strcmp(call.class.system, "syscalls") == 0) {
     continue;
+    }
 
-    pr_info("Testing event %s: ", trace_event_name(call));
+    pr_info!("Testing event %s: ", trace_event_name(call));
 //
 // If an event is already enabled, someone is using
 // it and the self test should not be on.
 //
     if (file.flags & EVENT_FILE_FL_ENABLED) {
-    pr_warn("Enabled event during self test!\n");
-    WARN_ON_ONCE(1);
+    pr_warn!("Enabled event during self test!\n");
+    WARN_ON_ONCE!(1);
     continue;
     }
     ftrace_event_enable_disable(file, 1);
@@ -4417,75 +4516,77 @@ unsafe extern "C" fn event_trace_self_tests() -> __init void {
     pr_cont("OK\n");
     }
 // Now test at the sub system level
-    pr_info("Running tests on trace event systems:\n");
+    pr_info!("Running tests on trace event systems:\n");
     list_for_each_entry(dir, &tr.systems, list) {
     system = dir.subsystem;
 // the ftrace system is special, skip it
-    if (strcmp(system.name, "ftrace") == 0)
+    if (strcmp(system.name, "ftrace") == 0) {
     continue;
-    pr_info("Testing event system %s: ", system.name);
+    }
+    pr_info!("Testing event system %s: ", system.name);
     ret = __ftrace_set_clr_event(tr, core::ptr::null_mut(), system.name, core::ptr::null_mut(), 1, core::ptr::null_mut());
-    if (WARN_ON_ONCE(ret)) {
-    pr_warn("error enabling system %s\n",
+    if (WARN_ON_ONCE!(ret)) {
+    pr_warn!("error enabling system %s\n",
     system.name);
     continue;
     }
     event_test_stuff();
     ret = __ftrace_set_clr_event(tr, core::ptr::null_mut(), system.name, core::ptr::null_mut(), 0, core::ptr::null_mut());
-    if (WARN_ON_ONCE(ret)) {
-    pr_warn("error disabling system %s\n",
+    if (WARN_ON_ONCE!(ret)) {
+    pr_warn!("error disabling system %s\n",
     system.name);
     continue;
     }
     pr_cont("OK\n");
     }
 // Test with all events enabled
-    pr_info("Running tests on all trace events:\n");
-    pr_info("Testing all events: ");
+    pr_info!("Running tests on all trace events:\n");
+    pr_info!("Testing all events: ");
     ret = __ftrace_set_clr_event(tr, core::ptr::null_mut(), core::ptr::null_mut(), core::ptr::null_mut(), 1, core::ptr::null_mut());
-    if (WARN_ON_ONCE(ret)) {
-    pr_warn("error enabling all events\n");
+    if (WARN_ON_ONCE!(ret)) {
+    pr_warn!("error enabling all events\n");
     return;
     }
     event_test_stuff();
 // reset sysname
     ret = __ftrace_set_clr_event(tr, core::ptr::null_mut(), core::ptr::null_mut(), core::ptr::null_mut(), 0, core::ptr::null_mut());
-    if (WARN_ON_ONCE(ret)) {
-    pr_warn("error disabling all events\n");
+    if (WARN_ON_ONCE!(ret)) {
+    pr_warn!("error disabling all events\n");
     return;
     }
     pr_cont("OK\n");
     }
 
-    static DEFINE_PER_CPU(atomic_t, ftrace_test_event_disable);
+pub static mut atomic_t: usize = 0;
     static struct trace_event_file event_trace_file __initdata;
     static void __init
-    function_test_events_call(unsigned long ip, unsigned long parent_ip,
-    struct ftrace_ops *op, struct ftrace_regs *regs)
+    function_test_events_call(unsigned long ip, unsigned long parent_ip, ftrace_ops *op, ftrace_regs *regs)
     {
-    struct trace_buffer *buffer;
-    struct ring_buffer_event *event;
-    struct ftrace_entry *entry;
-    unsigned int trace_ctx;
-    long disabled;
-    int cpu;
+pub static mut buffer: *mut c_void = core::ptr::null_mut();
+pub static mut event: *mut c_void = core::ptr::null_mut();
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+    let mut trace_ctx = 0;
+    let mut disabled = 0;
+    let mut cpu = 0;
     trace_ctx = tracing_gen_ctx();
     preempt_disable_notrace();
     cpu = raw_smp_processor_id();
     disabled = atomic_inc_return(&per_cpu(ftrace_test_event_disable, cpu));
-    if (disabled != 1)
-    goto out;
+    if (disabled != 1) {
+// goto;
+    }
     event = trace_event_buffer_lock_reserve(&buffer, &event_trace_file,
-    TRACE_FN, sizeof(*entry),
+    TRACE_FN, sizeof!(*entry),
     trace_ctx);
-    if (!event)
-    goto out;
+    if (!event) {
+// goto;
+    }
     entry	= ring_buffer_event_data(event);
     entry.ip			= ip;
     entry.parent_ip		= parent_ip;
     event_trigger_unlock_commit(&event_trace_file, buffer, event,
     entry, trace_ctx);
-    out:
+// label;
     atomic_dec(&per_cpu(ftrace_test_event_disable, cpu));
     preempt_enable_notrace();
     }
@@ -4495,36 +4596,34 @@ unsafe extern "C" fn event_trace_self_tests() -> __init void {
     };
 #[no_mangle]
 unsafe extern "C" fn event_trace_self_test_with_function() -> __init void {
-    static __init void event_trace_self_test_with_function(void)
-    {
-    int ret;
+    let mut ret = 0;
     event_trace_file.tr = top_trace_array();
-    if (WARN_ON(!event_trace_file.tr))
-    return;
-    ret = register_ftrace_function(&trace_ops);
-    if (WARN_ON(ret < 0)) {
-    pr_info("Failed to enable function tracer for event tests\n");
+    if (WARN_ON!(!event_trace_file.tr)) {
     return;
     }
-    pr_info("Running tests again, along with the function tracer\n");
+    ret = register_ftrace_function(&trace_ops);
+    if (WARN_ON!(ret < 0)) {
+    pr_info!("Failed to enable function tracer for event tests\n");
+    return;
+    }
+    pr_info!("Running tests again, along with the function tracer\n");
     event_trace_self_tests();
     unregister_ftrace_function(&trace_ops);
     }
 
 #[no_mangle]
 unsafe extern "C" fn event_trace_self_test_with_function() -> __init void {
-    static __init void event_trace_self_test_with_function(void)
-    {
     }
 
 #[no_mangle]
 unsafe extern "C" fn event_trace_self_tests_init() -> __init int {
-    static __init int event_trace_self_tests_init(void)
-    {
     if (!tracing_selftest_disabled) {
     event_trace_self_tests();
     event_trace_self_test_with_function();
     }
     return 0;
     }
-    late_initcall(event_trace_self_tests_init);
+    late_initcall!(event_trace_self_tests_init);
+}
+}
+}

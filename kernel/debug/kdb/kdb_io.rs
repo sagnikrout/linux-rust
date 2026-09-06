@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -46,17 +296,15 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
 pub const CMD_BUFLEN: c_int = 256;
     char kdb_prompt_str[CMD_BUFLEN];
-    int kdb_trap_printk;
-    let mut kdb_printf_cpu: c_int = -1;
+    let mut kdb_trap_printk = 0;
+pub static mut kdb_printf_cpu: c_int = 0;
 #[no_mangle]
 unsafe extern "C" fn kgdb_transition_check(buffer: *mut c_char) -> c_int {
-    static int kgdb_transition_check(char *buffer)
-    {
     if (buffer[0] != '+' && buffer[0] != '$') {
     KDB_STATE_SET(KGDB_TRANS);
     kdb_printf("%s", buffer);
     } else {
-    let mut slen: c_int = strlen(buffer);
+pub static mut slen: c_int = 0;
     if (slen > 3 && buffer[slen - 3] == '#') {
     kdb_gdb_state_pass(buffer);
     strcpy(buffer, "kgdb");
@@ -78,43 +326,55 @@ unsafe extern "C" fn kgdb_transition_check(buffer: *mut c_char) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_handle_escape(buf: *mut c_char, sz: usize) -> c_int {
-    static int kdb_handle_escape(char *buf, size_t sz)
-    {
-    char *lastkey = buf + sz - 1;
-    switch (sz) {
-    case 1:
-    if (*lastkey == '\e')
+    let mut lastkey = buf + sz - 1;
+    match (sz) {
+    1 => {
+    if (*lastkey == '\e') {
     return 0;
-    break;
-    case 2: /* \e<something> */
-    if (*lastkey == '[')
+    }
+    // break;
+    }
+    2 => {
+    if (*lastkey == '[') {
     return 0;
-    break;
-    case 3:
-    switch (*lastkey) {
-    case 'A': /* \e[A, up arrow */
+    }
+    // break;
+    }
+    3 => {
+    match (*lastkey) {
+    'A' => {
     return 16;
-    case 'B': /* \e[B, down arrow */
+    }
+    'B' => {
     return 14;
-    case 'C': /* \e[C, right arrow */
+    }
+    'C' => {
     return 6;
-    case 'D': /* \e[D, left arrow */
+    }
+    'D' => {
     return 2;
-    case '1': /* \e[<1,3,4>], may be home, del, end */
-    case '3':
-    case '4':
+    }
+    '1' => {
+    }
+    '3' => {
+    }
+    '4' => {
     return 0;
+    }
     }
     break;
     case 4:
     if (*lastkey == '~') {
-    switch (buf[2]) {
-    case '1': /* \e[1~, home */
+    match (buf[2]) {
+    '1' => {
     return 1;
-    case '3': /* \e[3~, del */
+    }
+    '3' => {
     return 4;
-    case '4': /* \e[4~, end */
+    }
+    '4' => {
     return 5;
+    }
     }
     }
     break;
@@ -138,17 +398,15 @@ unsafe extern "C" fn kdb_handle_escape(buf: *mut c_char, sz: usize) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kdb_getchar() -> c_char {
-    char kdb_getchar(void)
-    {
 pub const ESCAPE_UDELAY: c_int = 1000;
 
     char buf[4];	/* longest vt100 escape sequence is 4 bytes */
-    char *pbuf = buf;
-    let mut escape_delay: c_int = 0;
+    let mut pbuf = buf;
+pub static mut escape_delay: c_int = 0;
     get_char_func *f, *f_prev = core::ptr::null_mut();
-    int key;
+    let mut key = 0;
     static bool last_char_was_cr;
-    for (f = &kdb_poll_funcs[0]; ; ++f) {
+    while ( ) {
     if (*f == core::ptr::null_mut()) {
 // Reset NMI watchdog once per poll loop
     touch_nmi_watchdog();
@@ -158,8 +416,9 @@ pub const ESCAPE_UDELAY: c_int = 1000;
     if (key == -1) {
     if (escape_delay) {
     udelay(ESCAPE_UDELAY);
-    if (--escape_delay == 0)
+    if (--escape_delay == 0) {
     return '\e';
+    }
     }
     continue;
     }
@@ -186,10 +445,12 @@ pub const ESCAPE_UDELAY: c_int = 1000;
     }
 // pbuf++ = key;
     key = kdb_handle_escape(buf, pbuf - buf);
-    if (key < 0) /* no escape sequence; return best character */
+    if (key < 0) /* no escape sequence; return best character */ {
     return buf[pbuf - buf == 2 ? 1 : 0];
-    if (key > 0)
+    }
+    if (key > 0) {
     return key;
+    }
     }
     unreachable();
     }
@@ -215,11 +476,10 @@ pub const ESCAPE_UDELAY: c_int = 1000;
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_position_cursor(prompt: *mut c_char, buffer: *mut c_char, cp: *mut c_char) {
-    static void kdb_position_cursor(char *prompt, char *buffer, char *cp)
-    {
     kdb_printf("\r%s", prompt);
-    if (cp > buffer)
+    if (cp > buffer) {
     kdb_printf("%.*s", (int)(cp - buffer), buffer);
+    }
     }
 //
 // kdb_read
@@ -241,49 +501,56 @@ unsafe extern "C" fn kdb_position_cursor(prompt: *mut c_char, buffer: *mut c_cha
 // Remarks:
 // The buffer size must be >= 2.
 //
-    static char *kdb_read(char *buffer, size_t bufsize)
-    {
-    char *cp = buffer;
-    char *bufend = buffer+bufsize-2;	/* Reserve space for newline
+#[no_mangle]
+pub unsafe extern "C" fn kdb_read(buffer: *mut c_char, bufsize: size_t) -> *mut c_void {
+    let mut cp = buffer;
+    let mut bufend = buffer+bufsize-2;	// Reserve space for newline
 // and null byte
-    char *lastchar;
-    char *p_tmp;
-    char tmp;
+pub static mut lastchar: *mut c_void = core::ptr::null_mut();
+pub static mut p_tmp: *mut c_void = core::ptr::null_mut();
+    let mut tmp = 0;
     static char tmpbuffer[CMD_BUFLEN];
-    let mut len: c_int = strlen(buffer);
-    int len_tmp;
-    let mut tab: c_int = 0;
-    int count;
-    int i;
-    int diag, dtab_count;
-    int key, ret;
+pub static mut len: c_int = 0;
+    let mut len_tmp = 0;
+pub static mut tab: c_int = 0;
+    let mut count = 0;
+    let mut i = 0;
+    let mut diag = 0;
+    let mut dtab_count = 0;
+    let mut key = 0;
+    let mut ret = 0;
     diag = kdbgetintenv("DTABCOUNT", &dtab_count);
-    if (diag)
+    if (diag) {
     dtab_count = 30;
+    }
     if (len > 0) {
     cp += len;
-    if (*(buffer+len-1) == '\n')
-    cp--;
+    if (*(buffer+len-1) == '\n') {
+    cp -= 1;
+    }
     }
     lastchar = cp;
 // cp = '\0';
     kdb_printf("%s", buffer);
-    poll_again:
+// label;
     key = kdb_getchar();
-    if (key != 9)
+    if (key != 9) {
     tab = 0;
-    switch (key) {
-    case 8: /* backspace */
+    }
+    match (key) {
+    8 => {
     if (cp > buffer) {
     memmove(cp-1, cp, lastchar - cp + 1);
-    lastchar--;
-    cp--;
+    lastchar -= 1;
+    cp -= 1;
     kdb_printf("\b%s ", cp);
     kdb_position_cursor(kdb_prompt_str, buffer, cp);
     }
-    break;
-    case 10: /* linefeed */
-    case 13: /* carriage return */
+    // break;
+    }
+    10 => {
+    }
+    13 => {
 // lastchar++ = '\n';
 // lastchar++ = '\0';
     if (!KDB_STATE(KGDB_TRANS)) {
@@ -292,49 +559,58 @@ unsafe extern "C" fn kdb_position_cursor(prompt: *mut c_char, buffer: *mut c_cha
     }
     kdb_printf("\n");
     return buffer;
-    case 4: /* Del */
+    }
+    4 => {
     if (cp < lastchar) {
     memmove(cp, cp+1, lastchar - cp);
-    lastchar--;
+    lastchar -= 1;
     kdb_printf("%s ", cp);
     kdb_position_cursor(kdb_prompt_str, buffer, cp);
     }
-    break;
-    case 1: /* Home */
+    // break;
+    }
+    1 => {
     if (cp > buffer) {
     cp = buffer;
     kdb_position_cursor(kdb_prompt_str, buffer, cp);
     }
-    break;
-    case 5: /* End */
+    // break;
+    }
+    5 => {
     if (cp < lastchar) {
     kdb_printf("%s", cp);
     cp = lastchar;
     }
-    break;
-    case 2: /* Left */
+    // break;
+    }
+    2 => {
     if (cp > buffer) {
     kdb_printf("\b");
-    --cp;
+    cp -= 1;
     }
-    break;
-    case 14: /* Down */
-    case 16: /* Up */
+    // break;
+    }
+    14 => {
+    }
+    16 => {
     kdb_printf("\r%*c\r",
     (int)(strlen(kdb_prompt_str) + (lastchar - buffer)),
     ' ');
 // lastchar = (char)key;
 // (lastchar+1) = '\0';
     return lastchar;
-    case 6: /* Right */
+    }
+    6 => {
     if (cp < lastchar) {
     kdb_printf("%c", *cp);
-    ++cp;
+    cp += 1;
     }
-    break;
-    case 9: /* Tab */
-    if (tab < 2)
-    ++tab;
+    // break;
+    }
+    9 => {
+    if (tab < 2) {
+    tab += 1;
+    }
     tmp = *cp;
 // cp = '\0';
     p_tmp = strrchr(buffer, ' ');
@@ -342,7 +618,7 @@ unsafe extern "C" fn kdb_position_cursor(prompt: *mut c_char, buffer: *mut c_cha
     strscpy(tmpbuffer, p_tmp);
 // cp = tmp;
     len = strlen(tmpbuffer);
-    count = kallsyms_symbol_complete(tmpbuffer, sizeof(tmpbuffer));
+    count = kallsyms_symbol_complete(tmpbuffer, sizeof!(tmpbuffer));
     if (tab == 2 && count > 0) {
     kdb_printf("\n%d symbols are found.", count);
     if (count > dtab_count) {
@@ -353,28 +629,34 @@ unsafe extern "C" fn kdb_position_cursor(prompt: *mut c_char, buffer: *mut c_cha
     count);
     }
     kdb_printf("\n");
-    for (i = 0; i < count; i++) {
-    ret = kallsyms_symbol_next(tmpbuffer, i, sizeof(tmpbuffer));
-    if (WARN_ON(!ret))
-    break;
-    if (ret != -E2BIG)
+    while (i < count) {
+    ret = kallsyms_symbol_next(tmpbuffer, i, sizeof!(tmpbuffer));
+    if (WARN_ON!(!ret)) {
+    // break;
+    }
+    if (ret != -E2BIG) {
     kdb_printf("%s ", tmpbuffer);
-    else
+    }
+    else {
     kdb_printf("%s... ", tmpbuffer);
+    }
     tmpbuffer[len] = '\0';
     }
-    if (i >= dtab_count)
+    if (i >= dtab_count) {
     kdb_printf("...");
+    }
     kdb_printf("\n");
     kdb_printf("%s",  kdb_prompt_str);
     kdb_printf("%s", buffer);
-    if (cp != lastchar)
+    if (cp != lastchar) {
     kdb_position_cursor(kdb_prompt_str, buffer, cp);
+    }
     } else if (tab != 2 && count > 0) {
 // How many new characters do we want from tmpbuffer?
     len_tmp = strlen(tmpbuffer) - len;
-    if (lastchar + len_tmp >= bufend)
+    if (lastchar + len_tmp >= bufend) {
     len_tmp = bufend - lastchar;
+    }
     if (len_tmp) {
 // + 1 ensures the '\0' is memmove'd
     memmove(cp+len_tmp, cp, (lastchar-cp) + 1);
@@ -382,21 +664,23 @@ unsafe extern "C" fn kdb_position_cursor(prompt: *mut c_char, buffer: *mut c_cha
     kdb_printf("%s", cp);
     cp += len_tmp;
     lastchar += len_tmp;
-    if (cp != lastchar)
+    if (cp != lastchar) {
     kdb_position_cursor(kdb_prompt_str,
     buffer, cp);
     }
     }
+    }
     kdb_nextline = 1; /* reset output line number */
-    break;
-    default:
+    // break;
+    }
+    _ => {
     if (key >= 32 && lastchar < bufend) {
     if (cp < lastchar) {
     memmove(cp+1, cp, lastchar - cp + 1);
-    lastchar++;
+    lastchar += 1;
 // cp = key;
     kdb_printf("%s", cp);
-    ++cp;
+    cp += 1;
     kdb_position_cursor(kdb_prompt_str, buffer, cp);
     } else {
 // ++lastchar = '\0';
@@ -406,8 +690,9 @@ unsafe extern "C" fn kdb_position_cursor(prompt: *mut c_char, buffer: *mut c_cha
 // kgdb is connecting, until the check
 // fails
     if (!KDB_STATE(KGDB_TRANS)) {
-    if (kgdb_transition_check(buffer))
+    if (kgdb_transition_check(buffer)) {
     return buffer;
+    }
     } else {
     kdb_printf("%c", key);
     }
@@ -428,9 +713,10 @@ unsafe extern "C" fn kdb_position_cursor(prompt: *mut c_char, buffer: *mut c_cha
     return buffer;
     }
     }
-    break;
+    // break;
     }
-    goto poll_again;
+    }
+// goto;
     }
 //
 // kdb_getstr
@@ -450,10 +736,11 @@ unsafe extern "C" fn kdb_position_cursor(prompt: *mut c_char, buffer: *mut c_cha
 // For SMP kernels, the processor number will be
 // substituted for %d, %x or %o in the prompt.
 //
-    char *kdb_getstr(char *buffer, size_t bufsize, const char *prompt)
-    {
-    if (prompt && kdb_prompt_str != prompt)
+#[no_mangle]
+pub unsafe extern "C" fn kdb_getstr(buffer: *mut c_char, bufsize: size_t, prompt: *mut c_char) -> *mut c_void {
+    if (prompt && kdb_prompt_str != prompt) {
     strscpy(kdb_prompt_str, prompt);
+    }
     kdb_printf("%s", kdb_prompt_str);
     kdb_nextline = 1;	/* Prompt and input resets line number */
     return kdb_read(buffer, bufsize);
@@ -476,24 +763,23 @@ unsafe extern "C" fn kdb_position_cursor(prompt: *mut c_char, buffer: *mut c_cha
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_input_flush() {
-    static void kdb_input_flush(void)
-    {
-    get_char_func *f;
-    int res;
-    let mut flush_delay: c_int = 1;
+pub static mut f: *mut c_void = core::ptr::null_mut();
+    let mut res = 0;
+pub static mut flush_delay: c_int = 1;
     while (flush_delay) {
-    flush_delay--;
-    empty:
+    flush_delay -= 1;
+// label;
     touch_nmi_watchdog();
-    for (f = &kdb_poll_funcs[0]; *f; ++f) {
+    while (*f) {
     res = (*f)();
     if (res != -1) {
     flush_delay = 1;
-    goto empty;
+// goto;
     }
     }
-    if (flush_delay)
+    if (flush_delay) {
     mdelay(1);
+    }
     }
     }
 //
@@ -528,49 +814,52 @@ unsafe extern "C" fn kdb_input_flush() {
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_search_string(searched: *mut c_char, searchfor: *mut c_char) -> c_int {
-    static int kdb_search_string(char *searched, char *searchfor)
-    {
     char firstchar, *cp;
-    int len1, len2;
+    let mut len1 = 0;
+    let mut len2 = 0;
 // not counting the newline at the end of "searched"
     len1 = strlen(searched)-1;
     len2 = strlen(searchfor);
-    if (len1 < len2)
+    if (len1 < len2) {
     return 0;
-    if (kdb_grep_leading && kdb_grep_trailing && len1 != len2)
+    }
+    if (kdb_grep_leading && kdb_grep_trailing && len1 != len2) {
     return 0;
+    }
     if (kdb_grep_leading) {
-    if (!strncmp(searched, searchfor, len2))
+    if (!strncmp(searched, searchfor, len2)) {
     return 1;
+    }
     } else if (kdb_grep_trailing) {
-    if (!strncmp(searched+len1-len2, searchfor, len2))
+    if (!strncmp(searched+len1-len2, searchfor, len2)) {
     return 1;
+    }
     } else {
     firstchar = *searchfor;
     cp = searched;
     while ((cp = strchr(cp, firstchar))) {
-    if (!strncmp(cp, searchfor, len2))
+    if (!strncmp(cp, searchfor, len2)) {
     return 1;
-    cp++;
+    }
+    cp += 1;
     }
     }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn kdb_msg_write(msg: *const c_char, msg_len: c_int) {
-    static void kdb_msg_write(const char *msg, int msg_len)
-    {
-    struct console *c;
-    const char *cp;
-    int cookie;
-    int len;
-    if (msg_len == 0)
+pub static mut c: *mut c_void = core::ptr::null_mut();
+pub static mut cp: *mut c_void = core::ptr::null_mut();
+    let mut cookie = 0;
+    let mut len = 0;
+    if (msg_len == 0) {
     return;
+    }
     cp = msg;
     len = msg_len;
     while (len--) {
     dbg_io_ops.write_char(*cp);
-    cp++;
+    cp += 1;
     }
 //
 // The console_srcu_read_lock() only provides safe console list
@@ -585,20 +874,23 @@ unsafe extern "C" fn kdb_msg_write(msg: *const c_char, msg_len: c_int) {
 //
     cookie = console_srcu_read_lock();
     for_each_console_srcu(c) {
-    let mut flags: c_short = console_srcu_read_flags(c);
-    if (!console_is_usable(c, flags, true))
+pub static mut flags: c_short = 0;
+    if (!console_is_usable(c, flags, true)) {
     continue;
-    if (c == dbg_io_ops.cons)
+    }
+    if (c == dbg_io_ops.cons) {
     continue;
+    }
     if (flags & CON_NBCON) {
-    let mut wctxt: nbcon_write_context = { };
+pub static mut wctxt: nbcon_write_context = 0;
 //
 // Do not continue if the console is NBCON and the context
 // can't be acquired.
 //
-    if (!nbcon_kdb_try_acquire(c, &wctxt))
+    if (!nbcon_kdb_try_acquire(c, &wctxt)) {
     continue;
-    nbcon_write_context_set_buf(&wctxt, (char *)msg, msg_len);
+    }
+    nbcon_write_context_set_buf(&wctxt, msg, msg_len);
     c.write_atomic(c, &wctxt);
     nbcon_kdb_release(&wctxt);
     } else {
@@ -611,28 +903,28 @@ unsafe extern "C" fn kdb_msg_write(msg: *const c_char, msg_len: c_int) {
 // the calls bust_spinlocks() makes on exit are not appropriate
 // for this calling context.
 //
-    ++oops_in_progress;
+    oops_in_progress += 1;
     c.write(c, msg, msg_len);
-    --oops_in_progress;
+    oops_in_progress -= 1;
     }
     touch_nmi_watchdog();
     }
     console_srcu_read_unlock(cookie);
     }
 #[no_mangle]
-pub unsafe extern "C" fn vkdb_printf(src: enum kdb_msgsrc, fmt: *const c_char, ap: va_list) -> c_int {
-    int vkdb_printf(enum kdb_msgsrc src, const char *fmt, va_list ap)
-    {
-    int diag;
-    int linecount;
-    int colcount;
+pub unsafe extern "C" fn vkdb_printf(src: kdb_msgsrc, fmt: *const c_char, ap: va_list) -> c_int {
+    let mut diag = 0;
+    let mut linecount = 0;
+    let mut colcount = 0;
     int logging, saved_loglevel = 0;
-    let mut retlen: c_int = 0;
-    int fnd, len;
-    int this_cpu, old_cpu;
+pub static mut retlen: c_int = 0;
+    let mut fnd = 0;
+    let mut len = 0;
+    let mut this_cpu = 0;
+    let mut old_cpu = 0;
     char *cp, *cp2, *cphold = core::ptr::null_mut(), replaced_byte = ' ';
-    char *moreprompt = "more> ";
-    unsigned long flags;
+    let mut moreprompt = "more> ";
+    let mut flags = 0;
 // Serialize kdb_printf if multiple cpus try to write at once.
 // But if any cpu goes recursive in kdb, just print the output,
 // even if it is interleaved with any other text.
@@ -641,23 +933,27 @@ pub unsafe extern "C" fn vkdb_printf(src: enum kdb_msgsrc, fmt: *const c_char, a
     this_cpu = smp_processor_id();
     for (;;) {
     old_cpu = cmpxchg(&kdb_printf_cpu, -1, this_cpu);
-    if (old_cpu == -1 || old_cpu == this_cpu)
+    if (old_cpu == -1 || old_cpu == this_cpu) {
     break;
+    }
     cpu_relax();
     }
     diag = kdbgetintenv("LINES", &linecount);
-    if (diag || linecount <= 1)
+    if (diag || linecount <= 1) {
     linecount = 24;
+    }
     diag = kdbgetintenv("COLUMNS", &colcount);
-    if (diag || colcount <= 1)
+    if (diag || colcount <= 1) {
     colcount = 80;
+    }
     diag = kdbgetintenv("LOGGING", &logging);
-    if (diag)
+    if (diag) {
     logging = 0;
+    }
     if (!kdb_grepping_flag || suspend_grep) {
 // normally, every vsnprintf starts a new buffer
     next_avail = kdb_buffer;
-    size_avail = sizeof(kdb_buffer);
+    size_avail = sizeof!(kdb_buffer);
     }
     vsnprintf(next_avail, size_avail, fmt, ap);
 //
@@ -698,24 +994,24 @@ pub unsafe extern "C" fn vkdb_printf(src: enum kdb_msgsrc, fmt: *const c_char, a
 // to normal mode.
 //
     kdb_grepping_flag = 0;
-    goto kdb_printit;
+// goto;
     }
     }
 // no newline; don't search/write the buffer
     until one is there */
     len = strlen(kdb_buffer);
     next_avail = kdb_buffer + len;
-    size_avail = sizeof(kdb_buffer) - len;
-    goto kdb_print_out;
+    size_avail = sizeof!(kdb_buffer) - len;
+// goto;
     }
 //
 // The newline is present; print through it or discard
 // it, depending on the results of the search.
 //
-    cp++;	 	     /* to byte after the newline */
+    cp += 1;	 	     /* to byte after the newline */
     replaced_byte = *cp; /* remember what it was */
     cphold = cp;	     /* remember where it was */
-// cp = '\0';	     /* end the string for our search
+// cp = '\0';	     // end the string for our search
 //
 // We now have a newline at the end of the string
 // Only continue with this output if it contains the
@@ -734,8 +1030,8 @@ pub unsafe extern "C" fn vkdb_printf(src: enum kdb_msgsrc, fmt: *const c_char, a
 // Use memmove() because the buffers overlap
     memmove(kdb_buffer, cphold, len + 1);
     next_avail = kdb_buffer + len;
-    size_avail = sizeof(kdb_buffer) - len;
-    goto kdb_print_out;
+    size_avail = sizeof!(kdb_buffer) - len;
+// goto;
     }
     if (kdb_grepping_flag >= KDB_GREPPING_FLAG_SEARCH) {
 //
@@ -752,23 +1048,27 @@ pub unsafe extern "C" fn vkdb_printf(src: enum kdb_msgsrc, fmt: *const c_char, a
 // should be printed, up to the null.
 //
     }
-    kdb_printit:
+// label;
 //
 // Write to all consoles.
 //
     retlen = strlen(kdb_buffer);
-    cp = (char *) printk_skip_headers(kdb_buffer);
-    if (!dbg_kdb_mode && kgdb_connected)
+    cp =  printk_skip_headers(kdb_buffer);
+    if (!dbg_kdb_mode && kgdb_connected) {
     gdbstub_msg_write(cp, retlen - (cp - kdb_buffer));
-    else
+    }
+    else {
     kdb_msg_write(cp, retlen - (cp - kdb_buffer));
+    }
     if (logging) {
     saved_loglevel = console_loglevel;
     console_loglevel = CONSOLE_LOGLEVEL_SILENT;
-    if (printk_get_level(kdb_buffer) || src == KDB_MSGSRC_PRINTK)
+    if (printk_get_level(kdb_buffer) || src == KDB_MSGSRC_PRINTK) {
     printk("%s", kdb_buffer);
-    else
-    pr_info("%s", kdb_buffer);
+    }
+    else {
+    pr_info!("%s", kdb_buffer);
+    }
     }
     if (KDB_STATE(PAGER)) {
 //
@@ -776,23 +1076,23 @@ pub unsafe extern "C" fn vkdb_printf(src: enum kdb_msgsrc, fmt: *const c_char, a
 // kdb_nextline to control when the more prompt should
 // show up.
 //
-    let mut got: c_int = 0;
+pub static mut got: c_int = 0;
     len = retlen;
     while (len--) {
     if (kdb_buffer[len] == '\n') {
-    kdb_nextline++;
+    kdb_nextline += 1;
     got = 0;
     } else if (kdb_buffer[len] == '\r') {
     got = 0;
     } else {
-    got++;
+    got += 1;
     }
     }
     kdb_nextline += got / (colcount + 1);
     }
 // check for having reached the LINES number of printed lines
     if (kdb_nextline >= linecount) {
-    char ch;
+    let mut ch = 0;
 // Watch out for recursion here.  Any routine that calls
 // kdb_printf will come back through here.  And kdb_read
 // uses kdb_printf to echo on serial consoles ...
@@ -802,18 +1102,20 @@ pub unsafe extern "C" fn vkdb_printf(src: enum kdb_msgsrc, fmt: *const c_char, a
 // Pause until cr.
 //
     moreprompt = kdbgetenv("MOREPROMPT");
-    if (moreprompt == core::ptr::null_mut())
+    if (moreprompt == core::ptr::null_mut()) {
     moreprompt = "more> ";
+    }
     kdb_input_flush();
     kdb_msg_write(moreprompt, strlen(moreprompt));
-    if (logging)
+    if (logging) {
     printk("%s", moreprompt);
+    }
     ch = kdb_getchar();
     kdb_nextline = 1;	/* Really set output line 1 */
 // empty and reset the buffer:
     kdb_buffer[0] = '\0';
     next_avail = kdb_buffer;
-    size_avail = sizeof(kdb_buffer);
+    size_avail = sizeof!(kdb_buffer);
     if ((ch == 'q') || (ch == 'Q')) {
 // user hit q or Q
     KDB_FLAG_SET(CMD_INTERRUPT); /* command interrupted */
@@ -838,13 +1140,15 @@ pub unsafe extern "C" fn vkdb_printf(src: enum kdb_msgsrc, fmt: *const c_char, a
     } else if (ch) {
 // user hit something unexpected
     suspend_grep = 1; /* for this recursion */
-    if (ch != '/')
+    if (ch != '/') {
     kdb_printf(
     "\nOnly 'q', 'Q' or '/' are processed at "
     "more prompt, input ignored\n");
-    else
+    }
+    else {
     kdb_printf("\n'/' cannot be used during | "
     "grep filtering, input ignored\n");
+    }
     } else if (kdb_grepping_flag) {
 // user hit enter
     suspend_grep = 1; /* for this recursion */
@@ -864,12 +1168,13 @@ pub unsafe extern "C" fn vkdb_printf(src: enum kdb_msgsrc, fmt: *const c_char, a
 // Use memmove() because the buffers overlap
     memmove(kdb_buffer, cphold, len + 1);
     next_avail = kdb_buffer + len;
-    size_avail = sizeof(kdb_buffer) - len;
+    size_avail = sizeof!(kdb_buffer) - len;
     }
-    kdb_print_out:
+// label;
     suspend_grep = 0; /* end of what may have been a recursive call */
-    if (logging)
+    if (logging) {
     console_loglevel = saved_loglevel;
+    }
 // kdb_printf_cpu locked the code above.
     smp_store_release(&kdb_printf_cpu, old_cpu);
     local_irq_restore(flags);
@@ -877,13 +1182,12 @@ pub unsafe extern "C" fn vkdb_printf(src: enum kdb_msgsrc, fmt: *const c_char, a
     }
 #[no_mangle]
 pub unsafe extern "C" fn kdb_printf(fmt: *const c_char, ...) -> c_int {
-    int kdb_printf(const char *fmt, ...)
-    {
-    va_list ap;
-    int r;
+    let mut ap;
+    let mut r = 0;
     va_start(ap, fmt);
     r = vkdb_printf(KDB_MSGSRC_INTERNAL, fmt, ap);
     va_end(ap);
     return r;
     }
     EXPORT_SYMBOL_GPL(kdb_printf);
+}

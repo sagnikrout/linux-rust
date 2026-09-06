@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0+
@@ -52,11 +302,11 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
 // Holdoff in nanoseconds for auto-expediting.
 
-    let mut exp_holdoff: static ulong = DEFAULT_SRCU_EXP_HOLDOFF;
-    module_param(exp_holdoff, ulong, 0444);
+pub static mut exp_holdoff: ulong = 0;
+    module_param!(exp_holdoff, ulong, 0444);
 // Overflow-check frequency.  N bits roughly says every 2**N grace periods.
-    let mut counter_wrap_check: static ulong = (ULONG_MAX >> 2);
-    module_param(counter_wrap_check, ulong, 0444);
+pub static mut counter_wrap_check: ulong = 0;
+    module_param!(counter_wrap_check, ulong, 0444);
 //
 // Control conversion to SRCU_SIZE_BIG:
 // 0: Don't convert at all.
@@ -71,22 +321,22 @@ pub const SRCU_SIZING_TORTURE: c_int = 2;
 pub const SRCU_SIZING_AUTO: c_int = 3;
 pub const SRCU_SIZING_CONTEND: c_uint = 0x10;
 
-    let mut convert_to_big: static int = SRCU_SIZING_AUTO;
-    module_param(convert_to_big, int, 0444);
+pub static mut convert_to_big: int = 0;
+    module_param!(convert_to_big, int, 0444);
 // Number of CPUs to trigger init_srcu_struct()-time transition to big.
-    let mut __read_mostly: static int big_cpu_lim = 128;
-    module_param(big_cpu_lim, int, 0444);
+pub static mut : int big_cpu_lim = 128;
+    module_param!(big_cpu_lim, int, 0444);
 // Contention events per jiffy to initiate transition to big.
-    let mut __read_mostly: static int small_contention_lim = 100;
-    module_param(small_contention_lim, int, 0444);
+pub static mut : int small_contention_lim = 100;
+    module_param!(small_contention_lim, int, 0444);
 // Early-boot callback-management, so early that no lock is required!
-    static LIST_HEAD(srcu_boot_list);
-    static bool __read_mostly srcu_init_done;
-    static void srcu_invoke_callbacks(struct work_struct *work);
-    static void srcu_reschedule(struct srcu_struct *ssp, unsigned long delay);
-    static void process_srcu(struct work_struct *work);
-    static void srcu_irq_work(struct irq_work *work);
-    static void srcu_delay_timer(struct timer_list *t);
+pub static mut srcu_boot_list: usize = 0;
+    static bool  srcu_init_done;
+// forward_decl: srcu_invoke_callbacks;
+// forward_decl: srcu_reschedule;
+// forward_decl: process_srcu;
+// forward_decl: srcu_irq_work;
+// forward_decl: srcu_delay_timer;
 //
 // Initialize SRCU per-CPU data.  Note that statically allocated
 // srcu_struct structures might already have srcu_read_lock() and
@@ -96,10 +346,8 @@ pub const SRCU_SIZING_CONTEND: c_uint = 0x10;
 //
 #[no_mangle]
 unsafe extern "C" fn init_srcu_struct_data(ssp: *mut srcu_struct) {
-    static void init_srcu_struct_data(struct srcu_struct *ssp)
-    {
-    int cpu;
-    struct srcu_data *sdp;
+    let mut cpu = 0;
+pub static mut sdp: *mut c_void = core::ptr::null_mut();
 //
 // Initialize the per-CPU srcu_data array, which feeds into the
 // leaves of the srcu_node tree.
@@ -127,9 +375,7 @@ pub const SRCU_SNP_INIT_SEQ: c_uint = 0x2;
 //
 #[no_mangle]
 pub unsafe extern "C" fn srcu_invl_snp_seq(s: c_ulong) -> bool {
-    static inline bool srcu_invl_snp_seq(unsigned long s)
-    {
-    let mut s: return = = SRCU_SNP_INIT_SEQ;
+pub static mut s: return = 0;
     }
 //
 // Allocated and initialize SRCU combining tree.  Returns @true if
@@ -137,32 +383,32 @@ pub unsafe extern "C" fn srcu_invl_snp_seq(s: c_ulong) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn init_srcu_struct_nodes(ssp: *mut srcu_struct, gfp_flags: gfp_t) -> bool {
-    static bool init_srcu_struct_nodes(struct srcu_struct *ssp, gfp_t gfp_flags)
-    {
-    int cpu;
-    int i;
-    let mut level: c_int = 0;
+    let mut cpu = 0;
+    let mut i = 0;
+pub static mut level: c_int = 0;
     int levelspread[RCU_NUM_LVLS];
-    struct srcu_data *sdp;
-    struct srcu_node *snp;
-    struct srcu_node *snp_first;
+pub static mut sdp: *mut c_void = core::ptr::null_mut();
+pub static mut snp: *mut c_void = core::ptr::null_mut();
+pub static mut snp_first: *mut c_void = core::ptr::null_mut();
 // Initialize geometry if it has not already been initialized.
     rcu_init_geometry();
     ssp.srcu_sup.node = kzalloc_objs(*ssp.srcu_sup.node, rcu_num_nodes,
     gfp_flags);
-    if (!ssp.srcu_sup.node)
+    if (!ssp.srcu_sup.node) {
     return false;
+    }
 // Work out the overall tree geometry.
     ssp.srcu_sup.level[0] = &ssp.srcu_sup.node[0];
-    for (i = 1; i < rcu_num_lvls; i++)
+    for (i = 1; i < rcu_num_lvls; i++) {
     ssp.srcu_sup.level[i] = ssp.srcu_sup.level[i - 1] + num_rcu_lvl[i - 1];
+    }
     rcu_init_levelspread(levelspread, num_rcu_lvl);
 // Each pass through this loop initializes one srcu_node structure.
     srcu_for_each_node_breadth_first(ssp, snp) {
     raw_spin_lock_init(&ACCESS_PRIVATE(snp, lock));
-    BUILD_BUG_ON(ARRAY_SIZE(snp.srcu_have_cbs) !=
-    ARRAY_SIZE(snp.srcu_data_have_cbs));
-    for (i = 0; i < ARRAY_SIZE(snp.srcu_have_cbs); i++) {
+    BUILD_BUG_ON!(ARRAY_SIZE!(snp.srcu_have_cbs) !=
+    ARRAY_SIZE!(snp.srcu_data_have_cbs));
+    while (i < ARRAY_SIZE!(snp.srcu_have_cbs)) {
     snp.srcu_have_cbs[i] = SRCU_SNP_INIT_SEQ;
     snp.srcu_data_have_cbs[i] = 0;
     }
@@ -175,8 +421,9 @@ unsafe extern "C" fn init_srcu_struct_nodes(ssp: *mut srcu_struct, gfp_flags: gf
     continue;
     }
 // Non-root node.
-    if (snp == ssp.srcu_sup.level[level + 1])
-    level++;
+    if (snp == ssp.srcu_sup.level[level + 1]) {
+    level += 1;
+    }
     snp.srcu_parent = ssp.srcu_sup.level[level - 1] +
     (snp - ssp.srcu_sup.level[level]) /
     levelspread[level - 1];
@@ -190,9 +437,10 @@ unsafe extern "C" fn init_srcu_struct_nodes(ssp: *mut srcu_struct, gfp_flags: gf
     for_each_possible_cpu(cpu) {
     sdp = per_cpu_ptr(ssp.sda, cpu);
     sdp.mynode = &snp_first[cpu / levelspread[level]];
-    for (snp = sdp.mynode; snp != core::ptr::null_mut(); snp = snp.srcu_parent) {
-    if (snp.grplo < 0)
+    while (snp != core::ptr::null_mut()) {
+    if (snp.grplo < 0) {
     snp.grplo = cpu;
+    }
     snp.grphi = cpu;
     }
     sdp.grpmask = 1UL << (cpu - sdp.mynode.grplo);
@@ -207,14 +455,15 @@ unsafe extern "C" fn init_srcu_struct_nodes(ssp: *mut srcu_struct, gfp_flags: gf
 //
 #[no_mangle]
 unsafe extern "C" fn init_srcu_struct_fields(ssp: *mut srcu_struct, is_static: bool) -> c_int {
-    static int init_srcu_struct_fields(struct srcu_struct *ssp, bool is_static)
-    {
-    if (!is_static)
+    if (!is_static) {
     ssp.srcu_sup = kzalloc_obj(*ssp.srcu_sup);
-    if (!ssp.srcu_sup)
+    }
+    if (!ssp.srcu_sup) {
     return -ENOMEM;
-    if (!is_static)
+    }
+    if (!is_static) {
     raw_spin_lock_init(&ACCESS_PRIVATE(ssp.srcu_sup, lock));
+    }
     ssp.srcu_sup.srcu_size_state = SRCU_SIZE_SMALL;
     ssp.srcu_sup.node = core::ptr::null_mut();
     mutex_init(&ssp.srcu_sup.srcu_cb_mutex);
@@ -227,34 +476,37 @@ unsafe extern "C" fn init_srcu_struct_fields(ssp: *mut srcu_struct, is_static: b
     init_irq_work(&ssp.srcu_sup.irq_work, srcu_irq_work);
     ssp.srcu_sup.sda_is_static = is_static;
     if (!is_static) {
-    ssp.sda = alloc_percpu(struct srcu_data);
+    ssp.sda = alloc_percpu(srcu_data);
     ssp.srcu_ctrp = &ssp.sda.srcu_ctrs[0];
     }
-    if (!ssp.sda)
-    goto err_free_sup;
+    if (!ssp.sda) {
+// goto;
+    }
     init_srcu_struct_data(ssp);
     ssp.srcu_sup.srcu_gp_seq_needed_exp = SRCU_GP_SEQ_INITIAL_VAL;
     ssp.srcu_sup.srcu_last_gp_end = ktime_get_mono_fast_ns();
     if (READ_ONCE(ssp.srcu_sup.srcu_size_state) == SRCU_SIZE_SMALL && SRCU_SIZING_IS_INIT()) {
-    if (!preemptible())
+    if (!preemptible()) {
     WRITE_ONCE(ssp.srcu_sup.srcu_size_state, SRCU_SIZE_ALLOC);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: init_srcu_struct_nodes(ssp, _arg: GFP_KERNEL)) -> else {
-    else if (init_srcu_struct_nodes(ssp, GFP_KERNEL))
+    }
+
+    else if (init_srcu_struct_nodes(ssp, GFP_KERNEL)) {
     WRITE_ONCE(ssp.srcu_sup.srcu_size_state, SRCU_SIZE_BIG);
-    else
-    goto err_free_sda;
+    }
+    else {
+// goto;
+    }
     }
     ssp.srcu_sup.srcu_ssp = ssp;
     smp_store_release(&ssp.srcu_sup.srcu_gp_seq_needed,
     SRCU_GP_SEQ_INITIAL_VAL); /* Init done. */
     return 0;
-    err_free_sda:
+// label;
     if (!is_static) {
     free_percpu(ssp.sda);
     ssp.sda = core::ptr::null_mut();
     }
-    err_free_sup:
+// label;
     if (!is_static) {
     kfree(ssp.srcu_sup);
     ssp.srcu_sup = core::ptr::null_mut();
@@ -262,32 +514,27 @@ pub unsafe extern "C" fn if(_arg: init_srcu_struct_nodes(ssp, _arg: GFP_KERNEL))
     return -ENOMEM;
     }
 
-    static int
-    __init_srcu_struct_common(struct srcu_struct *ssp, const char *name, struct lock_class_key *key)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __init_srcu_struct_common(ssp: *mut srcu_struct, name: *mut c_char, key: *mut lock_class_key) -> c_int {
 // Don't re-initialize a lock while it is held.
-    debug_check_no_locks_freed((void *)ssp, sizeof(*ssp));
+    debug_check_no_locks_freed(ssp, sizeof!(*ssp));
     lockdep_init_map(&ssp.dep_map, name, key, 0);
     return init_srcu_struct_fields(ssp, false);
     }
-    int init_srcu_struct_lockdep(struct srcu_struct *ssp, const char *name,
-    struct lock_class_key *key)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn init_srcu_struct_lockdep(ssp: *mut srcu_struct, name: *mut c_char, key: *mut lock_class_key) -> c_int {
     ssp.srcu_reader_flavor = 0;
     return __init_srcu_struct_common(ssp, name, key);
     }
     EXPORT_SYMBOL_GPL(init_srcu_struct_lockdep);
 #[no_mangle]
 pub unsafe extern "C" fn __init_srcu_struct_fast(ssp: *mut srcu_struct, name: *const c_char, key: *mut lock_class_key) -> c_int {
-    int __init_srcu_struct_fast(struct srcu_struct *ssp, const char *name, struct lock_class_key *key)
-    {
     ssp.srcu_reader_flavor = SRCU_READ_FLAVOR_FAST;
     return __init_srcu_struct_common(ssp, name, key);
     }
     EXPORT_SYMBOL_GPL(__init_srcu_struct_fast);
-    int __init_srcu_struct_fast_updown(struct srcu_struct *ssp, const char *name,
-    struct lock_class_key *key)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __init_srcu_struct_fast_updown(ssp: *mut srcu_struct, name: *mut c_char, key: *mut lock_class_key) -> c_int {
     ssp.srcu_reader_flavor = SRCU_READ_FLAVOR_FAST_UPDOWN;
     return __init_srcu_struct_common(ssp, name, key);
     }
@@ -306,8 +553,6 @@ pub unsafe extern "C" fn __init_srcu_struct_fast(ssp: *mut srcu_struct, name: *c
 //
 #[no_mangle]
 pub unsafe extern "C" fn init_srcu_struct_generic(ssp: *mut srcu_struct) -> c_int {
-    int init_srcu_struct_generic(struct srcu_struct *ssp)
-    {
     ssp.srcu_reader_flavor = 0;
     return init_srcu_struct_fields(ssp, false);
     }
@@ -324,8 +569,6 @@ pub unsafe extern "C" fn init_srcu_struct_generic(ssp: *mut srcu_struct) -> c_in
 //
 #[no_mangle]
 pub unsafe extern "C" fn init_srcu_struct_fast(ssp: *mut srcu_struct) -> c_int {
-    int init_srcu_struct_fast(struct srcu_struct *ssp)
-    {
     ssp.srcu_reader_flavor = SRCU_READ_FLAVOR_FAST;
     return init_srcu_struct_fields(ssp, false);
     }
@@ -343,8 +586,6 @@ pub unsafe extern "C" fn init_srcu_struct_fast(ssp: *mut srcu_struct) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn init_srcu_struct_fast_updown(ssp: *mut srcu_struct) -> c_int {
-    int init_srcu_struct_fast_updown(struct srcu_struct *ssp)
-    {
     ssp.srcu_reader_flavor = SRCU_READ_FLAVOR_FAST_UPDOWN;
     return init_srcu_struct_fields(ssp, false);
     }
@@ -355,8 +596,6 @@ pub unsafe extern "C" fn init_srcu_struct_fast_updown(ssp: *mut srcu_struct) -> 
 //
 #[no_mangle]
 unsafe extern "C" fn __srcu_transition_to_big(ssp: *mut srcu_struct) {
-    static void __srcu_transition_to_big(struct srcu_struct *ssp)
-    {
     lockdep_assert_held(&ACCESS_PRIVATE(ssp.srcu_sup, lock));
     smp_store_release(&ssp.srcu_sup.srcu_size_state, SRCU_SIZE_ALLOC);
     }
@@ -365,12 +604,11 @@ unsafe extern "C" fn __srcu_transition_to_big(ssp: *mut srcu_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn srcu_transition_to_big(ssp: *mut srcu_struct) {
-    static void srcu_transition_to_big(struct srcu_struct *ssp)
-    {
-    unsigned long flags;
+    let mut flags = 0;
 // Double-checked locking on ->srcu_size-state.
-    if (smp_load_acquire(&ssp.srcu_sup.srcu_size_state) != SRCU_SIZE_SMALL)
+    if (smp_load_acquire(&ssp.srcu_sup.srcu_size_state) != SRCU_SIZE_SMALL) {
     return;
+    }
     raw_spin_lock_irqsave_rcu_node(ssp.srcu_sup, flags);
     if (smp_load_acquire(&ssp.srcu_sup.srcu_size_state) != SRCU_SIZE_SMALL) {
     raw_spin_unlock_irqrestore_rcu_node(ssp.srcu_sup, flags);
@@ -385,18 +623,18 @@ unsafe extern "C" fn srcu_transition_to_big(ssp: *mut srcu_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn raw_spin_lock_irqsave_check_contention(ssp: *mut srcu_struct) {
-    static void raw_spin_lock_irqsave_check_contention(struct srcu_struct *ssp)
-    {
-    unsigned long j;
-    if (!SRCU_SIZING_IS_CONTEND() || ssp.srcu_sup.srcu_size_state)
+    let mut j = 0;
+    if (!SRCU_SIZING_IS_CONTEND() || ssp.srcu_sup.srcu_size_state) {
     return;
+    }
     j = jiffies;
     if (ssp.srcu_sup.srcu_size_jiffies != j) {
     ssp.srcu_sup.srcu_size_jiffies = j;
     ssp.srcu_sup.srcu_n_lock_retries = 0;
     }
-    if (++ssp.srcu_sup.srcu_n_lock_retries <= small_contention_lim)
+    if (++ssp.srcu_sup.srcu_n_lock_retries <= small_contention_lim) {
     return;
+    }
     __srcu_transition_to_big(ssp);
     }
 //
@@ -407,11 +645,10 @@ unsafe extern "C" fn raw_spin_lock_irqsave_check_contention(ssp: *mut srcu_struc
 //
 #[no_mangle]
 unsafe extern "C" fn raw_spin_lock_irqsave_sdp_contention(sdp: *mut srcu_data, flags: *mut c_ulong) {
-    static void raw_spin_lock_irqsave_sdp_contention(struct srcu_data *sdp, unsigned long *flags)
-    {
-    struct srcu_struct *ssp = sdp.ssp;
-    if (raw_spin_trylock_irqsave_rcu_node(sdp, *flags))
+    let mut ssp = sdp.ssp;
+    if (raw_spin_trylock_irqsave_rcu_node(sdp, *flags)) {
     return;
+    }
     raw_spin_lock_irqsave_rcu_node(ssp.srcu_sup, *flags);
     raw_spin_lock_irqsave_check_contention(ssp);
     raw_spin_unlock_irqrestore_rcu_node(ssp.srcu_sup, *flags);
@@ -425,10 +662,9 @@ unsafe extern "C" fn raw_spin_lock_irqsave_sdp_contention(sdp: *mut srcu_data, f
 //
 #[no_mangle]
 unsafe extern "C" fn raw_spin_lock_irqsave_ssp_contention(ssp: *mut srcu_struct, flags: *mut c_ulong) {
-    static void raw_spin_lock_irqsave_ssp_contention(struct srcu_struct *ssp, unsigned long *flags)
-    {
-    if (raw_spin_trylock_irqsave_rcu_node(ssp.srcu_sup, *flags))
+    if (raw_spin_trylock_irqsave_rcu_node(ssp.srcu_sup, *flags)) {
     return;
+    }
     raw_spin_lock_irqsave_rcu_node(ssp.srcu_sup, *flags);
     raw_spin_lock_irqsave_check_contention(ssp);
     }
@@ -442,12 +678,11 @@ unsafe extern "C" fn raw_spin_lock_irqsave_ssp_contention(ssp: *mut srcu_struct,
 //
 #[no_mangle]
 unsafe extern "C" fn check_init_srcu_struct(ssp: *mut srcu_struct) {
-    static void check_init_srcu_struct(struct srcu_struct *ssp)
-    {
-    unsigned long flags;
+    let mut flags = 0;
 // The smp_load_acquire() pairs with the smp_store_release().
-    if (!rcu_seq_state(smp_load_acquire(&ssp.srcu_sup.srcu_gp_seq_needed))) /*^^^*/
+    if (!rcu_seq_state(smp_load_acquire(&ssp.srcu_sup.srcu_gp_seq_needed))) /*^^^*/ {
     return; /* Already initialized. */
+    }
     raw_spin_lock_irqsave_rcu_node(ssp.srcu_sup, flags);
     if (!rcu_seq_state(ssp.srcu_sup.srcu_gp_seq_needed)) {
     raw_spin_unlock_irqrestore_rcu_node(ssp.srcu_sup, flags);
@@ -461,9 +696,7 @@ unsafe extern "C" fn check_init_srcu_struct(ssp: *mut srcu_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn srcu_gp_is_expedited(ssp: *mut srcu_struct) -> bool {
-    static bool srcu_gp_is_expedited(struct srcu_struct *ssp)
-    {
-    struct srcu_usage *sup = ssp.srcu_sup;
+    let mut sup = ssp.srcu_sup;
     return ULONG_CMP_LT(READ_ONCE(sup.srcu_gp_seq), READ_ONCE(sup.srcu_gp_seq_needed_exp));
     }
 //
@@ -474,22 +707,22 @@ unsafe extern "C" fn srcu_gp_is_expedited(ssp: *mut srcu_struct) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn srcu_readers_lock_idx(ssp: *mut srcu_struct, idx: c_int, gp: bool, unlocks: c_ulong) -> bool {
-    static bool srcu_readers_lock_idx(struct srcu_struct *ssp, int idx, bool gp, unsigned long unlocks)
-    {
-    int cpu;
-    let mut mask: c_ulong = 0;
-    let mut sum: c_ulong = 0;
+    let mut cpu = 0;
+pub static mut mask: c_ulong = 0;
+pub static mut sum: c_ulong = 0;
     for_each_possible_cpu(cpu) {
-    struct srcu_data *sdp = per_cpu_ptr(ssp.sda, cpu);
+    let mut sdp = per_cpu_ptr(ssp.sda, cpu);
     sum += atomic_long_read(&sdp.srcu_ctrs[idx].srcu_locks);
-    if (IS_ENABLED(CONFIG_PROVE_RCU))
+    if (IS_ENABLED!(CONFIG_PROVE_RCU)) {
     mask = mask | READ_ONCE(sdp.srcu_reader_flavor);
     }
-    WARN_ONCE(IS_ENABLED(CONFIG_PROVE_RCU) && (mask & (mask - 1)),
+    }
+    WARN_ONCE(IS_ENABLED!(CONFIG_PROVE_RCU) && (mask & (mask - 1)),
     "Mixed reader flavors for srcu_struct at %ps.\n", ssp);
-    if (mask & SRCU_READ_FLAVOR_SLOWGP && !gp)
+    if (mask & SRCU_READ_FLAVOR_SLOWGP && !gp) {
     return false;
-    let mut sum: return = = unlocks;
+    }
+pub static mut sum: return = 0;
     }
 //
 // Returns approximate total of the readers' ->srcu_ctrs[].srcu_unlocks
@@ -497,17 +730,15 @@ unsafe extern "C" fn srcu_readers_lock_idx(ssp: *mut srcu_struct, idx: c_int, gp
 //
 #[no_mangle]
 unsafe extern "C" fn srcu_readers_unlock_idx(ssp: *mut srcu_struct, idx: c_int, rdm: *mut c_ulong) -> c_ulong {
-    static unsigned long srcu_readers_unlock_idx(struct srcu_struct *ssp, int idx, unsigned long *rdm)
-    {
-    int cpu;
-    let mut mask: c_ulong = ssp.srcu_reader_flavor;
-    let mut sum: c_ulong = 0;
+    let mut cpu = 0;
+pub static mut mask: c_ulong = 0;
+pub static mut sum: c_ulong = 0;
     for_each_possible_cpu(cpu) {
-    struct srcu_data *sdp = per_cpu_ptr(ssp.sda, cpu);
+    let mut sdp = per_cpu_ptr(ssp.sda, cpu);
     sum += atomic_long_read(&sdp.srcu_ctrs[idx].srcu_unlocks);
     mask = mask | READ_ONCE(sdp.srcu_reader_flavor);
     }
-    WARN_ONCE(IS_ENABLED(CONFIG_PROVE_RCU) && (mask & (mask - 1)),
+    WARN_ONCE(IS_ENABLED!(CONFIG_PROVE_RCU) && (mask & (mask - 1)),
     "Mixed reader flavors for srcu_struct at %ps.\n", ssp);
 // rdm = mask;
     return sum;
@@ -518,11 +749,9 @@ unsafe extern "C" fn srcu_readers_unlock_idx(ssp: *mut srcu_struct, idx: c_int, 
 //
 #[no_mangle]
 unsafe extern "C" fn srcu_readers_active_idx_check(ssp: *mut srcu_struct, idx: c_int) -> bool {
-    static bool srcu_readers_active_idx_check(struct srcu_struct *ssp, int idx)
-    {
-    bool did_gp;
-    unsigned long rdm;
-    unsigned long unlocks;
+    let mut did_gp = 0;
+    let mut rdm = 0;
+    let mut unlocks = 0;
     unlocks = srcu_readers_unlock_idx(ssp, idx, &rdm);
     did_gp = !!(rdm & SRCU_READ_FLAVOR_SLOWGP);
 //
@@ -536,14 +765,16 @@ unsafe extern "C" fn srcu_readers_active_idx_check(ssp: *mut srcu_struct, idx: c
 // Z) to prevent accesses after the synchronize_srcu() from being
 // executed before the grace period ends.
 //
-    if (!did_gp)
+    if (!did_gp) {
     smp_mb(); /* A */
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: srcu_gp_is_expedited(ssp)) -> else {
-    else if (srcu_gp_is_expedited(ssp))
+    }
+
+    else if (srcu_gp_is_expedited(ssp)) {
     synchronize_rcu_expedited(); /* X */
-    else
+    }
+    else {
     synchronize_rcu(); /* X */
+    }
 //
 // If the locks are the same as the unlocks, then there must have
 // been no readers on this index at some point in this function.
@@ -552,7 +783,7 @@ pub unsafe extern "C" fn if(_arg: srcu_gp_is_expedited(ssp)) -> else {
 // ->srcu_ctrs[idx].srcu_locks counter.  In fact, it is possible
 // that most of the tasks have been preempted between fetching
 // ->srcu_ctrp and incrementing ->srcu_ctrs[idx].srcu_locks.  And
-// there could be almost (ULONG_MAX / sizeof(struct task_struct))
+// there could be almost (ULONG_MAX / sizeof!(task_struct))
 // tasks in a system whose address space was fully populated
 // with memory.  Call this quantity Nt.
 //
@@ -613,8 +844,8 @@ pub unsafe extern "C" fn if(_arg: srcu_gp_is_expedited(ssp)) -> else {
 // with max blocking time capped at 10 jiffies.
 //
 pub const SRCU_DEFAULT_RETRY_CHECK_DELAY: c_int = 5;
-    let mut srcu_retry_check_delay: static ulong = SRCU_DEFAULT_RETRY_CHECK_DELAY;
-    module_param(srcu_retry_check_delay, ulong, 0444);
+pub static mut srcu_retry_check_delay: ulong = 0;
+    module_param!(srcu_retry_check_delay, ulong, 0444);
 
 // no-delay instances.
 
@@ -627,41 +858,42 @@ pub const SRCU_DEFAULT_RETRY_CHECK_DELAY: c_int = 5;
     (2UL * USEC_PER_SEC / HZ / SRCU_DEFAULT_RETRY_CHECK_DELAY)
 // Maximum per-GP-phase consecutive no-delay instances.
 
-    SRCU_UL_CLAMP(SRCU_DEFAULT_MAX_NODELAY_PHASE_ADJUSTED,	\
-    SRCU_DEFAULT_MAX_NODELAY_PHASE_LO,	\
+    SRCU_UL_CLAMP(SRCU_DEFAULT_MAX_NODELAY_PHASE_ADJUSTED,	
+    SRCU_DEFAULT_MAX_NODELAY_PHASE_LO,	
     SRCU_DEFAULT_MAX_NODELAY_PHASE_HI)
-    let mut srcu_max_nodelay_phase: static ulong = SRCU_DEFAULT_MAX_NODELAY_PHASE;
-    module_param(srcu_max_nodelay_phase, ulong, 0444);
+pub static mut srcu_max_nodelay_phase: ulong = 0;
+    module_param!(srcu_max_nodelay_phase, ulong, 0444);
 // Maximum consecutive no-delay instances.
 
     SRCU_DEFAULT_MAX_NODELAY_PHASE : 100)
-    let mut srcu_max_nodelay: static ulong = SRCU_DEFAULT_MAX_NODELAY;
-    module_param(srcu_max_nodelay, ulong, 0444);
+pub static mut srcu_max_nodelay: ulong = 0;
+    module_param!(srcu_max_nodelay, ulong, 0444);
 //
 // Return grace-period delay, zero if there are expedited grace
 // periods pending, SRCU_INTERVAL otherwise.
 //
 #[no_mangle]
 unsafe extern "C" fn srcu_get_delay(ssp: *mut srcu_struct) -> c_ulong {
-    static unsigned long srcu_get_delay(struct srcu_struct *ssp)
-    {
-    unsigned long gpstart;
-    unsigned long j;
-    let mut jbase: c_ulong = SRCU_INTERVAL;
-    struct srcu_usage *sup = ssp.srcu_sup;
+    let mut gpstart = 0;
+    let mut j = 0;
+pub static mut jbase: c_ulong = 0;
+    let mut sup = ssp.srcu_sup;
     lockdep_assert_held(&ACCESS_PRIVATE(ssp.srcu_sup, lock));
-    if (srcu_gp_is_expedited(ssp))
+    if (srcu_gp_is_expedited(ssp)) {
     jbase = 0;
+    }
     if (rcu_seq_state(READ_ONCE(sup.srcu_gp_seq))) {
     j = jiffies - 1;
     gpstart = READ_ONCE(sup.srcu_gp_start);
-    if (time_after(j, gpstart))
+    if (time_after(j, gpstart)) {
     jbase += j - gpstart;
+    }
     if (!jbase) {
     ASSERT_EXCLUSIVE_WRITER(sup.srcu_n_exp_nodelay);
     WRITE_ONCE(sup.srcu_n_exp_nodelay, READ_ONCE(sup.srcu_n_exp_nodelay) + 1);
-    if (READ_ONCE(sup.srcu_n_exp_nodelay) > srcu_max_nodelay_phase)
+    if (READ_ONCE(sup.srcu_n_exp_nodelay) > srcu_max_nodelay_phase) {
     jbase = 1;
+    }
     }
     }
     return jbase > SRCU_MAX_INTERVAL ? SRCU_MAX_INTERVAL : jbase;
@@ -675,37 +907,39 @@ unsafe extern "C" fn srcu_get_delay(ssp: *mut srcu_struct) -> c_ulong {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cleanup_srcu_struct(ssp: *mut srcu_struct) {
-    void cleanup_srcu_struct(struct srcu_struct *ssp)
-    {
-    int cpu;
-    unsigned long delay;
-    struct srcu_usage *sup = ssp.srcu_sup;
+    let mut cpu = 0;
+    let mut delay = 0;
+    let mut sup = ssp.srcu_sup;
     raw_spin_lock_irq_rcu_node(ssp.srcu_sup);
     delay = srcu_get_delay(ssp);
     raw_spin_unlock_irq_rcu_node(ssp.srcu_sup);
-    if (WARN_ON(!delay))
+    if (WARN_ON!(!delay)) {
     return; /* Just leak it! */
-    if (WARN_ON(srcu_readers_active(ssp)))
+    }
+    if (WARN_ON!(srcu_readers_active(ssp))) {
     return; /* Just leak it! */
+    }
 // Wait for irq_work to finish first as it may queue a new work.
     irq_work_sync(&sup.irq_work);
     flush_delayed_work(&sup.work);
     for_each_possible_cpu(cpu) {
-    struct srcu_data *sdp = per_cpu_ptr(ssp.sda, cpu);
+    let mut sdp = per_cpu_ptr(ssp.sda, cpu);
 // Call srcu_barrier() before this cleanup_srcu_struct()
-// to avoid triggering this WARN_ON().
-    if (WARN_ON(timer_delete_sync(&sdp.delay_work) &&
+// to avoid triggering this WARN_ON!().
+    if (WARN_ON!(timer_delete_sync(&sdp.delay_work) &&
     rcu_segcblist_n_cbs(&sdp.srcu_cblist)) &&
-    rcu_cpu_beenfullyonline(sdp.cpu))
+    rcu_cpu_beenfullyonline(sdp.cpu)) {
     queue_work_on(sdp.cpu, rcu_gp_wq, &sdp.work);
+    }
     flush_work(&sdp.work);
-    if (WARN_ON(rcu_segcblist_n_cbs(&sdp.srcu_cblist)))
+    if (WARN_ON!(rcu_segcblist_n_cbs(&sdp.srcu_cblist))) {
     return; /* Forgot srcu_barrier(), so just leak it! */
     }
-    if (WARN_ON(rcu_seq_state(READ_ONCE(sup.srcu_gp_seq)) != SRCU_STATE_IDLE) ||
-    WARN_ON(rcu_seq_current(&sup.srcu_gp_seq) != sup.srcu_gp_seq_needed) ||
-    WARN_ON(srcu_readers_active(ssp))) {
-    pr_info("%s: Active srcu_struct %p read state: %d gp state: %lu/%lu\n",
+    }
+    if (WARN_ON!(rcu_seq_state(READ_ONCE(sup.srcu_gp_seq)) != SRCU_STATE_IDLE) ||
+    WARN_ON!(rcu_seq_current(&sup.srcu_gp_seq) != sup.srcu_gp_seq_needed) ||
+    WARN_ON!(srcu_readers_active(ssp))) {
+    pr_info!("%s: Active srcu_struct %p read state: %d gp state: %lu/%lu\n",
     __func__, ssp, rcu_seq_state(READ_ONCE(sup.srcu_gp_seq)),
     rcu_seq_current(&sup.srcu_gp_seq), sup.srcu_gp_seq_needed);
     return; // Caller forgot to stop doing call_srcu()?
@@ -729,24 +963,23 @@ pub unsafe extern "C" fn cleanup_srcu_struct(ssp: *mut srcu_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __srcu_check_read_flavor(ssp: *mut srcu_struct, read_flavor: c_int) {
-    void __srcu_check_read_flavor(struct srcu_struct *ssp, int read_flavor)
-    {
-    int old_read_flavor;
-    struct srcu_data *sdp;
+    let mut old_read_flavor = 0;
+pub static mut sdp: *mut c_void = core::ptr::null_mut();
 // NMI-unsafe use in NMI is a bad sign, as is multi-bit read_flavor values.
-    WARN_ON_ONCE(read_flavor != SRCU_READ_FLAVOR_NMI &&
+    WARN_ON_ONCE!(read_flavor != SRCU_READ_FLAVOR_NMI &&
     read_flavor != SRCU_READ_FLAVOR_FAST && in_nmi());
-    WARN_ON_ONCE(read_flavor & (read_flavor - 1));
+    WARN_ON_ONCE!(read_flavor & (read_flavor - 1));
     sdp = raw_cpu_ptr(ssp.sda);
     old_read_flavor = READ_ONCE(sdp.srcu_reader_flavor);
-    WARN_ON_ONCE(ssp.srcu_reader_flavor && read_flavor != ssp.srcu_reader_flavor);
-    WARN_ON_ONCE(old_read_flavor && ssp.srcu_reader_flavor &&
+    WARN_ON_ONCE!(ssp.srcu_reader_flavor && read_flavor != ssp.srcu_reader_flavor);
+    WARN_ON_ONCE!(old_read_flavor && ssp.srcu_reader_flavor &&
     old_read_flavor != ssp.srcu_reader_flavor);
-    WARN_ON_ONCE(read_flavor == SRCU_READ_FLAVOR_FAST && !ssp.srcu_reader_flavor);
+    WARN_ON_ONCE!(read_flavor == SRCU_READ_FLAVOR_FAST && !ssp.srcu_reader_flavor);
     if (!old_read_flavor) {
     old_read_flavor = cmpxchg(&sdp.srcu_reader_flavor, 0, read_flavor);
-    if (!old_read_flavor)
+    if (!old_read_flavor) {
     return;
+    }
     }
     WARN_ONCE(old_read_flavor != read_flavor, "CPU %d old state %d new state %d\n", sdp.cpu, old_read_flavor, read_flavor);
     }
@@ -759,9 +992,7 @@ pub unsafe extern "C" fn __srcu_check_read_flavor(ssp: *mut srcu_struct, read_fl
 //
 #[no_mangle]
 pub unsafe extern "C" fn __srcu_read_lock(ssp: *mut srcu_struct) -> c_int {
-    int __srcu_read_lock(struct srcu_struct *ssp)
-    {
-    struct srcu_ctr __percpu *scp = READ_ONCE(ssp.srcu_ctrp);
+    let mut scp = READ_ONCE(ssp.srcu_ctrp);
     this_cpu_inc(scp.srcu_locks.counter);
     smp_mb(); /* B */  /* Avoid leaking the critical section. */
     return __srcu_ptr_to_ctr(ssp, scp);
@@ -774,8 +1005,6 @@ pub unsafe extern "C" fn __srcu_read_lock(ssp: *mut srcu_struct) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __srcu_read_unlock(ssp: *mut srcu_struct, idx: c_int) {
-    void __srcu_read_unlock(struct srcu_struct *ssp, int idx)
-    {
     smp_mb(); /* C */  /* Avoid leaking the critical section. */
     this_cpu_inc(__srcu_ctr_to_ptr(ssp, idx).srcu_unlocks.counter);
     }
@@ -788,10 +1017,8 @@ pub unsafe extern "C" fn __srcu_read_unlock(ssp: *mut srcu_struct, idx: c_int) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __srcu_read_lock_nmisafe(ssp: *mut srcu_struct) -> c_int {
-    int __srcu_read_lock_nmisafe(struct srcu_struct *ssp)
-    {
-    struct srcu_ctr __percpu *scpp = READ_ONCE(ssp.srcu_ctrp);
-    struct srcu_ctr *scp = raw_cpu_ptr(scpp);
+    let mut scpp = READ_ONCE(ssp.srcu_ctrp);
+    let mut scp = raw_cpu_ptr(scpp);
     atomic_long_inc(&scp.srcu_locks);
     smp_mb__after_atomic(); /* B */  /* Avoid leaking the critical section. */
     return __srcu_ptr_to_ctr(ssp, scpp);
@@ -804,8 +1031,6 @@ pub unsafe extern "C" fn __srcu_read_lock_nmisafe(ssp: *mut srcu_struct) -> c_in
 //
 #[no_mangle]
 pub unsafe extern "C" fn __srcu_read_unlock_nmisafe(ssp: *mut srcu_struct, idx: c_int) {
-    void __srcu_read_unlock_nmisafe(struct srcu_struct *ssp, int idx)
-    {
     smp_mb__before_atomic(); /* C */  /* Avoid leaking the critical section. */
     atomic_long_inc(&raw_cpu_ptr(__srcu_ctr_to_ptr(ssp, idx)).srcu_unlocks);
     }
@@ -816,28 +1041,23 @@ pub unsafe extern "C" fn __srcu_read_unlock_nmisafe(ssp: *mut srcu_struct, idx: 
 //
 #[no_mangle]
 unsafe extern "C" fn srcu_gp_start(ssp: *mut srcu_struct) {
-    static void srcu_gp_start(struct srcu_struct *ssp)
-    {
-    int state;
+    let mut state = 0;
     lockdep_assert_held(&ACCESS_PRIVATE(ssp.srcu_sup, lock));
-    WARN_ON_ONCE(ULONG_CMP_GE(ssp.srcu_sup.srcu_gp_seq, ssp.srcu_sup.srcu_gp_seq_needed));
+    WARN_ON_ONCE!(ULONG_CMP_GE(ssp.srcu_sup.srcu_gp_seq, ssp.srcu_sup.srcu_gp_seq_needed));
     WRITE_ONCE(ssp.srcu_sup.srcu_gp_start, jiffies);
     WRITE_ONCE(ssp.srcu_sup.srcu_n_exp_nodelay, 0);
     smp_mb(); /* Order prior store to .srcu_gp_seq_needed vs. GP start. */
     rcu_seq_start(&ssp.srcu_sup.srcu_gp_seq);
     state = rcu_seq_state(ssp.srcu_sup.srcu_gp_seq);
-    WARN_ON_ONCE(state != SRCU_STATE_SCAN1);
+    WARN_ON_ONCE!(state != SRCU_STATE_SCAN1);
     }
 #[no_mangle]
 unsafe extern "C" fn srcu_delay_timer(t: *mut timer_list) {
-    static void srcu_delay_timer(struct timer_list *t)
-    {
-    struct srcu_data *sdp = container_of(t, struct srcu_data, delay_work);
+    let mut sdp = container_of!(t, srcu_data, delay_work);
     queue_work_on(sdp.cpu, rcu_gp_wq, &sdp.work);
     }
-    static void srcu_queue_delayed_work_on(struct srcu_data *sdp,
-    unsigned long delay)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn srcu_queue_delayed_work_on(sdp: *mut srcu_data, delay: c_ulong) {
     if (!delay) {
     queue_work_on(sdp.cpu, rcu_gp_wq, &sdp.work);
     return;
@@ -850,8 +1070,6 @@ unsafe extern "C" fn srcu_delay_timer(t: *mut timer_list) {
 //
 #[no_mangle]
 unsafe extern "C" fn srcu_schedule_cbs_sdp(sdp: *mut srcu_data, delay: c_ulong) {
-    static void srcu_schedule_cbs_sdp(struct srcu_data *sdp, unsigned long delay)
-    {
     srcu_queue_delayed_work_on(sdp, delay);
     }
 //
@@ -860,13 +1078,13 @@ unsafe extern "C" fn srcu_schedule_cbs_sdp(sdp: *mut srcu_data, delay: c_ulong) 
 // just-completed grace period, the one corresponding to idx.  If possible,
 // schedule this invocation on the corresponding CPUs.
 //
-    static void srcu_schedule_cbs_snp(struct srcu_struct *ssp, struct srcu_node *snp,
-    unsigned long mask, unsigned long delay)
-    {
-    int cpu;
-    for (cpu = snp.grplo; cpu <= snp.grphi; cpu++)
+#[no_mangle]
+pub unsafe extern "C" fn srcu_schedule_cbs_snp(ssp: *mut srcu_struct, snp: *mut srcu_node, mask: c_ulong, delay: c_ulong) {
+    let mut cpu = 0;
+    for (cpu = snp.grplo; cpu <= snp.grphi; cpu++) {
     if ((mask & (1UL << (cpu - snp.grplo))) && rcu_cpu_beenfullyonline(cpu))
     srcu_schedule_cbs_sdp(per_cpu_ptr(ssp.sda, cpu), delay);
+    }
     }
 //
 // Note the end of an SRCU grace period.  Initiates callback invocation
@@ -879,33 +1097,33 @@ unsafe extern "C" fn srcu_schedule_cbs_sdp(sdp: *mut srcu_data, delay: c_ulong) 
 //
 #[no_mangle]
 unsafe extern "C" fn srcu_gp_end(ssp: *mut srcu_struct) {
-    static void srcu_gp_end(struct srcu_struct *ssp)
-    {
-    let mut cbdelay: c_ulong = 1;
-    bool cbs;
-    bool last_lvl;
-    int cpu;
-    unsigned long gpseq;
-    int idx;
-    unsigned long mask;
-    struct srcu_data *sdp;
-    unsigned long sgsne;
-    struct srcu_node *snp;
-    int ss_state;
-    struct srcu_usage *sup = ssp.srcu_sup;
+pub static mut cbdelay: c_ulong = 1;
+    let mut cbs = 0;
+    let mut last_lvl = 0;
+    let mut cpu = 0;
+    let mut gpseq = 0;
+    let mut idx = 0;
+    let mut mask = 0;
+pub static mut sdp: *mut c_void = core::ptr::null_mut();
+    let mut sgsne = 0;
+pub static mut snp: *mut c_void = core::ptr::null_mut();
+    let mut ss_state = 0;
+    let mut sup = ssp.srcu_sup;
 // Prevent more than one additional grace period.
     mutex_lock(&sup.srcu_cb_mutex);
 // End the current grace period.
     raw_spin_lock_irq_rcu_node(sup);
     idx = rcu_seq_state(sup.srcu_gp_seq);
-    WARN_ON_ONCE(idx != SRCU_STATE_SCAN2);
-    if (srcu_gp_is_expedited(ssp))
+    WARN_ON_ONCE!(idx != SRCU_STATE_SCAN2);
+    if (srcu_gp_is_expedited(ssp)) {
     cbdelay = 0;
+    }
     WRITE_ONCE(sup.srcu_last_gp_end, ktime_get_mono_fast_ns());
     rcu_seq_end(&sup.srcu_gp_seq);
     gpseq = rcu_seq_current(&sup.srcu_gp_seq);
-    if (ULONG_CMP_LT(sup.srcu_gp_seq_needed_exp, gpseq))
+    if (ULONG_CMP_LT(sup.srcu_gp_seq_needed_exp, gpseq)) {
     WRITE_ONCE(sup.srcu_gp_seq_needed_exp, gpseq);
+    }
     raw_spin_unlock_irq_rcu_node(sup);
     mutex_unlock(&sup.srcu_gp_mutex);
 // A new grace period can start at this point.  But only one.
@@ -915,37 +1133,45 @@ unsafe extern "C" fn srcu_gp_end(ssp: *mut srcu_struct) {
     srcu_schedule_cbs_sdp(per_cpu_ptr(ssp.sda, get_boot_cpu_id()),
     cbdelay);
     } else {
-    idx = rcu_seq_ctr(gpseq) % ARRAY_SIZE(snp.srcu_have_cbs);
+    idx = rcu_seq_ctr(gpseq) % ARRAY_SIZE!(snp.srcu_have_cbs);
     srcu_for_each_node_breadth_first(ssp, snp) {
     raw_spin_lock_irq_rcu_node(snp);
     cbs = false;
     last_lvl = snp >= sup.level[rcu_num_lvls - 1];
-    if (last_lvl)
+    if (last_lvl) {
     cbs = ss_state < SRCU_SIZE_BIG || snp.srcu_have_cbs[idx] == gpseq;
+    }
     snp.srcu_have_cbs[idx] = gpseq;
     rcu_seq_set_state(&snp.srcu_have_cbs[idx], 1);
     sgsne = snp.srcu_gp_seq_needed_exp;
-    if (srcu_invl_snp_seq(sgsne) || ULONG_CMP_LT(sgsne, gpseq))
+    if (srcu_invl_snp_seq(sgsne) || ULONG_CMP_LT(sgsne, gpseq)) {
     WRITE_ONCE(snp.srcu_gp_seq_needed_exp, gpseq);
-    if (ss_state < SRCU_SIZE_BIG)
+    }
+    if (ss_state < SRCU_SIZE_BIG) {
     mask = ~0;
-    else
+    }
+    else {
     mask = snp.srcu_data_have_cbs[idx];
+    }
     snp.srcu_data_have_cbs[idx] = 0;
     raw_spin_unlock_irq_rcu_node(snp);
-    if (cbs)
+    if (cbs) {
     srcu_schedule_cbs_snp(ssp, snp, mask, cbdelay);
     }
     }
+    }
 // Occasionally prevent srcu_data counter wrap.
-    if (!(gpseq & counter_wrap_check))
+    if (!(gpseq & counter_wrap_check)) {
     for_each_possible_cpu(cpu) {
+    }
     sdp = per_cpu_ptr(ssp.sda, cpu);
     raw_spin_lock_irq_rcu_node(sdp);
-    if (ULONG_CMP_GE(gpseq, sdp.srcu_gp_seq_needed + 100))
+    if (ULONG_CMP_GE(gpseq, sdp.srcu_gp_seq_needed + 100)) {
     sdp.srcu_gp_seq_needed = gpseq;
-    if (ULONG_CMP_GE(gpseq, sdp.srcu_gp_seq_needed_exp + 100))
+    }
+    if (ULONG_CMP_GE(gpseq, sdp.srcu_gp_seq_needed_exp + 100)) {
     sdp.srcu_gp_seq_needed_exp = gpseq;
+    }
     raw_spin_unlock_irq_rcu_node(sdp);
     }
 // Callback initiation done, allow grace periods after next.
@@ -963,10 +1189,12 @@ unsafe extern "C" fn srcu_gp_end(ssp: *mut srcu_struct) {
     }
 // Transition to big if needed.
     if (ss_state != SRCU_SIZE_SMALL && ss_state != SRCU_SIZE_BIG) {
-    if (ss_state == SRCU_SIZE_ALLOC)
+    if (ss_state == SRCU_SIZE_ALLOC) {
     init_srcu_struct_nodes(ssp, GFP_KERNEL);
-    else
+    }
+    else {
     smp_store_release(&sup.srcu_size_state, ss_state + 1);
+    }
     }
     }
 //
@@ -976,17 +1204,18 @@ unsafe extern "C" fn srcu_gp_end(ssp: *mut srcu_struct) {
 // but without expediting.  To start a completely new grace period,
 // whether expedited or not, use srcu_funnel_gp_start() instead.
 //
-    static void srcu_funnel_exp_start(struct srcu_struct *ssp, struct srcu_node *snp,
-    unsigned long s)
-    {
-    unsigned long flags;
-    unsigned long sgsne;
-    if (snp)
-    for (; snp != core::ptr::null_mut(); snp = snp.srcu_parent) {
+#[no_mangle]
+pub unsafe extern "C" fn srcu_funnel_exp_start(ssp: *mut srcu_struct, snp: *mut srcu_node, s: c_ulong) {
+    let mut flags = 0;
+    let mut sgsne = 0;
+    if (snp) {
+    while (snp != core::ptr::null_mut()) {
+    }
     sgsne = READ_ONCE(snp.srcu_gp_seq_needed_exp);
-    if (WARN_ON_ONCE(rcu_seq_done(&ssp.srcu_sup.srcu_gp_seq, s)) ||
-    (!srcu_invl_snp_seq(sgsne) && ULONG_CMP_GE(sgsne, s)))
+    if (WARN_ON_ONCE!(rcu_seq_done(&ssp.srcu_sup.srcu_gp_seq, s)) ||
+    (!srcu_invl_snp_seq(sgsne) && ULONG_CMP_GE(sgsne, s))) {
     return;
+    }
     raw_spin_lock_irqsave_rcu_node(snp, flags);
     sgsne = snp.srcu_gp_seq_needed_exp;
     if (!srcu_invl_snp_seq(sgsne) && ULONG_CMP_GE(sgsne, s)) {
@@ -997,8 +1226,9 @@ unsafe extern "C" fn srcu_gp_end(ssp: *mut srcu_struct) {
     raw_spin_unlock_irqrestore_rcu_node(snp, flags);
     }
     raw_spin_lock_irqsave_ssp_contention(ssp, &flags);
-    if (ULONG_CMP_LT(ssp.srcu_sup.srcu_gp_seq_needed_exp, s))
+    if (ULONG_CMP_LT(ssp.srcu_sup.srcu_gp_seq_needed_exp, s)) {
     WRITE_ONCE(ssp.srcu_sup.srcu_gp_seq_needed_exp, s);
+    }
     raw_spin_unlock_irqrestore_rcu_node(ssp.srcu_sup, flags);
     }
 //
@@ -1014,46 +1244,53 @@ unsafe extern "C" fn srcu_gp_end(ssp: *mut srcu_struct) {
 // The srcu read lock should be hold around this function. And s is a seq snap
 // after holding that lock.
 //
-    static void srcu_funnel_gp_start(struct srcu_struct *ssp, struct srcu_data *sdp,
-    unsigned long s, bool do_norm)
-    {
-    unsigned long flags;
-    let mut idx: c_int = rcu_seq_ctr(s) % ARRAY_SIZE(sdp.mynode.srcu_have_cbs);
-    unsigned long sgsne;
-    struct srcu_node *snp;
-    struct srcu_node *snp_leaf;
-    unsigned long snp_seq;
-    struct srcu_usage *sup = ssp.srcu_sup;
+#[no_mangle]
+pub unsafe extern "C" fn srcu_funnel_gp_start(ssp: *mut srcu_struct, sdp: *mut srcu_data, s: c_ulong, do_norm: bool) {
+    let mut flags = 0;
+pub static mut idx: c_int = 0;
+    let mut sgsne = 0;
+pub static mut snp: *mut c_void = core::ptr::null_mut();
+pub static mut snp_leaf: *mut c_void = core::ptr::null_mut();
+    let mut snp_seq = 0;
+    let mut sup = ssp.srcu_sup;
 // Ensure that snp node tree is fully initialized before traversing it
-    if (smp_load_acquire(&sup.srcu_size_state) < SRCU_SIZE_WAIT_BARRIER)
+    if (smp_load_acquire(&sup.srcu_size_state) < SRCU_SIZE_WAIT_BARRIER) {
     snp_leaf = core::ptr::null_mut();
-    else
+    }
+    else {
     snp_leaf = sdp.mynode;
-    if (snp_leaf)
+    }
+    if (snp_leaf) {
 // Each pass through the loop does one level of the srcu_node tree.
-    for (snp = snp_leaf; snp != core::ptr::null_mut(); snp = snp.srcu_parent) {
-    if (WARN_ON_ONCE(rcu_seq_done(&sup.srcu_gp_seq, s)) && snp != snp_leaf)
+    while (snp != core::ptr::null_mut()) {
+    }
+    if (WARN_ON_ONCE!(rcu_seq_done(&sup.srcu_gp_seq, s)) && snp != snp_leaf) {
     return; /* GP already done and CBs recorded. */
+    }
     raw_spin_lock_irqsave_rcu_node(snp, flags);
     snp_seq = snp.srcu_have_cbs[idx];
     if (!srcu_invl_snp_seq(snp_seq) && ULONG_CMP_GE(snp_seq, s)) {
-    if (snp == snp_leaf && snp_seq == s)
+    if (snp == snp_leaf && snp_seq == s) {
     snp.srcu_data_have_cbs[idx] |= sdp.grpmask;
+    }
     raw_spin_unlock_irqrestore_rcu_node(snp, flags);
     if (snp == snp_leaf && snp_seq != s) {
     srcu_schedule_cbs_sdp(sdp, do_norm ? SRCU_INTERVAL : 0);
     return;
     }
-    if (!do_norm)
+    if (!do_norm) {
     srcu_funnel_exp_start(ssp, snp, s);
+    }
     return;
     }
     snp.srcu_have_cbs[idx] = s;
-    if (snp == snp_leaf)
+    if (snp == snp_leaf) {
     snp.srcu_data_have_cbs[idx] |= sdp.grpmask;
+    }
     sgsne = snp.srcu_gp_seq_needed_exp;
-    if (!do_norm && (srcu_invl_snp_seq(sgsne) || ULONG_CMP_LT(sgsne, s)))
+    if (!do_norm && (srcu_invl_snp_seq(sgsne) || ULONG_CMP_LT(sgsne, s))) {
     WRITE_ONCE(snp.srcu_gp_seq_needed_exp, s);
+    }
     raw_spin_unlock_irqrestore_rcu_node(snp, flags);
     }
 // Top of tree, must ensure the grace period will be started.
@@ -1065,10 +1302,11 @@ unsafe extern "C" fn srcu_gp_end(ssp: *mut srcu_struct) {
 //
     smp_store_release(&sup.srcu_gp_seq_needed, s); /*^^^*/
     }
-    if (!do_norm && ULONG_CMP_LT(sup.srcu_gp_seq_needed_exp, s))
+    if (!do_norm && ULONG_CMP_LT(sup.srcu_gp_seq_needed_exp, s)) {
     WRITE_ONCE(sup.srcu_gp_seq_needed_exp, s);
+    }
 // If grace period not already in progress, start it.
-    if (!WARN_ON_ONCE(rcu_seq_done(&sup.srcu_gp_seq, s)) &&
+    if (!WARN_ON_ONCE!(rcu_seq_done(&sup.srcu_gp_seq, s)) &&
     rcu_seq_state(sup.srcu_gp_seq) == SRCU_STATE_IDLE) {
     srcu_gp_start(ssp);
 // And how can that list_add() in the "else" clause
@@ -1081,12 +1319,13 @@ unsafe extern "C" fn srcu_gp_end(ssp: *mut srcu_struct) {
 // srcu rcu_node::lock held. BPF instrument could introduce the
 // opposite dependency, hence we need to break the possible
 // locking dependency here.
-    if (likely(srcu_init_done))
+    if (likely(srcu_init_done)) {
     irq_work_queue(&sup.irq_work);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: list_empty(&sup->work.work.entry)) -> else {
-    else if (list_empty(&sup.work.work.entry))
+    }
+
+    else if (list_empty(&sup.work.work.entry)) {
     list_add(&sup.work.work.entry, &srcu_boot_list);
+    }
     }
     raw_spin_unlock_irqrestore_rcu_node(sup, flags);
     }
@@ -1097,17 +1336,17 @@ pub unsafe extern "C" fn if(_arg: list_empty(&sup->work.work.entry)) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn try_check_zero(ssp: *mut srcu_struct, idx: c_int, trycount: c_int) -> bool {
-    static bool try_check_zero(struct srcu_struct *ssp, int idx, int trycount)
-    {
-    unsigned long curdelay;
+    let mut curdelay = 0;
     raw_spin_lock_irq_rcu_node(ssp.srcu_sup);
     curdelay = !srcu_get_delay(ssp);
     raw_spin_unlock_irq_rcu_node(ssp.srcu_sup);
     for (;;) {
-    if (srcu_readers_active_idx_check(ssp, idx))
+    if (srcu_readers_active_idx_check(ssp, idx)) {
     return true;
-    if ((--trycount + curdelay) <= 0)
+    }
+    if ((--trycount + curdelay) <= 0) {
     return false;
+    }
     udelay(srcu_retry_check_delay);
     }
     }
@@ -1118,8 +1357,6 @@ unsafe extern "C" fn try_check_zero(ssp: *mut srcu_struct, idx: c_int, trycount:
 //
 #[no_mangle]
 unsafe extern "C" fn srcu_flip(ssp: *mut srcu_struct) {
-    static void srcu_flip(struct srcu_struct *ssp)
-    {
 //
 // Because the flip of ->srcu_ctrp is executed only if the
 // preceding call to srcu_readers_active_idx_check() found that
@@ -1198,17 +1435,16 @@ unsafe extern "C" fn srcu_flip(ssp: *mut srcu_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn srcu_should_expedite(ssp: *mut srcu_struct) -> bool {
-    static bool srcu_should_expedite(struct srcu_struct *ssp)
-    {
-    unsigned long curseq;
-    unsigned long flags;
-    struct srcu_data *sdp;
-    unsigned long t;
-    unsigned long tlast;
+    let mut curseq = 0;
+    let mut flags = 0;
+pub static mut sdp: *mut c_void = core::ptr::null_mut();
+    let mut t = 0;
+    let mut tlast = 0;
     check_init_srcu_struct(ssp);
 // If _lite() readers, don't do unsolicited expediting.
-    if (this_cpu_read(ssp.sda.srcu_reader_flavor) & SRCU_READ_FLAVOR_SLOWGP)
+    if (this_cpu_read(ssp.sda.srcu_reader_flavor) & SRCU_READ_FLAVOR_SLOWGP) {
     return false;
+    }
 // If the local srcu_data structure has callbacks, not idle.
     sdp = raw_cpu_ptr(ssp.sda);
     raw_spin_lock_irqsave_rcu_node(sdp, flags);
@@ -1226,16 +1462,19 @@ unsafe extern "C" fn srcu_should_expedite(ssp: *mut srcu_struct) -> bool {
     t = ktime_get_mono_fast_ns();
     tlast = READ_ONCE(ssp.srcu_sup.srcu_last_gp_end);
     if (exp_holdoff == 0 ||
-    time_in_range_open(t, tlast, tlast + exp_holdoff))
+    time_in_range_open(t, tlast, tlast + exp_holdoff)) {
     return false; /* Too soon after last GP. */
+    }
 // Next, check for probable idleness.
     curseq = rcu_seq_current(&ssp.srcu_sup.srcu_gp_seq);
     smp_mb(); /* Order .srcu_gp_seq with .srcu_gp_seq_needed. */
-    if (ULONG_CMP_LT(curseq, READ_ONCE(ssp.srcu_sup.srcu_gp_seq_needed)))
+    if (ULONG_CMP_LT(curseq, READ_ONCE(ssp.srcu_sup.srcu_gp_seq_needed))) {
     return false; /* Grace period in progress, so not idle. */
+    }
     smp_mb(); /* Order .srcu_gp_seq with prior access. */
-    if (curseq != rcu_seq_current(&ssp.srcu_sup.srcu_gp_seq))
+    if (curseq != rcu_seq_current(&ssp.srcu_sup.srcu_gp_seq)) {
     return false; /* GP # changed, so not idle. */
+    }
     return true; /* With reasonable probability, idle! */
     }
 //
@@ -1243,23 +1482,20 @@ unsafe extern "C" fn srcu_should_expedite(ssp: *mut srcu_struct) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn srcu_leak_callback(rhp: *mut rcu_head) {
-    static void srcu_leak_callback(struct rcu_head *rhp)
-    {
     }
 //
 // Start an SRCU grace period, and also queue the callback if non-NULL.
 //
-    static unsigned long srcu_gp_start_if_needed(struct srcu_struct *ssp,
-    struct rcu_head *rhp, bool do_norm)
-    {
-    unsigned long flags;
-    int idx;
-    let mut needexp: bool = false;
-    let mut needgp: bool = false;
-    unsigned long s;
-    struct srcu_data *sdp;
-    struct srcu_node *sdp_mynode;
-    int ss_state;
+#[no_mangle]
+pub unsafe extern "C" fn srcu_gp_start_if_needed(ssp: *mut srcu_struct, rhp: *mut rcu_head, do_norm: bool) -> c_ulong {
+    let mut flags = 0;
+    let mut idx = 0;
+pub static mut needexp: bool = false;
+pub static mut needgp: bool = false;
+    let mut s = 0;
+pub static mut sdp: *mut c_void = core::ptr::null_mut();
+pub static mut sdp_mynode: *mut c_void = core::ptr::null_mut();
+    let mut ss_state = 0;
     check_init_srcu_struct(ssp);
 //
 // While starting a new grace period, make sure we are in an
@@ -1270,13 +1506,16 @@ unsafe extern "C" fn srcu_leak_callback(rhp: *mut rcu_head) {
     ss_state = smp_load_acquire(&ssp.srcu_sup.srcu_size_state);
 // If !rcu_cpu_beenfullyonline(), interrupts are still disabled,
 // so no migration is possible in either direction from this CPU.
-    if (ss_state < SRCU_SIZE_WAIT_CALL || !rcu_cpu_beenfullyonline(raw_smp_processor_id()))
+    if (ss_state < SRCU_SIZE_WAIT_CALL || !rcu_cpu_beenfullyonline(raw_smp_processor_id())) {
     sdp = per_cpu_ptr(ssp.sda, get_boot_cpu_id());
-    else
+    }
+    else {
     sdp = raw_cpu_ptr(ssp.sda);
+    }
     raw_spin_lock_irqsave_sdp_contention(sdp, &flags);
-    if (rhp)
+    if (rhp) {
     rcu_segcblist_enqueue(&sdp.srcu_cblist, rhp);
+    }
 //
 // It's crucial to capture the snapshot 's' for acceleration before
 // reading the current gp_seq that is used for advancing. This is
@@ -1324,7 +1563,7 @@ unsafe extern "C" fn srcu_leak_callback(rhp: *mut rcu_head) {
 // always be able to be emptied by the acceleration into the
 // RCU_NEXT_READY_TAIL or RCU_WAIT_TAIL segments.
 //
-    WARN_ON_ONCE(!srcu_segcblist_accelerate(&sdp.srcu_cblist, s));
+    WARN_ON_ONCE!(!srcu_segcblist_accelerate(&sdp.srcu_cblist, s));
     }
     if (ULONG_CMP_LT(sdp.srcu_gp_seq_needed, s)) {
     sdp.srcu_gp_seq_needed = s;
@@ -1336,16 +1575,19 @@ unsafe extern "C" fn srcu_leak_callback(rhp: *mut rcu_head) {
     }
     raw_spin_unlock_irqrestore_rcu_node(sdp, flags);
 // Ensure that snp node tree is fully initialized before traversing it
-    if (ss_state < SRCU_SIZE_WAIT_BARRIER)
+    if (ss_state < SRCU_SIZE_WAIT_BARRIER) {
     sdp_mynode = core::ptr::null_mut();
-    else
+    }
+    else {
     sdp_mynode = sdp.mynode;
-    if (needgp)
+    }
+    if (needgp) {
     srcu_funnel_gp_start(ssp, sdp, s, do_norm);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: needexp) -> else {
-    else if (needexp)
+    }
+
+    else if (needexp) {
     srcu_funnel_exp_start(ssp, sdp_mynode, s);
+    }
     __srcu_read_unlock_nmisafe(ssp, idx);
     return s;
     }
@@ -1377,9 +1619,8 @@ pub unsafe extern "C" fn if(_arg: needexp) -> else {
 // srcu_read_lock(), and srcu_read_unlock() that are all passed the same
 // srcu_struct structure.
 //
-    static void __call_srcu(struct srcu_struct *ssp, struct rcu_head *rhp,
-    rcu_callback_t func, bool do_norm)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __call_srcu(ssp: *mut srcu_struct, rhp: *mut rcu_head, func: rcu_callback_t, do_norm: bool) {
     if (debug_rcu_head_queue(rhp)) {
 // Probable double call_srcu(), so leak the callback.
     WRITE_ONCE(rhp.func, srcu_leak_callback);
@@ -1410,9 +1651,8 @@ pub unsafe extern "C" fn if(_arg: needexp) -> else {
 // See the description of call_rcu() for more detailed information on
 // memory ordering guarantees.
 //
-    void call_srcu(struct srcu_struct *ssp, struct rcu_head *rhp,
-    rcu_callback_t func)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn call_srcu(ssp: *mut srcu_struct, rhp: *mut rcu_head, func: rcu_callback_t) {
     __call_srcu(ssp, rhp, func, true);
     }
     EXPORT_SYMBOL_GPL(call_srcu);
@@ -1421,17 +1661,16 @@ pub unsafe extern "C" fn if(_arg: needexp) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn __synchronize_srcu(ssp: *mut srcu_struct, do_norm: bool) {
-    static void __synchronize_srcu(struct srcu_struct *ssp, bool do_norm)
-    {
-    struct rcu_synchronize rcu;
+pub static mut rcu: usize = 0;
     srcu_lock_sync(&ssp.dep_map);
     RCU_LOCKDEP_WARN(lockdep_is_held(ssp) ||
     lock_is_held(&rcu_bh_lock_map) ||
     lock_is_held(&rcu_lock_map) ||
     lock_is_held(&rcu_sched_lock_map),
     "Illegal synchronize_srcu() in same-type SRCU (or in RCU) read-side critical section");
-    if (rcu_scheduler_active == RCU_SCHEDULER_INACTIVE)
+    if (rcu_scheduler_active == RCU_SCHEDULER_INACTIVE) {
     return;
+    }
     might_sleep();
     check_init_srcu_struct(ssp);
     init_completion(&rcu.completion);
@@ -1460,8 +1699,6 @@ unsafe extern "C" fn __synchronize_srcu(ssp: *mut srcu_struct, do_norm: bool) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn synchronize_srcu_expedited(ssp: *mut srcu_struct) {
-    void synchronize_srcu_expedited(struct srcu_struct *ssp)
-    {
     __synchronize_srcu(ssp, rcu_gp_is_normal());
     }
     EXPORT_SYMBOL_GPL(synchronize_srcu_expedited);
@@ -1516,12 +1753,12 @@ pub unsafe extern "C" fn synchronize_srcu_expedited(ssp: *mut srcu_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn synchronize_srcu(ssp: *mut srcu_struct) {
-    void synchronize_srcu(struct srcu_struct *ssp)
-    {
-    if (srcu_should_expedite(ssp) || rcu_gp_is_expedited())
+    if (srcu_should_expedite(ssp) || rcu_gp_is_expedited()) {
     synchronize_srcu_expedited(ssp);
-    else
+    }
+    else {
     __synchronize_srcu(ssp, true);
+    }
     }
     EXPORT_SYMBOL_GPL(synchronize_srcu);
 //
@@ -1536,8 +1773,6 @@ pub unsafe extern "C" fn synchronize_srcu(ssp: *mut srcu_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn get_state_synchronize_srcu(ssp: *mut srcu_struct) -> c_ulong {
-    unsigned long get_state_synchronize_srcu(struct srcu_struct *ssp)
-    {
 // Any prior manipulation of SRCU-protected data must happen
 // before the load from ->srcu_gp_seq.
     smp_mb();
@@ -1556,8 +1791,6 @@ pub unsafe extern "C" fn get_state_synchronize_srcu(ssp: *mut srcu_struct) -> c_
 //
 #[no_mangle]
 pub unsafe extern "C" fn start_poll_synchronize_srcu(ssp: *mut srcu_struct) -> c_ulong {
-    unsigned long start_poll_synchronize_srcu(struct srcu_struct *ssp)
-    {
     return srcu_gp_start_if_needed(ssp, core::ptr::null_mut(), true);
     }
     EXPORT_SYMBOL_GPL(start_poll_synchronize_srcu);
@@ -1588,11 +1821,10 @@ pub unsafe extern "C" fn start_poll_synchronize_srcu(ssp: *mut srcu_struct) -> c
 //
 #[no_mangle]
 pub unsafe extern "C" fn poll_state_synchronize_srcu(ssp: *mut srcu_struct, cookie: c_ulong) -> bool {
-    bool poll_state_synchronize_srcu(struct srcu_struct *ssp, unsigned long cookie)
-    {
     if (cookie != SRCU_GET_STATE_COMPLETED &&
-    !rcu_seq_done_exact(&ssp.srcu_sup.srcu_gp_seq, cookie))
+    !rcu_seq_done_exact(&ssp.srcu_sup.srcu_gp_seq, cookie)) {
     return false;
+    }
 // Ensure that the end of the SRCU grace period happens before
 // any subsequent code that the caller might execute.
     smp_mb(); // ^^^
@@ -1604,15 +1836,14 @@ pub unsafe extern "C" fn poll_state_synchronize_srcu(ssp: *mut srcu_struct, cook
 //
 #[no_mangle]
 unsafe extern "C" fn srcu_barrier_cb(rhp: *mut rcu_head) {
-    static void srcu_barrier_cb(struct rcu_head *rhp)
-    {
-    struct srcu_data *sdp;
-    struct srcu_struct *ssp;
+pub static mut sdp: *mut c_void = core::ptr::null_mut();
+pub static mut ssp: *mut c_void = core::ptr::null_mut();
     rhp.next = rhp; // Mark the callback as having been invoked.
-    sdp = container_of(rhp, struct srcu_data, srcu_barrier_head);
+    sdp = container_of!(rhp, srcu_data, srcu_barrier_head);
     ssp = sdp.ssp;
-    if (atomic_dec_and_test(&ssp.srcu_sup.srcu_barrier_cpu_cnt))
+    if (atomic_dec_and_test(&ssp.srcu_sup.srcu_barrier_cpu_cnt)) {
     complete(&ssp.srcu_sup.srcu_barrier_completion);
+    }
     }
 //
 // Enqueue an srcu_barrier() callback on the specified srcu_data
@@ -1624,8 +1855,6 @@ unsafe extern "C" fn srcu_barrier_cb(rhp: *mut rcu_head) {
 //
 #[no_mangle]
 unsafe extern "C" fn srcu_barrier_one_cpu(ssp: *mut srcu_struct, sdp: *mut srcu_data) {
-    static void srcu_barrier_one_cpu(struct srcu_struct *ssp, struct srcu_data *sdp)
-    {
     raw_spin_lock_irq_rcu_node(sdp);
     atomic_inc(&ssp.srcu_sup.srcu_barrier_cpu_cnt);
     sdp.srcu_barrier_head.func = srcu_barrier_cb;
@@ -1643,11 +1872,9 @@ unsafe extern "C" fn srcu_barrier_one_cpu(ssp: *mut srcu_struct, sdp: *mut srcu_
 //
 #[no_mangle]
 pub unsafe extern "C" fn srcu_barrier(ssp: *mut srcu_struct) {
-    void srcu_barrier(struct srcu_struct *ssp)
-    {
-    int cpu;
-    int idx;
-    let mut s: c_ulong = rcu_seq_snap(&ssp.srcu_sup.srcu_barrier_seq);
+    let mut cpu = 0;
+    let mut idx = 0;
+pub static mut s: c_ulong = 0;
     check_init_srcu_struct(ssp);
     mutex_lock(&ssp.srcu_sup.srcu_barrier_mutex);
     if (rcu_seq_done(&ssp.srcu_sup.srcu_barrier_seq, s)) {
@@ -1660,15 +1887,18 @@ pub unsafe extern "C" fn srcu_barrier(ssp: *mut srcu_struct) {
 // Initial count prevents reaching zero until all CBs are posted.
     atomic_set(&ssp.srcu_sup.srcu_barrier_cpu_cnt, 1);
     idx = __srcu_read_lock_nmisafe(ssp);
-    if (smp_load_acquire(&ssp.srcu_sup.srcu_size_state) < SRCU_SIZE_WAIT_BARRIER)
+    if (smp_load_acquire(&ssp.srcu_sup.srcu_size_state) < SRCU_SIZE_WAIT_BARRIER) {
     srcu_barrier_one_cpu(ssp, per_cpu_ptr(ssp.sda,	get_boot_cpu_id()));
-    else
+    }
+    else {
     for_each_possible_cpu(cpu)
     srcu_barrier_one_cpu(ssp, per_cpu_ptr(ssp.sda, cpu));
+    }
     __srcu_read_unlock_nmisafe(ssp, idx);
 // Remove the initial count, at which point reaching zero can happen.
-    if (atomic_dec_and_test(&ssp.srcu_sup.srcu_barrier_cpu_cnt))
+    if (atomic_dec_and_test(&ssp.srcu_sup.srcu_barrier_cpu_cnt)) {
     complete(&ssp.srcu_sup.srcu_barrier_completion);
+    }
     wait_for_completion(&ssp.srcu_sup.srcu_barrier_completion);
     rcu_seq_end(&ssp.srcu_sup.srcu_barrier_seq);
     mutex_unlock(&ssp.srcu_sup.srcu_barrier_mutex);
@@ -1677,25 +1907,24 @@ pub unsafe extern "C" fn srcu_barrier(ssp: *mut srcu_struct) {
 // Callback for srcu_expedite_current() usage.
 #[no_mangle]
 unsafe extern "C" fn srcu_expedite_current_cb(rhp: *mut rcu_head) {
-    static void srcu_expedite_current_cb(struct rcu_head *rhp)
-    {
-    unsigned long flags;
-    let mut needcb: bool = false;
-    struct srcu_data *sdp = container_of(rhp, struct srcu_data, srcu_ec_head);
+    let mut flags = 0;
+pub static mut needcb: bool = false;
+    let mut sdp = container_of!(rhp, srcu_data, srcu_ec_head);
     raw_spin_lock_irqsave_sdp_contention(sdp, &flags);
     if (sdp.srcu_ec_state == SRCU_EC_IDLE) {
-    WARN_ON_ONCE(1);
+    WARN_ON_ONCE!(1);
     } else if (sdp.srcu_ec_state == SRCU_EC_PENDING) {
     sdp.srcu_ec_state = SRCU_EC_IDLE;
     } else {
-    WARN_ON_ONCE(sdp.srcu_ec_state != SRCU_EC_REPOST);
+    WARN_ON_ONCE!(sdp.srcu_ec_state != SRCU_EC_REPOST);
     sdp.srcu_ec_state = SRCU_EC_PENDING;
     needcb = true;
     }
     raw_spin_unlock_irqrestore_rcu_node(sdp, flags);
 // If needed, requeue ourselves as an expedited SRCU callback.
-    if (needcb)
+    if (needcb) {
     __call_srcu(sdp.ssp, &sdp.srcu_ec_head, srcu_expedite_current_cb, false);
+    }
     }
 //
 // srcu_expedite_current - Expedite the current SRCU grace period
@@ -1709,11 +1938,9 @@ unsafe extern "C" fn srcu_expedite_current_cb(rhp: *mut rcu_head) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn srcu_expedite_current(ssp: *mut srcu_struct) {
-    void srcu_expedite_current(struct srcu_struct *ssp)
-    {
-    unsigned long flags;
-    let mut needcb: bool = false;
-    struct srcu_data *sdp;
+    let mut flags = 0;
+pub static mut needcb: bool = false;
+pub static mut sdp: *mut c_void = core::ptr::null_mut();
     migrate_disable();
     sdp = this_cpu_ptr(ssp.sda);
     raw_spin_lock_irqsave_sdp_contention(sdp, &flags);
@@ -1723,12 +1950,13 @@ pub unsafe extern "C" fn srcu_expedite_current(ssp: *mut srcu_struct) {
     } else if (sdp.srcu_ec_state == SRCU_EC_PENDING) {
     sdp.srcu_ec_state = SRCU_EC_REPOST;
     } else {
-    WARN_ON_ONCE(sdp.srcu_ec_state != SRCU_EC_REPOST);
+    WARN_ON_ONCE!(sdp.srcu_ec_state != SRCU_EC_REPOST);
     }
     raw_spin_unlock_irqrestore_rcu_node(sdp, flags);
 // If needed, queue an expedited SRCU callback.
-    if (needcb)
+    if (needcb) {
     __call_srcu(ssp, &sdp.srcu_ec_head, srcu_expedite_current_cb, false);
+    }
     migrate_enable();
     }
     EXPORT_SYMBOL_GPL(srcu_expedite_current);
@@ -1741,8 +1969,6 @@ pub unsafe extern "C" fn srcu_expedite_current(ssp: *mut srcu_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn srcu_batches_completed(ssp: *mut srcu_struct) -> c_ulong {
-    unsigned long srcu_batches_completed(struct srcu_struct *ssp)
-    {
     return READ_ONCE(ssp.srcu_sup.srcu_gp_seq);
     }
     EXPORT_SYMBOL_GPL(srcu_batches_completed);
@@ -1753,9 +1979,7 @@ pub unsafe extern "C" fn srcu_batches_completed(ssp: *mut srcu_struct) -> c_ulon
 //
 #[no_mangle]
 unsafe extern "C" fn srcu_advance_state(ssp: *mut srcu_struct) {
-    static void srcu_advance_state(struct srcu_struct *ssp)
-    {
-    int idx;
+    let mut idx = 0;
     mutex_lock(&ssp.srcu_sup.srcu_gp_mutex);
 //
 // Because readers might be delayed for an extended period after
@@ -1771,14 +1995,15 @@ unsafe extern "C" fn srcu_advance_state(ssp: *mut srcu_struct) {
     if (idx == SRCU_STATE_IDLE) {
     raw_spin_lock_irq_rcu_node(ssp.srcu_sup);
     if (ULONG_CMP_GE(ssp.srcu_sup.srcu_gp_seq, ssp.srcu_sup.srcu_gp_seq_needed)) {
-    WARN_ON_ONCE(rcu_seq_state(ssp.srcu_sup.srcu_gp_seq));
+    WARN_ON_ONCE!(rcu_seq_state(ssp.srcu_sup.srcu_gp_seq));
     raw_spin_unlock_irq_rcu_node(ssp.srcu_sup);
     mutex_unlock(&ssp.srcu_sup.srcu_gp_mutex);
     return;
     }
     idx = rcu_seq_state(READ_ONCE(ssp.srcu_sup.srcu_gp_seq));
-    if (idx == SRCU_STATE_IDLE)
+    if (idx == SRCU_STATE_IDLE) {
     srcu_gp_start(ssp);
+    }
     raw_spin_unlock_irq_rcu_node(ssp.srcu_sup);
     if (idx != SRCU_STATE_IDLE) {
     mutex_unlock(&ssp.srcu_sup.srcu_gp_mutex);
@@ -1819,19 +2044,17 @@ unsafe extern "C" fn srcu_advance_state(ssp: *mut srcu_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn srcu_invoke_callbacks(work: *mut work_struct) {
-    static void srcu_invoke_callbacks(struct work_struct *work)
-    {
-    long len;
-    bool more;
-    struct rcu_cblist ready_cbs;
-    struct rcu_head *rhp;
-    struct srcu_data *sdp;
-    struct srcu_struct *ssp;
-    sdp = container_of(work, struct srcu_data, work);
+    let mut len = 0;
+    let mut more = 0;
+pub static mut ready_cbs: usize = 0;
+pub static mut rhp: *mut c_void = core::ptr::null_mut();
+pub static mut sdp: *mut c_void = core::ptr::null_mut();
+pub static mut ssp: *mut c_void = core::ptr::null_mut();
+    sdp = container_of!(work, srcu_data, work);
     ssp = sdp.ssp;
     rcu_cblist_init(&ready_cbs);
     raw_spin_lock_irq_rcu_node(sdp);
-    WARN_ON_ONCE(!rcu_segcblist_segempty(&sdp.srcu_cblist, RCU_NEXT_TAIL));
+    WARN_ON_ONCE!(!rcu_segcblist_segempty(&sdp.srcu_cblist, RCU_NEXT_TAIL));
     srcu_segcblist_advance(&sdp.srcu_cblist,
     rcu_seq_current(&ssp.srcu_sup.srcu_gp_seq));
 //
@@ -1857,7 +2080,7 @@ unsafe extern "C" fn srcu_invoke_callbacks(work: *mut work_struct) {
     rhp.func(rhp);
     local_bh_enable();
     }
-    WARN_ON_ONCE(ready_cbs.len);
+    WARN_ON_ONCE!(ready_cbs.len);
 //
 // Update counts, accelerate new callbacks, and if needed,
 // schedule another round of callback invocation.
@@ -1868,8 +2091,9 @@ unsafe extern "C" fn srcu_invoke_callbacks(work: *mut work_struct) {
     more = rcu_segcblist_ready_cbs(&sdp.srcu_cblist);
     raw_spin_unlock_irq_rcu_node(sdp);
 // An SRCU barrier or callbacks from previous nesting work pending
-    if (more)
+    if (more) {
     srcu_schedule_cbs_sdp(sdp, 0);
+    }
     }
 //
 // Finished one round of SRCU grace period.  Start another if there are
@@ -1877,12 +2101,10 @@ unsafe extern "C" fn srcu_invoke_callbacks(work: *mut work_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn srcu_reschedule(ssp: *mut srcu_struct, delay: c_ulong) {
-    static void srcu_reschedule(struct srcu_struct *ssp, unsigned long delay)
-    {
-    let mut pushgp: bool = true;
+pub static mut pushgp: bool = true;
     raw_spin_lock_irq_rcu_node(ssp.srcu_sup);
     if (ULONG_CMP_GE(ssp.srcu_sup.srcu_gp_seq, ssp.srcu_sup.srcu_gp_seq_needed)) {
-    if (!WARN_ON_ONCE(rcu_seq_state(ssp.srcu_sup.srcu_gp_seq))) {
+    if (!WARN_ON_ONCE!(rcu_seq_state(ssp.srcu_sup.srcu_gp_seq))) {
 // All requests fulfilled, time to go idle.
     pushgp = false;
     }
@@ -1891,21 +2113,20 @@ unsafe extern "C" fn srcu_reschedule(ssp: *mut srcu_struct, delay: c_ulong) {
     srcu_gp_start(ssp);
     }
     raw_spin_unlock_irq_rcu_node(ssp.srcu_sup);
-    if (pushgp)
+    if (pushgp) {
     queue_delayed_work(rcu_gp_wq, &ssp.srcu_sup.work, delay);
+    }
     }
 //
 // This is the work-queue function that handles SRCU grace periods.
 //
 #[no_mangle]
 unsafe extern "C" fn process_srcu(work: *mut work_struct) {
-    static void process_srcu(struct work_struct *work)
-    {
-    unsigned long curdelay;
-    unsigned long j;
-    struct srcu_struct *ssp;
-    struct srcu_usage *sup;
-    sup = container_of(work, struct srcu_usage, work.work);
+    let mut curdelay = 0;
+    let mut j = 0;
+pub static mut ssp: *mut c_void = core::ptr::null_mut();
+pub static mut sup: *mut c_void = core::ptr::null_mut();
+    sup = container_of!(work, srcu_usage, work.work);
     ssp = sup.srcu_ssp;
     srcu_advance_state(ssp);
     raw_spin_lock_irq_rcu_node(ssp.srcu_sup);
@@ -1918,8 +2139,9 @@ unsafe extern "C" fn process_srcu(work: *mut work_struct) {
     if (READ_ONCE(sup.reschedule_jiffies) == j) {
     ASSERT_EXCLUSIVE_WRITER(sup.reschedule_count);
     WRITE_ONCE(sup.reschedule_count, READ_ONCE(sup.reschedule_count) + 1);
-    if (READ_ONCE(sup.reschedule_count) > srcu_max_nodelay)
+    if (READ_ONCE(sup.reschedule_count) > srcu_max_nodelay) {
     curdelay = 1;
+    }
     } else {
     WRITE_ONCE(sup.reschedule_count, 1);
     WRITE_ONCE(sup.reschedule_jiffies, j);
@@ -1929,22 +2151,19 @@ unsafe extern "C" fn process_srcu(work: *mut work_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn srcu_irq_work(work: *mut irq_work) {
-    static void srcu_irq_work(struct irq_work *work)
-    {
-    struct srcu_struct *ssp;
-    struct srcu_usage *sup;
-    unsigned long delay;
-    unsigned long flags;
-    sup = container_of(work, struct srcu_usage, irq_work);
+pub static mut ssp: *mut c_void = core::ptr::null_mut();
+pub static mut sup: *mut c_void = core::ptr::null_mut();
+    let mut delay = 0;
+    let mut flags = 0;
+    sup = container_of!(work, srcu_usage, irq_work);
     ssp = sup.srcu_ssp;
     raw_spin_lock_irqsave_rcu_node(ssp.srcu_sup, flags);
     delay = srcu_get_delay(ssp);
     raw_spin_unlock_irqrestore_rcu_node(ssp.srcu_sup, flags);
     queue_delayed_work(rcu_gp_wq, &sup.work, !!delay);
     }
-    void srcutorture_get_gp_data(struct srcu_struct *ssp, int *flags,
-    unsigned long *gp_seq)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn srcutorture_get_gp_data(ssp: *mut srcu_struct, flags: *mut c_int, gp_seq: *mut c_ulong) {
 // flags = 0;
 // gp_seq = rcu_seq_current(&ssp->srcu_sup->srcu_gp_seq);
     }
@@ -1963,16 +2182,15 @@ unsafe extern "C" fn srcu_irq_work(work: *mut irq_work) {
     };
 #[no_mangle]
 pub unsafe extern "C" fn srcu_torture_stats_print(ssp: *mut srcu_struct, tt: *mut c_char, tf: *mut c_char) {
-    void srcu_torture_stats_print(struct srcu_struct *ssp, char *tt, char *tf)
-    {
-    int cpu;
-    int idx;
-    let mut s0: c_ulong = 0, s1 = 0;
-    let mut ss_state: c_int = READ_ONCE(ssp.srcu_sup.srcu_size_state);
-    let mut ss_state_idx: c_int = ss_state;
+    let mut cpu = 0;
+    let mut idx = 0;
+pub static mut s0: c_ulong = 0;
+pub static mut ss_state: c_int = 0;
+pub static mut ss_state_idx: c_int = 0;
     idx = ssp.srcu_ctrp - &ssp.sda.srcu_ctrs[0];
-    if (ss_state < 0 || ss_state >= ARRAY_SIZE(srcu_size_state_name))
-    ss_state_idx = ARRAY_SIZE(srcu_size_state_name) - 1;
+    if (ss_state < 0 || ss_state >= ARRAY_SIZE!(srcu_size_state_name)) {
+    ss_state_idx = ARRAY_SIZE!(srcu_size_state_name) - 1;
+    }
     pr_alert("%s%s Tree SRCU g%ld state %d (%s)",
     tt, tf, rcu_seq_current(&ssp.srcu_sup.srcu_gp_seq), ss_state,
     srcu_size_state_name[ss_state_idx]);
@@ -1984,8 +2202,9 @@ pub unsafe extern "C" fn srcu_torture_stats_print(ssp: *mut srcu_struct, tt: *mu
     for_each_possible_cpu(cpu) {
     unsigned long l0, l1;
     unsigned long u0, u1;
-    long c0, c1;
-    struct srcu_data *sdp;
+    let mut c0 = 0;
+    let mut c1 = 0;
+pub static mut sdp: *mut c_void = core::ptr::null_mut();
     sdp = per_cpu_ptr(ssp.sda, cpu);
     u0 = data_race(atomic_long_read(&sdp.srcu_ctrs[!idx].srcu_unlocks));
     u1 = data_race(atomic_long_read(&sdp.srcu_ctrs[idx].srcu_unlocks));
@@ -2006,38 +2225,38 @@ pub unsafe extern "C" fn srcu_torture_stats_print(ssp: *mut srcu_struct, tt: *mu
     }
     pr_cont(" T(%ld,%ld)\n", s0, s1);
     }
-    if (SRCU_SIZING_IS_TORTURE())
+    if (SRCU_SIZING_IS_TORTURE()) {
     srcu_transition_to_big(ssp);
+    }
     }
     EXPORT_SYMBOL_GPL(srcu_torture_stats_print);
 #[no_mangle]
-unsafe extern "C" fn srcu_bootup_announce() -> int __init {
-    static int __init srcu_bootup_announce(void)
-    {
-    pr_info("Hierarchical SRCU implementation.\n");
-    if (exp_holdoff != DEFAULT_SRCU_EXP_HOLDOFF)
-    pr_info("\tNon-default auto-expedite holdoff of %lu ns.\n", exp_holdoff);
-    if (srcu_retry_check_delay != SRCU_DEFAULT_RETRY_CHECK_DELAY)
-    pr_info("\tNon-default retry check delay of %lu us.\n", srcu_retry_check_delay);
-    if (srcu_max_nodelay != SRCU_DEFAULT_MAX_NODELAY)
-    pr_info("\tNon-default max no-delay of %lu.\n", srcu_max_nodelay);
-    pr_info("\tMax phase no-delay instances is %lu.\n", srcu_max_nodelay_phase);
+unsafe extern "C" fn srcu_bootup_announce() -> c_int {
+    pr_info!("Hierarchical SRCU implementation.\n");
+    if (exp_holdoff != DEFAULT_SRCU_EXP_HOLDOFF) {
+    pr_info!("\tNon-default auto-expedite holdoff of %lu ns.\n", exp_holdoff);
+    }
+    if (srcu_retry_check_delay != SRCU_DEFAULT_RETRY_CHECK_DELAY) {
+    pr_info!("\tNon-default retry check delay of %lu us.\n", srcu_retry_check_delay);
+    }
+    if (srcu_max_nodelay != SRCU_DEFAULT_MAX_NODELAY) {
+    pr_info!("\tNon-default max no-delay of %lu.\n", srcu_max_nodelay);
+    }
+    pr_info!("\tMax phase no-delay instances is %lu.\n", srcu_max_nodelay_phase);
     return 0;
     }
-    early_initcall(srcu_bootup_announce);
+    early_initcall!(srcu_bootup_announce);
 #[no_mangle]
-pub unsafe extern "C" fn srcu_init() -> void __init {
-    void __init srcu_init(void)
-    {
-    struct srcu_usage *sup;
+pub unsafe extern "C" fn srcu_init()  {
+pub static mut sup: *mut c_void = core::ptr::null_mut();
 // Decide on srcu_struct-size strategy.
     if (SRCU_SIZING_IS(SRCU_SIZING_AUTO)) {
     if (nr_cpu_ids >= big_cpu_lim) {
     convert_to_big = SRCU_SIZING_INIT; // Don't bother waiting for contention.
-    pr_info("%s: Setting srcu_struct sizes to big.\n", __func__);
+    pr_info!("%s: Setting srcu_struct sizes to big.\n", __func__);
     } else {
     convert_to_big = SRCU_SIZING_NONE | SRCU_SIZING_CONTEND;
-    pr_info("%s: Setting srcu_struct sizes based on contention.\n", __func__);
+    pr_info!("%s: Setting srcu_struct sizes based on contention.\n", __func__);
     }
     }
 //
@@ -2047,12 +2266,13 @@ pub unsafe extern "C" fn srcu_init() -> void __init {
 //
     srcu_init_done = true;
     while (!list_empty(&srcu_boot_list)) {
-    sup = list_first_entry(&srcu_boot_list, struct srcu_usage,
+    sup = list_first_entry(&srcu_boot_list, srcu_usage,
     work.work.entry);
     list_del_init(&sup.work.work.entry);
     if (SRCU_SIZING_IS(SRCU_SIZING_INIT) &&
-    sup.srcu_size_state == SRCU_SIZE_SMALL)
+    sup.srcu_size_state == SRCU_SIZE_SMALL) {
     sup.srcu_size_state = SRCU_SIZE_ALLOC;
+    }
     queue_work(rcu_gp_wq, &sup.work.work);
     }
     }
@@ -2060,16 +2280,15 @@ pub unsafe extern "C" fn srcu_init() -> void __init {
 // Initialize any global-scope srcu_struct structures used by this module.
 #[no_mangle]
 unsafe extern "C" fn srcu_module_coming(mod: *mut module) -> c_int {
-    static int srcu_module_coming(struct module *mod)
-    {
-    int i;
-    struct srcu_struct *ssp;
-    struct srcu_struct **sspp = mod.srcu_struct_ptrs;
-    for (i = 0; i < mod.num_srcu_structs; i++) {
+    let mut i = 0;
+pub static mut ssp: *mut c_void = core::ptr::null_mut();
+    let mut sspp = mod.srcu_struct_ptrs;
+    while (i < mod.num_srcu_structs) {
     ssp = *(sspp++);
-    ssp.sda = alloc_percpu(struct srcu_data);
-    if (WARN_ON_ONCE(!ssp.sda))
+    ssp.sda = alloc_percpu(srcu_data);
+    if (WARN_ON_ONCE!(!ssp.sda)) {
     return -ENOMEM;
+    }
     ssp.srcu_ctrp = &ssp.sda.srcu_ctrs[0];
     }
     return 0;
@@ -2077,50 +2296,48 @@ unsafe extern "C" fn srcu_module_coming(mod: *mut module) -> c_int {
 // Clean up any global-scope srcu_struct structures used by this module.
 #[no_mangle]
 unsafe extern "C" fn srcu_module_going(mod: *mut module) {
-    static void srcu_module_going(struct module *mod)
-    {
-    int i;
-    struct srcu_struct *ssp;
-    struct srcu_struct **sspp = mod.srcu_struct_ptrs;
-    for (i = 0; i < mod.num_srcu_structs; i++) {
+    let mut i = 0;
+pub static mut ssp: *mut c_void = core::ptr::null_mut();
+    let mut sspp = mod.srcu_struct_ptrs;
+    while (i < mod.num_srcu_structs) {
     ssp = *(sspp++);
     if (!rcu_seq_state(smp_load_acquire(&ssp.srcu_sup.srcu_gp_seq_needed)) &&
-    !WARN_ON_ONCE(!ssp.srcu_sup.sda_is_static))
+    !WARN_ON_ONCE!(!ssp.srcu_sup.sda_is_static)) {
     cleanup_srcu_struct(ssp);
-    if (!WARN_ON(srcu_readers_active(ssp)))
+    }
+    if (!WARN_ON!(srcu_readers_active(ssp))) {
     free_percpu(ssp.sda);
     }
     }
+    }
 // Handle one module, either coming or going.
-    static int srcu_module_notify(struct notifier_block *self,
-    unsigned long val, void *data)
-    {
-    struct module *mod = data;
-    let mut ret: c_int = 0;
-    switch (val) {
-    case MODULE_STATE_COMING:
+#[no_mangle]
+pub unsafe extern "C" fn srcu_module_notify(self: *mut notifier_block, val: c_ulong, data: *mut c_void) -> c_int {
+    let mut mod = data;
+pub static mut ret: c_int = 0;
+    match (val) {
+    MODULE_STATE_COMING => {
     ret = srcu_module_coming(mod);
-    break;
-    case MODULE_STATE_GOING:
+    // break;
+    }
+    MODULE_STATE_GOING => {
     srcu_module_going(mod);
-    break;
-    default:
-    break;
+    // break;
+    }
+    _ => {
+    // break;
+    }
     }
     return ret;
     }
-    static struct notifier_block srcu_module_nb = {
-    .notifier_call = srcu_module_notify,
-    .priority = 0,
-    };
+pub static mut notifier_block: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn init_srcu_module_notifier() -> __init int {
-    static __init int init_srcu_module_notifier(void)
-    {
-    int ret;
+    let mut ret = 0;
     ret = register_module_notifier(&srcu_module_nb);
-    if (ret)
-    pr_warn("Failed to register srcu module notifier\n");
+    if (ret) {
+    pr_warn!("Failed to register srcu module notifier\n");
+    }
     return ret;
     }
-    late_initcall(init_srcu_module_notifier);
+    late_initcall!(init_srcu_module_notifier);

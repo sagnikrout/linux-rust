@@ -34,6 +34,216 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
 macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
@@ -161,13 +371,13 @@ pub unsafe extern "C" fn kallsyms_expand_symbol() {
 // Get the compressed symbol length from the first symbol byte.
     data = &kallsyms_names[off];
     len = *data;
-    data++;
-    off++;
+    data += 1;
+    off += 1;
 // If MSB is 1, it is a "big" symbol, so needs an additional byte.
     if ((len & 0x80) != 0) {
     len = (len & 0x7F) | (*data << 7);
-    data++;
-    off++;
+    data += 1;
+    off += 1;
     }
 //
 // Update the offset to return the offset for the next symbol on
@@ -180,23 +390,23 @@ pub unsafe extern "C" fn kallsyms_expand_symbol() {
 //
     while (len) {
     tptr = &kallsyms_token_table[kallsyms_token_index[*data]];
-    data++;
-    len--;
+    data += 1;
+    len -= 1;
     while (*tptr) {
     if (skipped_first) {
     if (maxlen <= 1) {
-    goto tail;
+// goto;
     }
 // result = *tptr;
-    result++;
-    maxlen--;
+    result += 1;
+    maxlen -= 1;
     } else {
     skipped_first = 1;
     }
-    tptr++;
+    tptr += 1;
     }
     }
-    tail:
+// label;
     if (maxlen) {
 // result = '\0';
     }
@@ -215,7 +425,7 @@ unsafe extern "C" fn kallsyms_get_symbol_type(off: c_uint) -> c_char {
 // is 1, it is a "big" symbol, so needs an additional byte.
 //
     if (kallsyms_names[off] & 0x80) {
-    off++;
+    off += 1;
     }
     return kallsyms_token_table[kallsyms_token_index[kallsyms_names[off + 1]]];
     }
@@ -226,7 +436,8 @@ unsafe extern "C" fn kallsyms_get_symbol_type(off: c_uint) -> c_char {
 #[no_mangle]
 unsafe extern "C" fn get_symbol_offset(pos: c_ulong) -> c_uint {
     let mut name = core::ptr::null_mut();
-    int i, len;
+    let mut i = 0;
+    let mut len = 0;
 //
 // Use the closest marker we have. We have markers every 256 positions,
 // so that should be close enough.
@@ -238,7 +449,7 @@ unsafe extern "C" fn get_symbol_offset(pos: c_ulong) -> c_uint {
 // so we just need to add the len to the current pointer for every
 // symbol we wish to skip.
 //
-    for (i = 0; i < (pos & 0xFF); i++) {
+    while (i < (pos & 0xFF)) {
     len = *name;
 //
 // If MSB is 1, it is a "big" symbol, so we need to look into
@@ -254,7 +465,7 @@ unsafe extern "C" fn get_symbol_offset(pos: c_ulong) -> c_uint {
 #[no_mangle]
 pub unsafe extern "C" fn kallsyms_sym_address(idx: c_int) -> c_ulong {
 // non-relocatable 32-bit kernels just embed the value directly
-    if (!IS_ENABLED(CONFIG_64BIT) && !IS_ENABLED(CONFIG_RELOCATABLE)) {
+    if (!IS_ENABLED!(CONFIG_64BIT) && !IS_ENABLED!(CONFIG_RELOCATABLE)) {
     return (u32)kallsyms_offsets[idx];
     }
     return (unsigned long)offset_to_ptr(kallsyms_offsets + idx);
@@ -262,15 +473,19 @@ pub unsafe extern "C" fn kallsyms_sym_address(idx: c_int) -> c_ulong {
 #[no_mangle]
 unsafe extern "C" fn get_symbol_seq(index: c_int) -> c_uint {
     unsigned int i, seq = 0;
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < 3; i++) {
     seq = (seq << 8) | kallsyms_seqs_of_names[3 * index + i];
+    }
     return seq;
     }
 #[no_mangle]
 pub unsafe extern "C" fn kallsyms_lookup_names() {
     let mut ret = 0;
-    int low, mid, high;
-    unsigned int seq, off;
+    let mut low = 0;
+    let mut mid = 0;
+    let mut high = 0;
+    let mut seq = 0;
+    let mut off = 0;
     char namebuf[KSYM_NAME_LEN];
     low = 0;
     high = kallsyms_num_syms - 1;
@@ -278,15 +493,15 @@ pub unsafe extern "C" fn kallsyms_lookup_names() {
     mid = low + (high - low) / 2;
     seq = get_symbol_seq(mid);
     off = get_symbol_offset(seq);
-    kallsyms_expand_symbol(off, namebuf, ARRAY_SIZE(namebuf));
+    kallsyms_expand_symbol(off, namebuf, ARRAY_SIZE!(namebuf));
     ret = strcmp(name, namebuf);
     if (ret > 0) {
     low = mid + 1;
     }
-#[no_mangle]
-pub unsafe extern "C" fn if(0: ret <) -> else {
-    else if (ret < 0)
+
+    else if (ret < 0) {
     high = mid - 1;
+    }
     else {
     break;
     }
@@ -298,11 +513,11 @@ pub unsafe extern "C" fn if(0: ret <) -> else {
     while (low) {
     seq = get_symbol_seq(low - 1);
     off = get_symbol_offset(seq);
-    kallsyms_expand_symbol(off, namebuf, ARRAY_SIZE(namebuf));
+    kallsyms_expand_symbol(off, namebuf, ARRAY_SIZE!(namebuf));
     if (strcmp(name, namebuf)) {
     break;
     }
-    low--;
+    low -= 1;
     }
 // start = low;
     if (end) {
@@ -310,11 +525,11 @@ pub unsafe extern "C" fn if(0: ret <) -> else {
     while (high < kallsyms_num_syms - 1) {
     seq = get_symbol_seq(high + 1);
     off = get_symbol_offset(seq);
-    kallsyms_expand_symbol(off, namebuf, ARRAY_SIZE(namebuf));
+    kallsyms_expand_symbol(off, namebuf, ARRAY_SIZE!(namebuf));
     if (strcmp(name, namebuf)) {
     break;
     }
-    high++;
+    high += 1;
     }
 // end = high;
     }
@@ -333,7 +548,7 @@ pub unsafe extern "C" fn kallsyms_lookup_name(name: *const c_char) -> c_ulong {
     if (!ret) {
     return kallsyms_sym_address(get_symbol_seq(i));
     }
-    return module_kallsyms_lookup_name(name);
+    return module_kallsyms_lookup_name!(name);
     }
 //
 // Iterate over all symbols in vmlinux.  For symbols from modules use
@@ -345,8 +560,8 @@ pub unsafe extern "C" fn kallsyms_on_each_symbol() {
     let mut i = 0;
     let mut off = 0;
     let mut ret = 0;
-    for (i = 0, off = 0; i < kallsyms_num_syms; i++) {
-    off = kallsyms_expand_symbol(off, namebuf, ARRAY_SIZE(namebuf));
+    while (i < kallsyms_num_syms) {
+    off = kallsyms_expand_symbol(off, namebuf, ARRAY_SIZE!(namebuf));
     ret = fn(data, namebuf, kallsyms_sym_address(i));
     if (ret != 0) {
     return ret;
@@ -358,12 +573,14 @@ pub unsafe extern "C" fn kallsyms_on_each_symbol() {
 #[no_mangle]
 pub unsafe extern "C" fn kallsyms_on_each_match_symbol() {
     let mut ret = 0;
-    unsigned int i, start, end;
+    let mut i = 0;
+    let mut start = 0;
+    let mut end = 0;
     ret = kallsyms_lookup_names(name, &start, &end);
     if (ret) {
     return 0;
     }
-    for (i = start; !ret && i <= end; i++) {
+    while (!ret && i <= end) {
     ret = fn(data, kallsyms_sym_address(get_symbol_seq(i)));
     cond_resched();
     }
@@ -371,7 +588,7 @@ pub unsafe extern "C" fn kallsyms_on_each_match_symbol() {
     }
 #[no_mangle]
 pub unsafe extern "C" fn get_symbol_pos() {
-pub static mut symbol_start: c_ulong = 0, symbol_end = 0;
+pub static mut symbol_start: c_ulong = 0;
     unsigned long i, low, high, mid;
 // Do a binary search on the sorted kallsyms_offsets array.
     low = 0;
@@ -389,11 +606,12 @@ pub static mut symbol_start: c_ulong = 0, symbol_end = 0;
 // Search for the first aliased symbol. Aliased
 // symbols are symbols with the same address.
 //
-    while (low && kallsyms_sym_address(low-1) == kallsyms_sym_address(low))
-    --low;
+    while (low && kallsyms_sym_address(low-1) == kallsyms_sym_address(low)) {
+    low -= 1;
+    }
     symbol_start = kallsyms_sym_address(low);
 // Search for next non-aliased symbol.
-    for (i = low + 1; i < kallsyms_num_syms; i++) {
+    while (i < kallsyms_num_syms) {
     if (kallsyms_sym_address(i) > symbol_start) {
     symbol_end = kallsyms_sym_address(i);
     break;
@@ -404,10 +622,10 @@ pub static mut symbol_start: c_ulong = 0, symbol_end = 0;
     if (is_kernel_inittext(addr)) {
     symbol_end = (unsigned long)_einittext;
     }
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: IS_ENABLED(CONFIG_KALLSYMS_ALL)) -> else {
-    else if (IS_ENABLED(CONFIG_KALLSYMS_ALL))
+
+    else if (IS_ENABLED!(CONFIG_KALLSYMS_ALL)) {
     symbol_end = (unsigned long)_end;
+    }
     else {
     symbol_end = (unsigned long)_etext;
     }
@@ -430,7 +648,7 @@ pub unsafe extern "C" fn kallsyms_lookup_size_offset() {
     get_symbol_pos(addr, symbolsize, offset);
     return 1;
     }
-    return !!module_address_lookup(addr, symbolsize, offset, core::ptr::null_mut(), core::ptr::null_mut(), namebuf) ||
+    return !!module_address_lookup!(addr, symbolsize, offset, core::ptr::null_mut(), core::ptr::null_mut(), namebuf) ||
     !!bpf_address_lookup(addr, symbolsize, offset, namebuf);
     }
 #[no_mangle]
@@ -462,7 +680,7 @@ pub unsafe extern "C" fn kallsyms_lookup_buildid() {
     return strlen(namebuf);
     }
 // See if it's in a module or a BPF JITed image.
-    ret = module_address_lookup(addr, symbolsize, offset,
+    ret = module_address_lookup!(addr, symbolsize, offset,
     modname, modbuildid, namebuf);
     if (!ret) {
     ret = bpf_address_lookup(addr, symbolsize, offset, namebuf);
@@ -485,7 +703,7 @@ pub unsafe extern "C" fn kallsyms_lookup_buildid() {
     unsigned long *offset,
     char **modname, char *namebuf)
     {
-    int ret = kallsyms_lookup_buildid(addr, symbolsize, offset, modname,
+    let mut ret = kallsyms_lookup_buildid(addr, symbolsize, offset, modname,
     core::ptr::null_mut(), namebuf);
     if (!ret) {
     return core::ptr::null_mut();
@@ -519,13 +737,15 @@ pub unsafe extern "C" fn append_buildid() {
     }
 // build ID should match length of sprintf
 
-    static_assert(sizeof(typeof_member(struct module, build_id)) == 20);
+    static_assert(sizeof!(typeof_member(module, build_id)) == 20);
 
     return sprintf(buffer, " %20phN", buildid);
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn append_buildid() {
+#[no_mangle]
+// duplicate fn: append_buildid
+pub unsafe extern "C" fn append_buildid_dup() {
     return 0;
     }
 
@@ -533,7 +753,7 @@ pub unsafe extern "C" fn append_buildid() {
 #[no_mangle]
 pub unsafe extern "C" fn __sprint_symbol() {
     let mut modname = core::ptr::null_mut();
-    const unsigned char *buildid;
+pub static mut buildid: *mut c_void = core::ptr::null_mut();
     unsigned long offset, size;
     let mut len = 0;
 // Prevent module removal until modname and modbuildid are printed
@@ -661,7 +881,7 @@ pub struct kallsym_iter {
 
 #[no_mangle]
 unsafe extern "C" fn get_ksymbol_mod(iter: *mut kallsym_iter) -> c_int {
-    int ret = module_get_kallsym(iter.pos - kallsyms_num_syms,
+    let mut ret = module_get_kallsym!(iter.pos - kallsyms_num_syms,
     &iter.value, &iter.type,
     iter.name, iter.module_name,
     &iter.exported);
@@ -678,7 +898,7 @@ unsafe extern "C" fn get_ksymbol_mod(iter: *mut kallsym_iter) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn get_ksymbol_ftrace_mod(iter: *mut kallsym_iter) -> c_int {
-    int ret = ftrace_mod_get_kallsym(iter.pos - iter.pos_mod_end,
+    let mut ret = ftrace_mod_get_kallsym(iter.pos - iter.pos_mod_end,
     &iter.value, &iter.type,
     iter.name, iter.module_name,
     &iter.exported);
@@ -718,11 +938,11 @@ unsafe extern "C" fn get_ksymbol_kprobe(iter: *mut kallsym_iter) -> c_int {
 // Returns space to next name.
 #[no_mangle]
 unsafe extern "C" fn get_ksymbol_core(iter: *mut kallsym_iter) -> c_ulong {
-pub static mut off: unsigned = iter.nameoff;
+pub static mut off: unsigned = 0;
     iter.module_name[0] = '\0';
     iter.value = kallsyms_sym_address(iter.pos);
     iter.type = kallsyms_get_symbol_type(off);
-    off = kallsyms_expand_symbol(off, iter.name, ARRAY_SIZE(iter.name));
+    off = kallsyms_expand_symbol(off, iter.name, ARRAY_SIZE!(iter.name));
     return off - iter.nameoff;
     }
 #[no_mangle]
@@ -745,14 +965,17 @@ unsafe extern "C" fn reset_iter(iter: *mut kallsym_iter, new_pos: loff_t) {
 unsafe extern "C" fn update_iter_mod(iter: *mut kallsym_iter, pos: loff_t) -> c_int {
     iter.pos = pos;
     if ((!iter.pos_mod_end || iter.pos_mod_end > pos) &&
-    get_ksymbol_mod(iter))
+    get_ksymbol_mod(iter)) {
     return 1;
+    }
     if ((!iter.pos_ftrace_mod_end || iter.pos_ftrace_mod_end > pos) &&
-    get_ksymbol_ftrace_mod(iter))
+    get_ksymbol_ftrace_mod(iter)) {
     return 1;
+    }
     if ((!iter.pos_bpf_end || iter.pos_bpf_end > pos) &&
-    get_ksymbol_bpf(iter))
+    get_ksymbol_bpf(iter)) {
     return 1;
+    }
     return get_ksymbol_kprobe(iter);
     }
 // Returns false if pos at or past end of file.
@@ -767,7 +990,7 @@ unsafe extern "C" fn update_iter(iter: *mut kallsym_iter, pos: loff_t) -> c_int 
     reset_iter(iter, pos);
     }
     iter.nameoff += get_ksymbol_core(iter);
-    iter.pos++;
+    iter.pos += 1;
     return 1;
     }
 #[no_mangle]
@@ -791,7 +1014,7 @@ unsafe extern "C" fn s_stop(m: *mut seq_file, p: *mut c_void) {
 #[no_mangle]
 unsafe extern "C" fn s_show(m: *mut seq_file, p: *mut c_void) -> c_int {
     let mut value = core::ptr::null_mut();
-    struct kallsym_iter *iter = m.private;
+    let mut iter = m.private;
 // Some debugging symbols have no name.  Ignore them.
     if (!iter.name[0]) {
     return 0;
@@ -818,8 +1041,8 @@ pub static mut seq_operations: usize = 0;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct bpf_iter__ksym {
-    pub meta): *mut *mut __bpf_md_ptr(struct bpf_iter_meta ,,
-    pub ksym): *mut *mut __bpf_md_ptr(struct kallsym_iter ,,
+    pub meta): *mut *mut __bpf_md_ptr(bpf_iter_meta ,,
+    pub ksym): *mut *mut __bpf_md_ptr(kallsym_iter ,,
 }
 
 #[no_mangle]
@@ -852,7 +1075,7 @@ unsafe extern "C" fn bpf_iter_ksym_seq_stop(m: *mut seq_file, p: *mut c_void) {
 pub static mut seq_operations: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn bpf_iter_ksym_init(priv_data: *mut c_void, aux: *mut bpf_iter_aux_info) -> c_int {
-    struct kallsym_iter *iter = priv_data;
+    let mut iter = priv_data;
     reset_iter(iter, 0);
 // cache here as in kallsyms_open() case; use current process
 // credentials to tell BPF iterators if values should be shown.
@@ -860,7 +1083,7 @@ unsafe extern "C" fn bpf_iter_ksym_init(priv_data: *mut c_void, aux: *mut bpf_it
     iter.show_value = kallsyms_show_value(current_cred());
     return 0;
     }
-    DEFINE_BPF_ITER_FUNC(ksym, struct bpf_iter_meta *meta, struct kallsym_iter *ksym)
+    DEFINE_BPF_ITER_FUNC(ksym, bpf_iter_meta *meta, kallsym_iter *ksym)
 pub static mut bpf_iter_seq_info: usize = 0;
 pub static mut bpf_iter_reg: usize = 0;
     BTF_ID_LIST_SINGLE(btf_ksym_iter_id, struct, kallsym_iter)
@@ -879,7 +1102,7 @@ unsafe extern "C" fn kallsyms_open(inode: *mut inode, file: *mut file) -> c_int 
 // using get_symbol_offset for every symbol.
 //
     let mut iter = core::ptr::null_mut();
-    iter = __seq_open_private(file, &kallsyms_op, sizeof(*iter));
+    iter = __seq_open_private(file, &kallsyms_op, sizeof!(*iter));
     if (!iter) {
     return -ENOMEM;
     }
@@ -894,10 +1117,10 @@ unsafe extern "C" fn kallsyms_open(inode: *mut inode, file: *mut file) -> c_int 
 
     const char *kdb_walk_kallsyms(loff_t *pos)
     {
-    static struct kallsym_iter kdb_walk_kallsyms_iter;
+pub static mut kdb_walk_kallsyms_iter: usize = 0;
     if (*pos == 0) {
     memset(&kdb_walk_kallsyms_iter, 0,
-    sizeof(kdb_walk_kallsyms_iter));
+    sizeof!(kdb_walk_kallsyms_iter));
     reset_iter(&kdb_walk_kallsyms_iter, 0);
     }
     while (1) {
@@ -919,6 +1142,3 @@ unsafe extern "C" fn kallsyms_init() -> c_int {
     return 0;
     }
 // device_initcall;
-
-}
-}

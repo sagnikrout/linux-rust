@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -43,7 +293,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Copyright (C) 2020 Christoph Hellwig
 //
 
-    static int (*const check_part[])(struct parsed_partitions *) = {
+    static int (*const check_part[]) = {
 //
 // Probe partition formats with tables at disk address 0
 // that also have an ADFS boot block at 0xdc0.
@@ -98,14 +348,15 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
     core::ptr::null_mut()
     };
-    static struct parsed_partitions *allocate_partitions(struct gendisk *hd)
-    {
-    struct parsed_partitions *state;
-    let mut nr: c_int = DISK_MAX_PARTS;
+#[no_mangle]
+pub unsafe extern "C" fn allocate_partitions(hd: *mut gendisk) -> *mut c_void {
+pub static mut state: *mut c_void = core::ptr::null_mut();
+pub static mut nr: c_int = 0;
     state = kzalloc_obj(*state);
-    if (!state)
+    if (!state) {
     return core::ptr::null_mut();
-    state.parts = vzalloc(array_size(nr, sizeof(state.parts[0])));
+    }
+    state.parts = vzalloc(array_size(nr, sizeof!(state.parts[0])));
     if (!state.parts) {
     kfree(state);
     return core::ptr::null_mut();
@@ -115,18 +366,19 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     }
 #[no_mangle]
 unsafe extern "C" fn free_partitions(state: *mut parsed_partitions) {
-    static void free_partitions(struct parsed_partitions *state)
-    {
     vfree(state.parts);
     kfree(state);
     }
-    static struct parsed_partitions *check_partition(struct gendisk *hd)
-    {
-    struct parsed_partitions *state;
-    int i, res, err;
+#[no_mangle]
+pub unsafe extern "C" fn check_partition(hd: *mut gendisk) -> *mut c_void {
+pub static mut state: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    let mut res = 0;
+    let mut err = 0;
     state = allocate_partitions(hd);
-    if (!state)
+    if (!state) {
     return core::ptr::null_mut();
+    }
     state.pp_buf.buffer = kmalloc(PAGE_SIZE, GFP_KERNEL);
     if (!state.pp_buf.buffer) {
     free_partitions(state);
@@ -136,11 +388,12 @@ unsafe extern "C" fn free_partitions(state: *mut parsed_partitions) {
     state.disk = hd;
     strscpy(state.name, hd.disk_name);
     seq_buf_printf(&state.pp_buf, " %s:", state.name);
-    if (isdigit(state.name[strlen(state.name)-1]))
+    if (isdigit(state.name[strlen(state.name)-1])) {
     sprintf(state.name, "p");
+    }
     i = res = err = 0;
     while (!res && check_part[i]) {
-    memset(state.parts, 0, state.limit * sizeof(state.parts[0]));
+    memset(state.parts, 0, state.limit * sizeof!(state.parts[0]));
     res = check_part[i++](state);
     if (res < 0) {
 //
@@ -152,49 +405,46 @@ unsafe extern "C" fn free_partitions(state: *mut parsed_partitions) {
     }
     }
     if (res > 0) {
-    printk(KERN_INFO "%s", seq_buf_str(&state.pp_buf));
+    printk("%s", seq_buf_str(&state.pp_buf));
     kfree(state.pp_buf.buffer);
     return state;
     }
-    if (state.access_beyond_eod)
+    if (state.access_beyond_eod) {
     err = -ENOSPC;
+    }
 //
 // The partition is unrecognized. So report I/O errors if there were any
 //
-    if (err)
+    if (err) {
     res = err;
+    }
     if (res) {
     seq_buf_puts(&state.pp_buf,
     " unable to read partition table\n");
-    printk(KERN_INFO "%s", seq_buf_str(&state.pp_buf));
+    printk("%s", seq_buf_str(&state.pp_buf));
     }
     kfree(state.pp_buf.buffer);
     free_partitions(state);
     return ERR_PTR(res);
     }
-    static ssize_t part_partition_show(struct device *dev,
-    struct device_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn part_partition_show(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%d\n", bdev_partno(dev_to_bdev(dev)));
     }
-    static ssize_t part_start_show(struct device *dev,
-    struct device_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn part_start_show(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%llu\n", dev_to_bdev(dev).bd_start_sect);
     }
-    static ssize_t part_ro_show(struct device *dev,
-    struct device_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn part_ro_show(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%d\n", bdev_read_only(dev_to_bdev(dev)));
     }
-    static ssize_t part_alignment_offset_show(struct device *dev,
-    struct device_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn part_alignment_offset_show(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%u\n", bdev_alignment_offset(dev_to_bdev(dev)));
     }
-    static ssize_t part_discard_alignment_show(struct device *dev,
-    struct device_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn part_discard_alignment_show(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%u\n", bdev_discard_alignment(dev_to_bdev(dev)));
     }
     static DEVICE_ATTR(partition, 0444, part_partition_show, core::ptr::null_mut());
@@ -223,9 +473,7 @@ unsafe extern "C" fn free_partitions(state: *mut parsed_partitions) {
 
     core::ptr::null_mut()
     };
-    static const struct attribute_group part_attr_group = {
-    .attrs = part_attrs,
-    };
+pub static mut attribute_group: usize = 0;
     static const struct attribute_group *part_attr_groups[] = {
     &part_attr_group,
 
@@ -235,42 +483,32 @@ unsafe extern "C" fn free_partitions(state: *mut parsed_partitions) {
     };
 #[no_mangle]
 unsafe extern "C" fn part_release(dev: *mut device) {
-    static void part_release(struct device *dev)
-    {
     put_disk(dev_to_bdev(dev).bd_disk);
     bdev_drop(dev_to_bdev(dev));
     }
 #[no_mangle]
 unsafe extern "C" fn part_uevent(dev: *const device, env: *mut kobj_uevent_env) -> c_int {
-    static int part_uevent(const struct device *dev, struct kobj_uevent_env *env)
-    {
-    const struct block_device *part = dev_to_bdev(dev);
+    let mut part = dev_to_bdev(dev);
     add_uevent_var(env, "PARTN=%u", bdev_partno(part));
-    if (part.bd_meta_info && part.bd_meta_info.volname[0])
+    if (part.bd_meta_info && part.bd_meta_info.volname[0]) {
     add_uevent_var(env, "PARTNAME=%s", part.bd_meta_info.volname);
-    if (part.bd_meta_info && part.bd_meta_info.uuid[0])
+    }
+    if (part.bd_meta_info && part.bd_meta_info.uuid[0]) {
     add_uevent_var(env, "PARTUUID=%s", part.bd_meta_info.uuid);
+    }
     return 0;
     }
-    const struct device_type part_type = {
-    .name		= "partition",
-    .groups		= part_attr_groups,
-    .release	= part_release,
-    .uevent		= part_uevent,
-    };
+pub static mut device_type: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn drop_partition(part: *mut block_device) {
-    void drop_partition(struct block_device *part)
-    {
     lockdep_assert_held(&part.bd_disk.open_mutex);
     xa_erase(&part.bd_disk.part_tbl, bdev_partno(part));
     kobject_put(part.bd_holder_dir);
     device_del(&part.bd_device);
     put_device(&part.bd_device);
     }
-    static ssize_t whole_disk_show(struct device *dev,
-    struct device_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn whole_disk_show(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char) -> ssize_t {
     return 0;
     }
     static const DEVICE_ATTR(whole_disk, 0444, whole_disk_show, core::ptr::null_mut());
@@ -278,44 +516,47 @@ pub unsafe extern "C" fn drop_partition(part: *mut block_device) {
 // Must be called either with open_mutex held, before a disk can be opened or
 // after all disk users are gone.
 //
-    static struct block_device *add_partition(struct gendisk *disk, int partno,
-    sector_t start, sector_t len, int flags,
-    struct partition_meta_info *info)
-    {
-    let mut devt: dev_t = MKDEV(0, 0);
-    struct device *ddev = disk_to_dev(disk);
-    struct device *pdev;
-    struct block_device *bdev;
-    const char *dname;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn add_partition(disk: *mut gendisk, partno: c_int, start: sector_t, len: sector_t, flags: c_int, info: *mut partition_meta_info) -> *mut c_void {
+pub static mut devt: dev_t = 0;
+    let mut ddev = disk_to_dev(disk);
+pub static mut pdev: *mut c_void = core::ptr::null_mut();
+pub static mut bdev: *mut c_void = core::ptr::null_mut();
+pub static mut dname: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
     lockdep_assert_held(&disk.open_mutex);
-    if (partno >= DISK_MAX_PARTS)
+    if (partno >= DISK_MAX_PARTS) {
     return ERR_PTR(-EINVAL);
+    }
 //
 // Partitions are not supported on zoned block devices that are used as
 // such.
 //
     if (bdev_is_zoned(disk.part0)) {
-    pr_warn("%s: partitions not supported on host managed zoned block device\n",
+    pr_warn!("%s: partitions not supported on host managed zoned block device\n",
     disk.disk_name);
     return ERR_PTR(-ENXIO);
     }
-    if (xa_load(&disk.part_tbl, partno))
+    if (xa_load(&disk.part_tbl, partno)) {
     return ERR_PTR(-EBUSY);
+    }
 // ensure we always have a reference to the whole disk
     get_device(disk_to_dev(disk));
     err = -ENOMEM;
     bdev = bdev_alloc(disk, partno);
-    if (!bdev)
-    goto out_put_disk;
+    if (!bdev) {
+// goto;
+    }
     bdev.bd_start_sect = start;
     bdev_set_nr_sectors(bdev, len);
     pdev = &bdev.bd_device;
     dname = dev_name(ddev);
-    if (isdigit(dname[strlen(dname) - 1]))
+    if (isdigit(dname[strlen(dname) - 1])) {
     dev_set_name(pdev, "%sp%d", dname, partno);
-    else
+    }
+    else {
     dev_set_name(pdev, "%s%d", dname, partno);
+    }
     device_initialize(pdev);
     pdev.class = &block_class;
     pdev.type = &part_type;
@@ -325,59 +566,66 @@ pub unsafe extern "C" fn drop_partition(part: *mut block_device) {
     devt = MKDEV(disk.major, disk.first_minor + bdev_partno(bdev));
     } else {
     err = blk_alloc_ext_minor();
-    if (err < 0)
-    goto out_put;
+    if (err < 0) {
+// goto;
+    }
     devt = MKDEV(BLOCK_EXT_MAJOR, err);
     }
     pdev.devt = devt;
     if (info) {
     err = -ENOMEM;
-    bdev.bd_meta_info = kmemdup(info, sizeof(*info), GFP_KERNEL);
-    if (!bdev.bd_meta_info)
-    goto out_put;
+    bdev.bd_meta_info = kmemdup(info, sizeof!(*info), GFP_KERNEL);
+    if (!bdev.bd_meta_info) {
+// goto;
+    }
     }
 // delay uevent until 'holders' subdir is created
     dev_set_uevent_suppress(pdev, 1);
     err = device_add(pdev);
-    if (err)
-    goto out_put;
+    if (err) {
+// goto;
+    }
     err = -ENOMEM;
     bdev.bd_holder_dir = kobject_create_and_add("holders", &pdev.kobj);
-    if (!bdev.bd_holder_dir)
-    goto out_del;
+    if (!bdev.bd_holder_dir) {
+// goto;
+    }
     dev_set_uevent_suppress(pdev, 0);
     if (flags & ADDPART_FLAG_WHOLEDISK) {
     err = device_create_file(pdev, &dev_attr_whole_disk);
-    if (err)
-    goto out_del;
+    if (err) {
+// goto;
     }
-    if (flags & ADDPART_FLAG_READONLY)
+    }
+    if (flags & ADDPART_FLAG_READONLY) {
     bdev_set_flag(bdev, BD_READ_ONLY);
+    }
 // everything is up and running, commence
     err = xa_insert(&disk.part_tbl, partno, bdev, GFP_KERNEL);
-    if (err)
-    goto out_del;
+    if (err) {
+// goto;
+    }
     bdev_add(bdev, devt);
 // suppress uevent if the disk suppresses it
-    if (!dev_get_uevent_suppress(ddev))
+    if (!dev_get_uevent_suppress(ddev)) {
     kobject_uevent(&pdev.kobj, KOBJ_ADD);
+    }
     return bdev;
-    out_del:
+// label;
     kobject_put(bdev.bd_holder_dir);
     device_del(pdev);
-    out_put:
+// label;
     put_device(pdev);
     return ERR_PTR(err);
-    out_put_disk:
+// label;
     put_disk(disk);
     return ERR_PTR(err);
     }
-    static bool partition_overlaps(struct gendisk *disk, sector_t start,
-    sector_t length, int skip_partno)
-    {
-    struct block_device *part;
-    let mut overlap: bool = false;
-    unsigned long idx;
+#[no_mangle]
+pub unsafe extern "C" fn partition_overlaps(disk: *mut gendisk, start: sector_t, length: sector_t, skip_partno: c_int) -> bool {
+pub static mut part: *mut c_void = core::ptr::null_mut();
+pub static mut overlap: bool = false;
+    let mut idx = 0;
     rcu_read_lock();
     xa_for_each_start(&disk.part_tbl, idx, part, 1) {
     if (bdev_partno(part) != skip_partno &&
@@ -390,44 +638,43 @@ pub unsafe extern "C" fn drop_partition(part: *mut block_device) {
     rcu_read_unlock();
     return overlap;
     }
-    int bdev_add_partition(struct gendisk *disk, int partno, sector_t start,
-    sector_t length)
-    {
-    struct block_device *part;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn bdev_add_partition(disk: *mut gendisk, partno: c_int, start: sector_t, length: sector_t) -> c_int {
+pub static mut part: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     mutex_lock(&disk.open_mutex);
     if (!disk_live(disk)) {
     ret = -ENXIO;
-    goto out;
+// goto;
     }
     if (disk.flags & GENHD_FL_NO_PART) {
     ret = -EINVAL;
-    goto out;
+// goto;
     }
     if (partition_overlaps(disk, start, length, -1)) {
     ret = -EBUSY;
-    goto out;
+// goto;
     }
     part = add_partition(disk, partno, start, length,
     ADDPART_FLAG_NONE, core::ptr::null_mut());
     ret = PTR_ERR_OR_ZERO(part);
-    out:
+// label;
     mutex_unlock(&disk.open_mutex);
     return ret;
     }
 #[no_mangle]
 pub unsafe extern "C" fn bdev_del_partition(disk: *mut gendisk, partno: c_int) -> c_int {
-    int bdev_del_partition(struct gendisk *disk, int partno)
-    {
-    struct block_device *part = core::ptr::null_mut();
-    let mut ret: c_int = -ENXIO;
+    let mut part = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     mutex_lock(&disk.open_mutex);
     part = xa_load(&disk.part_tbl, partno);
-    if (!part)
-    goto out_unlock;
+    if (!part) {
+// goto;
+    }
     ret = -EBUSY;
-    if (atomic_read(&part.bd_openers))
-    goto out_unlock;
+    if (atomic_read(&part.bd_openers)) {
+// goto;
+    }
 //
 // We verified that @part->bd_openers is zero above and so
 // @part->bd_holder{_ops} can't be set. And since we hold
@@ -440,66 +687,66 @@ pub unsafe extern "C" fn bdev_del_partition(disk: *mut gendisk, partno: c_int) -
     invalidate_bdev(part);
     drop_partition(part);
     ret = 0;
-    out_unlock:
+// label;
     mutex_unlock(&disk.open_mutex);
     return ret;
     }
-    int bdev_resize_partition(struct gendisk *disk, int partno, sector_t start,
-    sector_t length)
-    {
-    struct block_device *part = core::ptr::null_mut();
-    let mut ret: c_int = -ENXIO;
+#[no_mangle]
+pub unsafe extern "C" fn bdev_resize_partition(disk: *mut gendisk, partno: c_int, start: sector_t, length: sector_t) -> c_int {
+    let mut part = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     mutex_lock(&disk.open_mutex);
     part = xa_load(&disk.part_tbl, partno);
-    if (!part)
-    goto out_unlock;
+    if (!part) {
+// goto;
+    }
     ret = -EINVAL;
-    if (start != part.bd_start_sect)
-    goto out_unlock;
+    if (start != part.bd_start_sect) {
+// goto;
+    }
     ret = -EBUSY;
-    if (partition_overlaps(disk, start, length, partno))
-    goto out_unlock;
+    if (partition_overlaps(disk, start, length, partno)) {
+// goto;
+    }
     bdev_set_nr_sectors(part, length);
     ret = 0;
-    out_unlock:
+// label;
     mutex_unlock(&disk.open_mutex);
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn disk_unlock_native_capacity(disk: *mut gendisk) -> bool {
-    static bool disk_unlock_native_capacity(struct gendisk *disk)
-    {
     if (!disk.fops.unlock_native_capacity ||
     test_and_set_bit(GD_NATIVE_CAPACITY, &disk.state)) {
-    printk(KERN_CONT "truncated\n");
+    printk("truncated\n");
     return false;
     }
-    printk(KERN_CONT "enabling native capacity\n");
+    printk("enabling native capacity\n");
     disk.fops.unlock_native_capacity(disk);
     return true;
     }
-    static bool blk_add_partition(struct gendisk *disk,
-    struct parsed_partitions *state, int p)
-    {
-    let mut size: sector_t = state.parts[p].size;
-    let mut from: sector_t = state.parts[p].from;
-    struct block_device *part;
-    if (!size)
+#[no_mangle]
+pub unsafe extern "C" fn blk_add_partition(disk: *mut gendisk, state: *mut parsed_partitions, p: c_int) -> bool {
+pub static mut size: sector_t = 0;
+pub static mut from: sector_t = 0;
+pub static mut part: *mut c_void = core::ptr::null_mut();
+    if (!size) {
     return true;
+    }
     if (from >= get_capacity(disk)) {
-    printk(KERN_WARNING
-    "%s: p%d start %llu is beyond EOD, ",
+    printk("%s: p%d start %llu is beyond EOD, ",
     disk.disk_name, p, (unsigned long long) from);
-    if (disk_unlock_native_capacity(disk))
+    if (disk_unlock_native_capacity(disk)) {
     return false;
+    }
     return true;
     }
     if (from + size > get_capacity(disk)) {
-    printk(KERN_WARNING
-    "%s: p%d size %llu extends beyond EOD, ",
+    printk("%s: p%d size %llu extends beyond EOD, ",
     disk.disk_name, p, (unsigned long long) size);
-    if (disk_unlock_native_capacity(disk))
+    if (disk_unlock_native_capacity(disk)) {
     return false;
+    }
 //
 // We can not ignore partitions of broken tables created by for
 // example camera firmware, but we limit them to the end of the
@@ -511,37 +758,39 @@ unsafe extern "C" fn disk_unlock_native_capacity(disk: *mut gendisk) -> bool {
     &state.parts[p].info);
     if (IS_ERR(part)) {
     if (PTR_ERR(part) != -ENXIO) {
-    printk(KERN_ERR " %s: p%d could not be added: %pe\n",
+    printk(" %s: p%d could not be added: %pe\n",
     disk.disk_name, p, part);
     }
     return true;
     }
     if (IS_BUILTIN(CONFIG_BLK_DEV_MD) &&
-    (state.parts[p].flags & ADDPART_FLAG_RAID))
+    (state.parts[p].flags & ADDPART_FLAG_RAID)) {
     md_autodetect_dev(part.bd_dev);
+    }
     return true;
     }
 #[no_mangle]
 unsafe extern "C" fn blk_add_partitions(disk: *mut gendisk) -> c_int {
-    static int blk_add_partitions(struct gendisk *disk)
-    {
-    struct parsed_partitions *state;
-    let mut ret: c_int = -EAGAIN, p;
-    if (!disk_has_partscan(disk))
+pub static mut state: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
+    if (!disk_has_partscan(disk)) {
     return 0;
+    }
     state = check_partition(disk);
-    if (!state)
+    if (!state) {
     return 0;
+    }
     if (IS_ERR(state)) {
 //
 // I/O error reading the partition table.  If we tried to read
 // beyond EOD, retry after unlocking the native capacity.
 //
     if (PTR_ERR(state) == -ENOSPC) {
-    printk(KERN_WARNING "%s: partition table beyond EOD, ",
+    printk("%s: partition table beyond EOD, ",
     disk.disk_name);
-    if (disk_unlock_native_capacity(disk))
+    if (disk_unlock_native_capacity(disk)) {
     return -EAGAIN;
+    }
     }
     return -EIO;
     }
@@ -549,10 +798,10 @@ unsafe extern "C" fn blk_add_partitions(disk: *mut gendisk) -> c_int {
 // Partitions are not supported on host managed zoned block devices.
 //
     if (bdev_is_zoned(disk.part0)) {
-    pr_warn("%s: ignoring partition table on host managed zoned block device\n",
+    pr_warn!("%s: ignoring partition table on host managed zoned block device\n",
     disk.disk_name);
     ret = 0;
-    goto out_free_state;
+// goto;
     }
 //
 // If we read beyond EOD, try unlocking native capacity even if the
@@ -560,35 +809,36 @@ unsafe extern "C" fn blk_add_partitions(disk: *mut gendisk) -> c_int {
 // partitions.
 //
     if (state.access_beyond_eod) {
-    printk(KERN_WARNING
-    "%s: partition table partially beyond EOD, ",
+    printk("%s: partition table partially beyond EOD, ",
     disk.disk_name);
-    if (disk_unlock_native_capacity(disk))
-    goto out_free_state;
+    if (disk_unlock_native_capacity(disk)) {
+// goto;
+    }
     }
 // tell userspace that the media / partition table may have changed
     kobject_uevent(&disk_to_dev(disk).kobj, KOBJ_CHANGE);
-    for (p = 1; p < state.limit; p++)
+    for (p = 1; p < state.limit; p++) {
     if (!blk_add_partition(disk, state, p))
-    goto out_free_state;
+// goto;
+    }
     ret = 0;
-    out_free_state:
+// label;
     free_partitions(state);
     return ret;
     }
 #[no_mangle]
 pub unsafe extern "C" fn bdev_disk_changed(disk: *mut gendisk, invalidate: bool) -> c_int {
-    int bdev_disk_changed(struct gendisk *disk, bool invalidate)
-    {
-    struct block_device *part;
-    unsigned long idx;
-    let mut ret: c_int = 0;
+pub static mut part: *mut c_void = core::ptr::null_mut();
+    let mut idx = 0;
+pub static mut ret: c_int = 0;
     lockdep_assert_held(&disk.open_mutex);
-    if (!disk_live(disk))
+    if (!disk_live(disk)) {
     return -ENXIO;
-    rescan:
-    if (disk.open_partitions)
+    }
+// label;
+    if (disk.open_partitions) {
     return -EBUSY;
+    }
     sync_blockdev(disk.part0);
     invalidate_bdev(disk.part0);
     xa_for_each_start(&disk.part_tbl, idx, part, 1) {
@@ -603,7 +853,7 @@ pub unsafe extern "C" fn bdev_disk_changed(disk: *mut gendisk, invalidate: bool)
 // still an active holder of that block device things
 // are broken.
 //
-    WARN_ON_ONCE(atomic_read(&part.bd_openers));
+    WARN_ON_ONCE!(atomic_read(&part.bd_openers));
     invalidate_bdev(part);
     drop_partition(part);
     }
@@ -618,13 +868,15 @@ pub unsafe extern "C" fn bdev_disk_changed(disk: *mut gendisk, invalidate: bool)
 //
     if (invalidate) {
     if (!(disk.flags & GENHD_FL_NO_PART) ||
-    !(disk.flags & GENHD_FL_REMOVABLE))
+    !(disk.flags & GENHD_FL_REMOVABLE)) {
     set_capacity(disk, 0);
+    }
     }
     if (get_capacity(disk)) {
     ret = blk_add_partitions(disk);
-    if (ret == -EAGAIN)
-    goto rescan;
+    if (ret == -EAGAIN) {
+// goto;
+    }
     } else if (invalidate) {
 //
 // Tell userspace that the media / partition table may have
@@ -639,20 +891,21 @@ pub unsafe extern "C" fn bdev_disk_changed(disk: *mut gendisk, invalidate: bool)
 // code!
 //
     EXPORT_SYMBOL_GPL(bdev_disk_changed);
-    void *read_part_sector(struct parsed_partitions *state, sector_t n, Sector *p)
-    {
-    struct address_space *mapping = state.disk.part0.bd_mapping;
-    struct folio *folio;
+#[no_mangle]
+pub unsafe extern "C" fn read_part_sector(state: *mut parsed_partitions, n: sector_t, p: *mut Sector) -> *mut c_void {
+    let mut mapping = state.disk.part0.bd_mapping;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     if (n >= get_capacity(state.disk)) {
     state.access_beyond_eod = true;
-    goto out;
+// goto;
     }
     folio = read_mapping_folio(mapping, n >> PAGE_SECTORS_SHIFT, core::ptr::null_mut());
-    if (IS_ERR(folio))
-    goto out;
+    if (IS_ERR(folio)) {
+// goto;
+    }
     p.v = folio;
     return folio_address(folio) + offset_in_folio(folio, n * SECTOR_SIZE);
-    out:
+// label;
     p.v = core::ptr::null_mut();
     return core::ptr::null_mut();
     }

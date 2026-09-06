@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -62,37 +312,35 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // or pm_qos_object list and pm_qos_objects need to happen with pm_qos_lock
 // held, taken with _irqsave.  One lock to rule them all
 //
-    static DEFINE_SPINLOCK(pm_qos_lock);
+pub static mut pm_qos_lock: usize = 0;
 //
 // pm_qos_read_value - Return the current effective constraint value.
 // @c: List of PM QoS constraint requests.
 //
 #[no_mangle]
 pub unsafe extern "C" fn pm_qos_read_value(c: *mut pm_qos_constraints) -> i32 {
-    s32 pm_qos_read_value(struct pm_qos_constraints *c)
-    {
     return READ_ONCE(c.target_value);
     }
 #[no_mangle]
 unsafe extern "C" fn pm_qos_get_value(c: *mut pm_qos_constraints) -> c_int {
-    static int pm_qos_get_value(struct pm_qos_constraints *c)
-    {
-    if (plist_head_empty(&c.list))
+    if (plist_head_empty(&c.list)) {
     return c.no_constraint_value;
-    switch (c.type) {
-    case PM_QOS_MIN:
+    }
+    match (c.type) {
+    PM_QOS_MIN => {
     return plist_first(&c.list).prio;
-    case PM_QOS_MAX:
+    }
+    PM_QOS_MAX => {
     return plist_last(&c.list).prio;
-    default:
+    }
+    _ => {
     WARN(1, "Unknown PM QoS type in %s\n", __func__);
     return PM_QOS_DEFAULT_VALUE;
     }
     }
+    }
 #[no_mangle]
 unsafe extern "C" fn pm_qos_set_value(c: *mut pm_qos_constraints, value: i32) {
-    static void pm_qos_set_value(struct pm_qos_constraints *c, s32 value)
-    {
     WRITE_ONCE(c.target_value, value);
     }
 //
@@ -112,44 +360,53 @@ unsafe extern "C" fn pm_qos_set_value(c: *mut pm_qos_constraints, value: i32) {
 //
 // Return: 1 if the aggregate constraint value has changed, 0  otherwise.
 //
-    int pm_qos_update_target(struct pm_qos_constraints *c, struct plist_node *node,
-    enum pm_qos_req_action action, int value)
-    {
-    int prev_value, curr_value, new_value;
-    unsigned long flags;
+#[no_mangle]
+pub unsafe extern "C" fn pm_qos_update_target(c: *mut pm_qos_constraints, node: *mut plist_node, action: pm_qos_req_action, value: c_int) -> c_int {
+    let mut prev_value = 0;
+    let mut curr_value = 0;
+    let mut new_value = 0;
+    let mut flags = 0;
     spin_lock_irqsave(&pm_qos_lock, flags);
     prev_value = pm_qos_get_value(c);
-    if (value == PM_QOS_DEFAULT_VALUE)
+    if (value == PM_QOS_DEFAULT_VALUE) {
     new_value = c.default_value;
-    else
+    }
+    else {
     new_value = value;
-    switch (action) {
-    case PM_QOS_REMOVE_REQ:
+    }
+    match (action) {
+    PM_QOS_REMOVE_REQ => {
     plist_del(node, &c.list);
-    break;
-    case PM_QOS_UPDATE_REQ:
+    // break;
+    }
+    PM_QOS_UPDATE_REQ => {
 //
 // To change the list, atomically remove, reinit with new value
 // and add, then see if the aggregate has changed.
 //
     plist_del(node, &c.list);
     fallthrough;
-    case PM_QOS_ADD_REQ:
+    }
+    PM_QOS_ADD_REQ => {
     plist_node_init(node, new_value);
     plist_add(node, &c.list);
-    break;
-    default:
+    // break;
+    }
+    _ => {
 // no action
     ;
+    }
     }
     curr_value = pm_qos_get_value(c);
     pm_qos_set_value(c, curr_value);
     spin_unlock_irqrestore(&pm_qos_lock, flags);
     trace_pm_qos_update_target(action, prev_value, curr_value);
-    if (prev_value == curr_value)
+    if (prev_value == curr_value) {
     return 0;
-    if (c.notifiers)
+    }
+    if (c.notifiers) {
     blocking_notifier_call_chain(c.notifiers, curr_value, core::ptr::null_mut());
+    }
     return 1;
     }
 //
@@ -157,13 +414,13 @@ unsafe extern "C" fn pm_qos_set_value(c: *mut pm_qos_constraints, value: i32) {
 // @pqf: Device PM QoS flags set to remove the request from.
 // @req: Request to remove from the set.
 //
-    static void pm_qos_flags_remove_req(struct pm_qos_flags *pqf,
-    struct pm_qos_flags_request *req)
-    {
-    let mut val: i32 = 0;
+#[no_mangle]
+pub unsafe extern "C" fn pm_qos_flags_remove_req(pqf: *mut pm_qos_flags, req: *mut pm_qos_flags_request) {
+pub static mut val: i32 = 0;
     list_del(&req.node);
-    list_for_each_entry(req, &pqf.list, node)
+    list_for_each_entry(req, &pqf.list, node) {
     val |= req.flags;
+    }
     pqf.effective_flags = val;
     }
 //
@@ -175,30 +432,32 @@ unsafe extern "C" fn pm_qos_set_value(c: *mut pm_qos_constraints, value: i32) {
 //
 // Return: 1 if the aggregate constraint value has changed, 0 otherwise.
 //
-    bool pm_qos_update_flags(struct pm_qos_flags *pqf,
-    struct pm_qos_flags_request *req,
-    enum pm_qos_req_action action, s32 val)
-    {
-    unsigned long irqflags;
+#[no_mangle]
+pub unsafe extern "C" fn pm_qos_update_flags(pqf: *mut pm_qos_flags, req: *mut pm_qos_flags_request, action: pm_qos_req_action, val: s32) -> bool {
+    let mut irqflags = 0;
     s32 prev_value, curr_value;
     spin_lock_irqsave(&pm_qos_lock, irqflags);
     prev_value = list_empty(&pqf.list) ? 0 : pqf.effective_flags;
-    switch (action) {
-    case PM_QOS_REMOVE_REQ:
+    match (action) {
+    PM_QOS_REMOVE_REQ => {
     pm_qos_flags_remove_req(pqf, req);
-    break;
-    case PM_QOS_UPDATE_REQ:
+    // break;
+    }
+    PM_QOS_UPDATE_REQ => {
     pm_qos_flags_remove_req(pqf, req);
     fallthrough;
-    case PM_QOS_ADD_REQ:
+    }
+    PM_QOS_ADD_REQ => {
     req.flags = val;
     INIT_LIST_HEAD(&req.node);
     list_add_tail(&req.node, &pqf.list);
     pqf.effective_flags |= val;
-    break;
-    default:
+    // break;
+    }
+    _ => {
 // no action
     ;
+    }
     }
     curr_value = list_empty(&pqf.list) ? 0 : pqf.effective_flags;
     spin_unlock_irqrestore(&pm_qos_lock, irqflags);
@@ -207,17 +466,9 @@ unsafe extern "C" fn pm_qos_set_value(c: *mut pm_qos_constraints, value: i32) {
     }
 
 // Definitions related to the CPU latency QoS.
-    static struct pm_qos_constraints cpu_latency_constraints = {
-    .list = PLIST_HEAD_INIT(cpu_latency_constraints.list),
-    .target_value = PM_QOS_CPU_LATENCY_DEFAULT_VALUE,
-    .default_value = PM_QOS_CPU_LATENCY_DEFAULT_VALUE,
-    .no_constraint_value = PM_QOS_CPU_LATENCY_DEFAULT_VALUE,
-    .type = PM_QOS_MIN,
-    };
+pub static mut pm_qos_constraints: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn cpu_latency_qos_value_invalid(value: i32) -> bool {
-    static inline bool cpu_latency_qos_value_invalid(s32 value)
-    {
     return value < 0 && value != PM_QOS_DEFAULT_VALUE;
     }
 //
@@ -225,8 +476,6 @@ pub unsafe extern "C" fn cpu_latency_qos_value_invalid(value: i32) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpu_latency_qos_limit() -> i32 {
-    s32 cpu_latency_qos_limit(void)
-    {
     return pm_qos_read_value(&cpu_latency_constraints);
     }
 //
@@ -238,17 +487,15 @@ pub unsafe extern "C" fn cpu_latency_qos_limit() -> i32 {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpu_latency_qos_request_active(req: *mut pm_qos_request) -> bool {
-    bool cpu_latency_qos_request_active(struct pm_qos_request *req)
-    {
     return req.qos == &cpu_latency_constraints;
     }
     EXPORT_SYMBOL_GPL(cpu_latency_qos_request_active);
-    static void cpu_latency_qos_apply(struct pm_qos_request *req,
-    enum pm_qos_req_action action, s32 value)
-    {
-    let mut ret: c_int = pm_qos_update_target(req.qos, &req.node, action, value);
-    if (ret > 0)
+#[no_mangle]
+pub unsafe extern "C" fn cpu_latency_qos_apply(req: *mut pm_qos_request, action: pm_qos_req_action, value: s32) {
+pub static mut ret: c_int = 0;
+    if (ret > 0) {
     wake_up_all_idle_cpus();
+    }
     }
 //
 // cpu_latency_qos_add_request - Add new CPU latency QoS request.
@@ -264,12 +511,11 @@ pub unsafe extern "C" fn cpu_latency_qos_request_active(req: *mut pm_qos_request
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpu_latency_qos_add_request(req: *mut pm_qos_request, value: i32) {
-    void cpu_latency_qos_add_request(struct pm_qos_request *req, s32 value)
-    {
-    if (!req || cpu_latency_qos_value_invalid(value))
+    if (!req || cpu_latency_qos_value_invalid(value)) {
     return;
+    }
     if (cpu_latency_qos_request_active(req)) {
-    WARN(1, KERN_ERR "%s called for already added request\n", __func__);
+    WARN(1, "%s called for already added request\n", __func__);
     return;
     }
     trace_pm_qos_add_request(value);
@@ -288,17 +534,17 @@ pub unsafe extern "C" fn cpu_latency_qos_add_request(req: *mut pm_qos_request, v
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpu_latency_qos_update_request(req: *mut pm_qos_request, new_value: i32) {
-    void cpu_latency_qos_update_request(struct pm_qos_request *req, s32 new_value)
-    {
-    if (!req || cpu_latency_qos_value_invalid(new_value))
+    if (!req || cpu_latency_qos_value_invalid(new_value)) {
     return;
+    }
     if (!cpu_latency_qos_request_active(req)) {
-    WARN(1, KERN_ERR "%s called for unknown object\n", __func__);
+    WARN(1, "%s called for unknown object\n", __func__);
     return;
     }
     trace_pm_qos_update_request(new_value);
-    if (new_value == req.node.prio)
+    if (new_value == req.node.prio) {
     return;
+    }
     cpu_latency_qos_apply(req, PM_QOS_UPDATE_REQ, new_value);
     }
     EXPORT_SYMBOL_GPL(cpu_latency_qos_update_request);
@@ -311,92 +557,73 @@ pub unsafe extern "C" fn cpu_latency_qos_update_request(req: *mut pm_qos_request
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpu_latency_qos_remove_request(req: *mut pm_qos_request) {
-    void cpu_latency_qos_remove_request(struct pm_qos_request *req)
-    {
-    if (!req)
+    if (!req) {
     return;
+    }
     if (!cpu_latency_qos_request_active(req)) {
-    WARN(1, KERN_ERR "%s called for unknown object\n", __func__);
+    WARN(1, "%s called for unknown object\n", __func__);
     return;
     }
     trace_pm_qos_remove_request(PM_QOS_DEFAULT_VALUE);
     cpu_latency_qos_apply(req, PM_QOS_REMOVE_REQ, PM_QOS_DEFAULT_VALUE);
-    memset(req, 0, sizeof(*req));
+    memset(req, 0, sizeof!(*req));
     }
     EXPORT_SYMBOL_GPL(cpu_latency_qos_remove_request);
 // User space interface to the CPU latency QoS via misc device.
 #[no_mangle]
 unsafe extern "C" fn cpu_latency_qos_open(inode: *mut inode, filp: *mut file) -> c_int {
-    static int cpu_latency_qos_open(struct inode *inode, struct file *filp)
-    {
-    struct pm_qos_request *req;
+pub static mut req: *mut c_void = core::ptr::null_mut();
     req = kzalloc_obj(*req);
-    if (!req)
+    if (!req) {
     return -ENOMEM;
+    }
     cpu_latency_qos_add_request(req, PM_QOS_DEFAULT_VALUE);
     filp.private_data = req;
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn cpu_latency_qos_release(inode: *mut inode, filp: *mut file) -> c_int {
-    static int cpu_latency_qos_release(struct inode *inode, struct file *filp)
-    {
-    struct pm_qos_request *req = filp.private_data;
+    let mut req = filp.private_data;
     filp.private_data = core::ptr::null_mut();
     cpu_latency_qos_remove_request(req);
     kfree(req);
     return 0;
     }
-    static ssize_t cpu_latency_qos_read(struct file *filp, char __user *buf,
-    size_t count, loff_t *f_pos)
-    {
-    struct pm_qos_request *req = filp.private_data;
-    unsigned long flags;
-    s32 value;
-    if (!req || !cpu_latency_qos_request_active(req))
+#[no_mangle]
+pub unsafe extern "C" fn cpu_latency_qos_read(filp: *mut file, buf: *mut c_char, count: size_t, f_pos: *mut loff_t) -> ssize_t {
+    let mut req = filp.private_data;
+    let mut flags = 0;
+    let mut value = 0;
+    if (!req || !cpu_latency_qos_request_active(req)) {
     return -EINVAL;
+    }
     spin_lock_irqsave(&pm_qos_lock, flags);
     value = pm_qos_get_value(&cpu_latency_constraints);
     spin_unlock_irqrestore(&pm_qos_lock, flags);
-    return simple_read_from_buffer(buf, count, f_pos, &value, sizeof(s32));
+    return simple_read_from_buffer(buf, count, f_pos, &value, sizeof!(s32));
     }
-    static ssize_t cpu_latency_qos_write(struct file *filp, const char __user *buf,
-    size_t count, loff_t *f_pos)
-    {
-    s32 value;
-    if (count == sizeof(s32)) {
-    if (copy_from_user(&value, buf, sizeof(s32)))
+#[no_mangle]
+pub unsafe extern "C" fn cpu_latency_qos_write(filp: *mut file, buf: *mut c_char, count: size_t, f_pos: *mut loff_t) -> ssize_t {
+    let mut value = 0;
+    if (count == sizeof!(s32)) {
+    if (copy_from_user(&value, buf, sizeof!(s32))) {
     return -EFAULT;
+    }
     } else {
-    int ret;
+    let mut ret = 0;
     ret = kstrtos32_from_user(buf, count, 16, &value);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     }
     cpu_latency_qos_update_request(filp.private_data, value);
     return count;
     }
-    static const struct file_operations cpu_latency_qos_fops = {
-    .write = cpu_latency_qos_write,
-    .read = cpu_latency_qos_read,
-    .open = cpu_latency_qos_open,
-    .release = cpu_latency_qos_release,
-    .llseek = noop_llseek,
-    };
-    static struct miscdevice cpu_latency_qos_miscdev = {
-    .minor = MISC_DYNAMIC_MINOR,
-    .name = "cpu_dma_latency",
-    .fops = &cpu_latency_qos_fops,
-    };
+pub static mut file_operations: usize = 0;
+pub static mut miscdevice: usize = 0;
 
 // The CPU system wakeup latency QoS.
-    static struct pm_qos_constraints cpu_wakeup_latency_constraints = {
-    .list = PLIST_HEAD_INIT(cpu_wakeup_latency_constraints.list),
-    .target_value = PM_QOS_RESUME_LATENCY_NO_CONSTRAINT,
-    .default_value = PM_QOS_RESUME_LATENCY_NO_CONSTRAINT,
-    .no_constraint_value = PM_QOS_RESUME_LATENCY_NO_CONSTRAINT,
-    .type = PM_QOS_MIN,
-    };
+pub static mut pm_qos_constraints: usize = 0;
 //
 // cpu_wakeup_latency_qos_limit - Current CPU system wakeup latency QoS limit.
 //
@@ -405,88 +632,72 @@ unsafe extern "C" fn cpu_latency_qos_release(inode: *mut inode, filp: *mut file)
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpu_wakeup_latency_qos_limit() -> i32 {
-    s32 cpu_wakeup_latency_qos_limit(void)
-    {
     return pm_qos_read_value(&cpu_wakeup_latency_constraints);
     }
 #[no_mangle]
 unsafe extern "C" fn cpu_wakeup_latency_qos_open(inode: *mut inode, filp: *mut file) -> c_int {
-    static int cpu_wakeup_latency_qos_open(struct inode *inode, struct file *filp)
-    {
-    struct pm_qos_request *req;
+pub static mut req: *mut c_void = core::ptr::null_mut();
     req = kzalloc_obj(*req);
-    if (!req)
+    if (!req) {
     return -ENOMEM;
+    }
     req.qos = &cpu_wakeup_latency_constraints;
     pm_qos_update_target(req.qos, &req.node, PM_QOS_ADD_REQ,
     PM_QOS_RESUME_LATENCY_NO_CONSTRAINT);
     filp.private_data = req;
     return 0;
     }
-    static int cpu_wakeup_latency_qos_release(struct inode *inode,
-    struct file *filp)
-    {
-    struct pm_qos_request *req = filp.private_data;
+#[no_mangle]
+pub unsafe extern "C" fn cpu_wakeup_latency_qos_release(inode: *mut inode, filp: *mut file) -> c_int {
+    let mut req = filp.private_data;
     filp.private_data = core::ptr::null_mut();
     pm_qos_update_target(req.qos, &req.node, PM_QOS_REMOVE_REQ,
     PM_QOS_RESUME_LATENCY_NO_CONSTRAINT);
     kfree(req);
     return 0;
     }
-    static ssize_t cpu_wakeup_latency_qos_read(struct file *filp, char __user *buf,
-    size_t count, loff_t *f_pos)
-    {
-    let mut value: i32 = pm_qos_read_value(&cpu_wakeup_latency_constraints);
-    return simple_read_from_buffer(buf, count, f_pos, &value, sizeof(s32));
+#[no_mangle]
+pub unsafe extern "C" fn cpu_wakeup_latency_qos_read(filp: *mut file, buf: *mut c_char, count: size_t, f_pos: *mut loff_t) -> ssize_t {
+pub static mut value: i32 = 0;
+    return simple_read_from_buffer(buf, count, f_pos, &value, sizeof!(s32));
     }
-    static ssize_t cpu_wakeup_latency_qos_write(struct file *filp,
-    const char __user *buf,
-    size_t count, loff_t *f_pos)
-    {
-    struct pm_qos_request *req = filp.private_data;
-    s32 value;
-    if (count == sizeof(s32)) {
-    if (copy_from_user(&value, buf, sizeof(s32)))
+#[no_mangle]
+pub unsafe extern "C" fn cpu_wakeup_latency_qos_write(filp: *mut file, buf: *mut c_char, count: size_t, f_pos: *mut loff_t) -> ssize_t {
+    let mut req = filp.private_data;
+    let mut value = 0;
+    if (count == sizeof!(s32)) {
+    if (copy_from_user(&value, buf, sizeof!(s32))) {
     return -EFAULT;
+    }
     } else {
-    int ret;
+    let mut ret = 0;
     ret = kstrtos32_from_user(buf, count, 16, &value);
-    if (ret)
+    if (ret) {
     return ret;
     }
-    if (value < 0)
+    }
+    if (value < 0) {
     return -EINVAL;
+    }
     pm_qos_update_target(req.qos, &req.node, PM_QOS_UPDATE_REQ, value);
     return count;
     }
-    static const struct file_operations cpu_wakeup_latency_qos_fops = {
-    .open = cpu_wakeup_latency_qos_open,
-    .release = cpu_wakeup_latency_qos_release,
-    .read = cpu_wakeup_latency_qos_read,
-    .write = cpu_wakeup_latency_qos_write,
-    .llseek = noop_llseek,
-    };
-    static struct miscdevice cpu_wakeup_latency_qos_miscdev = {
-    .minor = MISC_DYNAMIC_MINOR,
-    .name = "cpu_wakeup_latency",
-    .fops = &cpu_wakeup_latency_qos_fops,
-    };
+pub static mut file_operations: usize = 0;
+pub static mut miscdevice: usize = 0;
 
 #[no_mangle]
-unsafe extern "C" fn cpu_latency_qos_init() -> int __init {
-    static int __init cpu_latency_qos_init(void)
-    {
-    int ret;
+unsafe extern "C" fn cpu_latency_qos_init() -> c_int {
+    let mut ret = 0;
     ret = misc_register(&cpu_latency_qos_miscdev);
     if (ret < 0) {
-    pr_err("%s: %s setup failed\n", __func__,
+    pr_err!("%s: %s setup failed\n", __func__,
     cpu_latency_qos_miscdev.name);
     return ret;
     }
 
     ret = misc_register(&cpu_wakeup_latency_qos_miscdev);
     if (ret < 0) {
-    pr_err("%s: %s setup failed\n", __func__,
+    pr_err!("%s: %s setup failed\n", __func__,
     cpu_wakeup_latency_qos_miscdev.name);
     misc_deregister(&cpu_latency_qos_miscdev);
     return ret;
@@ -494,13 +705,11 @@ unsafe extern "C" fn cpu_latency_qos_init() -> int __init {
 
     return 0;
     }
-    late_initcall(cpu_latency_qos_init);
+    late_initcall!(cpu_latency_qos_init);
 
 // Definitions related to the frequency QoS below.
 #[no_mangle]
 pub unsafe extern "C" fn freq_qos_value_invalid(value: i32) -> bool {
-    static inline bool freq_qos_value_invalid(s32 value)
-    {
     return value < 0 && value != PM_QOS_DEFAULT_VALUE;
     }
 //
@@ -509,9 +718,7 @@ pub unsafe extern "C" fn freq_qos_value_invalid(value: i32) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn freq_constraints_init(qos: *mut freq_constraints) {
-    void freq_constraints_init(struct freq_constraints *qos)
-    {
-    struct pm_qos_constraints *c;
+pub static mut c: *mut c_void = core::ptr::null_mut();
     c = &qos.min_freq;
     plist_head_init(&c.list);
     c.target_value = FREQ_QOS_MIN_DEFAULT_VALUE;
@@ -534,24 +741,26 @@ pub unsafe extern "C" fn freq_constraints_init(qos: *mut freq_constraints) {
 // @qos: Constraints to evaluate.
 // @type: QoS request type.
 //
-    s32 freq_qos_read_value(struct freq_constraints *qos,
-    enum freq_qos_req_type type)
-    {
-    s32 ret;
-    switch (type) {
-    case FREQ_QOS_MIN:
+#[no_mangle]
+pub unsafe extern "C" fn freq_qos_read_value(qos: *mut freq_constraints, type: freq_qos_req_type) -> s32 {
+    let mut ret = 0;
+    match (type) {
+    FREQ_QOS_MIN => {
     ret = IS_ERR_OR_NULL(qos) ?
     FREQ_QOS_MIN_DEFAULT_VALUE :
     pm_qos_read_value(&qos.min_freq);
-    break;
-    case FREQ_QOS_MAX:
+    // break;
+    }
+    FREQ_QOS_MAX => {
     ret = IS_ERR_OR_NULL(qos) ?
     FREQ_QOS_MAX_DEFAULT_VALUE :
     pm_qos_read_value(&qos.max_freq);
-    break;
-    default:
-    WARN_ON(1);
+    // break;
+    }
+    _ => {
+    WARN_ON!(1);
     ret = 0;
+    }
     }
     return ret;
     }
@@ -563,21 +772,23 @@ pub unsafe extern "C" fn freq_constraints_init(qos: *mut freq_constraints) {
 //
 // This is only meant to be called from inside pm_qos, not drivers.
 //
-    int freq_qos_apply(struct freq_qos_request *req,
-    enum pm_qos_req_action action, s32 value)
-    {
-    int ret;
-    switch(req.type) {
-    case FREQ_QOS_MIN:
+#[no_mangle]
+pub unsafe extern "C" fn freq_qos_apply(req: *mut freq_qos_request, action: pm_qos_req_action, value: s32) -> c_int {
+    let mut ret = 0;
+    match (req.type) {
+    FREQ_QOS_MIN => {
     ret = pm_qos_update_target(&req.qos.min_freq, &req.pnode,
     action, value);
-    break;
-    case FREQ_QOS_MAX:
+    // break;
+    }
+    FREQ_QOS_MAX => {
     ret = pm_qos_update_target(&req.qos.max_freq, &req.pnode,
     action, value);
-    break;
-    default:
+    // break;
+    }
+    _ => {
     ret = -EINVAL;
+    }
     }
     return ret;
     }
@@ -595,16 +806,16 @@ pub unsafe extern "C" fn freq_constraints_init(qos: *mut freq_constraints) {
 // Return 1 if the effective constraint value has changed, 0 if the effective
 // constraint value has not changed, or a negative error code on failures.
 //
-    int freq_qos_add_request(struct freq_constraints *qos,
-    struct freq_qos_request *req,
-    enum freq_qos_req_type type, s32 value)
-    {
-    int ret;
-    if (IS_ERR_OR_NULL(qos) || !req || freq_qos_value_invalid(value))
+#[no_mangle]
+pub unsafe extern "C" fn freq_qos_add_request(qos: *mut freq_constraints, req: *mut freq_qos_request, type: freq_qos_req_type, value: s32) -> c_int {
+    let mut ret = 0;
+    if (IS_ERR_OR_NULL(qos) || !req || freq_qos_value_invalid(value)) {
     return -EINVAL;
+    }
     if (WARN(freq_qos_request_active(req),
-    "%s() called for active request\n", __func__))
+    "%s() called for active request\n", __func__)) {
     return -EINVAL;
+    }
     req.qos = qos;
     req.type = type;
     ret = freq_qos_apply(req, PM_QOS_ADD_REQ, value);
@@ -628,15 +839,16 @@ pub unsafe extern "C" fn freq_constraints_init(qos: *mut freq_constraints) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn freq_qos_update_request(req: *mut freq_qos_request, new_value: i32) -> c_int {
-    int freq_qos_update_request(struct freq_qos_request *req, s32 new_value)
-    {
-    if (!req || freq_qos_value_invalid(new_value))
+    if (!req || freq_qos_value_invalid(new_value)) {
     return -EINVAL;
+    }
     if (WARN(!freq_qos_request_active(req),
-    "%s() called for unknown object\n", __func__))
+    "%s() called for unknown object\n", __func__)) {
     return -EINVAL;
-    if (req.pnode.prio == new_value)
+    }
+    if (req.pnode.prio == new_value) {
     return 0;
+    }
     return freq_qos_apply(req, PM_QOS_UPDATE_REQ, new_value);
     }
     EXPORT_SYMBOL_GPL(freq_qos_update_request);
@@ -652,14 +864,14 @@ pub unsafe extern "C" fn freq_qos_update_request(req: *mut freq_qos_request, new
 //
 #[no_mangle]
 pub unsafe extern "C" fn freq_qos_remove_request(req: *mut freq_qos_request) -> c_int {
-    int freq_qos_remove_request(struct freq_qos_request *req)
-    {
-    int ret;
-    if (!req)
+    let mut ret = 0;
+    if (!req) {
     return -EINVAL;
+    }
     if (WARN(!freq_qos_request_active(req),
-    "%s() called for unknown object\n", __func__))
+    "%s() called for unknown object\n", __func__)) {
     return -EINVAL;
+    }
     ret = freq_qos_apply(req, PM_QOS_REMOVE_REQ, PM_QOS_DEFAULT_VALUE);
     req.qos = core::ptr::null_mut();
     req.type = 0;
@@ -672,25 +884,27 @@ pub unsafe extern "C" fn freq_qos_remove_request(req: *mut freq_qos_request) -> 
 // @type: Request type.
 // @notifier: Notifier block to add.
 //
-    int freq_qos_add_notifier(struct freq_constraints *qos,
-    enum freq_qos_req_type type,
-    struct notifier_block *notifier)
-    {
-    int ret;
-    if (IS_ERR_OR_NULL(qos) || !notifier)
+#[no_mangle]
+pub unsafe extern "C" fn freq_qos_add_notifier(qos: *mut freq_constraints, type: freq_qos_req_type, notifier: *mut notifier_block) -> c_int {
+    let mut ret = 0;
+    if (IS_ERR_OR_NULL(qos) || !notifier) {
     return -EINVAL;
-    switch (type) {
-    case FREQ_QOS_MIN:
+    }
+    match (type) {
+    FREQ_QOS_MIN => {
     ret = blocking_notifier_chain_register(qos.min_freq.notifiers,
     notifier);
-    break;
-    case FREQ_QOS_MAX:
+    // break;
+    }
+    FREQ_QOS_MAX => {
     ret = blocking_notifier_chain_register(qos.max_freq.notifiers,
     notifier);
-    break;
-    default:
-    WARN_ON(1);
+    // break;
+    }
+    _ => {
+    WARN_ON!(1);
     ret = -EINVAL;
+    }
     }
     return ret;
     }
@@ -701,25 +915,27 @@ pub unsafe extern "C" fn freq_qos_remove_request(req: *mut freq_qos_request) -> 
 // @type: Request type.
 // @notifier: Notifier block to remove.
 //
-    int freq_qos_remove_notifier(struct freq_constraints *qos,
-    enum freq_qos_req_type type,
-    struct notifier_block *notifier)
-    {
-    int ret;
-    if (IS_ERR_OR_NULL(qos) || !notifier)
+#[no_mangle]
+pub unsafe extern "C" fn freq_qos_remove_notifier(qos: *mut freq_constraints, type: freq_qos_req_type, notifier: *mut notifier_block) -> c_int {
+    let mut ret = 0;
+    if (IS_ERR_OR_NULL(qos) || !notifier) {
     return -EINVAL;
-    switch (type) {
-    case FREQ_QOS_MIN:
+    }
+    match (type) {
+    FREQ_QOS_MIN => {
     ret = blocking_notifier_chain_unregister(qos.min_freq.notifiers,
     notifier);
-    break;
-    case FREQ_QOS_MAX:
+    // break;
+    }
+    FREQ_QOS_MAX => {
     ret = blocking_notifier_chain_unregister(qos.max_freq.notifiers,
     notifier);
-    break;
-    default:
-    WARN_ON(1);
+    // break;
+    }
+    _ => {
+    WARN_ON!(1);
     ret = -EINVAL;
+    }
     }
     return ret;
     }

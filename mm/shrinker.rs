@@ -34,46 +34,294 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
 
-    LIST_HEAD(shrinker_list);
-    DEFINE_MUTEX(shrinker_mutex);
+pub static mut shrinker_list: usize = 0;
+pub static mut shrinker_mutex: usize = 0;
 
     static int shrinker_nr_max;
 #[no_mangle]
 pub unsafe extern "C" fn shrinker_unit_size(nr_items: c_int) -> c_int {
-    static inline int shrinker_unit_size(int nr_items)
-    {
-    return (DIV_ROUND_UP(nr_items, SHRINKER_UNIT_BITS) * sizeof(struct shrinker_info_unit *));
+    return (DIV_ROUND_UP(nr_items, SHRINKER_UNIT_BITS) * sizeof!);
     }
 #[no_mangle]
 pub unsafe extern "C" fn shrinker_unit_free(info: *mut shrinker_info, start: c_int) {
-    static inline void shrinker_unit_free(struct shrinker_info *info, int start)
-    {
-    struct shrinker_info_unit **unit;
-    int nr, i;
-    if (!info)
+pub static mut unit: *mut c_void = core::ptr::null_mut();
+    let mut nr = 0;
+    let mut i = 0;
+    if (!info) {
     return;
+    }
     unit = info.unit;
     nr = DIV_ROUND_UP(info.map_nr_max, SHRINKER_UNIT_BITS);
-    for (i = start; i < nr; i++) {
-    if (!unit[i])
+    while (i < nr) {
+    if (!unit[i]) {
     break;
+    }
     kfree(unit[i]);
     unit[i] = core::ptr::null_mut();
     }
     }
-    static inline int shrinker_unit_alloc(struct shrinker_info *new,
-    struct shrinker_info *old, int nid)
-    {
-    struct shrinker_info_unit *unit;
-    let mut nr: c_int = DIV_ROUND_UP(new.map_nr_max, SHRINKER_UNIT_BITS);
-    let mut start: c_int = old ? DIV_ROUND_UP(old.map_nr_max, SHRINKER_UNIT_BITS) : 0;
-    int i;
-    for (i = start; i < nr; i++) {
-    unit = kzalloc_node(sizeof(*unit), GFP_KERNEL, nid);
+#[no_mangle]
+pub unsafe extern "C" fn shrinker_unit_alloc(new: *mut shrinker_info, old: *mut shrinker_info, nid: c_int) -> c_int {
+pub static mut unit: *mut c_void = core::ptr::null_mut();
+pub static mut nr: c_int = 0;
+pub static mut start: c_int = 0;
+    let mut i = 0;
+    while (i < nr) {
+    unit = kzalloc_node(sizeof!(*unit), GFP_KERNEL, nid);
     if (!unit) {
     shrinker_unit_free(new, start);
     return -ENOMEM;
@@ -84,11 +332,9 @@ pub unsafe extern "C" fn shrinker_unit_free(info: *mut shrinker_info, start: c_i
     }
 #[no_mangle]
 unsafe extern "C" fn __free_shrinker_info(memcg: *mut mem_cgroup) {
-    static void __free_shrinker_info(struct mem_cgroup *memcg)
-    {
-    struct mem_cgroup_per_node *pn;
-    struct shrinker_info *info;
-    int nid;
+pub static mut pn: *mut c_void = core::ptr::null_mut();
+pub static mut info: *mut c_void = core::ptr::null_mut();
+    let mut nid = 0;
     lockdep_assert_held(&shrinker_mutex);
     for_each_node(nid) {
     pn = memcg.nodeinfo[nid];
@@ -100,63 +346,62 @@ unsafe extern "C" fn __free_shrinker_info(memcg: *mut mem_cgroup) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn free_shrinker_info(memcg: *mut mem_cgroup) {
-    void free_shrinker_info(struct mem_cgroup *memcg)
-    {
     mutex_lock(&shrinker_mutex);
     __free_shrinker_info(memcg);
     mutex_unlock(&shrinker_mutex);
     }
 #[no_mangle]
 pub unsafe extern "C" fn alloc_shrinker_info(memcg: *mut mem_cgroup) -> c_int {
-    int alloc_shrinker_info(struct mem_cgroup *memcg)
-    {
     int nid, ret = 0;
-    let mut array_size: c_int = 0;
+pub static mut array_size: c_int = 0;
     mutex_lock(&shrinker_mutex);
     array_size = shrinker_unit_size(shrinker_nr_max);
     for_each_node(nid) {
-    struct shrinker_info *info = kvzalloc_node(sizeof(*info) + array_size,
+    let mut info = kvzalloc_node(sizeof!(*info) + array_size,
     GFP_KERNEL, nid);
-    if (!info)
-    goto err;
+    if (!info) {
+// goto;
+    }
     info.map_nr_max = shrinker_nr_max;
     if (shrinker_unit_alloc(info, core::ptr::null_mut(), nid)) {
     kvfree(info);
-    goto err;
+// goto;
     }
     rcu_assign_pointer(memcg.nodeinfo[nid].shrinker_info, info);
     }
     mutex_unlock(&shrinker_mutex);
     return ret;
-    err:
+// label;
     __free_shrinker_info(memcg);
     mutex_unlock(&shrinker_mutex);
     return -ENOMEM;
     }
-    static struct shrinker_info *shrinker_info_protected(struct mem_cgroup *memcg,
-    int nid)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn shrinker_info_protected(memcg: *mut mem_cgroup, nid: c_int) -> *mut c_void {
     return rcu_dereference_protected(memcg.nodeinfo[nid].shrinker_info,
     lockdep_is_held(&shrinker_mutex));
     }
-    static int expand_one_shrinker_info(struct mem_cgroup *memcg, int new_size,
-    int old_size, int new_nr_max)
-    {
-    struct shrinker_info *new, *old;
-    struct mem_cgroup_per_node *pn;
-    int nid;
+#[no_mangle]
+pub unsafe extern "C" fn expand_one_shrinker_info(memcg: *mut mem_cgroup, new_size: c_int, old_size: c_int, new_nr_max: c_int) -> c_int {
+    let mut new = core::ptr::null_mut();
+    let mut old = core::ptr::null_mut();
+pub static mut pn: *mut c_void = core::ptr::null_mut();
+    let mut nid = 0;
     for_each_node(nid) {
     pn = memcg.nodeinfo[nid];
     old = shrinker_info_protected(memcg, nid);
 // Not yet online memcg
-    if (!old)
+    if (!old) {
     return 0;
+    }
 // Already expanded this shrinker_info
-    if (new_nr_max <= old.map_nr_max)
+    if (new_nr_max <= old.map_nr_max) {
     continue;
-    new = kvzalloc_node(sizeof(*new) + new_size, GFP_KERNEL, nid);
-    if (!new)
+    }
+    new = kvzalloc_node(sizeof!(*new) + new_size, GFP_KERNEL, nid);
+    if (!new) {
     return -ENOMEM;
+    }
     new.map_nr_max = new_nr_max;
     memcpy(new.unit, old.unit, old_size);
     if (shrinker_unit_alloc(new, old, nid)) {
@@ -170,14 +415,13 @@ pub unsafe extern "C" fn alloc_shrinker_info(memcg: *mut mem_cgroup) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn expand_shrinker_info(new_id: c_int) -> c_int {
-    static int expand_shrinker_info(int new_id)
-    {
-    let mut ret: c_int = 0;
-    let mut new_nr_max: c_int = round_up(new_id + 1, SHRINKER_UNIT_BITS);
+pub static mut ret: c_int = 0;
+pub static mut new_nr_max: c_int = 0;
     int new_size, old_size = 0;
-    struct mem_cgroup *memcg;
-    if (!root_mem_cgroup)
-    goto out;
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+    if (!root_mem_cgroup) {
+// goto;
+    }
     lockdep_assert_held(&shrinker_mutex);
     new_size = shrinker_unit_size(new_nr_max);
     old_size = shrinker_unit_size(shrinker_nr_max);
@@ -187,42 +431,35 @@ unsafe extern "C" fn expand_shrinker_info(new_id: c_int) -> c_int {
     new_nr_max);
     if (ret) {
     mem_cgroup_iter_break(core::ptr::null_mut(), memcg);
-    goto out;
+// goto;
     }
     } while ((memcg = mem_cgroup_iter(core::ptr::null_mut(), memcg, core::ptr::null_mut())) != core::ptr::null_mut());
-    out:
-    if (!ret)
+// label;
+    if (!ret) {
     shrinker_nr_max = new_nr_max;
+    }
     return ret;
     }
 #[no_mangle]
 pub unsafe extern "C" fn shrinker_id_to_index(shrinker_id: c_int) -> c_int {
-    static inline int shrinker_id_to_index(int shrinker_id)
-    {
     return shrinker_id / SHRINKER_UNIT_BITS;
     }
 #[no_mangle]
 pub unsafe extern "C" fn shrinker_id_to_offset(shrinker_id: c_int) -> c_int {
-    static inline int shrinker_id_to_offset(int shrinker_id)
-    {
     return shrinker_id % SHRINKER_UNIT_BITS;
     }
 #[no_mangle]
 pub unsafe extern "C" fn calc_shrinker_id(index: c_int, offset: c_int) -> c_int {
-    static inline int calc_shrinker_id(int index, int offset)
-    {
     return index * SHRINKER_UNIT_BITS + offset;
     }
 #[no_mangle]
 pub unsafe extern "C" fn set_shrinker_bit(memcg: *mut mem_cgroup, nid: c_int, shrinker_id: c_int) {
-    void set_shrinker_bit(struct mem_cgroup *memcg, int nid, int shrinker_id)
-    {
     if (shrinker_id >= 0 && memcg && !mem_cgroup_is_root(memcg)) {
-    struct shrinker_info *info;
+pub static mut info: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     info = rcu_dereference(memcg.nodeinfo[nid].shrinker_info);
-    if (!WARN_ON_ONCE(shrinker_id >= info.map_nr_max)) {
-    struct shrinker_info_unit *unit;
+    if (!WARN_ON_ONCE!(shrinker_id >= info.map_nr_max)) {
+pub static mut unit: *mut c_void = core::ptr::null_mut();
     unit = info.unit[shrinker_id_to_index(shrinker_id)];
 // Pairs with smp mb in shrink_slab()
     smp_mb__before_atomic();
@@ -231,20 +468,21 @@ pub unsafe extern "C" fn set_shrinker_bit(memcg: *mut mem_cgroup, nid: c_int, sh
     rcu_read_unlock();
     }
     }
-    static DEFINE_IDR(shrinker_idr);
+pub static mut shrinker_idr: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn shrinker_memcg_alloc(shrinker: *mut shrinker) -> c_int {
-    static int shrinker_memcg_alloc(struct shrinker *shrinker)
-    {
-    int id;
-    if (mem_cgroup_disabled())
+    let mut id = 0;
+    if (mem_cgroup_disabled()) {
     return -ENOSYS;
-    if (mem_cgroup_kmem_disabled() && !(shrinker.flags & SHRINKER_NONSLAB))
+    }
+    if (mem_cgroup_kmem_disabled() && !(shrinker.flags & SHRINKER_NONSLAB)) {
     return -ENOSYS;
+    }
     guard(mutex)(&shrinker_mutex);
     id = idr_alloc(&shrinker_idr, shrinker, 0, 0, GFP_KERNEL);
-    if (id < 0)
+    if (id < 0) {
     return id;
+    }
     if (id >= shrinker_nr_max) {
     if (expand_shrinker_info(id)) {
     idr_remove(&shrinker_idr, id);
@@ -256,19 +494,16 @@ unsafe extern "C" fn shrinker_memcg_alloc(shrinker: *mut shrinker) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn shrinker_memcg_remove(shrinker: *mut shrinker) {
-    static void shrinker_memcg_remove(struct shrinker *shrinker)
-    {
-    let mut id: c_int = shrinker.id;
-    BUG_ON(id < 0);
+pub static mut id: c_int = 0;
+    BUG_ON!(id < 0);
     lockdep_assert_held(&shrinker_mutex);
     idr_remove(&shrinker_idr, id);
     }
-    static long xchg_nr_deferred_memcg(int nid, struct shrinker *shrinker,
-    struct mem_cgroup *memcg)
-    {
-    struct shrinker_info *info;
-    struct shrinker_info_unit *unit;
-    long nr_deferred;
+#[no_mangle]
+pub unsafe extern "C" fn xchg_nr_deferred_memcg(nid: c_int, shrinker: *mut shrinker, memcg: *mut mem_cgroup) -> c_long {
+pub static mut info: *mut c_void = core::ptr::null_mut();
+pub static mut unit: *mut c_void = core::ptr::null_mut();
+    let mut nr_deferred = 0;
     rcu_read_lock();
     info = rcu_dereference(memcg.nodeinfo[nid].shrinker_info);
     unit = info.unit[shrinker_id_to_index(shrinker.id)];
@@ -276,12 +511,11 @@ unsafe extern "C" fn shrinker_memcg_remove(shrinker: *mut shrinker) {
     rcu_read_unlock();
     return nr_deferred;
     }
-    static long add_nr_deferred_memcg(long nr, int nid, struct shrinker *shrinker,
-    struct mem_cgroup *memcg)
-    {
-    struct shrinker_info *info;
-    struct shrinker_info_unit *unit;
-    long nr_deferred;
+#[no_mangle]
+pub unsafe extern "C" fn add_nr_deferred_memcg(nr: c_long, nid: c_int, shrinker: *mut shrinker, memcg: *mut mem_cgroup) -> c_long {
+pub static mut info: *mut c_void = core::ptr::null_mut();
+pub static mut unit: *mut c_void = core::ptr::null_mut();
+    let mut nr_deferred = 0;
     rcu_read_lock();
     info = rcu_dereference(memcg.nodeinfo[nid].shrinker_info);
     unit = info.unit[shrinker_id_to_index(shrinker.id)];
@@ -292,22 +526,24 @@ unsafe extern "C" fn shrinker_memcg_remove(shrinker: *mut shrinker) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn reparent_shrinker_deferred(memcg: *mut mem_cgroup) {
-    void reparent_shrinker_deferred(struct mem_cgroup *memcg)
-    {
-    int nid, index, offset;
-    long nr;
-    struct mem_cgroup *parent = parent_mem_cgroup(memcg);
-    struct shrinker_info *child_info, *parent_info;
-    struct shrinker_info_unit *child_unit, *parent_unit;
+    let mut nid = 0;
+    let mut index = 0;
+    let mut offset = 0;
+    let mut nr = 0;
+    let mut parent = parent_mem_cgroup(memcg);
+    let mut child_info = core::ptr::null_mut();
+    let mut parent_info = core::ptr::null_mut();
+    let mut child_unit = core::ptr::null_mut();
+    let mut parent_unit = core::ptr::null_mut();
 // Prevent from concurrent shrinker_info expand
     mutex_lock(&shrinker_mutex);
     for_each_node(nid) {
     child_info = shrinker_info_protected(memcg, nid);
     parent_info = shrinker_info_protected(parent, nid);
-    for (index = 0; index < shrinker_id_to_index(child_info.map_nr_max); index++) {
+    while (index < shrinker_id_to_index(child_info.map_nr_max)) {
     child_unit = child_info.unit[index];
     parent_unit = parent_info.unit[index];
-    for (offset = 0; offset < SHRINKER_UNIT_BITS; offset++) {
+    while (offset < SHRINKER_UNIT_BITS) {
     nr = atomic_long_read(&child_unit.nr_deferred[offset]);
     atomic_long_add(nr, &parent_unit.nr_deferred[offset]);
     }
@@ -318,66 +554,66 @@ pub unsafe extern "C" fn reparent_shrinker_deferred(memcg: *mut mem_cgroup) {
 
 #[no_mangle]
 unsafe extern "C" fn shrinker_memcg_alloc(shrinker: *mut shrinker) -> c_int {
-    static int shrinker_memcg_alloc(struct shrinker *shrinker)
-    {
     return -ENOSYS;
     }
 #[no_mangle]
 unsafe extern "C" fn shrinker_memcg_remove(shrinker: *mut shrinker) {
-    static void shrinker_memcg_remove(struct shrinker *shrinker)
-    {
     }
-    static long xchg_nr_deferred_memcg(int nid, struct shrinker *shrinker,
-    struct mem_cgroup *memcg)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: xchg_nr_deferred_memcg
+pub unsafe extern "C" fn xchg_nr_deferred_memcg_dup(nid: c_int, shrinker: *mut shrinker, memcg: *mut mem_cgroup) -> c_long {
     return 0;
     }
-    static long add_nr_deferred_memcg(long nr, int nid, struct shrinker *shrinker,
-    struct mem_cgroup *memcg)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: add_nr_deferred_memcg
+pub unsafe extern "C" fn add_nr_deferred_memcg_dup(nr: c_long, nid: c_int, shrinker: *mut shrinker, memcg: *mut mem_cgroup) -> c_long {
     return 0;
     }
 
-    static long xchg_nr_deferred(struct shrinker *shrinker,
-    struct shrink_control *sc)
-    {
-    let mut nid: c_int = sc.nid;
-    if (!(shrinker.flags & SHRINKER_NUMA_AWARE))
+#[no_mangle]
+pub unsafe extern "C" fn xchg_nr_deferred(shrinker: *mut shrinker, sc: *mut shrink_control) -> c_long {
+pub static mut nid: c_int = 0;
+    if (!(shrinker.flags & SHRINKER_NUMA_AWARE)) {
     nid = 0;
+    }
     if (sc.memcg &&
-    (shrinker.flags & SHRINKER_MEMCG_AWARE))
+    (shrinker.flags & SHRINKER_MEMCG_AWARE)) {
     return xchg_nr_deferred_memcg(nid, shrinker,
     sc.memcg);
+    }
     return atomic_long_xchg(&shrinker.nr_deferred[nid], 0);
     }
-    static long add_nr_deferred(long nr, struct shrinker *shrinker,
-    struct shrink_control *sc)
-    {
-    let mut nid: c_int = sc.nid;
-    if (!(shrinker.flags & SHRINKER_NUMA_AWARE))
+#[no_mangle]
+pub unsafe extern "C" fn add_nr_deferred(nr: c_long, shrinker: *mut shrinker, sc: *mut shrink_control) -> c_long {
+pub static mut nid: c_int = 0;
+    if (!(shrinker.flags & SHRINKER_NUMA_AWARE)) {
     nid = 0;
+    }
     if (sc.memcg &&
-    (shrinker.flags & SHRINKER_MEMCG_AWARE))
+    (shrinker.flags & SHRINKER_MEMCG_AWARE)) {
     return add_nr_deferred_memcg(nr, nid, shrinker,
     sc.memcg);
+    }
     return atomic_long_add_return(nr, &shrinker.nr_deferred[nid]);
     }
 pub const SHRINK_BATCH: c_int = 128;
-    static unsigned long do_shrink_slab(struct shrink_control *shrinkctl,
-    struct shrinker *shrinker, int priority)
-    {
-    let mut freed: c_ulong = 0;
+#[no_mangle]
+pub unsafe extern "C" fn do_shrink_slab(shrinkctl: *mut shrink_control, shrinker: *mut shrinker, priority: c_int) -> c_ulong {
+pub static mut freed: c_ulong = 0;
     unsigned long long delta;
-    long total_scan;
-    long freeable;
-    long nr;
-    long new_nr;
-    long batch_size = shrinker.batch ? shrinker.batch
+    let mut total_scan = 0;
+    let mut freeable = 0;
+    let mut nr = 0;
+    let mut new_nr = 0;
+    let mut batch_size = shrinker.batch ? shrinker.batch
     : SHRINK_BATCH;
-    let mut scanned: c_long = 0, next_deferred;
+pub static mut scanned: c_long = 0;
     freeable = shrinker.count_objects(shrinker, shrinkctl);
-    if (freeable == 0 || freeable == SHRINK_EMPTY)
+    if (freeable == 0 || freeable == SHRINK_EMPTY) {
     return freeable;
+    }
 //
 // copy the current shrinker scan count into a local variable
 // and zero it so that other concurrent shrinker invocations
@@ -419,13 +655,14 @@ pub const SHRINK_BATCH: c_int = 128;
 //
     while (total_scan >= batch_size ||
     total_scan >= freeable) {
-    unsigned long ret;
-    let mut nr_to_scan: c_ulong = min(batch_size, total_scan);
+    let mut ret = 0;
+pub static mut nr_to_scan: c_ulong = 0;
     shrinkctl.nr_to_scan = nr_to_scan;
     shrinkctl.nr_scanned = nr_to_scan;
     ret = shrinker.scan_objects(shrinker, shrinkctl);
-    if (ret == SHRINK_STOP)
+    if (ret == SHRINK_STOP) {
     break;
+    }
     freed += ret;
     count_vm_events(SLABS_SCANNED, shrinkctl.nr_scanned);
     total_scan -= shrinkctl.nr_scanned;
@@ -450,14 +687,14 @@ pub const SHRINK_BATCH: c_int = 128;
     return freed;
     }
 
-    static unsigned long shrink_slab_memcg(gfp_t gfp_mask, int nid,
-    struct mem_cgroup *memcg, int priority)
-    {
-    struct shrinker_info *info;
+#[no_mangle]
+pub unsafe extern "C" fn shrink_slab_memcg(gfp_mask: gfp_t, nid: c_int, memcg: *mut mem_cgroup, priority: c_int) -> c_ulong {
+pub static mut info: *mut c_void = core::ptr::null_mut();
     unsigned long ret, freed = 0;
     int offset, index = 0;
-    if (!mem_cgroup_online(memcg))
+    if (!mem_cgroup_online(memcg)) {
     return 0;
+    }
 //
 // lockless algorithm of memcg shrink.
 //
@@ -493,23 +730,20 @@ pub const SHRINK_BATCH: c_int = 128;
 // released in expand_one_shrinker_info(), so go back to step 1
 // to reacquire the shrinker_info.
 //
-    again:
+// label;
     rcu_read_lock();
     info = rcu_dereference(memcg.nodeinfo[nid].shrinker_info);
-    if (unlikely(!info))
-    goto unlock;
+    if (unlikely(!info)) {
+// goto;
+    }
     if (index < shrinker_id_to_index(info.map_nr_max)) {
-    struct shrinker_info_unit *unit;
+pub static mut unit: *mut c_void = core::ptr::null_mut();
     unit = info.unit[index];
     rcu_read_unlock();
     for_each_set_bit(offset, unit.map, SHRINKER_UNIT_BITS) {
-    struct shrink_control sc = {
-    .gfp_mask = gfp_mask,
-    .nid = nid,
-    .memcg = memcg,
-    };
-    struct shrinker *shrinker;
-    let mut shrinker_id: c_int = calc_shrinker_id(index, offset);
+pub static mut shrink_control: usize = 0;
+pub static mut shrinker: *mut c_void = core::ptr::null_mut();
+pub static mut shrinker_id: c_int = 0;
     rcu_read_lock();
     shrinker = idr_find(&shrinker_idr, shrinker_id);
     if (unlikely(!shrinker || !shrinker_try_get(shrinker))) {
@@ -545,25 +779,28 @@ pub const SHRINK_BATCH: c_int = 128;
 //
     smp_mb__after_atomic();
     ret = do_shrink_slab(&sc, shrinker, priority);
-    if (ret == SHRINK_EMPTY)
+    if (ret == SHRINK_EMPTY) {
     ret = 0;
-    else
+    }
+    else {
     set_shrinker_bit(memcg, nid, shrinker_id);
+    }
     }
     freed += ret;
     shrinker_put(shrinker);
     }
-    index++;
-    goto again;
+    index += 1;
+// goto;
     }
-    unlock:
+// label;
     rcu_read_unlock();
     return freed;
     }
 
-    static unsigned long shrink_slab_memcg(gfp_t gfp_mask, int nid,
-    struct mem_cgroup *memcg, int priority)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: shrink_slab_memcg
+pub unsafe extern "C" fn shrink_slab_memcg_dup(gfp_mask: gfp_t, nid: c_int, memcg: *mut mem_cgroup, priority: c_int) -> c_ulong {
     return 0;
     }
 
@@ -587,11 +824,10 @@ pub const SHRINK_BATCH: c_int = 128;
 //
 // Returns the number of reclaimed slab objects.
 //
-    unsigned long shrink_slab(gfp_t gfp_mask, int nid, struct mem_cgroup *memcg,
-    int priority)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn shrink_slab(gfp_mask: gfp_t, nid: c_int, memcg: *mut mem_cgroup, priority: c_int) -> c_ulong {
     unsigned long ret, freed = 0;
-    struct shrinker *shrinker;
+pub static mut shrinker: *mut c_void = core::ptr::null_mut();
 //
 // The root memcg might be allocated even though memcg is disabled
 // via "cgroup_disable=memory" boot parameter.  This could make
@@ -599,8 +835,9 @@ pub const SHRINK_BATCH: c_int = 128;
 // shrink, but skip global shrink.  This may result in premature
 // oom.
 //
-    if (!mem_cgroup_disabled() && !mem_cgroup_is_root(memcg))
+    if (!mem_cgroup_disabled() && !mem_cgroup_is_root(memcg)) {
     return shrink_slab_memcg(gfp_mask, nid, memcg, priority);
+    }
 //
 // lockless algorithm of global shrink.
 //
@@ -624,17 +861,15 @@ pub const SHRINK_BATCH: c_int = 128;
 //
     rcu_read_lock();
     list_for_each_entry_rcu(shrinker, &shrinker_list, list) {
-    struct shrink_control sc = {
-    .gfp_mask = gfp_mask,
-    .nid = nid,
-    .memcg = memcg,
-    };
-    if (!shrinker_try_get(shrinker))
+pub static mut shrink_control: usize = 0;
+    if (!shrinker_try_get(shrinker)) {
     continue;
+    }
     rcu_read_unlock();
     ret = do_shrink_slab(&sc, shrinker, priority);
-    if (ret == SHRINK_EMPTY)
+    if (ret == SHRINK_EMPTY) {
     ret = 0;
+    }
     freed += ret;
     rcu_read_lock();
     shrinker_put(shrinker);
@@ -643,20 +878,22 @@ pub const SHRINK_BATCH: c_int = 128;
     cond_resched();
     return freed;
     }
-    struct shrinker *shrinker_alloc(unsigned int flags, const char *fmt, ...)
-    {
-    struct shrinker *shrinker;
-    unsigned int size;
-    va_list ap;
-    int err;
-    shrinker = kzalloc_obj(struct shrinker);
-    if (!shrinker)
+#[no_mangle]
+pub unsafe extern "C" fn shrinker_alloc(flags: c_uint, fmt: *mut c_char) -> *mut c_void {
+pub static mut shrinker: *mut c_void = core::ptr::null_mut();
+    let mut size = 0;
+    let mut ap;
+    let mut err = 0;
+    shrinker = kzalloc_obj(shrinker);
+    if (!shrinker) {
     return core::ptr::null_mut();
+    }
     va_start(ap, fmt);
     err = shrinker_debugfs_name_alloc(shrinker, fmt, ap);
     va_end(ap);
-    if (err)
-    goto err_name;
+    if (err) {
+// goto;
+    }
     shrinker.flags = flags | SHRINKER_ALLOCATED;
     shrinker.seeks = DEFAULT_SEEKS;
     if (flags & SHRINKER_MEMCG_AWARE) {
@@ -664,13 +901,14 @@ pub const SHRINK_BATCH: c_int = 128;
     if (err == -ENOSYS) {
 // Memcg is not supported, fallback to non-memcg-aware shrinker.
     shrinker.flags &= ~SHRINKER_MEMCG_AWARE;
-    goto non_memcg;
+// goto;
     }
-    if (err)
-    goto err_flags;
+    if (err) {
+// goto;
+    }
     return shrinker;
     }
-    non_memcg:
+// label;
 //
 // The nr_deferred is available on per memcg level for memcg aware
 // shrinkers, so only allocate nr_deferred in the following cases:
@@ -679,26 +917,26 @@ pub const SHRINK_BATCH: c_int = 128;
 // - memcg is disabled by kernel command line
 // - non-slab shrinkers: when memcg kmem is disabled
 //
-    size = sizeof(*shrinker.nr_deferred);
-    if (flags & SHRINKER_NUMA_AWARE)
+    size = sizeof!(*shrinker.nr_deferred);
+    if (flags & SHRINKER_NUMA_AWARE) {
     size *= nr_node_ids;
+    }
     shrinker.nr_deferred = kzalloc(size, GFP_KERNEL);
-    if (!shrinker.nr_deferred)
-    goto err_flags;
+    if (!shrinker.nr_deferred) {
+// goto;
+    }
     return shrinker;
-    err_flags:
+// label;
     shrinker_debugfs_name_free(shrinker);
-    err_name:
+// label;
     kfree(shrinker);
     return core::ptr::null_mut();
     }
     EXPORT_SYMBOL_GPL(shrinker_alloc);
 #[no_mangle]
 pub unsafe extern "C" fn shrinker_register(shrinker: *mut shrinker) {
-    void shrinker_register(struct shrinker *shrinker)
-    {
     if (unlikely(!(shrinker.flags & SHRINKER_ALLOCATED))) {
-    pr_warn("Must use shrinker_alloc() to dynamically allocate the shrinker");
+    pr_warn!("Must use shrinker_alloc() to dynamically allocate the shrinker");
     return;
     }
     mutex_lock(&shrinker_mutex);
@@ -717,20 +955,17 @@ pub unsafe extern "C" fn shrinker_register(shrinker: *mut shrinker) {
     EXPORT_SYMBOL_GPL(shrinker_register);
 #[no_mangle]
 unsafe extern "C" fn shrinker_free_rcu_cb(head: *mut rcu_head) {
-    static void shrinker_free_rcu_cb(struct rcu_head *head)
-    {
-    struct shrinker *shrinker = container_of(head, struct shrinker, rcu);
+    let mut shrinker = container_of!(head, shrinker, rcu);
     kfree(shrinker.nr_deferred);
     kfree(shrinker);
     }
 #[no_mangle]
 pub unsafe extern "C" fn shrinker_free(shrinker: *mut shrinker) {
-    void shrinker_free(struct shrinker *shrinker)
-    {
-    struct dentry *debugfs_entry = core::ptr::null_mut();
-    int debugfs_id;
-    if (!shrinker)
+    let mut debugfs_entry = core::ptr::null_mut();
+    let mut debugfs_id = 0;
+    if (!shrinker) {
     return;
+    }
     if (shrinker.flags & SHRINKER_REGISTERED) {
 // drop the initial refcount
     shrinker_put(shrinker);
@@ -753,11 +988,13 @@ pub unsafe extern "C" fn shrinker_free(shrinker: *mut shrinker) {
     shrinker.flags &= ~SHRINKER_REGISTERED;
     }
     shrinker_debugfs_name_free(shrinker);
-    if (shrinker.flags & SHRINKER_MEMCG_AWARE)
+    if (shrinker.flags & SHRINKER_MEMCG_AWARE) {
     shrinker_memcg_remove(shrinker);
+    }
     mutex_unlock(&shrinker_mutex);
-    if (debugfs_entry)
+    if (debugfs_entry) {
     shrinker_debugfs_remove(debugfs_entry, debugfs_id);
+    }
     call_rcu(&shrinker.rcu, shrinker_free_rcu_cb);
     }
     EXPORT_SYMBOL_GPL(shrinker_free);

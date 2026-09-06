@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -84,11 +334,10 @@ pub struct msi_ctrl {
 
 // The maximum domain size
 
-    static void msi_domain_free_locked(struct device *dev, struct msi_ctrl *ctrl);
-    static unsigned int msi_domain_get_hwsize(struct device *dev, unsigned int domid);
-    static inline int msi_sysfs_create_group(struct device *dev);
-    static int msi_domain_prepare_irqs(struct irq_domain *domain, struct device *dev,
-    int nvec, msi_alloc_info_t *arg);
+// forward_decl: msi_domain_free_locked;
+// forward_decl: msi_domain_get_hwsize;
+// forward_decl: msi_sysfs_create_group;
+// forward_decl: msi_domain_prepare_irqs;
 //
 // msi_alloc_desc - Allocate an initialized msi_desc
 // @dev:	Pointer to the device for which this is allocated
@@ -100,16 +349,16 @@ pub struct msi_ctrl {
 //
 // Return: pointer to allocated &msi_desc on success or %NULL on failure
 //
-    static struct msi_desc *msi_alloc_desc(struct device *dev, int nvec,
-    const struct irq_affinity_desc *affinity)
-    {
-    struct msi_desc *desc = kzalloc_obj(*desc);
-    if (!desc)
+#[no_mangle]
+pub unsafe extern "C" fn msi_alloc_desc(dev: *mut device, nvec: c_int, affinity: *mut irq_affinity_desc) -> *mut c_void {
+    let mut desc = kzalloc_obj(*desc);
+    if (!desc) {
     return core::ptr::null_mut();
+    }
     desc.dev = dev;
     desc.nvec_used = nvec;
     if (affinity) {
-    desc.affinity = kmemdup_array(affinity, nvec, sizeof(*desc.affinity), GFP_KERNEL);
+    desc.affinity = kmemdup_array(affinity, nvec, sizeof!(*desc.affinity), GFP_KERNEL);
     if (!desc.affinity) {
     kfree(desc);
     return core::ptr::null_mut();
@@ -119,40 +368,39 @@ pub struct msi_ctrl {
     }
 #[no_mangle]
 unsafe extern "C" fn msi_free_desc(desc: *mut msi_desc) {
-    static void msi_free_desc(struct msi_desc *desc)
-    {
     kfree(desc.affinity);
     kfree(desc);
     }
-    static int msi_insert_desc(struct device *dev, struct msi_desc *desc,
-    unsigned int domid, unsigned int index)
-    {
-    struct msi_device_data *md = dev.msi.data;
-    struct xarray *xa = &md.__domains[domid].store;
-    unsigned int hwsize;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn msi_insert_desc(dev: *mut device, desc: *mut msi_desc, domid: c_uint, index: c_uint) -> c_int {
+    let mut md = dev.msi.data;
+    let mut xa = &md.__domains[domid].store;
+    let mut hwsize = 0;
+    let mut ret = 0;
     hwsize = msi_domain_get_hwsize(dev, domid);
     if (index == MSI_ANY_INDEX) {
-    let mut limit: xa_limit = { .min = 0, .max = hwsize - 1 };
-    unsigned int index;
+pub static mut limit: xa_limit = 0;
+    let mut index = 0;
 // Let the xarray allocate a free index within the limit
     ret = xa_alloc(xa, &index, desc, limit, GFP_KERNEL);
-    if (ret)
-    goto fail;
+    if (ret) {
+// goto;
+    }
     desc.msi_index = index;
     return 0;
     } else {
     if (index >= hwsize) {
     ret = -ERANGE;
-    goto fail;
+// goto;
     }
     desc.msi_index = index;
     ret = xa_insert(xa, index, desc, GFP_KERNEL);
-    if (ret)
-    goto fail;
+    if (ret) {
+// goto;
+    }
     return 0;
     }
-    fail:
+// label;
     msi_free_desc(desc);
     return ret;
     }
@@ -166,65 +414,66 @@ unsafe extern "C" fn msi_free_desc(desc: *mut msi_desc) {
 //
 // Return: 0 on success or an appropriate failure code.
 //
-    int msi_domain_insert_msi_desc(struct device *dev, unsigned int domid,
-    struct msi_desc *init_desc)
-    {
-    struct msi_desc *desc;
+#[no_mangle]
+pub unsafe extern "C" fn msi_domain_insert_msi_desc(dev: *mut device, domid: c_uint, init_desc: *mut msi_desc) -> c_int {
+pub static mut desc: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&dev.msi.data.mutex);
     desc = msi_alloc_desc(dev, init_desc.nvec_used, init_desc.affinity);
-    if (!desc)
+    if (!desc) {
     return -ENOMEM;
+    }
 // Copy type specific data to the new descriptor.
     desc.pci = init_desc.pci;
     return msi_insert_desc(dev, desc, domid, init_desc.msi_index);
     }
 #[no_mangle]
-unsafe extern "C" fn msi_desc_match(desc: *mut msi_desc, filter: enum msi_desc_filter) -> bool {
-    static bool msi_desc_match(struct msi_desc *desc, enum msi_desc_filter filter)
-    {
-    switch (filter) {
-    case MSI_DESC_ALL:
+unsafe extern "C" fn msi_desc_match(desc: *mut msi_desc, filter: msi_desc_filter) -> bool {
+    match (filter) {
+    MSI_DESC_ALL => {
     return true;
-    case MSI_DESC_NOTASSOCIATED:
+    }
+    MSI_DESC_NOTASSOCIATED => {
     return !desc.irq;
-    case MSI_DESC_ASSOCIATED:
+    }
+    MSI_DESC_ASSOCIATED => {
     return !!desc.irq;
     }
-    WARN_ON_ONCE(1);
+    }
+    WARN_ON_ONCE!(1);
     return false;
     }
 #[no_mangle]
 unsafe extern "C" fn msi_ctrl_valid(dev: *mut device, ctrl: *mut msi_ctrl) -> bool {
-    static bool msi_ctrl_valid(struct device *dev, struct msi_ctrl *ctrl)
-    {
-    unsigned int hwsize;
-    if (WARN_ON_ONCE(ctrl.domid >= MSI_MAX_DEVICE_IRQDOMAINS ||
+    let mut hwsize = 0;
+    if (WARN_ON_ONCE!(ctrl.domid >= MSI_MAX_DEVICE_IRQDOMAINS ||
     (dev.msi.domain &&
-    !dev.msi.data.__domains[ctrl.domid].domain)))
+    !dev.msi.data.__domains[ctrl.domid].domain))) {
     return false;
+    }
     hwsize = msi_domain_get_hwsize(dev, ctrl.domid);
-    if (WARN_ON_ONCE(ctrl.first > ctrl.last ||
+    if (WARN_ON_ONCE!(ctrl.first > ctrl.last ||
     ctrl.first >= hwsize ||
-    ctrl.last >= hwsize))
+    ctrl.last >= hwsize)) {
     return false;
+    }
     return true;
     }
 #[no_mangle]
 unsafe extern "C" fn msi_domain_free_descs(dev: *mut device, ctrl: *mut msi_ctrl) {
-    static void msi_domain_free_descs(struct device *dev, struct msi_ctrl *ctrl)
-    {
-    struct msi_desc *desc;
-    struct xarray *xa;
-    unsigned long idx;
+pub static mut desc: *mut c_void = core::ptr::null_mut();
+pub static mut xa: *mut c_void = core::ptr::null_mut();
+    let mut idx = 0;
     lockdep_assert_held(&dev.msi.data.mutex);
-    if (!msi_ctrl_valid(dev, ctrl))
+    if (!msi_ctrl_valid(dev, ctrl)) {
     return;
+    }
     xa = &dev.msi.data.__domains[ctrl.domid].store;
     xa_for_each_range(xa, idx, desc, ctrl.first, ctrl.last) {
     xa_erase(xa, idx);
 // Leak the descriptor when it is still referenced
-    if (WARN_ON_ONCE(msi_desc_match(desc, MSI_DESC_ASSOCIATED)))
+    if (WARN_ON_ONCE!(msi_desc_match(desc, MSI_DESC_ASSOCIATED))) {
     continue;
+    }
     msi_free_desc(desc);
     }
     }
@@ -235,14 +484,9 @@ unsafe extern "C" fn msi_domain_free_descs(dev: *mut device, ctrl: *mut msi_ctrl
 // @first:	Index to start freeing from (inclusive)
 // @last:	Last index to be freed (inclusive)
 //
-    void msi_domain_free_msi_descs_range(struct device *dev, unsigned int domid,
-    unsigned int first, unsigned int last)
-    {
-    struct msi_ctrl ctrl = {
-    .domid	= domid,
-    .first	= first,
-    .last	= last,
-    };
+#[no_mangle]
+pub unsafe extern "C" fn msi_domain_free_msi_descs_range(dev: *mut device, domid: c_uint, first: c_uint, last: c_uint) {
+pub static mut msi_ctrl: usize = 0;
     msi_domain_free_descs(dev, &ctrl);
     }
 //
@@ -254,52 +498,47 @@ unsafe extern "C" fn msi_domain_free_descs(dev: *mut device, ctrl: *mut msi_ctrl
 //
 #[no_mangle]
 unsafe extern "C" fn msi_domain_add_simple_msi_descs(dev: *mut device, ctrl: *mut msi_ctrl) -> c_int {
-    static int msi_domain_add_simple_msi_descs(struct device *dev, struct msi_ctrl *ctrl)
-    {
-    struct msi_desc *desc;
-    unsigned int idx;
-    int ret;
+pub static mut desc: *mut c_void = core::ptr::null_mut();
+    let mut idx = 0;
+    let mut ret = 0;
     lockdep_assert_held(&dev.msi.data.mutex);
-    if (!msi_ctrl_valid(dev, ctrl))
+    if (!msi_ctrl_valid(dev, ctrl)) {
     return -EINVAL;
-    for (idx = ctrl.first; idx <= ctrl.last; idx++) {
+    }
+    while (idx <= ctrl.last) {
     desc = msi_alloc_desc(dev, 1, core::ptr::null_mut());
-    if (!desc)
-    goto fail_mem;
+    if (!desc) {
+// goto;
+    }
     ret = msi_insert_desc(dev, desc, ctrl.domid, idx);
-    if (ret)
-    goto fail;
+    if (ret) {
+// goto;
+    }
     }
     return 0;
-    fail_mem:
+// label;
     ret = -ENOMEM;
-    fail:
+// label;
     msi_domain_free_descs(dev, ctrl);
     return ret;
     }
 #[no_mangle]
 pub unsafe extern "C" fn __get_cached_msi_msg(entry: *mut msi_desc, msg: *mut msi_msg) {
-    void __get_cached_msi_msg(struct msi_desc *entry, struct msi_msg *msg)
-    {
 // msg = entry->msg;
     }
 #[no_mangle]
 pub unsafe extern "C" fn get_cached_msi_msg(irq: c_uint, msg: *mut msi_msg) {
-    void get_cached_msi_msg(unsigned int irq, struct msi_msg *msg)
-    {
-    struct msi_desc *entry = irq_get_msi_desc(irq);
+    let mut entry = irq_get_msi_desc(irq);
     __get_cached_msi_msg(entry, msg);
     }
     EXPORT_SYMBOL_GPL(get_cached_msi_msg);
 #[no_mangle]
 unsafe extern "C" fn msi_device_data_release(dev: *mut device, res: *mut c_void) {
-    static void msi_device_data_release(struct device *dev, void *res)
-    {
-    struct msi_device_data *md = res;
-    int i;
-    for (i = 0; i < MSI_MAX_DEVICE_IRQDOMAINS; i++) {
+    let mut md = res;
+    let mut i = 0;
+    while (i < MSI_MAX_DEVICE_IRQDOMAINS) {
     msi_remove_device_irq_domain(dev, i);
-    WARN_ON_ONCE(!xa_empty(&md.__domains[i].store));
+    WARN_ON_ONCE!(!xa_empty(&md.__domains[i].store));
     xa_destroy(&md.__domains[i].store);
     }
     dev.msi.data = core::ptr::null_mut();
@@ -316,30 +555,33 @@ unsafe extern "C" fn msi_device_data_release(dev: *mut device, res: *mut c_void)
 //
 #[no_mangle]
 pub unsafe extern "C" fn msi_setup_device_data(dev: *mut device) -> c_int {
-    int msi_setup_device_data(struct device *dev)
-    {
-    struct msi_device_data *md;
-    int ret, i;
-    if (dev.msi.data)
+pub static mut md: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    let mut i = 0;
+    if (dev.msi.data) {
     return 0;
-    md = devres_alloc(msi_device_data_release, sizeof(*md), GFP_KERNEL);
-    if (!md)
+    }
+    md = devres_alloc(msi_device_data_release, sizeof!(*md), GFP_KERNEL);
+    if (!md) {
     return -ENOMEM;
+    }
     ret = msi_sysfs_create_group(dev);
     if (ret) {
     devres_free(md);
     return ret;
     }
-    for (i = 0; i < MSI_MAX_DEVICE_IRQDOMAINS; i++)
+    for (i = 0; i < MSI_MAX_DEVICE_IRQDOMAINS; i++) {
     xa_init_flags(&md.__domains[i].store, XA_FLAGS_ALLOC);
+    }
 //
 // If @dev::msi::domain is set and is a global MSI domain, copy the
 // pointer into the domain array so all code can operate on domain
 // ids. The NULL pointer check is required to keep the legacy
 // architecture specific PCI/MSI support working.
 //
-    if (dev.msi.domain && !irq_domain_is_msi_parent(dev.msi.domain))
+    if (dev.msi.domain && !irq_domain_is_msi_parent(dev.msi.domain)) {
     md.__domains[MSI_DEFAULT_DOMAIN].domain = dev.msi.domain;
+    }
     mutex_init(&md.mutex);
     dev.msi.data = md;
     devres_add(dev, md);
@@ -353,8 +595,6 @@ pub unsafe extern "C" fn msi_setup_device_data(dev: *mut device) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __msi_lock_descs(dev: *mut device) {
-    void __msi_lock_descs(struct device *dev)
-    {
     mutex_lock(&dev.msi.data.mutex);
     }
     EXPORT_SYMBOL_GPL(__msi_lock_descs);
@@ -366,21 +606,19 @@ pub unsafe extern "C" fn __msi_lock_descs(dev: *mut device) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __msi_unlock_descs(dev: *mut device) {
-    void __msi_unlock_descs(struct device *dev)
-    {
 // Invalidate the index which was cached by the iterator
     dev.msi.data.__iter_idx = MSI_XA_MAX_INDEX;
     mutex_unlock(&dev.msi.data.mutex);
     }
     EXPORT_SYMBOL_GPL(__msi_unlock_descs);
-    static struct msi_desc *msi_find_desc(struct msi_device_data *md, unsigned int domid,
-    enum msi_desc_filter filter)
-    {
-    struct xarray *xa = &md.__domains[domid].store;
-    struct msi_desc *desc;
+#[no_mangle]
+pub unsafe extern "C" fn msi_find_desc(md: *mut msi_device_data, domid: c_uint, filter: msi_desc_filter) -> *mut c_void {
+    let mut xa = &md.__domains[domid].store;
+pub static mut desc: *mut c_void = core::ptr::null_mut();
     xa_for_each_start(xa, md.__iter_idx, desc, md.__iter_idx) {
-    if (msi_desc_match(desc, filter))
+    if (msi_desc_match(desc, filter)) {
     return desc;
+    }
     }
     md.__iter_idx = MSI_XA_MAX_INDEX;
     return core::ptr::null_mut();
@@ -397,12 +635,12 @@ pub unsafe extern "C" fn __msi_unlock_descs(dev: *mut device) {
 // Return: Pointer to the first MSI descriptor matching the search
 // criteria, NULL if none found.
 //
-    struct msi_desc *msi_domain_first_desc(struct device *dev, unsigned int domid,
-    enum msi_desc_filter filter)
-    {
-    struct msi_device_data *md = dev.msi.data;
-    if (WARN_ON_ONCE(!md || domid >= MSI_MAX_DEVICE_IRQDOMAINS))
+#[no_mangle]
+pub unsafe extern "C" fn msi_domain_first_desc(dev: *mut device, domid: c_uint, filter: msi_desc_filter) -> *mut c_void {
+    let mut md = dev.msi.data;
+    if (WARN_ON_ONCE!(!md || domid >= MSI_MAX_DEVICE_IRQDOMAINS)) {
     return core::ptr::null_mut();
+    }
     lockdep_assert_held(&md.mutex);
     md.__iter_idx = 0;
     return msi_find_desc(md, domid, filter);
@@ -422,16 +660,17 @@ pub unsafe extern "C" fn __msi_unlock_descs(dev: *mut device) {
 // Return: Pointer to the next MSI descriptor matching the search
 // criteria, NULL if none found.
 //
-    struct msi_desc *msi_next_desc(struct device *dev, unsigned int domid,
-    enum msi_desc_filter filter)
-    {
-    struct msi_device_data *md = dev.msi.data;
-    if (WARN_ON_ONCE(!md || domid >= MSI_MAX_DEVICE_IRQDOMAINS))
+#[no_mangle]
+pub unsafe extern "C" fn msi_next_desc(dev: *mut device, domid: c_uint, filter: msi_desc_filter) -> *mut c_void {
+    let mut md = dev.msi.data;
+    if (WARN_ON_ONCE!(!md || domid >= MSI_MAX_DEVICE_IRQDOMAINS)) {
     return core::ptr::null_mut();
+    }
     lockdep_assert_held(&md.mutex);
-    if (md.__iter_idx >= (unsigned long)MSI_MAX_INDEX)
+    if (md.__iter_idx >= (unsigned long)MSI_MAX_INDEX) {
     return core::ptr::null_mut();
-    md.__iter_idx++;
+    }
+    md.__iter_idx += 1;
     return msi_find_desc(md, domid, filter);
     }
     EXPORT_SYMBOL_GPL(msi_next_desc);
@@ -445,18 +684,19 @@ pub unsafe extern "C" fn __msi_unlock_descs(dev: *mut device) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn msi_domain_get_virq(dev: *mut device, domid: c_uint, index: c_uint) -> c_uint {
-    unsigned int msi_domain_get_virq(struct device *dev, unsigned int domid, unsigned int index)
-    {
-    struct msi_desc *desc;
-    let mut pcimsi: bool = false;
-    struct xarray *xa;
-    if (!dev.msi.data)
+pub static mut desc: *mut c_void = core::ptr::null_mut();
+pub static mut pcimsi: bool = false;
+pub static mut xa: *mut c_void = core::ptr::null_mut();
+    if (!dev.msi.data) {
     return 0;
-    if (WARN_ON_ONCE(index > MSI_MAX_INDEX || domid >= MSI_MAX_DEVICE_IRQDOMAINS))
+    }
+    if (WARN_ON_ONCE!(index > MSI_MAX_INDEX || domid >= MSI_MAX_DEVICE_IRQDOMAINS)) {
     return 0;
+    }
 // This check is only valid for the PCI default MSI domain
-    if (dev_is_pci(dev) && domid == MSI_DEFAULT_DOMAIN)
+    if (dev_is_pci(dev) && domid == MSI_DEFAULT_DOMAIN) {
     pcimsi = to_pci_dev(dev).msi_enabled;
+    }
     guard(msi_descs_lock)(dev);
     xa = &dev.msi.data.__domains[domid].store;
     desc = xa_load(xa, pcimsi ? 0 : index);
@@ -466,10 +706,12 @@ pub unsafe extern "C" fn msi_domain_get_virq(dev: *mut device, domid: c_uint, in
 // PCI-MSIX and platform MSI use a descriptor per
 // interrupt.
 //
-    if (!pcimsi)
+    if (!pcimsi) {
     return desc.irq;
-    if (index < desc.nvec_used)
+    }
+    if (index < desc.nvec_used) {
     return desc.irq + index;
+    }
     }
     return 0;
     }
@@ -478,66 +720,60 @@ pub unsafe extern "C" fn msi_domain_get_virq(dev: *mut device, domid: c_uint, in
     static struct attribute *msi_dev_attrs[] = {
     core::ptr::null_mut()
     };
-    static const struct attribute_group msi_irqs_group = {
-    .name	= "msi_irqs",
-    .attrs	= msi_dev_attrs,
-    };
+pub static mut attribute_group: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn msi_sysfs_create_group(dev: *mut device) -> c_int {
-    static inline int msi_sysfs_create_group(struct device *dev)
-    {
     return devm_device_add_group(dev, &msi_irqs_group);
     }
-    static ssize_t msi_mode_show(struct device *dev, struct device_attribute *attr,
-    char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn msi_mode_show(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char) -> ssize_t {
 // MSI vs. MSIX is per device not per interrupt
-    let mut is_msix: bool = dev_is_pci(dev) ? to_pci_dev(dev).msix_enabled : false;
+pub static mut is_msix: bool = false;
     return sysfs_emit(buf, "%s\n", is_msix ? "msix" : "msi");
     }
 #[no_mangle]
 unsafe extern "C" fn msi_sysfs_remove_desc(dev: *mut device, desc: *mut msi_desc) {
-    static void msi_sysfs_remove_desc(struct device *dev, struct msi_desc *desc)
-    {
-    struct device_attribute *attrs = desc.sysfs_attrs;
-    int i;
-    if (!attrs)
+    let mut attrs = desc.sysfs_attrs;
+    let mut i = 0;
+    if (!attrs) {
     return;
+    }
     desc.sysfs_attrs = core::ptr::null_mut();
-    for (i = 0; i < desc.nvec_used; i++) {
-    if (attrs[i].show)
+    while (i < desc.nvec_used) {
+    if (attrs[i].show) {
     sysfs_remove_file_from_group(&dev.kobj, &attrs[i].attr, msi_irqs_group.name);
+    }
     kfree(attrs[i].attr.name);
     }
     kfree(attrs);
     }
 #[no_mangle]
 unsafe extern "C" fn msi_sysfs_populate_desc(dev: *mut device, desc: *mut msi_desc) -> c_int {
-    static int msi_sysfs_populate_desc(struct device *dev, struct msi_desc *desc)
-    {
-    struct device_attribute *attrs;
-    int ret, i;
+pub static mut attrs: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    let mut i = 0;
     attrs = kzalloc_objs(*attrs, desc.nvec_used);
-    if (!attrs)
+    if (!attrs) {
     return -ENOMEM;
+    }
     desc.sysfs_attrs = attrs;
-    for (i = 0; i < desc.nvec_used; i++) {
+    while (i < desc.nvec_used) {
     sysfs_attr_init(&attrs[i].attr);
     attrs[i].attr.name = kasprintf(GFP_KERNEL, "%d", desc.irq + i);
     if (!attrs[i].attr.name) {
     ret = -ENOMEM;
-    goto fail;
+// goto;
     }
     attrs[i].attr.mode = 0444;
     attrs[i].show = msi_mode_show;
     ret = sysfs_add_file_to_group(&dev.kobj, &attrs[i].attr, msi_irqs_group.name);
     if (ret) {
     attrs[i].show = core::ptr::null_mut();
-    goto fail;
+// goto;
     }
     }
     return 0;
-    fail:
+// label;
     msi_sysfs_remove_desc(dev, desc);
     return ret;
     }
@@ -548,16 +784,16 @@ unsafe extern "C" fn msi_sysfs_populate_desc(dev: *mut device, desc: *mut msi_de
 //
 #[no_mangle]
 pub unsafe extern "C" fn msi_device_populate_sysfs(dev: *mut device) -> c_int {
-    int msi_device_populate_sysfs(struct device *dev)
-    {
-    struct msi_desc *desc;
-    int ret;
+pub static mut desc: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     msi_for_each_desc(desc, dev, MSI_DESC_ASSOCIATED) {
-    if (desc.sysfs_attrs)
+    if (desc.sysfs_attrs) {
     continue;
+    }
     ret = msi_sysfs_populate_desc(dev, desc);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     }
     return 0;
     }
@@ -568,36 +804,40 @@ pub unsafe extern "C" fn msi_device_populate_sysfs(dev: *mut device) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn msi_device_destroy_sysfs(dev: *mut device) {
-    void msi_device_destroy_sysfs(struct device *dev)
-    {
-    struct msi_desc *desc;
+pub static mut desc: *mut c_void = core::ptr::null_mut();
     msi_for_each_desc(desc, dev, MSI_DESC_ALL)
     msi_sysfs_remove_desc(dev, desc);
     }
 
-    static inline int msi_sysfs_create_group(struct device *dev) { return 0; }
-    static inline int msi_sysfs_populate_desc(struct device *dev, struct msi_desc *desc) { return 0; }
-    static inline void msi_sysfs_remove_desc(struct device *dev, struct msi_desc *desc) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: msi_sysfs_create_group
+pub unsafe extern "C" fn msi_sysfs_create_group_dup(dev: *mut device) -> c_int { return 0; }
+#[no_mangle]
+pub unsafe extern "C" fn msi_sysfs_populate_desc(dev: *mut device, desc: *mut msi_desc) -> c_int { return 0; }
+#[no_mangle]
+pub unsafe extern "C" fn msi_sysfs_remove_desc(dev: *mut device, desc: *mut msi_desc) { }
 
-    static struct irq_domain *msi_get_device_domain(struct device *dev, unsigned int domid)
-    {
-    struct irq_domain *domain;
+#[no_mangle]
+pub unsafe extern "C" fn msi_get_device_domain(dev: *mut device, domid: c_uint) -> *mut c_void {
+pub static mut domain: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&dev.msi.data.mutex);
-    if (WARN_ON_ONCE(domid >= MSI_MAX_DEVICE_IRQDOMAINS))
+    if (WARN_ON_ONCE!(domid >= MSI_MAX_DEVICE_IRQDOMAINS)) {
     return core::ptr::null_mut();
+    }
     domain = dev.msi.data.__domains[domid].domain;
-    if (!domain)
+    if (!domain) {
     return core::ptr::null_mut();
-    if (WARN_ON_ONCE(irq_domain_is_msi_parent(domain)))
+    }
+    if (WARN_ON_ONCE!(irq_domain_is_msi_parent(domain))) {
     return core::ptr::null_mut();
+    }
     return domain;
     }
 #[no_mangle]
 unsafe extern "C" fn msi_domain_get_hwsize(dev: *mut device, domid: c_uint) -> c_uint {
-    static unsigned int msi_domain_get_hwsize(struct device *dev, unsigned int domid)
-    {
-    struct msi_domain_info *info;
-    struct irq_domain *domain;
+pub static mut info: *mut c_void = core::ptr::null_mut();
+pub static mut domain: *mut c_void = core::ptr::null_mut();
     domain = msi_get_device_domain(dev, domid);
     if (domain) {
     info = domain.host_data;
@@ -606,21 +846,18 @@ unsafe extern "C" fn msi_domain_get_hwsize(dev: *mut device, domid: c_uint) -> c
 // No domain, default to MSI_XA_DOMAIN_SIZE
     return MSI_XA_DOMAIN_SIZE;
     }
-    static inline void irq_chip_write_msi_msg(struct irq_data *data,
-    struct msi_msg *msg)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn irq_chip_write_msi_msg(data: *mut irq_data, msg: *mut msi_msg) {
     data.chip.irq_write_msi_msg(data, msg);
     }
 #[no_mangle]
 unsafe extern "C" fn msi_check_level(domain: *mut irq_domain, msg: *mut msi_msg) {
-    static void msi_check_level(struct irq_domain *domain, struct msi_msg *msg)
-    {
-    struct msi_domain_info *info = domain.host_data;
+    let mut info = domain.host_data;
 //
 // If the MSI provider has messed with the second message and
 // not advertized that it is level-capable, signal the breakage.
 //
-    WARN_ON(!((info.flags & MSI_FLAG_LEVEL_CAPABLE) &&
+    WARN_ON!(!((info.flags & MSI_FLAG_LEVEL_CAPABLE) &&
     (info.chip.flags & IRQCHIP_SUPPORTS_LEVEL_MSI)) &&
     (msg[1].address_lo || msg[1].address_hi || msg[1].data));
     }
@@ -635,56 +872,56 @@ unsafe extern "C" fn msi_check_level(domain: *mut irq_domain, msg: *mut msi_msg)
 //
 // Return: IRQ_SET_MASK_* result code
 //
-    int msi_domain_set_affinity(struct irq_data *irq_data,
-    const struct cpumask *mask, bool force)
-    {
-    struct irq_data *parent = irq_data.parent_data;
-    struct msi_msg msg[2] = { [1] = { }, };
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn msi_domain_set_affinity(irq_data: *mut irq_data, mask: *mut cpumask, force: bool) -> c_int {
+    let mut parent = irq_data.parent_data;
+pub static mut msi_msg: usize = 0;
+    let mut ret = 0;
     ret = parent.chip.irq_set_affinity(parent, mask, force);
     if (ret >= 0 && ret != IRQ_SET_MASK_OK_DONE) {
-    BUG_ON(irq_chip_compose_msi_msg(irq_data, msg));
+    BUG_ON!(irq_chip_compose_msi_msg(irq_data, msg));
     msi_check_level(irq_data.domain, msg);
     irq_chip_write_msi_msg(irq_data, msg);
     }
     return ret;
     }
-    static int msi_domain_activate(struct irq_domain *domain,
-    struct irq_data *irq_data, bool early)
-    {
-    struct msi_msg msg[2] = { [1] = { }, };
-    BUG_ON(irq_chip_compose_msi_msg(irq_data, msg));
+#[no_mangle]
+pub unsafe extern "C" fn msi_domain_activate(domain: *mut irq_domain, irq_data: *mut irq_data, early: bool) -> c_int {
+pub static mut msi_msg: usize = 0;
+    BUG_ON!(irq_chip_compose_msi_msg(irq_data, msg));
     msi_check_level(irq_data.domain, msg);
     irq_chip_write_msi_msg(irq_data, msg);
     return 0;
     }
-    static void msi_domain_deactivate(struct irq_domain *domain,
-    struct irq_data *irq_data)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn msi_domain_deactivate(domain: *mut irq_domain, irq_data: *mut irq_data) {
     struct msi_msg msg[2];
-    memset(msg, 0, sizeof(msg));
+    memset(msg, 0, sizeof!(msg));
     irq_chip_write_msi_msg(irq_data, msg);
     }
-    static int msi_domain_alloc(struct irq_domain *domain, unsigned int virq,
-    unsigned int nr_irqs, void *arg)
-    {
-    struct msi_domain_info *info = domain.host_data;
-    struct msi_domain_ops *ops = info.ops;
-    let mut hwirq: irq_hw_number_t = ops.get_hwirq(info, arg);
-    int i, ret;
-    if (irq_resolve_mapping(domain, hwirq))
+#[no_mangle]
+pub unsafe extern "C" fn msi_domain_alloc(domain: *mut irq_domain, virq: c_uint, nr_irqs: c_uint, arg: *mut c_void) -> c_int {
+    let mut info = domain.host_data;
+    let mut ops = info.ops;
+pub static mut hwirq: irq_hw_number_t = 0;
+    let mut i = 0;
+    let mut ret = 0;
+    if (irq_resolve_mapping(domain, hwirq)) {
     return -EEXIST;
+    }
     if (domain.parent) {
     ret = irq_domain_alloc_irqs_parent(domain, virq, nr_irqs, arg);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
     }
-    for (i = 0; i < nr_irqs; i++) {
+    }
+    while (i < nr_irqs) {
     ret = ops.msi_init(domain, info, virq + i, hwirq + i, arg);
     if (ret < 0) {
     if (ops.msi_free) {
-    for (i--; i >= 0; i--)
+    for (i -= 1; i >= 0; i--) {
     ops.msi_free(domain, info, virq + i);
+    }
     }
     irq_domain_free_irqs_top(domain, virq, nr_irqs);
     return ret;
@@ -692,149 +929,132 @@ unsafe extern "C" fn msi_check_level(domain: *mut irq_domain, msg: *mut msi_msg)
     }
     return 0;
     }
-    static void msi_domain_free(struct irq_domain *domain, unsigned int virq,
-    unsigned int nr_irqs)
-    {
-    struct msi_domain_info *info = domain.host_data;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn msi_domain_free(domain: *mut irq_domain, virq: c_uint, nr_irqs: c_uint) {
+    let mut info = domain.host_data;
+    let mut i = 0;
     if (info.ops.msi_free) {
-    for (i = 0; i < nr_irqs; i++)
+    for (i = 0; i < nr_irqs; i++) {
     info.ops.msi_free(domain, info, virq + i);
+    }
     }
     irq_domain_free_irqs_top(domain, virq, nr_irqs);
     }
-    static int msi_domain_translate(struct irq_domain *domain, struct irq_fwspec *fwspec,
-    irq_hw_number_t *hwirq, unsigned int *type)
-    {
-    struct msi_domain_info *info = domain.host_data;
+#[no_mangle]
+pub unsafe extern "C" fn msi_domain_translate(domain: *mut irq_domain, fwspec: *mut irq_fwspec, hwirq: *mut irq_hw_number_t, type: *mut c_uint) -> c_int {
+    let mut info = domain.host_data;
 //
 // This will catch allocations through the regular irqdomain path except
 // for MSI domains which really support this, e.g. MBIGEN.
 //
-    if (!info.ops.msi_translate)
+    if (!info.ops.msi_translate) {
     return -ENOTSUPP;
+    }
     return info.ops.msi_translate(domain, fwspec, hwirq, type);
     }
 
-    static void msi_domain_debug_show(struct seq_file *m, struct irq_domain *d,
-    struct irq_data *irqd, int ind)
-    {
-    struct msi_desc *desc = irqd ? irq_data_get_msi_desc(irqd) : core::ptr::null_mut();
-    if (!desc)
+#[no_mangle]
+pub unsafe extern "C" fn msi_domain_debug_show(m: *mut seq_file, d: *mut irq_domain, irqd: *mut irq_data, ind: c_int) {
+    let mut desc = irqd ? irq_data_get_msi_desc(irqd) : core::ptr::null_mut();
+    if (!desc) {
     return;
+    }
     seq_printf(m, "\n%*saddress_hi: 0x%08x", ind + 1, "", desc.msg.address_hi);
     seq_printf(m, "\n%*saddress_lo: 0x%08x", ind + 1, "", desc.msg.address_lo);
     seq_printf(m, "\n%*smsg_data:   0x%08x\n", ind + 1, "", desc.msg.data);
     }
 
-    static const struct irq_domain_ops msi_domain_ops = {
-    .alloc		= msi_domain_alloc,
-    .free		= msi_domain_free,
-    .activate	= msi_domain_activate,
-    .deactivate	= msi_domain_deactivate,
-    .translate	= msi_domain_translate,
-
-    .debug_show     = msi_domain_debug_show,
-
-    };
-    static irq_hw_number_t msi_domain_ops_get_hwirq(struct msi_domain_info *info,
+pub static mut irq_domain_ops: usize = 0;
+    static irq_hw_number_t msi_domain_ops_get_hwirq(msi_domain_info *info,
     msi_alloc_info_t *arg)
     {
     return arg.hwirq;
     }
-    static int msi_domain_ops_prepare(struct irq_domain *domain, struct device *dev,
-    int nvec, msi_alloc_info_t *arg)
-    {
-    memset(arg, 0, sizeof(*arg));
+#[no_mangle]
+pub unsafe extern "C" fn msi_domain_ops_prepare(domain: *mut irq_domain, dev: *mut device, nvec: c_int, arg: *mut msi_alloc_info_t) -> c_int {
+    memset(arg, 0, sizeof!(*arg));
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn msi_domain_ops_teardown(domain: *mut irq_domain, arg: *mut msi_alloc_info_t) {
-    static void msi_domain_ops_teardown(struct irq_domain *domain, msi_alloc_info_t *arg)
-    {
     }
-    static void msi_domain_ops_set_desc(msi_alloc_info_t *arg,
-    struct msi_desc *desc)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn msi_domain_ops_set_desc(arg: *mut msi_alloc_info_t, desc: *mut msi_desc) {
     arg.desc = desc;
     }
-    static int msi_domain_ops_init(struct irq_domain *domain,
-    struct msi_domain_info *info,
-    unsigned int virq, irq_hw_number_t hwirq,
-    msi_alloc_info_t *arg)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn msi_domain_ops_init(domain: *mut irq_domain, info: *mut msi_domain_info, virq: c_uint, hwirq: irq_hw_number_t, arg: *mut msi_alloc_info_t) -> c_int {
     irq_domain_set_hwirq_and_chip(domain, virq, hwirq, info.chip,
     info.chip_data);
     if (info.handler && info.handler_name) {
     __irq_set_handler(virq, info.handler, 0, info.handler_name);
-    if (info.handler_data)
+    if (info.handler_data) {
     irq_set_handler_data(virq, info.handler_data);
+    }
     }
     return 0;
     }
-    static struct msi_domain_ops msi_domain_ops_default = {
-    .get_hwirq		= msi_domain_ops_get_hwirq,
-    .msi_init		= msi_domain_ops_init,
-    .msi_prepare		= msi_domain_ops_prepare,
-    .msi_teardown		= msi_domain_ops_teardown,
-    .set_desc		= msi_domain_ops_set_desc,
-    };
+pub static mut msi_domain_ops: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn msi_domain_update_dom_ops(info: *mut msi_domain_info) {
-    static void msi_domain_update_dom_ops(struct msi_domain_info *info)
-    {
-    struct msi_domain_ops *ops = info.ops;
+    let mut ops = info.ops;
     if (ops == core::ptr::null_mut()) {
     info.ops = &msi_domain_ops_default;
     return;
     }
-    if (!(info.flags & MSI_FLAG_USE_DEF_DOM_OPS))
+    if (!(info.flags & MSI_FLAG_USE_DEF_DOM_OPS)) {
     return;
-    if (ops.get_hwirq == core::ptr::null_mut())
+    }
+    if (ops.get_hwirq == core::ptr::null_mut()) {
     ops.get_hwirq = msi_domain_ops_default.get_hwirq;
-    if (ops.msi_init == core::ptr::null_mut())
+    }
+    if (ops.msi_init == core::ptr::null_mut()) {
     ops.msi_init = msi_domain_ops_default.msi_init;
-    if (ops.msi_prepare == core::ptr::null_mut())
+    }
+    if (ops.msi_prepare == core::ptr::null_mut()) {
     ops.msi_prepare = msi_domain_ops_default.msi_prepare;
-    if (ops.msi_teardown == core::ptr::null_mut())
+    }
+    if (ops.msi_teardown == core::ptr::null_mut()) {
     ops.msi_teardown = msi_domain_ops_default.msi_teardown;
-    if (ops.set_desc == core::ptr::null_mut())
+    }
+    if (ops.set_desc == core::ptr::null_mut()) {
     ops.set_desc = msi_domain_ops_default.set_desc;
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn msi_domain_update_chip_ops(info: *mut msi_domain_info) {
-    static void msi_domain_update_chip_ops(struct msi_domain_info *info)
-    {
-    struct irq_chip *chip = info.chip;
-    BUG_ON(!chip || !chip.irq_mask || !chip.irq_unmask);
-    if (!chip.irq_set_affinity && !(info.flags & MSI_FLAG_NO_AFFINITY))
+    let mut chip = info.chip;
+    BUG_ON!(!chip || !chip.irq_mask || !chip.irq_unmask);
+    if (!chip.irq_set_affinity && !(info.flags & MSI_FLAG_NO_AFFINITY)) {
     chip.irq_set_affinity = msi_domain_set_affinity;
     }
-    static struct irq_domain *__msi_create_irq_domain(struct fwnode_handle *fwnode,
-    struct msi_domain_info *info,
-    unsigned int flags,
-    struct irq_domain *parent)
-    {
-    struct irq_domain *domain;
-    if (info.hwsize > MSI_XA_DOMAIN_SIZE)
+    }
+#[no_mangle]
+pub unsafe extern "C" fn __msi_create_irq_domain(fwnode: *mut fwnode_handle, info: *mut msi_domain_info, flags: c_uint, parent: *mut irq_domain) -> *mut c_void {
+pub static mut domain: *mut c_void = core::ptr::null_mut();
+    if (info.hwsize > MSI_XA_DOMAIN_SIZE) {
     return core::ptr::null_mut();
+    }
 //
 // Hardware size 0 is valid for backwards compatibility and for
 // domains which are not backed by a hardware table. Grant the
 // maximum index space.
 //
-    if (!info.hwsize)
+    if (!info.hwsize) {
     info.hwsize = MSI_XA_DOMAIN_SIZE;
+    }
     msi_domain_update_dom_ops(info);
-    if (info.flags & MSI_FLAG_USE_DEF_CHIP_OPS)
+    if (info.flags & MSI_FLAG_USE_DEF_CHIP_OPS) {
     msi_domain_update_chip_ops(info);
+    }
     domain = irq_domain_create_hierarchy(parent, flags | IRQ_DOMAIN_FLAG_MSI, 0,
     fwnode, &msi_domain_ops, info);
     if (domain) {
     irq_domain_update_bus_token(domain, info.bus_token);
     domain.dev = info.dev;
-    if (info.flags & MSI_FLAG_PARENT_PM_DEV)
+    if (info.flags & MSI_FLAG_PARENT_PM_DEV) {
     domain.pm_dev = parent.pm_dev;
+    }
     }
     return domain;
     }
@@ -846,10 +1066,8 @@ unsafe extern "C" fn msi_domain_update_chip_ops(info: *mut msi_domain_info) {
 //
 // Return: pointer to the created &struct irq_domain or %NULL on failure
 //
-    struct irq_domain *msi_create_irq_domain(struct fwnode_handle *fwnode,
-    struct msi_domain_info *info,
-    struct irq_domain *parent)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn msi_create_irq_domain(fwnode: *mut fwnode_handle, info: *mut msi_domain_info, parent: *mut irq_domain) -> *mut c_void {
     return __msi_create_irq_domain(fwnode, info, 0, parent);
     }
 //
@@ -859,17 +1077,17 @@ unsafe extern "C" fn msi_domain_update_chip_ops(info: *mut msi_domain_info) {
 //
 // Return: pointer to the created &struct irq_domain or %NULL on failure
 //
-    struct irq_domain *msi_create_parent_irq_domain(struct irq_domain_info *info,
-    const struct msi_parent_ops *msi_parent_ops)
-    {
-    struct irq_domain *d;
+#[no_mangle]
+pub unsafe extern "C" fn msi_create_parent_irq_domain(info: *mut irq_domain_info, msi_parent_ops: *mut msi_parent_ops) -> *mut c_void {
+pub static mut d: *mut c_void = core::ptr::null_mut();
     info.hwirq_max		= max(info.hwirq_max, info.size);
     info.size		= info.hwirq_max;
     info.domain_flags	|= IRQ_DOMAIN_FLAG_MSI_PARENT;
     info.bus_token		= msi_parent_ops.bus_select_token;
     d = irq_domain_instantiate(info);
-    if (IS_ERR(d))
+    if (IS_ERR(d)) {
     return core::ptr::null_mut();
+    }
     d.msi_parent_ops = msi_parent_ops;
     return d;
     }
@@ -901,14 +1119,13 @@ unsafe extern "C" fn msi_domain_update_chip_ops(info: *mut msi_domain_info) {
 // One solution is to let the root domain handle the initialization that's
 // why there is the @domain and the @msi_parent_domain pointer.
 //
-    bool msi_parent_init_dev_msi_info(struct device *dev, struct irq_domain *domain,
-    struct irq_domain *msi_parent_domain,
-    struct msi_domain_info *msi_child_info)
-    {
-    struct irq_domain *parent = domain.parent;
-    if (WARN_ON_ONCE(!parent || !parent.msi_parent_ops ||
-    !parent.msi_parent_ops.init_dev_msi_info))
+#[no_mangle]
+pub unsafe extern "C" fn msi_parent_init_dev_msi_info(dev: *mut device, domain: *mut irq_domain, msi_parent_domain: *mut irq_domain, msi_child_info: *mut msi_domain_info) -> bool {
+    let mut parent = domain.parent;
+    if (WARN_ON_ONCE!(!parent || !parent.msi_parent_ops ||
+    !parent.msi_parent_ops.init_dev_msi_info)) {
     return false;
+    }
     return parent.msi_parent_ops.init_dev_msi_info(dev, parent, msi_parent_domain,
     msi_child_info);
     }
@@ -959,22 +1176,22 @@ unsafe extern "C" fn msi_domain_update_chip_ops(info: *mut msi_domain_info) {
 // in the context of @dev::msi::data freeing, but it can also be
 // independently removed via @msi_remove_device_irq_domain().
 //
-    bool msi_create_device_irq_domain(struct device *dev, unsigned int domid,
-    const struct msi_domain_template *template,
-    unsigned int hwsize, void *domain_data,
-    void *chip_data)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn msi_create_device_irq_domain(dev: *mut device, domid: c_uint, template: *mut msi_domain_template, hwsize: c_uint, domain_data: *mut c_void, chip_data: *mut c_void) -> bool {
     struct irq_domain *domain, *parent = dev.msi.domain;
-    const struct msi_parent_ops *pops;
-    struct fwnode_handle *fwnode;
-    if (!irq_domain_is_msi_parent(parent))
+pub static mut pops: *mut c_void = core::ptr::null_mut();
+pub static mut fwnode: *mut c_void = core::ptr::null_mut();
+    if (!irq_domain_is_msi_parent(parent)) {
     return false;
-    if (domid >= MSI_MAX_DEVICE_IRQDOMAINS)
+    }
+    if (domid >= MSI_MAX_DEVICE_IRQDOMAINS) {
     return false;
+    }
     struct msi_domain_template *bundle __free(kfree) =
-    kmemdup(template, sizeof(*bundle), GFP_KERNEL);
-    if (!bundle)
+    kmemdup(template, sizeof!(*bundle), GFP_KERNEL);
+    if (!bundle) {
     return false;
+    }
     bundle.info.hwsize = hwsize;
     bundle.info.chip = &bundle.chip;
     bundle.info.ops = &bundle.ops;
@@ -983,7 +1200,7 @@ unsafe extern "C" fn msi_domain_update_chip_ops(info: *mut msi_domain_info) {
     bundle.info.alloc_data = &bundle.alloc_info;
     bundle.info.dev = dev;
     pops = parent.msi_parent_ops;
-    snprintf(bundle.name, sizeof(bundle.name), "%s%s-%s",
+    snprintf(bundle.name, sizeof!(bundle.name), "%s%s-%s",
     pops.prefix ? : "", bundle.chip.name, dev_name(dev));
     bundle.chip.name = bundle.name;
 //
@@ -995,22 +1212,29 @@ unsafe extern "C" fn msi_domain_update_chip_ops(info: *mut msi_domain_info) {
 // looked up and always handled in the context of the device.
 //
     struct fwnode_handle *fwnode_alloced __free(irq_domain_free_fwnode) = core::ptr::null_mut();
-    if (!(bundle.info.flags & MSI_FLAG_USE_DEV_FWNODE))
+    if (!(bundle.info.flags & MSI_FLAG_USE_DEV_FWNODE)) {
     fwnode = fwnode_alloced = irq_domain_alloc_named_fwnode(bundle.name);
-    else
+    }
+    else {
     fwnode = dev.fwnode;
-    if (!fwnode)
+    }
+    if (!fwnode) {
     return false;
-    if (msi_setup_device_data(dev))
+    }
+    if (msi_setup_device_data(dev)) {
     return false;
+    }
     guard(msi_descs_lock)(dev);
-    if (WARN_ON_ONCE(msi_get_device_domain(dev, domid)))
+    if (WARN_ON_ONCE!(msi_get_device_domain(dev, domid))) {
     return false;
-    if (!pops.init_dev_msi_info(dev, parent, parent, &bundle.info))
+    }
+    if (!pops.init_dev_msi_info(dev, parent, parent, &bundle.info)) {
     return false;
+    }
     domain = __msi_create_irq_domain(fwnode, &bundle.info, IRQ_DOMAIN_FLAG_MSI_DEVICE, parent);
-    if (!domain)
+    if (!domain) {
     return false;
+    }
     dev.msi.data.__domains[domid].domain = domain;
     if (msi_domain_prepare_irqs(domain, dev, hwsize, &bundle.alloc_info)) {
     dev.msi.data.__domains[domid].domain = core::ptr::null_mut();
@@ -1029,23 +1253,23 @@ unsafe extern "C" fn msi_domain_update_chip_ops(info: *mut msi_domain_info) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn msi_remove_device_irq_domain(dev: *mut device, domid: c_uint) {
-    void msi_remove_device_irq_domain(struct device *dev, unsigned int domid)
-    {
-    struct fwnode_handle *fwnode = core::ptr::null_mut();
-    struct msi_domain_info *info;
-    struct irq_domain *domain;
+    let mut fwnode = core::ptr::null_mut();
+pub static mut info: *mut c_void = core::ptr::null_mut();
+pub static mut domain: *mut c_void = core::ptr::null_mut();
     guard(msi_descs_lock)(dev);
     domain = msi_get_device_domain(dev, domid);
-    if (!domain || !irq_domain_is_msi_device(domain))
+    if (!domain || !irq_domain_is_msi_device(domain)) {
     return;
+    }
     dev.msi.data.__domains[domid].domain = core::ptr::null_mut();
     info = domain.host_data;
     info.ops.msi_teardown(domain, info.alloc_data);
-    if (irq_domain_is_msi_device(domain))
+    if (irq_domain_is_msi_device(domain)) {
     fwnode = domain.fwnode;
+    }
     irq_domain_remove(domain);
     irq_domain_free_fwnode(fwnode);
-    kfree(container_of(info, struct msi_domain_template, info));
+    kfree(container_of!(info, msi_domain_template, info));
     }
 //
 // msi_match_device_irq_domain - Match a device irq domain against a bus token
@@ -1055,11 +1279,10 @@ pub unsafe extern "C" fn msi_remove_device_irq_domain(dev: *mut device, domid: c
 //
 // Return: True if device domain exists and bus tokens match.
 //
-    bool msi_match_device_irq_domain(struct device *dev, unsigned int domid,
-    enum irq_domain_bus_token bus_token)
-    {
-    struct msi_domain_info *info;
-    struct irq_domain *domain;
+#[no_mangle]
+pub unsafe extern "C" fn msi_match_device_irq_domain(dev: *mut device, domid: c_uint, bus_token: irq_domain_bus_token) -> bool {
+pub static mut info: *mut c_void = core::ptr::null_mut();
+pub static mut domain: *mut c_void = core::ptr::null_mut();
     guard(msi_descs_lock)(dev);
     domain = msi_get_device_domain(dev, domid);
     if (domain && irq_domain_is_msi_device(domain)) {
@@ -1068,11 +1291,10 @@ pub unsafe extern "C" fn msi_remove_device_irq_domain(dev: *mut device, domid: c
     }
     return false;
     }
-    static int msi_domain_prepare_irqs(struct irq_domain *domain, struct device *dev,
-    int nvec, msi_alloc_info_t *arg)
-    {
-    struct msi_domain_info *info = domain.host_data;
-    struct msi_domain_ops *ops = info.ops;
+#[no_mangle]
+pub unsafe extern "C" fn msi_domain_prepare_irqs(domain: *mut irq_domain, dev: *mut device, nvec: c_int, arg: *mut msi_alloc_info_t) -> c_int {
+    let mut info = domain.host_data;
+    let mut ops = info.ops;
     return ops.msi_prepare(domain, dev, nvec, arg);
     }
 //
@@ -1086,24 +1308,29 @@ pub unsafe extern "C" fn msi_remove_device_irq_domain(dev: *mut device, domid: c
 // logic will prevent the spurious interrupt and reservation mode can be
 // used. For now reservation mode is restricted to PCI/MSI.
 //
-    static bool msi_check_reservation_mode(struct irq_domain *domain,
-    struct msi_domain_info *info,
-    struct device *dev)
-    {
-    struct msi_desc *desc;
-    switch(domain.bus_token) {
-    case DOMAIN_BUS_PCI_MSI:
-    case DOMAIN_BUS_PCI_DEVICE_MSI:
-    case DOMAIN_BUS_PCI_DEVICE_MSIX:
-    case DOMAIN_BUS_VMD_MSI:
-    break;
-    default:
+#[no_mangle]
+pub unsafe extern "C" fn msi_check_reservation_mode(domain: *mut irq_domain, info: *mut msi_domain_info, dev: *mut device) -> bool {
+pub static mut desc: *mut c_void = core::ptr::null_mut();
+    match (domain.bus_token) {
+    DOMAIN_BUS_PCI_MSI => {
+    }
+    DOMAIN_BUS_PCI_DEVICE_MSI => {
+    }
+    DOMAIN_BUS_PCI_DEVICE_MSIX => {
+    }
+    DOMAIN_BUS_VMD_MSI => {
+    // break;
+    }
+    _ => {
     return false;
     }
-    if (!(info.flags & MSI_FLAG_MUST_REACTIVATE))
+    }
+    if (!(info.flags & MSI_FLAG_MUST_REACTIVATE)) {
     return false;
-    if (info.flags & MSI_FLAG_NO_MASK)
+    }
+    if (info.flags & MSI_FLAG_NO_MASK) {
     return false;
+    }
 //
 // Checking the first MSI descriptor is sufficient. MSIX supports
 // masking and MSI does so when the can_mask attribute is set.
@@ -1111,23 +1338,29 @@ pub unsafe extern "C" fn msi_remove_device_irq_domain(dev: *mut device, domid: c
     desc = msi_first_desc(dev, MSI_DESC_ALL);
     return desc.pci.msi_attrib.is_msix || desc.pci.msi_attrib.can_mask;
     }
-    static int msi_handle_pci_fail(struct irq_domain *domain, struct msi_desc *desc,
-    int allocated)
-    {
-    switch(domain.bus_token) {
-    case DOMAIN_BUS_PCI_MSI:
-    case DOMAIN_BUS_PCI_DEVICE_MSI:
-    case DOMAIN_BUS_PCI_DEVICE_MSIX:
-    case DOMAIN_BUS_VMD_MSI:
-    if (IS_ENABLED(CONFIG_PCI_MSI))
-    break;
+#[no_mangle]
+pub unsafe extern "C" fn msi_handle_pci_fail(domain: *mut irq_domain, desc: *mut msi_desc, allocated: c_int) -> c_int {
+    match (domain.bus_token) {
+    DOMAIN_BUS_PCI_MSI => {
+    }
+    DOMAIN_BUS_PCI_DEVICE_MSI => {
+    }
+    DOMAIN_BUS_PCI_DEVICE_MSIX => {
+    }
+    DOMAIN_BUS_VMD_MSI => {
+    if (IS_ENABLED!(CONFIG_PCI_MSI)) {
+    // break;
+    }
     fallthrough;
-    default:
+    }
+    _ => {
     return -ENOSPC;
     }
+    }
 // Let a failed PCI multi MSI allocation retry
-    if (desc.nvec_used > 1)
+    if (desc.nvec_used > 1) {
     return 1;
+    }
 // If there was a successful allocation let the caller know
     return allocated ? allocated : -ENOSPC;
     }
@@ -1135,10 +1368,8 @@ pub const VIRQ_CAN_RESERVE: c_uint = 0x01;
 pub const VIRQ_ACTIVATE: c_uint = 0x02;
 #[no_mangle]
 unsafe extern "C" fn msi_init_virq(domain: *mut irq_domain, virq: c_int, vflags: c_uint) -> c_int {
-    static int msi_init_virq(struct irq_domain *domain, int virq, unsigned int vflags)
-    {
-    struct irq_data *irqd = irq_domain_get_irq_data(domain, virq);
-    int ret;
+    let mut irqd = irq_domain_get_irq_data(domain, virq);
+    let mut ret = 0;
     if (!(vflags & VIRQ_CAN_RESERVE)) {
     irqd_clr_can_reserve(irqd);
 //
@@ -1156,128 +1387,141 @@ unsafe extern "C" fn msi_init_virq(domain: *mut irq_domain, virq: c_int, vflags:
     return 0;
     }
     }
-    if (!(vflags & VIRQ_ACTIVATE))
+    if (!(vflags & VIRQ_ACTIVATE)) {
     return 0;
+    }
     ret = irq_domain_activate_irq(irqd, vflags & VIRQ_CAN_RESERVE);
-    if (ret)
+    if (ret) {
     return ret;
+    }
 //
 // If the interrupt uses reservation mode, clear the activated bit
 // so request_irq() will assign the final vector.
 //
-    if (vflags & VIRQ_CAN_RESERVE)
+    if (vflags & VIRQ_CAN_RESERVE) {
     irqd_clr_activated(irqd);
+    }
     return 0;
     }
-    static int populate_alloc_info(struct irq_domain *domain, struct device *dev,
-    unsigned int nirqs, msi_alloc_info_t *arg)
-    {
-    struct msi_domain_info *info = domain.host_data;
+#[no_mangle]
+pub unsafe extern "C" fn populate_alloc_info(domain: *mut irq_domain, dev: *mut device, nirqs: c_uint, arg: *mut msi_alloc_info_t) -> c_int {
+    let mut info = domain.host_data;
 //
 // If the caller has provided a template alloc info, use that. Once
 // all users of msi_create_irq_domain() have been eliminated, this
 // should be the only source of allocation information, and the
 // prepare call below should be finally removed.
 //
-    if (!info.alloc_data)
+    if (!info.alloc_data) {
     return msi_domain_prepare_irqs(domain, dev, nirqs, arg);
+    }
 // arg = *info->alloc_data;
     return 0;
     }
-    static int __msi_domain_alloc_irqs(struct device *dev, struct irq_domain *domain,
-    struct msi_ctrl *ctrl)
-    {
-    struct xarray *xa = &dev.msi.data.__domains[ctrl.domid].store;
-    struct msi_domain_info *info = domain.host_data;
-    struct msi_domain_ops *ops = info.ops;
-    let mut vflags: c_uint = 0, allocated = 0;
-    let mut arg: msi_alloc_info_t = { };
-    struct msi_desc *desc;
-    unsigned long idx;
-    int i, ret, virq;
+#[no_mangle]
+pub unsafe extern "C" fn __msi_domain_alloc_irqs(dev: *mut device, domain: *mut irq_domain, ctrl: *mut msi_ctrl) -> c_int {
+    let mut xa = &dev.msi.data.__domains[ctrl.domid].store;
+    let mut info = domain.host_data;
+    let mut ops = info.ops;
+pub static mut vflags: c_uint = 0;
+pub static mut arg: msi_alloc_info_t = 0;
+pub static mut desc: *mut c_void = core::ptr::null_mut();
+    let mut idx = 0;
+    let mut i = 0;
+    let mut ret = 0;
+    let mut virq = 0;
     ret = populate_alloc_info(domain, dev, ctrl.nirqs, &arg);
-    if (ret)
+    if (ret) {
     return ret;
+    }
 //
 // This flag is set by the PCI layer as we need to activate
 // the MSI entries before the PCI layer enables MSI in the
 // card. Otherwise the card latches a random msi message.
 //
-    if (info.flags & MSI_FLAG_ACTIVATE_EARLY)
+    if (info.flags & MSI_FLAG_ACTIVATE_EARLY) {
     vflags |= VIRQ_ACTIVATE;
+    }
 //
 // Interrupt can use a reserved vector and will not occupy
 // a real device vector until the interrupt is requested.
 //
-    if (msi_check_reservation_mode(domain, info, dev))
+    if (msi_check_reservation_mode(domain, info, dev)) {
     vflags |= VIRQ_CAN_RESERVE;
+    }
     xa_for_each_range(xa, idx, desc, ctrl.first, ctrl.last) {
-    if (!msi_desc_match(desc, MSI_DESC_NOTASSOCIATED))
+    if (!msi_desc_match(desc, MSI_DESC_NOTASSOCIATED)) {
     continue;
+    }
 // This should return -ECONFUSED...
-    if (WARN_ON_ONCE(allocated >= ctrl.nirqs))
+    if (WARN_ON_ONCE!(allocated >= ctrl.nirqs)) {
     return -EINVAL;
-    if (ops.prepare_desc)
+    }
+    if (ops.prepare_desc) {
     ops.prepare_desc(domain, &arg, desc);
+    }
     ops.set_desc(&arg, desc);
     virq = __irq_domain_alloc_irqs(domain, -1, desc.nvec_used,
     dev_to_node(dev), &arg, false,
     desc.affinity);
-    if (virq < 0)
+    if (virq < 0) {
     return msi_handle_pci_fail(domain, desc, allocated);
-    for (i = 0; i < desc.nvec_used; i++) {
+    }
+    while (i < desc.nvec_used) {
     irq_set_msi_desc_off(virq, i, desc);
     irq_debugfs_copy_devname(virq + i, dev);
     ret = msi_init_virq(domain, virq + i, vflags);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     }
     if (info.flags & MSI_FLAG_DEV_SYSFS) {
     ret = msi_sysfs_populate_desc(dev, desc);
-    if (ret)
+    if (ret) {
     return ret;
     }
-    allocated++;
+    }
+    allocated += 1;
     }
     return 0;
     }
-    static int msi_domain_alloc_simple_msi_descs(struct device *dev,
-    struct msi_domain_info *info,
-    struct msi_ctrl *ctrl)
-    {
-    if (!(info.flags & MSI_FLAG_ALLOC_SIMPLE_MSI_DESCS))
+#[no_mangle]
+pub unsafe extern "C" fn msi_domain_alloc_simple_msi_descs(dev: *mut device, info: *mut msi_domain_info, ctrl: *mut msi_ctrl) -> c_int {
+    if (!(info.flags & MSI_FLAG_ALLOC_SIMPLE_MSI_DESCS)) {
     return 0;
+    }
     return msi_domain_add_simple_msi_descs(dev, ctrl);
     }
 #[no_mangle]
 unsafe extern "C" fn __msi_domain_alloc_locked(dev: *mut device, ctrl: *mut msi_ctrl) -> c_int {
-    static int __msi_domain_alloc_locked(struct device *dev, struct msi_ctrl *ctrl)
-    {
-    struct msi_domain_info *info;
-    struct msi_domain_ops *ops;
-    struct irq_domain *domain;
-    int ret;
-    if (!msi_ctrl_valid(dev, ctrl))
+pub static mut info: *mut c_void = core::ptr::null_mut();
+pub static mut ops: *mut c_void = core::ptr::null_mut();
+pub static mut domain: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (!msi_ctrl_valid(dev, ctrl)) {
     return -EINVAL;
+    }
     domain = msi_get_device_domain(dev, ctrl.domid);
-    if (!domain)
+    if (!domain) {
     return -ENODEV;
+    }
     info = domain.host_data;
     ret = msi_domain_alloc_simple_msi_descs(dev, info, ctrl);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     ops = info.ops;
-    if (ops.domain_alloc_irqs)
+    if (ops.domain_alloc_irqs) {
     return ops.domain_alloc_irqs(domain, dev, ctrl.nirqs);
+    }
     return __msi_domain_alloc_irqs(dev, domain, ctrl);
     }
 #[no_mangle]
 unsafe extern "C" fn msi_domain_alloc_locked(dev: *mut device, ctrl: *mut msi_ctrl) -> c_int {
-    static int msi_domain_alloc_locked(struct device *dev, struct msi_ctrl *ctrl)
-    {
-    let mut ret: c_int = __msi_domain_alloc_locked(dev, ctrl);
-    if (ret)
+pub static mut ret: c_int = 0;
+    if (ret) {
     msi_domain_free_locked(dev, ctrl);
+    }
     return ret;
     }
 //
@@ -1294,15 +1538,9 @@ unsafe extern "C" fn msi_domain_alloc_locked(dev: *mut device, ctrl: *mut msi_ct
 //
 // Return: %0 on success or an error code.
 //
-    int msi_domain_alloc_irqs_range_locked(struct device *dev, unsigned int domid,
-    unsigned int first, unsigned int last)
-    {
-    struct msi_ctrl ctrl = {
-    .domid	= domid,
-    .first	= first,
-    .last	= last,
-    .nirqs	= last + 1 - first,
-    };
+#[no_mangle]
+pub unsafe extern "C" fn msi_domain_alloc_irqs_range_locked(dev: *mut device, domid: c_uint, first: c_uint, last: c_uint) -> c_int {
+pub static mut msi_ctrl: usize = 0;
     return msi_domain_alloc_locked(dev, &ctrl);
     }
 //
@@ -1315,9 +1553,8 @@ unsafe extern "C" fn msi_domain_alloc_locked(dev: *mut device, ctrl: *mut msi_ct
 //
 // Return: %0 on success or an error code.
 //
-    int msi_domain_alloc_irqs_range(struct device *dev, unsigned int domid,
-    unsigned int first, unsigned int last)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn msi_domain_alloc_irqs_range(dev: *mut device, domid: c_uint, first: c_uint, last: c_uint) -> c_int {
     guard(msi_descs_lock)(dev);
     return msi_domain_alloc_irqs_range_locked(dev, domid, first, last);
     }
@@ -1338,26 +1575,16 @@ unsafe extern "C" fn msi_domain_alloc_locked(dev: *mut device, ctrl: *mut msi_ct
 //
 #[no_mangle]
 pub unsafe extern "C" fn msi_domain_alloc_irqs_all_locked(dev: *mut device, domid: c_uint, nirqs: c_int) -> c_int {
-    int msi_domain_alloc_irqs_all_locked(struct device *dev, unsigned int domid, int nirqs)
-    {
-    struct msi_ctrl ctrl = {
-    .domid	= domid,
-    .first	= 0,
-    .last	= msi_domain_get_hwsize(dev, domid) - 1,
-    .nirqs	= nirqs,
-    };
+pub static mut msi_ctrl: usize = 0;
     return msi_domain_alloc_locked(dev, &ctrl);
     }
-    static struct msi_map __msi_domain_alloc_irq_at(struct device *dev, unsigned int domid,
-    unsigned int index,
-    const struct irq_affinity_desc *affdesc,
-    union msi_instance_cookie *icookie)
-    {
-    let mut ctrl: msi_ctrl = { .domid	= domid, .nirqs = 1, };
-    struct irq_domain *domain;
-    let mut map: msi_map = { };
-    struct msi_desc *desc;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn __msi_domain_alloc_irq_at(dev: *mut device, domid: c_uint, index: c_uint, affdesc: *mut irq_affinity_desc, icookie: *mut union msi_instance_cookie) {
+pub static mut ctrl: msi_ctrl = 0;
+pub static mut domain: *mut c_void = core::ptr::null_mut();
+pub static mut map: msi_map = 0;
+pub static mut desc: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     domain = msi_get_device_domain(dev, domid);
     if (!domain) {
     map.index = -ENODEV;
@@ -1368,8 +1595,9 @@ pub unsafe extern "C" fn msi_domain_alloc_irqs_all_locked(dev: *mut device, domi
     map.index = -ENOMEM;
     return map;
     }
-    if (icookie)
+    if (icookie) {
     desc.data.icookie = *icookie;
+    }
     ret = msi_insert_desc(dev, desc, domid, index);
     if (ret) {
     map.index = ret;
@@ -1403,7 +1631,7 @@ pub unsafe extern "C" fn msi_domain_alloc_irqs_all_locked(dev: *mut device, domi
 // This requires a MSI interrupt domain which lets the core code manage the
 // MSI descriptors.
 //
-// Return: struct msi_map
+// Return: msi_map
 //
 // On success msi_map::index contains the allocated index number and
 // msi_map::virq the corresponding Linux interrupt number
@@ -1411,10 +1639,8 @@ pub unsafe extern "C" fn msi_domain_alloc_irqs_all_locked(dev: *mut device, domi
 // On failure msi_map::index contains the error code and msi_map::virq
 // is %0.
 //
-    struct msi_map msi_domain_alloc_irq_at(struct device *dev, unsigned int domid, unsigned int index,
-    const struct irq_affinity_desc *affdesc,
-    union msi_instance_cookie *icookie)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn msi_domain_alloc_irq_at(dev: *mut device, domid: c_uint, index: c_uint, affdesc: *mut irq_affinity_desc, icookie: *mut union msi_instance_cookie) {
     guard(msi_descs_lock)(dev);
     return __msi_domain_alloc_irq_at(dev, domid, index, affdesc, icookie);
     }
@@ -1439,68 +1665,75 @@ pub unsafe extern "C" fn msi_domain_alloc_irqs_all_locked(dev: *mut device, domi
 //
 // Return: The Linux interrupt number (> 0) or an error code
 //
-    int msi_device_domain_alloc_wired(struct irq_domain *domain, unsigned int hwirq,
-    unsigned int type)
-    {
-    let mut domid: c_uint = MSI_DEFAULT_DOMAIN;
-    let mut icookie: union msi_instance_cookie = { };
-    struct device *dev = domain.dev;
-    let mut map: msi_map = { };
-    if (WARN_ON_ONCE(!dev || domain.bus_token != DOMAIN_BUS_WIRED_TO_MSI))
+#[no_mangle]
+pub unsafe extern "C" fn msi_device_domain_alloc_wired(domain: *mut irq_domain, hwirq: c_uint, type: c_uint) -> c_int {
+pub static mut domid: c_uint = 0;
+pub static mut icookie: union msi_instance_cookie = 0;
+    let mut dev = domain.dev;
+pub static mut map: msi_map = 0;
+    if (WARN_ON_ONCE!(!dev || domain.bus_token != DOMAIN_BUS_WIRED_TO_MSI)) {
     return -EINVAL;
+    }
     icookie.value = ((u64)type << 32) | hwirq;
     guard(msi_descs_lock)(dev);
-    if (WARN_ON_ONCE(msi_get_device_domain(dev, domid) != domain))
+    if (WARN_ON_ONCE!(msi_get_device_domain(dev, domid) != domain)) {
     map.index = -EINVAL;
-    else
+    }
+    else {
     map = __msi_domain_alloc_irq_at(dev, domid, MSI_ANY_INDEX, core::ptr::null_mut(), &icookie);
+    }
     return map.index >= 0 ? map.virq : map.index;
     }
-    static void __msi_domain_free_irqs(struct device *dev, struct irq_domain *domain,
-    struct msi_ctrl *ctrl)
-    {
-    struct xarray *xa = &dev.msi.data.__domains[ctrl.domid].store;
-    struct msi_domain_info *info = domain.host_data;
-    struct irq_data *irqd;
-    struct msi_desc *desc;
-    unsigned long idx;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn __msi_domain_free_irqs(dev: *mut device, domain: *mut irq_domain, ctrl: *mut msi_ctrl) {
+    let mut xa = &dev.msi.data.__domains[ctrl.domid].store;
+    let mut info = domain.host_data;
+pub static mut irqd: *mut c_void = core::ptr::null_mut();
+pub static mut desc: *mut c_void = core::ptr::null_mut();
+    let mut idx = 0;
+    let mut i = 0;
     xa_for_each_range(xa, idx, desc, ctrl.first, ctrl.last) {
 // Only handle MSI entries which have an interrupt associated
-    if (!msi_desc_match(desc, MSI_DESC_ASSOCIATED))
+    if (!msi_desc_match(desc, MSI_DESC_ASSOCIATED)) {
     continue;
+    }
 // Make sure all interrupts are deactivated
-    for (i = 0; i < desc.nvec_used; i++) {
+    while (i < desc.nvec_used) {
     irqd = irq_domain_get_irq_data(domain, desc.irq + i);
-    if (irqd && irqd_is_activated(irqd))
+    if (irqd && irqd_is_activated(irqd)) {
     irq_domain_deactivate_irq(irqd);
     }
+    }
     irq_domain_free_irqs(desc.irq, desc.nvec_used);
-    if (info.flags & MSI_FLAG_DEV_SYSFS)
+    if (info.flags & MSI_FLAG_DEV_SYSFS) {
     msi_sysfs_remove_desc(dev, desc);
+    }
     desc.irq = 0;
     }
     }
 #[no_mangle]
 unsafe extern "C" fn msi_domain_free_locked(dev: *mut device, ctrl: *mut msi_ctrl) {
-    static void msi_domain_free_locked(struct device *dev, struct msi_ctrl *ctrl)
-    {
-    struct msi_domain_info *info;
-    struct msi_domain_ops *ops;
-    struct irq_domain *domain;
-    if (!msi_ctrl_valid(dev, ctrl))
+pub static mut info: *mut c_void = core::ptr::null_mut();
+pub static mut ops: *mut c_void = core::ptr::null_mut();
+pub static mut domain: *mut c_void = core::ptr::null_mut();
+    if (!msi_ctrl_valid(dev, ctrl)) {
     return;
+    }
     domain = msi_get_device_domain(dev, ctrl.domid);
-    if (!domain)
+    if (!domain) {
     return;
+    }
     info = domain.host_data;
     ops = info.ops;
-    if (ops.domain_free_irqs)
+    if (ops.domain_free_irqs) {
     ops.domain_free_irqs(domain, dev);
-    else
+    }
+    else {
     __msi_domain_free_irqs(dev, domain, ctrl);
-    if (info.flags & MSI_FLAG_FREE_MSI_DESCS)
+    }
+    if (info.flags & MSI_FLAG_FREE_MSI_DESCS) {
     msi_domain_free_descs(dev, ctrl);
+    }
     }
 //
 // msi_domain_free_irqs_range_locked - Free a range of interrupts from a MSI interrupt domain
@@ -1511,14 +1744,9 @@ unsafe extern "C" fn msi_domain_free_locked(dev: *mut device, ctrl: *mut msi_ctr
 // @first:	First index to free (inclusive)
 // @last:	Last index to free (inclusive)
 //
-    void msi_domain_free_irqs_range_locked(struct device *dev, unsigned int domid,
-    unsigned int first, unsigned int last)
-    {
-    struct msi_ctrl ctrl = {
-    .domid	= domid,
-    .first	= first,
-    .last	= last,
-    };
+#[no_mangle]
+pub unsafe extern "C" fn msi_domain_free_irqs_range_locked(dev: *mut device, domid: c_uint, first: c_uint, last: c_uint) {
+pub static mut msi_ctrl: usize = 0;
     msi_domain_free_locked(dev, &ctrl);
     }
 //
@@ -1530,9 +1758,8 @@ unsafe extern "C" fn msi_domain_free_locked(dev: *mut device, ctrl: *mut msi_ctr
 // @first:	First index to free (inclusive)
 // @last:	Last index to free (inclusive)
 //
-    void msi_domain_free_irqs_range(struct device *dev, unsigned int domid,
-    unsigned int first, unsigned int last)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn msi_domain_free_irqs_range(dev: *mut device, domid: c_uint, first: c_uint, last: c_uint) {
     guard(msi_descs_lock)(dev);
     msi_domain_free_irqs_range_locked(dev, domid, first, last);
     }
@@ -1549,8 +1776,6 @@ unsafe extern "C" fn msi_domain_free_locked(dev: *mut device, ctrl: *mut msi_ctr
 //
 #[no_mangle]
 pub unsafe extern "C" fn msi_domain_free_irqs_all_locked(dev: *mut device, domid: c_uint) {
-    void msi_domain_free_irqs_all_locked(struct device *dev, unsigned int domid)
-    {
     msi_domain_free_irqs_range_locked(dev, domid, 0,
     msi_domain_get_hwsize(dev, domid) - 1);
     }
@@ -1563,8 +1788,6 @@ pub unsafe extern "C" fn msi_domain_free_irqs_all_locked(dev: *mut device, domid
 //
 #[no_mangle]
 pub unsafe extern "C" fn msi_domain_free_irqs_all(dev: *mut device, domid: c_uint) {
-    void msi_domain_free_irqs_all(struct device *dev, unsigned int domid)
-    {
     guard(msi_descs_lock)(dev);
     msi_domain_free_irqs_all_locked(dev, domid);
     }
@@ -1579,15 +1802,15 @@ pub unsafe extern "C" fn msi_domain_free_irqs_all(dev: *mut device, domid: c_uin
 //
 #[no_mangle]
 pub unsafe extern "C" fn msi_device_domain_free_wired(domain: *mut irq_domain, virq: c_uint) {
-    void msi_device_domain_free_wired(struct irq_domain *domain, unsigned int virq)
-    {
-    struct msi_desc *desc = irq_get_msi_desc(virq);
-    struct device *dev = domain.dev;
-    if (WARN_ON_ONCE(!dev || !desc || domain.bus_token != DOMAIN_BUS_WIRED_TO_MSI))
+    let mut desc = irq_get_msi_desc(virq);
+    let mut dev = domain.dev;
+    if (WARN_ON_ONCE!(!dev || !desc || domain.bus_token != DOMAIN_BUS_WIRED_TO_MSI)) {
     return;
+    }
     guard(msi_descs_lock)(dev);
-    if (WARN_ON_ONCE(msi_get_device_domain(dev, MSI_DEFAULT_DOMAIN) != domain))
+    if (WARN_ON_ONCE!(msi_get_device_domain(dev, MSI_DEFAULT_DOMAIN) != domain)) {
     return;
+    }
     msi_domain_free_irqs_range_locked(dev, MSI_DEFAULT_DOMAIN, desc.msi_index,
     desc.msi_index);
     }
@@ -1597,9 +1820,9 @@ pub unsafe extern "C" fn msi_device_domain_free_wired(domain: *mut irq_domain, v
 //
 // Return: the pointer to the msi_domain_info stored in @domain->host_data.
 //
-    struct msi_domain_info *msi_get_domain_info(struct irq_domain *domain)
-    {
-    return (struct msi_domain_info *)domain.host_data;
+#[no_mangle]
+pub unsafe extern "C" fn msi_get_domain_info(domain: *mut irq_domain) -> *mut c_void {
+    return domain.host_data;
     }
 //
 // msi_device_has_isolated_msi - True if the device has isolated MSI
@@ -1619,12 +1842,11 @@ pub unsafe extern "C" fn msi_device_domain_free_wired(domain: *mut irq_domain, v
 //
 #[no_mangle]
 pub unsafe extern "C" fn msi_device_has_isolated_msi(dev: *mut device) -> bool {
-    bool msi_device_has_isolated_msi(struct device *dev)
-    {
-    struct irq_domain *domain = dev_get_msi_domain(dev);
-    for (; domain; domain = domain.parent)
+    let mut domain = dev_get_msi_domain(dev);
+    for (; domain; domain = domain.parent) {
     if (domain.flags & IRQ_DOMAIN_FLAG_ISOLATED_MSI)
     return true;
+    }
     return arch_is_isolated_msi();
     }
     EXPORT_SYMBOL_GPL(msi_device_has_isolated_msi);

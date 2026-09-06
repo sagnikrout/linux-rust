@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
 macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
@@ -77,32 +327,35 @@ macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
 //
 // SLAB caches for signal bits.
 //
-    static struct kmem_cache *sigqueue_cachep;
-    int print_fatal_signals __read_mostly;
-    static void __user *sig_handler(struct task_struct *t, int sig)
+pub static mut sigqueue_cachep: *mut c_void = core::ptr::null_mut();
+    let mut print_fatal_signals = 0;
+    static void  *sig_handler(task_struct *t, int sig)
     {
     return t.sighand.action[sig - 1].sa.sa_handler;
     }
 #[no_mangle]
-pub unsafe extern "C" fn sig_handler_ignored(handler: *mut void __user, sig: c_int) -> bool {
+pub unsafe extern "C" fn sig_handler_ignored(handler: *mut c_void , sig: c_int) -> bool {
 // Is it explicitly or implicitly ignored?
     return handler == SIG_IGN ||
     (handler == SIG_DFL && sig_kernel_ignore(sig));
     }
 #[no_mangle]
 unsafe extern "C" fn sig_task_ignored(t: *mut task_struct, sig: c_int, force: bool) -> bool {
-    void __user *handler;
+    let mut handler = core::ptr::null_mut();
     handler = sig_handler(t, sig);
 // SIGKILL and SIGSTOP may not be sent to the global init
-    if (unlikely(is_global_init(t) && sig_kernel_only(sig)))
+    if (unlikely(is_global_init(t) && sig_kernel_only(sig))) {
     return true;
+    }
     if (unlikely(t.signal.flags & SIGNAL_UNKILLABLE) &&
-    handler == SIG_DFL && !(force && sig_kernel_only(sig)))
+    handler == SIG_DFL && !(force && sig_kernel_only(sig))) {
     return true;
+    }
 // Only allow kernel generated signals to this kthread
     if (unlikely((t.flags & PF_KTHREAD) &&
-    (handler == SIG_KTHREAD_KERNEL) && !force))
+    (handler == SIG_KTHREAD_KERNEL) && !force)) {
     return true;
+    }
     return sig_handler_ignored(handler, sig);
     }
 #[no_mangle]
@@ -112,15 +365,17 @@ unsafe extern "C" fn sig_ignored(t: *mut task_struct, sig: c_int, force: bool) -
 // signal handler may change by the time it is
 // unblocked.
 //
-    if (sigismember(&t.blocked, sig) || sigismember(&t.real_blocked, sig))
+    if (sigismember(&t.blocked, sig) || sigismember(&t.real_blocked, sig)) {
     return false;
+    }
 //
 // Tracers may want to know about even ignored signal unless it
 // is SIGKILL which can't be reported anyway but can be ignored
 // by SIGNAL_UNKILLABLE task.
 //
-    if (t.ptrace && sig != SIGKILL)
+    if (t.ptrace && sig != SIGKILL) {
     return false;
+    }
     return sig_task_ignored(t, sig, force);
     }
 //
@@ -129,9 +384,10 @@ unsafe extern "C" fn sig_ignored(t: *mut task_struct, sig: c_int, force: bool) -
 //
 #[no_mangle]
 pub unsafe extern "C" fn has_pending_signals(signal: *mut sigset_t, blocked: *mut sigset_t) -> bool {
-    let mut ready: c_ulong = 0;
-    for (long i = 0; i < _NSIG_WORDS; i++)
+pub static mut ready: c_ulong = 0;
+    for (long i = 0; i < _NSIG_WORDS; i++) {
     ready |= signal.sig[i] & ~blocked.sig[i];
+    }
     return ready != 0;
     }
 
@@ -154,8 +410,9 @@ unsafe extern "C" fn recalc_sigpending_tsk(t: *mut task_struct) -> bool {
 #[no_mangle]
 pub unsafe extern "C" fn recalc_sigpending() {
     if (!recalc_sigpending_tsk(current) && !freezing(current)) {
-    if (unlikely(test_thread_flag(TIF_SIGPENDING)))
+    if (unlikely(test_thread_flag(TIF_SIGPENDING))) {
     clear_thread_flag(TIF_SIGPENDING);
+    }
     }
     }
     EXPORT_SYMBOL(recalc_sigpending);
@@ -171,12 +428,12 @@ pub unsafe extern "C" fn calculate_sigpending() {
     }
 // Given the mask, find the first available signal that should be serviced.
 
-    (sigmask(SIGSEGV) | sigmask(SIGBUS) | sigmask(SIGILL) | \
+    (sigmask(SIGSEGV) | sigmask(SIGBUS) | sigmask(SIGILL) | 
     sigmask(SIGTRAP) | sigmask(SIGFPE) | sigmask(SIGSYS))
 #[no_mangle]
 pub unsafe extern "C" fn next_signal(pending: *mut sigpending, mask: *mut sigset_t) -> c_int {
     unsigned long i, *s, *m, x;
-    let mut sig: c_int = 0;
+pub static mut sig: c_int = 0;
     s = pending.signal.sig;
     m = mask.sig;
 //
@@ -185,41 +442,49 @@ pub unsafe extern "C" fn next_signal(pending: *mut sigpending, mask: *mut sigset
 //
     x = *s &~ *m;
     if (x) {
-    if (x & SYNCHRONOUS_MASK)
+    if (x & SYNCHRONOUS_MASK) {
     x &= SYNCHRONOUS_MASK;
+    }
     sig = ffz(~x) + 1;
     return sig;
     }
-    switch (_NSIG_WORDS) {
-    default:
-    for (i = 1; i < _NSIG_WORDS; ++i) {
-    x = *++s &~ *++m;
-    if (!x)
+    match (_NSIG_WORDS) {
+    _ => {
+    while (i < _NSIG_WORDS) {
+    x = *++s &~ *m += 1;
+    if (!x) {
     continue;
-    sig = ffz(~x) + i*_NSIG_BPW + 1;
-    break;
     }
-    break;
-    case 2:
+    sig = ffz(~x) + i*_NSIG_BPW + 1;
+    // break;
+    }
+    // break;
+    }
+    2 => {
     x = s[1] &~ m[1];
-    if (!x)
-    break;
+    if (!x) {
+    // break;
+    }
     sig = ffz(~x) + _NSIG_BPW + 1;
-    break;
-    case 1:
+    // break;
+    }
+    1 => {
 // Nothing to do
-    break;
+    // break;
+    }
     }
     return sig;
     }
 #[no_mangle]
 pub unsafe extern "C" fn print_dropped_signal(sig: c_int) {
 // static DEFINE_RATELIMIT_STATE(ratelimit_state, 5 * HZ, 10);
-    if (!print_fatal_signals)
+    if (!print_fatal_signals) {
     return;
-    if (!__ratelimit(&ratelimit_state))
+    }
+    if (!__ratelimit(&ratelimit_state)) {
     return;
-    pr_info("%s/%d: reached RLIMIT_SIGPENDING, dropped signal %d\n",
+    }
+    pr_info!("%s/%d: reached RLIMIT_SIGPENDING, dropped signal %d\n",
     current.comm, current.pid, sig);
     }
 //
@@ -241,13 +506,15 @@ pub unsafe extern "C" fn print_dropped_signal(sig: c_int) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn task_set_jobctl_pending(task: *mut task_struct, mask: c_ulong) -> bool {
-    BUG_ON(mask & ~(JOBCTL_PENDING_MASK | JOBCTL_STOP_CONSUME |
+    BUG_ON!(mask & ~(JOBCTL_PENDING_MASK | JOBCTL_STOP_CONSUME |
     JOBCTL_STOP_SIGMASK | JOBCTL_TRAPPING));
-    BUG_ON((mask & JOBCTL_TRAPPING) && !(mask & JOBCTL_PENDING_MASK));
-    if (unlikely(fatal_signal_pending(task) || (task.flags & PF_EXITING)))
+    BUG_ON!((mask & JOBCTL_TRAPPING) && !(mask & JOBCTL_PENDING_MASK));
+    if (unlikely(fatal_signal_pending(task) || (task.flags & PF_EXITING))) {
     return false;
-    if (mask & JOBCTL_STOP_SIGMASK)
+    }
+    if (mask & JOBCTL_STOP_SIGMASK) {
     task.jobctl &= ~JOBCTL_STOP_SIGMASK;
+    }
     task.jobctl |= mask;
     return true;
     }
@@ -288,12 +555,14 @@ pub unsafe extern "C" fn task_clear_jobctl_trapping(task: *mut task_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn task_clear_jobctl_pending(task: *mut task_struct, mask: c_ulong) {
-    BUG_ON(mask & ~JOBCTL_PENDING_MASK);
-    if (mask & JOBCTL_STOP_PENDING)
+    BUG_ON!(mask & ~JOBCTL_PENDING_MASK);
+    if (mask & JOBCTL_STOP_PENDING) {
     mask |= JOBCTL_STOP_CONSUME | JOBCTL_STOP_DEQUEUED;
+    }
     task.jobctl &= ~mask;
-    if (!(task.jobctl & JOBCTL_PENDING_MASK))
+    if (!(task.jobctl & JOBCTL_PENDING_MASK)) {
     task_clear_jobctl_trapping(task);
+    }
     }
 //
 // task_participate_group_stop - participate in a group stop
@@ -313,14 +582,16 @@ pub unsafe extern "C" fn task_clear_jobctl_pending(task: *mut task_struct, mask:
 //
 #[no_mangle]
 unsafe extern "C" fn task_participate_group_stop(task: *mut task_struct) -> bool {
-    struct signal_struct *sig = task.signal;
-    let mut consume: bool = task.jobctl & JOBCTL_STOP_CONSUME;
-    WARN_ON_ONCE(!(task.jobctl & JOBCTL_STOP_PENDING));
+    let mut sig = task.signal;
+pub static mut consume: bool = false;
+    WARN_ON_ONCE!(!(task.jobctl & JOBCTL_STOP_PENDING));
     task_clear_jobctl_pending(task, JOBCTL_STOP_PENDING);
-    if (!consume)
+    if (!consume) {
     return false;
-    if (!WARN_ON_ONCE(sig.group_stop_count == 0))
-    sig.group_stop_count--;
+    }
+    if (!WARN_ON_ONCE!(sig.group_stop_count == 0)) {
+    sig.group_stop_count -= 1;
+    }
 //
 // Tell the caller to notify completion iff we are entering into a
 // fresh group stop.  Read comment in do_signal_stop() for details.
@@ -333,21 +604,21 @@ unsafe extern "C" fn task_participate_group_stop(task: *mut task_struct) -> bool
     }
 #[no_mangle]
 pub unsafe extern "C" fn task_join_group_stop(task: *mut task_struct) {
-    let mut mask: c_ulong = current.jobctl & JOBCTL_STOP_SIGMASK;
-    struct signal_struct *sig = current.signal;
+pub static mut mask: c_ulong = 0;
+    let mut sig = current.signal;
     if (sig.group_stop_count) {
-    sig.group_stop_count++;
+    sig.group_stop_count += 1;
     mask |= JOBCTL_STOP_CONSUME;
-    } else if (!(sig.flags & SIGNAL_STOP_STOPPED))
+    } else if (!(sig.flags & SIGNAL_STOP_STOPPED)) {
     return;
+    }
 // Have the new thread join an on-going signal group stop
     task_set_jobctl_pending(task, mask | JOBCTL_STOP_PENDING);
     }
-    static struct ucounts *sig_get_ucounts(struct task_struct *t, int sig,
-    int override_rlimit)
-    {
-    struct ucounts *ucounts;
-    long sigpending;
+#[no_mangle]
+pub unsafe extern "C" fn sig_get_ucounts(t: *mut task_struct, sig: c_int, override_rlimit: c_int) -> *mut c_void {
+pub static mut ucounts: *mut c_void = core::ptr::null_mut();
+    let mut sigpending = 0;
 //
 // Protect access to @t credentials. This can go away when all
 // callers hold rcu read lock.
@@ -361,8 +632,9 @@ pub unsafe extern "C" fn task_join_group_stop(task: *mut task_struct) {
     sigpending = inc_rlimit_get_ucounts(ucounts, UCOUNT_RLIMIT_SIGPENDING,
     override_rlimit);
     rcu_read_unlock();
-    if (!sigpending)
+    if (!sigpending) {
     return core::ptr::null_mut();
+    }
     if (unlikely(!override_rlimit && sigpending > task_rlimit(t, RLIMIT_SIGPENDING))) {
     dec_rlimit_put_ucounts(ucounts, UCOUNT_RLIMIT_SIGPENDING);
     print_dropped_signal(sig);
@@ -370,9 +642,8 @@ pub unsafe extern "C" fn task_join_group_stop(task: *mut task_struct) {
     }
     return ucounts;
     }
-    static void __sigqueue_init(struct sigqueue *q, struct ucounts *ucounts,
-    const unsigned int sigqueue_flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __sigqueue_init(q: *mut sigqueue, ucounts: *mut ucounts, sigqueue_flags: c_uint) {
     INIT_LIST_HEAD(&q.list);
     q.flags = sigqueue_flags;
     q.ucounts = ucounts;
@@ -382,13 +653,13 @@ pub unsafe extern "C" fn task_join_group_stop(task: *mut task_struct) {
 // - this may be called without locks if and only if t == current, otherwise an
 // appropriate lock must be held to stop the target task from exiting
 //
-    static struct sigqueue *sigqueue_alloc(int sig, struct task_struct *t, gfp_t gfp_flags,
-    int override_rlimit)
-    {
-    struct ucounts *ucounts = sig_get_ucounts(t, sig, override_rlimit);
-    struct sigqueue *q;
-    if (!ucounts)
+#[no_mangle]
+pub unsafe extern "C" fn sigqueue_alloc(sig: c_int, t: *mut task_struct, gfp_flags: gfp_t, override_rlimit: c_int) -> *mut c_void {
+    let mut ucounts = sig_get_ucounts(t, sig, override_rlimit);
+pub static mut q: *mut c_void = core::ptr::null_mut();
+    if (!ucounts) {
     return core::ptr::null_mut();
+    }
     q = kmem_cache_alloc(sigqueue_cachep, gfp_flags);
     if (!q) {
     dec_rlimit_put_ucounts(ucounts, UCOUNT_RLIMIT_SIGPENDING);
@@ -411,10 +682,10 @@ unsafe extern "C" fn __sigqueue_free(q: *mut sigqueue) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn flush_sigqueue(queue: *mut sigpending) {
-    struct sigqueue *q;
+pub static mut q: *mut c_void = core::ptr::null_mut();
     sigemptyset(&queue.signal);
     while (!list_empty(&queue.list)) {
-    q = list_entry(queue.list.next, struct sigqueue , list);
+    q = list_entry(queue.list.next, sigqueue , list);
     list_del_init(&q.list);
     __sigqueue_free(q);
     }
@@ -424,7 +695,7 @@ pub unsafe extern "C" fn flush_sigqueue(queue: *mut sigpending) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn flush_signals(t: *mut task_struct) {
-    unsigned long flags;
+    let mut flags = 0;
     spin_lock_irqsave(&t.sighand.siglock, flags);
     clear_tsk_thread_flag(t, TIF_SIGPENDING);
     flush_sigqueue(&t.pending);
@@ -434,46 +705,49 @@ pub unsafe extern "C" fn flush_signals(t: *mut task_struct) {
     EXPORT_SYMBOL(flush_signals);
 #[no_mangle]
 pub unsafe extern "C" fn ignore_signals(t: *mut task_struct) {
-    int i;
-    for (i = 0; i < _NSIG; ++i)
+    let mut i = 0;
+    for (i = 0; i < _NSIG; ++i) {
     t.sighand.action[i].sa.sa_handler = SIG_IGN;
+    }
     flush_signals(t);
     }
 //
 // Flush all handlers for a task.
 //
-    void
-    flush_signal_handlers(struct task_struct *t, int force_default)
-    {
-    int i;
-    struct k_sigaction *ka = &t.sighand.action[0];
-    for (i = _NSIG ; i != 0 ; i--) {
-    if (force_default || ka.sa.sa_handler != SIG_IGN)
+#[no_mangle]
+pub unsafe extern "C" fn flush_signal_handlers(t: *mut task_struct, force_default: c_int) {
+    let mut i = 0;
+    let mut ka = &t.sighand.action[0];
+    while (i != 0 ) {
+    if (force_default || ka.sa.sa_handler != SIG_IGN) {
     ka.sa.sa_handler = SIG_DFL;
+    }
     ka.sa.sa_flags = 0;
 
     ka.sa.sa_restorer = core::ptr::null_mut();
 
     sigemptyset(&ka.sa.sa_mask);
-    ka++;
+    ka += 1;
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn unhandled_signal(tsk: *mut task_struct, sig: c_int) -> bool {
-    void __user *handler = tsk.sighand.action[sig-1].sa.sa_handler;
-    if (is_global_init(tsk))
+    let mut handler = tsk.sighand.action[sig-1].sa.sa_handler;
+    if (is_global_init(tsk)) {
     return true;
-    if (handler != SIG_IGN && handler != SIG_DFL)
+    }
+    if (handler != SIG_IGN && handler != SIG_DFL) {
     return false;
+    }
 // If dying, we handle all new signals by ignoring them
-    if (fatal_signal_pending(tsk))
+    if (fatal_signal_pending(tsk)) {
     return false;
+    }
 // if ptraced, let the tracer determine
     return !tsk.ptrace;
     }
-    static void collect_signal(int sig, struct sigpending *list, kernel_siginfo_t *info,
-    struct sigqueue **timer_sigq)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn collect_signal(sig: c_int, list: *mut sigpending, info: *mut kernel_siginfo_t, timer_sigq: *mut *mut sigqueue) {
     struct sigqueue *q, *first = core::ptr::null_mut();
 //
 // Collect the siginfo appropriate to this signal.  Check if
@@ -481,14 +755,15 @@ pub unsafe extern "C" fn unhandled_signal(tsk: *mut task_struct, sig: c_int) -> 
 //
     list_for_each_entry(q, &list.list, list) {
     if (q.info.si_signo == sig) {
-    if (first)
-    goto still_pending;
+    if (first) {
+// goto;
+    }
     first = q;
     }
     }
     sigdelset(&list.signal, sig);
     if (first) {
-    still_pending:
+// label;
     list_del_init(&first.list);
     copy_siginfo(info, &first.info);
 //
@@ -498,10 +773,12 @@ pub unsafe extern "C" fn unhandled_signal(tsk: *mut task_struct, sig: c_int) -> 
 // Spare the extra round through __sigqueue_free() which is
 // ignoring preallocated signals.
 //
-    if (unlikely((first.flags & SIGQUEUE_PREALLOC) && (info.si_code == SI_TIMER)))
+    if (unlikely((first.flags & SIGQUEUE_PREALLOC) && (info.si_code == SI_TIMER))) {
 // timer_sigq = first;
-    else
+    }
+    else {
     __sigqueue_free(first);
+    }
     } else {
 //
 // Ok, it wasn't in the queue.  This must be
@@ -516,12 +793,12 @@ pub unsafe extern "C" fn unhandled_signal(tsk: *mut task_struct, sig: c_int) -> 
     info.si_uid = 0;
     }
     }
-    static int __dequeue_signal(struct sigpending *pending, sigset_t *mask,
-    kernel_siginfo_t *info, struct sigqueue **timer_sigq)
-    {
-    let mut sig: c_int = next_signal(pending, mask);
-    if (sig)
+#[no_mangle]
+pub unsafe extern "C" fn __dequeue_signal(pending: *mut sigpending, mask: *mut sigset_t, info: *mut kernel_siginfo_t, timer_sigq: *mut *mut sigqueue) -> c_int {
+pub static mut sig: c_int = 0;
+    if (sig) {
     collect_signal(sig, pending, info, timer_sigq);
+    }
     return sig;
     }
 //
@@ -531,11 +808,11 @@ pub unsafe extern "C" fn unhandled_signal(tsk: *mut task_struct, sig: c_int) -> 
 //
 #[no_mangle]
 pub unsafe extern "C" fn dequeue_signal(mask: *mut sigset_t, info: *mut kernel_siginfo_t, type: *mut enum pid_type) -> c_int {
-    struct task_struct *tsk = current;
-    struct sigqueue *timer_sigq;
-    int signr;
+    let mut tsk = current;
+pub static mut timer_sigq: *mut c_void = core::ptr::null_mut();
+    let mut signr = 0;
     lockdep_assert_held(&tsk.sighand.siglock);
-    again:
+// label;
 // type = PIDTYPE_PID;
     timer_sigq = core::ptr::null_mut();
     signr = __dequeue_signal(&tsk.pending, mask, info, &timer_sigq);
@@ -543,12 +820,14 @@ pub unsafe extern "C" fn dequeue_signal(mask: *mut sigset_t, info: *mut kernel_s
 // type = PIDTYPE_TGID;
     signr = __dequeue_signal(&tsk.signal.shared_pending,
     mask, info, &timer_sigq);
-    if (unlikely(signr == SIGALRM))
+    if (unlikely(signr == SIGALRM)) {
     posixtimer_rearm_itimer(tsk);
     }
+    }
     recalc_sigpending();
-    if (!signr)
+    if (!signr) {
     return 0;
+    }
     if (unlikely(sig_kernel_stop(signr))) {
 //
 // Set a marker that we have dequeued a stop signal.  Our
@@ -564,23 +843,25 @@ pub unsafe extern "C" fn dequeue_signal(mask: *mut sigset_t, info: *mut kernel_s
 //
     current.jobctl |= JOBCTL_STOP_DEQUEUED;
     }
-    if (IS_ENABLED(CONFIG_POSIX_TIMERS) && unlikely(timer_sigq)) {
-    if (!posixtimer_deliver_signal(info, timer_sigq))
-    goto again;
+    if (IS_ENABLED!(CONFIG_POSIX_TIMERS) && unlikely(timer_sigq)) {
+    if (!posixtimer_deliver_signal(info, timer_sigq)) {
+// goto;
+    }
     }
     return signr;
     }
     EXPORT_SYMBOL_GPL(dequeue_signal);
 #[no_mangle]
 unsafe extern "C" fn dequeue_synchronous_signal(info: *mut kernel_siginfo_t) -> c_int {
-    struct task_struct *tsk = current;
-    struct sigpending *pending = &tsk.pending;
+    let mut tsk = current;
+    let mut pending = &tsk.pending;
     struct sigqueue *q, *sync = core::ptr::null_mut();
 //
 // Might a synchronous signal be in the queue?
 //
-    if (!((pending.signal.sig[0] & ~tsk.blocked.sig[0]) & SYNCHRONOUS_MASK))
+    if (!((pending.signal.sig[0] & ~tsk.blocked.sig[0]) & SYNCHRONOUS_MASK)) {
     return 0;
+    }
 //
 // Return the first synchronous signal in the queue.
 //
@@ -589,21 +870,22 @@ unsafe extern "C" fn dequeue_synchronous_signal(info: *mut kernel_siginfo_t) -> 
     if ((q.info.si_code > SI_USER) &&
     (sigmask(q.info.si_signo) & SYNCHRONOUS_MASK)) {
     sync = q;
-    goto next;
+// goto;
     }
     }
     return 0;
-    next:
+// label;
 //
 // Check if there is another siginfo for the same signal.
 //
     list_for_each_entry_continue(q, &pending.list, list) {
-    if (q.info.si_signo == sync.info.si_signo)
-    goto still_pending;
+    if (q.info.si_signo == sync.info.si_signo) {
+// goto;
+    }
     }
     sigdelset(&pending.signal, sync.info.si_signo);
     recalc_sigpending();
-    still_pending:
+// label;
     list_del_init(&sync.list);
     copy_siginfo(info, &sync.info);
     __sigqueue_free(sync);
@@ -631,26 +913,31 @@ pub unsafe extern "C" fn signal_wake_up_state(t: *mut task_struct, state: c_uint
 // By using wake_up_state, we ensure the process will wake up and
 // handle its death signal.
 //
-    if (!wake_up_state(t, state | TASK_INTERRUPTIBLE))
+    if (!wake_up_state(t, state | TASK_INTERRUPTIBLE)) {
     kick_process(t);
     }
-    static inline void posixtimer_sig_ignore(struct task_struct *tsk, struct sigqueue *q);
+    }
+// forward_decl: posixtimer_sig_ignore;
 #[no_mangle]
 unsafe extern "C" fn sigqueue_free_ignored(tsk: *mut task_struct, q: *mut sigqueue) {
-    if (likely(!(q.flags & SIGQUEUE_PREALLOC) || q.info.si_code != SI_TIMER))
+    if (likely(!(q.flags & SIGQUEUE_PREALLOC) || q.info.si_code != SI_TIMER)) {
     __sigqueue_free(q);
-    else
+    }
+    else {
     posixtimer_sig_ignore(tsk, q);
+    }
     }
 // Remove signals in mask from the pending set and queue.
 #[no_mangle]
 unsafe extern "C" fn flush_sigqueue_mask(p: *mut task_struct, mask: *mut sigset_t, s: *mut sigpending) {
-    struct sigqueue *q, *n;
-    sigset_t m;
+    let mut q = core::ptr::null_mut();
+    let mut n = core::ptr::null_mut();
+    let mut m;
     lockdep_assert_held(&p.sighand.siglock);
     sigandsets(&m, mask, &s.signal);
-    if (sigisemptyset(&m))
+    if (sigisemptyset(&m)) {
     return;
+    }
     sigandnsets(&s.signal, &s.signal, mask);
     list_for_each_entry_safe(q, n, &s.list, list) {
     if (sigismember(mask, q.info.si_signo)) {
@@ -673,8 +960,8 @@ pub unsafe extern "C" fn si_fromuser(info: *const kernel_siginfo) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn kill_ok_by_cred(t: *mut task_struct) -> bool {
-    const struct cred *cred = current_cred();
-    const struct cred *tcred = __task_cred(t);
+    let mut cred = current_cred();
+    let mut tcred = __task_cred(t);
     return uid_eq(cred.euid, tcred.suid) ||
     uid_eq(cred.euid, tcred.uid) ||
     uid_eq(cred.uid, tcred.suid) ||
@@ -685,32 +972,37 @@ unsafe extern "C" fn kill_ok_by_cred(t: *mut task_struct) -> bool {
 // Bad permissions for sending the signal
 // - the caller must hold the RCU read lock
 //
-    static int check_kill_permission(int sig, struct kernel_siginfo *info,
-    struct task_struct *t)
-    {
-    struct pid *sid;
-    int error;
-    if (!valid_signal(sig))
+#[no_mangle]
+pub unsafe extern "C" fn check_kill_permission(sig: c_int, info: *mut kernel_siginfo, t: *mut task_struct) -> c_int {
+pub static mut sid: *mut c_void = core::ptr::null_mut();
+    let mut error = 0;
+    if (!valid_signal(sig)) {
     return -EINVAL;
-    if (!si_fromuser(info))
+    }
+    if (!si_fromuser(info)) {
     return 0;
+    }
     error = audit_signal_info(sig, t); /* Let audit system see the signal */
-    if (error)
+    if (error) {
     return error;
+    }
     if (!same_thread_group(current, t) &&
     !kill_ok_by_cred(t)) {
-    switch (sig) {
-    case SIGCONT:
+    match (sig) {
+    SIGCONT => {
     sid = task_session(t);
 //
 // We don't return the error if sid == NULL. The
 // task was unhashed, the caller must notice this.
 //
-    if (!sid || sid == task_session(current))
-    break;
+    if (!sid || sid == task_session(current)) {
+    // break;
+    }
     fallthrough;
-    default:
+    }
+    _ => {
     return -EPERM;
+    }
     }
     }
     return security_task_kill(t, info, sig, core::ptr::null_mut());
@@ -734,7 +1026,7 @@ unsafe extern "C" fn kill_ok_by_cred(t: *mut task_struct) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn ptrace_trap_notify(t: *mut task_struct) {
-    WARN_ON_ONCE(!(t.ptrace & PT_SEIZED));
+    WARN_ON_ONCE!(!(t.ptrace & PT_SEIZED));
     lockdep_assert_held(&t.sighand.siglock);
     task_set_jobctl_pending(t, JOBCTL_TRAP_NOTIFY);
     ptrace_signal_wake_up(t, t.jobctl & JOBCTL_LISTENING);
@@ -751,12 +1043,13 @@ unsafe extern "C" fn ptrace_trap_notify(t: *mut task_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn prepare_signal(sig: c_int, p: *mut task_struct, force: bool) -> bool {
-    struct signal_struct *signal = p.signal;
-    struct task_struct *t;
-    sigset_t flush;
+    let mut signal = p.signal;
+pub static mut t: *mut c_void = core::ptr::null_mut();
+    let mut flush;
     if (signal.flags & SIGNAL_GROUP_EXIT) {
-    if (signal.core_state)
-    let mut sig: return = = SIGKILL;
+    if (signal.core_state) {
+pub static mut sig: return = 0;
+    }
 //
 // The process is in the middle of dying, drop the signal.
 //
@@ -767,10 +1060,11 @@ unsafe extern "C" fn prepare_signal(sig: c_int, p: *mut task_struct, force: bool
 //
     siginitset(&flush, sigmask(SIGCONT));
     flush_sigqueue_mask(p, &flush, &signal.shared_pending);
-    for_each_thread(p, t)
+    for_each_thread(p, t) {
     flush_sigqueue_mask(p, &flush, &t.pending);
+    }
     } else if (sig == SIGCONT) {
-    unsigned int why;
+    let mut why = 0;
 //
 // Remove all stop signals from all queues, wake all threads.
 //
@@ -782,8 +1076,9 @@ unsafe extern "C" fn prepare_signal(sig: c_int, p: *mut task_struct, force: bool
     if (likely(!(t.ptrace & PT_SEIZED))) {
     t.jobctl &= ~JOBCTL_STOPPED;
     wake_up_state(t, __TASK_STOPPED);
-    } else
+    } else {
     ptrace_trap_notify(t);
+    }
     }
 //
 // Notify the parent with CLD_CONTINUED if we were stopped.
@@ -794,12 +1089,13 @@ unsafe extern "C" fn prepare_signal(sig: c_int, p: *mut task_struct, force: bool
 // CLD_CONTINUED was dropped.
 //
     why = 0;
-    if (signal.flags & SIGNAL_STOP_STOPPED)
+    if (signal.flags & SIGNAL_STOP_STOPPED) {
     why |= SIGNAL_CLD_CONTINUED;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: signal->group_stop_count) -> else {
-    else if (signal.group_stop_count)
+    }
+
+    else if (signal.group_stop_count) {
     why |= SIGNAL_CLD_STOPPED;
+    }
     if (why) {
 //
 // The first thread which returns from do_signal_stop()
@@ -823,35 +1119,40 @@ pub unsafe extern "C" fn if(_arg: signal->group_stop_count) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn wants_signal(sig: c_int, p: *mut task_struct) -> bool {
-    if (sigismember(&p.blocked, sig))
+    if (sigismember(&p.blocked, sig)) {
     return false;
-    if (p.flags & PF_EXITING)
+    }
+    if (p.flags & PF_EXITING) {
     return false;
-    if (sig == SIGKILL)
+    }
+    if (sig == SIGKILL) {
     return true;
-    if (task_is_stopped_or_traced(p))
+    }
+    if (task_is_stopped_or_traced(p)) {
     return false;
+    }
     return task_curr(p) || !task_sigpending(p);
     }
 #[no_mangle]
-unsafe extern "C" fn complete_signal(sig: c_int, p: *mut task_struct, type: enum pid_type) {
-    struct signal_struct *signal = p.signal;
-    struct task_struct *t;
+unsafe extern "C" fn complete_signal(sig: c_int, p: *mut task_struct, type: pid_type) {
+    let mut signal = p.signal;
+pub static mut t: *mut c_void = core::ptr::null_mut();
 //
 // Now find a thread we can wake up to take the signal off the queue.
 //
 // Try the suggested task first (may or may not be the main thread).
 //
-    if (wants_signal(sig, p))
+    if (wants_signal(sig, p)) {
     t = p;
-#[no_mangle]
-pub unsafe extern "C" fn if(thread_group_empty(p): (type == PIDTYPE_PID) ||) -> else {
-    else if ((type == PIDTYPE_PID) || thread_group_empty(p))
+    }
+
+    else if ((type == PIDTYPE_PID) || thread_group_empty(p)) {
 //
 // There is just one thread and it does not need to be woken.
 // It will dequeue unblocked signals before it runs again.
 //
     return;
+    }
     else {
 //
 // Otherwise try to find a suitable thread.
@@ -859,13 +1160,14 @@ pub unsafe extern "C" fn if(thread_group_empty(p): (type == PIDTYPE_PID) ||) -> 
     t = signal.curr_target;
     while (!wants_signal(sig, t)) {
     t = next_thread(t);
-    if (t == signal.curr_target)
+    if (t == signal.curr_target) {
 //
 // No thread needs to be woken.
 // Any eligible threads will see
 // the signal in the queue soon.
 //
     return;
+    }
     }
     signal.curr_target = t;
     }
@@ -907,17 +1209,17 @@ pub unsafe extern "C" fn if(thread_group_empty(p): (type == PIDTYPE_PID) ||) -> 
 pub unsafe extern "C" fn legacy_queue(signals: *mut sigpending, sig: c_int) -> bool {
     return (sig < SIGRTMIN) && sigismember(&signals.signal, sig);
     }
-    static int __send_signal_locked(int sig, struct kernel_siginfo *info,
-    struct task_struct *t, enum pid_type type, bool force)
-    {
-    struct sigpending *pending;
-    struct sigqueue *q;
-    int override_rlimit;
-    let mut ret: c_int = 0, result;
+#[no_mangle]
+pub unsafe extern "C" fn __send_signal_locked(sig: c_int, info: *mut kernel_siginfo, t: *mut task_struct, type: pid_type, force: bool) -> c_int {
+pub static mut pending: *mut c_void = core::ptr::null_mut();
+pub static mut q: *mut c_void = core::ptr::null_mut();
+    let mut override_rlimit = 0;
+pub static mut ret: c_int = 0;
     lockdep_assert_held(&t.sighand.siglock);
     result = TRACE_SIGNAL_IGNORED;
-    if (!prepare_signal(sig, t, force))
-    goto ret;
+    if (!prepare_signal(sig, t, force)) {
+// goto;
+    }
     pending = (type != PIDTYPE_PID) ? &t.signal.shared_pending : &t.pending;
 //
 // Short-circuit ignored signals and support queuing
@@ -925,14 +1227,16 @@ pub unsafe extern "C" fn legacy_queue(signals: *mut sigpending, sig: c_int) -> b
 // detailed information about the cause of the signal.
 //
     result = TRACE_SIGNAL_ALREADY_PENDING;
-    if (legacy_queue(pending, sig))
-    goto ret;
+    if (legacy_queue(pending, sig)) {
+// goto;
+    }
     result = TRACE_SIGNAL_DELIVERED;
 //
 // Skip useless siginfo allocation for SIGKILL and kernel threads.
 //
-    if ((sig == SIGKILL) || (t.flags & PF_KTHREAD))
-    goto out_set;
+    if ((sig == SIGKILL) || (t.flags & PF_KTHREAD)) {
+// goto;
+    }
 //
 // Real-time signals must be queued if sent by sigqueue, or
 // some other real-time mechanism.  It is implementation
@@ -942,10 +1246,12 @@ pub unsafe extern "C" fn legacy_queue(signals: *mut sigpending, sig: c_int) -> b
 // make sure at least one signal gets delivered and don't
 // pass on the info struct.
 //
-    if (sig < SIGRTMIN)
+    if (sig < SIGRTMIN) {
     override_rlimit = (is_si_special(info) || info.si_code >= 0);
-    else
+    }
+    else {
     override_rlimit = 0;
+    }
     q = sigqueue_alloc(sig, t, GFP_ATOMIC, override_rlimit);
     if (q) {
     list_add_tail(&q.list, &pending.list);
@@ -971,7 +1277,7 @@ pub unsafe extern "C" fn legacy_queue(signals: *mut sigpending, sig: c_int) -> b
     q.info.si_pid = 0;
     q.info.si_uid = 0;
     break;
-    default:
+// label;
     copy_siginfo(&q.info, info);
     break;
     }
@@ -984,7 +1290,7 @@ pub unsafe extern "C" fn legacy_queue(signals: *mut sigpending, sig: c_int) -> b
 //
     result = TRACE_SIGNAL_OVERFLOW_FAIL;
     ret = -EAGAIN;
-    goto ret;
+// goto;
     } else {
 //
 // This is a silent loss of information.  We still
@@ -992,32 +1298,33 @@ pub unsafe extern "C" fn legacy_queue(signals: *mut sigpending, sig: c_int) -> b
 //
     result = TRACE_SIGNAL_LOSE_INFO;
     }
-    out_set:
+// label;
     signalfd_notify(t, sig);
     sigaddset(&pending.signal, sig);
 // Let multiprocess signals appear after on-going forks
     if (type > PIDTYPE_TGID) {
-    struct multiprocess_signals *delayed;
+pub static mut delayed: *mut c_void = core::ptr::null_mut();
     hlist_for_each_entry(delayed, &t.signal.multiprocess, node) {
-    sigset_t *signal = &delayed.signal;
+    let mut signal = &delayed.signal;
 // Can't queue both a stop and a continue signal
-    if (sig == SIGCONT)
+    if (sig == SIGCONT) {
     sigdelsetmask(signal, SIG_KERNEL_STOP_MASK);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: sig_kernel_stop(sig)) -> else {
-    else if (sig_kernel_stop(sig))
+    }
+
+    else if (sig_kernel_stop(sig)) {
     sigdelset(signal, SIGCONT);
+    }
     sigaddset(signal, sig);
     }
     }
     complete_signal(sig, t, type);
-    ret:
+// label;
     trace_signal_generate(sig, info, t, type != PIDTYPE_PID, result);
     return ret;
     }
 #[no_mangle]
 pub unsafe extern "C" fn has_si_pid_and_uid(info: *mut kernel_siginfo) -> bool {
-    let mut ret: bool = false;
+pub static mut ret: bool = false;
     switch (siginfo_layout(info.si_signo, info.si_code)) {
     case SIL_KILL:
     case SIL_CHLD:
@@ -1038,12 +1345,11 @@ pub unsafe extern "C" fn has_si_pid_and_uid(info: *mut kernel_siginfo) -> bool {
     }
     return ret;
     }
-    int send_signal_locked(int sig, struct kernel_siginfo *info,
-    struct task_struct *t, enum pid_type type)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn send_signal_locked(sig: c_int, info: *mut kernel_siginfo, t: *mut task_struct, type: pid_type) -> c_int {
     struct kernel_siginfo __maybe_unused rewritten;
 // Should SIGKILL or SIGSTOP be received by a pid namespace init?
-    let mut force: bool = false;
+pub static mut force: bool = false;
     if (info == SEND_SIG_NOINFO) {
 // Force if sent from an ancestor pid namespace
     force = !task_pid_nr_ns(current, task_active_pid_ns(t));
@@ -1053,8 +1359,8 @@ pub unsafe extern "C" fn has_si_pid_and_uid(info: *mut kernel_siginfo) -> bool {
     } else if (has_si_pid_and_uid(info)) {
 // SIGKILL and SIGSTOP is special or has ids
 
-    struct user_namespace *t_user_ns;
-    kuid_t uid;
+pub static mut t_user_ns: *mut c_void = core::ptr::null_mut();
+    let mut uid;
     rcu_read_lock();
     t_user_ns = task_cred_xxx(t, user_ns);
     if (current_user_ns() != t_user_ns) {
@@ -1083,25 +1389,26 @@ pub unsafe extern "C" fn has_si_pid_and_uid(info: *mut kernel_siginfo) -> bool {
     }
 #[no_mangle]
 unsafe extern "C" fn print_fatal_signal(signr: c_int) {
-    struct pt_regs *regs = task_pt_regs(current);
-    struct file *exe_file;
+    let mut regs = task_pt_regs(current);
+pub static mut exe_file: *mut c_void = core::ptr::null_mut();
     exe_file = get_task_exe_file(current);
     if (exe_file) {
-    pr_info("%pD: %s: potentially unexpected fatal signal %d.\n",
+    pr_info!("%pD: %s: potentially unexpected fatal signal %d.\n",
     exe_file, current.comm, signr);
     fput(exe_file);
     } else {
-    pr_info("%s: potentially unexpected fatal signal %d.\n",
+    pr_info!("%s: potentially unexpected fatal signal %d.\n",
     current.comm, signr);
     }
 
-    pr_info("code at %08lx: ", regs.ip);
+    pr_info!("code at %08lx: ", regs.ip);
     {
-    int i;
-    for (i = 0; i < 16; i++) {
-    unsigned char insn;
-    if (get_user(insn, (unsigned char *)(regs.ip + i)))
+    let mut i = 0;
+    while (i < 16) {
+    let mut insn = 0;
+    if (get_user(insn, (regs.ip + i))) {
     break;
+    }
     pr_cont("%02x ", insn);
     }
     }
@@ -1116,12 +1423,11 @@ unsafe extern "C" fn setup_print_fatal_signals(str: *mut c_char) -> c_int {
     get_option (&str, &print_fatal_signals);
     return 1;
     }
-    __setup("print-fatal-signals=", setup_print_fatal_signals);
-    int do_send_sig_info(int sig, struct kernel_siginfo *info, struct task_struct *p,
-    enum pid_type type)
-    {
-    unsigned long flags;
-    let mut ret: c_int = -ESRCH;
+    __setup!("print-fatal-signals=", setup_print_fatal_signals);
+#[no_mangle]
+pub unsafe extern "C" fn do_send_sig_info(sig: c_int, info: *mut kernel_siginfo, p: *mut task_struct, type: pid_type) -> c_int {
+    let mut flags = 0;
+pub static mut ret: c_int = 0;
     if (lock_task_sighand(p, &flags)) {
     ret = send_signal_locked(sig, info, p, type);
     unlock_task_sighand(p, &flags);
@@ -1144,36 +1450,40 @@ unsafe extern "C" fn setup_print_fatal_signals(str: *mut c_char) -> c_int {
 // We don't want to have recursive SIGSEGV's etc, for example,
 // that is why we also clear SIGNAL_UNKILLABLE.
 //
-    static int
-    force_sig_info_to_task(struct kernel_siginfo *info, struct task_struct *t,
-    enum sig_handler handler)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn force_sig_info_to_task(info: *mut kernel_siginfo, t: *mut task_struct, handler: sig_handler) -> c_int {
     unsigned long int flags;
-    int ret, blocked, ignored;
-    struct k_sigaction *action;
-    let mut sig: c_int = info.si_signo;
+    let mut ret = 0;
+    let mut blocked = 0;
+    let mut ignored = 0;
+pub static mut action: *mut c_void = core::ptr::null_mut();
+pub static mut sig: c_int = 0;
     spin_lock_irqsave(&t.sighand.siglock, flags);
     action = &t.sighand.action[sig-1];
     ignored = action.sa.sa_handler == SIG_IGN;
     blocked = sigismember(&t.blocked, sig);
     if (blocked || ignored || (handler != HANDLER_CURRENT)) {
     action.sa.sa_handler = SIG_DFL;
-    if (handler == HANDLER_EXIT)
+    if (handler == HANDLER_EXIT) {
     action.sa.sa_flags |= SA_IMMUTABLE;
-    if (blocked)
+    }
+    if (blocked) {
     sigdelset(&t.blocked, sig);
+    }
     }
 //
 // Don't clear SIGNAL_UNKILLABLE for traced tasks, users won't expect
 // debugging to leave init killable. But HANDLER_EXIT is always fatal.
 //
     if (action.sa.sa_handler == SIG_DFL &&
-    (!t.ptrace || (handler == HANDLER_EXIT)))
+    (!t.ptrace || (handler == HANDLER_EXIT))) {
     t.signal.flags &= ~SIGNAL_UNKILLABLE;
+    }
     ret = send_signal_locked(sig, info, t, PIDTYPE_PID);
 // This can happen if the signal was already pending and blocked
-    if (!task_sigpending(t))
+    if (!task_sigpending(t)) {
     signal_wake_up(t, 0);
+    }
     spin_unlock_irqrestore(&t.sighand.siglock, flags);
     return ret;
     }
@@ -1186,25 +1496,25 @@ pub unsafe extern "C" fn force_sig_info(info: *mut kernel_siginfo) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn zap_other_threads(p: *mut task_struct) -> c_int {
-    struct task_struct *t;
-    let mut count: c_int = 0;
+pub static mut t: *mut c_void = core::ptr::null_mut();
+pub static mut count: c_int = 0;
     p.signal.group_stop_count = 0;
     task_clear_jobctl_pending(p, JOBCTL_PENDING_MASK);
     for_other_threads(p, t) {
     task_clear_jobctl_pending(t, JOBCTL_PENDING_MASK);
-    count++;
+    count += 1;
 // Don't bother with already dead threads
-    if (t.exit_state)
+    if (t.exit_state) {
     continue;
+    }
     sigaddset(&t.pending.signal, SIGKILL);
     signal_wake_up(t, 1);
     }
     return count;
     }
-    struct sighand_struct *lock_task_sighand(struct task_struct *tsk,
-    unsigned long *flags)
-    {
-    struct sighand_struct *sighand;
+#[no_mangle]
+pub unsafe extern "C" fn lock_task_sighand(tsk: *mut task_struct, flags: *mut c_ulong) -> *mut c_void {
+pub static mut sighand: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     for (;;) {
     sighand = rcu_dereference(tsk.sighand);
@@ -1230,8 +1540,9 @@ pub unsafe extern "C" fn zap_other_threads(p: *mut task_struct) -> c_int {
 // must see ->sighand == NULL.
 //
     spin_lock_irqsave(&sighand.siglock, *flags);
-    if (likely(sighand == rcu_access_pointer(tsk.sighand)))
+    if (likely(sighand == rcu_access_pointer(tsk.sighand))) {
     break;
+    }
     spin_unlock_irqrestore(&sighand.siglock, *flags);
     }
     rcu_read_unlock();
@@ -1240,13 +1551,15 @@ pub unsafe extern "C" fn zap_other_threads(p: *mut task_struct) -> c_int {
 
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_assert_task_sighand_held(task: *mut task_struct) {
-    struct sighand_struct *sighand;
+pub static mut sighand: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     sighand = rcu_dereference(task.sighand);
-    if (sighand)
+    if (sighand) {
     lockdep_assert_held(&sighand.siglock);
-    else
-    WARN_ON_ONCE(1);
+    }
+    else {
+    WARN_ON_ONCE!(1);
+    }
     rcu_read_unlock();
     }
 
@@ -1254,15 +1567,15 @@ pub unsafe extern "C" fn lockdep_assert_task_sighand_held(task: *mut task_struct
 // send signal info to all the members of a thread group or to the
 // individual thread if type == PIDTYPE_PID.
 //
-    int group_send_sig_info(int sig, struct kernel_siginfo *info,
-    struct task_struct *p, enum pid_type type)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn group_send_sig_info(sig: c_int, info: *mut kernel_siginfo, p: *mut task_struct, type: pid_type) -> c_int {
+    let mut ret = 0;
     rcu_read_lock();
     ret = check_kill_permission(sig, info, p);
     rcu_read_unlock();
-    if (!ret && sig)
+    if (!ret && sig) {
     ret = do_send_sig_info(sig, info, p, type);
+    }
     return ret;
     }
 //
@@ -1272,34 +1585,36 @@ pub unsafe extern "C" fn lockdep_assert_task_sighand_held(task: *mut task_struct
 //
 #[no_mangle]
 pub unsafe extern "C" fn __kill_pgrp_info(sig: c_int, info: *mut kernel_siginfo, pgrp: *mut pid) -> c_int {
-    struct task_struct *p = core::ptr::null_mut();
-    let mut ret: c_int = -ESRCH;
+    let mut p = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     do_each_pid_task(pgrp, PIDTYPE_PGID, p) {
-    let mut err: c_int = group_send_sig_info(sig, info, p, PIDTYPE_PGID);
+pub static mut err: c_int = 0;
 //
 // If group_send_sig_info() succeeds at least once ret
 // becomes 0 and after that the code below has no effect.
 // Otherwise we return the last err or -ESRCH if this
 // process group is empty.
 //
-    if (ret)
+    if (ret) {
     ret = err;
+    }
     } while_each_pid_task(pgrp, PIDTYPE_PGID, p);
     return ret;
     }
-    static int kill_pid_info_type(int sig, struct kernel_siginfo *info,
-    struct pid *pid, enum pid_type type)
-    {
-    let mut error: c_int = -ESRCH;
-    struct task_struct *p;
+#[no_mangle]
+pub unsafe extern "C" fn kill_pid_info_type(sig: c_int, info: *mut kernel_siginfo, pid: *mut pid, type: pid_type) -> c_int {
+pub static mut error: c_int = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
     for (;;) {
     rcu_read_lock();
     p = pid_task(pid, PIDTYPE_PID);
-    if (p)
+    if (p) {
     error = group_send_sig_info(sig, info, p, type);
+    }
     rcu_read_unlock();
-    if (likely(!p || error != -ESRCH))
+    if (likely(!p || error != -ESRCH)) {
     return error;
+    }
 //
 // The task was unhashed in between, try again.  If it
 // is dead, pid_task() will return NULL, if we race with
@@ -1313,16 +1628,15 @@ pub unsafe extern "C" fn kill_pid_info(sig: c_int, info: *mut kernel_siginfo, pi
     }
 #[no_mangle]
 unsafe extern "C" fn kill_proc_info(sig: c_int, info: *mut kernel_siginfo, pid: pid_t) -> c_int {
-    int error;
+    let mut error = 0;
     rcu_read_lock();
     error = kill_pid_info(sig, info, find_vpid(pid));
     rcu_read_unlock();
     return error;
     }
-    static inline bool kill_as_cred_perm(const struct cred *cred,
-    struct task_struct *target)
-    {
-    const struct cred *pcred = __task_cred(target);
+#[no_mangle]
+pub unsafe extern "C" fn kill_as_cred_perm(cred: *mut cred, target: *mut task_struct) -> bool {
+    let mut pcred = __task_cred(target);
     return uid_eq(cred.euid, pcred.suid) ||
     uid_eq(cred.euid, pcred.uid) ||
     uid_eq(cred.uid, pcred.suid) ||
@@ -1338,7 +1652,7 @@ unsafe extern "C" fn kill_proc_info(sig: c_int, info: *mut kernel_siginfo, pid: 
 //
 // Unfortunately when usb generates SI_ASYNCIO it assumes the layout
 // after the generic fields is:
-// void __user 	*si_addr;
+// void  	*si_addr;
 //
 // This is a practical problem when there is a 64bit big endian kernel
 // and a 32bit userspace.  As the 32bit address will encoded in the low
@@ -1353,41 +1667,43 @@ unsafe extern "C" fn kill_proc_info(sig: c_int, info: *mut kernel_siginfo, pid: 
 // pointer in sival_int, instead of sival_addr of the sigval_t addr
 // parameter.
 //
-    int kill_pid_usb_asyncio(int sig, int errno, sigval_t addr,
-    struct pid *pid, const struct cred *cred)
-    {
-    struct kernel_siginfo info;
-    struct task_struct *p;
-    unsigned long flags;
-    let mut ret: c_int = -EINVAL;
-    if (!valid_signal(sig))
+#[no_mangle]
+pub unsafe extern "C" fn kill_pid_usb_asyncio(sig: c_int, errno: c_int, addr: sigval_t, pid: *mut pid, cred: *mut cred) -> c_int {
+pub static mut info: usize = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+pub static mut ret: c_int = 0;
+    if (!valid_signal(sig)) {
     return ret;
+    }
     clear_siginfo(&info);
     info.si_signo = sig;
     info.si_errno = errno;
     info.si_code = SI_ASYNCIO;
-// ((sigval_t *)&info.si_pid) = addr;
+// (&info.si_pid) = addr;
     rcu_read_lock();
     p = pid_task(pid, PIDTYPE_PID);
     if (!p) {
     ret = -ESRCH;
-    goto out_unlock;
+// goto;
     }
     if (!kill_as_cred_perm(cred, p)) {
     ret = -EPERM;
-    goto out_unlock;
+// goto;
     }
     ret = security_task_kill(p, &info, sig, cred);
-    if (ret)
-    goto out_unlock;
+    if (ret) {
+// goto;
+    }
     if (sig) {
     if (lock_task_sighand(p, &flags)) {
     ret = __send_signal_locked(sig, &info, p, PIDTYPE_TGID, false);
     unlock_task_sighand(p, &flags);
-    } else
+    } else {
     ret = -ESRCH;
     }
-    out_unlock:
+    }
+// label;
     rcu_read_unlock();
     return ret;
     }
@@ -1400,27 +1716,30 @@ unsafe extern "C" fn kill_proc_info(sig: c_int, info: *mut kernel_siginfo, pid: 
 //
 #[no_mangle]
 unsafe extern "C" fn kill_something_info(sig: c_int, info: *mut kernel_siginfo, pid: pid_t) -> c_int {
-    int ret;
-    if (pid > 0)
+    let mut ret = 0;
+    if (pid > 0) {
     return kill_proc_info(sig, info, pid);
+    }
 // -INT_MIN is undefined.  Exclude this case to avoid a UBSAN warning
-    if (pid == INT_MIN)
+    if (pid == INT_MIN) {
     return -ESRCH;
+    }
     read_lock(&tasklist_lock);
     if (pid != -1) {
     ret = __kill_pgrp_info(sig, info,
     pid ? find_vpid(-pid) : task_pgrp(current));
     } else {
-    let mut retval: c_int = 0, count = 0;
+pub static mut retval: c_int = 0;
     struct task_struct * p;
     for_each_process(p) {
     if (task_pid_vnr(p) > 1 &&
     !same_thread_group(p, current)) {
-    int err = group_send_sig_info(sig, info, p,
+    let mut err = group_send_sig_info(sig, info, p,
     PIDTYPE_MAX);
-    ++count;
-    if (err != -EPERM)
+    count += 1;
+    if (err != -EPERM) {
     retval = err;
+    }
     }
     }
     ret = count ? retval : -ESRCH;
@@ -1437,22 +1756,22 @@ pub unsafe extern "C" fn send_sig_info(sig: c_int, info: *mut kernel_siginfo, p:
 // Make sure legacy kernel users don't send in bad values
 // (normal paths check this in check_kill_permission).
 //
-    if (!valid_signal(sig))
+    if (!valid_signal(sig)) {
     return -EINVAL;
+    }
     return do_send_sig_info(sig, info, p, PIDTYPE_PID);
     }
     EXPORT_SYMBOL(send_sig_info);
 
     ((priv) ? SEND_SIG_PRIV : SEND_SIG_NOINFO)
-    int
-    send_sig(int sig, struct task_struct *p, int priv)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn send_sig(sig: c_int, p: *mut task_struct, priv: c_int) -> c_int {
     return send_sig_info(sig, __si_special(priv), p);
     }
     EXPORT_SYMBOL(send_sig);
 #[no_mangle]
 pub unsafe extern "C" fn force_sig(sig: c_int) {
-    struct kernel_siginfo info;
+pub static mut info: usize = 0;
     clear_siginfo(&info);
     info.si_signo = sig;
     info.si_errno = 0;
@@ -1464,7 +1783,7 @@ pub unsafe extern "C" fn force_sig(sig: c_int) {
     EXPORT_SYMBOL(force_sig);
 #[no_mangle]
 pub unsafe extern "C" fn force_fatal_sig(sig: c_int) {
-    struct kernel_siginfo info;
+pub static mut info: usize = 0;
     clear_siginfo(&info);
     info.si_signo = sig;
     info.si_errno = 0;
@@ -1475,7 +1794,7 @@ pub unsafe extern "C" fn force_fatal_sig(sig: c_int) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn force_exit_sig(sig: c_int) {
-    struct kernel_siginfo info;
+pub static mut info: usize = 0;
     clear_siginfo(&info);
     info.si_signo = sig;
     info.si_errno = 0;
@@ -1492,15 +1811,16 @@ pub unsafe extern "C" fn force_exit_sig(sig: c_int) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn force_sigsegv(sig: c_int) {
-    if (sig == SIGSEGV)
+    if (sig == SIGSEGV) {
     force_fatal_sig(SIGSEGV);
-    else
+    }
+    else {
     force_sig(SIGSEGV);
     }
-    int force_sig_fault_to_task(int sig, int code, void __user *addr,
-    struct task_struct *t)
-    {
-    struct kernel_siginfo info;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn force_sig_fault_to_task(sig: c_int, code: c_int, addr: *mut c_void, t: *mut task_struct) -> c_int {
+pub static mut info: usize = 0;
     clear_siginfo(&info);
     info.si_signo = sig;
     info.si_errno = 0;
@@ -1509,12 +1829,12 @@ pub unsafe extern "C" fn force_sigsegv(sig: c_int) {
     return force_sig_info_to_task(&info, t, HANDLER_CURRENT);
     }
 #[no_mangle]
-pub unsafe extern "C" fn force_sig_fault(sig: c_int, code: c_int, addr: *mut void __user) -> c_int {
+pub unsafe extern "C" fn force_sig_fault(sig: c_int, code: c_int, addr: *mut c_void ) -> c_int {
     return force_sig_fault_to_task(sig, code, addr, current);
     }
 #[no_mangle]
-pub unsafe extern "C" fn send_sig_fault(sig: c_int, code: c_int, addr: *mut void __user, t: *mut task_struct) -> c_int {
-    struct kernel_siginfo info;
+pub unsafe extern "C" fn send_sig_fault(sig: c_int, code: c_int, addr: *mut c_void , t: *mut task_struct) -> c_int {
+pub static mut info: usize = 0;
     clear_siginfo(&info);
     info.si_signo = sig;
     info.si_errno = 0;
@@ -1523,9 +1843,9 @@ pub unsafe extern "C" fn send_sig_fault(sig: c_int, code: c_int, addr: *mut void
     return send_sig_info(info.si_signo, &info, t);
     }
 #[no_mangle]
-pub unsafe extern "C" fn force_sig_mceerr(code: c_int, addr: *mut void __user, lsb: c_short) -> c_int {
-    struct kernel_siginfo info;
-    WARN_ON((code != BUS_MCEERR_AO) && (code != BUS_MCEERR_AR));
+pub unsafe extern "C" fn force_sig_mceerr(code: c_int, addr: *mut c_void , lsb: c_short) -> c_int {
+pub static mut info: usize = 0;
+    WARN_ON!((code != BUS_MCEERR_AO) && (code != BUS_MCEERR_AR));
     clear_siginfo(&info);
     info.si_signo = SIGBUS;
     info.si_errno = 0;
@@ -1535,9 +1855,9 @@ pub unsafe extern "C" fn force_sig_mceerr(code: c_int, addr: *mut void __user, l
     return force_sig_info(&info);
     }
 #[no_mangle]
-pub unsafe extern "C" fn send_sig_mceerr(code: c_int, addr: *mut void __user, lsb: c_short, t: *mut task_struct) -> c_int {
-    struct kernel_siginfo info;
-    WARN_ON((code != BUS_MCEERR_AO) && (code != BUS_MCEERR_AR));
+pub unsafe extern "C" fn send_sig_mceerr(code: c_int, addr: *mut c_void , lsb: c_short, t: *mut task_struct) -> c_int {
+pub static mut info: usize = 0;
+    WARN_ON!((code != BUS_MCEERR_AO) && (code != BUS_MCEERR_AR));
     clear_siginfo(&info);
     info.si_signo = SIGBUS;
     info.si_errno = 0;
@@ -1548,8 +1868,8 @@ pub unsafe extern "C" fn send_sig_mceerr(code: c_int, addr: *mut void __user, ls
     }
     EXPORT_SYMBOL(send_sig_mceerr);
 #[no_mangle]
-pub unsafe extern "C" fn force_sig_bnderr(addr: *mut void __user, lower: *mut void __user, upper: *mut void __user) -> c_int {
-    struct kernel_siginfo info;
+pub unsafe extern "C" fn force_sig_bnderr(addr: *mut c_void , lower: *mut c_void , upper: *mut c_void ) -> c_int {
+pub static mut info: usize = 0;
     clear_siginfo(&info);
     info.si_signo = SIGSEGV;
     info.si_errno = 0;
@@ -1561,8 +1881,8 @@ pub unsafe extern "C" fn force_sig_bnderr(addr: *mut void __user, lower: *mut vo
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn force_sig_pkuerr(addr: *mut void __user, pkey: u32) -> c_int {
-    struct kernel_siginfo info;
+pub unsafe extern "C" fn force_sig_pkuerr(addr: *mut c_void , pkey: u32) -> c_int {
+pub static mut info: usize = 0;
     clear_siginfo(&info);
     info.si_signo = SIGSEGV;
     info.si_errno = 0;
@@ -1573,8 +1893,8 @@ pub unsafe extern "C" fn force_sig_pkuerr(addr: *mut void __user, pkey: u32) -> 
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn send_sig_perf(addr: *mut void __user, type: u32, sig_data: u64) -> c_int {
-    struct kernel_siginfo info;
+pub unsafe extern "C" fn send_sig_perf(addr: *mut c_void , type: u32, sig_data: u64) -> c_int {
+pub static mut info: usize = 0;
     clear_siginfo(&info);
     info.si_signo     = SIGTRAP;
     info.si_errno     = 0;
@@ -1604,11 +1924,11 @@ pub unsafe extern "C" fn send_sig_perf(addr: *mut void __user, type: u32, sig_da
 //
 #[no_mangle]
 pub unsafe extern "C" fn force_sig_seccomp(syscall: c_int, reason: c_int, force_coredump: bool) -> c_int {
-    struct kernel_siginfo info;
+pub static mut info: usize = 0;
     clear_siginfo(&info);
     info.si_signo = SIGSYS;
     info.si_code = SYS_SECCOMP;
-    info.si_call_addr = (void __user *)KSTK_EIP(current);
+    info.si_call_addr = KSTK_EIP(current);
     info.si_errno = reason;
     info.si_arch = syscall_get_arch(current);
     info.si_syscall = syscall;
@@ -1619,8 +1939,8 @@ pub unsafe extern "C" fn force_sig_seccomp(syscall: c_int, reason: c_int, force_
 // the errno field, instead of an actual errno value.
 //
 #[no_mangle]
-pub unsafe extern "C" fn force_sig_ptrace_errno_trap(errno: c_int, addr: *mut void __user) -> c_int {
-    struct kernel_siginfo info;
+pub unsafe extern "C" fn force_sig_ptrace_errno_trap(errno: c_int, addr: *mut c_void ) -> c_int {
+pub static mut info: usize = 0;
     clear_siginfo(&info);
     info.si_signo = SIGTRAP;
     info.si_errno = errno;
@@ -1632,8 +1952,8 @@ pub unsafe extern "C" fn force_sig_ptrace_errno_trap(errno: c_int, addr: *mut vo
 // si_trapno.
 //
 #[no_mangle]
-pub unsafe extern "C" fn force_sig_fault_trapno(sig: c_int, code: c_int, addr: *mut void __user, trapno: c_int) -> c_int {
-    struct kernel_siginfo info;
+pub unsafe extern "C" fn force_sig_fault_trapno(sig: c_int, code: c_int, addr: *mut c_void , trapno: c_int) -> c_int {
+pub static mut info: usize = 0;
     clear_siginfo(&info);
     info.si_signo = sig;
     info.si_errno = 0;
@@ -1645,10 +1965,9 @@ pub unsafe extern "C" fn force_sig_fault_trapno(sig: c_int, code: c_int, addr: *
 // For the rare architectures that include trap information using
 // si_trapno.
 //
-    int send_sig_fault_trapno(int sig, int code, void __user *addr, int trapno,
-    struct task_struct *t)
-    {
-    struct kernel_siginfo info;
+#[no_mangle]
+pub unsafe extern "C" fn send_sig_fault_trapno(sig: c_int, code: c_int, addr: *mut c_void, trapno: c_int, t: *mut task_struct) -> c_int {
+pub static mut info: usize = 0;
     clear_siginfo(&info);
     info.si_signo = sig;
     info.si_errno = 0;
@@ -1659,7 +1978,7 @@ pub unsafe extern "C" fn force_sig_fault_trapno(sig: c_int, code: c_int, addr: *
     }
 #[no_mangle]
 unsafe extern "C" fn kill_pgrp_info(sig: c_int, info: *mut kernel_siginfo, pgrp: *mut pid) -> c_int {
-    int ret;
+    let mut ret = 0;
     read_lock(&tasklist_lock);
     ret = __kill_pgrp_info(sig, info, pgrp);
     read_unlock(&tasklist_lock);
@@ -1683,11 +2002,12 @@ pub unsafe extern "C" fn kill_pid(pid: *mut pid, sig: c_int, priv: c_int) -> c_i
 #[no_mangle]
 unsafe extern "C" fn __flush_itimer_signals(pending: *mut sigpending) {
     sigset_t signal, retain;
-    struct sigqueue *q, *n;
+    let mut q = core::ptr::null_mut();
+    let mut n = core::ptr::null_mut();
     signal = pending.signal;
     sigemptyset(&retain);
     list_for_each_entry_safe(q, n, &pending.list, list) {
-    let mut sig: c_int = q.info.si_signo;
+pub static mut sig: c_int = 0;
     if (likely(q.info.si_code != SI_TIMER)) {
     sigaddset(&retain, sig);
     } else {
@@ -1700,24 +2020,25 @@ unsafe extern "C" fn __flush_itimer_signals(pending: *mut sigpending) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn flush_itimer_signals() {
-    struct task_struct *tsk = current;
+    let mut tsk = current;
     guard(spinlock_irqsave)(&tsk.sighand.siglock);
     __flush_itimer_signals(&tsk.pending);
     __flush_itimer_signals(&tsk.signal.shared_pending);
     }
 #[no_mangle]
 pub unsafe extern "C" fn posixtimer_init_sigqueue(q: *mut sigqueue) -> bool {
-    struct ucounts *ucounts = sig_get_ucounts(current, -1, 0);
-    if (!ucounts)
+    let mut ucounts = sig_get_ucounts(current, -1, 0);
+    if (!ucounts) {
     return false;
+    }
     clear_siginfo(&q.info);
     __sigqueue_init(q, ucounts, SIGQUEUE_PREALLOC);
     return true;
     }
 #[no_mangle]
-unsafe extern "C" fn posixtimer_queue_sigqueue(q: *mut sigqueue, t: *mut task_struct, type: enum pid_type) {
-    struct sigpending *pending;
-    let mut sig: c_int = q.info.si_signo;
+unsafe extern "C" fn posixtimer_queue_sigqueue(q: *mut sigqueue, t: *mut task_struct, type: pid_type) {
+pub static mut pending: *mut c_void = core::ptr::null_mut();
+pub static mut sig: c_int = 0;
     signalfd_notify(t, sig);
     pending = (type != PIDTYPE_PID) ? &t.signal.shared_pending : &t.pending;
     list_add_tail(&q.list, &pending.list);
@@ -1735,27 +2056,30 @@ unsafe extern "C" fn posixtimer_queue_sigqueue(q: *mut sigqueue, t: *mut task_st
 // the same thread group as the target process and its sighand is
 // stable, which avoids unnecessarily waking up a potentially idle task.
 //
-    static inline struct task_struct *posixtimer_get_target(struct k_itimer *tmr)
-    {
-    struct task_struct *t = pid_task(tmr.it_pid, tmr.it_pid_type);
+#[no_mangle]
+pub unsafe extern "C" fn posixtimer_get_target(tmr: *mut k_itimer) -> *mut c_void {
+    let mut t = pid_task(tmr.it_pid, tmr.it_pid_type);
     if (t && tmr.it_pid_type != PIDTYPE_PID &&
-    same_thread_group(t, current) && !current.exit_state)
+    same_thread_group(t, current) && !current.exit_state) {
     t = current;
+    }
     return t;
     }
 #[no_mangle]
 pub unsafe extern "C" fn posixtimer_send_sigqueue(tmr: *mut k_itimer) {
-    struct sigqueue *q = &tmr.sigq;
-    let mut sig: c_int = q.info.si_signo;
-    struct task_struct *t;
-    unsigned long flags;
-    int result;
+    let mut q = &tmr.sigq;
+pub static mut sig: c_int = 0;
+pub static mut t: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut result = 0;
     guard(rcu)();
     t = posixtimer_get_target(tmr);
-    if (!t)
+    if (!t) {
     return;
-    if (!likely(lock_task_sighand(t, &flags)))
+    }
+    if (!likely(lock_task_sighand(t, &flags))) {
     return;
+    }
 //
 // Update @tmr::sigqueue_seq for posix timer signals with sighand
 // locked to prevent a race against dequeue_signal().
@@ -1787,7 +2111,7 @@ pub unsafe extern "C" fn posixtimer_send_sigqueue(tmr: *mut k_itimer) {
 // ignored independent of its queued state. This
 // gets cleaned up in __exit_signal().
 //
-    goto out;
+// goto;
     }
 // Periodic timers with SIG_IGN are queued on the ignored list
     if (tmr.it_sig_periodic) {
@@ -1817,12 +2141,12 @@ pub unsafe extern "C" fn posixtimer_send_sigqueue(tmr: *mut k_itimer) {
     hlist_del_init(&tmr.ignored_list);
     posixtimer_putref(tmr);
     }
-    goto out;
+// goto;
     }
     if (unlikely(!list_empty(&q.list))) {
 // This holds a reference count already
     result = TRACE_SIGNAL_ALREADY_PENDING;
-    goto out;
+// goto;
     }
 //
 // If the signal is on the ignore list, it got blocked after it was
@@ -1832,36 +2156,41 @@ pub unsafe extern "C" fn posixtimer_send_sigqueue(tmr: *mut k_itimer) {
 //
 // If it's not on the ignore list acquire a reference count.
 //
-    if (likely(hlist_unhashed(&tmr.ignored_list)))
+    if (likely(hlist_unhashed(&tmr.ignored_list))) {
     posixtimer_sigqueue_getref(q);
-    else
+    }
+    else {
     hlist_del_init(&tmr.ignored_list);
+    }
     posixtimer_queue_sigqueue(q, t, tmr.it_pid_type);
     result = TRACE_SIGNAL_DELIVERED;
-    out:
+// label;
     trace_signal_generate(sig, &q.info, t, tmr.it_pid_type != PIDTYPE_PID, result);
     unlock_task_sighand(t, &flags);
     }
 #[no_mangle]
 pub unsafe extern "C" fn posixtimer_sig_ignore(tsk: *mut task_struct, q: *mut sigqueue) {
-    struct k_itimer *tmr = container_of(q, struct k_itimer, sigq);
+    let mut tmr = container_of!(q, k_itimer, sigq);
 //
 // If the timer is marked deleted already or the signal originates
 // from a non-periodic timer, then just drop the reference
 // count. Otherwise queue it on the ignored list.
 //
-    if (posixtimer_valid(tmr) && tmr.it_sig_periodic)
+    if (posixtimer_valid(tmr) && tmr.it_sig_periodic) {
     hlist_add_head(&tmr.ignored_list, &tsk.signal.ignored_posix_timers);
-    else
+    }
+    else {
     posixtimer_putref(tmr);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn posixtimer_sig_unignore(tsk: *mut task_struct, sig: c_int) {
-    struct hlist_head *head = &tsk.signal.ignored_posix_timers;
-    struct hlist_node *tmp;
-    struct k_itimer *tmr;
-    if (likely(hlist_empty(head)))
+    let mut head = &tsk.signal.ignored_posix_timers;
+pub static mut tmp: *mut c_void = core::ptr::null_mut();
+pub static mut tmr: *mut c_void = core::ptr::null_mut();
+    if (likely(hlist_empty(head))) {
     return;
+    }
 //
 // Rearming a timer with sighand lock held is not possible due to
 // lock ordering vs. tmr::it_lock. Just stick the sigqueue back and
@@ -1870,37 +2199,45 @@ unsafe extern "C" fn posixtimer_sig_unignore(tsk: *mut task_struct, sig: c_int) 
 // lock and creating a loop retry horror show.
 //
     hlist_for_each_entry_safe(tmr, tmp , head, ignored_list) {
-    struct task_struct *target;
+pub static mut target: *mut c_void = core::ptr::null_mut();
 //
 // tmr::sigq.info.si_signo is immutable, so accessing it
 // without holding tmr::it_lock is safe.
 //
-    if (tmr.sigq.info.si_signo != sig)
+    if (tmr.sigq.info.si_signo != sig) {
     continue;
+    }
     hlist_del_init(&tmr.ignored_list);
 // This should never happen and leaks a reference count
-    if (WARN_ON_ONCE(!list_empty(&tmr.sigq.list)))
+    if (WARN_ON_ONCE!(!list_empty(&tmr.sigq.list))) {
     continue;
+    }
 //
 // Get the target for the signal. If target is a thread and
 // has exited by now, drop the reference count.
 //
     guard(rcu)();
     target = posixtimer_get_target(tmr);
-    if (target)
+    if (target) {
     posixtimer_queue_sigqueue(&tmr.sigq, target, tmr.it_pid_type);
-    else
+    }
+    else {
     posixtimer_putref(tmr);
     }
     }
+    }
 
-    static inline void posixtimer_sig_ignore(struct task_struct *tsk, struct sigqueue *q) { }
-    static inline void posixtimer_sig_unignore(struct task_struct *tsk, int sig) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: posixtimer_sig_ignore
+pub unsafe extern "C" fn posixtimer_sig_ignore_dup(tsk: *mut task_struct, q: *mut sigqueue) { }
+#[no_mangle]
+pub unsafe extern "C" fn posixtimer_sig_unignore(tsk: *mut task_struct, sig: c_int) { }
 
 #[no_mangle]
 pub unsafe extern "C" fn do_notify_pidfd(task: *mut task_struct) {
-    struct pid *pid = task_pid(task);
-    WARN_ON(task.exit_state == 0);
+    let mut pid = task_pid(task);
+    WARN_ON!(task.exit_state == 0);
     __wake_up(&pid.wait_pidfd, TASK_NORMAL, 0,
     poll_to_key(EPOLLIN | EPOLLRDNORM));
     }
@@ -1913,16 +2250,17 @@ pub unsafe extern "C" fn do_notify_pidfd(task: *mut task_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn do_notify_parent(tsk: *mut task_struct, sig: c_int) -> bool {
-    struct kernel_siginfo info;
-    unsigned long flags;
-    struct sighand_struct *psig;
-    let mut autoreap: bool = false;
+pub static mut info: usize = 0;
+    let mut flags = 0;
+pub static mut psig: *mut c_void = core::ptr::null_mut();
+pub static mut autoreap: bool = false;
     u64 utime, stime;
-    if (WARN_ON_ONCE(!valid_signal(sig)))
+    if (WARN_ON_ONCE!(!valid_signal(sig))) {
     return false;
+    }
 // do_notify_parent_cldstop should have been called instead.
-    WARN_ON_ONCE(task_is_stopped_or_traced(tsk));
-    WARN_ON_ONCE(!tsk.ptrace && !thread_group_empty(tsk));
+    WARN_ON_ONCE!(task_is_stopped_or_traced(tsk));
+    WARN_ON_ONCE!(!tsk.ptrace && !thread_group_empty(tsk));
 // ptraced, or group-leader without sub-threads
     do_notify_pidfd(tsk);
     if (sig != SIGCHLD) {
@@ -1930,8 +2268,9 @@ pub unsafe extern "C" fn do_notify_parent(tsk: *mut task_struct, sig: c_int) -> 
 // This is only possible if parent == real_parent.
 // Check if it has changed security domain.
 //
-    if (tsk.parent_exec_id != READ_ONCE(tsk.parent.self_exec_id))
+    if (tsk.parent_exec_id != READ_ONCE(tsk.parent.self_exec_id)) {
     sig = SIGCHLD;
+    }
     }
     clear_siginfo(&info);
     info.si_signo = sig;
@@ -1956,12 +2295,13 @@ pub unsafe extern "C" fn do_notify_parent(tsk: *mut task_struct, sig: c_int) -> 
     info.si_utime = nsec_to_clock_t(utime + tsk.signal.utime);
     info.si_stime = nsec_to_clock_t(stime + tsk.signal.stime);
     info.si_status = tsk.exit_code & 0x7f;
-    if (tsk.exit_code & 0x80)
+    if (tsk.exit_code & 0x80) {
     info.si_code = CLD_DUMPED;
-#[no_mangle]
-pub unsafe extern "C" fn if(0x7f: tsk->exit_code &) -> else {
-    else if (tsk.exit_code & 0x7f)
+    }
+
+    else if (tsk.exit_code & 0x7f) {
     info.si_code = CLD_KILLED;
+    }
     else {
     info.si_code = CLD_EXITED;
     info.si_status = tsk.exit_code >> 8;
@@ -1987,8 +2327,9 @@ pub unsafe extern "C" fn if(0x7f: tsk->exit_code &) -> else {
 // it, just use SIG_IGN instead).
 //
     autoreap = true;
-    if (psig.action[SIGCHLD-1].sa.sa_handler == SIG_IGN)
+    if (psig.action[SIGCHLD-1].sa.sa_handler == SIG_IGN) {
     sig = 0;
+    }
     }
     if (!tsk.ptrace && tsk.signal.autoreap) {
     autoreap = true;
@@ -1998,8 +2339,9 @@ pub unsafe extern "C" fn if(0x7f: tsk->exit_code &) -> else {
 // Send with __send_signal as si_pid and si_uid are in the
 // parent's namespaces.
 //
-    if (sig)
+    if (sig) {
     __send_signal_locked(sig, &info, tsk.parent, PIDTYPE_TGID, false);
+    }
     __wake_up_parent(tsk, tsk.parent);
     spin_unlock_irqrestore(&psig.siglock, flags);
     return autoreap;
@@ -2017,13 +2359,12 @@ pub unsafe extern "C" fn if(0x7f: tsk->exit_code &) -> else {
 // CONTEXT:
 // Must be called with tasklist_lock at least read locked.
 //
-    static void do_notify_parent_cldstop(struct task_struct *tsk,
-    bool for_ptracer, int why)
-    {
-    struct kernel_siginfo info;
-    unsigned long flags;
-    struct task_struct *parent;
-    struct sighand_struct *sighand;
+#[no_mangle]
+pub unsafe extern "C" fn do_notify_parent_cldstop(tsk: *mut task_struct, for_ptracer: bool, why: c_int) {
+pub static mut info: usize = 0;
+    let mut flags = 0;
+pub static mut parent: *mut c_void = core::ptr::null_mut();
+pub static mut sighand: *mut c_void = core::ptr::null_mut();
     u64 utime, stime;
     if (for_ptracer) {
     parent = tsk.parent;
@@ -2045,24 +2386,29 @@ pub unsafe extern "C" fn if(0x7f: tsk->exit_code &) -> else {
     info.si_utime = nsec_to_clock_t(utime);
     info.si_stime = nsec_to_clock_t(stime);
     info.si_code = why;
-    switch (why) {
-    case CLD_CONTINUED:
+    match (why) {
+    CLD_CONTINUED => {
     info.si_status = SIGCONT;
-    break;
-    case CLD_STOPPED:
+    // break;
+    }
+    CLD_STOPPED => {
     info.si_status = tsk.signal.group_exit_code & 0x7f;
-    break;
-    case CLD_TRAPPED:
+    // break;
+    }
+    CLD_TRAPPED => {
     info.si_status = tsk.exit_code & 0x7f;
-    break;
-    default:
+    // break;
+    }
+    _ => {
     BUG();
+    }
     }
     sighand = parent.sighand;
     spin_lock_irqsave(&sighand.siglock, flags);
     if (sighand.action[SIGCHLD-1].sa.sa_handler != SIG_IGN &&
-    !(sighand.action[SIGCHLD-1].sa.sa_flags & SA_NOCLDSTOP))
+    !(sighand.action[SIGCHLD-1].sa.sa_flags & SA_NOCLDSTOP)) {
     send_signal_locked(SIGCHLD, &info, parent, PIDTYPE_TGID);
+    }
 //
 // Even if SIGCHLD is not generated, we must wake up wait4 calls.
 //
@@ -2081,12 +2427,11 @@ pub unsafe extern "C" fn if(0x7f: tsk->exit_code &) -> else {
 // with.  If the code did not stop because the tracer is gone,
 // the stop signal remains unchanged unless clear_code.
 //
-    static int ptrace_stop(int exit_code, int why, unsigned long message,
-    kernel_siginfo_t *info)
+#[no_mangle]
+pub unsafe extern "C" fn ptrace_stop(exit_code: c_int, why: c_int, message: c_ulong, siglock: *mut kernel_siginfo_tinfo)
     __releases(&current.sighand.siglock)
-    __acquires(&current.sighand.siglock)
-    {
-    let mut gstop_done: bool = false;
+    __acquires(&current.sighand.) -> c_int {
+pub static mut gstop_done: bool = false;
     if (arch_ptrace_stop_needed()) {
 //
 // The arch code has something special to do before a
@@ -2106,8 +2451,9 @@ pub unsafe extern "C" fn if(0x7f: tsk->exit_code &) -> else {
 // signal comes in.  Handle previous ptrace_unlinks and fatal
 // signals here to prevent ptrace_stop sleeping in schedule.
 //
-    if (!current.ptrace || __fatal_signal_pending(current))
+    if (!current.ptrace || __fatal_signal_pending(current)) {
     return exit_code;
+    }
     set_special_state(TASK_TRACED);
     current.jobctl |= JOBCTL_TRACED;
 //
@@ -2139,12 +2485,14 @@ pub unsafe extern "C" fn if(0x7f: tsk->exit_code &) -> else {
 // could be clear now.  We act as if SIGCONT is received after
 // TASK_TRACED is entered - ignore it.
 //
-    if (why == CLD_STOPPED && (current.jobctl & JOBCTL_STOP_PENDING))
+    if (why == CLD_STOPPED && (current.jobctl & JOBCTL_STOP_PENDING)) {
     gstop_done = task_participate_group_stop(current);
+    }
 // any trap clears pending STOP trap, STOP trap clears NOTIFY
     task_clear_jobctl_pending(current, JOBCTL_TRAP_STOP);
-    if (info && info.si_code >> 8 == PTRACE_EVENT_STOP)
+    if (info && info.si_code >> 8 == PTRACE_EVENT_STOP) {
     task_clear_jobctl_pending(current, JOBCTL_TRAP_NOTIFY);
+    }
 // entering a trap, clear TRAPPING
     task_clear_jobctl_trapping(current);
     spin_unlock_irq(&current.sighand.siglock);
@@ -2159,10 +2507,12 @@ pub unsafe extern "C" fn if(0x7f: tsk->exit_code &) -> else {
 // for the two don't interact with each other.  Notify
 // separately unless they're gonna be duplicates.
 //
-    if (current.ptrace)
+    if (current.ptrace) {
     do_notify_parent_cldstop(current, true, why);
-    if (gstop_done && (!current.ptrace || ptrace_reparented(current)))
+    }
+    if (gstop_done && (!current.ptrace || ptrace_reparented(current))) {
     do_notify_parent_cldstop(current, false, why);
+    }
 //
 // The previous do_notify_parent_cldstop() invocation woke ptracer.
 // One a PREEMPTION kernel this can result in preemption requirement
@@ -2190,12 +2540,14 @@ pub unsafe extern "C" fn if(0x7f: tsk->exit_code &) -> else {
 // with preemption disabled due to the 'sleeping' spinlock
 // substitution of RT.
 //
-    if (!IS_ENABLED(CONFIG_PREEMPT_RT))
+    if (!IS_ENABLED!(CONFIG_PREEMPT_RT)) {
     preempt_disable();
+    }
     read_unlock(&tasklist_lock);
     cgroup_enter_frozen();
-    if (!IS_ENABLED(CONFIG_PREEMPT_RT))
+    if (!IS_ENABLED!(CONFIG_PREEMPT_RT)) {
     preempt_enable_no_resched();
+    }
     schedule();
     cgroup_leave_frozen(true);
 //
@@ -2220,7 +2572,7 @@ pub unsafe extern "C" fn if(0x7f: tsk->exit_code &) -> else {
     }
 #[no_mangle]
 unsafe extern "C" fn ptrace_do_notify(signr: c_int, exit_code: c_int, why: c_int, message: c_ulong) -> c_int {
-    kernel_siginfo_t info;
+    let mut info;
     clear_siginfo(&info);
     info.si_signo = signr;
     info.si_code = exit_code;
@@ -2231,10 +2583,11 @@ unsafe extern "C" fn ptrace_do_notify(signr: c_int, exit_code: c_int, why: c_int
     }
 #[no_mangle]
 pub unsafe extern "C" fn ptrace_notify(exit_code: c_int, message: c_ulong) -> c_int {
-    int signr;
-    BUG_ON((exit_code & (0x7f | ~0xffff)) != SIGTRAP);
-    if (unlikely(task_work_pending(current)))
+    let mut signr = 0;
+    BUG_ON!((exit_code & (0x7f | ~0xffff)) != SIGTRAP);
+    if (unlikely(task_work_pending(current))) {
     task_work_run();
+    }
     spin_lock_irq(&current.sighand.siglock);
     signr = ptrace_do_notify(SIGTRAP, exit_code, CLD_TRAPPED, message);
     spin_unlock_irq(&current.sighand.siglock);
@@ -2264,16 +2617,17 @@ pub unsafe extern "C" fn ptrace_notify(exit_code: c_int, message: c_ulong) -> c_
 //
 #[no_mangle]
 unsafe extern "C" fn do_signal_stop(signr: c_int) -> bool {
-    struct signal_struct *sig = current.signal;
+    let mut sig = current.signal;
     if (!(current.jobctl & JOBCTL_STOP_PENDING)) {
-    let mut gstop: c_ulong = JOBCTL_STOP_PENDING | JOBCTL_STOP_CONSUME;
-    struct task_struct *t;
+pub static mut gstop: c_ulong = 0;
+pub static mut t: *mut c_void = core::ptr::null_mut();
 // signr will be recorded in task->jobctl for retries
-    WARN_ON_ONCE(signr & ~JOBCTL_STOP_SIGMASK);
+    WARN_ON_ONCE!(signr & ~JOBCTL_STOP_SIGMASK);
     if (!likely(current.jobctl & JOBCTL_STOP_DEQUEUED) ||
     unlikely(sig.flags & SIGNAL_GROUP_EXIT) ||
-    unlikely(sig.group_exec_task))
+    unlikely(sig.group_exec_task)) {
     return false;
+    }
 //
 // There is no group stop already in progress.  We must
 // initiate one now.
@@ -2293,11 +2647,13 @@ unsafe extern "C" fn do_signal_stop(signr: c_int) -> bool {
 // an intervening stop signal is required to cause two
 // continued events regardless of ptrace.
 //
-    if (!(sig.flags & SIGNAL_STOP_STOPPED))
+    if (!(sig.flags & SIGNAL_STOP_STOPPED)) {
     sig.group_exit_code = signr;
+    }
     sig.group_stop_count = 0;
-    if (task_set_jobctl_pending(current, signr | gstop))
-    sig.group_stop_count++;
+    if (task_set_jobctl_pending(current, signr | gstop)) {
+    sig.group_stop_count += 1;
+    }
     for_other_threads(current, t) {
 //
 // Setting state to TASK_STOPPED for a group
@@ -2306,23 +2662,26 @@ unsafe extern "C" fn do_signal_stop(signr: c_int) -> bool {
 //
     if (!task_is_stopped(t) &&
     task_set_jobctl_pending(t, signr | gstop)) {
-    sig.group_stop_count++;
-    if (likely(!(t.ptrace & PT_SEIZED)))
+    sig.group_stop_count += 1;
+    if (likely(!(t.ptrace & PT_SEIZED))) {
     signal_wake_up(t, 0);
-    else
+    }
+    else {
     ptrace_trap_notify(t);
     }
     }
     }
+    }
     if (likely(!current.ptrace)) {
-    let mut notify: c_int = 0;
+pub static mut notify: c_int = 0;
 //
 // If there are no other threads in the group, or if there
 // is a group stop in progress and we are the last to stop,
 // report to the parent.
 //
-    if (task_participate_group_stop(current))
+    if (task_participate_group_stop(current)) {
     notify = CLD_STOPPED;
+    }
     current.jobctl |= JOBCTL_STOPPED;
     set_special_state(TASK_STOPPED);
     spin_unlock_irq(&current.sighand.siglock);
@@ -2370,17 +2729,18 @@ unsafe extern "C" fn do_signal_stop(signr: c_int) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn do_jobctl_trap() {
-    struct signal_struct *signal = current.signal;
-    let mut signr: c_int = current.jobctl & JOBCTL_STOP_SIGMASK;
+    let mut signal = current.signal;
+pub static mut signr: c_int = 0;
     if (current.ptrace & PT_SEIZED) {
     if (!signal.group_stop_count &&
-    !(signal.flags & SIGNAL_STOP_STOPPED))
+    !(signal.flags & SIGNAL_STOP_STOPPED)) {
     signr = SIGTRAP;
-    WARN_ON_ONCE(!signr);
+    }
+    WARN_ON_ONCE!(!signr);
     ptrace_do_notify(signr, signr | (PTRACE_EVENT_STOP << 8),
     CLD_STOPPED, 0);
     } else {
-    WARN_ON_ONCE(!signr);
+    WARN_ON_ONCE!(!signr);
     ptrace_stop(signr, CLD_STOPPED, 0, core::ptr::null_mut());
     }
     }
@@ -2422,11 +2782,12 @@ unsafe extern "C" fn do_freezer_trap() {
 // TIF_NOTIFY_SIGNAL. The caller will retry if necessary.
 //
     clear_notify_signal();
-    if (unlikely(task_work_pending(current)))
+    if (unlikely(task_work_pending(current))) {
     task_work_run();
     }
+    }
 #[no_mangle]
-unsafe extern "C" fn ptrace_signal(signr: c_int, info: *mut kernel_siginfo_t, type: enum pid_type) -> c_int {
+unsafe extern "C" fn ptrace_signal(signr: c_int, info: *mut kernel_siginfo_t, type: pid_type) -> c_int {
 //
 // We do not check sig_kernel_stop(signr) but set this marker
 // unconditionally because we do not know whether debugger will
@@ -2439,8 +2800,9 @@ unsafe extern "C" fn ptrace_signal(signr: c_int, info: *mut kernel_siginfo_t, ty
     current.jobctl |= JOBCTL_STOP_DEQUEUED;
     signr = ptrace_stop(signr, CLD_TRAPPED, 0, info);
 // We're back.  Did the debugger cancel the sig?
-    if (signr == 0)
+    if (signr == 0) {
     return signr;
+    }
 //
 // Update the siginfo structure if the signal has
 // changed.  If the debugger wanted something
@@ -2489,16 +2851,19 @@ unsafe extern "C" fn hide_si_addr_tag_bits(ksig: *mut ksignal) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn get_signal(ksig: *mut ksignal) -> bool {
-    struct sighand_struct *sighand = current.sighand;
-    struct signal_struct *signal = current.signal;
-    int signr;
+    let mut sighand = current.sighand;
+    let mut signal = current.signal;
+    let mut signr = 0;
     clear_notify_signal();
-    if (unlikely(task_work_pending(current)))
+    if (unlikely(task_work_pending(current))) {
     task_work_run();
-    if (!task_sigpending(current))
+    }
+    if (!task_sigpending(current)) {
     return false;
-    if (unlikely(uprobe_deny_signal()))
+    }
+    if (unlikely(uprobe_deny_signal())) {
     return false;
+    }
 //
 // Do this once, we can't return to user-mode if freezing() == T.
 // do_signal_stop() and ptrace_stop() set TASK_STOPPED/TASK_TRACED
@@ -2506,7 +2871,7 @@ pub unsafe extern "C" fn get_signal(ksig: *mut ksignal) -> bool {
 // do not need another check after return.
 //
     try_to_freeze();
-    relock:
+// label;
     spin_lock_irq(&sighand.siglock);
 //
 // Every stopped thread goes here after wakeup. Check to see if
@@ -2514,11 +2879,13 @@ pub unsafe extern "C" fn get_signal(ksig: *mut ksignal) -> bool {
 // the CLD_ si_code into SIGNAL_CLD_MASK bits.
 //
     if (unlikely(signal.flags & SIGNAL_CLD_MASK)) {
-    int why;
-    if (signal.flags & SIGNAL_CLD_CONTINUED)
+    let mut why = 0;
+    if (signal.flags & SIGNAL_CLD_CONTINUED) {
     why = CLD_CONTINUED;
-    else
+    }
+    else {
     why = CLD_STOPPED;
+    }
     signal.flags &= ~SIGNAL_CLD_MASK;
     spin_unlock_irq(&sighand.siglock);
 //
@@ -2531,14 +2898,15 @@ pub unsafe extern "C" fn get_signal(ksig: *mut ksignal) -> bool {
 //
     read_lock(&tasklist_lock);
     do_notify_parent_cldstop(current, false, why);
-    if (ptrace_reparented(current.group_leader))
+    if (ptrace_reparented(current.group_leader)) {
     do_notify_parent_cldstop(current.group_leader,
     true, why);
+    }
     read_unlock(&tasklist_lock);
-    goto relock;
+// goto;
     }
     for (;;) {
-    struct k_sigaction *ka;
+pub static mut ka: *mut c_void = core::ptr::null_mut();
     enum pid_type type;
 // Has this task already been marked for death?
     if ((signal.flags & SIGNAL_GROUP_EXIT) ||
@@ -2552,19 +2920,21 @@ pub unsafe extern "C" fn get_signal(ksig: *mut ksignal) -> bool {
 // implies do_group_exit() or return to PF_USER_WORKER,
 // no need to initialize ksig->info/etc.
 //
-    goto fatal;
+// goto;
     }
     if (unlikely(current.jobctl & JOBCTL_STOP_PENDING) &&
-    do_signal_stop(0))
-    goto relock;
+    do_signal_stop(0)) {
+// goto;
+    }
     if (unlikely(current.jobctl &
     (JOBCTL_TRAP_MASK | JOBCTL_TRAP_FREEZE))) {
     if (current.jobctl & JOBCTL_TRAP_MASK) {
     do_jobctl_trap();
     spin_unlock_irq(&sighand.siglock);
-    } else if (current.jobctl & JOBCTL_TRAP_FREEZE)
+    } else if (current.jobctl & JOBCTL_TRAP_FREEZE) {
     do_freezer_trap();
-    goto relock;
+    }
+// goto;
     }
 //
 // If the task is leaving the frozen state, let's update
@@ -2573,7 +2943,7 @@ pub unsafe extern "C" fn get_signal(ksig: *mut ksignal) -> bool {
     if (unlikely(cgroup_task_frozen(current))) {
     spin_unlock_irq(&sighand.siglock);
     cgroup_leave_frozen(false);
-    goto relock;
+// goto;
     }
 //
 // Signals generated by the execution of an instruction
@@ -2583,33 +2953,39 @@ pub unsafe extern "C" fn get_signal(ksig: *mut ksignal) -> bool {
 //
     type = PIDTYPE_PID;
     signr = dequeue_synchronous_signal(&ksig.info);
-    if (!signr)
+    if (!signr) {
     signr = dequeue_signal(&current.blocked, &ksig.info, &type);
-    if (!signr)
+    }
+    if (!signr) {
     break; /* will return 0 */
+    }
     if (unlikely(current.ptrace) && (signr != SIGKILL) &&
     !(sighand.action[signr -1].sa.sa_flags & SA_IMMUTABLE)) {
     signr = ptrace_signal(signr, &ksig.info, type);
-    if (!signr)
+    if (!signr) {
     continue;
+    }
     }
     ka = &sighand.action[signr-1];
 // Trace actually delivered signals.
     trace_signal_deliver(signr, &ksig.info, ka);
-    if (ka.sa.sa_handler == SIG_IGN) /* Do nothing.  */
+    if (ka.sa.sa_handler == SIG_IGN) /* Do nothing.  */ {
     continue;
+    }
     if (ka.sa.sa_handler != SIG_DFL) {
 // Run the handler.
     ksig.ka = *ka;
-    if (ka.sa.sa_flags & SA_ONESHOT)
+    if (ka.sa.sa_flags & SA_ONESHOT) {
     ka.sa.sa_handler = SIG_DFL;
+    }
     break; /* will return non-zero "signr" value */
     }
 //
 // Now we are doing the default action for this signal.
 //
-    if (sig_kernel_ignore(signr)) /* Default is nothing. */
+    if (sig_kernel_ignore(signr)) /* Default is nothing. */ {
     continue;
+    }
 //
 // Global init gets no signals it doesn't want.
 // Container-init gets no signals it doesn't want from same
@@ -2621,8 +2997,9 @@ pub unsafe extern "C" fn get_signal(ksig: *mut ksignal) -> bool {
 // case, the signal cannot be dropped.
 //
     if (unlikely(signal.flags & SIGNAL_UNKILLABLE) &&
-    !sig_kernel_only(signr))
+    !sig_kernel_only(signr)) {
     continue;
+    }
     if (sig_kernel_stop(signr)) {
 //
 // The default action is to stop all threads in
@@ -2637,13 +3014,14 @@ pub unsafe extern "C" fn get_signal(ksig: *mut ksignal) -> bool {
     if (signr != SIGSTOP) {
     spin_unlock_irq(&sighand.siglock);
 // signals can be posted during this window
-    if (is_current_pgrp_orphaned())
-    goto relock;
+    if (is_current_pgrp_orphaned()) {
+// goto;
+    }
     spin_lock_irq(&sighand.siglock);
     }
     if (likely(do_signal_stop(signr))) {
 // It released the siglock.
-    goto relock;
+// goto;
     }
 //
 // We didn't actually stop, due to a race
@@ -2651,17 +3029,19 @@ pub unsafe extern "C" fn get_signal(ksig: *mut ksignal) -> bool {
 //
     continue;
     }
-    fatal:
+// label;
     spin_unlock_irq(&sighand.siglock);
-    if (unlikely(cgroup_task_frozen(current)))
+    if (unlikely(cgroup_task_frozen(current))) {
     cgroup_leave_frozen(true);
+    }
 //
 // Anything else is fatal, maybe with a core dump.
 //
     current.flags |= PF_SIGNALED;
     if (sig_kernel_coredump(signr)) {
-    if (print_fatal_signals)
+    if (print_fatal_signals) {
     print_fatal_signal(signr);
+    }
     proc_coredump_connector(current);
 //
 // If it was able to dump core, this kills all
@@ -2679,8 +3059,9 @@ pub unsafe extern "C" fn get_signal(ksig: *mut ksignal) -> bool {
 // cannot call do_exit() on their behalf. Note that ksig won't
 // be properly initialized, PF_USER_WORKER's shouldn't use it.
 //
-    if (current.flags & PF_USER_WORKER)
-    goto out;
+    if (current.flags & PF_USER_WORKER) {
+// goto;
+    }
 //
 // Death signals, no core dump.
 //
@@ -2689,9 +3070,10 @@ pub unsafe extern "C" fn get_signal(ksig: *mut ksignal) -> bool {
     }
     spin_unlock_irq(&sighand.siglock);
     ksig.sig = signr;
-    if (signr && !(ksig.ka.sa.sa_flags & SA_EXPOSE_TAGBITS))
+    if (signr && !(ksig.ka.sa.sa_flags & SA_EXPOSE_TAGBITS)) {
     hide_si_addr_tag_bits(ksig);
-    out:
+    }
+// label;
     return signr > 0;
     }
 //
@@ -2706,27 +3088,32 @@ pub unsafe extern "C" fn get_signal(ksig: *mut ksignal) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn signal_delivered(ksig: *mut ksignal, stepping: c_int) {
-    sigset_t blocked;
+    let mut blocked;
 // A signal was successfully delivered, and the
     saved sigmask was stored on the signal frame,
     and will be restored by sigreturn.  So we can
     simply clear the restore sigmask flag.  */
     clear_restore_sigmask();
     sigorsets(&blocked, &current.blocked, &ksig.ka.sa.sa_mask);
-    if (!(ksig.ka.sa.sa_flags & SA_NODEFER))
+    if (!(ksig.ka.sa.sa_flags & SA_NODEFER)) {
     sigaddset(&blocked, ksig.sig);
+    }
     set_current_blocked(&blocked);
-    if (current.sas_ss_flags & SS_AUTODISARM)
+    if (current.sas_ss_flags & SS_AUTODISARM) {
     sas_ss_reset(current);
-    if (stepping)
+    }
+    if (stepping) {
     ptrace_notify(SIGTRAP, 0);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn signal_setup_done(failed: c_int, ksig: *mut ksignal, stepping: c_int) {
-    if (failed)
+    if (failed) {
     force_sigsegv(ksig.sig);
-    else
+    }
+    else {
     signal_delivered(ksig, stepping);
+    }
     }
 //
 // It could be that complete_signal() picked us to notify about the
@@ -2735,28 +3122,33 @@ pub unsafe extern "C" fn signal_setup_done(failed: c_int, ksig: *mut ksignal, st
 //
 #[no_mangle]
 unsafe extern "C" fn retarget_shared_pending(tsk: *mut task_struct, which: *mut sigset_t) {
-    sigset_t retarget;
-    struct task_struct *t;
+    let mut retarget;
+pub static mut t: *mut c_void = core::ptr::null_mut();
     sigandsets(&retarget, &tsk.signal.shared_pending.signal, which);
-    if (sigisemptyset(&retarget))
+    if (sigisemptyset(&retarget)) {
     return;
+    }
     for_other_threads(tsk, t) {
-    if (t.flags & PF_EXITING)
+    if (t.flags & PF_EXITING) {
     continue;
-    if (!has_pending_signals(&retarget, &t.blocked))
+    }
+    if (!has_pending_signals(&retarget, &t.blocked)) {
     continue;
+    }
 // Remove the signals this thread can handle.
     sigandsets(&retarget, &retarget, &t.blocked);
-    if (!task_sigpending(t))
+    if (!task_sigpending(t)) {
     signal_wake_up(t, 0);
-    if (sigisemptyset(&retarget))
+    }
+    if (sigisemptyset(&retarget)) {
     break;
+    }
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn exit_signals(tsk: *mut task_struct) {
-    let mut group_stop: c_int = 0;
-    sigset_t unblocked;
+pub static mut group_stop: c_int = 0;
+    let mut unblocked;
 //
 // @tsk is about to have PF_EXITING set - lock out users which
 // expect stable threadgroup.
@@ -2774,15 +3166,17 @@ pub unsafe extern "C" fn exit_signals(tsk: *mut task_struct) {
 //
     tsk.flags |= PF_EXITING;
     cgroup_threadgroup_change_end(tsk);
-    if (!task_sigpending(tsk))
-    goto out;
+    if (!task_sigpending(tsk)) {
+// goto;
+    }
     unblocked = tsk.blocked;
     signotset(&unblocked);
     retarget_shared_pending(tsk, &unblocked);
     if (unlikely(tsk.jobctl & JOBCTL_STOP_PENDING) &&
-    task_participate_group_stop(tsk))
+    task_participate_group_stop(tsk)) {
     group_stop = CLD_STOPPED;
-    out:
+    }
+// label;
     spin_unlock_irq(&tsk.sighand.siglock);
 //
 // If group stop has completed, deliver the notification.  This
@@ -2799,9 +3193,9 @@ pub unsafe extern "C" fn exit_signals(tsk: *mut task_struct) {
 //
 // sys_restart_syscall - restart a system call
 //
-    SYSCALL_DEFINE0(restart_syscall)
-    {
-    struct restart_block *restart = &current.restart_block;
+#[no_mangle]
+pub unsafe extern "C" fn sys_restart_syscall() -> c_long {
+    let mut restart = &current.restart_block;
     return restart.fn(restart);
     }
 #[no_mangle]
@@ -2811,7 +3205,7 @@ pub unsafe extern "C" fn do_no_restart_syscall(param: *mut restart_block) -> c_l
 #[no_mangle]
 unsafe extern "C" fn __set_task_blocked(tsk: *mut task_struct, newset: *const sigset_t) {
     if (task_sigpending(tsk) && !thread_group_empty(tsk)) {
-    sigset_t newblocked;
+    let mut newblocked;
 // A set of now blocked but previously unblocked signals.
     sigandnsets(&newblocked, newset, &current.blocked);
     retarget_shared_pending(tsk, &newblocked);
@@ -2833,13 +3227,14 @@ pub unsafe extern "C" fn set_current_blocked(newset: *mut sigset_t) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __set_current_blocked(newset: *const sigset_t) {
-    struct task_struct *tsk = current;
+    let mut tsk = current;
 //
 // In case the signal mask hasn't changed, there is nothing we need
 // to do. The current->blocked shouldn't be modified by other task.
 //
-    if (sigequalsets(&tsk.blocked, newset))
+    if (sigequalsets(&tsk.blocked, newset)) {
     return;
+    }
     spin_lock_irq(&tsk.sighand.siglock);
     __set_task_blocked(tsk, newset);
     spin_unlock_irq(&tsk.sighand.siglock);
@@ -2854,23 +3249,28 @@ pub unsafe extern "C" fn __set_current_blocked(newset: *const sigset_t) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn sigprocmask(how: c_int, set: *mut sigset_t, oldset: *mut sigset_t) -> c_int {
-    struct task_struct *tsk = current;
-    sigset_t newset;
+    let mut tsk = current;
+    let mut newset;
 // Lockless, only current can change ->blocked, never from irq
-    if (oldset)
+    if (oldset) {
 // oldset = tsk->blocked;
-    switch (how) {
-    case SIG_BLOCK:
+    }
+    match (how) {
+    SIG_BLOCK => {
     sigorsets(&newset, &tsk.blocked, set);
-    break;
-    case SIG_UNBLOCK:
+    // break;
+    }
+    SIG_UNBLOCK => {
     sigandnsets(&newset, &tsk.blocked, set);
-    break;
-    case SIG_SETMASK:
+    // break;
+    }
+    SIG_SETMASK => {
     newset = *set;
-    break;
-    default:
+    // break;
+    }
+    _ => {
     return -EINVAL;
+    }
     }
     __set_current_blocked(&newset);
     return 0;
@@ -2886,30 +3286,35 @@ pub unsafe extern "C" fn sigprocmask(how: c_int, set: *mut sigset_t, oldset: *mu
 // paired with restore_saved_sigmask_unless() before return from syscall.
 //
 #[no_mangle]
-pub unsafe extern "C" fn set_user_sigmask(umask: *const sigset_t __user, sigsetsize: usize) -> c_int {
-    sigset_t kmask;
-    if (!umask)
+pub unsafe extern "C" fn set_user_sigmask(umask: *const sigset_t , sigsetsize: usize) -> c_int {
+    let mut kmask;
+    if (!umask) {
     return 0;
-    if (sigsetsize != sizeof(sigset_t))
+    }
+    if (sigsetsize != sizeof!(sigset_t)) {
     return -EINVAL;
-    if (copy_from_user(&kmask, umask, sizeof(sigset_t)))
+    }
+    if (copy_from_user(&kmask, umask, sizeof!(sigset_t))) {
     return -EFAULT;
+    }
     set_restore_sigmask();
     current.saved_sigmask = current.blocked;
     set_current_blocked(&kmask);
     return 0;
     }
 
-    int set_compat_user_sigmask(const compat_sigset_t __user *umask,
-    size_t sigsetsize)
-    {
-    sigset_t kmask;
-    if (!umask)
+#[no_mangle]
+pub unsafe extern "C" fn set_compat_user_sigmask(umask: *mut compat_sigset_t, sigsetsize: size_t) -> c_int {
+    let mut kmask;
+    if (!umask) {
     return 0;
-    if (sigsetsize != sizeof(compat_sigset_t))
+    }
+    if (sigsetsize != sizeof!(compat_sigset_t)) {
     return -EINVAL;
-    if (get_compat_sigset(&kmask, umask))
+    }
+    if (get_compat_sigset(&kmask, umask)) {
     return -EFAULT;
+    }
     set_restore_sigmask();
     current.saved_sigmask = current.blocked;
     set_current_blocked(&kmask);
@@ -2923,48 +3328,55 @@ pub unsafe extern "C" fn set_user_sigmask(umask: *const sigset_t __user, sigsets
 // @oset: previous value of signal mask if non-null
 // @sigsetsize: size of sigset_t type
 //
-    SYSCALL_DEFINE4(rt_sigprocmask, int, how, sigset_t __user *, nset,
-    sigset_t __user *, oset, size_t, sigsetsize)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_rt_sigprocmask(how: usize, nset: usize, oset: usize, sigsetsize: usize) -> c_long {
     sigset_t old_set, new_set;
-    int error;
+    let mut error = 0;
 // XXX: Don't preclude handling different sized sigset_t's.
-    if (sigsetsize != sizeof(sigset_t))
+    if (sigsetsize != sizeof!(sigset_t)) {
     return -EINVAL;
+    }
     old_set = current.blocked;
     if (nset) {
-    if (copy_from_user(&new_set, nset, sizeof(sigset_t)))
+    if (copy_from_user(&new_set, nset, sizeof!(sigset_t))) {
     return -EFAULT;
+    }
     sigdelsetmask(&new_set, sigmask(SIGKILL)|sigmask(SIGSTOP));
     error = sigprocmask(how, &new_set, core::ptr::null_mut());
-    if (error)
+    if (error) {
     return error;
     }
+    }
     if (oset) {
-    if (copy_to_user(oset, &old_set, sizeof(sigset_t)))
+    if (copy_to_user(oset, &old_set, sizeof!(sigset_t))) {
     return -EFAULT;
+    }
     }
     return 0;
     }
 
-    COMPAT_SYSCALL_DEFINE4(rt_sigprocmask, int, how, compat_sigset_t __user *, nset,
-    compat_sigset_t __user *, oset, compat_size_t, sigsetsize)
-    {
-    let mut old_set: sigset_t = current.blocked;
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sys_rt_sigprocmask
+pub unsafe extern "C" fn sys_rt_sigprocmask_dup(how: usize, nset: usize, oset: usize, sigsetsize: usize) -> c_long {
+pub static mut old_set: sigset_t = 0;
 // XXX: Don't preclude handling different sized sigset_t's.
-    if (sigsetsize != sizeof(sigset_t))
+    if (sigsetsize != sizeof!(sigset_t)) {
     return -EINVAL;
+    }
     if (nset) {
-    sigset_t new_set;
-    int error;
-    if (get_compat_sigset(&new_set, nset))
+    let mut new_set;
+    let mut error = 0;
+    if (get_compat_sigset(&new_set, nset)) {
     return -EFAULT;
+    }
     sigdelsetmask(&new_set, sigmask(SIGKILL)|sigmask(SIGSTOP));
     error = sigprocmask(how, &new_set, core::ptr::null_mut());
-    if (error)
+    if (error) {
     return error;
     }
-    return oset ? put_compat_sigset(oset, &old_set, sizeof(*oset)) : 0;
+    }
+    return oset ? put_compat_sigset(oset, &old_set, sizeof!(*oset)) : 0;
     }
 
 #[no_mangle]
@@ -2982,165 +3394,164 @@ unsafe extern "C" fn do_sigpending(set: *mut sigset_t) {
 // @uset: stores pending signals
 // @sigsetsize: size of sigset_t type or larger
 //
-    SYSCALL_DEFINE2(rt_sigpending, sigset_t __user *, uset, size_t, sigsetsize)
-    {
-    sigset_t set;
-    if (sigsetsize > sizeof(*uset))
+#[no_mangle]
+pub unsafe extern "C" fn sys_rt_sigpending(uset: usize, sigsetsize: usize) -> c_long {
+    let mut set;
+    if (sigsetsize > sizeof!(*uset)) {
     return -EINVAL;
+    }
     do_sigpending(&set);
-    if (copy_to_user(uset, &set, sigsetsize))
+    if (copy_to_user(uset, &set, sigsetsize)) {
     return -EFAULT;
+    }
     return 0;
     }
 
-    COMPAT_SYSCALL_DEFINE2(rt_sigpending, compat_sigset_t __user *, uset,
-    compat_size_t, sigsetsize)
-    {
-    sigset_t set;
-    if (sigsetsize > sizeof(*uset))
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sys_rt_sigpending
+pub unsafe extern "C" fn sys_rt_sigpending_dup(uset: usize, sigsetsize: usize) -> c_long {
+    let mut set;
+    if (sigsetsize > sizeof!(*uset)) {
     return -EINVAL;
+    }
     do_sigpending(&set);
     return put_compat_sigset(uset, &set, sigsetsize);
     }
 
-    static const struct {
-    unsigned char limit, layout;
-    } sig_sicodes[] = {
-    [SIGILL]  = { NSIGILL,  SIL_FAULT },
-    [SIGFPE]  = { NSIGFPE,  SIL_FAULT },
-    [SIGSEGV] = { NSIGSEGV, SIL_FAULT },
-    [SIGBUS]  = { NSIGBUS,  SIL_FAULT },
-    [SIGTRAP] = { NSIGTRAP, SIL_FAULT },
-
-    [SIGEMT]  = { NSIGEMT,  SIL_FAULT },
-
-    [SIGCHLD] = { NSIGCHLD, SIL_CHLD },
-    [SIGPOLL] = { NSIGPOLL, SIL_POLL },
-    [SIGSYS]  = { NSIGSYS,  SIL_SYS },
-    };
+pub static mut sig_sicodes: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn known_siginfo_layout(sig: unsigned, si_code: c_int) -> bool {
-    if (si_code == SI_KERNEL)
+    if (si_code == SI_KERNEL) {
     return true;
-#[no_mangle]
-pub unsafe extern "C" fn if(SI_USER): (si_code >) -> else {
+    }
+if true {
     if (sig_specific_sicodes(sig)) {
-    if (si_code <= sig_sicodes[sig].limit)
+    if (si_code <= sig_sicodes[sig].limit) {
     return true;
     }
-#[no_mangle]
-pub unsafe extern "C" fn if(NSIGPOLL: si_code <=) -> else {
-    else if (si_code <= NSIGPOLL)
+    }
+
+    else if (si_code <= NSIGPOLL) {
     return true;
     }
-#[no_mangle]
-pub unsafe extern "C" fn if(SI_DETHREAD: si_code >=) -> else {
-    else if (si_code >= SI_DETHREAD)
+    }
+
+    else if (si_code >= SI_DETHREAD) {
     return true;
-#[no_mangle]
-pub unsafe extern "C" fn if(SI_ASYNCNL: si_code ==) -> else {
-    else if (si_code == SI_ASYNCNL)
+    }
+
+    else if (si_code == SI_ASYNCNL) {
     return true;
+    }
     return false;
     }
 #[no_mangle]
 pub unsafe extern "C" fn siginfo_layout(sig: unsigned, si_code: c_int) -> enum siginfo_layout {
-    let mut layout: enum siginfo_layout = SIL_KILL;
+pub static mut layout: siginfo_layout = 0;
     if ((si_code > SI_USER) && (si_code < SI_KERNEL)) {
-    if ((sig < ARRAY_SIZE(sig_sicodes)) &&
+    if ((sig < ARRAY_SIZE!(sig_sicodes)) &&
     (si_code <= sig_sicodes[sig].limit)) {
     layout = sig_sicodes[sig].layout;
 // Handle the exceptions
     if ((sig == SIGBUS) &&
-    (si_code >= BUS_MCEERR_AR) && (si_code <= BUS_MCEERR_AO))
+    (si_code >= BUS_MCEERR_AR) && (si_code <= BUS_MCEERR_AO)) {
     layout = SIL_FAULT_MCEERR;
-#[no_mangle]
-pub unsafe extern "C" fn if(SEGV_BNDERR): (sig == SIGSEGV) && (si_code ==) -> else {
-    else if ((sig == SIGSEGV) && (si_code == SEGV_BNDERR))
+    }
+
+    else if ((sig == SIGSEGV) && (si_code == SEGV_BNDERR)) {
     layout = SIL_FAULT_BNDERR;
+    }
 
-#[no_mangle]
-pub unsafe extern "C" fn if(SEGV_PKUERR): (sig == SIGSEGV) && (si_code ==) -> else {
-    else if ((sig == SIGSEGV) && (si_code == SEGV_PKUERR))
+
+    else if ((sig == SIGSEGV) && (si_code == SEGV_PKUERR)) {
     layout = SIL_FAULT_PKUERR;
+    }
 
-#[no_mangle]
-pub unsafe extern "C" fn if(TRAP_PERF): (sig == SIGTRAP) && (si_code ==) -> else {
-    else if ((sig == SIGTRAP) && (si_code == TRAP_PERF))
+
+    else if ((sig == SIGTRAP) && (si_code == TRAP_PERF)) {
     layout = SIL_FAULT_PERF_EVENT;
-    else if (IS_ENABLED(CONFIG_SPARC) &&
-    (sig == SIGILL) && (si_code == ILL_ILLTRP))
-    layout = SIL_FAULT_TRAPNO;
-    else if (IS_ENABLED(CONFIG_ALPHA) &&
-    ((sig == SIGFPE) ||
-    ((sig == SIGTRAP) && (si_code == TRAP_UNK))))
+    }
+    else if (IS_ENABLED!(CONFIG_SPARC) &&
+    (sig == SIGILL) && (si_code == ILL_ILLTRP)) {
     layout = SIL_FAULT_TRAPNO;
     }
-#[no_mangle]
-pub unsafe extern "C" fn if(NSIGPOLL: si_code <=) -> else {
-    else if (si_code <= NSIGPOLL)
+    else if (IS_ENABLED!(CONFIG_ALPHA) &&
+    ((sig == SIGFPE) ||
+    ((sig == SIGTRAP) && (si_code == TRAP_UNK)))) {
+    layout = SIL_FAULT_TRAPNO;
+    }
+    }
+
+    else if (si_code <= NSIGPOLL) {
     layout = SIL_POLL;
+    }
     } else {
-    if (si_code == SI_TIMER)
+    if (si_code == SI_TIMER) {
     layout = SIL_TIMER;
-#[no_mangle]
-pub unsafe extern "C" fn if(SI_SIGIO: si_code ==) -> else {
-    else if (si_code == SI_SIGIO)
+    }
+
+    else if (si_code == SI_SIGIO) {
     layout = SIL_POLL;
-#[no_mangle]
-pub unsafe extern "C" fn if(0: si_code <) -> else {
-    else if (si_code < 0)
+    }
+
+    else if (si_code < 0) {
     layout = SIL_RT;
+    }
     }
     return layout;
     }
-    static inline char __user *si_expansion(const siginfo_t __user *info)
+    static inline char  *si_expansion(const siginfo_t  *info)
     {
-    return ((char __user *)info) + sizeof(struct kernel_siginfo);
+    return (info) + sizeof!(kernel_siginfo);
     }
 #[no_mangle]
-pub unsafe extern "C" fn copy_siginfo_to_user(to: *mut siginfo_t __user, from: *const kernel_siginfo_t) -> c_int {
-    char __user *expansion = si_expansion(to);
-    if (copy_to_user(to, from , sizeof(struct kernel_siginfo)))
+pub unsafe extern "C" fn copy_siginfo_to_user(to: *mut siginfo_t , from: *const kernel_siginfo_t) -> c_int {
+    let mut expansion = si_expansion(to);
+    if (copy_to_user(to, from , sizeof!(kernel_siginfo))) {
     return -EFAULT;
-    if (clear_user(expansion, SI_EXPANSION_SIZE))
+    }
+    if (clear_user(expansion, SI_EXPANSION_SIZE)) {
     return -EFAULT;
+    }
     return 0;
     }
-    static int post_copy_siginfo_from_user(kernel_siginfo_t *info,
-    const siginfo_t __user *from)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn post_copy_siginfo_from_user(info: *mut kernel_siginfo_t, from: *mut siginfo_t) -> c_int {
     if (unlikely(!known_siginfo_layout(info.si_signo, info.si_code))) {
-    char __user *expansion = si_expansion(from);
+    let mut expansion = si_expansion(from);
     char buf[SI_EXPANSION_SIZE];
-    int i;
+    let mut i = 0;
 //
 // An unknown si_code might need more than
-// sizeof(struct kernel_siginfo) bytes.  Verify all of the
+// sizeof!(kernel_siginfo) bytes.  Verify all of the
 // extra bytes are 0.  This guarantees copy_siginfo_to_user
 // will return this data to userspace exactly.
 //
-    if (copy_from_user(&buf, expansion, SI_EXPANSION_SIZE))
+    if (copy_from_user(&buf, expansion, SI_EXPANSION_SIZE)) {
     return -EFAULT;
-    for (i = 0; i < SI_EXPANSION_SIZE; i++) {
-    if (buf[i] != 0)
+    }
+    while (i < SI_EXPANSION_SIZE) {
+    if (buf[i] != 0) {
     return -E2BIG;
+    }
     }
     }
     return 0;
     }
-    static int __copy_siginfo_from_user(int signo, kernel_siginfo_t *to,
-    const siginfo_t __user *from)
-    {
-    if (copy_from_user(to, from, sizeof(struct kernel_siginfo)))
+#[no_mangle]
+pub unsafe extern "C" fn __copy_siginfo_from_user(signo: c_int, to: *mut kernel_siginfo_t, from: *mut siginfo_t) -> c_int {
+    if (copy_from_user(to, from, sizeof!(kernel_siginfo))) {
     return -EFAULT;
+    }
     to.si_signo = signo;
     return post_copy_siginfo_from_user(to, from);
     }
 #[no_mangle]
-pub unsafe extern "C" fn copy_siginfo_from_user(to: *mut kernel_siginfo_t, from: *const siginfo_t __user) -> c_int {
-    if (copy_from_user(to, from, sizeof(struct kernel_siginfo)))
+pub unsafe extern "C" fn copy_siginfo_from_user(to: *mut kernel_siginfo_t, from: *const siginfo_t ) -> c_int {
+    if (copy_from_user(to, from, sizeof!(kernel_siginfo))) {
     return -EFAULT;
+    }
     return post_copy_siginfo_from_user(to, from);
     }
 
@@ -3154,10 +3565,9 @@ pub unsafe extern "C" fn copy_siginfo_from_user(to: *mut kernel_siginfo_t, from:
 // copy_siginfo_to_user32, which is overriden for x32 and the coredump code.
 // The latter does not care because SIGCHLD will never cause a coredump.
 //
-    void copy_siginfo_to_external32(struct compat_siginfo *to,
-    const struct kernel_siginfo *from)
-    {
-    memset(to, 0, sizeof(*to));
+#[no_mangle]
+pub unsafe extern "C" fn copy_siginfo_to_external32(to: *mut compat_siginfo, from: *mut kernel_siginfo) {
+    memset(to, 0, sizeof!(*to));
     to.si_signo = from.si_signo;
     to.si_errno = from.si_errno;
     to.si_code  = from.si_code;
@@ -3220,18 +3630,17 @@ pub unsafe extern "C" fn copy_siginfo_from_user(to: *mut kernel_siginfo_t, from:
     break;
     }
     }
-    int __copy_siginfo_to_user32(struct compat_siginfo __user *to,
-    const struct kernel_siginfo *from)
-    {
-    struct compat_siginfo new;
+#[no_mangle]
+pub unsafe extern "C" fn __copy_siginfo_to_user32(to: *mut compat_siginfo, from: *mut kernel_siginfo) -> c_int {
+pub static mut new: usize = 0;
     copy_siginfo_to_external32(&new, from);
-    if (copy_to_user(to, &new, sizeof(struct compat_siginfo)))
+    if (copy_to_user(to, &new, sizeof!(compat_siginfo))) {
     return -EFAULT;
+    }
     return 0;
     }
-    static int post_copy_siginfo_from_user32(kernel_siginfo_t *to,
-    const struct compat_siginfo *from)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn post_copy_siginfo_from_user32(to: *mut kernel_siginfo_t, from: *mut compat_siginfo) -> c_int {
     clear_siginfo(to);
     to.si_signo = from.si_signo;
     to.si_errno = from.si_errno;
@@ -3284,9 +3693,10 @@ pub unsafe extern "C" fn copy_siginfo_from_user(to: *mut kernel_siginfo_t, from:
     if (in_x32_syscall()) {
     to.si_utime = from._sifields._sigchld_x32._utime;
     to.si_stime = from._sifields._sigchld_x32._stime;
-    } else
+    } else {
 
     {
+    }
     to.si_utime = from.si_utime;
     to.si_stime = from.si_stime;
     }
@@ -3304,21 +3714,21 @@ pub unsafe extern "C" fn copy_siginfo_from_user(to: *mut kernel_siginfo_t, from:
     }
     return 0;
     }
-    static int __copy_siginfo_from_user32(int signo, struct kernel_siginfo *to,
-    const struct compat_siginfo __user *ufrom)
-    {
-    struct compat_siginfo from;
-    if (copy_from_user(&from, ufrom, sizeof(struct compat_siginfo)))
+#[no_mangle]
+pub unsafe extern "C" fn __copy_siginfo_from_user32(signo: c_int, to: *mut kernel_siginfo, ufrom: *mut compat_siginfo) -> c_int {
+pub static mut from: usize = 0;
+    if (copy_from_user(&from, ufrom, sizeof!(compat_siginfo))) {
     return -EFAULT;
+    }
     from.si_signo = signo;
     return post_copy_siginfo_from_user32(to, &from);
     }
-    int copy_siginfo_from_user32(struct kernel_siginfo *to,
-    const struct compat_siginfo __user *ufrom)
-    {
-    struct compat_siginfo from;
-    if (copy_from_user(&from, ufrom, sizeof(struct compat_siginfo)))
+#[no_mangle]
+pub unsafe extern "C" fn copy_siginfo_from_user32(to: *mut kernel_siginfo, ufrom: *mut compat_siginfo) -> c_int {
+pub static mut from: usize = 0;
+    if (copy_from_user(&from, ufrom, sizeof!(compat_siginfo))) {
     return -EFAULT;
+    }
     return post_copy_siginfo_from_user32(to, &from);
     }
 
@@ -3328,17 +3738,17 @@ pub unsafe extern "C" fn copy_siginfo_from_user(to: *mut kernel_siginfo_t, from:
 // @info: if non-null, the signal's siginfo is returned here
 // @ts: upper bound on process time suspension
 //
-    static int do_sigtimedwait(const sigset_t *which, kernel_siginfo_t *info,
-    const struct timespec64 *ts)
-    {
-    ktime_t *to = core::ptr::null_mut(), timeout = KTIME_MAX;
-    struct task_struct *tsk = current;
-    let mut mask: sigset_t = *which;
+#[no_mangle]
+pub unsafe extern "C" fn do_sigtimedwait(which: *mut sigset_t, info: *mut kernel_siginfo_t, ts: *mut timespec64) -> c_int {
+    let mut to = core::ptr::null_mut(), timeout = KTIME_MAX;
+    let mut tsk = current;
+pub static mut mask: sigset_t = 0;
     enum pid_type type;
     int sig, ret = 0;
     if (ts) {
-    if (!timespec64_valid(ts))
+    if (!timespec64_valid(ts)) {
     return -EINVAL;
+    }
     timeout = timespec64_to_ktime(*ts);
     to = &timeout;
     }
@@ -3369,8 +3779,9 @@ pub unsafe extern "C" fn copy_siginfo_from_user(to: *mut kernel_siginfo_t, from:
     sig = dequeue_signal(&mask, info, &type);
     }
     spin_unlock_irq(&tsk.sighand.siglock);
-    if (sig)
+    if (sig) {
     return sig;
+    }
     return ret ? -EINTR : -EAGAIN;
     }
 //
@@ -3381,108 +3792,115 @@ pub unsafe extern "C" fn copy_siginfo_from_user(to: *mut kernel_siginfo_t, from:
 // @uts: upper bound on process time suspension
 // @sigsetsize: size of sigset_t type
 //
-    SYSCALL_DEFINE4(rt_sigtimedwait, const sigset_t __user *, uthese,
-    siginfo_t __user *, uinfo,
-    const struct __kernel_timespec __user *, uts,
-    size_t, sigsetsize)
-    {
-    sigset_t these;
-    struct timespec64 ts;
-    kernel_siginfo_t info;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn sys_rt_sigtimedwait(uthese: usize, uinfo: usize, uts: usize, sigsetsize: usize) -> c_long {
+    let mut these;
+pub static mut ts: usize = 0;
+    let mut info;
+    let mut ret = 0;
 // XXX: Don't preclude handling different sized sigset_t's.
-    if (sigsetsize != sizeof(sigset_t))
+    if (sigsetsize != sizeof!(sigset_t)) {
     return -EINVAL;
-    if (copy_from_user(&these, uthese, sizeof(these)))
+    }
+    if (copy_from_user(&these, uthese, sizeof!(these))) {
     return -EFAULT;
+    }
     if (uts) {
-    if (get_timespec64(&ts, uts))
+    if (get_timespec64(&ts, uts)) {
     return -EFAULT;
+    }
     }
     ret = do_sigtimedwait(&these, &info, uts ? &ts : core::ptr::null_mut());
     if (ret > 0 && uinfo) {
-    if (copy_siginfo_to_user(uinfo, &info))
+    if (copy_siginfo_to_user(uinfo, &info)) {
     ret = -EFAULT;
+    }
     }
     return ret;
     }
 
-    SYSCALL_DEFINE4(rt_sigtimedwait_time32, const sigset_t __user *, uthese,
-    siginfo_t __user *, uinfo,
-    const struct old_timespec32 __user *, uts,
-    size_t, sigsetsize)
-    {
-    sigset_t these;
-    struct timespec64 ts;
-    kernel_siginfo_t info;
-    int ret;
-    if (sigsetsize != sizeof(sigset_t))
+#[no_mangle]
+pub unsafe extern "C" fn sys_rt_sigtimedwait_time32(uthese: usize, uinfo: usize, uts: usize, sigsetsize: usize) -> c_long {
+    let mut these;
+pub static mut ts: usize = 0;
+    let mut info;
+    let mut ret = 0;
+    if (sigsetsize != sizeof!(sigset_t)) {
     return -EINVAL;
-    if (copy_from_user(&these, uthese, sizeof(these)))
+    }
+    if (copy_from_user(&these, uthese, sizeof!(these))) {
     return -EFAULT;
+    }
     if (uts) {
-    if (get_old_timespec32(&ts, uts))
+    if (get_old_timespec32(&ts, uts)) {
     return -EFAULT;
+    }
     }
     ret = do_sigtimedwait(&these, &info, uts ? &ts : core::ptr::null_mut());
     if (ret > 0 && uinfo) {
-    if (copy_siginfo_to_user(uinfo, &info))
+    if (copy_siginfo_to_user(uinfo, &info)) {
     ret = -EFAULT;
+    }
     }
     return ret;
     }
 
-    COMPAT_SYSCALL_DEFINE4(rt_sigtimedwait_time64, compat_sigset_t __user *, uthese,
-    struct compat_siginfo __user *, uinfo,
-    struct __kernel_timespec __user *, uts, compat_size_t, sigsetsize)
-    {
-    sigset_t s;
-    struct timespec64 t;
-    kernel_siginfo_t info;
-    long ret;
-    if (sigsetsize != sizeof(sigset_t))
+#[no_mangle]
+pub unsafe extern "C" fn sys_rt_sigtimedwait_time64(uthese: usize, uinfo: usize, uts: usize, sigsetsize: usize) -> c_long {
+    let mut s;
+pub static mut t: usize = 0;
+    let mut info;
+    let mut ret = 0;
+    if (sigsetsize != sizeof!(sigset_t)) {
     return -EINVAL;
-    if (get_compat_sigset(&s, uthese))
+    }
+    if (get_compat_sigset(&s, uthese)) {
     return -EFAULT;
+    }
     if (uts) {
-    if (get_timespec64(&t, uts))
+    if (get_timespec64(&t, uts)) {
     return -EFAULT;
+    }
     }
     ret = do_sigtimedwait(&s, &info, uts ? &t : core::ptr::null_mut());
     if (ret > 0 && uinfo) {
-    if (copy_siginfo_to_user32(uinfo, &info))
+    if (copy_siginfo_to_user32(uinfo, &info)) {
     ret = -EFAULT;
+    }
     }
     return ret;
     }
 
-    COMPAT_SYSCALL_DEFINE4(rt_sigtimedwait_time32, compat_sigset_t __user *, uthese,
-    struct compat_siginfo __user *, uinfo,
-    struct old_timespec32 __user *, uts, compat_size_t, sigsetsize)
-    {
-    sigset_t s;
-    struct timespec64 t;
-    kernel_siginfo_t info;
-    long ret;
-    if (sigsetsize != sizeof(sigset_t))
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sys_rt_sigtimedwait_time32
+pub unsafe extern "C" fn sys_rt_sigtimedwait_time32_dup(uthese: usize, uinfo: usize, uts: usize, sigsetsize: usize) -> c_long {
+    let mut s;
+pub static mut t: usize = 0;
+    let mut info;
+    let mut ret = 0;
+    if (sigsetsize != sizeof!(sigset_t)) {
     return -EINVAL;
-    if (get_compat_sigset(&s, uthese))
+    }
+    if (get_compat_sigset(&s, uthese)) {
     return -EFAULT;
+    }
     if (uts) {
-    if (get_old_timespec32(&t, uts))
+    if (get_old_timespec32(&t, uts)) {
     return -EFAULT;
+    }
     }
     ret = do_sigtimedwait(&s, &info, uts ? &t : core::ptr::null_mut());
     if (ret > 0 && uinfo) {
-    if (copy_siginfo_to_user32(uinfo, &info))
+    if (copy_siginfo_to_user32(uinfo, &info)) {
     ret = -EFAULT;
+    }
     }
     return ret;
     }
 
-    static void prepare_kill_siginfo(int sig, struct kernel_siginfo *info,
-    enum pid_type type)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn prepare_kill_siginfo(sig: c_int, info: *mut kernel_siginfo, type: pid_type) {
     clear_siginfo(info);
     info.si_signo = sig;
     info.si_errno = 0;
@@ -3503,8 +3921,8 @@ unsafe extern "C" fn si_code_reserved_to_kernel(si_code: c_int) -> bool {
 // @pid: the PID of the process
 // @sig: signal to be sent
 //
-    SYSCALL_DEFINE2(kill, pid_t, pid, int, sig)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_kill(pid: usize, sig: usize) -> c_long {
     return kill_something_info(sig, SEND_SIG_NOINFO, pid);
     }
 //
@@ -3514,74 +3932,83 @@ unsafe extern "C" fn si_code_reserved_to_kernel(si_code: c_int) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn access_pidfd_pidns(pid: *mut pid) -> bool {
-    struct pid_namespace *active = task_active_pid_ns(current);
-    struct pid_namespace *p = ns_of_pid(pid);
+    let mut active = task_active_pid_ns(current);
+    let mut p = ns_of_pid(pid);
     for (;;) {
-    if (!p)
+    if (!p) {
     return false;
-    if (p == active)
+    }
+    if (p == active) {
     break;
+    }
     p = p.parent;
     }
     return true;
     }
-    static int copy_siginfo_from_user_any(kernel_siginfo_t *kinfo,
-    siginfo_t __user *info)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn copy_siginfo_from_user_any(kinfo: *mut kernel_siginfo_t, info: *mut siginfo_t) -> c_int {
 
 //
 // Avoid hooking up compat syscalls and instead handle necessary
 // conversions here. Note, this is a stop-gap measure and should not be
 // considered a generic solution.
 //
-    if (in_compat_syscall())
+    if (in_compat_syscall()) {
     return copy_siginfo_from_user32(
-    kinfo, (struct compat_siginfo __user *)info);
+    kinfo, info);
+    }
 
     return copy_siginfo_from_user(kinfo, info);
     }
-    static struct pid *pidfd_to_pid(const struct file *file)
-    {
-    struct pid *pid;
+#[no_mangle]
+pub unsafe extern "C" fn pidfd_to_pid(file: *mut file) -> *mut c_void {
+pub static mut pid: *mut c_void = core::ptr::null_mut();
     pid = pidfd_pid(file);
-    if (!IS_ERR(pid))
+    if (!IS_ERR(pid)) {
     return pid;
+    }
     return tgid_pidfd_to_pid(file);
     }
 
-    (PIDFD_SIGNAL_THREAD | PIDFD_SIGNAL_THREAD_GROUP | \
+    (PIDFD_SIGNAL_THREAD | PIDFD_SIGNAL_THREAD_GROUP | 
     PIDFD_SIGNAL_PROCESS_GROUP)
-    static int do_pidfd_send_signal(struct pid *pid, int sig, enum pid_type type,
-    siginfo_t __user *info, unsigned int flags)
-    {
-    kernel_siginfo_t kinfo;
-    switch (flags) {
-    case PIDFD_SIGNAL_THREAD:
+#[no_mangle]
+pub unsafe extern "C" fn do_pidfd_send_signal(pid: *mut pid, sig: c_int, type: pid_type, info: *mut siginfo_t, flags: c_uint) -> c_int {
+    let mut kinfo;
+    match (flags) {
+    PIDFD_SIGNAL_THREAD => {
     type = PIDTYPE_PID;
-    break;
-    case PIDFD_SIGNAL_THREAD_GROUP:
+    // break;
+    }
+    PIDFD_SIGNAL_THREAD_GROUP => {
     type = PIDTYPE_TGID;
-    break;
-    case PIDFD_SIGNAL_PROCESS_GROUP:
+    // break;
+    }
+    PIDFD_SIGNAL_PROCESS_GROUP => {
     type = PIDTYPE_PGID;
-    break;
+    // break;
+    }
     }
     if (info) {
-    int ret;
+    let mut ret = 0;
     ret = copy_siginfo_from_user_any(&kinfo, info);
-    if (unlikely(ret))
+    if (unlikely(ret)) {
     return ret;
-    if (unlikely(sig != kinfo.si_signo))
+    }
+    if (unlikely(sig != kinfo.si_signo)) {
     return -EINVAL;
+    }
 // Only allow sending arbitrary signals to yourself.
     if ((task_pid(current) != pid || type > PIDTYPE_TGID) &&
-    si_code_reserved_to_kernel(kinfo.si_code))
+    si_code_reserved_to_kernel(kinfo.si_code)) {
     return -EPERM;
+    }
     } else {
     prepare_kill_siginfo(sig, &kinfo, type);
     }
-    if (type == PIDTYPE_PGID)
+    if (type == PIDTYPE_PGID) {
     return kill_pgrp_info(sig, &kinfo, pid);
+    }
     return kill_pid_info_type(sig, &kinfo, pid, type);
     }
 //
@@ -3598,54 +4025,62 @@ unsafe extern "C" fn access_pidfd_pidns(pid: *mut pid) -> bool {
 //
 // Return: 0 on success, negative errno on failure
 //
-    SYSCALL_DEFINE4(pidfd_send_signal, int, pidfd, int, sig,
-    siginfo_t __user *, info, unsigned int, flags)
-    {
-    struct pid *pid;
+#[no_mangle]
+pub unsafe extern "C" fn sys_pidfd_send_signal(pidfd: usize, sig: usize, info: usize, flags: usize) -> c_long {
+pub static mut pid: *mut c_void = core::ptr::null_mut();
     enum pid_type type;
-    int ret;
+    let mut ret = 0;
 // Enforce flags be set to 0 until we add an extension.
-    if (flags & ~PIDFD_SEND_SIGNAL_FLAGS)
+    if (flags & ~PIDFD_SEND_SIGNAL_FLAGS) {
     return -EINVAL;
+    }
 // Ensure that only a single signal scope determining flag is set.
-    if (hweight32(flags & PIDFD_SEND_SIGNAL_FLAGS) > 1)
+    if (hweight32(flags & PIDFD_SEND_SIGNAL_FLAGS) > 1) {
     return -EINVAL;
-    switch (pidfd) {
-    case PIDFD_SELF_THREAD:
+    }
+    match (pidfd) {
+    PIDFD_SELF_THREAD => {
     pid = get_task_pid(current, PIDTYPE_PID);
     type = PIDTYPE_PID;
-    break;
-    case PIDFD_SELF_THREAD_GROUP:
+    // break;
+    }
+    PIDFD_SELF_THREAD_GROUP => {
     pid = get_task_pid(current, PIDTYPE_TGID);
     type = PIDTYPE_TGID;
-    break;
-    default: {
+    // break;
+    }
+    _ => {
     CLASS(fd, f)(pidfd);
-    if (fd_empty(f))
+    if (fd_empty(f)) {
     return -EBADF;
+    }
 // Is this a pidfd?
     pid = pidfd_to_pid(fd_file(f));
-    if (IS_ERR(pid))
+    if (IS_ERR(pid)) {
     return PTR_ERR(pid);
-    if (!access_pidfd_pidns(pid))
+    }
+    if (!access_pidfd_pidns(pid)) {
     return -EINVAL;
+    }
 // Infer scope from the type of pidfd.
-    if (fd_file(f).f_flags & PIDFD_THREAD)
+    if (fd_file(f).f_flags & PIDFD_THREAD) {
     type = PIDTYPE_PID;
-    else
+    }
+    else {
     type = PIDTYPE_TGID;
+    }
     return do_pidfd_send_signal(pid, sig, type, info, flags);
+    }
     }
     }
     ret = do_pidfd_send_signal(pid, sig, type, info, flags);
     put_pid(pid);
     return ret;
     }
-    static int
-    do_send_specific(pid_t tgid, pid_t pid, int sig, struct kernel_siginfo *info)
-    {
-    struct task_struct *p;
-    let mut error: c_int = -ESRCH;
+#[no_mangle]
+pub unsafe extern "C" fn do_send_specific(tgid: pid_t, pid: pid_t, sig: c_int, info: *mut kernel_siginfo) -> c_int {
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut error: c_int = 0;
     rcu_read_lock();
     p = find_task_by_vpid(pid);
     if (p && (tgid <= 0 || task_tgid_vnr(p) == tgid)) {
@@ -3661,8 +4096,9 @@ unsafe extern "C" fn access_pidfd_pidns(pid: *mut pid) -> bool {
 // dies after receiving the signal. The window is tiny,
 // and the signal is private anyway.
 //
-    if (unlikely(error == -ESRCH))
+    if (unlikely(error == -ESRCH)) {
     error = 0;
+    }
     }
     }
     rcu_read_unlock();
@@ -3670,7 +4106,7 @@ unsafe extern "C" fn access_pidfd_pidns(pid: *mut pid) -> bool {
     }
 #[no_mangle]
 unsafe extern "C" fn do_tkill(tgid: pid_t, pid: pid_t, sig: c_int) -> c_int {
-    struct kernel_siginfo info;
+pub static mut info: usize = 0;
     prepare_kill_siginfo(sig, &info, PIDTYPE_PID);
     return do_send_specific(tgid, pid, sig, &info);
     }
@@ -3684,11 +4120,12 @@ unsafe extern "C" fn do_tkill(tgid: pid_t, pid: pid_t, sig: c_int) -> c_int {
 // exists but it's not belonging to the target process anymore. This
 // method solves the problem of threads exiting and PIDs getting reused.
 //
-    SYSCALL_DEFINE3(tgkill, pid_t, tgid, pid_t, pid, int, sig)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_tgkill(tgid: usize, pid: usize, sig: usize) -> c_long {
 // This is only valid for single tasks
-    if (pid <= 0 || tgid <= 0)
+    if (pid <= 0 || tgid <= 0) {
     return -EINVAL;
+    }
     return do_tkill(tgid, pid, sig);
     }
 //
@@ -3698,18 +4135,20 @@ unsafe extern "C" fn do_tkill(tgid: pid_t, pid: pid_t, sig: c_int) -> c_int {
 //
 // Send a signal to only one task, even if it's a CLONE_THREAD task.
 //
-    SYSCALL_DEFINE2(tkill, pid_t, pid, int, sig)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_tkill(pid: usize, sig: usize) -> c_long {
 // This is only valid for single tasks
-    if (pid <= 0)
+    if (pid <= 0) {
     return -EINVAL;
+    }
     return do_tkill(0, pid, sig);
     }
 #[no_mangle]
 unsafe extern "C" fn do_rt_sigqueueinfo(pid: pid_t, sig: c_int, info: *mut kernel_siginfo_t) -> c_int {
     if (si_code_reserved_to_kernel(info.si_code) &&
-    task_pid_vnr(current) != pid)
+    task_pid_vnr(current) != pid) {
     return -EPERM;
+    }
 // POSIX.1b doesn't mention process groups.
     return kill_proc_info(sig, info, pid);
     }
@@ -3719,58 +4158,59 @@ unsafe extern "C" fn do_rt_sigqueueinfo(pid: pid_t, sig: c_int, info: *mut kerne
 // @sig: signal to be sent
 // @uinfo: signal info to be sent
 //
-    SYSCALL_DEFINE3(rt_sigqueueinfo, pid_t, pid, int, sig,
-    siginfo_t __user *, uinfo)
-    {
-    kernel_siginfo_t info;
-    let mut ret: c_int = __copy_siginfo_from_user(sig, &info, uinfo);
-    if (unlikely(ret))
+#[no_mangle]
+pub unsafe extern "C" fn sys_rt_sigqueueinfo(pid: usize, sig: usize, uinfo: usize) -> c_long {
+    let mut info;
+pub static mut ret: c_int = 0;
+    if (unlikely(ret)) {
     return ret;
+    }
     return do_rt_sigqueueinfo(pid, sig, &info);
     }
 
-    COMPAT_SYSCALL_DEFINE3(rt_sigqueueinfo,
-    compat_pid_t, pid,
-    int, sig,
-    struct compat_siginfo __user *, uinfo)
-    {
-    kernel_siginfo_t info;
-    let mut ret: c_int = __copy_siginfo_from_user32(sig, &info, uinfo);
-    if (unlikely(ret))
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sys_rt_sigqueueinfo
+pub unsafe extern "C" fn sys_rt_sigqueueinfo_dup(pid: usize, sig: usize, uinfo: usize) -> c_long {
+    let mut info;
+pub static mut ret: c_int = 0;
+    if (unlikely(ret)) {
     return ret;
+    }
     return do_rt_sigqueueinfo(pid, sig, &info);
     }
 
 #[no_mangle]
 unsafe extern "C" fn do_rt_tgsigqueueinfo(tgid: pid_t, pid: pid_t, sig: c_int, info: *mut kernel_siginfo_t) -> c_int {
 // This is only valid for single tasks
-    if (pid <= 0 || tgid <= 0)
+    if (pid <= 0 || tgid <= 0) {
     return -EINVAL;
+    }
     if (si_code_reserved_to_kernel(info.si_code) &&
-    task_pid_vnr(current) != pid)
+    task_pid_vnr(current) != pid) {
     return -EPERM;
+    }
     return do_send_specific(tgid, pid, sig, info);
     }
-    SYSCALL_DEFINE4(rt_tgsigqueueinfo, pid_t, tgid, pid_t, pid, int, sig,
-    siginfo_t __user *, uinfo)
-    {
-    kernel_siginfo_t info;
-    let mut ret: c_int = __copy_siginfo_from_user(sig, &info, uinfo);
-    if (unlikely(ret))
+#[no_mangle]
+pub unsafe extern "C" fn sys_rt_tgsigqueueinfo(tgid: usize, pid: usize, sig: usize, uinfo: usize) -> c_long {
+    let mut info;
+pub static mut ret: c_int = 0;
+    if (unlikely(ret)) {
     return ret;
+    }
     return do_rt_tgsigqueueinfo(tgid, pid, sig, &info);
     }
 
-    COMPAT_SYSCALL_DEFINE4(rt_tgsigqueueinfo,
-    compat_pid_t, tgid,
-    compat_pid_t, pid,
-    int, sig,
-    struct compat_siginfo __user *, uinfo)
-    {
-    kernel_siginfo_t info;
-    let mut ret: c_int = __copy_siginfo_from_user32(sig, &info, uinfo);
-    if (unlikely(ret))
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sys_rt_tgsigqueueinfo
+pub unsafe extern "C" fn sys_rt_tgsigqueueinfo_dup(tgid: usize, pid: usize, sig: usize, uinfo: usize) -> c_long {
+    let mut info;
+pub static mut ret: c_int = 0;
+    if (unlikely(ret)) {
     return ret;
+    }
     return do_rt_tgsigqueueinfo(tgid, pid, sig, &info);
     }
 
@@ -3782,7 +4222,7 @@ pub unsafe extern "C" fn kernel_sigaction(sig: c_int, action: __sighandler_t) {
     spin_lock_irq(&current.sighand.siglock);
     current.sighand.action[sig - 1].sa.sa_handler = action;
     if (action == SIG_IGN) {
-    sigset_t mask;
+    let mut mask;
     sigemptyset(&mask);
     sigaddset(&mask, sig);
     flush_sigqueue_mask(current, &mask, &current.signal.shared_pending);
@@ -3792,42 +4232,45 @@ pub unsafe extern "C" fn kernel_sigaction(sig: c_int, action: __sighandler_t) {
     spin_unlock_irq(&current.sighand.siglock);
     }
     EXPORT_SYMBOL(kernel_sigaction);
-    void __weak sigaction_compat_abi(struct k_sigaction *act,
-    struct k_sigaction *oact)
+    void __weak sigaction_compat_abi(k_sigaction *act, k_sigaction *oact)
     {
     }
 #[no_mangle]
 pub unsafe extern "C" fn do_sigaction(sig: c_int, act: *mut k_sigaction, oact: *mut k_sigaction) -> c_int {
-    struct task_struct *p = current, *t;
-    struct k_sigaction *k;
-    sigset_t mask;
-    if (!valid_signal(sig) || sig < 1 || (act && sig_kernel_only(sig)))
+    let mut p = current, *t;
+pub static mut k: *mut c_void = core::ptr::null_mut();
+    let mut mask;
+    if (!valid_signal(sig) || sig < 1 || (act && sig_kernel_only(sig))) {
     return -EINVAL;
+    }
     k = &p.sighand.action[sig-1];
     spin_lock_irq(&p.sighand.siglock);
     if (k.sa.sa_flags & SA_IMMUTABLE) {
     spin_unlock_irq(&p.sighand.siglock);
     return -EINVAL;
     }
-    if (oact)
+    if (oact) {
 // oact = *k;
+    }
 //
 // Make sure that we never accidentally claim to support SA_UNSUPPORTED,
 // e.g. by having an architecture use the bit in their uapi.
 //
-    BUILD_BUG_ON(UAPI_SA_FLAGS & SA_UNSUPPORTED);
+    BUILD_BUG_ON!(UAPI_SA_FLAGS & SA_UNSUPPORTED);
 //
 // Clear unknown flag bits in order to allow userspace to detect missing
 // support for flag bits and to allow the kernel to use non-uapi bits
 // internally.
 //
-    if (act)
+    if (act) {
     act.sa.sa_flags &= UAPI_SA_FLAGS;
-    if (oact)
+    }
+    if (oact) {
     oact.sa.sa_flags &= UAPI_SA_FLAGS;
+    }
     sigaction_compat_abi(act, oact);
     if (act) {
-    let mut was_ignored: bool = k.sa.sa_handler == SIG_IGN;
+pub static mut was_ignored: bool = false;
     sigdelsetmask(&act.sa.sa_mask,
     sigmask(SIGKILL) | sigmask(SIGSTOP));
 // k = *act;
@@ -3846,8 +4289,9 @@ pub unsafe extern "C" fn do_sigaction(sig: c_int, act: *mut k_sigaction, oact: *
     sigemptyset(&mask);
     sigaddset(&mask, sig);
     flush_sigqueue_mask(p, &mask, &p.signal.shared_pending);
-    for_each_thread(p, t)
+    for_each_thread(p, t) {
     flush_sigqueue_mask(p, &mask, &t.pending);
+    }
     } else if (was_ignored) {
     posixtimer_sig_unignore(p, sig);
     }
@@ -3865,50 +4309,59 @@ pub unsafe extern "C" fn sigaltstack_unlock() {
     spin_unlock_irq(&current.sighand.siglock);
     }
 
-    static inline void sigaltstack_lock(void) { }
-    static inline void sigaltstack_unlock(void) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sigaltstack_lock
+pub unsafe extern "C" fn sigaltstack_lock_dup() { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sigaltstack_unlock
+pub unsafe extern "C" fn sigaltstack_unlock_dup() { }
 
-    static int
-    do_sigaltstack (const stack_t *ss, stack_t *oss, unsigned long sp,
-    size_t min_ss_size)
-    {
-    struct task_struct *t = current;
-    let mut ret: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn do_sigaltstack(ss: *mut stack_t, oss: *mut stack_t, sp: c_ulong, min_ss_size: size_t) -> c_int {
+    let mut t = current;
+pub static mut ret: c_int = 0;
     if (oss) {
-    memset(oss, 0, sizeof(stack_t));
-    oss.ss_sp = (void __user *) t.sas_ss_sp;
+    memset(oss, 0, sizeof!(stack_t));
+    oss.ss_sp =  t.sas_ss_sp;
     oss.ss_size = t.sas_ss_size;
     oss.ss_flags = sas_ss_flags(sp) |
     (current.sas_ss_flags & SS_FLAG_BITS);
     }
     if (ss) {
-    void __user *ss_sp = ss.ss_sp;
-    let mut ss_size: usize = ss.ss_size;
-    let mut ss_flags: unsigned = ss.ss_flags;
-    int ss_mode;
-    if (unlikely(on_sig_stack(sp)))
+    let mut ss_sp = ss.ss_sp;
+pub static mut ss_size: usize = 0;
+pub static mut ss_flags: unsigned = 0;
+    let mut ss_mode = 0;
+    if (unlikely(on_sig_stack(sp))) {
     return -EPERM;
+    }
     ss_mode = ss_flags & ~SS_FLAG_BITS;
     if (unlikely(ss_mode != SS_DISABLE && ss_mode != SS_ONSTACK &&
-    ss_mode != 0))
+    ss_mode != 0)) {
     return -EINVAL;
+    }
 //
 // Return before taking any locks if no actual
 // sigaltstack changes were requested.
 //
     if (t.sas_ss_sp == (unsigned long)ss_sp &&
     t.sas_ss_size == ss_size &&
-    t.sas_ss_flags == ss_flags)
+    t.sas_ss_flags == ss_flags) {
     return 0;
+    }
     sigaltstack_lock();
     if (ss_mode == SS_DISABLE) {
     ss_size = 0;
     ss_sp = core::ptr::null_mut();
     } else {
-    if (unlikely(ss_size < min_ss_size))
+    if (unlikely(ss_size < min_ss_size)) {
     ret = -ENOMEM;
-    if (!sigaltstack_size_valid(ss_size))
+    }
+    if (!sigaltstack_size_valid(ss_size)) {
     ret = -ENOMEM;
+    }
     }
     if (!ret) {
     t.sas_ss_sp = (unsigned long) ss_sp;
@@ -3919,47 +4372,50 @@ pub unsafe extern "C" fn sigaltstack_unlock() {
     }
     return ret;
     }
-    SYSCALL_DEFINE2(sigaltstack,const stack_t __user *,uss, stack_t __user *,uoss)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_sigaltstack(uss: usize, uoss: usize) -> c_long {
     stack_t new, old;
-    int err;
-    if (uss && copy_from_user(&new, uss, sizeof(stack_t)))
+    let mut err = 0;
+    if (uss && copy_from_user(&new, uss, sizeof!(stack_t))) {
     return -EFAULT;
+    }
     err = do_sigaltstack(uss ? &new : core::ptr::null_mut(), uoss ? &old : core::ptr::null_mut(),
     current_user_stack_pointer(),
     MINSIGSTKSZ);
-    if (!err && uoss && copy_to_user(uoss, &old, sizeof(stack_t)))
+    if (!err && uoss && copy_to_user(uoss, &old, sizeof!(stack_t))) {
     err = -EFAULT;
+    }
     return err;
     }
 #[no_mangle]
-pub unsafe extern "C" fn restore_altstack(uss: *const stack_t __user) -> c_int {
-    stack_t new;
-    if (copy_from_user(&new, uss, sizeof(stack_t)))
+pub unsafe extern "C" fn restore_altstack(uss: *const stack_t ) -> c_int {
+    let mut new;
+    if (copy_from_user(&new, uss, sizeof!(stack_t))) {
     return -EFAULT;
+    }
     (void)do_sigaltstack(&new, core::ptr::null_mut(), current_user_stack_pointer(),
     MINSIGSTKSZ);
 // squash all but EFAULT for now
     return 0;
     }
 #[no_mangle]
-pub unsafe extern "C" fn __save_altstack(uss: *mut stack_t __user, sp: c_ulong) -> c_int {
-    struct task_struct *t = current;
-    int err = __put_user((void __user *)t.sas_ss_sp, &uss.ss_sp) |
+pub unsafe extern "C" fn __save_altstack(uss: *mut stack_t , sp: c_ulong) -> c_int {
+    let mut t = current;
+    let mut err = __put_user(t.sas_ss_sp, &uss.ss_sp) |
     __put_user(t.sas_ss_flags, &uss.ss_flags) |
     __put_user(t.sas_ss_size, &uss.ss_size);
     return err;
     }
 
-    static int do_compat_sigaltstack(const compat_stack_t __user *uss_ptr,
-    compat_stack_t __user *uoss_ptr)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn do_compat_sigaltstack(uss_ptr: *mut compat_stack_t, uoss_ptr: *mut compat_stack_t) -> c_int {
     stack_t uss, uoss;
-    int ret;
+    let mut ret = 0;
     if (uss_ptr) {
-    compat_stack_t uss32;
-    if (copy_from_user(&uss32, uss_ptr, sizeof(compat_stack_t)))
+    let mut uss32;
+    if (copy_from_user(&uss32, uss_ptr, sizeof!(compat_stack_t))) {
     return -EFAULT;
+    }
     uss.ss_sp = compat_ptr(uss32.ss_sp);
     uss.ss_flags = uss32.ss_flags;
     uss.ss_size = uss32.ss_size;
@@ -3968,33 +4424,34 @@ pub unsafe extern "C" fn __save_altstack(uss: *mut stack_t __user, sp: c_ulong) 
     compat_user_stack_pointer(),
     COMPAT_MINSIGSTKSZ);
     if (ret >= 0 && uoss_ptr)  {
-    compat_stack_t old;
-    memset(&old, 0, sizeof(old));
+    let mut old;
+    memset(&old, 0, sizeof!(old));
     old.ss_sp = ptr_to_compat(uoss.ss_sp);
     old.ss_flags = uoss.ss_flags;
     old.ss_size = uoss.ss_size;
-    if (copy_to_user(uoss_ptr, &old, sizeof(compat_stack_t)))
+    if (copy_to_user(uoss_ptr, &old, sizeof!(compat_stack_t))) {
     ret = -EFAULT;
+    }
     }
     return ret;
     }
-    COMPAT_SYSCALL_DEFINE2(sigaltstack,
-    const compat_stack_t __user *, uss_ptr,
-    compat_stack_t __user *, uoss_ptr)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sys_sigaltstack
+pub unsafe extern "C" fn sys_sigaltstack_dup(uss_ptr: usize, uoss_ptr: usize) -> c_long {
     return do_compat_sigaltstack(uss_ptr, uoss_ptr);
     }
 #[no_mangle]
-pub unsafe extern "C" fn compat_restore_altstack(uss: *const compat_stack_t __user) -> c_int {
-    let mut err: c_int = do_compat_sigaltstack(uss, core::ptr::null_mut());
+pub unsafe extern "C" fn compat_restore_altstack(uss: *const compat_stack_t ) -> c_int {
+pub static mut err: c_int = 0;
 // squash all but -EFAULT for now
-    let mut err: return = = -EFAULT ? err : 0;
+pub static mut err: return = 0;
     }
 #[no_mangle]
-pub unsafe extern "C" fn __compat_save_altstack(uss: *mut compat_stack_t __user, sp: c_ulong) -> c_int {
-    int err;
-    struct task_struct *t = current;
-    err = __put_user(ptr_to_compat((void __user *)t.sas_ss_sp),
+pub unsafe extern "C" fn __compat_save_altstack(uss: *mut compat_stack_t , sp: c_ulong) -> c_int {
+    let mut err = 0;
+    let mut t = current;
+    err = __put_user(ptr_to_compat(t.sas_ss_sp),
     &uss.ss_sp) |
     __put_user(t.sas_ss_flags, &uss.ss_flags) |
     __put_user(t.sas_ss_size, &uss.ss_size);
@@ -4005,20 +4462,24 @@ pub unsafe extern "C" fn __compat_save_altstack(uss: *mut compat_stack_t __user,
 // sys_sigpending - examine pending signals
 // @uset: where mask of pending signal is returned
 //
-    SYSCALL_DEFINE1(sigpending, old_sigset_t __user *, uset)
-    {
-    sigset_t set;
-    if (sizeof(old_sigset_t) > sizeof(*uset))
+#[no_mangle]
+pub unsafe extern "C" fn sys_sigpending(uset: usize) -> c_long {
+    let mut set;
+    if (sizeof!(old_sigset_t) > sizeof!(*uset)) {
     return -EINVAL;
+    }
     do_sigpending(&set);
-    if (copy_to_user(uset, &set, sizeof(old_sigset_t)))
+    if (copy_to_user(uset, &set, sizeof!(old_sigset_t))) {
     return -EFAULT;
+    }
     return 0;
     }
 
-    COMPAT_SYSCALL_DEFINE1(sigpending, compat_old_sigset_t __user *, set32)
-    {
-    sigset_t set;
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sys_sigpending
+pub unsafe extern "C" fn sys_sigpending_dup(set32: usize) -> c_long {
+    let mut set;
     do_sigpending(&set);
     return put_user(set.sig[0], set32);
     }
@@ -4032,34 +4493,39 @@ pub unsafe extern "C" fn __compat_save_altstack(uss: *mut compat_stack_t __user,
 // Some platforms have their own version with special arguments;
 // others support only sys_rt_sigprocmask.
 //
-    SYSCALL_DEFINE3(sigprocmask, int, how, old_sigset_t __user *, nset,
-    old_sigset_t __user *, oset)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_sigprocmask(how: usize, nset: usize, oset: usize) -> c_long {
     old_sigset_t old_set, new_set;
-    sigset_t new_blocked;
+    let mut new_blocked;
     old_set = current.blocked.sig[0];
     if (nset) {
-    if (copy_from_user(&new_set, nset, sizeof(*nset)))
+    if (copy_from_user(&new_set, nset, sizeof!(*nset))) {
     return -EFAULT;
+    }
     new_blocked = current.blocked;
-    switch (how) {
-    case SIG_BLOCK:
+    match (how) {
+    SIG_BLOCK => {
     sigaddsetmask(&new_blocked, new_set);
-    break;
-    case SIG_UNBLOCK:
+    // break;
+    }
+    SIG_UNBLOCK => {
     sigdelsetmask(&new_blocked, new_set);
-    break;
-    case SIG_SETMASK:
+    // break;
+    }
+    SIG_SETMASK => {
     new_blocked.sig[0] = new_set;
-    break;
-    default:
+    // break;
+    }
+    _ => {
     return -EINVAL;
+    }
     }
     set_current_blocked(&new_blocked);
     }
     if (oset) {
-    if (copy_to_user(oset, &old_set, sizeof(*oset)))
+    if (copy_to_user(oset, &old_set, sizeof!(*oset))) {
     return -EFAULT;
+    }
     }
     return 0;
     }
@@ -4071,41 +4537,42 @@ pub unsafe extern "C" fn __compat_save_altstack(uss: *mut compat_stack_t __user,
 // @oact: used to save the previous sigaction
 // @sigsetsize: size of sigset_t type
 //
-    SYSCALL_DEFINE4(rt_sigaction, int, sig,
-    const struct sigaction __user *, act,
-    struct sigaction __user *, oact,
-    size_t, sigsetsize)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_rt_sigaction(sig: usize, act: usize, oact: usize, sigsetsize: usize) -> c_long {
     struct k_sigaction new_sa, old_sa;
-    int ret;
+    let mut ret = 0;
 // XXX: Don't preclude handling different sized sigset_t's.
-    if (sigsetsize != sizeof(sigset_t))
+    if (sigsetsize != sizeof!(sigset_t)) {
     return -EINVAL;
-    if (act && copy_from_user(&new_sa.sa, act, sizeof(new_sa.sa)))
+    }
+    if (act && copy_from_user(&new_sa.sa, act, sizeof!(new_sa.sa))) {
     return -EFAULT;
+    }
     ret = do_sigaction(sig, act ? &new_sa : core::ptr::null_mut(), oact ? &old_sa : core::ptr::null_mut());
-    if (ret)
+    if (ret) {
     return ret;
-    if (oact && copy_to_user(oact, &old_sa.sa, sizeof(old_sa.sa)))
+    }
+    if (oact && copy_to_user(oact, &old_sa.sa, sizeof!(old_sa.sa))) {
     return -EFAULT;
+    }
     return 0;
     }
 
-    COMPAT_SYSCALL_DEFINE4(rt_sigaction, int, sig,
-    const struct compat_sigaction __user *, act,
-    struct compat_sigaction __user *, oact,
-    compat_size_t, sigsetsize)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sys_rt_sigaction
+pub unsafe extern "C" fn sys_rt_sigaction_dup(sig: usize, act: usize, oact: usize, sigsetsize: usize) -> c_long {
     struct k_sigaction new_ka, old_ka;
 
-    compat_uptr_t restorer;
+    let mut restorer;
 
-    int ret;
+    let mut ret = 0;
 // XXX: Don't preclude handling different sized sigset_t's.
-    if (sigsetsize != sizeof(compat_sigset_t))
+    if (sigsetsize != sizeof!(compat_sigset_t)) {
     return -EINVAL;
+    }
     if (act) {
-    compat_uptr_t handler;
+    let mut handler;
     ret = get_user(handler, &act.sa_handler);
     new_ka.sa.sa_handler = compat_ptr(handler);
 
@@ -4114,15 +4581,16 @@ pub unsafe extern "C" fn __compat_save_altstack(uss: *mut compat_stack_t __user,
 
     ret |= get_compat_sigset(&new_ka.sa.sa_mask, &act.sa_mask);
     ret |= get_user(new_ka.sa.sa_flags, &act.sa_flags);
-    if (ret)
+    if (ret) {
     return -EFAULT;
+    }
     }
     ret = do_sigaction(sig, act ? &new_ka : core::ptr::null_mut(), oact ? &old_ka : core::ptr::null_mut());
     if (!ret && oact) {
     ret = put_user(ptr_to_compat(old_ka.sa.sa_handler),
     &oact.sa_handler);
     ret |= put_compat_sigset(&oact.sa_mask, &old_ka.sa.sa_mask,
-    sizeof(oact.sa_mask));
+    sizeof!(oact.sa_mask));
     ret |= put_user(old_ka.sa.sa_flags, &oact.sa_flags);
 
     ret |= put_user(ptr_to_compat(old_ka.sa.sa_restorer),
@@ -4132,20 +4600,19 @@ pub unsafe extern "C" fn __compat_save_altstack(uss: *mut compat_stack_t __user,
     return ret;
     }
 
-    SYSCALL_DEFINE3(sigaction, int, sig,
-    const struct old_sigaction __user *, act,
-    struct old_sigaction __user *, oact)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_sigaction(sig: usize, act: usize, oact: usize) -> c_long {
     struct k_sigaction new_ka, old_ka;
-    int ret;
+    let mut ret = 0;
     if (act) {
-    old_sigset_t mask;
-    if (!access_ok(act, sizeof(*act)) ||
+    let mut mask;
+    if (!access_ok(act, sizeof!(*act)) ||
     __get_user(new_ka.sa.sa_handler, &act.sa_handler) ||
     __get_user(new_ka.sa.sa_restorer, &act.sa_restorer) ||
     __get_user(new_ka.sa.sa_flags, &act.sa_flags) ||
-    __get_user(mask, &act.sa_mask))
+    __get_user(mask, &act.sa_mask)) {
     return -EFAULT;
+    }
 
     new_ka.ka_restorer = core::ptr::null_mut();
 
@@ -4153,31 +4620,33 @@ pub unsafe extern "C" fn __compat_save_altstack(uss: *mut compat_stack_t __user,
     }
     ret = do_sigaction(sig, act ? &new_ka : core::ptr::null_mut(), oact ? &old_ka : core::ptr::null_mut());
     if (!ret && oact) {
-    if (!access_ok(oact, sizeof(*oact)) ||
+    if (!access_ok(oact, sizeof!(*oact)) ||
     __put_user(old_ka.sa.sa_handler, &oact.sa_handler) ||
     __put_user(old_ka.sa.sa_restorer, &oact.sa_restorer) ||
     __put_user(old_ka.sa.sa_flags, &oact.sa_flags) ||
-    __put_user(old_ka.sa.sa_mask.sig[0], &oact.sa_mask))
+    __put_user(old_ka.sa.sa_mask.sig[0], &oact.sa_mask)) {
     return -EFAULT;
+    }
     }
     return ret;
     }
 
-    COMPAT_SYSCALL_DEFINE3(sigaction, int, sig,
-    const struct compat_old_sigaction __user *, act,
-    struct compat_old_sigaction __user *, oact)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sys_sigaction
+pub unsafe extern "C" fn sys_sigaction_dup(sig: usize, act: usize, oact: usize) -> c_long {
     struct k_sigaction new_ka, old_ka;
-    int ret;
-    compat_old_sigset_t mask;
+    let mut ret = 0;
+    let mut mask;
     compat_uptr_t handler, restorer;
     if (act) {
-    if (!access_ok(act, sizeof(*act)) ||
+    if (!access_ok(act, sizeof!(*act)) ||
     __get_user(handler, &act.sa_handler) ||
     __get_user(restorer, &act.sa_restorer) ||
     __get_user(new_ka.sa.sa_flags, &act.sa_flags) ||
-    __get_user(mask, &act.sa_mask))
+    __get_user(mask, &act.sa_mask)) {
     return -EFAULT;
+    }
 
     new_ka.ka_restorer = core::ptr::null_mut();
 
@@ -4187,14 +4656,15 @@ pub unsafe extern "C" fn __compat_save_altstack(uss: *mut compat_stack_t __user,
     }
     ret = do_sigaction(sig, act ? &new_ka : core::ptr::null_mut(), oact ? &old_ka : core::ptr::null_mut());
     if (!ret && oact) {
-    if (!access_ok(oact, sizeof(*oact)) ||
+    if (!access_ok(oact, sizeof!(*oact)) ||
     __put_user(ptr_to_compat(old_ka.sa.sa_handler),
     &oact.sa_handler) ||
     __put_user(ptr_to_compat(old_ka.sa.sa_restorer),
     &oact.sa_restorer) ||
     __put_user(old_ka.sa.sa_flags, &oact.sa_flags) ||
-    __put_user(old_ka.sa.sa_mask.sig[0], &oact.sa_mask))
+    __put_user(old_ka.sa.sa_mask.sig[0], &oact.sa_mask)) {
     return -EFAULT;
+    }
     }
     return ret;
     }
@@ -4202,15 +4672,15 @@ pub unsafe extern "C" fn __compat_save_altstack(uss: *mut compat_stack_t __user,
 //
 // For backwards compatibility.  Functionality superseded by sigprocmask.
 //
-    SYSCALL_DEFINE0(sgetmask)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_sgetmask() -> c_long {
 // SMP safe
     return current.blocked.sig[0];
     }
-    SYSCALL_DEFINE1(ssetmask, int, newmask)
-    {
-    let mut old: c_int = current.blocked.sig[0];
-    sigset_t newset;
+#[no_mangle]
+pub unsafe extern "C" fn sys_ssetmask(newmask: usize) -> c_long {
+pub static mut old: c_int = 0;
+    let mut newset;
     siginitset(&newset, newmask);
     set_current_blocked(&newset);
     return old;
@@ -4219,10 +4689,10 @@ pub unsafe extern "C" fn __compat_save_altstack(uss: *mut compat_stack_t __user,
 //
 // For backwards compatibility.  Functionality superseded by sigaction.
 //
-    SYSCALL_DEFINE2(signal, int, sig, __sighandler_t, handler)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_signal(sig: usize, handler: usize) -> c_long {
     struct k_sigaction new_sa, old_sa;
-    int ret;
+    let mut ret = 0;
     new_sa.sa.sa_handler = handler;
     new_sa.sa.sa_flags = SA_ONESHOT | SA_NOMASK;
     sigemptyset(&new_sa.sa.sa_mask);
@@ -4230,8 +4700,8 @@ pub unsafe extern "C" fn __compat_save_altstack(uss: *mut compat_stack_t __user,
     return ret ? ret : (unsigned long)old_sa.sa.sa_handler;
     }
 
-    SYSCALL_DEFINE0(pause)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_pause() -> c_long {
     while (!signal_pending(current)) {
     __set_current_state(TASK_INTERRUPTIBLE);
     schedule();
@@ -4256,52 +4726,60 @@ unsafe extern "C" fn sigsuspend(set: *mut sigset_t) -> c_int {
 // @unewset: new signal mask value
 // @sigsetsize: size of sigset_t type
 //
-    SYSCALL_DEFINE2(rt_sigsuspend, sigset_t __user *, unewset, size_t, sigsetsize)
-    {
-    sigset_t newset;
+#[no_mangle]
+pub unsafe extern "C" fn sys_rt_sigsuspend(unewset: usize, sigsetsize: usize) -> c_long {
+    let mut newset;
 // XXX: Don't preclude handling different sized sigset_t's.
-    if (sigsetsize != sizeof(sigset_t))
+    if (sigsetsize != sizeof!(sigset_t)) {
     return -EINVAL;
-    if (copy_from_user(&newset, unewset, sizeof(newset)))
+    }
+    if (copy_from_user(&newset, unewset, sizeof!(newset))) {
     return -EFAULT;
+    }
     return sigsuspend(&newset);
     }
 
-    COMPAT_SYSCALL_DEFINE2(rt_sigsuspend, compat_sigset_t __user *, unewset, compat_size_t, sigsetsize)
-    {
-    sigset_t newset;
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sys_rt_sigsuspend
+pub unsafe extern "C" fn sys_rt_sigsuspend_dup(unewset: usize, sigsetsize: usize) -> c_long {
+    let mut newset;
 // XXX: Don't preclude handling different sized sigset_t's.
-    if (sigsetsize != sizeof(sigset_t))
+    if (sigsetsize != sizeof!(sigset_t)) {
     return -EINVAL;
-    if (get_compat_sigset(&newset, unewset))
+    }
+    if (get_compat_sigset(&newset, unewset)) {
     return -EFAULT;
+    }
     return sigsuspend(&newset);
     }
 
-    SYSCALL_DEFINE1(sigsuspend, old_sigset_t, mask)
-    {
-    sigset_t blocked;
+#[no_mangle]
+pub unsafe extern "C" fn sys_sigsuspend(mask: usize) -> c_long {
+    let mut blocked;
     siginitset(&blocked, mask);
     return sigsuspend(&blocked);
     }
 
-    SYSCALL_DEFINE3(sigsuspend, int, unused1, int, unused2, old_sigset_t, mask)
-    {
-    sigset_t blocked;
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sys_sigsuspend
+pub unsafe extern "C" fn sys_sigsuspend_dup(unused1: usize, unused2: usize, mask: usize) -> c_long {
+    let mut blocked;
     siginitset(&blocked, mask);
     return sigsuspend(&blocked);
     }
 
-    __weak const char *arch_vma_name(struct vm_area_struct *vma)
+    __weak const char *arch_vma_name(vm_area_struct *vma)
     {
     return core::ptr::null_mut();
     }
 #[no_mangle]
 pub unsafe extern "C" fn siginfo_buildtime_checks() {
-    BUILD_BUG_ON(sizeof(struct siginfo) != SI_MAX_SIZE);
+    BUILD_BUG_ON!(sizeof!(siginfo) != SI_MAX_SIZE);
 // Verify the offsets in the two siginfos match
 
-    BUILD_BUG_ON(offsetof(siginfo_t, field) != offsetof(kernel_siginfo_t, field))
+    BUILD_BUG_ON!(offsetof(siginfo_t, field) != offsetof(kernel_siginfo_t, field))
 // kill
     CHECK_OFFSET(si_pid);
     CHECK_OFFSET(si_uid);
@@ -4338,55 +4816,37 @@ pub unsafe extern "C" fn siginfo_buildtime_checks() {
     CHECK_OFFSET(si_arch);
 
 // usb asyncio
-    BUILD_BUG_ON(offsetof(struct siginfo, si_pid) !=
-    offsetof(struct siginfo, si_addr));
-    if (sizeof(int) == sizeof(void __user *)) {
-    BUILD_BUG_ON(sizeof_field(struct siginfo, si_pid) !=
-    sizeof(void __user *));
+    BUILD_BUG_ON!(offsetof(siginfo, si_pid) !=
+    offsetof(siginfo, si_addr));
+    if (sizeof!(int) == sizeof!) {
+    BUILD_BUG_ON!(sizeof_field(siginfo, si_pid) !=
+    sizeof!);
     } else {
-    BUILD_BUG_ON((sizeof_field(struct siginfo, si_pid) +
-    sizeof_field(struct siginfo, si_uid)) !=
-    sizeof(void __user *));
-    BUILD_BUG_ON(offsetofend(struct siginfo, si_pid) !=
-    offsetof(struct siginfo, si_uid));
+    BUILD_BUG_ON!((sizeof_field(siginfo, si_pid) +
+    sizeof_field(siginfo, si_uid)) !=
+    sizeof!);
+    BUILD_BUG_ON!(offsetofend(siginfo, si_pid) !=
+    offsetof(siginfo, si_uid));
     }
 
-    BUILD_BUG_ON(offsetof(struct compat_siginfo, si_pid) !=
-    offsetof(struct compat_siginfo, si_addr));
-    BUILD_BUG_ON(sizeof_field(struct compat_siginfo, si_pid) !=
-    sizeof(compat_uptr_t));
-    BUILD_BUG_ON(sizeof_field(struct compat_siginfo, si_pid) !=
-    sizeof_field(struct siginfo, si_pid));
+    BUILD_BUG_ON!(offsetof(compat_siginfo, si_pid) !=
+    offsetof(compat_siginfo, si_addr));
+    BUILD_BUG_ON!(sizeof_field(compat_siginfo, si_pid) !=
+    sizeof!(compat_uptr_t));
+    BUILD_BUG_ON!(sizeof_field(compat_siginfo, si_pid) !=
+    sizeof_field(siginfo, si_pid));
 
     }
 
-    static const struct ctl_table signal_debug_table[] = {
-
-    {
-    .procname	= "exception-trace",
-    .data		= &show_unhandled_signals,
-    .maxlen		= sizeof(int),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec
-    },
-
-    };
-    static const struct ctl_table signal_table[] = {
-    {
-    .procname	= "print-fatal-signals",
-    .data		= &print_fatal_signals,
-    .maxlen		= sizeof(int),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec,
-    },
-    };
+pub static mut ctl_table: usize = 0;
+pub static mut ctl_table: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn init_signal_sysctls() -> c_int {
     register_sysctl_init("debug", signal_debug_table);
     register_sysctl_init("kernel", signal_table);
     return 0;
     }
-    early_initcall(init_signal_sysctls);
+    early_initcall!(init_signal_sysctls);
 
 #[no_mangle]
 pub unsafe extern "C" fn signals_init() -> c_int {
@@ -4402,8 +4862,9 @@ pub unsafe extern "C" fn signals_init() -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kdb_send_sig(t: *mut task_struct, sig: c_int) {
-    static struct task_struct *kdb_prev_t;
-    int new_t, ret;
+pub static mut kdb_prev_t: *mut c_void = core::ptr::null_mut();
+    let mut new_t = 0;
+    let mut ret = 0;
     if (!spin_trylock(&t.sighand.siglock)) {
     kdb_printf("Can't do kill command now.\n"
     "The sigmask lock is held somewhere else in "
@@ -4424,23 +4885,10 @@ pub unsafe extern "C" fn kdb_send_sig(t: *mut task_struct, sig: c_int) {
     }
     ret = send_signal_locked(sig, SEND_SIG_PRIV, t, PIDTYPE_PID);
     spin_unlock(&t.sighand.siglock);
-    if (ret)
+    if (ret) {
     kdb_printf("Fail to deliver Signal %d to process %d.\n",
     sig, t.pid);
-    else
+    }
+    else {
     kdb_printf("Signal %d is sent to process %d.\n", sig, t.pid);
     }
-
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}

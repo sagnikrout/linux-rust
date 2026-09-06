@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -70,7 +320,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 // (default SCHED_TUNABLESCALING_LOG = *(1+ilog(ncpus))
 //
-    let mut sysctl_sched_tunable_scaling: c_uint = SCHED_TUNABLESCALING_LOG;
+pub static mut sysctl_sched_tunable_scaling: c_uint = 0;
 //
 // Default base time slice (request size r_i) for SCHED_NORMAL/SCHED_BATCH:
 //
@@ -79,24 +329,20 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 // (default: 0.70 msec * (1 + ilog(ncpus)), units: nanoseconds)
 //
-    let mut sysctl_sched_base_slice: c_uint = 700000ULL;
-    let mut normalized_sysctl_sched_base_slice: static unsigned int = 700000ULL;
-    let mut sysctl_sched_migration_cost: __read_mostly unsigned int = 500000UL;
+pub static mut sysctl_sched_base_slice: c_uint = 0;
+pub static mut normalized_sysctl_sched_base_slice: unsigned int = 0;
+pub static mut sysctl_sched_migration_cost:  unsigned int = 0;
 #[no_mangle]
-unsafe extern "C" fn setup_sched_thermal_decay_shift(str: *mut c_char) -> int __init {
-    static int __init setup_sched_thermal_decay_shift(char *str)
-    {
-    pr_warn("Ignoring the deprecated sched_thermal_decay_shift= option\n");
+unsafe extern "C" fn setup_sched_thermal_decay_shift(str: *mut c_char) -> c_int {
+    pr_warn!("Ignoring the deprecated sched_thermal_decay_shift= option\n");
     return 1;
     }
-    __setup("sched_thermal_decay_shift=", setup_sched_thermal_decay_shift);
+    __setup!("sched_thermal_decay_shift=", setup_sched_thermal_decay_shift);
 //
 // For asym packing, by default the lower numbered CPU has higher priority.
 //
 #[no_mangle]
 pub unsafe extern "C" fn arch_asym_cpu_priority(cpu: c_int) -> int __weak {
-    int __weak arch_asym_cpu_priority(int cpu)
-    {
     return -cpu;
     }
 //
@@ -122,59 +368,31 @@ pub unsafe extern "C" fn arch_asym_cpu_priority(cpu: c_int) -> int __weak {
 //
 // (default: 5 msec, units: microseconds)
 //
-    let mut sysctl_sched_cfs_bandwidth_slice: static unsigned int = 5000UL;
+pub static mut sysctl_sched_cfs_bandwidth_slice: unsigned int = 0;
 
 // Restrict the NUMA promotion throughput (MB/s) for each target node.
-    let mut sysctl_numa_balancing_promote_rate_limit: static unsigned int = 65536;
+pub static mut sysctl_numa_balancing_promote_rate_limit: unsigned int = 65536;
 
-    static const struct ctl_table sched_fair_sysctls[] = {
-
-    {
-    .procname       = "sched_cfs_bandwidth_slice_us",
-    .data           = &sysctl_sched_cfs_bandwidth_slice,
-    .maxlen         = sizeof(unsigned int),
-    .mode           = 0644,
-    .proc_handler   = proc_dointvec_minmax,
-    .extra1         = SYSCTL_ONE,
-    },
-
-    {
-    .procname	= "numa_balancing_promote_rate_limit_MBps",
-    .data		= &sysctl_numa_balancing_promote_rate_limit,
-    .maxlen		= sizeof(unsigned int),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec_minmax,
-    .extra1		= SYSCTL_ZERO,
-    },
-
-    };
+pub static mut ctl_table: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn sched_fair_sysctl_init() -> int __init {
-    static int __init sched_fair_sysctl_init(void)
-    {
+unsafe extern "C" fn sched_fair_sysctl_init() -> c_int {
     register_sysctl_init("kernel", sched_fair_sysctls);
     return 0;
     }
-    late_initcall(sched_fair_sysctl_init);
+    late_initcall!(sched_fair_sysctl_init);
 
 #[no_mangle]
 pub unsafe extern "C" fn update_load_add(lw: *mut load_weight, inc: c_ulong) {
-    static inline void update_load_add(struct load_weight *lw, unsigned long inc)
-    {
     lw.weight += inc;
     lw.inv_weight = 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn update_load_sub(lw: *mut load_weight, dec: c_ulong) {
-    static inline void update_load_sub(struct load_weight *lw, unsigned long dec)
-    {
     lw.weight -= dec;
     lw.inv_weight = 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn update_load_set(lw: *mut load_weight, w: c_ulong) {
-    static inline void update_load_set(struct load_weight *lw, unsigned long w)
-    {
     lw.weight = w;
     lw.inv_weight = 0;
     }
@@ -189,58 +407,57 @@ pub unsafe extern "C" fn update_load_set(lw: *mut load_weight, w: c_ulong) {
 //
 #[no_mangle]
 unsafe extern "C" fn get_update_sysctl_factor() -> c_uint {
-    static unsigned int get_update_sysctl_factor(void)
-    {
-    let mut cpus: c_uint = min_t(unsigned int, num_online_cpus(), 8);
-    unsigned int factor;
-    switch (sysctl_sched_tunable_scaling) {
-    case SCHED_TUNABLESCALING_NONE:
+pub static mut cpus: c_uint = 0;
+    let mut factor = 0;
+    match (sysctl_sched_tunable_scaling) {
+    SCHED_TUNABLESCALING_NONE => {
     factor = 1;
-    break;
-    case SCHED_TUNABLESCALING_LINEAR:
+    // break;
+    }
+    SCHED_TUNABLESCALING_LINEAR => {
     factor = cpus;
-    break;
-    case SCHED_TUNABLESCALING_LOG:
-    default:
+    // break;
+    }
+    SCHED_TUNABLESCALING_LOG => {
+    }
+    _ => {
     factor = 1 + ilog2(cpus);
-    break;
+    // break;
+    }
     }
     return factor;
     }
 #[no_mangle]
 unsafe extern "C" fn update_sysctl() {
-    static void update_sysctl(void)
-    {
-    let mut factor: c_uint = get_update_sysctl_factor();
+pub static mut factor: c_uint = 0;
 
     (sysctl_##name = (factor) * normalized_sysctl_##name)
     SET_SYSCTL(sched_base_slice);
 
     }
 #[no_mangle]
-pub unsafe extern "C" fn sched_init_granularity() -> void __init {
-    void __init sched_init_granularity(void)
-    {
+pub unsafe extern "C" fn sched_init_granularity()  {
     update_sysctl();
     }
 
 pub const WMULT_SHIFT: c_int = 32;
 #[no_mangle]
 unsafe extern "C" fn __update_inv_weight(lw: *mut load_weight) {
-    static void __update_inv_weight(struct load_weight *lw)
-    {
-    unsigned long w;
-    if (likely(lw.inv_weight))
+    let mut w = 0;
+    if (likely(lw.inv_weight)) {
     return;
+    }
     w = scale_load_down(lw.weight);
-    if (BITS_PER_LONG > 32 && unlikely(w >= WMULT_CONST))
+    if (BITS_PER_LONG > 32 && unlikely(w >= WMULT_CONST)) {
     lw.inv_weight = 1;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: unlikely(!w)) -> else {
-    else if (unlikely(!w))
+    }
+
+    else if (unlikely(!w)) {
     lw.inv_weight = WMULT_CONST;
-    else
+    }
+    else {
     lw.inv_weight = WMULT_CONST / w;
+    }
     }
 //
 // delta_exec * weight / lw.weight
@@ -256,12 +473,10 @@ pub unsafe extern "C" fn if(_arg: unlikely(!w)) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn __calc_delta(delta_exec: u64, weight: c_ulong, lw: *mut load_weight) -> u64 {
-    static u64 __calc_delta(u64 delta_exec, unsigned long weight, struct load_weight *lw)
-    {
-    let mut fact: u64 = scale_load_down(weight);
-    let mut fact_hi: u32 = (u32)(fact >> 32);
-    let mut shift: c_int = WMULT_SHIFT;
-    int fs;
+pub static mut fact: u64 = 0;
+pub static mut fact_hi: u32 = 0;
+pub static mut shift: c_int = 0;
+    let mut fs = 0;
     __update_inv_weight(lw);
     if (unlikely(fact_hi)) {
     fs = fls(fact_hi);
@@ -280,8 +495,6 @@ unsafe extern "C" fn __calc_delta(delta_exec: u64, weight: c_ulong, lw: *mut loa
 
 #[no_mangle]
 unsafe extern "C" fn __calc_delta(delta_exec: u64, weight: c_ulong, lw: *mut load_weight) -> u64 {
-    static u64 __calc_delta(u64 delta_exec, unsigned long weight, struct load_weight *lw)
-    {
     return (delta_exec * weight) / lw.weight;
     }
 
@@ -290,28 +503,27 @@ unsafe extern "C" fn __calc_delta(delta_exec: u64, weight: c_ulong, lw: *mut loa
 //
 #[no_mangle]
 pub unsafe extern "C" fn calc_delta_fair(delta: u64, se: *mut sched_entity) -> u64 {
-    static inline u64 calc_delta_fair(u64 delta, struct sched_entity *se)
-    {
-    if (se.h_load.weight != NICE_0_LOAD)
+    if (se.h_load.weight != NICE_0_LOAD) {
     delta = __calc_delta(delta, NICE_0_LOAD, &se.h_load);
+    }
     return delta;
     }
-    const struct sched_class fair_sched_class;
+pub static mut fair_sched_class: usize = 0;
 //
 // CFS operations on generic schedulable entities:
 //
 
 // Walk up scheduling entities hierarchy
 
-    for (; se; se = se.parent)
+    for (; se; se = se.parent) {
 #[no_mangle]
 pub unsafe extern "C" fn list_add_leaf_cfs_rq(cfs_rq: *mut cfs_rq) -> bool {
-    static inline bool list_add_leaf_cfs_rq(struct cfs_rq *cfs_rq)
-    {
-    struct rq *rq = rq_of(cfs_rq);
-    let mut cpu: c_int = cpu_of(rq);
-    if (cfs_rq.on_list)
+    }
+    let mut rq = rq_of(cfs_rq);
+pub static mut cpu: c_int = 0;
+    if (cfs_rq.on_list) {
     return rq.tmp_alone_branch == &rq.leaf_cfs_rq_list;
+    }
     cfs_rq.on_list = 1;
 //
 // Ensure we either appear before our parent (if already
@@ -370,10 +582,8 @@ pub unsafe extern "C" fn list_add_leaf_cfs_rq(cfs_rq: *mut cfs_rq) -> bool {
     }
 #[no_mangle]
 pub unsafe extern "C" fn list_del_leaf_cfs_rq(cfs_rq: *mut cfs_rq) {
-    static inline void list_del_leaf_cfs_rq(struct cfs_rq *cfs_rq)
-    {
     if (cfs_rq.on_list) {
-    struct rq *rq = rq_of(cfs_rq);
+    let mut rq = rq_of(cfs_rq);
 //
 // With cfs_rq being unthrottled/throttled during an enqueue,
 // it can happen the tmp_alone_branch points to the leaf that
@@ -381,154 +591,144 @@ pub unsafe extern "C" fn list_del_leaf_cfs_rq(cfs_rq: *mut cfs_rq) {
 // to the prev element but it will point to rq->leaf_cfs_rq_list
 // at the end of the enqueue.
 //
-    if (rq.tmp_alone_branch == &cfs_rq.leaf_cfs_rq_list)
+    if (rq.tmp_alone_branch == &cfs_rq.leaf_cfs_rq_list) {
     rq.tmp_alone_branch = cfs_rq.leaf_cfs_rq_list.prev;
+    }
     list_del_rcu(&cfs_rq.leaf_cfs_rq_list);
     cfs_rq.on_list = 0;
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn assert_list_leaf_cfs_rq(rq: *mut rq) {
-    static inline void assert_list_leaf_cfs_rq(struct rq *rq)
-    {
-    WARN_ON_ONCE(rq.tmp_alone_branch != &rq.leaf_cfs_rq_list);
+    WARN_ON_ONCE!(rq.tmp_alone_branch != &rq.leaf_cfs_rq_list);
     }
 // Iterate through all leaf cfs_rq's on a runqueue
 
-    list_for_each_entry_safe(cfs_rq, pos, &rq.leaf_cfs_rq_list,	\
-    leaf_cfs_rq_list)
+    list_for_each_entry_safe(cfs_rq, pos, &rq.leaf_cfs_rq_list,	
+    leaf_cfs_rq_list) {
 // Do the two (enqueued) entities belong to the same group ?
-    static inline struct cfs_rq *
-    is_same_group(struct sched_entity *se, struct sched_entity *pse)
-    {
-    if (se.cfs_rq == pse.cfs_rq)
+#[no_mangle]
+pub unsafe extern "C" fn is_same_group(se: *mut sched_entity, pse: *mut sched_entity) -> *mut c_void {
+    }
+    if (se.cfs_rq == pse.cfs_rq) {
     return se.cfs_rq;
+    }
     return core::ptr::null_mut();
     }
-    static inline struct sched_entity *parent_entity(const struct sched_entity *se)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn parent_entity(se: *mut sched_entity) -> *mut c_void {
     return se.parent;
     }
 #[no_mangle]
 unsafe extern "C" fn tg_is_idle(tg: *mut task_group) -> c_int {
-    static int tg_is_idle(struct task_group *tg)
-    {
     return tg.idle > 0;
     }
 #[no_mangle]
 unsafe extern "C" fn cfs_rq_is_idle(cfs_rq: *mut cfs_rq) -> c_int {
-    static int cfs_rq_is_idle(struct cfs_rq *cfs_rq)
-    {
     return cfs_rq.idle > 0;
     }
 #[no_mangle]
 unsafe extern "C" fn se_is_idle(se: *mut sched_entity) -> c_int {
-    static int se_is_idle(struct sched_entity *se)
-    {
-    if (entity_is_task(se))
+    if (entity_is_task(se)) {
     return task_has_idle_policy(task_of(se));
+    }
     return cfs_rq_is_idle(group_cfs_rq(se));
     }
 
-    for (; se; se = core::ptr::null_mut())
+    for (; se; se = core::ptr::null_mut()) {
 #[no_mangle]
-pub unsafe extern "C" fn list_add_leaf_cfs_rq(cfs_rq: *mut cfs_rq) -> bool {
-    static inline bool list_add_leaf_cfs_rq(struct cfs_rq *cfs_rq)
-    {
+#[no_mangle]
+// duplicate fn: list_add_leaf_cfs_rq
+pub unsafe extern "C" fn list_add_leaf_cfs_rq_dup(cfs_rq: *mut cfs_rq) -> bool {
+    }
     return true;
     }
 #[no_mangle]
-pub unsafe extern "C" fn list_del_leaf_cfs_rq(cfs_rq: *mut cfs_rq) {
-    static inline void list_del_leaf_cfs_rq(struct cfs_rq *cfs_rq)
-    {
+#[no_mangle]
+// duplicate fn: list_del_leaf_cfs_rq
+pub unsafe extern "C" fn list_del_leaf_cfs_rq_dup(cfs_rq: *mut cfs_rq) {
     }
 #[no_mangle]
-pub unsafe extern "C" fn assert_list_leaf_cfs_rq(rq: *mut rq) {
-    static inline void assert_list_leaf_cfs_rq(struct rq *rq)
-    {
+#[no_mangle]
+// duplicate fn: assert_list_leaf_cfs_rq
+pub unsafe extern "C" fn assert_list_leaf_cfs_rq_dup(rq: *mut rq) {
     }
 
-    for (cfs_rq = &rq.cfs, pos = core::ptr::null_mut(); cfs_rq; cfs_rq = pos)
-    static inline struct sched_entity *parent_entity(struct sched_entity *se)
-    {
+    for (cfs_rq = &rq.cfs, pos = core::ptr::null_mut(); cfs_rq; cfs_rq = pos) {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: parent_entity
+pub unsafe extern "C" fn parent_entity_dup(se: *mut sched_entity) -> *mut c_void {
+    }
     return core::ptr::null_mut();
     }
 #[no_mangle]
 pub unsafe extern "C" fn tg_is_idle(tg: *mut task_group) -> c_int {
-    static inline int tg_is_idle(struct task_group *tg)
-    {
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn cfs_rq_is_idle(cfs_rq: *mut cfs_rq) -> c_int {
-    static int cfs_rq_is_idle(struct cfs_rq *cfs_rq)
-    {
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn se_is_idle(se: *mut sched_entity) -> c_int {
-    static int se_is_idle(struct sched_entity *se)
-    {
     return task_has_idle_policy(task_of(se));
     }
 
     static __always_inline
-    bool account_cfs_rq_runtime(struct cfs_rq *cfs_rq, u64 delta_exec);
+// forward_decl: account_cfs_rq_runtime;
 //
 // Scheduling class tree data structure manipulation methods:
 //
-    extern void __BUILD_BUG_vruntime_cmp(void);
+// forward_decl: __BUILD_BUG_vruntime_cmp;
 // Use __builtin_strcmp() because of __HAVE_ARCH_STRCMP:
 
-    int __res = 0;						\
-    \
-    if (!__builtin_strcmp(CMP_STR, "<")) {			\
-    __res = ((s64)((A)-(B)) < 0);			\
-    } else if (!__builtin_strcmp(CMP_STR, "<=")) {		\
-    __res = ((s64)((A)-(B)) <= 0);			\
-    } else if (!__builtin_strcmp(CMP_STR, ">")) {		\
-    __res = ((s64)((A)-(B)) > 0);			\
-    } else if (!__builtin_strcmp(CMP_STR, ">=")) {		\
-    __res = ((s64)((A)-(B)) >= 0);			\
-    } else {						\
-// Unknown operator throws linker error: */	\
-    __BUILD_BUG_vruntime_cmp();			\
-    }							\
-    \
-    __res;							\
+    let mut __res = 0;						
+    
+    if (!__builtin_strcmp(CMP_STR, "<")) {			
+    __res = ((s64)((A)-(B)) < 0);			
+    } else if (!__builtin_strcmp(CMP_STR, "<=")) {		
+    __res = ((s64)((A)-(B)) <= 0);			
+    } else if (!__builtin_strcmp(CMP_STR, ">")) {		
+    __res = ((s64)((A)-(B)) > 0);			
+    } else if (!__builtin_strcmp(CMP_STR, ">=")) {		
+    __res = ((s64)((A)-(B)) >= 0);			
+    } else {						
+// Unknown operator throws linker error: */	
+    __BUILD_BUG_vruntime_cmp();			
+    }							
+    
+    __res;							
     })
-    extern void __BUILD_BUG_vruntime_op(void);
+// forward_decl: __BUILD_BUG_vruntime_op;
 
-    s64 __res = 0;						\
-    \
-    if (!__builtin_strcmp(OP_STR, "-")) {			\
-    __res = (s64)((A)-(B));				\
-    } else {						\
-// Unknown operator throws linker error: */	\
-    __BUILD_BUG_vruntime_op();			\
-    }							\
-    \
-    __res;						\
+    s64 __res = 0;						
+    
+    if (!__builtin_strcmp(OP_STR, "-")) {			
+    __res = (s64)((A)-(B));				
+    } else {						
+// Unknown operator throws linker error: */	
+    __BUILD_BUG_vruntime_op();			
+    }							
+    
+    __res;						
     })
 #[no_mangle]
 pub unsafe extern "C" fn max_vruntime(max_vruntime: u64, vruntime: u64) -> __maybe_unused u64 {
-    static inline __maybe_unused u64 max_vruntime(u64 max_vruntime, u64 vruntime)
-    {
-    if (vruntime_cmp(vruntime, ">", max_vruntime))
+    if (vruntime_cmp(vruntime, ">", max_vruntime)) {
     max_vruntime = vruntime;
+    }
     return max_vruntime;
     }
 #[no_mangle]
 pub unsafe extern "C" fn min_vruntime(min_vruntime: u64, vruntime: u64) -> __maybe_unused u64 {
-    static inline __maybe_unused u64 min_vruntime(u64 min_vruntime, u64 vruntime)
-    {
-    if (vruntime_cmp(vruntime, "<", min_vruntime))
+    if (vruntime_cmp(vruntime, "<", min_vruntime)) {
     min_vruntime = vruntime;
+    }
     return min_vruntime;
     }
-    static inline bool entity_before(const struct sched_entity *a,
-    const struct sched_entity *b)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn entity_before(a: *mut sched_entity, b: *mut sched_entity) -> bool {
 //
 // Tiebreak on vruntime seems unnecessary since it can
 // hardly happen.
@@ -552,12 +752,10 @@ pub unsafe extern "C" fn min_vruntime(min_vruntime: u64, vruntime: u64) -> __may
 //
 #[no_mangle]
 pub unsafe extern "C" fn entity_key(cfs_rq: *mut cfs_rq, se: *mut sched_entity) -> i64 {
-    static inline s64 entity_key(struct cfs_rq *cfs_rq, struct sched_entity *se)
-    {
     return vruntime_op(se.vruntime, "-", cfs_rq.zero_vruntime);
     }
 
-    rb_entry((node), struct sched_entity, run_node)
+    rb_entry((node), sched_entity, run_node)
 //
 // Compute virtual time from the per-task service numbers:
 //
@@ -614,76 +812,73 @@ pub unsafe extern "C" fn entity_key(cfs_rq: *mut cfs_rq, se: *mut sched_entity) 
 //
 #[no_mangle]
 pub unsafe extern "C" fn avg_vruntime_weight(cfs_rq: *mut cfs_rq, w: c_ulong) -> c_ulong {
-    static inline unsigned long avg_vruntime_weight(struct cfs_rq *cfs_rq, unsigned long w)
-    {
 
-    if (cfs_rq.sum_shift)
+    if (cfs_rq.sum_shift) {
     w = max(2UL, w >> cfs_rq.sum_shift);
+    }
 
     return w;
     }
-    static inline void
-    __sum_w_vruntime_add(struct cfs_rq *cfs_rq, struct sched_entity *se)
-    {
-    let mut weight: c_ulong = avg_vruntime_weight(cfs_rq, se.h_load.weight);
+#[no_mangle]
+pub unsafe extern "C" fn __sum_w_vruntime_add(cfs_rq: *mut cfs_rq, se: *mut sched_entity) {
+pub static mut weight: c_ulong = 0;
     s64 w_vruntime, key = entity_key(cfs_rq, se);
     w_vruntime = key * weight;
-    WARN_ON_ONCE((w_vruntime >> 63) != (w_vruntime >> 62));
+    WARN_ON_ONCE!((w_vruntime >> 63) != (w_vruntime >> 62));
     cfs_rq.sum_w_vruntime += w_vruntime;
     cfs_rq.sum_weight += weight;
     }
-    static void
-    sum_w_vruntime_add_paranoid(struct cfs_rq *cfs_rq, struct sched_entity *se)
-    {
-    unsigned long weight;
+#[no_mangle]
+pub unsafe extern "C" fn sum_w_vruntime_add_paranoid(cfs_rq: *mut cfs_rq, se: *mut sched_entity) {
+    let mut weight = 0;
     s64 key, tmp;
-    again:
+// label;
     weight = avg_vruntime_weight(cfs_rq, se.h_load.weight);
     key = entity_key(cfs_rq, se);
-    if (check_mul_overflow(key, weight, &key))
-    goto overflow;
-    if (check_add_overflow(cfs_rq.sum_w_vruntime, key, &tmp))
-    goto overflow;
+    if (check_mul_overflow(key, weight, &key)) {
+// goto;
+    }
+    if (check_add_overflow(cfs_rq.sum_w_vruntime, key, &tmp)) {
+// goto;
+    }
     cfs_rq.sum_w_vruntime = tmp;
     cfs_rq.sum_weight += weight;
     return;
-    overflow:
+// label;
 //
 // There's gotta be a limit -- if we're still failing at this point
 // there's really nothing much to be done about things.
 //
-    BUG_ON(cfs_rq.sum_shift >= 10);
-    cfs_rq.sum_shift++;
+    BUG_ON!(cfs_rq.sum_shift >= 10);
+    cfs_rq.sum_shift += 1;
 //
 // Note: \Sum (k_i * (w_i >> 1)) != (\Sum (k_i * w_i)) >> 1
 //
     cfs_rq.sum_w_vruntime = 0;
     cfs_rq.sum_weight = 0;
-    for (struct rb_node *node = cfs_rq.tasks_timeline.rb_leftmost;
-    node; node = rb_next(node))
+    for (rb_node *node = cfs_rq.tasks_timeline.rb_leftmost;
+    node; node = rb_next(node)) {
     __sum_w_vruntime_add(cfs_rq, __node_2_se(node));
-    goto again;
     }
-    static void
-    sum_w_vruntime_add(struct cfs_rq *cfs_rq, struct sched_entity *se)
-    {
-    if (sched_feat(PARANOID_AVG))
+// goto;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn sum_w_vruntime_add(cfs_rq: *mut cfs_rq, se: *mut sched_entity) {
+    if (sched_feat(PARANOID_AVG)) {
     return sum_w_vruntime_add_paranoid(cfs_rq, se);
+    }
     __sum_w_vruntime_add(cfs_rq, se);
     }
-    static void
-    sum_w_vruntime_sub(struct cfs_rq *cfs_rq, struct sched_entity *se)
-    {
-    let mut weight: c_ulong = avg_vruntime_weight(cfs_rq, se.h_load.weight);
-    let mut key: i64 = entity_key(cfs_rq, se);
+#[no_mangle]
+pub unsafe extern "C" fn sum_w_vruntime_sub(cfs_rq: *mut cfs_rq, se: *mut sched_entity) {
+pub static mut weight: c_ulong = 0;
+pub static mut key: i64 = 0;
     cfs_rq.sum_w_vruntime -= key * weight;
     cfs_rq.sum_weight -= weight;
     }
     static inline
 #[no_mangle]
 pub unsafe extern "C" fn update_zero_vruntime(cfs_rq: *mut cfs_rq, delta: i64) {
-    void update_zero_vruntime(struct cfs_rq *cfs_rq, s64 delta)
-    {
 //
 // v' = v + d ==> sum_w_vruntime' = sum_w_vruntime - d*sum_weight
 //
@@ -704,23 +899,23 @@ pub unsafe extern "C" fn update_zero_vruntime(cfs_rq: *mut cfs_rq, delta: i64) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn avg_vruntime(cfs_rq: *mut cfs_rq) -> u64 {
-    u64 avg_vruntime(struct cfs_rq *cfs_rq)
-    {
-    struct sched_entity *curr = cfs_rq.curr;
-    let mut weight: c_long = cfs_rq.sum_weight;
-    let mut delta: i64 = 0;
-    if (curr && !curr.on_rq)
+    let mut curr = cfs_rq.curr;
+pub static mut weight: c_long = 0;
+pub static mut delta: i64 = 0;
+    if (curr && !curr.on_rq) {
     curr = core::ptr::null_mut();
+    }
     if (weight) {
-    let mut runtime: i64 = cfs_rq.sum_w_vruntime;
+pub static mut runtime: i64 = 0;
     if (curr) {
-    let mut w: c_ulong = avg_vruntime_weight(cfs_rq, curr.h_load.weight);
+pub static mut w: c_ulong = 0;
     runtime += entity_key(cfs_rq, curr) * w;
     weight += w;
     }
 // sign flips effective floor / ceiling
-    if (runtime < 0)
+    if (runtime < 0) {
     runtime -= (weight - 1);
+    }
     delta = div64_long(runtime, weight);
     } else if (curr) {
 //
@@ -762,31 +957,31 @@ pub unsafe extern "C" fn avg_vruntime(cfs_rq: *mut cfs_rq) -> u64 {
 //
 #[no_mangle]
 unsafe extern "C" fn ineligible_vruntime(cfs_rq: *mut cfs_rq) -> u64 {
-    static u64 ineligible_vruntime(struct cfs_rq *cfs_rq)
-    {
-    struct sched_entity *curr = cfs_rq.curr;
-    let mut weight: c_long = cfs_rq.sum_weight;
-    let mut delta: i64 = 0;
-    if (curr && !curr.on_rq)
+    let mut curr = cfs_rq.curr;
+pub static mut weight: c_long = 0;
+pub static mut delta: i64 = 0;
+    if (curr && !curr.on_rq) {
     curr = core::ptr::null_mut();
+    }
 //
 // This is called from set_next_task_fair(.first=true)
 // set_protect_slice() so curr had better be set and on_rq.
 //
-    WARN_ON_ONCE(!curr);
+    WARN_ON_ONCE!(!curr);
     if (weight) {
-    let mut runtime: i64 = cfs_rq.sum_w_vruntime;
+pub static mut runtime: i64 = 0;
 //
 // Do not add @curr to obtain the effective '- w_j' terms.
 //
 // sign flips effective floor / ceiling
-    if (runtime < 0)
+    if (runtime < 0) {
     runtime -= (weight - 1);
+    }
     delta = div64_long(runtime, weight);
     }
     return cfs_rq.zero_vruntime + delta + 1;
     }
-    static inline u64 cfs_rq_max_slice(struct cfs_rq *cfs_rq);
+// forward_decl: cfs_rq_max_slice;
 //
 // lag_i = S - s_i = w_i * (V - v_i)
 //
@@ -803,9 +998,7 @@ unsafe extern "C" fn ineligible_vruntime(cfs_rq: *mut cfs_rq) -> u64 {
 //
 #[no_mangle]
 unsafe extern "C" fn entity_lag(cfs_rq: *mut cfs_rq, se: *mut sched_entity, avruntime: u64) -> i64 {
-    static s64 entity_lag(struct cfs_rq *cfs_rq, struct sched_entity *se, u64 avruntime)
-    {
-    let mut max_slice: u64 = cfs_rq_max_slice(cfs_rq) + TICK_NSEC;
+pub static mut max_slice: u64 = 0;
     s64 vlag, limit;
     vlag = avruntime - se.vruntime;
     limit = calc_delta_fair(max_slice, se);
@@ -829,15 +1022,14 @@ unsafe extern "C" fn entity_lag(cfs_rq: *mut cfs_rq, se: *mut sched_entity, avru
     static __always_inline
 #[no_mangle]
 pub unsafe extern "C" fn update_entity_lag(cfs_rq: *mut cfs_rq, se: *mut sched_entity) -> bool {
-    bool update_entity_lag(struct cfs_rq *cfs_rq, struct sched_entity *se)
-    {
-    let mut avruntime: u64 = avg_vruntime(cfs_rq);
-    let mut vlag: i64 = entity_lag(cfs_rq, se, avruntime);
+pub static mut avruntime: u64 = 0;
+pub static mut vlag: i64 = 0;
     if (se.sched_delayed) {
 // previous vlag < 0 otherwise se would not be delayed
     vlag = max(vlag, se.vlag);
-    if (sched_feat(DELAY_ZERO))
+    if (sched_feat(DELAY_ZERO)) {
     vlag = min(vlag, 0);
+    }
     }
     se.vlag = vlag;
     return avruntime - vlag != se.vruntime;
@@ -861,13 +1053,11 @@ pub unsafe extern "C" fn update_entity_lag(cfs_rq: *mut cfs_rq, se: *mut sched_e
 //
 #[no_mangle]
 unsafe extern "C" fn vruntime_eligible(cfs_rq: *mut cfs_rq, vruntime: u64) -> c_int {
-    static int vruntime_eligible(struct cfs_rq *cfs_rq, u64 vruntime)
-    {
-    struct sched_entity *curr = cfs_rq.curr;
+    let mut curr = cfs_rq.curr;
     s64 key, avg = cfs_rq.sum_w_vruntime;
-    let mut load: c_long = cfs_rq.sum_weight;
+pub static mut load: c_long = 0;
     if (curr && curr.on_rq) {
-    let mut weight: c_ulong = avg_vruntime_weight(cfs_rq, curr.h_load.weight);
+pub static mut weight: c_ulong = 0;
     avg += entity_key(cfs_rq, curr) * weight;
     load += weight;
     }
@@ -885,14 +1075,15 @@ unsafe extern "C" fn vruntime_eligible(cfs_rq: *mut cfs_rq, vruntime: u64) -> c_
 // This often results in simpler code than __builtin_mul_overflow().
     return avg >= (__int128)key * load;
 
-    s64 rhs;
+    let mut rhs = 0;
 //
 // On overflow, the sign of key tells us the correct answer: a large
 // positive key means vruntime >> V, so not eligible; a large negative
 // key means vruntime << V, so eligible.
 //
-    if (check_mul_overflow(key, load, &rhs))
+    if (check_mul_overflow(key, load, &rhs)) {
     return key <= 0;
+    }
     return avg >= rhs;
 
     return avg >= key * load;
@@ -900,70 +1091,63 @@ unsafe extern "C" fn vruntime_eligible(cfs_rq: *mut cfs_rq, vruntime: u64) -> c_
     }
 #[no_mangle]
 pub unsafe extern "C" fn entity_eligible(cfs_rq: *mut cfs_rq, se: *mut sched_entity) -> c_int {
-    int entity_eligible(struct cfs_rq *cfs_rq, struct sched_entity *se)
-    {
     return vruntime_eligible(cfs_rq, se.vruntime);
     }
 #[no_mangle]
 pub unsafe extern "C" fn cfs_rq_min_slice(cfs_rq: *mut cfs_rq) -> u64 {
-    static inline u64 cfs_rq_min_slice(struct cfs_rq *cfs_rq)
-    {
-    struct sched_entity *root = __pick_root_entity(cfs_rq);
-    struct sched_entity *curr = cfs_rq.curr;
-    let mut min_slice: u64 = ~0ULL;
-    if (curr && curr.on_rq)
+    let mut root = __pick_root_entity(cfs_rq);
+    let mut curr = cfs_rq.curr;
+pub static mut min_slice: u64 = 0;
+    if (curr && curr.on_rq) {
     min_slice = curr.slice;
-    if (root)
+    }
+    if (root) {
     min_slice = min(min_slice, root.min_slice);
+    }
     return min_slice;
     }
 #[no_mangle]
 pub unsafe extern "C" fn cfs_rq_max_slice(cfs_rq: *mut cfs_rq) -> u64 {
-    static inline u64 cfs_rq_max_slice(struct cfs_rq *cfs_rq)
-    {
-    struct sched_entity *root = __pick_root_entity(cfs_rq);
-    struct sched_entity *curr = cfs_rq.curr;
-    let mut max_slice: u64 = 0ULL;
-    if (curr && curr.on_rq)
+    let mut root = __pick_root_entity(cfs_rq);
+    let mut curr = cfs_rq.curr;
+pub static mut max_slice: u64 = 0;
+    if (curr && curr.on_rq) {
     max_slice = curr.slice;
-    if (root)
+    }
+    if (root) {
     max_slice = max(max_slice, root.max_slice);
+    }
     return max_slice;
     }
 #[no_mangle]
 pub unsafe extern "C" fn __entity_less(a: *mut rb_node, b: *const rb_node) -> bool {
-    static inline bool __entity_less(struct rb_node *a, const struct rb_node *b)
-    {
     return entity_before(__node_2_se(a), __node_2_se(b));
     }
 #[no_mangle]
 pub unsafe extern "C" fn __min_vruntime_update(se: *mut sched_entity, node: *mut rb_node) {
-    static inline void __min_vruntime_update(struct sched_entity *se, struct rb_node *node)
-    {
     if (node) {
-    struct sched_entity *rse = __node_2_se(node);
-    if (vruntime_cmp(se.min_vruntime, ">", rse.min_vruntime))
+    let mut rse = __node_2_se(node);
+    if (vruntime_cmp(se.min_vruntime, ">", rse.min_vruntime)) {
     se.min_vruntime = rse.min_vruntime;
+    }
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn __min_slice_update(se: *mut sched_entity, node: *mut rb_node) {
-    static inline void __min_slice_update(struct sched_entity *se, struct rb_node *node)
-    {
     if (node) {
-    struct sched_entity *rse = __node_2_se(node);
-    if (rse.min_slice < se.min_slice)
+    let mut rse = __node_2_se(node);
+    if (rse.min_slice < se.min_slice) {
     se.min_slice = rse.min_slice;
+    }
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn __max_slice_update(se: *mut sched_entity, node: *mut rb_node) {
-    static inline void __max_slice_update(struct sched_entity *se, struct rb_node *node)
-    {
     if (node) {
-    struct sched_entity *rse = __node_2_se(node);
-    if (rse.max_slice > se.max_slice)
+    let mut rse = __node_2_se(node);
+    if (rse.max_slice > se.max_slice) {
     se.max_slice = rse.max_slice;
+    }
     }
     }
 //
@@ -971,12 +1155,10 @@ pub unsafe extern "C" fn __max_slice_update(se: *mut sched_entity, node: *mut rb
 //
 #[no_mangle]
 pub unsafe extern "C" fn min_vruntime_update(se: *mut sched_entity, exit: bool) -> bool {
-    static inline bool min_vruntime_update(struct sched_entity *se, bool exit)
-    {
-    let mut old_min_vruntime: u64 = se.min_vruntime;
-    let mut old_min_slice: u64 = se.min_slice;
-    let mut old_max_slice: u64 = se.max_slice;
-    struct rb_node *node = &se.run_node;
+pub static mut old_min_vruntime: u64 = 0;
+pub static mut old_min_slice: u64 = 0;
+pub static mut old_max_slice: u64 = 0;
+    let mut node = &se.run_node;
     se.min_vruntime = se.vruntime;
     __min_vruntime_update(se, node.rb_right);
     __min_vruntime_update(se, node.rb_left);
@@ -990,17 +1172,15 @@ pub unsafe extern "C" fn min_vruntime_update(se: *mut sched_entity, exit: bool) 
     se.min_slice == old_min_slice &&
     se.max_slice == old_max_slice;
     }
-    RB_DECLARE_CALLBACKS(static, min_vruntime_cb, struct sched_entity,
+    RB_DECLARE_CALLBACKS(static, min_vruntime_cb, sched_entity,
     run_node, min_vruntime, min_vruntime_update);
 //
 // Enqueue an entity into the rb-tree:
 //
 #[no_mangle]
 unsafe extern "C" fn __enqueue_entity(cfs_rq: *mut cfs_rq, se: *mut sched_entity) {
-    static void __enqueue_entity(struct cfs_rq *cfs_rq, struct sched_entity *se)
-    {
-    WARN_ON_ONCE(&rq_of(cfs_rq).cfs != cfs_rq);
-    WARN_ON_ONCE(!entity_is_task(se));
+    WARN_ON_ONCE!(&rq_of(cfs_rq).cfs != cfs_rq);
+    WARN_ON_ONCE!(!entity_is_task(se));
     sum_w_vruntime_add(cfs_rq, se);
     se.min_vruntime = se.vruntime;
     se.min_slice = se.slice;
@@ -1009,26 +1189,26 @@ unsafe extern "C" fn __enqueue_entity(cfs_rq: *mut cfs_rq, se: *mut sched_entity
     }
 #[no_mangle]
 unsafe extern "C" fn __dequeue_entity(cfs_rq: *mut cfs_rq, se: *mut sched_entity) {
-    static void __dequeue_entity(struct cfs_rq *cfs_rq, struct sched_entity *se)
-    {
-    WARN_ON_ONCE(&rq_of(cfs_rq).cfs != cfs_rq);
-    WARN_ON_ONCE(!entity_is_task(se));
+    WARN_ON_ONCE!(&rq_of(cfs_rq).cfs != cfs_rq);
+    WARN_ON_ONCE!(!entity_is_task(se));
     rb_erase_augmented_cached(&se.run_node, &cfs_rq.tasks_timeline,
     &min_vruntime_cb);
     sum_w_vruntime_sub(cfs_rq, se);
     }
-    struct sched_entity *__pick_root_entity(struct cfs_rq *cfs_rq)
-    {
-    struct rb_node *root = cfs_rq.tasks_timeline.rb_root.rb_node;
-    if (!root)
+#[no_mangle]
+pub unsafe extern "C" fn __pick_root_entity(cfs_rq: *mut cfs_rq) -> *mut c_void {
+    let mut root = cfs_rq.tasks_timeline.rb_root.rb_node;
+    if (!root) {
     return core::ptr::null_mut();
+    }
     return __node_2_se(root);
     }
-    struct sched_entity *__pick_first_entity(struct cfs_rq *cfs_rq)
-    {
-    struct rb_node *left = rb_first_cached(&cfs_rq.tasks_timeline);
-    if (!left)
+#[no_mangle]
+pub unsafe extern "C" fn __pick_first_entity(cfs_rq: *mut cfs_rq) -> *mut c_void {
+    let mut left = rb_first_cached(&cfs_rq.tasks_timeline);
+    if (!left) {
     return core::ptr::null_mut();
+    }
     return __node_2_se(left);
     }
 //
@@ -1041,42 +1221,38 @@ unsafe extern "C" fn __dequeue_entity(cfs_rq: *mut cfs_rq, se: *mut sched_entity
 //
 #[no_mangle]
 pub unsafe extern "C" fn set_protect_slice(cfs_rq: *mut cfs_rq, se: *mut sched_entity) {
-    static inline void set_protect_slice(struct cfs_rq *cfs_rq, struct sched_entity *se)
-    {
-    let mut slice: u64 = normalized_sysctl_sched_base_slice;
-    let mut vprot: u64 = se.deadline;
-    if (sched_feat(RUN_TO_PARITY))
+pub static mut slice: u64 = 0;
+pub static mut vprot: u64 = 0;
+    if (sched_feat(RUN_TO_PARITY)) {
     slice = cfs_rq_min_slice(cfs_rq);
+    }
     slice = min(slice, se.slice);
 // If there are shorter slices than se's one
     if (slice != se.slice) {
-    if (sched_feat(PREEMPT_SHORT))
+    if (sched_feat(PREEMPT_SHORT)) {
     vprot = min_vruntime(vprot, ineligible_vruntime(cfs_rq));
-    else
+    }
+    else {
     vprot = min_vruntime(vprot, se.vruntime + calc_delta_fair(slice, se));
+    }
     }
     se.vprot = vprot;
     }
 #[no_mangle]
 pub unsafe extern "C" fn update_protect_slice(cfs_rq: *mut cfs_rq, se: *mut sched_entity) {
-    static inline void update_protect_slice(struct cfs_rq *cfs_rq, struct sched_entity *se)
-    {
-    let mut slice: u64 = cfs_rq_min_slice(cfs_rq);
-    let mut vruntime: u64 = min_vruntime(se.vruntime, avg_vruntime(cfs_rq));
+pub static mut slice: u64 = 0;
+pub static mut vruntime: u64 = 0;
     se.vprot = min_vruntime(se.vprot, vruntime + calc_delta_fair(slice, se));
     }
 #[no_mangle]
 pub unsafe extern "C" fn protect_slice(se: *mut sched_entity) -> bool {
-    static inline bool protect_slice(struct sched_entity *se)
-    {
     return vruntime_cmp(se.vruntime, "<", se.vprot);
     }
 #[no_mangle]
 pub unsafe extern "C" fn cancel_protect_slice(se: *mut sched_entity) {
-    static inline void cancel_protect_slice(struct sched_entity *se)
-    {
-    if (protect_slice(se))
+    if (protect_slice(se)) {
     se.vprot = se.vruntime;
+    }
     }
 //
 // Earliest Eligible Virtual Deadline First
@@ -1097,39 +1273,42 @@ pub unsafe extern "C" fn cancel_protect_slice(se: *mut sched_entity) {
 //
 // Which allows tree pruning through eligibility.
 //
-    static struct sched_entity *pick_eevdf(struct cfs_rq *cfs_rq, bool protect)
-    {
-    struct rb_node *node = cfs_rq.tasks_timeline.rb_root.rb_node;
-    struct sched_entity *se = __pick_first_entity(cfs_rq);
-    struct sched_entity *curr = cfs_rq.curr;
-    struct sched_entity *best = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn pick_eevdf(cfs_rq: *mut cfs_rq, protect: bool) -> *mut c_void {
+    let mut node = cfs_rq.tasks_timeline.rb_root.rb_node;
+    let mut se = __pick_first_entity(cfs_rq);
+    let mut curr = cfs_rq.curr;
+    let mut best = core::ptr::null_mut();
 //
 // We can safely skip eligibility check if there is only one entity
 // in this cfs_rq, saving some cycles.
 //
-    if (cfs_rq.h_nr_queued == 1)
+    if (cfs_rq.h_nr_queued == 1) {
     return curr && curr.on_rq ? curr : se;
+    }
 //
 // Picking the ->next buddy will affect latency but not fairness.
 //
     if (sched_feat(PICK_BUDDY) && protect &&
     cfs_rq.next && entity_eligible(cfs_rq, cfs_rq.next)) {
 // ->next will never be delayed
-    WARN_ON_ONCE(cfs_rq.next.sched_delayed);
+    WARN_ON_ONCE!(cfs_rq.next.sched_delayed);
     return cfs_rq.next;
     }
-    if (curr && (!curr.on_rq || !entity_eligible(cfs_rq, curr)))
+    if (curr && (!curr.on_rq || !entity_eligible(cfs_rq, curr))) {
     curr = core::ptr::null_mut();
-    if (curr && protect && protect_slice(curr))
+    }
+    if (curr && protect && protect_slice(curr)) {
     return curr;
+    }
 // Pick the leftmost entity if it's eligible
     if (se && entity_eligible(cfs_rq, se)) {
     best = se;
-    goto found;
+// goto;
     }
 // Heap search for the EEVD entity
     while (node) {
-    struct rb_node *left = node.rb_left;
+    let mut left = node.rb_left;
 //
 // Eligible entities in left subtree are always better
 // choices, since they have earlier deadlines.
@@ -1151,16 +1330,18 @@ pub unsafe extern "C" fn cancel_protect_slice(se: *mut sched_entity) {
     }
     node = node.rb_right;
     }
-    found:
-    if (!best || (curr && entity_before(curr, best)))
+// label;
+    if (!best || (curr && entity_before(curr, best))) {
     best = curr;
+    }
     return best;
     }
-    struct sched_entity *__pick_last_entity(struct cfs_rq *cfs_rq)
-    {
-    struct rb_node *last = rb_last(&cfs_rq.tasks_timeline.rb_root);
-    if (!last)
+#[no_mangle]
+pub unsafe extern "C" fn __pick_last_entity(cfs_rq: *mut cfs_rq) -> *mut c_void {
+    let mut last = rb_last(&cfs_rq.tasks_timeline.rb_root);
+    if (!last) {
     return core::ptr::null_mut();
+    }
     return __node_2_se(last);
     }
 //
@@ -1168,33 +1349,31 @@ pub unsafe extern "C" fn cancel_protect_slice(se: *mut sched_entity) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn sched_update_scaling() -> c_int {
-    int sched_update_scaling(void)
-    {
-    let mut factor: c_uint = get_update_sysctl_factor();
+pub static mut factor: c_uint = 0;
 
     (normalized_sysctl_##name = sysctl_##name / (factor))
     WRT_SYSCTL(sched_base_slice);
 
     return 0;
     }
-    static void clear_buddies(struct cfs_rq *cfs_rq, struct sched_entity *se);
+// forward_decl: clear_buddies;
 //
 // XXX: strictly: vd_i += N*r_i/w_i such that: vd_i > ve_i
 // this is probably good enough.
 //
 #[no_mangle]
 unsafe extern "C" fn update_deadline(cfs_rq: *mut cfs_rq, se: *mut sched_entity) -> bool {
-    static bool update_deadline(struct cfs_rq *cfs_rq, struct sched_entity *se)
-    {
-    if (vruntime_cmp(se.vruntime, "<", se.deadline))
+    if (vruntime_cmp(se.vruntime, "<", se.deadline)) {
     return false;
+    }
 //
 // For EEVDF the virtual time slope is determined by w_i (iow.
 // nice) while the request time r_i is determined by
 // sysctl_sched_base_slice.
 //
-    if (!se.custom_slice)
+    if (!se.custom_slice) {
     se.slice = sysctl_sched_base_slice;
+    }
 //
 // EEVDF: vd_i = ve_i + r_i / w_i
 //
@@ -1206,24 +1385,23 @@ unsafe extern "C" fn update_deadline(cfs_rq: *mut cfs_rq, se: *mut sched_entity)
     return true;
     }
 
-    static int select_idle_sibling(struct task_struct *p, int prev_cpu, int cpu);
-    static unsigned long task_h_load(struct task_struct *p);
-    static unsigned long capacity_of(int cpu);
+// forward_decl: select_idle_sibling;
+// forward_decl: task_h_load;
+// forward_decl: capacity_of;
 // Give new sched_entity start runnable values to heavy its load in infant time
 #[no_mangle]
 pub unsafe extern "C" fn init_entity_runnable_average(se: *mut sched_entity) {
-    void init_entity_runnable_average(struct sched_entity *se)
-    {
-    struct sched_avg *sa = &se.avg;
-    memset(sa, 0, sizeof(*sa));
+    let mut sa = &se.avg;
+    memset(sa, 0, sizeof!(*sa));
 //
 // Tasks are initialized with full load to be seen as heavy tasks until
 // they get a chance to stabilize to their real load level.
 // Group entities are initialized with zero load to reflect the fact that
 // nothing has been attached to the task group yet.
 //
-    if (entity_is_task(se))
+    if (entity_is_task(se)) {
     sa.load_avg = scale_load_down(se.load.weight);
+    }
 // when this task is enqueued, it will contribute to its cfs_rq's load_avg
     }
 //
@@ -1255,13 +1433,11 @@ pub unsafe extern "C" fn init_entity_runnable_average(se: *mut sched_entity) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn post_init_entity_util_avg(p: *mut task_struct) {
-    void post_init_entity_util_avg(struct task_struct *p)
-    {
-    struct sched_entity *se = &p.se;
-    struct cfs_rq *cfs_rq = cfs_rq_of(se);
-    struct sched_avg *sa = &se.avg;
-    let mut cpu_scale: c_long = arch_scale_cpu_capacity(cpu_of(rq_of(cfs_rq)));
-    let mut cap: c_long = (long)(cpu_scale - cfs_rq.avg.util_avg) / 2;
+    let mut se = &p.se;
+    let mut cfs_rq = cfs_rq_of(se);
+    let mut sa = &se.avg;
+pub static mut cpu_scale: c_long = 0;
+pub static mut cap: c_long = 0;
     if (p.sched_class != &fair_sched_class) {
 //
 // For !fair tasks do:
@@ -1280,28 +1456,28 @@ pub unsafe extern "C" fn post_init_entity_util_avg(p: *mut task_struct) {
     if (cfs_rq.avg.util_avg != 0) {
     sa.util_avg  = cfs_rq.avg.util_avg * se_weight(se);
     sa.util_avg /= (cfs_rq.avg.load_avg + 1);
-    if (sa.util_avg > cap)
+    if (sa.util_avg > cap) {
     sa.util_avg = cap;
+    }
     } else {
     sa.util_avg = cap;
     }
     }
     sa.runnable_avg = sa.util_avg;
     }
-    static inline void account_mm_sched(struct rq *rq, struct task_struct *p, s64 delta_exec);
+// forward_decl: account_mm_sched;
 #[no_mangle]
 unsafe extern "C" fn update_se(rq: *mut rq, se: *mut sched_entity) -> i64 {
-    static s64 update_se(struct rq *rq, struct sched_entity *se)
-    {
-    let mut now: u64 = rq_clock_task(rq);
-    s64 delta_exec;
+pub static mut now: u64 = 0;
+    let mut delta_exec = 0;
     delta_exec = now - se.exec_start;
-    if (unlikely(delta_exec <= 0))
+    if (unlikely(delta_exec <= 0)) {
     return delta_exec;
+    }
     se.exec_start = now;
     if (entity_is_task(se)) {
-    struct task_struct *donor = task_of(se);
-    struct task_struct *running = rq.curr;
+    let mut donor = task_of(se);
+    let mut running = rq.curr;
 //
 // If se is a task, we account the time against the running
 // task, as w/ proxy-exec they may not be the same.
@@ -1318,7 +1494,7 @@ unsafe extern "C" fn update_se(rq: *mut rq, se: *mut sched_entity) -> i64 {
     se.sum_exec_runtime += delta_exec;
     }
     if (schedstat_enabled()) {
-    struct sched_statistics *stats;
+pub static mut stats: *mut c_void = core::ptr::null_mut();
     stats = __schedstats_from_se(se);
     __schedstat_set(stats.exec_max,
     max(delta_exec, stats.exec_max));
@@ -1331,42 +1507,40 @@ unsafe extern "C" fn update_se(rq: *mut rq, se: *mut sched_entity) -> i64 {
 // tunable or so.
 //
 
-    let mut llc_aggr_tolerance: __read_mostly unsigned int = 1;
-    let mut llc_epoch_period: __read_mostly unsigned int = EPOCH_PERIOD;
-    let mut llc_epoch_affinity_timeout: __read_mostly unsigned int = EPOCH_LLC_AFFINITY_TIMEOUT;
-    let mut llc_imb_pct: __read_mostly unsigned int = 20;
-    let mut llc_overaggr_pct: __read_mostly unsigned int = 50;
+pub static mut llc_aggr_tolerance:  unsigned int = 1;
+pub static mut llc_epoch_period:  unsigned int = 0;
+pub static mut llc_epoch_affinity_timeout:  unsigned int = 0;
+pub static mut llc_imb_pct:  unsigned int = 20;
+pub static mut llc_overaggr_pct:  unsigned int = 50;
 #[no_mangle]
 unsafe extern "C" fn llc_id(cpu: c_int) -> c_int {
-    static int llc_id(int cpu)
-    {
-    if (cpu < 0)
+    if (cpu < 0) {
     return -1;
+    }
     return per_cpu(sd_llc_id, cpu);
     }
 #[no_mangle]
 pub unsafe extern "C" fn get_sched_cache_scale(mul: c_int) -> c_int {
-    static inline int get_sched_cache_scale(int mul)
-    {
-    let mut tol: c_uint = READ_ONCE(llc_aggr_tolerance);
-    if (!tol)
+pub static mut tol: c_uint = 0;
+    if (!tol) {
     return 0;
-    if (tol >= 100)
+    }
+    if (tol >= 100) {
     return INT_MAX;
+    }
     return (1 + (tol - 1) * mul);
     }
 #[no_mangle]
 unsafe extern "C" fn exceed_llc_capacity(mm: *mut mm_struct, cpu: c_int) -> bool {
-    static bool exceed_llc_capacity(struct mm_struct *mm, int cpu)
-    {
 
     unsigned long llc, footprint;
-    struct sched_domain *sd;
-    int scale;
+pub static mut sd: *mut c_void = core::ptr::null_mut();
+    let mut scale = 0;
     guard(rcu)();
     sd = rcu_dereference_sched_domain(cpu_rq(cpu).sd);
-    if (!sd)
+    if (!sd) {
     return true;
+    }
     if (static_branch_likely(&sched_numa_balancing)) {
 //
 // TBD: RDT exclusive LLC ways reserved should be
@@ -1392,40 +1566,42 @@ unsafe extern "C" fn exceed_llc_capacity(mm: *mut mm_struct, cpu: c_int) -> bool
 // anyway.
 //
     scale = get_sched_cache_scale(256);
-    if (scale == INT_MAX)
+    if (scale == INT_MAX) {
     return false;
+    }
     return ((llc * (u64)scale) < (footprint * PAGE_SIZE));
     }
 
     return false;
     }
-    static bool invalid_llc_nr(struct mm_struct *mm, struct task_struct *p,
-    int cpu)
-    {
-    int scale;
-    if (get_nr_threads(p) <= 1)
+#[no_mangle]
+pub unsafe extern "C" fn invalid_llc_nr(mm: *mut mm_struct, p: *mut task_struct, cpu: c_int) -> bool {
+    let mut scale = 0;
+    if (get_nr_threads(p) <= 1) {
     return true;
+    }
 //
 // Scale the number of 'cores' in a LLC by llc_aggr_tolerance
 // and compare it to the task's active threads.
 //
     scale = get_sched_cache_scale(1);
-    if (scale == INT_MAX)
+    if (scale == INT_MAX) {
     return false;
+    }
     return !fits_capacity((mm.sc_stat.nr_running_avg * cpu_smt_num_threads),
     (scale * per_cpu(sd_llc_size, cpu)));
     }
 #[no_mangle]
 unsafe extern "C" fn account_llc_enqueue(rq: *mut rq, p: *mut task_struct) {
-    static void account_llc_enqueue(struct rq *rq, struct task_struct *p)
-    {
-    int pref_llc, pref_llc_queued;
-    struct sched_domain *sd;
+    let mut pref_llc = 0;
+    let mut pref_llc_queued = 0;
+pub static mut sd: *mut c_void = core::ptr::null_mut();
     pref_llc = p.preferred_llc;
-    if (pref_llc < 0)
+    if (pref_llc < 0) {
     return;
+    }
     pref_llc_queued = (pref_llc == task_llc(p));
-    rq.nr_llc_running++;
+    rq.nr_llc_running += 1;
     rq.nr_pref_llc_running += pref_llc_queued;
 //
 // Record whether p is enqueued on its preferred
@@ -1443,21 +1619,21 @@ unsafe extern "C" fn account_llc_enqueue(rq: *mut rq, p: *mut task_struct) {
 //
     p.pref_llc_queued = pref_llc_queued;
     sd = rcu_dereference_all(rq.sd);
-    if (sd && (unsigned int)pref_llc < sd.llc_max)
+    if (sd && (unsigned int)pref_llc < sd.llc_max) {
     sd.llc_counts[pref_llc]++;
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn account_llc_dequeue(rq: *mut rq, p: *mut task_struct) {
-    static void account_llc_dequeue(struct rq *rq, struct task_struct *p)
-    {
-    struct sched_domain *sd;
-    int pref_llc;
+pub static mut sd: *mut c_void = core::ptr::null_mut();
+    let mut pref_llc = 0;
     pref_llc = p.preferred_llc;
-    if (pref_llc < 0)
+    if (pref_llc < 0) {
     return;
-    rq.nr_llc_running--;
+    }
+    rq.nr_llc_running -= 1;
     if (p.pref_llc_queued) {
-    rq.nr_pref_llc_running--;
+    rq.nr_pref_llc_running -= 1;
 //
 // Update the status in case
 // other logic might query
@@ -1479,18 +1655,18 @@ unsafe extern "C" fn account_llc_dequeue(rq: *mut rq, p: *mut task_struct) {
 // This undercount is temporary and accurate accounting
 // will resume once the rq has a chance to be idle.
 //
-    if (sd.llc_counts[pref_llc])
+    if (sd.llc_counts[pref_llc]) {
     sd.llc_counts[pref_llc]--;
     }
     }
-    void mm_init_sched(struct mm_struct *mm,
-    struct sched_cache_time __percpu *_pcpu_sched)
-    {
-    let mut epoch: c_ulong = 0;
-    int i;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn mm_init_sched(mm: *mut mm_struct, _pcpu_sched: *mut sched_cache_time) {
+pub static mut epoch: c_ulong = 0;
+    let mut i = 0;
     for_each_possible_cpu(i) {
-    struct sched_cache_time *pcpu_sched = per_cpu_ptr(_pcpu_sched, i);
-    struct rq *rq = cpu_rq(i);
+    let mut pcpu_sched = per_cpu_ptr(_pcpu_sched, i);
+    let mut rq = cpu_rq(i);
     pcpu_sched.runtime = 0;
 // a slightly stale cpu epoch is acceptible
     pcpu_sched.epoch = rq.cpu_epoch;
@@ -1512,21 +1688,18 @@ unsafe extern "C" fn account_llc_dequeue(rq: *mut rq, p: *mut task_struct) {
 // because why would C be fully specified
 #[no_mangle]
 unsafe extern "C" fn __shr_u64(val: *mut u64, n: c_uint) -> __always_inline void {
-    static __always_inline void __shr_u64(u64 *val, unsigned int n)
-    {
     if (n >= 64) {
 // val = 0;
     return;
     }
 // val >>= n;
     }
-    static inline void __update_mm_sched(struct rq *rq,
-    struct sched_cache_time *pcpu_sched)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __update_mm_sched(rq: *mut rq, pcpu_sched: *mut sched_cache_time) {
     lockdep_assert_held(&rq.cpu_epoch_lock);
-    let mut period: c_uint = max(READ_ONCE(llc_epoch_period), 1U);
+pub static mut period: c_uint = 0;
     unsigned long n, now = jiffies;
-    let mut delta: c_long = now - rq.cpu_epoch_next;
+pub static mut delta: c_long = 0;
     if (delta > 0) {
     n = (delta + period - 1) / period;
     rq.cpu_epoch += n;
@@ -1539,9 +1712,8 @@ unsafe extern "C" fn __shr_u64(val: *mut u64, n: c_uint) -> __always_inline void
     __shr_u64(&pcpu_sched.runtime, n);
     }
     }
-    static unsigned long fraction_mm_sched(struct rq *rq,
-    struct sched_cache_time *pcpu_sched)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn fraction_mm_sched(rq: *mut rq, pcpu_sched: *mut sched_cache_time) -> c_ulong {
     guard(raw_spinlock_irqsave)(&rq.cpu_epoch_lock);
     __update_mm_sched(rq, pcpu_sched);
 //
@@ -1553,11 +1725,10 @@ unsafe extern "C" fn __shr_u64(val: *mut u64, n: c_uint) -> __always_inline void
     }
 #[no_mangle]
 unsafe extern "C" fn get_pref_llc(p: *mut task_struct, mm: *mut mm_struct) -> c_int {
-    static int get_pref_llc(struct task_struct *p, struct mm_struct *mm)
-    {
-    let mut mm_sched_llc: c_int = -1, mm_sched_cpu;
-    if (!mm)
+pub static mut mm_sched_llc: c_int = 0;
+    if (!mm) {
     return -1;
+    }
     mm_sched_cpu = READ_ONCE(mm.sc_stat.cpu);
     if (mm_sched_cpu != -1) {
     mm_sched_llc = llc_id(mm_sched_cpu);
@@ -1574,32 +1745,34 @@ unsafe extern "C" fn get_pref_llc(p: *mut task_struct, mm: *mut mm_struct) -> c_
 //
     if (static_branch_likely(&sched_numa_balancing) &&
     p.numa_preferred_nid >= 0 &&
-    cpu_to_node(mm_sched_cpu) != p.numa_preferred_nid)
+    cpu_to_node(mm_sched_cpu) != p.numa_preferred_nid) {
     mm_sched_llc = -1;
+    }
 
     }
     return mm_sched_llc;
     }
-    static unsigned int task_running_on_cpu(int cpu, struct task_struct *p);
+// forward_decl: task_running_on_cpu;
     static inline
 #[no_mangle]
 pub unsafe extern "C" fn account_mm_sched(rq: *mut rq, p: *mut task_struct, delta_exec: i64) {
-    void account_mm_sched(struct rq *rq, struct task_struct *p, s64 delta_exec)
-    {
-    struct sched_cache_time *pcpu_sched;
-    struct mm_struct *mm = p.mm;
-    let mut mm_sched_llc: c_int = -1;
-    unsigned long epoch;
-    if (!sched_cache_enabled())
+pub static mut pcpu_sched: *mut c_void = core::ptr::null_mut();
+    let mut mm = p.mm;
+pub static mut mm_sched_llc: c_int = 0;
+    let mut epoch = 0;
+    if (!sched_cache_enabled()) {
     return;
-    if (p.sched_class != &fair_sched_class)
+    }
+    if (p.sched_class != &fair_sched_class) {
     return;
+    }
 //
 // init_task, kthreads and user thread created
 // by user_mode_thread() don't have mm.
 //
-    if (!mm || !mm.sc_stat.pcpu_sched)
+    if (!mm || !mm.sc_stat.pcpu_sched) {
     return;
+    }
     pcpu_sched = per_cpu_ptr(mm.sc_stat.pcpu_sched, cpu_of(rq));
     scoped_guard (raw_spinlock, &rq.cpu_epoch_lock) {
     __update_mm_sched(rq, pcpu_sched);
@@ -1614,8 +1787,9 @@ pub unsafe extern "C" fn account_mm_sched(rq: *mut rq, p: *mut task_struct, delt
     if ((long)(epoch - READ_ONCE(mm.sc_stat.epoch)) > llc_epoch_affinity_timeout ||
     invalid_llc_nr(mm, p, cpu_of(rq)) ||
     exceed_llc_capacity(mm, cpu_of(rq))) {
-    if (READ_ONCE(mm.sc_stat.cpu) != -1)
+    if (READ_ONCE(mm.sc_stat.cpu) != -1) {
     WRITE_ONCE(mm.sc_stat.cpu, -1);
+    }
     }
     mm_sched_llc = get_pref_llc(p, mm);
 // task not on rq accounted later in account_entity_enqueue()
@@ -1628,20 +1802,21 @@ pub unsafe extern "C" fn account_mm_sched(rq: *mut rq, p: *mut task_struct, delt
     }
 #[no_mangle]
 unsafe extern "C" fn task_tick_cache(rq: *mut rq, p: *mut task_struct) {
-    static void task_tick_cache(struct rq *rq, struct task_struct *p)
-    {
-    struct callback_head *work = &p.cache_work;
-    struct mm_struct *mm = p.mm;
-    unsigned long epoch;
-    if (!sched_cache_enabled())
+    let mut work = &p.cache_work;
+    let mut mm = p.mm;
+    let mut epoch = 0;
+    if (!sched_cache_enabled()) {
     return;
+    }
     if (!mm || p.flags & PF_KTHREAD ||
-    !mm.sc_stat.pcpu_sched)
+    !mm.sc_stat.pcpu_sched) {
     return;
+    }
     epoch = rq.cpu_epoch;
 // avoid moving backwards
-    if (time_after_eq(mm.sc_stat.epoch, epoch))
+    if (time_after_eq(mm.sc_stat.epoch, epoch)) {
     return;
+    }
     guard(raw_spinlock)(&mm.sc_stat.lock);
     if (work.next == work) {
     task_work_add(p, work, TWA_RESUME);
@@ -1650,15 +1825,18 @@ unsafe extern "C" fn task_tick_cache(rq: *mut rq, p: *mut task_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn get_scan_cpumasks(cpus: cpumask_var_t, p: *mut task_struct) {
-    static void get_scan_cpumasks(cpumask_var_t cpus, struct task_struct *p)
-    {
 
-    int cpu, curr_cpu, nid, pref_nid;
-    if (!static_branch_likely(&sched_numa_balancing))
-    goto out;
+    let mut cpu = 0;
+    let mut curr_cpu = 0;
+    let mut nid = 0;
+    let mut pref_nid = 0;
+    if (!static_branch_likely(&sched_numa_balancing)) {
+// goto;
+    }
     cpu = READ_ONCE(p.mm.sc_stat.cpu);
-    if (cpu != -1)
+    if (cpu != -1) {
     nid = cpu_to_node(cpu);
+    }
     curr_cpu = task_cpu(p);
 //
 // Scanning in the preferred NUMA node is ideal. However, the NUMA
@@ -1672,27 +1850,27 @@ unsafe extern "C" fn get_scan_cpumasks(cpus: cpumask_var_t, p: *mut task_struct)
 //
     pref_nid = p.numa_preferred_nid;
 // honor the task's preferred node
-    if (pref_nid == NUMA_NO_NODE)
-    goto out;
+    if (pref_nid == NUMA_NO_NODE) {
+// goto;
+    }
     cpumask_or(cpus, cpus, cpumask_of_node(pref_nid));
 // honor the task's preferred LLC CPU
-    if (cpu != -1 && !cpumask_test_cpu(cpu, cpus) && nid != NUMA_NO_NODE)
+    if (cpu != -1 && !cpumask_test_cpu(cpu, cpus) && nid != NUMA_NO_NODE) {
     cpumask_or(cpus, cpus, cpumask_of_node(nid));
+    }
 // make sure the task's current running node is included
-    if (!cpumask_test_cpu(curr_cpu, cpus))
+    if (!cpumask_test_cpu(curr_cpu, cpus)) {
     cpumask_or(cpus, cpus, cpumask_of_node(cpu_to_node(curr_cpu)));
+    }
     return;
-    out:
-
+// label;
     cpumask_copy(cpus, cpu_online_mask);
     }
 #[no_mangle]
 pub unsafe extern "C" fn update_avg_scale(avg: *mut u64, sample: u64) {
-    static inline void update_avg_scale(u64 *avg, u64 sample)
-    {
-    let mut factor: c_int = per_cpu(sd_llc_size, raw_smp_processor_id());
-    let mut diff: i64 = sample - *avg;
-    u32 divisor;
+pub static mut factor: c_int = 0;
+pub static mut diff: i64 = 0;
+    let mut divisor = 0;
 //
 // Scale the divisor based on the number of CPUs contained
 // in the LLC. This scaling ensures smaller LLC domains use
@@ -1706,46 +1884,50 @@ pub unsafe extern "C" fn update_avg_scale(avg: *mut u64, sample: u64) {
     }
 #[no_mangle]
 unsafe extern "C" fn task_cache_work(work: *mut callback_head) {
-    static void task_cache_work(struct callback_head *work)
-    {
     int cpu, m_a_cpu = -1, nr_running = 0, curr_cpu;
     unsigned long next_scan, now = jiffies;
-    struct task_struct *p = current, *cur;
-    let mut curr_m_a_occ: c_ulong = 0;
-    struct mm_struct *mm = p.mm;
-    let mut m_a_occ: c_ulong = 0;
-    cpumask_var_t cpus;
-    WARN_ON_ONCE(work != &p.cache_work);
+    let mut p = current, *cur;
+pub static mut curr_m_a_occ: c_ulong = 0;
+    let mut mm = p.mm;
+pub static mut m_a_occ: c_ulong = 0;
+    let mut cpus;
+    WARN_ON_ONCE!(work != &p.cache_work);
     work.next = work;
-    if (p.flags & PF_EXITING)
+    if (p.flags & PF_EXITING) {
     return;
+    }
     next_scan = READ_ONCE(mm.sc_stat.next_scan);
-    if (time_before(now, next_scan))
+    if (time_before(now, next_scan)) {
     return;
+    }
 // only 1 thread is allowed to scan
     if (!try_cmpxchg(&mm.sc_stat.next_scan, &next_scan,
     now + max_t(unsigned long,
-    READ_ONCE(llc_epoch_period), 1)))
+    READ_ONCE(llc_epoch_period), 1))) {
     return;
+    }
     curr_cpu = task_cpu(p);
     if (invalid_llc_nr(mm, p, curr_cpu) ||
     exceed_llc_capacity(mm, curr_cpu)) {
-    if (READ_ONCE(mm.sc_stat.cpu) != -1)
+    if (READ_ONCE(mm.sc_stat.cpu) != -1) {
     WRITE_ONCE(mm.sc_stat.cpu, -1);
+    }
     return;
     }
-    if (!zalloc_cpumask_var(&cpus, GFP_KERNEL))
+    if (!zalloc_cpumask_var(&cpus, GFP_KERNEL)) {
     return;
+    }
     scoped_guard (cpus_read_lock) {
     guard(rcu)();
     get_scan_cpumasks(cpus, p);
     for_each_cpu(cpu, cpus) {
 // XXX sched_cluster_active
-    struct sched_domain *sd = rcu_dereference_all(per_cpu(sd_llc, cpu));
+    let mut sd = rcu_dereference_all(per_cpu(sd_llc, cpu));
     unsigned long occ, m_occ = 0, a_occ = 0;
-    let mut m_cpu: c_int = -1, i;
-    if (!sd)
+pub static mut m_cpu: c_int = 0;
+    if (!sd) {
     continue;
+    }
     for_each_cpu(i, sched_domain_span(sd)) {
     occ = fraction_mm_sched(cpu_rq(i),
     per_cpu_ptr(mm.sc_stat.pcpu_sched, i));
@@ -1756,8 +1938,9 @@ unsafe extern "C" fn task_cache_work(work: *mut callback_head) {
     }
     cur = rcu_dereference_all(cpu_rq(i).curr);
     if (cur && !(cur.flags & (PF_EXITING | PF_KTHREAD)) &&
-    cur.mm == mm)
-    nr_running++;
+    cur.mm == mm) {
+    nr_running += 1;
+    }
     }
 //
 // Compare the accumulated occupancy of each LLC. The
@@ -1778,8 +1961,9 @@ unsafe extern "C" fn task_cache_work(work: *mut callback_head) {
     m_a_occ = a_occ;
     m_a_cpu = m_cpu;
     }
-    if (llc_id(cpu) == llc_id(READ_ONCE(mm.sc_stat.cpu)))
+    if (llc_id(cpu) == llc_id(READ_ONCE(mm.sc_stat.cpu))) {
     curr_m_a_occ = a_occ;
+    }
     cpumask_andnot(cpus, cpus, sched_domain_span(sd));
     }
     }
@@ -1801,9 +1985,7 @@ unsafe extern "C" fn task_cache_work(work: *mut callback_head) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn init_sched_mm(p: *mut task_struct) {
-    void init_sched_mm(struct task_struct *p)
-    {
-    struct callback_head *work = &p.cache_work;
+    let mut work = &p.cache_work;
     init_task_work(work, task_cache_work);
     work.next = work;
 //
@@ -1813,25 +1995,30 @@ pub unsafe extern "C" fn init_sched_mm(p: *mut task_struct) {
     p.preferred_llc = -1;
     }
 
-    static inline void account_mm_sched(struct rq *rq, struct task_struct *p,
-    s64 delta_exec) { }
-    void init_sched_mm(struct task_struct *p) { }
-    static void task_tick_cache(struct rq *rq, struct task_struct *p) { }
-    static inline int get_pref_llc(struct task_struct *p,
-    struct mm_struct *mm)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: account_mm_sched
+pub unsafe extern "C" fn account_mm_sched_dup(rq: *mut rq, p: *mut task_struct, delta_exec: s64) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: init_sched_mm
+pub unsafe extern "C" fn init_sched_mm_dup(p: *mut task_struct) { }
+#[no_mangle]
+pub unsafe extern "C" fn task_tick_cache(rq: *mut rq, p: *mut task_struct) { }
+#[no_mangle]
+pub unsafe extern "C" fn get_pref_llc(p: *mut task_struct, mm: *mut mm_struct) -> c_int {
     return -1;
     }
-    static void account_llc_enqueue(struct rq *rq, struct task_struct *p) {}
-    static void account_llc_dequeue(struct rq *rq, struct task_struct *p) {}
+#[no_mangle]
+pub unsafe extern "C" fn account_llc_enqueue(rq: *mut rq, p: *mut task_struct) {}
+#[no_mangle]
+pub unsafe extern "C" fn account_llc_dequeue(rq: *mut rq, p: *mut task_struct) {}
 
 //
 // Used by other classes to account runtime.
 //
 #[no_mangle]
 pub unsafe extern "C" fn update_curr_common(rq: *mut rq) -> i64 {
-    s64 update_curr_common(struct rq *rq)
-    {
     return update_se(rq, &rq.donor.se);
     }
 //
@@ -1839,26 +2026,27 @@ pub unsafe extern "C" fn update_curr_common(rq: *mut rq) -> i64 {
 //
 #[no_mangle]
 unsafe extern "C" fn update_curr(cfs_rq: *mut cfs_rq) {
-    static void update_curr(struct cfs_rq *cfs_rq)
-    {
 //
 // Note: cfs_rq->curr corresponds to the task picked to
 // run (ie: rq->donor.se) which due to proxy-exec may
 // not necessarily be the actual task running
 // (rq->curr.se). This is easy to confuse!
 //
-    struct sched_entity *curr = cfs_rq.h_curr;
-    struct rq *rq = rq_of(cfs_rq);
-    s64 delta_exec;
-    bool resched;
-    if (unlikely(!curr))
+    let mut curr = cfs_rq.h_curr;
+    let mut rq = rq_of(cfs_rq);
+    let mut delta_exec = 0;
+    let mut resched = 0;
+    if (unlikely(!curr)) {
     return;
+    }
     delta_exec = update_se(rq, curr);
-    if (unlikely(delta_exec <= 0))
+    if (unlikely(delta_exec <= 0)) {
     return;
+    }
     account_cfs_rq_runtime(cfs_rq, delta_exec);
-    if (!entity_is_task(curr))
+    if (!entity_is_task(curr)) {
     return;
+    }
     cfs_rq = &rq.cfs;
     curr.vruntime += calc_delta_fair(delta_exec, curr);
     resched = update_deadline(cfs_rq, curr);
@@ -1873,8 +2061,9 @@ unsafe extern "C" fn update_curr(cfs_rq: *mut cfs_rq) {
 // and possibly avoid running this period.
 //
     dl_server_update(&rq.fair_server, delta_exec);
-    if (cfs_rq.h_nr_queued == 1)
+    if (cfs_rq.h_nr_queued == 1) {
     return;
+    }
     if (resched || !protect_slice(curr)) {
     resched_curr_lazy(rq);
     clear_buddies(cfs_rq, curr);
@@ -1882,31 +2071,31 @@ unsafe extern "C" fn update_curr(cfs_rq: *mut cfs_rq) {
     }
 #[no_mangle]
 unsafe extern "C" fn update_curr_fair(rq: *mut rq) {
-    static void update_curr_fair(struct rq *rq)
-    {
-    struct sched_entity *se = &rq.donor.se;
-    for_each_sched_entity(se)
+    let mut se = &rq.donor.se;
+    for_each_sched_entity(se) {
     update_curr(cfs_rq_of(se));
     }
-    static inline void
-    update_stats_wait_start_fair(struct cfs_rq *cfs_rq, struct sched_entity *se)
-    {
-    struct sched_statistics *stats;
-    struct task_struct *p = core::ptr::null_mut();
-    if (!schedstat_enabled())
+    }
+#[no_mangle]
+pub unsafe extern "C" fn update_stats_wait_start_fair(cfs_rq: *mut cfs_rq, se: *mut sched_entity) {
+pub static mut stats: *mut c_void = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
+    if (!schedstat_enabled()) {
     return;
+    }
     stats = __schedstats_from_se(se);
-    if (entity_is_task(se))
+    if (entity_is_task(se)) {
     p = task_of(se);
+    }
     __update_stats_wait_start(rq_of(cfs_rq), p, stats);
     }
-    static inline void
-    update_stats_wait_end_fair(struct cfs_rq *cfs_rq, struct sched_entity *se)
-    {
-    struct sched_statistics *stats;
-    struct task_struct *p = core::ptr::null_mut();
-    if (!schedstat_enabled())
+#[no_mangle]
+pub unsafe extern "C" fn update_stats_wait_end_fair(cfs_rq: *mut cfs_rq, se: *mut sched_entity) {
+pub static mut stats: *mut c_void = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
+    if (!schedstat_enabled()) {
     return;
+    }
     stats = __schedstats_from_se(se);
 //
 // When the sched_schedstat changes from 0 to 1, some sched se
@@ -1914,71 +2103,78 @@ unsafe extern "C" fn update_curr_fair(rq: *mut rq) {
 // will be 0.So it will let the delta wrong. We need to avoid this
 // scenario.
 //
-    if (unlikely(!schedstat_val(stats.wait_start)))
+    if (unlikely(!schedstat_val(stats.wait_start))) {
     return;
-    if (entity_is_task(se))
+    }
+    if (entity_is_task(se)) {
     p = task_of(se);
+    }
     __update_stats_wait_end(rq_of(cfs_rq), p, stats);
     }
-    static inline void
-    update_stats_enqueue_sleeper_fair(struct cfs_rq *cfs_rq, struct sched_entity *se)
-    {
-    struct sched_statistics *stats;
-    struct task_struct *tsk = core::ptr::null_mut();
-    if (!schedstat_enabled())
+#[no_mangle]
+pub unsafe extern "C" fn update_stats_enqueue_sleeper_fair(cfs_rq: *mut cfs_rq, se: *mut sched_entity) {
+pub static mut stats: *mut c_void = core::ptr::null_mut();
+    let mut tsk = core::ptr::null_mut();
+    if (!schedstat_enabled()) {
     return;
+    }
     stats = __schedstats_from_se(se);
-    if (entity_is_task(se))
+    if (entity_is_task(se)) {
     tsk = task_of(se);
+    }
     __update_stats_enqueue_sleeper(rq_of(cfs_rq), tsk, stats);
     }
 //
 // Task is being enqueued - update stats:
 //
-    static inline void
-    update_stats_enqueue_fair(struct cfs_rq *cfs_rq, struct sched_entity *se, int flags)
-    {
-    if (!schedstat_enabled())
+#[no_mangle]
+pub unsafe extern "C" fn update_stats_enqueue_fair(cfs_rq: *mut cfs_rq, se: *mut sched_entity, flags: c_int) {
+    if (!schedstat_enabled()) {
     return;
+    }
 //
 // Are we enqueueing a waiting task? (for current tasks
 // a dequeue/enqueue event is a NOP)
 //
-    if (se != cfs_rq.h_curr)
+    if (se != cfs_rq.h_curr) {
     update_stats_wait_start_fair(cfs_rq, se);
-    if (flags & ENQUEUE_WAKEUP)
+    }
+    if (flags & ENQUEUE_WAKEUP) {
     update_stats_enqueue_sleeper_fair(cfs_rq, se);
     }
-    static inline void
-    update_stats_dequeue_fair(struct cfs_rq *cfs_rq, struct sched_entity *se, int flags)
-    {
-    if (!schedstat_enabled())
+    }
+#[no_mangle]
+pub unsafe extern "C" fn update_stats_dequeue_fair(cfs_rq: *mut cfs_rq, se: *mut sched_entity, flags: c_int) {
+    if (!schedstat_enabled()) {
     return;
+    }
 //
 // Mark the end of the wait period if dequeueing a
 // waiting task:
 //
-    if (se != cfs_rq.h_curr)
+    if (se != cfs_rq.h_curr) {
     update_stats_wait_end_fair(cfs_rq, se);
+    }
     if ((flags & DEQUEUE_SLEEP) && entity_is_task(se)) {
-    struct task_struct *tsk = task_of(se);
-    unsigned int state;
+    let mut tsk = task_of(se);
+    let mut state = 0;
 // XXX racy against TTWU
     state = READ_ONCE(tsk.__state);
-    if (state & TASK_INTERRUPTIBLE)
+    if (state & TASK_INTERRUPTIBLE) {
     __schedstat_set(tsk.stats.sleep_start,
     rq_clock(rq_of(cfs_rq)));
-    if (state & TASK_UNINTERRUPTIBLE)
+    }
+    if (state & TASK_UNINTERRUPTIBLE) {
     __schedstat_set(tsk.stats.block_start,
     rq_clock(rq_of(cfs_rq)));
+    }
     }
     }
 //
 // We are picking a new current task - update its stats:
 //
-    static inline void
-    update_stats_curr_start(struct cfs_rq *cfs_rq, struct sched_entity *se)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn update_stats_curr_start(cfs_rq: *mut cfs_rq, se: *mut sched_entity) {
 //
 // We are starting a new run period:
 //
@@ -1987,22 +2183,21 @@ unsafe extern "C" fn update_curr_fair(rq: *mut rq) {
 // Check sched_smt_active before calling this to avoid overheads in fastpaths
 #[no_mangle]
 pub unsafe extern "C" fn is_core_idle(cpu: c_int) -> bool {
-    static inline bool is_core_idle(int cpu)
-    {
-    int sibling;
+    let mut sibling = 0;
     for_each_cpu(sibling, cpu_smt_mask(cpu)) {
-    if (cpu == sibling)
+    if (cpu == sibling) {
     continue;
-    if (!idle_cpu(sibling))
+    }
+    if (!idle_cpu(sibling)) {
     return false;
+    }
     }
     return true;
     }
 
 pub const NUMA_IMBALANCE_MIN: c_int = 2;
-    static inline long
-    adjust_numa_imbalance(int imbalance, int dst_running, int imb_numa_nr)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn adjust_numa_imbalance(imbalance: c_int, dst_running: c_int, imb_numa_nr: c_int) -> c_long {
 //
 // Allow a NUMA imbalance if busy CPUs is less than the maximum
 // threshold. Above this threshold, individual tasks may be contending
@@ -2010,14 +2205,16 @@ pub const NUMA_IMBALANCE_MIN: c_int = 2;
 // approximation as the number of running tasks may not be related to
 // the number of busy CPUs due to sched_setaffinity.
 //
-    if (dst_running > imb_numa_nr)
+    if (dst_running > imb_numa_nr) {
     return imbalance;
+    }
 //
 // Allow a small imbalance based on a simple pair of communicating
 // tasks that remain local when the destination is lightly loaded.
 //
-    if (imbalance <= NUMA_IMBALANCE_MIN)
+    if (imbalance <= NUMA_IMBALANCE_MIN) {
     return 0;
+    }
     return imbalance;
     }
 
@@ -2026,19 +2223,19 @@ pub const NUMA_IMBALANCE_MIN: c_int = 2;
 // calculated based on the tasks virtual memory size and
 // numa_balancing_scan_size.
 //
-    let mut sysctl_numa_balancing_scan_period_min: c_uint = 1000;
-    let mut sysctl_numa_balancing_scan_period_max: c_uint = 60000;
+pub static mut sysctl_numa_balancing_scan_period_min: c_uint = 1000;
+pub static mut sysctl_numa_balancing_scan_period_max: c_uint = 60000;
 // Portion of address space to scan in MB
-    let mut sysctl_numa_balancing_scan_size: c_uint = 256;
+pub static mut sysctl_numa_balancing_scan_size: c_uint = 256;
 // Scan @scan_size MB every @scan_period after an initial @scan_delay in ms
-    let mut sysctl_numa_balancing_scan_delay: c_uint = 1000;
+pub static mut sysctl_numa_balancing_scan_delay: c_uint = 1000;
 // The page with hint page fault latency < threshold in ms is considered hot
-    let mut sysctl_numa_balancing_hot_threshold: c_uint = MSEC_PER_SEC;
+pub static mut sysctl_numa_balancing_hot_threshold: c_uint = 0;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct numa_group {
     pub refcount: refcount_t,
-    pub /: *mut *mut spinlock_t lock; / nr_tasks, tasks,
+//     pub /: *mut *mut spinlock_t lock; / nr_tasks, tasks,
     pub nr_tasks: c_int,
     pub gid: pid_t,
     pub active_nodes: c_int,
@@ -2052,30 +2249,28 @@ pub struct numa_group {
 // towards the CPU. As a consequence, these stats are weighted
 // more by CPU use than by memory faults.
 //
-    pub faults: [c_ulong; ],
+    pub faults: [c_ulong; 0],
 }
 
 //
 // For functions that can be called in multiple contexts that permit reading
 // ->numa_group (see struct task_struct for locking rules).
 //
-    static struct numa_group *deref_task_numa_group(struct task_struct *p)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn deref_task_numa_group(p: *mut task_struct) -> *mut c_void {
     return rcu_dereference_check(p.numa_group, p == current ||
     (lockdep_is_held(__rq_lockp(task_rq(p))) && !READ_ONCE(p.on_cpu)));
     }
-    static struct numa_group *deref_curr_numa_group(struct task_struct *p)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn deref_curr_numa_group(p: *mut task_struct) -> *mut c_void {
     return rcu_dereference_protected(p.numa_group, p == current);
     }
-    static inline unsigned long group_faults_priv(struct numa_group *ng);
-    static inline unsigned long group_faults_shared(struct numa_group *ng);
+// forward_decl: group_faults_priv;
+// forward_decl: group_faults_shared;
 #[no_mangle]
 unsafe extern "C" fn task_nr_scan_windows(p: *mut task_struct) -> c_uint {
-    static unsigned int task_nr_scan_windows(struct task_struct *p)
-    {
-    let mut rss: c_ulong = 0;
-    unsigned long nr_scan_pages;
+pub static mut rss: c_ulong = 0;
+    let mut nr_scan_pages = 0;
 //
 // Calculations based on RSS as non-present and empty pages are skipped
 // by the PTE scanner and NUMA hinting faults should be trapped based
@@ -2083,8 +2278,9 @@ unsafe extern "C" fn task_nr_scan_windows(p: *mut task_struct) -> c_uint {
 //
     nr_scan_pages = MB_TO_PAGES(sysctl_numa_balancing_scan_size);
     rss = get_mm_rss(p.mm);
-    if (!rss)
+    if (!rss) {
     rss = nr_scan_pages;
+    }
     rss = round_up(rss, nr_scan_pages);
     return rss / nr_scan_pages;
     }
@@ -2092,30 +2288,28 @@ unsafe extern "C" fn task_nr_scan_windows(p: *mut task_struct) -> c_uint {
 pub const MAX_SCAN_WINDOW: c_int = 2560;
 #[no_mangle]
 unsafe extern "C" fn task_scan_min(p: *mut task_struct) -> c_uint {
-    static unsigned int task_scan_min(struct task_struct *p)
-    {
-    let mut scan_size: c_uint = READ_ONCE(sysctl_numa_balancing_scan_size);
-    unsigned int scan, floor;
-    let mut windows: c_uint = 1;
-    if (scan_size < MAX_SCAN_WINDOW)
+pub static mut scan_size: c_uint = 0;
+    let mut scan = 0;
+    let mut floor = 0;
+pub static mut windows: c_uint = 1;
+    if (scan_size < MAX_SCAN_WINDOW) {
     windows = MAX_SCAN_WINDOW / scan_size;
+    }
     floor = 1000 / windows;
     scan = sysctl_numa_balancing_scan_period_min / task_nr_scan_windows(p);
     return max_t(unsigned int, floor, scan);
     }
 #[no_mangle]
 unsafe extern "C" fn task_scan_start(p: *mut task_struct) -> c_uint {
-    static unsigned int task_scan_start(struct task_struct *p)
-    {
-    let mut smin: c_ulong = task_scan_min(p);
-    let mut period: c_ulong = smin;
-    struct numa_group *ng;
+pub static mut smin: c_ulong = 0;
+pub static mut period: c_ulong = 0;
+pub static mut ng: *mut c_void = core::ptr::null_mut();
 // Scale the maximum scan period with the amount of shared memory.
     rcu_read_lock();
     ng = rcu_dereference_all(p.numa_group);
     if (ng) {
-    let mut shared: c_ulong = group_faults_shared(ng);
-    let mut private: c_ulong = group_faults_priv(ng);
+pub static mut shared: c_ulong = 0;
+pub static mut private: c_ulong = 0;
     period *= refcount_read(&ng.refcount);
     period *= shared + 1;
     period /= private + shared + 1;
@@ -2125,19 +2319,17 @@ unsafe extern "C" fn task_scan_start(p: *mut task_struct) -> c_uint {
     }
 #[no_mangle]
 unsafe extern "C" fn task_scan_max(p: *mut task_struct) -> c_uint {
-    static unsigned int task_scan_max(struct task_struct *p)
-    {
-    let mut smin: c_ulong = task_scan_min(p);
-    unsigned long smax;
-    struct numa_group *ng;
+pub static mut smin: c_ulong = 0;
+    let mut smax = 0;
+pub static mut ng: *mut c_void = core::ptr::null_mut();
 // Watch for min being lower than max due to floor calculations
     smax = sysctl_numa_balancing_scan_period_max / task_nr_scan_windows(p);
 // Scale the maximum scan period with the amount of shared memory.
     ng = deref_curr_numa_group(p);
     if (ng) {
-    let mut shared: c_ulong = group_faults_shared(ng);
-    let mut private: c_ulong = group_faults_priv(ng);
-    let mut period: c_ulong = smax;
+pub static mut shared: c_ulong = 0;
+pub static mut private: c_ulong = 0;
+pub static mut period: c_ulong = 0;
     period *= refcount_read(&ng.refcount);
     period *= shared + 1;
     period /= private + shared + 1;
@@ -2147,15 +2339,11 @@ unsafe extern "C" fn task_scan_max(p: *mut task_struct) -> c_uint {
     }
 #[no_mangle]
 unsafe extern "C" fn account_numa_enqueue(rq: *mut rq, p: *mut task_struct) {
-    static void account_numa_enqueue(struct rq *rq, struct task_struct *p)
-    {
     rq.nr_numa_running += (p.numa_preferred_nid != NUMA_NO_NODE);
     rq.nr_preferred_running += (p.numa_preferred_nid == task_node(p));
     }
 #[no_mangle]
 unsafe extern "C" fn account_numa_dequeue(rq: *mut rq, p: *mut task_struct) {
-    static void account_numa_dequeue(struct rq *rq, struct task_struct *p)
-    {
     rq.nr_numa_running -= (p.numa_preferred_nid != NUMA_NO_NODE);
     rq.nr_preferred_running -= (p.numa_preferred_nid == task_node(p));
     }
@@ -2167,14 +2355,13 @@ pub const NR_NUMA_HINT_FAULT_TYPES: c_int = 2;
 
 #[no_mangle]
 pub unsafe extern "C" fn task_numa_group_id(p: *mut task_struct) -> pid_t {
-    pid_t task_numa_group_id(struct task_struct *p)
-    {
-    struct numa_group *ng;
-    let mut gid: pid_t = 0;
+pub static mut ng: *mut c_void = core::ptr::null_mut();
+pub static mut gid: pid_t = 0;
     rcu_read_lock();
     ng = rcu_dereference_all(p.numa_group);
-    if (ng)
+    if (ng) {
     gid = ng.gid;
+    }
     rcu_read_unlock();
     return gid;
     }
@@ -2185,43 +2372,35 @@ pub unsafe extern "C" fn task_numa_group_id(p: *mut task_struct) -> pid_t {
 // first set by task_numa_placement.
 //
 #[no_mangle]
-pub unsafe extern "C" fn task_faults_idx(s: enum numa_faults_stats, nid: c_int, priv: c_int) -> c_int {
-    static inline int task_faults_idx(enum numa_faults_stats s, int nid, int priv)
-    {
+pub unsafe extern "C" fn task_faults_idx(s: numa_faults_stats, nid: c_int, priv: c_int) -> c_int {
     return NR_NUMA_HINT_FAULT_TYPES * (s * nr_node_ids + nid) + priv;
     }
 #[no_mangle]
 pub unsafe extern "C" fn task_faults(p: *mut task_struct, nid: c_int) -> c_ulong {
-    static inline unsigned long task_faults(struct task_struct *p, int nid)
-    {
-    if (!p.numa_faults)
+    if (!p.numa_faults) {
     return 0;
+    }
     return p.numa_faults[task_faults_idx(NUMA_MEM, nid, 0)] +
     p.numa_faults[task_faults_idx(NUMA_MEM, nid, 1)];
     }
 #[no_mangle]
 pub unsafe extern "C" fn group_faults(p: *mut task_struct, nid: c_int) -> c_ulong {
-    static inline unsigned long group_faults(struct task_struct *p, int nid)
-    {
-    struct numa_group *ng = deref_task_numa_group(p);
-    if (!ng)
+    let mut ng = deref_task_numa_group(p);
+    if (!ng) {
     return 0;
+    }
     return ng.faults[task_faults_idx(NUMA_MEM, nid, 0)] +
     ng.faults[task_faults_idx(NUMA_MEM, nid, 1)];
     }
 #[no_mangle]
 pub unsafe extern "C" fn group_faults_cpu(group: *mut numa_group, nid: c_int) -> c_ulong {
-    static inline unsigned long group_faults_cpu(struct numa_group *group, int nid)
-    {
     return group.faults[task_faults_idx(NUMA_CPU, nid, 0)] +
     group.faults[task_faults_idx(NUMA_CPU, nid, 1)];
     }
 #[no_mangle]
 pub unsafe extern "C" fn group_faults_priv(ng: *mut numa_group) -> c_ulong {
-    static inline unsigned long group_faults_priv(struct numa_group *ng)
-    {
-    let mut faults: c_ulong = 0;
-    int node;
+pub static mut faults: c_ulong = 0;
+    let mut node = 0;
     for_each_online_node(node) {
     faults += ng.faults[task_faults_idx(NUMA_MEM, node, 1)];
     }
@@ -2229,10 +2408,8 @@ pub unsafe extern "C" fn group_faults_priv(ng: *mut numa_group) -> c_ulong {
     }
 #[no_mangle]
 pub unsafe extern "C" fn group_faults_shared(ng: *mut numa_group) -> c_ulong {
-    static inline unsigned long group_faults_shared(struct numa_group *ng)
-    {
-    let mut faults: c_ulong = 0;
-    int node;
+pub static mut faults: c_ulong = 0;
+    let mut node = 0;
     for_each_online_node(node) {
     faults += ng.faults[task_faults_idx(NUMA_MEM, node, 0)];
     }
@@ -2246,22 +2423,21 @@ pub unsafe extern "C" fn group_faults_shared(ng: *mut numa_group) -> c_ulong {
 pub const ACTIVE_NODE_FRACTION: c_int = 3;
 #[no_mangle]
 unsafe extern "C" fn numa_is_active_node(nid: c_int, ng: *mut numa_group) -> bool {
-    static bool numa_is_active_node(int nid, struct numa_group *ng)
-    {
     return group_faults_cpu(ng, nid) * ACTIVE_NODE_FRACTION > ng.max_faults_cpu;
     }
 // Handle placement on systems where not all nodes are directly connected.
-    static unsigned long score_nearby_nodes(struct task_struct *p, int nid,
-    int lim_dist, bool task)
-    {
-    let mut score: c_ulong = 0;
-    int node, max_dist;
+#[no_mangle]
+pub unsafe extern "C" fn score_nearby_nodes(p: *mut task_struct, nid: c_int, lim_dist: c_int, task: bool) -> c_ulong {
+pub static mut score: c_ulong = 0;
+    let mut node = 0;
+    let mut max_dist = 0;
 //
 // All nodes are directly connected, and the same distance
 // from each other. No need for fancy placement algorithms.
 //
-    if (sched_numa_topology_type == NUMA_DIRECT)
+    if (sched_numa_topology_type == NUMA_DIRECT) {
     return 0;
+    }
 // sched_max_numa_distance may be changed in parallel.
     max_dist = READ_ONCE(sched_max_numa_distance);
 //
@@ -2269,14 +2445,15 @@ unsafe extern "C" fn numa_is_active_node(nid: c_int, ng: *mut numa_group) -> boo
 // which should be OK given the number of nodes rarely exceeds 8.
 //
     for_each_online_node(node) {
-    unsigned long faults;
-    let mut dist: c_int = node_distance(nid, node);
+    let mut faults = 0;
+pub static mut dist: c_int = 0;
 //
 // The furthest away nodes in the system are not interesting
 // for placement; nid was already counted.
 //
-    if (dist >= max_dist || node == nid)
+    if (dist >= max_dist || node == nid) {
     continue;
+    }
 //
 // On systems with a backplane NUMA topology, compare groups
 // of nodes, and move tasks towards the group with the most
@@ -2284,13 +2461,16 @@ unsafe extern "C" fn numa_is_active_node(nid: c_int, ng: *mut numa_group) -> boo
 // "hoplimit", only nodes closer by than "hoplimit" are part
 // of each group. Skip other nodes.
 //
-    if (sched_numa_topology_type == NUMA_BACKPLANE && dist >= lim_dist)
+    if (sched_numa_topology_type == NUMA_BACKPLANE && dist >= lim_dist) {
     continue;
+    }
 // Add up the faults from nearby nodes.
-    if (task)
+    if (task) {
     faults = task_faults(p, node);
-    else
+    }
+    else {
     faults = group_faults(p, node);
+    }
 //
 // On systems with a glueless mesh NUMA topology, there are
 // no fixed "groups of nodes". Instead, nodes that are not
@@ -2313,29 +2493,31 @@ unsafe extern "C" fn numa_is_active_node(nid: c_int, ng: *mut numa_group) -> boo
 // larger multiplier, in order to group tasks together that are almost
 // evenly spread out between numa nodes.
 //
-    static inline unsigned long task_weight(struct task_struct *p, int nid,
-    int dist)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn task_weight(p: *mut task_struct, nid: c_int, dist: c_int) -> c_ulong {
     unsigned long faults, total_faults;
-    if (!p.numa_faults)
+    if (!p.numa_faults) {
     return 0;
+    }
     total_faults = p.total_numa_faults;
-    if (!total_faults)
+    if (!total_faults) {
     return 0;
+    }
     faults = task_faults(p, nid);
     faults += score_nearby_nodes(p, nid, dist, true);
     return 1000 * faults / total_faults;
     }
-    static inline unsigned long group_weight(struct task_struct *p, int nid,
-    int dist)
-    {
-    struct numa_group *ng = deref_task_numa_group(p);
+#[no_mangle]
+pub unsafe extern "C" fn group_weight(p: *mut task_struct, nid: c_int, dist: c_int) -> c_ulong {
+    let mut ng = deref_task_numa_group(p);
     unsigned long faults, total_faults;
-    if (!ng)
+    if (!ng) {
     return 0;
+    }
     total_faults = ng.total_faults;
-    if (!total_faults)
+    if (!total_faults) {
     return 0;
+    }
     faults = group_faults(p, nid);
     faults += score_nearby_nodes(p, nid, dist, false);
     return 1000 * faults / total_faults;
@@ -2349,8 +2531,6 @@ unsafe extern "C" fn numa_is_active_node(nid: c_int, ng: *mut numa_group) -> boo
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpupid_valid(cpupid: c_int) -> bool {
-    static inline bool cpupid_valid(int cpupid)
-    {
     return cpupid_to_cpu(cpupid) < nr_cpu_ids;
     }
 //
@@ -2362,20 +2542,20 @@ pub unsafe extern "C" fn cpupid_valid(cpupid: c_int) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn pgdat_free_space_enough(pgdat: *mut pglist_data) -> bool {
-    static bool pgdat_free_space_enough(struct pglist_data *pgdat)
-    {
-    int z;
-    unsigned long enough_wmark;
+    let mut z = 0;
+    let mut enough_wmark = 0;
     enough_wmark = max(1UL * 1024 * 1024 * 1024 >> PAGE_SHIFT,
     pgdat.node_present_pages >> 4);
-    for (z = pgdat.nr_zones - 1; z >= 0; z--) {
-    struct zone *zone = pgdat.node_zones + z;
-    if (!populated_zone(zone))
+    while (z >= 0) {
+    let mut zone = pgdat.node_zones + z;
+    if (!populated_zone(zone)) {
     continue;
+    }
     if (zone_watermark_ok(zone, 0,
     promo_wmark_pages(zone) + enough_wmark,
-    ZONE_MOVABLE, 0))
+    ZONE_MOVABLE, 0)) {
     return true;
+    }
     }
     return false;
     }
@@ -2393,9 +2573,8 @@ unsafe extern "C" fn pgdat_free_space_enough(pgdat: *mut pglist_data) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn numa_hint_fault_latency(folio: *mut folio) -> c_int {
-    static int numa_hint_fault_latency(struct folio *folio)
-    {
-    int last_time, time;
+    let mut last_time = 0;
+    let mut time = 0;
     time = jiffies_to_msecs(jiffies);
     last_time = folio_xchg_access_time(folio, time);
     return (time - last_time) & PAGE_ACCESS_TIME_MASK;
@@ -2405,28 +2584,32 @@ unsafe extern "C" fn numa_hint_fault_latency(folio: *mut folio) -> c_int {
 // hurt application latency.  So we provide a mechanism to rate limit
 // the number of pages that are tried to be promoted.
 //
-    static bool numa_promotion_rate_limit(struct pglist_data *pgdat,
-    unsigned long rate_limit, int nr)
-    {
-    unsigned long nr_cand;
-    unsigned int now, start;
+#[no_mangle]
+pub unsafe extern "C" fn numa_promotion_rate_limit(pgdat: *mut pglist_data, rate_limit: c_ulong, nr: c_int) -> bool {
+    let mut nr_cand = 0;
+    let mut now = 0;
+    let mut start = 0;
     now = jiffies_to_msecs(jiffies);
     mod_node_page_state(pgdat, PGPROMOTE_CANDIDATE, nr);
     nr_cand = node_page_state(pgdat, PGPROMOTE_CANDIDATE);
     start = pgdat.nbp_rl_start;
     if (now - start > MSEC_PER_SEC &&
-    cmpxchg(&pgdat.nbp_rl_start, start, now) == start)
+    cmpxchg(&pgdat.nbp_rl_start, start, now) == start) {
     pgdat.nbp_rl_nr_cand = nr_cand;
-    if (nr_cand - pgdat.nbp_rl_nr_cand >= rate_limit)
+    }
+    if (nr_cand - pgdat.nbp_rl_nr_cand >= rate_limit) {
     return true;
+    }
     return false;
     }
 pub const NUMA_MIGRATION_ADJUST_STEPS: c_int = 16;
-    static void numa_promotion_adjust_threshold(struct pglist_data *pgdat,
-    unsigned long rate_limit,
-    unsigned int ref_th)
-    {
-    unsigned int now, start, th_period, unit_th, th;
+#[no_mangle]
+pub unsafe extern "C" fn numa_promotion_adjust_threshold(pgdat: *mut pglist_data, rate_limit: c_ulong, ref_th: c_uint) {
+    let mut now = 0;
+    let mut start = 0;
+    let mut th_period = 0;
+    let mut unit_th = 0;
+    let mut th = 0;
     unsigned long nr_cand, ref_cand, diff_cand;
     now = jiffies_to_msecs(jiffies);
     th_period = sysctl_numa_balancing_scan_period_max;
@@ -2439,36 +2622,40 @@ pub const NUMA_MIGRATION_ADJUST_STEPS: c_int = 16;
     diff_cand = nr_cand - pgdat.nbp_th_nr_cand;
     unit_th = ref_th * 2 / NUMA_MIGRATION_ADJUST_STEPS;
     th = pgdat.nbp_threshold ? : ref_th;
-    if (diff_cand > ref_cand * 11 / 10)
+    if (diff_cand > ref_cand * 11 / 10) {
     th = max(th - unit_th, unit_th);
-#[no_mangle]
-pub unsafe extern "C" fn if(10: *mut *mut diff_cand < ref_cand  9 /) -> else {
-    else if (diff_cand < ref_cand * 9 / 10)
+    }
+
+    else if (diff_cand < ref_cand * 9 / 10) {
     th = min(th + unit_th, ref_th * 2);
+    }
     pgdat.nbp_th_nr_cand = nr_cand;
     pgdat.nbp_threshold = th;
     }
     }
-    bool should_numa_migrate_memory(struct task_struct *p, struct folio *folio,
-    int src_nid, int dst_cpu)
-    {
-    struct numa_group *ng = deref_curr_numa_group(p);
-    let mut dst_nid: c_int = cpu_to_node(dst_cpu);
-    int last_cpupid, this_cpupid;
+#[no_mangle]
+pub unsafe extern "C" fn should_numa_migrate_memory(p: *mut task_struct, folio: *mut folio, src_nid: c_int, dst_cpu: c_int) -> bool {
+    let mut ng = deref_curr_numa_group(p);
+pub static mut dst_nid: c_int = 0;
+    let mut last_cpupid = 0;
+    let mut this_cpupid = 0;
 //
 // Cannot migrate to memoryless nodes.
 //
-    if (!node_state(dst_nid, N_MEMORY))
+    if (!node_state(dst_nid, N_MEMORY)) {
     return false;
+    }
 //
 // The pages in slow memory node should be migrated according
 // to hot/cold instead of private/shared.
 //
     if (folio_use_access_time(folio)) {
-    struct pglist_data *pgdat;
-    unsigned long rate_limit;
-    unsigned int latency, th, def_th;
-    let mut nr: c_long = folio_nr_pages(folio);
+pub static mut pgdat: *mut c_void = core::ptr::null_mut();
+    let mut rate_limit = 0;
+    let mut latency = 0;
+    let mut th = 0;
+    let mut def_th = 0;
+pub static mut nr: c_long = 0;
     pgdat = NODE_DATA(dst_nid);
     if (pgdat_free_space_enough(pgdat)) {
 // workload changed, reset hot threshold
@@ -2481,15 +2668,17 @@ pub unsafe extern "C" fn if(10: *mut *mut diff_cand < ref_cand  9 /) -> else {
     numa_promotion_adjust_threshold(pgdat, rate_limit, def_th);
     th = pgdat.nbp_threshold ? : def_th;
     latency = numa_hint_fault_latency(folio);
-    if (latency >= th)
+    if (latency >= th) {
     return false;
+    }
     return !numa_promotion_rate_limit(pgdat, rate_limit, nr);
     }
     this_cpupid = cpu_pid_to_cpupid(dst_cpu, current.pid);
     last_cpupid = folio_xchg_last_cpupid(folio, this_cpupid);
     if (!(sysctl_numa_balancing_mode & NUMA_BALANCING_MEMORY_TIERING) &&
-    !node_is_toptier(src_nid) && !cpupid_valid(last_cpupid))
+    !node_is_toptier(src_nid) && !cpupid_valid(last_cpupid)) {
     return false;
+    }
 //
 // Allow first faults or private faults to migrate immediately early in
 // the lifetime of a task. The magic number 4 is based on waiting for
@@ -2497,8 +2686,9 @@ pub unsafe extern "C" fn if(10: *mut *mut diff_cand < ref_cand  9 /) -> else {
 // executed below.
 //
     if ((p.numa_preferred_nid == NUMA_NO_NODE || p.numa_scan_seq <= 4) &&
-    (cpupid_pid_unset(last_cpupid) || cpupid_match_pid(p, last_cpupid)))
+    (cpupid_pid_unset(last_cpupid) || cpupid_match_pid(p, last_cpupid))) {
     return true;
+    }
 //
 // Multi-stage node selection is used in conjunction with a periodic
 // migration fault to build a temporal task<->page relation. By using
@@ -2517,21 +2707,25 @@ pub unsafe extern "C" fn if(10: *mut *mut diff_cand < ref_cand  9 /) -> else {
 // act on an unlikely task<->page relation.
 //
     if (!cpupid_pid_unset(last_cpupid) &&
-    cpupid_to_nid(last_cpupid) != dst_nid)
+    cpupid_to_nid(last_cpupid) != dst_nid) {
     return false;
+    }
 // Always allow migrate on private faults
-    if (cpupid_match_pid(p, last_cpupid))
+    if (cpupid_match_pid(p, last_cpupid)) {
     return true;
+    }
 // A shared fault, but p->numa_group has not been set up yet.
-    if (!ng)
+    if (!ng) {
     return true;
+    }
 //
 // Destination node is much more heavily used than the source
 // node? Allow migration.
 //
     if (group_faults_cpu(ng, dst_nid) > group_faults_cpu(ng, src_nid) *
-    ACTIVE_NODE_FRACTION)
+    ACTIVE_NODE_FRACTION) {
     return true;
+    }
 //
 // Distribute memory according to CPU & memory use on each node,
 // with 3/4 hysteresis to avoid unnecessary memory migrations:
@@ -2571,7 +2765,7 @@ pub struct numa_stats {
     pub compute_capacity: c_ulong,
     pub nr_running: c_uint,
     pub weight: c_uint,
-    pub node_type: enum numa_type,
+    pub node_type: numa_type,
     pub idle_cpu: c_int,
 }
 
@@ -2590,37 +2784,38 @@ pub struct task_numa_env {
     pub best_cpu: c_int,
 }
 
-    static unsigned long cpu_load(struct rq *rq);
-    static unsigned long cpu_runnable(struct rq *rq);
+// forward_decl: cpu_load;
+// forward_decl: cpu_runnable;
     static inline enum
-    numa_type numa_classify(unsigned int imbalance_pct,
-    struct numa_stats *ns)
+    numa_type numa_classify(unsigned int imbalance_pct, numa_stats *ns)
     {
     if ((ns.nr_running > ns.weight) &&
     (((ns.compute_capacity * 100) < (ns.util * imbalance_pct)) ||
-    ((ns.compute_capacity * imbalance_pct) < (ns.runnable * 100))))
+    ((ns.compute_capacity * imbalance_pct) < (ns.runnable * 100)))) {
     return node_overloaded;
+    }
     if ((ns.nr_running < ns.weight) ||
     (((ns.compute_capacity * 100) > (ns.util * imbalance_pct)) &&
-    ((ns.compute_capacity * imbalance_pct) > (ns.runnable * 100))))
+    ((ns.compute_capacity * imbalance_pct) > (ns.runnable * 100)))) {
     return node_has_spare;
+    }
     return node_fully_busy;
     }
 // Forward declarations of select_idle_sibling helpers
-    static inline bool test_idle_cores(int cpu);
+// forward_decl: test_idle_cores;
 #[no_mangle]
 pub unsafe extern "C" fn numa_idle_core(idle_core: c_int, cpu: c_int) -> c_int {
-    static inline int numa_idle_core(int idle_core, int cpu)
-    {
     if (!sched_smt_active() ||
-    idle_core >= 0 || !test_idle_cores(cpu))
+    idle_core >= 0 || !test_idle_cores(cpu)) {
     return idle_core;
+    }
 //
 // Prefer cores instead of packing HT siblings
 // and triggering future load balancing.
 //
-    if (is_core_idle(cpu))
+    if (is_core_idle(cpu)) {
     idle_core = cpu;
+    }
     return idle_core;
     }
 //
@@ -2629,16 +2824,14 @@ pub unsafe extern "C" fn numa_idle_core(idle_core: c_int, cpu: c_int) -> c_int {
 // borrows code and logic from update_sg_lb_stats but sharing a
 // common implementation is impractical.
 //
-    static void update_numa_stats(struct task_numa_env *env,
-    struct numa_stats *ns, int nid,
-    bool find_idle)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn update_numa_stats(env: *mut task_numa_env, ns: *mut numa_stats, nid: c_int, find_idle: bool) {
     int cpu, idle_core = -1;
-    memset(ns, 0, sizeof(*ns));
+    memset(ns, 0, sizeof!(*ns));
     ns.idle_cpu = -1;
     rcu_read_lock();
     for_each_cpu(cpu, cpumask_of_node(nid)) {
-    struct rq *rq = cpu_rq(cpu);
+    let mut rq = cpu_rq(cpu);
     ns.load += cpu_load(rq);
     ns.runnable += cpu_runnable(rq);
     ns.util += cpu_util_cfs(cpu);
@@ -2646,27 +2839,29 @@ pub unsafe extern "C" fn numa_idle_core(idle_core: c_int, cpu: c_int) -> c_int {
     ns.compute_capacity += capacity_of(cpu);
     if (find_idle && idle_core < 0 && !rq.nr_running && idle_cpu(cpu)) {
     if (READ_ONCE(rq.numa_migrate_on) ||
-    !cpumask_test_cpu(cpu, env.p.cpus_ptr))
+    !cpumask_test_cpu(cpu, env.p.cpus_ptr)) {
     continue;
-    if (ns.idle_cpu == -1)
+    }
+    if (ns.idle_cpu == -1) {
     ns.idle_cpu = cpu;
+    }
     idle_core = numa_idle_core(idle_core, cpu);
     }
     }
     rcu_read_unlock();
     ns.weight = cpumask_weight(cpumask_of_node(nid));
     ns.node_type = numa_classify(env.imbalance_pct, ns);
-    if (idle_core >= 0)
+    if (idle_core >= 0) {
     ns.idle_cpu = idle_core;
     }
-    static void task_numa_assign(struct task_numa_env *env,
-    struct task_struct *p, long imp)
-    {
-    struct rq *rq = cpu_rq(env.dst_cpu);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn task_numa_assign(env: *mut task_numa_env, p: *mut task_struct, imp: c_long) {
+    let mut rq = cpu_rq(env.dst_cpu);
 // Check if run-queue part of active NUMA balance.
     if (env.best_cpu != env.dst_cpu && xchg(&rq.numa_migrate_on, 1)) {
-    int cpu;
-    let mut start: c_int = env.dst_cpu;
+    let mut cpu = 0;
+pub static mut start: c_int = 0;
 // Find alternative idle CPU.
     for_each_cpu_wrap(cpu, cpumask_of_node(env.dst_nid), start + 1) {
     if (cpu == env.best_cpu || !idle_cpu(cpu) ||
@@ -2675,13 +2870,14 @@ pub unsafe extern "C" fn numa_idle_core(idle_core: c_int, cpu: c_int) -> c_int {
     }
     env.dst_cpu = cpu;
     rq = cpu_rq(env.dst_cpu);
-    if (!xchg(&rq.numa_migrate_on, 1))
-    goto assign;
+    if (!xchg(&rq.numa_migrate_on, 1)) {
+// goto;
+    }
     }
 // Failed to find an alternative idle CPU
     return;
     }
-    assign:
+// label;
 //
 // Clear previous best_cpu/rq numa-migrate flag, since task now
 // found a better CPU to move/swap.
@@ -2690,20 +2886,24 @@ pub unsafe extern "C" fn numa_idle_core(idle_core: c_int, cpu: c_int) -> c_int {
     rq = cpu_rq(env.best_cpu);
     WRITE_ONCE(rq.numa_migrate_on, 0);
     }
-    if (env.best_task)
+    if (env.best_task) {
     put_task_struct(env.best_task);
-    if (p)
+    }
+    if (p) {
     get_task_struct(p);
+    }
     env.best_task = p;
     env.best_imp = imp;
     env.best_cpu = env.dst_cpu;
     }
-    static bool load_too_imbalanced(long src_load, long dst_load,
-    struct task_numa_env *env)
-    {
-    long imb, old_imb;
-    long orig_src_load, orig_dst_load;
-    long src_capacity, dst_capacity;
+#[no_mangle]
+pub unsafe extern "C" fn load_too_imbalanced(src_load: c_long, dst_load: c_long, env: *mut task_numa_env) -> bool {
+    let mut imb = 0;
+    let mut old_imb = 0;
+    let mut orig_src_load = 0;
+    let mut orig_dst_load = 0;
+    let mut src_capacity = 0;
+    let mut dst_capacity = 0;
 //
 // The load is corrected for the CPU capacity available on each node.
 //
@@ -2732,42 +2932,47 @@ pub const SMALLIMP: c_int = 30;
 // into account that it might be best if task running on the dst_cpu should
 // be exchanged with the source task
 //
-    static bool task_numa_compare(struct task_numa_env *env,
-    long taskimp, long groupimp, bool maymove)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn task_numa_compare(env: *mut task_numa_env, taskimp: c_long, groupimp: c_long, maymove: bool) -> bool {
     struct numa_group *cur_ng, *p_ng = deref_curr_numa_group(env.p);
-    struct rq *dst_rq = cpu_rq(env.dst_cpu);
-    let mut imp: c_long = p_ng ? groupimp : taskimp;
-    struct task_struct *cur;
-    long src_load, dst_load;
-    let mut dist: c_int = env.dist;
-    let mut moveimp: c_long = imp;
-    long load;
-    let mut stopsearch: bool = false;
-    if (READ_ONCE(dst_rq.numa_migrate_on))
+    let mut dst_rq = cpu_rq(env.dst_cpu);
+pub static mut imp: c_long = 0;
+pub static mut cur: *mut c_void = core::ptr::null_mut();
+    let mut src_load = 0;
+    let mut dst_load = 0;
+pub static mut dist: c_int = 0;
+pub static mut moveimp: c_long = 0;
+    let mut load = 0;
+pub static mut stopsearch: bool = false;
+    if (READ_ONCE(dst_rq.numa_migrate_on)) {
     return false;
+    }
     rcu_read_lock();
     cur = rcu_dereference_all(dst_rq.curr);
     if (cur && ((cur.flags & (PF_EXITING | PF_KTHREAD)) ||
-    !cur.mm))
+    !cur.mm)) {
     cur = core::ptr::null_mut();
+    }
 //
 // Because we have preemption enabled we can get migrated around and
 // end try selecting ourselves (current == env->p) as a swap candidate.
 //
     if (cur == env.p) {
     stopsearch = true;
-    goto unlock;
+// goto;
     }
     if (!cur) {
-    if (maymove && moveimp >= env.best_imp)
-    goto assign;
-    else
-    goto unlock;
+    if (maymove && moveimp >= env.best_imp) {
+// goto;
+    }
+    else {
+// goto;
+    }
     }
 // Skip this swap candidate if cannot move to the source cpu.
-    if (!cpumask_test_cpu(env.src_cpu, cur.cpus_ptr))
-    goto unlock;
+    if (!cpumask_test_cpu(env.src_cpu, cur.cpus_ptr)) {
+// goto;
+    }
 //
 // Skip this swap candidate if it is not moving to its preferred
 // node and the best task is.
@@ -2775,7 +2980,7 @@ pub const SMALLIMP: c_int = 30;
     if (env.best_task &&
     env.best_task.numa_preferred_nid == env.src_nid &&
     cur.numa_preferred_nid != env.src_nid) {
-    goto unlock;
+// goto;
     }
 //
 // "imp" is the fault differential for the source task between the
@@ -2795,43 +3000,49 @@ pub const SMALLIMP: c_int = 30;
 // not address the load imbalance and helps one task at
 // the cost of punishing another.
 //
-    if (env.dst_stats.node_type == node_has_spare)
-    goto unlock;
+    if (env.dst_stats.node_type == node_has_spare) {
+// goto;
+    }
     imp = taskimp + task_weight(cur, env.src_nid, dist) -
     task_weight(cur, env.dst_nid, dist);
 //
 // Add some hysteresis to prevent swapping the
 // tasks within a group over tiny differences.
 //
-    if (cur_ng)
+    if (cur_ng) {
     imp -= imp / 16;
+    }
     } else {
 //
 // Compare the group weights. If a task is all by itself
 // (not part of a group), use the task weight instead.
 //
-    if (cur_ng && p_ng)
+    if (cur_ng && p_ng) {
     imp += group_weight(cur, env.src_nid, dist) -
     group_weight(cur, env.dst_nid, dist);
-    else
+    }
+    else {
     imp += task_weight(cur, env.src_nid, dist) -
     task_weight(cur, env.dst_nid, dist);
     }
+    }
 // Discourage picking a task already on its preferred node
-    if (cur.numa_preferred_nid == env.dst_nid)
+    if (cur.numa_preferred_nid == env.dst_nid) {
     imp -= imp / 16;
+    }
 //
 // Encourage picking a task that moves to its preferred node.
 // This potentially makes imp larger than it's maximum of
 // 1998 (see SMALLIMP and task_weight for why) but in this
 // case, it does not matter.
 //
-    if (cur.numa_preferred_nid == env.src_nid)
+    if (cur.numa_preferred_nid == env.src_nid) {
     imp += imp / 8;
+    }
     if (maymove && moveimp > imp && moveimp > env.best_imp) {
     imp = moveimp;
     cur = core::ptr::null_mut();
-    goto assign;
+// goto;
     }
 //
 // Prefer swapping with a task moving to its preferred node over a
@@ -2839,7 +3050,7 @@ pub const SMALLIMP: c_int = 30;
 //
     if (env.best_task && cur.numa_preferred_nid == env.src_nid &&
     env.best_task.numa_preferred_nid != env.src_nid) {
-    goto assign;
+// goto;
     }
 //
 // If the NUMA importance is less than SMALLIMP,
@@ -2847,25 +3058,29 @@ pub const SMALLIMP: c_int = 30;
 // of tasks and also hurt performance due to cache
 // misses.
 //
-    if (imp < SMALLIMP || imp <= env.best_imp + SMALLIMP / 2)
-    goto unlock;
+    if (imp < SMALLIMP || imp <= env.best_imp + SMALLIMP / 2) {
+// goto;
+    }
 //
 // In the overloaded case, try and keep the load balanced.
 //
     load = task_h_load(env.p) - task_h_load(cur);
-    if (!load)
-    goto assign;
+    if (!load) {
+// goto;
+    }
     dst_load = env.dst_stats.load + load;
     src_load = env.src_stats.load - load;
-    if (load_too_imbalanced(src_load, dst_load, env))
-    goto unlock;
-    assign:
+    if (load_too_imbalanced(src_load, dst_load, env)) {
+// goto;
+    }
+// label;
 // Evaluate an idle CPU for a task numa move.
     if (!cur) {
-    let mut cpu: c_int = env.dst_stats.idle_cpu;
+pub static mut cpu: c_int = 0;
 // Nothing cached so current CPU went idle since the search.
-    if (cpu < 0)
+    if (cpu < 0) {
     cpu = env.dst_cpu;
+    }
 //
 // If the CPU is no longer truly idle and the previous best CPU
 // is, keep using it.
@@ -2882,8 +3097,9 @@ pub const SMALLIMP: c_int = 30;
 // balance improves then stop the search. While a better swap
 // candidate may exist, a search is not free.
 //
-    if (maymove && !cur && env.best_cpu >= 0 && idle_cpu(env.best_cpu))
+    if (maymove && !cur && env.best_cpu >= 0 && idle_cpu(env.best_cpu)) {
     stopsearch = true;
+    }
 //
 // If a swap candidate must be identified and the current best task
 // moves its preferred node then stop the search.
@@ -2892,22 +3108,22 @@ pub const SMALLIMP: c_int = 30;
     env.best_task.numa_preferred_nid == env.src_nid) {
     stopsearch = true;
     }
-    unlock:
+// label;
     rcu_read_unlock();
     return stopsearch;
     }
-    static void task_numa_find_cpu(struct task_numa_env *env,
-    long taskimp, long groupimp)
-    {
-    let mut maymove: bool = false;
-    int cpu;
+#[no_mangle]
+pub unsafe extern "C" fn task_numa_find_cpu(env: *mut task_numa_env, taskimp: c_long, groupimp: c_long) {
+pub static mut maymove: bool = false;
+    let mut cpu = 0;
 //
 // If dst node has spare capacity, then check if there is an
 // imbalance that would be overruled by the load balancer.
 //
     if (env.dst_stats.node_type == node_has_spare) {
-    unsigned int imbalance;
-    int src_running, dst_running;
+    let mut imbalance = 0;
+    let mut src_running = 0;
+    let mut dst_running = 0;
 //
 // Would movement cause an imbalance? Note that if src has
 // more running tasks that the imbalance is ignored as the
@@ -2929,7 +3145,9 @@ pub const SMALLIMP: c_int = 30;
     }
     }
     } else {
-    long src_load, dst_load, load;
+    let mut src_load = 0;
+    let mut dst_load = 0;
+    let mut load = 0;
 //
 // If the improvement from just moving env->p direction is better
 // than swapping tasks around, check if a move is possible.
@@ -2942,29 +3160,23 @@ pub const SMALLIMP: c_int = 30;
 // Skip CPUs if the source task cannot migrate
     for_each_cpu_and(cpu, cpumask_of_node(env.dst_nid), env.p.cpus_ptr) {
     env.dst_cpu = cpu;
-    if (task_numa_compare(env, taskimp, groupimp, maymove))
+    if (task_numa_compare(env, taskimp, groupimp, maymove)) {
     break;
+    }
     }
     }
 #[no_mangle]
 unsafe extern "C" fn task_numa_migrate(p: *mut task_struct) -> c_int {
-    static int task_numa_migrate(struct task_struct *p)
-    {
-    struct task_numa_env env = {
-    .p = p,
-    .src_cpu = task_cpu(p),
-    .src_nid = task_node(p),
-    .imbalance_pct = 112,
-    .best_task = core::ptr::null_mut(),
-    .best_imp = 0,
-    .best_cpu = -1,
-    };
+pub static mut task_numa_env: usize = 0;
     unsigned long taskweight, groupweight;
-    struct sched_domain *sd;
-    long taskimp, groupimp;
-    struct numa_group *ng;
-    struct rq *best_rq;
-    int nid, ret, dist;
+pub static mut sd: *mut c_void = core::ptr::null_mut();
+    let mut taskimp = 0;
+    let mut groupimp = 0;
+pub static mut ng: *mut c_void = core::ptr::null_mut();
+pub static mut best_rq: *mut c_void = core::ptr::null_mut();
+    let mut nid = 0;
+    let mut ret = 0;
+    let mut dist = 0;
 //
 // Pick the lowest SD_NUMA domain, as that would have the smallest
 // imbalance and would be the first to start moving tasks about.
@@ -3010,8 +3222,9 @@ unsafe extern "C" fn task_numa_migrate(p: *mut task_struct) -> c_int {
     ng = deref_curr_numa_group(p);
     if (env.best_cpu == -1 || (ng && ng.active_nodes > 1)) {
     for_each_node_state(nid, N_CPU) {
-    if (nid == env.src_nid || nid == p.numa_preferred_nid)
+    if (nid == env.src_nid || nid == p.numa_preferred_nid) {
     continue;
+    }
     dist = node_distance(env.src_nid, env.dst_nid);
     if (sched_numa_topology_type == NUMA_BACKPLANE &&
     dist != env.dist) {
@@ -3021,8 +3234,9 @@ unsafe extern "C" fn task_numa_migrate(p: *mut task_struct) -> c_int {
 // Only consider nodes where both task and groups benefit
     taskimp = task_weight(p, nid, dist) - taskweight;
     groupimp = group_weight(p, nid, dist) - groupweight;
-    if (taskimp < 0 && groupimp < 0)
+    if (taskimp < 0 && groupimp < 0) {
     continue;
+    }
     env.dist = dist;
     env.dst_nid = nid;
     update_numa_stats(&env, &env.dst_stats, env.dst_nid, true);
@@ -3038,12 +3252,15 @@ unsafe extern "C" fn task_numa_migrate(p: *mut task_struct) -> c_int {
 // trying for a better one later. Do not set the preferred node here.
 //
     if (ng) {
-    if (env.best_cpu == -1)
+    if (env.best_cpu == -1) {
     nid = env.src_nid;
-    else
+    }
+    else {
     nid = cpu_to_node(env.best_cpu);
-    if (nid != p.numa_preferred_nid)
+    }
+    if (nid != p.numa_preferred_nid) {
     sched_setnuma(p, nid);
+    }
     }
 // No better CPU than the current one was found.
     if (env.best_cpu == -1) {
@@ -3054,32 +3271,34 @@ unsafe extern "C" fn task_numa_migrate(p: *mut task_struct) -> c_int {
     if (env.best_task == core::ptr::null_mut()) {
     ret = migrate_task_to(p, env.best_cpu);
     WRITE_ONCE(best_rq.numa_migrate_on, 0);
-    if (ret != 0)
+    if (ret != 0) {
     trace_sched_stick_numa(p, env.src_cpu, core::ptr::null_mut(), env.best_cpu);
+    }
     return ret;
     }
     ret = migrate_swap(p, env.best_task, env.best_cpu, env.src_cpu);
     WRITE_ONCE(best_rq.numa_migrate_on, 0);
-    if (ret != 0)
+    if (ret != 0) {
     trace_sched_stick_numa(p, env.src_cpu, env.best_task, env.best_cpu);
+    }
     put_task_struct(env.best_task);
     return ret;
     }
 // Attempt to migrate a task to a CPU on the preferred node.
 #[no_mangle]
 unsafe extern "C" fn numa_migrate_preferred(p: *mut task_struct) {
-    static void numa_migrate_preferred(struct task_struct *p)
-    {
-    let mut interval: c_ulong = HZ;
+pub static mut interval: c_ulong = 0;
 // This task has no NUMA fault statistics yet
-    if (unlikely(p.numa_preferred_nid == NUMA_NO_NODE || !p.numa_faults))
+    if (unlikely(p.numa_preferred_nid == NUMA_NO_NODE || !p.numa_faults)) {
     return;
+    }
 // Periodically retry migrating the task to the preferred node
     interval = min(interval, msecs_to_jiffies(p.numa_scan_period) / 16);
     p.numa_migrate_retry = jiffies + interval;
 // Success if task is already running on preferred CPU
-    if (task_node(p) == p.numa_preferred_nid)
+    if (task_node(p) == p.numa_preferred_nid) {
     return;
+    }
 // Otherwise, try migrate to a CPU on the preferred node
     task_numa_migrate(p);
     }
@@ -3091,19 +3310,19 @@ unsafe extern "C" fn numa_migrate_preferred(p: *mut task_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn numa_group_count_active_nodes(numa_group: *mut numa_group) {
-    static void numa_group_count_active_nodes(struct numa_group *numa_group)
-    {
     unsigned long faults, max_faults = 0;
     int nid, active_nodes = 0;
     for_each_node_state(nid, N_CPU) {
     faults = group_faults_cpu(numa_group, nid);
-    if (faults > max_faults)
+    if (faults > max_faults) {
     max_faults = faults;
+    }
     }
     for_each_node_state(nid, N_CPU) {
     faults = group_faults_cpu(numa_group, nid);
-    if (faults * ACTIVE_NODE_FRACTION > max_faults)
-    active_nodes++;
+    if (faults * ACTIVE_NODE_FRACTION > max_faults) {
+    active_nodes += 1;
+    }
     }
     numa_group.max_faults_cpu = max_faults;
     numa_group.active_nodes = active_nodes;
@@ -3123,14 +3342,14 @@ pub const NUMA_PERIOD_THRESHOLD: c_int = 7;
 // the page accesses are shared with other processes.
 // Otherwise, decrease the scan period.
 //
-    static void update_task_scan_period(struct task_struct *p,
-    unsigned long shared, unsigned long private)
-    {
-    unsigned int period_slot;
-    int lr_ratio, ps_ratio;
-    int diff;
-    let mut remote: c_ulong = p.numa_faults_locality[0];
-    let mut local: c_ulong = p.numa_faults_locality[1];
+#[no_mangle]
+pub unsafe extern "C" fn update_task_scan_period(p: *mut task_struct, shared: c_ulong, private: c_ulong) {
+    let mut period_slot = 0;
+    let mut lr_ratio = 0;
+    let mut ps_ratio = 0;
+    let mut diff = 0;
+pub static mut remote: c_ulong = 0;
+pub static mut local: c_ulong = 0;
 //
 // If there were no record hinting faults then either the task is
 // completely idle or all activity is in areas that are not of interest
@@ -3159,9 +3378,10 @@ pub const NUMA_PERIOD_THRESHOLD: c_int = 7;
 // Most memory accesses are local. There is no need to
 // do fast NUMA scanning, since memory is already local.
 //
-    let mut slot: c_int = ps_ratio - NUMA_PERIOD_THRESHOLD;
-    if (!slot)
+pub static mut slot: c_int = 0;
+    if (!slot) {
     slot = 1;
+    }
     diff = slot * period_slot;
     } else if (lr_ratio >= NUMA_PERIOD_THRESHOLD) {
 //
@@ -3169,9 +3389,10 @@ pub const NUMA_PERIOD_THRESHOLD: c_int = 7;
 // There is no point in continuing fast NUMA scanning,
 // since other tasks may just move the memory elsewhere.
 //
-    let mut slot: c_int = lr_ratio - NUMA_PERIOD_THRESHOLD;
-    if (!slot)
+pub static mut slot: c_int = 0;
+    if (!slot) {
     slot = 1;
+    }
     diff = slot * period_slot;
     } else {
 //
@@ -3179,12 +3400,12 @@ pub const NUMA_PERIOD_THRESHOLD: c_int = 7;
 // yet they are not on the local NUMA node. Speed up
 // NUMA scanning to get the memory moved over.
 //
-    let mut ratio: c_int = max(lr_ratio, ps_ratio);
+pub static mut ratio: c_int = 0;
     diff = -(NUMA_PERIOD_THRESHOLD - ratio) * period_slot;
     }
     p.numa_scan_period = clamp(p.numa_scan_period + diff,
     task_scan_min(p), task_scan_max(p));
-    memset(p.numa_faults_locality, 0, sizeof(p.numa_faults_locality));
+    memset(p.numa_faults_locality, 0, sizeof!(p.numa_faults_locality));
     }
 //
 // Get the fraction of time the task has been running since the last
@@ -3195,8 +3416,6 @@ pub const NUMA_PERIOD_THRESHOLD: c_int = 7;
 //
 #[no_mangle]
 unsafe extern "C" fn numa_get_avg_runtime(p: *mut task_struct, period: *mut u64) -> u64 {
-    static u64 numa_get_avg_runtime(struct task_struct *p, u64 *period)
-    {
     u64 runtime, delta, now;
 // Use the start of this time slice to avoid calculations.
     now = p.se.exec_start;
@@ -3205,8 +3424,9 @@ unsafe extern "C" fn numa_get_avg_runtime(p: *mut task_struct, period: *mut u64)
     delta = runtime - p.last_sum_exec_runtime;
 // period = now - p->last_task_numa_placement;
 // Avoid time going backwards, prevent potential divide error:
-    if (unlikely((s64)*period < 0))
+    if (unlikely((s64)*period < 0)) {
 // period = 0;
+    }
     } else {
     delta = p.se.avg.load_sum;
 // period = LOAD_AVG_MAX;
@@ -3222,13 +3442,12 @@ unsafe extern "C" fn numa_get_avg_runtime(p: *mut task_struct, period: *mut u64)
 //
 #[no_mangle]
 unsafe extern "C" fn preferred_group_nid(p: *mut task_struct, nid: c_int) -> c_int {
-    static int preferred_group_nid(struct task_struct *p, int nid)
-    {
-    nodemask_t nodes;
-    int dist;
+    let mut nodes;
+    let mut dist = 0;
 // Direct connections between all NUMA nodes.
-    if (sched_numa_topology_type == NUMA_DIRECT)
+    if (sched_numa_topology_type == NUMA_DIRECT) {
     return nid;
+    }
 //
 // On a system with glueless mesh NUMA topology, group_weight
 // scores nodes according to the number of NUMA hinting faults on
@@ -3257,16 +3476,18 @@ unsafe extern "C" fn preferred_group_nid(p: *mut task_struct, nid: c_int) -> c_i
 // keep the complexity of the search down.
 //
     nodes = node_states[N_CPU];
-    for (dist = sched_max_numa_distance; dist > LOCAL_DISTANCE; dist--) {
-    let mut max_faults: c_ulong = 0;
-    let mut max_group: nodemask_t = NODE_MASK_NONE;
-    int a, b;
+    while (dist > LOCAL_DISTANCE) {
+pub static mut max_faults: c_ulong = 0;
+pub static mut max_group: nodemask_t = 0;
+    let mut a = 0;
+    let mut b = 0;
 // Are there nodes at this distance from each other?
-    if (!find_numa_distance(dist))
+    if (!find_numa_distance(dist)) {
     continue;
+    }
     for_each_node_mask(a, nodes) {
-    let mut faults: c_ulong = 0;
-    nodemask_t this_group;
+pub static mut faults: c_ulong = 0;
+    let mut this_group;
     nodes_clear(this_group);
 // Sum group's NUMA faults; includes a==b case.
     for_each_node_mask(b, nodes) {
@@ -3289,33 +3510,32 @@ unsafe extern "C" fn preferred_group_nid(p: *mut task_struct, nid: c_int) -> c_i
     }
     }
 // Next round, evaluate the nodes within max_group.
-    if (!max_faults)
+    if (!max_faults) {
     break;
+    }
     nodes = max_group;
     }
     return nid;
     }
 #[no_mangle]
 unsafe extern "C" fn task_numa_placement(p: *mut task_struct) {
-    static void task_numa_placement(struct task_struct *p)
-    __context_unsafe(/* conditional locking */)
-    {
     int seq, nid, max_nid = NUMA_NO_NODE;
-    let mut max_faults: c_ulong = 0;
+pub static mut max_faults: c_ulong = 0;
     unsigned long fault_types[2] = { 0, 0 };
-    unsigned long total_faults;
+    let mut total_faults = 0;
     u64 runtime, period;
-    spinlock_t *group_lock = core::ptr::null_mut();
+    let mut group_lock = core::ptr::null_mut();
     long __maybe_unused new_fp;
-    struct numa_group *ng;
+pub static mut ng: *mut c_void = core::ptr::null_mut();
 //
 // The p->mm->numa_scan_seq field gets updated without
 // exclusive access. Use READ_ONCE() here to ensure
 // that the field is read in a single access:
 //
     seq = READ_ONCE(p.mm.numa_scan_seq);
-    if (p.numa_scan_seq == seq)
+    if (p.numa_scan_seq == seq) {
     return;
+    }
     p.numa_scan_seq = seq;
     p.numa_scan_period_max = task_scan_max(p);
     total_faults = p.numa_faults_locality[0] +
@@ -3330,11 +3550,16 @@ unsafe extern "C" fn task_numa_placement(p: *mut task_struct) {
 // Find the node with the highest number of faults
     for_each_online_node(nid) {
 // Keep track of the offsets in numa_faults array
-    int mem_idx, membuf_idx, cpu_idx, cpubuf_idx;
-    let mut faults: c_ulong = 0, group_faults = 0;
-    int priv;
-    for (priv = 0; priv < NR_NUMA_HINT_FAULT_TYPES; priv++) {
-    long diff, f_diff, f_weight;
+    let mut mem_idx = 0;
+    let mut membuf_idx = 0;
+    let mut cpu_idx = 0;
+    let mut cpubuf_idx = 0;
+pub static mut faults: c_ulong = 0;
+    let mut priv = 0;
+    while (priv < NR_NUMA_HINT_FAULT_TYPES) {
+    let mut diff = 0;
+    let mut f_diff = 0;
+    let mut f_weight = 0;
     mem_idx = task_faults_idx(NUMA_MEM, nid, priv);
     membuf_idx = task_faults_idx(NUMA_MEMBUF, nid, priv);
     cpu_idx = task_faults_idx(NUMA_CPU, nid, priv);
@@ -3417,100 +3642,109 @@ unsafe extern "C" fn task_numa_placement(p: *mut task_struct) {
     }
     if (max_faults) {
 // Set the new preferred node
-    if (max_nid != p.numa_preferred_nid)
+    if (max_nid != p.numa_preferred_nid) {
     sched_setnuma(p, max_nid);
+    }
     }
     update_task_scan_period(p, fault_types[0], fault_types[1]);
     }
 #[no_mangle]
 pub unsafe extern "C" fn get_numa_group(grp: *mut numa_group) -> c_int {
-    static inline int get_numa_group(struct numa_group *grp)
-    {
     return refcount_inc_not_zero(&grp.refcount);
     }
 #[no_mangle]
 pub unsafe extern "C" fn put_numa_group(grp: *mut numa_group) {
-    static inline void put_numa_group(struct numa_group *grp)
-    {
-    if (refcount_dec_and_test(&grp.refcount))
+    if (refcount_dec_and_test(&grp.refcount)) {
     kfree_rcu(grp, rcu);
     }
-    static void task_numa_group(struct task_struct *p, int cpupid, int flags,
-    int *priv)
-    {
-    struct numa_group *grp, *my_grp;
-    struct task_struct *tsk;
-    let mut join: bool = false;
-    let mut cpu: c_int = cpupid_to_cpu(cpupid);
-    int i;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn task_numa_group(p: *mut task_struct, cpupid: c_int, flags: c_int, priv: *mut c_int) {
+    let mut grp = core::ptr::null_mut();
+    let mut my_grp = core::ptr::null_mut();
+pub static mut tsk: *mut c_void = core::ptr::null_mut();
+pub static mut join: bool = false;
+pub static mut cpu: c_int = 0;
+    let mut i = 0;
     if (unlikely(!deref_curr_numa_group(p))) {
-    unsigned int size = sizeof(struct numa_group) +
+    let mut size = sizeof!(numa_group) +
     NR_NUMA_HINT_FAULT_STATS *
-    nr_node_ids * sizeof(unsigned long);
+    nr_node_ids * sizeof!(unsigned long);
     grp = kzalloc(size, GFP_KERNEL | __GFP_NOWARN);
-    if (!grp)
+    if (!grp) {
     return;
+    }
     refcount_set(&grp.refcount, 1);
     grp.active_nodes = 1;
     grp.max_faults_cpu = 0;
     spin_lock_init(&grp.lock);
     grp.gid = p.pid;
-    for (i = 0; i < NR_NUMA_HINT_FAULT_STATS * nr_node_ids; i++)
+    for (i = 0; i < NR_NUMA_HINT_FAULT_STATS * nr_node_ids; i++) {
     grp.faults[i] = p.numa_faults[i];
+    }
     grp.total_faults = p.total_numa_faults;
-    grp.nr_tasks++;
+    grp.nr_tasks += 1;
     rcu_assign_pointer(p.numa_group, grp);
     }
     rcu_read_lock();
     tsk = READ_ONCE(cpu_rq(cpu).curr);
-    if (!cpupid_match_pid(tsk, cpupid))
-    goto no_join;
+    if (!cpupid_match_pid(tsk, cpupid)) {
+// goto;
+    }
     grp = rcu_dereference_all(tsk.numa_group);
-    if (!grp)
-    goto no_join;
+    if (!grp) {
+// goto;
+    }
     my_grp = deref_curr_numa_group(p);
-    if (grp == my_grp)
-    goto no_join;
+    if (grp == my_grp) {
+// goto;
+    }
 //
 // Only join the other group if its bigger; if we're the bigger group,
 // the other task will join us.
 //
-    if (my_grp.nr_tasks > grp.nr_tasks)
-    goto no_join;
+    if (my_grp.nr_tasks > grp.nr_tasks) {
+// goto;
+    }
 //
 // Tie-break on the grp address.
 //
-    if (my_grp.nr_tasks == grp.nr_tasks && my_grp > grp)
-    goto no_join;
+    if (my_grp.nr_tasks == grp.nr_tasks && my_grp > grp) {
+// goto;
+    }
 // Always join threads in the same process.
-    if (tsk.mm == current.mm)
+    if (tsk.mm == current.mm) {
     join = true;
+    }
 // Simple filter to avoid false positives due to PID collisions
-    if (flags & TNF_SHARED)
+    if (flags & TNF_SHARED) {
     join = true;
+    }
 // Update priv based on whether false sharing was detected
 // priv = !join;
-    if (join && !get_numa_group(grp))
-    goto no_join;
+    if (join && !get_numa_group(grp)) {
+// goto;
+    }
     rcu_read_unlock();
-    if (!join)
+    if (!join) {
     return;
-    WARN_ON_ONCE(irqs_disabled());
+    }
+    WARN_ON_ONCE!(irqs_disabled());
     double_lock_irq(&my_grp.lock, &grp.lock);
-    for (i = 0; i < NR_NUMA_HINT_FAULT_STATS * nr_node_ids; i++) {
+    while (i < NR_NUMA_HINT_FAULT_STATS * nr_node_ids) {
     my_grp.faults[i] -= p.numa_faults[i];
     grp.faults[i] += p.numa_faults[i];
     }
     my_grp.total_faults -= p.total_numa_faults;
     grp.total_faults += p.total_numa_faults;
-    my_grp.nr_tasks--;
-    grp.nr_tasks++;
+    my_grp.nr_tasks -= 1;
+    grp.nr_tasks += 1;
     spin_unlock(&my_grp.lock);
     spin_unlock_irq(&grp.lock);
     rcu_assign_pointer(p.numa_group, grp);
     put_numa_group(my_grp);
     return;
-    no_join:
+// label;
     rcu_read_unlock();
     return;
     }
@@ -3523,21 +3757,21 @@ pub unsafe extern "C" fn put_numa_group(grp: *mut numa_group) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn task_numa_free(p: *mut task_struct, final: bool) {
-    void task_numa_free(struct task_struct *p, bool final)
-    {
 // safe: p either is current or is being freed by current
-    struct numa_group *grp = rcu_dereference_raw(p.numa_group);
-    unsigned long *numa_faults = p.numa_faults;
-    unsigned long flags;
-    int i;
-    if (!numa_faults)
+    let mut grp = rcu_dereference_raw(p.numa_group);
+    let mut numa_faults = p.numa_faults;
+    let mut flags = 0;
+    let mut i = 0;
+    if (!numa_faults) {
     return;
+    }
     if (grp) {
     spin_lock_irqsave(&grp.lock, flags);
-    for (i = 0; i < NR_NUMA_HINT_FAULT_STATS * nr_node_ids; i++)
+    for (i = 0; i < NR_NUMA_HINT_FAULT_STATS * nr_node_ids; i++) {
     grp.faults[i] -= p.numa_faults[i];
+    }
     grp.total_faults -= p.total_numa_faults;
-    grp.nr_tasks--;
+    grp.nr_tasks -= 1;
     spin_unlock_irqrestore(&grp.lock, flags);
     RCU_INIT_POINTER(p.numa_group, core::ptr::null_mut());
     put_numa_group(grp);
@@ -3547,8 +3781,9 @@ pub unsafe extern "C" fn task_numa_free(p: *mut task_struct, final: bool) {
     kfree(numa_faults);
     } else {
     p.total_numa_faults = 0;
-    for (i = 0; i < NR_NUMA_HINT_FAULT_STATS * nr_node_ids; i++)
+    for (i = 0; i < NR_NUMA_HINT_FAULT_STATS * nr_node_ids; i++) {
     numa_faults[i] = 0;
+    }
     }
     }
 //
@@ -3556,36 +3791,38 @@ pub unsafe extern "C" fn task_numa_free(p: *mut task_struct, final: bool) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn task_numa_fault(last_cpupid: c_int, mem_node: c_int, pages: c_int, flags: c_int) {
-    void task_numa_fault(int last_cpupid, int mem_node, int pages, int flags)
-    {
-    struct task_struct *p = current;
-    let mut migrated: bool = flags & TNF_MIGRATED;
-    let mut cpu_node: c_int = task_node(current);
-    let mut local: c_int = !!(flags & TNF_FAULT_LOCAL);
-    struct numa_group *ng;
-    int priv;
-    if (!static_branch_likely(&sched_numa_balancing))
+    let mut p = current;
+pub static mut migrated: bool = false;
+pub static mut cpu_node: c_int = 0;
+pub static mut local: c_int = 0;
+pub static mut ng: *mut c_void = core::ptr::null_mut();
+    let mut priv = 0;
+    if (!static_branch_likely(&sched_numa_balancing)) {
     return;
+    }
 // for example, ksmd faulting in a user's mm
-    if (!p.mm)
+    if (!p.mm) {
     return;
+    }
 //
 // NUMA faults statistics are unnecessary for the slow memory
 // node for memory tiering mode.
 //
     if (!node_is_toptier(mem_node) &&
     (sysctl_numa_balancing_mode & NUMA_BALANCING_MEMORY_TIERING ||
-    !cpupid_valid(last_cpupid)))
+    !cpupid_valid(last_cpupid))) {
     return;
+    }
 // Allocate buffer to track faults on a per-node basis
     if (unlikely(!p.numa_faults)) {
-    int size = sizeof(*p.numa_faults) *
+    let mut size = sizeof!(*p.numa_faults) *
     NR_NUMA_HINT_FAULT_BUCKETS * nr_node_ids;
     p.numa_faults = kzalloc(size, GFP_KERNEL|__GFP_NOWARN);
-    if (!p.numa_faults)
+    if (!p.numa_faults) {
     return;
+    }
     p.total_numa_faults = 0;
-    memset(p.numa_faults_locality, 0, sizeof(p.numa_faults_locality));
+    memset(p.numa_faults_locality, 0, sizeof!(p.numa_faults_locality));
     }
 //
 // First accesses are treated as private, otherwise consider accesses
@@ -3595,8 +3832,9 @@ pub unsafe extern "C" fn task_numa_fault(last_cpupid: c_int, mem_node: c_int, pa
     priv = 1;
     } else {
     priv = cpupid_match_pid(p, last_cpupid);
-    if (!priv && !(flags & TNF_NO_GROUP))
+    if (!priv && !(flags & TNF_NO_GROUP)) {
     task_numa_group(p, last_cpupid, flags, &priv);
+    }
     }
 //
 // If a workload spans multiple NUMA nodes, a shared fault that
@@ -3607,8 +3845,9 @@ pub unsafe extern "C" fn task_numa_fault(last_cpupid: c_int, mem_node: c_int, pa
     ng = deref_curr_numa_group(p);
     if (!priv && !local && ng && ng.active_nodes > 1 &&
     numa_is_active_node(cpu_node, ng) &&
-    numa_is_active_node(mem_node, ng))
+    numa_is_active_node(mem_node, ng)) {
     local = 1;
+    }
 //
 // Retry to migrate task to preferred node periodically, in case it
 // previously failed, or the scheduler moved us.
@@ -3617,18 +3856,18 @@ pub unsafe extern "C" fn task_numa_fault(last_cpupid: c_int, mem_node: c_int, pa
     task_numa_placement(p);
     numa_migrate_preferred(p);
     }
-    if (migrated)
+    if (migrated) {
     p.numa_pages_migrated += pages;
-    if (flags & TNF_MIGRATE_FAIL)
+    }
+    if (flags & TNF_MIGRATE_FAIL) {
     p.numa_faults_locality[2] += pages;
+    }
     p.numa_faults[task_faults_idx(NUMA_MEMBUF, mem_node, priv)] += pages;
     p.numa_faults[task_faults_idx(NUMA_CPUBUF, cpu_node, priv)] += pages;
     p.numa_faults_locality[local] += pages;
     }
 #[no_mangle]
 unsafe extern "C" fn reset_ptenuma_scan(p: *mut task_struct) {
-    static void reset_ptenuma_scan(struct task_struct *p)
-    {
 //
 // We only did a read acquisition of the mmap sem, so
 // p->mm->numa_scan_seq is written to without exclusive access
@@ -3642,20 +3881,20 @@ unsafe extern "C" fn reset_ptenuma_scan(p: *mut task_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn vma_is_accessed(mm: *mut mm_struct, vma: *mut vm_area_struct) -> bool {
-    static bool vma_is_accessed(struct mm_struct *mm, struct vm_area_struct *vma)
-    {
-    unsigned long pids;
+    let mut pids = 0;
 //
 // Allow unconditional access first two times, so that all the (pages)
 // of VMAs get prot_none fault introduced irrespective of accesses.
 // This is also done to avoid any side effect of task scanning
 // amplifying the unfairness of disjoint set of VMAs' access.
 //
-    if ((READ_ONCE(current.mm.numa_scan_seq) - vma.numab_state.start_scan_seq) < 2)
+    if ((READ_ONCE(current.mm.numa_scan_seq) - vma.numab_state.start_scan_seq) < 2) {
     return true;
+    }
     pids = vma.numab_state.pids_active[0] | vma.numab_state.pids_active[1];
-    if (test_bit(hash_32(current.pid, ilog2(BITS_PER_LONG)), &pids))
+    if (test_bit(hash_32(current.pid, ilog2(BITS_PER_LONG)), &pids)) {
     return true;
+    }
 //
 // Complete a scan that has already started regardless of PID access, or
 // some VMAs may never be scanned in multi-threaded applications:
@@ -3670,8 +3909,9 @@ unsafe extern "C" fn vma_is_accessed(mm: *mut mm_struct, vma: *mut vm_area_struc
 // threads can help scan this vma, force a vma scan.
 //
     if (READ_ONCE(mm.numa_scan_seq) >
-    (vma.numab_state.prev_scan_seq + get_nr_threads(current)))
+    (vma.numab_state.prev_scan_seq + get_nr_threads(current))) {
     return true;
+    }
     return false;
     }
 
@@ -3681,20 +3921,19 @@ unsafe extern "C" fn vma_is_accessed(mm: *mut mm_struct, vma: *mut vm_area_struc
 //
 #[no_mangle]
 unsafe extern "C" fn task_numa_work(work: *mut callback_head) {
-    static void task_numa_work(struct callback_head *work)
-    {
     unsigned long migrate, next_scan, now = jiffies;
-    struct task_struct *p = current;
-    struct mm_struct *mm = p.mm;
-    let mut runtime: u64 = p.se.sum_exec_runtime;
-    struct vm_area_struct *vma;
+    let mut p = current;
+    let mut mm = p.mm;
+pub static mut runtime: u64 = 0;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
     unsigned long start, end;
-    let mut nr_pte_updates: c_ulong = 0;
-    long pages, virtpages;
-    struct vma_iterator vmi;
-    bool vma_pids_skipped;
-    let mut vma_pids_forced: bool = false;
-    WARN_ON_ONCE(p != container_of(work, struct task_struct, numa_work));
+pub static mut nr_pte_updates: c_ulong = 0;
+    let mut pages = 0;
+    let mut virtpages = 0;
+pub static mut vmi: usize = 0;
+    let mut vma_pids_skipped = 0;
+pub static mut vma_pids_forced: bool = false;
+    WARN_ON_ONCE!(p != container_of!(work, task_struct, numa_work));
     work.next = work;
 //
 // Who cares about NUMA placement when they're dying.
@@ -3704,8 +3943,9 @@ unsafe extern "C" fn task_numa_work(work: *mut callback_head) {
 // without p->mm even though we still had it when we enqueued this
 // work.
 //
-    if (p.flags & PF_EXITING)
+    if (p.flags & PF_EXITING) {
     return;
+    }
 //
 // Memory is pinned to only one NUMA node via cpuset.mems, naturally
 // no page can be migrated.
@@ -3722,15 +3962,17 @@ unsafe extern "C" fn task_numa_work(work: *mut callback_head) {
 // Enforce maximal scan/migration frequency..
 //
     migrate = mm.numa_next_scan;
-    if (time_before(now, migrate))
+    if (time_before(now, migrate)) {
     return;
+    }
     if (p.numa_scan_period == 0) {
     p.numa_scan_period_max = task_scan_max(p);
     p.numa_scan_period = task_scan_start(p);
     }
     next_scan = now + msecs_to_jiffies(p.numa_scan_period);
-    if (!try_cmpxchg(&mm.numa_next_scan, &migrate, next_scan))
+    if (!try_cmpxchg(&mm.numa_next_scan, &migrate, next_scan)) {
     return;
+    }
 //
 // Delay this task enough that another task of this mm will likely win
 // the next time around.
@@ -3739,17 +3981,19 @@ unsafe extern "C" fn task_numa_work(work: *mut callback_head) {
     pages = sysctl_numa_balancing_scan_size;
     pages <<= 20 - PAGE_SHIFT; /* MB in pages */
     virtpages = pages * 8;	   /* Scan up to this much virtual space */
-    if (!pages)
+    if (!pages) {
     return;
-    if (!mmap_read_trylock(mm))
+    }
+    if (!mmap_read_trylock(mm)) {
     return;
+    }
 //
 // VMAs are skipped if the current PID has not trapped a fault within
 // the VMA recently. Allow scanning to be forced if there is no
 // suitable VMA remaining.
 //
     vma_pids_skipped = false;
-    retry_pids:
+// label;
     start = mm.numa_scan_offset;
     vma_iter_init(&vmi, mm, start);
     vma = vma_next(&vmi);
@@ -3786,10 +4030,11 @@ unsafe extern "C" fn task_numa_work(work: *mut callback_head) {
     }
 // Initialise new per-VMA NUMAB state.
     if (!vma.numab_state) {
-    struct vma_numab_state *ptr;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
     ptr = kzalloc_obj(*ptr);
-    if (!ptr)
+    if (!ptr) {
     continue;
+    }
     if (cmpxchg(&vma.numab_state, core::ptr::null_mut(), ptr)) {
     kfree(ptr);
     continue;
@@ -3852,12 +4097,14 @@ unsafe extern "C" fn task_numa_work(work: *mut callback_head) {
 // PTEs, scan up to virtpages, to skip through those
 // areas faster.
 //
-    if (nr_pte_updates)
+    if (nr_pte_updates) {
     pages -= (end - start) >> PAGE_SHIFT;
+    }
     virtpages -= (end - start) >> PAGE_SHIFT;
     start = end;
-    if (pages <= 0 || virtpages <= 0)
-    goto out;
+    if (pages <= 0 || virtpages <= 0) {
+// goto;
+    }
     cond_resched();
     } while (end != vma.vm_end);
 // VMA scan is complete, do not scan until next sequence.
@@ -3866,8 +4113,9 @@ unsafe extern "C" fn task_numa_work(work: *mut callback_head) {
 // Only force scan within one VMA at a time, to limit the
 // cost of scanning a potentially uninteresting VMA.
 //
-    if (vma_pids_forced)
+    if (vma_pids_forced) {
     break;
+    }
     }
 //
 // If no VMAs are remaining and VMAs were skipped due to the PID
@@ -3876,19 +4124,21 @@ unsafe extern "C" fn task_numa_work(work: *mut callback_head) {
 //
     if (!vma && !vma_pids_forced && vma_pids_skipped) {
     vma_pids_forced = true;
-    goto retry_pids;
+// goto;
     }
-    out:
+// label;
 //
 // It is possible to reach the end of the VMA list but the last few
 // VMAs are not guaranteed to the vma_migratable. If they are not, we
 // would find the !migratable VMA on the next scan but not reset the
 // scanner to the start so check it now.
 //
-    if (vma)
+    if (vma) {
     mm.numa_scan_offset = start;
-    else
+    }
+    else {
     reset_ptenuma_scan(p);
+    }
     mmap_read_unlock(mm);
 //
 // Make sure tasks use at least 32x as much time to run other code
@@ -3897,16 +4147,14 @@ unsafe extern "C" fn task_numa_work(work: *mut callback_head) {
 // overloaded system we need to limit overhead on a per task basis.
 //
     if (unlikely(p.se.sum_exec_runtime != runtime)) {
-    let mut diff: u64 = p.se.sum_exec_runtime - runtime;
+pub static mut diff: u64 = 0;
     p.node_stamp += 32 * diff;
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn init_numa_balancing(clone_flags: u64, p: *mut task_struct) {
-    void init_numa_balancing(u64 clone_flags, struct task_struct *p)
-    {
-    let mut mm_users: c_int = 0;
-    struct mm_struct *mm = p.mm;
+pub static mut mm_users: c_int = 0;
+    let mut mm = p.mm;
     if (mm) {
     mm_users = atomic_read(&mm.mm_users);
     if (mm_users == 1) {
@@ -3937,7 +4185,7 @@ pub unsafe extern "C" fn init_numa_balancing(clone_flags: u64, p: *mut task_stru
 // already by arch_dup_task_struct but stagger when scans start.
 //
     if (mm) {
-    unsigned int delay;
+    let mut delay = 0;
     delay = min_t(unsigned int, task_scan_max(current),
     current.numa_scan_period * mm_users * NSEC_PER_MSEC);
     delay += 2 * TICK_NSEC;
@@ -3949,15 +4197,14 @@ pub unsafe extern "C" fn init_numa_balancing(clone_flags: u64, p: *mut task_stru
 //
 #[no_mangle]
 unsafe extern "C" fn task_tick_numa(rq: *mut rq, curr: *mut task_struct) {
-    static void task_tick_numa(struct rq *rq, struct task_struct *curr)
-    {
-    struct callback_head *work = &curr.numa_work;
+    let mut work = &curr.numa_work;
     u64 period, now;
 //
 // We don't care about NUMA placement if we don't have memory.
 //
-    if (!curr.mm || (curr.flags & (PF_EXITING | PF_KTHREAD)) || work.next != work)
+    if (!curr.mm || (curr.flags & (PF_EXITING | PF_KTHREAD)) || work.next != work) {
     return;
+    }
 //
 // Using runtime rather than walltime has the dual advantage that
 // we (mostly) drive the selection from busy threads and that the
@@ -3967,25 +4214,28 @@ unsafe extern "C" fn task_tick_numa(rq: *mut rq, curr: *mut task_struct) {
     now = curr.se.sum_exec_runtime;
     period = (u64)curr.numa_scan_period * NSEC_PER_MSEC;
     if (now > curr.node_stamp + period) {
-    if (!curr.node_stamp)
+    if (!curr.node_stamp) {
     curr.numa_scan_period = task_scan_start(curr);
+    }
     curr.node_stamp += period;
-    if (!time_before(jiffies, curr.mm.numa_next_scan))
+    if (!time_before(jiffies, curr.mm.numa_next_scan)) {
     task_work_add(curr, work, TWA_RESUME);
+    }
     }
     }
 #[no_mangle]
 unsafe extern "C" fn update_scan_period(p: *mut task_struct, new_cpu: c_int) {
-    static void update_scan_period(struct task_struct *p, int new_cpu)
-    {
-    let mut src_nid: c_int = cpu_to_node(task_cpu(p));
-    let mut dst_nid: c_int = cpu_to_node(new_cpu);
-    if (!static_branch_likely(&sched_numa_balancing))
+pub static mut src_nid: c_int = 0;
+pub static mut dst_nid: c_int = 0;
+    if (!static_branch_likely(&sched_numa_balancing)) {
     return;
-    if (!p.mm || !p.numa_faults || (p.flags & PF_EXITING))
+    }
+    if (!p.mm || !p.numa_faults || (p.flags & PF_EXITING)) {
     return;
-    if (src_nid == dst_nid)
+    }
+    if (src_nid == dst_nid) {
     return;
+    }
 //
 // Allow resets if faults have been trapped before one scan
 // has completed. This is most likely due to a new task that
@@ -3999,60 +4249,51 @@ unsafe extern "C" fn update_scan_period(p: *mut task_struct, new_cpu: c_int) {
 //
     if (dst_nid == p.numa_preferred_nid ||
     (p.numa_preferred_nid != NUMA_NO_NODE &&
-    src_nid != p.numa_preferred_nid))
+    src_nid != p.numa_preferred_nid)) {
     return;
+    }
     }
     p.numa_scan_period = task_scan_start(p);
     }
 
 #[no_mangle]
 unsafe extern "C" fn task_tick_numa(rq: *mut rq, curr: *mut task_struct) {
-    static void task_tick_numa(struct rq *rq, struct task_struct *curr)
-    {
     }
 #[no_mangle]
 pub unsafe extern "C" fn account_numa_enqueue(rq: *mut rq, p: *mut task_struct) {
-    static inline void account_numa_enqueue(struct rq *rq, struct task_struct *p)
-    {
     }
 #[no_mangle]
 pub unsafe extern "C" fn account_numa_dequeue(rq: *mut rq, p: *mut task_struct) {
-    static inline void account_numa_dequeue(struct rq *rq, struct task_struct *p)
-    {
     }
 #[no_mangle]
 pub unsafe extern "C" fn update_scan_period(p: *mut task_struct, new_cpu: c_int) {
-    static inline void update_scan_period(struct task_struct *p, int new_cpu)
-    {
     }
 
-    static void
-    account_entity_enqueue(struct cfs_rq *cfs_rq, struct sched_entity *se)
-    {
-    WARN_ON_ONCE(cfs_rq != cfs_rq_of(se));
+#[no_mangle]
+pub unsafe extern "C" fn account_entity_enqueue(cfs_rq: *mut cfs_rq, se: *mut sched_entity) {
+    WARN_ON_ONCE!(cfs_rq != cfs_rq_of(se));
     update_load_add(&cfs_rq.load, se.load.weight);
     if (entity_is_task(se)) {
-    struct task_struct *p = task_of(se);
-    struct rq *rq = rq_of(cfs_rq);
+    let mut p = task_of(se);
+    let mut rq = rq_of(cfs_rq);
     account_numa_enqueue(rq, p);
     account_llc_enqueue(rq, p);
     list_add(&se.group_node, &rq.cfs_tasks);
     }
-    cfs_rq.nr_queued++;
+    cfs_rq.nr_queued += 1;
     }
-    static void
-    account_entity_dequeue(struct cfs_rq *cfs_rq, struct sched_entity *se)
-    {
-    WARN_ON_ONCE(cfs_rq != cfs_rq_of(se));
+#[no_mangle]
+pub unsafe extern "C" fn account_entity_dequeue(cfs_rq: *mut cfs_rq, se: *mut sched_entity) {
+    WARN_ON_ONCE!(cfs_rq != cfs_rq_of(se));
     update_load_sub(&cfs_rq.load, se.load.weight);
     if (entity_is_task(se)) {
-    struct task_struct *p = task_of(se);
-    struct rq *rq = rq_of(cfs_rq);
+    let mut p = task_of(se);
+    let mut rq = rq_of(cfs_rq);
     account_numa_dequeue(rq, p);
     account_llc_dequeue(rq, p);
     list_del_init(&se.group_node);
     }
-    cfs_rq.nr_queued--;
+    cfs_rq.nr_queued -= 1;
     }
 //
 // Signed add and clamp on underflow.
@@ -4062,16 +4303,17 @@ pub unsafe extern "C" fn update_scan_period(p: *mut task_struct, new_cpu: c_int)
 // values.
 //
 
-    typeof(_ptr) ptr = (_ptr);                              \
-    __signed_scalar_typeof(*ptr) val = (_val);              \
-    typeof(*ptr) res, var = READ_ONCE(*ptr);                \
-    \
-    res = var + val;                                        \
-    \
-    if (val < 0 && res > var)                               \
-    res = 0;                                        \
-    \
-    WRITE_ONCE(*ptr, res);                                  \
+    typeof(_ptr) ptr = (_ptr);                              
+    __signed_scalar_typeof(*ptr) val = (_val);              
+    typeof(*ptr) res, var = READ_ONCE(*ptr);                
+    
+    res = var + val;                                        
+    
+    if (val < 0 && res > var)                                {
+    res = 0;                                        
+    }
+    
+    WRITE_ONCE(*ptr, res);                                  
     } while (0)
 //
 // Remove and clamp on negative, from a local variable.
@@ -4080,8 +4322,8 @@ pub unsafe extern "C" fn update_scan_period(p: *mut task_struct, new_cpu: c_int)
 // and is thus optimized for local variable updates.
 //
 
-    typeof(_ptr) ptr = (_ptr);				\
-// ptr -= min_t(typeof(*ptr), *ptr, _val);		\
+    typeof(_ptr) ptr = (_ptr);				
+// ptr -= min_t(typeof(*ptr), *ptr, _val);		
     } while (0)
 //
 // Because of rounding, se->util_sum might ends up being +1 more than
@@ -4096,28 +4338,25 @@ pub unsafe extern "C" fn update_scan_period(p: *mut task_struct, new_cpu: c_int)
 // util_avg * minimum possible divider
 //
 
-    add_positive(&(sa).name##_avg, delta_avg);		\
-    add_positive(&(sa).name##_sum, delta_sum);		\
-    (sa).name##_sum = max_t(typeof((sa).name##_sum),	\
-    (sa).name##_sum,		\
-    (sa).name##_avg * PELT_MIN_DIVIDER); \
+    add_positive(&(sa).name##_avg, delta_avg);		
+    add_positive(&(sa).name##_sum, delta_sum);		
+    (sa).name##_sum = max_t(typeof((sa).name##_sum),	
+    (sa).name##_sum,		
+    (sa).name##_avg * PELT_MIN_DIVIDER); 
     } while (0)
-    static inline void
-    enqueue_load_avg(struct cfs_rq *cfs_rq, struct sched_entity *se)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn enqueue_load_avg(cfs_rq: *mut cfs_rq, se: *mut sched_entity) {
     __update_sa(&cfs_rq.avg, load, se.avg.load_avg,
     se_weight(se) * se.avg.load_sum);
     }
-    static inline void
-    dequeue_load_avg(struct cfs_rq *cfs_rq, struct sched_entity *se)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn dequeue_load_avg(cfs_rq: *mut cfs_rq, se: *mut sched_entity) {
     __update_sa(&cfs_rq.avg, load, -se.avg.load_avg,
     se_weight(se) * -se.avg.load_sum);
     }
-    static void
-    rescale_entity(struct sched_entity *se, unsigned long weight, bool rel_vprot)
-    {
-    let mut old_weight: c_long = se.h_load.weight;
+#[no_mangle]
+pub unsafe extern "C" fn rescale_entity(se: *mut sched_entity, weight: c_ulong, rel_vprot: bool) {
+pub static mut old_weight: c_long = 0;
 //
 // VRUNTIME
 // --------
@@ -4206,19 +4445,21 @@ pub unsafe extern "C" fn update_scan_period(p: *mut task_struct, new_cpu: c_int)
 // = V  - (V - v)*w/w' + (d - v)*w/w'
 // = V  + (d - V)*w/w'
 //
-    if (se.rel_deadline)
+    if (se.rel_deadline) {
     se.deadline = div64_long(se.deadline * old_weight, weight);
-    if (rel_vprot)
+    }
+    if (rel_vprot) {
     se.vprot = div64_long(se.vprot * old_weight, weight);
     }
-    static void reweight_eevdf(struct cfs_rq *cfs_rq, struct sched_entity *se,
-    unsigned long weight, bool on_rq)
-    {
-    let mut curr: bool = cfs_rq.curr == se;
-    let mut rel_vprot: bool = false;
-    let mut avruntime: u64 = 0;
-    if (se.h_load.weight == weight)
+    }
+#[no_mangle]
+pub unsafe extern "C" fn reweight_eevdf(cfs_rq: *mut cfs_rq, se: *mut sched_entity, weight: c_ulong, on_rq: bool) {
+pub static mut curr: bool = false;
+pub static mut rel_vprot: bool = false;
+pub static mut avruntime: u64 = 0;
+    if (se.h_load.weight == weight) {
     return;
+    }
     if (on_rq) {
     avruntime = avg_vruntime(cfs_rq);
     se.vlag = entity_lag(cfs_rq, se, avruntime);
@@ -4228,41 +4469,45 @@ pub unsafe extern "C" fn update_scan_period(p: *mut task_struct, new_cpu: c_int)
     se.vprot -= avruntime;
     rel_vprot = true;
     }
-    cfs_rq.h_nr_queued--;
-    if (!curr)
+    cfs_rq.h_nr_queued -= 1;
+    if (!curr) {
     __dequeue_entity(cfs_rq, se);
+    }
     }
     rescale_entity(se, weight, rel_vprot);
     update_load_set(&se.h_load, weight);
     if (on_rq) {
-    if (rel_vprot)
+    if (rel_vprot) {
     se.vprot += avruntime;
+    }
     se.deadline += avruntime;
     se.rel_deadline = 0;
     se.vruntime = avruntime - se.vlag;
-    if (!curr)
+    if (!curr) {
     __enqueue_entity(cfs_rq, se);
-    cfs_rq.h_nr_queued++;
+    }
+    cfs_rq.h_nr_queued += 1;
     }
     }
-    static void reweight_entity(struct cfs_rq *cfs_rq, struct sched_entity *se,
-    unsigned long weight)
-    {
-    if (se.load.weight == weight)
+#[no_mangle]
+pub unsafe extern "C" fn reweight_entity(cfs_rq: *mut cfs_rq, se: *mut sched_entity, weight: c_ulong) {
+    if (se.load.weight == weight) {
     return;
+    }
     if (se.on_rq) {
-    WARN_ON_ONCE(cfs_rq != cfs_rq_of(se));
+    WARN_ON_ONCE!(cfs_rq != cfs_rq_of(se));
     update_load_sub(&cfs_rq.load, se.load.weight);
     }
     dequeue_load_avg(cfs_rq, se);
     update_load_set(&se.load, weight);
     do {
-    let mut divider: u32 = get_pelt_divider(&se.avg);
+pub static mut divider: u32 = 0;
     se.avg.load_avg = div_u64(se_weight(se) * se.avg.load_sum, divider);
     } while (0);
     enqueue_load_avg(cfs_rq, se);
-    if (se.on_rq)
+    if (se.on_rq) {
     update_load_add(&cfs_rq.load, se.load.weight);
+    }
     }
 //
 // weight = NICE_0_LOAD;
@@ -4270,32 +4515,35 @@ pub unsafe extern "C" fn update_scan_period(p: *mut task_struct, new_cpu: c_int)
 // weight = __calc_prop_weight(cfs_rq_of(se), se, weight);
 //
     static __always_inline
-    unsigned long __calc_prop_weight(struct cfs_rq *cfs_rq, struct sched_entity *se,
-    unsigned long weight)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __calc_prop_weight(cfs_rq: *mut cfs_rq, se: *mut sched_entity, weight: c_ulong) -> c_ulong {
     weight *= se.load.weight;
-    if (parent_entity(se))
+    if (parent_entity(se)) {
     weight /= cfs_rq.load.weight;
-    else
+    }
+    else {
     weight /= NICE_0_LOAD;
+    }
     return max(weight, MIN_SHARES);
     }
-    static void reweight_task_fair(struct rq *rq, struct task_struct *p,
-    const struct load_weight *lw)
-    {
-    struct sched_entity *se = &p.se;
-    let mut weight: c_ulong = NICE_0_LOAD;
-    if (se.on_rq)
+#[no_mangle]
+pub unsafe extern "C" fn reweight_task_fair(rq: *mut rq, p: *mut task_struct, lw: *mut load_weight) {
+    let mut se = &p.se;
+pub static mut weight: c_ulong = 0;
+    if (se.on_rq) {
     update_curr_fair(rq);
+    }
     reweight_entity(cfs_rq_of(se), se, lw.weight);
     se.load.inv_weight = lw.inv_weight;
-    if (!se.on_rq)
+    if (!se.on_rq) {
     return;
-    for_each_sched_entity(se)
+    }
+    for_each_sched_entity(se) {
     weight = __calc_prop_weight(cfs_rq_of(se), se, weight);
+    }
     reweight_eevdf(&rq.cfs, &p.se, weight, p.se.on_rq);
     }
-    static inline int throttled_hierarchy(struct cfs_rq *cfs_rq);
+// forward_decl: throttled_hierarchy;
 
 //
 // All this does is approximate the hierarchical proportion which includes that
@@ -4371,18 +4619,19 @@ pub unsafe extern "C" fn update_scan_period(p: *mut task_struct, new_cpu: c_int)
 //
 #[no_mangle]
 unsafe extern "C" fn __calc_smp_shares(cfs_rq: *mut cfs_rq, tg_shares: c_long, shares_max: c_long) -> c_long {
-    static long __calc_smp_shares(struct cfs_rq *cfs_rq, long tg_shares, long shares_max)
-    {
-    struct task_group *tg = cfs_rq.tg;
-    long tg_weight, load, shares;
+    let mut tg = cfs_rq.tg;
+    let mut tg_weight = 0;
+    let mut load = 0;
+    let mut shares = 0;
     load = max(scale_load_down(cfs_rq.load.weight), cfs_rq.avg.load_avg);
     tg_weight = atomic_long_read(&tg.load_avg);
 // Ensure tg_weight >= load
     tg_weight -= cfs_rq.tg_load_avg_contrib;
     tg_weight += load;
     shares = (tg_shares * load);
-    if (tg_weight)
+    if (tg_weight) {
     shares /= tg_weight;
+    }
 //
 // MIN_SHARES has to be unscaled here to support per-CPU partitioning
 // of a group with small tg->shares value. It is a floor value which is
@@ -4399,13 +4648,12 @@ unsafe extern "C" fn __calc_smp_shares(cfs_rq: *mut cfs_rq, tg_shares: c_long, s
     }
 #[no_mangle]
 unsafe extern "C" fn tg_cpus(tg: *mut task_group) -> c_int {
-    static int tg_cpus(struct task_group *tg)
-    {
-    let mut nr: c_int = num_online_cpus();
+pub static mut nr: c_int = 0;
     if (cpusets_enabled()) {
-    struct cgroup *cgrp = tg.css.cgroup;
-    if (cgrp)
+    let mut cgrp = tg.css.cgroup;
+    if (cgrp) {
     nr = cpuset_num_cpus(cgrp);
+    }
     }
 //
 // An empty cpuset would propagate a 0 shares_max into
@@ -4416,8 +4664,6 @@ unsafe extern "C" fn tg_cpus(tg: *mut task_group) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn tg_tasks(tg: *mut task_group) -> c_int {
-    static inline int tg_tasks(struct task_group *tg)
-    {
     return max(1, atomic_long_read(&tg.runnable_avg) >> SCHED_CAPACITY_SHIFT);
     }
 //
@@ -4427,11 +4673,9 @@ pub unsafe extern "C" fn tg_tasks(tg: *mut task_group) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn calc_tasks_shares(cfs_rq: *mut cfs_rq) -> c_long {
-    static long calc_tasks_shares(struct cfs_rq *cfs_rq)
-    {
-    struct task_group *tg = cfs_rq.tg;
-    let mut nr: c_int = tg_tasks(tg);
-    let mut tg_shares: c_long = READ_ONCE(tg.shares);
+    let mut tg = cfs_rq.tg;
+pub static mut nr: c_int = 0;
+pub static mut tg_shares: c_long = 0;
     return __calc_smp_shares(cfs_rq, nr * tg_shares, nr * tg_shares);
     }
 //
@@ -4443,12 +4687,10 @@ unsafe extern "C" fn calc_tasks_shares(cfs_rq: *mut cfs_rq) -> c_long {
 //
 #[no_mangle]
 unsafe extern "C" fn calc_max_shares(cfs_rq: *mut cfs_rq) -> c_long {
-    static long calc_max_shares(struct cfs_rq *cfs_rq)
-    {
-    struct task_group *tg = cfs_rq.tg;
-    let mut nr: c_int = tg_cpus(tg);
-    let mut tg_shares: c_long = READ_ONCE(tg.shares);
-    let mut max_shares: c_long = scale_load(sched_prio_to_weight[0]);
+    let mut tg = cfs_rq.tg;
+pub static mut nr: c_int = 0;
+pub static mut tg_shares: c_long = 0;
+pub static mut max_shares: c_long = 0;
     return __calc_smp_shares(cfs_rq, tg_shares * nr, max_shares);
     }
 //
@@ -4459,11 +4701,9 @@ unsafe extern "C" fn calc_max_shares(cfs_rq: *mut cfs_rq) -> c_long {
 //
 #[no_mangle]
 unsafe extern "C" fn calc_concur_shares(cfs_rq: *mut cfs_rq) -> c_long {
-    static long calc_concur_shares(struct cfs_rq *cfs_rq)
-    {
-    struct task_group *tg = cfs_rq.tg;
-    let mut nr: c_int = min(tg_tasks(tg), tg_cpus(tg));
-    let mut tg_shares: c_long = READ_ONCE(tg.shares);
+    let mut tg = cfs_rq.tg;
+pub static mut nr: c_int = 0;
+pub static mut tg_shares: c_long = 0;
     return __calc_smp_shares(cfs_rq, nr * tg_shares, nr * tg_shares);
     }
 //
@@ -4473,10 +4713,8 @@ unsafe extern "C" fn calc_concur_shares(cfs_rq: *mut cfs_rq) -> c_long {
 //
 #[no_mangle]
 unsafe extern "C" fn calc_smp_shares(cfs_rq: *mut cfs_rq) -> c_long {
-    static long calc_smp_shares(struct cfs_rq *cfs_rq)
-    {
-    struct task_group *tg = cfs_rq.tg;
-    let mut tg_shares: c_long = READ_ONCE(tg.shares);
+    let mut tg = cfs_rq.tg;
+pub static mut tg_shares: c_long = 0;
     return __calc_smp_shares(cfs_rq, tg_shares, tg_shares);
     }
 //
@@ -4484,34 +4722,36 @@ unsafe extern "C" fn calc_smp_shares(cfs_rq: *mut cfs_rq) -> c_long {
 //
 #[no_mangle]
 unsafe extern "C" fn calc_up_shares(cfs_rq: *mut cfs_rq) -> c_long {
-    static long calc_up_shares(struct cfs_rq *cfs_rq)
-    {
-    struct task_group *tg = cfs_rq.tg;
+    let mut tg = cfs_rq.tg;
     return READ_ONCE(tg.shares);
     }
-    DEFINE_STATIC_CALL(calc_group_shares, calc_concur_shares);
+pub static mut calc_group_shares: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn __sched_cgroup_mode_update(mode: c_int) {
-    void __sched_cgroup_mode_update(int mode)
-    {
-    long (*func)(struct cfs_rq *);
-    switch (mode) {
-    case 0:
+    long (*func);
+    match (mode) {
+    0 => {
     func = &calc_up_shares;
-    break;
-    case 1:
+    // break;
+    }
+    1 => {
     func = &calc_smp_shares;
-    break;
-    case 2:
-    default:
+    // break;
+    }
+    2 => {
+    }
+    _ => {
     func = &calc_concur_shares;
-    break;
-    case 3:
+    // break;
+    }
+    3 => {
     func = &calc_max_shares;
-    break;
-    case 4:
+    // break;
+    }
+    4 => {
     func = &calc_tasks_shares;
-    break;
+    // break;
+    }
     }
     static_call_update(calc_group_shares, func);
     }
@@ -4521,31 +4761,26 @@ pub unsafe extern "C" fn __sched_cgroup_mode_update(mode: c_int) {
 //
 #[no_mangle]
 unsafe extern "C" fn update_cfs_group(se: *mut sched_entity) {
-    static void update_cfs_group(struct sched_entity *se)
-    {
-    struct cfs_rq *gcfs_rq = group_cfs_rq(se);
-    long shares;
+    let mut gcfs_rq = group_cfs_rq(se);
+    let mut shares = 0;
 //
 // When a group becomes empty, preserve its weight. This matters for
 // DELAY_DEQUEUE.
 //
-    if (!gcfs_rq || !gcfs_rq.load.weight)
+    if (!gcfs_rq || !gcfs_rq.load.weight) {
     return;
+    }
     shares = static_call(calc_group_shares)(gcfs_rq);
     reweight_entity(cfs_rq_of(se), se, shares);
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn update_cfs_group(se: *mut sched_entity) {
-    static inline void update_cfs_group(struct sched_entity *se)
-    {
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn cfs_rq_util_change(cfs_rq: *mut cfs_rq, flags: c_int) {
-    static inline void cfs_rq_util_change(struct cfs_rq *cfs_rq, int flags)
-    {
-    struct rq *rq = rq_of(cfs_rq);
+    let mut rq = rq_of(cfs_rq);
     if (&rq.cfs == cfs_rq) {
 //
 // There are a few boundary cases this might miss but it should
@@ -4566,28 +4801,27 @@ pub unsafe extern "C" fn cfs_rq_util_change(cfs_rq: *mut cfs_rq, flags: c_int) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn load_avg_is_decayed(sa: *mut sched_avg) -> bool {
-    static inline bool load_avg_is_decayed(struct sched_avg *sa)
-    {
-    if (sa.load_sum)
+    if (sa.load_sum) {
     return false;
-    if (sa.util_sum)
+    }
+    if (sa.util_sum) {
     return false;
-    if (sa.runnable_sum)
+    }
+    if (sa.runnable_sum) {
     return false;
+    }
 //
 // _avg must be null when _sum are null because _avg = _sum / divider
 // Make sure that rounding and/or propagation of PELT values never
 // break this.
 //
-    WARN_ON_ONCE(sa.load_avg ||
+    WARN_ON_ONCE!(sa.load_avg ||
     sa.util_avg ||
     sa.runnable_avg);
     return true;
     }
 #[no_mangle]
 pub unsafe extern "C" fn cfs_rq_last_update_time(cfs_rq: *mut cfs_rq) -> u64 {
-    static inline u64 cfs_rq_last_update_time(struct cfs_rq *cfs_rq)
-    {
     return u64_u32_load_copy(cfs_rq.avg.last_update_time,
     cfs_rq.last_update_time_copy);
     }
@@ -4602,33 +4836,34 @@ pub unsafe extern "C" fn cfs_rq_last_update_time(cfs_rq: *mut cfs_rq) -> u64 {
 //
 #[no_mangle]
 pub unsafe extern "C" fn child_cfs_rq_on_list(cfs_rq: *mut cfs_rq) -> bool {
-    static inline bool child_cfs_rq_on_list(struct cfs_rq *cfs_rq)
-    {
-    struct cfs_rq *prev_cfs_rq;
-    struct list_head *prev;
-    struct rq *rq = rq_of(cfs_rq);
+pub static mut prev_cfs_rq: *mut c_void = core::ptr::null_mut();
+pub static mut prev: *mut c_void = core::ptr::null_mut();
+    let mut rq = rq_of(cfs_rq);
     if (cfs_rq.on_list) {
     prev = cfs_rq.leaf_cfs_rq_list.prev;
     } else {
     prev = rq.tmp_alone_branch;
     }
-    if (prev == &rq.leaf_cfs_rq_list)
+    if (prev == &rq.leaf_cfs_rq_list) {
     return false;
-    prev_cfs_rq = container_of(prev, struct cfs_rq, leaf_cfs_rq_list);
+    }
+    prev_cfs_rq = container_of!(prev, cfs_rq, leaf_cfs_rq_list);
     return (prev_cfs_rq.tg.parent == cfs_rq.tg);
     }
 #[no_mangle]
 pub unsafe extern "C" fn cfs_rq_is_decayed(cfs_rq: *mut cfs_rq) -> bool {
-    static inline bool cfs_rq_is_decayed(struct cfs_rq *cfs_rq)
-    {
-    if (cfs_rq.load.weight)
+    if (cfs_rq.load.weight) {
     return false;
-    if (!load_avg_is_decayed(&cfs_rq.avg))
+    }
+    if (!load_avg_is_decayed(&cfs_rq.avg)) {
     return false;
-    if (child_cfs_rq_on_list(cfs_rq))
+    }
+    if (child_cfs_rq_on_list(cfs_rq)) {
     return false;
-    if (cfs_rq.tg_load_avg_contrib)
+    }
+    if (cfs_rq.tg_load_avg_contrib) {
     return false;
+    }
     return true;
     }
 //
@@ -4647,25 +4882,27 @@ pub unsafe extern "C" fn cfs_rq_is_decayed(cfs_rq: *mut cfs_rq) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn update_tg_load_avg(cfs_rq: *mut cfs_rq) {
-    static inline void update_tg_load_avg(struct cfs_rq *cfs_rq)
-    {
-    long dl, dr;
-    u64 now;
+    let mut dl = 0;
+    let mut dr = 0;
+    let mut now = 0;
 //
 // No need to update load_avg for root_task_group as it is not used.
 //
-    if (cfs_rq.tg == &root_task_group)
+    if (cfs_rq.tg == &root_task_group) {
     return;
+    }
 // rq has been offline and doesn't contribute to the share anymore:
-    if (!cpu_active(cpu_of(rq_of(cfs_rq))))
+    if (!cpu_active(cpu_of(rq_of(cfs_rq)))) {
     return;
+    }
 //
 // For migration heavy workloads, access to tg->load_avg can be
 // unbound. Limit the update rate to at most once per ms.
 //
     now = rq_clock(rq_of(cfs_rq));
-    if (now - cfs_rq.last_update_tg_load_avg < NSEC_PER_MSEC)
+    if (now - cfs_rq.last_update_tg_load_avg < NSEC_PER_MSEC) {
     return;
+    }
     dl = cfs_rq.avg.load_avg - cfs_rq.tg_load_avg_contrib;
     dr = cfs_rq.avg.runnable_avg - cfs_rq.tg_runnable_avg_contrib;
     if (abs(dl) > cfs_rq.tg_load_avg_contrib / 64 ||
@@ -4679,15 +4916,15 @@ pub unsafe extern "C" fn update_tg_load_avg(cfs_rq: *mut cfs_rq) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn clear_tg_load_avg(cfs_rq: *mut cfs_rq) {
-    static inline void clear_tg_load_avg(struct cfs_rq *cfs_rq)
-    {
-    long dl, dr;
-    u64 now;
+    let mut dl = 0;
+    let mut dr = 0;
+    let mut now = 0;
 //
 // No need to update load_avg for root_task_group, as it is not used.
 //
-    if (cfs_rq.tg == &root_task_group)
+    if (cfs_rq.tg == &root_task_group) {
     return;
+    }
     now = rq_clock(rq_of(cfs_rq));
     dl = 0 - cfs_rq.tg_load_avg_contrib;
     dr = 0 - cfs_rq.tg_runnable_avg_contrib;
@@ -4700,9 +4937,7 @@ pub unsafe extern "C" fn clear_tg_load_avg(cfs_rq: *mut cfs_rq) {
 // CPU offline callback:
 #[no_mangle]
 unsafe extern "C" fn clear_tg_offline_cfs_rqs(rq: *mut rq) -> void __maybe_unused {
-    static void __maybe_unused clear_tg_offline_cfs_rqs(struct rq *rq)
-    {
-    struct task_group *tg;
+pub static mut tg: *mut c_void = core::ptr::null_mut();
     lockdep_assert_rq_held(rq);
 //
 // The rq clock has already been updated in
@@ -4712,7 +4947,7 @@ unsafe extern "C" fn clear_tg_offline_cfs_rqs(rq: *mut rq) -> void __maybe_unuse
     rq_clock_start_loop_update(rq);
     guard(rcu)();
     list_for_each_entry_rcu(tg, &task_groups, list) {
-    struct cfs_rq *cfs_rq = tg_cfs_rq(tg, cpu_of(rq));
+    let mut cfs_rq = tg_cfs_rq(tg, cpu_of(rq));
     clear_tg_load_avg(cfs_rq);
     }
     rq_clock_stop_loop_update(rq);
@@ -4722,13 +4957,13 @@ unsafe extern "C" fn clear_tg_offline_cfs_rqs(rq: *mut rq) -> void __maybe_unuse
 // caller only guarantees p->pi_lock is held; no other assumptions,
 // including the state of rq->lock, should be made.
 //
-    void set_task_rq_fair(struct sched_entity *se,
-    struct cfs_rq *prev, struct cfs_rq *next)
-    {
-    u64 p_last_update_time;
-    u64 n_last_update_time;
-    if (!sched_feat(ATTACH_AGE_LOAD))
+#[no_mangle]
+pub unsafe extern "C" fn set_task_rq_fair(se: *mut sched_entity, prev: *mut cfs_rq, next: *mut cfs_rq) {
+    let mut p_last_update_time = 0;
+    let mut n_last_update_time = 0;
+    if (!sched_feat(ATTACH_AGE_LOAD)) {
     return;
+    }
 //
 // We are supposed to update the task to "current" time, then its up to
 // date and ready to go to new CPU/cfs_rq. But we have difficulty in
@@ -4736,8 +4971,9 @@ unsafe extern "C" fn clear_tg_offline_cfs_rqs(rq: *mut rq) -> void __maybe_unuse
 // time. This will result in the wakee task is less decayed, but giving
 // the wakee more load sounds not bad.
 //
-    if (!(se.avg.last_update_time && prev))
+    if (!(se.avg.last_update_time && prev)) {
     return;
+    }
     p_last_update_time = cfs_rq_last_update_time(prev);
     n_last_update_time = cfs_rq_last_update_time(next);
     __update_load_avg_blocked_se(p_last_update_time, se);
@@ -4809,14 +5045,14 @@ unsafe extern "C" fn clear_tg_offline_cfs_rqs(rq: *mut rq) -> void __maybe_unuse
 //
 // XXX: only do this for the part of runnable > running ?
 //
-    static inline void
-    update_tg_cfs_util(struct cfs_rq *cfs_rq, struct sched_entity *se, struct cfs_rq *gcfs_rq)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn update_tg_cfs_util(cfs_rq: *mut cfs_rq, se: *mut sched_entity, gcfs_rq: *mut cfs_rq) {
     long delta_sum, delta_avg = gcfs_rq.avg.util_avg - se.avg.util_avg;
     u32 new_sum, divider;
 // Nothing to update
-    if (!delta_avg)
+    if (!delta_avg) {
     return;
+    }
 //
 // cfs_rq->avg.period_contrib can be used for both cfs_rq and se.
 // See ___update_load_avg() for details.
@@ -4830,15 +5066,15 @@ unsafe extern "C" fn clear_tg_offline_cfs_rqs(rq: *mut rq) -> void __maybe_unuse
 // Update parent cfs_rq utilization
     __update_sa(&cfs_rq.avg, util, delta_avg, delta_sum);
     }
-    static inline void
-    update_tg_cfs_runnable(struct cfs_rq *cfs_rq, struct sched_entity *se, struct cfs_rq *gcfs_rq)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn update_tg_cfs_runnable(cfs_rq: *mut cfs_rq, se: *mut sched_entity, gcfs_rq: *mut cfs_rq) {
     long delta_sum, delta_avg = gcfs_rq.avg.runnable_avg - se.avg.runnable_avg;
-    u64 new_sum;
-    u32 divider;
+    let mut new_sum = 0;
+    let mut divider = 0;
 // Nothing to update
-    if (!delta_avg)
+    if (!delta_avg) {
     return;
+    }
 //
 // cfs_rq->avg.period_contrib can be used for both cfs_rq and se.
 // See ___update_load_avg() for details.
@@ -4852,16 +5088,16 @@ unsafe extern "C" fn clear_tg_offline_cfs_rqs(rq: *mut rq) -> void __maybe_unuse
 // Update parent cfs_rq runnable
     __update_sa(&cfs_rq.avg, runnable, delta_avg, delta_sum);
     }
-    static inline void
-    update_tg_cfs_load(struct cfs_rq *cfs_rq, struct sched_entity *se, struct cfs_rq *gcfs_rq)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn update_tg_cfs_load(cfs_rq: *mut cfs_rq, se: *mut sched_entity, gcfs_rq: *mut cfs_rq) {
     long delta_avg, running_sum, runnable_sum = gcfs_rq.prop_runnable_sum;
-    unsigned long load_avg;
-    let mut load_sum: u64 = 0;
-    s64 delta_sum;
-    u32 divider;
-    if (!runnable_sum)
+    let mut load_avg = 0;
+pub static mut load_sum: u64 = 0;
+    let mut delta_sum = 0;
+    let mut divider = 0;
+    if (!runnable_sum) {
     return;
+    }
     gcfs_rq.prop_runnable_sum = 0;
 //
 // cfs_rq->avg.period_contrib can be used for both cfs_rq and se.
@@ -4898,8 +5134,9 @@ unsafe extern "C" fn clear_tg_offline_cfs_rqs(rq: *mut rq) -> void __maybe_unuse
     load_sum = se_weight(se) * runnable_sum;
     load_avg = div_u64(load_sum, divider);
     delta_avg = load_avg - se.avg.load_avg;
-    if (!delta_avg)
+    if (!delta_avg) {
     return;
+    }
     delta_sum = load_sum - (s64)se_weight(se) * se.avg.load_sum;
     se.avg.load_sum = runnable_sum;
     se.avg.load_avg = load_avg;
@@ -4907,22 +5144,21 @@ unsafe extern "C" fn clear_tg_offline_cfs_rqs(rq: *mut rq) -> void __maybe_unuse
     }
 #[no_mangle]
 pub unsafe extern "C" fn add_tg_cfs_propagate(cfs_rq: *mut cfs_rq, runnable_sum: c_long) {
-    static inline void add_tg_cfs_propagate(struct cfs_rq *cfs_rq, long runnable_sum)
-    {
     cfs_rq.propagate = 1;
     cfs_rq.prop_runnable_sum += runnable_sum;
     }
 // Update task and its cfs_rq load average
 #[no_mangle]
 pub unsafe extern "C" fn propagate_entity_load_avg(se: *mut sched_entity) -> c_int {
-    static inline int propagate_entity_load_avg(struct sched_entity *se)
-    {
-    struct cfs_rq *cfs_rq, *gcfs_rq;
-    if (entity_is_task(se))
+    let mut cfs_rq = core::ptr::null_mut();
+    let mut gcfs_rq = core::ptr::null_mut();
+    if (entity_is_task(se)) {
     return 0;
+    }
     gcfs_rq = group_cfs_rq(se);
-    if (!gcfs_rq.propagate)
+    if (!gcfs_rq.propagate) {
     return 0;
+    }
     gcfs_rq.propagate = 0;
     cfs_rq = cfs_rq_of(se);
     add_tg_cfs_propagate(cfs_rq, gcfs_rq.prop_runnable_sum);
@@ -4939,21 +5175,21 @@ pub unsafe extern "C" fn propagate_entity_load_avg(se: *mut sched_entity) -> c_i
 //
 #[no_mangle]
 pub unsafe extern "C" fn skip_blocked_update(se: *mut sched_entity) -> bool {
-    static inline bool skip_blocked_update(struct sched_entity *se)
-    {
-    struct cfs_rq *gcfs_rq = group_cfs_rq(se);
+    let mut gcfs_rq = group_cfs_rq(se);
 //
 // If sched_entity still have not zero load or utilization, we have to
 // decay it:
 //
-    if (se.avg.load_avg || se.avg.util_avg)
+    if (se.avg.load_avg || se.avg.util_avg) {
     return false;
+    }
 //
 // If there is a pending propagation, we have to update the load and
 // the utilization of the sched_entity:
 //
-    if (gcfs_rq.propagate)
+    if (gcfs_rq.propagate) {
     return false;
+    }
 //
 // Otherwise, the load and the utilization of the sched_entity is
 // already zero and there is no pending propagation, so it will be a
@@ -4962,26 +5198,32 @@ pub unsafe extern "C" fn skip_blocked_update(se: *mut sched_entity) -> bool {
     return true;
     }
 
-    static inline void update_tg_load_avg(struct cfs_rq *cfs_rq) {}
-    static inline void clear_tg_offline_cfs_rqs(struct rq *rq) {}
 #[no_mangle]
-pub unsafe extern "C" fn propagate_entity_load_avg(se: *mut sched_entity) -> c_int {
-    static inline int propagate_entity_load_avg(struct sched_entity *se)
-    {
+#[no_mangle]
+// duplicate fn: update_tg_load_avg
+pub unsafe extern "C" fn update_tg_load_avg_dup(cfs_rq: *mut cfs_rq) {}
+#[no_mangle]
+pub unsafe extern "C" fn clear_tg_offline_cfs_rqs(rq: *mut rq) {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: propagate_entity_load_avg
+pub unsafe extern "C" fn propagate_entity_load_avg_dup(se: *mut sched_entity) -> c_int {
     return 0;
     }
-    static inline void add_tg_cfs_propagate(struct cfs_rq *cfs_rq, long runnable_sum) {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: add_tg_cfs_propagate
+pub unsafe extern "C" fn add_tg_cfs_propagate_dup(cfs_rq: *mut cfs_rq, runnable_sum: c_long) {}
 
 #[no_mangle]
 pub unsafe extern "C" fn migrate_se_pelt_lag(se: *mut sched_entity) {
-    static inline void migrate_se_pelt_lag(struct sched_entity *se)
-    {
-    let mut throttled: u64 = 0, now, lut;
-    struct cfs_rq *cfs_rq;
-    struct rq *rq;
-    bool is_idle;
-    if (load_avg_is_decayed(&se.avg))
+pub static mut throttled: u64 = 0;
+pub static mut cfs_rq: *mut c_void = core::ptr::null_mut();
+pub static mut rq: *mut c_void = core::ptr::null_mut();
+    let mut is_idle = 0;
+    if (load_avg_is_decayed(&se.avg)) {
     return;
+    }
     cfs_rq = cfs_rq_of(se);
     rq = rq_of(cfs_rq);
     rcu_read_lock();
@@ -4992,8 +5234,9 @@ pub unsafe extern "C" fn migrate_se_pelt_lag(se: *mut sched_entity) {
 // time. Hence, limiting to the case where the source CPU is idle and
 // we know we are at the greatest risk to have an outdated clock.
 //
-    if (!is_idle)
+    if (!is_idle) {
     return;
+    }
 //
 // Estimated "now" is: last_update_time + cfs_idle_lag + rq_idle_lag, where:
 //
@@ -5021,8 +5264,9 @@ pub unsafe extern "C" fn migrate_se_pelt_lag(se: *mut sched_entity) {
 
     throttled = u64_u32_load(cfs_rq.throttled_pelt_idle);
 // The clock has been stopped for throttling
-    if (throttled == U64_MAX)
+    if (throttled == U64_MAX) {
     return;
+    }
 
     now = u64_u32_load(rq.clock_pelt_idle);
 //
@@ -5034,18 +5278,23 @@ pub unsafe extern "C" fn migrate_se_pelt_lag(se: *mut sched_entity) {
     smp_rmb();
     lut = cfs_rq_last_update_time(cfs_rq);
     now -= throttled;
-    if (now < lut)
+    if (now < lut) {
 //
 // cfs_rq->avg.last_update_time is more recent than our
 // estimation, let's use it.
 //
     now = lut;
-    else
+    }
+    else {
     now += sched_clock_cpu(cpu_of(rq)) - u64_u32_load(rq.clock_idle);
+    }
     __update_load_avg_blocked_se(now, se);
     }
 
-    static void migrate_se_pelt_lag(struct sched_entity *se) {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: migrate_se_pelt_lag
+pub unsafe extern "C" fn migrate_se_pelt_lag_dup(se: *mut sched_entity) {}
 
 //
 // update_cfs_rq_load_avg - update the cfs_rq's load/util averages
@@ -5062,15 +5311,14 @@ pub unsafe extern "C" fn migrate_se_pelt_lag(se: *mut sched_entity) {
 // Since both these conditions indicate a changed cfs_rq->avg.load we should
 // call update_tg_load_avg() when this function returns true.
 //
-    static inline int
-    update_cfs_rq_load_avg(u64 now, struct cfs_rq *cfs_rq)
-    {
-    let mut removed_load: c_ulong = 0, removed_util = 0, removed_runnable = 0;
-    struct sched_avg *sa = &cfs_rq.avg;
-    let mut decayed: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn update_cfs_rq_load_avg(now: u64, cfs_rq: *mut cfs_rq) -> c_int {
+pub static mut removed_load: c_ulong = 0;
+    let mut sa = &cfs_rq.avg;
+pub static mut decayed: c_int = 0;
     if (cfs_rq.removed.nr) {
-    unsigned long r;
-    let mut divider: u32 = get_pelt_divider(&cfs_rq.avg);
+    let mut r = 0;
+pub static mut divider: u32 = 0;
     raw_spin_lock(&cfs_rq.removed.lock);
     swap(cfs_rq.removed.util_avg, removed_util);
     swap(cfs_rq.removed.load_avg, removed_load);
@@ -5092,9 +5340,7 @@ pub unsafe extern "C" fn migrate_se_pelt_lag(se: *mut sched_entity) {
     decayed = 1;
     }
     decayed |= __update_load_avg_cfs_rq(now, cfs_rq);
-    u64_u32_store_copy(sa.last_update_time,
-    cfs_rq.last_update_time_copy,
-    sa.last_update_time);
+// forward_decl: _u32_store_copy;
     return decayed;
     }
 //
@@ -5107,13 +5353,11 @@ pub unsafe extern "C" fn migrate_se_pelt_lag(se: *mut sched_entity) {
 //
 #[no_mangle]
 unsafe extern "C" fn attach_entity_load_avg(cfs_rq: *mut cfs_rq, se: *mut sched_entity) {
-    static void attach_entity_load_avg(struct cfs_rq *cfs_rq, struct sched_entity *se)
-    {
 //
 // cfs_rq->avg.period_contrib can be used for both cfs_rq and se.
 // See ___update_load_avg() for details.
 //
-    let mut divider: u32 = get_pelt_divider(&cfs_rq.avg);
+pub static mut divider: u32 = 0;
 //
 // When we attach the @se to the @cfs_rq, we must align the decay
 // window because without that, really weird and wonderful things can
@@ -5132,10 +5376,12 @@ unsafe extern "C" fn attach_entity_load_avg(cfs_rq: *mut cfs_rq, se: *mut sched_
     se.avg.util_sum = se.avg.util_avg * divider;
     se.avg.runnable_sum = se.avg.runnable_avg * divider;
     se.avg.load_sum = se.avg.load_avg * divider;
-    if (se_weight(se) < se.avg.load_sum)
+    if (se_weight(se) < se.avg.load_sum) {
     se.avg.load_sum = div_u64(se.avg.load_sum, se_weight(se));
-    else
+    }
+    else {
     se.avg.load_sum = 1;
+    }
     enqueue_load_avg(cfs_rq, se);
     cfs_rq.avg.util_avg += se.avg.util_avg;
     cfs_rq.avg.util_sum += se.avg.util_sum;
@@ -5155,8 +5401,6 @@ unsafe extern "C" fn attach_entity_load_avg(cfs_rq: *mut cfs_rq, se: *mut sched_
 //
 #[no_mangle]
 unsafe extern "C" fn detach_entity_load_avg(cfs_rq: *mut cfs_rq, se: *mut sched_entity) {
-    static void detach_entity_load_avg(struct cfs_rq *cfs_rq, struct sched_entity *se)
-    {
     dequeue_load_avg(cfs_rq, se);
     __update_sa(&cfs_rq.avg, util, -se.avg.util_avg, -se.avg.util_sum);
     __update_sa(&cfs_rq.avg, runnable, -se.avg.runnable_avg, -se.avg.runnable_sum);
@@ -5167,19 +5411,21 @@ unsafe extern "C" fn detach_entity_load_avg(cfs_rq: *mut cfs_rq, se: *mut sched_
 
 #[no_mangle]
 pub unsafe extern "C" fn util_est_update(se: *mut sched_entity) {
-    static inline void util_est_update(struct sched_entity *se)
-    {
-    unsigned int ewma, dequeued, last_ewma_diff;
-    if (!sched_feat(UTIL_EST))
+    let mut ewma = 0;
+    let mut dequeued = 0;
+    let mut last_ewma_diff = 0;
+    if (!sched_feat(UTIL_EST)) {
     return;
+    }
 // Get current estimate of utilization
     ewma = READ_ONCE(se.avg.util_est);
 //
 // If the PELT values haven't changed since enqueue time,
 // skip the util_est update.
 //
-    if (ewma & UTIL_AVG_UNCHANGED)
+    if (ewma & UTIL_AVG_UNCHANGED) {
     return;
+    }
 // Get utilization at dequeue
     dequeued = READ_ONCE(se.avg.util_avg);
 //
@@ -5188,21 +5434,23 @@ pub unsafe extern "C" fn util_est_update(se: *mut sched_entity) {
 //
     if (ewma <= dequeued) {
     ewma = dequeued;
-    goto done;
+// goto;
     }
 //
 // Skip update of task's estimated utilization when its members are
 // already ~1% close to its last activation value.
 //
     last_ewma_diff = ewma - dequeued;
-    if (last_ewma_diff < UTIL_EST_MARGIN)
-    goto done;
+    if (last_ewma_diff < UTIL_EST_MARGIN) {
+// goto;
+    }
 //
 // To avoid underestimate of task utilization, skip updates of EWMA if
 // we cannot grant that thread got all CPU time it wanted.
 //
-    if ((dequeued + UTIL_EST_MARGIN) < READ_ONCE(se.avg.runnable_avg))
-    goto done;
+    if ((dequeued + UTIL_EST_MARGIN) < READ_ONCE(se.avg.runnable_avg)) {
+// goto;
+    }
 //
 // Update Task's estimated utilization
 //
@@ -5222,7 +5470,7 @@ pub unsafe extern "C" fn util_est_update(se: *mut sched_entity) {
     ewma <<= UTIL_EST_WEIGHT_SHIFT;
     ewma  -= last_ewma_diff;
     ewma >>= UTIL_EST_WEIGHT_SHIFT;
-    done:
+// label;
     ewma |= UTIL_AVG_UNCHANGED;
     WRITE_ONCE(se.avg.util_est, ewma);
     trace_sched_util_est_se_tp(se);
@@ -5238,16 +5486,15 @@ pub const UPDATE_UTIL_EST: c_uint = 0x10;
 // Update task and its cfs_rq load average
 #[no_mangle]
 pub unsafe extern "C" fn update_load_avg(cfs_rq: *mut cfs_rq, se: *mut sched_entity, flags: c_int) {
-    static inline void update_load_avg(struct cfs_rq *cfs_rq, struct sched_entity *se, int flags)
-    {
-    let mut now: u64 = cfs_rq_clock_pelt(cfs_rq);
-    int decayed;
+pub static mut now: u64 = 0;
+    let mut decayed = 0;
 //
 // Track task load average for carrying it to new CPU after migrated, and
 // track group sched_entity load average for task_h_load calculation in migration
 //
-    if (se.avg.last_update_time && !(flags & SKIP_AGE_LOAD))
+    if (se.avg.last_update_time && !(flags & SKIP_AGE_LOAD)) {
     __update_load_avg_se(now, cfs_rq, se);
+    }
     decayed  = update_cfs_rq_load_avg(now, cfs_rq);
     decayed |= propagate_entity_load_avg(se);
     if (!se.avg.last_update_time && (flags & DO_ATTACH)) {
@@ -5269,11 +5516,13 @@ pub unsafe extern "C" fn update_load_avg(cfs_rq: *mut cfs_rq, se: *mut sched_ent
     update_tg_load_avg(cfs_rq);
     } else if (decayed) {
     cfs_rq_util_change(cfs_rq, 0);
-    if (flags & UPDATE_TG)
+    if (flags & UPDATE_TG) {
     update_tg_load_avg(cfs_rq);
     }
-    if (flags & UPDATE_UTIL_EST)
+    }
+    if (flags & UPDATE_UTIL_EST) {
     util_est_update(se);
+    }
     }
 //
 // Synchronize entity load avg of dequeued entity without locking
@@ -5281,10 +5530,8 @@ pub unsafe extern "C" fn update_load_avg(cfs_rq: *mut cfs_rq, se: *mut sched_ent
 //
 #[no_mangle]
 unsafe extern "C" fn sync_entity_load_avg(se: *mut sched_entity) {
-    static void sync_entity_load_avg(struct sched_entity *se)
-    {
-    struct cfs_rq *cfs_rq = cfs_rq_of(se);
-    u64 last_update_time;
+    let mut cfs_rq = cfs_rq_of(se);
+    let mut last_update_time = 0;
     last_update_time = cfs_rq_last_update_time(cfs_rq);
     __update_load_avg_blocked_se(last_update_time, se);
     }
@@ -5294,10 +5541,8 @@ unsafe extern "C" fn sync_entity_load_avg(se: *mut sched_entity) {
 //
 #[no_mangle]
 unsafe extern "C" fn remove_entity_load_avg(se: *mut sched_entity) {
-    static void remove_entity_load_avg(struct sched_entity *se)
-    {
-    struct cfs_rq *cfs_rq = cfs_rq_of(se);
-    unsigned long flags;
+    let mut cfs_rq = cfs_rq_of(se);
+    let mut flags = 0;
 //
 // tasks cannot exit without having gone through wake_up_new_task() ->
 // enqueue_task_fair() which will have added things to the cfs_rq,
@@ -5313,56 +5558,45 @@ unsafe extern "C" fn remove_entity_load_avg(se: *mut sched_entity) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn cfs_rq_runnable_avg(cfs_rq: *mut cfs_rq) -> c_ulong {
-    static inline unsigned long cfs_rq_runnable_avg(struct cfs_rq *cfs_rq)
-    {
     return cfs_rq.avg.runnable_avg;
     }
 #[no_mangle]
 pub unsafe extern "C" fn cfs_rq_load_avg(cfs_rq: *mut cfs_rq) -> c_ulong {
-    static inline unsigned long cfs_rq_load_avg(struct cfs_rq *cfs_rq)
-    {
     return cfs_rq.avg.load_avg;
     }
 #[no_mangle]
 unsafe extern "C" fn sched_balance_newidle(this_rq: *mut rq, rf: *mut rq_flags) -> c_int {
-    static int sched_balance_newidle(struct rq *this_rq, struct rq_flags *rf)
-    __must_hold(__rq_lockp(this_rq));
+// forward_decl: sched_balance_newidle;
 #[no_mangle]
 pub unsafe extern "C" fn task_util(p: *mut task_struct) -> c_ulong {
-    static inline unsigned long task_util(struct task_struct *p)
-    {
     return READ_ONCE(p.se.avg.util_avg);
     }
 #[no_mangle]
 pub unsafe extern "C" fn _task_util_est(p: *mut task_struct) -> c_ulong {
-    static inline unsigned long _task_util_est(struct task_struct *p)
-    {
     return READ_ONCE(p.se.avg.util_est) & ~UTIL_AVG_UNCHANGED;
     }
 #[no_mangle]
 pub unsafe extern "C" fn task_util_est(p: *mut task_struct) -> c_ulong {
-    static inline unsigned long task_util_est(struct task_struct *p)
-    {
     return max(task_util(p), _task_util_est(p));
     }
-    static inline void util_est_enqueue(struct cfs_rq *cfs_rq,
-    struct task_struct *p)
-    {
-    unsigned int enqueued;
-    if (!sched_feat(UTIL_EST))
+#[no_mangle]
+pub unsafe extern "C" fn util_est_enqueue(cfs_rq: *mut cfs_rq, p: *mut task_struct) {
+    let mut enqueued = 0;
+    if (!sched_feat(UTIL_EST)) {
     return;
+    }
 // Update root cfs_rq's estimated utilization
     enqueued  = cfs_rq.avg.util_est;
     enqueued += _task_util_est(p);
     WRITE_ONCE(cfs_rq.avg.util_est, enqueued);
     trace_sched_util_est_cfs_tp(cfs_rq);
     }
-    static inline void util_est_dequeue(struct cfs_rq *cfs_rq,
-    struct task_struct *p)
-    {
-    unsigned int enqueued;
-    if (!sched_feat(UTIL_EST))
+#[no_mangle]
+pub unsafe extern "C" fn util_est_dequeue(cfs_rq: *mut cfs_rq, p: *mut task_struct) {
+    let mut enqueued = 0;
+    if (!sched_feat(UTIL_EST)) {
     return;
+    }
 // Update root cfs_rq's estimated utilization
     enqueued  = cfs_rq.avg.util_est;
     enqueued -= min_t(unsigned int, enqueued, _task_util_est(p));
@@ -5371,26 +5605,23 @@ pub unsafe extern "C" fn task_util_est(p: *mut task_struct) -> c_ulong {
     }
 #[no_mangle]
 pub unsafe extern "C" fn get_actual_cpu_capacity(cpu: c_int) -> c_ulong {
-    static inline unsigned long get_actual_cpu_capacity(int cpu)
-    {
-    let mut capacity: c_ulong = arch_scale_cpu_capacity(cpu);
+pub static mut capacity: c_ulong = 0;
     capacity -= max(hw_load_avg(cpu_rq(cpu)), cpufreq_get_pressure(cpu));
     return capacity;
     }
-    static inline int util_fits_cpu(unsigned long util,
-    unsigned long uclamp_min,
-    unsigned long uclamp_max,
-    int cpu)
-    {
-    let mut capacity: c_ulong = capacity_of(cpu);
-    unsigned long capacity_orig;
-    bool fits, uclamp_max_fits;
+#[no_mangle]
+pub unsafe extern "C" fn util_fits_cpu(util: c_ulong, uclamp_min: c_ulong, uclamp_max: c_ulong, cpu: c_int) -> c_int {
+pub static mut capacity: c_ulong = 0;
+    let mut capacity_orig = 0;
+    let mut fits = 0;
+    let mut uclamp_max_fits = 0;
 //
 // Check if the real util fits without any uclamp boost/cap applied.
 //
     fits = fits_capacity(util, capacity);
-    if (!uclamp_is_used())
+    if (!uclamp_is_used()) {
     return fits;
+    }
 //
 // We must use arch_scale_cpu_capacity() for comparing against uclamp_min and
 // uclamp_max. We only care about capacity pressure (by using
@@ -5482,17 +5713,16 @@ pub unsafe extern "C" fn get_actual_cpu_capacity(cpu: c_int) -> c_ulong {
 //
     uclamp_min = min(uclamp_min, uclamp_max);
     if (fits && (util < uclamp_min) &&
-    (uclamp_min > get_actual_cpu_capacity(cpu)))
+    (uclamp_min > get_actual_cpu_capacity(cpu))) {
     return -1;
+    }
     return fits;
     }
 #[no_mangle]
 pub unsafe extern "C" fn task_fits_cpu(p: *mut task_struct, cpu: c_int) -> c_int {
-    static inline int task_fits_cpu(struct task_struct *p, int cpu)
-    {
-    let mut uclamp_min: c_ulong = uclamp_eff_value(p, UCLAMP_MIN);
-    let mut uclamp_max: c_ulong = uclamp_eff_value(p, UCLAMP_MAX);
-    let mut util: c_ulong = task_util_est(p);
+pub static mut uclamp_min: c_ulong = 0;
+pub static mut uclamp_max: c_ulong = 0;
+pub static mut util: c_ulong = 0;
 //
 // Return true only if the cpu fully fits the task requirements, which
 // include the utilization but also the performance hints.
@@ -5501,11 +5731,10 @@ pub unsafe extern "C" fn task_fits_cpu(p: *mut task_struct, cpu: c_int) -> c_int
     }
 #[no_mangle]
 pub unsafe extern "C" fn update_misfit_status(p: *mut task_struct, rq: *mut rq) {
-    static inline void update_misfit_status(struct task_struct *p, struct rq *rq)
-    {
-    let mut cpu: c_int = cpu_of(rq);
-    if (!sched_asym_cpucap_active())
+pub static mut cpu: c_int = 0;
+    if (!sched_asym_cpucap_active()) {
     return;
+    }
 //
 // Affinity allows us to go somewhere higher?  Or are we on biggest
 // available CPU already? Or do we fit into this CPU ?
@@ -5524,9 +5753,7 @@ pub unsafe extern "C" fn update_misfit_status(p: *mut task_struct, rq: *mut rq) 
     }
 #[no_mangle]
 pub unsafe extern "C" fn __setparam_fair(p: *mut task_struct, attr: *const sched_attr) {
-    void __setparam_fair(struct task_struct *p, const struct sched_attr *attr)
-    {
-    struct sched_entity *se = &p.se;
+    let mut se = &p.se;
     p.static_prio = NICE_TO_PRIO(attr.sched_nice);
     if (attr.sched_runtime) {
     se.custom_slice = 1;
@@ -5538,18 +5765,19 @@ pub unsafe extern "C" fn __setparam_fair(p: *mut task_struct, attr: *const sched
     se.slice = sysctl_sched_base_slice;
     }
     }
-    static void
-    place_entity(struct cfs_rq *cfs_rq, struct sched_entity *se, int flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn place_entity(cfs_rq: *mut cfs_rq, se: *mut sched_entity, flags: c_int) {
     u64 vslice, vruntime = avg_vruntime(cfs_rq);
-    let mut nr_queued: c_uint = cfs_rq.h_nr_queued;
-    let mut update_zero: bool = false;
-    let mut lag: i64 = 0;
-    if (!se.custom_slice)
+pub static mut nr_queued: c_uint = 0;
+pub static mut update_zero: bool = false;
+pub static mut lag: i64 = 0;
+    if (!se.custom_slice) {
     se.slice = sysctl_sched_base_slice;
+    }
     vslice = calc_delta_fair(se.slice, se);
-    if (flags & ENQUEUE_QUEUED)
+    if (flags & ENQUEUE_QUEUED) {
     nr_queued -= 1;
+    }
 //
 // Due to how V is constructed as the weighted average of entities,
 // adding tasks with positive lag, or removing tasks with negative lag
@@ -5559,8 +5787,9 @@ pub unsafe extern "C" fn __setparam_fair(p: *mut task_struct, attr: *const sched
 // EEVDF: placement strategy #1 / #2
 //
     if (sched_feat(PLACE_LAG) && nr_queued && se.vlag) {
-    struct sched_entity *curr = cfs_rq.curr;
-    long load, weight;
+    let mut curr = cfs_rq.curr;
+    let mut load = 0;
+    let mut weight = 0;
     lag = se.vlag;
 //
 // If we want to place a task and preserve lag, we have to
@@ -5615,12 +5844,14 @@ pub unsafe extern "C" fn __setparam_fair(p: *mut task_struct, attr: *const sched
 // vl_i = (W + w_i)*vl'_i / W
 //
     load = cfs_rq.sum_weight;
-    if (curr && curr.on_rq)
+    if (curr && curr.on_rq) {
     load += avg_vruntime_weight(cfs_rq, curr.h_load.weight);
+    }
     weight = avg_vruntime_weight(cfs_rq, se.h_load.weight);
     lag *= load + weight;
-    if (WARN_ON_ONCE(!load))
+    if (WARN_ON_ONCE!(!load)) {
     load = 1;
+    }
     lag = div64_long(lag, load);
 //
 // A heavy entity (relative to the tree) will pull the
@@ -5642,12 +5873,14 @@ pub unsafe extern "C" fn __setparam_fair(p: *mut task_struct, attr: *const sched
 // for the heavy entity the difference is small but the factor
 // is large. Avoiding the multiplication overflow.
 //
-    if (weight > load)
+    if (weight > load) {
     update_zero = true;
     }
+    }
     se.vruntime = vruntime - lag;
-    if (update_zero)
+    if (update_zero) {
     update_zero_vruntime(cfs_rq, -lag);
+    }
     if (sched_feat(PLACE_REL_DEADLINE) && se.rel_deadline) {
     se.deadline += se.vruntime;
     se.rel_deadline = 0;
@@ -5658,18 +5891,18 @@ pub unsafe extern "C" fn __setparam_fair(p: *mut task_struct, attr: *const sched
 // on average, halfway through their slice, as such start tasks
 // off with half a slice to ease into the competition.
 //
-    if (sched_feat(PLACE_DEADLINE_INITIAL) && (flags & ENQUEUE_INITIAL))
+    if (sched_feat(PLACE_DEADLINE_INITIAL) && (flags & ENQUEUE_INITIAL)) {
     vslice /= 2;
+    }
 //
 // EEVDF: vd_i = ve_i + r_i/w_i
 //
     se.deadline = se.vruntime + vslice;
     }
-    static void check_enqueue_throttle(struct cfs_rq *cfs_rq);
-    static inline int cfs_rq_throttled(struct cfs_rq *cfs_rq);
-    static void
-    enqueue_entity(struct cfs_rq *cfs_rq, struct sched_entity *se, int flags)
-    {
+// forward_decl: check_enqueue_throttle;
+// forward_decl: cfs_rq_throttled;
+#[no_mangle]
+pub unsafe extern "C" fn enqueue_entity(cfs_rq: *mut cfs_rq, se: *mut sched_entity, flags: c_int) {
 //
 // When enqueuing a sched_entity, we must:
 // - Update loads to have both entity and cfs_rq synced with now.
@@ -5689,8 +5922,9 @@ pub unsafe extern "C" fn __setparam_fair(p: *mut task_struct, attr: *const sched
     update_cfs_group(se);
     account_entity_enqueue(cfs_rq, se);
 // Entity has migrated, no longer consider this task hot
-    if (flags & ENQUEUE_MIGRATED)
+    if (flags & ENQUEUE_MIGRATED) {
     se.exec_start = 0;
+    }
     check_schedstat_required();
     update_stats_enqueue_fair(cfs_rq, se, flags);
     se.on_rq = 1;
@@ -5699,7 +5933,7 @@ pub unsafe extern "C" fn __setparam_fair(p: *mut task_struct, attr: *const sched
     list_add_leaf_cfs_rq(cfs_rq);
 
     if (cfs_rq.pelt_clock_throttled) {
-    struct rq *rq = rq_of(cfs_rq);
+    let mut rq = rq_of(cfs_rq);
     cfs_rq.throttled_clock_pelt_time += rq_clock_pelt(rq) -
     cfs_rq.throttled_clock_pelt;
     cfs_rq.pelt_clock_throttled = 0;
@@ -5709,43 +5943,39 @@ pub unsafe extern "C" fn __setparam_fair(p: *mut task_struct, attr: *const sched
     }
 #[no_mangle]
 unsafe extern "C" fn set_next_buddy(cfs_rq: *mut cfs_rq, se: *mut sched_entity) {
-    static void set_next_buddy(struct cfs_rq *cfs_rq, struct sched_entity *se)
-    {
-    if (WARN_ON_ONCE(!se.on_rq || se.sched_delayed))
+    if (WARN_ON_ONCE!(!se.on_rq || se.sched_delayed)) {
     return;
-    if (se_is_idle(se))
+    }
+    if (se_is_idle(se)) {
     return;
+    }
     cfs_rq.next = se;
     }
 #[no_mangle]
 unsafe extern "C" fn clear_buddies(cfs_rq: *mut cfs_rq, se: *mut sched_entity) {
-    static void clear_buddies(struct cfs_rq *cfs_rq, struct sched_entity *se)
-    {
-    if (cfs_rq.next == se)
+    if (cfs_rq.next == se) {
     cfs_rq.next = core::ptr::null_mut();
     }
-    static __always_inline void return_cfs_rq_runtime(struct cfs_rq *cfs_rq);
+    }
+    static __always_inline void return_cfs_rq_runtime(cfs_rq *cfs_rq);
 #[no_mangle]
 unsafe extern "C" fn set_delayed(se: *mut sched_entity) {
-    static void set_delayed(struct sched_entity *se)
-    {
     se.sched_delayed = 1;
 //
 // Delayed se of cfs_rq have no tasks queued on them.
 // Do not adjust h_nr_runnable since __dequeue_task()
 // will account it for blocked tasks.
 //
-    if (!entity_is_task(se))
+    if (!entity_is_task(se)) {
     return;
+    }
     for_each_sched_entity(se) {
-    struct cfs_rq *cfs_rq = cfs_rq_of(se);
-    cfs_rq.h_nr_runnable--;
+    let mut cfs_rq = cfs_rq_of(se);
+    cfs_rq.h_nr_runnable -= 1;
     }
     }
 #[no_mangle]
 unsafe extern "C" fn clear_delayed(se: *mut sched_entity) {
-    static void clear_delayed(struct sched_entity *se)
-    {
     se.sched_delayed = 0;
 //
 // Delayed se of cfs_rq have no tasks queued on them.
@@ -5753,22 +5983,24 @@ unsafe extern "C" fn clear_delayed(se: *mut sched_entity) {
 // already accounted for it or an enqueue of a task
 // below it will account for it in enqueue_task_fair().
 //
-    if (!entity_is_task(se))
+    if (!entity_is_task(se)) {
     return;
+    }
     for_each_sched_entity(se) {
-    struct cfs_rq *cfs_rq = cfs_rq_of(se);
-    cfs_rq.h_nr_runnable++;
+    let mut cfs_rq = cfs_rq_of(se);
+    cfs_rq.h_nr_runnable += 1;
     }
     }
-    static void
-    dequeue_entity(struct cfs_rq *cfs_rq, struct sched_entity *se, int flags)
-    {
-    let mut action: c_int = UPDATE_TG;
+#[no_mangle]
+pub unsafe extern "C" fn dequeue_entity(cfs_rq: *mut cfs_rq, se: *mut sched_entity, flags: c_int) {
+pub static mut action: c_int = 0;
     if (entity_is_task(se)) {
-    if (task_on_rq_migrating(task_of(se)))
+    if (task_on_rq_migrating(task_of(se))) {
     action |= DO_DETACH;
-    if ((flags & DEQUEUE_SLEEP) && !(flags & DEQUEUE_DELAYED))
+    }
+    if ((flags & DEQUEUE_SLEEP) && !(flags & DEQUEUE_DELAYED)) {
     action |= UPDATE_UTIL_EST;
+    }
     }
 //
 // When dequeuing a sched_entity, we must:
@@ -5791,7 +6023,7 @@ unsafe extern "C" fn clear_delayed(se: *mut sched_entity) {
     update_idle_cfs_rq_clock_pelt(cfs_rq);
 
     if (throttled_hierarchy(cfs_rq)) {
-    struct rq *rq = rq_of(cfs_rq);
+    let mut rq = rq_of(cfs_rq);
     list_del_leaf_cfs_rq(cfs_rq);
     cfs_rq.throttled_clock_pelt = rq_clock_pelt(rq);
     cfs_rq.pelt_clock_throttled = 1;
@@ -5799,9 +6031,8 @@ unsafe extern "C" fn clear_delayed(se: *mut sched_entity) {
 
     }
     }
-    static void
-    set_next_entity(struct cfs_rq *cfs_rq, struct sched_entity *se)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn set_next_entity(cfs_rq: *mut cfs_rq, se: *mut sched_entity) {
 // 'current' is not kept within the tree.
     if (se.on_rq) {
 //
@@ -5813,7 +6044,7 @@ unsafe extern "C" fn clear_delayed(se: *mut sched_entity) {
     update_load_avg(cfs_rq, se, UPDATE_TG);
     }
     update_stats_curr_start(cfs_rq, se);
-    WARN_ON_ONCE(cfs_rq.h_curr);
+    WARN_ON_ONCE!(cfs_rq.h_curr);
     cfs_rq.h_curr = se;
 //
 // Track our maximum slice length, if the CPU's load is at
@@ -5822,7 +6053,7 @@ unsafe extern "C" fn clear_delayed(se: *mut sched_entity) {
 //
     if (schedstat_enabled() &&
     rq_of(cfs_rq).cfs.load.weight >= 2*se.load.weight) {
-    struct sched_statistics *stats;
+pub static mut stats: *mut c_void = core::ptr::null_mut();
     stats = __schedstats_from_se(se);
     __schedstat_set(stats.slice_max,
     max((u64)stats.slice_max,
@@ -5830,12 +6061,11 @@ unsafe extern "C" fn clear_delayed(se: *mut sched_entity) {
     }
     se.prev_sum_exec_runtime = se.sum_exec_runtime;
     }
-    static bool __dequeue_task(struct rq *rq, struct task_struct *p, int flags);
-    static struct sched_entity *
-    pick_next_entity(struct rq *rq, bool protect)
-    {
-    struct cfs_rq *cfs_rq = &rq.cfs;
-    struct sched_entity *se;
+// forward_decl: __dequeue_task;
+#[no_mangle]
+pub unsafe extern "C" fn pick_next_entity(rq: *mut rq, protect: bool) -> *mut c_void {
+    let mut cfs_rq = &rq.cfs;
+pub static mut se: *mut c_void = core::ptr::null_mut();
     se = pick_eevdf(cfs_rq, protect);
     if (se.sched_delayed) {
     __dequeue_task(rq, task_of(se), DEQUEUE_SLEEP | DEQUEUE_DELAYED);
@@ -5848,25 +6078,23 @@ unsafe extern "C" fn clear_delayed(se: *mut sched_entity) {
     }
 #[no_mangle]
 unsafe extern "C" fn put_prev_entity(cfs_rq: *mut cfs_rq, prev: *mut sched_entity) {
-    static void put_prev_entity(struct cfs_rq *cfs_rq, struct sched_entity *prev)
-    {
 //
 // If still on the runqueue then deactivate_task()
 // was not called and update_curr() has to be done:
 //
-    if (prev.on_rq)
+    if (prev.on_rq) {
     update_curr(cfs_rq);
+    }
     if (prev.on_rq) {
     update_stats_wait_start_fair(cfs_rq, prev);
 // in !on_rq case, update occurred at dequeue
     update_load_avg(cfs_rq, prev, 0);
     }
-    WARN_ON_ONCE(cfs_rq.h_curr != prev);
+    WARN_ON_ONCE!(cfs_rq.h_curr != prev);
     cfs_rq.h_curr = core::ptr::null_mut();
     }
-    static void
-    entity_tick(struct cfs_rq *cfs_rq, struct sched_entity *curr, int queued)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn entity_tick(cfs_rq: *mut cfs_rq, curr: *mut sched_entity, queued: c_int) {
 //
 // Update run-time statistics of the 'current'.
 //
@@ -5891,39 +6119,35 @@ unsafe extern "C" fn put_prev_entity(cfs_rq: *mut cfs_rq, prev: *mut sched_entit
 // CFS bandwidth control machinery
 //
 
-    static struct static_key __cfs_bandwidth_used;
+pub static mut __cfs_bandwidth_used: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn cfs_bandwidth_used() -> bool {
-    static inline bool cfs_bandwidth_used(void)
-    {
     return static_key_false(&__cfs_bandwidth_used);
     }
 #[no_mangle]
 pub unsafe extern "C" fn cfs_bandwidth_usage_inc() {
-    void cfs_bandwidth_usage_inc(void)
-    {
     static_key_slow_inc_cpuslocked(&__cfs_bandwidth_used);
     }
 #[no_mangle]
 pub unsafe extern "C" fn cfs_bandwidth_usage_dec() {
-    void cfs_bandwidth_usage_dec(void)
-    {
     static_key_slow_dec_cpuslocked(&__cfs_bandwidth_used);
     }
 
 #[no_mangle]
 unsafe extern "C" fn cfs_bandwidth_used() -> bool {
-    static bool cfs_bandwidth_used(void)
-    {
     return true;
     }
-    void cfs_bandwidth_usage_inc(void) {}
-    void cfs_bandwidth_usage_dec(void) {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: cfs_bandwidth_usage_inc
+pub unsafe extern "C" fn cfs_bandwidth_usage_inc_dup() {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: cfs_bandwidth_usage_dec
+pub unsafe extern "C" fn cfs_bandwidth_usage_dec_dup() {}
 
 #[no_mangle]
 pub unsafe extern "C" fn sched_cfs_bandwidth_slice() -> u64 {
-    static inline u64 sched_cfs_bandwidth_slice(void)
-    {
     return (u64)sysctl_sched_cfs_bandwidth_slice * NSEC_PER_USEC;
     }
 //
@@ -5935,34 +6159,33 @@ pub unsafe extern "C" fn sched_cfs_bandwidth_slice() -> u64 {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __refill_cfs_bandwidth_runtime(cfs_b: *mut cfs_bandwidth) {
-    void __refill_cfs_bandwidth_runtime(struct cfs_bandwidth *cfs_b)
-    {
-    s64 runtime;
-    if (unlikely(cfs_b.quota == RUNTIME_INF))
+    let mut runtime = 0;
+    if (unlikely(cfs_b.quota == RUNTIME_INF)) {
     return;
+    }
     cfs_b.runtime += cfs_b.quota;
     runtime = cfs_b.runtime_snap - cfs_b.runtime;
     if (runtime > 0) {
     cfs_b.burst_time += runtime;
-    cfs_b.nr_burst++;
+    cfs_b.nr_burst += 1;
     }
     cfs_b.runtime = min(cfs_b.runtime, cfs_b.quota + cfs_b.burst);
     cfs_b.runtime_snap = cfs_b.runtime;
     }
-    static inline struct cfs_bandwidth *tg_cfs_bandwidth(struct task_group *tg)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn tg_cfs_bandwidth(tg: *mut task_group) -> *mut c_void {
     return &tg.cfs_bandwidth;
     }
 // returns 0 on failure to allocate runtime
-    static int __assign_cfs_rq_runtime(struct cfs_bandwidth *cfs_b,
-    struct cfs_rq *cfs_rq, u64 target_runtime)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __assign_cfs_rq_runtime(cfs_b: *mut cfs_bandwidth, cfs_rq: *mut cfs_rq, target_runtime: u64) -> c_int {
     u64 min_amount, amount = 0;
     lockdep_assert_held(&cfs_b.lock);
 // note: this is a positive sum as runtime_remaining <= 0
     min_amount = target_runtime - cfs_rq.runtime_remaining;
-    if (cfs_b.quota == RUNTIME_INF)
+    if (cfs_b.quota == RUNTIME_INF) {
     amount = min_amount;
+    }
     else {
     start_cfs_bandwidth(cfs_b);
     if (cfs_b.runtime > 0) {
@@ -5974,17 +6197,17 @@ pub unsafe extern "C" fn __refill_cfs_bandwidth_runtime(cfs_b: *mut cfs_bandwidt
     cfs_rq.runtime_remaining += amount;
     return cfs_rq.runtime_remaining > 0;
     }
-    static bool throttle_cfs_rq(struct cfs_rq *cfs_rq);
+// forward_decl: throttle_cfs_rq;
 #[no_mangle]
 unsafe extern "C" fn __account_cfs_rq_runtime(cfs_rq: *mut cfs_rq, delta_exec: u64) -> bool {
-    static bool __account_cfs_rq_runtime(struct cfs_rq *cfs_rq, u64 delta_exec)
-    {
 // dock delta_exec before expiring quota (as it could span periods)
     cfs_rq.runtime_remaining -= delta_exec;
-    if (likely(cfs_rq.runtime_remaining > 0))
+    if (likely(cfs_rq.runtime_remaining > 0)) {
     return false;
-    if (cfs_rq.throttled)
+    }
+    if (cfs_rq.throttled) {
     return true;
+    }
 //
 // throttle_cfs_rq() will try to extend the runtime first
 // before throttling the hierarchy.
@@ -5994,75 +6217,65 @@ unsafe extern "C" fn __account_cfs_rq_runtime(cfs_rq: *mut cfs_rq, delta_exec: u
     static __always_inline
 #[no_mangle]
 pub unsafe extern "C" fn account_cfs_rq_runtime(cfs_rq: *mut cfs_rq, delta_exec: u64) -> bool {
-    bool account_cfs_rq_runtime(struct cfs_rq *cfs_rq, u64 delta_exec)
-    {
-    if (!cfs_bandwidth_used() || !cfs_rq.runtime_enabled)
+    if (!cfs_bandwidth_used() || !cfs_rq.runtime_enabled) {
     return false;
+    }
     return __account_cfs_rq_runtime(cfs_rq, delta_exec);
     }
 #[no_mangle]
 pub unsafe extern "C" fn cfs_rq_throttled(cfs_rq: *mut cfs_rq) -> c_int {
-    static inline int cfs_rq_throttled(struct cfs_rq *cfs_rq)
-    {
     return cfs_bandwidth_used() && cfs_rq.throttled;
     }
 #[no_mangle]
 pub unsafe extern "C" fn cfs_rq_pelt_clock_throttled(cfs_rq: *mut cfs_rq) -> bool {
-    static inline bool cfs_rq_pelt_clock_throttled(struct cfs_rq *cfs_rq)
-    {
     return cfs_bandwidth_used() && cfs_rq.pelt_clock_throttled;
     }
 // check whether cfs_rq, or any parent, is throttled
 #[no_mangle]
 pub unsafe extern "C" fn throttled_hierarchy(cfs_rq: *mut cfs_rq) -> c_int {
-    static inline int throttled_hierarchy(struct cfs_rq *cfs_rq)
-    {
     return cfs_bandwidth_used() && cfs_rq.throttle_count;
     }
 #[no_mangle]
 pub unsafe extern "C" fn lb_throttled_hierarchy(p: *mut task_struct, dst_cpu: c_int) -> c_int {
-    static inline int lb_throttled_hierarchy(struct task_struct *p, int dst_cpu)
-    {
     return throttled_hierarchy(tg_cfs_rq(task_group(p), dst_cpu));
     }
 #[no_mangle]
 pub unsafe extern "C" fn task_is_throttled(p: *mut task_struct) -> bool {
-    static inline bool task_is_throttled(struct task_struct *p)
-    {
     return cfs_bandwidth_used() && p.throttled;
     }
-    static bool dequeue_task_fair(struct rq *rq, struct task_struct *p, int flags);
+// forward_decl: dequeue_task_fair;
 #[no_mangle]
 unsafe extern "C" fn throttle_cfs_rq_work(work: *mut callback_head) {
-    static void throttle_cfs_rq_work(struct callback_head *work)
-    {
-    struct task_struct *p = container_of(work, struct task_struct, sched_throttle_work);
-    struct sched_entity *se;
-    struct cfs_rq *cfs_rq;
-    struct rq *rq;
-    WARN_ON_ONCE(p != current);
+    let mut p = container_of!(work, task_struct, sched_throttle_work);
+pub static mut se: *mut c_void = core::ptr::null_mut();
+pub static mut cfs_rq: *mut c_void = core::ptr::null_mut();
+pub static mut rq: *mut c_void = core::ptr::null_mut();
+    WARN_ON_ONCE!(p != current);
     p.sched_throttle_work.next = &p.sched_throttle_work;
 //
 // If task is exiting, then there won't be a return to userspace, so we
 // don't have to bother with any of this.
 //
-    if ((p.flags & PF_EXITING))
+    if ((p.flags & PF_EXITING)) {
     return;
+    }
     scoped_guard(task_rq_lock, p) {
     se = &p.se;
     cfs_rq = cfs_rq_of(se);
 // Raced, forget
-    if (p.sched_class != &fair_sched_class)
+    if (p.sched_class != &fair_sched_class) {
     return;
+    }
 //
 // If not in limbo, then either replenish has happened or this
 // task got migrated out of the throttled cfs_rq, move along.
 //
-    if (!cfs_rq.throttle_count)
+    if (!cfs_rq.throttle_count) {
     return;
+    }
     rq = scope.rq;
     update_rq_clock(rq);
-    WARN_ON_ONCE(p.throttled || !list_empty(&p.throttle_node));
+    WARN_ON_ONCE!(p.throttled || !list_empty(&p.throttle_node));
     dequeue_task_fair(rq, p, DEQUEUE_SLEEP | DEQUEUE_THROTTLE);
     list_add(&p.throttle_node, &cfs_rq.throttled_limbo_list);
 //
@@ -6075,8 +6288,6 @@ unsafe extern "C" fn throttle_cfs_rq_work(work: *mut callback_head) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn init_cfs_throttle_work(p: *mut task_struct) {
-    void init_cfs_throttle_work(struct task_struct *p)
-    {
     init_task_work(&p.sched_throttle_work, throttle_cfs_rq_work);
 // Protect against double add, see throttle_cfs_rq() and throttle_cfs_rq_work()
     p.sched_throttle_work.next = &p.sched_throttle_work;
@@ -6090,12 +6301,10 @@ pub unsafe extern "C" fn init_cfs_throttle_work(p: *mut task_struct) {
 // or the task is blocked after throttled due to freezer etc.
 // and in these cases, DEQUEUE_SLEEP is set.
 //
-    static void detach_task_cfs_rq(struct task_struct *p);
+// forward_decl: detach_task_cfs_rq;
 #[no_mangle]
 unsafe extern "C" fn dequeue_throttled_task(p: *mut task_struct, flags: c_int) {
-    static void dequeue_throttled_task(struct task_struct *p, int flags)
-    {
-    WARN_ON_ONCE(p.se.on_rq);
+    WARN_ON_ONCE!(p.se.on_rq);
     list_del_init(&p.throttle_node);
 // task blocked after throttled
     if (flags & DEQUEUE_SLEEP) {
@@ -6106,16 +6315,15 @@ unsafe extern "C" fn dequeue_throttled_task(p: *mut task_struct, flags: c_int) {
 // task is migrating off its old cfs_rq, detach
 // the task's load from its old cfs_rq.
 //
-    if (task_on_rq_migrating(p))
+    if (task_on_rq_migrating(p)) {
     detach_task_cfs_rq(p);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn enqueue_throttled_task(p: *mut task_struct) -> bool {
-    static bool enqueue_throttled_task(struct task_struct *p)
-    {
-    struct cfs_rq *cfs_rq = cfs_rq_of(&p.se);
+    let mut cfs_rq = cfs_rq_of(&p.se);
 // @p should have gone through dequeue_throttled_task() first
-    WARN_ON_ONCE(!list_empty(&p.throttle_node));
+    WARN_ON_ONCE!(!list_empty(&p.throttle_node));
 //
 // If the throttled task @p is enqueued to a throttled cfs_rq,
 // take the fast path by directly putting the task on the
@@ -6159,15 +6367,14 @@ unsafe extern "C" fn enqueue_throttled_task(p: *mut task_struct) -> bool {
     p.throttled = false;
     return false;
     }
-    static void enqueue_task_fair(struct rq *rq, struct task_struct *p, int flags);
+// forward_decl: enqueue_task_fair;
 #[no_mangle]
 unsafe extern "C" fn tg_unthrottle_up(tg: *mut task_group, data: *mut c_void) -> c_int {
-    static int tg_unthrottle_up(struct task_group *tg, void *data)
-    {
-    struct rq *rq = data;
-    struct cfs_rq *cfs_rq = tg_cfs_rq(tg, cpu_of(rq));
-    struct task_struct *p, *tmp;
-    LIST_HEAD(throttled_tasks);
+    let mut rq = data;
+    let mut cfs_rq = tg_cfs_rq(tg, cpu_of(rq));
+    let mut p = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
+pub static mut throttled_tasks: usize = 0;
 //
 // If cfs_rq->curr is set, the cfs_rq might not have caught up
 // since the last clock update. Do it now before we begin
@@ -6176,18 +6383,20 @@ unsafe extern "C" fn tg_unthrottle_up(tg: *mut task_group, data: *mut c_void) ->
 // right back again.
 //
     update_curr(cfs_rq);
-    if (--cfs_rq.throttle_count)
+    if (--cfs_rq.throttle_count) {
     return 0;
+    }
     if (cfs_rq.pelt_clock_throttled) {
     cfs_rq.throttled_clock_pelt_time += rq_clock_pelt(rq) -
     cfs_rq.throttled_clock_pelt;
     cfs_rq.pelt_clock_throttled = 0;
     }
     if (cfs_rq.throttled_clock_self) {
-    let mut delta: u64 = rq_clock(rq) - cfs_rq.throttled_clock_self;
+pub static mut delta: u64 = 0;
     cfs_rq.throttled_clock_self = 0;
-    if (WARN_ON_ONCE((s64)delta < 0))
+    if (WARN_ON_ONCE!((s64)delta < 0)) {
     delta = 0;
+    }
     cfs_rq.throttled_clock_self_time += delta;
     }
 //
@@ -6204,56 +6413,55 @@ unsafe extern "C" fn tg_unthrottle_up(tg: *mut task_group, data: *mut c_void) ->
 // tasks back onto the limbo_list to prevent running them
 // unnecessarily.
 //
-    if (cfs_rq.throttle_count)
+    if (cfs_rq.throttle_count) {
     break;
+    }
     list_del_init(&p.throttle_node);
     p.throttled = false;
     enqueue_task_fair(rq, p, ENQUEUE_WAKEUP);
     }
     list_splice(&throttled_tasks, &cfs_rq.throttled_limbo_list);
 // Add cfs_rq with load or one or more already running entities to the list
-    if (!cfs_rq_is_decayed(cfs_rq))
+    if (!cfs_rq_is_decayed(cfs_rq)) {
     list_add_leaf_cfs_rq(cfs_rq);
+    }
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn task_has_throttle_work(p: *mut task_struct) -> bool {
-    static inline bool task_has_throttle_work(struct task_struct *p)
-    {
     return p.sched_throttle_work.next != &p.sched_throttle_work;
     }
 #[no_mangle]
 pub unsafe extern "C" fn task_throttle_setup_work(p: *mut task_struct) {
-    static inline void task_throttle_setup_work(struct task_struct *p)
-    {
-    if (task_has_throttle_work(p))
+    if (task_has_throttle_work(p)) {
     return;
+    }
 //
 // Kthreads and exiting tasks don't return to userspace, so adding the
 // work is pointless
 //
-    if ((p.flags & (PF_EXITING | PF_KTHREAD)))
+    if ((p.flags & (PF_EXITING | PF_KTHREAD))) {
     return;
+    }
     task_work_add(p, &p.sched_throttle_work, TWA_RESUME);
     }
 #[no_mangle]
 unsafe extern "C" fn record_throttle_clock(cfs_rq: *mut cfs_rq) {
-    static void record_throttle_clock(struct cfs_rq *cfs_rq)
-    {
-    struct rq *rq = rq_of(cfs_rq);
-    if (cfs_rq_throttled(cfs_rq) && !cfs_rq.throttled_clock)
+    let mut rq = rq_of(cfs_rq);
+    if (cfs_rq_throttled(cfs_rq) && !cfs_rq.throttled_clock) {
     cfs_rq.throttled_clock = rq_clock(rq);
-    if (!cfs_rq.throttled_clock_self)
+    }
+    if (!cfs_rq.throttled_clock_self) {
     cfs_rq.throttled_clock_self = rq_clock(rq);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn tg_throttle_down(tg: *mut task_group, data: *mut c_void) -> c_int {
-    static int tg_throttle_down(struct task_group *tg, void *data)
-    {
-    struct rq *rq = data;
-    struct cfs_rq *cfs_rq = tg_cfs_rq(tg, cpu_of(rq));
-    if (cfs_rq.throttle_count++)
+    let mut rq = data;
+    let mut cfs_rq = tg_cfs_rq(tg, cpu_of(rq));
+    if (cfs_rq.throttle_count++) {
     return 0;
+    }
 //
 // For cfs_rqs that still have entities enqueued, PELT clock
 // stop happens at dequeue time when all entities are dequeued.
@@ -6263,19 +6471,17 @@ unsafe extern "C" fn tg_throttle_down(tg: *mut task_group, data: *mut c_void) ->
     cfs_rq.throttled_clock_pelt = rq_clock_pelt(rq);
     cfs_rq.pelt_clock_throttled = 1;
     }
-    WARN_ON_ONCE(cfs_rq.throttled_clock_self);
-    WARN_ON_ONCE(!list_empty(&cfs_rq.throttled_limbo_list));
+    WARN_ON_ONCE!(cfs_rq.throttled_clock_self);
+    WARN_ON_ONCE!(!list_empty(&cfs_rq.throttled_limbo_list));
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn throttle_cfs_rq(cfs_rq: *mut cfs_rq) -> bool {
-    static bool throttle_cfs_rq(struct cfs_rq *cfs_rq)
-    {
-    struct cfs_bandwidth *cfs_b = tg_cfs_bandwidth(cfs_rq.tg);
-    struct sched_entity *curr = cfs_rq.curr;
-    struct rq *rq = rq_of(cfs_rq);
+    let mut cfs_b = tg_cfs_bandwidth(cfs_rq.tg);
+    let mut curr = cfs_rq.curr;
+    let mut rq = rq_of(cfs_rq);
     scoped_guard(raw_spinlock, &cfs_b.lock) {
-    let mut target_runtime: u64 = 1;
+pub static mut target_runtime: u64 = 1;
 //
 // If cfs_rq->curr is still runnable, we are here from an
 // update_curr(). Request sysctl_sched_cfs_bandwidth_slice
@@ -6284,8 +6490,9 @@ unsafe extern "C" fn throttle_cfs_rq(cfs_rq: *mut cfs_rq) -> bool {
 // If the curr is not runnable, just request enough bandwidth
 // to be runnable next time the pick selects this cfs_rq.
 //
-    if (curr && curr.on_rq)
+    if (curr && curr.on_rq) {
     target_runtime = sched_cfs_bandwidth_slice();
+    }
 //
 // Check if We have raced with bandwidth becoming available. If
 // we actually throttled the timer might not unthrottle us for
@@ -6296,8 +6503,9 @@ unsafe extern "C" fn throttle_cfs_rq(cfs_rq: *mut cfs_rq) -> bool {
 //
 // This will start the period timer if necessary.
 //
-    if (__assign_cfs_rq_runtime(cfs_b, cfs_rq, target_runtime))
+    if (__assign_cfs_rq_runtime(cfs_b, cfs_rq, target_runtime)) {
     return false;
+    }
 //
 // No bandwidth available; Add ourselves on the list to be
 // unthrottled later.
@@ -6307,13 +6515,13 @@ unsafe extern "C" fn throttle_cfs_rq(cfs_rq: *mut cfs_rq) -> bool {
     }
 // freeze hierarchy runnable averages while throttled
     scoped_guard(rcu)
-    walk_tg_tree_from(cfs_rq.tg, tg_throttle_down, tg_nop, (void *)rq);
+    walk_tg_tree_from(cfs_rq.tg, tg_throttle_down, tg_nop, rq);
 //
 // Note: distribution will already see us throttled via the
 // throttled-list.  rq->lock protects completion.
 //
     cfs_rq.throttled = 1;
-    WARN_ON_ONCE(cfs_rq.throttled_clock);
+    WARN_ON_ONCE!(cfs_rq.throttled_clock);
 //
 // If current hierarchy was throttled, add throttle work to the
 // current donor. In case of proxy-execution, the execution
@@ -6321,17 +6529,16 @@ unsafe extern "C" fn throttle_cfs_rq(cfs_rq: *mut cfs_rq) -> bool {
 // and the rule of throttle deferral to only throttle the
 // throttled context at exit to userspace is still preserved.
 //
-    if (curr && curr.on_rq)
+    if (curr && curr.on_rq) {
     task_throttle_setup_work(rq.donor);
+    }
     return true;
     }
 #[no_mangle]
 pub unsafe extern "C" fn unthrottle_cfs_rq(cfs_rq: *mut cfs_rq) {
-    void unthrottle_cfs_rq(struct cfs_rq *cfs_rq)
-    {
-    struct rq *rq = rq_of(cfs_rq);
-    struct cfs_bandwidth *cfs_b = tg_cfs_bandwidth(cfs_rq.tg);
-    struct sched_entity *se = cfs_rq_se(cfs_rq);
+    let mut rq = rq_of(cfs_rq);
+    let mut cfs_b = tg_cfs_bandwidth(cfs_rq.tg);
+    let mut se = cfs_rq_se(cfs_rq);
 //
 // It's possible we are called with runtime_remaining < 0 due to things
 // like async unthrottled us with a positive runtime_remaining but other
@@ -6345,41 +6552,45 @@ pub unsafe extern "C" fn unthrottle_cfs_rq(cfs_rq: *mut cfs_rq) {
 // checking runtime remaining.
 //
     update_curr(cfs_rq);
-    if (cfs_rq.runtime_enabled && cfs_rq.runtime_remaining <= 0)
+    if (cfs_rq.runtime_enabled && cfs_rq.runtime_remaining <= 0) {
     return;
+    }
     cfs_rq.throttled = 0;
     scoped_guard(raw_spinlock, &cfs_b.lock) {
     list_del_rcu(&cfs_rq.throttled_list);
-    if (!cfs_rq.throttled_clock)
+    if (!cfs_rq.throttled_clock) {
     break;
+    }
     cfs_b.throttled_time += rq_clock(rq) - cfs_rq.throttled_clock;
     cfs_rq.throttled_clock = 0;
     }
 // update hierarchical throttle state
-    walk_tg_tree_from(cfs_rq.tg, tg_nop, tg_unthrottle_up, (void *)rq);
+    walk_tg_tree_from(cfs_rq.tg, tg_nop, tg_unthrottle_up, rq);
     if (!cfs_rq.load.weight) {
-    if (!cfs_rq.on_list)
+    if (!cfs_rq.on_list) {
     return;
+    }
 //
 // Nothing to run but something to decay (on_list)?
 // Complete the branch.
 //
     for_each_sched_entity(se) {
-    if (list_add_leaf_cfs_rq(cfs_rq_of(se)))
+    if (list_add_leaf_cfs_rq(cfs_rq_of(se))) {
     break;
+    }
     }
     }
     assert_list_leaf_cfs_rq(rq);
 // Determine whether we need to wake up potentially idle CPU:
-    if (rq.curr == rq.idle && rq.cfs.h_nr_queued)
+    if (rq.curr == rq.idle && rq.cfs.h_nr_queued) {
     resched_curr(rq);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn __cfsb_csd_unthrottle(arg: *mut c_void) {
-    static void __cfsb_csd_unthrottle(void *arg)
-    {
-    struct cfs_rq *cursor, *tmp;
-    struct rq *rq = arg;
+    let mut cursor = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
+    let mut rq = arg;
     guard(rq_lock)(rq);
 //
 // Iterating over the list can trigger several call to
@@ -6399,49 +6610,47 @@ unsafe extern "C" fn __cfsb_csd_unthrottle(arg: *mut c_void) {
     list_for_each_entry_safe(cursor, tmp, &rq.cfsb_csd_list,
     throttled_csd_list) {
     list_del_init(&cursor.throttled_csd_list);
-    if (cfs_rq_throttled(cursor))
+    if (cfs_rq_throttled(cursor)) {
     unthrottle_cfs_rq(cursor);
+    }
     }
     rq_clock_stop_loop_update(rq);
     }
 #[no_mangle]
 pub unsafe extern "C" fn __unthrottle_cfs_rq_async(cfs_rq: *mut cfs_rq) {
-    static inline void __unthrottle_cfs_rq_async(struct cfs_rq *cfs_rq)
-    {
-    struct rq *rq = rq_of(cfs_rq);
-    bool first;
+    let mut rq = rq_of(cfs_rq);
+    let mut first = 0;
     if (rq == this_rq()) {
     update_rq_clock(rq);
     unthrottle_cfs_rq(cfs_rq);
     return;
     }
 // Already enqueued
-    if (WARN_ON_ONCE(!list_empty(&cfs_rq.throttled_csd_list)))
+    if (WARN_ON_ONCE!(!list_empty(&cfs_rq.throttled_csd_list))) {
     return;
+    }
     first = list_empty(&rq.cfsb_csd_list);
     list_add_tail(&cfs_rq.throttled_csd_list, &rq.cfsb_csd_list);
-    if (first)
+    if (first) {
     smp_call_function_single_async(cpu_of(rq), &rq.cfsb_csd);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn unthrottle_cfs_rq_async(cfs_rq: *mut cfs_rq) {
-    static void unthrottle_cfs_rq_async(struct cfs_rq *cfs_rq)
-    {
     lockdep_assert_rq_held(rq_of(cfs_rq));
-    if (WARN_ON_ONCE(!cfs_rq_throttled(cfs_rq) ||
-    cfs_rq.runtime_remaining <= 0))
+    if (WARN_ON_ONCE!(!cfs_rq_throttled(cfs_rq) ||
+    cfs_rq.runtime_remaining <= 0)) {
     return;
+    }
     __unthrottle_cfs_rq_async(cfs_rq);
     }
 #[no_mangle]
 unsafe extern "C" fn distribute_cfs_runtime(cfs_b: *mut cfs_bandwidth) -> bool {
-    static bool distribute_cfs_runtime(struct cfs_bandwidth *cfs_b)
-    {
-    let mut throttled: bool = false, unthrottle_local = false;
-    let mut this_cpu: c_int = smp_processor_id();
+pub static mut throttled: bool = false;
+pub static mut this_cpu: c_int = 0;
     u64 runtime, remaining = 1;
-    struct cfs_rq *cfs_rq;
-    struct rq *rq;
+pub static mut cfs_rq: *mut c_void = core::ptr::null_mut();
+pub static mut rq: *mut c_void = core::ptr::null_mut();
     guard(rcu)();
     list_for_each_entry_rcu(cfs_rq, &cfs_b.throttled_cfs_rq,
     throttled_list) {
@@ -6451,21 +6660,24 @@ unsafe extern "C" fn distribute_cfs_runtime(cfs_b: *mut cfs_bandwidth) -> bool {
     break;
     }
     guard(rq_lock_irqsave)(rq);
-    if (!cfs_rq_throttled(cfs_rq))
+    if (!cfs_rq_throttled(cfs_rq)) {
     continue;
+    }
 // Already queued for async unthrottle
-    if (!list_empty(&cfs_rq.throttled_csd_list))
+    if (!list_empty(&cfs_rq.throttled_csd_list)) {
     continue;
+    }
     if (cfs_rq.curr) {
     update_rq_clock(rq);
     update_curr(cfs_rq);
     }
 // By the above checks, this should never be true
-    WARN_ON_ONCE(cfs_rq.runtime_remaining > 0);
+    WARN_ON_ONCE!(cfs_rq.runtime_remaining > 0);
     scoped_guard(raw_spinlock, &cfs_b.lock) {
     runtime = -cfs_rq.runtime_remaining + 1;
-    if (runtime > cfs_b.runtime)
+    if (runtime > cfs_b.runtime) {
     runtime = cfs_b.runtime;
+    }
     cfs_b.runtime -= runtime;
     remaining = cfs_b.runtime;
     }
@@ -6510,13 +6722,11 @@ unsafe extern "C" fn distribute_cfs_runtime(cfs_b: *mut cfs_bandwidth) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn do_sched_cfs_period_timer(cfs_b: *mut cfs_bandwidth, overrun: c_int, flags: c_ulong) -> c_int {
-    static int do_sched_cfs_period_timer(struct cfs_bandwidth *cfs_b, int overrun, unsigned long flags)
-    __must_hold(&cfs_b.lock)
-    {
-    int throttled;
+    let mut throttled = 0;
 // no need to continue the timer with no bandwidth constraint
-    if (cfs_b.quota == RUNTIME_INF)
-    goto out_deactivate;
+    if (cfs_b.quota == RUNTIME_INF) {
+// goto;
+    }
     throttled = !list_empty(&cfs_b.throttled_cfs_rq);
     cfs_b.nr_periods += overrun;
 // Refill extra burst quota even if cfs_b->idle
@@ -6525,8 +6735,9 @@ unsafe extern "C" fn do_sched_cfs_period_timer(cfs_b: *mut cfs_bandwidth, overru
 // idle depends on !throttled (for the case of a large deficit), and if
 // we're going inactive then everything else can be deferred
 //
-    if (cfs_b.idle && !throttled)
-    goto out_deactivate;
+    if (cfs_b.idle && !throttled) {
+// goto;
+    }
     if (!throttled) {
 // mark as potentially idle for the upcoming period
     cfs_b.idle = 1;
@@ -6551,15 +6762,15 @@ unsafe extern "C" fn do_sched_cfs_period_timer(cfs_b: *mut cfs_bandwidth, overru
 //
     cfs_b.idle = 0;
     return 0;
-    out_deactivate:
+// label;
     return 1;
     }
 // a cfs_rq won't donate quota below this amount
-    let mut min_cfs_rq_runtime: static u64 = 1 * NSEC_PER_MSEC;
+pub static mut min_cfs_rq_runtime: u64 = 0;
 // minimum remaining period time to redistribute slack quota
-    let mut min_bandwidth_expiration: static u64 = 2 * NSEC_PER_MSEC;
+pub static mut min_bandwidth_expiration: u64 = 0;
 // how long we wait to gather additional slack before distributing
-    let mut cfs_bandwidth_slack_period: static u64 = 5 * NSEC_PER_MSEC;
+pub static mut cfs_bandwidth_slack_period: u64 = 0;
 //
 // Are we near the end of the current quota period?
 //
@@ -6569,30 +6780,30 @@ unsafe extern "C" fn do_sched_cfs_period_timer(cfs_b: *mut cfs_bandwidth, overru
 //
 #[no_mangle]
 unsafe extern "C" fn runtime_refresh_within(cfs_b: *mut cfs_bandwidth, min_expire: u64) -> c_int {
-    static int runtime_refresh_within(struct cfs_bandwidth *cfs_b, u64 min_expire)
-    {
-    struct hrtimer *refresh_timer = &cfs_b.period_timer;
-    s64 remaining;
+    let mut refresh_timer = &cfs_b.period_timer;
+    let mut remaining = 0;
 // if the call-back is running a quota refresh is already occurring
-    if (hrtimer_callback_running(refresh_timer))
+    if (hrtimer_callback_running(refresh_timer)) {
     return 1;
+    }
 // is a quota refresh about to occur?
     remaining = ktime_to_ns(hrtimer_expires_remaining(refresh_timer));
-    if (remaining < (s64)min_expire)
+    if (remaining < (s64)min_expire) {
     return 1;
+    }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn start_cfs_slack_bandwidth(cfs_b: *mut cfs_bandwidth) {
-    static void start_cfs_slack_bandwidth(struct cfs_bandwidth *cfs_b)
-    {
-    let mut min_left: u64 = cfs_bandwidth_slack_period + min_bandwidth_expiration;
+pub static mut min_left: u64 = 0;
 // if there's a quota refresh soon don't bother with slack
-    if (runtime_refresh_within(cfs_b, min_left))
+    if (runtime_refresh_within(cfs_b, min_left)) {
     return;
+    }
 // don't push forwards an existing deferred unthrottle
-    if (cfs_b.slack_started)
+    if (cfs_b.slack_started) {
     return;
+    }
     cfs_b.slack_started = true;
     hrtimer_start(&cfs_b.slack_timer,
     ns_to_ktime(cfs_bandwidth_slack_period),
@@ -6601,31 +6812,31 @@ unsafe extern "C" fn start_cfs_slack_bandwidth(cfs_b: *mut cfs_bandwidth) {
 // we know any runtime found here is valid as update_curr() precedes return
 #[no_mangle]
 unsafe extern "C" fn __return_cfs_rq_runtime(cfs_rq: *mut cfs_rq) {
-    static void __return_cfs_rq_runtime(struct cfs_rq *cfs_rq)
-    {
-    struct cfs_bandwidth *cfs_b = tg_cfs_bandwidth(cfs_rq.tg);
-    let mut slack_runtime: i64 = cfs_rq.runtime_remaining - min_cfs_rq_runtime;
-    if (slack_runtime <= 0)
+    let mut cfs_b = tg_cfs_bandwidth(cfs_rq.tg);
+pub static mut slack_runtime: i64 = 0;
+    if (slack_runtime <= 0) {
     return;
+    }
     guard(raw_spinlock)(&cfs_b.lock);
     if (cfs_b.quota != RUNTIME_INF) {
     cfs_b.runtime += slack_runtime;
 // we are under rq->lock, defer unthrottling using a timer
     if (cfs_b.runtime > sched_cfs_bandwidth_slice() &&
-    !list_empty(&cfs_b.throttled_cfs_rq))
+    !list_empty(&cfs_b.throttled_cfs_rq)) {
     start_cfs_slack_bandwidth(cfs_b);
+    }
     }
 // even if it's not valid for return we don't want to try again
     cfs_rq.runtime_remaining -= slack_runtime;
     }
 #[no_mangle]
 unsafe extern "C" fn return_cfs_rq_runtime(cfs_rq: *mut cfs_rq) -> __always_inline void {
-    static __always_inline void return_cfs_rq_runtime(struct cfs_rq *cfs_rq)
-    {
-    if (!cfs_bandwidth_used())
+    if (!cfs_bandwidth_used()) {
     return;
-    if (!cfs_rq.runtime_enabled || cfs_rq.nr_queued)
+    }
+    if (!cfs_rq.runtime_enabled || cfs_rq.nr_queued) {
     return;
+    }
     __return_cfs_rq_runtime(cfs_rq);
     }
 //
@@ -6634,18 +6845,19 @@ unsafe extern "C" fn return_cfs_rq_runtime(cfs_rq: *mut cfs_rq) -> __always_inli
 //
 #[no_mangle]
 unsafe extern "C" fn do_sched_cfs_slack_timer(cfs_b: *mut cfs_bandwidth) {
-    static void do_sched_cfs_slack_timer(struct cfs_bandwidth *cfs_b)
-    {
 // confirm we're still not at a refresh boundary
     scoped_guard(raw_spinlock_irqsave, &cfs_b.lock) {
-    let mut runtime: u64 = 0, slice = sched_cfs_bandwidth_slice();
+pub static mut runtime: u64 = 0;
     cfs_b.slack_started = false;
-    if (runtime_refresh_within(cfs_b, min_bandwidth_expiration))
+    if (runtime_refresh_within(cfs_b, min_bandwidth_expiration)) {
     return;
-    if (cfs_b.quota != RUNTIME_INF && cfs_b.runtime > slice)
+    }
+    if (cfs_b.quota != RUNTIME_INF && cfs_b.runtime > slice) {
     runtime = cfs_b.runtime;
-    if (!runtime)
+    }
+    if (!runtime) {
     return;
+    }
     }
     distribute_cfs_runtime(cfs_b);
     }
@@ -6656,28 +6868,30 @@ unsafe extern "C" fn do_sched_cfs_slack_timer(cfs_b: *mut cfs_bandwidth) {
 //
 #[no_mangle]
 unsafe extern "C" fn check_enqueue_throttle(cfs_rq: *mut cfs_rq) {
-    static void check_enqueue_throttle(struct cfs_rq *cfs_rq)
-    {
-    if (!cfs_bandwidth_used())
+    if (!cfs_bandwidth_used()) {
     return;
+    }
 // an active group must be handled by the update_curr() path
-    if (!cfs_rq.runtime_enabled || cfs_rq.h_curr)
+    if (!cfs_rq.runtime_enabled || cfs_rq.h_curr) {
     return;
+    }
 // ensure the group is not already throttled
-    if (cfs_rq_throttled(cfs_rq))
+    if (cfs_rq_throttled(cfs_rq)) {
     return;
+    }
 // update runtime allocation
     account_cfs_rq_runtime(cfs_rq, 0);
     }
 #[no_mangle]
 unsafe extern "C" fn sync_throttle(tg: *mut task_group, cpu: c_int) {
-    static void sync_throttle(struct task_group *tg, int cpu)
-    {
-    struct cfs_rq *pcfs_rq, *cfs_rq;
-    if (!cfs_bandwidth_used())
+    let mut pcfs_rq = core::ptr::null_mut();
+    let mut cfs_rq = core::ptr::null_mut();
+    if (!cfs_bandwidth_used()) {
     return;
-    if (!tg.parent)
+    }
+    if (!tg.parent) {
     return;
+    }
     cfs_rq = tg_cfs_rq(tg, cpu);
     pcfs_rq = tg_cfs_rq(tg.parent, cpu);
     cfs_rq.throttle_count = pcfs_rq.throttle_count;
@@ -6689,32 +6903,28 @@ unsafe extern "C" fn sync_throttle(tg: *mut task_group, cpu: c_int) {
 // and leaf it to the first enqueue, or distribution to
 // unthrottle the PELT clock.
 //
-    if (cfs_rq.throttle_count)
+    if (cfs_rq.throttle_count) {
     cfs_rq.pelt_clock_throttled = 1;
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn sched_cfs_slack_timer(timer: *mut hrtimer) -> enum hrtimer_restart {
-    static enum hrtimer_restart sched_cfs_slack_timer(struct hrtimer *timer)
-    {
-    struct cfs_bandwidth *cfs_b =
-    container_of(timer, struct cfs_bandwidth, slack_timer);
+    let mut cfs_b = container_of!(timer, cfs_bandwidth, slack_timer);
     do_sched_cfs_slack_timer(cfs_b);
     return HRTIMER_NORESTART;
     }
 #[no_mangle]
 unsafe extern "C" fn sched_cfs_period_timer(timer: *mut hrtimer) -> enum hrtimer_restart {
-    static enum hrtimer_restart sched_cfs_period_timer(struct hrtimer *timer)
-    {
-    struct cfs_bandwidth *cfs_b =
-    container_of(timer, struct cfs_bandwidth, period_timer);
-    int overrun;
-    let mut idle: c_int = 0;
-    let mut count: c_int = 0;
+    let mut cfs_b = container_of!(timer, cfs_bandwidth, period_timer);
+    let mut overrun = 0;
+pub static mut idle: c_int = 0;
+pub static mut count: c_int = 0;
     CLASS(raw_spinlock_irqsave, cfsb_guard)(&cfs_b.lock);
     for (;;) {
     overrun = hrtimer_forward_now(timer, cfs_b.period);
-    if (!overrun)
+    if (!overrun) {
     break;
+    }
     idle = do_sched_cfs_period_timer(cfs_b, overrun, cfsb_guard.flags);
     if (++count > 3) {
     u64 new, old = ktime_to_ns(cfs_b.period);
@@ -6752,8 +6962,6 @@ unsafe extern "C" fn sched_cfs_period_timer(timer: *mut hrtimer) -> enum hrtimer
     }
 #[no_mangle]
 pub unsafe extern "C" fn init_cfs_bandwidth(cfs_b: *mut cfs_bandwidth, parent: *mut cfs_bandwidth) {
-    void init_cfs_bandwidth(struct cfs_bandwidth *cfs_b, struct cfs_bandwidth *parent)
-    {
     raw_spin_lock_init(&cfs_b.lock);
     cfs_b.runtime = 0;
     cfs_b.quota = RUNTIME_INF;
@@ -6772,8 +6980,6 @@ pub unsafe extern "C" fn init_cfs_bandwidth(cfs_b: *mut cfs_bandwidth, parent: *
     }
 #[no_mangle]
 unsafe extern "C" fn init_cfs_rq_runtime(cfs_rq: *mut cfs_rq) {
-    static void init_cfs_rq_runtime(struct cfs_rq *cfs_rq)
-    {
     cfs_rq.runtime_enabled = 0;
     INIT_LIST_HEAD(&cfs_rq.throttled_list);
     INIT_LIST_HEAD(&cfs_rq.throttled_csd_list);
@@ -6781,23 +6987,21 @@ unsafe extern "C" fn init_cfs_rq_runtime(cfs_rq: *mut cfs_rq) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn start_cfs_bandwidth(cfs_b: *mut cfs_bandwidth) {
-    void start_cfs_bandwidth(struct cfs_bandwidth *cfs_b)
-    {
     lockdep_assert_held(&cfs_b.lock);
-    if (cfs_b.period_active)
+    if (cfs_b.period_active) {
     return;
+    }
     cfs_b.period_active = 1;
     hrtimer_forward_now(&cfs_b.period_timer, cfs_b.period);
     hrtimer_start_expires(&cfs_b.period_timer, HRTIMER_MODE_ABS_PINNED);
     }
 #[no_mangle]
 unsafe extern "C" fn destroy_cfs_bandwidth(cfs_b: *mut cfs_bandwidth) {
-    static void destroy_cfs_bandwidth(struct cfs_bandwidth *cfs_b)
-    {
     int __maybe_unused i;
 // init_cfs_bandwidth() was not called
-    if (!cfs_b.throttled_cfs_rq.next)
+    if (!cfs_b.throttled_cfs_rq.next) {
     return;
+    }
     hrtimer_cancel(&cfs_b.period_timer);
     hrtimer_cancel(&cfs_b.slack_timer);
 //
@@ -6811,9 +7015,10 @@ unsafe extern "C" fn destroy_cfs_bandwidth(cfs_b: *mut cfs_bandwidth) {
 // join a CSD list.
 //
     for_each_possible_cpu(i) {
-    struct rq *rq = cpu_rq(i);
-    if (list_empty(&rq.cfsb_csd_list))
+    let mut rq = cpu_rq(i);
+    if (list_empty(&rq.cfsb_csd_list)) {
     continue;
+    }
     scoped_guard(irqsave)
     __cfsb_csd_unthrottle(rq);
     }
@@ -6827,14 +7032,12 @@ unsafe extern "C" fn destroy_cfs_bandwidth(cfs_b: *mut cfs_bandwidth) {
 // cpu online callback
 #[no_mangle]
 unsafe extern "C" fn update_runtime_enabled(rq: *mut rq) -> void __maybe_unused {
-    static void __maybe_unused update_runtime_enabled(struct rq *rq)
-    {
-    struct task_group *tg;
+pub static mut tg: *mut c_void = core::ptr::null_mut();
     lockdep_assert_rq_held(rq);
     guard(rcu)();
     list_for_each_entry_rcu(tg, &task_groups, list) {
-    struct cfs_bandwidth *cfs_b = &tg.cfs_bandwidth;
-    struct cfs_rq *cfs_rq = tg_cfs_rq(tg, cpu_of(rq));
+    let mut cfs_b = &tg.cfs_bandwidth;
+    let mut cfs_rq = tg_cfs_rq(tg, cpu_of(rq));
     scoped_guard(raw_spinlock, &cfs_b.lock)
     cfs_rq.runtime_enabled = cfs_b.quota != RUNTIME_INF;
     }
@@ -6842,13 +7045,12 @@ unsafe extern "C" fn update_runtime_enabled(rq: *mut rq) -> void __maybe_unused 
 // cpu offline callback
 #[no_mangle]
 unsafe extern "C" fn unthrottle_offline_cfs_rqs(rq: *mut rq) -> void __maybe_unused {
-    static void __maybe_unused unthrottle_offline_cfs_rqs(struct rq *rq)
-    {
-    struct task_group *tg;
+pub static mut tg: *mut c_void = core::ptr::null_mut();
     lockdep_assert_rq_held(rq);
 // Do not unthrottle for an active CPU
-    if (cpumask_test_cpu(cpu_of(rq), cpu_active_mask))
+    if (cpumask_test_cpu(cpu_of(rq), cpu_active_mask)) {
     return;
+    }
 //
 // The rq clock has already been updated in the
 // set_rq_offline(), so we should skip updating
@@ -6857,16 +7059,18 @@ unsafe extern "C" fn unthrottle_offline_cfs_rqs(rq: *mut rq) -> void __maybe_unu
     rq_clock_start_loop_update(rq);
     guard(rcu)();
     list_for_each_entry_rcu(tg, &task_groups, list) {
-    struct cfs_rq *cfs_rq = tg_cfs_rq(tg, cpu_of(rq));
-    if (!cfs_rq.runtime_enabled)
+    let mut cfs_rq = tg_cfs_rq(tg, cpu_of(rq));
+    if (!cfs_rq.runtime_enabled) {
     continue;
+    }
 //
 // Offline rq is schedulable till CPU is completely disabled
 // in take_cpu_down(), so we prevent new cfs throttling here.
 //
     cfs_rq.runtime_enabled = 0;
-    if (!cfs_rq_throttled(cfs_rq))
+    if (!cfs_rq_throttled(cfs_rq)) {
     continue;
+    }
 //
 // clock_task is not advancing so we just need to make sure
 // there's some valid quota amount
@@ -6878,92 +7082,118 @@ unsafe extern "C" fn unthrottle_offline_cfs_rqs(rq: *mut rq) -> void __maybe_unu
     }
 #[no_mangle]
 pub unsafe extern "C" fn cfs_task_bw_constrained(p: *mut task_struct) -> bool {
-    bool cfs_task_bw_constrained(struct task_struct *p)
-    {
-    struct cfs_rq *cfs_rq = task_cfs_rq(p);
-    if (!cfs_bandwidth_used())
+    let mut cfs_rq = task_cfs_rq(p);
+    if (!cfs_bandwidth_used()) {
     return false;
+    }
     if (cfs_rq.runtime_enabled ||
-    tg_cfs_bandwidth(cfs_rq.tg).hierarchical_quota != RUNTIME_INF)
+    tg_cfs_bandwidth(cfs_rq.tg).hierarchical_quota != RUNTIME_INF) {
     return true;
+    }
     return false;
     }
 
 // called from pick_next_task_fair()
 #[no_mangle]
 unsafe extern "C" fn sched_fair_update_stop_tick(rq: *mut rq, p: *mut task_struct) {
-    static void sched_fair_update_stop_tick(struct rq *rq, struct task_struct *p)
-    {
-    let mut cpu: c_int = cpu_of(rq);
-    if (!cfs_bandwidth_used())
+pub static mut cpu: c_int = 0;
+    if (!cfs_bandwidth_used()) {
     return;
-    if (!tick_nohz_full_cpu(cpu))
+    }
+    if (!tick_nohz_full_cpu(cpu)) {
     return;
-    if (rq.nr_running != 1)
+    }
+    if (rq.nr_running != 1) {
     return;
+    }
 //
 // We know there is only one task runnable and we've just picked it. The
 // normal enqueue path will have cleared TICK_DEP_BIT_SCHED if we will
 // be otherwise able to stop the tick. Just need to check if we are using
 // bandwidth control.
 //
-    if (cfs_task_bw_constrained(p))
+    if (cfs_task_bw_constrained(p)) {
     tick_nohz_dep_set_cpu(cpu, TICK_DEP_BIT_SCHED);
     }
+    }
 
-    static bool account_cfs_rq_runtime(struct cfs_rq *cfs_rq, u64 delta_exec) { return false; }
-    static void check_enqueue_throttle(struct cfs_rq *cfs_rq) {}
-    static inline void sync_throttle(struct task_group *tg, int cpu) {}
-    static __always_inline void return_cfs_rq_runtime(struct cfs_rq *cfs_rq) {}
-    static void task_throttle_setup_work(struct task_struct *p) {}
-    static bool task_is_throttled(struct task_struct *p) { return false; }
-    static void dequeue_throttled_task(struct task_struct *p, int flags) {}
-    static bool enqueue_throttled_task(struct task_struct *p) { return false; }
-    static void record_throttle_clock(struct cfs_rq *cfs_rq) {}
 #[no_mangle]
-pub unsafe extern "C" fn cfs_rq_throttled(cfs_rq: *mut cfs_rq) -> c_int {
-    static inline int cfs_rq_throttled(struct cfs_rq *cfs_rq)
-    {
+#[no_mangle]
+// duplicate fn: account_cfs_rq_runtime
+pub unsafe extern "C" fn account_cfs_rq_runtime_dup(cfs_rq: *mut cfs_rq, delta_exec: u64) -> bool { return false; }
+#[no_mangle]
+pub unsafe extern "C" fn check_enqueue_throttle(cfs_rq: *mut cfs_rq) {}
+#[no_mangle]
+pub unsafe extern "C" fn sync_throttle(tg: *mut task_group, cpu: c_int) {}
+    static __always_inline void return_cfs_rq_runtime(cfs_rq *cfs_rq) {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: task_throttle_setup_work
+pub unsafe extern "C" fn task_throttle_setup_work_dup(p: *mut task_struct) {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: task_is_throttled
+pub unsafe extern "C" fn task_is_throttled_dup(p: *mut task_struct) -> bool { return false; }
+#[no_mangle]
+pub unsafe extern "C" fn dequeue_throttled_task(p: *mut task_struct, flags: c_int) {}
+#[no_mangle]
+pub unsafe extern "C" fn enqueue_throttled_task(p: *mut task_struct) -> bool { return false; }
+#[no_mangle]
+pub unsafe extern "C" fn record_throttle_clock(cfs_rq: *mut cfs_rq) {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: cfs_rq_throttled
+pub unsafe extern "C" fn cfs_rq_throttled_dup(cfs_rq: *mut cfs_rq) -> c_int {
     return 0;
     }
 #[no_mangle]
-pub unsafe extern "C" fn cfs_rq_pelt_clock_throttled(cfs_rq: *mut cfs_rq) -> bool {
-    static inline bool cfs_rq_pelt_clock_throttled(struct cfs_rq *cfs_rq)
-    {
+#[no_mangle]
+// duplicate fn: cfs_rq_pelt_clock_throttled
+pub unsafe extern "C" fn cfs_rq_pelt_clock_throttled_dup(cfs_rq: *mut cfs_rq) -> bool {
     return false;
     }
 #[no_mangle]
-pub unsafe extern "C" fn throttled_hierarchy(cfs_rq: *mut cfs_rq) -> c_int {
-    static inline int throttled_hierarchy(struct cfs_rq *cfs_rq)
-    {
+#[no_mangle]
+// duplicate fn: throttled_hierarchy
+pub unsafe extern "C" fn throttled_hierarchy_dup(cfs_rq: *mut cfs_rq) -> c_int {
     return 0;
     }
 #[no_mangle]
-pub unsafe extern "C" fn lb_throttled_hierarchy(p: *mut task_struct, dst_cpu: c_int) -> c_int {
-    static inline int lb_throttled_hierarchy(struct task_struct *p, int dst_cpu)
-    {
+#[no_mangle]
+// duplicate fn: lb_throttled_hierarchy
+pub unsafe extern "C" fn lb_throttled_hierarchy_dup(p: *mut task_struct, dst_cpu: c_int) -> c_int {
     return 0;
     }
 
-    void init_cfs_bandwidth(struct cfs_bandwidth *cfs_b, struct cfs_bandwidth *parent) {}
-    static void init_cfs_rq_runtime(struct cfs_rq *cfs_rq) {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: init_cfs_bandwidth
+pub unsafe extern "C" fn init_cfs_bandwidth_dup(cfs_b: *mut cfs_bandwidth, parent: *mut cfs_bandwidth) {}
+#[no_mangle]
+pub unsafe extern "C" fn init_cfs_rq_runtime(cfs_rq: *mut cfs_rq) {}
 
-    static inline struct cfs_bandwidth *tg_cfs_bandwidth(struct task_group *tg)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: tg_cfs_bandwidth
+pub unsafe extern "C" fn tg_cfs_bandwidth_dup(tg: *mut task_group) -> *mut c_void {
     return core::ptr::null_mut();
     }
-    static inline void destroy_cfs_bandwidth(struct cfs_bandwidth *cfs_b) {}
-    static inline void update_runtime_enabled(struct rq *rq) {}
-    static inline void unthrottle_offline_cfs_rqs(struct rq *rq) {}
+#[no_mangle]
+pub unsafe extern "C" fn destroy_cfs_bandwidth(cfs_b: *mut cfs_bandwidth) {}
+#[no_mangle]
+pub unsafe extern "C" fn update_runtime_enabled(rq: *mut rq) {}
+#[no_mangle]
+pub unsafe extern "C" fn unthrottle_offline_cfs_rqs(rq: *mut rq) {}
 
 #[no_mangle]
-pub unsafe extern "C" fn cfs_task_bw_constrained(p: *mut task_struct) -> bool {
-    bool cfs_task_bw_constrained(struct task_struct *p)
-    {
+#[no_mangle]
+// duplicate fn: cfs_task_bw_constrained
+pub unsafe extern "C" fn cfs_task_bw_constrained_dup(p: *mut task_struct) -> bool {
     return false;
     }
 
-    static inline void sched_fair_update_stop_tick(struct rq *rq, struct task_struct *p) {}
+#[no_mangle]
+pub unsafe extern "C" fn sched_fair_update_stop_tick(rq: *mut rq, p: *mut task_struct) {}
 
 //
 // CFS operations on tasks:
@@ -6971,23 +7201,23 @@ pub unsafe extern "C" fn cfs_task_bw_constrained(p: *mut task_struct) -> bool {
 
 #[no_mangle]
 unsafe extern "C" fn hrtick_start_fair(rq: *mut rq, p: *mut task_struct) {
-    static void hrtick_start_fair(struct rq *rq, struct task_struct *p)
-    {
-    struct sched_entity *se = &p.se;
-    let mut scale: c_ulong = 1024;
-    let mut util: c_ulong = 0;
-    u64 vdelta;
-    u64 delta;
-    WARN_ON_ONCE(task_rq(p) != rq);
-    if (rq.cfs.h_nr_queued <= 1)
+    let mut se = &p.se;
+pub static mut scale: c_ulong = 1024;
+pub static mut util: c_ulong = 0;
+    let mut vdelta = 0;
+    let mut delta = 0;
+    WARN_ON_ONCE!(task_rq(p) != rq);
+    if (rq.cfs.h_nr_queued <= 1) {
     return;
+    }
 //
 // Compute time until virtual deadline
 //
     vdelta = se.deadline - se.vruntime;
     if ((s64)vdelta < 0) {
-    if (task_current_donor(rq, p))
+    if (task_current_donor(rq, p)) {
     resched_curr(rq);
+    }
     return;
     }
     delta = (se.h_load.weight * vdelta) / NICE_0_LOAD;
@@ -7006,33 +7236,29 @@ unsafe extern "C" fn hrtick_start_fair(rq: *mut rq, p: *mut task_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn hrtick_update(rq: *mut rq) {
-    static void hrtick_update(struct rq *rq)
-    {
-    struct task_struct *donor = rq.donor;
-    if (!hrtick_enabled_fair(rq) || donor.sched_class != &fair_sched_class)
+    let mut donor = rq.donor;
+    if (!hrtick_enabled_fair(rq) || donor.sched_class != &fair_sched_class) {
     return;
-    if (hrtick_active(rq))
+    }
+    if (hrtick_active(rq)) {
     return;
+    }
     hrtick_start_fair(rq, donor);
     }
 
-    static inline void
-    hrtick_start_fair(struct rq *rq, struct task_struct *p)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hrtick_start_fair(rq: *mut rq, p: *mut task_struct) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn hrtick_update(rq: *mut rq) {
-    static inline void hrtick_update(struct rq *rq)
-    {
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn cpu_overutilized(cpu: c_int) -> bool {
-    static inline bool cpu_overutilized(int cpu)
-    {
-    unsigned long rq_util_max;
-    if (!sched_energy_enabled())
+    let mut rq_util_max = 0;
+    if (!sched_energy_enabled()) {
     return false;
+    }
     rq_util_max = uclamp_rq_get(cpu_rq(cpu), UCLAMP_MAX);
 // Return true only if the utilization doesn't fit CPU's capacity
     return !util_fits_cpu(cpu_util_cfs(cpu), 0, rq_util_max, cpu);
@@ -7042,86 +7268,76 @@ pub unsafe extern "C" fn cpu_overutilized(cpu: c_int) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn is_rd_overutilized(rd: *mut root_domain) -> bool {
-    static inline bool is_rd_overutilized(struct root_domain *rd)
-    {
     return !sched_energy_enabled() || READ_ONCE(rd.overutilized);
     }
 #[no_mangle]
 pub unsafe extern "C" fn set_rd_overutilized(rd: *mut root_domain, flag: bool) {
-    static inline void set_rd_overutilized(struct root_domain *rd, bool flag)
-    {
-    if (!sched_energy_enabled())
+    if (!sched_energy_enabled()) {
     return;
+    }
     WRITE_ONCE(rd.overutilized, flag);
     trace_sched_overutilized_tp(rd, flag);
     }
 #[no_mangle]
 pub unsafe extern "C" fn check_update_overutilized_status(rq: *mut rq) {
-    static inline void check_update_overutilized_status(struct rq *rq)
-    {
 //
 // overutilized field is used for load balancing decisions only
 // if energy aware scheduler is being used
 //
-    if (!is_rd_overutilized(rq.rd) && cpu_overutilized(rq.cpu))
+    if (!is_rd_overutilized(rq.rd) && cpu_overutilized(rq.cpu)) {
     set_rd_overutilized(rq.rd, 1);
+    }
     }
 // Runqueue only has SCHED_IDLE tasks enqueued
 #[no_mangle]
 unsafe extern "C" fn sched_idle_rq(rq: *mut rq) -> c_int {
-    static int sched_idle_rq(struct rq *rq)
-    {
     return unlikely(rq.nr_running == rq.cfs.h_nr_idle &&
     rq.nr_running);
     }
 #[no_mangle]
 unsafe extern "C" fn choose_sched_idle_rq(rq: *mut rq, p: *mut task_struct) -> c_int {
-    static int choose_sched_idle_rq(struct rq *rq, struct task_struct *p)
-    {
     return sched_idle_rq(rq) && !task_has_idle_policy(p);
     }
 #[no_mangle]
 unsafe extern "C" fn choose_idle_cpu(cpu: c_int, p: *mut task_struct) -> c_int {
-    static int choose_idle_cpu(int cpu, struct task_struct *p)
-    {
     return available_idle_cpu(cpu) ||
     choose_sched_idle_rq(cpu_rq(cpu), p);
     }
-    static void
-    requeue_delayed_entity(struct cfs_rq *cfs_rq, struct sched_entity *se)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn requeue_delayed_entity(cfs_rq: *mut cfs_rq, se: *mut sched_entity) {
 //
 // se->sched_delayed should imply: se->on_rq == 1.
 // Because a delayed entity is one that is still on
 // the runqueue competing until elegibility.
 //
-    WARN_ON_ONCE(!se.sched_delayed);
-    WARN_ON_ONCE(!se.on_rq);
+    WARN_ON_ONCE!(!se.sched_delayed);
+    WARN_ON_ONCE!(!se.on_rq);
     if (update_entity_lag(cfs_rq, se)) {
-    cfs_rq.h_nr_queued--;
-    if (se != cfs_rq.curr)
+    cfs_rq.h_nr_queued -= 1;
+    if (se != cfs_rq.curr) {
     __dequeue_entity(cfs_rq, se);
+    }
     place_entity(cfs_rq, se, 0);
-    if (se != cfs_rq.curr)
+    if (se != cfs_rq.curr) {
     __enqueue_entity(cfs_rq, se);
-    cfs_rq.h_nr_queued++;
+    }
+    cfs_rq.h_nr_queued += 1;
     }
     update_load_avg(cfs_rq, se, 0);
     clear_delayed(se);
     }
 #[no_mangle]
 unsafe extern "C" fn enqueue_hierarchy(p: *mut task_struct, flags: c_int) -> c_ulong {
-    static unsigned long enqueue_hierarchy(struct task_struct *p, int flags)
-    {
-    let mut weight: c_ulong = NICE_0_LOAD;
-    let mut task_new: c_int = !(flags & ENQUEUE_WAKEUP);
-    struct sched_entity *se = &p.se;
-    let mut h_nr_idle: c_int = task_has_idle_policy(p);
-    let mut h_nr_runnable: c_int = 1;
-    if (task_new && se.sched_delayed)
+pub static mut weight: c_ulong = 0;
+pub static mut task_new: c_int = 0;
+    let mut se = &p.se;
+pub static mut h_nr_idle: c_int = 0;
+pub static mut h_nr_runnable: c_int = 1;
+    if (task_new && se.sched_delayed) {
     h_nr_runnable = 0;
+    }
     for_each_sched_entity(se) {
-    struct cfs_rq *cfs_rq = cfs_rq_of(se);
+    let mut cfs_rq = cfs_rq_of(se);
     update_curr(cfs_rq);
     if (!se.on_rq) {
     enqueue_entity(cfs_rq, se, flags);
@@ -7131,10 +7347,11 @@ unsafe extern "C" fn enqueue_hierarchy(p: *mut task_struct, flags: c_int) -> c_u
     update_cfs_group(se);
     }
     cfs_rq.h_nr_runnable += h_nr_runnable;
-    cfs_rq.h_nr_queued++;
+    cfs_rq.h_nr_queued += 1;
     cfs_rq.h_nr_idle += h_nr_idle;
-    if (cfs_rq_is_idle(cfs_rq))
+    if (cfs_rq_is_idle(cfs_rq)) {
     h_nr_idle = 1;
+    }
     weight = __calc_prop_weight(cfs_rq, se, weight);
     flags = ENQUEUE_WAKEUP;
     }
@@ -7143,10 +7360,9 @@ unsafe extern "C" fn enqueue_hierarchy(p: *mut task_struct, flags: c_int) -> c_u
 // Update curr's vruntime before placing entity or updating lag
 #[no_mangle]
 pub unsafe extern "C" fn update_curr_eevdf(cfs_rq: *mut cfs_rq) {
-    static inline void update_curr_eevdf(struct cfs_rq *cfs_rq)
-    {
-    if (!cfs_rq.curr)
+    if (!cfs_rq.curr) {
     return;
+    }
     update_curr(cfs_rq_of(cfs_rq.curr));
     }
 //
@@ -7154,25 +7370,26 @@ pub unsafe extern "C" fn update_curr_eevdf(cfs_rq: *mut cfs_rq) {
 // increased. Here we update the fair scheduling stats and
 // then put the task into the rbtree:
 //
-    static void
-    enqueue_task_fair(struct rq *rq, struct task_struct *p, int flags)
-    {
-    let mut rq_h_nr_queued: c_int = rq.cfs.h_nr_queued;
-    let mut task_new: c_int = !(flags & ENQUEUE_WAKEUP);
-    struct sched_entity *se = &p.se;
-    struct cfs_rq *cfs_rq = &rq.cfs;
-    unsigned long weight;
-    bool curr;
-    if (task_is_throttled(p) && enqueue_throttled_task(p))
+#[no_mangle]
+pub unsafe extern "C" fn enqueue_task_fair(rq: *mut rq, p: *mut task_struct, flags: c_int) {
+pub static mut rq_h_nr_queued: c_int = 0;
+pub static mut task_new: c_int = 0;
+    let mut se = &p.se;
+    let mut cfs_rq = &rq.cfs;
+    let mut weight = 0;
+    let mut curr = 0;
+    if (task_is_throttled(p) && enqueue_throttled_task(p)) {
     return;
+    }
 //
 // The code below (indirectly) updates schedutil which looks at
 // the cfs_rq utilization to select a frequency.
 // Let's add the task's estimated utilization to the cfs_rq's
 // estimated utilization, before we update schedutil.
 //
-    if (!p.se.sched_delayed || (flags & ENQUEUE_DELAYED))
+    if (!p.se.sched_delayed || (flags & ENQUEUE_DELAYED)) {
     util_est_enqueue(cfs_rq, p);
+    }
     update_curr_eevdf(cfs_rq);
     if (flags & ENQUEUE_DELAYED) {
     requeue_delayed_entity(cfs_rq, se);
@@ -7183,24 +7400,28 @@ pub unsafe extern "C" fn update_curr_eevdf(cfs_rq: *mut cfs_rq) {
 // utilization updates, so do it here explicitly with the IOWAIT flag
 // passed.
 //
-    if (p.in_iowait)
+    if (p.in_iowait) {
     cpufreq_update_util(rq, SCHED_CPUFREQ_IOWAIT);
+    }
 //
 // XXX comment on the curr thing
 //
     curr = (cfs_rq.curr == se);
-    if (curr)
+    if (curr) {
     place_entity(cfs_rq, se, flags);
-    if (se.on_rq && se.sched_delayed)
+    }
+    if (se.on_rq && se.sched_delayed) {
     requeue_delayed_entity(cfs_rq, se);
+    }
     weight = enqueue_hierarchy(p, flags);
     if (!curr) {
     reweight_eevdf(cfs_rq, se, weight, false);
     place_entity(cfs_rq, se, flags | ENQUEUE_QUEUED);
     __enqueue_entity(cfs_rq, se);
     }
-    if (!rq_h_nr_queued && rq.cfs.h_nr_queued)
+    if (!rq_h_nr_queued && rq.cfs.h_nr_queued) {
     dl_server_start(&rq.fair_server);
+    }
 // At this point se is NULL and we are at root level
     add_nr_running(rq, 1);
 //
@@ -7217,44 +7438,47 @@ pub unsafe extern "C" fn update_curr_eevdf(cfs_rq: *mut cfs_rq) {
 // into account, but that is not straightforward to implement,
 // and the following generally works well enough in practice.
 //
-    if (!task_new)
+    if (!task_new) {
     check_update_overutilized_status(rq);
+    }
     assert_list_leaf_cfs_rq(rq);
     hrtick_update(rq);
     }
 #[no_mangle]
 unsafe extern "C" fn dequeue_hierarchy(p: *mut task_struct, flags: c_int) {
-    static void dequeue_hierarchy(struct task_struct *p, int flags)
-    {
-    struct sched_entity *se = &p.se;
-    let mut task_sleep: bool = flags & DEQUEUE_SLEEP;
-    let mut task_delayed: bool = flags & DEQUEUE_DELAYED;
-    let mut task_throttled: bool = flags & DEQUEUE_THROTTLE;
-    let mut h_nr_runnable: c_int = 0;
-    let mut h_nr_idle: c_int = task_has_idle_policy(p);
-    let mut dequeue: bool = true;
-    if (task_sleep || task_delayed || !se.sched_delayed)
+    let mut se = &p.se;
+pub static mut task_sleep: bool = false;
+pub static mut task_delayed: bool = false;
+pub static mut task_throttled: bool = false;
+pub static mut h_nr_runnable: c_int = 0;
+pub static mut h_nr_idle: c_int = 0;
+pub static mut dequeue: bool = true;
+    if (task_sleep || task_delayed || !se.sched_delayed) {
     h_nr_runnable = 1;
+    }
     for_each_sched_entity(se) {
-    struct cfs_rq *cfs_rq = cfs_rq_of(se);
+    let mut cfs_rq = cfs_rq_of(se);
     update_curr(cfs_rq);
     if (dequeue) {
     dequeue_entity(cfs_rq, se, flags);
 // Don't dequeue parent if it has other entities besides us
-    if (cfs_rq.load.weight)
+    if (cfs_rq.load.weight) {
     dequeue = false;
+    }
     } else {
     update_load_avg(cfs_rq, se, UPDATE_TG);
     se_update_runnable(se);
     update_cfs_group(se);
     }
     cfs_rq.h_nr_runnable -= h_nr_runnable;
-    cfs_rq.h_nr_queued--;
+    cfs_rq.h_nr_queued -= 1;
     cfs_rq.h_nr_idle -= h_nr_idle;
-    if (cfs_rq_is_idle(cfs_rq))
+    if (cfs_rq_is_idle(cfs_rq)) {
     h_nr_idle = 1;
-    if (throttled_hierarchy(cfs_rq) && task_throttled)
+    }
+    if (throttled_hierarchy(cfs_rq) && task_throttled) {
     record_throttle_clock(cfs_rq);
+    }
     flags |= DEQUEUE_SLEEP;
     flags &= ~(DEQUEUE_DELAYED | DEQUEUE_SPECIAL);
     }
@@ -7268,27 +7492,26 @@ unsafe extern "C" fn dequeue_hierarchy(p: *mut task_struct, flags: c_int) {
 //
 #[no_mangle]
 unsafe extern "C" fn __dequeue_task(rq: *mut rq, p: *mut task_struct, flags: c_int) -> bool {
-    static bool __dequeue_task(struct rq *rq, struct task_struct *p, int flags)
-    {
-    struct sched_entity *se = &p.se;
-    struct cfs_rq *cfs_rq = &rq.cfs;
-    let mut was_sched_idle: bool = sched_idle_rq(rq);
-    let mut task_sleep: bool = flags & DEQUEUE_SLEEP;
-    let mut task_delayed: bool = flags & DEQUEUE_DELAYED;
+    let mut se = &p.se;
+    let mut cfs_rq = &rq.cfs;
+pub static mut was_sched_idle: bool = false;
+pub static mut task_sleep: bool = false;
+pub static mut task_delayed: bool = false;
     clear_buddies(cfs_rq, se);
     update_curr_eevdf(cfs_rq);
     update_entity_lag(cfs_rq, se);
     if (flags & DEQUEUE_DELAYED) {
-    WARN_ON_ONCE(!se.sched_delayed);
+    WARN_ON_ONCE!(!se.sched_delayed);
     } else {
-    let mut delay: bool = task_sleep;
+pub static mut delay: bool = false;
 //
 // DELAY_DEQUEUE relies on spurious wakeups, special task
 // states must not suffer spurious wakeups, excempt them.
 //
-    if (flags & (DEQUEUE_SPECIAL | DEQUEUE_THROTTLE))
+    if (flags & (DEQUEUE_SPECIAL | DEQUEUE_THROTTLE)) {
     delay = false;
-    WARN_ON_ONCE(delay && se.sched_delayed);
+    }
+    WARN_ON_ONCE!(delay && se.sched_delayed);
     if (sched_feat(DELAY_DEQUEUE) && delay &&
     !entity_eligible(cfs_rq, se)) {
     update_load_avg(cfs_rq_of(se), se, UPDATE_UTIL_EST);
@@ -7301,16 +7524,18 @@ unsafe extern "C" fn __dequeue_task(rq: *mut rq, p: *mut task_struct, flags: c_i
     se.deadline -= se.vruntime;
     se.rel_deadline = 1;
     }
-    if (se != cfs_rq.curr)
+    if (se != cfs_rq.curr) {
     __dequeue_entity(cfs_rq, se);
+    }
     sub_nr_running(rq, 1);
 // balance early to pull high priority tasks
-    if (unlikely(!was_sched_idle && sched_idle_rq(rq)))
+    if (unlikely(!was_sched_idle && sched_idle_rq(rq))) {
     rq.next_balance = jiffies;
+    }
     if (task_delayed) {
     clear_delayed(se);
-    WARN_ON_ONCE(!task_sleep);
-    WARN_ON_ONCE(p.on_rq != 1);
+    WARN_ON_ONCE!(!task_sleep);
+    WARN_ON_ONCE!(p.on_rq != 1);
 //
 // Fix-up what block_task() skipped.
 //
@@ -7327,16 +7552,16 @@ unsafe extern "C" fn __dequeue_task(rq: *mut rq, p: *mut task_struct, flags: c_i
 //
 #[no_mangle]
 unsafe extern "C" fn dequeue_task_fair(rq: *mut rq, p: *mut task_struct, flags: c_int) -> bool {
-    static bool dequeue_task_fair(struct rq *rq, struct task_struct *p, int flags)
-    {
     if (task_is_throttled(p)) {
     dequeue_throttled_task(p, flags);
     return true;
     }
-    if (!p.se.sched_delayed)
+    if (!p.se.sched_delayed) {
     util_est_dequeue(&rq.cfs, p);
-    if (!__dequeue_task(rq, p, flags))
+    }
+    if (!__dequeue_task(rq, p, flags)) {
     return false;
+    }
 //
 // Must not reference @p after __dequeue_task(DEQUEUE_DELAYED).
 //
@@ -7344,27 +7569,23 @@ unsafe extern "C" fn dequeue_task_fair(rq: *mut rq, p: *mut task_struct, flags: 
     }
 #[no_mangle]
 pub unsafe extern "C" fn cfs_h_nr_delayed(rq: *mut rq) -> c_uint {
-    static inline unsigned int cfs_h_nr_delayed(struct rq *rq)
-    {
     return (rq.cfs.h_nr_queued - rq.cfs.h_nr_runnable);
     }
 // Working cpumask for: sched_balance_rq(), sched_balance_newidle().
-    static DEFINE_PER_CPU(cpumask_var_t, load_balance_mask);
-    static DEFINE_PER_CPU(cpumask_var_t, select_rq_mask);
-    static DEFINE_PER_CPU(cpumask_var_t, should_we_balance_tmpmask);
+pub static mut cpumask_var_t: usize = 0;
+pub static mut cpumask_var_t: usize = 0;
+pub static mut cpumask_var_t: usize = 0;
 
     static struct {
-    cpumask_var_t idle_cpus_mask;
-    int has_blocked_load;		/* Idle CPUS has blocked load */
-    int needs_update;		/* Newly idle CPUs need their next_balance collated */
-    unsigned long next_balance;     /* in jiffy units */
-    unsigned long next_blocked;	/* Next update of blocked load in jiffies */
+    let mut idle_cpus_mask;
+    let mut has_blocked_load = 0;		/* Idle CPUS has blocked load */
+    let mut needs_update = 0;		/* Newly idle CPUs need their next_balance collated */
+    let mut next_balance = 0;     /* in jiffy units */
+    let mut next_blocked = 0;	/* Next update of blocked load in jiffies */
     } nohz ____cacheline_aligned;
 
 #[no_mangle]
 unsafe extern "C" fn cpu_load(rq: *mut rq) -> c_ulong {
-    static unsigned long cpu_load(struct rq *rq)
-    {
     return cfs_rq_load_avg(&rq.cfs);
     }
 //
@@ -7382,13 +7603,12 @@ unsafe extern "C" fn cpu_load(rq: *mut rq) -> c_ulong {
 //
 #[no_mangle]
 unsafe extern "C" fn cpu_load_without(rq: *mut rq, p: *mut task_struct) -> c_ulong {
-    static unsigned long cpu_load_without(struct rq *rq, struct task_struct *p)
-    {
-    struct cfs_rq *cfs_rq;
-    unsigned int load;
+pub static mut cfs_rq: *mut c_void = core::ptr::null_mut();
+    let mut load = 0;
 // Task has no contribution or is new
-    if (cpu_of(rq) != task_cpu(p) || !READ_ONCE(p.se.avg.last_update_time))
+    if (cpu_of(rq) != task_cpu(p) || !READ_ONCE(p.se.avg.last_update_time)) {
     return cpu_load(rq);
+    }
     cfs_rq = &rq.cfs;
     load = READ_ONCE(cfs_rq.avg.load_avg);
 // Discount task's util from CPU's util
@@ -7397,19 +7617,16 @@ unsafe extern "C" fn cpu_load_without(rq: *mut rq, p: *mut task_struct) -> c_ulo
     }
 #[no_mangle]
 unsafe extern "C" fn cpu_runnable(rq: *mut rq) -> c_ulong {
-    static unsigned long cpu_runnable(struct rq *rq)
-    {
     return cfs_rq_runnable_avg(&rq.cfs);
     }
 #[no_mangle]
 unsafe extern "C" fn cpu_runnable_without(rq: *mut rq, p: *mut task_struct) -> c_ulong {
-    static unsigned long cpu_runnable_without(struct rq *rq, struct task_struct *p)
-    {
-    struct cfs_rq *cfs_rq;
-    unsigned int runnable;
+pub static mut cfs_rq: *mut c_void = core::ptr::null_mut();
+    let mut runnable = 0;
 // Task has no contribution or is new
-    if (cpu_of(rq) != task_cpu(p) || !READ_ONCE(p.se.avg.last_update_time))
+    if (cpu_of(rq) != task_cpu(p) || !READ_ONCE(p.se.avg.last_update_time)) {
     return cpu_runnable(rq);
+    }
     cfs_rq = &rq.cfs;
     runnable = READ_ONCE(cfs_rq.avg.runnable_avg);
 // Discount task's runnable from CPU's runnable
@@ -7418,14 +7635,10 @@ unsafe extern "C" fn cpu_runnable_without(rq: *mut rq, p: *mut task_struct) -> c
     }
 #[no_mangle]
 unsafe extern "C" fn capacity_of(cpu: c_int) -> c_ulong {
-    static unsigned long capacity_of(int cpu)
-    {
     return cpu_rq(cpu).cpu_capacity;
     }
 #[no_mangle]
 unsafe extern "C" fn record_wakee(p: *mut task_struct) {
-    static void record_wakee(struct task_struct *p)
-    {
 //
 // Only decay a single time; tasks that have less then 1 wakeup per
 // jiffy will not have built up many flips.
@@ -7436,7 +7649,7 @@ unsafe extern "C" fn record_wakee(p: *mut task_struct) {
     }
     if (current.last_wakee != p) {
     current.last_wakee = p;
-    current.wakee_flips++;
+    current.wakee_flips += 1;
     }
     }
 //
@@ -7458,15 +7671,15 @@ unsafe extern "C" fn record_wakee(p: *mut task_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn wake_wide(p: *mut task_struct) -> c_int {
-    static int wake_wide(struct task_struct *p)
-    {
-    let mut master: c_uint = current.wakee_flips;
-    let mut slave: c_uint = p.wakee_flips;
-    let mut factor: c_int = __this_cpu_read(sd_llc_size);
-    if (master < slave)
+pub static mut master: c_uint = 0;
+pub static mut slave: c_uint = 0;
+pub static mut factor: c_int = 0;
+    if (master < slave) {
     swap(master, slave);
-    if (slave < factor || master < slave * factor)
+    }
+    if (slave < factor || master < slave * factor) {
     return 0;
+    }
     return 1;
     }
 //
@@ -7481,9 +7694,8 @@ unsafe extern "C" fn wake_wide(p: *mut task_struct) -> c_int {
 // scheduling latency of the CPUs. This seems to work
 // for the overloaded case.
 //
-    static int
-    wake_affine_idle(int this_cpu, int prev_cpu, int sync)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn wake_affine_idle(this_cpu: c_int, prev_cpu: c_int, sync: c_int) -> c_int {
 //
 // If this_cpu is idle, it implies the wakeup is from interrupt
 // context. Only allow the move if cache is shared. Otherwise an
@@ -7496,39 +7708,43 @@ unsafe extern "C" fn wake_wide(p: *mut task_struct) -> c_int {
 // a cpufreq perspective, it's better to have higher utilisation
 // on one CPU.
 //
-    if (available_idle_cpu(this_cpu) && cpus_share_cache(this_cpu, prev_cpu))
+    if (available_idle_cpu(this_cpu) && cpus_share_cache(this_cpu, prev_cpu)) {
     return available_idle_cpu(prev_cpu) ? prev_cpu : this_cpu;
+    }
     if (sync) {
-    struct rq *rq = cpu_rq(this_cpu);
-    if ((rq.nr_running - cfs_h_nr_delayed(rq)) == 1)
+    let mut rq = cpu_rq(this_cpu);
+    if ((rq.nr_running - cfs_h_nr_delayed(rq)) == 1) {
     return this_cpu;
     }
-    if (available_idle_cpu(prev_cpu))
+    }
+    if (available_idle_cpu(prev_cpu)) {
     return prev_cpu;
+    }
     return nr_cpumask_bits;
     }
-    static int
-    wake_affine_weight(struct sched_domain *sd, struct task_struct *p,
-    int this_cpu, int prev_cpu, int sync)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn wake_affine_weight(sd: *mut sched_domain, p: *mut task_struct, this_cpu: c_int, prev_cpu: c_int, sync: c_int) -> c_int {
     s64 this_eff_load, prev_eff_load;
-    unsigned long task_load;
+    let mut task_load = 0;
     this_eff_load = cpu_load(cpu_rq(this_cpu));
     if (sync) {
-    let mut current_load: c_ulong = task_h_load(current);
-    if (current_load > this_eff_load)
+pub static mut current_load: c_ulong = 0;
+    if (current_load > this_eff_load) {
     return this_cpu;
+    }
     this_eff_load -= current_load;
     }
     task_load = task_h_load(p);
     this_eff_load += task_load;
-    if (sched_feat(WA_BIAS))
+    if (sched_feat(WA_BIAS)) {
     this_eff_load *= 100;
+    }
     this_eff_load *= capacity_of(prev_cpu);
     prev_eff_load = cpu_load(cpu_rq(prev_cpu));
     prev_eff_load -= task_load;
-    if (sched_feat(WA_BIAS))
+    if (sched_feat(WA_BIAS)) {
     prev_eff_load *= 100 + (sd.imbalance_pct - 100) / 2;
+    }
     prev_eff_load *= capacity_of(this_cpu);
 //
 // If sync, adjust the weight of prev_eff_load such that if
@@ -7536,51 +7752,55 @@ unsafe extern "C" fn wake_wide(p: *mut task_struct) -> c_int {
 // stacking the wakee on top of the waker if no other CPU is
 // idle.
 //
-    if (sync)
+    if (sync) {
     prev_eff_load += 1;
+    }
     return this_eff_load < prev_eff_load ? this_cpu : nr_cpumask_bits;
     }
-    static int wake_affine(struct sched_domain *sd, struct task_struct *p,
-    int this_cpu, int prev_cpu, int sync)
-    {
-    let mut target: c_int = nr_cpumask_bits;
-    if (sched_feat(WA_IDLE))
+#[no_mangle]
+pub unsafe extern "C" fn wake_affine(sd: *mut sched_domain, p: *mut task_struct, this_cpu: c_int, prev_cpu: c_int, sync: c_int) -> c_int {
+pub static mut target: c_int = 0;
+    if (sched_feat(WA_IDLE)) {
     target = wake_affine_idle(this_cpu, prev_cpu, sync);
-    if (sched_feat(WA_WEIGHT) && target == nr_cpumask_bits)
+    }
+    if (sched_feat(WA_WEIGHT) && target == nr_cpumask_bits) {
     target = wake_affine_weight(sd, p, this_cpu, prev_cpu, sync);
+    }
     schedstat_inc(p.stats.nr_wakeups_affine_attempts);
-    if (target != this_cpu)
+    if (target != this_cpu) {
     return prev_cpu;
+    }
     schedstat_inc(sd.ttwu_move_affine);
     schedstat_inc(p.stats.nr_wakeups_affine);
     return target;
     }
-    static struct sched_group *
-    sched_balance_find_dst_group(struct sched_domain *sd, struct task_struct *p, int this_cpu);
+// forward_decl: sched_balance_find_dst_group;
 //
 // sched_balance_find_dst_group_cpu - find the idlest CPU among the CPUs in the group.
 //
-    static int
-    sched_balance_find_dst_group_cpu(struct sched_group *group, struct task_struct *p, int this_cpu)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sched_balance_find_dst_group_cpu(group: *mut sched_group, p: *mut task_struct, this_cpu: c_int) -> c_int {
     unsigned long load, min_load = ULONG_MAX;
-    let mut min_exit_latency: c_uint = UINT_MAX;
-    let mut latest_idle_timestamp: u64 = 0;
-    let mut least_loaded_cpu: c_int = this_cpu;
-    let mut shallowest_idle_cpu: c_int = -1;
-    int i;
+pub static mut min_exit_latency: c_uint = 0;
+pub static mut latest_idle_timestamp: u64 = 0;
+pub static mut least_loaded_cpu: c_int = 0;
+pub static mut shallowest_idle_cpu: c_int = 0;
+    let mut i = 0;
 // Check if we have any choice:
-    if (group.group_weight == 1)
+    if (group.group_weight == 1) {
     return cpumask_first(sched_group_span(group));
+    }
 // Traverse only the allowed CPUs
     for_each_cpu_and(i, sched_group_span(group), p.cpus_ptr) {
-    struct rq *rq = cpu_rq(i);
-    if (!sched_core_cookie_match(rq, p))
+    let mut rq = cpu_rq(i);
+    if (!sched_core_cookie_match(rq, p)) {
     continue;
-    if (choose_sched_idle_rq(rq, p))
+    }
+    if (choose_sched_idle_rq(rq, p)) {
     return i;
+    }
     if (available_idle_cpu(i)) {
-    struct cpuidle_state *idle = idle_get_state(rq);
+    let mut idle = idle_get_state(rq);
     if (idle && idle.exit_latency < min_exit_latency) {
 //
 // We give priority to a CPU whose idle state
@@ -7610,22 +7830,23 @@ unsafe extern "C" fn wake_wide(p: *mut task_struct) -> c_int {
     }
     return shallowest_idle_cpu != -1 ? shallowest_idle_cpu : least_loaded_cpu;
     }
-    static inline int sched_balance_find_dst_cpu(struct sched_domain *sd, struct task_struct *p,
-    int cpu, int prev_cpu, int sd_flag)
-    {
-    let mut new_cpu: c_int = cpu;
-    if (!cpumask_intersects(sched_domain_span(sd), p.cpus_ptr))
+#[no_mangle]
+pub unsafe extern "C" fn sched_balance_find_dst_cpu(sd: *mut sched_domain, p: *mut task_struct, cpu: c_int, prev_cpu: c_int, sd_flag: c_int) -> c_int {
+pub static mut new_cpu: c_int = 0;
+    if (!cpumask_intersects(sched_domain_span(sd), p.cpus_ptr)) {
     return prev_cpu;
+    }
 //
 // We need task's util for cpu_util_without, sync it up to
 // prev_cpu's last_update_time.
 //
-    if (!(sd_flag & SD_BALANCE_FORK))
+    if (!(sd_flag & SD_BALANCE_FORK)) {
     sync_entity_load_avg(&p.se);
+    }
     while (sd) {
-    struct sched_group *group;
-    struct sched_domain *tmp;
-    int weight;
+pub static mut group: *mut c_void = core::ptr::null_mut();
+pub static mut tmp: *mut c_void = core::ptr::null_mut();
+    let mut weight = 0;
     if (!(sd.flags & sd_flag)) {
     sd = sd.child;
     continue;
@@ -7646,41 +7867,40 @@ unsafe extern "C" fn wake_wide(p: *mut task_struct) -> c_int {
     weight = sd.span_weight;
     sd = core::ptr::null_mut();
     for_each_domain(cpu, tmp) {
-    if (weight <= tmp.span_weight)
+    if (weight <= tmp.span_weight) {
     break;
-    if (tmp.flags & sd_flag)
+    }
+    if (tmp.flags & sd_flag) {
     sd = tmp;
+    }
     }
     }
     return new_cpu;
     }
 #[no_mangle]
 pub unsafe extern "C" fn __select_idle_cpu(cpu: c_int, p: *mut task_struct) -> c_int {
-    static inline int __select_idle_cpu(int cpu, struct task_struct *p)
-    {
-    if (choose_idle_cpu(cpu, p) && sched_cpu_cookie_match(cpu_rq(cpu), p))
+    if (choose_idle_cpu(cpu, p) && sched_cpu_cookie_match(cpu_rq(cpu), p)) {
     return cpu;
+    }
     return -1;
     }
-    DEFINE_STATIC_KEY_FALSE(sched_smt_present);
+pub static mut sched_smt_present: usize = 0;
     EXPORT_SYMBOL_GPL(sched_smt_present);
 #[no_mangle]
 pub unsafe extern "C" fn set_idle_cores(cpu: c_int, val: c_int) {
-    static inline void set_idle_cores(int cpu, int val)
-    {
-    struct sched_domain_shared *sds;
+pub static mut sds: *mut c_void = core::ptr::null_mut();
     sds = rcu_dereference_all(per_cpu(sd_balance_shared, cpu));
-    if (sds)
+    if (sds) {
     WRITE_ONCE(sds.has_idle_cores, val);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn test_idle_cores(cpu: c_int) -> bool {
-    static inline bool test_idle_cores(int cpu)
-    {
-    struct sched_domain_shared *sds;
+pub static mut sds: *mut c_void = core::ptr::null_mut();
     sds = rcu_dereference_all(per_cpu(sd_balance_shared, cpu));
-    if (sds)
+    if (sds) {
     return READ_ONCE(sds.has_idle_cores);
+    }
     return false;
     }
 //
@@ -7692,21 +7912,22 @@ pub unsafe extern "C" fn test_idle_cores(cpu: c_int) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __update_idle_core(rq: *mut rq) {
-    void __update_idle_core(struct rq *rq)
-    {
-    let mut core: c_int = cpu_of(rq);
-    int cpu;
+pub static mut core: c_int = 0;
+    let mut cpu = 0;
     rcu_read_lock();
-    if (test_idle_cores(core))
-    goto unlock;
+    if (test_idle_cores(core)) {
+// goto;
+    }
     for_each_cpu(cpu, cpu_smt_mask(core)) {
-    if (cpu == core)
+    if (cpu == core) {
     continue;
-    if (!available_idle_cpu(cpu))
-    goto unlock;
+    }
+    if (!available_idle_cpu(cpu)) {
+// goto;
+    }
     }
     set_idle_cores(core, 1);
-    unlock:
+// label;
     rcu_read_unlock();
     }
 //
@@ -7717,10 +7938,8 @@ pub unsafe extern "C" fn __update_idle_core(rq: *mut rq) {
 //
 #[no_mangle]
 unsafe extern "C" fn select_idle_core(p: *mut task_struct, core: c_int, cpus: *mut cpumask, idle_cpu: *mut c_int) -> c_int {
-    static int select_idle_core(struct task_struct *p, int core, struct cpumask *cpus, int *idle_cpu)
-    {
-    let mut idle: bool = true;
-    int cpu;
+pub static mut idle: bool = true;
+    let mut cpu = 0;
     for_each_cpu(cpu, cpu_smt_mask(core)) {
     if (!available_idle_cpu(cpu)) {
     idle = false;
@@ -7734,11 +7953,13 @@ unsafe extern "C" fn select_idle_core(p: *mut task_struct, core: c_int, cpus: *m
     }
     break;
     }
-    if (*idle_cpu == -1 && cpumask_test_cpu(cpu, cpus))
+    if (*idle_cpu == -1 && cpumask_test_cpu(cpu, cpus)) {
 // idle_cpu = cpu;
     }
-    if (idle)
+    }
+    if (idle) {
     return core;
+    }
     cpumask_andnot(cpus, cpus, cpu_smt_mask(core));
     return -1;
     }
@@ -7747,20 +7968,21 @@ unsafe extern "C" fn select_idle_core(p: *mut task_struct, core: c_int, cpus: *m
 //
 #[no_mangle]
 unsafe extern "C" fn select_idle_smt(p: *mut task_struct, sd: *mut sched_domain, target: c_int) -> c_int {
-    static int select_idle_smt(struct task_struct *p, struct sched_domain *sd, int target)
-    {
-    int cpu;
+    let mut cpu = 0;
     for_each_cpu_and(cpu, cpu_smt_mask(target), p.cpus_ptr) {
-    if (cpu == target)
+    if (cpu == target) {
     continue;
+    }
 //
 // Check if the CPU is in the LLC scheduling domain of @target.
 // Due to isolcpus, there is no guarantee that all the siblings are in the domain.
 //
-    if (!cpumask_test_cpu(cpu, sched_domain_span(sd)))
+    if (!cpumask_test_cpu(cpu, sched_domain_span(sd))) {
     continue;
-    if (choose_idle_cpu(cpu, p))
+    }
+    if (choose_idle_cpu(cpu, p)) {
     return cpu;
+    }
     }
     return -1;
     }
@@ -7771,9 +7993,7 @@ unsafe extern "C" fn select_idle_smt(p: *mut task_struct, sd: *mut sched_domain,
 //
 #[no_mangle]
 unsafe extern "C" fn select_idle_cpu(p: *mut task_struct, sd: *mut sched_domain, has_idle_core: bool, target: c_int) -> c_int {
-    static int select_idle_cpu(struct task_struct *p, struct sched_domain *sd, bool has_idle_core, int target)
-    {
-    struct cpumask *cpus = this_cpu_cpumask_var_ptr(select_rq_mask);
+    let mut cpus = this_cpu_cpumask_var_ptr(select_rq_mask);
     int i, cpu, idle_cpu = -1, nr = INT_MAX;
     if (sched_feat(SIS_UTIL) && sd.shared) {
 //
@@ -7787,27 +8007,33 @@ unsafe extern "C" fn select_idle_cpu(p: *mut task_struct, sd: *mut sched_domain,
 //
     nr = READ_ONCE(sd.shared.nr_idle_scan) + 1;
 // overloaded LLC is unlikely to have idle cpu/core
-    if (nr == 1)
+    if (nr == 1) {
     return -1;
     }
-    if (!cpumask_and(cpus, sched_domain_span(sd), p.cpus_ptr))
+    }
+    if (!cpumask_and(cpus, sched_domain_span(sd), p.cpus_ptr)) {
     return -1;
+    }
     if (static_branch_unlikely(&sched_cluster_active)) {
-    struct sched_group *sg = sd.groups;
+    let mut sg = sd.groups;
     if (sg.flags & SD_CLUSTER) {
     for_each_cpu_wrap(cpu, sched_group_span(sg), target + 1) {
-    if (!cpumask_test_cpu(cpu, cpus))
+    if (!cpumask_test_cpu(cpu, cpus)) {
     continue;
+    }
     if (has_idle_core) {
     i = select_idle_core(p, cpu, cpus, &idle_cpu);
-    if ((unsigned int)i < nr_cpumask_bits)
+    if ((unsigned int)i < nr_cpumask_bits) {
     return i;
+    }
     } else {
-    if (--nr <= 0)
+    if (--nr <= 0) {
     return -1;
+    }
     idle_cpu = __select_idle_cpu(cpu, p);
-    if ((unsigned int)idle_cpu < nr_cpumask_bits)
+    if ((unsigned int)idle_cpu < nr_cpumask_bits) {
     return idle_cpu;
+    }
     }
     }
     cpumask_andnot(cpus, cpus, sched_group_span(sg));
@@ -7816,18 +8042,22 @@ unsafe extern "C" fn select_idle_cpu(p: *mut task_struct, sd: *mut sched_domain,
     for_each_cpu_wrap(cpu, cpus, target + 1) {
     if (has_idle_core) {
     i = select_idle_core(p, cpu, cpus, &idle_cpu);
-    if ((unsigned int)i < nr_cpumask_bits)
+    if ((unsigned int)i < nr_cpumask_bits) {
     return i;
+    }
     } else {
-    if (--nr <= 0)
+    if (--nr <= 0) {
     return -1;
+    }
     idle_cpu = __select_idle_cpu(cpu, p);
-    if ((unsigned int)idle_cpu < nr_cpumask_bits)
+    if ((unsigned int)idle_cpu < nr_cpumask_bits) {
     break;
     }
     }
-    if (has_idle_core)
+    }
+    if (has_idle_core) {
     set_idle_cores(target, false);
+    }
     return idle_cpu;
     }
 //
@@ -7881,20 +8111,19 @@ unsafe extern "C" fn select_idle_cpu(p: *mut task_struct, sd: *mut sched_domain,
 // the task fits. If no CPU is big enough, but there are idle ones, try to
 // maximize capacity.
 //
-    static int
-    select_idle_capacity(struct task_struct *p, struct sched_domain *sd, int target)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn select_idle_capacity(p: *mut task_struct, sd: *mut sched_domain, target: c_int) -> c_int {
 //
 // On !SMT systems, has_idle_core is always false and preferred_core
 // is always true (CPU == core), so the SMT preference logic below
 // collapses to the plain capacity scan.
 //
-    let mut has_idle_core: bool = sched_smt_active() && test_idle_cores(target);
+pub static mut has_idle_core: bool = false;
     unsigned long task_util, util_min, util_max, best_cap = 0;
     int fits, best_fits = ASYM_IDLE_THREAD_MISFIT;
     int cpu, best_cpu = -1;
-    struct cpumask *cpus;
-    let mut nr: c_int = INT_MAX;
+pub static mut cpus: *mut c_void = core::ptr::null_mut();
+pub static mut nr: c_int = 0;
     cpus = this_cpu_cpumask_var_ptr(select_rq_mask);
     cpumask_and(cpus, sched_domain_span(sd), p.cpus_ptr);
     task_util = task_util_est(p);
@@ -7907,20 +8136,23 @@ unsafe extern "C" fn select_idle_cpu(p: *mut task_struct, sd: *mut sched_domain,
 //
     nr = READ_ONCE(sd.shared.nr_idle_scan) + 1;
 // overloaded domain is unlikely to have idle cpu/core
-    if (nr == 1)
+    if (nr == 1) {
     return -1;
     }
+    }
     for_each_cpu_wrap(cpu, cpus, target) {
-    let mut preferred_core: bool = !has_idle_core || is_core_idle(cpu);
-    let mut cpu_cap: c_ulong = capacity_of(cpu);
+pub static mut preferred_core: bool = false;
+pub static mut cpu_cap: c_ulong = 0;
 //
 // Stop when the nr_idle_scan is exhausted (mirrors
 // select_idle_cpu() logic).
 //
-    if (!has_idle_core && --nr <= 0)
+    if (!has_idle_core && --nr <= 0) {
     return best_cpu;
-    if (!choose_idle_cpu(cpu, p))
+    }
+    if (!choose_idle_cpu(cpu, p)) {
     continue;
+    }
     fits = util_fits_cpu(task_util, util_min, util_max, cpu);
 //
 // Perfect fit: capacity satisfies util + uclamp and the CPU
@@ -7929,16 +8161,17 @@ unsafe extern "C" fn select_idle_cpu(p: *mut task_struct, sd: *mut sched_domain,
 // Short-circuit the rank-based selection and return
 // immediately.
 //
-    if (fits > 0 && preferred_core)
+    if (fits > 0 && preferred_core) {
     return cpu;
+    }
 //
 // Only the min performance hint (i.e. uclamp_min) doesn't fit.
 // Look for the CPU with best capacity.
 //
-#[no_mangle]
-pub unsafe extern "C" fn if(0: fits <) -> else {
-    else if (fits < 0)
+
+    else if (fits < 0) {
     cpu_cap = get_actual_cpu_capacity(cpu);
+    }
 //
 // fits > 0 implies we are not on a preferred core, but the util
 // fits CPU capacity. Set fits to ASYM_IDLE_THREAD_FITS
@@ -7948,10 +8181,10 @@ pub unsafe extern "C" fn if(0: fits <) -> else {
 // ASYM_IDLE_THREAD_UCLAMP_MISFIT - fits with the exception of UCLAMP_MIN
 // ASYM_IDLE_THREAD_FITS - fits with the exception of preferred_core
 //
-#[no_mangle]
-pub unsafe extern "C" fn if(0: fits >) -> else {
-    else if (fits > 0)
+
+    else if (fits > 0) {
     fits = ASYM_IDLE_THREAD_FITS;
+    }
 //
 // If we are on a preferred core, translate the range of fits
 // of [ASYM_IDLE_THREAD_UCLAMP_MISFIT, ASYM_IDLE_THREAD_MISFIT] to
@@ -7962,8 +8195,9 @@ pub unsafe extern "C" fn if(0: fits >) -> else {
 // A fully fitting idle core would have returned early and hence
 // fits > 0 for preferred_core need not be dealt with.
 //
-    if (preferred_core)
+    if (preferred_core) {
     fits += ASYM_IDLE_CORE_BIAS;
+    }
 //
 // First, select CPU which fits better (lower is more preferred).
 // Then, select the one with best capacity at same level.
@@ -7985,15 +8219,13 @@ pub unsafe extern "C" fn if(0: fits >) -> else {
 // select_idle_cpu() tail that clears idle cores must live here when the
 // idle-core preference did not win.
 //
-    if (has_idle_core && best_fits > ASYM_IDLE_COMPLETE_MISFIT)
+    if (has_idle_core && best_fits > ASYM_IDLE_COMPLETE_MISFIT) {
     set_idle_cores(target, false);
+    }
     return best_cpu;
     }
-    static inline bool asym_fits_cpu(unsigned long util,
-    unsigned long util_min,
-    unsigned long util_max,
-    int cpu)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn asym_fits_cpu(util: c_ulong, util_min: c_ulong, util_max: c_ulong, cpu: c_int) -> bool {
     if (sched_asym_cpucap_active()) {
 //
 // Return true only if the cpu fully fits the task requirements
@@ -8017,10 +8249,8 @@ pub unsafe extern "C" fn if(0: fits >) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn select_idle_sibling(p: *mut task_struct, prev: c_int, target: c_int) -> c_int {
-    static int select_idle_sibling(struct task_struct *p, int prev, int target)
-    {
-    let mut has_idle_core: bool = false;
-    struct sched_domain *sd;
+pub static mut has_idle_core: bool = false;
+pub static mut sd: *mut c_void = core::ptr::null_mut();
     unsigned long task_util, util_min, util_max;
     int i, recent_used_cpu, prev_aff = -1;
 //
@@ -8038,8 +8268,9 @@ unsafe extern "C" fn select_idle_sibling(p: *mut task_struct, prev: c_int, targe
 //
     lockdep_assert_irqs_disabled();
     if (choose_idle_cpu(target, p) &&
-    asym_fits_cpu(task_util, util_min, util_max, target))
+    asym_fits_cpu(task_util, util_min, util_max, target)) {
     return target;
+    }
 //
 // If the previous CPU is cache affine and idle, don't be stupid:
 //
@@ -8047,8 +8278,9 @@ unsafe extern "C" fn select_idle_sibling(p: *mut task_struct, prev: c_int, targe
     choose_idle_cpu(prev, p) &&
     asym_fits_cpu(task_util, util_min, util_max, prev)) {
     if (!static_branch_unlikely(&sched_cluster_active) ||
-    cpus_share_resources(prev, target))
+    cpus_share_resources(prev, target)) {
     return prev;
+    }
     prev_aff = prev;
     }
 //
@@ -8076,8 +8308,9 @@ unsafe extern "C" fn select_idle_sibling(p: *mut task_struct, prev: c_int, targe
     cpumask_test_cpu(recent_used_cpu, p.cpus_ptr) &&
     asym_fits_cpu(task_util, util_min, util_max, recent_used_cpu)) {
     if (!static_branch_unlikely(&sched_cluster_active) ||
-    cpus_share_resources(recent_used_cpu, target))
+    cpus_share_resources(recent_used_cpu, target)) {
     return recent_used_cpu;
+    }
     } else {
     recent_used_cpu = -1;
     }
@@ -8101,29 +8334,34 @@ unsafe extern "C" fn select_idle_sibling(p: *mut task_struct, prev: c_int, targe
     }
     }
     sd = rcu_dereference_all(per_cpu(sd_llc, target));
-    if (!sd)
+    if (!sd) {
     return target;
+    }
     if (sched_smt_active()) {
     has_idle_core = test_idle_cores(target);
     if (!has_idle_core && cpus_share_cache(prev, target)) {
     i = select_idle_smt(p, sd, prev);
-    if ((unsigned int)i < nr_cpumask_bits)
+    if ((unsigned int)i < nr_cpumask_bits) {
     return i;
+    }
     }
     }
     i = select_idle_cpu(p, sd, has_idle_core, target);
-    if ((unsigned)i < nr_cpumask_bits)
+    if ((unsigned)i < nr_cpumask_bits) {
     return i;
+    }
 //
 // For cluster machines which have lower sharing cache like L2 or
 // LLC Tag, we tend to find an idle CPU in the target's cluster
 // first. But prev_cpu or recent_used_cpu may also be a good candidate,
 // use them if possible when no idle CPU found in select_idle_cpu().
 //
-    if ((unsigned int)prev_aff < nr_cpumask_bits)
+    if ((unsigned int)prev_aff < nr_cpumask_bits) {
     return prev_aff;
-    if ((unsigned int)recent_used_cpu < nr_cpumask_bits)
+    }
+    if ((unsigned int)recent_used_cpu < nr_cpumask_bits) {
     return recent_used_cpu;
+    }
     return target;
     }
 //
@@ -8167,39 +8405,40 @@ unsafe extern "C" fn select_idle_sibling(p: *mut task_struct, prev: c_int, targe
 //
 // Return: (Boosted) (estimated) utilization for the specified CPU.
 //
-    static unsigned long
-    cpu_util(int cpu, struct task_struct *p, int dst_cpu, int boost)
-    {
-    let mut add_task: bool = p && task_cpu(p) != cpu && dst_cpu == cpu;
-    let mut sub_task: bool = p && task_cpu(p) == cpu && dst_cpu != cpu;
-    struct cfs_rq *cfs_rq = &cpu_rq(cpu).cfs;
-    let mut util: c_ulong = READ_ONCE(cfs_rq.avg.util_avg);
-    unsigned long runnable;
+#[no_mangle]
+pub unsafe extern "C" fn cpu_util(cpu: c_int, p: *mut task_struct, dst_cpu: c_int, boost: c_int) -> c_ulong {
+pub static mut add_task: bool = false;
+pub static mut sub_task: bool = false;
+    let mut cfs_rq = &cpu_rq(cpu).cfs;
+pub static mut util: c_ulong = 0;
+    let mut runnable = 0;
 //
 // If @dst_cpu is -1 or @p migrates from @cpu to @dst_cpu remove its
 // contribution. If @p migrates from another CPU to @cpu add its
 // contribution. In all the other cases @cpu is not impacted by the
 // migration so its util_avg is already correct.
 //
-    if (add_task)
+    if (add_task) {
     util += task_util(p);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: sub_task) -> else {
-    else if (sub_task)
+    }
+
+    else if (sub_task) {
     lsub_positive(&util, task_util(p));
+    }
     if (boost) {
     runnable = READ_ONCE(cfs_rq.avg.runnable_avg);
-    if (add_task)
+    if (add_task) {
     runnable += READ_ONCE(p.se.avg.runnable_avg);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: sub_task) -> else {
-    else if (sub_task)
+    }
+
+    else if (sub_task) {
     lsub_positive(&runnable,
     READ_ONCE(p.se.avg.runnable_avg));
+    }
     util = max(util, runnable);
     }
     if (sched_feat(UTIL_EST)) {
-    unsigned long util_est;
+    let mut util_est = 0;
     util_est = READ_ONCE(cfs_rq.avg.util_est);
 //
 // During wake-up @p isn't enqueued yet and doesn't contribute
@@ -8219,7 +8458,7 @@ pub unsafe extern "C" fn if(_arg: sub_task) -> else {
 // deactivate_task()
 // p->on_rq = TASK_ON_RQ_MIGRATING;
 // -------------------------------- A
-// dequeue_task()                    \
+// dequeue_task()                    
 // dequeue_task_fair()              + Race Time
 // util_est_dequeue()
 // -------------------------------- B
@@ -8227,26 +8466,23 @@ pub unsafe extern "C" fn if(_arg: sub_task) -> else {
 // The additional check "current == p" is required to further
 // reduce the race window.
 //
-    if (dst_cpu == cpu)
+    if (dst_cpu == cpu) {
     util_est += _task_util_est(p);
-#[no_mangle]
-pub unsafe extern "C" fn if(p): p && unlikely(task_on_rq_queued(p) || current ==) -> else {
-    else if (p && unlikely(task_on_rq_queued(p) || current == p))
+    }
+
+    else if (p && unlikely(task_on_rq_queued(p) || current == p)) {
     lsub_positive(&util_est, _task_util_est(p));
+    }
     util = max(util, util_est);
     }
     return min(util, arch_scale_cpu_capacity(cpu));
     }
 #[no_mangle]
 pub unsafe extern "C" fn cpu_util_cfs(cpu: c_int) -> c_ulong {
-    unsigned long cpu_util_cfs(int cpu)
-    {
     return cpu_util(cpu, core::ptr::null_mut(), -1, 0);
     }
 #[no_mangle]
 pub unsafe extern "C" fn cpu_util_cfs_boost(cpu: c_int) -> c_ulong {
-    unsigned long cpu_util_cfs_boost(int cpu)
-    {
     return cpu_util(cpu, core::ptr::null_mut(), -1, 1);
     }
 //
@@ -8264,11 +8500,10 @@ pub unsafe extern "C" fn cpu_util_cfs_boost(cpu: c_int) -> c_ulong {
 //
 #[no_mangle]
 unsafe extern "C" fn cpu_util_without(cpu: c_int, p: *mut task_struct) -> c_ulong {
-    static unsigned long cpu_util_without(int cpu, struct task_struct *p)
-    {
 // Task has no contribution or is new
-    if (cpu != task_cpu(p) || !READ_ONCE(p.se.avg.last_update_time))
+    if (cpu != task_cpu(p) || !READ_ONCE(p.se.avg.last_update_time)) {
     p = core::ptr::null_mut();
+    }
     return cpu_util(cpu, p, -1, 0);
     }
 //
@@ -8291,12 +8526,10 @@ unsafe extern "C" fn cpu_util_without(cpu: c_int, p: *mut task_struct) -> c_ulon
 // based on the task model parameters and gives the minimal utilization
 // required to meet deadlines.
 //
-    unsigned long effective_cpu_util(int cpu, unsigned long util_cfs,
-    unsigned long *min,
-    unsigned long *max)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn effective_cpu_util(cpu: c_int, util_cfs: c_ulong, min: *mut c_ulong, max: *mut c_ulong) -> c_ulong {
     unsigned long util, irq, scale;
-    struct rq *rq = cpu_rq(cpu);
+    let mut rq = cpu_rq(cpu);
     scale = arch_scale_cpu_capacity(cpu);
 //
 // Early check to see if IRQ/steal time saturates the CPU, can be
@@ -8305,10 +8538,12 @@ unsafe extern "C" fn cpu_util_without(cpu: c_int, p: *mut task_struct) -> c_ulon
 //
     irq = cpu_util_irq(rq);
     if (unlikely(irq >= scale)) {
-    if (min)
+    if (min) {
 // min = scale;
-    if (max)
+    }
+    if (max) {
 // max = scale;
+    }
     return scale;
     }
     if (min) {
@@ -8323,8 +8558,9 @@ unsafe extern "C" fn cpu_util_without(cpu: c_int, p: *mut task_struct) -> c_ulon
 // When an RT task is runnable and uclamp is not used, we must
 // ensure that the task will run at maximum compute capacity.
 //
-    if (!uclamp_is_used() && rt_rq_is_runnable(&rq.rt))
+    if (!uclamp_is_used() && rt_rq_is_runnable(&rq.rt)) {
 // min = max(*min, scale);
+    }
     }
 //
 // Because the time spend on RT/DL tasks is visible as 'lost' time to
@@ -8338,10 +8574,12 @@ unsafe extern "C" fn cpu_util_without(cpu: c_int, p: *mut task_struct) -> c_ulon
 // The maximum hint is a soft bandwidth requirement, which can be lower
 // than the actual utilization because of uclamp_max requirements.
 //
-    if (max)
+    if (max) {
 // max = min(scale, uclamp_rq_get(rq, UCLAMP_MAX));
-    if (util >= scale)
+    }
+    if (util >= scale) {
     return scale;
+    }
 //
 // There is still idle time; further improve the number by using the
 // IRQ metric. Because IRQ/steal time is hidden from the task clock we
@@ -8357,8 +8595,6 @@ unsafe extern "C" fn cpu_util_without(cpu: c_int, p: *mut task_struct) -> c_ulon
     }
 #[no_mangle]
 pub unsafe extern "C" fn sched_cpu_util(cpu: c_int) -> c_ulong {
-    unsigned long sched_cpu_util(int cpu)
-    {
     return effective_cpu_util(cpu, cpu_util_cfs(cpu), core::ptr::null_mut(), core::ptr::null_mut());
     }
 //
@@ -8385,15 +8621,16 @@ pub struct energy_env {
 // The latter only makes sense with the most recent CPUs where the task has
 // run.
 //
-    static inline void eenv_task_busy_time(struct energy_env *eenv,
-    struct task_struct *p, int prev_cpu)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn eenv_task_busy_time(eenv: *mut energy_env, p: *mut task_struct, prev_cpu: c_int) {
     unsigned long busy_time, max_cap = arch_scale_cpu_capacity(prev_cpu);
-    let mut irq: c_ulong = cpu_util_irq(cpu_rq(prev_cpu));
-    if (unlikely(irq >= max_cap))
+pub static mut irq: c_ulong = 0;
+    if (unlikely(irq >= max_cap)) {
     busy_time = max_cap;
-    else
+    }
+    else {
     busy_time = scale_irq_capacity(task_util_est(p), irq, max_cap);
+    }
     eenv.task_busy_time = busy_time;
     }
 //
@@ -8417,14 +8654,12 @@ pub struct energy_env {
 // Set @eenv busy time for the PD that spans @pd_cpus. This busy time can't
 // exceed @eenv->pd_cap.
 //
-    static inline void eenv_pd_busy_time(struct energy_env *eenv,
-    struct cpumask *pd_cpus,
-    struct task_struct *p)
-    {
-    let mut busy_time: c_ulong = 0;
-    int cpu;
+#[no_mangle]
+pub unsafe extern "C" fn eenv_pd_busy_time(eenv: *mut energy_env, pd_cpus: *mut cpumask, p: *mut task_struct) {
+pub static mut busy_time: c_ulong = 0;
+    let mut cpu = 0;
     for_each_cpu(cpu, pd_cpus) {
-    let mut util: c_ulong = cpu_util(cpu, p, -1, 0);
+pub static mut util: c_ulong = 0;
     busy_time += effective_cpu_util(cpu, util, core::ptr::null_mut(), core::ptr::null_mut());
     }
     eenv.pd_busy_time = min(eenv.pd_cap, busy_time);
@@ -8436,15 +8671,13 @@ pub struct energy_env {
 // Returns the maximum utilization among @eenv->cpus. This utilization can't
 // exceed @eenv->cpu_cap.
 //
-    static inline unsigned long
-    eenv_pd_max_util(struct energy_env *eenv, struct cpumask *pd_cpus,
-    struct task_struct *p, int dst_cpu)
-    {
-    let mut max_util: c_ulong = 0;
-    int cpu;
+#[no_mangle]
+pub unsafe extern "C" fn eenv_pd_max_util(eenv: *mut energy_env, pd_cpus: *mut cpumask, p: *mut task_struct, dst_cpu: c_int) -> c_ulong {
+pub static mut max_util: c_ulong = 0;
+    let mut cpu = 0;
     for_each_cpu(cpu, pd_cpus) {
-    struct task_struct *tsk = (cpu == dst_cpu) ? p : core::ptr::null_mut();
-    let mut util: c_ulong = cpu_util(cpu, p, dst_cpu, 1);
+    let mut tsk = (cpu == dst_cpu) ? p : core::ptr::null_mut();
+pub static mut util: c_ulong = 0;
     unsigned long eff_util, min, max;
 //
 // Performance domain frequency: utilization clamping
@@ -8461,10 +8694,12 @@ pub struct energy_env {
 // If there is no active max uclamp constraint,
 // directly use task's one, otherwise keep max.
 //
-    if (uclamp_rq_is_idle(cpu_rq(cpu)))
+    if (uclamp_rq_is_idle(cpu_rq(cpu))) {
     max = uclamp_eff_value(p, UCLAMP_MAX);
-    else
+    }
+    else {
     max = max(max, uclamp_eff_value(p, UCLAMP_MAX));
+    }
     }
     eff_util = sugov_effective_cpu_perf(cpu, eff_util, min, max);
     max_util = max(max_util, eff_util);
@@ -8476,15 +8711,14 @@ pub struct energy_env {
 // consume for a given utilization landscape @eenv. When @dst_cpu < 0, the task
 // contribution is ignored.
 //
-    static inline unsigned long
-    compute_energy(struct energy_env *eenv, struct perf_domain *pd,
-    struct cpumask *pd_cpus, struct task_struct *p, int dst_cpu)
-    {
-    let mut max_util: c_ulong = eenv_pd_max_util(eenv, pd_cpus, p, dst_cpu);
-    let mut busy_time: c_ulong = eenv.pd_busy_time;
-    unsigned long energy;
-    if (dst_cpu >= 0)
+#[no_mangle]
+pub unsafe extern "C" fn compute_energy(eenv: *mut energy_env, pd: *mut perf_domain, pd_cpus: *mut cpumask, p: *mut task_struct, dst_cpu: c_int) -> c_ulong {
+pub static mut max_util: c_ulong = 0;
+pub static mut busy_time: c_ulong = 0;
+    let mut energy = 0;
+    if (dst_cpu >= 0) {
     busy_time = min(eenv.pd_cap, busy_time + eenv.task_busy_time);
+    }
     energy = em_cpu_energy(pd.em_pd, max_util, busy_time, eenv.cpu_cap);
     trace_sched_compute_energy_tp(p, dst_cpu, energy, max_util, busy_time);
     return energy;
@@ -8530,59 +8764,64 @@ pub struct energy_env {
 //
 #[no_mangle]
 unsafe extern "C" fn find_energy_efficient_cpu(p: *mut task_struct, prev_cpu: c_int) -> c_int {
-    static int find_energy_efficient_cpu(struct task_struct *p, int prev_cpu)
-    {
-    struct cpumask *cpus = this_cpu_cpumask_var_ptr(select_rq_mask);
-    let mut prev_delta: c_ulong = ULONG_MAX, best_delta = ULONG_MAX;
-    let mut p_util_min: c_ulong = uclamp_is_used() ? uclamp_eff_value(p, UCLAMP_MIN) : 0;
-    let mut p_util_max: c_ulong = uclamp_is_used() ? uclamp_eff_value(p, UCLAMP_MAX) : 1024;
-    struct root_domain *rd = this_rq().rd;
+    let mut cpus = this_cpu_cpumask_var_ptr(select_rq_mask);
+pub static mut prev_delta: c_ulong = 0;
+pub static mut p_util_min: c_ulong = 0;
+pub static mut p_util_max: c_ulong = 0;
+    let mut rd = this_rq().rd;
     int cpu, best_energy_cpu, target = -1;
-    let mut prev_fits: c_int = -1, best_fits = -1;
-    let mut best_actual_cap: c_ulong = 0;
-    let mut prev_actual_cap: c_ulong = 0;
-    struct sched_domain *sd;
-    struct perf_domain *pd;
-    struct energy_env eenv;
+pub static mut prev_fits: c_int = 0;
+pub static mut best_actual_cap: c_ulong = 0;
+pub static mut prev_actual_cap: c_ulong = 0;
+pub static mut sd: *mut c_void = core::ptr::null_mut();
+pub static mut pd: *mut c_void = core::ptr::null_mut();
+pub static mut eenv: usize = 0;
     pd = rcu_dereference_all(rd.pd);
-    if (!pd)
+    if (!pd) {
     return target;
+    }
 //
 // Energy-aware wake-up happens on the lowest sched_domain starting
 // from sd_asym_cpucapacity spanning over this_cpu and prev_cpu.
 //
     sd = rcu_dereference_all(*this_cpu_ptr(&sd_asym_cpucapacity));
-    while (sd && !cpumask_test_cpu(prev_cpu, sched_domain_span(sd)))
+    while (sd && !cpumask_test_cpu(prev_cpu, sched_domain_span(sd))) {
     sd = sd.parent;
-    if (!sd)
+    }
+    if (!sd) {
     return target;
+    }
     target = prev_cpu;
     sync_entity_load_avg(&p.se);
-    if (!task_util_est(p) && p_util_min == 0)
+    if (!task_util_est(p) && p_util_min == 0) {
     return target;
+    }
     eenv_task_busy_time(&eenv, p, prev_cpu);
-    for (; pd; pd = pd.next) {
-    let mut util_min: c_ulong = p_util_min, util_max = p_util_max;
+    while (pd) {
+pub static mut util_min: c_ulong = 0;
     unsigned long cpu_cap, cpu_actual_cap, util;
-    let mut prev_spare_cap: c_long = -1, max_spare_cap = -1;
+pub static mut prev_spare_cap: c_long = 0;
     unsigned long rq_util_min, rq_util_max;
     unsigned long cur_delta, base_energy;
-    let mut max_spare_cap_cpu: c_int = -1;
+pub static mut max_spare_cap_cpu: c_int = 0;
     int fits, max_fits = -1;
-    if (!cpumask_and(cpus, perf_domain_span(pd), cpu_online_mask))
+    if (!cpumask_and(cpus, perf_domain_span(pd), cpu_online_mask)) {
     continue;
+    }
 // Account external pressure for the energy estimation
     cpu = cpumask_first(cpus);
     cpu_actual_cap = get_actual_cpu_capacity(cpu);
     eenv.cpu_cap = cpu_actual_cap;
     eenv.pd_cap = 0;
     for_each_cpu(cpu, cpus) {
-    struct rq *rq = cpu_rq(cpu);
+    let mut rq = cpu_rq(cpu);
     eenv.pd_cap += cpu_actual_cap;
-    if (!cpumask_test_cpu(cpu, sched_domain_span(sd)))
+    if (!cpumask_test_cpu(cpu, sched_domain_span(sd))) {
     continue;
-    if (!cpumask_test_cpu(cpu, p.cpus_ptr))
+    }
+    if (!cpumask_test_cpu(cpu, p.cpus_ptr)) {
     continue;
+    }
     util = cpu_util(cpu, p, cpu, 0);
     cpu_cap = capacity_of(cpu);
 //
@@ -8606,8 +8845,9 @@ unsafe extern "C" fn find_energy_efficient_cpu(p: *mut task_struct, prev_cpu: c_
     util_max = max(rq_util_max, p_util_max);
     }
     fits = util_fits_cpu(util, util_min, util_max, cpu);
-    if (!fits)
+    if (!fits) {
     continue;
+    }
     lsub_positive(&cpu_cap, util);
     if (cpu == prev_cpu) {
 // Always use prev_cpu as a candidate.
@@ -8625,8 +8865,9 @@ unsafe extern "C" fn find_energy_efficient_cpu(p: *mut task_struct, prev_cpu: c_
     max_fits = fits;
     }
     }
-    if (max_spare_cap_cpu < 0 && prev_spare_cap < 0)
+    if (max_spare_cap_cpu < 0 && prev_spare_cap < 0) {
     continue;
+    }
     eenv_pd_busy_time(&eenv, cpus, p);
 // Compute the 'base' energy of the pd, without @p
     base_energy = compute_energy(&eenv, pd, cpus, p, -1);
@@ -8635,8 +8876,9 @@ unsafe extern "C" fn find_energy_efficient_cpu(p: *mut task_struct, prev_cpu: c_
     prev_delta = compute_energy(&eenv, pd, cpus, p,
     prev_cpu);
 // CPU utilization has changed
-    if (prev_delta < base_energy)
+    if (prev_delta < base_energy) {
     return target;
+    }
     prev_delta -= base_energy;
     prev_actual_cap = cpu_actual_cap;
     best_delta = min(best_delta, prev_delta);
@@ -8644,28 +8886,32 @@ unsafe extern "C" fn find_energy_efficient_cpu(p: *mut task_struct, prev_cpu: c_
 // Evaluate the energy impact of using max_spare_cap_cpu.
     if (max_spare_cap_cpu >= 0 && max_spare_cap > prev_spare_cap) {
 // Current best energy cpu fits better
-    if (max_fits < best_fits)
+    if (max_fits < best_fits) {
     continue;
+    }
 //
 // Both don't fit performance hint (i.e. uclamp_min)
 // but best energy cpu has better capacity.
 //
     if ((max_fits < 0) &&
-    (cpu_actual_cap <= best_actual_cap))
+    (cpu_actual_cap <= best_actual_cap)) {
     continue;
+    }
     cur_delta = compute_energy(&eenv, pd, cpus, p,
     max_spare_cap_cpu);
 // CPU utilization has changed
-    if (cur_delta < base_energy)
+    if (cur_delta < base_energy) {
     return target;
+    }
     cur_delta -= base_energy;
 //
 // Both fit for the task but best energy cpu has lower
 // energy impact.
 //
     if ((max_fits > 0) && (best_fits > 0) &&
-    (cur_delta >= best_delta))
+    (cur_delta >= best_delta)) {
     continue;
+    }
     best_delta = cur_delta;
     best_energy_cpu = max_spare_cap_cpu;
     best_fits = max_fits;
@@ -8674,8 +8920,9 @@ unsafe extern "C" fn find_energy_efficient_cpu(p: *mut task_struct, prev_cpu: c_
     }
     if ((best_fits > prev_fits) ||
     ((best_fits > 0) && (best_delta < prev_delta)) ||
-    ((best_fits < 0) && (best_actual_cap > prev_actual_cap)))
+    ((best_fits < 0) && (best_actual_cap > prev_actual_cap))) {
     target = best_energy_cpu;
+    }
     return target;
     }
 //
@@ -8688,16 +8935,15 @@ unsafe extern "C" fn find_energy_efficient_cpu(p: *mut task_struct, prev_cpu: c_
 //
 // Returns the target CPU number.
 //
-    static int
-    select_task_rq_fair(struct task_struct *p, int prev_cpu, int wake_flags)
-    {
-    let mut sync: c_int = (wake_flags & WF_SYNC) && !(current.flags & PF_EXITING);
+#[no_mangle]
+pub unsafe extern "C" fn select_task_rq_fair(p: *mut task_struct, prev_cpu: c_int, wake_flags: c_int) -> c_int {
+pub static mut sync: c_int = 0;
     struct sched_domain *tmp, *sd = core::ptr::null_mut();
-    let mut cpu: c_int = smp_processor_id();
-    let mut new_cpu: c_int = prev_cpu;
-    let mut want_affine: c_int = 0;
+pub static mut cpu: c_int = 0;
+pub static mut new_cpu: c_int = 0;
+pub static mut want_affine: c_int = 0;
 // SD_flags and WF_flags share the first nibble
-    let mut sd_flag: c_int = wake_flags & 0xF;
+pub static mut sd_flag: c_int = 0;
 //
 // required for stable ->cpus_allowed
 //
@@ -8705,12 +8951,14 @@ unsafe extern "C" fn find_energy_efficient_cpu(p: *mut task_struct, prev_cpu: c_
     if (wake_flags & WF_TTWU) {
     record_wakee(p);
     if ((wake_flags & WF_CURRENT_CPU) &&
-    cpumask_test_cpu(cpu, p.cpus_ptr))
+    cpumask_test_cpu(cpu, p.cpus_ptr)) {
     return cpu;
+    }
     if (!is_rd_overutilized(this_rq().rd)) {
     new_cpu = find_energy_efficient_cpu(p, prev_cpu);
-    if (new_cpu >= 0)
+    if (new_cpu >= 0) {
     return new_cpu;
+    }
     new_cpu = prev_cpu;
     }
     want_affine = !wake_wide(p) && cpumask_test_cpu(cpu, p.cpus_ptr);
@@ -8722,8 +8970,9 @@ unsafe extern "C" fn find_energy_efficient_cpu(p: *mut task_struct, prev_cpu: c_
 //
     if (want_affine && (tmp.flags & SD_WAKE_AFFINE) &&
     cpumask_test_cpu(prev_cpu, sched_domain_span(tmp))) {
-    if (cpu != prev_cpu)
+    if (cpu != prev_cpu) {
     new_cpu = wake_affine(tmp, p, cpu, prev_cpu, sync);
+    }
     sd = core::ptr::null_mut(); /* Prefer wake_affine over balance flags */
     break;
     }
@@ -8732,19 +8981,22 @@ unsafe extern "C" fn find_energy_efficient_cpu(p: *mut task_struct, prev_cpu: c_
 // usually do not have SD_BALANCE_WAKE set. That means wakeup
 // will usually go to the fast path.
 //
-    if (tmp.flags & sd_flag)
+    if (tmp.flags & sd_flag) {
     sd = tmp;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !want_affine) -> else {
-    else if (!want_affine)
+    }
+
+    else if (!want_affine) {
     break;
     }
+    }
 // Slow path
-    if (unlikely(sd))
+    if (unlikely(sd)) {
     return sched_balance_find_dst_cpu(sd, p, cpu, prev_cpu, sd_flag);
+    }
 // Fast path
-    if (wake_flags & WF_TTWU)
+    if (wake_flags & WF_TTWU) {
     return select_idle_sibling(p, prev_cpu, new_cpu);
+    }
     return new_cpu;
     }
 //
@@ -8754,9 +9006,7 @@ pub unsafe extern "C" fn if(_arg: !want_affine) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn migrate_task_rq_fair(p: *mut task_struct, new_cpu: c_int) {
-    static void migrate_task_rq_fair(struct task_struct *p, int new_cpu)
-    {
-    struct sched_entity *se = &p.se;
+    let mut se = &p.se;
     if (!task_on_rq_migrating(p)) {
     remove_entity_load_avg(se);
 //
@@ -8777,9 +9027,7 @@ unsafe extern "C" fn migrate_task_rq_fair(p: *mut task_struct, new_cpu: c_int) {
     }
 #[no_mangle]
 unsafe extern "C" fn task_dead_fair(p: *mut task_struct) {
-    static void task_dead_fair(struct task_struct *p)
-    {
-    struct sched_entity *se = &p.se;
+    let mut se = &p.se;
     remove_entity_load_avg(se);
     }
 //
@@ -8787,17 +9035,17 @@ unsafe extern "C" fn task_dead_fair(p: *mut task_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn set_task_max_allowed_capacity(p: *mut task_struct) {
-    static void set_task_max_allowed_capacity(struct task_struct *p)
-    {
-    struct asym_cap_data *entry;
-    if (!sched_asym_cpucap_active())
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+    if (!sched_asym_cpucap_active()) {
     return;
+    }
     rcu_read_lock();
     list_for_each_entry_rcu(entry, &asym_cap_list, link) {
-    cpumask_t *cpumask;
+pub static mut cpumask: *mut c_void = core::ptr::null_mut();
     cpumask = cpu_capacity_span(entry);
-    if (!cpumask_intersects(p.cpus_ptr, cpumask))
+    if (!cpumask_intersects(p.cpus_ptr, cpumask)) {
     continue;
+    }
     p.max_allowed_capacity = entry.capacity;
     break;
     }
@@ -8805,8 +9053,6 @@ unsafe extern "C" fn set_task_max_allowed_capacity(p: *mut task_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn set_cpus_allowed_fair(p: *mut task_struct, ctx: *mut affinity_context) {
-    static void set_cpus_allowed_fair(struct task_struct *p, struct affinity_context *ctx)
-    {
     set_cpus_allowed_common(p, ctx);
     set_task_max_allowed_capacity(p);
     }
@@ -8818,25 +9064,23 @@ unsafe extern "C" fn set_cpus_allowed_fair(p: *mut task_struct, ctx: *mut affini
     };
 #[no_mangle]
 pub unsafe extern "C" fn set_preempt_buddy(cfs_rq: *mut cfs_rq, pse: *mut sched_entity) -> bool {
-    static inline bool set_preempt_buddy(struct cfs_rq *cfs_rq, struct sched_entity *pse)
-    {
 //
 // Keep existing buddy if the deadline is sooner than pse.
 // The older buddy may be cache cold and completely unrelated
 // to the current wakeup but that is unpredictable where as
 // obeying the deadline is more in line with EEVDF objectives.
 //
-    if (cfs_rq.next && entity_before(cfs_rq.next, pse))
+    if (cfs_rq.next && entity_before(cfs_rq.next, pse)) {
     return false;
+    }
     set_next_buddy(cfs_rq, pse);
     return true;
     }
 #[no_mangle]
 pub unsafe extern "C" fn set_short_buddy(cfs_rq: *mut cfs_rq, pse: *mut sched_entity) -> bool {
-    static inline bool set_short_buddy(struct cfs_rq *cfs_rq, struct sched_entity *pse)
-    {
-    if (cfs_rq.next && cfs_rq.next.slice < pse.slice)
+    if (cfs_rq.next && cfs_rq.next.slice < pse.slice) {
     return false;
+    }
     set_next_buddy(cfs_rq, pse);
     return true;
     }
@@ -8846,33 +9090,35 @@ pub unsafe extern "C" fn set_short_buddy(cfs_rq: *mut cfs_rq, pse: *mut sched_en
 // multiple tasks must be woken up.
 //
     static inline enum preempt_wakeup_action
-    preempt_sync(struct rq *rq, int wake_flags,
-    struct sched_entity *pse, struct sched_entity *se)
+    preempt_sync(rq *rq, int wake_flags, sched_entity *pse, sched_entity *se)
     {
     u64 threshold, delta;
 //
 // WF_SYNC without WF_TTWU is not expected so warn if it happens even
 // though it is likely harmless.
 //
-    WARN_ON_ONCE(!(wake_flags & WF_TTWU));
+    WARN_ON_ONCE!(!(wake_flags & WF_TTWU));
     threshold = sysctl_sched_migration_cost;
     delta = rq_clock_task(rq) - se.exec_start;
-    if ((s64)delta < 0)
+    if ((s64)delta < 0) {
     delta = 0;
+    }
 //
 // WF_RQ_SELECTED implies the tasks are stacking on a CPU when they
 // could run on other CPUs. Reduce the threshold before preemption is
 // allowed to an arbitrary lower value as it is more likely (but not
 // guaranteed) the waker requires the wakee to finish.
 //
-    if (wake_flags & WF_RQ_SELECTED)
+    if (wake_flags & WF_RQ_SELECTED) {
     threshold >>= 2;
+    }
 //
 // As WF_SYNC is not strictly obeyed, allow some runtime for batch
 // wakeups to be issued.
 //
-    if (entity_before(pse, se) && delta >= threshold)
+    if (entity_before(pse, se) && delta >= threshold) {
     return PREEMPT_WAKEUP_RESCHED;
+    }
     return PREEMPT_WAKEUP_NONE;
     }
 //
@@ -8880,29 +9126,31 @@ pub unsafe extern "C" fn set_short_buddy(cfs_rq: *mut cfs_rq, pse: *mut sched_en
 //
 #[no_mangle]
 unsafe extern "C" fn wakeup_preempt_fair(rq: *mut rq, p: *mut task_struct, wake_flags: c_int) {
-    static void wakeup_preempt_fair(struct rq *rq, struct task_struct *p, int wake_flags)
-    {
-    let mut preempt_action: enum preempt_wakeup_action = PREEMPT_WAKEUP_PICK;
-    struct task_struct *donor = rq.donor;
+pub static mut preempt_action: preempt_wakeup_action = 0;
+    let mut donor = rq.donor;
     struct sched_entity *nse, *se = &donor.se, *pse = &p.se;
-    struct cfs_rq *cfs_rq = &rq.cfs;
-    int cse_is_idle, pse_is_idle;
+    let mut cfs_rq = &rq.cfs;
+    let mut cse_is_idle = 0;
+    let mut pse_is_idle = 0;
 //
 // XXX Getting preempted by higher class, try and find idle CPU?
 //
     if (p.sched_class != &fair_sched_class ||
-    donor.sched_class != &fair_sched_class)
+    donor.sched_class != &fair_sched_class) {
     return;
-    if (unlikely(se == pse))
+    }
+    if (unlikely(se == pse)) {
     return;
+    }
 //
 // This is possible from callers such as attach_tasks(), in which we
 // unconditionally wakeup_preempt() after an enqueue (which may have
 // lead to a throttle).  This both saves work and prevents false
 // next-buddy nomination below.
 //
-    if (task_is_throttled(p))
+    if (task_is_throttled(p)) {
     return;
+    }
 //
 // We can come here with TIF_NEED_RESCHED already set from new task
 // wake up path.
@@ -8913,11 +9161,13 @@ unsafe extern "C" fn wakeup_preempt_fair(rq: *mut rq, p: *mut task_struct, wake_
 // prevents us from potentially nominating it as a false LAST_BUDDY
 // below.
 //
-    if (!sched_feat(PREEMPT_SHORT) && test_tsk_need_resched(rq.curr))
+    if (!sched_feat(PREEMPT_SHORT) && test_tsk_need_resched(rq.curr)) {
     return;
-    if (!sched_feat(WAKEUP_PREEMPTION))
+    }
+    if (!sched_feat(WAKEUP_PREEMPTION)) {
     return;
-    WARN_ON_ONCE(!pse);
+    }
+    WARN_ON_ONCE!(!pse);
     cse_is_idle = se_is_idle(se);
     pse_is_idle = se_is_idle(pse);
     nse = se;
@@ -8925,36 +9175,41 @@ unsafe extern "C" fn wakeup_preempt_fair(rq: *mut rq, p: *mut task_struct, wake_
 // Preempt an idle entity in favor of a non-idle entity (and don't preempt
 // in the inverse case).
 //
-    if (cse_is_idle && !pse_is_idle)
-    goto preempt;
+    if (cse_is_idle && !pse_is_idle) {
+// goto;
+    }
     update_curr_fair(rq);
-    if (cse_is_idle != pse_is_idle)
-    goto update;
+    if (cse_is_idle != pse_is_idle) {
+// goto;
+    }
 //
 // BATCH and IDLE tasks do not preempt others.
 //
-    if (unlikely(!normal_policy(p.policy)))
-    goto update;
+    if (unlikely(!normal_policy(p.policy))) {
+// goto;
+    }
 //
 // Do not preempt for tasks that are sched_delayed as it would violate
 // EEVDF to forcibly queue an ineligible task.
 //
-    if (pse.sched_delayed)
-    goto update;
+    if (pse.sched_delayed) {
+// goto;
+    }
 //
 // If @p has a shorter slice than current and @p is eligible, override
 // current's slice protection in order to allow preemption.
 //
     if (sched_feat(PREEMPT_SHORT) && (pse.slice < se.slice)) {
     preempt_action = PREEMPT_WAKEUP_SHORT;
-    goto pick;
+// goto;
     }
 //
 // Ignore wakee preemption on WF_FORK as it is less likely that
 // there is shared data as exec often follow fork.
 //
-    if (wake_flags & WF_FORK)
-    goto update;
+    if (wake_flags & WF_FORK) {
+// goto;
+    }
 // Prefer picking wakee soon if appropriate.
     if (sched_feat(NEXT_BUDDY) && set_preempt_buddy(cfs_rq, pse)) {
 //
@@ -8962,83 +9217,94 @@ unsafe extern "C" fn wakeup_preempt_fair(rq: *mut rq, p: *mut task_struct, wake_
 // buddies are ignored as they may not be relevant to the
 // waker and less likely to be cache hot.
 //
-    if (wake_flags & WF_SYNC)
+    if (wake_flags & WF_SYNC) {
     preempt_action = preempt_sync(rq, wake_flags, pse, se);
     }
-    switch (preempt_action) {
-    case PREEMPT_WAKEUP_NONE:
-    return;
-    case PREEMPT_WAKEUP_RESCHED:
-    goto preempt;
-    case PREEMPT_WAKEUP_SHORT:
-    fallthrough;
-    case PREEMPT_WAKEUP_PICK:
-    break;
     }
-    pick:
+    match (preempt_action) {
+    PREEMPT_WAKEUP_NONE => {
+    return;
+    }
+    PREEMPT_WAKEUP_RESCHED => {
+// goto;
+    }
+    PREEMPT_WAKEUP_SHORT => {
+    fallthrough;
+    }
+    PREEMPT_WAKEUP_PICK => {
+    // break;
+    }
+    }
+// label;
     if (cfs_rq.h_nr_queued) {
     nse = pick_next_entity(rq, preempt_action != PREEMPT_WAKEUP_SHORT);
-    if (unlikely(!nse))
-    goto pick;
+    if (unlikely(!nse)) {
+// goto;
+    }
 // If @p has become the most eligible task, force preemption
-    if (nse == pse)
-    goto preempt;
+    if (nse == pse) {
+// goto;
+    }
     }
 //
 // If @p is eligible but not the next task to run then cancel protection
 // to prevent large scheduling latency
 //
-    if (preempt_action == PREEMPT_WAKEUP_SHORT && entity_eligible(cfs_rq, pse))
-    goto preempt;
-    update:
-    if (sched_feat(RUN_TO_PARITY))
+    if (preempt_action == PREEMPT_WAKEUP_SHORT && entity_eligible(cfs_rq, pse)) {
+// goto;
+    }
+// label;
+    if (sched_feat(RUN_TO_PARITY)) {
     update_protect_slice(cfs_rq, se);
+    }
     return;
-    preempt:
+// label;
     cancel_protect_slice(se);
-    if (preempt_action == PREEMPT_WAKEUP_SHORT)
+    if (preempt_action == PREEMPT_WAKEUP_SHORT) {
     set_short_buddy(cfs_rq, pse);
+    }
     resched_curr_lazy(rq);
     }
-    struct task_struct *pick_task_fair(struct rq *rq, struct rq_flags *rf)
-    __must_hold(__rq_lockp(rq))
-    {
-    struct cfs_rq *cfs_rq = &rq.cfs;
-    struct sched_entity *se;
-    struct task_struct *p;
-    int new_tasks;
-    again:
-    if (!cfs_rq.h_nr_queued)
-    goto idle;
+#[no_mangle]
+pub unsafe extern "C" fn pick_task_fair(rq: *mut rq) -> *mut c_void {
+    let mut cfs_rq = &rq.cfs;
+pub static mut se: *mut c_void = core::ptr::null_mut();
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    let mut new_tasks = 0;
+// label;
+    if (!cfs_rq.h_nr_queued) {
+// goto;
+    }
 // Might not have done put_prev_entity()
-    if (cfs_rq.curr && cfs_rq.curr.on_rq)
+    if (cfs_rq.curr && cfs_rq.curr.on_rq) {
     update_curr(cfs_rq);
+    }
     se = pick_next_entity(rq, true);
-    if (!se)
-    goto again;
+    if (!se) {
+// goto;
+    }
     p = task_of(se);
     return p;
-    idle:
-    if (sched_core_enabled(rq))
-    return core::ptr::null_mut();
-    new_tasks = sched_balance_newidle(rq, rf);
-    if (new_tasks < 0)
-    return RETRY_TASK;
-    if (new_tasks > 0)
-    goto again;
+// label;
+    if (sched_core_enabled(rq)) {
     return core::ptr::null_mut();
     }
-    static struct task_struct *
-    fair_server_pick_task(struct sched_dl_entity *dl_se, struct rq_flags *rf)
-    __must_hold(__rq_lockp(dl_se.rq))
-    {
+    new_tasks = sched_balance_newidle(rq, rf);
+    if (new_tasks < 0) {
+    return RETRY_TASK;
+    }
+    if (new_tasks > 0) {
+// goto;
+    }
+    return core::ptr::null_mut();
+    }
+#[no_mangle]
+pub unsafe extern "C" fn fair_server_pick_task(dl_se: *mut sched_dl_entity) -> *mut c_void {
     return pick_task_fair(dl_se.rq, rf);
     }
 #[no_mangle]
 pub unsafe extern "C" fn fair_server_init(rq: *mut rq) {
-    void fair_server_init(struct rq *rq)
-    {
-    struct sched_dl_entity *dl_se = &rq.fair_server;
+    let mut dl_se = &rq.fair_server;
     init_dl_entity(dl_se);
     dl_server_init(dl_se, rq, fair_server_pick_task);
     }
@@ -9047,30 +9313,32 @@ pub unsafe extern "C" fn fair_server_init(rq: *mut rq) {
 //
 #[no_mangle]
 unsafe extern "C" fn put_prev_task_fair(rq: *mut rq, prev: *mut task_struct, next: *mut task_struct) {
-    static void put_prev_task_fair(struct rq *rq, struct task_struct *prev, struct task_struct *next)
-    {
-    struct sched_entity *se = &prev.se;
-    struct cfs_rq *cfs_rq = &rq.cfs;
-    struct sched_entity *nse = core::ptr::null_mut();
+    let mut se = &prev.se;
+    let mut cfs_rq = &rq.cfs;
+    let mut nse = core::ptr::null_mut();
 
-    if (next && next.sched_class == &fair_sched_class)
+    if (next && next.sched_class == &fair_sched_class) {
     nse = &next.se;
+    }
 
     while (se) {
     cfs_rq = cfs_rq_of(se);
-    if (!nse || cfs_rq.h_curr)
+    if (!nse || cfs_rq.h_curr) {
     put_prev_entity(cfs_rq, se);
+    }
 
     if (nse) {
-    if (is_same_group(se, nse))
+    if (is_same_group(se, nse)) {
     break;
-    let mut d: c_int = nse.depth - se.depth;
+    }
+pub static mut d: c_int = 0;
     if (d >= 0) {
 // nse has equal or greater depth, ascend
     nse = parent_entity(nse);
 // if nse is the deeper, do not ascend se
-    if (d > 0)
+    if (d > 0) {
     continue;
+    }
     }
     }
 
@@ -9079,26 +9347,26 @@ unsafe extern "C" fn put_prev_task_fair(rq: *mut rq, prev: *mut task_struct, nex
 // Put 'current' back into the tree.
     cfs_rq = &rq.cfs;
     se = &prev.se;
-    WARN_ON_ONCE(cfs_rq.curr != se);
+    WARN_ON_ONCE!(cfs_rq.curr != se);
     cfs_rq.curr = core::ptr::null_mut();
-    if (se.on_rq)
+    if (se.on_rq) {
     __enqueue_entity(cfs_rq, se);
+    }
     }
 //
 // sched_yield() is very simple
 //
 #[no_mangle]
 unsafe extern "C" fn yield_task_fair(rq: *mut rq) {
-    static void yield_task_fair(struct rq *rq)
-    {
-    struct task_struct *curr = rq.donor;
-    struct sched_entity *se = &curr.se;
-    struct cfs_rq *cfs_rq = &rq.cfs;
+    let mut curr = rq.donor;
+    let mut se = &curr.se;
+    let mut cfs_rq = &rq.cfs;
 //
 // Are we the only task in the tree?
 //
-    if (unlikely(rq.nr_running == 1))
+    if (unlikely(rq.nr_running == 1)) {
     return;
+    }
     clear_buddies(cfs_rq, se);
     update_rq_clock(rq);
 //
@@ -9107,7 +9375,7 @@ unsafe extern "C" fn yield_task_fair(rq: *mut rq) {
     update_curr(cfs_rq);
 //
 // Tell update_rq_clock() that we've just updated,
-// so we don't do microscopic update in schedule()
+so we don't do microscopic update in schedule()
 // and double the fastpath cost.
 //
     rq_clock_skip_update(rq);
@@ -9126,12 +9394,11 @@ unsafe extern "C" fn yield_task_fair(rq: *mut rq) {
     }
 #[no_mangle]
 unsafe extern "C" fn yield_to_task_fair(rq: *mut rq, p: *mut task_struct) -> bool {
-    static bool yield_to_task_fair(struct rq *rq, struct task_struct *p)
-    {
-    struct sched_entity *se = &p.se;
+    let mut se = &p.se;
 // !se->on_rq also covers throttled task
-    if (!se.on_rq || se.sched_delayed)
+    if (!se.on_rq || se.sched_delayed) {
     return false;
+    }
 // Tell the scheduler that we'd really like se to run next.
     set_next_buddy(&task_rq(p).cfs, se);
     yield_task_fair(rq);
@@ -9251,7 +9518,7 @@ unsafe extern "C" fn yield_to_task_fair(rq: *mut rq, p: *mut task_struct) -> boo
 // [XXX write more on how we solve this.. _after_ merging pjt's patches that
 // rewrite all of this once again.]
 //
-    let mut max_load_balance_interval: static unsigned long __read_mostly = HZ/10;
+pub static mut max_load_balance_interval: unsigned long  = 0;
     enum fbq_type { regular, remote, all };
 //
 // 'group_type' describes the group of CPUs at the moment of load balancing.
@@ -9329,7 +9596,7 @@ pub struct lb_env {
     pub dst_core_idle: bool,
     pub dst_grpmask: *mut cpumask,
     pub new_dst_cpu: c_int,
-    pub idle: enum cpu_idle_type,
+    pub idle: cpu_idle_type,
     pub imbalance: c_long,
 // The set of CPUs under consideration for load-balancing
     pub cpus: *mut cpumask,
@@ -9337,8 +9604,8 @@ pub struct lb_env {
     pub loop: c_uint,
     pub loop_break: c_uint,
     pub loop_max: c_uint,
-    pub fbq_type: enum fbq_type,
-    pub migration_type: enum migration_type,
+    pub fbq_type: fbq_type,
+    pub migration_type: migration_type,
     pub tasks: list_head,
 }
 
@@ -9347,33 +9614,38 @@ pub struct lb_env {
 //
 #[no_mangle]
 unsafe extern "C" fn task_hot(p: *mut task_struct, env: *mut lb_env) -> c_int {
-    static int task_hot(struct task_struct *p, struct lb_env *env)
-    {
-    s64 delta;
+    let mut delta = 0;
     lockdep_assert_rq_held(env.src_rq);
-    if (p.sched_class != &fair_sched_class)
+    if (p.sched_class != &fair_sched_class) {
     return 0;
-    if (unlikely(task_has_idle_policy(p)))
+    }
+    if (unlikely(task_has_idle_policy(p))) {
     return 0;
+    }
 // SMT siblings share cache
-    if (env.sd.flags & SD_SHARE_CPUCAPACITY)
+    if (env.sd.flags & SD_SHARE_CPUCAPACITY) {
     return 0;
+    }
 //
 // Buddy candidates are cache hot:
 //
     if (sched_feat(CACHE_HOT_BUDDY) && env.dst_rq.nr_running &&
-    (&p.se == cfs_rq_of(&p.se).next))
+    (&p.se == cfs_rq_of(&p.se).next)) {
     return 1;
-    if (sysctl_sched_migration_cost == -1)
+    }
+    if (sysctl_sched_migration_cost == -1) {
     return 1;
+    }
 //
 // Don't migrate task if the task's cookie does not match
 // with the destination CPU's core cookie.
 //
-    if (!sched_core_cookie_match(cpu_rq(env.dst_cpu), p))
+    if (!sched_core_cookie_match(cpu_rq(env.dst_cpu), p)) {
     return 1;
-    if (sysctl_sched_migration_cost == 0)
+    }
+    if (sysctl_sched_migration_cost == 0) {
     return 0;
+    }
     delta = rq_clock_task(env.src_rq) - p.se.exec_start;
     return delta < (s64)sysctl_sched_migration_cost;
     }
@@ -9385,32 +9657,39 @@ unsafe extern "C" fn task_hot(p: *mut task_struct, env: *mut lb_env) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn migrate_degrades_locality(p: *mut task_struct, env: *mut lb_env) -> c_long {
-    static long migrate_degrades_locality(struct task_struct *p, struct lb_env *env)
-    {
-    struct numa_group *numa_group = rcu_dereference_all(p.numa_group);
+    let mut numa_group = rcu_dereference_all(p.numa_group);
     unsigned long src_weight, dst_weight;
-    int src_nid, dst_nid, dist;
-    if (!static_branch_likely(&sched_numa_balancing))
-    return 0;
-    if (!p.numa_faults || !(env.sd.flags & SD_NUMA))
-    return 0;
-    src_nid = cpu_to_node(env.src_cpu);
-    dst_nid = cpu_to_node(env.dst_cpu);
-    if (src_nid == dst_nid)
-    return 0;
-// Migrating away from the preferred node is always bad.
-    if (src_nid == p.numa_preferred_nid) {
-    if (env.src_rq.nr_running > env.src_rq.nr_preferred_running)
-    return 1;
-    else
+    let mut src_nid = 0;
+    let mut dst_nid = 0;
+    let mut dist = 0;
+    if (!static_branch_likely(&sched_numa_balancing)) {
     return 0;
     }
-// Encourage migration to the preferred node.
-    if (dst_nid == p.numa_preferred_nid)
-    return -1;
-// Leaving a core idle is often worse than degrading locality.
-    if (env.idle == CPU_IDLE)
+    if (!p.numa_faults || !(env.sd.flags & SD_NUMA)) {
     return 0;
+    }
+    src_nid = cpu_to_node(env.src_cpu);
+    dst_nid = cpu_to_node(env.dst_cpu);
+    if (src_nid == dst_nid) {
+    return 0;
+    }
+// Migrating away from the preferred node is always bad.
+    if (src_nid == p.numa_preferred_nid) {
+    if (env.src_rq.nr_running > env.src_rq.nr_preferred_running) {
+    return 1;
+    }
+    else {
+    return 0;
+    }
+    }
+// Encourage migration to the preferred node.
+    if (dst_nid == p.numa_preferred_nid) {
+    return -1;
+    }
+// Leaving a core idle is often worse than degrading locality.
+    if (env.idle == CPU_IDLE) {
+    return 0;
+    }
     dist = node_distance(src_nid, dst_nid);
     if (numa_group) {
     src_weight = group_weight(p, src_nid, dist);
@@ -9422,9 +9701,8 @@ unsafe extern "C" fn migrate_degrades_locality(p: *mut task_struct, env: *mut lb
     return src_weight - dst_weight;
     }
 
-    static inline long migrate_degrades_locality(struct task_struct *p,
-    struct lb_env *env)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn migrate_degrades_locality(p: *mut task_struct, env: *mut lb_env) -> c_long {
     return 0;
     }
 
@@ -9438,12 +9716,11 @@ unsafe extern "C" fn migrate_degrades_locality(p: *mut task_struct, env: *mut lb
 //
 #[no_mangle]
 pub unsafe extern "C" fn task_is_ineligible_on_dst_cpu(p: *mut task_struct, dest_cpu: c_int) -> c_int {
-    static inline int task_is_ineligible_on_dst_cpu(struct task_struct *p, int dest_cpu)
-    {
-    struct cfs_rq *dst_cfs_rq = &cpu_rq(dest_cpu).cfs;
+    let mut dst_cfs_rq = &cpu_rq(dest_cpu).cfs;
     if (sched_feat(PLACE_LAG) && dst_cfs_rq.h_nr_queued &&
-    !entity_eligible(&task_rq(p).cfs, &p.se))
+    !entity_eligible(&task_rq(p).cfs, &p.se)) {
     return 1;
+    }
     return 0;
     }
 
@@ -9457,15 +9734,14 @@ pub unsafe extern "C" fn task_is_ineligible_on_dst_cpu(p: *mut task_struct, dest
 //
 #[no_mangle]
 unsafe extern "C" fn fits_llc_capacity(util: c_ulong, max: c_ulong) -> bool {
-    static bool fits_llc_capacity(unsigned long util, unsigned long max)
-    {
-    let mut aggr_pct: u32 = llc_overaggr_pct;
+pub static mut aggr_pct: u32 = 0;
 //
 // For single core systems, raise the aggregation
 // threshold to accommodate more tasks.
 //
-    if (cpu_smt_num_threads == 1)
+    if (cpu_smt_num_threads == 1) {
     aggr_pct = (aggr_pct * 3 / 2);
+    }
     return util * 100 < max * aggr_pct;
     }
 //
@@ -9480,10 +9756,11 @@ unsafe extern "C" fn fits_llc_capacity(util: c_ulong, max: c_ulong) -> bool {
     static __maybe_unused bool get_llc_stats(int cpu, unsigned long *util,
     unsigned long *cap)
     {
-    struct sched_domain_shared *sd_share;
+pub static mut sd_share: *mut c_void = core::ptr::null_mut();
     sd_share = rcu_dereference_all(per_cpu(sd_llc_shared, cpu));
-    if (!sd_share)
+    if (!sd_share) {
     return false;
+    }
 // util = READ_ONCE(sd_share->util_avg);
 // cap = READ_ONCE(sd_share->capacity);
     return true;
@@ -9554,13 +9831,15 @@ unsafe extern "C" fn fits_llc_capacity(util: c_ulong, max: c_ulong) -> bool {
     {
     unsigned long src_util, dst_util, src_cap, dst_cap;
     if (!get_llc_stats(src_cpu, &src_util, &src_cap) ||
-    !get_llc_stats(dst_cpu, &dst_util, &dst_cap))
+    !get_llc_stats(dst_cpu, &dst_util, &dst_cap)) {
     return mig_unrestricted;
+    }
     src_util = src_util < tsk_util ? 0 : src_util - tsk_util;
     dst_util = dst_util + tsk_util;
     if (!fits_llc_capacity(dst_util, dst_cap) &&
-    !fits_llc_capacity(src_util, src_cap))
+    !fits_llc_capacity(src_util, src_cap)) {
     return mig_unrestricted;
+    }
     if (to_pref) {
 //
 // Don't migrate if we will get preferred LLC too
@@ -9569,8 +9848,9 @@ unsafe extern "C" fn fits_llc_capacity(util: c_ulong, max: c_ulong) -> bool {
 // increase the imbalance too much.
 //
     if (!fits_llc_capacity(dst_util, dst_cap) &&
-    util_greater(dst_util, src_util))
+    util_greater(dst_util, src_util)) {
     return mig_forbid;
+    }
     } else {
 //
 // Don't migrate if we will leave preferred LLC
@@ -9580,8 +9860,9 @@ unsafe extern "C" fn fits_llc_capacity(util: c_ulong, max: c_ulong) -> bool {
 // back to preferred LLC.
 //
     if (fits_llc_capacity(src_util, src_cap) ||
-    !util_greater(src_util, dst_util))
+    !util_greater(src_util, dst_util)) {
     return mig_forbid;
+    }
     }
     return mig_llc;
     }
@@ -9589,33 +9870,37 @@ unsafe extern "C" fn fits_llc_capacity(util: c_ulong, max: c_ulong) -> bool {
 // Check if task p can migrate from source LLC to
 // destination LLC in terms of cache aware load balance.
 //
-    static enum llc_mig can_migrate_llc_task(int src_cpu, int dst_cpu,
-    struct task_struct *p)
+    static enum llc_mig can_migrate_llc_task(int src_cpu, int dst_cpu, task_struct *p)
     {
-    struct mm_struct *mm;
-    bool to_pref;
-    int cpu;
+pub static mut mm: *mut c_void = core::ptr::null_mut();
+    let mut to_pref = 0;
+    let mut cpu = 0;
     mm = p.mm;
-    if (!mm)
+    if (!mm) {
     return mig_unrestricted;
+    }
     cpu = READ_ONCE(mm.sc_stat.cpu);
-    if (cpu < 0 || cpus_share_cache(src_cpu, dst_cpu))
+    if (cpu < 0 || cpus_share_cache(src_cpu, dst_cpu)) {
     return mig_unrestricted;
+    }
 // skip cache aware load balance for too many threads
     if (invalid_llc_nr(mm, p, dst_cpu) ||
     exceed_llc_capacity(mm, dst_cpu)) {
-    if (READ_ONCE(mm.sc_stat.cpu) != -1)
+    if (READ_ONCE(mm.sc_stat.cpu) != -1) {
     WRITE_ONCE(mm.sc_stat.cpu, -1);
+    }
     return mig_unrestricted;
     }
-    if (cpus_share_cache(dst_cpu, cpu))
+    if (cpus_share_cache(dst_cpu, cpu)) {
     to_pref = true;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: cpus_share_cache(src_cpu, _arg: cpu)) -> else {
-    else if (cpus_share_cache(src_cpu, cpu))
+    }
+
+    else if (cpus_share_cache(src_cpu, cpu)) {
     to_pref = false;
-    else
+    }
+    else {
     return mig_unrestricted;
+    }
     return can_migrate_llc(src_cpu, dst_cpu,
     task_util(p), to_pref);
     }
@@ -9627,13 +9912,14 @@ pub unsafe extern "C" fn if(_arg: cpus_share_cache(src_cpu, _arg: cpu)) -> else 
 // LLC locality outweighs the power efficiency gained from
 // migrating the only runnable task away.
 //
-    static inline bool
-    alb_break_llc(struct lb_env *env)
-    {
-    if (!sched_cache_enabled())
+#[no_mangle]
+pub unsafe extern "C" fn alb_break_llc(env: *mut lb_env) -> bool {
+    if (!sched_cache_enabled()) {
     return false;
-    if (cpus_share_cache(env.src_cpu, env.dst_cpu))
+    }
+    if (cpus_share_cache(env.src_cpu, env.dst_cpu)) {
     return false;
+    }
 //
 // All tasks prefer to stay on their current CPU.
 // Do not pull a task from its preferred CPU if:
@@ -9644,16 +9930,19 @@ pub unsafe extern "C" fn if(_arg: cpus_share_cache(src_cpu, _arg: cpu)) -> else 
 //
     if (env.src_rq.nr_pref_llc_running &&
     env.src_rq.nr_pref_llc_running == env.src_rq.cfs.h_nr_runnable) {
-    let mut util: c_ulong = 0;
-    struct task_struct *cur;
-    if (env.src_rq.nr_running <= 1)
+pub static mut util: c_ulong = 0;
+pub static mut cur: *mut c_void = core::ptr::null_mut();
+    if (env.src_rq.nr_running <= 1) {
     return true;
+    }
     cur = rcu_dereference_all(env.src_rq.curr);
-    if (cur && cur.sched_class == &fair_sched_class)
+    if (cur && cur.sched_class == &fair_sched_class) {
     util = task_util(cur);
+    }
     if (can_migrate_llc(env.src_cpu, env.dst_cpu,
-    util, false) == mig_forbid)
+    util, false) == mig_forbid) {
     return true;
+    }
     }
     return false;
     }
@@ -9663,12 +9952,12 @@ pub unsafe extern "C" fn if(_arg: cpus_share_cache(src_cpu, _arg: cpu)) -> else 
 //
 #[no_mangle]
 unsafe extern "C" fn migrate_degrades_llc(p: *mut task_struct, env: *mut lb_env) -> bool {
-    static bool migrate_degrades_llc(struct task_struct *p, struct lb_env *env)
-    {
-    if (!sched_cache_enabled())
+    if (!sched_cache_enabled()) {
     return false;
-    if (task_has_sched_core(p))
+    }
+    if (task_has_sched_core(p)) {
     return false;
+    }
 //
 // Skip over tasks that would degrade LLC locality;
 // only when nr_balanced_failed is sufficiently high do we
@@ -9678,35 +9967,37 @@ unsafe extern "C" fn migrate_degrades_llc(p: *mut task_struct, env: *mut lb_env)
 // than nr_balance_failed to avoid excessive task
 // migration at the same time.
 //
-    if (env.sd.nr_balance_failed >= env.sd.cache_nice_tries + 1)
+    if (env.sd.nr_balance_failed >= env.sd.cache_nice_tries + 1) {
     return false;
+    }
 //
 // We know the env->src_cpu has some tasks prefer to
 // run on env->dst_cpu, skip the tasks do not prefer
 // env->dst_cpu, and find the one that prefers.
 //
     if (env.migration_type == migrate_llc_task &&
-    READ_ONCE(p.preferred_llc) != llc_id(env.dst_cpu))
+    READ_ONCE(p.preferred_llc) != llc_id(env.dst_cpu)) {
     return true;
+    }
     if (can_migrate_llc_task(env.src_cpu,
-    env.dst_cpu, p) != mig_forbid)
+    env.dst_cpu, p) != mig_forbid) {
     return false;
+    }
     return true;
     }
 
-    static inline bool get_llc_stats(int cpu, unsigned long *util,
-    unsigned long *cap)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn get_llc_stats(cpu: c_int, util: *mut c_ulong, cap: *mut c_ulong) -> bool {
     return false;
     }
-    static inline bool
-    alb_break_llc(struct lb_env *env)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: alb_break_llc
+pub unsafe extern "C" fn alb_break_llc_dup(env: *mut lb_env) -> bool {
     return false;
     }
-    static inline bool
-    migrate_degrades_llc(struct task_struct *p, struct lb_env *env)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn migrate_degrades_llc(p: *mut task_struct, env: *mut lb_env) -> bool {
     return false;
     }
 
@@ -9716,12 +10007,12 @@ unsafe extern "C" fn migrate_degrades_llc(p: *mut task_struct, env: *mut lb_env)
     static
 #[no_mangle]
 pub unsafe extern "C" fn can_migrate_task(p: *mut task_struct, env: *mut lb_env) -> c_int {
-    int can_migrate_task(struct task_struct *p, struct lb_env *env)
-    {
-    long degrades, hot;
+    let mut degrades = 0;
+    let mut hot = 0;
     lockdep_assert_rq_held(env.src_rq);
-    if (p.sched_task_hot)
+    if (p.sched_task_hot) {
     p.sched_task_hot = 0;
+    }
 //
 // We do not migrate tasks that are:
 // 1) delayed dequeued unless we migrate load, or
@@ -9731,10 +10022,12 @@ pub unsafe extern "C" fn can_migrate_task(p: *mut task_struct, env: *mut lb_env)
 // 5) are cache-hot on their current CPU, or
 // 6) are blocked on mutexes (if SCHED_PROXY_EXEC is enabled)
 //
-    if ((p.se.sched_delayed) && (env.migration_type != migrate_load))
+    if ((p.se.sched_delayed) && (env.migration_type != migrate_load)) {
     return 0;
-    if (lb_throttled_hierarchy(p, env.dst_cpu))
+    }
+    if (lb_throttled_hierarchy(p, env.dst_cpu)) {
     return 0;
+    }
 //
 // We want to prioritize the migration of eligible tasks.
 // For ineligible tasks we soft-limit them and only allow
@@ -9742,15 +10035,18 @@ pub unsafe extern "C" fn can_migrate_task(p: *mut task_struct, env: *mut lb_env)
 // avoid load-balancing trying very hard to balance the load.
 //
     if (!env.sd.nr_balance_failed &&
-    task_is_ineligible_on_dst_cpu(p, env.dst_cpu))
+    task_is_ineligible_on_dst_cpu(p, env.dst_cpu)) {
     return 0;
+    }
 // Disregard percpu kthreads; they are where they need to be.
-    if (kthread_is_per_cpu(p))
+    if (kthread_is_per_cpu(p)) {
     return 0;
-    if (task_is_blocked(p))
+    }
+    if (task_is_blocked(p)) {
     return 0;
+    }
     if (!cpumask_test_cpu(env.dst_cpu, p.cpus_ptr)) {
-    int cpu;
+    let mut cpu = 0;
     schedstat_inc(p.stats.nr_failed_migrations_affine);
     env.flags |= LBF_SOME_PINNED;
 //
@@ -9764,8 +10060,9 @@ pub unsafe extern "C" fn can_migrate_task(p: *mut task_struct, env: *mut lb_env)
 // - if it's an active balance
 //
     if (env.idle == CPU_NEWLY_IDLE ||
-    env.flags & (LBF_DST_PINNED | LBF_ACTIVE_LB))
+    env.flags & (LBF_DST_PINNED | LBF_ACTIVE_LB)) {
     return 0;
+    }
 // Prevent to re-select dst_cpu via env's CPUs:
     cpu = cpumask_first_and_and(env.dst_grpmask, env.cpus, p.cpus_ptr);
     if (cpu < nr_cpu_ids) {
@@ -9788,8 +10085,9 @@ pub unsafe extern "C" fn can_migrate_task(p: *mut task_struct, env: *mut lb_env)
 // 3) task is cache cold, or
 // 4) too many balance attempts have failed.
 //
-    if (env.flags & LBF_ACTIVE_LB)
+    if (env.flags & LBF_ACTIVE_LB) {
     return 1;
+    }
     degrades = migrate_degrades_locality(p, env);
     if (!degrades) {
 //
@@ -9804,8 +10102,9 @@ pub unsafe extern "C" fn can_migrate_task(p: *mut task_struct, env: *mut lb_env)
 // and we set LBF_LLC_PINNED so we don't increase
 // nr_balance_failed unecessarily.
 //
-    if (env.migration_type != migrate_llc_task)
+    if (env.migration_type != migrate_llc_task) {
     env.flags |= LBF_LLC_PINNED;
+    }
     return 0;
     }
     hot = task_hot(p, env);
@@ -9813,8 +10112,9 @@ pub unsafe extern "C" fn can_migrate_task(p: *mut task_struct, env: *mut lb_env)
     hot = degrades > 0;
     }
     if (!hot || env.sd.nr_balance_failed > env.sd.cache_nice_tries) {
-    if (hot)
+    if (hot) {
     p.sched_task_hot = 1;
+    }
     return 1;
     }
     schedstat_inc(p.stats.nr_failed_migrations_hot);
@@ -9825,16 +10125,14 @@ pub unsafe extern "C" fn can_migrate_task(p: *mut task_struct, env: *mut lb_env)
 //
 #[no_mangle]
 unsafe extern "C" fn detach_task(p: *mut task_struct, env: *mut lb_env) {
-    static void detach_task(struct task_struct *p, struct lb_env *env)
-    {
     lockdep_assert_rq_held(env.src_rq);
     if (p.sched_task_hot) {
     p.sched_task_hot = 0;
     schedstat_inc(env.sd.lb_hot_gained[env.idle]);
     schedstat_inc(p.stats.nr_forced_migrations);
     }
-    WARN_ON(task_current(env.src_rq, p));
-    WARN_ON(task_current_donor(env.src_rq, p));
+    WARN_ON!(task_current(env.src_rq, p));
+    WARN_ON!(task_current_donor(env.src_rq, p));
     deactivate_task(env.src_rq, p, DEQUEUE_NOCLOCK);
     set_task_cpu(p, env.dst_cpu);
     }
@@ -9844,14 +10142,15 @@ unsafe extern "C" fn detach_task(p: *mut task_struct, env: *mut lb_env) {
 //
 // Returns a task if successful and NULL otherwise.
 //
-    static struct task_struct *detach_one_task(struct lb_env *env)
-    {
-    struct task_struct *p;
+#[no_mangle]
+pub unsafe extern "C" fn detach_one_task(env: *mut lb_env) -> *mut c_void {
+pub static mut p: *mut c_void = core::ptr::null_mut();
     lockdep_assert_rq_held(env.src_rq);
     list_for_each_entry_reverse(p,
     &env.src_rq.cfs_tasks, se.group_node) {
-    if (!can_migrate_task(p, env))
+    if (!can_migrate_task(p, env)) {
     continue;
+    }
     detach_task(p, env);
 //
 // Right now, this is only the second place where
@@ -9872,12 +10171,10 @@ unsafe extern "C" fn detach_task(p: *mut task_struct, env: *mut lb_env) {
 //
 #[no_mangle]
 unsafe extern "C" fn detach_tasks(env: *mut lb_env) -> c_int {
-    static int detach_tasks(struct lb_env *env)
-    {
-    struct list_head *tasks = &env.src_rq.cfs_tasks;
+    let mut tasks = &env.src_rq.cfs_tasks;
     unsigned long util, load;
-    struct task_struct *p;
-    let mut detached: c_int = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut detached: c_int = 0;
     lockdep_assert_rq_held(env.src_rq);
 //
 // Source run queue has been emptied by another CPU, clear
@@ -9887,30 +10184,34 @@ unsafe extern "C" fn detach_tasks(env: *mut lb_env) -> c_int {
     env.flags &= ~LBF_ALL_PINNED;
     return 0;
     }
-    if (env.imbalance <= 0)
+    if (env.imbalance <= 0) {
     return 0;
+    }
     while (!list_empty(tasks)) {
 //
 // We don't want to steal all, otherwise we may be treated likewise,
 // which could at worst lead to a livelock crash.
 //
-    if (env.idle && env.src_rq.nr_running <= 1)
+    if (env.idle && env.src_rq.nr_running <= 1) {
     break;
-    env.loop++;
+    }
+    env.loop += 1;
 // We've more or less seen every task there is, call it quits
-    if (env.loop > env.loop_max)
+    if (env.loop > env.loop_max) {
     break;
+    }
 // take a breather every nr_migrate tasks
     if (env.loop > env.loop_break) {
     env.loop_break += SCHED_NR_MIGRATE_BREAK;
     env.flags |= LBF_NEED_BREAK;
     break;
     }
-    p = list_last_entry(tasks, struct task_struct, se.group_node);
-    if (!can_migrate_task(p, env))
-    goto next;
-    switch (env.migration_type) {
-    case migrate_load:
+    p = list_last_entry(tasks, task_struct, se.group_node);
+    if (!can_migrate_task(p, env)) {
+// goto;
+    }
+    match (env.migration_type) {
+    migrate_load => {
 //
 // Depending of the number of CPUs and tasks and the
 // cgroup hierarchy, task_h_load() can return a null
@@ -9920,59 +10221,71 @@ unsafe extern "C" fn detach_tasks(env: *mut lb_env) -> c_int {
 //
     load = max_t(unsigned long, task_h_load(p), 1);
     if (sched_feat(LB_MIN) &&
-    load < 16 && !env.sd.nr_balance_failed)
-    goto next;
+    load < 16 && !env.sd.nr_balance_failed) {
+// goto;
+    }
 //
 // Make sure that we don't migrate too much load.
 // Nevertheless, let relax the constraint if
 // scheduler fails to find a good waiting task to
 // migrate.
 //
-    if (shr_bound(load, env.sd.nr_balance_failed) > env.imbalance)
-    goto next;
+    if (shr_bound(load, env.sd.nr_balance_failed) > env.imbalance) {
+// goto;
+    }
     env.imbalance -= load;
-    break;
-    case migrate_util:
+    // break;
+    }
+    migrate_util => {
     util = task_util_est(p);
-    if (shr_bound(util, env.sd.nr_balance_failed) > env.imbalance)
-    goto next;
+    if (shr_bound(util, env.sd.nr_balance_failed) > env.imbalance) {
+// goto;
+    }
     env.imbalance -= util;
-    break;
-    case migrate_task:
-    env.imbalance--;
-    break;
-    case migrate_misfit:
+    // break;
+    }
+    migrate_task => {
+    env.imbalance -= 1;
+    // break;
+    }
+    migrate_misfit => {
 // This is not a misfit task
-    if (task_fits_cpu(p, env.src_cpu))
-    goto next;
+    if (task_fits_cpu(p, env.src_cpu)) {
+// goto;
+    }
     env.imbalance = 0;
-    break;
-    case migrate_llc_task:
-    env.imbalance--;
-    break;
+    // break;
+    }
+    migrate_llc_task => {
+    env.imbalance -= 1;
+    // break;
+    }
     }
     detach_task(p, env);
     list_add(&p.se.group_node, &env.tasks);
-    detached++;
+    detached += 1;
 
 //
 // NEWIDLE balancing is a source of latency, so preemptible
 // kernels will stop after the first task is detached to minimize
 // the critical section.
 //
-    if (env.idle == CPU_NEWLY_IDLE)
+    if (env.idle == CPU_NEWLY_IDLE) {
     break;
+    }
 
 //
 // We only want to steal up to the prescribed amount of
 // load/util/tasks.
 //
-    if (env.imbalance <= 0)
+    if (env.imbalance <= 0) {
     break;
+    }
     continue;
-    next:
-    if (p.sched_task_hot)
+// label;
+    if (p.sched_task_hot) {
     schedstat_inc(p.stats.nr_failed_migrations_hot);
+    }
     list_move(&p.se.group_node, tasks);
     }
 //
@@ -9989,15 +10302,13 @@ unsafe extern "C" fn detach_tasks(env: *mut lb_env) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn attach_tasks(env: *mut lb_env) {
-    static void attach_tasks(struct lb_env *env)
-    {
-    struct list_head *tasks = &env.tasks;
-    struct task_struct *p;
-    struct rq_flags rf;
+    let mut tasks = &env.tasks;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut rf: usize = 0;
     rq_lock(env.dst_rq, &rf);
     update_rq_clock(env.dst_rq);
     while (!list_empty(tasks)) {
-    p = list_first_entry(tasks, struct task_struct, se.group_node);
+    p = list_first_entry(tasks, task_struct, se.group_node);
     list_del_init(&p.se.group_node);
     attach_task(env.dst_rq, p);
     }
@@ -10006,94 +10317,108 @@ unsafe extern "C" fn attach_tasks(env: *mut lb_env) {
 
 #[no_mangle]
 pub unsafe extern "C" fn cfs_rq_has_blocked_load(cfs_rq: *mut cfs_rq) -> bool {
-    static inline bool cfs_rq_has_blocked_load(struct cfs_rq *cfs_rq)
-    {
-    if (cfs_rq.avg.load_avg)
+    if (cfs_rq.avg.load_avg) {
     return true;
-    if (cfs_rq.avg.util_avg)
+    }
+    if (cfs_rq.avg.util_avg) {
     return true;
+    }
     return false;
     }
 #[no_mangle]
 pub unsafe extern "C" fn others_have_blocked(rq: *mut rq) -> bool {
-    static inline bool others_have_blocked(struct rq *rq)
-    {
-    if (cpu_util_rt(rq))
+    if (cpu_util_rt(rq)) {
     return true;
-    if (cpu_util_dl(rq))
+    }
+    if (cpu_util_dl(rq)) {
     return true;
-    if (hw_load_avg(rq))
+    }
+    if (hw_load_avg(rq)) {
     return true;
-    if (cpu_util_irq(rq))
+    }
+    if (cpu_util_irq(rq)) {
     return true;
+    }
     return false;
     }
 #[no_mangle]
 pub unsafe extern "C" fn update_blocked_load_tick(rq: *mut rq) {
-    static inline void update_blocked_load_tick(struct rq *rq)
-    {
     WRITE_ONCE(rq.last_blocked_load_update_tick, jiffies);
     }
 #[no_mangle]
 pub unsafe extern "C" fn update_has_blocked_load_status(rq: *mut rq, has_blocked_load: bool) {
-    static inline void update_has_blocked_load_status(struct rq *rq, bool has_blocked_load)
-    {
-    if (!has_blocked_load)
+    if (!has_blocked_load) {
     rq.has_blocked_load = 0;
     }
+    }
 
-    static inline bool cfs_rq_has_blocked_load(struct cfs_rq *cfs_rq) { return false; }
-    static inline bool others_have_blocked(struct rq *rq) { return false; }
-    static inline void update_blocked_load_tick(struct rq *rq) {}
-    static inline void update_has_blocked_load_status(struct rq *rq, bool has_blocked_load) {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: cfs_rq_has_blocked_load
+pub unsafe extern "C" fn cfs_rq_has_blocked_load_dup(cfs_rq: *mut cfs_rq) -> bool { return false; }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: others_have_blocked
+pub unsafe extern "C" fn others_have_blocked_dup(rq: *mut rq) -> bool { return false; }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: update_blocked_load_tick
+pub unsafe extern "C" fn update_blocked_load_tick_dup(rq: *mut rq) {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: update_has_blocked_load_status
+pub unsafe extern "C" fn update_has_blocked_load_status_dup(rq: *mut rq, has_blocked_load: bool) {}
 
 #[no_mangle]
 unsafe extern "C" fn __update_blocked_others(rq: *mut rq, done: *mut bool) -> bool {
-    static bool __update_blocked_others(struct rq *rq, bool *done)
-    {
-    bool updated;
+    let mut updated = 0;
 //
 // update_load_avg() can call cpufreq_update_util(). Make sure that RT,
 // DL and IRQ signals have been updated before updating CFS.
 //
     updated = update_other_load_avgs(rq);
-    if (others_have_blocked(rq))
+    if (others_have_blocked(rq)) {
 // done = false;
+    }
     return updated;
     }
 
 #[no_mangle]
 unsafe extern "C" fn __update_blocked_fair(rq: *mut rq, done: *mut bool) -> bool {
-    static bool __update_blocked_fair(struct rq *rq, bool *done)
-    {
-    struct cfs_rq *cfs_rq, *pos;
-    let mut decayed: bool = false;
+    let mut cfs_rq = core::ptr::null_mut();
+    let mut pos = core::ptr::null_mut();
+pub static mut decayed: bool = false;
 //
 // Iterates the task_group tree in a bottom up fashion, see
 // list_add_leaf_cfs_rq() for details.
 //
     for_each_leaf_cfs_rq_safe(rq, cfs_rq, pos) {
-    struct sched_entity *se;
+pub static mut se: *mut c_void = core::ptr::null_mut();
     if (update_cfs_rq_load_avg(cfs_rq_clock_pelt(cfs_rq), cfs_rq)) {
     update_tg_load_avg(cfs_rq);
-    if (cfs_rq.nr_queued == 0)
+    if (cfs_rq.nr_queued == 0) {
     update_idle_cfs_rq_clock_pelt(cfs_rq);
-    if (cfs_rq == &rq.cfs)
+    }
+    if (cfs_rq == &rq.cfs) {
     decayed = true;
+    }
     }
 // Propagate pending load changes to the parent, if any:
     se = cfs_rq_se(cfs_rq);
-    if (se && !skip_blocked_update(se))
+    if (se && !skip_blocked_update(se)) {
     update_load_avg(cfs_rq_of(se), se, UPDATE_TG);
+    }
 //
 // There can be a lot of idle CPU cgroups.  Don't let fully
 // decayed cfs_rqs linger on the list.
 //
-    if (cfs_rq_is_decayed(cfs_rq))
+    if (cfs_rq_is_decayed(cfs_rq)) {
     list_del_leaf_cfs_rq(cfs_rq);
+    }
 // Don't need periodic decay once load/util_avg are null
-    if (cfs_rq_has_blocked_load(cfs_rq))
+    if (cfs_rq_has_blocked_load(cfs_rq)) {
 // done = false;
+    }
     }
     return decayed;
     }
@@ -10104,19 +10429,19 @@ unsafe extern "C" fn __update_blocked_fair(rq: *mut rq, done: *mut bool) -> bool
 //
 #[no_mangle]
 unsafe extern "C" fn update_cfs_rq_h_load(cfs_rq: *mut cfs_rq) {
-    static void update_cfs_rq_h_load(struct cfs_rq *cfs_rq)
-    {
-    struct sched_entity *se = cfs_rq_se(cfs_rq);
-    let mut now: c_ulong = jiffies;
-    unsigned long load;
-    if (cfs_rq.last_h_load_update == now)
+    let mut se = cfs_rq_se(cfs_rq);
+pub static mut now: c_ulong = 0;
+    let mut load = 0;
+    if (cfs_rq.last_h_load_update == now) {
     return;
+    }
     WRITE_ONCE(cfs_rq.h_load_next, core::ptr::null_mut());
     for_each_sched_entity(se) {
     cfs_rq = cfs_rq_of(se);
     WRITE_ONCE(cfs_rq.h_load_next, se);
-    if (cfs_rq.last_h_load_update == now)
+    if (cfs_rq.last_h_load_update == now) {
     break;
+    }
     }
     if (!se) {
     cfs_rq.h_load = cfs_rq_load_avg(cfs_rq);
@@ -10133,9 +10458,7 @@ unsafe extern "C" fn update_cfs_rq_h_load(cfs_rq: *mut cfs_rq) {
     }
 #[no_mangle]
 unsafe extern "C" fn task_h_load(p: *mut task_struct) -> c_ulong {
-    static unsigned long task_h_load(struct task_struct *p)
-    {
-    struct cfs_rq *cfs_rq = task_cfs_rq(p);
+    let mut cfs_rq = task_cfs_rq(p);
     update_cfs_rq_h_load(cfs_rq);
     return div64_ul(p.se.avg.load_avg * cfs_rq.h_load,
     cfs_rq_load_avg(cfs_rq) + 1);
@@ -10143,39 +10466,33 @@ unsafe extern "C" fn task_h_load(p: *mut task_struct) -> c_ulong {
 
 #[no_mangle]
 unsafe extern "C" fn __update_blocked_fair(rq: *mut rq, done: *mut bool) -> bool {
-    static bool __update_blocked_fair(struct rq *rq, bool *done)
-    {
-    struct cfs_rq *cfs_rq = &rq.cfs;
-    bool decayed;
+    let mut cfs_rq = &rq.cfs;
+    let mut decayed = 0;
     decayed = update_cfs_rq_load_avg(cfs_rq_clock_pelt(cfs_rq), cfs_rq);
-    if (cfs_rq_has_blocked_load(cfs_rq))
+    if (cfs_rq_has_blocked_load(cfs_rq)) {
 // done = false;
+    }
     return decayed;
     }
 #[no_mangle]
 unsafe extern "C" fn task_h_load(p: *mut task_struct) -> c_ulong {
-    static unsigned long task_h_load(struct task_struct *p)
-    {
     return p.se.avg.load_avg;
     }
 
 #[no_mangle]
 unsafe extern "C" fn __sched_balance_update_blocked_averages(rq: *mut rq) {
-    static void __sched_balance_update_blocked_averages(struct rq *rq)
-    {
-    let mut decayed: bool = false, done = true;
+pub static mut decayed: bool = false;
     update_blocked_load_tick(rq);
     decayed |= __update_blocked_others(rq, &done);
     decayed |= __update_blocked_fair(rq, &done);
     update_has_blocked_load_status(rq, !done);
-    if (decayed)
+    if (decayed) {
     cpufreq_update_util(rq, 0);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn sched_balance_update_blocked_averages(cpu: c_int) {
-    static void sched_balance_update_blocked_averages(int cpu)
-    {
-    struct rq *rq = cpu_rq(cpu);
+    let mut rq = cpu_rq(cpu);
     guard(rq_lock_irqsave)(rq);
     update_rq_clock(rq);
     __sched_balance_update_blocked_averages(rq);
@@ -10187,21 +10504,21 @@ unsafe extern "C" fn sched_balance_update_blocked_averages(cpu: c_int) {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct sg_lb_stats {
-    pub /: *mut *mut unsigned long avg_load; / Avg load over the CPUs of the group,
-    pub /: *mut *mut unsigned long group_load; / Total load over the CPUs of the group,
-    pub /: *mut *mut unsigned long group_capacity; / Capacity over the CPUs of the group,
-    pub /: *mut *mut unsigned long group_util; / Total utilization over the CPUs of the group,
-    pub /: *mut *mut unsigned long group_runnable; / Total runnable time over the CPUs of the group,
-    pub /: *mut *mut unsigned int sum_nr_running; / Nr of all tasks running in the group,
-    pub /: *mut *mut unsigned int sum_h_nr_running; / Nr of CFS tasks running in the group,
-    pub /: *mut *mut unsigned int idle_cpus; / Nr of idle CPUs in the group,
+//     pub /: *mut *mut unsigned long avg_load; / Avg load over the CPUs of the group,
+//     pub /: *mut *mut unsigned long group_load; / Total load over the CPUs of the group,
+//     pub /: *mut *mut unsigned long group_capacity; / Capacity over the CPUs of the group,
+//     pub /: *mut *mut unsigned long group_util; / Total utilization over the CPUs of the group,
+//     pub /: *mut *mut unsigned long group_runnable; / Total runnable time over the CPUs of the group,
+//     pub /: *mut *mut unsigned int sum_nr_running; / Nr of all tasks running in the group,
+//     pub /: *mut *mut unsigned int sum_h_nr_running; / Nr of CFS tasks running in the group,
+//     pub /: *mut *mut unsigned int idle_cpus; / Nr of idle CPUs in the group,
     pub group_weight: c_uint,
-    pub group_type: enum group_type,
-    pub /: *mut *mut unsigned int group_asym_packing; / Tasks should be moved to preferred CPU,
-    pub /: *mut *mut unsigned int group_smt_balance; / Task on busy SMT be moved,
-    pub /: *mut *mut unsigned int group_llc_balance; / Tasks should be moved to preferred LLC,
-    pub /: *mut *mut unsigned long group_misfit_task_load; / A CPU has a task too big for its capacity,
-    pub /: *mut *mut unsigned int group_overutilized; / At least one CPU is overutilized in the group,
+    pub group_type: group_type,
+//     pub /: *mut *mut unsigned int group_asym_packing; / Tasks should be moved to preferred CPU,
+//     pub /: *mut *mut unsigned int group_smt_balance; / Task on busy SMT be moved,
+//     pub /: *mut *mut unsigned int group_llc_balance; / Tasks should be moved to preferred LLC,
+//     pub /: *mut *mut unsigned long group_misfit_task_load; / A CPU has a task too big for its capacity,
+//     pub /: *mut *mut unsigned int group_overutilized; / At least one CPU is overutilized in the group,
 
     pub nr_numa_running: c_uint,
     pub nr_preferred_running: c_uint,
@@ -10216,20 +10533,18 @@ pub struct sg_lb_stats {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct sd_lb_stats {
-    pub /: *mut *mut *mut sched_group busiest; / Busiest group in this sd,
-    pub /: *mut *mut *mut sched_group local; / Local group in this sd,
-    pub /: *mut *mut unsigned long total_load; / Total load of all groups in sd,
-    pub /: *mut *mut unsigned long total_capacity; / Total capacity of all groups in sd,
-    pub /: *mut *mut unsigned long avg_load; / Average load across all groups in sd,
-    pub /: *mut *mut unsigned int prefer_sibling; / Tasks should go to sibling first,
-    pub /: *mut *mut sg_lb_stats busiest_stat; / Statistics of the busiest group,
-    pub /: *mut *mut sg_lb_stats local_stat; / Statistics of the local group,
+//     pub /: *mut *mut *mut sched_group busiest; / Busiest group in this sd,
+//     pub /: *mut *mut *mut sched_group local; / Local group in this sd,
+//     pub /: *mut *mut unsigned long total_load; / Total load of all groups in sd,
+//     pub /: *mut *mut unsigned long total_capacity; / Total capacity of all groups in sd,
+//     pub /: *mut *mut unsigned long avg_load; / Average load across all groups in sd,
+//     pub /: *mut *mut unsigned int prefer_sibling; / Tasks should go to sibling first,
+//     pub /: *mut *mut sg_lb_stats busiest_stat; / Statistics of the busiest group,
+//     pub /: *mut *mut sg_lb_stats local_stat; / Statistics of the local group,
 }
 
 #[no_mangle]
 pub unsafe extern "C" fn init_sd_lb_stats(sds: *mut sd_lb_stats) {
-    static inline void init_sd_lb_stats(struct sd_lb_stats *sds)
-    {
 //
 // Skimp on the clearing to avoid duplicate work. We can avoid clearing
 // local_stat because update_sg_lb_stats() does a full clear/assignment.
@@ -10237,7 +10552,7 @@ pub unsafe extern "C" fn init_sd_lb_stats(sds: *mut sd_lb_stats) {
 // busiest_stat::idle_cpus to the worst busiest group because
 // update_sd_pick_busiest() reads these before assignment.
 //
-// sds = (struct sd_lb_stats){
+// sds = (sd_lb_stats){
     .busiest = core::ptr::null_mut(),
     .local = core::ptr::null_mut(),
     .total_load = 0UL,
@@ -10250,34 +10565,33 @@ pub unsafe extern "C" fn init_sd_lb_stats(sds: *mut sd_lb_stats) {
     }
 #[no_mangle]
 unsafe extern "C" fn scale_rt_capacity(cpu: c_int) -> c_ulong {
-    static unsigned long scale_rt_capacity(int cpu)
-    {
-    let mut max: c_ulong = get_actual_cpu_capacity(cpu);
-    struct rq *rq = cpu_rq(cpu);
+pub static mut max: c_ulong = 0;
+    let mut rq = cpu_rq(cpu);
     unsigned long used, free;
-    unsigned long irq;
+    let mut irq = 0;
     irq = cpu_util_irq(rq);
-    if (unlikely(irq >= max))
+    if (unlikely(irq >= max)) {
     return 1;
+    }
 //
 // avg_rt.util_avg and avg_dl.util_avg track binary signals
 // (running and not running) with weights 0 and 1024 respectively.
 //
     used = cpu_util_rt(rq);
     used += cpu_util_dl(rq);
-    if (unlikely(used >= max))
+    if (unlikely(used >= max)) {
     return 1;
+    }
     free = max - used;
     return scale_irq_capacity(free, irq, max);
     }
 #[no_mangle]
 unsafe extern "C" fn update_cpu_capacity(sd: *mut sched_domain, cpu: c_int) {
-    static void update_cpu_capacity(struct sched_domain *sd, int cpu)
-    {
-    let mut capacity: c_ulong = scale_rt_capacity(cpu);
-    struct sched_group *sdg = sd.groups;
-    if (!capacity)
+pub static mut capacity: c_ulong = 0;
+    let mut sdg = sd.groups;
+    if (!capacity) {
     capacity = 1;
+    }
     cpu_rq(cpu).cpu_capacity = capacity;
     trace_sched_cpu_capacity_tp(cpu_rq(cpu));
     sdg.sgc.capacity = capacity;
@@ -10286,12 +10600,10 @@ unsafe extern "C" fn update_cpu_capacity(sd: *mut sched_domain, cpu: c_int) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn update_group_capacity(sd: *mut sched_domain, cpu: c_int) {
-    void update_group_capacity(struct sched_domain *sd, int cpu)
-    {
-    struct sched_domain *child = sd.child;
+    let mut child = sd.child;
     struct sched_group *group, *sdg = sd.groups;
     unsigned long capacity, min_capacity, max_capacity;
-    unsigned long interval;
+    let mut interval = 0;
     interval = msecs_to_jiffies(sd.balance_interval);
     interval = clamp(interval, 1UL, max_load_balance_interval);
     sdg.sgc.next_update = jiffies + interval;
@@ -10308,7 +10620,7 @@ pub unsafe extern "C" fn update_group_capacity(sd: *mut sched_domain, cpu: c_int
 // span the current group.
 //
     for_each_cpu(cpu, sched_group_span(sdg)) {
-    let mut cpu_cap: c_ulong = capacity_of(cpu);
+pub static mut cpu_cap: c_ulong = 0;
     capacity += cpu_cap;
     min_capacity = min(cpu_cap, min_capacity);
     max_capacity = max(cpu_cap, max_capacity);
@@ -10320,7 +10632,7 @@ pub unsafe extern "C" fn update_group_capacity(sd: *mut sched_domain, cpu: c_int
 //
     group = child.groups;
     do {
-    struct sched_group_capacity *sgc = group.sgc;
+    let mut sgc = group.sgc;
     capacity += sgc.capacity;
     min_capacity = min(sgc.min_capacity, min_capacity);
     max_capacity = max(sgc.max_capacity, max_capacity);
@@ -10336,17 +10648,14 @@ pub unsafe extern "C" fn update_group_capacity(sd: *mut sched_domain, cpu: c_int
 // activity. The imbalance_pct is used for the threshold.
 // Return true is the capacity is reduced
 //
-    static inline int
-    check_cpu_capacity(struct rq *rq, struct sched_domain *sd)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn check_cpu_capacity(rq: *mut rq, sd: *mut sched_domain) -> c_int {
     return ((rq.cpu_capacity * sd.imbalance_pct) <
     (arch_scale_cpu_capacity(cpu_of(rq)) * 100));
     }
 // Check if the rq has a misfit task
 #[no_mangle]
 pub unsafe extern "C" fn check_misfit_status(rq: *mut rq) -> bool {
-    static inline bool check_misfit_status(struct rq *rq)
-    {
     return rq.misfit_task_load;
     }
 //
@@ -10379,8 +10688,6 @@ pub unsafe extern "C" fn check_misfit_status(rq: *mut rq) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn sg_imbalanced(group: *mut sched_group) -> c_int {
-    static inline int sg_imbalanced(struct sched_group *group)
-    {
     return group.sgc.imbalance;
     }
 //
@@ -10395,17 +10702,19 @@ pub unsafe extern "C" fn sg_imbalanced(group: *mut sched_group) -> c_int {
 // As an example, an available capacity of 1% can appear but it doesn't make
 // any benefit for the load balance.
 //
-    static inline bool
-    group_has_capacity(unsigned int imbalance_pct, struct sg_lb_stats *sgs)
-    {
-    if (sgs.sum_nr_running < sgs.group_weight)
+#[no_mangle]
+pub unsafe extern "C" fn group_has_capacity(imbalance_pct: c_uint, sgs: *mut sg_lb_stats) -> bool {
+    if (sgs.sum_nr_running < sgs.group_weight) {
     return true;
+    }
     if ((sgs.group_capacity * imbalance_pct) <
-    (sgs.group_runnable * 100))
+    (sgs.group_runnable * 100)) {
     return false;
+    }
     if ((sgs.group_capacity * 100) >
-    (sgs.group_util * imbalance_pct))
+    (sgs.group_util * imbalance_pct)) {
     return true;
+    }
     return false;
     }
 //
@@ -10416,44 +10725,52 @@ pub unsafe extern "C" fn sg_imbalanced(group: *mut sched_group) -> c_int {
 // overloaded so both group_has_capacity and group_is_overloaded return
 // false.
 //
-    static inline bool
-    group_is_overloaded(unsigned int imbalance_pct, struct sg_lb_stats *sgs)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn group_is_overloaded(imbalance_pct: c_uint, sgs: *mut sg_lb_stats) -> bool {
 //
 // With EAS and uclamp, 1 CPU in the group must be overutilized to
 // consider the group overloaded.
 //
-    if (sched_energy_enabled() && !sgs.group_overutilized)
+    if (sched_energy_enabled() && !sgs.group_overutilized) {
     return false;
-    if (sgs.sum_nr_running <= sgs.group_weight)
+    }
+    if (sgs.sum_nr_running <= sgs.group_weight) {
     return false;
+    }
     if ((sgs.group_capacity * 100) <
-    (sgs.group_util * imbalance_pct))
+    (sgs.group_util * imbalance_pct)) {
     return true;
+    }
     if ((sgs.group_capacity * imbalance_pct) <
-    (sgs.group_runnable * 100))
+    (sgs.group_runnable * 100)) {
     return true;
+    }
     return false;
     }
     static inline enum
-    group_type group_classify(unsigned int imbalance_pct,
-    struct sched_group *group,
-    struct sg_lb_stats *sgs)
+    group_type group_classify(unsigned int imbalance_pct, sched_group *group, sg_lb_stats *sgs)
     {
-    if (group_is_overloaded(imbalance_pct, sgs))
+    if (group_is_overloaded(imbalance_pct, sgs)) {
     return group_overloaded;
-    if (sgs.group_llc_balance)
+    }
+    if (sgs.group_llc_balance) {
     return group_llc_balance;
-    if (sg_imbalanced(group))
+    }
+    if (sg_imbalanced(group)) {
     return group_imbalanced;
-    if (sgs.group_asym_packing)
+    }
+    if (sgs.group_asym_packing) {
     return group_asym_packing;
-    if (sgs.group_smt_balance)
+    }
+    if (sgs.group_smt_balance) {
     return group_smt_balance;
-    if (sgs.group_misfit_task_load)
+    }
+    if (sgs.group_misfit_task_load) {
     return group_misfit_task;
-    if (!group_has_capacity(imbalance_pct, sgs))
+    }
+    if (!group_has_capacity(imbalance_pct, sgs)) {
     return group_fully_busy;
+    }
     return group_has_spare;
     }
 //
@@ -10469,18 +10786,16 @@ pub unsafe extern "C" fn sg_imbalanced(group: *mut sched_group) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn sched_use_asym_prio(sd: *mut sched_domain, cpu: c_int) -> bool {
-    static bool sched_use_asym_prio(struct sched_domain *sd, int cpu)
-    {
-    if (!(sd.flags & SD_ASYM_PACKING))
+    if (!(sd.flags & SD_ASYM_PACKING)) {
     return false;
-    if (!sched_smt_active())
+    }
+    if (!sched_smt_active()) {
     return true;
+    }
     return sd.flags & SD_SHARE_CPUCAPACITY || is_core_idle(cpu);
     }
 #[no_mangle]
 pub unsafe extern "C" fn sched_asym(sd: *mut sched_domain, dst_cpu: c_int, src_cpu: c_int) -> bool {
-    static inline bool sched_asym(struct sched_domain *sd, int dst_cpu, int src_cpu)
-    {
 //
 // First check if @dst_cpu can do asym_packing load balance. Only do it
 // if it has higher priority than @src_cpu.
@@ -10500,32 +10815,32 @@ pub unsafe extern "C" fn sched_asym(sd: *mut sched_domain, dst_cpu: c_int, src_c
 // Return: true if @env::dst_cpu can do with asym_packing load balance. False
 // otherwise.
 //
-    static inline bool
-    sched_group_asym(struct lb_env *env, struct sg_lb_stats *sgs, struct sched_group *group)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sched_group_asym(env: *mut lb_env, sgs: *mut sg_lb_stats, group: *mut sched_group) -> bool {
 //
 // CPU priorities do not make sense for SMT cores with more than one
 // busy sibling.
 //
     if ((group.flags & SD_SHARE_CPUCAPACITY) &&
-    (sgs.group_weight - sgs.idle_cpus != 1))
+    (sgs.group_weight - sgs.idle_cpus != 1)) {
     return false;
+    }
     return sched_asym(env.sd, env.dst_cpu, READ_ONCE(group.asym_prefer_cpu));
     }
 // One group has more than one SMT CPU while the other group does not
-    static inline bool smt_vs_nonsmt_groups(struct sched_group *sg1,
-    struct sched_group *sg2)
-    {
-    if (!sg1 || !sg2)
+#[no_mangle]
+pub unsafe extern "C" fn smt_vs_nonsmt_groups(sg1: *mut sched_group, sg2: *mut sched_group) -> bool {
+    if (!sg1 || !sg2) {
     return false;
+    }
     return (sg1.flags & SD_SHARE_CPUCAPACITY) !=
     (sg2.flags & SD_SHARE_CPUCAPACITY);
     }
-    static inline bool smt_balance(struct lb_env *env, struct sg_lb_stats *sgs,
-    struct sched_group *group)
-    {
-    if (!env.idle)
+#[no_mangle]
+pub unsafe extern "C" fn smt_balance(env: *mut lb_env, sgs: *mut sg_lb_stats, group: *mut sched_group) -> bool {
+    if (!env.idle) {
     return false;
+    }
 //
 // For SMT source group, it is better to move a task
 // to a CPU that doesn't have multiple tasks sharing its CPU capacity.
@@ -10533,19 +10848,19 @@ pub unsafe extern "C" fn sched_asym(sd: *mut sched_domain, dst_cpu: c_int, src_c
 // will not be on.
 //
     if (group.flags & SD_SHARE_CPUCAPACITY &&
-    sgs.sum_h_nr_running > 1)
+    sgs.sum_h_nr_running > 1) {
     return true;
+    }
     return false;
     }
-    static inline long sibling_imbalance(struct lb_env *env,
-    struct sd_lb_stats *sds,
-    struct sg_lb_stats *busiest,
-    struct sg_lb_stats *local)
-    {
-    int ncores_busiest, ncores_local;
-    long imbalance;
-    if (!env.idle || !busiest.sum_nr_running)
+#[no_mangle]
+pub unsafe extern "C" fn sibling_imbalance(env: *mut lb_env, sds: *mut sd_lb_stats, busiest: *mut sg_lb_stats, local: *mut sg_lb_stats) -> c_long {
+    let mut ncores_busiest = 0;
+    let mut ncores_local = 0;
+    let mut imbalance = 0;
+    if (!env.idle || !busiest.sum_nr_running) {
     return 0;
+    }
     ncores_busiest = sds.busiest.cores;
     ncores_local = sds.local.cores;
     if (ncores_busiest == ncores_local) {
@@ -10561,19 +10876,20 @@ pub unsafe extern "C" fn sched_asym(sd: *mut sched_domain, dst_cpu: c_int, src_c
     imbalance /= ncores_local + ncores_busiest;
 // Take advantage of resource in an empty sched group
     if (imbalance <= 1 && local.sum_nr_running == 0 &&
-    busiest.sum_nr_running > 1)
+    busiest.sum_nr_running > 1) {
     imbalance = 2;
+    }
     return imbalance;
     }
-    static inline bool
-    sched_reduced_capacity(struct rq *rq, struct sched_domain *sd)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sched_reduced_capacity(rq: *mut rq, sd: *mut sched_domain) -> bool {
 //
 // When there is more than 1 task, the group_overloaded case already
 // takes care of cpu with reduced capacity
 //
-    if (rq.cfs.h_nr_runnable != 1)
+    if (rq.cfs.h_nr_runnable != 1) {
     return false;
+    }
     return check_cpu_capacity(rq, sd);
     }
 
@@ -10582,17 +10898,17 @@ pub unsafe extern "C" fn sched_asym(sd: *mut sched_domain, dst_cpu: c_int, src_c
 // use. These values guide load balancing on aggregating tasks
 // to a LLC.
 //
-    static void record_sg_llc_stats(struct lb_env *env,
-    struct sg_lb_stats *sgs,
-    struct sched_group *group)
-    {
-    struct sched_domain_shared *sd_share;
-    int cpu;
-    if (!sched_cache_enabled() || env.idle == CPU_NEWLY_IDLE)
+#[no_mangle]
+pub unsafe extern "C" fn record_sg_llc_stats(env: *mut lb_env, sgs: *mut sg_lb_stats, group: *mut sched_group) {
+pub static mut sd_share: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
+    if (!sched_cache_enabled() || env.idle == CPU_NEWLY_IDLE) {
     return;
+    }
 // Only care about sched domain spanning multiple LLCs
-    if (env.sd.child != rcu_dereference_all(per_cpu(sd_llc, env.dst_cpu)))
+    if (env.sd.child != rcu_dereference_all(per_cpu(sd_llc, env.dst_cpu))) {
     return;
+    }
 //
 // At this point we know this group spans a LLC domain.
 // Record the statistic of this group in its corresponding
@@ -10604,60 +10920,66 @@ pub unsafe extern "C" fn sched_asym(sd: *mut sched_domain, dst_cpu: c_int, src_c
 //
     cpu = cpumask_first(sched_group_span(group));
     sd_share = rcu_dereference_all(per_cpu(sd_llc_shared, cpu));
-    if (!sd_share)
+    if (!sd_share) {
     return;
-    if (READ_ONCE(sd_share.util_avg) != sgs.group_util)
+    }
+    if (READ_ONCE(sd_share.util_avg) != sgs.group_util) {
     WRITE_ONCE(sd_share.util_avg, sgs.group_util);
-    if (unlikely(READ_ONCE(sd_share.capacity) != sgs.group_capacity))
+    }
+    if (unlikely(READ_ONCE(sd_share.capacity) != sgs.group_capacity)) {
     WRITE_ONCE(sd_share.capacity, sgs.group_capacity);
+    }
     }
 //
 // Do LLC balance on sched group that contains LLC, and have tasks preferring
 // to run on LLC in idle dst_cpu.
 //
-    static inline bool llc_balance(struct lb_env *env, struct sg_lb_stats *sgs,
-    struct sched_group *group)
-    {
-    if (!sched_cache_enabled())
+#[no_mangle]
+pub unsafe extern "C" fn llc_balance(env: *mut lb_env, sgs: *mut sg_lb_stats, group: *mut sched_group) -> bool {
+    if (!sched_cache_enabled()) {
     return false;
-    if (env.sd.flags & SD_SHARE_LLC)
+    }
+    if (env.sd.flags & SD_SHARE_LLC) {
     return false;
+    }
 //
 // Skip cache aware tagging if nr_balanced_failed is sufficiently high.
 // Threshold of cache_nice_tries is set to 1 higher than nr_balance_failed
 // to avoid excessive task migration at the same time.
 //
-    if (env.sd.nr_balance_failed >= env.sd.cache_nice_tries + 1)
-    return false;
-    if (sgs.nr_pref_dst_llc &&
-    can_migrate_llc(cpumask_first(sched_group_span(group)),
-    env.dst_cpu, 0, true) == mig_llc)
-    return true;
+    if (env.sd.nr_balance_failed >= env.sd.cache_nice_tries + 1) {
     return false;
     }
-    static bool update_llc_busiest(struct lb_env *env,
-    struct sg_lb_stats *busiest,
-    struct sg_lb_stats *sgs)
-    {
+    if (sgs.nr_pref_dst_llc &&
+    can_migrate_llc(cpumask_first(sched_group_span(group)),
+    env.dst_cpu, 0, true) == mig_llc) {
+    return true;
+    }
+    return false;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn update_llc_busiest(env: *mut lb_env, busiest: *mut sg_lb_stats, sgs: *mut sg_lb_stats) -> bool {
 //
 // There are more tasks that want to run on dst_cpu's LLC.
 //
     return sgs.nr_pref_dst_llc > busiest.nr_pref_dst_llc;
     }
 
-    static inline void record_sg_llc_stats(struct lb_env *env, struct sg_lb_stats *sgs,
-    struct sched_group *group)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: record_sg_llc_stats
+pub unsafe extern "C" fn record_sg_llc_stats_dup(env: *mut lb_env, sgs: *mut sg_lb_stats, group: *mut sched_group) {
     }
-    static inline bool llc_balance(struct lb_env *env, struct sg_lb_stats *sgs,
-    struct sched_group *group)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: llc_balance
+pub unsafe extern "C" fn llc_balance_dup(env: *mut lb_env, sgs: *mut sg_lb_stats, group: *mut sched_group) -> bool {
     return false;
     }
-    static bool update_llc_busiest(struct lb_env *env,
-    struct sg_lb_stats *busiest,
-    struct sg_lb_stats *sgs)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: update_llc_busiest
+pub unsafe extern "C" fn update_llc_busiest_dup(env: *mut lb_env, busiest: *mut sg_lb_stats, sgs: *mut sg_lb_stats) -> bool {
     return false;
     }
 
@@ -10669,36 +10991,34 @@ pub unsafe extern "C" fn sched_asym(sd: *mut sched_domain, dst_cpu: c_int, src_c
 // @sgs: variable to hold the statistics for this group.
 // @sg_overloaded: sched_group is overloaded
 //
-    static inline void update_sg_lb_stats(struct lb_env *env,
-    struct sd_lb_stats *sds,
-    struct sched_group *group,
-    struct sg_lb_stats *sgs,
-    bool *sg_overloaded)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn update_sg_lb_stats(env: *mut lb_env, sds: *mut sd_lb_stats, group: *mut sched_group, sgs: *mut sg_lb_stats, sg_overloaded: *mut bool) {
     int i, nr_running, local_group, sd_flags = env.sd.flags;
-    let mut balancing_at_rd: bool = !env.sd.parent;
-    memset(sgs, 0, sizeof(*sgs));
+pub static mut balancing_at_rd: bool = false;
+    memset(sgs, 0, sizeof!(*sgs));
     local_group = group == sds.local;
     for_each_cpu_and(i, sched_group_span(group), env.cpus) {
-    struct rq *rq = cpu_rq(i);
-    let mut load: c_ulong = cpu_load(rq);
+    let mut rq = cpu_rq(i);
+pub static mut load: c_ulong = 0;
     sgs.group_load += load;
     sgs.group_util += cpu_util_cfs(i);
     sgs.group_runnable += cpu_runnable(rq);
     sgs.sum_h_nr_running += rq.cfs.h_nr_runnable;
     nr_running = rq.nr_running;
     sgs.sum_nr_running += nr_running;
-    if (cpu_overutilized(i))
+    if (cpu_overutilized(i)) {
     sgs.group_overutilized = 1;
+    }
 
     if (sched_cache_enabled()) {
-    struct sched_domain *sd_tmp;
-    int dst_llc;
+pub static mut sd_tmp: *mut c_void = core::ptr::null_mut();
+    let mut dst_llc = 0;
     dst_llc = llc_id(env.dst_cpu);
     if (llc_id(i) != dst_llc) {
     sd_tmp = rcu_dereference_all(rq.sd);
-    if (sd_tmp && (unsigned int)dst_llc < sd_tmp.llc_max)
+    if (sd_tmp && (unsigned int)dst_llc < sd_tmp.llc_max) {
     sgs.nr_pref_dst_llc += sd_tmp.llc_counts[dst_llc];
+    }
     }
     }
 
@@ -10706,13 +11026,14 @@ pub unsafe extern "C" fn sched_asym(sd: *mut sched_domain, dst_cpu: c_int, src_c
 // No need to call idle_cpu() if nr_running is not 0
 //
     if (!nr_running && idle_cpu(i)) {
-    sgs.idle_cpus++;
+    sgs.idle_cpus += 1;
 // Idle cpu can't have misfit task
     continue;
     }
 // Overload indicator is only updated at root domain
-    if (balancing_at_rd && nr_running > 1)
+    if (balancing_at_rd && nr_running > 1) {
 // sg_overloaded = 1;
+    }
 
 // Only fbq_classify_group() uses this to classify NUMA groups
     if (sd_flags & SD_NUMA) {
@@ -10720,8 +11041,9 @@ pub unsafe extern "C" fn sched_asym(sd: *mut sched_domain, dst_cpu: c_int, src_c
     sgs.nr_preferred_running += rq.nr_preferred_running;
     }
 
-    if (local_group)
+    if (local_group) {
     continue;
+    }
     if (sd_flags & SD_ASYM_CPUCAPACITY) {
     if (rq.misfit_task_load) {
 //
@@ -10729,8 +11051,9 @@ pub unsafe extern "C" fn sched_asym(sd: *mut sched_domain, dst_cpu: c_int, src_c
 // CPUs can pick up misfit tasks via newly idle
 // balance.
 //
-    if (balancing_at_rd)
+    if (balancing_at_rd) {
 // sg_overloaded = 1;
+    }
 //
 // Only account misfit load if @dst_cpu can
 // help; otherwise, the group may be classified
@@ -10739,13 +11062,15 @@ pub unsafe extern "C" fn sched_asym(sd: *mut sched_domain, dst_cpu: c_int, src_c
 //
     if (capacity_greater(capacity_of(env.dst_cpu),
     group.sgc.max_capacity) &&
-    (sgs.group_misfit_task_load < rq.misfit_task_load))
+    (sgs.group_misfit_task_load < rq.misfit_task_load)) {
     sgs.group_misfit_task_load = rq.misfit_task_load;
+    }
     }
     } else if (env.idle && sched_reduced_capacity(rq, env.sd)) {
 // Check for a task running on a CPU with reduced capacity
-    if (sgs.group_misfit_task_load < load)
+    if (sgs.group_misfit_task_load < load) {
     sgs.group_misfit_task_load = load;
+    }
     }
     }
     sgs.group_capacity = group.sgc.capacity;
@@ -10753,21 +11078,25 @@ pub unsafe extern "C" fn sched_asym(sd: *mut sched_domain, dst_cpu: c_int, src_c
     if (!local_group) {
 // Check if dst CPU is idle and preferred to this group
     if (env.idle && sgs.sum_h_nr_running &&
-    sched_group_asym(env, sgs, group))
+    sched_group_asym(env, sgs, group)) {
     sgs.group_asym_packing = 1;
+    }
 // Check for loaded SMT group to be balanced to dst CPU
-    if (smt_balance(env, sgs, group))
+    if (smt_balance(env, sgs, group)) {
     sgs.group_smt_balance = 1;
+    }
 // Check for tasks in this group can be moved to their preferred LLC
-    if (llc_balance(env, sgs, group))
+    if (llc_balance(env, sgs, group)) {
     sgs.group_llc_balance = 1;
+    }
     }
     sgs.group_type = group_classify(env.sd.imbalance_pct, group, sgs);
     record_sg_llc_stats(env, sgs, group);
 // Computing avg_load makes sense only when group is overloaded
-    if (sgs.group_type == group_overloaded)
+    if (sgs.group_type == group_overloaded) {
     sgs.avg_load = (sgs.group_load * SCHED_CAPACITY_SCALE) /
     sgs.group_capacity;
+    }
     }
 //
 // update_sd_pick_busiest - return 1 on busiest group
@@ -10782,15 +11111,13 @@ pub unsafe extern "C" fn sched_asym(sd: *mut sched_domain, dst_cpu: c_int, src_c
 // Return: %true if @sg is a busier group than the previously selected
 // busiest group. %false otherwise.
 //
-    static bool update_sd_pick_busiest(struct lb_env *env,
-    struct sd_lb_stats *sds,
-    struct sched_group *sg,
-    struct sg_lb_stats *sgs)
-    {
-    struct sg_lb_stats *busiest = &sds.busiest_stat;
+#[no_mangle]
+pub unsafe extern "C" fn update_sd_pick_busiest(env: *mut lb_env, sds: *mut sd_lb_stats, sg: *mut sched_group, sgs: *mut sg_lb_stats) -> bool {
+    let mut busiest = &sds.busiest_stat;
 // Make sure that there is at least one task to pull
-    if (!sgs.sum_h_nr_running)
+    if (!sgs.sum_h_nr_running) {
     return false;
+    }
 //
 // Don't try to pull misfit tasks we can't help.
 // We can use max_capacity here as reduction in capacity on some
@@ -10806,8 +11133,9 @@ pub unsafe extern "C" fn sched_asym(sd: *mut sched_domain, dst_cpu: c_int, src_c
     (sgs.group_type == group_misfit_task) &&
     (!env.dst_core_idle ||
     !capacity_greater(capacity_of(env.dst_cpu), sg.sgc.max_capacity) ||
-    sds.local_stat.group_type != group_has_spare))
+    sds.local_stat.group_type != group_has_spare)) {
     return false;
+    }
 //
 // Candidate sg has no more than one task per CPU and has higher
 // per-CPU capacity. Migrating tasks to less capable CPUs may harm
@@ -10816,48 +11144,58 @@ pub unsafe extern "C" fn sched_asym(sd: *mut sched_domain, dst_cpu: c_int, src_c
 //
     if ((env.sd.flags & SD_ASYM_CPUCAPACITY) &&
     (sgs.group_type <= group_fully_busy) &&
-    (capacity_greater(sg.sgc.min_capacity, capacity_of(env.dst_cpu))))
+    (capacity_greater(sg.sgc.min_capacity, capacity_of(env.dst_cpu)))) {
     return false;
-    if (sgs.group_type > busiest.group_type)
+    }
+    if (sgs.group_type > busiest.group_type) {
     return true;
-    if (sgs.group_type < busiest.group_type)
+    }
+    if (sgs.group_type < busiest.group_type) {
     return false;
+    }
 //
 // The candidate and the current busiest group are the same type of
 // group. Let check which one is the busiest according to the type.
 //
-    switch (sgs.group_type) {
-    case group_overloaded:
+    match (sgs.group_type) {
+    group_overloaded => {
 // Select the overloaded group with highest avg_load.
     return sgs.avg_load > busiest.avg_load;
-    case group_llc_balance:
+    }
+    group_llc_balance => {
 // Select the group with most tasks preferring dst LLC
     return update_llc_busiest(env, busiest, sgs);
-    case group_imbalanced:
+    }
+    group_imbalanced => {
 //
 // Select the 1st imbalanced group as we don't have any way to
 // choose one more than another.
 //
     return false;
-    case group_asym_packing:
+    }
+    group_asym_packing => {
 // Prefer to move from lowest priority CPU's work
     return sched_asym_prefer(READ_ONCE(sds.busiest.asym_prefer_cpu),
     READ_ONCE(sg.asym_prefer_cpu));
-    case group_misfit_task:
+    }
+    group_misfit_task => {
 //
 // If we have more than one misfit sg go with the biggest
 // misfit.
 //
     return sgs.group_misfit_task_load > busiest.group_misfit_task_load;
-    case group_smt_balance:
+    }
+    group_smt_balance => {
 //
 // Check if we have spare CPUs on either SMT group to
 // choose has spare or fully busy handling.
 //
-    if (sgs.idle_cpus != 0 || busiest.idle_cpus != 0)
-    goto has_spare;
+    if (sgs.idle_cpus != 0 || busiest.idle_cpus != 0) {
+// goto;
+    }
     fallthrough;
-    case group_fully_busy:
+    }
+    group_fully_busy => {
 //
 // Select the fully busy group with highest avg_load. In
 // theory, there is no need to pull task from such kind of
@@ -10869,30 +11207,35 @@ pub unsafe extern "C" fn sched_asym(sd: *mut sched_domain, dst_cpu: c_int, src_c
 // select the 1st one, except if @sg is composed of SMT
 // siblings.
 //
-    if (sgs.avg_load < busiest.avg_load)
+    if (sgs.avg_load < busiest.avg_load) {
     return false;
+    }
     if (sgs.avg_load == busiest.avg_load) {
 //
 // SMT sched groups need more help than non-SMT groups.
 // If @sg happens to also be SMT, either choice is good.
 //
-    if (sds.busiest.flags & SD_SHARE_CPUCAPACITY)
+    if (sds.busiest.flags & SD_SHARE_CPUCAPACITY) {
     return false;
     }
-    break;
-    case group_has_spare:
+    }
+    // break;
+    }
+    group_has_spare => {
 //
 // Do not pick sg with SMT CPUs over sg with pure CPUs,
 // as we do not want to pull task off SMT core with one task
 // and make the core idle.
 //
     if (smt_vs_nonsmt_groups(sds.busiest, sg)) {
-    if (sg.flags & SD_SHARE_CPUCAPACITY && sgs.sum_h_nr_running <= 1)
+    if (sg.flags & SD_SHARE_CPUCAPACITY && sgs.sum_h_nr_running <= 1) {
     return false;
-    else
+    }
+    else {
     return true;
     }
-    has_spare:
+    }
+// label;
 //
 // Select not overloaded group with lowest number of idle CPUs
 // and highest number of running tasks. We could also compare
@@ -10900,63 +11243,66 @@ pub unsafe extern "C" fn sched_asym(sd: *mut sched_domain, dst_cpu: c_int, src_c
 // that the group has less spare capacity but finally more idle
 // CPUs which means less opportunity to pull tasks.
 //
-    if (sgs.idle_cpus > busiest.idle_cpus)
+    if (sgs.idle_cpus > busiest.idle_cpus) {
     return false;
+    }
     else if ((sgs.idle_cpus == busiest.idle_cpus) &&
-    (sgs.sum_nr_running <= busiest.sum_nr_running))
+    (sgs.sum_nr_running <= busiest.sum_nr_running)) {
     return false;
-    break;
+    }
+    // break;
+    }
     }
     return true;
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn fbq_classify_group(sgs: *mut sg_lb_stats) -> enum fbq_type {
-    static inline enum fbq_type fbq_classify_group(struct sg_lb_stats *sgs)
-    {
-    if (sgs.sum_h_nr_running > sgs.nr_numa_running)
+    if (sgs.sum_h_nr_running > sgs.nr_numa_running) {
     return regular;
-    if (sgs.sum_h_nr_running > sgs.nr_preferred_running)
+    }
+    if (sgs.sum_h_nr_running > sgs.nr_preferred_running) {
     return remote;
+    }
     return all;
     }
 #[no_mangle]
 pub unsafe extern "C" fn fbq_classify_rq(rq: *mut rq) -> enum fbq_type {
-    static inline enum fbq_type fbq_classify_rq(struct rq *rq)
-    {
-    if (rq.nr_running > rq.nr_numa_running)
+    if (rq.nr_running > rq.nr_numa_running) {
     return regular;
-    if (rq.nr_running > rq.nr_preferred_running)
+    }
+    if (rq.nr_running > rq.nr_preferred_running) {
     return remote;
+    }
     return all;
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn fbq_classify_group(sgs: *mut sg_lb_stats) -> enum fbq_type {
-    static inline enum fbq_type fbq_classify_group(struct sg_lb_stats *sgs)
-    {
+#[no_mangle]
+// duplicate fn: fbq_classify_group
+pub unsafe extern "C" fn fbq_classify_group_dup(sgs: *mut sg_lb_stats) -> enum fbq_type {
     return all;
     }
 #[no_mangle]
-pub unsafe extern "C" fn fbq_classify_rq(rq: *mut rq) -> enum fbq_type {
-    static inline enum fbq_type fbq_classify_rq(struct rq *rq)
-    {
+#[no_mangle]
+// duplicate fn: fbq_classify_rq
+pub unsafe extern "C" fn fbq_classify_rq_dup(rq: *mut rq) -> enum fbq_type {
     return regular;
     }
 
-    struct sg_lb_stats;
+    let mut sg_lb_stats;
 //
 // task_running_on_cpu - return 1 if @p is running on @cpu.
 //
 #[no_mangle]
 unsafe extern "C" fn task_running_on_cpu(cpu: c_int, p: *mut task_struct) -> c_uint {
-    static unsigned int task_running_on_cpu(int cpu, struct task_struct *p)
-    {
 // Task has no contribution or is new
-    if (cpu != task_cpu(p) || !READ_ONCE(p.se.avg.last_update_time))
+    if (cpu != task_cpu(p) || !READ_ONCE(p.se.avg.last_update_time)) {
     return 0;
-    if (task_on_rq_queued(p))
+    }
+    if (task_on_rq_queued(p)) {
     return 1;
+    }
     return 0;
     }
 //
@@ -10968,18 +11314,18 @@ unsafe extern "C" fn task_running_on_cpu(cpu: c_int, p: *mut task_struct) -> c_u
 //
 #[no_mangle]
 unsafe extern "C" fn idle_cpu_without(cpu: c_int, p: *mut task_struct) -> c_int {
-    static int idle_cpu_without(int cpu, struct task_struct *p)
-    {
-    struct rq *rq = cpu_rq(cpu);
-    if (rq.curr != rq.idle && rq.curr != p)
+    let mut rq = cpu_rq(cpu);
+    if (rq.curr != rq.idle && rq.curr != p) {
     return 0;
+    }
 //
 // rq->nr_running can't be used but an updated version without the
 // impact of p on cpu must be used instead. The updated nr_running
 // be computed and tested before calling idle_cpu_without().
 //
-    if (rq.ttwu_pending)
+    if (rq.ttwu_pending) {
     return 0;
+    }
     return 1;
     }
 //
@@ -10989,19 +11335,18 @@ unsafe extern "C" fn idle_cpu_without(cpu: c_int, p: *mut task_struct) -> c_int 
 // @sgs: variable to hold the statistics for this group.
 // @p: The task for which we look for the idlest group/CPU.
 //
-    static inline void update_sg_wakeup_stats(struct sched_domain *sd,
-    struct sched_group *group,
-    struct sg_lb_stats *sgs,
-    struct task_struct *p)
-    {
-    int i, nr_running;
-    memset(sgs, 0, sizeof(*sgs));
+#[no_mangle]
+pub unsafe extern "C" fn update_sg_wakeup_stats(sd: *mut sched_domain, group: *mut sched_group, sgs: *mut sg_lb_stats, p: *mut task_struct) {
+    let mut i = 0;
+    let mut nr_running = 0;
+    memset(sgs, 0, sizeof!(*sgs));
 // Assume that task can't fit any CPU of the group
-    if (sd.flags & SD_ASYM_CPUCAPACITY)
+    if (sd.flags & SD_ASYM_CPUCAPACITY) {
     sgs.group_misfit_task_load = 1;
+    }
     for_each_cpu_and(i, sched_group_span(group), p.cpus_ptr) {
-    struct rq *rq = cpu_rq(i);
-    unsigned int local;
+    let mut rq = cpu_rq(i);
+    let mut local = 0;
     sgs.group_load += cpu_load_without(rq, p);
     sgs.group_util += cpu_util_without(i, p);
     sgs.group_runnable += cpu_runnable_without(rq, p);
@@ -11012,13 +11357,15 @@ unsafe extern "C" fn idle_cpu_without(cpu: c_int, p: *mut task_struct) -> c_int 
 //
 // No need to call idle_cpu_without() if nr_running is not 0
 //
-    if (!nr_running && idle_cpu_without(i, p))
-    sgs.idle_cpus++;
+    if (!nr_running && idle_cpu_without(i, p)) {
+    sgs.idle_cpus += 1;
+    }
 // Check if task fits in the CPU
     if (sd.flags & SD_ASYM_CPUCAPACITY &&
     sgs.group_misfit_task_load &&
-    task_fits_cpu(p, i))
+    task_fits_cpu(p, i)) {
     sgs.group_misfit_task_load = 0;
+    }
     }
     sgs.group_capacity = group.sgc.capacity;
     sgs.group_weight = group.group_weight;
@@ -11028,50 +11375,62 @@ unsafe extern "C" fn idle_cpu_without(cpu: c_int, p: *mut task_struct) -> c_int 
 // overloaded
 //
     if (sgs.group_type == group_fully_busy ||
-    sgs.group_type == group_overloaded)
+    sgs.group_type == group_overloaded) {
     sgs.avg_load = (sgs.group_load * SCHED_CAPACITY_SCALE) /
     sgs.group_capacity;
     }
-    static bool update_pick_idlest(struct sched_group *idlest,
-    struct sg_lb_stats *idlest_sgs,
-    struct sched_group *group,
-    struct sg_lb_stats *sgs)
-    {
-    if (sgs.group_type < idlest_sgs.group_type)
+    }
+#[no_mangle]
+pub unsafe extern "C" fn update_pick_idlest(idlest: *mut sched_group, idlest_sgs: *mut sg_lb_stats, group: *mut sched_group, sgs: *mut sg_lb_stats) -> bool {
+    if (sgs.group_type < idlest_sgs.group_type) {
     return true;
-    if (sgs.group_type > idlest_sgs.group_type)
+    }
+    if (sgs.group_type > idlest_sgs.group_type) {
     return false;
+    }
 //
 // The candidate and the current idlest group are the same type of
 // group. Let check which one is the idlest according to the type.
 //
-    switch (sgs.group_type) {
-    case group_overloaded:
-    case group_fully_busy:
+    match (sgs.group_type) {
+    group_overloaded => {
+    }
+    group_fully_busy => {
 // Select the group with lowest avg_load.
-    if (idlest_sgs.avg_load <= sgs.avg_load)
+    if (idlest_sgs.avg_load <= sgs.avg_load) {
     return false;
-    break;
-    case group_llc_balance:
-    case group_imbalanced:
-    case group_asym_packing:
-    case group_smt_balance:
+    }
+    // break;
+    }
+    group_llc_balance => {
+    }
+    group_imbalanced => {
+    }
+    group_asym_packing => {
+    }
+    group_smt_balance => {
 // Those types are not used in the slow wakeup path
     return false;
-    case group_misfit_task:
+    }
+    group_misfit_task => {
 // Select group with the highest max capacity
-    if (idlest.sgc.max_capacity >= group.sgc.max_capacity)
+    if (idlest.sgc.max_capacity >= group.sgc.max_capacity) {
     return false;
-    break;
-    case group_has_spare:
+    }
+    // break;
+    }
+    group_has_spare => {
 // Select group with most idle CPUs
-    if (idlest_sgs.idle_cpus > sgs.idle_cpus)
+    if (idlest_sgs.idle_cpus > sgs.idle_cpus) {
     return false;
+    }
 // Select group with lowest group_util
     if (idlest_sgs.idle_cpus == sgs.idle_cpus &&
-    idlest_sgs.group_util <= sgs.group_util)
+    idlest_sgs.group_util <= sgs.group_util) {
     return false;
-    break;
+    }
+    // break;
+    }
     }
     return true;
     }
@@ -11081,26 +11440,24 @@ unsafe extern "C" fn idle_cpu_without(cpu: c_int, p: *mut task_struct) -> c_int 
 //
 // Assumes p is allowed on at least one CPU in sd.
 //
-    static struct sched_group *
-    sched_balance_find_dst_group(struct sched_domain *sd, struct task_struct *p, int this_cpu)
-    {
-    struct sched_group *idlest = core::ptr::null_mut(), *local = core::ptr::null_mut(), *group = sd.groups;
+#[no_mangle]
+pub unsafe extern "C" fn sched_balance_find_dst_group(sd: *mut sched_domain, p: *mut task_struct, this_cpu: c_int) -> *mut c_void {
+    let mut idlest = core::ptr::null_mut(), *local = core::ptr::null_mut(), *group = sd.groups;
     struct sg_lb_stats local_sgs, tmp_sgs;
-    struct sg_lb_stats *sgs;
-    unsigned long imbalance;
-    struct sg_lb_stats idlest_sgs = {
-    .avg_load = UINT_MAX,
-    .group_type = group_overloaded,
-    };
+pub static mut sgs: *mut c_void = core::ptr::null_mut();
+    let mut imbalance = 0;
+pub static mut sg_lb_stats: usize = 0;
     do {
-    int local_group;
+    let mut local_group = 0;
 // Skip over this group if it has no CPUs allowed
     if (!cpumask_intersects(sched_group_span(group),
-    p.cpus_ptr))
+    p.cpus_ptr)) {
     continue;
+    }
 // Skip over this group if no cookie matched
-    if (!sched_group_cookie_match(cpu_rq(this_cpu), p, group))
+    if (!sched_group_cookie_match(cpu_rq(this_cpu), p, group)) {
     continue;
+    }
     local_group = cpumask_test_cpu(this_cpu,
     sched_group_span(group));
     if (local_group) {
@@ -11116,26 +11473,31 @@ unsafe extern "C" fn idle_cpu_without(cpu: c_int, p: *mut task_struct) -> c_int 
     }
     } while (group = group.next, group != sd.groups);
 // There is no idlest group to push tasks to
-    if (!idlest)
+    if (!idlest) {
     return core::ptr::null_mut();
+    }
 // The local group has been skipped because of CPU affinity
-    if (!local)
+    if (!local) {
     return idlest;
+    }
 //
 // If the local group is idler than the selected idlest group
 // don't try and push the task.
 //
-    if (local_sgs.group_type < idlest_sgs.group_type)
+    if (local_sgs.group_type < idlest_sgs.group_type) {
     return core::ptr::null_mut();
+    }
 //
 // If the local group is busier than the selected idlest group
 // try and push the task.
 //
-    if (local_sgs.group_type > idlest_sgs.group_type)
+    if (local_sgs.group_type > idlest_sgs.group_type) {
     return idlest;
-    switch (local_sgs.group_type) {
-    case group_overloaded:
-    case group_fully_busy:
+    }
+    match (local_sgs.group_type) {
+    group_overloaded => {
+    }
+    group_fully_busy => {
 // Calculate allowed imbalance based on load
     imbalance = scale_load_down(NICE_0_LOAD) *
     (sd.imbalance_pct-100) / 100;
@@ -11148,43 +11510,55 @@ unsafe extern "C" fn idle_cpu_without(cpu: c_int, p: *mut task_struct) -> c_int 
 // and consider staying local.
 //
     if ((sd.flags & SD_NUMA) &&
-    ((idlest_sgs.avg_load + imbalance) >= local_sgs.avg_load))
+    ((idlest_sgs.avg_load + imbalance) >= local_sgs.avg_load)) {
     return core::ptr::null_mut();
+    }
 //
 // If the local group is less loaded than the selected
 // idlest group don't try and push any tasks.
 //
-    if (idlest_sgs.avg_load >= (local_sgs.avg_load + imbalance))
+    if (idlest_sgs.avg_load >= (local_sgs.avg_load + imbalance)) {
     return core::ptr::null_mut();
-    if (100 * local_sgs.avg_load <= sd.imbalance_pct * idlest_sgs.avg_load)
+    }
+    if (100 * local_sgs.avg_load <= sd.imbalance_pct * idlest_sgs.avg_load) {
     return core::ptr::null_mut();
-    break;
-    case group_llc_balance:
-    case group_imbalanced:
-    case group_asym_packing:
-    case group_smt_balance:
+    }
+    // break;
+    }
+    group_llc_balance => {
+    }
+    group_imbalanced => {
+    }
+    group_asym_packing => {
+    }
+    group_smt_balance => {
 // Those type are not used in the slow wakeup path
     return core::ptr::null_mut();
-    case group_misfit_task:
+    }
+    group_misfit_task => {
 // Select group with the highest max capacity
-    if (local.sgc.max_capacity >= idlest.sgc.max_capacity)
+    if (local.sgc.max_capacity >= idlest.sgc.max_capacity) {
     return core::ptr::null_mut();
-    break;
-    case group_has_spare:
+    }
+    // break;
+    }
+    group_has_spare => {
 
     if (sd.flags & SD_NUMA) {
-    let mut imb_numa_nr: c_int = sd.imb_numa_nr;
+pub static mut imb_numa_nr: c_int = 0;
 
-    int idlest_cpu;
+    let mut idlest_cpu = 0;
 //
 // If there is spare capacity at NUMA, try to select
 // the preferred node
 //
-    if (cpu_to_node(this_cpu) == p.numa_preferred_nid)
+    if (cpu_to_node(this_cpu) == p.numa_preferred_nid) {
     return core::ptr::null_mut();
+    }
     idlest_cpu = cpumask_first(sched_group_span(idlest));
-    if (cpu_to_node(idlest_cpu) == p.numa_preferred_nid)
+    if (cpu_to_node(idlest_cpu) == p.numa_preferred_nid) {
     return idlest;
+    }
 
 //
 // Otherwise, keep the task close to the wakeup source
@@ -11196,7 +11570,7 @@ unsafe extern "C" fn idle_cpu_without(cpu: c_int, p: *mut task_struct) -> c_int 
 // take care of it.
 //
     if (p.nr_cpus_allowed != NR_CPUS) {
-    unsigned int w = cpumask_weight_and(p.cpus_ptr,
+    let mut w = cpumask_weight_and(p.cpus_ptr,
     sched_group_span(local));
     imb_numa_nr = min(w, sd.imb_numa_nr);
     }
@@ -11214,18 +11588,20 @@ unsafe extern "C" fn idle_cpu_without(cpu: c_int, p: *mut task_struct) -> c_int 
 // up that the group has less spare capacity but finally more
 // idle CPUs which means more opportunity to run task.
 //
-    if (local_sgs.idle_cpus >= idlest_sgs.idle_cpus)
+    if (local_sgs.idle_cpus >= idlest_sgs.idle_cpus) {
     return core::ptr::null_mut();
-    break;
+    }
+    // break;
+    }
     }
     return idlest;
     }
-    static void update_idle_cpu_scan(struct lb_env *env,
-    unsigned long sum_util)
-    {
-    struct sched_domain_shared *sd_share;
-    struct sched_domain *sd = env.sd;
-    int llc_weight, pct;
+#[no_mangle]
+pub unsafe extern "C" fn update_idle_cpu_scan(env: *mut lb_env, sum_util: c_ulong) {
+pub static mut sd_share: *mut c_void = core::ptr::null_mut();
+    let mut sd = env.sd;
+    let mut llc_weight = 0;
+    let mut pct = 0;
     u64 x, y, tmp;
 //
 // Update the number of CPUs to scan in LLC domain, which could
@@ -11235,11 +11611,13 @@ unsafe extern "C" fn idle_cpu_without(cpu: c_int, p: *mut task_struct) -> c_int 
 // balancing, rather than CPU_NEWLY_IDLE, because the latter
 // can fire way more frequently than the former.
 //
-    if (!sched_feat(SIS_UTIL) || env.idle == CPU_NEWLY_IDLE)
+    if (!sched_feat(SIS_UTIL) || env.idle == CPU_NEWLY_IDLE) {
     return;
+    }
     sd_share = sd.shared;
-    if (!sd_share)
+    if (!sd_share) {
     return;
+    }
 //
 // The number of CPUs to search drops as sum_util increases, when
 // sum_util hits 85% or above, the scan stops.
@@ -11280,8 +11658,9 @@ unsafe extern "C" fn idle_cpu_without(cpu: c_int, p: *mut task_struct) -> c_int 
 // equation [2]
     y *= llc_weight;
     do_div(y, SCHED_CAPACITY_SCALE);
-    if ((int)y != sd_share.nr_idle_scan)
+    if ((int)y != sd_share.nr_idle_scan) {
     WRITE_ONCE(sd_share.nr_idle_scan, (int)y);
+    }
     }
 //
 // update_sd_lb_stats - Update sched_domain's statistics for load balancing.
@@ -11290,24 +11669,23 @@ unsafe extern "C" fn idle_cpu_without(cpu: c_int, p: *mut task_struct) -> c_int 
 //
 #[no_mangle]
 pub unsafe extern "C" fn update_sd_lb_stats(env: *mut lb_env, sds: *mut sd_lb_stats) {
-    static inline void update_sd_lb_stats(struct lb_env *env, struct sd_lb_stats *sds)
-    {
-    struct sched_group *sg = env.sd.groups;
-    struct sg_lb_stats *local = &sds.local_stat;
-    struct sg_lb_stats tmp_sgs;
-    let mut sum_util: c_ulong = 0;
-    let mut sg_overloaded: bool = 0, sg_overutilized = 0;
+    let mut sg = env.sd.groups;
+    let mut local = &sds.local_stat;
+pub static mut tmp_sgs: usize = 0;
+pub static mut sum_util: c_ulong = 0;
+pub static mut sg_overloaded: bool = false;
     env.dst_core_idle = !sched_smt_active() || is_core_idle(env.dst_cpu);
     do {
-    struct sg_lb_stats *sgs = &tmp_sgs;
-    int local_group;
+    let mut sgs = &tmp_sgs;
+    let mut local_group = 0;
     local_group = cpumask_test_cpu(env.dst_cpu, sched_group_span(sg));
     if (local_group) {
     sds.local = sg;
     sgs = local;
     if (env.idle != CPU_NEWLY_IDLE ||
-    time_after_eq(jiffies, sg.sgc.next_update))
+    time_after_eq(jiffies, sg.sgc.next_update)) {
     update_group_capacity(env.sd, env.dst_cpu);
+    }
     }
     update_sg_lb_stats(env, sds, sg, sgs, &sg_overloaded);
     if (!local_group && update_sd_pick_busiest(env, sds, sg, sgs)) {
@@ -11326,10 +11704,12 @@ pub unsafe extern "C" fn update_sd_lb_stats(env: *mut lb_env, sds: *mut sd_lb_st
 // go to a child's sibling domains first. NB the flags of a sched group
 // are those of the child domain.
 //
-    if (sds.busiest)
+    if (sds.busiest) {
     sds.prefer_sibling = !!(sds.busiest.flags & SD_PREFER_SIBLING);
-    if (env.sd.flags & SD_NUMA)
+    }
+    if (env.sd.flags & SD_NUMA) {
     env.fbq_type = fbq_classify_group(&sds.busiest_stat);
+    }
     if (!env.sd.parent) {
 // update overload indicator if we are at root domain
     set_rd_overloaded(env.dst_rq.rd, sg_overloaded);
@@ -11348,9 +11728,8 @@ pub unsafe extern "C" fn update_sd_lb_stats(env: *mut lb_env, sds: *mut sd_lb_st
 //
 #[no_mangle]
 pub unsafe extern "C" fn calculate_imbalance(env: *mut lb_env, sds: *mut sd_lb_stats) {
-    static inline void calculate_imbalance(struct lb_env *env, struct sd_lb_stats *sds)
-    {
-    struct sg_lb_stats *local, *busiest;
+    let mut local = core::ptr::null_mut();
+    let mut busiest = core::ptr::null_mut();
     local = &sds.local_stat;
     busiest = &sds.busiest_stat;
     if (busiest.group_type == group_misfit_task) {
@@ -11534,10 +11913,11 @@ pub unsafe extern "C" fn calculate_imbalance(env: *mut lb_env, sds: *mut sd_lb_s
 //
 // Return:	- The busiest group if imbalance exists.
 //
-    static struct sched_group *sched_balance_find_src_group(struct lb_env *env)
-    {
-    struct sg_lb_stats *local, *busiest;
-    struct sd_lb_stats sds;
+#[no_mangle]
+pub unsafe extern "C" fn sched_balance_find_src_group(env: *mut lb_env) -> *mut c_void {
+    let mut local = core::ptr::null_mut();
+    let mut busiest = core::ptr::null_mut();
+pub static mut sds: usize = 0;
     init_sd_lb_stats(&sds);
 //
 // Compute the various statistics relevant for load balancing at
@@ -11545,32 +11925,38 @@ pub unsafe extern "C" fn calculate_imbalance(env: *mut lb_env, sds: *mut sd_lb_s
 //
     update_sd_lb_stats(env, &sds);
 // There is no busy sibling group to pull tasks from
-    if (!sds.busiest)
-    goto out_balanced;
+    if (!sds.busiest) {
+// goto;
+    }
     busiest = &sds.busiest_stat;
 // Misfit tasks should be dealt with regardless of the avg load
-    if (busiest.group_type == group_misfit_task)
-    goto force_balance;
+    if (busiest.group_type == group_misfit_task) {
+// goto;
+    }
     if (!is_rd_overutilized(env.dst_rq.rd) &&
-    rcu_dereference_all(env.dst_rq.rd.pd))
-    goto out_balanced;
+    rcu_dereference_all(env.dst_rq.rd.pd)) {
+// goto;
+    }
 // ASYM feature bypasses nice load balance check
-    if (busiest.group_type == group_asym_packing)
-    goto force_balance;
+    if (busiest.group_type == group_asym_packing) {
+// goto;
+    }
 //
 // If the busiest group is imbalanced the below checks don't
 // work because they assume all things are equal, which typically
 // isn't true due to cpus_ptr constraints and the like.
 //
-    if (busiest.group_type == group_imbalanced)
-    goto force_balance;
+    if (busiest.group_type == group_imbalanced) {
+// goto;
+    }
     local = &sds.local_stat;
 //
 // If the local group is busier than the selected busiest group
 // don't try and pull any tasks.
 //
-    if (local.group_type > busiest.group_type)
-    goto out_balanced;
+    if (local.group_type > busiest.group_type) {
+// goto;
+    }
 //
 // When groups are overloaded, use the avg_load to ensure fairness
 // between tasks.
@@ -11580,8 +11966,9 @@ pub unsafe extern "C" fn calculate_imbalance(env: *mut lb_env, sds: *mut sd_lb_s
 // If the local group is more loaded than the selected
 // busiest group don't try to pull any tasks.
 //
-    if (local.avg_load >= busiest.avg_load)
-    goto out_balanced;
+    if (local.avg_load >= busiest.avg_load) {
+// goto;
+    }
 // XXX broken for overlapping NUMA groups
     sds.avg_load = (sds.total_load * SCHED_CAPACITY_SCALE) /
     sds.total_capacity;
@@ -11589,15 +11976,17 @@ pub unsafe extern "C" fn calculate_imbalance(env: *mut lb_env, sds: *mut sd_lb_s
 // Don't pull any tasks if this group is already above the
 // domain average load.
 //
-    if (local.avg_load >= sds.avg_load)
-    goto out_balanced;
+    if (local.avg_load >= sds.avg_load) {
+// goto;
+    }
 //
 // If the busiest group is more loaded, use imbalance_pct to be
 // conservative.
 //
     if (100 * busiest.avg_load <=
-    env.sd.imbalance_pct * local.avg_load)
-    goto out_balanced;
+    env.sd.imbalance_pct * local.avg_load) {
+// goto;
+    }
     }
 //
 // Try to move all excess tasks to a sibling domain of the busiest
@@ -11605,8 +11994,9 @@ pub unsafe extern "C" fn calculate_imbalance(env: *mut lb_env, sds: *mut sd_lb_s
 //
     if (sds.prefer_sibling && local.group_type == group_has_spare &&
     (busiest.group_type == group_llc_balance ||
-    sibling_imbalance(env, &sds, busiest, local) > 1))
-    goto force_balance;
+    sibling_imbalance(env, &sds, busiest, local) > 1)) {
+// goto;
+    }
     if (busiest.group_type != group_overloaded) {
     if (!env.idle) {
 //
@@ -11614,12 +12004,12 @@ pub unsafe extern "C" fn calculate_imbalance(env: *mut lb_env, sds: *mut sd_lb_s
 // result the local one too) but this CPU is already
 // busy, let another idle CPU try to pull task.
 //
-    goto out_balanced;
+// goto;
     }
     if (busiest.group_type == group_smt_balance &&
     smt_vs_nonsmt_groups(sds.local, sds.busiest)) {
 // Let non SMT CPU pull from SMT CPU sharing with sibling
-    goto force_balance;
+// goto;
     }
     if (busiest.group_weight > 1 &&
     local.idle_cpus <= (busiest.idle_cpus + 1)) {
@@ -11632,39 +12022,38 @@ pub unsafe extern "C" fn calculate_imbalance(env: *mut lb_env, sds: *mut sd_lb_s
 // on another group. Of course this applies only if
 // there is more than 1 CPU per group.
 //
-    goto out_balanced;
+// goto;
     }
     if (busiest.sum_h_nr_running == 1) {
 //
 // busiest doesn't have any tasks waiting to run
 //
-    goto out_balanced;
+// goto;
     }
     }
-    force_balance:
+// label;
 // Looks like there is an imbalance. Compute it
     calculate_imbalance(env, &sds);
     return env.imbalance ? sds.busiest : core::ptr::null_mut();
-    out_balanced:
+// label;
     env.imbalance = 0;
     return core::ptr::null_mut();
     }
 //
 // sched_balance_find_src_rq - find the busiest runqueue among the CPUs in the group.
 //
-    static struct rq *sched_balance_find_src_rq(struct lb_env *env,
-    struct sched_group *group)
-    {
-    struct rq *busiest = core::ptr::null_mut(), *rq;
-    let mut busiest_util: c_ulong = 0, busiest_load = 0, busiest_capacity = 1;
-    let mut busiest_pref_llc: unsigned int __maybe_unused = 0;
+#[no_mangle]
+pub unsafe extern "C" fn sched_balance_find_src_rq(env: *mut lb_env, group: *mut sched_group) -> *mut c_void {
+    let mut busiest = core::ptr::null_mut(), *rq;
+pub static mut busiest_util: c_ulong = 0;
+pub static mut busiest_pref_llc: unsigned int __maybe_unused = 0;
     struct sched_domain __maybe_unused *sd_tmp;
-    let mut busiest_nr: c_uint = 0;
+pub static mut busiest_nr: c_uint = 0;
     int __maybe_unused dst_llc;
-    int i;
+    let mut i = 0;
     for_each_cpu_and(i, sched_group_span(group), env.cpus) {
     unsigned long capacity, load, util;
-    unsigned int nr_running;
+    let mut nr_running = 0;
     enum fbq_type rt;
     rq = cpu_rq(i);
     rt = fbq_classify_rq(rq);
@@ -11687,11 +12076,13 @@ pub unsafe extern "C" fn calculate_imbalance(env: *mut lb_env, sds: *mut sd_lb_s
 //
 // Both cases only affect the total convergence complexity.
 //
-    if (rt > env.fbq_type)
+    if (rt > env.fbq_type) {
     continue;
+    }
     nr_running = rq.cfs.h_nr_runnable;
-    if (!nr_running)
+    if (!nr_running) {
     continue;
+    }
     capacity = capacity_of(i);
 //
 // For ASYM_CPUCAPACITY domains, don't pick a CPU that could
@@ -11701,10 +12092,10 @@ pub unsafe extern "C" fn calculate_imbalance(env: *mut lb_env, sds: *mut sd_lb_s
 //
     if (env.sd.flags & SD_ASYM_CPUCAPACITY &&
     nr_running == 1) {
-    bool cluster_equal_cap = static_branch_unlikely(&sched_cluster_active) &&
+    let mut cluster_equal_cap = static_branch_unlikely(&sched_cluster_active) &&
     (get_actual_cpu_capacity(env.dst_cpu) ==
     get_actual_cpu_capacity(i));
-    let mut smt_degraded_cap: bool = sched_smt_active() && !is_core_idle(i);
+pub static mut smt_degraded_cap: bool = false;
 //
 // Busy SMT siblings reduce the capacity of CPU @i. Do
 // not skip it in this case.
@@ -11714,8 +12105,9 @@ pub unsafe extern "C" fn calculate_imbalance(env: *mut lb_env, sds: *mut sd_lb_s
 // hardware and cpufreq pressure.
 //
     if (!smt_degraded_cap && !cluster_equal_cap &&
-    !capacity_greater(capacity_of(env.dst_cpu), capacity))
+    !capacity_greater(capacity_of(env.dst_cpu), capacity)) {
     continue;
+    }
     }
 //
 // Make sure we only pull tasks from a CPU of lower priority
@@ -11724,18 +12116,20 @@ pub unsafe extern "C" fn calculate_imbalance(env: *mut lb_env, sds: *mut sd_lb_s
 // If balancing between cores, let lower priority CPUs help
 // SMT cores with more than one busy sibling.
 //
-    if (sched_asym(env.sd, i, env.dst_cpu) && nr_running == 1)
+    if (sched_asym(env.sd, i, env.dst_cpu) && nr_running == 1) {
     continue;
-    switch (env.migration_type) {
-    case migrate_load:
+    }
+    match (env.migration_type) {
+    migrate_load => {
 //
 // When comparing with load imbalance, use cpu_load()
 // which is not scaled with the CPU capacity.
 //
     load = cpu_load(rq);
     if (nr_running == 1 && load > env.imbalance &&
-    !check_cpu_capacity(rq, env.sd))
-    break;
+    !check_cpu_capacity(rq, env.sd)) {
+    // break;
+    }
 //
 // For the load comparisons with the other CPUs,
 // consider the cpu_load() scaled with the CPU
@@ -11754,28 +12148,32 @@ pub unsafe extern "C" fn calculate_imbalance(env: *mut lb_env, sds: *mut sd_lb_s
     busiest_capacity = capacity;
     busiest = rq;
     }
-    break;
-    case migrate_util:
+    // break;
+    }
+    migrate_util => {
     util = cpu_util_cfs_boost(i);
 //
 // Don't try to pull utilization from a CPU with one
 // running task. Whatever its utilization, we will fail
 // detach the task.
 //
-    if (nr_running <= 1)
+    if (nr_running <= 1) {
     continue;
+    }
     if (busiest_util < util) {
     busiest_util = util;
     busiest = rq;
     }
-    break;
-    case migrate_task:
+    // break;
+    }
+    migrate_task => {
     if (busiest_nr < nr_running) {
     busiest_nr = nr_running;
     busiest = rq;
     }
-    break;
-    case migrate_misfit:
+    // break;
+    }
+    migrate_misfit => {
 //
 // For ASYM_CPUCAPACITY domains with misfit tasks we
 // simply seek the "biggest" misfit task.
@@ -11784,21 +12182,22 @@ pub unsafe extern "C" fn calculate_imbalance(env: *mut lb_env, sds: *mut sd_lb_s
     busiest_load = rq.misfit_task_load;
     busiest = rq;
     }
-    break;
-    case migrate_llc_task:
+    // break;
+    }
+    migrate_llc_task => {
 
     sd_tmp = rcu_dereference_all(rq.sd);
     dst_llc = llc_id(env.dst_cpu);
     if (sd_tmp && (unsigned)dst_llc < sd_tmp.llc_max) {
-    unsigned int this_pref_llc =
-    sd_tmp.llc_counts[dst_llc];
+    let mut this_pref_llc = sd_tmp.llc_counts[dst_llc];
     if (busiest_pref_llc < this_pref_llc) {
     busiest_pref_llc = this_pref_llc;
     busiest = rq;
     }
     }
 
-    break;
+    // break;
+    }
     }
     }
     return busiest;
@@ -11808,9 +12207,8 @@ pub unsafe extern "C" fn calculate_imbalance(env: *mut lb_env, sds: *mut sd_lb_s
 // so long as it is large enough.
 //
 pub const MAX_PINNED_INTERVAL: c_int = 512;
-    static inline bool
-    asym_active_balance(struct lb_env *env)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn asym_active_balance(env: *mut lb_env) -> bool {
 //
 // ASYM_PACKING needs to force migrate tasks from busy but lower
 // priority CPUs in order to pack all tasks in the highest priority
@@ -11825,31 +12223,32 @@ pub const MAX_PINNED_INTERVAL: c_int = 512;
     (sched_asym_prefer(env.dst_cpu, env.src_cpu) ||
     !sched_use_asym_prio(env.sd, env.src_cpu));
     }
-    static inline bool
-    imbalanced_active_balance(struct lb_env *env)
-    {
-    struct sched_domain *sd = env.sd;
+#[no_mangle]
+pub unsafe extern "C" fn imbalanced_active_balance(env: *mut lb_env) -> bool {
+    let mut sd = env.sd;
 //
 // The imbalanced case includes the case of pinned tasks preventing a fair
 // distribution of the load on the system but also the even distribution of the
 // threads on a system with spare capacity
 //
     if ((env.migration_type == migrate_task) &&
-    (sd.nr_balance_failed > sd.cache_nice_tries+2))
+    (sd.nr_balance_failed > sd.cache_nice_tries+2)) {
     return 1;
+    }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn need_active_balance(env: *mut lb_env) -> c_int {
-    static int need_active_balance(struct lb_env *env)
-    {
-    struct sched_domain *sd = env.sd;
-    if (alb_break_llc(env))
+    let mut sd = env.sd;
+    if (alb_break_llc(env)) {
     return 0;
-    if (asym_active_balance(env))
+    }
+    if (asym_active_balance(env)) {
     return 1;
-    if (imbalanced_active_balance(env))
+    }
+    if (imbalanced_active_balance(env)) {
     return 1;
+    }
 //
 // The dst_cpu is idle and the src_cpu CPU has only 1 CFS task.
 // It's worth migrating the task if the src_cpu's capacity is reduced
@@ -11859,28 +12258,29 @@ unsafe extern "C" fn need_active_balance(env: *mut lb_env) -> c_int {
     if (env.idle &&
     (env.src_rq.cfs.h_nr_runnable == 1)) {
     if ((check_cpu_capacity(env.src_rq, sd)) &&
-    (capacity_of(env.src_cpu)*sd.imbalance_pct < capacity_of(env.dst_cpu)*100))
+    (capacity_of(env.src_cpu)*sd.imbalance_pct < capacity_of(env.dst_cpu)*100)) {
     return 1;
+    }
     }
     if (env.migration_type == migrate_misfit ||
-    env.migration_type == migrate_llc_task)
+    env.migration_type == migrate_llc_task) {
     return 1;
+    }
     return 0;
     }
-    static int active_load_balance_cpu_stop(void *data);
+// forward_decl: active_load_balance_cpu_stop;
 #[no_mangle]
 unsafe extern "C" fn should_we_balance(env: *mut lb_env) -> c_int {
-    static int should_we_balance(struct lb_env *env)
-    {
-    struct cpumask *swb_cpus = this_cpu_cpumask_var_ptr(should_we_balance_tmpmask);
-    struct sched_group *sg = env.sd.groups;
+    let mut swb_cpus = this_cpu_cpumask_var_ptr(should_we_balance_tmpmask);
+    let mut sg = env.sd.groups;
     int cpu, idle_smt = -1;
 //
 // Ensure the balancing environment is consistent; can happen
 // when the softirq triggers 'during' hotplug.
 //
-    if (!cpumask_test_cpu(env.dst_cpu, env.cpus))
+    if (!cpumask_test_cpu(env.dst_cpu, env.cpus)) {
     return 0;
+    }
 //
 // In the newly idle case, we will allow all the CPUs
 // to do the newly idle load balance.
@@ -11889,15 +12289,17 @@ unsafe extern "C" fn should_we_balance(env: *mut lb_env) -> c_int {
 // to optimize wakeup latency.
 //
     if (env.idle == CPU_NEWLY_IDLE) {
-    if (env.dst_rq.nr_running > 0 || env.dst_rq.ttwu_pending)
+    if (env.dst_rq.nr_running > 0 || env.dst_rq.ttwu_pending) {
     return 0;
+    }
     return 1;
     }
     cpumask_copy(swb_cpus, group_balance_mask(sg));
 // Try to find first idle CPU
     for_each_cpu_and(cpu, swb_cpus, env.cpus) {
-    if (!idle_cpu(cpu))
+    if (!idle_cpu(cpu)) {
     continue;
+    }
 //
 // Don't balance to idle SMT in busy core right away when
 // balancing cores, but remember the first idle SMT CPU for
@@ -11906,8 +12308,9 @@ unsafe extern "C" fn should_we_balance(env: *mut lb_env) -> c_int {
     if (sched_smt_active() &&
     !(env.sd.flags & SD_SHARE_CPUCAPACITY) &&
     !is_core_idle(cpu)) {
-    if (idle_smt == -1)
+    if (idle_smt == -1) {
     idle_smt = cpu;
+    }
 //
 // If the core is not idle, and first SMT sibling which is
 // idle has been found, then its not needed to check other
@@ -11920,34 +12323,40 @@ unsafe extern "C" fn should_we_balance(env: *mut lb_env) -> c_int {
 // Are we the first idle core in a non-SMT domain or higher,
 // or the first idle CPU in a SMT domain?
 //
-    let mut cpu: return = = env.dst_cpu;
+pub static mut cpu: return = 0;
     }
 // Are we the first idle CPU with busy siblings?
-    if (idle_smt != -1)
-    let mut idle_smt: return = = env.dst_cpu;
+    if (idle_smt != -1) {
+pub static mut idle_smt: return = 0;
+    }
 // Are we the first CPU of this group ?
     return group_balance_cpu(sg) == env.dst_cpu;
     }
-    static void update_lb_imbalance_stat(struct lb_env *env, struct sched_domain *sd,
-    enum cpu_idle_type idle)
-    {
-    if (!schedstat_enabled())
+#[no_mangle]
+pub unsafe extern "C" fn update_lb_imbalance_stat(env: *mut lb_env, sd: *mut sched_domain, idle: cpu_idle_type) {
+    if (!schedstat_enabled()) {
     return;
-    switch (env.migration_type) {
-    case migrate_load:
+    }
+    match (env.migration_type) {
+    migrate_load => {
     __schedstat_add(sd.lb_imbalance_load[idle], env.imbalance);
-    break;
-    case migrate_util:
+    // break;
+    }
+    migrate_util => {
     __schedstat_add(sd.lb_imbalance_util[idle], env.imbalance);
-    break;
-    case migrate_task:
+    // break;
+    }
+    migrate_task => {
     __schedstat_add(sd.lb_imbalance_task[idle], env.imbalance);
-    break;
-    case migrate_misfit:
+    // break;
+    }
+    migrate_misfit => {
     __schedstat_add(sd.lb_imbalance_misfit[idle], env.imbalance);
-    break;
-    case migrate_llc_task:
-    break;
+    // break;
+    }
+    migrate_llc_task => {
+    // break;
+    }
     }
     }
 //
@@ -11963,57 +12372,46 @@ unsafe extern "C" fn should_we_balance(env: *mut lb_env) -> c_int {
 // execution, as non-SD_SERIALIZE domains will still be
 // load-balanced in parallel.
 //
-    let mut sched_balance_running: static atomic_t = ATOMIC_INIT(0);
+pub static mut sched_balance_running: atomic_t = 0;
 //
 // Check this_cpu to ensure it is balanced within domain. Attempt to move
 // tasks if there is an imbalance.
 //
-    static int sched_balance_rq(int this_cpu, struct rq *this_rq,
-    struct sched_domain *sd, enum cpu_idle_type idle,
-    int *continue_balancing)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sched_balance_rq(this_cpu: c_int, this_rq: *mut rq, sd: *mut sched_domain, idle: cpu_idle_type, continue_balancing: *mut c_int) -> c_int {
     int ld_moved, cur_ld_moved, active_balance = 0;
-    struct sched_domain *sd_parent = sd.parent;
-    struct sched_group *group;
-    struct rq *busiest;
-    struct rq_flags rf;
-    struct cpumask *cpus = this_cpu_cpumask_var_ptr(load_balance_mask);
-    struct lb_env env = {
-    .sd		= sd,
-    .dst_cpu	= this_cpu,
-    .dst_rq		= this_rq,
-    .dst_grpmask    = group_balance_mask(sd.groups),
-    .idle		= idle,
-    .loop_break	= SCHED_NR_MIGRATE_BREAK,
-    .cpus		= cpus,
-    .fbq_type	= all,
-    .tasks		= LIST_HEAD_INIT(env.tasks),
-    };
-    let mut need_unlock: bool = false;
+    let mut sd_parent = sd.parent;
+pub static mut group: *mut c_void = core::ptr::null_mut();
+pub static mut busiest: *mut c_void = core::ptr::null_mut();
+pub static mut rf: usize = 0;
+    let mut cpus = this_cpu_cpumask_var_ptr(load_balance_mask);
+pub static mut lb_env: usize = 0;
+pub static mut need_unlock: bool = false;
     cpumask_and(cpus, sched_domain_span(sd), cpu_active_mask);
     schedstat_inc(sd.lb_count[idle]);
-    redo:
+// label;
     if (!should_we_balance(&env)) {
 // continue_balancing = 0;
-    goto out_balanced;
+// goto;
     }
     if (!need_unlock && (sd.flags & SD_SERIALIZE)) {
-    let mut zero: c_int = 0;
-    if (!atomic_try_cmpxchg_acquire(&sched_balance_running, &zero, 1))
-    goto out_balanced;
+pub static mut zero: c_int = 0;
+    if (!atomic_try_cmpxchg_acquire(&sched_balance_running, &zero, 1)) {
+// goto;
+    }
     need_unlock = true;
     }
     group = sched_balance_find_src_group(&env);
     if (!group) {
     schedstat_inc(sd.lb_nobusyg[idle]);
-    goto out_balanced;
+// goto;
     }
     busiest = sched_balance_find_src_rq(&env, group);
     if (!busiest) {
     schedstat_inc(sd.lb_nobusyq[idle]);
-    goto out_balanced;
+// goto;
     }
-    WARN_ON_ONCE(busiest == env.dst_rq);
+    WARN_ON_ONCE!(busiest == env.dst_rq);
     update_lb_imbalance_stat(&env, sd, idle);
     env.src_cpu = busiest.cpu;
     env.src_rq = busiest;
@@ -12028,7 +12426,7 @@ unsafe extern "C" fn should_we_balance(env: *mut lb_env) -> c_int {
 // correctly treated as an imbalance.
 //
     env.loop_max  = min(sysctl_sched_nr_migrate, busiest.nr_running);
-    more_balance:
+// label;
     rq_lock_irqsave(busiest, &rf);
     update_rq_clock(busiest);
 //
@@ -12051,7 +12449,7 @@ unsafe extern "C" fn should_we_balance(env: *mut lb_env) -> c_int {
     local_irq_restore(rf.flags);
     if (env.flags & LBF_NEED_BREAK) {
     env.flags &= ~LBF_NEED_BREAK;
-    goto more_balance;
+// goto;
     }
 //
 // Revisit (affine) tasks on src_cpu that couldn't be moved to
@@ -12084,15 +12482,16 @@ unsafe extern "C" fn should_we_balance(env: *mut lb_env) -> c_int {
 // Go back to "more_balance" rather than "redo" since we
 // need to continue with same src_cpu.
 //
-    goto more_balance;
+// goto;
     }
 //
 // We failed to reach balance because of affinity.
 //
     if (sd_parent) {
-    int *group_imbalance = &sd_parent.groups.sgc.imbalance;
-    if ((env.flags & LBF_SOME_PINNED) && env.imbalance > 0)
+    let mut group_imbalance = &sd_parent.groups.sgc.imbalance;
+    if ((env.flags & LBF_SOME_PINNED) && env.imbalance > 0) {
 // group_imbalance = 1;
+    }
     }
 // All tasks on this runqueue were pinned by CPU affinity
     if (unlikely(env.flags & LBF_ALL_PINNED)) {
@@ -12108,14 +12507,14 @@ unsafe extern "C" fn should_we_balance(env: *mut lb_env) -> c_int {
     if (!cpumask_subset(cpus, env.dst_grpmask)) {
     env.loop = 0;
     env.loop_break = SCHED_NR_MIGRATE_BREAK;
-    goto redo;
+// goto;
     }
-    goto out_all_pinned;
+// goto;
     }
     }
     if (ld_moved) {
     sd.nr_balance_failed = 0;
-    goto out_unbalanced;
+// goto;
     }
     schedstat_inc(sd.lb_failed[idle]);
 //
@@ -12135,18 +12534,21 @@ unsafe extern "C" fn should_we_balance(env: *mut lb_env) -> c_int {
 //
     if (idle != CPU_NEWLY_IDLE &&
     env.migration_type != migrate_misfit &&
-    !(env.flags & LBF_LLC_PINNED))
-    sd.nr_balance_failed++;
-    if (!need_active_balance(&env))
-    goto out_unbalanced;
+    !(env.flags & LBF_LLC_PINNED)) {
+    sd.nr_balance_failed += 1;
+    }
+    if (!need_active_balance(&env)) {
+// goto;
+    }
     scoped_guard (raw_spin_rq_lock_irqsave, busiest) {
 //
 // Don't kick the active_load_balance_cpu_stop,
 // if the curr task on busiest CPU can't be
 // moved to this_cpu:
 //
-    if (!cpumask_test_cpu(this_cpu, busiest.curr.cpus_ptr))
-    goto out_one_pinned;
+    if (!cpumask_test_cpu(this_cpu, busiest.curr.cpus_ptr)) {
+// goto;
+    }
 // Record that we found at least one task that could run on this_cpu
     env.flags &= ~LBF_ALL_PINNED;
 //
@@ -12154,15 +12556,17 @@ unsafe extern "C" fn should_we_balance(env: *mut lb_env) -> c_int {
 // ->active_balance_work.  Once set, it's cleared
 // only after active load balance is finished.
 //
-    if (busiest.active_balance)
-    goto out_unbalanced;
+    if (busiest.active_balance) {
+// goto;
+    }
 //
 // @busiest dropped its rq_lock in the middle of
 // scheduling out its ->curr task (->on_rq := 0), no
 // need to forcefully punt it away with active balance.
 //
-    if (!busiest.curr.on_rq)
-    goto out_unbalanced;
+    if (!busiest.curr.on_rq) {
+// goto;
+    }
     busiest.active_balance = 1;
     busiest.push_cpu = this_cpu;
     active_balance = 1;
@@ -12174,22 +12578,23 @@ unsafe extern "C" fn should_we_balance(env: *mut lb_env) -> c_int {
     &busiest.active_balance_work);
     }
     preempt_enable();
-    out_unbalanced:
+// label;
 // We were unbalanced, so reset the balancing interval
     sd.balance_interval = sd.min_interval;
-    goto out;
-    out_balanced:
+// goto;
+// label;
 //
 // We reach balance although we may have faced some affinity
 // constraints. Clear the imbalance flag only if other tasks got
 // a chance to move and fix the imbalance.
 //
     if (sd_parent && !(env.flags & LBF_ALL_PINNED)) {
-    int *group_imbalance = &sd_parent.groups.sgc.imbalance;
-    if (*group_imbalance)
+    let mut group_imbalance = &sd_parent.groups.sgc.imbalance;
+    if (*group_imbalance) {
 // group_imbalance = 0;
     }
-    out_all_pinned:
+    }
+// label;
 //
 // We reach balance because all tasks are pinned at this level so
 // we can't migrate them. Let the imbalance flag set so parent level
@@ -12197,7 +12602,7 @@ unsafe extern "C" fn should_we_balance(env: *mut lb_env) -> c_int {
 //
     schedstat_inc(sd.lb_balanced[idle]);
     sd.nr_balance_failed = 0;
-    out_one_pinned:
+// label;
     ld_moved = 0;
 //
 // sched_balance_newidle() disregards balance intervals, so we could
@@ -12210,24 +12615,27 @@ unsafe extern "C" fn should_we_balance(env: *mut lb_env) -> c_int {
 // down.
 //
     if (env.idle == CPU_NEWLY_IDLE ||
-    env.migration_type == migrate_misfit)
-    goto out;
+    env.migration_type == migrate_misfit) {
+// goto;
+    }
 // tune up the balancing interval
     if ((env.flags & LBF_ALL_PINNED &&
     sd.balance_interval < MAX_PINNED_INTERVAL) ||
-    sd.balance_interval < sd.max_interval)
+    sd.balance_interval < sd.max_interval) {
     sd.balance_interval *= 2;
-    out:
-    if (need_unlock)
+    }
+// label;
+    if (need_unlock) {
     atomic_set_release(&sched_balance_running, 0);
+    }
     return ld_moved;
     }
-    static inline unsigned long
-    get_sd_balance_interval(struct sched_domain *sd, int cpu_busy)
-    {
-    let mut interval: c_ulong = sd.balance_interval;
-    if (cpu_busy)
+#[no_mangle]
+pub unsafe extern "C" fn get_sd_balance_interval(sd: *mut sched_domain, cpu_busy: c_int) -> c_ulong {
+pub static mut interval: c_ulong = 0;
+    if (cpu_busy) {
     interval *= sd.busy_factor;
+    }
 // scale ms to jiffies
     interval = msecs_to_jiffies(interval);
 //
@@ -12235,20 +12643,21 @@ unsafe extern "C" fn should_we_balance(env: *mut lb_env) -> c_int {
 // balancing at lower domains by preventing their balancing periods
 // from being multiples of each other.
 //
-    if (cpu_busy)
+    if (cpu_busy) {
     interval -= 1;
+    }
     interval = clamp(interval, 1UL, max_load_balance_interval);
     return interval;
     }
-    static inline void
-    update_next_balance(struct sched_domain *sd, unsigned long *next_balance)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn update_next_balance(sd: *mut sched_domain, next_balance: *mut c_ulong) {
     unsigned long interval, next;
 // used by idle balance, so cpu_busy = 0
     interval = get_sd_balance_interval(sd, 0);
     next = sd.last_balance + interval;
-    if (time_after(*next_balance, next))
+    if (time_after(*next_balance, next)) {
 // next_balance = next;
+    }
     }
 //
 // active_load_balance_cpu_stop is run by the CPU stopper. It pushes
@@ -12258,52 +12667,46 @@ unsafe extern "C" fn should_we_balance(env: *mut lb_env) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn active_load_balance_cpu_stop(data: *mut c_void) -> c_int {
-    static int active_load_balance_cpu_stop(void *data)
-    {
-    struct rq *busiest_rq = data;
-    let mut busiest_cpu: c_int = cpu_of(busiest_rq);
-    let mut target_cpu: c_int = busiest_rq.push_cpu;
-    struct rq *target_rq = cpu_rq(target_cpu);
-    struct sched_domain *sd;
-    struct task_struct *p = core::ptr::null_mut();
-    struct rq_flags rf;
+    let mut busiest_rq = data;
+pub static mut busiest_cpu: c_int = 0;
+pub static mut target_cpu: c_int = 0;
+    let mut target_rq = cpu_rq(target_cpu);
+pub static mut sd: *mut c_void = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
+pub static mut rf: usize = 0;
     rq_lock_irq(busiest_rq, &rf);
 //
 // Between queueing the stop-work and running it is a hole in which
 // CPUs can become inactive. We should not move tasks from or to
 // inactive CPUs.
 //
-    if (!cpu_active(busiest_cpu) || !cpu_active(target_cpu))
-    goto out_unlock;
+    if (!cpu_active(busiest_cpu) || !cpu_active(target_cpu)) {
+// goto;
+    }
 // Make sure the requested CPU hasn't gone down in the meantime:
     if (unlikely(busiest_cpu != smp_processor_id() ||
-    !busiest_rq.active_balance))
-    goto out_unlock;
+    !busiest_rq.active_balance)) {
+// goto;
+    }
 // Is there any task to move?
-    if (busiest_rq.nr_running <= 1)
-    goto out_unlock;
+    if (busiest_rq.nr_running <= 1) {
+// goto;
+    }
 //
 // This condition is "impossible", if it occurs
 // we need to fix it. Originally reported by
 // Bjorn Helgaas on a 128-CPU setup.
 //
-    WARN_ON_ONCE(busiest_rq == target_rq);
+    WARN_ON_ONCE!(busiest_rq == target_rq);
 // Search for an sd spanning us and the target CPU.
     rcu_read_lock();
     for_each_domain(target_cpu, sd) {
-    if (cpumask_test_cpu(busiest_cpu, sched_domain_span(sd)))
+    if (cpumask_test_cpu(busiest_cpu, sched_domain_span(sd))) {
     break;
     }
+    }
     if (likely(sd)) {
-    struct lb_env env = {
-    .sd		= sd,
-    .dst_cpu	= target_cpu,
-    .dst_rq		= target_rq,
-    .src_cpu	= busiest_rq.cpu,
-    .src_rq		= busiest_rq,
-    .idle		= CPU_IDLE,
-    .flags		= LBF_ACTIVE_LB,
-    };
+pub static mut lb_env: usize = 0;
     schedstat_inc(sd.alb_count);
     update_rq_clock(busiest_rq);
     p = detach_one_task(&env);
@@ -12316,11 +12719,12 @@ unsafe extern "C" fn active_load_balance_cpu_stop(data: *mut c_void) -> c_int {
     }
     }
     rcu_read_unlock();
-    out_unlock:
+// label;
     busiest_rq.active_balance = 0;
     rq_unlock(busiest_rq, &rf);
-    if (p)
+    if (p) {
     attach_one_task(target_rq, p);
+    }
     local_irq_enable();
     return 0;
     }
@@ -12330,23 +12734,20 @@ unsafe extern "C" fn active_load_balance_cpu_stop(data: *mut c_void) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn update_max_interval() {
-    void update_max_interval(void)
-    {
     max_load_balance_interval = HZ*num_online_cpus()/10;
     }
 #[no_mangle]
 pub unsafe extern "C" fn update_newidle_stats(sd: *mut sched_domain, success: c_uint) {
-    static inline void update_newidle_stats(struct sched_domain *sd, unsigned int success)
-    {
-    sd.newidle_call++;
+    sd.newidle_call += 1;
     sd.newidle_success += success;
     if (sd.newidle_call >= 1024) {
-    let mut now: u64 = sched_clock();
-    let mut delta: i64 = now - sd.newidle_stamp;
+pub static mut now: u64 = 0;
+pub static mut delta: i64 = 0;
     sd.newidle_stamp = now;
-    let mut ratio: c_int = 0;
-    if (delta < 0)
+pub static mut ratio: c_int = 0;
+    if (delta < 0) {
     delta = 0;
+    }
     if (sched_feat(NI_RATE)) {
 //
 // ratio  delta   freq
@@ -12365,13 +12766,13 @@ pub unsafe extern "C" fn update_newidle_stats(sd: *mut sched_domain, success: c_
     sd.newidle_success /= 2;
     }
     }
-    static inline bool
-    update_newidle_cost(struct sched_domain *sd, u64 cost, unsigned int success)
-    {
-    let mut next_decay: c_ulong = sd.last_decay_max_lb_cost + HZ;
-    let mut now: c_ulong = jiffies;
-    if (cost)
+#[no_mangle]
+pub unsafe extern "C" fn update_newidle_cost(sd: *mut sched_domain, cost: u64, success: c_uint) -> bool {
+pub static mut next_decay: c_ulong = 0;
+pub static mut now: c_ulong = 0;
+    if (cost) {
     update_newidle_stats(sd, success);
+    }
     if (cost > sd.max_newidle_lb_cost) {
 //
 // Track max cost of a domain to make sure to not delay the
@@ -12398,19 +12799,17 @@ pub unsafe extern "C" fn update_newidle_stats(sd: *mut sched_domain, success: c_
 // Balancing parameters are set up in init_sched_domains.
 //
 #[no_mangle]
-unsafe extern "C" fn sched_balance_domains(rq: *mut rq, idle: enum cpu_idle_type) {
-    static void sched_balance_domains(struct rq *rq, enum cpu_idle_type idle)
-    {
-    let mut continue_balancing: c_int = 1;
-    let mut cpu: c_int = rq.cpu;
-    let mut busy: c_int = idle != CPU_IDLE && !sched_idle_rq(rq);
-    unsigned long interval;
-    struct sched_domain *sd;
+unsafe extern "C" fn sched_balance_domains(rq: *mut rq, idle: cpu_idle_type) {
+pub static mut continue_balancing: c_int = 1;
+pub static mut cpu: c_int = 0;
+pub static mut busy: c_int = 0;
+    let mut interval = 0;
+pub static mut sd: *mut c_void = core::ptr::null_mut();
 // Earliest time when we have to do rebalance again
-    let mut next_balance: c_ulong = jiffies + 60*HZ;
-    let mut update_next_balance: c_int = 0;
-    let mut need_decay: c_int = 0;
-    let mut max_cost: u64 = 0;
+pub static mut next_balance: c_ulong = 0;
+pub static mut update_next_balance: c_int = 0;
+pub static mut need_decay: c_int = 0;
+pub static mut max_cost: u64 = 0;
     rcu_read_lock();
     for_each_domain(cpu, sd) {
 //
@@ -12425,8 +12824,9 @@ unsafe extern "C" fn sched_balance_domains(rq: *mut rq, idle: enum cpu_idle_type
 // actively.
 //
     if (!continue_balancing) {
-    if (need_decay)
+    if (need_decay) {
     continue;
+    }
     break;
     }
     interval = get_sd_balance_interval(sd, busy);
@@ -12462,13 +12862,12 @@ unsafe extern "C" fn sched_balance_domains(rq: *mut rq, idle: enum cpu_idle_type
 // When the cpu is attached to null domain for ex, it will not be
 // updated.
 //
-    if (likely(update_next_balance))
+    if (likely(update_next_balance)) {
     rq.next_balance = next_balance;
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn on_null_domain(rq: *mut rq) -> c_int {
-    static inline int on_null_domain(struct rq *rq)
-    {
     return unlikely(!rcu_dereference_sched(rq.sd));
     }
 
@@ -12481,9 +12880,7 @@ pub unsafe extern "C" fn on_null_domain(rq: *mut rq) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn find_new_ilb() -> c_int {
-    static inline int find_new_ilb(void)
-    {
-    struct cpumask *ilb_cpus;
+pub static mut ilb_cpus: *mut c_void = core::ptr::null_mut();
     int ilb_cpu, fallback = -1;
     lockdep_assert_irqs_disabled();
 //
@@ -12499,8 +12896,9 @@ pub unsafe extern "C" fn find_new_ilb() -> c_int {
 // Once an idle fallback exists, a busy CPU proves that
 // this core cannot be fully idle. Skip its siblings.
 //
-    if (sched_smt_active() && fallback >= 0)
+    if (sched_smt_active() && fallback >= 0) {
     cpumask_andnot(ilb_cpus, ilb_cpus, cpu_smt_mask(ilb_cpu));
+    }
     continue;
     }
 //
@@ -12511,8 +12909,9 @@ pub unsafe extern "C" fn find_new_ilb() -> c_int {
 // idle core exists.
 //
     if (sched_smt_active() && !is_core_idle(ilb_cpu)) {
-    if (fallback < 0)
+    if (fallback < 0) {
     fallback = ilb_cpu;
+    }
 //
 // The core is not idle, so there is no need to check
 // any of its other SMT siblings.
@@ -12534,31 +12933,33 @@ pub unsafe extern "C" fn find_new_ilb() -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn kick_ilb(flags: c_uint) {
-    static void kick_ilb(unsigned int flags)
-    {
-    int ilb_cpu;
+    let mut ilb_cpu = 0;
 //
 // Increase nohz.next_balance only when if full ilb is triggered but
 // not if we only update stats.
 //
-    if (flags & NOHZ_BALANCE_KICK)
+    if (flags & NOHZ_BALANCE_KICK) {
     nohz.next_balance = jiffies+1;
+    }
     ilb_cpu = find_new_ilb();
-    if (ilb_cpu < 0)
+    if (ilb_cpu < 0) {
     return;
+    }
 //
 // Don't bother if no new NOHZ balance work items for ilb_cpu,
 // i.e. all bits in flags are already set in ilb_cpu.
 //
-    if ((atomic_read(nohz_flags(ilb_cpu)) & flags) == flags)
+    if ((atomic_read(nohz_flags(ilb_cpu)) & flags) == flags) {
     return;
+    }
 //
 // Access to rq::nohz_csd is serialized by NOHZ_KICK_MASK; he who sets
 // the first flag owns it; cleared by nohz_csd_func().
 //
     flags = atomic_fetch_or(flags, nohz_flags(ilb_cpu));
-    if (flags & NOHZ_KICK_MASK)
+    if (flags & NOHZ_KICK_MASK) {
     return;
+    }
 //
 // This way we generate an IPI on the target CPU which
 // is idle, and the softirq performing NOHZ idle load balancing
@@ -12572,23 +12973,23 @@ unsafe extern "C" fn kick_ilb(flags: c_uint) {
 //
 #[no_mangle]
 unsafe extern "C" fn nohz_balancer_kick(rq: *mut rq) {
-    static void nohz_balancer_kick(struct rq *rq)
-    {
-    let mut now: c_ulong = jiffies;
-    struct sched_domain_shared *sds;
-    struct sched_domain *sd;
+pub static mut now: c_ulong = 0;
+pub static mut sds: *mut c_void = core::ptr::null_mut();
+pub static mut sd: *mut c_void = core::ptr::null_mut();
     int nr_busy, i, cpu = rq.cpu;
-    let mut flags: c_uint = 0;
-    if (unlikely(rq.idle_balance))
+pub static mut flags: c_uint = 0;
+    if (unlikely(rq.idle_balance)) {
     return;
+    }
 //
 // We may be recently in ticked or tickless idle mode. At the first
 // busy tick after returning from idle, we will update the busy stats.
 //
     nohz_balance_exit_idle(rq);
     if (READ_ONCE(nohz.has_blocked_load) &&
-    time_after(now, READ_ONCE(nohz.next_blocked)))
+    time_after(now, READ_ONCE(nohz.next_blocked))) {
     flags = NOHZ_STATS_KICK;
+    }
 //
 // Most of the time system is not 100% busy. i.e nohz.nr_cpus > 0
 // Skip the read if time is not due.
@@ -12598,17 +12999,19 @@ unsafe extern "C" fn nohz_balancer_kick(rq: *mut rq) {
 // But idle load balancing is not done as find_new_ilb fails.
 // That's very rare. So read nohz.nr_cpus only if time is due.
 //
-    if (time_before(now, nohz.next_balance))
-    goto out;
+    if (time_before(now, nohz.next_balance)) {
+// goto;
+    }
 //
 // None are in tickless mode and hence no need for NOHZ idle load
 // balancing
 //
-    if (unlikely(cpumask_empty(nohz.idle_cpus_mask)))
+    if (unlikely(cpumask_empty(nohz.idle_cpus_mask))) {
     return;
+    }
     if (rq.nr_running >= 2) {
     flags = NOHZ_STATS_KICK | NOHZ_BALANCE_KICK;
-    goto out;
+// goto;
     }
     sd = rcu_dereference_all(rq.sd);
     if (sd) {
@@ -12618,7 +13021,7 @@ unsafe extern "C" fn nohz_balancer_kick(rq: *mut rq) {
 //
     if (rq.cfs.h_nr_runnable >= 1 && check_cpu_capacity(rq, sd)) {
     flags |= NOHZ_STATS_KICK | NOHZ_BALANCE_KICK;
-    goto out;
+// goto;
     }
     }
     sd = rcu_dereference_all(per_cpu(sd_asym_packing, cpu));
@@ -12634,7 +13037,7 @@ unsafe extern "C" fn nohz_balancer_kick(rq: *mut rq) {
     for_each_cpu_and(i, sched_domain_span(sd), nohz.idle_cpus_mask) {
     if (sched_asym(sd, i, cpu)) {
     flags |= NOHZ_STATS_KICK | NOHZ_BALANCE_KICK;
-    goto out;
+// goto;
     }
     }
     }
@@ -12644,8 +13047,9 @@ unsafe extern "C" fn nohz_balancer_kick(rq: *mut rq) {
 // When ASYM_CPUCAPACITY; see if there's a higher capacity CPU
 // to run the misfit task on.
 //
-    if (check_misfit_status(rq))
+    if (check_misfit_status(rq)) {
     flags |= NOHZ_STATS_KICK | NOHZ_BALANCE_KICK;
+    }
 //
 // For asymmetric systems, we do not want to nicely balance
 // cache use, instead we want to embrace asymmetry and only
@@ -12653,7 +13057,7 @@ unsafe extern "C" fn nohz_balancer_kick(rq: *mut rq) {
 //
 // Skip the LLC logic because it's not relevant in that case.
 //
-    goto out;
+// goto;
     }
     sds = rcu_dereference_all(per_cpu(sd_balance_shared, cpu));
     if (sds) {
@@ -12667,50 +13071,50 @@ unsafe extern "C" fn nohz_balancer_kick(rq: *mut rq) {
 // like this LLC domain has tasks we could move.
 //
     nr_busy = atomic_read(&sds.nr_busy_cpus);
-    if (nr_busy > 1)
+    if (nr_busy > 1) {
     flags |= NOHZ_STATS_KICK | NOHZ_BALANCE_KICK;
     }
-    out:
-    if (READ_ONCE(nohz.needs_update))
+    }
+// label;
+    if (READ_ONCE(nohz.needs_update)) {
     flags |= NOHZ_NEXT_KICK;
-    if (flags)
+    }
+    if (flags) {
     kick_ilb(flags);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn set_cpu_sd_state_busy(cpu: c_int) {
-    static void set_cpu_sd_state_busy(int cpu)
-    {
-    struct sched_domain *sd;
+pub static mut sd: *mut c_void = core::ptr::null_mut();
     sd = rcu_dereference_all(per_cpu(sd_llc, cpu));
 //
 // sd->nohz_idle only pairs with nr_busy_cpus on sd->shared; if this
 // domain has no shared object there is nothing to clear or account.
 //
-    if (!sd || !sd.shared || !sd.nohz_idle)
+    if (!sd || !sd.shared || !sd.nohz_idle) {
     return;
+    }
     sd.nohz_idle = 0;
     atomic_inc(&sd.shared.nr_busy_cpus);
     }
 #[no_mangle]
 pub unsafe extern "C" fn nohz_balance_exit_idle(rq: *mut rq) {
-    void nohz_balance_exit_idle(struct rq *rq)
-    {
-    WARN_ON_ONCE(rq != this_rq());
-    if (likely(!rq.nohz_tick_stopped))
+    WARN_ON_ONCE!(rq != this_rq());
+    if (likely(!rq.nohz_tick_stopped)) {
     return;
+    }
     rq.nohz_tick_stopped = 0;
     cpumask_clear_cpu(rq.cpu, nohz.idle_cpus_mask);
     set_cpu_sd_state_busy(rq.cpu);
     }
 #[no_mangle]
 unsafe extern "C" fn set_cpu_sd_state_idle(cpu: c_int) {
-    static void set_cpu_sd_state_idle(int cpu)
-    {
-    struct sched_domain *sd;
+pub static mut sd: *mut c_void = core::ptr::null_mut();
     sd = rcu_dereference_all(per_cpu(sd_llc, cpu));
 // See set_cpu_sd_state_busy(): nohz_idle is only used with sd->shared.
-    if (!sd || !sd.shared || sd.nohz_idle)
+    if (!sd || !sd.shared || sd.nohz_idle) {
     return;
+    }
     sd.nohz_idle = 1;
     atomic_dec(&sd.shared.nr_busy_cpus);
     }
@@ -12720,13 +13124,12 @@ unsafe extern "C" fn set_cpu_sd_state_idle(cpu: c_int) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn nohz_balance_enter_idle(cpu: c_int) {
-    void nohz_balance_enter_idle(int cpu)
-    {
-    struct rq *rq = cpu_rq(cpu);
-    WARN_ON_ONCE(cpu != smp_processor_id());
+    let mut rq = cpu_rq(cpu);
+    WARN_ON_ONCE!(cpu != smp_processor_id());
 // If this CPU is going down, then nothing needs to be done:
-    if (!cpu_active(cpu))
+    if (!cpu_active(cpu)) {
     return;
+    }
 //
 // Can be set safely without rq->lock held
 // If a clear happens, it will have evaluated last additions because
@@ -12739,11 +13142,13 @@ pub unsafe extern "C" fn nohz_balance_enter_idle(cpu: c_int) {
 // *_avg. The CPU is already part of nohz.idle_cpus_mask so the clear
 // of nohz.has_blocked_load can only happen after checking the new load
 //
-    if (rq.nohz_tick_stopped)
-    goto out;
+    if (rq.nohz_tick_stopped) {
+// goto;
+    }
 // If we're a completely isolated CPU, we don't play:
-    if (on_null_domain(rq))
+    if (on_null_domain(rq)) {
     return;
+    }
     rq.nohz_tick_stopped = 1;
     cpumask_set_cpu(cpu, nohz.idle_cpus_mask);
 //
@@ -12754,7 +13159,7 @@ pub unsafe extern "C" fn nohz_balance_enter_idle(cpu: c_int) {
     smp_mb__after_atomic();
     set_cpu_sd_state_idle(cpu);
     WRITE_ONCE(nohz.needs_update, 1);
-    out:
+// label;
 //
 // Each time a cpu enter idle, we assume that it has blocked load and
 // enable the periodic update of the load of idle CPUs
@@ -12763,15 +13168,16 @@ pub unsafe extern "C" fn nohz_balance_enter_idle(cpu: c_int) {
     }
 #[no_mangle]
 unsafe extern "C" fn update_nohz_stats(rq: *mut rq) -> bool {
-    static bool update_nohz_stats(struct rq *rq)
-    {
-    let mut cpu: c_uint = rq.cpu;
-    if (!rq.has_blocked_load)
+pub static mut cpu: c_uint = 0;
+    if (!rq.has_blocked_load) {
     return false;
-    if (!cpumask_test_cpu(cpu, nohz.idle_cpus_mask))
+    }
+    if (!cpumask_test_cpu(cpu, nohz.idle_cpus_mask)) {
     return false;
-    if (!time_after(jiffies, READ_ONCE(rq.last_blocked_load_update_tick)))
+    }
+    if (!time_after(jiffies, READ_ONCE(rq.last_blocked_load_update_tick))) {
     return true;
+    }
     sched_balance_update_blocked_averages(cpu);
     return rq.has_blocked_load;
     }
@@ -12782,17 +13188,15 @@ unsafe extern "C" fn update_nohz_stats(rq: *mut rq) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn _nohz_idle_balance(this_rq: *mut rq, flags: c_uint) {
-    static void _nohz_idle_balance(struct rq *this_rq, unsigned int flags)
-    {
 // Earliest time when we have to do rebalance again
-    let mut now: c_ulong = jiffies;
-    let mut next_balance: c_ulong = now + 60*HZ;
-    let mut has_blocked_load: bool = false;
-    let mut update_next_balance: c_int = 0;
-    let mut this_cpu: c_int = this_rq.cpu;
-    int balance_cpu;
-    struct rq *rq;
-    WARN_ON_ONCE((flags & NOHZ_KICK_MASK) == NOHZ_BALANCE_KICK);
+pub static mut now: c_ulong = 0;
+pub static mut next_balance: c_ulong = 0;
+pub static mut has_blocked_load: bool = false;
+pub static mut update_next_balance: c_int = 0;
+pub static mut this_cpu: c_int = 0;
+    let mut balance_cpu = 0;
+pub static mut rq: *mut c_void = core::ptr::null_mut();
+    WARN_ON_ONCE!((flags & NOHZ_KICK_MASK) == NOHZ_BALANCE_KICK);
 //
 // We assume there will be no idle load after this update and clear
 // the has_blocked_load flag. If a cpu enters idle in the mean time, it will
@@ -12803,10 +13207,12 @@ unsafe extern "C" fn _nohz_idle_balance(this_rq: *mut rq, flags: c_uint) {
 //
 // Same applies to idle_cpus_mask vs needs_update.
 //
-    if (flags & NOHZ_STATS_KICK)
+    if (flags & NOHZ_STATS_KICK) {
     WRITE_ONCE(nohz.has_blocked_load, 0);
-    if (flags & NOHZ_NEXT_KICK)
+    }
+    if (flags & NOHZ_NEXT_KICK) {
     WRITE_ONCE(nohz.needs_update, 0);
+    }
 //
 // Ensures that if we miss the CPU, we must see the has_blocked_load
 // store from nohz_balance_enter_idle().
@@ -12817,34 +13223,39 @@ unsafe extern "C" fn _nohz_idle_balance(this_rq: *mut rq, flags: c_uint) {
 // chance for other idle cpu to pull load.
 //
     for_each_cpu_wrap(balance_cpu,  nohz.idle_cpus_mask, this_cpu+1) {
-    if (!idle_cpu(balance_cpu))
+    if (!idle_cpu(balance_cpu)) {
     continue;
+    }
 //
 // If this CPU gets work to do, stop the load balancing
 // work being done for other CPUs. Next load
 // balancing owner will pick it up.
 //
     if (!idle_cpu(this_cpu) && need_resched()) {
-    if (flags & NOHZ_STATS_KICK)
+    if (flags & NOHZ_STATS_KICK) {
     has_blocked_load = true;
-    if (flags & NOHZ_NEXT_KICK)
+    }
+    if (flags & NOHZ_NEXT_KICK) {
     WRITE_ONCE(nohz.needs_update, 1);
-    goto abort;
+    }
+// goto;
     }
     rq = cpu_rq(balance_cpu);
-    if (flags & NOHZ_STATS_KICK)
+    if (flags & NOHZ_STATS_KICK) {
     has_blocked_load |= update_nohz_stats(rq);
+    }
 //
 // If time for next balance is due,
 // do the balance.
 //
     if (time_after_eq(jiffies, rq.next_balance)) {
-    struct rq_flags rf;
+pub static mut rf: usize = 0;
     rq_lock_irqsave(rq, &rf);
     update_rq_clock(rq);
     rq_unlock_irqrestore(rq, &rf);
-    if (flags & NOHZ_BALANCE_KICK)
+    if (flags & NOHZ_BALANCE_KICK) {
     sched_balance_domains(rq, CPU_IDLE);
+    }
     }
     if (time_after(next_balance, rq.next_balance)) {
     next_balance = rq.next_balance;
@@ -12856,30 +13267,33 @@ unsafe extern "C" fn _nohz_idle_balance(this_rq: *mut rq, flags: c_uint) {
 // When the CPU is attached to null domain for ex, it will not be
 // updated.
 //
-    if (likely(update_next_balance))
+    if (likely(update_next_balance)) {
     nohz.next_balance = next_balance;
-    if (flags & NOHZ_STATS_KICK)
+    }
+    if (flags & NOHZ_STATS_KICK) {
     WRITE_ONCE(nohz.next_blocked,
     now + msecs_to_jiffies(LOAD_AVG_PERIOD));
-    abort:
+    }
+// label;
 // There is still blocked load, enable periodic update
-    if (has_blocked_load)
+    if (has_blocked_load) {
     WRITE_ONCE(nohz.has_blocked_load, 1);
+    }
     }
 //
 // In CONFIG_NO_HZ_COMMON case, the idle balance kickee will do the
 // rebalancing for all the CPUs for whom scheduler ticks are stopped.
 //
 #[no_mangle]
-unsafe extern "C" fn nohz_idle_balance(this_rq: *mut rq, idle: enum cpu_idle_type) -> bool {
-    static bool nohz_idle_balance(struct rq *this_rq, enum cpu_idle_type idle)
-    {
-    let mut flags: c_uint = this_rq.nohz_idle_balance;
-    if (!flags)
+unsafe extern "C" fn nohz_idle_balance(this_rq: *mut rq, idle: cpu_idle_type) -> bool {
+pub static mut flags: c_uint = 0;
+    if (!flags) {
     return false;
+    }
     this_rq.nohz_idle_balance = 0;
-    if (idle != CPU_IDLE)
+    if (idle != CPU_IDLE) {
     return false;
+    }
     _nohz_idle_balance(this_rq, flags);
     return true;
     }
@@ -12900,29 +13314,28 @@ unsafe extern "C" fn nohz_idle_balance(this_rq: *mut rq, idle: enum cpu_idle_typ
 //
 #[no_mangle]
 pub unsafe extern "C" fn nohz_run_idle_balance(cpu: c_int) {
-    void nohz_run_idle_balance(int cpu)
-    {
-    unsigned int flags;
+    let mut flags = 0;
     flags = atomic_fetch_andnot(NOHZ_NEWILB_KICK, nohz_flags(cpu));
 //
 // Update the blocked load only if no SCHED_SOFTIRQ is about to happen
 // (i.e. NOHZ_STATS_KICK set) and will do the same.
 //
-    if ((flags == NOHZ_NEWILB_KICK) && !need_resched())
+    if ((flags == NOHZ_NEWILB_KICK) && !need_resched()) {
     _nohz_idle_balance(cpu_rq(cpu), NOHZ_STATS_KICK);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn nohz_newidle_balance(this_rq: *mut rq) {
-    static void nohz_newidle_balance(struct rq *this_rq)
-    {
-    let mut this_cpu: c_int = this_rq.cpu;
+pub static mut this_cpu: c_int = 0;
 // Will wake up very soon. No time for doing anything else
-    if (this_rq.avg_idle < sysctl_sched_migration_cost)
+    if (this_rq.avg_idle < sysctl_sched_migration_cost) {
     return;
+    }
 // Don't need to update blocked load of idle CPUs
     if (!READ_ONCE(nohz.has_blocked_load) ||
-    time_before(jiffies, READ_ONCE(nohz.next_blocked)))
+    time_before(jiffies, READ_ONCE(nohz.next_blocked))) {
     return;
+    }
 //
 // Set the need to trigger ILB in order to update blocked load
 // before entering idle state.
@@ -12930,14 +13343,14 @@ unsafe extern "C" fn nohz_newidle_balance(this_rq: *mut rq) {
     atomic_or(NOHZ_NEWILB_KICK, nohz_flags(this_cpu));
     }
 
-    static inline void nohz_balancer_kick(struct rq *rq) { }
 #[no_mangle]
-pub unsafe extern "C" fn nohz_idle_balance(this_rq: *mut rq, idle: enum cpu_idle_type) -> bool {
-    static inline bool nohz_idle_balance(struct rq *this_rq, enum cpu_idle_type idle)
-    {
+pub unsafe extern "C" fn nohz_balancer_kick(rq: *mut rq) { }
+#[no_mangle]
+pub unsafe extern "C" fn nohz_idle_balance(this_rq: *mut rq, idle: cpu_idle_type) -> bool {
     return false;
     }
-    static inline void nohz_newidle_balance(struct rq *this_rq) { }
+#[no_mangle]
+pub unsafe extern "C" fn nohz_newidle_balance(this_rq: *mut rq) { }
 
 //
 // sched_balance_newidle is called by schedule() if this_cpu is about to become
@@ -12950,22 +13363,20 @@ pub unsafe extern "C" fn nohz_idle_balance(this_rq: *mut rq, idle: enum cpu_idle
 //
 #[no_mangle]
 unsafe extern "C" fn sched_balance_newidle(this_rq: *mut rq, rf: *mut rq_flags) -> c_int {
-    static int sched_balance_newidle(struct rq *this_rq, struct rq_flags *rf)
-    __must_hold(__rq_lockp(this_rq))
-    {
-    let mut next_balance: c_ulong = jiffies + HZ;
-    let mut this_cpu: c_int = this_rq.cpu;
-    let mut continue_balancing: c_int = 1;
+pub static mut next_balance: c_ulong = 0;
+pub static mut this_cpu: c_int = 0;
+pub static mut continue_balancing: c_int = 1;
     u64 t0, t1, curr_cost = 0;
-    struct sched_domain *sd;
-    let mut pulled_task: c_int = 0;
+pub static mut sd: *mut c_void = core::ptr::null_mut();
+pub static mut pulled_task: c_int = 0;
     update_misfit_status(core::ptr::null_mut(), this_rq);
 //
 // There is a task waiting to run. No need to search for one.
 // Return 0; the task will be enqueued when switching to idle.
 //
-    if (this_rq.ttwu_pending)
+    if (this_rq.ttwu_pending) {
     return 0;
+    }
 //
 // We must set idle_stamp _before_ calling sched_balance_rq()
 // for CPU_NEWLY_IDLE, such that we measure the this duration
@@ -12975,8 +13386,9 @@ unsafe extern "C" fn sched_balance_newidle(this_rq: *mut rq, rf: *mut rq_flags) 
 //
 // Do not pull tasks towards !active CPUs...
 //
-    if (!cpu_active(this_cpu))
+    if (!cpu_active(this_cpu)) {
     return 0;
+    }
 //
 // This is OK, because current is on_cpu, which avoids it being picked
 // for load-balance and preemption/IRQs are still disabled avoiding
@@ -12985,12 +13397,13 @@ unsafe extern "C" fn sched_balance_newidle(this_rq: *mut rq, rf: *mut rq_flags) 
 //
     rq_unpin_lock(this_rq, rf);
     sd = rcu_dereference_sched_domain(this_rq.sd);
-    if (!sd)
-    goto out;
+    if (!sd) {
+// goto;
+    }
     if (!get_rd_overloaded(this_rq.rd) ||
     this_rq.avg_idle < sd.max_newidle_lb_cost) {
     update_next_balance(sd, &next_balance);
-    goto out;
+// goto;
     }
 //
 // Include sched_balance_update_blocked_averages() in the cost
@@ -13002,19 +13415,20 @@ unsafe extern "C" fn sched_balance_newidle(this_rq: *mut rq, rf: *mut rq_flags) 
     rq_modified_begin(this_rq, &fair_sched_class);
     raw_spin_rq_unlock(this_rq);
     for_each_domain(this_cpu, sd) {
-    u64 domain_cost;
+    let mut domain_cost = 0;
     update_next_balance(sd, &next_balance);
-    if (this_rq.avg_idle < curr_cost + sd.max_newidle_lb_cost)
+    if (this_rq.avg_idle < curr_cost + sd.max_newidle_lb_cost) {
     break;
+    }
     if (sd.flags & SD_BALANCE_NEWIDLE) {
-    let mut weight: c_uint = 1;
+pub static mut weight: c_uint = 1;
     if (sched_feat(NI_RANDOM) && sd.newidle_ratio < 1024) {
 //
 // Throw a 1k sided dice; and only run
 // newidle_balance according to the success
 // rate.
 //
-    let mut d1k: u32 = sched_rng() % 1024;
+pub static mut d1k: u32 = 0;
     weight = 1 + sd.newidle_ratio;
     if (d1k > weight) {
     update_newidle_stats(sd, 0);
@@ -13039,30 +13453,37 @@ unsafe extern "C" fn sched_balance_newidle(this_rq: *mut rq, rf: *mut rq_flags) 
 // Stop searching for tasks to pull if there are
 // now runnable tasks on this rq.
 //
-    if (pulled_task || !continue_balancing)
+    if (pulled_task || !continue_balancing) {
     break;
     }
+    }
     raw_spin_rq_lock(this_rq);
-    if (curr_cost > this_rq.max_idle_balance_cost)
+    if (curr_cost > this_rq.max_idle_balance_cost) {
     this_rq.max_idle_balance_cost = curr_cost;
+    }
 //
 // While browsing the domains, we released the rq lock, a task could
 // have been enqueued in the meantime. Since we're not going idle,
 // pretend we pulled a task.
 //
-    if (this_rq.cfs.h_nr_queued && !pulled_task)
+    if (this_rq.cfs.h_nr_queued && !pulled_task) {
     pulled_task = 1;
+    }
 // If a higher prio class was modified, restart the pick
-    if (rq_modified_above(this_rq, &fair_sched_class))
+    if (rq_modified_above(this_rq, &fair_sched_class)) {
     pulled_task = -1;
-    out:
+    }
+// label;
 // Move the next balance forward
-    if (time_after(this_rq.next_balance, next_balance))
+    if (time_after(this_rq.next_balance, next_balance)) {
     this_rq.next_balance = next_balance;
-    if (pulled_task)
+    }
+    if (pulled_task) {
     this_rq.idle_stamp = 0;
-    else
+    }
+    else {
     nohz_newidle_balance(this_rq);
+    }
     rq_repin_lock(this_rq, rf);
     return pulled_task;
     }
@@ -13076,10 +13497,8 @@ unsafe extern "C" fn sched_balance_newidle(this_rq: *mut rq, rf: *mut rq_flags) 
 //
 #[no_mangle]
 unsafe extern "C" fn sched_balance_softirq() -> __latent_entropy void {
-    static __latent_entropy void sched_balance_softirq(void)
-    {
-    struct rq *this_rq = this_rq();
-    let mut idle: enum cpu_idle_type = this_rq.idle_balance;
+    let mut this_rq = this_rq();
+pub static mut idle: cpu_idle_type = 0;
 //
 // If this CPU has a pending NOHZ_BALANCE_KICK, then do the
 // balancing on behalf of the other idle CPUs whose ticks are
@@ -13088,8 +13507,9 @@ unsafe extern "C" fn sched_balance_softirq() -> __latent_entropy void {
 // load balance only within the local sched_domain hierarchy
 // and abort nohz_idle_balance altogether if we pull some load.
 //
-    if (nohz_idle_balance(this_rq, idle))
+    if (nohz_idle_balance(this_rq, idle)) {
     return;
+    }
 // normal load balance
     sched_balance_update_blocked_averages(this_rq.cpu);
     sched_balance_domains(this_rq, idle);
@@ -13099,29 +13519,25 @@ unsafe extern "C" fn sched_balance_softirq() -> __latent_entropy void {
 //
 #[no_mangle]
 pub unsafe extern "C" fn sched_balance_trigger(rq: *mut rq) {
-    void sched_balance_trigger(struct rq *rq)
-    {
 //
 // Don't need to rebalance while attached to NULL domain or
 // runqueue CPU is not active
 //
-    if (unlikely(on_null_domain(rq) || !cpu_active(cpu_of(rq))))
+    if (unlikely(on_null_domain(rq) || !cpu_active(cpu_of(rq)))) {
     return;
-    if (time_after_eq(jiffies, rq.next_balance))
+    }
+    if (time_after_eq(jiffies, rq.next_balance)) {
     raise_softirq(SCHED_SOFTIRQ);
+    }
     nohz_balancer_kick(rq);
     }
 #[no_mangle]
 unsafe extern "C" fn rq_online_fair(rq: *mut rq) {
-    static void rq_online_fair(struct rq *rq)
-    {
     update_sysctl();
     update_runtime_enabled(rq);
     }
 #[no_mangle]
 unsafe extern "C" fn rq_offline_fair(rq: *mut rq) {
-    static void rq_offline_fair(struct rq *rq)
-    {
     update_sysctl();
 // Ensure any throttled groups are reachable by pick_next_task
     unthrottle_offline_cfs_rqs(rq);
@@ -13129,20 +13545,18 @@ unsafe extern "C" fn rq_offline_fair(rq: *mut rq) {
     clear_tg_offline_cfs_rqs(rq);
     }
 
-    static inline bool
-    __entity_slice_used(struct sched_entity *se, int min_nr_tasks)
-    {
-    let mut rtime: u64 = se.sum_exec_runtime - se.prev_sum_exec_runtime;
-    let mut slice: u64 = se.slice;
+#[no_mangle]
+pub unsafe extern "C" fn __entity_slice_used(se: *mut sched_entity, min_nr_tasks: c_int) -> bool {
+pub static mut rtime: u64 = 0;
+pub static mut slice: u64 = 0;
     return (rtime * min_nr_tasks > slice);
     }
 pub const MIN_NR_TASKS_DURING_FORCEIDLE: c_int = 2;
 #[no_mangle]
 pub unsafe extern "C" fn task_tick_core(rq: *mut rq, curr: *mut task_struct) {
-    static inline void task_tick_core(struct rq *rq, struct task_struct *curr)
-    {
-    if (!sched_core_enabled(rq))
+    if (!sched_core_enabled(rq)) {
     return;
+    }
 //
 // If runqueue has only one task which used up its slice and
 // if the sibling is forced idle, then trigger schedule to
@@ -13158,8 +13572,9 @@ pub unsafe extern "C" fn task_tick_core(rq: *mut rq, curr: *mut task_struct) {
 // if we need to give up the CPU.
 //
     if (rq.core.core_forceidle_count && rq.cfs.h_nr_queued == 1 &&
-    __entity_slice_used(&curr.se, MIN_NR_TASKS_DURING_FORCEIDLE))
+    __entity_slice_used(&curr.se, MIN_NR_TASKS_DURING_FORCEIDLE)) {
     resched_curr(rq);
+    }
     }
 //
 // Consider any infeasible weight scenario. Take for instance two tasks,
@@ -13321,14 +13736,14 @@ pub unsafe extern "C" fn task_tick_core(rq: *mut rq, curr: *mut task_struct) {
 //
 // se_fi_update - Update the cfs_rq->zero_vruntime_fi in a CFS hierarchy if needed.
 //
-    static void se_fi_update(const struct sched_entity *se, unsigned int fi_seq,
-    bool forceidle)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn se_fi_update(se: *mut sched_entity, fi_seq: c_uint, forceidle: bool) {
     for_each_sched_entity(se) {
-    struct cfs_rq *cfs_rq = cfs_rq_of(se);
+    let mut cfs_rq = cfs_rq_of(se);
     if (forceidle) {
-    if (cfs_rq.forceidle_seq == fi_seq)
+    if (cfs_rq.forceidle_seq == fi_seq) {
     break;
+    }
     cfs_rq.forceidle_seq = fi_seq;
     }
     cfs_rq.zero_vruntime_fi = cfs_rq.zero_vruntime;
@@ -13336,23 +13751,21 @@ pub unsafe extern "C" fn task_tick_core(rq: *mut rq, curr: *mut task_struct) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn task_vruntime_update(rq: *mut rq, p: *mut task_struct, in_fi: bool) {
-    void task_vruntime_update(struct rq *rq, struct task_struct *p, bool in_fi)
-    {
-    struct sched_entity *se = &p.se;
-    if (p.sched_class != &fair_sched_class)
+    let mut se = &p.se;
+    if (p.sched_class != &fair_sched_class) {
     return;
+    }
     se_fi_update(se, rq.core.core_forceidle_seq, in_fi);
     }
-    bool cfs_prio_less(const struct task_struct *a, const struct task_struct *b,
-    bool in_fi)
-    {
-    struct rq *rq = task_rq(a);
-    const struct sched_entity *sea = &a.se;
-    const struct sched_entity *seb = &b.se;
-    struct cfs_rq *cfs_rqa;
-    struct cfs_rq *cfs_rqb;
-    s64 delta;
-    WARN_ON_ONCE(task_rq(b).core != rq.core);
+#[no_mangle]
+pub unsafe extern "C" fn cfs_prio_less(a: *mut task_struct, b: *mut task_struct, in_fi: bool) -> bool {
+    let mut rq = task_rq(a);
+    let mut sea = &a.se;
+    let mut seb = &b.se;
+pub static mut cfs_rqa: *mut c_void = core::ptr::null_mut();
+pub static mut cfs_rqb: *mut c_void = core::ptr::null_mut();
+    let mut delta = 0;
+    WARN_ON_ONCE!(task_rq(b).core != rq.core);
     cfs_rqa = &task_rq(a).cfs;
     cfs_rqb = &task_rq(b).cfs;
 //
@@ -13366,9 +13779,7 @@ pub unsafe extern "C" fn task_vruntime_update(rq: *mut rq, p: *mut task_struct, 
     }
 #[no_mangle]
 unsafe extern "C" fn task_is_throttled_fair(p: *mut task_struct, cpu: c_int) -> c_int {
-    static int task_is_throttled_fair(struct task_struct *p, int cpu)
-    {
-    struct cfs_rq *cfs_rq;
+pub static mut cfs_rq: *mut c_void = core::ptr::null_mut();
 
     cfs_rq = tg_cfs_rq(task_group(p), cpu);
 
@@ -13377,7 +13788,10 @@ unsafe extern "C" fn task_is_throttled_fair(p: *mut task_struct, cpu: c_int) -> 
     return throttled_hierarchy(cfs_rq);
     }
 
-    static inline void task_tick_core(struct rq *rq, struct task_struct *curr) {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: task_tick_core
+pub unsafe extern "C" fn task_tick_core_dup(rq: *mut rq, curr: *mut task_struct) {}
 
 //
 // scheduler tick hitting a task of our scheduling class.
@@ -13389,12 +13803,10 @@ unsafe extern "C" fn task_is_throttled_fair(p: *mut task_struct, cpu: c_int) -> 
 //
 #[no_mangle]
 unsafe extern "C" fn task_tick_fair(rq: *mut rq, curr: *mut task_struct, queued: c_int) {
-    static void task_tick_fair(struct rq *rq, struct task_struct *curr, int queued)
-    {
-    struct sched_entity *se = &curr.se;
+    let mut se = &curr.se;
     if (se.on_rq) {
-    let mut weight: c_ulong = NICE_0_LOAD;
-    struct cfs_rq *cfs_rq;
+pub static mut weight: c_ulong = 0;
+pub static mut cfs_rq: *mut c_void = core::ptr::null_mut();
     for_each_sched_entity(se) {
     cfs_rq = cfs_rq_of(se);
     entity_tick(cfs_rq, se, queued);
@@ -13403,10 +13815,12 @@ unsafe extern "C" fn task_tick_fair(rq: *mut rq, curr: *mut task_struct, queued:
     se = &curr.se;
     reweight_eevdf(cfs_rq, se, weight, se.on_rq);
     }
-    if (queued)
+    if (queued) {
     return;
-    if (static_branch_unlikely(&sched_numa_balancing))
+    }
+    if (static_branch_unlikely(&sched_numa_balancing)) {
     task_tick_numa(rq, curr);
+    }
     task_tick_cache(rq, curr);
     update_misfit_status(curr, rq);
     check_update_overutilized_status(task_rq(curr));
@@ -13419,31 +13833,32 @@ unsafe extern "C" fn task_tick_fair(rq: *mut rq, curr: *mut task_struct, queued:
 //
 #[no_mangle]
 unsafe extern "C" fn task_fork_fair(p: *mut task_struct) {
-    static void task_fork_fair(struct task_struct *p)
-    {
     set_task_max_allowed_capacity(p);
     }
 //
 // Priority of the task has changed. Check to see if we preempt
 // the current task.
 //
-    static void
-    prio_changed_fair(struct rq *rq, struct task_struct *p, u64 oldprio)
-    {
-    if (!task_on_rq_queued(p))
+#[no_mangle]
+pub unsafe extern "C" fn prio_changed_fair(rq: *mut rq, p: *mut task_struct, oldprio: u64) {
+    if (!task_on_rq_queued(p)) {
     return;
-    if (p.prio == oldprio)
+    }
+    if (p.prio == oldprio) {
     return;
-    if (rq.cfs.h_nr_queued == 1)
+    }
+    if (rq.cfs.h_nr_queued == 1) {
     return;
+    }
 //
 // Reschedule if we are currently running on this runqueue and
 // our priority decreased, or if we are not currently running on
 // this runqueue and our priority is higher than the current's
 //
     if (task_current_donor(rq, p)) {
-    if (p.prio > oldprio)
+    if (p.prio > oldprio) {
     resched_curr(rq);
+    }
     } else {
     wakeup_preempt(rq, p, 0);
     }
@@ -13455,43 +13870,43 @@ unsafe extern "C" fn task_fork_fair(p: *mut task_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn propagate_entity_cfs_rq(se: *mut sched_entity) {
-    static void propagate_entity_cfs_rq(struct sched_entity *se)
-    {
-    struct cfs_rq *cfs_rq = cfs_rq_of(se);
+    let mut cfs_rq = cfs_rq_of(se);
 //
 // If a task gets attached to this cfs_rq and before being queued,
 // it gets migrated to another CPU due to reasons like affinity
 // change, make sure this cfs_rq stays on leaf cfs_rq list to have
 // that removed load decayed or it can cause faireness problem.
 //
-    if (!cfs_rq_pelt_clock_throttled(cfs_rq))
+    if (!cfs_rq_pelt_clock_throttled(cfs_rq)) {
     list_add_leaf_cfs_rq(cfs_rq);
+    }
 // Start to propagate at parent
     se = se.parent;
     for_each_sched_entity(se) {
     cfs_rq = cfs_rq_of(se);
     update_load_avg(cfs_rq, se, UPDATE_TG);
-    if (!cfs_rq_pelt_clock_throttled(cfs_rq))
+    if (!cfs_rq_pelt_clock_throttled(cfs_rq)) {
     list_add_leaf_cfs_rq(cfs_rq);
+    }
     }
     assert_list_leaf_cfs_rq(rq_of(cfs_rq));
     }
 
-    static void propagate_entity_cfs_rq(struct sched_entity *se) { }
+#[no_mangle]
+pub unsafe extern "C" fn propagate_entity_cfs_rq(se: *mut sched_entity) { }
 
 #[no_mangle]
 unsafe extern "C" fn detach_entity_cfs_rq(se: *mut sched_entity) {
-    static void detach_entity_cfs_rq(struct sched_entity *se)
-    {
-    struct cfs_rq *cfs_rq = cfs_rq_of(se);
+    let mut cfs_rq = cfs_rq_of(se);
 //
 // In case the task sched_avg hasn't been attached:
 // - A forked task which hasn't been woken up by wake_up_new_task().
 // - A task which has been woken up by try_to_wake_up() but is
 // waiting for actually being woken up by sched_ttwu_pending().
 //
-    if (!se.avg.last_update_time)
+    if (!se.avg.last_update_time) {
     return;
+    }
 // Catch up with the cfs_rq and remove our load when we leave
     update_load_avg(cfs_rq, se, 0);
     detach_entity_load_avg(cfs_rq, se);
@@ -13500,9 +13915,7 @@ unsafe extern "C" fn detach_entity_cfs_rq(se: *mut sched_entity) {
     }
 #[no_mangle]
 unsafe extern "C" fn attach_entity_cfs_rq(se: *mut sched_entity) {
-    static void attach_entity_cfs_rq(struct sched_entity *se)
-    {
-    struct cfs_rq *cfs_rq = cfs_rq_of(se);
+    let mut cfs_rq = cfs_rq_of(se);
 // Synchronize entity with its cfs_rq
     update_load_avg(cfs_rq, se, sched_feat(ATTACH_AGE_LOAD) ? 0 : SKIP_AGE_LOAD);
     attach_entity_load_avg(cfs_rq, se);
@@ -13511,36 +13924,27 @@ unsafe extern "C" fn attach_entity_cfs_rq(se: *mut sched_entity) {
     }
 #[no_mangle]
 unsafe extern "C" fn detach_task_cfs_rq(p: *mut task_struct) {
-    static void detach_task_cfs_rq(struct task_struct *p)
-    {
-    struct sched_entity *se = &p.se;
+    let mut se = &p.se;
     detach_entity_cfs_rq(se);
     }
 #[no_mangle]
 unsafe extern "C" fn attach_task_cfs_rq(p: *mut task_struct) {
-    static void attach_task_cfs_rq(struct task_struct *p)
-    {
-    struct sched_entity *se = &p.se;
+    let mut se = &p.se;
     attach_entity_cfs_rq(se);
     }
 #[no_mangle]
 unsafe extern "C" fn switching_from_fair(rq: *mut rq, p: *mut task_struct) {
-    static void switching_from_fair(struct rq *rq, struct task_struct *p)
-    {
-    if (p.se.sched_delayed)
+    if (p.se.sched_delayed) {
     dequeue_task(rq, p, DEQUEUE_SLEEP | DEQUEUE_DELAYED | DEQUEUE_NOCLOCK);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn switched_from_fair(rq: *mut rq, p: *mut task_struct) {
-    static void switched_from_fair(struct rq *rq, struct task_struct *p)
-    {
     detach_task_cfs_rq(p);
     }
 #[no_mangle]
 unsafe extern "C" fn switched_to_fair(rq: *mut rq, p: *mut task_struct) {
-    static void switched_to_fair(struct rq *rq, struct task_struct *p)
-    {
-    WARN_ON_ONCE(p.se.sched_delayed);
+    WARN_ON_ONCE!(p.se.sched_delayed);
     attach_task_cfs_rq(p);
     set_task_max_allowed_capacity(p);
     if (task_on_rq_queued(p)) {
@@ -13549,42 +13953,47 @@ unsafe extern "C" fn switched_to_fair(rq: *mut rq, p: *mut task_struct) {
 // kick off the schedule if running, otherwise just see
 // if we can still preempt the current task.
 //
-    if (task_current_donor(rq, p))
+    if (task_current_donor(rq, p)) {
     resched_curr(rq);
-    else
+    }
+    else {
     wakeup_preempt(rq, p, 0);
+    }
     }
     }
 #[no_mangle]
 unsafe extern "C" fn set_next_task_fair(rq: *mut rq, p: *mut task_struct, first: bool) {
-    static void set_next_task_fair(struct rq *rq, struct task_struct *p, bool first)
-    {
-    struct sched_entity *se = &p.se;
-    let mut throttled: bool = false;
-    struct cfs_rq *cfs_rq = &rq.cfs;
-    let mut weight: c_ulong = NICE_0_LOAD;
-    let mut on_rq: bool = se.on_rq;
+    let mut se = &p.se;
+pub static mut throttled: bool = false;
+    let mut cfs_rq = &rq.cfs;
+pub static mut weight: c_ulong = 0;
+pub static mut on_rq: bool = false;
     clear_buddies(cfs_rq, se);
-    if (on_rq)
+    if (on_rq) {
     __dequeue_entity(cfs_rq, se);
+    }
     for_each_sched_entity(se) {
     cfs_rq = cfs_rq_of(se);
-    if (!IS_ENABLED(CONFIG_FAIR_GROUP_SCHED) ||
-    !first || !cfs_rq.h_curr)
+    if (!IS_ENABLED!(CONFIG_FAIR_GROUP_SCHED) ||
+    !first || !cfs_rq.h_curr) {
     set_next_entity(cfs_rq, se);
+    }
 // ensure bandwidth has been allocated on our new cfs_rq
     throttled |= account_cfs_rq_runtime(cfs_rq, 0);
-    if (on_rq)
+    if (on_rq) {
     weight = __calc_prop_weight(cfs_rq, se, weight);
     }
-    if (throttled)
+    }
+    if (throttled) {
     task_throttle_setup_work(p);
+    }
     se = &p.se;
     cfs_rq.curr = se;
     if (on_rq) {
     reweight_eevdf(cfs_rq, se, weight, se.on_rq);
-    if (first)
+    if (first) {
     set_protect_slice(cfs_rq, se);
+    }
     }
     if (task_on_rq_queued(p)) {
 //
@@ -13593,18 +14002,18 @@ unsafe extern "C" fn set_next_task_fair(rq: *mut rq, p: *mut task_struct, first:
 //
     list_move(&se.group_node, &rq.cfs_tasks);
     }
-    if (!first)
+    if (!first) {
     return;
-    WARN_ON_ONCE(se.sched_delayed);
-    if (hrtick_enabled_fair(rq))
+    }
+    WARN_ON_ONCE!(se.sched_delayed);
+    if (hrtick_enabled_fair(rq)) {
     hrtick_start_fair(rq, p);
+    }
     update_misfit_status(p, rq);
     sched_fair_update_stop_tick(rq, p);
     }
 #[no_mangle]
 pub unsafe extern "C" fn init_cfs_rq(cfs_rq: *mut cfs_rq) {
-    void init_cfs_rq(struct cfs_rq *cfs_rq)
-    {
     cfs_rq.tasks_timeline = RB_ROOT_CACHED;
     cfs_rq.zero_vruntime = (u64)(-(1LL << 20));
     raw_spin_lock_init(&cfs_rq.removed.lock);
@@ -13612,14 +14021,13 @@ pub unsafe extern "C" fn init_cfs_rq(cfs_rq: *mut cfs_rq) {
 
 #[no_mangle]
 unsafe extern "C" fn task_change_group_fair(p: *mut task_struct) {
-    static void task_change_group_fair(struct task_struct *p)
-    {
 //
 // We couldn't detach or attach a forked task which
 // hasn't been woken up by wake_up_new_task().
 //
-    if (READ_ONCE(p.__state) == TASK_NEW)
+    if (READ_ONCE(p.__state) == TASK_NEW) {
     return;
+    }
     detach_task_cfs_rq(p);
 // Tell se's cfs_rq has been changed -- migrated
     p.se.avg.last_update_time = 0;
@@ -13628,45 +14036,41 @@ unsafe extern "C" fn task_change_group_fair(p: *mut task_struct) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn free_fair_sched_group(tg: *mut task_group) {
-    void free_fair_sched_group(struct task_group *tg)
-    {
     free_percpu(tg.cfs_rq);
     }
 #[no_mangle]
 pub unsafe extern "C" fn alloc_fair_sched_group(tg: *mut task_group, parent: *mut task_group) -> c_int {
-    int alloc_fair_sched_group(struct task_group *tg, struct task_group *parent)
-    {
-    struct cfs_tg_state __percpu *state;
-    struct sched_entity *se;
-    struct cfs_rq *cfs_rq;
-    int i;
-    state = alloc_percpu_gfp(struct cfs_tg_state, GFP_KERNEL);
-    if (!state)
-    goto err;
+    let mut state = core::ptr::null_mut();
+pub static mut se: *mut c_void = core::ptr::null_mut();
+pub static mut cfs_rq: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    state = alloc_percpu_gfp(cfs_tg_state, GFP_KERNEL);
+    if (!state) {
+// goto;
+    }
     tg.cfs_rq = &state.cfs_rq;
     tg.shares = NICE_0_LOAD;
     init_cfs_bandwidth(tg_cfs_bandwidth(tg), tg_cfs_bandwidth(parent));
     for_each_possible_cpu(i) {
     cfs_rq = tg_cfs_rq(tg, i);
-    if (!cfs_rq)
-    goto err;
+    if (!cfs_rq) {
+// goto;
+    }
     se = tg_se(tg, i);
     init_cfs_rq(cfs_rq);
     init_tg_cfs_entry(tg, cfs_rq, se, i, tg_se(parent, i));
     init_entity_runnable_average(se);
     }
     return 1;
-    err:
+// label;
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn online_fair_sched_group(tg: *mut task_group) {
-    void online_fair_sched_group(struct task_group *tg)
-    {
-    struct sched_entity *se;
-    struct rq_flags rf;
-    struct rq *rq;
-    int i;
+pub static mut se: *mut c_void = core::ptr::null_mut();
+pub static mut rf: usize = 0;
+pub static mut rq: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
     for_each_possible_cpu(i) {
     rq = cpu_rq(i);
     se = tg_se(tg, i);
@@ -13679,16 +14083,15 @@ pub unsafe extern "C" fn online_fair_sched_group(tg: *mut task_group) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn unregister_fair_sched_group(tg: *mut task_group) {
-    void unregister_fair_sched_group(struct task_group *tg)
-    {
-    int cpu;
+    let mut cpu = 0;
     destroy_cfs_bandwidth(tg_cfs_bandwidth(tg));
     for_each_possible_cpu(cpu) {
-    struct cfs_rq *cfs_rq = tg_cfs_rq(tg, cpu);
-    struct sched_entity *se = tg_se(tg, cpu);
-    struct rq *rq = cpu_rq(cpu);
-    if (se)
+    let mut cfs_rq = tg_cfs_rq(tg, cpu);
+    let mut se = tg_se(tg, cpu);
+    let mut rq = cpu_rq(cpu);
+    if (se) {
     remove_entity_load_avg(se);
+    }
 //
 // Only empty task groups can be destroyed; so we can speculatively
 // check on_list without danger of it being re-added.
@@ -13699,17 +14102,16 @@ pub unsafe extern "C" fn unregister_fair_sched_group(tg: *mut task_group) {
     }
     }
     }
-    void init_tg_cfs_entry(struct task_group *tg, struct cfs_rq *cfs_rq,
-    struct sched_entity *se, int cpu,
-    struct sched_entity *parent)
-    {
-    struct rq *rq = cpu_rq(cpu);
+#[no_mangle]
+pub unsafe extern "C" fn init_tg_cfs_entry(tg: *mut task_group, cfs_rq: *mut cfs_rq, se: *mut sched_entity, cpu: c_int, parent: *mut sched_entity) {
+    let mut rq = cpu_rq(cpu);
     cfs_rq.tg = tg;
     cfs_rq.rq = rq;
     init_cfs_rq_runtime(cfs_rq);
 // se could be NULL for root_task_group
-    if (!se)
+    if (!se) {
     return;
+    }
     if (!parent) {
     se.cfs_rq = &rq.cfs;
     se.depth = 0;
@@ -13722,26 +14124,26 @@ pub unsafe extern "C" fn unregister_fair_sched_group(tg: *mut task_group) {
     update_load_set(&se.load, NICE_0_LOAD);
     se.parent = parent;
     }
-    static DEFINE_MUTEX(shares_mutex);
+pub static mut shares_mutex: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn __sched_group_set_shares(tg: *mut task_group, shares: c_ulong) -> c_int {
-    static int __sched_group_set_shares(struct task_group *tg, unsigned long shares)
-    {
-    int i;
+    let mut i = 0;
     lockdep_assert_held(&shares_mutex);
 //
 // We can't change the weight of the root cgroup.
 //
-    if (is_root_task_group(tg))
+    if (is_root_task_group(tg)) {
     return -EINVAL;
+    }
     shares = clamp(shares, scale_load(MIN_SHARES), scale_load(MAX_SHARES));
-    if (tg.shares == shares)
+    if (tg.shares == shares) {
     return 0;
+    }
     tg.shares = shares;
     for_each_possible_cpu(i) {
-    struct rq *rq = cpu_rq(i);
-    struct sched_entity *se = tg_se(tg, i);
-    struct rq_flags rf;
+    let mut rq = cpu_rq(i);
+    let mut se = tg_se(tg, i);
+pub static mut rf: usize = 0;
 // Propagate contribution to hierarchy
     rq_lock_irqsave(rq, &rf);
     update_rq_clock(rq);
@@ -13755,26 +14157,26 @@ unsafe extern "C" fn __sched_group_set_shares(tg: *mut task_group, shares: c_ulo
     }
 #[no_mangle]
 pub unsafe extern "C" fn sched_group_set_shares(tg: *mut task_group, shares: c_ulong) -> c_int {
-    int sched_group_set_shares(struct task_group *tg, unsigned long shares)
-    {
-    int ret;
+    let mut ret = 0;
     mutex_lock(&shares_mutex);
-    if (tg_is_idle(tg))
+    if (tg_is_idle(tg)) {
     ret = -EINVAL;
-    else
+    }
+    else {
     ret = __sched_group_set_shares(tg, shares);
+    }
     mutex_unlock(&shares_mutex);
     return ret;
     }
 #[no_mangle]
 pub unsafe extern "C" fn sched_group_set_idle(tg: *mut task_group, idle: c_long) -> c_int {
-    int sched_group_set_idle(struct task_group *tg, long idle)
-    {
-    int i;
-    if (tg == &root_task_group)
+    let mut i = 0;
+    if (tg == &root_task_group) {
     return -EINVAL;
-    if (idle < 0 || idle > 1)
+    }
+    if (idle < 0 || idle > 1) {
     return -EINVAL;
+    }
     mutex_lock(&shares_mutex);
     if (tg.idle == idle) {
     mutex_unlock(&shares_mutex);
@@ -13782,53 +14184,58 @@ pub unsafe extern "C" fn sched_group_set_idle(tg: *mut task_group, idle: c_long)
     }
     tg.idle = idle;
     for_each_possible_cpu(i) {
-    struct rq *rq = cpu_rq(i);
-    struct sched_entity *se = tg_se(tg, i);
-    struct cfs_rq *grp_cfs_rq = tg_cfs_rq(tg, i);
-    let mut was_idle: bool = cfs_rq_is_idle(grp_cfs_rq);
-    long idle_task_delta;
-    struct rq_flags rf;
+    let mut rq = cpu_rq(i);
+    let mut se = tg_se(tg, i);
+    let mut grp_cfs_rq = tg_cfs_rq(tg, i);
+pub static mut was_idle: bool = false;
+    let mut idle_task_delta = 0;
+pub static mut rf: usize = 0;
     rq_lock_irqsave(rq, &rf);
     grp_cfs_rq.idle = idle;
-    if (WARN_ON_ONCE(was_idle == cfs_rq_is_idle(grp_cfs_rq)))
-    goto next_cpu;
+    if (WARN_ON_ONCE!(was_idle == cfs_rq_is_idle(grp_cfs_rq))) {
+// goto;
+    }
     idle_task_delta = grp_cfs_rq.h_nr_queued -
     grp_cfs_rq.h_nr_idle;
-    if (!cfs_rq_is_idle(grp_cfs_rq))
+    if (!cfs_rq_is_idle(grp_cfs_rq)) {
     idle_task_delta *= -1;
+    }
     for_each_sched_entity(se) {
-    struct cfs_rq *cfs_rq = cfs_rq_of(se);
-    if (!se.on_rq)
-    break;
-    cfs_rq.h_nr_idle += idle_task_delta;
-// Already accounted at parent level and above.
-    if (cfs_rq_is_idle(cfs_rq))
+    let mut cfs_rq = cfs_rq_of(se);
+    if (!se.on_rq) {
     break;
     }
-    next_cpu:
+    cfs_rq.h_nr_idle += idle_task_delta;
+// Already accounted at parent level and above.
+    if (cfs_rq_is_idle(cfs_rq)) {
+    break;
+    }
+    }
+// label;
     rq_unlock_irqrestore(rq, &rf);
     }
 // Idle groups have minimum weight.
-    if (tg_is_idle(tg))
+    if (tg_is_idle(tg)) {
     __sched_group_set_shares(tg, scale_load(WEIGHT_IDLEPRIO));
-    else
+    }
+    else {
     __sched_group_set_shares(tg, NICE_0_LOAD);
+    }
     mutex_unlock(&shares_mutex);
     return 0;
     }
 
 #[no_mangle]
 unsafe extern "C" fn get_rr_interval_fair(rq: *mut rq, task: *mut task_struct) -> c_uint {
-    static unsigned int get_rr_interval_fair(struct rq *rq, struct task_struct *task)
-    {
-    struct sched_entity *se = &task.se;
-    let mut rr_interval: c_uint = 0;
+    let mut se = &task.se;
+pub static mut rr_interval: c_uint = 0;
 //
 // Time slice is 0 for SCHED_OTHER tasks that are on an otherwise
 // idle runqueue:
 //
-    if (rq.cfs.load.weight)
+    if (rq.cfs.load.weight) {
     rr_interval = NS_TO_JIFFIES(se.slice);
+    }
     return rr_interval;
     }
 //
@@ -13868,22 +14275,20 @@ unsafe extern "C" fn get_rr_interval_fair(rq: *mut rq, task: *mut task_struct) -
     };
 #[no_mangle]
 pub unsafe extern "C" fn print_cfs_stats(m: *mut seq_file, cpu: c_int) {
-    void print_cfs_stats(struct seq_file *m, int cpu)
-    {
-    struct cfs_rq *cfs_rq, *pos;
+    let mut cfs_rq = core::ptr::null_mut();
+    let mut pos = core::ptr::null_mut();
     rcu_read_lock();
-    for_each_leaf_cfs_rq_safe(cpu_rq(cpu), cfs_rq, pos)
+    for_each_leaf_cfs_rq_safe(cpu_rq(cpu), cfs_rq, pos) {
     print_cfs_rq(m, cpu, cfs_rq);
+    }
     rcu_read_unlock();
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn show_numa_stats(p: *mut task_struct, m: *mut seq_file) {
-    void show_numa_stats(struct task_struct *p, struct seq_file *m)
-    {
-    int node;
-    let mut tsf: c_ulong = 0, tpf = 0, gsf = 0, gpf = 0;
-    struct numa_group *ng;
+    let mut node = 0;
+pub static mut tsf: c_ulong = 0;
+pub static mut ng: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     ng = rcu_dereference_all(p.numa_group);
     for_each_online_node(node) {
@@ -13902,9 +14307,7 @@ pub unsafe extern "C" fn show_numa_stats(p: *mut task_struct, m: *mut seq_file) 
 
 #[no_mangle]
 pub unsafe extern "C" fn init_sched_fair_class() -> __init void {
-    __init void init_sched_fair_class(void)
-    {
-    int i;
+    let mut i = 0;
     for_each_possible_cpu(i) {
     zalloc_cpumask_var_node(&per_cpu(load_balance_mask, i), GFP_KERNEL, cpu_to_node(i));
     zalloc_cpumask_var_node(&per_cpu(select_rq_mask,    i), GFP_KERNEL, cpu_to_node(i));
@@ -13920,5 +14323,3 @@ pub unsafe extern "C" fn init_sched_fair_class() -> __init void {
     nohz.next_balance = jiffies;
     nohz.next_blocked = jiffies;
     zalloc_cpumask_var(&nohz.idle_cpus_mask, GFP_NOWAIT);
-
-    }

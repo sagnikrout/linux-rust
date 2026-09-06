@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -60,7 +310,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
     static int sysctl_panic_on_oom;
     static int sysctl_oom_kill_allocating_task;
-    let mut sysctl_oom_dump_tasks: static int = 1;
+pub static mut sysctl_oom_dump_tasks: int = 1;
 //
 // Serializes oom killer invocations (out_of_memory()) from all contexts to
 // prevent from over eager oom killing (e.g. when the oom killer is invoked
@@ -69,13 +319,11 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // oom_killer_disable() relies on this lock to stabilize oom_killer_disabled
 // and mark_oom_victim
 //
-    DEFINE_MUTEX(oom_lock);
+pub static mut oom_lock: usize = 0;
 // Serializes oom_score_adj and oom_score_adj_min updates
-    DEFINE_MUTEX(oom_adj_mutex);
+pub static mut oom_adj_mutex: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn is_memcg_oom(oc: *mut oom_control) -> bool {
-    static inline bool is_memcg_oom(struct oom_control *oc)
-    {
     return oc.memcg != core::ptr::null_mut();
     }
 
@@ -91,12 +339,11 @@ pub unsafe extern "C" fn is_memcg_oom(oc: *mut oom_control) -> bool {
 // This function is assuming oom-killer context and 'current' has triggered
 // the oom-killer.
 //
-    static bool oom_cpuset_eligible(struct task_struct *start,
-    struct oom_control *oc)
-    {
-    struct task_struct *tsk;
-    let mut ret: bool = false;
-    const nodemask_t *mask = oc.nodemask;
+#[no_mangle]
+pub unsafe extern "C" fn oom_cpuset_eligible(start: *mut task_struct, oc: *mut oom_control) -> bool {
+pub static mut tsk: *mut c_void = core::ptr::null_mut();
+pub static mut ret: bool = false;
+    let mut mask = oc.nodemask;
     rcu_read_lock();
     for_each_thread(start, tsk) {
     if (mask) {
@@ -114,8 +361,9 @@ pub unsafe extern "C" fn is_memcg_oom(oc: *mut oom_control) -> bool {
 //
     ret = cpuset_mems_allowed_intersects(current, tsk);
     }
-    if (ret)
+    if (ret) {
     break;
+    }
     }
     rcu_read_unlock();
     return ret;
@@ -123,8 +371,6 @@ pub unsafe extern "C" fn is_memcg_oom(oc: *mut oom_control) -> bool {
 
 #[no_mangle]
 unsafe extern "C" fn oom_cpuset_eligible(tsk: *mut task_struct, oc: *mut oom_control) -> bool {
-    static bool oom_cpuset_eligible(struct task_struct *tsk, struct oom_control *oc)
-    {
     return true;
     }
 
@@ -134,14 +380,15 @@ unsafe extern "C" fn oom_cpuset_eligible(tsk: *mut task_struct, oc: *mut oom_con
 // pointer.  Return p, or any of its subthreads with a valid ->mm, with
 // task_lock() held.
 //
-    struct task_struct *find_lock_task_mm(struct task_struct *p)
-    {
-    struct task_struct *t;
+#[no_mangle]
+pub unsafe extern "C" fn find_lock_task_mm(p: *mut task_struct) -> *mut c_void {
+pub static mut t: *mut c_void = core::ptr::null_mut();
     guard(rcu)();
     for_each_thread(p, t) {
     task_lock(t);
-    if (likely(t.mm))
+    if (likely(t.mm)) {
     return t;
+    }
     task_unlock(t);
     }
     return core::ptr::null_mut();
@@ -152,19 +399,17 @@ unsafe extern "C" fn oom_cpuset_eligible(tsk: *mut task_struct, oc: *mut oom_con
 //
 #[no_mangle]
 pub unsafe extern "C" fn is_sysrq_oom(oc: *mut oom_control) -> bool {
-    static inline bool is_sysrq_oom(struct oom_control *oc)
-    {
     return oc.order == -1;
     }
 // return true if the task is not adequate as candidate victim task.
 #[no_mangle]
 unsafe extern "C" fn oom_unkillable_task(p: *mut task_struct) -> bool {
-    static bool oom_unkillable_task(struct task_struct *p)
-    {
-    if (is_global_init(p))
+    if (is_global_init(p)) {
     return true;
-    if (p.flags & PF_KTHREAD)
+    }
+    if (p.flags & PF_KTHREAD) {
     return true;
+    }
     return false;
     }
 //
@@ -175,9 +420,7 @@ unsafe extern "C" fn oom_unkillable_task(p: *mut task_struct) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn should_dump_unreclaim_slab() -> bool {
-    static bool should_dump_unreclaim_slab(void)
-    {
-    unsigned long nr_lru;
+    let mut nr_lru = 0;
     nr_lru = global_node_page_state(NR_ACTIVE_ANON) +
     global_node_page_state(NR_INACTIVE_ANON) +
     global_node_page_state(NR_ACTIVE_FILE) +
@@ -198,15 +441,15 @@ unsafe extern "C" fn should_dump_unreclaim_slab() -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn oom_badness(p: *mut task_struct, totalpages: c_ulong) -> c_long {
-    long oom_badness(struct task_struct *p, unsigned long totalpages)
-    {
-    long points;
-    long adj;
-    if (oom_unkillable_task(p))
+    let mut points = 0;
+    let mut adj = 0;
+    if (oom_unkillable_task(p)) {
     return LONG_MIN;
+    }
     p = find_lock_task_mm(p);
-    if (!p)
+    if (!p) {
     return LONG_MIN;
+    }
 //
 // Do not even consider tasks which are explicitly marked oom
 // unkillable or have been already oom reaped or the are in
@@ -242,30 +485,31 @@ pub unsafe extern "C" fn oom_badness(p: *mut task_struct, totalpages: c_ulong) -
 //
 #[no_mangle]
 unsafe extern "C" fn constrained_alloc(oc: *mut oom_control) -> enum oom_constraint {
-    static enum oom_constraint constrained_alloc(struct oom_control *oc)
-    {
-    struct zone *zone;
-    struct zoneref *z;
-    let mut highest_zoneidx: enum zone_type = gfp_zone(oc.gfp_mask);
-    let mut cpuset_limited: bool = false;
-    int nid;
+pub static mut zone: *mut c_void = core::ptr::null_mut();
+pub static mut z: *mut c_void = core::ptr::null_mut();
+pub static mut highest_zoneidx: zone_type = 0;
+pub static mut cpuset_limited: bool = false;
+    let mut nid = 0;
     if (is_memcg_oom(oc)) {
     oc.totalpages = mem_cgroup_get_max(oc.memcg) ?: 1;
     return CONSTRAINT_MEMCG;
     }
 // Default to all available memory
     oc.totalpages = totalram_pages() + total_swap_pages;
-    if (!IS_ENABLED(CONFIG_NUMA))
+    if (!IS_ENABLED!(CONFIG_NUMA)) {
     return CONSTRAINT_NONE;
-    if (!oc.zonelist)
+    }
+    if (!oc.zonelist) {
     return CONSTRAINT_NONE;
+    }
 //
 // Reach here only when __GFP_NOFAIL is used. So, we should avoid
 // to kill current.We have to random task kill in this case.
 // Hopefully, CONSTRAINT_THISNODE...but no way to handle it, now.
 //
-    if (oc.gfp_mask & __GFP_THISNODE)
+    if (oc.gfp_mask & __GFP_THISNODE) {
     return CONSTRAINT_NONE;
+    }
 //
 // This is not a __GFP_THISNODE allocation, so a truncated nodemask in
 // the page allocator means a mempolicy is in effect.  Cpuset policy
@@ -274,34 +518,37 @@ unsafe extern "C" fn constrained_alloc(oc: *mut oom_control) -> enum oom_constra
     if (oc.nodemask &&
     !nodes_subset(node_states[N_MEMORY], *oc.nodemask)) {
     oc.totalpages = total_swap_pages;
-    for_each_node_mask(nid, *oc.nodemask)
+    for_each_node_mask(nid, *oc.nodemask) {
     oc.totalpages += node_present_pages(nid);
+    }
     return CONSTRAINT_MEMORY_POLICY;
     }
 // Check this allocation failure is caused by cpuset's wall function
     for_each_zone_zonelist_nodemask(zone, z, oc.zonelist,
-    highest_zoneidx, oc.nodemask)
+    highest_zoneidx, oc.nodemask) {
     if (!cpuset_zone_allowed(zone, oc.gfp_mask))
     cpuset_limited = true;
+    }
     if (cpuset_limited) {
     oc.totalpages = total_swap_pages;
-    for_each_node_mask(nid, cpuset_current_mems_allowed)
+    for_each_node_mask(nid, cpuset_current_mems_allowed) {
     oc.totalpages += node_present_pages(nid);
+    }
     return CONSTRAINT_CPUSET;
     }
     return CONSTRAINT_NONE;
     }
 #[no_mangle]
 unsafe extern "C" fn oom_evaluate_task(task: *mut task_struct, arg: *mut c_void) -> c_int {
-    static int oom_evaluate_task(struct task_struct *task, void *arg)
-    {
-    struct oom_control *oc = arg;
-    long points;
-    if (oom_unkillable_task(task))
-    goto next;
+    let mut oc = arg;
+    let mut points = 0;
+    if (oom_unkillable_task(task)) {
+// goto;
+    }
 // p may not have freeable memory in nodemask
-    if (!is_memcg_oom(oc) && !oom_cpuset_eligible(task, oc))
-    goto next;
+    if (!is_memcg_oom(oc) && !oom_cpuset_eligible(task, oc)) {
+// goto;
+    }
 //
 // This task already has access to memory reserves and is being killed.
 // Don't allow any other task to have access to the reserves unless
@@ -309,9 +556,10 @@ unsafe extern "C" fn oom_evaluate_task(task: *mut task_struct, arg: *mut c_void)
 // any memory is quite low.
 //
     if (!is_sysrq_oom(oc) && tsk_is_oom_victim(task)) {
-    if (mm_flags_test(MMF_OOM_SKIP, task.signal.oom_mm))
-    goto next;
-    goto abort;
+    if (mm_flags_test(MMF_OOM_SKIP, task.signal.oom_mm)) {
+// goto;
+    }
+// goto;
     }
 //
 // If task is allocating a lot of memory and has been marked to be
@@ -319,23 +567,26 @@ unsafe extern "C" fn oom_evaluate_task(task: *mut task_struct, arg: *mut c_void)
 //
     if (oom_task_origin(task)) {
     points = LONG_MAX;
-    goto select;
+// goto;
     }
     points = oom_badness(task, oc.totalpages);
-    if (points == LONG_MIN || points < oc.chosen_points)
-    goto next;
-    select:
-    if (oc.chosen)
+    if (points == LONG_MIN || points < oc.chosen_points) {
+// goto;
+    }
+// label;
+    if (oc.chosen) {
     put_task_struct(oc.chosen);
+    }
     get_task_struct(task);
     oc.chosen = task;
     oc.chosen_points = points;
-    next:
+// label;
     return 0;
-    abort:
-    if (oc.chosen)
+// label;
+    if (oc.chosen) {
     put_task_struct(oc.chosen);
-    oc.chosen = (void *)-1UL;
+    }
+    oc.chosen = -1UL;
     return 1;
     }
 //
@@ -344,31 +595,31 @@ unsafe extern "C" fn oom_evaluate_task(task: *mut task_struct, arg: *mut c_void)
 //
 #[no_mangle]
 unsafe extern "C" fn select_bad_process(oc: *mut oom_control) {
-    static void select_bad_process(struct oom_control *oc)
-    {
     oc.chosen_points = LONG_MIN;
-    if (is_memcg_oom(oc))
+    if (is_memcg_oom(oc)) {
     mem_cgroup_scan_tasks(oc.memcg, oom_evaluate_task, oc);
+    }
     else {
-    struct task_struct *p;
+pub static mut p: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
-    for_each_process(p)
+    for_each_process(p) {
     if (oom_evaluate_task(p, oc))
     break;
+    }
     rcu_read_unlock();
     }
     }
 #[no_mangle]
 unsafe extern "C" fn dump_task(p: *mut task_struct, arg: *mut c_void) -> c_int {
-    static int dump_task(struct task_struct *p, void *arg)
-    {
-    struct oom_control *oc = arg;
-    struct task_struct *task;
-    if (oom_unkillable_task(p))
+    let mut oc = arg;
+pub static mut task: *mut c_void = core::ptr::null_mut();
+    if (oom_unkillable_task(p)) {
     return 0;
+    }
 // p may not have freeable memory in nodemask
-    if (!is_memcg_oom(oc) && !oom_cpuset_eligible(p, oc))
+    if (!is_memcg_oom(oc) && !oom_cpuset_eligible(p, oc)) {
     return 0;
+    }
     task = find_lock_task_mm(p);
     if (!task) {
 //
@@ -377,7 +628,7 @@ unsafe extern "C" fn dump_task(p: *mut task_struct, arg: *mut c_void) -> c_int {
 //
     return 0;
     }
-    pr_info("[%7d] %5d %5d %8lu %8lu %8lu %8lu %9lu %8ld %8lu         %5hd %s\n",
+    pr_info!("[%7d] %5d %5d %8lu %8lu %8lu %8lu %9lu %8ld %8lu         %5hd %s\n",
     task.pid, from_kuid(&init_user_ns, task_uid(task)),
     task.tgid, task.mm.total_vm, get_mm_rss_sum(task.mm),
     get_mm_counter_sum(task.mm, MM_ANONPAGES), get_mm_counter_sum(task.mm, MM_FILEPAGES),
@@ -399,20 +650,20 @@ unsafe extern "C" fn dump_task(p: *mut task_struct, arg: *mut c_void) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn dump_tasks(oc: *mut oom_control) {
-    static void dump_tasks(struct oom_control *oc)
-    {
-    pr_info("Tasks state (memory values in pages):\n");
-    pr_info("[  pid  ]   uid  tgid total_vm      rss rss_anon rss_file rss_shmem pgtables_bytes swapents oom_score_adj name\n");
-    if (is_memcg_oom(oc))
+    pr_info!("Tasks state (memory values in pages):\n");
+    pr_info!("[  pid  ]   uid  tgid total_vm      rss rss_anon rss_file rss_shmem pgtables_bytes swapents oom_score_adj name\n");
+    if (is_memcg_oom(oc)) {
     mem_cgroup_scan_tasks(oc.memcg, dump_task, oc);
+    }
     else {
-    struct task_struct *p;
-    let mut i: c_int = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut i: c_int = 0;
     rcu_read_lock();
     for_each_process(p) {
 // Avoid potential softlockup warning
-    if ((++i & 1023) == 0)
+    if ((++i & 1023) == 0) {
     touch_softlockup_watchdog();
+    }
     dump_task(p, oc);
     }
     rcu_read_unlock();
@@ -420,10 +671,8 @@ unsafe extern "C" fn dump_tasks(oc: *mut oom_control) {
     }
 #[no_mangle]
 unsafe extern "C" fn dump_oom_victim(oc: *mut oom_control, victim: *mut task_struct) {
-    static void dump_oom_victim(struct oom_control *oc, struct task_struct *victim)
-    {
 // one line summary of the oom killer context.
-    pr_info("oom-kill:constraint=%s,nodemask=%*pbl",
+    pr_info!("oom-kill:constraint=%s,nodemask=%*pbl",
     oom_constraint_text[oc.constraint],
     nodemask_pr_args(oc.nodemask));
     cpuset_print_current_mems_allowed();
@@ -433,31 +682,33 @@ unsafe extern "C" fn dump_oom_victim(oc: *mut oom_control, victim: *mut task_str
     }
 #[no_mangle]
 unsafe extern "C" fn dump_header(oc: *mut oom_control) {
-    static void dump_header(struct oom_control *oc)
-    {
-    pr_warn("%s invoked oom-killer: gfp_mask=%#x(%pGg), order=%d, oom_score_adj=%d\n",
+    pr_warn!("%s invoked oom-killer: gfp_mask=%#x(%pGg), order=%d, oom_score_adj=%d\n",
     current.comm, oc.gfp_mask, &oc.gfp_mask, oc.order,
     current.signal.oom_score_adj);
-    if (!IS_ENABLED(CONFIG_COMPACTION) && oc.order)
-    pr_warn("COMPACTION is disabled!!!\n");
+    if (!IS_ENABLED!(CONFIG_COMPACTION) && oc.order) {
+    pr_warn!("COMPACTION is disabled!!!\n");
+    }
     dump_stack();
-    if (is_memcg_oom(oc))
+    if (is_memcg_oom(oc)) {
     mem_cgroup_print_oom_meminfo(oc.memcg);
+    }
     else {
     __show_mem(SHOW_MEM_FILTER_NODES, oc.nodemask, gfp_zone(oc.gfp_mask));
-    if (should_dump_unreclaim_slab())
+    if (should_dump_unreclaim_slab()) {
     dump_unreclaimable_slab();
     }
+    }
     mem_cgroup_show_protected_memory(oc.memcg);
-    if (sysctl_oom_dump_tasks)
+    if (sysctl_oom_dump_tasks) {
     dump_tasks(oc);
+    }
     }
 //
 // Number of OOM victims in flight
 //
-    let mut oom_victims: static atomic_t = ATOMIC_INIT(0);
-    static DECLARE_WAIT_QUEUE_HEAD(oom_victims_wait);
-    static bool oom_killer_disabled __read_mostly;
+pub static mut oom_victims: atomic_t = 0;
+pub static mut oom_victims_wait: usize = 0;
+    static bool oom_killer_disabled ;
 //
 // task->mm can be NULL if the task is the exited group leader.  So to
 // determine whether the task is using a particular mm, we examine all the
@@ -466,13 +717,12 @@ unsafe extern "C" fn dump_header(oc: *mut oom_control) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn process_shares_mm(p: *const task_struct, mm: *const mm_struct) -> bool {
-    bool process_shares_mm(const struct task_struct *p, const struct mm_struct *mm)
-    {
-    const struct task_struct *t;
+pub static mut t: *mut c_void = core::ptr::null_mut();
     for_each_thread(p, t) {
-    const struct mm_struct *t_mm = READ_ONCE(t.mm);
-    if (t_mm)
-    let mut t_mm: return = = mm;
+    let mut t_mm = READ_ONCE(t.mm);
+    if (t_mm) {
+pub static mut t_mm: return = 0;
+    }
     }
     return false;
     }
@@ -481,16 +731,14 @@ pub unsafe extern "C" fn process_shares_mm(p: *const task_struct, mm: *const mm_
 // OOM Reaper kernel thread which tries to reap the memory used by the OOM
 // victim (if that is possible) to help the OOM killer to move on.
 //
-    static struct task_struct *oom_reaper_th;
-    static DECLARE_WAIT_QUEUE_HEAD(oom_reaper_wait);
-    static struct task_struct *oom_reaper_list;
-    static DEFINE_SPINLOCK(oom_reaper_lock);
+pub static mut oom_reaper_th: *mut c_void = core::ptr::null_mut();
+pub static mut oom_reaper_wait: usize = 0;
+pub static mut oom_reaper_list: *mut c_void = core::ptr::null_mut();
+pub static mut oom_reaper_lock: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn __oom_reap_task_mm(mm: *mut mm_struct) -> bool {
-    static bool __oom_reap_task_mm(struct mm_struct *mm)
-    {
-    struct vm_area_struct *vma;
-    let mut ret: bool = true;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+pub static mut ret: bool = true;
     MA_STATE(mas, &mm.mm_mt, ULONG_MAX, ULONG_MAX);
 //
 // Tell all users of get_user/copy_from_user etc... that the content
@@ -506,8 +754,9 @@ unsafe extern "C" fn __oom_reap_task_mm(mm: *mut mm_struct) -> bool {
 // of the address space.
 //
     mas_for_each_rev(&mas, vma, 0) {
-    if (vma.vm_flags & (VM_HUGETLB|VM_PFNMAP))
+    if (vma.vm_flags & (VM_HUGETLB|VM_PFNMAP)) {
     continue;
+    }
 //
 // Only anonymous pages have a good chance to be dropped
 // without additional steps which we cannot afford as we
@@ -519,8 +768,9 @@ unsafe extern "C" fn __oom_reap_task_mm(mm: *mut mm_struct) -> bool {
 // count elevated without a good reason.
 //
     if (vma_is_anonymous(vma) || !(vma.vm_flags & VM_SHARED)) {
-    if (zap_vma_for_reaping(vma))
+    if (zap_vma_for_reaping(vma)) {
     ret = false;
+    }
     }
     }
     return ret;
@@ -533,9 +783,7 @@ unsafe extern "C" fn __oom_reap_task_mm(mm: *mut mm_struct) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn oom_reap_task_mm(tsk: *mut task_struct, mm: *mut mm_struct) -> bool {
-    static bool oom_reap_task_mm(struct task_struct *tsk, struct mm_struct *mm)
-    {
-    let mut ret: bool = true;
+pub static mut ret: bool = true;
     if (!mmap_read_trylock(mm)) {
     trace_skip_task_reaping(tsk.pid);
     return false;
@@ -548,42 +796,43 @@ unsafe extern "C" fn oom_reap_task_mm(tsk: *mut task_struct, mm: *mut mm_struct)
 //
     if (mm_flags_test(MMF_OOM_SKIP, mm)) {
     trace_skip_task_reaping(tsk.pid);
-    goto out_unlock;
+// goto;
     }
     trace_start_task_reaping(tsk.pid);
 // failed to reap part of the address space. Try again later
     ret = __oom_reap_task_mm(mm);
-    if (!ret)
-    goto out_finish;
-    pr_info("oom_reaper: reaped process %d (%s), now anon-rss:%lukB, file-rss:%lukB, shmem-rss:%lukB\n",
+    if (!ret) {
+// goto;
+    }
+    pr_info!("oom_reaper: reaped process %d (%s), now anon-rss:%lukB, file-rss:%lukB, shmem-rss:%lukB\n",
     task_pid_nr(tsk), tsk.comm,
     K(get_mm_counter_sum(mm, MM_ANONPAGES)),
     K(get_mm_counter_sum(mm, MM_FILEPAGES)),
     K(get_mm_counter_sum(mm, MM_SHMEMPAGES)));
-    out_finish:
+// label;
     trace_finish_task_reaping(tsk.pid);
-    out_unlock:
+// label;
     mmap_read_unlock(mm);
     return ret;
     }
 pub const MAX_OOM_REAP_RETRIES: c_int = 10;
 #[no_mangle]
 unsafe extern "C" fn oom_reap_task(tsk: *mut task_struct) {
-    static void oom_reap_task(struct task_struct *tsk)
-    {
-    let mut attempts: c_int = 0;
-    struct mm_struct *mm = tsk.signal.oom_mm;
+pub static mut attempts: c_int = 0;
+    let mut mm = tsk.signal.oom_mm;
 // Retry the mmap_read_trylock(mm) a few times
-    while (attempts++ < MAX_OOM_REAP_RETRIES && !oom_reap_task_mm(tsk, mm))
+    while (attempts++ < MAX_OOM_REAP_RETRIES && !oom_reap_task_mm(tsk, mm)) {
     schedule_timeout_idle(HZ/10);
+    }
     if (attempts <= MAX_OOM_REAP_RETRIES ||
-    mm_flags_test(MMF_OOM_SKIP, mm))
-    goto done;
-    pr_info("oom_reaper: unable to reap pid:%d (%s)\n",
+    mm_flags_test(MMF_OOM_SKIP, mm)) {
+// goto;
+    }
+    pr_info!("oom_reaper: unable to reap pid:%d (%s)\n",
     task_pid_nr(tsk), tsk.comm);
     sched_show_task(tsk);
     debug_show_all_locks();
-    done:
+// label;
     tsk.oom_reaper_list = core::ptr::null_mut();
 //
 // Hide this mm from OOM killer because it has been either reaped or
@@ -595,11 +844,9 @@ unsafe extern "C" fn oom_reap_task(tsk: *mut task_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn oom_reaper(unused: *mut c_void) -> c_int {
-    static int oom_reaper(void *unused)
-    {
     set_freezable();
     while (true) {
-    struct task_struct *tsk = core::ptr::null_mut();
+    let mut tsk = core::ptr::null_mut();
     wait_event_freezable(oom_reaper_wait, oom_reaper_list != core::ptr::null_mut());
     spin_lock_irq(&oom_reaper_lock);
     if (oom_reaper_list != core::ptr::null_mut()) {
@@ -607,19 +854,18 @@ unsafe extern "C" fn oom_reaper(unused: *mut c_void) -> c_int {
     oom_reaper_list = tsk.oom_reaper_list;
     }
     spin_unlock_irq(&oom_reaper_lock);
-    if (tsk)
+    if (tsk) {
     oom_reap_task(tsk);
+    }
     }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn wake_oom_reaper(timer: *mut timer_list) {
-    static void wake_oom_reaper(struct timer_list *timer)
-    {
-    struct task_struct *tsk = container_of(timer, struct task_struct,
+    let mut tsk = container_of!(timer, task_struct,
     oom_reaper_timer);
-    struct mm_struct *mm = tsk.signal.oom_mm;
-    unsigned long flags;
+    let mut mm = tsk.signal.oom_mm;
+    let mut flags = 0;
 // The victim managed to terminate on its own - see exit_mmap
     if (mm_flags_test(MMF_OOM_SKIP, mm)) {
     put_task_struct(tsk);
@@ -643,59 +889,30 @@ unsafe extern "C" fn wake_oom_reaper(timer: *mut timer_list) {
 
 #[no_mangle]
 unsafe extern "C" fn queue_oom_reaper(tsk: *mut task_struct) {
-    static void queue_oom_reaper(struct task_struct *tsk)
-    {
 // mm is already queued?
-    if (mm_flags_test_and_set(MMF_OOM_REAP_QUEUED, tsk.signal.oom_mm))
+    if (mm_flags_test_and_set(MMF_OOM_REAP_QUEUED, tsk.signal.oom_mm)) {
     return;
+    }
     get_task_struct(tsk);
     timer_setup(&tsk.oom_reaper_timer, wake_oom_reaper, 0);
     tsk.oom_reaper_timer.expires = jiffies + OOM_REAPER_DELAY;
     add_timer(&tsk.oom_reaper_timer);
     }
 
-    static const struct ctl_table vm_oom_kill_table[] = {
-    {
-    .procname	= "panic_on_oom",
-    .data		= &sysctl_panic_on_oom,
-    .maxlen		= sizeof(sysctl_panic_on_oom),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec_minmax,
-    .extra1		= SYSCTL_ZERO,
-    .extra2		= SYSCTL_TWO,
-    },
-    {
-    .procname	= "oom_kill_allocating_task",
-    .data		= &sysctl_oom_kill_allocating_task,
-    .maxlen		= sizeof(sysctl_oom_kill_allocating_task),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec,
-    },
-    {
-    .procname	= "oom_dump_tasks",
-    .data		= &sysctl_oom_dump_tasks,
-    .maxlen		= sizeof(sysctl_oom_dump_tasks),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec,
-    },
-    };
+pub static mut ctl_table: usize = 0;
 
 #[no_mangle]
-unsafe extern "C" fn oom_init() -> int __init {
-    static int __init oom_init(void)
-    {
+unsafe extern "C" fn oom_init() -> c_int {
     oom_reaper_th = kthread_run(oom_reaper, core::ptr::null_mut(), "oom_reaper");
 
     register_sysctl_init("vm", vm_oom_kill_table);
 
     return 0;
     }
-    subsys_initcall(oom_init)
+    subsys_initcall!(oom_init)
 
 #[no_mangle]
 pub unsafe extern "C" fn queue_oom_reaper(tsk: *mut task_struct) {
-    static inline void queue_oom_reaper(struct task_struct *tsk)
-    {
     }
 
 //
@@ -710,17 +927,17 @@ pub unsafe extern "C" fn queue_oom_reaper(tsk: *mut task_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn mark_oom_victim(tsk: *mut task_struct) {
-    static void mark_oom_victim(struct task_struct *tsk)
-    {
-    const struct cred *cred;
-    struct mm_struct *mm = tsk.mm;
-    WARN_ON(oom_killer_disabled);
+pub static mut cred: *mut c_void = core::ptr::null_mut();
+    let mut mm = tsk.mm;
+    WARN_ON!(oom_killer_disabled);
 // OOM killer might race with memcg OOM
-    if (test_and_set_tsk_thread_flag(tsk, TIF_MEMDIE))
+    if (test_and_set_tsk_thread_flag(tsk, TIF_MEMDIE)) {
     return;
+    }
 // oom_mm is bound to the signal struct life time.
-    if (!cmpxchg(&tsk.signal.oom_mm, core::ptr::null_mut(), mm))
+    if (!cmpxchg(&tsk.signal.oom_mm, core::ptr::null_mut(), mm)) {
     mmgrab(tsk.signal.oom_mm);
+    }
 //
 // Make sure that the process is woken up from uninterruptible sleep
 // if it is frozen because OOM killer wouldn't be able to free any
@@ -738,21 +955,18 @@ unsafe extern "C" fn mark_oom_victim(tsk: *mut task_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn exit_oom_victim() {
-    void exit_oom_victim(void)
-    {
     clear_thread_flag(TIF_MEMDIE);
-    if (!atomic_dec_return(&oom_victims))
+    if (!atomic_dec_return(&oom_victims)) {
     wake_up_all(&oom_victims_wait);
+    }
     }
 //
 // oom_killer_enable - enable OOM killer
 //
 #[no_mangle]
 pub unsafe extern "C" fn oom_killer_enable() {
-    void oom_killer_enable(void)
-    {
     oom_killer_disabled = false;
-    pr_info("OOM killer enabled.\n");
+    pr_info!("OOM killer enabled.\n");
     }
 //
 // oom_killer_disable - disable OOM killer
@@ -771,15 +985,14 @@ pub unsafe extern "C" fn oom_killer_enable() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn oom_killer_disable(timeout: signed long) -> bool {
-    bool oom_killer_disable(signed long timeout)
-    {
     signed long ret;
 //
 // Make sure to not race with an ongoing OOM killer. Check that the
 // current is not killed (possibly due to sharing the victim's memory).
 //
-    if (mutex_lock_killable(&oom_lock))
+    if (mutex_lock_killable(&oom_lock)) {
     return false;
+    }
     oom_killer_disabled = true;
     mutex_unlock(&oom_lock);
     ret = wait_event_interruptible_timeout(oom_victims_wait,
@@ -788,25 +1001,26 @@ pub unsafe extern "C" fn oom_killer_disable(timeout: signed long) -> bool {
     oom_killer_enable();
     return false;
     }
-    pr_info("OOM killer disabled.\n");
+    pr_info!("OOM killer disabled.\n");
     return true;
     }
 #[no_mangle]
 pub unsafe extern "C" fn __task_will_free_mem(task: *mut task_struct) -> bool {
-    static inline bool __task_will_free_mem(struct task_struct *task)
-    {
-    struct signal_struct *sig = task.signal;
+    let mut sig = task.signal;
 //
 // A coredumping process may sleep for an extended period in
 // coredump_task_exit(), so the oom killer cannot assume that
 // the process will promptly exit and release memory.
 //
-    if (sig.core_state)
+    if (sig.core_state) {
     return false;
-    if (sig.flags & SIGNAL_GROUP_EXIT)
+    }
+    if (sig.flags & SIGNAL_GROUP_EXIT) {
     return true;
-    if (thread_group_empty(task) && (task.flags & PF_EXITING))
+    }
+    if (thread_group_empty(task) && (task.flags & PF_EXITING)) {
     return true;
+    }
     return false;
     }
 //
@@ -818,28 +1032,30 @@ pub unsafe extern "C" fn __task_will_free_mem(task: *mut task_struct) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn task_will_free_mem(task: *mut task_struct) -> bool {
-    static bool task_will_free_mem(struct task_struct *task)
-    {
-    struct mm_struct *mm = task.mm;
-    struct task_struct *p;
-    let mut ret: bool = true;
+    let mut mm = task.mm;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut ret: bool = true;
 //
 // Skip tasks without mm because it might have passed its exit_mm and
 // exit_oom_victim. oom_reaper could have rescued that but do not rely
 // on that for now. We can consider find_lock_task_mm in future.
 //
-    if (!mm)
+    if (!mm) {
     return false;
-    if (!__task_will_free_mem(task))
+    }
+    if (!__task_will_free_mem(task)) {
     return false;
+    }
 //
 // This task has already been drained by the oom reaper so there are
 // only small chances it will free some more
 //
-    if (mm_flags_test(MMF_OOM_SKIP, mm))
+    if (mm_flags_test(MMF_OOM_SKIP, mm)) {
     return false;
-    if (atomic_read(&mm.mm_users) <= 1)
+    }
+    if (atomic_read(&mm.mm_users) <= 1) {
     return true;
+    }
 //
 // Make sure that all tasks which share the mm with the given tasks
 // are dying as well to make sure that a) nobody pins its mm and
@@ -847,27 +1063,28 @@ unsafe extern "C" fn task_will_free_mem(task: *mut task_struct) -> bool {
 //
     rcu_read_lock();
     for_each_process(p) {
-    if (!process_shares_mm(p, mm))
+    if (!process_shares_mm(p, mm)) {
     continue;
-    if (same_thread_group(task, p))
+    }
+    if (same_thread_group(task, p)) {
     continue;
+    }
     ret = __task_will_free_mem(p);
-    if (!ret)
+    if (!ret) {
     break;
+    }
     }
     rcu_read_unlock();
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn __oom_kill_process(victim: *mut task_struct, message: *const c_char) {
-    static void __oom_kill_process(struct task_struct *victim, const char *message)
-    {
-    struct task_struct *p;
-    struct mm_struct *mm;
-    let mut can_oom_reap: bool = true;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut mm: *mut c_void = core::ptr::null_mut();
+pub static mut can_oom_reap: bool = true;
     p = find_lock_task_mm(victim);
     if (!p) {
-    pr_info("%s: OOM victim %d (%s) is already exiting. Skip killing the task\n",
+    pr_info!("%s: OOM victim %d (%s) is already exiting. Skip killing the task\n",
     message, task_pid_nr(victim), victim.comm);
     put_task_struct(victim);
     return;
@@ -889,7 +1106,7 @@ unsafe extern "C" fn __oom_kill_process(victim: *mut task_struct, message: *cons
 //
     do_send_sig_info(SIGKILL, SEND_SIG_PRIV, victim, PIDTYPE_TGID);
     mark_oom_victim(victim);
-    pr_err("%s: Killed process %d (%s) total-vm:%lukB, anon-rss:%lukB, file-rss:%lukB, shmem-rss:%lukB, UID:%u pgtables:%lukB oom_score_adj:%d\n",
+    pr_err!("%s: Killed process %d (%s) total-vm:%lukB, anon-rss:%lukB, file-rss:%lukB, shmem-rss:%lukB, UID:%u pgtables:%lukB oom_score_adj:%d\n",
     message, task_pid_nr(victim), victim.comm, K(mm.total_vm),
     K(get_mm_counter_sum(mm, MM_ANONPAGES)),
     K(get_mm_counter_sum(mm, MM_FILEPAGES)),
@@ -908,14 +1125,16 @@ unsafe extern "C" fn __oom_kill_process(victim: *mut task_struct, message: *cons
 //
     rcu_read_lock();
     for_each_process(p) {
-    if (!process_shares_mm(p, mm))
+    if (!process_shares_mm(p, mm)) {
     continue;
-    if (same_thread_group(p, victim))
+    }
+    if (same_thread_group(p, victim)) {
     continue;
+    }
     if (is_global_init(p)) {
     can_oom_reap = false;
     mm_flags_set(MMF_OOM_SKIP, mm);
-    pr_info("oom killer %d (%s) has mm pinned by %d (%s)\n",
+    pr_info!("oom killer %d (%s) has mm pinned by %d (%s)\n",
     task_pid_nr(victim), victim.comm,
     task_pid_nr(p), p.comm);
     continue;
@@ -924,13 +1143,15 @@ unsafe extern "C" fn __oom_kill_process(victim: *mut task_struct, message: *cons
 // No kthread_use_mm() user needs to read from the userspace so
 // we are ok to reap it.
 //
-    if (unlikely(p.flags & PF_KTHREAD))
+    if (unlikely(p.flags & PF_KTHREAD)) {
     continue;
+    }
     do_send_sig_info(SIGKILL, SEND_SIG_PRIV, p, PIDTYPE_TGID);
     }
     rcu_read_unlock();
-    if (can_oom_reap)
+    if (can_oom_reap) {
     queue_oom_reaper(victim);
+    }
     mmdrop(mm);
     put_task_struct(victim);
     }
@@ -940,8 +1161,6 @@ unsafe extern "C" fn __oom_kill_process(victim: *mut task_struct, message: *cons
 //
 #[no_mangle]
 unsafe extern "C" fn oom_kill_memcg_member(task: *mut task_struct, message: *mut c_void) -> c_int {
-    static int oom_kill_memcg_member(struct task_struct *task, void *message)
-    {
     if (task.signal.oom_score_adj != OOM_SCORE_ADJ_MIN &&
     !is_global_init(task)) {
     get_task_struct(task);
@@ -951,12 +1170,9 @@ unsafe extern "C" fn oom_kill_memcg_member(task: *mut task_struct, message: *mut
     }
 #[no_mangle]
 unsafe extern "C" fn oom_kill_process(oc: *mut oom_control, message: *const c_char) {
-    static void oom_kill_process(struct oom_control *oc, const char *message)
-    {
-    struct task_struct *victim = oc.chosen;
-    struct mem_cgroup *oom_group;
-    static DEFINE_RATELIMIT_STATE(oom_rs, DEFAULT_RATELIMIT_INTERVAL,
-    DEFAULT_RATELIMIT_BURST);
+    let mut victim = oc.chosen;
+pub static mut oom_group: *mut c_void = core::ptr::null_mut();
+pub static mut oom_rs: usize = 0;
 //
 // If the task is already exiting, don't alarm the sysadmin or kill
 // its children or threads, just give it access to memory reserves
@@ -989,7 +1205,7 @@ unsafe extern "C" fn oom_kill_process(oc: *mut oom_control, message: *const c_ch
     memcg_memory_event(oom_group, MEMCG_OOM_GROUP_KILL);
     mem_cgroup_print_oom_group(oom_group);
     mem_cgroup_scan_tasks(oom_group, oom_kill_memcg_member,
-    (void *)message);
+    message);
     mem_cgroup_put(oom_group);
     }
     }
@@ -998,22 +1214,23 @@ unsafe extern "C" fn oom_kill_process(oc: *mut oom_control, message: *const c_ch
 //
 #[no_mangle]
 unsafe extern "C" fn check_panic_on_oom(oc: *mut oom_control) {
-    static void check_panic_on_oom(struct oom_control *oc)
-    {
-    if (likely(!sysctl_panic_on_oom))
+    if (likely(!sysctl_panic_on_oom)) {
     return;
+    }
     if (sysctl_panic_on_oom != 2) {
 //
 // panic_on_oom == 1 only affects CONSTRAINT_NONE, the kernel
 // does not panic for cpuset, mempolicy, or memcg allocation
 // failures.
 //
-    if (oc.constraint != CONSTRAINT_NONE)
+    if (oc.constraint != CONSTRAINT_NONE) {
     return;
     }
+    }
 // Do not panic for oom kills triggered by sysrq
-    if (is_sysrq_oom(oc))
+    if (is_sysrq_oom(oc)) {
     return;
+    }
     dump_header(oc);
     panic("Out of memory: %s panic_on_oom is enabled\n",
     sysctl_panic_on_oom == 2 ? "compulsory" : "system-wide");
@@ -1021,15 +1238,11 @@ unsafe extern "C" fn check_panic_on_oom(oc: *mut oom_control) {
     static BLOCKING_NOTIFIER_HEAD(oom_notify_list);
 #[no_mangle]
 pub unsafe extern "C" fn register_oom_notifier(nb: *mut notifier_block) -> c_int {
-    int register_oom_notifier(struct notifier_block *nb)
-    {
     return blocking_notifier_chain_register(&oom_notify_list, nb);
     }
     EXPORT_SYMBOL_GPL(register_oom_notifier);
 #[no_mangle]
 pub unsafe extern "C" fn unregister_oom_notifier(nb: *mut notifier_block) -> c_int {
-    int unregister_oom_notifier(struct notifier_block *nb)
-    {
     return blocking_notifier_chain_unregister(&oom_notify_list, nb);
     }
     EXPORT_SYMBOL_GPL(unregister_oom_notifier);
@@ -1044,16 +1257,16 @@ pub unsafe extern "C" fn unregister_oom_notifier(nb: *mut notifier_block) -> c_i
 //
 #[no_mangle]
 pub unsafe extern "C" fn out_of_memory(oc: *mut oom_control) -> bool {
-    bool out_of_memory(struct oom_control *oc)
-    {
-    let mut freed: c_ulong = 0;
-    if (oom_killer_disabled)
+pub static mut freed: c_ulong = 0;
+    if (oom_killer_disabled) {
     return false;
+    }
     if (!is_memcg_oom(oc)) {
     blocking_notifier_call_chain(&oom_notify_list, 0, &freed);
-    if (freed > 0 && !is_sysrq_oom(oc))
+    if (freed > 0 && !is_sysrq_oom(oc)) {
 // Got some memory back in the last second.
     return true;
+    }
     }
 //
 // If current has a pending SIGKILL or is exiting, then automatically
@@ -1070,15 +1283,17 @@ pub unsafe extern "C" fn out_of_memory(oc: *mut oom_control) -> bool {
 // But mem_cgroup_oom() has to invoke the OOM killer even
 // if it is a GFP_NOFS allocation.
 //
-    if (!(oc.gfp_mask & __GFP_FS) && !is_memcg_oom(oc))
+    if (!(oc.gfp_mask & __GFP_FS) && !is_memcg_oom(oc)) {
     return true;
+    }
 //
 // Check if there were limitations on the allocation (only relevant for
 // NUMA and memcg) that may require different handling.
 //
     oc.constraint = constrained_alloc(oc);
-    if (oc.constraint != CONSTRAINT_MEMORY_POLICY)
+    if (oc.constraint != CONSTRAINT_MEMORY_POLICY) {
     oc.nodemask = core::ptr::null_mut();
+    }
     check_panic_on_oom(oc);
     if (!is_memcg_oom(oc) && sysctl_oom_kill_allocating_task &&
     current.mm && !oom_unkillable_task(current) &&
@@ -1093,18 +1308,20 @@ pub unsafe extern "C" fn out_of_memory(oc: *mut oom_control) -> bool {
 // Found nothing?!?!
     if (!oc.chosen) {
     dump_header(oc);
-    pr_warn("Out of memory and no killable processes...\n");
+    pr_warn!("Out of memory and no killable processes...\n");
 //
 // If we got here due to an actual allocation at the
 // system level, we cannot survive this and will enter
 // an endless loop in the allocator. Bail out now.
 //
-    if (!is_sysrq_oom(oc) && !is_memcg_oom(oc))
+    if (!is_sysrq_oom(oc) && !is_memcg_oom(oc)) {
     panic("System is deadlocked on memory\n");
     }
-    if (oc.chosen && oc.chosen != (void *)-1UL)
+    }
+    if (oc.chosen && oc.chosen != -1UL) {
     oom_kill_process(oc, !is_memcg_oom(oc) ? "Out of memory" :
     "Memory cgroup out of memory");
+    }
     return !!oc.chosen;
     }
 //
@@ -1115,31 +1332,33 @@ pub unsafe extern "C" fn out_of_memory(oc: *mut oom_control) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn pagefault_out_of_memory() {
-    void pagefault_out_of_memory(void)
-    {
-    static DEFINE_RATELIMIT_STATE(pfoom_rs, DEFAULT_RATELIMIT_INTERVAL,
-    DEFAULT_RATELIMIT_BURST);
-    if (mem_cgroup_oom_synchronize(true))
+pub static mut pfoom_rs: usize = 0;
+    if (mem_cgroup_oom_synchronize(true)) {
     return;
-    if (fatal_signal_pending(current))
-    return;
-    if (__ratelimit(&pfoom_rs))
-    pr_warn("Huh VM_FAULT_OOM leaked out to the #PF handler. Retrying PF\n");
     }
-    SYSCALL_DEFINE2(process_mrelease, int, pidfd, unsigned int, flags)
-    {
+    if (fatal_signal_pending(current)) {
+    return;
+    }
+    if (__ratelimit(&pfoom_rs)) {
+    pr_warn!("Huh VM_FAULT_OOM leaked out to the #PF handler. Retrying PF\n");
+    }
+    }
+#[no_mangle]
+pub unsafe extern "C" fn sys_process_mrelease(pidfd: usize, flags: usize) -> c_long {
 
-    struct mm_struct *mm = core::ptr::null_mut();
-    struct task_struct *task;
-    struct task_struct *p;
-    unsigned int f_flags;
-    let mut reap: bool = false;
-    let mut ret: c_long = 0;
-    if (flags)
+    let mut mm = core::ptr::null_mut();
+pub static mut task: *mut c_void = core::ptr::null_mut();
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    let mut f_flags = 0;
+pub static mut reap: bool = false;
+pub static mut ret: c_long = 0;
+    if (flags) {
     return -EINVAL;
+    }
     task = pidfd_get_task(pidfd, &f_flags);
-    if (IS_ERR(task))
+    if (IS_ERR(task)) {
     return PTR_ERR(task);
+    }
 //
 // Make sure to choose a thread which still has a reference to mm
 // during the group exit
@@ -1147,34 +1366,38 @@ pub unsafe extern "C" fn pagefault_out_of_memory() {
     p = find_lock_task_mm(task);
     if (!p) {
     ret = -ESRCH;
-    goto put_task;
+// goto;
     }
     mm = p.mm;
     mmgrab(mm);
-    if (task_will_free_mem(p))
+    if (task_will_free_mem(p)) {
     reap = true;
+    }
     else {
 // Error only if the work has not been done already
-    if (!mm_flags_test(MMF_OOM_SKIP, mm))
+    if (!mm_flags_test(MMF_OOM_SKIP, mm)) {
     ret = -EINVAL;
     }
+    }
     task_unlock(p);
-    if (!reap)
-    goto drop_mm;
+    if (!reap) {
+// goto;
+    }
     if (mmap_read_lock_killable(mm)) {
     ret = -EINTR;
-    goto drop_mm;
+// goto;
     }
 //
 // Check MMF_OOM_SKIP again under mmap_read_lock protection to ensure
 // possible change in exit_mmap is seen
 //
-    if (!mm_flags_test(MMF_OOM_SKIP, mm) && !__oom_reap_task_mm(mm))
+    if (!mm_flags_test(MMF_OOM_SKIP, mm) && !__oom_reap_task_mm(mm)) {
     ret = -EAGAIN;
+    }
     mmap_read_unlock(mm);
-    drop_mm:
+// label;
     mmdrop(mm);
-    put_task:
+// label;
     put_task_struct(task);
     return ret;
 

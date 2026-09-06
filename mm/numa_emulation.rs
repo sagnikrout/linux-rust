@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -42,60 +292,56 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 
     int emu_nid_to_phys[MAX_NUMNODES];
-    static char *emu_cmdline __initdata;
+pub static mut emu_cmdline: *mut c_void = core::ptr::null_mut();
 #[no_mangle]
-pub unsafe extern "C" fn numa_emu_cmdline(str: *mut c_char) -> int __init {
-    int __init numa_emu_cmdline(char *str)
-    {
+pub unsafe extern "C" fn numa_emu_cmdline(str: *mut c_char) -> c_int {
     emu_cmdline = str;
     return 0;
     }
 #[no_mangle]
-unsafe extern "C" fn emu_find_memblk_by_nid(nid: c_int, mi: *const numa_meminfo) -> int __init {
-    static int __init emu_find_memblk_by_nid(int nid, const struct numa_meminfo *mi)
-    {
-    int i;
-    for (i = 0; i < mi.nr_blks; i++)
+unsafe extern "C" fn emu_find_memblk_by_nid(nid: c_int, mi: *const numa_meminfo) -> c_int {
+    let mut i = 0;
+    for (i = 0; i < mi.nr_blks; i++) {
     if (mi.blk[i].nid == nid)
     return i;
+    }
     return -ENOENT;
     }
 #[no_mangle]
 unsafe extern "C" fn mem_hole_size(start: u64, end: u64) -> u64 __init {
-    static u64 __init mem_hole_size(u64 start, u64 end)
-    {
-    let mut start_pfn: c_ulong = PFN_UP(start);
-    let mut end_pfn: c_ulong = PFN_DOWN(end);
-    if (start_pfn < end_pfn)
+pub static mut start_pfn: c_ulong = 0;
+pub static mut end_pfn: c_ulong = 0;
+    if (start_pfn < end_pfn) {
     return PFN_PHYS(absent_pages_in_range(start_pfn, end_pfn));
+    }
     return 0;
     }
 //
 // Sets up nid to range from @start to @end.  The return value is -errno if
 // something went wrong, 0 otherwise.
 //
-    static int __init emu_setup_memblk(struct numa_meminfo *ei,
-    struct numa_meminfo *pi,
+    static int __init emu_setup_memblk(numa_meminfo *ei, numa_meminfo *pi,
     int nid, int phys_blk, u64 size)
     {
-    struct numa_memblk *eb = &ei.blk[ei.nr_blks];
-    struct numa_memblk *pb = &pi.blk[phys_blk];
+    let mut eb = &ei.blk[ei.nr_blks];
+    let mut pb = &pi.blk[phys_blk];
     if (ei.nr_blks >= NR_NODE_MEMBLKS) {
-    pr_err("NUMA: Too many emulated memblks, failing emulation\n");
+    pr_err!("NUMA: Too many emulated memblks, failing emulation\n");
     return -EINVAL;
     }
-    ei.nr_blks++;
+    ei.nr_blks += 1;
     eb.start = pb.start;
     eb.end = pb.start + size;
     eb.nid = nid;
-    if (emu_nid_to_phys[nid] == NUMA_NO_NODE)
+    if (emu_nid_to_phys[nid] == NUMA_NO_NODE) {
     emu_nid_to_phys[nid] = pb.nid;
+    }
     pb.start += size;
     if (pb.start >= pb.end) {
-    WARN_ON_ONCE(pb.start > pb.end);
+    WARN_ON_ONCE!(pb.start > pb.end);
     numa_remove_memblk_from(phys_blk, pi);
     }
-    printk(KERN_INFO "Faking node %d at [mem %#018Lx-%#018Lx] (%LuMB)\n",
+    printk("Faking node %d at [mem %#018Lx-%#018Lx] (%LuMB)\n",
     nid, eb.start, eb.end - 1, (eb.end - eb.start) / SZ_1M);
     return 0;
     }
@@ -105,19 +351,20 @@ unsafe extern "C" fn mem_hole_size(start: u64, end: u64) -> u64 __init {
 //
 // Returns zero on success or negative on error.
 //
-    static int __init split_nodes_interleave(struct numa_meminfo *ei,
-    struct numa_meminfo *pi,
+    static int __init split_nodes_interleave(numa_meminfo *ei, numa_meminfo *pi,
     u64 addr, u64 max_addr, int nr_nodes)
     {
-    let mut physnode_mask: nodemask_t = numa_nodes_parsed;
-    u64 size;
-    int big;
-    let mut nid: c_int = 0;
-    int i, ret;
-    if (nr_nodes <= 0)
+pub static mut physnode_mask: nodemask_t = 0;
+    let mut size = 0;
+    let mut big = 0;
+pub static mut nid: c_int = 0;
+    let mut i = 0;
+    let mut ret = 0;
+    if (nr_nodes <= 0) {
     return -1;
+    }
     if (nr_nodes > MAX_NUMNODES) {
-    pr_info("numa=fake=%d too large, reducing to %d\n",
+    pr_info!("numa=fake=%d too large, reducing to %d\n",
     nr_nodes, MAX_NUMNODES);
     nr_nodes = MAX_NUMNODES;
     }
@@ -135,7 +382,7 @@ unsafe extern "C" fn mem_hole_size(start: u64, end: u64) -> u64 __init {
     FAKE_NODE_MIN_SIZE;
     size &= FAKE_NODE_MIN_HASH_MASK;
     if (!size) {
-    pr_err("Not enough memory for each node.  "
+    pr_err!("Not enough memory for each node.  "
     "NUMA emulation disabled.\n");
     return -1;
     }
@@ -145,9 +392,9 @@ unsafe extern "C" fn mem_hole_size(start: u64, end: u64) -> u64 __init {
 //
     while (!nodes_empty(physnode_mask)) {
     for_each_node_mask(i, physnode_mask) {
-    let mut dma32_end: u64 = numa_emu_dma_end();
+pub static mut dma32_end: u64 = 0;
     u64 start, limit, end;
-    int phys_blk;
+    let mut phys_blk = 0;
     phys_blk = emu_find_memblk_by_nid(i, pi);
     if (phys_blk < 0) {
     node_clear(i, physnode_mask);
@@ -156,8 +403,9 @@ unsafe extern "C" fn mem_hole_size(start: u64, end: u64) -> u64 __init {
     start = pi.blk[phys_blk].start;
     limit = pi.blk[phys_blk].end;
     end = start + size;
-    if (nid < big)
+    if (nid < big) {
     end += FAKE_NODE_MIN_SIZE;
+    }
 //
 // Continue to add memory to this fake node if its
 // non-reserved memory is less than the per-node size.
@@ -175,20 +423,23 @@ unsafe extern "C" fn mem_hole_size(start: u64, end: u64) -> u64 __init {
 // this one must extend to the boundary.
 //
     if (end < dma32_end && dma32_end - end -
-    mem_hole_size(end, dma32_end) < FAKE_NODE_MIN_SIZE)
+    mem_hole_size(end, dma32_end) < FAKE_NODE_MIN_SIZE) {
     end = dma32_end;
+    }
 //
 // If there won't be enough non-reserved memory for the
 // next node, this one must extend to the end of the
 // physical node.
 //
-    if (limit - end - mem_hole_size(end, limit) < size)
+    if (limit - end - mem_hole_size(end, limit) < size) {
     end = limit;
+    }
     ret = emu_setup_memblk(ei, pi, nid++ % nr_nodes,
     phys_blk,
     min(end, limit) - start);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     }
     }
     return 0;
@@ -199,9 +450,7 @@ unsafe extern "C" fn mem_hole_size(start: u64, end: u64) -> u64 __init {
 //
 #[no_mangle]
 unsafe extern "C" fn find_end_of_node(start: u64, max_addr: u64, size: u64) -> u64 __init {
-    static u64 __init find_end_of_node(u64 start, u64 max_addr, u64 size)
-    {
-    let mut end: u64 = start + size;
+pub static mut end: u64 = 0;
     while (end - start - mem_hole_size(start, end) < size) {
     end += FAKE_NODE_MIN_SIZE;
     if (end > max_addr) {
@@ -213,11 +462,9 @@ unsafe extern "C" fn find_end_of_node(start: u64, max_addr: u64, size: u64) -> u
     }
 #[no_mangle]
 unsafe extern "C" fn uniform_size(max_addr: u64, base: u64, hole: u64, nr_nodes: c_int) -> u64 {
-    static u64 uniform_size(u64 max_addr, u64 base, u64 hole, int nr_nodes)
-    {
-    let mut max_pfn: c_ulong = PHYS_PFN(max_addr);
-    let mut base_pfn: c_ulong = PHYS_PFN(base);
-    let mut hole_pfns: c_ulong = PHYS_PFN(hole);
+pub static mut max_pfn: c_ulong = 0;
+pub static mut base_pfn: c_ulong = 0;
+pub static mut hole_pfns: c_ulong = 0;
     return PFN_PHYS((max_pfn - base_pfn - hole_pfns) / nr_nodes);
     }
 //
@@ -226,17 +473,17 @@ unsafe extern "C" fn uniform_size(max_addr: u64, base: u64, hole: u64, nr_nodes:
 //
 // Returns node ID of the next node on success or negative error code.
 //
-    static int __init split_nodes_size_interleave_uniform(struct numa_meminfo *ei,
-    struct numa_meminfo *pi,
+    static int __init split_nodes_size_interleave_uniform(numa_meminfo *ei, numa_meminfo *pi,
     u64 addr, u64 max_addr, u64 size,
-    int nr_nodes, struct numa_memblk *pblk,
+    int nr_nodes, numa_memblk *pblk,
     int nid)
     {
-    let mut physnode_mask: nodemask_t = numa_nodes_parsed;
+pub static mut physnode_mask: nodemask_t = 0;
     int i, ret, uniform = 0;
-    u64 min_size;
-    if ((!size && !nr_nodes) || (nr_nodes && !pblk))
+    let mut min_size = 0;
+    if ((!size && !nr_nodes) || (nr_nodes && !pblk)) {
     return -1;
+    }
 //
 // In the 'uniform' case split the passed in physical node by
 // nr_nodes, in the non-uniform case, ignore the passed in
@@ -247,8 +494,9 @@ unsafe extern "C" fn uniform_size(max_addr: u64, base: u64, hole: u64, nr_nodes:
 // capacity, i.e. ignore holes. In the non-uniform case account
 // for holes and treat @size as a minimum floor.
 //
-    if (!nr_nodes)
+    if (!nr_nodes) {
     nr_nodes = MAX_NUMNODES;
+    }
     else {
     nodes_clear(physnode_mask);
     node_set(pblk.nid, physnode_mask);
@@ -270,7 +518,7 @@ unsafe extern "C" fn uniform_size(max_addr: u64, base: u64, hole: u64, nr_nodes:
     }
     min_size = ALIGN(max(min_size, FAKE_NODE_MIN_SIZE), FAKE_NODE_MIN_SIZE);
     if (size < min_size) {
-    pr_err("Fake node size %LuMB too small, increasing to %LuMB\n",
+    pr_err!("Fake node size %LuMB too small, increasing to %LuMB\n",
     size / SZ_1M, min_size / SZ_1M);
     size = min_size;
     }
@@ -281,9 +529,9 @@ unsafe extern "C" fn uniform_size(max_addr: u64, base: u64, hole: u64, nr_nodes:
 //
     while (!nodes_empty(physnode_mask)) {
     for_each_node_mask(i, physnode_mask) {
-    let mut dma32_end: u64 = numa_emu_dma_end();
+pub static mut dma32_end: u64 = 0;
     u64 start, limit, end;
-    int phys_blk;
+    let mut phys_blk = 0;
     phys_blk = emu_find_memblk_by_nid(i, pi);
     if (phys_blk < 0) {
     node_clear(i, physnode_mask);
@@ -291,53 +539,56 @@ unsafe extern "C" fn uniform_size(max_addr: u64, base: u64, hole: u64, nr_nodes:
     }
     start = pi.blk[phys_blk].start;
     limit = pi.blk[phys_blk].end;
-    if (uniform)
+    if (uniform) {
     end = start + size;
-    else
+    }
+    else {
     end = find_end_of_node(start, limit, size);
+    }
 //
 // If there won't be at least FAKE_NODE_MIN_SIZE of
 // non-reserved memory in ZONE_DMA32 for the next node,
 // this one must extend to the boundary.
 //
     if (end < dma32_end && dma32_end - end -
-    mem_hole_size(end, dma32_end) < FAKE_NODE_MIN_SIZE)
+    mem_hole_size(end, dma32_end) < FAKE_NODE_MIN_SIZE) {
     end = dma32_end;
+    }
 //
 // If there won't be enough non-reserved memory for the
 // next node, this one must extend to the end of the
 // physical node.
 //
     if ((limit - end - mem_hole_size(end, limit) < size)
-    && !uniform)
+    && !uniform) {
     end = limit;
+    }
     ret = emu_setup_memblk(ei, pi, nid++ % MAX_NUMNODES,
     phys_blk,
     min(end, limit) - start);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     }
     }
     return nid;
     }
-    static int __init split_nodes_size_interleave(struct numa_meminfo *ei,
-    struct numa_meminfo *pi,
+    static int __init split_nodes_size_interleave(numa_meminfo *ei, numa_meminfo *pi,
     u64 addr, u64 max_addr, u64 size)
     {
     return split_nodes_size_interleave_uniform(ei, pi, addr, max_addr, size,
     0, core::ptr::null_mut(), 0);
     }
 #[no_mangle]
-unsafe extern "C" fn setup_emu2phys_nid(dfl_phys_nid: *mut c_int) -> int __init {
-    static int __init setup_emu2phys_nid(int *dfl_phys_nid)
-    {
+unsafe extern "C" fn setup_emu2phys_nid(dfl_phys_nid: *mut c_int) -> c_int {
     int i, max_emu_nid = 0;
 // dfl_phys_nid = NUMA_NO_NODE;
-    for (i = 0; i < ARRAY_SIZE(emu_nid_to_phys); i++) {
+    while (i < ARRAY_SIZE!(emu_nid_to_phys)) {
     if (emu_nid_to_phys[i] != NUMA_NO_NODE) {
     max_emu_nid = i;
-    if (*dfl_phys_nid == NUMA_NO_NODE)
+    if (*dfl_phys_nid == NUMA_NO_NODE) {
 // dfl_phys_nid = emu_nid_to_phys[i];
+    }
     }
     }
     return max_emu_nid;
@@ -370,31 +621,34 @@ unsafe extern "C" fn setup_emu2phys_nid(dfl_phys_nid: *mut c_int) -> int __init 
 // identity mapping and no other modification is made.
 //
 #[no_mangle]
-pub unsafe extern "C" fn numa_emulation(numa_meminfo: *mut numa_meminfo, numa_dist_cnt: c_int) -> void __init {
-    void __init numa_emulation(struct numa_meminfo *numa_meminfo, int numa_dist_cnt)
-    {
+pub unsafe extern "C" fn numa_emulation(numa_meminfo: *mut numa_meminfo, numa_dist_cnt: c_int)  {
     static struct numa_meminfo ei __initdata;
     static struct numa_meminfo pi __initdata;
-    let mut max_addr: u64 = PFN_PHYS(max_pfn);
-    u8 *phys_dist = core::ptr::null_mut();
-    let mut phys_size: usize = numa_dist_cnt * numa_dist_cnt * sizeof(phys_dist[0]);
-    int max_emu_nid, dfl_phys_nid;
-    int i, j, ret;
-    let mut physnode_mask: nodemask_t = numa_nodes_parsed;
-    if (!emu_cmdline)
-    goto no_emu;
-    memset(&ei, 0, sizeof(ei));
+pub static mut max_addr: u64 = 0;
+    let mut phys_dist = core::ptr::null_mut();
+pub static mut phys_size: usize = 0;
+    let mut max_emu_nid = 0;
+    let mut dfl_phys_nid = 0;
+    let mut i = 0;
+    let mut j = 0;
+    let mut ret = 0;
+pub static mut physnode_mask: nodemask_t = 0;
+    if (!emu_cmdline) {
+// goto;
+    }
+    memset(&ei, 0, sizeof!(ei));
     pi = *numa_meminfo;
-    for (i = 0; i < MAX_NUMNODES; i++)
+    for (i = 0; i < MAX_NUMNODES; i++) {
     emu_nid_to_phys[i] = NUMA_NO_NODE;
+    }
 //
 // If the numa=fake command-line contains a 'M' or 'G', it represents
 // the fixed node size.  Otherwise, if it is just a single number N,
 // split the system RAM into N fake nodes.
 //
     if (strchr(emu_cmdline, 'U')) {
-    unsigned long n;
-    let mut nid: c_int = 0, nr_created;
+    let mut n = 0;
+pub static mut nid: c_int = 0;
     n = simple_strtoul(emu_cmdline, &emu_cmdline, 0);
     ret = -1;
     for_each_node_mask(i, physnode_mask) {
@@ -409,17 +663,19 @@ pub unsafe extern "C" fn numa_emulation(numa_meminfo: *mut numa_meminfo, numa_di
     ret = split_nodes_size_interleave_uniform(&ei, &pi,
     pi.blk[0].start, pi.blk[0].end, 0,
     n, &pi.blk[0], nid);
-    if (ret < 0)
+    if (ret < 0) {
     break;
+    }
 //
 // If no memory was found for this physical node,
 // skip the under-allocation check.
 //
-    if (ret == nid)
+    if (ret == nid) {
     continue;
+    }
     nr_created = ret - nid;
     if (nr_created < n) {
-    pr_info("%s: phys: %d only got %d of %ld nodes, failing\n",
+    pr_info!("%s: phys: %d only got %d of %ld nodes, failing\n",
     __func__, i, nr_created, n);
     ret = -1;
     break;
@@ -427,31 +683,34 @@ pub unsafe extern "C" fn numa_emulation(numa_meminfo: *mut numa_meminfo, numa_di
     nid = ret;
     }
     } else if (strchr(emu_cmdline, 'M') || strchr(emu_cmdline, 'G')) {
-    u64 size;
+    let mut size = 0;
     size = memparse(emu_cmdline, &emu_cmdline);
     ret = split_nodes_size_interleave(&ei, &pi, 0, max_addr, size);
     } else {
-    unsigned long n;
+    let mut n = 0;
     n = simple_strtoul(emu_cmdline, &emu_cmdline, 0);
     ret = split_nodes_interleave(&ei, &pi, 0, max_addr, n);
     }
-    if (*emu_cmdline == ':')
-    emu_cmdline++;
-    if (ret < 0)
-    goto no_emu;
+    if (*emu_cmdline == ':') {
+    emu_cmdline += 1;
+    }
+    if (ret < 0) {
+// goto;
+    }
     if (numa_cleanup_meminfo(&ei) < 0) {
-    pr_warn("NUMA: Warning: constructed meminfo invalid, disabling emulation\n");
-    goto no_emu;
+    pr_warn!("NUMA: Warning: constructed meminfo invalid, disabling emulation\n");
+// goto;
     }
 // copy the physical distance table
     if (numa_dist_cnt) {
     phys_dist = memblock_alloc(phys_size, PAGE_SIZE);
     if (!phys_dist) {
-    pr_warn("NUMA: Warning: can't allocate copy of distance table, disabling emulation\n");
-    goto no_emu;
+    pr_warn!("NUMA: Warning: can't allocate copy of distance table, disabling emulation\n");
+// goto;
     }
-    for (i = 0; i < numa_dist_cnt; i++)
+    for (i = 0; i < numa_dist_cnt; i++) {
     for (j = 0; j < numa_dist_cnt; j++)
+    }
     phys_dist[i * numa_dist_cnt + j] =
     node_distance(i, j);
     }
@@ -462,59 +721,70 @@ pub unsafe extern "C" fn numa_emulation(numa_meminfo: *mut numa_meminfo, numa_di
     max_emu_nid = setup_emu2phys_nid(&dfl_phys_nid);
 // Make sure numa_nodes_parsed only contains emulated nodes
     nodes_clear(numa_nodes_parsed);
-    for (i = 0; i < ARRAY_SIZE(ei.blk); i++)
+    for (i = 0; i < ARRAY_SIZE!(ei.blk); i++) {
     if (ei.blk[i].start != ei.blk[i].end &&
     ei.blk[i].nid != NUMA_NO_NODE)
     node_set(ei.blk[i].nid, numa_nodes_parsed);
+    }
 // fix pxm_to_node_map[] and node_to_pxm_map[] to avoid collision
 // with faked numa nodes, particularly during later memory hotplug
 // handling, and also update numa_nodes_parsed accordingly.
 //
     ret = fix_pxm_node_maps(max_emu_nid);
-    if (ret < 0)
-    goto no_emu;
+    if (ret < 0) {
+// goto;
+    }
 // commit
 // numa_meminfo = ei;
     numa_emu_update_cpu_to_node(emu_nid_to_phys, max_emu_nid + 1);
 // make sure all emulated nodes are mapped to a physical node
-    for (i = 0; i < max_emu_nid + 1; i++)
+    for (i = 0; i < max_emu_nid + 1; i++) {
     if (emu_nid_to_phys[i] == NUMA_NO_NODE)
     emu_nid_to_phys[i] = dfl_phys_nid;
+    }
 // transform distance table
     numa_reset_distance();
-    for (i = 0; i < max_emu_nid + 1; i++) {
-    for (j = 0; j < max_emu_nid + 1; j++) {
-    let mut physi: c_int = emu_nid_to_phys[i];
-    let mut physj: c_int = emu_nid_to_phys[j];
-    int dist;
-    if (get_option(&emu_cmdline, &dist) == 2)
+    while (i < max_emu_nid + 1) {
+    while (j < max_emu_nid + 1) {
+pub static mut physi: c_int = 0;
+pub static mut physj: c_int = 0;
+    let mut dist = 0;
+    if (get_option(&emu_cmdline, &dist) == 2) {
     ;
-#[no_mangle]
-pub unsafe extern "C" fn if(numa_dist_cnt: physi >= numa_dist_cnt || physj >=) -> else {
-    else if (physi >= numa_dist_cnt || physj >= numa_dist_cnt)
+    }
+
+    else if (physi >= numa_dist_cnt || physj >= numa_dist_cnt) {
     dist = physi == physj ?
     LOCAL_DISTANCE : REMOTE_DISTANCE;
-    else
+    }
+    else {
     dist = phys_dist[physi * numa_dist_cnt + physj];
+    }
     numa_set_distance(i, j, dist);
     }
     }
-    for (i = 0; i < numa_distance_cnt; i++) {
-    for (j = 0; j < numa_distance_cnt; j++) {
-    int physi, physj;
-    u8 dist;
+    while (i < numa_distance_cnt) {
+    while (j < numa_distance_cnt) {
+    let mut physi = 0;
+    let mut physj = 0;
+    let mut dist = 0;
 // distance between fake nodes is already ok
     if (emu_nid_to_phys[i] != NUMA_NO_NODE &&
-    emu_nid_to_phys[j] != NUMA_NO_NODE)
+    emu_nid_to_phys[j] != NUMA_NO_NODE) {
     continue;
-    if (emu_nid_to_phys[i] != NUMA_NO_NODE)
+    }
+    if (emu_nid_to_phys[i] != NUMA_NO_NODE) {
     physi = emu_nid_to_phys[i];
-    else
+    }
+    else {
     physi = i - max_emu_nid;
-    if (emu_nid_to_phys[j] != NUMA_NO_NODE)
+    }
+    if (emu_nid_to_phys[j] != NUMA_NO_NODE) {
     physj = emu_nid_to_phys[j];
-    else
+    }
+    else {
     physj = j - max_emu_nid;
+    }
     dist = phys_dist[physi * numa_dist_cnt + physj];
     numa_set_distance(i, j, dist);
     }
@@ -522,43 +792,42 @@ pub unsafe extern "C" fn if(numa_dist_cnt: physi >= numa_dist_cnt || physj >=) -
 // free the copied physical distance table
     memblock_free(phys_dist, phys_size);
     return;
-    no_emu:
+// label;
     numa_nodes_parsed = physnode_mask;
 // No emulation.  Build identity emu_nid_to_phys[] for numa_add_cpu()
-    for (i = 0; i < ARRAY_SIZE(emu_nid_to_phys); i++)
+    for (i = 0; i < ARRAY_SIZE!(emu_nid_to_phys); i++) {
     emu_nid_to_phys[i] = i;
+    }
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn numa_add_cpu(cpu: c_uint) {
-    void numa_add_cpu(unsigned int cpu)
-    {
-    int physnid, nid;
+    let mut physnid = 0;
+    let mut nid = 0;
     nid = early_cpu_to_node(cpu);
-    BUG_ON(nid == NUMA_NO_NODE || !node_online(nid));
+    BUG_ON!(nid == NUMA_NO_NODE || !node_online(nid));
     physnid = emu_nid_to_phys[nid];
 //
 // Map the cpu to each emulated node that is allocated on the physical
 // node of the cpu's apic id.
 //
-    for_each_online_node(nid)
+    for_each_online_node(nid) {
     if (emu_nid_to_phys[nid] == physnid)
     cpumask_set_cpu(cpu, node_to_cpumask_map[nid]);
     }
+    }
 #[no_mangle]
 pub unsafe extern "C" fn numa_remove_cpu(cpu: c_uint) {
-    void numa_remove_cpu(unsigned int cpu)
-    {
-    int i;
-    for_each_online_node(i)
+    let mut i = 0;
+    for_each_online_node(i) {
     cpumask_clear_cpu(cpu, node_to_cpumask_map[i]);
+    }
     }
 
 #[no_mangle]
 unsafe extern "C" fn numa_set_cpumask(cpu: c_uint, enable: bool) {
-    static void numa_set_cpumask(unsigned int cpu, bool enable)
-    {
-    int nid, physnid;
+    let mut nid = 0;
+    let mut physnid = 0;
     nid = early_cpu_to_node(cpu);
     if (nid == NUMA_NO_NODE) {
 // early_cpu_to_node() already emits a warning and trace
@@ -566,20 +835,21 @@ unsafe extern "C" fn numa_set_cpumask(cpu: c_uint, enable: bool) {
     }
     physnid = emu_nid_to_phys[nid];
     for_each_online_node(nid) {
-    if (emu_nid_to_phys[nid] != physnid)
+    if (emu_nid_to_phys[nid] != physnid) {
     continue;
+    }
     debug_cpumask_set_cpu(cpu, nid, enable);
     }
     }
 #[no_mangle]
-pub unsafe extern "C" fn numa_add_cpu(cpu: c_uint) {
-    void numa_add_cpu(unsigned int cpu)
-    {
+#[no_mangle]
+// duplicate fn: numa_add_cpu
+pub unsafe extern "C" fn numa_add_cpu_dup(cpu: c_uint) {
     numa_set_cpumask(cpu, true);
     }
 #[no_mangle]
-pub unsafe extern "C" fn numa_remove_cpu(cpu: c_uint) {
-    void numa_remove_cpu(unsigned int cpu)
-    {
+#[no_mangle]
+// duplicate fn: numa_remove_cpu
+pub unsafe extern "C" fn numa_remove_cpu_dup(cpu: c_uint) {
     numa_set_cpumask(cpu, false);
     }

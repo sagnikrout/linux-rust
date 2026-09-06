@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -42,13 +292,11 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // (C) Nadia Yvette Chambers, April 2004
 //
 
-    int movable_gigantic_pages;
+    let mut movable_gigantic_pages = 0;
 
-    static int proc_hugetlb_doulongvec_minmax(const struct ctl_table *table, int write,
-    void *buffer, size_t *length,
-    loff_t *ppos, unsigned long *out)
-    {
-    struct ctl_table dup_table;
+#[no_mangle]
+pub unsafe extern "C" fn proc_hugetlb_doulongvec_minmax(table: *mut ctl_table, write: c_int, buffer: *mut c_void, length: *mut size_t, ppos: *mut loff_t, out: *mut c_ulong) -> c_int {
+pub static mut dup_table: usize = 0;
 //
 // In order to avoid races with __do_proc_doulongvec_minmax(), we
 // can duplicate the @table and alter the duplicate of it.
@@ -57,106 +305,65 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     dup_table.data = out;
     return proc_doulongvec_minmax(&dup_table, write, buffer, length, ppos);
     }
-    static int hugetlb_sysctl_handler_common(bool obey_mempolicy,
-    const struct ctl_table *table, int write,
-    void *buffer, size_t *length, loff_t *ppos)
-    {
-    struct hstate *h = &default_hstate;
-    let mut tmp: c_ulong = h.max_huge_pages;
-    int ret;
-    if (!hugepages_supported())
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_sysctl_handler_common(obey_mempolicy: bool, table: *mut ctl_table, write: c_int, buffer: *mut c_void, length: *mut size_t, ppos: *mut loff_t) -> c_int {
+    let mut h = &default_hstate;
+pub static mut tmp: c_ulong = 0;
+    let mut ret = 0;
+    if (!hugepages_supported()) {
     return -EOPNOTSUPP;
+    }
     ret = proc_hugetlb_doulongvec_minmax(table, write, buffer, length, ppos,
     &tmp);
-    if (ret)
-    goto out;
-    if (write)
+    if (ret) {
+// goto;
+    }
+    if (write) {
     ret = __nr_hugepages_store_common(obey_mempolicy, h,
     NUMA_NO_NODE, tmp, *length);
-    out:
+    }
+// label;
     return ret;
     }
-    static int hugetlb_sysctl_handler(const struct ctl_table *table, int write,
-    void *buffer, size_t *length, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_sysctl_handler(table: *mut ctl_table, write: c_int, buffer: *mut c_void, length: *mut size_t, ppos: *mut loff_t) -> c_int {
     return hugetlb_sysctl_handler_common(false, table, write,
     buffer, length, ppos);
     }
 
-    static int hugetlb_mempolicy_sysctl_handler(const struct ctl_table *table, int write,
-    void *buffer, size_t *length, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_mempolicy_sysctl_handler(table: *mut ctl_table, write: c_int, buffer: *mut c_void, length: *mut size_t, ppos: *mut loff_t) -> c_int {
     return hugetlb_sysctl_handler_common(true, table, write,
     buffer, length, ppos);
     }
 
-    static int hugetlb_overcommit_handler(const struct ctl_table *table, int write,
-    void *buffer, size_t *length, loff_t *ppos)
-    {
-    struct hstate *h = &default_hstate;
-    unsigned long tmp;
-    int ret;
-    if (!hugepages_supported())
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_overcommit_handler(table: *mut ctl_table, write: c_int, buffer: *mut c_void, length: *mut size_t, ppos: *mut loff_t) -> c_int {
+    let mut h = &default_hstate;
+    let mut tmp = 0;
+    let mut ret = 0;
+    if (!hugepages_supported()) {
     return -EOPNOTSUPP;
+    }
     tmp = h.nr_overcommit_huge_pages;
-    if (write && hstate_is_gigantic_no_runtime(h))
+    if (write && hstate_is_gigantic_no_runtime(h)) {
     return -EINVAL;
+    }
     ret = proc_hugetlb_doulongvec_minmax(table, write, buffer, length, ppos,
     &tmp);
-    if (ret)
-    goto out;
+    if (ret) {
+// goto;
+    }
     if (write) {
     spin_lock_irq(&hugetlb_lock);
     h.nr_overcommit_huge_pages = tmp;
     spin_unlock_irq(&hugetlb_lock);
     }
-    out:
+// label;
     return ret;
     }
-    static const struct ctl_table hugetlb_table[] = {
-    {
-    .procname	= "nr_hugepages",
-    .data		= core::ptr::null_mut(),
-    .maxlen		= sizeof(unsigned long),
-    .mode		= 0644,
-    .proc_handler	= hugetlb_sysctl_handler,
-    },
-
-    {
-    .procname       = "nr_hugepages_mempolicy",
-    .data           = core::ptr::null_mut(),
-    .maxlen         = sizeof(unsigned long),
-    .mode           = 0644,
-    .proc_handler   = &hugetlb_mempolicy_sysctl_handler,
-    },
-
-    {
-    .procname	= "hugetlb_shm_group",
-    .data		= &sysctl_hugetlb_shm_group,
-    .maxlen		= sizeof(gid_t),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec,
-    },
-    {
-    .procname	= "nr_overcommit_hugepages",
-    .data		= core::ptr::null_mut(),
-    .maxlen		= sizeof(unsigned long),
-    .mode		= 0644,
-    .proc_handler	= hugetlb_overcommit_handler,
-    },
-
-    {
-    .procname	= "movable_gigantic_pages",
-    .data		= &movable_gigantic_pages,
-    .maxlen		= sizeof(int),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec,
-    },
-
-    };
+pub static mut ctl_table: usize = 0;
 #[no_mangle]
-pub unsafe extern "C" fn hugetlb_sysctl_init() -> void __init {
-    void __init hugetlb_sysctl_init(void)
-    {
+pub unsafe extern "C" fn hugetlb_sysctl_init()  {
     register_sysctl_init("vm", hugetlb_table);
     }

@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -164,7 +414,7 @@ pub struct kyber_ctx_queue {
 //
     pub lock: spinlock_t,
     pub rq_list: [list_head; KYBER_NUM_DOMAINS],
-    pub ____cacheline_aligned_in_smp: },
+}
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct kyber_queue_data {
@@ -175,7 +425,7 @@ pub struct kyber_queue_data {
 // device-wide, limited by these tokens.
 //
     pub domain_tokens: [sbitmap_queue; KYBER_NUM_DOMAINS],
-    pub cpu_latency: *mut kyber_cpu_latency __percpu,
+    pub cpu_latency: *mut kyber_cpu_latency ,
 // Timer for stats aggregation and adjusting domain tokens.
     pub timer: timer_list,
     pub latency_buckets: [c_uint; KYBER_OTHER][2][KYBER_LATENCY_BUCKETS],
@@ -199,73 +449,74 @@ pub struct kyber_hctx_data {
     pub wait_index: [core::sync::atomic::AtomicI32; KYBER_NUM_DOMAINS],
 }
 
-    static int kyber_domain_wake(wait_queue_entry_t *wait, unsigned mode, int flags,
-    void *key);
+// forward_decl: kyber_domain_wake;
 #[no_mangle]
 unsafe extern "C" fn kyber_sched_domain(opf: blk_opf_t) -> c_uint {
-    static unsigned int kyber_sched_domain(blk_opf_t opf)
-    {
-    switch (opf & REQ_OP_MASK) {
-    case REQ_OP_READ:
+    match (opf & REQ_OP_MASK) {
+    REQ_OP_READ => {
     return KYBER_READ;
-    case REQ_OP_WRITE:
+    }
+    REQ_OP_WRITE => {
     return KYBER_WRITE;
-    case REQ_OP_DISCARD:
+    }
+    REQ_OP_DISCARD => {
     return KYBER_DISCARD;
-    default:
+    }
+    _ => {
     return KYBER_OTHER;
     }
     }
-    static void flush_latency_buckets(struct kyber_queue_data *kqd,
-    struct kyber_cpu_latency *cpu_latency,
-    unsigned int sched_domain, unsigned int type)
-    {
-    unsigned int *buckets = kqd.latency_buckets[sched_domain][type];
-    atomic_t *cpu_buckets = cpu_latency.buckets[sched_domain][type];
-    unsigned int bucket;
-    for (bucket = 0; bucket < KYBER_LATENCY_BUCKETS; bucket++)
+    }
+#[no_mangle]
+pub unsafe extern "C" fn flush_latency_buckets(kqd: *mut kyber_queue_data, cpu_latency: *mut kyber_cpu_latency, sched_domain: c_uint, type: c_uint) {
+    let mut buckets = kqd.latency_buckets[sched_domain][type];
+    let mut cpu_buckets = cpu_latency.buckets[sched_domain][type];
+    let mut bucket = 0;
+    for (bucket = 0; bucket < KYBER_LATENCY_BUCKETS; bucket++) {
     buckets[bucket] += atomic_xchg(&cpu_buckets[bucket], 0);
+    }
     }
 //
 // Calculate the histogram bucket with the given percentile rank, or -1 if there
 // aren't enough samples yet.
 //
-    static int calculate_percentile(struct kyber_queue_data *kqd,
-    unsigned int sched_domain, unsigned int type,
-    unsigned int percentile)
-    {
-    unsigned int *buckets = kqd.latency_buckets[sched_domain][type];
+#[no_mangle]
+pub unsafe extern "C" fn calculate_percentile(kqd: *mut kyber_queue_data, sched_domain: c_uint, type: c_uint, percentile: c_uint) -> c_int {
+    let mut buckets = kqd.latency_buckets[sched_domain][type];
     unsigned int bucket, samples = 0, percentile_samples;
-    for (bucket = 0; bucket < KYBER_LATENCY_BUCKETS; bucket++)
+    for (bucket = 0; bucket < KYBER_LATENCY_BUCKETS; bucket++) {
     samples += buckets[bucket];
-    if (!samples)
+    }
+    if (!samples) {
     return -1;
+    }
 //
 // We do the calculation once we have 500 samples or one second passes
 // since the first sample was recorded, whichever comes first.
 //
-    if (!kqd.latency_timeout[sched_domain])
+    if (!kqd.latency_timeout[sched_domain]) {
     kqd.latency_timeout[sched_domain] = max(jiffies + HZ, 1UL);
+    }
     if (samples < 500 &&
     time_is_after_jiffies(kqd.latency_timeout[sched_domain])) {
     return -1;
     }
     kqd.latency_timeout[sched_domain] = 0;
     percentile_samples = DIV_ROUND_UP(samples * percentile, 100);
-    for (bucket = 0; bucket < KYBER_LATENCY_BUCKETS - 1; bucket++) {
-    if (buckets[bucket] >= percentile_samples)
+    while (bucket < KYBER_LATENCY_BUCKETS - 1) {
+    if (buckets[bucket] >= percentile_samples) {
     break;
+    }
     percentile_samples -= buckets[bucket];
     }
-    memset(buckets, 0, sizeof(kqd.latency_buckets[sched_domain][type]));
+    memset(buckets, 0, sizeof!(kqd.latency_buckets[sched_domain][type]));
     trace_kyber_latency(kqd.dev, kyber_domain_names[sched_domain],
     kyber_latency_type_names[type], percentile,
     bucket + 1, 1 << KYBER_LATENCY_SHIFT, samples);
     return bucket;
     }
-    static void kyber_resize_domain(struct kyber_queue_data *kqd,
-    unsigned int sched_domain, unsigned int depth)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn kyber_resize_domain(kqd: *mut kyber_queue_data, sched_domain: c_uint, depth: c_uint) {
     depth = clamp(depth, 1U, kyber_depth[sched_domain]);
     if (depth != kqd.domain_tokens[sched_domain].sb.depth) {
     sbitmap_queue_resize(&kqd.domain_tokens[sched_domain], depth);
@@ -275,17 +526,15 @@ unsafe extern "C" fn kyber_sched_domain(opf: blk_opf_t) -> c_uint {
     }
 #[no_mangle]
 unsafe extern "C" fn kyber_timer_fn(t: *mut timer_list) {
-    static void kyber_timer_fn(struct timer_list *t)
-    {
-    struct kyber_queue_data *kqd = timer_container_of(kqd, t, timer);
-    unsigned int sched_domain;
-    int cpu;
-    let mut bad: bool = false;
+    let mut kqd = timer_container_of(kqd, t, timer);
+    let mut sched_domain = 0;
+    let mut cpu = 0;
+pub static mut bad: bool = false;
 // Sum all of the per-cpu latency histograms.
     for_each_possible_cpu(cpu) {
-    struct kyber_cpu_latency *cpu_latency;
+pub static mut cpu_latency: *mut c_void = core::ptr::null_mut();
     cpu_latency = per_cpu_ptr(kqd.cpu_latency, cpu);
-    for (sched_domain = 0; sched_domain < KYBER_OTHER; sched_domain++) {
+    while (sched_domain < KYBER_OTHER) {
     flush_latency_buckets(kqd, cpu_latency, sched_domain,
     KYBER_TOTAL_LATENCY);
     flush_latency_buckets(kqd, cpu_latency, sched_domain,
@@ -297,21 +546,23 @@ unsafe extern "C" fn kyber_timer_fn(t: *mut timer_list) {
 // congestion in the device. Note that we use the p90; we don't want to
 // be too sensitive to outliers here.
 //
-    for (sched_domain = 0; sched_domain < KYBER_OTHER; sched_domain++) {
-    int p90;
+    while (sched_domain < KYBER_OTHER) {
+    let mut p90 = 0;
     p90 = calculate_percentile(kqd, sched_domain, KYBER_IO_LATENCY,
     90);
-    if (p90 >= KYBER_GOOD_BUCKETS)
+    if (p90 >= KYBER_GOOD_BUCKETS) {
     bad = true;
+    }
     }
 //
 // Adjust the scheduling domain depths. If we determined that there was
 // congestion, we throttle all domains with good latencies. Either way,
 // we ease up on throttling domains with bad latencies.
 //
-    for (sched_domain = 0; sched_domain < KYBER_OTHER; sched_domain++) {
-    unsigned int orig_depth, depth;
-    int p99;
+    while (sched_domain < KYBER_OTHER) {
+    let mut orig_depth = 0;
+    let mut depth = 0;
+    let mut p99 = 0;
     p99 = calculate_percentile(kqd, sched_domain,
     KYBER_TOTAL_LATENCY, 99);
 //
@@ -323,14 +574,16 @@ unsafe extern "C" fn kyber_timer_fn(t: *mut timer_list) {
 // reset it to -1.
 //
     if (bad) {
-    if (p99 < 0)
+    if (p99 < 0) {
     p99 = kqd.domain_p99[sched_domain];
+    }
     kqd.domain_p99[sched_domain] = -1;
     } else if (p99 >= 0) {
     kqd.domain_p99[sched_domain] = p99;
     }
-    if (p99 < 0)
+    if (p99 < 0) {
     continue;
+    }
 //
 // If this domain has bad latency, throttle less. Otherwise,
 // throttle more iff we determined that there is congestion.
@@ -347,55 +600,54 @@ unsafe extern "C" fn kyber_timer_fn(t: *mut timer_list) {
     }
     }
     }
-    static struct kyber_queue_data *kyber_queue_data_alloc(struct request_queue *q)
-    {
-    struct kyber_queue_data *kqd;
-    let mut ret: c_int = -ENOMEM;
-    int i;
-    kqd = kzalloc_node(sizeof(*kqd), GFP_KERNEL, q.node);
-    if (!kqd)
-    goto err;
+#[no_mangle]
+pub unsafe extern "C" fn kyber_queue_data_alloc(q: *mut request_queue) -> *mut c_void {
+pub static mut kqd: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
+    let mut i = 0;
+    kqd = kzalloc_node(sizeof!(*kqd), GFP_KERNEL, q.node);
+    if (!kqd) {
+// goto;
+    }
     kqd.q = q;
     kqd.dev = disk_devt(q.disk);
-    kqd.cpu_latency = alloc_percpu_gfp(struct kyber_cpu_latency,
+    kqd.cpu_latency = alloc_percpu_gfp(kyber_cpu_latency,
     GFP_KERNEL | __GFP_ZERO);
-    if (!kqd.cpu_latency)
-    goto err_kqd;
+    if (!kqd.cpu_latency) {
+// goto;
+    }
     timer_setup(&kqd.timer, kyber_timer_fn, 0);
-    for (i = 0; i < KYBER_NUM_DOMAINS; i++) {
-    WARN_ON(!kyber_depth[i]);
-    WARN_ON(!kyber_batch_size[i]);
+    while (i < KYBER_NUM_DOMAINS) {
+    WARN_ON!(!kyber_depth[i]);
+    WARN_ON!(!kyber_batch_size[i]);
     ret = sbitmap_queue_init_node(&kqd.domain_tokens[i],
     kyber_depth[i], -1, false,
     GFP_KERNEL, q.node);
     if (ret) {
-    while (--i >= 0)
+    while (--i >= 0) {
     sbitmap_queue_free(&kqd.domain_tokens[i]);
-    goto err_buckets;
+    }
+// goto;
     }
     }
-    for (i = 0; i < KYBER_OTHER; i++) {
+    while (i < KYBER_OTHER) {
     kqd.domain_p99[i] = -1;
     kqd.latency_targets[i] = kyber_latency_targets[i];
     }
     return kqd;
-    err_buckets:
+// label;
     free_percpu(kqd.cpu_latency);
-    err_kqd:
+// label;
     kfree(kqd);
-    err:
+// label;
     return ERR_PTR(ret);
     }
 #[no_mangle]
 unsafe extern "C" fn kyber_depth_updated(q: *mut request_queue) {
-    static void kyber_depth_updated(struct request_queue *q)
-    {
     blk_mq_set_min_shallow_depth(q, q.async_depth);
     }
 #[no_mangle]
 unsafe extern "C" fn kyber_init_sched(q: *mut request_queue, eq: *mut elevator_queue) -> c_int {
-    static int kyber_init_sched(struct request_queue *q, struct elevator_queue *eq)
-    {
     blk_stat_enable_accounting(q);
     blk_queue_flag_clear(QUEUE_FLAG_SQ_SCHED, q);
     q.elevator = eq;
@@ -403,71 +655,71 @@ unsafe extern "C" fn kyber_init_sched(q: *mut request_queue, eq: *mut elevator_q
     kyber_depth_updated(q);
     return 0;
     }
-    static void *kyber_alloc_sched_data(struct request_queue *q)
-    {
-    struct kyber_queue_data *kqd;
+#[no_mangle]
+pub unsafe extern "C" fn kyber_alloc_sched_data(q: *mut request_queue) -> *mut c_void {
+pub static mut kqd: *mut c_void = core::ptr::null_mut();
     kqd = kyber_queue_data_alloc(q);
-    if (IS_ERR(kqd))
+    if (IS_ERR(kqd)) {
     return core::ptr::null_mut();
+    }
     return kqd;
     }
 #[no_mangle]
 unsafe extern "C" fn kyber_exit_sched(e: *mut elevator_queue) {
-    static void kyber_exit_sched(struct elevator_queue *e)
-    {
-    struct kyber_queue_data *kqd = e.elevator_data;
+    let mut kqd = e.elevator_data;
     timer_shutdown_sync(&kqd.timer);
     blk_stat_disable_accounting(kqd.q);
     }
 #[no_mangle]
 unsafe extern "C" fn kyber_free_sched_data(elv_data: *mut c_void) {
-    static void kyber_free_sched_data(void *elv_data)
-    {
-    struct kyber_queue_data *kqd = elv_data;
-    int i;
-    if (!kqd)
+    let mut kqd = elv_data;
+    let mut i = 0;
+    if (!kqd) {
     return;
-    for (i = 0; i < KYBER_NUM_DOMAINS; i++)
+    }
+    for (i = 0; i < KYBER_NUM_DOMAINS; i++) {
     sbitmap_queue_free(&kqd.domain_tokens[i]);
+    }
     free_percpu(kqd.cpu_latency);
     kfree(kqd);
     }
 #[no_mangle]
 unsafe extern "C" fn kyber_ctx_queue_init(kcq: *mut kyber_ctx_queue) {
-    static void kyber_ctx_queue_init(struct kyber_ctx_queue *kcq)
-    {
-    unsigned int i;
+    let mut i = 0;
     spin_lock_init(&kcq.lock);
-    for (i = 0; i < KYBER_NUM_DOMAINS; i++)
+    for (i = 0; i < KYBER_NUM_DOMAINS; i++) {
     INIT_LIST_HEAD(&kcq.rq_list[i]);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn kyber_init_hctx(hctx: *mut blk_mq_hw_ctx, hctx_idx: c_uint) -> c_int {
-    static int kyber_init_hctx(struct blk_mq_hw_ctx *hctx, unsigned int hctx_idx)
-    {
-    struct kyber_hctx_data *khd;
-    int i;
-    khd = kmalloc_node(sizeof(*khd), GFP_KERNEL, hctx.numa_node);
-    if (!khd)
+pub static mut khd: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    khd = kmalloc_node(sizeof!(*khd), GFP_KERNEL, hctx.numa_node);
+    if (!khd) {
     return -ENOMEM;
+    }
     khd.kcqs = kmalloc_array_node(hctx.nr_ctx,
-    sizeof(struct kyber_ctx_queue),
+    sizeof!(kyber_ctx_queue),
     GFP_KERNEL, hctx.numa_node);
-    if (!khd.kcqs)
-    goto err_khd;
-    for (i = 0; i < hctx.nr_ctx; i++)
+    if (!khd.kcqs) {
+// goto;
+    }
+    for (i = 0; i < hctx.nr_ctx; i++) {
     kyber_ctx_queue_init(&khd.kcqs[i]);
-    for (i = 0; i < KYBER_NUM_DOMAINS; i++) {
+    }
+    while (i < KYBER_NUM_DOMAINS) {
     if (sbitmap_init_node(&khd.kcq_map[i], hctx.nr_ctx,
     ilog2(8), GFP_KERNEL, hctx.numa_node,
     false, false)) {
-    while (--i >= 0)
+    while (--i >= 0) {
     sbitmap_free(&khd.kcq_map[i]);
-    goto err_kcqs;
+    }
+// goto;
     }
     }
     spin_lock_init(&khd.lock);
-    for (i = 0; i < KYBER_NUM_DOMAINS; i++) {
+    while (i < KYBER_NUM_DOMAINS) {
     INIT_LIST_HEAD(&khd.rqs[i]);
     khd.domain_wait[i].sbq = core::ptr::null_mut();
     init_waitqueue_func_entry(&khd.domain_wait[i].wait,
@@ -480,40 +732,34 @@ unsafe extern "C" fn kyber_init_hctx(hctx: *mut blk_mq_hw_ctx, hctx_idx: c_uint)
     khd.batching = 0;
     hctx.sched_data = khd;
     return 0;
-    err_kcqs:
+// label;
     kfree(khd.kcqs);
-    err_khd:
+// label;
     kfree(khd);
     return -ENOMEM;
     }
 #[no_mangle]
 unsafe extern "C" fn kyber_exit_hctx(hctx: *mut blk_mq_hw_ctx, hctx_idx: c_uint) {
-    static void kyber_exit_hctx(struct blk_mq_hw_ctx *hctx, unsigned int hctx_idx)
-    {
-    struct kyber_hctx_data *khd = hctx.sched_data;
-    int i;
-    for (i = 0; i < KYBER_NUM_DOMAINS; i++)
+    let mut khd = hctx.sched_data;
+    let mut i = 0;
+    for (i = 0; i < KYBER_NUM_DOMAINS; i++) {
     sbitmap_free(&khd.kcq_map[i]);
+    }
     kfree(khd.kcqs);
     kfree(hctx.sched_data);
     }
 #[no_mangle]
 unsafe extern "C" fn rq_get_domain_token(rq: *mut request) -> c_int {
-    static int rq_get_domain_token(struct request *rq)
-    {
     return (long)rq.elv.priv[0];
     }
 #[no_mangle]
 unsafe extern "C" fn rq_set_domain_token(rq: *mut request, token: c_int) {
-    static void rq_set_domain_token(struct request *rq, int token)
-    {
-    rq.elv.priv[0] = (void *)(long)token;
+    rq.elv.priv[0] = (long)token;
     }
-    static void rq_clear_domain_token(struct kyber_queue_data *kqd,
-    struct request *rq)
-    {
-    unsigned int sched_domain;
-    int nr;
+#[no_mangle]
+pub unsafe extern "C" fn rq_clear_domain_token(kqd: *mut kyber_queue_data, rq: *mut request) {
+    let mut sched_domain = 0;
+    let mut nr = 0;
     nr = rq_get_domain_token(rq);
     if (nr != -1) {
     sched_domain = kyber_sched_domain(rq.cmd_flags);
@@ -523,21 +769,19 @@ unsafe extern "C" fn rq_set_domain_token(rq: *mut request, token: c_int) {
     }
 #[no_mangle]
 unsafe extern "C" fn kyber_limit_depth(opf: blk_opf_t, data: *mut blk_mq_alloc_data) {
-    static void kyber_limit_depth(blk_opf_t opf, struct blk_mq_alloc_data *data)
-    {
-    if (!blk_mq_is_sync_read(opf))
+    if (!blk_mq_is_sync_read(opf)) {
     data.shallow_depth = data.q.async_depth;
     }
-    static bool kyber_bio_merge(struct request_queue *q, struct bio *bio,
-    unsigned int nr_segs)
-    {
-    struct blk_mq_ctx *ctx = blk_mq_get_ctx(q);
-    struct blk_mq_hw_ctx *hctx = blk_mq_map_queue(bio.bi_opf, ctx);
-    struct kyber_hctx_data *khd = hctx.sched_data;
-    struct kyber_ctx_queue *kcq = &khd.kcqs[ctx.index_hw[hctx.type]];
-    let mut sched_domain: c_uint = kyber_sched_domain(bio.bi_opf);
-    struct list_head *rq_list = &kcq.rq_list[sched_domain];
-    bool merged;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn kyber_bio_merge(q: *mut request_queue, bio: *mut bio, nr_segs: c_uint) -> bool {
+    let mut ctx = blk_mq_get_ctx(q);
+    let mut hctx = blk_mq_map_queue(bio.bi_opf, ctx);
+    let mut khd = hctx.sched_data;
+    let mut kcq = &khd.kcqs[ctx.index_hw[hctx.type]];
+pub static mut sched_domain: c_uint = 0;
+    let mut rq_list = &kcq.rq_list[sched_domain];
+    let mut merged = 0;
     spin_lock(&kcq.lock);
     merged = blk_bio_list_merge(hctx.queue, rq_list, bio, nr_segs);
     spin_unlock(&kcq.lock);
@@ -545,26 +789,25 @@ unsafe extern "C" fn kyber_limit_depth(opf: blk_opf_t, data: *mut blk_mq_alloc_d
     }
 #[no_mangle]
 unsafe extern "C" fn kyber_prepare_request(rq: *mut request) {
-    static void kyber_prepare_request(struct request *rq)
-    {
     rq_set_domain_token(rq, -1);
     }
-    static void kyber_insert_requests(struct blk_mq_hw_ctx *hctx,
-    struct list_head *rq_list,
-    blk_insert_t flags)
-    {
-    struct kyber_hctx_data *khd = hctx.sched_data;
-    struct request *rq, *next;
+#[no_mangle]
+pub unsafe extern "C" fn kyber_insert_requests(hctx: *mut blk_mq_hw_ctx, rq_list: *mut list_head, flags: blk_insert_t) {
+    let mut khd = hctx.sched_data;
+    let mut rq = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
     list_for_each_entry_safe(rq, next, rq_list, queuelist) {
-    let mut sched_domain: c_uint = kyber_sched_domain(rq.cmd_flags);
-    struct kyber_ctx_queue *kcq = &khd.kcqs[rq.mq_ctx.index_hw[hctx.type]];
-    struct list_head *head = &kcq.rq_list[sched_domain];
+pub static mut sched_domain: c_uint = 0;
+    let mut kcq = &khd.kcqs[rq.mq_ctx.index_hw[hctx.type]];
+    let mut head = &kcq.rq_list[sched_domain];
     spin_lock(&kcq.lock);
     trace_block_rq_insert(rq);
-    if (flags & BLK_MQ_INSERT_AT_HEAD)
+    if (flags & BLK_MQ_INSERT_AT_HEAD) {
     list_move(&rq.queuelist, head);
-    else
+    }
+    else {
     list_move_tail(&rq.queuelist, head);
+    }
     sbitmap_set_bit(&khd.kcq_map[sched_domain],
     rq.mq_ctx.index_hw[hctx.type]);
     spin_unlock(&kcq.lock);
@@ -572,17 +815,13 @@ unsafe extern "C" fn kyber_prepare_request(rq: *mut request) {
     }
 #[no_mangle]
 unsafe extern "C" fn kyber_finish_request(rq: *mut request) {
-    static void kyber_finish_request(struct request *rq)
-    {
-    struct kyber_queue_data *kqd = rq.q.elevator.elevator_data;
+    let mut kqd = rq.q.elevator.elevator_data;
     rq_clear_domain_token(kqd, rq);
     }
-    static void add_latency_sample(struct kyber_cpu_latency *cpu_latency,
-    unsigned int sched_domain, unsigned int type,
-    u64 target, u64 latency)
-    {
-    unsigned int bucket;
-    u64 divisor;
+#[no_mangle]
+pub unsafe extern "C" fn add_latency_sample(cpu_latency: *mut kyber_cpu_latency, sched_domain: c_uint, type: c_uint, target: u64, latency: u64) {
+    let mut bucket = 0;
+    let mut divisor = 0;
     if (latency > 0) {
     divisor = max_t(u64, target >> KYBER_LATENCY_SHIFT, 1);
     bucket = min_t(unsigned int, div64_u64(latency - 1, divisor),
@@ -594,15 +833,14 @@ unsafe extern "C" fn kyber_finish_request(rq: *mut request) {
     }
 #[no_mangle]
 unsafe extern "C" fn kyber_completed_request(rq: *mut request, now: u64) {
-    static void kyber_completed_request(struct request *rq, u64 now)
-    {
-    struct kyber_queue_data *kqd = rq.q.elevator.elevator_data;
-    struct kyber_cpu_latency *cpu_latency;
-    unsigned int sched_domain;
-    u64 target;
+    let mut kqd = rq.q.elevator.elevator_data;
+pub static mut cpu_latency: *mut c_void = core::ptr::null_mut();
+    let mut sched_domain = 0;
+    let mut target = 0;
     sched_domain = kyber_sched_domain(rq.cmd_flags);
-    if (sched_domain == KYBER_OTHER)
+    if (sched_domain == KYBER_OTHER) {
     return;
+    }
     cpu_latency = get_cpu_ptr(kqd.cpu_latency);
     target = kqd.latency_targets[sched_domain];
     add_latency_sample(cpu_latency, sched_domain, KYBER_TOTAL_LATENCY,
@@ -622,10 +860,8 @@ pub struct flush_kcq_data {
 
 #[no_mangle]
 unsafe extern "C" fn flush_busy_kcq(sb: *mut sbitmap, bitnr: c_uint, data: *mut c_void) -> bool {
-    static bool flush_busy_kcq(struct sbitmap *sb, unsigned int bitnr, void *data)
-    {
-    struct flush_kcq_data *flush_data = data;
-    struct kyber_ctx_queue *kcq = &flush_data.khd.kcqs[bitnr];
+    let mut flush_data = data;
+    let mut kcq = &flush_data.khd.kcqs[bitnr];
     spin_lock(&kcq.lock);
     list_splice_tail_init(&kcq.rq_list[flush_data.sched_domain],
     flush_data.list);
@@ -633,36 +869,27 @@ unsafe extern "C" fn flush_busy_kcq(sb: *mut sbitmap, bitnr: c_uint, data: *mut 
     spin_unlock(&kcq.lock);
     return true;
     }
-    static void kyber_flush_busy_kcqs(struct kyber_hctx_data *khd,
-    unsigned int sched_domain,
-    struct list_head *list)
-    {
-    struct flush_kcq_data data = {
-    .khd = khd,
-    .sched_domain = sched_domain,
-    .list = list,
-    };
+#[no_mangle]
+pub unsafe extern "C" fn kyber_flush_busy_kcqs(khd: *mut kyber_hctx_data, sched_domain: c_uint, list: *mut list_head) {
+pub static mut flush_kcq_data: usize = 0;
     sbitmap_for_each_set(&khd.kcq_map[sched_domain],
     flush_busy_kcq, &data);
     }
-    static int kyber_domain_wake(wait_queue_entry_t *wqe, unsigned mode, int flags,
-    void *key)
-    {
-    struct blk_mq_hw_ctx *hctx = READ_ONCE(wqe.private);
-    struct sbq_wait *wait = container_of(wqe, struct sbq_wait, wait);
+#[no_mangle]
+pub unsafe extern "C" fn kyber_domain_wake(wqe: *mut wait_queue_entry_t, mode: c_uint, flags: c_int, key: *mut c_void) -> c_int {
+    let mut hctx = READ_ONCE(wqe.private);
+    let mut wait = container_of!(wqe, sbq_wait, wait);
     sbitmap_del_wait_queue(wait);
     blk_mq_run_hw_queue(hctx, true);
     return 1;
     }
-    static int kyber_get_domain_token(struct kyber_queue_data *kqd,
-    struct kyber_hctx_data *khd,
-    struct blk_mq_hw_ctx *hctx)
-    {
-    let mut sched_domain: c_uint = khd.cur_domain;
-    struct sbitmap_queue *domain_tokens = &kqd.domain_tokens[sched_domain];
-    struct sbq_wait *wait = &khd.domain_wait[sched_domain];
-    struct sbq_wait_state *ws;
-    int nr;
+#[no_mangle]
+pub unsafe extern "C" fn kyber_get_domain_token(kqd: *mut kyber_queue_data, khd: *mut kyber_hctx_data, hctx: *mut blk_mq_hw_ctx) -> c_int {
+pub static mut sched_domain: c_uint = 0;
+    let mut domain_tokens = &kqd.domain_tokens[sched_domain];
+    let mut wait = &khd.domain_wait[sched_domain];
+pub static mut ws: *mut c_void = core::ptr::null_mut();
+    let mut nr = 0;
     nr = __sbitmap_queue_get(domain_tokens);
 //
 // If we failed to get a domain token, make sure the hardware queue is
@@ -695,14 +922,11 @@ unsafe extern "C" fn flush_busy_kcq(sb: *mut sbitmap, bitnr: c_uint, data: *mut 
     }
     return nr;
     }
-    static struct request *
-    kyber_dispatch_cur_domain(struct kyber_queue_data *kqd,
-    struct kyber_hctx_data *khd,
-    struct blk_mq_hw_ctx *hctx)
-    {
-    struct list_head *rqs;
-    struct request *rq;
-    int nr;
+#[no_mangle]
+pub unsafe extern "C" fn kyber_dispatch_cur_domain(kqd: *mut kyber_queue_data, khd: *mut kyber_hctx_data, hctx: *mut blk_mq_hw_ctx) -> *mut c_void {
+pub static mut rqs: *mut c_void = core::ptr::null_mut();
+pub static mut rq: *mut c_void = core::ptr::null_mut();
+    let mut nr = 0;
     rqs = &khd.rqs[khd.cur_domain];
 //
 // If we already have a flushed request, then we just need to get a
@@ -712,11 +936,11 @@ unsafe extern "C" fn flush_busy_kcq(sb: *mut sbitmap, bitnr: c_uint, data: *mut 
 // khd->lock serializes the flushes, so if we observed any bit set in
 // the kcq_map, we will always get a request.
 //
-    rq = list_first_entry_or_null(rqs, struct request, queuelist);
+    rq = list_first_entry_or_null(rqs, request, queuelist);
     if (rq) {
     nr = kyber_get_domain_token(kqd, khd, hctx);
     if (nr >= 0) {
-    khd.batching++;
+    khd.batching += 1;
     rq_set_domain_token(rq, nr);
     list_del_init(&rq.queuelist);
     return rq;
@@ -728,8 +952,8 @@ unsafe extern "C" fn flush_busy_kcq(sb: *mut sbitmap, bitnr: c_uint, data: *mut 
     nr = kyber_get_domain_token(kqd, khd, hctx);
     if (nr >= 0) {
     kyber_flush_busy_kcqs(khd, khd.cur_domain, rqs);
-    rq = list_first_entry(rqs, struct request, queuelist);
-    khd.batching++;
+    rq = list_first_entry(rqs, request, queuelist);
+    khd.batching += 1;
     rq_set_domain_token(rq, nr);
     list_del_init(&rq.queuelist);
     return rq;
@@ -741,12 +965,12 @@ unsafe extern "C" fn flush_busy_kcq(sb: *mut sbitmap, bitnr: c_uint, data: *mut 
 // There were either no pending requests or no tokens.
     return core::ptr::null_mut();
     }
-    static struct request *kyber_dispatch_request(struct blk_mq_hw_ctx *hctx)
-    {
-    struct kyber_queue_data *kqd = hctx.queue.elevator.elevator_data;
-    struct kyber_hctx_data *khd = hctx.sched_data;
-    struct request *rq;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn kyber_dispatch_request(hctx: *mut blk_mq_hw_ctx) -> *mut c_void {
+    let mut kqd = hctx.queue.elevator.elevator_data;
+    let mut khd = hctx.sched_data;
+pub static mut rq: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
     spin_lock(&khd.lock);
 //
 // First, if we are still entitled to batch, try to dispatch a request
@@ -754,8 +978,9 @@ unsafe extern "C" fn flush_busy_kcq(sb: *mut sbitmap, bitnr: c_uint, data: *mut 
 //
     if (khd.batching < kyber_batch_size[khd.cur_domain]) {
     rq = kyber_dispatch_cur_domain(kqd, khd, hctx);
-    if (rq)
-    goto out;
+    if (rq) {
+// goto;
+    }
     }
 //
 // Either,
@@ -767,118 +992,117 @@ unsafe extern "C" fn flush_busy_kcq(sb: *mut sbitmap, bitnr: c_uint, data: *mut 
 // domain if no other domains have requests or tokens.
 //
     khd.batching = 0;
-    for (i = 0; i < KYBER_NUM_DOMAINS; i++) {
-    if (khd.cur_domain == KYBER_NUM_DOMAINS - 1)
+    while (i < KYBER_NUM_DOMAINS) {
+    if (khd.cur_domain == KYBER_NUM_DOMAINS - 1) {
     khd.cur_domain = 0;
-    else
-    khd.cur_domain++;
+    }
+    else {
+    khd.cur_domain += 1;
+    }
     rq = kyber_dispatch_cur_domain(kqd, khd, hctx);
-    if (rq)
-    goto out;
+    if (rq) {
+// goto;
+    }
     }
     rq = core::ptr::null_mut();
-    out:
+// label;
     spin_unlock(&khd.lock);
     return rq;
     }
 #[no_mangle]
 unsafe extern "C" fn kyber_has_work(hctx: *mut blk_mq_hw_ctx) -> bool {
-    static bool kyber_has_work(struct blk_mq_hw_ctx *hctx)
-    {
-    struct kyber_hctx_data *khd = hctx.sched_data;
-    int i;
-    for (i = 0; i < KYBER_NUM_DOMAINS; i++) {
+    let mut khd = hctx.sched_data;
+    let mut i = 0;
+    while (i < KYBER_NUM_DOMAINS) {
     if (!list_empty_careful(&khd.rqs[i]) ||
-    sbitmap_any_bit_set(&khd.kcq_map[i]))
+    sbitmap_any_bit_set(&khd.kcq_map[i])) {
     return true;
+    }
     }
     return false;
     }
 
-    static ssize_t kyber_##name##_lat_show(struct elevator_queue *e,	\
-    char *page)			\
-    {									\
-    struct kyber_queue_data *kqd = e.elevator_data;		\
-    \
-    return sprintf(page, "%llu\n", kqd.latency_targets[domain]);	\
-    }									\
-    \
-    static ssize_t kyber_##name##_lat_store(struct elevator_queue *e,	\
-    const char *page, size_t count)	\
-    {									\
-    struct kyber_queue_data *kqd = e.elevator_data;		\
-    unsigned long long nsec;					\
-    int ret;							\
-    \
-    ret = kstrtoull(page, 10, &nsec);				\
-    if (ret)							\
-    return ret;						\
-    \
-    kqd.latency_targets[domain] = nsec;				\
-    \
-    return count;							\
+    static ssize_t kyber_##name##_lat_show(elevator_queue *e,	
+    char *page)			
+    {									
+    let mut kqd = e.elevator_data;		
+    
+    return sprintf(page, "%llu\n", kqd.latency_targets[domain]);	
+    }									
+    
+    static ssize_t kyber_##name##_lat_store(elevator_queue *e,	
+    const char *page, size_t count)	
+    {									
+    let mut kqd = e.elevator_data;		
+    unsigned long long nsec;					
+    let mut ret = 0;							
+    
+    ret = kstrtoull(page, 10, &nsec);				
+    if (ret)							 {
+    return ret;						
+    }
+    
+    kqd.latency_targets[domain] = nsec;				
+    
+    return count;							
     }
     KYBER_LAT_SHOW_STORE(KYBER_READ, read);
     KYBER_LAT_SHOW_STORE(KYBER_WRITE, write);
 
-    static const struct elv_fs_entry kyber_sched_attrs[] = {
-    KYBER_LAT_ATTR(read),
-    KYBER_LAT_ATTR(write),
-    __ATTR_NULL
-    };
+pub static mut elv_fs_entry: usize = 0;
 
-    static int kyber_##name##_tokens_show(void *data, struct seq_file *m)	\
-    {									\
-    struct request_queue *q = data;					\
-    struct kyber_queue_data *kqd = q.elevator.elevator_data;	\
-    \
-    sbitmap_queue_show(&kqd.domain_tokens[domain], m);		\
-    return 0;							\
-    }									\
-    \
-    static void *kyber_##name##_rqs_start(struct seq_file *m, loff_t *pos)	\
-    __acquires(&KYBER_HCTX_DATA(HCTX_FROM_SEQ_FILE(m)).lock)	\
-    {									\
-    struct blk_mq_hw_ctx *hctx = m.private;			\
-    struct kyber_hctx_data *khd = hctx.sched_data;			\
-    \
-    spin_lock(&khd.lock);						\
-    return seq_list_start(&khd.rqs[domain], *pos);			\
-    }									\
-    \
-    static void *kyber_##name##_rqs_next(struct seq_file *m, void *v,	\
-    loff_t *pos)			\
-    {									\
-    struct blk_mq_hw_ctx *hctx = m.private;			\
-    struct kyber_hctx_data *khd = hctx.sched_data;			\
-    \
-    return seq_list_next(v, &khd.rqs[domain], pos);		\
-    }									\
-    \
-    static void kyber_##name##_rqs_stop(struct seq_file *m, void *v)	\
-    __releases(&KYBER_HCTX_DATA(HCTX_FROM_SEQ_FILE(m)).lock)	\
-    {									\
-    struct blk_mq_hw_ctx *hctx = m.private;			\
-    struct kyber_hctx_data *khd = hctx.sched_data;			\
-    \
-    spin_unlock(&khd.lock);					\
-    }									\
-    \
-    static const struct seq_operations kyber_##name##_rqs_seq_ops = {	\
-    .start	= kyber_##name##_rqs_start,				\
-    .next	= kyber_##name##_rqs_next,				\
-    .stop	= kyber_##name##_rqs_stop,				\
-    .show	= blk_mq_debugfs_rq_show,				\
-    };									\
-    \
-    static int kyber_##name##_waiting_show(void *data, struct seq_file *m)	\
-    {									\
-    struct blk_mq_hw_ctx *hctx = data;				\
-    struct kyber_hctx_data *khd = hctx.sched_data;			\
-    wait_queue_entry_t *wait = &khd.domain_wait[domain].wait;	\
-    \
-    seq_printf(m, "%d\n", !list_empty_careful(&wait.entry));	\
-    return 0;							\
+    static int kyber_##name##_tokens_show(void *data, seq_file *m)	
+    {									
+    let mut q = data;					
+    let mut kqd = q.elevator.elevator_data;	
+    
+    sbitmap_queue_show(&kqd.domain_tokens[domain], m);		
+    return 0;							
+    }									
+    
+    static void *kyber_##name##_rqs_start(seq_file *m, loff_t *pos)	
+    __acquires(&KYBER_HCTX_DATA(HCTX_FROM_SEQ_FILE(m)).lock)	
+    {									
+    let mut hctx = m.private;			
+    let mut khd = hctx.sched_data;			
+    
+    spin_lock(&khd.lock);						
+    return seq_list_start(&khd.rqs[domain], *pos);			
+    }									
+    
+    static void *kyber_##name##_rqs_next(seq_file *m, void *v,	
+    loff_t *pos)			
+    {									
+    let mut hctx = m.private;			
+    let mut khd = hctx.sched_data;			
+    
+    return seq_list_next(v, &khd.rqs[domain], pos);		
+    }									
+    
+    static void kyber_##name##_rqs_stop(seq_file *m, void *v)	
+    __releases(&KYBER_HCTX_DATA(HCTX_FROM_SEQ_FILE(m)).lock)	
+    {									
+    let mut hctx = m.private;			
+    let mut khd = hctx.sched_data;			
+    
+    spin_unlock(&khd.lock);					
+    }									
+    
+    static const struct seq_operations kyber_##name##_rqs_seq_ops = {	
+    .start	= kyber_##name##_rqs_start,				
+    .next	= kyber_##name##_rqs_next,				
+    .stop	= kyber_##name##_rqs_stop,				
+    .show	= blk_mq_debugfs_rq_show,				
+    };									
+    
+    static int kyber_##name##_waiting_show(void *data, seq_file *m)	
+    {									
+    let mut hctx = data;				
+    let mut khd = hctx.sched_data;			
+    let mut wait = &khd.domain_wait[domain].wait;	
+    
+    seq_printf(m, "%d\n", !list_empty_careful(&wait.entry));	
+    return 0;							
     }
     KYBER_DEBUGFS_DOMAIN_ATTRS(KYBER_READ, read)
     KYBER_DEBUGFS_DOMAIN_ATTRS(KYBER_WRITE, write)
@@ -887,85 +1111,37 @@ unsafe extern "C" fn kyber_has_work(hctx: *mut blk_mq_hw_ctx) -> bool {
 
 #[no_mangle]
 unsafe extern "C" fn kyber_cur_domain_show(data: *mut c_void, m: *mut seq_file) -> c_int {
-    static int kyber_cur_domain_show(void *data, struct seq_file *m)
-    {
-    struct blk_mq_hw_ctx *hctx = data;
-    struct kyber_hctx_data *khd = hctx.sched_data;
+    let mut hctx = data;
+    let mut khd = hctx.sched_data;
     seq_printf(m, "%s\n", kyber_domain_names[khd.cur_domain]);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn kyber_batching_show(data: *mut c_void, m: *mut seq_file) -> c_int {
-    static int kyber_batching_show(void *data, struct seq_file *m)
-    {
-    struct blk_mq_hw_ctx *hctx = data;
-    struct kyber_hctx_data *khd = hctx.sched_data;
+    let mut hctx = data;
+    let mut khd = hctx.sched_data;
     seq_printf(m, "%u\n", khd.batching);
     return 0;
     }
 
     {#name "_tokens", 0400, kyber_##name##_tokens_show}
-    static const struct blk_mq_debugfs_attr kyber_queue_debugfs_attrs[] = {
-    KYBER_QUEUE_DOMAIN_ATTRS(read),
-    KYBER_QUEUE_DOMAIN_ATTRS(write),
-    KYBER_QUEUE_DOMAIN_ATTRS(discard),
-    KYBER_QUEUE_DOMAIN_ATTRS(other),
-    {},
-    };
+pub static mut blk_mq_debugfs_attr: usize = 0;
 
-    {#name "_rqs", 0400, .seq_ops = &kyber_##name##_rqs_seq_ops},	\
+    {#name "_rqs", 0400, .seq_ops = &kyber_##name##_rqs_seq_ops},	
     {#name "_waiting", 0400, kyber_##name##_waiting_show}
-    static const struct blk_mq_debugfs_attr kyber_hctx_debugfs_attrs[] = {
-    KYBER_HCTX_DOMAIN_ATTRS(read),
-    KYBER_HCTX_DOMAIN_ATTRS(write),
-    KYBER_HCTX_DOMAIN_ATTRS(discard),
-    KYBER_HCTX_DOMAIN_ATTRS(other),
-    {"cur_domain", 0400, kyber_cur_domain_show},
-    {"batching", 0400, kyber_batching_show},
-    {},
-    };
+pub static mut blk_mq_debugfs_attr: usize = 0;
 
-    static struct elevator_type kyber_sched = {
-    .ops = {
-    .init_sched = kyber_init_sched,
-    .exit_sched = kyber_exit_sched,
-    .init_hctx = kyber_init_hctx,
-    .exit_hctx = kyber_exit_hctx,
-    .alloc_sched_data = kyber_alloc_sched_data,
-    .free_sched_data = kyber_free_sched_data,
-    .limit_depth = kyber_limit_depth,
-    .bio_merge = kyber_bio_merge,
-    .prepare_request = kyber_prepare_request,
-    .insert_requests = kyber_insert_requests,
-    .finish_request = kyber_finish_request,
-    .requeue_request = kyber_finish_request,
-    .completed_request = kyber_completed_request,
-    .dispatch_request = kyber_dispatch_request,
-    .has_work = kyber_has_work,
-    .depth_updated = kyber_depth_updated,
-    },
-
-    .queue_debugfs_attrs = kyber_queue_debugfs_attrs,
-    .hctx_debugfs_attrs = kyber_hctx_debugfs_attrs,
-
-    .elevator_attrs = kyber_sched_attrs,
-    .elevator_name = "kyber",
-    .elevator_owner = THIS_MODULE,
-    };
+pub static mut elevator_type: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn kyber_init() -> int __init {
-    static int __init kyber_init(void)
-    {
+unsafe extern "C" fn kyber_init() -> c_int {
     return elv_register(&kyber_sched);
     }
 #[no_mangle]
-unsafe extern "C" fn kyber_exit() -> void __exit {
-    static void __exit kyber_exit(void)
-    {
+unsafe extern "C" fn kyber_exit()  {
     elv_unregister(&kyber_sched);
     }
-    module_init(kyber_init);
-    module_exit(kyber_exit);
+    module_init!(kyber_init);
+    module_exit!(kyber_exit);
     MODULE_AUTHOR("Omar Sandoval");
     MODULE_LICENSE("GPL");
     MODULE_DESCRIPTION("Kyber I/O scheduler");

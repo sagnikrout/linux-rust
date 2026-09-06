@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -66,8 +316,8 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Protects list of resource pools maintained on per cgroup basis
 // and rdma device list.
 //
-    static DEFINE_MUTEX(rdmacg_mutex);
-    static LIST_HEAD(rdmacg_devices);
+pub static mut rdmacg_mutex: usize = 0;
+pub static mut rdmacg_devices: usize = 0;
     enum rdmacg_file_type {
     RDMACG_RESOURCE_TYPE_MAX,
     RDMACG_RESOURCE_TYPE_STAT,
@@ -115,42 +365,40 @@ pub struct rdmacg_resource_pool {
     pub events_local_alloc_fail: [u64; RDMACG_RESOURCE_MAX],
 }
 
-    static struct rdma_cgroup *css_rdmacg(struct cgroup_subsys_state *css)
-    {
-    return container_of(css, struct rdma_cgroup, css);
+#[no_mangle]
+pub unsafe extern "C" fn css_rdmacg(css: *mut cgroup_subsys_state) -> *mut c_void {
+    return container_of!(css, rdma_cgroup, css);
     }
-    static struct rdma_cgroup *parent_rdmacg(struct rdma_cgroup *cg)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn parent_rdmacg(cg: *mut rdma_cgroup) -> *mut c_void {
     return css_rdmacg(cg.css.parent);
     }
-    static inline struct rdma_cgroup *get_current_rdmacg(void)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn get_current_rdmacg() -> *mut c_void {
     return css_rdmacg(task_get_css(current, rdma_cgrp_id));
     }
-    static void set_resource_limit(struct rdmacg_resource_pool *rpool,
-    int index, int new_max)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn set_resource_limit(rpool: *mut rdmacg_resource_pool, index: c_int, new_max: c_int) {
     if (new_max == S32_MAX) {
-    if (rpool.resources[index].max != S32_MAX)
-    rpool.num_max_cnt++;
+    if (rpool.resources[index].max != S32_MAX) {
+    rpool.num_max_cnt += 1;
+    }
     } else {
-    if (rpool.resources[index].max == S32_MAX)
-    rpool.num_max_cnt--;
+    if (rpool.resources[index].max == S32_MAX) {
+    rpool.num_max_cnt -= 1;
+    }
     }
     rpool.resources[index].max = new_max;
     }
 #[no_mangle]
 unsafe extern "C" fn set_all_resource_max_limit(rpool: *mut rdmacg_resource_pool) {
-    static void set_all_resource_max_limit(struct rdmacg_resource_pool *rpool)
-    {
-    int i;
-    for (i = 0; i < RDMACG_RESOURCE_MAX; i++)
+    let mut i = 0;
+    for (i = 0; i < RDMACG_RESOURCE_MAX; i++) {
     set_resource_limit(rpool, i, S32_MAX);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn free_cg_rpool_locked(rpool: *mut rdmacg_resource_pool) {
-    static void free_cg_rpool_locked(struct rdmacg_resource_pool *rpool)
-    {
     lockdep_assert_held(&rdmacg_mutex);
     list_del(&rpool.cg_node);
     list_del(&rpool.dev_node);
@@ -158,45 +406,44 @@ unsafe extern "C" fn free_cg_rpool_locked(rpool: *mut rdmacg_resource_pool) {
     }
 #[no_mangle]
 unsafe extern "C" fn rpool_has_persistent_state(rpool: *mut rdmacg_resource_pool) -> bool {
-    static bool rpool_has_persistent_state(struct rdmacg_resource_pool *rpool)
-    {
-    int i;
+    let mut i = 0;
 //
 // Keep the rpool alive if any peak value is non-zero,
 // so that rdma.peak persists as a historical high-
 // watermark even after all resources are freed.
 //
-    for (i = 0; i < RDMACG_RESOURCE_MAX; i++) {
+    while (i < RDMACG_RESOURCE_MAX) {
     if (rpool.resources[i].peak ||
     rpool.events_max[i] ||
     rpool.events_local_max[i] ||
     rpool.events_alloc_fail[i] ||
-    rpool.events_local_alloc_fail[i])
+    rpool.events_local_alloc_fail[i]) {
     return true;
+    }
     }
     return false;
     }
-    static struct rdmacg_resource_pool *
-    find_cg_rpool_locked(struct rdma_cgroup *cg,
-    struct rdmacg_device *device)
-    {
-    struct rdmacg_resource_pool *pool;
+#[no_mangle]
+pub unsafe extern "C" fn find_cg_rpool_locked(cg: *mut rdma_cgroup, device: *mut rdmacg_device) -> *mut c_void {
+pub static mut pool: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&rdmacg_mutex);
-    list_for_each_entry(pool, &cg.rpools, cg_node)
+    list_for_each_entry(pool, &cg.rpools, cg_node) {
     if (pool.device == device)
     return pool;
+    }
     return core::ptr::null_mut();
     }
-    static struct rdmacg_resource_pool *
-    get_cg_rpool_locked(struct rdma_cgroup *cg, struct rdmacg_device *device)
-    {
-    struct rdmacg_resource_pool *rpool;
+#[no_mangle]
+pub unsafe extern "C" fn get_cg_rpool_locked(cg: *mut rdma_cgroup, device: *mut rdmacg_device) -> *mut c_void {
+pub static mut rpool: *mut c_void = core::ptr::null_mut();
     rpool = find_cg_rpool_locked(cg, device);
-    if (rpool)
+    if (rpool) {
     return rpool;
+    }
     rpool = kzalloc_obj(*rpool);
-    if (!rpool)
+    if (!rpool) {
     return ERR_PTR(-ENOMEM);
+    }
     rpool.device = device;
     set_all_resource_max_limit(rpool);
     INIT_LIST_HEAD(&rpool.cg_node);
@@ -215,12 +462,9 @@ unsafe extern "C" fn rpool_has_persistent_state(rpool: *mut rdmacg_resource_pool
 // charging operation when there are no resources attached to
 // resource pool.
 //
-    static void
-    uncharge_cg_locked(struct rdma_cgroup *cg,
-    struct rdmacg_device *device,
-    enum rdmacg_resource_type index)
-    {
-    struct rdmacg_resource_pool *rpool;
+#[no_mangle]
+pub unsafe extern "C" fn uncharge_cg_locked(cg: *mut rdma_cgroup, device: *mut rdmacg_device, index: rdmacg_resource_type) {
+pub static mut rpool: *mut c_void = core::ptr::null_mut();
     rpool = find_cg_rpool_locked(cg, device);
 //
 // rpool cannot be null at this stage. Let kernel operate in case
@@ -228,16 +472,16 @@ unsafe extern "C" fn rpool_has_persistent_state(rpool: *mut rdmacg_resource_pool
 // the system.
 //
     if (unlikely(!rpool)) {
-    pr_warn("Invalid device %p or rdma cgroup %p\n", device, cg);
+    pr_warn!("Invalid device %p or rdma cgroup %p\n", device, cg);
     return;
     }
-    rpool.resources[index].usage--;
+    rpool.resources[index].usage -= 1;
 //
 // A negative count (or overflow) is invalid,
 // it indicates a bug in the rdma controller.
 //
-    WARN_ON_ONCE(rpool.resources[index].usage < 0);
-    rpool.usage_sum--;
+    WARN_ON_ONCE!(rpool.resources[index].usage < 0);
+    rpool.usage_sum -= 1;
     if (rpool.usage_sum == 0 &&
     rpool.num_max_cnt == RDMACG_RESOURCE_MAX) {
     if (!rpool_has_persistent_state(rpool)) {
@@ -261,13 +505,10 @@ unsafe extern "C" fn rpool_has_persistent_state(rpool: *mut rdmacg_resource_pool
 // events from @over_cg (including itself) upward, and notifies
 // userspace via cgroup_file_notify().
 //
-    static void rdmacg_event_locked(struct rdma_cgroup *cg,
-    struct rdma_cgroup *over_cg,
-    struct rdmacg_device *device,
-    enum rdmacg_resource_type index)
-    {
-    struct rdmacg_resource_pool *rpool;
-    struct rdma_cgroup *p;
+#[no_mangle]
+pub unsafe extern "C" fn rdmacg_event_locked(cg: *mut rdma_cgroup, over_cg: *mut rdma_cgroup, device: *mut rdmacg_device, index: rdmacg_resource_type) {
+pub static mut rpool: *mut c_void = core::ptr::null_mut();
+pub static mut p: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&rdmacg_mutex);
 // Increment local alloc_fail in requesting cgroup
     rpool = find_cg_rpool_locked(cg, device);
@@ -306,15 +547,13 @@ unsafe extern "C" fn rpool_has_persistent_state(rpool: *mut rdmacg_resource_pool
 // stop uncharging
 // @index: index of the resource to uncharge in cg in given resource pool
 //
-    static void rdmacg_uncharge_hierarchy(struct rdma_cgroup *cg,
-    struct rdmacg_device *device,
-    struct rdma_cgroup *stop_cg,
-    enum rdmacg_resource_type index)
-    {
-    struct rdma_cgroup *p;
+#[no_mangle]
+pub unsafe extern "C" fn rdmacg_uncharge_hierarchy(cg: *mut rdma_cgroup, device: *mut rdmacg_device, stop_cg: *mut rdma_cgroup, index: rdmacg_resource_type) {
+pub static mut p: *mut c_void = core::ptr::null_mut();
     mutex_lock(&rdmacg_mutex);
-    for (p = cg; p != stop_cg; p = parent_rdmacg(p))
+    for (p = cg; p != stop_cg; p = parent_rdmacg(p)) {
     uncharge_cg_locked(p, device, index);
+    }
     mutex_unlock(&rdmacg_mutex);
     css_put(&cg.css);
     }
@@ -324,12 +563,11 @@ unsafe extern "C" fn rpool_has_persistent_state(rpool: *mut rdmacg_resource_pool
 // @device: pointer to rdmacg device
 // @index: index of the resource to uncharge in cgroup in given resource pool
 //
-    void rdmacg_uncharge(struct rdma_cgroup *cg,
-    struct rdmacg_device *device,
-    enum rdmacg_resource_type index)
-    {
-    if (index >= RDMACG_RESOURCE_MAX)
+#[no_mangle]
+pub unsafe extern "C" fn rdmacg_uncharge(cg: *mut rdma_cgroup, device: *mut rdmacg_device, index: rdmacg_resource_type) {
+    if (index >= RDMACG_RESOURCE_MAX) {
     return;
+    }
     rdmacg_uncharge_hierarchy(cg, device, core::ptr::null_mut(), index);
     }
     EXPORT_SYMBOL(rdmacg_uncharge);
@@ -354,16 +592,16 @@ unsafe extern "C" fn rpool_has_persistent_state(rpool: *mut rdmacg_resource_pool
 // pool will be available. Therefore it will be much faster thereon
 // to charge/uncharge.
 //
-    int rdmacg_try_charge(struct rdma_cgroup **rdmacg,
-    struct rdmacg_device *device,
-    enum rdmacg_resource_type index)
-    {
-    struct rdma_cgroup *cg, *p;
-    struct rdmacg_resource_pool *rpool;
-    s64 new;
-    let mut ret: c_int = 0;
-    if (index >= RDMACG_RESOURCE_MAX)
+#[no_mangle]
+pub unsafe extern "C" fn rdmacg_try_charge(rdmacg: *mut *mut rdma_cgroup, device: *mut rdmacg_device, index: rdmacg_resource_type) -> c_int {
+    let mut cg = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
+pub static mut rpool: *mut c_void = core::ptr::null_mut();
+    let mut new = 0;
+pub static mut ret: c_int = 0;
+    if (index >= RDMACG_RESOURCE_MAX) {
     return -EINVAL;
+    }
 //
 // hold on to css, as cgroup can be removed but resource
 // accounting happens on css.
@@ -374,30 +612,32 @@ unsafe extern "C" fn rpool_has_persistent_state(rpool: *mut rdmacg_resource_pool
     rpool = get_cg_rpool_locked(p, device);
     if (IS_ERR(rpool)) {
     ret = PTR_ERR(rpool);
-    goto err;
+// goto;
     } else {
     new = (s64)rpool.resources[index].usage + 1;
     if (new > rpool.resources[index].max) {
     ret = -EAGAIN;
-    goto err;
+// goto;
     } else {
     rpool.resources[index].usage = new;
-    rpool.usage_sum++;
+    rpool.usage_sum += 1;
     }
     }
     }
 // Update peak only after all charges succeed
     for (p = cg; p; p = parent_rdmacg(p)) {
     rpool = find_cg_rpool_locked(p, device);
-    if (rpool && rpool.resources[index].usage > rpool.resources[index].peak)
+    if (rpool && rpool.resources[index].usage > rpool.resources[index].peak) {
     rpool.resources[index].peak = rpool.resources[index].usage;
+    }
     }
     mutex_unlock(&rdmacg_mutex);
 // rdmacg = cg;
     return 0;
-    err:
-    if (ret == -EAGAIN)
+// label;
+    if (ret == -EAGAIN) {
     rdmacg_event_locked(cg, p, device, index);
+    }
     mutex_unlock(&rdmacg_mutex);
     rdmacg_uncharge_hierarchy(cg, device, p, index);
     return ret;
@@ -413,8 +653,6 @@ unsafe extern "C" fn rpool_has_persistent_state(rpool: *mut rdmacg_resource_pool
 //
 #[no_mangle]
 pub unsafe extern "C" fn rdmacg_register_device(device: *mut rdmacg_device) {
-    void rdmacg_register_device(struct rdmacg_device *device)
-    {
     INIT_LIST_HEAD(&device.dev_node);
     INIT_LIST_HEAD(&device.rpools);
     mutex_lock(&rdmacg_mutex);
@@ -433,9 +671,8 @@ pub unsafe extern "C" fn rdmacg_register_device(device: *mut rdmacg_device) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn rdmacg_unregister_device(device: *mut rdmacg_device) {
-    void rdmacg_unregister_device(struct rdmacg_device *device)
-    {
-    struct rdmacg_resource_pool *rpool, *tmp;
+    let mut rpool = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
 //
 // Synchronize with any active resource settings,
 // usage query happening via configfs.
@@ -446,116 +683,126 @@ pub unsafe extern "C" fn rdmacg_unregister_device(device: *mut rdmacg_device) {
 // Now that this device is off the cgroup list, its safe to free
 // all the rpool resources.
 //
-    list_for_each_entry_safe(rpool, tmp, &device.rpools, dev_node)
+    list_for_each_entry_safe(rpool, tmp, &device.rpools, dev_node) {
     free_cg_rpool_locked(rpool);
+    }
     mutex_unlock(&rdmacg_mutex);
     }
     EXPORT_SYMBOL(rdmacg_unregister_device);
-    static struct rdmacg_device *
-    rdmacg_get_device_locked(const char *name, bool has_index, u32 index)
-    {
-    struct rdmacg_device *match = core::ptr::null_mut();
-    struct rdmacg_device *device;
+#[no_mangle]
+pub unsafe extern "C" fn rdmacg_get_device_locked(name: *mut c_char, has_index: bool, index: u32) -> *mut c_void {
+    let mut match = core::ptr::null_mut();
+pub static mut device: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&rdmacg_mutex);
     list_for_each_entry(device, &rdmacg_devices, dev_node) {
-    if (strcmp(name, device.name))
-    continue;
-    if (has_index) {
-    if (device.index == index)
-    return device;
+    if (strcmp(name, device.name)) {
     continue;
     }
-    if (match)
+    if (has_index) {
+    if (device.index == index) {
+    return device;
+    }
+    continue;
+    }
+    if (match) {
     return ERR_PTR(-ENOTUNIQ);
+    }
     match = device;
     }
     return match ?: ERR_PTR(-ENODEV);
     }
-    static bool
-    rdmacg_device_name_unique_locked(const struct rdmacg_device *device)
-    {
-    struct rdmacg_device *other;
+#[no_mangle]
+pub unsafe extern "C" fn rdmacg_device_name_unique_locked(device: *mut rdmacg_device) -> bool {
+pub static mut other: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&rdmacg_mutex);
-    list_for_each_entry(other, &rdmacg_devices, dev_node)
+    list_for_each_entry(other, &rdmacg_devices, dev_node) {
     if (other != device && !strcmp(other.name, device.name))
     return false;
+    }
     return true;
     }
-    static void rdmacg_print_device_key(struct seq_file *sf,
-    const struct rdmacg_device *device)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn rdmacg_print_device_key(sf: *mut seq_file, device: *mut rdmacg_device) {
     seq_puts(sf, device.name);
-    if (!rdmacg_device_name_unique_locked(device))
+    if (!rdmacg_device_name_unique_locked(device)) {
     seq_printf(sf, " index=%u", device.index);
+    }
     seq_putc(sf, ' ');
     }
-    static ssize_t rdmacg_resource_set_max(struct kernfs_open_file *of,
-    char *buf, size_t nbytes, loff_t off)
-    {
-    struct rdma_cgroup *cg = css_rdmacg(of_css(of));
-    const char *dev_name;
-    struct rdmacg_resource_pool *rpool;
-    struct rdmacg_device *device;
-    char *options = strstrip(buf);
-    char *p;
-    int *new_limits;
-    let mut enables: c_ulong = 0;
-    let mut dev_index: u32 = 0;
-    let mut has_index: bool = false;
-    let mut i: c_int = 0, ret = 0;
+#[no_mangle]
+pub unsafe extern "C" fn rdmacg_resource_set_max(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+    let mut cg = css_rdmacg(of_css(of));
+pub static mut dev_name: *mut c_void = core::ptr::null_mut();
+pub static mut rpool: *mut c_void = core::ptr::null_mut();
+pub static mut device: *mut c_void = core::ptr::null_mut();
+    let mut options = strstrip(buf);
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut new_limits: *mut c_void = core::ptr::null_mut();
+pub static mut enables: c_ulong = 0;
+pub static mut dev_index: u32 = 0;
+pub static mut has_index: bool = false;
+pub static mut i: c_int = 0;
 // extract the device name first
     dev_name = strsep(&options, " ");
     if (!dev_name) {
     ret = -EINVAL;
-    goto err;
+// goto;
     }
     new_limits = kzalloc_objs(int, RDMACG_RESOURCE_MAX);
     if (!new_limits) {
     ret = -ENOMEM;
-    goto err;
+// goto;
     }
 // parse the optional device index and resource limit tokens
     while ((p = strsep(&options, " \t\n"))) {
     substring_t args[MAX_OPT_ARGS];
-    int tok, intval;
-    if (!*p)
+    let mut tok = 0;
+    let mut intval = 0;
+    if (!*p) {
     continue;
+    }
     tok = match_token(p, rdmacg_limit_tokens, args);
-    switch (tok) {
-    case RDMACG_DEVICE_INDEX:
+    match (tok) {
+    RDMACG_DEVICE_INDEX => {
     if (has_index || match_uint(&args[0], &dev_index)) {
     ret = -EINVAL;
-    goto parse_err;
+// goto;
     }
     has_index = true;
-    break;
-    case RDMACG_HCA_HANDLE_VAL:
+    // break;
+    }
+    RDMACG_HCA_HANDLE_VAL => {
     if (match_int(&args[0], &intval) || intval < 0) {
     ret = -EINVAL;
-    goto parse_err;
+// goto;
     }
     new_limits[RDMACG_RESOURCE_HCA_HANDLE] = intval;
     enables |= BIT(RDMACG_RESOURCE_HCA_HANDLE);
-    break;
-    case RDMACG_HCA_HANDLE_MAX:
+    // break;
+    }
+    RDMACG_HCA_HANDLE_MAX => {
     new_limits[RDMACG_RESOURCE_HCA_HANDLE] = S32_MAX;
     enables |= BIT(RDMACG_RESOURCE_HCA_HANDLE);
-    break;
-    case RDMACG_HCA_OBJECT_VAL:
+    // break;
+    }
+    RDMACG_HCA_OBJECT_VAL => {
     if (match_int(&args[0], &intval) || intval < 0) {
     ret = -EINVAL;
-    goto parse_err;
+// goto;
     }
     new_limits[RDMACG_RESOURCE_HCA_OBJECT] = intval;
     enables |= BIT(RDMACG_RESOURCE_HCA_OBJECT);
-    break;
-    case RDMACG_HCA_OBJECT_MAX:
+    // break;
+    }
+    RDMACG_HCA_OBJECT_MAX => {
     new_limits[RDMACG_RESOURCE_HCA_OBJECT] = S32_MAX;
     enables |= BIT(RDMACG_RESOURCE_HCA_OBJECT);
-    break;
-    default:
+    // break;
+    }
+    _ => {
     ret = -EINVAL;
-    goto parse_err;
+// goto;
+    }
     }
     }
 // acquire lock to synchronize with hot plug devices
@@ -563,16 +810,17 @@ pub unsafe extern "C" fn rdmacg_unregister_device(device: *mut rdmacg_device) {
     device = rdmacg_get_device_locked(dev_name, has_index, dev_index);
     if (IS_ERR(device)) {
     ret = PTR_ERR(device);
-    goto dev_err;
+// goto;
     }
     rpool = get_cg_rpool_locked(cg, device);
     if (IS_ERR(rpool)) {
     ret = PTR_ERR(rpool);
-    goto dev_err;
+// goto;
     }
 // now set the new limits of the rpool
-    for_each_set_bit(i, &enables, RDMACG_RESOURCE_MAX)
+    for_each_set_bit(i, &enables, RDMACG_RESOURCE_MAX) {
     set_resource_limit(rpool, i, new_limits[i]);
+    }
     if (rpool.usage_sum == 0 &&
     rpool.num_max_cnt == RDMACG_RESOURCE_MAX) {
     if (!rpool_has_persistent_state(rpool)) {
@@ -583,50 +831,53 @@ pub unsafe extern "C" fn rdmacg_unregister_device(device: *mut rdmacg_device) {
     free_cg_rpool_locked(rpool);
     }
     }
-    dev_err:
+// label;
     mutex_unlock(&rdmacg_mutex);
-    parse_err:
+// label;
     kfree(new_limits);
-    err:
+// label;
     return ret ?: nbytes;
     }
-    static void print_rpool_values(struct seq_file *sf,
-    struct rdmacg_resource_pool *rpool)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn print_rpool_values(sf: *mut seq_file, rpool: *mut rdmacg_resource_pool) {
     enum rdmacg_file_type sf_type;
-    int i;
-    u32 value;
+    let mut i = 0;
+    let mut value = 0;
     sf_type = seq_cft(sf).private;
-    for (i = 0; i < RDMACG_RESOURCE_MAX; i++) {
+    while (i < RDMACG_RESOURCE_MAX) {
     seq_puts(sf, rdmacg_resource_names[i]);
     seq_putc(sf, '=');
     if (sf_type == RDMACG_RESOURCE_TYPE_MAX) {
-    if (rpool)
+    if (rpool) {
     value = rpool.resources[i].max;
-    else
+    }
+    else {
     value = S32_MAX;
+    }
     } else if (sf_type == RDMACG_RESOURCE_TYPE_PEAK) {
     value = rpool ? rpool.resources[i].peak : 0;
     } else {
-    if (rpool)
+    if (rpool) {
     value = rpool.resources[i].usage;
-    else
+    }
+    else {
     value = 0;
     }
-    if (value == S32_MAX)
+    }
+    if (value == S32_MAX) {
     seq_puts(sf, RDMACG_MAX_STR);
-    else
+    }
+    else {
     seq_printf(sf, "%d", value);
+    }
     seq_putc(sf, ' ');
     }
     }
 #[no_mangle]
 unsafe extern "C" fn rdmacg_resource_read(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int rdmacg_resource_read(struct seq_file *sf, void *v)
-    {
-    struct rdmacg_device *device;
-    struct rdmacg_resource_pool *rpool;
-    struct rdma_cgroup *cg = css_rdmacg(seq_css(sf));
+pub static mut device: *mut c_void = core::ptr::null_mut();
+pub static mut rpool: *mut c_void = core::ptr::null_mut();
+    let mut cg = css_rdmacg(seq_css(sf));
     mutex_lock(&rdmacg_mutex);
     list_for_each_entry(device, &rdmacg_devices, dev_node) {
     rdmacg_print_device_key(sf, device);
@@ -639,24 +890,23 @@ unsafe extern "C" fn rdmacg_resource_read(sf: *mut seq_file, v: *mut c_void) -> 
     }
 #[no_mangle]
 unsafe extern "C" fn rdmacg_events_show(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int rdmacg_events_show(struct seq_file *sf, void *v)
-    {
-    struct rdma_cgroup *cg = css_rdmacg(seq_css(sf));
-    struct rdmacg_resource_pool *rpool;
-    struct rdmacg_device *device;
-    int i;
+    let mut cg = css_rdmacg(seq_css(sf));
+pub static mut rpool: *mut c_void = core::ptr::null_mut();
+pub static mut device: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
     mutex_lock(&rdmacg_mutex);
     list_for_each_entry(device, &rdmacg_devices, dev_node) {
     rpool = find_cg_rpool_locked(cg, device);
     rdmacg_print_device_key(sf, device);
-    for (i = 0; i < RDMACG_RESOURCE_MAX; i++) {
+    while (i < RDMACG_RESOURCE_MAX) {
     seq_printf(sf, "%s.max=%llu %s.alloc_fail=%llu",
     rdmacg_resource_names[i],
     rpool ? rpool.events_max[i] : 0ULL,
     rdmacg_resource_names[i],
     rpool ? rpool.events_alloc_fail[i] : 0ULL);
-    if (i < RDMACG_RESOURCE_MAX - 1)
+    if (i < RDMACG_RESOURCE_MAX - 1) {
     seq_putc(sf, ' ');
+    }
     }
     seq_putc(sf, '\n');
     }
@@ -665,84 +915,50 @@ unsafe extern "C" fn rdmacg_events_show(sf: *mut seq_file, v: *mut c_void) -> c_
     }
 #[no_mangle]
 unsafe extern "C" fn rdmacg_events_local_show(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int rdmacg_events_local_show(struct seq_file *sf, void *v)
-    {
-    struct rdma_cgroup *cg = css_rdmacg(seq_css(sf));
-    struct rdmacg_resource_pool *rpool;
-    struct rdmacg_device *device;
-    int i;
+    let mut cg = css_rdmacg(seq_css(sf));
+pub static mut rpool: *mut c_void = core::ptr::null_mut();
+pub static mut device: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
     mutex_lock(&rdmacg_mutex);
     list_for_each_entry(device, &rdmacg_devices, dev_node) {
     rpool = find_cg_rpool_locked(cg, device);
     rdmacg_print_device_key(sf, device);
-    for (i = 0; i < RDMACG_RESOURCE_MAX; i++) {
+    while (i < RDMACG_RESOURCE_MAX) {
     seq_printf(sf, "%s.max=%llu %s.alloc_fail=%llu",
     rdmacg_resource_names[i],
     rpool ? rpool.events_local_max[i] : 0ULL,
     rdmacg_resource_names[i],
     rpool ? rpool.events_local_alloc_fail[i] : 0ULL);
-    if (i < RDMACG_RESOURCE_MAX - 1)
+    if (i < RDMACG_RESOURCE_MAX - 1) {
     seq_putc(sf, ' ');
+    }
     }
     seq_putc(sf, '\n');
     }
     mutex_unlock(&rdmacg_mutex);
     return 0;
     }
-    static struct cftype rdmacg_files[] = {
-    {
-    .name = "max",
-    .write = rdmacg_resource_set_max,
-    .seq_show = rdmacg_resource_read,
-    .private = RDMACG_RESOURCE_TYPE_MAX,
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    {
-    .name = "current",
-    .seq_show = rdmacg_resource_read,
-    .private = RDMACG_RESOURCE_TYPE_STAT,
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    {
-    .name = "peak",
-    .seq_show = rdmacg_resource_read,
-    .private = RDMACG_RESOURCE_TYPE_PEAK,
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    {
-    .name = "events",
-    .seq_show = rdmacg_events_show,
-    .file_offset = offsetof(struct rdma_cgroup, events_file),
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    {
-    .name = "events.local",
-    .seq_show = rdmacg_events_local_show,
-    .file_offset = offsetof(struct rdma_cgroup, events_local_file),
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    { }	/* terminate */
-    };
-    static struct cgroup_subsys_state *
-    rdmacg_css_alloc(struct cgroup_subsys_state *parent)
-    {
-    struct rdma_cgroup *cg;
+pub static mut cftype: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn rdmacg_css_alloc(parent: *mut cgroup_subsys_state) -> *mut c_void {
+pub static mut cg: *mut c_void = core::ptr::null_mut();
     cg = kzalloc_obj(*cg);
-    if (!cg)
+    if (!cg) {
     return ERR_PTR(-ENOMEM);
+    }
     INIT_LIST_HEAD(&cg.rpools);
     return &cg.css;
     }
 #[no_mangle]
 unsafe extern "C" fn rdmacg_css_free(css: *mut cgroup_subsys_state) {
-    static void rdmacg_css_free(struct cgroup_subsys_state *css)
-    {
-    struct rdma_cgroup *cg = css_rdmacg(css);
-    struct rdmacg_resource_pool *rpool, *tmp;
+    let mut cg = css_rdmacg(css);
+    let mut rpool = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
 // Clean up rpools kept alive by non-zero peak values
     mutex_lock(&rdmacg_mutex);
-    list_for_each_entry_safe(rpool, tmp, &cg.rpools, cg_node)
+    list_for_each_entry_safe(rpool, tmp, &cg.rpools, cg_node) {
     free_cg_rpool_locked(rpool);
+    }
     mutex_unlock(&rdmacg_mutex);
     kfree(cg);
     }
@@ -757,19 +973,12 @@ unsafe extern "C" fn rdmacg_css_free(css: *mut cgroup_subsys_state) {
 //
 #[no_mangle]
 unsafe extern "C" fn rdmacg_css_offline(css: *mut cgroup_subsys_state) {
-    static void rdmacg_css_offline(struct cgroup_subsys_state *css)
-    {
-    struct rdma_cgroup *cg = css_rdmacg(css);
-    struct rdmacg_resource_pool *rpool;
+    let mut cg = css_rdmacg(css);
+pub static mut rpool: *mut c_void = core::ptr::null_mut();
     mutex_lock(&rdmacg_mutex);
-    list_for_each_entry(rpool, &cg.rpools, cg_node)
+    list_for_each_entry(rpool, &cg.rpools, cg_node) {
     set_all_resource_max_limit(rpool);
+    }
     mutex_unlock(&rdmacg_mutex);
     }
-    struct cgroup_subsys rdma_cgrp_subsys = {
-    .css_alloc	= rdmacg_css_alloc,
-    .css_free	= rdmacg_css_free,
-    .css_offline	= rdmacg_css_offline,
-    .legacy_cftypes	= rdmacg_files,
-    .dfl_cftypes	= rdmacg_files,
-    };
+pub static mut cgroup_subsys: usize = 0;

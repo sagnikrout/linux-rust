@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -91,7 +341,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // sys_futex(WAIT, futex, val);
 // futex_wait(futex, val);
 //
-// waiters++; (a)
+// waiters += 1; (a)
 // smp_mb(); (A) <-- paired with -.
 // |
 // lock(hash_bucket(futex));      |
@@ -108,7 +358,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // schedule();                         if (waiters)
 // lock(hash_bucket(futex));
 // else                                    wake_waiters(futex);
-// waiters--; (b)                        unlock(hash_bucket(futex));
+// waiters -= 1; (b)                        unlock(hash_bucket(futex));
 //
 // Where (A) orders the waiters increment and the futex value read through
 // atomic operations (see futex_hb_waiters_inc) and where (B) orders the write
@@ -139,10 +389,9 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 #[no_mangle]
 pub unsafe extern "C" fn __futex_wake_mark(q: *mut futex_q) -> bool {
-    bool __futex_wake_mark(struct futex_q *q)
-    {
-    if (WARN(q.pi_state || q.rt_waiter, "refusing to wake PI futex\n"))
+    if (WARN(q.pi_state || q.rt_waiter, "refusing to wake PI futex\n")) {
     return false;
+    }
     __futex_unqueue(q);
 //
 // The waiting task can free the futex_q as soon as q->lock_ptr = NULL
@@ -162,9 +411,7 @@ pub unsafe extern "C" fn __futex_wake_mark(q: *mut futex_q) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn futex_wake_mark(wake_q: *mut wake_q_head, q: *mut futex_q) {
-    void futex_wake_mark(struct wake_q_head *wake_q, struct futex_q *q)
-    {
-    struct task_struct *p = q.task;
+    let mut p = q.task;
     get_task_struct(p);
     if (!__futex_wake_mark(q)) {
     put_task_struct(p);
@@ -180,11 +427,10 @@ pub unsafe extern "C" fn futex_wake_mark(wake_q: *mut wake_q_head, q: *mut futex
 // If requested, clear the robust list pending op and unlock the futex
 //
 #[no_mangle]
-unsafe extern "C" fn futex_robust_unlock(uaddr: *mut u32 __user, flags: c_uint, pop: *mut void __user) -> bool {
-    static bool futex_robust_unlock(u32 __user *uaddr, unsigned int flags, void __user *pop)
-    {
-    if (!(flags & FLAGS_ROBUST_UNLOCK))
+unsafe extern "C" fn futex_robust_unlock(uaddr: *mut u32 , flags: c_uint, pop: *mut c_void ) -> bool {
+    if (!(flags & FLAGS_ROBUST_UNLOCK)) {
     return true;
+    }
 // First unlock the futex, which requires release semantics.
     scoped_user_write_access(uaddr, efault)
     unsafe_atomic_store_release_user(0, uaddr, efault);
@@ -194,34 +440,38 @@ unsafe extern "C" fn futex_robust_unlock(uaddr: *mut u32 __user, flags: c_uint, 
 // The chance of survival is close to zero.
 //
     return futex_robust_list_clear_pending(pop, flags);
-    efault:
+// label;
     return false;
     }
 //
 // Wake up waiters matching bitset queued on this futex (uaddr).
 //
 #[no_mangle]
-pub unsafe extern "C" fn futex_wake(uaddr: *mut u32 __user, flags: c_uint, pop: *mut void __user, nr_wake: c_int, bitset: u32) -> c_int {
-    int futex_wake(u32 __user *uaddr, unsigned int flags, void __user *pop, int nr_wake, u32 bitset)
-    {
-    let mut key: union futex_key = FUTEX_KEY_INIT;
-    struct futex_q *this, *next;
-    DEFINE_WAKE_Q(wake_q);
-    int ret;
-    if (!bitset)
+pub unsafe extern "C" fn futex_wake(uaddr: *mut u32 , flags: c_uint, pop: *mut c_void , nr_wake: c_int, bitset: u32) -> c_int {
+pub static mut key: union futex_key = 0;
+    let mut this = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+pub static mut wake_q: usize = 0;
+    let mut ret = 0;
+    if (!bitset) {
     return -EINVAL;
+    }
     ret = get_futex_key(uaddr, flags, &key, FUTEX_READ);
-    if (unlikely(ret != 0))
+    if (unlikely(ret != 0)) {
     return ret;
-    if (!futex_robust_unlock(uaddr, flags, pop))
+    }
+    if (!futex_robust_unlock(uaddr, flags, pop)) {
     return -EFAULT;
-    if ((flags & FLAGS_STRICT) && !nr_wake)
+    }
+    if ((flags & FLAGS_STRICT) && !nr_wake) {
     return 0;
+    }
     CLASS(hbr, hbr)(&key);
-    let mut hb: auto = hbr.hb;
+pub static mut hb: auto = 0;
 // Make sure we really have tasks to wakeup
-    if (!futex_hb_waiters_pending(hb))
+    if (!futex_hb_waiters_pending(hb)) {
     return ret;
+    }
     spin_lock(&hb.lock);
     plist_for_each_entry_safe(this, next, &hb.chain, list) {
     if (futex_match (&this.key, &key)) {
@@ -230,11 +480,13 @@ pub unsafe extern "C" fn futex_wake(uaddr: *mut u32 __user, flags: c_uint, pop: 
     break;
     }
 // Check if one of the bits is set in both bitsets
-    if (!(this.bitset & bitset))
+    if (!(this.bitset & bitset)) {
     continue;
+    }
     this.wake(&wake_q, this);
-    if (++ret >= nr_wake)
+    if (++ret >= nr_wake) {
     break;
+    }
     }
     }
     spin_unlock(&hb.lock);
@@ -242,14 +494,13 @@ pub unsafe extern "C" fn futex_wake(uaddr: *mut u32 __user, flags: c_uint, pop: 
     return ret;
     }
 #[no_mangle]
-unsafe extern "C" fn futex_atomic_op_inuser(encoded_op: c_uint, uaddr: *mut u32 __user) -> c_int {
-    static int futex_atomic_op_inuser(unsigned int encoded_op, u32 __user *uaddr)
-    {
-    let mut op: c_uint = (encoded_op & 0x70000000) >> 28;
-    let mut cmp: c_uint = (encoded_op & 0x0f000000) >> 24;
-    let mut oparg: c_int = sign_extend32((encoded_op & 0x00fff000) >> 12, 11);
-    let mut cmparg: c_int = sign_extend32(encoded_op & 0x00000fff, 11);
-    int oldval, ret;
+unsafe extern "C" fn futex_atomic_op_inuser(encoded_op: c_uint, uaddr: *mut u32 ) -> c_int {
+pub static mut op: c_uint = 0;
+pub static mut cmp: c_uint = 0;
+pub static mut oparg: c_int = 0;
+pub static mut cmparg: c_int = 0;
+    let mut oldval = 0;
+    let mut ret = 0;
     if (encoded_op & (FUTEX_OP_OPARG_SHIFT << 28)) {
     if (oparg < 0 || oparg > 31) {
 //
@@ -265,54 +516,65 @@ unsafe extern "C" fn futex_atomic_op_inuser(encoded_op: c_uint, uaddr: *mut u32 
     pagefault_disable();
     ret = arch_futex_atomic_op_inuser(op, oparg, &oldval, uaddr);
     pagefault_enable();
-    if (ret)
+    if (ret) {
     return ret;
-    switch (cmp) {
-    case FUTEX_OP_CMP_EQ:
-    let mut oldval: return = = cmparg;
-    case FUTEX_OP_CMP_NE:
+    }
+    match (cmp) {
+    FUTEX_OP_CMP_EQ => {
+pub static mut oldval: return = 0;
+    }
+    FUTEX_OP_CMP_NE => {
     return oldval != cmparg;
-    case FUTEX_OP_CMP_LT:
+    }
+    FUTEX_OP_CMP_LT => {
     return oldval < cmparg;
-    case FUTEX_OP_CMP_GE:
+    }
+    FUTEX_OP_CMP_GE => {
     return oldval >= cmparg;
-    case FUTEX_OP_CMP_LE:
+    }
+    FUTEX_OP_CMP_LE => {
     return oldval <= cmparg;
-    case FUTEX_OP_CMP_GT:
+    }
+    FUTEX_OP_CMP_GT => {
     return oldval > cmparg;
-    default:
+    }
+    _ => {
     return -ENOSYS;
+    }
     }
     }
 //
 // Wake up all waiters hashed on the physical page that is mapped
 // to this virtual address:
 //
-    int futex_wake_op(u32 __user *uaddr1, unsigned int flags, u32 __user *uaddr2,
-    int nr_wake, int nr_wake2, int op)
-    {
-    let mut key1: union futex_key = FUTEX_KEY_INIT, key2 = FUTEX_KEY_INIT;
-    struct futex_q *this, *next;
-    int ret, op_ret;
-    DEFINE_WAKE_Q(wake_q);
-    retry:
+#[no_mangle]
+pub unsafe extern "C" fn futex_wake_op(uaddr1: *mut u32, flags: c_uint, uaddr2: *mut u32, nr_wake: c_int, nr_wake2: c_int, op: c_int) -> c_int {
+pub static mut key1: union futex_key = 0;
+    let mut this = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+    let mut ret = 0;
+    let mut op_ret = 0;
+pub static mut wake_q: usize = 0;
+// label;
     ret = get_futex_key(uaddr1, flags, &key1, FUTEX_READ);
-    if (unlikely(ret != 0))
+    if (unlikely(ret != 0)) {
     return ret;
+    }
     ret = get_futex_key(uaddr2, flags, &key2, FUTEX_WRITE);
-    if (unlikely(ret != 0))
+    if (unlikely(ret != 0)) {
     return ret;
-    retry_private:
+    }
+// label;
     if (1) {
     CLASS(hbr, hbr1)(&key1);
     CLASS(hbr, hbr2)(&key2);
-    let mut hb1: auto = hbr1.hb;
-    let mut hb2: auto = hbr2.hb;
+pub static mut hb1: auto = 0;
+pub static mut hb2: auto = 0;
     double_lock_hb(hb1, hb2);
     op_ret = futex_atomic_op_inuser(op, uaddr2);
     if (unlikely(op_ret < 0)) {
     double_unlock_hb(hb1, hb2);
-    if (!IS_ENABLED(CONFIG_MMU) ||
+    if (!IS_ENABLED!(CONFIG_MMU) ||
     unlikely(op_ret != -EFAULT && op_ret != -EAGAIN)) {
 //
 // we don't get EFAULT from MMU faults if we don't have
@@ -323,23 +585,26 @@ unsafe extern "C" fn futex_atomic_op_inuser(encoded_op: c_uint, uaddr: *mut u32 
     }
     if (op_ret == -EFAULT) {
     ret = fault_in_user_writeable(uaddr2);
-    if (ret)
+    if (ret) {
     return ret;
     }
+    }
     cond_resched();
-    if (!(flags & FLAGS_SHARED))
-    goto retry_private;
-    goto retry;
+    if (!(flags & FLAGS_SHARED)) {
+// goto;
+    }
+// goto;
     }
     plist_for_each_entry_safe(this, next, &hb1.chain, list) {
     if (futex_match(&this.key, &key1)) {
     if (this.pi_state || this.rt_waiter) {
     ret = -EINVAL;
-    goto out_unlock;
+// goto;
     }
     this.wake(&wake_q, this);
-    if (++ret >= nr_wake)
+    if (++ret >= nr_wake) {
     break;
+    }
     }
     }
     if (op_ret > 0) {
@@ -348,22 +613,23 @@ unsafe extern "C" fn futex_atomic_op_inuser(encoded_op: c_uint, uaddr: *mut u32 
     if (futex_match(&this.key, &key2)) {
     if (this.pi_state || this.rt_waiter) {
     ret = -EINVAL;
-    goto out_unlock;
+// goto;
     }
     this.wake(&wake_q, this);
-    if (++op_ret >= nr_wake2)
+    if (++op_ret >= nr_wake2) {
     break;
+    }
     }
     }
     ret += op_ret;
     }
-    out_unlock:
+// label;
     double_unlock_hb(hb1, hb2);
     }
     wake_up_q(&wake_q);
     return ret;
     }
-    static long futex_wait_restart(struct restart_block *restart);
+// forward_decl: futex_wait_restart;
 //
 // futex_do_wait() - wait for wakeup, timeout, or signal
 // @q:		the futex_q to queue up on
@@ -371,11 +637,10 @@ unsafe extern "C" fn futex_atomic_op_inuser(encoded_op: c_uint, uaddr: *mut u32 
 //
 #[no_mangle]
 pub unsafe extern "C" fn futex_do_wait(q: *mut futex_q, timeout: *mut hrtimer_sleeper) {
-    void futex_do_wait(struct futex_q *q, struct hrtimer_sleeper *timeout)
-    {
 // Arm the timer
-    if (timeout)
+    if (timeout) {
     hrtimer_sleeper_start_expires(timeout, HRTIMER_MODE_ABS);
+    }
 //
 // If we have been removed from the hash list, then another task
 // has tried to wake us, and we can skip the call to schedule().
@@ -386,8 +651,9 @@ pub unsafe extern "C" fn futex_do_wait(q: *mut futex_q, timeout: *mut hrtimer_sl
 // flagged for rescheduling. Only call schedule if there
 // is no timeout, or if it has yet to expire.
 //
-    if (!timeout || timeout.task)
+    if (!timeout || timeout.task) {
     schedule();
+    }
     }
     __set_current_state(TASK_RUNNING);
     }
@@ -404,12 +670,11 @@ pub unsafe extern "C" fn futex_do_wait(q: *mut futex_q, timeout: *mut hrtimer_sl
 //
 #[no_mangle]
 pub unsafe extern "C" fn futex_unqueue_multiple(v: *mut futex_vector, count: c_int) -> c_int {
-    int futex_unqueue_multiple(struct futex_vector *v, int count)
-    {
-    let mut ret: c_int = -1, i;
-    for (i = 0; i < count; i++) {
-    if (!futex_unqueue(&v[i].q))
+pub static mut ret: c_int = 0;
+    while (i < count) {
+    if (!futex_unqueue(&v[i].q)) {
     ret = i;
+    }
     }
     return ret;
     }
@@ -431,11 +696,10 @@ pub unsafe extern "C" fn futex_unqueue_multiple(v: *mut futex_vector, count: c_i
 //
 #[no_mangle]
 pub unsafe extern "C" fn futex_wait_multiple_setup(vs: *mut futex_vector, count: c_int, woken: *mut c_int) -> c_int {
-    int futex_wait_multiple_setup(struct futex_vector *vs, int count, int *woken)
-    {
-    let mut retry: bool = false;
-    int ret, i;
-    u32 uval;
+pub static mut retry: bool = false;
+    let mut ret = 0;
+    let mut i = 0;
+    let mut uval = 0;
 //
 // Make sure to have a reference on the private_hash such that we
 // don't block on rehash after changing the task state below.
@@ -455,24 +719,26 @@ pub unsafe extern "C" fn futex_wait_multiple_setup(vs: *mut futex_vector, count:
 // Private futexes doesn't need to recalculate hash in retry, so skip
 // get_futex_key() when retrying.
 //
-    retry:
-    for (i = 0; i < count; i++) {
-    if (!(vs[i].w.flags & FLAGS_SHARED) && retry)
+// label;
+    while (i < count) {
+    if (!(vs[i].w.flags & FLAGS_SHARED) && retry) {
     continue;
+    }
     ret = get_futex_key(u64_to_user_ptr(vs[i].w.uaddr),
     vs[i].w.flags,
     &vs[i].q.key, FUTEX_READ);
-    if (unlikely(ret))
+    if (unlikely(ret)) {
     return ret;
     }
+    }
     set_current_state(TASK_INTERRUPTIBLE|TASK_FREEZABLE);
-    for (i = 0; i < count; i++) {
-    u32 __user *uaddr = (u32 __user *)(unsigned long)vs[i].w.uaddr;
-    struct futex_q *q = &vs[i].q;
-    let mut val: u32 = vs[i].w.val;
+    while (i < count) {
+    let mut uaddr = (unsigned long)vs[i].w.uaddr;
+    let mut q = &vs[i].q;
+pub static mut val: u32 = 0;
     if (1) {
     CLASS(hbr, hbr)(&q.key);
-    let mut hb: auto = hbr.hb;
+pub static mut hb: auto = 0;
     futex_q_lock(q, hb);
     ret = futex_get_value_locked(&uval, uaddr);
     if (!ret && uval == val) {
@@ -494,8 +760,9 @@ pub unsafe extern "C" fn futex_wait_multiple_setup(vs: *mut futex_vector, count:
 // userspace
 //
 // woken = futex_unqueue_multiple(vs, i);
-    if (*woken >= 0)
+    if (*woken >= 0) {
     return 1;
+    }
     if (ret) {
 //
 // If we need to handle a page fault, we need to do so
@@ -504,13 +771,15 @@ pub unsafe extern "C" fn futex_wait_multiple_setup(vs: *mut futex_vector, count:
 // undoing all the work done so far. In success, we
 // retry all the work.
 //
-    if (get_user(uval, uaddr))
+    if (get_user(uval, uaddr)) {
     return -EFAULT;
-    retry = true;
-    goto retry;
     }
-    if (uval != val)
+    retry = true;
+// goto;
+    }
+    if (uval != val) {
     return -EWOULDBLOCK;
+    }
     }
     return 0;
     }
@@ -523,14 +792,15 @@ pub unsafe extern "C" fn futex_wait_multiple_setup(vs: *mut futex_vector, count:
 // Sleep if and only if the timeout hasn't expired and no futex on the list has
 // been woken up.
 //
-    static void futex_sleep_multiple(struct futex_vector *vs, unsigned int count,
-    struct hrtimer_sleeper *to)
-    {
-    if (to && !to.task)
+#[no_mangle]
+pub unsafe extern "C" fn futex_sleep_multiple(vs: *mut futex_vector, count: c_uint, to: *mut hrtimer_sleeper) {
+    if (to && !to.task) {
     return;
-    for (; count; count--, vs++) {
-    if (!READ_ONCE(vs.q.lock_ptr))
+    }
+    while (count) {
+    if (!READ_ONCE(vs.q.lock_ptr)) {
     return;
+    }
     }
     schedule();
     }
@@ -548,12 +818,12 @@ pub unsafe extern "C" fn futex_wait_multiple_setup(vs: *mut futex_vector, count:
 // - >=0 - Hint to the futex that was awoken
 // - <0  - On error
 //
-    int futex_wait_multiple(struct futex_vector *vs, unsigned int count,
-    struct hrtimer_sleeper *to)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn futex_wait_multiple(vs: *mut futex_vector, count: c_uint, to: *mut hrtimer_sleeper) -> c_int {
     int ret, hint = 0;
-    if (to)
+    if (to) {
     hrtimer_sleeper_start_expires(to, HRTIMER_MODE_ABS);
+    }
     while (1) {
     ret = futex_wait_multiple_setup(vs, count, &hint);
     if (ret) {
@@ -566,14 +836,16 @@ pub unsafe extern "C" fn futex_wait_multiple_setup(vs: *mut futex_vector, count:
     futex_sleep_multiple(vs, count, to);
     __set_current_state(TASK_RUNNING);
     ret = futex_unqueue_multiple(vs, count);
-    if (ret >= 0)
+    if (ret >= 0) {
     return ret;
-    if (to && !to.task)
+    }
+    if (to && !to.task) {
     return -ETIMEDOUT;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: signal_pending(current)) -> else {
-    else if (signal_pending(current))
+    }
+
+    else if (signal_pending(current)) {
     return -ERESTARTSYS;
+    }
 //
 // The final case is a spurious wakeup, for
 // which just retry.
@@ -598,12 +870,10 @@ pub unsafe extern "C" fn if(_arg: signal_pending(current)) -> else {
 // - <0 - On error and the hb is unlocked. A possible reason: the uaddr can not
 // be read, does not contain the expected value or is not properly aligned.
 //
-    int futex_wait_setup(u32 __user *uaddr, u32 val, unsigned int flags,
-    struct futex_q *q, union futex_key *key2,
-    struct task_struct *task)
-    {
-    u32 uval;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn futex_wait_setup(uaddr: *mut u32, val: u32, flags: c_uint, q: *mut futex_q, key2: *mut union futex_key, task: *mut task_struct) -> c_int {
+    let mut uval = 0;
+    let mut ret = 0;
 //
 // Access the page AFTER the hash-bucket is locked.
 // Order is important:
@@ -622,25 +892,28 @@ pub unsafe extern "C" fn if(_arg: signal_pending(current)) -> else {
 // absorb a wakeup if *uaddr does not match the desired values
 // while the syscall executes.
 //
-    retry:
+// label;
     ret = get_futex_key(uaddr, flags, &q.key, FUTEX_READ);
-    if (unlikely(ret != 0))
+    if (unlikely(ret != 0)) {
     return ret;
-    retry_private:
+    }
+// label;
     if (1) {
     CLASS(hbr, hbr)(&q.key);
-    let mut hb: auto = hbr.hb;
+pub static mut hb: auto = 0;
     futex_q_lock(q, hb);
     ret = futex_get_value_locked(&uval, uaddr);
     if (ret) {
     futex_q_unlock(hb);
     __release(q.lock_ptr);
     ret = get_user(uval, uaddr);
-    if (ret)
+    if (ret) {
     return ret;
-    if (!(flags & FLAGS_SHARED))
-    goto retry_private;
-    goto retry;
+    }
+    if (!(flags & FLAGS_SHARED)) {
+// goto;
+    }
+// goto;
     }
     if (uval != val) {
     futex_q_unlock(hb);
@@ -658,56 +931,60 @@ pub unsafe extern "C" fn if(_arg: signal_pending(current)) -> else {
 // futex_queue() calls spin_unlock() upon completion, both serializing
 // access to the hash list and forcing another memory barrier.
 //
-    if (task == current)
+    if (task == current) {
     set_current_state(TASK_INTERRUPTIBLE|TASK_FREEZABLE);
+    }
     futex_queue(q, hb, task);
     }
     return ret;
     }
-    int __futex_wait(u32 __user *uaddr, unsigned int flags, u32 val,
-    struct hrtimer_sleeper *to, u32 bitset)
-    {
-    let mut q: futex_q = futex_q_init;
-    int ret;
-    if (!bitset)
+#[no_mangle]
+pub unsafe extern "C" fn __futex_wait(uaddr: *mut u32, flags: c_uint, val: u32, to: *mut hrtimer_sleeper, bitset: u32) -> c_int {
+pub static mut q: futex_q = 0;
+    let mut ret = 0;
+    if (!bitset) {
     return -EINVAL;
+    }
     q.bitset = bitset;
-    retry:
+// label;
 //
 // Prepare to wait on uaddr. On success, it holds hb->lock and q
 // is initialized.
 //
     ret = futex_wait_setup(uaddr, val, flags, &q, core::ptr::null_mut(), current);
-    if (ret)
+    if (ret) {
     return ret;
+    }
 // futex_queue and wait for wakeup, timeout, or a signal.
     futex_do_wait(&q, to);
 // If we were woken (and unqueued), we succeeded, whatever.
-    if (!futex_unqueue(&q))
+    if (!futex_unqueue(&q)) {
     return 0;
-    if (to && !to.task)
+    }
+    if (to && !to.task) {
     return -ETIMEDOUT;
+    }
 //
 // We expect signal_pending(current), but we might be the
 // victim of a spurious wakeup as well.
 //
-    if (!signal_pending(current))
-    goto retry;
+    if (!signal_pending(current)) {
+// goto;
+    }
     return -ERESTARTSYS;
     }
 #[no_mangle]
-pub unsafe extern "C" fn futex_wait(uaddr: *mut u32 __user, flags: c_uint, val: u32, abs_time: *mut ktime_t, bitset: u32) -> c_int {
-    int futex_wait(u32 __user *uaddr, unsigned int flags, u32 val, ktime_t *abs_time, u32 bitset)
-    {
+pub unsafe extern "C" fn futex_wait(uaddr: *mut u32 , flags: c_uint, val: u32, abs_time: *mut ktime_t, bitset: u32) -> c_int {
     struct hrtimer_sleeper timeout, *to;
-    struct restart_block *restart;
-    int ret;
+pub static mut restart: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     to = futex_setup_timer(abs_time, &timeout, flags,
     current.timer_slack_ns);
     ret = __futex_wait(uaddr, flags, val, to, bitset);
 // No timeout, nothing to clean up.
-    if (!to)
+    if (!to) {
     return ret;
+    }
     hrtimer_cancel(&to.timer);
     destroy_hrtimer_on_stack(&to.timer);
     if (ret == -ERESTARTSYS) {
@@ -723,12 +1000,11 @@ pub unsafe extern "C" fn futex_wait(uaddr: *mut u32 __user, flags: c_uint, val: 
     }
 #[no_mangle]
 unsafe extern "C" fn futex_wait_restart(restart: *mut restart_block) -> c_long {
-    static long futex_wait_restart(struct restart_block *restart)
-    {
-    u32 __user *uaddr = restart.futex.uaddr;
-    ktime_t *tp = core::ptr::null_mut();
-    if (restart.futex.flags & FLAGS_HAS_TIMEOUT)
+    let mut uaddr = restart.futex.uaddr;
+    let mut tp = core::ptr::null_mut();
+    if (restart.futex.flags & FLAGS_HAS_TIMEOUT) {
     tp = &restart.futex.time;
+    }
     restart.fn = do_no_restart_syscall;
     return (long)futex_wait(uaddr, restart.futex.flags,
     restart.futex.val, tp, restart.futex.bitset);

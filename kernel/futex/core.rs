@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -72,7 +322,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
     static u32 __futex_mask __ro_after_init;
     static u32 __futex_shift __ro_after_init;
-    static struct futex_hash_bucket **__futex_queues __ro_after_init;
+pub static mut __futex_queues: *mut c_void = core::ptr::null_mut();
     static __always_inline struct futex_hash_bucket **futex_queues(void)
     {
     return runtime_const_ptr(__futex_queues);
@@ -85,98 +335,85 @@ pub struct futex_private_hash {
     pub rcu: rcu_head,
     pub mm: *mut c_void,
     pub custom: bool,
-    pub queues: [futex_hash_bucket; ],
+    pub queues: [futex_hash_bucket; 0],
 }
 
 //
 // Fault injections for futexes.
 //
 
-    static struct {
-    struct fault_attr attr;
-    bool ignore_private;
-    } fail_futex = {
-    .attr = FAULT_ATTR_INITIALIZER,
-    .ignore_private = false,
-    };
+pub static mut fail_futex: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn setup_fail_futex(str: *mut c_char) -> int __init {
-    static int __init setup_fail_futex(char *str)
-    {
+unsafe extern "C" fn setup_fail_futex(str: *mut c_char) -> c_int {
     return setup_fault_attr(&fail_futex.attr, str);
     }
-    __setup("fail_futex=", setup_fail_futex);
+    __setup!("fail_futex=", setup_fail_futex);
 #[no_mangle]
 pub unsafe extern "C" fn should_fail_futex(fshared: bool) -> bool {
-    bool should_fail_futex(bool fshared)
-    {
-    if (fail_futex.ignore_private && !fshared)
+    if (fail_futex.ignore_private && !fshared) {
     return false;
+    }
     return should_fail(&fail_futex.attr, 1);
     }
 
 #[no_mangle]
-unsafe extern "C" fn fail_futex_debugfs() -> int __init {
-    static int __init fail_futex_debugfs(void)
-    {
-    let mut mode: umode_t = S_IFREG | S_IRUSR | S_IWUSR;
-    struct dentry *dir;
+unsafe extern "C" fn fail_futex_debugfs() -> c_int {
+pub static mut mode: umode_t = 0;
+pub static mut dir: *mut c_void = core::ptr::null_mut();
     dir = fault_create_debugfs_attr("fail_futex", core::ptr::null_mut(),
     &fail_futex.attr);
-    if (IS_ERR(dir))
+    if (IS_ERR(dir)) {
     return PTR_ERR(dir);
+    }
     debugfs_create_bool("ignore-private", mode, dir,
     &fail_futex.ignore_private);
     return 0;
     }
-    late_initcall(fail_futex_debugfs);
+    late_initcall!(fail_futex_debugfs);
 
-    static struct futex_hash_bucket *
-    __futex_hash(union futex_key *key, struct futex_private_hash *fph, struct futex_private_hash **fph_p);
+// forward_decl: __futex_hash;
 
-    static bool futex_ref_get(struct futex_private_hash *fph);
-    static bool futex_ref_put(struct futex_private_hash *fph);
-    static bool futex_ref_is_dead(struct futex_private_hash *fph);
+// forward_decl: futex_ref_get;
+// forward_decl: futex_ref_put;
+// forward_decl: futex_ref_is_dead;
     enum { FR_PERCPU = 0, FR_ATOMIC };
 #[no_mangle]
 unsafe extern "C" fn futex_private_hash_get(fph: *mut futex_private_hash) -> bool {
-    static bool futex_private_hash_get(struct futex_private_hash *fph)
-    {
     return futex_ref_get(fph);
     }
 #[no_mangle]
 pub unsafe extern "C" fn futex_private_hash_put(fph: *mut futex_private_hash) {
-    void futex_private_hash_put(struct futex_private_hash *fph)
-    {
-    struct mm_struct *mm;
-    if (!fph)
+pub static mut mm: *mut c_void = core::ptr::null_mut();
+    if (!fph) {
     return;
+    }
     mm = fph.mm;
-    if (futex_ref_put(fph))
+    if (futex_ref_put(fph)) {
     wake_up_var(mm);
     }
-    static struct futex_hash_bucket *
-    __futex_hash_private(union futex_key *key, struct futex_private_hash *fph)
-    {
-    u32 hash;
-    hash = jhash2((void *)&key.private.address, sizeof(key.private.address) / 4,
+    }
+#[no_mangle]
+pub unsafe extern "C" fn __futex_hash_private(key: *mut union futex_key, fph: *mut futex_private_hash) -> *mut c_void {
+    let mut hash = 0;
+    hash = jhash2(&key.private.address, sizeof!(key.private.address) / 4,
     key.both.offset);
     return &fph.queues[hash & fph.hash_mask];
     }
-    static void futex_rehash_private(struct futex_private_hash *old,
-    struct futex_private_hash *new)
-    {
-    struct futex_hash_bucket *hb_old, *hb_new;
-    let mut slots: c_uint = old.hash_mask + 1;
-    unsigned int i;
-    for (i = 0; i < slots; i++) {
-    struct futex_q *this, *tmp;
+#[no_mangle]
+pub unsafe extern "C" fn futex_rehash_private(old: *mut futex_private_hash, new: *mut futex_private_hash) {
+    let mut hb_old = core::ptr::null_mut();
+    let mut hb_new = core::ptr::null_mut();
+pub static mut slots: c_uint = 0;
+    let mut i = 0;
+    while (i < slots) {
+    let mut this = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
     hb_old = &old.queues[i];
     spin_lock(&hb_old.lock);
     plist_for_each_entry_safe(this, tmp, &hb_old.chain, list) {
     plist_del(&this.list, &hb_old.chain);
     futex_hb_waiters_dec(hb_old);
-    WARN_ON_ONCE(this.lock_ptr != &hb_old.lock);
+    WARN_ON_ONCE!(this.lock_ptr != &hb_old.lock);
     hb_new = __futex_hash(&this.key, new, core::ptr::null_mut());
     futex_hb_waiters_inc(hb_new);
 //
@@ -193,11 +430,9 @@ pub unsafe extern "C" fn futex_private_hash_put(fph: *mut futex_private_hash) {
     }
 #[no_mangle]
 unsafe extern "C" fn __futex_pivot_hash(mm: *mut mm_struct, new: *mut futex_private_hash) -> bool {
-    static bool __futex_pivot_hash(struct mm_struct *mm, struct futex_private_hash *new)
-    {
-    struct futex_mm_phash *mmph = &mm.futex.phash;
-    struct futex_private_hash *fph;
-    WARN_ON_ONCE(mmph.hash_new);
+    let mut mmph = &mm.futex.phash;
+pub static mut fph: *mut c_void = core::ptr::null_mut();
+    WARN_ON_ONCE!(mmph.hash_new);
     fph = rcu_dereference_protected(mmph.hash, lockdep_is_held(&mmph.lock));
     if (fph) {
     if (!futex_ref_is_dead(fph)) {
@@ -216,10 +451,8 @@ unsafe extern "C" fn __futex_pivot_hash(mm: *mut mm_struct, new: *mut futex_priv
     }
 #[no_mangle]
 unsafe extern "C" fn futex_pivot_hash(mm: *mut mm_struct) {
-    static void futex_pivot_hash(struct mm_struct *mm)
-    {
     scoped_guard(mutex, &mm.futex.phash.lock) {
-    struct futex_private_hash *fph;
+pub static mut fph: *mut c_void = core::ptr::null_mut();
     fph = mm.futex.phash.hash_new;
     if (fph) {
     mm.futex.phash.hash_new = core::ptr::null_mut();
@@ -227,8 +460,8 @@ unsafe extern "C" fn futex_pivot_hash(mm: *mut mm_struct) {
     }
     }
     }
-    struct futex_private_hash *futex_private_hash(struct mm_struct *mm)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn futex_private_hash(mm: *mut mm_struct) -> *mut c_void {
 //
 // Ideally we don't loop. If there is a replacement in progress
 // then a new private hash is already prepared and a reference can't be
@@ -239,96 +472,100 @@ unsafe extern "C" fn futex_pivot_hash(mm: *mut mm_struct) {
 // new private hash or loop again because a new replacement has been
 // requested.
 //
-    again:
+// label;
     scoped_guard(rcu) {
-    struct futex_private_hash *fph;
+pub static mut fph: *mut c_void = core::ptr::null_mut();
     fph = rcu_dereference(mm.futex.phash.hash);
-    if (!fph)
+    if (!fph) {
     return core::ptr::null_mut();
-    if (futex_private_hash_get(fph))
+    }
+    if (futex_private_hash_get(fph)) {
     return fph;
     }
+    }
     futex_pivot_hash(mm);
-    goto again;
+// goto;
     }
 #[no_mangle]
 pub unsafe extern "C" fn futex_hash(key: *mut union futex_key) -> futex_bucket_ref {
-    struct futex_bucket_ref futex_hash(union futex_key *key)
-    {
-    again:
+// label;
     scoped_guard(rcu) {
-    struct futex_private_hash *fph = core::ptr::null_mut();
-    struct futex_hash_bucket *hb;
+    let mut fph = core::ptr::null_mut();
+pub static mut hb: *mut c_void = core::ptr::null_mut();
     hb = __futex_hash(key, core::ptr::null_mut(), &fph);
-    if (!fph || futex_private_hash_get(fph))
-    return (struct futex_bucket_ref){ .hb = hb, .fph = fph };
+    if (!fph || futex_private_hash_get(fph)) {
+    return (futex_bucket_ref){ .hb = hb, .fph = fph };
+    }
     }
     futex_pivot_hash(key.private.mm);
-    goto again;
+// goto;
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn futex_hash(key: *mut union futex_key) -> futex_bucket_ref {
-    struct futex_bucket_ref futex_hash(union futex_key *key)
-    {
-    return (struct futex_bucket_ref){ .hb = __futex_hash(key, core::ptr::null_mut(), core::ptr::null_mut()), .fph = core::ptr::null_mut() };
+#[no_mangle]
+// duplicate fn: futex_hash
+pub unsafe extern "C" fn futex_hash_dup(key: *mut union futex_key) -> futex_bucket_ref {
+    return (futex_bucket_ref){ .hb = __futex_hash(key, core::ptr::null_mut(), core::ptr::null_mut()), .fph = core::ptr::null_mut() };
     }
 
 #[no_mangle]
 unsafe extern "C" fn __futex_key_to_node(mm: *mut mm_struct, addr: c_ulong) -> c_int {
-    static int __futex_key_to_node(struct mm_struct *mm, unsigned long addr)
-    {
-    struct vm_area_struct *vma = vma_lookup(mm, addr);
-    struct mempolicy *mpol;
-    let mut node: c_int = FUTEX_NO_NODE;
-    if (!vma)
+    let mut vma = vma_lookup(mm, addr);
+pub static mut mpol: *mut c_void = core::ptr::null_mut();
+pub static mut node: c_int = 0;
+    if (!vma) {
     return FUTEX_NO_NODE;
+    }
     mpol = READ_ONCE(vma.vm_policy);
-    if (!mpol)
+    if (!mpol) {
     return FUTEX_NO_NODE;
-    switch (mpol.mode) {
-    case MPOL_PREFERRED:
+    }
+    match (mpol.mode) {
+    MPOL_PREFERRED => {
     node = first_node(mpol.nodes);
-    break;
-    case MPOL_PREFERRED_MANY:
-    case MPOL_BIND:
-    if (mpol.home_node != NUMA_NO_NODE)
+    // break;
+    }
+    MPOL_PREFERRED_MANY => {
+    }
+    MPOL_BIND => {
+    if (mpol.home_node != NUMA_NO_NODE) {
     node = mpol.home_node;
-    break;
-    default:
-    break;
+    }
+    // break;
+    }
+    _ => {
+    // break;
+    }
     }
     return node;
     }
 #[no_mangle]
 unsafe extern "C" fn futex_key_to_node_opt(mm: *mut mm_struct, addr: c_ulong) -> c_int {
-    static int futex_key_to_node_opt(struct mm_struct *mm, unsigned long addr)
-    {
-    int seq, node;
+    let mut seq = 0;
+    let mut node = 0;
     guard(rcu)();
-    if (!mmap_lock_speculate_try_begin(mm, &seq))
+    if (!mmap_lock_speculate_try_begin(mm, &seq)) {
     return -EBUSY;
+    }
     node = __futex_key_to_node(mm, addr);
-    if (mmap_lock_speculate_retry(mm, seq))
+    if (mmap_lock_speculate_retry(mm, seq)) {
     return -EAGAIN;
+    }
     return node;
     }
 #[no_mangle]
 unsafe extern "C" fn futex_mpol(mm: *mut mm_struct, addr: c_ulong) -> c_int {
-    static int futex_mpol(struct mm_struct *mm, unsigned long addr)
-    {
-    int node;
+    let mut node = 0;
     node = futex_key_to_node_opt(mm, addr);
-    if (node >= FUTEX_NO_NODE)
+    if (node >= FUTEX_NO_NODE) {
     return node;
+    }
     guard(mmap_read_lock)(mm);
     return __futex_key_to_node(mm, addr);
     }
 
 #[no_mangle]
 unsafe extern "C" fn futex_mpol(mm: *mut mm_struct, addr: c_ulong) -> c_int {
-    static int futex_mpol(struct mm_struct *mm, unsigned long addr)
-    {
     return FUTEX_NO_NODE;
     }
 
@@ -345,23 +582,24 @@ unsafe extern "C" fn futex_mpol(mm: *mut mm_struct, addr: c_ulong) -> c_int {
 // private hash) is returned if existing. Otherwise a hash bucket from the
 // global hash is returned.
 //
-    static struct futex_hash_bucket *
-    __futex_hash(union futex_key *key, struct futex_private_hash *fph, struct futex_private_hash **fph_p)
-    {
-    let mut node: c_int = key.both.node;
-    u32 hash;
+#[no_mangle]
+pub unsafe extern "C" fn __futex_hash(key: *mut union futex_key, fph: *mut futex_private_hash, fph_p: *mut *mut futex_private_hash) -> *mut c_void {
+pub static mut node: c_int = 0;
+    let mut hash = 0;
 
     if (node == FUTEX_NO_NODE && futex_key_is_private(key)) {
-    if (!fph)
+    if (!fph) {
     fph = rcu_dereference(key.private.mm.futex.phash.hash);
+    }
     if (fph && fph.hash_mask) {
-    if (fph_p)
+    if (fph_p) {
 // fph_p = fph;
+    }
     return __futex_hash_private(key, fph);
     }
     }
 
-    hash = jhash2((u32 *)key, offsetof(typeof(*key), both.offset) / sizeof(u32),
+    hash = jhash2(key, offsetof(typeof(*key), both.offset) / sizeof!(u32),
     key.both.offset);
     if (node == FUTEX_NO_NODE) {
 //
@@ -390,11 +628,11 @@ unsafe extern "C" fn futex_mpol(mm: *mut mm_struct, addr: c_ulong) -> c_int {
 // Return: Initialized hrtimer_sleeper structure or NULL if no timeout
 // value given
 //
-    struct hrtimer_sleeper *futex_setup_timer(ktime_t *time, struct hrtimer_sleeper *timeout,
-    int flags, u64 range_ns)
-    {
-    if (!time)
+#[no_mangle]
+pub unsafe extern "C" fn futex_setup_timer(time: *mut ktime_t, timeout: *mut hrtimer_sleeper, flags: c_int, range_ns: u64) -> *mut c_void {
+    if (!time) {
     return core::ptr::null_mut();
+    }
     hrtimer_setup_sleeper_on_stack(timeout,
     (flags & FLAGS_CLOCKRT) ? CLOCK_REALTIME : CLOCK_MONOTONIC,
     HRTIMER_MODE_ABS);
@@ -425,21 +663,22 @@ unsafe extern "C" fn futex_mpol(mm: *mut mm_struct, addr: c_ulong) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn get_inode_sequence_number(inode: *mut inode) -> u64 {
-    static u64 get_inode_sequence_number(struct inode *inode)
-    {
     static atomic64_t i_seq;
-    u64 old;
+    let mut old = 0;
 // Does the inode already have a sequence number?
     old = atomic64_read(&inode.i_sequence);
-    if (likely(old))
+    if (likely(old)) {
     return old;
+    }
     for (;;) {
-    let mut new: u64 = atomic64_inc_return(&i_seq);
-    if (WARN_ON_ONCE(!new))
+pub static mut new: u64 = 0;
+    if (WARN_ON_ONCE!(!new)) {
     continue;
+    }
     old = 0;
-    if (!atomic64_try_cmpxchg_relaxed(&inode.i_sequence, &old, new))
+    if (!atomic64_try_cmpxchg_relaxed(&inode.i_sequence, &old, new)) {
     return old;
+    }
     return new;
     }
     }
@@ -449,7 +688,7 @@ unsafe extern "C" fn get_inode_sequence_number(inode: *mut inode) -> u64 {
 // @flags:	FLAGS_
 // @key:	address where result is stored.
 // @rw:		mapping needs to be read/write (values: FUTEX_READ,
-// FUTEX_WRITE)
+FUTEX_WRITE)
 //
 // Return: a negative error code or 0
 //
@@ -470,53 +709,59 @@ unsafe extern "C" fn get_inode_sequence_number(inode: *mut inode) -> u64 {
 //
 // lock_page() might sleep, the caller should not hold a spinlock.
 //
-    int get_futex_key(u32 __user *uaddr, unsigned int flags, union futex_key *key,
-    enum futex_access rw)
-    {
-    let mut address: c_ulong = (unsigned long)uaddr;
-    struct mm_struct *mm = current.mm;
-    struct page *page;
-    struct folio *folio;
-    struct address_space *mapping;
+#[no_mangle]
+pub unsafe extern "C" fn get_futex_key(uaddr: *mut u32, flags: c_uint, key: *mut union futex_key, rw: futex_access) -> c_int {
+pub static mut address: c_ulong = 0;
+    let mut mm = current.mm;
+pub static mut page: *mut c_void = core::ptr::null_mut();
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut mapping: *mut c_void = core::ptr::null_mut();
     int node, err, size, ro = 0;
-    let mut node_updated: bool = false;
-    bool fshared;
+pub static mut node_updated: bool = false;
+    let mut fshared = 0;
     fshared = flags & FLAGS_SHARED;
     size = futex_size(flags);
-    if (flags & FLAGS_NUMA)
+    if (flags & FLAGS_NUMA) {
     size *= 2;
+    }
 //
 // The futex address must be "naturally" aligned.
 //
     key.both.offset = address % PAGE_SIZE;
-    if (unlikely((address & (size-1)) != 0))
+    if (unlikely((address & (size-1)) != 0)) {
     return -EINVAL;
+    }
     address -= key.both.offset;
-    if (unlikely(!access_ok(uaddr, size)))
+    if (unlikely(!access_ok(uaddr, size))) {
     return -EFAULT;
-    if (unlikely(should_fail_futex(fshared)))
+    }
+    if (unlikely(should_fail_futex(fshared))) {
     return -EFAULT;
+    }
     node = FUTEX_NO_NODE;
     if (flags & FLAGS_NUMA) {
-    u32 __user *naddr = (void *)uaddr + size / 2;
-    if (get_user_inline(node, naddr))
+    let mut naddr = uaddr + size / 2;
+    if (get_user_inline(node, naddr)) {
     return -EFAULT;
+    }
     if ((node != FUTEX_NO_NODE) &&
-    ((unsigned int)node >= MAX_NUMNODES || !node_possible(node)))
+    ((unsigned int)node >= MAX_NUMNODES || !node_possible(node))) {
     return -EINVAL;
+    }
     }
     if (node == FUTEX_NO_NODE && (flags & FLAGS_MPOL)) {
     node = futex_mpol(mm, address);
     node_updated = true;
     }
     if (flags & FLAGS_NUMA) {
-    u32 __user *naddr = (void *)uaddr + size / 2;
+    let mut naddr = uaddr + size / 2;
     if (node == FUTEX_NO_NODE) {
     node = numa_node_id();
     node_updated = true;
     }
-    if (node_updated && put_user_inline(node, naddr))
+    if (node_updated && put_user_inline(node, naddr)) {
     return -EFAULT;
+    }
     }
     key.both.node = node;
 //
@@ -524,7 +769,7 @@ unsafe extern "C" fn get_inode_sequence_number(inode: *mut inode) -> u64 {
 // As the mm cannot disappear under us and the 'key' only needs
 // virtual address, we dont even have to find the underlying vma.
 // Note : We do have to check 'uaddr' is a valid user address,
-// but access_ok() should be faster than find_vma()
+but access_ok() should be faster than find_vma()
 //
     if (!fshared) {
 //
@@ -533,17 +778,20 @@ unsafe extern "C" fn get_inode_sequence_number(inode: *mut inode) -> u64 {
 // there is only one address space, the address is a unique key
 // on its own.
 //
-    if (IS_ENABLED(CONFIG_MMU))
+    if (IS_ENABLED!(CONFIG_MMU)) {
     key.private.mm = mm;
-    else
+    }
+    else {
     key.private.mm = core::ptr::null_mut();
+    }
     key.private.address = address;
     return 0;
     }
-    again:
+// label;
 // Ignore any VERIFY_READ mapping (futex common case)
-    if (unlikely(should_fail_futex(true)))
+    if (unlikely(should_fail_futex(true))) {
     return -EFAULT;
+    }
     err = get_user_pages_fast(address, 1, FOLL_WRITE, &page);
 //
 // If write access is not required (eg. FUTEX_WAIT), try
@@ -553,10 +801,12 @@ unsafe extern "C" fn get_inode_sequence_number(inode: *mut inode) -> u64 {
     err = get_user_pages_fast(address, 1, 0, &page);
     ro = 1;
     }
-    if (err < 0)
+    if (err < 0) {
     return err;
-    else
+    }
+    else {
     err = 0;
+    }
 //
 // The treatment of mapping from this point on is critical. The folio
 // lock protects many things but in this context the folio lock
@@ -592,7 +842,7 @@ unsafe extern "C" fn get_inode_sequence_number(inode: *mut inode) -> u64 {
 // an unlikely race, but we do need to retry for folio->mapping.
 //
     if (unlikely(!mapping)) {
-    int shmem_swizzled;
+    let mut shmem_swizzled = 0;
 //
 // Folio lock is required to identify which special case above
 // applies. If this is really a shmem page then the folio lock
@@ -602,8 +852,9 @@ unsafe extern "C" fn get_inode_sequence_number(inode: *mut inode) -> u64 {
     shmem_swizzled = folio_test_swapcache(folio) || folio.mapping;
     folio_unlock(folio);
     folio_put(folio);
-    if (shmem_swizzled)
-    goto again;
+    if (shmem_swizzled) {
+// goto;
+    }
     return -EFAULT;
     }
 //
@@ -623,13 +874,13 @@ unsafe extern "C" fn get_inode_sequence_number(inode: *mut inode) -> u64 {
 //
     if (unlikely(should_fail_futex(true)) || ro) {
     err = -EFAULT;
-    goto out;
+// goto;
     }
     key.both.offset |= FUT_OFF_MMSHARED; /* ref taken on mm */
     key.private.mm = mm;
     key.private.address = address;
     } else {
-    struct inode *inode;
+pub static mut inode: *mut c_void = core::ptr::null_mut();
 //
 // The associated futex object in this case is the inode and
 // the folio->mapping must be traversed. Ordinarily this should
@@ -645,20 +896,20 @@ unsafe extern "C" fn get_inode_sequence_number(inode: *mut inode) -> u64 {
     if (READ_ONCE(folio.mapping) != mapping) {
     rcu_read_unlock();
     folio_put(folio);
-    goto again;
+// goto;
     }
     inode = READ_ONCE(mapping.host);
     if (!inode) {
     rcu_read_unlock();
     folio_put(folio);
-    goto again;
+// goto;
     }
     key.both.offset |= FUT_OFF_INODE; /* inode-based key */
     key.shared.i_seq = get_inode_sequence_number(inode);
     key.shared.pgoff = page_pgoff(folio, page);
     rcu_read_unlock();
     }
-    out:
+// label;
     folio_put(folio);
     return err;
     }
@@ -675,11 +926,9 @@ unsafe extern "C" fn get_inode_sequence_number(inode: *mut inode) -> u64 {
 // calling get_user_pages() right away.
 //
 #[no_mangle]
-pub unsafe extern "C" fn fault_in_user_writeable(uaddr: *mut u32 __user) -> c_int {
-    int fault_in_user_writeable(u32 __user *uaddr)
-    {
-    struct mm_struct *mm = current.mm;
-    int ret;
+pub unsafe extern "C" fn fault_in_user_writeable(uaddr: *mut u32 ) -> c_int {
+    let mut mm = current.mm;
+    let mut ret = 0;
     mmap_read_lock(mm);
     ret = fixup_user_fault(mm, (unsigned long)uaddr,
     FAULT_FLAG_WRITE, core::ptr::null_mut());
@@ -693,12 +942,13 @@ pub unsafe extern "C" fn fault_in_user_writeable(uaddr: *mut u32 __user) -> c_in
 //
 // Must be called with the hb lock held.
 //
-    struct futex_q *futex_top_waiter(struct futex_hash_bucket *hb, union futex_key *key)
-    {
-    struct futex_q *this;
+#[no_mangle]
+pub unsafe extern "C" fn futex_top_waiter(hb: *mut futex_hash_bucket, key: *mut union futex_key) -> *mut c_void {
+pub static mut this: *mut c_void = core::ptr::null_mut();
     plist_for_each_entry(this, &hb.chain, list) {
-    if (futex_match(&this.key, key))
+    if (futex_match(&this.key, key)) {
     return this;
+    }
     }
     return core::ptr::null_mut();
     }
@@ -711,14 +961,13 @@ pub unsafe extern "C" fn fault_in_user_writeable(uaddr: *mut u32 __user) -> c_in
 //
 #[no_mangle]
 pub unsafe extern "C" fn wait_for_owner_exiting(ret: c_int, exiting: *mut task_struct) {
-    void wait_for_owner_exiting(int ret, struct task_struct *exiting)
-    {
     if (ret != -EBUSY) {
-    WARN_ON_ONCE(exiting);
+    WARN_ON_ONCE!(exiting);
     return;
     }
-    if (WARN_ON_ONCE(ret == -EBUSY && !exiting))
+    if (WARN_ON_ONCE!(ret == -EBUSY && !exiting)) {
     return;
+    }
     mutex_lock(&exiting.futex.exit_mutex);
 //
 // No point in doing state checking here. If the waiter got here
@@ -739,21 +988,18 @@ pub unsafe extern "C" fn wait_for_owner_exiting(ret: c_int, exiting: *mut task_s
 //
 #[no_mangle]
 pub unsafe extern "C" fn __futex_unqueue(q: *mut futex_q) {
-    void __futex_unqueue(struct futex_q *q)
-    {
-    struct futex_hash_bucket *hb;
-    if (WARN_ON_SMP(!q.lock_ptr) || WARN_ON(plist_node_empty(&q.list)))
+pub static mut hb: *mut c_void = core::ptr::null_mut();
+    if (WARN_ON_SMP(!q.lock_ptr) || WARN_ON!(plist_node_empty(&q.list))) {
     return;
+    }
     lockdep_assert_held(q.lock_ptr);
-    hb = container_of(q.lock_ptr, struct futex_hash_bucket, lock);
+    hb = container_of!(q.lock_ptr, futex_hash_bucket, lock);
     plist_del(&q.list, &hb.chain);
     futex_hb_waiters_dec(hb);
     }
 // The key must be already stored in q->key.
 #[no_mangle]
 pub unsafe extern "C" fn futex_q_lock(q: *mut futex_q, hb: *mut futex_hash_bucket) {
-    void futex_q_lock(struct futex_q *q, struct futex_hash_bucket *hb)
-    {
 //
 // Increment the counter before taking the lock so that
 // a potential waker won't miss a to-be-slept task that is
@@ -769,15 +1015,12 @@ pub unsafe extern "C" fn futex_q_lock(q: *mut futex_q, hb: *mut futex_hash_bucke
     }
 #[no_mangle]
 pub unsafe extern "C" fn futex_q_unlock(hb: *mut futex_hash_bucket) {
-    void futex_q_unlock(struct futex_hash_bucket *hb)
-    {
     futex_hb_waiters_dec(hb);
     spin_unlock(&hb.lock);
     }
-    void __futex_queue(struct futex_q *q, struct futex_hash_bucket *hb,
-    struct task_struct *task)
-    {
-    int prio;
+#[no_mangle]
+pub unsafe extern "C" fn __futex_queue(q: *mut futex_q, hb: *mut futex_hash_bucket, task: *mut task_struct) {
+    let mut prio = 0;
 //
 // The priority used to register this element is
 // - either the real thread-priority for the real-time threads
@@ -804,14 +1047,12 @@ pub unsafe extern "C" fn futex_q_unlock(hb: *mut futex_hash_bucket) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn futex_unqueue(q: *mut futex_q) -> c_int {
-    int futex_unqueue(struct futex_q *q)
-    {
-    spinlock_t *lock_ptr;
-    let mut ret: c_int = 0;
+pub static mut lock_ptr: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
 // RCU so lock_ptr is not going away during locking.
     guard(rcu)();
 // In the common case we don't take the spinlock, which is nice.
-    retry:
+// label;
 //
 // q->lock_ptr can change between this read and the following spin_lock.
 // Use READ_ONCE to forbid the compiler from reloading q->lock_ptr and
@@ -826,7 +1067,7 @@ pub unsafe extern "C" fn futex_unqueue(q: *mut futex_q) -> c_int {
 // corrects the race condition.
 //
 // Reasoning goes like this: if we have the wrong lock,
-// q->lock_ptr must have changed (maybe several times)
+q.lock_ptr must have changed (maybe several times)
 // between reading it and the spin_lock().  It can
 // change again after the spin_lock() but only if it was
 // already changed before the spin_lock().  It cannot,
@@ -835,10 +1076,10 @@ pub unsafe extern "C" fn futex_unqueue(q: *mut futex_q) -> c_int {
 //
     if (unlikely(lock_ptr != q.lock_ptr)) {
     spin_unlock(lock_ptr);
-    goto retry;
+// goto;
     }
     __futex_unqueue(q);
-    BUG_ON(q.pi_state);
+    BUG_ON!(q.pi_state);
     spin_unlock(lock_ptr);
     ret = 1;
     }
@@ -846,19 +1087,17 @@ pub unsafe extern "C" fn futex_unqueue(q: *mut futex_q) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn futex_q_lockptr_lock(q: *mut futex_q) {
-    void futex_q_lockptr_lock(struct futex_q *q)
-    {
-    spinlock_t *lock_ptr;
+pub static mut lock_ptr: *mut c_void = core::ptr::null_mut();
 //
 // See futex_unqueue() why lock_ptr can change.
 //
     guard(rcu)();
-    retry:
+// label;
     lock_ptr = READ_ONCE(q.lock_ptr);
     spin_lock(lock_ptr);
     if (unlikely(lock_ptr != q.lock_ptr)) {
     spin_unlock(lock_ptr);
-    goto retry;
+// goto;
     }
     }
 //
@@ -867,8 +1106,6 @@ pub unsafe extern "C" fn futex_q_lockptr_lock(q: *mut futex_q) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn futex_unqueue_pi(q: *mut futex_q) {
-    void futex_unqueue_pi(struct futex_q *q)
-    {
 //
 // If the lock was not acquired (due to timeout or signal) then the
 // rt_waiter is removed before futex_q is. If this is observed by
@@ -877,9 +1114,10 @@ pub unsafe extern "C" fn futex_unqueue_pi(q: *mut futex_q) {
 // futex_q from the hash bucket list to guarantee consistent state
 // vs. userspace. Therefore the dequeue here must be conditional.
 //
-    if (!plist_node_empty(&q.list))
+    if (!plist_node_empty(&q.list)) {
     __futex_unqueue(q);
-    BUG_ON(!q.pi_state);
+    }
+    BUG_ON!(!q.pi_state);
     put_pi_state(q.pi_state);
     q.pi_state = core::ptr::null_mut();
     }
@@ -889,19 +1127,20 @@ pub unsafe extern "C" fn futex_unqueue_pi(q: *mut futex_q) {
 // Process a futex-list entry, check whether it's owned by the
 // dying task, and do notification if so:
 //
-    static int handle_futex_death(u32 __user *uaddr, struct task_struct *curr,
-    unsigned int mod, bool pending_op)
-    {
-    let mut pi: bool = !!(mod & FUTEX_ROBUST_MOD_PI);
+#[no_mangle]
+pub unsafe extern "C" fn handle_futex_death(uaddr: *mut u32, curr: *mut task_struct, mod: c_uint, pending_op: bool) -> c_int {
+pub static mut pi: bool = false;
     u32 uval, nval, mval;
-    pid_t owner;
-    int err;
+    let mut owner = 0;
+    let mut err = 0;
 // Futex address must be 32bit aligned
-    if ((((unsigned long)uaddr) % sizeof(*uaddr)) != 0)
+    if ((((unsigned long)uaddr) % sizeof!(*uaddr)) != 0) {
     return -1;
-    retry:
-    if (get_user(uval, uaddr))
+    }
+// label;
+    if (get_user(uval, uaddr)) {
     return -1;
+    }
 //
 // Special case for regular (non PI) futexes. Ordinarily, we do
 // not perform any processing here unless the current thread was
@@ -999,21 +1238,26 @@ pub unsafe extern "C" fn futex_unqueue_pi(q: *mut futex_q) {
 // give up and leave the futex locked.
 //
     if ((err = futex_cmpxchg_value_locked(&nval, uaddr, uval, mval))) {
-    switch (err) {
-    case -EFAULT:
-    if (fault_in_user_writeable(uaddr))
+    match (err) {
+    -EFAULT => {
+    if (fault_in_user_writeable(uaddr)) {
     return -1;
-    goto retry;
-    case -EAGAIN:
+    }
+// goto;
+    }
+    -EAGAIN => {
     cond_resched();
-    goto retry;
-    default:
-    WARN_ON_ONCE(1);
+// goto;
+    }
+    _ => {
+    WARN_ON_ONCE!(1);
     return err;
     }
     }
-    if (nval != uval)
-    goto retry;
+    }
+    if (nval != uval) {
+// goto;
+    }
 //
 // Wake robust non-PI futexes here. The wakeup of
 // PI futexes happens in exit_pi_state():
@@ -1027,14 +1271,13 @@ pub unsafe extern "C" fn futex_unqueue_pi(q: *mut futex_q) {
 //
 // Fetch a robust-list pointer. Bit 0 signals PI futexes:
 //
-    static inline int fetch_robust_entry(struct robust_list __user **entry,
-    struct robust_list __user * __user *head,
-    unsigned int *mod)
-    {
-    unsigned long uentry;
-    if (get_user(uentry, (unsigned long __user *)head))
+#[no_mangle]
+pub unsafe extern "C" fn fetch_robust_entry(entry: *mut *mut robust_list, head: *mut *mut robust_list, mod: *mut c_uint) -> c_int {
+    let mut uentry = 0;
+    if (get_user(uentry, head)) {
     return -EFAULT;
-// entry = (void __user *)(uentry & ~FUTEX_ROBUST_MOD_MASK);
+    }
+// entry = (uentry & ~FUTEX_ROBUST_MOD_MASK);
 // mod = uentry & FUTEX_ROBUST_MOD_MASK;
     return 0;
     }
@@ -1046,30 +1289,33 @@ pub unsafe extern "C" fn futex_unqueue_pi(q: *mut futex_q) {
 //
 #[no_mangle]
 unsafe extern "C" fn exit_robust_list(curr: *mut task_struct) {
-    static void exit_robust_list(struct task_struct *curr)
-    {
-    struct robust_list_head __user *head = curr.futex.robust_list;
-    let mut limit: c_uint = ROBUST_LIST_LIMIT, cur_mod, next_mod, pend_mod;
-    struct robust_list __user *entry, *next_entry, *pending;
-    unsigned long futex_offset;
-    int rc;
+    let mut head = curr.futex.robust_list;
+pub static mut limit: c_uint = 0;
+    let mut entry = core::ptr::null_mut();
+    let mut next_entry = core::ptr::null_mut();
+    let mut pending = core::ptr::null_mut();
+    let mut futex_offset = 0;
+    let mut rc = 0;
 //
 // Fetch the list head (which was registered earlier, via
 // sys_set_robust_list()):
 //
-    if (fetch_robust_entry(&entry, &head.list.next, &cur_mod))
+    if (fetch_robust_entry(&entry, &head.list.next, &cur_mod)) {
     return;
+    }
 //
 // Fetch the relative futex offset:
 //
-    if (get_user(futex_offset, &head.futex_offset))
+    if (get_user(futex_offset, &head.futex_offset)) {
     return;
+    }
 //
 // Fetch any possibly pending lock-add first, and handle it
 // if it exists:
 //
-    if (fetch_robust_entry(&pending, &head.list_op_pending, &pend_mod))
+    if (fetch_robust_entry(&pending, &head.list_op_pending, &pend_mod)) {
     return;
+    }
     next_entry = core::ptr::null_mut();	/* avoid warning with gcc */
     while (entry != &head.list) {
 //
@@ -1082,33 +1328,35 @@ unsafe extern "C" fn exit_robust_list(curr: *mut task_struct) {
 // don't process it twice:
 //
     if (entry != pending) {
-    if (handle_futex_death((void __user *)entry + futex_offset,
-    curr, cur_mod, HANDLE_DEATH_LIST))
+    if (handle_futex_death(entry + futex_offset,
+    curr, cur_mod, HANDLE_DEATH_LIST)) {
     return;
     }
-    if (rc)
+    }
+    if (rc) {
     return;
+    }
     entry = next_entry;
     cur_mod = next_mod;
 //
 // Avoid excessively long or circular lists:
 //
-    if (!--limit)
+    if (!--limit) {
     break;
+    }
     cond_resched();
     }
     if (pending) {
-    handle_futex_death((void __user *)pending + futex_offset,
+    handle_futex_death(pending + futex_offset,
     curr, pend_mod, HANDLE_DEATH_PENDING);
     }
     }
 #[no_mangle]
-unsafe extern "C" fn robust_list_clear_pending(pop: *mut unsigned long __user) -> bool {
-    static bool robust_list_clear_pending(unsigned long __user *pop)
-    {
-    struct robust_list_head __user *head = current.futex.robust_list;
-    if (!put_user(0UL, pop))
+unsafe extern "C" fn robust_list_clear_pending(pop: *mut unsigned long ) -> bool {
+    let mut head = current.futex.robust_list;
+    if (!put_user(0UL, pop)) {
     return true;
+    }
 //
 // Just give up. The robust list head is usually part of TLS, so the
 // chance that this gets resolved is close to zero.
@@ -1118,27 +1366,27 @@ unsafe extern "C" fn robust_list_clear_pending(pop: *mut unsigned long __user) -
 // task exits.  Better a few stale futexes than corrupted memory. But
 // that's mostly an academic exercise.
 //
-    if (pop == (unsigned long __user *)&head.list_op_pending)
+    if (pop == &head.list_op_pending) {
     current.futex.robust_list = core::ptr::null_mut();
+    }
     return false;
     }
 
-    static void __user *futex_uaddr(struct robust_list __user *entry,
+    static void  *futex_uaddr(robust_list  *entry,
     compat_long_t futex_offset)
     {
-    let mut base: compat_uptr_t = ptr_to_compat(entry);
-    void __user *uaddr = compat_ptr(base + futex_offset);
+pub static mut base: compat_uptr_t = 0;
+    let mut uaddr = compat_ptr(base + futex_offset);
     return uaddr;
     }
 //
 // Fetch a robust-list pointer. Bit 0 signals PI futexes:
 //
-    static inline int
-    compat_fetch_robust_entry(compat_uptr_t *uentry, struct robust_list __user **entry,
-    compat_uptr_t __user *head, unsigned int *pflags)
-    {
-    if (get_user(*uentry, head))
+#[no_mangle]
+pub unsafe extern "C" fn compat_fetch_robust_entry(uentry: *mut compat_uptr_t, entry: *mut *mut robust_list, head: *mut compat_uptr_t, pflags: *mut c_uint) -> c_int {
+    if (get_user(*uentry, head)) {
     return -EFAULT;
+    }
 // entry = compat_ptr((*uentry) & ~FUTEX_ROBUST_MOD_MASK);
 // pflags = (unsigned int)(*uentry) & FUTEX_ROBUST_MOD_MASK;
     return 0;
@@ -1151,79 +1399,86 @@ unsafe extern "C" fn robust_list_clear_pending(pop: *mut unsigned long __user) -
 //
 #[no_mangle]
 unsafe extern "C" fn compat_exit_robust_list(curr: *mut task_struct) {
-    static void compat_exit_robust_list(struct task_struct *curr)
-    {
-    struct compat_robust_list_head __user *head = current.futex.compat_robust_list;
-    let mut limit: c_uint = ROBUST_LIST_LIMIT, cur_mod, next_mod, pend_mod;
-    struct robust_list __user *entry, *next_entry, *pending;
+    let mut head = current.futex.compat_robust_list;
+pub static mut limit: c_uint = 0;
+    let mut entry = core::ptr::null_mut();
+    let mut next_entry = core::ptr::null_mut();
+    let mut pending = core::ptr::null_mut();
     compat_uptr_t uentry, next_uentry, upending;
-    compat_long_t futex_offset;
-    int rc;
+    let mut futex_offset;
+    let mut rc = 0;
 //
 // Fetch the list head (which was registered earlier, via
 // sys_set_robust_list()):
 //
-    if (compat_fetch_robust_entry(&uentry, &entry, &head.list.next, &cur_mod))
+    if (compat_fetch_robust_entry(&uentry, &entry, &head.list.next, &cur_mod)) {
     return;
+    }
 //
 // Fetch the relative futex offset:
 //
-    if (get_user(futex_offset, &head.futex_offset))
+    if (get_user(futex_offset, &head.futex_offset)) {
     return;
+    }
 //
 // Fetch any possibly pending lock-add first, and handle it
 // if it exists:
 //
-    if (compat_fetch_robust_entry(&upending, &pending, &head.list_op_pending, &pend_mod))
+    if (compat_fetch_robust_entry(&upending, &pending, &head.list_op_pending, &pend_mod)) {
     return;
+    }
     next_entry = core::ptr::null_mut();	/* avoid warning with gcc */
-    while (entry != (struct robust_list __user *) &head.list) {
+    while (entry !=  &head.list) {
 //
 // Fetch the next entry in the list before calling
 // handle_futex_death:
 //
     rc = compat_fetch_robust_entry(&next_uentry, &next_entry,
-    (compat_uptr_t __user *)&entry.next, &next_mod);
+    &entry.next, &next_mod);
 //
 // A pending lock might already be on the list, so
 // dont process it twice:
 //
     if (entry != pending) {
-    void __user *uaddr = futex_uaddr(entry, futex_offset);
-    if (handle_futex_death(uaddr, curr, cur_mod, HANDLE_DEATH_LIST))
+    let mut uaddr = futex_uaddr(entry, futex_offset);
+    if (handle_futex_death(uaddr, curr, cur_mod, HANDLE_DEATH_LIST)) {
     return;
     }
-    if (rc)
+    }
+    if (rc) {
     return;
+    }
     uentry = next_uentry;
     entry = next_entry;
     cur_mod = next_mod;
 //
 // Avoid excessively long or circular lists:
 //
-    if (!--limit)
+    if (!--limit) {
     break;
+    }
     cond_resched();
     }
     if (pending) {
-    void __user *uaddr = futex_uaddr(pending, futex_offset);
+    let mut uaddr = futex_uaddr(pending, futex_offset);
     handle_futex_death(uaddr, curr, pend_mod, HANDLE_DEATH_PENDING);
     }
     }
 #[no_mangle]
-unsafe extern "C" fn compat_robust_list_clear_pending(pop: *mut u32 __user) -> bool {
-    static bool compat_robust_list_clear_pending(u32 __user *pop)
-    {
-    struct compat_robust_list_head __user *head = current.futex.compat_robust_list;
-    if (!put_user(0U, pop))
+unsafe extern "C" fn compat_robust_list_clear_pending(pop: *mut u32 ) -> bool {
+    let mut head = current.futex.compat_robust_list;
+    if (!put_user(0U, pop)) {
     return true;
+    }
 // See comment in robust_list_clear_pending().
-    if (pop == &head.list_op_pending)
+    if (pop == &head.list_op_pending) {
     current.futex.compat_robust_list = core::ptr::null_mut();
+    }
     return false;
     }
 
-    static bool compat_robust_list_clear_pending(u32 __user *pop_addr) { return false; }
+#[no_mangle]
+pub unsafe extern "C" fn compat_robust_list_clear_pending(pop_addr: *mut u32) -> bool { return false; }
 
 //
 // This task is holding PI mutexes at exit time => bad.
@@ -1232,11 +1487,9 @@ unsafe extern "C" fn compat_robust_list_clear_pending(pop: *mut u32 __user) -> b
 //
 #[no_mangle]
 unsafe extern "C" fn exit_pi_state_list(curr: *mut task_struct) {
-    static void exit_pi_state_list(struct task_struct *curr)
-    {
     struct list_head *next, *head = &curr.futex.pi_state_list;
-    struct futex_pi_state *pi_state;
-    let mut key: union futex_key = FUTEX_KEY_INIT;
+pub static mut pi_state: *mut c_void = core::ptr::null_mut();
+pub static mut key: union futex_key = 0;
 //
 // The mutex mm_struct::futex_hash_lock might be acquired.
 //
@@ -1246,7 +1499,7 @@ unsafe extern "C" fn exit_pi_state_list(curr: *mut task_struct) {
 // below. The hb pointer is acquired under the pi_lock so we can't block
 // on the mutex.
 //
-    WARN_ON(curr != current);
+    WARN_ON!(curr != current);
     guard(private_hash)(current.mm);
 //
 // We are a ZOMBIE and nobody can enqueue itself on
@@ -1256,11 +1509,11 @@ unsafe extern "C" fn exit_pi_state_list(curr: *mut task_struct) {
     raw_spin_lock_irq(&curr.pi_lock);
     while (!list_empty(head)) {
     next = head.next;
-    pi_state = list_entry(next, struct futex_pi_state, list);
+    pi_state = list_entry(next, futex_pi_state, list);
     key = pi_state.key;
     if (1) {
     CLASS(hbr, hbr)(&key);
-    let mut hb: auto = hbr.hb;
+pub static mut hb: auto = 0;
 //
 // We can race against put_pi_state() removing itself from the
 // list (a waiter going away). put_pi_state() will first
@@ -1292,8 +1545,8 @@ unsafe extern "C" fn exit_pi_state_list(curr: *mut task_struct) {
     put_pi_state(pi_state);
     continue;
     }
-    WARN_ON(pi_state.owner != curr);
-    WARN_ON(list_empty(&pi_state.list));
+    WARN_ON!(pi_state.owner != curr);
+    WARN_ON!(list_empty(&pi_state.list));
     list_del_init(&pi_state.list);
     pi_state.owner = core::ptr::null_mut();
     raw_spin_unlock(&curr.pi_lock);
@@ -1307,38 +1560,36 @@ unsafe extern "C" fn exit_pi_state_list(curr: *mut task_struct) {
     raw_spin_unlock_irq(&curr.pi_lock);
     }
 
-    static inline void exit_pi_state_list(struct task_struct *curr) { }
+#[no_mangle]
+pub unsafe extern "C" fn exit_pi_state_list(curr: *mut task_struct) { }
 
 #[no_mangle]
-pub unsafe extern "C" fn futex_robust_list_clear_pending(pop: *mut void __user, flags: c_uint) -> bool {
-    bool futex_robust_list_clear_pending(void __user *pop, unsigned int flags)
-    {
-    let mut size32bit: bool = !!(flags & FLAGS_ROBUST_LIST32);
-    if (!IS_ENABLED(CONFIG_64BIT) && !size32bit)
+pub unsafe extern "C" fn futex_robust_list_clear_pending(pop: *mut c_void , flags: c_uint) -> bool {
+pub static mut size32bit: bool = false;
+    if (!IS_ENABLED!(CONFIG_64BIT) && !size32bit) {
     return false;
-    if (IS_ENABLED(CONFIG_64BIT) && size32bit)
+    }
+    if (IS_ENABLED!(CONFIG_64BIT) && size32bit) {
     return compat_robust_list_clear_pending(pop);
+    }
     return robust_list_clear_pending(pop);
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn __futex_fixup_robust_unlock(regs: *mut pt_regs, csr: *mut futex_unlock_cs_range) {
-    void __futex_fixup_robust_unlock(struct pt_regs *regs, struct futex_unlock_cs_range *csr)
-    {
 //
 // arch_futex_robust_unlock_get_pop() returns the list pending op pointer from
 // @regs if the try_cmpxchg() succeeded.
 //
-    void __user *pop = arch_futex_robust_unlock_get_pop(regs);
-    if (!pop)
+    let mut pop = arch_futex_robust_unlock_get_pop(regs);
+    if (!pop) {
     return;
+    }
     futex_robust_list_clear_pending(pop, csr.pop_size32 ? FLAGS_ROBUST_LIST32 : 0);
     }
 
 #[no_mangle]
 unsafe extern "C" fn futex_cleanup(tsk: *mut task_struct) {
-    static void futex_cleanup(struct task_struct *tsk)
-    {
     if (unlikely(tsk.futex.robust_list)) {
     exit_robust_list(tsk);
     tsk.futex.robust_list = core::ptr::null_mut();
@@ -1349,8 +1600,9 @@ unsafe extern "C" fn futex_cleanup(tsk: *mut task_struct) {
     tsk.futex.compat_robust_list = core::ptr::null_mut();
     }
 
-    if (unlikely(!list_empty(&tsk.futex.pi_state_list)))
+    if (unlikely(!list_empty(&tsk.futex.pi_state_list))) {
     exit_pi_state_list(tsk);
+    }
     }
 //
 // futex_exit_recursive - Set the tasks futex state to FUTEX_STATE_DEAD
@@ -1371,8 +1623,6 @@ unsafe extern "C" fn futex_cleanup(tsk: *mut task_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn futex_exit_recursive(tsk: *mut task_struct) {
-    void futex_exit_recursive(struct task_struct *tsk)
-    {
 // If the state is FUTEX_STATE_EXITING then futex_exit_mutex is held
     if (tsk.futex.state == FUTEX_STATE_EXITING) {
     __assume_ctx_lock(&tsk.futex.exit_mutex);
@@ -1382,9 +1632,6 @@ pub unsafe extern "C" fn futex_exit_recursive(tsk: *mut task_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn futex_cleanup_begin(tsk: *mut task_struct) {
-    static void futex_cleanup_begin(struct task_struct *tsk)
-    __acquires(&tsk.futex.exit_mutex)
-    {
 //
 // Prevent various race issues against a concurrent incoming waiter
 // including live locks by forcing the waiter to block on
@@ -1409,9 +1656,6 @@ unsafe extern "C" fn futex_cleanup_begin(tsk: *mut task_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn futex_cleanup_end(tsk: *mut task_struct) {
-    static void futex_cleanup_end(struct task_struct *tsk)
-    __releases(&tsk.futex.exit_mutex)
-    {
     scoped_guard(raw_spinlock_irq, &tsk.pi_lock)
     tsk.futex.state = FUTEX_STATE_DEAD;
 //
@@ -1438,8 +1682,6 @@ unsafe extern "C" fn futex_cleanup_end(tsk: *mut task_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn futex_exit_exec_release(tsk: *mut task_struct) {
-    void futex_exit_exec_release(struct task_struct *tsk)
-    {
     futex_cleanup_begin(tsk);
     futex_cleanup(tsk);
     futex_cleanup_end(tsk);
@@ -1449,8 +1691,6 @@ pub unsafe extern "C" fn futex_exit_exec_release(tsk: *mut task_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn futex_exec_done(tsk: *mut task_struct) {
-    void futex_exec_done(struct task_struct *tsk)
-    {
 //
 // This store does not have to take tsk::futex::exit_mutex because the
 // phase where waiters block on it during state FUTEX_STATE_EXITING has
@@ -1466,8 +1706,6 @@ pub unsafe extern "C" fn futex_exec_done(tsk: *mut task_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn futex_hash_bucket_init(fhb: *mut futex_hash_bucket) {
-    static void futex_hash_bucket_init(struct futex_hash_bucket *fhb)
-    {
     atomic_set(&fhb.waiters, 0);
     plist_head_init(&fhb.chain);
     spin_lock_init(&fhb.lock);
@@ -1484,18 +1722,16 @@ pub const FH_CUSTOM: c_uint = 0x01;
 // re-initializes the state automatically, such that the fph swizzle is also a
 // transition back to per-cpu.
 //
-    static void futex_ref_rcu(struct rcu_head *head);
+// forward_decl: futex_ref_rcu;
 #[no_mangle]
 unsafe extern "C" fn __futex_ref_atomic_begin(fph: *mut futex_private_hash) {
-    static void __futex_ref_atomic_begin(struct futex_private_hash *fph)
-    {
-    struct mm_struct *mm = fph.mm;
+    let mut mm = fph.mm;
 //
 // The counter we're about to switch to must have fully switched;
 // otherwise it would be impossible for it to have reported success
 // from futex_ref_is_dead().
 //
-    WARN_ON_ONCE(atomic_long_read(&mm.futex.phash.atomic) != 0);
+    WARN_ON_ONCE!(atomic_long_read(&mm.futex.phash.atomic) != 0);
 //
 // Set the atomic to the bias value such that futex_ref_{get,put}()
 // will never observe 0. Will be fixed up in __futex_ref_atomic_end()
@@ -1507,23 +1743,21 @@ unsafe extern "C" fn __futex_ref_atomic_begin(fph: *mut futex_private_hash) {
     }
 #[no_mangle]
 unsafe extern "C" fn __futex_ref_atomic_end(fph: *mut futex_private_hash) {
-    static void __futex_ref_atomic_end(struct futex_private_hash *fph)
-    {
-    struct mm_struct *mm = fph.mm;
-    let mut count: c_uint = 0;
-    long ret;
-    int cpu;
+    let mut mm = fph.mm;
+pub static mut count: c_uint = 0;
+    let mut ret = 0;
+    let mut cpu = 0;
 //
 // Per __futex_ref_atomic_begin() the state of the fph must be ATOMIC
 // and per this RCU callback, everybody must now observe this state and
 // use the atomic variable.
 //
-    WARN_ON_ONCE(fph.state != FR_ATOMIC);
+    WARN_ON_ONCE!(fph.state != FR_ATOMIC);
 //
 // Therefore the per-cpu counter is now stable, sum and reset.
 //
     for_each_possible_cpu(cpu) {
-    unsigned int *ptr = per_cpu_ptr(mm.futex.phash.ref, cpu);
+    let mut ptr = per_cpu_ptr(mm.futex.phash.ref, cpu);
     count += *ptr;
 // ptr = 0;
     }
@@ -1538,17 +1772,16 @@ unsafe extern "C" fn __futex_ref_atomic_end(fph: *mut futex_private_hash) {
 // become true.
 //
     ret = atomic_long_add_return(count - LONG_MAX - 1, &mm.futex.phash.atomic);
-    if (!ret)
+    if (!ret) {
     wake_up_var(mm);
-    WARN_ON_ONCE(ret < 0);
+    }
+    WARN_ON_ONCE!(ret < 0);
     mmput_async(mm);
     }
 #[no_mangle]
 unsafe extern "C" fn futex_ref_rcu(head: *mut rcu_head) {
-    static void futex_ref_rcu(struct rcu_head *head)
-    {
-    struct mm_struct *mm = container_of(head, struct mm_struct, futex.phash.rcu);
-    struct futex_private_hash *fph = rcu_dereference_raw(mm.futex.phash.hash);
+    let mut mm = container_of!(head, mm_struct, futex.phash.rcu);
+    let mut fph = rcu_dereference_raw(mm.futex.phash.hash);
     if (fph.state == FR_PERCPU) {
 //
 // Per this extra grace-period, everybody must now observe
@@ -1569,13 +1802,11 @@ unsafe extern "C" fn futex_ref_rcu(head: *mut rcu_head) {
 //
 #[no_mangle]
 unsafe extern "C" fn futex_ref_drop(fph: *mut futex_private_hash) {
-    static void futex_ref_drop(struct futex_private_hash *fph)
-    {
-    struct mm_struct *mm = fph.mm;
+    let mut mm = fph.mm;
 //
 // Can only transition the current fph;
 //
-    WARN_ON_ONCE(rcu_dereference_raw(mm.futex.phash.hash) != fph);
+    WARN_ON_ONCE!(rcu_dereference_raw(mm.futex.phash.hash) != fph);
 //
 // We enqueue at least one RCU callback. Ensure mm stays if the task
 // exits before the transition is completed.
@@ -1613,9 +1844,7 @@ unsafe extern "C" fn futex_ref_drop(fph: *mut futex_private_hash) {
     }
 #[no_mangle]
 unsafe extern "C" fn futex_ref_get(fph: *mut futex_private_hash) -> bool {
-    static bool futex_ref_get(struct futex_private_hash *fph)
-    {
-    struct mm_struct *mm = fph.mm;
+    let mut mm = fph.mm;
     guard(preempt)();
     if (READ_ONCE(fph.state) == FR_PERCPU) {
     __this_cpu_inc(*mm.futex.phash.ref);
@@ -1625,9 +1854,7 @@ unsafe extern "C" fn futex_ref_get(fph: *mut futex_private_hash) -> bool {
     }
 #[no_mangle]
 unsafe extern "C" fn futex_ref_put(fph: *mut futex_private_hash) -> bool {
-    static bool futex_ref_put(struct futex_private_hash *fph)
-    {
-    struct mm_struct *mm = fph.mm;
+    let mut mm = fph.mm;
     guard(preempt)();
     if (READ_ONCE(fph.state) == FR_PERCPU) {
     __this_cpu_dec(*mm.futex.phash.ref);
@@ -1637,27 +1864,22 @@ unsafe extern "C" fn futex_ref_put(fph: *mut futex_private_hash) -> bool {
     }
 #[no_mangle]
 unsafe extern "C" fn futex_ref_is_dead(fph: *mut futex_private_hash) -> bool {
-    static bool futex_ref_is_dead(struct futex_private_hash *fph)
-    {
-    struct mm_struct *mm = fph.mm;
+    let mut mm = fph.mm;
     guard(rcu)();
-    if (smp_load_acquire(&fph.state) == FR_PERCPU)
+    if (smp_load_acquire(&fph.state) == FR_PERCPU) {
     return false;
+    }
     return atomic_long_read(&mm.futex.phash.atomic) == 0;
     }
 #[no_mangle]
 unsafe extern "C" fn futex_hash_init_mm(fd: *mut futex_mm_data) {
-    static void futex_hash_init_mm(struct futex_mm_data *fd)
-    {
-    memset(&fd.phash, 0, sizeof(fd.phash));
+    memset(&fd.phash, 0, sizeof!(fd.phash));
     mutex_init(&fd.phash.lock);
     fd.phash.batches = get_state_synchronize_rcu();
     }
 #[no_mangle]
 pub unsafe extern "C" fn futex_hash_free(mm: *mut mm_struct) {
-    void futex_hash_free(struct mm_struct *mm)
-    {
-    struct futex_private_hash *fph;
+pub static mut fph: *mut c_void = core::ptr::null_mut();
     free_percpu(mm.futex.phash.ref);
     kvfree(mm.futex.phash.hash_new);
     fph = rcu_dereference_raw(mm.futex.phash.hash);
@@ -1665,85 +1887,93 @@ pub unsafe extern "C" fn futex_hash_free(mm: *mut mm_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn futex_pivot_pending(mm: *mut mm_struct) -> bool {
-    static bool futex_pivot_pending(struct mm_struct *mm)
-    {
-    struct futex_mm_phash *mmph = &mm.futex.phash;
-    struct futex_private_hash *fph;
+    let mut mmph = &mm.futex.phash;
+pub static mut fph: *mut c_void = core::ptr::null_mut();
     guard(mutex)(&mmph.lock);
-    if (!mmph.hash_new)
+    if (!mmph.hash_new) {
     return true;
+    }
     fph = rcu_dereference_raw(mmph.hash);
     return futex_ref_is_dead(fph);
     }
-    static bool futex_hash_less(struct futex_private_hash *a,
-    struct futex_private_hash *b)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn futex_hash_less(a: *mut futex_private_hash, b: *mut futex_private_hash) -> bool {
 // user provided always wins
-    if (!a.custom && b.custom)
+    if (!a.custom && b.custom) {
     return true;
-    if (a.custom && !b.custom)
+    }
+    if (a.custom && !b.custom) {
     return false;
+    }
 // zero-sized hash wins
-    if (!b.hash_mask)
+    if (!b.hash_mask) {
     return true;
-    if (!a.hash_mask)
+    }
+    if (!a.hash_mask) {
     return false;
+    }
 // keep the biggest
-    if (a.hash_mask < b.hash_mask)
+    if (a.hash_mask < b.hash_mask) {
     return true;
-    if (a.hash_mask > b.hash_mask)
+    }
+    if (a.hash_mask > b.hash_mask) {
     return false;
+    }
     return false; /* equal */
     }
 #[no_mangle]
 unsafe extern "C" fn futex_hash_allocate(hash_slots: c_uint, flags: c_uint) -> c_int {
-    static int futex_hash_allocate(unsigned int hash_slots, unsigned int flags)
-    {
-    struct mm_struct *mm = current.mm;
-    struct futex_private_hash *fph;
-    let mut custom: bool = flags & FH_CUSTOM;
-    int i;
-    if (hash_slots && (hash_slots == 1 || !is_power_of_2(hash_slots)))
+    let mut mm = current.mm;
+pub static mut fph: *mut c_void = core::ptr::null_mut();
+pub static mut custom: bool = false;
+    let mut i = 0;
+    if (hash_slots && (hash_slots == 1 || !is_power_of_2(hash_slots))) {
     return -EINVAL;
+    }
 //
 // Once we've disabled the global hash there is no way back.
 //
     scoped_guard(rcu) {
     fph = rcu_dereference(mm.futex.phash.hash);
     if (fph && !fph.hash_mask) {
-    if (custom)
+    if (custom) {
     return -EBUSY;
+    }
     return 0;
     }
     }
     if (!mm.futex.phash.ref) {
-    unsigned int __percpu *ref = alloc_percpu(unsigned int);
-    if (!ref)
+    let mut ref = alloc_percpu(unsigned int);
+    if (!ref) {
     return -ENOMEM;
+    }
 //
 // Tasks sharing the mm can run this concurrently, so take the
 // initial reference before publishing the counter.
 //
     this_cpu_inc(*ref); /* 0 . 1 */
-    if (cmpxchg(&mm.futex.phash.ref, core::ptr::null_mut(), ref))
+    if (cmpxchg(&mm.futex.phash.ref, core::ptr::null_mut(), ref)) {
     free_percpu(ref);
+    }
     }
     fph = kvzalloc_flex(*fph, queues, hash_slots,
     GFP_KERNEL_ACCOUNT | __GFP_NOWARN);
-    if (!fph)
+    if (!fph) {
     return -ENOMEM;
+    }
     fph.hash_mask = hash_slots ? hash_slots - 1 : 0;
     fph.custom = custom;
     fph.mm = mm;
-    for (i = 0; i < hash_slots; i++)
+    for (i = 0; i < hash_slots; i++) {
     futex_hash_bucket_init(&fph.queues[i]);
+    }
     if (custom) {
-    struct wait_bit_queue_entry __wbq_entry;
-    struct wait_queue_head *__wq_head;
+pub static mut __wbq_entry: usize = 0;
+pub static mut __wq_head: *mut c_void = core::ptr::null_mut();
 //
 // Only let prctl() wait / retry; don't unduly delay clone().
 //
-    again:
+// label;
     __wq_head = __var_waitqueue(mm);
     init_wait_var_entry(&__wbq_entry, mm, 0);
     __wbq_entry.wq_entry.func = woken_wake_bit_function;
@@ -1760,13 +1990,15 @@ unsafe extern "C" fn futex_hash_allocate(hash_slots: c_uint, flags: c_uint) -> c
     smp_mb();
     while (!futex_pivot_pending(mm) &&
     wait_woken(&__wbq_entry.wq_entry, TASK_UNINTERRUPTIBLE,
-    MAX_SCHEDULE_TIMEOUT))
+    MAX_SCHEDULE_TIMEOUT)) {
 // empty */;
+    }
     remove_wait_queue(__wq_head, &__wbq_entry.wq_entry);
     }
     scoped_guard(mutex, &mm.futex.phash.lock) {
     struct futex_private_hash *free __free(kvfree) = core::ptr::null_mut();
-    struct futex_private_hash *cur, *new;
+    let mut cur = core::ptr::null_mut();
+    let mut new = core::ptr::null_mut();
     cur = rcu_dereference_protected(mm.futex.phash.hash,
     lockdep_is_held(&mm.futex.phash.lock));
     new = mm.futex.phash.hash_new;
@@ -1810,26 +2042,27 @@ unsafe extern "C" fn futex_hash_allocate(hash_slots: c_uint, flags: c_uint) -> c
 // Will set mm->futex.phash.new_hash on failure;
 // futex_private_hash_get() will try again.
 //
-    if (!__futex_pivot_hash(mm, new) && custom)
-    goto again;
+    if (!__futex_pivot_hash(mm, new) && custom) {
+// goto;
+    }
     }
     }
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn futex_hash_allocate_default() -> c_int {
-    int futex_hash_allocate_default(void)
-    {
     unsigned int threads, buckets, current_buckets = 0;
-    struct futex_private_hash *fph;
-    if (!current.mm)
+pub static mut fph: *mut c_void = core::ptr::null_mut();
+    if (!current.mm) {
     return 0;
+    }
     scoped_guard(rcu) {
     threads = min_t(unsigned int, get_nr_threads(current), num_online_cpus());
     fph = rcu_dereference(current.mm.futex.phash.hash);
     if (fph) {
-    if (fph.custom)
+    if (fph.custom) {
     return 0;
+    }
     current_buckets = fph.hash_mask + 1;
     }
     }
@@ -1839,93 +2072,92 @@ pub unsafe extern "C" fn futex_hash_allocate_default() -> c_int {
 //
     buckets = roundup_pow_of_two(4 * threads);
     buckets = clamp(buckets, 16, __futex_mask + 1);
-    if (current_buckets >= buckets)
+    if (current_buckets >= buckets) {
     return 0;
+    }
     return futex_hash_allocate(buckets, 0);
     }
 #[no_mangle]
 unsafe extern "C" fn futex_hash_get_slots() -> c_int {
-    static int futex_hash_get_slots(void)
-    {
-    struct futex_private_hash *fph;
+pub static mut fph: *mut c_void = core::ptr::null_mut();
     guard(rcu)();
     fph = rcu_dereference(current.mm.futex.phash.hash);
-    if (fph && fph.hash_mask)
+    if (fph && fph.hash_mask) {
     return fph.hash_mask + 1;
+    }
     return 0;
     }
 
-    static inline int futex_hash_allocate(unsigned int hslots, unsigned int flags) { return -EINVAL; }
-    static inline int futex_hash_get_slots(void) { return 0; }
-    static inline void futex_hash_init_mm(struct futex_mm_data *fd) { }
+#[no_mangle]
+pub unsafe extern "C" fn futex_hash_allocate(hslots: c_uint, flags: c_uint) -> c_int { return -EINVAL; }
+#[no_mangle]
+pub unsafe extern "C" fn futex_hash_get_slots() -> c_int { return 0; }
+#[no_mangle]
+pub unsafe extern "C" fn futex_hash_init_mm(fd: *mut futex_mm_data) { }
 
 #[no_mangle]
 unsafe extern "C" fn futex_invalidate_cs_ranges(fd: *mut futex_mm_data) {
-    static void futex_invalidate_cs_ranges(struct futex_mm_data *fd)
-    {
 //
 // Invalidate start_ip so that the quick check fails for ip >= start_ip
 // if VDSO is not mapped or the second slot is not available for compat
 // tasks as they use VDSO32 which does not provide the 64-bit pointer
 // variant.
 //
-    for (int i = 0; i < FUTEX_ROBUST_MAX_CS_RANGES; i++)
+    for (int i = 0; i < FUTEX_ROBUST_MAX_CS_RANGES; i++) {
     fd.unlock.cs_ranges[i].start_ip = ~0UL;
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn futex_reset_cs_ranges(fd: *mut futex_mm_data) {
-    void futex_reset_cs_ranges(struct futex_mm_data *fd)
-    {
-    memset(fd.unlock.cs_ranges, 0, sizeof(fd.unlock.cs_ranges));
+    memset(fd.unlock.cs_ranges, 0, sizeof!(fd.unlock.cs_ranges));
     futex_invalidate_cs_ranges(fd);
     }
 #[no_mangle]
 unsafe extern "C" fn futex_robust_unlock_init_mm(fd: *mut futex_mm_data) {
-    static void futex_robust_unlock_init_mm(struct futex_mm_data *fd)
-    {
 // mm_dup() preserves the range, mm_alloc() clears it
-    if (!fd.unlock.cs_ranges[0].start_ip)
+    if (!fd.unlock.cs_ranges[0].start_ip) {
     futex_invalidate_cs_ranges(fd);
     }
+    }
 
-    static inline void futex_robust_unlock_init_mm(struct futex_mm_data *fd) { }
+#[no_mangle]
+pub unsafe extern "C" fn futex_robust_unlock_init_mm(fd: *mut futex_mm_data) { }
 
 #[no_mangle]
 pub unsafe extern "C" fn futex_mm_init(mm: *mut mm_struct) {
-    void futex_mm_init(struct mm_struct *mm)
-    {
     futex_hash_init_mm(&mm.futex);
     futex_robust_unlock_init_mm(&mm.futex);
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn futex_hash_prctl(arg2: c_ulong, arg3: c_ulong, arg4: c_ulong) -> c_int {
-    int futex_hash_prctl(unsigned long arg2, unsigned long arg3, unsigned long arg4)
-    {
-    let mut flags: c_uint = FH_CUSTOM;
-    int ret;
-    switch (arg2) {
-    case PR_FUTEX_HASH_SET_SLOTS:
-    if (arg4)
+pub static mut flags: c_uint = 0;
+    let mut ret = 0;
+    match (arg2) {
+    PR_FUTEX_HASH_SET_SLOTS => {
+    if (arg4) {
     return -EINVAL;
+    }
     ret = futex_hash_allocate(arg3, flags);
-    break;
-    case PR_FUTEX_HASH_GET_SLOTS:
+    // break;
+    }
+    PR_FUTEX_HASH_GET_SLOTS => {
     ret = futex_hash_get_slots();
-    break;
-    default:
+    // break;
+    }
+    _ => {
     ret = -EINVAL;
-    break;
+    // break;
+    }
     }
     return ret;
     }
 #[no_mangle]
-unsafe extern "C" fn futex_init() -> int __init {
-    static int __init futex_init(void)
-    {
+unsafe extern "C" fn futex_init() -> c_int {
     unsigned long hashsize, i;
-    unsigned int order, n;
-    unsigned long size;
+    let mut order = 0;
+    let mut n = 0;
+    let mut size = 0;
 
     hashsize = 16;
 
@@ -1936,7 +2168,7 @@ unsafe extern "C" fn futex_init() -> int __init {
 
     __futex_mask = hashsize - 1;
     __futex_shift = ilog2(hashsize);
-    size = sizeof(struct futex_hash_bucket) * hashsize;
+    size = sizeof!(futex_hash_bucket) * hashsize;
     order = get_order(size);
     __futex_queues = kzalloc_objs(*__futex_queues, nr_node_ids);
     kmemleak_not_leak(__futex_queues);
@@ -1944,21 +2176,24 @@ unsafe extern "C" fn futex_init() -> int __init {
     runtime_const_init(mask,  __futex_mask);
     runtime_const_init(ptr,   __futex_queues);
     barrier();
-    BUG_ON(!futex_queues());
+    BUG_ON!(!futex_queues());
     for_each_node(n) {
-    struct futex_hash_bucket *table;
-    if (order > MAX_PAGE_ORDER)
+pub static mut table: *mut c_void = core::ptr::null_mut();
+    if (order > MAX_PAGE_ORDER) {
     table = vmalloc_huge_node(size, GFP_KERNEL, n);
-    else
+    }
+    else {
     table = alloc_pages_exact_nid(n, size, GFP_KERNEL);
-    BUG_ON(!table);
-    for (i = 0; i < hashsize; i++)
+    }
+    BUG_ON!(!table);
+    for (i = 0; i < hashsize; i++) {
     futex_hash_bucket_init(&table[i]);
+    }
     futex_queues()[n] = table;
     }
-    pr_info("futex hash table entries: %lu (%lu bytes on %d NUMA nodes, total %lu KiB, %s).\n",
+    pr_info!("futex hash table entries: %lu (%lu bytes on %d NUMA nodes, total %lu KiB, %s).\n",
     hashsize, size, num_possible_nodes(), size * num_possible_nodes() / 1024,
     order > MAX_PAGE_ORDER ? "vmalloc" : "linear");
     return 0;
     }
-    core_initcall(futex_init);
+    core_initcall!(futex_init);

@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
 macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
@@ -83,10 +333,11 @@ macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
 //
 #[no_mangle]
 pub unsafe extern "C" fn ptracer_access_allowed(tsk: *mut task_struct) -> bool {
-    const struct task_exec_state *es;
+pub static mut es: *mut c_void = core::ptr::null_mut();
     guard(rcu)();
-    if (ptrace_parent(tsk) != current)
+    if (ptrace_parent(tsk) != current) {
     return false;
+    }
     es = task_exec_state_rcu(tsk);
     return READ_ONCE(es.dumpable) == TASK_DUMPABLE_OWNER ||
     ptracer_capable(tsk, es.user_ns);
@@ -96,23 +347,23 @@ pub unsafe extern "C" fn ptracer_access_allowed(tsk: *mut task_struct) -> bool {
 // Source/target buffer must be kernel space,
 // Do not walk the page table directly, use get_user_pages
 //
-    int ptrace_access_vm(struct task_struct *tsk, unsigned long addr,
-    void *buf, int len, unsigned int gup_flags)
-    {
-    struct mm_struct *mm;
-    let mut ret: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn ptrace_access_vm(tsk: *mut task_struct, addr: c_ulong, buf: *mut c_void, len: c_int, gup_flags: c_uint) -> c_int {
+pub static mut mm: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     mm = get_task_mm(tsk);
-    if (!mm)
+    if (!mm) {
     return 0;
-    if (ptracer_access_allowed(tsk))
+    }
+    if (ptracer_access_allowed(tsk)) {
     ret = access_remote_vm(mm, addr, buf, len, gup_flags);
+    }
     mmput(mm);
     return ret;
     }
-    void __ptrace_link(struct task_struct *child, struct task_struct *new_parent,
-    const struct cred *ptracer_cred)
-    {
-    BUG_ON(!list_empty(&child.ptrace_entry));
+#[no_mangle]
+pub unsafe extern "C" fn __ptrace_link(child: *mut task_struct, new_parent: *mut task_struct, ptracer_cred: *mut cred) {
+    BUG_ON!(!list_empty(&child.ptrace_entry));
     list_add(&child.ptrace_entry, &new_parent.ptraced);
     child.parent = new_parent;
     child.ptracer_cred = get_cred(ptracer_cred);
@@ -157,8 +408,8 @@ unsafe extern "C" fn ptrace_link(child: *mut task_struct, new_parent: *mut task_
 //
 #[no_mangle]
 pub unsafe extern "C" fn __ptrace_unlink(child: *mut task_struct) {
-    const struct cred *old_cred;
-    BUG_ON(!child.ptrace);
+pub static mut old_cred: *mut c_void = core::ptr::null_mut();
+    BUG_ON!(!child.ptrace);
     clear_task_syscall_work(child, SYSCALL_TRACE);
 
     clear_task_syscall_work(child, SYSCALL_EMU);
@@ -182,24 +433,28 @@ pub unsafe extern "C" fn __ptrace_unlink(child: *mut task_struct) {
 //
     if (!(child.flags & PF_EXITING) &&
     (child.signal.flags & SIGNAL_STOP_STOPPED ||
-    child.signal.group_stop_count))
+    child.signal.group_stop_count)) {
     child.jobctl |= JOBCTL_STOP_PENDING;
+    }
 //
 // If transition to TASK_STOPPED is pending or in TASK_TRACED, kick
 // @child in the butt.  Note that @resume should be used iff @child
 // is in TASK_TRACED; otherwise, we might unduly disrupt
 // TASK_KILLABLE sleeps.
 //
-    if (child.jobctl & JOBCTL_STOP_PENDING || task_is_traced(child))
+    if (child.jobctl & JOBCTL_STOP_PENDING || task_is_traced(child)) {
     ptrace_signal_wake_up(child, true);
+    }
     spin_unlock(&child.sighand.siglock);
     }
 #[no_mangle]
 unsafe extern "C" fn looks_like_a_spurious_pid(task: *mut task_struct) -> bool {
-    if (task.exit_code != ((PTRACE_EVENT_EXEC << 8) | SIGTRAP))
+    if (task.exit_code != ((PTRACE_EVENT_EXEC << 8) | SIGTRAP)) {
     return false;
-    if (task_pid_vnr(task) == task.ptrace_message)
+    }
+    if (task_pid_vnr(task) == task.ptrace_message) {
     return false;
+    }
 //
 // The tracee changed its pid but the PTRACE_EVENT_EXEC event
 // was not wait()'ed, most probably debugger targets the old
@@ -215,10 +470,11 @@ unsafe extern "C" fn looks_like_a_spurious_pid(task: *mut task_struct) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn ptrace_freeze_traced(task: *mut task_struct) -> bool {
-    let mut ret: bool = false;
+pub static mut ret: bool = false;
 // Lockless, nobody but us can set this flag
-    if (task.jobctl & JOBCTL_LISTENING)
+    if (task.jobctl & JOBCTL_LISTENING) {
     return ret;
+    }
     spin_lock_irq(&task.sighand.siglock);
     if (task_is_traced(task) && !looks_like_a_spurious_pid(task) &&
     !__fatal_signal_pending(task)) {
@@ -230,7 +486,7 @@ unsafe extern "C" fn ptrace_freeze_traced(task: *mut task_struct) -> bool {
     }
 #[no_mangle]
 unsafe extern "C" fn ptrace_unfreeze_traced(task: *mut task_struct) {
-    unsigned long flags;
+    let mut flags = 0;
 //
 // The child may be awake and may have cleared
 // JOBCTL_PTRACE_FROZEN (see ptrace_resume).  The child will
@@ -264,7 +520,7 @@ unsafe extern "C" fn ptrace_unfreeze_traced(task: *mut task_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn ptrace_check_attach(child: *mut task_struct, ignore_state: bool) -> c_int {
-    let mut ret: c_int = -ESRCH;
+pub static mut ret: c_int = 0;
 //
 // We take the read lock around doing both checks to close a
 // possible race where someone else was tracing our child and
@@ -278,36 +534,40 @@ unsafe extern "C" fn ptrace_check_attach(child: *mut task_struct, ignore_state: 
 // child->sighand can't be NULL, release_task()
 // does ptrace_unlink() before __exit_signal().
 //
-    if (ignore_state || ptrace_freeze_traced(child))
+    if (ignore_state || ptrace_freeze_traced(child)) {
     ret = 0;
+    }
     }
     read_unlock(&tasklist_lock);
     if (!ret && !ignore_state &&
-    WARN_ON_ONCE(!wait_task_inactive(child, __TASK_TRACED|TASK_FROZEN)))
+    WARN_ON_ONCE!(!wait_task_inactive(child, __TASK_TRACED|TASK_FROZEN))) {
     ret = -ESRCH;
+    }
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn ptrace_has_cap(ns: *mut user_namespace, mode: c_uint) -> bool {
-    if (mode & PTRACE_MODE_NOAUDIT)
+    if (mode & PTRACE_MODE_NOAUDIT) {
     return ns_capable_noaudit(ns, CAP_SYS_PTRACE);
+    }
     return ns_capable(ns, CAP_SYS_PTRACE);
     }
 #[no_mangle]
 unsafe extern "C" fn task_still_dumpable(task: *mut task_struct, mode: c_uint) -> bool {
-    const struct task_exec_state *exec_state;
+pub static mut exec_state: *mut c_void = core::ptr::null_mut();
     guard(rcu)();
     exec_state = task_exec_state_rcu(task);
-    if (READ_ONCE(exec_state.dumpable) == TASK_DUMPABLE_OWNER)
+    if (READ_ONCE(exec_state.dumpable) == TASK_DUMPABLE_OWNER) {
     return true;
+    }
     return ptrace_has_cap(exec_state.user_ns, mode);
     }
 // Returns 0 on success, -errno on denial.
 #[no_mangle]
 unsafe extern "C" fn __ptrace_may_access(task: *mut task_struct, mode: c_uint) -> c_int {
-    const struct cred *cred = current_cred(), *tcred;
-    kuid_t caller_uid;
-    kgid_t caller_gid;
+    let mut cred = current_cred(), *tcred;
+    let mut caller_uid;
+    let mut caller_gid;
     if (!(mode & PTRACE_MODE_FSCREDS) == !(mode & PTRACE_MODE_REALCREDS)) {
     WARN(1, "denying ptrace access check without PTRACE_MODE_*CREDS\n");
     return -EPERM;
@@ -321,8 +581,9 @@ unsafe extern "C" fn __ptrace_may_access(task: *mut task_struct, mode: c_uint) -
 // or halting the specified task is impossible.
 //
 // Don't let security modules deny introspection
-    if (same_thread_group(task, current))
+    if (same_thread_group(task, current)) {
     return 0;
+    }
     rcu_read_lock();
     if (mode & PTRACE_MODE_FSCREDS) {
     caller_uid = cred.fsuid;
@@ -345,13 +606,15 @@ unsafe extern "C" fn __ptrace_may_access(task: *mut task_struct, mode: c_uint) -
     uid_eq(caller_uid, tcred.uid)  &&
     gid_eq(caller_gid, tcred.egid) &&
     gid_eq(caller_gid, tcred.sgid) &&
-    gid_eq(caller_gid, tcred.gid))
-    goto ok;
-    if (ptrace_has_cap(tcred.user_ns, mode))
-    goto ok;
+    gid_eq(caller_gid, tcred.gid)) {
+// goto;
+    }
+    if (ptrace_has_cap(tcred.user_ns, mode)) {
+// goto;
+    }
     rcu_read_unlock();
     return -EPERM;
-    ok:
+// label;
     rcu_read_unlock();
 //
 // If a task drops privileges and becomes nondumpable (through a syscall
@@ -363,13 +626,14 @@ unsafe extern "C" fn __ptrace_may_access(task: *mut task_struct, mode: c_uint) -
 // Pairs with a write barrier in commit_creds().
 //
     smp_rmb();
-    if (!task_still_dumpable(task, mode))
+    if (!task_still_dumpable(task, mode)) {
     return -EPERM;
+    }
     return security_ptrace_access_check(task, mode);
     }
 #[no_mangle]
 pub unsafe extern "C" fn ptrace_may_access(task: *mut task_struct, mode: c_uint) -> bool {
-    int err;
+    let mut err = 0;
     task_lock(task);
     err = __ptrace_may_access(task, mode);
     task_unlock(task);
@@ -377,17 +641,21 @@ pub unsafe extern "C" fn ptrace_may_access(task: *mut task_struct, mode: c_uint)
     }
 #[no_mangle]
 unsafe extern "C" fn check_ptrace_options(data: c_ulong) -> c_int {
-    if (data & ~(unsigned long)PTRACE_O_MASK)
+    if (data & ~(unsigned long)PTRACE_O_MASK) {
     return -EINVAL;
+    }
     if (unlikely(data & PTRACE_O_SUSPEND_SECCOMP)) {
-    if (!IS_ENABLED(CONFIG_CHECKPOINT_RESTORE) ||
-    !IS_ENABLED(CONFIG_SECCOMP))
+    if (!IS_ENABLED!(CONFIG_CHECKPOINT_RESTORE) ||
+    !IS_ENABLED!(CONFIG_SECCOMP)) {
     return -EINVAL;
-    if (!capable(CAP_SYS_ADMIN))
+    }
+    if (!capable(CAP_SYS_ADMIN)) {
     return -EPERM;
+    }
     if (seccomp_mode(&current.seccomp) != SECCOMP_MODE_DISABLED ||
-    current.ptrace & PT_SUSPEND_SECCOMP)
+    current.ptrace & PT_SUSPEND_SECCOMP) {
     return -EPERM;
+    }
     }
     return 0;
     }
@@ -395,8 +663,9 @@ unsafe extern "C" fn check_ptrace_options(data: c_ulong) -> c_int {
 pub unsafe extern "C" fn ptrace_set_stopped(task: *mut task_struct, seize: bool) {
     guard(spinlock)(&task.sighand.siglock);
 // SEIZE doesn't trap tracee on attach
-    if (!seize)
+    if (!seize) {
     send_signal_locked(SIGSTOP, SEND_SIG_PRIV, task, PIDTYPE_PID);
+    }
 //
 // If the task is already STOPPED, set JOBCTL_TRAP_STOP and
 // TRAPPING, and kick it so that it transits to TRACED.  TRAPPING
@@ -420,34 +689,37 @@ pub unsafe extern "C" fn ptrace_set_stopped(task: *mut task_struct, seize: bool)
     signal_wake_up_state(task, __TASK_STOPPED);
     }
     }
-    static int ptrace_attach(struct task_struct *task, long request,
-    unsigned long addr,
-    unsigned long flags)
-    {
-    let mut seize: bool = (request == PTRACE_SEIZE);
-    int retval;
+#[no_mangle]
+pub unsafe extern "C" fn ptrace_attach(task: *mut task_struct, request: c_long, addr: c_ulong, flags: c_ulong) -> c_int {
+pub static mut seize: bool = false;
+    let mut retval = 0;
     if (seize) {
-    if (addr != 0)
+    if (addr != 0) {
     return -EIO;
+    }
 //
 // This duplicates the check in check_ptrace_options() because
 // ptrace_attach() and ptrace_setoptions() have historically
 // used different error codes for unknown ptrace options.
 //
-    if (flags & ~(unsigned long)PTRACE_O_MASK)
+    if (flags & ~(unsigned long)PTRACE_O_MASK) {
     return -EIO;
+    }
     retval = check_ptrace_options(flags);
-    if (retval)
+    if (retval) {
     return retval;
+    }
     flags = PT_PTRACED | PT_SEIZED | (flags << PT_OPT_FLAG_SHIFT);
     } else {
     flags = PT_PTRACED;
     }
     audit_ptrace(task);
-    if (unlikely(task.flags & PF_KTHREAD))
+    if (unlikely(task.flags & PF_KTHREAD)) {
     return -EPERM;
-    if (same_thread_group(task, current))
+    }
+    if (same_thread_group(task, current)) {
     return -EPERM;
+    }
 //
 // Protect exec's credential calculations against our interference;
 // SUID, SGID and LSM creds get determined differently
@@ -457,14 +729,17 @@ pub unsafe extern "C" fn ptrace_set_stopped(task: *mut task_struct, seize: bool)
     &task.signal.cred_guard_mutex) {
     scoped_guard (task_lock, task) {
     retval = __ptrace_may_access(task, PTRACE_MODE_ATTACH_REALCREDS);
-    if (retval)
+    if (retval) {
     return retval;
     }
+    }
     scoped_guard (write_lock_irq, &tasklist_lock) {
-    if (unlikely(task.exit_state))
+    if (unlikely(task.exit_state)) {
     return -EPERM;
-    if (task.ptrace)
+    }
+    if (task.ptrace) {
     return -EPERM;
+    }
     task.ptrace = flags;
     ptrace_link(task, current);
     ptrace_set_stopped(task, seize);
@@ -489,7 +764,7 @@ pub unsafe extern "C" fn ptrace_set_stopped(task: *mut task_struct, seize: bool)
 //
 #[no_mangle]
 unsafe extern "C" fn ptrace_traceme() -> c_int {
-    let mut ret: c_int = -EPERM;
+pub static mut ret: c_int = 0;
     write_lock_irq(&tasklist_lock);
 // Are we already being traced?
     if (!current.ptrace) {
@@ -512,7 +787,7 @@ unsafe extern "C" fn ptrace_traceme() -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn ignoring_children(sigh: *mut sighand_struct) -> c_int {
-    int ret;
+    let mut ret = 0;
     spin_lock(&sigh.siglock);
     ret = (sigh.action[SIGCHLD-1].sa.sa_handler == SIG_IGN) ||
     (sigh.action[SIGCHLD-1].sa.sa_flags & SA_NOCLDWAIT);
@@ -536,14 +811,16 @@ unsafe extern "C" fn ignoring_children(sigh: *mut sighand_struct) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn __ptrace_detach(tracer: *mut task_struct, p: *mut task_struct) -> bool {
-    bool dead;
+    let mut dead = 0;
     __ptrace_unlink(p);
-    if (p.exit_state != EXIT_ZOMBIE)
+    if (p.exit_state != EXIT_ZOMBIE) {
     return false;
+    }
     dead = !thread_group_leader(p);
     if (!dead && thread_group_empty(p)) {
-    if (!same_thread_group(p.real_parent, tracer))
+    if (!same_thread_group(p.real_parent, tracer)) {
     dead = do_notify_parent(p, p.exit_signal);
+    }
     else if (ignoring_children(tracer.sighand) ||
     p.signal.autoreap) {
     __wake_up_parent(p, tracer);
@@ -551,14 +828,16 @@ unsafe extern "C" fn __ptrace_detach(tracer: *mut task_struct, p: *mut task_stru
     }
     }
 // Mark it as in the process of being reaped.
-    if (dead)
+    if (dead) {
     p.exit_state = EXIT_DEAD;
+    }
     return dead;
     }
 #[no_mangle]
 unsafe extern "C" fn ptrace_detach(child: *mut task_struct, data: c_uint) -> c_int {
-    if (!valid_signal(data))
+    if (!valid_signal(data)) {
     return -EIO;
+    }
 // Architecture-specific hardware disable ..
     ptrace_disable(child);
     write_lock_irq(&tasklist_lock);
@@ -566,7 +845,7 @@ unsafe extern "C" fn ptrace_detach(child: *mut task_struct, data: c_uint) -> c_i
 // We rely on ptrace_freeze_traced(). It can't be killed and
 // untraced by another thread, it can't be a zombie.
 //
-    WARN_ON(!child.ptrace || child.exit_state);
+    WARN_ON!(!child.ptrace || child.exit_state);
 //
 // tasklist_lock avoids the race with wait_task_stopped(), see
 // the comment in ptrace_resume().
@@ -583,29 +862,35 @@ unsafe extern "C" fn ptrace_detach(child: *mut task_struct, data: c_uint) -> c_i
 //
 #[no_mangle]
 pub unsafe extern "C" fn exit_ptrace(tracer: *mut task_struct, dead: *mut list_head) {
-    struct task_struct *p, *n;
+    let mut p = core::ptr::null_mut();
+    let mut n = core::ptr::null_mut();
     list_for_each_entry_safe(p, n, &tracer.ptraced, ptrace_entry) {
-    if (unlikely(p.ptrace & PT_EXITKILL))
+    if (unlikely(p.ptrace & PT_EXITKILL)) {
     send_sig_info(SIGKILL, SEND_SIG_PRIV, p);
-    if (__ptrace_detach(tracer, p))
+    }
+    if (__ptrace_detach(tracer, p)) {
     list_add(&p.ptrace_entry, dead);
     }
     }
+    }
 #[no_mangle]
-pub unsafe extern "C" fn ptrace_readdata(tsk: *mut task_struct, src: c_ulong, dst: *mut char __user, len: c_int) -> c_int {
-    let mut copied: c_int = 0;
+pub unsafe extern "C" fn ptrace_readdata(tsk: *mut task_struct, src: c_ulong, dst: *mut char , len: c_int) -> c_int {
+pub static mut copied: c_int = 0;
     while (len > 0) {
     char buf[128];
-    int this_len, retval;
-    this_len = (len > sizeof(buf)) ? sizeof(buf) : len;
+    let mut this_len = 0;
+    let mut retval = 0;
+    this_len = (len > sizeof!(buf)) ? sizeof!(buf) : len;
     retval = ptrace_access_vm(tsk, src, buf, this_len, FOLL_FORCE);
     if (!retval) {
-    if (copied)
+    if (copied) {
     break;
+    }
     return -EIO;
     }
-    if (copy_to_user(dst, buf, retval))
+    if (copy_to_user(dst, buf, retval)) {
     return -EFAULT;
+    }
     copied += retval;
     src += retval;
     dst += retval;
@@ -614,19 +899,22 @@ pub unsafe extern "C" fn ptrace_readdata(tsk: *mut task_struct, src: c_ulong, ds
     return copied;
     }
 #[no_mangle]
-pub unsafe extern "C" fn ptrace_writedata(tsk: *mut task_struct, src: *mut char __user, dst: c_ulong, len: c_int) -> c_int {
-    let mut copied: c_int = 0;
+pub unsafe extern "C" fn ptrace_writedata(tsk: *mut task_struct, src: *mut char , dst: c_ulong, len: c_int) -> c_int {
+pub static mut copied: c_int = 0;
     while (len > 0) {
     char buf[128];
-    int this_len, retval;
-    this_len = (len > sizeof(buf)) ? sizeof(buf) : len;
-    if (copy_from_user(buf, src, this_len))
+    let mut this_len = 0;
+    let mut retval = 0;
+    this_len = (len > sizeof!(buf)) ? sizeof!(buf) : len;
+    if (copy_from_user(buf, src, this_len)) {
     return -EFAULT;
+    }
     retval = ptrace_access_vm(tsk, dst, buf, this_len,
     FOLL_FORCE | FOLL_WRITE);
     if (!retval) {
-    if (copied)
+    if (copied) {
     break;
+    }
     return -EIO;
     }
     copied += retval;
@@ -638,11 +926,12 @@ pub unsafe extern "C" fn ptrace_writedata(tsk: *mut task_struct, src: *mut char 
     }
 #[no_mangle]
 unsafe extern "C" fn ptrace_setoptions(child: *mut task_struct, data: c_ulong) -> c_int {
-    unsigned flags;
-    int ret;
+    let mut flags: c_uint = 0;
+    let mut ret = 0;
     ret = check_ptrace_options(data);
-    if (ret)
+    if (ret) {
     return ret;
+    }
 // Avoid intermediate state when all opts are cleared
     flags = child.ptrace;
     flags &= ~(PTRACE_O_MASK << PT_OPT_FLAG_SHIFT);
@@ -652,8 +941,8 @@ unsafe extern "C" fn ptrace_setoptions(child: *mut task_struct, data: c_ulong) -
     }
 #[no_mangle]
 unsafe extern "C" fn ptrace_getsiginfo(child: *mut task_struct, info: *mut kernel_siginfo_t) -> c_int {
-    unsigned long flags;
-    let mut error: c_int = -ESRCH;
+    let mut flags = 0;
+pub static mut error: c_int = 0;
     if (lock_task_sighand(child, &flags)) {
     error = -EINVAL;
     if (likely(child.last_siginfo != core::ptr::null_mut())) {
@@ -666,8 +955,8 @@ unsafe extern "C" fn ptrace_getsiginfo(child: *mut task_struct, info: *mut kerne
     }
 #[no_mangle]
 unsafe extern "C" fn ptrace_setsiginfo(child: *mut task_struct, info: *const kernel_siginfo_t) -> c_int {
-    unsigned long flags;
-    let mut error: c_int = -ESRCH;
+    let mut flags = 0;
+pub static mut error: c_int = 0;
     if (lock_task_sighand(child, &flags)) {
     error = -EINVAL;
     if (likely(child.last_siginfo != core::ptr::null_mut())) {
@@ -678,33 +967,38 @@ unsafe extern "C" fn ptrace_setsiginfo(child: *mut task_struct, info: *const ker
     }
     return error;
     }
-    static int ptrace_peek_siginfo(struct task_struct *child,
-    unsigned long addr,
-    unsigned long data)
-    {
-    struct ptrace_peeksiginfo_args arg;
-    struct sigpending *pending;
-    struct sigqueue *q;
-    int ret, i;
-    ret = copy_from_user(&arg, (void __user *) addr,
-    sizeof(struct ptrace_peeksiginfo_args));
-    if (ret)
+#[no_mangle]
+pub unsafe extern "C" fn ptrace_peek_siginfo(child: *mut task_struct, addr: c_ulong, data: c_ulong) -> c_int {
+pub static mut arg: usize = 0;
+pub static mut pending: *mut c_void = core::ptr::null_mut();
+pub static mut q: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    let mut i = 0;
+    ret = copy_from_user(&arg,  addr,
+    sizeof!(ptrace_peeksiginfo_args));
+    if (ret) {
     return -EFAULT;
-    if (arg.flags & ~PTRACE_PEEKSIGINFO_SHARED)
+    }
+    if (arg.flags & ~PTRACE_PEEKSIGINFO_SHARED) {
     return -EINVAL; /* unknown flags */
-    if (arg.nr < 0)
+    }
+    if (arg.nr < 0) {
     return -EINVAL;
+    }
 // Ensure arg.off fits in an unsigned long
-    if (arg.off > ULONG_MAX)
+    if (arg.off > ULONG_MAX) {
     return 0;
-    if (arg.flags & PTRACE_PEEKSIGINFO_SHARED)
+    }
+    if (arg.flags & PTRACE_PEEKSIGINFO_SHARED) {
     pending = &child.signal.shared_pending;
-    else
+    }
+    else {
     pending = &child.pending;
-    for (i = 0; i < arg.nr; ) {
-    kernel_siginfo_t info;
-    let mut off: c_ulong = arg.off + i;
-    let mut found: bool = false;
+    }
+    while (i < arg.nr) {
+    let mut info;
+pub static mut off: c_ulong = 0;
+pub static mut found: bool = false;
     spin_lock_irq(&child.sighand.siglock);
     list_for_each_entry(q, &pending.list, list) {
     if (!off--) {
@@ -714,76 +1008,81 @@ unsafe extern "C" fn ptrace_setsiginfo(child: *mut task_struct, info: *const ker
     }
     }
     spin_unlock_irq(&child.sighand.siglock);
-    if (!found) /* beyond the end of the list */
+    if (!found) /* beyond the end of the list */ {
     break;
+    }
 
     if (unlikely(in_compat_syscall())) {
-    compat_siginfo_t __user *uinfo = compat_ptr(data);
+    let mut uinfo = compat_ptr(data);
     if (copy_siginfo_to_user32(uinfo, &info)) {
     ret = -EFAULT;
     break;
     }
-    } else
+    } else {
 
     {
-    siginfo_t __user *uinfo = (siginfo_t __user *) data;
+    }
+    let mut uinfo =  data;
     if (copy_siginfo_to_user(uinfo, &info)) {
     ret = -EFAULT;
     break;
     }
     }
-    data += sizeof(siginfo_t);
-    i++;
-    if (signal_pending(current))
+    data += sizeof!(siginfo_t);
+    i += 1;
+    if (signal_pending(current)) {
     break;
+    }
     cond_resched();
     }
-    if (i > 0)
+    if (i > 0) {
     return i;
+    }
     return ret;
     }
 
-    static long ptrace_get_rseq_configuration(struct task_struct *task,
-    unsigned long size, void __user *data)
-    {
-    struct ptrace_rseq_configuration conf = {
-    .rseq_abi_pointer = (u64)(uintptr_t)task.rseq.usrptr,
-    .rseq_abi_size = task.rseq.len,
-    .signature = task.rseq.sig,
-    .flags = 0,
-    };
-    size = min_t(unsigned long, size, sizeof(conf));
-    if (copy_to_user(data, &conf, size))
+#[no_mangle]
+pub unsafe extern "C" fn ptrace_get_rseq_configuration(task: *mut task_struct, size: c_ulong, data: *mut c_void) -> c_long {
+pub static mut ptrace_rseq_configuration: usize = 0;
+    size = min_t(unsigned long, size, sizeof!(conf));
+    if (copy_to_user(data, &conf, size)) {
     return -EFAULT;
-    return sizeof(conf);
+    }
+    return sizeof!(conf);
     }
 
 pub const is_singleblock(request): c_int = 0;
 
 pub const is_sysemu_singlestep(request): c_int = 0;
 
-    static int ptrace_resume(struct task_struct *child, long request,
-    unsigned long data)
-    {
-    if (!valid_signal(data))
+#[no_mangle]
+pub unsafe extern "C" fn ptrace_resume(child: *mut task_struct, request: c_long, data: c_ulong) -> c_int {
+    if (!valid_signal(data)) {
     return -EIO;
-    if (request == PTRACE_SYSCALL)
+    }
+    if (request == PTRACE_SYSCALL) {
     set_task_syscall_work(child, SYSCALL_TRACE);
-    else
+    }
+    else {
     clear_task_syscall_work(child, SYSCALL_TRACE);
+    }
 
-    if (request == PTRACE_SYSEMU || request == PTRACE_SYSEMU_SINGLESTEP)
+    if (request == PTRACE_SYSEMU || request == PTRACE_SYSEMU_SINGLESTEP) {
     set_task_syscall_work(child, SYSCALL_EMU);
-    else
+    }
+    else {
     clear_task_syscall_work(child, SYSCALL_EMU);
+    }
 
     if (is_singleblock(request)) {
-    if (unlikely(!arch_has_block_step()))
+    if (unlikely(!arch_has_block_step())) {
     return -EIO;
+    }
     user_enable_block_step(child);
     } else if (is_singlestep(request) || is_sysemu_singlestep(request)) {
-    if (unlikely(!arch_has_single_step()))
+    if (unlikely(!arch_has_single_step())) {
     return -EIO;
+    }
     user_enable_single_step(child);
     } else {
     user_disable_single_step(child);
@@ -808,32 +1107,35 @@ pub const is_sysemu_singlestep(request): c_int = 0;
     static const struct user_regset *
     find_regset(const struct user_regset_view *view, unsigned int type)
     {
-    const struct user_regset *regset;
-    int n;
-    for (n = 0; n < view.n; ++n) {
+pub static mut regset: *mut c_void = core::ptr::null_mut();
+    let mut n = 0;
+    while (n < view.n) {
     regset = view.regsets + n;
-    if (regset.core_note_type == type)
+    if (regset.core_note_type == type) {
     return regset;
+    }
     }
     return core::ptr::null_mut();
     }
-    static int ptrace_regset(struct task_struct *task, int req, unsigned int type,
-    struct iovec *kiov)
-    {
-    const struct user_regset_view *view = task_user_regset_view(task);
-    const struct user_regset *regset = find_regset(view, type);
-    int regset_no;
-    if (!regset || (kiov.iov_len % regset.size) != 0)
+#[no_mangle]
+pub unsafe extern "C" fn ptrace_regset(task: *mut task_struct, req: c_int, type: c_uint, kiov: *mut iovec) -> c_int {
+    let mut view = task_user_regset_view(task);
+    let mut regset = find_regset(view, type);
+    let mut regset_no = 0;
+    if (!regset || (kiov.iov_len % regset.size) != 0) {
     return -EINVAL;
+    }
     regset_no = regset - view.regsets;
     kiov.iov_len = min(kiov.iov_len,
     (__kernel_size_t) (regset.n * regset.size));
-    if (req == PTRACE_GETREGSET)
+    if (req == PTRACE_GETREGSET) {
     return copy_regset_to_user(task, view, regset_no, 0,
     kiov.iov_len, kiov.iov_base);
-    else
+    }
+    else {
     return copy_regset_from_user(task, view, regset_no, 0,
     kiov.iov_len, kiov.iov_base);
+    }
     }
 //
 // This is declared in linux/regset.h and defined in machine-dependent
@@ -841,23 +1143,20 @@ pub const is_sysemu_singlestep(request): c_int = 0;
 // to ensure no machine forgets it.
 //
     EXPORT_SYMBOL_GPL(task_user_regset_view);
-    static unsigned long
-    ptrace_get_syscall_info_entry(struct task_struct *child, struct pt_regs *regs,
-    struct ptrace_syscall_info *info)
-    {
-    unsigned long args[ARRAY_SIZE(info.entry.args)];
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn ptrace_get_syscall_info_entry(child: *mut task_struct, regs: *mut pt_regs, info: *mut ptrace_syscall_info) -> c_ulong {
+    unsigned long args[ARRAY_SIZE!(info.entry.args)];
+    let mut i = 0;
     info.entry.nr = syscall_get_nr(child, regs);
     syscall_get_arguments(child, regs, args);
-    for (i = 0; i < ARRAY_SIZE(args); i++)
+    for (i = 0; i < ARRAY_SIZE!(args); i++) {
     info.entry.args[i] = args[i];
-// args is the last field in struct ptrace_syscall_info.entry
-    return offsetofend(struct ptrace_syscall_info, entry.args);
     }
-    static unsigned long
-    ptrace_get_syscall_info_seccomp(struct task_struct *child, struct pt_regs *regs,
-    struct ptrace_syscall_info *info)
-    {
+// args is the last field in struct ptrace_syscall_info.entry
+    return offsetofend(ptrace_syscall_info, entry.args);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn ptrace_get_syscall_info_seccomp(child: *mut task_struct, regs: *mut pt_regs, info: *mut ptrace_syscall_info) -> c_ulong {
 //
 // As struct ptrace_syscall_info.entry is currently a subset
 // of struct ptrace_syscall_info.seccomp, it makes sense to
@@ -871,94 +1170,91 @@ pub const is_sysemu_singlestep(request): c_int = 0;
 // ret_data is the last non-reserved field
 // in struct ptrace_syscall_info.seccomp
 //
-    return offsetofend(struct ptrace_syscall_info, seccomp.ret_data);
+    return offsetofend(ptrace_syscall_info, seccomp.ret_data);
     }
-    static unsigned long
-    ptrace_get_syscall_info_exit(struct task_struct *child, struct pt_regs *regs,
-    struct ptrace_syscall_info *info)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ptrace_get_syscall_info_exit(child: *mut task_struct, regs: *mut pt_regs, info: *mut ptrace_syscall_info) -> c_ulong {
     info.exit.rval = syscall_get_error(child, regs);
     info.exit.is_error = !!info.exit.rval;
-    if (!info.exit.is_error)
+    if (!info.exit.is_error) {
     info.exit.rval = syscall_get_return_value(child, regs);
-// is_error is the last field in struct ptrace_syscall_info.exit
-    return offsetofend(struct ptrace_syscall_info, exit.is_error);
     }
-    static int
-    ptrace_get_syscall_info_op(struct task_struct *child)
-    {
+// is_error is the last field in struct ptrace_syscall_info.exit
+    return offsetofend(ptrace_syscall_info, exit.is_error);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn ptrace_get_syscall_info_op(child: *mut task_struct) -> c_int {
 //
 // This does not need lock_task_sighand() to access
 // child->last_siginfo because ptrace_freeze_traced()
 // called earlier by ptrace_check_attach() ensures that
 // the tracee cannot go away and clear its last_siginfo.
 //
-    switch (child.last_siginfo ? child.last_siginfo.si_code : 0) {
-    case SIGTRAP | 0x80:
-    switch (child.ptrace_message) {
-    case PTRACE_EVENTMSG_SYSCALL_ENTRY:
+    match (child.last_siginfo ? child.last_siginfo.si_code : 0) {
+    SIGTRAP | 0x80 => {
+    match (child.ptrace_message) {
+    PTRACE_EVENTMSG_SYSCALL_ENTRY => {
     return PTRACE_SYSCALL_INFO_ENTRY;
-    case PTRACE_EVENTMSG_SYSCALL_EXIT:
+    }
+    PTRACE_EVENTMSG_SYSCALL_EXIT => {
     return PTRACE_SYSCALL_INFO_EXIT;
-    default:
+    }
+    _ => {
     return PTRACE_SYSCALL_INFO_NONE;
+    }
     }
     case SIGTRAP | (PTRACE_EVENT_SECCOMP << 8):
     return PTRACE_SYSCALL_INFO_SECCOMP;
-    default:
+// label;
     return PTRACE_SYSCALL_INFO_NONE;
     }
     }
-    static int
-    ptrace_get_syscall_info(struct task_struct *child, unsigned long user_size,
-    void __user *datavp)
-    {
-    struct pt_regs *regs = task_pt_regs(child);
-    struct ptrace_syscall_info info = {
-    .op = ptrace_get_syscall_info_op(child),
-    .arch = syscall_get_arch(child),
-    .instruction_pointer = instruction_pointer(regs),
-    .stack_pointer = user_stack_pointer(regs),
-    };
-    let mut actual_size: c_ulong = offsetof(struct ptrace_syscall_info, entry);
-    unsigned long write_size;
-    switch (info.op) {
-    case PTRACE_SYSCALL_INFO_ENTRY:
+#[no_mangle]
+pub unsafe extern "C" fn ptrace_get_syscall_info(child: *mut task_struct, user_size: c_ulong, datavp: *mut c_void) -> c_int {
+    let mut regs = task_pt_regs(child);
+pub static mut ptrace_syscall_info: usize = 0;
+pub static mut actual_size: c_ulong = 0;
+    let mut write_size = 0;
+    match (info.op) {
+    PTRACE_SYSCALL_INFO_ENTRY => {
     actual_size = ptrace_get_syscall_info_entry(child, regs, &info);
-    break;
-    case PTRACE_SYSCALL_INFO_EXIT:
+    // break;
+    }
+    PTRACE_SYSCALL_INFO_EXIT => {
     actual_size = ptrace_get_syscall_info_exit(child, regs, &info);
-    break;
-    case PTRACE_SYSCALL_INFO_SECCOMP:
+    // break;
+    }
+    PTRACE_SYSCALL_INFO_SECCOMP => {
     actual_size = ptrace_get_syscall_info_seccomp(child, regs, &info);
-    break;
+    // break;
+    }
     }
     write_size = min(actual_size, user_size);
     return copy_to_user(datavp, &info, write_size) ? -EFAULT : actual_size;
     }
-    static int
-    ptrace_set_syscall_info_entry(struct task_struct *child, struct pt_regs *regs,
-    struct ptrace_syscall_info *info)
-    {
-    unsigned long args[ARRAY_SIZE(info.entry.args)];
-    let mut nr: c_int = info.entry.nr;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn ptrace_set_syscall_info_entry(child: *mut task_struct, regs: *mut pt_regs, info: *mut ptrace_syscall_info) -> c_int {
+    unsigned long args[ARRAY_SIZE!(info.entry.args)];
+pub static mut nr: c_int = 0;
+    let mut i = 0;
 //
 // Check that the syscall number specified in info->entry.nr
 // is either a value of type "int" or a sign-extended value
 // of type "int".
 //
-    if (nr != info.entry.nr)
+    if (nr != info.entry.nr) {
     return -ERANGE;
-    for (i = 0; i < ARRAY_SIZE(args); i++) {
+    }
+    while (i < ARRAY_SIZE!(args)) {
     args[i] = info.entry.args[i];
 //
 // Check that the syscall argument specified in
 // info->entry.args[i] is either a value of type
 // "unsigned long" or a sign-extended value of type "long".
 //
-    if (args[i] != info.entry.args[i])
+    if (args[i] != info.entry.args[i]) {
     return -ERANGE;
+    }
     }
     syscall_set_nr(child, regs, nr);
 //
@@ -967,133 +1263,155 @@ pub const is_sysemu_singlestep(request): c_int = 0;
 // those architectures that share the same register both for the first
 // argument of syscall and its return value.
 //
-    if (nr != -1)
+    if (nr != -1) {
     syscall_set_arguments(child, regs, args);
+    }
     return 0;
     }
-    static int
-    ptrace_set_syscall_info_seccomp(struct task_struct *child, struct pt_regs *regs,
-    struct ptrace_syscall_info *info)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ptrace_set_syscall_info_seccomp(child: *mut task_struct, regs: *mut pt_regs, info: *mut ptrace_syscall_info) -> c_int {
 //
 // info->entry is currently a subset of info->seccomp,
 // info->seccomp.ret_data is currently ignored.
 //
     return ptrace_set_syscall_info_entry(child, regs, info);
     }
-    static int
-    ptrace_set_syscall_info_exit(struct task_struct *child, struct pt_regs *regs,
-    struct ptrace_syscall_info *info)
-    {
-    let mut rval: c_long = info.exit.rval;
+#[no_mangle]
+pub unsafe extern "C" fn ptrace_set_syscall_info_exit(child: *mut task_struct, regs: *mut pt_regs, info: *mut ptrace_syscall_info) -> c_int {
+pub static mut rval: c_long = 0;
 //
 // Check that the return value specified in info->exit.rval
 // is either a value of type "long" or a sign-extended value
 // of type "long".
 //
-    if (rval != info.exit.rval)
+    if (rval != info.exit.rval) {
     return -ERANGE;
-    if (info.exit.is_error)
+    }
+    if (info.exit.is_error) {
     syscall_set_return_value(child, regs, rval, 0);
-    else
+    }
+    else {
     syscall_set_return_value(child, regs, 0, rval);
+    }
     return 0;
     }
-    static int
-    ptrace_set_syscall_info(struct task_struct *child, unsigned long user_size,
-    const void __user *datavp)
-    {
-    struct pt_regs *regs = task_pt_regs(child);
-    struct ptrace_syscall_info info;
-    if (user_size < sizeof(info))
+#[no_mangle]
+pub unsafe extern "C" fn ptrace_set_syscall_info(child: *mut task_struct, user_size: c_ulong, datavp: *mut c_void) -> c_int {
+    let mut regs = task_pt_regs(child);
+pub static mut info: usize = 0;
+    if (user_size < sizeof!(info)) {
     return -EINVAL;
+    }
 //
 // The compatibility is tracked by info.op and info.flags: if user-space
 // does not instruct us to use unknown extra bits from future versions
 // of ptrace_syscall_info, we are not going to read them either.
 //
-    if (copy_from_user(&info, datavp, sizeof(info)))
+    if (copy_from_user(&info, datavp, sizeof!(info))) {
     return -EFAULT;
+    }
 // Reserved for future use.
-    if (info.flags || info.reserved)
+    if (info.flags || info.reserved) {
     return -EINVAL;
+    }
 // Changing the type of the system call stop is not supported yet.
-    if (ptrace_get_syscall_info_op(child) != info.op)
+    if (ptrace_get_syscall_info_op(child) != info.op) {
     return -EINVAL;
-    switch (info.op) {
-    case PTRACE_SYSCALL_INFO_ENTRY:
+    }
+    match (info.op) {
+    PTRACE_SYSCALL_INFO_ENTRY => {
     return ptrace_set_syscall_info_entry(child, regs, &info);
-    case PTRACE_SYSCALL_INFO_EXIT:
+    }
+    PTRACE_SYSCALL_INFO_EXIT => {
     return ptrace_set_syscall_info_exit(child, regs, &info);
-    case PTRACE_SYSCALL_INFO_SECCOMP:
+    }
+    PTRACE_SYSCALL_INFO_SECCOMP => {
     return ptrace_set_syscall_info_seccomp(child, regs, &info);
-    default:
+    }
+    _ => {
 // Other types of system call stops are not supported yet.
     return -EINVAL;
     }
     }
+    }
 
-    int ptrace_request(struct task_struct *child, long request,
-    unsigned long addr, unsigned long data)
-    {
-    let mut seized: bool = child.ptrace & PT_SEIZED;
-    let mut ret: c_int = -EIO;
+#[no_mangle]
+pub unsafe extern "C" fn ptrace_request(child: *mut task_struct, request: c_long, addr: c_ulong, data: c_ulong) -> c_int {
+pub static mut seized: bool = false;
+pub static mut ret: c_int = 0;
     kernel_siginfo_t siginfo, *si;
-    void __user *datavp = (void __user *) data;
-    unsigned long __user *datalp = datavp;
-    unsigned long flags;
-    switch (request) {
-    case PTRACE_PEEKTEXT:
-    case PTRACE_PEEKDATA:
+    let mut datavp =  data;
+    let mut datalp = datavp;
+    let mut flags = 0;
+    match (request) {
+    PTRACE_PEEKTEXT => {
+    }
+    PTRACE_PEEKDATA => {
     return generic_ptrace_peekdata(child, addr, data);
-    case PTRACE_POKETEXT:
-    case PTRACE_POKEDATA:
+    }
+    PTRACE_POKETEXT => {
+    }
+    PTRACE_POKEDATA => {
     return generic_ptrace_pokedata(child, addr, data);
 
-    case PTRACE_OLDSETOPTIONS:
-
-    case PTRACE_SETOPTIONS:
-    ret = ptrace_setoptions(child, data);
-    break;
-    case PTRACE_GETEVENTMSG:
-    ret = put_user(child.ptrace_message, datalp);
-    break;
-    case PTRACE_PEEKSIGINFO:
-    ret = ptrace_peek_siginfo(child, addr, data);
-    break;
-    case PTRACE_GETSIGINFO:
-    ret = ptrace_getsiginfo(child, &siginfo);
-    if (!ret)
-    ret = copy_siginfo_to_user(datavp, &siginfo);
-    break;
-    case PTRACE_SETSIGINFO:
-    ret = copy_siginfo_from_user(&siginfo, datavp);
-    if (!ret)
-    ret = ptrace_setsiginfo(child, &siginfo);
-    break;
-    case PTRACE_GETSIGMASK: {
-    sigset_t *mask;
-    if (addr != sizeof(sigset_t)) {
-    ret = -EINVAL;
-    break;
     }
-    if (test_tsk_restore_sigmask(child))
+    PTRACE_OLDSETOPTIONS => {
+
+    }
+    PTRACE_SETOPTIONS => {
+    ret = ptrace_setoptions(child, data);
+    // break;
+    }
+    PTRACE_GETEVENTMSG => {
+    ret = put_user(child.ptrace_message, datalp);
+    // break;
+    }
+    PTRACE_PEEKSIGINFO => {
+    ret = ptrace_peek_siginfo(child, addr, data);
+    // break;
+    }
+    PTRACE_GETSIGINFO => {
+    ret = ptrace_getsiginfo(child, &siginfo);
+    if (!ret) {
+    ret = copy_siginfo_to_user(datavp, &siginfo);
+    }
+    // break;
+    }
+    PTRACE_SETSIGINFO => {
+    ret = copy_siginfo_from_user(&siginfo, datavp);
+    if (!ret) {
+    ret = ptrace_setsiginfo(child, &siginfo);
+    }
+    // break;
+    }
+    PTRACE_GETSIGMASK => {
+pub static mut mask: *mut c_void = core::ptr::null_mut();
+    if (addr != sizeof!(sigset_t)) {
+    ret = -EINVAL;
+    // break;
+    }
+    if (test_tsk_restore_sigmask(child)) {
     mask = &child.saved_sigmask;
-    else
+    }
+    else {
     mask = &child.blocked;
-    if (copy_to_user(datavp, mask, sizeof(sigset_t)))
+    }
+    if (copy_to_user(datavp, mask, sizeof!(sigset_t))) {
     ret = -EFAULT;
-    else
+    }
+    else {
     ret = 0;
-    break;
+    }
+    // break;
+    }
     }
     case PTRACE_SETSIGMASK: {
-    sigset_t new_set;
-    if (addr != sizeof(sigset_t)) {
+    let mut new_set;
+    if (addr != sizeof!(sigset_t)) {
     ret = -EINVAL;
     break;
     }
-    if (copy_from_user(&new_set, datavp, sizeof(sigset_t))) {
+    if (copy_from_user(&new_set, datavp, sizeof!(sigset_t))) {
     ret = -EFAULT;
     break;
     }
@@ -1121,16 +1439,18 @@ pub const is_sysemu_singlestep(request): c_int = 0;
 // The actual trap might not be PTRACE_EVENT_STOP trap but
 // the pending condition is cleared regardless.
 //
-    if (unlikely(!seized || !lock_task_sighand(child, &flags)))
+    if (unlikely(!seized || !lock_task_sighand(child, &flags))) {
     break;
+    }
 //
 // INTERRUPT doesn't disturb existing trap sans one
 // exception.  If ptracer issued LISTEN for the current
 // STOP, this INTERRUPT should clear LISTEN and re-trap
 // tracee into STOP.
 //
-    if (likely(task_set_jobctl_pending(child, JOBCTL_TRAP_STOP)))
+    if (likely(task_set_jobctl_pending(child, JOBCTL_TRAP_STOP))) {
     ptrace_signal_wake_up(child, child.jobctl & JOBCTL_LISTENING);
+    }
     unlock_task_sighand(child, &flags);
     ret = 0;
     break;
@@ -1143,8 +1463,9 @@ pub const is_sysemu_singlestep(request): c_int = 0;
 // again.  Alternatively, ptracer can issue INTERRUPT to
 // finish listening and re-trap tracee into STOP.
 //
-    if (unlikely(!seized || !lock_task_sighand(child, &flags)))
+    if (unlikely(!seized || !lock_task_sighand(child, &flags))) {
     break;
+    }
     si = child.last_siginfo;
     if (likely(si && (si.si_code >> 8) == PTRACE_EVENT_STOP)) {
     child.jobctl |= JOBCTL_LISTENING;
@@ -1152,8 +1473,9 @@ pub const is_sysemu_singlestep(request): c_int = 0;
 // If NOTIFY is set, it means event happened between
 // start of this trap and now.  Trigger re-trap.
 //
-    if (child.jobctl & JOBCTL_TRAP_NOTIFY)
+    if (child.jobctl & JOBCTL_TRAP_NOTIFY) {
     ptrace_signal_wake_up(child, true);
+    }
     ret = 0;
     }
     unlock_task_sighand(child, &flags);
@@ -1163,20 +1485,24 @@ pub const is_sysemu_singlestep(request): c_int = 0;
     break;
 
     case PTRACE_GETFDPIC: {
-    struct mm_struct *mm = get_task_mm(child);
-    let mut tmp: c_ulong = 0;
+    let mut mm = get_task_mm(child);
+pub static mut tmp: c_ulong = 0;
     ret = -ESRCH;
-    if (!mm)
+    if (!mm) {
     break;
-    switch (addr) {
-    case PTRACE_GETFDPIC_EXEC:
+    }
+    match (addr) {
+    PTRACE_GETFDPIC_EXEC => {
     tmp = mm.context.exec_fdpic_loadmap;
-    break;
-    case PTRACE_GETFDPIC_INTERP:
+    // break;
+    }
+    PTRACE_GETFDPIC_INTERP => {
     tmp = mm.context.interp_fdpic_loadmap;
-    break;
-    default:
-    break;
+    // break;
+    }
+    _ => {
+    // break;
+    }
     }
     mmput(mm);
     ret = put_user(tmp, datalp);
@@ -1199,16 +1525,19 @@ pub const is_sysemu_singlestep(request): c_int = 0;
 
     case PTRACE_GETREGSET:
     case PTRACE_SETREGSET: {
-    struct iovec kiov;
-    struct iovec __user *uiov = datavp;
-    if (!access_ok(uiov, sizeof(*uiov)))
+pub static mut kiov: usize = 0;
+    let mut uiov = datavp;
+    if (!access_ok(uiov, sizeof!(*uiov))) {
     return -EFAULT;
+    }
     if (__get_user(kiov.iov_base, &uiov.iov_base) ||
-    __get_user(kiov.iov_len, &uiov.iov_len))
+    __get_user(kiov.iov_len, &uiov.iov_len)) {
     return -EFAULT;
+    }
     ret = ptrace_regset(child, request, addr, &kiov);
-    if (!ret)
+    if (!ret) {
     ret = __put_user(kiov.iov_len, &uiov.iov_len);
+    }
     break;
     }
     case PTRACE_GET_SYSCALL_INFO:
@@ -1235,153 +1564,170 @@ pub const is_sysemu_singlestep(request): c_int = 0;
     case PTRACE_GET_SYSCALL_USER_DISPATCH_CONFIG:
     ret = syscall_user_dispatch_get_config(child, addr, datavp);
     break;
-    default:
+// label;
     break;
     }
     return ret;
     }
-    SYSCALL_DEFINE4(ptrace, long, request, long, pid, unsigned long, addr,
-    unsigned long, data)
-    {
-    struct task_struct *child;
-    long ret;
+#[no_mangle]
+pub unsafe extern "C" fn sys_ptrace(request: usize, pid: usize, addr: usize, data: usize) -> c_long {
+pub static mut child: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     if (request == PTRACE_TRACEME) {
     ret = ptrace_traceme();
-    goto out;
+// goto;
     }
     child = find_get_task_by_vpid(pid);
     if (!child) {
     ret = -ESRCH;
-    goto out;
+// goto;
     }
     if (request == PTRACE_ATTACH || request == PTRACE_SEIZE) {
     ret = ptrace_attach(child, request, addr, data);
-    goto out_put_task_struct;
+// goto;
     }
     ret = ptrace_check_attach(child, request == PTRACE_KILL ||
     request == PTRACE_INTERRUPT);
-    if (ret < 0)
-    goto out_put_task_struct;
+    if (ret < 0) {
+// goto;
+    }
     ret = arch_ptrace(child, request, addr, data);
-    if (ret || request != PTRACE_DETACH)
+    if (ret || request != PTRACE_DETACH) {
     ptrace_unfreeze_traced(child);
-    out_put_task_struct:
+    }
+// label;
     put_task_struct(child);
-    out:
+// label;
     return ret;
     }
-    int generic_ptrace_peekdata(struct task_struct *tsk, unsigned long addr,
-    unsigned long data)
-    {
-    unsigned long tmp;
-    int copied;
-    copied = ptrace_access_vm(tsk, addr, &tmp, sizeof(tmp), FOLL_FORCE);
-    if (copied != sizeof(tmp))
+#[no_mangle]
+pub unsafe extern "C" fn generic_ptrace_peekdata(tsk: *mut task_struct, addr: c_ulong, data: c_ulong) -> c_int {
+    let mut tmp = 0;
+    let mut copied = 0;
+    copied = ptrace_access_vm(tsk, addr, &tmp, sizeof!(tmp), FOLL_FORCE);
+    if (copied != sizeof!(tmp)) {
     return -EIO;
-    return put_user(tmp, (unsigned long __user *)data);
     }
-    int generic_ptrace_pokedata(struct task_struct *tsk, unsigned long addr,
-    unsigned long data)
-    {
-    int copied;
-    copied = ptrace_access_vm(tsk, addr, &data, sizeof(data),
+    return put_user(tmp, data);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn generic_ptrace_pokedata(tsk: *mut task_struct, addr: c_ulong, data: c_ulong) -> c_int {
+    let mut copied = 0;
+    copied = ptrace_access_vm(tsk, addr, &data, sizeof!(data),
     FOLL_FORCE | FOLL_WRITE);
-    return (copied == sizeof(data)) ? 0 : -EIO;
+    return (copied == sizeof!(data)) ? 0 : -EIO;
     }
 
-    int compat_ptrace_request(struct task_struct *child, compat_long_t request,
-    compat_ulong_t addr, compat_ulong_t data)
-    {
-    compat_ulong_t __user *datap = compat_ptr(data);
-    compat_ulong_t word;
-    kernel_siginfo_t siginfo;
-    int ret;
-    switch (request) {
-    case PTRACE_PEEKTEXT:
-    case PTRACE_PEEKDATA:
-    ret = ptrace_access_vm(child, addr, &word, sizeof(word),
+#[no_mangle]
+pub unsafe extern "C" fn compat_ptrace_request(child: *mut task_struct, request: compat_long_t, addr: compat_ulong_t, data: compat_ulong_t) -> c_int {
+    let mut datap = compat_ptr(data);
+    let mut word;
+    let mut siginfo;
+    let mut ret = 0;
+    match (request) {
+    PTRACE_PEEKTEXT => {
+    }
+    PTRACE_PEEKDATA => {
+    ret = ptrace_access_vm(child, addr, &word, sizeof!(word),
     FOLL_FORCE);
-    if (ret != sizeof(word))
+    if (ret != sizeof!(word)) {
     ret = -EIO;
-    else
+    }
+    else {
     ret = put_user(word, datap);
-    break;
-    case PTRACE_POKETEXT:
-    case PTRACE_POKEDATA:
-    ret = ptrace_access_vm(child, addr, &data, sizeof(data),
+    }
+    // break;
+    }
+    PTRACE_POKETEXT => {
+    }
+    PTRACE_POKEDATA => {
+    ret = ptrace_access_vm(child, addr, &data, sizeof!(data),
     FOLL_FORCE | FOLL_WRITE);
-    ret = (ret != sizeof(data) ? -EIO : 0);
-    break;
-    case PTRACE_GETEVENTMSG:
+    ret = (ret != sizeof!(data) ? -EIO : 0);
+    // break;
+    }
+    PTRACE_GETEVENTMSG => {
     ret = put_user((compat_ulong_t) child.ptrace_message, datap);
-    break;
-    case PTRACE_GETSIGINFO:
+    // break;
+    }
+    PTRACE_GETSIGINFO => {
     ret = ptrace_getsiginfo(child, &siginfo);
-    if (!ret)
+    if (!ret) {
     ret = copy_siginfo_to_user32(
-    (struct compat_siginfo __user *) datap,
+     datap,
     &siginfo);
-    break;
-    case PTRACE_SETSIGINFO:
+    }
+    // break;
+    }
+    PTRACE_SETSIGINFO => {
     ret = copy_siginfo_from_user32(
-    &siginfo, (struct compat_siginfo __user *) datap);
-    if (!ret)
+    &siginfo,  datap);
+    if (!ret) {
     ret = ptrace_setsiginfo(child, &siginfo);
-    break;
+    }
+    // break;
 
-    case PTRACE_GETREGSET:
-    case PTRACE_SETREGSET:
+    }
+    PTRACE_GETREGSET => {
+    }
+    PTRACE_SETREGSET => {
     {
-    struct iovec kiov;
-    struct compat_iovec __user *uiov =
-    (struct compat_iovec __user *) datap;
-    compat_uptr_t ptr;
-    compat_size_t len;
-    if (!access_ok(uiov, sizeof(*uiov)))
+pub static mut kiov: usize = 0;
+    let mut uiov =  datap;
+    let mut ptr;
+    let mut len;
+    if (!access_ok(uiov, sizeof!(*uiov))) {
     return -EFAULT;
+    }
     if (__get_user(ptr, &uiov.iov_base) ||
-    __get_user(len, &uiov.iov_len))
+    __get_user(len, &uiov.iov_len)) {
     return -EFAULT;
+    }
     kiov.iov_base = compat_ptr(ptr);
     kiov.iov_len = len;
     ret = ptrace_regset(child, request, addr, &kiov);
-    if (!ret)
+    if (!ret) {
     ret = __put_user(kiov.iov_len, &uiov.iov_len);
-    break;
+    }
+    // break;
     }
 
-    default:
+    }
+    _ => {
     ret = ptrace_request(child, request, addr, data);
+    }
     }
     return ret;
     }
-    COMPAT_SYSCALL_DEFINE4(ptrace, compat_long_t, request, compat_long_t, pid,
-    compat_long_t, addr, compat_long_t, data)
-    {
-    struct task_struct *child;
-    long ret;
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sys_ptrace
+pub unsafe extern "C" fn sys_ptrace_dup(request: usize, pid: usize, addr: usize, data: usize) -> c_long {
+pub static mut child: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     if (request == PTRACE_TRACEME) {
     ret = ptrace_traceme();
-    goto out;
+// goto;
     }
     child = find_get_task_by_vpid(pid);
     if (!child) {
     ret = -ESRCH;
-    goto out;
+// goto;
     }
     if (request == PTRACE_ATTACH || request == PTRACE_SEIZE) {
     ret = ptrace_attach(child, request, addr, data);
-    goto out_put_task_struct;
+// goto;
     }
     ret = ptrace_check_attach(child, request == PTRACE_KILL ||
     request == PTRACE_INTERRUPT);
     if (!ret) {
     ret = compat_arch_ptrace(child, request, addr, data);
-    if (ret || request != PTRACE_DETACH)
+    if (ret || request != PTRACE_DETACH) {
     ptrace_unfreeze_traced(child);
     }
-    out_put_task_struct:
+    }
+// label;
     put_task_struct(child);
-    out:
+// label;
     return ret;
     }

@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -121,17 +371,7 @@ pub struct ntp_data {
 
 }
 
-    static struct ntp_data tk_ntp_data[TIMEKEEPERS_MAX] = {
-    [ 0 ... TIMEKEEPERS_MAX - 1 ] = {
-    .tick_usec		= USER_TICK_USEC,
-    .time_state		= TIME_OK,
-    .time_status		= STA_UNSYNC,
-    .time_constant		= 2,
-    .time_maxerror		= NTP_PHASE_LIMIT,
-    .time_esterror		= NTP_PHASE_LIMIT,
-    .ntp_next_leap_sec	= TIME64_MAX,
-    },
-    };
+pub static mut ntp_data: usize = 0;
 pub const SECS_PER_DAY: c_int = 86400;
 
 // One microsecond of phase, in plain shifted-ns (ns << NTP_SCALE_SHIFT)
@@ -156,17 +396,15 @@ pub const MAX_TAI_OFFSET: c_int = 100000;
 //
 #[no_mangle]
 pub unsafe extern "C" fn ntp_offset_chunk(ntpdata: *mut ntp_data, offset: i64) -> i64 {
-    static inline s64 ntp_offset_chunk(struct ntp_data *ntpdata, s64 offset)
-    {
-    if (ntpdata.time_status & STA_PPSTIME && ntpdata.time_status & STA_PPSSIGNAL)
+    if (ntpdata.time_status & STA_PPSTIME && ntpdata.time_status & STA_PPSSIGNAL) {
     return offset;
-    else
+    }
+    else {
     return shift_right(offset, SHIFT_PLL + ntpdata.time_constant);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn pps_reset_freq_interval(ntpdata: *mut ntp_data) {
-    static inline void pps_reset_freq_interval(struct ntp_data *ntpdata)
-    {
 // The PPS calibration interval may end surprisingly early
     ntpdata.pps_shift = PPS_INTMIN;
     ntpdata.pps_intcnt = 0;
@@ -177,8 +415,6 @@ pub unsafe extern "C" fn pps_reset_freq_interval(ntpdata: *mut ntp_data) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn pps_clear(ntpdata: *mut ntp_data) {
-    static inline void pps_clear(struct ntp_data *ntpdata)
-    {
     pps_reset_freq_interval(ntpdata);
     ntpdata.pps_tf[0] = 0;
     ntpdata.pps_tf[1] = 0;
@@ -192,10 +428,8 @@ pub unsafe extern "C" fn pps_clear(ntpdata: *mut ntp_data) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn pps_dec_valid(ntpdata: *mut ntp_data) {
-    static inline void pps_dec_valid(struct ntp_data *ntpdata)
-    {
     if (ntpdata.pps_valid > 0) {
-    ntpdata.pps_valid--;
+    ntpdata.pps_valid -= 1;
     } else {
     ntpdata.time_status &= ~(STA_PPSSIGNAL | STA_PPSJITTER |
     STA_PPSWANDER | STA_PPSERROR);
@@ -204,14 +438,10 @@ pub unsafe extern "C" fn pps_dec_valid(ntpdata: *mut ntp_data) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn pps_set_freq(ntpdata: *mut ntp_data) {
-    static inline void pps_set_freq(struct ntp_data *ntpdata)
-    {
     ntpdata.pps_freq = ntpdata.time_freq;
     }
 #[no_mangle]
 pub unsafe extern "C" fn is_error_status(status: c_int) -> bool {
-    static inline bool is_error_status(int status)
-    {
     return (status & (STA_UNSYNC|STA_CLOCKERR))
 //
 // PPS signal lost when either PPS time or PPS frequency
@@ -234,13 +464,12 @@ pub unsafe extern "C" fn is_error_status(status: c_int) -> bool {
     }
 #[no_mangle]
 pub unsafe extern "C" fn pps_fill_timex(ntpdata: *mut ntp_data, txc: *mut __kernel_timex) {
-    static inline void pps_fill_timex(struct ntp_data *ntpdata, struct __kernel_timex *txc)
-    {
     txc.ppsfreq	   = shift_right((ntpdata.pps_freq >> PPM_SCALE_INV_SHIFT) *
     PPM_SCALE_INV, NTP_SCALE_SHIFT);
     txc.jitter	   = ntpdata.pps_jitter;
-    if (!(ntpdata.time_status & STA_NANO))
+    if (!(ntpdata.time_status & STA_NANO)) {
     txc.jitter = ntpdata.pps_jitter / NSEC_PER_USEC;
+    }
     txc.shift	   = ntpdata.pps_shift;
     txc.stabil	   = ntpdata.pps_stabil;
     txc.jitcnt	   = ntpdata.pps_jitcnt;
@@ -250,25 +479,37 @@ pub unsafe extern "C" fn pps_fill_timex(ntpdata: *mut ntp_data, txc: *mut __kern
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn ntp_offset_chunk(ntpdata: *mut ntp_data, offset: i64) -> i64 {
-    static inline s64 ntp_offset_chunk(struct ntp_data *ntpdata, s64 offset)
-    {
+#[no_mangle]
+// duplicate fn: ntp_offset_chunk
+pub unsafe extern "C" fn ntp_offset_chunk_dup(ntpdata: *mut ntp_data, offset: i64) -> i64 {
     return shift_right(offset, SHIFT_PLL + ntpdata.time_constant);
     }
-    static inline void pps_reset_freq_interval(struct ntp_data *ntpdata) {}
-    static inline void pps_clear(struct ntp_data *ntpdata) {}
-    static inline void pps_dec_valid(struct ntp_data *ntpdata) {}
-    static inline void pps_set_freq(struct ntp_data *ntpdata) {}
 #[no_mangle]
-pub unsafe extern "C" fn is_error_status(status: c_int) -> bool {
-    static inline bool is_error_status(int status)
-    {
+#[no_mangle]
+// duplicate fn: pps_reset_freq_interval
+pub unsafe extern "C" fn pps_reset_freq_interval_dup(ntpdata: *mut ntp_data) {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: pps_clear
+pub unsafe extern "C" fn pps_clear_dup(ntpdata: *mut ntp_data) {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: pps_dec_valid
+pub unsafe extern "C" fn pps_dec_valid_dup(ntpdata: *mut ntp_data) {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: pps_set_freq
+pub unsafe extern "C" fn pps_set_freq_dup(ntpdata: *mut ntp_data) {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: is_error_status
+pub unsafe extern "C" fn is_error_status_dup(status: c_int) -> bool {
     return status & (STA_UNSYNC|STA_CLOCKERR);
     }
 #[no_mangle]
-pub unsafe extern "C" fn pps_fill_timex(ntpdata: *mut ntp_data, txc: *mut __kernel_timex) {
-    static inline void pps_fill_timex(struct ntp_data *ntpdata, struct __kernel_timex *txc)
-    {
+#[no_mangle]
+// duplicate fn: pps_fill_timex
+pub unsafe extern "C" fn pps_fill_timex_dup(ntpdata: *mut ntp_data, txc: *mut __kernel_timex) {
 // PPS is not implemented, so these are zero
     txc.ppsfreq	   = 0;
     txc.jitter	   = 0;
@@ -285,8 +526,6 @@ pub unsafe extern "C" fn pps_fill_timex(ntpdata: *mut ntp_data, txc: *mut __kern
 //
 #[no_mangle]
 unsafe extern "C" fn ntp_update_frequency(ntpdata: *mut ntp_data) {
-    static void ntp_update_frequency(struct ntp_data *ntpdata)
-    {
     u64 second_length, new_base, tick_usec = (u64)ntpdata.tick_usec;
     second_length		 = (u64)(tick_usec * NSEC_PER_USEC * USER_HZ) << NTP_SCALE_SHIFT;
     second_length		+= ntpdata.ntp_tick_adj;
@@ -301,24 +540,24 @@ unsafe extern "C" fn ntp_update_frequency(ntpdata: *mut ntp_data) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn ntp_update_offset_fll(ntpdata: *mut ntp_data, offset64: i64, secs: c_long) -> i64 {
-    static inline s64 ntp_update_offset_fll(struct ntp_data *ntpdata, s64 offset64, long secs)
-    {
     ntpdata.time_status &= ~STA_MODE;
-    if (secs < MINSEC)
+    if (secs < MINSEC) {
     return 0;
-    if (!(ntpdata.time_status & STA_FLL) && (secs <= MAXSEC))
+    }
+    if (!(ntpdata.time_status & STA_FLL) && (secs <= MAXSEC)) {
     return 0;
+    }
     ntpdata.time_status |= STA_MODE;
     return div64_long(offset64 << (NTP_SCALE_SHIFT - SHIFT_FLL), secs);
     }
 #[no_mangle]
 unsafe extern "C" fn ntp_update_offset(ntpdata: *mut ntp_data, offset: c_long) {
-    static void ntp_update_offset(struct ntp_data *ntpdata, long offset)
-    {
     s64 freq_adj, offset64;
-    long secs, real_secs;
-    if (!(ntpdata.time_status & STA_PLL))
+    let mut secs = 0;
+    let mut real_secs = 0;
+    if (!(ntpdata.time_status & STA_PLL)) {
     return;
+    }
     if (!(ntpdata.time_status & STA_NANO)) {
 // Make sure the multiplication below won't overflow
     offset = clamp(offset, -USEC_PER_SEC, USEC_PER_SEC);
@@ -332,8 +571,9 @@ unsafe extern "C" fn ntp_update_offset(ntpdata: *mut ntp_data, offset: c_long) {
 //
     real_secs = ktime_get_ntp_seconds(ntpdata - tk_ntp_data);
     secs = (long)(real_secs - ntpdata.time_reftime);
-    if (unlikely(ntpdata.time_status & STA_FREQHOLD))
+    if (unlikely(ntpdata.time_status & STA_FREQHOLD)) {
     secs = 0;
+    }
     ntpdata.time_reftime = real_secs;
     offset64    = offset;
     freq_adj    = ntp_update_offset_fll(ntpdata, offset64, secs);
@@ -342,8 +582,9 @@ unsafe extern "C" fn ntp_update_offset(ntpdata: *mut ntp_data, offset: c_long) {
 // sampling rate (e.g. intermittent network connection)
 // to avoid instability.
 //
-    if (unlikely(secs > 1 << (SHIFT_PLL + 1 + ntpdata.time_constant)))
+    if (unlikely(secs > 1 << (SHIFT_PLL + 1 + ntpdata.time_constant))) {
     secs = 1 << (SHIFT_PLL + 1 + ntpdata.time_constant);
+    }
     freq_adj    += (offset64 * secs) <<
     (NTP_SCALE_SHIFT - 2 * (SHIFT_PLL + 2 + ntpdata.time_constant));
     freq_adj    = min(freq_adj + ntpdata.time_freq, MAXFREQ_SCALED);
@@ -352,8 +593,6 @@ unsafe extern "C" fn ntp_update_offset(ntpdata: *mut ntp_data, offset: c_long) {
     }
 #[no_mangle]
 unsafe extern "C" fn __ntp_clear(ntpdata: *mut ntp_data) {
-    static void __ntp_clear(struct ntp_data *ntpdata)
-    {
 // Stop active adjtime()
     ntpdata.time_adjust	= 0;
     ntpdata.time_adjust_frac = 0;
@@ -387,41 +626,32 @@ unsafe extern "C" fn __ntp_clear(ntpdata: *mut ntp_data) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ntp_clear(tkid: c_uint, cs_tick_adj: i64) {
-    void ntp_clear(unsigned int tkid, s64 cs_tick_adj)
-    {
     tk_ntp_data[tkid].cs_tick_adj = cs_tick_adj;
     __ntp_clear(&tk_ntp_data[tkid]);
     }
 #[no_mangle]
 pub unsafe extern "C" fn ntp_tick_length(tkid: c_uint) -> u64 {
-    u64 ntp_tick_length(unsigned int tkid)
-    {
     return tk_ntp_data[tkid].tick_length;
     }
 #[no_mangle]
 pub unsafe extern "C" fn ntp_get_skew_delta(tkid: c_uint) -> i64 {
-    s64 ntp_get_skew_delta(unsigned int tkid)
-    {
     return tk_ntp_data[tkid].skew_delta;
     }
 // Sign of @x as +1 or -1 (zero counts as positive; callers pass nonzero).
 #[no_mangle]
 pub unsafe extern "C" fn signof(x: i64) -> c_int {
-    static inline int signof(s64 x)
-    {
     return x < 0 ? -1 : 1;
     }
 #[no_mangle]
 unsafe extern "C" fn ntp_drain_time_offset(tkid: c_uint, amount: i64) -> i64 {
-    static s64 ntp_drain_time_offset(unsigned int tkid, s64 amount)
-    {
-    struct ntp_data *ntpdata = &tk_ntp_data[tkid];
+    let mut ntpdata = &tk_ntp_data[tkid];
 // Only drain if amount and time_offset have the same sign
-    if (!amount || signof(amount) != signof(ntpdata.time_offset))
+    if (!amount || signof(amount) != signof(ntpdata.time_offset)) {
     return amount;
+    }
 // Clamp: don't overshoot zero
     if (abs(amount) > abs(ntpdata.time_offset)) {
-    let mut undrained: i64 = amount - ntpdata.time_offset;
+pub static mut undrained: i64 = 0;
     ntpdata.time_offset = 0;
     return undrained;
     }
@@ -444,15 +674,14 @@ unsafe extern "C" fn ntp_drain_time_offset(tkid: c_uint, amount: i64) -> i64 {
 //
 #[no_mangle]
 unsafe extern "C" fn ntp_drain_time_adjust(tkid: c_uint, amount: i64, shift: c_uint) -> i64 {
-    static s64 ntp_drain_time_adjust(unsigned int tkid, s64 amount, unsigned int shift)
-    {
-    struct ntp_data *ntpdata = &tk_ntp_data[tkid];
+    let mut ntpdata = &tk_ntp_data[tkid];
 // Sign reference: time_adjust if any whole us remain, else the drawer
     s64 ref = ntpdata.time_adjust ? (s64)ntpdata.time_adjust
     : ntpdata.time_adjust_frac;
     s64 deliver, deficit, claimed;
-    if (!amount || !ref || signof(amount) != signof(ref))
+    if (!amount || !ref || signof(amount) != signof(ref)) {
     return amount;
+    }
 //
 // Phase to deliver this accumulation, in plain shifted-ns. The drain
 // @amount is in ÷HZ units, so multiply by HZ first, then clamp to the
@@ -464,25 +693,28 @@ unsafe extern "C" fn ntp_drain_time_adjust(tkid: c_uint, amount: i64, shift: c_u
 // Top up the sub-µs drawer from whole-µs time_adjust as needed
     deficit = deliver - abs(ntpdata.time_adjust_frac);
     if (deficit > 0 && ntpdata.time_adjust) {
-    let mut borrow: c_long = div64_u64(deficit + ONE_US_NS - 1, ONE_US_NS);
+pub static mut borrow: c_long = 0;
     if (ntpdata.time_adjust > 0) {
     borrow = min(borrow, ntpdata.time_adjust);
     ntpdata.time_adjust	  -= borrow;
     ntpdata.time_adjust_frac += (s64)borrow * ONE_US_NS;
     } else {
 // Clamp without negating time_adjust (UB for LONG_MIN)
-    if (ntpdata.time_adjust > -borrow)
+    if (ntpdata.time_adjust > -borrow) {
     borrow = -ntpdata.time_adjust;
+    }
     ntpdata.time_adjust	  += borrow;
     ntpdata.time_adjust_frac -= (s64)borrow * ONE_US_NS;
     }
     }
 // Never deliver more than the drawer holds
     deliver = min(deliver, abs(ntpdata.time_adjust_frac));
-    if (ntpdata.time_adjust_frac > 0)
+    if (ntpdata.time_adjust_frac > 0) {
     ntpdata.time_adjust_frac -= deliver;
-    else
+    }
+    else {
     ntpdata.time_adjust_frac += deliver;
+    }
 // Return the unclaimed remainder in ÷HZ drain units for time_offset
     claimed = div_s64(deliver, NTP_INTERVAL_FREQ);
     return amount - signof(amount) * claimed;
@@ -498,9 +730,7 @@ unsafe extern "C" fn ntp_drain_time_adjust(tkid: c_uint, amount: i64, shift: c_u
 //
 #[no_mangle]
 pub unsafe extern "C" fn ntp_drain_skew(tkid: c_uint, amount: i64, shift: c_uint) -> i64 {
-    s64 ntp_drain_skew(unsigned int tkid, s64 amount, unsigned int shift)
-    {
-    let mut unclaimed: i64 = ntp_drain_time_adjust(tkid, amount, shift);
+pub static mut unclaimed: i64 = 0;
     unclaimed = ntp_drain_time_offset(tkid, unclaimed);
 //
 // Return the amount actually drained from the intentional
@@ -523,18 +753,18 @@ pub unsafe extern "C" fn ntp_drain_skew(tkid: c_uint, amount: i64, shift: c_uint
 //
 #[no_mangle]
 unsafe extern "C" fn ntp_transfer_offset_adjust(ntpdata: *mut ntp_data, amount: i64) {
-    static void ntp_transfer_offset_adjust(struct ntp_data *ntpdata, s64 amount)
-    {
     s64 frac_delta, carry;
 //
 // Don't drain time_offset past zero. @amount shares its sign and is
 // normally bounded below it by ntp_offset_chunk(), but the ±1 skew_delta
 // floor for a tiny time_offset can exceed it, so clamp.
 //
-    if (abs(amount) > abs(ntpdata.time_offset))
+    if (abs(amount) > abs(ntpdata.time_offset)) {
     amount = ntpdata.time_offset;
-    if (!amount)
+    }
+    if (!amount) {
     return;
+    }
 //
 // Remove the matching phase from time_adjust, in plain shifted-ns. No
 // clamp against time_adjust's zero is needed: @amount is bounded by the
@@ -560,10 +790,10 @@ unsafe extern "C" fn ntp_transfer_offset_adjust(ntpdata: *mut ntp_data, amount: 
 // repay a single whole µs to realign; the total phase is unchanged.
 //
     if (ntpdata.time_adjust > 0 && ntpdata.time_adjust_frac < 0) {
-    ntpdata.time_adjust--;
+    ntpdata.time_adjust -= 1;
     ntpdata.time_adjust_frac += ONE_US_NS;
     } else if (ntpdata.time_adjust < 0 && ntpdata.time_adjust_frac > 0) {
-    ntpdata.time_adjust++;
+    ntpdata.time_adjust += 1;
     ntpdata.time_adjust_frac -= ONE_US_NS;
     }
     }
@@ -577,13 +807,13 @@ unsafe extern "C" fn ntp_transfer_offset_adjust(ntpdata: *mut ntp_data, amount: 
 //
 #[no_mangle]
 pub unsafe extern "C" fn ntp_get_next_leap(tkid: c_uint) -> ktime_t {
-    ktime_t ntp_get_next_leap(unsigned int tkid)
-    {
-    struct ntp_data *ntpdata = &tk_ntp_data[TIMEKEEPER_CORE];
-    if (tkid != TIMEKEEPER_CORE)
+    let mut ntpdata = &tk_ntp_data[TIMEKEEPER_CORE];
+    if (tkid != TIMEKEEPER_CORE) {
     return KTIME_MAX;
-    if ((ntpdata.time_state == TIME_INS) && (ntpdata.time_status & STA_INS))
+    }
+    if ((ntpdata.time_state == TIME_INS) && (ntpdata.time_status & STA_INS)) {
     return ktime_set(ntpdata.ntp_next_leap_sec, 0);
+    }
     return KTIME_MAX;
     }
 //
@@ -598,18 +828,16 @@ pub unsafe extern "C" fn ntp_get_next_leap(tkid: c_uint) -> ktime_t {
 //
 #[no_mangle]
 pub unsafe extern "C" fn second_overflow(tkid: c_uint, secs: time64_t) -> c_int {
-    int second_overflow(unsigned int tkid, time64_t secs)
-    {
-    struct ntp_data *ntpdata = &tk_ntp_data[tkid];
-    let mut leap: c_int = 0;
-    s32 rem;
+    let mut ntpdata = &tk_ntp_data[tkid];
+pub static mut leap: c_int = 0;
+    let mut rem = 0;
 //
 // Leap second processing. If in leap-insert state at the end of the
 // day, the system clock is set back one second; if in leap-delete
 // state, the system clock is set ahead one second.
 //
-    switch (ntpdata.time_state) {
-    case TIME_OK:
+    match (ntpdata.time_state) {
+    TIME_OK => {
     if (ntpdata.time_status & STA_INS) {
     ntpdata.time_state = TIME_INS;
     div_s64_rem(secs, SECS_PER_DAY, &rem);
@@ -619,8 +847,9 @@ pub unsafe extern "C" fn second_overflow(tkid: c_uint, secs: time64_t) -> c_int 
     div_s64_rem(secs + 1, SECS_PER_DAY, &rem);
     ntpdata.ntp_next_leap_sec = secs + SECS_PER_DAY - rem;
     }
-    break;
-    case TIME_INS:
+    // break;
+    }
+    TIME_INS => {
     if (!(ntpdata.time_status & STA_INS)) {
     ntpdata.ntp_next_leap_sec = TIME64_MAX;
     ntpdata.time_state = TIME_OK;
@@ -629,8 +858,9 @@ pub unsafe extern "C" fn second_overflow(tkid: c_uint, secs: time64_t) -> c_int 
     ntpdata.time_state = TIME_OOP;
     pr_notice("Clock: inserting leap second 23:59:60 UTC\n");
     }
-    break;
-    case TIME_DEL:
+    // break;
+    }
+    TIME_DEL => {
     if (!(ntpdata.time_status & STA_DEL)) {
     ntpdata.ntp_next_leap_sec = TIME64_MAX;
     ntpdata.time_state = TIME_OK;
@@ -640,15 +870,19 @@ pub unsafe extern "C" fn second_overflow(tkid: c_uint, secs: time64_t) -> c_int 
     ntpdata.time_state = TIME_WAIT;
     pr_notice("Clock: deleting leap second 23:59:59 UTC\n");
     }
-    break;
-    case TIME_OOP:
+    // break;
+    }
+    TIME_OOP => {
     ntpdata.ntp_next_leap_sec = TIME64_MAX;
     ntpdata.time_state = TIME_WAIT;
-    break;
-    case TIME_WAIT:
-    if (!(ntpdata.time_status & (STA_INS | STA_DEL)))
+    // break;
+    }
+    TIME_WAIT => {
+    if (!(ntpdata.time_status & (STA_INS | STA_DEL))) {
     ntpdata.time_state = TIME_OK;
-    break;
+    }
+    // break;
+    }
     }
 // Bump the maxerror field
     ntpdata.time_maxerror += MAXFREQ / NSEC_PER_USEC;
@@ -671,29 +905,33 @@ pub unsafe extern "C" fn second_overflow(tkid: c_uint, secs: time64_t) -> c_int 
 //
     if (ntpdata.time_offset || ntpdata.time_adjust ||
     ntpdata.time_adjust_frac) {
-    let mut off_chunk: i64 = ntp_offset_chunk(ntpdata, ntpdata.time_offset);
-    let mut adj_chunk: i64 = 0, net;
+pub static mut off_chunk: i64 = 0;
+pub static mut adj_chunk: i64 = 0;
 //
 // Once the exponential chunk rounds to zero, deliver the last
 // remaining offset this second so it converges to zero instead
 // of stalling just above it.
 //
-    if (!off_chunk)
+    if (!off_chunk) {
     off_chunk = ntpdata.time_offset;
+    }
     if (ntpdata.time_adjust || ntpdata.time_adjust_frac) {
-    s64 adj;
-    if (ntpdata.time_adjust >= MAX_TICKADJ)
+    let mut adj = 0;
+    if (ntpdata.time_adjust >= MAX_TICKADJ) {
     adj = MAX_TICKADJ * ONE_US_NS;
-#[no_mangle]
-pub unsafe extern "C" fn if(-MAX_TICKADJ: ntpdata->time_adjust <=) -> else {
-    else if (ntpdata.time_adjust <= -MAX_TICKADJ)
+    }
+
+    else if (ntpdata.time_adjust <= -MAX_TICKADJ) {
     adj = -MAX_TICKADJ * ONE_US_NS;
-    else
+    }
+    else {
     adj = ntpdata.time_adjust * ONE_US_NS +
     ntpdata.time_adjust_frac;
+    }
     adj_chunk = div_s64(adj, NTP_INTERVAL_FREQ);
-    if (!adj_chunk)
+    if (!adj_chunk) {
     adj_chunk = signof(ntpdata.time_adjust_frac);
+    }
     }
 //
 // If the two slews oppose, only their net would drive the
@@ -702,40 +940,39 @@ pub unsafe extern "C" fn if(-MAX_TICKADJ: ntpdata->time_adjust <=) -> else {
 // Settle that overlap directly between them (no clock motion).
 //
     if (off_chunk && adj_chunk && signof(off_chunk) != signof(adj_chunk)) {
-    let mut conflict: i64 = min(abs(off_chunk), abs(adj_chunk));
+pub static mut conflict: i64 = 0;
     ntp_transfer_offset_adjust(ntpdata, signof(off_chunk) * conflict);
     }
 // Net is what the clock delivers; reduce to per-tick, then floor.
     net = off_chunk + adj_chunk;
     ntpdata.skew_delta = div_s64(net, NTP_INTERVAL_FREQ);
-    if (!ntpdata.skew_delta && net)
+    if (!ntpdata.skew_delta && net) {
     ntpdata.skew_delta = signof(net);
+    }
     } else {
     ntpdata.skew_delta = 0;
     }
     return leap;
     }
 
-    static void sync_hw_clock(struct work_struct *work);
-    static DECLARE_WORK(sync_work, sync_hw_clock);
-    static struct hrtimer sync_hrtimer;
+// forward_decl: sync_hw_clock;
+pub static mut sync_work: usize = 0;
+pub static mut sync_hrtimer: usize = 0;
 
 #[no_mangle]
 unsafe extern "C" fn sync_timer_callback(timer: *mut hrtimer) -> enum hrtimer_restart {
-    static enum hrtimer_restart sync_timer_callback(struct hrtimer *timer)
-    {
     queue_work(system_freezable_power_efficient_wq, &sync_work);
     return HRTIMER_NORESTART;
     }
 #[no_mangle]
 unsafe extern "C" fn sched_sync_hw_clock(offset_nsec: c_ulong, retry: bool) {
-    static void sched_sync_hw_clock(unsigned long offset_nsec, bool retry)
-    {
-    let mut exp: ktime_t = ktime_set(ktime_get_real_seconds(), 0);
-    if (retry)
+pub static mut exp: ktime_t = 0;
+    if (retry) {
     exp = ktime_add_ns(exp, 2ULL * NSEC_PER_SEC - offset_nsec);
-    else
+    }
+    else {
     exp = ktime_add_ns(exp, SYNC_PERIOD_NS - offset_nsec);
+    }
     hrtimer_start(&sync_hrtimer, exp, HRTIMER_MODE_ABS);
     }
 //
@@ -759,21 +996,18 @@ unsafe extern "C" fn sched_sync_hw_clock(offset_nsec: c_ulong, retry: bool) {
 //
 // If @now is not inside the allowed window the function returns false.
 //
-    static inline bool rtc_tv_nsec_ok(unsigned long set_offset_nsec,
-    struct timespec64 *to_set,
-    const struct timespec64 *now)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn rtc_tv_nsec_ok(set_offset_nsec: c_ulong, to_set: *mut timespec64, now: *mut timespec64) -> bool {
 // Allowed error in tv_nsec, arbitrarily set to 5 jiffies in ns.
-    let mut TIME_SET_NSEC_FUZZ: c_ulong = TICK_NSEC * 5;
-    struct timespec64 delay = {.tv_sec = -1,
-    .tv_nsec = set_offset_nsec};
+pub static mut TIME_SET_NSEC_FUZZ: c_ulong = 0;
+pub static mut timespec64: usize = 0;
 // to_set = timespec64_add(*now, delay);
     if (to_set.tv_nsec < TIME_SET_NSEC_FUZZ) {
     to_set.tv_nsec = 0;
     return true;
     }
     if (to_set.tv_nsec > NSEC_PER_SEC - TIME_SET_NSEC_FUZZ) {
-    to_set.tv_sec++;
+    to_set.tv_sec += 1;
     to_set.tv_nsec = 0;
     return true;
     }
@@ -782,31 +1016,29 @@ unsafe extern "C" fn sched_sync_hw_clock(offset_nsec: c_ulong, retry: bool) {
 
 #[no_mangle]
 pub unsafe extern "C" fn update_persistent_clock64(now64: timespec64) -> int __weak {
-    int __weak update_persistent_clock64(struct timespec64 now64)
-    {
     return -ENODEV;
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn update_persistent_clock64(now64: timespec64) -> c_int {
-    static inline int update_persistent_clock64(struct timespec64 now64)
-    {
+#[no_mangle]
+// duplicate fn: update_persistent_clock64
+pub unsafe extern "C" fn update_persistent_clock64_dup(now64: timespec64) -> c_int {
     return -ENODEV;
     }
 
 // Save NTP synchronized time to the RTC
 #[no_mangle]
 unsafe extern "C" fn update_rtc(to_set: *mut timespec64, offset_nsec: *mut c_ulong) -> c_int {
-    static int update_rtc(struct timespec64 *to_set, unsigned long *offset_nsec)
-    {
-    struct rtc_device *rtc;
-    struct rtc_time tm;
-    let mut err: c_int = -ENODEV;
+pub static mut rtc: *mut c_void = core::ptr::null_mut();
+pub static mut tm: usize = 0;
+pub static mut err: c_int = 0;
     rtc = rtc_class_open(CONFIG_RTC_SYSTOHC_DEVICE);
-    if (!rtc)
+    if (!rtc) {
     return -ENODEV;
-    if (!rtc.ops || !rtc.ops.set_time)
-    goto out_close;
+    }
+    if (!rtc.ops || !rtc.ops.set_time) {
+// goto;
+    }
 // First call might not have the correct offset
     if (*offset_nsec == rtc.set_offset_nsec) {
     rtc_time64_to_tm(to_set.tv_sec, &tm);
@@ -816,15 +1048,13 @@ unsafe extern "C" fn update_rtc(to_set: *mut timespec64, offset_nsec: *mut c_ulo
 // offset_nsec = rtc->set_offset_nsec;
     err = -EAGAIN;
     }
-    out_close:
+// label;
     rtc_class_close(rtc);
     return err;
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn update_rtc(to_set: *mut timespec64, offset_nsec: *mut c_ulong) -> c_int {
-    static inline int update_rtc(struct timespec64 *to_set, unsigned long *offset_nsec)
-    {
     return -ENODEV;
     }
 
@@ -834,8 +1064,6 @@ pub unsafe extern "C" fn update_rtc(to_set: *mut timespec64, offset_nsec: *mut c
 //
 #[no_mangle]
 pub unsafe extern "C" fn ntp_synced() -> bool {
-    static inline bool ntp_synced(void)
-    {
     return !(tk_ntp_data[TIMEKEEPER_CORE].time_status & STA_UNSYNC);
     }
 //
@@ -848,64 +1076,65 @@ pub unsafe extern "C" fn ntp_synced() -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn sync_hw_clock(work: *mut work_struct) {
-    static void sync_hw_clock(struct work_struct *work)
-    {
 //
 // The default synchronization offset is 500ms for the deprecated
 // update_persistent_clock64() under the assumption that it uses
 // the infamous CMOS clock (MC146818).
 //
-    let mut offset_nsec: static unsigned long = NSEC_PER_SEC / 2;
+pub static mut offset_nsec: unsigned long = 0;
     struct timespec64 now, to_set;
-    let mut res: c_int = -EAGAIN;
+pub static mut res: c_int = 0;
 //
 // Don't update if STA_UNSYNC is set and if ntp_notify_cmos_timer()
 // managed to schedule the work between the timer firing and the
 // work being able to rearm the timer. Wait for the timer to expire.
 //
-    if (!ntp_synced() || hrtimer_is_queued(&sync_hrtimer))
+    if (!ntp_synced() || hrtimer_is_queued(&sync_hrtimer)) {
     return;
+    }
     ktime_get_real_ts64(&now);
 // If @now is not in the allowed window, try again
-    if (!rtc_tv_nsec_ok(offset_nsec, &to_set, &now))
-    goto rearm;
+    if (!rtc_tv_nsec_ok(offset_nsec, &to_set, &now)) {
+// goto;
+    }
 // Take timezone adjusted RTCs into account
-    if (persistent_clock_is_local)
+    if (persistent_clock_is_local) {
     to_set.tv_sec -= (sys_tz.tz_minuteswest * 60);
+    }
 // Try the legacy RTC first.
     res = update_persistent_clock64(to_set);
-    if (res != -ENODEV)
-    goto rearm;
+    if (res != -ENODEV) {
+// goto;
+    }
 // Try the RTC class
     res = update_rtc(&to_set, &offset_nsec);
-    if (res == -ENODEV)
+    if (res == -ENODEV) {
     return;
-    rearm:
+    }
+// label;
     sched_sync_hw_clock(offset_nsec, res != 0);
     }
 #[no_mangle]
 pub unsafe extern "C" fn ntp_notify_cmos_timer(offset_set: bool) {
-    void ntp_notify_cmos_timer(bool offset_set)
-    {
 //
 // If the time jumped (using ADJ_SETOFFSET) cancels sync timer,
 // which may have been running if the time was synchronized
 // prior to the ADJ_SETOFFSET call.
 //
-    if (offset_set)
+    if (offset_set) {
     hrtimer_cancel(&sync_hrtimer);
+    }
 //
 // When the work is currently executed but has not yet the timer
 // rearmed this queues the work immediately again. No big issue,
 // just a pointless work scheduled.
 //
-    if (ntp_synced() && !hrtimer_is_queued(&sync_hrtimer))
+    if (ntp_synced() && !hrtimer_is_queued(&sync_hrtimer)) {
     queue_work(system_freezable_power_efficient_wq, &sync_work);
     }
+    }
 #[no_mangle]
-unsafe extern "C" fn ntp_init_cmos_sync() -> void __init {
-    static void __init ntp_init_cmos_sync(void)
-    {
+unsafe extern "C" fn ntp_init_cmos_sync()  {
     hrtimer_setup(&sync_hrtimer, sync_timer_callback, CLOCK_REALTIME, HRTIMER_MODE_ABS);
     }
 
@@ -916,8 +1145,6 @@ unsafe extern "C" fn ntp_init_cmos_sync() -> void __init {
 //
 #[no_mangle]
 pub unsafe extern "C" fn process_adj_status(ntpdata: *mut ntp_data, txc: *const __kernel_timex) {
-    static inline void process_adj_status(struct ntp_data *ntpdata, const struct __kernel_timex *txc)
-    {
     if ((ntpdata.time_status & STA_PLL) && !(txc.status & STA_PLL)) {
     ntpdata.time_state = TIME_OK;
     ntpdata.time_status = STA_UNSYNC;
@@ -929,21 +1156,24 @@ pub unsafe extern "C" fn process_adj_status(ntpdata: *mut ntp_data, txc: *const 
 // If we turn on PLL adjustments then reset the
 // reference time to current time.
 //
-    if (!(ntpdata.time_status & STA_PLL) && (txc.status & STA_PLL))
+    if (!(ntpdata.time_status & STA_PLL) && (txc.status & STA_PLL)) {
     ntpdata.time_reftime = ktime_get_ntp_seconds(ntpdata - tk_ntp_data);
+    }
 // only set allowed bits
     ntpdata.time_status &= STA_RONLY;
     ntpdata.time_status |= txc.status & ~STA_RONLY;
     }
-    static inline void process_adjtimex_modes(struct ntp_data *ntpdata, const struct __kernel_timex *txc,
-    s32 *time_tai)
-    {
-    if (txc.modes & ADJ_STATUS)
+#[no_mangle]
+pub unsafe extern "C" fn process_adjtimex_modes(ntpdata: *mut ntp_data, txc: *mut __kernel_timex, time_tai: *mut s32) {
+    if (txc.modes & ADJ_STATUS) {
     process_adj_status(ntpdata, txc);
-    if (txc.modes & ADJ_NANO)
+    }
+    if (txc.modes & ADJ_NANO) {
     ntpdata.time_status |= STA_NANO;
-    if (txc.modes & ADJ_MICRO)
+    }
+    if (txc.modes & ADJ_MICRO) {
     ntpdata.time_status &= ~STA_NANO;
+    }
     if (txc.modes & ADJ_FREQUENCY) {
     ntpdata.time_freq = txc.freq * PPM_SCALE;
     ntpdata.time_freq = min(ntpdata.time_freq, MAXFREQ_SCALED);
@@ -951,36 +1181,42 @@ pub unsafe extern "C" fn process_adj_status(ntpdata: *mut ntp_data, txc: *const 
 // Update pps_freq
     pps_set_freq(ntpdata);
     }
-    if (txc.modes & ADJ_MAXERROR)
+    if (txc.modes & ADJ_MAXERROR) {
     ntpdata.time_maxerror = clamp(txc.maxerror, 0, NTP_PHASE_LIMIT);
-    if (txc.modes & ADJ_ESTERROR)
+    }
+    if (txc.modes & ADJ_ESTERROR) {
     ntpdata.time_esterror = clamp(txc.esterror, 0, NTP_PHASE_LIMIT);
+    }
     if (txc.modes & ADJ_TIMECONST) {
     ntpdata.time_constant = clamp(txc.constant, 0, MAXTC);
-    if (!(ntpdata.time_status & STA_NANO))
+    if (!(ntpdata.time_status & STA_NANO)) {
     ntpdata.time_constant += 4;
+    }
     ntpdata.time_constant = clamp(ntpdata.time_constant, 0, MAXTC);
     }
-    if (txc.modes & ADJ_TAI && txc.constant >= 0 && txc.constant <= MAX_TAI_OFFSET)
+    if (txc.modes & ADJ_TAI && txc.constant >= 0 && txc.constant <= MAX_TAI_OFFSET) {
 // time_tai = txc->constant;
-    if (txc.modes & ADJ_OFFSET)
+    }
+    if (txc.modes & ADJ_OFFSET) {
     ntp_update_offset(ntpdata, txc.offset);
-    if (txc.modes & ADJ_TICK)
+    }
+    if (txc.modes & ADJ_TICK) {
     ntpdata.tick_usec = txc.tick;
-    if (txc.modes & (ADJ_TICK|ADJ_FREQUENCY|ADJ_OFFSET))
+    }
+    if (txc.modes & (ADJ_TICK|ADJ_FREQUENCY|ADJ_OFFSET)) {
     ntp_update_frequency(ntpdata);
+    }
     }
 //
 // adjtimex() mainly allows reading (and writing, if superuser) of
 // kernel time-keeping variables. used by xntpd.
 //
-    int ntp_adjtimex(unsigned int tkid, struct __kernel_timex *txc, const struct timespec64 *ts,
-    s32 *time_tai, struct audit_ntp_data *ad)
-    {
-    struct ntp_data *ntpdata = &tk_ntp_data[tkid];
-    int result;
+#[no_mangle]
+pub unsafe extern "C" fn ntp_adjtimex(tkid: c_uint, txc: *mut __kernel_timex, ts: *mut timespec64, time_tai: *mut s32, ad: *mut audit_ntp_data) -> c_int {
+    let mut ntpdata = &tk_ntp_data[tkid];
+    let mut result = 0;
     if (txc.modes & ADJ_ADJTIME) {
-    let mut save_adjust: c_long = ntpdata.time_adjust;
+pub static mut save_adjust: c_long = 0;
     if (!(txc.modes & ADJ_OFFSET_READONLY)) {
 // adjtime() is independent from ntp_adjtime()
     ntpdata.time_adjust = txc.offset;
@@ -1006,12 +1242,14 @@ pub unsafe extern "C" fn process_adj_status(ntpdata: *mut ntp_data, txc: *const 
     audit_ntp_set_new(ad, AUDIT_NTP_TICK,	ntpdata.tick_usec);
     }
     txc.offset = shift_right(ntpdata.time_offset * NTP_INTERVAL_FREQ, NTP_SCALE_SHIFT);
-    if (!(ntpdata.time_status & STA_NANO))
+    if (!(ntpdata.time_status & STA_NANO)) {
     txc.offset = div_s64(txc.offset, NSEC_PER_USEC);
     }
+    }
     result = ntpdata.time_state;
-    if (is_error_status(ntpdata.time_status))
+    if (is_error_status(ntpdata.time_status)) {
     result = TIME_ERROR;
+    }
     txc.freq	   = shift_right((ntpdata.time_freq >> PPM_SCALE_INV_SHIFT) *
     PPM_SCALE_INV, NTP_SCALE_SHIFT);
     txc.maxerror	   = ntpdata.time_maxerror;
@@ -1026,22 +1264,24 @@ pub unsafe extern "C" fn process_adj_status(ntpdata: *mut ntp_data, txc: *const 
     pps_fill_timex(ntpdata, txc);
     txc.time.tv_sec = ts.tv_sec;
     txc.time.tv_usec = ts.tv_nsec;
-    if (!(ntpdata.time_status & STA_NANO))
+    if (!(ntpdata.time_status & STA_NANO)) {
     txc.time.tv_usec = ts.tv_nsec / NSEC_PER_USEC;
+    }
 // Handle leapsec adjustments
     if (unlikely(ts.tv_sec >= ntpdata.ntp_next_leap_sec)) {
     if ((ntpdata.time_state == TIME_INS) && (ntpdata.time_status & STA_INS)) {
     result = TIME_OOP;
-    txc.tai++;
-    txc.time.tv_sec--;
+    txc.tai += 1;
+    txc.time.tv_sec -= 1;
     }
     if ((ntpdata.time_state == TIME_DEL) && (ntpdata.time_status & STA_DEL)) {
     result = TIME_WAIT;
-    txc.tai--;
-    txc.time.tv_sec++;
+    txc.tai -= 1;
+    txc.time.tv_sec += 1;
     }
-    if ((ntpdata.time_state == TIME_OOP) && (ts.tv_sec == ntpdata.ntp_next_leap_sec))
+    if ((ntpdata.time_state == TIME_OOP) && (ts.tv_sec == ntpdata.ntp_next_leap_sec)) {
     result = TIME_WAIT;
+    }
     }
     return result;
     }
@@ -1055,8 +1295,8 @@ pub unsafe extern "C" fn process_adj_status(ntpdata: *mut ntp_data, txc: *const 
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct pps_normtime {
-    pub /: *mut *mut s64 sec; / seconds,
-    pub /: *mut *mut long nsec; / nanoseconds,
+//     pub /: *mut *mut s64 sec; / seconds,
+//     pub /: *mut *mut long nsec; / nanoseconds,
 }
 
 //
@@ -1065,34 +1305,26 @@ pub struct pps_normtime {
 //
 #[no_mangle]
 pub unsafe extern "C" fn pps_normalize_ts(ts: timespec64) -> pps_normtime {
-    static inline struct pps_normtime pps_normalize_ts(struct timespec64 ts)
-    {
-    struct pps_normtime norm = {
-    .sec = ts.tv_sec,
-    .nsec = ts.tv_nsec
-    };
+pub static mut pps_normtime: usize = 0;
     if (norm.nsec > (NSEC_PER_SEC >> 1)) {
     norm.nsec -= NSEC_PER_SEC;
-    norm.sec++;
+    norm.sec += 1;
     }
     return norm;
     }
 // Get current phase correction and jitter
 #[no_mangle]
 pub unsafe extern "C" fn pps_phase_filter_get(ntpdata: *mut ntp_data, jitter: *mut c_long) -> c_long {
-    static inline long pps_phase_filter_get(struct ntp_data *ntpdata, long *jitter)
-    {
 // jitter = ntpdata->pps_tf[0] - ntpdata->pps_tf[1];
-    if (*jitter < 0)
+    if (*jitter < 0) {
 // jitter = -*jitter;
+    }
 // TODO: test various filters
     return ntpdata.pps_tf[0];
     }
 // Add the sample to the phase filter
 #[no_mangle]
 pub unsafe extern "C" fn pps_phase_filter_add(ntpdata: *mut ntp_data, err: c_long) {
-    static inline void pps_phase_filter_add(struct ntp_data *ntpdata, long err)
-    {
     ntpdata.pps_tf[2] = ntpdata.pps_tf[1];
     ntpdata.pps_tf[1] = ntpdata.pps_tf[0];
     ntpdata.pps_tf[0] = err;
@@ -1103,12 +1335,10 @@ pub unsafe extern "C" fn pps_phase_filter_add(ntpdata: *mut ntp_data, err: c_lon
 //
 #[no_mangle]
 pub unsafe extern "C" fn pps_dec_freq_interval(ntpdata: *mut ntp_data) {
-    static inline void pps_dec_freq_interval(struct ntp_data *ntpdata)
-    {
     if (--ntpdata.pps_intcnt <= -PPS_INTCOUNT) {
     ntpdata.pps_intcnt = -PPS_INTCOUNT;
     if (ntpdata.pps_shift > PPS_INTMIN) {
-    ntpdata.pps_shift--;
+    ntpdata.pps_shift -= 1;
     ntpdata.pps_intcnt = 0;
     }
     }
@@ -1119,12 +1349,10 @@ pub unsafe extern "C" fn pps_dec_freq_interval(ntpdata: *mut ntp_data) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn pps_inc_freq_interval(ntpdata: *mut ntp_data) {
-    static inline void pps_inc_freq_interval(struct ntp_data *ntpdata)
-    {
     if (++ntpdata.pps_intcnt >= PPS_INTCOUNT) {
     ntpdata.pps_intcnt = PPS_INTCOUNT;
     if (ntpdata.pps_shift < PPS_INTMAX) {
-    ntpdata.pps_shift++;
+    ntpdata.pps_shift += 1;
     ntpdata.pps_intcnt = 0;
     }
     }
@@ -1141,16 +1369,15 @@ pub unsafe extern "C" fn pps_inc_freq_interval(ntpdata: *mut ntp_data) {
 //
 #[no_mangle]
 unsafe extern "C" fn hardpps_update_freq(ntpdata: *mut ntp_data, freq_norm: pps_normtime) -> c_long {
-    static long hardpps_update_freq(struct ntp_data *ntpdata, struct pps_normtime freq_norm)
-    {
-    long delta, delta_mod;
-    s64 ftemp;
+    let mut delta = 0;
+    let mut delta_mod = 0;
+    let mut ftemp = 0;
 // Check if the frequency interval was too long
     if (freq_norm.sec > (2 << ntpdata.pps_shift)) {
     ntpdata.time_status |= STA_PPSERROR;
-    ntpdata.pps_errcnt++;
+    ntpdata.pps_errcnt += 1;
     pps_dec_freq_interval(ntpdata);
-    printk_deferred(KERN_ERR "hardpps: PPSERROR: interval too long - %lld s\n",
+    printk_deferred("hardpps: PPSERROR: interval too long - %lld s\n",
     freq_norm.sec);
     return 0;
     }
@@ -1164,9 +1391,9 @@ unsafe extern "C" fn hardpps_update_freq(ntpdata: *mut ntp_data, freq_norm: pps_
     delta = shift_right(ftemp - ntpdata.pps_freq, NTP_SCALE_SHIFT);
     ntpdata.pps_freq = ftemp;
     if (delta > PPS_MAXWANDER || delta < -PPS_MAXWANDER) {
-    printk_deferred(KERN_WARNING "hardpps: PPSWANDER: change=%ld\n", delta);
+    printk_deferred("hardpps: PPSWANDER: change=%ld\n", delta);
     ntpdata.time_status |= STA_PPSWANDER;
-    ntpdata.pps_stbcnt++;
+    ntpdata.pps_stbcnt += 1;
     pps_dec_freq_interval(ntpdata);
     } else {
 // Good sample
@@ -1177,8 +1404,9 @@ unsafe extern "C" fn hardpps_update_freq(ntpdata: *mut ntp_data, freq_norm: pps_
 // frequency changes, but is used only for performance monitoring
 //
     delta_mod = delta;
-    if (delta_mod < 0)
+    if (delta_mod < 0) {
     delta_mod = -delta_mod;
+    }
     ntpdata.pps_stabil += (div_s64(((s64)delta_mod) << (NTP_SCALE_SHIFT - SHIFT_USEC),
     NSEC_PER_USEC) - ntpdata.pps_stabil) >> PPS_INTMIN;
 // If enabled, the system clock frequency is updated
@@ -1191,10 +1419,8 @@ unsafe extern "C" fn hardpps_update_freq(ntpdata: *mut ntp_data, freq_norm: pps_
 // Correct REALTIME clock phase error against PPS signal
 #[no_mangle]
 unsafe extern "C" fn hardpps_update_phase(ntpdata: *mut ntp_data, error: c_long) {
-    static void hardpps_update_phase(struct ntp_data *ntpdata, long error)
-    {
-    let mut correction: c_long = -error;
-    long jitter;
+pub static mut correction: c_long = 0;
+    let mut jitter = 0;
 // Add the sample to the median filter
     pps_phase_filter_add(ntpdata, correction);
     correction = pps_phase_filter_get(ntpdata, &jitter);
@@ -1204,10 +1430,10 @@ unsafe extern "C" fn hardpps_update_phase(ntpdata: *mut ntp_data, error: c_long)
 // the time offset is updated.
 //
     if (jitter > (ntpdata.pps_jitter << PPS_POPCORN)) {
-    printk_deferred(KERN_WARNING "hardpps: PPSJITTER: jitter=%ld, limit=%ld\n",
+    printk_deferred("hardpps: PPSJITTER: jitter=%ld, limit=%ld\n",
     jitter, (ntpdata.pps_jitter << PPS_POPCORN));
     ntpdata.time_status |= STA_PPSJITTER;
-    ntpdata.pps_jitcnt++;
+    ntpdata.pps_jitcnt += 1;
     } else if (ntpdata.time_status & STA_PPSTIME) {
 // Correct the time using the phase offset
     ntpdata.time_offset = div_s64(((s64)correction) << NTP_SCALE_SHIFT,
@@ -1233,9 +1459,7 @@ unsafe extern "C" fn hardpps_update_phase(ntpdata: *mut ntp_data, error: c_long)
 //
 #[no_mangle]
 pub unsafe extern "C" fn __hardpps(phase_ts: *const timespec64, raw_ts: *const timespec64) {
-    void __hardpps(const struct timespec64 *phase_ts, const struct timespec64 *raw_ts)
-    {
-    struct ntp_data *ntpdata = &tk_ntp_data[TIMEKEEPER_CORE];
+    let mut ntpdata = &tk_ntp_data[TIMEKEEPER_CORE];
     struct pps_normtime pts_norm, freq_norm;
     pts_norm = pps_normalize_ts(*phase_ts);
 // Clear the error bits, they will be set again if needed
@@ -1262,12 +1486,12 @@ pub unsafe extern "C" fn __hardpps(phase_ts: *const timespec64, raw_ts: *const t
     ntpdata.time_status |= STA_PPSJITTER;
 // Restart the frequency calibration interval
     ntpdata.pps_fbase = *raw_ts;
-    printk_deferred(KERN_ERR "hardpps: PPSJITTER: bad pulse\n");
+    printk_deferred("hardpps: PPSJITTER: bad pulse\n");
     return;
     }
 // Signal is ok. Check if the current frequency interval is finished
     if (freq_norm.sec >= (1 << ntpdata.pps_shift)) {
-    ntpdata.pps_calcnt++;
+    ntpdata.pps_calcnt += 1;
 // Restart the frequency calibration interval
     ntpdata.pps_fbase = *raw_ts;
     hardpps_update_freq(ntpdata, freq_norm);
@@ -1276,21 +1500,19 @@ pub unsafe extern "C" fn __hardpps(phase_ts: *const timespec64, raw_ts: *const t
     }
 
 #[no_mangle]
-unsafe extern "C" fn ntp_tick_adj_setup(str: *mut c_char) -> int __init {
-    static int __init ntp_tick_adj_setup(char *str)
-    {
-    let mut rc: c_int = kstrtos64(str, 0, &tk_ntp_data[TIMEKEEPER_CORE].ntp_tick_adj);
-    if (rc)
+unsafe extern "C" fn ntp_tick_adj_setup(str: *mut c_char) -> c_int {
+pub static mut rc: c_int = 0;
+    if (rc) {
     return rc;
+    }
     tk_ntp_data[TIMEKEEPER_CORE].ntp_tick_adj <<= NTP_SCALE_SHIFT;
     return 1;
     }
-    __setup("ntp_tick_adj=", ntp_tick_adj_setup);
+    __setup!("ntp_tick_adj=", ntp_tick_adj_setup);
 #[no_mangle]
-pub unsafe extern "C" fn ntp_init() -> void __init {
-    void __init ntp_init(void)
-    {
-    for (int id = 0; id < TIMEKEEPERS_MAX; id++)
+pub unsafe extern "C" fn ntp_init()  {
+    for (int id = 0; id < TIMEKEEPERS_MAX; id++) {
     __ntp_clear(tk_ntp_data + id);
+    }
     ntp_init_cmos_sync();
     }

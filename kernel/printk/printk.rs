@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -64,50 +314,44 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     CONSOLE_LOGLEVEL_DEFAULT,	/* default_console_loglevel */
     };
     EXPORT_SYMBOL_GPL(console_printk);
-    let mut __read_mostly: atomic_t ignore_console_lock_warning = ATOMIC_INIT(0);
+pub static mut : atomic_t ignore_console_lock_warning = 0;
     EXPORT_SYMBOL(ignore_console_lock_warning);
     EXPORT_TRACEPOINT_SYMBOL_GPL(console);
 //
 // Low level drivers may need that to know if they can schedule in
 // their unblank() callback or not. So let's export it.
 //
-    int oops_in_progress;
+    let mut oops_in_progress = 0;
     EXPORT_SYMBOL(oops_in_progress);
 //
 // console_mutex protects console_list updates and console->flags updates.
 // The flags are synchronized only for consoles that are registered, i.e.
 // accessible via the console list.
 //
-    static DEFINE_MUTEX(console_mutex);
+pub static mut console_mutex: usize = 0;
 //
 // console_sem protects updates to console->seq
 // and also provides serialization for console printing.
 //
-    static DEFINE_SEMAPHORE(console_sem, 1);
+pub static mut console_sem: usize = 0;
     HLIST_HEAD(console_list);
     EXPORT_SYMBOL_GPL(console_list);
-    DEFINE_STATIC_SRCU(console_srcu);
+pub static mut console_srcu: usize = 0;
 //
 // System may need to suppress printk message under certain
 // circumstances, like after kernel panic happens.
 //
-    int __read_mostly suppress_printk;
+    let mut suppress_printk = 0;
 
-    static struct lockdep_map console_lock_dep_map = {
-    .name = "console_lock"
-    };
+pub static mut lockdep_map: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_assert_console_list_lock_held() {
-    void lockdep_assert_console_list_lock_held(void)
-    {
     lockdep_assert_held(&console_mutex);
     }
     EXPORT_SYMBOL(lockdep_assert_console_list_lock_held);
 
 #[no_mangle]
 pub unsafe extern "C" fn console_srcu_read_lock_is_held() -> bool {
-    bool console_srcu_read_lock_is_held(void)
-    {
     return srcu_read_lock_held(&console_srcu);
     }
     EXPORT_SYMBOL(console_srcu_read_lock_is_held);
@@ -124,14 +368,13 @@ pub unsafe extern "C" fn console_srcu_read_lock_is_held() -> bool {
     };
 // Keep both the 'on' and 'off' bits clear, i.e. ratelimit by default:
 pub const DEVKMSG_LOG_MASK_DEFAULT: c_int = 0;
-    let mut devkmsg_log: static unsigned int __read_mostly = DEVKMSG_LOG_MASK_DEFAULT;
+pub static mut devkmsg_log: unsigned int  = 0;
 #[no_mangle]
 unsafe extern "C" fn __control_devkmsg(str: *mut c_char) -> c_int {
-    static int __control_devkmsg(char *str)
-    {
-    size_t len;
-    if (!str)
+    let mut len = 0;
+    if (!str) {
     return -EINVAL;
+    }
     len = str_has_prefix(str, "on");
     if (len) {
     devkmsg_log = DEVKMSG_LOG_MASK_ON;
@@ -150,22 +393,21 @@ unsafe extern "C" fn __control_devkmsg(str: *mut c_char) -> c_int {
     return -EINVAL;
     }
 #[no_mangle]
-unsafe extern "C" fn control_devkmsg(str: *mut c_char) -> int __init {
-    static int __init control_devkmsg(char *str)
-    {
+unsafe extern "C" fn control_devkmsg(str: *mut c_char) -> c_int {
     if (__control_devkmsg(str) < 0) {
-    pr_warn("printk.devkmsg: bad option string '%s'\n", str);
+    pr_warn!("printk.devkmsg: bad option string '%s'\n", str);
     return 1;
     }
 //
 // Set sysctl string accordingly:
 //
-    if (devkmsg_log == DEVKMSG_LOG_MASK_ON)
+    if (devkmsg_log == DEVKMSG_LOG_MASK_ON) {
     strscpy(devkmsg_log_str, "on");
-#[no_mangle]
-pub unsafe extern "C" fn if(DEVKMSG_LOG_MASK_OFF: devkmsg_log ==) -> else {
-    else if (devkmsg_log == DEVKMSG_LOG_MASK_OFF)
+    }
+
+    else if (devkmsg_log == DEVKMSG_LOG_MASK_OFF) {
     strscpy(devkmsg_log_str, "off");
+    }
 // else "ratelimit" which is set by default.
 //
 // Sysctl cannot change it anymore. The kernel command line setting of
@@ -176,24 +418,25 @@ pub unsafe extern "C" fn if(DEVKMSG_LOG_MASK_OFF: devkmsg_log ==) -> else {
     devkmsg_log |= DEVKMSG_LOG_MASK_LOCK;
     return 1;
     }
-    __setup("printk.devkmsg=", control_devkmsg);
+    __setup!("printk.devkmsg=", control_devkmsg);
     char devkmsg_log_str[DEVKMSG_STR_MAX_SIZE] = "ratelimit";
 
-    int devkmsg_sysctl_set_loglvl(const struct ctl_table *table, int write,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn devkmsg_sysctl_set_loglvl(table: *mut ctl_table, write: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
     char old_str[DEVKMSG_STR_MAX_SIZE];
-    unsigned int old;
-    int err;
+    let mut old = 0;
+    let mut err = 0;
     if (write) {
-    if (devkmsg_log & DEVKMSG_LOG_MASK_LOCK)
+    if (devkmsg_log & DEVKMSG_LOG_MASK_LOCK) {
     return -EINVAL;
+    }
     old = devkmsg_log;
     strscpy(old_str, devkmsg_log_str);
     }
     err = proc_dostring(table, write, buffer, lenp, ppos);
-    if (err)
+    if (err) {
     return err;
+    }
     if (write) {
     err = __control_devkmsg(devkmsg_log_str);
 //
@@ -217,9 +460,6 @@ pub unsafe extern "C" fn if(DEVKMSG_LOG_MASK_OFF: devkmsg_log ==) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn console_list_lock() {
-    void console_list_lock(void)
-    __acquires(&console_mutex)
-    {
 //
 // In unregister_console() and console_force_preferred_locked(),
 // synchronize_srcu() is called with the console_list_lock held.
@@ -230,7 +470,7 @@ pub unsafe extern "C" fn console_list_lock() {
 // section is only possible if the appropriate debug options are
 // enabled.
 //
-    WARN_ON_ONCE(debug_lockdep_rcu_enabled() &&
+    WARN_ON_ONCE!(debug_lockdep_rcu_enabled() &&
     srcu_read_lock_held(&console_srcu));
     mutex_lock(&console_mutex);
     }
@@ -242,9 +482,6 @@ pub unsafe extern "C" fn console_list_lock() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn console_list_unlock() {
-    void console_list_unlock(void)
-    __releases(&console_mutex)
-    {
     mutex_unlock(&console_mutex);
     }
     EXPORT_SYMBOL(console_list_unlock);
@@ -259,9 +496,6 @@ pub unsafe extern "C" fn console_list_unlock() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn console_srcu_read_lock() -> c_int {
-    int console_srcu_read_lock(void)
-    __acquires(&console_srcu)
-    {
     return srcu_read_lock_nmisafe(&console_srcu);
     }
     EXPORT_SYMBOL(console_srcu_read_lock);
@@ -274,9 +508,6 @@ pub unsafe extern "C" fn console_srcu_read_lock() -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn console_srcu_read_unlock(cookie: c_int) {
-    void console_srcu_read_unlock(int cookie)
-    __releases(&console_srcu)
-    {
     srcu_read_unlock_nmisafe(&console_srcu, cookie);
     }
     EXPORT_SYMBOL(console_srcu_read_unlock);
@@ -285,15 +516,13 @@ pub unsafe extern "C" fn console_srcu_read_unlock(cookie: c_int) {
 // macros instead of functions so that _RET_IP_ contains useful information.
 //
 
-    down(&console_sem);\
-    mutex_acquire(&console_lock_dep_map, 0, 0, _RET_IP_);\
+    down(&console_sem);
+    mutex_acquire(&console_lock_dep_map, 0, 0, _RET_IP_);
     } while (0)
 #[no_mangle]
 unsafe extern "C" fn __down_trylock_console_sem(ip: c_ulong) -> c_int {
-    static int __down_trylock_console_sem(unsigned long ip)
-    {
-    int lock_failed;
-    unsigned long flags;
+    let mut lock_failed = 0;
+    let mut flags = 0;
 //
 // Here and in __up_console_sem() we need to be in safe mode,
 // because spindump/WARN/etc from under console ->lock will
@@ -302,17 +531,16 @@ unsafe extern "C" fn __down_trylock_console_sem(ip: c_ulong) -> c_int {
     printk_safe_enter_irqsave(flags);
     lock_failed = down_trylock(&console_sem);
     printk_safe_exit_irqrestore(flags);
-    if (lock_failed)
+    if (lock_failed) {
     return 1;
+    }
     mutex_acquire(&console_lock_dep_map, 0, 1, ip);
     return 0;
     }
 
 #[no_mangle]
 unsafe extern "C" fn __up_console_sem(ip: c_ulong) {
-    static void __up_console_sem(unsigned long ip)
-    {
-    unsigned long flags;
+    let mut flags = 0;
     mutex_release(&console_lock_dep_map, ip);
     printk_safe_enter_irqsave(flags);
     up(&console_sem);
@@ -333,8 +561,8 @@ unsafe extern "C" fn __up_console_sem(ip: c_ulong) {
 //
 pub const MAX_CMDLINECONSOLES: c_int = 8;
     static struct console_cmdline console_cmdline[MAX_CMDLINECONSOLES];
-    let mut preferred_console: static int = -1;
-    int console_set_on_cmdline;
+pub static mut preferred_console: int = 0;
+    let mut console_set_on_cmdline = 0;
     EXPORT_SYMBOL(console_set_on_cmdline);
 // Flag: console code may call schedule()
     static int console_may_schedule;
@@ -342,7 +570,7 @@ pub const MAX_CMDLINECONSOLES: c_int = 8;
     MSG_FORMAT_DEFAULT	= 0,
     MSG_FORMAT_SYSLOG	= (1 << 0),
     };
-    let mut console_msg_format: static int = MSG_FORMAT_DEFAULT;
+pub static mut console_msg_format: int = 0;
 //
 // The printk log buffer consists of a sequenced collection of records, each
 // containing variable length message text. Every record also contains its
@@ -399,40 +627,40 @@ pub const MAX_CMDLINECONSOLES: c_int = 8;
 // non-prinatable characters are escaped in the "\xff" notation.
 //
 // syslog_lock protects syslog_* variables and write access to clear_seq.
-    static DEFINE_MUTEX(syslog_lock);
+pub static mut syslog_lock: usize = 0;
 //
 // Specifies if a legacy console is registered. If legacy consoles are
 // present, it is necessary to perform the console lock/unlock dance
 // whenever console flushing should occur.
 //
-    bool have_legacy_console;
+    let mut have_legacy_console = 0;
 //
 // Specifies if an nbcon console is registered. If nbcon consoles are present,
 // synchronous printing of legacy consoles will not occur during panic until
 // the backtrace has been stored to the ringbuffer.
 //
-    bool have_nbcon_console;
+    let mut have_nbcon_console = 0;
 //
 // Specifies if a boot console is registered. If boot consoles are present,
 // nbcon consoles cannot print simultaneously and must be synchronized by
 // the console lock. This is because boot consoles and nbcon consoles may
 // have mapped the same hardware.
 //
-    bool have_boot_console;
+    let mut have_boot_console = 0;
 // See printk_legacy_allow_panic_sync() for details.
-    bool legacy_allow_panic_sync;
+    let mut legacy_allow_panic_sync = 0;
 // Avoid using irq_work when suspending.
-    bool console_irqwork_blocked;
+    let mut console_irqwork_blocked = 0;
 
-    DECLARE_WAIT_QUEUE_HEAD(log_wait);
-    static DECLARE_WAIT_QUEUE_HEAD(legacy_wait);
+pub static mut log_wait: usize = 0;
+pub static mut legacy_wait: usize = 0;
 // All 3 protected by @syslog_lock.
 // the next printk record to read by syslog(READ) or /proc/kmsg
     static u64 syslog_seq;
     static size_t syslog_partial;
     static bool syslog_time;
 // True when _all_ printer threads are available for printing.
-    bool printk_kthreads_running;
+    let mut printk_kthreads_running = 0;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct latched_seq {
@@ -445,17 +673,13 @@ pub struct latched_seq {
 // two copies (updated with seqcount_latch) so that reads can locklessly
 // access a valid value. Writers are synchronized by @syslog_lock.
 //
-    static struct latched_seq clear_seq = {
-    .latch		= SEQCNT_LATCH_ZERO(clear_seq.latch),
-    .val[0]		= 0,
-    .val[1]		= 0,
-    };
+pub static mut latched_seq: usize = 0;
 
 // record buffer
 
     static char __log_buf[__LOG_BUF_LEN] __aligned(LOG_ALIGN);
     static char *log_buf = __log_buf;
-    let mut log_buf_len: static u32 = __LOG_BUF_LEN;
+pub static mut log_buf_len: u32 = 0;
 //
 // Define the average message size. This only affects the number of
 // descriptors that will be available. Underestimating is better than
@@ -464,8 +688,8 @@ pub struct latched_seq {
 
     _DEFINE_PRINTKRB(printk_rb_static, CONFIG_LOG_BUF_SHIFT - PRB_AVGBITS,
     PRB_AVGBITS, &__log_buf[0]);
-    static struct printk_ringbuffer printk_rb_dynamic;
-    struct printk_ringbuffer *prb = &printk_rb_static;
+pub static mut printk_rb_dynamic: usize = 0;
+    let mut prb = &printk_rb_static;
 //
 // We cannot access per-CPU data (e.g. per-CPU flush irq_work) before
 // per_cpu_areas are initialised. This variable is set to true when
@@ -474,15 +698,11 @@ pub struct latched_seq {
     static bool __printk_percpu_data_ready __ro_after_init;
 #[no_mangle]
 pub unsafe extern "C" fn printk_percpu_data_ready() -> bool {
-    bool printk_percpu_data_ready(void)
-    {
     return __printk_percpu_data_ready;
     }
 // Must be called under syslog_lock.
 #[no_mangle]
 unsafe extern "C" fn latched_seq_write(ls: *mut latched_seq, val: u64) {
-    static void latched_seq_write(struct latched_seq *ls, u64 val)
-    {
     write_seqcount_latch_begin(&ls.latch);
     ls.val[0] = val;
     write_seqcount_latch(&ls.latch);
@@ -492,11 +712,9 @@ unsafe extern "C" fn latched_seq_write(ls: *mut latched_seq, val: u64) {
 // Can be called from any context.
 #[no_mangle]
 unsafe extern "C" fn latched_seq_read_nolock(ls: *mut latched_seq) -> u64 {
-    static u64 latched_seq_read_nolock(struct latched_seq *ls)
-    {
-    unsigned int seq;
-    unsigned int idx;
-    u64 val;
+    let mut seq = 0;
+    let mut idx = 0;
+    let mut val = 0;
     do {
     seq = read_seqcount_latch(&ls.latch);
     idx = seq & 0x1;
@@ -505,15 +723,13 @@ unsafe extern "C" fn latched_seq_read_nolock(ls: *mut latched_seq) -> u64 {
     return val;
     }
 // Return log buffer address
-    char *log_buf_addr_get(void)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn log_buf_addr_get() -> *mut c_void {
     return log_buf;
     }
 // Return log buffer size
 #[no_mangle]
 pub unsafe extern "C" fn log_buf_len_get() -> u32 {
-    u32 log_buf_len_get(void)
-    {
     return log_buf_len;
     }
 //
@@ -525,29 +741,29 @@ pub const MAX_LOG_TAKE_PART: c_int = 4;
     static const char trunc_msg[] = "<truncated>";
 #[no_mangle]
 unsafe extern "C" fn truncate_msg(text_len: *mut u16, trunc_msg_len: *mut u16) {
-    static void truncate_msg(u16 *text_len, u16 *trunc_msg_len)
-    {
 //
 // The message should not take the whole buffer. Otherwise, it might
 // get removed too soon.
 //
-    let mut max_text_len: u32 = log_buf_len / MAX_LOG_TAKE_PART;
-    if (*text_len > max_text_len)
+pub static mut max_text_len: u32 = 0;
+    if (*text_len > max_text_len) {
 // text_len = max_text_len;
+    }
 // enable the warning message (if there is room)
 // trunc_msg_len = strlen(trunc_msg);
-    if (*text_len >= *trunc_msg_len)
+    if (*text_len >= *trunc_msg_len) {
 // text_len -= *trunc_msg_len;
-    else
+    }
+    else {
 // trunc_msg_len = 0;
     }
-    let mut dmesg_restrict: c_int = IS_ENABLED(CONFIG_SECURITY_DMESG_RESTRICT);
+    }
+pub static mut dmesg_restrict: c_int = 0;
 #[no_mangle]
 unsafe extern "C" fn syslog_action_restricted(type: c_int) -> c_int {
-    static int syslog_action_restricted(int type)
-    {
-    if (dmesg_restrict)
+    if (dmesg_restrict) {
     return 1;
+    }
 //
 // Unless restricted, we allow "read all" and "get buffer size"
 // for everybody.
@@ -557,37 +773,35 @@ unsafe extern "C" fn syslog_action_restricted(type: c_int) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn check_syslog_permissions(type: c_int, source: c_int) -> c_int {
-    static int check_syslog_permissions(int type, int source)
-    {
 //
 // If this is from /proc/kmsg and we've already opened it, then we've
 // already done the capabilities checks at open time.
 //
-    if (source == SYSLOG_FROM_PROC && type != SYSLOG_ACTION_OPEN)
-    goto ok;
+    if (source == SYSLOG_FROM_PROC && type != SYSLOG_ACTION_OPEN) {
+// goto;
+    }
     if (syslog_action_restricted(type)) {
-    if (capable(CAP_SYSLOG))
-    goto ok;
+    if (capable(CAP_SYSLOG)) {
+// goto;
+    }
     return -EPERM;
     }
-    ok:
+// label;
     return security_syslog(type);
     }
 #[no_mangle]
 unsafe extern "C" fn append_char(pp: *mut c_char, e: *mut c_char, c: c_char) {
-    static void append_char(char **pp, char *e, char c)
-    {
-    if (*pp < e)
+    if (*pp < e) {
 // (*pp)++ = c;
     }
-    static ssize_t info_print_ext_header(char *buf, size_t size,
-    struct printk_info *info)
-    {
-    let mut ts_usec: u64 = info.ts_nsec;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn info_print_ext_header(buf: *mut c_char, size: size_t, info: *mut printk_info) -> ssize_t {
+pub static mut ts_usec: u64 = 0;
     char caller[20];
 
-    let mut id: u32 = info.caller_id;
-    snprintf(caller, sizeof(caller), ",caller=%c%u",
+pub static mut id: u32 = 0;
+    snprintf(caller, sizeof!(caller), ",caller=%c%u",
     id & 0x80000000 ? 'C' : 'T', id & ~0x80000000);
 
     caller[0] = '\0';
@@ -597,48 +811,47 @@ unsafe extern "C" fn append_char(pp: *mut c_char, e: *mut c_char, c: c_char) {
     (info.facility << 3) | info.level, info.seq,
     ts_usec, info.flags & LOG_CONT ? 'c' : '-', caller);
     }
-    static ssize_t msg_add_ext_text(char *buf, size_t size,
-    const char *text, size_t text_len,
-    unsigned char endc)
-    {
-    char *p = buf, *e = buf + size;
-    size_t i;
+#[no_mangle]
+pub unsafe extern "C" fn msg_add_ext_text(buf: *mut c_char, size: size_t, text: *mut c_char, text_len: size_t, endc: c_uchar) -> ssize_t {
+    let mut p = buf, *e = buf + size;
+    let mut i = 0;
 // escape non-printable characters
-    for (i = 0; i < text_len; i++) {
-    let mut c: c_uchar = text[i];
-    if (c < ' ' || c >= 127 || c == '\\')
+    while (i < text_len) {
+pub static mut c: c_uchar = 0;
+    if (c < ' ' || c >= 127 || c == '\\') {
     p += scnprintf(p, e - p, "\\x%02x", c);
-    else
+    }
+    else {
     append_char(&p, e, c);
+    }
     }
     append_char(&p, e, endc);
     return p - buf;
     }
-    static ssize_t msg_add_dict_text(char *buf, size_t size,
-    const char *key, const char *val)
-    {
-    let mut val_len: usize = strlen(val);
-    ssize_t len;
-    if (!val_len)
+#[no_mangle]
+pub unsafe extern "C" fn msg_add_dict_text(buf: *mut c_char, size: size_t, key: *mut c_char, val: *mut c_char) -> ssize_t {
+pub static mut val_len: usize = 0;
+    let mut len = 0;
+    if (!val_len) {
     return 0;
+    }
     len = msg_add_ext_text(buf, size, "", 0, ' ');	/* dict prefix */
     len += msg_add_ext_text(buf + len, size - len, key, strlen(key), '=');
     len += msg_add_ext_text(buf + len, size - len, val, val_len, '\n');
     return len;
     }
-    static ssize_t msg_print_ext_body(char *buf, size_t size,
-    char *text, size_t text_len,
-    struct dev_printk_info *dev_info)
-    {
-    ssize_t len;
+#[no_mangle]
+pub unsafe extern "C" fn msg_print_ext_body(buf: *mut c_char, size: size_t, text: *mut c_char, text_len: size_t, dev_info: *mut dev_printk_info) -> ssize_t {
+    let mut len = 0;
     len = msg_add_ext_text(buf, size, text, text_len, '\n');
-    if (!dev_info)
-    goto out;
+    if (!dev_info) {
+// goto;
+    }
     len += msg_add_dict_text(buf + len, size - len, "SUBSYSTEM",
     dev_info.subsystem);
     len += msg_add_dict_text(buf + len, size - len, "DEVICE",
     dev_info.device);
-    out:
+// label;
     return len;
     }
 // /dev/kmsg - userspace message inject/listen interface
@@ -654,10 +867,8 @@ pub struct devkmsg_user {
     static __printf(3, 4) __cold
 #[no_mangle]
 pub unsafe extern "C" fn devkmsg_emit(facility: c_int, level: c_int, fmt: *const c_char, ...) -> c_int {
-    int devkmsg_emit(int facility, int level, const char *fmt, ...)
-    {
-    va_list args;
-    int r;
+    let mut args;
+    let mut r = 0;
     va_start(args, fmt);
     r = vprintk_emit(facility, level, core::ptr::null_mut(), fmt, args);
     va_end(args);
@@ -665,28 +876,31 @@ pub unsafe extern "C" fn devkmsg_emit(facility: c_int, level: c_int, fmt: *const
     }
 #[no_mangle]
 unsafe extern "C" fn devkmsg_write(iocb: *mut kiocb, from: *mut iov_iter) -> isize {
-    static ssize_t devkmsg_write(struct kiocb *iocb, struct iov_iter *from)
-    {
-    char *buf, *line;
-    let mut level: c_int = default_message_loglevel;
-    int facility = 1;	/* LOG_USER */
-    struct file *file = iocb.ki_filp;
-    struct devkmsg_user *user = file.private_data;
-    let mut len: usize = iov_iter_count(from);
-    let mut ret: isize = len;
-    if (len > PRINTKRB_RECORD_MAX)
+    let mut buf = core::ptr::null_mut();
+    let mut line = core::ptr::null_mut();
+pub static mut level: c_int = 0;
+    let mut facility = 1;	/* LOG_USER */
+    let mut file = iocb.ki_filp;
+    let mut user = file.private_data;
+pub static mut len: usize = 0;
+pub static mut ret: isize = 0;
+    if (len > PRINTKRB_RECORD_MAX) {
     return -EINVAL;
+    }
 // Ignore when user logging is disabled.
-    if (devkmsg_log & DEVKMSG_LOG_MASK_OFF)
+    if (devkmsg_log & DEVKMSG_LOG_MASK_OFF) {
     return len;
+    }
 // Ratelimit when not explicitly enabled.
     if (!(devkmsg_log & DEVKMSG_LOG_MASK_ON)) {
-    if (!___ratelimit(&user.rs, current.comm))
+    if (!___ratelimit(&user.rs, current.comm)) {
     return ret;
     }
+    }
     buf = kmalloc(len+1, GFP_KERNEL);
-    if (buf == core::ptr::null_mut())
+    if (buf == core::ptr::null_mut()) {
     return -ENOMEM;
+    }
     buf[len] = '\0';
     if (!copy_from_iter_full(buf, len, from)) {
     kfree(buf);
@@ -703,14 +917,15 @@ unsafe extern "C" fn devkmsg_write(iocb: *mut kiocb, from: *mut iov_iter) -> isi
 //
     line = buf;
     if (line[0] == '<') {
-    char *endp = core::ptr::null_mut();
-    unsigned int u;
+    let mut endp = core::ptr::null_mut();
+    let mut u = 0;
     u = simple_strtoul(line + 1, &endp, 10);
     if (endp && endp[0] == '>') {
     level = LOG_LEVEL(u);
-    if (LOG_FACILITY(u) != 0)
+    if (LOG_FACILITY(u) != 0) {
     facility = LOG_FACILITY(u);
-    endp++;
+    }
+    endp += 1;
     line = endp;
     }
     }
@@ -718,22 +933,20 @@ unsafe extern "C" fn devkmsg_write(iocb: *mut kiocb, from: *mut iov_iter) -> isi
     kfree(buf);
     return ret;
     }
-    static ssize_t devkmsg_read(struct file *file, char __user *buf,
-    size_t count, loff_t *ppos)
-    {
-    struct devkmsg_user *user = file.private_data;
-    char *outbuf = &user.pbufs.outbuf[0];
-    struct printk_message pmsg = {
-    .pbufs = &user.pbufs,
-    };
-    ssize_t ret;
+#[no_mangle]
+pub unsafe extern "C" fn devkmsg_read(file: *mut file, buf: *mut c_char, count: size_t, ppos: *mut loff_t) -> ssize_t {
+    let mut user = file.private_data;
+    let mut outbuf = &user.pbufs.outbuf[0];
+pub static mut printk_message: usize = 0;
+    let mut ret = 0;
     ret = mutex_lock_interruptible(&user.lock);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     if (!printk_get_next_message(&pmsg, atomic64_read(&user.seq), true, false)) {
     if (file.f_flags & O_NONBLOCK) {
     ret = -EAGAIN;
-    goto out;
+// goto;
     }
 //
 // Guarantee this task is visible on the waitqueue before
@@ -748,26 +961,27 @@ unsafe extern "C" fn devkmsg_write(iocb: *mut kiocb, from: *mut iov_iter) -> isi
     ret = wait_event_interruptible(log_wait,
     printk_get_next_message(&pmsg, atomic64_read(&user.seq), true,
     false)); /* LMM(devkmsg_read:A) */
-    if (ret)
-    goto out;
+    if (ret) {
+// goto;
+    }
     }
     if (pmsg.dropped) {
 // our last seen message is gone, return error and reset
     atomic64_set(&user.seq, pmsg.seq);
     ret = -EPIPE;
-    goto out;
+// goto;
     }
     atomic64_set(&user.seq, pmsg.seq + 1);
     if (pmsg.outbuf_len > count) {
     ret = -EINVAL;
-    goto out;
+// goto;
     }
     if (copy_to_user(buf, outbuf, pmsg.outbuf_len)) {
     ret = -EFAULT;
-    goto out;
+// goto;
     }
     ret = pmsg.outbuf_len;
-    out:
+// label;
     mutex_unlock(&user.lock);
     return ret;
     }
@@ -781,69 +995,73 @@ unsafe extern "C" fn devkmsg_write(iocb: *mut kiocb, from: *mut iov_iter) -> isi
 //
 #[no_mangle]
 unsafe extern "C" fn devkmsg_llseek(file: *mut file, offset: loff_t, whence: c_int) -> loff_t {
-    static loff_t devkmsg_llseek(struct file *file, loff_t offset, int whence)
-    {
-    struct devkmsg_user *user = file.private_data;
-    let mut ret: loff_t = 0;
-    if (offset)
+    let mut user = file.private_data;
+pub static mut ret: loff_t = 0;
+    if (offset) {
     return -ESPIPE;
-    switch (whence) {
-    case SEEK_SET:
+    }
+    match (whence) {
+    SEEK_SET => {
 // the first record
     atomic64_set(&user.seq, prb_first_valid_seq(prb));
-    break;
-    case SEEK_DATA:
+    // break;
+    }
+    SEEK_DATA => {
 //
 // The first record after the last SYSLOG_ACTION_CLEAR,
 // like issued by 'dmesg -c'. Reading /dev/kmsg itself
 // changes no global state, and does not clear anything.
 //
     atomic64_set(&user.seq, latched_seq_read_nolock(&clear_seq));
-    break;
-    case SEEK_END:
+    // break;
+    }
+    SEEK_END => {
 // after the last record
     atomic64_set(&user.seq, prb_next_seq(prb));
-    break;
-    default:
+    // break;
+    }
+    _ => {
     ret = -EINVAL;
+    }
     }
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn devkmsg_poll(file: *mut file, wait: *mut poll_table) -> __poll_t {
-    static __poll_t devkmsg_poll(struct file *file, poll_table *wait)
-    {
-    struct devkmsg_user *user = file.private_data;
-    struct printk_info info;
-    let mut ret: __poll_t = 0;
+    let mut user = file.private_data;
+pub static mut info: usize = 0;
+pub static mut ret: __poll_t = 0;
     poll_wait(file, &log_wait, wait);
     if (prb_read_valid_info(prb, atomic64_read(&user.seq), &info, core::ptr::null_mut())) {
 // return error when data has vanished underneath us
-    if (info.seq != atomic64_read(&user.seq))
+    if (info.seq != atomic64_read(&user.seq)) {
     ret = EPOLLIN|EPOLLRDNORM|EPOLLERR|EPOLLPRI;
-    else
+    }
+    else {
     ret = EPOLLIN|EPOLLRDNORM;
+    }
     }
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn devkmsg_open(inode: *mut inode, file: *mut file) -> c_int {
-    static int devkmsg_open(struct inode *inode, struct file *file)
-    {
-    struct devkmsg_user *user;
-    int err;
-    if (devkmsg_log & DEVKMSG_LOG_MASK_OFF)
+pub static mut user: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
+    if (devkmsg_log & DEVKMSG_LOG_MASK_OFF) {
     return -EPERM;
+    }
 // write-only does not need any file context
     if ((file.f_flags & O_ACCMODE) != O_WRONLY) {
     err = check_syslog_permissions(SYSLOG_ACTION_READ_ALL,
     SYSLOG_FROM_READER);
-    if (err)
+    if (err) {
     return err;
     }
-    user = kvmalloc_obj(struct devkmsg_user);
-    if (!user)
+    }
+    user = kvmalloc_obj(devkmsg_user);
+    if (!user) {
     return -ENOMEM;
+    }
     ratelimit_default_init(&user.rs);
     ratelimit_set_flags(&user.rs, RATELIMIT_MSG_ON_RELEASE);
     mutex_init(&user.lock);
@@ -853,22 +1071,13 @@ unsafe extern "C" fn devkmsg_open(inode: *mut inode, file: *mut file) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn devkmsg_release(inode: *mut inode, file: *mut file) -> c_int {
-    static int devkmsg_release(struct inode *inode, struct file *file)
-    {
-    struct devkmsg_user *user = file.private_data;
+    let mut user = file.private_data;
     ratelimit_state_exit(&user.rs);
     mutex_destroy(&user.lock);
     kvfree(user);
     return 0;
     }
-    const struct file_operations kmsg_fops = {
-    .open = devkmsg_open,
-    .read = devkmsg_read,
-    .write_iter = devkmsg_write,
-    .llseek = devkmsg_llseek,
-    .poll = devkmsg_poll,
-    .release = devkmsg_release,
-    };
+pub static mut file_operations: usize = 0;
 
 //
 // This appends the listed symbols to /proc/vmcore
@@ -880,9 +1089,7 @@ unsafe extern "C" fn devkmsg_release(inode: *mut inode, file: *mut file) -> c_in
 //
 #[no_mangle]
 pub unsafe extern "C" fn log_buf_vmcoreinfo_setup() {
-    void log_buf_vmcoreinfo_setup(void)
-    {
-    struct dev_printk_info *dev_info = core::ptr::null_mut();
+    let mut dev_info = core::ptr::null_mut();
     VMCOREINFO_SYMBOL(prb);
     VMCOREINFO_SYMBOL(printk_rb_static);
     VMCOREINFO_SYMBOL(clear_seq);
@@ -914,9 +1121,9 @@ pub unsafe extern "C" fn log_buf_vmcoreinfo_setup() {
     VMCOREINFO_OFFSET(printk_info, dev_info);
     VMCOREINFO_STRUCT_SIZE(dev_printk_info);
     VMCOREINFO_OFFSET(dev_printk_info, subsystem);
-    VMCOREINFO_LENGTH(printk_info_subsystem, sizeof(dev_info.subsystem));
+    VMCOREINFO_LENGTH(printk_info_subsystem, sizeof!(dev_info.subsystem));
     VMCOREINFO_OFFSET(dev_printk_info, device);
-    VMCOREINFO_LENGTH(printk_info_device, sizeof(dev_info.device));
+    VMCOREINFO_LENGTH(printk_info_device, sizeof!(dev_info.device));
     VMCOREINFO_STRUCT_SIZE(prb_data_ring);
     VMCOREINFO_OFFSET(prb_data_ring, size_bits);
     VMCOREINFO_OFFSET(prb_data_ring, data);
@@ -932,72 +1139,70 @@ pub unsafe extern "C" fn log_buf_vmcoreinfo_setup() {
     static unsigned long __initdata new_log_buf_len;
 // we practice scaling the ring buffer by powers of 2
 #[no_mangle]
-unsafe extern "C" fn log_buf_len_update(size: u64) -> void __init {
-    static void __init log_buf_len_update(u64 size)
-    {
+unsafe extern "C" fn log_buf_len_update(size: u64)  {
     if (size > (u64)LOG_BUF_LEN_MAX) {
     size = (u64)LOG_BUF_LEN_MAX;
-    pr_err("log_buf over 2G is not supported.\n");
+    pr_err!("log_buf over 2G is not supported.\n");
     }
-    if (size)
+    if (size) {
     size = roundup_pow_of_two(size);
-    if (size > log_buf_len)
+    }
+    if (size > log_buf_len) {
     new_log_buf_len = (unsigned long)size;
+    }
     }
 // save requested log_buf_len since it's too early to process it
 #[no_mangle]
-unsafe extern "C" fn log_buf_len_setup(str: *mut c_char) -> int __init {
-    static int __init log_buf_len_setup(char *str)
-    {
-    u64 size;
-    if (!str)
+unsafe extern "C" fn log_buf_len_setup(str: *mut c_char) -> c_int {
+    let mut size = 0;
+    if (!str) {
     return -EINVAL;
+    }
     size = memparse(str, &str);
     log_buf_len_update(size);
     return 0;
     }
-    early_param("log_buf_len", log_buf_len_setup);
+    early_param!("log_buf_len", log_buf_len_setup);
 
 #[no_mangle]
-unsafe extern "C" fn log_buf_add_cpu() -> void __init {
-    static void __init log_buf_add_cpu(void)
-    {
-    unsigned int cpu_extra;
+unsafe extern "C" fn log_buf_add_cpu()  {
+    let mut cpu_extra = 0;
 //
 // archs should set up cpu_possible_bits properly with
 // set_cpu_possible() after setup_arch() but just in
 // case lets ensure this is valid.
 //
-    if (num_possible_cpus() == 1)
+    if (num_possible_cpus() == 1) {
     return;
+    }
     cpu_extra = (num_possible_cpus() - 1) * __LOG_CPU_MAX_BUF_LEN;
 // by default this will only continue through for large > 64 CPUs
-    if (cpu_extra <= __LOG_BUF_LEN / 2)
+    if (cpu_extra <= __LOG_BUF_LEN / 2) {
     return;
-    pr_info("log_buf_len individual max cpu contribution: %d bytes\n",
+    }
+    pr_info!("log_buf_len individual max cpu contribution: %d bytes\n",
     __LOG_CPU_MAX_BUF_LEN);
-    pr_info("log_buf_len total cpu_extra contributions: %d bytes\n",
+    pr_info!("log_buf_len total cpu_extra contributions: %d bytes\n",
     cpu_extra);
-    pr_info("log_buf_len min size: %d bytes\n", __LOG_BUF_LEN);
+    pr_info!("log_buf_len min size: %d bytes\n", __LOG_BUF_LEN);
     log_buf_len_update(cpu_extra + __LOG_BUF_LEN);
     }
 
-    static inline void log_buf_add_cpu(void) {}
+#[no_mangle]
+pub unsafe extern "C" fn log_buf_add_cpu() {}
 
 #[no_mangle]
-unsafe extern "C" fn set_percpu_data_ready() -> void __init {
-    static void __init set_percpu_data_ready(void)
-    {
+unsafe extern "C" fn set_percpu_data_ready()  {
     __printk_percpu_data_ready = true;
     }
-    static unsigned int __init add_to_rb(struct printk_ringbuffer *rb,
-    struct printk_record *r)
+    static unsigned int __init add_to_rb(printk_ringbuffer *rb, printk_record *r)
     {
-    struct prb_reserved_entry e;
-    struct printk_record dest_r;
+pub static mut e: usize = 0;
+pub static mut dest_r: usize = 0;
     prb_rec_init_wr(&dest_r, r.info.text_len);
-    if (!prb_reserve(&e, rb, &dest_r))
+    if (!prb_reserve(&e, rb, &dest_r)) {
     return 0;
+    }
     memcpy(&dest_r.text_buf[0], &r.text_buf[0], r.info.text_len);
     dest_r.info.text_len = r.info.text_len;
     dest_r.info.facility = r.info.facility;
@@ -1005,80 +1210,80 @@ unsafe extern "C" fn set_percpu_data_ready() -> void __init {
     dest_r.info.flags = r.info.flags;
     dest_r.info.ts_nsec = r.info.ts_nsec;
     dest_r.info.caller_id = r.info.caller_id;
-    memcpy(&dest_r.info.dev_info, &r.info.dev_info, sizeof(dest_r.info.dev_info));
+    memcpy(&dest_r.info.dev_info, &r.info.dev_info, sizeof!(dest_r.info.dev_info));
     prb_final_commit(&e);
     return prb_record_text_space(&e);
     }
     static char setup_text_buf[PRINTKRB_RECORD_MAX] __initdata;
 #[no_mangle]
 unsafe extern "C" fn print_log_buf_usage_stats() {
-    static void print_log_buf_usage_stats(void)
-    {
-    let mut descs_count: c_uint = log_buf_len >> PRB_AVGBITS;
-    size_t meta_data_size;
-    meta_data_size = descs_count * (sizeof(struct prb_desc) + sizeof(struct printk_info));
-    pr_info("log buffer data + meta data: %u + %zu = %zu bytes\n",
+pub static mut descs_count: c_uint = 0;
+    let mut meta_data_size = 0;
+    meta_data_size = descs_count * (sizeof!(prb_desc) + sizeof!(printk_info));
+    pr_info!("log buffer data + meta data: %u + %zu = %zu bytes\n",
     log_buf_len, meta_data_size, log_buf_len + meta_data_size);
     }
 #[no_mangle]
-pub unsafe extern "C" fn setup_log_buf(early: c_int) -> void __init {
-    void __init setup_log_buf(int early)
-    {
-    struct printk_info *new_infos;
-    unsigned int new_descs_count;
-    struct prb_desc *new_descs;
-    struct printk_info info;
-    struct printk_record r;
-    unsigned int text_size;
-    size_t new_descs_size;
-    size_t new_infos_size;
-    unsigned long flags;
-    char *new_log_buf;
-    unsigned int free;
-    u64 seq;
+pub unsafe extern "C" fn setup_log_buf(early: c_int)  {
+pub static mut new_infos: *mut c_void = core::ptr::null_mut();
+    let mut new_descs_count = 0;
+pub static mut new_descs: *mut c_void = core::ptr::null_mut();
+pub static mut info: usize = 0;
+pub static mut r: usize = 0;
+    let mut text_size = 0;
+    let mut new_descs_size = 0;
+    let mut new_infos_size = 0;
+    let mut flags = 0;
+pub static mut new_log_buf: *mut c_void = core::ptr::null_mut();
+    let mut free = 0;
+    let mut seq = 0;
 //
 // Some archs call setup_log_buf() multiple times - first is very
 // early, e.g. from setup_arch(), and second - when percpu_areas
 // are initialised.
 //
-    if (!early)
+    if (!early) {
     set_percpu_data_ready();
-    if (log_buf != __log_buf)
+    }
+    if (log_buf != __log_buf) {
     return;
-    if (!early && !new_log_buf_len)
+    }
+    if (!early && !new_log_buf_len) {
     log_buf_add_cpu();
+    }
     if (!new_log_buf_len) {
 // Show the memory stats only once.
-    if (!early)
-    goto out;
+    if (!early) {
+// goto;
+    }
     return;
     }
     new_descs_count = new_log_buf_len >> PRB_AVGBITS;
     if (new_descs_count == 0) {
-    pr_err("new_log_buf_len: %lu too small\n", new_log_buf_len);
-    goto out;
+    pr_err!("new_log_buf_len: %lu too small\n", new_log_buf_len);
+// goto;
     }
     new_log_buf = memblock_alloc(new_log_buf_len, LOG_ALIGN);
     if (unlikely(!new_log_buf)) {
-    pr_err("log_buf_len: %lu text bytes not available\n",
+    pr_err!("log_buf_len: %lu text bytes not available\n",
     new_log_buf_len);
-    goto out;
+// goto;
     }
-    new_descs_size = new_descs_count * sizeof(struct prb_desc);
+    new_descs_size = new_descs_count * sizeof!(prb_desc);
     new_descs = memblock_alloc(new_descs_size, LOG_ALIGN);
     if (unlikely(!new_descs)) {
-    pr_err("log_buf_len: %zu desc bytes not available\n",
+    pr_err!("log_buf_len: %zu desc bytes not available\n",
     new_descs_size);
-    goto err_free_log_buf;
+// goto;
     }
-    new_infos_size = new_descs_count * sizeof(struct printk_info);
+    new_infos_size = new_descs_count * sizeof!(printk_info);
     new_infos = memblock_alloc(new_infos_size, LOG_ALIGN);
     if (unlikely(!new_infos)) {
-    pr_err("log_buf_len: %zu info bytes not available\n",
+    pr_err!("log_buf_len: %zu info bytes not available\n",
     new_infos_size);
-    goto err_free_descs;
+// goto;
     }
-    prb_rec_init_rd(&r, &info, &setup_text_buf[0], sizeof(setup_text_buf));
+    prb_rec_init_rd(&r, &info, &setup_text_buf[0], sizeof!(setup_text_buf));
     prb_init(&printk_rb_dynamic,
     new_log_buf, ilog2(new_log_buf_len),
     new_descs, ilog2(new_descs_count),
@@ -1090,10 +1295,12 @@ pub unsafe extern "C" fn setup_log_buf(early: c_int) -> void __init {
     free = __LOG_BUF_LEN;
     prb_for_each_record(0, &printk_rb_static, seq, &r) {
     text_size = add_to_rb(&printk_rb_dynamic, &r);
-    if (text_size > free)
+    if (text_size > free) {
     free = 0;
-    else
+    }
+    else {
     free -= text_size;
+    }
     }
     prb = &printk_rb_dynamic;
     local_irq_restore(flags);
@@ -1104,133 +1311,123 @@ pub unsafe extern "C" fn setup_log_buf(early: c_int) -> void __init {
 //
     prb_for_each_record(seq, &printk_rb_static, seq, &r) {
     text_size = add_to_rb(&printk_rb_dynamic, &r);
-    if (text_size > free)
+    if (text_size > free) {
     free = 0;
-    else
+    }
+    else {
     free -= text_size;
     }
+    }
     if (seq != prb_next_seq(&printk_rb_static)) {
-    pr_err("dropped %llu messages\n",
+    pr_err!("dropped %llu messages\n",
     prb_next_seq(&printk_rb_static) - seq);
     }
     print_log_buf_usage_stats();
-    pr_info("early log buf free: %u(%u%%)\n",
+    pr_info!("early log buf free: %u(%u%%)\n",
     free, (free * 100) / __LOG_BUF_LEN);
     return;
-    err_free_descs:
+// label;
     memblock_free(new_descs, new_descs_size);
-    err_free_log_buf:
+// label;
     memblock_free(new_log_buf, new_log_buf_len);
-    out:
+// label;
     print_log_buf_usage_stats();
     }
-    static bool __read_mostly ignore_loglevel;
+    static bool  ignore_loglevel;
 #[no_mangle]
-unsafe extern "C" fn ignore_loglevel_setup(str: *mut c_char) -> int __init {
-    static int __init ignore_loglevel_setup(char *str)
-    {
+unsafe extern "C" fn ignore_loglevel_setup(str: *mut c_char) -> c_int {
     ignore_loglevel = true;
-    pr_info("debug: ignoring loglevel setting.\n");
+    pr_info!("debug: ignoring loglevel setting.\n");
     return 0;
     }
-    early_param("ignore_loglevel", ignore_loglevel_setup);
-    module_param(ignore_loglevel, bool, S_IRUGO | S_IWUSR);
+    early_param!("ignore_loglevel", ignore_loglevel_setup);
+    module_param!(ignore_loglevel, bool, S_IRUGO | S_IWUSR);
     MODULE_PARM_DESC(ignore_loglevel,
     "ignore loglevel setting (prints all kernel messages to the console)");
 #[no_mangle]
 unsafe extern "C" fn suppress_message_printing(level: c_int) -> bool {
-    static bool suppress_message_printing(int level)
-    {
     return (level >= console_loglevel && !ignore_loglevel);
     }
 
     static int boot_delay; /* msecs delay after each printk during bootup */
     static unsigned long long loops_per_msec;	/* based on boot_delay */
 #[no_mangle]
-unsafe extern "C" fn boot_delay_setup(str: *mut c_char) -> int __init {
-    static int __init boot_delay_setup(char *str)
-    {
-    unsigned long lpj;
+unsafe extern "C" fn boot_delay_setup(str: *mut c_char) -> c_int {
+    let mut lpj = 0;
     lpj = preset_lpj ? preset_lpj : 1000000;	/* some guess */
     loops_per_msec = (unsigned long long)lpj / 1000 * HZ;
     get_option(&str, &boot_delay);
-    if (boot_delay > 10 * 1000)
+    if (boot_delay > 10 * 1000) {
     boot_delay = 0;
-    pr_debug("boot_delay: %u, preset_lpj: %ld, lpj: %lu, "
+    }
+    pr_debug!("boot_delay: %u, preset_lpj: %ld, lpj: %lu, "
     "HZ: %d, loops_per_msec: %llu\n",
     boot_delay, preset_lpj, lpj, HZ, loops_per_msec);
     return 0;
     }
-    early_param("boot_delay", boot_delay_setup);
+    early_param!("boot_delay", boot_delay_setup);
 #[no_mangle]
 unsafe extern "C" fn boot_delay_msec(level: c_int) {
-    static void boot_delay_msec(int level)
-    {
     unsigned long long k;
-    unsigned long timeout;
-    bool suppress = !is_printk_force_console() &&
+    let mut timeout = 0;
+    let mut suppress = !is_printk_force_console() &&
     suppress_message_printing(level);
-    if ((boot_delay == 0 || system_state >= SYSTEM_RUNNING) || suppress)
+    if ((boot_delay == 0 || system_state >= SYSTEM_RUNNING) || suppress) {
     return;
+    }
     k = (unsigned long long)loops_per_msec * boot_delay;
     timeout = jiffies + msecs_to_jiffies(boot_delay);
     while (k) {
-    k--;
+    k -= 1;
     cpu_relax();
 //
 // use (volatile) jiffies to prevent
 // compiler reduction; loop termination via jiffies
 // is secondary and may or may not happen.
 //
-    if (time_after(jiffies, timeout))
+    if (time_after(jiffies, timeout)) {
     break;
+    }
     touch_nmi_watchdog();
     }
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn boot_delay_msec(level: c_int) {
-    static inline void boot_delay_msec(int level)
-    {
     }
 
-    let mut printk_time: static bool = IS_ENABLED(CONFIG_PRINTK_TIME);
-    module_param_named(time, printk_time, bool, S_IRUGO | S_IWUSR);
+pub static mut printk_time: bool = false;
+    module_param_named!(time, printk_time, bool, S_IRUGO | S_IWUSR);
 #[no_mangle]
 unsafe extern "C" fn print_syslog(level: c_uint, buf: *mut c_char) -> usize {
-    static size_t print_syslog(unsigned int level, char *buf)
-    {
     return sprintf(buf, "<%u>", level);
     }
 #[no_mangle]
 unsafe extern "C" fn print_time(ts: u64, buf: *mut c_char) -> usize {
-    static size_t print_time(u64 ts, char *buf)
-    {
-    let mut rem_nsec: c_ulong = do_div(ts, 1000000000);
+pub static mut rem_nsec: c_ulong = 0;
     return sprintf(buf, "[%5lu.%06lu]",
     (unsigned long)ts, rem_nsec / 1000);
     }
 
 #[no_mangle]
 unsafe extern "C" fn print_caller(id: u32, buf: *mut c_char) -> usize {
-    static size_t print_caller(u32 id, char *buf)
-    {
     char caller[12];
-    snprintf(caller, sizeof(caller), "%c%u",
+    snprintf(caller, sizeof!(caller), "%c%u",
     id & 0x80000000 ? 'C' : 'T', id & ~0x80000000);
     return sprintf(buf, "[%6s]", caller);
     }
 
-    static size_t info_print_prefix(const struct printk_info  *info, bool syslog,
-    bool time, char *buf)
-    {
-    let mut len: usize = 0;
-    if (syslog)
+#[no_mangle]
+pub unsafe extern "C" fn info_print_prefix(info: *mut printk_info, syslog: bool, time: bool, buf: *mut c_char) -> size_t {
+pub static mut len: usize = 0;
+    if (syslog) {
     len = print_syslog((info.facility << 3) | info.level, buf);
-    if (time)
+    }
+    if (time) {
     len += print_time(info.ts_nsec, buf + len);
+    }
     len += print_caller(info.caller_id, buf + len);
-    if (IS_ENABLED(CONFIG_PRINTK_CALLER) || time) {
+    if (IS_ENABLED!(CONFIG_PRINTK_CALLER) || time) {
     buf[len++] = ' ';
     buf[len] = '\0';
     }
@@ -1253,24 +1450,24 @@ unsafe extern "C" fn print_caller(id: u32, buf: *mut c_char) -> usize {
 // prefixes and the newline. The terminator is not counted. The dropped
 // line(s) are not counted.
 //
-    static size_t record_print_text(struct printk_record *r, bool syslog,
-    bool time)
-    {
-    let mut text_len: usize = r.info.text_len;
-    let mut buf_size: usize = r.text_buf_size;
-    char *text = r.text_buf;
+#[no_mangle]
+pub unsafe extern "C" fn record_print_text(r: *mut printk_record, syslog: bool, time: bool) -> size_t {
+pub static mut text_len: usize = 0;
+pub static mut buf_size: usize = 0;
+    let mut text = r.text_buf;
     char prefix[PRINTK_PREFIX_MAX];
-    let mut truncated: bool = false;
-    size_t prefix_len;
-    size_t line_len;
-    let mut len: usize = 0;
-    char *next;
+pub static mut truncated: bool = false;
+    let mut prefix_len = 0;
+    let mut line_len = 0;
+pub static mut len: usize = 0;
+pub static mut next: *mut c_void = core::ptr::null_mut();
 //
 // If the message was truncated because the buffer was not large
 // enough, treat the available text as if it were the full text.
 //
-    if (text_len > buf_size)
+    if (text_len > buf_size) {
     text_len = buf_size;
+    }
     prefix_len = info_print_prefix(r.info, syslog, time, prefix);
 //
 // @text_len: bytes of unprocessed text
@@ -1284,8 +1481,9 @@ unsafe extern "C" fn print_caller(id: u32, buf: *mut c_char) -> usize {
     line_len = next - text;
     } else {
 // Drop truncated line(s).
-    if (truncated)
+    if (truncated) {
     break;
+    }
     line_len = text_len;
     }
 //
@@ -1294,8 +1492,9 @@ unsafe extern "C" fn print_caller(id: u32, buf: *mut c_char) -> usize {
 //
     if (len + prefix_len + text_len + 1 + 1 > buf_size) {
 // Drop even the current line if no space.
-    if (len + prefix_len + line_len + 1 + 1 > buf_size)
+    if (len + prefix_len + line_len + 1 + 1 > buf_size) {
     break;
+    }
     text_len = buf_size - len - prefix_len - 1 - 1;
     truncated = true;
     }
@@ -1338,16 +1537,15 @@ unsafe extern "C" fn print_caller(id: u32, buf: *mut c_char) -> usize {
 // string terminator is guaranteed to be available. The terminator is
 // not counted in the return value.
 //
-    if (buf_size > 0)
+    if (buf_size > 0) {
     r.text_buf[len] = 0;
+    }
     return len;
     }
-    static size_t get_record_print_text_size(struct printk_info *info,
-    unsigned int line_count,
-    bool syslog, bool time)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn get_record_print_text_size(info: *mut printk_info, line_count: c_uint, syslog: bool, time: bool) -> size_t {
     char prefix[PRINTK_PREFIX_MAX];
-    size_t prefix_len;
+    let mut prefix_len = 0;
     prefix_len = info_print_prefix(info, syslog, time, prefix);
 //
 // Each line will be preceded with a prefix. The intermediate
@@ -1363,25 +1561,26 @@ unsafe extern "C" fn print_caller(id: u32, buf: *mut c_char) -> usize {
 // @max_seq is simply an upper bound and does not need to exist. If the caller
 // does not require an upper bound, -1 can be used for @max_seq.
 //
-    static u64 find_first_fitting_seq(u64 start_seq, u64 max_seq, size_t size,
-    bool syslog, bool time)
-    {
-    struct printk_info info;
-    unsigned int line_count;
-    let mut len: usize = 0;
-    u64 seq;
+#[no_mangle]
+pub unsafe extern "C" fn find_first_fitting_seq(start_seq: u64, max_seq: u64, size: size_t, syslog: bool, time: bool) -> u64 {
+pub static mut info: usize = 0;
+    let mut line_count = 0;
+pub static mut len: usize = 0;
+    let mut seq = 0;
 // Determine the size of the records up to @max_seq.
     prb_for_each_info(start_seq, prb, seq, &info, &line_count) {
-    if (info.seq >= max_seq)
+    if (info.seq >= max_seq) {
     break;
+    }
     len += get_record_print_text_size(&info, line_count, syslog, time);
     }
 //
 // Adjust the upper bound for the next loop to avoid subtracting
 // lengths that were never added.
 //
-    if (seq < max_seq)
+    if (seq < max_seq) {
     max_seq = seq;
+    }
 //
 // Move first record forward until length fits into the buffer. Ignore
 // newest messages that were not counted in the above cycle. Messages
@@ -1389,25 +1588,25 @@ unsafe extern "C" fn print_caller(id: u32, buf: *mut c_char) -> usize {
 // that prevents an infinite loop that could occur with a retry.
 //
     prb_for_each_info(start_seq, prb, seq, &info, &line_count) {
-    if (len <= size || info.seq >= max_seq)
+    if (len <= size || info.seq >= max_seq) {
     break;
+    }
     len -= get_record_print_text_size(&info, line_count, syslog, time);
     }
     return seq;
     }
 // The caller is responsible for making sure @size is greater than 0.
 #[no_mangle]
-unsafe extern "C" fn syslog_print(buf: *mut char __user, size: c_int) -> c_int {
-    static int syslog_print(char __user *buf, int size)
-    {
-    struct printk_info info;
-    struct printk_record r;
-    char *text;
-    let mut len: c_int = 0;
-    u64 seq;
+unsafe extern "C" fn syslog_print(buf: *mut char , size: c_int) -> c_int {
+pub static mut info: usize = 0;
+pub static mut r: usize = 0;
+pub static mut text: *mut c_void = core::ptr::null_mut();
+pub static mut len: c_int = 0;
+    let mut seq = 0;
     text = kmalloc(PRINTK_MESSAGE_MAX, GFP_KERNEL);
-    if (!text)
+    if (!text) {
     return -ENOMEM;
+    }
     prb_rec_init_rd(&r, &info, text, PRINTK_MESSAGE_MAX);
     mutex_lock(&syslog_lock);
 //
@@ -1430,19 +1629,21 @@ unsafe extern "C" fn syslog_print(buf: *mut char __user, size: c_int) -> c_int {
     len = wait_event_interruptible(log_wait,
     prb_read_valid(prb, seq, core::ptr::null_mut())); /* LMM(syslog_print:A) */
     mutex_lock(&syslog_lock);
-    if (len)
-    goto out;
+    if (len) {
+// goto;
+    }
     } while (syslog_seq != seq);
 //
 // Copy records that fit into the buffer. The above cycle makes sure
 // that the first record is always available.
 //
     do {
-    size_t n;
-    size_t skip;
-    int err;
-    if (!prb_read_valid(prb, syslog_seq, &r))
+    let mut n = 0;
+    let mut skip = 0;
+    let mut err = 0;
+    if (!prb_read_valid(prb, syslog_seq, &r)) {
     break;
+    }
     if (r.info.seq != syslog_seq) {
 // message is gone, move to next valid one
     syslog_seq = r.info.seq;
@@ -1452,8 +1653,9 @@ unsafe extern "C" fn syslog_print(buf: *mut char __user, size: c_int) -> c_int {
 // To keep reading/counting partial line consistent,
 // use printk_time value as of the beginning of a line.
 //
-    if (!syslog_partial)
+    if (!syslog_partial) {
     syslog_time = printk_time;
+    }
     skip = syslog_partial;
     n = record_print_text(&r, true, syslog_time);
     if (n - syslog_partial <= size) {
@@ -1465,40 +1667,42 @@ unsafe extern "C" fn syslog_print(buf: *mut char __user, size: c_int) -> c_int {
 // partial read(), remember position
     n = size;
     syslog_partial += n;
-    } else
+    } else {
     n = 0;
-    if (!n)
+    }
+    if (!n) {
     break;
+    }
     mutex_unlock(&syslog_lock);
     err = copy_to_user(buf, text + skip, n);
     mutex_lock(&syslog_lock);
     if (err) {
-    if (!len)
+    if (!len) {
     len = -EFAULT;
+    }
     break;
     }
     len += n;
     size -= n;
     buf += n;
     } while (size);
-    out:
+// label;
     mutex_unlock(&syslog_lock);
     kfree(text);
     return len;
     }
 #[no_mangle]
-unsafe extern "C" fn syslog_print_all(buf: *mut char __user, size: c_int, clear: bool) -> c_int {
-    static int syslog_print_all(char __user *buf, int size, bool clear)
-    {
-    struct printk_info info;
-    struct printk_record r;
-    char *text;
-    let mut len: c_int = 0;
-    u64 seq;
-    bool time;
+unsafe extern "C" fn syslog_print_all(buf: *mut char , size: c_int, clear: bool) -> c_int {
+pub static mut info: usize = 0;
+pub static mut r: usize = 0;
+pub static mut text: *mut c_void = core::ptr::null_mut();
+pub static mut len: c_int = 0;
+    let mut seq = 0;
+    let mut time = 0;
     text = kmalloc(PRINTK_MESSAGE_MAX, GFP_KERNEL);
-    if (!text)
+    if (!text) {
     return -ENOMEM;
+    }
     time = printk_time;
 //
 // Find first record that fits, including all following records,
@@ -1508,18 +1712,21 @@ unsafe extern "C" fn syslog_print_all(buf: *mut char __user, size: c_int, clear:
     size, true, time);
     prb_rec_init_rd(&r, &info, text, PRINTK_MESSAGE_MAX);
     prb_for_each_record(seq, prb, seq, &r) {
-    int textlen;
+    let mut textlen = 0;
     textlen = record_print_text(&r, true, time);
     if (len + textlen > size) {
-    seq--;
+    seq -= 1;
     break;
     }
-    if (copy_to_user(buf + len, text, textlen))
+    if (copy_to_user(buf + len, text, textlen)) {
     len = -EFAULT;
-    else
+    }
+    else {
     len += textlen;
-    if (len < 0)
+    }
+    if (len < 0) {
     break;
+    }
     }
     if (clear) {
     mutex_lock(&syslog_lock);
@@ -1531,80 +1738,95 @@ unsafe extern "C" fn syslog_print_all(buf: *mut char __user, size: c_int, clear:
     }
 #[no_mangle]
 unsafe extern "C" fn syslog_clear() {
-    static void syslog_clear(void)
-    {
     mutex_lock(&syslog_lock);
     latched_seq_write(&clear_seq, prb_next_seq(prb));
     mutex_unlock(&syslog_lock);
     }
 #[no_mangle]
-pub unsafe extern "C" fn do_syslog(type: c_int, buf: *mut char __user, len: c_int, source: c_int) -> c_int {
-    int do_syslog(int type, char __user *buf, int len, int source)
-    {
-    struct printk_info info;
-    let mut clear: bool = false;
-    let mut saved_console_loglevel: static int = LOGLEVEL_DEFAULT;
-    int error;
+pub unsafe extern "C" fn do_syslog(type: c_int, buf: *mut char , len: c_int, source: c_int) -> c_int {
+pub static mut info: usize = 0;
+pub static mut clear: bool = false;
+pub static mut saved_console_loglevel: int = 0;
+    let mut error = 0;
     error = check_syslog_permissions(type, source);
-    if (error)
+    if (error) {
     return error;
-    switch (type) {
-    case SYSLOG_ACTION_CLOSE:	/* Close log */
-    break;
-    case SYSLOG_ACTION_OPEN:	/* Open log */
-    break;
-    case SYSLOG_ACTION_READ:	/* Read from log */
-    if (!buf || len < 0)
+    }
+    match (type) {
+    SYSLOG_ACTION_CLOSE => {
+    // break;
+    }
+    SYSLOG_ACTION_OPEN => {
+    // break;
+    }
+    SYSLOG_ACTION_READ => {
+    if (!buf || len < 0) {
     return -EINVAL;
-    if (!len)
+    }
+    if (!len) {
     return 0;
-    if (!access_ok(buf, len))
+    }
+    if (!access_ok(buf, len)) {
     return -EFAULT;
+    }
     error = syslog_print(buf, len);
-    break;
+    // break;
 // Read/clear last kernel messages
-    case SYSLOG_ACTION_READ_CLEAR:
+    }
+    SYSLOG_ACTION_READ_CLEAR => {
     clear = true;
     fallthrough;
 // Read last kernel messages
-    case SYSLOG_ACTION_READ_ALL:
-    if (!buf || len < 0)
+    }
+    SYSLOG_ACTION_READ_ALL => {
+    if (!buf || len < 0) {
     return -EINVAL;
-    if (!len)
+    }
+    if (!len) {
     return 0;
-    if (!access_ok(buf, len))
+    }
+    if (!access_ok(buf, len)) {
     return -EFAULT;
+    }
     error = syslog_print_all(buf, len, clear);
-    break;
+    // break;
 // Clear ring buffer
-    case SYSLOG_ACTION_CLEAR:
+    }
+    SYSLOG_ACTION_CLEAR => {
     syslog_clear();
-    break;
+    // break;
 // Disable logging to console
-    case SYSLOG_ACTION_CONSOLE_OFF:
-    if (saved_console_loglevel == LOGLEVEL_DEFAULT)
+    }
+    SYSLOG_ACTION_CONSOLE_OFF => {
+    if (saved_console_loglevel == LOGLEVEL_DEFAULT) {
     saved_console_loglevel = console_loglevel;
+    }
     console_loglevel = minimum_console_loglevel;
-    break;
+    // break;
 // Enable logging to console
-    case SYSLOG_ACTION_CONSOLE_ON:
+    }
+    SYSLOG_ACTION_CONSOLE_ON => {
     if (saved_console_loglevel != LOGLEVEL_DEFAULT) {
     console_loglevel = saved_console_loglevel;
     saved_console_loglevel = LOGLEVEL_DEFAULT;
     }
-    break;
+    // break;
 // Set level of messages printed to console
-    case SYSLOG_ACTION_CONSOLE_LEVEL:
-    if (len < 1 || len > 8)
+    }
+    SYSLOG_ACTION_CONSOLE_LEVEL => {
+    if (len < 1 || len > 8) {
     return -EINVAL;
-    if (len < minimum_console_loglevel)
+    }
+    if (len < minimum_console_loglevel) {
     len = minimum_console_loglevel;
+    }
     console_loglevel = len;
 // Implicitly re-enable logging to console
     saved_console_loglevel = LOGLEVEL_DEFAULT;
-    break;
+    // break;
 // Number of chars in the log buffer
-    case SYSLOG_ACTION_SIZE_UNREAD:
+    }
+    SYSLOG_ACTION_SIZE_UNREAD => {
     mutex_lock(&syslog_lock);
     if (!prb_read_valid_info(prb, syslog_seq, &info, core::ptr::null_mut())) {
 // No unread messages.
@@ -1624,9 +1846,9 @@ pub unsafe extern "C" fn do_syslog(type: c_int, buf: *mut char __user, len: c_in
 //
     error = prb_next_seq(prb) - syslog_seq;
     } else {
-    let mut time: bool = syslog_partial ? syslog_time : printk_time;
-    unsigned int line_count;
-    u64 seq;
+pub static mut time: bool = false;
+    let mut line_count = 0;
+    let mut seq = 0;
     prb_for_each_info(syslog_seq, prb, seq, &info,
     &line_count) {
     error += get_record_print_text_size(&info, line_count,
@@ -1636,19 +1858,22 @@ pub unsafe extern "C" fn do_syslog(type: c_int, buf: *mut char __user, len: c_in
     error -= syslog_partial;
     }
     mutex_unlock(&syslog_lock);
-    break;
+    // break;
 // Size of the log buffer
-    case SYSLOG_ACTION_SIZE_BUFFER:
+    }
+    SYSLOG_ACTION_SIZE_BUFFER => {
     error = log_buf_len;
-    break;
-    default:
+    // break;
+    }
+    _ => {
     error = -EINVAL;
-    break;
+    // break;
+    }
     }
     return error;
     }
-    SYSCALL_DEFINE3(syslog, int, type, char __user *, buf, int, len)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_syslog(type: usize, buf: usize, len: usize) -> c_long {
     return do_syslog(type, buf, len, SYSLOG_FROM_READER);
     }
 //
@@ -1656,12 +1881,10 @@ pub unsafe extern "C" fn do_syslog(type: c_int, buf: *mut char __user, len: c_in
 // They allow to pass console_lock to another printk() call using a busy wait.
 //
 
-    static struct lockdep_map console_owner_dep_map = {
-    .name = "console_owner"
-    };
+pub static mut lockdep_map: usize = 0;
 
-    static DEFINE_RAW_SPINLOCK(console_owner_lock);
-    static struct task_struct *console_owner;
+pub static mut console_owner_lock: usize = 0;
+pub static mut console_owner: *mut c_void = core::ptr::null_mut();
     static bool console_waiter;
 //
 // console_lock_spinning_enable - mark beginning of code where another
@@ -1674,8 +1897,6 @@ pub unsafe extern "C" fn do_syslog(type: c_int, buf: *mut char __user, len: c_in
 //
 #[no_mangle]
 pub unsafe extern "C" fn console_lock_spinning_enable() {
-    void console_lock_spinning_enable(void)
-    {
 //
 // Do not use spinning in panic(). The panic CPU wants to keep the lock.
 // Non-panic CPUs abandon the flush anyway.
@@ -1685,12 +1906,13 @@ pub unsafe extern "C" fn console_lock_spinning_enable() {
 // This looks like the easiest way how to prevent false lockdep
 // reports without handling races a lockless way.
 //
-    if (panic_in_progress())
-    goto lockdep;
+    if (panic_in_progress()) {
+// goto;
+    }
     raw_spin_lock(&console_owner_lock);
     console_owner = current;
     raw_spin_unlock(&console_owner_lock);
-    lockdep:
+// label;
 // The waiter may spin on us after setting console_owner
     spin_acquire(&console_owner_dep_map, 0, 0, _THIS_IP_);
     }
@@ -1712,9 +1934,7 @@ pub unsafe extern "C" fn console_lock_spinning_enable() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn console_lock_spinning_disable_and_check(cookie: c_int) -> c_int {
-    int console_lock_spinning_disable_and_check(int cookie)
-    {
-    int waiter;
+    let mut waiter = 0;
 //
 // Ignore spinning waiters during panic() because they might get stopped
 // or blocked at any time,
@@ -1765,14 +1985,13 @@ pub unsafe extern "C" fn console_lock_spinning_disable_and_check(cookie: c_int) 
 //
 #[no_mangle]
 unsafe extern "C" fn console_trylock_spinning() -> c_int {
-    static int console_trylock_spinning(void)
-    {
-    struct task_struct *owner = core::ptr::null_mut();
-    bool waiter;
-    let mut spin: bool = false;
-    unsigned long flags;
-    if (console_trylock())
+    let mut owner = core::ptr::null_mut();
+    let mut waiter = 0;
+pub static mut spin: bool = false;
+    let mut flags = 0;
+    if (console_trylock()) {
     return 1;
+    }
 //
 // It's unsafe to spin once a panic has begun. If we are the
 // panic CPU, we may have already halted the owner of the
@@ -1780,8 +1999,9 @@ unsafe extern "C" fn console_trylock_spinning() -> c_int {
 // avoid taking console_sem, so the panic CPU has a better
 // chance of cleanly acquiring it later.
 //
-    if (panic_in_progress())
+    if (panic_in_progress()) {
     return 0;
+    }
     printk_safe_enter_irqsave(flags);
     raw_spin_lock(&console_owner_lock);
     owner = READ_ONCE(console_owner);
@@ -1807,8 +2027,9 @@ unsafe extern "C" fn console_trylock_spinning() -> c_int {
 // We spin waiting for the owner to release us
     spin_acquire(&console_owner_dep_map, 0, 0, _THIS_IP_);
 // Owner will clear console_waiter on hand off
-    while (READ_ONCE(console_waiter))
+    while (READ_ONCE(console_waiter)) {
     cpu_relax();
+    }
     spin_release(&console_owner_dep_map, _THIS_IP_);
     printk_safe_exit_irqrestore(flags);
 //
@@ -1830,10 +2051,10 @@ unsafe extern "C" fn console_trylock_spinning() -> c_int {
 // additional NMI context per CPU is also separately tracked. Until per-CPU
 // is available, a separate "early tracking" is performed.
 //
-    static DEFINE_PER_CPU(u8, printk_count);
+pub static mut u8: usize = 0;
     static u8 printk_count_early;
 
-    static DEFINE_PER_CPU(u8, printk_count_nmi);
+pub static mut u8: usize = 0;
     static u8 printk_count_nmi_early;
 
 //
@@ -1847,17 +2068,19 @@ pub const PRINTK_MAX_RECURSION: c_int = 3;
 // Return a pointer to the dedicated counter for the CPU+context of the
 // caller.
 //
-    static u8 *__printk_recursion_counter(void)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __printk_recursion_counter() -> *mut c_void {
 
     if (in_nmi()) {
-    if (printk_percpu_data_ready())
+    if (printk_percpu_data_ready()) {
     return this_cpu_ptr(&printk_count_nmi);
+    }
     return &printk_count_nmi_early;
     }
 
-    if (printk_percpu_data_ready())
+    if (printk_percpu_data_ready()) {
     return this_cpu_ptr(&printk_count);
+    }
     return &printk_count_early;
     }
 //
@@ -1865,39 +2088,37 @@ pub const PRINTK_MAX_RECURSION: c_int = 3;
 // The caller must check the boolean return value to see if the recursion is
 // allowed. On failure, interrupts are not disabled.
 //
-// @recursion_ptr must be a variable of type (u8 *) and is the same variable
+// @recursion_ptr must be a variable of type  and is the same variable
 // that is passed to printk_exit_irqrestore().
 //
 
-    ({							\
-    bool success = true;				\
-    \
-    typecheck(u8 *, recursion_ptr);			\
-    local_irq_save(flags);				\
-    (recursion_ptr) = __printk_recursion_counter();	\
-    if (*(recursion_ptr) > PRINTK_MAX_RECURSION) {	\
-    local_irq_restore(flags);		\
-    success = false;			\
-    } else {					\
-    (*(recursion_ptr))++;			\
-    }						\
-    success;					\
+    ({							
+    let mut success = true;				
+    
+    typecheck(u8 *, recursion_ptr);			
+    local_irq_save(flags);				
+    (recursion_ptr) = __printk_recursion_counter();	
+    if (*(recursion_ptr) > PRINTK_MAX_RECURSION) {	
+    local_irq_restore(flags);		
+    success = false;			
+    } else {					
+    (*(recursion_ptr))++;			
+    }						
+    success;					
     })
 // Exit recursion tracking, restoring interrupts.
 
-    do {						\
-    typecheck(u8 *, recursion_ptr);		\
-    (*(recursion_ptr))--;			\
-    local_irq_restore(flags);		\
+    do {						
+    typecheck(u8 *, recursion_ptr);		
+    (*(recursion_ptr))--;			
+    local_irq_restore(flags);		
     } while (0)
-    int printk_delay_msec __read_mostly;
+    let mut printk_delay_msec = 0;
 #[no_mangle]
 pub unsafe extern "C" fn printk_delay(level: c_int) {
-    static inline void printk_delay(int level)
-    {
     boot_delay_msec(level);
     if (unlikely(printk_delay_msec)) {
-    let mut m: c_int = printk_delay_msec;
+pub static mut m: c_int = 0;
     while (m--) {
     mdelay(1);
     touch_nmi_watchdog();
@@ -1907,8 +2128,6 @@ pub unsafe extern "C" fn printk_delay(level: c_int) {
 pub const CALLER_ID_MASK: c_uint = 0x80000000;
 #[no_mangle]
 pub unsafe extern "C" fn printk_caller_id() -> u32 {
-    static inline u32 printk_caller_id(void)
-    {
     return in_task() ? task_pid_nr(current) :
     CALLER_ID_MASK + smp_processor_id();
     }
@@ -1916,25 +2135,19 @@ pub unsafe extern "C" fn printk_caller_id() -> u32 {
 // Store the opposite info than caller_id.
 #[no_mangle]
 unsafe extern "C" fn printk_caller_id2() -> u32 {
-    static u32 printk_caller_id2(void)
-    {
     return !in_task() ? task_pid_nr(current) :
     CALLER_ID_MASK + smp_processor_id();
     }
 #[no_mangle]
 unsafe extern "C" fn printk_info_get_pid(info: *const printk_info) -> pid_t {
-    static pid_t printk_info_get_pid(const struct printk_info *info)
-    {
-    let mut caller_id: u32 = info.caller_id;
-    let mut caller_id2: u32 = info.caller_id2;
+pub static mut caller_id: u32 = 0;
+pub static mut caller_id2: u32 = 0;
     return caller_id & CALLER_ID_MASK ? caller_id2 : caller_id;
     }
 #[no_mangle]
 unsafe extern "C" fn printk_info_get_cpu(info: *const printk_info) -> c_int {
-    static int printk_info_get_cpu(const struct printk_info *info)
-    {
-    let mut caller_id: u32 = info.caller_id;
-    let mut caller_id2: u32 = info.caller_id2;
+pub static mut caller_id: u32 = 0;
+pub static mut caller_id2: u32 = 0;
     return ((caller_id & CALLER_ID_MASK ?
     caller_id : caller_id2) & ~CALLER_ID_MASK);
     }
@@ -1956,23 +2169,27 @@ unsafe extern "C" fn printk_info_get_cpu(info: *const printk_info) -> c_int {
 //
 // Return: The length of the parsed level and control flags.
 //
-    u16 printk_parse_prefix(const char *text, int *level,
-    enum printk_info_flags *flags)
-    {
-    let mut prefix_len: u16 = 0;
-    int kern_level;
+#[no_mangle]
+pub unsafe extern "C" fn printk_parse_prefix(text: *mut c_char, level: *mut c_int, flags: *mut printk_info_flags) -> u16 {
+pub static mut prefix_len: u16 = 0;
+    let mut kern_level = 0;
     while (*text) {
     kern_level = printk_get_level(text);
-    if (!kern_level)
+    if (!kern_level) {
     break;
-    switch (kern_level) {
-    case '0' ... '7':
-    if (level && *level == LOGLEVEL_DEFAULT)
+    }
+    match (kern_level) {
+    '0' ... '7' => {
+    if (level && *level == LOGLEVEL_DEFAULT) {
 // level = kern_level - '0';
-    break;
-    case 'c':	/* KERN_CONT */
-    if (flags)
+    }
+    // break;
+    }
+    'c' => {
+    if (flags) {
 // flags |= LOG_CONT;
+    }
+    }
     }
     prefix_len += 2;
     text += 2;
@@ -1980,20 +2197,18 @@ unsafe extern "C" fn printk_info_get_cpu(info: *const printk_info) -> c_int {
     return prefix_len;
     }
     __printf(5, 0)
-    static u16 printk_sprint(char *text, u16 size, int facility,
-    enum printk_info_flags *flags, const char *fmt,
-    va_list args)
-    {
-    u16 text_len;
+#[no_mangle]
+pub unsafe extern "C" fn printk_sprint(text: *mut c_char, size: u16, facility: c_int, flags: *mut printk_info_flags, fmt: *mut c_char, args: va_list) -> u16 {
+    let mut text_len = 0;
     text_len = vscnprintf(text, size, fmt, args);
 // Mark and strip a trailing newline.
     if (text_len && text[text_len - 1] == '\n') {
-    text_len--;
+    text_len -= 1;
 // flags |= LOG_NEWLINE;
     }
 // Strip log level and control flags.
     if (facility == 0) {
-    u16 prefix_len;
+    let mut prefix_len = 0;
     prefix_len = printk_parse_prefix(text, core::ptr::null_mut(), core::ptr::null_mut());
     if (prefix_len) {
     text_len -= prefix_len;
@@ -2006,44 +2221,43 @@ unsafe extern "C" fn printk_info_get_cpu(info: *const printk_info) -> c_int {
 
 #[no_mangle]
 unsafe extern "C" fn printk_store_execution_ctx(info: *mut printk_info) {
-    static void printk_store_execution_ctx(struct printk_info *info)
-    {
     info.caller_id2 = printk_caller_id2();
     get_task_comm(info.comm, current);
     }
-    static void pmsg_load_execution_ctx(struct printk_message *pmsg,
-    const struct printk_info *info)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pmsg_load_execution_ctx(pmsg: *mut printk_message, info: *mut printk_info) {
     pmsg.cpu = printk_info_get_cpu(info);
     pmsg.pid = printk_info_get_pid(info);
-    memcpy(pmsg.comm, info.comm, sizeof(pmsg.comm));
-    static_assert(sizeof(pmsg.comm) == sizeof(info.comm));
+    memcpy(pmsg.comm, info.comm, sizeof!(pmsg.comm));
+    static_assert(sizeof!(pmsg.comm) == sizeof!(info.comm));
     }
 
-    static void printk_store_execution_ctx(struct printk_info *info) {}
-    static void pmsg_load_execution_ctx(struct printk_message *pmsg,
-    const struct printk_info *info) {}
+#[no_mangle]
+pub unsafe extern "C" fn printk_store_execution_ctx(info: *mut printk_info) {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: pmsg_load_execution_ctx
+pub unsafe extern "C" fn pmsg_load_execution_ctx_dup(pmsg: *mut printk_message, info: *mut printk_info) {}
 
     __printf(4, 0)
-    int vprintk_store(int facility, int level,
-    const struct dev_printk_info *dev_info,
-    const char *fmt, va_list args)
-    {
-    struct prb_reserved_entry e;
-    let mut flags: enum printk_info_flags = 0;
-    struct printk_record r;
-    unsigned long irqflags;
-    let mut trunc_msg_len: u16 = 0;
+#[no_mangle]
+pub unsafe extern "C" fn vprintk_store(facility: c_int, level: c_int, dev_info: *mut dev_printk_info, fmt: *mut c_char, args: va_list) -> c_int {
+pub static mut e: usize = 0;
+pub static mut flags: printk_info_flags = 0;
+pub static mut r: usize = 0;
+    let mut irqflags = 0;
+pub static mut trunc_msg_len: u16 = 0;
     char prefix_buf[8];
-    u8 *recursion_ptr;
-    u16 reserve_size;
-    va_list args2;
-    u32 caller_id;
-    u16 text_len;
-    let mut ret: c_int = 0;
-    u64 ts_nsec;
-    if (!printk_enter_irqsave(recursion_ptr, irqflags))
+pub static mut recursion_ptr: *mut c_void = core::ptr::null_mut();
+    let mut reserve_size = 0;
+    let mut args2;
+    let mut caller_id = 0;
+    let mut text_len = 0;
+pub static mut ret: c_int = 0;
+    let mut ts_nsec = 0;
+    if (!printk_enter_irqsave(recursion_ptr, irqflags)) {
     return 0;
+    }
 //
 // Since the duration of printk() can vary depending on the message
 // and state of the ringbuffer, grab the timestamp now so that it is
@@ -2059,27 +2273,33 @@ unsafe extern "C" fn printk_store_execution_ctx(info: *mut printk_info) {
 // terminating '\0', which is not counted by vsnprintf().
 //
     va_copy(args2, args);
-    reserve_size = vsnprintf(&prefix_buf[0], sizeof(prefix_buf), fmt, args2) + 1;
+    reserve_size = vsnprintf(&prefix_buf[0], sizeof!(prefix_buf), fmt, args2) + 1;
     va_end(args2);
-    if (reserve_size > PRINTKRB_RECORD_MAX)
+    if (reserve_size > PRINTKRB_RECORD_MAX) {
     reserve_size = PRINTKRB_RECORD_MAX;
+    }
 // Extract log level or control flags.
-    if (facility == 0)
+    if (facility == 0) {
     printk_parse_prefix(&prefix_buf[0], &level, &flags);
-    if (level == LOGLEVEL_DEFAULT)
+    }
+    if (level == LOGLEVEL_DEFAULT) {
     level = default_message_loglevel;
-    if (dev_info)
+    }
+    if (dev_info) {
     flags |= LOG_NEWLINE;
-    if (is_printk_force_console())
+    }
+    if (is_printk_force_console()) {
     flags |= LOG_FORCE_CON;
+    }
     if (flags & LOG_CONT) {
     prb_rec_init_wr(&r, reserve_size);
     if (prb_reserve_in_last(&e, prb, &r, caller_id, PRINTKRB_RECORD_MAX)) {
     text_len = printk_sprint(&r.text_buf[r.info.text_len], reserve_size,
     facility, &flags, fmt, args);
     r.info.text_len += text_len;
-    if (flags & LOG_FORCE_CON)
+    if (flags & LOG_FORCE_CON) {
     r.info.flags |= LOG_FORCE_CON;
+    }
     if (flags & LOG_NEWLINE) {
     r.info.flags |= LOG_NEWLINE;
     prb_final_commit(&e);
@@ -2087,7 +2307,7 @@ unsafe extern "C" fn printk_store_execution_ctx(info: *mut printk_info) {
     prb_commit(&e);
     }
     ret = text_len;
-    goto out;
+// goto;
     }
     }
 //
@@ -2100,29 +2320,34 @@ unsafe extern "C" fn printk_store_execution_ctx(info: *mut printk_info) {
 // truncate the message if it is too long for empty buffer
     truncate_msg(&reserve_size, &trunc_msg_len);
     prb_rec_init_wr(&r, reserve_size + trunc_msg_len);
-    if (!prb_reserve(&e, prb, &r))
-    goto out;
+    if (!prb_reserve(&e, prb, &r)) {
+// goto;
+    }
     }
 // fill message
     text_len = printk_sprint(&r.text_buf[0], reserve_size, facility, &flags, fmt, args);
-    if (trunc_msg_len)
+    if (trunc_msg_len) {
     memcpy(&r.text_buf[text_len], trunc_msg, trunc_msg_len);
+    }
     r.info.text_len = text_len + trunc_msg_len;
     r.info.facility = facility;
     r.info.level = level & 7;
     r.info.flags = flags & 0x1f;
     r.info.ts_nsec = ts_nsec;
     r.info.caller_id = caller_id;
-    if (dev_info)
-    memcpy(&r.info.dev_info, dev_info, sizeof(r.info.dev_info));
+    if (dev_info) {
+    memcpy(&r.info.dev_info, dev_info, sizeof!(r.info.dev_info));
+    }
     printk_store_execution_ctx(r.info);
 // A message without a trailing newline can be continued.
-    if (!(flags & LOG_NEWLINE))
+    if (!(flags & LOG_NEWLINE)) {
     prb_commit(&e);
-    else
+    }
+    else {
     prb_final_commit(&e);
+    }
     ret = text_len + trunc_msg_len;
-    out:
+// label;
     printk_exit_irqrestore(recursion_ptr, irqflags);
     return ret;
     }
@@ -2133,28 +2358,25 @@ unsafe extern "C" fn printk_store_execution_ctx(info: *mut printk_info) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn printk_legacy_allow_panic_sync() {
-    void printk_legacy_allow_panic_sync(void)
-    {
-    struct console_flush_type ft;
+pub static mut ft: usize = 0;
     legacy_allow_panic_sync = true;
     printk_get_console_flush_type(&ft);
     if (ft.legacy_direct) {
-    if (console_trylock())
+    if (console_trylock()) {
     console_unlock();
     }
     }
-    bool __read_mostly debug_non_panic_cpus;
+    }
+    let mut debug_non_panic_cpus = 0;
 
 #[no_mangle]
-unsafe extern "C" fn debug_non_panic_cpus_setup(str: *mut c_char) -> int __init {
-    static int __init debug_non_panic_cpus_setup(char *str)
-    {
+unsafe extern "C" fn debug_non_panic_cpus_setup(str: *mut c_char) -> c_int {
     debug_non_panic_cpus = true;
-    pr_info("allow messages from non-panic CPUs in panic()\n");
+    pr_info!("allow messages from non-panic CPUs in panic()\n");
     return 0;
     }
-    early_param("debug_non_panic_cpus", debug_non_panic_cpus_setup);
-    module_param(debug_non_panic_cpus, bool, 0644);
+    early_param!("debug_non_panic_cpus", debug_non_panic_cpus_setup);
+    module_param!(debug_non_panic_cpus, bool, 0644);
     MODULE_PARM_DESC(debug_non_panic_cpus,
     "allow messages from non-panic CPUs in panic()");
 
@@ -2162,11 +2384,12 @@ unsafe extern "C" fn debug_non_panic_cpus_setup(str: *mut c_char) -> int __init 
     const struct dev_printk_info *dev_info,
     const char *fmt, va_list args)
     {
-    struct console_flush_type ft;
-    int printed_len;
+pub static mut ft: usize = 0;
+    let mut printed_len = 0;
 // Suppress unimportant messages after panic happens
-    if (unlikely(suppress_printk))
+    if (unlikely(suppress_printk)) {
     return 0;
+    }
 //
 // The messages on the panic CPU are the most important. If
 // non-panic CPUs are generating any messages, they will be
@@ -2174,8 +2397,9 @@ unsafe extern "C" fn debug_non_panic_cpus_setup(str: *mut c_char) -> int __init 
 //
     if (panic_on_other_cpu() &&
     !debug_non_panic_cpus &&
-    !panic_triggering_all_cpu_backtrace)
+    !panic_triggering_all_cpu_backtrace) {
     return 0;
+    }
     printk_get_console_flush_type(&ft);
 // If called from the scheduler, we can not call up().
     if (level == LOGLEVEL_SCHED) {
@@ -2185,10 +2409,12 @@ unsafe extern "C" fn debug_non_panic_cpus_setup(str: *mut c_char) -> int __init 
     }
     printk_delay(level);
     printed_len = vprintk_store(facility, level, dev_info, fmt, args);
-    if (ft.nbcon_atomic)
+    if (ft.nbcon_atomic) {
     nbcon_atomic_flush_pending();
-    if (ft.nbcon_offload)
+    }
+    if (ft.nbcon_offload) {
     nbcon_kthreads_wake();
+    }
     if (ft.legacy_direct) {
 //
 // The caller may be holding system-critical or
@@ -2204,67 +2430,64 @@ unsafe extern "C" fn debug_non_panic_cpus_setup(str: *mut c_char) -> int __init 
 // spinning variant, this context tries to take over the
 // printing from another printing context.
 //
-    if (console_trylock_spinning())
+    if (console_trylock_spinning()) {
     console_unlock();
+    }
     preempt_enable();
     }
-    if (ft.legacy_offload)
+    if (ft.legacy_offload) {
     defer_console_output();
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !console_irqwork_blocked) -> else {
-    else if (!console_irqwork_blocked)
+    }
+
+    else if (!console_irqwork_blocked) {
     wake_up_klogd();
+    }
     return printed_len;
     }
     EXPORT_SYMBOL(vprintk_emit);
 #[no_mangle]
 pub unsafe extern "C" fn vprintk_default(fmt: *const c_char, args: va_list) -> c_int {
-    int vprintk_default(const char *fmt, va_list args)
-    {
     return vprintk_emit(0, LOGLEVEL_DEFAULT, core::ptr::null_mut(), fmt, args);
     }
     EXPORT_SYMBOL_GPL(vprintk_default);
 #[no_mangle]
 pub unsafe extern "C" fn _printk(fmt: *const c_char, ...) -> asmlinkage __visible int {
-    asmlinkage __visible int _printk(const char *fmt, ...)
-    {
-    va_list args;
-    int r;
+    let mut args;
+    let mut r = 0;
     va_start(args, fmt);
     r = vprintk(fmt, args);
     va_end(args);
     return r;
     }
     EXPORT_SYMBOL(_printk);
-    static bool __pr_flush(struct console *con, int timeout_ms, bool reset_on_progress);
+// forward_decl: __pr_flush;
 
 pub const prb_first_valid_seq(rb): c_int = 0;
 pub const prb_next_seq(rb): c_int = 0;
     static u64 syslog_seq;
-    static bool __pr_flush(struct console *con, int timeout_ms, bool reset_on_progress) { return true; }
+#[no_mangle]
+pub unsafe extern "C" fn __pr_flush(con: *mut console, timeout_ms: c_int, reset_on_progress: bool) -> bool { return true; }
 
-    struct console *early_console;
+pub static mut early_console: *mut c_void = core::ptr::null_mut();
 #[no_mangle]
 pub unsafe extern "C" fn early_printk(fmt: *const c_char, ...) -> asmlinkage __visible void {
-    asmlinkage __visible void early_printk(const char *fmt, ...)
-    {
-    va_list ap;
+    let mut ap;
     char buf[512];
-    int n;
-    if (!early_console)
+    let mut n = 0;
+    if (!early_console) {
     return;
+    }
     va_start(ap, fmt);
-    n = vscnprintf(buf, sizeof(buf), fmt, ap);
+    n = vscnprintf(buf, sizeof!(buf), fmt, ap);
     va_end(ap);
     early_console.write(early_console, buf, n);
     }
 
 #[no_mangle]
 unsafe extern "C" fn set_user_specified(c: *mut console_cmdline, user_specified: bool) {
-    static void set_user_specified(struct console_cmdline *c, bool user_specified)
-    {
-    if (!user_specified)
+    if (!user_specified) {
     return;
+    }
 //
 // @c console was defined by the user on the command line.
 // Do not clear when added twice also by SPCR or the device tree.
@@ -2273,45 +2496,48 @@ unsafe extern "C" fn set_user_specified(c: *mut console_cmdline, user_specified:
 // At least one console defined by the user on the command line.
     console_set_on_cmdline = 1;
     }
-    static int __add_preferred_console(const char *name, const short idx,
-    const char *devname, char *options,
-    char *brl_options, bool user_specified)
-    {
-    struct console_cmdline *c;
-    int i;
-    if (!name && !devname)
+#[no_mangle]
+pub unsafe extern "C" fn __add_preferred_console(name: *mut c_char, idx: c_short, devname: *mut c_char, options: *mut c_char, brl_options: *mut c_char, user_specified: bool) -> c_int {
+pub static mut c: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    if (!name && !devname) {
     return -EINVAL;
+    }
 //
 // We use a signed short index for struct console for device drivers to
 // indicate a not yet assigned index or port. However, a negative index
 // value is not valid when the console name and index are defined on
 // the command line.
 //
-    if (name && idx < 0)
+    if (name && idx < 0) {
     return -EINVAL;
+    }
 //
 // See if this tty is not yet registered, and
 // if we have a slot free.
 //
-    for (i = 0, c = console_cmdline;
-    i < MAX_CMDLINECONSOLES && (c.name[0] || c.devname[0]);
-    i++, c++) {
+    while (i < MAX_CMDLINECONSOLES && (c.name[0] || c.devname[0])) {
     if ((name && strcmp(c.name, name) == 0 && c.index == idx) ||
     (devname && strcmp(c.devname, devname) == 0)) {
-    if (!brl_options)
+    if (!brl_options) {
     preferred_console = i;
+    }
     set_user_specified(c, user_specified);
     return 0;
     }
     }
-    if (i == MAX_CMDLINECONSOLES)
+    if (i == MAX_CMDLINECONSOLES) {
     return -E2BIG;
-    if (!brl_options)
+    }
+    if (!brl_options) {
     preferred_console = i;
-    if (name)
+    }
+    if (name) {
     strscpy(c.name, name);
-    if (devname)
+    }
+    if (devname) {
     strscpy(c.devname, devname);
+    }
     c.options = options;
     set_user_specified(c, user_specified);
     braille_set_options(c, brl_options);
@@ -2319,32 +2545,30 @@ unsafe extern "C" fn set_user_specified(c: *mut console_cmdline, user_specified:
     return 0;
     }
 #[no_mangle]
-unsafe extern "C" fn console_msg_format_setup(str: *mut c_char) -> int __init {
-    static int __init console_msg_format_setup(char *str)
-    {
-    if (!strcmp(str, "syslog"))
+unsafe extern "C" fn console_msg_format_setup(str: *mut c_char) -> c_int {
+    if (!strcmp(str, "syslog")) {
     console_msg_format = MSG_FORMAT_SYSLOG;
-    if (!strcmp(str, "default"))
+    }
+    if (!strcmp(str, "default")) {
     console_msg_format = MSG_FORMAT_DEFAULT;
+    }
     return 1;
     }
-    __setup("console_msg_format=", console_msg_format_setup);
+    __setup!("console_msg_format=", console_msg_format_setup);
 //
 // Set up a console.  Called via do_early_param() in init/main.c
 // for each "console=" parameter in the boot command line.
 //
 #[no_mangle]
-unsafe extern "C" fn console_setup(str: *mut c_char) -> int __init {
-    static int __init console_setup(char *str)
-    {
-    static_assert(sizeof(console_cmdline[0].devname) >= sizeof(console_cmdline[0].name) + 4);
-    char buf[sizeof(console_cmdline[0].devname)];
-    char *brl_options = core::ptr::null_mut();
-    char *ttyname = core::ptr::null_mut();
-    char *devname = core::ptr::null_mut();
-    char *options;
-    char *s;
-    int idx;
+unsafe extern "C" fn console_setup(str: *mut c_char) -> c_int {
+    static_assert(sizeof!(console_cmdline[0].devname) >= sizeof!(console_cmdline[0].name) + 4);
+    char buf[sizeof!(console_cmdline[0].devname)];
+    let mut brl_options = core::ptr::null_mut();
+    let mut ttyname = core::ptr::null_mut();
+    let mut devname = core::ptr::null_mut();
+pub static mut options: *mut c_void = core::ptr::null_mut();
+pub static mut s: *mut c_void = core::ptr::null_mut();
+    let mut idx = 0;
 //
 // console="" or console=null have been suggested as a way to
 // disable console output. Use ttynull that has been created
@@ -2354,42 +2578,53 @@ unsafe extern "C" fn console_setup(str: *mut c_char) -> int __init {
     __add_preferred_console("ttynull", 0, core::ptr::null_mut(), core::ptr::null_mut(), core::ptr::null_mut(), true);
     return 1;
     }
-    if (_braille_console_setup(&str, &brl_options))
+    if (_braille_console_setup(&str, &brl_options)) {
     return 1;
+    }
 // For a DEVNAME:0.0 style console the character device is unknown early
-    if (strchr(str, ':'))
+    if (strchr(str, ':')) {
     devname = buf;
-    else
+    }
+    else {
     ttyname = buf;
+    }
 //
 // Decode str into name, index, options.
 //
-    if (ttyname && isdigit(str[0]))
-    scnprintf(buf, sizeof(buf), "ttyS%s", str);
-    else
+    if (ttyname && isdigit(str[0])) {
+    scnprintf(buf, sizeof!(buf), "ttyS%s", str);
+    }
+    else {
     strscpy(buf, str);
+    }
     options = strchr(str, ',');
-    if (options)
+    if (options) {
 // (options++) = 0;
+    }
 
-    if (!strcmp(str, "ttya"))
+    if (!strcmp(str, "ttya")) {
     strscpy(buf, "ttyS0");
-    if (!strcmp(str, "ttyb"))
+    }
+    if (!strcmp(str, "ttyb")) {
     strscpy(buf, "ttyS1");
+    }
 
-    for (s = buf; *s; s++)
+    for (s = buf; *s; s++) {
     if ((ttyname && isdigit(*s)) || *s == ',')
     break;
+    }
 // @idx will get defined when devname matches.
-    if (devname)
+    if (devname) {
     idx = -1;
-    else
+    }
+    else {
     idx = simple_strtoul(s, core::ptr::null_mut(), 10);
+    }
 // s = 0;
     __add_preferred_console(ttyname, idx, devname, options, brl_options, true);
     return 1;
     }
-    __setup("console=", console_setup);
+    __setup!("console=", console_setup);
 //
 // add_preferred_console - add a device to the list of preferred consoles.
 // @name: device name
@@ -2405,8 +2640,6 @@ unsafe extern "C" fn console_setup(str: *mut c_char) -> int __init {
 //
 #[no_mangle]
 pub unsafe extern "C" fn add_preferred_console(name: *const c_char, idx: c_short, options: *mut c_char) -> c_int {
-    int add_preferred_console(const char *name, const short idx, char *options)
-    {
     return __add_preferred_console(name, idx, core::ptr::null_mut(), options, core::ptr::null_mut(), false);
     }
 //
@@ -2429,18 +2662,16 @@ pub unsafe extern "C" fn add_preferred_console(name: *const c_char, idx: c_short
 //
 // Return: 0 on success, negative error code on failure.
 //
-    int match_devname_and_update_preferred_console(const char *devname,
-    const char *name,
-    const short idx)
-    {
-    struct console_cmdline *c = console_cmdline;
-    int i;
-    if (!devname || !strlen(devname) || !name || !strlen(name) || idx < 0)
+#[no_mangle]
+pub unsafe extern "C" fn match_devname_and_update_preferred_console(devname: *mut c_char, name: *mut c_char, idx: c_short) -> c_int {
+    let mut c = console_cmdline;
+    let mut i = 0;
+    if (!devname || !strlen(devname) || !name || !strlen(name) || idx < 0) {
     return -EINVAL;
-    for (i = 0; i < MAX_CMDLINECONSOLES && (c.name[0] || c.devname[0]);
-    i++, c++) {
+    }
+    while (i < MAX_CMDLINECONSOLES && (c.name[0] || c.devname[0])) {
     if (!strcmp(devname, c.devname)) {
-    pr_info("associate the preferred console \"%s\" with \"%s%d\"\n",
+    pr_info!("associate the preferred console \"%s\" with \"%s%d\"\n",
     devname, name, idx);
     strscpy(c.name, name);
     c.index = idx;
@@ -2450,30 +2681,27 @@ pub unsafe extern "C" fn add_preferred_console(name: *const c_char, idx: c_short
     return -ENOENT;
     }
     EXPORT_SYMBOL_GPL(match_devname_and_update_preferred_console);
-    let mut console_suspend_enabled: bool = true;
+pub static mut console_suspend_enabled: bool = true;
     EXPORT_SYMBOL(console_suspend_enabled);
 #[no_mangle]
-unsafe extern "C" fn console_suspend_disable(str: *mut c_char) -> int __init {
-    static int __init console_suspend_disable(char *str)
-    {
+unsafe extern "C" fn console_suspend_disable(str: *mut c_char) -> c_int {
     console_suspend_enabled = false;
     return 1;
     }
-    __setup("no_console_suspend", console_suspend_disable);
-    module_param_named(console_suspend, console_suspend_enabled,
+    __setup!("no_console_suspend", console_suspend_disable);
+    module_param_named!(console_suspend, console_suspend_enabled,
     bool, S_IRUGO | S_IWUSR);
     MODULE_PARM_DESC(console_suspend, "suspend console during suspend"
     " and hibernate operations");
     static bool printk_console_no_auto_verbose;
 #[no_mangle]
 pub unsafe extern "C" fn console_verbose() {
-    void console_verbose(void)
-    {
-    if (console_loglevel && !printk_console_no_auto_verbose)
+    if (console_loglevel && !printk_console_no_auto_verbose) {
     console_loglevel = CONSOLE_LOGLEVEL_MOTORMOUTH;
     }
+    }
     EXPORT_SYMBOL_GPL(console_verbose);
-    module_param_named(console_no_auto_verbose, printk_console_no_auto_verbose, bool, 0644);
+    module_param_named!(console_no_auto_verbose, printk_console_no_auto_verbose, bool, 0644);
     MODULE_PARM_DESC(console_no_auto_verbose, "Disable console loglevel raise to highest on oops/panic/etc");
 //
 // console_suspend_all - suspend the console subsystem
@@ -2482,11 +2710,10 @@ pub unsafe extern "C" fn console_verbose() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn console_suspend_all() {
-    void console_suspend_all(void)
-    {
-    struct console *con;
-    if (console_suspend_enabled)
-    pr_info("Suspending console(s) (use no_console_suspend to debug)\n");
+pub static mut con: *mut c_void = core::ptr::null_mut();
+    if (console_suspend_enabled) {
+    pr_info!("Suspending console(s) (use no_console_suspend to debug)\n");
+    }
 //
 // Flush any console backlog and then avoid queueing irq_work until
 // console_resume_all(). Until then deferred printing is no longer
@@ -2495,11 +2722,13 @@ pub unsafe extern "C" fn console_suspend_all() {
 //
     pr_flush(1000, true);
     console_irqwork_blocked = true;
-    if (!console_suspend_enabled)
+    if (!console_suspend_enabled) {
     return;
+    }
     console_list_lock();
-    for_each_console(con)
+    for_each_console(con) {
     console_srcu_write_flags(con, con.flags | CON_SUSPENDED);
+    }
     console_list_unlock();
 //
 // Ensure that all SRCU list walks have completed. All printing
@@ -2511,10 +2740,8 @@ pub unsafe extern "C" fn console_suspend_all() {
     }
 #[no_mangle]
 pub unsafe extern "C" fn console_resume_all() {
-    void console_resume_all(void)
-    {
-    struct console_flush_type ft;
-    struct console *con;
+pub static mut ft: usize = 0;
+pub static mut con: *mut c_void = core::ptr::null_mut();
 //
 // Allow queueing irq_work. After restoring console state, deferred
 // printing and any klogd waiters need to be triggered in case there
@@ -2523,8 +2750,9 @@ pub unsafe extern "C" fn console_resume_all() {
     console_irqwork_blocked = false;
     if (console_suspend_enabled) {
     console_list_lock();
-    for_each_console(con)
+    for_each_console(con) {
     console_srcu_write_flags(con, con.flags & ~CON_SUSPENDED);
+    }
     console_list_unlock();
 //
 // Ensure that all SRCU list walks have completed. All printing
@@ -2534,12 +2762,15 @@ pub unsafe extern "C" fn console_resume_all() {
     synchronize_srcu(&console_srcu);
     }
     printk_get_console_flush_type(&ft);
-    if (ft.nbcon_offload)
+    if (ft.nbcon_offload) {
     nbcon_kthreads_wake();
-    if (ft.legacy_offload)
+    }
+    if (ft.legacy_offload) {
     defer_console_output();
-    else
+    }
+    else {
     wake_up_klogd();
+    }
     pr_flush(1000, true);
     }
 //
@@ -2553,16 +2784,16 @@ pub unsafe extern "C" fn console_resume_all() {
 //
 #[no_mangle]
 unsafe extern "C" fn console_cpu_notify(cpu: c_uint) -> c_int {
-    static int console_cpu_notify(unsigned int cpu)
-    {
-    struct console_flush_type ft;
+pub static mut ft: usize = 0;
     if (!cpuhp_tasks_frozen) {
     printk_get_console_flush_type(&ft);
-    if (ft.nbcon_atomic)
+    if (ft.nbcon_atomic) {
     nbcon_atomic_flush_pending();
+    }
     if (ft.legacy_direct) {
-    if (console_trylock())
+    if (console_trylock()) {
     console_unlock();
+    }
     }
     }
     return 0;
@@ -2577,12 +2808,11 @@ unsafe extern "C" fn console_cpu_notify(cpu: c_uint) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn console_lock() {
-    void console_lock(void)
-    {
     might_sleep();
 // On panic, the console_lock must be left to the panic cpu.
-    while (panic_on_other_cpu())
+    while (panic_on_other_cpu()) {
     msleep(1000);
+    }
     down_console_sem();
     console_locked = 1;
     console_may_schedule = 1;
@@ -2598,13 +2828,13 @@ pub unsafe extern "C" fn console_lock() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn console_trylock() -> c_int {
-    int console_trylock(void)
-    {
 // On panic, the console_lock must be left to the panic cpu.
-    if (panic_on_other_cpu())
+    if (panic_on_other_cpu()) {
     return 0;
-    if (down_trylock_console_sem())
+    }
+    if (down_trylock_console_sem()) {
     return 0;
+    }
     console_locked = 1;
     console_may_schedule = 0;
     return 1;
@@ -2612,15 +2842,11 @@ pub unsafe extern "C" fn console_trylock() -> c_int {
     EXPORT_SYMBOL(console_trylock);
 #[no_mangle]
 pub unsafe extern "C" fn is_console_locked() -> c_int {
-    int is_console_locked(void)
-    {
     return console_locked;
     }
     EXPORT_SYMBOL(is_console_locked);
 #[no_mangle]
 unsafe extern "C" fn __console_unlock() {
-    static void __console_unlock(void)
-    {
     console_locked = 0;
     up_console_sem();
     }
@@ -2640,15 +2866,13 @@ unsafe extern "C" fn __console_unlock() {
     __printf(2, 3)
 #[no_mangle]
 unsafe extern "C" fn console_prepend_message(pmsg: *mut printk_message, fmt: *const c_char, ...) {
-    static void console_prepend_message(struct printk_message *pmsg, const char *fmt, ...)
-    {
-    struct printk_buffers *pbufs = pmsg.pbufs;
-    let mut scratchbuf_sz: usize = sizeof(pbufs.scratchbuf);
-    let mut outbuf_sz: usize = sizeof(pbufs.outbuf);
-    char *scratchbuf = &pbufs.scratchbuf[0];
-    char *outbuf = &pbufs.outbuf[0];
-    va_list args;
-    size_t len;
+    let mut pbufs = pmsg.pbufs;
+pub static mut scratchbuf_sz: usize = 0;
+pub static mut outbuf_sz: usize = 0;
+    let mut scratchbuf = &pbufs.scratchbuf[0];
+    let mut outbuf = &pbufs.outbuf[0];
+    let mut args;
+    let mut len = 0;
     va_start(args, fmt);
     len = vscnprintf(scratchbuf, scratchbuf_sz, fmt, args);
     va_end(args);
@@ -2658,8 +2882,9 @@ unsafe extern "C" fn console_prepend_message(pmsg: *mut printk_message, fmt: *co
 // It is a rather theoretical problem when someone tries to
 // use a minimalist buffer.
 //
-    if (WARN_ON_ONCE(len + PRINTK_PREFIX_MAX >= outbuf_sz))
+    if (WARN_ON_ONCE!(len + PRINTK_PREFIX_MAX >= outbuf_sz)) {
     return;
+    }
     if (pmsg.outbuf_len + len >= outbuf_sz) {
 // Truncate the message, but keep it terminated.
     pmsg.outbuf_len = outbuf_sz - (len + 1);
@@ -2679,8 +2904,6 @@ unsafe extern "C" fn console_prepend_message(pmsg: *mut printk_message, fmt: *co
 //
 #[no_mangle]
 pub unsafe extern "C" fn console_prepend_dropped(pmsg: *mut printk_message, dropped: c_ulong) {
-    void console_prepend_dropped(struct printk_message *pmsg, unsigned long dropped)
-    {
     console_prepend_message(pmsg, "** %lu printk messages dropped **\n", dropped);
     }
 //
@@ -2691,8 +2914,6 @@ pub unsafe extern "C" fn console_prepend_dropped(pmsg: *mut printk_message, drop
 //
 #[no_mangle]
 pub unsafe extern "C" fn console_prepend_replay(pmsg: *mut printk_message) {
-    void console_prepend_replay(struct printk_message *pmsg)
-    {
     console_prepend_message(pmsg, "** replaying previous printk message **\n");
     }
 //
@@ -2714,18 +2935,17 @@ pub unsafe extern "C" fn console_prepend_replay(pmsg: *mut printk_message) {
 // of @pmsg are valid. (See the documentation of struct printk_message
 // for information about the @pmsg fields.)
 //
-    bool printk_get_next_message(struct printk_message *pmsg, u64 seq,
-    bool is_extended, bool may_suppress)
-    {
-    struct printk_buffers *pbufs = pmsg.pbufs;
-    let mut scratchbuf_sz: usize = sizeof(pbufs.scratchbuf);
-    let mut outbuf_sz: usize = sizeof(pbufs.outbuf);
-    char *scratchbuf = &pbufs.scratchbuf[0];
-    char *outbuf = &pbufs.outbuf[0];
-    struct printk_info info;
-    struct printk_record r;
-    let mut len: usize = 0;
-    bool force_con;
+#[no_mangle]
+pub unsafe extern "C" fn printk_get_next_message(pmsg: *mut printk_message, seq: u64, is_extended: bool, may_suppress: bool) -> bool {
+    let mut pbufs = pmsg.pbufs;
+pub static mut scratchbuf_sz: usize = 0;
+pub static mut outbuf_sz: usize = 0;
+    let mut scratchbuf = &pbufs.scratchbuf[0];
+    let mut outbuf = &pbufs.outbuf[0];
+pub static mut info: usize = 0;
+pub static mut r: usize = 0;
+pub static mut len: usize = 0;
+    let mut force_con = 0;
 //
 // Formatting extended messages requires a separate buffer, so use the
 // scratch buffer to read in the ringbuffer text.
@@ -2733,12 +2953,15 @@ pub unsafe extern "C" fn console_prepend_replay(pmsg: *mut printk_message) {
 // Formatting normal messages is done in-place, so read the ringbuffer
 // text directly into the output buffer.
 //
-    if (is_extended)
+    if (is_extended) {
     prb_rec_init_rd(&r, &info, scratchbuf, scratchbuf_sz);
-    else
+    }
+    else {
     prb_rec_init_rd(&r, &info, outbuf, outbuf_sz);
-    if (!prb_read_valid(prb, seq, &r))
+    }
+    if (!prb_read_valid(prb, seq, &r)) {
     return false;
+    }
     pmsg.seq = r.info.seq;
     pmsg.dropped = r.info.seq - seq;
     force_con = r.info.flags & LOG_FORCE_CON;
@@ -2747,8 +2970,9 @@ pub unsafe extern "C" fn console_prepend_replay(pmsg: *mut printk_message) {
 // Skip records that are not forced to be printed on consoles and that
 // has level above the console loglevel.
 //
-    if (!force_con && may_suppress && suppress_message_printing(r.info.level))
-    goto out;
+    if (!force_con && may_suppress && suppress_message_printing(r.info.level)) {
+// goto;
+    }
     if (is_extended) {
     len = info_print_ext_header(outbuf, outbuf_sz, r.info);
     len += msg_print_ext_body(outbuf + len, outbuf_sz - len,
@@ -2756,7 +2980,7 @@ pub unsafe extern "C" fn console_prepend_replay(pmsg: *mut printk_message) {
     } else {
     len = record_print_text(&r, console_msg_format & MSG_FORMAT_SYSLOG, printk_time);
     }
-    out:
+// label;
     pmsg.outbuf_len = len;
     return true;
     }
@@ -2769,20 +2993,22 @@ pub unsafe extern "C" fn console_prepend_replay(pmsg: *mut printk_message) {
 // lockdep that a sleeping spin lock (spinlock_t) is valid here.
 //
 
-    static inline void printk_legacy_allow_spinlock_enter(void) { }
-    static inline void printk_legacy_allow_spinlock_exit(void) { }
-
-    static DEFINE_WAIT_OVERRIDE_MAP(printk_legacy_map, LD_WAIT_CONFIG);
 #[no_mangle]
-pub unsafe extern "C" fn printk_legacy_allow_spinlock_enter() {
-    static inline void printk_legacy_allow_spinlock_enter(void)
-    {
+pub unsafe extern "C" fn printk_legacy_allow_spinlock_enter() { }
+#[no_mangle]
+pub unsafe extern "C" fn printk_legacy_allow_spinlock_exit() { }
+
+pub static mut printk_legacy_map: usize = 0;
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: printk_legacy_allow_spinlock_enter
+pub unsafe extern "C" fn printk_legacy_allow_spinlock_enter_dup() {
     lock_map_acquire_try(&printk_legacy_map);
     }
 #[no_mangle]
-pub unsafe extern "C" fn printk_legacy_allow_spinlock_exit() {
-    static inline void printk_legacy_allow_spinlock_exit(void)
-    {
+#[no_mangle]
+// duplicate fn: printk_legacy_allow_spinlock_exit
+pub unsafe extern "C" fn printk_legacy_allow_spinlock_exit_dup() {
     lock_map_release(&printk_legacy_map);
     }
 
@@ -2791,7 +3017,7 @@ pub unsafe extern "C" fn printk_legacy_allow_spinlock_exit() {
 // This is for legacy (!CON_NBCON) as well as all boot (CON_BOOT) consoles.
 // Its usage requires the console_lock held.
 //
-    struct printk_buffers printk_shared_pbufs;
+pub static mut printk_shared_pbufs: usize = 0;
 //
 // Print one record for the given console. The record printed is whatever
 // record is the next available record for the given console.
@@ -2809,22 +3035,19 @@ pub unsafe extern "C" fn printk_legacy_allow_spinlock_exit() {
 //
 #[no_mangle]
 unsafe extern "C" fn console_emit_next_record(con: *mut console, handover: *mut bool, cookie: c_int) -> bool {
-    static bool console_emit_next_record(struct console *con, bool *handover, int cookie)
-    {
-    let mut is_extended: bool = console_srcu_read_flags(con) & CON_EXTENDED;
-    char *outbuf = &printk_shared_pbufs.outbuf[0];
-    struct printk_message pmsg = {
-    .pbufs = &printk_shared_pbufs,
-    };
-    unsigned long flags;
+pub static mut is_extended: bool = false;
+    let mut outbuf = &printk_shared_pbufs.outbuf[0];
+pub static mut printk_message: usize = 0;
+    let mut flags = 0;
 // handover = false;
-    if (!printk_get_next_message(&pmsg, con.seq, is_extended, true))
+    if (!printk_get_next_message(&pmsg, con.seq, is_extended, true)) {
     return false;
+    }
     con.dropped += pmsg.dropped;
 // Skip messages of formatted length 0.
     if (pmsg.outbuf_len == 0) {
     con.seq = pmsg.seq + 1;
-    goto skip;
+// goto;
     }
     if (con.dropped && !is_extended) {
     console_prepend_dropped(&pmsg, con.dropped);
@@ -2863,18 +3086,17 @@ unsafe extern "C" fn console_emit_next_record(con: *mut console, handover: *mut 
 // handover = console_lock_spinning_disable_and_check(cookie);
     printk_safe_exit_irqrestore(flags);
     }
-    skip:
+// label;
     return true;
     }
 
 #[no_mangle]
 unsafe extern "C" fn console_emit_next_record(con: *mut console, handover: *mut bool, cookie: c_int) -> bool {
-    static bool console_emit_next_record(struct console *con, bool *handover, int cookie)
-    {
 // handover = false;
     return false;
     }
-    static inline void printk_kthreads_check_locked(void) { }
+#[no_mangle]
+pub unsafe extern "C" fn printk_kthreads_check_locked() { }
 
 //
 // Print out one record for each console.
@@ -2900,29 +3122,30 @@ unsafe extern "C" fn console_emit_next_record(con: *mut console, handover: *mut 
 //
 // Requires the console_lock.
 //
-    static bool console_flush_one_record(bool do_cond_resched, u64 *next_seq, bool *handover,
-    bool *try_again)
-    {
-    struct console_flush_type ft;
-    let mut any_usable: bool = false;
-    struct console *con;
-    int cookie;
+#[no_mangle]
+pub unsafe extern "C" fn console_flush_one_record(do_cond_resched: bool, next_seq: *mut u64, handover: *mut bool, try_again: *mut bool) -> bool {
+pub static mut ft: usize = 0;
+pub static mut any_usable: bool = false;
+pub static mut con: *mut c_void = core::ptr::null_mut();
+    let mut cookie = 0;
 // try_again = false;
     printk_get_console_flush_type(&ft);
     cookie = console_srcu_read_lock();
     for_each_console_srcu(con) {
-    let mut flags: c_short = console_srcu_read_flags(con);
-    u64 printk_seq;
-    bool progress;
+pub static mut flags: c_short = 0;
+    let mut printk_seq = 0;
+    let mut progress = 0;
 //
 // console_flush_one_record() is only responsible for
 // nbcon consoles when the nbcon consoles cannot print via
 // their atomic or threaded flushing.
 //
-    if ((flags & CON_NBCON) && (ft.nbcon_atomic || ft.nbcon_offload))
+    if ((flags & CON_NBCON) && (ft.nbcon_atomic || ft.nbcon_offload)) {
     continue;
-    if (!console_is_usable(con, flags, !do_cond_resched))
+    }
+    if (!console_is_usable(con, flags, !do_cond_resched)) {
     continue;
+    }
     any_usable = true;
     if (flags & CON_NBCON) {
     progress = nbcon_legacy_emit_next_record(con, handover, cookie,
@@ -2934,37 +3157,44 @@ unsafe extern "C" fn console_emit_next_record(con: *mut console, handover: *mut 
 // If a handover has occurred, the SRCU read lock
 // is already released.
 //
-    if (*handover)
-    goto fail;
+    if (*handover) {
+// goto;
+    }
 //
 // @con can be used here now that it is certain that this
 // context is still holding the SRCU read lock.
 //
-    if (flags & CON_NBCON)
+    if (flags & CON_NBCON) {
     printk_seq = nbcon_seq_read(con);
-    else
+    }
+    else {
     printk_seq = con.seq;
+    }
 // Track the next of the highest seq flushed.
-    if (printk_seq > *next_seq)
+    if (printk_seq > *next_seq) {
 // next_seq = printk_seq;
-    if (!progress)
+    }
+    if (!progress) {
     continue;
+    }
 //
 // A usable console made progress. There might still be
 // pending messages.
 //
 // try_again = true;
 // Allow panic_cpu to take over the consoles safely.
-    if (panic_on_other_cpu())
-    goto fail_srcu;
-    if (do_cond_resched)
+    if (panic_on_other_cpu()) {
+// goto;
+    }
+    if (do_cond_resched) {
     cond_resched();
+    }
     }
     console_srcu_read_unlock(cookie);
     return any_usable;
-    fail_srcu:
+// label;
     console_srcu_read_unlock(cookie);
-    fail:
+// label;
 // try_again = false;
     return false;
     }
@@ -2993,10 +3223,8 @@ unsafe extern "C" fn console_emit_next_record(con: *mut console, handover: *mut 
 //
 #[no_mangle]
 unsafe extern "C" fn console_flush_all(do_cond_resched: bool, next_seq: *mut u64, handover: *mut bool) -> bool {
-    static bool console_flush_all(bool do_cond_resched, u64 *next_seq, bool *handover)
-    {
-    bool try_again;
-    bool ret;
+    let mut try_again = 0;
+    let mut ret = 0;
 // next_seq = 0;
 // handover = false;
     do {
@@ -3007,12 +3235,10 @@ unsafe extern "C" fn console_flush_all(do_cond_resched: bool, next_seq: *mut u64
     }
 #[no_mangle]
 unsafe extern "C" fn __console_flush_and_unlock() {
-    static void __console_flush_and_unlock(void)
-    {
-    bool do_cond_resched;
-    bool handover;
-    bool flushed;
-    u64 next_seq;
+    let mut do_cond_resched = 0;
+    let mut handover = 0;
+    let mut flushed = 0;
+    let mut next_seq = 0;
 //
 // Console drivers are called with interrupts disabled, so
 // @console_may_schedule should be cleared before; however, we may
@@ -3028,16 +3254,18 @@ unsafe extern "C" fn __console_flush_and_unlock() {
     do {
     console_may_schedule = 0;
     flushed = console_flush_all(do_cond_resched, &next_seq, &handover);
-    if (!handover)
+    if (!handover) {
     __console_unlock();
+    }
 //
 // Abort if there was a failure to flush all messages to all
 // usable consoles. Either it is not possible to flush (in
 // which case it would be an infinite loop of retrying) or
 // another context has taken over printing.
 //
-    if (!flushed)
+    if (!flushed) {
     break;
+    }
 //
 // Some context may have added new records after
 // console_flush_all() but before unlocking the console.
@@ -3060,23 +3288,21 @@ unsafe extern "C" fn __console_flush_and_unlock() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn console_unlock() {
-    void console_unlock(void)
-    {
-    struct console_flush_type ft;
+pub static mut ft: usize = 0;
     printk_get_console_flush_type(&ft);
-    if (ft.legacy_direct)
+    if (ft.legacy_direct) {
     __console_flush_and_unlock();
-    else
+    }
+    else {
     __console_unlock();
+    }
     }
     EXPORT_SYMBOL(console_unlock);
 #[no_mangle]
 pub unsafe extern "C" fn console_unblank() {
-    void console_unblank(void)
-    {
-    let mut found_unblank: bool = false;
-    struct console *c;
-    int cookie;
+pub static mut found_unblank: bool = false;
+pub static mut c: *mut c_void = core::ptr::null_mut();
+    let mut cookie = 0;
 //
 // First check if there are any consoles implementing the unblank()
 // callback. If not, there is no reason to continue and take the
@@ -3085,16 +3311,18 @@ pub unsafe extern "C" fn console_unblank() {
 //
     cookie = console_srcu_read_lock();
     for_each_console_srcu(c) {
-    if (!console_is_usable(c, console_srcu_read_flags(c), true))
+    if (!console_is_usable(c, console_srcu_read_flags(c), true)) {
     continue;
+    }
     if (c.unblank) {
     found_unblank = true;
     break;
     }
     }
     console_srcu_read_unlock(cookie);
-    if (!found_unblank)
+    if (!found_unblank) {
     return;
+    }
 //
 // Stop console printing because the unblank() callback may
 // assume the console is not within its write() callback.
@@ -3104,31 +3332,37 @@ pub unsafe extern "C" fn console_unblank() {
 //
     if (oops_in_progress) {
 // Semaphores are not NMI-safe.
-    if (in_nmi())
+    if (in_nmi()) {
     return;
+    }
 //
 // Attempting to trylock the console lock can deadlock
 // if another CPU was stopped while modifying the
 // semaphore. "Hope and pray" that this is not the
 // current situation.
 //
-    if (down_trylock_console_sem() != 0)
+    if (down_trylock_console_sem() != 0) {
     return;
-    } else
+    }
+    } else {
     console_lock();
+    }
     console_locked = 1;
     console_may_schedule = 0;
     cookie = console_srcu_read_lock();
     for_each_console_srcu(c) {
-    if (!console_is_usable(c, console_srcu_read_flags(c), true))
+    if (!console_is_usable(c, console_srcu_read_flags(c), true)) {
     continue;
-    if (c.unblank)
+    }
+    if (c.unblank) {
     c.unblank();
+    }
     }
     console_srcu_read_unlock(cookie);
     console_unlock();
-    if (!oops_in_progress)
+    if (!oops_in_progress) {
     pr_flush(1000, true);
+    }
     }
 //
 // Rewind all consoles to the oldest available record.
@@ -3139,12 +3373,10 @@ pub unsafe extern "C" fn console_unblank() {
 //
 #[no_mangle]
 unsafe extern "C" fn __console_rewind_all() {
-    static void __console_rewind_all(void)
-    {
-    struct console *c;
-    short flags;
-    int cookie;
-    u64 seq;
+pub static mut c: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut cookie = 0;
+    let mut seq = 0;
     seq = prb_first_valid_seq(prb);
     cookie = console_srcu_read_lock();
     for_each_console_srcu(c) {
@@ -3169,12 +3401,10 @@ unsafe extern "C" fn __console_rewind_all() {
 // Immediately output all pending messages no matter what.
 //
 #[no_mangle]
-pub unsafe extern "C" fn console_flush_on_panic(mode: enum con_flush_mode) {
-    void console_flush_on_panic(enum con_flush_mode mode)
-    {
-    struct console_flush_type ft;
-    bool handover;
-    u64 next_seq;
+pub unsafe extern "C" fn console_flush_on_panic(mode: con_flush_mode) {
+pub static mut ft: usize = 0;
+    let mut handover = 0;
+    let mut next_seq = 0;
 //
 // Ignore the console lock and flush out the messages. Attempting a
 // trylock would not be useful because:
@@ -3189,23 +3419,26 @@ pub unsafe extern "C" fn console_flush_on_panic(mode: enum con_flush_mode) {
 // this context does not call cond_resched() while flushing.
 //
     console_may_schedule = 0;
-    if (mode == CONSOLE_REPLAY_ALL)
+    if (mode == CONSOLE_REPLAY_ALL) {
     __console_rewind_all();
+    }
     printk_get_console_flush_type(&ft);
-    if (ft.nbcon_atomic)
+    if (ft.nbcon_atomic) {
     nbcon_atomic_flush_pending();
+    }
 // Flush legacy consoles once allowed, even when dangerous.
-    if (legacy_allow_panic_sync)
+    if (legacy_allow_panic_sync) {
     console_flush_all(false, &next_seq, &handover);
+    }
     }
 //
 // Return the console tty driver structure and its associated index
 //
-    struct tty_driver *console_device(int *index)
-    {
-    struct console *c;
-    struct tty_driver *driver = core::ptr::null_mut();
-    int cookie;
+#[no_mangle]
+pub unsafe extern "C" fn console_device(index: *mut c_int) -> *mut c_void {
+pub static mut c: *mut c_void = core::ptr::null_mut();
+    let mut driver = core::ptr::null_mut();
+    let mut cookie = 0;
 //
 // Take console_lock to serialize device() callback with
 // other console operations. For example, fg_console is
@@ -3214,11 +3447,13 @@ pub unsafe extern "C" fn console_flush_on_panic(mode: enum con_flush_mode) {
     console_lock();
     cookie = console_srcu_read_lock();
     for_each_console_srcu(c) {
-    if (!c.device)
+    if (!c.device) {
     continue;
+    }
     driver = c.device(c, index);
-    if (driver)
+    if (driver) {
     break;
+    }
     }
     console_srcu_read_unlock(cookie);
     console_unlock();
@@ -3231,8 +3466,6 @@ pub unsafe extern "C" fn console_flush_on_panic(mode: enum con_flush_mode) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn console_suspend(console: *mut console) {
-    void console_suspend(struct console *console)
-    {
     __pr_flush(console, 1000, true);
     console_list_lock();
     console_srcu_write_flags(console, console.flags & ~CON_ENABLED);
@@ -3248,10 +3481,8 @@ pub unsafe extern "C" fn console_suspend(console: *mut console) {
     EXPORT_SYMBOL(console_suspend);
 #[no_mangle]
 pub unsafe extern "C" fn console_resume(console: *mut console) {
-    void console_resume(struct console *console)
-    {
-    struct console_flush_type ft;
-    bool is_nbcon;
+pub static mut ft: usize = 0;
+    let mut is_nbcon = 0;
     console_list_lock();
     console_srcu_write_flags(console, console.flags | CON_ENABLED);
     is_nbcon = console.flags & CON_NBCON;
@@ -3263,44 +3494,46 @@ pub unsafe extern "C" fn console_resume(console: *mut console) {
 //
     synchronize_srcu(&console_srcu);
     printk_get_console_flush_type(&ft);
-    if (is_nbcon && ft.nbcon_offload)
+    if (is_nbcon && ft.nbcon_offload) {
     nbcon_kthread_wake(console);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: ft.legacy_offload) -> else {
-    else if (ft.legacy_offload)
+    }
+
+    else if (ft.legacy_offload) {
     defer_console_output();
+    }
     __pr_flush(console, 1000, true);
     }
     EXPORT_SYMBOL(console_resume);
 
-    static int unregister_console_locked(struct console *console);
+// forward_decl: unregister_console_locked;
 // True when system boot is far enough to create printer threads.
     bool printk_kthreads_ready __ro_after_init;
-    static struct task_struct *printk_legacy_kthread;
+pub static mut printk_legacy_kthread: *mut c_void = core::ptr::null_mut();
 #[no_mangle]
 unsafe extern "C" fn legacy_kthread_should_wakeup() -> bool {
-    static bool legacy_kthread_should_wakeup(void)
-    {
-    struct console_flush_type ft;
-    struct console *con;
-    let mut ret: bool = false;
-    int cookie;
-    if (kthread_should_stop())
+pub static mut ft: usize = 0;
+pub static mut con: *mut c_void = core::ptr::null_mut();
+pub static mut ret: bool = false;
+    let mut cookie = 0;
+    if (kthread_should_stop()) {
     return true;
+    }
     printk_get_console_flush_type(&ft);
     cookie = console_srcu_read_lock();
     for_each_console_srcu(con) {
-    let mut flags: c_short = console_srcu_read_flags(con);
-    u64 printk_seq;
+pub static mut flags: c_short = 0;
+    let mut printk_seq = 0;
 //
 // The legacy printer thread is only responsible for nbcon
 // consoles when the nbcon consoles cannot print via their
 // atomic or threaded flushing.
 //
-    if ((flags & CON_NBCON) && (ft.nbcon_atomic || ft.nbcon_offload))
+    if ((flags & CON_NBCON) && (ft.nbcon_atomic || ft.nbcon_offload)) {
     continue;
-    if (!console_is_usable(con, flags, false))
+    }
+    if (!console_is_usable(con, flags, false)) {
     continue;
+    }
     if (flags & CON_NBCON) {
     printk_seq = nbcon_seq_read(con);
     } else {
@@ -3320,32 +3553,30 @@ unsafe extern "C" fn legacy_kthread_should_wakeup() -> bool {
     }
 #[no_mangle]
 unsafe extern "C" fn legacy_kthread_func(unused: *mut c_void) -> c_int {
-    static int legacy_kthread_func(void *unused)
-    {
-    bool try_again;
-    wait_for_event:
+    let mut try_again = 0;
+// label;
     wait_event_interruptible(legacy_wait, legacy_kthread_should_wakeup());
     do {
-    let mut handover: bool = false;
-    let mut next_seq: u64 = 0;
-    if (kthread_should_stop())
+pub static mut handover: bool = false;
+pub static mut next_seq: u64 = 0;
+    if (kthread_should_stop()) {
     return 0;
+    }
     console_lock();
     console_flush_one_record(true, &next_seq, &handover, &try_again);
-    if (!handover)
+    if (!handover) {
     __console_unlock();
+    }
     } while (try_again);
-    goto wait_for_event;
+// goto;
     }
 #[no_mangle]
 unsafe extern "C" fn legacy_kthread_create() -> bool {
-    static bool legacy_kthread_create(void)
-    {
-    struct task_struct *kt;
+pub static mut kt: *mut c_void = core::ptr::null_mut();
     lockdep_assert_console_list_lock_held();
     kt = kthread_run(legacy_kthread_func, core::ptr::null_mut(), "pr/legacy");
-    if (WARN_ON(IS_ERR(kt))) {
-    pr_err("failed to start legacy printing thread\n");
+    if (WARN_ON!(IS_ERR(kt))) {
+    pr_err!("failed to start legacy printing thread\n");
     return false;
     }
     printk_legacy_kthread = kt;
@@ -3366,15 +3597,14 @@ unsafe extern "C" fn legacy_kthread_create() -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn printk_kthreads_shutdown(data: *mut c_void) {
-    static void printk_kthreads_shutdown(void *data)
-    {
-    struct console *con;
+pub static mut con: *mut c_void = core::ptr::null_mut();
     console_list_lock();
     if (printk_kthreads_running) {
     printk_kthreads_running = false;
     for_each_console(con) {
-    if (con.flags & CON_NBCON)
+    if (con.flags & CON_NBCON) {
     nbcon_kthread_stop(con);
+    }
     }
 //
 // The threads may have been stopped while printing a
@@ -3384,12 +3614,8 @@ unsafe extern "C" fn printk_kthreads_shutdown(data: *mut c_void) {
     }
     console_list_unlock();
     }
-    static const struct syscore_ops printk_syscore_ops = {
-    .shutdown = printk_kthreads_shutdown,
-    };
-    static struct syscore printk_syscore = {
-    .ops = &printk_syscore_ops,
-    };
+pub static mut syscore_ops: usize = 0;
+pub static mut syscore: usize = 0;
 //
 // If appropriate, start nbcon kthreads and set @printk_kthreads_running.
 // If any kthreads fail to start, those consoles are unregistered.
@@ -3398,13 +3624,12 @@ unsafe extern "C" fn printk_kthreads_shutdown(data: *mut c_void) {
 //
 #[no_mangle]
 unsafe extern "C" fn printk_kthreads_check_locked() {
-    static void printk_kthreads_check_locked(void)
-    {
-    struct hlist_node *tmp;
-    struct console *con;
+pub static mut tmp: *mut c_void = core::ptr::null_mut();
+pub static mut con: *mut c_void = core::ptr::null_mut();
     lockdep_assert_console_list_lock_held();
-    if (!printk_kthreads_ready)
+    if (!printk_kthreads_ready) {
     return;
+    }
 // Start or stop the legacy kthread when needed.
     if (have_legacy_console || have_boot_console) {
     if (!printk_legacy_kthread &&
@@ -3416,8 +3641,9 @@ unsafe extern "C" fn printk_kthreads_check_locked() {
 // kthread.
 //
     hlist_for_each_entry_safe(con, tmp, &console_list, node) {
-    if (con.flags & CON_NBCON)
+    if (con.flags & CON_NBCON) {
     continue;
+    }
     unregister_console_locked(con);
     }
     }
@@ -3437,20 +3663,21 @@ unsafe extern "C" fn printk_kthreads_check_locked() {
     printk_kthreads_running = false;
     return;
     }
-    if (printk_kthreads_running)
+    if (printk_kthreads_running) {
     return;
+    }
     hlist_for_each_entry_safe(con, tmp, &console_list, node) {
-    if (!(con.flags & CON_NBCON))
+    if (!(con.flags & CON_NBCON)) {
     continue;
-    if (!nbcon_kthread_create(con))
+    }
+    if (!nbcon_kthread_create(con)) {
     unregister_console_locked(con);
+    }
     }
     printk_kthreads_running = true;
     }
 #[no_mangle]
-unsafe extern "C" fn printk_set_kthreads_ready() -> int __init {
-    static int __init printk_set_kthreads_ready(void)
-    {
+unsafe extern "C" fn printk_set_kthreads_ready() -> c_int {
     register_syscore(&printk_syscore);
     console_list_lock();
     printk_kthreads_ready = true;
@@ -3458,25 +3685,22 @@ unsafe extern "C" fn printk_set_kthreads_ready() -> int __init {
     console_list_unlock();
     return 0;
     }
-    early_initcall(printk_set_kthreads_ready);
+    early_initcall!(printk_set_kthreads_ready);
 
-    static int __read_mostly keep_bootcon;
+    static int  keep_bootcon;
 #[no_mangle]
-unsafe extern "C" fn keep_bootcon_setup(str: *mut c_char) -> int __init {
-    static int __init keep_bootcon_setup(char *str)
-    {
+unsafe extern "C" fn keep_bootcon_setup(str: *mut c_char) -> c_int {
     keep_bootcon = 1;
-    pr_info("debug: skip boot console de-registration.\n");
+    pr_info!("debug: skip boot console de-registration.\n");
     return 0;
     }
-    early_param("keep_bootcon", keep_bootcon_setup);
+    early_param!("keep_bootcon", keep_bootcon_setup);
 #[no_mangle]
 unsafe extern "C" fn console_call_setup(newcon: *mut console, options: *mut c_char) -> c_int {
-    static int console_call_setup(struct console *newcon, char *options)
-    {
-    int err;
-    if (!newcon.setup)
+    let mut err = 0;
+    if (!newcon.setup) {
     return 0;
+    }
 // Synchronize with possible boot console.
     console_lock();
     err = newcon.setup(newcon, options);
@@ -3489,39 +3713,45 @@ unsafe extern "C" fn console_call_setup(newcon: *mut console, options: *mut c_ch
 // by either the command line or add_preferred_console() and
 // setup/enable it.
 //
-    static int try_enable_preferred_console(struct console *newcon,
-    bool user_specified)
-    {
-    struct console_cmdline *c;
-    int i, err;
-    for (i = 0, c = console_cmdline;
-    i < MAX_CMDLINECONSOLES && (c.name[0] || c.devname[0]);
-    i++, c++) {
+#[no_mangle]
+pub unsafe extern "C" fn try_enable_preferred_console(newcon: *mut console, user_specified: bool) -> c_int {
+pub static mut c: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    let mut err = 0;
+    while (i < MAX_CMDLINECONSOLES && (c.name[0] || c.devname[0])) {
 // Console not yet initialized?
-    if (!c.name[0])
+    if (!c.name[0]) {
     continue;
-    if (c.user_specified != user_specified)
+    }
+    if (c.user_specified != user_specified) {
     continue;
+    }
     if (!newcon.match ||
     newcon.match(newcon, c.name, c.index, c.options) != 0) {
 // default matching
-    BUILD_BUG_ON(sizeof(c.name) != sizeof(newcon.name));
-    if (strcmp(c.name, newcon.name) != 0)
+    BUILD_BUG_ON!(sizeof!(c.name) != sizeof!(newcon.name));
+    if (strcmp(c.name, newcon.name) != 0) {
     continue;
+    }
     if (newcon.index >= 0 &&
-    newcon.index != c.index)
+    newcon.index != c.index) {
     continue;
-    if (newcon.index < 0)
+    }
+    if (newcon.index < 0) {
     newcon.index = c.index;
-    if (_braille_register_console(newcon, c))
+    }
+    if (_braille_register_console(newcon, c)) {
     return 0;
+    }
     err = console_call_setup(newcon, c.options);
-    if (err)
+    if (err) {
     return err;
     }
+    }
     newcon.flags |= CON_ENABLED;
-    if (i == preferred_console)
+    if (i == preferred_console) {
     newcon.flags |= CON_CONSDEV;
+    }
     return 0;
     }
     return -ENOENT;
@@ -3529,24 +3759,23 @@ unsafe extern "C" fn console_call_setup(newcon: *mut console, options: *mut c_ch
 // Try to enable the console unconditionally
 #[no_mangle]
 unsafe extern "C" fn try_enable_default_console(newcon: *mut console) {
-    static void try_enable_default_console(struct console *newcon)
-    {
-    if (newcon.index < 0)
+    if (newcon.index < 0) {
     newcon.index = 0;
-    if (console_call_setup(newcon, core::ptr::null_mut()) != 0)
+    }
+    if (console_call_setup(newcon, core::ptr::null_mut()) != 0) {
     return;
+    }
     newcon.flags |= CON_ENABLED;
-    if (newcon.device)
+    if (newcon.device) {
     newcon.flags |= CON_CONSDEV;
+    }
     }
 // Return the starting sequence number for a newly registered console.
 #[no_mangle]
 unsafe extern "C" fn get_init_console_seq(newcon: *mut console, bootcon_registered: bool) -> u64 {
-    static u64 get_init_console_seq(struct console *newcon, bool bootcon_registered)
-    {
-    struct console *con;
-    bool handover;
-    u64 init_seq;
+pub static mut con: *mut c_void = core::ptr::null_mut();
+    let mut handover = 0;
+    let mut init_seq = 0;
     if (newcon.flags & (CON_PRINTBUFFER | CON_BOOT)) {
 // Get a consistent copy of @syslog_seq.
     mutex_lock(&syslog_lock);
@@ -3581,21 +3810,25 @@ unsafe extern "C" fn get_init_console_seq(newcon: *mut console, bootcon_register
 // If there was a handover, this context no
 // longer holds the console_lock.
 //
-    if (handover)
+    if (handover) {
     console_lock();
+    }
     init_seq = prb_next_seq(prb);
     for_each_console(con) {
-    u64 seq;
+    let mut seq = 0;
     if (!(con.flags & CON_BOOT) ||
     !(con.flags & CON_ENABLED)) {
     continue;
     }
-    if (con.flags & CON_NBCON)
+    if (con.flags & CON_NBCON) {
     seq = nbcon_seq_read(con);
-    else
+    }
+    else {
     seq = con.seq;
-    if (seq < init_seq)
+    }
+    if (seq < init_seq) {
     init_seq = seq;
+    }
     }
     }
     console_unlock();
@@ -3604,8 +3837,8 @@ unsafe extern "C" fn get_init_console_seq(newcon: *mut console, bootcon_register
     return init_seq;
     }
 
-    hlist_entry(console_list.first, struct console, node)
-    static int unregister_console_locked(struct console *console);
+    hlist_entry(console_list.first, console, node)
+// forward_decl: unregister_console_locked;
 //
 // The console driver calls this routine during kernel initialization
 // to register the console printing procedure with printk() and to
@@ -3627,39 +3860,40 @@ unsafe extern "C" fn get_init_console_seq(newcon: *mut console, bootcon_register
 //
 #[no_mangle]
 pub unsafe extern "C" fn register_console(newcon: *mut console) {
-    void register_console(struct console *newcon)
-    {
-    let mut use_device_lock: bool = (newcon.flags & CON_NBCON) && newcon.write_atomic;
-    let mut bootcon_registered: bool = false;
-    let mut realcon_registered: bool = false;
-    struct console *con;
-    unsigned long flags;
-    u64 init_seq;
-    int err;
+pub static mut use_device_lock: bool = false;
+pub static mut bootcon_registered: bool = false;
+pub static mut realcon_registered: bool = false;
+pub static mut con: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut init_seq = 0;
+    let mut err = 0;
     console_list_lock();
     for_each_console(con) {
     if (WARN(con == newcon, "console '%s%d' already registered\n",
     con.name, con.index)) {
-    goto unlock;
+// goto;
     }
-    if (con.flags & CON_BOOT)
+    if (con.flags & CON_BOOT) {
     bootcon_registered = true;
-    else
+    }
+    else {
     realcon_registered = true;
+    }
     }
 // Do not register boot consoles when there already is a real one.
     if ((newcon.flags & CON_BOOT) && realcon_registered) {
-    pr_info("Too late to register bootconsole %s%d\n",
+    pr_info!("Too late to register bootconsole %s%d\n",
     newcon.name, newcon.index);
-    goto unlock;
+// goto;
     }
     if (newcon.flags & CON_NBCON) {
 //
 // Ensure the nbcon console buffers can be allocated
 // before modifying any global data.
 //
-    if (!nbcon_alloc(newcon))
-    goto unlock;
+    if (!nbcon_alloc(newcon)) {
+// goto;
+    }
     }
 //
 // See if we want to enable this console driver by default.
@@ -3682,20 +3916,23 @@ pub unsafe extern "C" fn register_console(newcon: *mut console) {
 // See if this console matches one we selected on the command line
     err = try_enable_preferred_console(newcon, true);
 // If not, try to match against the platform default(s)
-    if (err == -ENOENT)
+    if (err == -ENOENT) {
     err = try_enable_preferred_console(newcon, false);
+    }
 //
 // Some consoles, such as pstore and netconsole, can be enabled even
 // without matching. Accept them at this stage when they had a chance
 // to match() and call setup().
 //
-    if (err == -ENOENT && (newcon.flags & CON_ENABLED))
+    if (err == -ENOENT && (newcon.flags & CON_ENABLED)) {
     err = 0;
+    }
 // printk() messages are not printed to the Braille console.
     if (err || newcon.flags & CON_BRL) {
-    if (newcon.flags & CON_NBCON)
+    if (newcon.flags & CON_NBCON) {
     nbcon_free(newcon);
-    goto unlock;
+    }
+// goto;
     }
 //
 // If we have a bootconsole, and are switching to a real console,
@@ -3716,8 +3953,9 @@ pub unsafe extern "C" fn register_console(newcon: *mut console) {
     have_legacy_console = true;
     newcon.seq = init_seq;
     }
-    if (newcon.flags & CON_BOOT)
+    if (newcon.flags & CON_BOOT) {
     have_boot_console = true;
+    }
 //
 // If another context is actively using the hardware of this new
 // console, it will not be aware of the nbcon synchronization. This
@@ -3728,8 +3966,9 @@ pub unsafe extern "C" fn register_console(newcon: *mut console) {
 // Use the driver synchronization to ensure that the hardware is not
 // in use while this new console transitions to being registered.
 //
-    if (use_device_lock)
+    if (use_device_lock) {
     newcon.device_lock(newcon, &flags);
+    }
 //
 // Put this console in the list - keep the
 // preferred driver at the head of the list.
@@ -3751,8 +3990,9 @@ pub unsafe extern "C" fn register_console(newcon: *mut console) {
 // register_console() completes.
 //
 // This new console is now registered.
-    if (use_device_lock)
+    if (use_device_lock) {
     newcon.device_unlock(newcon, flags);
+    }
     console_sysfs_notify();
 //
 // By unregistering the bootconsoles after we enable the real console
@@ -3765,56 +4005,61 @@ pub unsafe extern "C" fn register_console(newcon: *mut console) {
     if (bootcon_registered &&
     ((newcon.flags & (CON_CONSDEV | CON_BOOT)) == CON_CONSDEV) &&
     !keep_bootcon) {
-    struct hlist_node *tmp;
+pub static mut tmp: *mut c_void = core::ptr::null_mut();
     hlist_for_each_entry_safe(con, tmp, &console_list, node) {
-    if (con.flags & CON_BOOT)
+    if (con.flags & CON_BOOT) {
     unregister_console_locked(con);
+    }
     }
     }
 // Changed console list, may require printer threads to start/stop.
     printk_kthreads_check_locked();
-    unlock:
+// label;
     console_list_unlock();
     }
     EXPORT_SYMBOL(register_console);
 // Must be called under console_list_lock().
 #[no_mangle]
 unsafe extern "C" fn unregister_console_locked(console: *mut console) -> c_int {
-    static int unregister_console_locked(struct console *console)
-    {
-    let mut use_device_lock: bool = (console.flags & CON_NBCON) && console.write_atomic;
-    let mut found_legacy_con: bool = false;
-    let mut found_nbcon_con: bool = false;
-    let mut found_boot_con: bool = false;
-    unsigned long flags;
-    struct console *c;
-    int res;
+pub static mut use_device_lock: bool = false;
+pub static mut found_legacy_con: bool = false;
+pub static mut found_nbcon_con: bool = false;
+pub static mut found_boot_con: bool = false;
+    let mut flags = 0;
+pub static mut c: *mut c_void = core::ptr::null_mut();
+    let mut res = 0;
     lockdep_assert_console_list_lock_held();
     con_printk(KERN_INFO, console, "disabled\n");
     res = _braille_unregister_console(console);
-    if (res < 0)
+    if (res < 0) {
     return res;
-    if (res > 0)
+    }
+    if (res > 0) {
     return 0;
-    if (!console_is_registered_locked(console))
+    }
+    if (!console_is_registered_locked(console)) {
     res = -ENODEV;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: console_is_usable(console, _arg: console->flags, _arg: true)) -> else {
-    else if (console_is_usable(console, console.flags, true))
+    }
+
+    else if (console_is_usable(console, console.flags, true)) {
     __pr_flush(console, 1000, true);
+    }
 // Disable it unconditionally
     console_srcu_write_flags(console, console.flags & ~CON_ENABLED);
-    if (res < 0)
+    if (res < 0) {
     return res;
+    }
 //
 // Use the driver synchronization to ensure that the hardware is not
 // in use while this console transitions to being unregistered.
 //
-    if (use_device_lock)
+    if (use_device_lock) {
     console.device_lock(console, &flags);
+    }
     hlist_del_init_rcu(&console.node);
-    if (use_device_lock)
+    if (use_device_lock) {
     console.device_unlock(console, flags);
+    }
 //
 // <HISTORICAL>
 // If this isn't the last console and it has CON_CONSDEV set, we
@@ -3824,8 +4069,9 @@ pub unsafe extern "C" fn if(_arg: console_is_usable(console, _arg: console->flag
 // The above makes no sense as there is no guarantee that the next
 // console has any device attached. Oh well....
 //
-    if (!hlist_empty(&console_list) && console.flags & CON_CONSDEV)
+    if (!hlist_empty(&console_list) && console.flags & CON_CONSDEV) {
     console_srcu_write_flags(console_first(), console_first().flags | CON_CONSDEV);
+    }
 //
 // Ensure that all SRCU list walks have completed. All contexts
 // must not be able to see this console in the list so that any
@@ -3837,34 +4083,40 @@ pub unsafe extern "C" fn if(_arg: console_is_usable(console, _arg: console->flag
 // console types may have changed. Update them.
 //
     for_each_console(c) {
-    if (c.flags & CON_BOOT)
+    if (c.flags & CON_BOOT) {
     found_boot_con = true;
-    if (c.flags & CON_NBCON)
+    }
+    if (c.flags & CON_NBCON) {
     found_nbcon_con = true;
-    else
+    }
+    else {
     found_legacy_con = true;
     }
-    if (!found_boot_con)
+    }
+    if (!found_boot_con) {
     have_boot_console = found_boot_con;
-    if (!found_legacy_con)
+    }
+    if (!found_legacy_con) {
     have_legacy_console = found_legacy_con;
-    if (!found_nbcon_con)
+    }
+    if (!found_nbcon_con) {
     have_nbcon_console = found_nbcon_con;
+    }
 // @have_nbcon_console must be updated before calling nbcon_free().
-    if (console.flags & CON_NBCON)
+    if (console.flags & CON_NBCON) {
     nbcon_free(console);
+    }
     console_sysfs_notify();
-    if (console.exit)
+    if (console.exit) {
     res = console.exit(console);
+    }
 // Changed console list, may require printer threads to start/stop.
     printk_kthreads_check_locked();
     return res;
     }
 #[no_mangle]
 pub unsafe extern "C" fn unregister_console(console: *mut console) -> c_int {
-    int unregister_console(struct console *console)
-    {
-    int res;
+    let mut res = 0;
     console_list_lock();
     res = unregister_console_locked(console);
     console_list_unlock();
@@ -3879,15 +4131,15 @@ pub unsafe extern "C" fn unregister_console(console: *mut console) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn console_force_preferred_locked(con: *mut console) {
-    void console_force_preferred_locked(struct console *con)
-    {
-    struct console *cur_pref_con;
-    if (!console_is_registered_locked(con))
+pub static mut cur_pref_con: *mut c_void = core::ptr::null_mut();
+    if (!console_is_registered_locked(con)) {
     return;
+    }
     cur_pref_con = console_first();
 // Already preferred?
-    if (cur_pref_con == con)
+    if (cur_pref_con == con) {
     return;
+    }
 //
 // Delete, but do not re-initialize the entry. This allows the console
 // to continue to appear registered (via any hlist_unhashed_lockless()
@@ -3901,7 +4153,7 @@ pub unsafe extern "C" fn console_force_preferred_locked(con: *mut console) {
 //
     synchronize_srcu(&console_srcu);
     con.flags |= CON_CONSDEV;
-    WARN_ON(!con.device);
+    WARN_ON!(!con.device);
 // Only the new head can have CON_CONSDEV set.
     console_srcu_write_flags(cur_pref_con, cur_pref_con.flags & ~CON_CONSDEV);
     hlist_add_head_rcu(&con.node, &console_list);
@@ -3914,15 +4166,14 @@ pub unsafe extern "C" fn console_force_preferred_locked(con: *mut console) {
 // later.
 //
 #[no_mangle]
-pub unsafe extern "C" fn console_init() -> void __init {
-    void __init console_init(void)
-    {
-    int ret;
-    initcall_t call;
-    initcall_entry_t *ce;
+pub unsafe extern "C" fn console_init()  {
+    let mut ret = 0;
+    let mut call;
+pub static mut ce: *mut c_void = core::ptr::null_mut();
 
-    if (!console_set_on_cmdline)
+    if (!console_set_on_cmdline) {
     add_preferred_console("ttynull", 0, core::ptr::null_mut());
+    }
 
 // Setup the default TTY line discipline.
     n_tty_init();
@@ -3931,13 +4182,13 @@ pub unsafe extern "C" fn console_init() -> void __init {
 // inform about problems etc..
 //
     ce = __con_initcall_start;
-    trace_initcall_level("console");
+    trace_initcall_level!("console");
     while (ce < __con_initcall_end) {
     call = initcall_from_entry(ce);
-    trace_initcall_start(call);
+    trace_initcall_start!(call);
     ret = call();
-    trace_initcall_finish(call, ret);
-    ce++;
+    trace_initcall_finish!(call, ret);
+    ce += 1;
     }
     }
 //
@@ -3955,18 +4206,17 @@ pub unsafe extern "C" fn console_init() -> void __init {
 // get unregistered when the real preferred console is registered.
 //
 #[no_mangle]
-unsafe extern "C" fn printk_late_init() -> int __init {
-    static int __init printk_late_init(void)
-    {
-    struct hlist_node *tmp;
-    struct console *con;
-    int ret;
+unsafe extern "C" fn printk_late_init() -> c_int {
+pub static mut tmp: *mut c_void = core::ptr::null_mut();
+pub static mut con: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     console_list_lock();
     hlist_for_each_entry_safe(con, tmp, &console_list, node) {
-    if (!(con.flags & CON_BOOT))
+    if (!(con.flags & CON_BOOT)) {
     continue;
+    }
 // Check addresses that might be used for enabled consoles.
-    if (init_section_intersects(con, sizeof(*con)) ||
+    if (init_section_intersects(con, sizeof!(*con)) ||
     init_section_contains(con.write, 0) ||
     init_section_contains(con.read, 0) ||
     init_section_contains(con.device, 0) ||
@@ -3976,7 +4226,7 @@ unsafe extern "C" fn printk_late_init() -> int __init {
 // Please, consider moving the reported consoles out
 // of the init section.
 //
-    pr_warn("bootconsole [%s%d] uses init memory and must be disabled even before the real one is ready\n",
+    pr_warn!("bootconsole [%s%d] uses init memory and must be disabled even before the real one is ready\n",
     con.name, con.index);
     unregister_console_locked(con);
     }
@@ -3984,46 +4234,46 @@ unsafe extern "C" fn printk_late_init() -> int __init {
     console_list_unlock();
     ret = cpuhp_setup_state_nocalls(CPUHP_PRINTK_DEAD, "printk:dead", core::ptr::null_mut(),
     console_cpu_notify);
-    WARN_ON(ret < 0);
+    WARN_ON!(ret < 0);
     ret = cpuhp_setup_state_nocalls(CPUHP_AP_ONLINE_DYN, "printk:online",
     console_cpu_notify, core::ptr::null_mut());
-    WARN_ON(ret < 0);
+    WARN_ON!(ret < 0);
     printk_sysctl_init();
     return 0;
     }
-    late_initcall(printk_late_init);
+    late_initcall!(printk_late_init);
 
 // If @con is specified, only wait for that console. Otherwise wait for all.
 #[no_mangle]
 unsafe extern "C" fn __pr_flush(con: *mut console, timeout_ms: c_int, reset_on_progress: bool) -> bool {
-    static bool __pr_flush(struct console *con, int timeout_ms, bool reset_on_progress)
-    {
-    let mut timeout_jiffies: c_ulong = msecs_to_jiffies(timeout_ms);
-    let mut remaining_jiffies: c_ulong = timeout_jiffies;
-    struct console_flush_type ft;
-    struct console *c;
-    let mut last_diff: u64 = 0;
-    u64 printk_seq;
-    short flags;
-    int cookie;
-    u64 diff;
-    u64 seq;
+pub static mut timeout_jiffies: c_ulong = 0;
+pub static mut remaining_jiffies: c_ulong = 0;
+pub static mut ft: usize = 0;
+pub static mut c: *mut c_void = core::ptr::null_mut();
+pub static mut last_diff: u64 = 0;
+    let mut printk_seq = 0;
+    let mut flags = 0;
+    let mut cookie = 0;
+    let mut diff = 0;
+    let mut seq = 0;
 // Sorry, pr_flush() will not work this early.
-    if (system_state < SYSTEM_SCHEDULING)
+    if (system_state < SYSTEM_SCHEDULING) {
     return false;
+    }
     might_sleep();
     seq = prb_next_reserve_seq(prb);
 // Flush the consoles so that records up to @seq are printed.
     printk_get_console_flush_type(&ft);
-    if (ft.nbcon_atomic)
+    if (ft.nbcon_atomic) {
     nbcon_atomic_flush_pending();
+    }
     if (ft.legacy_direct) {
     console_lock();
     console_unlock();
     }
     for (;;) {
-    unsigned long begin_jiffies;
-    unsigned long slept_jiffies;
+    let mut begin_jiffies = 0;
+    let mut slept_jiffies = 0;
     diff = 0;
 //
 // Hold the console_lock to guarantee safe access to
@@ -4040,8 +4290,9 @@ unsafe extern "C" fn __pr_flush(con: *mut console, timeout_ms: c_int, reset_on_p
     console_lock();
     cookie = console_srcu_read_lock();
     for_each_console_srcu(c) {
-    if (con && con != c)
+    if (con && con != c) {
     continue;
+    }
     flags = console_srcu_read_flags(c);
 //
 // If consoles are not usable, it cannot be expected
@@ -4057,16 +4308,19 @@ unsafe extern "C" fn __pr_flush(con: *mut console, timeout_ms: c_int, reset_on_p
     } else {
     printk_seq = c.seq;
     }
-    if (printk_seq < seq)
+    if (printk_seq < seq) {
     diff += seq - printk_seq;
     }
+    }
     console_srcu_read_unlock(cookie);
-    if (diff != last_diff && reset_on_progress)
+    if (diff != last_diff && reset_on_progress) {
     remaining_jiffies = timeout_jiffies;
+    }
     console_unlock();
 // Note: @diff is 0 if there are no usable consoles.
-    if (diff == 0 || remaining_jiffies == 0)
+    if (diff == 0 || remaining_jiffies == 0) {
     break;
+    }
 // msleep(1) might sleep much longer. Check time by jiffies.
     begin_jiffies = jiffies;
     msleep(1);
@@ -4093,8 +4347,6 @@ unsafe extern "C" fn __pr_flush(con: *mut console, timeout_ms: c_int, reset_on_p
 //
 #[no_mangle]
 pub unsafe extern "C" fn pr_flush(timeout_ms: c_int, reset_on_progress: bool) -> bool {
-    bool pr_flush(int timeout_ms, bool reset_on_progress)
-    {
     return __pr_flush(core::ptr::null_mut(), timeout_ms, reset_on_progress);
     }
 //
@@ -4102,38 +4354,39 @@ pub unsafe extern "C" fn pr_flush(timeout_ms: c_int, reset_on_progress: bool) ->
 //
 pub const PRINTK_PENDING_WAKEUP: c_uint = 0x01;
 pub const PRINTK_PENDING_OUTPUT: c_uint = 0x02;
-    static DEFINE_PER_CPU(int, printk_pending);
+pub static mut int: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn wake_up_klogd_work_func(irq_work: *mut irq_work) {
-    static void wake_up_klogd_work_func(struct irq_work *irq_work)
-    {
-    let mut pending: c_int = this_cpu_xchg(printk_pending, 0);
+pub static mut pending: c_int = 0;
     if (pending & PRINTK_PENDING_OUTPUT) {
     if (force_legacy_kthread()) {
-    if (printk_legacy_kthread)
+    if (printk_legacy_kthread) {
     wake_up_interruptible(&legacy_wait);
+    }
     } else {
-    if (console_trylock())
+    if (console_trylock()) {
     console_unlock();
     }
     }
-    if (pending & PRINTK_PENDING_WAKEUP)
+    }
+    if (pending & PRINTK_PENDING_WAKEUP) {
     wake_up_interruptible(&log_wait);
     }
-    static DEFINE_PER_CPU(struct irq_work, wake_up_klogd_work) =
+    }
+    static DEFINE_PER_CPU(irq_work, wake_up_klogd_work) =
     IRQ_WORK_INIT_LAZY(wake_up_klogd_work_func);
 #[no_mangle]
 unsafe extern "C" fn __wake_up_klogd(val: c_int) {
-    static void __wake_up_klogd(int val)
-    {
-    if (!printk_percpu_data_ready())
+    if (!printk_percpu_data_ready()) {
     return;
+    }
 //
 // It is not allowed to call this function when console irq_work
 // is blocked.
 //
-    if (WARN_ON_ONCE(console_irqwork_blocked))
+    if (WARN_ON_ONCE!(console_irqwork_blocked)) {
     return;
+    }
     preempt_disable();
 //
 // Guarantee any new records can be seen by tasks preparing to wait
@@ -4165,8 +4418,6 @@ unsafe extern "C" fn __wake_up_klogd(val: c_int) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn wake_up_klogd() {
-    void wake_up_klogd(void)
-    {
     __wake_up_klogd(PRINTK_PENDING_WAKEUP);
     }
 //
@@ -4183,8 +4434,6 @@ pub unsafe extern "C" fn wake_up_klogd() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn defer_console_output() {
-    void defer_console_output(void)
-    {
 //
 // New messages may have been added directly to the ringbuffer
 // using vprintk_store(), so wake any waiters as well.
@@ -4202,33 +4451,31 @@ pub unsafe extern "C" fn defer_console_output() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn printk_trigger_flush() {
-    void printk_trigger_flush(void)
-    {
-    struct console_flush_type ft;
+pub static mut ft: usize = 0;
     printk_get_console_flush_type(&ft);
-    if (ft.nbcon_atomic)
+    if (ft.nbcon_atomic) {
     nbcon_atomic_flush_pending();
-    if (ft.nbcon_offload)
+    }
+    if (ft.nbcon_offload) {
     nbcon_kthreads_wake();
+    }
     if (ft.legacy_direct) {
-    if (console_trylock())
+    if (console_trylock()) {
     console_unlock();
     }
-    if (ft.legacy_offload)
+    }
+    if (ft.legacy_offload) {
     defer_console_output();
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn vprintk_deferred(fmt: *const c_char, args: va_list) -> c_int {
-    int vprintk_deferred(const char *fmt, va_list args)
-    {
     return vprintk_emit(0, LOGLEVEL_SCHED, core::ptr::null_mut(), fmt, args);
     }
 #[no_mangle]
 pub unsafe extern "C" fn _printk_deferred(fmt: *const c_char, ...) -> c_int {
-    int _printk_deferred(const char *fmt, ...)
-    {
-    va_list args;
-    int r;
+    let mut args;
+    let mut r = 0;
     va_start(args, fmt);
     r = vprintk_deferred(fmt, args);
     va_end(args);
@@ -4240,11 +4487,9 @@ pub unsafe extern "C" fn _printk_deferred(fmt: *const c_char, ...) -> c_int {
 // This enforces a rate limit: not more than 10 kernel messages
 // every 5s to make a denial-of-service attack impossible.
 //
-    DEFINE_RATELIMIT_STATE(printk_ratelimit_state, 5 * HZ, 10);
+pub static mut printk_ratelimit_state: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn __printk_ratelimit(func: *const c_char) -> c_int {
-    int __printk_ratelimit(const char *func)
-    {
     return ___ratelimit(&printk_ratelimit_state, func);
     }
     EXPORT_SYMBOL(__printk_ratelimit);
@@ -4257,18 +4502,18 @@ pub unsafe extern "C" fn __printk_ratelimit(func: *const c_char) -> c_int {
 // milliseconds have elapsed since the last time printk_timed_ratelimit()
 // returned true.
 //
-    bool printk_timed_ratelimit(unsigned long *caller_jiffies,
-    unsigned int interval_msecs)
-    {
-    let mut elapsed: c_ulong = jiffies - *caller_jiffies;
-    if (*caller_jiffies && elapsed <= msecs_to_jiffies(interval_msecs))
+#[no_mangle]
+pub unsafe extern "C" fn printk_timed_ratelimit(caller_jiffies: *mut c_ulong, interval_msecs: c_uint) -> bool {
+pub static mut elapsed: c_ulong = 0;
+    if (*caller_jiffies && elapsed <= msecs_to_jiffies(interval_msecs)) {
     return false;
+    }
 // caller_jiffies = jiffies;
     return true;
     }
     EXPORT_SYMBOL(printk_timed_ratelimit);
-    static DEFINE_SPINLOCK(dump_list_lock);
-    static LIST_HEAD(dump_list);
+pub static mut dump_list_lock: usize = 0;
+pub static mut dump_list: usize = 0;
 //
 // kmsg_dump_register - register a kernel log dumper.
 // @dumper: pointer to the kmsg_dumper structure
@@ -4279,13 +4524,12 @@ pub unsafe extern "C" fn __printk_ratelimit(func: *const c_char) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kmsg_dump_register(dumper: *mut kmsg_dumper) -> c_int {
-    int kmsg_dump_register(struct kmsg_dumper *dumper)
-    {
-    unsigned long flags;
-    let mut err: c_int = -EBUSY;
+    let mut flags = 0;
+pub static mut err: c_int = 0;
 // The dump callback needs to be set
-    if (!dumper.dump)
+    if (!dumper.dump) {
     return -EINVAL;
+    }
     spin_lock_irqsave(&dump_list_lock, flags);
 // Don't allow registering multiple times
     if (!dumper.registered) {
@@ -4306,10 +4550,8 @@ pub unsafe extern "C" fn kmsg_dump_register(dumper: *mut kmsg_dumper) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kmsg_dump_unregister(dumper: *mut kmsg_dumper) -> c_int {
-    int kmsg_dump_unregister(struct kmsg_dumper *dumper)
-    {
-    unsigned long flags;
-    let mut err: c_int = -EINVAL;
+    let mut flags = 0;
+pub static mut err: c_int = 0;
     spin_lock_irqsave(&dump_list_lock, flags);
     if (dumper.registered) {
     dumper.registered = 0;
@@ -4322,20 +4564,25 @@ pub unsafe extern "C" fn kmsg_dump_unregister(dumper: *mut kmsg_dumper) -> c_int
     }
     EXPORT_SYMBOL_GPL(kmsg_dump_unregister);
     static bool always_kmsg_dump;
-    module_param_named(always_kmsg_dump, always_kmsg_dump, bool, S_IRUGO | S_IWUSR);
+    module_param_named!(always_kmsg_dump, always_kmsg_dump, bool, S_IRUGO | S_IWUSR);
     const char *kmsg_dump_reason_str(enum kmsg_dump_reason reason)
     {
-    switch (reason) {
-    case KMSG_DUMP_PANIC:
+    match (reason) {
+    KMSG_DUMP_PANIC => {
     return "Panic";
-    case KMSG_DUMP_OOPS:
+    }
+    KMSG_DUMP_OOPS => {
     return "Oops";
-    case KMSG_DUMP_EMERG:
+    }
+    KMSG_DUMP_EMERG => {
     return "Emergency";
-    case KMSG_DUMP_SHUTDOWN:
+    }
+    KMSG_DUMP_SHUTDOWN => {
     return "Shutdown";
-    default:
+    }
+    _ => {
     return "Unknown";
+    }
     }
     }
     EXPORT_SYMBOL_GPL(kmsg_dump_reason_str);
@@ -4350,16 +4597,12 @@ pub unsafe extern "C" fn kmsg_dump_unregister(dumper: *mut kmsg_dumper) -> c_int
 // kmsg_dump_get_buffer().
 //
 #[no_mangle]
-pub unsafe extern "C" fn kmsg_dump_desc(reason: enum kmsg_dump_reason, desc: *const c_char) {
-    void kmsg_dump_desc(enum kmsg_dump_reason reason, const char *desc)
-    {
-    struct kmsg_dumper *dumper;
-    struct kmsg_dump_detail detail = {
-    .reason = reason,
-    .description = desc};
+pub unsafe extern "C" fn kmsg_dump_desc(reason: kmsg_dump_reason, desc: *const c_char) {
+pub static mut dumper: *mut c_void = core::ptr::null_mut();
+pub static mut kmsg_dump_detail: usize = 0;
     rcu_read_lock();
     list_for_each_entry_rcu(dumper, &dump_list, list) {
-    let mut max_reason: enum kmsg_dump_reason = dumper.max_reason;
+pub static mut max_reason: kmsg_dump_reason = 0;
 //
 // If client has not provided a specific max_reason, default
 // to KMSG_DUMP_OOPS, unless always_kmsg_dump was set.
@@ -4368,8 +4611,9 @@ pub unsafe extern "C" fn kmsg_dump_desc(reason: enum kmsg_dump_reason, desc: *co
     max_reason = always_kmsg_dump ? KMSG_DUMP_MAX :
     KMSG_DUMP_OOPS;
     }
-    if (reason > max_reason)
+    if (reason > max_reason) {
     continue;
+    }
 // invoke dumper which will iterate over records
     dumper.dump(dumper, &detail);
     }
@@ -4392,36 +4636,38 @@ pub unsafe extern "C" fn kmsg_dump_desc(reason: enum kmsg_dump_reason, desc: *co
 // A return value of FALSE indicates that there are no more records to
 // read.
 //
-    bool kmsg_dump_get_line(struct kmsg_dump_iter *iter, bool syslog,
-    char *line, size_t size, size_t *len)
-    {
-    let mut min_seq: u64 = latched_seq_read_nolock(&clear_seq);
-    struct printk_info info;
-    unsigned int line_count;
-    struct printk_record r;
-    let mut l: usize = 0;
-    let mut ret: bool = false;
-    if (iter.cur_seq < min_seq)
+#[no_mangle]
+pub unsafe extern "C" fn kmsg_dump_get_line(iter: *mut kmsg_dump_iter, syslog: bool, line: *mut c_char, size: size_t, len: *mut size_t) -> bool {
+pub static mut min_seq: u64 = 0;
+pub static mut info: usize = 0;
+    let mut line_count = 0;
+pub static mut r: usize = 0;
+pub static mut l: usize = 0;
+pub static mut ret: bool = false;
+    if (iter.cur_seq < min_seq) {
     iter.cur_seq = min_seq;
+    }
     prb_rec_init_rd(&r, &info, line, size);
 // Read text or count text lines?
     if (line) {
-    if (!prb_read_valid(prb, iter.cur_seq, &r))
-    goto out;
+    if (!prb_read_valid(prb, iter.cur_seq, &r)) {
+// goto;
+    }
     l = record_print_text(&r, syslog, printk_time);
     } else {
     if (!prb_read_valid_info(prb, iter.cur_seq,
     &info, &line_count)) {
-    goto out;
+// goto;
     }
     l = get_record_print_text_size(&info, line_count, syslog,
     printk_time);
     }
     iter.cur_seq = r.info.seq + 1;
     ret = true;
-    out:
-    if (len)
+// label;
+    if (len) {
 // len = l;
+    }
     return ret;
     }
     EXPORT_SYMBOL_GPL(kmsg_dump_get_line);
@@ -4444,21 +4690,22 @@ pub unsafe extern "C" fn kmsg_dump_desc(reason: enum kmsg_dump_reason, desc: *co
 // A return value of FALSE indicates that there are no more records to
 // read.
 //
-    bool kmsg_dump_get_buffer(struct kmsg_dump_iter *iter, bool syslog,
-    char *buf, size_t size, size_t *len_out)
-    {
-    let mut min_seq: u64 = latched_seq_read_nolock(&clear_seq);
-    struct printk_info info;
-    struct printk_record r;
-    u64 seq;
-    u64 next_seq;
-    let mut len: usize = 0;
-    let mut ret: bool = false;
-    let mut time: bool = printk_time;
-    if (!buf || !size)
-    goto out;
-    if (iter.cur_seq < min_seq)
+#[no_mangle]
+pub unsafe extern "C" fn kmsg_dump_get_buffer(iter: *mut kmsg_dump_iter, syslog: bool, buf: *mut c_char, size: size_t, len_out: *mut size_t) -> bool {
+pub static mut min_seq: u64 = 0;
+pub static mut info: usize = 0;
+pub static mut r: usize = 0;
+    let mut seq = 0;
+    let mut next_seq = 0;
+pub static mut len: usize = 0;
+pub static mut ret: bool = false;
+pub static mut time: bool = false;
+    if (!buf || !size) {
+// goto;
+    }
+    if (iter.cur_seq < min_seq) {
     iter.cur_seq = min_seq;
+    }
     if (prb_read_valid_info(prb, iter.cur_seq, &info, core::ptr::null_mut())) {
     if (info.seq != iter.cur_seq) {
 // messages are gone, move to first available one
@@ -4466,8 +4713,9 @@ pub unsafe extern "C" fn kmsg_dump_desc(reason: enum kmsg_dump_reason, desc: *co
     }
     }
 // last entry
-    if (iter.cur_seq >= iter.next_seq)
-    goto out;
+    if (iter.cur_seq >= iter.next_seq) {
+// goto;
+    }
 //
 // Find first record that fits, including all following records,
 // into the user-provided buffer for this dump. Pass in size-1
@@ -4483,17 +4731,19 @@ pub unsafe extern "C" fn kmsg_dump_desc(reason: enum kmsg_dump_reason, desc: *co
     next_seq = seq;
     prb_rec_init_rd(&r, &info, buf, size);
     prb_for_each_record(seq, prb, seq, &r) {
-    if (r.info.seq >= iter.next_seq)
+    if (r.info.seq >= iter.next_seq) {
     break;
+    }
     len += record_print_text(&r, syslog, time);
 // Adjust record to store to remaining buffer space.
     prb_rec_init_rd(&r, &info, buf + len, size - len);
     }
     iter.next_seq = next_seq;
     ret = true;
-    out:
-    if (len_out)
+// label;
+    if (len_out) {
 // len_out = len;
+    }
     return ret;
     }
     EXPORT_SYMBOL_GPL(kmsg_dump_get_buffer);
@@ -4507,8 +4757,6 @@ pub unsafe extern "C" fn kmsg_dump_desc(reason: enum kmsg_dump_reason, desc: *co
 //
 #[no_mangle]
 pub unsafe extern "C" fn kmsg_dump_rewind(iter: *mut kmsg_dump_iter) {
-    void kmsg_dump_rewind(struct kmsg_dump_iter *iter)
-    {
     iter.cur_seq = latched_seq_read_nolock(&clear_seq);
     iter.next_seq = prb_next_seq(prb);
     }
@@ -4524,29 +4772,28 @@ pub unsafe extern "C" fn kmsg_dump_rewind(iter: *mut kmsg_dump_iter) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn console_try_replay_all() {
-    void console_try_replay_all(void)
-    {
-    struct console_flush_type ft;
+pub static mut ft: usize = 0;
     printk_get_console_flush_type(&ft);
     if (console_trylock()) {
     __console_rewind_all();
-    if (ft.nbcon_atomic)
+    if (ft.nbcon_atomic) {
     nbcon_atomic_flush_pending();
-    if (ft.nbcon_offload)
+    }
+    if (ft.nbcon_offload) {
     nbcon_kthreads_wake();
-    if (ft.legacy_offload)
+    }
+    if (ft.legacy_offload) {
     defer_console_output();
+    }
 // Consoles are flushed as part of console_unlock().
     console_unlock();
     }
     }
 
-    let mut printk_cpu_sync_owner: static atomic_t = ATOMIC_INIT(-1);
-    let mut printk_cpu_sync_nested: static atomic_t = ATOMIC_INIT(0);
+pub static mut printk_cpu_sync_owner: atomic_t = 0;
+pub static mut printk_cpu_sync_nested: atomic_t = 0;
 #[no_mangle]
 pub unsafe extern "C" fn is_printk_cpu_sync_owner() -> bool {
-    bool is_printk_cpu_sync_owner(void)
-    {
     return (atomic_read(&printk_cpu_sync_owner) == raw_smp_processor_id());
     }
 //
@@ -4557,8 +4804,6 @@ pub unsafe extern "C" fn is_printk_cpu_sync_owner() -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __printk_cpu_sync_wait() {
-    void __printk_cpu_sync_wait(void)
-    {
     do {
     cpu_relax();
     } while (atomic_read(&printk_cpu_sync_owner) != -1);
@@ -4577,10 +4822,8 @@ pub unsafe extern "C" fn __printk_cpu_sync_wait() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __printk_cpu_sync_try_get() -> c_int {
-    int __printk_cpu_sync_try_get(void)
-    {
-    int cpu;
-    int old;
+    let mut cpu = 0;
+    let mut old = 0;
     cpu = smp_processor_id();
 //
 // Guarantee loads and stores from this CPU when it is the lock owner
@@ -4626,8 +4869,6 @@ pub unsafe extern "C" fn __printk_cpu_sync_try_get() -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __printk_cpu_sync_put() {
-    void __printk_cpu_sync_put(void)
-    {
     if (atomic_read(&printk_cpu_sync_nested)) {
     atomic_dec(&printk_cpu_sync_nested);
     return;

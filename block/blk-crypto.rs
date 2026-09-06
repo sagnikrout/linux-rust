@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -43,132 +293,98 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Refer to Documentation/block/inline-encryption.rst for detailed explanation.
 //
 
-    const struct blk_crypto_mode blk_crypto_modes[] = {
-    [BLK_ENCRYPTION_MODE_AES_256_XTS] = {
-    .name = "AES-256-XTS",
-    .cipher_str = "xts(aes)",
-    .keysize = 64,
-    .security_strength = 32,
-    .ivsize = 16,
-    },
-    [BLK_ENCRYPTION_MODE_AES_128_CBC_ESSIV] = {
-    .name = "AES-128-CBC-ESSIV",
-    .cipher_str = "essiv(cbc(aes),sha256)",
-    .keysize = 16,
-    .security_strength = 16,
-    .ivsize = 16,
-    },
-    [BLK_ENCRYPTION_MODE_ADIANTUM] = {
-    .name = "Adiantum",
-    .cipher_str = "adiantum(xchacha12,aes)",
-    .keysize = 32,
-    .security_strength = 32,
-    .ivsize = 32,
-    },
-    [BLK_ENCRYPTION_MODE_SM4_XTS] = {
-    .name = "SM4-XTS",
-    .cipher_str = "xts(sm4)",
-    .keysize = 32,
-    .security_strength = 16,
-    .ivsize = 16,
-    },
-    };
+pub static mut blk_crypto_mode: usize = 0;
 //
 // This number needs to be at least (the number of threads doing IO
 // concurrently) * (maximum recursive depth of a bio), so that we don't
 // deadlock on crypt_ctx allocations. The default is chosen to be the same
 // as the default number of post read contexts in both EXT4 and F2FS.
 //
-    let mut num_prealloc_crypt_ctxs: static int = 128;
-    module_param(num_prealloc_crypt_ctxs, int, 0444);
+pub static mut num_prealloc_crypt_ctxs: int = 128;
+    module_param!(num_prealloc_crypt_ctxs, int, 0444);
     MODULE_PARM_DESC(num_prealloc_crypt_ctxs,
     "Number of bio crypto contexts to preallocate");
-    static struct kmem_cache *bio_crypt_ctx_cache;
-    static mempool_t *bio_crypt_ctx_pool;
+pub static mut bio_crypt_ctx_cache: *mut c_void = core::ptr::null_mut();
+pub static mut bio_crypt_ctx_pool: *mut c_void = core::ptr::null_mut();
 #[no_mangle]
-unsafe extern "C" fn bio_crypt_ctx_init() -> int __init {
-    static int __init bio_crypt_ctx_init(void)
-    {
-    size_t i;
+unsafe extern "C" fn bio_crypt_ctx_init() -> c_int {
+    let mut i = 0;
     bio_crypt_ctx_cache = KMEM_CACHE(bio_crypt_ctx, 0);
-    if (!bio_crypt_ctx_cache)
-    goto out_no_mem;
+    if (!bio_crypt_ctx_cache) {
+// goto;
+    }
     bio_crypt_ctx_pool = mempool_create_slab_pool(num_prealloc_crypt_ctxs,
     bio_crypt_ctx_cache);
-    if (!bio_crypt_ctx_pool)
-    goto out_no_mem;
+    if (!bio_crypt_ctx_pool) {
+// goto;
+    }
 // This is assumed in various places.
-    BUILD_BUG_ON(BLK_ENCRYPTION_MODE_INVALID != 0);
+    BUILD_BUG_ON!(BLK_ENCRYPTION_MODE_INVALID != 0);
 //
 // Validate the crypto mode properties.  This ideally would be done with
 // static assertions, but boot-time checks are the next best thing.
 //
-    for (i = 0; i < BLK_ENCRYPTION_MODE_MAX; i++) {
-    BUG_ON(blk_crypto_modes[i].keysize >
+    while (i < BLK_ENCRYPTION_MODE_MAX) {
+    BUG_ON!(blk_crypto_modes[i].keysize >
     BLK_CRYPTO_MAX_RAW_KEY_SIZE);
-    BUG_ON(blk_crypto_modes[i].security_strength >
+    BUG_ON!(blk_crypto_modes[i].security_strength >
     blk_crypto_modes[i].keysize);
-    BUG_ON(blk_crypto_modes[i].ivsize > BLK_CRYPTO_MAX_IV_SIZE);
+    BUG_ON!(blk_crypto_modes[i].ivsize > BLK_CRYPTO_MAX_IV_SIZE);
     }
     return 0;
-    out_no_mem:
+// label;
     panic("Failed to allocate mem for bio crypt ctxs\n");
     }
-    subsys_initcall(bio_crypt_ctx_init);
-    void bio_crypt_set_ctx(struct bio *bio, const struct blk_crypto_key *key,
-    const u64 dun[BLK_CRYPTO_DUN_ARRAY_SIZE], gfp_t gfp_mask)
-    {
-    struct bio_crypt_ctx *bc;
+    subsys_initcall!(bio_crypt_ctx_init);
+#[no_mangle]
+pub unsafe extern "C" fn bio_crypt_set_ctx(bio: *mut bio, key: *mut blk_crypto_key, gfp_mask: gfp_t) {
+pub static mut bc: *mut c_void = core::ptr::null_mut();
 //
 // The caller must use a gfp_mask that contains __GFP_DIRECT_RECLAIM so
 // that the mempool_alloc() can't fail.
 //
-    WARN_ON_ONCE(!(gfp_mask & __GFP_DIRECT_RECLAIM));
+    WARN_ON_ONCE!(!(gfp_mask & __GFP_DIRECT_RECLAIM));
     bc = mempool_alloc(bio_crypt_ctx_pool, gfp_mask);
     bc.bc_key = key;
-    memcpy(bc.bc_dun, dun, sizeof(bc.bc_dun));
+    memcpy(bc.bc_dun, dun, sizeof!(bc.bc_dun));
     bio.bi_crypt_context = bc;
     }
     EXPORT_SYMBOL_GPL(bio_crypt_set_ctx);
 #[no_mangle]
 pub unsafe extern "C" fn __bio_crypt_free_ctx(bio: *mut bio) {
-    void __bio_crypt_free_ctx(struct bio *bio)
-    {
     mempool_free(bio.bi_crypt_context, bio_crypt_ctx_pool);
     bio.bi_crypt_context = core::ptr::null_mut();
     }
 #[no_mangle]
 pub unsafe extern "C" fn __bio_crypt_clone(dst: *mut bio, src: *mut bio, gfp_mask: gfp_t) -> c_int {
-    int __bio_crypt_clone(struct bio *dst, struct bio *src, gfp_t gfp_mask)
-    {
     dst.bi_crypt_context = mempool_alloc(bio_crypt_ctx_pool, gfp_mask);
-    if (!dst.bi_crypt_context)
+    if (!dst.bi_crypt_context) {
     return -ENOMEM;
+    }
 // dst->bi_crypt_context = *src->bi_crypt_context;
     return 0;
     }
 // Increments @dun by @inc, treating @dun as a multi-limb integer.
-    void bio_crypt_dun_increment(u64 dun[BLK_CRYPTO_DUN_ARRAY_SIZE],
-    unsigned int inc)
-    {
-    int i;
-    for (i = 0; inc && i < BLK_CRYPTO_DUN_ARRAY_SIZE; i++) {
+#[no_mangle]
+pub unsafe extern "C" fn bio_crypt_dun_increment(inc: c_uint) {
+    let mut i = 0;
+    while (inc && i < BLK_CRYPTO_DUN_ARRAY_SIZE) {
     dun[i] += inc;
 //
 // If the addition in this limb overflowed, then we need to
 // carry 1 into the next limb. Else the carry is 0.
 //
-    if (dun[i] < inc)
+    if (dun[i] < inc) {
     inc = 1;
-    else
+    }
+    else {
     inc = 0;
+    }
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn __bio_crypt_advance(bio: *mut bio, bytes: c_uint) {
-    void __bio_crypt_advance(struct bio *bio, unsigned int bytes)
-    {
-    struct bio_crypt_ctx *bc = bio.bi_crypt_context;
+    let mut bc = bio.bi_crypt_context;
     bio_crypt_dun_increment(bc.bc_dun,
     bytes >> bc.bc_key.data_unit_size_bits);
     }
@@ -176,42 +392,41 @@ pub unsafe extern "C" fn __bio_crypt_advance(bio: *mut bio, bytes: c_uint) {
 // Returns true if @bc->bc_dun plus @bytes converted to data units is equal to
 // @next_dun, treating the DUNs as multi-limb integers.
 //
-    bool bio_crypt_dun_is_contiguous(const struct bio_crypt_ctx *bc,
-    unsigned int bytes,
-    const u64 next_dun[BLK_CRYPTO_DUN_ARRAY_SIZE])
-    {
-    int i;
-    let mut carry: c_uint = bytes >> bc.bc_key.data_unit_size_bits;
-    for (i = 0; i < BLK_CRYPTO_DUN_ARRAY_SIZE; i++) {
-    if (bc.bc_dun[i] + carry != next_dun[i])
+#[no_mangle]
+pub unsafe extern "C" fn bio_crypt_dun_is_contiguous(bc: *mut bio_crypt_ctx, bytes: c_uint) -> bool {
+    let mut i = 0;
+pub static mut carry: c_uint = 0;
+    while (i < BLK_CRYPTO_DUN_ARRAY_SIZE) {
+    if (bc.bc_dun[i] + carry != next_dun[i]) {
     return false;
+    }
 //
 // If the addition in this limb overflowed, then we need to
 // carry 1 into the next limb. Else the carry is 0.
 //
-    if ((bc.bc_dun[i] + carry) < carry)
+    if ((bc.bc_dun[i] + carry) < carry) {
     carry = 1;
-    else
+    }
+    else {
     carry = 0;
     }
+    }
 // If the DUN wrapped through 0, don't treat it as contiguous.
-    let mut carry: return = = 0;
+pub static mut carry: return = 0;
     }
 //
 // Checks that two bio crypt contexts are compatible - i.e. that
 // they are mergeable except for data_unit_num continuity.
 //
-    static bool bio_crypt_ctx_compatible(struct bio_crypt_ctx *bc1,
-    struct bio_crypt_ctx *bc2)
-    {
-    if (!bc1)
+#[no_mangle]
+pub unsafe extern "C" fn bio_crypt_ctx_compatible(bc1: *mut bio_crypt_ctx, bc2: *mut bio_crypt_ctx) -> bool {
+    if (!bc1) {
     return !bc2;
+    }
     return bc2 && bc1.bc_key == bc2.bc_key;
     }
 #[no_mangle]
 pub unsafe extern "C" fn bio_crypt_rq_ctx_compatible(rq: *mut request, bio: *mut bio) -> bool {
-    bool bio_crypt_rq_ctx_compatible(struct request *rq, struct bio *bio)
-    {
     return bio_crypt_ctx_compatible(rq.crypt_ctx, bio.bi_crypt_context);
     }
 //
@@ -219,35 +434,30 @@ pub unsafe extern "C" fn bio_crypt_rq_ctx_compatible(rq: *mut request, bio: *mut
 // that their data_unit_nums are continuous (and can hence be merged)
 // in the order @bc1 followed by @bc2.
 //
-    bool bio_crypt_ctx_mergeable(struct bio_crypt_ctx *bc1, unsigned int bc1_bytes,
-    struct bio_crypt_ctx *bc2)
-    {
-    if (!bio_crypt_ctx_compatible(bc1, bc2))
+#[no_mangle]
+pub unsafe extern "C" fn bio_crypt_ctx_mergeable(bc1: *mut bio_crypt_ctx, bc1_bytes: c_uint, bc2: *mut bio_crypt_ctx) -> bool {
+    if (!bio_crypt_ctx_compatible(bc1, bc2)) {
     return false;
+    }
     return !bc1 || bio_crypt_dun_is_contiguous(bc1, bc1_bytes, bc2.bc_dun);
     }
 #[no_mangle]
 pub unsafe extern "C" fn __blk_crypto_rq_get_keyslot(rq: *mut request) -> blk_status_t {
-    blk_status_t __blk_crypto_rq_get_keyslot(struct request *rq)
-    {
     return blk_crypto_get_keyslot(rq.q.crypto_profile,
     rq.crypt_ctx.bc_key,
     &rq.crypt_keyslot);
     }
 #[no_mangle]
 pub unsafe extern "C" fn __blk_crypto_rq_put_keyslot(rq: *mut request) {
-    void __blk_crypto_rq_put_keyslot(struct request *rq)
-    {
     blk_crypto_put_keyslot(rq.crypt_keyslot);
     rq.crypt_keyslot = core::ptr::null_mut();
     }
 #[no_mangle]
 pub unsafe extern "C" fn __blk_crypto_free_request(rq: *mut request) {
-    void __blk_crypto_free_request(struct request *rq)
-    {
 // The keyslot, if one was needed, should have been released earlier.
-    if (WARN_ON_ONCE(rq.crypt_keyslot))
+    if (WARN_ON_ONCE!(rq.crypt_keyslot)) {
     __blk_crypto_rq_put_keyslot(rq);
+    }
     mempool_free(rq.crypt_ctx, bio_crypt_ctx_pool);
     rq.crypt_ctx = core::ptr::null_mut();
     }
@@ -259,12 +469,10 @@ pub unsafe extern "C" fn __blk_crypto_free_request(rq: *mut request) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __blk_crypto_submit_bio(bio: *mut bio) -> bool {
-    bool __blk_crypto_submit_bio(struct bio *bio)
-    {
-    const struct blk_crypto_key *bc_key = bio.bi_crypt_context.bc_key;
-    struct block_device *bdev = bio.bi_bdev;
+    let mut bc_key = bio.bi_crypt_context.bc_key;
+    let mut bdev = bio.bi_bdev;
 // Error if bio has no data.
-    if (WARN_ON_ONCE(!bio_has_data(bio))) {
+    if (WARN_ON_ONCE!(!bio_has_data(bio))) {
     bio_io_error(bio);
     return false;
     }
@@ -273,7 +481,7 @@ pub unsafe extern "C" fn __blk_crypto_submit_bio(bio: *mut bio) -> bool {
 // the fallback if available.
 //
     if (!blk_crypto_config_supported_natively(bdev, &bc_key.crypto_cfg)) {
-    if (!IS_ENABLED(CONFIG_BLK_INLINE_ENCRYPTION_FALLBACK)) {
+    if (!IS_ENABLED!(CONFIG_BLK_INLINE_ENCRYPTION_FALLBACK)) {
     pr_warn_once("%pg: crypto API fallback disabled; failing request.\n",
     bdev);
     bio_endio_status(bio, BLK_STS_NOTSUPP);
@@ -284,13 +492,13 @@ pub unsafe extern "C" fn __blk_crypto_submit_bio(bio: *mut bio) -> bool {
     return true;
     }
     EXPORT_SYMBOL_GPL(__blk_crypto_submit_bio);
-    int __blk_crypto_rq_bio_prep(struct request *rq, struct bio *bio,
-    gfp_t gfp_mask)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __blk_crypto_rq_bio_prep(rq: *mut request, bio: *mut bio, gfp_mask: gfp_t) -> c_int {
     if (!rq.crypt_ctx) {
     rq.crypt_ctx = mempool_alloc(bio_crypt_ctx_pool, gfp_mask);
-    if (!rq.crypt_ctx)
+    if (!rq.crypt_ctx) {
     return -ENOMEM;
+    }
     }
 // rq->crypt_ctx = *bio->bi_crypt_context;
     return 0;
@@ -310,39 +518,44 @@ pub unsafe extern "C" fn __blk_crypto_submit_bio(bio: *mut bio) -> bool {
 // Return: 0 on success, -errno on failure.  The caller is responsible for
 // zeroizing both blk_key and key_bytes when done with them.
 //
-    int blk_crypto_init_key(struct blk_crypto_key *blk_key,
-    const u8 *key_bytes, size_t key_size,
-    enum blk_crypto_key_type key_type,
-    enum blk_crypto_mode_num crypto_mode,
-    unsigned int dun_bytes,
-    unsigned int data_unit_size, int flags)
-    {
-    const struct blk_crypto_mode *mode;
-    memset(blk_key, 0, sizeof(*blk_key));
-    if (crypto_mode >= ARRAY_SIZE(blk_crypto_modes))
-    return -EINVAL;
-    if (flags & ~BLK_CRYPTO_CFG_ALLOW_HW)
-    return -EINVAL;
-    mode = &blk_crypto_modes[crypto_mode];
-    switch (key_type) {
-    case BLK_CRYPTO_KEY_TYPE_RAW:
-    if (key_size != mode.keysize)
-    return -EINVAL;
-    break;
-    case BLK_CRYPTO_KEY_TYPE_HW_WRAPPED:
-    if (key_size < mode.security_strength ||
-    key_size > BLK_CRYPTO_MAX_HW_WRAPPED_KEY_SIZE)
-    return -EINVAL;
-    if (!(flags & BLK_CRYPTO_CFG_ALLOW_HW))
-    return -EINVAL;
-    break;
-    default:
+#[no_mangle]
+pub unsafe extern "C" fn blk_crypto_init_key(blk_key: *mut blk_crypto_key, key_bytes: *mut u8, key_size: size_t, key_type: blk_crypto_key_type, crypto_mode: blk_crypto_mode_num, dun_bytes: c_uint, data_unit_size: c_uint, flags: c_int) -> c_int {
+pub static mut mode: *mut c_void = core::ptr::null_mut();
+    memset(blk_key, 0, sizeof!(*blk_key));
+    if (crypto_mode >= ARRAY_SIZE!(blk_crypto_modes)) {
     return -EINVAL;
     }
-    if (dun_bytes == 0 || dun_bytes > mode.ivsize)
+    if (flags & ~BLK_CRYPTO_CFG_ALLOW_HW) {
     return -EINVAL;
-    if (!is_power_of_2(data_unit_size))
+    }
+    mode = &blk_crypto_modes[crypto_mode];
+    match (key_type) {
+    BLK_CRYPTO_KEY_TYPE_RAW => {
+    if (key_size != mode.keysize) {
     return -EINVAL;
+    }
+    // break;
+    }
+    BLK_CRYPTO_KEY_TYPE_HW_WRAPPED => {
+    if (key_size < mode.security_strength ||
+    key_size > BLK_CRYPTO_MAX_HW_WRAPPED_KEY_SIZE) {
+    return -EINVAL;
+    }
+    if (!(flags & BLK_CRYPTO_CFG_ALLOW_HW)) {
+    return -EINVAL;
+    }
+    // break;
+    }
+    _ => {
+    return -EINVAL;
+    }
+    }
+    if (dun_bytes == 0 || dun_bytes > mode.ivsize) {
+    return -EINVAL;
+    }
+    if (!is_power_of_2(data_unit_size)) {
+    return -EINVAL;
+    }
     blk_key.crypto_cfg.crypto_mode = crypto_mode;
     blk_key.crypto_cfg.dun_bytes = dun_bytes;
     blk_key.crypto_cfg.data_unit_size = data_unit_size;
@@ -363,21 +576,24 @@ pub unsafe extern "C" fn __blk_crypto_submit_bio(bio: *mut bio) -> bool {
 //
 // Return: %true if @bdev supports hardware inline encryption with @cfg.
 //
-    bool blk_crypto_config_supported_natively(struct block_device *bdev,
-    const struct blk_crypto_config *cfg)
-    {
-    struct blk_crypto_profile *profile =
-    bdev_get_queue(bdev).crypto_profile;
-    if (!profile)
+#[no_mangle]
+pub unsafe extern "C" fn blk_crypto_config_supported_natively(bdev: *mut block_device, cfg: *mut blk_crypto_config) -> bool {
+    let mut profile = bdev_get_queue(bdev).crypto_profile;
+    if (!profile) {
     return false;
-    if (!(cfg.flags & BLK_CRYPTO_CFG_ALLOW_HW))
+    }
+    if (!(cfg.flags & BLK_CRYPTO_CFG_ALLOW_HW)) {
     return false;
-    if (!(profile.modes_supported[cfg.crypto_mode] & cfg.data_unit_size))
+    }
+    if (!(profile.modes_supported[cfg.crypto_mode] & cfg.data_unit_size)) {
     return false;
-    if (profile.max_dun_bytes_supported < cfg.dun_bytes)
+    }
+    if (profile.max_dun_bytes_supported < cfg.dun_bytes) {
     return false;
-    if (!(profile.key_types_supported & cfg.key_type))
+    }
+    if (!(profile.key_types_supported & cfg.key_type)) {
     return false;
+    }
     return true;
     }
 //
@@ -397,11 +613,11 @@ pub unsafe extern "C" fn __blk_crypto_submit_bio(bio: *mut bio) -> bool {
 // disabled or the needed algorithm is disabled in the crypto API; or
 // another -errno code if something else went wrong.
 //
-    int blk_crypto_start_using_key(struct block_device *bdev,
-    const struct blk_crypto_key *key)
-    {
-    if (blk_crypto_config_supported_natively(bdev, &key.crypto_cfg))
+#[no_mangle]
+pub unsafe extern "C" fn blk_crypto_start_using_key(bdev: *mut block_device, key: *mut blk_crypto_key) -> c_int {
+    if (blk_crypto_config_supported_natively(bdev, &key.crypto_cfg)) {
     return 0;
+    }
     if (key.crypto_cfg.key_type != BLK_CRYPTO_KEY_TYPE_RAW) {
     pr_warn_ratelimited("%pg: no support for wrapped keys\n", bdev);
     return -EOPNOTSUPP;
@@ -424,15 +640,16 @@ pub unsafe extern "C" fn __blk_crypto_submit_bio(bio: *mut bio) -> bool {
 //
 // Context: May sleep.
 //
-    void blk_crypto_evict_key(struct block_device *bdev,
-    const struct blk_crypto_key *key)
-    {
-    struct request_queue *q = bdev_get_queue(bdev);
-    int err;
-    if (blk_crypto_config_supported_natively(bdev, &key.crypto_cfg))
+#[no_mangle]
+pub unsafe extern "C" fn blk_crypto_evict_key(bdev: *mut block_device, key: *mut blk_crypto_key) {
+    let mut q = bdev_get_queue(bdev);
+    let mut err = 0;
+    if (blk_crypto_config_supported_natively(bdev, &key.crypto_cfg)) {
     err = __blk_crypto_evict_key(q.crypto_profile, key);
-    else
+    }
+    else {
     err = blk_crypto_fallback_evict_key(key);
+    }
 //
 // An error can only occur here if the key failed to be evicted from a
 // keyslot (due to a hardware or driver issue) or is allegedly still in
@@ -441,130 +658,142 @@ pub unsafe extern "C" fn __blk_crypto_submit_bio(bio: *mut bio) -> bool {
 // is allowed and expected to free it right away.  There's nothing
 // callers can do to handle errors, so just log them and return void.
 //
-    if (err)
+    if (err) {
     pr_warn_ratelimited("%pg: error %d evicting key\n", bdev, err);
     }
+    }
     EXPORT_SYMBOL_GPL(blk_crypto_evict_key);
-    static int blk_crypto_ioctl_import_key(struct blk_crypto_profile *profile,
-    void __user *argp)
-    {
-    struct blk_crypto_import_key_arg arg;
+#[no_mangle]
+pub unsafe extern "C" fn blk_crypto_ioctl_import_key(profile: *mut blk_crypto_profile, argp: *mut c_void) -> c_int {
+pub static mut arg: usize = 0;
     u8 raw_key[BLK_CRYPTO_MAX_RAW_KEY_SIZE];
     u8 lt_key[BLK_CRYPTO_MAX_HW_WRAPPED_KEY_SIZE];
-    int ret;
-    if (copy_from_user(&arg, argp, sizeof(arg)))
+    let mut ret = 0;
+    if (copy_from_user(&arg, argp, sizeof!(arg))) {
     return -EFAULT;
-    if (memchr_inv(arg.reserved, 0, sizeof(arg.reserved)))
+    }
+    if (memchr_inv(arg.reserved, 0, sizeof!(arg.reserved))) {
     return -EINVAL;
-    if (arg.raw_key_size < 16 || arg.raw_key_size > sizeof(raw_key))
+    }
+    if (arg.raw_key_size < 16 || arg.raw_key_size > sizeof!(raw_key)) {
     return -EINVAL;
+    }
     if (copy_from_user(raw_key, u64_to_user_ptr(arg.raw_key_ptr),
     arg.raw_key_size)) {
     ret = -EFAULT;
-    goto out;
+// goto;
     }
     ret = blk_crypto_import_key(profile, raw_key, arg.raw_key_size, lt_key);
-    if (ret < 0)
-    goto out;
+    if (ret < 0) {
+// goto;
+    }
     if (ret > arg.lt_key_size) {
     ret = -EOVERFLOW;
-    goto out;
+// goto;
     }
     arg.lt_key_size = ret;
     if (copy_to_user(u64_to_user_ptr(arg.lt_key_ptr), lt_key,
     arg.lt_key_size) ||
-    copy_to_user(argp, &arg, sizeof(arg))) {
+    copy_to_user(argp, &arg, sizeof!(arg))) {
     ret = -EFAULT;
-    goto out;
+// goto;
     }
     ret = 0;
-    out:
-    memzero_explicit(raw_key, sizeof(raw_key));
-    memzero_explicit(lt_key, sizeof(lt_key));
+// label;
+    memzero_explicit(raw_key, sizeof!(raw_key));
+    memzero_explicit(lt_key, sizeof!(lt_key));
     return ret;
     }
-    static int blk_crypto_ioctl_generate_key(struct blk_crypto_profile *profile,
-    void __user *argp)
-    {
-    struct blk_crypto_generate_key_arg arg;
+#[no_mangle]
+pub unsafe extern "C" fn blk_crypto_ioctl_generate_key(profile: *mut blk_crypto_profile, argp: *mut c_void) -> c_int {
+pub static mut arg: usize = 0;
     u8 lt_key[BLK_CRYPTO_MAX_HW_WRAPPED_KEY_SIZE];
-    int ret;
-    if (copy_from_user(&arg, argp, sizeof(arg)))
+    let mut ret = 0;
+    if (copy_from_user(&arg, argp, sizeof!(arg))) {
     return -EFAULT;
-    if (memchr_inv(arg.reserved, 0, sizeof(arg.reserved)))
+    }
+    if (memchr_inv(arg.reserved, 0, sizeof!(arg.reserved))) {
     return -EINVAL;
+    }
     ret = blk_crypto_generate_key(profile, lt_key);
-    if (ret < 0)
-    goto out;
+    if (ret < 0) {
+// goto;
+    }
     if (ret > arg.lt_key_size) {
     ret = -EOVERFLOW;
-    goto out;
+// goto;
     }
     arg.lt_key_size = ret;
     if (copy_to_user(u64_to_user_ptr(arg.lt_key_ptr), lt_key,
     arg.lt_key_size) ||
-    copy_to_user(argp, &arg, sizeof(arg))) {
+    copy_to_user(argp, &arg, sizeof!(arg))) {
     ret = -EFAULT;
-    goto out;
+// goto;
     }
     ret = 0;
-    out:
-    memzero_explicit(lt_key, sizeof(lt_key));
+// label;
+    memzero_explicit(lt_key, sizeof!(lt_key));
     return ret;
     }
-    static int blk_crypto_ioctl_prepare_key(struct blk_crypto_profile *profile,
-    void __user *argp)
-    {
-    struct blk_crypto_prepare_key_arg arg;
+#[no_mangle]
+pub unsafe extern "C" fn blk_crypto_ioctl_prepare_key(profile: *mut blk_crypto_profile, argp: *mut c_void) -> c_int {
+pub static mut arg: usize = 0;
     u8 lt_key[BLK_CRYPTO_MAX_HW_WRAPPED_KEY_SIZE];
     u8 eph_key[BLK_CRYPTO_MAX_HW_WRAPPED_KEY_SIZE];
-    int ret;
-    if (copy_from_user(&arg, argp, sizeof(arg)))
+    let mut ret = 0;
+    if (copy_from_user(&arg, argp, sizeof!(arg))) {
     return -EFAULT;
-    if (memchr_inv(arg.reserved, 0, sizeof(arg.reserved)))
+    }
+    if (memchr_inv(arg.reserved, 0, sizeof!(arg.reserved))) {
     return -EINVAL;
-    if (arg.lt_key_size > sizeof(lt_key))
+    }
+    if (arg.lt_key_size > sizeof!(lt_key)) {
     return -EINVAL;
+    }
     if (copy_from_user(lt_key, u64_to_user_ptr(arg.lt_key_ptr),
     arg.lt_key_size)) {
     ret = -EFAULT;
-    goto out;
+// goto;
     }
     ret = blk_crypto_prepare_key(profile, lt_key, arg.lt_key_size, eph_key);
-    if (ret < 0)
-    goto out;
+    if (ret < 0) {
+// goto;
+    }
     if (ret > arg.eph_key_size) {
     ret = -EOVERFLOW;
-    goto out;
+// goto;
     }
     arg.eph_key_size = ret;
     if (copy_to_user(u64_to_user_ptr(arg.eph_key_ptr), eph_key,
     arg.eph_key_size) ||
-    copy_to_user(argp, &arg, sizeof(arg))) {
+    copy_to_user(argp, &arg, sizeof!(arg))) {
     ret = -EFAULT;
-    goto out;
+// goto;
     }
     ret = 0;
-    out:
-    memzero_explicit(lt_key, sizeof(lt_key));
-    memzero_explicit(eph_key, sizeof(eph_key));
+// label;
+    memzero_explicit(lt_key, sizeof!(lt_key));
+    memzero_explicit(eph_key, sizeof!(eph_key));
     return ret;
     }
-    int blk_crypto_ioctl(struct block_device *bdev, unsigned int cmd,
-    void __user *argp)
-    {
-    struct blk_crypto_profile *profile =
-    bdev_get_queue(bdev).crypto_profile;
-    if (!profile)
+#[no_mangle]
+pub unsafe extern "C" fn blk_crypto_ioctl(bdev: *mut block_device, cmd: c_uint, argp: *mut c_void) -> c_int {
+    let mut profile = bdev_get_queue(bdev).crypto_profile;
+    if (!profile) {
     return -EOPNOTSUPP;
-    switch (cmd) {
-    case BLKCRYPTOIMPORTKEY:
+    }
+    match (cmd) {
+    BLKCRYPTOIMPORTKEY => {
     return blk_crypto_ioctl_import_key(profile, argp);
-    case BLKCRYPTOGENERATEKEY:
+    }
+    BLKCRYPTOGENERATEKEY => {
     return blk_crypto_ioctl_generate_key(profile, argp);
-    case BLKCRYPTOPREPAREKEY:
+    }
+    BLKCRYPTOPREPAREKEY => {
     return blk_crypto_ioctl_prepare_key(profile, argp);
-    default:
+    }
+    _ => {
     return -ENOTTY;
+    }
     }
     }

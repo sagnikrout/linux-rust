@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -42,69 +292,37 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // policies)
 //
 
-    let mut sched_rr_timeslice: c_int = RR_TIMESLICE;
+pub static mut sched_rr_timeslice: c_int = 0;
 // More than 4 hours if BW_SHIFT equals 20.
-    let mut max_rt_runtime: static u64 = MAX_BW;
+pub static mut max_rt_runtime: u64 = 0;
 //
 // period over which we measure -rt task CPU usage in us.
 // default: 1s
 //
-    let mut sysctl_sched_rt_period: c_int = 1000000;
+pub static mut sysctl_sched_rt_period: c_int = 1000000;
 //
 // part of the period that we allow rt tasks to run in us.
 // default: 1s
 //
-    let mut sysctl_sched_rt_runtime: c_int = 1000000;
+pub static mut sysctl_sched_rt_runtime: c_int = 1000000;
 
-    let mut sysctl_sched_rr_timeslice: static int = (MSEC_PER_SEC * RR_TIMESLICE) / HZ;
-    static int sched_rt_handler(const struct ctl_table *table, int write, void *buffer,
-    size_t *lenp, loff_t *ppos);
-    static int sched_rr_handler(const struct ctl_table *table, int write, void *buffer,
-    size_t *lenp, loff_t *ppos);
-    static const struct ctl_table sched_rt_sysctls[] = {
-    {
-    .procname       = "sched_rt_period_us",
-    .data           = &sysctl_sched_rt_period,
-    .maxlen         = sizeof(int),
-    .mode           = 0644,
-    .proc_handler   = sched_rt_handler,
-    .extra1         = SYSCTL_ONE,
-    .extra2         = SYSCTL_INT_MAX,
-    },
-    {
-    .procname       = "sched_rt_runtime_us",
-    .data           = &sysctl_sched_rt_runtime,
-    .maxlen         = sizeof(int),
-    .mode           = 0644,
-    .proc_handler   = sched_rt_handler,
-    .extra1         = SYSCTL_NEG_ONE,
-    .extra2         = (void *)&sysctl_sched_rt_period,
-    },
-    {
-    .procname       = "sched_rr_timeslice_ms",
-    .data           = &sysctl_sched_rr_timeslice,
-    .maxlen         = sizeof(int),
-    .mode           = 0644,
-    .proc_handler   = sched_rr_handler,
-    },
-    };
+pub static mut sysctl_sched_rr_timeslice: int = 0;
+// forward_decl: sched_rt_handler;
+// forward_decl: sched_rr_handler;
+pub static mut ctl_table: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn sched_rt_sysctl_init() -> int __init {
-    static int __init sched_rt_sysctl_init(void)
-    {
+unsafe extern "C" fn sched_rt_sysctl_init() -> c_int {
     register_sysctl_init("kernel", sched_rt_sysctls);
     return 0;
     }
-    late_initcall(sched_rt_sysctl_init);
+    late_initcall!(sched_rt_sysctl_init);
 
 #[no_mangle]
 pub unsafe extern "C" fn init_rt_rq(rt_rq: *mut rt_rq) {
-    void init_rt_rq(struct rt_rq *rt_rq)
-    {
-    struct rt_prio_array *array;
-    int i;
+pub static mut array: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
     array = &rt_rq.active;
-    for (i = 0; i < MAX_RT_PRIO; i++) {
+    while (i < MAX_RT_PRIO) {
     INIT_LIST_HEAD(array.queue + i);
     __clear_bit(i, array.bitmap);
     }
@@ -125,33 +343,30 @@ pub unsafe extern "C" fn init_rt_rq(rt_rq: *mut rt_rq) {
 
     }
 
-    static int do_sched_rt_period_timer(struct rt_bandwidth *rt_b, int overrun);
+// forward_decl: do_sched_rt_period_timer;
 #[no_mangle]
 unsafe extern "C" fn sched_rt_period_timer(timer: *mut hrtimer) -> enum hrtimer_restart {
-    static enum hrtimer_restart sched_rt_period_timer(struct hrtimer *timer)
-    {
-    struct rt_bandwidth *rt_b =
-    container_of(timer, struct rt_bandwidth, rt_period_timer);
-    let mut idle: c_int = 0;
-    int overrun;
+    let mut rt_b = container_of!(timer, rt_bandwidth, rt_period_timer);
+pub static mut idle: c_int = 0;
+    let mut overrun = 0;
     raw_spin_lock(&rt_b.rt_runtime_lock);
     for (;;) {
     overrun = hrtimer_forward_now(timer, rt_b.rt_period);
-    if (!overrun)
+    if (!overrun) {
     break;
+    }
     raw_spin_unlock(&rt_b.rt_runtime_lock);
     idle = do_sched_rt_period_timer(rt_b, overrun);
     raw_spin_lock(&rt_b.rt_runtime_lock);
     }
-    if (idle)
+    if (idle) {
     rt_b.rt_period_active = 0;
+    }
     raw_spin_unlock(&rt_b.rt_runtime_lock);
     return idle ? HRTIMER_NORESTART : HRTIMER_RESTART;
     }
 #[no_mangle]
 pub unsafe extern "C" fn init_rt_bandwidth(rt_b: *mut rt_bandwidth, period: u64, runtime: u64) {
-    void init_rt_bandwidth(struct rt_bandwidth *rt_b, u64 period, u64 runtime)
-    {
     rt_b.rt_period = ns_to_ktime(period);
     rt_b.rt_runtime = runtime;
     raw_spin_lock_init(&rt_b.rt_runtime_lock);
@@ -160,8 +375,6 @@ pub unsafe extern "C" fn init_rt_bandwidth(rt_b: *mut rt_bandwidth, period: u64,
     }
 #[no_mangle]
 pub unsafe extern "C" fn do_start_rt_bandwidth(rt_b: *mut rt_bandwidth) {
-    static inline void do_start_rt_bandwidth(struct rt_bandwidth *rt_b)
-    {
     raw_spin_lock(&rt_b.rt_runtime_lock);
     if (!rt_b.rt_period_active) {
     rt_b.rt_period_active = 1;
@@ -181,169 +394,180 @@ pub unsafe extern "C" fn do_start_rt_bandwidth(rt_b: *mut rt_bandwidth) {
     }
 #[no_mangle]
 unsafe extern "C" fn start_rt_bandwidth(rt_b: *mut rt_bandwidth) {
-    static void start_rt_bandwidth(struct rt_bandwidth *rt_b)
-    {
-    if (!rt_bandwidth_enabled() || rt_b.rt_runtime == RUNTIME_INF)
+    if (!rt_bandwidth_enabled() || rt_b.rt_runtime == RUNTIME_INF) {
     return;
+    }
     do_start_rt_bandwidth(rt_b);
     }
 #[no_mangle]
 unsafe extern "C" fn destroy_rt_bandwidth(rt_b: *mut rt_bandwidth) {
-    static void destroy_rt_bandwidth(struct rt_bandwidth *rt_b)
-    {
     hrtimer_cancel(&rt_b.rt_period_timer);
     }
 
-    static inline struct task_struct *rt_task_of(struct sched_rt_entity *rt_se)
-    {
-    WARN_ON_ONCE(!rt_entity_is_task(rt_se));
-    return container_of(rt_se, struct task_struct, rt);
+#[no_mangle]
+pub unsafe extern "C" fn rt_task_of(rt_se: *mut sched_rt_entity) -> *mut c_void {
+    WARN_ON_ONCE!(!rt_entity_is_task(rt_se));
+    return container_of!(rt_se, task_struct, rt);
     }
-    static inline struct rq *rq_of_rt_rq(struct rt_rq *rt_rq)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn rq_of_rt_rq(rt_rq: *mut rt_rq) -> *mut c_void {
 // Cannot fold with non-CONFIG_RT_GROUP_SCHED version, layout
-    WARN_ON(!rt_group_sched_enabled() && rt_rq.tg != &root_task_group);
+    WARN_ON!(!rt_group_sched_enabled() && rt_rq.tg != &root_task_group);
     return rt_rq.rq;
     }
-    static inline struct rt_rq *rt_rq_of_se(struct sched_rt_entity *rt_se)
-    {
-    WARN_ON(!rt_group_sched_enabled() && rt_se.rt_rq.tg != &root_task_group);
+#[no_mangle]
+pub unsafe extern "C" fn rt_rq_of_se(rt_se: *mut sched_rt_entity) -> *mut c_void {
+    WARN_ON!(!rt_group_sched_enabled() && rt_se.rt_rq.tg != &root_task_group);
     return rt_se.rt_rq;
     }
-    static inline struct rq *rq_of_rt_se(struct sched_rt_entity *rt_se)
-    {
-    struct rt_rq *rt_rq = rt_se.rt_rq;
-    WARN_ON(!rt_group_sched_enabled() && rt_rq.tg != &root_task_group);
+#[no_mangle]
+pub unsafe extern "C" fn rq_of_rt_se(rt_se: *mut sched_rt_entity) -> *mut c_void {
+    let mut rt_rq = rt_se.rt_rq;
+    WARN_ON!(!rt_group_sched_enabled() && rt_rq.tg != &root_task_group);
     return rt_rq.rq;
     }
 #[no_mangle]
 pub unsafe extern "C" fn unregister_rt_sched_group(tg: *mut task_group) {
-    void unregister_rt_sched_group(struct task_group *tg)
-    {
-    if (!rt_group_sched_enabled())
+    if (!rt_group_sched_enabled()) {
     return;
-    if (tg.rt_se)
+    }
+    if (tg.rt_se) {
     destroy_rt_bandwidth(&tg.rt_bandwidth);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn free_rt_sched_group(tg: *mut task_group) {
-    void free_rt_sched_group(struct task_group *tg)
-    {
-    int i;
-    if (!rt_group_sched_enabled())
+    let mut i = 0;
+    if (!rt_group_sched_enabled()) {
     return;
+    }
     for_each_possible_cpu(i) {
-    if (tg.rt_rq)
+    if (tg.rt_rq) {
     kfree(tg.rt_rq[i]);
-    if (tg.rt_se)
+    }
+    if (tg.rt_se) {
     kfree(tg.rt_se[i]);
+    }
     }
     kfree(tg.rt_rq);
     kfree(tg.rt_se);
     }
-    void init_tg_rt_entry(struct task_group *tg, struct rt_rq *rt_rq,
-    struct sched_rt_entity *rt_se, int cpu,
-    struct sched_rt_entity *parent)
-    {
-    struct rq *rq = cpu_rq(cpu);
+#[no_mangle]
+pub unsafe extern "C" fn init_tg_rt_entry(tg: *mut task_group, rt_rq: *mut rt_rq, rt_se: *mut sched_rt_entity, cpu: c_int, parent: *mut sched_rt_entity) {
+    let mut rq = cpu_rq(cpu);
     rt_rq.highest_prio.curr = MAX_RT_PRIO-1;
     rt_rq.rt_nr_boosted = 0;
     rt_rq.rq = rq;
     rt_rq.tg = tg;
     tg.rt_rq[cpu] = rt_rq;
     tg.rt_se[cpu] = rt_se;
-    if (!rt_se)
+    if (!rt_se) {
     return;
-    if (!parent)
+    }
+    if (!parent) {
     rt_se.rt_rq = &rq.rt;
-    else
+    }
+    else {
     rt_se.rt_rq = parent.my_q;
+    }
     rt_se.my_q = rt_rq;
     rt_se.parent = parent;
     INIT_LIST_HEAD(&rt_se.run_list);
     }
 #[no_mangle]
 pub unsafe extern "C" fn alloc_rt_sched_group(tg: *mut task_group, parent: *mut task_group) -> c_int {
-    int alloc_rt_sched_group(struct task_group *tg, struct task_group *parent)
-    {
-    struct rt_rq *rt_rq;
-    struct sched_rt_entity *rt_se;
-    int i;
-    if (!rt_group_sched_enabled())
+pub static mut rt_rq: *mut c_void = core::ptr::null_mut();
+pub static mut rt_se: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    if (!rt_group_sched_enabled()) {
     return 1;
+    }
     tg.rt_rq = kzalloc_objs(rt_rq, nr_cpu_ids);
-    if (!tg.rt_rq)
-    goto err;
+    if (!tg.rt_rq) {
+// goto;
+    }
     tg.rt_se = kzalloc_objs(rt_se, nr_cpu_ids);
-    if (!tg.rt_se)
-    goto err;
+    if (!tg.rt_se) {
+// goto;
+    }
     init_rt_bandwidth(&tg.rt_bandwidth, ktime_to_ns(global_rt_period()), 0);
     for_each_possible_cpu(i) {
-    rt_rq = kzalloc_node(sizeof(struct rt_rq),
+    rt_rq = kzalloc_node(sizeof!(rt_rq),
     GFP_KERNEL, cpu_to_node(i));
-    if (!rt_rq)
-    goto err;
-    rt_se = kzalloc_node(sizeof(struct sched_rt_entity),
+    if (!rt_rq) {
+// goto;
+    }
+    rt_se = kzalloc_node(sizeof!(sched_rt_entity),
     GFP_KERNEL, cpu_to_node(i));
-    if (!rt_se)
-    goto err_free_rq;
+    if (!rt_se) {
+// goto;
+    }
     init_rt_rq(rt_rq);
     rt_rq.rt_runtime = tg.rt_bandwidth.rt_runtime;
     init_tg_rt_entry(tg, rt_rq, rt_se, i, parent.rt_se[i]);
     }
     return 1;
-    err_free_rq:
+// label;
     kfree(rt_rq);
-    err:
+// label;
     return 0;
     }
 
-    static inline struct task_struct *rt_task_of(struct sched_rt_entity *rt_se)
-    {
-    return container_of(rt_se, struct task_struct, rt);
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: rt_task_of
+pub unsafe extern "C" fn rt_task_of_dup(rt_se: *mut sched_rt_entity) -> *mut c_void {
+    return container_of!(rt_se, task_struct, rt);
     }
-    static inline struct rq *rq_of_rt_rq(struct rt_rq *rt_rq)
-    {
-    return container_of(rt_rq, struct rq, rt);
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: rq_of_rt_rq
+pub unsafe extern "C" fn rq_of_rt_rq_dup(rt_rq: *mut rt_rq) -> *mut c_void {
+    return container_of!(rt_rq, rq, rt);
     }
-    static inline struct rq *rq_of_rt_se(struct sched_rt_entity *rt_se)
-    {
-    struct task_struct *p = rt_task_of(rt_se);
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: rq_of_rt_se
+pub unsafe extern "C" fn rq_of_rt_se_dup(rt_se: *mut sched_rt_entity) -> *mut c_void {
+    let mut p = rt_task_of(rt_se);
     return task_rq(p);
     }
-    static inline struct rt_rq *rt_rq_of_se(struct sched_rt_entity *rt_se)
-    {
-    struct rq *rq = rq_of_rt_se(rt_se);
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: rt_rq_of_se
+pub unsafe extern "C" fn rt_rq_of_se_dup(rt_se: *mut sched_rt_entity) -> *mut c_void {
+    let mut rq = rq_of_rt_se(rt_se);
     return &rq.rt;
     }
-    void unregister_rt_sched_group(struct task_group *tg) { }
-    void free_rt_sched_group(struct task_group *tg) { }
 #[no_mangle]
-pub unsafe extern "C" fn alloc_rt_sched_group(tg: *mut task_group, parent: *mut task_group) -> c_int {
-    int alloc_rt_sched_group(struct task_group *tg, struct task_group *parent)
-    {
+#[no_mangle]
+// duplicate fn: unregister_rt_sched_group
+pub unsafe extern "C" fn unregister_rt_sched_group_dup(tg: *mut task_group) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: free_rt_sched_group
+pub unsafe extern "C" fn free_rt_sched_group_dup(tg: *mut task_group) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: alloc_rt_sched_group
+pub unsafe extern "C" fn alloc_rt_sched_group_dup(tg: *mut task_group, parent: *mut task_group) -> c_int {
     return 1;
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn need_pull_rt_task(rq: *mut rq, prev: *mut task_struct) -> bool {
-    static inline bool need_pull_rt_task(struct rq *rq, struct task_struct *prev)
-    {
 // Try to pull RT tasks here if we lower this rq's prio
     return rq.online && rq.rt.highest_prio.curr > prev.prio;
     }
 #[no_mangle]
 pub unsafe extern "C" fn rt_overloaded(rq: *mut rq) -> c_int {
-    static inline int rt_overloaded(struct rq *rq)
-    {
     return atomic_read(&rq.rd.rto_count);
     }
 #[no_mangle]
 pub unsafe extern "C" fn rt_set_overload(rq: *mut rq) {
-    static inline void rt_set_overload(struct rq *rq)
-    {
-    if (!rq.online)
+    if (!rq.online) {
     return;
+    }
     cpumask_set_cpu(rq.cpu, rq.rd.rto_mask);
 //
 // Make sure the mask is visible before we set
@@ -359,48 +583,41 @@ pub unsafe extern "C" fn rt_set_overload(rq: *mut rq) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn rt_clear_overload(rq: *mut rq) {
-    static inline void rt_clear_overload(struct rq *rq)
-    {
-    if (!rq.online)
+    if (!rq.online) {
     return;
+    }
 // the order here really doesn't matter
     atomic_dec(&rq.rd.rto_count);
     cpumask_clear_cpu(rq.cpu, rq.rd.rto_mask);
     }
 #[no_mangle]
 pub unsafe extern "C" fn has_pushable_tasks(rq: *mut rq) -> c_int {
-    static inline int has_pushable_tasks(struct rq *rq)
-    {
     return !plist_head_empty(&rq.rt.pushable_tasks);
     }
-    static DEFINE_PER_CPU(struct balance_callback, rt_push_head);
-    static DEFINE_PER_CPU(struct balance_callback, rt_pull_head);
-    static void push_rt_tasks(struct rq *);
-    static void pull_rt_task(struct rq *);
+pub static mut struct balance_callback: usize = 0;
+pub static mut struct balance_callback: usize = 0;
+// forward_decl: push_rt_tasks;
+// forward_decl: pull_rt_task;
 #[no_mangle]
 pub unsafe extern "C" fn rt_queue_push_tasks(rq: *mut rq) {
-    static inline void rt_queue_push_tasks(struct rq *rq)
-    {
-    if (!has_pushable_tasks(rq))
+    if (!has_pushable_tasks(rq)) {
     return;
+    }
     queue_balance_callback(rq, &per_cpu(rt_push_head, rq.cpu), push_rt_tasks);
     }
 #[no_mangle]
 pub unsafe extern "C" fn rt_queue_pull_task(rq: *mut rq) {
-    static inline void rt_queue_pull_task(struct rq *rq)
-    {
     queue_balance_callback(rq, &per_cpu(rt_pull_head, rq.cpu), pull_rt_task);
     }
 #[no_mangle]
 unsafe extern "C" fn enqueue_pushable_task(rq: *mut rq, p: *mut task_struct) {
-    static void enqueue_pushable_task(struct rq *rq, struct task_struct *p)
-    {
     plist_del(&p.pushable_tasks, &rq.rt.pushable_tasks);
     plist_node_init(&p.pushable_tasks, p.prio);
     plist_add(&p.pushable_tasks, &rq.rt.pushable_tasks);
 // Update the highest prio pushable task
-    if (p.prio < rq.rt.highest_prio.next)
+    if (p.prio < rq.rt.highest_prio.next) {
     rq.rt.highest_prio.next = p.prio;
+    }
     if (!rq.rt.overloaded) {
     rt_set_overload(rq);
     rq.rt.overloaded = 1;
@@ -408,13 +625,10 @@ unsafe extern "C" fn enqueue_pushable_task(rq: *mut rq, p: *mut task_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn dequeue_pushable_task(rq: *mut rq, p: *mut task_struct) {
-    static void dequeue_pushable_task(struct rq *rq, struct task_struct *p)
-    {
     plist_del(&p.pushable_tasks, &rq.rt.pushable_tasks);
 // Update the new highest prio pushable task
     if (has_pushable_tasks(rq)) {
-    p = plist_first_entry(&rq.rt.pushable_tasks,
-    struct task_struct, pushable_tasks);
+    p = plist_first_entry(&rq.rt.pushable_tasks, task_struct, pushable_tasks);
     rq.rt.highest_prio.next = p.prio;
     } else {
     rq.rt.highest_prio.next = MAX_RT_PRIO-1;
@@ -424,12 +638,10 @@ unsafe extern "C" fn dequeue_pushable_task(rq: *mut rq, p: *mut task_struct) {
     }
     }
     }
-    static void enqueue_top_rt_rq(struct rt_rq *rt_rq);
-    static void dequeue_top_rt_rq(struct rt_rq *rt_rq, unsigned int count);
+// forward_decl: enqueue_top_rt_rq;
+// forward_decl: dequeue_top_rt_rq;
 #[no_mangle]
 pub unsafe extern "C" fn on_rt_rq(rt_se: *mut sched_rt_entity) -> c_int {
-    static inline int on_rt_rq(struct sched_rt_entity *rt_se)
-    {
     return rt_se.on_rq;
     }
 
@@ -449,14 +661,13 @@ pub unsafe extern "C" fn on_rt_rq(rt_se: *mut sched_rt_entity) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn rt_task_fits_capacity(p: *mut task_struct, cpu: c_int) -> bool {
-    static inline bool rt_task_fits_capacity(struct task_struct *p, int cpu)
-    {
-    unsigned int min_cap;
-    unsigned int max_cap;
-    unsigned int cpu_cap;
+    let mut min_cap = 0;
+    let mut max_cap = 0;
+    let mut cpu_cap = 0;
 // Only heterogeneous systems can benefit from this check
-    if (!sched_asym_cpucap_active())
+    if (!sched_asym_cpucap_active()) {
     return true;
+    }
     min_cap = uclamp_eff_value(p, UCLAMP_MIN);
     max_cap = uclamp_eff_value(p, UCLAMP_MAX);
     cpu_cap = arch_scale_cpu_capacity(cpu);
@@ -464,102 +675,95 @@ pub unsafe extern "C" fn rt_task_fits_capacity(p: *mut task_struct, cpu: c_int) 
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn rt_task_fits_capacity(p: *mut task_struct, cpu: c_int) -> bool {
-    static inline bool rt_task_fits_capacity(struct task_struct *p, int cpu)
-    {
+#[no_mangle]
+// duplicate fn: rt_task_fits_capacity
+pub unsafe extern "C" fn rt_task_fits_capacity_dup(p: *mut task_struct, cpu: c_int) -> bool {
     return true;
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn sched_rt_runtime(rt_rq: *mut rt_rq) -> u64 {
-    static inline u64 sched_rt_runtime(struct rt_rq *rt_rq)
-    {
     return rt_rq.rt_runtime;
     }
 #[no_mangle]
 pub unsafe extern "C" fn sched_rt_period(rt_rq: *mut rt_rq) -> u64 {
-    static inline u64 sched_rt_period(struct rt_rq *rt_rq)
-    {
     return ktime_to_ns(rt_rq.tg.rt_bandwidth.rt_period);
     }
     typedef struct task_group *rt_rq_iter_t;
-    static inline struct task_group *next_task_group(struct task_group *tg)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn next_task_group(tg: *mut task_group) -> *mut c_void {
     if (!rt_group_sched_enabled()) {
-    WARN_ON(tg != &root_task_group);
+    WARN_ON!(tg != &root_task_group);
     return core::ptr::null_mut();
     }
     do {
     tg = list_entry_rcu(tg.list.next,
-    typeof(struct task_group), list);
+    typeof(task_group), list);
     } while (&tg.list != &task_groups && task_group_is_autogroup(tg));
-    if (&tg.list == &task_groups)
+    if (&tg.list == &task_groups) {
     tg = core::ptr::null_mut();
+    }
     return tg;
     }
 
-    for (iter = &root_task_group;					\
-    iter && (rt_rq = iter.rt_rq[cpu_of(rq)]);		\
-    iter = next_task_group(iter))
+    for (iter = &root_task_group;					
+    iter && (rt_rq = iter.rt_rq[cpu_of(rq)]);		
+    iter = next_task_group(iter)) {
 
     for (; rt_se; rt_se = rt_se.parent)
-    static inline struct rt_rq *group_rt_rq(struct sched_rt_entity *rt_se)
-    {
+    }
+#[no_mangle]
+pub unsafe extern "C" fn group_rt_rq(rt_se: *mut sched_rt_entity) -> *mut c_void {
     return rt_se.my_q;
     }
-    static void enqueue_rt_entity(struct sched_rt_entity *rt_se, unsigned int flags);
-    static void dequeue_rt_entity(struct sched_rt_entity *rt_se, unsigned int flags);
+// forward_decl: enqueue_rt_entity;
+// forward_decl: dequeue_rt_entity;
 #[no_mangle]
 unsafe extern "C" fn sched_rt_rq_enqueue(rt_rq: *mut rt_rq) {
-    static void sched_rt_rq_enqueue(struct rt_rq *rt_rq)
-    {
-    struct task_struct *donor = rq_of_rt_rq(rt_rq).donor;
-    struct rq *rq = rq_of_rt_rq(rt_rq);
-    struct sched_rt_entity *rt_se;
-    let mut cpu: c_int = cpu_of(rq);
+    let mut donor = rq_of_rt_rq(rt_rq).donor;
+    let mut rq = rq_of_rt_rq(rt_rq);
+pub static mut rt_se: *mut c_void = core::ptr::null_mut();
+pub static mut cpu: c_int = 0;
     rt_se = rt_rq.tg.rt_se[cpu];
     if (rt_rq.rt_nr_running) {
-    if (!rt_se)
+    if (!rt_se) {
     enqueue_top_rt_rq(rt_rq);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !on_rt_rq(rt_se)) -> else {
-    else if (!on_rt_rq(rt_se))
+    }
+
+    else if (!on_rt_rq(rt_se)) {
     enqueue_rt_entity(rt_se, 0);
-    if (rt_rq.highest_prio.curr < donor.prio)
+    }
+    if (rt_rq.highest_prio.curr < donor.prio) {
     resched_curr(rq);
+    }
     }
     }
 #[no_mangle]
 unsafe extern "C" fn sched_rt_rq_dequeue(rt_rq: *mut rt_rq) {
-    static void sched_rt_rq_dequeue(struct rt_rq *rt_rq)
-    {
-    struct sched_rt_entity *rt_se;
-    let mut cpu: c_int = cpu_of(rq_of_rt_rq(rt_rq));
+pub static mut rt_se: *mut c_void = core::ptr::null_mut();
+pub static mut cpu: c_int = 0;
     rt_se = rt_rq.tg.rt_se[cpu];
     if (!rt_se) {
     dequeue_top_rt_rq(rt_rq, rt_rq.rt_nr_running);
 // Kick cpufreq (see the comment in kernel/sched/sched.h).
     cpufreq_update_util(rq_of_rt_rq(rt_rq), 0);
     }
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: on_rt_rq(rt_se)) -> else {
-    else if (on_rt_rq(rt_se))
+
+    else if (on_rt_rq(rt_se)) {
     dequeue_rt_entity(rt_se, 0);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn rt_rq_throttled(rt_rq: *mut rt_rq) -> c_int {
-    static inline int rt_rq_throttled(struct rt_rq *rt_rq)
-    {
     return rt_rq.rt_throttled && !rt_rq.rt_nr_boosted;
     }
 #[no_mangle]
 unsafe extern "C" fn rt_se_boosted(rt_se: *mut sched_rt_entity) -> c_int {
-    static int rt_se_boosted(struct sched_rt_entity *rt_se)
-    {
-    struct rt_rq *rt_rq = group_rt_rq(rt_se);
-    struct task_struct *p;
-    if (rt_rq)
+    let mut rt_rq = group_rt_rq(rt_se);
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    if (rt_rq) {
     return !!rt_rq.rt_nr_boosted;
+    }
     p = rt_task_of(rt_se);
     return p.prio != p.normal_prio;
     }
@@ -567,20 +771,17 @@ unsafe extern "C" fn rt_se_boosted(rt_se: *mut sched_rt_entity) -> c_int {
     {
     return this_rq().rd.span;
     }
-    static inline
-    struct rt_rq *sched_rt_period_rt_rq(struct rt_bandwidth *rt_b, int cpu)
-    {
-    return container_of(rt_b, struct task_group, rt_bandwidth).rt_rq[cpu];
+#[no_mangle]
+pub unsafe extern "C" fn sched_rt_period_rt_rq(rt_b: *mut rt_bandwidth, cpu: c_int) -> *mut c_void {
+    return container_of!(rt_b, task_group, rt_bandwidth).rt_rq[cpu];
     }
-    static inline struct rt_bandwidth *sched_rt_bandwidth(struct rt_rq *rt_rq)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sched_rt_bandwidth(rt_rq: *mut rt_rq) -> *mut c_void {
     return &rt_rq.tg.rt_bandwidth;
     }
 #[no_mangle]
 pub unsafe extern "C" fn sched_rt_bandwidth_account(rt_rq: *mut rt_rq) -> bool {
-    bool sched_rt_bandwidth_account(struct rt_rq *rt_rq)
-    {
-    struct rt_bandwidth *rt_b = sched_rt_bandwidth(rt_rq);
+    let mut rt_b = sched_rt_bandwidth(rt_rq);
     return (hrtimer_active(&rt_b.rt_period_timer) ||
     rt_rq.rt_time < rt_b.rt_runtime);
     }
@@ -589,28 +790,29 @@ pub unsafe extern "C" fn sched_rt_bandwidth_account(rt_rq: *mut rt_rq) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn do_balance_runtime(rt_rq: *mut rt_rq) {
-    static void do_balance_runtime(struct rt_rq *rt_rq)
-    {
-    struct rt_bandwidth *rt_b = sched_rt_bandwidth(rt_rq);
-    struct root_domain *rd = rq_of_rt_rq(rt_rq).rd;
-    int i, weight;
-    u64 rt_period;
+    let mut rt_b = sched_rt_bandwidth(rt_rq);
+    let mut rd = rq_of_rt_rq(rt_rq).rd;
+    let mut i = 0;
+    let mut weight = 0;
+    let mut rt_period = 0;
     weight = cpumask_weight(rd.span);
     raw_spin_lock(&rt_b.rt_runtime_lock);
     rt_period = ktime_to_ns(rt_b.rt_period);
     for_each_cpu(i, rd.span) {
-    struct rt_rq *iter = sched_rt_period_rt_rq(rt_b, i);
-    s64 diff;
-    if (iter == rt_rq)
+    let mut iter = sched_rt_period_rt_rq(rt_b, i);
+    let mut diff = 0;
+    if (iter == rt_rq) {
     continue;
+    }
     raw_spin_lock(&iter.rt_runtime_lock);
 //
 // Either all rqs have inf runtime and there's nothing to steal
 // or __disable_runtime() below sets a specific rq to inf to
 // indicate its been disabled and disallow stealing.
 //
-    if (iter.rt_runtime == RUNTIME_INF)
-    goto next;
+    if (iter.rt_runtime == RUNTIME_INF) {
+// goto;
+    }
 //
 // From runqueues with spare time, take 1/n part of their
 // spare time, but no more than our period.
@@ -618,8 +820,9 @@ unsafe extern "C" fn do_balance_runtime(rt_rq: *mut rt_rq) {
     diff = iter.rt_runtime - iter.rt_time;
     if (diff > 0) {
     diff = div_u64((u64)diff, weight);
-    if (rt_rq.rt_runtime + diff > rt_period)
+    if (rt_rq.rt_runtime + diff > rt_period) {
     diff = rt_period - rt_rq.rt_runtime;
+    }
     iter.rt_runtime -= diff;
     rt_rq.rt_runtime += diff;
     if (rt_rq.rt_runtime == rt_period) {
@@ -627,7 +830,7 @@ unsafe extern "C" fn do_balance_runtime(rt_rq: *mut rt_rq) {
     break;
     }
     }
-    next:
+// label;
     raw_spin_unlock(&iter.rt_runtime_lock);
     }
     raw_spin_unlock(&rt_b.rt_runtime_lock);
@@ -637,17 +840,16 @@ unsafe extern "C" fn do_balance_runtime(rt_rq: *mut rt_rq) {
 //
 #[no_mangle]
 unsafe extern "C" fn __disable_runtime(rq: *mut rq) {
-    static void __disable_runtime(struct rq *rq)
-    {
-    struct root_domain *rd = rq.rd;
-    rt_rq_iter_t iter;
-    struct rt_rq *rt_rq;
-    if (unlikely(!scheduler_running))
+    let mut rd = rq.rd;
+    let mut iter;
+pub static mut rt_rq: *mut c_void = core::ptr::null_mut();
+    if (unlikely(!scheduler_running)) {
     return;
+    }
     for_each_rt_rq(rt_rq, iter, rq) {
-    struct rt_bandwidth *rt_b = sched_rt_bandwidth(rt_rq);
-    s64 want;
-    int i;
+    let mut rt_b = sched_rt_bandwidth(rt_rq);
+    let mut want = 0;
+    let mut i = 0;
     raw_spin_lock(&rt_b.rt_runtime_lock);
     raw_spin_lock(&rt_rq.rt_runtime_lock);
 //
@@ -656,8 +858,9 @@ unsafe extern "C" fn __disable_runtime(rq: *mut rq) {
 // exactly the right amount of runtime to take out.
 //
     if (rt_rq.rt_runtime == RUNTIME_INF ||
-    rt_rq.rt_runtime == rt_b.rt_runtime)
-    goto balanced;
+    rt_rq.rt_runtime == rt_b.rt_runtime) {
+// goto;
+    }
     raw_spin_unlock(&rt_rq.rt_runtime_lock);
 //
 // Calculate the difference between what we started out with
@@ -669,13 +872,14 @@ unsafe extern "C" fn __disable_runtime(rq: *mut rq) {
 // Greedy reclaim, take back as much as we can.
 //
     for_each_cpu(i, rd.span) {
-    struct rt_rq *iter = sched_rt_period_rt_rq(rt_b, i);
-    s64 diff;
+    let mut iter = sched_rt_period_rt_rq(rt_b, i);
+    let mut diff = 0;
 //
 // Can't reclaim from ourselves or disabled runqueues.
 //
-    if (iter == rt_rq || iter.rt_runtime == RUNTIME_INF)
+    if (iter == rt_rq || iter.rt_runtime == RUNTIME_INF) {
     continue;
+    }
     raw_spin_lock(&iter.rt_runtime_lock);
     if (want > 0) {
     diff = min_t(s64, iter.rt_runtime, want);
@@ -686,16 +890,17 @@ unsafe extern "C" fn __disable_runtime(rq: *mut rq) {
     want -= want;
     }
     raw_spin_unlock(&iter.rt_runtime_lock);
-    if (!want)
+    if (!want) {
     break;
+    }
     }
     raw_spin_lock(&rt_rq.rt_runtime_lock);
 //
 // We cannot be left wanting - that would mean some runtime
 // leaked out of the system.
 //
-    WARN_ON_ONCE(want);
-    balanced:
+    WARN_ON_ONCE!(want);
+// label;
 //
 // Disable all the borrow logic by pretending we have inf
 // runtime - in which case borrowing doesn't make sense.
@@ -710,17 +915,16 @@ unsafe extern "C" fn __disable_runtime(rq: *mut rq) {
     }
 #[no_mangle]
 unsafe extern "C" fn __enable_runtime(rq: *mut rq) {
-    static void __enable_runtime(struct rq *rq)
-    {
-    rt_rq_iter_t iter;
-    struct rt_rq *rt_rq;
-    if (unlikely(!scheduler_running))
+    let mut iter;
+pub static mut rt_rq: *mut c_void = core::ptr::null_mut();
+    if (unlikely(!scheduler_running)) {
     return;
+    }
 //
 // Reset each runqueue's bandwidth settings
 //
     for_each_rt_rq(rt_rq, iter, rq) {
-    struct rt_bandwidth *rt_b = sched_rt_bandwidth(rt_rq);
+    let mut rt_b = sched_rt_bandwidth(rt_rq);
     raw_spin_lock(&rt_b.rt_runtime_lock);
     raw_spin_lock(&rt_rq.rt_runtime_lock);
     rt_rq.rt_runtime = rt_b.rt_runtime;
@@ -732,10 +936,9 @@ unsafe extern "C" fn __enable_runtime(rq: *mut rq) {
     }
 #[no_mangle]
 unsafe extern "C" fn balance_runtime(rt_rq: *mut rt_rq) {
-    static void balance_runtime(struct rt_rq *rt_rq)
-    {
-    if (!sched_feat(RT_RUNTIME_SHARE))
+    if (!sched_feat(RT_RUNTIME_SHARE)) {
     return;
+    }
     if (rt_rq.rt_time > rt_rq.rt_runtime) {
     raw_spin_unlock(&rt_rq.rt_runtime_lock);
     do_balance_runtime(rt_rq);
@@ -744,10 +947,8 @@ unsafe extern "C" fn balance_runtime(rt_rq: *mut rt_rq) {
     }
 #[no_mangle]
 unsafe extern "C" fn do_sched_rt_period_timer(rt_b: *mut rt_bandwidth, overrun: c_int) -> c_int {
-    static int do_sched_rt_period_timer(struct rt_bandwidth *rt_b, int overrun)
-    {
     int i, idle = 1, throttled = 0;
-    const struct cpumask *span;
+pub static mut span: *mut c_void = core::ptr::null_mut();
     span = sched_rt_period_mask();
 //
 // FIXME: isolated CPUs should really leave the root task group,
@@ -758,32 +959,36 @@ unsafe extern "C" fn do_sched_rt_period_timer(rt_b: *mut rt_bandwidth, overrun: 
 // off to kill the perturbations it causes anyway.  Meanwhile,
 // this maintains functionality for boot and/or troubleshooting.
 //
-    if (rt_b == &root_task_group.rt_bandwidth)
+    if (rt_b == &root_task_group.rt_bandwidth) {
     span = cpu_online_mask;
+    }
     for_each_cpu(i, span) {
-    let mut enqueue: c_int = 0;
-    struct rt_rq *rt_rq = sched_rt_period_rt_rq(rt_b, i);
-    struct rq *rq = rq_of_rt_rq(rt_rq);
-    struct rq_flags rf;
-    int skip;
+pub static mut enqueue: c_int = 0;
+    let mut rt_rq = sched_rt_period_rt_rq(rt_b, i);
+    let mut rq = rq_of_rt_rq(rt_rq);
+pub static mut rf: usize = 0;
+    let mut skip = 0;
 //
 // When span == cpu_online_mask, taking each rq->lock
 // can be time-consuming. Try to avoid it when possible.
 //
     raw_spin_lock(&rt_rq.rt_runtime_lock);
-    if (!sched_feat(RT_RUNTIME_SHARE) && rt_rq.rt_runtime != RUNTIME_INF)
+    if (!sched_feat(RT_RUNTIME_SHARE) && rt_rq.rt_runtime != RUNTIME_INF) {
     rt_rq.rt_runtime = rt_b.rt_runtime;
+    }
     skip = !rt_rq.rt_time && !rt_rq.rt_nr_running;
     raw_spin_unlock(&rt_rq.rt_runtime_lock);
-    if (skip)
+    if (skip) {
     continue;
+    }
     rq_lock(rq, &rf);
     update_rq_clock(rq);
     if (rt_rq.rt_time) {
-    u64 runtime;
+    let mut runtime = 0;
     raw_spin_lock(&rt_rq.rt_runtime_lock);
-    if (rt_rq.rt_throttled)
+    if (rt_rq.rt_throttled) {
     balance_runtime(rt_rq);
+    }
     runtime = rt_rq.rt_runtime;
     rt_rq.rt_time -= min(rt_rq.rt_time, overrun*runtime);
     if (rt_rq.rt_throttled && rt_rq.rt_time < runtime) {
@@ -796,42 +1001,49 @@ unsafe extern "C" fn do_sched_rt_period_timer(rt_b: *mut rt_bandwidth, overrun: 
 // and this unthrottle will get accounted as
 // 'runtime'.
 //
-    if (rt_rq.rt_nr_running && rq.curr == rq.idle)
+    if (rt_rq.rt_nr_running && rq.curr == rq.idle) {
     rq_clock_cancel_skipupdate(rq);
     }
-    if (rt_rq.rt_time || rt_rq.rt_nr_running)
+    }
+    if (rt_rq.rt_time || rt_rq.rt_nr_running) {
     idle = 0;
+    }
     raw_spin_unlock(&rt_rq.rt_runtime_lock);
     } else if (rt_rq.rt_nr_running) {
     idle = 0;
-    if (!rt_rq_throttled(rt_rq))
+    if (!rt_rq_throttled(rt_rq)) {
     enqueue = 1;
     }
-    if (rt_rq.rt_throttled)
+    }
+    if (rt_rq.rt_throttled) {
     throttled = 1;
-    if (enqueue)
+    }
+    if (enqueue) {
     sched_rt_rq_enqueue(rt_rq);
+    }
     rq_unlock(rq, &rf);
     }
-    if (!throttled && (!rt_bandwidth_enabled() || rt_b.rt_runtime == RUNTIME_INF))
+    if (!throttled && (!rt_bandwidth_enabled() || rt_b.rt_runtime == RUNTIME_INF)) {
     return 1;
+    }
     return idle;
     }
 #[no_mangle]
 unsafe extern "C" fn sched_rt_runtime_exceeded(rt_rq: *mut rt_rq) -> c_int {
-    static int sched_rt_runtime_exceeded(struct rt_rq *rt_rq)
-    {
-    let mut runtime: u64 = sched_rt_runtime(rt_rq);
-    if (rt_rq.rt_throttled)
+pub static mut runtime: u64 = 0;
+    if (rt_rq.rt_throttled) {
     return rt_rq_throttled(rt_rq);
-    if (runtime >= sched_rt_period(rt_rq))
+    }
+    if (runtime >= sched_rt_period(rt_rq)) {
     return 0;
+    }
     balance_runtime(rt_rq);
     runtime = sched_rt_runtime(rt_rq);
-    if (runtime == RUNTIME_INF)
+    if (runtime == RUNTIME_INF) {
     return 0;
+    }
     if (rt_rq.rt_time > runtime) {
-    struct rt_bandwidth *rt_b = sched_rt_bandwidth(rt_rq);
+    let mut rt_b = sched_rt_bandwidth(rt_rq);
 //
 // Don't actually throttle groups that have no runtime assigned
 // but accrue some time due to boosting.
@@ -857,55 +1069,57 @@ unsafe extern "C" fn sched_rt_runtime_exceeded(rt_rq: *mut rt_rq) -> c_int {
 
     typedef struct rt_rq *rt_rq_iter_t;
 
-    for ((void) iter, rt_rq = &rq.rt; rt_rq; rt_rq = core::ptr::null_mut())
+    for ((void) iter, rt_rq = &rq.rt; rt_rq; rt_rq = core::ptr::null_mut()) {
 
     for (; rt_se; rt_se = core::ptr::null_mut())
-    static inline struct rt_rq *group_rt_rq(struct sched_rt_entity *rt_se)
-    {
+    }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: group_rt_rq
+pub unsafe extern "C" fn group_rt_rq_dup(rt_se: *mut sched_rt_entity) -> *mut c_void {
     return core::ptr::null_mut();
     }
 #[no_mangle]
 pub unsafe extern "C" fn sched_rt_rq_enqueue(rt_rq: *mut rt_rq) {
-    static inline void sched_rt_rq_enqueue(struct rt_rq *rt_rq)
-    {
-    struct rq *rq = rq_of_rt_rq(rt_rq);
-    if (!rt_rq.rt_nr_running)
+    let mut rq = rq_of_rt_rq(rt_rq);
+    if (!rt_rq.rt_nr_running) {
     return;
+    }
     enqueue_top_rt_rq(rt_rq);
     resched_curr(rq);
     }
 #[no_mangle]
 pub unsafe extern "C" fn sched_rt_rq_dequeue(rt_rq: *mut rt_rq) {
-    static inline void sched_rt_rq_dequeue(struct rt_rq *rt_rq)
-    {
     dequeue_top_rt_rq(rt_rq, rt_rq.rt_nr_running);
     }
 #[no_mangle]
-pub unsafe extern "C" fn rt_rq_throttled(rt_rq: *mut rt_rq) -> c_int {
-    static inline int rt_rq_throttled(struct rt_rq *rt_rq)
-    {
+#[no_mangle]
+// duplicate fn: rt_rq_throttled
+pub unsafe extern "C" fn rt_rq_throttled_dup(rt_rq: *mut rt_rq) -> c_int {
     return false;
     }
     static inline const struct cpumask *sched_rt_period_mask(void)
     {
     return cpu_online_mask;
     }
-    static inline
-    struct rt_rq *sched_rt_period_rt_rq(struct rt_bandwidth *rt_b, int cpu)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sched_rt_period_rt_rq
+pub unsafe extern "C" fn sched_rt_period_rt_rq_dup(rt_b: *mut rt_bandwidth, cpu: c_int) -> *mut c_void {
     return &cpu_rq(cpu).rt;
     }
-    static void __enable_runtime(struct rq *rq) { }
-    static void __disable_runtime(struct rq *rq) { }
+#[no_mangle]
+pub unsafe extern "C" fn __enable_runtime(rq: *mut rq) { }
+#[no_mangle]
+pub unsafe extern "C" fn __disable_runtime(rq: *mut rq) { }
 
 #[no_mangle]
 pub unsafe extern "C" fn rt_se_prio(rt_se: *mut sched_rt_entity) -> c_int {
-    static inline int rt_se_prio(struct sched_rt_entity *rt_se)
-    {
 
-    struct rt_rq *rt_rq = group_rt_rq(rt_se);
-    if (rt_rq)
+    let mut rt_rq = group_rt_rq(rt_se);
+    if (rt_rq) {
     return rt_rq.highest_prio.curr;
+    }
 
     return rt_task_of(rt_se).prio;
     }
@@ -915,55 +1129,59 @@ pub unsafe extern "C" fn rt_se_prio(rt_se: *mut sched_rt_entity) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn update_curr_rt(rq: *mut rq) {
-    static void update_curr_rt(struct rq *rq)
-    {
-    struct task_struct *donor = rq.donor;
-    s64 delta_exec;
-    if (donor.sched_class != &rt_sched_class)
+    let mut donor = rq.donor;
+    let mut delta_exec = 0;
+    if (donor.sched_class != &rt_sched_class) {
     return;
+    }
     delta_exec = update_curr_common(rq);
-    if (unlikely(delta_exec <= 0))
+    if (unlikely(delta_exec <= 0)) {
     return;
+    }
 
-    struct sched_rt_entity *rt_se = &donor.rt;
-    if (!rt_bandwidth_enabled())
+    let mut rt_se = &donor.rt;
+    if (!rt_bandwidth_enabled()) {
     return;
+    }
     for_each_sched_rt_entity(rt_se) {
-    struct rt_rq *rt_rq = rt_rq_of_se(rt_se);
-    int exceeded;
+    let mut rt_rq = rt_rq_of_se(rt_se);
+    let mut exceeded = 0;
     if (sched_rt_runtime(rt_rq) != RUNTIME_INF) {
     raw_spin_lock(&rt_rq.rt_runtime_lock);
     rt_rq.rt_time += delta_exec;
     exceeded = sched_rt_runtime_exceeded(rt_rq);
-    if (exceeded)
+    if (exceeded) {
     resched_curr(rq);
+    }
     raw_spin_unlock(&rt_rq.rt_runtime_lock);
-    if (exceeded)
+    if (exceeded) {
     do_start_rt_bandwidth(sched_rt_bandwidth(rt_rq));
+    }
     }
     }
 
     }
-    static void
-    dequeue_top_rt_rq(struct rt_rq *rt_rq, unsigned int count)
-    {
-    struct rq *rq = rq_of_rt_rq(rt_rq);
-    BUG_ON(&rq.rt != rt_rq);
-    if (!rt_rq.rt_queued)
+#[no_mangle]
+pub unsafe extern "C" fn dequeue_top_rt_rq(rt_rq: *mut rt_rq, count: c_uint) {
+    let mut rq = rq_of_rt_rq(rt_rq);
+    BUG_ON!(&rq.rt != rt_rq);
+    if (!rt_rq.rt_queued) {
     return;
-    BUG_ON(!rq.nr_running);
+    }
+    BUG_ON!(!rq.nr_running);
     sub_nr_running(rq, count);
     rt_rq.rt_queued = 0;
     }
-    static void
-    enqueue_top_rt_rq(struct rt_rq *rt_rq)
-    {
-    struct rq *rq = rq_of_rt_rq(rt_rq);
-    BUG_ON(&rq.rt != rt_rq);
-    if (rt_rq.rt_queued)
+#[no_mangle]
+pub unsafe extern "C" fn enqueue_top_rt_rq(rt_rq: *mut rt_rq) {
+    let mut rq = rq_of_rt_rq(rt_rq);
+    BUG_ON!(&rq.rt != rt_rq);
+    if (rt_rq.rt_queued) {
     return;
-    if (rt_rq_throttled(rt_rq))
+    }
+    if (rt_rq_throttled(rt_rq)) {
     return;
+    }
     if (rt_rq.rt_nr_running) {
     add_nr_running(rq, rt_rq.rt_nr_running);
     rt_rq.rt_queued = 1;
@@ -971,50 +1189,51 @@ unsafe extern "C" fn update_curr_rt(rq: *mut rq) {
 // Kick cpufreq (see the comment in kernel/sched/sched.h).
     cpufreq_update_util(rq, 0);
     }
-    static void
-    inc_rt_prio_smp(struct rt_rq *rt_rq, int prio, int prev_prio)
-    {
-    struct rq *rq = rq_of_rt_rq(rt_rq);
+#[no_mangle]
+pub unsafe extern "C" fn inc_rt_prio_smp(rt_rq: *mut rt_rq, prio: c_int, prev_prio: c_int) {
+    let mut rq = rq_of_rt_rq(rt_rq);
 //
 // Change rq's cpupri only if rt_rq is the top queue.
 //
-    if (IS_ENABLED(CONFIG_RT_GROUP_SCHED) && &rq.rt != rt_rq)
+    if (IS_ENABLED!(CONFIG_RT_GROUP_SCHED) && &rq.rt != rt_rq) {
     return;
-    if (rq.online && prio < prev_prio)
+    }
+    if (rq.online && prio < prev_prio) {
     cpupri_set(&rq.rd.cpupri, rq.cpu, prio);
     }
-    static void
-    dec_rt_prio_smp(struct rt_rq *rt_rq, int prio, int prev_prio)
-    {
-    struct rq *rq = rq_of_rt_rq(rt_rq);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn dec_rt_prio_smp(rt_rq: *mut rt_rq, prio: c_int, prev_prio: c_int) {
+    let mut rq = rq_of_rt_rq(rt_rq);
 //
 // Change rq's cpupri only if rt_rq is the top queue.
 //
-    if (IS_ENABLED(CONFIG_RT_GROUP_SCHED) && &rq.rt != rt_rq)
+    if (IS_ENABLED!(CONFIG_RT_GROUP_SCHED) && &rq.rt != rt_rq) {
     return;
-    if (rq.online && rt_rq.highest_prio.curr != prev_prio)
+    }
+    if (rq.online && rt_rq.highest_prio.curr != prev_prio) {
     cpupri_set(&rq.rd.cpupri, rq.cpu, rt_rq.highest_prio.curr);
     }
-    static void
-    inc_rt_prio(struct rt_rq *rt_rq, int prio)
-    {
-    let mut prev_prio: c_int = rt_rq.highest_prio.curr;
-    if (prio < prev_prio)
+    }
+#[no_mangle]
+pub unsafe extern "C" fn inc_rt_prio(rt_rq: *mut rt_rq, prio: c_int) {
+pub static mut prev_prio: c_int = 0;
+    if (prio < prev_prio) {
     rt_rq.highest_prio.curr = prio;
+    }
     inc_rt_prio_smp(rt_rq, prio, prev_prio);
     }
-    static void
-    dec_rt_prio(struct rt_rq *rt_rq, int prio)
-    {
-    let mut prev_prio: c_int = rt_rq.highest_prio.curr;
+#[no_mangle]
+pub unsafe extern "C" fn dec_rt_prio(rt_rq: *mut rt_rq, prio: c_int) {
+pub static mut prev_prio: c_int = 0;
     if (rt_rq.rt_nr_running) {
-    WARN_ON(prio < prev_prio);
+    WARN_ON!(prio < prev_prio);
 //
 // This may have been our highest task, and therefore
 // we may have some re-computation to do
 //
     if (prio == prev_prio) {
-    struct rt_prio_array *array = &rt_rq.active;
+    let mut array = &rt_rq.active;
     rt_rq.highest_prio.curr =
     sched_find_first_bit(array.bitmap);
     }
@@ -1024,58 +1243,58 @@ unsafe extern "C" fn update_curr_rt(rq: *mut rq) {
     dec_rt_prio_smp(rt_rq, prio, prev_prio);
     }
 
-    static void
-    inc_rt_group(struct sched_rt_entity *rt_se, struct rt_rq *rt_rq)
-    {
-    if (rt_se_boosted(rt_se))
-    rt_rq.rt_nr_boosted++;
+#[no_mangle]
+pub unsafe extern "C" fn inc_rt_group(rt_se: *mut sched_rt_entity, rt_rq: *mut rt_rq) {
+    if (rt_se_boosted(rt_se)) {
+    rt_rq.rt_nr_boosted += 1;
+    }
     start_rt_bandwidth(&rt_rq.tg.rt_bandwidth);
     }
-    static void
-    dec_rt_group(struct sched_rt_entity *rt_se, struct rt_rq *rt_rq)
-    {
-    if (rt_se_boosted(rt_se))
-    rt_rq.rt_nr_boosted--;
-    WARN_ON(!rt_rq.rt_nr_running && rt_rq.rt_nr_boosted);
+#[no_mangle]
+pub unsafe extern "C" fn dec_rt_group(rt_se: *mut sched_rt_entity, rt_rq: *mut rt_rq) {
+    if (rt_se_boosted(rt_se)) {
+    rt_rq.rt_nr_boosted -= 1;
+    }
+    WARN_ON!(!rt_rq.rt_nr_running && rt_rq.rt_nr_boosted);
     }
 
-    static void
-    inc_rt_group(struct sched_rt_entity *rt_se, struct rt_rq *rt_rq)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: inc_rt_group
+pub unsafe extern "C" fn inc_rt_group_dup(rt_se: *mut sched_rt_entity, rt_rq: *mut rt_rq) {
     }
-    static inline
-    void dec_rt_group(struct sched_rt_entity *rt_se, struct rt_rq *rt_rq) {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: dec_rt_group
+pub unsafe extern "C" fn dec_rt_group_dup(rt_se: *mut sched_rt_entity, rt_rq: *mut rt_rq) {}
 
     static inline
 #[no_mangle]
 pub unsafe extern "C" fn rt_se_nr_running(rt_se: *mut sched_rt_entity) -> c_uint {
-    unsigned int rt_se_nr_running(struct sched_rt_entity *rt_se)
-    {
-    struct rt_rq *group_rq = group_rt_rq(rt_se);
-    if (group_rq)
+    let mut group_rq = group_rt_rq(rt_se);
+    if (group_rq) {
     return group_rq.rt_nr_running;
-    else
+    }
+    else {
     return 1;
+    }
     }
     static inline
 #[no_mangle]
 pub unsafe extern "C" fn rt_se_rr_nr_running(rt_se: *mut sched_rt_entity) -> c_uint {
-    unsigned int rt_se_rr_nr_running(struct sched_rt_entity *rt_se)
-    {
-    struct rt_rq *group_rq = group_rt_rq(rt_se);
-    struct task_struct *tsk;
-    if (group_rq)
+    let mut group_rq = group_rt_rq(rt_se);
+pub static mut tsk: *mut c_void = core::ptr::null_mut();
+    if (group_rq) {
     return group_rq.rr_nr_running;
+    }
     tsk = rt_task_of(rt_se);
     return (tsk.policy == SCHED_RR) ? 1 : 0;
     }
     static inline
 #[no_mangle]
 pub unsafe extern "C" fn inc_rt_tasks(rt_se: *mut sched_rt_entity, rt_rq: *mut rt_rq) {
-    void inc_rt_tasks(struct sched_rt_entity *rt_se, struct rt_rq *rt_rq)
-    {
-    let mut prio: c_int = rt_se_prio(rt_se);
-    WARN_ON(!rt_prio(prio));
+pub static mut prio: c_int = 0;
+    WARN_ON!(!rt_prio(prio));
     rt_rq.rt_nr_running += rt_se_nr_running(rt_se);
     rt_rq.rr_nr_running += rt_se_rr_nr_running(rt_se);
     inc_rt_prio(rt_rq, prio);
@@ -1084,10 +1303,8 @@ pub unsafe extern "C" fn inc_rt_tasks(rt_se: *mut sched_rt_entity, rt_rq: *mut r
     static inline
 #[no_mangle]
 pub unsafe extern "C" fn dec_rt_tasks(rt_se: *mut sched_rt_entity, rt_rq: *mut rt_rq) {
-    void dec_rt_tasks(struct sched_rt_entity *rt_se, struct rt_rq *rt_rq)
-    {
-    WARN_ON(!rt_prio(rt_se_prio(rt_se)));
-    WARN_ON(!rt_rq.rt_nr_running);
+    WARN_ON!(!rt_prio(rt_se_prio(rt_se)));
+    WARN_ON!(!rt_rq.rt_nr_running);
     rt_rq.rt_nr_running -= rt_se_nr_running(rt_se);
     rt_rq.rr_nr_running -= rt_se_rr_nr_running(rt_se);
     dec_rt_prio(rt_rq, rt_se_prio(rt_se));
@@ -1100,112 +1317,116 @@ pub unsafe extern "C" fn dec_rt_tasks(rt_se: *mut sched_rt_entity, rt_rq: *mut r
 //
 #[no_mangle]
 pub unsafe extern "C" fn move_entity(flags: c_uint) -> bool {
-    static inline bool move_entity(unsigned int flags)
-    {
-    if ((flags & (DEQUEUE_SAVE | DEQUEUE_MOVE)) == DEQUEUE_SAVE)
+    if ((flags & (DEQUEUE_SAVE | DEQUEUE_MOVE)) == DEQUEUE_SAVE) {
     return false;
+    }
     return true;
     }
 #[no_mangle]
 unsafe extern "C" fn __delist_rt_entity(rt_se: *mut sched_rt_entity, array: *mut rt_prio_array) {
-    static void __delist_rt_entity(struct sched_rt_entity *rt_se, struct rt_prio_array *array)
-    {
     list_del_init(&rt_se.run_list);
-    if (list_empty(array.queue + rt_se_prio(rt_se)))
+    if (list_empty(array.queue + rt_se_prio(rt_se))) {
     __clear_bit(rt_se_prio(rt_se), array.bitmap);
+    }
     rt_se.on_list = 0;
     }
-    static inline struct sched_statistics *
-    __schedstats_from_rt_se(struct sched_rt_entity *rt_se)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __schedstats_from_rt_se(rt_se: *mut sched_rt_entity) -> *mut c_void {
 // schedstats is not supported for rt group.
-    if (!rt_entity_is_task(rt_se))
+    if (!rt_entity_is_task(rt_se)) {
     return core::ptr::null_mut();
+    }
     return &rt_task_of(rt_se).stats;
     }
-    static inline void
-    update_stats_wait_start_rt(struct rt_rq *rt_rq, struct sched_rt_entity *rt_se)
-    {
-    struct sched_statistics *stats;
-    struct task_struct *p = core::ptr::null_mut();
-    if (!schedstat_enabled())
+#[no_mangle]
+pub unsafe extern "C" fn update_stats_wait_start_rt(rt_rq: *mut rt_rq, rt_se: *mut sched_rt_entity) {
+pub static mut stats: *mut c_void = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
+    if (!schedstat_enabled()) {
     return;
-    if (rt_entity_is_task(rt_se))
-    p = rt_task_of(rt_se);
-    stats = __schedstats_from_rt_se(rt_se);
-    if (!stats)
-    return;
-    __update_stats_wait_start(rq_of_rt_rq(rt_rq), p, stats);
     }
-    static inline void
-    update_stats_enqueue_sleeper_rt(struct rt_rq *rt_rq, struct sched_rt_entity *rt_se)
-    {
-    struct sched_statistics *stats;
-    struct task_struct *p = core::ptr::null_mut();
-    if (!schedstat_enabled())
-    return;
-    if (rt_entity_is_task(rt_se))
-    p = rt_task_of(rt_se);
-    stats = __schedstats_from_rt_se(rt_se);
-    if (!stats)
-    return;
-    __update_stats_enqueue_sleeper(rq_of_rt_rq(rt_rq), p, stats);
-    }
-    static inline void
-    update_stats_enqueue_rt(struct rt_rq *rt_rq, struct sched_rt_entity *rt_se,
-    int flags)
-    {
-    if (!schedstat_enabled())
-    return;
-    if (flags & ENQUEUE_WAKEUP)
-    update_stats_enqueue_sleeper_rt(rt_rq, rt_se);
-    }
-    static inline void
-    update_stats_wait_end_rt(struct rt_rq *rt_rq, struct sched_rt_entity *rt_se)
-    {
-    struct sched_statistics *stats;
-    struct task_struct *p = core::ptr::null_mut();
-    if (!schedstat_enabled())
-    return;
-    if (rt_entity_is_task(rt_se))
-    p = rt_task_of(rt_se);
-    stats = __schedstats_from_rt_se(rt_se);
-    if (!stats)
-    return;
-    __update_stats_wait_end(rq_of_rt_rq(rt_rq), p, stats);
-    }
-    static inline void
-    update_stats_dequeue_rt(struct rt_rq *rt_rq, struct sched_rt_entity *rt_se,
-    int flags)
-    {
-    struct task_struct *p = core::ptr::null_mut();
-    struct rq *rq = rq_of_rt_rq(rt_rq);
-    if (!schedstat_enabled())
-    return;
     if (rt_entity_is_task(rt_se)) {
     p = rt_task_of(rt_se);
-    if (p != rq.curr)
+    }
+    stats = __schedstats_from_rt_se(rt_se);
+    if (!stats) {
+    return;
+    }
+    __update_stats_wait_start(rq_of_rt_rq(rt_rq), p, stats);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn update_stats_enqueue_sleeper_rt(rt_rq: *mut rt_rq, rt_se: *mut sched_rt_entity) {
+pub static mut stats: *mut c_void = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
+    if (!schedstat_enabled()) {
+    return;
+    }
+    if (rt_entity_is_task(rt_se)) {
+    p = rt_task_of(rt_se);
+    }
+    stats = __schedstats_from_rt_se(rt_se);
+    if (!stats) {
+    return;
+    }
+    __update_stats_enqueue_sleeper(rq_of_rt_rq(rt_rq), p, stats);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn update_stats_enqueue_rt(rt_rq: *mut rt_rq, rt_se: *mut sched_rt_entity, flags: c_int) {
+    if (!schedstat_enabled()) {
+    return;
+    }
+    if (flags & ENQUEUE_WAKEUP) {
+    update_stats_enqueue_sleeper_rt(rt_rq, rt_se);
+    }
+    }
+#[no_mangle]
+pub unsafe extern "C" fn update_stats_wait_end_rt(rt_rq: *mut rt_rq, rt_se: *mut sched_rt_entity) {
+pub static mut stats: *mut c_void = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
+    if (!schedstat_enabled()) {
+    return;
+    }
+    if (rt_entity_is_task(rt_se)) {
+    p = rt_task_of(rt_se);
+    }
+    stats = __schedstats_from_rt_se(rt_se);
+    if (!stats) {
+    return;
+    }
+    __update_stats_wait_end(rq_of_rt_rq(rt_rq), p, stats);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn update_stats_dequeue_rt(rt_rq: *mut rt_rq, rt_se: *mut sched_rt_entity, flags: c_int) {
+    let mut p = core::ptr::null_mut();
+    let mut rq = rq_of_rt_rq(rt_rq);
+    if (!schedstat_enabled()) {
+    return;
+    }
+    if (rt_entity_is_task(rt_se)) {
+    p = rt_task_of(rt_se);
+    if (p != rq.curr) {
     update_stats_wait_end_rt(rt_rq, rt_se);
     }
+    }
     if ((flags & DEQUEUE_SLEEP) && p) {
-    unsigned int state;
+    let mut state = 0;
     state = READ_ONCE(p.__state);
-    if (state & TASK_INTERRUPTIBLE)
+    if (state & TASK_INTERRUPTIBLE) {
     __schedstat_set(p.stats.sleep_start,
     rq_clock(rq_of_rt_rq(rt_rq)));
-    if (state & TASK_UNINTERRUPTIBLE)
+    }
+    if (state & TASK_UNINTERRUPTIBLE) {
     __schedstat_set(p.stats.block_start,
     rq_clock(rq_of_rt_rq(rt_rq)));
     }
     }
+    }
 #[no_mangle]
 unsafe extern "C" fn __enqueue_rt_entity(rt_se: *mut sched_rt_entity, flags: c_uint) {
-    static void __enqueue_rt_entity(struct sched_rt_entity *rt_se, unsigned int flags)
-    {
-    struct rt_rq *rt_rq = rt_rq_of_se(rt_se);
-    struct rt_prio_array *array = &rt_rq.active;
-    struct rt_rq *group_rq = group_rt_rq(rt_se);
-    struct list_head *queue = array.queue + rt_se_prio(rt_se);
+    let mut rt_rq = rt_rq_of_se(rt_se);
+    let mut array = &rt_rq.active;
+    let mut group_rq = group_rt_rq(rt_se);
+    let mut queue = array.queue + rt_se_prio(rt_se);
 //
 // Don't enqueue the group if its throttled, or when empty.
 // The latter is a consequence of the former when a child group
@@ -1213,16 +1434,19 @@ unsafe extern "C" fn __enqueue_rt_entity(rt_se: *mut sched_rt_entity, flags: c_u
 // active members.
 //
     if (group_rq && (rt_rq_throttled(group_rq) || !group_rq.rt_nr_running)) {
-    if (rt_se.on_list)
+    if (rt_se.on_list) {
     __delist_rt_entity(rt_se, array);
+    }
     return;
     }
     if (move_entity(flags)) {
-    WARN_ON_ONCE(rt_se.on_list);
-    if (flags & ENQUEUE_HEAD)
+    WARN_ON_ONCE!(rt_se.on_list);
+    if (flags & ENQUEUE_HEAD) {
     list_add(&rt_se.run_list, queue);
-    else
+    }
+    else {
     list_add_tail(&rt_se.run_list, queue);
+    }
     __set_bit(rt_se_prio(rt_se), array.bitmap);
     rt_se.on_list = 1;
     }
@@ -1231,12 +1455,10 @@ unsafe extern "C" fn __enqueue_rt_entity(rt_se: *mut sched_rt_entity, flags: c_u
     }
 #[no_mangle]
 unsafe extern "C" fn __dequeue_rt_entity(rt_se: *mut sched_rt_entity, flags: c_uint) {
-    static void __dequeue_rt_entity(struct sched_rt_entity *rt_se, unsigned int flags)
-    {
-    struct rt_rq *rt_rq = rt_rq_of_se(rt_se);
-    struct rt_prio_array *array = &rt_rq.active;
+    let mut rt_rq = rt_rq_of_se(rt_se);
+    let mut array = &rt_rq.active;
     if (move_entity(flags)) {
-    WARN_ON_ONCE(!rt_se.on_list);
+    WARN_ON_ONCE!(!rt_se.on_list);
     __delist_rt_entity(rt_se, array);
     }
     rt_se.on_rq = 0;
@@ -1248,68 +1470,65 @@ unsafe extern "C" fn __dequeue_rt_entity(rt_se: *mut sched_rt_entity, flags: c_u
 //
 #[no_mangle]
 unsafe extern "C" fn dequeue_rt_stack(rt_se: *mut sched_rt_entity, flags: c_uint) {
-    static void dequeue_rt_stack(struct sched_rt_entity *rt_se, unsigned int flags)
-    {
-    struct sched_rt_entity *back = core::ptr::null_mut();
-    unsigned int rt_nr_running;
+    let mut back = core::ptr::null_mut();
+    let mut rt_nr_running = 0;
     for_each_sched_rt_entity(rt_se) {
     rt_se.back = back;
     back = rt_se;
     }
     rt_nr_running = rt_rq_of_se(back).rt_nr_running;
-    for (rt_se = back; rt_se; rt_se = rt_se.back) {
-    if (on_rt_rq(rt_se))
+    while (rt_se) {
+    if (on_rt_rq(rt_se)) {
     __dequeue_rt_entity(rt_se, flags);
+    }
     }
     dequeue_top_rt_rq(rt_rq_of_se(back), rt_nr_running);
     }
 #[no_mangle]
 unsafe extern "C" fn enqueue_rt_entity(rt_se: *mut sched_rt_entity, flags: c_uint) {
-    static void enqueue_rt_entity(struct sched_rt_entity *rt_se, unsigned int flags)
-    {
-    struct rq *rq = rq_of_rt_se(rt_se);
+    let mut rq = rq_of_rt_se(rt_se);
     update_stats_enqueue_rt(rt_rq_of_se(rt_se), rt_se, flags);
     dequeue_rt_stack(rt_se, flags);
-    for_each_sched_rt_entity(rt_se)
+    for_each_sched_rt_entity(rt_se) {
     __enqueue_rt_entity(rt_se, flags);
+    }
     enqueue_top_rt_rq(&rq.rt);
     }
 #[no_mangle]
 unsafe extern "C" fn dequeue_rt_entity(rt_se: *mut sched_rt_entity, flags: c_uint) {
-    static void dequeue_rt_entity(struct sched_rt_entity *rt_se, unsigned int flags)
-    {
-    struct rq *rq = rq_of_rt_se(rt_se);
+    let mut rq = rq_of_rt_se(rt_se);
     update_stats_dequeue_rt(rt_rq_of_se(rt_se), rt_se, flags);
     dequeue_rt_stack(rt_se, flags);
     for_each_sched_rt_entity(rt_se) {
-    struct rt_rq *rt_rq = group_rt_rq(rt_se);
-    if (rt_rq && rt_rq.rt_nr_running)
+    let mut rt_rq = group_rt_rq(rt_se);
+    if (rt_rq && rt_rq.rt_nr_running) {
     __enqueue_rt_entity(rt_se, flags);
+    }
     }
     enqueue_top_rt_rq(&rq.rt);
     }
 //
 // Adding/removing a task to/from a priority array:
 //
-    static void
-    enqueue_task_rt(struct rq *rq, struct task_struct *p, int flags)
-    {
-    struct sched_rt_entity *rt_se = &p.rt;
-    if (flags & ENQUEUE_WAKEUP)
+#[no_mangle]
+pub unsafe extern "C" fn enqueue_task_rt(rq: *mut rq, p: *mut task_struct, flags: c_int) {
+    let mut rt_se = &p.rt;
+    if (flags & ENQUEUE_WAKEUP) {
     rt_se.timeout = 0;
+    }
     check_schedstat_required();
     update_stats_wait_start_rt(rt_rq_of_se(rt_se), rt_se);
     enqueue_rt_entity(rt_se, flags);
-    if (task_is_blocked(p))
+    if (task_is_blocked(p)) {
     return;
-    if (!task_current(rq, p) && p.nr_cpus_allowed > 1)
+    }
+    if (!task_current(rq, p) && p.nr_cpus_allowed > 1) {
     enqueue_pushable_task(rq, p);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn dequeue_task_rt(rq: *mut rq, p: *mut task_struct, flags: c_int) -> bool {
-    static bool dequeue_task_rt(struct rq *rq, struct task_struct *p, int flags)
-    {
-    struct sched_rt_entity *rt_se = &p.rt;
+    let mut rt_se = &p.rt;
     update_curr_rt(rq);
     dequeue_rt_entity(rt_se, flags);
     dequeue_pushable_task(rq, p);
@@ -1319,24 +1538,23 @@ unsafe extern "C" fn dequeue_task_rt(rq: *mut rq, p: *mut task_struct, flags: c_
 // Put task to the head or the end of the run list without the overhead of
 // dequeue followed by enqueue.
 //
-    static void
-    requeue_rt_entity(struct rt_rq *rt_rq, struct sched_rt_entity *rt_se, int head)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn requeue_rt_entity(rt_rq: *mut rt_rq, rt_se: *mut sched_rt_entity, head: c_int) {
     if (on_rt_rq(rt_se)) {
-    struct rt_prio_array *array = &rt_rq.active;
-    struct list_head *queue = array.queue + rt_se_prio(rt_se);
-    if (head)
+    let mut array = &rt_rq.active;
+    let mut queue = array.queue + rt_se_prio(rt_se);
+    if (head) {
     list_move(&rt_se.run_list, queue);
-    else
+    }
+    else {
     list_move_tail(&rt_se.run_list, queue);
+    }
     }
     }
 #[no_mangle]
 unsafe extern "C" fn requeue_task_rt(rq: *mut rq, p: *mut task_struct, head: c_int) {
-    static void requeue_task_rt(struct rq *rq, struct task_struct *p, int head)
-    {
-    struct sched_rt_entity *rt_se = &p.rt;
-    struct rt_rq *rt_rq;
+    let mut rt_se = &p.rt;
+pub static mut rt_rq: *mut c_void = core::ptr::null_mut();
     for_each_sched_rt_entity(rt_se) {
     rt_rq = rt_rq_of_se(rt_se);
     requeue_rt_entity(rt_rq, rt_se, head);
@@ -1344,20 +1562,19 @@ unsafe extern "C" fn requeue_task_rt(rq: *mut rq, p: *mut task_struct, head: c_i
     }
 #[no_mangle]
 unsafe extern "C" fn yield_task_rt(rq: *mut rq) {
-    static void yield_task_rt(struct rq *rq)
-    {
     requeue_task_rt(rq, rq.donor, 0);
     }
-    static int find_lowest_rq(struct task_struct *task);
-    static int
-    select_task_rq_rt(struct task_struct *p, int cpu, int flags)
-    {
-    struct task_struct *curr, *donor;
-    struct rq *rq;
-    bool test;
+// forward_decl: find_lowest_rq;
+#[no_mangle]
+pub unsafe extern "C" fn select_task_rq_rt(p: *mut task_struct, cpu: c_int, flags: c_int) -> c_int {
+    let mut curr = core::ptr::null_mut();
+    let mut donor = core::ptr::null_mut();
+pub static mut rq: *mut c_void = core::ptr::null_mut();
+    let mut test = 0;
 // For anything but wake ups, just return the task_cpu
-    if (!(flags & (WF_TTWU | WF_FORK)))
-    goto out;
+    if (!(flags & (WF_TTWU | WF_FORK))) {
+// goto;
+    }
     rq = cpu_rq(cpu);
     rcu_read_lock();
     curr = READ_ONCE(rq.curr); /* unlocked access */
@@ -1392,40 +1609,42 @@ unsafe extern "C" fn yield_task_rt(rq: *mut rq) {
     unlikely(rt_task(donor)) &&
     (curr.nr_cpus_allowed < 2 || donor.prio <= p.prio);
     if (test || !rt_task_fits_capacity(p, cpu)) {
-    let mut target: c_int = find_lowest_rq(p);
+pub static mut target: c_int = 0;
 //
 // Bail out if we were forcing a migration to find a better
 // fitting CPU but our search failed.
 //
-    if (!test && target != -1 && !rt_task_fits_capacity(p, target))
-    goto out_unlock;
+    if (!test && target != -1 && !rt_task_fits_capacity(p, target)) {
+// goto;
+    }
 //
 // Don't bother moving it if the destination CPU is
 // not running a lower priority task.
 //
     if (target != -1 &&
-    p.prio < cpu_rq(target).rt.highest_prio.curr)
+    p.prio < cpu_rq(target).rt.highest_prio.curr) {
     cpu = target;
     }
-    out_unlock:
+    }
+// label;
     rcu_read_unlock();
-    out:
+// label;
     return cpu;
     }
 #[no_mangle]
 unsafe extern "C" fn check_preempt_equal_prio(rq: *mut rq, p: *mut task_struct) {
-    static void check_preempt_equal_prio(struct rq *rq, struct task_struct *p)
-    {
     if (rq.curr.nr_cpus_allowed == 1 ||
-    !cpupri_find(&rq.rd.cpupri, rq.donor, core::ptr::null_mut()))
+    !cpupri_find(&rq.rd.cpupri, rq.donor, core::ptr::null_mut())) {
     return;
+    }
 //
 // p is migratable, so let's not schedule it and
 // see if it is pushed or pulled somewhere else.
 //
     if (p.nr_cpus_allowed != 1 &&
-    cpupri_find(&rq.rd.cpupri, p, core::ptr::null_mut()))
+    cpupri_find(&rq.rd.cpupri, p, core::ptr::null_mut())) {
     return;
+    }
 //
 // There appear to be other CPUs that can accept
 // the current task but none can run 'p', so lets reschedule
@@ -1436,13 +1655,11 @@ unsafe extern "C" fn check_preempt_equal_prio(rq: *mut rq, p: *mut task_struct) 
     }
 #[no_mangle]
 unsafe extern "C" fn balance_rt(rq: *mut rq, rf: *mut rq_flags) -> c_int {
-    static int balance_rt(struct rq *rq, struct rq_flags *rf)
-    {
 //
 // Note, rq->donor may change during rq lock drops,
 // so don't re-use p across lock drops
 //
-    struct task_struct *p = rq.donor;
+    let mut p = rq.donor;
     if (!on_rt_rq(&p.rt) && need_pull_rt_task(rq, p)) {
 //
 // This is OK, because current is on_cpu, which avoids it being
@@ -1461,15 +1678,14 @@ unsafe extern "C" fn balance_rt(rq: *mut rq, rf: *mut rq_flags) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn wakeup_preempt_rt(rq: *mut rq, p: *mut task_struct, flags: c_int) {
-    static void wakeup_preempt_rt(struct rq *rq, struct task_struct *p, int flags)
-    {
-    struct task_struct *donor = rq.donor;
+    let mut donor = rq.donor;
 //
 // XXX If we're preempted by DL, queue a push?
 //
     if (p.sched_class != &rt_sched_class ||
-    donor.sched_class != &rt_sched_class)
+    donor.sched_class != &rt_sched_class) {
     return;
+    }
     if (p.prio < donor.prio) {
     resched_curr(rq);
     return;
@@ -1486,83 +1702,89 @@ unsafe extern "C" fn wakeup_preempt_rt(rq: *mut rq, p: *mut task_struct, flags: 
 // to move current somewhere else, making room for our non-migratable
 // task.
 //
-    if (p.prio == donor.prio && !test_tsk_need_resched(rq.curr))
+    if (p.prio == donor.prio && !test_tsk_need_resched(rq.curr)) {
     check_preempt_equal_prio(rq, p);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn set_next_task_rt(rq: *mut rq, p: *mut task_struct, first: bool) {
-    static inline void set_next_task_rt(struct rq *rq, struct task_struct *p, bool first)
-    {
-    struct sched_rt_entity *rt_se = &p.rt;
-    struct rt_rq *rt_rq = &rq.rt;
+    let mut rt_se = &p.rt;
+    let mut rt_rq = &rq.rt;
     p.se.exec_start = rq_clock_task(rq);
-    if (on_rt_rq(&p.rt))
+    if (on_rt_rq(&p.rt)) {
     update_stats_wait_end_rt(rt_rq, rt_se);
+    }
 // The running task is never eligible for pushing
     dequeue_pushable_task(rq, p);
-    if (!first)
+    if (!first) {
     return;
+    }
 //
 // If prev task was rt, put_prev_task() has already updated the
 // utilization. We only care of the case where we start to schedule a
 // rt task
 //
-    if (rq.donor.sched_class != &rt_sched_class)
+    if (rq.donor.sched_class != &rt_sched_class) {
     update_rt_rq_load_avg(rq_clock_pelt(rq), rq, 0);
+    }
     rt_queue_push_tasks(rq);
     }
-    static struct sched_rt_entity *pick_next_rt_entity(struct rt_rq *rt_rq)
-    {
-    struct rt_prio_array *array = &rt_rq.active;
-    struct sched_rt_entity *next = core::ptr::null_mut();
-    struct list_head *queue;
-    int idx;
+#[no_mangle]
+pub unsafe extern "C" fn pick_next_rt_entity(rt_rq: *mut rt_rq) -> *mut c_void {
+    let mut array = &rt_rq.active;
+    let mut next = core::ptr::null_mut();
+pub static mut queue: *mut c_void = core::ptr::null_mut();
+    let mut idx = 0;
     idx = sched_find_first_bit(array.bitmap);
-    BUG_ON(idx >= MAX_RT_PRIO);
+    BUG_ON!(idx >= MAX_RT_PRIO);
     queue = array.queue + idx;
-    if (WARN_ON_ONCE(list_empty(queue)))
+    if (WARN_ON_ONCE!(list_empty(queue))) {
     return core::ptr::null_mut();
-    next = list_entry(queue.next, struct sched_rt_entity, run_list);
+    }
+    next = list_entry(queue.next, sched_rt_entity, run_list);
     return next;
     }
-    static struct task_struct *_pick_next_task_rt(struct rq *rq)
-    {
-    struct sched_rt_entity *rt_se;
-    struct rt_rq *rt_rq  = &rq.rt;
+#[no_mangle]
+pub unsafe extern "C" fn _pick_next_task_rt(rq: *mut rq) -> *mut c_void {
+pub static mut rt_se: *mut c_void = core::ptr::null_mut();
+    let mut rt_rq = &rq.rt;
     do {
     rt_se = pick_next_rt_entity(rt_rq);
-    if (unlikely(!rt_se))
+    if (unlikely(!rt_se)) {
     return core::ptr::null_mut();
+    }
     rt_rq = group_rt_rq(rt_se);
     } while (rt_rq);
     return rt_task_of(rt_se);
     }
-    static struct task_struct *pick_task_rt(struct rq *rq, struct rq_flags *rf)
-    {
-    struct task_struct *p;
-    if (!sched_rt_runnable(rq))
+#[no_mangle]
+pub unsafe extern "C" fn pick_task_rt(rq: *mut rq, rf: *mut rq_flags) -> *mut c_void {
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    if (!sched_rt_runnable(rq)) {
     return core::ptr::null_mut();
+    }
     p = _pick_next_task_rt(rq);
     return p;
     }
 #[no_mangle]
 unsafe extern "C" fn put_prev_task_rt(rq: *mut rq, p: *mut task_struct, next: *mut task_struct) {
-    static void put_prev_task_rt(struct rq *rq, struct task_struct *p, struct task_struct *next)
-    {
-    struct sched_rt_entity *rt_se = &p.rt;
-    struct rt_rq *rt_rq = &rq.rt;
-    if (on_rt_rq(&p.rt))
+    let mut rt_se = &p.rt;
+    let mut rt_rq = &rq.rt;
+    if (on_rt_rq(&p.rt)) {
     update_stats_wait_start_rt(rt_rq, rt_se);
+    }
     update_curr_rt(rq);
     update_rt_rq_load_avg(rq_clock_pelt(rq), rq, 1);
-    if (task_is_blocked(p))
+    if (task_is_blocked(p)) {
     return;
+    }
 //
 // The previous task needs to be made eligible for pushing
 // if it is still active
 //
-    if (on_rt_rq(&p.rt) && p.nr_cpus_allowed > 1)
+    if (on_rt_rq(&p.rt) && p.nr_cpus_allowed > 1) {
     enqueue_pushable_task(rq, p);
+    }
     }
 // Only try algorithms three times
 pub const RT_MAX_TRIES: c_int = 3;
@@ -1570,33 +1792,35 @@ pub const RT_MAX_TRIES: c_int = 3;
 // Return the highest pushable rq's task, which is suitable to be executed
 // on the CPU, NULL otherwise
 //
-    static struct task_struct *pick_highest_pushable_task(struct rq *rq, int cpu)
-    {
-    struct plist_head *head = &rq.rt.pushable_tasks;
-    struct task_struct *p;
-    if (!has_pushable_tasks(rq))
+#[no_mangle]
+pub unsafe extern "C" fn pick_highest_pushable_task(rq: *mut rq, cpu: c_int) -> *mut c_void {
+    let mut head = &rq.rt.pushable_tasks;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    if (!has_pushable_tasks(rq)) {
     return core::ptr::null_mut();
+    }
     plist_for_each_entry(p, head, pushable_tasks) {
-    if (task_is_pushable(rq, p, cpu))
+    if (task_is_pushable(rq, p, cpu)) {
     return p;
     }
+    }
     return core::ptr::null_mut();
     }
-    static DEFINE_PER_CPU(cpumask_var_t, local_cpu_mask);
+pub static mut cpumask_var_t: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn find_lowest_rq(task: *mut task_struct) -> c_int {
-    static int find_lowest_rq(struct task_struct *task)
-    {
-    struct sched_domain *sd;
-    struct cpumask *lowest_mask = this_cpu_cpumask_var_ptr(local_cpu_mask);
-    let mut this_cpu: c_int = smp_processor_id();
-    let mut cpu: c_int = task_cpu(task);
-    int ret;
+pub static mut sd: *mut c_void = core::ptr::null_mut();
+    let mut lowest_mask = this_cpu_cpumask_var_ptr(local_cpu_mask);
+pub static mut this_cpu: c_int = 0;
+pub static mut cpu: c_int = 0;
+    let mut ret = 0;
 // Make sure the mask is initialized first
-    if (unlikely(!lowest_mask))
+    if (unlikely(!lowest_mask)) {
     return -1;
-    if (task.nr_cpus_allowed == 1)
+    }
+    if (task.nr_cpus_allowed == 1) {
     return -1; /* No other targets possible */
+    }
 //
 // If we're on asym system ensure we consider the different capacities
 // of the CPUs when searching for the lowest_mask.
@@ -1609,8 +1833,9 @@ unsafe extern "C" fn find_lowest_rq(task: *mut task_struct) -> c_int {
     ret = cpupri_find(&task_rq(task).rd.cpupri,
     task, lowest_mask);
     }
-    if (!ret)
+    if (!ret) {
     return -1; /* No targets found */
+    }
 //
 // At this point we have built a mask of CPUs representing the
 // lowest priority tasks in the system.  Now we want to elect
@@ -1619,18 +1844,20 @@ unsafe extern "C" fn find_lowest_rq(task: *mut task_struct) -> c_int {
 // We prioritize the last CPU that the task executed on since
 // it is most likely cache-hot in that location.
 //
-    if (cpumask_test_cpu(cpu, lowest_mask))
+    if (cpumask_test_cpu(cpu, lowest_mask)) {
     return cpu;
+    }
 //
 // Otherwise, we consult the sched_domains span maps to figure
 // out which CPU is logically closest to our hot cache data.
 //
-    if (!cpumask_test_cpu(this_cpu, lowest_mask))
+    if (!cpumask_test_cpu(this_cpu, lowest_mask)) {
     this_cpu = -1; /* Skip this_cpu opt if not among lowest */
+    }
     rcu_read_lock();
     for_each_domain(cpu, sd) {
     if (sd.flags & SD_WAKE_AFFINE) {
-    int best_cpu;
+    let mut best_cpu = 0;
 //
 // "this_cpu" is cheaper to preempt than a
 // remote processor.
@@ -1654,19 +1881,22 @@ unsafe extern "C" fn find_lowest_rq(task: *mut task_struct) -> c_int {
 // just give the caller *something* to work with from the compatible
 // locations.
 //
-    if (this_cpu != -1)
+    if (this_cpu != -1) {
     return this_cpu;
+    }
     cpu = cpumask_any_distribute(lowest_mask);
-    if (cpu < nr_cpu_ids)
+    if (cpu < nr_cpu_ids) {
     return cpu;
+    }
     return -1;
     }
-    static struct task_struct *pick_next_pushable_task(struct rq *rq)
-    {
-    struct plist_head *head = &rq.rt.pushable_tasks;
+#[no_mangle]
+pub unsafe extern "C" fn pick_next_pushable_task(rq: *mut rq) -> *mut c_void {
+    let mut head = &rq.rt.pushable_tasks;
     struct task_struct *i, *p = core::ptr::null_mut();
-    if (!has_pushable_tasks(rq))
+    if (!has_pushable_tasks(rq)) {
     return core::ptr::null_mut();
+    }
     plist_for_each_entry(i, head, pushable_tasks) {
 // make sure task isn't on_cpu (possible with proxy-exec)
     if (!task_on_cpu(rq, i)) {
@@ -1674,26 +1904,28 @@ unsafe extern "C" fn find_lowest_rq(task: *mut task_struct) -> c_int {
     break;
     }
     }
-    if (!p)
+    if (!p) {
     return core::ptr::null_mut();
-    BUG_ON(rq.cpu != task_cpu(p));
-    BUG_ON(task_current(rq, p));
-    BUG_ON(task_current_donor(rq, p));
-    BUG_ON(p.nr_cpus_allowed <= 1);
-    BUG_ON(!task_on_rq_queued(p));
-    BUG_ON(!rt_task(p));
+    }
+    BUG_ON!(rq.cpu != task_cpu(p));
+    BUG_ON!(task_current(rq, p));
+    BUG_ON!(task_current_donor(rq, p));
+    BUG_ON!(p.nr_cpus_allowed <= 1);
+    BUG_ON!(!task_on_rq_queued(p));
+    BUG_ON!(!rt_task(p));
     return p;
     }
 // Will lock the rq it finds
-    static struct rq *find_lock_lowest_rq(struct task_struct *task, struct rq *rq)
-    {
-    struct rq *lowest_rq = core::ptr::null_mut();
-    int tries;
-    int cpu;
-    for (tries = 0; tries < RT_MAX_TRIES; tries++) {
+#[no_mangle]
+pub unsafe extern "C" fn find_lock_lowest_rq(task: *mut task_struct, rq: *mut rq) -> *mut c_void {
+    let mut lowest_rq = core::ptr::null_mut();
+    let mut tries = 0;
+    let mut cpu = 0;
+    while (tries < RT_MAX_TRIES) {
     cpu = find_lowest_rq(task);
-    if ((cpu == -1) || (cpu == rq.cpu))
+    if ((cpu == -1) || (cpu == rq.cpu)) {
     break;
+    }
     lowest_rq = cpu_rq(cpu);
     if (lowest_rq.rt.highest_prio.curr <= task.prio) {
 //
@@ -1725,8 +1957,9 @@ unsafe extern "C" fn find_lowest_rq(task: *mut task_struct) -> c_int {
     }
     }
 // If this rq is still suitable use it.
-    if (lowest_rq.rt.highest_prio.curr > task.prio)
+    if (lowest_rq.rt.highest_prio.curr > task.prio) {
     break;
+    }
 // try again
     double_unlock_balance(rq, lowest_rq);
     lowest_rq = core::ptr::null_mut();
@@ -1740,17 +1973,17 @@ unsafe extern "C" fn find_lowest_rq(task: *mut task_struct) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn push_rt_task(rq: *mut rq, pull: bool) -> c_int {
-    static int push_rt_task(struct rq *rq, bool pull)
-    {
-    struct task_struct *next_task;
-    struct rq *lowest_rq;
-    let mut ret: c_int = 0;
-    if (!rq.rt.overloaded)
+pub static mut next_task: *mut c_void = core::ptr::null_mut();
+pub static mut lowest_rq: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
+    if (!rq.rt.overloaded) {
     return 0;
+    }
     next_task = pick_next_pushable_task(rq);
-    if (!next_task)
+    if (!next_task) {
     return 0;
-    retry:
+    }
+// label;
 //
 // It's possible that the next_task slipped in of
 // higher priority than current. If that's the case
@@ -1761,10 +1994,11 @@ unsafe extern "C" fn push_rt_task(rq: *mut rq, pull: bool) -> c_int {
     return 0;
     }
     if (is_migration_disabled(next_task)) {
-    struct task_struct *push_task = core::ptr::null_mut();
-    int cpu;
-    if (!pull || rq.push_busy)
+    let mut push_task = core::ptr::null_mut();
+    let mut cpu = 0;
+    if (!pull || rq.push_busy) {
     return 0;
+    }
 //
 // Invoking find_lowest_rq() on anything but an RT task doesn't
 // make sense. Per the above priority check, curr has to
@@ -1774,11 +2008,13 @@ unsafe extern "C" fn push_rt_task(rq: *mut rq, pull: bool) -> c_int {
 // Note that the stoppers are masqueraded as SCHED_FIFO
 // (cf. sched_set_stop_task()), so we can't rely on rt_task().
 //
-    if (rq.donor.sched_class != &rt_sched_class)
+    if (rq.donor.sched_class != &rt_sched_class) {
     return 0;
+    }
     cpu = find_lowest_rq(rq.curr);
-    if (cpu == -1 || cpu == rq.cpu)
+    if (cpu == -1 || cpu == rq.cpu) {
     return 0;
+    }
 //
 // Given we found a CPU with lower priority than @next_task,
 // therefore it should be running. However we cannot migrate it
@@ -1796,14 +2032,15 @@ unsafe extern "C" fn push_rt_task(rq: *mut rq, pull: bool) -> c_int {
     }
     return 0;
     }
-    if (WARN_ON(next_task == rq.curr))
+    if (WARN_ON!(next_task == rq.curr)) {
     return 0;
+    }
 // We might release rq lock
     get_task_struct(next_task);
 // find_lock_lowest_rq locks the rq if found
     lowest_rq = find_lock_lowest_rq(next_task, rq);
     if (!lowest_rq) {
-    struct task_struct *task;
+pub static mut task: *mut c_void = core::ptr::null_mut();
 //
 // find_lock_lowest_rq releases rq->lock
 // so it is possible that next_task has migrated.
@@ -1820,33 +2057,33 @@ unsafe extern "C" fn push_rt_task(rq: *mut rq, pull: bool) -> c_int {
 // to push it to.  Do not retry in this case, since
 // other CPUs will pull from us when ready.
 //
-    goto out;
+// goto;
     }
-    if (!task)
+    if (!task) {
 // No more tasks, just exit
-    goto out;
+// goto;
+    }
 //
 // Something has shifted, try again.
 //
     put_task_struct(next_task);
     next_task = task;
-    goto retry;
+// goto;
     }
     move_queued_task_locked(rq, lowest_rq, next_task);
     resched_curr(lowest_rq);
     ret = 1;
     double_unlock_balance(rq, lowest_rq);
-    out:
+// label;
     put_task_struct(next_task);
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn push_rt_tasks(rq: *mut rq) {
-    static void push_rt_tasks(struct rq *rq)
-    {
 // push_rt_task will return true if it moved an RT
-    while (push_rt_task(rq, false))
+    while (push_rt_task(rq, false)) {
     ;
+    }
     }
 
 //
@@ -1891,11 +2128,9 @@ unsafe extern "C" fn push_rt_tasks(rq: *mut rq) {
 //
 #[no_mangle]
 unsafe extern "C" fn rto_next_cpu(rd: *mut root_domain) -> c_int {
-    static int rto_next_cpu(struct root_domain *rd)
-    {
-    let mut this_cpu: c_int = smp_processor_id();
-    int next;
-    int cpu;
+pub static mut this_cpu: c_int = 0;
+    let mut next = 0;
+    let mut cpu = 0;
 //
 // When starting the IPI RT pushing, the rto_cpu is set to -1,
 // rt_next_cpu() will simply return the first CPU found in
@@ -1914,10 +2149,12 @@ unsafe extern "C" fn rto_next_cpu(rd: *mut root_domain) -> c_int {
     cpu = cpumask_next(rd.rto_cpu, rd.rto_mask);
     rd.rto_cpu = cpu;
 // Do not send IPI to self
-    if (cpu == this_cpu)
+    if (cpu == this_cpu) {
     continue;
-    if (cpu < nr_cpu_ids)
+    }
+    if (cpu < nr_cpu_ids) {
     return cpu;
+    }
     rd.rto_cpu = -1;
 //
 // ACQUIRE ensures we see the @rto_mask changes
@@ -1926,34 +2163,30 @@ unsafe extern "C" fn rto_next_cpu(rd: *mut root_domain) -> c_int {
 // Matches WMB in rt_set_overload().
 //
     next = atomic_read_acquire(&rd.rto_loop_next);
-    if (rd.rto_loop == next)
+    if (rd.rto_loop == next) {
     break;
+    }
     rd.rto_loop = next;
     }
     return -1;
     }
 #[no_mangle]
 pub unsafe extern "C" fn rto_start_trylock(v: *mut core::sync::atomic::AtomicI32) -> bool {
-    static inline bool rto_start_trylock(atomic_t *v)
-    {
     return !atomic_cmpxchg_acquire(v, 0, 1);
     }
 #[no_mangle]
 pub unsafe extern "C" fn rto_start_unlock(v: *mut core::sync::atomic::AtomicI32) {
-    static inline void rto_start_unlock(atomic_t *v)
-    {
     atomic_set_release(v, 0);
     }
 #[no_mangle]
 unsafe extern "C" fn tell_cpu_to_push(rq: *mut rq) {
-    static void tell_cpu_to_push(struct rq *rq)
-    {
-    let mut cpu: c_int = -1;
+pub static mut cpu: c_int = 0;
 // Keep the loop going if the IPI is currently active
     atomic_inc(&rq.rd.rto_loop_next);
 // Only one CPU can initiate a loop at a time
-    if (!rto_start_trylock(&rq.rd.rto_loop_start))
+    if (!rto_start_trylock(&rq.rd.rto_loop_start)) {
     return;
+    }
     raw_spin_lock(&rq.rd.rto_lock);
 //
 // The rto_cpu is updated under the lock, if it has a valid CPU
@@ -1961,8 +2194,9 @@ unsafe extern "C" fn tell_cpu_to_push(rq: *mut rq) {
 // update to loop_next, and nothing needs to be done here.
 // Otherwise it is finishing up and an IPI needs to be sent.
 //
-    if (rq.rd.rto_cpu < 0)
+    if (rq.rd.rto_cpu < 0) {
     cpu = rto_next_cpu(rq.rd);
+    }
     raw_spin_unlock(&rq.rd.rto_lock);
     rto_start_unlock(&rq.rd.rto_loop_start);
     if (cpu >= 0) {
@@ -1974,12 +2208,9 @@ unsafe extern "C" fn tell_cpu_to_push(rq: *mut rq) {
 // Called from hardirq context
 #[no_mangle]
 pub unsafe extern "C" fn rto_push_irq_work_func(work: *mut irq_work) {
-    void rto_push_irq_work_func(struct irq_work *work)
-    {
-    struct root_domain *rd =
-    container_of(work, struct root_domain, rto_push_work);
-    struct rq *rq;
-    int cpu;
+    let mut rd = container_of!(work, root_domain, rto_push_work);
+pub static mut rq: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
     rq = this_rq();
 //
 // We do not need to grab the lock to check for has_pushable_tasks.
@@ -1987,8 +2218,9 @@ pub unsafe extern "C" fn rto_push_irq_work_func(work: *mut irq_work) {
 //
     if (has_pushable_tasks(rq)) {
     raw_spin_rq_lock(rq);
-    while (push_rt_task(rq, true))
+    while (push_rt_task(rq, true)) {
     ;
+    }
     raw_spin_rq_unlock(rq);
     }
     raw_spin_lock(&rd.rto_lock);
@@ -2005,15 +2237,15 @@ pub unsafe extern "C" fn rto_push_irq_work_func(work: *mut irq_work) {
 
 #[no_mangle]
 unsafe extern "C" fn pull_rt_task(this_rq: *mut rq) {
-    static void pull_rt_task(struct rq *this_rq)
-    {
-    let mut this_cpu: c_int = this_rq.cpu, cpu;
-    let mut resched: bool = false;
-    struct task_struct *p, *push_task;
-    struct rq *src_rq;
-    let mut rt_overload_count: c_int = rt_overloaded(this_rq);
-    if (likely(!rt_overload_count))
+pub static mut this_cpu: c_int = 0;
+pub static mut resched: bool = false;
+    let mut p = core::ptr::null_mut();
+    let mut push_task = core::ptr::null_mut();
+pub static mut src_rq: *mut c_void = core::ptr::null_mut();
+pub static mut rt_overload_count: c_int = 0;
+    if (likely(!rt_overload_count)) {
     return;
+    }
 //
 // Match the barrier from rt_set_overloaded; this guarantees that if we
 // see overloaded we must also see the rto_mask bit.
@@ -2021,8 +2253,9 @@ unsafe extern "C" fn pull_rt_task(this_rq: *mut rq) {
     smp_rmb();
 // If we are the only overloaded CPU do nothing
     if (rt_overload_count == 1 &&
-    cpumask_test_cpu(this_rq.cpu, this_rq.rd.rto_mask))
+    cpumask_test_cpu(this_rq.cpu, this_rq.rd.rto_mask)) {
     return;
+    }
 
     if (sched_feat(RT_PUSH_IPI)) {
     tell_cpu_to_push(this_rq);
@@ -2030,8 +2263,9 @@ unsafe extern "C" fn pull_rt_task(this_rq: *mut rq) {
     }
 
     for_each_cpu(cpu, this_rq.rd.rto_mask) {
-    if (this_cpu == cpu)
+    if (this_cpu == cpu) {
     continue;
+    }
     src_rq = cpu_rq(cpu);
 //
 // Don't bother taking the src_rq->lock if the next highest
@@ -2041,8 +2275,9 @@ unsafe extern "C" fn pull_rt_task(this_rq: *mut rq) {
 // And if its going logically lower, we do not care
 //
     if (src_rq.rt.highest_prio.next >=
-    this_rq.rt.highest_prio.curr)
+    this_rq.rt.highest_prio.curr) {
     continue;
+    }
 //
 // We can potentially drop this_rq's lock in
 // double_lock_balance, and another CPU could
@@ -2060,8 +2295,8 @@ unsafe extern "C" fn pull_rt_task(this_rq: *mut rq) {
 // the to-be-scheduled task?
 //
     if (p && (p.prio < this_rq.rt.highest_prio.curr)) {
-    WARN_ON(p == src_rq.curr);
-    WARN_ON(!task_on_rq_queued(p));
+    WARN_ON!(p == src_rq.curr);
+    WARN_ON!(!task_on_rq_queued(p));
 //
 // There's a chance that p is higher in priority
 // than what's currently running on its CPU.
@@ -2070,8 +2305,9 @@ unsafe extern "C" fn pull_rt_task(this_rq: *mut rq) {
 // p if it is lower in priority than the
 // current task on the run queue
 //
-    if (p.prio < src_rq.donor.prio)
-    goto skip;
+    if (p.prio < src_rq.donor.prio) {
+// goto;
+    }
     if (is_migration_disabled(p)) {
     push_task = get_push_task(src_rq);
     } else {
@@ -2085,7 +2321,7 @@ unsafe extern "C" fn pull_rt_task(this_rq: *mut rq) {
 // but possible)
 //
     }
-    skip:
+// label;
     double_unlock_balance(this_rq, src_rq);
     if (push_task) {
     preempt_disable();
@@ -2096,8 +2332,9 @@ unsafe extern "C" fn pull_rt_task(this_rq: *mut rq) {
     raw_spin_rq_lock(this_rq);
     }
     }
-    if (resched)
+    if (resched) {
     resched_curr(this_rq);
+    }
     }
 //
 // If we are not running and we are not going to reschedule soon, we should
@@ -2105,34 +2342,31 @@ unsafe extern "C" fn pull_rt_task(this_rq: *mut rq) {
 //
 #[no_mangle]
 unsafe extern "C" fn task_woken_rt(rq: *mut rq, p: *mut task_struct) {
-    static void task_woken_rt(struct rq *rq, struct task_struct *p)
-    {
-    bool need_to_push = !task_on_cpu(rq, p) &&
+    let mut need_to_push = !task_on_cpu(rq, p) &&
     !test_tsk_need_resched(rq.curr) &&
     p.nr_cpus_allowed > 1 &&
     (dl_task(rq.donor) || rt_task(rq.donor)) &&
     (rq.curr.nr_cpus_allowed < 2 ||
     rq.donor.prio <= p.prio);
-    if (need_to_push)
+    if (need_to_push) {
     push_rt_tasks(rq);
+    }
     }
 // Assumes rq->lock is held
 #[no_mangle]
 unsafe extern "C" fn rq_online_rt(rq: *mut rq) {
-    static void rq_online_rt(struct rq *rq)
-    {
-    if (rq.rt.overloaded)
+    if (rq.rt.overloaded) {
     rt_set_overload(rq);
+    }
     __enable_runtime(rq);
     cpupri_set(&rq.rd.cpupri, rq.cpu, rq.rt.highest_prio.curr);
     }
 // Assumes rq->lock is held
 #[no_mangle]
 unsafe extern "C" fn rq_offline_rt(rq: *mut rq) {
-    static void rq_offline_rt(struct rq *rq)
-    {
-    if (rq.rt.overloaded)
+    if (rq.rt.overloaded) {
     rt_clear_overload(rq);
+    }
     __disable_runtime(rq);
     cpupri_set(&rq.rd.cpupri, rq.cpu, CPUPRI_INVALID);
     }
@@ -2142,8 +2376,6 @@ unsafe extern "C" fn rq_offline_rt(rq: *mut rq) {
 //
 #[no_mangle]
 unsafe extern "C" fn switched_from_rt(rq: *mut rq, p: *mut task_struct) {
-    static void switched_from_rt(struct rq *rq, struct task_struct *p)
-    {
 //
 // If there are other RT tasks then we will reschedule
 // and the scheduling of the other RT tasks will handle
@@ -2151,15 +2383,14 @@ unsafe extern "C" fn switched_from_rt(rq: *mut rq, p: *mut task_struct) {
 // we may need to handle the pulling of RT tasks
 // now.
 //
-    if (!task_on_rq_queued(p) || rq.rt.rt_nr_running)
+    if (!task_on_rq_queued(p) || rq.rt.rt_nr_running) {
     return;
+    }
     rt_queue_pull_task(rq);
     }
 #[no_mangle]
-pub unsafe extern "C" fn init_sched_rt_class() -> void __init {
-    void __init init_sched_rt_class(void)
-    {
-    unsigned int i;
+pub unsafe extern "C" fn init_sched_rt_class()  {
+    let mut i = 0;
     for_each_possible_cpu(i) {
     zalloc_cpumask_var_node(&per_cpu(local_cpu_mask, i),
     GFP_KERNEL, cpu_to_node(i));
@@ -2172,8 +2403,6 @@ pub unsafe extern "C" fn init_sched_rt_class() -> void __init {
 //
 #[no_mangle]
 unsafe extern "C" fn switched_to_rt(rq: *mut rq, p: *mut task_struct) {
-    static void switched_to_rt(struct rq *rq, struct task_struct *p)
-    {
 //
 // If we are running, update the avg_rt tracking, as the running time
 // will now on be accounted into the latter.
@@ -2188,59 +2417,63 @@ unsafe extern "C" fn switched_to_rt(rq: *mut rq, p: *mut task_struct) {
 // then see if we can move to another run queue.
 //
     if (task_on_rq_queued(p)) {
-    if (p.nr_cpus_allowed > 1 && rq.rt.overloaded)
+    if (p.nr_cpus_allowed > 1 && rq.rt.overloaded) {
     rt_queue_push_tasks(rq);
-    if (p.prio < rq.donor.prio && cpu_online(cpu_of(rq)))
+    }
+    if (p.prio < rq.donor.prio && cpu_online(cpu_of(rq))) {
     resched_curr(rq);
+    }
     }
     }
 //
 // Priority of the task has changed. This may cause
 // us to initiate a push or pull.
 //
-    static void
-    prio_changed_rt(struct rq *rq, struct task_struct *p, u64 oldprio)
-    {
-    if (!task_on_rq_queued(p))
+#[no_mangle]
+pub unsafe extern "C" fn prio_changed_rt(rq: *mut rq, p: *mut task_struct, oldprio: u64) {
+    if (!task_on_rq_queued(p)) {
     return;
-    if (p.prio == oldprio)
+    }
+    if (p.prio == oldprio) {
     return;
+    }
     if (task_current_donor(rq, p)) {
 //
 // If our priority decreases while running, we
 // may need to pull tasks to this runqueue.
 //
-    if (oldprio < p.prio)
+    if (oldprio < p.prio) {
     rt_queue_pull_task(rq);
+    }
 //
 // If there's a higher priority task waiting to run
 // then reschedule.
 //
-    if (p.prio > rq.rt.highest_prio.curr)
+    if (p.prio > rq.rt.highest_prio.curr) {
     resched_curr(rq);
+    }
     } else {
 //
 // This task is not running, but if it is
 // greater than the current running task
 // then reschedule.
 //
-    if (p.prio < rq.donor.prio)
+    if (p.prio < rq.donor.prio) {
     resched_curr(rq);
+    }
     }
     }
 
 #[no_mangle]
 unsafe extern "C" fn watchdog(rq: *mut rq, p: *mut task_struct) {
-    static void watchdog(struct rq *rq, struct task_struct *p)
-    {
     unsigned long soft, hard;
 // max may change after cur was read, this will be fixed next tick
     soft = task_rlimit(p, RLIMIT_RTTIME);
     hard = task_rlimit_max(p, RLIMIT_RTTIME);
     if (soft != RLIM_INFINITY) {
-    unsigned long next;
+    let mut next = 0;
     if (p.rt.watchdog_stamp != jiffies) {
-    p.rt.timeout++;
+    p.rt.timeout += 1;
     p.rt.watchdog_stamp = jiffies;
     }
     next = DIV_ROUND_UP(min(soft, hard), USEC_PER_SEC/HZ);
@@ -2251,7 +2484,8 @@ unsafe extern "C" fn watchdog(rq: *mut rq, p: *mut task_struct) {
     }
     }
 
-    static inline void watchdog(struct rq *rq, struct task_struct *p) { }
+#[no_mangle]
+pub unsafe extern "C" fn watchdog(rq: *mut rq, p: *mut task_struct) { }
 
 //
 // scheduler tick hitting a task of our scheduling class.
@@ -2263,9 +2497,7 @@ unsafe extern "C" fn watchdog(rq: *mut rq, p: *mut task_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn task_tick_rt(rq: *mut rq, p: *mut task_struct, queued: c_int) {
-    static void task_tick_rt(struct rq *rq, struct task_struct *p, int queued)
-    {
-    struct sched_rt_entity *rt_se = &p.rt;
+    let mut rt_se = &p.rt;
     update_curr_rt(rq);
     update_rt_rq_load_avg(rq_clock_pelt(rq), rq, 1);
     watchdog(rq, p);
@@ -2273,10 +2505,12 @@ unsafe extern "C" fn task_tick_rt(rq: *mut rq, p: *mut task_struct, queued: c_in
 // RR tasks need a special form of time-slice management.
 // FIFO tasks have no timeslices.
 //
-    if (p.policy != SCHED_RR)
+    if (p.policy != SCHED_RR) {
     return;
-    if (--p.rt.time_slice)
+    }
+    if (--p.rt.time_slice) {
     return;
+    }
     p.rt.time_slice = sched_rr_timeslice;
 //
 // Requeue to the end of queue if we (and all of our ancestors) are not
@@ -2292,25 +2526,23 @@ unsafe extern "C" fn task_tick_rt(rq: *mut rq, p: *mut task_struct, queued: c_in
     }
 #[no_mangle]
 unsafe extern "C" fn get_rr_interval_rt(rq: *mut rq, task: *mut task_struct) -> c_uint {
-    static unsigned int get_rr_interval_rt(struct rq *rq, struct task_struct *task)
-    {
 //
 // Time slice is 0 for SCHED_FIFO tasks
 //
-    if (task.policy == SCHED_RR)
+    if (task.policy == SCHED_RR) {
     return sched_rr_timeslice;
-    else
+    }
+    else {
     return 0;
+    }
     }
 
 #[no_mangle]
 unsafe extern "C" fn task_is_throttled_rt(p: *mut task_struct, cpu: c_int) -> c_int {
-    static int task_is_throttled_rt(struct task_struct *p, int cpu)
-    {
-    struct rt_rq *rt_rq;
+pub static mut rt_rq: *mut c_void = core::ptr::null_mut();
 
     rt_rq = task_group(p).rt_rq[cpu];
-    WARN_ON(!rt_group_sched_enabled() && rt_rq.tg != &root_task_group);
+    WARN_ON!(!rt_group_sched_enabled() && rt_rq.tg != &root_task_group);
 
     rt_rq = &cpu_rq(cpu).rt;
 
@@ -2348,22 +2580,22 @@ unsafe extern "C" fn task_is_throttled_rt(p: *mut task_struct, cpu: c_int) -> c_
 //
 // Ensure that the real time constraints are schedulable.
 //
-    static DEFINE_MUTEX(rt_constraints_mutex);
+pub static mut rt_constraints_mutex: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn tg_has_rt_tasks(tg: *mut task_group) -> c_int {
-    static inline int tg_has_rt_tasks(struct task_group *tg)
-    {
-    struct task_struct *task;
-    struct css_task_iter it;
-    let mut ret: c_int = 0;
+pub static mut task: *mut c_void = core::ptr::null_mut();
+pub static mut it: usize = 0;
+pub static mut ret: c_int = 0;
 //
 // Autogroups do not have RT tasks; see autogroup_create().
 //
-    if (task_group_is_autogroup(tg))
+    if (task_group_is_autogroup(tg)) {
     return 0;
+    }
     css_task_iter_start(&tg.css, 0, &it);
-    while (!ret && (task = css_task_iter_next(&it)))
+    while (!ret && (task = css_task_iter_next(&it))) {
     ret |= rt_task(task);
+    }
     css_task_iter_end(&it);
     return ret;
     }
@@ -2377,10 +2609,8 @@ pub struct rt_schedulable_data {
 
 #[no_mangle]
 unsafe extern "C" fn tg_rt_schedulable(tg: *mut task_group, data: *mut c_void) -> c_int {
-    static int tg_rt_schedulable(struct task_group *tg, void *data)
-    {
-    struct rt_schedulable_data *d = data;
-    struct task_group *child;
+    let mut d = data;
+pub static mut child: *mut c_void = core::ptr::null_mut();
     u64 total, sum = 0;
     u64 period, runtime;
     period = ktime_to_ns(tg.rt_bandwidth.rt_period);
@@ -2392,20 +2622,23 @@ unsafe extern "C" fn tg_rt_schedulable(tg: *mut task_group, data: *mut c_void) -
 //
 // Cannot have more runtime than the period.
 //
-    if (runtime > period && runtime != RUNTIME_INF)
+    if (runtime > period && runtime != RUNTIME_INF) {
     return -EINVAL;
+    }
 //
 // Ensure we don't starve existing RT tasks if runtime turns zero.
 //
     if (rt_bandwidth_enabled() && !runtime &&
-    tg.rt_bandwidth.rt_runtime && tg_has_rt_tasks(tg))
+    tg.rt_bandwidth.rt_runtime && tg_has_rt_tasks(tg)) {
     return -EBUSY;
+    }
     total = to_ratio(period, runtime);
 //
 // Nobody can have more than the global setting allows.
 //
-    if (total > to_ratio(global_rt_period(), global_rt_runtime()))
+    if (total > to_ratio(global_rt_period(), global_rt_runtime())) {
     return -EINVAL;
+    }
 //
 // The sum of our children's runtime should not exceed our own.
 //
@@ -2418,140 +2651,132 @@ unsafe extern "C" fn tg_rt_schedulable(tg: *mut task_group, data: *mut c_void) -
     }
     sum += to_ratio(period, runtime);
     }
-    if (sum > total)
+    if (sum > total) {
     return -EINVAL;
+    }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn __rt_schedulable(tg: *mut task_group, period: u64, runtime: u64) -> c_int {
-    static int __rt_schedulable(struct task_group *tg, u64 period, u64 runtime)
-    {
-    int ret;
-    struct rt_schedulable_data data = {
-    .tg = tg,
-    .rt_period = period,
-    .rt_runtime = runtime,
-    };
+    let mut ret = 0;
+pub static mut rt_schedulable_data: usize = 0;
     rcu_read_lock();
     ret = walk_tg_tree(tg_rt_schedulable, tg_nop, &data);
     rcu_read_unlock();
     return ret;
     }
-    static int tg_set_rt_bandwidth(struct task_group *tg,
-    u64 rt_period, u64 rt_runtime)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn tg_set_rt_bandwidth(tg: *mut task_group, rt_period: u64, rt_runtime: u64) -> c_int {
     int i, err = 0;
 //
 // Disallowing the root group RT runtime is BAD, it would disallow the
 // kernel creating (and or operating) RT threads.
 //
-    if (tg == &root_task_group && rt_runtime == 0)
+    if (tg == &root_task_group && rt_runtime == 0) {
     return -EINVAL;
+    }
 // No period doesn't make any sense.
-    if (rt_period == 0)
+    if (rt_period == 0) {
     return -EINVAL;
+    }
 //
 // Bound quota to defend quota against overflow during bandwidth shift.
 //
-    if (rt_runtime != RUNTIME_INF && rt_runtime > max_rt_runtime)
+    if (rt_runtime != RUNTIME_INF && rt_runtime > max_rt_runtime) {
     return -EINVAL;
+    }
     mutex_lock(&rt_constraints_mutex);
     err = __rt_schedulable(tg, rt_period, rt_runtime);
-    if (err)
-    goto unlock;
+    if (err) {
+// goto;
+    }
     raw_spin_lock_irq(&tg.rt_bandwidth.rt_runtime_lock);
     tg.rt_bandwidth.rt_period = ns_to_ktime(rt_period);
     tg.rt_bandwidth.rt_runtime = rt_runtime;
     for_each_possible_cpu(i) {
-    struct rt_rq *rt_rq = tg.rt_rq[i];
+    let mut rt_rq = tg.rt_rq[i];
     raw_spin_lock(&rt_rq.rt_runtime_lock);
     rt_rq.rt_runtime = rt_runtime;
     raw_spin_unlock(&rt_rq.rt_runtime_lock);
     }
     raw_spin_unlock_irq(&tg.rt_bandwidth.rt_runtime_lock);
-    unlock:
+// label;
     mutex_unlock(&rt_constraints_mutex);
     return err;
     }
 #[no_mangle]
 pub unsafe extern "C" fn sched_group_set_rt_runtime(tg: *mut task_group, rt_runtime_us: c_long) -> c_int {
-    int sched_group_set_rt_runtime(struct task_group *tg, long rt_runtime_us)
-    {
     u64 rt_runtime, rt_period;
     rt_period = ktime_to_ns(tg.rt_bandwidth.rt_period);
     rt_runtime = (u64)rt_runtime_us * NSEC_PER_USEC;
-    if (rt_runtime_us < 0)
+    if (rt_runtime_us < 0) {
     rt_runtime = RUNTIME_INF;
-#[no_mangle]
-pub unsafe extern "C" fn if(NSEC_PER_USEC: (u64)rt_runtime_us > U64_MAX /) -> else {
-    else if ((u64)rt_runtime_us > U64_MAX / NSEC_PER_USEC)
+    }
+
+    else if ((u64)rt_runtime_us > U64_MAX / NSEC_PER_USEC) {
     return -EINVAL;
+    }
     return tg_set_rt_bandwidth(tg, rt_period, rt_runtime);
     }
 #[no_mangle]
 pub unsafe extern "C" fn sched_group_rt_runtime(tg: *mut task_group) -> c_long {
-    long sched_group_rt_runtime(struct task_group *tg)
-    {
-    u64 rt_runtime_us;
-    if (tg.rt_bandwidth.rt_runtime == RUNTIME_INF)
+    let mut rt_runtime_us = 0;
+    if (tg.rt_bandwidth.rt_runtime == RUNTIME_INF) {
     return -1;
+    }
     rt_runtime_us = tg.rt_bandwidth.rt_runtime;
     do_div(rt_runtime_us, NSEC_PER_USEC);
     return rt_runtime_us;
     }
 #[no_mangle]
 pub unsafe extern "C" fn sched_group_set_rt_period(tg: *mut task_group, rt_period_us: u64) -> c_int {
-    int sched_group_set_rt_period(struct task_group *tg, u64 rt_period_us)
-    {
     u64 rt_runtime, rt_period;
-    if (rt_period_us > U64_MAX / NSEC_PER_USEC)
+    if (rt_period_us > U64_MAX / NSEC_PER_USEC) {
     return -EINVAL;
+    }
     rt_period = rt_period_us * NSEC_PER_USEC;
     rt_runtime = tg.rt_bandwidth.rt_runtime;
     return tg_set_rt_bandwidth(tg, rt_period, rt_runtime);
     }
 #[no_mangle]
 pub unsafe extern "C" fn sched_group_rt_period(tg: *mut task_group) -> c_long {
-    long sched_group_rt_period(struct task_group *tg)
-    {
-    u64 rt_period_us;
+    let mut rt_period_us = 0;
     rt_period_us = ktime_to_ns(tg.rt_bandwidth.rt_period);
     do_div(rt_period_us, NSEC_PER_USEC);
     return rt_period_us;
     }
 #[no_mangle]
 pub unsafe extern "C" fn sched_rt_can_attach(tg: *mut task_group, tsk: *mut task_struct) -> c_int {
-    int sched_rt_can_attach(struct task_group *tg, struct task_struct *tsk)
-    {
 // Don't accept real-time tasks when there is no way for them to run
-    if (rt_group_sched_enabled() && rt_task(tsk) && tg.rt_bandwidth.rt_runtime == 0)
+    if (rt_group_sched_enabled() && rt_task(tsk) && tg.rt_bandwidth.rt_runtime == 0) {
     return 0;
+    }
     return 1;
     }
 
 #[no_mangle]
 unsafe extern "C" fn sched_rt_global_validate() -> c_int {
-    static int sched_rt_global_validate(void)
-    {
     if ((sysctl_sched_rt_runtime != RUNTIME_INF) &&
     ((sysctl_sched_rt_runtime > sysctl_sched_rt_period) ||
     ((u64)sysctl_sched_rt_runtime *
-    NSEC_PER_USEC > max_rt_runtime)))
+    NSEC_PER_USEC > max_rt_runtime))) {
     return -EINVAL;
+    }
 
-    if (!rt_group_sched_enabled())
+    if (!rt_group_sched_enabled()) {
     return 0;
+    }
     scoped_guard(mutex, &rt_constraints_mutex)
     return __rt_schedulable(core::ptr::null_mut(), 0, 0);
 
     return 0;
     }
-    static int sched_rt_handler(const struct ctl_table *table, int write, void *buffer,
-    size_t *lenp, loff_t *ppos)
-    {
-    int old_period, old_runtime;
-    static DEFINE_MUTEX(mutex);
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn sched_rt_handler(table: *mut ctl_table, write: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
+    let mut old_period = 0;
+    let mut old_runtime = 0;
+pub static mut mutex: usize = 0;
+    let mut ret = 0;
     mutex_lock(&mutex);
     sched_domains_mutex_lock();
     old_period = sysctl_sched_rt_period;
@@ -2559,15 +2784,17 @@ unsafe extern "C" fn sched_rt_global_validate() -> c_int {
     ret = proc_dointvec_minmax(table, write, buffer, lenp, ppos);
     if (!ret && write) {
     ret = sched_rt_global_validate();
-    if (ret)
-    goto undo;
+    if (ret) {
+// goto;
+    }
     ret = sched_dl_global_validate();
-    if (ret)
-    goto undo;
+    if (ret) {
+// goto;
+    }
     sched_dl_do_global();
     }
     if (0) {
-    undo:
+// label;
     sysctl_sched_rt_period = old_period;
     sysctl_sched_rt_runtime = old_runtime;
     }
@@ -2580,11 +2807,10 @@ unsafe extern "C" fn sched_rt_global_validate() -> c_int {
     rebuild_sched_domains();
     return ret;
     }
-    static int sched_rr_handler(const struct ctl_table *table, int write, void *buffer,
-    size_t *lenp, loff_t *ppos)
-    {
-    int ret;
-    static DEFINE_MUTEX(mutex);
+#[no_mangle]
+pub unsafe extern "C" fn sched_rr_handler(table: *mut ctl_table, write: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
+    let mut ret = 0;
+pub static mut mutex: usize = 0;
     mutex_lock(&mutex);
     ret = proc_dointvec(table, write, buffer, lenp, ppos);
 //
@@ -2595,8 +2821,9 @@ unsafe extern "C" fn sched_rt_global_validate() -> c_int {
     sched_rr_timeslice =
     sysctl_sched_rr_timeslice <= 0 ? RR_TIMESLICE :
     msecs_to_jiffies(sysctl_sched_rr_timeslice);
-    if (sysctl_sched_rr_timeslice <= 0)
+    if (sysctl_sched_rr_timeslice <= 0) {
     sysctl_sched_rr_timeslice = jiffies_to_msecs(RR_TIMESLICE);
+    }
     }
     mutex_unlock(&mutex);
     return ret;
@@ -2604,12 +2831,11 @@ unsafe extern "C" fn sched_rt_global_validate() -> c_int {
 
 #[no_mangle]
 pub unsafe extern "C" fn print_rt_stats(m: *mut seq_file, cpu: c_int) {
-    void print_rt_stats(struct seq_file *m, int cpu)
-    {
-    rt_rq_iter_t iter;
-    struct rt_rq *rt_rq;
+    let mut iter;
+pub static mut rt_rq: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
-    for_each_rt_rq(rt_rq, iter, cpu_rq(cpu))
+    for_each_rt_rq(rt_rq, iter, cpu_rq(cpu)) {
     print_rt_rq(m, cpu, rt_rq);
+    }
     rcu_read_unlock();
     }

@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -49,38 +299,34 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Copyright (C) 2004 Nadia Yvette Chambers
 //
 
-    static struct trace_array		*irqsoff_trace __read_mostly;
-    static int				tracer_enabled __read_mostly;
-    static DEFINE_PER_CPU(int, tracing_cpu);
-    static DEFINE_RAW_SPINLOCK(max_trace_lock);
+pub static mut irqsoff_trace: *mut c_void = core::ptr::null_mut();
+    static int				tracer_enabled ;
+pub static mut int: usize = 0;
+pub static mut max_trace_lock: usize = 0;
     enum {
     TRACER_IRQS_OFF		= (1 << 1),
     TRACER_PREEMPT_OFF	= (1 << 2),
     };
-    static int trace_type __read_mostly;
+    static int trace_type ;
     static int save_flags;
-    static void stop_irqsoff_tracer(struct trace_array *tr, int graph);
-    static int start_irqsoff_tracer(struct trace_array *tr, int graph);
+// forward_decl: stop_irqsoff_tracer;
+// forward_decl: start_irqsoff_tracer;
 
-    static inline int
-    preempt_trace(int pc)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn preempt_trace(pc: c_int) -> c_int {
     return ((trace_type & TRACER_PREEMPT_OFF) && pc);
     }
 
-    static inline int
-    irq_trace(void)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn irq_trace() -> c_int {
     return ((trace_type & TRACER_IRQS_OFF) &&
     irqs_disabled());
     }
 
-    static int irqsoff_display_graph(struct trace_array *tr, int set);
+// forward_decl: irqsoff_display_graph;
 
 #[no_mangle]
 pub unsafe extern "C" fn irqsoff_display_graph(tr: *mut trace_array, set: c_int) -> c_int {
-    static inline int irqsoff_display_graph(struct trace_array *tr, int set)
-    {
     return -EINVAL;
     }
 
@@ -107,12 +353,10 @@ pub unsafe extern "C" fn irqsoff_display_graph(tr: *mut trace_array, set: c_int)
 // This is OK, since the function graph tracer is
 // dependent on the function tracer.
 //
-    static int func_prolog_dec(struct trace_array *tr,
-    struct trace_array_cpu **data,
-    unsigned long *flags)
-    {
-    long disabled;
-    int cpu;
+#[no_mangle]
+pub unsafe extern "C" fn func_prolog_dec(tr: *mut trace_array, data: *mut *mut trace_array_cpu, flags: *mut c_ulong) -> c_int {
+    let mut disabled = 0;
+    let mut cpu = 0;
 //
 // Does not matter if we preempt. We test the flags
 // afterward, to see if irqs are disabled or not.
@@ -120,36 +364,38 @@ pub unsafe extern "C" fn irqsoff_display_graph(tr: *mut trace_array, set: c_int)
 // test will fail.
 //
     cpu = raw_smp_processor_id();
-    if (likely(!per_cpu(tracing_cpu, cpu)))
+    if (likely(!per_cpu(tracing_cpu, cpu))) {
     return 0;
+    }
     local_save_flags(*flags);
 //
 // Slight chance to get a false positive on tracing_cpu,
 // although I'm starting to think there isn't a chance.
 // Leave this for now just to be paranoid.
 //
-    if (!irqs_disabled_flags(*flags) && !preempt_count())
+    if (!irqs_disabled_flags(*flags) && !preempt_count()) {
     return 0;
+    }
 // data = per_cpu_ptr(tr->array_buffer.data, cpu);
     disabled = local_inc_return(&(*data).disabled);
-    if (likely(disabled == 1))
+    if (likely(disabled == 1)) {
     return 1;
+    }
     local_dec(&(*data).disabled);
     return 0;
     }
 //
 // irqsoff uses its own tracer function to keep the overhead down:
 //
-    static void
-    irqsoff_tracer_call(unsigned long ip, unsigned long parent_ip,
-    struct ftrace_ops *op, struct ftrace_regs *fregs)
-    {
-    struct trace_array *tr = irqsoff_trace;
-    struct trace_array_cpu *data;
-    unsigned long flags;
-    unsigned int trace_ctx;
-    if (!func_prolog_dec(tr, &data, &flags))
+#[no_mangle]
+pub unsafe extern "C" fn irqsoff_tracer_call(ip: c_ulong, parent_ip: c_ulong, op: *mut ftrace_ops, fregs: *mut ftrace_regs) {
+    let mut tr = irqsoff_trace;
+pub static mut data: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut trace_ctx = 0;
+    if (!func_prolog_dec(tr, &data, &flags)) {
     return;
+    }
     trace_ctx = tracing_gen_ctx_flags(flags);
     trace_function(tr, ip, parent_ip, trace_ctx, fregs);
     local_dec(&data.disabled);
@@ -157,30 +403,29 @@ pub unsafe extern "C" fn irqsoff_display_graph(tr: *mut trace_array, set: c_int)
 
 #[no_mangle]
 unsafe extern "C" fn irqsoff_display_graph(tr: *mut trace_array, set: c_int) -> c_int {
-    static int irqsoff_display_graph(struct trace_array *tr, int set)
-    {
-    int cpu;
-    if (!(is_graph(tr) ^ set))
+    let mut cpu = 0;
+    if (!(is_graph(tr) ^ set)) {
     return 0;
+    }
     stop_irqsoff_tracer(irqsoff_trace, !set);
-    for_each_possible_cpu(cpu)
+    for_each_possible_cpu(cpu) {
     per_cpu(tracing_cpu, cpu) = 0;
+    }
     tr.max_latency = 0;
     tracing_reset_online_cpus(&irqsoff_trace.array_buffer);
     return start_irqsoff_tracer(irqsoff_trace, set);
     }
-    static int irqsoff_graph_entry(struct ftrace_graph_ent *trace,
-    struct fgraph_ops *gops,
-    struct ftrace_regs *fregs)
-    {
-    struct trace_array *tr = irqsoff_trace;
-    struct trace_array_cpu *data;
-    unsigned long flags;
-    unsigned int trace_ctx;
-    u64 *calltime;
-    let mut ret: c_int = 0;
-    if (ftrace_graph_ignore_func(gops, trace))
+#[no_mangle]
+pub unsafe extern "C" fn irqsoff_graph_entry(trace: *mut ftrace_graph_ent, gops: *mut fgraph_ops, fregs: *mut ftrace_regs) -> c_int {
+    let mut tr = irqsoff_trace;
+pub static mut data: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut trace_ctx = 0;
+pub static mut calltime: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
+    if (ftrace_graph_ignore_func(gops, trace)) {
     return 0;
+    }
 //
 // Do not trace a function if it's filtered by set_graph_notrace.
 // Make the index of ret stack negative to indicate that it should
@@ -188,11 +433,13 @@ unsafe extern "C" fn irqsoff_display_graph(tr: *mut trace_array, set: c_int) -> 
 // to recover the original index in order to continue tracing after
 // returning from the function.
 //
-    if (ftrace_graph_notrace_addr(trace.func))
+    if (ftrace_graph_notrace_addr(trace.func)) {
     return 1;
-    if (!func_prolog_dec(tr, &data, &flags))
+    }
+    if (!func_prolog_dec(tr, &data, &flags)) {
     return 0;
-    calltime = fgraph_reserve_data(gops.idx, sizeof(*calltime));
+    }
+    calltime = fgraph_reserve_data(gops.idx, sizeof!(*calltime));
     if (calltime) {
 // calltime = trace_clock_local();
     trace_ctx = tracing_gen_ctx_flags(flags);
@@ -201,20 +448,19 @@ unsafe extern "C" fn irqsoff_display_graph(tr: *mut trace_array, set: c_int) -> 
     local_dec(&data.disabled);
     return ret;
     }
-    static void irqsoff_graph_return(struct ftrace_graph_ret *trace,
-    struct fgraph_ops *gops,
-    struct ftrace_regs *fregs)
-    {
-    struct trace_array *tr = irqsoff_trace;
-    struct trace_array_cpu *data;
-    unsigned long flags;
-    unsigned int trace_ctx;
-    u64 *calltime;
-    u64 rettime;
-    int size;
+#[no_mangle]
+pub unsafe extern "C" fn irqsoff_graph_return(trace: *mut ftrace_graph_ret, gops: *mut fgraph_ops, fregs: *mut ftrace_regs) {
+    let mut tr = irqsoff_trace;
+pub static mut data: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut trace_ctx = 0;
+pub static mut calltime: *mut c_void = core::ptr::null_mut();
+    let mut rettime = 0;
+    let mut size = 0;
     ftrace_graph_addr_finish(gops, trace);
-    if (!func_prolog_dec(tr, &data, &flags))
+    if (!func_prolog_dec(tr, &data, &flags)) {
     return;
+    }
     rettime = trace_clock_local();
     calltime = fgraph_retrieve_data(gops.idx, &size);
     if (calltime) {
@@ -223,88 +469,76 @@ unsafe extern "C" fn irqsoff_display_graph(tr: *mut trace_array, set: c_int) -> 
     }
     local_dec(&data.disabled);
     }
-    static struct fgraph_ops fgraph_ops = {
-    .entryfunc		= &irqsoff_graph_entry,
-    .retfunc		= &irqsoff_graph_return,
-    };
+pub static mut fgraph_ops: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn irqsoff_trace_open(iter: *mut trace_iterator) {
-    static void irqsoff_trace_open(struct trace_iterator *iter)
-    {
-    if (is_graph(iter.tr))
+    if (is_graph(iter.tr)) {
     graph_trace_open(iter);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn irqsoff_trace_close(iter: *mut trace_iterator) {
-    static void irqsoff_trace_close(struct trace_iterator *iter)
-    {
-    if (iter.private)
+    if (iter.private) {
     graph_trace_close(iter);
     }
+    }
 
-    TRACE_GRAPH_PRINT_PROC | \
-    TRACE_GRAPH_PRINT_REL_TIME | \
+    TRACE_GRAPH_PRINT_PROC | 
+    TRACE_GRAPH_PRINT_REL_TIME | 
     TRACE_GRAPH_PRINT_DURATION)
 #[no_mangle]
 unsafe extern "C" fn irqsoff_print_line(iter: *mut trace_iterator) -> enum print_line_t {
-    static enum print_line_t irqsoff_print_line(struct trace_iterator *iter)
-    {
 //
 // In graph mode call the graph tracer output function,
 // otherwise go with the TRACE_FN event handler
 //
-    if (is_graph(iter.tr))
+    if (is_graph(iter.tr)) {
     return print_graph_function_flags(iter, GRAPH_TRACER_FLAGS);
+    }
     return TRACE_TYPE_UNHANDLED;
     }
 #[no_mangle]
 unsafe extern "C" fn irqsoff_print_header(s: *mut seq_file) {
-    static void irqsoff_print_header(struct seq_file *s)
-    {
-    struct trace_array *tr = irqsoff_trace;
-    if (is_graph(tr))
+    let mut tr = irqsoff_trace;
+    if (is_graph(tr)) {
     print_graph_headers_flags(s, GRAPH_TRACER_FLAGS);
-    else
+    }
+    else {
     trace_default_header(s);
     }
-    static void
-    __trace_function(struct trace_array *tr,
-    unsigned long ip, unsigned long parent_ip,
-    unsigned int trace_ctx)
-    {
-    if (is_graph(tr))
+    }
+#[no_mangle]
+pub unsafe extern "C" fn __trace_function(tr: *mut trace_array, ip: c_ulong, parent_ip: c_ulong, trace_ctx: c_uint) {
+    if (is_graph(tr)) {
     trace_graph_function(tr, ip, parent_ip, trace_ctx);
-    else
+    }
+    else {
     trace_function(tr, ip, parent_ip, trace_ctx, core::ptr::null_mut());
     }
+    }
 
-    static inline void
-    __trace_function(struct trace_array *tr,
-    unsigned long ip, unsigned long parent_ip,
-    unsigned int trace_ctx)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: __trace_function
+pub unsafe extern "C" fn __trace_function_dup(tr: *mut trace_array, ip: c_ulong, parent_ip: c_ulong, trace_ctx: c_uint) {
     return trace_function(tr, ip, parent_ip, trace_ctx, core::ptr::null_mut());
     }
 #[no_mangle]
 unsafe extern "C" fn irqsoff_print_line(iter: *mut trace_iterator) -> enum print_line_t {
-    static enum print_line_t irqsoff_print_line(struct trace_iterator *iter)
-    {
     return TRACE_TYPE_UNHANDLED;
     }
-    static void irqsoff_trace_open(struct trace_iterator *iter) { }
-    static void irqsoff_trace_close(struct trace_iterator *iter) { }
+#[no_mangle]
+pub unsafe extern "C" fn irqsoff_trace_open(iter: *mut trace_iterator) { }
+#[no_mangle]
+pub unsafe extern "C" fn irqsoff_trace_close(iter: *mut trace_iterator) { }
 
 #[no_mangle]
 unsafe extern "C" fn irqsoff_print_header(s: *mut seq_file) {
-    static void irqsoff_print_header(struct seq_file *s)
-    {
     trace_default_header(s);
     }
 
 #[no_mangle]
 unsafe extern "C" fn irqsoff_print_header(s: *mut seq_file) {
-    static void irqsoff_print_header(struct seq_file *s)
-    {
     trace_latency_header(s);
     }
 
@@ -313,50 +547,49 @@ unsafe extern "C" fn irqsoff_print_header(s: *mut seq_file) {
 //
 #[no_mangle]
 unsafe extern "C" fn report_latency(tr: *mut trace_array, delta: u64) -> bool {
-    static bool report_latency(struct trace_array *tr, u64 delta)
-    {
     if (tracing_thresh) {
-    if (delta < tracing_thresh)
+    if (delta < tracing_thresh) {
     return false;
+    }
     } else {
-    if (delta <= tr.max_latency)
+    if (delta <= tr.max_latency) {
     return false;
+    }
     }
     return true;
     }
-    static void
-    check_critical_timing(struct trace_array *tr,
-    struct trace_array_cpu *data,
-    unsigned long parent_ip,
-    int cpu)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn check_critical_timing(tr: *mut trace_array, data: *mut trace_array_cpu, parent_ip: c_ulong, cpu: c_int) {
     u64 T0, T1, delta;
-    unsigned long flags;
-    unsigned int trace_ctx;
+    let mut flags = 0;
+    let mut trace_ctx = 0;
     T0 = data.preempt_timestamp;
     T1 = ftrace_now(cpu);
     delta = T1-T0;
     trace_ctx = tracing_gen_ctx();
-    if (!report_latency(tr, delta))
-    goto out;
+    if (!report_latency(tr, delta)) {
+// goto;
+    }
     raw_spin_lock_irqsave(&max_trace_lock, flags);
 // check if we are still the max latency
-    if (!report_latency(tr, delta))
-    goto out_unlock;
+    if (!report_latency(tr, delta)) {
+// goto;
+    }
     __trace_function(tr, CALLER_ADDR0, parent_ip, trace_ctx);
 // Skip 5 functions to get to the irq/preempt enable function
     __trace_stack(tr, trace_ctx, 5);
-    if (data.critical_sequence != max_sequence)
-    goto out_unlock;
+    if (data.critical_sequence != max_sequence) {
+// goto;
+    }
     data.critical_end = parent_ip;
     if (likely(!is_tracing_stopped())) {
     tr.max_latency = delta;
     update_max_tr_single(tr, current, cpu);
     }
-    max_sequence++;
-    out_unlock:
+    max_sequence += 1;
+// label;
     raw_spin_unlock_irqrestore(&max_trace_lock, flags);
-    out:
+// label;
     data.critical_sequence = max_sequence;
     data.preempt_timestamp = ftrace_now(cpu);
     __trace_function(tr, CALLER_ADDR0, parent_ip, trace_ctx);
@@ -364,18 +597,21 @@ unsafe extern "C" fn report_latency(tr: *mut trace_array, delta: u64) -> bool {
     static nokprobe_inline void
     start_critical_timing(unsigned long ip, unsigned long parent_ip)
     {
-    int cpu;
-    struct trace_array *tr = irqsoff_trace;
-    struct trace_array_cpu *data;
-    long disabled;
-    if (!tracer_enabled || !tracing_is_enabled())
+    let mut cpu = 0;
+    let mut tr = irqsoff_trace;
+pub static mut data: *mut c_void = core::ptr::null_mut();
+    let mut disabled = 0;
+    if (!tracer_enabled || !tracing_is_enabled()) {
     return;
+    }
     cpu = raw_smp_processor_id();
-    if (per_cpu(tracing_cpu, cpu))
+    if (per_cpu(tracing_cpu, cpu)) {
     return;
+    }
     data = per_cpu_ptr(tr.array_buffer.data, cpu);
-    if (unlikely(!data) || local_read(&data.disabled))
+    if (unlikely(!data) || local_read(&data.disabled)) {
     return;
+    }
     disabled = local_inc_return(&data.disabled);
     if (disabled == 1) {
     data.critical_sequence = max_sequence;
@@ -389,23 +625,27 @@ unsafe extern "C" fn report_latency(tr: *mut trace_array, delta: u64) -> bool {
     static nokprobe_inline void
     stop_critical_timing(unsigned long ip, unsigned long parent_ip)
     {
-    int cpu;
-    struct trace_array *tr = irqsoff_trace;
-    struct trace_array_cpu *data;
-    unsigned int trace_ctx;
-    long disabled;
+    let mut cpu = 0;
+    let mut tr = irqsoff_trace;
+pub static mut data: *mut c_void = core::ptr::null_mut();
+    let mut trace_ctx = 0;
+    let mut disabled = 0;
     cpu = raw_smp_processor_id();
 // Always clear the tracing cpu on stopping the trace
-    if (unlikely(per_cpu(tracing_cpu, cpu)))
+    if (unlikely(per_cpu(tracing_cpu, cpu))) {
     per_cpu(tracing_cpu, cpu) = 0;
-    else
+    }
+    else {
     return;
-    if (!tracer_enabled || !tracing_is_enabled())
+    }
+    if (!tracer_enabled || !tracing_is_enabled()) {
     return;
+    }
     data = per_cpu_ptr(tr.array_buffer.data, cpu);
     if (unlikely(!data) ||
-    !data.critical_start || local_read(&data.disabled))
+    !data.critical_start || local_read(&data.disabled)) {
     return;
+    }
     disabled = local_inc_return(&data.disabled);
     if (disabled == 1) {
     trace_ctx = tracing_gen_ctx();
@@ -418,19 +658,17 @@ unsafe extern "C" fn report_latency(tr: *mut trace_array, delta: u64) -> bool {
 // start and stop critical timings used to for stoppage (in idle)
 #[no_mangle]
 pub unsafe extern "C" fn start_critical_timings() {
-    void start_critical_timings(void)
-    {
-    if (preempt_trace(preempt_count()) || irq_trace())
+    if (preempt_trace(preempt_count()) || irq_trace()) {
     start_critical_timing(CALLER_ADDR0, CALLER_ADDR1);
+    }
     }
     EXPORT_SYMBOL_GPL(start_critical_timings);
     NOKPROBE_SYMBOL(start_critical_timings);
 #[no_mangle]
 pub unsafe extern "C" fn stop_critical_timings() {
-    void stop_critical_timings(void)
-    {
-    if (preempt_trace(preempt_count()) || irq_trace())
+    if (preempt_trace(preempt_count()) || irq_trace()) {
     stop_critical_timing(CALLER_ADDR0, CALLER_ADDR1);
+    }
     }
     EXPORT_SYMBOL_GPL(stop_critical_timings);
     NOKPROBE_SYMBOL(stop_critical_timings);
@@ -438,98 +676,96 @@ pub unsafe extern "C" fn stop_critical_timings() {
     static bool function_enabled;
 #[no_mangle]
 unsafe extern "C" fn register_irqsoff_function(tr: *mut trace_array, graph: c_int, set: c_int) -> c_int {
-    static int register_irqsoff_function(struct trace_array *tr, int graph, int set)
-    {
-    int ret;
+    let mut ret = 0;
 // 'set' is set if TRACE_ITER(FUNCTION) is about to be set
-    if (function_enabled || (!set && !(tr.trace_flags & TRACE_ITER(FUNCTION))))
+    if (function_enabled || (!set && !(tr.trace_flags & TRACE_ITER(FUNCTION)))) {
     return 0;
-    if (graph)
+    }
+    if (graph) {
     ret = register_ftrace_graph(&fgraph_ops);
-    else
+    }
+    else {
     ret = register_ftrace_function(tr.ops);
-    if (!ret)
+    }
+    if (!ret) {
     function_enabled = true;
+    }
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn unregister_irqsoff_function(tr: *mut trace_array, graph: c_int) {
-    static void unregister_irqsoff_function(struct trace_array *tr, int graph)
-    {
-    if (!function_enabled)
+    if (!function_enabled) {
     return;
-    if (graph)
+    }
+    if (graph) {
     unregister_ftrace_graph(&fgraph_ops);
-    else
+    }
+    else {
     unregister_ftrace_function(tr.ops);
+    }
     function_enabled = false;
     }
 #[no_mangle]
 unsafe extern "C" fn irqsoff_function_set(tr: *mut trace_array, mask: u32, set: c_int) -> c_int {
-    static int irqsoff_function_set(struct trace_array *tr, u32 mask, int set)
-    {
-    if (!(mask & TRACE_ITER(FUNCTION)))
+    if (!(mask & TRACE_ITER(FUNCTION))) {
     return 0;
-    if (set)
+    }
+    if (set) {
     register_irqsoff_function(tr, is_graph(tr), 1);
-    else
+    }
+    else {
     unregister_irqsoff_function(tr, is_graph(tr));
+    }
     return 1;
     }
 
 #[no_mangle]
 unsafe extern "C" fn register_irqsoff_function(tr: *mut trace_array, graph: c_int, set: c_int) -> c_int {
-    static int register_irqsoff_function(struct trace_array *tr, int graph, int set)
-    {
     return 0;
     }
-    static void unregister_irqsoff_function(struct trace_array *tr, int graph) { }
+#[no_mangle]
+pub unsafe extern "C" fn unregister_irqsoff_function(tr: *mut trace_array, graph: c_int) { }
 #[no_mangle]
 pub unsafe extern "C" fn irqsoff_function_set(tr: *mut trace_array, mask: u32, set: c_int) -> c_int {
-    static inline int irqsoff_function_set(struct trace_array *tr, u32 mask, int set)
-    {
     return 0;
     }
 
 #[no_mangle]
 unsafe extern "C" fn irqsoff_flag_changed(tr: *mut trace_array, mask: u64, set: c_int) -> c_int {
-    static int irqsoff_flag_changed(struct trace_array *tr, u64 mask, int set)
-    {
-    struct tracer *tracer = tr.current_trace;
-    if (irqsoff_function_set(tr, mask, set))
+    let mut tracer = tr.current_trace;
+    if (irqsoff_function_set(tr, mask, set)) {
     return 0;
+    }
 
-    if (mask & TRACE_ITER(DISPLAY_GRAPH))
+    if (mask & TRACE_ITER(DISPLAY_GRAPH)) {
     return irqsoff_display_graph(tr, set);
+    }
 
     return trace_keep_overwrite(tracer, mask, set);
     }
 #[no_mangle]
 unsafe extern "C" fn start_irqsoff_tracer(tr: *mut trace_array, graph: c_int) -> c_int {
-    static int start_irqsoff_tracer(struct trace_array *tr, int graph)
-    {
-    int ret;
+    let mut ret = 0;
     ret = register_irqsoff_function(tr, graph, 0);
-    if (!ret && tracing_is_enabled())
+    if (!ret && tracing_is_enabled()) {
     tracer_enabled = 1;
-    else
+    }
+    else {
     tracer_enabled = 0;
+    }
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn stop_irqsoff_tracer(tr: *mut trace_array, graph: c_int) {
-    static void stop_irqsoff_tracer(struct trace_array *tr, int graph)
-    {
     tracer_enabled = 0;
     unregister_irqsoff_function(tr, graph);
     }
     static bool irqsoff_busy;
 #[no_mangle]
 unsafe extern "C" fn __irqsoff_tracer_init(tr: *mut trace_array) -> c_int {
-    static int __irqsoff_tracer_init(struct trace_array *tr)
-    {
-    if (irqsoff_busy)
+    if (irqsoff_busy) {
     return -EBUSY;
+    }
     save_flags = tr.trace_flags;
 // non overwrite screws up the latency tracers
     set_tracer_flag(tr, TRACE_ITER(OVERWRITE), 1);
@@ -543,18 +779,17 @@ unsafe extern "C" fn __irqsoff_tracer_init(tr: *mut trace_array) -> c_int {
     ftrace_init_array_ops(tr, irqsoff_tracer_call);
 // Only toplevel instance supports graph tracing
     if (start_irqsoff_tracer(tr, (tr.flags & TRACE_ARRAY_FL_GLOBAL &&
-    is_graph(tr))))
-    printk(KERN_ERR "failed to start irqsoff tracer\n");
+    is_graph(tr)))) {
+    printk("failed to start irqsoff tracer\n");
+    }
     irqsoff_busy = true;
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn __irqsoff_tracer_reset(tr: *mut trace_array) {
-    static void __irqsoff_tracer_reset(struct trace_array *tr)
-    {
-    let mut lat_flag: c_int = save_flags & TRACE_ITER(LATENCY_FMT);
-    let mut overwrite_flag: c_int = save_flags & TRACE_ITER(OVERWRITE);
-    let mut pause_flag: c_int = save_flags & TRACE_ITER(PAUSE_ON_TRACE);
+pub static mut lat_flag: c_int = 0;
+pub static mut overwrite_flag: c_int = 0;
+pub static mut pause_flag: c_int = 0;
     stop_irqsoff_tracer(tr, is_graph(tr));
     set_tracer_flag(tr, TRACE_ITER(LATENCY_FMT), lat_flag);
     set_tracer_flag(tr, TRACE_ITER(OVERWRITE), overwrite_flag);
@@ -564,14 +799,10 @@ unsafe extern "C" fn __irqsoff_tracer_reset(tr: *mut trace_array) {
     }
 #[no_mangle]
 unsafe extern "C" fn irqsoff_tracer_start(tr: *mut trace_array) {
-    static void irqsoff_tracer_start(struct trace_array *tr)
-    {
     tracer_enabled = 1;
     }
 #[no_mangle]
 unsafe extern "C" fn irqsoff_tracer_stop(tr: *mut trace_array) {
-    static void irqsoff_tracer_stop(struct trace_array *tr)
-    {
     tracer_enabled = 0;
     }
 
@@ -580,34 +811,28 @@ unsafe extern "C" fn irqsoff_tracer_stop(tr: *mut trace_array) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn tracer_hardirqs_on(a0: c_ulong, a1: c_ulong) {
-    void tracer_hardirqs_on(unsigned long a0, unsigned long a1)
-    {
-    if (!preempt_trace(preempt_count()) && irq_trace())
+    if (!preempt_trace(preempt_count()) && irq_trace()) {
     stop_critical_timing(a0, a1);
+    }
     }
     NOKPROBE_SYMBOL(tracer_hardirqs_on);
 #[no_mangle]
 pub unsafe extern "C" fn tracer_hardirqs_off(a0: c_ulong, a1: c_ulong) {
-    void tracer_hardirqs_off(unsigned long a0, unsigned long a1)
-    {
-    if (!preempt_trace(preempt_count()) && irq_trace())
+    if (!preempt_trace(preempt_count()) && irq_trace()) {
     start_critical_timing(a0, a1);
+    }
     }
     NOKPROBE_SYMBOL(tracer_hardirqs_off);
 #[no_mangle]
 unsafe extern "C" fn irqsoff_tracer_init(tr: *mut trace_array) -> c_int {
-    static int irqsoff_tracer_init(struct trace_array *tr)
-    {
     trace_type = TRACER_IRQS_OFF;
     return __irqsoff_tracer_init(tr);
     }
 #[no_mangle]
 unsafe extern "C" fn irqsoff_tracer_reset(tr: *mut trace_array) {
-    static void irqsoff_tracer_reset(struct trace_array *tr)
-    {
     __irqsoff_tracer_reset(tr);
     }
-    static struct tracer irqsoff_tracer __read_mostly =
+    static struct tracer irqsoff_tracer  =
     {
     .name		= "irqsoff",
     .init		= irqsoff_tracer_init,
@@ -629,32 +854,26 @@ unsafe extern "C" fn irqsoff_tracer_reset(tr: *mut trace_array) {
 
 #[no_mangle]
 pub unsafe extern "C" fn tracer_preempt_on(a0: c_ulong, a1: c_ulong) {
-    void tracer_preempt_on(unsigned long a0, unsigned long a1)
-    {
-    if (preempt_trace(preempt_count()) && !irq_trace())
+    if (preempt_trace(preempt_count()) && !irq_trace()) {
     stop_critical_timing(a0, a1);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn tracer_preempt_off(a0: c_ulong, a1: c_ulong) {
-    void tracer_preempt_off(unsigned long a0, unsigned long a1)
-    {
-    if (preempt_trace(preempt_count()) && !irq_trace())
+    if (preempt_trace(preempt_count()) && !irq_trace()) {
     start_critical_timing(a0, a1);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn preemptoff_tracer_init(tr: *mut trace_array) -> c_int {
-    static int preemptoff_tracer_init(struct trace_array *tr)
-    {
     trace_type = TRACER_PREEMPT_OFF;
     return __irqsoff_tracer_init(tr);
     }
 #[no_mangle]
 unsafe extern "C" fn preemptoff_tracer_reset(tr: *mut trace_array) {
-    static void preemptoff_tracer_reset(struct trace_array *tr)
-    {
     __irqsoff_tracer_reset(tr);
     }
-    static struct tracer preemptoff_tracer __read_mostly =
+    static struct tracer preemptoff_tracer  =
     {
     .name		= "preemptoff",
     .init		= preemptoff_tracer_init,
@@ -676,18 +895,14 @@ unsafe extern "C" fn preemptoff_tracer_reset(tr: *mut trace_array) {
 
 #[no_mangle]
 unsafe extern "C" fn preemptirqsoff_tracer_init(tr: *mut trace_array) -> c_int {
-    static int preemptirqsoff_tracer_init(struct trace_array *tr)
-    {
     trace_type = TRACER_IRQS_OFF | TRACER_PREEMPT_OFF;
     return __irqsoff_tracer_init(tr);
     }
 #[no_mangle]
 unsafe extern "C" fn preemptirqsoff_tracer_reset(tr: *mut trace_array) {
-    static void preemptirqsoff_tracer_reset(struct trace_array *tr)
-    {
     __irqsoff_tracer_reset(tr);
     }
-    static struct tracer preemptirqsoff_tracer __read_mostly =
+    static struct tracer preemptirqsoff_tracer  =
     {
     .name		= "preemptirqsoff",
     .init		= preemptirqsoff_tracer_init,
@@ -709,8 +924,6 @@ unsafe extern "C" fn preemptirqsoff_tracer_reset(tr: *mut trace_array) {
 
 #[no_mangle]
 pub unsafe extern "C" fn init_irqsoff_tracer() -> __init static int {
-    __init static int init_irqsoff_tracer(void)
-    {
 
     register_tracer(&irqsoff_tracer);
 
@@ -720,4 +933,4 @@ pub unsafe extern "C" fn init_irqsoff_tracer() -> __init static int {
 
     return 0;
     }
-    core_initcall(init_irqsoff_tracer);
+    core_initcall!(init_irqsoff_tracer);

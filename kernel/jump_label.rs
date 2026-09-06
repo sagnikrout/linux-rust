@@ -34,6 +34,216 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
 macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
@@ -153,8 +363,8 @@ pub unsafe extern "C" fn jump_label_unlock() {
     }
 #[no_mangle]
 unsafe extern "C" fn jump_label_cmp(a: *const c_void, b: *const c_void) -> c_int {
-    const struct jump_entry *jea = a;
-    const struct jump_entry *jeb = b;
+    let mut jea = a;
+    let mut jeb = b;
 //
 // Entrires are sorted by key.
 //
@@ -179,10 +389,10 @@ unsafe extern "C" fn jump_label_cmp(a: *const c_void, b: *const c_void) -> c_int
     }
 #[no_mangle]
 unsafe extern "C" fn jump_label_swap(a: *mut c_void, b: *mut c_void, size: c_int) {
-pub static mut delta: c_long = (unsigned long)a - (unsigned long)b;
-    struct jump_entry *jea = a;
-    struct jump_entry *jeb = b;
-pub static mut tmp: jump_entry = *jea;
+pub static mut delta: c_long = 0;
+    let mut jea = a;
+    let mut jeb = b;
+pub static mut tmp: jump_entry = 0;
     jea.code	= jeb.code - delta;
     jea.target	= jeb.target - delta;
     jea.key	= jeb.key - delta;
@@ -193,15 +403,15 @@ pub static mut tmp: jump_entry = *jea;
 #[no_mangle]
 pub unsafe extern "C" fn jump_label_sort_entries() {
     let mut size = 0;
-    void *swapfn = core::ptr::null_mut();
-    if (IS_ENABLED(CONFIG_HAVE_ARCH_JUMP_LABEL_RELATIVE)) {
+    let mut swapfn = core::ptr::null_mut();
+    if (IS_ENABLED!(CONFIG_HAVE_ARCH_JUMP_LABEL_RELATIVE)) {
     swapfn = jump_label_swap;
     }
     size = (((unsigned long)stop - (unsigned long)start)
-    / sizeof(struct jump_entry));
-    sort(start, size, sizeof(struct jump_entry), jump_label_cmp, swapfn);
+    / sizeof!(jump_entry));
+    sort(start, size, sizeof!(jump_entry), jump_label_cmp, swapfn);
     }
-    static void jump_label_update(struct static_key *key);
+// forward_decl: jump_label_update;
 //
 // There are similar definitions for the !CONFIG_JUMP_LABEL case in jump_label.h.
 // The use of 'atomic_read()' requires atomic.h and its problematic for some
@@ -217,7 +427,7 @@ pub unsafe extern "C" fn static_key_count(key: *mut static_key) -> c_int {
 // -1 means the first static_key_slow_inc() is in progress.
 // static_key_enabled() must return true, so return 1 here.
 //
-pub static mut n: c_int = atomic_read(&key.enabled);
+pub static mut n: c_int = 0;
     return n >= 0 ? n : 1;
     }
 // EXPORT_SYMBOL_GPL;
@@ -282,7 +492,7 @@ pub unsafe extern "C" fn static_key_slow_inc_cpuslocked(key: *mut static_key) ->
 // While holding the mutex this should never observe
 // anything else than a value >= 1 and succeed
 //
-    if (WARN_ON_ONCE(!static_key_fast_inc_not_disabled(key))) {
+    if (WARN_ON_ONCE!(!static_key_fast_inc_not_disabled(key))) {
     return false;
     }
     }
@@ -373,7 +583,7 @@ unsafe extern "C" fn static_key_dec_not_one(key: *mut static_key) -> bool {
 // Warn about underflow, and lie about success in an attempt to
 // not make things worse.
 //
-    if (WARN_ON_ONCE(v == 0)) {
+    if (WARN_ON_ONCE!(v == 0)) {
     return true;
     }
     if (v <= 1) {
@@ -395,13 +605,13 @@ unsafe extern "C" fn __static_key_slow_dec_cpuslocked(key: *mut static_key) {
 // It should be impossible to observe -1 with jump_label_mutex held,
 // see static_key_slow_inc_cpuslocked().
 //
-    if (WARN_ON_ONCE(val == -1)) {
+    if (WARN_ON_ONCE!(val == -1)) {
     return;
     }
 //
 // Cannot already be 0, something went sideways.
 //
-    if (WARN_ON_ONCE(val == 0)) {
+    if (WARN_ON_ONCE!(val == 0)) {
     return;
     }
     if (atomic_dec_and_test(&key.enabled)) {
@@ -416,8 +626,7 @@ unsafe extern "C" fn __static_key_slow_dec(key: *mut static_key) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn jump_label_update_timeout(work: *mut work_struct) {
-    struct static_key_deferred *key =
-    container_of(work, struct static_key_deferred, work.work);
+    let mut key = container_of!(work, static_key_deferred, work.work);
     __static_key_slow_dec(&key.key);
     }
 // EXPORT_SYMBOL_GPL;
@@ -457,8 +666,9 @@ pub unsafe extern "C" fn jump_label_rate_limit() {
 #[no_mangle]
 unsafe extern "C" fn addr_conflict(entry: *mut jump_entry, start: *mut c_void, end: *mut c_void) -> c_int {
     if (jump_entry_code(entry) <= (unsigned long)end &&
-    jump_entry_code(entry) + jump_entry_size(entry) > (unsigned long)start)
+    jump_entry_code(entry) + jump_entry_size(entry) > (unsigned long)start) {
     return 1;
+    }
     return 0;
     }
 #[no_mangle]
@@ -471,7 +681,7 @@ pub unsafe extern "C" fn __jump_label_text_reserved() {
     return 1;
     }
     }
-    iter++;
+    iter += 1;
     }
     return 0;
     }
@@ -521,9 +731,9 @@ pub unsafe extern "C" fn static_key_set_entries() {
     }
 #[no_mangle]
 unsafe extern "C" fn jump_label_type(entry: *mut jump_entry) -> enum jump_label_type {
-    struct static_key *key = jump_entry_key(entry);
-pub static mut enabled: bool = static_key_enabled(key);
-pub static mut branch: bool = jump_entry_is_branch(entry);
+    let mut key = jump_entry_key(entry);
+pub static mut enabled: bool = false;
+pub static mut branch: bool = false;
 // See the comment in linux/jump_label.h
     return enabled ^ branch;
     }
@@ -554,7 +764,7 @@ unsafe extern "C" fn jump_label_can_update(entry: *mut jump_entry, init: bool) -
 
 #[no_mangle]
 pub unsafe extern "C" fn __jump_label_update() {
-    for (; (entry < stop) && (jump_entry_key(entry) == key); entry++) {
+    while ((entry < stop) && (jump_entry_key(entry) == key)) {
     if (jump_label_can_update(entry, init)) {
     arch_jump_label_transform(entry, jump_label_type(entry));
     }
@@ -562,8 +772,10 @@ pub unsafe extern "C" fn __jump_label_update() {
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn __jump_label_update() {
-    for (; (entry < stop) && (jump_entry_key(entry) == key); entry++) {
+#[no_mangle]
+// duplicate fn: __jump_label_update
+pub unsafe extern "C" fn __jump_label_update_dup() {
+    while ((entry < stop) && (jump_entry_key(entry) == key)) {
     if (!jump_label_can_update(entry, init)) {
     continue;
     }
@@ -580,9 +792,9 @@ pub unsafe extern "C" fn __jump_label_update() {
 
 #[no_mangle]
 pub unsafe extern "C" fn jump_label_init() -> c_int {
-    struct jump_entry *iter_start = __start___jump_table;
-    struct jump_entry *iter_stop = __stop___jump_table;
-    struct static_key *key = core::ptr::null_mut();
+    let mut iter_start = __start___jump_table;
+    let mut iter_stop = __stop___jump_table;
+    let mut key = core::ptr::null_mut();
     let mut iter = core::ptr::null_mut();
     if (static_key_initialized) {
     return;
@@ -590,7 +802,7 @@ pub unsafe extern "C" fn jump_label_init() -> c_int {
     cpus_read_lock();
     jump_label_lock();
     jump_label_sort_entries(iter_start, iter_stop);
-    for (iter = iter_start; iter < iter_stop; iter++) {
+    while (iter < iter_stop) {
     let mut iterk = core::ptr::null_mut();
     let mut in_init = 0;
 // rewrite NOPs
@@ -616,21 +828,21 @@ pub unsafe extern "C" fn static_key_sealed(key: *mut static_key) -> bool {
     }
 #[no_mangle]
 pub unsafe extern "C" fn static_key_seal(key: *mut static_key) {
-pub static mut type: c_ulong = key.type & JUMP_TYPE_TRUE;
+pub static mut type: c_ulong = 0;
     key.type = JUMP_TYPE_LINKED | type;
     }
 #[no_mangle]
 pub unsafe extern "C" fn jump_label_init_ro() {
-    struct jump_entry *iter_start = __start___jump_table;
-    struct jump_entry *iter_stop = __stop___jump_table;
+    let mut iter_start = __start___jump_table;
+    let mut iter_stop = __stop___jump_table;
     let mut iter = core::ptr::null_mut();
-    if (WARN_ON_ONCE(!static_key_initialized)) {
+    if (WARN_ON_ONCE!(!static_key_initialized)) {
     return;
     }
     cpus_read_lock();
     jump_label_lock();
-    for (iter = iter_start; iter < iter_stop; iter++) {
-    struct static_key *iterk = jump_entry_key(iter);
+    while (iter < iter_stop) {
+    let mut iterk = jump_entry_key(iter);
     if (!is_kernel_ro_after_init((unsigned long)iterk)) {
     continue;
     }
@@ -645,9 +857,9 @@ pub unsafe extern "C" fn jump_label_init_ro() {
 
 #[no_mangle]
 pub unsafe extern "C" fn jump_label_init_type(entry: *mut jump_entry) -> enum jump_label_type {
-    struct static_key *key = jump_entry_key(entry);
-pub static mut type: bool = static_key_type(key);
-pub static mut branch: bool = jump_entry_is_branch(entry);
+    let mut key = jump_entry_key(entry);
+pub static mut type: bool = false;
+pub static mut branch: bool = false;
 // See the comment in linux/jump_label.h
     return type ^ branch;
     }
@@ -701,7 +913,7 @@ unsafe extern "C" fn __jump_label_mod_text_reserved(start: *mut c_void, end: *mu
 #[no_mangle]
 unsafe extern "C" fn __jump_label_mod_update(key: *mut static_key) {
     let mut mod = core::ptr::null_mut();
-    for (mod = static_key_mod(key); mod; mod = mod.next) {
+    while (mod) {
     let mut stop = core::ptr::null_mut();
     let mut m = core::ptr::null_mut();
 //
@@ -724,17 +936,18 @@ unsafe extern "C" fn __jump_label_mod_update(key: *mut static_key) {
     }
 #[no_mangle]
 unsafe extern "C" fn jump_label_add_module(mod: *mut module) -> c_int {
-    struct jump_entry *iter_start = mod.jump_entries;
-    struct jump_entry *iter_stop = iter_start + mod.num_jump_entries;
+    let mut iter_start = mod.jump_entries;
+    let mut iter_stop = iter_start + mod.num_jump_entries;
     let mut iter = core::ptr::null_mut();
-    struct static_key *key = core::ptr::null_mut();
-    struct static_key_mod *jlm, *jlm2;
+    let mut key = core::ptr::null_mut();
+    let mut jlm = core::ptr::null_mut();
+    let mut jlm2 = core::ptr::null_mut();
 // if the module doesn't have jump label entries, just return
     if (iter_start == iter_stop) {
     return 0;
     }
     jump_label_sort_entries(iter_start, iter_stop);
-    for (iter = iter_start; iter < iter_stop; iter++) {
+    while (iter < iter_stop) {
     let mut iterk = core::ptr::null_mut();
     let mut in_init = 0;
     in_init = within_module_init(jump_entry_code(iter), mod);
@@ -754,14 +967,14 @@ unsafe extern "C" fn jump_label_add_module(mod: *mut module) -> c_int {
 // done with it.
 //
     if (static_key_sealed(key)) {
-    goto do_poke;
+// goto;
     }
-    jlm = kzalloc_obj(struct static_key_mod);
+    jlm = kzalloc_obj(static_key_mod);
     if (!jlm) {
     return -ENOMEM;
     }
     if (!static_key_linked(key)) {
-    jlm2 = kzalloc_obj(struct static_key_mod);
+    jlm2 = kzalloc_obj(static_key_mod);
     if (!jlm2) {
     kfree(jlm);
     return -ENOMEM;
@@ -779,7 +992,7 @@ unsafe extern "C" fn jump_label_add_module(mod: *mut module) -> c_int {
     static_key_set_mod(key, jlm);
     static_key_set_linked(key);
 // Only update if we've changed from our initial state
-    do_poke:
+// label;
     if (jump_label_type(iter) != jump_label_init_type(iter)) {
     __jump_label_update(key, iter, iter_stop, true);
     }
@@ -788,12 +1001,13 @@ unsafe extern "C" fn jump_label_add_module(mod: *mut module) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn jump_label_del_module(mod: *mut module) {
-    struct jump_entry *iter_start = mod.jump_entries;
-    struct jump_entry *iter_stop = iter_start + mod.num_jump_entries;
+    let mut iter_start = mod.jump_entries;
+    let mut iter_stop = iter_start + mod.num_jump_entries;
     let mut iter = core::ptr::null_mut();
-    struct static_key *key = core::ptr::null_mut();
-    struct static_key_mod *jlm, **prev;
-    for (iter = iter_start; iter < iter_stop; iter++) {
+    let mut key = core::ptr::null_mut();
+    let mut jlm = core::ptr::null_mut();
+    let mut prev = core::ptr::null_mut();
+    while (iter < iter_stop) {
     if (jump_entry_key(iter) == key) {
     continue;
     }
@@ -806,7 +1020,7 @@ unsafe extern "C" fn jump_label_del_module(mod: *mut module) {
     continue;
     }
 // No memory during module load
-    if (WARN_ON(!static_key_linked(key))) {
+    if (WARN_ON!(!static_key_linked(key))) {
     continue;
     }
     prev = &key.next;
@@ -816,7 +1030,7 @@ unsafe extern "C" fn jump_label_del_module(mod: *mut module) {
     jlm = jlm.next;
     }
 // No memory during module load
-    if (WARN_ON(!jlm)) {
+    if (WARN_ON!(!jlm)) {
     continue;
     }
     if (prev == &key.next) {
@@ -837,7 +1051,7 @@ unsafe extern "C" fn jump_label_del_module(mod: *mut module) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn jump_label_module_notify() {
-    struct module *mod = data;
+    let mut mod = data;
 pub static mut ret: c_int = 0;
     cpus_read_lock();
     jump_label_lock();
@@ -848,10 +1062,12 @@ pub static mut ret: c_int = 0;
 // WARN;
     jump_label_del_module(mod);
     }
-    break;
+    // break;
+    }
     MODULE_STATE_GOING => {
     jump_label_del_module(mod);
-    break;
+    // break;
+    }
     }
     jump_label_unlock();
     cpus_read_unlock();
@@ -879,8 +1095,8 @@ unsafe extern "C" fn jump_label_init_module() -> __init int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn jump_label_text_reserved(start: *mut c_void, end: *mut c_void) -> c_int {
-pub static mut init: bool = system_state < SYSTEM_RUNNING;
-    int ret = __jump_label_text_reserved(__start___jump_table,
+pub static mut init: bool = false;
+    let mut ret = __jump_label_text_reserved(__start___jump_table,
     __stop___jump_table, start, end, init);
     if (ret) {
     return ret;
@@ -892,8 +1108,8 @@ pub static mut init: bool = system_state < SYSTEM_RUNNING;
     }
 #[no_mangle]
 unsafe extern "C" fn jump_label_update(key: *mut static_key) {
-    struct jump_entry *stop = __stop___jump_table;
-pub static mut init: bool = system_state < SYSTEM_RUNNING;
+    let mut stop = __stop___jump_table;
+pub static mut init: bool = false;
     let mut entry = core::ptr::null_mut();
 
     let mut mod = core::ptr::null_mut();
@@ -920,7 +1136,7 @@ pub static mut init: bool = system_state < SYSTEM_RUNNING;
 #[no_mangle]
 unsafe extern "C" fn jump_label_test() -> __init int {
     let mut i = 0;
-    for (i = 0; i < 2; i++) {
+    while (i < 2) {
 // WARN_ON;
 // WARN_ON;
 // WARN_ON;
@@ -941,5 +1157,3 @@ unsafe extern "C" fn jump_label_test() -> __init int {
     return 0;
     }
 // early_initcall;
-}
-}

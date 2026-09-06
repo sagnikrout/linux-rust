@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0+
@@ -57,11 +307,11 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
 // Macro flag: #define CREATE_TRACE_POINTS
 
-    module_param(rcu_expedited, int, 0444);
-    module_param(rcu_normal, int, 0444);
-    let mut rcu_normal_after_boot: static int = IS_ENABLED(CONFIG_PREEMPT_RT);
+    module_param!(rcu_expedited, int, 0444);
+    module_param!(rcu_normal, int, 0444);
+pub static mut rcu_normal_after_boot: int = 0;
 
-    module_param(rcu_normal_after_boot, int, 0444);
+    module_param!(rcu_normal_after_boot, int, 0444);
 
 //
 // rcu_read_lock_held_common() - might we be in RCU-sched read-side critical section?
@@ -101,8 +351,6 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 #[no_mangle]
 unsafe extern "C" fn rcu_read_lock_held_common(ret: *mut bool) -> bool {
-    static bool rcu_read_lock_held_common(bool *ret)
-    {
     if (!debug_lockdep_rcu_enabled()) {
 // ret = true;
     return true;
@@ -119,11 +367,10 @@ unsafe extern "C" fn rcu_read_lock_held_common(ret: *mut bool) -> bool {
     }
 #[no_mangle]
 pub unsafe extern "C" fn rcu_read_lock_sched_held() -> int notrace {
-    int notrace rcu_read_lock_sched_held(void)
-    {
-    bool ret;
-    if (rcu_read_lock_held_common(&ret))
+    let mut ret = 0;
+    if (rcu_read_lock_held_common(&ret)) {
     return ret;
+    }
     return lock_is_held(&rcu_sched_lock_map) || !preemptible();
     }
     EXPORT_SYMBOL(rcu_read_lock_sched_held);
@@ -134,26 +381,22 @@ pub unsafe extern "C" fn rcu_read_lock_sched_held() -> int notrace {
 // that if the user specifies both rcu_expedited and rcu_normal, then
 // rcu_normal wins.  (Except during the time period during boot from
 // when the first task is spawned until the rcu_set_runtime_mode()
-// core_initcall() is invoked, at which point everything is expedited.)
+// core_initcall!() is invoked, at which point everything is expedited.)
 //
 #[no_mangle]
 pub unsafe extern "C" fn rcu_gp_is_normal() -> bool {
-    bool rcu_gp_is_normal(void)
-    {
     return READ_ONCE(rcu_normal) &&
     rcu_scheduler_active != RCU_SCHEDULER_INIT;
     }
     EXPORT_SYMBOL_GPL(rcu_gp_is_normal);
-    let mut rcu_async_hurry_nesting: static atomic_t = ATOMIC_INIT(1);
+pub static mut rcu_async_hurry_nesting: atomic_t = 0;
 //
 // Should call_rcu() callbacks be processed with urgency or are
 // they OK being executed with arbitrary delays?
 //
 #[no_mangle]
 pub unsafe extern "C" fn rcu_async_should_hurry() -> bool {
-    bool rcu_async_should_hurry(void)
-    {
-    return !IS_ENABLED(CONFIG_RCU_LAZY) ||
+    return !IS_ENABLED!(CONFIG_RCU_LAZY) ||
     atomic_read(&rcu_async_hurry_nesting);
     }
     EXPORT_SYMBOL_GPL(rcu_async_should_hurry);
@@ -165,10 +408,9 @@ pub unsafe extern "C" fn rcu_async_should_hurry() -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn rcu_async_hurry() {
-    void rcu_async_hurry(void)
-    {
-    if (IS_ENABLED(CONFIG_RCU_LAZY))
+    if (IS_ENABLED!(CONFIG_RCU_LAZY)) {
     atomic_inc(&rcu_async_hurry_nesting);
+    }
     }
     EXPORT_SYMBOL_GPL(rcu_async_hurry);
 //
@@ -179,13 +421,12 @@ pub unsafe extern "C" fn rcu_async_hurry() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn rcu_async_relax() {
-    void rcu_async_relax(void)
-    {
-    if (IS_ENABLED(CONFIG_RCU_LAZY))
+    if (IS_ENABLED!(CONFIG_RCU_LAZY)) {
     atomic_dec(&rcu_async_hurry_nesting);
     }
+    }
     EXPORT_SYMBOL_GPL(rcu_async_relax);
-    let mut rcu_expedited_nesting: static atomic_t = ATOMIC_INIT(1);
+pub static mut rcu_expedited_nesting: atomic_t = 0;
 //
 // Should normal grace-period primitives be expedited?  Intended for
 // use within RCU.  Note that this function takes the rcu_expedited
@@ -195,8 +436,6 @@ pub unsafe extern "C" fn rcu_async_relax() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn rcu_gp_is_expedited() -> bool {
-    bool rcu_gp_is_expedited(void)
-    {
     return rcu_expedited || atomic_read(&rcu_expedited_nesting);
     }
     EXPORT_SYMBOL_GPL(rcu_gp_is_expedited);
@@ -209,8 +448,6 @@ pub unsafe extern "C" fn rcu_gp_is_expedited() -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn rcu_expedite_gp() {
-    void rcu_expedite_gp(void)
-    {
     atomic_inc(&rcu_expedited_nesting);
     }
     EXPORT_SYMBOL_GPL(rcu_expedite_gp);
@@ -225,23 +462,20 @@ pub unsafe extern "C" fn rcu_expedite_gp() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn rcu_unexpedite_gp() {
-    void rcu_unexpedite_gp(void)
-    {
     atomic_dec(&rcu_expedited_nesting);
     }
     EXPORT_SYMBOL_GPL(rcu_unexpedite_gp);
-    static bool rcu_boot_ended __read_mostly;
+    static bool rcu_boot_ended ;
 //
 // Inform RCU of the end of the in-kernel boot sequence.
 //
 #[no_mangle]
 pub unsafe extern "C" fn rcu_end_inkernel_boot() {
-    void rcu_end_inkernel_boot(void)
-    {
     rcu_unexpedite_gp();
     rcu_async_relax();
-    if (rcu_normal_after_boot)
+    if (rcu_normal_after_boot) {
     WRITE_ONCE(rcu_normal, 1);
+    }
     rcu_boot_ended = true;
     }
 //
@@ -249,8 +483,6 @@ pub unsafe extern "C" fn rcu_end_inkernel_boot() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn rcu_inkernel_boot_has_ended() -> bool {
-    bool rcu_inkernel_boot_has_ended(void)
-    {
     return rcu_boot_ended;
     }
     EXPORT_SYMBOL_GPL(rcu_inkernel_boot_has_ended);
@@ -262,11 +494,10 @@ pub unsafe extern "C" fn rcu_inkernel_boot_has_ended() -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn rcu_test_sync_prims() {
-    void rcu_test_sync_prims(void)
-    {
-    if (!IS_ENABLED(CONFIG_PROVE_RCU))
+    if (!IS_ENABLED!(CONFIG_PROVE_RCU)) {
     return;
-    pr_info("Running RCU synchronous self tests\n");
+    }
+    pr_info!("Running RCU synchronous self tests\n");
     synchronize_rcu();
     synchronize_rcu_expedited();
     }
@@ -275,50 +506,31 @@ pub unsafe extern "C" fn rcu_test_sync_prims() {
 // Switch to run-time mode once RCU has fully initialized.
 //
 #[no_mangle]
-unsafe extern "C" fn rcu_set_runtime_mode() -> int __init {
-    static int __init rcu_set_runtime_mode(void)
-    {
+unsafe extern "C" fn rcu_set_runtime_mode() -> c_int {
     rcu_test_sync_prims();
     rcu_scheduler_active = RCU_SCHEDULER_RUNNING;
     kfree_rcu_scheduler_running();
     rcu_test_sync_prims();
     return 0;
     }
-    core_initcall(rcu_set_runtime_mode);
+    core_initcall!(rcu_set_runtime_mode);
 
-    static struct lock_class_key rcu_lock_key;
-    struct lockdep_map rcu_lock_map = {
-    .name = "rcu_read_lock",
-    .key = &rcu_lock_key,
-    .wait_type_outer = LD_WAIT_FREE,
-    .wait_type_inner = LD_WAIT_CONFIG, /* PREEMPT_RT implies PREEMPT_RCU */
-    };
+pub static mut rcu_lock_key: usize = 0;
+pub static mut lockdep_map: usize = 0;
     EXPORT_SYMBOL_GPL(rcu_lock_map);
-    static struct lock_class_key rcu_bh_lock_key;
-    struct lockdep_map rcu_bh_lock_map = {
-    .name = "rcu_read_lock_bh",
-    .key = &rcu_bh_lock_key,
-    .wait_type_outer = LD_WAIT_FREE,
-    .wait_type_inner = LD_WAIT_CONFIG, /* PREEMPT_RT makes BH preemptible. */
-    };
+pub static mut rcu_bh_lock_key: usize = 0;
+pub static mut lockdep_map: usize = 0;
     EXPORT_SYMBOL_GPL(rcu_bh_lock_map);
-    static struct lock_class_key rcu_sched_lock_key;
-    struct lockdep_map rcu_sched_lock_map = {
-    .name = "rcu_read_lock_sched",
-    .key = &rcu_sched_lock_key,
-    .wait_type_outer = LD_WAIT_FREE,
-    .wait_type_inner = LD_WAIT_SPIN,
-    };
+pub static mut rcu_sched_lock_key: usize = 0;
+pub static mut lockdep_map: usize = 0;
     EXPORT_SYMBOL_GPL(rcu_sched_lock_map);
 // Tell lockdep when RCU callbacks are being invoked.
-    static struct lock_class_key rcu_callback_key;
+pub static mut rcu_callback_key: usize = 0;
     struct lockdep_map rcu_callback_map =
     STATIC_LOCKDEP_MAP_INIT("rcu_callback", &rcu_callback_key);
     EXPORT_SYMBOL_GPL(rcu_callback_map);
 #[no_mangle]
 pub unsafe extern "C" fn debug_lockdep_rcu_enabled() -> noinstr int notrace {
-    noinstr int notrace debug_lockdep_rcu_enabled(void)
-    {
     return rcu_scheduler_active != RCU_SCHEDULER_INACTIVE && READ_ONCE(debug_locks) &&
     current.lockdep_recursion == 0;
     }
@@ -345,11 +557,10 @@ pub unsafe extern "C" fn debug_lockdep_rcu_enabled() -> noinstr int notrace {
 //
 #[no_mangle]
 pub unsafe extern "C" fn rcu_read_lock_held() -> int notrace {
-    int notrace rcu_read_lock_held(void)
-    {
-    bool ret;
-    if (rcu_read_lock_held_common(&ret))
+    let mut ret = 0;
+    if (rcu_read_lock_held_common(&ret)) {
     return ret;
+    }
     return lock_is_held(&rcu_lock_map);
     }
     EXPORT_SYMBOL_GPL(rcu_read_lock_held);
@@ -370,25 +581,24 @@ pub unsafe extern "C" fn rcu_read_lock_held() -> int notrace {
 //
 #[no_mangle]
 pub unsafe extern "C" fn rcu_read_lock_bh_held() -> int notrace {
-    int notrace rcu_read_lock_bh_held(void)
-    {
-    bool ret;
-    if (rcu_read_lock_held_common(&ret))
+    let mut ret = 0;
+    if (rcu_read_lock_held_common(&ret)) {
     return ret;
+    }
     return in_softirq() || irqs_disabled();
     }
     EXPORT_SYMBOL_GPL(rcu_read_lock_bh_held);
 #[no_mangle]
 pub unsafe extern "C" fn rcu_read_lock_any_held() -> int notrace {
-    int notrace rcu_read_lock_any_held(void)
-    {
-    bool ret;
-    if (rcu_read_lock_held_common(&ret))
+    let mut ret = 0;
+    if (rcu_read_lock_held_common(&ret)) {
     return ret;
+    }
     if (lock_is_held(&rcu_lock_map) ||
     lock_is_held(&rcu_bh_lock_map) ||
-    lock_is_held(&rcu_sched_lock_map))
+    lock_is_held(&rcu_sched_lock_map)) {
     return 1;
+    }
     return !preemptible();
     }
     EXPORT_SYMBOL_GPL(rcu_read_lock_any_held);
@@ -401,28 +611,26 @@ pub unsafe extern "C" fn rcu_read_lock_any_held() -> int notrace {
 //
 #[no_mangle]
 pub unsafe extern "C" fn wakeme_after_rcu(head: *mut rcu_head) {
-    void wakeme_after_rcu(struct rcu_head *head)
-    {
-    struct rcu_synchronize *rcu;
-    rcu = container_of(head, struct rcu_synchronize, head);
+pub static mut rcu: *mut c_void = core::ptr::null_mut();
+    rcu = container_of!(head, rcu_synchronize, head);
     complete(&rcu.completion);
     }
     EXPORT_SYMBOL_GPL(wakeme_after_rcu);
-    void __wait_rcu_gp(bool checktiny, unsigned int state, int n, call_rcu_func_t *crcu_array,
-    struct rcu_synchronize *rs_array)
-    {
-    int i;
-    int j;
+#[no_mangle]
+pub unsafe extern "C" fn __wait_rcu_gp(checktiny: bool, state: c_uint, n: c_int, crcu_array: *mut call_rcu_func_t, rs_array: *mut rcu_synchronize) {
+    let mut i = 0;
+    let mut j = 0;
 // Initialize and register callbacks for each crcu_array element.
-    for (i = 0; i < n; i++) {
+    while (i < n) {
     if (checktiny &&
     (crcu_array[i] == call_rcu)) {
     might_sleep();
     continue;
     }
-    for (j = 0; j < i; j++)
+    for (j = 0; j < i; j++) {
     if (crcu_array[j] == crcu_array[i])
     break;
+    }
     if (j == i) {
     init_rcu_head_on_stack(&rs_array[i].head);
     init_completion(&rs_array[i].completion);
@@ -430,13 +638,15 @@ pub unsafe extern "C" fn wakeme_after_rcu(head: *mut rcu_head) {
     }
     }
 // Wait for all callbacks to be invoked.
-    for (i = 0; i < n; i++) {
+    while (i < n) {
     if (checktiny &&
-    (crcu_array[i] == call_rcu))
+    (crcu_array[i] == call_rcu)) {
     continue;
-    for (j = 0; j < i; j++)
+    }
+    for (j = 0; j < i; j++) {
     if (crcu_array[j] == crcu_array[i])
     break;
+    }
     if (j == i) {
     wait_for_completion_state(&rs_array[i].completion, state);
     destroy_rcu_head_on_stack(&rs_array[i].head);
@@ -446,8 +656,6 @@ pub unsafe extern "C" fn wakeme_after_rcu(head: *mut rcu_head) {
     EXPORT_SYMBOL_GPL(__wait_rcu_gp);
 #[no_mangle]
 pub unsafe extern "C" fn finish_rcuwait(w: *mut rcuwait) {
-    void finish_rcuwait(struct rcuwait *w)
-    {
     rcu_assign_pointer(w.task, core::ptr::null_mut());
     __set_current_state(TASK_RUNNING);
     }
@@ -455,22 +663,16 @@ pub unsafe extern "C" fn finish_rcuwait(w: *mut rcuwait) {
 
 #[no_mangle]
 pub unsafe extern "C" fn init_rcu_head(head: *mut rcu_head) {
-    void init_rcu_head(struct rcu_head *head)
-    {
     debug_object_init(head, &rcuhead_debug_descr);
     }
     EXPORT_SYMBOL_GPL(init_rcu_head);
 #[no_mangle]
 pub unsafe extern "C" fn destroy_rcu_head(head: *mut rcu_head) {
-    void destroy_rcu_head(struct rcu_head *head)
-    {
     debug_object_free(head, &rcuhead_debug_descr);
     }
     EXPORT_SYMBOL_GPL(destroy_rcu_head);
 #[no_mangle]
 unsafe extern "C" fn rcuhead_is_static_object(addr: *mut c_void) -> bool {
-    static bool rcuhead_is_static_object(void *addr)
-    {
     return true;
     }
 //
@@ -485,8 +687,6 @@ unsafe extern "C" fn rcuhead_is_static_object(addr: *mut c_void) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn init_rcu_head_on_stack(head: *mut rcu_head) {
-    void init_rcu_head_on_stack(struct rcu_head *head)
-    {
     debug_object_init_on_stack(head, &rcuhead_debug_descr);
     }
     EXPORT_SYMBOL_GPL(init_rcu_head_on_stack);
@@ -503,21 +703,14 @@ pub unsafe extern "C" fn init_rcu_head_on_stack(head: *mut rcu_head) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn destroy_rcu_head_on_stack(head: *mut rcu_head) {
-    void destroy_rcu_head_on_stack(struct rcu_head *head)
-    {
     debug_object_free(head, &rcuhead_debug_descr);
     }
     EXPORT_SYMBOL_GPL(destroy_rcu_head_on_stack);
-    const struct debug_obj_descr rcuhead_debug_descr = {
-    .name = "rcu_head",
-    .is_static_object = rcuhead_is_static_object,
-    };
+pub static mut debug_obj_descr: usize = 0;
     EXPORT_SYMBOL_GPL(rcuhead_debug_descr);
 
-    void do_trace_rcu_torture_read(const char *rcutorturename, struct rcu_head *rhp,
-    unsigned long secs,
-    unsigned long c_old, unsigned long c)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn do_trace_rcu_torture_read(rcutorturename: *mut c_char, rhp: *mut rcu_head, secs: c_ulong, c_old: c_ulong, c: c_ulong) {
     trace_rcu_torture_read(rcutorturename, rhp, secs, c_old, c);
     }
     EXPORT_SYMBOL_GPL(do_trace_rcu_torture_read);
@@ -527,9 +720,7 @@ pub unsafe extern "C" fn destroy_rcu_head_on_stack(head: *mut rcu_head) {
 // Get rcutorture access to sched_setaffinity().
 #[no_mangle]
 pub unsafe extern "C" fn torture_sched_setaffinity(pid: pid_t, in_mask: *const cpumask, dowarn: bool) -> c_long {
-    long torture_sched_setaffinity(pid_t pid, const struct cpumask *in_mask, bool dowarn)
-    {
-    int ret;
+    let mut ret = 0;
     ret = sched_setaffinity(pid, in_mask);
     WARN_ONCE(dowarn && ret, "%s: sched_setaffinity(%d) returned %d\n", __func__, pid, ret);
     return ret;
@@ -540,48 +731,48 @@ pub unsafe extern "C" fn torture_sched_setaffinity(pid: pid_t, in_mask: *const c
 // kernels can find tasklist_lock.
 #[no_mangle]
 pub unsafe extern "C" fn synchronize_rcu_trivial_preempt() {
-    void synchronize_rcu_trivial_preempt(void)
-    {
-    struct task_struct *g;
-    struct task_struct *t;
+pub static mut g: *mut c_void = core::ptr::null_mut();
+pub static mut t: *mut c_void = core::ptr::null_mut();
     smp_mb(); // Order prior accesses before grace-period start.
     rcu_read_lock(); // Protect task list.
     for_each_process_thread(g, t) {
-    if (t == current)
+    if (t == current) {
     continue;  // Don't deadlock on ourselves!
+    }
 // Order later rcu_read_lock() on other tasks after QS.
-    while (smp_load_acquire(&t.rcu_trivial_preempt_nesting))
+    while (smp_load_acquire(&t.rcu_trivial_preempt_nesting)) {
     continue;
+    }
     }
     rcu_read_unlock();
     }
     EXPORT_SYMBOL_GPL(synchronize_rcu_trivial_preempt);
 
-    int rcu_cpu_stall_notifiers __read_mostly; // !0 = provide stall notifiers (rarely useful)
+    let mut rcu_cpu_stall_notifiers = 0; // !0 = provide stall notifiers (rarely useful)
     EXPORT_SYMBOL_GPL(rcu_cpu_stall_notifiers);
 
-    int rcu_cpu_stall_ftrace_dump __read_mostly;
-    module_param(rcu_cpu_stall_ftrace_dump, int, 0644);
+    let mut rcu_cpu_stall_ftrace_dump = 0;
+    module_param!(rcu_cpu_stall_ftrace_dump, int, 0644);
 
-    module_param(rcu_cpu_stall_notifiers, int, 0444);
+    module_param!(rcu_cpu_stall_notifiers, int, 0444);
 
-    int rcu_cpu_stall_suppress __read_mostly; // !0 = suppress stall warnings.
+    let mut rcu_cpu_stall_suppress = 0; // !0 = suppress stall warnings.
     EXPORT_SYMBOL_GPL(rcu_cpu_stall_suppress);
-    module_param(rcu_cpu_stall_suppress, int, 0644);
-    let mut __read_mostly: int rcu_cpu_stall_timeout = CONFIG_RCU_CPU_STALL_TIMEOUT;
-    module_param(rcu_cpu_stall_timeout, int, 0644);
-    let mut __read_mostly: int rcu_exp_cpu_stall_timeout = CONFIG_RCU_EXP_CPU_STALL_TIMEOUT;
-    module_param(rcu_exp_cpu_stall_timeout, int, 0644);
-    let mut __read_mostly: int rcu_cpu_stall_cputime = IS_ENABLED(CONFIG_RCU_CPU_STALL_CPUTIME);
-    module_param(rcu_cpu_stall_cputime, int, 0644);
-    bool rcu_exp_stall_task_details __read_mostly;
-    module_param(rcu_exp_stall_task_details, bool, 0644);
+    module_param!(rcu_cpu_stall_suppress, int, 0644);
+pub static mut : int rcu_cpu_stall_timeout = 0;
+    module_param!(rcu_cpu_stall_timeout, int, 0644);
+pub static mut : int rcu_exp_cpu_stall_timeout = 0;
+    module_param!(rcu_exp_cpu_stall_timeout, int, 0644);
+pub static mut : int rcu_cpu_stall_cputime = 0;
+    module_param!(rcu_cpu_stall_cputime, int, 0644);
+    let mut rcu_exp_stall_task_details = 0;
+    module_param!(rcu_exp_stall_task_details, bool, 0644);
 
 // Suppress boot-time RCU CPU stall warnings and rcutorture writer stall
 // warnings.  Also used by rcutorture even if stall warnings are excluded.
-    int rcu_cpu_stall_suppress_at_boot __read_mostly; // !0 = suppress boot stalls.
+    let mut rcu_cpu_stall_suppress_at_boot = 0; // !0 = suppress boot stalls.
     EXPORT_SYMBOL_GPL(rcu_cpu_stall_suppress_at_boot);
-    module_param(rcu_cpu_stall_suppress_at_boot, int, 0444);
+    module_param!(rcu_cpu_stall_suppress_at_boot, int, 0444);
 //
 // get_completed_synchronize_rcu - Return a pre-completed polled state cookie
 //
@@ -591,8 +782,6 @@ pub unsafe extern "C" fn synchronize_rcu_trivial_preempt() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn get_completed_synchronize_rcu() -> c_ulong {
-    unsigned long get_completed_synchronize_rcu(void)
-    {
     return RCU_GET_STATE_COMPLETED;
     }
     EXPORT_SYMBOL_GPL(get_completed_synchronize_rcu);
@@ -601,16 +790,14 @@ pub unsafe extern "C" fn get_completed_synchronize_rcu() -> c_ulong {
 // Early boot self test parameters.
 //
     static bool rcu_self_test;
-    module_param(rcu_self_test, bool, 0444);
+    module_param!(rcu_self_test, bool, 0444);
     static int rcu_self_test_counter;
 #[no_mangle]
 unsafe extern "C" fn test_callback(r: *mut rcu_head) {
-    static void test_callback(struct rcu_head *r)
-    {
-    rcu_self_test_counter++;
-    pr_info("RCU test callback executed %d\n", rcu_self_test_counter);
+    rcu_self_test_counter += 1;
+    pr_info!("RCU test callback executed %d\n", rcu_self_test_counter);
     }
-    DEFINE_STATIC_SRCU(early_srcu);
+pub static mut early_srcu: usize = 0;
     static unsigned long early_srcu_cookie;
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -620,74 +807,74 @@ pub struct early_boot_kfree_rcu {
 
 #[no_mangle]
 unsafe extern "C" fn early_boot_test_call_rcu() {
-    static void early_boot_test_call_rcu(void)
-    {
-    static struct rcu_head head;
-    int idx;
-    static struct rcu_head shead;
-    struct early_boot_kfree_rcu *rhp;
+pub static mut head: usize = 0;
+    let mut idx = 0;
+pub static mut shead: usize = 0;
+pub static mut rhp: *mut c_void = core::ptr::null_mut();
     idx = srcu_down_read(&early_srcu);
     srcu_up_read(&early_srcu, idx);
     call_rcu(&head, test_callback);
     early_srcu_cookie = start_poll_synchronize_srcu(&early_srcu);
     call_srcu(&early_srcu, &shead, test_callback);
     rhp = kmalloc_obj(*rhp);
-    if (!WARN_ON_ONCE(!rhp))
+    if (!WARN_ON_ONCE!(!rhp)) {
     kfree_rcu(rhp, rh);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn rcu_early_boot_tests() {
-    void rcu_early_boot_tests(void)
-    {
-    pr_info("Running RCU self tests\n");
-    if (rcu_self_test)
+    pr_info!("Running RCU self tests\n");
+    if (rcu_self_test) {
     early_boot_test_call_rcu();
+    }
     rcu_test_sync_prims();
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_verify_early_boot_tests() -> c_int {
-    static int rcu_verify_early_boot_tests(void)
-    {
-    let mut ret: c_int = 0;
-    let mut early_boot_test_counter: c_int = 0;
+pub static mut ret: c_int = 0;
+pub static mut early_boot_test_counter: c_int = 0;
     if (rcu_self_test) {
-    early_boot_test_counter++;
+    early_boot_test_counter += 1;
     rcu_barrier();
-    early_boot_test_counter++;
+    early_boot_test_counter += 1;
     srcu_barrier(&early_srcu);
-    WARN_ON_ONCE(!poll_state_synchronize_srcu(&early_srcu, early_srcu_cookie));
+    WARN_ON_ONCE!(!poll_state_synchronize_srcu(&early_srcu, early_srcu_cookie));
     cleanup_srcu_struct(&early_srcu);
     }
     if (rcu_self_test_counter != early_boot_test_counter) {
-    WARN_ON(1);
+    WARN_ON!(1);
     ret = -1;
     }
     return ret;
     }
-    late_initcall(rcu_verify_early_boot_tests);
+    late_initcall!(rcu_verify_early_boot_tests);
 
-    void rcu_early_boot_tests(void) {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: rcu_early_boot_tests
+pub unsafe extern "C" fn rcu_early_boot_tests_dup() {}
 
 //
 // Print any significant non-default boot-time settings.
 //
 #[no_mangle]
-pub unsafe extern "C" fn rcupdate_announce_bootup_oddness() -> void __init {
-    void __init rcupdate_announce_bootup_oddness(void)
-    {
-    if (rcu_normal)
-    pr_info("\tNo expedited grace period (rcu_normal).\n");
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: rcu_normal_after_boot) -> else {
-    else if (rcu_normal_after_boot)
-    pr_info("\tNo expedited grace period (rcu_normal_after_boot).\n");
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: rcu_expedited) -> else {
-    else if (rcu_expedited)
-    pr_info("\tAll grace periods are expedited (rcu_expedited).\n");
-    if (rcu_cpu_stall_suppress)
-    pr_info("\tRCU CPU stall warnings suppressed (rcu_cpu_stall_suppress).\n");
-    if (rcu_cpu_stall_timeout != CONFIG_RCU_CPU_STALL_TIMEOUT)
-    pr_info("\tRCU CPU stall warnings timeout set to %d (rcu_cpu_stall_timeout).\n", rcu_cpu_stall_timeout);
+pub unsafe extern "C" fn rcupdate_announce_bootup_oddness()  {
+    if (rcu_normal) {
+    pr_info!("\tNo expedited grace period (rcu_normal).\n");
+    }
+
+    else if (rcu_normal_after_boot) {
+    pr_info!("\tNo expedited grace period (rcu_normal_after_boot).\n");
+    }
+
+    else if (rcu_expedited) {
+    pr_info!("\tAll grace periods are expedited (rcu_expedited).\n");
+    }
+    if (rcu_cpu_stall_suppress) {
+    pr_info!("\tRCU CPU stall warnings suppressed (rcu_cpu_stall_suppress).\n");
+    }
+    if (rcu_cpu_stall_timeout != CONFIG_RCU_CPU_STALL_TIMEOUT) {
+    pr_info!("\tRCU CPU stall warnings timeout set to %d (rcu_cpu_stall_timeout).\n", rcu_cpu_stall_timeout);
+    }
     rcu_tasks_bootup_oddness();
     }

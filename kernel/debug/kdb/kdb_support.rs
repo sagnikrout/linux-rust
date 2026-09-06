@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -57,10 +307,8 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 #[no_mangle]
 pub unsafe extern "C" fn kdbgetsymval(symname: *const c_char, symtab: *mut kdb_symtab_t) -> c_int {
-    int kdbgetsymval(const char *symname, kdb_symtab_t *symtab)
-    {
     kdb_dbg_printf(AR, "symname=%s, symtab=%px\n", symname, symtab);
-    memset(symtab, 0, sizeof(*symtab));
+    memset(symtab, 0, sizeof!(*symtab));
     symtab.sym_start = kallsyms_lookup_name(symname);
     if (symtab.sym_start) {
     kdb_dbg_printf(AR, "returns 1, symtab.sym_start=0x%lx\n",
@@ -100,18 +348,17 @@ pub unsafe extern "C" fn kdbgetsymval(symname: *const c_char, symtab: *mut kdb_s
 //
 #[no_mangle]
 pub unsafe extern "C" fn kdbnearsym(addr: c_ulong, symtab: *mut kdb_symtab_t) -> c_int {
-    int kdbnearsym(unsigned long addr, kdb_symtab_t *symtab)
-    {
-    let mut ret: c_int = 0;
-    let mut symbolsize: c_ulong = 0;
-    let mut offset: c_ulong = 0;
+pub static mut ret: c_int = 0;
+pub static mut symbolsize: c_ulong = 0;
+pub static mut offset: c_ulong = 0;
     static char namebuf[KSYM_NAME_LEN];
     kdb_dbg_printf(AR, "addr=0x%lx, symtab=%px\n", addr, symtab);
-    memset(symtab, 0, sizeof(*symtab));
-    if (addr < 4096)
-    goto out;
+    memset(symtab, 0, sizeof!(*symtab));
+    if (addr < 4096) {
+// goto;
+    }
     symtab.sym_name = kallsyms_lookup(addr, &symbolsize , &offset,
-    (char **)(&symtab.mod_name), namebuf);
+    (&symtab.mod_name), namebuf);
     if (offset > 8*1024*1024) {
     symtab.sym_name = core::ptr::null_mut();
     addr = offset = symbolsize = 0;
@@ -119,11 +366,12 @@ pub unsafe extern "C" fn kdbnearsym(addr: c_ulong, symtab: *mut kdb_symtab_t) ->
     symtab.sym_start = addr - offset;
     symtab.sym_end = symtab.sym_start + symbolsize;
     ret = symtab.sym_name != core::ptr::null_mut() && *(symtab.sym_name) != '\0';
-    if (symtab.mod_name == core::ptr::null_mut())
+    if (symtab.mod_name == core::ptr::null_mut()) {
     symtab.mod_name = "kernel";
+    }
     kdb_dbg_printf(AR, "returns %d symtab.sym_start=0x%lx, symtab.mod_name=%px, symtab.sym_name=%px (%s)\n",
     ret, symtab.sym_start, symtab.mod_name, symtab.sym_name, symtab.sym_name);
-    out:
+// label;
     return ret;
     }
     static char ks_namebuf[KSYM_NAME_LEN+1], ks_namebuf_prev[KSYM_NAME_LEN+1];
@@ -141,15 +389,13 @@ pub unsafe extern "C" fn kdbnearsym(addr: c_ulong, symtab: *mut kdb_symtab_t) ->
 //
 #[no_mangle]
 pub unsafe extern "C" fn kallsyms_symbol_complete(prefix_name: *mut c_char, max_len: c_int) -> c_int {
-    int kallsyms_symbol_complete(char *prefix_name, int max_len)
-    {
-    let mut pos: loff_t = 0;
-    let mut prefix_len: c_int = strlen(prefix_name), prev_len = 0;
+pub static mut pos: loff_t = 0;
+pub static mut prefix_len: c_int = 0;
     int i, number = 0;
-    const char *name;
+pub static mut name: *mut c_void = core::ptr::null_mut();
     while ((name = kdb_walk_kallsyms(&pos))) {
     if (strncmp(name, prefix_name, prefix_len) == 0) {
-    strscpy(ks_namebuf, name, sizeof(ks_namebuf));
+    strscpy(ks_namebuf, name, sizeof!(ks_namebuf));
 // Work out the longest name that matches the prefix
     if (++number == 1) {
     prev_len = min_t(int, max_len-1,
@@ -158,7 +404,7 @@ pub unsafe extern "C" fn kallsyms_symbol_complete(prefix_name: *mut c_char, max_
     ks_namebuf_prev[prev_len] = '\0';
     continue;
     }
-    for (i = 0; i < prev_len; i++) {
+    while (i < prev_len) {
     if (ks_namebuf[i] != ks_namebuf_prev[i]) {
     prev_len = i;
     ks_namebuf_prev[i] = '\0';
@@ -167,8 +413,9 @@ pub unsafe extern "C" fn kallsyms_symbol_complete(prefix_name: *mut c_char, max_
     }
     }
     }
-    if (prev_len > prefix_len)
+    if (prev_len > prefix_len) {
     memcpy(prefix_name, ks_namebuf_prev, prev_len+1);
+    }
     return number;
     }
 //
@@ -185,16 +432,16 @@ pub unsafe extern "C" fn kallsyms_symbol_complete(prefix_name: *mut c_char, max_
 //
 #[no_mangle]
 pub unsafe extern "C" fn kallsyms_symbol_next(prefix_name: *mut c_char, flag: c_int, buf_size: c_int) -> c_int {
-    int kallsyms_symbol_next(char *prefix_name, int flag, int buf_size)
-    {
-    let mut prefix_len: c_int = strlen(prefix_name);
+pub static mut prefix_len: c_int = 0;
     static loff_t pos;
-    const char *name;
-    if (!flag)
+pub static mut name: *mut c_void = core::ptr::null_mut();
+    if (!flag) {
     pos = 0;
+    }
     while ((name = kdb_walk_kallsyms(&pos))) {
-    if (!strncmp(name, prefix_name, prefix_len))
+    if (!strncmp(name, prefix_name, prefix_len)) {
     return strscpy(prefix_name, name, buf_size);
+    }
     }
     return 0;
     }
@@ -210,42 +457,52 @@ pub unsafe extern "C" fn kallsyms_symbol_next(prefix_name: *mut c_char, flag: c_
 // is inside the kernel, except that the value is always printed
 // when requested.
 //
-    void kdb_symbol_print(unsigned long addr, const kdb_symtab_t *symtab_p,
-    unsigned int punc)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn kdb_symbol_print(addr: c_ulong, symtab_p: *mut kdb_symtab_t, punc: c_uint) {
     kdb_symtab_t symtab, *symtab_p2;
     if (symtab_p) {
-    symtab_p2 = (kdb_symtab_t *)symtab_p;
+    symtab_p2 = symtab_p;
     } else {
     symtab_p2 = &symtab;
     kdbnearsym(addr, symtab_p2);
     }
-    if (!(symtab_p2.sym_name || (punc & KDB_SP_VALUE)))
+    if (!(symtab_p2.sym_name || (punc & KDB_SP_VALUE))) {
     return;
-    if (punc & KDB_SP_SPACEB)
+    }
+    if (punc & KDB_SP_SPACEB) {
     kdb_printf(" ");
-    if (punc & KDB_SP_VALUE)
+    }
+    if (punc & KDB_SP_VALUE) {
     kdb_printf(kdb_machreg_fmt0, addr);
+    }
     if (symtab_p2.sym_name) {
-    if (punc & KDB_SP_VALUE)
+    if (punc & KDB_SP_VALUE) {
     kdb_printf(" ");
-    if (punc & KDB_SP_PAREN)
+    }
+    if (punc & KDB_SP_PAREN) {
     kdb_printf("(");
-    if (strcmp(symtab_p2.mod_name, "kernel"))
+    }
+    if (strcmp(symtab_p2.mod_name, "kernel")) {
     kdb_printf("[%s]", symtab_p2.mod_name);
+    }
     kdb_printf("%s", symtab_p2.sym_name);
-    if (addr != symtab_p2.sym_start)
+    if (addr != symtab_p2.sym_start) {
     kdb_printf("+0x%lx", addr - symtab_p2.sym_start);
-    if (punc & KDB_SP_SYMSIZE)
+    }
+    if (punc & KDB_SP_SYMSIZE) {
     kdb_printf("/0x%lx",
     symtab_p2.sym_end - symtab_p2.sym_start);
-    if (punc & KDB_SP_PAREN)
+    }
+    if (punc & KDB_SP_PAREN) {
     kdb_printf(")");
     }
-    if (punc & KDB_SP_SPACEA)
+    }
+    if (punc & KDB_SP_SPACEA) {
     kdb_printf(" ");
-    if (punc & KDB_SP_NEWLINE)
+    }
+    if (punc & KDB_SP_NEWLINE) {
     kdb_printf("\n");
+    }
     }
 //
 // kdb_strdup - kdb equivalent of strdup, for disasm code.
@@ -258,12 +515,13 @@ pub unsafe extern "C" fn kallsyms_symbol_next(prefix_name: *mut c_char, flag: c_
 // This is not in lib/string.c because it uses kmalloc which is not
 // available when string.o is used in boot loaders.
 //
-    char *kdb_strdup(const char *str, gfp_t type)
-    {
-    let mut n: usize = strlen(str) + 1;
-    char *s = kmalloc(n, type);
-    if (!s)
+#[no_mangle]
+pub unsafe extern "C" fn kdb_strdup(str: *mut c_char, type: gfp_t) -> *mut c_void {
+pub static mut n: usize = 0;
+    let mut s = kmalloc(n, type);
+    if (!s) {
     return core::ptr::null_mut();
+    }
     memcpy(s, str, n);
     return s;
     }
@@ -273,19 +531,20 @@ pub unsafe extern "C" fn kallsyms_symbol_next(prefix_name: *mut c_char, flag: c_
 // Remarks:
 // Quotes are only removed if there is both a leading and a trailing quote.
 //
-    char *kdb_strdup_dequote(const char *str, gfp_t type)
-    {
-    let mut len: usize = strlen(str);
-    char *s;
+#[no_mangle]
+pub unsafe extern "C" fn kdb_strdup_dequote(str: *mut c_char, type: gfp_t) -> *mut c_void {
+pub static mut len: usize = 0;
+pub static mut s: *mut c_void = core::ptr::null_mut();
     if (str[0] == '"' && len > 1 && str[len - 1] == '"') {
 // trim both leading and trailing quotes
-    str++;
+    str += 1;
     len -= 2;
     }
-    len++; /* add space for NUL terminator */
+    len += 1; /* add space for NUL terminator */
     s = kmalloc(len, type);
-    if (!s)
+    if (!s) {
     return core::ptr::null_mut();
+    }
     memcpy(s, str, len - 1);
     s[len - 1] = '\0';
     return s;
@@ -302,9 +561,7 @@ pub unsafe extern "C" fn kallsyms_symbol_next(prefix_name: *mut c_char, flag: c_
 //
 #[no_mangle]
 pub unsafe extern "C" fn kdb_getarea_size(res: *mut c_void, addr: c_ulong, size: usize) -> c_int {
-    int kdb_getarea_size(void *res, unsigned long addr, size_t size)
-    {
-    let mut ret: c_int = copy_from_kernel_nofault((char *)res, (char *)addr, size);
+pub static mut ret: c_int = 0;
     if (ret) {
     if (!KDB_STATE(SUPPRESS)) {
     kdb_func_printf("Bad address 0x%lx\n", addr);
@@ -328,9 +585,7 @@ pub unsafe extern "C" fn kdb_getarea_size(res: *mut c_void, addr: c_ulong, size:
 //
 #[no_mangle]
 pub unsafe extern "C" fn kdb_putarea_size(addr: c_ulong, res: *mut c_void, size: usize) -> c_int {
-    int kdb_putarea_size(unsigned long addr, void *res, size_t size)
-    {
-    let mut ret: c_int = copy_to_kernel_nofault((char *)addr, (char *)res, size);
+pub static mut ret: c_int = 0;
     if (ret) {
     if (!KDB_STATE(SUPPRESS)) {
     kdb_func_printf("Bad address 0x%lx\n", addr);
@@ -355,14 +610,13 @@ pub unsafe extern "C" fn kdb_putarea_size(addr: c_ulong, res: *mut c_void, size:
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_getphys(res: *mut c_void, addr: c_ulong, size: usize) -> c_int {
-    static int kdb_getphys(void *res, unsigned long addr, size_t size)
-    {
-    unsigned long pfn;
-    void *vaddr;
-    struct page *page;
+    let mut pfn = 0;
+pub static mut vaddr: *mut c_void = core::ptr::null_mut();
+pub static mut page: *mut c_void = core::ptr::null_mut();
     pfn = (addr >> PAGE_SHIFT);
-    if (!pfn_valid(pfn))
+    if (!pfn_valid(pfn)) {
     return 1;
+    }
     page = pfn_to_page(pfn);
     vaddr = kmap_local_page(page);
     memcpy(res, vaddr + (addr & (PAGE_SIZE - 1)), size);
@@ -380,41 +634,48 @@ unsafe extern "C" fn kdb_getphys(res: *mut c_void, addr: c_ulong, size: usize) -
 //
 #[no_mangle]
 pub unsafe extern "C" fn kdb_getphysword(word: *mut c_ulong, addr: c_ulong, size: usize) -> c_int {
-    int kdb_getphysword(unsigned long *word, unsigned long addr, size_t size)
-    {
-    int diag;
-    __u8  w1;
-    __u16 w2;
-    __u32 w4;
-    __u64 w8;
-// word = 0;	/* Default value if addr or size is invalid
-    switch (size) {
-    case 1:
-    diag = kdb_getphys(&w1, addr, sizeof(w1));
-    if (!diag)
+    let mut diag = 0;
+    let mut w1 = 0;
+    let mut w2 = 0;
+    let mut w4 = 0;
+    let mut w8 = 0;
+// word = 0;	// Default value if addr or size is invalid
+    match (size) {
+    1 => {
+    diag = kdb_getphys(&w1, addr, sizeof!(w1));
+    if (!diag) {
 // word = w1;
-    break;
-    case 2:
-    diag = kdb_getphys(&w2, addr, sizeof(w2));
-    if (!diag)
+    }
+    // break;
+    }
+    2 => {
+    diag = kdb_getphys(&w2, addr, sizeof!(w2));
+    if (!diag) {
 // word = w2;
-    break;
-    case 4:
-    diag = kdb_getphys(&w4, addr, sizeof(w4));
-    if (!diag)
+    }
+    // break;
+    }
+    4 => {
+    diag = kdb_getphys(&w4, addr, sizeof!(w4));
+    if (!diag) {
 // word = w4;
-    break;
-    case 8:
-    if (size <= sizeof(*word)) {
-    diag = kdb_getphys(&w8, addr, sizeof(w8));
-    if (!diag)
+    }
+    // break;
+    }
+    8 => {
+    if (size <= sizeof!(*word)) {
+    diag = kdb_getphys(&w8, addr, sizeof!(w8));
+    if (!diag) {
 // word = w8;
-    break;
+    }
+    // break;
     }
     fallthrough;
-    default:
+    }
+    _ => {
     diag = KDB_BADWIDTH;
     kdb_func_printf("bad width %zu\n", size);
+    }
     }
     return diag;
     }
@@ -430,41 +691,48 @@ pub unsafe extern "C" fn kdb_getphysword(word: *mut c_ulong, addr: c_ulong, size
 //
 #[no_mangle]
 pub unsafe extern "C" fn kdb_getword(word: *mut c_ulong, addr: c_ulong, size: usize) -> c_int {
-    int kdb_getword(unsigned long *word, unsigned long addr, size_t size)
-    {
-    int diag;
-    __u8  w1;
-    __u16 w2;
-    __u32 w4;
-    __u64 w8;
-// word = 0;	/* Default value if addr or size is invalid
-    switch (size) {
-    case 1:
+    let mut diag = 0;
+    let mut w1 = 0;
+    let mut w2 = 0;
+    let mut w4 = 0;
+    let mut w8 = 0;
+// word = 0;	// Default value if addr or size is invalid
+    match (size) {
+    1 => {
     diag = kdb_getarea(w1, addr);
-    if (!diag)
+    if (!diag) {
 // word = w1;
-    break;
-    case 2:
+    }
+    // break;
+    }
+    2 => {
     diag = kdb_getarea(w2, addr);
-    if (!diag)
+    if (!diag) {
 // word = w2;
-    break;
-    case 4:
+    }
+    // break;
+    }
+    4 => {
     diag = kdb_getarea(w4, addr);
-    if (!diag)
+    if (!diag) {
 // word = w4;
-    break;
-    case 8:
-    if (size <= sizeof(*word)) {
+    }
+    // break;
+    }
+    8 => {
+    if (size <= sizeof!(*word)) {
     diag = kdb_getarea(w8, addr);
-    if (!diag)
+    if (!diag) {
 // word = w8;
-    break;
+    }
+    // break;
     }
     fallthrough;
-    default:
+    }
+    _ => {
     diag = KDB_BADWIDTH;
     kdb_func_printf("bad width %zu\n", size);
+    }
     }
     return diag;
     }
@@ -480,36 +748,39 @@ pub unsafe extern "C" fn kdb_getword(word: *mut c_ulong, addr: c_ulong, size: us
 //
 #[no_mangle]
 pub unsafe extern "C" fn kdb_putword(addr: c_ulong, word: c_ulong, size: usize) -> c_int {
-    int kdb_putword(unsigned long addr, unsigned long word, size_t size)
-    {
-    int diag;
-    __u8  w1;
-    __u16 w2;
-    __u32 w4;
-    __u64 w8;
-    switch (size) {
-    case 1:
+    let mut diag = 0;
+    let mut w1 = 0;
+    let mut w2 = 0;
+    let mut w4 = 0;
+    let mut w8 = 0;
+    match (size) {
+    1 => {
     w1 = word;
     diag = kdb_putarea(addr, w1);
-    break;
-    case 2:
+    // break;
+    }
+    2 => {
     w2 = word;
     diag = kdb_putarea(addr, w2);
-    break;
-    case 4:
+    // break;
+    }
+    4 => {
     w4 = word;
     diag = kdb_putarea(addr, w4);
-    break;
-    case 8:
-    if (size <= sizeof(word)) {
+    // break;
+    }
+    8 => {
+    if (size <= sizeof!(word)) {
     w8 = word;
     diag = kdb_putarea(addr, w8);
-    break;
+    // break;
     }
     fallthrough;
-    default:
+    }
+    _ => {
     diag = KDB_BADWIDTH;
     kdb_func_printf("bad width %zu\n", size);
+    }
     }
     return diag;
     }
@@ -522,22 +793,22 @@ pub unsafe extern "C" fn kdb_putword(addr: c_ulong, word: c_ulong, size: usize) 
 //
 #[no_mangle]
 pub unsafe extern "C" fn kdb_task_state_char(p: *const task_struct) -> c_char {
-    char kdb_task_state_char (const struct task_struct *p)
-    {
-    unsigned long tmp;
-    char state;
-    int cpu;
+    let mut tmp = 0;
+    let mut state = 0;
+    let mut cpu = 0;
     if (!p ||
-    copy_from_kernel_nofault(&tmp, (char *)p, sizeof(unsigned long)))
+    copy_from_kernel_nofault(&tmp, p, sizeof!(unsigned long))) {
     return 'E';
-    state = task_state_to_char((struct task_struct *) p);
+    }
+    state = task_state_to_char( p);
     if (is_idle_task(p)) {
 // Idle task.  Is it really idle, apart from the kdb
 // interrupt?
     cpu = kdb_process_cpu(p);
     if (!kdb_task_has_cpu(p) || kgdb_info[cpu].irq_depth == 1) {
-    if (cpu != kdb_initial_cpu)
+    if (cpu != kdb_initial_cpu) {
     state = '-';	/* idle task */
+    }
     }
     } else if (!p.mm && strchr("IMS", state)) {
     state = tolower(state);		/* sleeping system daemon */
@@ -557,17 +828,17 @@ pub unsafe extern "C" fn kdb_task_state_char(p: *const task_struct) -> c_char {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kdb_task_state(p: *const task_struct, mask: *const c_char) -> bool {
-    bool kdb_task_state(const struct task_struct *p, const char *mask)
-    {
-    let mut state: c_char = kdb_task_state_char(p);
+pub static mut state: c_char = 0;
 // If there is no mask, then we will filter code that runs when the
 // scheduler is idling and any system daemons that are currently
 // sleeping.
 //
-    if (!mask || mask[0] == '\0')
+    if (!mask || mask[0] == '\0') {
     return !strchr("-ims", state);
+    }
 // A is a special case that matches all states
-    if (strchr(mask, 'A'))
+    if (strchr(mask, 'A')) {
     return true;
+    }
     return strchr(mask, state);
     }

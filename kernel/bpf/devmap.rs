@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -98,7 +348,7 @@ pub struct xdp_dev_bulk_queue {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct bpf_dtab_netdev {
-    pub /: *mut *mut *mut net_device dev; / must be first member, due to tracepoint,
+//     pub /: *mut *mut *mut net_device dev; / must be first member, due to tracepoint,
     pub index_hlist: hlist_node,
     pub xdp_prog: *mut bpf_prog,
     pub rcu: rcu_head,
@@ -110,7 +360,7 @@ pub struct bpf_dtab_netdev {
 #[derive(Copy, Clone)]
 pub struct bpf_dtab {
     pub map: bpf_map,
-    pub /: *mut *mut *mut *mut bpf_dtab_netdev __rcu netdev_map; / DEVMAP type only,
+//     pub /: *mut *mut *mut *mut bpf_dtab_netdev  netdev_map; / DEVMAP type only,
     pub list: list_head,
 // these are only used for DEVMAP_HASH type maps
     pub dev_index_head: *mut hlist_head,
@@ -119,51 +369,48 @@ pub struct bpf_dtab {
     pub n_buckets: u32,
 }
 
-    static DEFINE_SPINLOCK(dev_map_lock);
-    static LIST_HEAD(dev_map_list);
-    static struct hlist_head *dev_map_create_hash(unsigned int entries,
-    int numa_node)
-    {
-    int i;
-    struct hlist_head *hash;
-    hash = bpf_map_area_alloc((u64) entries * sizeof(*hash), numa_node);
-    if (hash != core::ptr::null_mut())
+pub static mut dev_map_lock: usize = 0;
+pub static mut dev_map_list: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn dev_map_create_hash(entries: c_uint, numa_node: c_int) -> *mut c_void {
+    let mut i = 0;
+pub static mut hash: *mut c_void = core::ptr::null_mut();
+    hash = bpf_map_area_alloc((u64) entries * sizeof!(*hash), numa_node);
+    if (hash != core::ptr::null_mut()) {
     for (i = 0; i < entries; i++)
+    }
     INIT_HLIST_HEAD(&hash[i]);
     return hash;
     }
-    static inline struct hlist_head *dev_map_index_hash(struct bpf_dtab *dtab,
-    int idx)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn dev_map_index_hash(dtab: *mut bpf_dtab, idx: c_int) -> *mut c_void {
     return &dtab.dev_index_head[idx & (dtab.n_buckets - 1)];
     }
 #[no_mangle]
 unsafe extern "C" fn dev_map_alloc_check(attr: *mut union bpf_attr) -> c_int {
-    static int dev_map_alloc_check(union bpf_attr *attr)
-    {
-    let mut valsize: u32 = attr.value_size;
+pub static mut valsize: u32 = 0;
 // check sanity of attributes. 2 value sizes supported:
 // 4 bytes: ifindex
 // 8 bytes: ifindex + prog fd
 //
     if (attr.max_entries == 0 || attr.key_size != 4 ||
-    (valsize != offsetofend(struct bpf_devmap_val, ifindex) &&
-    valsize != offsetofend(struct bpf_devmap_val, bpf_prog.fd)) ||
-    attr.map_flags & ~DEV_CREATE_FLAG_MASK)
+    (valsize != offsetofend(bpf_devmap_val, ifindex) &&
+    valsize != offsetofend(bpf_devmap_val, bpf_prog.fd)) ||
+    attr.map_flags & ~DEV_CREATE_FLAG_MASK) {
     return -EINVAL;
+    }
     if (attr.map_type == BPF_MAP_TYPE_DEVMAP_HASH) {
 // Hash table size must be power of 2; roundup_pow_of_two()
 // can overflow into UB on 32-bit arches
 //
-    if (attr.max_entries > 1UL << 31)
+    if (attr.max_entries > 1UL << 31) {
     return -EINVAL;
+    }
     }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn dev_map_init_map(dtab: *mut bpf_dtab, attr: *mut union bpf_attr) -> c_int {
-    static int dev_map_init_map(struct bpf_dtab *dtab, union bpf_attr *attr)
-    {
 // Lookup returns a pointer straight to dev->ifindex, so make sure the
 // verifier prevents writes from the BPF side
 //
@@ -174,25 +421,28 @@ unsafe extern "C" fn dev_map_init_map(dtab: *mut bpf_dtab, attr: *mut union bpf_
     dtab.n_buckets = roundup_pow_of_two(dtab.map.max_entries);
     dtab.dev_index_head = dev_map_create_hash(dtab.n_buckets,
     dtab.map.numa_node);
-    if (!dtab.dev_index_head)
+    if (!dtab.dev_index_head) {
     return -ENOMEM;
+    }
     spin_lock_init(&dtab.index_lock);
     } else {
     dtab.netdev_map = bpf_map_area_alloc((u64) dtab.map.max_entries *
-    sizeof(struct bpf_dtab_netdev *),
+    sizeof!,
     dtab.map.numa_node);
-    if (!dtab.netdev_map)
+    if (!dtab.netdev_map) {
     return -ENOMEM;
+    }
     }
     return 0;
     }
-    static struct bpf_map *dev_map_alloc(union bpf_attr *attr)
-    {
-    struct bpf_dtab *dtab;
-    int err;
-    dtab = bpf_map_area_alloc(sizeof(*dtab), NUMA_NO_NODE);
-    if (!dtab)
+#[no_mangle]
+pub unsafe extern "C" fn dev_map_alloc(attr: *mut union bpf_attr) -> *mut c_void {
+pub static mut dtab: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
+    dtab = bpf_map_area_alloc(sizeof!(*dtab), NUMA_NO_NODE);
+    if (!dtab) {
     return ERR_PTR(-ENOMEM);
+    }
     err = dev_map_init_map(dtab, attr);
     if (err) {
     bpf_map_area_free(dtab);
@@ -205,10 +455,8 @@ unsafe extern "C" fn dev_map_init_map(dtab: *mut bpf_dtab, attr: *mut union bpf_
     }
 #[no_mangle]
 unsafe extern "C" fn dev_map_free(map: *mut bpf_map) {
-    static void dev_map_free(struct bpf_map *map)
-    {
-    struct bpf_dtab *dtab = container_of(map, struct bpf_dtab, map);
-    u32 i;
+    let mut dtab = container_of!(map, bpf_dtab, map);
+    let mut i = 0;
 // At this point bpf_prog->aux->refcnt == 0 and this map->refcnt == 0,
 // so the programs (can be more than one that used this map) were
 // disconnected from events. The following synchronize_rcu() guarantees
@@ -233,28 +481,31 @@ unsafe extern "C" fn dev_map_free(map: *mut bpf_map) {
 // Make sure prior __dev_map_entry_free() have completed.
     rcu_barrier();
     if (dtab.map.map_type == BPF_MAP_TYPE_DEVMAP_HASH) {
-    for (i = 0; i < dtab.n_buckets; i++) {
-    struct bpf_dtab_netdev *dev;
-    struct hlist_head *head;
-    struct hlist_node *next;
+    while (i < dtab.n_buckets) {
+pub static mut dev: *mut c_void = core::ptr::null_mut();
+pub static mut head: *mut c_void = core::ptr::null_mut();
+pub static mut next: *mut c_void = core::ptr::null_mut();
     head = dev_map_index_hash(dtab, i);
     hlist_for_each_entry_safe(dev, next, head, index_hlist) {
     hlist_del_rcu(&dev.index_hlist);
-    if (dev.xdp_prog)
+    if (dev.xdp_prog) {
     bpf_prog_put(dev.xdp_prog);
+    }
     dev_put(dev.dev);
     kfree(dev);
     }
     }
     bpf_map_area_free(dtab.dev_index_head);
     } else {
-    for (i = 0; i < dtab.map.max_entries; i++) {
-    struct bpf_dtab_netdev *dev;
+    while (i < dtab.map.max_entries) {
+pub static mut dev: *mut c_void = core::ptr::null_mut();
     dev = rcu_dereference_raw(dtab.netdev_map[i]);
-    if (!dev)
+    if (!dev) {
     continue;
-    if (dev.xdp_prog)
+    }
+    if (dev.xdp_prog) {
     bpf_prog_put(dev.xdp_prog);
+    }
     dev_put(dev.dev);
     kfree(dev);
     }
@@ -264,17 +515,16 @@ unsafe extern "C" fn dev_map_free(map: *mut bpf_map) {
     }
 #[no_mangle]
 unsafe extern "C" fn dev_map_get_next_key(map: *mut bpf_map, key: *mut c_void, next_key: *mut c_void) -> c_int {
-    static int dev_map_get_next_key(struct bpf_map *map, void *key, void *next_key)
-    {
-    struct bpf_dtab *dtab = container_of(map, struct bpf_dtab, map);
-    let mut index: u32 = key ? *(u32 *)key : U32_MAX;
-    u32 *next = next_key;
+    let mut dtab = container_of!(map, bpf_dtab, map);
+pub static mut index: u32 = 0;
+    let mut next = next_key;
     if (index >= dtab.map.max_entries) {
 // next = 0;
     return 0;
     }
-    if (index == dtab.map.max_entries - 1)
+    if (index == dtab.map.max_entries - 1) {
     return -ENOENT;
+    }
 // next = index + 1;
     return 0;
     }
@@ -282,44 +532,45 @@ unsafe extern "C" fn dev_map_get_next_key(map: *mut bpf_map, key: *mut c_void, n
 // by local_bh_disable() (from XDP calls inside NAPI). The
 // rcu_read_lock_bh_held() below makes lockdep accept both.
 //
-    static void *__dev_map_hash_lookup_elem(struct bpf_map *map, u32 key)
-    {
-    struct bpf_dtab *dtab = container_of(map, struct bpf_dtab, map);
-    struct hlist_head *head = dev_map_index_hash(dtab, key);
-    struct bpf_dtab_netdev *dev;
+#[no_mangle]
+pub unsafe extern "C" fn __dev_map_hash_lookup_elem(map: *mut bpf_map, key: u32) -> *mut c_void {
+    let mut dtab = container_of!(map, bpf_dtab, map);
+    let mut head = dev_map_index_hash(dtab, key);
+pub static mut dev: *mut c_void = core::ptr::null_mut();
     hlist_for_each_entry_rcu(dev, head, index_hlist,
     lockdep_is_held(&dtab.index_lock))
-    if (dev.idx == key)
+    if (dev.idx == key) {
     return dev;
+    }
     return core::ptr::null_mut();
     }
-    static int dev_map_hash_get_next_key(struct bpf_map *map, void *key,
-    void *next_key)
-    {
-    struct bpf_dtab *dtab = container_of(map, struct bpf_dtab, map);
+#[no_mangle]
+pub unsafe extern "C" fn dev_map_hash_get_next_key(map: *mut bpf_map, key: *mut c_void, next_key: *mut c_void) -> c_int {
+    let mut dtab = container_of!(map, bpf_dtab, map);
     u32 idx, *next = next_key;
-    struct bpf_dtab_netdev *dev, *next_dev;
-    struct hlist_head *head;
-    let mut i: c_int = 0;
-    if (!key)
-    goto find_first;
-    idx = *(u32 *)key;
+    let mut dev = core::ptr::null_mut();
+    let mut next_dev = core::ptr::null_mut();
+pub static mut head: *mut c_void = core::ptr::null_mut();
+pub static mut i: c_int = 0;
+    if (!key) {
+// goto;
+    }
+    idx = *key;
     dev = __dev_map_hash_lookup_elem(map, idx);
-    if (!dev)
-    goto find_first;
-    next_dev = hlist_entry_safe(rcu_dereference_raw(hlist_next_rcu(&dev.index_hlist)),
-    struct bpf_dtab_netdev, index_hlist);
+    if (!dev) {
+// goto;
+    }
+    next_dev = hlist_entry_safe(rcu_dereference_raw(hlist_next_rcu(&dev.index_hlist)), bpf_dtab_netdev, index_hlist);
     if (next_dev) {
 // next = next_dev->idx;
     return 0;
     }
     i = idx & (dtab.n_buckets - 1);
-    i++;
-    find_first:
-    for (; i < dtab.n_buckets; i++) {
+    i += 1;
+// label;
+    while (i < dtab.n_buckets) {
     head = dev_map_index_hash(dtab, i);
-    next_dev = hlist_entry_safe(rcu_dereference_raw(hlist_first_rcu(head)),
-    struct bpf_dtab_netdev,
+    next_dev = hlist_entry_safe(rcu_dereference_raw(hlist_first_rcu(head)), bpf_dtab_netdev,
     index_hlist);
     if (next_dev) {
 // next = next_dev->idx;
@@ -328,64 +579,67 @@ unsafe extern "C" fn dev_map_get_next_key(map: *mut bpf_map, key: *mut c_void, n
     }
     return -ENOENT;
     }
-    static int dev_map_bpf_prog_run(struct bpf_prog *xdp_prog,
-    struct xdp_frame **frames, int n,
-    struct net_device *tx_dev,
-    struct net_device *rx_dev)
-    {
-    let mut txq: xdp_txq_info = { .dev = tx_dev };
-    let mut rxq: xdp_rxq_info = { .dev = rx_dev };
-    struct xdp_buff xdp;
+#[no_mangle]
+pub unsafe extern "C" fn dev_map_bpf_prog_run(xdp_prog: *mut bpf_prog, frames: *mut *mut xdp_frame, n: c_int, tx_dev: *mut net_device, rx_dev: *mut net_device) -> c_int {
+pub static mut txq: xdp_txq_info = 0;
+pub static mut rxq: xdp_rxq_info = 0;
+pub static mut xdp: usize = 0;
     int i, nframes = 0;
-    for (i = 0; i < n; i++) {
-    struct xdp_frame *xdpf = frames[i];
-    u32 act;
-    int err;
+    while (i < n) {
+    let mut xdpf = frames[i];
+    let mut act = 0;
+    let mut err = 0;
     xdp_convert_frame_to_buff(xdpf, &xdp);
     xdp.txq = &txq;
     xdp.rxq = &rxq;
     act = bpf_prog_run_xdp(xdp_prog, &xdp);
-    switch (act) {
-    case XDP_PASS:
+    match (act) {
+    XDP_PASS => {
     err = xdp_update_frame_from_buff(&xdp, xdpf);
-    if (unlikely(err < 0))
+    if (unlikely(err < 0)) {
     xdp_return_frame_rx_napi(xdpf);
-    else
+    }
+    else {
     frames[nframes++] = xdpf;
-    break;
-    default:
+    }
+    // break;
+    }
+    _ => {
     bpf_warn_invalid_xdp_action(core::ptr::null_mut(), xdp_prog, act);
     fallthrough;
-    case XDP_ABORTED:
+    }
+    XDP_ABORTED => {
     trace_xdp_exception(tx_dev, xdp_prog, act);
     fallthrough;
-    case XDP_DROP:
+    }
+    XDP_DROP => {
     xdp_return_frame_rx_napi(xdpf);
-    break;
+    // break;
+    }
     }
     }
     return nframes; /* sent frames count */
     }
 #[no_mangle]
 unsafe extern "C" fn bq_xmit_all(bq: *mut xdp_dev_bulk_queue, flags: u32) {
-    static void bq_xmit_all(struct xdp_dev_bulk_queue *bq, u32 flags)
-    {
-    struct net_device *dev = bq.dev;
-    let mut cnt: c_uint = bq.count;
-    let mut sent: c_int = 0, err = 0;
-    let mut to_send: c_int = cnt;
-    int i;
+    let mut dev = bq.dev;
+pub static mut cnt: c_uint = 0;
+pub static mut sent: c_int = 0;
+pub static mut to_send: c_int = 0;
+    let mut i = 0;
     lockdep_assert_held(&bq.bq_lock);
-    if (unlikely(!cnt))
+    if (unlikely(!cnt)) {
     return;
-    for (i = 0; i < cnt; i++) {
-    struct xdp_frame *xdpf = bq.q[i];
+    }
+    while (i < cnt) {
+    let mut xdpf = bq.q[i];
     prefetch(xdpf);
     }
     if (bq.xdp_prog) {
     to_send = dev_map_bpf_prog_run(bq.xdp_prog, bq.q, cnt, dev, bq.dev_rx);
-    if (!to_send)
-    goto out;
+    if (!to_send) {
+// goto;
+    }
     }
     sent = dev.netdev_ops.ndo_xdp_xmit(dev, to_send, bq.q, flags);
     if (sent < 0) {
@@ -398,9 +652,10 @@ unsafe extern "C" fn bq_xmit_all(bq: *mut xdp_dev_bulk_queue, flags: u32) {
 // If not all frames have been transmitted, it is our
 // responsibility to free them
 //
-    for (i = sent; unlikely(i < to_send); i++)
+    for (i = sent; unlikely(i < to_send); i++) {
     xdp_return_frame_rx_napi(bq.q[i]);
-    out:
+    }
+// label;
     bq.count = 0;
     trace_xdp_devmap_xmit(bq.dev_rx, dev, sent, cnt - sent, err);
     }
@@ -410,9 +665,8 @@ unsafe extern "C" fn bq_xmit_all(bq: *mut xdp_dev_bulk_queue, flags: u32) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __dev_flush(flush_list: *mut list_head) {
-    void __dev_flush(struct list_head *flush_list)
-    {
-    struct xdp_dev_bulk_queue *bq, *tmp;
+    let mut bq = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
     list_for_each_entry_safe(bq, tmp, flush_list, flush_node) {
     local_lock_nested_bh(&bq.dev.xdp_bulkq.bq_lock);
     bq_xmit_all(bq, XDP_XMIT_FLUSH);
@@ -426,12 +680,13 @@ pub unsafe extern "C" fn __dev_flush(flush_list: *mut list_head) {
 // by local_bh_disable() (from XDP calls inside NAPI). The
 // rcu_read_lock_bh_held() below makes lockdep accept both.
 //
-    static void *__dev_map_lookup_elem(struct bpf_map *map, u32 key)
-    {
-    struct bpf_dtab *dtab = container_of(map, struct bpf_dtab, map);
-    struct bpf_dtab_netdev *obj;
-    if (key >= map.max_entries)
+#[no_mangle]
+pub unsafe extern "C" fn __dev_map_lookup_elem(map: *mut bpf_map, key: u32) -> *mut c_void {
+    let mut dtab = container_of!(map, bpf_dtab, map);
+pub static mut obj: *mut c_void = core::ptr::null_mut();
+    if (key >= map.max_entries) {
     return core::ptr::null_mut();
+    }
     obj = rcu_dereference_check(dtab.netdev_map[key],
     rcu_read_lock_bh_held());
     return obj;
@@ -441,14 +696,14 @@ pub unsafe extern "C" fn __dev_flush(flush_list: *mut list_head) {
 // xdp_do_flush() in filter.c. PREEMPT_RT relies on local_lock_nested_bh()
 // to serialise access to the per-CPU bq.
 //
-    static void bq_enqueue(struct net_device *dev, struct xdp_frame *xdpf,
-    struct net_device *dev_rx, struct bpf_prog *xdp_prog)
-    {
-    struct xdp_dev_bulk_queue *bq;
+#[no_mangle]
+pub unsafe extern "C" fn bq_enqueue(dev: *mut net_device, xdpf: *mut xdp_frame, dev_rx: *mut net_device, xdp_prog: *mut bpf_prog) {
+pub static mut bq: *mut c_void = core::ptr::null_mut();
     local_lock_nested_bh(&dev.xdp_bulkq.bq_lock);
     bq = this_cpu_ptr(dev.xdp_bulkq);
-    if (unlikely(bq.count == DEV_MAP_BULK_SIZE))
+    if (unlikely(bq.count == DEV_MAP_BULK_SIZE)) {
     bq_xmit_all(bq, 0);
+    }
 // Ingress dev_rx will be the same for all xdp_frame's in
 // bulk_queue, because bq stored per-CPU and must be flushed
 // from net_device drivers NAPI func end.
@@ -457,7 +712,7 @@ pub unsafe extern "C" fn __dev_flush(flush_list: *mut list_head) {
 // are only ever modified together.
 //
     if (!bq.dev_rx) {
-    struct list_head *flush_list = bpf_net_ctx_get_dev_flush_list();
+    let mut flush_list = bpf_net_ctx_get_dev_flush_list();
     bq.dev_rx = dev_rx;
     bq.xdp_prog = xdp_prog;
     list_add(&bq.flush_node, flush_list);
@@ -465,97 +720,100 @@ pub unsafe extern "C" fn __dev_flush(flush_list: *mut list_head) {
     bq.q[bq.count++] = xdpf;
     local_unlock_nested_bh(&dev.xdp_bulkq.bq_lock);
     }
-    static inline int __xdp_enqueue(struct net_device *dev, struct xdp_frame *xdpf,
-    struct net_device *dev_rx,
-    struct bpf_prog *xdp_prog)
-    {
-    int err;
-    if (!(dev.xdp_features & NETDEV_XDP_ACT_NDO_XMIT))
+#[no_mangle]
+pub unsafe extern "C" fn __xdp_enqueue(dev: *mut net_device, xdpf: *mut xdp_frame, dev_rx: *mut net_device, xdp_prog: *mut bpf_prog) -> c_int {
+    let mut err = 0;
+    if (!(dev.xdp_features & NETDEV_XDP_ACT_NDO_XMIT)) {
     return -EOPNOTSUPP;
+    }
     if (unlikely(!(dev.xdp_features & NETDEV_XDP_ACT_NDO_XMIT_SG) &&
-    xdp_frame_has_frags(xdpf)))
+    xdp_frame_has_frags(xdpf))) {
     return -EOPNOTSUPP;
+    }
     err = xdp_ok_fwd_dev(dev, xdp_get_frame_len(xdpf));
-    if (unlikely(err))
+    if (unlikely(err)) {
     return err;
+    }
     bq_enqueue(dev, xdpf, dev_rx, xdp_prog);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn dev_map_bpf_prog_run_skb(skb: *mut sk_buff, dst: *mut bpf_dtab_netdev) -> u32 {
-    static u32 dev_map_bpf_prog_run_skb(struct sk_buff *skb, struct bpf_dtab_netdev *dst)
-    {
-    let mut txq: xdp_txq_info = { .dev = dst.dev };
-    struct xdp_buff xdp;
-    u32 act;
-    if (!dst.xdp_prog)
+pub static mut txq: xdp_txq_info = 0;
+pub static mut xdp: usize = 0;
+    let mut act = 0;
+    if (!dst.xdp_prog) {
     return XDP_PASS;
+    }
     __skb_pull(skb, skb.mac_len);
     xdp.txq = &txq;
     act = bpf_prog_run_generic_xdp(skb, &xdp, dst.xdp_prog);
-    switch (act) {
-    case XDP_PASS:
+    match (act) {
+    XDP_PASS => {
     __skb_push(skb, skb.mac_len);
-    break;
-    default:
+    // break;
+    }
+    _ => {
     bpf_warn_invalid_xdp_action(core::ptr::null_mut(), dst.xdp_prog, act);
     fallthrough;
-    case XDP_ABORTED:
+    }
+    XDP_ABORTED => {
     trace_xdp_exception(dst.dev, dst.xdp_prog, act);
     fallthrough;
-    case XDP_DROP:
+    }
+    XDP_DROP => {
     kfree_skb(skb);
-    break;
+    // break;
+    }
     }
     return act;
     }
-    int dev_xdp_enqueue(struct net_device *dev, struct xdp_frame *xdpf,
-    struct net_device *dev_rx)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn dev_xdp_enqueue(dev: *mut net_device, xdpf: *mut xdp_frame, dev_rx: *mut net_device) -> c_int {
     return __xdp_enqueue(dev, xdpf, dev_rx, core::ptr::null_mut());
     }
-    int dev_map_enqueue(struct bpf_dtab_netdev *dst, struct xdp_frame *xdpf,
-    struct net_device *dev_rx)
-    {
-    struct net_device *dev = dst.dev;
+#[no_mangle]
+pub unsafe extern "C" fn dev_map_enqueue(dst: *mut bpf_dtab_netdev, xdpf: *mut xdp_frame, dev_rx: *mut net_device) -> c_int {
+    let mut dev = dst.dev;
     return __xdp_enqueue(dev, xdpf, dev_rx, dst.xdp_prog);
     }
 #[no_mangle]
 unsafe extern "C" fn is_valid_dst(obj: *mut bpf_dtab_netdev, xdpf: *mut xdp_frame) -> bool {
-    static bool is_valid_dst(struct bpf_dtab_netdev *obj, struct xdp_frame *xdpf)
-    {
-    if (!obj)
+    if (!obj) {
     return false;
-    if (!(obj.dev.xdp_features & NETDEV_XDP_ACT_NDO_XMIT))
+    }
+    if (!(obj.dev.xdp_features & NETDEV_XDP_ACT_NDO_XMIT)) {
     return false;
+    }
     if (unlikely(!(obj.dev.xdp_features & NETDEV_XDP_ACT_NDO_XMIT_SG) &&
-    xdp_frame_has_frags(xdpf)))
+    xdp_frame_has_frags(xdpf))) {
     return false;
-    if (xdp_ok_fwd_dev(obj.dev, xdp_get_frame_len(xdpf)))
+    }
+    if (xdp_ok_fwd_dev(obj.dev, xdp_get_frame_len(xdpf))) {
     return false;
+    }
     return true;
     }
-    static int dev_map_enqueue_clone(struct bpf_dtab_netdev *obj,
-    struct net_device *dev_rx,
-    struct xdp_frame *xdpf)
-    {
-    struct xdp_frame *nxdpf;
+#[no_mangle]
+pub unsafe extern "C" fn dev_map_enqueue_clone(obj: *mut bpf_dtab_netdev, dev_rx: *mut net_device, xdpf: *mut xdp_frame) -> c_int {
+pub static mut nxdpf: *mut c_void = core::ptr::null_mut();
 // Frags live outside the linear frame and cannot be cloned safely.
-    if (unlikely(xdp_frame_has_frags(xdpf)))
+    if (unlikely(xdp_frame_has_frags(xdpf))) {
     return -EOPNOTSUPP;
+    }
     nxdpf = xdpf_clone(xdpf);
-    if (!nxdpf)
+    if (!nxdpf) {
     return -ENOMEM;
+    }
     bq_enqueue(obj.dev, nxdpf, dev_rx, obj.xdp_prog);
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn is_ifindex_excluded(excluded: *mut c_int, num_excluded: c_int, ifindex: c_int) -> bool {
-    static inline bool is_ifindex_excluded(int *excluded, int num_excluded, int ifindex)
-    {
     while (num_excluded--) {
-    if (ifindex == excluded[num_excluded])
+    if (ifindex == excluded[num_excluded]) {
     return true;
+    }
     }
     return false;
     }
@@ -566,94 +824,102 @@ pub unsafe extern "C" fn is_ifindex_excluded(excluded: *mut c_int, num_excluded:
 //
 #[no_mangle]
 unsafe extern "C" fn get_upper_ifindexes(dev: *mut net_device, indexes: *mut c_int, max: c_int) -> c_int {
-    static int get_upper_ifindexes(struct net_device *dev, int *indexes, int max)
-    {
-    struct net_device *upper;
-    struct list_head *iter;
-    let mut n: c_int = 0;
+pub static mut upper: *mut c_void = core::ptr::null_mut();
+pub static mut iter: *mut c_void = core::ptr::null_mut();
+pub static mut n: c_int = 0;
     netdev_for_each_upper_dev_rcu(dev, upper, iter) {
-    if (n >= max)
+    if (n >= max) {
     return -EOVERFLOW;
+    }
     indexes[n++] = upper.ifindex;
     }
     return n;
     }
-    int dev_map_enqueue_multi(struct xdp_frame *xdpf, struct net_device *dev_rx,
-    struct bpf_map *map, bool exclude_ingress)
-    {
-    struct bpf_dtab *dtab = container_of(map, struct bpf_dtab, map);
+#[no_mangle]
+pub unsafe extern "C" fn dev_map_enqueue_multi(xdpf: *mut xdp_frame, dev_rx: *mut net_device, map: *mut bpf_map, exclude_ingress: bool) -> c_int {
+    let mut dtab = container_of!(map, bpf_dtab, map);
     struct bpf_dtab_netdev *dst, *last_dst = core::ptr::null_mut();
     int excluded_devices[1+MAX_NEST_DEV];
-    struct hlist_head *head;
-    let mut num_excluded: c_int = 0;
-    unsigned int i;
-    int err;
+pub static mut head: *mut c_void = core::ptr::null_mut();
+pub static mut num_excluded: c_int = 0;
+    let mut i = 0;
+    let mut err = 0;
     if (exclude_ingress) {
     num_excluded = get_upper_ifindexes(dev_rx, excluded_devices,
-    ARRAY_SIZE(excluded_devices) - 1);
-    if (num_excluded < 0)
+    ARRAY_SIZE!(excluded_devices) - 1);
+    if (num_excluded < 0) {
     return num_excluded;
+    }
     excluded_devices[num_excluded++] = dev_rx.ifindex;
     }
     if (map.map_type == BPF_MAP_TYPE_DEVMAP) {
-    for (i = 0; i < map.max_entries; i++) {
+    while (i < map.max_entries) {
     dst = rcu_dereference_check(dtab.netdev_map[i],
     rcu_read_lock_bh_held());
-    if (!is_valid_dst(dst, xdpf))
+    if (!is_valid_dst(dst, xdpf)) {
     continue;
-    if (is_ifindex_excluded(excluded_devices, num_excluded, dst.dev.ifindex))
+    }
+    if (is_ifindex_excluded(excluded_devices, num_excluded, dst.dev.ifindex)) {
     continue;
+    }
 // we only need n-1 clones; last_dst enqueued below
     if (!last_dst) {
     last_dst = dst;
     continue;
     }
     err = dev_map_enqueue_clone(last_dst, dev_rx, xdpf);
-    if (err)
+    if (err) {
     return err;
+    }
     last_dst = dst;
     }
     } else { /* BPF_MAP_TYPE_DEVMAP_HASH */
-    for (i = 0; i < dtab.n_buckets; i++) {
+    while (i < dtab.n_buckets) {
     head = dev_map_index_hash(dtab, i);
     hlist_for_each_entry_rcu(dst, head, index_hlist,
     rcu_read_lock_bh_held()) {
-    if (!is_valid_dst(dst, xdpf))
+    if (!is_valid_dst(dst, xdpf)) {
     continue;
+    }
     if (is_ifindex_excluded(excluded_devices, num_excluded,
-    dst.dev.ifindex))
+    dst.dev.ifindex)) {
     continue;
+    }
 // we only need n-1 clones; last_dst enqueued below
     if (!last_dst) {
     last_dst = dst;
     continue;
     }
     err = dev_map_enqueue_clone(last_dst, dev_rx, xdpf);
-    if (err)
+    if (err) {
     return err;
+    }
     last_dst = dst;
     }
     }
     }
 // consume the last copy of the frame
-    if (last_dst)
+    if (last_dst) {
     bq_enqueue(last_dst.dev, xdpf, dev_rx, last_dst.xdp_prog);
-    else
+    }
+    else {
     xdp_return_frame_rx_napi(xdpf); /* dtab is empty */
+    }
     return 0;
     }
-    int dev_map_generic_redirect(struct bpf_dtab_netdev *dst, struct sk_buff *skb,
-    const struct bpf_prog *xdp_prog)
-    {
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn dev_map_generic_redirect(dst: *mut bpf_dtab_netdev, skb: *mut sk_buff, xdp_prog: *mut bpf_prog) -> c_int {
+    let mut err = 0;
     err = xdp_ok_fwd_dev(dst.dev, skb.len);
-    if (unlikely(err))
+    if (unlikely(err)) {
     return err;
+    }
     if (dst.xdp_prog && skb_cloned(skb)) {
-    struct sk_buff *nskb;
+pub static mut nskb: *mut c_void = core::ptr::null_mut();
     nskb = skb_copy(skb, GFP_ATOMIC);
-    if (!nskb)
+    if (!nskb) {
     return -ENOMEM;
+    }
     nskb.mac_len = skb.mac_len;
     consume_skb(skb);
     skb = nskb;
@@ -662,23 +928,24 @@ unsafe extern "C" fn get_upper_ifindexes(dev: *mut net_device, indexes: *mut c_i
 // return 0 even if packet is dropped. Helper below takes care of
 // freeing skb.
 //
-    if (dev_map_bpf_prog_run_skb(skb, dst) != XDP_PASS)
+    if (dev_map_bpf_prog_run_skb(skb, dst) != XDP_PASS) {
     return 0;
+    }
     skb.dev = dst.dev;
     generic_xdp_tx(skb, xdp_prog);
     return 0;
     }
-    static int dev_map_redirect_clone(struct bpf_dtab_netdev *dst,
-    struct sk_buff *skb,
-    const struct bpf_prog *xdp_prog)
-    {
-    struct sk_buff *nskb;
-    int err;
-    if (unlikely(skb_is_nonlinear(skb)))
+#[no_mangle]
+pub unsafe extern "C" fn dev_map_redirect_clone(dst: *mut bpf_dtab_netdev, skb: *mut sk_buff, xdp_prog: *mut bpf_prog) -> c_int {
+pub static mut nskb: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
+    if (unlikely(skb_is_nonlinear(skb))) {
     return -EOPNOTSUPP;
+    }
     nskb = skb_clone(skb, GFP_ATOMIC);
-    if (!nskb)
+    if (!nskb) {
     return -ENOMEM;
+    }
     err = dev_map_generic_redirect(dst, nskb, xdp_prog);
     if (unlikely(err)) {
     consume_skb(nskb);
@@ -686,119 +953,120 @@ unsafe extern "C" fn get_upper_ifindexes(dev: *mut net_device, indexes: *mut c_i
     }
     return 0;
     }
-    int dev_map_redirect_multi(struct net_device *dev, struct sk_buff *skb,
-    const struct bpf_prog *xdp_prog,
-    struct bpf_map *map, bool exclude_ingress)
-    {
-    struct bpf_dtab *dtab = container_of(map, struct bpf_dtab, map);
+#[no_mangle]
+pub unsafe extern "C" fn dev_map_redirect_multi(dev: *mut net_device, skb: *mut sk_buff, xdp_prog: *mut bpf_prog, map: *mut bpf_map, exclude_ingress: bool) -> c_int {
+    let mut dtab = container_of!(map, bpf_dtab, map);
     struct bpf_dtab_netdev *dst, *last_dst = core::ptr::null_mut();
     int excluded_devices[1+MAX_NEST_DEV];
-    struct hlist_head *head;
-    let mut num_excluded: c_int = 0;
-    unsigned int i;
-    int err;
+pub static mut head: *mut c_void = core::ptr::null_mut();
+pub static mut num_excluded: c_int = 0;
+    let mut i = 0;
+    let mut err = 0;
     if (exclude_ingress) {
     num_excluded = get_upper_ifindexes(dev, excluded_devices,
-    ARRAY_SIZE(excluded_devices) - 1);
-    if (num_excluded < 0)
+    ARRAY_SIZE!(excluded_devices) - 1);
+    if (num_excluded < 0) {
     return num_excluded;
+    }
     excluded_devices[num_excluded++] = dev.ifindex;
     }
     if (map.map_type == BPF_MAP_TYPE_DEVMAP) {
-    for (i = 0; i < map.max_entries; i++) {
+    while (i < map.max_entries) {
     dst = rcu_dereference_check(dtab.netdev_map[i],
     rcu_read_lock_bh_held());
-    if (!dst)
+    if (!dst) {
     continue;
-    if (is_ifindex_excluded(excluded_devices, num_excluded, dst.dev.ifindex))
+    }
+    if (is_ifindex_excluded(excluded_devices, num_excluded, dst.dev.ifindex)) {
     continue;
+    }
 // we only need n-1 clones; last_dst enqueued below
     if (!last_dst) {
     last_dst = dst;
     continue;
     }
     err = dev_map_redirect_clone(last_dst, skb, xdp_prog);
-    if (err)
+    if (err) {
     return err;
+    }
     last_dst = dst;
     }
     } else { /* BPF_MAP_TYPE_DEVMAP_HASH */
-    for (i = 0; i < dtab.n_buckets; i++) {
+    while (i < dtab.n_buckets) {
     head = dev_map_index_hash(dtab, i);
     hlist_for_each_entry_rcu(dst, head, index_hlist, rcu_read_lock_bh_held()) {
     if (is_ifindex_excluded(excluded_devices, num_excluded,
-    dst.dev.ifindex))
+    dst.dev.ifindex)) {
     continue;
+    }
 // we only need n-1 clones; last_dst enqueued below
     if (!last_dst) {
     last_dst = dst;
     continue;
     }
     err = dev_map_redirect_clone(last_dst, skb, xdp_prog);
-    if (err)
+    if (err) {
     return err;
+    }
     last_dst = dst;
     }
     }
     }
 // consume the first skb and return
-    if (last_dst)
+    if (last_dst) {
     return dev_map_generic_redirect(last_dst, skb, xdp_prog);
+    }
 // dtab is empty
     consume_skb(skb);
     return 0;
     }
-    static void *dev_map_lookup_elem(struct bpf_map *map, void *key)
-    {
-    struct bpf_dtab_netdev *obj = __dev_map_lookup_elem(map, *(u32 *)key);
+#[no_mangle]
+pub unsafe extern "C" fn dev_map_lookup_elem(map: *mut bpf_map, key: *mut c_void) -> *mut c_void {
+    let mut obj = __dev_map_lookup_elem(map, *key);
     return obj ? &obj.val : core::ptr::null_mut();
     }
-    static void *dev_map_hash_lookup_elem(struct bpf_map *map, void *key)
-    {
-    struct bpf_dtab_netdev *obj = __dev_map_hash_lookup_elem(map,
-// (u32 *)key);
+#[no_mangle]
+pub unsafe extern "C" fn dev_map_hash_lookup_elem(map: *mut bpf_map, key: *mut c_void) -> *mut c_void {
+    let mut obj = __dev_map_hash_lookup_elem(map,
+// key);
     return obj ? &obj.val : core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn __dev_map_entry_free(rcu: *mut rcu_head) {
-    static void __dev_map_entry_free(struct rcu_head *rcu)
-    {
-    struct bpf_dtab_netdev *dev;
-    dev = container_of(rcu, struct bpf_dtab_netdev, rcu);
-    if (dev.xdp_prog)
+pub static mut dev: *mut c_void = core::ptr::null_mut();
+    dev = container_of!(rcu, bpf_dtab_netdev, rcu);
+    if (dev.xdp_prog) {
     bpf_prog_put(dev.xdp_prog);
+    }
     dev_put(dev.dev);
     kfree(dev);
     }
 #[no_mangle]
 unsafe extern "C" fn dev_map_delete_elem(map: *mut bpf_map, key: *mut c_void) -> c_long {
-    static long dev_map_delete_elem(struct bpf_map *map, void *key)
-    {
-    struct bpf_dtab *dtab = container_of(map, struct bpf_dtab, map);
-    struct bpf_dtab_netdev *old_dev;
-    let mut k: u32 = *(u32 *)key;
-    if (k >= map.max_entries)
+    let mut dtab = container_of!(map, bpf_dtab, map);
+pub static mut old_dev: *mut c_void = core::ptr::null_mut();
+pub static mut k: u32 = 0;
+    if (k >= map.max_entries) {
     return -EINVAL;
+    }
     old_dev = unrcu_pointer(xchg(&dtab.netdev_map[k], core::ptr::null_mut()));
     if (old_dev) {
     call_rcu(&old_dev.rcu, __dev_map_entry_free);
-    atomic_dec((atomic_t *)&dtab.items);
+    atomic_dec(&dtab.items);
     }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn dev_map_hash_delete_elem(map: *mut bpf_map, key: *mut c_void) -> c_long {
-    static long dev_map_hash_delete_elem(struct bpf_map *map, void *key)
-    {
-    struct bpf_dtab *dtab = container_of(map, struct bpf_dtab, map);
-    struct bpf_dtab_netdev *old_dev;
-    let mut k: u32 = *(u32 *)key;
-    unsigned long flags;
-    let mut ret: c_int = -ENOENT;
+    let mut dtab = container_of!(map, bpf_dtab, map);
+pub static mut old_dev: *mut c_void = core::ptr::null_mut();
+pub static mut k: u32 = 0;
+    let mut flags = 0;
+pub static mut ret: c_int = 0;
     spin_lock_irqsave(&dtab.index_lock, flags);
     old_dev = __dev_map_hash_lookup_elem(map, k);
     if (old_dev) {
-    dtab.items--;
+    dtab.items -= 1;
     hlist_del_init_rcu(&old_dev.index_hlist);
     call_rcu(&old_dev.rcu, __dev_map_entry_free);
     ret = 0;
@@ -806,29 +1074,30 @@ unsafe extern "C" fn dev_map_hash_delete_elem(map: *mut bpf_map, key: *mut c_voi
     spin_unlock_irqrestore(&dtab.index_lock, flags);
     return ret;
     }
-    static struct bpf_dtab_netdev *__dev_map_alloc_node(struct net *net,
-    struct bpf_dtab *dtab,
-    struct bpf_devmap_val *val,
-    unsigned int idx)
-    {
-    struct bpf_prog *prog = core::ptr::null_mut();
-    struct bpf_dtab_netdev *dev;
-    dev = bpf_map_kmalloc_node(&dtab.map, sizeof(*dev),
+#[no_mangle]
+pub unsafe extern "C" fn __dev_map_alloc_node(net: *mut net, dtab: *mut bpf_dtab, val: *mut bpf_devmap_val, idx: c_uint) -> *mut c_void {
+    let mut prog = core::ptr::null_mut();
+pub static mut dev: *mut c_void = core::ptr::null_mut();
+    dev = bpf_map_kmalloc_node(&dtab.map, sizeof!(*dev),
     GFP_NOWAIT,
     dtab.map.numa_node);
-    if (!dev)
+    if (!dev) {
     return ERR_PTR(-ENOMEM);
+    }
     dev.dev = dev_get_by_index(net, val.ifindex);
-    if (!dev.dev)
-    goto err_out;
+    if (!dev.dev) {
+// goto;
+    }
     if (val.bpf_prog.fd > 0) {
     prog = bpf_prog_get_type_dev(val.bpf_prog.fd,
     BPF_PROG_TYPE_XDP, false);
-    if (IS_ERR(prog))
-    goto err_put_dev;
+    if (IS_ERR(prog)) {
+// goto;
+    }
     if (prog.expected_attach_type != BPF_XDP_DEVMAP ||
-    !bpf_prog_map_compatible(&dtab.map, prog))
-    goto err_put_prog;
+    !bpf_prog_map_compatible(&dtab.map, prog)) {
+// goto;
+    }
     }
     dev.idx = idx;
     if (prog) {
@@ -840,77 +1109,85 @@ unsafe extern "C" fn dev_map_hash_delete_elem(map: *mut bpf_map, key: *mut c_voi
     }
     dev.val.ifindex = val.ifindex;
     return dev;
-    err_put_prog:
+// label;
     bpf_prog_put(prog);
-    err_put_dev:
+// label;
     dev_put(dev.dev);
-    err_out:
+// label;
     kfree(dev);
     return ERR_PTR(-EINVAL);
     }
-    static long __dev_map_update_elem(struct net *net, struct bpf_map *map,
-    void *key, void *value, u64 map_flags)
-    {
-    struct bpf_dtab *dtab = container_of(map, struct bpf_dtab, map);
-    struct bpf_dtab_netdev *dev, *old_dev;
-    let mut val: bpf_devmap_val = {};
-    let mut i: u32 = *(u32 *)key;
-    if (unlikely(map_flags > BPF_EXIST))
+#[no_mangle]
+pub unsafe extern "C" fn __dev_map_update_elem(net: *mut net, map: *mut bpf_map, key: *mut c_void, value: *mut c_void, map_flags: u64) -> c_long {
+    let mut dtab = container_of!(map, bpf_dtab, map);
+    let mut dev = core::ptr::null_mut();
+    let mut old_dev = core::ptr::null_mut();
+pub static mut val: bpf_devmap_val = 0;
+pub static mut i: u32 = 0;
+    if (unlikely(map_flags > BPF_EXIST)) {
     return -EINVAL;
-    if (unlikely(i >= dtab.map.max_entries))
+    }
+    if (unlikely(i >= dtab.map.max_entries)) {
     return -E2BIG;
-    if (unlikely(map_flags == BPF_NOEXIST))
+    }
+    if (unlikely(map_flags == BPF_NOEXIST)) {
     return -EEXIST;
+    }
 // already verified value_size <= sizeof val
     memcpy(&val, value, map.value_size);
     if (!val.ifindex) {
     dev = core::ptr::null_mut();
 // can not specify fd if ifindex is 0
-    if (val.bpf_prog.fd > 0)
+    if (val.bpf_prog.fd > 0) {
     return -EINVAL;
+    }
     } else {
     dev = __dev_map_alloc_node(net, dtab, &val, i);
-    if (IS_ERR(dev))
+    if (IS_ERR(dev)) {
     return PTR_ERR(dev);
+    }
     }
 // Use call_rcu() here to ensure rcu critical sections have completed
 // Remembering the driver side flush operation will happen before the
 // net device is removed.
 //
     old_dev = unrcu_pointer(xchg(&dtab.netdev_map[i], RCU_INITIALIZER(dev)));
-    if (old_dev)
+    if (old_dev) {
     call_rcu(&old_dev.rcu, __dev_map_entry_free);
-    else
-    atomic_inc((atomic_t *)&dtab.items);
+    }
+    else {
+    atomic_inc(&dtab.items);
+    }
     return 0;
     }
-    static long dev_map_update_elem(struct bpf_map *map, void *key, void *value,
-    u64 map_flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn dev_map_update_elem(map: *mut bpf_map, key: *mut c_void, value: *mut c_void, map_flags: u64) -> c_long {
     return __dev_map_update_elem(current.nsproxy.net_ns,
     map, key, value, map_flags);
     }
-    static long __dev_map_hash_update_elem(struct net *net, struct bpf_map *map,
-    void *key, void *value, u64 map_flags)
-    {
-    struct bpf_dtab *dtab = container_of(map, struct bpf_dtab, map);
-    struct bpf_dtab_netdev *dev, *old_dev;
-    let mut val: bpf_devmap_val = {};
-    let mut idx: u32 = *(u32 *)key;
-    unsigned long flags;
-    let mut err: c_int = -EEXIST;
+#[no_mangle]
+pub unsafe extern "C" fn __dev_map_hash_update_elem(net: *mut net, map: *mut bpf_map, key: *mut c_void, value: *mut c_void, map_flags: u64) -> c_long {
+    let mut dtab = container_of!(map, bpf_dtab, map);
+    let mut dev = core::ptr::null_mut();
+    let mut old_dev = core::ptr::null_mut();
+pub static mut val: bpf_devmap_val = 0;
+pub static mut idx: u32 = 0;
+    let mut flags = 0;
+pub static mut err: c_int = 0;
 // already verified value_size <= sizeof val
     memcpy(&val, value, map.value_size);
-    if (unlikely(map_flags > BPF_EXIST || !val.ifindex))
+    if (unlikely(map_flags > BPF_EXIST || !val.ifindex)) {
     return -EINVAL;
+    }
     spin_lock_irqsave(&dtab.index_lock, flags);
     old_dev = __dev_map_hash_lookup_elem(map, idx);
-    if (old_dev && (map_flags & BPF_NOEXIST))
-    goto out_err;
+    if (old_dev && (map_flags & BPF_NOEXIST)) {
+// goto;
+    }
     dev = __dev_map_alloc_node(net, dtab, &val, idx);
     if (IS_ERR(dev)) {
     err = PTR_ERR(dev);
-    goto out_err;
+// goto;
     }
     if (old_dev) {
     hlist_del_rcu(&old_dev.index_hlist);
@@ -920,126 +1197,99 @@ unsafe extern "C" fn dev_map_hash_delete_elem(map: *mut bpf_map, key: *mut c_voi
     call_rcu(&dev.rcu, __dev_map_entry_free);
     return -E2BIG;
     }
-    dtab.items++;
+    dtab.items += 1;
     }
     hlist_add_head_rcu(&dev.index_hlist,
     dev_map_index_hash(dtab, idx));
     spin_unlock_irqrestore(&dtab.index_lock, flags);
-    if (old_dev)
+    if (old_dev) {
     call_rcu(&old_dev.rcu, __dev_map_entry_free);
+    }
     return 0;
-    out_err:
+// label;
     spin_unlock_irqrestore(&dtab.index_lock, flags);
     return err;
     }
-    static long dev_map_hash_update_elem(struct bpf_map *map, void *key, void *value,
-    u64 map_flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn dev_map_hash_update_elem(map: *mut bpf_map, key: *mut c_void, value: *mut c_void, map_flags: u64) -> c_long {
     return __dev_map_hash_update_elem(current.nsproxy.net_ns,
     map, key, value, map_flags);
     }
 #[no_mangle]
 unsafe extern "C" fn dev_map_redirect(map: *mut bpf_map, ifindex: u64, flags: u64) -> c_long {
-    static long dev_map_redirect(struct bpf_map *map, u64 ifindex, u64 flags)
-    {
     return __bpf_xdp_redirect_map(map, ifindex, flags,
     BPF_F_BROADCAST | BPF_F_EXCLUDE_INGRESS,
     __dev_map_lookup_elem);
     }
 #[no_mangle]
 unsafe extern "C" fn dev_hash_map_redirect(map: *mut bpf_map, ifindex: u64, flags: u64) -> c_long {
-    static long dev_hash_map_redirect(struct bpf_map *map, u64 ifindex, u64 flags)
-    {
     return __bpf_xdp_redirect_map(map, ifindex, flags,
     BPF_F_BROADCAST | BPF_F_EXCLUDE_INGRESS,
     __dev_map_hash_lookup_elem);
     }
 #[no_mangle]
 unsafe extern "C" fn dev_map_mem_usage(map: *const bpf_map) -> u64 {
-    static u64 dev_map_mem_usage(const struct bpf_map *map)
-    {
-    struct bpf_dtab *dtab = container_of(map, struct bpf_dtab, map);
-    let mut usage: u64 = sizeof(struct bpf_dtab);
-    if (map.map_type == BPF_MAP_TYPE_DEVMAP_HASH)
-    usage += (u64)dtab.n_buckets * sizeof(struct hlist_head);
-    else
-    usage += (u64)map.max_entries * sizeof(struct bpf_dtab_netdev *);
-    usage += atomic_read((atomic_t *)&dtab.items) *
-    (u64)sizeof(struct bpf_dtab_netdev);
+    let mut dtab = container_of!(map, bpf_dtab, map);
+pub static mut usage: u64 = 0;
+    if (map.map_type == BPF_MAP_TYPE_DEVMAP_HASH) {
+    usage += (u64)dtab.n_buckets * sizeof!(hlist_head);
+    }
+    else {
+    usage += (u64)map.max_entries * sizeof!;
+    }
+    usage += atomic_read(&dtab.items) *
+    (u64)sizeof!(bpf_dtab_netdev);
     return usage;
     }
     BTF_ID_LIST_SINGLE(dev_map_btf_ids, struct, bpf_dtab)
-    const struct bpf_map_ops dev_map_ops = {
-    .map_meta_equal = bpf_map_meta_equal,
-    .map_alloc_check = dev_map_alloc_check,
-    .map_alloc = dev_map_alloc,
-    .map_free = dev_map_free,
-    .map_get_next_key = dev_map_get_next_key,
-    .map_lookup_elem = dev_map_lookup_elem,
-    .map_update_elem = dev_map_update_elem,
-    .map_delete_elem = dev_map_delete_elem,
-    .map_check_btf = map_check_no_btf,
-    .map_mem_usage = dev_map_mem_usage,
-    .map_btf_id = &dev_map_btf_ids[0],
-    .map_redirect = dev_map_redirect,
-    };
-    const struct bpf_map_ops dev_map_hash_ops = {
-    .map_meta_equal = bpf_map_meta_equal,
-    .map_alloc_check = dev_map_alloc_check,
-    .map_alloc = dev_map_alloc,
-    .map_free = dev_map_free,
-    .map_get_next_key = dev_map_hash_get_next_key,
-    .map_lookup_elem = dev_map_hash_lookup_elem,
-    .map_update_elem = dev_map_hash_update_elem,
-    .map_delete_elem = dev_map_hash_delete_elem,
-    .map_check_btf = map_check_no_btf,
-    .map_mem_usage = dev_map_mem_usage,
-    .map_btf_id = &dev_map_btf_ids[0],
-    .map_redirect = dev_hash_map_redirect,
-    };
-    static void dev_map_hash_remove_netdev(struct bpf_dtab *dtab,
-    struct net_device *netdev)
-    {
-    unsigned long flags;
-    u32 i;
+pub static mut bpf_map_ops: usize = 0;
+pub static mut bpf_map_ops: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn dev_map_hash_remove_netdev(dtab: *mut bpf_dtab, netdev: *mut net_device) {
+    let mut flags = 0;
+    let mut i = 0;
     spin_lock_irqsave(&dtab.index_lock, flags);
-    for (i = 0; i < dtab.n_buckets; i++) {
-    struct bpf_dtab_netdev *dev;
-    struct hlist_head *head;
-    struct hlist_node *next;
+    while (i < dtab.n_buckets) {
+pub static mut dev: *mut c_void = core::ptr::null_mut();
+pub static mut head: *mut c_void = core::ptr::null_mut();
+pub static mut next: *mut c_void = core::ptr::null_mut();
     head = dev_map_index_hash(dtab, i);
     hlist_for_each_entry_safe(dev, next, head, index_hlist) {
-    if (netdev != dev.dev)
+    if (netdev != dev.dev) {
     continue;
-    dtab.items--;
+    }
+    dtab.items -= 1;
     hlist_del_rcu(&dev.index_hlist);
     call_rcu(&dev.rcu, __dev_map_entry_free);
     }
     }
     spin_unlock_irqrestore(&dtab.index_lock, flags);
     }
-    static int dev_map_notification(struct notifier_block *notifier,
-    ulong event, void *ptr)
-    {
-    struct net_device *netdev = netdev_notifier_info_to_dev(ptr);
-    struct bpf_dtab *dtab;
-    int i, cpu;
-    switch (event) {
-    case NETDEV_REGISTER:
-    if (!netdev.netdev_ops.ndo_xdp_xmit || netdev.xdp_bulkq)
-    break;
+#[no_mangle]
+pub unsafe extern "C" fn dev_map_notification(notifier: *mut notifier_block, event: c_ulong, ptr: *mut c_void) -> c_int {
+    let mut netdev = netdev_notifier_info_to_dev(ptr);
+pub static mut dtab: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    let mut cpu = 0;
+    match (event) {
+    NETDEV_REGISTER => {
+    if (!netdev.netdev_ops.ndo_xdp_xmit || netdev.xdp_bulkq) {
+    // break;
+    }
 // will be freed in free_netdev()
-    netdev.xdp_bulkq = alloc_percpu(struct xdp_dev_bulk_queue);
-    if (!netdev.xdp_bulkq)
+    netdev.xdp_bulkq = alloc_percpu(xdp_dev_bulk_queue);
+    if (!netdev.xdp_bulkq) {
     return NOTIFY_BAD;
+    }
     for_each_possible_cpu(cpu) {
-    struct xdp_dev_bulk_queue *bq;
+pub static mut bq: *mut c_void = core::ptr::null_mut();
     bq = per_cpu_ptr(netdev.xdp_bulkq, cpu);
     bq.dev = netdev;
     local_lock_init(&bq.bq_lock);
     }
-    break;
-    case NETDEV_UNREGISTER:
+    // break;
+    }
+    NETDEV_UNREGISTER => {
 // This rcu_read_lock/unlock pair is needed because
 // dev_map_list is an RCU list AND to ensure a delete
 // operation does not free a netdev_map entry while we
@@ -1051,37 +1301,37 @@ unsafe extern "C" fn dev_map_mem_usage(map: *const bpf_map) -> u64 {
     dev_map_hash_remove_netdev(dtab, netdev);
     continue;
     }
-    for (i = 0; i < dtab.map.max_entries; i++) {
-    struct bpf_dtab_netdev *dev, *odev;
+    while (i < dtab.map.max_entries) {
+    let mut dev = core::ptr::null_mut();
+    let mut odev = core::ptr::null_mut();
     dev = rcu_dereference(dtab.netdev_map[i]);
-    if (!dev || netdev != dev.dev)
+    if (!dev || netdev != dev.dev) {
     continue;
+    }
     odev = unrcu_pointer(cmpxchg(&dtab.netdev_map[i], RCU_INITIALIZER(dev), core::ptr::null_mut()));
     if (dev == odev) {
     call_rcu(&dev.rcu,
     __dev_map_entry_free);
-    atomic_dec((atomic_t *)&dtab.items);
+    atomic_dec(&dtab.items);
     }
     }
     }
     rcu_read_unlock();
-    break;
-    default:
-    break;
+    // break;
+    }
+    _ => {
+    // break;
+    }
     }
     return NOTIFY_OK;
     }
-    static struct notifier_block dev_map_notifier = {
-    .notifier_call = dev_map_notification,
-    };
+pub static mut notifier_block: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn dev_map_init() -> int __init {
-    static int __init dev_map_init(void)
-    {
+unsafe extern "C" fn dev_map_init() -> c_int {
 // Assure tracepoint shadow struct _bpf_dtab_netdev is in sync
-    BUILD_BUG_ON(offsetof(struct bpf_dtab_netdev, dev) !=
-    offsetof(struct _bpf_dtab_netdev, dev));
+    BUILD_BUG_ON!(offsetof(bpf_dtab_netdev, dev) !=
+    offsetof(_bpf_dtab_netdev, dev));
     register_netdevice_notifier(&dev_map_notifier);
     return 0;
     }
-    subsys_initcall(dev_map_init);
+    subsys_initcall!(dev_map_init);

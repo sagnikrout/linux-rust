@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -52,24 +302,18 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 #[no_mangle]
 pub unsafe extern "C" fn pgd_clear_bad(pgd: *mut pgd_t) {
-    void pgd_clear_bad(pgd_t *pgd)
-    {
     pgd_ERROR(*pgd);
     pgd_clear(pgd);
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn p4d_clear_bad(p4d: *mut p4d_t) {
-    void p4d_clear_bad(p4d_t *p4d)
-    {
     p4d_ERROR(*p4d);
     p4d_clear(p4d);
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn pud_clear_bad(pud: *mut pud_t) {
-    void pud_clear_bad(pud_t *pud)
-    {
     pud_ERROR(*pud);
     pud_clear(pud);
     }
@@ -81,8 +325,6 @@ pub unsafe extern "C" fn pud_clear_bad(pud: *mut pud_t) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn pmd_clear_bad(pmd: *mut pmd_t) {
-    void pmd_clear_bad(pmd_t *pmd)
-    {
     pmd_ERROR(*pmd);
     pmd_clear(pmd);
     }
@@ -96,11 +338,9 @@ pub unsafe extern "C" fn pmd_clear_bad(pmd: *mut pmd_t) {
 // used to be done in the caller, but sparc needs minor faults to
 // force that call on sun4c so we changed this macro slightly
 //
-    int ptep_set_access_flags(struct vm_area_struct *vma,
-    unsigned long address, pte_t *ptep,
-    pte_t entry, int dirty)
-    {
-    let mut changed: c_int = !pte_same(ptep_get(ptep), entry);
+#[no_mangle]
+pub unsafe extern "C" fn ptep_set_access_flags(vma: *mut vm_area_struct, address: c_ulong, ptep: *mut pte_t, entry: pte_t, dirty: c_int) -> c_int {
+pub static mut changed: c_int = 0;
     if (changed) {
     set_pte_at(vma.vm_mm, address, ptep, entry);
     flush_tlb_fix_spurious_fault(vma, address, ptep);
@@ -108,32 +348,31 @@ pub unsafe extern "C" fn pmd_clear_bad(pmd: *mut pmd_t) {
     return changed;
     }
 
-    bool ptep_clear_flush_young(struct vm_area_struct *vma,
-    unsigned long address, pte_t *ptep)
-    {
-    bool young;
+#[no_mangle]
+pub unsafe extern "C" fn ptep_clear_flush_young(vma: *mut vm_area_struct, address: c_ulong, ptep: *mut pte_t) -> bool {
+    let mut young = 0;
     young = ptep_test_and_clear_young(vma, address, ptep);
-    if (young)
+    if (young) {
     flush_tlb_page(vma, address);
+    }
     return young;
     }
 
-    pte_t ptep_clear_flush(struct vm_area_struct *vma, unsigned long address,
+    pte_t ptep_clear_flush(vm_area_struct *vma, unsigned long address,
     pte_t *ptep)
     {
-    struct mm_struct *mm = (vma).vm_mm;
-    pte_t pte;
+    let mut mm = (vma).vm_mm;
+    let mut pte;
     pte = ptep_get_and_clear(mm, address, ptep);
-    if (pte_accessible(mm, pte))
+    if (pte_accessible(mm, pte)) {
     flush_tlb_page(vma, address);
+    }
     return pte;
     }
 
-    int pmdp_set_access_flags(struct vm_area_struct *vma,
-    unsigned long address, pmd_t *pmdp,
-    pmd_t entry, int dirty)
-    {
-    let mut changed: c_int = !pmd_same(*pmdp, entry);
+#[no_mangle]
+pub unsafe extern "C" fn pmdp_set_access_flags(vma: *mut vm_area_struct, address: c_ulong, pmdp: *mut pmd_t, entry: pmd_t, dirty: c_int) -> c_int {
+pub static mut changed: c_int = 0;
     VM_BUG_ON(address & ~HPAGE_PMD_MASK);
     if (changed) {
     set_pmd_at(vma.vm_mm, address, pmdp, entry);
@@ -142,21 +381,21 @@ pub unsafe extern "C" fn pmd_clear_bad(pmd: *mut pmd_t) {
     return changed;
     }
 
-    bool pmdp_clear_flush_young(struct vm_area_struct *vma,
-    unsigned long address, pmd_t *pmdp)
-    {
-    bool young;
+#[no_mangle]
+pub unsafe extern "C" fn pmdp_clear_flush_young(vma: *mut vm_area_struct, address: c_ulong, pmdp: *mut pmd_t) -> bool {
+    let mut young = 0;
     VM_BUG_ON(address & ~HPAGE_PMD_MASK);
     young = pmdp_test_and_clear_young(vma, address, pmdp);
-    if (young)
+    if (young) {
     flush_pmd_tlb_range(vma, address, address + HPAGE_PMD_SIZE);
+    }
     return young;
     }
 
-    pmd_t pmdp_huge_clear_flush(struct vm_area_struct *vma, unsigned long address,
+    pmd_t pmdp_huge_clear_flush(vm_area_struct *vma, unsigned long address,
     pmd_t *pmdp)
     {
-    pmd_t pmd;
+    let mut pmd;
     VM_BUG_ON(address & ~HPAGE_PMD_MASK);
     VM_BUG_ON(pmd_present(*pmdp) && !pmd_trans_huge(*pmdp));
     pmd = pmdp_huge_get_and_clear(vma.vm_mm, address, pmdp);
@@ -164,10 +403,10 @@ pub unsafe extern "C" fn pmd_clear_bad(pmd: *mut pmd_t) {
     return pmd;
     }
 
-    pud_t pudp_huge_clear_flush(struct vm_area_struct *vma, unsigned long address,
+    pud_t pudp_huge_clear_flush(vm_area_struct *vma, unsigned long address,
     pud_t *pudp)
     {
-    pud_t pud;
+    let mut pud;
     VM_BUG_ON(address & ~HPAGE_PUD_MASK);
     VM_BUG_ON(!pud_trans_huge(*pudp));
     pud = pudp_huge_get_and_clear(vma.vm_mm, address, pudp);
@@ -175,58 +414,57 @@ pub unsafe extern "C" fn pmd_clear_bad(pmd: *mut pmd_t) {
     return pud;
     }
 
-    void pgtable_trans_huge_deposit(struct mm_struct *mm, pmd_t *pmdp,
-    pgtable_t pgtable)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pgtable_trans_huge_deposit(mm: *mut mm_struct, pmdp: *mut pmd_t, pgtable: pgtable_t) {
     assert_spin_locked(pmd_lockptr(mm, pmdp));
 // FIFO
-    if (!pmd_huge_pte(mm, pmdp))
+    if (!pmd_huge_pte(mm, pmdp)) {
     INIT_LIST_HEAD(&pgtable.lru);
-    else
+    }
+    else {
     list_add(&pgtable.lru, &pmd_huge_pte(mm, pmdp).lru);
+    }
     pmd_huge_pte(mm, pmdp) = pgtable;
     }
 
 // no "address" argument so destroys page coloring of some arch
 #[no_mangle]
 pub unsafe extern "C" fn pgtable_trans_huge_withdraw(mm: *mut mm_struct, pmdp: *mut pmd_t) -> pgtable_t {
-    pgtable_t pgtable_trans_huge_withdraw(struct mm_struct *mm, pmd_t *pmdp)
-    {
-    pgtable_t pgtable;
+    let mut pgtable;
     assert_spin_locked(pmd_lockptr(mm, pmdp));
 // FIFO
     pgtable = pmd_huge_pte(mm, pmdp);
-    pmd_huge_pte(mm, pmdp) = list_first_entry_or_null(&pgtable.lru,
-    struct page, lru);
-    if (pmd_huge_pte(mm, pmdp))
+    pmd_huge_pte(mm, pmdp) = list_first_entry_or_null(&pgtable.lru, page, lru);
+    if (pmd_huge_pte(mm, pmdp)) {
     list_del(&pgtable.lru);
+    }
     return pgtable;
     }
 
-    pmd_t pmdp_invalidate(struct vm_area_struct *vma, unsigned long address,
+    pmd_t pmdp_invalidate(vm_area_struct *vma, unsigned long address,
     pmd_t *pmdp)
     {
     VM_WARN_ON_ONCE(!pmd_present(*pmdp));
-    let mut old: pmd_t = pmdp_establish(vma, address, pmdp, pmd_mkinvalid(*pmdp));
+pub static mut old: pmd_t = 0;
     flush_pmd_tlb_range(vma, address, address + HPAGE_PMD_SIZE);
     return old;
     }
 
-    pmd_t pmdp_invalidate_ad(struct vm_area_struct *vma, unsigned long address,
+    pmd_t pmdp_invalidate_ad(vm_area_struct *vma, unsigned long address,
     pmd_t *pmdp)
     {
     VM_WARN_ON_ONCE(!pmd_present(*pmdp));
     return pmdp_invalidate(vma, address, pmdp);
     }
 
-    pmd_t pmdp_collapse_flush(struct vm_area_struct *vma, unsigned long address,
+    pmd_t pmdp_collapse_flush(vm_area_struct *vma, unsigned long address,
     pmd_t *pmdp)
     {
 //
 // pmd and hugepage pte format are same. So we could
 // use the same function.
 //
-    pmd_t pmd;
+    let mut pmd;
     VM_BUG_ON(address & ~HPAGE_PMD_MASK);
     VM_BUG_ON(pmd_trans_huge(*pmdp));
     pmd = pmdp_huge_get_and_clear(vma.vm_mm, address, pmdp);
@@ -239,17 +477,13 @@ pub unsafe extern "C" fn pgtable_trans_huge_withdraw(mm: *mut mm_struct, pmdp: *
 
 #[no_mangle]
 unsafe extern "C" fn pte_free_now(head: *mut rcu_head) {
-    static void pte_free_now(struct rcu_head *head)
-    {
-    struct page *page;
-    page = container_of(head, struct page, rcu_head);
+pub static mut page: *mut c_void = core::ptr::null_mut();
+    page = container_of!(head, page, rcu_head);
     pte_free(core::ptr::null_mut() /* mm not passed and not used */, (pgtable_t)page);
     }
 #[no_mangle]
 pub unsafe extern "C" fn pte_free_defer(mm: *mut mm_struct, pgtable: pgtable_t) {
-    void pte_free_defer(struct mm_struct *mm, pgtable_t pgtable)
-    {
-    struct page *page;
+pub static mut page: *mut c_void = core::ptr::null_mut();
     page = pgtable;
     call_rcu(&page.rcu_head, pte_free_now);
     }
@@ -264,64 +498,67 @@ pub unsafe extern "C" fn pte_free_defer(mm: *mut mm_struct, pgtable: pgtable_t) 
 //
 #[no_mangle]
 unsafe extern "C" fn pmdp_get_lockless_start() -> c_ulong {
-    static unsigned long pmdp_get_lockless_start(void)
-    {
-    unsigned long irqflags;
+    let mut irqflags = 0;
     local_irq_save(irqflags);
     return irqflags;
     }
 #[no_mangle]
 unsafe extern "C" fn pmdp_get_lockless_end(irqflags: c_ulong) {
-    static void pmdp_get_lockless_end(unsigned long irqflags)
-    {
     local_irq_restore(irqflags);
     }
 
-    static unsigned long pmdp_get_lockless_start(void) { return 0; }
-    static void pmdp_get_lockless_end(unsigned long irqflags) { }
+#[no_mangle]
+pub unsafe extern "C" fn pmdp_get_lockless_start() -> c_ulong { return 0; }
+#[no_mangle]
+pub unsafe extern "C" fn pmdp_get_lockless_end(irqflags: c_ulong) { }
 
     pte_t *__pte_offset_map(pmd_t *pmd, unsigned long addr, pmd_t *pmdvalp)
     {
-    unsigned long irqflags;
-    pmd_t pmdval;
+    let mut irqflags = 0;
+    let mut pmdval;
     rcu_read_lock();
     irqflags = pmdp_get_lockless_start();
     pmdval = pmdp_get_lockless(pmd);
     pmdp_get_lockless_end(irqflags);
-    if (pmdvalp)
+    if (pmdvalp) {
 // pmdvalp = pmdval;
-    if (unlikely(pmd_none(pmdval) || !pmd_present(pmdval)))
-    goto nomap;
-    if (unlikely(pmd_trans_huge(pmdval)))
-    goto nomap;
+    }
+    if (unlikely(pmd_none(pmdval) || !pmd_present(pmdval))) {
+// goto;
+    }
+    if (unlikely(pmd_trans_huge(pmdval))) {
+// goto;
+    }
     if (unlikely(pmd_bad(pmdval))) {
     pmd_clear_bad(pmd);
-    goto nomap;
+// goto;
     }
     return __pte_map(&pmdval, addr);
-    nomap:
+// label;
     rcu_read_unlock();
     return core::ptr::null_mut();
     }
-    pte_t *pte_offset_map_ro_nolock(struct mm_struct *mm, pmd_t *pmd,
+    pte_t *pte_offset_map_ro_nolock(mm_struct *mm, pmd_t *pmd,
     unsigned long addr, spinlock_t **ptlp)
     {
-    pmd_t pmdval;
-    pte_t *pte;
+    let mut pmdval;
+pub static mut pte: *mut c_void = core::ptr::null_mut();
     pte = __pte_offset_map(pmd, addr, &pmdval);
-    if (likely(pte))
+    if (likely(pte)) {
 // ptlp = pte_lockptr(mm, &pmdval);
+    }
     return pte;
     }
-    pte_t *pte_offset_map_rw_nolock(struct mm_struct *mm, pmd_t *pmd,
+    pte_t *pte_offset_map_rw_nolock(mm_struct *mm, pmd_t *pmd,
     unsigned long addr, pmd_t *pmdvalp,
     spinlock_t **ptlp)
     {
-    pte_t *pte;
+pub static mut pte: *mut c_void = core::ptr::null_mut();
     VM_WARN_ON_ONCE(!pmdvalp);
     pte = __pte_offset_map(pmd, addr, pmdvalp);
-    if (likely(pte))
+    if (likely(pte)) {
 // ptlp = pte_lockptr(mm, pmdvalp);
+    }
     return pte;
     }
 //
@@ -381,16 +618,17 @@ unsafe extern "C" fn pmdp_get_lockless_end(irqflags: c_ulong) {
 // table, and may not use RCU at all: "outsiders" like khugepaged should avoid
 // pte_offset_map() and co once the vma is detached from mm or mm_users is zero.
 //
-    pte_t *pte_offset_map_lock(struct mm_struct *mm, pmd_t *pmd,
+    pte_t *pte_offset_map_lock(mm_struct *mm, pmd_t *pmd,
     unsigned long addr, spinlock_t **ptlp)
     {
-    spinlock_t *ptl;
-    pmd_t pmdval;
-    pte_t *pte;
-    again:
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
+    let mut pmdval;
+pub static mut pte: *mut c_void = core::ptr::null_mut();
+// label;
     pte = __pte_offset_map(pmd, addr, &pmdval);
-    if (unlikely(!pte))
+    if (unlikely(!pte)) {
     return pte;
+    }
     ptl = pte_lockptr(mm, &pmdval);
     spin_lock(ptl);
     if (likely(pmd_same(pmdval, pmdp_get_lockless(pmd)))) {
@@ -398,37 +636,26 @@ unsafe extern "C" fn pmdp_get_lockless_end(irqflags: c_ulong) {
     return pte;
     }
     pte_unmap_unlock(pte, ptl);
-    goto again;
+// goto;
     }
 
-    static void kernel_pgtable_work_func(struct work_struct *work);
-    static struct {
-    struct list_head list;
-// protect above ptdesc lists
-    spinlock_t lock;
-    struct work_struct work;
-    } kernel_pgtable_work = {
-    .list = LIST_HEAD_INIT(kernel_pgtable_work.list),
-    .lock = __SPIN_LOCK_UNLOCKED(kernel_pgtable_work.lock),
-    .work = __WORK_INITIALIZER(kernel_pgtable_work.work, kernel_pgtable_work_func),
-    };
+// forward_decl: kernel_pgtable_work_func;
+pub static mut kernel_pgtable_work: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn kernel_pgtable_work_func(work: *mut work_struct) {
-    static void kernel_pgtable_work_func(struct work_struct *work)
-    {
-    struct ptdesc *pt, *next;
-    LIST_HEAD(page_list);
+    let mut pt = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+pub static mut page_list: usize = 0;
     spin_lock(&kernel_pgtable_work.lock);
     list_splice_tail_init(&kernel_pgtable_work.list, &page_list);
     spin_unlock(&kernel_pgtable_work.lock);
     iommu_sva_invalidate_kva_range(PAGE_OFFSET, TLB_FLUSH_ALL);
-    list_for_each_entry_safe(pt, next, &page_list, pt_list)
+    list_for_each_entry_safe(pt, next, &page_list, pt_list) {
     __pagetable_free(pt);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn pagetable_free_kernel(pt: *mut ptdesc) {
-    void pagetable_free_kernel(struct ptdesc *pt)
-    {
     spin_lock(&kernel_pgtable_work.lock);
     list_add(&pt.pt_list, &kernel_pgtable_work.list);
     spin_unlock(&kernel_pgtable_work.lock);

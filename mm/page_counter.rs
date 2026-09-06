@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -45,32 +295,32 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
 #[no_mangle]
 unsafe extern "C" fn track_protection(c: *mut page_counter) -> bool {
-    static bool track_protection(struct page_counter *c)
-    {
     return c.protection_support;
     }
-    static void propagate_protected_usage(struct page_counter *c,
-    unsigned long usage)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn propagate_protected_usage(c: *mut page_counter, usage: c_ulong) {
     unsigned long protected, old_protected;
-    long delta;
-    if (!c.parent)
+    let mut delta = 0;
+    if (!c.parent) {
     return;
+    }
     protected = min(usage, READ_ONCE(c.min));
     old_protected = atomic_long_read(&c.min_usage);
     if (protected != old_protected) {
     old_protected = atomic_long_xchg(&c.min_usage, protected);
     delta = protected - old_protected;
-    if (delta)
+    if (delta) {
     atomic_long_add(delta, &c.parent.children_min_usage);
+    }
     }
     protected = min(usage, READ_ONCE(c.low));
     old_protected = atomic_long_read(&c.low_usage);
     if (protected != old_protected) {
     old_protected = atomic_long_xchg(&c.low_usage, protected);
     delta = protected - old_protected;
-    if (delta)
+    if (delta) {
     atomic_long_add(delta, &c.parent.children_low_usage);
+    }
     }
     }
 //
@@ -80,9 +330,7 @@ unsafe extern "C" fn track_protection(c: *mut page_counter) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn page_counter_cancel(counter: *mut page_counter, nr_pages: c_ulong) {
-    void page_counter_cancel(struct page_counter *counter, unsigned long nr_pages)
-    {
-    long new;
+    let mut new = 0;
     new = atomic_long_sub_return(nr_pages, &counter.usage);
 // More uncharges than charges?
     if (WARN_ONCE(new < 0, "page_counter underflow: %ld nr_pages=%lu\n",
@@ -90,8 +338,9 @@ pub unsafe extern "C" fn page_counter_cancel(counter: *mut page_counter, nr_page
     new = 0;
     atomic_long_set(&counter.usage, new);
     }
-    if (track_protection(counter))
+    if (track_protection(counter)) {
     propagate_protected_usage(counter, new);
+    }
     }
 //
 // page_counter_charge - hierarchically charge pages
@@ -102,15 +351,14 @@ pub unsafe extern "C" fn page_counter_cancel(counter: *mut page_counter, nr_page
 //
 #[no_mangle]
 pub unsafe extern "C" fn page_counter_charge(counter: *mut page_counter, nr_pages: c_ulong) {
-    void page_counter_charge(struct page_counter *counter, unsigned long nr_pages)
-    {
-    struct page_counter *c;
-    let mut protection: bool = track_protection(counter);
-    for (c = counter; c; c = c.parent) {
-    long new;
+pub static mut c: *mut c_void = core::ptr::null_mut();
+pub static mut protection: bool = false;
+    while (c) {
+    let mut new = 0;
     new = atomic_long_add_return(nr_pages, &c.usage);
-    if (protection)
+    if (protection) {
     propagate_protected_usage(c, new);
+    }
 //
 // This is indeed racy, but we can live with some
 // inaccuracy in the watermark.
@@ -127,8 +375,9 @@ pub unsafe extern "C" fn page_counter_charge(counter: *mut page_counter, nr_page
 //
     if (new > READ_ONCE(c.local_watermark)) {
     WRITE_ONCE(c.local_watermark, new);
-    if (new > READ_ONCE(c.watermark))
+    if (new > READ_ONCE(c.watermark)) {
     WRITE_ONCE(c.watermark, new);
+    }
     }
     }
     }
@@ -141,15 +390,13 @@ pub unsafe extern "C" fn page_counter_charge(counter: *mut page_counter, nr_page
 // Returns %true on success, or %false and @fail if the counter or one
 // of its ancestors has hit its configured limit.
 //
-    bool page_counter_try_charge(struct page_counter *counter,
-    unsigned long nr_pages,
-    struct page_counter **fail)
-    {
-    struct page_counter *c;
-    let mut protection: bool = track_protection(counter);
-    let mut track_failcnt: bool = counter.track_failcnt;
-    for (c = counter; c; c = c.parent) {
-    long new;
+#[no_mangle]
+pub unsafe extern "C" fn page_counter_try_charge(counter: *mut page_counter, nr_pages: c_ulong, fail: *mut *mut page_counter) -> bool {
+pub static mut c: *mut c_void = core::ptr::null_mut();
+pub static mut protection: bool = false;
+pub static mut track_failcnt: bool = false;
+    while (c) {
+    let mut new = 0;
 //
 // Charge speculatively to avoid an expensive CAS.  If
 // a bigger charge fails, it might falsely lock out a
@@ -172,24 +419,28 @@ pub unsafe extern "C" fn page_counter_charge(counter: *mut page_counter, nr_page
 // inaccuracy in the failcnt which is only used
 // to report stats.
 //
-    if (track_failcnt)
+    if (track_failcnt) {
     data_race(c.failcnt++);
-// fail = c;
-    goto failed;
     }
-    if (protection)
+// fail = c;
+// goto;
+    }
+    if (protection) {
     propagate_protected_usage(c, new);
+    }
 // see comment on page_counter_charge
     if (new > READ_ONCE(c.local_watermark)) {
     WRITE_ONCE(c.local_watermark, new);
-    if (new > READ_ONCE(c.watermark))
+    if (new > READ_ONCE(c.watermark)) {
     WRITE_ONCE(c.watermark, new);
     }
     }
+    }
     return true;
-    failed:
-    for (c = counter; c != *fail; c = c.parent)
+// label;
+    for (c = counter; c != *fail; c = c.parent) {
     page_counter_cancel(c, nr_pages);
+    }
     return false;
     }
 //
@@ -199,11 +450,10 @@ pub unsafe extern "C" fn page_counter_charge(counter: *mut page_counter, nr_page
 //
 #[no_mangle]
 pub unsafe extern "C" fn page_counter_uncharge(counter: *mut page_counter, nr_pages: c_ulong) {
-    void page_counter_uncharge(struct page_counter *counter, unsigned long nr_pages)
-    {
-    struct page_counter *c;
-    for (c = counter; c; c = c.parent)
+pub static mut c: *mut c_void = core::ptr::null_mut();
+    for (c = counter; c; c = c.parent) {
     page_counter_cancel(c, nr_pages);
+    }
     }
 //
 // page_counter_set_max - set the maximum number of pages allowed
@@ -217,11 +467,9 @@ pub unsafe extern "C" fn page_counter_uncharge(counter: *mut page_counter, nr_pa
 //
 #[no_mangle]
 pub unsafe extern "C" fn page_counter_set_max(counter: *mut page_counter, nr_pages: c_ulong) -> c_int {
-    int page_counter_set_max(struct page_counter *counter, unsigned long nr_pages)
-    {
     for (;;) {
-    unsigned long old;
-    long usage;
+    let mut old = 0;
+    let mut usage = 0;
 //
 // Update the limit while making sure that it's not
 // below the concurrently-changing counter value.
@@ -234,11 +482,13 @@ pub unsafe extern "C" fn page_counter_set_max(counter: *mut page_counter, nr_pag
 // modified counter and retry.
 //
     usage = page_counter_read(counter);
-    if (usage > nr_pages)
+    if (usage > nr_pages) {
     return -EBUSY;
+    }
     old = xchg(&counter.max, nr_pages);
-    if (page_counter_read(counter) <= usage || nr_pages >= old)
+    if (page_counter_read(counter) <= usage || nr_pages >= old) {
     return 0;
+    }
     counter.max = old;
     cond_resched();
     }
@@ -252,12 +502,11 @@ pub unsafe extern "C" fn page_counter_set_max(counter: *mut page_counter, nr_pag
 //
 #[no_mangle]
 pub unsafe extern "C" fn page_counter_set_min(counter: *mut page_counter, nr_pages: c_ulong) {
-    void page_counter_set_min(struct page_counter *counter, unsigned long nr_pages)
-    {
-    struct page_counter *c;
+pub static mut c: *mut c_void = core::ptr::null_mut();
     WRITE_ONCE(counter.min, nr_pages);
-    for (c = counter; c; c = c.parent)
+    for (c = counter; c; c = c.parent) {
     propagate_protected_usage(c, atomic_long_read(&c.usage));
+    }
     }
 //
 // page_counter_set_low - set the amount of protected memory
@@ -268,12 +517,11 @@ pub unsafe extern "C" fn page_counter_set_min(counter: *mut page_counter, nr_pag
 //
 #[no_mangle]
 pub unsafe extern "C" fn page_counter_set_low(counter: *mut page_counter, nr_pages: c_ulong) {
-    void page_counter_set_low(struct page_counter *counter, unsigned long nr_pages)
-    {
-    struct page_counter *c;
+pub static mut c: *mut c_void = core::ptr::null_mut();
     WRITE_ONCE(counter.low, nr_pages);
-    for (c = counter; c; c = c.parent)
+    for (c = counter; c; c = c.parent) {
     propagate_protected_usage(c, atomic_long_read(&c.usage));
+    }
     }
 //
 // page_counter_memparse - memparse() for page counter limits
@@ -284,18 +532,18 @@ pub unsafe extern "C" fn page_counter_set_low(counter: *mut page_counter, nr_pag
 // Returns -EINVAL, or 0 and @nr_pages on success.  @nr_pages will be
 // limited to %PAGE_COUNTER_MAX.
 //
-    int page_counter_memparse(const char *buf, const char *max,
-    unsigned long *nr_pages)
-    {
-    char *end;
-    u64 bytes;
+#[no_mangle]
+pub unsafe extern "C" fn page_counter_memparse(buf: *mut c_char, max: *mut c_char, nr_pages: *mut c_ulong) -> c_int {
+pub static mut end: *mut c_void = core::ptr::null_mut();
+    let mut bytes = 0;
     if (!strcmp(buf, max)) {
 // nr_pages = PAGE_COUNTER_MAX;
     return 0;
     }
     bytes = memparse(buf, &end);
-    if (*end != '\0')
+    if (*end != '\0') {
     return -EINVAL;
+    }
 // nr_pages = min(bytes / PAGE_SIZE, (u64)PAGE_COUNTER_MAX);
     return 0;
     }
@@ -343,15 +591,10 @@ pub unsafe extern "C" fn page_counter_set_low(counter: *mut page_counter, nr_pag
 // against immediate siblings whereas 5. is about protecting against
 // neighboring subtrees.
 //
-    static unsigned long effective_protection(unsigned long usage,
-    unsigned long parent_usage,
-    unsigned long setting,
-    unsigned long parent_effective,
-    unsigned long siblings_protected,
-    bool recursive_protection)
-    {
-    unsigned long protected;
-    unsigned long ep;
+#[no_mangle]
+pub unsafe extern "C" fn effective_protection(usage: c_ulong, parent_usage: c_ulong, setting: c_ulong, parent_effective: c_ulong, siblings_protected: c_ulong, recursive_protection: bool) -> c_ulong {
+    let mut protected = 0;
+    let mut ep = 0;
     protected = min(usage, setting);
 //
 // If all cgroups at this level combined claim and use more
@@ -363,8 +606,9 @@ pub unsafe extern "C" fn page_counter_set_low(counter: *mut page_counter, nr_pag
 // but unused protection is available to siblings that would
 // otherwise get a smaller chunk than what they claimed.
 //
-    if (siblings_protected > parent_effective)
+    if (siblings_protected > parent_effective) {
     return protected * parent_effective / siblings_protected;
+    }
 //
 // Ok, utilized protection of all children is within what the
 // parent affords them, so we know whatever this child claims
@@ -397,12 +641,13 @@ pub unsafe extern "C" fn page_counter_set_low(counter: *mut page_counter, nr_pag
 // protected values. One should imply the other, but they
 // aren't read atomically - make sure the division is sane.
 //
-    if (!recursive_protection)
+    if (!recursive_protection) {
     return ep;
+    }
     if (parent_effective > siblings_protected &&
     parent_usage > siblings_protected &&
     usage > protected) {
-    unsigned long unclaimed;
+    let mut unclaimed = 0;
     unclaimed = parent_effective - siblings_protected;
     unclaimed *= usage - protected;
     unclaimed /= parent_usage - siblings_protected;
@@ -421,12 +666,10 @@ pub unsafe extern "C" fn page_counter_set_low(counter: *mut page_counter, nr_pag
 // WARNING: This function is not stateless! It can only be used as part
 // of a top-down tree iteration, not for isolated queries.
 //
-    void page_counter_calculate_protection(struct page_counter *root,
-    struct page_counter *counter,
-    bool recursive_protection)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn page_counter_calculate_protection(root: *mut page_counter, counter: *mut page_counter, recursive_protection: bool) {
     unsigned long usage, parent_usage;
-    struct page_counter *parent = counter.parent;
+    let mut parent = counter.parent;
 //
 // Effective values of the reclaim targets are ignored so they
 // can be stale. Have a look at mem_cgroup_protection for more
@@ -434,11 +677,13 @@ pub unsafe extern "C" fn page_counter_set_low(counter: *mut page_counter, nr_pag
 // TODO: calculation should be more robust so that we do not need
 // that special casing.
 //
-    if (root == counter)
+    if (root == counter) {
     return;
+    }
     usage = page_counter_read(counter);
-    if (!usage)
+    if (!usage) {
     return;
+    }
     if (parent == root) {
     counter.emin = READ_ONCE(counter.min);
     counter.elow = READ_ONCE(counter.low);

@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -46,7 +296,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Copyright  ©  2009 Paul Mackerras, IBM Corp. <paulus@au1.ibm.com>
 //
 
-    typedef int (*remote_function_f)(void *);
+    typedef int (*remote_function_f);
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct remote_function_call {
@@ -58,21 +308,21 @@ pub struct remote_function_call {
 
 #[no_mangle]
 unsafe extern "C" fn remote_function(data: *mut c_void) {
-    static void remote_function(void *data)
-    {
-    struct remote_function_call *tfc = data;
-    struct task_struct *p = tfc.p;
+    let mut tfc = data;
+    let mut p = tfc.p;
     if (p) {
 // -EAGAIN
-    if (task_cpu(p) != smp_processor_id())
+    if (task_cpu(p) != smp_processor_id()) {
     return;
+    }
 //
 // Now that we're on right CPU with IRQs disabled, we can test
 // if we hit the right task without races.
 //
     tfc.ret = -ESRCH; /* No such (running) process */
-    if (p != current)
+    if (p != current) {
     return;
+    }
     }
     tfc.ret = tfc.func(tfc.info);
     }
@@ -89,23 +339,19 @@ unsafe extern "C" fn remote_function(data: *mut c_void) {
 //
 // returns @func return value or -ESRCH or -ENXIO when the process isn't running
 //
-    static int
-    task_function_call(struct task_struct *p, remote_function_f func, void *info)
-    {
-    struct remote_function_call data = {
-    .p	= p,
-    .func	= func,
-    .info	= info,
-    .ret	= -EAGAIN,
-    };
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn task_function_call(p: *mut task_struct, func: remote_function_f, info: *mut c_void) -> c_int {
+pub static mut remote_function_call: usize = 0;
+    let mut ret = 0;
     for (;;) {
     ret = smp_call_function_single(task_cpu(p), remote_function,
     &data, 1);
-    if (!ret)
+    if (!ret) {
     ret = data.ret;
-    if (ret != -EAGAIN)
+    }
+    if (ret != -EAGAIN) {
     break;
+    }
     cond_resched();
     }
     return ret;
@@ -122,14 +368,7 @@ unsafe extern "C" fn remote_function(data: *mut c_void) {
 //
 #[no_mangle]
 unsafe extern "C" fn cpu_function_call(cpu: c_int, func: remote_function_f, info: *mut c_void) -> c_int {
-    static int cpu_function_call(int cpu, remote_function_f func, void *info)
-    {
-    struct remote_function_call data = {
-    .p	= core::ptr::null_mut(),
-    .func	= func,
-    .info	= info,
-    .ret	= -ENXIO, /* No such CPU */
-    };
+pub static mut remote_function_call: usize = 0;
     smp_call_function_single(cpu, remote_function, &data, 1);
     return data.ret;
     }
@@ -159,63 +398,56 @@ unsafe extern "C" fn cpu_function_call(cpu: c_int, func: remote_function_f, info
     };
 #[no_mangle]
 pub unsafe extern "C" fn __perf_ctx_lock(ctx: *mut perf_event_context) {
-    static inline void __perf_ctx_lock(struct perf_event_context *ctx)
-    {
     raw_spin_lock(&ctx.lock);
-    WARN_ON_ONCE(ctx.is_active & EVENT_FROZEN);
+    WARN_ON_ONCE!(ctx.is_active & EVENT_FROZEN);
     }
-    static void perf_ctx_lock(struct perf_cpu_context *cpuctx,
-    struct perf_event_context *ctx)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn perf_ctx_lock(cpuctx: *mut perf_cpu_context, ctx: *mut perf_event_context) {
     __perf_ctx_lock(&cpuctx.ctx);
-    if (ctx)
+    if (ctx) {
     __perf_ctx_lock(ctx);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn __perf_ctx_unlock(ctx: *mut perf_event_context) {
-    static inline void __perf_ctx_unlock(struct perf_event_context *ctx)
-    {
 //
 // If ctx_sched_in() didn't again set any ALL flags, clean up
 // after ctx_sched_out() by clearing is_active.
 //
     if (ctx.is_active & EVENT_FROZEN) {
-    if (!(ctx.is_active & EVENT_ALL))
+    if (!(ctx.is_active & EVENT_ALL)) {
     ctx.is_active = 0;
-    else
+    }
+    else {
     ctx.is_active &= ~EVENT_FROZEN;
+    }
     }
     raw_spin_unlock(&ctx.lock);
     }
-    static void perf_ctx_unlock(struct perf_cpu_context *cpuctx,
-    struct perf_event_context *ctx)
-    {
-    if (ctx)
+#[no_mangle]
+pub unsafe extern "C" fn perf_ctx_unlock(cpuctx: *mut perf_cpu_context, ctx: *mut perf_event_context) {
+    if (ctx) {
     __perf_ctx_unlock(ctx);
+    }
     __perf_ctx_unlock(&cpuctx.ctx);
     }
     typedef struct {
-    struct perf_cpu_context *cpuctx;
-    struct perf_event_context *ctx;
+pub static mut cpuctx: *mut c_void = core::ptr::null_mut();
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
     } class_perf_ctx_lock_t;
 #[no_mangle]
-pub unsafe extern "C" fn class_perf_ctx_lock_destructor(_T: *mut class_perf_ctx_lock_t) {
-    static inline void class_perf_ctx_lock_destructor(class_perf_ctx_lock_t *_T)
-    { perf_ctx_unlock(_T.cpuctx, _T.ctx); }
+pub unsafe extern "C" fn class_perf_ctx_lock_destructor(_T: *mut class_perf_ctx_lock_t) { perf_ctx_unlock(_T.cpuctx, _T.ctx); }
     static inline class_perf_ctx_lock_t
-    class_perf_ctx_lock_constructor(struct perf_cpu_context *cpuctx,
-    struct perf_event_context *ctx)
+    class_perf_ctx_lock_constructor(perf_cpu_context *cpuctx, perf_event_context *ctx)
     { perf_ctx_lock(cpuctx, ctx); return (class_perf_ctx_lock_t){ cpuctx, ctx }; }
 
 #[no_mangle]
 unsafe extern "C" fn is_kernel_event(event: *mut perf_event) -> bool {
-    static bool is_kernel_event(struct perf_event *event)
-    {
     return READ_ONCE(event.owner) == TASK_TOMBSTONE;
     }
-    static DEFINE_PER_CPU(struct perf_cpu_context, perf_cpu_context);
-    struct perf_event_context *perf_cpu_task_ctx(void)
-    {
+pub static mut struct perf_cpu_context: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn perf_cpu_task_ctx() -> *mut c_void {
     lockdep_assert_irqs_disabled();
     return this_cpu_ptr(&perf_cpu_context).task_ctx;
     }
@@ -237,8 +469,7 @@ unsafe extern "C" fn is_kernel_event(event: *mut perf_event) -> bool {
 //
 // If ctx->nr_events, then ctx->is_active and cpuctx->task_ctx are set.
 //
-    typedef void (*event_f)(struct perf_event *, struct perf_cpu_context *,
-    struct perf_event_context *, void *);
+    typedef void (*event_f)(perf_event *, perf_cpu_context *, perf_event_context *, void *);
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct event_function_struct {
@@ -249,14 +480,12 @@ pub struct event_function_struct {
 
 #[no_mangle]
 unsafe extern "C" fn event_function(info: *mut c_void) -> c_int {
-    static int event_function(void *info)
-    {
-    struct event_function_struct *efs = info;
-    struct perf_event *event = efs.event;
-    struct perf_event_context *ctx = event.ctx;
-    struct perf_cpu_context *cpuctx = this_cpu_ptr(&perf_cpu_context);
-    struct perf_event_context *task_ctx = cpuctx.task_ctx;
-    let mut ret: c_int = 0;
+    let mut efs = info;
+    let mut event = efs.event;
+    let mut ctx = event.ctx;
+    let mut cpuctx = this_cpu_ptr(&perf_cpu_context);
+    let mut task_ctx = cpuctx.task_ctx;
+pub static mut ret: c_int = 0;
     lockdep_assert_irqs_disabled();
     perf_ctx_lock(cpuctx, task_ctx);
 //
@@ -266,7 +495,7 @@ unsafe extern "C" fn event_function(info: *mut c_void) -> c_int {
     if (ctx.task) {
     if (ctx.task != current) {
     ret = -ESRCH;
-    goto unlock;
+// goto;
     }
 //
 // We only use event_function_call() on established contexts,
@@ -275,32 +504,26 @@ unsafe extern "C" fn event_function(info: *mut c_void) -> c_int {
 // above ctx->task != current test), therefore we must have
 // ctx->is_active here.
 //
-    WARN_ON_ONCE(!ctx.is_active);
+    WARN_ON_ONCE!(!ctx.is_active);
 //
 // And since we have ctx->is_active, cpuctx->task_ctx must
 // match.
 //
-    WARN_ON_ONCE(task_ctx != ctx);
+    WARN_ON_ONCE!(task_ctx != ctx);
     } else {
-    WARN_ON_ONCE(&cpuctx.ctx != ctx);
+    WARN_ON_ONCE!(&cpuctx.ctx != ctx);
     }
     efs.func(event, cpuctx, ctx, efs.data);
-    unlock:
+// label;
     perf_ctx_unlock(cpuctx, task_ctx);
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn event_function_call(event: *mut perf_event, func: event_f, data: *mut c_void) {
-    static void event_function_call(struct perf_event *event, event_f func, void *data)
-    {
-    struct perf_event_context *ctx = event.ctx;
-    struct task_struct *task = READ_ONCE(ctx.task); /* verified in event_function */
-    struct perf_cpu_context *cpuctx;
-    struct event_function_struct efs = {
-    .event = event,
-    .func = func,
-    .data = data,
-    };
+    let mut ctx = event.ctx;
+    let mut task = READ_ONCE(ctx.task); /* verified in event_function */
+pub static mut cpuctx: *mut c_void = core::ptr::null_mut();
+pub static mut event_function_struct: usize = 0;
     if (!event.parent) {
 //
 // If this is a !child event, we must hold ctx::mutex to
@@ -313,11 +536,13 @@ unsafe extern "C" fn event_function_call(event: *mut perf_event, func: event_f, 
     cpu_function_call(event.cpu, event_function, &efs);
     return;
     }
-    if (task == TASK_TOMBSTONE)
+    if (task == TASK_TOMBSTONE) {
     return;
-    again:
-    if (!task_function_call(task, event_function, &efs))
+    }
+// label;
+    if (!task_function_call(task, event_function, &efs)) {
     return;
+    }
     local_irq_disable();
     cpuctx = this_cpu_ptr(&perf_cpu_context);
     perf_ctx_lock(cpuctx, ctx);
@@ -326,15 +551,16 @@ unsafe extern "C" fn event_function_call(event: *mut perf_event, func: event_f, 
 // a concurrent perf_event_context_sched_out().
 //
     task = ctx.task;
-    if (task == TASK_TOMBSTONE)
-    goto unlock;
+    if (task == TASK_TOMBSTONE) {
+// goto;
+    }
     if (ctx.is_active) {
     perf_ctx_unlock(cpuctx, ctx);
     local_irq_enable();
-    goto again;
+// goto;
     }
     func(event, core::ptr::null_mut(), ctx, data);
-    unlock:
+// label;
     perf_ctx_unlock(cpuctx, ctx);
     local_irq_enable();
     }
@@ -344,22 +570,22 @@ unsafe extern "C" fn event_function_call(event: *mut perf_event, func: event_f, 
 //
 #[no_mangle]
 unsafe extern "C" fn event_function_local(event: *mut perf_event, func: event_f, data: *mut c_void) {
-    static void event_function_local(struct perf_event *event, event_f func, void *data)
-    {
-    struct perf_event_context *ctx = event.ctx;
-    struct perf_cpu_context *cpuctx = this_cpu_ptr(&perf_cpu_context);
-    struct task_struct *task = READ_ONCE(ctx.task);
-    struct perf_event_context *task_ctx = core::ptr::null_mut();
+    let mut ctx = event.ctx;
+    let mut cpuctx = this_cpu_ptr(&perf_cpu_context);
+    let mut task = READ_ONCE(ctx.task);
+    let mut task_ctx = core::ptr::null_mut();
     lockdep_assert_irqs_disabled();
     if (task) {
-    if (task == TASK_TOMBSTONE)
+    if (task == TASK_TOMBSTONE) {
     return;
+    }
     task_ctx = ctx;
     }
     perf_ctx_lock(cpuctx, task_ctx);
     task = ctx.task;
-    if (task == TASK_TOMBSTONE)
-    goto unlock;
+    if (task == TASK_TOMBSTONE) {
+// goto;
+    }
     if (task) {
 //
 // We must be either inactive or active and the right task,
@@ -367,71 +593,69 @@ unsafe extern "C" fn event_function_local(event: *mut perf_event, func: event_f,
 // else.
 //
     if (ctx.is_active) {
-    if (WARN_ON_ONCE(task != current))
-    goto unlock;
-    if (WARN_ON_ONCE(cpuctx.task_ctx != ctx))
-    goto unlock;
+    if (WARN_ON_ONCE!(task != current)) {
+// goto;
+    }
+    if (WARN_ON_ONCE!(cpuctx.task_ctx != ctx)) {
+// goto;
+    }
     }
     } else {
-    WARN_ON_ONCE(&cpuctx.ctx != ctx);
+    WARN_ON_ONCE!(&cpuctx.ctx != ctx);
     }
     func(event, cpuctx, ctx, data);
-    unlock:
+// label;
     perf_ctx_unlock(cpuctx, task_ctx);
     }
 
-    PERF_FLAG_FD_OUTPUT  |\
-    PERF_FLAG_PID_CGROUP |\
+    PERF_FLAG_FD_OUTPUT  |
+    PERF_FLAG_PID_CGROUP |
     PERF_FLAG_FD_CLOEXEC)
 //
 // branch priv levels that need permission checks
 //
 
-    (PERF_SAMPLE_BRANCH_KERNEL |\
+    (PERF_SAMPLE_BRANCH_KERNEL |
     PERF_SAMPLE_BRANCH_HV)
 //
 // perf_sched_events : >0 events exist
 //
-    static void perf_sched_delayed(struct work_struct *work);
-    DEFINE_STATIC_KEY_FALSE(perf_sched_events);
-    static DECLARE_DELAYED_WORK(perf_sched_work, perf_sched_delayed);
-    static DEFINE_MUTEX(perf_sched_mutex);
+// forward_decl: perf_sched_delayed;
+pub static mut perf_sched_events: usize = 0;
+pub static mut perf_sched_work: usize = 0;
+pub static mut perf_sched_mutex: usize = 0;
     static atomic_t perf_sched_count;
-    static DEFINE_PER_CPU(struct pmu_event_list, pmu_sb_events);
-    static atomic_t nr_mmap_events __read_mostly;
-    static atomic_t nr_comm_events __read_mostly;
-    static atomic_t nr_namespaces_events __read_mostly;
-    static atomic_t nr_task_events __read_mostly;
-    static atomic_t nr_freq_events __read_mostly;
-    static atomic_t nr_switch_events __read_mostly;
-    static atomic_t nr_ksymbol_events __read_mostly;
-    static atomic_t nr_bpf_events __read_mostly;
-    static atomic_t nr_cgroup_events __read_mostly;
-    static atomic_t nr_text_poke_events __read_mostly;
-    static atomic_t nr_build_id_events __read_mostly;
-    static LIST_HEAD(pmus);
-    static DEFINE_MUTEX(pmus_lock);
-    static struct srcu_struct pmus_srcu;
+pub static mut struct pmu_event_list: usize = 0;
+    static atomic_t nr_mmap_events ;
+    static atomic_t nr_comm_events ;
+    static atomic_t nr_namespaces_events ;
+    static atomic_t nr_task_events ;
+    static atomic_t nr_freq_events ;
+    static atomic_t nr_switch_events ;
+    static atomic_t nr_ksymbol_events ;
+    static atomic_t nr_bpf_events ;
+    static atomic_t nr_cgroup_events ;
+    static atomic_t nr_text_poke_events ;
+    static atomic_t nr_build_id_events ;
+pub static mut pmus: usize = 0;
+pub static mut pmus_lock: usize = 0;
+pub static mut pmus_srcu: usize = 0;
     static cpumask_var_t perf_online_mask;
     static cpumask_var_t perf_online_core_mask;
     static cpumask_var_t perf_online_die_mask;
     static cpumask_var_t perf_online_cluster_mask;
     static cpumask_var_t perf_online_pkg_mask;
     static cpumask_var_t perf_online_sys_mask;
-    static struct kmem_cache *perf_event_cache;
+pub static mut perf_event_cache: *mut c_void = core::ptr::null_mut();
 
-    static DEFINE_PER_CPU(bool, guest_ctx_loaded);
+pub static mut bool: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn is_guest_mediated_pmu_loaded() -> __always_inline bool {
-    static __always_inline bool is_guest_mediated_pmu_loaded(void)
-    {
     return __this_cpu_read(guest_ctx_loaded);
     }
 
 #[no_mangle]
 unsafe extern "C" fn is_guest_mediated_pmu_loaded() -> __always_inline bool {
-    static __always_inline bool is_guest_mediated_pmu_loaded(void)
-    {
     return false;
     }
 
@@ -442,112 +666,73 @@ unsafe extern "C" fn is_guest_mediated_pmu_loaded() -> __always_inline bool {
 // 1 - disallow cpu events for unpriv
 // 2 - disallow kernel profiling for unpriv
 //
-    let mut __read_mostly: int sysctl_perf_event_paranoid = 2;
+pub static mut : int sysctl_perf_event_paranoid = 2;
 // Minimum for 512 kiB + 1 user control page. 'free' kiB per user.
-    let mut __read_mostly: static int sysctl_perf_event_mlock = 512 + (PAGE_SIZE / 1024);
+pub static mut : int sysctl_perf_event_mlock = 0;
 //
 // max perf event sample rate
 //
 pub const DEFAULT_MAX_SAMPLE_RATE: c_int = 100000;
 
 pub const DEFAULT_CPU_TIME_MAX_PERCENT: c_int = 25;
-    let mut __read_mostly: int sysctl_perf_event_sample_rate = DEFAULT_MAX_SAMPLE_RATE;
-    let mut __read_mostly: static int sysctl_perf_cpu_time_max_percent = DEFAULT_CPU_TIME_MAX_PERCENT;
-    let mut __read_mostly: static int max_samples_per_tick = DIV_ROUND_UP(DEFAULT_MAX_SAMPLE_RATE, HZ);
-    let mut __read_mostly: static int perf_sample_period_ns = DEFAULT_SAMPLE_PERIOD_NS;
-    static int perf_sample_allowed_ns __read_mostly =
+pub static mut : int sysctl_perf_event_sample_rate = 0;
+pub static mut : int sysctl_perf_cpu_time_max_percent = 0;
+pub static mut : int max_samples_per_tick = 0;
+pub static mut : int perf_sample_period_ns = 0;
+    static int perf_sample_allowed_ns  =
     DEFAULT_SAMPLE_PERIOD_NS * DEFAULT_CPU_TIME_MAX_PERCENT / 100;
 #[no_mangle]
 unsafe extern "C" fn update_perf_cpu_limits() {
-    static void update_perf_cpu_limits(void)
-    {
-    let mut tmp: u64 = perf_sample_period_ns;
+pub static mut tmp: u64 = 0;
     tmp *= sysctl_perf_cpu_time_max_percent;
     tmp = div_u64(tmp, 100);
-    if (!tmp)
+    if (!tmp) {
     tmp = 1;
+    }
     WRITE_ONCE(perf_sample_allowed_ns, tmp);
     }
-    static bool perf_rotate_context(struct perf_cpu_pmu_context *cpc);
-    static int perf_event_max_sample_rate_handler(const struct ctl_table *table, int write,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
-    int ret;
-    let mut perf_cpu: c_int = sysctl_perf_cpu_time_max_percent;
+// forward_decl: perf_rotate_context;
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_max_sample_rate_handler(table: *mut ctl_table, write: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
+    let mut ret = 0;
+pub static mut perf_cpu: c_int = 0;
 //
 // If throttling is disabled don't allow the write:
 //
-    if (write && (perf_cpu == 100 || perf_cpu == 0))
+    if (write && (perf_cpu == 100 || perf_cpu == 0)) {
     return -EINVAL;
+    }
     ret = proc_dointvec_minmax(table, write, buffer, lenp, ppos);
-    if (ret || !write)
+    if (ret || !write) {
     return ret;
+    }
     max_samples_per_tick = DIV_ROUND_UP(sysctl_perf_event_sample_rate, HZ);
     perf_sample_period_ns = NSEC_PER_SEC / sysctl_perf_event_sample_rate;
     update_perf_cpu_limits();
     return 0;
     }
-    static int perf_cpu_time_max_percent_handler(const struct ctl_table *table, int write,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
-    let mut ret: c_int = proc_dointvec_minmax(table, write, buffer, lenp, ppos);
-    if (ret || !write)
+#[no_mangle]
+pub unsafe extern "C" fn perf_cpu_time_max_percent_handler(table: *mut ctl_table, write: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
+pub static mut ret: c_int = 0;
+    if (ret || !write) {
     return ret;
+    }
     if (sysctl_perf_cpu_time_max_percent == 100 ||
     sysctl_perf_cpu_time_max_percent == 0) {
-    printk(KERN_WARNING
-    "perf: Dynamic interrupt throttling disabled, can hang your system!\n");
+    printk("perf: Dynamic interrupt throttling disabled, can hang your system!\n");
     WRITE_ONCE(perf_sample_allowed_ns, 0);
     } else {
     update_perf_cpu_limits();
     }
     return 0;
     }
-    static const struct ctl_table events_core_sysctl_table[] = {
-//
-// User-space relies on this file as a feature check for
-// perf_events being enabled. It's an ABI, do not remove!
-//
-    {
-    .procname	= "perf_event_paranoid",
-    .data		= &sysctl_perf_event_paranoid,
-    .maxlen		= sizeof(sysctl_perf_event_paranoid),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec,
-    },
-    {
-    .procname	= "perf_event_mlock_kb",
-    .data		= &sysctl_perf_event_mlock,
-    .maxlen		= sizeof(sysctl_perf_event_mlock),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec,
-    },
-    {
-    .procname	= "perf_event_max_sample_rate",
-    .data		= &sysctl_perf_event_sample_rate,
-    .maxlen		= sizeof(sysctl_perf_event_sample_rate),
-    .mode		= 0644,
-    .proc_handler	= perf_event_max_sample_rate_handler,
-    .extra1		= SYSCTL_ONE,
-    },
-    {
-    .procname	= "perf_cpu_time_max_percent",
-    .data		= &sysctl_perf_cpu_time_max_percent,
-    .maxlen		= sizeof(sysctl_perf_cpu_time_max_percent),
-    .mode		= 0644,
-    .proc_handler	= perf_cpu_time_max_percent_handler,
-    .extra1		= SYSCTL_ZERO,
-    .extra2		= SYSCTL_ONE_HUNDRED,
-    },
-    };
+pub static mut ctl_table: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn init_events_core_sysctls() -> int __init {
-    static int __init init_events_core_sysctls(void)
-    {
+unsafe extern "C" fn init_events_core_sysctls() -> c_int {
     register_sysctl_init("kernel", events_core_sysctl_table);
     return 0;
     }
-    core_initcall(init_events_core_sysctls);
+    core_initcall!(init_events_core_sysctls);
 //
 // perf samples are done in some very critical code paths (NMIs).
 // If they take too much CPU time, the system can lock up and not
@@ -555,30 +740,26 @@ unsafe extern "C" fn init_events_core_sysctls() -> int __init {
 // we detect that events are taking too long.
 //
 pub const NR_ACCUMULATED_SAMPLES: c_int = 128;
-    static DEFINE_PER_CPU(u64, running_sample_length);
+pub static mut u64: usize = 0;
     static u64 __report_avg;
     static u64 __report_allowed;
 #[no_mangle]
 unsafe extern "C" fn perf_duration_warn(w: *mut irq_work) {
-    static void perf_duration_warn(struct irq_work *w)
-    {
-    printk_ratelimited(KERN_INFO
-    "perf: interrupt took too long (%lld > %lld), lowering "
+    printk_ratelimited("perf: interrupt took too long (%lld > %lld), lowering "
     "kernel.perf_event_max_sample_rate to %d\n",
     __report_avg, __report_allowed,
     sysctl_perf_event_sample_rate);
     }
-    static DEFINE_IRQ_WORK(perf_duration_work, perf_duration_warn);
+pub static mut perf_duration_work: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn perf_sample_event_took(sample_len_ns: u64) {
-    void perf_sample_event_took(u64 sample_len_ns)
-    {
-    let mut max_len: u64 = READ_ONCE(perf_sample_allowed_ns);
-    u64 running_len;
-    u64 avg_len;
-    u32 max;
-    if (max_len == 0)
+pub static mut max_len: u64 = 0;
+    let mut running_len = 0;
+    let mut avg_len = 0;
+    let mut max = 0;
+    if (max_len == 0) {
     return;
+    }
 // Decay the counter by 1 average sample.
     running_len = __this_cpu_read(running_sample_length);
     running_len -= running_len/NR_ACCUMULATED_SAMPLES;
@@ -590,8 +771,9 @@ pub unsafe extern "C" fn perf_sample_event_took(sample_len_ns: u64) {
 // from having to maintain a count.
 //
     avg_len = running_len/NR_ACCUMULATED_SAMPLES;
-    if (avg_len <= max_len)
+    if (avg_len <= max_len) {
     return;
+    }
     __report_avg = avg_len;
     __report_allowed = max_len;
 //
@@ -599,10 +781,12 @@ pub unsafe extern "C" fn perf_sample_event_took(sample_len_ns: u64) {
 //
     avg_len += avg_len / 4;
     max = (TICK_NSEC / 100) * sysctl_perf_cpu_time_max_percent;
-    if (avg_len < max)
+    if (avg_len < max) {
     max /= (u32)avg_len;
-    else
+    }
+    else {
     max = 1;
+    }
     WRITE_ONCE(perf_sample_allowed_ns, avg_len);
     WRITE_ONCE(max_samples_per_tick, max);
     sysctl_perf_event_sample_rate = max * HZ;
@@ -615,19 +799,15 @@ pub unsafe extern "C" fn perf_sample_event_took(sample_len_ns: u64) {
     }
     }
     static atomic64_t perf_event_id;
-    static void update_context_time(struct perf_event_context *ctx);
-    static u64 perf_event_time(struct perf_event *event);
+// forward_decl: update_context_time;
+// forward_decl: perf_event_time;
     void __weak perf_event_print_debug(void)	{ }
 #[no_mangle]
 pub unsafe extern "C" fn perf_clock() -> u64 {
-    static inline u64 perf_clock(void)
-    {
     return local_clock();
     }
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_clock(event: *mut perf_event) -> u64 {
-    static inline u64 perf_event_clock(struct perf_event *event)
-    {
     return event.clock();
     }
 //
@@ -651,109 +831,113 @@ pub unsafe extern "C" fn perf_event_clock(event: *mut perf_event) -> u64 {
 // update our timestamps.
 //
     static __always_inline enum perf_event_state
-    __perf_effective_state(struct perf_event *event)
+    __perf_effective_state(perf_event *event)
     {
-    struct perf_event *leader = event.group_leader;
-    if (leader.state <= PERF_EVENT_STATE_OFF)
+    let mut leader = event.group_leader;
+    if (leader.state <= PERF_EVENT_STATE_OFF) {
     return leader.state;
+    }
     return event.state;
     }
     static __always_inline void
-    __perf_update_times(struct perf_event *event, u64 now, u64 *enabled, u64 *running)
+    __perf_update_times(perf_event *event, u64 now, u64 *enabled, u64 *running)
     {
-    let mut state: enum perf_event_state = __perf_effective_state(event);
-    let mut delta: u64 = now - event.tstamp;
+pub static mut state: perf_event_state = 0;
+pub static mut delta: u64 = 0;
 // enabled = event->total_time_enabled;
-    if (state >= PERF_EVENT_STATE_INACTIVE)
+    if (state >= PERF_EVENT_STATE_INACTIVE) {
 // enabled += delta;
+    }
 // running = event->total_time_running;
-    if (state >= PERF_EVENT_STATE_ACTIVE)
+    if (state >= PERF_EVENT_STATE_ACTIVE) {
 // running += delta;
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_update_time(event: *mut perf_event) {
-    static void perf_event_update_time(struct perf_event *event)
-    {
-    let mut now: u64 = perf_event_time(event);
+pub static mut now: u64 = 0;
     __perf_update_times(event, now, &event.total_time_enabled,
     &event.total_time_running);
     event.tstamp = now;
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_update_sibling_time(leader: *mut perf_event) {
-    static void perf_event_update_sibling_time(struct perf_event *leader)
-    {
-    struct perf_event *sibling;
-    for_each_sibling_event(sibling, leader)
+pub static mut sibling: *mut c_void = core::ptr::null_mut();
+    for_each_sibling_event(sibling, leader) {
     perf_event_update_time(sibling);
     }
-    static void
-    perf_event_set_state(struct perf_event *event, enum perf_event_state state)
-    {
-    if (event.state == state)
+    }
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_set_state(event: *mut perf_event, state: perf_event_state) {
+    if (event.state == state) {
     return;
+    }
     perf_event_update_time(event);
 //
 // If a group leader gets enabled/disabled all its siblings
 // are affected too.
 //
-    if ((event.state < 0) ^ (state < 0))
+    if ((event.state < 0) ^ (state < 0)) {
     perf_event_update_sibling_time(event);
+    }
     WRITE_ONCE(event.state, state);
     }
 //
 // UP store-release, load-acquire
 //
 
-    do {									\
-    barrier();							\
-    WRITE_ONCE(*(ptr), (val));					\
+    do {									
+    barrier();							
+    WRITE_ONCE(*(ptr), (val));					
     } while (0)
 
-    ({									\
-    __unqual_scalar_typeof(*(ptr)) ___p = READ_ONCE(*(ptr));	\
-    barrier();							\
-    ___p;								\
+    ({									
+    __unqual_scalar_typeof(*(ptr)) ___p = READ_ONCE(*(ptr));	
+    barrier();							
+    ___p;								
     })
-    static bool perf_skip_pmu_ctx(struct perf_event_pmu_context *pmu_ctx,
-    enum event_type_t event_type)
-    {
-    if ((event_type & EVENT_CGROUP) && !pmu_ctx.nr_cgroups)
+#[no_mangle]
+pub unsafe extern "C" fn perf_skip_pmu_ctx(pmu_ctx: *mut perf_event_pmu_context, event_type: event_type_t) -> bool {
+    if ((event_type & EVENT_CGROUP) && !pmu_ctx.nr_cgroups) {
     return true;
+    }
     if ((event_type & EVENT_GUEST) &&
-    !(pmu_ctx.pmu.capabilities & PERF_PMU_CAP_MEDIATED_VPMU))
+    !(pmu_ctx.pmu.capabilities & PERF_PMU_CAP_MEDIATED_VPMU)) {
     return true;
+    }
     return false;
     }
 
-    list_for_each_entry(_epc, &((_ctx).pmu_ctx_list), pmu_ctx_entry) \
-    if (perf_skip_pmu_ctx(_epc, _event_type))		\
-    continue;					\
-    else if (_pmu && _epc.pmu != _pmu)			\
-    continue;					\
-    else
-    static void perf_ctx_disable(struct perf_event_context *ctx,
-    enum event_type_t event_type)
-    {
-    struct perf_event_pmu_context *pmu_ctx;
-    for_each_epc(pmu_ctx, ctx, core::ptr::null_mut(), event_type)
+    list_for_each_entry(_epc, &((_ctx).pmu_ctx_list), pmu_ctx_entry)  {
+    if (perf_skip_pmu_ctx(_epc, _event_type))		
+    continue;					
+    }
+    else if (_pmu && _epc.pmu != _pmu)			 {
+    continue;					
+    }
+    else {
+#[no_mangle]
+pub unsafe extern "C" fn perf_ctx_disable(ctx: *mut perf_event_context, event_type: event_type_t) {
+    }
+pub static mut pmu_ctx: *mut c_void = core::ptr::null_mut();
+    for_each_epc(pmu_ctx, ctx, core::ptr::null_mut(), event_type) {
     perf_pmu_disable(pmu_ctx.pmu);
     }
-    static void perf_ctx_enable(struct perf_event_context *ctx,
-    enum event_type_t event_type)
-    {
-    struct perf_event_pmu_context *pmu_ctx;
-    for_each_epc(pmu_ctx, ctx, core::ptr::null_mut(), event_type)
+    }
+#[no_mangle]
+pub unsafe extern "C" fn perf_ctx_enable(ctx: *mut perf_event_context, event_type: event_type_t) {
+pub static mut pmu_ctx: *mut c_void = core::ptr::null_mut();
+    for_each_epc(pmu_ctx, ctx, core::ptr::null_mut(), event_type) {
     perf_pmu_enable(pmu_ctx.pmu);
     }
-    static void ctx_sched_out(struct perf_event_context *ctx, struct pmu *pmu, enum event_type_t event_type);
-    static void ctx_sched_in(struct perf_event_context *ctx, struct pmu *pmu, enum event_type_t event_type);
+    }
+// forward_decl: ctx_sched_out;
+// forward_decl: ctx_sched_in;
 #[no_mangle]
 pub unsafe extern "C" fn update_perf_time_ctx(time: *mut perf_time_ctx, now: u64, adv: bool) {
-    static inline void update_perf_time_ctx(struct perf_time_ctx *time, u64 now, bool adv)
-    {
-    if (adv)
+    if (adv) {
     time.time += now - time.stamp;
+    }
     time.stamp = now;
 //
 // The above: time' = time + (now - timestamp), can be re-arranged
@@ -766,23 +950,21 @@ pub unsafe extern "C" fn update_perf_time_ctx(time: *mut perf_time_ctx, now: u64
 //
     WRITE_ONCE(time.offset, time.time - time.stamp);
     }
-    static_assert(offsetof(struct perf_event_context, timeguest) -
-    offsetof(struct perf_event_context, time) ==
-    sizeof(struct perf_time_ctx));
+    static_assert(offsetof(perf_event_context, timeguest) -
+    offsetof(perf_event_context, time) ==
+    sizeof!(perf_time_ctx));
 pub const T_TOTAL: c_int = 0;
 pub const T_GUEST: c_int = 1;
-    static inline u64 __perf_event_time_ctx(struct perf_event *event,
-    struct perf_time_ctx *times)
-    {
-    let mut time: u64 = times[T_TOTAL].time;
-    if (event.attr.exclude_guest)
+#[no_mangle]
+pub unsafe extern "C" fn __perf_event_time_ctx(event: *mut perf_event, times: *mut perf_time_ctx) -> u64 {
+pub static mut time: u64 = 0;
+    if (event.attr.exclude_guest) {
     time -= times[T_GUEST].time;
+    }
     return time;
     }
-    static inline u64 __perf_event_time_ctx_now(struct perf_event *event,
-    struct perf_time_ctx *times,
-    u64 now)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __perf_event_time_ctx_now(event: *mut perf_event, times: *mut perf_time_ctx, now: u64) -> u64 {
     if (is_guest_mediated_pmu_loaded() && event.attr.exclude_guest) {
 //
 // (now + times[total].offset) - (now + times[guest].offset) :=
@@ -793,16 +975,17 @@ pub const T_GUEST: c_int = 1;
     return now + READ_ONCE(times[T_TOTAL].offset);
     }
 
-    static inline bool
-    perf_cgroup_match(struct perf_event *event)
-    {
-    struct perf_cpu_context *cpuctx = this_cpu_ptr(&perf_cpu_context);
+#[no_mangle]
+pub unsafe extern "C" fn perf_cgroup_match(event: *mut perf_event) -> bool {
+    let mut cpuctx = this_cpu_ptr(&perf_cpu_context);
 // @event doesn't care about cgroup
-    if (!event.cgrp)
+    if (!event.cgrp) {
     return true;
+    }
 // wants specific cgroup scope but @cpuctx isn't associated with any
-    if (!cpuctx.cgrp)
+    if (!cpuctx.cgrp) {
     return false;
+    }
 //
 // Cgroup scoping is recursive.  An event enabled for a cgroup is
 // also enabled for all its descendant cgroups.  If @cpuctx's
@@ -814,105 +997,94 @@ pub const T_GUEST: c_int = 1;
     }
 #[no_mangle]
 pub unsafe extern "C" fn perf_detach_cgroup(event: *mut perf_event) {
-    static inline void perf_detach_cgroup(struct perf_event *event)
-    {
     css_put(&event.cgrp.css);
     event.cgrp = core::ptr::null_mut();
     }
 #[no_mangle]
 pub unsafe extern "C" fn is_cgroup_event(event: *mut perf_event) -> c_int {
-    static inline int is_cgroup_event(struct perf_event *event)
-    {
     return event.cgrp != core::ptr::null_mut();
     }
-    static_assert(offsetof(struct perf_cgroup_info, timeguest) -
-    offsetof(struct perf_cgroup_info, time) ==
-    sizeof(struct perf_time_ctx));
+    static_assert(offsetof(perf_cgroup_info, timeguest) -
+    offsetof(perf_cgroup_info, time) ==
+    sizeof!(perf_time_ctx));
 #[no_mangle]
 pub unsafe extern "C" fn perf_cgroup_event_time(event: *mut perf_event) -> u64 {
-    static inline u64 perf_cgroup_event_time(struct perf_event *event)
-    {
-    struct perf_cgroup_info *t;
+pub static mut t: *mut c_void = core::ptr::null_mut();
     t = per_cpu_ptr(event.cgrp.info, event.cpu);
     return __perf_event_time_ctx(event, &t.time);
     }
 #[no_mangle]
 pub unsafe extern "C" fn perf_cgroup_event_time_now(event: *mut perf_event, now: u64) -> u64 {
-    static inline u64 perf_cgroup_event_time_now(struct perf_event *event, u64 now)
-    {
-    struct perf_cgroup_info *t;
+pub static mut t: *mut c_void = core::ptr::null_mut();
     t = per_cpu_ptr(event.cgrp.info, event.cpu);
-    if (!__load_acquire(&t.active))
+    if (!__load_acquire(&t.active)) {
     return __perf_event_time_ctx(event, &t.time);
+    }
     return __perf_event_time_ctx_now(event, &t.time, now);
     }
 #[no_mangle]
 pub unsafe extern "C" fn __update_cgrp_guest_time(info: *mut perf_cgroup_info, now: u64, adv: bool) {
-    static inline void __update_cgrp_guest_time(struct perf_cgroup_info *info, u64 now, bool adv)
-    {
     update_perf_time_ctx(&info.timeguest, now, adv);
     }
 #[no_mangle]
 pub unsafe extern "C" fn update_cgrp_time(info: *mut perf_cgroup_info, now: u64) {
-    static inline void update_cgrp_time(struct perf_cgroup_info *info, u64 now)
-    {
     update_perf_time_ctx(&info.time, now, true);
-    if (is_guest_mediated_pmu_loaded())
+    if (is_guest_mediated_pmu_loaded()) {
     __update_cgrp_guest_time(info, now, true);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn update_cgrp_time_from_cpuctx(cpuctx: *mut perf_cpu_context, final: bool) {
-    static inline void update_cgrp_time_from_cpuctx(struct perf_cpu_context *cpuctx, bool final)
-    {
-    struct perf_cgroup *cgrp = cpuctx.cgrp;
-    struct cgroup_subsys_state *css;
-    struct perf_cgroup_info *info;
+    let mut cgrp = cpuctx.cgrp;
+pub static mut css: *mut c_void = core::ptr::null_mut();
+pub static mut info: *mut c_void = core::ptr::null_mut();
     if (cgrp) {
-    let mut now: u64 = perf_clock();
-    for (css = &cgrp.css; css; css = css.parent) {
-    cgrp = container_of(css, struct perf_cgroup, css);
+pub static mut now: u64 = 0;
+    while (css) {
+    cgrp = container_of!(css, perf_cgroup, css);
     info = this_cpu_ptr(cgrp.info);
     update_cgrp_time(info, now);
-    if (final)
+    if (final) {
     __store_release(&info.active, 0);
+    }
     }
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn update_cgrp_time_from_event(event: *mut perf_event) {
-    static inline void update_cgrp_time_from_event(struct perf_event *event)
-    {
-    struct perf_cgroup_info *info;
+pub static mut info: *mut c_void = core::ptr::null_mut();
 //
 // ensure we access cgroup data only when needed and
 // when we know the cgroup is pinned (css_get)
 //
-    if (!is_cgroup_event(event))
+    if (!is_cgroup_event(event)) {
     return;
+    }
     info = this_cpu_ptr(event.cgrp.info);
 //
 // Do not update time when cgroup is not active
 //
-    if (info.active)
+    if (info.active) {
     update_cgrp_time(info, perf_clock());
     }
-    static inline void
-    perf_cgroup_set_timestamp(struct perf_cpu_context *cpuctx, bool guest)
-    {
-    struct perf_event_context *ctx = &cpuctx.ctx;
-    struct perf_cgroup *cgrp = cpuctx.cgrp;
-    struct perf_cgroup_info *info;
-    struct cgroup_subsys_state *css;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn perf_cgroup_set_timestamp(cpuctx: *mut perf_cpu_context, guest: bool) {
+    let mut ctx = &cpuctx.ctx;
+    let mut cgrp = cpuctx.cgrp;
+pub static mut info: *mut c_void = core::ptr::null_mut();
+pub static mut css: *mut c_void = core::ptr::null_mut();
 //
 // ctx->lock held by caller
 // ensure we do not access cgroup data
 // unless we have the cgroup pinned (css_get)
 //
-    if (!cgrp)
+    if (!cgrp) {
     return;
-    WARN_ON_ONCE(!ctx.nr_cgroups);
-    for (css = &cgrp.css; css; css = css.parent) {
-    cgrp = container_of(css, struct perf_cgroup, css);
+    }
+    WARN_ON_ONCE!(!ctx.nr_cgroups);
+    while (css) {
+    cgrp = container_of!(css, perf_cgroup, css);
     info = this_cpu_ptr(cgrp.info);
     if (guest) {
     __update_cgrp_guest_time(info, ctx.time.stamp, false);
@@ -927,26 +1099,27 @@ pub unsafe extern "C" fn update_cgrp_time_from_event(event: *mut perf_event) {
 //
 #[no_mangle]
 unsafe extern "C" fn perf_cgroup_switch(task: *mut task_struct) {
-    static void perf_cgroup_switch(struct task_struct *task)
-    {
-    struct perf_cpu_context *cpuctx = this_cpu_ptr(&perf_cpu_context);
-    struct perf_cgroup *cgrp;
+    let mut cpuctx = this_cpu_ptr(&perf_cpu_context);
+pub static mut cgrp: *mut c_void = core::ptr::null_mut();
 //
 // cpuctx->cgrp is set when the first cgroup event enabled,
 // and is cleared when the last cgroup event disabled.
 //
-    if (READ_ONCE(cpuctx.cgrp) == core::ptr::null_mut())
+    if (READ_ONCE(cpuctx.cgrp) == core::ptr::null_mut()) {
     return;
+    }
     cgrp = perf_cgroup_from_task(task, core::ptr::null_mut());
-    if (READ_ONCE(cpuctx.cgrp) == cgrp)
+    if (READ_ONCE(cpuctx.cgrp) == cgrp) {
     return;
+    }
     guard(perf_ctx_lock)(cpuctx, cpuctx.task_ctx);
 //
 // Re-check, could've raced vs perf_remove_from_context().
 //
-    if (READ_ONCE(cpuctx.cgrp) == core::ptr::null_mut())
+    if (READ_ONCE(cpuctx.cgrp) == core::ptr::null_mut()) {
     return;
-    WARN_ON_ONCE(cpuctx.ctx.nr_cgroups == 0);
+    }
+    WARN_ON_ONCE!(cpuctx.ctx.nr_cgroups == 0);
     perf_ctx_disable(&cpuctx.ctx, EVENT_CGROUP);
     ctx_sched_out(&cpuctx.ctx, core::ptr::null_mut(), EVENT_ALL|EVENT_CGROUP);
 //
@@ -963,23 +1136,24 @@ unsafe extern "C" fn perf_cgroup_switch(task: *mut task_struct) {
     ctx_sched_in(&cpuctx.ctx, core::ptr::null_mut(), EVENT_ALL|EVENT_CGROUP);
     perf_ctx_enable(&cpuctx.ctx, EVENT_CGROUP);
     }
-    static int perf_cgroup_ensure_storage(struct perf_event *event,
-    struct cgroup_subsys_state *css)
-    {
-    struct perf_cpu_context *cpuctx;
-    struct perf_event **storage;
+#[no_mangle]
+pub unsafe extern "C" fn perf_cgroup_ensure_storage(event: *mut perf_event, css: *mut cgroup_subsys_state) -> c_int {
+pub static mut cpuctx: *mut c_void = core::ptr::null_mut();
+pub static mut storage: *mut c_void = core::ptr::null_mut();
     int cpu, heap_size, ret = 0;
 //
 // Allow storage to have sufficient space for an iterator for each
 // possibly nested cgroup plus an iterator for events with no cgroup.
 //
-    for (heap_size = 1; css; css = css.parent)
-    heap_size++;
+    for (heap_size = 1; css; css = css.parent) {
+    heap_size += 1;
+    }
     for_each_possible_cpu(cpu) {
     cpuctx = per_cpu_ptr(&perf_cpu_context, cpu);
-    if (heap_size <= cpuctx.heap_size)
+    if (heap_size <= cpuctx.heap_size) {
     continue;
-    storage = kmalloc_node(heap_size * sizeof(struct perf_event *),
+    }
+    storage = kmalloc_node(heap_size * sizeof!,
     GFP_KERNEL, cpu_to_node(cpu));
     if (!storage) {
     ret = -ENOMEM;
@@ -988,8 +1162,9 @@ unsafe extern "C" fn perf_cgroup_switch(task: *mut task_struct) {
     raw_spin_lock_irq(&cpuctx.ctx.lock);
     if (cpuctx.heap_size < heap_size) {
     swap(cpuctx.heap, storage);
-    if (storage == cpuctx.heap_default)
+    if (storage == cpuctx.heap_default) {
     storage = core::ptr::null_mut();
+    }
     cpuctx.heap_size = heap_size;
     }
     raw_spin_unlock_irq(&cpuctx.ctx.lock);
@@ -997,24 +1172,25 @@ unsafe extern "C" fn perf_cgroup_switch(task: *mut task_struct) {
     }
     return ret;
     }
-    static inline int perf_cgroup_connect(int fd, struct perf_event *event,
-    struct perf_event_attr *attr,
-    struct perf_event *group_leader)
-    {
-    struct perf_cgroup *cgrp;
-    struct cgroup_subsys_state *css;
+#[no_mangle]
+pub unsafe extern "C" fn perf_cgroup_connect(fd: c_int, event: *mut perf_event, attr: *mut perf_event_attr, group_leader: *mut perf_event) -> c_int {
+pub static mut cgrp: *mut c_void = core::ptr::null_mut();
+pub static mut css: *mut c_void = core::ptr::null_mut();
     CLASS(fd, f)(fd);
-    let mut ret: c_int = 0;
-    if (fd_empty(f))
+pub static mut ret: c_int = 0;
+    if (fd_empty(f)) {
     return -EBADF;
+    }
     css = css_tryget_online_from_dir(fd_file(f).f_path.dentry,
     &perf_event_cgrp_subsys);
-    if (IS_ERR(css))
+    if (IS_ERR(css)) {
     return PTR_ERR(css);
+    }
     ret = perf_cgroup_ensure_storage(event, css);
-    if (ret)
+    if (ret) {
     return ret;
-    cgrp = container_of(css, struct perf_cgroup, css);
+    }
+    cgrp = container_of!(css, perf_cgroup, css);
     event.cgrp = cgrp;
 //
 // all events in a group must monitor
@@ -1027,97 +1203,102 @@ unsafe extern "C" fn perf_cgroup_switch(task: *mut task_struct) {
     }
     return ret;
     }
-    static inline void
-    perf_cgroup_event_enable(struct perf_event *event, struct perf_event_context *ctx)
-    {
-    struct perf_cpu_context *cpuctx;
-    if (!is_cgroup_event(event))
+#[no_mangle]
+pub unsafe extern "C" fn perf_cgroup_event_enable(event: *mut perf_event, ctx: *mut perf_event_context) {
+pub static mut cpuctx: *mut c_void = core::ptr::null_mut();
+    if (!is_cgroup_event(event)) {
     return;
-    event.pmu_ctx.nr_cgroups++;
+    }
+    event.pmu_ctx.nr_cgroups += 1;
 //
 // Because cgroup events are always per-cpu events,
 // @ctx == &cpuctx->ctx.
 //
-    cpuctx = container_of(ctx, struct perf_cpu_context, ctx);
-    if (ctx.nr_cgroups++)
+    cpuctx = container_of!(ctx, perf_cpu_context, ctx);
+    if (ctx.nr_cgroups++) {
     return;
+    }
     cpuctx.cgrp = perf_cgroup_from_task(current, ctx);
     }
-    static inline void
-    perf_cgroup_event_disable(struct perf_event *event, struct perf_event_context *ctx)
-    {
-    struct perf_cpu_context *cpuctx;
-    if (!is_cgroup_event(event))
+#[no_mangle]
+pub unsafe extern "C" fn perf_cgroup_event_disable(event: *mut perf_event, ctx: *mut perf_event_context) {
+pub static mut cpuctx: *mut c_void = core::ptr::null_mut();
+    if (!is_cgroup_event(event)) {
     return;
-    event.pmu_ctx.nr_cgroups--;
+    }
+    event.pmu_ctx.nr_cgroups -= 1;
 //
 // Because cgroup events are always per-cpu events,
 // @ctx == &cpuctx->ctx.
 //
-    cpuctx = container_of(ctx, struct perf_cpu_context, ctx);
-    if (--ctx.nr_cgroups)
+    cpuctx = container_of!(ctx, perf_cpu_context, ctx);
+    if (--ctx.nr_cgroups) {
     return;
+    }
     cpuctx.cgrp = core::ptr::null_mut();
     }
 
-    static inline bool
-    perf_cgroup_match(struct perf_event *event)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: perf_cgroup_match
+pub unsafe extern "C" fn perf_cgroup_match_dup(event: *mut perf_event) -> bool {
     return true;
     }
 #[no_mangle]
-pub unsafe extern "C" fn perf_detach_cgroup(event: *mut perf_event) {
-    static inline void perf_detach_cgroup(struct perf_event *event)
-    {}
 #[no_mangle]
-pub unsafe extern "C" fn is_cgroup_event(event: *mut perf_event) -> c_int {
-    static inline int is_cgroup_event(struct perf_event *event)
-    {
+// duplicate fn: perf_detach_cgroup
+pub unsafe extern "C" fn perf_detach_cgroup_dup(event: *mut perf_event) {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: is_cgroup_event
+pub unsafe extern "C" fn is_cgroup_event_dup(event: *mut perf_event) -> c_int {
     return 0;
     }
 #[no_mangle]
-pub unsafe extern "C" fn update_cgrp_time_from_event(event: *mut perf_event) {
-    static inline void update_cgrp_time_from_event(struct perf_event *event)
-    {
+#[no_mangle]
+// duplicate fn: update_cgrp_time_from_event
+pub unsafe extern "C" fn update_cgrp_time_from_event_dup(event: *mut perf_event) {
     }
-    static inline void update_cgrp_time_from_cpuctx(struct perf_cpu_context *cpuctx,
-    bool final)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: update_cgrp_time_from_cpuctx
+pub unsafe extern "C" fn update_cgrp_time_from_cpuctx_dup(cpuctx: *mut perf_cpu_context, final: bool) {
     }
-    static inline int perf_cgroup_connect(pid_t pid, struct perf_event *event,
-    struct perf_event_attr *attr,
-    struct perf_event *group_leader)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: perf_cgroup_connect
+pub unsafe extern "C" fn perf_cgroup_connect_dup(pid: pid_t, event: *mut perf_event, attr: *mut perf_event_attr, group_leader: *mut perf_event) -> c_int {
     return -EINVAL;
     }
-    static inline void
-    perf_cgroup_set_timestamp(struct perf_cpu_context *cpuctx, bool guest)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: perf_cgroup_set_timestamp
+pub unsafe extern "C" fn perf_cgroup_set_timestamp_dup(cpuctx: *mut perf_cpu_context, guest: bool) {
     }
 #[no_mangle]
-pub unsafe extern "C" fn perf_cgroup_event_time(event: *mut perf_event) -> u64 {
-    static inline u64 perf_cgroup_event_time(struct perf_event *event)
-    {
+#[no_mangle]
+// duplicate fn: perf_cgroup_event_time
+pub unsafe extern "C" fn perf_cgroup_event_time_dup(event: *mut perf_event) -> u64 {
     return 0;
     }
 #[no_mangle]
-pub unsafe extern "C" fn perf_cgroup_event_time_now(event: *mut perf_event, now: u64) -> u64 {
-    static inline u64 perf_cgroup_event_time_now(struct perf_event *event, u64 now)
-    {
+#[no_mangle]
+// duplicate fn: perf_cgroup_event_time_now
+pub unsafe extern "C" fn perf_cgroup_event_time_now_dup(event: *mut perf_event, now: u64) -> u64 {
     return 0;
     }
-    static inline void
-    perf_cgroup_event_enable(struct perf_event *event, struct perf_event_context *ctx)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: perf_cgroup_event_enable
+pub unsafe extern "C" fn perf_cgroup_event_enable_dup(event: *mut perf_event, ctx: *mut perf_event_context) {
     }
-    static inline void
-    perf_cgroup_event_disable(struct perf_event *event, struct perf_event_context *ctx)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: perf_cgroup_event_disable
+pub unsafe extern "C" fn perf_cgroup_event_disable_dup(event: *mut perf_event, ctx: *mut perf_event_context) {
     }
 #[no_mangle]
 unsafe extern "C" fn perf_cgroup_switch(task: *mut task_struct) {
-    static void perf_cgroup_switch(struct task_struct *task)
-    {
     }
 
 //
@@ -1130,35 +1311,34 @@ unsafe extern "C" fn perf_cgroup_switch(task: *mut task_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn perf_mux_hrtimer_handler(hr: *mut hrtimer) -> enum hrtimer_restart {
-    static enum hrtimer_restart perf_mux_hrtimer_handler(struct hrtimer *hr)
-    {
-    struct perf_cpu_pmu_context *cpc;
-    bool rotations;
+pub static mut cpc: *mut c_void = core::ptr::null_mut();
+    let mut rotations = 0;
     lockdep_assert_irqs_disabled();
-    cpc = container_of(hr, struct perf_cpu_pmu_context, hrtimer);
+    cpc = container_of!(hr, perf_cpu_pmu_context, hrtimer);
     rotations = perf_rotate_context(cpc);
     raw_spin_lock(&cpc.hrtimer_lock);
-    if (rotations)
+    if (rotations) {
     hrtimer_forward_now(hr, cpc.hrtimer_interval);
-    else
+    }
+    else {
     cpc.hrtimer_active = 0;
+    }
     raw_spin_unlock(&cpc.hrtimer_lock);
     return rotations ? HRTIMER_RESTART : HRTIMER_NORESTART;
     }
 #[no_mangle]
 unsafe extern "C" fn __perf_mux_hrtimer_init(cpc: *mut perf_cpu_pmu_context, cpu: c_int) {
-    static void __perf_mux_hrtimer_init(struct perf_cpu_pmu_context *cpc, int cpu)
-    {
-    struct hrtimer *timer = &cpc.hrtimer;
-    struct pmu *pmu = cpc.epc.pmu;
-    u64 interval;
+    let mut timer = &cpc.hrtimer;
+    let mut pmu = cpc.epc.pmu;
+    let mut interval = 0;
 //
 // check default is sane, if not set then force to
 // default interval (1/tick)
 //
     interval = pmu.hrtimer_interval_ms;
-    if (interval < 1)
+    if (interval < 1) {
     interval = pmu.hrtimer_interval_ms = PERF_CPU_HRTIMER;
+    }
     cpc.hrtimer_interval = ns_to_ktime(NSEC_PER_MSEC * interval);
     raw_spin_lock_init(&cpc.hrtimer_lock);
     hrtimer_setup(timer, perf_mux_hrtimer_handler, CLOCK_MONOTONIC,
@@ -1166,10 +1346,8 @@ unsafe extern "C" fn __perf_mux_hrtimer_init(cpc: *mut perf_cpu_pmu_context, cpu
     }
 #[no_mangle]
 unsafe extern "C" fn perf_mux_hrtimer_restart(cpc: *mut perf_cpu_pmu_context) -> c_int {
-    static int perf_mux_hrtimer_restart(struct perf_cpu_pmu_context *cpc)
-    {
-    struct hrtimer *timer = &cpc.hrtimer;
-    unsigned long flags;
+    let mut timer = &cpc.hrtimer;
+    let mut flags = 0;
     raw_spin_lock_irqsave(&cpc.hrtimer_lock, flags);
     if (!cpc.hrtimer_active) {
     cpc.hrtimer_active = 1;
@@ -1181,72 +1359,62 @@ unsafe extern "C" fn perf_mux_hrtimer_restart(cpc: *mut perf_cpu_pmu_context) ->
     }
 #[no_mangle]
 unsafe extern "C" fn perf_mux_hrtimer_restart_ipi(arg: *mut c_void) -> c_int {
-    static int perf_mux_hrtimer_restart_ipi(void *arg)
-    {
     return perf_mux_hrtimer_restart(arg);
     }
-    static __always_inline struct perf_cpu_pmu_context *this_cpc(struct pmu *pmu)
+    static __always_inline struct perf_cpu_pmu_context *this_cpc(pmu *pmu)
     {
     return *this_cpu_ptr(pmu.cpu_pmu_context);
     }
 #[no_mangle]
 pub unsafe extern "C" fn perf_pmu_disable(pmu: *mut pmu) {
-    void perf_pmu_disable(struct pmu *pmu)
-    {
-    int *count = &this_cpc(pmu).pmu_disable_count;
-    if (!(*count)++)
+    let mut count = &this_cpc(pmu).pmu_disable_count;
+    if (!(*count)++) {
     pmu.pmu_disable(pmu);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn perf_pmu_enable(pmu: *mut pmu) {
-    void perf_pmu_enable(struct pmu *pmu)
-    {
-    int *count = &this_cpc(pmu).pmu_disable_count;
-    if (!--(*count))
+    let mut count = &this_cpc(pmu).pmu_disable_count;
+    if (!--(*count)) {
     pmu.pmu_enable(pmu);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn perf_assert_pmu_disabled(pmu: *mut pmu) {
-    static void perf_assert_pmu_disabled(struct pmu *pmu)
-    {
-    int *count = &this_cpc(pmu).pmu_disable_count;
-    WARN_ON_ONCE(*count == 0);
+    let mut count = &this_cpc(pmu).pmu_disable_count;
+    WARN_ON_ONCE!(*count == 0);
     }
 #[no_mangle]
 pub unsafe extern "C" fn perf_pmu_read(event: *mut perf_event) {
-    static inline void perf_pmu_read(struct perf_event *event)
-    {
-    if (event.state == PERF_EVENT_STATE_ACTIVE)
+    if (event.state == PERF_EVENT_STATE_ACTIVE) {
     event.pmu.read(event);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn get_ctx(ctx: *mut perf_event_context) {
-    static void get_ctx(struct perf_event_context *ctx)
-    {
     refcount_inc(&ctx.refcount);
     }
 #[no_mangle]
 unsafe extern "C" fn free_ctx(head: *mut rcu_head) {
-    static void free_ctx(struct rcu_head *head)
-    {
-    struct perf_event_context *ctx;
-    ctx = container_of(head, struct perf_event_context, rcu_head);
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+    ctx = container_of!(head, perf_event_context, rcu_head);
     kfree(ctx);
     }
 #[no_mangle]
 unsafe extern "C" fn put_ctx(ctx: *mut perf_event_context) {
-    static void put_ctx(struct perf_event_context *ctx)
-    {
     if (refcount_dec_and_test(&ctx.refcount)) {
-    if (ctx.parent_ctx)
+    if (ctx.parent_ctx) {
     put_ctx(ctx.parent_ctx);
-    if (ctx.task && ctx.task != TASK_TOMBSTONE)
+    }
+    if (ctx.task && ctx.task != TASK_TOMBSTONE) {
     put_task_struct(ctx.task);
+    }
     call_rcu(&ctx.rcu_head, free_ctx);
     } else {
     smp_mb__after_atomic(); /* pairs with wait_var_event() */
-    if (ctx.task == TASK_TOMBSTONE)
+    if (ctx.task == TASK_TOMBSTONE) {
     wake_up_var(&ctx.refcount);
+    }
     }
     }
 //
@@ -1316,34 +1484,31 @@ unsafe extern "C" fn put_ctx(ctx: *mut perf_event_context) {
 // pmus_lock
 // cpuctx->mutex / perf_event_context::mutex
 //
-    static struct perf_event_context *
-    perf_event_ctx_lock_nested(struct perf_event *event, int nesting)
-    {
-    struct perf_event_context *ctx;
-    again:
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_ctx_lock_nested(event: *mut perf_event, nesting: c_int) -> *mut c_void {
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+// label;
     rcu_read_lock();
     ctx = READ_ONCE(event.ctx);
     if (!refcount_inc_not_zero(&ctx.refcount)) {
     rcu_read_unlock();
-    goto again;
+// goto;
     }
     rcu_read_unlock();
     mutex_lock_nested(&ctx.mutex, nesting);
     if (event.ctx != ctx) {
     mutex_unlock(&ctx.mutex);
     put_ctx(ctx);
-    goto again;
+// goto;
     }
     return ctx;
     }
-    static inline struct perf_event_context *
-    perf_event_ctx_lock(struct perf_event *event)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_ctx_lock(event: *mut perf_event) -> *mut c_void {
     return perf_event_ctx_lock_nested(event, 0);
     }
-    static void perf_event_ctx_unlock(struct perf_event *event,
-    struct perf_event_context *ctx)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_ctx_unlock(event: *mut perf_event, ctx: *mut perf_event_context) {
     mutex_unlock(&ctx.mutex);
     put_ctx(ctx);
     }
@@ -1353,40 +1518,38 @@ unsafe extern "C" fn put_ctx(ctx: *mut perf_event_context) {
 // calling scheduler related locks and ctx->lock nests inside those.
 //
     static __must_check struct perf_event_context *
-    unclone_ctx(struct perf_event_context *ctx)
+    unclone_ctx(perf_event_context *ctx)
     {
-    struct perf_event_context *parent_ctx = ctx.parent_ctx;
+    let mut parent_ctx = ctx.parent_ctx;
     lockdep_assert_held(&ctx.lock);
-    if (parent_ctx)
+    if (parent_ctx) {
     ctx.parent_ctx = core::ptr::null_mut();
-    ctx.generation++;
+    }
+    ctx.generation += 1;
     return parent_ctx;
     }
-    static u32 perf_event_pid_type(struct perf_event *event, struct task_struct *p,
-    enum pid_type type)
-    {
-    u32 nr;
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_pid_type(event: *mut perf_event, p: *mut task_struct, type: pid_type) -> u32 {
+    let mut nr = 0;
 //
 // only top level events have the pid namespace they were created in
 //
-    if (event.parent)
+    if (event.parent) {
     event = event.parent;
+    }
     nr = __task_pid_nr_ns(p, type, event.ns);
 // avoid -1 if it is idle thread or runs in another ns
-    if (!nr && !pid_alive(p))
+    if (!nr && !pid_alive(p)) {
     nr = -1;
+    }
     return nr;
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_pid(event: *mut perf_event, p: *mut task_struct) -> u32 {
-    static u32 perf_event_pid(struct perf_event *event, struct task_struct *p)
-    {
     return perf_event_pid_type(event, p, PIDTYPE_TGID);
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_tid(event: *mut perf_event, p: *mut task_struct) -> u32 {
-    static u32 perf_event_tid(struct perf_event *event, struct task_struct *p)
-    {
     return perf_event_pid_type(event, p, PIDTYPE_PID);
     }
 //
@@ -1395,11 +1558,10 @@ unsafe extern "C" fn perf_event_tid(event: *mut perf_event, p: *mut task_struct)
 //
 #[no_mangle]
 unsafe extern "C" fn primary_event_id(event: *mut perf_event) -> u64 {
-    static u64 primary_event_id(struct perf_event *event)
-    {
-    let mut id: u64 = event.id;
-    if (event.parent)
+pub static mut id: u64 = 0;
+    if (event.parent) {
     id = event.parent.id;
+    }
     return id;
     }
 //
@@ -1408,11 +1570,10 @@ unsafe extern "C" fn primary_event_id(event: *mut perf_event) -> u64 {
 // This has to cope with the fact that until it is locked,
 // the context could get moved to another task.
 //
-    static struct perf_event_context *
-    perf_lock_task_context(struct task_struct *task, unsigned long *flags)
-    {
-    struct perf_event_context *ctx;
-    retry:
+#[no_mangle]
+pub unsafe extern "C" fn perf_lock_task_context(task: *mut task_struct, flags: *mut c_ulong) -> *mut c_void {
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+// label;
 //
 // One of the few rules of preemptible RCU is that one cannot do
 // rcu_read_unlock() while holding a scheduler (or nested) lock when
@@ -1441,19 +1602,20 @@ unsafe extern "C" fn primary_event_id(event: *mut perf_event) -> u64 {
     raw_spin_unlock(&ctx.lock);
     rcu_read_unlock();
     local_irq_restore(*flags);
-    goto retry;
+// goto;
     }
     if (ctx.task == TASK_TOMBSTONE ||
     !refcount_inc_not_zero(&ctx.refcount)) {
     raw_spin_unlock(&ctx.lock);
     ctx = core::ptr::null_mut();
     } else {
-    WARN_ON_ONCE(ctx.task != task);
+    WARN_ON_ONCE!(ctx.task != task);
     }
     }
     rcu_read_unlock();
-    if (!ctx)
+    if (!ctx) {
     local_irq_restore(*flags);
+    }
     return ctx;
     }
 //
@@ -1461,11 +1623,10 @@ unsafe extern "C" fn primary_event_id(event: *mut perf_event) -> u64 {
 // can't get swapped to another task.  This also increments its
 // reference count so that the context can't get freed.
 //
-    static struct perf_event_context *
-    perf_pin_task_context(struct task_struct *task)
-    {
-    struct perf_event_context *ctx;
-    unsigned long flags;
+#[no_mangle]
+pub unsafe extern "C" fn perf_pin_task_context(task: *mut task_struct) -> *mut c_void {
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
     ctx = perf_lock_task_context(task, &flags);
     if (ctx) {
     ++ctx.pin_count;
@@ -1475,9 +1636,7 @@ unsafe extern "C" fn primary_event_id(event: *mut perf_event) -> u64 {
     }
 #[no_mangle]
 unsafe extern "C" fn perf_unpin_context(ctx: *mut perf_event_context) {
-    static void perf_unpin_context(struct perf_event_context *ctx)
-    {
-    unsigned long flags;
+    let mut flags = 0;
     raw_spin_lock_irqsave(&ctx.lock, flags);
     --ctx.pin_count;
     raw_spin_unlock_irqrestore(&ctx.lock, flags);
@@ -1487,67 +1646,63 @@ unsafe extern "C" fn perf_unpin_context(ctx: *mut perf_event_context) {
 //
 #[no_mangle]
 unsafe extern "C" fn __update_context_time(ctx: *mut perf_event_context, adv: bool) {
-    static void __update_context_time(struct perf_event_context *ctx, bool adv)
-    {
     lockdep_assert_held(&ctx.lock);
     update_perf_time_ctx(&ctx.time, perf_clock(), adv);
     }
 #[no_mangle]
 unsafe extern "C" fn __update_context_guest_time(ctx: *mut perf_event_context, adv: bool) {
-    static void __update_context_guest_time(struct perf_event_context *ctx, bool adv)
-    {
     lockdep_assert_held(&ctx.lock);
 // must be called after __update_context_time();
     update_perf_time_ctx(&ctx.timeguest, ctx.time.stamp, adv);
     }
 #[no_mangle]
 unsafe extern "C" fn update_context_time(ctx: *mut perf_event_context) {
-    static void update_context_time(struct perf_event_context *ctx)
-    {
     __update_context_time(ctx, true);
-    if (is_guest_mediated_pmu_loaded())
+    if (is_guest_mediated_pmu_loaded()) {
     __update_context_guest_time(ctx, true);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_time(event: *mut perf_event) -> u64 {
-    static u64 perf_event_time(struct perf_event *event)
-    {
-    struct perf_event_context *ctx = event.ctx;
-    if (unlikely(!ctx))
+    let mut ctx = event.ctx;
+    if (unlikely(!ctx)) {
     return 0;
-    if (is_cgroup_event(event))
+    }
+    if (is_cgroup_event(event)) {
     return perf_cgroup_event_time(event);
+    }
     return __perf_event_time_ctx(event, &ctx.time);
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_time_now(event: *mut perf_event, now: u64) -> u64 {
-    static u64 perf_event_time_now(struct perf_event *event, u64 now)
-    {
-    struct perf_event_context *ctx = event.ctx;
-    if (unlikely(!ctx))
+    let mut ctx = event.ctx;
+    if (unlikely(!ctx)) {
     return 0;
-    if (is_cgroup_event(event))
+    }
+    if (is_cgroup_event(event)) {
     return perf_cgroup_event_time_now(event, now);
-    if (!(__load_acquire(&ctx.is_active) & EVENT_TIME))
+    }
+    if (!(__load_acquire(&ctx.is_active) & EVENT_TIME)) {
     return __perf_event_time_ctx(event, &ctx.time);
+    }
     return __perf_event_time_ctx_now(event, &ctx.time, now);
     }
 #[no_mangle]
 unsafe extern "C" fn get_event_type(event: *mut perf_event) -> enum event_type_t {
-    static enum event_type_t get_event_type(struct perf_event *event)
-    {
-    struct perf_event_context *ctx = event.ctx;
+    let mut ctx = event.ctx;
     enum event_type_t event_type;
     lockdep_assert_held(&ctx.lock);
 //
 // It's 'group type', really, because if our group leader is
 // pinned, so are we.
 //
-    if (event.group_leader != event)
+    if (event.group_leader != event) {
     event = event.group_leader;
+    }
     event_type = event.attr.pinned ? EVENT_PINNED : EVENT_FLEXIBLE;
-    if (!ctx.task)
+    if (!ctx.task) {
     event_type |= EVENT_CPU;
+    }
     return event_type;
     }
 //
@@ -1555,8 +1710,6 @@ unsafe extern "C" fn get_event_type(event: *mut perf_event) -> enum event_type_t
 //
 #[no_mangle]
 unsafe extern "C" fn init_event_group(event: *mut perf_event) {
-    static void init_event_group(struct perf_event *event)
-    {
     RB_CLEAR_NODE(&event.group_node);
     event.group_index = 0;
     }
@@ -1564,30 +1717,30 @@ unsafe extern "C" fn init_event_group(event: *mut perf_event) {
 // Extract pinned or flexible groups from the context
 // based on event attrs bits.
 //
-    static struct perf_event_groups *
-    get_event_groups(struct perf_event *event, struct perf_event_context *ctx)
-    {
-    if (event.attr.pinned)
+#[no_mangle]
+pub unsafe extern "C" fn get_event_groups(event: *mut perf_event, ctx: *mut perf_event_context) -> *mut c_void {
+    if (event.attr.pinned) {
     return &ctx.pinned_groups;
-    else
+    }
+    else {
     return &ctx.flexible_groups;
+    }
     }
 //
 // Helper function to initializes perf_event_group trees.
 //
 #[no_mangle]
 unsafe extern "C" fn perf_event_groups_init(groups: *mut perf_event_groups) {
-    static void perf_event_groups_init(struct perf_event_groups *groups)
-    {
     groups.tree = RB_ROOT;
     groups.index = 0;
     }
-    static inline struct cgroup *event_cgroup(const struct perf_event *event)
-    {
-    struct cgroup *cgroup = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn event_cgroup(event: *mut perf_event) -> *mut c_void {
+    let mut cgroup = core::ptr::null_mut();
 
-    if (event.cgrp)
+    if (event.cgrp) {
     cgroup = event.cgrp.css.cgroup;
+    }
 
     return cgroup;
     }
@@ -1602,19 +1755,23 @@ unsafe extern "C" fn perf_event_groups_init(groups: *mut perf_event_groups) {
     const struct cgroup *left_cgroup, const u64 left_group_index,
     const struct perf_event *right)
     {
-    if (left_cpu < right.cpu)
+    if (left_cpu < right.cpu) {
     return -1;
-    if (left_cpu > right.cpu)
+    }
+    if (left_cpu > right.cpu) {
     return 1;
+    }
     if (left_pmu) {
-    if (left_pmu < right.pmu_ctx.pmu)
+    if (left_pmu < right.pmu_ctx.pmu) {
     return -1;
-    if (left_pmu > right.pmu_ctx.pmu)
+    }
+    if (left_pmu > right.pmu_ctx.pmu) {
     return 1;
+    }
     }
 
     {
-    const struct cgroup *right_cgroup = event_cgroup(right);
+    let mut right_cgroup = event_cgroup(right);
     if (left_cgroup != right_cgroup) {
     if (!left_cgroup) {
 //
@@ -1631,25 +1788,26 @@ unsafe extern "C" fn perf_event_groups_init(groups: *mut perf_event_groups) {
     return 1;
     }
 // Two dissimilar cgroups, order by id.
-    if (cgroup_id(left_cgroup) < cgroup_id(right_cgroup))
+    if (cgroup_id(left_cgroup) < cgroup_id(right_cgroup)) {
     return -1;
+    }
     return 1;
     }
     }
 
-    if (left_group_index < right.group_index)
+    if (left_group_index < right.group_index) {
     return -1;
-    if (left_group_index > right.group_index)
+    }
+    if (left_group_index > right.group_index) {
     return 1;
+    }
     return 0;
     }
 
-    rb_entry((node), struct perf_event, group_node)
+    rb_entry((node), perf_event, group_node)
 #[no_mangle]
 pub unsafe extern "C" fn __group_less(a: *mut rb_node, b: *const rb_node) -> bool {
-    static inline bool __group_less(struct rb_node *a, const struct rb_node *b)
-    {
-    struct perf_event *e = __node_2_pe(a);
+    let mut e = __node_2_pe(a);
     return perf_event_groups_cmp(e.cpu, e.pmu_ctx.pmu, event_cgroup(e),
     e.group_index, __node_2_pe(b)) < 0;
     }
@@ -1663,18 +1821,15 @@ pub struct __group_key {
 
 #[no_mangle]
 pub unsafe extern "C" fn __group_cmp(key: *const c_void, node: *const rb_node) -> c_int {
-    static inline int __group_cmp(const void *key, const struct rb_node *node)
-    {
-    const struct __group_key *a = key;
-    const struct perf_event *b = __node_2_pe(node);
+    let mut a = key;
+    let mut b = __node_2_pe(node);
 // partial/subtree match: @cpu, @pmu, @cgroup; ignore: @group_index
     return perf_event_groups_cmp(a.cpu, a.pmu, a.cgroup, b.group_index, b);
     }
-    static inline int
-    __group_cmp_ignore_cgroup(const void *key, const struct rb_node *node)
-    {
-    const struct __group_key *a = key;
-    const struct perf_event *b = __node_2_pe(node);
+#[no_mangle]
+pub unsafe extern "C" fn __group_cmp_ignore_cgroup(key: *mut c_void, node: *mut rb_node) -> c_int {
+    let mut a = key;
+    let mut b = __node_2_pe(node);
 // partial/subtree match: @cpu, @pmu, ignore: @cgroup, @group_index
     return perf_event_groups_cmp(a.cpu, a.pmu, event_cgroup(b),
     b.group_index, b);
@@ -1684,31 +1839,26 @@ pub unsafe extern "C" fn __group_cmp(key: *const c_void, node: *const rb_node) -
 // {@event->cpu, @event->pmu_ctx->pmu, event_cgroup(@event), ++@groups->index}
 // as key. This places it last inside the {cpu,pmu,cgroup} subtree.
 //
-    static void
-    perf_event_groups_insert(struct perf_event_groups *groups,
-    struct perf_event *event)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_groups_insert(groups: *mut perf_event_groups, event: *mut perf_event) {
     event.group_index = ++groups.index;
     rb_add(&event.group_node, &groups.tree, __group_less);
     }
 //
 // Helper function to insert event into the pinned or flexible groups.
 //
-    static void
-    add_event_to_groups(struct perf_event *event, struct perf_event_context *ctx)
-    {
-    struct perf_event_groups *groups;
+#[no_mangle]
+pub unsafe extern "C" fn add_event_to_groups(event: *mut perf_event, ctx: *mut perf_event_context) {
+pub static mut groups: *mut c_void = core::ptr::null_mut();
     groups = get_event_groups(event, ctx);
     perf_event_groups_insert(groups, event);
     }
 //
 // Delete a group from a tree.
 //
-    static void
-    perf_event_groups_delete(struct perf_event_groups *groups,
-    struct perf_event *event)
-    {
-    WARN_ON_ONCE(RB_EMPTY_NODE(&event.group_node) ||
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_groups_delete(groups: *mut perf_event_groups, event: *mut perf_event) {
+    WARN_ON_ONCE!(RB_EMPTY_NODE(&event.group_node) ||
     RB_EMPTY_ROOT(&groups.tree));
     rb_erase(&event.group_node, &groups.tree);
     init_event_group(event);
@@ -1716,74 +1866,62 @@ pub unsafe extern "C" fn __group_cmp(key: *const c_void, node: *const rb_node) -
 //
 // Helper function to delete event from its groups.
 //
-    static void
-    del_event_from_groups(struct perf_event *event, struct perf_event_context *ctx)
-    {
-    struct perf_event_groups *groups;
+#[no_mangle]
+pub unsafe extern "C" fn del_event_from_groups(event: *mut perf_event, ctx: *mut perf_event_context) {
+pub static mut groups: *mut c_void = core::ptr::null_mut();
     groups = get_event_groups(event, ctx);
     perf_event_groups_delete(groups, event);
     }
 //
 // Get the leftmost event in the {cpu,pmu,cgroup} subtree.
 //
-    static struct perf_event *
-    perf_event_groups_first(struct perf_event_groups *groups, int cpu,
-    struct pmu *pmu, struct cgroup *cgrp)
-    {
-    struct __group_key key = {
-    .cpu = cpu,
-    .pmu = pmu,
-    .cgroup = cgrp,
-    };
-    struct rb_node *node;
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_groups_first(groups: *mut perf_event_groups, cpu: c_int, pmu: *mut pmu, cgrp: *mut cgroup) -> *mut c_void {
+pub static mut __group_key: usize = 0;
+pub static mut node: *mut c_void = core::ptr::null_mut();
     node = rb_find_first(&key, &groups.tree, __group_cmp);
-    if (node)
+    if (node) {
     return __node_2_pe(node);
+    }
     return core::ptr::null_mut();
     }
-    static struct perf_event *
-    perf_event_groups_next(struct perf_event *event, struct pmu *pmu)
-    {
-    struct __group_key key = {
-    .cpu = event.cpu,
-    .pmu = pmu,
-    .cgroup = event_cgroup(event),
-    };
-    struct rb_node *next;
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_groups_next(event: *mut perf_event, pmu: *mut pmu) -> *mut c_void {
+pub static mut __group_key: usize = 0;
+pub static mut next: *mut c_void = core::ptr::null_mut();
     next = rb_next_match(&key, &event.group_node, __group_cmp);
-    if (next)
+    if (next) {
     return __node_2_pe(next);
+    }
     return core::ptr::null_mut();
     }
 
-    for (event = perf_event_groups_first(groups, cpu, pmu, core::ptr::null_mut());	\
-    event; event = perf_event_groups_next(event, pmu))
+    for (event = perf_event_groups_first(groups, cpu, pmu, core::ptr::null_mut());	
+    event; event = perf_event_groups_next(event, pmu)) {
 //
 // Iterate through the whole groups tree.
 //
 
-    for (event = rb_entry_safe(rb_first(&((groups).tree)),		\
-    typeof(*event), group_node); event;	\
-    event = rb_entry_safe(rb_next(&event.group_node),	\
+    for (event = rb_entry_safe(rb_first(&((groups).tree)),		
+    typeof(*event), group_node); event;	
+    }
+    event = rb_entry_safe(rb_next(&event.group_node),	
     typeof(*event), group_node))
 //
 // Does the event attribute request inherit with PERF_SAMPLE_READ
 //
 #[no_mangle]
 pub unsafe extern "C" fn has_inherit_and_sample_read(attr: *mut perf_event_attr) -> bool {
-    static inline bool has_inherit_and_sample_read(struct perf_event_attr *attr)
-    {
     return attr.inherit && (attr.sample_type & PERF_SAMPLE_READ);
     }
 //
 // Add an event from the lists for its context.
 // Must be called with ctx->mutex and ctx->lock held.
 //
-    static void
-    list_add_event(struct perf_event *event, struct perf_event_context *ctx)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn list_add_event(event: *mut perf_event, ctx: *mut perf_event_context) {
     lockdep_assert_held(&ctx.lock);
-    WARN_ON_ONCE(event.attach_state & PERF_ATTACH_CONTEXT);
+    WARN_ON_ONCE!(event.attach_state & PERF_ATTACH_CONTEXT);
     event.attach_state |= PERF_ATTACH_CONTEXT;
     event.tstamp = perf_event_time(event);
 //
@@ -1796,46 +1934,50 @@ pub unsafe extern "C" fn has_inherit_and_sample_read(attr: *mut perf_event_attr)
     add_event_to_groups(event, ctx);
     }
     list_add_rcu(&event.event_entry, &ctx.event_list);
-    ctx.nr_events++;
-    if (event.hw.flags & PERF_EVENT_FLAG_USER_READ_CNT)
-    ctx.nr_user++;
-    if (event.attr.inherit_stat)
-    ctx.nr_stat++;
-    if (has_inherit_and_sample_read(&event.attr))
+    ctx.nr_events += 1;
+    if (event.hw.flags & PERF_EVENT_FLAG_USER_READ_CNT) {
+    ctx.nr_user += 1;
+    }
+    if (event.attr.inherit_stat) {
+    ctx.nr_stat += 1;
+    }
+    if (has_inherit_and_sample_read(&event.attr)) {
     local_inc(&ctx.nr_no_switch_fast);
-    if (event.state > PERF_EVENT_STATE_OFF)
+    }
+    if (event.state > PERF_EVENT_STATE_OFF) {
     perf_cgroup_event_enable(event, ctx);
-    ctx.generation++;
-    event.pmu_ctx.nr_events++;
+    }
+    ctx.generation += 1;
+    event.pmu_ctx.nr_events += 1;
     }
 //
 // Initialize event state based on the perf_event_attr::disabled.
 //
 #[no_mangle]
 pub unsafe extern "C" fn perf_event__state_init(event: *mut perf_event) {
-    static inline void perf_event__state_init(struct perf_event *event)
-    {
     event.state = event.attr.disabled ? PERF_EVENT_STATE_OFF :
     PERF_EVENT_STATE_INACTIVE;
     }
 #[no_mangle]
 unsafe extern "C" fn __perf_event_read_size(read_format: u64, nr_siblings: c_int) -> c_int {
-    static int __perf_event_read_size(u64 read_format, int nr_siblings)
-    {
-    int entry = sizeof(u64); /* value */
-    let mut size: c_int = 0;
-    let mut nr: c_int = 1;
-    if (read_format & PERF_FORMAT_TOTAL_TIME_ENABLED)
-    size += sizeof(u64);
-    if (read_format & PERF_FORMAT_TOTAL_TIME_RUNNING)
-    size += sizeof(u64);
-    if (read_format & PERF_FORMAT_ID)
-    entry += sizeof(u64);
-    if (read_format & PERF_FORMAT_LOST)
-    entry += sizeof(u64);
+    let mut entry = sizeof!(u64); /* value */
+pub static mut size: c_int = 0;
+pub static mut nr: c_int = 1;
+    if (read_format & PERF_FORMAT_TOTAL_TIME_ENABLED) {
+    size += sizeof!(u64);
+    }
+    if (read_format & PERF_FORMAT_TOTAL_TIME_RUNNING) {
+    size += sizeof!(u64);
+    }
+    if (read_format & PERF_FORMAT_ID) {
+    entry += sizeof!(u64);
+    }
+    if (read_format & PERF_FORMAT_LOST) {
+    entry += sizeof!(u64);
+    }
     if (read_format & PERF_FORMAT_GROUP) {
     nr += nr_siblings;
-    size += sizeof(u64);
+    size += sizeof!(u64);
     }
 //
 // Since perf_event_validate_size() limits this to 16k and inhibits
@@ -1845,32 +1987,41 @@ unsafe extern "C" fn __perf_event_read_size(read_format: u64, nr_siblings: c_int
     }
 #[no_mangle]
 unsafe extern "C" fn __perf_event_header_size(event: *mut perf_event, sample_type: u64) {
-    static void __perf_event_header_size(struct perf_event *event, u64 sample_type)
-    {
-    struct perf_sample_data *data;
-    let mut size: u16 = 0;
-    if (sample_type & PERF_SAMPLE_IP)
-    size += sizeof(data.ip);
-    if (sample_type & PERF_SAMPLE_ADDR)
-    size += sizeof(data.addr);
-    if (sample_type & PERF_SAMPLE_PERIOD)
-    size += sizeof(data.period);
-    if (sample_type & PERF_SAMPLE_WEIGHT_TYPE)
-    size += sizeof(data.weight.full);
-    if (sample_type & PERF_SAMPLE_READ)
+pub static mut data: *mut c_void = core::ptr::null_mut();
+pub static mut size: u16 = 0;
+    if (sample_type & PERF_SAMPLE_IP) {
+    size += sizeof!(data.ip);
+    }
+    if (sample_type & PERF_SAMPLE_ADDR) {
+    size += sizeof!(data.addr);
+    }
+    if (sample_type & PERF_SAMPLE_PERIOD) {
+    size += sizeof!(data.period);
+    }
+    if (sample_type & PERF_SAMPLE_WEIGHT_TYPE) {
+    size += sizeof!(data.weight.full);
+    }
+    if (sample_type & PERF_SAMPLE_READ) {
     size += event.read_size;
-    if (sample_type & PERF_SAMPLE_DATA_SRC)
-    size += sizeof(data.data_src.val);
-    if (sample_type & PERF_SAMPLE_TRANSACTION)
-    size += sizeof(data.txn);
-    if (sample_type & PERF_SAMPLE_PHYS_ADDR)
-    size += sizeof(data.phys_addr);
-    if (sample_type & PERF_SAMPLE_CGROUP)
-    size += sizeof(data.cgroup);
-    if (sample_type & PERF_SAMPLE_DATA_PAGE_SIZE)
-    size += sizeof(data.data_page_size);
-    if (sample_type & PERF_SAMPLE_CODE_PAGE_SIZE)
-    size += sizeof(data.code_page_size);
+    }
+    if (sample_type & PERF_SAMPLE_DATA_SRC) {
+    size += sizeof!(data.data_src.val);
+    }
+    if (sample_type & PERF_SAMPLE_TRANSACTION) {
+    size += sizeof!(data.txn);
+    }
+    if (sample_type & PERF_SAMPLE_PHYS_ADDR) {
+    size += sizeof!(data.phys_addr);
+    }
+    if (sample_type & PERF_SAMPLE_CGROUP) {
+    size += sizeof!(data.cgroup);
+    }
+    if (sample_type & PERF_SAMPLE_DATA_PAGE_SIZE) {
+    size += sizeof!(data.data_page_size);
+    }
+    if (sample_type & PERF_SAMPLE_CODE_PAGE_SIZE) {
+    size += sizeof!(data.code_page_size);
+    }
     event.header_size = size;
     }
 //
@@ -1879,8 +2030,6 @@ unsafe extern "C" fn __perf_event_header_size(event: *mut perf_event, sample_typ
 //
 #[no_mangle]
 unsafe extern "C" fn perf_event__header_size(event: *mut perf_event) {
-    static void perf_event__header_size(struct perf_event *event)
-    {
     event.read_size =
     __perf_event_read_size(event.attr.read_format,
     event.group_leader.nr_siblings);
@@ -1888,23 +2037,27 @@ unsafe extern "C" fn perf_event__header_size(event: *mut perf_event) {
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event__id_header_size(event: *mut perf_event) {
-    static void perf_event__id_header_size(struct perf_event *event)
-    {
-    struct perf_sample_data *data;
-    let mut sample_type: u64 = event.attr.sample_type;
-    let mut size: u16 = 0;
-    if (sample_type & PERF_SAMPLE_TID)
-    size += sizeof(data.tid_entry);
-    if (sample_type & PERF_SAMPLE_TIME)
-    size += sizeof(data.time);
-    if (sample_type & PERF_SAMPLE_IDENTIFIER)
-    size += sizeof(data.id);
-    if (sample_type & PERF_SAMPLE_ID)
-    size += sizeof(data.id);
-    if (sample_type & PERF_SAMPLE_STREAM_ID)
-    size += sizeof(data.stream_id);
-    if (sample_type & PERF_SAMPLE_CPU)
-    size += sizeof(data.cpu_entry);
+pub static mut data: *mut c_void = core::ptr::null_mut();
+pub static mut sample_type: u64 = 0;
+pub static mut size: u16 = 0;
+    if (sample_type & PERF_SAMPLE_TID) {
+    size += sizeof!(data.tid_entry);
+    }
+    if (sample_type & PERF_SAMPLE_TIME) {
+    size += sizeof!(data.time);
+    }
+    if (sample_type & PERF_SAMPLE_IDENTIFIER) {
+    size += sizeof!(data.id);
+    }
+    if (sample_type & PERF_SAMPLE_ID) {
+    size += sizeof!(data.id);
+    }
+    if (sample_type & PERF_SAMPLE_STREAM_ID) {
+    size += sizeof!(data.stream_id);
+    }
+    if (sample_type & PERF_SAMPLE_CPU) {
+    size += sizeof!(data.cpu_entry);
+    }
     event.id_header_size = size;
     }
 //
@@ -1920,15 +2073,15 @@ unsafe extern "C" fn perf_event__id_header_size(event: *mut perf_event) {
 //
 #[no_mangle]
 unsafe extern "C" fn perf_event_validate_size(event: *mut perf_event) -> bool {
-    static bool perf_event_validate_size(struct perf_event *event)
-    {
     struct perf_event *sibling, *group_leader = event.group_leader;
     if (__perf_event_read_size(event.attr.read_format,
-    group_leader.nr_siblings + 1) > 16*1024)
+    group_leader.nr_siblings + 1) > 16*1024) {
     return false;
+    }
     if (__perf_event_read_size(group_leader.attr.read_format,
-    group_leader.nr_siblings + 1) > 16*1024)
+    group_leader.nr_siblings + 1) > 16*1024) {
     return false;
+    }
 //
 // When creating a new group leader, group_leader->ctx is initialized
 // after the size has been validated, but we cannot safely use
@@ -1936,86 +2089,90 @@ unsafe extern "C" fn perf_event_validate_size(event: *mut perf_event) -> bool {
 // leader cannot have any siblings yet, so we can safely skip checking
 // the non-existent siblings.
 //
-    if (event == group_leader)
+    if (event == group_leader) {
     return true;
+    }
     for_each_sibling_event(sibling, group_leader) {
     if (__perf_event_read_size(sibling.attr.read_format,
-    group_leader.nr_siblings + 1) > 16*1024)
+    group_leader.nr_siblings + 1) > 16*1024) {
     return false;
+    }
     }
     return true;
     }
 #[no_mangle]
 unsafe extern "C" fn perf_group_attach(event: *mut perf_event) {
-    static void perf_group_attach(struct perf_event *event)
-    {
-    struct perf_event *group_leader = event.group_leader, *pos;
+    let mut group_leader = event.group_leader, *pos;
     lockdep_assert_held(&event.ctx.lock);
 //
 // We can have double attach due to group movement (move_group) in
 // perf_event_open().
 //
-    if (event.attach_state & PERF_ATTACH_GROUP)
+    if (event.attach_state & PERF_ATTACH_GROUP) {
     return;
+    }
     event.attach_state |= PERF_ATTACH_GROUP;
-    if (group_leader == event)
+    if (group_leader == event) {
     return;
-    WARN_ON_ONCE(group_leader.ctx != event.ctx);
+    }
+    WARN_ON_ONCE!(group_leader.ctx != event.ctx);
     group_leader.group_caps &= event.event_caps;
     list_add_tail(&event.sibling_list, &group_leader.sibling_list);
-    group_leader.nr_siblings++;
-    group_leader.group_generation++;
+    group_leader.nr_siblings += 1;
+    group_leader.group_generation += 1;
     perf_event__header_size(group_leader);
-    for_each_sibling_event(pos, group_leader)
+    for_each_sibling_event(pos, group_leader) {
     perf_event__header_size(pos);
+    }
     }
 //
 // Remove an event from the lists for its context.
 // Must be called with ctx->mutex and ctx->lock held.
 //
-    static void
-    list_del_event(struct perf_event *event, struct perf_event_context *ctx)
-    {
-    WARN_ON_ONCE(event.ctx != ctx);
+#[no_mangle]
+pub unsafe extern "C" fn list_del_event(event: *mut perf_event, ctx: *mut perf_event_context) {
+    WARN_ON_ONCE!(event.ctx != ctx);
     lockdep_assert_held(&ctx.lock);
 //
 // We can have double detach due to exit/hot-unplug + close.
 //
-    if (!(event.attach_state & PERF_ATTACH_CONTEXT))
+    if (!(event.attach_state & PERF_ATTACH_CONTEXT)) {
     return;
-    event.attach_state &= ~PERF_ATTACH_CONTEXT;
-    ctx.nr_events--;
-    if (event.hw.flags & PERF_EVENT_FLAG_USER_READ_CNT)
-    ctx.nr_user--;
-    if (event.attr.inherit_stat)
-    ctx.nr_stat--;
-    if (has_inherit_and_sample_read(&event.attr))
-    local_dec(&ctx.nr_no_switch_fast);
-    list_del_rcu(&event.event_entry);
-    if (event.group_leader == event)
-    del_event_from_groups(event, ctx);
-    ctx.generation++;
-    event.pmu_ctx.nr_events--;
     }
-    static int
-    perf_aux_output_match(struct perf_event *event, struct perf_event *aux_event)
-    {
-    if (!has_aux(aux_event))
+    event.attach_state &= ~PERF_ATTACH_CONTEXT;
+    ctx.nr_events -= 1;
+    if (event.hw.flags & PERF_EVENT_FLAG_USER_READ_CNT) {
+    ctx.nr_user -= 1;
+    }
+    if (event.attr.inherit_stat) {
+    ctx.nr_stat -= 1;
+    }
+    if (has_inherit_and_sample_read(&event.attr)) {
+    local_dec(&ctx.nr_no_switch_fast);
+    }
+    list_del_rcu(&event.event_entry);
+    if (event.group_leader == event) {
+    del_event_from_groups(event, ctx);
+    }
+    ctx.generation += 1;
+    event.pmu_ctx.nr_events -= 1;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn perf_aux_output_match(event: *mut perf_event, aux_event: *mut perf_event) -> c_int {
+    if (!has_aux(aux_event)) {
     return 0;
-    if (!event.pmu.aux_output_match)
+    }
+    if (!event.pmu.aux_output_match) {
     return 0;
+    }
     return event.pmu.aux_output_match(aux_event);
     }
-    static void put_event(struct perf_event *event);
-    static void __event_disable(struct perf_event *event,
-    struct perf_event_context *ctx,
-    enum perf_event_state state);
+// forward_decl: put_event;
+// forward_decl: __event_disable;
 #[no_mangle]
 unsafe extern "C" fn perf_put_aux_event(event: *mut perf_event) {
-    static void perf_put_aux_event(struct perf_event *event)
-    {
-    struct perf_event_context *ctx = event.ctx;
-    struct perf_event *iter;
+    let mut ctx = event.ctx;
+pub static mut iter: *mut c_void = core::ptr::null_mut();
 //
 // If event uses aux_event tear down the link
 //
@@ -2030,8 +2187,9 @@ unsafe extern "C" fn perf_put_aux_event(event: *mut perf_event) {
 // it from other events.
 //
     for_each_sibling_event(iter, event) {
-    if (iter.aux_event != event)
+    if (iter.aux_event != event) {
     continue;
+    }
     iter.aux_event = core::ptr::null_mut();
     put_event(event);
 //
@@ -2044,36 +2202,39 @@ unsafe extern "C" fn perf_put_aux_event(event: *mut perf_event) {
     }
 #[no_mangle]
 unsafe extern "C" fn perf_need_aux_event(event: *mut perf_event) -> bool {
-    static bool perf_need_aux_event(struct perf_event *event)
-    {
     return event.attr.aux_output || has_aux_action(event);
     }
-    static int perf_get_aux_event(struct perf_event *event,
-    struct perf_event *group_leader)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn perf_get_aux_event(event: *mut perf_event, group_leader: *mut perf_event) -> c_int {
 //
 // Our group leader must be an aux event if we want to be
 // an aux_output. This way, the aux event will precede its
 // aux_output events in the group, and therefore will always
 // schedule first.
 //
-    if (!group_leader)
+    if (!group_leader) {
     return 0;
+    }
 //
 // aux_output and aux_sample_size are mutually exclusive.
 //
-    if (event.attr.aux_output && event.attr.aux_sample_size)
+    if (event.attr.aux_output && event.attr.aux_sample_size) {
     return 0;
+    }
     if (event.attr.aux_output &&
-    !perf_aux_output_match(event, group_leader))
+    !perf_aux_output_match(event, group_leader)) {
     return 0;
+    }
     if ((event.attr.aux_pause || event.attr.aux_resume) &&
-    !(group_leader.pmu.capabilities & PERF_PMU_CAP_AUX_PAUSE))
+    !(group_leader.pmu.capabilities & PERF_PMU_CAP_AUX_PAUSE)) {
     return 0;
-    if (event.attr.aux_sample_size && !group_leader.pmu.snapshot_aux)
+    }
+    if (event.attr.aux_sample_size && !group_leader.pmu.snapshot_aux) {
     return 0;
-    if (!atomic_long_inc_not_zero(&group_leader.refcount))
+    }
+    if (!atomic_long_inc_not_zero(&group_leader.refcount)) {
     return 0;
+    }
 //
 // Link aux_outputs to their aux event; this is undone in
 // perf_group_detach() by perf_put_aux_event(). When the
@@ -2083,16 +2244,14 @@ unsafe extern "C" fn perf_need_aux_event(event: *mut perf_event) -> bool {
     event.aux_event = group_leader;
     return 1;
     }
-    static inline struct list_head *get_event_list(struct perf_event *event)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn get_event_list(event: *mut perf_event) -> *mut c_void {
     return event.attr.pinned ? &event.pmu_ctx.pinned_active :
     &event.pmu_ctx.flexible_active;
     }
 // @sibling must already be unlinked from its old leader's sibling_list.
-    static void perf_promote_sibling_to_leader(struct perf_event *sibling,
-    struct perf_event_context *ctx,
-    int group_caps)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn perf_promote_sibling_to_leader(sibling: *mut perf_event, ctx: *mut perf_event_context, group_caps: c_int) {
 //
 // Events that have PERF_EV_CAP_SIBLING require being part of
 // a group and cannot exist on their own, schedule them out
@@ -2100,30 +2259,32 @@ unsafe extern "C" fn perf_need_aux_event(event: *mut perf_event) -> bool {
 // _perf_event_enable(), it will not be able to recover this
 // ERROR state.
 //
-    if (sibling.event_caps & PERF_EV_CAP_SIBLING)
+    if (sibling.event_caps & PERF_EV_CAP_SIBLING) {
     __event_disable(sibling, ctx, PERF_EVENT_STATE_ERROR);
+    }
     sibling.group_leader = sibling;
     sibling.group_caps = group_caps;
     if (sibling.attach_state & PERF_ATTACH_CONTEXT) {
     add_event_to_groups(sibling, ctx);
-    if (sibling.state == PERF_EVENT_STATE_ACTIVE)
+    if (sibling.state == PERF_EVENT_STATE_ACTIVE) {
     list_add_tail(&sibling.active_list, get_event_list(sibling));
+    }
     }
     perf_event__header_size(sibling);
     }
 #[no_mangle]
 unsafe extern "C" fn perf_group_detach(event: *mut perf_event) {
-    static void perf_group_detach(struct perf_event *event)
-    {
-    struct perf_event *leader = event.group_leader;
-    struct perf_event *sibling, *tmp;
-    struct perf_event_context *ctx = event.ctx;
+    let mut leader = event.group_leader;
+    let mut sibling = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
+    let mut ctx = event.ctx;
     lockdep_assert_held(&ctx.lock);
 //
 // We can have double detach due to exit/hot-unplug + close.
 //
-    if (!(event.attach_state & PERF_ATTACH_GROUP))
+    if (!(event.attach_state & PERF_ATTACH_GROUP)) {
     return;
+    }
     event.attach_state &= ~PERF_ATTACH_GROUP;
     perf_put_aux_event(event);
 //
@@ -2131,10 +2292,10 @@ unsafe extern "C" fn perf_group_detach(event: *mut perf_event) {
 //
     if (leader != event) {
     list_del_init(&event.sibling_list);
-    leader.nr_siblings--;
-    leader.group_generation++;
+    leader.nr_siblings -= 1;
+    leader.group_generation += 1;
     perf_promote_sibling_to_leader(event, ctx, event.event_caps);
-    goto out;
+// goto;
     }
 //
 // If this was a group event with sibling events then
@@ -2145,24 +2306,25 @@ unsafe extern "C" fn perf_group_detach(event: *mut perf_event) {
     list_del_init(&sibling.sibling_list);
 // Inherit group flags from the previous leader
     perf_promote_sibling_to_leader(sibling, ctx, event.group_caps);
-    WARN_ON_ONCE(sibling.ctx != event.ctx);
+    WARN_ON_ONCE!(sibling.ctx != event.ctx);
     }
     event.nr_siblings = 0;
-    out:
-    for_each_sibling_event(tmp, leader)
+// label;
+    for_each_sibling_event(tmp, leader) {
     perf_event__header_size(tmp);
+    }
     perf_event__header_size(leader);
     }
 #[no_mangle]
 unsafe extern "C" fn perf_child_detach(event: *mut perf_event) {
-    static void perf_child_detach(struct perf_event *event)
-    {
-    struct perf_event *parent_event = event.parent;
-    if (!(event.attach_state & PERF_ATTACH_CHILD))
+    let mut parent_event = event.parent;
+    if (!(event.attach_state & PERF_ATTACH_CHILD)) {
     return;
+    }
     event.attach_state &= ~PERF_ATTACH_CHILD;
-    if (WARN_ON_ONCE(!parent_event))
+    if (WARN_ON_ONCE!(!parent_event)) {
     return;
+    }
 //
 // Can't check this from an IPI, the holder is likey another CPU.
 //
@@ -2172,33 +2334,28 @@ unsafe extern "C" fn perf_child_detach(event: *mut perf_event) {
     }
 #[no_mangle]
 unsafe extern "C" fn is_orphaned_event(event: *mut perf_event) -> bool {
-    static bool is_orphaned_event(struct perf_event *event)
-    {
     return event.state == PERF_EVENT_STATE_DEAD;
     }
-    static inline int
-    event_filter_match(struct perf_event *event)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn event_filter_match(event: *mut perf_event) -> c_int {
     return (event.cpu == -1 || event.cpu == smp_processor_id()) &&
     perf_cgroup_match(event);
     }
 #[no_mangle]
 pub unsafe extern "C" fn is_event_in_freq_mode(event: *mut perf_event) -> bool {
-    static inline bool is_event_in_freq_mode(struct perf_event *event)
-    {
     return event.attr.freq && event.attr.sample_freq;
     }
-    static void
-    event_sched_out(struct perf_event *event, struct perf_event_context *ctx)
-    {
-    struct perf_event_pmu_context *epc = event.pmu_ctx;
-    struct perf_cpu_pmu_context *cpc = this_cpc(epc.pmu);
-    let mut state: enum perf_event_state = PERF_EVENT_STATE_INACTIVE;
+#[no_mangle]
+pub unsafe extern "C" fn event_sched_out(event: *mut perf_event, ctx: *mut perf_event_context) {
+    let mut epc = event.pmu_ctx;
+    let mut cpc = this_cpc(epc.pmu);
+pub static mut state: perf_event_state = 0;
 // XXX cpc serialization, probably per-cpu IRQ disabled
-    WARN_ON_ONCE(event.ctx != ctx);
+    WARN_ON_ONCE!(event.ctx != ctx);
     lockdep_assert_held(&ctx.lock);
-    if (event.state != PERF_EVENT_STATE_ACTIVE)
+    if (event.state != PERF_EVENT_STATE_ACTIVE) {
     return;
+    }
 //
 // Asymmetry; we only schedule events _IN_ through ctx_sched_in(), but
 // we can schedule events _OUT_ individually through things like
@@ -2214,63 +2371,64 @@ pub unsafe extern "C" fn is_event_in_freq_mode(event: *mut perf_event) -> bool {
     state = PERF_EVENT_STATE_OFF;
     }
     perf_event_set_state(event, state);
-    if (!is_software_event(event))
-    cpc.active_oncpu--;
-    if (is_event_in_freq_mode(event)) {
-    ctx.nr_freq--;
-    epc.nr_freq--;
+    if (!is_software_event(event)) {
+    cpc.active_oncpu -= 1;
     }
-    if (event.attr.exclusive || !cpc.active_oncpu)
+    if (is_event_in_freq_mode(event)) {
+    ctx.nr_freq -= 1;
+    epc.nr_freq -= 1;
+    }
+    if (event.attr.exclusive || !cpc.active_oncpu) {
     cpc.exclusive = 0;
+    }
     perf_pmu_enable(event.pmu);
     }
-    static void
-    group_sched_out(struct perf_event *group_event, struct perf_event_context *ctx)
-    {
-    struct perf_event *event;
-    if (group_event.state != PERF_EVENT_STATE_ACTIVE)
+#[no_mangle]
+pub unsafe extern "C" fn group_sched_out(group_event: *mut perf_event, ctx: *mut perf_event_context) {
+pub static mut event: *mut c_void = core::ptr::null_mut();
+    if (group_event.state != PERF_EVENT_STATE_ACTIVE) {
     return;
+    }
     perf_assert_pmu_disabled(group_event.pmu_ctx.pmu);
     event_sched_out(group_event, ctx);
 //
 // Schedule out siblings (if any):
 //
-    for_each_sibling_event(event, group_event)
+    for_each_sibling_event(event, group_event) {
     event_sched_out(event, ctx);
     }
-    static inline void
-    __ctx_time_update(struct perf_cpu_context *cpuctx, struct perf_event_context *ctx,
-    bool final, enum event_type_t event_type)
-    {
+    }
+#[no_mangle]
+pub unsafe extern "C" fn __ctx_time_update(cpuctx: *mut perf_cpu_context, ctx: *mut perf_event_context, final: bool, event_type: event_type_t) {
     if (ctx.is_active & EVENT_TIME) {
-    if (ctx.is_active & EVENT_FROZEN)
+    if (ctx.is_active & EVENT_FROZEN) {
     return;
+    }
     update_context_time(ctx);
 // vPMU should not stop time
     update_cgrp_time_from_cpuctx(cpuctx, !(event_type & EVENT_GUEST) && final);
     }
     }
-    static inline void
-    ctx_time_update(struct perf_cpu_context *cpuctx, struct perf_event_context *ctx)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ctx_time_update(cpuctx: *mut perf_cpu_context, ctx: *mut perf_event_context) {
     __ctx_time_update(cpuctx, ctx, false, 0);
     }
 //
 // To be used inside perf_ctx_lock() / perf_ctx_unlock(). Lasts until perf_ctx_unlock().
 //
-    static inline void
-    ctx_time_freeze(struct perf_cpu_context *cpuctx, struct perf_event_context *ctx)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ctx_time_freeze(cpuctx: *mut perf_cpu_context, ctx: *mut perf_event_context) {
     ctx_time_update(cpuctx, ctx);
-    if (ctx.is_active & EVENT_TIME)
+    if (ctx.is_active & EVENT_TIME) {
     ctx.is_active |= EVENT_FROZEN;
     }
-    static inline void
-    ctx_time_update_event(struct perf_event_context *ctx, struct perf_event *event)
-    {
+    }
+#[no_mangle]
+pub unsafe extern "C" fn ctx_time_update_event(ctx: *mut perf_event_context, event: *mut perf_event) {
     if (ctx.is_active & EVENT_TIME) {
-    if (ctx.is_active & EVENT_FROZEN)
+    if (ctx.is_active & EVENT_FROZEN) {
     return;
+    }
     update_context_time(ctx);
     update_cgrp_time_from_event(event);
     }
@@ -2286,46 +2444,48 @@ pub const DETACH_DEAD: c_uint = 0x10UL;
 // We disable the event on the hardware level first. After that we
 // remove it from the context list.
 //
-    static void
-    __perf_remove_from_context(struct perf_event *event,
-    struct perf_cpu_context *cpuctx,
-    struct perf_event_context *ctx,
-    void *info)
-    {
-    struct perf_event_pmu_context *pmu_ctx = event.pmu_ctx;
-    let mut state: enum perf_event_state = PERF_EVENT_STATE_OFF;
-    let mut flags: c_ulong = (unsigned long)info;
+#[no_mangle]
+pub unsafe extern "C" fn __perf_remove_from_context(event: *mut perf_event, cpuctx: *mut perf_cpu_context, ctx: *mut perf_event_context, info: *mut c_void) {
+    let mut pmu_ctx = event.pmu_ctx;
+pub static mut state: perf_event_state = 0;
+pub static mut flags: c_ulong = 0;
     ctx_time_update(cpuctx, ctx);
 //
 // Ensure event_sched_out() switches to OFF, at the very least
 // this avoids raising perf_pending_task() at this time.
 //
-    if (flags & DETACH_EXIT)
+    if (flags & DETACH_EXIT) {
     state = PERF_EVENT_STATE_EXIT;
-    if (flags & DETACH_REVOKE)
+    }
+    if (flags & DETACH_REVOKE) {
     state = PERF_EVENT_STATE_REVOKED;
-    if (flags & DETACH_DEAD)
+    }
+    if (flags & DETACH_DEAD) {
     state = PERF_EVENT_STATE_DEAD;
+    }
     __event_disable(event, ctx, state);
-    if (flags & DETACH_GROUP)
+    if (flags & DETACH_GROUP) {
     perf_group_detach(event);
-    if (flags & DETACH_CHILD)
+    }
+    if (flags & DETACH_CHILD) {
     perf_child_detach(event);
+    }
     list_del_event(event, ctx);
     if (!pmu_ctx.nr_events) {
     pmu_ctx.rotate_necessary = 0;
     if (ctx.task && ctx.is_active) {
-    struct perf_cpu_pmu_context *cpc = this_cpc(pmu_ctx.pmu);
-    WARN_ON_ONCE(cpc.task_epc && cpc.task_epc != pmu_ctx);
+    let mut cpc = this_cpc(pmu_ctx.pmu);
+    WARN_ON_ONCE!(cpc.task_epc && cpc.task_epc != pmu_ctx);
     cpc.task_epc = core::ptr::null_mut();
     }
     }
     if (!ctx.nr_events && ctx.is_active) {
-    if (ctx == &cpuctx.ctx)
+    if (ctx == &cpuctx.ctx) {
     update_cgrp_time_from_cpuctx(cpuctx, true);
+    }
     ctx.is_active = 0;
     if (ctx.task) {
-    WARN_ON_ONCE(cpuctx.task_ctx != ctx);
+    WARN_ON_ONCE!(cpuctx.task_ctx != ctx);
     cpuctx.task_ctx = core::ptr::null_mut();
     }
     }
@@ -2342,9 +2502,7 @@ pub const DETACH_DEAD: c_uint = 0x10UL;
 //
 #[no_mangle]
 unsafe extern "C" fn perf_remove_from_context(event: *mut perf_event, flags: c_ulong) {
-    static void perf_remove_from_context(struct perf_event *event, unsigned long flags)
-    {
-    struct perf_event_context *ctx = event.ctx;
+    let mut ctx = event.ctx;
     lockdep_assert_held(&ctx.mutex);
 //
 // Because of perf_event_exit_task(), perf_remove_from_context() ought
@@ -2354,40 +2512,38 @@ unsafe extern "C" fn perf_remove_from_context(event: *mut perf_event, flags: c_u
     raw_spin_lock_irq(&ctx.lock);
     if (!ctx.is_active) {
     __perf_remove_from_context(event, this_cpu_ptr(&perf_cpu_context),
-    ctx, (void *)flags);
+    ctx, flags);
     raw_spin_unlock_irq(&ctx.lock);
     return;
     }
     raw_spin_unlock_irq(&ctx.lock);
-    event_function_call(event, __perf_remove_from_context, (void *)flags);
+    event_function_call(event, __perf_remove_from_context, flags);
     }
-    static void __event_disable(struct perf_event *event,
-    struct perf_event_context *ctx,
-    enum perf_event_state state)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __event_disable(event: *mut perf_event, ctx: *mut perf_event_context, state: perf_event_state) {
     event_sched_out(event, ctx);
-    if (event.state > PERF_EVENT_STATE_OFF)
+    if (event.state > PERF_EVENT_STATE_OFF) {
     perf_cgroup_event_disable(event, ctx);
+    }
     perf_event_set_state(event, min(event.state, state));
     }
 //
 // Cross CPU call to disable a performance event
 //
-    static void __perf_event_disable(struct perf_event *event,
-    struct perf_cpu_context *cpuctx,
-    struct perf_event_context *ctx,
-    void *info)
-    {
-    if (event.state < PERF_EVENT_STATE_INACTIVE)
+#[no_mangle]
+pub unsafe extern "C" fn __perf_event_disable(event: *mut perf_event, cpuctx: *mut perf_cpu_context, ctx: *mut perf_event_context, info: *mut c_void) {
+    if (event.state < PERF_EVENT_STATE_INACTIVE) {
     return;
+    }
     perf_pmu_disable(event.pmu_ctx.pmu);
     ctx_time_update_event(ctx, event);
 //
 // When disabling a group leader, the whole group becomes ineligible
 // to run, so schedule out the full group.
 //
-    if (event == event.group_leader)
+    if (event == event.group_leader) {
     group_sched_out(event, ctx);
+    }
 //
 // But only mark the leader OFF; the siblings will remain
 // INACTIVE.
@@ -2411,9 +2567,7 @@ unsafe extern "C" fn perf_remove_from_context(event: *mut perf_event, flags: c_u
 //
 #[no_mangle]
 unsafe extern "C" fn _perf_event_disable(event: *mut perf_event) {
-    static void _perf_event_disable(struct perf_event *event)
-    {
-    struct perf_event_context *ctx = event.ctx;
+    let mut ctx = event.ctx;
     raw_spin_lock_irq(&ctx.lock);
     if (event.state <= PERF_EVENT_STATE_OFF) {
     raw_spin_unlock_irq(&ctx.lock);
@@ -2424,8 +2578,6 @@ unsafe extern "C" fn _perf_event_disable(event: *mut perf_event) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_disable_local(event: *mut perf_event) {
-    void perf_event_disable_local(struct perf_event *event)
-    {
     event_function_local(event, __perf_event_disable, core::ptr::null_mut());
     }
 //
@@ -2434,9 +2586,7 @@ pub unsafe extern "C" fn perf_event_disable_local(event: *mut perf_event) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_disable(event: *mut perf_event) {
-    void perf_event_disable(struct perf_event *event)
-    {
-    struct perf_event_context *ctx;
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
     ctx = perf_event_ctx_lock(event);
     _perf_event_disable(event);
     perf_event_ctx_unlock(event, ctx);
@@ -2444,65 +2594,62 @@ pub unsafe extern "C" fn perf_event_disable(event: *mut perf_event) {
     EXPORT_SYMBOL_GPL(perf_event_disable);
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_disable_inatomic(event: *mut perf_event) {
-    void perf_event_disable_inatomic(struct perf_event *event)
-    {
     event.pending_disable = 1;
     irq_work_queue(&event.pending_disable_irq);
     }
 
-    static void perf_log_throttle(struct perf_event *event, int enable);
-    static void perf_log_itrace_start(struct perf_event *event);
+// forward_decl: perf_log_throttle;
+// forward_decl: perf_log_itrace_start;
 #[no_mangle]
 unsafe extern "C" fn perf_event_unthrottle(event: *mut perf_event, start: bool) {
-    static void perf_event_unthrottle(struct perf_event *event, bool start)
-    {
-    if (event.state != PERF_EVENT_STATE_ACTIVE)
+    if (event.state != PERF_EVENT_STATE_ACTIVE) {
     return;
+    }
     event.hw.interrupts = 0;
-    if (start)
+    if (start) {
     event.pmu.start(event, 0);
-    if (event == event.group_leader)
+    }
+    if (event == event.group_leader) {
     perf_log_throttle(event, 1);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_throttle(event: *mut perf_event) {
-    static void perf_event_throttle(struct perf_event *event)
-    {
-    if (event.state != PERF_EVENT_STATE_ACTIVE)
+    if (event.state != PERF_EVENT_STATE_ACTIVE) {
     return;
+    }
     event.hw.interrupts = MAX_INTERRUPTS;
     event.pmu.stop(event, 0);
-    if (event == event.group_leader)
+    if (event == event.group_leader) {
     perf_log_throttle(event, 0);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_unthrottle_group(event: *mut perf_event, skip_start_event: bool) {
-    static void perf_event_unthrottle_group(struct perf_event *event, bool skip_start_event)
-    {
     struct perf_event *sibling, *leader = event.group_leader;
     perf_event_unthrottle(leader, skip_start_event ? leader != event : true);
-    for_each_sibling_event(sibling, leader)
+    for_each_sibling_event(sibling, leader) {
     perf_event_unthrottle(sibling, skip_start_event ? sibling != event : true);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_throttle_group(event: *mut perf_event) {
-    static void perf_event_throttle_group(struct perf_event *event)
-    {
     struct perf_event *sibling, *leader = event.group_leader;
     perf_event_throttle(leader);
-    for_each_sibling_event(sibling, leader)
+    for_each_sibling_event(sibling, leader) {
     perf_event_throttle(sibling);
     }
-    static int
-    event_sched_in(struct perf_event *event, struct perf_event_context *ctx)
-    {
-    struct perf_event_pmu_context *epc = event.pmu_ctx;
-    struct perf_cpu_pmu_context *cpc = this_cpc(epc.pmu);
-    let mut ret: c_int = 0;
-    WARN_ON_ONCE(event.ctx != ctx);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn event_sched_in(event: *mut perf_event, ctx: *mut perf_event_context) -> c_int {
+    let mut epc = event.pmu_ctx;
+    let mut cpc = this_cpc(epc.pmu);
+pub static mut ret: c_int = 0;
+    WARN_ON_ONCE!(event.ctx != ctx);
     lockdep_assert_held(&ctx.lock);
-    if (event.state <= PERF_EVENT_STATE_OFF)
+    if (event.state <= PERF_EVENT_STATE_OFF) {
     return 0;
+    }
     WRITE_ONCE(event.oncpu, smp_processor_id());
 //
 // Order event::oncpu write to happen before the ACTIVE state is
@@ -2516,62 +2663,68 @@ unsafe extern "C" fn perf_event_throttle_group(event: *mut perf_event) {
 // ticks already, also for a heavily scheduling task there is little
 // guarantee it'll get a tick in a timely manner.
 //
-    if (unlikely(event.hw.interrupts == MAX_INTERRUPTS))
+    if (unlikely(event.hw.interrupts == MAX_INTERRUPTS)) {
     perf_event_unthrottle(event, false);
+    }
     perf_pmu_disable(event.pmu);
     perf_log_itrace_start(event);
     if (event.pmu.add(event, PERF_EF_START)) {
     perf_event_set_state(event, PERF_EVENT_STATE_INACTIVE);
     event.oncpu = -1;
     ret = -EAGAIN;
-    goto out;
+// goto;
     }
-    if (!is_software_event(event))
-    cpc.active_oncpu++;
+    if (!is_software_event(event)) {
+    cpc.active_oncpu += 1;
+    }
     if (is_event_in_freq_mode(event)) {
-    ctx.nr_freq++;
-    epc.nr_freq++;
+    ctx.nr_freq += 1;
+    epc.nr_freq += 1;
     }
-    if (event.attr.exclusive)
+    if (event.attr.exclusive) {
     cpc.exclusive = 1;
-    out:
+    }
+// label;
     perf_pmu_enable(event.pmu);
     return ret;
     }
-    static int
-    group_sched_in(struct perf_event *group_event, struct perf_event_context *ctx)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn group_sched_in(group_event: *mut perf_event, ctx: *mut perf_event_context) -> c_int {
     struct perf_event *event, *partial_group = core::ptr::null_mut();
-    struct pmu *pmu = group_event.pmu_ctx.pmu;
-    if (group_event.state == PERF_EVENT_STATE_OFF)
+    let mut pmu = group_event.pmu_ctx.pmu;
+    if (group_event.state == PERF_EVENT_STATE_OFF) {
     return 0;
+    }
     pmu.start_txn(pmu, PERF_PMU_TXN_ADD);
-    if (event_sched_in(group_event, ctx))
-    goto error;
+    if (event_sched_in(group_event, ctx)) {
+// goto;
+    }
 //
 // Schedule in siblings as one group (if any):
 //
     for_each_sibling_event(event, group_event) {
     if (event_sched_in(event, ctx)) {
     partial_group = event;
-    goto group_error;
+// goto;
     }
     }
-    if (!pmu.commit_txn(pmu))
+    if (!pmu.commit_txn(pmu)) {
     return 0;
-    group_error:
+    }
+// label;
 //
 // Groups can be scheduled in as one unit only, so undo any
 // partial group before returning:
 // The events up to the failed event are scheduled out normally.
 //
     for_each_sibling_event(event, group_event) {
-    if (event == partial_group)
+    if (event == partial_group) {
     break;
+    }
     event_sched_out(event, ctx);
     }
     event_sched_out(group_event, ctx);
-    error:
+// label;
     pmu.cancel_txn(pmu);
     return -EAGAIN;
     }
@@ -2580,61 +2733,60 @@ unsafe extern "C" fn perf_event_throttle_group(event: *mut perf_event) {
 //
 #[no_mangle]
 unsafe extern "C" fn group_can_go_on(event: *mut perf_event, can_add_hw: c_int) -> c_int {
-    static int group_can_go_on(struct perf_event *event, int can_add_hw)
-    {
-    struct perf_event_pmu_context *epc = event.pmu_ctx;
-    struct perf_cpu_pmu_context *cpc = this_cpc(epc.pmu);
+    let mut epc = event.pmu_ctx;
+    let mut cpc = this_cpc(epc.pmu);
 //
 // Groups consisting entirely of software events can always go on.
 //
-    if (event.group_caps & PERF_EV_CAP_SOFTWARE)
+    if (event.group_caps & PERF_EV_CAP_SOFTWARE) {
     return 1;
+    }
 //
 // If an exclusive group is already on, no other hardware
 // events can go on.
 //
-    if (cpc.exclusive)
+    if (cpc.exclusive) {
     return 0;
+    }
 //
 // If this group is exclusive and there are already
 // events on the CPU, it can't go on.
 //
-    if (event.attr.exclusive && !list_empty(get_event_list(event)))
+    if (event.attr.exclusive && !list_empty(get_event_list(event))) {
     return 0;
+    }
 //
 // Otherwise, try to add it if all previous groups were able
 // to go on.
 //
     return can_add_hw;
     }
-    static void add_event_to_ctx(struct perf_event *event,
-    struct perf_event_context *ctx)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn add_event_to_ctx(event: *mut perf_event, ctx: *mut perf_event_context) {
     list_add_event(event, ctx);
     perf_group_attach(event);
     }
-    static void task_ctx_sched_out(struct perf_event_context *ctx,
-    struct pmu *pmu,
-    enum event_type_t event_type)
-    {
-    struct perf_cpu_context *cpuctx = this_cpu_ptr(&perf_cpu_context);
-    if (!cpuctx.task_ctx)
+#[no_mangle]
+pub unsafe extern "C" fn task_ctx_sched_out(ctx: *mut perf_event_context, pmu: *mut pmu, event_type: event_type_t) {
+    let mut cpuctx = this_cpu_ptr(&perf_cpu_context);
+    if (!cpuctx.task_ctx) {
     return;
-    if (WARN_ON_ONCE(ctx != cpuctx.task_ctx))
+    }
+    if (WARN_ON_ONCE!(ctx != cpuctx.task_ctx)) {
     return;
+    }
     ctx_sched_out(ctx, pmu, event_type);
     }
-    static void perf_event_sched_in(struct perf_cpu_context *cpuctx,
-    struct perf_event_context *ctx,
-    struct pmu *pmu,
-    enum event_type_t event_type)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_sched_in(cpuctx: *mut perf_cpu_context, ctx: *mut perf_event_context, pmu: *mut pmu, event_type: event_type_t) {
     ctx_sched_in(&cpuctx.ctx, pmu, EVENT_PINNED | event_type);
-    if (ctx)
+    if (ctx) {
     ctx_sched_in(ctx, pmu, EVENT_PINNED | event_type);
+    }
     ctx_sched_in(&cpuctx.ctx, pmu, EVENT_FLEXIBLE | event_type);
-    if (ctx)
+    if (ctx) {
     ctx_sched_in(ctx, pmu, EVENT_FLEXIBLE | event_type);
+    }
     }
 //
 // We want to maintain the following priority of scheduling:
@@ -2651,24 +2803,25 @@ unsafe extern "C" fn group_can_go_on(event: *mut perf_event, can_add_hw: c_int) 
 // event_type is a bit mask of the types of events involved. For CPU events,
 // event_type is only either EVENT_PINNED or EVENT_FLEXIBLE.
 //
-    static void ctx_resched(struct perf_cpu_context *cpuctx,
-    struct perf_event_context *task_ctx,
-    struct pmu *pmu, enum event_type_t event_type)
-    {
-    let mut cpu_event: bool = !!(event_type & EVENT_CPU);
-    struct perf_event_pmu_context *epc;
+#[no_mangle]
+pub unsafe extern "C" fn ctx_resched(cpuctx: *mut perf_cpu_context, task_ctx: *mut perf_event_context, pmu: *mut pmu, event_type: event_type_t) {
+pub static mut cpu_event: bool = false;
+pub static mut epc: *mut c_void = core::ptr::null_mut();
 //
 // If pinned groups are involved, flexible groups also need to be
 // scheduled out.
 //
-    if (event_type & EVENT_PINNED)
+    if (event_type & EVENT_PINNED) {
     event_type |= EVENT_FLEXIBLE;
+    }
     event_type &= EVENT_ALL;
-    for_each_epc(epc, &cpuctx.ctx, pmu, 0)
+    for_each_epc(epc, &cpuctx.ctx, pmu, 0) {
     perf_pmu_disable(epc.pmu);
+    }
     if (task_ctx) {
-    for_each_epc(epc, task_ctx, pmu, 0)
+    for_each_epc(epc, task_ctx, pmu, 0) {
     perf_pmu_disable(epc.pmu);
+    }
     task_ctx_sched_out(task_ctx, pmu, event_type);
     }
 //
@@ -2678,26 +2831,27 @@ unsafe extern "C" fn group_can_go_on(event: *mut perf_event, can_add_hw: c_int) 
 // - EVENT_PINNED task events: schedule out EVENT_FLEXIBLE groups;
 // - otherwise, do nothing more.
 //
-    if (cpu_event)
+    if (cpu_event) {
     ctx_sched_out(&cpuctx.ctx, pmu, event_type);
-#[no_mangle]
-pub unsafe extern "C" fn if(EVENT_PINNED: event_type &) -> else {
-    else if (event_type & EVENT_PINNED)
+    }
+
+    else if (event_type & EVENT_PINNED) {
     ctx_sched_out(&cpuctx.ctx, pmu, EVENT_FLEXIBLE);
+    }
     perf_event_sched_in(cpuctx, task_ctx, pmu, 0);
-    for_each_epc(epc, &cpuctx.ctx, pmu, 0)
+    for_each_epc(epc, &cpuctx.ctx, pmu, 0) {
     perf_pmu_enable(epc.pmu);
+    }
     if (task_ctx) {
-    for_each_epc(epc, task_ctx, pmu, 0)
+    for_each_epc(epc, task_ctx, pmu, 0) {
     perf_pmu_enable(epc.pmu);
+    }
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn perf_pmu_resched(pmu: *mut pmu) {
-    void perf_pmu_resched(struct pmu *pmu)
-    {
-    struct perf_cpu_context *cpuctx = this_cpu_ptr(&perf_cpu_context);
-    struct perf_event_context *task_ctx = cpuctx.task_ctx;
+    let mut cpuctx = this_cpu_ptr(&perf_cpu_context);
+    let mut task_ctx = cpuctx.task_ctx;
     perf_ctx_lock(cpuctx, task_ctx);
     ctx_resched(cpuctx, task_ctx, pmu, EVENT_ALL|EVENT_CPU);
     perf_ctx_unlock(cpuctx, task_ctx);
@@ -2710,14 +2864,12 @@ pub unsafe extern "C" fn perf_pmu_resched(pmu: *mut pmu) {
 //
 #[no_mangle]
 unsafe extern "C" fn __perf_install_in_context(info: *mut c_void) -> c_int {
-    static int  __perf_install_in_context(void *info)
-    {
-    struct perf_event *event = info;
-    struct perf_event_context *ctx = event.ctx;
-    struct perf_cpu_context *cpuctx = this_cpu_ptr(&perf_cpu_context);
-    struct perf_event_context *task_ctx = cpuctx.task_ctx;
-    let mut reprogram: bool = true;
-    let mut ret: c_int = 0;
+    let mut event = info;
+    let mut ctx = event.ctx;
+    let mut cpuctx = this_cpu_ptr(&perf_cpu_context);
+    let mut task_ctx = cpuctx.task_ctx;
+pub static mut reprogram: bool = true;
+pub static mut ret: c_int = 0;
     raw_spin_lock(&cpuctx.ctx.lock);
     if (ctx.task) {
     raw_spin_lock(&ctx.lock);
@@ -2732,9 +2884,9 @@ unsafe extern "C" fn __perf_install_in_context(info: *mut c_void) -> c_int {
 //
     if (task_curr(ctx.task) && !reprogram) {
     ret = -ESRCH;
-    goto unlock;
+// goto;
     }
-    WARN_ON_ONCE(reprogram && cpuctx.task_ctx && cpuctx.task_ctx != ctx);
+    WARN_ON_ONCE!(reprogram && cpuctx.task_ctx && cpuctx.task_ctx != ctx);
     } else if (task_ctx) {
     raw_spin_lock(&task_ctx.lock);
     }
@@ -2744,7 +2896,7 @@ unsafe extern "C" fn __perf_install_in_context(info: *mut c_void) -> c_int {
 // If the current cgroup doesn't match the event's
 // cgroup, we should not try to schedule it.
 //
-    struct perf_cgroup *cgrp = perf_cgroup_from_task(current, ctx);
+    let mut cgrp = perf_cgroup_from_task(current, ctx);
     reprogram = cgroup_is_descendant(cgrp.css.cgroup,
     event.cgrp.css.cgroup);
     }
@@ -2757,27 +2909,24 @@ unsafe extern "C" fn __perf_install_in_context(info: *mut c_void) -> c_int {
     } else {
     add_event_to_ctx(event, ctx);
     }
-    unlock:
+// label;
     perf_ctx_unlock(cpuctx, task_ctx);
     return ret;
     }
-    static bool exclusive_event_installable(struct perf_event *event,
-    struct perf_event_context *ctx);
+// forward_decl: exclusive_event_installable;
 //
 // Attach a performance event to a context.
 //
 // Very similar to event_function_call, see comment there.
 //
-    static void
-    perf_install_in_context(struct perf_event_context *ctx,
-    struct perf_event *event,
-    int cpu)
-    {
-    struct task_struct *task = READ_ONCE(ctx.task);
+#[no_mangle]
+pub unsafe extern "C" fn perf_install_in_context(ctx: *mut perf_event_context, event: *mut perf_event, cpu: c_int) {
+    let mut task = READ_ONCE(ctx.task);
     lockdep_assert_held(&ctx.mutex);
-    WARN_ON_ONCE(!exclusive_event_installable(event, ctx));
-    if (event.cpu != -1)
-    WARN_ON_ONCE(event.cpu != cpu);
+    WARN_ON_ONCE!(!exclusive_event_installable(event, ctx));
+    if (event.cpu != -1) {
+    WARN_ON_ONCE!(event.cpu != cpu);
+    }
 //
 // Ensures that if we can observe event->ctx, both the event and ctx
 // will be 'complete'. See perf_iterate_sb_cpu().
@@ -2809,8 +2958,9 @@ unsafe extern "C" fn __perf_install_in_context(info: *mut c_void) -> c_int {
 //
 // Should not happen, we validate the ctx is still alive before calling.
 //
-    if (WARN_ON_ONCE(task == TASK_TOMBSTONE))
+    if (WARN_ON_ONCE!(task == TASK_TOMBSTONE)) {
     return;
+    }
 //
 // Installing events is tricky because we cannot rely on ctx->is_active
 // to be set in case this is the nr_events 0 -> 1 transition.
@@ -2840,12 +2990,13 @@ unsafe extern "C" fn __perf_install_in_context(info: *mut c_void) -> c_int {
 // store.
 //
     smp_mb();
-    again:
-    if (!task_function_call(task, __perf_install_in_context, event))
+// label;
+    if (!task_function_call(task, __perf_install_in_context, event)) {
     return;
+    }
     raw_spin_lock_irq(&ctx.lock);
     task = ctx.task;
-    if (WARN_ON_ONCE(task == TASK_TOMBSTONE)) {
+    if (WARN_ON_ONCE!(task == TASK_TOMBSTONE)) {
 //
 // Cannot happen because we already checked above (which also
 // cannot happen), and we hold ctx->mutex, which serializes us
@@ -2860,7 +3011,7 @@ unsafe extern "C" fn __perf_install_in_context(info: *mut c_void) -> c_int {
 //
     if (task_curr(task)) {
     raw_spin_unlock_irq(&ctx.lock);
-    goto again;
+// goto;
     }
     add_event_to_ctx(event, ctx);
     raw_spin_unlock_irq(&ctx.lock);
@@ -2868,32 +3019,34 @@ unsafe extern "C" fn __perf_install_in_context(info: *mut c_void) -> c_int {
 //
 // Cross CPU call to enable a performance event
 //
-    static void __perf_event_enable(struct perf_event *event,
-    struct perf_cpu_context *cpuctx,
-    struct perf_event_context *ctx,
-    void *info)
-    {
-    struct perf_event *leader = event.group_leader;
-    struct perf_event_context *task_ctx;
+#[no_mangle]
+pub unsafe extern "C" fn __perf_event_enable(event: *mut perf_event, cpuctx: *mut perf_cpu_context, ctx: *mut perf_event_context, info: *mut c_void) {
+    let mut leader = event.group_leader;
+pub static mut task_ctx: *mut c_void = core::ptr::null_mut();
     if (event.state >= PERF_EVENT_STATE_INACTIVE ||
-    event.state <= PERF_EVENT_STATE_ERROR)
+    event.state <= PERF_EVENT_STATE_ERROR) {
     return;
+    }
     ctx_time_freeze(cpuctx, ctx);
     perf_event_set_state(event, PERF_EVENT_STATE_INACTIVE);
     perf_cgroup_event_enable(event, ctx);
-    if (!ctx.is_active)
+    if (!ctx.is_active) {
     return;
-    if (!event_filter_match(event))
+    }
+    if (!event_filter_match(event)) {
     return;
+    }
 //
 // If the event is in a group and isn't the group leader,
 // then don't put it on unless the group is on.
 //
-    if (leader != event && leader.state != PERF_EVENT_STATE_ACTIVE)
+    if (leader != event && leader.state != PERF_EVENT_STATE_ACTIVE) {
     return;
+    }
     task_ctx = cpuctx.task_ctx;
-    if (ctx.task)
-    WARN_ON_ONCE(task_ctx != ctx);
+    if (ctx.task) {
+    WARN_ON_ONCE!(task_ctx != ctx);
+    }
     ctx_resched(cpuctx, task_ctx, event.pmu_ctx.pmu, get_event_type(event));
     }
 //
@@ -2907,13 +3060,11 @@ unsafe extern "C" fn __perf_install_in_context(info: *mut c_void) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn _perf_event_enable(event: *mut perf_event) {
-    static void _perf_event_enable(struct perf_event *event)
-    {
-    struct perf_event_context *ctx = event.ctx;
+    let mut ctx = event.ctx;
     raw_spin_lock_irq(&ctx.lock);
     if (event.state >= PERF_EVENT_STATE_INACTIVE ||
     event.state <  PERF_EVENT_STATE_ERROR) {
-    out:
+// label;
     raw_spin_unlock_irq(&ctx.lock);
     return;
     }
@@ -2929,8 +3080,9 @@ unsafe extern "C" fn _perf_event_enable(event: *mut perf_event) {
 // Detached SIBLING events cannot leave ERROR state.
 //
     if (event.event_caps & PERF_EV_CAP_SIBLING &&
-    event.group_leader == event)
-    goto out;
+    event.group_leader == event) {
+// goto;
+    }
     event.state = PERF_EVENT_STATE_OFF;
     }
     raw_spin_unlock_irq(&ctx.lock);
@@ -2941,9 +3093,7 @@ unsafe extern "C" fn _perf_event_enable(event: *mut perf_event) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_enable(event: *mut perf_event) {
-    void perf_event_enable(struct perf_event *event)
-    {
-    struct perf_event_context *ctx;
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
     ctx = perf_event_ctx_lock(event);
     _perf_event_enable(event);
     perf_event_ctx_unlock(event, ctx);
@@ -2958,21 +3108,21 @@ pub struct stop_event_data {
 
 #[no_mangle]
 unsafe extern "C" fn __perf_event_stop(info: *mut c_void) -> c_int {
-    static int __perf_event_stop(void *info)
-    {
-    struct stop_event_data *sd = info;
-    struct perf_event *event = sd.event;
+    let mut sd = info;
+    let mut event = sd.event;
 // if it's already INACTIVE, do nothing
-    if (READ_ONCE(event.state) != PERF_EVENT_STATE_ACTIVE)
+    if (READ_ONCE(event.state) != PERF_EVENT_STATE_ACTIVE) {
     return 0;
+    }
 // matches smp_wmb() in event_sched_in()
     smp_rmb();
 //
 // There is a window with interrupts enabled before we get here,
 // so we need to check again lest we try to stop another CPU's event.
 //
-    if (READ_ONCE(event.oncpu) != smp_processor_id())
+    if (READ_ONCE(event.oncpu) != smp_processor_id()) {
     return -EAGAIN;
+    }
     event.pmu.stop(event, PERF_EF_UPDATE);
 //
 // May race with the actual stop (through perf_pmu_output_stop()),
@@ -2983,22 +3133,19 @@ unsafe extern "C" fn __perf_event_stop(info: *mut c_void) -> c_int {
 // Since this is happening on an event-local CPU, no trace is lost
 // while restarting.
 //
-    if (sd.restart)
+    if (sd.restart) {
     event.pmu.start(event, 0);
+    }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_stop(event: *mut perf_event, restart: c_int) -> c_int {
-    static int perf_event_stop(struct perf_event *event, int restart)
-    {
-    struct stop_event_data sd = {
-    .event		= event,
-    .restart	= restart,
-    };
-    let mut ret: c_int = 0;
+pub static mut stop_event_data: usize = 0;
+pub static mut ret: c_int = 0;
     do {
-    if (READ_ONCE(event.state) != PERF_EVENT_STATE_ACTIVE)
+    if (READ_ONCE(event.state) != PERF_EVENT_STATE_ACTIVE) {
     return 0;
+    }
 // matches smp_wmb() in event_sched_in()
     smp_rmb();
 //
@@ -3035,11 +3182,10 @@ unsafe extern "C" fn perf_event_stop(event: *mut perf_event, restart: c_int) -> 
 //
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_addr_filters_sync(event: *mut perf_event) {
-    void perf_event_addr_filters_sync(struct perf_event *event)
-    {
-    struct perf_addr_filters_head *ifh = perf_event_addr_filters(event);
-    if (!has_addr_filter(event))
+    let mut ifh = perf_event_addr_filters(event);
+    if (!has_addr_filter(event)) {
     return;
+    }
     raw_spin_lock(&ifh.lock);
     if (event.addr_filters_gen != event.hw.addr_filters_gen) {
     event.pmu.addr_filters_sync(event);
@@ -3050,13 +3196,12 @@ pub unsafe extern "C" fn perf_event_addr_filters_sync(event: *mut perf_event) {
     EXPORT_SYMBOL_GPL(perf_event_addr_filters_sync);
 #[no_mangle]
 unsafe extern "C" fn _perf_event_refresh(event: *mut perf_event, refresh: c_int) -> c_int {
-    static int _perf_event_refresh(struct perf_event *event, int refresh)
-    {
 //
 // not supported on inherited events
 //
-    if (event.attr.inherit || !is_sampling_event(event))
+    if (event.attr.inherit || !is_sampling_event(event)) {
     return -EINVAL;
+    }
     atomic_add(refresh, &event.event_limit);
     _perf_event_enable(event);
     return 0;
@@ -3066,51 +3211,50 @@ unsafe extern "C" fn _perf_event_refresh(event: *mut perf_event, refresh: c_int)
 //
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_refresh(event: *mut perf_event, refresh: c_int) -> c_int {
-    int perf_event_refresh(struct perf_event *event, int refresh)
-    {
-    struct perf_event_context *ctx;
-    int ret;
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     ctx = perf_event_ctx_lock(event);
     ret = _perf_event_refresh(event, refresh);
     perf_event_ctx_unlock(event, ctx);
     return ret;
     }
     EXPORT_SYMBOL_GPL(perf_event_refresh);
-    static int perf_event_modify_breakpoint(struct perf_event *bp,
-    struct perf_event_attr *attr)
-    {
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_modify_breakpoint(bp: *mut perf_event, attr: *mut perf_event_attr) -> c_int {
+    let mut err = 0;
     _perf_event_disable(bp);
     err = modify_user_hw_breakpoint_check(bp, attr, true);
-    if (!bp.attr.disabled)
+    if (!bp.attr.disabled) {
     _perf_event_enable(bp);
+    }
     return err;
     }
 //
 // Copy event-type-independent attributes that may be modified.
 //
-    static void perf_event_modify_copy_attr(struct perf_event_attr *to,
-    const struct perf_event_attr *from)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_modify_copy_attr(to: *mut perf_event_attr, from: *mut perf_event_attr) {
     to.sig_data = from.sig_data;
     }
-    static int perf_event_modify_attr(struct perf_event *event,
-    struct perf_event_attr *attr)
-    {
-    int (*func)(struct perf_event *, struct perf_event_attr *);
-    struct perf_event *child;
-    int err;
-    if (event.attr.type != attr.type)
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_modify_attr(event: *mut perf_event, attr: *mut perf_event_attr) -> c_int {
+    int (*func)(perf_event *, perf_event_attr *);
+pub static mut child: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
+    if (event.attr.type != attr.type) {
     return -EINVAL;
-    switch (event.attr.type) {
-    case PERF_TYPE_BREAKPOINT:
+    }
+    match (event.attr.type) {
+    PERF_TYPE_BREAKPOINT => {
     func = perf_event_modify_breakpoint;
-    break;
-    default:
+    // break;
+    }
+    _ => {
 // Place holder for future additions.
     return -EOPNOTSUPP;
     }
-    WARN_ON_ONCE(event.ctx.parent_ctx);
+    }
+    WARN_ON_ONCE!(event.ctx.parent_ctx);
     mutex_lock(&event.child_mutex);
 //
 // Event-type-independent attributes must be copied before event-type
@@ -3119,43 +3263,48 @@ pub unsafe extern "C" fn perf_event_refresh(event: *mut perf_event, refresh: c_i
 //
     perf_event_modify_copy_attr(&event.attr, attr);
     err = func(event, attr);
-    if (err)
-    goto out;
+    if (err) {
+// goto;
+    }
     list_for_each_entry(child, &event.child_list, child_list) {
     perf_event_modify_copy_attr(&child.attr, attr);
     err = func(child, attr);
-    if (err)
-    goto out;
+    if (err) {
+// goto;
     }
-    out:
+    }
+// label;
     mutex_unlock(&event.child_mutex);
     return err;
     }
-    static void __pmu_ctx_sched_out(struct perf_event_pmu_context *pmu_ctx,
-    enum event_type_t event_type)
-    {
-    struct perf_event_context *ctx = pmu_ctx.ctx;
-    struct perf_event *event, *tmp;
-    struct pmu *pmu = pmu_ctx.pmu;
+#[no_mangle]
+pub unsafe extern "C" fn __pmu_ctx_sched_out(pmu_ctx: *mut perf_event_pmu_context, event_type: event_type_t) {
+    let mut ctx = pmu_ctx.ctx;
+    let mut event = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
+    let mut pmu = pmu_ctx.pmu;
     if (ctx.task && !(ctx.is_active & EVENT_ALL)) {
-    struct perf_cpu_pmu_context *cpc = this_cpc(pmu);
-    WARN_ON_ONCE(cpc.task_epc && cpc.task_epc != pmu_ctx);
+    let mut cpc = this_cpc(pmu);
+    WARN_ON_ONCE!(cpc.task_epc && cpc.task_epc != pmu_ctx);
     cpc.task_epc = core::ptr::null_mut();
     }
-    if (!(event_type & EVENT_ALL))
+    if (!(event_type & EVENT_ALL)) {
     return;
+    }
     perf_pmu_disable(pmu);
     if (event_type & EVENT_PINNED) {
     list_for_each_entry_safe(event, tmp,
     &pmu_ctx.pinned_active,
-    active_list)
+    active_list) {
     group_sched_out(event, ctx);
+    }
     }
     if (event_type & EVENT_FLEXIBLE) {
     list_for_each_entry_safe(event, tmp,
     &pmu_ctx.flexible_active,
-    active_list)
+    active_list) {
     group_sched_out(event, ctx);
+    }
 //
 // Since we cleared EVENT_FLEXIBLE, also clear
 // rotate_necessary, is will be reset by
@@ -3174,21 +3323,21 @@ pub unsafe extern "C" fn perf_event_refresh(event: *mut perf_event, refresh: c_i
 // state, eg. ctx->is_active cleared even though most EPCs would still actually
 // be active.
 //
-    static void
-    ctx_sched_out(struct perf_event_context *ctx, struct pmu *pmu, enum event_type_t event_type)
-    {
-    struct perf_cpu_context *cpuctx = this_cpu_ptr(&perf_cpu_context);
-    let mut active_type: enum event_type_t = event_type & ~EVENT_FLAGS;
-    struct perf_event_pmu_context *pmu_ctx;
-    let mut is_active: c_int = ctx.is_active;
+#[no_mangle]
+pub unsafe extern "C" fn ctx_sched_out(ctx: *mut perf_event_context, pmu: *mut pmu, event_type: event_type_t) {
+    let mut cpuctx = this_cpu_ptr(&perf_cpu_context);
+pub static mut active_type: event_type_t = 0;
+pub static mut pmu_ctx: *mut c_void = core::ptr::null_mut();
+pub static mut is_active: c_int = 0;
     lockdep_assert_held(&ctx.lock);
     if (likely(!ctx.nr_events)) {
 //
 // See __perf_remove_from_context().
 //
-    WARN_ON_ONCE(ctx.is_active);
-    if (ctx.task)
-    WARN_ON_ONCE(cpuctx.task_ctx);
+    WARN_ON_ONCE!(ctx.is_active);
+    if (ctx.task) {
+    WARN_ON_ONCE!(cpuctx.task_ctx);
+    }
     return;
     }
 //
@@ -3204,7 +3353,7 @@ pub unsafe extern "C" fn perf_event_refresh(event: *mut perf_event, refresh: c_i
     __ctx_time_update(cpuctx, ctx, ctx == &cpuctx.ctx, event_type);
 //
 // CPU-release for the below ->is_active store,
-// see __load_acquire() in perf_event_time_now()
+see __load_acquire() in perf_event_time_now()
 //
     barrier();
     ctx.is_active &= ~active_type;
@@ -3213,15 +3362,18 @@ pub unsafe extern "C" fn perf_event_refresh(event: *mut perf_event, refresh: c_i
 // For FROZEN, preserve TIME|FROZEN such that perf_event_time_now()
 // does not observe a hole. perf_ctx_unlock() will clean up.
 //
-    if (ctx.is_active & EVENT_FROZEN)
+    if (ctx.is_active & EVENT_FROZEN) {
     ctx.is_active &= EVENT_TIME_FROZEN;
-    else
+    }
+    else {
     ctx.is_active = 0;
     }
+    }
     if (ctx.task) {
-    WARN_ON_ONCE(cpuctx.task_ctx != ctx);
-    if (!(ctx.is_active & EVENT_ALL))
+    WARN_ON_ONCE!(cpuctx.task_ctx != ctx);
+    if (!(ctx.is_active & EVENT_ALL)) {
     cpuctx.task_ctx = core::ptr::null_mut();
+    }
     }
     if (event_type & EVENT_GUEST) {
 //
@@ -3235,8 +3387,9 @@ pub unsafe extern "C" fn perf_event_refresh(event: *mut perf_event, refresh: c_i
     } else {
     is_active ^= ctx.is_active; /* changed bits */
     }
-    for_each_epc(pmu_ctx, ctx, pmu, event_type)
+    for_each_epc(pmu_ctx, ctx, pmu, event_type) {
     __pmu_ctx_sched_out(pmu_ctx, is_active);
+    }
     }
 //
 // Test whether two contexts are equivalent, i.e. whether they have both been
@@ -3246,36 +3399,39 @@ pub unsafe extern "C" fn perf_event_refresh(event: *mut perf_event, refresh: c_i
 // incremented on each modification to it; see unclone_ctx(), list_add_event()
 // and list_del_event().
 //
-    static int context_equiv(struct perf_event_context *ctx1,
-    struct perf_event_context *ctx2)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn context_equiv(ctx1: *mut perf_event_context, ctx2: *mut perf_event_context) -> c_int {
     lockdep_assert_held(&ctx1.lock);
     lockdep_assert_held(&ctx2.lock);
 // Pinning disables the swap optimization
-    if (ctx1.pin_count || ctx2.pin_count)
+    if (ctx1.pin_count || ctx2.pin_count) {
     return 0;
+    }
 // If ctx1 is the parent of ctx2
-    if (ctx1 == ctx2.parent_ctx && ctx1.generation == ctx2.parent_gen)
+    if (ctx1 == ctx2.parent_ctx && ctx1.generation == ctx2.parent_gen) {
     return 1;
+    }
 // If ctx2 is the parent of ctx1
-    if (ctx1.parent_ctx == ctx2 && ctx1.parent_gen == ctx2.generation)
+    if (ctx1.parent_ctx == ctx2 && ctx1.parent_gen == ctx2.generation) {
     return 1;
+    }
 //
 // If ctx1 and ctx2 have the same parent; we flatten the parent
 // hierarchy, see perf_event_init_context().
 //
     if (ctx1.parent_ctx && ctx1.parent_ctx == ctx2.parent_ctx &&
-    ctx1.parent_gen == ctx2.parent_gen)
+    ctx1.parent_gen == ctx2.parent_gen) {
     return 1;
+    }
 // Unmatched
     return 0;
     }
-    static void __perf_event_sync_stat(struct perf_event *event,
-    struct perf_event *next_event)
-    {
-    u64 value;
-    if (!event.attr.inherit_stat)
+#[no_mangle]
+pub unsafe extern "C" fn __perf_event_sync_stat(event: *mut perf_event, next_event: *mut perf_event) {
+    let mut value = 0;
+    if (!event.attr.inherit_stat) {
     return;
+    }
 //
 // Update the event value, we cannot use perf_event_read()
 // because we're in the middle of a context switch and have IRQs
@@ -3300,17 +3456,16 @@ pub unsafe extern "C" fn perf_event_refresh(event: *mut perf_event, refresh: c_i
     perf_event_update_userpage(event);
     perf_event_update_userpage(next_event);
     }
-    static void perf_event_sync_stat(struct perf_event_context *ctx,
-    struct perf_event_context *next_ctx)
-    {
-    struct perf_event *event, *next_event;
-    if (!ctx.nr_stat)
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_sync_stat(ctx: *mut perf_event_context, next_ctx: *mut perf_event_context) {
+    let mut event = core::ptr::null_mut();
+    let mut next_event = core::ptr::null_mut();
+    if (!ctx.nr_stat) {
     return;
+    }
     update_context_time(ctx);
-    event = list_first_entry(&ctx.event_list,
-    struct perf_event, event_entry);
-    next_event = list_first_entry(&next_ctx.event_list,
-    struct perf_event, event_entry);
+    event = list_first_entry(&ctx.event_list, perf_event, event_entry);
+    next_event = list_first_entry(&next_ctx.event_list, perf_event, event_entry);
     while (&event.event_entry != &ctx.event_list &&
     &next_event.event_entry != &next_ctx.event_list) {
     __perf_event_sync_stat(event, next_event);
@@ -3318,35 +3473,38 @@ pub unsafe extern "C" fn perf_event_refresh(event: *mut perf_event, refresh: c_i
     next_event = list_next_entry(next_event, event_entry);
     }
     }
-    static void perf_ctx_sched_task_cb(struct perf_event_context *ctx,
-    struct task_struct *task, bool sched_in)
-    {
-    struct perf_event_pmu_context *pmu_ctx;
-    struct perf_cpu_pmu_context *cpc;
+#[no_mangle]
+pub unsafe extern "C" fn perf_ctx_sched_task_cb(ctx: *mut perf_event_context, task: *mut task_struct, sched_in: bool) {
+pub static mut pmu_ctx: *mut c_void = core::ptr::null_mut();
+pub static mut cpc: *mut c_void = core::ptr::null_mut();
     list_for_each_entry(pmu_ctx, &ctx.pmu_ctx_list, pmu_ctx_entry) {
     cpc = this_cpc(pmu_ctx.pmu);
-    if (cpc.sched_cb_usage && pmu_ctx.pmu.sched_task)
+    if (cpc.sched_cb_usage && pmu_ctx.pmu.sched_task) {
     pmu_ctx.pmu.sched_task(pmu_ctx, task, sched_in);
     }
     }
-    static void
-    perf_event_context_sched_out(struct task_struct *task, struct task_struct *next)
-    {
-    struct perf_event_context *ctx = task.perf_event_ctxp;
-    struct perf_event_context *next_ctx;
-    struct perf_event_context *parent, *next_parent;
-    let mut do_switch: c_int = 1;
-    if (likely(!ctx))
+    }
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_context_sched_out(task: *mut task_struct, next: *mut task_struct) {
+    let mut ctx = task.perf_event_ctxp;
+pub static mut next_ctx: *mut c_void = core::ptr::null_mut();
+    let mut parent = core::ptr::null_mut();
+    let mut next_parent = core::ptr::null_mut();
+pub static mut do_switch: c_int = 1;
+    if (likely(!ctx)) {
     return;
+    }
     rcu_read_lock();
     next_ctx = rcu_dereference(next.perf_event_ctxp);
-    if (!next_ctx)
-    goto unlock;
+    if (!next_ctx) {
+// goto;
+    }
     parent = rcu_dereference(ctx.parent_ctx);
     next_parent = rcu_dereference(next_ctx.parent_ctx);
 // If neither context have a parent context; they cannot be clones.
-    if (!parent && !next_parent)
-    goto unlock;
+    if (!parent && !next_parent) {
+// goto;
+    }
     if (next_parent == ctx || next_ctx == parent || next_parent == parent) {
 //
 // Looks like the two contexts are clones, so we might be
@@ -3375,7 +3533,7 @@ pub unsafe extern "C" fn perf_event_refresh(event: *mut perf_event, refresh: c_i
 //
     raw_spin_unlock(&next_ctx.lock);
     rcu_read_unlock();
-    goto inside_switch;
+// goto;
     }
     WRITE_ONCE(ctx.task, next);
     WRITE_ONCE(next_ctx.task, task);
@@ -3396,37 +3554,35 @@ pub unsafe extern "C" fn perf_event_refresh(event: *mut perf_event, refresh: c_i
     raw_spin_unlock(&next_ctx.lock);
     raw_spin_unlock(&ctx.lock);
     }
-    unlock:
+// label;
     rcu_read_unlock();
     if (do_switch) {
     raw_spin_lock(&ctx.lock);
     perf_ctx_disable(ctx, 0);
-    inside_switch:
+// label;
     perf_ctx_sched_task_cb(ctx, task, false);
     task_ctx_sched_out(ctx, core::ptr::null_mut(), EVENT_ALL);
     perf_ctx_enable(ctx, 0);
     raw_spin_unlock(&ctx.lock);
     }
     }
-    static DEFINE_PER_CPU(struct list_head, sched_cb_list);
-    static DEFINE_PER_CPU(int, perf_sched_cb_usages);
+pub static mut struct list_head: usize = 0;
+pub static mut int: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn perf_sched_cb_dec(pmu: *mut pmu) {
-    void perf_sched_cb_dec(struct pmu *pmu)
-    {
-    struct perf_cpu_pmu_context *cpc = this_cpc(pmu);
+    let mut cpc = this_cpc(pmu);
     this_cpu_dec(perf_sched_cb_usages);
     barrier();
-    if (!--cpc.sched_cb_usage)
+    if (!--cpc.sched_cb_usage) {
     list_del(&cpc.sched_cb_entry);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn perf_sched_cb_inc(pmu: *mut pmu) {
-    void perf_sched_cb_inc(struct pmu *pmu)
-    {
-    struct perf_cpu_pmu_context *cpc = this_cpc(pmu);
-    if (!cpc.sched_cb_usage++)
+    let mut cpc = this_cpc(pmu);
+    if (!cpc.sched_cb_usage++) {
     list_add(&cpc.sched_cb_entry, this_cpu_ptr(&sched_cb_list));
+    }
     barrier();
     this_cpu_inc(perf_sched_cb_usages);
     }
@@ -3438,35 +3594,34 @@ pub unsafe extern "C" fn perf_sched_cb_inc(pmu: *mut pmu) {
 // PEBS requires this to provide PID/TID information. This requires we flush
 // all queued PEBS records before we context switch to a new task.
 //
-    static void __perf_pmu_sched_task(struct perf_cpu_pmu_context *cpc,
-    struct task_struct *task, bool sched_in)
-    {
-    struct perf_cpu_context *cpuctx = this_cpu_ptr(&perf_cpu_context);
-    struct pmu *pmu;
+#[no_mangle]
+pub unsafe extern "C" fn __perf_pmu_sched_task(cpc: *mut perf_cpu_pmu_context, task: *mut task_struct, sched_in: bool) {
+    let mut cpuctx = this_cpu_ptr(&perf_cpu_context);
+pub static mut pmu: *mut c_void = core::ptr::null_mut();
     pmu = cpc.epc.pmu;
 // software PMUs will not have sched_task
-    if (WARN_ON_ONCE(!pmu.sched_task))
+    if (WARN_ON_ONCE!(!pmu.sched_task)) {
     return;
+    }
     perf_ctx_lock(cpuctx, cpuctx.task_ctx);
     perf_pmu_disable(pmu);
     pmu.sched_task(cpc.task_epc, task, sched_in);
     perf_pmu_enable(pmu);
     perf_ctx_unlock(cpuctx, cpuctx.task_ctx);
     }
-    static void perf_pmu_sched_task(struct task_struct *prev,
-    struct task_struct *next,
-    bool sched_in)
-    {
-    struct perf_cpu_context *cpuctx = this_cpu_ptr(&perf_cpu_context);
-    struct perf_cpu_pmu_context *cpc;
+#[no_mangle]
+pub unsafe extern "C" fn perf_pmu_sched_task(prev: *mut task_struct, next: *mut task_struct, sched_in: bool) {
+    let mut cpuctx = this_cpu_ptr(&perf_cpu_context);
+pub static mut cpc: *mut c_void = core::ptr::null_mut();
 // cpuctx->task_ctx will be handled in perf_event_context_sched_in/out
-    if (prev == next || cpuctx.task_ctx)
+    if (prev == next || cpuctx.task_ctx) {
     return;
-    list_for_each_entry(cpc, this_cpu_ptr(&sched_cb_list), sched_cb_entry)
+    }
+    list_for_each_entry(cpc, this_cpu_ptr(&sched_cb_list), sched_cb_entry) {
     __perf_pmu_sched_task(cpc, sched_in ? next : prev, sched_in);
     }
-    static void perf_event_switch(struct task_struct *task,
-    struct task_struct *next_prev, bool sched_in);
+    }
+// forward_decl: perf_event_switch;
 //
 // Called from scheduler to remove the events of the current task,
 // with interrupts disabled.
@@ -3478,13 +3633,14 @@ pub unsafe extern "C" fn perf_sched_cb_inc(pmu: *mut pmu) {
 // accessing the event control register. If a NMI hits, then it will
 // not restart the event.
 //
-    void __perf_event_task_sched_out(struct task_struct *task,
-    struct task_struct *next)
-    {
-    if (__this_cpu_read(perf_sched_cb_usages))
+#[no_mangle]
+pub unsafe extern "C" fn __perf_event_task_sched_out(task: *mut task_struct, next: *mut task_struct) {
+    if (__this_cpu_read(perf_sched_cb_usages)) {
     perf_pmu_sched_task(task, next, false);
-    if (atomic_read(&nr_switch_events))
+    }
+    if (atomic_read(&nr_switch_events)) {
     perf_event_switch(task, next, false);
+    }
     perf_event_context_sched_out(task, next);
 //
 // if cgroup events exist on this CPU, then we need
@@ -3494,73 +3650,65 @@ pub unsafe extern "C" fn perf_sched_cb_inc(pmu: *mut pmu) {
     perf_cgroup_switch(next);
     }
 #[no_mangle]
-unsafe extern "C" fn perf_less_group_idx(l: *const c_void, r: *const c_void, args: *mut void __always_unused) -> bool {
-    static bool perf_less_group_idx(const void *l, const void *r, void __always_unused *args)
-    {
-    const struct perf_event *le = *(const struct perf_event **)l;
-    const struct perf_event *re = *(const struct perf_event **)r;
+unsafe extern "C" fn perf_less_group_idx(l: *const c_void, r: *const c_void, args: *mut c_void) -> bool {
+    let mut le = *l;
+    let mut re = *r;
     return le.group_index < re.group_index;
     }
-    DEFINE_MIN_HEAP(struct perf_event *, perf_event_min_heap);
-    static const struct min_heap_callbacks perf_min_heap = {
-    .less = perf_less_group_idx,
-    .swp = core::ptr::null_mut(),
-    };
+pub static mut struct perf_event *: usize = 0;
+pub static mut min_heap_callbacks: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn __heap_add(heap: *mut perf_event_min_heap, event: *mut perf_event) {
-    static void __heap_add(struct perf_event_min_heap *heap, struct perf_event *event)
-    {
-    struct perf_event **itrs = heap.data;
+    let mut itrs = heap.data;
     if (event) {
     itrs[heap.nr] = event;
-    heap.nr++;
+    heap.nr += 1;
     }
     }
 #[no_mangle]
 unsafe extern "C" fn __link_epc(pmu_ctx: *mut perf_event_pmu_context) {
-    static void __link_epc(struct perf_event_pmu_context *pmu_ctx)
-    {
-    struct perf_cpu_pmu_context *cpc;
-    if (!pmu_ctx.ctx.task)
+pub static mut cpc: *mut c_void = core::ptr::null_mut();
+    if (!pmu_ctx.ctx.task) {
     return;
+    }
     cpc = this_cpc(pmu_ctx.pmu);
-    WARN_ON_ONCE(cpc.task_epc && cpc.task_epc != pmu_ctx);
+    WARN_ON_ONCE!(cpc.task_epc && cpc.task_epc != pmu_ctx);
     cpc.task_epc = pmu_ctx;
     }
-    static noinline int visit_groups_merge(struct perf_event_context *ctx,
-    struct perf_event_groups *groups, int cpu,
-    struct pmu *pmu,
-    int (*func)(struct perf_event *, void *),
+    static noinline int visit_groups_merge(perf_event_context *ctx, perf_event_groups *groups, int cpu, pmu *pmu,
+    int (*func)(perf_event *, void *),
     void *data)
     {
 
-    struct cgroup_subsys_state *css = core::ptr::null_mut();
+    let mut css = core::ptr::null_mut();
 
-    struct perf_cpu_context *cpuctx = core::ptr::null_mut();
+    let mut cpuctx = core::ptr::null_mut();
 // Space for per CPU and/or any CPU event iterators.
     struct perf_event *itrs[2];
-    struct perf_event_min_heap event_heap;
-    struct perf_event **evt;
-    int ret;
-    if (pmu.filter && pmu.filter(pmu, cpu))
+pub static mut event_heap: usize = 0;
+pub static mut evt: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (pmu.filter && pmu.filter(pmu, cpu)) {
     return 0;
+    }
     if (!ctx.task) {
     cpuctx = this_cpu_ptr(&perf_cpu_context);
-    event_heap = (struct perf_event_min_heap){
+    event_heap = (perf_event_min_heap){
     .data = cpuctx.heap,
     .nr = 0,
     .size = cpuctx.heap_size,
     };
     lockdep_assert_held(&cpuctx.ctx.lock);
 
-    if (cpuctx.cgrp)
+    if (cpuctx.cgrp) {
     css = &cpuctx.cgrp.css;
+    }
 
     } else {
-    event_heap = (struct perf_event_min_heap){
+    event_heap = (perf_event_min_heap){
     .data = itrs,
     .nr = 0,
-    .size = ARRAY_SIZE(itrs),
+    .size = ARRAY_SIZE!(itrs),
     };
 // Events not within a CPU context may be on any CPU.
     __heap_add(&event_heap, perf_event_groups_first(groups, -1, pmu, core::ptr::null_mut()));
@@ -3568,8 +3716,9 @@ unsafe extern "C" fn __link_epc(pmu_ctx: *mut perf_event_pmu_context) {
     evt = event_heap.data;
     __heap_add(&event_heap, perf_event_groups_first(groups, cpu, pmu, core::ptr::null_mut()));
 
-    for (; css; css = css.parent)
+    for (; css; css = css.parent) {
     __heap_add(&event_heap, perf_event_groups_first(groups, cpu, pmu, css.cgroup));
+    }
 
     if (event_heap.nr) {
     __link_epc((*evt).pmu_ctx);
@@ -3578,13 +3727,16 @@ unsafe extern "C" fn __link_epc(pmu_ctx: *mut perf_event_pmu_context) {
     min_heapify_all_inline(&event_heap, &perf_min_heap, core::ptr::null_mut());
     while (event_heap.nr) {
     ret = func(*evt, data);
-    if (ret)
+    if (ret) {
     return ret;
+    }
 // evt = perf_event_groups_next(*evt, pmu);
-    if (*evt)
+    if (*evt) {
     min_heap_sift_down_inline(&event_heap, 0, &perf_min_heap, core::ptr::null_mut());
-    else
+    }
+    else {
     min_heap_pop_inline(&event_heap, &perf_min_heap, core::ptr::null_mut());
+    }
     }
     return 0;
     }
@@ -3597,64 +3749,66 @@ unsafe extern "C" fn __link_epc(pmu_ctx: *mut perf_event_pmu_context) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn event_update_userpage(event: *mut perf_event) -> bool {
-    static inline bool event_update_userpage(struct perf_event *event)
-    {
-    if (likely(!refcount_read(&event.mmap_count)))
+    if (likely(!refcount_read(&event.mmap_count))) {
     return false;
+    }
     perf_event_update_time(event);
     perf_event_update_userpage(event);
     return true;
     }
 #[no_mangle]
 pub unsafe extern "C" fn group_update_userpage(group_event: *mut perf_event) {
-    static inline void group_update_userpage(struct perf_event *group_event)
-    {
-    struct perf_event *event;
-    if (!event_update_userpage(group_event))
+pub static mut event: *mut c_void = core::ptr::null_mut();
+    if (!event_update_userpage(group_event)) {
     return;
-    for_each_sibling_event(event, group_event)
+    }
+    for_each_sibling_event(event, group_event) {
     event_update_userpage(event);
+    }
     }
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct merge_sched_data {
     pub can_add_hw: c_int,
-    pub event_type: enum event_type_t,
+    pub event_type: event_type_t,
 }
 
 #[no_mangle]
 unsafe extern "C" fn merge_sched_in(event: *mut perf_event, data: *mut c_void) -> c_int {
-    static int merge_sched_in(struct perf_event *event, void *data)
-    {
-    struct perf_event_context *ctx = event.ctx;
-    struct merge_sched_data *msd = data;
-    if (event.state <= PERF_EVENT_STATE_OFF)
+    let mut ctx = event.ctx;
+    let mut msd = data;
+    if (event.state <= PERF_EVENT_STATE_OFF) {
     return 0;
-    if (!event_filter_match(event))
+    }
+    if (!event_filter_match(event)) {
     return 0;
+    }
 //
 // Don't schedule in any host events from PMU with
 // PERF_PMU_CAP_MEDIATED_VPMU, while a guest is running.
 //
     if (is_guest_mediated_pmu_loaded() &&
     event.pmu_ctx.pmu.capabilities & PERF_PMU_CAP_MEDIATED_VPMU &&
-    !(msd.event_type & EVENT_GUEST))
+    !(msd.event_type & EVENT_GUEST)) {
     return 0;
+    }
     if (group_can_go_on(event, msd.can_add_hw)) {
-    if (!group_sched_in(event, ctx))
+    if (!group_sched_in(event, ctx)) {
     list_add_tail(&event.active_list, get_event_list(event));
+    }
     }
     if (event.state == PERF_EVENT_STATE_INACTIVE) {
     msd.can_add_hw = 0;
     if (event.attr.pinned) {
     perf_cgroup_event_disable(event, ctx);
     perf_event_set_state(event, PERF_EVENT_STATE_ERROR);
-    if (*perf_event_fasync(event))
+    if (*perf_event_fasync(event)) {
     event.pending_kill = POLL_ERR;
+    }
     event.pending_wakeup = 1;
     irq_work_queue(&event.pending_irq);
     } else {
-    struct perf_cpu_pmu_context *cpc = this_cpc(event.pmu_ctx.pmu);
+    let mut cpc = this_cpc(event.pmu_ctx.pmu);
     event.pmu_ctx.rotate_necessary = 1;
     perf_mux_hrtimer_restart(cpc);
     group_update_userpage(event);
@@ -3662,55 +3816,52 @@ unsafe extern "C" fn merge_sched_in(event: *mut perf_event, data: *mut c_void) -
     }
     return 0;
     }
-    static void pmu_groups_sched_in(struct perf_event_context *ctx,
-    struct perf_event_groups *groups,
-    struct pmu *pmu,
-    enum event_type_t event_type)
-    {
-    struct merge_sched_data msd = {
-    .can_add_hw = 1,
-    .event_type = event_type,
-    };
+#[no_mangle]
+pub unsafe extern "C" fn pmu_groups_sched_in(ctx: *mut perf_event_context, groups: *mut perf_event_groups, pmu: *mut pmu, event_type: event_type_t) {
+pub static mut merge_sched_data: usize = 0;
     visit_groups_merge(ctx, groups, smp_processor_id(), pmu,
     merge_sched_in, &msd);
     }
-    static void __pmu_ctx_sched_in(struct perf_event_pmu_context *pmu_ctx,
-    enum event_type_t event_type)
-    {
-    struct perf_event_context *ctx = pmu_ctx.ctx;
-    if (event_type & EVENT_PINNED)
+#[no_mangle]
+pub unsafe extern "C" fn __pmu_ctx_sched_in(pmu_ctx: *mut perf_event_pmu_context, event_type: event_type_t) {
+    let mut ctx = pmu_ctx.ctx;
+    if (event_type & EVENT_PINNED) {
     pmu_groups_sched_in(ctx, &ctx.pinned_groups, pmu_ctx.pmu, event_type);
-    if (event_type & EVENT_FLEXIBLE)
+    }
+    if (event_type & EVENT_FLEXIBLE) {
     pmu_groups_sched_in(ctx, &ctx.flexible_groups, pmu_ctx.pmu, event_type);
     }
-    static void
-    ctx_sched_in(struct perf_event_context *ctx, struct pmu *pmu, enum event_type_t event_type)
-    {
-    struct perf_cpu_context *cpuctx = this_cpu_ptr(&perf_cpu_context);
-    let mut active_type: enum event_type_t = event_type & ~EVENT_FLAGS;
-    struct perf_event_pmu_context *pmu_ctx;
-    let mut is_active: c_int = ctx.is_active;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn ctx_sched_in(ctx: *mut perf_event_context, pmu: *mut pmu, event_type: event_type_t) {
+    let mut cpuctx = this_cpu_ptr(&perf_cpu_context);
+pub static mut active_type: event_type_t = 0;
+pub static mut pmu_ctx: *mut c_void = core::ptr::null_mut();
+pub static mut is_active: c_int = 0;
     lockdep_assert_held(&ctx.lock);
-    if (likely(!ctx.nr_events))
+    if (likely(!ctx.nr_events)) {
     return;
+    }
     if (!(is_active & EVENT_TIME)) {
 // EVENT_TIME should be active while the guest runs
-    WARN_ON_ONCE(event_type & EVENT_GUEST);
+    WARN_ON_ONCE!(event_type & EVENT_GUEST);
 // start ctx time
     __update_context_time(ctx, false);
     perf_cgroup_set_timestamp(cpuctx, false);
 //
 // CPU-release for the below ->is_active store,
-// see __load_acquire() in perf_event_time_now()
+see __load_acquire() in perf_event_time_now()
 //
     barrier();
     }
     ctx.is_active |= active_type | EVENT_TIME;
     if (ctx.task) {
-    if (!(is_active & EVENT_ALL))
+    if (!(is_active & EVENT_ALL)) {
     cpuctx.task_ctx = ctx;
-    else
-    WARN_ON_ONCE(cpuctx.task_ctx != ctx);
+    }
+    else {
+    WARN_ON_ONCE!(cpuctx.task_ctx != ctx);
+    }
     }
     if (event_type & EVENT_GUEST) {
 //
@@ -3733,40 +3884,42 @@ unsafe extern "C" fn merge_sched_in(event: *mut perf_event, data: *mut c_void) -
 // in order to give them the best chance of going on.
 //
     if (is_active & EVENT_PINNED) {
-    for_each_epc(pmu_ctx, ctx, pmu, event_type)
+    for_each_epc(pmu_ctx, ctx, pmu, event_type) {
     __pmu_ctx_sched_in(pmu_ctx, EVENT_PINNED | (event_type & EVENT_GUEST));
+    }
     }
 // Then walk through the lower prio flexible groups
     if (is_active & EVENT_FLEXIBLE) {
-    for_each_epc(pmu_ctx, ctx, pmu, event_type)
+    for_each_epc(pmu_ctx, ctx, pmu, event_type) {
     __pmu_ctx_sched_in(pmu_ctx, EVENT_FLEXIBLE | (event_type & EVENT_GUEST));
+    }
     }
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_context_sched_in(task: *mut task_struct) {
-    static void perf_event_context_sched_in(struct task_struct *task)
-    {
-    struct perf_cpu_context *cpuctx = this_cpu_ptr(&perf_cpu_context);
-    struct perf_event_context *ctx;
+    let mut cpuctx = this_cpu_ptr(&perf_cpu_context);
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     ctx = rcu_dereference(task.perf_event_ctxp);
-    if (!ctx)
-    goto rcu_unlock;
+    if (!ctx) {
+// goto;
+    }
     if (cpuctx.task_ctx == ctx) {
     perf_ctx_lock(cpuctx, ctx);
     perf_ctx_disable(ctx, 0);
     perf_ctx_sched_task_cb(ctx, task, true);
     perf_ctx_enable(ctx, 0);
     perf_ctx_unlock(cpuctx, ctx);
-    goto rcu_unlock;
+// goto;
     }
     perf_ctx_lock(cpuctx, ctx);
 //
 // We must check ctx->nr_events while holding ctx->lock, such
 // that we serialize against perf_install_in_context().
 //
-    if (!ctx.nr_events)
-    goto unlock;
+    if (!ctx.nr_events) {
+// goto;
+    }
     perf_ctx_disable(ctx, 0);
 //
 // We want to keep the following priority order:
@@ -3782,12 +3935,13 @@ unsafe extern "C" fn perf_event_context_sched_in(task: *mut task_struct) {
     }
     perf_event_sched_in(cpuctx, ctx, core::ptr::null_mut(), 0);
     perf_ctx_sched_task_cb(cpuctx.task_ctx, task, true);
-    if (!RB_EMPTY_ROOT(&ctx.pinned_groups.tree))
+    if (!RB_EMPTY_ROOT(&ctx.pinned_groups.tree)) {
     perf_ctx_enable(&cpuctx.ctx, 0);
+    }
     perf_ctx_enable(ctx, 0);
-    unlock:
+// label;
     perf_ctx_unlock(cpuctx, ctx);
-    rcu_unlock:
+// label;
     rcu_read_unlock();
     }
 //
@@ -3801,23 +3955,25 @@ unsafe extern "C" fn perf_event_context_sched_in(task: *mut task_struct) {
 // accessing the event control register. If a NMI hits, then it will
 // keep the event running.
 //
-    void __perf_event_task_sched_in(struct task_struct *prev,
-    struct task_struct *task)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __perf_event_task_sched_in(prev: *mut task_struct, task: *mut task_struct) {
     perf_event_context_sched_in(task);
-    if (atomic_read(&nr_switch_events))
+    if (atomic_read(&nr_switch_events)) {
     perf_event_switch(task, prev, true);
-    if (__this_cpu_read(perf_sched_cb_usages))
+    }
+    if (__this_cpu_read(perf_sched_cb_usages)) {
     perf_pmu_sched_task(prev, task, true);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn perf_calculate_period(event: *mut perf_event, nsec: u64, count: u64) -> u64 {
-    static u64 perf_calculate_period(struct perf_event *event, u64 nsec, u64 count)
-    {
-    let mut frequency: u64 = event.attr.sample_freq;
-    let mut sec: u64 = NSEC_PER_SEC;
+pub static mut frequency: u64 = 0;
+pub static mut sec: u64 = 0;
     u64 divisor, dividend;
-    int count_fls, nsec_fls, frequency_fls, sec_fls;
+    let mut count_fls = 0;
+    let mut nsec_fls = 0;
+    let mut frequency_fls = 0;
+    let mut sec_fls = 0;
     count_fls = fls64(count);
     nsec_fls = fls64(nsec);
     frequency_fls = fls64(frequency);
@@ -3834,14 +3990,14 @@ unsafe extern "C" fn perf_calculate_period(event: *mut perf_event, nsec: u64, co
 // to a similar magnitude.
 //
 
-    do {					\
-    if (a##_fls > b##_fls) {	\
-    a >>= 1;		\
-    a##_fls--;		\
-    } else {			\
-    b >>= 1;		\
-    b##_fls--;		\
-    }				\
+    do {					
+    if (a##_fls > b##_fls) {	
+    a >>= 1;		
+    a##_fls -= 1;		
+    } else {			
+    b >>= 1;		
+    b##_fls -= 1;		
+    }				
     } while (0)
 //
 // Reduce accuracy until either term fits in a u64, then proceed with
@@ -3866,57 +4022,63 @@ unsafe extern "C" fn perf_calculate_period(event: *mut perf_event, nsec: u64, co
     }
     divisor = nsec * frequency;
     }
-    if (!divisor)
+    if (!divisor) {
     return dividend;
+    }
     return div64_u64(dividend, divisor);
     }
-    static DEFINE_PER_CPU(int, perf_throttled_count);
-    static DEFINE_PER_CPU(u64, perf_throttled_seq);
+pub static mut int: usize = 0;
+pub static mut u64: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn perf_adjust_period(event: *mut perf_event, nsec: u64, count: u64, disable: bool) {
-    static void perf_adjust_period(struct perf_event *event, u64 nsec, u64 count, bool disable)
-    {
-    struct hw_perf_event *hwc = &event.hw;
+    let mut hwc = &event.hw;
     s64 period, sample_period;
-    s64 delta;
+    let mut delta = 0;
     period = perf_calculate_period(event, nsec, count);
     delta = (s64)(period - hwc.sample_period);
-    if (delta >= 0)
+    if (delta >= 0) {
     delta += 7;
-    else
+    }
+    else {
     delta -= 7;
+    }
     delta /= 8; /* low pass filter */
     sample_period = hwc.sample_period + delta;
-    if (!sample_period)
+    if (!sample_period) {
     sample_period = 1;
+    }
     hwc.sample_period = sample_period;
     if (local64_read(&hwc.period_left) > 8*sample_period) {
-    if (disable)
+    if (disable) {
     event.pmu.stop(event, PERF_EF_UPDATE);
+    }
     local64_set(&hwc.period_left, 0);
-    if (disable)
+    if (disable) {
     event.pmu.start(event, PERF_EF_RELOAD);
+    }
     }
     }
 #[no_mangle]
 unsafe extern "C" fn perf_adjust_freq_unthr_events(event_list: *mut list_head) {
-    static void perf_adjust_freq_unthr_events(struct list_head *event_list)
-    {
-    struct perf_event *event;
-    struct hw_perf_event *hwc;
+pub static mut event: *mut c_void = core::ptr::null_mut();
+pub static mut hwc: *mut c_void = core::ptr::null_mut();
     u64 now, period = TICK_NSEC;
-    s64 delta;
+    let mut delta = 0;
     list_for_each_entry(event, event_list, active_list) {
-    if (event.state != PERF_EVENT_STATE_ACTIVE)
+    if (event.state != PERF_EVENT_STATE_ACTIVE) {
     continue;
+    }
 // XXX use visit thingy to avoid the -1,cpu match
-    if (!event_filter_match(event))
+    if (!event_filter_match(event)) {
     continue;
+    }
     hwc = &event.hw;
-    if (hwc.interrupts == MAX_INTERRUPTS)
+    if (hwc.interrupts == MAX_INTERRUPTS) {
     perf_event_unthrottle_group(event, is_event_in_freq_mode(event));
-    if (!is_event_in_freq_mode(event))
+    }
+    if (!is_event_in_freq_mode(event)) {
     continue;
+    }
 //
 // stop the event and update event->count
 //
@@ -3931,8 +4093,9 @@ unsafe extern "C" fn perf_adjust_freq_unthr_events(event_list: *mut list_head) {
 // to perf_adjust_period() to avoid stopping it
 // twice.
 //
-    if (delta > 0)
+    if (delta > 0) {
     perf_adjust_period(event, period, delta, false);
+    }
     event.pmu.start(event, delta > 0 ? PERF_EF_RELOAD : 0);
     }
     }
@@ -3941,25 +4104,28 @@ unsafe extern "C" fn perf_adjust_freq_unthr_events(event_list: *mut list_head) {
 // events. At the same time, make sure, having freq events does not change
 // the rate of unthrottling as that would introduce bias.
 //
-    static void
-    perf_adjust_freq_unthr_context(struct perf_event_context *ctx, bool unthrottle)
-    {
-    struct perf_event_pmu_context *pmu_ctx;
+#[no_mangle]
+pub unsafe extern "C" fn perf_adjust_freq_unthr_context(ctx: *mut perf_event_context, unthrottle: bool) {
+pub static mut pmu_ctx: *mut c_void = core::ptr::null_mut();
 //
 // only need to iterate over all events iff:
 // - context have events in frequency mode (needs freq adjust)
 // - there are events to unthrottle on this cpu
 //
-    if (!(ctx.nr_freq || unthrottle))
+    if (!(ctx.nr_freq || unthrottle)) {
     return;
+    }
     raw_spin_lock(&ctx.lock);
     list_for_each_entry(pmu_ctx, &ctx.pmu_ctx_list, pmu_ctx_entry) {
-    if (!(pmu_ctx.nr_freq || unthrottle))
+    if (!(pmu_ctx.nr_freq || unthrottle)) {
     continue;
-    if (!perf_pmu_ctx_is_active(pmu_ctx))
+    }
+    if (!perf_pmu_ctx_is_active(pmu_ctx)) {
     continue;
-    if (pmu_ctx.pmu.capabilities & PERF_PMU_CAP_NO_INTERRUPT)
+    }
+    if (pmu_ctx.pmu.capabilities & PERF_PMU_CAP_NO_INTERRUPT) {
     continue;
+    }
     perf_pmu_disable(pmu_ctx.pmu);
     perf_adjust_freq_unthr_events(&pmu_ctx.pinned_active);
     perf_adjust_freq_unthr_events(&pmu_ctx.flexible_active);
@@ -3972,52 +4138,50 @@ unsafe extern "C" fn perf_adjust_freq_unthr_events(event_list: *mut list_head) {
 //
 #[no_mangle]
 unsafe extern "C" fn rotate_ctx(ctx: *mut perf_event_context, event: *mut perf_event) {
-    static void rotate_ctx(struct perf_event_context *ctx, struct perf_event *event)
-    {
 //
 // Rotate the first entry last of non-pinned groups. Rotation might be
 // disabled by the inheritance code.
 //
-    if (ctx.rotate_disable)
+    if (ctx.rotate_disable) {
     return;
+    }
     perf_event_groups_delete(&ctx.flexible_groups, event);
     perf_event_groups_insert(&ctx.flexible_groups, event);
     }
 // pick an event from the flexible_groups to rotate
-    static inline struct perf_event *
-    ctx_event_to_rotate(struct perf_event_pmu_context *pmu_ctx)
-    {
-    struct perf_event *event;
-    struct rb_node *node;
-    struct rb_root *tree;
-    struct __group_key key = {
-    .pmu = pmu_ctx.pmu,
-    };
+#[no_mangle]
+pub unsafe extern "C" fn ctx_event_to_rotate(pmu_ctx: *mut perf_event_pmu_context) -> *mut c_void {
+pub static mut event: *mut c_void = core::ptr::null_mut();
+pub static mut node: *mut c_void = core::ptr::null_mut();
+pub static mut tree: *mut c_void = core::ptr::null_mut();
+pub static mut __group_key: usize = 0;
 // pick the first active flexible event
-    event = list_first_entry_or_null(&pmu_ctx.flexible_active,
-    struct perf_event, active_list);
-    if (event)
-    goto out;
+    event = list_first_entry_or_null(&pmu_ctx.flexible_active, perf_event, active_list);
+    if (event) {
+// goto;
+    }
 // if no active flexible event, pick the first event
     tree = &pmu_ctx.ctx.flexible_groups.tree;
     if (!pmu_ctx.ctx.task) {
     key.cpu = smp_processor_id();
     node = rb_find_first(&key, tree, __group_cmp_ignore_cgroup);
-    if (node)
+    if (node) {
     event = __node_2_pe(node);
-    goto out;
+    }
+// goto;
     }
     key.cpu = -1;
     node = rb_find_first(&key, tree, __group_cmp_ignore_cgroup);
     if (node) {
     event = __node_2_pe(node);
-    goto out;
+// goto;
     }
     key.cpu = smp_processor_id();
     node = rb_find_first(&key, tree, __group_cmp_ignore_cgroup);
-    if (node)
+    if (node) {
     event = __node_2_pe(node);
-    out:
+    }
+// label;
 //
 // Unconditionally clear rotate_necessary; if ctx_flexible_sched_in()
 // finds there are unschedulable events, it will set it again.
@@ -4027,13 +4191,12 @@ unsafe extern "C" fn rotate_ctx(ctx: *mut perf_event_context, event: *mut perf_e
     }
 #[no_mangle]
 unsafe extern "C" fn perf_rotate_context(cpc: *mut perf_cpu_pmu_context) -> bool {
-    static bool perf_rotate_context(struct perf_cpu_pmu_context *cpc)
-    {
-    struct perf_cpu_context *cpuctx = this_cpu_ptr(&perf_cpu_context);
+    let mut cpuctx = this_cpu_ptr(&perf_cpu_context);
     struct perf_event_pmu_context *cpu_epc, *task_epc = core::ptr::null_mut();
-    struct perf_event *cpu_event = core::ptr::null_mut(), *task_event = core::ptr::null_mut();
-    int cpu_rotate, task_rotate;
-    struct pmu *pmu;
+    let mut cpu_event = core::ptr::null_mut(), *task_event = core::ptr::null_mut();
+    let mut cpu_rotate = 0;
+    let mut task_rotate = 0;
+pub static mut pmu: *mut c_void = core::ptr::null_mut();
 //
 // Since we run this from IRQ context, nobody can install new
 // events, thus the event count values are stable.
@@ -4043,14 +4206,17 @@ unsafe extern "C" fn perf_rotate_context(cpc: *mut perf_cpu_pmu_context) -> bool
     task_epc = cpc.task_epc;
     cpu_rotate = cpu_epc.rotate_necessary;
     task_rotate = task_epc ? task_epc.rotate_necessary : 0;
-    if (!(cpu_rotate || task_rotate))
+    if (!(cpu_rotate || task_rotate)) {
     return false;
+    }
     perf_ctx_lock(cpuctx, cpuctx.task_ctx);
     perf_pmu_disable(pmu);
-    if (task_rotate)
+    if (task_rotate) {
     task_event = ctx_event_to_rotate(task_epc);
-    if (cpu_rotate)
+    }
+    if (cpu_rotate) {
     cpu_event = ctx_event_to_rotate(cpu_epc);
+    }
 //
 // As per the order given at ctx_resched() first 'pop' task flexible
 // and then, if needed CPU flexible.
@@ -4065,21 +4231,21 @@ unsafe extern "C" fn perf_rotate_context(cpc: *mut perf_cpu_pmu_context) -> bool
     rotate_ctx(&cpuctx.ctx, cpu_event);
     __pmu_ctx_sched_in(cpu_epc, EVENT_FLEXIBLE);
     }
-    if (task_event)
+    if (task_event) {
     rotate_ctx(task_epc.ctx, task_event);
-    if (task_event || (task_epc && cpu_event))
+    }
+    if (task_event || (task_epc && cpu_event)) {
     __pmu_ctx_sched_in(task_epc, EVENT_FLEXIBLE);
+    }
     perf_pmu_enable(pmu);
     perf_ctx_unlock(cpuctx, cpuctx.task_ctx);
     return true;
     }
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_task_tick() {
-    void perf_event_task_tick(void)
-    {
-    struct perf_cpu_context *cpuctx = this_cpu_ptr(&perf_cpu_context);
-    struct perf_event_context *ctx;
-    int throttled;
+    let mut cpuctx = this_cpu_ptr(&perf_cpu_context);
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+    let mut throttled = 0;
     lockdep_assert_irqs_disabled();
     __this_cpu_inc(perf_throttled_seq);
     throttled = __this_cpu_xchg(perf_throttled_count, 0);
@@ -4087,18 +4253,20 @@ pub unsafe extern "C" fn perf_event_task_tick() {
     perf_adjust_freq_unthr_context(&cpuctx.ctx, !!throttled);
     rcu_read_lock();
     ctx = rcu_dereference(current.perf_event_ctxp);
-    if (ctx)
+    if (ctx) {
     perf_adjust_freq_unthr_context(ctx, !!throttled);
+    }
     rcu_read_unlock();
     }
-    static int event_enable_on_exec(struct perf_event *event,
-    struct perf_event_context *ctx)
-    {
-    if (!event.attr.enable_on_exec)
+#[no_mangle]
+pub unsafe extern "C" fn event_enable_on_exec(event: *mut perf_event, ctx: *mut perf_event_context) -> c_int {
+    if (!event.attr.enable_on_exec) {
     return 0;
+    }
     event.attr.enable_on_exec = 0;
-    if (event.state >= PERF_EVENT_STATE_INACTIVE)
+    if (event.state >= PERF_EVENT_STATE_INACTIVE) {
     return 0;
+    }
     perf_event_set_state(event, PERF_EVENT_STATE_INACTIVE);
     return 1;
     }
@@ -4108,19 +4276,19 @@ pub unsafe extern "C" fn perf_event_task_tick() {
 //
 #[no_mangle]
 unsafe extern "C" fn perf_event_enable_on_exec(ctx: *mut perf_event_context) {
-    static void perf_event_enable_on_exec(struct perf_event_context *ctx)
-    {
-    struct perf_event_context *clone_ctx = core::ptr::null_mut();
-    let mut event_type: enum event_type_t = 0;
-    struct perf_cpu_context *cpuctx;
-    struct perf_event *event;
-    unsigned long flags;
-    let mut enabled: c_int = 0;
+    let mut clone_ctx = core::ptr::null_mut();
+pub static mut event_type: event_type_t = 0;
+pub static mut cpuctx: *mut c_void = core::ptr::null_mut();
+pub static mut event: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+pub static mut enabled: c_int = 0;
     local_irq_save(flags);
-    if (WARN_ON_ONCE(current.perf_event_ctxp != ctx))
-    goto out;
-    if (!ctx.nr_events)
-    goto out;
+    if (WARN_ON_ONCE!(current.perf_event_ctxp != ctx)) {
+// goto;
+    }
+    if (!ctx.nr_events) {
+// goto;
+    }
     cpuctx = this_cpu_ptr(&perf_cpu_context);
     perf_ctx_lock(cpuctx, ctx);
     ctx_time_freeze(cpuctx, ctx);
@@ -4136,47 +4304,49 @@ unsafe extern "C" fn perf_event_enable_on_exec(ctx: *mut perf_event_context) {
     ctx_resched(cpuctx, ctx, core::ptr::null_mut(), event_type);
     }
     perf_ctx_unlock(cpuctx, ctx);
-    out:
+// label;
     local_irq_restore(flags);
-    if (clone_ctx)
+    if (clone_ctx) {
     put_ctx(clone_ctx);
     }
-    static void perf_remove_from_owner(struct perf_event *event);
-    static void perf_event_exit_event(struct perf_event *event,
-    struct perf_event_context *ctx,
-    struct task_struct *task,
-    unsigned long detach_flags);
+    }
+// forward_decl: perf_remove_from_owner;
+// forward_decl: perf_event_exit_event;
 //
 // Removes all events from the current task that have been marked
 // remove-on-exec, and feeds their values back to parent events.
 //
 #[no_mangle]
 unsafe extern "C" fn perf_event_remove_on_exec(ctx: *mut perf_event_context) {
-    static void perf_event_remove_on_exec(struct perf_event_context *ctx)
-    {
-    struct perf_event_context *clone_ctx = core::ptr::null_mut();
-    struct perf_event *event, *next;
-    unsigned long flags;
-    let mut modified: bool = false;
+    let mut clone_ctx = core::ptr::null_mut();
+    let mut event = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+    let mut flags = 0;
+pub static mut modified: bool = false;
     mutex_lock(&ctx.mutex);
-    if (WARN_ON_ONCE(ctx.task != current))
-    goto unlock;
+    if (WARN_ON_ONCE!(ctx.task != current)) {
+// goto;
+    }
     list_for_each_entry_safe(event, next, &ctx.event_list, event_entry) {
-    if (!event.attr.remove_on_exec)
+    if (!event.attr.remove_on_exec) {
     continue;
-    if (!is_kernel_event(event))
+    }
+    if (!is_kernel_event(event)) {
     perf_remove_from_owner(event);
+    }
     modified = true;
     perf_event_exit_event(event, ctx, ctx.task, DETACH_GROUP);
     }
     raw_spin_lock_irqsave(&ctx.lock, flags);
-    if (modified)
+    if (modified) {
     clone_ctx = unclone_ctx(ctx);
+    }
     raw_spin_unlock_irqrestore(&ctx.lock, flags);
-    unlock:
+// label;
     mutex_unlock(&ctx.mutex);
-    if (clone_ctx)
+    if (clone_ctx) {
     put_ctx(clone_ctx);
+    }
     }
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -4189,22 +4359,23 @@ pub struct perf_read_data {
     static inline const struct cpumask *perf_scope_cpu_topology_cpumask(unsigned int scope, int cpu);
 #[no_mangle]
 unsafe extern "C" fn __perf_event_read_cpu(event: *mut perf_event, event_cpu: c_int) -> c_int {
-    static int __perf_event_read_cpu(struct perf_event *event, int event_cpu)
-    {
-    let mut local_cpu: c_int = smp_processor_id();
+pub static mut local_cpu: c_int = 0;
     u16 local_pkg, event_pkg;
-    if ((unsigned)event_cpu >= nr_cpu_ids)
+    if ((unsigned)event_cpu >= nr_cpu_ids) {
     return event_cpu;
+    }
     if (event.group_caps & PERF_EV_CAP_READ_SCOPE) {
-    const struct cpumask *cpumask = perf_scope_cpu_topology_cpumask(event.pmu.scope, event_cpu);
-    if (cpumask && cpumask_test_cpu(local_cpu, cpumask))
+    let mut cpumask = perf_scope_cpu_topology_cpumask(event.pmu.scope, event_cpu);
+    if (cpumask && cpumask_test_cpu(local_cpu, cpumask)) {
     return local_cpu;
+    }
     }
     if (event.group_caps & PERF_EV_CAP_READ_ACTIVE_PKG) {
     event_pkg = topology_physical_package_id(event_cpu);
     local_pkg = topology_physical_package_id(local_cpu);
-    if (event_pkg == local_pkg)
+    if (event_pkg == local_pkg) {
     return local_cpu;
+    }
     }
     return event_cpu;
     }
@@ -4213,13 +4384,11 @@ unsafe extern "C" fn __perf_event_read_cpu(event: *mut perf_event, event_cpu: c_
 //
 #[no_mangle]
 unsafe extern "C" fn __perf_event_read(info: *mut c_void) {
-    static void __perf_event_read(void *info)
-    {
-    struct perf_read_data *data = info;
+    let mut data = info;
     struct perf_event *sub, *event = data.event;
-    struct perf_event_context *ctx = event.ctx;
-    struct perf_cpu_context *cpuctx = this_cpu_ptr(&perf_cpu_context);
-    struct pmu *pmu;
+    let mut ctx = event.ctx;
+    let mut cpuctx = this_cpu_ptr(&perf_cpu_context);
+pub static mut pmu: *mut c_void = core::ptr::null_mut();
 //
 // If this is a task context, we need to check whether it is
 // the current task context of this cpu.  If not it has been
@@ -4227,15 +4396,18 @@ unsafe extern "C" fn __perf_event_read(info: *mut c_void) {
 // event->count would have been updated to a recent sample
 // when the event was scheduled out.
 //
-    if (ctx.task && cpuctx.task_ctx != ctx)
+    if (ctx.task && cpuctx.task_ctx != ctx) {
     return;
+    }
     guard(raw_spinlock)(&ctx.lock);
     ctx_time_update_event(ctx, event);
     perf_event_update_time(event);
-    if (data.group)
+    if (data.group) {
     perf_event_update_sibling_time(event);
-    if (event.state != PERF_EVENT_STATE_ACTIVE)
+    }
+    if (event.state != PERF_EVENT_STATE_ACTIVE) {
     return;
+    }
     if (!data.group) {
     perf_pmu_read(event);
     data.ret = 0;
@@ -4244,24 +4416,21 @@ unsafe extern "C" fn __perf_event_read(info: *mut c_void) {
     pmu = event.pmu_ctx.pmu;
     pmu.start_txn(pmu, PERF_PMU_TXN_READ);
     perf_pmu_read(event);
-    for_each_sibling_event(sub, event)
+    for_each_sibling_event(sub, event) {
     perf_pmu_read(sub);
+    }
     data.ret = pmu.commit_txn(pmu);
     }
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_count(event: *mut perf_event, self: bool) -> u64 {
-    static inline u64 perf_event_count(struct perf_event *event, bool self)
-    {
-    if (self)
+    if (self) {
     return local64_read(&event.count);
+    }
     return local64_read(&event.count) + atomic64_read(&event.child_count);
     }
-    static void calc_timer_values(struct perf_event *event,
-    u64 *now,
-    u64 *enabled,
-    u64 *running)
-    {
-    u64 ctx_time;
+#[no_mangle]
+pub unsafe extern "C" fn calc_timer_values(event: *mut perf_event, now: *mut u64, enabled: *mut u64, running: *mut u64) {
+    let mut ctx_time = 0;
 // now = perf_clock();
     ctx_time = perf_event_time_now(event, *now);
     __perf_update_times(event, ctx_time, enabled, running);
@@ -4274,13 +4443,12 @@ pub unsafe extern "C" fn perf_event_count(event: *mut perf_event, self: bool) ->
 // will not be local and we cannot read them atomically
 // - must not have a pmu::count method
 //
-    int perf_event_read_local(struct perf_event *event, u64 *value,
-    u64 *enabled, u64 *running)
-    {
-    unsigned long flags;
-    int event_oncpu;
-    int event_cpu;
-    let mut ret: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_read_local(event: *mut perf_event, value: *mut u64, enabled: *mut u64, running: *mut u64) -> c_int {
+    let mut flags = 0;
+    let mut event_oncpu = 0;
+    let mut event_cpu = 0;
+pub static mut ret: c_int = 0;
 //
 // Disabling interrupts avoids all counter scheduling (context
 // switches, timer based rotation and IPIs).
@@ -4292,13 +4460,13 @@ pub unsafe extern "C" fn perf_event_count(event: *mut perf_event, self: bool) ->
 //
     if (event.attr.inherit) {
     ret = -EOPNOTSUPP;
-    goto out;
+// goto;
     }
 // If this is a per-task event, it must be for current
     if ((event.attach_state & PERF_ATTACH_TASK) &&
     event.hw.target != current) {
     ret = -EINVAL;
-    goto out;
+// goto;
     }
 //
 // Get the event CPU numbers, and adjust them to local if the event is
@@ -4310,46 +4478,47 @@ pub unsafe extern "C" fn perf_event_count(event: *mut perf_event, self: bool) ->
     if (!(event.attach_state & PERF_ATTACH_TASK) &&
     event_cpu != smp_processor_id()) {
     ret = -EINVAL;
-    goto out;
+// goto;
     }
 // If this is a pinned event it must be running on this CPU
     if (event.attr.pinned && event_oncpu != smp_processor_id()) {
     ret = -EBUSY;
-    goto out;
+// goto;
     }
 //
 // If the event is currently on this CPU, its either a per-task event,
 // or local to this CPU. Furthermore it means its ACTIVE (otherwise
 // oncpu == -1).
 //
-    if (event_oncpu == smp_processor_id())
+    if (event_oncpu == smp_processor_id()) {
     event.pmu.read(event);
+    }
 // value = local64_read(&event->count);
     if (enabled || running) {
     u64 __enabled, __running, __now;
     calc_timer_values(event, &__now, &__enabled, &__running);
-    if (enabled)
+    if (enabled) {
 // enabled = __enabled;
-    if (running)
+    }
+    if (running) {
 // running = __running;
     }
-    out:
+    }
+// label;
     local_irq_restore(flags);
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_read(event: *mut perf_event, group: bool) -> c_int {
-    static int perf_event_read(struct perf_event *event, bool group)
-    {
-    let mut state: enum perf_event_state = READ_ONCE(event.state);
+pub static mut state: perf_event_state = 0;
     int event_cpu, ret = 0;
 //
 // If event is enabled and currently active on a CPU, update the
 // value in the event structure:
 //
-    again:
+// label;
     if (state == PERF_EVENT_STATE_ACTIVE) {
-    struct perf_read_data data;
+pub static mut data: usize = 0;
 //
 // Orders the ->state and ->oncpu loads such that if we see
 // ACTIVE we must also see the right ->oncpu.
@@ -4358,9 +4527,10 @@ unsafe extern "C" fn perf_event_read(event: *mut perf_event, group: bool) -> c_i
 //
     smp_rmb();
     event_cpu = READ_ONCE(event.oncpu);
-    if ((unsigned)event_cpu >= nr_cpu_ids)
+    if ((unsigned)event_cpu >= nr_cpu_ids) {
     return 0;
-    data = (struct perf_read_data){
+    }
+    data = (perf_read_data){
     .event = event,
     .group = group,
     .ret = 0,
@@ -4381,13 +4551,13 @@ unsafe extern "C" fn perf_event_read(event: *mut perf_event, group: bool) -> c_i
     preempt_enable();
     ret = data.ret;
     } else if (state == PERF_EVENT_STATE_INACTIVE) {
-    struct perf_event_context *ctx = event.ctx;
-    unsigned long flags;
+    let mut ctx = event.ctx;
+    let mut flags = 0;
     raw_spin_lock_irqsave(&ctx.lock, flags);
     state = event.state;
     if (state != PERF_EVENT_STATE_INACTIVE) {
     raw_spin_unlock_irqrestore(&ctx.lock, flags);
-    goto again;
+// goto;
     }
 //
 // May read while context is not active (e.g., thread is
@@ -4395,8 +4565,9 @@ unsafe extern "C" fn perf_event_read(event: *mut perf_event, group: bool) -> c_i
 //
     ctx_time_update_event(ctx, event);
     perf_event_update_time(event);
-    if (group)
+    if (group) {
     perf_event_update_sibling_time(event);
+    }
     raw_spin_unlock_irqrestore(&ctx.lock, flags);
     }
     return ret;
@@ -4406,8 +4577,6 @@ unsafe extern "C" fn perf_event_read(event: *mut perf_event, group: bool) -> c_i
 //
 #[no_mangle]
 unsafe extern "C" fn __perf_event_init_context(ctx: *mut perf_event_context) {
-    static void __perf_event_init_context(struct perf_event_context *ctx)
-    {
     raw_spin_lock_init(&ctx.lock);
     mutex_init(&ctx.mutex);
     INIT_LIST_HEAD(&ctx.pmu_ctx_list);
@@ -4416,58 +4585,61 @@ unsafe extern "C" fn __perf_event_init_context(ctx: *mut perf_event_context) {
     INIT_LIST_HEAD(&ctx.event_list);
     refcount_set(&ctx.refcount, 1);
     }
-    static void
-    __perf_init_event_pmu_context(struct perf_event_pmu_context *epc, struct pmu *pmu)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __perf_init_event_pmu_context(epc: *mut perf_event_pmu_context, pmu: *mut pmu) {
     epc.pmu = pmu;
     INIT_LIST_HEAD(&epc.pmu_ctx_entry);
     INIT_LIST_HEAD(&epc.pinned_active);
     INIT_LIST_HEAD(&epc.flexible_active);
     atomic_set(&epc.refcount, 1);
     }
-    static struct perf_event_context *
-    alloc_perf_context(struct task_struct *task)
-    {
-    struct perf_event_context *ctx;
-    ctx = kzalloc_obj(struct perf_event_context);
-    if (!ctx)
+#[no_mangle]
+pub unsafe extern "C" fn alloc_perf_context(task: *mut task_struct) -> *mut c_void {
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+    ctx = kzalloc_obj(perf_event_context);
+    if (!ctx) {
     return core::ptr::null_mut();
+    }
     __perf_event_init_context(ctx);
-    if (task)
+    if (task) {
     ctx.task = get_task_struct(task);
+    }
     return ctx;
     }
-    static struct task_struct *
-    find_lively_task_by_vpid(pid_t vpid)
-    {
-    struct task_struct *task;
+#[no_mangle]
+pub unsafe extern "C" fn find_lively_task_by_vpid(vpid: pid_t) -> *mut c_void {
+pub static mut task: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
-    if (!vpid)
+    if (!vpid) {
     task = current;
-    else
+    }
+    else {
     task = find_task_by_vpid(vpid);
-    if (task)
+    }
+    if (task) {
     get_task_struct(task);
+    }
     rcu_read_unlock();
-    if (!task)
+    if (!task) {
     return ERR_PTR(-ESRCH);
+    }
     return task;
     }
 //
 // Returns a matching context with refcount and pincount.
 //
-    static struct perf_event_context *
-    find_get_context(struct task_struct *task, struct perf_event *event)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn find_get_context(task: *mut task_struct, event: *mut perf_event) -> *mut c_void {
     struct perf_event_context *ctx, *clone_ctx = core::ptr::null_mut();
-    struct perf_cpu_context *cpuctx;
-    unsigned long flags;
-    int err;
+pub static mut cpuctx: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut err = 0;
     if (!task) {
 // Must be root to operate on a CPU event:
     err = perf_allow_cpu();
-    if (err)
+    if (err) {
     return ERR_PTR(err);
+    }
     cpuctx = per_cpu_ptr(&perf_cpu_context, event.cpu);
     ctx = &cpuctx.ctx;
     get_ctx(ctx);
@@ -4477,31 +4649,34 @@ unsafe extern "C" fn __perf_event_init_context(ctx: *mut perf_event_context) {
     return ctx;
     }
     err = -EINVAL;
-    retry:
+// label;
     ctx = perf_lock_task_context(task, &flags);
     if (ctx) {
     clone_ctx = unclone_ctx(ctx);
     ++ctx.pin_count;
     raw_spin_unlock_irqrestore(&ctx.lock, flags);
-    if (clone_ctx)
+    if (clone_ctx) {
     put_ctx(clone_ctx);
+    }
     } else {
     ctx = alloc_perf_context(task);
     err = -ENOMEM;
-    if (!ctx)
-    goto errout;
+    if (!ctx) {
+// goto;
+    }
     err = 0;
     mutex_lock(&task.perf_event_mutex);
 //
 // If it has already passed perf_event_exit_task().
 // we must see PF_EXITING, it takes this mutex too.
 //
-    if (task.flags & PF_EXITING)
+    if (task.flags & PF_EXITING) {
     err = -ESRCH;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: task->perf_event_ctxp) -> else {
-    else if (task.perf_event_ctxp)
+    }
+
+    else if (task.perf_event_ctxp) {
     err = -EAGAIN;
+    }
     else {
     get_ctx(ctx);
     ++ctx.pin_count;
@@ -4510,27 +4685,26 @@ pub unsafe extern "C" fn if(_arg: task->perf_event_ctxp) -> else {
     mutex_unlock(&task.perf_event_mutex);
     if (unlikely(err)) {
     put_ctx(ctx);
-    if (err == -EAGAIN)
-    goto retry;
-    goto errout;
+    if (err == -EAGAIN) {
+// goto;
+    }
+// goto;
     }
     }
     return ctx;
-    errout:
+// label;
     return ERR_PTR(err);
     }
-    static struct perf_event_pmu_context *
-    find_get_pmu_context(struct pmu *pmu, struct perf_event_context *ctx,
-    struct perf_event *event)
-    {
-    struct perf_event_pmu_context *new = core::ptr::null_mut(), *pos = core::ptr::null_mut(), *epc;
+#[no_mangle]
+pub unsafe extern "C" fn find_get_pmu_context(pmu: *mut pmu, ctx: *mut perf_event_context, event: *mut perf_event) -> *mut c_void {
+    let mut new = core::ptr::null_mut(), *pos = core::ptr::null_mut(), *epc;
     if (!ctx.task) {
 //
 // perf_pmu_migrate_context() / __perf_pmu_install_event()
 // relies on the fact that find_get_pmu_context() cannot fail
 // for CPU contexts.
 //
-    struct perf_cpu_pmu_context *cpc;
+pub static mut cpc: *mut c_void = core::ptr::null_mut();
     cpc = *per_cpu_ptr(pmu.cpu_pmu_context, event.cpu);
     epc = &cpc.epc;
     raw_spin_lock_irq(&ctx.lock);
@@ -4543,15 +4717,16 @@ pub unsafe extern "C" fn if(_arg: task->perf_event_ctxp) -> else {
     list_add(&epc.pmu_ctx_entry, &ctx.pmu_ctx_list);
     epc.ctx = ctx;
     } else {
-    WARN_ON_ONCE(epc.ctx != ctx);
+    WARN_ON_ONCE!(epc.ctx != ctx);
     atomic_inc(&epc.refcount);
     }
     raw_spin_unlock_irq(&ctx.lock);
     return epc;
     }
     new = kzalloc_obj(*epc);
-    if (!new)
+    if (!new) {
     return ERR_PTR(-ENOMEM);
+    }
     __perf_init_event_pmu_context(new, pmu);
 //
 // XXX
@@ -4564,53 +4739,47 @@ pub unsafe extern "C" fn if(_arg: task->perf_event_ctxp) -> else {
     raw_spin_lock_irq(&ctx.lock);
     list_for_each_entry(epc, &ctx.pmu_ctx_list, pmu_ctx_entry) {
     if (epc.pmu == pmu) {
-    WARN_ON_ONCE(epc.ctx != ctx);
+    WARN_ON_ONCE!(epc.ctx != ctx);
     atomic_inc(&epc.refcount);
-    goto found_epc;
+// goto;
     }
 // Make sure the pmu_ctx_list is sorted by PMU type:
-    if (!pos && epc.pmu.type > pmu.type)
+    if (!pos && epc.pmu.type > pmu.type) {
     pos = epc;
+    }
     }
     epc = new;
     new = core::ptr::null_mut();
-    if (!pos)
+    if (!pos) {
     list_add_tail(&epc.pmu_ctx_entry, &ctx.pmu_ctx_list);
-    else
+    }
+    else {
     list_add(&epc.pmu_ctx_entry, pos.pmu_ctx_entry.prev);
+    }
     epc.ctx = ctx;
-    found_epc:
+// label;
     raw_spin_unlock_irq(&ctx.lock);
     kfree(new);
     return epc;
     }
 #[no_mangle]
 unsafe extern "C" fn get_pmu_ctx(epc: *mut perf_event_pmu_context) {
-    static void get_pmu_ctx(struct perf_event_pmu_context *epc)
-    {
-    WARN_ON_ONCE(!atomic_inc_not_zero(&epc.refcount));
+    WARN_ON_ONCE!(!atomic_inc_not_zero(&epc.refcount));
     }
 #[no_mangle]
 unsafe extern "C" fn free_cpc_rcu(head: *mut rcu_head) {
-    static void free_cpc_rcu(struct rcu_head *head)
-    {
-    struct perf_cpu_pmu_context *cpc =
-    container_of(head, typeof(*cpc), epc.rcu_head);
+    let mut cpc = container_of!(head, typeof(*cpc), epc.rcu_head);
     kfree(cpc);
     }
 #[no_mangle]
 unsafe extern "C" fn free_epc_rcu(head: *mut rcu_head) {
-    static void free_epc_rcu(struct rcu_head *head)
-    {
-    struct perf_event_pmu_context *epc = container_of(head, typeof(*epc), rcu_head);
+    let mut epc = container_of!(head, typeof(*epc), rcu_head);
     kfree(epc);
     }
 #[no_mangle]
 unsafe extern "C" fn put_pmu_ctx(epc: *mut perf_event_pmu_context) {
-    static void put_pmu_ctx(struct perf_event_pmu_context *epc)
-    {
-    struct perf_event_context *ctx = epc.ctx;
-    unsigned long flags;
+    let mut ctx = epc.ctx;
+    let mut flags = 0;
 //
 // XXX
 //
@@ -4619,13 +4788,14 @@ unsafe extern "C" fn put_pmu_ctx(epc: *mut perf_event_pmu_context) {
 // can't because of the call-site in _free_event()/put_event()
 // which isn't always called under ctx->mutex.
 //
-    if (!atomic_dec_and_raw_lock_irqsave(&epc.refcount, &ctx.lock, flags))
+    if (!atomic_dec_and_raw_lock_irqsave(&epc.refcount, &ctx.lock, flags)) {
     return;
-    WARN_ON_ONCE(list_empty(&epc.pmu_ctx_entry));
+    }
+    WARN_ON_ONCE!(list_empty(&epc.pmu_ctx_entry));
     list_del_init(&epc.pmu_ctx_entry);
     epc.ctx = core::ptr::null_mut();
-    WARN_ON_ONCE(!list_empty(&epc.pinned_active));
-    WARN_ON_ONCE(!list_empty(&epc.flexible_active));
+    WARN_ON_ONCE!(!list_empty(&epc.pinned_active));
+    WARN_ON_ONCE!(!list_empty(&epc.flexible_active));
     raw_spin_unlock_irqrestore(&ctx.lock, flags);
     if (epc.embedded) {
     call_rcu(&epc.rcu_head, free_cpc_rcu);
@@ -4633,83 +4803,78 @@ unsafe extern "C" fn put_pmu_ctx(epc: *mut perf_event_pmu_context) {
     }
     call_rcu(&epc.rcu_head, free_epc_rcu);
     }
-    static void perf_event_free_filter(struct perf_event *event);
+// forward_decl: perf_event_free_filter;
 #[no_mangle]
 unsafe extern "C" fn free_event_rcu(head: *mut rcu_head) {
-    static void free_event_rcu(struct rcu_head *head)
-    {
-    struct perf_event *event = container_of(head, typeof(*event), rcu_head);
-    if (event.ns)
+    let mut event = container_of!(head, typeof(*event), rcu_head);
+    if (event.ns) {
     put_pid_ns(event.ns);
+    }
     perf_event_free_filter(event);
     kfree(event.addr_filter_ranges);
     kmem_cache_free(perf_event_cache, event);
     }
-    static void ring_buffer_attach(struct perf_event *event,
-    struct perf_buffer *rb);
+// forward_decl: ring_buffer_attach;
 #[no_mangle]
 unsafe extern "C" fn detach_sb_event(event: *mut perf_event) {
-    static void detach_sb_event(struct perf_event *event)
-    {
-    struct pmu_event_list *pel = per_cpu_ptr(&pmu_sb_events, event.cpu);
+    let mut pel = per_cpu_ptr(&pmu_sb_events, event.cpu);
     raw_spin_lock(&pel.lock);
     list_del_rcu(&event.sb_list);
     raw_spin_unlock(&pel.lock);
     }
 #[no_mangle]
 unsafe extern "C" fn is_sb_event(event: *mut perf_event) -> bool {
-    static bool is_sb_event(struct perf_event *event)
-    {
-    struct perf_event_attr *attr = &event.attr;
-    if (event.parent)
+    let mut attr = &event.attr;
+    if (event.parent) {
     return false;
-    if (event.attach_state & PERF_ATTACH_TASK)
+    }
+    if (event.attach_state & PERF_ATTACH_TASK) {
     return false;
+    }
     if (attr.mmap || attr.mmap_data || attr.mmap2 ||
     attr.comm || attr.comm_exec ||
     attr.task || attr.ksymbol ||
     attr.context_switch || attr.text_poke ||
-    attr.bpf_event)
+    attr.bpf_event) {
     return true;
+    }
     return false;
     }
 #[no_mangle]
 unsafe extern "C" fn unaccount_pmu_sb_event(event: *mut perf_event) {
-    static void unaccount_pmu_sb_event(struct perf_event *event)
-    {
-    if (is_sb_event(event))
+    if (is_sb_event(event)) {
     detach_sb_event(event);
     }
+    }
 
-    static DEFINE_SPINLOCK(nr_freq_lock);
+pub static mut nr_freq_lock: usize = 0;
 
 #[no_mangle]
 unsafe extern "C" fn unaccount_freq_event_nohz() {
-    static void unaccount_freq_event_nohz(void)
-    {
 
     spin_lock(&nr_freq_lock);
-    if (atomic_dec_and_test(&nr_freq_events))
+    if (atomic_dec_and_test(&nr_freq_events)) {
     tick_nohz_dep_clear(TICK_DEP_BIT_PERF_EVENTS);
+    }
     spin_unlock(&nr_freq_lock);
 
     }
 #[no_mangle]
 unsafe extern "C" fn unaccount_freq_event() {
-    static void unaccount_freq_event(void)
-    {
-    if (tick_nohz_full_enabled())
+    if (tick_nohz_full_enabled()) {
     unaccount_freq_event_nohz();
-    else
+    }
+    else {
     atomic_dec(&nr_freq_events);
     }
-    static struct perf_ctx_data *
-    alloc_perf_ctx_data(struct kmem_cache *ctx_cache, bool global, gfp_t gfp_flags)
-    {
-    struct perf_ctx_data *cd;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn alloc_perf_ctx_data(ctx_cache: *mut kmem_cache, global: bool, gfp_flags: gfp_t) -> *mut c_void {
+pub static mut cd: *mut c_void = core::ptr::null_mut();
     cd = kzalloc_obj(*cd, gfp_flags);
-    if (!cd)
+    if (!cd) {
     return core::ptr::null_mut();
+    }
     cd.data = kmem_cache_zalloc(ctx_cache, gfp_flags);
     if (!cd.data) {
     kfree(cd);
@@ -4722,37 +4887,31 @@ unsafe extern "C" fn unaccount_freq_event() {
     }
 #[no_mangle]
 unsafe extern "C" fn free_perf_ctx_data(cd: *mut perf_ctx_data) {
-    static void free_perf_ctx_data(struct perf_ctx_data *cd)
-    {
     kmem_cache_free(cd.ctx_cache, cd.data);
     kfree(cd);
     }
 #[no_mangle]
 unsafe extern "C" fn __free_perf_ctx_data_rcu(rcu_head: *mut rcu_head) {
-    static void __free_perf_ctx_data_rcu(struct rcu_head *rcu_head)
-    {
-    struct perf_ctx_data *cd;
-    cd = container_of(rcu_head, struct perf_ctx_data, rcu_head);
+pub static mut cd: *mut c_void = core::ptr::null_mut();
+    cd = container_of!(rcu_head, perf_ctx_data, rcu_head);
     free_perf_ctx_data(cd);
     }
 #[no_mangle]
 pub unsafe extern "C" fn perf_free_ctx_data_rcu(cd: *mut perf_ctx_data) {
-    static inline void perf_free_ctx_data_rcu(struct perf_ctx_data *cd)
-    {
     call_rcu(&cd.rcu_head, __free_perf_ctx_data_rcu);
     }
-    static int
-    attach_task_ctx_data(struct task_struct *task, struct kmem_cache *ctx_cache,
-    bool global, gfp_t gfp_flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn attach_task_ctx_data(task: *mut task_struct, ctx_cache: *mut kmem_cache, global: bool, gfp_flags: gfp_t) -> c_int {
     struct perf_ctx_data *cd, *old = core::ptr::null_mut();
     cd = alloc_perf_ctx_data(ctx_cache, global, gfp_flags);
-    if (!cd)
+    if (!cd) {
     return -ENOMEM;
+    }
     for (;;) {
     if (try_cmpxchg(&task.perf_ctx_data, &old, cd)) {
-    if (old)
+    if (old) {
     perf_free_ctx_data_rcu(old);
+    }
 //
 // Above try_cmpxchg() pairs with try_cmpxchg() from
 // detach_task_ctx_data() such that
@@ -4761,8 +4920,9 @@ pub unsafe extern "C" fn perf_free_ctx_data_rcu(cd: *mut perf_ctx_data) {
 //
     if (task.flags & PF_EXITING) {
 // detach_task_ctx_data() may free it already
-    if (try_cmpxchg(&task.perf_ctx_data, &cd, core::ptr::null_mut()))
+    if (try_cmpxchg(&task.perf_ctx_data, &cd, core::ptr::null_mut())) {
     perf_free_ctx_data_rcu(cd);
+    }
     }
     return 0;
     }
@@ -4784,94 +4944,101 @@ pub unsafe extern "C" fn perf_free_ctx_data_rcu(cd: *mut perf_ctx_data) {
     }
     return 0;
     }
-    static void __detach_global_ctx_data(void);
-    DEFINE_STATIC_PERCPU_RWSEM(global_ctx_data_rwsem);
+// forward_decl: __detach_global_ctx_data;
+pub static mut global_ctx_data_rwsem: usize = 0;
     static refcount_t global_ctx_data_ref;
-    static int
-    attach_global_ctx_data(struct kmem_cache *ctx_cache)
-    {
-    struct task_struct *g, *p;
-    struct perf_ctx_data *cd;
-    int ret;
-    if (refcount_inc_not_zero(&global_ctx_data_ref))
+#[no_mangle]
+pub unsafe extern "C" fn attach_global_ctx_data(ctx_cache: *mut kmem_cache) -> c_int {
+    let mut g = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
+pub static mut cd: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (refcount_inc_not_zero(&global_ctx_data_ref)) {
     return 0;
+    }
     guard(percpu_write)(&global_ctx_data_rwsem);
-    if (refcount_inc_not_zero(&global_ctx_data_ref))
+    if (refcount_inc_not_zero(&global_ctx_data_ref)) {
     return 0;
-    again:
+    }
+// label;
 // Allocate everything
     scoped_guard (rcu) {
     for_each_process_thread(g, p) {
-    if (p.flags & PF_EXITING)
+    if (p.flags & PF_EXITING) {
     continue;
+    }
     cd = rcu_dereference(p.perf_ctx_data);
     if (cd && !cd.global) {
     cd.global = 1;
-    if (!refcount_inc_not_zero(&cd.refcount))
+    if (!refcount_inc_not_zero(&cd.refcount)) {
     cd = core::ptr::null_mut();
+    }
     }
     if (!cd) {
 //
 // Try to allocate context quickly before
 // traversing the whole thread list again.
 //
-    if (!attach_task_ctx_data(p, ctx_cache, true, GFP_NOWAIT))
+    if (!attach_task_ctx_data(p, ctx_cache, true, GFP_NOWAIT)) {
     continue;
+    }
     get_task_struct(p);
-    goto alloc;
+// goto;
     }
     }
     }
     refcount_set(&global_ctx_data_ref, 1);
     return 0;
-    alloc:
+// label;
     ret = attach_task_ctx_data(p, ctx_cache, true, GFP_KERNEL);
     put_task_struct(p);
     if (ret) {
     __detach_global_ctx_data();
     return ret;
     }
-    goto again;
+// goto;
     }
-    static int
-    attach_perf_ctx_data(struct perf_event *event)
-    {
-    struct task_struct *task = event.hw.target;
-    struct kmem_cache *ctx_cache = event.pmu.task_ctx_cache;
-    int ret;
-    if (!ctx_cache)
+#[no_mangle]
+pub unsafe extern "C" fn attach_perf_ctx_data(event: *mut perf_event) -> c_int {
+    let mut task = event.hw.target;
+    let mut ctx_cache = event.pmu.task_ctx_cache;
+    let mut ret = 0;
+    if (!ctx_cache) {
     return -ENOMEM;
-    if (task)
+    }
+    if (task) {
     return attach_task_ctx_data(task, ctx_cache, false, GFP_KERNEL);
+    }
     ret = attach_global_ctx_data(ctx_cache);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     event.attach_state |= PERF_ATTACH_GLOBAL_DATA;
     return 0;
     }
-    static void
-    detach_task_ctx_data(struct task_struct *p)
-    {
-    struct perf_ctx_data *cd;
+#[no_mangle]
+pub unsafe extern "C" fn detach_task_ctx_data(p: *mut task_struct) {
+pub static mut cd: *mut c_void = core::ptr::null_mut();
     scoped_guard (rcu) {
     cd = rcu_dereference(p.perf_ctx_data);
-    if (!cd || !refcount_dec_and_test(&cd.refcount))
+    if (!cd || !refcount_dec_and_test(&cd.refcount)) {
     return;
+    }
     }
 //
 // The old ctx_data may be lost because of the race.
 // Nothing is required to do for the case.
 // See attach_task_ctx_data().
 //
-    if (try_cmpxchg((struct perf_ctx_data **)&p.perf_ctx_data, &cd, core::ptr::null_mut()))
+    if (try_cmpxchg(&p.perf_ctx_data, &cd, core::ptr::null_mut())) {
     perf_free_ctx_data_rcu(cd);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn __detach_global_ctx_data() {
-    static void __detach_global_ctx_data(void)
-    {
-    struct task_struct *g, *p;
-    struct perf_ctx_data *cd;
+    let mut g = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
+pub static mut cd: *mut c_void = core::ptr::null_mut();
     scoped_guard (rcu) {
     for_each_process_thread(g, p) {
     cd = rcu_dereference(p.perf_ctx_data);
@@ -4884,24 +5051,23 @@ unsafe extern "C" fn __detach_global_ctx_data() {
     }
 #[no_mangle]
 unsafe extern "C" fn detach_global_ctx_data() {
-    static void detach_global_ctx_data(void)
-    {
-    if (refcount_dec_not_one(&global_ctx_data_ref))
+    if (refcount_dec_not_one(&global_ctx_data_ref)) {
     return;
+    }
     guard(percpu_write)(&global_ctx_data_rwsem);
-    if (!refcount_dec_and_test(&global_ctx_data_ref))
+    if (!refcount_dec_and_test(&global_ctx_data_ref)) {
     return;
+    }
 // remove everything
     __detach_global_ctx_data();
     }
 #[no_mangle]
 unsafe extern "C" fn detach_perf_ctx_data(event: *mut perf_event) {
-    static void detach_perf_ctx_data(struct perf_event *event)
-    {
-    struct task_struct *task = event.hw.target;
+    let mut task = event.hw.target;
     event.attach_state &= ~PERF_ATTACH_TASK_DATA;
-    if (task)
+    if (task) {
     return detach_task_ctx_data(task);
+    }
     if (event.attach_state & PERF_ATTACH_GLOBAL_DATA) {
     detach_global_ctx_data();
     event.attach_state &= ~PERF_ATTACH_GLOBAL_DATA;
@@ -4909,54 +5075,66 @@ unsafe extern "C" fn detach_perf_ctx_data(event: *mut perf_event) {
     }
 #[no_mangle]
 unsafe extern "C" fn unaccount_event(event: *mut perf_event) {
-    static void unaccount_event(struct perf_event *event)
-    {
-    let mut dec: bool = false;
-    if (event.parent)
+pub static mut dec: bool = false;
+    if (event.parent) {
     return;
-    if (event.attach_state & (PERF_ATTACH_TASK | PERF_ATTACH_SCHED_CB))
+    }
+    if (event.attach_state & (PERF_ATTACH_TASK | PERF_ATTACH_SCHED_CB)) {
     dec = true;
-    if (event.attr.mmap || event.attr.mmap_data)
+    }
+    if (event.attr.mmap || event.attr.mmap_data) {
     atomic_dec(&nr_mmap_events);
-    if (event.attr.build_id)
+    }
+    if (event.attr.build_id) {
     atomic_dec(&nr_build_id_events);
-    if (event.attr.comm)
+    }
+    if (event.attr.comm) {
     atomic_dec(&nr_comm_events);
-    if (event.attr.namespaces)
+    }
+    if (event.attr.namespaces) {
     atomic_dec(&nr_namespaces_events);
-    if (event.attr.cgroup)
+    }
+    if (event.attr.cgroup) {
     atomic_dec(&nr_cgroup_events);
-    if (event.attr.task)
+    }
+    if (event.attr.task) {
     atomic_dec(&nr_task_events);
-    if (event.attr.freq)
+    }
+    if (event.attr.freq) {
     unaccount_freq_event();
+    }
     if (event.attr.context_switch) {
     dec = true;
     atomic_dec(&nr_switch_events);
     }
-    if (is_cgroup_event(event))
+    if (is_cgroup_event(event)) {
     dec = true;
-    if (has_branch_stack(event))
+    }
+    if (has_branch_stack(event)) {
     dec = true;
-    if (event.attr.ksymbol)
+    }
+    if (event.attr.ksymbol) {
     atomic_dec(&nr_ksymbol_events);
-    if (event.attr.bpf_event)
+    }
+    if (event.attr.bpf_event) {
     atomic_dec(&nr_bpf_events);
-    if (event.attr.text_poke)
+    }
+    if (event.attr.text_poke) {
     atomic_dec(&nr_text_poke_events);
+    }
     if (dec) {
-    if (!atomic_add_unless(&perf_sched_count, -1, 1))
+    if (!atomic_add_unless(&perf_sched_count, -1, 1)) {
     schedule_delayed_work(&perf_sched_work, HZ);
+    }
     }
     unaccount_pmu_sb_event(event);
     }
 #[no_mangle]
 unsafe extern "C" fn perf_sched_delayed(work: *mut work_struct) {
-    static void perf_sched_delayed(struct work_struct *work)
-    {
     mutex_lock(&perf_sched_mutex);
-    if (atomic_dec_and_test(&perf_sched_count))
+    if (atomic_dec_and_test(&perf_sched_count)) {
     static_branch_disable(&perf_sched_events);
+    }
     mutex_unlock(&perf_sched_mutex);
     }
 //
@@ -4973,11 +5151,10 @@ unsafe extern "C" fn perf_sched_delayed(work: *mut work_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn exclusive_event_init(event: *mut perf_event) -> c_int {
-    static int exclusive_event_init(struct perf_event *event)
-    {
-    struct pmu *pmu = event.pmu;
-    if (!is_exclusive_pmu(pmu))
+    let mut pmu = event.pmu;
+    if (!is_exclusive_pmu(pmu)) {
     return 0;
+    }
 //
 // Prevent co-existence of per-task and cpu-wide events on the
 // same exclusive pmu.
@@ -4992,94 +5169,101 @@ unsafe extern "C" fn exclusive_event_init(event: *mut perf_event) -> c_int {
 // never gets cleared.
 //
     if (event.attach_state & PERF_ATTACH_TASK) {
-    if (!atomic_inc_unless_negative(&pmu.exclusive_cnt))
+    if (!atomic_inc_unless_negative(&pmu.exclusive_cnt)) {
     return -EBUSY;
+    }
     } else {
-    if (!atomic_dec_unless_positive(&pmu.exclusive_cnt))
+    if (!atomic_dec_unless_positive(&pmu.exclusive_cnt)) {
     return -EBUSY;
+    }
     }
     event.attach_state |= PERF_ATTACH_EXCLUSIVE;
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn exclusive_event_destroy(event: *mut perf_event) {
-    static void exclusive_event_destroy(struct perf_event *event)
-    {
-    struct pmu *pmu = event.pmu;
+    let mut pmu = event.pmu;
 // see comment in exclusive_event_init()
-    if (event.attach_state & PERF_ATTACH_TASK)
+    if (event.attach_state & PERF_ATTACH_TASK) {
     atomic_dec(&pmu.exclusive_cnt);
-    else
+    }
+    else {
     atomic_inc(&pmu.exclusive_cnt);
+    }
     event.attach_state &= ~PERF_ATTACH_EXCLUSIVE;
     }
 #[no_mangle]
 unsafe extern "C" fn exclusive_event_match(e1: *mut perf_event, e2: *mut perf_event) -> bool {
-    static bool exclusive_event_match(struct perf_event *e1, struct perf_event *e2)
-    {
     if ((e1.pmu == e2.pmu) &&
     (e1.cpu == e2.cpu ||
     e1.cpu == -1 ||
-    e2.cpu == -1))
+    e2.cpu == -1)) {
     return true;
+    }
     return false;
     }
-    static bool exclusive_event_installable(struct perf_event *event,
-    struct perf_event_context *ctx)
-    {
-    struct perf_event *iter_event;
-    struct pmu *pmu = event.pmu;
+#[no_mangle]
+pub unsafe extern "C" fn exclusive_event_installable(event: *mut perf_event, ctx: *mut perf_event_context) -> bool {
+pub static mut iter_event: *mut c_void = core::ptr::null_mut();
+    let mut pmu = event.pmu;
     lockdep_assert_held(&ctx.mutex);
-    if (!is_exclusive_pmu(pmu))
+    if (!is_exclusive_pmu(pmu)) {
     return true;
+    }
     list_for_each_entry(iter_event, &ctx.event_list, event_entry) {
-    if (exclusive_event_match(iter_event, event))
+    if (exclusive_event_match(iter_event, event)) {
     return false;
     }
+    }
     return true;
     }
-    static void perf_free_addr_filters(struct perf_event *event);
+// forward_decl: perf_free_addr_filters;
 // vs perf_event_alloc() error
 #[no_mangle]
 unsafe extern "C" fn __free_event(event: *mut perf_event) {
-    static void __free_event(struct perf_event *event)
-    {
-    struct pmu *pmu = event.pmu;
+    let mut pmu = event.pmu;
     security_perf_event_free(event);
-    if (event.attach_state & PERF_ATTACH_CALLCHAIN)
+    if (event.attach_state & PERF_ATTACH_CALLCHAIN) {
     put_callchain_buffers();
-    if (event.attach_state & PERF_ATTACH_EXCLUSIVE)
+    }
+    if (event.attach_state & PERF_ATTACH_EXCLUSIVE) {
     exclusive_event_destroy(event);
-    if (is_cgroup_event(event))
+    }
+    if (is_cgroup_event(event)) {
     perf_detach_cgroup(event);
-    if (event.attach_state & PERF_ATTACH_TASK_DATA)
+    }
+    if (event.attach_state & PERF_ATTACH_TASK_DATA) {
     detach_perf_ctx_data(event);
-    if (event.destroy)
+    }
+    if (event.destroy) {
     event.destroy(event);
+    }
 //
 // Must be after ->destroy(), due to uprobe_perf_close() using
 // hw.target.
 //
-    if (event.hw.target)
+    if (event.hw.target) {
     put_task_struct(event.hw.target);
+    }
     if (event.pmu_ctx) {
 //
 // put_pmu_ctx() needs an event->ctx reference, because of
 // epc->ctx.
 //
-    WARN_ON_ONCE(!pmu);
-    WARN_ON_ONCE(!event.ctx);
-    WARN_ON_ONCE(event.pmu_ctx.ctx != event.ctx);
+    WARN_ON_ONCE!(!pmu);
+    WARN_ON_ONCE!(!event.ctx);
+    WARN_ON_ONCE!(event.pmu_ctx.ctx != event.ctx);
     put_pmu_ctx(event.pmu_ctx);
     }
 //
 // perf_event_free_task() relies on put_ctx() being 'last', in
 // particular all task references must be cleaned up.
 //
-    if (event.ctx)
+    if (event.ctx) {
     put_ctx(event.ctx);
+    }
     if (pmu) {
-    module_put(pmu.module);
+    module_put!(pmu.module);
     scoped_guard (spinlock, &pmu.events_lock) {
     list_del(&event.pmu_list);
     wake_up_var(pmu);
@@ -5087,13 +5271,11 @@ unsafe extern "C" fn __free_event(event: *mut perf_event) {
     }
     call_rcu(&event.rcu_head, free_event_rcu);
     }
-    static void mediated_pmu_unaccount_event(struct perf_event *event);
-    DEFINE_FREE(__free_event, struct perf_event *, if (_T) __free_event(_T))
+// forward_decl: mediated_pmu_unaccount_event;
+    DEFINE_FREE(__free_event, perf_event *, if (_T) __free_event(_T))
 // vs perf_event_alloc() success
 #[no_mangle]
 unsafe extern "C" fn _free_event(event: *mut perf_event) {
-    static void _free_event(struct perf_event *event)
-    {
     irq_work_sync(&event.pending_irq);
     irq_work_sync(&event.pending_disable_irq);
     unaccount_event(event);
@@ -5119,8 +5301,6 @@ unsafe extern "C" fn _free_event(event: *mut perf_event) {
 //
 #[no_mangle]
 unsafe extern "C" fn free_event(event: *mut perf_event) {
-    static void free_event(struct perf_event *event)
-    {
     if (WARN(atomic_long_cmpxchg(&event.refcount, 1, 0) != 1,
     "unexpected event refcount: %ld; ptr=%p\n",
     atomic_long_read(&event.refcount), event)) {
@@ -5134,9 +5314,7 @@ unsafe extern "C" fn free_event(event: *mut perf_event) {
 //
 #[no_mangle]
 unsafe extern "C" fn perf_remove_from_owner(event: *mut perf_event) {
-    static void perf_remove_from_owner(struct perf_event *event)
-    {
-    struct task_struct *owner;
+pub static mut owner: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
 //
 // Matches the smp_store_release() in perf_event_exit_task(). If we
@@ -5180,16 +5358,16 @@ unsafe extern "C" fn perf_remove_from_owner(event: *mut perf_event) {
     }
 #[no_mangle]
 unsafe extern "C" fn put_event(event: *mut perf_event) {
-    static void put_event(struct perf_event *event)
-    {
-    struct perf_event *parent;
-    if (!atomic_long_dec_and_test(&event.refcount))
+pub static mut parent: *mut c_void = core::ptr::null_mut();
+    if (!atomic_long_dec_and_test(&event.refcount)) {
     return;
+    }
     parent = event.parent;
     _free_event(event);
 // Matches the refcount bump in inherit_event()
-    if (parent)
+    if (parent) {
     put_event(parent);
+    }
     }
 //
 // Kill an event dead; while event:refcount will preserve the event
@@ -5198,23 +5376,23 @@ unsafe extern "C" fn put_event(event: *mut perf_event) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_release_kernel(event: *mut perf_event) -> c_int {
-    int perf_event_release_kernel(struct perf_event *event)
-    {
-    struct perf_event_context *ctx = event.ctx;
-    struct perf_event *child, *tmp;
+    let mut ctx = event.ctx;
+    let mut child = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
 //
 // If we got here through err_alloc: free_event(event); we will not
 // have attached to a context yet.
 //
     if (!ctx) {
-    WARN_ON_ONCE(event.attach_state &
+    WARN_ON_ONCE!(event.attach_state &
     (PERF_ATTACH_CONTEXT|PERF_ATTACH_GROUP));
-    goto no_ctx;
+// goto;
     }
-    if (!is_kernel_event(event))
+    if (!is_kernel_event(event)) {
     perf_remove_from_owner(event);
+    }
     ctx = perf_event_ctx_lock(event);
-    WARN_ON_ONCE(ctx.parent_ctx);
+    WARN_ON_ONCE!(ctx.parent_ctx);
 //
 // Mark this event as STATE_DEAD, there is no external reference to it
 // anymore.
@@ -5232,7 +5410,7 @@ pub unsafe extern "C" fn perf_event_release_kernel(event: *mut perf_event) -> c_
     event.state = PERF_EVENT_STATE_DEAD;
     }
     perf_event_ctx_unlock(event, ctx);
-    again:
+// label;
     mutex_lock(&event.child_mutex);
     list_for_each_entry(child, &event.child_list, child_list) {
 //
@@ -5262,8 +5440,7 @@ pub unsafe extern "C" fn perf_event_release_kernel(event: *mut perf_event) -> c_
 // state, if child is still the first entry, it didn't get freed
 // and we can continue doing so.
 //
-    tmp = list_first_entry_or_null(&event.child_list,
-    struct perf_event, child_list);
+    tmp = list_first_entry_or_null(&event.child_list, perf_event, child_list);
     if (tmp == child) {
     perf_remove_from_context(child, DETACH_GROUP | DETACH_CHILD);
     } else {
@@ -5276,10 +5453,10 @@ pub unsafe extern "C" fn perf_event_release_kernel(event: *mut perf_event) -> c_
     put_event(child);
     }
     put_ctx(ctx);
-    goto again;
+// goto;
     }
     mutex_unlock(&event.child_mutex);
-    no_ctx:
+// label;
 //
 // Last reference unless ->pending_task work is pending on this event
 // or any of its children.
@@ -5293,17 +5470,13 @@ pub unsafe extern "C" fn perf_event_release_kernel(event: *mut perf_event) -> c_
 //
 #[no_mangle]
 unsafe extern "C" fn perf_release(inode: *mut inode, file: *mut file) -> c_int {
-    static int perf_release(struct inode *inode, struct file *file)
-    {
     perf_event_release_kernel(file.private_data);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn __perf_event_read_value(event: *mut perf_event, enabled: *mut u64, running: *mut u64) -> u64 {
-    static u64 __perf_event_read_value(struct perf_event *event, u64 *enabled, u64 *running)
-    {
-    struct perf_event *child;
-    let mut total: u64 = 0;
+pub static mut child: *mut c_void = core::ptr::null_mut();
+pub static mut total: u64 = 0;
 // enabled = 0;
 // running = 0;
     mutex_lock(&event.child_mutex);
@@ -5324,27 +5497,26 @@ unsafe extern "C" fn __perf_event_read_value(event: *mut perf_event, enabled: *m
     }
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_read_value(event: *mut perf_event, enabled: *mut u64, running: *mut u64) -> u64 {
-    u64 perf_event_read_value(struct perf_event *event, u64 *enabled, u64 *running)
-    {
-    struct perf_event_context *ctx;
-    u64 count;
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+    let mut count = 0;
     ctx = perf_event_ctx_lock(event);
     count = __perf_event_read_value(event, enabled, running);
     perf_event_ctx_unlock(event, ctx);
     return count;
     }
     EXPORT_SYMBOL_GPL(perf_event_read_value);
-    static int __perf_read_group_add(struct perf_event *leader,
-    u64 read_format, u64 *values)
-    {
-    struct perf_event_context *ctx = leader.ctx;
-    struct perf_event *sub, *parent;
-    unsigned long flags;
-    int n = 1; /* skip @nr */
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn __perf_read_group_add(leader: *mut perf_event, read_format: u64, values: *mut u64) -> c_int {
+    let mut ctx = leader.ctx;
+    let mut sub = core::ptr::null_mut();
+    let mut parent = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut n = 1; /* skip @nr */
+    let mut ret = 0;
     ret = perf_event_read(leader, true);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     raw_spin_lock_irqsave(&ctx.lock, flags);
 //
 // Verify the grouping between the parent and child (inherited)
@@ -5371,7 +5543,7 @@ pub unsafe extern "C" fn perf_event_read_value(event: *mut perf_event, enabled: 
     (parent.group_generation != leader.group_generation ||
     parent.nr_siblings != leader.nr_siblings)) {
     ret = -ECHILD;
-    goto unlock;
+// goto;
     }
 //
 // Since we co-schedule groups, {enabled,running} times of siblings
@@ -5390,79 +5562,89 @@ pub unsafe extern "C" fn perf_event_read_value(event: *mut perf_event, enabled: 
 // Write {count,id} tuples for every sibling.
 //
     values[n++] += perf_event_count(leader, false);
-    if (read_format & PERF_FORMAT_ID)
+    if (read_format & PERF_FORMAT_ID) {
     values[n++] = primary_event_id(leader);
-    if (read_format & PERF_FORMAT_LOST)
+    }
+    if (read_format & PERF_FORMAT_LOST) {
     values[n++] = atomic64_read(&leader.lost_samples);
+    }
     for_each_sibling_event(sub, leader) {
     values[n++] += perf_event_count(sub, false);
-    if (read_format & PERF_FORMAT_ID)
+    if (read_format & PERF_FORMAT_ID) {
     values[n++] = primary_event_id(sub);
-    if (read_format & PERF_FORMAT_LOST)
+    }
+    if (read_format & PERF_FORMAT_LOST) {
     values[n++] = atomic64_read(&sub.lost_samples);
     }
-    unlock:
+    }
+// label;
     raw_spin_unlock_irqrestore(&ctx.lock, flags);
     return ret;
     }
-    static int perf_read_group(struct perf_event *event,
-    u64 read_format, char __user *buf)
-    {
-    struct perf_event *leader = event.group_leader, *child;
-    struct perf_event_context *ctx = leader.ctx;
-    int ret;
-    u64 *values;
+#[no_mangle]
+pub unsafe extern "C" fn perf_read_group(event: *mut perf_event, read_format: u64, buf: *mut c_char) -> c_int {
+    let mut leader = event.group_leader, *child;
+    let mut ctx = leader.ctx;
+    let mut ret = 0;
+pub static mut values: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&ctx.mutex);
     values = kzalloc(event.read_size, GFP_KERNEL);
-    if (!values)
+    if (!values) {
     return -ENOMEM;
+    }
     values[0] = 1 + leader.nr_siblings;
     mutex_lock(&leader.child_mutex);
     ret = __perf_read_group_add(leader, read_format, values);
-    if (ret)
-    goto unlock;
+    if (ret) {
+// goto;
+    }
     list_for_each_entry(child, &leader.child_list, child_list) {
     ret = __perf_read_group_add(child, read_format, values);
-    if (ret)
-    goto unlock;
+    if (ret) {
+// goto;
+    }
     }
     mutex_unlock(&leader.child_mutex);
     ret = event.read_size;
-    if (copy_to_user(buf, values, event.read_size))
+    if (copy_to_user(buf, values, event.read_size)) {
     ret = -EFAULT;
-    goto out;
-    unlock:
+    }
+// goto;
+// label;
     mutex_unlock(&leader.child_mutex);
-    out:
+// label;
     kfree(values);
     return ret;
     }
-    static int perf_read_one(struct perf_event *event,
-    u64 read_format, char __user *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn perf_read_one(event: *mut perf_event, read_format: u64, buf: *mut c_char) -> c_int {
     u64 enabled, running;
     u64 values[5];
-    let mut n: c_int = 0;
+pub static mut n: c_int = 0;
     values[n++] = __perf_event_read_value(event, &enabled, &running);
-    if (read_format & PERF_FORMAT_TOTAL_TIME_ENABLED)
+    if (read_format & PERF_FORMAT_TOTAL_TIME_ENABLED) {
     values[n++] = enabled;
-    if (read_format & PERF_FORMAT_TOTAL_TIME_RUNNING)
+    }
+    if (read_format & PERF_FORMAT_TOTAL_TIME_RUNNING) {
     values[n++] = running;
-    if (read_format & PERF_FORMAT_ID)
+    }
+    if (read_format & PERF_FORMAT_ID) {
     values[n++] = primary_event_id(event);
-    if (read_format & PERF_FORMAT_LOST)
+    }
+    if (read_format & PERF_FORMAT_LOST) {
     values[n++] = atomic64_read(&event.lost_samples);
-    if (copy_to_user(buf, values, n * sizeof(u64)))
+    }
+    if (copy_to_user(buf, values, n * sizeof!(u64))) {
     return -EFAULT;
-    return n * sizeof(u64);
+    }
+    return n * sizeof!(u64);
     }
 #[no_mangle]
 unsafe extern "C" fn is_event_hup(event: *mut perf_event) -> bool {
-    static bool is_event_hup(struct perf_event *event)
-    {
-    bool no_children;
-    if (event.state > PERF_EVENT_STATE_EXIT)
+    let mut no_children = 0;
+    if (event.state > PERF_EVENT_STATE_EXIT) {
     return false;
+    }
     mutex_lock(&event.child_mutex);
     no_children = list_empty(&event.child_list);
     mutex_unlock(&event.child_mutex);
@@ -5471,36 +5653,39 @@ unsafe extern "C" fn is_event_hup(event: *mut perf_event) -> bool {
 //
 // Read the performance event - simple non blocking version for now
 //
-    static ssize_t
-    __perf_read(struct perf_event *event, char __user *buf, size_t count)
-    {
-    let mut read_format: u64 = event.attr.read_format;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn __perf_read(event: *mut perf_event, buf: *mut c_char, count: size_t) -> ssize_t {
+pub static mut read_format: u64 = 0;
+    let mut ret = 0;
 //
 // Return end-of-file for a read on an event that is in
 // error state (i.e. because it was pinned but it couldn't be
 // scheduled on to the CPU at some point).
 //
-    if (event.state == PERF_EVENT_STATE_ERROR)
+    if (event.state == PERF_EVENT_STATE_ERROR) {
     return 0;
-    if (count < event.read_size)
+    }
+    if (count < event.read_size) {
     return -ENOSPC;
-    WARN_ON_ONCE(event.ctx.parent_ctx);
-    if (read_format & PERF_FORMAT_GROUP)
+    }
+    WARN_ON_ONCE!(event.ctx.parent_ctx);
+    if (read_format & PERF_FORMAT_GROUP) {
     ret = perf_read_group(event, read_format, buf);
-    else
+    }
+    else {
     ret = perf_read_one(event, read_format, buf);
+    }
     return ret;
     }
-    static ssize_t
-    perf_read(struct file *file, char __user *buf, size_t count, loff_t *ppos)
-    {
-    struct perf_event *event = file.private_data;
-    struct perf_event_context *ctx;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn perf_read(file: *mut file, buf: *mut c_char, count: size_t, ppos: *mut loff_t) -> ssize_t {
+    let mut event = file.private_data;
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     ret = security_perf_event_read(event);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     ctx = perf_event_ctx_lock(event);
     ret = __perf_read(event, buf, count);
     perf_event_ctx_unlock(event, ctx);
@@ -5508,36 +5693,37 @@ unsafe extern "C" fn is_event_hup(event: *mut perf_event) -> bool {
     }
 #[no_mangle]
 unsafe extern "C" fn perf_poll(file: *mut file, wait: *mut poll_table) -> __poll_t {
-    static __poll_t perf_poll(struct file *file, poll_table *wait)
-    {
-    struct perf_event *event = file.private_data;
-    struct perf_buffer *rb;
-    let mut events: __poll_t = EPOLLHUP;
-    if (event.state <= PERF_EVENT_STATE_REVOKED)
+    let mut event = file.private_data;
+pub static mut rb: *mut c_void = core::ptr::null_mut();
+pub static mut events: __poll_t = 0;
+    if (event.state <= PERF_EVENT_STATE_REVOKED) {
     return EPOLLERR;
+    }
     poll_wait(file, &event.waitq, wait);
-    if (event.state <= PERF_EVENT_STATE_REVOKED)
+    if (event.state <= PERF_EVENT_STATE_REVOKED) {
     return EPOLLERR;
-    if (is_event_hup(event))
+    }
+    if (is_event_hup(event)) {
     return events;
+    }
     if (unlikely(READ_ONCE(event.state) == PERF_EVENT_STATE_ERROR &&
-    event.attr.pinned))
+    event.attr.pinned)) {
     return EPOLLERR;
+    }
 //
 // Pin the event->rb by taking event->mmap_mutex; otherwise
 // perf_event_set_output() can swizzle our rb and make us miss wakeups.
 //
     mutex_lock(&event.mmap_mutex);
     rb = event.rb;
-    if (rb)
+    if (rb) {
     events = atomic_xchg(&rb.poll, 0);
+    }
     mutex_unlock(&event.mmap_mutex);
     return events;
     }
 #[no_mangle]
 unsafe extern "C" fn _perf_event_reset(event: *mut perf_event) {
-    static void _perf_event_reset(struct perf_event *event)
-    {
     (void)perf_event_read(event, false);
     local64_set(&event.count, 0);
     perf_event_update_userpage(event);
@@ -5545,56 +5731,55 @@ unsafe extern "C" fn _perf_event_reset(event: *mut perf_event) {
 // Assume it's not an event with inherit set.
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_pause(event: *mut perf_event, reset: bool) -> u64 {
-    u64 perf_event_pause(struct perf_event *event, bool reset)
-    {
-    struct perf_event_context *ctx;
-    u64 count;
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+    let mut count = 0;
     ctx = perf_event_ctx_lock(event);
-    WARN_ON_ONCE(event.attr.inherit);
+    WARN_ON_ONCE!(event.attr.inherit);
     _perf_event_disable(event);
     count = local64_read(&event.count);
-    if (reset)
+    if (reset) {
     local64_set(&event.count, 0);
+    }
     perf_event_ctx_unlock(event, ctx);
     return count;
     }
     EXPORT_SYMBOL_GPL(perf_event_pause);
 
-    static atomic_t nr_include_guest_events __read_mostly;
-    static atomic_t nr_mediated_pmu_vms __read_mostly;
-    static DEFINE_MUTEX(perf_mediated_pmu_mutex);
+    static atomic_t nr_include_guest_events ;
+    static atomic_t nr_mediated_pmu_vms ;
+pub static mut perf_mediated_pmu_mutex: usize = 0;
 // !exclude_guest event of PMU with PERF_PMU_CAP_MEDIATED_VPMU
 #[no_mangle]
 pub unsafe extern "C" fn is_include_guest_event(event: *mut perf_event) -> bool {
-    static inline bool is_include_guest_event(struct perf_event *event)
-    {
     if ((event.pmu.capabilities & PERF_PMU_CAP_MEDIATED_VPMU) &&
-    !event.attr.exclude_guest)
+    !event.attr.exclude_guest) {
     return true;
+    }
     return false;
     }
 #[no_mangle]
 unsafe extern "C" fn mediated_pmu_account_event(event: *mut perf_event) -> c_int {
-    static int mediated_pmu_account_event(struct perf_event *event)
-    {
-    if (!is_include_guest_event(event))
+    if (!is_include_guest_event(event)) {
     return 0;
-    if (atomic_inc_not_zero(&nr_include_guest_events))
+    }
+    if (atomic_inc_not_zero(&nr_include_guest_events)) {
     return 0;
+    }
     guard(mutex)(&perf_mediated_pmu_mutex);
-    if (atomic_read(&nr_mediated_pmu_vms))
+    if (atomic_read(&nr_mediated_pmu_vms)) {
     return -EOPNOTSUPP;
+    }
     atomic_inc(&nr_include_guest_events);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn mediated_pmu_unaccount_event(event: *mut perf_event) {
-    static void mediated_pmu_unaccount_event(struct perf_event *event)
-    {
-    if (!is_include_guest_event(event))
+    if (!is_include_guest_event(event)) {
     return;
-    if (WARN_ON_ONCE(!atomic_read(&nr_include_guest_events)))
+    }
+    if (WARN_ON_ONCE!(!atomic_read(&nr_include_guest_events))) {
     return;
+    }
     atomic_dec(&nr_include_guest_events);
     }
 //
@@ -5609,36 +5794,34 @@ unsafe extern "C" fn mediated_pmu_unaccount_event(event: *mut perf_event) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn perf_create_mediated_pmu() -> c_int {
-    int perf_create_mediated_pmu(void)
-    {
-    if (atomic_inc_not_zero(&nr_mediated_pmu_vms))
+    if (atomic_inc_not_zero(&nr_mediated_pmu_vms)) {
     return 0;
+    }
     guard(mutex)(&perf_mediated_pmu_mutex);
-    if (atomic_read(&nr_include_guest_events))
+    if (atomic_read(&nr_include_guest_events)) {
     return -EBUSY;
+    }
     atomic_inc(&nr_mediated_pmu_vms);
     return 0;
     }
     EXPORT_SYMBOL_FOR_KVM(perf_create_mediated_pmu);
 #[no_mangle]
 pub unsafe extern "C" fn perf_release_mediated_pmu() {
-    void perf_release_mediated_pmu(void)
-    {
-    if (WARN_ON_ONCE(!atomic_read(&nr_mediated_pmu_vms)))
+    if (WARN_ON_ONCE!(!atomic_read(&nr_mediated_pmu_vms))) {
     return;
+    }
     atomic_dec(&nr_mediated_pmu_vms);
     }
     EXPORT_SYMBOL_FOR_KVM(perf_release_mediated_pmu);
 // When loading a guest's mediated PMU, schedule out all exclude_guest events.
 #[no_mangle]
 pub unsafe extern "C" fn perf_load_guest_context() {
-    void perf_load_guest_context(void)
-    {
-    struct perf_cpu_context *cpuctx = this_cpu_ptr(&perf_cpu_context);
+    let mut cpuctx = this_cpu_ptr(&perf_cpu_context);
     lockdep_assert_irqs_disabled();
     guard(perf_ctx_lock)(cpuctx, cpuctx.task_ctx);
-    if (WARN_ON_ONCE(__this_cpu_read(guest_ctx_loaded)))
+    if (WARN_ON_ONCE!(__this_cpu_read(guest_ctx_loaded))) {
     return;
+    }
     perf_ctx_disable(&cpuctx.ctx, EVENT_GUEST);
     ctx_sched_out(&cpuctx.ctx, core::ptr::null_mut(), EVENT_GUEST);
     if (cpuctx.task_ctx) {
@@ -5646,33 +5829,37 @@ pub unsafe extern "C" fn perf_load_guest_context() {
     task_ctx_sched_out(cpuctx.task_ctx, core::ptr::null_mut(), EVENT_GUEST);
     }
     perf_ctx_enable(&cpuctx.ctx, EVENT_GUEST);
-    if (cpuctx.task_ctx)
+    if (cpuctx.task_ctx) {
     perf_ctx_enable(cpuctx.task_ctx, EVENT_GUEST);
+    }
     __this_cpu_write(guest_ctx_loaded, true);
     }
     EXPORT_SYMBOL_GPL(perf_load_guest_context);
 #[no_mangle]
 pub unsafe extern "C" fn perf_put_guest_context() {
-    void perf_put_guest_context(void)
-    {
-    struct perf_cpu_context *cpuctx = this_cpu_ptr(&perf_cpu_context);
+    let mut cpuctx = this_cpu_ptr(&perf_cpu_context);
     lockdep_assert_irqs_disabled();
     guard(perf_ctx_lock)(cpuctx, cpuctx.task_ctx);
-    if (WARN_ON_ONCE(!__this_cpu_read(guest_ctx_loaded)))
+    if (WARN_ON_ONCE!(!__this_cpu_read(guest_ctx_loaded))) {
     return;
+    }
     perf_ctx_disable(&cpuctx.ctx, EVENT_GUEST);
-    if (cpuctx.task_ctx)
+    if (cpuctx.task_ctx) {
     perf_ctx_disable(cpuctx.task_ctx, EVENT_GUEST);
+    }
     perf_event_sched_in(cpuctx, cpuctx.task_ctx, core::ptr::null_mut(), EVENT_GUEST);
-    if (cpuctx.task_ctx)
+    if (cpuctx.task_ctx) {
     perf_ctx_enable(cpuctx.task_ctx, EVENT_GUEST);
+    }
     perf_ctx_enable(&cpuctx.ctx, EVENT_GUEST);
     __this_cpu_write(guest_ctx_loaded, false);
     }
     EXPORT_SYMBOL_GPL(perf_put_guest_context);
 
-    static int mediated_pmu_account_event(struct perf_event *event) { return 0; }
-    static void mediated_pmu_unaccount_event(struct perf_event *event) {}
+#[no_mangle]
+pub unsafe extern "C" fn mediated_pmu_account_event(event: *mut perf_event) -> c_int { return 0; }
+#[no_mangle]
+pub unsafe extern "C" fn mediated_pmu_unaccount_event(event: *mut perf_event) {}
 
 //
 // Holding the top-level event's child_mutex means that any
@@ -5680,35 +5867,32 @@ pub unsafe extern "C" fn perf_put_guest_context() {
 // in perf_event_exit_event() if it goes to exit, thus satisfying the
 // task existence requirements of perf_event_enable/disable.
 //
-    static void perf_event_for_each_child(struct perf_event *event,
-    void (*func)(struct perf_event *))
-    {
-    struct perf_event *child;
-    WARN_ON_ONCE(event.ctx.parent_ctx);
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_for_each_child(event: *mut perf_event) {
+pub static mut child: *mut c_void = core::ptr::null_mut();
+    WARN_ON_ONCE!(event.ctx.parent_ctx);
     mutex_lock(&event.child_mutex);
     func(event);
-    list_for_each_entry(child, &event.child_list, child_list)
+    list_for_each_entry(child, &event.child_list, child_list) {
     func(child);
+    }
     mutex_unlock(&event.child_mutex);
     }
-    static void perf_event_for_each(struct perf_event *event,
-    void (*func)(struct perf_event *))
-    {
-    struct perf_event_context *ctx = event.ctx;
-    struct perf_event *sibling;
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_for_each(event: *mut perf_event) {
+    let mut ctx = event.ctx;
+pub static mut sibling: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&ctx.mutex);
     event = event.group_leader;
     perf_event_for_each_child(event, func);
-    for_each_sibling_event(sibling, event)
+    for_each_sibling_event(sibling, event) {
     perf_event_for_each_child(sibling, func);
     }
-    static void __perf_event_period(struct perf_event *event,
-    struct perf_cpu_context *cpuctx,
-    struct perf_event_context *ctx,
-    void *info)
-    {
-    let mut value: u64 = *((u64 *)info);
-    bool active;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn __perf_event_period(event: *mut perf_event, cpuctx: *mut perf_cpu_context, ctx: *mut perf_event_context, info: *mut c_void) {
+pub static mut value: u64 = 0;
+    let mut active = 0;
     if (event.attr.freq) {
     event.attr.sample_freq = value;
     } else {
@@ -5729,118 +5913,123 @@ pub unsafe extern "C" fn perf_put_guest_context() {
 // event/group now to avoid the next tick trying to unthrottle
 // while we already re-started the event/group.
 //
-    if (event.hw.interrupts == MAX_INTERRUPTS)
+    if (event.hw.interrupts == MAX_INTERRUPTS) {
     perf_event_unthrottle_group(event, true);
+    }
     perf_pmu_enable(event.pmu);
     }
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_check_period(event: *mut perf_event, value: u64) -> c_int {
-    static int perf_event_check_period(struct perf_event *event, u64 value)
-    {
     return event.pmu.check_period(event, value);
     }
 #[no_mangle]
 unsafe extern "C" fn _perf_event_period(event: *mut perf_event, value: u64) -> c_int {
-    static int _perf_event_period(struct perf_event *event, u64 value)
-    {
-    if (!is_sampling_event(event))
+    if (!is_sampling_event(event)) {
     return -EINVAL;
-    if (!value)
+    }
+    if (!value) {
     return -EINVAL;
+    }
     if (event.attr.freq) {
-    if (value > sysctl_perf_event_sample_rate)
+    if (value > sysctl_perf_event_sample_rate) {
     return -EINVAL;
+    }
     } else {
-    if (perf_event_check_period(event, value))
+    if (perf_event_check_period(event, value)) {
     return -EINVAL;
-    if (value & (1ULL << 63))
+    }
+    if (value & (1ULL << 63)) {
     return -EINVAL;
+    }
     }
     event_function_call(event, __perf_event_period, &value);
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_period(event: *mut perf_event, value: u64) -> c_int {
-    int perf_event_period(struct perf_event *event, u64 value)
-    {
-    struct perf_event_context *ctx;
-    int ret;
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     ctx = perf_event_ctx_lock(event);
     ret = _perf_event_period(event, value);
     perf_event_ctx_unlock(event, ctx);
     return ret;
     }
     EXPORT_SYMBOL_GPL(perf_event_period);
-    static const struct file_operations perf_fops;
+pub static mut perf_fops: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn is_perf_file(f: fd) -> bool {
-    static inline bool is_perf_file(struct fd f)
-    {
     return !fd_empty(f) && fd_file(f).f_op == &perf_fops;
     }
-    static int perf_event_set_output(struct perf_event *event,
-    struct perf_event *output_event);
-    static int perf_event_set_filter(struct perf_event *event, void __user *arg);
-    static int perf_copy_attr(struct perf_event_attr __user *uattr,
-    struct perf_event_attr *attr);
-    static int __perf_event_set_bpf_prog(struct perf_event *event,
-    struct bpf_prog *prog,
-    u64 bpf_cookie);
+// forward_decl: perf_event_set_output;
+// forward_decl: perf_event_set_filter;
+// forward_decl: perf_copy_attr;
+// forward_decl: __perf_event_set_bpf_prog;
 #[no_mangle]
 unsafe extern "C" fn _perf_ioctl(event: *mut perf_event, cmd: c_uint, arg: c_ulong) -> c_long {
-    static long _perf_ioctl(struct perf_event *event, unsigned int cmd, unsigned long arg)
-    {
-    void (*func)(struct perf_event *);
-    let mut flags: u32 = arg;
-    if (event.state <= PERF_EVENT_STATE_REVOKED)
+    void (*func);
+pub static mut flags: u32 = 0;
+    if (event.state <= PERF_EVENT_STATE_REVOKED) {
     return -ENODEV;
-    switch (cmd) {
-    case PERF_EVENT_IOC_ENABLE:
+    }
+    match (cmd) {
+    PERF_EVENT_IOC_ENABLE => {
     func = _perf_event_enable;
-    break;
-    case PERF_EVENT_IOC_DISABLE:
+    // break;
+    }
+    PERF_EVENT_IOC_DISABLE => {
     func = _perf_event_disable;
-    break;
-    case PERF_EVENT_IOC_RESET:
+    // break;
+    }
+    PERF_EVENT_IOC_RESET => {
     func = _perf_event_reset;
-    break;
-    case PERF_EVENT_IOC_REFRESH:
+    // break;
+    }
+    PERF_EVENT_IOC_REFRESH => {
     return _perf_event_refresh(event, arg);
-    case PERF_EVENT_IOC_PERIOD:
+    }
+    PERF_EVENT_IOC_PERIOD => {
     {
-    u64 value;
-    if (copy_from_user(&value, (u64 __user *)arg, sizeof(value)))
+    let mut value = 0;
+    if (copy_from_user(&value, arg, sizeof!(value))) {
     return -EFAULT;
+    }
     return _perf_event_period(event, value);
     }
-    case PERF_EVENT_IOC_ID:
+    }
+    PERF_EVENT_IOC_ID => {
     {
-    let mut id: u64 = primary_event_id(event);
-    if (copy_to_user((void __user *)arg, &id, sizeof(id)))
+pub static mut id: u64 = 0;
+    if (copy_to_user(arg, &id, sizeof!(id))) {
     return -EFAULT;
+    }
     return 0;
     }
-    case PERF_EVENT_IOC_SET_OUTPUT:
+    }
+    PERF_EVENT_IOC_SET_OUTPUT => {
     {
     CLASS(fd, output)(arg);	     // arg == -1 => empty
-    struct perf_event *output_event = core::ptr::null_mut();
+    let mut output_event = core::ptr::null_mut();
     if (arg != -1) {
-    if (!is_perf_file(output))
+    if (!is_perf_file(output)) {
     return -EBADF;
+    }
     output_event = fd_file(output).private_data;
     }
     return perf_event_set_output(event, output_event);
     }
-    case PERF_EVENT_IOC_SET_FILTER:
-    return perf_event_set_filter(event, (void __user *)arg);
-    case PERF_EVENT_IOC_SET_BPF:
+    }
+    PERF_EVENT_IOC_SET_FILTER => {
+    return perf_event_set_filter(event, arg);
+    }
+    PERF_EVENT_IOC_SET_BPF => {
     {
-    struct bpf_prog *prog;
-    int err;
+pub static mut prog: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
     prog = bpf_prog_get(arg);
-    if (IS_ERR(prog))
+    if (IS_ERR(prog)) {
     return PTR_ERR(prog);
+    }
     err = __perf_event_set_bpf_prog(event, prog, 0);
     if (err) {
     bpf_prog_put(prog);
@@ -5848,8 +6037,9 @@ unsafe extern "C" fn _perf_ioctl(event: *mut perf_event, cmd: c_uint, arg: c_ulo
     }
     return 0;
     }
-    case PERF_EVENT_IOC_PAUSE_OUTPUT: {
-    struct perf_buffer *rb;
+    }
+    PERF_EVENT_IOC_PAUSE_OUTPUT => {
+pub static mut rb: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     rb = rcu_dereference(event.rb);
     if (!rb || !rb.nr_pages) {
@@ -5860,54 +6050,56 @@ unsafe extern "C" fn _perf_ioctl(event: *mut perf_event, cmd: c_uint, arg: c_ulo
     rcu_read_unlock();
     return 0;
     }
+    }
     case PERF_EVENT_IOC_QUERY_BPF:
-    return perf_event_query_prog_array(event, (void __user *)arg);
+    return perf_event_query_prog_array(event, arg);
     case PERF_EVENT_IOC_MODIFY_ATTRIBUTES: {
-    struct perf_event_attr new_attr;
-    int err = perf_copy_attr((struct perf_event_attr __user *)arg,
+pub static mut new_attr: usize = 0;
+    let mut err = perf_copy_attr(arg,
     &new_attr);
-    if (err)
+    if (err) {
     return err;
+    }
     return perf_event_modify_attr(event,  &new_attr);
     }
-    default:
+// label;
     return -ENOTTY;
     }
-    if (flags & PERF_IOC_FLAG_GROUP)
+    if (flags & PERF_IOC_FLAG_GROUP) {
     perf_event_for_each(event, func);
-    else
+    }
+    else {
     perf_event_for_each_child(event, func);
+    }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn perf_ioctl(file: *mut file, cmd: c_uint, arg: c_ulong) -> c_long {
-    static long perf_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
-    {
-    struct perf_event *event = file.private_data;
-    struct perf_event_context *ctx;
-    long ret;
+    let mut event = file.private_data;
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
 // Treat ioctl like writes as it is likely a mutating operation.
     ret = security_perf_event_write(event);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     ctx = perf_event_ctx_lock(event);
     ret = _perf_ioctl(event, cmd, arg);
     perf_event_ctx_unlock(event, ctx);
     return ret;
     }
 
-    static long perf_compat_ioctl(struct file *file, unsigned int cmd,
-    unsigned long arg)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn perf_compat_ioctl(file: *mut file, cmd: c_uint, arg: c_ulong) -> c_long {
     switch (_IOC_NR(cmd)) {
     case _IOC_NR(PERF_EVENT_IOC_SET_FILTER):
     case _IOC_NR(PERF_EVENT_IOC_ID):
     case _IOC_NR(PERF_EVENT_IOC_QUERY_BPF):
     case _IOC_NR(PERF_EVENT_IOC_MODIFY_ATTRIBUTES):
 // Fix up pointer size (usually 4 -> 8 in 32-on-64-bit case
-    if (_IOC_SIZE(cmd) == sizeof(compat_uptr_t)) {
+    if (_IOC_SIZE(cmd) == sizeof!(compat_uptr_t)) {
     cmd &= ~IOCSIZE_MASK;
-    cmd |= sizeof(void *) << IOCSIZE_SHIFT;
+    cmd |= sizeof! << IOCSIZE_SHIFT;
     }
     break;
     }
@@ -5916,10 +6108,8 @@ unsafe extern "C" fn perf_ioctl(file: *mut file, cmd: c_uint, arg: c_ulong) -> c
 
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_task_enable() -> c_int {
-    int perf_event_task_enable(void)
-    {
-    struct perf_event_context *ctx;
-    struct perf_event *event;
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+pub static mut event: *mut c_void = core::ptr::null_mut();
     mutex_lock(&current.perf_event_mutex);
     list_for_each_entry(event, &current.perf_event_list, owner_entry) {
     ctx = perf_event_ctx_lock(event);
@@ -5931,10 +6121,8 @@ pub unsafe extern "C" fn perf_event_task_enable() -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_task_disable() -> c_int {
-    int perf_event_task_disable(void)
-    {
-    struct perf_event_context *ctx;
-    struct perf_event *event;
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+pub static mut event: *mut c_void = core::ptr::null_mut();
     mutex_lock(&current.perf_event_mutex);
     list_for_each_entry(event, &current.perf_event_list, owner_entry) {
     ctx = perf_event_ctx_lock(event);
@@ -5946,35 +6134,33 @@ pub unsafe extern "C" fn perf_event_task_disable() -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_index(event: *mut perf_event) -> c_int {
-    static int perf_event_index(struct perf_event *event)
-    {
-    if (event.hw.state & PERF_HES_STOPPED)
+    if (event.hw.state & PERF_HES_STOPPED) {
     return 0;
-    if (event.state != PERF_EVENT_STATE_ACTIVE)
+    }
+    if (event.state != PERF_EVENT_STATE_ACTIVE) {
     return 0;
+    }
     return event.pmu.event_idx(event);
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_init_userpage(event: *mut perf_event) {
-    static void perf_event_init_userpage(struct perf_event *event)
-    {
-    struct perf_event_mmap_page *userpg;
-    struct perf_buffer *rb;
+pub static mut userpg: *mut c_void = core::ptr::null_mut();
+pub static mut rb: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     rb = rcu_dereference(event.rb);
-    if (!rb)
-    goto unlock;
+    if (!rb) {
+// goto;
+    }
     userpg = rb.user_page;
 // Allow new userspace to detect that bit 0 is deprecated
     userpg.cap_bit0_is_deprecated = 1;
-    userpg.size = offsetof(struct perf_event_mmap_page, __reserved);
+    userpg.size = offsetof(perf_event_mmap_page, __reserved);
     userpg.data_offset = PAGE_SIZE;
     userpg.data_size = perf_data_size(rb);
-    unlock:
+// label;
     rcu_read_unlock();
     }
-    void __weak arch_perf_update_userpage(
-    struct perf_event *event, struct perf_event_mmap_page *userpg, u64 now)
+    void __weak arch_perf_update_userpage(perf_event *event, perf_event_mmap_page *userpg, u64 now)
     {
     }
 //
@@ -5984,15 +6170,14 @@ unsafe extern "C" fn perf_event_init_userpage(event: *mut perf_event) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_update_userpage(event: *mut perf_event) {
-    void perf_event_update_userpage(struct perf_event *event)
-    {
-    struct perf_event_mmap_page *userpg;
-    struct perf_buffer *rb;
+pub static mut userpg: *mut c_void = core::ptr::null_mut();
+pub static mut rb: *mut c_void = core::ptr::null_mut();
     u64 enabled, running, now;
     rcu_read_lock();
     rb = rcu_dereference(event.rb);
-    if (!rb)
-    goto unlock;
+    if (!rb) {
+// goto;
+    }
 //
 // Disable preemption to guarantee consistent time stamps are stored to
 // the user page.
@@ -6011,8 +6196,9 @@ pub unsafe extern "C" fn perf_event_update_userpage(event: *mut perf_event) {
     barrier();
     userpg.index = perf_event_index(event);
     userpg.offset = perf_event_count(event, false);
-    if (userpg.index)
+    if (userpg.index) {
     userpg.offset -= local64_read(&event.hw.prev_count);
+    }
     userpg.time_enabled = enabled +
     atomic64_read(&event.child_total_time_enabled);
     userpg.time_running = running +
@@ -6021,22 +6207,21 @@ pub unsafe extern "C" fn perf_event_update_userpage(event: *mut perf_event) {
     barrier();
     ++userpg.lock;
     preempt_enable();
-    unlock:
+// label;
     rcu_read_unlock();
     }
     EXPORT_SYMBOL_GPL(perf_event_update_userpage);
-    static void ring_buffer_attach(struct perf_event *event,
-    struct perf_buffer *rb)
-    {
-    struct perf_buffer *old_rb = core::ptr::null_mut();
-    unsigned long flags;
-    WARN_ON_ONCE(event.parent);
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_attach(event: *mut perf_event, rb: *mut perf_buffer) {
+    let mut old_rb = core::ptr::null_mut();
+    let mut flags = 0;
+    WARN_ON_ONCE!(event.parent);
     if (event.rb) {
 //
 // Should be impossible, we set this when removing
 // event->rb_entry and wait/clear when adding event->rb_entry.
 //
-    WARN_ON_ONCE(event.rcu_pending);
+    WARN_ON_ONCE!(event.rcu_pending);
     old_rb = event.rb;
     spin_lock_irqsave(&old_rb.event_lock, flags);
     list_del_rcu(&event.rb_entry);
@@ -6063,8 +6248,9 @@ pub unsafe extern "C" fn perf_event_update_userpage(event: *mut perf_event) {
 // mid-air, but then again, whoever does it like this is
 // not in for the data anyway.
 //
-    if (has_aux(event))
+    if (has_aux(event)) {
     perf_event_stop(event, 0);
+    }
     rcu_assign_pointer(event.rb, rb);
     if (old_rb) {
     ring_buffer_put(old_rb);
@@ -6078,67 +6264,69 @@ pub unsafe extern "C" fn perf_event_update_userpage(event: *mut perf_event) {
     }
 #[no_mangle]
 unsafe extern "C" fn ring_buffer_wakeup(event: *mut perf_event) {
-    static void ring_buffer_wakeup(struct perf_event *event)
-    {
-    struct perf_buffer *rb;
-    if (event.parent)
+pub static mut rb: *mut c_void = core::ptr::null_mut();
+    if (event.parent) {
     event = event.parent;
+    }
     rcu_read_lock();
     rb = rcu_dereference(event.rb);
     if (rb) {
-    list_for_each_entry_rcu(event, &rb.event_list, rb_entry)
+    list_for_each_entry_rcu(event, &rb.event_list, rb_entry) {
     wake_up_all(&event.waitq);
+    }
     }
     rcu_read_unlock();
     }
-    struct perf_buffer *ring_buffer_get(struct perf_event *event)
-    {
-    struct perf_buffer *rb;
-    if (event.parent)
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_get(event: *mut perf_event) -> *mut c_void {
+pub static mut rb: *mut c_void = core::ptr::null_mut();
+    if (event.parent) {
     event = event.parent;
+    }
     rcu_read_lock();
     rb = rcu_dereference(event.rb);
     if (rb) {
-    if (!refcount_inc_not_zero(&rb.refcount))
+    if (!refcount_inc_not_zero(&rb.refcount)) {
     rb = core::ptr::null_mut();
+    }
     }
     rcu_read_unlock();
     return rb;
     }
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_put(rb: *mut perf_buffer) {
-    void ring_buffer_put(struct perf_buffer *rb)
-    {
-    if (!refcount_dec_and_test(&rb.refcount))
+    if (!refcount_dec_and_test(&rb.refcount)) {
     return;
-    WARN_ON_ONCE(!list_empty(&rb.event_list));
+    }
+    WARN_ON_ONCE!(!list_empty(&rb.event_list));
     call_rcu(&rb.rcu_head, rb_free_rcu);
     }
-    typedef void (*mapped_f)(struct perf_event *event, struct mm_struct *mm);
+    typedef void (*mapped_f)(perf_event *event, mm_struct *mm);
 
-    ({	struct pmu *pmu;			\
-    mapped_f f = core::ptr::null_mut();			\
-    guard(rcu)();				\
-    pmu = READ_ONCE(event.pmu);		\
-    if (pmu)				\
-    f = pmu.func;			\
-    f;					\
+    ({	struct pmu *pmu;			
+    mapped_f f = core::ptr::null_mut();			
+    guard(rcu)();				
+    pmu = READ_ONCE(event.pmu);		
+    if (pmu)				 {
+    f = pmu.func;			
+    }
+    f;					
     })
 #[no_mangle]
 unsafe extern "C" fn perf_mmap_open(vma: *mut vm_area_struct) {
-    static void perf_mmap_open(struct vm_area_struct *vma)
-    {
-    struct perf_event *event = vma.vm_file.private_data;
-    let mut mapped: mapped_f = get_mapped(event, event_mapped);
+    let mut event = vma.vm_file.private_data;
+pub static mut mapped: mapped_f = 0;
     refcount_inc(&event.mmap_count);
     refcount_inc(&event.rb.mmap_count);
-    if (vma_start_pgoff(vma))
+    if (vma_start_pgoff(vma)) {
     refcount_inc(&event.rb.aux_mmap_count);
-    if (mapped)
+    }
+    if (mapped) {
     mapped(event, vma.vm_mm);
     }
-    static void perf_pmu_output_stop(struct perf_event *event);
-    static void perf_mmap_unaccount(struct vm_area_struct *vma, struct perf_buffer *rb);
+    }
+// forward_decl: perf_pmu_output_stop;
+// forward_decl: perf_mmap_unaccount;
 //
 // A buffer can be mmap()ed multiple times; either directly through the same
 // event, or through other events by use of perf_event_set_output().
@@ -6149,16 +6337,15 @@ unsafe extern "C" fn perf_mmap_open(vma: *mut vm_area_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn perf_mmap_close(vma: *mut vm_area_struct) {
-    static void perf_mmap_close(struct vm_area_struct *vma)
-    {
-    struct perf_event *event = vma.vm_file.private_data;
-    let mut unmapped: mapped_f = get_mapped(event, event_unmapped);
-    struct perf_buffer *rb = ring_buffer_get(event);
-    struct user_struct *mmap_user = rb.mmap_user;
-    let mut detach_rest: bool = false;
+    let mut event = vma.vm_file.private_data;
+pub static mut unmapped: mapped_f = 0;
+    let mut rb = ring_buffer_get(event);
+    let mut mmap_user = rb.mmap_user;
+pub static mut detach_rest: bool = false;
 // FIXIES vs perf_pmu_unregister()
-    if (unmapped)
+    if (unmapped) {
     unmapped(event, vma.vm_mm);
+    }
 //
 // The AUX buffer is strictly a sub-buffer, serialize using aux_mutex
 // to avoid complications.
@@ -6177,24 +6364,27 @@ unsafe extern "C" fn perf_mmap_close(vma: *mut vm_area_struct) {
     atomic64_sub(rb.aux_mmap_locked, &vma.vm_mm.pinned_vm);
 // this has to be the last one
     rb_free_aux(rb);
-    WARN_ON_ONCE(refcount_read(&rb.aux_refcount));
+    WARN_ON_ONCE!(refcount_read(&rb.aux_refcount));
     mutex_unlock(&rb.aux_mutex);
     }
-    if (refcount_dec_and_test(&rb.mmap_count))
+    if (refcount_dec_and_test(&rb.mmap_count)) {
     detach_rest = true;
-    if (!refcount_dec_and_mutex_lock(&event.mmap_count, &event.mmap_mutex))
-    goto out_put;
+    }
+    if (!refcount_dec_and_mutex_lock(&event.mmap_count, &event.mmap_mutex)) {
+// goto;
+    }
     ring_buffer_attach(event, core::ptr::null_mut());
     mutex_unlock(&event.mmap_mutex);
 // If there's still other mmap()s of this buffer, we're done.
-    if (!detach_rest)
-    goto out_put;
+    if (!detach_rest) {
+// goto;
+    }
 //
 // No other mmap()s, detach from all other events that might redirect
 // into the now unreachable buffer. Somewhat complicated by the
 // fact that rb::event_lock otherwise nests inside mmap_mutex.
 //
-    again:
+// label;
     rcu_read_lock();
     list_for_each_entry_rcu(event, &rb.event_list, rb_entry) {
     if (!atomic_long_inc_not_zero(&event.refcount)) {
@@ -6216,15 +6406,16 @@ unsafe extern "C" fn perf_mmap_close(vma: *mut vm_area_struct) {
 // still restart the iteration to make sure we're not now
 // iterating the wrong list.
 //
-    if (event.rb == rb)
+    if (event.rb == rb) {
     ring_buffer_attach(event, core::ptr::null_mut());
+    }
     mutex_unlock(&event.mmap_mutex);
     put_event(event);
 //
 // Restart the iteration; either we're on the wrong list or
 // destroyed its integrity by doing a deletion.
 //
-    goto again;
+// goto;
     }
     rcu_read_unlock();
 //
@@ -6236,39 +6427,28 @@ unsafe extern "C" fn perf_mmap_close(vma: *mut vm_area_struct) {
 // undo the VM accounting.
 //
     perf_mmap_unaccount(vma, rb);
-    out_put:
+// label;
     ring_buffer_put(rb); /* could be last */
     }
 #[no_mangle]
 unsafe extern "C" fn perf_mmap_pfn_mkwrite(vmf: *mut vm_fault) -> vm_fault_t {
-    static vm_fault_t perf_mmap_pfn_mkwrite(struct vm_fault *vmf)
-    {
 // The first page is the user control page, others are read-only.
     return vmf.pgoff == 0 ? 0 : VM_FAULT_SIGBUS;
     }
 #[no_mangle]
 unsafe extern "C" fn perf_mmap_may_split(vma: *mut vm_area_struct, addr: c_ulong) -> c_int {
-    static int perf_mmap_may_split(struct vm_area_struct *vma, unsigned long addr)
-    {
 //
 // Forbid splitting perf mappings to prevent refcount leaks due to
 // the resulting non-matching offsets and sizes. See open()/close().
 //
     return -EINVAL;
     }
-    static const struct vm_operations_struct perf_mmap_vmops = {
-    .open		= perf_mmap_open,
-    .close		= perf_mmap_close, /* non mergeable */
-    .pfn_mkwrite	= perf_mmap_pfn_mkwrite,
-    .may_split	= perf_mmap_may_split,
-    };
+pub static mut vm_operations_struct: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn map_range(rb: *mut perf_buffer, vma: *mut vm_area_struct) -> c_int {
-    static int map_range(struct perf_buffer *rb, struct vm_area_struct *vma)
-    {
-    let mut nr_pages: c_ulong = vma_pages(vma);
-    let mut err: c_int = 0;
-    unsigned long pagenum;
+pub static mut nr_pages: c_ulong = 0;
+pub static mut err: c_int = 0;
+    let mut pagenum = 0;
     guard(mutex)(&rb.aux_mutex);
 //
 // We map this as a VM_PFNMAP VMA.
@@ -6308,9 +6488,9 @@ unsafe extern "C" fn map_range(rb: *mut perf_buffer, vma: *mut vm_area_struct) -
 // perf_mmap_open() and perf_mmap_close()) so we ensure the lifetime of
 // this mapping is maintained correctly.
 //
-    for (pagenum = 0; pagenum < nr_pages; pagenum++) {
-    let mut va: c_ulong = vma.vm_start + PAGE_SIZE * pagenum;
-    struct page *page = perf_mmap_to_page(rb,
+    while (pagenum < nr_pages) {
+pub static mut va: c_ulong = 0;
+    let mut page = perf_mmap_to_page(rb,
     vma_start_pgoff(vma) + pagenum);
     if (page == core::ptr::null_mut()) {
     err = -EINVAL;
@@ -6319,22 +6499,22 @@ unsafe extern "C" fn map_range(rb: *mut perf_buffer, vma: *mut vm_area_struct) -
 // Map readonly, perf_mmap_pfn_mkwrite() called on write fault.
     err = remap_pfn_range(vma, va, page_to_pfn(page), PAGE_SIZE,
     vm_get_page_prot(vma.vm_flags & ~VM_SHARED));
-    if (err)
+    if (err) {
     break;
+    }
     }
 
 // Clear any partial mappings on error.
-    if (err)
+    if (err) {
     zap_vma_range(vma, vma.vm_start, nr_pages * PAGE_SIZE);
+    }
 
     return err;
     }
 #[no_mangle]
 unsafe extern "C" fn perf_mmap_calc_limits(vma: *mut vm_area_struct, user_extra: *mut c_long, extra: *mut c_long) -> bool {
-    static bool perf_mmap_calc_limits(struct vm_area_struct *vma, long *user_extra, long *extra)
-    {
     unsigned long user_locked, user_lock_limit, locked, lock_limit;
-    struct user_struct *user = current_user();
+    let mut user = current_user();
     user_lock_limit = sysctl_perf_event_mlock >> (PAGE_SHIFT - 10);
 // Increase the limit linearly with more CPUs
     user_lock_limit *= num_online_cpus();
@@ -6343,8 +6523,9 @@ unsafe extern "C" fn perf_mmap_calc_limits(vma: *mut vm_area_struct, user_extra:
 // sysctl_perf_event_mlock may have changed, so that
 // user->locked_vm > user_lock_limit
 //
-    if (user_locked > user_lock_limit)
+    if (user_locked > user_lock_limit) {
     user_locked = user_lock_limit;
+    }
     user_locked += *user_extra;
     if (user_locked > user_lock_limit) {
 //
@@ -6361,46 +6542,44 @@ unsafe extern "C" fn perf_mmap_calc_limits(vma: *mut vm_area_struct, user_extra:
     }
 #[no_mangle]
 unsafe extern "C" fn perf_mmap_account(vma: *mut vm_area_struct, user_extra: c_long, extra: c_long) {
-    static void perf_mmap_account(struct vm_area_struct *vma, long user_extra, long extra)
-    {
-    struct user_struct *user = current_user();
+    let mut user = current_user();
     atomic_long_add(user_extra, &user.locked_vm);
     atomic64_add(extra, &vma.vm_mm.pinned_vm);
     }
 #[no_mangle]
 unsafe extern "C" fn perf_mmap_unaccount(vma: *mut vm_area_struct, rb: *mut perf_buffer) {
-    static void perf_mmap_unaccount(struct vm_area_struct *vma, struct perf_buffer *rb)
-    {
-    struct user_struct *user = rb.mmap_user;
+    let mut user = rb.mmap_user;
     atomic_long_sub((perf_data_size(rb) >> PAGE_SHIFT) + 1 - rb.mmap_locked,
     &user.locked_vm);
     atomic64_sub(rb.mmap_locked, &vma.vm_mm.pinned_vm);
     }
-    static int perf_mmap_rb(struct vm_area_struct *vma, struct perf_event *event,
-    unsigned long nr_pages)
-    {
-    let mut extra: c_long = 0, user_extra = nr_pages;
-    struct perf_buffer *rb;
-    let mut rb_flags: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn perf_mmap_rb(vma: *mut vm_area_struct, event: *mut perf_event, nr_pages: c_ulong) -> c_int {
+pub static mut extra: c_long = 0;
+pub static mut rb: *mut c_void = core::ptr::null_mut();
+pub static mut rb_flags: c_int = 0;
     nr_pages -= 1;
 //
 // If we have rb pages ensure they're a power-of-two number, so we
 // can do bitmasks instead of modulo.
 //
-    if (nr_pages != 0 && !is_power_of_2(nr_pages))
+    if (nr_pages != 0 && !is_power_of_2(nr_pages)) {
     return -EINVAL;
-    WARN_ON_ONCE(event.ctx.parent_ctx);
+    }
+    WARN_ON_ONCE!(event.ctx.parent_ctx);
     if (event.rb) {
-    if (data_page_nr(event.rb) != nr_pages)
+    if (data_page_nr(event.rb) != nr_pages) {
     return -EINVAL;
+    }
 //
 // If this event doesn't have mmap_count, we're attempting to
 // create an alias of another event's mmap(); this would mean
 // both events will end up scribbling the same user_page;
 // which makes no sense.
 //
-    if (!refcount_read(&event.mmap_count))
+    if (!refcount_read(&event.mmap_count)) {
     return -EBUSY;
+    }
     if (refcount_inc_not_zero(&event.rb.mmap_count)) {
 //
 // Success -- managed to mmap() the same buffer
@@ -6417,15 +6596,18 @@ unsafe extern "C" fn perf_mmap_unaccount(vma: *mut vm_area_struct, rb: *mut perf
 //
     ring_buffer_attach(event, core::ptr::null_mut());
     }
-    if (!perf_mmap_calc_limits(vma, &user_extra, &extra))
+    if (!perf_mmap_calc_limits(vma, &user_extra, &extra)) {
     return -EPERM;
-    if (vma.vm_flags & VM_WRITE)
+    }
+    if (vma.vm_flags & VM_WRITE) {
     rb_flags |= RING_BUFFER_WRITABLE;
+    }
     rb = rb_alloc(nr_pages,
     event.attr.watermark ? event.attr.wakeup_watermark : 0,
     event.cpu, rb_flags);
-    if (!rb)
+    if (!rb) {
     return -ENOMEM;
+    }
     rb.mmap_locked = extra;
     ring_buffer_attach(event, rb);
     perf_event_update_time(event);
@@ -6435,17 +6617,17 @@ unsafe extern "C" fn perf_mmap_unaccount(vma: *mut vm_area_struct, rb: *mut perf
     refcount_set(&event.mmap_count, 1);
     return 0;
     }
-    static int perf_mmap_aux(struct vm_area_struct *vma, struct perf_event *event,
-    unsigned long nr_pages)
-    {
-    let mut pgoff_start: pgoff_t = vma_start_pgoff(vma);
-    let mut extra: c_long = 0, user_extra = nr_pages;
+#[no_mangle]
+pub unsafe extern "C" fn perf_mmap_aux(vma: *mut vm_area_struct, event: *mut perf_event, nr_pages: c_ulong) -> c_int {
+pub static mut pgoff_start: pgoff_t = 0;
+pub static mut extra: c_long = 0;
     u64 aux_offset, aux_size;
-    struct perf_buffer *rb;
+pub static mut rb: *mut c_void = core::ptr::null_mut();
     int ret, rb_flags = 0;
     rb = event.rb;
-    if (!rb)
+    if (!rb) {
     return -EINVAL;
+    }
     guard(mutex)(&rb.aux_mutex);
 //
 // AUX area mapping: if rb->aux_nr_pages != 0, it's already
@@ -6454,22 +6636,29 @@ unsafe extern "C" fn perf_mmap_unaccount(vma: *mut vm_area_struct, rb: *mut perf
 //
     aux_offset = READ_ONCE(rb.user_page.aux_offset);
     aux_size = READ_ONCE(rb.user_page.aux_size);
-    if (aux_offset < perf_data_size(rb) + PAGE_SIZE)
+    if (aux_offset < perf_data_size(rb) + PAGE_SIZE) {
     return -EINVAL;
-    if (aux_offset != pgoff_start << PAGE_SHIFT)
+    }
+    if (aux_offset != pgoff_start << PAGE_SHIFT) {
     return -EINVAL;
+    }
 // already mapped with a different offset
-    if (rb_has_aux(rb) && rb.aux_pgoff != pgoff_start)
+    if (rb_has_aux(rb) && rb.aux_pgoff != pgoff_start) {
     return -EINVAL;
-    if (aux_size != nr_pages * PAGE_SIZE)
+    }
+    if (aux_size != nr_pages * PAGE_SIZE) {
     return -EINVAL;
+    }
 // already mapped with a different size
-    if (rb_has_aux(rb) && rb.aux_nr_pages != nr_pages)
+    if (rb_has_aux(rb) && rb.aux_nr_pages != nr_pages) {
     return -EINVAL;
-    if (!is_power_of_2(nr_pages))
+    }
+    if (!is_power_of_2(nr_pages)) {
     return -EINVAL;
-    if (!refcount_inc_not_zero(&rb.mmap_count))
+    }
+    if (!refcount_inc_not_zero(&rb.mmap_count)) {
     return -EINVAL;
+    }
     if (rb_has_aux(rb)) {
     refcount_inc(&rb.aux_mmap_count);
     } else {
@@ -6477,9 +6666,10 @@ unsafe extern "C" fn perf_mmap_unaccount(vma: *mut vm_area_struct, rb: *mut perf
     refcount_dec(&rb.mmap_count);
     return -EPERM;
     }
-    WARN_ON(!rb && event.rb);
-    if (vma.vm_flags & VM_WRITE)
+    WARN_ON!(!rb && event.rb);
+    if (vma.vm_flags & VM_WRITE) {
     rb_flags |= RING_BUFFER_WRITABLE;
+    }
     ret = rb_alloc_aux(rb, event, pgoff_start, nr_pages,
     event.attr.aux_watermark, rb_flags);
     if (ret) {
@@ -6495,44 +6685,51 @@ unsafe extern "C" fn perf_mmap_unaccount(vma: *mut vm_area_struct, rb: *mut perf
     }
 #[no_mangle]
 unsafe extern "C" fn perf_mmap(file: *mut file, vma: *mut vm_area_struct) -> c_int {
-    static int perf_mmap(struct file *file, struct vm_area_struct *vma)
-    {
-    struct perf_event *event = file.private_data;
+    let mut event = file.private_data;
     unsigned long vma_size, nr_pages;
-    mapped_f mapped;
-    int ret;
+    let mut mapped;
+    let mut ret = 0;
 //
 // Don't allow mmap() of inherited per-task counters. This would
 // create a performance issue due to all children writing to the
 // same rb.
 //
-    if (event.cpu == -1 && event.attr.inherit)
+    if (event.cpu == -1 && event.attr.inherit) {
     return -EINVAL;
-    if (!(vma.vm_flags & VM_SHARED))
+    }
+    if (!(vma.vm_flags & VM_SHARED)) {
     return -EINVAL;
+    }
     ret = security_perf_event_read(event);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     vma_size = vma.vm_end - vma.vm_start;
     nr_pages = vma_size / PAGE_SIZE;
-    if (nr_pages > INT_MAX)
+    if (nr_pages > INT_MAX) {
     return -ENOMEM;
-    if (vma_size != PAGE_SIZE * nr_pages)
+    }
+    if (vma_size != PAGE_SIZE * nr_pages) {
     return -EINVAL;
+    }
     scoped_guard (mutex, &event.mmap_mutex) {
 //
 // This relies on __pmu_detach_event() taking mmap_mutex after marking
 // the event REVOKED. Either we observe the state, or __pmu_detach_event()
 // will detach the rb created here.
 //
-    if (event.state <= PERF_EVENT_STATE_REVOKED)
+    if (event.state <= PERF_EVENT_STATE_REVOKED) {
     return -ENODEV;
-    if (!vma_start_pgoff(vma))
+    }
+    if (!vma_start_pgoff(vma)) {
     ret = perf_mmap_rb(vma, event, nr_pages);
-    else
+    }
+    else {
     ret = perf_mmap_aux(vma, event, nr_pages);
-    if (ret)
+    }
+    if (ret) {
     return ret;
+    }
 //
 // Since pinned accounting is per vm we cannot allow fork() to copy our
 // vma.
@@ -6540,16 +6737,18 @@ unsafe extern "C" fn perf_mmap(file: *mut file, vma: *mut vm_area_struct) -> c_i
     vm_flags_set(vma, VM_DONTCOPY | VM_DONTEXPAND | VM_DONTDUMP);
     vma.vm_ops = &perf_mmap_vmops;
     mapped = get_mapped(event, event_mapped);
-    if (mapped)
+    if (mapped) {
     mapped(event, vma.vm_mm);
+    }
 //
 // Try to map it into the page table. On fail undo the above,
 // as the callsite expects full cleanup in this case and
 // therefore does not invoke vmops::close().
 //
     ret = map_range(event.rb, vma);
-    if (likely(!ret))
+    if (likely(!ret)) {
     return 0;
+    }
 // Error path
 //
 // If this is the first mmap(), then event->mmap_count should
@@ -6573,8 +6772,9 @@ unsafe extern "C" fn perf_mmap(file: *mut file, vma: *mut vm_area_struct) -> c_i
 // other events on account of this being the first.
 //
     mapped = get_mapped(event, event_unmapped);
-    if (mapped)
+    if (mapped) {
     mapped(event, vma.vm_mm);
+    }
     perf_mmap_unaccount(vma, event.rb);
     ring_buffer_attach(event, core::ptr::null_mut());	/* drops last rb.refcount */
     refcount_set(&event.mmap_count, 0);
@@ -6591,33 +6791,32 @@ unsafe extern "C" fn perf_mmap(file: *mut file, vma: *mut vm_area_struct) -> c_i
     }
 #[no_mangle]
 unsafe extern "C" fn perf_fasync(fd: c_int, filp: *mut file, on: c_int) -> c_int {
-    static int perf_fasync(int fd, struct file *filp, int on)
-    {
-    struct inode *inode = file_inode(filp);
-    struct perf_event *event = filp.private_data;
-    int retval;
-    if (event.state <= PERF_EVENT_STATE_REVOKED)
+    let mut inode = file_inode(filp);
+    let mut event = filp.private_data;
+    let mut retval = 0;
+    if (event.state <= PERF_EVENT_STATE_REVOKED) {
     return -ENODEV;
+    }
     inode_lock(inode);
     retval = fasync_helper(fd, filp, on, &event.fasync);
     inode_unlock(inode);
-    if (retval < 0)
+    if (retval < 0) {
     return retval;
+    }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn perf_show_fdinfo(m: *mut seq_file, f: *mut file) {
-    static void perf_show_fdinfo(struct seq_file *m, struct file *f)
-    {
-    struct perf_event *event = f.private_data;
-    struct perf_event_context *ctx;
-    struct mutex *child_mutex;
+    let mut event = f.private_data;
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+pub static mut child_mutex: *mut c_void = core::ptr::null_mut();
     ctx = perf_event_ctx_lock(event);
     child_mutex = event.parent ? &event.parent.child_mutex : &event.child_mutex;
     mutex_lock(child_mutex);
     seq_printf(m, "perf_event_attr.type:\t%u\n", event.orig_type);
-    if (event.pmu)
+    if (event.pmu) {
     seq_printf(m, "pmu_type:\t%u\n", event.pmu.type);
+    }
     seq_printf(m, "perf_event_attr.config:\t0x%llx\n", (unsigned long long)event.attr.config);
     seq_printf(m, "perf_event_attr.config1:\t0x%llx\n",
     (unsigned long long)event.attr.config1);
@@ -6630,16 +6829,7 @@ unsafe extern "C" fn perf_show_fdinfo(m: *mut seq_file, f: *mut file) {
     mutex_unlock(child_mutex);
     perf_event_ctx_unlock(event, ctx);
     }
-    static const struct file_operations perf_fops = {
-    .release		= perf_release,
-    .read			= perf_read,
-    .poll			= perf_poll,
-    .unlocked_ioctl		= perf_ioctl,
-    .compat_ioctl		= perf_compat_ioctl,
-    .mmap			= perf_mmap,
-    .fasync			= perf_fasync,
-    .show_fdinfo		= perf_show_fdinfo,
-    };
+pub static mut file_operations: usize = 0;
 //
 // Perf event wakeup
 //
@@ -6648,8 +6838,6 @@ unsafe extern "C" fn perf_show_fdinfo(m: *mut seq_file, f: *mut file) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_wakeup(event: *mut perf_event) {
-    void perf_event_wakeup(struct perf_event *event)
-    {
     ring_buffer_wakeup(event);
     if (event.pending_kill) {
     kill_fasync(perf_event_fasync(event), SIGIO, event.pending_kill);
@@ -6658,22 +6846,22 @@ pub unsafe extern "C" fn perf_event_wakeup(event: *mut perf_event) {
     }
 #[no_mangle]
 unsafe extern "C" fn perf_sigtrap(event: *mut perf_event) {
-    static void perf_sigtrap(struct perf_event *event)
-    {
 //
 // Both perf_pending_task() and perf_pending_irq() can race with the
 // task exiting.
 //
-    if (current.flags & PF_EXITING)
+    if (current.flags & PF_EXITING) {
     return;
+    }
 //
 // We'd expect this to only occur if the irq_work is delayed and either
 // ctx->task or current has changed in the meantime. This can be the
 // case on architectures that do not implement arch_irq_work_raise().
 //
-    if (WARN_ON_ONCE(event.ctx.task != current))
+    if (WARN_ON_ONCE!(event.ctx.task != current)) {
     return;
-    send_sig_perf((void __user *)event.pending_addr,
+    }
+    send_sig_perf(event.pending_addr,
     event.orig_type, event.attr.sig_data);
     }
 //
@@ -6681,15 +6869,14 @@ unsafe extern "C" fn perf_sigtrap(event: *mut perf_event) {
 //
 #[no_mangle]
 unsafe extern "C" fn __perf_pending_disable(event: *mut perf_event) {
-    static void __perf_pending_disable(struct perf_event *event)
-    {
-    let mut cpu: c_int = READ_ONCE(event.oncpu);
+pub static mut cpu: c_int = 0;
 //
 // If the event isn't running; we done. event_sched_out() will have
 // taken care of things.
 //
-    if (cpu < 0)
+    if (cpu < 0) {
     return;
+    }
 //
 // Yay, we hit home and are in the context of the event.
 //
@@ -6724,25 +6911,22 @@ unsafe extern "C" fn __perf_pending_disable(event: *mut perf_event) {
     }
 #[no_mangle]
 unsafe extern "C" fn perf_pending_disable(entry: *mut irq_work) {
-    static void perf_pending_disable(struct irq_work *entry)
-    {
-    struct perf_event *event = container_of(entry, struct perf_event, pending_disable_irq);
-    int rctx;
+    let mut event = container_of!(entry, perf_event, pending_disable_irq);
+    let mut rctx = 0;
 //
 // If we 'fail' here, that's OK, it means recursion is already disabled
 // and we won't recurse 'further'.
 //
     rctx = perf_swevent_get_recursion_context();
     __perf_pending_disable(event);
-    if (rctx >= 0)
+    if (rctx >= 0) {
     perf_swevent_put_recursion_context(rctx);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn perf_pending_irq(entry: *mut irq_work) {
-    static void perf_pending_irq(struct irq_work *entry)
-    {
-    struct perf_event *event = container_of(entry, struct perf_event, pending_irq);
-    int rctx;
+    let mut event = container_of!(entry, perf_event, pending_irq);
+    let mut rctx = 0;
 //
 // If we 'fail' here, that's OK, it means recursion is already disabled
 // and we won't recurse 'further'.
@@ -6756,15 +6940,14 @@ unsafe extern "C" fn perf_pending_irq(entry: *mut irq_work) {
     event.pending_wakeup = 0;
     perf_event_wakeup(event);
     }
-    if (rctx >= 0)
+    if (rctx >= 0) {
     perf_swevent_put_recursion_context(rctx);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn perf_pending_task(head: *mut callback_head) {
-    static void perf_pending_task(struct callback_head *head)
-    {
-    struct perf_event *event = container_of(head, struct perf_event, pending_task);
-    int rctx;
+    let mut event = container_of!(head, perf_event, pending_task);
+    let mut rctx = 0;
 //
 // If we 'fail' here, that's OK, it means recursion is already disabled
 // and we won't recurse 'further'.
@@ -6776,64 +6959,62 @@ unsafe extern "C" fn perf_pending_task(head: *mut callback_head) {
     local_dec(&event.ctx.nr_no_switch_fast);
     }
     put_event(event);
-    if (rctx >= 0)
+    if (rctx >= 0) {
     perf_swevent_put_recursion_context(rctx);
     }
+    }
 
-    struct perf_guest_info_callbacks __rcu *perf_guest_cbs;
-    DEFINE_STATIC_CALL_RET0(__perf_guest_state, *perf_guest_cbs.state);
-    DEFINE_STATIC_CALL_RET0(__perf_guest_get_ip, *perf_guest_cbs.get_ip);
-    DEFINE_STATIC_CALL_RET0(__perf_guest_handle_intel_pt_intr, *perf_guest_cbs.handle_intel_pt_intr);
-    DEFINE_STATIC_CALL_RET0(__perf_guest_handle_mediated_pmi, *perf_guest_cbs.handle_mediated_pmi);
+    let mut perf_guest_cbs = core::ptr::null_mut();
+pub static mut __perf_guest_state: usize = 0;
+pub static mut __perf_guest_get_ip: usize = 0;
+pub static mut __perf_guest_handle_intel_pt_intr: usize = 0;
+pub static mut __perf_guest_handle_mediated_pmi: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn perf_register_guest_info_callbacks(cbs: *mut perf_guest_info_callbacks) {
-    void perf_register_guest_info_callbacks(struct perf_guest_info_callbacks *cbs)
-    {
-    if (WARN_ON_ONCE(rcu_access_pointer(perf_guest_cbs)))
+    if (WARN_ON_ONCE!(rcu_access_pointer(perf_guest_cbs))) {
     return;
+    }
     rcu_assign_pointer(perf_guest_cbs, cbs);
     static_call_update(__perf_guest_state, cbs.state);
     static_call_update(__perf_guest_get_ip, cbs.get_ip);
 // Implementing ->handle_intel_pt_intr is optional.
-    if (cbs.handle_intel_pt_intr)
+    if (cbs.handle_intel_pt_intr) {
     static_call_update(__perf_guest_handle_intel_pt_intr,
     cbs.handle_intel_pt_intr);
-    if (cbs.handle_mediated_pmi)
+    }
+    if (cbs.handle_mediated_pmi) {
     static_call_update(__perf_guest_handle_mediated_pmi,
     cbs.handle_mediated_pmi);
+    }
     }
     EXPORT_SYMBOL_GPL(perf_register_guest_info_callbacks);
 #[no_mangle]
 pub unsafe extern "C" fn perf_unregister_guest_info_callbacks(cbs: *mut perf_guest_info_callbacks) {
-    void perf_unregister_guest_info_callbacks(struct perf_guest_info_callbacks *cbs)
-    {
-    if (WARN_ON_ONCE(rcu_access_pointer(perf_guest_cbs) != cbs))
+    if (WARN_ON_ONCE!(rcu_access_pointer(perf_guest_cbs) != cbs)) {
     return;
+    }
     rcu_assign_pointer(perf_guest_cbs, core::ptr::null_mut());
-    static_call_update(__perf_guest_state, (void *)&__static_call_return0);
-    static_call_update(__perf_guest_get_ip, (void *)&__static_call_return0);
-    static_call_update(__perf_guest_handle_intel_pt_intr, (void *)&__static_call_return0);
-    static_call_update(__perf_guest_handle_mediated_pmi, (void *)&__static_call_return0);
+    static_call_update(__perf_guest_state, &__static_call_return0);
+    static_call_update(__perf_guest_get_ip, &__static_call_return0);
+    static_call_update(__perf_guest_handle_intel_pt_intr, &__static_call_return0);
+    static_call_update(__perf_guest_handle_mediated_pmi, &__static_call_return0);
     synchronize_rcu();
     }
     EXPORT_SYMBOL_GPL(perf_unregister_guest_info_callbacks);
 
 #[no_mangle]
 unsafe extern "C" fn should_sample_guest(event: *mut perf_event) -> bool {
-    static bool should_sample_guest(struct perf_event *event)
-    {
     return !event.attr.exclude_guest && perf_guest_state();
     }
-    unsigned long perf_misc_flags(struct perf_event *event,
-    struct pt_regs *regs)
-    {
-    if (should_sample_guest(event))
+#[no_mangle]
+pub unsafe extern "C" fn perf_misc_flags(event: *mut perf_event, regs: *mut pt_regs) -> c_ulong {
+    if (should_sample_guest(event)) {
     return perf_arch_guest_misc_flags(regs);
+    }
     return perf_arch_misc_flags(regs);
     }
-    unsigned long perf_instruction_pointer(struct perf_event *event,
-    struct pt_regs *regs)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn perf_instruction_pointer(event: *mut perf_event, regs: *mut pt_regs) -> c_ulong {
 //
 // Hardware skid can lead to a scenario where a PMI is
 // delivered after the CPU has already entered kernel mode.
@@ -6848,22 +7029,19 @@ unsafe extern "C" fn should_sample_guest(event: *mut perf_event) -> bool {
     return event.attr.exclude_kernel && !user_mode(regs) ?
     0 : perf_arch_instruction_pointer(regs);
     }
-    static void
-    perf_output_sample_regs(struct perf_output_handle *handle,
-    struct pt_regs *regs, u64 mask)
-    {
-    int bit;
-    DECLARE_BITMAP(_mask, 64);
+#[no_mangle]
+pub unsafe extern "C" fn perf_output_sample_regs(handle: *mut perf_output_handle, regs: *mut pt_regs, mask: u64) {
+    let mut bit = 0;
+pub static mut _mask: usize = 0;
     bitmap_from_u64(_mask, mask);
-    for_each_set_bit(bit, _mask, sizeof(mask) * BITS_PER_BYTE) {
-    u64 val;
+    for_each_set_bit(bit, _mask, sizeof!(mask) * BITS_PER_BYTE) {
+    let mut val = 0;
     val = perf_reg_value(regs, bit);
     perf_output_put(handle, val);
     }
     }
-    static void perf_sample_regs_user(struct perf_regs *regs_user,
-    struct pt_regs *regs)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn perf_sample_regs_user(regs_user: *mut perf_regs, regs: *mut pt_regs) {
     if (user_mode(regs)) {
     regs_user.abi = perf_reg_abi(current);
     regs_user.regs = regs;
@@ -6874,10 +7052,8 @@ unsafe extern "C" fn should_sample_guest(event: *mut perf_event) -> bool {
     regs_user.regs = core::ptr::null_mut();
     }
     }
-    static void perf_sample_regs_intr(struct perf_regs *regs_intr,
-    struct pt_regs *regs,
-    bool exclude_kernel)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn perf_sample_regs_intr(regs_intr: *mut perf_regs, regs: *mut pt_regs, exclude_kernel: bool) {
 //
 // Hardware skid can lead to a scenario where a PMI is
 // delivered after the CPU has already entered kernel mode.
@@ -6901,24 +7077,23 @@ unsafe extern "C" fn should_sample_guest(event: *mut perf_event) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn perf_ustack_task_size(regs: *mut pt_regs) -> u64 {
-    static u64 perf_ustack_task_size(struct pt_regs *regs)
-    {
-    let mut addr: c_ulong = perf_user_stack_pointer(regs);
-    if (!addr || addr >= TASK_SIZE)
+pub static mut addr: c_ulong = 0;
+    if (!addr || addr >= TASK_SIZE) {
     return 0;
+    }
     return TASK_SIZE - addr;
     }
-    static u16
-    perf_sample_ustack_size(u16 stack_size, u16 header_size,
-    struct pt_regs *regs)
-    {
-    u64 task_size;
+#[no_mangle]
+pub unsafe extern "C" fn perf_sample_ustack_size(stack_size: u16, header_size: u16, regs: *mut pt_regs) -> u16 {
+    let mut task_size = 0;
 // No regs, no stack pointer, no dump.
-    if (!regs)
+    if (!regs) {
     return 0;
+    }
 // No mm, no stack, no dump.
-    if (!current.mm)
+    if (!current.mm) {
     return 0;
+    }
 //
 // Check if we fit in with the requested stack size into the:
 // - TASK_SIZE
@@ -6931,30 +7106,28 @@ unsafe extern "C" fn perf_ustack_task_size(regs: *mut pt_regs) -> u64 {
     task_size  = min((u64) USHRT_MAX, perf_ustack_task_size(regs));
     stack_size = min(stack_size, (u16) task_size);
 // Current header size plus static size and dynamic size.
-    header_size += 2 * sizeof(u64);
+    header_size += 2 * sizeof!(u64);
 // Do we fit in with the current stack dump size?
     if ((u16) (header_size + stack_size) < header_size) {
 //
 // If we overflow the maximum size for the sample,
 // we customize the stack dump size to fit in.
 //
-    stack_size = USHRT_MAX - header_size - sizeof(u64);
-    stack_size = round_up(stack_size, sizeof(u64));
+    stack_size = USHRT_MAX - header_size - sizeof!(u64);
+    stack_size = round_up(stack_size, sizeof!(u64));
     }
     return stack_size;
     }
-    static void
-    perf_output_sample_ustack(struct perf_output_handle *handle, u64 dump_size,
-    struct pt_regs *regs)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn perf_output_sample_ustack(handle: *mut perf_output_handle, dump_size: u64, regs: *mut pt_regs) {
 // Case of a kernel thread, nothing to dump
     if (!regs) {
-    let mut size: u64 = 0;
+pub static mut size: u64 = 0;
     perf_output_put(handle, size);
     } else {
-    unsigned long sp;
-    unsigned int rem;
-    u64 dyn_size;
+    let mut sp = 0;
+    let mut rem = 0;
+    let mut dyn_size = 0;
 //
 // We dump:
 // static size
@@ -6969,29 +7142,31 @@ unsafe extern "C" fn perf_ustack_task_size(regs: *mut pt_regs) -> u64 {
     perf_output_put(handle, dump_size);
 // Data.
     sp = perf_user_stack_pointer(regs);
-    rem = __output_copy_user(handle, (void *) sp, dump_size);
+    rem = __output_copy_user(handle,  sp, dump_size);
     dyn_size = dump_size - rem;
     perf_output_skip(handle, rem);
 // Dynamic size.
     perf_output_put(handle, dyn_size);
     }
     }
-    static unsigned long perf_prepare_sample_aux(struct perf_event *event,
-    struct perf_sample_data *data,
-    size_t size)
-    {
-    struct perf_event *sampler = event.aux_event;
-    struct perf_buffer *rb;
+#[no_mangle]
+pub unsafe extern "C" fn perf_prepare_sample_aux(event: *mut perf_event, data: *mut perf_sample_data, size: size_t) -> c_ulong {
+    let mut sampler = event.aux_event;
+pub static mut rb: *mut c_void = core::ptr::null_mut();
     data.aux_size = 0;
-    if (!sampler)
-    goto out;
-    if (WARN_ON_ONCE(READ_ONCE(sampler.state) != PERF_EVENT_STATE_ACTIVE))
-    goto out;
-    if (WARN_ON_ONCE(READ_ONCE(sampler.oncpu) != smp_processor_id()))
-    goto out;
+    if (!sampler) {
+// goto;
+    }
+    if (WARN_ON_ONCE!(READ_ONCE(sampler.state) != PERF_EVENT_STATE_ACTIVE)) {
+// goto;
+    }
+    if (WARN_ON_ONCE!(READ_ONCE(sampler.oncpu) != smp_processor_id())) {
+// goto;
+    }
     rb = ring_buffer_get(sampler);
-    if (!rb)
-    goto out;
+    if (!rb) {
+// goto;
+    }
 //
 // If this is an NMI hit inside sampling code, don't take
 // the sample. See also perf_aux_sample_output().
@@ -7000,19 +7175,16 @@ unsafe extern "C" fn perf_ustack_task_size(regs: *mut pt_regs) -> u64 {
     data.aux_size = 0;
     } else {
     size = min_t(size_t, size, perf_aux_size(rb));
-    data.aux_size = ALIGN(size, sizeof(u64));
+    data.aux_size = ALIGN(size, sizeof!(u64));
     }
     ring_buffer_put(rb);
-    out:
+// label;
     return data.aux_size;
     }
-    static long perf_pmu_snapshot_aux(struct perf_buffer *rb,
-    struct perf_event *event,
-    struct perf_output_handle *handle,
-    unsigned long size)
-    {
-    unsigned long flags;
-    long ret;
+#[no_mangle]
+pub unsafe extern "C" fn perf_pmu_snapshot_aux(rb: *mut perf_buffer, event: *mut perf_event, handle: *mut perf_output_handle, size: c_ulong) -> c_long {
+    let mut flags = 0;
+    let mut ret = 0;
 //
 // Normal ->start()/->stop() callbacks run in IRQ mode in scheduler
 // paths. If we start calling them in NMI context, they may race with
@@ -7035,19 +7207,19 @@ unsafe extern "C" fn perf_ustack_task_size(regs: *mut pt_regs) -> u64 {
     local_irq_restore(flags);
     return ret;
     }
-    static void perf_aux_sample_output(struct perf_event *event,
-    struct perf_output_handle *handle,
-    struct perf_sample_data *data)
-    {
-    struct perf_event *sampler = event.aux_event;
-    struct perf_buffer *rb;
-    unsigned long pad;
-    long size;
-    if (WARN_ON_ONCE(!sampler || !data.aux_size))
+#[no_mangle]
+pub unsafe extern "C" fn perf_aux_sample_output(event: *mut perf_event, handle: *mut perf_output_handle, data: *mut perf_sample_data) {
+    let mut sampler = event.aux_event;
+pub static mut rb: *mut c_void = core::ptr::null_mut();
+    let mut pad = 0;
+    let mut size = 0;
+    if (WARN_ON_ONCE!(!sampler || !data.aux_size)) {
     return;
+    }
     rb = ring_buffer_get(sampler);
-    if (!rb)
+    if (!rb) {
     return;
+    }
     size = perf_pmu_snapshot_aux(rb, sampler, handle, data.aux_size);
 //
 // An error here means that perf_output_copy() failed (returned a
@@ -7055,20 +7227,22 @@ unsafe extern "C" fn perf_ustack_task_size(regs: *mut pt_regs) -> u64 {
 // enlightened implementation is not possible. If that changes, we'd
 // like to know.
 //
-    if (WARN_ON_ONCE(size < 0))
-    goto out_put;
+    if (WARN_ON_ONCE!(size < 0)) {
+// goto;
+    }
 //
 // The pad comes from ALIGN()ing data->aux_size up to u64 in
 // perf_prepare_sample_aux(), so should not be more than that.
 //
     pad = data.aux_size - size;
-    if (WARN_ON_ONCE(pad >= sizeof(u64)))
+    if (WARN_ON_ONCE!(pad >= sizeof!(u64))) {
     pad = 8;
+    }
     if (pad) {
-    let mut zero: u64 = 0;
+pub static mut zero: u64 = 0;
     perf_output_copy(handle, &zero, pad);
     }
-    out_put:
+// label;
     ring_buffer_put(rb);
     }
 //
@@ -7076,12 +7250,10 @@ unsafe extern "C" fn perf_ustack_task_size(regs: *mut pt_regs) -> u64 {
 // when event->attr.sample_id_all is set.
 //
 
-    PERF_SAMPLE_ID | PERF_SAMPLE_STREAM_ID |	\
+    PERF_SAMPLE_ID | PERF_SAMPLE_STREAM_ID |	
     PERF_SAMPLE_CPU | PERF_SAMPLE_IDENTIFIER)
-    static void __perf_event_header__init_id(struct perf_sample_data *data,
-    struct perf_event *event,
-    u64 sample_type)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __perf_event_header__init_id(data: *mut perf_sample_data, event: *mut perf_event, sample_type: u64) {
     data.type = event.attr.sample_type;
     data.sample_flags |= data.type & PERF_SAMPLE_ID_ALL;
     if (sample_type & PERF_SAMPLE_TID) {
@@ -7089,57 +7261,60 @@ unsafe extern "C" fn perf_ustack_task_size(regs: *mut pt_regs) -> u64 {
     data.tid_entry.pid = perf_event_pid(event, current);
     data.tid_entry.tid = perf_event_tid(event, current);
     }
-    if (sample_type & PERF_SAMPLE_TIME)
+    if (sample_type & PERF_SAMPLE_TIME) {
     data.time = perf_event_clock(event);
-    if (sample_type & (PERF_SAMPLE_ID | PERF_SAMPLE_IDENTIFIER))
+    }
+    if (sample_type & (PERF_SAMPLE_ID | PERF_SAMPLE_IDENTIFIER)) {
     data.id = primary_event_id(event);
-    if (sample_type & PERF_SAMPLE_STREAM_ID)
+    }
+    if (sample_type & PERF_SAMPLE_STREAM_ID) {
     data.stream_id = event.id;
+    }
     if (sample_type & PERF_SAMPLE_CPU) {
     data.cpu_entry.cpu	 = raw_smp_processor_id();
     data.cpu_entry.reserved = 0;
     }
     }
-    void perf_event_header__init_id(struct perf_event_header *header,
-    struct perf_sample_data *data,
-    struct perf_event *event)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_header__init_id(header: *mut perf_event_header, data: *mut perf_sample_data, event: *mut perf_event) {
     if (event.attr.sample_id_all) {
     header.size += event.id_header_size;
     __perf_event_header__init_id(data, event, event.attr.sample_type);
     }
     }
-    static void __perf_event__output_id_sample(struct perf_output_handle *handle,
-    struct perf_sample_data *data)
-    {
-    let mut sample_type: u64 = data.type;
-    if (sample_type & PERF_SAMPLE_TID)
+#[no_mangle]
+pub unsafe extern "C" fn __perf_event__output_id_sample(handle: *mut perf_output_handle, data: *mut perf_sample_data) {
+pub static mut sample_type: u64 = 0;
+    if (sample_type & PERF_SAMPLE_TID) {
     perf_output_put(handle, data.tid_entry);
-    if (sample_type & PERF_SAMPLE_TIME)
+    }
+    if (sample_type & PERF_SAMPLE_TIME) {
     perf_output_put(handle, data.time);
-    if (sample_type & PERF_SAMPLE_ID)
-    perf_output_put(handle, data.id);
-    if (sample_type & PERF_SAMPLE_STREAM_ID)
-    perf_output_put(handle, data.stream_id);
-    if (sample_type & PERF_SAMPLE_CPU)
-    perf_output_put(handle, data.cpu_entry);
-    if (sample_type & PERF_SAMPLE_IDENTIFIER)
+    }
+    if (sample_type & PERF_SAMPLE_ID) {
     perf_output_put(handle, data.id);
     }
-    void perf_event__output_id_sample(struct perf_event *event,
-    struct perf_output_handle *handle,
-    struct perf_sample_data *sample)
-    {
-    if (event.attr.sample_id_all)
+    if (sample_type & PERF_SAMPLE_STREAM_ID) {
+    perf_output_put(handle, data.stream_id);
+    }
+    if (sample_type & PERF_SAMPLE_CPU) {
+    perf_output_put(handle, data.cpu_entry);
+    }
+    if (sample_type & PERF_SAMPLE_IDENTIFIER) {
+    perf_output_put(handle, data.id);
+    }
+    }
+#[no_mangle]
+pub unsafe extern "C" fn perf_event__output_id_sample(event: *mut perf_event, handle: *mut perf_output_handle, sample: *mut perf_sample_data) {
+    if (event.attr.sample_id_all) {
     __perf_event__output_id_sample(handle, sample);
     }
-    static void perf_output_read_one(struct perf_output_handle *handle,
-    struct perf_event *event,
-    u64 enabled, u64 running)
-    {
-    let mut read_format: u64 = event.attr.read_format;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn perf_output_read_one(handle: *mut perf_output_handle, event: *mut perf_event, enabled: u64, running: u64) {
+pub static mut read_format: u64 = 0;
     u64 values[5];
-    let mut n: c_int = 0;
+pub static mut n: c_int = 0;
     values[n++] = perf_event_count(event, has_inherit_and_sample_read(&event.attr));
     if (read_format & PERF_FORMAT_TOTAL_TIME_ENABLED) {
     values[n++] = enabled +
@@ -7149,50 +7324,58 @@ unsafe extern "C" fn perf_ustack_task_size(regs: *mut pt_regs) -> u64 {
     values[n++] = running +
     atomic64_read(&event.child_total_time_running);
     }
-    if (read_format & PERF_FORMAT_ID)
+    if (read_format & PERF_FORMAT_ID) {
     values[n++] = primary_event_id(event);
-    if (read_format & PERF_FORMAT_LOST)
-    values[n++] = atomic64_read(&event.lost_samples);
-    __output_copy(handle, values, n * sizeof(u64));
     }
-    static void perf_output_read_group(struct perf_output_handle *handle,
-    struct perf_event *event,
-    u64 enabled, u64 running)
-    {
-    struct perf_event *leader = event.group_leader, *sub;
-    let mut read_format: u64 = event.attr.read_format;
-    unsigned long flags;
+    if (read_format & PERF_FORMAT_LOST) {
+    values[n++] = atomic64_read(&event.lost_samples);
+    }
+    __output_copy(handle, values, n * sizeof!(u64));
+    }
+#[no_mangle]
+pub unsafe extern "C" fn perf_output_read_group(handle: *mut perf_output_handle, event: *mut perf_event, enabled: u64, running: u64) {
+    let mut leader = event.group_leader, *sub;
+pub static mut read_format: u64 = 0;
+    let mut flags = 0;
     u64 values[6];
-    let mut n: c_int = 0;
-    let mut self: bool = has_inherit_and_sample_read(&event.attr);
+pub static mut n: c_int = 0;
+pub static mut self: bool = false;
 //
 // Disabling interrupts avoids all counter scheduling
 // (context switches, timer based rotation and IPIs).
 //
     local_irq_save(flags);
     values[n++] = 1 + leader.nr_siblings;
-    if (read_format & PERF_FORMAT_TOTAL_TIME_ENABLED)
+    if (read_format & PERF_FORMAT_TOTAL_TIME_ENABLED) {
     values[n++] = enabled;
-    if (read_format & PERF_FORMAT_TOTAL_TIME_RUNNING)
+    }
+    if (read_format & PERF_FORMAT_TOTAL_TIME_RUNNING) {
     values[n++] = running;
-    if ((leader != event) && !handle.skip_read)
+    }
+    if ((leader != event) && !handle.skip_read) {
     perf_pmu_read(leader);
+    }
     values[n++] = perf_event_count(leader, self);
-    if (read_format & PERF_FORMAT_ID)
+    if (read_format & PERF_FORMAT_ID) {
     values[n++] = primary_event_id(leader);
-    if (read_format & PERF_FORMAT_LOST)
+    }
+    if (read_format & PERF_FORMAT_LOST) {
     values[n++] = atomic64_read(&leader.lost_samples);
-    __output_copy(handle, values, n * sizeof(u64));
+    }
+    __output_copy(handle, values, n * sizeof!(u64));
     for_each_sibling_event(sub, leader) {
     n = 0;
-    if ((sub != event) && !handle.skip_read)
+    if ((sub != event) && !handle.skip_read) {
     perf_pmu_read(sub);
+    }
     values[n++] = perf_event_count(sub, self);
-    if (read_format & PERF_FORMAT_ID)
+    if (read_format & PERF_FORMAT_ID) {
     values[n++] = primary_event_id(sub);
-    if (read_format & PERF_FORMAT_LOST)
+    }
+    if (read_format & PERF_FORMAT_LOST) {
     values[n++] = atomic64_read(&sub.lost_samples);
-    __output_copy(handle, values, n * sizeof(u64));
+    }
+    __output_copy(handle, values, n * sizeof!(u64));
     }
     local_irq_restore(flags);
     }
@@ -7209,11 +7392,10 @@ unsafe extern "C" fn perf_ustack_task_size(regs: *mut pt_regs) -> u64 {
 // counts rather than attempting to accumulate some value across all children on
 // all cores.
 //
-    static void perf_output_read(struct perf_output_handle *handle,
-    struct perf_event *event)
-    {
-    let mut enabled: u64 = 0, running = 0, now;
-    let mut read_format: u64 = event.attr.read_format;
+#[no_mangle]
+pub unsafe extern "C" fn perf_output_read(handle: *mut perf_output_handle, event: *mut perf_event) {
+pub static mut enabled: u64 = 0;
+pub static mut read_format: u64 = 0;
 //
 // Compute total_time_enabled, total_time_running based on snapshot
 // values taken when the event was last scheduled in.
@@ -7221,52 +7403,63 @@ unsafe extern "C" fn perf_ustack_task_size(regs: *mut pt_regs) -> u64 {
 // We cannot simply call update_context_time() because doing so would
 // lead to deadlock when called from NMI context.
 //
-    if (read_format & PERF_FORMAT_TOTAL_TIMES)
+    if (read_format & PERF_FORMAT_TOTAL_TIMES) {
     calc_timer_values(event, &now, &enabled, &running);
-    if (event.attr.read_format & PERF_FORMAT_GROUP)
+    }
+    if (event.attr.read_format & PERF_FORMAT_GROUP) {
     perf_output_read_group(handle, event, enabled, running);
-    else
+    }
+    else {
     perf_output_read_one(handle, event, enabled, running);
     }
-    void perf_output_sample(struct perf_output_handle *handle,
-    struct perf_event_header *header,
-    struct perf_sample_data *data,
-    struct perf_event *event)
-    {
-    let mut sample_type: u64 = data.type;
-    if (data.sample_flags & PERF_SAMPLE_READ)
+    }
+#[no_mangle]
+pub unsafe extern "C" fn perf_output_sample(handle: *mut perf_output_handle, header: *mut perf_event_header, data: *mut perf_sample_data, event: *mut perf_event) {
+pub static mut sample_type: u64 = 0;
+    if (data.sample_flags & PERF_SAMPLE_READ) {
     handle.skip_read = 1;
+    }
     perf_output_put(handle, *header);
-    if (sample_type & PERF_SAMPLE_IDENTIFIER)
+    if (sample_type & PERF_SAMPLE_IDENTIFIER) {
     perf_output_put(handle, data.id);
-    if (sample_type & PERF_SAMPLE_IP)
+    }
+    if (sample_type & PERF_SAMPLE_IP) {
     perf_output_put(handle, data.ip);
-    if (sample_type & PERF_SAMPLE_TID)
+    }
+    if (sample_type & PERF_SAMPLE_TID) {
     perf_output_put(handle, data.tid_entry);
-    if (sample_type & PERF_SAMPLE_TIME)
+    }
+    if (sample_type & PERF_SAMPLE_TIME) {
     perf_output_put(handle, data.time);
-    if (sample_type & PERF_SAMPLE_ADDR)
+    }
+    if (sample_type & PERF_SAMPLE_ADDR) {
     perf_output_put(handle, data.addr);
-    if (sample_type & PERF_SAMPLE_ID)
+    }
+    if (sample_type & PERF_SAMPLE_ID) {
     perf_output_put(handle, data.id);
-    if (sample_type & PERF_SAMPLE_STREAM_ID)
+    }
+    if (sample_type & PERF_SAMPLE_STREAM_ID) {
     perf_output_put(handle, data.stream_id);
-    if (sample_type & PERF_SAMPLE_CPU)
+    }
+    if (sample_type & PERF_SAMPLE_CPU) {
     perf_output_put(handle, data.cpu_entry);
-    if (sample_type & PERF_SAMPLE_PERIOD)
+    }
+    if (sample_type & PERF_SAMPLE_PERIOD) {
     perf_output_put(handle, data.period);
-    if (sample_type & PERF_SAMPLE_READ)
+    }
+    if (sample_type & PERF_SAMPLE_READ) {
     perf_output_read(handle, event);
+    }
     if (sample_type & PERF_SAMPLE_CALLCHAIN) {
-    let mut size: c_int = 1;
+pub static mut size: c_int = 1;
     size += data.callchain.nr;
-    size *= sizeof(u64);
+    size *= sizeof!(u64);
     __output_copy(handle, data.callchain, size);
     }
     if (sample_type & PERF_SAMPLE_RAW) {
-    struct perf_raw_record *raw = data.raw;
+    let mut raw = data.raw;
     if (raw) {
-    struct perf_raw_frag *frag = &raw.frag;
+    let mut frag = &raw.frag;
     perf_output_put(handle, raw.size);
     do {
     if (frag.copy) {
@@ -7276,57 +7469,54 @@ unsafe extern "C" fn perf_ustack_task_size(regs: *mut pt_regs) -> u64 {
     __output_copy(handle, frag.data,
     frag.size);
     }
-    if (perf_raw_frag_last(frag))
+    if (perf_raw_frag_last(frag)) {
     break;
+    }
     frag = frag.next;
     } while (1);
-    if (frag.pad)
+    if (frag.pad) {
     __output_skip(handle, core::ptr::null_mut(), frag.pad);
+    }
     } else {
-    struct {
-    u32	size;
-    u32	data;
-    } raw = {
-    .size = sizeof(u32),
-    .data = 0,
-    };
+pub static mut raw: usize = 0;
     perf_output_put(handle, raw);
     }
     }
     if (sample_type & PERF_SAMPLE_BRANCH_STACK) {
     if (data.br_stack) {
-    size_t size;
+    let mut size = 0;
     size = data.br_stack.nr
-// sizeof(struct perf_branch_entry);
+// sizeof!(perf_branch_entry);
     perf_output_put(handle, data.br_stack.nr);
-    if (branch_sample_hw_index(event))
+    if (branch_sample_hw_index(event)) {
     perf_output_put(handle, data.br_stack.hw_idx);
+    }
     perf_output_copy(handle, data.br_stack.entries, size);
 //
 // Add the extension space which is appended
 // right after the struct perf_branch_stack.
 //
     if (data.br_stack_cntr) {
-    size = data.br_stack.nr * sizeof(u64);
+    size = data.br_stack.nr * sizeof!(u64);
     perf_output_copy(handle, data.br_stack_cntr, size);
     }
     } else {
 //
 // we always store at least the value of nr
 //
-    let mut nr: u64 = 0;
+pub static mut nr: u64 = 0;
     perf_output_put(handle, nr);
     }
     }
     if (sample_type & PERF_SAMPLE_REGS_USER) {
-    let mut abi: u64 = data.regs_user.abi;
+pub static mut abi: u64 = 0;
 //
 // If there are no regs to dump, notice it through
 // first u64 being zero (PERF_SAMPLE_REGS_ABI_NONE).
 //
     perf_output_put(handle, abi);
     if (abi) {
-    let mut mask: u64 = event.attr.sample_regs_user;
+pub static mut mask: u64 = 0;
     perf_output_sample_regs(handle,
     data.regs_user.regs,
     mask);
@@ -7337,44 +7527,52 @@ unsafe extern "C" fn perf_ustack_task_size(regs: *mut pt_regs) -> u64 {
     data.stack_user_size,
     data.regs_user.regs);
     }
-    if (sample_type & PERF_SAMPLE_WEIGHT_TYPE)
+    if (sample_type & PERF_SAMPLE_WEIGHT_TYPE) {
     perf_output_put(handle, data.weight.full);
-    if (sample_type & PERF_SAMPLE_DATA_SRC)
+    }
+    if (sample_type & PERF_SAMPLE_DATA_SRC) {
     perf_output_put(handle, data.data_src.val);
-    if (sample_type & PERF_SAMPLE_TRANSACTION)
+    }
+    if (sample_type & PERF_SAMPLE_TRANSACTION) {
     perf_output_put(handle, data.txn);
+    }
     if (sample_type & PERF_SAMPLE_REGS_INTR) {
-    let mut abi: u64 = data.regs_intr.abi;
+pub static mut abi: u64 = 0;
 //
 // If there are no regs to dump, notice it through
 // first u64 being zero (PERF_SAMPLE_REGS_ABI_NONE).
 //
     perf_output_put(handle, abi);
     if (abi) {
-    let mut mask: u64 = event.attr.sample_regs_intr;
+pub static mut mask: u64 = 0;
     perf_output_sample_regs(handle,
     data.regs_intr.regs,
     mask);
     }
     }
-    if (sample_type & PERF_SAMPLE_PHYS_ADDR)
+    if (sample_type & PERF_SAMPLE_PHYS_ADDR) {
     perf_output_put(handle, data.phys_addr);
-    if (sample_type & PERF_SAMPLE_CGROUP)
+    }
+    if (sample_type & PERF_SAMPLE_CGROUP) {
     perf_output_put(handle, data.cgroup);
-    if (sample_type & PERF_SAMPLE_DATA_PAGE_SIZE)
+    }
+    if (sample_type & PERF_SAMPLE_DATA_PAGE_SIZE) {
     perf_output_put(handle, data.data_page_size);
-    if (sample_type & PERF_SAMPLE_CODE_PAGE_SIZE)
+    }
+    if (sample_type & PERF_SAMPLE_CODE_PAGE_SIZE) {
     perf_output_put(handle, data.code_page_size);
+    }
     if (sample_type & PERF_SAMPLE_AUX) {
     perf_output_put(handle, data.aux_size);
-    if (data.aux_size)
+    if (data.aux_size) {
     perf_aux_sample_output(event, handle, data);
     }
+    }
     if (!event.attr.watermark) {
-    let mut wakeup_events: c_int = event.attr.wakeup_events;
+pub static mut wakeup_events: c_int = 0;
     if (wakeup_events) {
-    struct perf_buffer *rb = handle.rb;
-    let mut events: c_int = local_inc_return(&rb.events);
+    let mut rb = handle.rb;
+pub static mut events: c_int = 0;
     if (events >= wakeup_events) {
     local_sub(wakeup_events, &rb.events);
     local_inc(&rb.wakeup);
@@ -7384,16 +7582,16 @@ unsafe extern "C" fn perf_ustack_task_size(regs: *mut pt_regs) -> u64 {
     }
 #[no_mangle]
 unsafe extern "C" fn perf_virt_to_phys(virt: u64) -> u64 {
-    static u64 perf_virt_to_phys(u64 virt)
-    {
-    let mut phys_addr: u64 = 0;
-    if (!virt)
+pub static mut phys_addr: u64 = 0;
+    if (!virt) {
     return 0;
+    }
     if (virt >= TASK_SIZE) {
 // If it's vmalloc()d memory, leave phys_addr as 0
-    if (virt_addr_valid((void *)(uintptr_t)virt) &&
-    !(virt >= VMALLOC_START && virt < VMALLOC_END))
-    phys_addr = (u64)virt_to_phys((void *)(uintptr_t)virt);
+    if (virt_addr_valid((uintptr_t)virt) &&
+    !(virt >= VMALLOC_START && virt < VMALLOC_END)) {
+    phys_addr = (u64)virt_to_phys((uintptr_t)virt);
+    }
     } else {
 //
 // Walking the pages tables for user address.
@@ -7403,7 +7601,7 @@ unsafe extern "C" fn perf_virt_to_phys(virt: u64) -> u64 {
 // If failed, leave phys_addr as 0.
 //
     if (is_user_task(current)) {
-    struct page *p;
+pub static mut p: *mut c_void = core::ptr::null_mut();
     pagefault_disable();
     if (get_user_page_fast_only(virt, 0, &p)) {
     phys_addr = page_to_phys(p) + virt % PAGE_SIZE;
@@ -7419,9 +7617,7 @@ unsafe extern "C" fn perf_virt_to_phys(virt: u64) -> u64 {
 //
 #[no_mangle]
 unsafe extern "C" fn perf_get_pgtable_size(mm: *mut mm_struct, addr: c_ulong) -> u64 {
-    static u64 perf_get_pgtable_size(struct mm_struct *mm, unsigned long addr)
-    {
-    let mut size: u64 = 0;
+pub static mut size: u64 = 0;
 
     pgd_t *pgdp, pgd;
     p4d_t *p4dp, p4d;
@@ -7430,48 +7626,57 @@ unsafe extern "C" fn perf_get_pgtable_size(mm: *mut mm_struct, addr: c_ulong) ->
     pte_t *ptep, pte;
     pgdp = pgd_offset(mm, addr);
     pgd = pgdp_get(pgdp);
-    if (pgd_none(pgd))
+    if (pgd_none(pgd)) {
     return 0;
-    if (pgd_leaf(pgd))
+    }
+    if (pgd_leaf(pgd)) {
     return pgd_leaf_size(pgd);
+    }
     p4dp = p4d_offset_lockless(pgdp, pgd, addr);
     p4d = p4dp_get(p4dp);
-    if (!p4d_present(p4d))
+    if (!p4d_present(p4d)) {
     return 0;
-    if (p4d_leaf(p4d))
+    }
+    if (p4d_leaf(p4d)) {
     return p4d_leaf_size(p4d);
+    }
     pudp = pud_offset_lockless(p4dp, p4d, addr);
     pud = pudp_get(pudp);
-    if (!pud_present(pud))
+    if (!pud_present(pud)) {
     return 0;
-    if (pud_leaf(pud))
+    }
+    if (pud_leaf(pud)) {
     return pud_leaf_size(pud);
+    }
     pmdp = pmd_offset_lockless(pudp, pud, addr);
-    again:
+// label;
     pmd = pmdp_get_lockless(pmdp);
-    if (!pmd_present(pmd))
+    if (!pmd_present(pmd)) {
     return 0;
-    if (pmd_leaf(pmd))
+    }
+    if (pmd_leaf(pmd)) {
     return pmd_leaf_size(pmd);
+    }
     ptep = pte_offset_map(&pmd, addr);
-    if (!ptep)
-    goto again;
+    if (!ptep) {
+// goto;
+    }
     pte = ptep_get_lockless(ptep);
-    if (pte_present(pte))
+    if (pte_present(pte)) {
     size = __pte_leaf_size(pmd, pte);
+    }
     pte_unmap(ptep);
 
     return size;
     }
 #[no_mangle]
 unsafe extern "C" fn perf_get_page_size(addr: c_ulong) -> u64 {
-    static u64 perf_get_page_size(unsigned long addr)
-    {
-    struct mm_struct *mm;
-    unsigned long flags;
-    u64 size;
-    if (!addr)
+pub static mut mm: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut size = 0;
+    if (!addr) {
     return 0;
+    }
 //
 // Software page-table walkers must disable IRQs,
 // which prevents any tear down of the page tables.
@@ -7489,44 +7694,42 @@ unsafe extern "C" fn perf_get_page_size(addr: c_ulong) -> u64 {
     local_irq_restore(flags);
     return size;
     }
-    let mut __empty_callchain: static struct perf_callchain_entry = { .nr = 0, };
-    static struct unwind_work perf_unwind_work;
-    struct perf_callchain_entry *
-    perf_callchain(struct perf_event *event, struct pt_regs *regs)
-    {
-    let mut kernel: bool = !event.attr.exclude_callchain_kernel;
-    bool user   = !event.attr.exclude_callchain_user &&
+pub static mut __empty_callchain: perf_callchain_entry = 0;
+pub static mut perf_unwind_work: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn perf_callchain(event: *mut perf_event, regs: *mut pt_regs) -> *mut c_void {
+pub static mut kernel: bool = false;
+    let mut user = !event.attr.exclude_callchain_user &&
     is_user_task(current);
 // Disallow cross-task user callchains.
-    let mut crosstask: bool = event.ctx.task && event.ctx.task != current;
-    bool defer_user = IS_ENABLED(CONFIG_UNWIND_USER) && user &&
+pub static mut crosstask: bool = false;
+    let mut defer_user = IS_ENABLED!(CONFIG_UNWIND_USER) && user &&
     event.attr.defer_callchain;
-    let mut max_stack: u32 = event.attr.sample_max_stack;
-    struct perf_callchain_entry *callchain;
-    u64 defer_cookie;
-    if (!current.mm)
+pub static mut max_stack: u32 = 0;
+pub static mut callchain: *mut c_void = core::ptr::null_mut();
+    let mut defer_cookie = 0;
+    if (!current.mm) {
     user = false;
-    if (!kernel && !user)
+    }
+    if (!kernel && !user) {
     return &__empty_callchain;
+    }
     if (!(user && defer_user && !crosstask &&
-    unwind_deferred_request(&perf_unwind_work, &defer_cookie) >= 0))
+    unwind_deferred_request(&perf_unwind_work, &defer_cookie) >= 0)) {
     defer_cookie = 0;
+    }
     callchain = get_perf_callchain(regs, kernel, user, max_stack,
     crosstask, true, defer_cookie);
     return callchain ?: &__empty_callchain;
     }
 #[no_mangle]
 unsafe extern "C" fn __cond_set(flags: u64, s: u64, d: u64) -> __always_inline u64 {
-    static __always_inline u64 __cond_set(u64 flags, u64 s, u64 d)
-    {
     return d * !!(flags & s);
     }
-    void perf_prepare_sample(struct perf_sample_data *data,
-    struct perf_event *event,
-    struct pt_regs *regs)
-    {
-    let mut sample_type: u64 = event.attr.sample_type;
-    u64 filtered_sample_type;
+#[no_mangle]
+pub unsafe extern "C" fn perf_prepare_sample(data: *mut perf_sample_data, event: *mut perf_event, regs: *mut pt_regs) {
+pub static mut sample_type: u64 = 0;
+    let mut filtered_sample_type = 0;
 //
 // Add the sample flags that are dependent to others.  And clear the
 // sample flags that have already been done by the PMU driver.
@@ -7549,20 +7752,22 @@ unsafe extern "C" fn __cond_set(flags: u64, s: u64, d: u64) -> __always_inline u
     data.ip = perf_instruction_pointer(event, regs);
     data.sample_flags |= PERF_SAMPLE_IP;
     }
-    if (filtered_sample_type & PERF_SAMPLE_CALLCHAIN)
+    if (filtered_sample_type & PERF_SAMPLE_CALLCHAIN) {
     perf_sample_save_callchain(data, event, regs);
+    }
     if (filtered_sample_type & PERF_SAMPLE_RAW) {
     data.raw = core::ptr::null_mut();
-    data.dyn_size += sizeof(u64);
+    data.dyn_size += sizeof!(u64);
     data.sample_flags |= PERF_SAMPLE_RAW;
     }
     if (filtered_sample_type & PERF_SAMPLE_BRANCH_STACK) {
     data.br_stack = core::ptr::null_mut();
-    data.dyn_size += sizeof(u64);
+    data.dyn_size += sizeof!(u64);
     data.sample_flags |= PERF_SAMPLE_BRANCH_STACK;
     }
-    if (filtered_sample_type & PERF_SAMPLE_REGS_USER)
+    if (filtered_sample_type & PERF_SAMPLE_REGS_USER) {
     perf_sample_regs_user(&data.regs_user, regs);
+    }
 //
 // It cannot use the filtered_sample_type here as REGS_USER can be set
 // by STACK_USER (using __cond_set() above) and we don't want to update
@@ -7570,10 +7775,10 @@ unsafe extern "C" fn __cond_set(flags: u64, s: u64, d: u64) -> __always_inline u
 //
     if ((sample_type & ~data.sample_flags) & PERF_SAMPLE_REGS_USER) {
 // regs dump ABI info
-    let mut size: c_int = sizeof(u64);
+pub static mut size: c_int = 0;
     if (data.regs_user.regs) {
-    let mut mask: u64 = event.attr.sample_regs_user;
-    size += hweight64(mask) * sizeof(u64);
+pub static mut mask: u64 = 0;
+    size += hweight64(mask) * sizeof!(u64);
     }
     data.dyn_size += size;
     data.sample_flags |= PERF_SAMPLE_REGS_USER;
@@ -7585,9 +7790,9 @@ unsafe extern "C" fn __cond_set(flags: u64, s: u64, d: u64) -> __always_inline u
 // in case new sample type is added, because we could eat
 // up the rest of the sample size.
 //
-    let mut stack_size: u16 = event.attr.sample_stack_user;
-    let mut header_size: u16 = perf_sample_data_size(data, event);
-    let mut size: u16 = sizeof(u64);
+pub static mut stack_size: u16 = 0;
+pub static mut header_size: u16 = 0;
+pub static mut size: u16 = 0;
     stack_size = perf_sample_ustack_size(stack_size, header_size,
     data.regs_user.regs);
 //
@@ -7595,8 +7800,9 @@ unsafe extern "C" fn __cond_set(flags: u64, s: u64, d: u64) -> __always_inline u
 // itself and for the field that tells the dynamic size,
 // which is how many have been actually dumped.
 //
-    if (stack_size)
-    size += sizeof(u64) + stack_size;
+    if (stack_size) {
+    size += sizeof!(u64) + stack_size;
+    }
     data.stack_user_size = stack_size;
     data.dyn_size += size;
     data.sample_flags |= PERF_SAMPLE_STACK_USER;
@@ -7619,12 +7825,12 @@ unsafe extern "C" fn __cond_set(flags: u64, s: u64, d: u64) -> __always_inline u
     }
     if (filtered_sample_type & PERF_SAMPLE_REGS_INTR) {
 // regs dump ABI info
-    let mut size: c_int = sizeof(u64);
+pub static mut size: c_int = 0;
     perf_sample_regs_intr(&data.regs_intr, regs,
     event.attr.exclude_kernel);
     if (data.regs_intr.regs) {
-    let mut mask: u64 = event.attr.sample_regs_intr;
-    size += hweight64(mask) * sizeof(u64);
+pub static mut mask: u64 = 0;
+    size += hweight64(mask) * sizeof!(u64);
     }
     data.dyn_size += size;
     data.sample_flags |= PERF_SAMPLE_REGS_INTR;
@@ -7635,7 +7841,7 @@ unsafe extern "C" fn __cond_set(flags: u64, s: u64, d: u64) -> __always_inline u
     }
 
     if (filtered_sample_type & PERF_SAMPLE_CGROUP) {
-    struct cgroup *cgrp;
+pub static mut cgrp: *mut c_void = core::ptr::null_mut();
 // protected by RCU
     cgrp = task_css_check(current, perf_event_cgrp_id, 1).cgroup;
     data.cgroup = cgroup_id(cgrp);
@@ -7656,9 +7862,9 @@ unsafe extern "C" fn __cond_set(flags: u64, s: u64, d: u64) -> __always_inline u
     data.sample_flags |= PERF_SAMPLE_CODE_PAGE_SIZE;
     }
     if (filtered_sample_type & PERF_SAMPLE_AUX) {
-    u64 size;
-    let mut header_size: u16 = perf_sample_data_size(data, event);
-    header_size += sizeof(u64); /* size */
+    let mut size = 0;
+pub static mut header_size: u16 = 0;
+    header_size += sizeof!(u64); /* size */
 //
 // Given the 16bit nature of header::size, an AUX sample can
 // easily overflow it, what with all the preceding sample bits.
@@ -7669,16 +7875,13 @@ unsafe extern "C" fn __cond_set(flags: u64, s: u64, d: u64) -> __always_inline u
     event.attr.aux_sample_size);
     size = rounddown(size, 8);
     size = perf_prepare_sample_aux(event, data, size);
-    WARN_ON_ONCE(size + header_size > U16_MAX);
-    data.dyn_size += size + sizeof(u64); /* size above */
+    WARN_ON_ONCE!(size + header_size > U16_MAX);
+    data.dyn_size += size + sizeof!(u64); /* size above */
     data.sample_flags |= PERF_SAMPLE_AUX;
     }
     }
-    void perf_prepare_header(struct perf_event_header *header,
-    struct perf_sample_data *data,
-    struct perf_event *event,
-    struct pt_regs *regs)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn perf_prepare_header(header: *mut perf_event_header, data: *mut perf_sample_data, event: *mut perf_event, regs: *mut pt_regs) {
     header.type = PERF_RECORD_SAMPLE;
     header.size = perf_sample_data_size(data, event);
     header.misc = perf_misc_flags(event, regs);
@@ -7690,12 +7893,10 @@ unsafe extern "C" fn __cond_set(flags: u64, s: u64, d: u64) -> __always_inline u
 // samples and why, so good argumentation is in order for whatever you
 // do here next.
 //
-    WARN_ON_ONCE(header.size & 7);
+    WARN_ON_ONCE!(header.size & 7);
     }
 #[no_mangle]
 unsafe extern "C" fn __perf_event_aux_pause(event: *mut perf_event, pause: bool) {
-    static void __perf_event_aux_pause(struct perf_event *event, bool pause)
-    {
     if (pause) {
     if (!event.hw.aux_paused) {
     event.hw.aux_paused = 1;
@@ -7710,21 +7911,22 @@ unsafe extern "C" fn __perf_event_aux_pause(event: *mut perf_event, pause: bool)
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_aux_pause(event: *mut perf_event, pause: bool) {
-    static void perf_event_aux_pause(struct perf_event *event, bool pause)
-    {
-    struct perf_buffer *rb;
-    if (WARN_ON_ONCE(!event))
+pub static mut rb: *mut c_void = core::ptr::null_mut();
+    if (WARN_ON_ONCE!(!event)) {
     return;
+    }
     rb = ring_buffer_get(event);
-    if (!rb)
+    if (!rb) {
     return;
+    }
     scoped_guard (irqsave) {
 //
 // Guard against self-recursion here. Another event could trip
 // this same from NMI context.
 //
-    if (READ_ONCE(rb.aux_in_pause_resume))
+    if (READ_ONCE(rb.aux_in_pause_resume)) {
     break;
+    }
     WRITE_ONCE(rb.aux_in_pause_resume, 1);
     barrier();
     __perf_event_aux_pause(event, pause);
@@ -7734,49 +7936,37 @@ unsafe extern "C" fn perf_event_aux_pause(event: *mut perf_event, pause: bool) {
     ring_buffer_put(rb);
     }
     static __always_inline int
-    __perf_event_output(struct perf_event *event,
-    struct perf_sample_data *data,
-    struct pt_regs *regs,
-    int (*output_begin)(struct perf_output_handle *,
-    struct perf_sample_data *,
-    struct perf_event *,
+    __perf_event_output(perf_event *event, perf_sample_data *data, pt_regs *regs,
+    int (*output_begin)(perf_output_handle *, perf_sample_data *, perf_event *,
     unsigned int))
     {
-    struct perf_output_handle handle;
-    struct perf_event_header header;
-    int err;
+pub static mut handle: usize = 0;
+pub static mut header: usize = 0;
+    let mut err = 0;
 // protect the callchain buffers
     rcu_read_lock();
     perf_prepare_sample(data, event, regs);
     perf_prepare_header(&header, data, event, regs);
     err = output_begin(&handle, data, event, header.size);
-    if (err)
-    goto exit;
+    if (err) {
+// goto;
+    }
     perf_output_sample(&handle, &header, data, event);
     perf_output_end(&handle);
-    exit:
+// label;
     rcu_read_unlock();
     return err;
     }
-    void
-    perf_event_output_forward(struct perf_event *event,
-    struct perf_sample_data *data,
-    struct pt_regs *regs)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_output_forward(event: *mut perf_event, data: *mut perf_sample_data, regs: *mut pt_regs) {
     __perf_event_output(event, data, regs, perf_output_begin_forward);
     }
-    void
-    perf_event_output_backward(struct perf_event *event,
-    struct perf_sample_data *data,
-    struct pt_regs *regs)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_output_backward(event: *mut perf_event, data: *mut perf_sample_data, regs: *mut pt_regs) {
     __perf_event_output(event, data, regs, perf_output_begin_backward);
     }
-    int
-    perf_event_output(struct perf_event *event,
-    struct perf_sample_data *data,
-    struct pt_regs *regs)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_output(event: *mut perf_event, data: *mut perf_sample_data, regs: *mut pt_regs) -> c_int {
     return __perf_event_output(event, data, regs, perf_output_begin);
     }
 //
@@ -7790,66 +7980,57 @@ pub struct perf_read_event {
     pub tid: u32,
 }
 
-    static void
-    perf_event_read_event(struct perf_event *event,
-    struct task_struct *task)
-    {
-    struct perf_output_handle handle;
-    struct perf_sample_data sample;
-    struct perf_read_event read_event = {
-    .header = {
-    .type = PERF_RECORD_READ,
-    .misc = 0,
-    .size = sizeof(read_event) + event.read_size,
-    },
-    .pid = perf_event_pid(event, task),
-    .tid = perf_event_tid(event, task),
-    };
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_read_event(event: *mut perf_event, task: *mut task_struct) {
+pub static mut handle: usize = 0;
+pub static mut sample: usize = 0;
+pub static mut perf_read_event: usize = 0;
+    let mut ret = 0;
     perf_event_header__init_id(&read_event.header, &sample, event);
     ret = perf_output_begin(&handle, &sample, event, read_event.header.size);
-    if (ret)
+    if (ret) {
     return;
+    }
     perf_output_put(&handle, read_event);
     perf_output_read(&handle, event);
     perf_event__output_id_sample(event, &handle, &sample);
     perf_output_end(&handle);
     }
-    typedef void (perf_iterate_f)(struct perf_event *event, void *data);
-    static void
-    perf_iterate_ctx(struct perf_event_context *ctx,
-    perf_iterate_f output,
-    void *data, bool all)
-    {
-    struct perf_event *event;
+    typedef void (perf_iterate_f)(perf_event *event, void *data);
+#[no_mangle]
+pub unsafe extern "C" fn perf_iterate_ctx(ctx: *mut perf_event_context, output: perf_iterate_f, data: *mut c_void, all: bool) {
+pub static mut event: *mut c_void = core::ptr::null_mut();
     list_for_each_entry_rcu(event, &ctx.event_list, event_entry) {
     if (!all) {
-    if (event.state < PERF_EVENT_STATE_INACTIVE)
+    if (event.state < PERF_EVENT_STATE_INACTIVE) {
     continue;
-    if (!event_filter_match(event))
+    }
+    if (!event_filter_match(event)) {
     continue;
+    }
     }
     output(event, data);
     }
     }
 #[no_mangle]
 unsafe extern "C" fn perf_iterate_sb_cpu(output: perf_iterate_f, data: *mut c_void) {
-    static void perf_iterate_sb_cpu(perf_iterate_f output, void *data)
-    {
-    struct pmu_event_list *pel = this_cpu_ptr(&pmu_sb_events);
-    struct perf_event *event;
+    let mut pel = this_cpu_ptr(&pmu_sb_events);
+pub static mut event: *mut c_void = core::ptr::null_mut();
     list_for_each_entry_rcu(event, &pel.list, sb_list) {
 //
 // Skip events that are not fully formed yet; ensure that
 // if we observe event->ctx, both event and ctx will be
 // complete enough. See perf_install_in_context().
 //
-    if (!smp_load_acquire(&event.ctx))
+    if (!smp_load_acquire(&event.ctx)) {
     continue;
-    if (event.state < PERF_EVENT_STATE_INACTIVE)
+    }
+    if (event.state < PERF_EVENT_STATE_INACTIVE) {
     continue;
-    if (!event_filter_match(event))
+    }
+    if (!event_filter_match(event)) {
     continue;
+    }
     output(event, data);
     }
     }
@@ -7859,11 +8040,9 @@ unsafe extern "C" fn perf_iterate_sb_cpu(output: perf_iterate_f, data: *mut c_vo
 // For new callers; ensure that account_pmu_sb_event() includes
 // your event, otherwise it might not get delivered.
 //
-    static void
-    perf_iterate_sb(perf_iterate_f output, void *data,
-    struct perf_event_context *task_ctx)
-    {
-    struct perf_event_context *ctx;
+#[no_mangle]
+pub unsafe extern "C" fn perf_iterate_sb(output: perf_iterate_f, data: *mut c_void, task_ctx: *mut perf_event_context) {
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     preempt_disable();
 //
@@ -7873,13 +8052,14 @@ unsafe extern "C" fn perf_iterate_sb_cpu(output: perf_iterate_f, data: *mut c_vo
 //
     if (task_ctx) {
     perf_iterate_ctx(task_ctx, output, data, false);
-    goto done;
+// goto;
     }
     perf_iterate_sb_cpu(output, data);
     ctx = rcu_dereference(current.perf_event_ctxp);
-    if (ctx)
+    if (ctx) {
     perf_iterate_ctx(ctx, output, data, false);
-    done:
+    }
+// label;
     preempt_enable();
     rcu_read_unlock();
     }
@@ -7889,37 +8069,37 @@ unsafe extern "C" fn perf_iterate_sb_cpu(output: perf_iterate_f, data: *mut c_vo
 //
 #[no_mangle]
 unsafe extern "C" fn perf_event_addr_filters_exec(event: *mut perf_event, data: *mut c_void) {
-    static void perf_event_addr_filters_exec(struct perf_event *event, void *data)
-    {
-    struct perf_addr_filters_head *ifh = perf_event_addr_filters(event);
-    struct perf_addr_filter *filter;
-    let mut restart: c_uint = 0, count = 0;
-    unsigned long flags;
-    if (!has_addr_filter(event))
+    let mut ifh = perf_event_addr_filters(event);
+pub static mut filter: *mut c_void = core::ptr::null_mut();
+pub static mut restart: c_uint = 0;
+    let mut flags = 0;
+    if (!has_addr_filter(event)) {
     return;
+    }
     raw_spin_lock_irqsave(&ifh.lock, flags);
     list_for_each_entry(filter, &ifh.list, entry) {
     if (filter.path.dentry) {
     event.addr_filter_ranges[count].start = 0;
     event.addr_filter_ranges[count].size = 0;
-    restart++;
+    restart += 1;
     }
-    count++;
+    count += 1;
     }
-    if (restart)
-    event.addr_filters_gen++;
+    if (restart) {
+    event.addr_filters_gen += 1;
+    }
     raw_spin_unlock_irqrestore(&ifh.lock, flags);
-    if (restart)
+    if (restart) {
     perf_event_stop(event, 1);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_exec() {
-    void perf_event_exec(void)
-    {
-    struct perf_event_context *ctx;
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
     ctx = perf_pin_task_context(current);
-    if (!ctx)
+    if (!ctx) {
     return;
+    }
     perf_event_enable_on_exec(ctx);
     perf_event_remove_on_exec(ctx);
     scoped_guard(rcu)
@@ -7936,18 +8116,16 @@ pub struct remote_output {
 
 #[no_mangle]
 unsafe extern "C" fn __perf_event_output_stop(event: *mut perf_event, data: *mut c_void) {
-    static void __perf_event_output_stop(struct perf_event *event, void *data)
-    {
-    struct perf_event *parent = event.parent;
-    struct remote_output *ro = data;
-    struct perf_buffer *rb = ro.rb;
-    struct stop_event_data sd = {
-    .event	= event,
-    };
-    if (!has_aux(event))
+    let mut parent = event.parent;
+    let mut ro = data;
+    let mut rb = ro.rb;
+pub static mut stop_event_data: usize = 0;
+    if (!has_aux(event)) {
     return;
-    if (!parent)
+    }
+    if (!parent) {
     parent = event;
+    }
 //
 // In case of inheritance, it will be the parent that links to the
 // ring-buffer, but it will be the child that's actually using it.
@@ -7958,33 +8136,30 @@ unsafe extern "C" fn __perf_event_output_stop(event: *mut perf_event, data: *mut
 // So ring_buffer_attach() has to stop an aux event before re-assigning
 // its rb pointer.
 //
-    if (rcu_dereference(parent.rb) == rb)
+    if (rcu_dereference(parent.rb) == rb) {
     ro.err = __perf_event_stop(&sd);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn __perf_pmu_output_stop(info: *mut c_void) -> c_int {
-    static int __perf_pmu_output_stop(void *info)
-    {
-    struct perf_event *event = info;
-    struct perf_cpu_context *cpuctx = this_cpu_ptr(&perf_cpu_context);
-    struct remote_output ro = {
-    .rb	= event.rb,
-    };
+    let mut event = info;
+    let mut cpuctx = this_cpu_ptr(&perf_cpu_context);
+pub static mut remote_output: usize = 0;
     rcu_read_lock();
     perf_iterate_ctx(&cpuctx.ctx, __perf_event_output_stop, &ro, false);
-    if (cpuctx.task_ctx)
+    if (cpuctx.task_ctx) {
     perf_iterate_ctx(cpuctx.task_ctx, __perf_event_output_stop,
     &ro, false);
+    }
     rcu_read_unlock();
     return ro.err;
     }
 #[no_mangle]
 unsafe extern "C" fn perf_pmu_output_stop(event: *mut perf_event) {
-    static void perf_pmu_output_stop(struct perf_event *event)
-    {
-    struct perf_event *iter;
-    int err, cpu;
-    restart:
+pub static mut iter: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
+    let mut cpu = 0;
+// label;
     rcu_read_lock();
     list_for_each_entry_rcu(iter, &event.rb.event_list, rb_entry) {
 //
@@ -7994,14 +8169,16 @@ unsafe extern "C" fn perf_pmu_output_stop(event: *mut perf_event) {
 // it can't have children.
 //
     cpu = iter.cpu;
-    if (cpu == -1)
+    if (cpu == -1) {
     cpu = READ_ONCE(iter.oncpu);
-    if (cpu == -1)
+    }
+    if (cpu == -1) {
     continue;
+    }
     err = cpu_function_call(cpu, __perf_pmu_output_stop, event);
     if (err == -EAGAIN) {
     rcu_read_unlock();
-    goto restart;
+// goto;
     }
     }
     rcu_read_unlock();
@@ -8016,780 +8193,13 @@ unsafe extern "C" fn perf_pmu_output_stop(event: *mut perf_event) {
 pub struct perf_task_event {
     pub task: *mut task_struct,
     pub task_ctx: *mut perf_event_context,
-    struct {
-    pub header: perf_event_header,
-    pub pid: u32,
-    pub ppid: u32,
-    pub tid: u32,
-    pub ptid: u32,
-    pub time: u64,
-    pub event_id: },
-}
-
-#[no_mangle]
-unsafe extern "C" fn perf_event_task_match(event: *mut perf_event) -> c_int {
-    static int perf_event_task_match(struct perf_event *event)
-    {
-    return event.attr.comm  || event.attr.mmap ||
-    event.attr.mmap2 || event.attr.mmap_data ||
-    event.attr.task;
-    }
-    static void perf_event_task_output(struct perf_event *event,
-    void *data)
-    {
-    struct perf_task_event *task_event = data;
-    struct perf_output_handle handle;
-    struct perf_sample_data	sample;
-    struct task_struct *task = task_event.task;
-    int ret, size = task_event.event_id.header.size;
-    if (!perf_event_task_match(event))
-    return;
-    perf_event_header__init_id(&task_event.event_id.header, &sample, event);
-    ret = perf_output_begin(&handle, &sample, event,
-    task_event.event_id.header.size);
-    if (ret)
-    goto out;
-    task_event.event_id.pid = perf_event_pid(event, task);
-    task_event.event_id.tid = perf_event_tid(event, task);
-    if (task_event.event_id.header.type == PERF_RECORD_EXIT) {
-    task_event.event_id.ppid = perf_event_pid(event,
-    task.real_parent);
-    task_event.event_id.ptid = perf_event_pid(event,
-    task.real_parent);
-    } else {  /* PERF_RECORD_FORK */
-    task_event.event_id.ppid = perf_event_pid(event, current);
-    task_event.event_id.ptid = perf_event_tid(event, current);
-    }
-    task_event.event_id.time = perf_event_clock(event);
-    perf_output_put(&handle, task_event.event_id);
-    perf_event__output_id_sample(event, &handle, &sample);
-    perf_output_end(&handle);
-    out:
-    task_event.event_id.header.size = size;
-    }
-    static void perf_event_task(struct task_struct *task,
-    struct perf_event_context *task_ctx,
-    int new)
-    {
-    struct perf_task_event task_event;
-    if (!atomic_read(&nr_comm_events) &&
-    !atomic_read(&nr_mmap_events) &&
-    !atomic_read(&nr_task_events))
-    return;
-    task_event = (struct perf_task_event){
-    .task	  = task,
-    .task_ctx = task_ctx,
-    .event_id    = {
-    .header = {
-    .type = new ? PERF_RECORD_FORK : PERF_RECORD_EXIT,
-    .misc = 0,
-    .size = sizeof(task_event.event_id),
-    },
-// .pid
-// .ppid
-// .tid
-// .ptid
-// .time
-    },
-    };
-    perf_iterate_sb(perf_event_task_output,
-    &task_event,
-    task_ctx);
-    }
-//
-// Allocate data for a new task when profiling system-wide
-// events which require PMU specific data
-//
-    static void
-    perf_event_alloc_task_data(struct task_struct *child,
-    struct task_struct *parent)
-    {
-    struct kmem_cache *ctx_cache = core::ptr::null_mut();
-    struct perf_ctx_data *cd;
-    if (!refcount_read(&global_ctx_data_ref))
-    return;
-    scoped_guard (rcu) {
-    cd = rcu_dereference(parent.perf_ctx_data);
-    if (cd)
-    ctx_cache = cd.ctx_cache;
-    }
-    if (!ctx_cache)
-    return;
-    guard(percpu_read)(&global_ctx_data_rwsem);
-    scoped_guard (rcu) {
-    cd = rcu_dereference(child.perf_ctx_data);
-    if (!cd) {
-//
-// A system-wide event may be unaccount,
-// when attaching the perf_ctx_data.
-//
-    if (!refcount_read(&global_ctx_data_ref))
-    return;
-    goto attach;
-    }
-    if (!cd.global) {
-    cd.global = 1;
-    refcount_inc(&cd.refcount);
-    }
-    }
-    return;
-    attach:
-    attach_task_ctx_data(child, ctx_cache, true, GFP_KERNEL);
-    }
-#[no_mangle]
-pub unsafe extern "C" fn perf_event_fork(task: *mut task_struct) {
-    void perf_event_fork(struct task_struct *task)
-    {
-    perf_event_task(task, core::ptr::null_mut(), 1);
-    perf_event_namespaces(task);
-    perf_event_alloc_task_data(task, current);
-    }
-//
-// comm tracking
-//
-#[repr(C)]
-#[derive(Copy, Clone)]
-pub struct perf_comm_event {
-    pub task: *mut task_struct,
-    pub comm: *mut c_char,
-    pub comm_size: c_int,
-    struct {
-    pub header: perf_event_header,
-    pub pid: u32,
-    pub tid: u32,
-    pub event_id: },
-}
-
-#[no_mangle]
-unsafe extern "C" fn perf_event_comm_match(event: *mut perf_event) -> c_int {
-    static int perf_event_comm_match(struct perf_event *event)
-    {
-    return event.attr.comm;
-    }
-    static void perf_event_comm_output(struct perf_event *event,
-    void *data)
-    {
-    struct perf_comm_event *comm_event = data;
-    struct perf_output_handle handle;
-    struct perf_sample_data sample;
-    let mut size: c_int = comm_event.event_id.header.size;
-    int ret;
-    if (!perf_event_comm_match(event))
-    return;
-    perf_event_header__init_id(&comm_event.event_id.header, &sample, event);
-    ret = perf_output_begin(&handle, &sample, event,
-    comm_event.event_id.header.size);
-    if (ret)
-    goto out;
-    comm_event.event_id.pid = perf_event_pid(event, comm_event.task);
-    comm_event.event_id.tid = perf_event_tid(event, comm_event.task);
-    perf_output_put(&handle, comm_event.event_id);
-    __output_copy(&handle, comm_event.comm,
-    comm_event.comm_size);
-    perf_event__output_id_sample(event, &handle, &sample);
-    perf_output_end(&handle);
-    out:
-    comm_event.event_id.header.size = size;
-    }
-#[no_mangle]
-unsafe extern "C" fn perf_event_comm_event(comm_event: *mut perf_comm_event) {
-    static void perf_event_comm_event(struct perf_comm_event *comm_event)
-    {
-    char comm[TASK_COMM_LEN];
-    unsigned int size;
-    memset(comm, 0, sizeof(comm));
-    strscpy(comm, comm_event.task.comm);
-    size = ALIGN(strlen(comm)+1, sizeof(u64));
-    comm_event.comm = comm;
-    comm_event.comm_size = size;
-    comm_event.event_id.header.size = sizeof(comm_event.event_id) + size;
-    perf_iterate_sb(perf_event_comm_output,
-    comm_event,
-    core::ptr::null_mut());
-    }
-#[no_mangle]
-pub unsafe extern "C" fn perf_event_comm(task: *mut task_struct, exec: bool) {
-    void perf_event_comm(struct task_struct *task, bool exec)
-    {
-    struct perf_comm_event comm_event;
-    if (!atomic_read(&nr_comm_events))
-    return;
-    comm_event = (struct perf_comm_event){
-    .task	= task,
-// .comm
-// .comm_size
-    .event_id  = {
-    .header = {
-    .type = PERF_RECORD_COMM,
-    .misc = exec ? PERF_RECORD_MISC_COMM_EXEC : 0,
-// .size
-    },
-// .pid
-// .tid
-    },
-    };
-    perf_event_comm_event(&comm_event);
-    }
-//
-// namespaces tracking
-//
-#[repr(C)]
-#[derive(Copy, Clone)]
-pub struct perf_namespaces_event {
-    pub task: *mut task_struct,
-    struct {
-    pub header: perf_event_header,
-    pub pid: u32,
-    pub tid: u32,
-    pub nr_namespaces: u64,
-    pub link_info: [perf_ns_link_info; NR_NAMESPACES],
-    pub event_id: },
-}
-
-#[no_mangle]
-unsafe extern "C" fn perf_event_namespaces_match(event: *mut perf_event) -> c_int {
-    static int perf_event_namespaces_match(struct perf_event *event)
-    {
-    return event.attr.namespaces;
-    }
-    static void perf_event_namespaces_output(struct perf_event *event,
-    void *data)
-    {
-    struct perf_namespaces_event *namespaces_event = data;
-    struct perf_output_handle handle;
-    struct perf_sample_data sample;
-    let mut header_size: u16 = namespaces_event.event_id.header.size;
-    int ret;
-    if (!perf_event_namespaces_match(event))
-    return;
-    perf_event_header__init_id(&namespaces_event.event_id.header,
-    &sample, event);
-    ret = perf_output_begin(&handle, &sample, event,
-    namespaces_event.event_id.header.size);
-    if (ret)
-    goto out;
-    namespaces_event.event_id.pid = perf_event_pid(event,
-    namespaces_event.task);
-    namespaces_event.event_id.tid = perf_event_tid(event,
-    namespaces_event.task);
-    perf_output_put(&handle, namespaces_event.event_id);
-    perf_event__output_id_sample(event, &handle, &sample);
-    perf_output_end(&handle);
-    out:
-    namespaces_event.event_id.header.size = header_size;
-    }
-    static void perf_fill_ns_link_info(struct perf_ns_link_info *ns_link_info,
-    struct task_struct *task,
-    const struct proc_ns_operations *ns_ops)
-    {
-    struct path ns_path;
-    struct inode *ns_inode;
-    int error;
-    error = ns_get_path(&ns_path, task, ns_ops);
-    if (!error) {
-    ns_inode = ns_path.dentry.d_inode;
-    ns_link_info.dev = new_encode_dev(ns_inode.i_sb.s_dev);
-    ns_link_info.ino = ns_inode.i_ino;
-    path_put(&ns_path);
-    }
-    }
-#[no_mangle]
-pub unsafe extern "C" fn perf_event_namespaces(task: *mut task_struct) {
-    void perf_event_namespaces(struct task_struct *task)
-    {
-    struct perf_namespaces_event namespaces_event;
-    struct perf_ns_link_info *ns_link_info;
-    if (!atomic_read(&nr_namespaces_events))
-    return;
-    namespaces_event = (struct perf_namespaces_event){
-    .task	= task,
-    .event_id  = {
-    .header = {
-    .type = PERF_RECORD_NAMESPACES,
-    .misc = 0,
-    .size = sizeof(namespaces_event.event_id),
-    },
-// .pid
-// .tid
-    .nr_namespaces = NR_NAMESPACES,
-// .link_info[NR_NAMESPACES]
-    },
-    };
-    ns_link_info = namespaces_event.event_id.link_info;
-    perf_fill_ns_link_info(&ns_link_info[MNT_NS_INDEX],
-    task, &mntns_operations);
-
-    perf_fill_ns_link_info(&ns_link_info[USER_NS_INDEX],
-    task, &userns_operations);
-
-    perf_fill_ns_link_info(&ns_link_info[NET_NS_INDEX],
-    task, &netns_operations);
-
-    perf_fill_ns_link_info(&ns_link_info[UTS_NS_INDEX],
-    task, &utsns_operations);
-
-    perf_fill_ns_link_info(&ns_link_info[IPC_NS_INDEX],
-    task, &ipcns_operations);
-
-    perf_fill_ns_link_info(&ns_link_info[PID_NS_INDEX],
-    task, &pidns_operations);
-
-    perf_fill_ns_link_info(&ns_link_info[CGROUP_NS_INDEX],
-    task, &cgroupns_operations);
-
-    perf_iterate_sb(perf_event_namespaces_output,
-    &namespaces_event,
-    core::ptr::null_mut());
-    }
-//
-// cgroup tracking
-//
-
-#[repr(C)]
-#[derive(Copy, Clone)]
-pub struct perf_cgroup_event {
-    pub path: *mut c_char,
-    pub path_size: c_int,
-    struct {
-    pub header: perf_event_header,
-    pub id: u64,
-    pub path: [c_char; ],
-    pub event_id: },
-}
-
-#[no_mangle]
-unsafe extern "C" fn perf_event_cgroup_match(event: *mut perf_event) -> c_int {
-    static int perf_event_cgroup_match(struct perf_event *event)
-    {
-    return event.attr.cgroup;
-    }
-#[no_mangle]
-unsafe extern "C" fn perf_event_cgroup_output(event: *mut perf_event, data: *mut c_void) {
-    static void perf_event_cgroup_output(struct perf_event *event, void *data)
-    {
-    struct perf_cgroup_event *cgroup_event = data;
-    struct perf_output_handle handle;
-    struct perf_sample_data sample;
-    let mut header_size: u16 = cgroup_event.event_id.header.size;
-    int ret;
-    if (!perf_event_cgroup_match(event))
-    return;
-    perf_event_header__init_id(&cgroup_event.event_id.header,
-    &sample, event);
-    ret = perf_output_begin(&handle, &sample, event,
-    cgroup_event.event_id.header.size);
-    if (ret)
-    goto out;
-    perf_output_put(&handle, cgroup_event.event_id);
-    __output_copy(&handle, cgroup_event.path, cgroup_event.path_size);
-    perf_event__output_id_sample(event, &handle, &sample);
-    perf_output_end(&handle);
-    out:
-    cgroup_event.event_id.header.size = header_size;
-    }
-#[no_mangle]
-unsafe extern "C" fn perf_event_cgroup(cgrp: *mut cgroup) {
-    static void perf_event_cgroup(struct cgroup *cgrp)
-    {
-    struct perf_cgroup_event cgroup_event;
-    char path_enomem[16] = "//enomem";
-    char *pathname;
-    size_t size;
-    if (!atomic_read(&nr_cgroup_events))
-    return;
-    cgroup_event = (struct perf_cgroup_event){
-    .event_id  = {
-    .header = {
-    .type = PERF_RECORD_CGROUP,
-    .misc = 0,
-    .size = sizeof(cgroup_event.event_id),
-    },
-    .id = cgroup_id(cgrp),
-    },
-    };
-    pathname = kmalloc(PATH_MAX, GFP_KERNEL);
-    if (pathname == core::ptr::null_mut()) {
-    cgroup_event.path = path_enomem;
-    } else {
-// just to be sure to have enough space for alignment
-    cgroup_path(cgrp, pathname, PATH_MAX - sizeof(u64));
-    cgroup_event.path = pathname;
-    }
-//
-// Since our buffer works in 8 byte units we need to align our string
-// size to a multiple of 8. However, we must guarantee the tail end is
-// zero'd out to avoid leaking random bits to userspace.
-//
-    size = strlen(cgroup_event.path) + 1;
-    while (!IS_ALIGNED(size, sizeof(u64)))
-    cgroup_event.path[size++] = '\0';
-    cgroup_event.event_id.header.size += size;
-    cgroup_event.path_size = size;
-    perf_iterate_sb(perf_event_cgroup_output,
-    &cgroup_event,
-    core::ptr::null_mut());
-    kfree(pathname);
-    }
-
-//
-// mmap tracking
-//
-#[repr(C)]
-#[derive(Copy, Clone)]
-pub struct perf_mmap_event {
-    pub vma: *mut vm_area_struct,
-    pub file_name: *const c_char,
-    pub file_size: c_int,
-    pub min: int maj,,
-    pub ino: u64,
-    pub ino_generation: u64,
-    pub flags: u32 prot,,
-    pub build_id: [u8; BUILD_ID_SIZE_MAX],
-    pub build_id_size: u32,
-    struct {
-    pub header: perf_event_header,
-    pub pid: u32,
-    pub tid: u32,
-    pub start: u64,
-    pub len: u64,
-    pub pgoff: u64,
-    pub event_id: },
-}
-
-    static int perf_event_mmap_match(struct perf_event *event,
-    void *data)
-    {
-    struct perf_mmap_event *mmap_event = data;
-    struct vm_area_struct *vma = mmap_event.vma;
-    let mut executable: c_int = vma.vm_flags & VM_EXEC;
-    return (!executable && event.attr.mmap_data) ||
-    (executable && (event.attr.mmap || event.attr.mmap2));
-    }
-    static void perf_event_mmap_output(struct perf_event *event,
-    void *data)
-    {
-    struct perf_mmap_event *mmap_event = data;
-    struct perf_output_handle handle;
-    struct perf_sample_data sample;
-    let mut size: c_int = mmap_event.event_id.header.size;
-    let mut type: u32 = mmap_event.event_id.header.type;
-    bool use_build_id;
-    int ret;
-    if (!perf_event_mmap_match(event, data))
-    return;
-    if (event.attr.mmap2) {
-    mmap_event.event_id.header.type = PERF_RECORD_MMAP2;
-    mmap_event.event_id.header.size += sizeof(mmap_event.maj);
-    mmap_event.event_id.header.size += sizeof(mmap_event.min);
-    mmap_event.event_id.header.size += sizeof(mmap_event.ino);
-    mmap_event.event_id.header.size += sizeof(mmap_event.ino_generation);
-    mmap_event.event_id.header.size += sizeof(mmap_event.prot);
-    mmap_event.event_id.header.size += sizeof(mmap_event.flags);
-    }
-    perf_event_header__init_id(&mmap_event.event_id.header, &sample, event);
-    ret = perf_output_begin(&handle, &sample, event,
-    mmap_event.event_id.header.size);
-    if (ret)
-    goto out;
-    mmap_event.event_id.pid = perf_event_pid(event, current);
-    mmap_event.event_id.tid = perf_event_tid(event, current);
-    use_build_id = event.attr.build_id && mmap_event.build_id_size;
-    if (event.attr.mmap2 && use_build_id)
-    mmap_event.event_id.header.misc |= PERF_RECORD_MISC_MMAP_BUILD_ID;
-    perf_output_put(&handle, mmap_event.event_id);
-    if (event.attr.mmap2) {
-    if (use_build_id) {
-    u8 size[4] = { (u8) mmap_event.build_id_size, 0, 0, 0 };
-    __output_copy(&handle, size, 4);
-    __output_copy(&handle, mmap_event.build_id, BUILD_ID_SIZE_MAX);
-    } else {
-    perf_output_put(&handle, mmap_event.maj);
-    perf_output_put(&handle, mmap_event.min);
-    perf_output_put(&handle, mmap_event.ino);
-    perf_output_put(&handle, mmap_event.ino_generation);
-    }
-    perf_output_put(&handle, mmap_event.prot);
-    perf_output_put(&handle, mmap_event.flags);
-    }
-    __output_copy(&handle, mmap_event.file_name,
-    mmap_event.file_size);
-    perf_event__output_id_sample(event, &handle, &sample);
-    perf_output_end(&handle);
-    out:
-    mmap_event.event_id.header.size = size;
-    mmap_event.event_id.header.type = type;
-    }
-#[no_mangle]
-unsafe extern "C" fn perf_event_mmap_event(mmap_event: *mut perf_mmap_event) {
-    static void perf_event_mmap_event(struct perf_mmap_event *mmap_event)
-    {
-    struct vm_area_struct *vma = mmap_event.vma;
-    struct file *file = vma.vm_file;
-    let mut maj: c_int = 0, min = 0;
-    let mut ino: u64 = 0, gen = 0;
-    let mut prot: u32 = 0, flags = 0;
-    unsigned int size;
-    char tmp[16];
-    char *buf = core::ptr::null_mut();
-    char *name = core::ptr::null_mut();
-    if (vma.vm_flags & VM_READ)
-    prot |= PROT_READ;
-    if (vma.vm_flags & VM_WRITE)
-    prot |= PROT_WRITE;
-    if (vma.vm_flags & VM_EXEC)
-    prot |= PROT_EXEC;
-    if (vma.vm_flags & VM_MAYSHARE)
-    flags = MAP_SHARED;
-    else
-    flags = MAP_PRIVATE;
-    if (vma.vm_flags & VM_LOCKED)
-    flags |= MAP_LOCKED;
-    if (is_vm_hugetlb_page(vma))
-    flags |= MAP_HUGETLB;
-    if (file) {
-    const struct inode *inode;
-    dev_t dev;
-    buf = kmalloc(PATH_MAX, GFP_KERNEL);
-    if (!buf) {
-    name = "//enomem";
-    goto cpy_name;
-    }
-//
-// d_path() works from the end of the rb backwards, so we
-// need to add enough zero bytes after the string to handle
-// the 64bit alignment we do later.
-//
-    name = d_path(file_user_path(file), buf, PATH_MAX - sizeof(u64));
-    if (IS_ERR(name)) {
-    name = "//toolong";
-    goto cpy_name;
-    }
-    inode = file_user_inode(vma.vm_file);
-    dev = inode.i_sb.s_dev;
-    ino = inode.i_ino;
-    gen = inode.i_generation;
-    maj = MAJOR(dev);
-    min = MINOR(dev);
-    goto got_name;
-    } else {
-    if (vma.vm_ops && vma.vm_ops.name)
-    name = (char *) vma.vm_ops.name(vma);
-    if (!name)
-    name = (char *)arch_vma_name(vma);
-    if (!name) {
-    if (vma_is_initial_heap(vma))
-    name = "[heap]";
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: vma_is_initial_stack(vma)) -> else {
-    else if (vma_is_initial_stack(vma))
-    name = "[stack]";
-    else
-    name = "//anon";
-    }
-    }
-    cpy_name:
-    strscpy(tmp, name);
-    name = tmp;
-    got_name:
-//
-// Since our buffer works in 8 byte units we need to align our string
-// size to a multiple of 8. However, we must guarantee the tail end is
-// zero'd out to avoid leaking random bits to userspace.
-//
-    size = strlen(name)+1;
-    while (!IS_ALIGNED(size, sizeof(u64)))
-    name[size++] = '\0';
-    mmap_event.file_name = name;
-    mmap_event.file_size = size;
-    mmap_event.maj = maj;
-    mmap_event.min = min;
-    mmap_event.ino = ino;
-    mmap_event.ino_generation = gen;
-    mmap_event.prot = prot;
-    mmap_event.flags = flags;
-    if (!(vma.vm_flags & VM_EXEC))
-    mmap_event.event_id.header.misc |= PERF_RECORD_MISC_MMAP_DATA;
-    mmap_event.event_id.header.size = sizeof(mmap_event.event_id) + size;
-    if (atomic_read(&nr_build_id_events))
-    build_id_parse_nofault(vma, mmap_event.build_id, &mmap_event.build_id_size);
-    perf_iterate_sb(perf_event_mmap_output,
-    mmap_event,
-    core::ptr::null_mut());
-    kfree(buf);
-    }
-//
-// Check whether inode and address range match filter criteria.
-//
-    static bool perf_addr_filter_match(struct perf_addr_filter *filter,
-    struct file *file, unsigned long offset,
-    unsigned long size)
-    {
-// d_inode(NULL) won't be equal to any mapped user-space file
-    if (!filter.path.dentry)
-    return false;
-    if (d_inode(filter.path.dentry) != file_user_inode(file))
-    return false;
-    if (filter.offset > offset + size)
-    return false;
-    if (filter.offset + filter.size < offset)
-    return false;
-    return true;
-    }
-    static bool perf_addr_filter_vma_adjust(struct perf_addr_filter *filter,
-    struct vm_area_struct *vma,
-    struct perf_addr_filter_range *fr)
-    {
-    let mut vma_size: c_ulong = vma.vm_end - vma.vm_start;
-    let mut off: c_ulong = vma_start_pgoff(vma) << PAGE_SHIFT;
-    struct file *file = vma.vm_file;
-    if (!perf_addr_filter_match(filter, file, off, vma_size))
-    return false;
-    if (filter.offset < off) {
-    fr.start = vma.vm_start;
-    fr.size = min(vma_size, filter.size - (off - filter.offset));
-    } else {
-    fr.start = vma.vm_start + filter.offset - off;
-    fr.size = min(vma.vm_end - fr.start, filter.size);
-    }
-    return true;
-    }
-#[no_mangle]
-unsafe extern "C" fn __perf_addr_filters_adjust(event: *mut perf_event, data: *mut c_void) {
-    static void __perf_addr_filters_adjust(struct perf_event *event, void *data)
-    {
-    struct perf_addr_filters_head *ifh = perf_event_addr_filters(event);
-    struct vm_area_struct *vma = data;
-    struct perf_addr_filter *filter;
-    let mut restart: c_uint = 0, count = 0;
-    unsigned long flags;
-    if (!has_addr_filter(event))
-    return;
-    if (!vma.vm_file)
-    return;
-    raw_spin_lock_irqsave(&ifh.lock, flags);
-    list_for_each_entry(filter, &ifh.list, entry) {
-    if (perf_addr_filter_vma_adjust(filter, vma,
-    &event.addr_filter_ranges[count]))
-    restart++;
-    count++;
-    }
-    if (restart)
-    event.addr_filters_gen++;
-    raw_spin_unlock_irqrestore(&ifh.lock, flags);
-    if (restart)
-    perf_event_stop(event, 1);
-    }
-//
-// Adjust all task's events' filters to the new vma
-//
-#[no_mangle]
-unsafe extern "C" fn perf_addr_filters_adjust(vma: *mut vm_area_struct) {
-    static void perf_addr_filters_adjust(struct vm_area_struct *vma)
-    {
-    struct perf_event_context *ctx;
-//
-// Data tracing isn't supported yet and as such there is no need
-// to keep track of anything that isn't related to executable code:
-//
-    if (!(vma.vm_flags & VM_EXEC))
-    return;
-    rcu_read_lock();
-    ctx = rcu_dereference(current.perf_event_ctxp);
-    if (ctx)
-    perf_iterate_ctx(ctx, __perf_addr_filters_adjust, vma, true);
-    rcu_read_unlock();
-    }
-#[no_mangle]
-pub unsafe extern "C" fn perf_event_mmap(vma: *mut vm_area_struct) {
-    void perf_event_mmap(struct vm_area_struct *vma)
-    {
-    struct perf_mmap_event mmap_event;
-    if (!atomic_read(&nr_mmap_events))
-    return;
-    mmap_event = (struct perf_mmap_event){
-    .vma	= vma,
-// .file_name
-// .file_size
-    .event_id  = {
-    .header = {
-    .type = PERF_RECORD_MMAP,
-    .misc = PERF_RECORD_MISC_USER,
-// .size
-    },
-// .pid
-// .tid
-    .start  = vma.vm_start,
-    .len    = vma.vm_end - vma.vm_start,
-    .pgoff  = (u64)vma_start_pgoff(vma) << PAGE_SHIFT,
-    },
-// .maj (attr_mmap2 only)
-// .min (attr_mmap2 only)
-// .ino (attr_mmap2 only)
-// .ino_generation (attr_mmap2 only)
-// .prot (attr_mmap2 only)
-// .flags (attr_mmap2 only)
-    };
-    perf_addr_filters_adjust(vma);
-    perf_event_mmap_event(&mmap_event);
-    }
-    void perf_event_aux_event(struct perf_event *event, unsigned long head,
-    unsigned long size, u64 flags)
-    {
-    struct perf_output_handle handle;
-    struct perf_sample_data sample;
-#[repr(C)]
-#[derive(Copy, Clone)]
-pub struct perf_aux_event {
-    pub header: perf_event_header,
-    pub offset: u64,
-    pub size: u64,
-    pub flags: u64,
-    } rec = {
-    .header = {
-    .type = PERF_RECORD_AUX,
-    .misc = 0,
-    .size = sizeof(rec),
-    },
-    .offset		= head,
-    .size		= size,
-    .flags		= flags,
-}
-
-    int ret;
-    perf_event_header__init_id(&rec.header, &sample, event);
-    ret = perf_output_begin(&handle, &sample, event, rec.header.size);
-    if (ret)
-    return;
-    perf_output_put(&handle, rec);
-    perf_event__output_id_sample(event, &handle, &sample);
-    perf_output_end(&handle);
-    }
-//
-// Lost/dropped samples logging
-//
-#[no_mangle]
-pub unsafe extern "C" fn perf_log_lost_samples(event: *mut perf_event, lost: u64) {
-    void perf_log_lost_samples(struct perf_event *event, u64 lost)
-    {
-    struct perf_output_handle handle;
-    struct perf_sample_data sample;
-    int ret;
-    struct {
-    struct perf_event_header	header;
-    u64				lost;
-    } lost_samples_event = {
-    .header = {
-    .type = PERF_RECORD_LOST_SAMPLES,
-    .misc = 0,
-    .size = sizeof(lost_samples_event),
-    },
-    .lost		= lost,
-    };
+pub static mut rec: usize = 0;
     perf_event_header__init_id(&lost_samples_event.header, &sample, event);
     ret = perf_output_begin(&handle, &sample, event,
     lost_samples_event.header.size);
-    if (ret)
+    if (ret) {
     return;
+    }
     perf_output_put(&handle, lost_samples_event);
     perf_event__output_id_sample(event, &handle, &sample);
     perf_output_end(&handle);
@@ -8802,108 +8212,16 @@ pub unsafe extern "C" fn perf_log_lost_samples(event: *mut perf_event, lost: u64
 pub struct perf_switch_event {
     pub task: *mut task_struct,
     pub next_prev: *mut task_struct,
-    struct {
-    pub header: perf_event_header,
-    pub next_prev_pid: u32,
-    pub next_prev_tid: u32,
-    pub event_id: },
-}
-
-#[no_mangle]
-unsafe extern "C" fn perf_event_switch_match(event: *mut perf_event) -> c_int {
-    static int perf_event_switch_match(struct perf_event *event)
-    {
-    return event.attr.context_switch;
-    }
-#[no_mangle]
-unsafe extern "C" fn perf_event_switch_output(event: *mut perf_event, data: *mut c_void) {
-    static void perf_event_switch_output(struct perf_event *event, void *data)
-    {
-    struct perf_switch_event *se = data;
-    struct perf_output_handle handle;
-    struct perf_sample_data sample;
-    int ret;
-    if (!perf_event_switch_match(event))
-    return;
-// Only CPU-wide events are allowed to see next/prev pid/tid
-    if (event.ctx.task) {
-    se.event_id.header.type = PERF_RECORD_SWITCH;
-    se.event_id.header.size = sizeof(se.event_id.header);
-    } else {
-    se.event_id.header.type = PERF_RECORD_SWITCH_CPU_WIDE;
-    se.event_id.header.size = sizeof(se.event_id);
-    se.event_id.next_prev_pid =
-    perf_event_pid(event, se.next_prev);
-    se.event_id.next_prev_tid =
-    perf_event_tid(event, se.next_prev);
-    }
-    perf_event_header__init_id(&se.event_id.header, &sample, event);
-    ret = perf_output_begin(&handle, &sample, event, se.event_id.header.size);
-    if (ret)
-    return;
-    if (event.ctx.task)
-    perf_output_put(&handle, se.event_id.header);
-    else
-    perf_output_put(&handle, se.event_id);
-    perf_event__output_id_sample(event, &handle, &sample);
-    perf_output_end(&handle);
-    }
-    static void perf_event_switch(struct task_struct *task,
-    struct task_struct *next_prev, bool sched_in)
-    {
-    struct perf_switch_event switch_event;
-// N.B. caller checks nr_switch_events != 0
-    switch_event = (struct perf_switch_event){
-    .task		= task,
-    .next_prev	= next_prev,
-    .event_id	= {
-    .header = {
-// .type
-    .misc = sched_in ? 0 : PERF_RECORD_MISC_SWITCH_OUT,
-// .size
-    },
-// .next_prev_pid
-// .next_prev_tid
-    },
-    };
-    if (!sched_in && task_is_runnable(task)) {
-    switch_event.event_id.header.misc |=
-    PERF_RECORD_MISC_SWITCH_OUT_PREEMPT;
-    }
-    perf_iterate_sb(perf_event_switch_output, &switch_event, core::ptr::null_mut());
-    }
-//
-// IRQ throttle logging
-//
-#[no_mangle]
-unsafe extern "C" fn perf_log_throttle(event: *mut perf_event, enable: c_int) {
-    static void perf_log_throttle(struct perf_event *event, int enable)
-    {
-    struct perf_output_handle handle;
-    struct perf_sample_data sample;
-    int ret;
-    struct {
-    struct perf_event_header	header;
-    u64				time;
-    u64				id;
-    u64				stream_id;
-    } throttle_event = {
-    .header = {
-    .type = PERF_RECORD_THROTTLE,
-    .misc = 0,
-    .size = sizeof(throttle_event),
-    },
-    .time		= perf_event_clock(event),
-    .id		= primary_event_id(event),
-    .stream_id	= event.id,
-    };
-    if (enable)
+pub static mut throttle_event: usize = 0;
+    if (enable) {
     throttle_event.header.type = PERF_RECORD_UNTHROTTLE;
+    }
     perf_event_header__init_id(&throttle_event.header, &sample, event);
     ret = perf_output_begin(&handle, &sample, event,
     throttle_event.header.size);
-    if (ret)
+    if (ret) {
     return;
+    }
     perf_output_put(&handle, throttle_event);
     perf_event__output_id_sample(event, &handle, &sample);
     perf_output_end(&handle);
@@ -8927,57 +8245,58 @@ pub struct perf_ksymbol_event {
 
 #[no_mangle]
 unsafe extern "C" fn perf_event_ksymbol_match(event: *mut perf_event) -> c_int {
-    static int perf_event_ksymbol_match(struct perf_event *event)
-    {
     return event.attr.ksymbol;
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_ksymbol_output(event: *mut perf_event, data: *mut c_void) {
-    static void perf_event_ksymbol_output(struct perf_event *event, void *data)
-    {
-    struct perf_ksymbol_event *ksymbol_event = data;
-    struct perf_output_handle handle;
-    struct perf_sample_data sample;
-    int ret;
-    if (!perf_event_ksymbol_match(event))
+    let mut ksymbol_event = data;
+pub static mut handle: usize = 0;
+pub static mut sample: usize = 0;
+    let mut ret = 0;
+    if (!perf_event_ksymbol_match(event)) {
     return;
+    }
     perf_event_header__init_id(&ksymbol_event.event_id.header,
     &sample, event);
     ret = perf_output_begin(&handle, &sample, event,
     ksymbol_event.event_id.header.size);
-    if (ret)
+    if (ret) {
     return;
+    }
     perf_output_put(&handle, ksymbol_event.event_id);
     __output_copy(&handle, ksymbol_event.name, ksymbol_event.name_len);
     perf_event__output_id_sample(event, &handle, &sample);
     perf_output_end(&handle);
     }
-    void perf_event_ksymbol(u16 ksym_type, u64 addr, u32 len, bool unregister,
-    const char *sym)
-    {
-    struct perf_ksymbol_event ksymbol_event;
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_ksymbol(ksym_type: u16, addr: u64, len: u32, unregister: bool, sym: *mut c_char) {
+pub static mut ksymbol_event: usize = 0;
     char name[KSYM_NAME_LEN];
-    let mut flags: u16 = 0;
-    int name_len;
-    if (!atomic_read(&nr_ksymbol_events))
+pub static mut flags: u16 = 0;
+    let mut name_len = 0;
+    if (!atomic_read(&nr_ksymbol_events)) {
     return;
+    }
     if (ksym_type >= PERF_RECORD_KSYMBOL_TYPE_MAX ||
-    ksym_type == PERF_RECORD_KSYMBOL_TYPE_UNKNOWN)
-    goto err;
+    ksym_type == PERF_RECORD_KSYMBOL_TYPE_UNKNOWN) {
+// goto;
+    }
     strscpy(name, sym);
     name_len = strlen(name) + 1;
-    while (!IS_ALIGNED(name_len, sizeof(u64)))
+    while (!IS_ALIGNED(name_len, sizeof!(u64))) {
     name[name_len++] = '\0';
-    BUILD_BUG_ON(KSYM_NAME_LEN % sizeof(u64));
-    if (unregister)
+    }
+    BUILD_BUG_ON!(KSYM_NAME_LEN % sizeof!(u64));
+    if (unregister) {
     flags |= PERF_RECORD_KSYMBOL_FLAGS_UNREGISTER;
-    ksymbol_event = (struct perf_ksymbol_event){
+    }
+    ksymbol_event = (perf_ksymbol_event){
     .name = name,
     .name_len = name_len,
     .event_id = {
     .header = {
     .type = PERF_RECORD_KSYMBOL,
-    .size = sizeof(ksymbol_event.event_id) +
+    .size = sizeof!(ksymbol_event.event_id) +
     name_len,
     },
     .addr = addr,
@@ -8988,7 +8307,7 @@ unsafe extern "C" fn perf_event_ksymbol_output(event: *mut perf_event, data: *mu
     };
     perf_iterate_sb(perf_event_ksymbol_output, &ksymbol_event, core::ptr::null_mut());
     return;
-    err:
+// label;
     WARN_ONCE(1, "%s: Invalid KSYMBOL type 0x%x\n", __func__, ksym_type);
     }
 //
@@ -9009,41 +8328,38 @@ pub struct perf_bpf_event {
 
 #[no_mangle]
 unsafe extern "C" fn perf_event_bpf_match(event: *mut perf_event) -> c_int {
-    static int perf_event_bpf_match(struct perf_event *event)
-    {
     return event.attr.bpf_event;
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_bpf_output(event: *mut perf_event, data: *mut c_void) {
-    static void perf_event_bpf_output(struct perf_event *event, void *data)
-    {
-    struct perf_bpf_event *bpf_event = data;
-    struct perf_output_handle handle;
-    struct perf_sample_data sample;
-    int ret;
-    if (!perf_event_bpf_match(event))
+    let mut bpf_event = data;
+pub static mut handle: usize = 0;
+pub static mut sample: usize = 0;
+    let mut ret = 0;
+    if (!perf_event_bpf_match(event)) {
     return;
+    }
     perf_event_header__init_id(&bpf_event.event_id.header,
     &sample, event);
     ret = perf_output_begin(&handle, &sample, event,
     bpf_event.event_id.header.size);
-    if (ret)
+    if (ret) {
     return;
+    }
     perf_output_put(&handle, bpf_event.event_id);
     perf_event__output_id_sample(event, &handle, &sample);
     perf_output_end(&handle);
     }
-    static void perf_event_bpf_emit_ksymbols(struct bpf_prog *prog,
-    enum perf_bpf_event_type type)
-    {
-    let mut unregister: bool = type == PERF_BPF_EVENT_PROG_UNLOAD;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_bpf_emit_ksymbols(prog: *mut bpf_prog, type: perf_bpf_event_type) {
+pub static mut unregister: bool = false;
+    let mut i = 0;
     perf_event_ksymbol(PERF_RECORD_KSYMBOL_TYPE_BPF,
     (u64)(unsigned long)prog.bpf_func,
     prog.jited_len, unregister,
     prog.aux.ksym.name);
-    for (i = 1; i < prog.aux.func_cnt; i++) {
-    struct bpf_prog *subprog = prog.aux.func[i];
+    while (i < prog.aux.func_cnt) {
+    let mut subprog = prog.aux.func[i];
     perf_event_ksymbol(
     PERF_RECORD_KSYMBOL_TYPE_BPF,
     (u64)(unsigned long)subprog.bpf_func,
@@ -9051,35 +8367,38 @@ unsafe extern "C" fn perf_event_bpf_output(event: *mut perf_event, data: *mut c_
     subprog.aux.ksym.name);
     }
     }
-    void perf_event_bpf_event(struct bpf_prog *prog,
-    enum perf_bpf_event_type type,
-    u16 flags)
-    {
-    struct perf_bpf_event bpf_event;
-    switch (type) {
-    case PERF_BPF_EVENT_PROG_LOAD:
-    case PERF_BPF_EVENT_PROG_UNLOAD:
-    if (atomic_read(&nr_ksymbol_events))
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_bpf_event(prog: *mut bpf_prog, type: perf_bpf_event_type, flags: u16) {
+pub static mut bpf_event: usize = 0;
+    match (type) {
+    PERF_BPF_EVENT_PROG_LOAD => {
+    }
+    PERF_BPF_EVENT_PROG_UNLOAD => {
+    if (atomic_read(&nr_ksymbol_events)) {
     perf_event_bpf_emit_ksymbols(prog, type);
-    break;
-    default:
+    }
+    // break;
+    }
+    _ => {
     return;
     }
-    if (!atomic_read(&nr_bpf_events))
+    }
+    if (!atomic_read(&nr_bpf_events)) {
     return;
-    bpf_event = (struct perf_bpf_event){
+    }
+    bpf_event = (perf_bpf_event){
     .prog = prog,
     .event_id = {
     .header = {
     .type = PERF_RECORD_BPF_EVENT,
-    .size = sizeof(bpf_event.event_id),
+    .size = sizeof!(bpf_event.event_id),
     },
     .type = type,
     .flags = flags,
     .id = prog.aux.id,
     },
     };
-    BUILD_BUG_ON(BPF_TAG_SIZE % sizeof(u64));
+    BUILD_BUG_ON!(BPF_TAG_SIZE % sizeof!(u64));
     memcpy(bpf_event.event_id.tag, prog.tag, BPF_TAG_SIZE);
     perf_iterate_sb(perf_event_bpf_output, &bpf_event, core::ptr::null_mut());
     }
@@ -9091,52 +8410,39 @@ pub struct perf_callchain_deferred_event {
     pub header: perf_event_header,
     pub cookie: u64,
     pub nr: u64,
-    pub ips: [u64; ],
+    pub ips: [u64; 0],
     pub event: },
 }
 
 #[no_mangle]
 unsafe extern "C" fn perf_callchain_deferred_output(event: *mut perf_event, data: *mut c_void) {
-    static void perf_callchain_deferred_output(struct perf_event *event, void *data)
-    {
-    struct perf_callchain_deferred_event *deferred_event = data;
-    struct perf_output_handle handle;
-    struct perf_sample_data sample;
+    let mut deferred_event = data;
+pub static mut handle: usize = 0;
+pub static mut sample: usize = 0;
     int ret, size = deferred_event.event.header.size;
-    if (!event.attr.defer_output)
+    if (!event.attr.defer_output) {
     return;
+    }
 // XXX do we really need sample_id_all for this ???
     perf_event_header__init_id(&deferred_event.event.header, &sample, event);
     ret = perf_output_begin(&handle, &sample, event,
     deferred_event.event.header.size);
-    if (ret)
-    goto out;
+    if (ret) {
+// goto;
+    }
     perf_output_put(&handle, deferred_event.event);
-    for (int i = 0; i < deferred_event.trace.nr; i++) {
-    let mut entry: u64 = deferred_event.trace.entries[i];
+    while (i < deferred_event.trace.nr) {
+pub static mut entry: u64 = 0;
     perf_output_put(&handle, entry);
     }
     perf_event__output_id_sample(event, &handle, &sample);
     perf_output_end(&handle);
-    out:
+// label;
     deferred_event.event.header.size = size;
     }
-    static void perf_unwind_deferred_callback(struct unwind_work *work,
-    struct unwind_stacktrace *trace, u64 cookie)
-    {
-    struct perf_callchain_deferred_event deferred_event = {
-    .trace = trace,
-    .event = {
-    .header = {
-    .type = PERF_RECORD_CALLCHAIN_DEFERRED,
-    .misc = PERF_RECORD_MISC_USER,
-    .size = sizeof(deferred_event.event) +
-    (trace.nr * sizeof(u64)),
-    },
-    .cookie = cookie,
-    .nr = trace.nr,
-    },
-    };
+#[no_mangle]
+pub unsafe extern "C" fn perf_unwind_deferred_callback(work: *mut unwind_work, trace: *mut unwind_stacktrace, cookie: u64) {
+pub static mut perf_callchain_deferred_event: usize = 0;
     perf_iterate_sb(perf_callchain_deferred_output, &deferred_event, core::ptr::null_mut());
     }
 #[repr(C)]
@@ -9155,47 +8461,46 @@ pub struct perf_text_poke_event {
 
 #[no_mangle]
 unsafe extern "C" fn perf_event_text_poke_match(event: *mut perf_event) -> c_int {
-    static int perf_event_text_poke_match(struct perf_event *event)
-    {
     return event.attr.text_poke;
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_text_poke_output(event: *mut perf_event, data: *mut c_void) {
-    static void perf_event_text_poke_output(struct perf_event *event, void *data)
-    {
-    struct perf_text_poke_event *text_poke_event = data;
-    struct perf_output_handle handle;
-    struct perf_sample_data sample;
-    let mut padding: u64 = 0;
-    int ret;
-    if (!perf_event_text_poke_match(event))
+    let mut text_poke_event = data;
+pub static mut handle: usize = 0;
+pub static mut sample: usize = 0;
+pub static mut padding: u64 = 0;
+    let mut ret = 0;
+    if (!perf_event_text_poke_match(event)) {
     return;
+    }
     perf_event_header__init_id(&text_poke_event.event_id.header, &sample, event);
     ret = perf_output_begin(&handle, &sample, event,
     text_poke_event.event_id.header.size);
-    if (ret)
+    if (ret) {
     return;
+    }
     perf_output_put(&handle, text_poke_event.event_id);
     perf_output_put(&handle, text_poke_event.old_len);
     perf_output_put(&handle, text_poke_event.new_len);
     __output_copy(&handle, text_poke_event.old_bytes, text_poke_event.old_len);
     __output_copy(&handle, text_poke_event.new_bytes, text_poke_event.new_len);
-    if (text_poke_event.pad)
+    if (text_poke_event.pad) {
     __output_copy(&handle, &padding, text_poke_event.pad);
+    }
     perf_event__output_id_sample(event, &handle, &sample);
     perf_output_end(&handle);
     }
-    void perf_event_text_poke(const void *addr, const void *old_bytes,
-    size_t old_len, const void *new_bytes, size_t new_len)
-    {
-    struct perf_text_poke_event text_poke_event;
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_text_poke(addr: *mut c_void, old_bytes: *mut c_void, old_len: size_t, new_bytes: *mut c_void, new_len: size_t) {
+pub static mut text_poke_event: usize = 0;
     size_t tot, pad;
-    if (!atomic_read(&nr_text_poke_events))
+    if (!atomic_read(&nr_text_poke_events)) {
     return;
-    tot  = sizeof(text_poke_event.old_len) + old_len;
-    tot += sizeof(text_poke_event.new_len) + new_len;
-    pad  = ALIGN(tot, sizeof(u64)) - tot;
-    text_poke_event = (struct perf_text_poke_event){
+    }
+    tot  = sizeof!(text_poke_event.old_len) + old_len;
+    tot += sizeof!(text_poke_event.new_len) + new_len;
+    pad  = ALIGN(tot, sizeof!(u64)) - tot;
+    text_poke_event = (perf_text_poke_event){
     .old_bytes    = old_bytes,
     .new_bytes    = new_bytes,
     .pad          = pad,
@@ -9205,7 +8510,7 @@ unsafe extern "C" fn perf_event_text_poke_output(event: *mut perf_event, data: *
     .header = {
     .type = PERF_RECORD_TEXT_POKE,
     .misc = PERF_RECORD_MISC_KERNEL,
-    .size = sizeof(text_poke_event.event_id) + tot + pad,
+    .size = sizeof!(text_poke_event.event_id) + tot + pad,
     },
     .addr = (unsigned long)addr,
     },
@@ -9214,16 +8519,12 @@ unsafe extern "C" fn perf_event_text_poke_output(event: *mut perf_event, data: *
     }
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_itrace_started(event: *mut perf_event) {
-    void perf_event_itrace_started(struct perf_event *event)
-    {
     WRITE_ONCE(event.attach_state, event.attach_state | PERF_ATTACH_ITRACE);
     }
 #[no_mangle]
 unsafe extern "C" fn perf_log_itrace_start(event: *mut perf_event) {
-    static void perf_log_itrace_start(struct perf_event *event)
-    {
-    struct perf_output_handle handle;
-    struct perf_sample_data sample;
+pub static mut handle: usize = 0;
+pub static mut sample: usize = 0;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct perf_aux_event {
@@ -9232,13 +8533,13 @@ pub struct perf_aux_event {
     pub tid: u32,
     pub rec: },
     pub ret: c_int,
-    if (event.parent)
+    if (event.parent) {
     pub event->parent: event =,
     if (!(event.pmu.capabilities & PERF_PMU_CAP_ITRACE) ||
     event.attach_state & PERF_ATTACH_ITRACE)
     pub PERF_RECORD_ITRACE_START: rec.header.type =,
     pub 0: rec.header.misc =,
-    pub sizeof(rec): rec.header.size =,
+    pub sizeof!(rec): rec.header.size =,
     pub current): rec.pid = perf_event_pid(event,,
     pub current): rec.tid = perf_event_tid(event,,
     pub event): perf_event_header__init_id(&rec.header, &sample,,
@@ -9249,8 +8550,7 @@ pub struct perf_aux_event {
     }
 #[no_mangle]
 pub unsafe extern "C" fn perf_report_aux_output_id(event: *mut perf_event, hw_id: u64) {
-    void perf_report_aux_output_id(struct perf_event *event, u64 hw_id)
-    {
+    }
     pub handle: perf_output_handle,
     pub sample: perf_sample_data,
 #[repr(C)]
@@ -9260,11 +8560,11 @@ pub struct perf_aux_event {
     pub hw_id: u64,
     pub rec: },
     pub ret: c_int,
-    if (event.parent)
+    if (event.parent) {
     pub event->parent: event =,
     pub PERF_RECORD_AUX_OUTPUT_HW_ID: rec.header.type =,
     pub 0: rec.header.misc =,
-    pub sizeof(rec): rec.header.size =,
+    pub sizeof!(rec): rec.header.size =,
     pub hw_id: rec.hw_id =,
     pub event): perf_event_header__init_id(&rec.header, &sample,,
     pub rec.header.size): ret = perf_output_begin(&handle, &sample, event,,
@@ -9272,9 +8572,9 @@ pub struct perf_aux_event {
     pub rec): perf_output_put(&handle,,
     pub &sample): perf_event__output_id_sample(event, &handle,,
     }
-    static int
-    __perf_event_account_interrupt(struct perf_event *event, int throttle)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __perf_event_account_interrupt(event: *mut perf_event, throttle: c_int) -> c_int {
+    }
     pub &event->hw: *mut *mut hw_perf_event hwc =,
     pub 0: int ret =,
     pub seq: u64,
@@ -9292,682 +8592,89 @@ pub struct perf_aux_event {
     pub perf_clock(): u64 now =,
     pub hwc->freq_time_stamp: s64 delta = now -,
     pub now: hwc->freq_time_stamp =,
-    if (delta > 0 && delta < 2*TICK_NSEC)
+    if (delta > 0 && delta < 2*TICK_NSEC) {
     pub true): perf_adjust_period(event, delta, hwc->last_period,,
     }
     pub ret: return,
     }
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_account_interrupt(event: *mut perf_event) -> c_int {
-    int perf_event_account_interrupt(struct perf_event *event)
-    {
+    }
     pub 1): return __perf_event_account_interrupt(event,,
     }
 #[no_mangle]
 pub unsafe extern "C" fn sample_is_allowed(event: *mut perf_event, regs: *mut pt_regs) -> bool {
-    static inline bool sample_is_allowed(struct perf_event *event, struct pt_regs *regs)
-    {
 //
 // Due to interrupt latency (AKA "skid"), we may enter the
 // kernel before taking an overflow, even if the PMU is only
 // counting user events.
 //
-    if (event.attr.exclude_kernel && !user_mode(regs))
+    if (event.attr.exclude_kernel && !user_mode(regs)) {
     pub false: return,
     pub true: return,
     }
 
-    static int bpf_overflow_handler(struct perf_event *event,
-    struct perf_sample_data *data,
-    struct pt_regs *regs)
-    {
-    struct bpf_perf_event_data_kern ctx = {
-    .data = data,
-    .event = event,
-}
-
-    struct bpf_prog *prog;
-    let mut ret: c_int = 0;
-    ctx.regs = perf_arch_bpf_user_pt_regs(regs);
-    if (unlikely(__this_cpu_inc_return(bpf_prog_active) != 1))
-    goto out;
-    rcu_read_lock();
-    prog = READ_ONCE(event.prog);
-    if (prog) {
-    perf_prepare_sample(data, event, regs);
-    ret = bpf_prog_run(prog, &ctx);
-    }
-    rcu_read_unlock();
-    out:
-    __this_cpu_dec(bpf_prog_active);
-    return ret;
-    }
-    static inline int perf_event_set_bpf_handler(struct perf_event *event,
-    struct bpf_prog *prog,
-    u64 bpf_cookie)
-    {
-    if (event.overflow_handler_context)
-// hw breakpoint or kernel counter
-    return -EINVAL;
-    if (event.prog)
-    return -EEXIST;
-    if (prog.type != BPF_PROG_TYPE_PERF_EVENT)
-    return -EINVAL;
-    if (event.attr.precise_ip &&
-    prog.call_get_stack &&
-    (!(event.attr.sample_type & PERF_SAMPLE_CALLCHAIN) ||
-    event.attr.exclude_callchain_kernel ||
-    event.attr.exclude_callchain_user)) {
-//
-// On perf_event with precise_ip, calling bpf_get_stack()
-// may trigger unwinder warnings and occasional crashes.
-// bpf_get_[stack|stackid] works around this issue by using
-// callchain attached to perf_sample_data. If the
-// perf_event does not full (kernel and user) callchain
-// attached to perf_sample_data, do not allow attaching BPF
-// program that calls bpf_get_[stack|stackid].
-//
-    return -EPROTO;
-    }
-    event.prog = prog;
-    event.bpf_cookie = bpf_cookie;
-    return 0;
-    }
 #[no_mangle]
-pub unsafe extern "C" fn perf_event_free_bpf_handler(event: *mut perf_event) {
-    static inline void perf_event_free_bpf_handler(struct perf_event *event)
-    {
-    struct bpf_prog *prog = event.prog;
-    if (!prog)
-    return;
-    event.prog = core::ptr::null_mut();
-    bpf_prog_put(prog);
+pub unsafe extern "C" fn bpf_overflow_handler(event: *mut perf_event, data: *mut perf_sample_data, regs: *mut pt_regs) -> c_int {
     }
-
-    static inline int bpf_overflow_handler(struct perf_event *event,
-    struct perf_sample_data *data,
-    struct pt_regs *regs)
-    {
-    return 1;
-    }
-    static inline int perf_event_set_bpf_handler(struct perf_event *event,
-    struct bpf_prog *prog,
-    u64 bpf_cookie)
-    {
-    return -EOPNOTSUPP;
-    }
-#[no_mangle]
-pub unsafe extern "C" fn perf_event_free_bpf_handler(event: *mut perf_event) {
-    static inline void perf_event_free_bpf_handler(struct perf_event *event)
-    {
-    }
-
-//
-// Generic event overflow handling, sampling.
-//
-    static int __perf_event_overflow(struct perf_event *event,
-    int throttle, struct perf_sample_data *data,
-    struct pt_regs *regs)
-    {
-    let mut events: c_int = atomic_read(&event.event_limit);
-    let mut ret: c_int = 0;
-//
-// Non-sampling counters might still use the PMI to fold short
-// hardware counters, ignore those.
-//
-    if (unlikely(!is_sampling_event(event)))
-    return 0;
-    ret = __perf_event_account_interrupt(event, throttle);
-    if (event.attr.aux_pause)
-    perf_event_aux_pause(event.aux_event, true);
-    if (event.prog && event.prog.type == BPF_PROG_TYPE_PERF_EVENT &&
-    !bpf_overflow_handler(event, data, regs))
-    goto out;
-//
-// XXX event_limit might not quite work as expected on inherited
-// events
-//
-    event.pending_kill = POLL_IN;
-    if (events && atomic_dec_and_test(&event.event_limit)) {
-    ret = 1;
-    event.pending_kill = POLL_HUP;
-    perf_event_disable_inatomic(event);
-    event.pmu.stop(event, 0);
-    }
-    if (event.attr.sigtrap) {
-//
-// The desired behaviour of sigtrap vs invalid samples is a bit
-// tricky; on the one hand, one should not loose the SIGTRAP if
-// it is the first event, on the other hand, we should also not
-// trigger the WARN or override the data address.
-//
-    let mut valid_sample: bool = sample_is_allowed(event, regs);
-    let mut pending_id: c_uint = 1;
-    enum task_work_notify_mode notify_mode;
-    if (regs)
-    pending_id = hash32_ptr((void *)instruction_pointer(regs)) ?: 1;
-    notify_mode = in_nmi() ? TWA_NMI_CURRENT : TWA_RESUME;
-    if (!event.pending_work &&
-    !task_work_add(current, &event.pending_task, notify_mode)) {
-    event.pending_work = pending_id;
-    local_inc(&event.ctx.nr_no_switch_fast);
-    WARN_ON_ONCE(!atomic_long_inc_not_zero(&event.refcount));
-    event.pending_addr = 0;
-    if (valid_sample && (data.sample_flags & PERF_SAMPLE_ADDR))
-    event.pending_addr = data.addr;
-    } else if (event.attr.exclude_kernel && valid_sample) {
-//
-// Should not be able to return to user space without
-// consuming pending_work; with exceptions:
-//
-// 1. Where !exclude_kernel, events can overflow again
-// in the kernel without returning to user space.
-//
-// 2. Events that can overflow again before the IRQ-
-// work without user space progress (e.g. hrtimer).
-// To approximate progress (with false negatives),
-// check 32-bit hash of the current IP.
-//
-    WARN_ON_ONCE(event.pending_work != pending_id);
-    }
-    }
-    READ_ONCE(event.overflow_handler)(event, data, regs);
-    if (*perf_event_fasync(event) && event.pending_kill) {
-    event.pending_wakeup = 1;
-    irq_work_queue(&event.pending_irq);
-    }
-    out:
-    if (event.attr.aux_resume)
-    perf_event_aux_pause(event.aux_event, false);
-    return ret;
-    }
-    int perf_event_overflow(struct perf_event *event,
-    struct perf_sample_data *data,
-    struct pt_regs *regs)
-    {
-//
-// Entry point from hardware PMI, interrupts should be disabled here.
-// This serializes us against perf_event_remove_from_context() in
-// things like perf_event_release_kernel().
-//
-    lockdep_assert_irqs_disabled();
-    return __perf_event_overflow(event, 1, data, regs);
-    }
-//
-// Generic software event infrastructure
-//
-#[repr(C)]
-#[derive(Copy, Clone)]
-pub struct swevent_htable {
-    pub swevent_hlist: *mut swevent_hlist,
-    pub hlist_mutex: mutex,
-    pub hlist_refcount: c_int,
-}
-
-    static DEFINE_PER_CPU(struct swevent_htable, swevent_htable);
-//
-// We directly increment event->count and keep a second value in
-// event->hw.period_left to count intervals. This period event
-// is kept in the range [-sample_period, 0] so that we can use the
-// sign as trigger.
-//
-#[no_mangle]
-pub unsafe extern "C" fn perf_swevent_set_period(event: *mut perf_event) -> u64 {
-    u64 perf_swevent_set_period(struct perf_event *event)
-    {
-    struct hw_perf_event *hwc = &event.hw;
-    let mut period: u64 = hwc.last_period;
-    u64 nr, offset;
-    s64 old, val;
-    hwc.last_period = hwc.sample_period;
-    old = local64_read(&hwc.period_left);
-    do {
-    val = old;
-    if (val < 0)
-    return 0;
-    nr = div64_u64(period + val, period);
-    offset = nr * period;
-    val -= offset;
-    } while (!local64_try_cmpxchg(&hwc.period_left, &old, val));
-    return nr;
-    }
-    static void perf_swevent_overflow(struct perf_event *event, u64 overflow,
-    struct perf_sample_data *data,
-    struct pt_regs *regs)
-    {
-    struct hw_perf_event *hwc = &event.hw;
-    let mut throttle: c_int = 0;
-    if (!overflow)
-    overflow = perf_swevent_set_period(event);
-    if (hwc.interrupts == MAX_INTERRUPTS)
-    return;
-    for (; overflow; overflow--) {
-    if (__perf_event_overflow(event, throttle,
-    data, regs)) {
-//
-// We inhibit the overflow from happening when
-// hwc->interrupts == MAX_INTERRUPTS.
-//
-    break;
-    }
-    throttle = 1;
-    }
-    }
-    static void perf_swevent_event(struct perf_event *event, u64 nr,
-    struct perf_sample_data *data,
-    struct pt_regs *regs)
-    {
-    struct hw_perf_event *hwc = &event.hw;
-//
-// This is:
-// - software		preempt
-// - tracepoint	preempt
-// -   tp_target_task	irq (ctx->lock)
-// - uprobes		preempt/irq
-// - kprobes		preempt/irq
-// - hw_breakpoint	irq
-//
-// Any of these are sufficient to hold off RCU and thus ensure @event
-// exists.
-//
-    lockdep_assert_preemption_disabled();
-    local64_add(nr, &event.count);
-    if (!regs)
-    return;
-    if (!is_sampling_event(event))
-    return;
-//
-// Serialize against event_function_call() IPIs like normal overflow
-// event handling. Specifically, must not allow
-// perf_event_release_kernel() -> perf_remove_from_context() to make
-// progress and 'release' the event from under us.
-//
-    guard(irqsave)();
-    if (event.state != PERF_EVENT_STATE_ACTIVE)
-    return;
-    if ((event.attr.sample_type & PERF_SAMPLE_PERIOD) && !event.attr.freq) {
-    data.period = nr;
-    return perf_swevent_overflow(event, 1, data, regs);
-    } else
-    data.period = event.hw.last_period;
-    if (nr == 1 && hwc.sample_period == 1 && !event.attr.freq)
-    return perf_swevent_overflow(event, 1, data, regs);
-    if (local64_add_negative(nr, &hwc.period_left))
-    return;
-    perf_swevent_overflow(event, 0, data, regs);
-    }
-#[no_mangle]
-pub unsafe extern "C" fn perf_exclude_event(event: *mut perf_event, regs: *mut pt_regs) -> c_int {
-    int perf_exclude_event(struct perf_event *event, struct pt_regs *regs)
-    {
-    if (event.hw.state & PERF_HES_STOPPED)
-    return 1;
-    if (regs) {
-    if (event.attr.exclude_user && user_mode(regs))
-    return 1;
-    if (event.attr.exclude_kernel && !user_mode(regs))
-    return 1;
-    }
-    return 0;
-    }
-    static int perf_swevent_match(struct perf_event *event,
-    enum perf_type_id type,
-    u32 event_id,
-    struct perf_sample_data *data,
-    struct pt_regs *regs)
-    {
-    if (event.attr.type != type)
-    return 0;
-    if (event.attr.config != event_id)
-    return 0;
-    if (perf_exclude_event(event, regs))
-    return 0;
-    return 1;
-    }
-#[no_mangle]
-pub unsafe extern "C" fn swevent_hash(type: u64, event_id: u32) -> u64 {
-    static inline u64 swevent_hash(u64 type, u32 event_id)
-    {
-    let mut val: u64 = event_id | (type << 32);
-    return hash_64(val, SWEVENT_HLIST_BITS);
-    }
-    static inline struct hlist_head *
-    __find_swevent_head(struct swevent_hlist *hlist, u64 type, u32 event_id)
-    {
-    let mut hash: u64 = swevent_hash(type, event_id);
-    return &hlist.heads[hash];
-    }
-// For the read side: events when they trigger
-    static inline struct hlist_head *
-    find_swevent_head_rcu(struct swevent_htable *swhash, u64 type, u32 event_id)
-    {
-    struct swevent_hlist *hlist;
-    hlist = rcu_dereference(swhash.swevent_hlist);
-    if (!hlist)
-    return core::ptr::null_mut();
-    return __find_swevent_head(hlist, type, event_id);
-    }
-// For the event head insertion and removal in the hlist
-    static inline struct hlist_head *
-    find_swevent_head(struct swevent_htable *swhash, struct perf_event *event)
-    {
-    struct swevent_hlist *hlist;
-    let mut event_id: u32 = event.attr.config;
-    let mut type: u64 = event.attr.type;
-//
-// Event scheduling is always serialized against hlist allocation
-// and release. Which makes the protected version suitable here.
-// The context lock guarantees that.
-//
-    hlist = rcu_dereference_protected(swhash.swevent_hlist,
-    lockdep_is_held(&event.ctx.lock));
-    if (!hlist)
-    return core::ptr::null_mut();
-    return __find_swevent_head(hlist, type, event_id);
-    }
-    static void do_perf_sw_event(enum perf_type_id type, u32 event_id,
-    u64 nr,
-    struct perf_sample_data *data,
-    struct pt_regs *regs)
-    {
-    struct swevent_htable *swhash = this_cpu_ptr(&swevent_htable);
-    struct perf_event *event;
-    struct hlist_head *head;
-    rcu_read_lock();
-    head = find_swevent_head_rcu(swhash, type, event_id);
-    if (!head)
-    goto end;
-    hlist_for_each_entry_rcu(event, head, hlist_entry) {
-    if (perf_swevent_match(event, type, event_id, data, regs))
-    perf_swevent_event(event, nr, data, regs);
-    }
-    end:
-    rcu_read_unlock();
-    }
-    DEFINE_PER_CPU(struct pt_regs, __perf_regs[4]);
-#[no_mangle]
-pub unsafe extern "C" fn perf_swevent_get_recursion_context() -> c_int {
-    int perf_swevent_get_recursion_context(void)
-    {
-    return get_recursion_context(current.perf_recursion);
-    }
-    EXPORT_SYMBOL_GPL(perf_swevent_get_recursion_context);
-#[no_mangle]
-pub unsafe extern "C" fn perf_swevent_put_recursion_context(rctx: c_int) {
-    void perf_swevent_put_recursion_context(int rctx)
-    {
-    put_recursion_context(current.perf_recursion, rctx);
-    }
-#[no_mangle]
-pub unsafe extern "C" fn ___perf_sw_event(event_id: u32, nr: u64, regs: *mut pt_regs, addr: u64) {
-    void ___perf_sw_event(u32 event_id, u64 nr, struct pt_regs *regs, u64 addr)
-    {
-    struct perf_sample_data data;
-    if (WARN_ON_ONCE(!regs))
-    return;
-    perf_sample_data_init(&data, addr, 0);
-    do_perf_sw_event(PERF_TYPE_SOFTWARE, event_id, nr, &data, regs);
-    }
-#[no_mangle]
-pub unsafe extern "C" fn __perf_sw_event(event_id: u32, nr: u64, regs: *mut pt_regs, addr: u64) {
-    void __perf_sw_event(u32 event_id, u64 nr, struct pt_regs *regs, u64 addr)
-    {
-    int rctx;
-    preempt_disable_notrace();
-    rctx = perf_swevent_get_recursion_context();
-    if (unlikely(rctx < 0))
-    goto fail;
-    ___perf_sw_event(event_id, nr, regs, addr);
-    perf_swevent_put_recursion_context(rctx);
-    fail:
-    preempt_enable_notrace();
-    }
-#[no_mangle]
-unsafe extern "C" fn perf_swevent_read(event: *mut perf_event) {
-    static void perf_swevent_read(struct perf_event *event)
-    {
-    }
-#[no_mangle]
-unsafe extern "C" fn perf_swevent_add(event: *mut perf_event, flags: c_int) -> c_int {
-    static int perf_swevent_add(struct perf_event *event, int flags)
-    {
-    struct swevent_htable *swhash = this_cpu_ptr(&swevent_htable);
-    struct hw_perf_event *hwc = &event.hw;
-    struct hlist_head *head;
-    if (is_sampling_event(event)) {
-    hwc.last_period = hwc.sample_period;
-    perf_swevent_set_period(event);
-    }
-    hwc.state = !(flags & PERF_EF_START);
-    head = find_swevent_head(swhash, event);
-    if (WARN_ON_ONCE(!head))
-    return -EINVAL;
-    hlist_add_head_rcu(&event.hlist_entry, head);
-    perf_event_update_userpage(event);
-    return 0;
-    }
-#[no_mangle]
-unsafe extern "C" fn perf_swevent_del(event: *mut perf_event, flags: c_int) {
-    static void perf_swevent_del(struct perf_event *event, int flags)
-    {
-    hlist_del_rcu(&event.hlist_entry);
-    }
-#[no_mangle]
-unsafe extern "C" fn perf_swevent_start(event: *mut perf_event, flags: c_int) {
-    static void perf_swevent_start(struct perf_event *event, int flags)
-    {
-    event.hw.state = 0;
-    }
-#[no_mangle]
-unsafe extern "C" fn perf_swevent_stop(event: *mut perf_event, flags: c_int) {
-    static void perf_swevent_stop(struct perf_event *event, int flags)
-    {
-    event.hw.state = PERF_HES_STOPPED;
-    }
-// Deref the hlist from the update side
-    static inline struct swevent_hlist *
-    swevent_hlist_deref(struct swevent_htable *swhash)
-    {
-    return rcu_dereference_protected(swhash.swevent_hlist,
-    lockdep_is_held(&swhash.hlist_mutex));
-    }
-#[no_mangle]
-unsafe extern "C" fn swevent_hlist_release(swhash: *mut swevent_htable) {
-    static void swevent_hlist_release(struct swevent_htable *swhash)
-    {
-    struct swevent_hlist *hlist = swevent_hlist_deref(swhash);
-    if (!hlist)
-    return;
-    RCU_INIT_POINTER(swhash.swevent_hlist, core::ptr::null_mut());
-    kfree_rcu(hlist, rcu_head);
-    }
-#[no_mangle]
-unsafe extern "C" fn swevent_hlist_put_cpu(cpu: c_int) {
-    static void swevent_hlist_put_cpu(int cpu)
-    {
-    struct swevent_htable *swhash = &per_cpu(swevent_htable, cpu);
-    mutex_lock(&swhash.hlist_mutex);
-    if (!--swhash.hlist_refcount)
-    swevent_hlist_release(swhash);
-    mutex_unlock(&swhash.hlist_mutex);
-    }
-#[no_mangle]
-unsafe extern "C" fn swevent_hlist_put() {
-    static void swevent_hlist_put(void)
-    {
-    int cpu;
-    for_each_possible_cpu(cpu)
-    swevent_hlist_put_cpu(cpu);
-    }
-#[no_mangle]
-unsafe extern "C" fn swevent_hlist_get_cpu(cpu: c_int) -> c_int {
-    static int swevent_hlist_get_cpu(int cpu)
-    {
-    struct swevent_htable *swhash = &per_cpu(swevent_htable, cpu);
-    let mut err: c_int = 0;
-    mutex_lock(&swhash.hlist_mutex);
-    if (!swevent_hlist_deref(swhash) &&
-    cpumask_test_cpu(cpu, perf_online_mask)) {
-    struct swevent_hlist *hlist;
-    hlist = kzalloc_obj(*hlist);
-    if (!hlist) {
-    err = -ENOMEM;
-    goto exit;
-    }
-    rcu_assign_pointer(swhash.swevent_hlist, hlist);
-    }
-    swhash.hlist_refcount++;
-    exit:
-    mutex_unlock(&swhash.hlist_mutex);
-    return err;
-    }
-#[no_mangle]
-unsafe extern "C" fn swevent_hlist_get() -> c_int {
-    static int swevent_hlist_get(void)
-    {
-    int err, cpu, failed_cpu;
-    mutex_lock(&pmus_lock);
-    for_each_possible_cpu(cpu) {
-    err = swevent_hlist_get_cpu(cpu);
-    if (err) {
-    failed_cpu = cpu;
-    goto fail;
-    }
-    }
-    mutex_unlock(&pmus_lock);
-    return 0;
-    fail:
-    for_each_possible_cpu(cpu) {
-    if (cpu == failed_cpu)
-    break;
-    swevent_hlist_put_cpu(cpu);
-    }
-    mutex_unlock(&pmus_lock);
-    return err;
-    }
-    struct static_key perf_swevent_enabled[PERF_COUNT_SW_MAX];
-#[no_mangle]
-unsafe extern "C" fn sw_perf_event_destroy(event: *mut perf_event) {
-    static void sw_perf_event_destroy(struct perf_event *event)
-    {
-    let mut event_id: u64 = event.attr.config;
-    WARN_ON(event.parent);
-    static_key_slow_dec(&perf_swevent_enabled[event_id]);
-    swevent_hlist_put();
-    }
-    static struct pmu perf_cpu_clock; /* fwd declaration */
-    static struct pmu perf_task_clock;
-#[no_mangle]
-unsafe extern "C" fn perf_swevent_init(event: *mut perf_event) -> c_int {
-    static int perf_swevent_init(struct perf_event *event)
-    {
-    let mut event_id: u64 = event.attr.config;
-    if (event.attr.type != PERF_TYPE_SOFTWARE)
-    return -ENOENT;
-//
-// no branch sampling for software events
-//
-    if (has_branch_stack(event))
-    return -EOPNOTSUPP;
-    switch (event_id) {
-    case PERF_COUNT_SW_CPU_CLOCK:
-    event.attr.type = perf_cpu_clock.type;
-    return -ENOENT;
-    case PERF_COUNT_SW_TASK_CLOCK:
-    event.attr.type = perf_task_clock.type;
-    return -ENOENT;
-    default:
-    break;
-    }
-    if (event_id >= PERF_COUNT_SW_MAX)
-    return -ENOENT;
-    if (!event.parent) {
-    int err;
-    err = swevent_hlist_get();
-    if (err)
-    return err;
-    static_key_slow_inc(&perf_swevent_enabled[event_id]);
-    event.destroy = sw_perf_event_destroy;
-    }
-    return 0;
-    }
-    static struct pmu perf_swevent = {
-    .task_ctx_nr	= perf_sw_context,
-    .capabilities	= PERF_PMU_CAP_NO_NMI,
-    .event_init	= perf_swevent_init,
-    .add		= perf_swevent_add,
-    .del		= perf_swevent_del,
-    .start		= perf_swevent_start,
-    .stop		= perf_swevent_stop,
-    .read		= perf_swevent_read,
-    };
+pub static mut bpf_perf_event_data_kern: usize = 0;
 
 #[no_mangle]
 unsafe extern "C" fn tp_perf_event_destroy(event: *mut perf_event) {
-    static void tp_perf_event_destroy(struct perf_event *event)
-    {
     perf_trace_destroy(event);
     }
 #[no_mangle]
 unsafe extern "C" fn perf_tp_event_init(event: *mut perf_event) -> c_int {
-    static int perf_tp_event_init(struct perf_event *event)
-    {
-    int err;
-    if (event.attr.type != PERF_TYPE_TRACEPOINT)
+    let mut err = 0;
+    if (event.attr.type != PERF_TYPE_TRACEPOINT) {
     return -ENOENT;
+    }
 //
 // no branch sampling for tracepoint events
 //
-    if (has_branch_stack(event))
+    if (has_branch_stack(event)) {
     return -EOPNOTSUPP;
+    }
     err = perf_trace_init(event);
-    if (err)
+    if (err) {
     return err;
+    }
     event.destroy = tp_perf_event_destroy;
     return 0;
     }
-    static struct pmu perf_tracepoint = {
-    .task_ctx_nr	= perf_sw_context,
-    .event_init	= perf_tp_event_init,
-    .add		= perf_trace_add,
-    .del		= perf_trace_del,
-    .start		= perf_swevent_start,
-    .stop		= perf_swevent_stop,
-    .read		= perf_swevent_read,
-    };
-    static int perf_tp_filter_match(struct perf_event *event,
-    struct perf_raw_record *raw)
-    {
-    void *record = raw.frag.data;
+pub static mut pmu: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn perf_tp_filter_match(event: *mut perf_event, raw: *mut perf_raw_record) -> c_int {
+    let mut record = raw.frag.data;
 // only top level events have filters set
-    if (event.parent)
+    if (event.parent) {
     event = event.parent;
-    if (likely(!event.filter) || filter_match_preds(event.filter, record))
+    }
+    if (likely(!event.filter) || filter_match_preds(event.filter, record)) {
     return 1;
+    }
     return 0;
     }
-    static int perf_tp_event_match(struct perf_event *event,
-    struct perf_raw_record *raw,
-    struct pt_regs *regs)
-    {
-    if (event.hw.state & PERF_HES_STOPPED)
+#[no_mangle]
+pub unsafe extern "C" fn perf_tp_event_match(event: *mut perf_event, raw: *mut perf_raw_record, regs: *mut pt_regs) -> c_int {
+    if (event.hw.state & PERF_HES_STOPPED) {
     return 0;
+    }
 //
 // If exclude_kernel, only trace user-space tracepoints (uprobes)
 //
-    if (event.attr.exclude_kernel && !user_mode(regs))
+    if (event.attr.exclude_kernel && !user_mode(regs)) {
     return 0;
-    if (!perf_tp_filter_match(event, raw))
+    }
+    if (!perf_tp_filter_match(event, raw)) {
     return 0;
+    }
     return 1;
     }
-    void perf_trace_run_bpf_submit(void *raw_data, int size, int rctx,
-    struct trace_event_call *call, u64 count,
-    struct pt_regs *regs, struct hlist_head *head,
-    struct task_struct *task)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn perf_trace_run_bpf_submit(raw_data: *mut c_void, size: c_int, rctx: c_int, call: *mut trace_event_call, count: u64, regs: *mut pt_regs, head: *mut hlist_head, task: *mut task_struct) {
     if (bpf_prog_array_valid(call)) {
-// (struct pt_regs **)raw_data = regs;
+// raw_data = regs;
     if (!trace_call_bpf(call, raw_data) || hlist_empty(head)) {
     perf_swevent_put_recursion_context(rctx);
     return;
@@ -9977,60 +8684,50 @@ unsafe extern "C" fn perf_tp_event_init(event: *mut perf_event) -> c_int {
     rctx, task);
     }
     EXPORT_SYMBOL_GPL(perf_trace_run_bpf_submit);
-    static void __perf_tp_event_target_task(u64 count, void *record,
-    struct pt_regs *regs,
-    struct perf_sample_data *data,
-    struct perf_raw_record *raw,
-    struct perf_event *event)
-    {
-    struct trace_entry *entry = record;
-    if (event.attr.config != entry.type)
+#[no_mangle]
+pub unsafe extern "C" fn __perf_tp_event_target_task(count: u64, record: *mut c_void, regs: *mut pt_regs, data: *mut perf_sample_data, raw: *mut perf_raw_record, event: *mut perf_event) {
+    let mut entry = record;
+    if (event.attr.config != entry.type) {
     return;
+    }
 // Cannot deliver synchronous signal to other task.
-    if (event.attr.sigtrap)
+    if (event.attr.sigtrap) {
     return;
+    }
     if (perf_tp_event_match(event, raw, regs)) {
     perf_sample_data_init(data, 0, 0);
     perf_sample_save_raw_data(data, event, raw);
     perf_swevent_event(event, count, data, regs);
     }
     }
-    static void perf_tp_event_target_task(u64 count, void *record,
-    struct pt_regs *regs,
-    struct perf_sample_data *data,
-    struct perf_raw_record *raw,
-    struct perf_event_context *ctx)
-    {
-    let mut cpu: c_uint = smp_processor_id();
-    struct pmu *pmu = &perf_tracepoint;
-    struct perf_event *event, *sibling;
+#[no_mangle]
+pub unsafe extern "C" fn perf_tp_event_target_task(count: u64, record: *mut c_void, regs: *mut pt_regs, data: *mut perf_sample_data, raw: *mut perf_raw_record, ctx: *mut perf_event_context) {
+pub static mut cpu: c_uint = 0;
+    let mut pmu = &perf_tracepoint;
+    let mut event = core::ptr::null_mut();
+    let mut sibling = core::ptr::null_mut();
     perf_event_groups_for_cpu_pmu(event, &ctx.pinned_groups, cpu, pmu) {
     __perf_tp_event_target_task(count, record, regs, data, raw, event);
-    for_each_sibling_event(sibling, event)
+    for_each_sibling_event(sibling, event) {
     __perf_tp_event_target_task(count, record, regs, data, raw, sibling);
+    }
     }
     perf_event_groups_for_cpu_pmu(event, &ctx.flexible_groups, cpu, pmu) {
     __perf_tp_event_target_task(count, record, regs, data, raw, event);
-    for_each_sibling_event(sibling, event)
+    for_each_sibling_event(sibling, event) {
     __perf_tp_event_target_task(count, record, regs, data, raw, sibling);
     }
     }
-    void perf_tp_event(u16 event_type, u64 count, void *record, int entry_size,
-    struct pt_regs *regs, struct hlist_head *head, int rctx,
-    struct task_struct *task)
-    {
-    struct perf_sample_data data;
-    struct perf_event *event;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn perf_tp_event(event_type: u16, count: u64, record: *mut c_void, entry_size: c_int, regs: *mut pt_regs, head: *mut hlist_head, rctx: c_int, task: *mut task_struct) {
+pub static mut data: usize = 0;
+pub static mut event: *mut c_void = core::ptr::null_mut();
 //
 // Per being a tracepoint, this runs with preemption disabled.
 //
     lockdep_assert_preemption_disabled();
-    struct perf_raw_record raw = {
-    .frag = {
-    .size = entry_size,
-    .data = record,
-    },
-    };
+pub static mut perf_raw_record: usize = 0;
     perf_trace_buf_update(record, event_type);
     hlist_for_each_entry_rcu(event, head, hlist_entry) {
     if (perf_tp_event_match(event, &raw, regs)) {
@@ -10052,15 +8749,16 @@ unsafe extern "C" fn perf_tp_event_init(event: *mut perf_event) -> c_int {
 // deliver this event there too.
 //
     if (task && task != current) {
-    struct perf_event_context *ctx;
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     ctx = rcu_dereference(task.perf_event_ctxp);
-    if (!ctx)
-    goto unlock;
+    if (!ctx) {
+// goto;
+    }
     raw_spin_lock(&ctx.lock);
     perf_tp_event_target_task(count, record, regs, &data, &raw, ctx);
     raw_spin_unlock(&ctx.lock);
-    unlock:
+// label;
     rcu_read_unlock();
     }
     perf_swevent_put_recursion_context(rctx);
@@ -10092,44 +8790,34 @@ unsafe extern "C" fn perf_tp_event_init(event: *mut perf_event) -> c_int {
     &format_attr_retprobe.attr,
     core::ptr::null_mut(),
     };
-    static struct attribute_group kprobe_format_group = {
-    .name = "format",
-    .attrs = kprobe_attrs,
-    };
+pub static mut attribute_group: usize = 0;
     static const struct attribute_group *kprobe_attr_groups[] = {
     &kprobe_format_group,
     core::ptr::null_mut(),
     };
-    static int perf_kprobe_event_init(struct perf_event *event);
-    static struct pmu perf_kprobe = {
-    .task_ctx_nr	= perf_sw_context,
-    .event_init	= perf_kprobe_event_init,
-    .add		= perf_trace_add,
-    .del		= perf_trace_del,
-    .start		= perf_swevent_start,
-    .stop		= perf_swevent_stop,
-    .read		= perf_swevent_read,
-    .attr_groups	= kprobe_attr_groups,
-    };
+// forward_decl: perf_kprobe_event_init;
+pub static mut pmu: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn perf_kprobe_event_init(event: *mut perf_event) -> c_int {
-    static int perf_kprobe_event_init(struct perf_event *event)
-    {
-    int err;
-    bool is_retprobe;
-    if (event.attr.type != perf_kprobe.type)
+    let mut err = 0;
+    let mut is_retprobe = 0;
+    if (event.attr.type != perf_kprobe.type) {
     return -ENOENT;
-    if (!perfmon_capable())
+    }
+    if (!perfmon_capable()) {
     return -EACCES;
+    }
 //
 // no branch sampling for probe events
 //
-    if (has_branch_stack(event))
+    if (has_branch_stack(event)) {
     return -EOPNOTSUPP;
+    }
     is_retprobe = event.attr.config & PERF_PROBE_CONFIG_IS_RETPROBE;
     err = perf_kprobe_init(event, is_retprobe);
-    if (err)
+    if (err) {
     return err;
+    }
     event.destroy = perf_kprobe_destroy;
     return 0;
     }
@@ -10140,54 +8828,42 @@ unsafe extern "C" fn perf_kprobe_event_init(event: *mut perf_event) -> c_int {
     &format_attr_ref_ctr_offset.attr,
     core::ptr::null_mut(),
     };
-    static struct attribute_group uprobe_format_group = {
-    .name = "format",
-    .attrs = uprobe_attrs,
-    };
+pub static mut attribute_group: usize = 0;
     static const struct attribute_group *uprobe_attr_groups[] = {
     &uprobe_format_group,
     core::ptr::null_mut(),
     };
-    static int perf_uprobe_event_init(struct perf_event *event);
-    static struct pmu perf_uprobe = {
-    .task_ctx_nr	= perf_sw_context,
-    .event_init	= perf_uprobe_event_init,
-    .add		= perf_trace_add,
-    .del		= perf_trace_del,
-    .start		= perf_swevent_start,
-    .stop		= perf_swevent_stop,
-    .read		= perf_swevent_read,
-    .attr_groups	= uprobe_attr_groups,
-    };
+// forward_decl: perf_uprobe_event_init;
+pub static mut pmu: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn perf_uprobe_event_init(event: *mut perf_event) -> c_int {
-    static int perf_uprobe_event_init(struct perf_event *event)
-    {
-    int err;
-    unsigned long ref_ctr_offset;
-    bool is_retprobe;
-    if (event.attr.type != perf_uprobe.type)
+    let mut err = 0;
+    let mut ref_ctr_offset = 0;
+    let mut is_retprobe = 0;
+    if (event.attr.type != perf_uprobe.type) {
     return -ENOENT;
-    if (!capable(CAP_SYS_ADMIN))
+    }
+    if (!capable(CAP_SYS_ADMIN)) {
     return -EACCES;
+    }
 //
 // no branch sampling for probe events
 //
-    if (has_branch_stack(event))
+    if (has_branch_stack(event)) {
     return -EOPNOTSUPP;
+    }
     is_retprobe = event.attr.config & PERF_PROBE_CONFIG_IS_RETPROBE;
     ref_ctr_offset = event.attr.config >> PERF_UPROBE_REF_CTR_OFFSET_SHIFT;
     err = perf_uprobe_init(event, ref_ctr_offset, is_retprobe);
-    if (err)
+    if (err) {
     return err;
+    }
     event.destroy = perf_uprobe_destroy;
     return 0;
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn perf_tp_register() {
-    static inline void perf_tp_register(void)
-    {
     perf_pmu_register(&perf_tracepoint, "tracepoint", PERF_TYPE_TRACEPOINT);
 
     perf_pmu_register(&perf_kprobe, "kprobe", -1);
@@ -10197,8 +8873,6 @@ pub unsafe extern "C" fn perf_tp_register() {
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_free_filter(event: *mut perf_event) {
-    static void perf_event_free_filter(struct perf_event *event)
-    {
     ftrace_profile_free_filter(event);
     }
 //
@@ -10207,69 +8881,78 @@ unsafe extern "C" fn perf_event_free_filter(event: *mut perf_event) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_is_tracing(event: *mut perf_event) -> bool {
-    static inline bool perf_event_is_tracing(struct perf_event *event)
-    {
-    if (event.pmu == &perf_tracepoint)
+    if (event.pmu == &perf_tracepoint) {
     return true;
+    }
 
-    if (event.pmu == &perf_kprobe)
+    if (event.pmu == &perf_kprobe) {
     return true;
+    }
 
-    if (event.pmu == &perf_uprobe)
+    if (event.pmu == &perf_uprobe) {
     return true;
+    }
 
     return false;
     }
-    static int __perf_event_set_bpf_prog(struct perf_event *event,
-    struct bpf_prog *prog,
-    u64 bpf_cookie)
-    {
-    bool is_kprobe, is_uprobe, is_tracepoint, is_syscall_tp;
-    if (event.state <= PERF_EVENT_STATE_REVOKED)
+#[no_mangle]
+pub unsafe extern "C" fn __perf_event_set_bpf_prog(event: *mut perf_event, prog: *mut bpf_prog, bpf_cookie: u64) -> c_int {
+    let mut is_kprobe = 0;
+    let mut is_uprobe = 0;
+    let mut is_tracepoint = 0;
+    let mut is_syscall_tp = 0;
+    if (event.state <= PERF_EVENT_STATE_REVOKED) {
     return -ENODEV;
-    if (!perf_event_is_tracing(event))
+    }
+    if (!perf_event_is_tracing(event)) {
     return perf_event_set_bpf_handler(event, prog, bpf_cookie);
+    }
     is_kprobe = event.tp_event.flags & TRACE_EVENT_FL_KPROBE;
     is_uprobe = event.tp_event.flags & TRACE_EVENT_FL_UPROBE;
     is_tracepoint = event.tp_event.flags & TRACE_EVENT_FL_TRACEPOINT;
     is_syscall_tp = is_syscall_trace_event(event.tp_event);
-    if (!is_kprobe && !is_uprobe && !is_tracepoint && !is_syscall_tp)
+    if (!is_kprobe && !is_uprobe && !is_tracepoint && !is_syscall_tp) {
 // bpf programs can only be attached to u/kprobe or tracepoint
     return -EINVAL;
+    }
     if (((is_kprobe || is_uprobe) && prog.type != BPF_PROG_TYPE_KPROBE) ||
     (is_tracepoint && prog.type != BPF_PROG_TYPE_TRACEPOINT) ||
-    (is_syscall_tp && prog.type != BPF_PROG_TYPE_TRACEPOINT))
+    (is_syscall_tp && prog.type != BPF_PROG_TYPE_TRACEPOINT)) {
     return -EINVAL;
-    if (prog.type == BPF_PROG_TYPE_KPROBE && prog.sleepable && !is_uprobe)
+    }
+    if (prog.type == BPF_PROG_TYPE_KPROBE && prog.sleepable && !is_uprobe) {
 // only uprobe programs are allowed to be sleepable
     return -EINVAL;
+    }
     if (prog.type == BPF_PROG_TYPE_TRACEPOINT && prog.sleepable) {
 //
 // Sleepable tracepoint programs can only attach to faultable
 // tracepoints. Currently only syscall tracepoints are faultable.
 //
-    if (!is_syscall_tp)
+    if (!is_syscall_tp) {
     return -EINVAL;
     }
+    }
 // Kprobe override only works for kprobes, not uprobes.
-    if (prog.kprobe_override && !is_kprobe)
+    if (prog.kprobe_override && !is_kprobe) {
     return -EINVAL;
+    }
 // Writing to context allowed only for uprobes.
-    if (prog.aux.kprobe_write_ctx && !is_uprobe)
+    if (prog.aux.kprobe_write_ctx && !is_uprobe) {
     return -EINVAL;
+    }
     if (is_tracepoint || is_syscall_tp) {
-    let mut off: c_int = trace_event_get_offsets(event.tp_event);
-    if (prog.aux.max_ctx_offset > off)
+pub static mut off: c_int = 0;
+    if (prog.aux.max_ctx_offset > off) {
     return -EACCES;
+    }
     }
     return perf_event_attach_bpf_prog(event, prog, bpf_cookie);
     }
-    int perf_event_set_bpf_prog(struct perf_event *event,
-    struct bpf_prog *prog,
-    u64 bpf_cookie)
-    {
-    struct perf_event_context *ctx;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_set_bpf_prog(event: *mut perf_event, prog: *mut bpf_prog, bpf_cookie: u64) -> c_int {
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     ctx = perf_event_ctx_lock(event);
     ret = __perf_event_set_bpf_prog(event, prog, bpf_cookie);
     perf_event_ctx_unlock(event, ctx);
@@ -10277,10 +8960,9 @@ pub unsafe extern "C" fn perf_event_is_tracing(event: *mut perf_event) -> bool {
     }
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_free_bpf_prog(event: *mut perf_event) {
-    void perf_event_free_bpf_prog(struct perf_event *event)
-    {
-    if (!event.prog)
+    if (!event.prog) {
     return;
+    }
     if (!perf_event_is_tracing(event)) {
     perf_event_free_bpf_handler(event);
     return;
@@ -10289,68 +8971,64 @@ pub unsafe extern "C" fn perf_event_free_bpf_prog(event: *mut perf_event) {
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn perf_tp_register() {
-    static inline void perf_tp_register(void)
-    {
+#[no_mangle]
+// duplicate fn: perf_tp_register
+pub unsafe extern "C" fn perf_tp_register_dup() {
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_free_filter(event: *mut perf_event) {
-    static void perf_event_free_filter(struct perf_event *event)
-    {
     }
-    static int __perf_event_set_bpf_prog(struct perf_event *event,
-    struct bpf_prog *prog,
-    u64 bpf_cookie)
-    {
-    return -ENOENT;
-    }
-    int perf_event_set_bpf_prog(struct perf_event *event,
-    struct bpf_prog *prog,
-    u64 bpf_cookie)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: __perf_event_set_bpf_prog
+pub unsafe extern "C" fn __perf_event_set_bpf_prog_dup(event: *mut perf_event, prog: *mut bpf_prog, bpf_cookie: u64) -> c_int {
     return -ENOENT;
     }
 #[no_mangle]
-pub unsafe extern "C" fn perf_event_free_bpf_prog(event: *mut perf_event) {
-    void perf_event_free_bpf_prog(struct perf_event *event)
-    {
+#[no_mangle]
+// duplicate fn: perf_event_set_bpf_prog
+pub unsafe extern "C" fn perf_event_set_bpf_prog_dup(event: *mut perf_event, prog: *mut bpf_prog, bpf_cookie: u64) -> c_int {
+    return -ENOENT;
+    }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: perf_event_free_bpf_prog
+pub unsafe extern "C" fn perf_event_free_bpf_prog_dup(event: *mut perf_event) {
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn perf_bp_event(bp: *mut perf_event, data: *mut c_void) {
-    void perf_bp_event(struct perf_event *bp, void *data)
-    {
-    struct perf_sample_data sample;
-    struct pt_regs *regs = data;
+pub static mut sample: usize = 0;
+    let mut regs = data;
 //
 // Exception context, will have interrupts disabled.
 //
     lockdep_assert_irqs_disabled();
     perf_sample_data_init(&sample, bp.attr.bp_addr, 0);
-    if (!bp.hw.state && !perf_exclude_event(bp, regs))
+    if (!bp.hw.state && !perf_exclude_event(bp, regs)) {
     perf_swevent_event(bp, 1, &sample, regs);
+    }
     }
 
 //
 // Allocate a new address filter
 //
-    static struct perf_addr_filter *
-    perf_addr_filter_new(struct perf_event *event, struct list_head *filters)
-    {
-    let mut node: c_int = cpu_to_node(event.cpu == -1 ? 0 : event.cpu);
-    struct perf_addr_filter *filter;
-    filter = kzalloc_node(sizeof(*filter), GFP_KERNEL, node);
-    if (!filter)
+#[no_mangle]
+pub unsafe extern "C" fn perf_addr_filter_new(event: *mut perf_event, filters: *mut list_head) -> *mut c_void {
+pub static mut node: c_int = 0;
+pub static mut filter: *mut c_void = core::ptr::null_mut();
+    filter = kzalloc_node(sizeof!(*filter), GFP_KERNEL, node);
+    if (!filter) {
     return core::ptr::null_mut();
+    }
     INIT_LIST_HEAD(&filter.entry);
     list_add_tail(&filter.entry, filters);
     return filter;
     }
 #[no_mangle]
 unsafe extern "C" fn free_filters_list(filters: *mut list_head) {
-    static void free_filters_list(struct list_head *filters)
-    {
-    struct perf_addr_filter *filter, *iter;
+    let mut filter = core::ptr::null_mut();
+    let mut iter = core::ptr::null_mut();
     list_for_each_entry_safe(filter, iter, filters, entry) {
     path_put(&filter.path);
     list_del(&filter.entry);
@@ -10360,32 +9038,33 @@ unsafe extern "C" fn free_filters_list(filters: *mut list_head) {
 //
 // Free existing address filters and optionally install new ones
 //
-    static void perf_addr_filters_splice(struct perf_event *event,
-    struct list_head *head)
-    {
-    unsigned long flags;
-    LIST_HEAD(list);
-    if (!has_addr_filter(event))
+#[no_mangle]
+pub unsafe extern "C" fn perf_addr_filters_splice(event: *mut perf_event, head: *mut list_head) {
+    let mut flags = 0;
+pub static mut list: usize = 0;
+    if (!has_addr_filter(event)) {
     return;
+    }
 // don't bother with children, they don't have their own filters
-    if (event.parent)
+    if (event.parent) {
     return;
+    }
     raw_spin_lock_irqsave(&event.addr_filters.lock, flags);
     list_splice_init(&event.addr_filters.list, &list);
-    if (head)
+    if (head) {
     list_splice(head, &event.addr_filters.list);
+    }
     raw_spin_unlock_irqrestore(&event.addr_filters.lock, flags);
     free_filters_list(&list);
     }
 #[no_mangle]
 unsafe extern "C" fn perf_free_addr_filters(event: *mut perf_event) {
-    static void perf_free_addr_filters(struct perf_event *event)
-    {
 //
 // Used during free paths, there is no concurrency.
 //
-    if (list_empty(&event.addr_filters.list))
+    if (list_empty(&event.addr_filters.list)) {
     return;
+    }
     perf_addr_filters_splice(event, core::ptr::null_mut());
     }
 //
@@ -10393,17 +9072,17 @@ unsafe extern "C" fn perf_free_addr_filters(event: *mut perf_event) {
 // @filter; if so, adjust filter's address range.
 // Called with mm::mmap_lock down for reading.
 //
-    static void perf_addr_filter_apply(struct perf_addr_filter *filter,
-    struct mm_struct *mm,
-    struct perf_addr_filter_range *fr)
-    {
-    struct vm_area_struct *vma;
+#[no_mangle]
+pub unsafe extern "C" fn perf_addr_filter_apply(filter: *mut perf_addr_filter, mm: *mut mm_struct, fr: *mut perf_addr_filter_range) {
+pub static mut vma: *mut c_void = core::ptr::null_mut();
     VMA_ITERATOR(vmi, mm, 0);
     for_each_vma(vmi, vma) {
-    if (!vma.vm_file)
+    if (!vma.vm_file) {
     continue;
-    if (perf_addr_filter_vma_adjust(filter, vma, fr))
+    }
+    if (perf_addr_filter_vma_adjust(filter, vma, fr)) {
     return;
+    }
     }
     }
 //
@@ -10412,24 +9091,24 @@ unsafe extern "C" fn perf_free_addr_filters(event: *mut perf_event) {
 //
 #[no_mangle]
 unsafe extern "C" fn perf_event_addr_filters_apply(event: *mut perf_event) {
-    static void perf_event_addr_filters_apply(struct perf_event *event)
-    {
-    struct perf_addr_filters_head *ifh = perf_event_addr_filters(event);
-    struct task_struct *task = READ_ONCE(event.ctx.task);
-    struct perf_addr_filter *filter;
-    struct mm_struct *mm = core::ptr::null_mut();
-    let mut count: c_uint = 0;
-    unsigned long flags;
+    let mut ifh = perf_event_addr_filters(event);
+    let mut task = READ_ONCE(event.ctx.task);
+pub static mut filter: *mut c_void = core::ptr::null_mut();
+    let mut mm = core::ptr::null_mut();
+pub static mut count: c_uint = 0;
+    let mut flags = 0;
 //
 // We may observe TASK_TOMBSTONE, which means that the event tear-down
 // will stop on the parent's child_mutex that our caller is also holding
 //
-    if (task == TASK_TOMBSTONE)
+    if (task == TASK_TOMBSTONE) {
     return;
+    }
     if (ifh.nr_file_filters) {
     mm = get_task_mm(task);
-    if (!mm)
-    goto restart;
+    if (!mm) {
+// goto;
+    }
     mmap_read_lock(mm);
     }
     raw_spin_lock_irqsave(&ifh.lock, flags);
@@ -10446,15 +9125,15 @@ unsafe extern "C" fn perf_event_addr_filters_apply(event: *mut perf_event) {
     event.addr_filter_ranges[count].start = filter.offset;
     event.addr_filter_ranges[count].size  = filter.size;
     }
-    count++;
+    count += 1;
     }
-    event.addr_filters_gen++;
+    event.addr_filters_gen += 1;
     raw_spin_unlock_irqrestore(&ifh.lock, flags);
     if (ifh.nr_file_filters) {
     mmap_read_unlock(mm);
     mmput(mm);
     }
-    restart:
+// label;
     perf_event_stop(event, 1);
     }
 //
@@ -10504,19 +9183,18 @@ unsafe extern "C" fn perf_event_addr_filters_apply(event: *mut perf_event) {
 //
 // Address filter string parser
 //
-    static int
-    perf_event_parse_addr_filter(struct perf_event *event, char *fstr,
-    struct list_head *filters)
-    {
-    struct perf_addr_filter *filter = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_parse_addr_filter(event: *mut perf_event, fstr: *mut c_char, filters: *mut list_head) -> c_int {
+    let mut filter = core::ptr::null_mut();
     char *start, *orig, *filename = core::ptr::null_mut();
     substring_t args[MAX_OPT_ARGS];
-    let mut state: c_int = IF_STATE_ACTION, token;
-    let mut kernel: c_uint = 0;
-    let mut ret: c_int = -EINVAL;
+pub static mut state: c_int = 0;
+pub static mut kernel: c_uint = 0;
+pub static mut ret: c_int = 0;
     orig = fstr = kstrdup(fstr, GFP_KERNEL);
-    if (!fstr)
+    if (!fstr) {
     return -ENOMEM;
+    }
     while ((start = strsep(&fstr, " ,\n")) != core::ptr::null_mut()) {
     static const enum perf_addr_filter_action_t actions[] = {
     [IF_ACT_FILTER]	= PERF_ADDR_FILTER_ACTION_FILTER,
@@ -10524,55 +9202,69 @@ unsafe extern "C" fn perf_event_addr_filters_apply(event: *mut perf_event) {
     [IF_ACT_STOP]	= PERF_ADDR_FILTER_ACTION_STOP,
     };
     ret = -EINVAL;
-    if (!*start)
+    if (!*start) {
     continue;
+    }
 // filter definition begins
     if (state == IF_STATE_ACTION) {
     filter = perf_addr_filter_new(event, filters);
-    if (!filter)
-    goto fail;
+    if (!filter) {
+// goto;
+    }
     }
     token = match_token(start, if_tokens, args);
-    switch (token) {
-    case IF_ACT_FILTER:
-    case IF_ACT_START:
-    case IF_ACT_STOP:
-    if (state != IF_STATE_ACTION)
-    goto fail;
+    match (token) {
+    IF_ACT_FILTER => {
+    }
+    IF_ACT_START => {
+    }
+    IF_ACT_STOP => {
+    if (state != IF_STATE_ACTION) {
+// goto;
+    }
     filter.action = actions[token];
     state = IF_STATE_SOURCE;
-    break;
-    case IF_SRC_KERNELADDR:
-    case IF_SRC_KERNEL:
+    // break;
+    }
+    IF_SRC_KERNELADDR => {
+    }
+    IF_SRC_KERNEL => {
     kernel = 1;
     fallthrough;
-    case IF_SRC_FILEADDR:
-    case IF_SRC_FILE:
-    if (state != IF_STATE_SOURCE)
-    goto fail;
+    }
+    IF_SRC_FILEADDR => {
+    }
+    IF_SRC_FILE => {
+    if (state != IF_STATE_SOURCE) {
+// goto;
+    }
 // args[0].to = 0;
     ret = kstrtoul(args[0].from, 0, &filter.offset);
-    if (ret)
-    goto fail;
+    if (ret) {
+// goto;
+    }
     if (token == IF_SRC_KERNEL || token == IF_SRC_FILE) {
 // args[1].to = 0;
     ret = kstrtoul(args[1].from, 0, &filter.size);
-    if (ret)
-    goto fail;
+    if (ret) {
+// goto;
+    }
     }
     if (token == IF_SRC_FILE || token == IF_SRC_FILEADDR) {
-    let mut fpos: c_int = token == IF_SRC_FILE ? 2 : 1;
+pub static mut fpos: c_int = 0;
     kfree(filename);
     filename = match_strdup(&args[fpos]);
     if (!filename) {
     ret = -ENOMEM;
-    goto fail;
+// goto;
     }
     }
     state = IF_STATE_END;
-    break;
-    default:
-    goto fail;
+    // break;
+    }
+    _ => {
+// goto;
+    }
     }
 //
 // Filter definition is fully parsed, validate and install it.
@@ -10586,11 +9278,13 @@ unsafe extern "C" fn perf_event_addr_filters_apply(event: *mut perf_event) {
 // specified.
 //
     if (filter.action == PERF_ADDR_FILTER_ACTION_FILTER &&
-    !filter.size)
-    goto fail;
+    !filter.size) {
+// goto;
+    }
     if (!kernel) {
-    if (!filename)
-    goto fail;
+    if (!filename) {
+// goto;
+    }
 //
 // For now, we only support file-based filters
 // in per-task events; doing so for CPU-wide
@@ -10600,19 +9294,22 @@ unsafe extern "C" fn perf_event_addr_filters_apply(event: *mut perf_event) {
 // different processes.
 //
     ret = -EOPNOTSUPP;
-    if (!event.ctx.task)
-    goto fail;
+    if (!event.ctx.task) {
+// goto;
+    }
 // look up the path and grab its inode
     ret = kern_path(filename, LOOKUP_FOLLOW,
     &filter.path);
-    if (ret)
-    goto fail;
+    if (ret) {
+// goto;
+    }
     ret = -EINVAL;
     if (!filter.path.dentry ||
     !S_ISREG(d_inode(filter.path.dentry)
-    .i_mode))
-    goto fail;
-    event.addr_filters.nr_file_filters++;
+    .i_mode)) {
+// goto;
+    }
+    event.addr_filters.nr_file_filters += 1;
     }
 // ready to consume more filters
     kfree(filename);
@@ -10622,58 +9319,60 @@ unsafe extern "C" fn perf_event_addr_filters_apply(event: *mut perf_event) {
     kernel = 0;
     }
     }
-    if (state != IF_STATE_ACTION)
-    goto fail;
+    if (state != IF_STATE_ACTION) {
+// goto;
+    }
     kfree(filename);
     kfree(orig);
     return 0;
-    fail:
+// label;
     kfree(filename);
     free_filters_list(filters);
     kfree(orig);
     return ret;
     }
-    static int
-    perf_event_set_addr_filter(struct perf_event *event, char *filter_str)
-    {
-    LIST_HEAD(filters);
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_set_addr_filter(event: *mut perf_event, filter_str: *mut c_char) -> c_int {
+pub static mut filters: usize = 0;
+    let mut ret = 0;
 //
 // Since this is called in perf_ioctl() path, we're already holding
 // ctx::mutex.
 //
     lockdep_assert_held(&event.ctx.mutex);
-    if (WARN_ON_ONCE(event.parent))
+    if (WARN_ON_ONCE!(event.parent)) {
     return -EINVAL;
+    }
     ret = perf_event_parse_addr_filter(event, filter_str, &filters);
-    if (ret)
-    goto fail_clear_files;
+    if (ret) {
+// goto;
+    }
     ret = event.pmu.addr_filters_validate(&filters);
-    if (ret)
-    goto fail_free_filters;
+    if (ret) {
+// goto;
+    }
 // remove existing filters, if any
     perf_addr_filters_splice(event, &filters);
 // install new filters
     perf_event_for_each_child(event, perf_event_addr_filters_apply);
     return ret;
-    fail_free_filters:
+// label;
     free_filters_list(&filters);
-    fail_clear_files:
+// label;
     event.addr_filters.nr_file_filters = 0;
     return ret;
     }
 #[no_mangle]
-unsafe extern "C" fn perf_event_set_filter(event: *mut perf_event, arg: *mut void __user) -> c_int {
-    static int perf_event_set_filter(struct perf_event *event, void __user *arg)
-    {
-    let mut ret: c_int = -EINVAL;
-    char *filter_str;
+unsafe extern "C" fn perf_event_set_filter(event: *mut perf_event, arg: *mut c_void ) -> c_int {
+pub static mut ret: c_int = 0;
+pub static mut filter_str: *mut c_void = core::ptr::null_mut();
     filter_str = strndup_user(arg, PAGE_SIZE);
-    if (IS_ERR(filter_str))
+    if (IS_ERR(filter_str)) {
     return PTR_ERR(filter_str);
+    }
 
     if (perf_event_is_tracing(event)) {
-    struct perf_event_context *ctx = event.ctx;
+    let mut ctx = event.ctx;
 //
 // Beware, here be dragons!!
 //
@@ -10688,10 +9387,11 @@ unsafe extern "C" fn perf_event_set_filter(event: *mut perf_event, arg: *mut voi
     mutex_unlock(&ctx.mutex);
     ret = ftrace_profile_set_filter(event, event.attr.config, filter_str);
     mutex_lock(&ctx.mutex);
-    } else
+    } else {
 
     if (has_addr_filter(event))
     ret = perf_event_set_addr_filter(event, filter_str);
+    }
     kfree(filter_str);
     return ret;
     }
@@ -10700,24 +9400,24 @@ unsafe extern "C" fn perf_event_set_filter(event: *mut perf_event, arg: *mut voi
 //
 #[no_mangle]
 unsafe extern "C" fn perf_swevent_hrtimer(hrtimer: *mut hrtimer) -> enum hrtimer_restart {
-    static enum hrtimer_restart perf_swevent_hrtimer(struct hrtimer *hrtimer)
-    {
-    let mut ret: enum hrtimer_restart = HRTIMER_RESTART;
-    struct perf_sample_data data;
-    struct pt_regs *regs;
-    struct perf_event *event;
-    u64 period;
-    event = container_of(hrtimer, struct perf_event, hw.hrtimer);
+pub static mut ret: hrtimer_restart = 0;
+pub static mut data: usize = 0;
+pub static mut regs: *mut c_void = core::ptr::null_mut();
+pub static mut event: *mut c_void = core::ptr::null_mut();
+    let mut period = 0;
+    event = container_of!(hrtimer, perf_event, hw.hrtimer);
     if (event.state != PERF_EVENT_STATE_ACTIVE ||
-    event.hw.state & PERF_HES_STOPPED)
+    event.hw.state & PERF_HES_STOPPED) {
     return HRTIMER_NORESTART;
+    }
     event.pmu.read(event);
     perf_sample_data_init(&data, 0, event.hw.last_period);
     regs = get_irq_regs();
     if (regs && !perf_exclude_event(event, regs)) {
-    if (!(event.attr.exclude_idle && is_idle_task(current)))
+    if (!(event.attr.exclude_idle && is_idle_task(current))) {
     if (perf_event_overflow(event, &data, regs))
     ret = HRTIMER_NORESTART;
+    }
     }
     period = max_t(u64, 10000, event.hw.sample_period);
     hrtimer_forward_now(hrtimer, ns_to_ktime(period));
@@ -10725,16 +9425,16 @@ unsafe extern "C" fn perf_swevent_hrtimer(hrtimer: *mut hrtimer) -> enum hrtimer
     }
 #[no_mangle]
 unsafe extern "C" fn perf_swevent_start_hrtimer(event: *mut perf_event) {
-    static void perf_swevent_start_hrtimer(struct perf_event *event)
-    {
-    struct hw_perf_event *hwc = &event.hw;
-    s64 period;
-    if (!is_sampling_event(event))
+    let mut hwc = &event.hw;
+    let mut period = 0;
+    if (!is_sampling_event(event)) {
     return;
+    }
     period = local64_read(&hwc.period_left);
     if (period) {
-    if (period < 0)
+    if (period < 0) {
     period = 10000;
+    }
     local64_set(&hwc.period_left, 0);
     } else {
     period = max_t(u64, 10000, hwc.sample_period);
@@ -10744,9 +9444,7 @@ unsafe extern "C" fn perf_swevent_start_hrtimer(event: *mut perf_event) {
     }
 #[no_mangle]
 unsafe extern "C" fn perf_swevent_cancel_hrtimer(event: *mut perf_event) {
-    static void perf_swevent_cancel_hrtimer(struct perf_event *event)
-    {
-    struct hw_perf_event *hwc = &event.hw;
+    let mut hwc = &event.hw;
 //
 // Careful: this function can be triggered in the hrtimer handler,
 // for cpu-clock events, so hrtimer_cancel() would cause a
@@ -10758,24 +9456,21 @@ unsafe extern "C" fn perf_swevent_cancel_hrtimer(event: *mut perf_event) {
 // hrtimer once it sees the PERF_HES_STOPPED flag.
 //
     if (is_sampling_event(event) && (hwc.interrupts != MAX_INTERRUPTS)) {
-    let mut remaining: ktime_t = hrtimer_get_remaining(&hwc.hrtimer);
+pub static mut remaining: ktime_t = 0;
     local64_set(&hwc.period_left, ktime_to_ns(remaining));
     hrtimer_try_to_cancel(&hwc.hrtimer);
     }
     }
 #[no_mangle]
 unsafe extern "C" fn perf_swevent_destroy_hrtimer(event: *mut perf_event) {
-    static void perf_swevent_destroy_hrtimer(struct perf_event *event)
-    {
     hrtimer_cancel(&event.hw.hrtimer);
     }
 #[no_mangle]
 unsafe extern "C" fn perf_swevent_init_hrtimer(event: *mut perf_event) {
-    static void perf_swevent_init_hrtimer(struct perf_event *event)
-    {
-    struct hw_perf_event *hwc = &event.hw;
-    if (!is_sampling_event(event))
+    let mut hwc = &event.hw;
+    if (!is_sampling_event(event)) {
     return;
+    }
     hrtimer_setup(&hwc.hrtimer, perf_swevent_hrtimer, CLOCK_MONOTONIC, HRTIMER_MODE_REL_HARD);
     event.destroy = perf_swevent_destroy_hrtimer;
 //
@@ -10783,7 +9478,7 @@ unsafe extern "C" fn perf_swevent_init_hrtimer(event: *mut perf_event) {
 // mapping and avoid the whole period adjust feedback stuff.
 //
     if (event.attr.freq) {
-    let mut freq: c_long = event.attr.sample_freq;
+pub static mut freq: c_long = 0;
     event.attr.sample_period = NSEC_PER_SEC / freq;
     hwc.sample_period = event.attr.sample_period;
     local64_set(&hwc.period_left, hwc.sample_period);
@@ -10796,268 +9491,213 @@ unsafe extern "C" fn perf_swevent_init_hrtimer(event: *mut perf_event) {
 //
 #[no_mangle]
 unsafe extern "C" fn cpu_clock_event_update(event: *mut perf_event) {
-    static void cpu_clock_event_update(struct perf_event *event)
-    {
-    s64 prev;
-    u64 now;
+    let mut prev = 0;
+    let mut now = 0;
     now = local_clock();
     prev = local64_xchg(&event.hw.prev_count, now);
     local64_add(now - prev, &event.count);
     }
 #[no_mangle]
 unsafe extern "C" fn cpu_clock_event_start(event: *mut perf_event, flags: c_int) {
-    static void cpu_clock_event_start(struct perf_event *event, int flags)
-    {
     event.hw.state = 0;
     local64_set(&event.hw.prev_count, local_clock());
     perf_swevent_start_hrtimer(event);
     }
 #[no_mangle]
 unsafe extern "C" fn cpu_clock_event_stop(event: *mut perf_event, flags: c_int) {
-    static void cpu_clock_event_stop(struct perf_event *event, int flags)
-    {
     event.hw.state = PERF_HES_STOPPED;
     perf_swevent_cancel_hrtimer(event);
-    if (flags & PERF_EF_UPDATE)
+    if (flags & PERF_EF_UPDATE) {
     cpu_clock_event_update(event);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn cpu_clock_event_add(event: *mut perf_event, flags: c_int) -> c_int {
-    static int cpu_clock_event_add(struct perf_event *event, int flags)
-    {
-    if (flags & PERF_EF_START)
+    if (flags & PERF_EF_START) {
     cpu_clock_event_start(event, flags);
+    }
     perf_event_update_userpage(event);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn cpu_clock_event_del(event: *mut perf_event, flags: c_int) {
-    static void cpu_clock_event_del(struct perf_event *event, int flags)
-    {
     cpu_clock_event_stop(event, PERF_EF_UPDATE);
     }
 #[no_mangle]
 unsafe extern "C" fn cpu_clock_event_read(event: *mut perf_event) {
-    static void cpu_clock_event_read(struct perf_event *event)
-    {
     cpu_clock_event_update(event);
     }
 #[no_mangle]
 unsafe extern "C" fn cpu_clock_event_init(event: *mut perf_event) -> c_int {
-    static int cpu_clock_event_init(struct perf_event *event)
-    {
-    if (event.attr.type != perf_cpu_clock.type)
+    if (event.attr.type != perf_cpu_clock.type) {
     return -ENOENT;
-    if (event.attr.config != PERF_COUNT_SW_CPU_CLOCK)
+    }
+    if (event.attr.config != PERF_COUNT_SW_CPU_CLOCK) {
     return -ENOENT;
+    }
 //
 // no branch sampling for software events
 //
-    if (has_branch_stack(event))
+    if (has_branch_stack(event)) {
     return -EOPNOTSUPP;
+    }
     perf_swevent_init_hrtimer(event);
     return 0;
     }
-    static struct pmu perf_cpu_clock = {
-    .task_ctx_nr	= perf_sw_context,
-    .capabilities	= PERF_PMU_CAP_NO_NMI,
-    .dev		= PMU_NULL_DEV,
-    .event_init	= cpu_clock_event_init,
-    .add		= cpu_clock_event_add,
-    .del		= cpu_clock_event_del,
-    .start		= cpu_clock_event_start,
-    .stop		= cpu_clock_event_stop,
-    .read		= cpu_clock_event_read,
-    };
+pub static mut pmu: usize = 0;
 //
 // Software event: task time clock
 //
 #[no_mangle]
 unsafe extern "C" fn task_clock_event_update(event: *mut perf_event, now: u64) {
-    static void task_clock_event_update(struct perf_event *event, u64 now)
-    {
-    u64 prev;
-    s64 delta;
+    let mut prev = 0;
+    let mut delta = 0;
     prev = local64_xchg(&event.hw.prev_count, now);
     delta = now - prev;
     local64_add(delta, &event.count);
     }
 #[no_mangle]
 unsafe extern "C" fn task_clock_event_start(event: *mut perf_event, flags: c_int) {
-    static void task_clock_event_start(struct perf_event *event, int flags)
-    {
     event.hw.state = 0;
     local64_set(&event.hw.prev_count, event.ctx.time.time);
     perf_swevent_start_hrtimer(event);
     }
 #[no_mangle]
 unsafe extern "C" fn task_clock_event_stop(event: *mut perf_event, flags: c_int) {
-    static void task_clock_event_stop(struct perf_event *event, int flags)
-    {
     event.hw.state = PERF_HES_STOPPED;
     perf_swevent_cancel_hrtimer(event);
-    if (flags & PERF_EF_UPDATE)
+    if (flags & PERF_EF_UPDATE) {
     task_clock_event_update(event, event.ctx.time.time);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn task_clock_event_add(event: *mut perf_event, flags: c_int) -> c_int {
-    static int task_clock_event_add(struct perf_event *event, int flags)
-    {
-    if (flags & PERF_EF_START)
+    if (flags & PERF_EF_START) {
     task_clock_event_start(event, flags);
+    }
     perf_event_update_userpage(event);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn task_clock_event_del(event: *mut perf_event, flags: c_int) {
-    static void task_clock_event_del(struct perf_event *event, int flags)
-    {
     task_clock_event_stop(event, PERF_EF_UPDATE);
     }
 #[no_mangle]
 unsafe extern "C" fn task_clock_event_read(event: *mut perf_event) {
-    static void task_clock_event_read(struct perf_event *event)
-    {
-    let mut now: u64 = perf_clock();
-    let mut delta: u64 = now - event.ctx.time.stamp;
-    let mut time: u64 = event.ctx.time.time + delta;
+pub static mut now: u64 = 0;
+pub static mut delta: u64 = 0;
+pub static mut time: u64 = 0;
     task_clock_event_update(event, time);
     }
 #[no_mangle]
 unsafe extern "C" fn task_clock_event_init(event: *mut perf_event) -> c_int {
-    static int task_clock_event_init(struct perf_event *event)
-    {
-    if (event.attr.type != perf_task_clock.type)
+    if (event.attr.type != perf_task_clock.type) {
     return -ENOENT;
-    if (event.attr.config != PERF_COUNT_SW_TASK_CLOCK)
+    }
+    if (event.attr.config != PERF_COUNT_SW_TASK_CLOCK) {
     return -ENOENT;
+    }
 //
 // no branch sampling for software events
 //
-    if (has_branch_stack(event))
+    if (has_branch_stack(event)) {
     return -EOPNOTSUPP;
+    }
     perf_swevent_init_hrtimer(event);
     return 0;
     }
-    static struct pmu perf_task_clock = {
-    .task_ctx_nr	= perf_sw_context,
-    .capabilities	= PERF_PMU_CAP_NO_NMI,
-    .dev		= PMU_NULL_DEV,
-    .event_init	= task_clock_event_init,
-    .add		= task_clock_event_add,
-    .del		= task_clock_event_del,
-    .start		= task_clock_event_start,
-    .stop		= task_clock_event_stop,
-    .read		= task_clock_event_read,
-    };
+pub static mut pmu: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn perf_pmu_nop_void(pmu: *mut pmu) {
-    static void perf_pmu_nop_void(struct pmu *pmu)
-    {
     }
 #[no_mangle]
 unsafe extern "C" fn perf_pmu_nop_txn(pmu: *mut pmu, flags: c_uint) {
-    static void perf_pmu_nop_txn(struct pmu *pmu, unsigned int flags)
-    {
     }
 #[no_mangle]
 unsafe extern "C" fn perf_pmu_nop_int(pmu: *mut pmu) -> c_int {
-    static int perf_pmu_nop_int(struct pmu *pmu)
-    {
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_nop_int(event: *mut perf_event, value: u64) -> c_int {
-    static int perf_event_nop_int(struct perf_event *event, u64 value)
-    {
     return 0;
     }
-    static DEFINE_PER_CPU(unsigned int, nop_txn_flags);
+pub static mut unsigned int: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn perf_pmu_start_txn(pmu: *mut pmu, flags: c_uint) {
-    static void perf_pmu_start_txn(struct pmu *pmu, unsigned int flags)
-    {
     __this_cpu_write(nop_txn_flags, flags);
-    if (flags & ~PERF_PMU_TXN_ADD)
+    if (flags & ~PERF_PMU_TXN_ADD) {
     return;
+    }
     perf_pmu_disable(pmu);
     }
 #[no_mangle]
 unsafe extern "C" fn perf_pmu_commit_txn(pmu: *mut pmu) -> c_int {
-    static int perf_pmu_commit_txn(struct pmu *pmu)
-    {
-    let mut flags: c_uint = __this_cpu_read(nop_txn_flags);
+pub static mut flags: c_uint = 0;
     __this_cpu_write(nop_txn_flags, 0);
-    if (flags & ~PERF_PMU_TXN_ADD)
+    if (flags & ~PERF_PMU_TXN_ADD) {
     return 0;
+    }
     perf_pmu_enable(pmu);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn perf_pmu_cancel_txn(pmu: *mut pmu) {
-    static void perf_pmu_cancel_txn(struct pmu *pmu)
-    {
-    let mut flags: c_uint = __this_cpu_read(nop_txn_flags);
+pub static mut flags: c_uint = 0;
     __this_cpu_write(nop_txn_flags, 0);
-    if (flags & ~PERF_PMU_TXN_ADD)
+    if (flags & ~PERF_PMU_TXN_ADD) {
     return;
+    }
     perf_pmu_enable(pmu);
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_idx_default(event: *mut perf_event) -> c_int {
-    static int perf_event_idx_default(struct perf_event *event)
-    {
     return 0;
     }
 //
 // Let userspace know that this PMU supports address range filtering:
 //
-    static ssize_t nr_addr_filters_show(struct device *dev,
-    struct device_attribute *attr,
-    char *page)
-    {
-    struct pmu *pmu = dev_get_drvdata(dev);
+#[no_mangle]
+pub unsafe extern "C" fn nr_addr_filters_show(dev: *mut device, attr: *mut device_attribute, page: *mut c_char) -> ssize_t {
+    let mut pmu = dev_get_drvdata(dev);
     return sysfs_emit(page, "%d\n", pmu.nr_addr_filters);
     }
     DEVICE_ATTR_RO(nr_addr_filters);
-    static struct idr pmu_idr;
-    static ssize_t
-    type_show(struct device *dev, struct device_attribute *attr, char *page)
-    {
-    struct pmu *pmu = dev_get_drvdata(dev);
+pub static mut pmu_idr: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn type_show(dev: *mut device, attr: *mut device_attribute, page: *mut c_char) -> ssize_t {
+    let mut pmu = dev_get_drvdata(dev);
     return sysfs_emit(page, "%d\n", pmu.type);
     }
     static DEVICE_ATTR_RO(type);
-    static ssize_t
-    perf_event_mux_interval_ms_show(struct device *dev,
-    struct device_attribute *attr,
-    char *page)
-    {
-    struct pmu *pmu = dev_get_drvdata(dev);
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_mux_interval_ms_show(dev: *mut device, attr: *mut device_attribute, page: *mut c_char) -> ssize_t {
+    let mut pmu = dev_get_drvdata(dev);
     return sysfs_emit(page, "%d\n", pmu.hrtimer_interval_ms);
     }
-    static DEFINE_MUTEX(mux_interval_mutex);
-    static ssize_t
-    perf_event_mux_interval_ms_store(struct device *dev,
-    struct device_attribute *attr,
-    const char *buf, size_t count)
-    {
-    struct pmu *pmu = dev_get_drvdata(dev);
-    int timer, cpu, ret;
+pub static mut mux_interval_mutex: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_mux_interval_ms_store(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut pmu = dev_get_drvdata(dev);
+    let mut timer = 0;
+    let mut cpu = 0;
+    let mut ret = 0;
     ret = kstrtoint(buf, 0, &timer);
-    if (ret)
+    if (ret) {
     return ret;
-    if (timer < 1)
+    }
+    if (timer < 1) {
     return -EINVAL;
+    }
 // same value, noting to do
-    if (timer == pmu.hrtimer_interval_ms)
+    if (timer == pmu.hrtimer_interval_ms) {
     return count;
+    }
     mutex_lock(&mux_interval_mutex);
     pmu.hrtimer_interval_ms = timer;
 // update all cpuctx for this PMU
     cpus_read_lock();
     for_each_online_cpu(cpu) {
-    struct perf_cpu_pmu_context *cpc;
+pub static mut cpc: *mut c_void = core::ptr::null_mut();
     cpc = *per_cpu_ptr(pmu.cpu_pmu_context, cpu);
     cpc.hrtimer_interval = ns_to_ktime(NSEC_PER_MSEC * timer);
     cpu_function_call(cpu, perf_mux_hrtimer_restart_ipi, cpc);
@@ -11069,43 +9709,53 @@ unsafe extern "C" fn perf_event_idx_default(event: *mut perf_event) -> c_int {
     static DEVICE_ATTR_RW(perf_event_mux_interval_ms);
     static inline const struct cpumask *perf_scope_cpu_topology_cpumask(unsigned int scope, int cpu)
     {
-    switch (scope) {
-    case PERF_PMU_SCOPE_CORE:
+    match (scope) {
+    PERF_PMU_SCOPE_CORE => {
     return topology_sibling_cpumask(cpu);
-    case PERF_PMU_SCOPE_DIE:
+    }
+    PERF_PMU_SCOPE_DIE => {
     return topology_die_cpumask(cpu);
-    case PERF_PMU_SCOPE_CLUSTER:
+    }
+    PERF_PMU_SCOPE_CLUSTER => {
     return topology_cluster_cpumask(cpu);
-    case PERF_PMU_SCOPE_PKG:
+    }
+    PERF_PMU_SCOPE_PKG => {
     return topology_core_cpumask(cpu);
-    case PERF_PMU_SCOPE_SYS_WIDE:
+    }
+    PERF_PMU_SCOPE_SYS_WIDE => {
     return cpu_online_mask;
     }
+    }
     return core::ptr::null_mut();
     }
-    static inline struct cpumask *perf_scope_cpumask(unsigned int scope)
-    {
-    switch (scope) {
-    case PERF_PMU_SCOPE_CORE:
+#[no_mangle]
+pub unsafe extern "C" fn perf_scope_cpumask(scope: c_uint) -> *mut c_void {
+    match (scope) {
+    PERF_PMU_SCOPE_CORE => {
     return perf_online_core_mask;
-    case PERF_PMU_SCOPE_DIE:
+    }
+    PERF_PMU_SCOPE_DIE => {
     return perf_online_die_mask;
-    case PERF_PMU_SCOPE_CLUSTER:
+    }
+    PERF_PMU_SCOPE_CLUSTER => {
     return perf_online_cluster_mask;
-    case PERF_PMU_SCOPE_PKG:
+    }
+    PERF_PMU_SCOPE_PKG => {
     return perf_online_pkg_mask;
-    case PERF_PMU_SCOPE_SYS_WIDE:
+    }
+    PERF_PMU_SCOPE_SYS_WIDE => {
     return perf_online_sys_mask;
     }
+    }
     return core::ptr::null_mut();
     }
-    static ssize_t cpumask_show(struct device *dev, struct device_attribute *attr,
-    char *buf)
-    {
-    struct pmu *pmu = dev_get_drvdata(dev);
-    struct cpumask *mask = perf_scope_cpumask(pmu.scope);
-    if (mask)
+#[no_mangle]
+pub unsafe extern "C" fn cpumask_show(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char) -> ssize_t {
+    let mut pmu = dev_get_drvdata(dev);
+    let mut mask = perf_scope_cpumask(pmu.scope);
+    if (mask) {
     return sysfs_emit(buf, "%*pbl\n", cpumask_pr_args(mask));
+    }
     return 0;
     }
     static DEVICE_ATTR_RO(cpumask);
@@ -11118,44 +9768,35 @@ unsafe extern "C" fn perf_event_idx_default(event: *mut perf_event) -> c_int {
     };
 #[no_mangle]
 unsafe extern "C" fn pmu_dev_is_visible(kobj: *mut kobject, a: *mut attribute, n: c_int) -> umode_t {
-    static umode_t pmu_dev_is_visible(struct kobject *kobj, struct attribute *a, int n)
-    {
-    struct device *dev = kobj_to_dev(kobj);
-    struct pmu *pmu = dev_get_drvdata(dev);
-    if (n == 2 && !pmu.nr_addr_filters)
+    let mut dev = kobj_to_dev(kobj);
+    let mut pmu = dev_get_drvdata(dev);
+    if (n == 2 && !pmu.nr_addr_filters) {
     return 0;
+    }
 // cpumask
-    if (n == 3 && pmu.scope == PERF_PMU_SCOPE_NONE)
+    if (n == 3 && pmu.scope == PERF_PMU_SCOPE_NONE) {
     return 0;
+    }
     return a.mode;
     }
-    static struct attribute_group pmu_dev_attr_group = {
-    .is_visible = pmu_dev_is_visible,
-    .attrs = pmu_dev_attrs,
-    };
+pub static mut attribute_group: usize = 0;
     static const struct attribute_group *pmu_dev_groups[] = {
     &pmu_dev_attr_group,
     core::ptr::null_mut(),
     };
     static int pmu_bus_running;
-    static const struct bus_type pmu_bus = {
-    .name		= "event_source",
-    .dev_groups	= pmu_dev_groups,
-    };
+pub static mut bus_type: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn pmu_dev_release(dev: *mut device) {
-    static void pmu_dev_release(struct device *dev)
-    {
     kfree(dev);
     }
 #[no_mangle]
 unsafe extern "C" fn pmu_dev_alloc(pmu: *mut pmu) -> c_int {
-    static int pmu_dev_alloc(struct pmu *pmu)
-    {
-    let mut ret: c_int = -ENOMEM;
-    pmu.dev = kzalloc_obj(struct device);
-    if (!pmu.dev)
-    goto out;
+pub static mut ret: c_int = 0;
+    pmu.dev = kzalloc_obj(device);
+    if (!pmu.dev) {
+// goto;
+    }
     pmu.dev.groups = pmu.attr_groups;
     device_initialize(pmu.dev);
     dev_set_drvdata(pmu.dev, pmu);
@@ -11163,57 +9804,60 @@ unsafe extern "C" fn pmu_dev_alloc(pmu: *mut pmu) -> c_int {
     pmu.dev.parent = pmu.parent;
     pmu.dev.release = pmu_dev_release;
     ret = dev_set_name(pmu.dev, "%s", pmu.name);
-    if (ret)
-    goto free_dev;
+    if (ret) {
+// goto;
+    }
     ret = device_add(pmu.dev);
-    if (ret)
-    goto free_dev;
+    if (ret) {
+// goto;
+    }
     if (pmu.attr_update) {
     ret = sysfs_update_groups(&pmu.dev.kobj, pmu.attr_update);
-    if (ret)
-    goto del_dev;
+    if (ret) {
+// goto;
     }
-    out:
+    }
+// label;
     return ret;
-    del_dev:
+// label;
     device_del(pmu.dev);
-    free_dev:
+// label;
     put_device(pmu.dev);
     pmu.dev = core::ptr::null_mut();
-    goto out;
+// goto;
     }
-    static struct lock_class_key cpuctx_mutex;
-    static struct lock_class_key cpuctx_lock;
+pub static mut cpuctx_mutex: usize = 0;
+pub static mut cpuctx_lock: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn idr_cmpxchg(idr: *mut idr, id: c_ulong, old: *mut c_void, new: *mut c_void) -> bool {
-    static bool idr_cmpxchg(struct idr *idr, unsigned long id, void *old, void *new)
-    {
     void *tmp, *val = idr_find(idr, id);
-    if (val != old)
+    if (val != old) {
     return false;
+    }
     tmp = idr_replace(idr, new, id);
-    if (IS_ERR(tmp))
+    if (IS_ERR(tmp)) {
     return false;
-    WARN_ON_ONCE(tmp != val);
+    }
+    WARN_ON_ONCE!(tmp != val);
     return true;
     }
 #[no_mangle]
 unsafe extern "C" fn perf_pmu_free(pmu: *mut pmu) {
-    static void perf_pmu_free(struct pmu *pmu)
-    {
     if (pmu_bus_running && pmu.dev && pmu.dev != PMU_NULL_DEV) {
-    if (pmu.nr_addr_filters)
+    if (pmu.nr_addr_filters) {
     device_remove_file(pmu.dev, &dev_attr_nr_addr_filters);
+    }
     device_del(pmu.dev);
     put_device(pmu.dev);
     }
     if (pmu.cpu_pmu_context) {
-    int cpu;
+    let mut cpu = 0;
     for_each_possible_cpu(cpu) {
-    struct perf_cpu_pmu_context *cpc;
+pub static mut cpc: *mut c_void = core::ptr::null_mut();
     cpc = *per_cpu_ptr(pmu.cpu_pmu_context, cpu);
-    if (!cpc)
+    if (!cpc) {
     continue;
+    }
     if (cpc.epc.embedded) {
 // refcount managed
     put_pmu_ctx(&cpc.epc);
@@ -11224,43 +9868,47 @@ unsafe extern "C" fn perf_pmu_free(pmu: *mut pmu) {
     free_percpu(pmu.cpu_pmu_context);
     }
     }
-    DEFINE_FREE(pmu_unregister, struct pmu *, if (_T) perf_pmu_free(_T))
+    DEFINE_FREE(pmu_unregister, pmu *, if (_T) perf_pmu_free(_T))
 #[no_mangle]
 pub unsafe extern "C" fn perf_pmu_register(_pmu: *mut pmu, name: *const c_char, type: c_int) -> c_int {
-    int perf_pmu_register(struct pmu *_pmu, const char *name, int type)
-    {
     int cpu, max = PERF_TYPE_MAX;
     struct pmu *pmu __free(pmu_unregister) = _pmu;
     guard(mutex)(&pmus_lock);
-    if (WARN_ONCE(!name, "Can not register anonymous pmu.\n"))
+    if (WARN_ONCE(!name, "Can not register anonymous pmu.\n")) {
     return -EINVAL;
+    }
     if (WARN_ONCE(pmu.scope >= PERF_PMU_MAX_SCOPE,
-    "Can not register a pmu with an invalid scope.\n"))
+    "Can not register a pmu with an invalid scope.\n")) {
     return -EINVAL;
+    }
     pmu.name = name;
-    if (type >= 0)
+    if (type >= 0) {
     max = type;
+    }
     CLASS(idr_alloc, pmu_type)(&pmu_idr, core::ptr::null_mut(), max, 0, GFP_KERNEL);
-    if (pmu_type.id < 0)
+    if (pmu_type.id < 0) {
     return pmu_type.id;
-    WARN_ON(type >= 0 && pmu_type.id != type);
+    }
+    WARN_ON!(type >= 0 && pmu_type.id != type);
     pmu.type = pmu_type.id;
     atomic_set(&pmu.exclusive_cnt, 0);
     if (pmu_bus_running && !pmu.dev) {
-    let mut ret: c_int = pmu_dev_alloc(pmu);
-    if (ret)
+pub static mut ret: c_int = 0;
+    if (ret) {
     return ret;
     }
-    pmu.cpu_pmu_context = alloc_percpu(struct perf_cpu_pmu_context *);
-    if (!pmu.cpu_pmu_context)
+    }
+    pmu.cpu_pmu_context = alloc_percpu;
+    if (!pmu.cpu_pmu_context) {
     return -ENOMEM;
+    }
     for_each_possible_cpu(cpu) {
-    struct perf_cpu_pmu_context *cpc =
-    kmalloc_node(sizeof(struct perf_cpu_pmu_context),
+    let mut cpc = kmalloc_node(sizeof!(perf_cpu_pmu_context),
     GFP_KERNEL | __GFP_ZERO,
     cpu_to_node(cpu));
-    if (!cpc)
+    if (!cpc) {
     return -ENOMEM;
+    }
 // per_cpu_ptr(pmu->cpu_pmu_context, cpu) = cpc;
     __perf_init_event_pmu_context(&cpc.epc, pmu);
     __perf_mux_hrtimer_init(cpc, cpu);
@@ -11285,26 +9933,28 @@ pub unsafe extern "C" fn perf_pmu_register(_pmu: *mut pmu, name: *const c_char, 
     pmu.pmu_enable  = perf_pmu_nop_void;
     pmu.pmu_disable = perf_pmu_nop_void;
     }
-    if (!pmu.check_period)
+    if (!pmu.check_period) {
     pmu.check_period = perf_event_nop_int;
-    if (!pmu.event_idx)
+    }
+    if (!pmu.event_idx) {
     pmu.event_idx = perf_event_idx_default;
+    }
     INIT_LIST_HEAD(&pmu.events);
     spin_lock_init(&pmu.events_lock);
 //
 // Now that the PMU is complete, make it visible to perf_try_init_event().
 //
-    if (!idr_cmpxchg(&pmu_idr, pmu.type, core::ptr::null_mut(), pmu))
+    if (!idr_cmpxchg(&pmu_idr, pmu.type, core::ptr::null_mut(), pmu)) {
     return -EINVAL;
+    }
     list_add_rcu(&pmu.entry, &pmus);
     take_idr_id(pmu_type);
     _pmu = no_free_ptr(pmu); // let it rip
     return 0;
     }
     EXPORT_SYMBOL_GPL(perf_pmu_register);
-    static void __pmu_detach_event(struct pmu *pmu, struct perf_event *event,
-    struct perf_event_context *ctx)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __pmu_detach_event(pmu: *mut pmu, event: *mut perf_event, ctx: *mut perf_event_context) {
 //
 // De-schedule the event and mark it REVOKED.
 //
@@ -11315,7 +9965,7 @@ pub unsafe extern "C" fn perf_pmu_register(_pmu: *mut pmu, name: *const c_char, 
 // Notably, perf_mmap() relies on the ordering here.
 //
     scoped_guard (mutex, &event.mmap_mutex) {
-    WARN_ON_ONCE(pmu.event_unmapped);
+    WARN_ON_ONCE!(pmu.event_unmapped);
 //
 // Mostly an empty lock sequence, such that perf_mmap(), which
 // relies on mmap_mutex, is sure to observe the state change.
@@ -11332,46 +9982,42 @@ pub unsafe extern "C" fn perf_pmu_register(_pmu: *mut pmu, name: *const c_char, 
     event.pmu_ctx = core::ptr::null_mut();
     }
     exclusive_event_destroy(event);
-    module_put(pmu.module);
+    module_put!(pmu.module);
     event.pmu = core::ptr::null_mut(); /* force fault instead of UAF */
     }
 #[no_mangle]
 unsafe extern "C" fn pmu_detach_event(pmu: *mut pmu, event: *mut perf_event) {
-    static void pmu_detach_event(struct pmu *pmu, struct perf_event *event)
-    {
-    struct perf_event_context *ctx;
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
     ctx = perf_event_ctx_lock(event);
     __pmu_detach_event(pmu, event, ctx);
     perf_event_ctx_unlock(event, ctx);
     scoped_guard (spinlock, &pmu.events_lock)
     list_del(&event.pmu_list);
     }
-    static struct perf_event *pmu_get_event(struct pmu *pmu)
-    {
-    struct perf_event *event;
+#[no_mangle]
+pub unsafe extern "C" fn pmu_get_event(pmu: *mut pmu) -> *mut c_void {
+pub static mut event: *mut c_void = core::ptr::null_mut();
     guard(spinlock)(&pmu.events_lock);
     list_for_each_entry(event, &pmu.events, pmu_list) {
-    if (atomic_long_inc_not_zero(&event.refcount))
+    if (atomic_long_inc_not_zero(&event.refcount)) {
     return event;
+    }
     }
     return core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn pmu_empty(pmu: *mut pmu) -> bool {
-    static bool pmu_empty(struct pmu *pmu)
-    {
     guard(spinlock)(&pmu.events_lock);
     return list_empty(&pmu.events);
     }
 #[no_mangle]
 unsafe extern "C" fn pmu_detach_events(pmu: *mut pmu) {
-    static void pmu_detach_events(struct pmu *pmu)
-    {
-    struct perf_event *event;
+pub static mut event: *mut c_void = core::ptr::null_mut();
     for (;;) {
     event = pmu_get_event(pmu);
-    if (!event)
+    if (!event) {
     break;
+    }
     pmu_detach_event(pmu, event);
     put_event(event);
     }
@@ -11382,11 +10028,10 @@ unsafe extern "C" fn pmu_detach_events(pmu: *mut pmu) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn perf_pmu_unregister(pmu: *mut pmu) -> c_int {
-    int perf_pmu_unregister(struct pmu *pmu)
-    {
     scoped_guard (mutex, &pmus_lock) {
-    if (!idr_cmpxchg(&pmu_idr, pmu.type, pmu, core::ptr::null_mut()))
+    if (!idr_cmpxchg(&pmu_idr, pmu.type, pmu, core::ptr::null_mut())) {
     return -EINVAL;
+    }
     list_del_rcu(&pmu.entry);
     }
 //
@@ -11427,19 +10072,16 @@ pub unsafe extern "C" fn perf_pmu_unregister(pmu: *mut pmu) -> c_int {
     EXPORT_SYMBOL_GPL(perf_pmu_unregister);
 #[no_mangle]
 pub unsafe extern "C" fn has_extended_regs(event: *mut perf_event) -> bool {
-    static inline bool has_extended_regs(struct perf_event *event)
-    {
     return (event.attr.sample_regs_user & PERF_REG_EXTENDED_MASK) ||
     (event.attr.sample_regs_intr & PERF_REG_EXTENDED_MASK);
     }
 #[no_mangle]
 unsafe extern "C" fn perf_try_init_event(pmu: *mut pmu, event: *mut perf_event) -> c_int {
-    static int perf_try_init_event(struct pmu *pmu, struct perf_event *event)
-    {
-    struct perf_event_context *ctx = core::ptr::null_mut();
-    int ret;
-    if (!try_module_get(pmu.module))
+    let mut ctx = core::ptr::null_mut();
+    let mut ret = 0;
+    if (!try_module_get(pmu.module)) {
     return -ENODEV;
+    }
 //
 // A number of pmu->event_init() methods iterate the sibling_list to,
 // for example, validate if the group fits on the PMU. Therefore,
@@ -11453,54 +10095,59 @@ unsafe extern "C" fn perf_try_init_event(pmu: *mut pmu, event: *mut perf_event) 
 //
     ctx = perf_event_ctx_lock_nested(event.group_leader,
     SINGLE_DEPTH_NESTING);
-    BUG_ON(!ctx);
+    BUG_ON!(!ctx);
     }
     event.pmu = pmu;
     ret = pmu.event_init(event);
-    if (ctx)
+    if (ctx) {
     perf_event_ctx_unlock(event.group_leader, ctx);
-    if (ret)
-    goto err_pmu;
+    }
+    if (ret) {
+// goto;
+    }
     if (!(pmu.capabilities & PERF_PMU_CAP_EXTENDED_REGS) &&
     has_extended_regs(event)) {
     ret = -EOPNOTSUPP;
-    goto err_destroy;
+// goto;
     }
     if (pmu.capabilities & PERF_PMU_CAP_NO_EXCLUDE &&
     event_has_any_exclude_flag(event)) {
     ret = -EINVAL;
-    goto err_destroy;
+// goto;
     }
     if (pmu.scope != PERF_PMU_SCOPE_NONE && event.cpu >= 0) {
-    const struct cpumask *cpumask;
-    struct cpumask *pmu_cpumask;
-    int cpu;
+pub static mut cpumask: *mut c_void = core::ptr::null_mut();
+pub static mut pmu_cpumask: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
     cpumask = perf_scope_cpu_topology_cpumask(pmu.scope, event.cpu);
     pmu_cpumask = perf_scope_cpumask(pmu.scope);
     ret = -ENODEV;
-    if (!pmu_cpumask || !cpumask)
-    goto err_destroy;
+    if (!pmu_cpumask || !cpumask) {
+// goto;
+    }
     cpu = cpumask_any_and(pmu_cpumask, cpumask);
-    if (cpu >= nr_cpu_ids)
-    goto err_destroy;
+    if (cpu >= nr_cpu_ids) {
+// goto;
+    }
     event.event_caps |= PERF_EV_CAP_READ_SCOPE;
     }
     return 0;
-    err_destroy:
+// label;
     if (event.destroy) {
     event.destroy(event);
     event.destroy = core::ptr::null_mut();
     }
-    err_pmu:
+// label;
     event.pmu = core::ptr::null_mut();
-    module_put(pmu.module);
+    module_put!(pmu.module);
     return ret;
     }
-    static struct pmu *perf_init_event(struct perf_event *event)
-    {
-    let mut extended_type: bool = false;
-    struct pmu *pmu;
-    int type, ret;
+#[no_mangle]
+pub unsafe extern "C" fn perf_init_event(event: *mut perf_event) -> *mut c_void {
+pub static mut extended_type: bool = false;
+pub static mut pmu: *mut c_void = core::ptr::null_mut();
+    let mut type = 0;
+    let mut ret = 0;
     guard(srcu)(&pmus_srcu); /* pmu idr/list access */
 //
 // Save original type before calling pmu->event_init() since certain
@@ -11511,8 +10158,9 @@ unsafe extern "C" fn perf_try_init_event(pmu: *mut pmu, event: *mut perf_event) 
     if (event.parent && event.parent.pmu) {
     pmu = event.parent.pmu;
     ret = perf_try_init_event(pmu, event);
-    if (!ret)
+    if (!ret) {
     return pmu;
+    }
     }
 //
 // PERF_TYPE_HARDWARE and PERF_TYPE_HW_CACHE
@@ -11528,36 +10176,38 @@ unsafe extern "C" fn perf_try_init_event(pmu: *mut pmu, event: *mut perf_event) 
     event.attr.config &= PERF_HW_EVENT_MASK;
     }
     }
-    again:
+// label;
     scoped_guard (rcu)
     pmu = idr_find(&pmu_idr, type);
     if (pmu) {
     if (event.attr.type != type && type != PERF_TYPE_RAW &&
-    !(pmu.capabilities & PERF_PMU_CAP_EXTENDED_HW_TYPE))
+    !(pmu.capabilities & PERF_PMU_CAP_EXTENDED_HW_TYPE)) {
     return ERR_PTR(-ENOENT);
+    }
     ret = perf_try_init_event(pmu, event);
     if (ret == -ENOENT && event.attr.type != type && !extended_type) {
     type = event.attr.type;
-    goto again;
+// goto;
     }
-    if (ret)
+    if (ret) {
     return ERR_PTR(ret);
+    }
     return pmu;
     }
     list_for_each_entry_rcu(pmu, &pmus, entry, lockdep_is_held(&pmus_srcu)) {
     ret = perf_try_init_event(pmu, event);
-    if (!ret)
+    if (!ret) {
     return pmu;
-    if (ret != -ENOENT)
+    }
+    if (ret != -ENOENT) {
     return ERR_PTR(ret);
+    }
     }
     return ERR_PTR(-ENOENT);
     }
 #[no_mangle]
 unsafe extern "C" fn attach_sb_event(event: *mut perf_event) {
-    static void attach_sb_event(struct perf_event *event)
-    {
-    struct pmu_event_list *pel = per_cpu_ptr(&pmu_sb_events, event.cpu);
+    let mut pel = per_cpu_ptr(&pmu_sb_events, event.cpu);
     raw_spin_lock(&pel.lock);
     list_add_rcu(&event.sb_list, &pel.list);
     raw_spin_unlock(&pel.lock);
@@ -11571,78 +10221,89 @@ unsafe extern "C" fn attach_sb_event(event: *mut perf_event) {
 //
 #[no_mangle]
 unsafe extern "C" fn account_pmu_sb_event(event: *mut perf_event) {
-    static void account_pmu_sb_event(struct perf_event *event)
-    {
-    if (is_sb_event(event))
+    if (is_sb_event(event)) {
     attach_sb_event(event);
+    }
     }
 // Freq events need the tick to stay alive (see perf_event_task_tick).
 #[no_mangle]
 unsafe extern "C" fn account_freq_event_nohz() {
-    static void account_freq_event_nohz(void)
-    {
 
 // Lock so we don't race with concurrent unaccount
     spin_lock(&nr_freq_lock);
-    if (atomic_inc_return(&nr_freq_events) == 1)
+    if (atomic_inc_return(&nr_freq_events) == 1) {
     tick_nohz_dep_set(TICK_DEP_BIT_PERF_EVENTS);
+    }
     spin_unlock(&nr_freq_lock);
 
     }
 #[no_mangle]
 unsafe extern "C" fn account_freq_event() {
-    static void account_freq_event(void)
-    {
-    if (tick_nohz_full_enabled())
+    if (tick_nohz_full_enabled()) {
     account_freq_event_nohz();
-    else
+    }
+    else {
     atomic_inc(&nr_freq_events);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn account_event(event: *mut perf_event) {
-    static void account_event(struct perf_event *event)
-    {
-    let mut inc: bool = false;
-    if (event.parent)
+pub static mut inc: bool = false;
+    if (event.parent) {
     return;
-    if (event.attach_state & (PERF_ATTACH_TASK | PERF_ATTACH_SCHED_CB))
+    }
+    if (event.attach_state & (PERF_ATTACH_TASK | PERF_ATTACH_SCHED_CB)) {
     inc = true;
-    if (event.attr.mmap || event.attr.mmap_data)
+    }
+    if (event.attr.mmap || event.attr.mmap_data) {
     atomic_inc(&nr_mmap_events);
-    if (event.attr.build_id)
+    }
+    if (event.attr.build_id) {
     atomic_inc(&nr_build_id_events);
-    if (event.attr.comm)
+    }
+    if (event.attr.comm) {
     atomic_inc(&nr_comm_events);
-    if (event.attr.namespaces)
+    }
+    if (event.attr.namespaces) {
     atomic_inc(&nr_namespaces_events);
-    if (event.attr.cgroup)
+    }
+    if (event.attr.cgroup) {
     atomic_inc(&nr_cgroup_events);
-    if (event.attr.task)
+    }
+    if (event.attr.task) {
     atomic_inc(&nr_task_events);
-    if (event.attr.freq)
+    }
+    if (event.attr.freq) {
     account_freq_event();
+    }
     if (event.attr.context_switch) {
     atomic_inc(&nr_switch_events);
     inc = true;
     }
-    if (has_branch_stack(event))
+    if (has_branch_stack(event)) {
     inc = true;
-    if (is_cgroup_event(event))
+    }
+    if (is_cgroup_event(event)) {
     inc = true;
-    if (event.attr.ksymbol)
+    }
+    if (event.attr.ksymbol) {
     atomic_inc(&nr_ksymbol_events);
-    if (event.attr.bpf_event)
+    }
+    if (event.attr.bpf_event) {
     atomic_inc(&nr_bpf_events);
-    if (event.attr.text_poke)
+    }
+    if (event.attr.text_poke) {
     atomic_inc(&nr_text_poke_events);
+    }
     if (inc) {
 //
 // We need the mutex here because static_branch_enable()
 // must complete *before* the perf_sched_count increment
 // becomes visible.
 //
-    if (atomic_inc_not_zero(&perf_sched_count))
-    goto enabled;
+    if (atomic_inc_not_zero(&perf_sched_count)) {
+// goto;
+    }
     mutex_lock(&perf_sched_mutex);
     if (!atomic_read(&perf_sched_count)) {
     static_branch_enable(&perf_sched_events);
@@ -11660,27 +10321,22 @@ unsafe extern "C" fn account_event(event: *mut perf_event) {
     atomic_inc(&perf_sched_count);
     mutex_unlock(&perf_sched_mutex);
     }
-    enabled:
+// label;
     account_pmu_sb_event(event);
     }
 //
 // Allocate and initialize an event structure
 //
-    static struct perf_event *
-    perf_event_alloc(struct perf_event_attr *attr, int cpu,
-    struct task_struct *task,
-    struct perf_event *group_leader,
-    struct perf_event *parent_event,
-    perf_overflow_handler_t overflow_handler,
-    void *context, int cgroup_fd)
-    {
-    struct pmu *pmu;
-    struct hw_perf_event *hwc;
-    let mut err: c_long = -EINVAL;
-    int node;
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_alloc(attr: *mut perf_event_attr, cpu: c_int, task: *mut task_struct, group_leader: *mut perf_event, parent_event: *mut perf_event, overflow_handler: perf_overflow_handler_t, context: *mut c_void, cgroup_fd: c_int) -> *mut c_void {
+pub static mut pmu: *mut c_void = core::ptr::null_mut();
+pub static mut hwc: *mut c_void = core::ptr::null_mut();
+pub static mut err: c_long = 0;
+    let mut node = 0;
     if ((unsigned)cpu >= nr_cpu_ids) {
-    if (!task || cpu != -1)
+    if (!task || cpu != -1) {
     return ERR_PTR(-EINVAL);
+    }
     }
     if (attr.sigtrap && !task) {
 // Requires a task: avoid signalling random tasks.
@@ -11689,14 +10345,16 @@ unsafe extern "C" fn account_event(event: *mut perf_event) {
     node = (cpu >= 0) ? cpu_to_node(cpu) : -1;
     struct perf_event *event __free(__free_event) =
     kmem_cache_alloc_node(perf_event_cache, GFP_KERNEL | __GFP_ZERO, node);
-    if (!event)
+    if (!event) {
     return ERR_PTR(-ENOMEM);
+    }
 //
 // Single events are their own group leaders, with an
 // empty sibling list:
 //
-    if (!group_leader)
+    if (!group_leader) {
     group_leader = event;
+    }
     mutex_init(&event.child_mutex);
     INIT_LIST_HEAD(&event.child_list);
     INIT_LIST_HEAD(&event.event_entry);
@@ -11724,8 +10382,9 @@ unsafe extern "C" fn account_event(event: *mut perf_event) {
     event.ns		= get_pid_ns(task_active_pid_ns(current));
     event.id		= atomic64_inc_return(&perf_event_id);
     event.state		= PERF_EVENT_STATE_INACTIVE;
-    if (parent_event)
+    if (parent_event) {
     event.event_caps = parent_event.event_caps;
+    }
     if (task) {
     event.attach_state = PERF_ATTACH_TASK;
 //
@@ -11736,14 +10395,15 @@ unsafe extern "C" fn account_event(event: *mut perf_event) {
     event.hw.target = get_task_struct(task);
     }
     event.clock = &local_clock;
-    if (parent_event)
+    if (parent_event) {
     event.clock = parent_event.clock;
+    }
     if (!overflow_handler && parent_event) {
     overflow_handler = parent_event.overflow_handler;
     context = parent_event.overflow_handler_context;
 
     if (parent_event.prog) {
-    struct bpf_prog *prog = parent_event.prog;
+    let mut prog = parent_event.prog;
     bpf_prog_inc(prog);
     event.prog = prog;
     }
@@ -11763,8 +10423,9 @@ unsafe extern "C" fn account_event(event: *mut perf_event) {
     pmu = core::ptr::null_mut();
     hwc = &event.hw;
     hwc.sample_period = attr.sample_period;
-    if (is_event_in_freq_mode(event))
+    if (is_event_in_freq_mode(event)) {
     hwc.sample_period = 1;
+    }
     hwc.last_period = hwc.sample_period;
     local64_set(&hwc.period_left, hwc.sample_period);
 //
@@ -11773,13 +10434,16 @@ unsafe extern "C" fn account_event(event: *mut perf_event) {
 // collect per-thread samples.
 // See perf_output_read().
 //
-    if (has_inherit_and_sample_read(attr) && !(attr.sample_type & PERF_SAMPLE_TID))
+    if (has_inherit_and_sample_read(attr) && !(attr.sample_type & PERF_SAMPLE_TID)) {
     return ERR_PTR(-EINVAL);
-    if (!has_branch_stack(event))
+    }
+    if (!has_branch_stack(event)) {
     event.attr.branch_sample_type = 0;
+    }
     pmu = perf_init_event(event);
-    if (IS_ERR(pmu))
+    if (IS_ERR(pmu)) {
     return (void*)pmu;
+    }
 //
 // The PERF_ATTACH_TASK_DATA is set in the event_init()->hw_config().
 // The attach should be right after the perf_init_event().
@@ -11788,50 +10452,58 @@ unsafe extern "C" fn account_event(event: *mut perf_event) {
 //
     if (event.attach_state & PERF_ATTACH_TASK_DATA) {
     err = attach_perf_ctx_data(event);
-    if (err)
+    if (err) {
     return ERR_PTR(err);
+    }
     }
 //
 // Disallow uncore-task events. Similarly, disallow uncore-cgroup
 // events (they don't make sense as the cgroup will be different
 // on other CPUs in the uncore mask).
 //
-    if (pmu.task_ctx_nr == perf_invalid_context && (task || cgroup_fd != -1))
+    if (pmu.task_ctx_nr == perf_invalid_context && (task || cgroup_fd != -1)) {
     return ERR_PTR(-EINVAL);
+    }
     if (event.attr.aux_output &&
     (!(pmu.capabilities & PERF_PMU_CAP_AUX_OUTPUT) ||
-    event.attr.aux_pause || event.attr.aux_resume))
+    event.attr.aux_pause || event.attr.aux_resume)) {
     return ERR_PTR(-EOPNOTSUPP);
-    if (event.attr.aux_pause && event.attr.aux_resume)
+    }
+    if (event.attr.aux_pause && event.attr.aux_resume) {
     return ERR_PTR(-EINVAL);
+    }
     if (event.attr.aux_start_paused) {
-    if (!(pmu.capabilities & PERF_PMU_CAP_AUX_PAUSE))
+    if (!(pmu.capabilities & PERF_PMU_CAP_AUX_PAUSE)) {
     return ERR_PTR(-EOPNOTSUPP);
+    }
     event.hw.aux_paused = 1;
     }
     if (cgroup_fd != -1) {
     err = perf_cgroup_connect(cgroup_fd, event, attr, group_leader);
-    if (err)
+    if (err) {
     return ERR_PTR(err);
     }
+    }
     err = exclusive_event_init(event);
-    if (err)
+    if (err) {
     return ERR_PTR(err);
+    }
     if (has_addr_filter(event)) {
-    event.addr_filter_ranges = kzalloc_objs(struct perf_addr_filter_range,
+    event.addr_filter_ranges = kzalloc_objs(perf_addr_filter_range,
     pmu.nr_addr_filters);
-    if (!event.addr_filter_ranges)
+    if (!event.addr_filter_ranges) {
     return ERR_PTR(-ENOMEM);
+    }
 //
 // Clone the parent's vma offsets: they are valid until exec()
 // even if the mm is not shared with the parent.
 //
     if (event.parent) {
-    struct perf_addr_filters_head *ifh = perf_event_addr_filters(event);
+    let mut ifh = perf_event_addr_filters(event);
     raw_spin_lock_irq(&ifh.lock);
     memcpy(event.addr_filter_ranges,
     event.parent.addr_filter_ranges,
-    pmu.nr_addr_filters * sizeof(struct perf_addr_filter_range));
+    pmu.nr_addr_filters * sizeof!(perf_addr_filter_range));
     raw_spin_unlock_irq(&ifh.lock);
     }
 // force hw sync on the address filters
@@ -11840,17 +10512,20 @@ unsafe extern "C" fn account_event(event: *mut perf_event) {
     if (!event.parent) {
     if (event.attr.sample_type & PERF_SAMPLE_CALLCHAIN) {
     err = get_callchain_buffers(attr.sample_max_stack);
-    if (err)
+    if (err) {
     return ERR_PTR(err);
+    }
     event.attach_state |= PERF_ATTACH_CALLCHAIN;
     }
     }
     err = security_perf_event_alloc(event);
-    if (err)
+    if (err) {
     return ERR_PTR(err);
+    }
     err = mediated_pmu_account_event(event);
-    if (err)
+    if (err) {
     return ERR_PTR(err);
+    }
 // symmetric to unaccount_event() in _free_event()
     account_event(event);
 //
@@ -11861,51 +10536,62 @@ unsafe extern "C" fn account_event(event: *mut perf_event) {
     list_add(&event.pmu_list, &pmu.events);
     return_ptr(event);
     }
-    static int perf_copy_attr(struct perf_event_attr __user *uattr,
-    struct perf_event_attr *attr)
-    {
-    u32 size;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn perf_copy_attr(uattr: *mut perf_event_attr, attr: *mut perf_event_attr) -> c_int {
+    let mut size = 0;
+    let mut ret = 0;
 // Zero the full structure, so that a short copy will be nice.
-    memset(attr, 0, sizeof(*attr));
+    memset(attr, 0, sizeof!(*attr));
     ret = get_user(size, &uattr.size);
-    if (ret)
-    return ret;
-// ABI compatibility quirk:
-    if (!size)
-    size = PERF_ATTR_SIZE_VER0;
-    if (size < PERF_ATTR_SIZE_VER0 || size > PAGE_SIZE)
-    goto err_size;
-    ret = copy_struct_from_user(attr, sizeof(*attr), uattr, size);
     if (ret) {
-    if (ret == -E2BIG)
-    goto err_size;
+    return ret;
+    }
+// ABI compatibility quirk:
+    if (!size) {
+    size = PERF_ATTR_SIZE_VER0;
+    }
+    if (size < PERF_ATTR_SIZE_VER0 || size > PAGE_SIZE) {
+// goto;
+    }
+    ret = copy_struct_from_user(attr, sizeof!(*attr), uattr, size);
+    if (ret) {
+    if (ret == -E2BIG) {
+// goto;
+    }
     return ret;
     }
     attr.size = size;
-    if (attr.__reserved_1 || attr.__reserved_2 || attr.__reserved_3)
+    if (attr.__reserved_1 || attr.__reserved_2 || attr.__reserved_3) {
     return -EINVAL;
-    if (attr.sample_type & ~(PERF_SAMPLE_MAX-1))
+    }
+    if (attr.sample_type & ~(PERF_SAMPLE_MAX-1)) {
     return -EINVAL;
-    if (attr.read_format & ~(PERF_FORMAT_MAX-1))
+    }
+    if (attr.read_format & ~(PERF_FORMAT_MAX-1)) {
     return -EINVAL;
+    }
     if (attr.sample_type & PERF_SAMPLE_BRANCH_STACK) {
-    let mut mask: u64 = attr.branch_sample_type;
+pub static mut mask: u64 = 0;
 // only using defined bits
-    if (mask & ~(PERF_SAMPLE_BRANCH_MAX-1))
+    if (mask & ~(PERF_SAMPLE_BRANCH_MAX-1)) {
     return -EINVAL;
+    }
 // at least one branch bit must be set
-    if (!(mask & ~PERF_SAMPLE_BRANCH_PLM_ALL))
+    if (!(mask & ~PERF_SAMPLE_BRANCH_PLM_ALL)) {
     return -EINVAL;
+    }
 // propagate priv level, when not set for branch
     if (!(mask & PERF_SAMPLE_BRANCH_PLM_ALL)) {
 // exclude_kernel checked on syscall entry
-    if (!attr.exclude_kernel)
+    if (!attr.exclude_kernel) {
     mask |= PERF_SAMPLE_BRANCH_KERNEL;
-    if (!attr.exclude_user)
+    }
+    if (!attr.exclude_user) {
     mask |= PERF_SAMPLE_BRANCH_USER;
-    if (!attr.exclude_hv)
+    }
+    if (!attr.exclude_hv) {
     mask |= PERF_SAMPLE_BRANCH_HV;
+    }
 //
 // adjust user setting (for HW filter setup)
 //
@@ -11914,102 +10600,117 @@ unsafe extern "C" fn account_event(event: *mut perf_event) {
 // privileged levels capture (kernel, hv): check permissions
     if (mask & PERF_SAMPLE_BRANCH_PERM_PLM) {
     ret = perf_allow_kernel();
-    if (ret)
+    if (ret) {
     return ret;
+    }
     }
     }
     if (attr.sample_type & PERF_SAMPLE_REGS_USER) {
     ret = perf_reg_validate(attr.sample_regs_user);
-    if (ret)
+    if (ret) {
     return ret;
     }
+    }
     if (attr.sample_type & PERF_SAMPLE_STACK_USER) {
-    if (!arch_perf_have_user_stack_dump())
+    if (!arch_perf_have_user_stack_dump()) {
     return -ENOSYS;
+    }
 //
 // We have __u32 type for the size, but so far
 // we can only use __u16 as maximum due to the
 // __u16 sample size limit.
 //
-    if (attr.sample_stack_user >= USHRT_MAX)
-    return -EINVAL;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !IS_ALIGNED(attr->sample_stack_user, _arg: sizeof(u64))) -> else {
-    else if (!IS_ALIGNED(attr.sample_stack_user, sizeof(u64)))
+    if (attr.sample_stack_user >= USHRT_MAX) {
     return -EINVAL;
     }
-    if (!attr.sample_max_stack)
-    attr.sample_max_stack = sysctl_perf_event_max_stack;
-    if (attr.sample_type & PERF_SAMPLE_REGS_INTR)
-    ret = perf_reg_validate(attr.sample_regs_intr);
 
-    if (attr.sample_type & PERF_SAMPLE_CGROUP)
+    else if (!IS_ALIGNED(attr.sample_stack_user, sizeof!(u64))) {
     return -EINVAL;
+    }
+    }
+    if (!attr.sample_max_stack) {
+    attr.sample_max_stack = sysctl_perf_event_max_stack;
+    }
+    if (attr.sample_type & PERF_SAMPLE_REGS_INTR) {
+    ret = perf_reg_validate(attr.sample_regs_intr);
+    }
+
+    if (attr.sample_type & PERF_SAMPLE_CGROUP) {
+    return -EINVAL;
+    }
 
     if ((attr.sample_type & PERF_SAMPLE_WEIGHT) &&
-    (attr.sample_type & PERF_SAMPLE_WEIGHT_STRUCT))
+    (attr.sample_type & PERF_SAMPLE_WEIGHT_STRUCT)) {
     return -EINVAL;
-    if (!attr.inherit && attr.inherit_thread)
+    }
+    if (!attr.inherit && attr.inherit_thread) {
     return -EINVAL;
-    if (attr.remove_on_exec && attr.enable_on_exec)
+    }
+    if (attr.remove_on_exec && attr.enable_on_exec) {
     return -EINVAL;
-    if (attr.sigtrap && !attr.remove_on_exec)
+    }
+    if (attr.sigtrap && !attr.remove_on_exec) {
     return -EINVAL;
-    out:
+    }
+// label;
     return ret;
-    err_size:
-    put_user(sizeof(*attr), &uattr.size);
+// label;
+    put_user(sizeof!(*attr), &uattr.size);
     ret = -E2BIG;
-    goto out;
+// goto;
     }
 #[no_mangle]
 unsafe extern "C" fn mutex_lock_double(a: *mut mutex, b: *mut mutex) {
-    static void mutex_lock_double(struct mutex *a, struct mutex *b)
-    {
-    if (b < a)
+    if (b < a) {
     swap(a, b);
+    }
     mutex_lock(a);
     mutex_lock_nested(b, SINGLE_DEPTH_NESTING);
     }
-    static int
-    perf_event_set_output(struct perf_event *event, struct perf_event *output_event)
-    {
-    struct perf_buffer *rb = core::ptr::null_mut();
-    let mut ret: c_int = -EINVAL;
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_set_output(event: *mut perf_event, output_event: *mut perf_event) -> c_int {
+    let mut rb = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     if (!output_event) {
     mutex_lock(&event.mmap_mutex);
-    goto set;
+// goto;
     }
 // don't allow circular references
-    if (event == output_event)
-    goto out;
+    if (event == output_event) {
+// goto;
+    }
 //
 // Don't allow cross-cpu buffers
 //
-    if (output_event.cpu != event.cpu)
-    goto out;
+    if (output_event.cpu != event.cpu) {
+// goto;
+    }
 //
 // If its not a per-cpu rb, it must be the same task.
 //
-    if (output_event.cpu == -1 && output_event.hw.target != event.hw.target)
-    goto out;
+    if (output_event.cpu == -1 && output_event.hw.target != event.hw.target) {
+// goto;
+    }
 //
 // Mixing clocks in the same buffer is trouble you don't need.
 //
-    if (output_event.clock != event.clock)
-    goto out;
+    if (output_event.clock != event.clock) {
+// goto;
+    }
 //
 // Either writing ring buffer from beginning or from end.
 // Mixing is not allowed.
 //
-    if (is_write_backward(output_event) != is_write_backward(event))
-    goto out;
+    if (is_write_backward(output_event) != is_write_backward(event)) {
+// goto;
+    }
 //
 // If both events generate aux data, they must be on the same PMU
 //
     if (has_aux(event) && has_aux(output_event) &&
-    event.pmu != output_event.pmu)
-    goto out;
+    event.pmu != output_event.pmu) {
+// goto;
+    }
 //
 // Hold both mmap_mutex to serialize against perf_mmap_close().  Since
 // output_event is already on rb->event_list, and the list iteration
@@ -12018,67 +10719,75 @@ unsafe extern "C" fn mutex_lock_double(a: *mut mutex, b: *mut mutex) {
 // observe !rb->mmap_count.
 //
     mutex_lock_double(&event.mmap_mutex, &output_event.mmap_mutex);
-    set:
+// label;
 // Can't redirect output if we've got an active mmap()
-    if (refcount_read(&event.mmap_count))
-    goto unlock;
+    if (refcount_read(&event.mmap_count)) {
+// goto;
+    }
     if (output_event) {
-    if (output_event.state <= PERF_EVENT_STATE_REVOKED)
-    goto unlock;
+    if (output_event.state <= PERF_EVENT_STATE_REVOKED) {
+// goto;
+    }
 // get the rb we want to redirect to
     rb = ring_buffer_get(output_event);
-    if (!rb)
-    goto unlock;
+    if (!rb) {
+// goto;
+    }
 // did we race against perf_mmap_close()
     if (!refcount_read(&rb.mmap_count)) {
     ring_buffer_put(rb);
-    goto unlock;
+// goto;
     }
     }
     ring_buffer_attach(event, rb);
     ret = 0;
-    unlock:
+// label;
     mutex_unlock(&event.mmap_mutex);
-    if (output_event)
+    if (output_event) {
     mutex_unlock(&output_event.mmap_mutex);
-    out:
+    }
+// label;
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_set_clock(event: *mut perf_event, clk_id: clockid_t) -> c_int {
-    static int perf_event_set_clock(struct perf_event *event, clockid_t clk_id)
-    {
-    let mut nmi_safe: bool = false;
-    switch (clk_id) {
-    case CLOCK_MONOTONIC:
+pub static mut nmi_safe: bool = false;
+    match (clk_id) {
+    CLOCK_MONOTONIC => {
     event.clock = &ktime_get_mono_fast_ns;
     nmi_safe = true;
-    break;
-    case CLOCK_MONOTONIC_RAW:
+    // break;
+    }
+    CLOCK_MONOTONIC_RAW => {
     event.clock = &ktime_get_raw_fast_ns;
     nmi_safe = true;
-    break;
-    case CLOCK_REALTIME:
+    // break;
+    }
+    CLOCK_REALTIME => {
     event.clock = &ktime_get_real_ns;
-    break;
-    case CLOCK_BOOTTIME:
+    // break;
+    }
+    CLOCK_BOOTTIME => {
     event.clock = &ktime_get_boottime_ns;
-    break;
-    case CLOCK_TAI:
+    // break;
+    }
+    CLOCK_TAI => {
     event.clock = &ktime_get_clocktai_ns;
-    break;
-    default:
+    // break;
+    }
+    _ => {
     return -EINVAL;
     }
-    if (!nmi_safe && !(event.pmu.capabilities & PERF_PMU_CAP_NO_NMI))
+    }
+    if (!nmi_safe && !(event.pmu.capabilities & PERF_PMU_CAP_NO_NMI)) {
     return -EINVAL;
+    }
     return 0;
     }
-    static bool
-    perf_check_permission(struct perf_event_attr *attr, struct task_struct *task)
-    {
-    let mut ptrace_mode: c_uint = PTRACE_MODE_READ_REALCREDS;
-    let mut is_capable: bool = perfmon_capable();
+#[no_mangle]
+pub unsafe extern "C" fn perf_check_permission(attr: *mut perf_event_attr, task: *mut task_struct) -> bool {
+pub static mut ptrace_mode: c_uint = 0;
+pub static mut is_capable: bool = false;
     if (attr.sigtrap) {
 //
 // perf_event_attr::sigtrap sends signals to the other task.
@@ -12110,62 +10819,70 @@ unsafe extern "C" fn perf_event_set_clock(event: *mut perf_event, clk_id: clocki
 // @group_fd:		group leader event fd
 // @flags:		perf event open flags
 //
-    SYSCALL_DEFINE5(perf_event_open,
-    struct perf_event_attr __user *, attr_uptr,
-    pid_t, pid, int, cpu, int, group_fd, unsigned long, flags)
-    {
-    struct perf_event *group_leader = core::ptr::null_mut(), *output_event = core::ptr::null_mut();
-    struct perf_event_pmu_context *pmu_ctx;
-    struct perf_event *event, *sibling;
-    struct perf_event_attr attr;
-    struct perf_event_context *ctx;
-    struct file *event_file = core::ptr::null_mut();
-    struct task_struct *task = core::ptr::null_mut();
-    struct pmu *pmu;
-    int event_fd;
-    let mut move_group: c_int = 0;
-    int err;
-    let mut f_flags: c_int = O_RDWR;
-    let mut cgroup_fd: c_int = -1;
+#[no_mangle]
+pub unsafe extern "C" fn sys_perf_event_open(attr_uptr: usize, pid: usize, cpu: usize, group_fd: usize, flags: usize) -> c_long {
+    let mut group_leader = core::ptr::null_mut(), *output_event = core::ptr::null_mut();
+pub static mut pmu_ctx: *mut c_void = core::ptr::null_mut();
+    let mut event = core::ptr::null_mut();
+    let mut sibling = core::ptr::null_mut();
+pub static mut attr: usize = 0;
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+    let mut event_file = core::ptr::null_mut();
+    let mut task = core::ptr::null_mut();
+pub static mut pmu: *mut c_void = core::ptr::null_mut();
+    let mut event_fd = 0;
+pub static mut move_group: c_int = 0;
+    let mut err = 0;
+pub static mut f_flags: c_int = 0;
+pub static mut cgroup_fd: c_int = 0;
 // for future expandability...
-    if (flags & ~PERF_FLAG_ALL)
+    if (flags & ~PERF_FLAG_ALL) {
     return -EINVAL;
+    }
     err = perf_copy_attr(attr_uptr, &attr);
-    if (err)
+    if (err) {
     return err;
+    }
 // Do we allow access to perf_event_open(2) ?
     err = security_perf_event_open(PERF_SECURITY_OPEN);
-    if (err)
+    if (err) {
     return err;
+    }
     if (!attr.exclude_kernel ||
     ((attr.sample_type & PERF_SAMPLE_CALLCHAIN) &&
     !attr.exclude_callchain_kernel)) {
     err = perf_allow_kernel();
-    if (err)
+    if (err) {
     return err;
     }
+    }
     if (attr.namespaces) {
-    if (!perfmon_capable())
+    if (!perfmon_capable()) {
     return -EACCES;
     }
+    }
     if (attr.freq) {
-    if (attr.sample_freq > sysctl_perf_event_sample_rate)
+    if (attr.sample_freq > sysctl_perf_event_sample_rate) {
     return -EINVAL;
+    }
     } else {
-    if (attr.sample_period & (1ULL << 63))
+    if (attr.sample_period & (1ULL << 63)) {
     return -EINVAL;
+    }
     }
 // Only privileged users can get physical addresses
     if ((attr.sample_type & PERF_SAMPLE_PHYS_ADDR)) {
     err = perf_allow_kernel();
-    if (err)
+    if (err) {
     return err;
+    }
     }
 // REGS_INTR can leak data, lockdown must prevent this
     if (attr.sample_type & PERF_SAMPLE_REGS_INTR) {
     err = security_locked_down(LOCKDOWN_PERF);
-    if (err)
+    if (err) {
     return err;
+    }
     }
 //
 // In cgroup mode, the pid argument is used to pass the fd
@@ -12173,13 +10890,16 @@ unsafe extern "C" fn perf_event_set_clock(event: *mut perf_event, clk_id: clocki
 // designates the cpu on which to monitor threads from that
 // cgroup.
 //
-    if ((flags & PERF_FLAG_PID_CGROUP) && (pid == -1 || cpu == -1))
+    if ((flags & PERF_FLAG_PID_CGROUP) && (pid == -1 || cpu == -1)) {
     return -EINVAL;
-    if (flags & PERF_FLAG_FD_CLOEXEC)
+    }
+    if (flags & PERF_FLAG_FD_CLOEXEC) {
     f_flags |= O_CLOEXEC;
+    }
     event_fd = get_unused_fd_flags(f_flags);
-    if (event_fd < 0)
+    if (event_fd < 0) {
     return event_fd;
+    }
 //
 // Event creation should be under SRCU, see perf_pmu_unregister().
 //
@@ -12188,42 +10908,45 @@ unsafe extern "C" fn perf_event_set_clock(event: *mut perf_event, clk_id: clocki
     if (group_fd != -1) {
     if (!is_perf_file(group)) {
     err = -EBADF;
-    goto err_fd;
+// goto;
     }
     group_leader = fd_file(group).private_data;
     if (group_leader.state <= PERF_EVENT_STATE_EXIT) {
     err = -ENODEV;
-    goto err_fd;
+// goto;
     }
-    if (flags & PERF_FLAG_FD_OUTPUT)
+    if (flags & PERF_FLAG_FD_OUTPUT) {
     output_event = group_leader;
-    if (flags & PERF_FLAG_FD_NO_GROUP)
+    }
+    if (flags & PERF_FLAG_FD_NO_GROUP) {
     group_leader = core::ptr::null_mut();
+    }
     }
     if (pid != -1 && !(flags & PERF_FLAG_PID_CGROUP)) {
     task = find_lively_task_by_vpid(pid);
     if (IS_ERR(task)) {
     err = PTR_ERR(task);
-    goto err_fd;
+// goto;
     }
     }
     if (task && group_leader &&
     group_leader.attr.inherit != attr.inherit) {
     err = -EINVAL;
-    goto err_task;
+// goto;
     }
-    if (flags & PERF_FLAG_PID_CGROUP)
+    if (flags & PERF_FLAG_PID_CGROUP) {
     cgroup_fd = pid;
+    }
     event = perf_event_alloc(&attr, cpu, task, group_leader, core::ptr::null_mut(),
     core::ptr::null_mut(), core::ptr::null_mut(), cgroup_fd);
     if (IS_ERR(event)) {
     err = PTR_ERR(event);
-    goto err_task;
+// goto;
     }
     if (is_sampling_event(event)) {
     if (event.pmu.capabilities & PERF_PMU_CAP_NO_INTERRUPT) {
     err = -EOPNOTSUPP;
-    goto err_alloc;
+// goto;
     }
     }
 //
@@ -12233,15 +10956,18 @@ unsafe extern "C" fn perf_event_set_clock(event: *mut perf_event, clk_id: clocki
     pmu = event.pmu;
     if (attr.use_clockid) {
     err = perf_event_set_clock(event, attr.clockid);
-    if (err)
-    goto err_alloc;
+    if (err) {
+// goto;
     }
-    if (pmu.task_ctx_nr == perf_sw_context)
+    }
+    if (pmu.task_ctx_nr == perf_sw_context) {
     event.event_caps |= PERF_EV_CAP_SOFTWARE;
+    }
     if (task) {
     err = down_read_interruptible(&task.signal.exec_update_lock);
-    if (err)
-    goto err_alloc;
+    if (err) {
+// goto;
+    }
 //
 // We must hold exec_update_lock across this and any potential
 // perf_install_in_context() call for this new event to
@@ -12249,8 +10975,9 @@ unsafe extern "C" fn perf_event_set_clock(event: *mut perf_event, clk_id: clocki
 // perf_event_exit_task() that could imply).
 //
     err = -EACCES;
-    if (!perf_check_permission(&attr, task))
-    goto err_cred;
+    if (!perf_check_permission(&attr, task)) {
+// goto;
+    }
     }
 //
 // Get the target context (task or percpu):
@@ -12258,12 +10985,12 @@ unsafe extern "C" fn perf_event_set_clock(event: *mut perf_event, clk_id: clocki
     ctx = find_get_context(task, event);
     if (IS_ERR(ctx)) {
     err = PTR_ERR(ctx);
-    goto err_cred;
+// goto;
     }
     mutex_lock(&ctx.mutex);
     if (ctx.task == TASK_TOMBSTONE) {
     err = -ESRCH;
-    goto err_locked;
+// goto;
     }
     if (!task) {
 //
@@ -12272,10 +10999,10 @@ unsafe extern "C" fn perf_event_set_clock(event: *mut perf_event, clk_id: clocki
 // We use the perf_cpu_context::ctx::mutex to serialize against
 // the hotplug notifiers. See perf_event_{init,exit}_cpu().
 //
-    struct perf_cpu_context *cpuctx = per_cpu_ptr(&perf_cpu_context, event.cpu);
+    let mut cpuctx = per_cpu_ptr(&perf_cpu_context, event.cpu);
     if (!cpuctx.online) {
     err = -ENODEV;
-    goto err_locked;
+// goto;
     }
     }
     if (group_leader) {
@@ -12284,33 +11011,38 @@ unsafe extern "C" fn perf_event_set_clock(event: *mut perf_event, clk_id: clocki
 // Do not allow a recursive hierarchy (this new sibling
 // becoming part of another group-sibling):
 //
-    if (group_leader.group_leader != group_leader)
-    goto err_locked;
+    if (group_leader.group_leader != group_leader) {
+// goto;
+    }
 // All events in a group should have the same clock
-    if (group_leader.clock != event.clock)
-    goto err_locked;
+    if (group_leader.clock != event.clock) {
+// goto;
+    }
 //
 // Make sure we're both events for the same CPU;
 // grouping events for different CPUs is broken; since
 // you can never concurrently schedule them anyhow.
 //
-    if (group_leader.cpu != event.cpu)
-    goto err_locked;
+    if (group_leader.cpu != event.cpu) {
+// goto;
+    }
 //
 // Make sure we're both on the same context; either task or cpu.
 //
-    if (group_leader.ctx != ctx)
-    goto err_locked;
+    if (group_leader.ctx != ctx) {
+// goto;
+    }
 // Recheck under ctx::mutex to serialize against remove-on-exec.
     if (group_leader.state <= PERF_EVENT_STATE_EXIT) {
     err = -ENODEV;
-    goto err_locked;
+// goto;
     }
 //
 // Only a group leader can be exclusive or pinned
 //
-    if (attr.exclusive || attr.pinned)
-    goto err_locked;
+    if (attr.exclusive || attr.pinned) {
+// goto;
+    }
     if (is_software_event(event) &&
     !in_software_context(group_leader)) {
 //
@@ -12337,8 +11069,9 @@ unsafe extern "C" fn perf_event_set_clock(event: *mut perf_event, clk_id: clocki
     }
 // Don't allow group of multiple hw events from different pmus
     if (!in_software_context(group_leader) &&
-    group_leader.pmu_ctx.pmu != pmu)
-    goto err_locked;
+    group_leader.pmu_ctx.pmu != pmu) {
+// goto;
+    }
     }
     }
 //
@@ -12347,21 +11080,22 @@ unsafe extern "C" fn perf_event_set_clock(event: *mut perf_event, clk_id: clocki
     pmu_ctx = find_get_pmu_context(pmu, ctx, event);
     if (IS_ERR(pmu_ctx)) {
     err = PTR_ERR(pmu_ctx);
-    goto err_locked;
+// goto;
     }
     event.pmu_ctx = pmu_ctx;
     if (output_event) {
     err = perf_event_set_output(event, output_event);
-    if (err)
-    goto err_context;
+    if (err) {
+// goto;
+    }
     }
     if (!perf_event_validate_size(event)) {
     err = -E2BIG;
-    goto err_context;
+// goto;
     }
     if (perf_need_aux_event(event) && !perf_get_aux_event(event, group_leader)) {
     err = -EINVAL;
-    goto err_context;
+// goto;
     }
 //
 // Must be under the same ctx::mutex as perf_install_in_context(),
@@ -12369,14 +11103,14 @@ unsafe extern "C" fn perf_event_set_clock(event: *mut perf_event, clk_id: clocki
 //
     if (!exclusive_event_installable(event, ctx)) {
     err = -EBUSY;
-    goto err_context;
+// goto;
     }
-    WARN_ON_ONCE(ctx.parent_ctx);
+    WARN_ON_ONCE!(ctx.parent_ctx);
     event_file = anon_inode_getfile("[perf_event]", &perf_fops, event, f_flags);
     if (IS_ERR(event_file)) {
     err = PTR_ERR(event_file);
     event_file = core::ptr::null_mut();
-    goto err_context;
+// goto;
     }
 //
 // This is the point on no return; we cannot fail hereafter. This is
@@ -12442,22 +11176,24 @@ unsafe extern "C" fn perf_event_set_clock(event: *mut perf_event, clk_id: clocki
 //
     fd_install(event_fd, event_file);
     return event_fd;
-    err_context:
+// label;
     put_pmu_ctx(event.pmu_ctx);
     event.pmu_ctx = core::ptr::null_mut(); /* _free_event() */
-    err_locked:
+// label;
     mutex_unlock(&ctx.mutex);
     perf_unpin_context(ctx);
     put_ctx(ctx);
-    err_cred:
-    if (task)
+// label;
+    if (task) {
     up_read(&task.signal.exec_update_lock);
-    err_alloc:
+    }
+// label;
     put_event(event);
-    err_task:
-    if (task)
+// label;
+    if (task) {
     put_task_struct(task);
-    err_fd:
+    }
+// label;
     put_unused_fd(event_fd);
     return err;
     }
@@ -12470,23 +11206,20 @@ unsafe extern "C" fn perf_event_set_clock(event: *mut perf_event, clk_id: clocki
 // @overflow_handler: callback to trigger when we hit the event
 // @context: context data could be used in overflow_handler callback
 //
-    struct perf_event *
-    perf_event_create_kernel_counter(struct perf_event_attr *attr, int cpu,
-    struct task_struct *task,
-    perf_overflow_handler_t overflow_handler,
-    void *context)
-    {
-    struct perf_event_pmu_context *pmu_ctx;
-    struct perf_event_context *ctx;
-    struct perf_event *event;
-    struct pmu *pmu;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_create_kernel_counter(attr: *mut perf_event_attr, cpu: c_int, task: *mut task_struct, overflow_handler: perf_overflow_handler_t, context: *mut c_void) -> *mut c_void {
+pub static mut pmu_ctx: *mut c_void = core::ptr::null_mut();
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+pub static mut event: *mut c_void = core::ptr::null_mut();
+pub static mut pmu: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
 //
 // Grouping is not supported for kernel events, neither is 'AUX',
 // make sure the caller's intentions are adjusted.
 //
-    if (attr.aux_output || attr.aux_action)
+    if (attr.aux_output || attr.aux_action) {
     return ERR_PTR(-EINVAL);
+    }
 //
 // Event creation should be under SRCU, see perf_pmu_unregister().
 //
@@ -12495,31 +11228,32 @@ unsafe extern "C" fn perf_event_set_clock(event: *mut perf_event, clk_id: clocki
     overflow_handler, context, -1);
     if (IS_ERR(event)) {
     err = PTR_ERR(event);
-    goto err;
+// goto;
     }
 // Mark owner so we could distinguish it from user events.
     event.owner = TASK_TOMBSTONE;
     pmu = event.pmu;
-    if (pmu.task_ctx_nr == perf_sw_context)
+    if (pmu.task_ctx_nr == perf_sw_context) {
     event.event_caps |= PERF_EV_CAP_SOFTWARE;
+    }
 //
 // Get the target context (task or percpu):
 //
     ctx = find_get_context(task, event);
     if (IS_ERR(ctx)) {
     err = PTR_ERR(ctx);
-    goto err_alloc;
+// goto;
     }
-    WARN_ON_ONCE(ctx.parent_ctx);
+    WARN_ON_ONCE!(ctx.parent_ctx);
     mutex_lock(&ctx.mutex);
     if (ctx.task == TASK_TOMBSTONE) {
     err = -ESRCH;
-    goto err_unlock;
+// goto;
     }
     pmu_ctx = find_get_pmu_context(pmu, ctx, event);
     if (IS_ERR(pmu_ctx)) {
     err = PTR_ERR(pmu_ctx);
-    goto err_unlock;
+// goto;
     }
     event.pmu_ctx = pmu_ctx;
     if (!task) {
@@ -12529,40 +11263,37 @@ unsafe extern "C" fn perf_event_set_clock(event: *mut perf_event, clk_id: clocki
 // We use the perf_cpu_context::ctx::mutex to serialize against
 // the hotplug notifiers. See perf_event_{init,exit}_cpu().
 //
-    struct perf_cpu_context *cpuctx =
-    container_of(ctx, struct perf_cpu_context, ctx);
+    let mut cpuctx = container_of!(ctx, perf_cpu_context, ctx);
     if (!cpuctx.online) {
     err = -ENODEV;
-    goto err_pmu_ctx;
+// goto;
     }
     }
     if (!exclusive_event_installable(event, ctx)) {
     err = -EBUSY;
-    goto err_pmu_ctx;
+// goto;
     }
     perf_install_in_context(ctx, event, event.cpu);
     perf_unpin_context(ctx);
     mutex_unlock(&ctx.mutex);
     return event;
-    err_pmu_ctx:
+// label;
     put_pmu_ctx(pmu_ctx);
     event.pmu_ctx = core::ptr::null_mut(); /* _free_event() */
-    err_unlock:
+// label;
     mutex_unlock(&ctx.mutex);
     perf_unpin_context(ctx);
     put_ctx(ctx);
-    err_alloc:
+// label;
     put_event(event);
-    err:
+// label;
     return ERR_PTR(err);
     }
     EXPORT_SYMBOL_GPL(perf_event_create_kernel_counter);
-    static void __perf_pmu_remove(struct perf_event_context *ctx,
-    int cpu, struct pmu *pmu,
-    struct perf_event_groups *groups,
-    struct list_head *events)
-    {
-    struct perf_event *event, *sibling;
+#[no_mangle]
+pub unsafe extern "C" fn __perf_pmu_remove(ctx: *mut perf_event_context, cpu: c_int, pmu: *mut pmu, groups: *mut perf_event_groups, events: *mut list_head) {
+    let mut event = core::ptr::null_mut();
+    let mut sibling = core::ptr::null_mut();
     perf_event_groups_for_cpu_pmu(event, groups, cpu, pmu) {
     perf_remove_from_context(event, 0);
     put_pmu_ctx(event.pmu_ctx);
@@ -12574,28 +11305,27 @@ unsafe extern "C" fn perf_event_set_clock(event: *mut perf_event, clk_id: clocki
     }
     }
     }
-    static void __perf_pmu_install_event(struct pmu *pmu,
-    struct perf_event_context *ctx,
-    int cpu, struct perf_event *event)
-    {
-    struct perf_event_pmu_context *epc;
-    struct perf_event_context *old_ctx = event.ctx;
+#[no_mangle]
+pub unsafe extern "C" fn __perf_pmu_install_event(pmu: *mut pmu, ctx: *mut perf_event_context, cpu: c_int, event: *mut perf_event) {
+pub static mut epc: *mut c_void = core::ptr::null_mut();
+    let mut old_ctx = event.ctx;
     get_ctx(ctx); /* normally find_get_context() */
     event.cpu = cpu;
     epc = find_get_pmu_context(pmu, ctx, event);
     event.pmu_ctx = epc;
-    if (event.state >= PERF_EVENT_STATE_OFF)
+    if (event.state >= PERF_EVENT_STATE_OFF) {
     event.state = PERF_EVENT_STATE_INACTIVE;
+    }
     perf_install_in_context(ctx, event, cpu);
 //
 // Now that event->ctx is updated and visible, put the old ctx.
 //
     put_ctx(old_ctx);
     }
-    static void __perf_pmu_install(struct perf_event_context *ctx,
-    int cpu, struct pmu *pmu, struct list_head *events)
-    {
-    struct perf_event *event, *tmp;
+#[no_mangle]
+pub unsafe extern "C" fn __perf_pmu_install(ctx: *mut perf_event_context, cpu: c_int, pmu: *mut pmu, events: *mut list_head) {
+    let mut event = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
 //
 // Re-instate events in 2 passes.
 //
@@ -12605,8 +11335,9 @@ unsafe extern "C" fn perf_event_set_clock(event: *mut perf_event, clk_id: clocki
 // context.
 //
     list_for_each_entry_safe(event, tmp, events, migrate_entry) {
-    if (event.group_leader == event)
+    if (event.group_leader == event) {
     continue;
+    }
     list_del(&event.migrate_entry);
     __perf_pmu_install_event(pmu, ctx, cpu, event);
     }
@@ -12621,10 +11352,9 @@ unsafe extern "C" fn perf_event_set_clock(event: *mut perf_event, clk_id: clocki
     }
 #[no_mangle]
 pub unsafe extern "C" fn perf_pmu_migrate_context(pmu: *mut pmu, src_cpu: c_int, dst_cpu: c_int) {
-    void perf_pmu_migrate_context(struct pmu *pmu, int src_cpu, int dst_cpu)
-    {
-    struct perf_event_context *src_ctx, *dst_ctx;
-    LIST_HEAD(events);
+    let mut src_ctx = core::ptr::null_mut();
+    let mut dst_ctx = core::ptr::null_mut();
+pub static mut events: usize = 0;
 //
 // Since per-cpu context is persistent, no need to grab an extra
 // reference.
@@ -12649,14 +11379,14 @@ pub unsafe extern "C" fn perf_pmu_migrate_context(pmu: *mut pmu, src_cpu: c_int,
     mutex_unlock(&src_ctx.mutex);
     }
     EXPORT_SYMBOL_GPL(perf_pmu_migrate_context);
-    static void sync_child_event(struct perf_event *child_event,
-    struct task_struct *task)
-    {
-    struct perf_event *parent_event = child_event.parent;
-    u64 child_val;
+#[no_mangle]
+pub unsafe extern "C" fn sync_child_event(child_event: *mut perf_event, task: *mut task_struct) {
+    let mut parent_event = child_event.parent;
+    let mut child_val = 0;
     if (child_event.attr.inherit_stat) {
-    if (task && task != TASK_TOMBSTONE)
+    if (task && task != TASK_TOMBSTONE) {
     perf_event_read_event(child_event, task);
+    }
     }
     child_val = perf_event_count(child_event, false);
 //
@@ -12668,14 +11398,10 @@ pub unsafe extern "C" fn perf_pmu_migrate_context(pmu: *mut pmu, src_cpu: c_int,
     atomic64_add(child_event.total_time_running,
     &parent_event.child_total_time_running);
     }
-    static void
-    perf_event_exit_event(struct perf_event *event,
-    struct perf_event_context *ctx,
-    struct task_struct *task,
-    unsigned long detach_flags)
-    {
-    struct perf_event *parent_event = event.parent;
-    unsigned int attach_state;
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_exit_event(event: *mut perf_event, ctx: *mut perf_event_context, task: *mut task_struct, detach_flags: c_ulong) {
+    let mut parent_event = event.parent;
+    let mut attach_state = 0;
     detach_flags |= DETACH_EXIT;
     if (parent_event) {
 //
@@ -12694,11 +11420,13 @@ pub unsafe extern "C" fn perf_pmu_migrate_context(pmu: *mut pmu, src_cpu: c_int,
     mutex_lock(&parent_event.child_mutex);
 // PERF_ATTACH_ITRACE might be set concurrently
     attach_state = READ_ONCE(event.attach_state);
-    if (attach_state & PERF_ATTACH_CHILD)
+    if (attach_state & PERF_ATTACH_CHILD) {
     sync_child_event(event, task);
     }
-    if (detach_flags & DETACH_REVOKE)
+    }
+    if (detach_flags & DETACH_REVOKE) {
     detach_flags |= DETACH_GROUP;
+    }
     perf_remove_from_context(event, detach_flags);
 //
 // Child events can be freed.
@@ -12729,13 +11457,13 @@ pub unsafe extern "C" fn perf_pmu_migrate_context(pmu: *mut pmu, src_cpu: c_int,
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_exit_task_context(task: *mut task_struct, exit: bool) {
-    static void perf_event_exit_task_context(struct task_struct *task, bool exit)
-    {
     struct perf_event_context *ctx, *clone_ctx = core::ptr::null_mut();
-    struct perf_event *child_event, *next;
+    let mut child_event = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
     ctx = perf_pin_task_context(task);
-    if (!ctx)
+    if (!ctx) {
     return;
+    }
 //
 // In order to reduce the amount of tricky in ctx tear-down, we hold
 // ctx::mutex over the entire thing. This serializes against almost
@@ -12753,8 +11481,9 @@ unsafe extern "C" fn perf_event_exit_task_context(task: *mut task_struct, exit: 
 // in.
 //
     raw_spin_lock_irq(&ctx.lock);
-    if (exit)
+    if (exit) {
     task_ctx_sched_out(ctx, core::ptr::null_mut(), EVENT_ALL);
+    }
 //
 // Now that the context is inactive, destroy the task <-> ctx relation
 // and mark the context dead.
@@ -12765,17 +11494,20 @@ unsafe extern "C" fn perf_event_exit_task_context(task: *mut task_struct, exit: 
     put_task_struct(task); /* cannot be last */
     clone_ctx = unclone_ctx(ctx);
     raw_spin_unlock_irq(&ctx.lock);
-    if (clone_ctx)
+    if (clone_ctx) {
     put_ctx(clone_ctx);
+    }
 //
 // Report the task dead after unscheduling the events so that we
 // won't get any samples after PERF_RECORD_EXIT. We can however still
 // get a few PERF_RECORD_READ events.
 //
-    if (exit)
+    if (exit) {
     perf_event_task(task, ctx, 0);
-    list_for_each_entry_safe(child_event, next, &ctx.event_list, event_entry)
+    }
+    list_for_each_entry_safe(child_event, next, &ctx.event_list, event_entry) {
     perf_event_exit_event(child_event, ctx, exit ? task : core::ptr::null_mut(), 0);
+    }
     mutex_unlock(&ctx.mutex);
     if (!exit) {
 //
@@ -12804,10 +11536,9 @@ unsafe extern "C" fn perf_event_exit_task_context(task: *mut task_struct, exit: 
 //
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_exit_task(task: *mut task_struct) {
-    void perf_event_exit_task(struct task_struct *task)
-    {
-    struct perf_event *event, *tmp;
-    WARN_ON_ONCE(task != current);
+    let mut event = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
+    WARN_ON_ONCE!(task != current);
     mutex_lock(&task.perf_event_mutex);
     list_for_each_entry_safe(event, tmp, &task.perf_event_list,
     owner_entry) {
@@ -12846,63 +11577,59 @@ pub unsafe extern "C" fn perf_event_exit_task(task: *mut task_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_free_task(task: *mut task_struct) {
-    void perf_event_free_task(struct task_struct *task)
-    {
     perf_event_exit_task_context(task, false);
     }
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_delayed_put(task: *mut task_struct) {
-    void perf_event_delayed_put(struct task_struct *task)
-    {
-    WARN_ON_ONCE(task.perf_event_ctxp);
+    WARN_ON_ONCE!(task.perf_event_ctxp);
     }
-    struct file *perf_event_get(unsigned int fd)
-    {
-    struct file *file = fget(fd);
-    if (!file)
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_get(fd: c_uint) -> *mut c_void {
+    let mut file = fget(fd);
+    if (!file) {
     return ERR_PTR(-EBADF);
+    }
     if (file.f_op != &perf_fops) {
     fput(file);
     return ERR_PTR(-EBADF);
     }
     return file;
     }
-    const struct perf_event *perf_get_event(struct file *file)
+    const struct perf_event *perf_get_event(file *file)
     {
-    if (file.f_op != &perf_fops)
+    if (file.f_op != &perf_fops) {
     return ERR_PTR(-EINVAL);
+    }
     return file.private_data;
     }
-    const struct perf_event_attr *perf_event_attrs(struct perf_event *event)
+    const struct perf_event_attr *perf_event_attrs(perf_event *event)
     {
-    if (!event)
+    if (!event) {
     return ERR_PTR(-EINVAL);
+    }
     return &event.attr;
     }
 #[no_mangle]
 pub unsafe extern "C" fn perf_allow_kernel() -> c_int {
-    int perf_allow_kernel(void)
-    {
-    if (sysctl_perf_event_paranoid > 1 && !perfmon_capable())
+    if (sysctl_perf_event_paranoid > 1 && !perfmon_capable()) {
     return -EACCES;
+    }
     return security_perf_event_open(PERF_SECURITY_KERNEL);
     }
     EXPORT_SYMBOL_GPL(perf_allow_kernel);
 #[no_mangle]
 pub unsafe extern "C" fn perf_allow_cpu() -> c_int {
-    int perf_allow_cpu(void)
-    {
-    if (sysctl_perf_event_paranoid > 0 && !perfmon_capable())
+    if (sysctl_perf_event_paranoid > 0 && !perfmon_capable()) {
     return -EACCES;
+    }
     return security_perf_event_open(PERF_SECURITY_CPU);
     }
     EXPORT_SYMBOL_GPL(perf_allow_cpu);
 #[no_mangle]
 pub unsafe extern "C" fn perf_allow_tracepoint() -> c_int {
-    int perf_allow_tracepoint(void)
-    {
-    if (sysctl_perf_event_paranoid > -1 && !perfmon_capable())
+    if (sysctl_perf_event_paranoid > -1 && !perfmon_capable()) {
     return -EPERM;
+    }
     return security_perf_event_open(PERF_SECURITY_TRACEPOINT);
     }
     EXPORT_SYMBOL_GPL(perf_allow_tracepoint);
@@ -12914,28 +11641,24 @@ pub unsafe extern "C" fn perf_allow_tracepoint() -> c_int {
 // - NULL for orphaned events
 // - IS_ERR() on error
 //
-    static struct perf_event *
-    inherit_event(struct perf_event *parent_event,
-    struct task_struct *parent,
-    struct perf_event_context *parent_ctx,
-    struct task_struct *child,
-    struct perf_event *group_leader,
-    struct perf_event_context *child_ctx)
-    {
-    let mut parent_state: enum perf_event_state = parent_event.state;
-    struct perf_event_pmu_context *pmu_ctx;
-    struct perf_event *child_event;
-    unsigned long flags;
+#[no_mangle]
+pub unsafe extern "C" fn inherit_event(parent_event: *mut perf_event, parent: *mut task_struct, parent_ctx: *mut perf_event_context, child: *mut task_struct, group_leader: *mut perf_event, child_ctx: *mut perf_event_context) -> *mut c_void {
+pub static mut parent_state: perf_event_state = 0;
+pub static mut pmu_ctx: *mut c_void = core::ptr::null_mut();
+pub static mut child_event: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
 //
 // Instead of creating recursive hierarchies of events,
 // we link inherited events back to the original parent,
 // which has a filp for sure, which we use as the reference
 // count:
 //
-    if (parent_event.parent)
+    if (parent_event.parent) {
     parent_event = parent_event.parent;
-    if (parent_event.state <= PERF_EVENT_STATE_REVOKED)
+    }
+    if (parent_event.state <= PERF_EVENT_STATE_REVOKED) {
     return core::ptr::null_mut();
+    }
 //
 // Event creation should be under SRCU, see perf_pmu_unregister().
 //
@@ -12945,8 +11668,9 @@ pub unsafe extern "C" fn perf_allow_tracepoint() -> c_int {
     child,
     group_leader, parent_event,
     core::ptr::null_mut(), core::ptr::null_mut(), -1);
-    if (IS_ERR(child_event))
+    if (IS_ERR(child_event)) {
     return child_event;
+    }
     get_ctx(child_ctx);
     child_event.ctx = child_ctx;
     pmu_ctx = find_get_pmu_context(parent_event.pmu_ctx.pmu, child_ctx, child_event);
@@ -12973,13 +11697,15 @@ pub unsafe extern "C" fn perf_allow_tracepoint() -> c_int {
 // not its attr.disabled bit.  We hold the parent's mutex,
 // so we won't race with perf_event_{en, dis}able_family.
 //
-    if (parent_state >= PERF_EVENT_STATE_INACTIVE)
+    if (parent_state >= PERF_EVENT_STATE_INACTIVE) {
     child_event.state = PERF_EVENT_STATE_INACTIVE;
-    else
+    }
+    else {
     child_event.state = PERF_EVENT_STATE_OFF;
+    }
     if (parent_event.attr.freq) {
-    let mut sample_period: u64 = parent_event.hw.sample_period;
-    struct hw_perf_event *hwc = &child_event.hw;
+pub static mut sample_period: u64 = 0;
+    let mut hwc = &child_event.hw;
     hwc.sample_period = sample_period;
     hwc.last_period   = sample_period;
     local64_set(&hwc.period_left, sample_period);
@@ -13016,19 +11742,16 @@ pub unsafe extern "C" fn perf_allow_tracepoint() -> c_int {
 // - 0 on success
 // - <0 on error
 //
-    static int inherit_group(struct perf_event *parent_event,
-    struct task_struct *parent,
-    struct perf_event_context *parent_ctx,
-    struct task_struct *child,
-    struct perf_event_context *child_ctx)
-    {
-    struct perf_event *leader;
-    struct perf_event *sub;
-    struct perf_event *child_ctr;
+#[no_mangle]
+pub unsafe extern "C" fn inherit_group(parent_event: *mut perf_event, parent: *mut task_struct, parent_ctx: *mut perf_event_context, child: *mut task_struct, child_ctx: *mut perf_event_context) -> c_int {
+pub static mut leader: *mut c_void = core::ptr::null_mut();
+pub static mut sub: *mut c_void = core::ptr::null_mut();
+pub static mut child_ctr: *mut c_void = core::ptr::null_mut();
     leader = inherit_event(parent_event, parent, parent_ctx,
     child, core::ptr::null_mut(), child_ctx);
-    if (IS_ERR(leader))
+    if (IS_ERR(leader)) {
     return PTR_ERR(leader);
+    }
 //
 // @leader can be NULL here because of is_orphaned_event(). In this
 // case inherit_event() will create individual events, similar to what
@@ -13037,14 +11760,17 @@ pub unsafe extern "C" fn perf_allow_tracepoint() -> c_int {
     for_each_sibling_event(sub, parent_event) {
     child_ctr = inherit_event(sub, parent, parent_ctx,
     child, leader, child_ctx);
-    if (IS_ERR(child_ctr))
+    if (IS_ERR(child_ctr)) {
     return PTR_ERR(child_ctr);
+    }
     if (sub.aux_event == parent_event && child_ctr &&
-    !perf_get_aux_event(child_ctr, leader))
+    !perf_get_aux_event(child_ctr, leader)) {
     return -EINVAL;
     }
-    if (leader)
+    }
+    if (leader) {
     leader.group_generation = parent_event.group_generation;
+    }
     return 0;
     }
 //
@@ -13058,14 +11784,10 @@ pub unsafe extern "C" fn perf_allow_tracepoint() -> c_int {
 // - 0 on success
 // - <0 on error
 //
-    static int
-    inherit_task_group(struct perf_event *event, struct task_struct *parent,
-    struct perf_event_context *parent_ctx,
-    struct task_struct *child,
-    u64 clone_flags, int *inherited_all)
-    {
-    struct perf_event_context *child_ctx;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn inherit_task_group(event: *mut perf_event, parent: *mut task_struct, parent_ctx: *mut perf_event_context, child: *mut task_struct, clone_flags: u64, inherited_all: *mut c_int) -> c_int {
+pub static mut child_ctx: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     if (!event.attr.inherit ||
     (event.attr.inherit_thread && !(clone_flags & CLONE_THREAD)) ||
 // Do not inherit if sigtrap and signal handlers were cleared.
@@ -13082,13 +11804,15 @@ pub unsafe extern "C" fn perf_allow_tracepoint() -> c_int {
 // child.
 //
     child_ctx = alloc_perf_context(child);
-    if (!child_ctx)
+    if (!child_ctx) {
     return -ENOMEM;
+    }
     child.perf_event_ctxp = child_ctx;
     }
     ret = inherit_group(event, parent, parent_ctx, child, child_ctx);
-    if (ret)
+    if (ret) {
 // inherited_all = 0;
+    }
     return ret;
     }
 //
@@ -13096,24 +11820,25 @@ pub unsafe extern "C" fn perf_allow_tracepoint() -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn perf_event_init_context(child: *mut task_struct, clone_flags: u64) -> c_int {
-    static int perf_event_init_context(struct task_struct *child, u64 clone_flags)
-    {
-    struct perf_event_context *child_ctx, *parent_ctx;
-    struct perf_event_context *cloned_ctx;
-    struct perf_event *event;
-    struct task_struct *parent = current;
-    let mut inherited_all: c_int = 1;
-    unsigned long flags;
-    let mut ret: c_int = 0;
-    if (likely(!parent.perf_event_ctxp))
+    let mut child_ctx = core::ptr::null_mut();
+    let mut parent_ctx = core::ptr::null_mut();
+pub static mut cloned_ctx: *mut c_void = core::ptr::null_mut();
+pub static mut event: *mut c_void = core::ptr::null_mut();
+    let mut parent = current;
+pub static mut inherited_all: c_int = 1;
+    let mut flags = 0;
+pub static mut ret: c_int = 0;
+    if (likely(!parent.perf_event_ctxp)) {
     return 0;
+    }
 //
 // If the parent's context is a clone, pin it so it won't get
 // swapped under us.
 //
     parent_ctx = perf_pin_task_context(parent);
-    if (!parent_ctx)
+    if (!parent_ctx) {
     return 0;
+    }
 //
 // No need to check if parent_ctx != NULL here; since we saw
 // it non-NULL earlier, the only reason for it to become NULL
@@ -13131,8 +11856,9 @@ unsafe extern "C" fn perf_event_init_context(child: *mut task_struct, clone_flag
     perf_event_groups_for_each(event, &parent_ctx.pinned_groups) {
     ret = inherit_task_group(event, parent, parent_ctx,
     child, clone_flags, &inherited_all);
-    if (ret)
-    goto out_unlock;
+    if (ret) {
+// goto;
+    }
     }
 //
 // We can't hold ctx->lock when iterating the ->flexible_group list due
@@ -13145,8 +11871,9 @@ unsafe extern "C" fn perf_event_init_context(child: *mut task_struct, clone_flag
     perf_event_groups_for_each(event, &parent_ctx.flexible_groups) {
     ret = inherit_task_group(event, parent, parent_ctx,
     child, clone_flags, &inherited_all);
-    if (ret)
-    goto out_unlock;
+    if (ret) {
+// goto;
+    }
     }
     raw_spin_lock_irqsave(&parent_ctx.lock, flags);
     parent_ctx.rotate_disable = 0;
@@ -13170,7 +11897,7 @@ unsafe extern "C" fn perf_event_init_context(child: *mut task_struct, clone_flag
     get_ctx(child_ctx.parent_ctx);
     }
     raw_spin_unlock_irqrestore(&parent_ctx.lock, flags);
-    out_unlock:
+// label;
     mutex_unlock(&parent_ctx.mutex);
     perf_unpin_context(parent_ctx);
     put_ctx(parent_ctx);
@@ -13181,10 +11908,8 @@ unsafe extern "C" fn perf_event_init_context(child: *mut task_struct, clone_flag
 //
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_init_task(child: *mut task_struct, clone_flags: u64) -> c_int {
-    int perf_event_init_task(struct task_struct *child, u64 clone_flags)
-    {
-    int ret;
-    memset(child.perf_recursion, 0, sizeof(child.perf_recursion));
+    let mut ret = 0;
+    memset(child.perf_recursion, 0, sizeof!(child.perf_recursion));
     child.perf_event_ctxp = core::ptr::null_mut();
     mutex_init(&child.perf_event_mutex);
     INIT_LIST_HEAD(&child.perf_event_list);
@@ -13197,12 +11922,10 @@ pub unsafe extern "C" fn perf_event_init_task(child: *mut task_struct, clone_fla
     return 0;
     }
 #[no_mangle]
-unsafe extern "C" fn perf_event_init_all_cpus() -> void __init {
-    static void __init perf_event_init_all_cpus(void)
-    {
-    struct swevent_htable *swhash;
-    struct perf_cpu_context *cpuctx;
-    int cpu;
+unsafe extern "C" fn perf_event_init_all_cpus()  {
+pub static mut swhash: *mut c_void = core::ptr::null_mut();
+pub static mut cpuctx: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
     zalloc_cpumask_var(&perf_online_mask, GFP_KERNEL);
     zalloc_cpumask_var(&perf_online_core_mask, GFP_KERNEL);
     zalloc_cpumask_var(&perf_online_die_mask, GFP_KERNEL);
@@ -13220,20 +11943,18 @@ unsafe extern "C" fn perf_event_init_all_cpus() -> void __init {
     lockdep_set_class(&cpuctx.ctx.mutex, &cpuctx_mutex);
     lockdep_set_class(&cpuctx.ctx.lock, &cpuctx_lock);
     cpuctx.online = cpumask_test_cpu(cpu, perf_online_mask);
-    cpuctx.heap_size = ARRAY_SIZE(cpuctx.heap_default);
+    cpuctx.heap_size = ARRAY_SIZE!(cpuctx.heap_default);
     cpuctx.heap = cpuctx.heap_default;
     }
     }
 #[no_mangle]
 unsafe extern "C" fn perf_swevent_init_cpu(cpu: c_uint) {
-    static void perf_swevent_init_cpu(unsigned int cpu)
-    {
-    struct swevent_htable *swhash = &per_cpu(swevent_htable, cpu);
+    let mut swhash = &per_cpu(swevent_htable, cpu);
     mutex_lock(&swhash.hlist_mutex);
     if (swhash.hlist_refcount > 0 && !swevent_hlist_deref(swhash)) {
-    struct swevent_hlist *hlist;
-    hlist = kzalloc_node(sizeof(*hlist), GFP_KERNEL, cpu_to_node(cpu));
-    WARN_ON(!hlist);
+pub static mut hlist: *mut c_void = core::ptr::null_mut();
+    hlist = kzalloc_node(sizeof!(*hlist), GFP_KERNEL, cpu_to_node(cpu));
+    WARN_ON!(!hlist);
     rcu_assign_pointer(swhash.swevent_hlist, hlist);
     }
     mutex_unlock(&swhash.hlist_mutex);
@@ -13241,52 +11962,52 @@ unsafe extern "C" fn perf_swevent_init_cpu(cpu: c_uint) {
 
 #[no_mangle]
 unsafe extern "C" fn __perf_event_exit_context(__info: *mut c_void) {
-    static void __perf_event_exit_context(void *__info)
-    {
-    struct perf_cpu_context *cpuctx = this_cpu_ptr(&perf_cpu_context);
-    struct perf_event_context *ctx = __info;
-    struct perf_event *event;
+    let mut cpuctx = this_cpu_ptr(&perf_cpu_context);
+    let mut ctx = __info;
+pub static mut event: *mut c_void = core::ptr::null_mut();
     raw_spin_lock(&ctx.lock);
     ctx_sched_out(ctx, core::ptr::null_mut(), EVENT_TIME);
-    list_for_each_entry(event, &ctx.event_list, event_entry)
-    __perf_remove_from_context(event, cpuctx, ctx, (void *)DETACH_GROUP);
+    list_for_each_entry(event, &ctx.event_list, event_entry) {
+    __perf_remove_from_context(event, cpuctx, ctx, DETACH_GROUP);
+    }
     raw_spin_unlock(&ctx.lock);
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_clear_cpumask(cpu: c_uint) {
-    static void perf_event_clear_cpumask(unsigned int cpu)
-    {
     int target[PERF_PMU_MAX_SCOPE];
-    unsigned int scope;
-    struct pmu *pmu;
+    let mut scope = 0;
+pub static mut pmu: *mut c_void = core::ptr::null_mut();
     cpumask_clear_cpu(cpu, perf_online_mask);
-    for (scope = PERF_PMU_SCOPE_NONE + 1; scope < PERF_PMU_MAX_SCOPE; scope++) {
-    const struct cpumask *cpumask = perf_scope_cpu_topology_cpumask(scope, cpu);
-    struct cpumask *pmu_cpumask = perf_scope_cpumask(scope);
+    while (scope < PERF_PMU_MAX_SCOPE) {
+    let mut cpumask = perf_scope_cpu_topology_cpumask(scope, cpu);
+    let mut pmu_cpumask = perf_scope_cpumask(scope);
     target[scope] = -1;
-    if (WARN_ON_ONCE(!pmu_cpumask || !cpumask))
+    if (WARN_ON_ONCE!(!pmu_cpumask || !cpumask)) {
     continue;
-    if (!cpumask_test_and_clear_cpu(cpu, pmu_cpumask))
+    }
+    if (!cpumask_test_and_clear_cpu(cpu, pmu_cpumask)) {
     continue;
+    }
     target[scope] = cpumask_any_but(cpumask, cpu);
-    if (target[scope] < nr_cpu_ids)
+    if (target[scope] < nr_cpu_ids) {
     cpumask_set_cpu(target[scope], pmu_cpumask);
+    }
     }
 // migrate
     list_for_each_entry(pmu, &pmus, entry) {
     if (pmu.scope == PERF_PMU_SCOPE_NONE ||
-    WARN_ON_ONCE(pmu.scope >= PERF_PMU_MAX_SCOPE))
+    WARN_ON_ONCE!(pmu.scope >= PERF_PMU_MAX_SCOPE)) {
     continue;
-    if (target[pmu.scope] >= 0 && target[pmu.scope] < nr_cpu_ids)
+    }
+    if (target[pmu.scope] >= 0 && target[pmu.scope] < nr_cpu_ids) {
     perf_pmu_migrate_context(pmu, cpu, target[pmu.scope]);
+    }
     }
     }
 #[no_mangle]
 unsafe extern "C" fn perf_event_exit_cpu_context(cpu: c_int) {
-    static void perf_event_exit_cpu_context(int cpu)
-    {
-    struct perf_cpu_context *cpuctx;
-    struct perf_event_context *ctx;
+pub static mut cpuctx: *mut c_void = core::ptr::null_mut();
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
 // XXX simplify cpuctx->online
     mutex_lock(&pmus_lock);
 //
@@ -13297,53 +12018,54 @@ unsafe extern "C" fn perf_event_exit_cpu_context(cpu: c_int) {
     cpuctx = per_cpu_ptr(&perf_cpu_context, cpu);
     ctx = &cpuctx.ctx;
     mutex_lock(&ctx.mutex);
-    if (ctx.nr_events)
+    if (ctx.nr_events) {
     smp_call_function_single(cpu, __perf_event_exit_context, ctx, 1);
+    }
     cpuctx.online = 0;
     mutex_unlock(&ctx.mutex);
     mutex_unlock(&pmus_lock);
     }
 
-    static void perf_event_exit_cpu_context(int cpu) { }
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_exit_cpu_context(cpu: c_int) { }
 
 #[no_mangle]
 unsafe extern "C" fn perf_event_setup_cpumask(cpu: c_uint) {
-    static void perf_event_setup_cpumask(unsigned int cpu)
-    {
-    struct cpumask *pmu_cpumask;
-    unsigned int scope;
+pub static mut pmu_cpumask: *mut c_void = core::ptr::null_mut();
+    let mut scope = 0;
 //
 // Early boot stage, the cpumask hasn't been set yet.
 // The perf_online_<domain>_masks includes the first CPU of each domain.
 // Always unconditionally set the boot CPU for the perf_online_<domain>_masks.
 //
     if (cpumask_empty(perf_online_mask)) {
-    for (scope = PERF_PMU_SCOPE_NONE + 1; scope < PERF_PMU_MAX_SCOPE; scope++) {
+    while (scope < PERF_PMU_MAX_SCOPE) {
     pmu_cpumask = perf_scope_cpumask(scope);
-    if (WARN_ON_ONCE(!pmu_cpumask))
+    if (WARN_ON_ONCE!(!pmu_cpumask)) {
     continue;
+    }
     cpumask_set_cpu(cpu, pmu_cpumask);
     }
-    goto end;
+// goto;
     }
-    for (scope = PERF_PMU_SCOPE_NONE + 1; scope < PERF_PMU_MAX_SCOPE; scope++) {
-    const struct cpumask *cpumask = perf_scope_cpu_topology_cpumask(scope, cpu);
+    while (scope < PERF_PMU_MAX_SCOPE) {
+    let mut cpumask = perf_scope_cpu_topology_cpumask(scope, cpu);
     pmu_cpumask = perf_scope_cpumask(scope);
-    if (WARN_ON_ONCE(!pmu_cpumask || !cpumask))
+    if (WARN_ON_ONCE!(!pmu_cpumask || !cpumask)) {
     continue;
+    }
     if (!cpumask_empty(cpumask) &&
-    cpumask_any_and(pmu_cpumask, cpumask) >= nr_cpu_ids)
+    cpumask_any_and(pmu_cpumask, cpumask) >= nr_cpu_ids) {
     cpumask_set_cpu(cpu, pmu_cpumask);
     }
-    end:
+    }
+// label;
     cpumask_set_cpu(cpu, perf_online_mask);
     }
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_init_cpu(cpu: c_uint) -> c_int {
-    int perf_event_init_cpu(unsigned int cpu)
-    {
-    struct perf_cpu_context *cpuctx;
-    struct perf_event_context *ctx;
+pub static mut cpuctx: *mut c_void = core::ptr::null_mut();
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
     perf_swevent_init_cpu(cpu);
     mutex_lock(&pmus_lock);
     perf_event_setup_cpumask(cpu);
@@ -13357,32 +12079,25 @@ pub unsafe extern "C" fn perf_event_init_cpu(cpu: c_uint) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn perf_event_exit_cpu(cpu: c_uint) -> c_int {
-    int perf_event_exit_cpu(unsigned int cpu)
-    {
     perf_event_exit_cpu_context(cpu);
     return 0;
     }
-    static int
-    perf_reboot(struct notifier_block *notifier, unsigned long val, void *v)
-    {
-    int cpu;
-    for_each_online_cpu(cpu)
+#[no_mangle]
+pub unsafe extern "C" fn perf_reboot(notifier: *mut notifier_block, val: c_ulong, v: *mut c_void) -> c_int {
+    let mut cpu = 0;
+    for_each_online_cpu(cpu) {
     perf_event_exit_cpu(cpu);
+    }
     return NOTIFY_OK;
     }
 //
 // Run the perf reboot notifier at the very last possible moment so that
 // the generic watchdog code runs as long as possible.
 //
-    static struct notifier_block perf_reboot_notifier = {
-    .notifier_call = perf_reboot,
-    .priority = INT_MIN,
-    };
+pub static mut notifier_block: usize = 0;
 #[no_mangle]
-pub unsafe extern "C" fn perf_event_init() -> void __init {
-    void __init perf_event_init(void)
-    {
-    int ret;
+pub unsafe extern "C" fn perf_event_init()  {
+    let mut ret = 0;
     idr_init(&pmu_idr);
     unwind_deferred_init(&perf_unwind_work,
     perf_unwind_deferred_callback);
@@ -13401,51 +12116,50 @@ pub unsafe extern "C" fn perf_event_init() -> void __init {
 // Build time assertion that we keep the data_head at the intended
 // location.  IOW, validation we got the __reserved[] size right.
 //
-    BUILD_BUG_ON((offsetof(struct perf_event_mmap_page, data_head))
+    BUILD_BUG_ON!((offsetof(perf_event_mmap_page, data_head))
     != 1024);
     }
-    ssize_t perf_event_sysfs_show(struct device *dev, struct device_attribute *attr,
-    char *page)
-    {
-    struct perf_pmu_events_attr *pmu_attr =
-    container_of(attr, struct perf_pmu_events_attr, attr);
-    if (pmu_attr.event_str)
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_sysfs_show(dev: *mut device, attr: *mut device_attribute, page: *mut c_char) -> ssize_t {
+    let mut pmu_attr = container_of!(attr, perf_pmu_events_attr, attr);
+    if (pmu_attr.event_str) {
     return sprintf(page, "%s\n", pmu_attr.event_str);
+    }
     return 0;
     }
     EXPORT_SYMBOL_GPL(perf_event_sysfs_show);
 #[no_mangle]
-unsafe extern "C" fn perf_event_sysfs_init() -> int __init {
-    static int __init perf_event_sysfs_init(void)
-    {
-    struct pmu *pmu;
-    int ret;
+unsafe extern "C" fn perf_event_sysfs_init() -> c_int {
+pub static mut pmu: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     mutex_lock(&pmus_lock);
     ret = bus_register(&pmu_bus);
-    if (ret)
-    goto unlock;
+    if (ret) {
+// goto;
+    }
     list_for_each_entry(pmu, &pmus, entry) {
-    if (pmu.dev)
+    if (pmu.dev) {
     continue;
+    }
     ret = pmu_dev_alloc(pmu);
     WARN(ret, "Failed to register pmu: %s, reason %d\n", pmu.name, ret);
     }
     pmu_bus_running = 1;
     ret = 0;
-    unlock:
+// label;
     mutex_unlock(&pmus_lock);
     return ret;
     }
-    device_initcall(perf_event_sysfs_init);
+    device_initcall!(perf_event_sysfs_init);
 
-    static struct cgroup_subsys_state *
-    perf_cgroup_css_alloc(struct cgroup_subsys_state *parent_css)
-    {
-    struct perf_cgroup *jc;
+#[no_mangle]
+pub unsafe extern "C" fn perf_cgroup_css_alloc(parent_css: *mut cgroup_subsys_state) -> *mut c_void {
+pub static mut jc: *mut c_void = core::ptr::null_mut();
     jc = kzalloc_obj(*jc);
-    if (!jc)
+    if (!jc) {
     return ERR_PTR(-ENOMEM);
-    jc.info = alloc_percpu(struct perf_cgroup_info);
+    }
+    jc.info = alloc_percpu(perf_cgroup_info);
     if (!jc.info) {
     kfree(jc);
     return ERR_PTR(-ENOMEM);
@@ -13454,24 +12168,18 @@ unsafe extern "C" fn perf_event_sysfs_init() -> int __init {
     }
 #[no_mangle]
 unsafe extern "C" fn perf_cgroup_css_free(css: *mut cgroup_subsys_state) {
-    static void perf_cgroup_css_free(struct cgroup_subsys_state *css)
-    {
-    struct perf_cgroup *jc = container_of(css, struct perf_cgroup, css);
+    let mut jc = container_of!(css, perf_cgroup, css);
     free_percpu(jc.info);
     kfree(jc);
     }
 #[no_mangle]
 unsafe extern "C" fn perf_cgroup_css_online(css: *mut cgroup_subsys_state) -> c_int {
-    static int perf_cgroup_css_online(struct cgroup_subsys_state *css)
-    {
     perf_event_cgroup(css.cgroup);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn __perf_cgroup_move(info: *mut c_void) -> c_int {
-    static int __perf_cgroup_move(void *info)
-    {
-    struct task_struct *task = info;
+    let mut task = info;
     preempt_disable();
     perf_cgroup_switch(task);
     preempt_enable();
@@ -13479,25 +12187,11 @@ unsafe extern "C" fn __perf_cgroup_move(info: *mut c_void) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn perf_cgroup_attach(tset: *mut cgroup_taskset) {
-    static void perf_cgroup_attach(struct cgroup_taskset *tset)
-    {
-    struct task_struct *task;
-    struct cgroup_subsys_state *css;
+pub static mut task: *mut c_void = core::ptr::null_mut();
+pub static mut css: *mut c_void = core::ptr::null_mut();
     cgroup_taskset_for_each(task, css, tset)
     task_function_call(task, __perf_cgroup_move, task);
     }
-    struct cgroup_subsys perf_event_cgrp_subsys = {
-    .css_alloc	= perf_cgroup_css_alloc,
-    .css_free	= perf_cgroup_css_free,
-    .css_online	= perf_cgroup_css_online,
-    .attach		= perf_cgroup_attach,
-//
-// Implicitly enable on dfl hierarchy so that perf events can
-// always be filtered by cgroup2 path as long as perf_event
-// controller is not mounted on a legacy hierarchy.
-//
-    .implicit_on_dfl = true,
-    .threaded	= true,
-    };
+pub static mut cgroup_subsys: usize = 0;
 
-    DEFINE_STATIC_CALL_RET0(perf_snapshot_branch_stack, perf_snapshot_branch_stack_t);
+pub static mut perf_snapshot_branch_stack: usize = 0;

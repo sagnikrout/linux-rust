@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -128,10 +378,10 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct llc_shard_layout {
-    pub /: *mut *mut int nr_large_shards; / number of large shards (cores_per_shard + 1),
-    pub /: *mut *mut int cores_per_shard; / base number of cores per default shard,
-    pub /: *mut *mut int nr_shards; / total number of shards,
-// nr_default shards = (nr_shards - nr_large_shards)
+//     pub /: *mut *mut int nr_large_shards; / number of large shards (cores_per_shard + 1),
+//     pub /: *mut *mut int cores_per_shard; / base number of cores per default shard,
+//     pub /: *mut *mut int nr_shards; / total number of shards,
+nr_default shards = (nr_shards - nr_large_shards)
 }
 
 //
@@ -187,13 +437,13 @@ pub const BH_WORKER_RESTARTS: c_int = 10;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct worker_pool {
-    pub /: *mut *mut raw_spinlock_t lock; / the pool lock,
-    pub /: *mut *mut int cpu; / I: the associated cpu,
-    pub /: *mut *mut int node; / I: the associated node ID,
-    pub /: *mut *mut int id; / I: pool ID,
-    pub /: *mut *mut unsigned int flags; / L: flags,
-    pub /: *mut *mut unsigned long last_progress_ts; / L: last forward progress timestamp,
-    pub /: *mut *mut bool cpu_stall; / WD: stalled cpu bound pool,
+//     pub /: *mut *mut raw_spinlock_t lock; / the pool lock,
+//     pub /: *mut *mut int cpu; / I: the associated cpu,
+//     pub /: *mut *mut int node; / I: the associated node ID,
+//     pub /: *mut *mut int id; / I: pool ID,
+//     pub /: *mut *mut unsigned int flags; / L: flags,
+//     pub /: *mut *mut unsigned long last_progress_ts; / L: last forward progress timestamp,
+//     pub /: *mut *mut bool cpu_stall; / WD: stalled cpu bound pool,
 //
 // The counter is incremented in a process context on the associated CPU
 // w/ preemption disabled, and decremented or reset in the same context
@@ -201,26 +451,26 @@ pub struct worker_pool {
 // guaranteed to see if the counter reached zero.
 //
     pub nr_running: c_int,
-    pub /: *mut *mut list_head worklist; / L: list of pending works,
-    pub /: *mut *mut int nr_workers; / L: total number of workers,
-    pub /: *mut *mut int nr_idle; / L: currently idle workers,
-    pub /: *mut *mut list_head idle_list; / L: list of idle workers,
-    pub /: *mut *mut timer_list idle_timer; / L: worker idle timeout,
-    pub /: *mut *mut work_idle_cull_work; / L: worker idle cleanup,
-    pub /: *mut *mut timer_list mayday_timer; / L: SOS timer for workers,
+//     pub /: *mut *mut list_head worklist; / L: list of pending works,
+//     pub /: *mut *mut int nr_workers; / L: total number of workers,
+//     pub /: *mut *mut int nr_idle; / L: currently idle workers,
+//     pub /: *mut *mut list_head idle_list; / L: list of idle workers,
+//     pub /: *mut *mut timer_list idle_timer; / L: worker idle timeout,
+//     pub /: *mut *mut work_idle_cull_work; / L: worker idle cleanup,
+//     pub /: *mut *mut timer_list mayday_timer; / L: SOS timer for workers,
 // a workers is either on busy_hash or idle_list, or the manager
     pub BUSY_WORKER_HASH_ORDER): DECLARE_HASHTABLE(busy_hash,,
 // L: hash of busy workers
-    pub /: *mut *mut *mut worker manager; / L: purely informational,
-// L: last worker woken by kick_pool()
+//     pub /: *mut *mut *mut worker manager; / L: purely informational,
+L: last worker woken by kick_pool()
     pub last_woken_worker: *mut worker,
-    pub /: *mut *mut list_head workers; / A: attached workers,
-    pub /: *mut *mut ida worker_ida; / worker IDs for task name,
-    pub /: *mut *mut *mut workqueue_attrs attrs; / I: worker attributes,
-    pub /: *mut *mut hlist_node hash_node; / PL: unbound_pool_hash node,
-    pub /: *mut *mut int refcnt; / PL: refcnt for unbound pools,
+//     pub /: *mut *mut list_head workers; / A: attached workers,
+//     pub /: *mut *mut ida worker_ida; / worker IDs for task name,
+//     pub /: *mut *mut *mut workqueue_attrs attrs; / I: worker attributes,
+//     pub /: *mut *mut hlist_node hash_node; / PL: unbound_pool_hash node,
+//     pub /: *mut *mut int refcnt; / PL: refcnt for unbound pools,
 
-    pub /: *mut *mut spinlock_t cb_lock; / BH worker cancel lock,
+//     pub /: *mut *mut spinlock_t cb_lock; / BH worker cancel lock,
 
 //
 // Destruction of pool is RCU protected to allow dereferences
@@ -253,14 +503,14 @@ pub struct worker_pool {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct pool_workqueue {
-    pub /: *mut *mut *mut worker_pool pool; / I: the associated pool,
-    pub /: *mut *mut *mut workqueue_wq; / I: the owning workqueue,
-    pub /: *mut *mut int work_color; / L: current color,
-    pub /: *mut *mut int flush_color; / L: flushing color,
-    pub /: *mut *mut int refcnt; / L: reference count,
+//     pub /: *mut *mut *mut worker_pool pool; / I: the associated pool,
+//     pub /: *mut *mut *mut workqueue_wq; / I: the owning workqueue,
+//     pub /: *mut *mut int work_color; / L: current color,
+//     pub /: *mut *mut int flush_color; / L: flushing color,
+//     pub /: *mut *mut int refcnt; / L: reference count,
     pub nr_in_flight: [c_int; WORK_NR_COLORS],
 // L: nr of in_flight works
-    pub /: *mut *mut bool plugged; / L: execution suspended,
+//     pub /: *mut *mut bool plugged; / L: execution suspended,
 //
 // nr_active management and WORK_STRUCT_INACTIVE:
 //
@@ -277,12 +527,12 @@ pub struct pool_workqueue {
 // in nr_active. For non-barrier work item, it is marked with
 // WORK_STRUCT_INACTIVE iff it is in pwq->inactive_works.
 //
-    pub /: *mut *mut int nr_active; / L: nr of active works,
-    pub /: *mut *mut list_head inactive_works; / L: inactive works,
-    pub /: *mut *mut list_head pending_node; / LN: node on wq_node_nr_active->pending_pwqs,
-    pub /: *mut *mut list_head pwqs_node; / WR: node on wq->pwqs,
-    pub /: *mut *mut list_head mayday_node; / MD: node on wq->maydays,
-    pub /: *mut *mut work_mayday_cursor; / L: cursor on pool->worklist,
+//     pub /: *mut *mut int nr_active; / L: nr of active works,
+//     pub /: *mut *mut list_head inactive_works; / L: inactive works,
+//     pub /: *mut *mut list_head pending_node; / LN: node on wq_node_nr_active->pending_pwqs,
+//     pub /: *mut *mut list_head pwqs_node; / WR: node on wq->pwqs,
+//     pub /: *mut *mut list_head mayday_node; / MD: node on wq->maydays,
+//     pub /: *mut *mut work_mayday_cursor; / L: cursor on pool->worklist,
     pub stats: [u64; PWQ_NR_STATS],
 //
 // Release of unbound pwq is punted to a kthread_worker. See put_pwq()
@@ -299,12 +549,12 @@ pub struct pool_workqueue {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct wq_flusher {
-    pub /: *mut *mut list_head list; / WQ: list of flushers,
-    pub /: *mut *mut int flush_color; / WQ: flush color waiting for,
-    pub /: *mut *mut completion done; / flush completion,
+//     pub /: *mut *mut list_head list; / WQ: list of flushers,
+//     pub /: *mut *mut int flush_color; / WQ: flush color waiting for,
+//     pub /: *mut *mut completion done; / flush completion,
 }
 
-    struct wq_device;
+    let mut wq_device;
 //
 // Unlike in a per-cpu workqueue where max_active limits its concurrency level
 // on each CPU, in an unbound workqueue, max_active applies to the whole system.
@@ -321,10 +571,10 @@ pub struct wq_flusher {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct wq_node_nr_active {
-    pub /: *mut *mut int max; / per-node max_active,
-    pub /: *mut *mut atomic_t nr; / per-node nr_active,
-    pub /: *mut *mut raw_spinlock_t lock; / nests inside pool locks,
-    pub /: *mut *mut list_head pending_pwqs; / LN: pwqs with inactive works,
+//     pub /: *mut *mut int max; / per-node max_active,
+//     pub /: *mut *mut atomic_t nr; / per-node nr_active,
+//     pub /: *mut *mut raw_spinlock_t lock; / nests inside pool locks,
+//     pub /: *mut *mut list_head pending_pwqs; / LN: pwqs with inactive works,
 }
 
 //
@@ -334,34 +584,34 @@ pub struct wq_node_nr_active {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct workqueue_struct {
-    pub /: *mut *mut list_head pwqs; / WR: all pwqs of this wq,
-    pub /: *mut *mut list_head list; / PR: list of all workqueues,
-    pub /: *mut *mut mutex mutex; / protects this wq,
-    pub /: *mut *mut int work_color; / WQ: current work color,
-    pub /: *mut *mut int flush_color; / WQ: current flush color,
-    pub /: *mut *mut atomic_t nr_pwqs_to_flush; / flush in progress,
-    pub /: *mut *mut *mut wq_flusher first_flusher; / WQ: first flusher,
-    pub /: *mut *mut list_head flusher_queue; / WQ: flush waiters,
-    pub /: *mut *mut list_head flusher_overflow; / WQ: flush overflow list,
-    pub /: *mut *mut list_head maydays; / MD: pwqs requesting rescue,
-    pub /: *mut *mut *mut worker rescuer; / MD: rescue worker,
-    pub /: *mut *mut int nr_drainers; / WQ: drain in progress,
+//     pub /: *mut *mut list_head pwqs; / WR: all pwqs of this wq,
+//     pub /: *mut *mut list_head list; / PR: list of all workqueues,
+//     pub /: *mut *mut mutex mutex; / protects this wq,
+//     pub /: *mut *mut int work_color; / WQ: current work color,
+//     pub /: *mut *mut int flush_color; / WQ: current flush color,
+//     pub /: *mut *mut atomic_t nr_pwqs_to_flush; / flush in progress,
+//     pub /: *mut *mut *mut wq_flusher first_flusher; / WQ: first flusher,
+//     pub /: *mut *mut list_head flusher_queue; / WQ: flush waiters,
+//     pub /: *mut *mut list_head flusher_overflow; / WQ: flush overflow list,
+//     pub /: *mut *mut list_head maydays; / MD: pwqs requesting rescue,
+//     pub /: *mut *mut *mut worker rescuer; / MD: rescue worker,
+//     pub /: *mut *mut int nr_drainers; / WQ: drain in progress,
 // See alloc_workqueue() function comment for info on min/max_active
-    pub /: *mut *mut int max_active; / WO: max active works,
-    pub /: *mut *mut int min_active; / WO: min active works,
-    pub /: *mut *mut int saved_max_active; / WQ: saved max_active,
-    pub /: *mut *mut int saved_min_active; / WQ: saved min_active,
-    pub /: *mut *mut *mut workqueue_attrs attrs; / PW: workqueue attributes,
-    pub /: *mut *mut *mut pool_workqueue __rcu dfl_pwq; / PW: only for unbound wqs,
+//     pub /: *mut *mut int max_active; / WO: max active works,
+//     pub /: *mut *mut int min_active; / WO: min active works,
+//     pub /: *mut *mut int saved_max_active; / WQ: saved max_active,
+//     pub /: *mut *mut int saved_min_active; / WQ: saved min_active,
+//     pub /: *mut *mut *mut workqueue_attrs attrs; / PW: workqueue attributes,
+//     pub /: *mut *mut *mut pool_workqueue  dfl_pwq; / PW: only for unbound wqs,
 
-    pub /: *mut *mut *mut wq_device wq_dev; / I: for sysfs interface,
+//     pub /: *mut *mut *mut wq_device wq_dev; / I: for sysfs interface,
 
     pub lock_name: *mut c_char,
     pub key: lock_class_key,
     pub __lockdep_map: lockdep_map,
     pub lockdep_map: *mut lockdep_map,
 
-    pub /: *mut *mut char name[WQ_NAME_LEN]; / I: workqueue name,
+//     pub /: *mut *mut char name[WQ_NAME_LEN]; / I: workqueue name,
 //
 // Destruction of workqueue_struct is RCU protected to allow walking
 // the workqueues list without grabbing wq_pool_mutex.
@@ -369,9 +619,9 @@ pub struct workqueue_struct {
 //
     pub rcu: rcu_head,
 // hot fields used during command issue, aligned to cacheline
-    pub /: *mut *mut *mut unsigned int flags ____cacheline_aligned; / WQ: WQ_ flags,
-    pub /: *mut *mut *mut *mut pool_workqueue __rcu  __percpu cpu_pwq; / I: per-cpu pwqs,
-    pub /: *mut *mut *mut wq_node_nr_active node_nr_active[]; / I: per-node nr_active,
+//     pub /: *mut *mut *mut unsigned int flags ____cacheline_aligned; / WQ: WQ_ flags,
+//     pub /: *mut *mut *mut *mut pool_workqueue    cpu_pwq; / I: per-cpu pwqs,
+//     pub /: *mut *mut *mut wq_node_nr_active node_nr_active[]; / I: per-node nr_active,
 }
 
 //
@@ -381,10 +631,10 @@ pub struct workqueue_struct {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct wq_pod_type {
-    pub /: *mut *mut int nr_pods; / number of pods,
-    pub /: *mut *mut *mut cpumask_var_t pod_cpus; / pod -> cpus,
-    pub /: *mut *mut *mut int pod_node; / pod -> node,
-    pub /: *mut *mut *mut int cpu_pod; / cpu -> pod,
+//     pub /: *mut *mut int nr_pods; / number of pods,
+//     pub /: *mut *mut *mut cpumask_var_t pod_cpus; / pod -> cpus,
+//     pub /: *mut *mut *mut int pod_node; / pod -> node,
+//     pub /: *mut *mut *mut int cpu_pod; / cpu -> pod,
 }
 
 #[repr(C)]
@@ -411,30 +661,30 @@ pub struct work_offq_data {
 // ULONG_MAX indicates that the user hasn't overridden it with a boot parameter.
 // The actual value is initialized in wq_cpu_intensive_thresh_init().
 //
-    let mut wq_cpu_intensive_thresh_us: static unsigned long = ULONG_MAX;
-    module_param_named(cpu_intensive_thresh_us, wq_cpu_intensive_thresh_us, ulong, 0644);
+pub static mut wq_cpu_intensive_thresh_us: unsigned long = 0;
+    module_param_named!(cpu_intensive_thresh_us, wq_cpu_intensive_thresh_us, ulong, 0644);
 
-    let mut wq_cpu_intensive_warning_thresh: static unsigned int = 4;
-    module_param_named(cpu_intensive_warning_thresh, wq_cpu_intensive_warning_thresh, uint, 0644);
+pub static mut wq_cpu_intensive_warning_thresh: unsigned int = 4;
+    module_param_named!(cpu_intensive_warning_thresh, wq_cpu_intensive_warning_thresh, uint, 0644);
 
 // see the comment above the definition of WQ_POWER_EFFICIENT
-    let mut wq_power_efficient: static bool = IS_ENABLED(CONFIG_WQ_POWER_EFFICIENT_DEFAULT);
-    module_param_named(power_efficient, wq_power_efficient, bool, 0444);
-    let mut wq_cache_shard_size: static unsigned int = 8;
-    module_param_named(cache_shard_size, wq_cache_shard_size, uint, 0444);
+pub static mut wq_power_efficient: bool = false;
+    module_param_named!(power_efficient, wq_power_efficient, bool, 0444);
+pub static mut wq_cache_shard_size: unsigned int = 8;
+    module_param_named!(cache_shard_size, wq_cache_shard_size, uint, 0444);
     static bool wq_online;			/* can kworkers be created yet? */
-    let mut __read_mostly: static bool wq_topo_initialized = false;
-    static struct kmem_cache *pwq_cache;
+pub static mut : bool wq_topo_initialized = false;
+pub static mut pwq_cache: *mut c_void = core::ptr::null_mut();
     static struct wq_pod_type wq_pod_types[WQ_AFFN_NR_TYPES];
-    let mut wq_affn_dfl: static enum wq_affn_scope = WQ_AFFN_CACHE_SHARD;
+pub static mut wq_affn_dfl: wq_affn_scope = 0;
 // buf for wq_update_unbound_pod_attrs(), protected by CPU hotplug exclusion
-    static struct workqueue_attrs *unbound_wq_update_pwq_attrs_buf;
-    static DEFINE_MUTEX(wq_pool_mutex);	/* protects pools and workqueues list */
-    static DEFINE_MUTEX(wq_pool_attach_mutex); /* protects worker attach/detach */
-    static DEFINE_RAW_SPINLOCK(wq_mayday_lock);	/* protects wq.maydays list */
+pub static mut unbound_wq_update_pwq_attrs_buf: *mut c_void = core::ptr::null_mut();
+pub static mut wq_pool_mutex: usize = 0;	/* protects pools and workqueues list */
+pub static mut wq_pool_attach_mutex: usize = 0; /* protects worker attach/detach */
+pub static mut wq_mayday_lock: usize = 0;	/* protects wq.maydays list */
 // wait for manager to go away
-    let mut manager_wait: static struct rcuwait = __RCUWAIT_INITIALIZER(manager_wait);
-    static LIST_HEAD(workqueues);		/* PR: list of all workqueues */
+pub static mut manager_wait: rcuwait = 0;
+pub static mut workqueues: usize = 0;		/* PR: list of all workqueues */
     static bool workqueue_freezing;		/* PL: have wqs started freezing? */
 // PL: mirror the cpu_online_mask excluding the CPU in the midst of hotplugging
     static cpumask_var_t wq_online_cpumask;
@@ -447,27 +697,27 @@ pub struct work_offq_data {
 // for further constrain wq_unbound_cpumask by cmdline parameter
     static struct cpumask wq_cmdline_cpumask __initdata;
 // CPU where unbound work was last round robin scheduled from this CPU
-    static DEFINE_PER_CPU(int, wq_rr_cpu_last);
+pub static mut int: usize = 0;
 //
 // Local execution of unbound work items is no longer guaranteed.  The
 // following always forces round-robin CPU selection on unbound work items
 // to uncover usages which depend on it.
 //
 
-    let mut wq_debug_force_rr_cpu: static bool = true;
+pub static mut wq_debug_force_rr_cpu: bool = true;
 
-    let mut wq_debug_force_rr_cpu: static bool = false;
+pub static mut wq_debug_force_rr_cpu: bool = false;
 
-    module_param_named(debug_force_rr_cpu, wq_debug_force_rr_cpu, bool, 0644);
+    module_param_named!(debug_force_rr_cpu, wq_debug_force_rr_cpu, bool, 0644);
 // to raise softirq for the BH worker pools on other CPUs
-    static DEFINE_PER_CPU_SHARED_ALIGNED(struct irq_work [NR_STD_WORKER_POOLS], bh_pool_irq_works);
+pub static mut struct irq_work [NR_STD_WORKER_POOLS]: usize = 0;
 // the BH worker pools
-    static DEFINE_PER_CPU_SHARED_ALIGNED(struct worker_pool [NR_STD_WORKER_POOLS], bh_worker_pools);
+pub static mut struct worker_pool [NR_STD_WORKER_POOLS]: usize = 0;
 // the per-cpu worker pools
-    static DEFINE_PER_CPU_SHARED_ALIGNED(struct worker_pool [NR_STD_WORKER_POOLS], cpu_worker_pools);
-    static DEFINE_IDR(worker_pool_idr);	/* PR: idr of all pools */
+pub static mut struct worker_pool [NR_STD_WORKER_POOLS]: usize = 0;
+pub static mut worker_pool_idr: usize = 0;	/* PR: idr of all pools */
 // PL: hash of all unbound pools keyed by pool->attrs
-    static DEFINE_HASHTABLE(unbound_pool_hash, UNBOUND_POOL_HASH_ORDER);
+pub static mut unbound_pool_hash: usize = 0;
 // I: attributes used when instantiating standard unbound pools on demand
     static struct workqueue_attrs *unbound_std_wq_attrs[NR_STD_WORKER_POOLS];
 // I: attributes used when instantiating ordered pools on demand
@@ -477,47 +727,48 @@ pub struct work_offq_data {
 // process context while holding a pool lock. Bounce to a dedicated kthread
 // worker to avoid A-A deadlocks.
 //
-    static struct kthread_worker *pwq_release_worker __ro_after_init;
-    struct workqueue_struct *system_wq __ro_after_init;
+pub static mut pwq_release_worker: *mut c_void = core::ptr::null_mut();
+pub static mut system_wq: *mut c_void = core::ptr::null_mut();
     EXPORT_SYMBOL(system_wq);
-    struct workqueue_struct *system_percpu_wq __ro_after_init;
+pub static mut system_percpu_wq: *mut c_void = core::ptr::null_mut();
     EXPORT_SYMBOL(system_percpu_wq);
-    struct workqueue_struct *system_highpri_wq __ro_after_init;
+pub static mut system_highpri_wq: *mut c_void = core::ptr::null_mut();
     EXPORT_SYMBOL_GPL(system_highpri_wq);
-    struct workqueue_struct *system_long_wq __ro_after_init;
+pub static mut system_long_wq: *mut c_void = core::ptr::null_mut();
     EXPORT_SYMBOL_GPL(system_long_wq);
-    struct workqueue_struct *system_unbound_wq __ro_after_init;
+pub static mut system_unbound_wq: *mut c_void = core::ptr::null_mut();
     EXPORT_SYMBOL_GPL(system_unbound_wq);
-    struct workqueue_struct *system_dfl_wq __ro_after_init;
+pub static mut system_dfl_wq: *mut c_void = core::ptr::null_mut();
     EXPORT_SYMBOL_GPL(system_dfl_wq);
-    struct workqueue_struct *system_freezable_wq __ro_after_init;
+pub static mut system_freezable_wq: *mut c_void = core::ptr::null_mut();
     EXPORT_SYMBOL_GPL(system_freezable_wq);
-    struct workqueue_struct *system_power_efficient_wq __ro_after_init;
+pub static mut system_power_efficient_wq: *mut c_void = core::ptr::null_mut();
     EXPORT_SYMBOL_GPL(system_power_efficient_wq);
-    struct workqueue_struct *system_freezable_power_efficient_wq __ro_after_init;
+pub static mut system_freezable_power_efficient_wq: *mut c_void = core::ptr::null_mut();
     EXPORT_SYMBOL_GPL(system_freezable_power_efficient_wq);
-    struct workqueue_struct *system_bh_wq;
+pub static mut system_bh_wq: *mut c_void = core::ptr::null_mut();
     EXPORT_SYMBOL_GPL(system_bh_wq);
-    struct workqueue_struct *system_bh_highpri_wq;
+pub static mut system_bh_highpri_wq: *mut c_void = core::ptr::null_mut();
     EXPORT_SYMBOL_GPL(system_bh_highpri_wq);
-    struct workqueue_struct *system_dfl_long_wq __ro_after_init;
+pub static mut system_dfl_long_wq: *mut c_void = core::ptr::null_mut();
     EXPORT_SYMBOL_GPL(system_dfl_long_wq);
-    static int worker_thread(void *__worker);
-    static void workqueue_sysfs_unregister(struct workqueue_struct *wq);
-    static void show_pwq(struct pool_workqueue *pwq);
-    static void show_one_worker_pool(struct worker_pool *pool);
+// forward_decl: worker_thread;
+// forward_decl: workqueue_sysfs_unregister;
+// forward_decl: show_pwq;
+// forward_decl: show_one_worker_pool;
 // Macro flag: #define CREATE_TRACE_POINTS
 
-    RCU_LOCKDEP_WARN(!rcu_read_lock_any_held() &&			\
-    !lockdep_is_held(&wq_pool_mutex),		\
+    RCU_LOCKDEP_WARN(!rcu_read_lock_any_held() &&			
+    !lockdep_is_held(&wq_pool_mutex),		
     "RCU or wq_pool_mutex should be held")
 
-    for ((pool) = &per_cpu(bh_worker_pools, cpu)[0];		\
-    (pool) < &per_cpu(bh_worker_pools, cpu)[NR_STD_WORKER_POOLS]; \
-    (pool)++)
+    for ((pool) = &per_cpu(bh_worker_pools, cpu)[0];		
+    (pool) < &per_cpu(bh_worker_pools, cpu)[NR_STD_WORKER_POOLS]; 
+    (pool)++) {
 
-    for ((pool) = &per_cpu(cpu_worker_pools, cpu)[0];		\
-    (pool) < &per_cpu(cpu_worker_pools, cpu)[NR_STD_WORKER_POOLS]; \
+    for ((pool) = &per_cpu(cpu_worker_pools, cpu)[0];		
+    }
+    (pool) < &per_cpu(cpu_worker_pools, cpu)[NR_STD_WORKER_POOLS]; 
     (pool)++)
 //
 // for_each_pool - iterate through all worker_pools in the system
@@ -532,8 +783,8 @@ pub struct work_offq_data {
 // ignored.
 //
 
-    idr_for_each_entry(&worker_pool_idr, pool, pi)			\
-    if (({ assert_rcu_or_pool_mutex(); false; })) { }	\
+    idr_for_each_entry(&worker_pool_idr, pool, pi)			
+    if (({ assert_rcu_or_pool_mutex(); false; })) { }	 {
     else
 //
 // for_each_pool_worker - iterate through all workers of a worker_pool
@@ -546,9 +797,10 @@ pub struct work_offq_data {
 // ignored.
 //
 
-    list_for_each_entry((worker), &(pool).workers, node)		\
-    if (({ lockdep_assert_held(&wq_pool_attach_mutex); false; })) { } \
-    else
+    list_for_each_entry((worker), &(pool).workers, node)		
+    if (({ lockdep_assert_held(&wq_pool_attach_mutex); false; })) { } 
+    }
+    else {
 //
 // for_each_pwq - iterate through all pool_workqueues of the specified workqueue
 // @pwq: iteration cursor
@@ -562,19 +814,18 @@ pub struct work_offq_data {
 // ignored.
 //
 
-    list_for_each_entry_rcu((pwq), &(wq).pwqs, pwqs_node,		\
+    list_for_each_entry_rcu((pwq), &(wq).pwqs, pwqs_node,		
     lockdep_is_held(&(wq.mutex)))
 
-    static const struct debug_obj_descr work_debug_descr;
-    static void *work_debug_hint(void *addr)
-    {
-    return ((struct work_struct *) addr).func;
+pub static mut work_debug_descr: usize = 0;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn work_debug_hint(addr: *mut c_void) -> *mut c_void {
+    return ( addr).func;
     }
 #[no_mangle]
 unsafe extern "C" fn work_is_static_object(addr: *mut c_void) -> bool {
-    static bool work_is_static_object(void *addr)
-    {
-    struct work_struct *work = addr;
+    let mut work = addr;
     return test_bit(WORK_STRUCT_STATIC_BIT, work_data_bits(work));
     }
 //
@@ -582,17 +833,17 @@ unsafe extern "C" fn work_is_static_object(addr: *mut c_void) -> bool {
 // - an active object is initialized
 //
 #[no_mangle]
-unsafe extern "C" fn work_fixup_init(addr: *mut c_void, state: enum debug_obj_state) -> bool {
-    static bool work_fixup_init(void *addr, enum debug_obj_state state)
-    {
-    struct work_struct *work = addr;
-    switch (state) {
-    case ODEBUG_STATE_ACTIVE:
+unsafe extern "C" fn work_fixup_init(addr: *mut c_void, state: debug_obj_state) -> bool {
+    let mut work = addr;
+    match (state) {
+    ODEBUG_STATE_ACTIVE => {
     cancel_work_sync(work);
     debug_object_init(work, &work_debug_descr);
     return true;
-    default:
+    }
+    _ => {
     return false;
+    }
     }
     }
 //
@@ -600,66 +851,58 @@ unsafe extern "C" fn work_fixup_init(addr: *mut c_void, state: enum debug_obj_st
 // - an active object is freed
 //
 #[no_mangle]
-unsafe extern "C" fn work_fixup_free(addr: *mut c_void, state: enum debug_obj_state) -> bool {
-    static bool work_fixup_free(void *addr, enum debug_obj_state state)
-    {
-    struct work_struct *work = addr;
-    switch (state) {
-    case ODEBUG_STATE_ACTIVE:
+unsafe extern "C" fn work_fixup_free(addr: *mut c_void, state: debug_obj_state) -> bool {
+    let mut work = addr;
+    match (state) {
+    ODEBUG_STATE_ACTIVE => {
     cancel_work_sync(work);
     debug_object_free(work, &work_debug_descr);
     return true;
-    default:
+    }
+    _ => {
     return false;
     }
     }
-    static const struct debug_obj_descr work_debug_descr = {
-    .name		= "work_struct",
-    .debug_hint	= work_debug_hint,
-    .is_static_object = work_is_static_object,
-    .fixup_init	= work_fixup_init,
-    .fixup_free	= work_fixup_free,
-    };
+    }
+pub static mut debug_obj_descr: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn debug_work_activate(work: *mut work_struct) {
-    static inline void debug_work_activate(struct work_struct *work)
-    {
     debug_object_activate(work, &work_debug_descr);
     }
 #[no_mangle]
 pub unsafe extern "C" fn debug_work_deactivate(work: *mut work_struct) {
-    static inline void debug_work_deactivate(struct work_struct *work)
-    {
     debug_object_deactivate(work, &work_debug_descr);
     }
 #[no_mangle]
 pub unsafe extern "C" fn __init_work(work: *mut work_struct, onstack: c_int) {
-    void __init_work(struct work_struct *work, int onstack)
-    {
-    if (onstack)
+    if (onstack) {
     debug_object_init_on_stack(work, &work_debug_descr);
-    else
+    }
+    else {
     debug_object_init(work, &work_debug_descr);
+    }
     }
     EXPORT_SYMBOL_GPL(__init_work);
 #[no_mangle]
 pub unsafe extern "C" fn destroy_work_on_stack(work: *mut work_struct) {
-    void destroy_work_on_stack(struct work_struct *work)
-    {
     debug_object_free(work, &work_debug_descr);
     }
     EXPORT_SYMBOL_GPL(destroy_work_on_stack);
 #[no_mangle]
 pub unsafe extern "C" fn destroy_delayed_work_on_stack(work: *mut delayed_work) {
-    void destroy_delayed_work_on_stack(struct delayed_work *work)
-    {
     timer_destroy_on_stack(&work.timer);
     debug_object_free(&work.work, &work_debug_descr);
     }
     EXPORT_SYMBOL_GPL(destroy_delayed_work_on_stack);
 
-    static inline void debug_work_activate(struct work_struct *work) { }
-    static inline void debug_work_deactivate(struct work_struct *work) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: debug_work_activate
+pub unsafe extern "C" fn debug_work_activate_dup(work: *mut work_struct) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: debug_work_deactivate
+pub unsafe extern "C" fn debug_work_deactivate_dup(work: *mut work_struct) { }
 
 //
 // worker_pool_assign_id - allocate ID and assign it to @pool
@@ -670,9 +913,7 @@ pub unsafe extern "C" fn destroy_delayed_work_on_stack(work: *mut delayed_work) 
 //
 #[no_mangle]
 unsafe extern "C" fn worker_pool_assign_id(pool: *mut worker_pool) -> c_int {
-    static int worker_pool_assign_id(struct worker_pool *pool)
-    {
-    int ret;
+    let mut ret = 0;
     lockdep_assert_held(&wq_pool_mutex);
     ret = idr_alloc(&worker_pool_idr, pool, 0, WORK_OFFQ_POOL_NONE,
     GFP_KERNEL);
@@ -682,17 +923,19 @@ unsafe extern "C" fn worker_pool_assign_id(pool: *mut worker_pool) -> c_int {
     }
     return ret;
     }
-    static struct pool_workqueue __rcu **
-    unbound_pwq_slot(struct workqueue_struct *wq, int cpu)
+    static struct pool_workqueue  **
+    unbound_pwq_slot(workqueue_struct *wq, int cpu)
     {
-    if (cpu >= 0)
+    if (cpu >= 0) {
     return per_cpu_ptr(wq.cpu_pwq, cpu);
-    else
+    }
+    else {
     return &wq.dfl_pwq;
     }
+    }
 // @cpu < 0 for dfl_pwq
-    static struct pool_workqueue *unbound_pwq(struct workqueue_struct *wq, int cpu)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn unbound_pwq(wq: *mut workqueue_struct, cpu: c_int) -> *mut c_void {
     return rcu_dereference_check(*unbound_pwq_slot(wq, cpu),
     lockdep_is_held(&wq_pool_mutex) ||
     lockdep_is_held(&wq.mutex));
@@ -705,33 +948,25 @@ unsafe extern "C" fn worker_pool_assign_id(pool: *mut worker_pool) -> c_int {
 // is masked with wq_unbound_cpumask to determine the effective cpumask. The
 // default pwq is always mapped to the pool with the current effective cpumask.
 //
-    static struct cpumask *unbound_effective_cpumask(struct workqueue_struct *wq)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn unbound_effective_cpumask(wq: *mut workqueue_struct) -> *mut c_void {
     return unbound_pwq(wq, -1).pool.attrs.__pod_cpumask;
     }
 #[no_mangle]
 unsafe extern "C" fn work_color_to_flags(color: c_int) -> c_uint {
-    static unsigned int work_color_to_flags(int color)
-    {
     return color << WORK_STRUCT_COLOR_SHIFT;
     }
 #[no_mangle]
 unsafe extern "C" fn get_work_color(work_data: c_ulong) -> c_int {
-    static int get_work_color(unsigned long work_data)
-    {
     return (work_data >> WORK_STRUCT_COLOR_SHIFT) &
     ((1 << WORK_STRUCT_COLOR_BITS) - 1);
     }
 #[no_mangle]
 unsafe extern "C" fn work_next_color(color: c_int) -> c_int {
-    static int work_next_color(int color)
-    {
     return (color + 1) % WORK_NR_COLORS;
     }
 #[no_mangle]
 unsafe extern "C" fn pool_offq_flags(pool: *mut worker_pool) -> c_ulong {
-    static unsigned long pool_offq_flags(struct worker_pool *pool)
-    {
     return (pool.flags & POOL_BH) ? WORK_OFFQ_BH : 0;
     }
 //
@@ -750,26 +985,21 @@ unsafe extern "C" fn pool_offq_flags(pool: *mut worker_pool) -> c_ulong {
 //
 #[no_mangle]
 pub unsafe extern "C" fn set_work_data(work: *mut work_struct, data: c_ulong) {
-    static inline void set_work_data(struct work_struct *work, unsigned long data)
-    {
-    WARN_ON_ONCE(!work_pending(work));
+    WARN_ON_ONCE!(!work_pending(work));
     atomic_long_set(&work.data, data | work_static(work));
     }
-    static void set_work_pwq(struct work_struct *work, struct pool_workqueue *pwq,
-    unsigned long flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn set_work_pwq(work: *mut work_struct, pwq: *mut pool_workqueue, flags: c_ulong) {
     set_work_data(work, (unsigned long)pwq | WORK_STRUCT_PENDING |
     WORK_STRUCT_PWQ | flags);
     }
-    static void set_work_pool_and_keep_pending(struct work_struct *work,
-    int pool_id, unsigned long flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn set_work_pool_and_keep_pending(work: *mut work_struct, pool_id: c_int, flags: c_ulong) {
     set_work_data(work, ((unsigned long)pool_id << WORK_OFFQ_POOL_SHIFT) |
     WORK_STRUCT_PENDING | flags);
     }
-    static void set_work_pool_and_clear_pending(struct work_struct *work,
-    int pool_id, unsigned long flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn set_work_pool_and_clear_pending(work: *mut work_struct, pool_id: c_int, flags: c_ulong) {
 //
 // The following wmb is paired with the implied mb in
 // test_and_set_bit(PENDING) and ensures all updates to @work made
@@ -809,17 +1039,19 @@ pub unsafe extern "C" fn set_work_data(work: *mut work_struct, data: c_ulong) {
 //
     smp_mb();
     }
-    static inline struct pool_workqueue *work_struct_pwq(unsigned long data)
-    {
-    return (struct pool_workqueue *)(data & WORK_STRUCT_PWQ_MASK);
+#[no_mangle]
+pub unsafe extern "C" fn work_struct_pwq(data: c_ulong) -> *mut c_void {
+    return (data & WORK_STRUCT_PWQ_MASK);
     }
-    static struct pool_workqueue *get_work_pwq(struct work_struct *work)
-    {
-    let mut data: c_ulong = atomic_long_read(&work.data);
-    if (data & WORK_STRUCT_PWQ)
+#[no_mangle]
+pub unsafe extern "C" fn get_work_pwq(work: *mut work_struct) -> *mut c_void {
+pub static mut data: c_ulong = 0;
+    if (data & WORK_STRUCT_PWQ) {
     return work_struct_pwq(data);
-    else
+    }
+    else {
     return core::ptr::null_mut();
+    }
     }
 //
 // get_work_pool - return the worker_pool a given work was associated with
@@ -836,29 +1068,27 @@ pub unsafe extern "C" fn set_work_data(work: *mut work_struct, data: c_ulong) {
 //
 // Return: The worker_pool @work was last associated with.  %NULL if none.
 //
-    static struct worker_pool *get_work_pool(struct work_struct *work)
-    {
-    let mut data: c_ulong = atomic_long_read(&work.data);
-    int pool_id;
+#[no_mangle]
+pub unsafe extern "C" fn get_work_pool(work: *mut work_struct) -> *mut c_void {
+pub static mut data: c_ulong = 0;
+    let mut pool_id = 0;
     assert_rcu_or_pool_mutex();
-    if (data & WORK_STRUCT_PWQ)
+    if (data & WORK_STRUCT_PWQ) {
     return work_struct_pwq(data).pool;
+    }
     pool_id = data >> WORK_OFFQ_POOL_SHIFT;
-    if (pool_id == WORK_OFFQ_POOL_NONE)
+    if (pool_id == WORK_OFFQ_POOL_NONE) {
     return core::ptr::null_mut();
+    }
     return idr_find(&worker_pool_idr, pool_id);
     }
 #[no_mangle]
 unsafe extern "C" fn shift_and_mask(v: c_ulong, shift: u32, bits: u32) -> c_ulong {
-    static unsigned long shift_and_mask(unsigned long v, u32 shift, u32 bits)
-    {
     return (v >> shift) & ((1U << bits) - 1);
     }
 #[no_mangle]
 unsafe extern "C" fn work_offqd_unpack(offqd: *mut work_offq_data, data: c_ulong) {
-    static void work_offqd_unpack(struct work_offq_data *offqd, unsigned long data)
-    {
-    WARN_ON_ONCE(data & WORK_STRUCT_PWQ);
+    WARN_ON_ONCE!(data & WORK_STRUCT_PWQ);
     offqd.pool_id = shift_and_mask(data, WORK_OFFQ_POOL_SHIFT,
     WORK_OFFQ_POOL_BITS);
     offqd.disable = shift_and_mask(data, WORK_OFFQ_DISABLE_SHIFT,
@@ -867,8 +1097,6 @@ unsafe extern "C" fn work_offqd_unpack(offqd: *mut work_offq_data, data: c_ulong
     }
 #[no_mangle]
 unsafe extern "C" fn work_offqd_pack_flags(offqd: *mut work_offq_data) -> c_ulong {
-    static unsigned long work_offqd_pack_flags(struct work_offq_data *offqd)
-    {
     return ((unsigned long)offqd.disable << WORK_OFFQ_DISABLE_SHIFT) |
     ((unsigned long)offqd.flags);
     }
@@ -886,39 +1114,29 @@ unsafe extern "C" fn work_offqd_pack_flags(offqd: *mut work_offq_data) -> c_ulon
 //
 #[no_mangle]
 unsafe extern "C" fn need_more_worker(pool: *mut worker_pool) -> bool {
-    static bool need_more_worker(struct worker_pool *pool)
-    {
     return !list_empty(&pool.worklist) && !pool.nr_running;
     }
 // Can I start working?  Called from busy but !running workers.
 #[no_mangle]
 unsafe extern "C" fn may_start_working(pool: *mut worker_pool) -> bool {
-    static bool may_start_working(struct worker_pool *pool)
-    {
     return pool.nr_idle;
     }
 // Do I need to keep working?  Called from currently running workers.
 #[no_mangle]
 unsafe extern "C" fn keep_working(pool: *mut worker_pool) -> bool {
-    static bool keep_working(struct worker_pool *pool)
-    {
     return !list_empty(&pool.worklist) && (pool.nr_running <= 1);
     }
 // Do we need a new worker?  Called from manager.
 #[no_mangle]
 unsafe extern "C" fn need_to_create_worker(pool: *mut worker_pool) -> bool {
-    static bool need_to_create_worker(struct worker_pool *pool)
-    {
     return need_more_worker(pool) && !may_start_working(pool);
     }
 // Do we have too many workers and should some go away?
 #[no_mangle]
 unsafe extern "C" fn too_many_workers(pool: *mut worker_pool) -> bool {
-    static bool too_many_workers(struct worker_pool *pool)
-    {
-    let mut managing: bool = pool.flags & POOL_MANAGER_ACTIVE;
-    int nr_idle = pool.nr_idle + managing; /* manager is considered idle */
-    let mut nr_busy: c_int = pool.nr_workers - nr_idle;
+pub static mut managing: bool = false;
+    let mut nr_idle = pool.nr_idle + managing; /* manager is considered idle */
+pub static mut nr_busy: c_int = 0;
     return nr_idle > 2 && (nr_idle - 2) * MAX_IDLE_WORKERS_RATIO >= nr_busy;
     }
 //
@@ -930,14 +1148,12 @@ unsafe extern "C" fn too_many_workers(pool: *mut worker_pool) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn worker_set_flags(worker: *mut worker, flags: c_uint) {
-    static inline void worker_set_flags(struct worker *worker, unsigned int flags)
-    {
-    struct worker_pool *pool = worker.pool;
+    let mut pool = worker.pool;
     lockdep_assert_held(&pool.lock);
 // If transitioning into NOT_RUNNING, adjust nr_running.
     if ((flags & WORKER_NOT_RUNNING) &&
     !(worker.flags & WORKER_NOT_RUNNING)) {
-    pool.nr_running--;
+    pool.nr_running -= 1;
     }
     worker.flags |= flags;
     }
@@ -950,10 +1166,8 @@ pub unsafe extern "C" fn worker_set_flags(worker: *mut worker, flags: c_uint) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn worker_clr_flags(worker: *mut worker, flags: c_uint) {
-    static inline void worker_clr_flags(struct worker *worker, unsigned int flags)
-    {
-    struct worker_pool *pool = worker.pool;
-    let mut oflags: c_uint = worker.flags;
+    let mut pool = worker.pool;
+pub static mut oflags: c_uint = 0;
     lockdep_assert_held(&pool.lock);
     worker.flags &= ~flags;
 //
@@ -961,16 +1175,18 @@ pub unsafe extern "C" fn worker_clr_flags(worker: *mut worker, flags: c_uint) {
 // that the nested NOT_RUNNING is not a noop.  NOT_RUNNING is mask
 // of multiple flags, not a single flag.
 //
-    if ((flags & WORKER_NOT_RUNNING) && (oflags & WORKER_NOT_RUNNING))
+    if ((flags & WORKER_NOT_RUNNING) && (oflags & WORKER_NOT_RUNNING)) {
     if (!(worker.flags & WORKER_NOT_RUNNING))
-    pool.nr_running++;
+    pool.nr_running += 1;
+    }
     }
 // Return the first idle worker.  Called with pool->lock held.
-    static struct worker *first_idle_worker(struct worker_pool *pool)
-    {
-    if (unlikely(list_empty(&pool.idle_list)))
+#[no_mangle]
+pub unsafe extern "C" fn first_idle_worker(pool: *mut worker_pool) -> *mut c_void {
+    if (unlikely(list_empty(&pool.idle_list))) {
     return core::ptr::null_mut();
-    return list_first_entry(&pool.idle_list, struct worker, entry);
+    }
+    return list_first_entry(&pool.idle_list, worker, entry);
     }
 //
 // worker_enter_idle - enter idle state
@@ -984,23 +1200,23 @@ pub unsafe extern "C" fn worker_clr_flags(worker: *mut worker, flags: c_uint) {
 //
 #[no_mangle]
 unsafe extern "C" fn worker_enter_idle(worker: *mut worker) {
-    static void worker_enter_idle(struct worker *worker)
-    {
-    struct worker_pool *pool = worker.pool;
-    if (WARN_ON_ONCE(worker.flags & WORKER_IDLE) ||
-    WARN_ON_ONCE(!list_empty(&worker.entry) &&
-    (worker.hentry.next || worker.hentry.pprev)))
+    let mut pool = worker.pool;
+    if (WARN_ON_ONCE!(worker.flags & WORKER_IDLE) ||
+    WARN_ON_ONCE!(!list_empty(&worker.entry) &&
+    (worker.hentry.next || worker.hentry.pprev))) {
     return;
+    }
 // can't use worker_set_flags(), also called from create_worker()
     worker.flags |= WORKER_IDLE;
-    pool.nr_idle++;
+    pool.nr_idle += 1;
     worker.last_active = jiffies;
 // idle_list is LIFO
     list_add(&worker.entry, &pool.idle_list);
-    if (too_many_workers(pool) && !timer_pending(&pool.idle_timer))
+    if (too_many_workers(pool) && !timer_pending(&pool.idle_timer)) {
     mod_timer(&pool.idle_timer, jiffies + IDLE_WORKER_TIMEOUT);
+    }
 // Sanity check nr_running.
-    WARN_ON_ONCE(pool.nr_workers == pool.nr_idle && pool.nr_running);
+    WARN_ON_ONCE!(pool.nr_workers == pool.nr_idle && pool.nr_running);
     }
 //
 // worker_leave_idle - leave idle state
@@ -1013,13 +1229,12 @@ unsafe extern "C" fn worker_enter_idle(worker: *mut worker) {
 //
 #[no_mangle]
 unsafe extern "C" fn worker_leave_idle(worker: *mut worker) {
-    static void worker_leave_idle(struct worker *worker)
-    {
-    struct worker_pool *pool = worker.pool;
-    if (WARN_ON_ONCE(!(worker.flags & WORKER_IDLE)))
+    let mut pool = worker.pool;
+    if (WARN_ON_ONCE!(!(worker.flags & WORKER_IDLE))) {
     return;
+    }
     worker_clr_flags(worker, WORKER_IDLE);
-    pool.nr_idle--;
+    pool.nr_idle -= 1;
     list_del_init(&worker.entry);
     }
 //
@@ -1055,21 +1270,19 @@ unsafe extern "C" fn worker_leave_idle(worker: *mut worker) {
 // Pointer to worker which is executing @work if found, %NULL
 // otherwise.
 //
-    static struct worker *find_worker_executing_work(struct worker_pool *pool,
-    struct work_struct *work)
-    {
-    struct worker *worker;
+#[no_mangle]
+pub unsafe extern "C" fn find_worker_executing_work(pool: *mut worker_pool, work: *mut work_struct) -> *mut c_void {
+pub static mut worker: *mut c_void = core::ptr::null_mut();
     hash_for_each_possible(pool.busy_hash, worker, hentry,
     (unsigned long)work)
     if (worker.current_work == work &&
-    worker.current_func == work.func)
+    worker.current_func == work.func) {
     return worker;
+    }
     return core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn mayday_cursor_func(work: *mut work_struct) {
-    static void mayday_cursor_func(struct work_struct *work)
-    {
 // should not be processed, only for marking position
     BUG();
     }
@@ -1087,26 +1300,27 @@ unsafe extern "C" fn mayday_cursor_func(work: *mut work_struct) {
 // CONTEXT:
 // raw_spin_lock_irq(pool->lock).
 //
-    static void move_linked_works(struct work_struct *work, struct list_head *head,
-    struct work_struct **nextp)
-    {
-    struct work_struct *n;
+#[no_mangle]
+pub unsafe extern "C" fn move_linked_works(work: *mut work_struct, head: *mut list_head, nextp: *mut *mut work_struct) {
+pub static mut n: *mut c_void = core::ptr::null_mut();
 //
 // Linked worklist will always end before the end of the list,
 // use NULL for list head.
 //
     list_for_each_entry_safe_from(work, n, core::ptr::null_mut(), entry) {
     list_move_tail(&work.entry, head);
-    if (!(*work_data_bits(work) & WORK_STRUCT_LINKED))
+    if (!(*work_data_bits(work) & WORK_STRUCT_LINKED)) {
     break;
+    }
     }
 //
 // If we're already inside safe list traversal and have moved
 // multiple works to the scheduled queue, the next position
 // needs to be updated.
 //
-    if (nextp)
+    if (nextp) {
 // nextp = n;
+    }
     }
 //
 // assign_work - assign a work item and its linked work items to a worker
@@ -1124,18 +1338,18 @@ unsafe extern "C" fn mayday_cursor_func(work: *mut work_struct) {
 // Returns %true if @work was successfully assigned to @worker. %false if @work
 // was punted to another worker already executing it.
 //
-    static bool assign_work(struct work_struct *work, struct worker *worker,
-    struct work_struct **nextp)
-    {
-    struct worker_pool *pool = worker.pool;
-    struct worker *collision;
+#[no_mangle]
+pub unsafe extern "C" fn assign_work(work: *mut work_struct, worker: *mut worker, nextp: *mut *mut work_struct) -> bool {
+    let mut pool = worker.pool;
+pub static mut collision: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&pool.lock);
 // The cursor work should not be processed
     if (unlikely(work.func == mayday_cursor_func)) {
 // only worker_thread() can possibly take this branch
-    WARN_ON_ONCE(worker.rescue_wq);
-    if (nextp)
+    WARN_ON_ONCE!(worker.rescue_wq);
+    if (nextp) {
 // nextp = list_next_entry(work, entry);
+    }
     list_del_init(&work.entry);
     return false;
     }
@@ -1155,15 +1369,13 @@ unsafe extern "C" fn mayday_cursor_func(work: *mut work_struct) {
     move_linked_works(work, &worker.scheduled, nextp);
     return true;
     }
-    static struct irq_work *bh_pool_irq_work(struct worker_pool *pool)
-    {
-    let mut high: c_int = pool.attrs.nice == HIGHPRI_NICE_LEVEL ? 1 : 0;
+#[no_mangle]
+pub unsafe extern "C" fn bh_pool_irq_work(pool: *mut worker_pool) -> *mut c_void {
+pub static mut high: c_int = 0;
     return &per_cpu(bh_pool_irq_works, pool.cpu)[high];
     }
 #[no_mangle]
 unsafe extern "C" fn kick_bh_pool(pool: *mut worker_pool) {
-    static void kick_bh_pool(struct worker_pool *pool)
-    {
 
 // see drain_dead_softirq_workfn() for BH_DRAINING
     if (unlikely(pool.cpu != smp_processor_id() &&
@@ -1172,10 +1384,12 @@ unsafe extern "C" fn kick_bh_pool(pool: *mut worker_pool) {
     return;
     }
 
-    if (pool.attrs.nice == HIGHPRI_NICE_LEVEL)
+    if (pool.attrs.nice == HIGHPRI_NICE_LEVEL) {
     raise_softirq_irqoff(HI_SOFTIRQ);
-    else
+    }
+    else {
     raise_softirq_irqoff(TASKLET_SOFTIRQ);
+    }
     }
 //
 // kick_pool_pick - select an idle worker to kick, deferring the wakeup
@@ -1192,14 +1406,13 @@ unsafe extern "C" fn kick_bh_pool(pool: *mut worker_pool) {
 //
 #[no_mangle]
 unsafe extern "C" fn kick_pool_pick(pool: *mut worker_pool, wakep: *mut task_struct) -> bool {
-    static bool kick_pool_pick(struct worker_pool *pool, struct task_struct **wakep)
-    {
-    struct worker *worker = first_idle_worker(pool);
-    struct task_struct *p;
+    let mut worker = first_idle_worker(pool);
+pub static mut p: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&pool.lock);
 // wakep = NULL;
-    if (!need_more_worker(pool) || !worker)
+    if (!need_more_worker(pool) || !worker) {
     return false;
+    }
     if (pool.flags & POOL_BH) {
     kick_bh_pool(pool);
     return true;
@@ -1225,9 +1438,8 @@ unsafe extern "C" fn kick_pool_pick(pool: *mut worker_pool, wakep: *mut task_str
     if (!pool.attrs.affn_strict &&
     !cpumask_test_cpu(READ_ONCE(p.wake_cpu),
     pool.attrs.__pod_cpumask)) {
-    struct work_struct *work = list_first_entry(&pool.worklist,
-    struct work_struct, entry);
-    int wake_cpu = cpumask_any_and_distribute(pool.attrs.__pod_cpumask,
+    let mut work = list_first_entry(&pool.worklist, work_struct, entry);
+    let mut wake_cpu = cpumask_any_and_distribute(pool.attrs.__pod_cpumask,
     cpu_online_mask);
     if (wake_cpu < nr_cpu_ids) {
     WRITE_ONCE(p.wake_cpu, wake_cpu);
@@ -1249,12 +1461,11 @@ unsafe extern "C" fn kick_pool_pick(pool: *mut worker_pool, wakep: *mut task_str
 //
 #[no_mangle]
 unsafe extern "C" fn kick_pool(pool: *mut worker_pool) -> bool {
-    static bool kick_pool(struct worker_pool *pool)
-    {
-    struct task_struct *p;
-    let mut kicked: bool = kick_pool_pick(pool, &p);
-    if (p)
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut kicked: bool = false;
+    if (p) {
     wake_up_process(p);
+    }
     return kicked;
     }
 
@@ -1281,27 +1492,26 @@ pub struct wci_ent {
 
     static struct wci_ent wci_ents[WCI_MAX_ENTS];
     static int wci_nr_ents;
-    static DEFINE_RAW_SPINLOCK(wci_lock);
+pub static mut wci_lock: usize = 0;
     static DEFINE_HASHTABLE(wci_hash, ilog2(WCI_MAX_ENTS));
-    static struct wci_ent *wci_find_ent(work_func_t func)
-    {
-    struct wci_ent *ent;
+#[no_mangle]
+pub unsafe extern "C" fn wci_find_ent(func: work_func_t) -> *mut c_void {
+pub static mut ent: *mut c_void = core::ptr::null_mut();
     hash_for_each_possible_rcu(wci_hash, ent, hash_node,
     (unsigned long)func) {
-    if (ent.func == func)
+    if (ent.func == func) {
     return ent;
+    }
     }
     return core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn wq_cpu_intensive_report(func: work_func_t) {
-    static void wq_cpu_intensive_report(work_func_t func)
-    {
-    struct wci_ent *ent;
-    restart:
+pub static mut ent: *mut c_void = core::ptr::null_mut();
+// label;
     ent = wci_find_ent(func);
     if (ent) {
-    u64 cnt;
+    let mut cnt = 0;
 //
 // Start reporting from the warning_thresh and back off
 // exponentially.
@@ -1309,10 +1519,11 @@ unsafe extern "C" fn wq_cpu_intensive_report(func: work_func_t) {
     cnt = atomic64_inc_return_relaxed(&ent.cnt);
     if (wq_cpu_intensive_warning_thresh &&
     cnt >= wq_cpu_intensive_warning_thresh &&
-    is_power_of_2(cnt + 1 - wq_cpu_intensive_warning_thresh))
-    printk_deferred(KERN_WARNING "workqueue: %ps hogged CPU for >%luus %llu times, consider switching to WQ_UNBOUND\n",
+    is_power_of_2(cnt + 1 - wq_cpu_intensive_warning_thresh)) {
+    printk_deferred("workqueue: %ps hogged CPU for >%luus %llu times, consider switching to WQ_UNBOUND\n",
     ent.func, wq_cpu_intensive_thresh_us,
     atomic64_read(&ent.cnt));
+    }
     return;
     }
 //
@@ -1320,8 +1531,9 @@ unsafe extern "C" fn wq_cpu_intensive_report(func: work_func_t) {
 // is exhausted, something went really wrong and we probably made enough
 // noise already.
 //
-    if (wci_nr_ents >= WCI_MAX_ENTS)
+    if (wci_nr_ents >= WCI_MAX_ENTS) {
     return;
+    }
     raw_spin_lock(&wci_lock);
     if (wci_nr_ents >= WCI_MAX_ENTS) {
     raw_spin_unlock(&wci_lock);
@@ -1329,17 +1541,18 @@ unsafe extern "C" fn wq_cpu_intensive_report(func: work_func_t) {
     }
     if (wci_find_ent(func)) {
     raw_spin_unlock(&wci_lock);
-    goto restart;
+// goto;
     }
     ent = &wci_ents[wci_nr_ents++];
     ent.func = func;
     atomic64_set(&ent.cnt, 0);
     hash_add_rcu(wci_hash, &ent.hash_node, (unsigned long)func);
     raw_spin_unlock(&wci_lock);
-    goto restart;
+// goto;
     }
 
-    static void wq_cpu_intensive_report(work_func_t func) {}
+#[no_mangle]
+pub unsafe extern "C" fn wq_cpu_intensive_report(func: work_func_t) {}
 
 //
 // wq_worker_running - a worker is running again
@@ -1349,11 +1562,10 @@ unsafe extern "C" fn wq_cpu_intensive_report(func: work_func_t) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn wq_worker_running(task: *mut task_struct) {
-    void wq_worker_running(struct task_struct *task)
-    {
-    struct worker *worker = kthread_data(task);
-    if (!READ_ONCE(worker.sleeping))
+    let mut worker = kthread_data(task);
+    if (!READ_ONCE(worker.sleeping)) {
     return;
+    }
 //
 // If preempted by unbind_workers() between the WORKER_NOT_RUNNING check
 // and the nr_running increment below, we may ruin the nr_running reset
@@ -1361,8 +1573,9 @@ pub unsafe extern "C" fn wq_worker_running(task: *mut task_struct) {
 // pool. Protect against such race.
 //
     preempt_disable();
-    if (!(worker.flags & WORKER_NOT_RUNNING))
-    worker.pool.nr_running++;
+    if (!(worker.flags & WORKER_NOT_RUNNING)) {
+    worker.pool.nr_running += 1;
+    }
     preempt_enable();
 //
 // CPU intensive auto-detection cares about how long a work item hogged
@@ -1380,21 +1593,21 @@ pub unsafe extern "C" fn wq_worker_running(task: *mut task_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn wq_worker_sleeping(task: *mut task_struct) {
-    void wq_worker_sleeping(struct task_struct *task)
-    {
-    struct worker *worker = kthread_data(task);
-    struct worker_pool *pool;
+    let mut worker = kthread_data(task);
+pub static mut pool: *mut c_void = core::ptr::null_mut();
 //
 // Rescuers, which may not have all the fields set up like normal
 // workers, also reach here, let's not access anything before
 // checking NOT_RUNNING.
 //
-    if (worker.flags & WORKER_NOT_RUNNING)
+    if (worker.flags & WORKER_NOT_RUNNING) {
     return;
+    }
     pool = worker.pool;
 // Return if preempted before wq_worker_running() was reached
-    if (READ_ONCE(worker.sleeping))
+    if (READ_ONCE(worker.sleeping)) {
     return;
+    }
     WRITE_ONCE(worker.sleeping, 1);
     raw_spin_lock_irq(&pool.lock);
 //
@@ -1406,9 +1619,10 @@ pub unsafe extern "C" fn wq_worker_sleeping(task: *mut task_struct) {
     raw_spin_unlock_irq(&pool.lock);
     return;
     }
-    pool.nr_running--;
-    if (kick_pool(pool))
+    pool.nr_running -= 1;
+    if (kick_pool(pool)) {
     worker.current_pwq.stats[PWQ_STAT_CM_WAKEUP]++;
+    }
     raw_spin_unlock_irq(&pool.lock);
     }
 //
@@ -1420,20 +1634,20 @@ pub unsafe extern "C" fn wq_worker_sleeping(task: *mut task_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn wq_worker_tick(task: *mut task_struct) {
-    void wq_worker_tick(struct task_struct *task)
-    {
-    struct worker *worker = kthread_data(task);
-    struct pool_workqueue *pwq = worker.current_pwq;
-    struct worker_pool *pool = worker.pool;
-    if (!pwq)
+    let mut worker = kthread_data(task);
+    let mut pwq = worker.current_pwq;
+    let mut pool = worker.pool;
+    if (!pwq) {
     return;
+    }
 //
 // @pwq is shared across CPUs for unbound wqs and this advisory stat is
 // bumped outside pool->lock, so the update is intentionally racy.
 //
     data_race(pwq.stats[PWQ_STAT_CPU_TIME] += TICK_USEC);
-    if (!wq_cpu_intensive_thresh_us)
+    if (!wq_cpu_intensive_thresh_us) {
     return;
+    }
 //
 // If the current worker is concurrency managed and hogged the CPU for
 // longer than wq_cpu_intensive_thresh_us, it's automatically marked
@@ -1448,14 +1662,16 @@ pub unsafe extern "C" fn wq_worker_tick(task: *mut task_struct) {
 //
     if ((worker.flags & WORKER_NOT_RUNNING) || READ_ONCE(worker.sleeping) ||
     READ_ONCE(worker.task.se.sum_exec_runtime) - worker.current_at <
-    wq_cpu_intensive_thresh_us * NSEC_PER_USEC)
+    wq_cpu_intensive_thresh_us * NSEC_PER_USEC) {
     return;
+    }
     raw_spin_lock(&pool.lock);
     worker_set_flags(worker, WORKER_CPU_INTENSIVE);
     wq_cpu_intensive_report(worker.current_func);
     pwq.stats[PWQ_STAT_CPU_INTENSIVE]++;
-    if (kick_pool(pool))
+    if (kick_pool(pool)) {
     pwq.stats[PWQ_STAT_CM_WAKEUP]++;
+    }
     raw_spin_unlock(&pool.lock);
     }
 //
@@ -1484,16 +1700,12 @@ pub unsafe extern "C" fn wq_worker_tick(task: *mut task_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn wq_worker_last_func(task: *mut task_struct) -> work_func_t {
-    work_func_t wq_worker_last_func(struct task_struct *task)
-    {
-    struct worker *worker = kthread_data(task);
+    let mut worker = kthread_data(task);
     return worker.last_func;
     }
 // True if @pool is a static per-cpu pool rather than an unbound one.
 #[no_mangle]
 unsafe extern "C" fn is_percpu_pool(pool: *mut worker_pool) -> bool {
-    static bool is_percpu_pool(struct worker_pool *pool)
-    {
     return pool.cpu >= 0;
     }
 //
@@ -1508,12 +1720,12 @@ unsafe extern "C" fn is_percpu_pool(pool: *mut worker_pool) -> bool {
 //
 // - Otherwise, node_nr_active[@node].
 //
-    static struct wq_node_nr_active *wq_node_nr_active(struct workqueue_struct *wq,
-    int node)
-    {
-    BUG_ON(!(wq.flags & WQ_UNBOUND));
-    if (node == NUMA_NO_NODE)
+#[no_mangle]
+pub unsafe extern "C" fn wq_node_nr_active(wq: *mut workqueue_struct, node: c_int) -> *mut c_void {
+    BUG_ON!(!(wq.flags & WQ_UNBOUND));
+    if (node == NUMA_NO_NODE) {
     node = nr_node_ids;
+    }
     return wq.node_nr_active[node];
     }
 //
@@ -1527,32 +1739,36 @@ unsafe extern "C" fn is_percpu_pool(pool: *mut worker_pool) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn wq_update_node_max_active(wq: *mut workqueue_struct, off_cpu: c_int) {
-    static void wq_update_node_max_active(struct workqueue_struct *wq, int off_cpu)
-    {
-    struct cpumask *effective = unbound_effective_cpumask(wq);
-    let mut min_active: c_int = READ_ONCE(wq.min_active);
-    let mut max_active: c_int = READ_ONCE(wq.max_active);
-    int total_cpus, node;
+    let mut effective = unbound_effective_cpumask(wq);
+pub static mut min_active: c_int = 0;
+pub static mut max_active: c_int = 0;
+    let mut total_cpus = 0;
+    let mut node = 0;
     lockdep_assert_held(&wq.mutex);
-    if (!wq_topo_initialized)
+    if (!wq_topo_initialized) {
     return;
-    if (off_cpu >= 0 && !cpumask_test_cpu(off_cpu, effective))
+    }
+    if (off_cpu >= 0 && !cpumask_test_cpu(off_cpu, effective)) {
     off_cpu = -1;
+    }
     total_cpus = cpumask_weight_and(effective, cpu_online_mask);
-    if (off_cpu >= 0)
-    total_cpus--;
+    if (off_cpu >= 0) {
+    total_cpus -= 1;
+    }
 // If all CPUs of the wq get offline, use the default values
     if (unlikely(!total_cpus)) {
-    for_each_node(node)
+    for_each_node(node) {
     wq_node_nr_active(wq, node).max = min_active;
+    }
     wq_node_nr_active(wq, NUMA_NO_NODE).max = max_active;
     return;
     }
     for_each_node(node) {
-    int node_cpus;
+    let mut node_cpus = 0;
     node_cpus = cpumask_weight_and(effective, cpumask_of_node(node));
-    if (off_cpu >= 0 && cpu_to_node(off_cpu) == node)
-    node_cpus--;
+    if (off_cpu >= 0 && cpu_to_node(off_cpu) == node) {
+    node_cpus -= 1;
+    }
     wq_node_nr_active(wq, node).max =
     clamp(DIV_ROUND_UP(max_active * node_cpus, total_cpus),
     min_active, max_active);
@@ -1568,11 +1784,9 @@ unsafe extern "C" fn wq_update_node_max_active(wq: *mut workqueue_struct, off_cp
 //
 #[no_mangle]
 unsafe extern "C" fn get_pwq(pwq: *mut pool_workqueue) {
-    static void get_pwq(struct pool_workqueue *pwq)
-    {
     lockdep_assert_held(&pwq.pool.lock);
-    WARN_ON_ONCE(pwq.refcnt <= 0);
-    pwq.refcnt++;
+    WARN_ON_ONCE!(pwq.refcnt <= 0);
+    pwq.refcnt += 1;
     }
 //
 // put_pwq - put a pool_workqueue reference
@@ -1583,11 +1797,10 @@ unsafe extern "C" fn get_pwq(pwq: *mut pool_workqueue) {
 //
 #[no_mangle]
 unsafe extern "C" fn put_pwq(pwq: *mut pool_workqueue) {
-    static void put_pwq(struct pool_workqueue *pwq)
-    {
     lockdep_assert_held(&pwq.pool.lock);
-    if (likely(--pwq.refcnt))
+    if (likely(--pwq.refcnt)) {
     return;
+    }
 //
 // @pwq can't be released under pool->lock, bounce to a dedicated
 // kthread_worker to avoid A-A deadlocks.
@@ -1602,8 +1815,6 @@ unsafe extern "C" fn put_pwq(pwq: *mut pool_workqueue) {
 //
 #[no_mangle]
 unsafe extern "C" fn put_pwq_unlocked(pwq: *mut pool_workqueue) {
-    static void put_pwq_unlocked(struct pool_workqueue *pwq)
-    {
     if (pwq) {
 //
 // As both pwqs and pools are RCU protected, the
@@ -1616,30 +1827,27 @@ unsafe extern "C" fn put_pwq_unlocked(pwq: *mut pool_workqueue) {
     }
 #[no_mangle]
 unsafe extern "C" fn pwq_is_empty(pwq: *mut pool_workqueue) -> bool {
-    static bool pwq_is_empty(struct pool_workqueue *pwq)
-    {
     return !pwq.nr_active && list_empty(&pwq.inactive_works);
     }
-    static void __pwq_activate_work(struct pool_workqueue *pwq,
-    struct work_struct *work)
-    {
-    unsigned long *wdb = work_data_bits(work);
-    WARN_ON_ONCE(!(*wdb & WORK_STRUCT_INACTIVE));
+#[no_mangle]
+pub unsafe extern "C" fn __pwq_activate_work(pwq: *mut pool_workqueue, work: *mut work_struct) {
+    let mut wdb = work_data_bits(work);
+    WARN_ON_ONCE!(!(*wdb & WORK_STRUCT_INACTIVE));
     trace_workqueue_activate_work(work);
-    if (list_empty(&pwq.pool.worklist))
+    if (list_empty(&pwq.pool.worklist)) {
     pwq.pool.last_progress_ts = jiffies;
+    }
     move_linked_works(work, &pwq.pool.worklist, core::ptr::null_mut());
     __clear_bit(WORK_STRUCT_INACTIVE_BIT, wdb);
     }
 #[no_mangle]
 unsafe extern "C" fn tryinc_node_nr_active(nna: *mut wq_node_nr_active) -> bool {
-    static bool tryinc_node_nr_active(struct wq_node_nr_active *nna)
-    {
-    let mut max: c_int = READ_ONCE(nna.max);
-    let mut old: c_int = atomic_read(&nna.nr);
+pub static mut max: c_int = 0;
+pub static mut old: c_int = 0;
     do {
-    if (old >= max)
+    if (old >= max) {
     return false;
+    }
     } while (!atomic_try_cmpxchg_relaxed(&nna.nr, &old, old + 1));
     return true;
     }
@@ -1653,12 +1861,10 @@ unsafe extern "C" fn tryinc_node_nr_active(nna: *mut wq_node_nr_active) -> bool 
 //
 #[no_mangle]
 unsafe extern "C" fn pwq_tryinc_nr_active(pwq: *mut pool_workqueue, fill: bool) -> bool {
-    static bool pwq_tryinc_nr_active(struct pool_workqueue *pwq, bool fill)
-    {
-    struct workqueue_struct *wq = pwq.wq;
-    struct worker_pool *pool = pwq.pool;
-    struct wq_node_nr_active *nna;
-    let mut obtained: bool = false;
+    let mut wq = pwq.wq;
+    let mut pool = pwq.pool;
+pub static mut nna: *mut c_void = core::ptr::null_mut();
+pub static mut obtained: bool = false;
     lockdep_assert_held(&pool.lock);
 //
 // A concurrency-managed per-cpu pool accounts nr_active per pwq, so
@@ -1666,10 +1872,11 @@ unsafe extern "C" fn pwq_tryinc_nr_active(pwq: *mut pool_workqueue, fill: bool) 
 //
     if (is_percpu_pool(pool)) {
     obtained = pwq.nr_active < READ_ONCE(wq.max_active);
-    goto out;
+// goto;
     }
-    if (unlikely(pwq.plugged))
+    if (unlikely(pwq.plugged)) {
     return false;
+    }
     nna = wq_node_nr_active(wq, pool.node);
 //
 // Unbound workqueue uses per-node shared nr_active $nna. If @pwq is
@@ -1680,11 +1887,13 @@ unsafe extern "C" fn pwq_tryinc_nr_active(pwq: *mut pool_workqueue, fill: bool) 
 // pwq_dec_nr_active() can only maintain the concurrency level but not
 // increase it. This is indicated by @fill.
 //
-    if (!list_empty(&pwq.pending_node) && likely(!fill))
-    goto out;
+    if (!list_empty(&pwq.pending_node) && likely(!fill)) {
+// goto;
+    }
     obtained = tryinc_node_nr_active(nna);
-    if (obtained)
-    goto out;
+    if (obtained) {
+// goto;
+    }
 //
 // Lockless acquisition failed. Lock, add ourself to $nna->pending_pwqs
 // and try again. The smp_mb() is paired with the implied memory barrier
@@ -1693,25 +1902,28 @@ unsafe extern "C" fn pwq_tryinc_nr_active(pwq: *mut pool_workqueue, fill: bool) 
 // $nna->pending_pwqs.
 //
     raw_spin_lock(&nna.lock);
-    if (list_empty(&pwq.pending_node))
+    if (list_empty(&pwq.pending_node)) {
     list_add_tail(&pwq.pending_node, &nna.pending_pwqs);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: likely(!fill)) -> else {
-    else if (likely(!fill))
-    goto out_unlock;
+    }
+
+    else if (likely(!fill)) {
+// goto;
+    }
     smp_mb();
     obtained = tryinc_node_nr_active(nna);
 //
 // If @fill, @pwq might have already been pending. Being spuriously
 // pending in cold paths doesn't affect anything. Let's leave it be.
 //
-    if (obtained && likely(!fill))
+    if (obtained && likely(!fill)) {
     list_del_init(&pwq.pending_node);
-    out_unlock:
+    }
+// label;
     raw_spin_unlock(&nna.lock);
-    out:
-    if (obtained)
-    pwq.nr_active++;
+// label;
+    if (obtained) {
+    pwq.nr_active += 1;
+    }
     return obtained;
     }
 //
@@ -1727,11 +1939,7 @@ pub unsafe extern "C" fn if(_arg: likely(!fill)) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn pwq_activate_first_inactive(pwq: *mut pool_workqueue, fill: bool) -> bool {
-    static bool pwq_activate_first_inactive(struct pool_workqueue *pwq, bool fill)
-    {
-    struct work_struct *work =
-    list_first_entry_or_null(&pwq.inactive_works,
-    struct work_struct, entry);
+    let mut work = list_first_entry_or_null(&pwq.inactive_works, work_struct, entry);
     if (work && pwq_tryinc_nr_active(pwq, fill)) {
     __pwq_activate_work(pwq, work);
     return true;
@@ -1763,12 +1971,10 @@ unsafe extern "C" fn pwq_activate_first_inactive(pwq: *mut pool_workqueue, fill:
 //
 #[no_mangle]
 unsafe extern "C" fn unplug_oldest_pwq(wq: *mut workqueue_struct) {
-    static void unplug_oldest_pwq(struct workqueue_struct *wq)
-    {
-    struct pool_workqueue *pwq;
+pub static mut pwq: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&wq.mutex);
 // Caller should make sure that pwqs isn't empty before calling
-    pwq = list_first_entry_or_null(&wq.pwqs, struct pool_workqueue,
+    pwq = list_first_entry_or_null(&wq.pwqs, pool_workqueue,
     pwqs_node);
     raw_spin_lock_irq(&pwq.pool.lock);
     if (pwq.plugged) {
@@ -1797,19 +2003,18 @@ unsafe extern "C" fn unplug_oldest_pwq(wq: *mut workqueue_struct) {
 // Activate a pwq in @nna->pending_pwqs. Called with @caller_pool locked.
 // @caller_pool may be unlocked and relocked to lock other worker_pools.
 //
-    static void node_activate_pending_pwq(struct wq_node_nr_active *nna,
-    struct worker_pool *caller_pool)
-    {
-    struct worker_pool *locked_pool = caller_pool;
-    struct pool_workqueue *pwq;
-    struct work_struct *work;
+#[no_mangle]
+pub unsafe extern "C" fn node_activate_pending_pwq(nna: *mut wq_node_nr_active, caller_pool: *mut worker_pool) {
+    let mut locked_pool = caller_pool;
+pub static mut pwq: *mut c_void = core::ptr::null_mut();
+pub static mut work: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&caller_pool.lock);
     raw_spin_lock(&nna.lock);
-    retry:
-    pwq = list_first_entry_or_null(&nna.pending_pwqs,
-    struct pool_workqueue, pending_node);
-    if (!pwq)
-    goto out_unlock;
+// label;
+    pwq = list_first_entry_or_null(&nna.pending_pwqs, pool_workqueue, pending_node);
+    if (!pwq) {
+// goto;
+    }
 //
 // If @pwq is for a different pool than @locked_pool, we need to lock
 // @pwq->pool->lock. Let's trylock first. If unsuccessful, do the unlock
@@ -1823,18 +2028,17 @@ unsafe extern "C" fn unplug_oldest_pwq(wq: *mut workqueue_struct) {
     raw_spin_unlock(&nna.lock);
     raw_spin_lock(&locked_pool.lock);
     raw_spin_lock(&nna.lock);
-    goto retry;
+// goto;
     }
     }
 //
 // $pwq may not have any inactive work items due to e.g. cancellations.
 // Drop it from pending_pwqs and see if there's another one.
 //
-    work = list_first_entry_or_null(&pwq.inactive_works,
-    struct work_struct, entry);
+    work = list_first_entry_or_null(&pwq.inactive_works, work_struct, entry);
     if (!work) {
     list_del_init(&pwq.pending_node);
-    goto retry;
+// goto;
     }
 //
 // Acquire an nr_active count and activate the inactive work item. If
@@ -1844,17 +2048,20 @@ unsafe extern "C" fn unplug_oldest_pwq(wq: *mut workqueue_struct) {
 // given that there has never been any ordering across different pwqs.
 //
     if (likely(tryinc_node_nr_active(nna))) {
-    pwq.nr_active++;
+    pwq.nr_active += 1;
     __pwq_activate_work(pwq, work);
-    if (list_empty(&pwq.inactive_works))
+    if (list_empty(&pwq.inactive_works)) {
     list_del_init(&pwq.pending_node);
-    else
+    }
+    else {
     list_move_tail(&pwq.pending_node, &nna.pending_pwqs);
+    }
 // if activating a foreign pool, make sure it's running
-    if (pwq.pool != caller_pool)
+    if (pwq.pool != caller_pool) {
     kick_pool(pwq.pool);
     }
-    out_unlock:
+    }
+// label;
     raw_spin_unlock(&nna.lock);
     if (locked_pool != caller_pool) {
     raw_spin_unlock(&locked_pool.lock);
@@ -1870,16 +2077,14 @@ unsafe extern "C" fn unplug_oldest_pwq(wq: *mut workqueue_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn pwq_dec_nr_active(pwq: *mut pool_workqueue) {
-    static void pwq_dec_nr_active(struct pool_workqueue *pwq)
-    {
-    struct worker_pool *pool = pwq.pool;
-    struct wq_node_nr_active *nna;
+    let mut pool = pwq.pool;
+pub static mut nna: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&pool.lock);
 //
 // @pwq->nr_active should be decremented for both percpu and unbound
 // workqueues.
 //
-    pwq.nr_active--;
+    pwq.nr_active -= 1;
 //
 // A concurrency-managed per-cpu pool only needs to kick the first
 // inactive work item on @pwq itself.
@@ -1903,10 +2108,12 @@ unsafe extern "C" fn pwq_dec_nr_active(pwq: *mut pool_workqueue) {
 // larger than @pwq->wq->min_active which is above zero unless freezing.
 // This maintains the forward progress guarantee.
 //
-    if (atomic_dec_return(&nna.nr) >= READ_ONCE(nna.max))
+    if (atomic_dec_return(&nna.nr) >= READ_ONCE(nna.max)) {
     return;
-    if (!list_empty(&nna.pending_pwqs))
+    }
+    if (!list_empty(&nna.pending_pwqs)) {
     node_activate_pending_pwq(nna, pool);
+    }
     }
 //
 // pwq_dec_nr_in_flight - decrement pwq's nr_in_flight
@@ -1926,27 +2133,29 @@ unsafe extern "C" fn pwq_dec_nr_active(pwq: *mut pool_workqueue) {
 //
 #[no_mangle]
 unsafe extern "C" fn pwq_dec_nr_in_flight(pwq: *mut pool_workqueue, work_data: c_ulong) {
-    static void pwq_dec_nr_in_flight(struct pool_workqueue *pwq, unsigned long work_data)
-    {
-    let mut color: c_int = get_work_color(work_data);
-    if (!(work_data & WORK_STRUCT_INACTIVE))
+pub static mut color: c_int = 0;
+    if (!(work_data & WORK_STRUCT_INACTIVE)) {
     pwq_dec_nr_active(pwq);
+    }
     pwq.nr_in_flight[color]--;
 // is flush in progress and are we at the flushing tip?
-    if (likely(pwq.flush_color != color))
-    goto out_put;
+    if (likely(pwq.flush_color != color)) {
+// goto;
+    }
 // are there still in-flight works?
-    if (pwq.nr_in_flight[color])
-    goto out_put;
+    if (pwq.nr_in_flight[color]) {
+// goto;
+    }
 // this pwq is done, clear flush_color
     pwq.flush_color = -1;
 //
 // If this was the last pwq, wake up the first flusher.  It
 // will handle the rest.
 //
-    if (atomic_dec_and_test(&pwq.wq.nr_pwqs_to_flush))
+    if (atomic_dec_and_test(&pwq.wq.nr_pwqs_to_flush)) {
     complete(&pwq.wq.first_flusher.done);
-    out_put:
+    }
+// label;
     put_pwq(pwq);
     }
 //
@@ -1977,34 +2186,36 @@ unsafe extern "C" fn pwq_dec_nr_in_flight(pwq: *mut pool_workqueue, work_data: c
 //
 // This function is safe to call from any context including IRQ handler.
 //
-    static int try_to_grab_pending(struct work_struct *work, u32 cflags,
-    unsigned long *irq_flags)
-    {
-    struct worker_pool *pool;
-    struct pool_workqueue *pwq;
+#[no_mangle]
+pub unsafe extern "C" fn try_to_grab_pending(work: *mut work_struct, cflags: u32, irq_flags: *mut c_ulong) -> c_int {
+pub static mut pool: *mut c_void = core::ptr::null_mut();
+pub static mut pwq: *mut c_void = core::ptr::null_mut();
     local_irq_save(*irq_flags);
 // try to steal the timer if it exists
     if (cflags & WORK_CANCEL_DELAYED) {
-    struct delayed_work *dwork = to_delayed_work(work);
+    let mut dwork = to_delayed_work(work);
 //
 // dwork->timer is irqsafe.  If timer_delete() fails, it's
 // guaranteed that the timer is not queued anywhere and not
 // running on the local CPU.
 //
-    if (likely(timer_delete(&dwork.timer)))
+    if (likely(timer_delete(&dwork.timer))) {
     return 1;
     }
+    }
 // try to claim PENDING the normal way
-    if (!test_and_set_bit(WORK_STRUCT_PENDING_BIT, work_data_bits(work)))
+    if (!test_and_set_bit(WORK_STRUCT_PENDING_BIT, work_data_bits(work))) {
     return 0;
+    }
     rcu_read_lock();
 //
 // The queueing is in progress, or it is already queued. Try to
 // steal it from ->worklist without clearing WORK_STRUCT_PENDING.
 //
     pool = get_work_pool(work);
-    if (!pool)
-    goto fail;
+    if (!pool) {
+// goto;
+    }
     raw_spin_lock(&pool.lock);
 //
 // work->data is guaranteed to point to pwq only while the work
@@ -2016,7 +2227,7 @@ unsafe extern "C" fn pwq_dec_nr_in_flight(pwq: *mut pool_workqueue, work_data: c
 //
     pwq = get_work_pwq(work);
     if (pwq && pwq.pool == pool) {
-    let mut work_data: c_ulong = *work_data_bits(work);
+pub static mut work_data: c_ulong = 0;
     debug_work_deactivate(work);
 //
 // A cancelable inactive work item must be in the
@@ -2032,8 +2243,9 @@ unsafe extern "C" fn pwq_dec_nr_in_flight(pwq: *mut pool_workqueue, work_data: c
 // it doesn't participate in nr_active management in later
 // pwq_dec_nr_in_flight().
 //
-    if (work_data & WORK_STRUCT_INACTIVE)
+    if (work_data & WORK_STRUCT_INACTIVE) {
     move_linked_works(work, &pwq.pool.worklist, core::ptr::null_mut());
+    }
     list_del_init(&work.entry);
 //
 // work->data points to pwq iff queued. Let's point to pool. As
@@ -2048,7 +2260,7 @@ unsafe extern "C" fn pwq_dec_nr_in_flight(pwq: *mut pool_workqueue, work_data: c
     return 1;
     }
     raw_spin_unlock(&pool.lock);
-    fail:
+// label;
     rcu_read_unlock();
     local_irq_restore(*irq_flags);
     return -EAGAIN;
@@ -2068,14 +2280,14 @@ unsafe extern "C" fn pwq_dec_nr_in_flight(pwq: *mut pool_workqueue, work_data: c
 //
 // Returns %true if @work was pending. %false if idle.
 //
-    static bool work_grab_pending(struct work_struct *work, u32 cflags,
-    unsigned long *irq_flags)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn work_grab_pending(work: *mut work_struct, cflags: u32, irq_flags: *mut c_ulong) -> bool {
+    let mut ret = 0;
     while (true) {
     ret = try_to_grab_pending(work, cflags, irq_flags);
-    if (ret >= 0)
+    if (ret >= 0) {
     return ret;
+    }
     cpu_relax();
     }
     }
@@ -2092,9 +2304,8 @@ unsafe extern "C" fn pwq_dec_nr_in_flight(pwq: *mut pool_workqueue, work_data: c
 // CONTEXT:
 // raw_spin_lock_irq(pool->lock).
 //
-    static void insert_work(struct pool_workqueue *pwq, struct work_struct *work,
-    struct list_head *head, unsigned int extra_flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn insert_work(pwq: *mut pool_workqueue, work: *mut work_struct, head: *mut list_head, extra_flags: c_uint) {
     debug_work_activate(work);
 // record the work call stack in order to print it in KASAN reports
     kasan_record_aux_stack(work);
@@ -2109,9 +2320,7 @@ unsafe extern "C" fn pwq_dec_nr_in_flight(pwq: *mut pool_workqueue, work_data: c
 //
 #[no_mangle]
 unsafe extern "C" fn is_chained_work(wq: *mut workqueue_struct) -> bool {
-    static bool is_chained_work(struct workqueue_struct *wq)
-    {
-    struct worker *worker;
+pub static mut worker: *mut c_void = core::ptr::null_mut();
     worker = current_wq_worker();
 //
 // Return %true iff I'm a worker executing a work item on @wq.  If
@@ -2126,36 +2335,37 @@ unsafe extern "C" fn is_chained_work(wq: *mut workqueue_struct) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn wq_select_unbound_cpu(cpu: c_int) -> c_int {
-    static int wq_select_unbound_cpu(int cpu)
-    {
-    int new_cpu;
+    let mut new_cpu = 0;
     if (likely(!wq_debug_force_rr_cpu)) {
-    if (cpumask_test_cpu(cpu, wq_unbound_cpumask))
+    if (cpumask_test_cpu(cpu, wq_unbound_cpumask)) {
     return cpu;
+    }
     } else {
     pr_warn_once("workqueue: round-robin CPU selection forced, expect performance impact\n");
     }
     new_cpu = __this_cpu_read(wq_rr_cpu_last);
     new_cpu = cpumask_next_and_wrap(new_cpu, wq_unbound_cpumask, cpu_online_mask);
-    if (unlikely(new_cpu >= nr_cpu_ids))
+    if (unlikely(new_cpu >= nr_cpu_ids)) {
     return cpu;
+    }
     __this_cpu_write(wq_rr_cpu_last, new_cpu);
     return new_cpu;
     }
-    static void __queue_work(int cpu, struct workqueue_struct *wq,
-    struct work_struct *work)
-    {
-    struct pool_workqueue *pwq;
-    struct worker_pool *last_pool, *pool;
-    struct task_struct *wake_task = core::ptr::null_mut();
-    unsigned int work_flags;
-    let mut req_cpu: c_uint = cpu;
+#[no_mangle]
+pub unsafe extern "C" fn __queue_work(cpu: c_int, wq: *mut workqueue_struct, work: *mut work_struct) {
+pub static mut pwq: *mut c_void = core::ptr::null_mut();
+    let mut last_pool = core::ptr::null_mut();
+    let mut pool = core::ptr::null_mut();
+    let mut wake_task = core::ptr::null_mut();
+    let mut work_flags = 0;
+pub static mut req_cpu: c_uint = 0;
 //
 // NOTE: Check whether the used workqueue is deprecated and warn
 //
-    if (unlikely(wq.flags & __WQ_DEPRECATED))
+    if (unlikely(wq.flags & __WQ_DEPRECATED)) {
     pr_warn_once("workqueue: work func %ps enqueued on deprecated workqueue. "
     "Use system_{percpu|dfl}_wq instead.\n",
+    }
     work.func);
 //
 // While a work item is PENDING && off queue, a task trying to
@@ -2172,7 +2382,7 @@ unsafe extern "C" fn wq_select_unbound_cpu(cpu: c_int) -> c_int {
     if (unlikely(wq.flags & (__WQ_DESTROYING | __WQ_DRAINING) &&
     WARN_ONCE(!is_chained_work(wq), "workqueue: cannot queue %ps on wq %s\n",
     work.func, wq.name))) {
-    struct work_offq_data offqd;
+pub static mut offqd: usize = 0;
 //
 // State on entry: PENDING is set, work is off-queue (no
 // insert_work() has run).
@@ -2186,13 +2396,15 @@ unsafe extern "C" fn wq_select_unbound_cpu(cpu: c_int) -> c_int {
     return;
     }
     rcu_read_lock();
-    retry:
+// label;
 // pwq which will be used unless @work is executing elsewhere
     if (req_cpu == WORK_CPU_UNBOUND) {
-    if (wq.flags & WQ_UNBOUND)
+    if (wq.flags & WQ_UNBOUND) {
     cpu = wq_select_unbound_cpu(raw_smp_processor_id());
-    else
+    }
+    else {
     cpu = raw_smp_processor_id();
+    }
     }
     pwq = rcu_dereference(*per_cpu_ptr(wq.cpu_pwq, cpu));
     pool = pwq.pool;
@@ -2207,13 +2419,13 @@ unsafe extern "C" fn wq_select_unbound_cpu(cpu: c_int) -> c_int {
 //
     last_pool = get_work_pool(work);
     if (last_pool && last_pool != pool && !(wq.flags & __WQ_ORDERED)) {
-    struct worker *worker;
+pub static mut worker: *mut c_void = core::ptr::null_mut();
     raw_spin_lock(&last_pool.lock);
     worker = find_worker_executing_work(last_pool, work);
     if (worker && worker.current_pwq.wq == wq) {
     pwq = worker.current_pwq;
     pool = pwq.pool;
-    WARN_ON_ONCE(pool != last_pool);
+    WARN_ON_ONCE!(pool != last_pool);
     } else {
 // meh... not running there, queue here
     raw_spin_unlock(&last_pool.lock);
@@ -2233,7 +2445,7 @@ unsafe extern "C" fn wq_select_unbound_cpu(cpu: c_int) -> c_int {
     if (wq.flags & WQ_UNBOUND) {
     raw_spin_unlock(&pool.lock);
     cpu_relax();
-    goto retry;
+// goto;
     }
 // oops
     WARN_ONCE(true, "workqueue: per-cpu pwq for %s on cpu%d has 0 refcnt",
@@ -2241,8 +2453,9 @@ unsafe extern "C" fn wq_select_unbound_cpu(cpu: c_int) -> c_int {
     }
 // pwq determined, queue
     trace_workqueue_queue_work(req_cpu, pwq, work);
-    if (WARN_ON(!list_empty(&work.entry)))
-    goto out;
+    if (WARN_ON!(!list_empty(&work.entry))) {
+// goto;
+    }
     pwq.nr_in_flight[pwq.work_color]++;
     work_flags = work_color_to_flags(pwq.work_color);
 //
@@ -2251,8 +2464,9 @@ unsafe extern "C" fn wq_select_unbound_cpu(cpu: c_int) -> c_int {
 // ordering when max_active changes. See wq_adjust_max_active().
 //
     if (list_empty(&pwq.inactive_works) && pwq_tryinc_nr_active(pwq, false)) {
-    if (list_empty(&pool.worklist))
+    if (list_empty(&pool.worklist)) {
     pool.last_progress_ts = jiffies;
+    }
     trace_workqueue_activate_work(work);
     insert_work(pwq, work, &pool.worklist, work_flags);
     kick_pool_pick(pool, &wake_task);
@@ -2260,21 +2474,21 @@ unsafe extern "C" fn wq_select_unbound_cpu(cpu: c_int) -> c_int {
     work_flags |= WORK_STRUCT_INACTIVE;
     insert_work(pwq, work, &pwq.inactive_works, work_flags);
     }
-    out:
+// label;
     raw_spin_unlock(&pool.lock);
-    if (wake_task)
+    if (wake_task) {
     wake_up_process(wake_task);
+    }
     rcu_read_unlock();
     }
 #[no_mangle]
 unsafe extern "C" fn clear_pending_if_disabled(work: *mut work_struct) -> bool {
-    static bool clear_pending_if_disabled(struct work_struct *work)
-    {
-    let mut data: c_ulong = *work_data_bits(work);
-    struct work_offq_data offqd;
+pub static mut data: c_ulong = 0;
+pub static mut offqd: usize = 0;
     if (likely((data & WORK_STRUCT_PWQ) ||
-    !(data & WORK_OFFQ_DISABLE_MASK)))
+    !(data & WORK_OFFQ_DISABLE_MASK))) {
     return false;
+    }
     work_offqd_unpack(&offqd, data);
     set_work_pool_and_clear_pending(work, offqd.pool_id,
     work_offqd_pack_flags(&offqd));
@@ -2294,11 +2508,10 @@ unsafe extern "C" fn clear_pending_if_disabled(work: *mut work_struct) -> bool {
 //
 // Return: %false if @work was already on a queue, %true otherwise.
 //
-    bool queue_work_on(int cpu, struct workqueue_struct *wq,
-    struct work_struct *work)
-    {
-    let mut ret: bool = false;
-    unsigned long irq_flags;
+#[no_mangle]
+pub unsafe extern "C" fn queue_work_on(cpu: c_int, wq: *mut workqueue_struct, work: *mut work_struct) -> bool {
+pub static mut ret: bool = false;
+    let mut irq_flags = 0;
     local_irq_save(irq_flags);
     if (!test_and_set_bit(WORK_STRUCT_PENDING_BIT, work_data_bits(work)) &&
     !clear_pending_if_disabled(work)) {
@@ -2320,16 +2533,16 @@ unsafe extern "C" fn clear_pending_if_disabled(work: *mut work_struct) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn select_numa_node_cpu(node: c_int) -> c_int {
-    static int select_numa_node_cpu(int node)
-    {
-    int cpu;
+    let mut cpu = 0;
 // Delay binding to CPU if node is not valid or online
-    if (node < 0 || node >= MAX_NUMNODES || !node_online(node))
+    if (node < 0 || node >= MAX_NUMNODES || !node_online(node)) {
     return WORK_CPU_UNBOUND;
+    }
 // Use local node/cpu if we are already there
     cpu = raw_smp_processor_id();
-    if (node == cpu_to_node(cpu))
+    if (node == cpu_to_node(cpu)) {
     return cpu;
+    }
 // Use "random" otherwise know as "first" online CPU of node
     cpu = cpumask_any_and(cpumask_of_node(node), cpu_online_mask);
 // If CPU is valid return that, otherwise just defer
@@ -2355,11 +2568,10 @@ unsafe extern "C" fn select_numa_node_cpu(node: c_int) -> c_int {
 //
 // Return: %false if @work was already on a queue, %true otherwise.
 //
-    bool queue_work_node(int node, struct workqueue_struct *wq,
-    struct work_struct *work)
-    {
-    unsigned long irq_flags;
-    let mut ret: bool = false;
+#[no_mangle]
+pub unsafe extern "C" fn queue_work_node(node: c_int, wq: *mut workqueue_struct, work: *mut work_struct) -> bool {
+    let mut irq_flags = 0;
+pub static mut ret: bool = false;
 //
 // This current implementation is specific to unbound workqueues.
 // Specifically we only return the first available CPU for a given
@@ -2369,11 +2581,11 @@ unsafe extern "C" fn select_numa_node_cpu(node: c_int) -> c_int {
 // workqueue_select_cpu_near would need to be updated to allow for
 // some round robin type logic.
 //
-    WARN_ON_ONCE(!(wq.flags & WQ_UNBOUND));
+    WARN_ON_ONCE!(!(wq.flags & WQ_UNBOUND));
     local_irq_save(irq_flags);
     if (!test_and_set_bit(WORK_STRUCT_PENDING_BIT, work_data_bits(work)) &&
     !clear_pending_if_disabled(work)) {
-    let mut cpu: c_int = select_numa_node_cpu(node);
+pub static mut cpu: c_int = 0;
     __queue_work(cpu, wq, work);
     ret = true;
     }
@@ -2383,21 +2595,18 @@ unsafe extern "C" fn select_numa_node_cpu(node: c_int) -> c_int {
     EXPORT_SYMBOL_GPL(queue_work_node);
 #[no_mangle]
 pub unsafe extern "C" fn delayed_work_timer_fn(t: *mut timer_list) {
-    void delayed_work_timer_fn(struct timer_list *t)
-    {
-    struct delayed_work *dwork = timer_container_of(dwork, t, timer);
+    let mut dwork = timer_container_of(dwork, t, timer);
 // should have been called from irqsafe timer with irq already off
     __queue_work(dwork.cpu, dwork.wq, &dwork.work);
     }
     EXPORT_SYMBOL(delayed_work_timer_fn);
-    static void __queue_delayed_work(int cpu, struct workqueue_struct *wq,
-    struct delayed_work *dwork, unsigned long delay)
-    {
-    struct timer_list *timer = &dwork.timer;
-    struct work_struct *work = &dwork.work;
-    WARN_ON_ONCE(timer.function != delayed_work_timer_fn);
-    WARN_ON_ONCE(timer_pending(timer));
-    WARN_ON_ONCE(!list_empty(&work.entry));
+#[no_mangle]
+pub unsafe extern "C" fn __queue_delayed_work(cpu: c_int, wq: *mut workqueue_struct, dwork: *mut delayed_work, delay: c_ulong) {
+    let mut timer = &dwork.timer;
+    let mut work = &dwork.work;
+    WARN_ON_ONCE!(timer.function != delayed_work_timer_fn);
+    WARN_ON_ONCE!(timer_pending(timer));
+    WARN_ON_ONCE!(!list_empty(&work.entry));
 //
 // If @delay is 0, queue @dwork->work immediately.  This is for
 // both optimization and correctness.  The earliest @timer can
@@ -2408,21 +2617,24 @@ pub unsafe extern "C" fn delayed_work_timer_fn(t: *mut timer_list) {
     __queue_work(cpu, wq, &dwork.work);
     return;
     }
-    WARN_ON_ONCE(cpu != WORK_CPU_UNBOUND && !cpu_online(cpu));
+    WARN_ON_ONCE!(cpu != WORK_CPU_UNBOUND && !cpu_online(cpu));
     dwork.wq = wq;
     dwork.cpu = cpu;
     timer.expires = jiffies + delay;
     if (housekeeping_enabled(HK_TYPE_TIMER)) {
 // If the current cpu is a housekeeping cpu, use it.
     cpu = smp_processor_id();
-    if (!housekeeping_test_cpu(cpu, HK_TYPE_TIMER))
+    if (!housekeeping_test_cpu(cpu, HK_TYPE_TIMER)) {
     cpu = housekeeping_any_cpu(HK_TYPE_TIMER);
+    }
     add_timer_on(timer, cpu);
     } else {
-    if (likely(cpu == WORK_CPU_UNBOUND))
+    if (likely(cpu == WORK_CPU_UNBOUND)) {
     add_timer_global(timer);
-    else
+    }
+    else {
     add_timer_on(timer, cpu);
+    }
     }
     }
 //
@@ -2442,12 +2654,11 @@ pub unsafe extern "C" fn delayed_work_timer_fn(t: *mut timer_list) {
 // @delay is zero and @dwork is idle, it will be scheduled for immediate
 // execution.
 //
-    bool queue_delayed_work_on(int cpu, struct workqueue_struct *wq,
-    struct delayed_work *dwork, unsigned long delay)
-    {
-    struct work_struct *work = &dwork.work;
-    let mut ret: bool = false;
-    unsigned long irq_flags;
+#[no_mangle]
+pub unsafe extern "C" fn queue_delayed_work_on(cpu: c_int, wq: *mut workqueue_struct, dwork: *mut delayed_work, delay: c_ulong) -> bool {
+    let mut work = &dwork.work;
+pub static mut ret: bool = false;
+    let mut irq_flags = 0;
 // read the comment in __queue_work()
     local_irq_save(irq_flags);
     if (!test_and_set_bit(WORK_STRUCT_PENDING_BIT, work_data_bits(work)) &&
@@ -2477,23 +2688,21 @@ pub unsafe extern "C" fn delayed_work_timer_fn(t: *mut timer_list) {
 // This function is safe to call from any context including IRQ handler.
 // See try_to_grab_pending() for details.
 //
-    bool mod_delayed_work_on(int cpu, struct workqueue_struct *wq,
-    struct delayed_work *dwork, unsigned long delay)
-    {
-    unsigned long irq_flags;
-    bool ret;
+#[no_mangle]
+pub unsafe extern "C" fn mod_delayed_work_on(cpu: c_int, wq: *mut workqueue_struct, dwork: *mut delayed_work, delay: c_ulong) -> bool {
+    let mut irq_flags = 0;
+    let mut ret = 0;
     ret = work_grab_pending(&dwork.work, WORK_CANCEL_DELAYED, &irq_flags);
-    if (!clear_pending_if_disabled(&dwork.work))
+    if (!clear_pending_if_disabled(&dwork.work)) {
     __queue_delayed_work(cpu, wq, dwork, delay);
+    }
     local_irq_restore(irq_flags);
     return ret;
     }
     EXPORT_SYMBOL_GPL(mod_delayed_work_on);
 #[no_mangle]
 unsafe extern "C" fn rcu_work_rcufn(rcu: *mut rcu_head) {
-    static void rcu_work_rcufn(struct rcu_head *rcu)
-    {
-    struct rcu_work *rwork = container_of(rcu, struct rcu_work, rcu);
+    let mut rwork = container_of!(rcu, rcu_work, rcu);
 // read the comment in __queue_work()
     local_irq_disable();
     __queue_work(WORK_CPU_UNBOUND, rwork.wq, &rwork.work);
@@ -2511,15 +2720,13 @@ unsafe extern "C" fn rcu_work_rcufn(rcu: *mut rcu_head) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn queue_rcu_work(wq: *mut workqueue_struct, rwork: *mut rcu_work) -> bool {
-    bool queue_rcu_work(struct workqueue_struct *wq, struct rcu_work *rwork)
-    {
-    struct work_struct *work = &rwork.work;
+    let mut work = &rwork.work;
 //
 // rcu_work can't be canceled or disabled. Warn if the user reached
 // inside @rwork and disabled the inner work.
 //
     if (!test_and_set_bit(WORK_STRUCT_PENDING_BIT, work_data_bits(work)) &&
-    !WARN_ON_ONCE(clear_pending_if_disabled(work))) {
+    !WARN_ON_ONCE!(clear_pending_if_disabled(work))) {
     rwork.wq = wq;
     call_rcu_hurry(&rwork.rcu, rcu_work_rcufn);
     return true;
@@ -2527,10 +2734,10 @@ pub unsafe extern "C" fn queue_rcu_work(wq: *mut workqueue_struct, rwork: *mut r
     return false;
     }
     EXPORT_SYMBOL(queue_rcu_work);
-    static struct worker *alloc_worker(int node)
-    {
-    struct worker *worker;
-    worker = kzalloc_node(sizeof(*worker), GFP_KERNEL, node);
+#[no_mangle]
+pub unsafe extern "C" fn alloc_worker(node: c_int) -> *mut c_void {
+pub static mut worker: *mut c_void = core::ptr::null_mut();
+    worker = kzalloc_node(sizeof!(*worker), GFP_KERNEL, node);
     if (worker) {
     INIT_LIST_HEAD(&worker.entry);
     INIT_LIST_HEAD(&worker.scheduled);
@@ -2540,12 +2747,14 @@ pub unsafe extern "C" fn queue_rcu_work(wq: *mut workqueue_struct, rwork: *mut r
     }
     return worker;
     }
-    static cpumask_t *pool_allowed_cpus(struct worker_pool *pool)
+    static cpumask_t *pool_allowed_cpus(worker_pool *pool)
     {
-    if (!is_percpu_pool(pool) && pool.attrs.affn_strict)
+    if (!is_percpu_pool(pool) && pool.attrs.affn_strict) {
     return pool.attrs.__pod_cpumask;
-    else
+    }
+    else {
     return pool.attrs.cpumask;
+    }
     }
 //
 // worker_attach_to_pool() - attach a worker to a pool
@@ -2556,9 +2765,8 @@ pub unsafe extern "C" fn queue_rcu_work(wq: *mut workqueue_struct, rwork: *mut r
 // cpu-binding of @worker are kept coordinated with the pool across
 // cpu-[un]hotplugs.
 //
-    static void worker_attach_to_pool(struct worker *worker,
-    struct worker_pool *pool)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn worker_attach_to_pool(worker: *mut worker, pool: *mut worker_pool) {
     mutex_lock(&wq_pool_attach_mutex);
 //
 // The wq_pool_attach_mutex ensures %POOL_DISASSOCIATED remains stable
@@ -2568,30 +2776,29 @@ pub unsafe extern "C" fn queue_rcu_work(wq: *mut workqueue_struct, rwork: *mut r
     if (pool.flags & POOL_DISASSOCIATED) {
     worker.flags |= WORKER_UNBOUND;
     } else {
-    WARN_ON_ONCE(pool.flags & POOL_BH);
+    WARN_ON_ONCE!(pool.flags & POOL_BH);
     kthread_set_per_cpu(worker.task, pool.cpu);
     }
-    if (worker.rescue_wq)
+    if (worker.rescue_wq) {
     set_cpus_allowed_ptr(worker.task, pool_allowed_cpus(pool));
+    }
     list_add_tail(&worker.node, &pool.workers);
     worker.pool = pool;
     mutex_unlock(&wq_pool_attach_mutex);
     }
 #[no_mangle]
 unsafe extern "C" fn unbind_worker(worker: *mut worker) {
-    static void unbind_worker(struct worker *worker)
-    {
     lockdep_assert_held(&wq_pool_attach_mutex);
     kthread_set_per_cpu(worker.task, -1);
-    if (cpumask_intersects(wq_unbound_cpumask, cpu_active_mask))
-    WARN_ON_ONCE(set_cpus_allowed_ptr(worker.task, wq_unbound_cpumask) < 0);
-    else
-    WARN_ON_ONCE(set_cpus_allowed_ptr(worker.task, cpu_possible_mask) < 0);
+    if (cpumask_intersects(wq_unbound_cpumask, cpu_active_mask)) {
+    WARN_ON_ONCE!(set_cpus_allowed_ptr(worker.task, wq_unbound_cpumask) < 0);
+    }
+    else {
+    WARN_ON_ONCE!(set_cpus_allowed_ptr(worker.task, cpu_possible_mask) < 0);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn detach_worker(worker: *mut worker) {
-    static void detach_worker(struct worker *worker)
-    {
     lockdep_assert_held(&wq_pool_attach_mutex);
     unbind_worker(worker);
     list_del(&worker.node);
@@ -2606,11 +2813,9 @@ unsafe extern "C" fn detach_worker(worker: *mut worker) {
 //
 #[no_mangle]
 unsafe extern "C" fn worker_detach_from_pool(worker: *mut worker) {
-    static void worker_detach_from_pool(struct worker *worker)
-    {
-    struct worker_pool *pool = worker.pool;
+    let mut pool = worker.pool;
 // there is one permanent BH worker per CPU which should never detach
-    WARN_ON_ONCE(pool.flags & POOL_BH);
+    WARN_ON_ONCE!(pool.flags & POOL_BH);
     mutex_lock(&wq_pool_attach_mutex);
     detach_worker(worker);
     worker.pool = core::ptr::null_mut();
@@ -2618,20 +2823,22 @@ unsafe extern "C" fn worker_detach_from_pool(worker: *mut worker) {
 // clear leftover flags without pool->lock after it is detached
     worker.flags &= ~(WORKER_UNBOUND | WORKER_REBOUND);
     }
-    static int format_worker_id(char *buf, size_t size, struct worker *worker,
-    struct worker_pool *pool)
-    {
-    if (worker.rescue_wq)
+#[no_mangle]
+pub unsafe extern "C" fn format_worker_id(buf: *mut c_char, size: size_t, worker: *mut worker, pool: *mut worker_pool) -> c_int {
+    if (worker.rescue_wq) {
     return scnprintf(buf, size, "kworker/R-%s",
     worker.rescue_wq.name);
+    }
     if (pool) {
-    if (pool.cpu >= 0)
+    if (pool.cpu >= 0) {
     return scnprintf(buf, size, "kworker/%d:%d%s",
     pool.cpu, worker.id,
     pool.attrs.nice < 0  ? "H" : "");
-    else
+    }
+    else {
     return scnprintf(buf, size, "kworker/u%d:%d",
     pool.id, worker.id);
+    }
     } else {
     return scnprintf(buf, size, "kworker/dying");
     }
@@ -2648,10 +2855,10 @@ unsafe extern "C" fn worker_detach_from_pool(worker: *mut worker) {
 // Return:
 // Pointer to the newly created worker.
 //
-    static struct worker *create_worker(struct worker_pool *pool)
-    {
-    struct worker *worker;
-    int id;
+#[no_mangle]
+pub unsafe extern "C" fn create_worker(pool: *mut worker_pool) -> *mut c_void {
+pub static mut worker: *mut c_void = core::ptr::null_mut();
+    let mut id = 0;
 // ID is needed to determine kthread name
     id = ida_alloc(&pool.worker_ida, GFP_KERNEL);
     if (id < 0) {
@@ -2662,23 +2869,23 @@ unsafe extern "C" fn worker_detach_from_pool(worker: *mut worker) {
     worker = alloc_worker(pool.node);
     if (!worker) {
     pr_err_once("workqueue: Failed to allocate a worker\n");
-    goto fail;
+// goto;
     }
     worker.id = id;
     if (!(pool.flags & POOL_BH)) {
     char id_buf[WORKER_ID_LEN];
-    format_worker_id(id_buf, sizeof(id_buf), worker, pool);
+    format_worker_id(id_buf, sizeof!(id_buf), worker, pool);
     worker.task = kthread_create_on_node(worker_thread, worker,
     pool.node, "%s", id_buf);
     if (IS_ERR(worker.task)) {
     if (PTR_ERR(worker.task) == -EINTR) {
-    pr_err("workqueue: Interrupted when creating a worker thread \"%s\"\n",
+    pr_err!("workqueue: Interrupted when creating a worker thread \"%s\"\n",
     id_buf);
     } else {
     pr_err_once("workqueue: Failed to create a worker thread: %pe",
     worker.task);
     }
-    goto fail;
+// goto;
     }
     set_user_nice(worker.task, pool.attrs.nice);
     kthread_bind_mask(worker.task, pool_allowed_cpus(pool));
@@ -2687,35 +2894,34 @@ unsafe extern "C" fn worker_detach_from_pool(worker: *mut worker) {
     worker_attach_to_pool(worker, pool);
 // start the newly created worker
     raw_spin_lock_irq(&pool.lock);
-    worker.pool.nr_workers++;
+    worker.pool.nr_workers += 1;
     worker_enter_idle(worker);
 //
 // @worker is waiting on a completion in kthread() and will trigger hung
 // check if not woken up soon. As kick_pool() is noop if @pool is empty,
 // wake it up explicitly.
 //
-    if (worker.task)
+    if (worker.task) {
     wake_up_process(worker.task);
+    }
     raw_spin_unlock_irq(&pool.lock);
     return worker;
-    fail:
+// label;
     ida_free(&pool.worker_ida, id);
     kfree(worker);
     return core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn detach_dying_workers(cull_list: *mut list_head) {
-    static void detach_dying_workers(struct list_head *cull_list)
-    {
-    struct worker *worker;
-    list_for_each_entry(worker, cull_list, entry)
+pub static mut worker: *mut c_void = core::ptr::null_mut();
+    list_for_each_entry(worker, cull_list, entry) {
     detach_worker(worker);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn reap_dying_workers(cull_list: *mut list_head) {
-    static void reap_dying_workers(struct list_head *cull_list)
-    {
-    struct worker *worker, *tmp;
+    let mut worker = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
     list_for_each_entry_safe(worker, tmp, cull_list, entry) {
     list_del_init(&worker.entry);
     kthread_stop_put(worker.task);
@@ -2735,24 +2941,24 @@ unsafe extern "C" fn reap_dying_workers(cull_list: *mut list_head) {
 //
 #[no_mangle]
 unsafe extern "C" fn set_worker_dying(worker: *mut worker, list: *mut list_head) {
-    static void set_worker_dying(struct worker *worker, struct list_head *list)
-    {
-    struct worker_pool *pool = worker.pool;
+    let mut pool = worker.pool;
     lockdep_assert_held(&pool.lock);
     lockdep_assert_held(&wq_pool_attach_mutex);
 // sanity check frenzy
-    if (WARN_ON(worker.current_work) ||
-    WARN_ON(!list_empty(&worker.scheduled)) ||
-    WARN_ON(!(worker.flags & WORKER_IDLE)))
+    if (WARN_ON!(worker.current_work) ||
+    WARN_ON!(!list_empty(&worker.scheduled)) ||
+    WARN_ON!(!(worker.flags & WORKER_IDLE))) {
     return;
-    pool.nr_workers--;
-    pool.nr_idle--;
+    }
+    pool.nr_workers -= 1;
+    pool.nr_idle -= 1;
 //
 // Clear last_woken_worker if it points to this worker, so that
 // show_cpu_pool_busy_workers() cannot dereference a freed worker.
 //
-    if (pool.last_woken_worker == worker)
+    if (pool.last_woken_worker == worker) {
     pool.last_woken_worker = core::ptr::null_mut();
+    }
     worker.flags |= WORKER_DIE;
     list_move(&worker.entry, list);
 // get an extra task struct reference for later kthread_stop_put()
@@ -2770,26 +2976,27 @@ unsafe extern "C" fn set_worker_dying(worker: *mut worker, list: *mut list_head)
 //
 #[no_mangle]
 unsafe extern "C" fn idle_worker_timeout(t: *mut timer_list) {
-    static void idle_worker_timeout(struct timer_list *t)
-    {
-    struct worker_pool *pool = timer_container_of(pool, t, idle_timer);
-    let mut do_cull: bool = false;
-    if (work_pending(&pool.idle_cull_work))
+    let mut pool = timer_container_of(pool, t, idle_timer);
+pub static mut do_cull: bool = false;
+    if (work_pending(&pool.idle_cull_work)) {
     return;
+    }
     raw_spin_lock_irq(&pool.lock);
     if (too_many_workers(pool)) {
-    struct worker *worker;
-    unsigned long expires;
+pub static mut worker: *mut c_void = core::ptr::null_mut();
+    let mut expires = 0;
 // idle_list is kept in LIFO order, check the last one
-    worker = list_last_entry(&pool.idle_list, struct worker, entry);
+    worker = list_last_entry(&pool.idle_list, worker, entry);
     expires = worker.last_active + IDLE_WORKER_TIMEOUT;
     do_cull = !time_before(jiffies, expires);
-    if (!do_cull)
+    if (!do_cull) {
     mod_timer(&pool.idle_timer, expires);
     }
+    }
     raw_spin_unlock_irq(&pool.lock);
-    if (do_cull)
+    if (do_cull) {
     queue_work(system_dfl_wq, &pool.idle_cull_work);
+    }
     }
 //
 // idle_cull_fn - cull workers that have been idle for too long.
@@ -2804,10 +3011,8 @@ unsafe extern "C" fn idle_worker_timeout(t: *mut timer_list) {
 //
 #[no_mangle]
 unsafe extern "C" fn idle_cull_fn(work: *mut work_struct) {
-    static void idle_cull_fn(struct work_struct *work)
-    {
-    struct worker_pool *pool = container_of(work, struct worker_pool, idle_cull_work);
-    LIST_HEAD(cull_list);
+    let mut pool = container_of!(work, worker_pool, idle_cull_work);
+pub static mut cull_list: usize = 0;
 //
 // Grabbing wq_pool_attach_mutex here ensures an already-running worker
 // cannot proceed beyong set_pf_worker() in its self-destruct path.
@@ -2817,9 +3022,9 @@ unsafe extern "C" fn idle_cull_fn(work: *mut work_struct) {
     mutex_lock(&wq_pool_attach_mutex);
     raw_spin_lock_irq(&pool.lock);
     while (too_many_workers(pool)) {
-    struct worker *worker;
-    unsigned long expires;
-    worker = list_last_entry(&pool.idle_list, struct worker, entry);
+pub static mut worker: *mut c_void = core::ptr::null_mut();
+    let mut expires = 0;
+    worker = list_last_entry(&pool.idle_list, worker, entry);
     expires = worker.last_active + IDLE_WORKER_TIMEOUT;
     if (time_before(jiffies, expires)) {
     mod_timer(&pool.idle_timer, expires);
@@ -2834,12 +3039,11 @@ unsafe extern "C" fn idle_cull_fn(work: *mut work_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn send_mayday(pwq: *mut pool_workqueue) {
-    static void send_mayday(struct pool_workqueue *pwq)
-    {
-    struct workqueue_struct *wq = pwq.wq;
+    let mut wq = pwq.wq;
     lockdep_assert_held(&wq_mayday_lock);
-    if (!wq.rescuer)
+    if (!wq.rescuer) {
     return;
+    }
 // mayday mayday mayday
     if (list_empty(&pwq.mayday_node)) {
 //
@@ -2855,10 +3059,8 @@ unsafe extern "C" fn send_mayday(pwq: *mut pool_workqueue) {
     }
 #[no_mangle]
 unsafe extern "C" fn pool_mayday_timeout(t: *mut timer_list) {
-    static void pool_mayday_timeout(struct timer_list *t)
-    {
-    struct worker_pool *pool = timer_container_of(pool, t, mayday_timer);
-    struct work_struct *work;
+    let mut pool = timer_container_of(pool, t, mayday_timer);
+pub static mut work: *mut c_void = core::ptr::null_mut();
     raw_spin_lock_irq(&pool.lock);
     raw_spin_lock(&wq_mayday_lock);		/* for wq.maydays */
     if (need_to_create_worker(pool)) {
@@ -2868,8 +3070,9 @@ unsafe extern "C" fn pool_mayday_timeout(t: *mut timer_list) {
 // allocation deadlock.  Send distress signals to
 // rescuers.
 //
-    list_for_each_entry(work, &pool.worklist, entry)
+    list_for_each_entry(work, &pool.worklist, entry) {
     send_mayday(get_work_pwq(work));
+    }
     }
     raw_spin_unlock(&wq_mayday_lock);
     raw_spin_unlock_irq(&pool.lock);
@@ -2895,20 +3098,18 @@ unsafe extern "C" fn pool_mayday_timeout(t: *mut timer_list) {
 //
 #[no_mangle]
 unsafe extern "C" fn maybe_create_worker(pool: *mut worker_pool) {
-    static void maybe_create_worker(struct worker_pool *pool)
-    __releases(&pool.lock)
-    __acquires(&pool.lock)
-    {
-    restart:
+// label;
     raw_spin_unlock_irq(&pool.lock);
 // if we don't make progress in MAYDAY_INITIAL_TIMEOUT, call for help
     mod_timer(&pool.mayday_timer, jiffies + MAYDAY_INITIAL_TIMEOUT);
     while (true) {
-    if (create_worker(pool) || !need_to_create_worker(pool))
+    if (create_worker(pool) || !need_to_create_worker(pool)) {
     break;
+    }
     schedule_timeout_interruptible(CREATE_COOLDOWN);
-    if (!need_to_create_worker(pool))
+    if (!need_to_create_worker(pool)) {
     break;
+    }
     }
     timer_delete_sync(&pool.mayday_timer);
     raw_spin_lock_irq(&pool.lock);
@@ -2917,14 +3118,13 @@ unsafe extern "C" fn maybe_create_worker(pool: *mut worker_pool) {
 // created as @pool->lock was dropped and the new worker might have
 // already become busy.
 //
-    if (need_to_create_worker(pool))
-    goto restart;
+    if (need_to_create_worker(pool)) {
+// goto;
+    }
     }
 
 #[no_mangle]
 unsafe extern "C" fn worker_lock_callback(pool: *mut worker_pool) {
-    static void worker_lock_callback(struct worker_pool *pool)
-    {
 //
 // SINGLE_DEPTH_NESTING is for a dead pool's bh_worker() running from
 // drain_dead_softirq_workfn() inside a live pool's bh_worker(). The
@@ -2938,21 +3138,20 @@ unsafe extern "C" fn worker_lock_callback(pool: *mut worker_pool) {
     }
 #[no_mangle]
 unsafe extern "C" fn worker_unlock_callback(pool: *mut worker_pool) {
-    static void worker_unlock_callback(struct worker_pool *pool)
-    {
     spin_unlock(&pool.cb_lock);
     }
 #[no_mangle]
 unsafe extern "C" fn workqueue_callback_cancel_wait_running(pool: *mut worker_pool) {
-    static void workqueue_callback_cancel_wait_running(struct worker_pool *pool)
-    {
     spin_lock(&pool.cb_lock);
     spin_unlock(&pool.cb_lock);
     }
 
-    static void worker_lock_callback(struct worker_pool *pool) { }
-    static void worker_unlock_callback(struct worker_pool *pool) { }
-    static void workqueue_callback_cancel_wait_running(struct worker_pool *pool) { }
+#[no_mangle]
+pub unsafe extern "C" fn worker_lock_callback(pool: *mut worker_pool) { }
+#[no_mangle]
+pub unsafe extern "C" fn worker_unlock_callback(pool: *mut worker_pool) { }
+#[no_mangle]
+pub unsafe extern "C" fn workqueue_callback_cancel_wait_running(pool: *mut worker_pool) { }
 
 //
 // manage_workers - manage worker pool
@@ -2978,11 +3177,10 @@ unsafe extern "C" fn workqueue_callback_cancel_wait_running(pool: *mut worker_po
 //
 #[no_mangle]
 unsafe extern "C" fn manage_workers(worker: *mut worker) -> bool {
-    static bool manage_workers(struct worker *worker)
-    {
-    struct worker_pool *pool = worker.pool;
-    if (pool.flags & POOL_MANAGER_ACTIVE)
+    let mut pool = worker.pool;
+    if (pool.flags & POOL_MANAGER_ACTIVE) {
     return false;
+    }
     pool.flags |= POOL_MANAGER_ACTIVE;
     pool.manager = worker;
     maybe_create_worker(pool);
@@ -3007,16 +3205,13 @@ unsafe extern "C" fn manage_workers(worker: *mut worker) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn process_one_work(worker: *mut worker, work: *mut work_struct) {
-    static void process_one_work(struct worker *worker, struct work_struct *work)
-    __releases(&pool.lock)
-    __acquires(&pool.lock)
-    {
-    struct pool_workqueue *pwq = get_work_pwq(work);
-    struct worker_pool *pool = worker.pool;
-    struct task_struct *wake_task = core::ptr::null_mut();
-    unsigned long work_data;
-    int lockdep_start_depth, rcu_start_depth;
-    let mut bh_draining: bool = pool.flags & POOL_BH_DRAINING;
+    let mut pwq = get_work_pwq(work);
+    let mut pool = worker.pool;
+    let mut wake_task = core::ptr::null_mut();
+    let mut work_data = 0;
+    let mut lockdep_start_depth = 0;
+    let mut rcu_start_depth = 0;
+pub static mut bh_draining: bool = false;
 
 //
 // It is permissible to free the struct work_struct from
@@ -3025,11 +3220,11 @@ unsafe extern "C" fn process_one_work(worker: *mut worker, work: *mut work_struc
 // lock freed" warnings as well as problems when looking into
 // work->lockdep_map, make a copy and use that here.
 //
-    struct lockdep_map lockdep_map;
+pub static mut lockdep_map: usize = 0;
     lockdep_copy_map(&lockdep_map, &work.lockdep_map);
 
 // ensure we're on the correct CPU
-    WARN_ON_ONCE(!(pool.flags & POOL_DISASSOCIATED) &&
+    WARN_ON_ONCE!(!(pool.flags & POOL_DISASSOCIATED) &&
     raw_smp_processor_id() != pool.cpu);
 // claim and dequeue
     debug_work_deactivate(work);
@@ -3037,8 +3232,9 @@ unsafe extern "C" fn process_one_work(worker: *mut worker, work: *mut work_struc
     worker.current_work = work;
     worker.current_func = work.func;
     worker.current_pwq = pwq;
-    if (worker.task)
+    if (worker.task) {
     worker.current_at = READ_ONCE(worker.task.se.sum_exec_runtime);
+    }
     worker.current_start = jiffies;
     work_data = *work_data_bits(work);
     worker.current_color = get_work_color(work_data);
@@ -3054,8 +3250,9 @@ unsafe extern "C" fn process_one_work(worker: *mut worker, work: *mut work_struc
 // of concurrency management and the next code block will chain
 // execution of the pending work items.
 //
-    if (unlikely(pwq.wq.flags & WQ_CPU_INTENSIVE))
+    if (unlikely(pwq.wq.flags & WQ_CPU_INTENSIVE)) {
     worker_set_flags(worker, WORKER_CPU_INTENSIVE);
+    }
 //
 // Kick @pool if necessary. It's always noop for per-cpu worker pools
 // since nr_running would always be >= 1 at this point. This is used to
@@ -3076,14 +3273,16 @@ unsafe extern "C" fn process_one_work(worker: *mut worker, work: *mut work_struc
     pwq.stats[PWQ_STAT_STARTED]++;
     rcu_read_lock();
     raw_spin_unlock_irq(&pool.lock);
-    if (wake_task)
+    if (wake_task) {
     wake_up_process(wake_task);
+    }
     rcu_read_unlock();
     rcu_start_depth = rcu_preempt_depth();
     lockdep_start_depth = lockdep_depth(current);
 // see drain_dead_softirq_workfn()
-    if (!bh_draining)
+    if (!bh_draining) {
     lock_map_acquire(pwq.wq.lockdep_map);
+    }
     lock_map_acquire(&lockdep_map);
 //
 // Strictly speaking we should mark the invariant state without holding
@@ -3115,12 +3314,13 @@ unsafe extern "C" fn process_one_work(worker: *mut worker, work: *mut work_struc
 //
     trace_workqueue_execute_end(work, worker.current_func);
     lock_map_release(&lockdep_map);
-    if (!bh_draining)
+    if (!bh_draining) {
     lock_map_release(pwq.wq.lockdep_map);
+    }
     if (unlikely((worker.task && in_atomic()) ||
     lockdep_depth(current) != lockdep_start_depth ||
     rcu_preempt_depth() != rcu_start_depth)) {
-    pr_err("BUG: workqueue leaked atomic, lock or RCU: %s[%d]\n"
+    pr_err!("BUG: workqueue leaked atomic, lock or RCU: %s[%d]\n"
     "     preempt=0x%08x lock=%d.%d RCU=%d.%d workfn=%ps\n",
     current.comm, task_pid_nr(current), preempt_count(),
     lockdep_start_depth, lockdep_depth(current),
@@ -3137,8 +3337,9 @@ unsafe extern "C" fn process_one_work(worker: *mut worker, work: *mut work_struc
 // stop_machine. At the same time, report a quiescent RCU state so
 // the same condition doesn't freeze RCU.
 //
-    if (worker.task)
+    if (worker.task) {
     cond_resched();
+    }
     raw_spin_lock_irq(&pool.lock);
     pwq.stats[PWQ_STAT_COMPLETED]++;
 //
@@ -3172,12 +3373,9 @@ unsafe extern "C" fn process_one_work(worker: *mut worker, work: *mut work_struc
 //
 #[no_mangle]
 unsafe extern "C" fn process_scheduled_works(worker: *mut worker) {
-    static void process_scheduled_works(struct worker *worker)
-    {
-    struct work_struct *work;
-    let mut first: bool = true;
-    while ((work = list_first_entry_or_null(&worker.scheduled,
-    struct work_struct, entry))) {
+pub static mut work: *mut c_void = core::ptr::null_mut();
+pub static mut first: bool = true;
+    while ((work = list_first_entry_or_null(&worker.scheduled, work_struct, entry))) {
     if (first) {
     worker.pool.last_progress_ts = jiffies;
     first = false;
@@ -3187,13 +3385,13 @@ unsafe extern "C" fn process_scheduled_works(worker: *mut worker) {
     }
 #[no_mangle]
 unsafe extern "C" fn set_pf_worker(val: bool) {
-    static void set_pf_worker(bool val)
-    {
     mutex_lock(&wq_pool_attach_mutex);
-    if (val)
+    if (val) {
     current.flags |= PF_WQ_WORKER;
-    else
+    }
+    else {
     current.flags &= ~PF_WQ_WORKER;
+    }
     mutex_unlock(&wq_pool_attach_mutex);
     }
 //
@@ -3210,13 +3408,11 @@ unsafe extern "C" fn set_pf_worker(val: bool) {
 //
 #[no_mangle]
 unsafe extern "C" fn worker_thread(__worker: *mut c_void) -> c_int {
-    static int worker_thread(void *__worker)
-    {
-    struct worker *worker = __worker;
-    struct worker_pool *pool = worker.pool;
+    let mut worker = __worker;
+    let mut pool = worker.pool;
 // tell the scheduler that this is a workqueue worker
     set_pf_worker(true);
-    woke_up:
+// label;
     raw_spin_lock_irq(&pool.lock);
 // am I supposed to die?
     if (unlikely(worker.flags & WORKER_DIE)) {
@@ -3231,19 +3427,21 @@ unsafe extern "C" fn worker_thread(__worker: *mut c_void) -> c_int {
     return 0;
     }
     worker_leave_idle(worker);
-    recheck:
+// label;
 // no more worker necessary?
-    if (!need_more_worker(pool))
-    goto sleep;
+    if (!need_more_worker(pool)) {
+// goto;
+    }
 // do we need to manage?
-    if (unlikely(!may_start_working(pool)) && manage_workers(worker))
-    goto recheck;
+    if (unlikely(!may_start_working(pool)) && manage_workers(worker)) {
+// goto;
+    }
 //
 // ->scheduled list can only be filled while a worker is
 // preparing to process a work or actually processing it.
 // Make sure nobody diddled with it while I was sleeping.
 //
-    WARN_ON_ONCE(!list_empty(&worker.scheduled));
+    WARN_ON_ONCE!(!list_empty(&worker.scheduled));
 //
 // Finish PREP stage.  We're guaranteed to have at least one idle
 // worker or that someone else has already assumed the manager
@@ -3253,14 +3451,13 @@ unsafe extern "C" fn worker_thread(__worker: *mut c_void) -> c_int {
 //
     worker_clr_flags(worker, WORKER_PREP | WORKER_REBOUND);
     do {
-    struct work_struct *work =
-    list_first_entry(&pool.worklist,
-    struct work_struct, entry);
-    if (assign_work(work, worker, core::ptr::null_mut()))
+    let mut work = list_first_entry(&pool.worklist, work_struct, entry);
+    if (assign_work(work, worker, core::ptr::null_mut())) {
     process_scheduled_works(worker);
+    }
     } while (keep_working(pool));
     worker_set_flags(worker, WORKER_PREP);
-    sleep:
+// label;
 //
 // pool->lock is held and there's no work to process and no need to
 // manage, sleep.  Workers are woken up only while holding
@@ -3272,18 +3469,18 @@ unsafe extern "C" fn worker_thread(__worker: *mut c_void) -> c_int {
     __set_current_state(TASK_IDLE);
     raw_spin_unlock_irq(&pool.lock);
     schedule();
-    goto woke_up;
+// goto;
     }
 #[no_mangle]
 unsafe extern "C" fn assign_rescuer_work(pwq: *mut pool_workqueue, rescuer: *mut worker) -> bool {
-    static bool assign_rescuer_work(struct pool_workqueue *pwq, struct worker *rescuer)
-    {
-    struct worker_pool *pool = pwq.pool;
-    struct work_struct *cursor = &pwq.mayday_cursor;
-    struct work_struct *work, *n;
+    let mut pool = pwq.pool;
+    let mut cursor = &pwq.mayday_cursor;
+    let mut work = core::ptr::null_mut();
+    let mut n = core::ptr::null_mut();
 // have work items to rescue?
-    if (!pwq.nr_active)
+    if (!pwq.nr_active) {
     return false;
+    }
 // need rescue?
     if (!need_to_create_worker(pool)) {
 //
@@ -3307,14 +3504,17 @@ unsafe extern "C" fn assign_rescuer_work(pwq: *mut pool_workqueue, rescuer: *mut
 // not precisely, unless there are other PWQs needing help.
 //
     if (!(pool.flags & POOL_MANAGER_ACTIVE) ||
-    !list_empty(&pwq.wq.maydays))
+    !list_empty(&pwq.wq.maydays)) {
     return false;
     }
+    }
 // search from the start or cursor if available
-    if (list_empty(&cursor.entry))
-    work = list_first_entry(&pool.worklist, struct work_struct, entry);
-    else
+    if (list_empty(&cursor.entry)) {
+    work = list_first_entry(&pool.worklist, work_struct, entry);
+    }
+    else {
     work = list_next_entry(cursor, entry);
+    }
 // find the next work item to rescue
     list_for_each_entry_safe_from(work, n, &pool.worklist, entry) {
     if (get_work_pwq(work) == pwq && assign_work(work, rescuer, &n)) {
@@ -3349,18 +3549,16 @@ unsafe extern "C" fn assign_rescuer_work(pwq: *mut pool_workqueue, rescuer: *mut
 //
 #[no_mangle]
 unsafe extern "C" fn rescuer_thread(__rescuer: *mut c_void) -> c_int {
-    static int rescuer_thread(void *__rescuer)
-    {
-    struct worker *rescuer = __rescuer;
-    struct workqueue_struct *wq = rescuer.rescue_wq;
-    bool should_stop;
+    let mut rescuer = __rescuer;
+    let mut wq = rescuer.rescue_wq;
+    let mut should_stop = 0;
     set_user_nice(current, RESCUER_NICE_LEVEL);
 //
 // Mark rescuer as worker too.  As WORKER_PREP is never cleared, it
 // doesn't participate in concurrency management.
 //
     set_pf_worker(true);
-    repeat:
+// label;
     set_current_state(TASK_IDLE);
 //
 // By the time the rescuer is requested to stop, the workqueue
@@ -3374,16 +3572,15 @@ unsafe extern "C" fn rescuer_thread(__rescuer: *mut c_void) -> c_int {
 // see whether any pwq is asking for help
     raw_spin_lock_irq(&wq_mayday_lock);
     while (!list_empty(&wq.maydays)) {
-    struct pool_workqueue *pwq = list_first_entry(&wq.maydays,
-    struct pool_workqueue, mayday_node);
-    struct worker_pool *pool = pwq.pool;
-    let mut count: c_uint = 0;
+    let mut pwq = list_first_entry(&wq.maydays, pool_workqueue, mayday_node);
+    let mut pool = pwq.pool;
+pub static mut count: c_uint = 0;
     __set_current_state(TASK_RUNNING);
     list_del_init(&pwq.mayday_node);
     raw_spin_unlock_irq(&wq_mayday_lock);
     worker_attach_to_pool(rescuer, pool);
     raw_spin_lock_irq(&pool.lock);
-    WARN_ON_ONCE(!list_empty(&rescuer.scheduled));
+    WARN_ON_ONCE!(!list_empty(&rescuer.scheduled));
     while (assign_rescuer_work(pwq, rescuer)) {
     process_scheduled_works(rescuer);
 //
@@ -3400,8 +3597,9 @@ unsafe extern "C" fn rescuer_thread(__rescuer: *mut c_void) -> c_int {
     }
     }
 // The cursor can not be left behind without the rescuer watching it.
-    if (!list_empty(&pwq.mayday_cursor.entry) && list_empty(&pwq.mayday_node))
+    if (!list_empty(&pwq.mayday_cursor.entry) && list_empty(&pwq.mayday_node)) {
     list_del_init(&pwq.mayday_cursor.entry);
+    }
 //
 // Leave this pool. Notify regular workers; otherwise, we end up
 // with 0 concurrency and stalling the execution.
@@ -3423,17 +3621,15 @@ unsafe extern "C" fn rescuer_thread(__rescuer: *mut c_void) -> c_int {
     return 0;
     }
 // rescuers should never participate in concurrency management
-    WARN_ON_ONCE(!(rescuer.flags & WORKER_NOT_RUNNING));
+    WARN_ON_ONCE!(!(rescuer.flags & WORKER_NOT_RUNNING));
     schedule();
-    goto repeat;
+// goto;
     }
 #[no_mangle]
 unsafe extern "C" fn bh_worker(worker: *mut worker) {
-    static void bh_worker(struct worker *worker)
-    {
-    struct worker_pool *pool = worker.pool;
-    let mut nr_restarts: c_int = BH_WORKER_RESTARTS;
-    let mut end: c_ulong = jiffies + BH_WORKER_JIFFIES;
+    let mut pool = worker.pool;
+pub static mut nr_restarts: c_int = 0;
+pub static mut end: c_ulong = 0;
     worker_lock_callback(pool);
     raw_spin_lock_irq(&pool.lock);
     worker_leave_idle(worker);
@@ -3441,20 +3637,20 @@ unsafe extern "C" fn bh_worker(worker: *mut worker) {
 // This function follows the structure of worker_thread(). See there for
 // explanations on each step.
 //
-    if (!need_more_worker(pool))
-    goto done;
-    WARN_ON_ONCE(!list_empty(&worker.scheduled));
+    if (!need_more_worker(pool)) {
+// goto;
+    }
+    WARN_ON_ONCE!(!list_empty(&worker.scheduled));
     worker_clr_flags(worker, WORKER_PREP | WORKER_REBOUND);
     do {
-    struct work_struct *work =
-    list_first_entry(&pool.worklist,
-    struct work_struct, entry);
-    if (assign_work(work, worker, core::ptr::null_mut()))
+    let mut work = list_first_entry(&pool.worklist, work_struct, entry);
+    if (assign_work(work, worker, core::ptr::null_mut())) {
     process_scheduled_works(worker);
+    }
     } while (keep_working(pool) &&
     --nr_restarts && time_before(jiffies, end));
     worker_set_flags(worker, WORKER_PREP);
-    done:
+// label;
     worker_enter_idle(worker);
     kick_pool(pool);
     raw_spin_unlock_irq(&pool.lock);
@@ -3473,12 +3669,10 @@ unsafe extern "C" fn bh_worker(worker: *mut worker) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn workqueue_softirq_action(highpri: bool) {
-    void workqueue_softirq_action(bool highpri)
-    {
-    struct worker_pool *pool =
-    &per_cpu(bh_worker_pools, smp_processor_id())[highpri];
-    if (need_more_worker(pool))
-    bh_worker(list_first_entry(&pool.workers, struct worker, node));
+    let mut pool = &per_cpu(bh_worker_pools, smp_processor_id())[highpri];
+    if (need_more_worker(pool)) {
+    bh_worker(list_first_entry(&pool.workers, worker, node));
+    }
     }
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -3490,12 +3684,9 @@ pub struct wq_drain_dead_softirq_work {
 
 #[no_mangle]
 unsafe extern "C" fn drain_dead_softirq_workfn(work: *mut work_struct) {
-    static void drain_dead_softirq_workfn(struct work_struct *work)
-    {
-    struct wq_drain_dead_softirq_work *dead_work =
-    container_of(work, struct wq_drain_dead_softirq_work, work);
-    struct worker_pool *pool = dead_work.pool;
-    bool repeat;
+    let mut dead_work = container_of!(work, wq_drain_dead_softirq_work, work);
+    let mut pool = dead_work.pool;
+    let mut repeat = 0;
 //
 // @pool's CPU is dead and we want to execute its still pending work
 // items from this BH work item which is running on a different CPU. As
@@ -3506,7 +3697,7 @@ unsafe extern "C" fn drain_dead_softirq_workfn(work: *mut work_struct) {
     raw_spin_lock_irq(&pool.lock);
     pool.flags |= POOL_BH_DRAINING;
     raw_spin_unlock_irq(&pool.lock);
-    bh_worker(list_first_entry(&pool.workers, struct worker, node));
+    bh_worker(list_first_entry(&pool.workers, worker, node));
     raw_spin_lock_irq(&pool.lock);
     pool.flags &= ~POOL_BH_DRAINING;
     repeat = need_more_worker(pool);
@@ -3517,10 +3708,12 @@ unsafe extern "C" fn drain_dead_softirq_workfn(work: *mut work_struct) {
 // don't hog this CPU's BH.
 //
     if (repeat) {
-    if (pool.attrs.nice == HIGHPRI_NICE_LEVEL)
+    if (pool.attrs.nice == HIGHPRI_NICE_LEVEL) {
     queue_work(system_bh_highpri_wq, work);
-    else
+    }
+    else {
     queue_work(system_bh_wq, work);
+    }
     } else {
     complete(&dead_work.done);
     }
@@ -3535,21 +3728,22 @@ unsafe extern "C" fn drain_dead_softirq_workfn(work: *mut work_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn workqueue_softirq_dead(cpu: c_uint) {
-    void workqueue_softirq_dead(unsigned int cpu)
-    {
-    int i;
-    for (i = 0; i < NR_STD_WORKER_POOLS; i++) {
-    struct worker_pool *pool = &per_cpu(bh_worker_pools, cpu)[i];
-    struct wq_drain_dead_softirq_work dead_work;
-    if (!need_more_worker(pool))
+    let mut i = 0;
+    while (i < NR_STD_WORKER_POOLS) {
+    let mut pool = &per_cpu(bh_worker_pools, cpu)[i];
+pub static mut dead_work: usize = 0;
+    if (!need_more_worker(pool)) {
     continue;
+    }
     INIT_WORK_ONSTACK(&dead_work.work, drain_dead_softirq_workfn);
     dead_work.pool = pool;
     init_completion(&dead_work.done);
-    if (pool.attrs.nice == HIGHPRI_NICE_LEVEL)
+    if (pool.attrs.nice == HIGHPRI_NICE_LEVEL) {
     queue_work(system_bh_highpri_wq, &dead_work.work);
-    else
+    }
+    else {
     queue_work(system_bh_wq, &dead_work.work);
+    }
     wait_for_completion(&dead_work.done);
     destroy_work_on_stack(&dead_work.work);
     }
@@ -3567,14 +3761,13 @@ pub unsafe extern "C" fn workqueue_softirq_dead(cpu: c_uint) {
 // on a workqueue which doesn't have %WQ_MEM_RECLAIM as that can break forward-
 // progress guarantee leading to a deadlock.
 //
-    static void check_flush_dependency(struct workqueue_struct *target_wq,
-    struct work_struct *target_work,
-    bool from_cancel)
-    {
-    work_func_t target_func;
-    struct worker *worker;
-    if (from_cancel || target_wq.flags & WQ_MEM_RECLAIM)
+#[no_mangle]
+pub unsafe extern "C" fn check_flush_dependency(target_wq: *mut workqueue_struct, target_work: *mut work_struct, from_cancel: bool) {
+    let mut target_func;
+pub static mut worker: *mut c_void = core::ptr::null_mut();
+    if (from_cancel || target_wq.flags & WQ_MEM_RECLAIM) {
     return;
+    }
     worker = current_wq_worker();
     target_func = target_work ? target_work.func : core::ptr::null_mut();
     WARN_ONCE(current.flags & PF_MEMALLOC,
@@ -3591,14 +3784,12 @@ pub unsafe extern "C" fn workqueue_softirq_dead(cpu: c_uint) {
 pub struct wq_barrier {
     pub work: work_struct,
     pub done: completion,
-    pub /: *mut *mut *mut task_task; / purely informational,
+//     pub /: *mut *mut *mut task_task; / purely informational,
 }
 
 #[no_mangle]
 unsafe extern "C" fn wq_barrier_func(work: *mut work_struct) {
-    static void wq_barrier_func(struct work_struct *work)
-    {
-    struct wq_barrier *barr = container_of(work, struct wq_barrier, work);
+    let mut barr = container_of!(work, wq_barrier, work);
     complete(&barr.done);
     }
 //
@@ -3625,14 +3816,12 @@ unsafe extern "C" fn wq_barrier_func(work: *mut work_struct) {
 // CONTEXT:
 // raw_spin_lock_irq(pool->lock).
 //
-    static void insert_wq_barrier(struct pool_workqueue *pwq,
-    struct wq_barrier *barr,
-    struct work_struct *target, struct worker *worker)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn insert_wq_barrier(pwq: *mut pool_workqueue, barr: *mut wq_barrier, target: *mut work_struct, worker: *mut worker) {
     static __maybe_unused struct lock_class_key bh_key, thr_key;
-    let mut work_flags: c_uint = 0;
-    unsigned int work_color;
-    struct list_head *head;
+pub static mut work_flags: c_uint = 0;
+    let mut work_color = 0;
+pub static mut head: *mut c_void = core::ptr::null_mut();
 //
 // debugobject calls are safe here even with pool->lock locked
 // as we know for sure that this will not trigger any of the
@@ -3658,7 +3847,7 @@ unsafe extern "C" fn wq_barrier_func(work: *mut work_struct) {
     head = worker.scheduled.next;
     work_color = worker.current_color;
     } else {
-    unsigned long *bits = work_data_bits(target);
+    let mut bits = work_data_bits(target);
     head = target.entry.next;
 // there can already be other linked works, inherit and set
     work_flags |= *bits & WORK_STRUCT_LINKED;
@@ -3700,14 +3889,13 @@ unsafe extern "C" fn wq_barrier_func(work: *mut work_struct) {
 // %true if @flush_color >= 0 and there's something to flush.  %false
 // otherwise.
 //
-    static bool flush_workqueue_prep_pwqs(struct workqueue_struct *wq,
-    int flush_color, int work_color)
-    {
-    let mut wait: bool = false;
-    struct pool_workqueue *pwq;
-    struct worker_pool *current_pool = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn flush_workqueue_prep_pwqs(wq: *mut workqueue_struct, flush_color: c_int, work_color: c_int) -> bool {
+pub static mut wait: bool = false;
+pub static mut pwq: *mut c_void = core::ptr::null_mut();
+    let mut current_pool = core::ptr::null_mut();
     if (flush_color >= 0) {
-    WARN_ON_ONCE(atomic_read(&wq.nr_pwqs_to_flush));
+    WARN_ON_ONCE!(atomic_read(&wq.nr_pwqs_to_flush));
     atomic_set(&wq.nr_pwqs_to_flush, 1);
     }
 //
@@ -3720,13 +3908,14 @@ unsafe extern "C" fn wq_barrier_func(work: *mut work_struct) {
 //
     for_each_pwq(pwq, wq) {
     if (current_pool != pwq.pool) {
-    if (likely(current_pool))
+    if (likely(current_pool)) {
     raw_spin_unlock_irq(&current_pool.lock);
+    }
     current_pool = pwq.pool;
     raw_spin_lock_irq(&current_pool.lock);
     }
     if (flush_color >= 0) {
-    WARN_ON_ONCE(pwq.flush_color != -1);
+    WARN_ON_ONCE!(pwq.flush_color != -1);
     if (pwq.nr_in_flight[flush_color]) {
     pwq.flush_color = flush_color;
     atomic_inc(&wq.nr_pwqs_to_flush);
@@ -3734,41 +3923,45 @@ unsafe extern "C" fn wq_barrier_func(work: *mut work_struct) {
     }
     }
     if (work_color >= 0) {
-    WARN_ON_ONCE(work_color != work_next_color(pwq.work_color));
+    WARN_ON_ONCE!(work_color != work_next_color(pwq.work_color));
     pwq.work_color = work_color;
     }
     }
-    if (current_pool)
+    if (current_pool) {
     raw_spin_unlock_irq(&current_pool.lock);
-    if (flush_color >= 0 && atomic_dec_and_test(&wq.nr_pwqs_to_flush))
+    }
+    if (flush_color >= 0 && atomic_dec_and_test(&wq.nr_pwqs_to_flush)) {
     complete(&wq.first_flusher.done);
+    }
     return wait;
     }
 #[no_mangle]
 unsafe extern "C" fn touch_wq_lockdep_map(wq: *mut workqueue_struct) {
-    static void touch_wq_lockdep_map(struct workqueue_struct *wq)
-    {
 
-    if (unlikely(!wq.lockdep_map))
+    if (unlikely(!wq.lockdep_map)) {
     return;
-    if (wq.flags & WQ_BH)
+    }
+    if (wq.flags & WQ_BH) {
     local_bh_disable();
+    }
     lock_map_acquire(wq.lockdep_map);
     lock_map_release(wq.lockdep_map);
-    if (wq.flags & WQ_BH)
+    if (wq.flags & WQ_BH) {
     local_bh_enable();
+    }
 
     }
-    static void touch_work_lockdep_map(struct work_struct *work,
-    struct workqueue_struct *wq)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn touch_work_lockdep_map(work: *mut work_struct, wq: *mut workqueue_struct) {
 
-    if (wq.flags & WQ_BH)
+    if (wq.flags & WQ_BH) {
     local_bh_disable();
+    }
     lock_map_acquire(&work.lockdep_map);
     lock_map_release(&work.lockdep_map);
-    if (wq.flags & WQ_BH)
+    if (wq.flags & WQ_BH) {
     local_bh_enable();
+    }
 
     }
 //
@@ -3780,16 +3973,11 @@ unsafe extern "C" fn touch_wq_lockdep_map(wq: *mut workqueue_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __flush_workqueue(wq: *mut workqueue_struct) {
-    void __flush_workqueue(struct workqueue_struct *wq)
-    {
-    struct wq_flusher this_flusher = {
-    .list = LIST_HEAD_INIT(this_flusher.list),
-    .flush_color = -1,
-    .done = COMPLETION_INITIALIZER_ONSTACK_MAP(this_flusher.done, (*wq.lockdep_map)),
-    };
-    int next_color;
-    if (WARN_ON(!wq_online))
+pub static mut wq_flusher: usize = 0;
+    let mut next_color = 0;
+    if (WARN_ON!(!wq_online)) {
     return;
+    }
     touch_wq_lockdep_map(wq);
     mutex_lock(&wq.mutex);
 //
@@ -3802,23 +3990,23 @@ pub unsafe extern "C" fn __flush_workqueue(wq: *mut workqueue_struct) {
 // becomes our flush_color and work_color is advanced
 // by one.
 //
-    WARN_ON_ONCE(!list_empty(&wq.flusher_overflow));
+    WARN_ON_ONCE!(!list_empty(&wq.flusher_overflow));
     this_flusher.flush_color = wq.work_color;
     wq.work_color = next_color;
     if (!wq.first_flusher) {
 // no flush in progress, become the first flusher
-    WARN_ON_ONCE(wq.flush_color != this_flusher.flush_color);
+    WARN_ON_ONCE!(wq.flush_color != this_flusher.flush_color);
     wq.first_flusher = &this_flusher;
     if (!flush_workqueue_prep_pwqs(wq, wq.flush_color,
     wq.work_color)) {
 // nothing to flush, done
     wq.flush_color = next_color;
     wq.first_flusher = core::ptr::null_mut();
-    goto out_unlock;
+// goto;
     }
     } else {
 // wait in queue
-    WARN_ON_ONCE(wq.flush_color == this_flusher.flush_color);
+    WARN_ON_ONCE!(wq.flush_color == this_flusher.flush_color);
     list_add_tail(&this_flusher.list, &wq.flusher_queue);
     flush_workqueue_prep_pwqs(wq, -1, wq.work_color);
     }
@@ -3839,25 +4027,29 @@ pub unsafe extern "C" fn __flush_workqueue(wq: *mut workqueue_struct) {
 // First flushers are responsible for cascading flushes and
 // handling overflow.  Non-first flushers can simply return.
 //
-    if (READ_ONCE(wq.first_flusher) != &this_flusher)
+    if (READ_ONCE(wq.first_flusher) != &this_flusher) {
     return;
+    }
     mutex_lock(&wq.mutex);
 // we might have raced, check again with mutex held
-    if (wq.first_flusher != &this_flusher)
-    goto out_unlock;
+    if (wq.first_flusher != &this_flusher) {
+// goto;
+    }
     WRITE_ONCE(wq.first_flusher, core::ptr::null_mut());
-    WARN_ON_ONCE(!list_empty(&this_flusher.list));
-    WARN_ON_ONCE(wq.flush_color != this_flusher.flush_color);
+    WARN_ON_ONCE!(!list_empty(&this_flusher.list));
+    WARN_ON_ONCE!(wq.flush_color != this_flusher.flush_color);
     while (true) {
-    struct wq_flusher *next, *tmp;
+    let mut next = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
 // complete all the flushers sharing the current flush color
     list_for_each_entry_safe(next, tmp, &wq.flusher_queue, list) {
-    if (next.flush_color != wq.flush_color)
+    if (next.flush_color != wq.flush_color) {
     break;
+    }
     list_del_init(&next.list);
     complete(&next.done);
     }
-    WARN_ON_ONCE(!list_empty(&wq.flusher_overflow) &&
+    WARN_ON_ONCE!(!list_empty(&wq.flusher_overflow) &&
     wq.flush_color != work_next_color(wq.work_color));
 // this flush_color is finished, advance by one
     wq.flush_color = work_next_color(wq.flush_color);
@@ -3869,34 +4061,36 @@ pub unsafe extern "C" fn __flush_workqueue(wq: *mut workqueue_struct) {
 // flusher_queue.  This is the start-to-wait
 // phase for these overflowed flushers.
 //
-    list_for_each_entry(tmp, &wq.flusher_overflow, list)
+    list_for_each_entry(tmp, &wq.flusher_overflow, list) {
     tmp.flush_color = wq.work_color;
+    }
     wq.work_color = work_next_color(wq.work_color);
     list_splice_tail_init(&wq.flusher_overflow,
     &wq.flusher_queue);
     flush_workqueue_prep_pwqs(wq, -1, wq.work_color);
     }
     if (list_empty(&wq.flusher_queue)) {
-    WARN_ON_ONCE(wq.flush_color != wq.work_color);
+    WARN_ON_ONCE!(wq.flush_color != wq.work_color);
     break;
     }
 //
 // Need to flush more colors.  Make the next flusher
 // the new first flusher and arm pwqs.
 //
-    WARN_ON_ONCE(wq.flush_color == wq.work_color);
-    WARN_ON_ONCE(wq.flush_color != next.flush_color);
+    WARN_ON_ONCE!(wq.flush_color == wq.work_color);
+    WARN_ON_ONCE!(wq.flush_color != next.flush_color);
     list_del_init(&next.list);
     wq.first_flusher = next;
-    if (flush_workqueue_prep_pwqs(wq, wq.flush_color, -1))
+    if (flush_workqueue_prep_pwqs(wq, wq.flush_color, -1)) {
     break;
+    }
 //
 // Meh... this color is already done, clear first
 // flusher and repeat cascading.
 //
     wq.first_flusher = core::ptr::null_mut();
     }
-    out_unlock:
+// label;
     mutex_unlock(&wq.mutex);
     }
     EXPORT_SYMBOL(__flush_workqueue);
@@ -3913,48 +4107,49 @@ pub unsafe extern "C" fn __flush_workqueue(wq: *mut workqueue_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn drain_workqueue(wq: *mut workqueue_struct) {
-    void drain_workqueue(struct workqueue_struct *wq)
-    {
-    let mut flush_cnt: c_uint = 0;
-    struct pool_workqueue *pwq;
+pub static mut flush_cnt: c_uint = 0;
+pub static mut pwq: *mut c_void = core::ptr::null_mut();
 //
 // __queue_work() needs to test whether there are drainers, is much
 // hotter than drain_workqueue() and already looks at @wq->flags.
 // Use __WQ_DRAINING so that queue doesn't have to check nr_drainers.
 //
     mutex_lock(&wq.mutex);
-    if (!wq.nr_drainers++)
+    if (!wq.nr_drainers++) {
     wq.flags |= __WQ_DRAINING;
+    }
     mutex_unlock(&wq.mutex);
-    reflush:
+// label;
     __flush_workqueue(wq);
     mutex_lock(&wq.mutex);
     for_each_pwq(pwq, wq) {
-    bool drained;
+    let mut drained = 0;
     raw_spin_lock_irq(&pwq.pool.lock);
     drained = pwq_is_empty(pwq);
     raw_spin_unlock_irq(&pwq.pool.lock);
-    if (drained)
+    if (drained) {
     continue;
-    if (++flush_cnt == 10 ||
-    (flush_cnt % 100 == 0 && flush_cnt <= 1000))
-    pr_warn("workqueue %s: %s() isn't complete after %u tries\n",
-    wq.name, __func__, flush_cnt);
-    mutex_unlock(&wq.mutex);
-    goto reflush;
     }
-    if (!--wq.nr_drainers)
+    if (++flush_cnt == 10 ||
+    (flush_cnt % 100 == 0 && flush_cnt <= 1000)) {
+    pr_warn!("workqueue %s: %s() isn't complete after %u tries\n",
+    wq.name, __func__, flush_cnt);
+    }
+    mutex_unlock(&wq.mutex);
+// goto;
+    }
+    if (!--wq.nr_drainers) {
     wq.flags &= ~__WQ_DRAINING;
+    }
     mutex_unlock(&wq.mutex);
     }
     EXPORT_SYMBOL_GPL(drain_workqueue);
-    static bool start_flush_work(struct work_struct *work, struct wq_barrier *barr,
-    bool from_cancel)
-    {
-    struct worker *worker = core::ptr::null_mut();
-    struct worker_pool *pool;
-    struct pool_workqueue *pwq;
-    struct workqueue_struct *wq;
+#[no_mangle]
+pub unsafe extern "C" fn start_flush_work(work: *mut work_struct, barr: *mut wq_barrier, from_cancel: bool) -> bool {
+    let mut worker = core::ptr::null_mut();
+pub static mut pool: *mut c_void = core::ptr::null_mut();
+pub static mut pwq: *mut c_void = core::ptr::null_mut();
+pub static mut wq: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     pool = get_work_pool(work);
     if (!pool) {
@@ -3965,12 +4160,14 @@ pub unsafe extern "C" fn drain_workqueue(wq: *mut workqueue_struct) {
 // see the comment in try_to_grab_pending() with the same code
     pwq = get_work_pwq(work);
     if (pwq) {
-    if (unlikely(pwq.pool != pool))
-    goto already_gone;
+    if (unlikely(pwq.pool != pool)) {
+// goto;
+    }
     } else {
     worker = find_worker_executing_work(pool, work);
-    if (!worker)
-    goto already_gone;
+    if (!worker) {
+// goto;
+    }
     pwq = worker.current_pwq;
     }
     wq = pwq.wq;
@@ -3987,26 +4184,28 @@ pub unsafe extern "C" fn drain_workqueue(wq: *mut workqueue_struct) {
 // workqueues the deadlock happens when the rescuer stalls, blocking
 // forward progress.
 //
-    if (!from_cancel && (wq.saved_max_active == 1 || wq.rescuer))
+    if (!from_cancel && (wq.saved_max_active == 1 || wq.rescuer)) {
     touch_wq_lockdep_map(wq);
+    }
     rcu_read_unlock();
     return true;
-    already_gone:
+// label;
     raw_spin_unlock_irq(&pool.lock);
     rcu_read_unlock();
     return false;
     }
 #[no_mangle]
 unsafe extern "C" fn __flush_work(work: *mut work_struct, from_cancel: bool) -> bool {
-    static bool __flush_work(struct work_struct *work, bool from_cancel)
-    {
-    struct wq_barrier barr;
-    if (WARN_ON(!wq_online))
+pub static mut barr: usize = 0;
+    if (WARN_ON!(!wq_online)) {
     return false;
-    if (WARN_ON(!work.func))
+    }
+    if (WARN_ON!(!work.func)) {
     return false;
-    if (!start_flush_work(work, &barr, from_cancel))
+    }
+    if (!start_flush_work(work, &barr, from_cancel)) {
     return false;
+    }
 //
 // start_flush_work() returned %true. If @from_cancel is set, we know
 // that @work must have been executing during start_flush_work() and
@@ -4015,8 +4214,8 @@ unsafe extern "C" fn __flush_work(work: *mut work_struct, from_cancel: bool) -> 
 // BH context and thus can be busy-waited.
 //
     if (from_cancel) {
-    let mut data: c_ulong = *work_data_bits(work);
-    if (!WARN_ON_ONCE(data & WORK_STRUCT_PWQ) &&
+pub static mut data: c_ulong = 0;
+    if (!WARN_ON_ONCE!(data & WORK_STRUCT_PWQ) &&
     (data & WORK_OFFQ_BH)) {
 //
 // On RT, prevent a live lock when %current preempted
@@ -4024,21 +4223,22 @@ unsafe extern "C" fn __flush_work(work: *mut work_struct, from_cancel: bool) -> 
 // is owned by the thread invoking the callback.
 //
     while (!try_wait_for_completion(&barr.done)) {
-    if (IS_ENABLED(CONFIG_PREEMPT_RT)) {
-    struct worker_pool *pool;
+    if (IS_ENABLED!(CONFIG_PREEMPT_RT)) {
+pub static mut pool: *mut c_void = core::ptr::null_mut();
     guard(rcu)();
     pool = get_work_pool(work);
-    if (pool)
+    if (pool) {
     workqueue_callback_cancel_wait_running(pool);
+    }
     } else {
     cpu_relax();
     }
     }
-    goto out_destroy;
+// goto;
     }
     }
     wait_for_completion(&barr.done);
-    out_destroy:
+// label;
     destroy_work_on_stack(&barr.work);
     return true;
     }
@@ -4055,8 +4255,6 @@ unsafe extern "C" fn __flush_work(work: *mut work_struct, from_cancel: bool) -> 
 //
 #[no_mangle]
 pub unsafe extern "C" fn flush_work(work: *mut work_struct) -> bool {
-    bool flush_work(struct work_struct *work)
-    {
     might_sleep();
     return __flush_work(work, false);
     }
@@ -4075,11 +4273,10 @@ pub unsafe extern "C" fn flush_work(work: *mut work_struct) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn flush_delayed_work(dwork: *mut delayed_work) -> bool {
-    bool flush_delayed_work(struct delayed_work *dwork)
-    {
     local_irq_disable();
-    if (timer_delete_sync(&dwork.timer))
+    if (timer_delete_sync(&dwork.timer)) {
     __queue_work(dwork.cpu, dwork.wq, &dwork.work);
+    }
     local_irq_enable();
     return flush_work(&dwork.work);
     }
@@ -4094,8 +4291,6 @@ pub unsafe extern "C" fn flush_delayed_work(dwork: *mut delayed_work) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn flush_rcu_work(rwork: *mut rcu_work) -> bool {
-    bool flush_rcu_work(struct rcu_work *rwork)
-    {
     if (test_bit(WORK_STRUCT_PENDING_BIT, work_data_bits(&rwork.work))) {
     rcu_barrier();
     flush_work(&rwork.work);
@@ -4107,34 +4302,33 @@ pub unsafe extern "C" fn flush_rcu_work(rwork: *mut rcu_work) -> bool {
     EXPORT_SYMBOL(flush_rcu_work);
 #[no_mangle]
 unsafe extern "C" fn work_offqd_disable(offqd: *mut work_offq_data) {
-    static void work_offqd_disable(struct work_offq_data *offqd)
-    {
-    let mut max: c_ulong = (1lu << WORK_OFFQ_DISABLE_BITS) - 1;
-    if (likely(offqd.disable < max))
-    offqd.disable++;
-    else
+pub static mut max: c_ulong = 0;
+    if (likely(offqd.disable < max)) {
+    offqd.disable += 1;
+    }
+    else {
     WARN_ONCE(true, "workqueue: work disable count overflowed\n");
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn work_offqd_enable(offqd: *mut work_offq_data) {
-    static void work_offqd_enable(struct work_offq_data *offqd)
-    {
-    if (likely(offqd.disable > 0))
-    offqd.disable--;
-    else
+    if (likely(offqd.disable > 0)) {
+    offqd.disable -= 1;
+    }
+    else {
     WARN_ONCE(true, "workqueue: work disable count underflowed\n");
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn __cancel_work(work: *mut work_struct, cflags: u32) -> bool {
-    static bool __cancel_work(struct work_struct *work, u32 cflags)
-    {
-    struct work_offq_data offqd;
-    unsigned long irq_flags;
-    int ret;
+pub static mut offqd: usize = 0;
+    let mut irq_flags = 0;
+    let mut ret = 0;
     ret = work_grab_pending(work, cflags, &irq_flags);
     work_offqd_unpack(&offqd, *work_data_bits(work));
-    if (cflags & WORK_CANCEL_DISABLE)
+    if (cflags & WORK_CANCEL_DISABLE) {
     work_offqd_disable(&offqd);
+    }
     set_work_pool_and_clear_pending(work, offqd.pool_id,
     work_offqd_pack_flags(&offqd));
     local_irq_restore(irq_flags);
@@ -4142,22 +4336,24 @@ unsafe extern "C" fn __cancel_work(work: *mut work_struct, cflags: u32) -> bool 
     }
 #[no_mangle]
 unsafe extern "C" fn __cancel_work_sync(work: *mut work_struct, cflags: u32) -> bool {
-    static bool __cancel_work_sync(struct work_struct *work, u32 cflags)
-    {
-    bool ret;
+    let mut ret = 0;
     ret = __cancel_work(work, cflags | WORK_CANCEL_DISABLE);
-    if (*work_data_bits(work) & WORK_OFFQ_BH)
-    WARN_ON_ONCE(in_hardirq());
-    else
+    if (*work_data_bits(work) & WORK_OFFQ_BH) {
+    WARN_ON_ONCE!(in_hardirq());
+    }
+    else {
     might_sleep();
+    }
 //
 // Skip __flush_work() during early boot when we know that @work isn't
 // executing. This allows canceling during early boot.
 //
-    if (wq_online)
+    if (wq_online) {
     __flush_work(work, true);
-    if (!(cflags & WORK_CANCEL_DISABLE))
+    }
+    if (!(cflags & WORK_CANCEL_DISABLE)) {
     enable_work(work);
+    }
     return ret;
     }
 //
@@ -4165,8 +4361,6 @@ unsafe extern "C" fn __cancel_work_sync(work: *mut work_struct, cflags: u32) -> 
 //
 #[no_mangle]
 pub unsafe extern "C" fn cancel_work(work: *mut work_struct) -> bool {
-    bool cancel_work(struct work_struct *work)
-    {
     return __cancel_work(work, 0);
     }
     EXPORT_SYMBOL(cancel_work);
@@ -4190,8 +4384,6 @@ pub unsafe extern "C" fn cancel_work(work: *mut work_struct) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cancel_work_sync(work: *mut work_struct) -> bool {
-    bool cancel_work_sync(struct work_struct *work)
-    {
     return __cancel_work_sync(work, 0);
     }
     EXPORT_SYMBOL_GPL(cancel_work_sync);
@@ -4213,8 +4405,6 @@ pub unsafe extern "C" fn cancel_work_sync(work: *mut work_struct) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cancel_delayed_work(dwork: *mut delayed_work) -> bool {
-    bool cancel_delayed_work(struct delayed_work *dwork)
-    {
     return __cancel_work(&dwork.work, WORK_CANCEL_DELAYED);
     }
     EXPORT_SYMBOL(cancel_delayed_work);
@@ -4229,8 +4419,6 @@ pub unsafe extern "C" fn cancel_delayed_work(dwork: *mut delayed_work) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cancel_delayed_work_sync(dwork: *mut delayed_work) -> bool {
-    bool cancel_delayed_work_sync(struct delayed_work *dwork)
-    {
     return __cancel_work_sync(&dwork.work, WORK_CANCEL_DELAYED);
     }
     EXPORT_SYMBOL(cancel_delayed_work_sync);
@@ -4248,8 +4436,6 @@ pub unsafe extern "C" fn cancel_delayed_work_sync(dwork: *mut delayed_work) -> b
 //
 #[no_mangle]
 pub unsafe extern "C" fn disable_work(work: *mut work_struct) -> bool {
-    bool disable_work(struct work_struct *work)
-    {
     return __cancel_work(work, WORK_CANCEL_DISABLE);
     }
     EXPORT_SYMBOL_GPL(disable_work);
@@ -4268,8 +4454,6 @@ pub unsafe extern "C" fn disable_work(work: *mut work_struct) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn disable_work_sync(work: *mut work_struct) -> bool {
-    bool disable_work_sync(struct work_struct *work)
-    {
     return __cancel_work_sync(work, WORK_CANCEL_DISABLE);
     }
     EXPORT_SYMBOL_GPL(disable_work_sync);
@@ -4285,10 +4469,8 @@ pub unsafe extern "C" fn disable_work_sync(work: *mut work_struct) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn enable_work(work: *mut work_struct) -> bool {
-    bool enable_work(struct work_struct *work)
-    {
-    struct work_offq_data offqd;
-    unsigned long irq_flags;
+pub static mut offqd: usize = 0;
+    let mut irq_flags = 0;
     work_grab_pending(work, 0, &irq_flags);
     work_offqd_unpack(&offqd, *work_data_bits(work));
     work_offqd_enable(&offqd);
@@ -4306,8 +4488,6 @@ pub unsafe extern "C" fn enable_work(work: *mut work_struct) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn disable_delayed_work(dwork: *mut delayed_work) -> bool {
-    bool disable_delayed_work(struct delayed_work *dwork)
-    {
     return __cancel_work(&dwork.work,
     WORK_CANCEL_DELAYED | WORK_CANCEL_DISABLE);
     }
@@ -4320,8 +4500,6 @@ pub unsafe extern "C" fn disable_delayed_work(dwork: *mut delayed_work) -> bool 
 //
 #[no_mangle]
 pub unsafe extern "C" fn disable_delayed_work_sync(dwork: *mut delayed_work) -> bool {
-    bool disable_delayed_work_sync(struct delayed_work *dwork)
-    {
     return __cancel_work_sync(&dwork.work,
     WORK_CANCEL_DELAYED | WORK_CANCEL_DISABLE);
     }
@@ -4334,8 +4512,6 @@ pub unsafe extern "C" fn disable_delayed_work_sync(dwork: *mut delayed_work) -> 
 //
 #[no_mangle]
 pub unsafe extern "C" fn enable_delayed_work(dwork: *mut delayed_work) -> bool {
-    bool enable_delayed_work(struct delayed_work *dwork)
-    {
     return enable_work(&dwork.work);
     }
     EXPORT_SYMBOL_GPL(enable_delayed_work);
@@ -4352,21 +4528,21 @@ pub unsafe extern "C" fn enable_delayed_work(dwork: *mut delayed_work) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn schedule_on_each_cpu(func: work_func_t) -> c_int {
-    int schedule_on_each_cpu(work_func_t func)
-    {
-    int cpu;
-    struct work_struct __percpu *works;
-    works = alloc_percpu(struct work_struct);
-    if (!works)
+    let mut cpu = 0;
+    let mut works = core::ptr::null_mut();
+    works = alloc_percpu(work_struct);
+    if (!works) {
     return -ENOMEM;
+    }
     cpus_read_lock();
     for_each_online_cpu(cpu) {
-    struct work_struct *work = per_cpu_ptr(works, cpu);
+    let mut work = per_cpu_ptr(works, cpu);
     INIT_WORK(work, func);
     schedule_work_on(cpu, work);
     }
-    for_each_online_cpu(cpu)
+    for_each_online_cpu(cpu) {
     flush_work(per_cpu_ptr(works, cpu));
+    }
     cpus_read_unlock();
     free_percpu(works);
     return 0;
@@ -4385,8 +4561,6 @@ pub unsafe extern "C" fn schedule_on_each_cpu(func: work_func_t) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn execute_in_process_context(fn: work_func_t, ew: *mut execute_work) -> c_int {
-    int execute_in_process_context(work_func_t fn, struct execute_work *ew)
-    {
     if (!in_interrupt()) {
     fn(&ew.work);
     return 0;
@@ -4404,8 +4578,6 @@ pub unsafe extern "C" fn execute_in_process_context(fn: work_func_t, ew: *mut ex
 //
 #[no_mangle]
 pub unsafe extern "C" fn free_workqueue_attrs(attrs: *mut workqueue_attrs) {
-    void free_workqueue_attrs(struct workqueue_attrs *attrs)
-    {
     if (attrs) {
     free_cpumask_var(attrs.cpumask);
     free_cpumask_var(attrs.__pod_cpumask);
@@ -4420,26 +4592,28 @@ pub unsafe extern "C" fn free_workqueue_attrs(attrs: *mut workqueue_attrs) {
 //
 // Return: The allocated new workqueue_attr on success. %NULL on failure.
 //
-    struct workqueue_attrs *alloc_workqueue_attrs_noprof(void)
-    {
-    struct workqueue_attrs *attrs;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_workqueue_attrs_noprof() -> *mut c_void {
+pub static mut attrs: *mut c_void = core::ptr::null_mut();
     attrs = kzalloc_obj(*attrs);
-    if (!attrs)
-    goto fail;
-    if (!alloc_cpumask_var(&attrs.cpumask, GFP_KERNEL))
-    goto fail;
-    if (!alloc_cpumask_var(&attrs.__pod_cpumask, GFP_KERNEL))
-    goto fail;
+    if (!attrs) {
+// goto;
+    }
+    if (!alloc_cpumask_var(&attrs.cpumask, GFP_KERNEL)) {
+// goto;
+    }
+    if (!alloc_cpumask_var(&attrs.__pod_cpumask, GFP_KERNEL)) {
+// goto;
+    }
     cpumask_copy(attrs.cpumask, cpu_possible_mask);
     attrs.affn_scope = WQ_AFFN_DFL;
     return attrs;
-    fail:
+// label;
     free_workqueue_attrs(attrs);
     return core::ptr::null_mut();
     }
-    static void copy_workqueue_attrs(struct workqueue_attrs *to,
-    const struct workqueue_attrs *from)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn copy_workqueue_attrs(to: *mut workqueue_attrs, from: *mut workqueue_attrs) {
     to.nice = from.nice;
     cpumask_copy(to.cpumask, from.cpumask);
     cpumask_copy(to.__pod_cpumask, from.__pod_cpumask);
@@ -4458,77 +4632,81 @@ pub unsafe extern "C" fn free_workqueue_attrs(attrs: *mut workqueue_attrs) {
 //
 #[no_mangle]
 unsafe extern "C" fn wqattrs_clear_for_pool(attrs: *mut workqueue_attrs) {
-    static void wqattrs_clear_for_pool(struct workqueue_attrs *attrs)
-    {
     attrs.affn_scope = WQ_AFFN_NR_TYPES;
     attrs.ordered = false;
-    if (attrs.affn_strict)
+    if (attrs.affn_strict) {
     cpumask_copy(attrs.cpumask, cpu_possible_mask);
+    }
     }
 // hash value of the content of @attr
 #[no_mangle]
 unsafe extern "C" fn wqattrs_hash(attrs: *const workqueue_attrs) -> u32 {
-    static u32 wqattrs_hash(const struct workqueue_attrs *attrs)
-    {
-    let mut hash: u32 = 0;
+pub static mut hash: u32 = 0;
     hash = jhash_1word(attrs.nice, hash);
     hash = jhash_1word(attrs.affn_strict, hash);
     hash = jhash(cpumask_bits(attrs.__pod_cpumask),
-    BITS_TO_LONGS(nr_cpumask_bits) * sizeof(long), hash);
-    if (!attrs.affn_strict)
+    BITS_TO_LONGS(nr_cpumask_bits) * sizeof!(long), hash);
+    if (!attrs.affn_strict) {
     hash = jhash(cpumask_bits(attrs.cpumask),
-    BITS_TO_LONGS(nr_cpumask_bits) * sizeof(long), hash);
+    BITS_TO_LONGS(nr_cpumask_bits) * sizeof!(long), hash);
+    }
     return hash;
     }
 // content equality test
-    static bool wqattrs_equal(const struct workqueue_attrs *a,
-    const struct workqueue_attrs *b)
-    {
-    if (a.nice != b.nice)
+#[no_mangle]
+pub unsafe extern "C" fn wqattrs_equal(a: *mut workqueue_attrs, b: *mut workqueue_attrs) -> bool {
+    if (a.nice != b.nice) {
     return false;
-    if (a.affn_strict != b.affn_strict)
+    }
+    if (a.affn_strict != b.affn_strict) {
     return false;
-    if (!cpumask_equal(a.__pod_cpumask, b.__pod_cpumask))
+    }
+    if (!cpumask_equal(a.__pod_cpumask, b.__pod_cpumask)) {
     return false;
-    if (!a.affn_strict && !cpumask_equal(a.cpumask, b.cpumask))
+    }
+    if (!a.affn_strict && !cpumask_equal(a.cpumask, b.cpumask)) {
     return false;
+    }
     return true;
     }
 // Update @attrs with actually available CPUs
-    static void wqattrs_actualize_cpumask(struct workqueue_attrs *attrs,
-    const cpumask_t *unbound_cpumask)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn wqattrs_actualize_cpumask(attrs: *mut workqueue_attrs, unbound_cpumask: *mut cpumask_t) {
 //
 // Calculate the effective CPU mask of @attrs given @unbound_cpumask. If
 // @attrs->cpumask doesn't overlap with @unbound_cpumask, we fallback to
 // @unbound_cpumask.
 //
     cpumask_and(attrs.cpumask, attrs.cpumask, unbound_cpumask);
-    if (unlikely(cpumask_empty(attrs.cpumask)))
+    if (unlikely(cpumask_empty(attrs.cpumask))) {
     cpumask_copy(attrs.cpumask, unbound_cpumask);
+    }
     }
 // find wq_pod_type to use for @attrs
     static const struct wq_pod_type *
     wqattrs_pod_type(const struct workqueue_attrs *attrs)
     {
     enum wq_affn_scope scope;
-    struct wq_pod_type *pt;
+pub static mut pt: *mut c_void = core::ptr::null_mut();
 // to synchronize access to wq_affn_dfl
     lockdep_assert_held(&wq_pool_mutex);
-    if (attrs.affn_scope == WQ_AFFN_DFL)
+    if (attrs.affn_scope == WQ_AFFN_DFL) {
     scope = wq_affn_dfl;
-    else
+    }
+    else {
     scope = attrs.affn_scope;
+    }
     pt = &wq_pod_types[scope];
-    if (!WARN_ON_ONCE(attrs.affn_scope == WQ_AFFN_NR_TYPES) &&
-    likely(pt.nr_pods))
+    if (!WARN_ON_ONCE!(attrs.affn_scope == WQ_AFFN_NR_TYPES) &&
+    likely(pt.nr_pods)) {
     return pt;
+    }
 //
 // Before workqueue_init_topology(), only SYSTEM is available which is
 // initialized in workqueue_init_early().
 //
     pt = &wq_pod_types[WQ_AFFN_SYSTEM];
-    BUG_ON(!pt.nr_pods);
+    BUG_ON!(!pt.nr_pods);
     return pt;
     }
 //
@@ -4543,8 +4721,6 @@ unsafe extern "C" fn wqattrs_hash(attrs: *const workqueue_attrs) -> u32 {
 //
 #[no_mangle]
 unsafe extern "C" fn init_worker_pool(pool: *mut worker_pool) -> c_int {
-    static int init_worker_pool(struct worker_pool *pool)
-    {
     raw_spin_lock_init(&pool.lock);
     pool.id = -1;
     pool.cpu = -1;
@@ -4566,64 +4742,55 @@ unsafe extern "C" fn init_worker_pool(pool: *mut worker_pool) -> c_int {
 
 // shouldn't fail above this point
     pool.attrs = alloc_workqueue_attrs();
-    if (!pool.attrs)
+    if (!pool.attrs) {
     return -ENOMEM;
+    }
     wqattrs_clear_for_pool(pool.attrs);
     return 0;
     }
 
 #[no_mangle]
 unsafe extern "C" fn wq_init_lockdep(wq: *mut workqueue_struct) {
-    static void wq_init_lockdep(struct workqueue_struct *wq)
-    {
-    char *lock_name;
+pub static mut lock_name: *mut c_void = core::ptr::null_mut();
     lockdep_register_key(&wq.key);
     lock_name = kasprintf(GFP_KERNEL, "%s%s", "(wq_completion)", wq.name);
-    if (!lock_name)
+    if (!lock_name) {
     lock_name = wq.name;
+    }
     wq.lock_name = lock_name;
     wq.lockdep_map = &wq.__lockdep_map;
     lockdep_init_map(wq.lockdep_map, lock_name, &wq.key, 0);
     }
 #[no_mangle]
 unsafe extern "C" fn wq_unregister_lockdep(wq: *mut workqueue_struct) {
-    static void wq_unregister_lockdep(struct workqueue_struct *wq)
-    {
-    if (wq.lockdep_map != &wq.__lockdep_map)
+    if (wq.lockdep_map != &wq.__lockdep_map) {
     return;
+    }
     lockdep_unregister_key(&wq.key);
     }
 #[no_mangle]
 unsafe extern "C" fn wq_free_lockdep(wq: *mut workqueue_struct) {
-    static void wq_free_lockdep(struct workqueue_struct *wq)
-    {
-    if (wq.lockdep_map != &wq.__lockdep_map)
+    if (wq.lockdep_map != &wq.__lockdep_map) {
     return;
-    if (wq.lock_name != wq.name)
+    }
+    if (wq.lock_name != wq.name) {
     kfree(wq.lock_name);
+    }
     }
 
 #[no_mangle]
 unsafe extern "C" fn wq_init_lockdep(wq: *mut workqueue_struct) {
-    static void wq_init_lockdep(struct workqueue_struct *wq)
-    {
     }
 #[no_mangle]
 unsafe extern "C" fn wq_unregister_lockdep(wq: *mut workqueue_struct) {
-    static void wq_unregister_lockdep(struct workqueue_struct *wq)
-    {
     }
 #[no_mangle]
 unsafe extern "C" fn wq_free_lockdep(wq: *mut workqueue_struct) {
-    static void wq_free_lockdep(struct workqueue_struct *wq)
-    {
     }
 
 #[no_mangle]
 unsafe extern "C" fn free_node_nr_active(nna_ar: *mut wq_node_nr_active) {
-    static void free_node_nr_active(struct wq_node_nr_active **nna_ar)
-    {
-    int node;
+    let mut node = 0;
     for_each_node(node) {
     kfree(nna_ar[node]);
     nna_ar[node] = core::ptr::null_mut();
@@ -4633,8 +4800,6 @@ unsafe extern "C" fn free_node_nr_active(nna_ar: *mut wq_node_nr_active) {
     }
 #[no_mangle]
 unsafe extern "C" fn init_node_nr_active(nna: *mut wq_node_nr_active) {
-    static void init_node_nr_active(struct wq_node_nr_active *nna)
-    {
     nna.max = WQ_DFL_MIN_ACTIVE;
     atomic_set(&nna.nr, 0);
     raw_spin_lock_init(&nna.lock);
@@ -4646,36 +4811,34 @@ unsafe extern "C" fn init_node_nr_active(nna: *mut wq_node_nr_active) {
 //
 #[no_mangle]
 unsafe extern "C" fn alloc_node_nr_active(nna_ar: *mut wq_node_nr_active) -> c_int {
-    static int alloc_node_nr_active(struct wq_node_nr_active **nna_ar)
-    {
-    struct wq_node_nr_active *nna;
-    int node;
+pub static mut nna: *mut c_void = core::ptr::null_mut();
+    let mut node = 0;
     for_each_node(node) {
-    nna = kzalloc_node(sizeof(*nna), GFP_KERNEL, node);
-    if (!nna)
-    goto err_free;
+    nna = kzalloc_node(sizeof!(*nna), GFP_KERNEL, node);
+    if (!nna) {
+// goto;
+    }
     init_node_nr_active(nna);
     nna_ar[node] = nna;
     }
 // [nr_node_ids] is used as the fallback
-    nna = kzalloc_node(sizeof(*nna), GFP_KERNEL, NUMA_NO_NODE);
-    if (!nna)
-    goto err_free;
+    nna = kzalloc_node(sizeof!(*nna), GFP_KERNEL, NUMA_NO_NODE);
+    if (!nna) {
+// goto;
+    }
     init_node_nr_active(nna);
     nna_ar[nr_node_ids] = nna;
     return 0;
-    err_free:
+// label;
     free_node_nr_active(nna_ar);
     return -ENOMEM;
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_free_wq(rcu: *mut rcu_head) {
-    static void rcu_free_wq(struct rcu_head *rcu)
-    {
-    struct workqueue_struct *wq =
-    container_of(rcu, struct workqueue_struct, rcu);
-    if (wq.flags & WQ_UNBOUND)
+    let mut wq = container_of!(rcu, workqueue_struct, rcu);
+    if (wq.flags & WQ_UNBOUND) {
     free_node_nr_active(wq.node_nr_active);
+    }
     wq_free_lockdep(wq);
     free_percpu(wq.cpu_pwq);
     free_workqueue_attrs(wq.attrs);
@@ -4683,9 +4846,7 @@ unsafe extern "C" fn rcu_free_wq(rcu: *mut rcu_head) {
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_free_pool(rcu: *mut rcu_head) {
-    static void rcu_free_pool(struct rcu_head *rcu)
-    {
-    struct worker_pool *pool = container_of(rcu, struct worker_pool, rcu);
+    let mut pool = container_of!(rcu, worker_pool, rcu);
     ida_destroy(&pool.worker_ida);
     free_workqueue_attrs(pool.attrs);
     kfree(pool);
@@ -4703,20 +4864,21 @@ unsafe extern "C" fn rcu_free_pool(rcu: *mut rcu_head) {
 //
 #[no_mangle]
 unsafe extern "C" fn put_unbound_pool(pool: *mut worker_pool) {
-    static void put_unbound_pool(struct worker_pool *pool)
-    {
-    struct worker *worker;
-    LIST_HEAD(cull_list);
+pub static mut worker: *mut c_void = core::ptr::null_mut();
+pub static mut cull_list: usize = 0;
     lockdep_assert_held(&wq_pool_mutex);
-    if (--pool.refcnt)
+    if (--pool.refcnt) {
     return;
+    }
 // sanity checks
-    if (WARN_ON(is_percpu_pool(pool)) ||
-    WARN_ON(!list_empty(&pool.worklist)))
+    if (WARN_ON!(is_percpu_pool(pool)) ||
+    WARN_ON!(!list_empty(&pool.worklist))) {
     return;
+    }
 // release id and unhash
-    if (pool.id >= 0)
+    if (pool.id >= 0) {
     idr_remove(&worker_pool_idr, pool.id);
+    }
     hash_del(&pool.hash_node);
 //
 // Become the manager and destroy all workers.  This prevents
@@ -4744,9 +4906,10 @@ unsafe extern "C" fn put_unbound_pool(pool: *mut worker_pool) {
     raw_spin_unlock_irq(&pool.lock);
     mutex_unlock(&wq_pool_attach_mutex);
     }
-    while ((worker = first_idle_worker(pool)))
+    while ((worker = first_idle_worker(pool))) {
     set_worker_dying(worker, &cull_list);
-    WARN_ON(pool.nr_workers || pool.nr_idle);
+    }
+    WARN_ON!(pool.nr_workers || pool.nr_idle);
     raw_spin_unlock_irq(&pool.lock);
     detach_dying_workers(&cull_list);
     mutex_unlock(&wq_pool_attach_mutex);
@@ -4772,45 +4935,49 @@ unsafe extern "C" fn put_unbound_pool(pool: *mut worker_pool) {
 // Return: On success, a worker_pool with the same attributes as @attrs.
 // On failure, %NULL.
 //
-    static struct worker_pool *get_unbound_pool(const struct workqueue_attrs *attrs)
-    {
-    struct wq_pod_type *pt = &wq_pod_types[WQ_AFFN_NUMA];
-    let mut hash: u32 = wqattrs_hash(attrs);
-    struct worker_pool *pool;
+#[no_mangle]
+pub unsafe extern "C" fn get_unbound_pool(attrs: *mut workqueue_attrs) -> *mut c_void {
+    let mut pt = &wq_pod_types[WQ_AFFN_NUMA];
+pub static mut hash: u32 = 0;
+pub static mut pool: *mut c_void = core::ptr::null_mut();
     int pod, node = NUMA_NO_NODE;
     lockdep_assert_held(&wq_pool_mutex);
 // do we already have a matching pool?
     hash_for_each_possible(unbound_pool_hash, pool, hash_node, hash) {
     if (wqattrs_equal(pool.attrs, attrs)) {
-    pool.refcnt++;
+    pool.refcnt += 1;
     return pool;
     }
     }
 // If __pod_cpumask is contained inside a NUMA pod, that's our node
-    for (pod = 0; pod < pt.nr_pods; pod++) {
+    while (pod < pt.nr_pods) {
     if (cpumask_subset(attrs.__pod_cpumask, pt.pod_cpus[pod])) {
     node = pt.pod_node[pod];
     break;
     }
     }
 // nope, create a new one
-    pool = kzalloc_node(sizeof(*pool), GFP_KERNEL, node);
-    if (!pool || init_worker_pool(pool) < 0)
-    goto fail;
+    pool = kzalloc_node(sizeof!(*pool), GFP_KERNEL, node);
+    if (!pool || init_worker_pool(pool) < 0) {
+// goto;
+    }
     pool.node = node;
     copy_workqueue_attrs(pool.attrs, attrs);
     wqattrs_clear_for_pool(pool.attrs);
-    if (worker_pool_assign_id(pool) < 0)
-    goto fail;
+    if (worker_pool_assign_id(pool) < 0) {
+// goto;
+    }
 // create and start the initial worker
-    if (wq_online && !create_worker(pool))
-    goto fail;
+    if (wq_online && !create_worker(pool)) {
+// goto;
+    }
 // install
     hash_add(unbound_pool_hash, &pool.hash_node, hash);
     return pool;
-    fail:
-    if (pool)
+// label;
+    if (pool) {
     put_unbound_pool(pool);
+    }
     return core::ptr::null_mut();
     }
 //
@@ -4819,13 +4986,11 @@ unsafe extern "C" fn put_unbound_pool(pool: *mut worker_pool) {
 //
 #[no_mangle]
 unsafe extern "C" fn pwq_release_workfn(work: *mut kthread_work) {
-    static void pwq_release_workfn(struct kthread_work *work)
-    {
-    struct pool_workqueue *pwq = container_of(work, struct pool_workqueue,
+    let mut pwq = container_of!(work, pool_workqueue,
     release_work);
-    struct workqueue_struct *wq = pwq.wq;
-    struct worker_pool *pool = pwq.pool;
-    let mut is_last: bool = false;
+    let mut wq = pwq.wq;
+    let mut pool = pwq.pool;
+pub static mut is_last: bool = false;
 //
 // When @pwq is not linked, it doesn't hold any reference to the
 // @wq, and @wq is invalid to access.
@@ -4837,13 +5002,13 @@ unsafe extern "C" fn pwq_release_workfn(work: *mut kthread_work) {
 //
 // For ordered workqueue with a plugged dfl_pwq, restart it now.
 //
-    if (!is_last && (wq.flags & __WQ_ORDERED))
+    if (!is_last && (wq.flags & __WQ_ORDERED)) {
     unplug_oldest_pwq(wq);
+    }
     mutex_unlock(&wq.mutex);
     }
     if (!list_empty(&pwq.pending_node)) {
-    struct wq_node_nr_active *nna =
-    wq_node_nr_active(pwq.wq, pwq.pool.node);
+    let mut nna = wq_node_nr_active(pwq.wq, pwq.pool.node);
     raw_spin_lock_irq(&nna.lock);
     list_del_init(&pwq.pending_node);
     raw_spin_unlock_irq(&nna.lock);
@@ -4864,11 +5029,10 @@ unsafe extern "C" fn pwq_release_workfn(work: *mut kthread_work) {
     }
     }
 // initialize newly allocated @pwq which is associated with @wq and @pool
-    static void init_pwq(struct pool_workqueue *pwq, struct workqueue_struct *wq,
-    struct worker_pool *pool)
-    {
-    BUG_ON((unsigned long)pwq & ~WORK_STRUCT_PWQ_MASK);
-    memset(pwq, 0, sizeof(*pwq));
+#[no_mangle]
+pub unsafe extern "C" fn init_pwq(pwq: *mut pool_workqueue, wq: *mut workqueue_struct, pool: *mut worker_pool) {
+    BUG_ON!((unsigned long)pwq & ~WORK_STRUCT_PWQ_MASK);
+    memset(pwq, 0, sizeof!(*pwq));
     pwq.pool = pool;
     pwq.wq = wq;
     pwq.flush_color = -1;
@@ -4894,39 +5058,40 @@ unsafe extern "C" fn pwq_release_workfn(work: *mut kthread_work) {
 // sync @pwq with the current state of its associated wq and link it
 #[no_mangle]
 unsafe extern "C" fn link_pwq(pwq: *mut pool_workqueue) {
-    static void link_pwq(struct pool_workqueue *pwq)
-    {
-    struct workqueue_struct *wq = pwq.wq;
+    let mut wq = pwq.wq;
     lockdep_assert_held(&wq.mutex);
 // may be called multiple times, ignore if already linked
-    if (!list_empty(&pwq.pwqs_node))
+    if (!list_empty(&pwq.pwqs_node)) {
     return;
+    }
 // set the matching work_color
     pwq.work_color = wq.work_color;
 // link in @pwq
     list_add_tail_rcu(&pwq.pwqs_node, &wq.pwqs);
     }
 // Return the static per-cpu worker_pool that backs @wq on @cpu.
-    static struct worker_pool *get_percpu_pool(struct workqueue_struct *wq, int cpu)
-    {
-    struct worker_pool __percpu *pools;
-    let mut highpri: bool = wq.flags & WQ_HIGHPRI;
-    if (wq.flags & WQ_BH)
+#[no_mangle]
+pub unsafe extern "C" fn get_percpu_pool(wq: *mut workqueue_struct, cpu: c_int) -> *mut c_void {
+    let mut pools = core::ptr::null_mut();
+pub static mut highpri: bool = false;
+    if (wq.flags & WQ_BH) {
     pools = bh_worker_pools;
-    else
+    }
+    else {
     pools = cpu_worker_pools;
+    }
     return &per_cpu_ptr(pools, cpu)[highpri];
     }
 // obtain a pool matching @attr and create a pwq associating the pool and @wq
-    static struct pool_workqueue *alloc_pwq(struct workqueue_struct *wq,
-    const struct workqueue_attrs *attrs)
-    {
-    struct worker_pool *pool;
-    struct pool_workqueue *pwq;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_pwq(wq: *mut workqueue_struct, attrs: *mut workqueue_attrs) -> *mut c_void {
+pub static mut pool: *mut c_void = core::ptr::null_mut();
+pub static mut pwq: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&wq_pool_mutex);
     pool = get_unbound_pool(attrs);
-    if (!pool)
+    if (!pool) {
     return core::ptr::null_mut();
+    }
     pwq = kmem_cache_alloc_node(pwq_cache, GFP_KERNEL, pool.node);
     if (!pwq) {
     put_unbound_pool(pool);
@@ -4951,10 +5116,8 @@ unsafe extern "C" fn link_pwq(pwq: *mut pool_workqueue) {
 //
 #[no_mangle]
 unsafe extern "C" fn wq_calc_pod_cpumask(attrs: *mut workqueue_attrs, cpu: c_int) {
-    static void wq_calc_pod_cpumask(struct workqueue_attrs *attrs, int cpu)
-    {
-    const struct wq_pod_type *pt = wqattrs_pod_type(attrs);
-    let mut pod: c_int = pt.cpu_pod[cpu];
+    let mut pt = wqattrs_pod_type(attrs);
+pub static mut pod: c_int = 0;
 // calculate possible CPUs in @pod that @attrs wants
     cpumask_and(attrs.__pod_cpumask, pt.pod_cpus[pod], attrs.cpumask);
 // does @pod have any online CPUs @attrs wants?
@@ -4964,11 +5127,10 @@ unsafe extern "C" fn wq_calc_pod_cpumask(attrs: *mut workqueue_attrs, cpu: c_int
     }
     }
 // install @pwq into @wq and return the old pwq, @cpu < 0 for dfl_pwq
-    static struct pool_workqueue *install_unbound_pwq(struct workqueue_struct *wq,
-    int cpu, struct pool_workqueue *pwq)
-    {
-    struct pool_workqueue __rcu **slot = unbound_pwq_slot(wq, cpu);
-    struct pool_workqueue *old_pwq;
+#[no_mangle]
+pub unsafe extern "C" fn install_unbound_pwq(wq: *mut workqueue_struct, cpu: c_int, pwq: *mut pool_workqueue) -> *mut c_void {
+    let mut slot = unbound_pwq_slot(wq, cpu);
+pub static mut old_pwq: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&wq_pool_mutex);
     lockdep_assert_held(&wq.mutex);
 // link_pwq() can handle duplicate calls
@@ -4981,9 +5143,9 @@ unsafe extern "C" fn wq_calc_pod_cpumask(attrs: *mut workqueue_attrs, cpu: c_int
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct apply_wqattrs_ctx {
-    pub /: *mut *mut *mut workqueue_wq; / target workqueue,
-    pub /: *mut *mut *mut workqueue_attrs attrs; / attrs to apply,
-    pub /: *mut *mut list_head list; / queued for batching commit,
+//     pub /: *mut *mut *mut workqueue_wq; / target workqueue,
+//     pub /: *mut *mut *mut workqueue_attrs attrs; / attrs to apply,
+//     pub /: *mut *mut list_head list; / queued for batching commit,
     pub dfl_pwq: *mut pool_workqueue,
     pub pwq_tbl: [*mut pool_workqueue; ],
 }
@@ -4991,34 +5153,32 @@ pub struct apply_wqattrs_ctx {
 // free the resources after success or abort
 #[no_mangle]
 unsafe extern "C" fn apply_wqattrs_cleanup(ctx: *mut apply_wqattrs_ctx) {
-    static void apply_wqattrs_cleanup(struct apply_wqattrs_ctx *ctx)
-    {
     if (ctx) {
-    int cpu;
-    for_each_possible_cpu(cpu)
+    let mut cpu = 0;
+    for_each_possible_cpu(cpu) {
     put_pwq_unlocked(ctx.pwq_tbl[cpu]);
+    }
     put_pwq_unlocked(ctx.dfl_pwq);
     free_workqueue_attrs(ctx.attrs);
     kfree(ctx);
     }
     }
 // allocate the attrs and pwqs for later installation
-    static struct apply_wqattrs_ctx *
-    apply_wqattrs_prepare(struct workqueue_struct *wq,
-    const struct workqueue_attrs *attrs,
-    const cpumask_var_t unbound_cpumask)
-    {
-    struct apply_wqattrs_ctx *ctx;
-    struct workqueue_attrs *new_attrs;
-    int cpu;
+#[no_mangle]
+pub unsafe extern "C" fn apply_wqattrs_prepare(wq: *mut workqueue_struct, attrs: *mut workqueue_attrs, unbound_cpumask: cpumask_var_t) -> *mut c_void {
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+pub static mut new_attrs: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
     lockdep_assert_held(&wq_pool_mutex);
-    if (WARN_ON(attrs.affn_scope < 0 ||
-    attrs.affn_scope >= WQ_AFFN_NR_TYPES))
+    if (WARN_ON!(attrs.affn_scope < 0 ||
+    attrs.affn_scope >= WQ_AFFN_NR_TYPES)) {
     return ERR_PTR(-EINVAL);
+    }
     ctx = kzalloc_flex(*ctx, pwq_tbl, nr_cpu_ids);
     new_attrs = alloc_workqueue_attrs();
-    if (!ctx || !new_attrs)
-    goto out_free;
+    if (!ctx || !new_attrs) {
+// goto;
+    }
 //
 // If something goes wrong during CPU up/down, we'll fall back to
 // the default pwq covering whole @attrs->cpumask.  Always create
@@ -5028,17 +5188,19 @@ unsafe extern "C" fn apply_wqattrs_cleanup(ctx: *mut apply_wqattrs_ctx) {
     wqattrs_actualize_cpumask(new_attrs, unbound_cpumask);
     cpumask_copy(new_attrs.__pod_cpumask, new_attrs.cpumask);
     ctx.dfl_pwq = alloc_pwq(wq, new_attrs);
-    if (!ctx.dfl_pwq)
-    goto out_free;
+    if (!ctx.dfl_pwq) {
+// goto;
+    }
     for_each_possible_cpu(cpu) {
     if (new_attrs.ordered) {
-    ctx.dfl_pwq.refcnt++;
+    ctx.dfl_pwq.refcnt += 1;
     ctx.pwq_tbl[cpu] = ctx.dfl_pwq;
     } else {
     wq_calc_pod_cpumask(new_attrs, cpu);
     ctx.pwq_tbl[cpu] = alloc_pwq(wq, new_attrs);
-    if (!ctx.pwq_tbl[cpu])
-    goto out_free;
+    if (!ctx.pwq_tbl[cpu]) {
+// goto;
+    }
     }
     }
 // save the user configured attrs and sanitize it.
@@ -5052,11 +5214,12 @@ unsafe extern "C" fn apply_wqattrs_cleanup(ctx: *mut apply_wqattrs_ctx) {
 // of newly queued work items until execution of older work items in
 // the old pwq's have completed.
 //
-    if ((wq.flags & __WQ_ORDERED) && !list_empty(&wq.pwqs))
+    if ((wq.flags & __WQ_ORDERED) && !list_empty(&wq.pwqs)) {
     ctx.dfl_pwq.plugged = true;
+    }
     ctx.wq = wq;
     return ctx;
-    out_free:
+// label;
     free_workqueue_attrs(new_attrs);
     apply_wqattrs_cleanup(ctx);
     return ERR_PTR(-ENOMEM);
@@ -5064,32 +5227,33 @@ unsafe extern "C" fn apply_wqattrs_cleanup(ctx: *mut apply_wqattrs_ctx) {
 // set attrs and install prepared pwqs, @ctx points to old pwqs on return
 #[no_mangle]
 unsafe extern "C" fn apply_wqattrs_commit(ctx: *mut apply_wqattrs_ctx) {
-    static void apply_wqattrs_commit(struct apply_wqattrs_ctx *ctx)
-    {
-    int cpu;
+    let mut cpu = 0;
 // all pwqs have been created successfully, let's install'em
     mutex_lock(&ctx.wq.mutex);
     copy_workqueue_attrs(ctx.wq.attrs, ctx.attrs);
 // save the previous pwqs and install the new ones
-    for_each_possible_cpu(cpu)
+    for_each_possible_cpu(cpu) {
     ctx.pwq_tbl[cpu] = install_unbound_pwq(ctx.wq, cpu,
     ctx.pwq_tbl[cpu]);
+    }
     ctx.dfl_pwq = install_unbound_pwq(ctx.wq, -1, ctx.dfl_pwq);
 // update node_nr_active->max, which only unbound workqueues have
-    if (ctx.wq.flags & WQ_UNBOUND)
+    if (ctx.wq.flags & WQ_UNBOUND) {
     wq_update_node_max_active(ctx.wq, -1);
+    }
     mutex_unlock(&ctx.wq.mutex);
     }
-    static int apply_workqueue_attrs_locked(struct workqueue_struct *wq,
-    const struct workqueue_attrs *attrs)
-    {
-    struct apply_wqattrs_ctx *ctx;
+#[no_mangle]
+pub unsafe extern "C" fn apply_workqueue_attrs_locked(wq: *mut workqueue_struct, attrs: *mut workqueue_attrs) -> c_int {
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
 // only unbound workqueues can change attributes
-    if (WARN_ON(!(wq.flags & WQ_UNBOUND)))
+    if (WARN_ON!(!(wq.flags & WQ_UNBOUND))) {
     return -EINVAL;
+    }
     ctx = apply_wqattrs_prepare(wq, attrs, wq_unbound_cpumask);
-    if (IS_ERR(ctx))
+    if (IS_ERR(ctx)) {
     return PTR_ERR(ctx);
+    }
 // the ctx has been prepared successfully, let's commit it
     apply_wqattrs_commit(ctx);
     apply_wqattrs_cleanup(ctx);
@@ -5110,10 +5274,9 @@ unsafe extern "C" fn apply_wqattrs_commit(ctx: *mut apply_wqattrs_ctx) {
 //
 // Return: 0 on success and -errno on failure.
 //
-    int apply_workqueue_attrs(struct workqueue_struct *wq,
-    const struct workqueue_attrs *attrs)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn apply_workqueue_attrs(wq: *mut workqueue_struct, attrs: *mut workqueue_attrs) -> c_int {
+    let mut ret = 0;
     mutex_lock(&wq_pool_mutex);
     ret = apply_workqueue_attrs_locked(wq, attrs);
     mutex_unlock(&wq_pool_mutex);
@@ -5139,13 +5302,12 @@ unsafe extern "C" fn apply_wqattrs_commit(ctx: *mut apply_wqattrs_ctx) {
 //
 #[no_mangle]
 unsafe extern "C" fn unbound_wq_update_pwq(wq: *mut workqueue_struct, cpu: c_int) {
-    static void unbound_wq_update_pwq(struct workqueue_struct *wq, int cpu)
-    {
-    struct pool_workqueue *old_pwq = core::ptr::null_mut(), *pwq;
-    struct workqueue_attrs *target_attrs;
+    let mut old_pwq = core::ptr::null_mut(), *pwq;
+pub static mut target_attrs: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&wq_pool_mutex);
-    if (!(wq.flags & WQ_UNBOUND) || wq.attrs.ordered)
+    if (!(wq.flags & WQ_UNBOUND) || wq.attrs.ordered) {
     return;
+    }
 //
 // We don't wanna alloc/free wq_attrs for each wq for each CPU.
 // Let's use a preallocated one.  The following buf is protected by
@@ -5156,41 +5318,41 @@ unsafe extern "C" fn unbound_wq_update_pwq(wq: *mut workqueue_struct, cpu: c_int
     wqattrs_actualize_cpumask(target_attrs, wq_unbound_cpumask);
 // nothing to do if the target cpumask matches the current pwq
     wq_calc_pod_cpumask(target_attrs, cpu);
-    if (wqattrs_equal(target_attrs, unbound_pwq(wq, cpu).pool.attrs))
+    if (wqattrs_equal(target_attrs, unbound_pwq(wq, cpu).pool.attrs)) {
     return;
+    }
 // create a new pwq
     pwq = alloc_pwq(wq, target_attrs);
     if (!pwq) {
-    pr_warn("workqueue: allocation failed while updating CPU pod affinity of \"%s\"\n",
+    pr_warn!("workqueue: allocation failed while updating CPU pod affinity of \"%s\"\n",
     wq.name);
-    goto use_dfl_pwq;
+// goto;
     }
 // Install the new pwq.
     mutex_lock(&wq.mutex);
     old_pwq = install_unbound_pwq(wq, cpu, pwq);
-    goto out_unlock;
-    use_dfl_pwq:
+// goto;
+// label;
     mutex_lock(&wq.mutex);
     pwq = unbound_pwq(wq, -1);
     raw_spin_lock_irq(&pwq.pool.lock);
     get_pwq(pwq);
     raw_spin_unlock_irq(&pwq.pool.lock);
     old_pwq = install_unbound_pwq(wq, cpu, pwq);
-    out_unlock:
+// label;
     mutex_unlock(&wq.mutex);
     put_pwq_unlocked(old_pwq);
     }
 #[no_mangle]
 unsafe extern "C" fn alloc_and_link_percpu_pwqs(wq: *mut workqueue_struct) -> c_int {
-    static int alloc_and_link_percpu_pwqs(struct workqueue_struct *wq)
-    {
-    struct pool_workqueue *pwq;
-    int cpu;
+pub static mut pwq: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
     for_each_possible_cpu(cpu) {
-    struct worker_pool *pool = get_percpu_pool(wq, cpu);
+    let mut pool = get_percpu_pool(wq, cpu);
     pwq = kmem_cache_alloc_node(pwq_cache, GFP_KERNEL, pool.node);
-    if (!pwq)
+    if (!pwq) {
     return -ENOMEM;
+    }
     init_pwq(pwq, wq, pool);
     mutex_lock(&wq.mutex);
     link_pwq(pwq);
@@ -5201,18 +5363,18 @@ unsafe extern "C" fn alloc_and_link_percpu_pwqs(wq: *mut workqueue_struct) -> c_
     }
 #[no_mangle]
 unsafe extern "C" fn alloc_and_link_pwqs(wq: *mut workqueue_struct) -> c_int {
-    static int alloc_and_link_pwqs(struct workqueue_struct *wq)
-    {
-    let mut highpri: bool = wq.flags & WQ_HIGHPRI;
-    int cpu, ret;
+pub static mut highpri: bool = false;
+    let mut cpu = 0;
+    let mut ret = 0;
     lockdep_assert_held(&wq_pool_mutex);
-    wq.cpu_pwq = alloc_percpu(struct pool_workqueue __rcu *);
-    if (!wq.cpu_pwq)
-    goto enomem;
+    wq.cpu_pwq = alloc_percpu;
+    if (!wq.cpu_pwq) {
+// goto;
+    }
     if (!(wq.flags & WQ_UNBOUND)) {
     ret = alloc_and_link_percpu_pwqs(wq);
     } else if (wq.flags & __WQ_ORDERED) {
-    struct pool_workqueue *dfl_pwq;
+pub static mut dfl_pwq: *mut c_void = core::ptr::null_mut();
     ret = apply_workqueue_attrs_locked(wq, ordered_wq_attrs[highpri]);
 // there should only be single pwq for ordering guarantee
     dfl_pwq = rcu_access_pointer(wq.dfl_pwq);
@@ -5222,14 +5384,15 @@ unsafe extern "C" fn alloc_and_link_pwqs(wq: *mut workqueue_struct) -> c_int {
     } else {
     ret = apply_workqueue_attrs_locked(wq, unbound_std_wq_attrs[highpri]);
     }
-    if (ret)
-    goto enomem;
+    if (ret) {
+// goto;
+    }
     return 0;
-    enomem:
+// label;
     if (wq.cpu_pwq) {
     for_each_possible_cpu(cpu) {
-    struct pool_workqueue __rcu **slot;
-    struct pool_workqueue *pwq;
+    let mut slot = core::ptr::null_mut();
+pub static mut pwq: *mut c_void = core::ptr::null_mut();
     slot = per_cpu_ptr(wq.cpu_pwq, cpu);
     pwq = rcu_access_pointer(*slot);
     if (pwq) {
@@ -5238,8 +5401,9 @@ unsafe extern "C" fn alloc_and_link_pwqs(wq: *mut workqueue_struct) -> c_int {
 // may have already added it. wq->mutex is not
 // needed as the wq has not been published yet.
 //
-    if (!list_empty(&pwq.pwqs_node))
+    if (!list_empty(&pwq.pwqs_node)) {
     list_del_rcu(&pwq.pwqs_node);
+    }
     kmem_cache_free(pwq_cache, pwq);
     }
     }
@@ -5248,12 +5412,12 @@ unsafe extern "C" fn alloc_and_link_pwqs(wq: *mut workqueue_struct) -> c_int {
     }
     return -ENOMEM;
     }
-    static int wq_clamp_max_active(int max_active, unsigned int flags,
-    const char *name)
-    {
-    if (max_active < 1 || max_active > WQ_MAX_ACTIVE)
-    pr_warn("workqueue: max_active %d requested for %s is out of range, clamping between %d and %d\n",
+#[no_mangle]
+pub unsafe extern "C" fn wq_clamp_max_active(max_active: c_int, flags: c_uint, name: *mut c_char) -> c_int {
+    if (max_active < 1 || max_active > WQ_MAX_ACTIVE) {
+    pr_warn!("workqueue: max_active %d requested for %s is out of range, clamping between %d and %d\n",
     max_active, name, 1, WQ_MAX_ACTIVE);
+    }
     return clamp_val(max_active, 1, WQ_MAX_ACTIVE);
     }
 //
@@ -5262,36 +5426,37 @@ unsafe extern "C" fn alloc_and_link_pwqs(wq: *mut workqueue_struct) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn init_rescuer(wq: *mut workqueue_struct) -> c_int {
-    static int init_rescuer(struct workqueue_struct *wq)
-    {
-    struct worker *rescuer;
+pub static mut rescuer: *mut c_void = core::ptr::null_mut();
     char id_buf[WORKER_ID_LEN];
-    int ret;
+    let mut ret = 0;
     lockdep_assert_held(&wq_pool_mutex);
-    if (!(wq.flags & WQ_MEM_RECLAIM))
+    if (!(wq.flags & WQ_MEM_RECLAIM)) {
     return 0;
+    }
     rescuer = alloc_worker(NUMA_NO_NODE);
     if (!rescuer) {
-    pr_err("workqueue: Failed to allocate a rescuer for wq \"%s\"\n",
+    pr_err!("workqueue: Failed to allocate a rescuer for wq \"%s\"\n",
     wq.name);
     return -ENOMEM;
     }
     rescuer.rescue_wq = wq;
-    format_worker_id(id_buf, sizeof(id_buf), rescuer, core::ptr::null_mut());
+    format_worker_id(id_buf, sizeof!(id_buf), rescuer, core::ptr::null_mut());
     rescuer.task = kthread_create(rescuer_thread, rescuer, "%s", id_buf);
     if (IS_ERR(rescuer.task)) {
     ret = PTR_ERR(rescuer.task);
-    pr_err("workqueue: Failed to create a rescuer kthread for wq \"%s\": %pe",
+    pr_err!("workqueue: Failed to create a rescuer kthread for wq \"%s\": %pe",
     wq.name, ERR_PTR(ret));
     kfree(rescuer);
     return ret;
     }
     wq.rescuer = rescuer;
 // initial cpumask is consistent with the detached rescuer and unbind_worker()
-    if (cpumask_intersects(wq_unbound_cpumask, cpu_active_mask))
+    if (cpumask_intersects(wq_unbound_cpumask, cpu_active_mask)) {
     kthread_bind_mask(rescuer.task, wq_unbound_cpumask);
-    else
+    }
+    else {
     kthread_bind_mask(rescuer.task, cpu_possible_mask);
+    }
     wake_up_process(rescuer.task);
     return 0;
     }
@@ -5305,10 +5470,9 @@ unsafe extern "C" fn init_rescuer(wq: *mut workqueue_struct) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn wq_adjust_max_active(wq: *mut workqueue_struct) {
-    static void wq_adjust_max_active(struct workqueue_struct *wq)
-    {
-    bool activated;
-    int new_max, new_min;
+    let mut activated = 0;
+    let mut new_max = 0;
+    let mut new_min = 0;
     lockdep_assert_held(&wq.mutex);
     if ((wq.flags & WQ_FREEZABLE) && workqueue_freezing) {
     new_max = 0;
@@ -5317,8 +5481,9 @@ unsafe extern "C" fn wq_adjust_max_active(wq: *mut workqueue_struct) {
     new_max = wq.saved_max_active;
     new_min = wq.saved_min_active;
     }
-    if (wq.max_active == new_max && wq.min_active == new_min)
+    if (wq.max_active == new_max && wq.min_active == new_min) {
     return;
+    }
 //
 // Update @wq->max/min_active and then kick inactive work items if more
 // active work items are allowed. This doesn't break work item ordering
@@ -5327,19 +5492,21 @@ unsafe extern "C" fn wq_adjust_max_active(wq: *mut workqueue_struct) {
 //
     WRITE_ONCE(wq.max_active, new_max);
     WRITE_ONCE(wq.min_active, new_min);
-    if (wq.flags & WQ_UNBOUND)
+    if (wq.flags & WQ_UNBOUND) {
     wq_update_node_max_active(wq, -1);
-    if (new_max == 0)
+    }
+    if (new_max == 0) {
     return;
+    }
 //
 // Round-robin through pwq's activating the first inactive work item
 // until max_active is filled.
 //
     do {
-    struct pool_workqueue *pwq;
+pub static mut pwq: *mut c_void = core::ptr::null_mut();
     activated = false;
     for_each_pwq(pwq, wq) {
-    unsigned long irq_flags;
+    let mut irq_flags = 0;
 // can be called during early boot w/ irq disabled
     raw_spin_lock_irqsave(&pwq.pool.lock, irq_flags);
     if (pwq_activate_first_inactive(pwq, true)) {
@@ -5351,37 +5518,43 @@ unsafe extern "C" fn wq_adjust_max_active(wq: *mut workqueue_struct) {
     } while (activated);
     }
     __printf(1, 0)
-    static struct workqueue_struct *__alloc_workqueue(const char *fmt,
-    unsigned int flags,
-    int max_active, va_list args)
-    {
-    struct workqueue_struct *wq;
-    size_t wq_size;
-    int name_len;
+#[no_mangle]
+pub unsafe extern "C" fn __alloc_workqueue(fmt: *mut c_char, flags: c_uint, max_active: c_int, args: va_list) -> *mut c_void {
+pub static mut wq: *mut c_void = core::ptr::null_mut();
+    let mut wq_size = 0;
+    let mut name_len = 0;
     if (flags & WQ_BH) {
-    if (WARN_ON_ONCE(flags & ~__WQ_BH_ALLOWS))
-    return core::ptr::null_mut();
-    if (WARN_ON_ONCE(max_active))
+    if (WARN_ON_ONCE!(flags & ~__WQ_BH_ALLOWS)) {
     return core::ptr::null_mut();
     }
-// see the comment above the definition of WQ_POWER_EFFICIENT
-    if ((flags & WQ_POWER_EFFICIENT) && wq_power_efficient)
-    flags = (flags & ~WQ_PERCPU) | WQ_UNBOUND;
-// allocate wq and format name
-    if (flags & WQ_UNBOUND)
-    wq_size = struct_size(wq, node_nr_active, nr_node_ids + 1);
-    else
-    wq_size = sizeof(*wq);
-    wq = kzalloc_noprof(wq_size, GFP_KERNEL);
-    if (!wq)
+    if (WARN_ON_ONCE!(max_active)) {
     return core::ptr::null_mut();
+    }
+    }
+// see the comment above the definition of WQ_POWER_EFFICIENT
+    if ((flags & WQ_POWER_EFFICIENT) && wq_power_efficient) {
+    flags = (flags & ~WQ_PERCPU) | WQ_UNBOUND;
+    }
+// allocate wq and format name
+    if (flags & WQ_UNBOUND) {
+    wq_size = struct_size(wq, node_nr_active, nr_node_ids + 1);
+    }
+    else {
+    wq_size = sizeof!(*wq);
+    }
+    wq = kzalloc_noprof(wq_size, GFP_KERNEL);
+    if (!wq) {
+    return core::ptr::null_mut();
+    }
     wq.attrs = alloc_workqueue_attrs_noprof();
-    if (!wq.attrs)
-    goto err_free_wq;
-    name_len = vsnprintf(wq.name, sizeof(wq.name), fmt, args);
-    if (name_len >= WQ_NAME_LEN)
+    if (!wq.attrs) {
+// goto;
+    }
+    name_len = vsnprintf(wq.name, sizeof!(wq.name), fmt, args);
+    if (name_len >= WQ_NAME_LEN) {
     pr_warn_once("workqueue: name exceeds WQ_NAME_LEN. Truncating to: %s\n",
     wq.name);
+    }
 //
 // One among WQ_PERCPU and WQ_UNBOUND must be set, but not both.
 // - If neither is set, default to WQ_PERCPU
@@ -5422,66 +5595,66 @@ unsafe extern "C" fn wq_adjust_max_active(wq: *mut workqueue_struct) {
     INIT_LIST_HEAD(&wq.maydays);
     INIT_LIST_HEAD(&wq.list);
     if (flags & WQ_UNBOUND) {
-    if (alloc_node_nr_active(wq.node_nr_active) < 0)
-    goto err_free_wq;
+    if (alloc_node_nr_active(wq.node_nr_active) < 0) {
+// goto;
+    }
     }
 //
 // wq_pool_mutex protects the workqueues list, allocations of PWQs,
 // and the global freeze state.
 //
     mutex_lock(&wq_pool_mutex);
-    if (alloc_and_link_pwqs(wq) < 0)
-    goto err_unlock_free_node_nr_active;
+    if (alloc_and_link_pwqs(wq) < 0) {
+// goto;
+    }
     mutex_lock(&wq.mutex);
     wq_adjust_max_active(wq);
     mutex_unlock(&wq.mutex);
     list_add_tail_rcu(&wq.list, &workqueues);
-    if (wq_online && init_rescuer(wq) < 0)
-    goto err_unlock_destroy;
+    if (wq_online && init_rescuer(wq) < 0) {
+// goto;
+    }
     mutex_unlock(&wq_pool_mutex);
-    if ((wq.flags & WQ_SYSFS) && workqueue_sysfs_register(wq))
-    goto err_destroy;
+    if ((wq.flags & WQ_SYSFS) && workqueue_sysfs_register(wq)) {
+// goto;
+    }
     return wq;
-    err_unlock_free_node_nr_active:
+// label;
     mutex_unlock(&wq_pool_mutex);
 //
 // Failed alloc_and_link_pwqs() may leave pending pwq->release_work,
-// flushing the pwq_release_worker ensures that the pwq_release_workfn()
+flushing the pwq_release_worker ensures that the pwq_release_workfn()
 // completes before calling kfree(wq).
 //
     if (wq.flags & WQ_UNBOUND) {
     kthread_flush_worker(pwq_release_worker);
     free_node_nr_active(wq.node_nr_active);
     }
-    err_free_wq:
+// label;
     free_workqueue_attrs(wq.attrs);
     kfree(wq);
     return core::ptr::null_mut();
-    err_unlock_destroy:
+// label;
     mutex_unlock(&wq_pool_mutex);
-    err_destroy:
+// label;
     destroy_workqueue(wq);
     return core::ptr::null_mut();
     }
     __printf(1, 0)
-    static struct workqueue_struct *alloc_workqueue_va(const char *fmt,
-    unsigned int flags,
-    int max_active,
-    va_list args)
-    {
-    struct workqueue_struct *wq;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_workqueue_va(fmt: *mut c_char, flags: c_uint, max_active: c_int, args: va_list) -> *mut c_void {
+pub static mut wq: *mut c_void = core::ptr::null_mut();
     wq = __alloc_workqueue(fmt, flags, max_active, args);
-    if (wq)
+    if (wq) {
     wq_init_lockdep(wq);
+    }
     return wq;
     }
     __printf(1, 4)
-    struct workqueue_struct *alloc_workqueue_noprof(const char *fmt,
-    unsigned int flags,
-    int max_active, ...)
-    {
-    struct workqueue_struct *wq;
-    va_list args;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_workqueue_noprof(fmt: *mut c_char, flags: c_uint, max_active: c_int) -> *mut c_void {
+pub static mut wq: *mut c_void = core::ptr::null_mut();
+    let mut args;
     va_start(args, max_active);
     wq = alloc_workqueue_va(fmt, flags, max_active, args);
     va_end(args);
@@ -5490,41 +5663,40 @@ unsafe extern "C" fn wq_adjust_max_active(wq: *mut workqueue_struct) {
     EXPORT_SYMBOL_GPL(alloc_workqueue_noprof);
 #[no_mangle]
 unsafe extern "C" fn devm_workqueue_release(res: *mut c_void) {
-    static void devm_workqueue_release(void *res)
-    {
     destroy_workqueue(res);
     }
     __printf(2, 5) struct workqueue_struct *
-    devm_alloc_workqueue_noprof(struct device *dev, const char *fmt,
+    devm_alloc_workqueue_noprof(device *dev, const char *fmt,
     unsigned int flags, int max_active, ...)
     {
-    struct workqueue_struct *wq;
-    va_list args;
-    int ret;
+pub static mut wq: *mut c_void = core::ptr::null_mut();
+    let mut args;
+    let mut ret = 0;
     va_start(args, max_active);
     wq = alloc_workqueue_va(fmt, flags, max_active, args);
     va_end(args);
-    if (!wq)
+    if (!wq) {
     return core::ptr::null_mut();
+    }
     ret = devm_add_action_or_reset(dev, devm_workqueue_release, wq);
-    if (ret)
+    if (ret) {
     return core::ptr::null_mut();
+    }
     return wq;
     }
     EXPORT_SYMBOL_GPL(devm_alloc_workqueue_noprof);
 
     __printf(1, 5)
-    struct workqueue_struct *
-    alloc_workqueue_lockdep_map(const char *fmt, unsigned int flags,
-    int max_active, struct lockdep_map *lockdep_map, ...)
-    {
-    struct workqueue_struct *wq;
-    va_list args;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_workqueue_lockdep_map(fmt: *mut c_char, flags: c_uint, max_active: c_int, lockdep_map: *mut lockdep_map) -> *mut c_void {
+pub static mut wq: *mut c_void = core::ptr::null_mut();
+    let mut args;
     va_start(args, lockdep_map);
     wq = __alloc_workqueue(fmt, flags, max_active, args);
     va_end(args);
-    if (!wq)
+    if (!wq) {
     return core::ptr::null_mut();
+    }
     wq.lockdep_map = lockdep_map;
     return wq;
     }
@@ -5532,16 +5704,17 @@ unsafe extern "C" fn devm_workqueue_release(res: *mut c_void) {
 
 #[no_mangle]
 unsafe extern "C" fn pwq_busy(pwq: *mut pool_workqueue) -> bool {
-    static bool pwq_busy(struct pool_workqueue *pwq)
-    {
-    int i;
-    for (i = 0; i < WORK_NR_COLORS; i++)
+    let mut i = 0;
+    for (i = 0; i < WORK_NR_COLORS; i++) {
     if (pwq.nr_in_flight[i])
     return true;
-    if ((pwq != rcu_access_pointer(pwq.wq.dfl_pwq)) && (pwq.refcnt > 1))
+    }
+    if ((pwq != rcu_access_pointer(pwq.wq.dfl_pwq)) && (pwq.refcnt > 1)) {
     return true;
-    if (!pwq_is_empty(pwq))
+    }
+    if (!pwq_is_empty(pwq)) {
     return true;
+    }
     return false;
     }
 //
@@ -5563,10 +5736,8 @@ unsafe extern "C" fn pwq_busy(pwq: *mut pool_workqueue) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn destroy_workqueue(wq: *mut workqueue_struct) {
-    void destroy_workqueue(struct workqueue_struct *wq)
-    {
-    struct pool_workqueue *pwq;
-    int cpu;
+pub static mut pwq: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
 //
 // Remove it from sysfs first so that sanity check failure doesn't
 // lead to sysfs name conflicts.
@@ -5593,8 +5764,8 @@ pub unsafe extern "C" fn destroy_workqueue(wq: *mut workqueue_struct) {
     mutex_lock(&wq.mutex);
     for_each_pwq(pwq, wq) {
     raw_spin_lock_irq(&pwq.pool.lock);
-    if (WARN_ON(pwq_busy(pwq))) {
-    pr_warn("%s: %s has the following busy pwq\n",
+    if (WARN_ON!(pwq_busy(pwq))) {
+    pr_warn!("%s: %s has the following busy pwq\n",
     __func__, wq.name);
     show_pwq(pwq);
     raw_spin_unlock_irq(&pwq.pool.lock);
@@ -5640,19 +5811,20 @@ pub unsafe extern "C" fn destroy_workqueue(wq: *mut workqueue_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn workqueue_set_max_active(wq: *mut workqueue_struct, max_active: c_int) {
-    void workqueue_set_max_active(struct workqueue_struct *wq, int max_active)
-    {
 // max_active doesn't mean anything for BH workqueues
-    if (WARN_ON(wq.flags & WQ_BH))
+    if (WARN_ON!(wq.flags & WQ_BH)) {
     return;
+    }
 // disallow meddling with max_active for ordered workqueues
-    if (WARN_ON(wq.flags & __WQ_ORDERED))
+    if (WARN_ON!(wq.flags & __WQ_ORDERED)) {
     return;
+    }
     max_active = wq_clamp_max_active(max_active, wq.flags, wq.name);
     mutex_lock(&wq.mutex);
     wq.saved_max_active = max_active;
-    if (wq.flags & WQ_UNBOUND)
+    if (wq.flags & WQ_UNBOUND) {
     wq.saved_min_active = min(wq.saved_min_active, max_active);
+    }
     wq_adjust_max_active(wq);
     mutex_unlock(&wq.mutex);
     }
@@ -5673,12 +5845,11 @@ pub unsafe extern "C" fn workqueue_set_max_active(wq: *mut workqueue_struct, max
 //
 #[no_mangle]
 pub unsafe extern "C" fn workqueue_set_min_active(wq: *mut workqueue_struct, min_active: c_int) {
-    void workqueue_set_min_active(struct workqueue_struct *wq, int min_active)
-    {
 // min_active is only meaningful for non-ordered unbound workqueues
-    if (WARN_ON((wq.flags & (WQ_BH | WQ_UNBOUND | __WQ_ORDERED)) !=
-    WQ_UNBOUND))
+    if (WARN_ON!((wq.flags & (WQ_BH | WQ_UNBOUND | __WQ_ORDERED)) !=
+    WQ_UNBOUND)) {
     return;
+    }
     mutex_lock(&wq.mutex);
     wq.saved_min_active = clamp(min_active, 0, wq.saved_max_active);
     wq_adjust_max_active(wq);
@@ -5692,9 +5863,9 @@ pub unsafe extern "C" fn workqueue_set_min_active(wq: *mut workqueue_struct, min
 //
 // Return: work struct if %current task is a workqueue worker, %NULL otherwise.
 //
-    struct work_struct *current_work(void)
-    {
-    struct worker *worker = current_wq_worker();
+#[no_mangle]
+pub unsafe extern "C" fn current_work() -> *mut c_void {
+    let mut worker = current_wq_worker();
     return worker ? worker.current_work : core::ptr::null_mut();
     }
     EXPORT_SYMBOL(current_work);
@@ -5708,9 +5879,7 @@ pub unsafe extern "C" fn workqueue_set_min_active(wq: *mut workqueue_struct, min
 //
 #[no_mangle]
 pub unsafe extern "C" fn current_is_workqueue_rescuer() -> bool {
-    bool current_is_workqueue_rescuer(void)
-    {
-    struct worker *worker = current_wq_worker();
+    let mut worker = current_wq_worker();
     return worker && worker.rescue_wq;
     }
 //
@@ -5729,9 +5898,7 @@ pub unsafe extern "C" fn current_is_workqueue_rescuer() -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn current_is_workqueue_mem_reclaim() -> bool {
-    bool current_is_workqueue_mem_reclaim(void)
-    {
-    struct worker *worker = current_wq_worker();
+    let mut worker = current_wq_worker();
     return worker &&
     ((worker.current_pwq.wq.flags &
     (WQ_MEM_RECLAIM | __WQ_LEGACY)) == WQ_MEM_RECLAIM);
@@ -5758,13 +5925,12 @@ pub unsafe extern "C" fn current_is_workqueue_mem_reclaim() -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn workqueue_congested(cpu: c_int, wq: *mut workqueue_struct) -> bool {
-    bool workqueue_congested(int cpu, struct workqueue_struct *wq)
-    {
-    struct pool_workqueue *pwq;
-    bool ret;
+pub static mut pwq: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     preempt_disable();
-    if (cpu == WORK_CPU_UNBOUND)
+    if (cpu == WORK_CPU_UNBOUND) {
     cpu = smp_processor_id();
+    }
     pwq = rcu_dereference_sched(*per_cpu_ptr(wq.cpu_pwq, cpu));
     ret = !list_empty(&pwq.inactive_works);
     preempt_enable();
@@ -5784,19 +5950,19 @@ pub unsafe extern "C" fn workqueue_congested(cpu: c_int, wq: *mut workqueue_stru
 //
 #[no_mangle]
 pub unsafe extern "C" fn work_busy(work: *mut work_struct) -> c_uint {
-    unsigned int work_busy(struct work_struct *work)
-    {
-    struct worker_pool *pool;
-    unsigned long irq_flags;
-    let mut ret: c_uint = 0;
-    if (work_pending(work))
+pub static mut pool: *mut c_void = core::ptr::null_mut();
+    let mut irq_flags = 0;
+pub static mut ret: c_uint = 0;
+    if (work_pending(work)) {
     ret |= WORK_BUSY_PENDING;
+    }
     rcu_read_lock();
     pool = get_work_pool(work);
     if (pool) {
     raw_spin_lock_irqsave(&pool.lock, irq_flags);
-    if (find_worker_executing_work(pool, work))
+    if (find_worker_executing_work(pool, work)) {
     ret |= WORK_BUSY_RUNNING;
+    }
     raw_spin_unlock_irqrestore(&pool.lock, irq_flags);
     }
     rcu_read_unlock();
@@ -5815,13 +5981,11 @@ pub unsafe extern "C" fn work_busy(work: *mut work_struct) -> c_uint {
 //
 #[no_mangle]
 pub unsafe extern "C" fn set_worker_desc(fmt: *const c_char, ...) {
-    void set_worker_desc(const char *fmt, ...)
-    {
-    struct worker *worker = current_wq_worker();
-    va_list args;
+    let mut worker = current_wq_worker();
+    let mut args;
     if (worker) {
     va_start(args, fmt);
-    vsnprintf(worker.desc, sizeof(worker.desc), fmt, args);
+    vsnprintf(worker.desc, sizeof!(worker.desc), fmt, args);
     va_end(args);
     }
     }
@@ -5841,16 +6005,15 @@ pub unsafe extern "C" fn set_worker_desc(fmt: *const c_char, ...) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn print_worker_info(log_lvl: *const c_char, task: *mut task_struct) {
-    void print_worker_info(const char *log_lvl, struct task_struct *task)
-    {
-    let mut fn: work_func_t = core::ptr::null_mut();
+pub static mut fn: work_func_t = 0;
     char name[WQ_NAME_LEN] = { };
     char desc[WORKER_DESC_LEN] = { };
-    struct pool_workqueue *pwq = core::ptr::null_mut();
-    struct workqueue_struct *wq = core::ptr::null_mut();
-    struct worker *worker;
-    if (!(task.flags & PF_WQ_WORKER))
+    let mut pwq = core::ptr::null_mut();
+    let mut wq = core::ptr::null_mut();
+pub static mut worker: *mut c_void = core::ptr::null_mut();
+    if (!(task.flags & PF_WQ_WORKER)) {
     return;
+    }
 //
 // This function is called without any synchronization and @task
 // could be in any state.  Be careful with dereferences.
@@ -5860,43 +6023,45 @@ pub unsafe extern "C" fn print_worker_info(log_lvl: *const c_char, task: *mut ta
 // Carefully copy the associated workqueue's workfn, name and desc.
 // Keep the original last '\0' in case the original is garbage.
 //
-    copy_from_kernel_nofault(&fn, &worker.current_func, sizeof(fn));
-    copy_from_kernel_nofault(&pwq, &worker.current_pwq, sizeof(pwq));
-    copy_from_kernel_nofault(&wq, &pwq.wq, sizeof(wq));
-    copy_from_kernel_nofault(name, wq.name, sizeof(name) - 1);
-    copy_from_kernel_nofault(desc, worker.desc, sizeof(desc) - 1);
+    copy_from_kernel_nofault(&fn, &worker.current_func, sizeof!(fn));
+    copy_from_kernel_nofault(&pwq, &worker.current_pwq, sizeof!(pwq));
+    copy_from_kernel_nofault(&wq, &pwq.wq, sizeof!(wq));
+    copy_from_kernel_nofault(name, wq.name, sizeof!(name) - 1);
+    copy_from_kernel_nofault(desc, worker.desc, sizeof!(desc) - 1);
     if (fn || name[0] || desc[0]) {
     printk("%sWorkqueue: %s %ps", log_lvl, name, fn);
-    if (strcmp(name, desc))
+    if (strcmp(name, desc)) {
     pr_cont(" (%s)", desc);
+    }
     pr_cont("\n");
     }
     }
 #[no_mangle]
 unsafe extern "C" fn pr_cont_pool_info(pool: *mut worker_pool) {
-    static void pr_cont_pool_info(struct worker_pool *pool)
-    {
     pr_cont(" cpus=%*pbl", nr_cpumask_bits, pool.attrs.cpumask);
-    if (pool.node != NUMA_NO_NODE)
+    if (pool.node != NUMA_NO_NODE) {
     pr_cont(" node=%d", pool.node);
+    }
     pr_cont(" flags=0x%x", pool.flags);
-    if (pool.flags & POOL_BH)
+    if (pool.flags & POOL_BH) {
     pr_cont(" bh%s",
     pool.attrs.nice == HIGHPRI_NICE_LEVEL ? "-hi" : "");
-    else
+    }
+    else {
     pr_cont(" nice=%d", pool.attrs.nice);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn pr_cont_worker_id(worker: *mut worker) {
-    static void pr_cont_worker_id(struct worker *worker)
-    {
-    struct worker_pool *pool = worker.pool;
-    if (pool.flags & POOL_BH)
+    let mut pool = worker.pool;
+    if (pool.flags & POOL_BH) {
     pr_cont("bh%s",
     pool.attrs.nice == HIGHPRI_NICE_LEVEL ? "-hi" : "");
-    else
+    }
+    else {
     pr_cont("%d%s", task_pid_nr(worker.task),
     worker.rescue_wq ? "(RESCUER)" : "");
+    }
     }
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -5908,53 +6073,52 @@ pub struct pr_cont_work_struct {
 
 #[no_mangle]
 unsafe extern "C" fn pr_cont_work_flush(comma: bool, func: work_func_t, pcwsp: *mut pr_cont_work_struct) {
-    static void pr_cont_work_flush(bool comma, work_func_t func, struct pr_cont_work_struct *pcwsp)
-    {
-    if (!pcwsp.ctr)
-    goto out_record;
+    if (!pcwsp.ctr) {
+// goto;
+    }
     if (func == pcwsp.func) {
-    pcwsp.ctr++;
+    pcwsp.ctr += 1;
     return;
     }
-    if (pcwsp.ctr == 1)
+    if (pcwsp.ctr == 1) {
     pr_cont("%s %ps", pcwsp.comma ? "," : "", pcwsp.func);
-    else
+    }
+    else {
     pr_cont("%s %ld*%ps", pcwsp.comma ? "," : "", pcwsp.ctr, pcwsp.func);
+    }
     pcwsp.ctr = 0;
-    out_record:
-    if ((long)func == -1L)
+// label;
+    if ((long)func == -1L) {
     return;
+    }
     pcwsp.comma = comma;
     pcwsp.func = func;
     pcwsp.ctr = 1;
     }
 #[no_mangle]
 unsafe extern "C" fn pr_cont_work(comma: bool, work: *mut work_struct, pcwsp: *mut pr_cont_work_struct) {
-    static void pr_cont_work(bool comma, struct work_struct *work, struct pr_cont_work_struct *pcwsp)
-    {
     if (work.func == wq_barrier_func) {
-    struct wq_barrier *barr;
-    barr = container_of(work, struct wq_barrier, work);
+pub static mut barr: *mut c_void = core::ptr::null_mut();
+    barr = container_of!(work, wq_barrier, work);
     pr_cont_work_flush(comma, (work_func_t)-1, pcwsp);
     pr_cont("%s BAR(%d)", comma ? "," : "",
     task_pid_nr(barr.task));
     } else {
-    if (!comma)
+    if (!comma) {
     pr_cont_work_flush(comma, (work_func_t)-1, pcwsp);
+    }
     pr_cont_work_flush(comma, work.func, pcwsp);
     }
     }
 #[no_mangle]
 unsafe extern "C" fn show_pwq(pwq: *mut pool_workqueue) {
-    static void show_pwq(struct pool_workqueue *pwq)
-    {
-    let mut pcws: pr_cont_work_struct = { .ctr = 0, };
-    struct worker_pool *pool = pwq.pool;
-    struct work_struct *work;
-    struct worker *worker;
-    let mut has_in_flight: bool = false, has_pending = false;
-    int bkt;
-    pr_info("  pwq %d:", pool.id);
+pub static mut pcws: pr_cont_work_struct = 0;
+    let mut pool = pwq.pool;
+pub static mut work: *mut c_void = core::ptr::null_mut();
+pub static mut worker: *mut c_void = core::ptr::null_mut();
+pub static mut has_in_flight: bool = false;
+    let mut bkt = 0;
+    pr_info!("  pwq %d:", pool.id);
     pr_cont_pool_info(pool);
     pr_cont(" active=%d refcnt=%d%s\n",
     pwq.nr_active, pwq.refcnt,
@@ -5966,18 +6130,20 @@ unsafe extern "C" fn show_pwq(pwq: *mut pool_workqueue) {
     }
     }
     if (has_in_flight) {
-    let mut comma: bool = false;
-    pr_info("    in-flight:");
+pub static mut comma: bool = false;
+    pr_info!("    in-flight:");
     hash_for_each(pool.busy_hash, bkt, worker, hentry) {
-    if (worker.current_pwq != pwq)
+    if (worker.current_pwq != pwq) {
     continue;
+    }
     pr_cont(" %s", comma ? "," : "");
     pr_cont_worker_id(worker);
     pr_cont(":%ps", worker.current_func);
     pr_cont(" for %us",
     jiffies_to_msecs(jiffies - worker.current_start) / 1000);
-    list_for_each_entry(work, &worker.scheduled, entry)
+    list_for_each_entry(work, &worker.scheduled, entry) {
     pr_cont_work(false, work, &pcws);
+    }
     pr_cont_work_flush(comma, (work_func_t)-1L, &pcws);
     comma = true;
     }
@@ -5990,11 +6156,12 @@ unsafe extern "C" fn show_pwq(pwq: *mut pool_workqueue) {
     }
     }
     if (has_pending) {
-    let mut comma: bool = false;
-    pr_info("    pending:");
+pub static mut comma: bool = false;
+    pr_info!("    pending:");
     list_for_each_entry(work, &pool.worklist, entry) {
-    if (get_work_pwq(work) != pwq)
+    if (get_work_pwq(work) != pwq) {
     continue;
+    }
     pr_cont_work(comma, work, &pcws);
     comma = !(*work_data_bits(work) & WORK_STRUCT_LINKED);
     }
@@ -6002,8 +6169,8 @@ unsafe extern "C" fn show_pwq(pwq: *mut pool_workqueue) {
     pr_cont("\n");
     }
     if (!list_empty(&pwq.inactive_works)) {
-    let mut comma: bool = false;
-    pr_info("    inactive:");
+pub static mut comma: bool = false;
+    pr_info!("    inactive:");
     list_for_each_entry(work, &pwq.inactive_works, entry) {
     pr_cont_work(comma, work, &pcws);
     comma = !(*work_data_bits(work) & WORK_STRUCT_LINKED);
@@ -6018,20 +6185,19 @@ unsafe extern "C" fn show_pwq(pwq: *mut pool_workqueue) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn show_one_workqueue(wq: *mut workqueue_struct) {
-    void show_one_workqueue(struct workqueue_struct *wq)
-    {
-    struct pool_workqueue *pwq;
-    let mut idle: bool = true;
-    unsigned long irq_flags;
+pub static mut pwq: *mut c_void = core::ptr::null_mut();
+pub static mut idle: bool = true;
+    let mut irq_flags = 0;
     for_each_pwq(pwq, wq) {
     if (!pwq_is_empty(pwq)) {
     idle = false;
     break;
     }
     }
-    if (idle) /* Nothing to print for idle workqueue */
+    if (idle) /* Nothing to print for idle workqueue */ {
     return;
-    pr_info("workqueue %s: flags=0x%x\n", wq.name, wq.flags);
+    }
+    pr_info!("workqueue %s: flags=0x%x\n", wq.name, wq.flags);
     for_each_pwq(pwq, wq) {
     raw_spin_lock_irqsave(&pwq.pool.lock, irq_flags);
     if (!pwq_is_empty(pwq)) {
@@ -6059,30 +6225,31 @@ pub unsafe extern "C" fn show_one_workqueue(wq: *mut workqueue_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn show_one_worker_pool(pool: *mut worker_pool) {
-    static void show_one_worker_pool(struct worker_pool *pool)
-    {
-    struct worker *worker;
-    let mut first: bool = true;
-    unsigned long irq_flags;
-    let mut hung: c_ulong = 0;
+pub static mut worker: *mut c_void = core::ptr::null_mut();
+pub static mut first: bool = true;
+    let mut irq_flags = 0;
+pub static mut hung: c_ulong = 0;
     raw_spin_lock_irqsave(&pool.lock, irq_flags);
-    if (pool.nr_workers == pool.nr_idle)
-    goto next_pool;
+    if (pool.nr_workers == pool.nr_idle) {
+// goto;
+    }
 // How long the first pending work is waiting for a worker.
-    if (!list_empty(&pool.worklist))
+    if (!list_empty(&pool.worklist)) {
     hung = jiffies_to_msecs(jiffies - pool.last_progress_ts) / 1000;
+    }
 //
 // Defer printing to avoid deadlocks in console drivers that
 // queue work while holding locks also taken in their write
 // paths.
 //
     printk_deferred_enter();
-    pr_info("pool %d:", pool.id);
+    pr_info!("pool %d:", pool.id);
     pr_cont_pool_info(pool);
     pr_cont(" hung=%lus workers=%d", hung, pool.nr_workers);
-    if (pool.manager)
+    if (pool.manager) {
     pr_cont(" manager: %d",
     task_pid_nr(pool.manager.task));
+    }
     list_for_each_entry(worker, &pool.idle_list, entry) {
     pr_cont(" %s", first ? "idle: " : "");
     pr_cont_worker_id(worker);
@@ -6090,7 +6257,7 @@ unsafe extern "C" fn show_one_worker_pool(pool: *mut worker_pool) {
     }
     pr_cont("\n");
     printk_deferred_exit();
-    next_pool:
+// label;
     raw_spin_unlock_irqrestore(&pool.lock, irq_flags);
 //
 // We could be printing a lot from atomic context, e.g.
@@ -6106,17 +6273,17 @@ unsafe extern "C" fn show_one_worker_pool(pool: *mut worker_pool) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn show_all_workqueues() {
-    void show_all_workqueues(void)
-    {
-    struct workqueue_struct *wq;
-    struct worker_pool *pool;
-    int pi;
+pub static mut wq: *mut c_void = core::ptr::null_mut();
+pub static mut pool: *mut c_void = core::ptr::null_mut();
+    let mut pi = 0;
     rcu_read_lock();
-    pr_info("Showing busy workqueues and worker pools:\n");
-    list_for_each_entry_rcu(wq, &workqueues, list)
+    pr_info!("Showing busy workqueues and worker pools:\n");
+    list_for_each_entry_rcu(wq, &workqueues, list) {
     show_one_workqueue(wq);
-    for_each_pool(pool, pi)
+    }
+    for_each_pool(pool, pi) {
     show_one_worker_pool(pool);
+    }
     rcu_read_unlock();
     }
 //
@@ -6127,14 +6294,13 @@ pub unsafe extern "C" fn show_all_workqueues() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn show_freezable_workqueues() {
-    void show_freezable_workqueues(void)
-    {
-    struct workqueue_struct *wq;
+pub static mut wq: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
-    pr_info("Showing freezable workqueues that are still busy:\n");
+    pr_info!("Showing freezable workqueues that are still busy:\n");
     list_for_each_entry_rcu(wq, &workqueues, list) {
-    if (!(wq.flags & WQ_FREEZABLE))
+    if (!(wq.flags & WQ_FREEZABLE)) {
     continue;
+    }
     show_one_workqueue(wq);
     }
     rcu_read_unlock();
@@ -6142,14 +6308,12 @@ pub unsafe extern "C" fn show_freezable_workqueues() {
 // used to show worker information through /proc/PID/{comm,stat,status}
 #[no_mangle]
 pub unsafe extern "C" fn wq_worker_comm(buf: *mut c_char, size: usize, task: *mut task_struct) {
-    void wq_worker_comm(char *buf, size_t size, struct task_struct *task)
-    {
 // stabilize PF_WQ_WORKER and worker pool association
     mutex_lock(&wq_pool_attach_mutex);
     if (task.flags & PF_WQ_WORKER) {
-    struct worker *worker = kthread_data(task);
-    struct worker_pool *pool = worker.pool;
-    int off;
+    let mut worker = kthread_data(task);
+    let mut pool = worker.pool;
+    let mut off = 0;
     off = format_worker_id(buf, size, worker, pool);
     if (pool) {
     raw_spin_lock_irq(&pool.lock);
@@ -6159,12 +6323,14 @@ pub unsafe extern "C" fn wq_worker_comm(buf: *mut c_char, size: usize, task: *mu
 // current, prepend '+', otherwise '-'.
 //
     if (worker.desc[0] != '\0') {
-    if (worker.current_work)
+    if (worker.current_work) {
     scnprintf(buf + off, size - off, "+%s",
     worker.desc);
-    else
+    }
+    else {
     scnprintf(buf + off, size - off, "-%s",
     worker.desc);
+    }
     }
     raw_spin_unlock_irq(&pool.lock);
     }
@@ -6190,10 +6356,8 @@ pub unsafe extern "C" fn wq_worker_comm(buf: *mut c_char, size: usize, task: *mu
 //
 #[no_mangle]
 unsafe extern "C" fn unbind_workers(cpu: c_int) {
-    static void unbind_workers(int cpu)
-    {
-    struct worker_pool *pool;
-    struct worker *worker;
+pub static mut pool: *mut c_void = core::ptr::null_mut();
+pub static mut worker: *mut c_void = core::ptr::null_mut();
     for_each_cpu_worker_pool(pool, cpu) {
     mutex_lock(&wq_pool_attach_mutex);
     raw_spin_lock_irq(&pool.lock);
@@ -6205,8 +6369,9 @@ unsafe extern "C" fn unbind_workers(cpu: c_int) {
 // are guaranteed to see WORKER_UNBOUND since the code here
 // is on the same cpu.
 //
-    for_each_pool_worker(worker, pool)
+    for_each_pool_worker(worker, pool) {
     worker.flags |= WORKER_UNBOUND;
+    }
     pool.flags |= POOL_DISASSOCIATED;
 //
 // The handling of nr_running in sched callbacks are disabled
@@ -6224,8 +6389,9 @@ unsafe extern "C" fn unbind_workers(cpu: c_int) {
 //
     kick_pool(pool);
     raw_spin_unlock_irq(&pool.lock);
-    for_each_pool_worker(worker, pool)
+    for_each_pool_worker(worker, pool) {
     unbind_worker(worker);
+    }
     mutex_unlock(&wq_pool_attach_mutex);
     }
     }
@@ -6237,9 +6403,7 @@ unsafe extern "C" fn unbind_workers(cpu: c_int) {
 //
 #[no_mangle]
 unsafe extern "C" fn rebind_workers(pool: *mut worker_pool) {
-    static void rebind_workers(struct worker_pool *pool)
-    {
-    struct worker *worker;
+pub static mut worker: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&wq_pool_attach_mutex);
 //
 // Restore CPU affinity of all workers.  As all idle workers should
@@ -6250,13 +6414,13 @@ unsafe extern "C" fn rebind_workers(pool: *mut worker_pool) {
 //
     for_each_pool_worker(worker, pool) {
     kthread_set_per_cpu(worker.task, pool.cpu);
-    WARN_ON_ONCE(set_cpus_allowed_ptr(worker.task,
+    WARN_ON_ONCE!(set_cpus_allowed_ptr(worker.task,
     pool_allowed_cpus(pool)) < 0);
     }
     raw_spin_lock_irq(&pool.lock);
     pool.flags &= ~POOL_DISASSOCIATED;
     for_each_pool_worker(worker, pool) {
-    let mut worker_flags: c_uint = worker.flags;
+pub static mut worker_flags: c_uint = 0;
 //
 // We want to clear UNBOUND but can't directly call
 // worker_clr_flags() or adjust nr_running.  Atomically
@@ -6272,7 +6436,7 @@ unsafe extern "C" fn rebind_workers(pool: *mut worker_pool) {
 // fail incorrectly leading to premature concurrency
 // management operations.
 //
-    WARN_ON_ONCE(!(worker_flags & WORKER_UNBOUND));
+    WARN_ON_ONCE!(!(worker_flags & WORKER_UNBOUND));
     worker_flags |= WORKER_REBOUND;
     worker_flags &= ~WORKER_UNBOUND;
     WRITE_ONCE(worker.flags, worker_flags);
@@ -6291,62 +6455,63 @@ unsafe extern "C" fn rebind_workers(pool: *mut worker_pool) {
 //
 #[no_mangle]
 unsafe extern "C" fn restore_unbound_workers_cpumask(pool: *mut worker_pool, cpu: c_int) {
-    static void restore_unbound_workers_cpumask(struct worker_pool *pool, int cpu)
-    {
     static cpumask_t cpumask;
-    struct worker *worker;
+pub static mut worker: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&wq_pool_attach_mutex);
 // is @cpu allowed for @pool?
-    if (!cpumask_test_cpu(cpu, pool.attrs.cpumask))
+    if (!cpumask_test_cpu(cpu, pool.attrs.cpumask)) {
     return;
+    }
     cpumask_and(&cpumask, pool.attrs.cpumask, cpu_online_mask);
 // as we're called from CPU_ONLINE, the following shouldn't fail
-    for_each_pool_worker(worker, pool)
-    WARN_ON_ONCE(set_cpus_allowed_ptr(worker.task, &cpumask) < 0);
+    for_each_pool_worker(worker, pool) {
+    WARN_ON_ONCE!(set_cpus_allowed_ptr(worker.task, &cpumask) < 0);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn workqueue_prepare_cpu(cpu: c_uint) -> c_int {
-    int workqueue_prepare_cpu(unsigned int cpu)
-    {
-    struct worker_pool *pool;
+pub static mut pool: *mut c_void = core::ptr::null_mut();
     for_each_cpu_worker_pool(pool, cpu) {
-    if (pool.nr_workers)
+    if (pool.nr_workers) {
     continue;
-    if (!create_worker(pool))
+    }
+    if (!create_worker(pool)) {
     return -ENOMEM;
+    }
     }
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn workqueue_online_cpu(cpu: c_uint) -> c_int {
-    int workqueue_online_cpu(unsigned int cpu)
-    {
-    struct worker_pool *pool;
-    struct workqueue_struct *wq;
-    int pi;
+pub static mut pool: *mut c_void = core::ptr::null_mut();
+pub static mut wq: *mut c_void = core::ptr::null_mut();
+    let mut pi = 0;
     mutex_lock(&wq_pool_mutex);
     cpumask_set_cpu(cpu, wq_online_cpumask);
     for_each_pool(pool, pi) {
 // BH pools aren't affected by hotplug
-    if (pool.flags & POOL_BH)
+    if (pool.flags & POOL_BH) {
     continue;
+    }
     mutex_lock(&wq_pool_attach_mutex);
-    if (pool.cpu == cpu)
+    if (pool.cpu == cpu) {
     rebind_workers(pool);
-#[no_mangle]
-pub unsafe extern "C" fn if(0: pool->cpu <) -> else {
-    else if (pool.cpu < 0)
+    }
+
+    else if (pool.cpu < 0) {
     restore_unbound_workers_cpumask(pool, cpu);
+    }
     mutex_unlock(&wq_pool_attach_mutex);
     }
 // update pod affinity of unbound workqueues
     list_for_each_entry(wq, &workqueues, list) {
-    struct workqueue_attrs *attrs = wq.attrs;
+    let mut attrs = wq.attrs;
     if (wq.flags & WQ_UNBOUND) {
-    const struct wq_pod_type *pt = wqattrs_pod_type(attrs);
-    int tcpu;
-    for_each_cpu(tcpu, pt.pod_cpus[pt.cpu_pod[cpu]])
+    let mut pt = wqattrs_pod_type(attrs);
+    let mut tcpu = 0;
+    for_each_cpu(tcpu, pt.pod_cpus[pt.cpu_pod[cpu]]) {
     unbound_wq_update_pwq(wq, tcpu);
+    }
     mutex_lock(&wq.mutex);
     wq_update_node_max_active(wq, -1);
     mutex_unlock(&wq.mutex);
@@ -6357,23 +6522,23 @@ pub unsafe extern "C" fn if(0: pool->cpu <) -> else {
     }
 #[no_mangle]
 pub unsafe extern "C" fn workqueue_offline_cpu(cpu: c_uint) -> c_int {
-    int workqueue_offline_cpu(unsigned int cpu)
-    {
-    struct workqueue_struct *wq;
+pub static mut wq: *mut c_void = core::ptr::null_mut();
 // unbinding per-cpu workers should happen on the local CPU
-    if (WARN_ON(cpu != smp_processor_id()))
+    if (WARN_ON!(cpu != smp_processor_id())) {
     return -1;
+    }
     unbind_workers(cpu);
 // update pod affinity of unbound workqueues
     mutex_lock(&wq_pool_mutex);
     cpumask_clear_cpu(cpu, wq_online_cpumask);
     list_for_each_entry(wq, &workqueues, list) {
-    struct workqueue_attrs *attrs = wq.attrs;
+    let mut attrs = wq.attrs;
     if (wq.flags & WQ_UNBOUND) {
-    const struct wq_pod_type *pt = wqattrs_pod_type(attrs);
-    int tcpu;
-    for_each_cpu(tcpu, pt.pod_cpus[pt.cpu_pod[cpu]])
+    let mut pt = wqattrs_pod_type(attrs);
+    let mut tcpu = 0;
+    for_each_cpu(tcpu, pt.pod_cpus[pt.cpu_pod[cpu]]) {
     unbound_wq_update_pwq(wq, tcpu);
+    }
     mutex_lock(&wq.mutex);
     wq_update_node_max_active(wq, cpu);
     mutex_unlock(&wq.mutex);
@@ -6386,16 +6551,14 @@ pub unsafe extern "C" fn workqueue_offline_cpu(cpu: c_uint) -> c_int {
 #[derive(Copy, Clone)]
 pub struct work_for_cpu {
     pub work: work_struct,
-    pub ): *mut *mut long (fn)(void,
+// fn ptr field
     pub arg: *mut c_void,
     pub ret: c_long,
 }
 
 #[no_mangle]
 unsafe extern "C" fn work_for_cpu_fn(work: *mut work_struct) {
-    static void work_for_cpu_fn(struct work_struct *work)
-    {
-    struct work_for_cpu *wfc = container_of(work, struct work_for_cpu, work);
+    let mut wfc = container_of!(work, work_for_cpu, work);
     wfc.ret = wfc.fn(wfc.arg);
     }
 //
@@ -6410,10 +6573,9 @@ unsafe extern "C" fn work_for_cpu_fn(work: *mut work_struct) {
 //
 // Return: The value @fn returns.
 //
-    long work_on_cpu_key(int cpu, long (*fn)(void *),
-    void *arg, struct lock_class_key *key)
-    {
-    let mut wfc: work_for_cpu = { .fn = fn, .arg = arg };
+#[no_mangle]
+pub unsafe extern "C" fn work_on_cpu_key(cpu: c_int, arg: *mut c_void, key: *mut lock_class_key) -> c_long {
+pub static mut wfc: work_for_cpu = 0;
     INIT_WORK_ONSTACK_KEY(&wfc.work, work_for_cpu_fn, key);
     schedule_work_on(cpu, &wfc.work);
     flush_work(&wfc.work);
@@ -6434,11 +6596,9 @@ unsafe extern "C" fn work_for_cpu_fn(work: *mut work_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn freeze_workqueues_begin() {
-    void freeze_workqueues_begin(void)
-    {
-    struct workqueue_struct *wq;
+pub static mut wq: *mut c_void = core::ptr::null_mut();
     mutex_lock(&wq_pool_mutex);
-    WARN_ON_ONCE(workqueue_freezing);
+    WARN_ON_ONCE!(workqueue_freezing);
     workqueue_freezing = true;
     list_for_each_entry(wq, &workqueues, list) {
     mutex_lock(&wq.mutex);
@@ -6462,32 +6622,31 @@ pub unsafe extern "C" fn freeze_workqueues_begin() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn freeze_workqueues_busy() -> bool {
-    bool freeze_workqueues_busy(void)
-    {
-    let mut busy: bool = false;
-    struct workqueue_struct *wq;
-    struct pool_workqueue *pwq;
+pub static mut busy: bool = false;
+pub static mut wq: *mut c_void = core::ptr::null_mut();
+pub static mut pwq: *mut c_void = core::ptr::null_mut();
     mutex_lock(&wq_pool_mutex);
-    WARN_ON_ONCE(!workqueue_freezing);
+    WARN_ON_ONCE!(!workqueue_freezing);
     list_for_each_entry(wq, &workqueues, list) {
-    if (!(wq.flags & WQ_FREEZABLE))
+    if (!(wq.flags & WQ_FREEZABLE)) {
     continue;
+    }
 //
 // nr_active is monotonically decreasing.  It's safe
 // to peek without lock.
 //
     rcu_read_lock();
     for_each_pwq(pwq, wq) {
-    WARN_ON_ONCE(pwq.nr_active < 0);
+    WARN_ON_ONCE!(pwq.nr_active < 0);
     if (pwq.nr_active) {
     busy = true;
     rcu_read_unlock();
-    goto out_unlock;
+// goto;
     }
     }
     rcu_read_unlock();
     }
-    out_unlock:
+// label;
     mutex_unlock(&wq_pool_mutex);
     return busy;
     }
@@ -6502,12 +6661,11 @@ pub unsafe extern "C" fn freeze_workqueues_busy() -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn thaw_workqueues() {
-    void thaw_workqueues(void)
-    {
-    struct workqueue_struct *wq;
+pub static mut wq: *mut c_void = core::ptr::null_mut();
     mutex_lock(&wq_pool_mutex);
-    if (!workqueue_freezing)
-    goto out_unlock;
+    if (!workqueue_freezing) {
+// goto;
+    }
     workqueue_freezing = false;
 // restore max_active and repopulate worklist
     list_for_each_entry(wq, &workqueues, list) {
@@ -6515,22 +6673,22 @@ pub unsafe extern "C" fn thaw_workqueues() {
     wq_adjust_max_active(wq);
     mutex_unlock(&wq.mutex);
     }
-    out_unlock:
+// label;
     mutex_unlock(&wq_pool_mutex);
     }
 
 #[no_mangle]
 unsafe extern "C" fn workqueue_apply_unbound_cpumask(unbound_cpumask: cpumask_var_t) -> c_int {
-    static int workqueue_apply_unbound_cpumask(const cpumask_var_t unbound_cpumask)
-    {
-    LIST_HEAD(ctxs);
-    let mut ret: c_int = 0;
-    struct workqueue_struct *wq;
-    struct apply_wqattrs_ctx *ctx, *n;
+pub static mut ctxs: usize = 0;
+pub static mut ret: c_int = 0;
+pub static mut wq: *mut c_void = core::ptr::null_mut();
+    let mut ctx = core::ptr::null_mut();
+    let mut n = core::ptr::null_mut();
     lockdep_assert_held(&wq_pool_mutex);
     list_for_each_entry(wq, &workqueues, list) {
-    if (!(wq.flags & WQ_UNBOUND) || (wq.flags & __WQ_DESTROYING))
+    if (!(wq.flags & WQ_UNBOUND) || (wq.flags & __WQ_DESTROYING)) {
     continue;
+    }
     ctx = apply_wqattrs_prepare(wq, wq.attrs, unbound_cpumask);
     if (IS_ERR(ctx)) {
     ret = PTR_ERR(ctx);
@@ -6539,28 +6697,32 @@ unsafe extern "C" fn workqueue_apply_unbound_cpumask(unbound_cpumask: cpumask_va
     list_add_tail(&ctx.list, &ctxs);
     }
     list_for_each_entry_safe(ctx, n, &ctxs, list) {
-    if (!ret)
+    if (!ret) {
     apply_wqattrs_commit(ctx);
+    }
     apply_wqattrs_cleanup(ctx);
     }
     if (!ret) {
-    int cpu;
-    struct worker_pool *pool;
-    struct worker *worker;
+    let mut cpu = 0;
+pub static mut pool: *mut c_void = core::ptr::null_mut();
+pub static mut worker: *mut c_void = core::ptr::null_mut();
     mutex_lock(&wq_pool_attach_mutex);
     cpumask_copy(wq_unbound_cpumask, unbound_cpumask);
 // rescuer needs to respect cpumask changes when it is not attached
     list_for_each_entry(wq, &workqueues, list) {
-    if (wq.rescuer && !wq.rescuer.pool)
+    if (wq.rescuer && !wq.rescuer.pool) {
     unbind_worker(wq.rescuer);
+    }
     }
 // DISASSOCIATED worker needs to respect wq_unbound_cpumask
     for_each_possible_cpu(cpu) {
     for_each_cpu_worker_pool(pool, cpu) {
-    if (!(pool.flags & POOL_DISASSOCIATED))
+    if (!(pool.flags & POOL_DISASSOCIATED)) {
     continue;
-    for_each_pool_worker(worker, pool)
+    }
+    for_each_pool_worker(worker, pool) {
     unbind_worker(worker);
+    }
     }
     }
     mutex_unlock(&wq_pool_attach_mutex);
@@ -6579,12 +6741,11 @@ unsafe extern "C" fn workqueue_apply_unbound_cpumask(unbound_cpumask: cpumask_va
 //
 #[no_mangle]
 pub unsafe extern "C" fn workqueue_unbound_housekeeping_update(hk: *const cpumask) -> c_int {
-    int workqueue_unbound_housekeeping_update(const struct cpumask *hk)
-    {
-    cpumask_var_t cpumask;
-    let mut ret: c_int = 0;
-    if (!zalloc_cpumask_var(&cpumask, GFP_KERNEL))
+    let mut cpumask;
+pub static mut ret: c_int = 0;
+    if (!zalloc_cpumask_var(&cpumask, GFP_KERNEL)) {
     return -ENOMEM;
+    }
     mutex_lock(&wq_pool_mutex);
 //
 // If the operation fails, it will fall back to
@@ -6592,40 +6753,43 @@ pub unsafe extern "C" fn workqueue_unbound_housekeeping_update(hk: *const cpumas
 // HK_TYPE_DOMAIN house keeping mask and rewritten
 // by any subsequent write to workqueue/cpumask sysfs file.
 //
-    if (!cpumask_and(cpumask, wq_requested_unbound_cpumask, hk))
+    if (!cpumask_and(cpumask, wq_requested_unbound_cpumask, hk)) {
     cpumask_copy(cpumask, wq_requested_unbound_cpumask);
-    if (!cpumask_equal(cpumask, wq_unbound_cpumask))
+    }
+    if (!cpumask_equal(cpumask, wq_unbound_cpumask)) {
     ret = workqueue_apply_unbound_cpumask(cpumask);
+    }
 // Save the current isolated cpumask & export it via sysfs
-    if (!ret)
+    if (!ret) {
     cpumask_andnot(wq_isolated_cpumask, cpu_possible_mask, hk);
+    }
     mutex_unlock(&wq_pool_mutex);
     free_cpumask_var(cpumask);
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn parse_affn_scope(val: *const c_char) -> c_int {
-    static int parse_affn_scope(const char *val)
-    {
     return sysfs_match_string(wq_affn_names, val);
     }
 #[no_mangle]
 unsafe extern "C" fn wq_affn_dfl_set(val: *const c_char, kp: *const kernel_param) -> c_int {
-    static int wq_affn_dfl_set(const char *val, const struct kernel_param *kp)
-    {
-    struct workqueue_struct *wq;
-    int affn, cpu;
+pub static mut wq: *mut c_void = core::ptr::null_mut();
+    let mut affn = 0;
+    let mut cpu = 0;
     affn = parse_affn_scope(val);
-    if (affn < 0)
+    if (affn < 0) {
     return affn;
-    if (affn == WQ_AFFN_DFL)
+    }
+    if (affn == WQ_AFFN_DFL) {
     return -EINVAL;
+    }
     cpus_read_lock();
     mutex_lock(&wq_pool_mutex);
     wq_affn_dfl = affn;
     list_for_each_entry(wq, &workqueues, list) {
-    for_each_online_cpu(cpu)
+    for_each_online_cpu(cpu) {
     unbound_wq_update_pwq(wq, cpu);
+    }
     }
     mutex_unlock(&wq_pool_mutex);
     cpus_read_unlock();
@@ -6633,15 +6797,10 @@ unsafe extern "C" fn wq_affn_dfl_set(val: *const c_char, kp: *const kernel_param
     }
 #[no_mangle]
 unsafe extern "C" fn wq_affn_dfl_get(buffer: *mut c_char, kp: *const kernel_param) -> c_int {
-    static int wq_affn_dfl_get(char *buffer, const struct kernel_param *kp)
-    {
     return scnprintf(buffer, PAGE_SIZE, "%s\n", wq_affn_names[wq_affn_dfl]);
     }
-    static const struct kernel_param_ops wq_affn_dfl_ops = {
-    .set	= wq_affn_dfl_set,
-    .get	= wq_affn_dfl_get,
-    };
-    module_param_cb(default_affinity_scope, &wq_affn_dfl_ops, core::ptr::null_mut(), 0644);
+pub static mut kernel_param_ops: usize = 0;
+    module_param_cb!(default_affinity_scope, &wq_affn_dfl_ops, core::ptr::null_mut(), 0644);
 
 //
 // Workqueues with WQ_SYSFS flag set is visible to userland via
@@ -6665,32 +6824,29 @@ pub struct wq_device {
     pub dev: device,
 }
 
-    static struct workqueue_struct *dev_to_wq(struct device *dev)
-    {
-    struct wq_device *wq_dev = container_of(dev, struct wq_device, dev);
+#[no_mangle]
+pub unsafe extern "C" fn dev_to_wq(dev: *mut device) -> *mut c_void {
+    let mut wq_dev = container_of!(dev, wq_device, dev);
     return wq_dev.wq;
     }
-    static ssize_t per_cpu_show(struct device *dev, struct device_attribute *attr,
-    char *buf)
-    {
-    struct workqueue_struct *wq = dev_to_wq(dev);
+#[no_mangle]
+pub unsafe extern "C" fn per_cpu_show(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char) -> ssize_t {
+    let mut wq = dev_to_wq(dev);
     return scnprintf(buf, PAGE_SIZE, "%d\n", (bool)!(wq.flags & WQ_UNBOUND));
     }
     static DEVICE_ATTR_RO(per_cpu);
-    static ssize_t max_active_show(struct device *dev,
-    struct device_attribute *attr, char *buf)
-    {
-    struct workqueue_struct *wq = dev_to_wq(dev);
+#[no_mangle]
+pub unsafe extern "C" fn max_active_show(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char) -> ssize_t {
+    let mut wq = dev_to_wq(dev);
     return scnprintf(buf, PAGE_SIZE, "%d\n", wq.saved_max_active);
     }
-    static ssize_t max_active_store(struct device *dev,
-    struct device_attribute *attr, const char *buf,
-    size_t count)
-    {
-    struct workqueue_struct *wq = dev_to_wq(dev);
-    int val;
-    if (sscanf(buf, "%d", &val) != 1 || val <= 0)
+#[no_mangle]
+pub unsafe extern "C" fn max_active_store(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut wq = dev_to_wq(dev);
+    let mut val = 0;
+    if (sscanf(buf, "%d", &val) != 1 || val <= 0) {
     return -EINVAL;
+    }
     workqueue_set_max_active(wq, val);
     return count;
     }
@@ -6702,120 +6858,117 @@ pub struct wq_device {
     };
 #[no_mangle]
 unsafe extern "C" fn wq_sysfs_is_visible(kobj: *mut kobject, a: *mut attribute, n: c_int) -> umode_t {
-    static umode_t wq_sysfs_is_visible(struct kobject *kobj, struct attribute *a, int n)
-    {
-    struct device *dev = kobj_to_dev(kobj);
-    struct workqueue_struct *wq = dev_to_wq(dev);
+    let mut dev = kobj_to_dev(kobj);
+    let mut wq = dev_to_wq(dev);
 //
 // Adjusting max_active breaks ordering guarantee. Changing it has no
 // effect on BH worker. Limit max_active to RO in such case.
 //
-    if (wq.flags & (WQ_BH | __WQ_ORDERED))
+    if (wq.flags & (WQ_BH | __WQ_ORDERED)) {
     return 0444;
+    }
     return a.mode;
     }
-    static const struct attribute_group wq_sysfs_group = {
-    .is_visible = wq_sysfs_is_visible,
-    .attrs = wq_sysfs_attrs,
-    };
+pub static mut attribute_group: usize = 0;
     __ATTRIBUTE_GROUPS(wq_sysfs);
-    static ssize_t wq_nice_show(struct device *dev, struct device_attribute *attr,
-    char *buf)
-    {
-    struct workqueue_struct *wq = dev_to_wq(dev);
-    int written;
+#[no_mangle]
+pub unsafe extern "C" fn wq_nice_show(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char) -> ssize_t {
+    let mut wq = dev_to_wq(dev);
+    let mut written = 0;
     mutex_lock(&wq.mutex);
     written = scnprintf(buf, PAGE_SIZE, "%d\n", wq.attrs.nice);
     mutex_unlock(&wq.mutex);
     return written;
     }
 // prepare workqueue_attrs for sysfs store operations
-    static struct workqueue_attrs *wq_sysfs_prep_attrs(struct workqueue_struct *wq)
-    {
-    struct workqueue_attrs *attrs;
+#[no_mangle]
+pub unsafe extern "C" fn wq_sysfs_prep_attrs(wq: *mut workqueue_struct) -> *mut c_void {
+pub static mut attrs: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&wq_pool_mutex);
     attrs = alloc_workqueue_attrs();
-    if (!attrs)
+    if (!attrs) {
     return core::ptr::null_mut();
+    }
     copy_workqueue_attrs(attrs, wq.attrs);
     return attrs;
     }
-    static ssize_t wq_nice_store(struct device *dev, struct device_attribute *attr,
-    const char *buf, size_t count)
-    {
-    struct workqueue_struct *wq = dev_to_wq(dev);
-    struct workqueue_attrs *attrs;
-    let mut ret: c_int = -ENOMEM;
+#[no_mangle]
+pub unsafe extern "C" fn wq_nice_store(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut wq = dev_to_wq(dev);
+pub static mut attrs: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     mutex_lock(&wq_pool_mutex);
     attrs = wq_sysfs_prep_attrs(wq);
-    if (!attrs)
-    goto out_unlock;
+    if (!attrs) {
+// goto;
+    }
     if (sscanf(buf, "%d", &attrs.nice) == 1 &&
-    attrs.nice >= MIN_NICE && attrs.nice <= MAX_NICE)
+    attrs.nice >= MIN_NICE && attrs.nice <= MAX_NICE) {
     ret = apply_workqueue_attrs_locked(wq, attrs);
-    else
+    }
+    else {
     ret = -EINVAL;
-    out_unlock:
+    }
+// label;
     mutex_unlock(&wq_pool_mutex);
     free_workqueue_attrs(attrs);
     return ret ?: count;
     }
-    static ssize_t wq_cpumask_show(struct device *dev,
-    struct device_attribute *attr, char *buf)
-    {
-    struct workqueue_struct *wq = dev_to_wq(dev);
-    int written;
+#[no_mangle]
+pub unsafe extern "C" fn wq_cpumask_show(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char) -> ssize_t {
+    let mut wq = dev_to_wq(dev);
+    let mut written = 0;
     mutex_lock(&wq.mutex);
     written = scnprintf(buf, PAGE_SIZE, "%*pb\n",
     cpumask_pr_args(wq.attrs.cpumask));
     mutex_unlock(&wq.mutex);
     return written;
     }
-    static ssize_t wq_cpumask_store(struct device *dev,
-    struct device_attribute *attr,
-    const char *buf, size_t count)
-    {
-    struct workqueue_struct *wq = dev_to_wq(dev);
-    struct workqueue_attrs *attrs;
-    let mut ret: c_int = -ENOMEM;
+#[no_mangle]
+pub unsafe extern "C" fn wq_cpumask_store(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut wq = dev_to_wq(dev);
+pub static mut attrs: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     mutex_lock(&wq_pool_mutex);
     attrs = wq_sysfs_prep_attrs(wq);
-    if (!attrs)
-    goto out_unlock;
+    if (!attrs) {
+// goto;
+    }
     ret = cpumask_parse(buf, attrs.cpumask);
-    if (!ret)
+    if (!ret) {
     ret = apply_workqueue_attrs_locked(wq, attrs);
-    out_unlock:
+    }
+// label;
     mutex_unlock(&wq_pool_mutex);
     free_workqueue_attrs(attrs);
     return ret ?: count;
     }
-    static ssize_t wq_affn_scope_show(struct device *dev,
-    struct device_attribute *attr, char *buf)
-    {
-    struct workqueue_struct *wq = dev_to_wq(dev);
-    int written;
+#[no_mangle]
+pub unsafe extern "C" fn wq_affn_scope_show(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char) -> ssize_t {
+    let mut wq = dev_to_wq(dev);
+    let mut written = 0;
     mutex_lock(&wq.mutex);
-    if (wq.attrs.affn_scope == WQ_AFFN_DFL)
+    if (wq.attrs.affn_scope == WQ_AFFN_DFL) {
     written = scnprintf(buf, PAGE_SIZE, "%s (%s)\n",
     wq_affn_names[WQ_AFFN_DFL],
     wq_affn_names[wq_affn_dfl]);
-    else
+    }
+    else {
     written = scnprintf(buf, PAGE_SIZE, "%s\n",
     wq_affn_names[wq.attrs.affn_scope]);
+    }
     mutex_unlock(&wq.mutex);
     return written;
     }
-    static ssize_t wq_affn_scope_store(struct device *dev,
-    struct device_attribute *attr,
-    const char *buf, size_t count)
-    {
-    struct workqueue_struct *wq = dev_to_wq(dev);
-    struct workqueue_attrs *attrs;
+#[no_mangle]
+pub unsafe extern "C" fn wq_affn_scope_store(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut wq = dev_to_wq(dev);
+pub static mut attrs: *mut c_void = core::ptr::null_mut();
     int affn, ret = -ENOMEM;
     affn = parse_affn_scope(buf);
-    if (affn < 0)
+    if (affn < 0) {
     return affn;
+    }
     mutex_lock(&wq_pool_mutex);
     attrs = wq_sysfs_prep_attrs(wq);
     if (attrs) {
@@ -6826,22 +6979,20 @@ unsafe extern "C" fn wq_sysfs_is_visible(kobj: *mut kobject, a: *mut attribute, 
     free_workqueue_attrs(attrs);
     return ret ?: count;
     }
-    static ssize_t wq_affinity_strict_show(struct device *dev,
-    struct device_attribute *attr, char *buf)
-    {
-    struct workqueue_struct *wq = dev_to_wq(dev);
+#[no_mangle]
+pub unsafe extern "C" fn wq_affinity_strict_show(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char) -> ssize_t {
+    let mut wq = dev_to_wq(dev);
     return scnprintf(buf, PAGE_SIZE, "%d\n",
     wq.attrs.affn_strict);
     }
-    static ssize_t wq_affinity_strict_store(struct device *dev,
-    struct device_attribute *attr,
-    const char *buf, size_t count)
-    {
-    struct workqueue_struct *wq = dev_to_wq(dev);
-    struct workqueue_attrs *attrs;
+#[no_mangle]
+pub unsafe extern "C" fn wq_affinity_strict_store(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut wq = dev_to_wq(dev);
+pub static mut attrs: *mut c_void = core::ptr::null_mut();
     int v, ret = -ENOMEM;
-    if (sscanf(buf, "%d", &v) != 1)
+    if (sscanf(buf, "%d", &v) != 1) {
     return -EINVAL;
+    }
     mutex_lock(&wq_pool_mutex);
     attrs = wq_sysfs_prep_attrs(wq);
     if (attrs) {
@@ -6852,17 +7003,8 @@ unsafe extern "C" fn wq_sysfs_is_visible(kobj: *mut kobject, a: *mut attribute, 
     free_workqueue_attrs(attrs);
     return ret ?: count;
     }
-    static struct device_attribute wq_sysfs_unbound_attrs[] = {
-    __ATTR(nice, 0644, wq_nice_show, wq_nice_store),
-    __ATTR(cpumask, 0644, wq_cpumask_show, wq_cpumask_store),
-    __ATTR(affinity_scope, 0644, wq_affn_scope_show, wq_affn_scope_store),
-    __ATTR(affinity_strict, 0644, wq_affinity_strict_show, wq_affinity_strict_store),
-    __ATTR_NULL,
-    };
-    static const struct bus_type wq_subsys = {
-    .name				= "workqueue",
-    .dev_groups			= wq_sysfs_groups,
-    };
+pub static mut device_attribute: usize = 0;
+pub static mut bus_type: usize = 0;
 //
 // workqueue_set_unbound_cpumask - Set the low-level unbound cpumask
 // @cpumask: the cpumask to set
@@ -6877,9 +7019,7 @@ unsafe extern "C" fn wq_sysfs_is_visible(kobj: *mut kobject, a: *mut attribute, 
 //
 #[no_mangle]
 unsafe extern "C" fn workqueue_set_unbound_cpumask(cpumask: cpumask_var_t) -> c_int {
-    static int workqueue_set_unbound_cpumask(cpumask_var_t cpumask)
-    {
-    let mut ret: c_int = -EINVAL;
+pub static mut ret: c_int = 0;
 //
 // Not excluding isolated cpus on purpose.
 // If the user wishes to include them, we allow that.
@@ -6888,50 +7028,49 @@ unsafe extern "C" fn workqueue_set_unbound_cpumask(cpumask: cpumask_var_t) -> c_
     if (!cpumask_empty(cpumask)) {
     ret = 0;
     mutex_lock(&wq_pool_mutex);
-    if (!cpumask_equal(cpumask, wq_unbound_cpumask))
+    if (!cpumask_equal(cpumask, wq_unbound_cpumask)) {
     ret = workqueue_apply_unbound_cpumask(cpumask);
-    if (!ret)
+    }
+    if (!ret) {
     cpumask_copy(wq_requested_unbound_cpumask, cpumask);
+    }
     mutex_unlock(&wq_pool_mutex);
     }
     return ret;
     }
-    static ssize_t __wq_cpumask_show(struct device *dev,
-    struct device_attribute *attr, char *buf, cpumask_var_t mask)
-    {
-    int written;
+#[no_mangle]
+pub unsafe extern "C" fn __wq_cpumask_show(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char, mask: cpumask_var_t) -> ssize_t {
+    let mut written = 0;
     mutex_lock(&wq_pool_mutex);
     written = scnprintf(buf, PAGE_SIZE, "%*pb\n", cpumask_pr_args(mask));
     mutex_unlock(&wq_pool_mutex);
     return written;
     }
-    static ssize_t cpumask_requested_show(struct device *dev,
-    struct device_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cpumask_requested_show(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char) -> ssize_t {
     return __wq_cpumask_show(dev, attr, buf, wq_requested_unbound_cpumask);
     }
     static DEVICE_ATTR_RO(cpumask_requested);
-    static ssize_t cpumask_isolated_show(struct device *dev,
-    struct device_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cpumask_isolated_show(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char) -> ssize_t {
     return __wq_cpumask_show(dev, attr, buf, wq_isolated_cpumask);
     }
     static DEVICE_ATTR_RO(cpumask_isolated);
-    static ssize_t cpumask_show(struct device *dev,
-    struct device_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cpumask_show(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char) -> ssize_t {
     return __wq_cpumask_show(dev, attr, buf, wq_unbound_cpumask);
     }
-    static ssize_t cpumask_store(struct device *dev,
-    struct device_attribute *attr, const char *buf, size_t count)
-    {
-    cpumask_var_t cpumask;
-    int ret;
-    if (!zalloc_cpumask_var(&cpumask, GFP_KERNEL))
+#[no_mangle]
+pub unsafe extern "C" fn cpumask_store(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut cpumask;
+    let mut ret = 0;
+    if (!zalloc_cpumask_var(&cpumask, GFP_KERNEL)) {
     return -ENOMEM;
+    }
     ret = cpumask_parse(buf, cpumask);
-    if (!ret)
+    if (!ret) {
     ret = workqueue_set_unbound_cpumask(cpumask);
+    }
     free_cpumask_var(cpumask);
     return ret ? ret : count;
     }
@@ -6944,17 +7083,13 @@ unsafe extern "C" fn workqueue_set_unbound_cpumask(cpumask: cpumask_var_t) -> c_
     };
     ATTRIBUTE_GROUPS(wq_sysfs_cpumask);
 #[no_mangle]
-unsafe extern "C" fn wq_sysfs_init() -> int __init {
-    static int __init wq_sysfs_init(void)
-    {
+unsafe extern "C" fn wq_sysfs_init() -> c_int {
     return subsys_virtual_register(&wq_subsys, wq_sysfs_cpumask_groups);
     }
-    core_initcall(wq_sysfs_init);
+    core_initcall!(wq_sysfs_init);
 #[no_mangle]
 unsafe extern "C" fn wq_device_release(dev: *mut device) {
-    static void wq_device_release(struct device *dev)
-    {
-    struct wq_device *wq_dev = container_of(dev, struct wq_device, dev);
+    let mut wq_dev = container_of!(dev, wq_device, dev);
     kfree(wq_dev);
     }
 //
@@ -6974,13 +7109,12 @@ unsafe extern "C" fn wq_device_release(dev: *mut device) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn workqueue_sysfs_register(wq: *mut workqueue_struct) -> c_int {
-    int workqueue_sysfs_register(struct workqueue_struct *wq)
-    {
-    struct wq_device *wq_dev;
-    int ret;
+pub static mut wq_dev: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     wq.wq_dev = wq_dev = kzalloc_obj(*wq_dev);
-    if (!wq_dev)
+    if (!wq_dev) {
     return -ENOMEM;
+    }
     wq_dev.wq = wq;
     wq_dev.dev.bus = &wq_subsys;
     wq_dev.dev.release = wq_device_release;
@@ -6997,8 +7131,8 @@ pub unsafe extern "C" fn workqueue_sysfs_register(wq: *mut workqueue_struct) -> 
     return ret;
     }
     if (wq.flags & WQ_UNBOUND) {
-    struct device_attribute *attr;
-    for (attr = wq_sysfs_unbound_attrs; attr.attr.name; attr++) {
+pub static mut attr: *mut c_void = core::ptr::null_mut();
+    while (attr.attr.name) {
     ret = device_create_file(&wq_dev.dev, attr);
     if (ret) {
     device_unregister(&wq_dev.dev);
@@ -7019,16 +7153,16 @@ pub unsafe extern "C" fn workqueue_sysfs_register(wq: *mut workqueue_struct) -> 
 //
 #[no_mangle]
 unsafe extern "C" fn workqueue_sysfs_unregister(wq: *mut workqueue_struct) {
-    static void workqueue_sysfs_unregister(struct workqueue_struct *wq)
-    {
-    struct wq_device *wq_dev = wq.wq_dev;
-    if (!wq.wq_dev)
+    let mut wq_dev = wq.wq_dev;
+    if (!wq.wq_dev) {
     return;
+    }
     wq.wq_dev = core::ptr::null_mut();
     device_unregister(&wq_dev.dev);
     }
 
-    static void workqueue_sysfs_unregister(struct workqueue_struct *wq)	{ }
+#[no_mangle]
+pub unsafe extern "C" fn workqueue_sysfs_unregister(wq: *mut workqueue_struct) { }
 
 //
 // Workqueue watchdog.
@@ -7048,14 +7182,14 @@ unsafe extern "C" fn workqueue_sysfs_unregister(wq: *mut workqueue_struct) {
 // corresponding sysfs parameter file.
 //
 
-    let mut wq_watchdog_thresh: static unsigned long = 30;
-    static struct timer_list wq_watchdog_timer;
-    let mut wq_watchdog_touched: static unsigned long = INITIAL_JIFFIES;
+pub static mut wq_watchdog_thresh: unsigned long = 30;
+pub static mut wq_watchdog_timer: usize = 0;
+pub static mut wq_watchdog_touched: unsigned long = 0;
     static DEFINE_PER_CPU(unsigned long, wq_watchdog_touched_cpu) = INITIAL_JIFFIES;
-    let mut wq_panic_on_stall: static unsigned int = CONFIG_BOOTPARAM_WQ_STALL_PANIC;
-    module_param_named(panic_on_stall, wq_panic_on_stall, uint, 0644);
+pub static mut wq_panic_on_stall: unsigned int = 0;
+    module_param_named!(panic_on_stall, wq_panic_on_stall, uint, 0644);
     static unsigned int wq_panic_on_stall_time;
-    module_param_named(panic_on_stall_time, wq_panic_on_stall_time, uint, 0644);
+    module_param_named!(panic_on_stall_time, wq_panic_on_stall_time, uint, 0644);
     MODULE_PARM_DESC(panic_on_stall_time, "Panic if stall exceeds this many seconds (0=disabled)");
 //
 // Report that a pool has no worker in running state, which is a sign that the
@@ -7064,15 +7198,13 @@ unsafe extern "C" fn workqueue_sysfs_unregister(wq: *mut workqueue_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn show_pool_no_running_worker(pool: *mut worker_pool) {
-    static void show_pool_no_running_worker(struct worker_pool *pool)
-    {
     lockdep_assert_held(&pool.lock);
     printk_deferred_enter();
-    pr_info("pool %d: no worker in running state, cpu=%d is %s (nr_workers=%d nr_idle=%d)\n",
+    pr_info!("pool %d: no worker in running state, cpu=%d is %s (nr_workers=%d nr_idle=%d)\n",
     pool.id, pool.cpu,
     idle_cpu(pool.cpu) ? "idle" : "busy",
     pool.nr_workers, pool.nr_idle);
-    pr_info("The pool might have trouble waking an idle worker.\n");
+    pr_info!("The pool might have trouble waking an idle worker.\n");
 //
 // last_woken_worker and its task are valid here: set_worker_dying()
 // clears it under pool->lock before setting WORKER_DIE, so if
@@ -7080,10 +7212,10 @@ unsafe extern "C" fn show_pool_no_running_worker(pool: *mut worker_pool) {
 // worker->task is still alive.
 //
     if (pool.last_woken_worker) {
-    pr_info("Backtrace of last woken worker:\n");
+    pr_info!("Backtrace of last woken worker:\n");
     sched_show_task(pool.last_woken_worker.task);
     } else {
-    pr_info("Last woken worker empty\n");
+    pr_info!("Last woken worker empty\n");
     }
     printk_deferred_exit();
     }
@@ -7094,19 +7226,19 @@ unsafe extern "C" fn show_pool_no_running_worker(pool: *mut worker_pool) {
 //
 #[no_mangle]
 unsafe extern "C" fn show_cpu_pool_busy_workers(pool: *mut worker_pool) {
-    static void show_cpu_pool_busy_workers(struct worker_pool *pool)
-    {
-    let mut found_running: bool = false;
-    struct worker *worker;
-    unsigned long irq_flags;
-    int cpu, bkt;
+pub static mut found_running: bool = false;
+pub static mut worker: *mut c_void = core::ptr::null_mut();
+    let mut irq_flags = 0;
+    let mut cpu = 0;
+    let mut bkt = 0;
     raw_spin_lock_irqsave(&pool.lock, irq_flags);
 // Snapshot cpu inside the lock to safely use it after unlock.
     cpu = pool.cpu;
     hash_for_each(pool.busy_hash, bkt, worker, hentry) {
 // Skip workers that are not actively running on the CPU.
-    if (!task_is_running(worker.task))
+    if (!task_is_running(worker.task)) {
     continue;
+    }
     found_running = true;
 //
 // Defer printing to avoid deadlocks in console
@@ -7114,7 +7246,7 @@ unsafe extern "C" fn show_cpu_pool_busy_workers(pool: *mut worker_pool) {
 // also taken in their write paths.
 //
     printk_deferred_enter();
-    pr_info("pool %d:\n", pool.id);
+    pr_info!("pool %d:\n", pool.id);
     sched_show_task(worker.task);
     printk_deferred_exit();
     }
@@ -7123,8 +7255,9 @@ unsafe extern "C" fn show_cpu_pool_busy_workers(pool: *mut worker_pool) {
 // state and the backtrace of the last woken worker, which is the prime
 // suspect for the stall.
 //
-    if (!found_running)
+    if (!found_running) {
     show_pool_no_running_worker(pool);
+    }
     raw_spin_unlock_irqrestore(&pool.lock, irq_flags);
 //
 // Trigger a backtrace on the stalled CPU to capture what it is
@@ -7132,20 +7265,20 @@ unsafe extern "C" fn show_cpu_pool_busy_workers(pool: *mut worker_pool) {
 // and would make the backtrace busy-wait until it times out. Done
 // after releasing the lock to avoid issues with NMI delivery.
 //
-    if (!found_running && cpu_online(cpu))
+    if (!found_running && cpu_online(cpu)) {
     trigger_single_cpu_backtrace(cpu);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn show_cpu_pools_busy_workers() {
-    static void show_cpu_pools_busy_workers(void)
-    {
-    struct worker_pool *pool;
-    int pi;
-    pr_info("Showing backtraces of busy workers in stalled worker pools:\n");
+pub static mut pool: *mut c_void = core::ptr::null_mut();
+    let mut pi = 0;
+    pr_info!("Showing backtraces of busy workers in stalled worker pools:\n");
     rcu_read_lock();
     for_each_pool(pool, pi) {
-    if (pool.cpu_stall)
+    if (pool.cpu_stall) {
     show_cpu_pool_busy_workers(pool);
+    }
     }
     rcu_read_unlock();
     }
@@ -7156,62 +7289,65 @@ unsafe extern "C" fn show_cpu_pools_busy_workers() {
 //
 #[no_mangle]
 unsafe extern "C" fn panic_on_wq_watchdog(stall_time_sec: c_uint) {
-    static void panic_on_wq_watchdog(unsigned int stall_time_sec)
-    {
     static unsigned int wq_stall;
     if (wq_panic_on_stall) {
-    wq_stall++;
-    if (wq_stall >= wq_panic_on_stall)
+    wq_stall += 1;
+    if (wq_stall >= wq_panic_on_stall) {
     panic("workqueue: %u stall(s) exceeded threshold %u\n",
     wq_stall, wq_panic_on_stall);
     }
-    if (wq_panic_on_stall_time && stall_time_sec >= wq_panic_on_stall_time)
+    }
+    if (wq_panic_on_stall_time && stall_time_sec >= wq_panic_on_stall_time) {
     panic("workqueue: stall lasted %us, exceeding threshold %us\n",
     stall_time_sec, wq_panic_on_stall_time);
     }
+    }
 #[no_mangle]
 unsafe extern "C" fn wq_watchdog_reset_touched() {
-    static void wq_watchdog_reset_touched(void)
-    {
-    int cpu;
+    let mut cpu = 0;
     wq_watchdog_touched = jiffies;
-    for_each_possible_cpu(cpu)
+    for_each_possible_cpu(cpu) {
     per_cpu(wq_watchdog_touched_cpu, cpu) = jiffies;
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn wq_watchdog_timer_fn(unused: *mut timer_list) {
-    static void wq_watchdog_timer_fn(struct timer_list *unused)
-    {
-    let mut thresh: c_ulong = READ_ONCE(wq_watchdog_thresh) * HZ;
-    let mut max_stall_time: c_uint = 0;
-    let mut lockup_detected: bool = false;
-    let mut cpu_pool_stall: bool = false;
-    let mut now: c_ulong = jiffies;
-    struct worker_pool *pool;
-    unsigned int stall_time;
-    int pi;
-    if (!thresh)
+pub static mut thresh: c_ulong = 0;
+pub static mut max_stall_time: c_uint = 0;
+pub static mut lockup_detected: bool = false;
+pub static mut cpu_pool_stall: bool = false;
+pub static mut now: c_ulong = 0;
+pub static mut pool: *mut c_void = core::ptr::null_mut();
+    let mut stall_time = 0;
+    let mut pi = 0;
+    if (!thresh) {
     return;
+    }
     for_each_pool(pool, pi) {
     unsigned long pool_ts, touched, ts;
     pool.cpu_stall = false;
-    if (list_empty(&pool.worklist))
+    if (list_empty(&pool.worklist)) {
     continue;
+    }
 //
 // If a virtual machine is stopped by the host it can look to
 // the watchdog like a stall.
 //
     kvm_check_and_clear_guest_paused();
 // get the latest of pool and touched timestamps
-    if (pool.cpu >= 0)
+    if (pool.cpu >= 0) {
     touched = READ_ONCE(per_cpu(wq_watchdog_touched_cpu, pool.cpu));
-    else
+    }
+    else {
     touched = READ_ONCE(wq_watchdog_touched);
+    }
     pool_ts = READ_ONCE(pool.last_progress_ts);
-    if (time_after(pool_ts, touched))
+    if (time_after(pool_ts, touched)) {
     ts = pool_ts;
-    else
+    }
+    else {
     ts = touched;
+    }
 //
 // Did we stall?
 //
@@ -7227,13 +7363,16 @@ unsafe extern "C" fn wq_watchdog_timer_fn(unused: *mut timer_list) {
     if (time_after(now, ts + thresh)) {
     scoped_guard(raw_spinlock_irqsave, &pool.lock) {
     pool_ts = pool.last_progress_ts;
-    if (time_after(pool_ts, touched))
+    if (time_after(pool_ts, touched)) {
     ts = pool_ts;
-    else
+    }
+    else {
     ts = touched;
     }
-    if (!time_after(now, ts + thresh))
+    }
+    if (!time_after(now, ts + thresh)) {
     continue;
+    }
     lockup_detected = true;
     stall_time = jiffies_to_msecs(now - pool_ts) / 1000;
     max_stall_time = max(max_stall_time, stall_time);
@@ -7246,34 +7385,36 @@ unsafe extern "C" fn wq_watchdog_timer_fn(unused: *mut timer_list) {
     pr_cont(" stuck for %us!\n", stall_time);
     }
     }
-    if (lockup_detected)
+    if (lockup_detected) {
     show_all_workqueues();
-    if (cpu_pool_stall)
+    }
+    if (cpu_pool_stall) {
     show_cpu_pools_busy_workers();
-    if (lockup_detected)
+    }
+    if (lockup_detected) {
     panic_on_wq_watchdog(max_stall_time);
+    }
     wq_watchdog_reset_touched();
     mod_timer(&wq_watchdog_timer, jiffies + thresh);
     }
 #[no_mangle]
 pub unsafe extern "C" fn wq_watchdog_touch(cpu: c_int) -> notrace void {
-    notrace void wq_watchdog_touch(int cpu)
-    {
-    let mut thresh: c_ulong = READ_ONCE(wq_watchdog_thresh) * HZ;
-    let mut touch_ts: c_ulong = READ_ONCE(wq_watchdog_touched);
-    let mut now: c_ulong = jiffies;
-    if (cpu >= 0)
+pub static mut thresh: c_ulong = 0;
+pub static mut touch_ts: c_ulong = 0;
+pub static mut now: c_ulong = 0;
+    if (cpu >= 0) {
     per_cpu(wq_watchdog_touched_cpu, cpu) = now;
-    else
+    }
+    else {
     WARN_ONCE(1, "%s should be called with valid CPU", __func__);
+    }
 // Don't unnecessarily store to global cacheline
-    if (time_after(now, touch_ts + thresh / 4))
+    if (time_after(now, touch_ts + thresh / 4)) {
     WRITE_ONCE(wq_watchdog_touched, jiffies);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn wq_watchdog_set_thresh(thresh: c_ulong) {
-    static void wq_watchdog_set_thresh(unsigned long thresh)
-    {
     wq_watchdog_thresh = 0;
     timer_delete_sync(&wq_watchdog_timer);
     if (thresh) {
@@ -7282,66 +7423,57 @@ unsafe extern "C" fn wq_watchdog_set_thresh(thresh: c_ulong) {
     mod_timer(&wq_watchdog_timer, jiffies + thresh * HZ);
     }
     }
-    static int wq_watchdog_param_set_thresh(const char *val,
-    const struct kernel_param *kp)
-    {
-    unsigned long thresh;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn wq_watchdog_param_set_thresh(val: *mut c_char, kp: *mut kernel_param) -> c_int {
+    let mut thresh = 0;
+    let mut ret = 0;
     ret = kstrtoul(val, 0, &thresh);
-    if (ret)
+    if (ret) {
     return ret;
-    if (thresh > MAX_JIFFY_OFFSET / HZ)
+    }
+    if (thresh > MAX_JIFFY_OFFSET / HZ) {
     return -ERANGE;
-    if (system_percpu_wq)
+    }
+    if (system_percpu_wq) {
     wq_watchdog_set_thresh(thresh);
-    else
+    }
+    else {
     wq_watchdog_thresh = thresh;
+    }
     return 0;
     }
-    static const struct kernel_param_ops wq_watchdog_thresh_ops = {
-    .set	= wq_watchdog_param_set_thresh,
-    .get	= param_get_ulong,
-    };
-    module_param_cb(watchdog_thresh, &wq_watchdog_thresh_ops, &wq_watchdog_thresh,
+pub static mut kernel_param_ops: usize = 0;
+    module_param_cb!(watchdog_thresh, &wq_watchdog_thresh_ops, &wq_watchdog_thresh,
     0644);
 #[no_mangle]
 unsafe extern "C" fn wq_watchdog_init() {
-    static void wq_watchdog_init(void)
-    {
     timer_setup(&wq_watchdog_timer, wq_watchdog_timer_fn, TIMER_DEFERRABLE);
     wq_watchdog_set_thresh(wq_watchdog_thresh);
     }
 
-    static inline void wq_watchdog_init(void) { }
+#[no_mangle]
+pub unsafe extern "C" fn wq_watchdog_init() { }
 
 #[no_mangle]
 unsafe extern "C" fn bh_pool_kick_normal(irq_work: *mut irq_work) {
-    static void bh_pool_kick_normal(struct irq_work *irq_work)
-    {
     raise_softirq(TASKLET_SOFTIRQ);
     }
 #[no_mangle]
 unsafe extern "C" fn bh_pool_kick_highpri(irq_work: *mut irq_work) {
-    static void bh_pool_kick_highpri(struct irq_work *irq_work)
-    {
     raise_softirq(HI_SOFTIRQ);
     }
 #[no_mangle]
-unsafe extern "C" fn restrict_unbound_cpumask(name: *const c_char, mask: *const cpumask) -> void __init {
-    static void __init restrict_unbound_cpumask(const char *name, const struct cpumask *mask)
-    {
+unsafe extern "C" fn restrict_unbound_cpumask(name: *const c_char, mask: *const cpumask)  {
     if (!cpumask_intersects(wq_unbound_cpumask, mask)) {
-    pr_warn("workqueue: Restricting unbound_cpumask (%*pb) with %s (%*pb) leaves no CPU, ignoring\n",
+    pr_warn!("workqueue: Restricting unbound_cpumask (%*pb) with %s (%*pb) leaves no CPU, ignoring\n",
     cpumask_pr_args(wq_unbound_cpumask), name, cpumask_pr_args(mask));
     return;
     }
     cpumask_and(wq_unbound_cpumask, wq_unbound_cpumask, mask);
     }
 #[no_mangle]
-unsafe extern "C" fn init_cpu_worker_pool(pool: *mut worker_pool, cpu: c_int, nice: c_int) -> void __init {
-    static void __init init_cpu_worker_pool(struct worker_pool *pool, int cpu, int nice)
-    {
-    BUG_ON(init_worker_pool(pool));
+unsafe extern "C" fn init_cpu_worker_pool(pool: *mut worker_pool, cpu: c_int, nice: c_int)  {
+    BUG_ON!(init_worker_pool(pool));
     pool.cpu = cpu;
     cpumask_copy(pool.attrs.cpumask, cpumask_of(cpu));
     cpumask_copy(pool.attrs.__pod_cpumask, cpumask_of(cpu));
@@ -7350,7 +7482,7 @@ unsafe extern "C" fn init_cpu_worker_pool(pool: *mut worker_pool, cpu: c_int, ni
     pool.node = cpu_to_node(cpu);
 // alloc pool ID
     mutex_lock(&wq_pool_mutex);
-    BUG_ON(worker_pool_assign_id(pool));
+    BUG_ON!(worker_pool_assign_id(pool));
     mutex_unlock(&wq_pool_mutex);
     }
 //
@@ -7364,71 +7496,73 @@ unsafe extern "C" fn init_cpu_worker_pool(pool: *mut worker_pool, cpu: c_int, ni
 // before early initcalls.
 //
 #[no_mangle]
-pub unsafe extern "C" fn workqueue_init_early() -> void __init {
-    void __init workqueue_init_early(void)
-    {
-    struct wq_pod_type *pt = &wq_pod_types[WQ_AFFN_SYSTEM];
+pub unsafe extern "C" fn workqueue_init_early()  {
+    let mut pt = &wq_pod_types[WQ_AFFN_SYSTEM];
     int std_nice[NR_STD_WORKER_POOLS] = { 0, HIGHPRI_NICE_LEVEL };
-    void (*irq_work_fns[NR_STD_WORKER_POOLS])(struct irq_work *) =
+    void (*irq_work_fns[NR_STD_WORKER_POOLS]) =
     { bh_pool_kick_normal, bh_pool_kick_highpri };
-    int i, cpu;
-    BUILD_BUG_ON(__alignof__(struct pool_workqueue) < __alignof__(long long));
-    BUG_ON(!alloc_cpumask_var(&wq_online_cpumask, GFP_KERNEL));
-    BUG_ON(!alloc_cpumask_var(&wq_unbound_cpumask, GFP_KERNEL));
-    BUG_ON(!alloc_cpumask_var(&wq_requested_unbound_cpumask, GFP_KERNEL));
-    BUG_ON(!zalloc_cpumask_var(&wq_isolated_cpumask, GFP_KERNEL));
+    let mut i = 0;
+    let mut cpu = 0;
+    BUILD_BUG_ON!(__alignof__(pool_workqueue) < __alignof__(long long));
+    BUG_ON!(!alloc_cpumask_var(&wq_online_cpumask, GFP_KERNEL));
+    BUG_ON!(!alloc_cpumask_var(&wq_unbound_cpumask, GFP_KERNEL));
+    BUG_ON!(!alloc_cpumask_var(&wq_requested_unbound_cpumask, GFP_KERNEL));
+    BUG_ON!(!zalloc_cpumask_var(&wq_isolated_cpumask, GFP_KERNEL));
     cpumask_copy(wq_online_cpumask, cpu_online_mask);
     cpumask_copy(wq_unbound_cpumask, cpu_possible_mask);
     restrict_unbound_cpumask("HK_TYPE_DOMAIN", housekeeping_cpumask(HK_TYPE_DOMAIN));
-    if (!cpumask_empty(&wq_cmdline_cpumask))
+    if (!cpumask_empty(&wq_cmdline_cpumask)) {
     restrict_unbound_cpumask("workqueue.unbound_cpus", &wq_cmdline_cpumask);
+    }
     cpumask_copy(wq_requested_unbound_cpumask, wq_unbound_cpumask);
     cpumask_andnot(wq_isolated_cpumask, cpu_possible_mask,
     housekeeping_cpumask(HK_TYPE_DOMAIN));
     pwq_cache = KMEM_CACHE(pool_workqueue, SLAB_PANIC);
     unbound_wq_update_pwq_attrs_buf = alloc_workqueue_attrs();
-    BUG_ON(!unbound_wq_update_pwq_attrs_buf);
+    BUG_ON!(!unbound_wq_update_pwq_attrs_buf);
 //
 // If nohz_full is enabled, set power efficient workqueue as unbound.
 // This allows workqueue items to be moved to HK CPUs.
 //
-    if (housekeeping_enabled(HK_TYPE_TICK))
+    if (housekeeping_enabled(HK_TYPE_TICK)) {
     wq_power_efficient = true;
+    }
 // initialize WQ_AFFN_SYSTEM pods
     pt.pod_cpus = kzalloc_objs(pt.pod_cpus[0], 1);
     pt.pod_node = kzalloc_objs(pt.pod_node[0], 1);
     pt.cpu_pod = kzalloc_objs(pt.cpu_pod[0], nr_cpu_ids);
-    BUG_ON(!pt.pod_cpus || !pt.pod_node || !pt.cpu_pod);
-    BUG_ON(!zalloc_cpumask_var_node(&pt.pod_cpus[0], GFP_KERNEL, NUMA_NO_NODE));
+    BUG_ON!(!pt.pod_cpus || !pt.pod_node || !pt.cpu_pod);
+    BUG_ON!(!zalloc_cpumask_var_node(&pt.pod_cpus[0], GFP_KERNEL, NUMA_NO_NODE));
     pt.nr_pods = 1;
     cpumask_copy(pt.pod_cpus[0], cpu_possible_mask);
     pt.pod_node[0] = NUMA_NO_NODE;
     pt.cpu_pod[0] = 0;
 // initialize BH and CPU pools
     for_each_possible_cpu(cpu) {
-    struct worker_pool *pool;
+pub static mut pool: *mut c_void = core::ptr::null_mut();
     i = 0;
     for_each_bh_worker_pool(pool, cpu) {
     init_cpu_worker_pool(pool, cpu, std_nice[i]);
     pool.flags |= POOL_BH;
     init_irq_work(bh_pool_irq_work(pool), irq_work_fns[i]);
-    i++;
+    i += 1;
     }
     i = 0;
-    for_each_cpu_worker_pool(pool, cpu)
+    for_each_cpu_worker_pool(pool, cpu) {
     init_cpu_worker_pool(pool, cpu, std_nice[i++]);
     }
+    }
 // create default unbound and ordered wq attrs
-    for (i = 0; i < NR_STD_WORKER_POOLS; i++) {
-    struct workqueue_attrs *attrs;
-    BUG_ON(!(attrs = alloc_workqueue_attrs()));
+    while (i < NR_STD_WORKER_POOLS) {
+pub static mut attrs: *mut c_void = core::ptr::null_mut();
+    BUG_ON!(!(attrs = alloc_workqueue_attrs()));
     attrs.nice = std_nice[i];
     unbound_std_wq_attrs[i] = attrs;
 //
 // An ordered wq should have only one pwq as ordering is
 // guaranteed by max_active which is enforced by pwqs.
 //
-    BUG_ON(!(attrs = alloc_workqueue_attrs()));
+    BUG_ON!(!(attrs = alloc_workqueue_attrs()));
     attrs.nice = std_nice[i];
     attrs.ordered = true;
     ordered_wq_attrs[i] = attrs;
@@ -7450,23 +7584,22 @@ pub unsafe extern "C" fn workqueue_init_early() -> void __init {
     system_bh_highpri_wq = alloc_workqueue("events_bh_highpri",
     WQ_BH | WQ_HIGHPRI | WQ_PERCPU, 0);
     system_dfl_long_wq = alloc_workqueue("events_dfl_long", WQ_UNBOUND, WQ_MAX_ACTIVE);
-    BUG_ON(!system_wq || !system_percpu_wq|| !system_highpri_wq || !system_long_wq ||
+    BUG_ON!(!system_wq || !system_percpu_wq|| !system_highpri_wq || !system_long_wq ||
     !system_unbound_wq || !system_freezable_wq || !system_dfl_wq ||
     !system_power_efficient_wq ||
     !system_freezable_power_efficient_wq ||
     !system_bh_wq || !system_bh_highpri_wq || !system_dfl_long_wq);
     }
 #[no_mangle]
-unsafe extern "C" fn wq_cpu_intensive_thresh_init() -> void __init {
-    static void __init wq_cpu_intensive_thresh_init(void)
-    {
-    unsigned long thresh;
-    unsigned long bogo;
+unsafe extern "C" fn wq_cpu_intensive_thresh_init()  {
+    let mut thresh = 0;
+    let mut bogo = 0;
     pwq_release_worker = kthread_run_worker(0, "pool_workqueue_release");
-    BUG_ON(IS_ERR(pwq_release_worker));
+    BUG_ON!(IS_ERR(pwq_release_worker));
 // if the user set it to a specific value, keep it
-    if (wq_cpu_intensive_thresh_us != ULONG_MAX)
+    if (wq_cpu_intensive_thresh_us != ULONG_MAX) {
     return;
+    }
 //
 // The default of 10ms is derived from the fact that most modern (as of
 // 2023) processors can do a lot in 10ms and that it's just below what
@@ -7484,9 +7617,10 @@ unsafe extern "C" fn wq_cpu_intensive_thresh_init() -> void __init {
     thresh = 10 * USEC_PER_MSEC;
 // see init/calibrate.c for lpj -> BogoMIPS calculation
     bogo = max_t(unsigned long, loops_per_jiffy / 500000 * HZ, 1);
-    if (bogo < 4000)
+    if (bogo < 4000) {
     thresh = min_t(unsigned long, thresh * 4000 / bogo, USEC_PER_SEC);
-    pr_debug("wq_cpu_intensive_thresh: lpj=%lu BogoMIPS=%lu thresh_us=%lu\n",
+    }
+    pr_debug!("wq_cpu_intensive_thresh: lpj=%lu BogoMIPS=%lu thresh_us=%lu\n",
     loops_per_jiffy, bogo, thresh);
     wq_cpu_intensive_thresh_us = thresh;
     }
@@ -7500,12 +7634,11 @@ unsafe extern "C" fn wq_cpu_intensive_thresh_init() -> void __init {
 // workers and enable future kworker creations.
 //
 #[no_mangle]
-pub unsafe extern "C" fn workqueue_init() -> void __init {
-    void __init workqueue_init(void)
-    {
-    struct workqueue_struct *wq;
-    struct worker_pool *pool;
-    int cpu, bkt;
+pub unsafe extern "C" fn workqueue_init()  {
+pub static mut wq: *mut c_void = core::ptr::null_mut();
+pub static mut pool: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
+    let mut bkt = 0;
     wq_cpu_intensive_thresh_init();
     mutex_lock(&wq_pool_mutex);
 //
@@ -7513,10 +7646,12 @@ pub unsafe extern "C" fn workqueue_init() -> void __init {
 // up. Also, create a rescuer for workqueues that requested it.
 //
     for_each_possible_cpu(cpu) {
-    for_each_bh_worker_pool(pool, cpu)
+    for_each_bh_worker_pool(pool, cpu) {
     pool.node = cpu_to_node(cpu);
-    for_each_cpu_worker_pool(pool, cpu)
+    }
+    for_each_cpu_worker_pool(pool, cpu) {
     pool.node = cpu_to_node(cpu);
+    }
     }
     list_for_each_entry(wq, &workqueues, list) {
     WARN(init_rescuer(wq),
@@ -7530,17 +7665,18 @@ pub unsafe extern "C" fn workqueue_init() -> void __init {
 // affected by hotplug events. Create the BH pseudo workers for all
 // possible CPUs here.
 //
-    for_each_possible_cpu(cpu)
+    for_each_possible_cpu(cpu) {
     for_each_bh_worker_pool(pool, cpu)
-    BUG_ON(!create_worker(pool));
+    BUG_ON!(!create_worker(pool));
+    }
     for_each_online_cpu(cpu) {
     for_each_cpu_worker_pool(pool, cpu) {
     pool.flags &= ~POOL_DISASSOCIATED;
-    BUG_ON(!create_worker(pool));
+    BUG_ON!(!create_worker(pool));
     }
     }
     hash_for_each(unbound_pool_hash, bkt, pool, hash_node)
-    BUG_ON(!create_worker(pool));
+    BUG_ON!(!create_worker(pool));
     wq_online = true;
     wq_watchdog_init();
     }
@@ -7549,18 +7685,21 @@ pub unsafe extern "C" fn workqueue_init() -> void __init {
 // @cpu_shares_pod(). Each subset of CPUs that share a pod is assigned a unique
 // and consecutive pod ID. The rest of @pt is initialized accordingly.
 //
-    static void __init init_pod_type(struct wq_pod_type *pt,
+    static void __init init_pod_type(wq_pod_type *pt,
     bool (*cpus_share_pod)(int, int))
     {
-    int cur, pre, cpu, pod;
+    let mut cur = 0;
+    let mut pre = 0;
+    let mut cpu = 0;
+    let mut pod = 0;
     pt.nr_pods = 0;
 // init @pt->cpu_pod[] according to @cpus_share_pod()
     pt.cpu_pod = kzalloc_objs(pt.cpu_pod[0], nr_cpu_ids);
-    BUG_ON(!pt.cpu_pod);
+    BUG_ON!(!pt.cpu_pod);
     for_each_possible_cpu(cur) {
     for_each_possible_cpu(pre) {
     if (pre >= cur) {
-    pt.cpu_pod[cur] = pt.nr_pods++;
+    pt.cpu_pod[cur] = pt.nr_pods += 1;
     break;
     }
     if (cpus_share_pod(cur, pre)) {
@@ -7572,9 +7711,10 @@ pub unsafe extern "C" fn workqueue_init() -> void __init {
 // init the rest to match @pt->cpu_pod[]
     pt.pod_cpus = kzalloc_objs(pt.pod_cpus[0], pt.nr_pods);
     pt.pod_node = kzalloc_objs(pt.pod_node[0], pt.nr_pods);
-    BUG_ON(!pt.pod_cpus || !pt.pod_node);
-    for (pod = 0; pod < pt.nr_pods; pod++)
-    BUG_ON(!zalloc_cpumask_var(&pt.pod_cpus[pod], GFP_KERNEL));
+    BUG_ON!(!pt.pod_cpus || !pt.pod_node);
+    for (pod = 0; pod < pt.nr_pods; pod++) {
+    BUG_ON!(!zalloc_cpumask_var(&pt.pod_cpus[pod], GFP_KERNEL));
+    }
     for_each_possible_cpu(cpu) {
     cpumask_set_cpu(cpu, pt.pod_cpus[pt.cpu_pod[cpu]]);
     pt.pod_node[pt.cpu_pod[cpu]] = cpu_to_node(cpu);
@@ -7582,20 +7722,14 @@ pub unsafe extern "C" fn workqueue_init() -> void __init {
     }
 #[no_mangle]
 unsafe extern "C" fn cpus_dont_share(cpu0: c_int, cpu1: c_int) -> bool __init {
-    static bool __init cpus_dont_share(int cpu0, int cpu1)
-    {
     return false;
     }
 #[no_mangle]
 unsafe extern "C" fn cpus_share_smt(cpu0: c_int, cpu1: c_int) -> bool __init {
-    static bool __init cpus_share_smt(int cpu0, int cpu1)
-    {
     return cpumask_test_cpu(cpu0, cpu_smt_mask(cpu1));
     }
 #[no_mangle]
 unsafe extern "C" fn cpus_share_numa(cpu0: c_int, cpu1: c_int) -> bool __init {
-    static bool __init cpus_share_numa(int cpu0, int cpu1)
-    {
     return cpu_to_node(cpu0) == cpu_to_node(cpu1);
     }
 // Maps each CPU to its shard index within the LLC pod it belongs to
@@ -7608,19 +7742,19 @@ unsafe extern "C" fn cpus_share_numa(cpu0: c_int, cpu1: c_int) -> bool __init {
 // A core is represented by the lowest-numbered CPU in its SMT group. Returns
 // the number of distinct cores found in @pod_cpus.
 //
-    static int __init llc_count_cores(const struct cpumask *pod_cpus,
-    struct wq_pod_type *smt_pods)
+    static int __init llc_count_cores(const struct cpumask *pod_cpus, wq_pod_type *smt_pods)
     {
-    const struct cpumask *sibling_cpus;
-    let mut nr_cores: c_int = 0, c;
+pub static mut sibling_cpus: *mut c_void = core::ptr::null_mut();
+pub static mut nr_cores: c_int = 0;
 //
 // Count distinct cores by only counting the first CPU in each
 // SMT sibling group.
 //
     for_each_cpu(c, pod_cpus) {
     sibling_cpus = smt_pods.pod_cpus[smt_pods.cpu_pod[c]];
-    if (cpumask_first(sibling_cpus) == c)
-    nr_cores++;
+    if (cpumask_first(sibling_cpus) == c) {
+    nr_cores += 1;
+    }
     }
     return nr_cores;
     }
@@ -7632,12 +7766,11 @@ unsafe extern "C" fn cpus_share_numa(cpu0: c_int, cpu1: c_int) -> bool __init {
 // shards" with cores_per_shard cores.
 //
 #[no_mangle]
-unsafe extern "C" fn llc_shard_size(shard_id: c_int, cores_per_shard: c_int, nr_large_shards: c_int) -> int __init {
-    static int __init llc_shard_size(int shard_id, int cores_per_shard, int nr_large_shards)
-    {
+unsafe extern "C" fn llc_shard_size(shard_id: c_int, cores_per_shard: c_int, nr_large_shards: c_int) -> c_int {
 // The first @nr_large_shards shards are large shards
-    if (shard_id < nr_large_shards)
+    if (shard_id < nr_large_shards) {
     return cores_per_shard + 1;
+    }
 // The remaining shards are default shards
     return cores_per_shard;
     }
@@ -7651,9 +7784,7 @@ unsafe extern "C" fn llc_shard_size(shard_id: c_int, cores_per_shard: c_int, nr_
 //
 #[no_mangle]
 unsafe extern "C" fn llc_calc_shard_layout(nr_cores: c_int) -> llc_shard_layout __init {
-    static struct llc_shard_layout __init llc_calc_shard_layout(int nr_cores)
-    {
-    struct llc_shard_layout layout;
+pub static mut layout: usize = 0;
 // Ensure at least one shard; pick the count closest to the target size
     layout.nr_shards = max(1, DIV_ROUND_CLOSEST(nr_cores, wq_cache_shard_size));
     layout.cores_per_shard = nr_cores / layout.nr_shards;
@@ -7683,28 +7814,27 @@ unsafe extern "C" fn llc_calc_shard_layout(nr_cores: c_int) -> llc_shard_layout 
 // Walks @pod_cpus in order. At each SMT group leader, advances to the next
 // shard once the current shard is full. Results are written to cpu_shard_id[].
 //
-    static void __init llc_populate_cpu_shard_id(const struct cpumask *pod_cpus,
-    struct wq_pod_type *smt_pods,
+    static void __init llc_populate_cpu_shard_id(const struct cpumask *pod_cpus, wq_pod_type *smt_pods,
     int nr_cores)
     {
-    let mut layout: llc_shard_layout = llc_calc_shard_layout(nr_cores);
-    const struct cpumask *sibling_cpus;
+pub static mut layout: llc_shard_layout = 0;
+pub static mut sibling_cpus: *mut c_void = core::ptr::null_mut();
 // Count the number of cores in the current shard_id
-    let mut cores_in_shard: c_int = 0;
-    unsigned int leader;
+pub static mut cores_in_shard: c_int = 0;
+    let mut leader = 0;
 // This is a cursor for the shards. Go from zero to nr_shards - 1
-    let mut shard_id: c_int = 0;
-    int c;
+pub static mut shard_id: c_int = 0;
+    let mut c = 0;
 // Iterate at every CPU for a given LLC pod, and assign it a shard
     for_each_cpu(c, pod_cpus) {
     sibling_cpus = smt_pods.pod_cpus[smt_pods.cpu_pod[c]];
     if (cpumask_first(sibling_cpus) == c) {
 // This is the CPU leader for the siblings
     if (llc_shard_is_full(cores_in_shard, shard_id, &layout)) {
-    shard_id++;
+    shard_id += 1;
     cores_in_shard = 0;
     }
-    cores_in_shard++;
+    cores_in_shard += 1;
     cpu_shard_id[c] = shard_id;
     } else {
 //
@@ -7718,12 +7848,13 @@ unsafe extern "C" fn llc_calc_shard_layout(nr_cores: c_int) -> llc_shard_layout 
 // a single-element array, and the compiler can't
 // prove the index is always 0.
 //
-    if (WARN_ON_ONCE(leader >= nr_cpu_ids))
+    if (WARN_ON_ONCE!(leader >= nr_cpu_ids)) {
     continue;
+    }
     cpu_shard_id[c] = cpu_shard_id[leader];
     }
     }
-    WARN_ON_ONCE(shard_id != (layout.nr_shards - 1));
+    WARN_ON_ONCE!(shard_id != (layout.nr_shards - 1));
     }
 //
 // precompute_cache_shard_ids - assign each CPU its shard index within its LLC
@@ -7733,19 +7864,17 @@ unsafe extern "C" fn llc_calc_shard_layout(nr_cores: c_int) -> llc_shard_layout 
 // WQ_AFFN_SMT have been initialized.
 //
 #[no_mangle]
-unsafe extern "C" fn precompute_cache_shard_ids() -> void __init {
-    static void __init precompute_cache_shard_ids(void)
-    {
-    struct wq_pod_type *llc_pods = &wq_pod_types[WQ_AFFN_CACHE];
-    struct wq_pod_type *smt_pods = &wq_pod_types[WQ_AFFN_SMT];
-    const struct cpumask *cpus_sharing_llc;
-    int nr_cores;
-    int pod;
+unsafe extern "C" fn precompute_cache_shard_ids()  {
+    let mut llc_pods = &wq_pod_types[WQ_AFFN_CACHE];
+    let mut smt_pods = &wq_pod_types[WQ_AFFN_SMT];
+pub static mut cpus_sharing_llc: *mut c_void = core::ptr::null_mut();
+    let mut nr_cores = 0;
+    let mut pod = 0;
     if (!wq_cache_shard_size) {
-    pr_warn("workqueue: cache_shard_size must be > 0, setting to 1\n");
+    pr_warn!("workqueue: cache_shard_size must be > 0, setting to 1\n");
     wq_cache_shard_size = 1;
     }
-    for (pod = 0; pod < llc_pods.nr_pods; pod++) {
+    while (pod < llc_pods.nr_pods) {
     cpus_sharing_llc = llc_pods.pod_cpus[pod];
 // Number of cores in this given LLC
     nr_cores = llc_count_cores(cpus_sharing_llc, smt_pods);
@@ -7760,10 +7889,9 @@ unsafe extern "C" fn precompute_cache_shard_ids() -> void __init {
 //
 #[no_mangle]
 unsafe extern "C" fn cpus_share_cache_shard(cpu0: c_int, cpu1: c_int) -> bool __init {
-    static bool __init cpus_share_cache_shard(int cpu0, int cpu1)
-    {
-    if (!cpus_share_cache(cpu0, cpu1))
+    if (!cpus_share_cache(cpu0, cpu1)) {
     return false;
+    }
     return cpu_shard_id[cpu0] == cpu_shard_id[cpu1];
     }
 //
@@ -7774,11 +7902,9 @@ unsafe extern "C" fn cpus_share_cache_shard(cpu0: c_int, cpu1: c_int) -> bool __
 // initializes the unbound CPU pods accordingly.
 //
 #[no_mangle]
-pub unsafe extern "C" fn workqueue_init_topology() -> void __init {
-    void __init workqueue_init_topology(void)
-    {
-    struct workqueue_struct *wq;
-    int cpu;
+pub unsafe extern "C" fn workqueue_init_topology()  {
+pub static mut wq: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
     init_pod_type(&wq_pod_types[WQ_AFFN_CPU], cpus_dont_share);
     init_pod_type(&wq_pod_types[WQ_AFFN_SMT], cpus_share_smt);
     init_pod_type(&wq_pod_types[WQ_AFFN_CACHE], cpus_share_cache);
@@ -7793,8 +7919,9 @@ pub unsafe extern "C" fn workqueue_init_topology() -> void __init {
 // and CPU combinations to apply per-pod sharing.
 //
     list_for_each_entry(wq, &workqueues, list) {
-    for_each_online_cpu(cpu)
+    for_each_online_cpu(cpu) {
     unbound_wq_update_pwq(wq, cpu);
+    }
     if (wq.flags & WQ_UNBOUND) {
     mutex_lock(&wq.mutex);
     wq_update_node_max_active(wq, -1);
@@ -7805,20 +7932,17 @@ pub unsafe extern "C" fn workqueue_init_topology() -> void __init {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __warn_flushing_systemwide_wq() {
-    void __warn_flushing_systemwide_wq(void)
-    {
-    pr_warn("WARNING: Flushing system-wide workqueues will be prohibited in near future.\n");
+    pr_warn!("WARNING: Flushing system-wide workqueues will be prohibited in near future.\n");
     dump_stack();
     }
     EXPORT_SYMBOL(__warn_flushing_systemwide_wq);
 #[no_mangle]
-unsafe extern "C" fn workqueue_unbound_cpus_setup(str: *mut c_char) -> int __init {
-    static int __init workqueue_unbound_cpus_setup(char *str)
-    {
+unsafe extern "C" fn workqueue_unbound_cpus_setup(str: *mut c_char) -> c_int {
     if (cpulist_parse(str, &wq_cmdline_cpumask) < 0) {
     cpumask_clear(&wq_cmdline_cpumask);
-    pr_warn("workqueue.unbound_cpus: incorrect CPU range, using default\n");
+    pr_warn!("workqueue.unbound_cpus: incorrect CPU range, using default\n");
     }
     return 1;
     }
-    __setup("workqueue.unbound_cpus=", workqueue_unbound_cpus_setup);
+    __setup!("workqueue.unbound_cpus=", workqueue_unbound_cpus_setup);
+}

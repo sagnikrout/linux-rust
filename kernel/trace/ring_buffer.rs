@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -49,7 +299,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // reinserted.
 //
 
-    static void update_pages_handler(struct work_struct *work);
+// forward_decl: update_pages_handler;
 pub const RING_BUFFER_META_MAGIC: c_uint = 0xBADFEED;
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -71,7 +321,7 @@ pub struct ring_buffer_cpu_meta {
 
     pub nr_invalid: __u32,
     pub entry_bytes: __u32,
-    pub buffers: [c_int; ],
+    pub buffers: [c_int; 0],
 }
 
 //
@@ -79,8 +329,6 @@ pub struct ring_buffer_cpu_meta {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_print_entry_header(s: *mut trace_seq) -> c_int {
-    int ring_buffer_print_entry_header(struct trace_seq *s)
-    {
     trace_seq_puts(s, "# compressed entry header\n");
     trace_seq_puts(s, "\ttype_len    :    5 bits\n");
     trace_seq_puts(s, "\ttime_delta  :   27 bits\n");
@@ -166,31 +414,28 @@ pub unsafe extern "C" fn ring_buffer_print_entry_header(s: *mut trace_seq) -> c_
     RB_LEN_TIME_STAMP =  8,
     };
 
-    ((struct ring_buffer_event *)((char *)event + RB_LEN_TIME_EXTEND))
+    ((event + RB_LEN_TIME_EXTEND))
 
     (event.type_len >= RINGBUF_TYPE_TIME_EXTEND)
 #[no_mangle]
 pub unsafe extern "C" fn rb_null_event(event: *mut ring_buffer_event) -> bool {
-    static inline bool rb_null_event(struct ring_buffer_event *event)
-    {
     return event.type_len == RINGBUF_TYPE_PADDING && !event.time_delta;
     }
 #[no_mangle]
 unsafe extern "C" fn rb_event_set_padding(event: *mut ring_buffer_event) {
-    static void rb_event_set_padding(struct ring_buffer_event *event)
-    {
 // padding has a NULL time_delta
     event.type_len = RINGBUF_TYPE_PADDING;
     event.time_delta = 0;
     }
-    static unsigned
-    rb_event_data_length(struct ring_buffer_event *event)
-    {
-    unsigned length;
-    if (event.type_len)
+#[no_mangle]
+pub unsafe extern "C" fn rb_event_data_length(event: *mut ring_buffer_event) -> c_uint {
+    let mut length: c_uint = 0;
+    if (event.type_len) {
     length = event.type_len * RB_ALIGNMENT;
-    else
+    }
+    else {
     length = event.array[0];
+    }
     return length + RB_EVNT_HDR_SIZE;
     }
 //
@@ -198,23 +443,28 @@ unsafe extern "C" fn rb_event_set_padding(event: *mut ring_buffer_event) {
 // the length of the time extend if the event is a
 // time extend.
 //
-    static inline unsigned
-    rb_event_length(struct ring_buffer_event *event)
-    {
-    switch (event.type_len) {
-    case RINGBUF_TYPE_PADDING:
-    if (rb_null_event(event))
+#[no_mangle]
+pub unsafe extern "C" fn rb_event_length(event: *mut ring_buffer_event) -> c_uint {
+    match (event.type_len) {
+    RINGBUF_TYPE_PADDING => {
+    if (rb_null_event(event)) {
 // undefined
     return -1;
+    }
     return  event.array[0] + RB_EVNT_HDR_SIZE;
-    case RINGBUF_TYPE_TIME_EXTEND:
+    }
+    RINGBUF_TYPE_TIME_EXTEND => {
     return RB_LEN_TIME_EXTEND;
-    case RINGBUF_TYPE_TIME_STAMP:
+    }
+    RINGBUF_TYPE_TIME_STAMP => {
     return RB_LEN_TIME_STAMP;
-    case RINGBUF_TYPE_DATA:
+    }
+    RINGBUF_TYPE_DATA => {
     return rb_event_data_length(event);
-    default:
-    WARN_ON_ONCE(1);
+    }
+    _ => {
+    WARN_ON_ONCE!(1);
+    }
     }
 // not hit
     return 0;
@@ -223,10 +473,9 @@ unsafe extern "C" fn rb_event_set_padding(event: *mut ring_buffer_event) {
 // Return total length of time extend and data,
 // or just the event length for all other events.
 //
-    static inline unsigned
-    rb_event_ts_length(struct ring_buffer_event *event)
-    {
-    let mut len: unsigned = 0;
+#[no_mangle]
+pub unsafe extern "C" fn rb_event_ts_length(event: *mut ring_buffer_event) -> c_uint {
+pub static mut len: unsigned = 0;
     if (extended_time(event)) {
 // time extends include the data event after it
     len = RB_LEN_TIME_EXTEND;
@@ -246,52 +495,54 @@ unsafe extern "C" fn rb_event_set_padding(event: *mut ring_buffer_event) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_event_length(event: *mut ring_buffer_event) -> unsigned {
-    unsigned ring_buffer_event_length(struct ring_buffer_event *event)
-    {
-    unsigned length;
-    if (extended_time(event))
+    let mut length: c_uint = 0;
+    if (extended_time(event)) {
     event = skip_time_extend(event);
+    }
     length = rb_event_length(event);
-    if (event.type_len > RINGBUF_TYPE_DATA_TYPE_LEN_MAX)
+    if (event.type_len > RINGBUF_TYPE_DATA_TYPE_LEN_MAX) {
     return length;
+    }
     length -= RB_EVNT_HDR_SIZE;
-    if (length > RB_MAX_SMALL_DATA + sizeof(event.array[0]) ||
-    RB_FORCE_8BYTE_ALIGNMENT)
-    length -= sizeof(event.array[0]);
+    if (length > RB_MAX_SMALL_DATA + sizeof!(event.array[0]) ||
+    RB_FORCE_8BYTE_ALIGNMENT) {
+    length -= sizeof!(event.array[0]);
+    }
     return length;
     }
     EXPORT_SYMBOL_GPL(ring_buffer_event_length);
 // inline for ring buffer fast paths
     static __always_inline void *
-    rb_event_data(struct ring_buffer_event *event)
+    rb_event_data(ring_buffer_event *event)
     {
-    if (extended_time(event))
+    if (extended_time(event)) {
     event = skip_time_extend(event);
-    WARN_ON_ONCE(event.type_len > RINGBUF_TYPE_DATA_TYPE_LEN_MAX);
+    }
+    WARN_ON_ONCE!(event.type_len > RINGBUF_TYPE_DATA_TYPE_LEN_MAX);
 // If length is in len field, then array[0] has the data
-    if (event.type_len)
-    return (void *)&event.array[0];
+    if (event.type_len) {
+    return &event.array[0];
+    }
 // Otherwise length is in array[0] and array[1] has the data
-    return (void *)&event.array[1];
+    return &event.array[1];
     }
 //
 // ring_buffer_event_data - return the data of the event
 // @event: the event to get the data from
 //
-    void *ring_buffer_event_data(struct ring_buffer_event *event)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_event_data(event: *mut ring_buffer_event) -> *mut c_void {
     return rb_event_data(event);
     }
     EXPORT_SYMBOL_GPL(ring_buffer_event_data);
 
-    for_each_cpu(cpu, buffer.cpumask)
+    for_each_cpu(cpu, buffer.cpumask) {
 
     for_each_cpu_and(cpu, buffer.cpumask, cpu_online_mask)
 #[no_mangle]
 unsafe extern "C" fn rb_event_time_stamp(event: *mut ring_buffer_event) -> u64 {
-    static u64 rb_event_time_stamp(struct ring_buffer_event *event)
-    {
-    u64 ts;
+    }
+    let mut ts = 0;
     ts = event.array[0];
     ts <<= TS_SHIFT;
     ts += event.time_delta;
@@ -304,8 +555,8 @@ unsafe extern "C" fn rb_event_time_stamp(event: *mut ring_buffer_event) -> u64 {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct buffer_data_read_page {
-    pub /: *mut *mut unsigned order; / order of the page,
-    pub /: *mut *mut *mut buffer_data_page data; / actual data, stored in this page,
+//     pub /: *mut *mut unsigned order; / order of the page,
+//     pub /: *mut *mut *mut buffer_data_page data; / actual data, stored in this page,
 }
 
 //
@@ -319,15 +570,15 @@ pub struct buffer_data_read_page {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct buffer_page {
-    pub /: *mut *mut list_head list; / list of buffer pages,
-    pub /: *mut *mut local_t write; / index for next write,
-    pub /: *mut *mut unsigned read; / index for next read,
-    pub /: *mut *mut local_t entries; / entries on this page,
-    pub /: *mut *mut unsigned long real_end; / real end of data,
-    pub /: *mut *mut unsigned order; / order of the page,
-    pub /: *mut *mut u32 id:30; / ID for external mapping,
-    pub /: *mut *mut u32 range:1; / Mapped via a range,
-    pub /: *mut *mut *mut buffer_data_page page; / Actual data page,
+//     pub /: *mut *mut list_head list; / list of buffer pages,
+//     pub /: *mut *mut local_t write; / index for next write,
+//     pub /: *mut *mut unsigned read; / index for next read,
+//     pub /: *mut *mut local_t entries; / entries on this page,
+//     pub /: *mut *mut unsigned long real_end; / real end of data,
+//     pub /: *mut *mut unsigned order; / order of the page,
+//     pub /: *mut *mut u32 id:30; / ID for external mapping,
+//     pub /: *mut *mut u32 range:1; / Mapped via a range,
+//     pub /: *mut *mut *mut buffer_data_page page; / Actual data page,
 }
 
 //
@@ -346,33 +597,23 @@ pub const RB_WRITE_MASK: c_uint = 0xfffff;
 
 #[no_mangle]
 unsafe extern "C" fn rb_init_data_page(bpage: *mut buffer_data_page) {
-    static void rb_init_data_page(struct buffer_data_page *bpage)
-    {
     local_set(&bpage.commit, 0);
     bpage.time_stamp = 0;
     }
 #[no_mangle]
 unsafe extern "C" fn rb_data_page_commit(dpage: *mut buffer_data_page) -> __always_inline long {
-    static __always_inline long rb_data_page_commit(struct buffer_data_page *dpage)
-    {
     return local_read(&dpage.commit);
     }
 #[no_mangle]
 unsafe extern "C" fn rb_data_page_size(dpage: *mut buffer_data_page) -> __always_inline long {
-    static __always_inline long rb_data_page_size(struct buffer_data_page *dpage)
-    {
     return rb_data_page_commit(dpage) & ~RB_MISSED_MASK;
     }
 #[no_mangle]
 unsafe extern "C" fn rb_page_commit(bpage: *mut buffer_page) -> __always_inline unsigned int {
-    static __always_inline unsigned int rb_page_commit(struct buffer_page *bpage)
-    {
     return rb_data_page_commit(bpage.page);
     }
 #[no_mangle]
 unsafe extern "C" fn rb_page_size(bpage: *mut buffer_page) -> __always_inline unsigned int {
-    static __always_inline unsigned int rb_page_size(struct buffer_page *bpage)
-    {
     return rb_data_page_size(bpage.page);
     }
 //
@@ -383,17 +624,14 @@ unsafe extern "C" fn rb_page_size(bpage: *mut buffer_page) -> __always_inline un
 //
 #[no_mangle]
 unsafe extern "C" fn rb_page_capacity(bpage: *mut buffer_page) -> __always_inline unsigned int {
-    static __always_inline unsigned int rb_page_capacity(struct buffer_page *bpage)
-    {
     return (PAGE_SIZE << bpage.order) - BUF_PAGE_HDR_SIZE;
     }
 #[no_mangle]
 unsafe extern "C" fn free_buffer_page(bpage: *mut buffer_page) {
-    static void free_buffer_page(struct buffer_page *bpage)
-    {
 // Range pages are not to be freed
-    if (!bpage.range)
+    if (!bpage.range) {
     free_pages((unsigned long)bpage.page, bpage.order);
+    }
     kfree(bpage);
     }
 //
@@ -401,16 +639,16 @@ unsafe extern "C" fn free_buffer_page(bpage: *mut buffer_page) {
 // and per CPU.
 //
 
-    kzalloc_node(ALIGN(sizeof(struct ring_buffer_per_cpu),		\
+    kzalloc_node(ALIGN(sizeof!(ring_buffer_per_cpu),		
     cache_line_size()), GFP_KERNEL, cpu_to_node(cpu))
 
-    kzalloc_node(ALIGN(sizeof(struct buffer_page),			\
+    kzalloc_node(ALIGN(sizeof!(buffer_page),			
     cache_line_size()), GFP_KERNEL, cpu_to_node(cpu))
-    static struct buffer_data_page *alloc_cpu_data(int cpu, int order)
-    {
-    struct buffer_data_page *dpage;
-    struct page *page;
-    gfp_t mflags;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_cpu_data(cpu: c_int, order: c_int) -> *mut c_void {
+pub static mut dpage: *mut c_void = core::ptr::null_mut();
+pub static mut page: *mut c_void = core::ptr::null_mut();
+    let mut mflags;
 //
 // __GFP_RETRY_MAYFAIL flag makes sure that the allocation fails
 // gracefully without invoking oom-killer and the system is not
@@ -418,8 +656,9 @@ unsafe extern "C" fn free_buffer_page(bpage: *mut buffer_page) {
 //
     mflags = GFP_KERNEL | __GFP_RETRY_MAYFAIL | __GFP_COMP | __GFP_ZERO;
     page = alloc_pages_node(cpu_to_node(cpu), mflags, order);
-    if (!page)
+    if (!page) {
     return core::ptr::null_mut();
+    }
     dpage = page_address(page);
     rb_init_data_page(dpage);
     return dpage;
@@ -500,7 +739,7 @@ pub struct ring_buffer_per_cpu {
     pub record_disabled: core::sync::atomic::AtomicI32,
     pub resize_disabled: core::sync::atomic::AtomicI32,
     pub buffer: *mut trace_buffer,
-    pub /: *mut *mut raw_spinlock_t reader_lock; / serialize readers,
+//     pub /: *mut *mut raw_spinlock_t reader_lock; / serialize readers,
     pub lock: arch_spinlock_t,
     pub lock_key: lock_class_key,
     pub free_page: buffer_data_read_page,
@@ -509,9 +748,9 @@ pub struct ring_buffer_per_cpu {
     pub pages: *mut list_head,
 // pages generation counter, incremented when the list changes
     pub cnt: c_ulong,
-    pub /: *mut *mut *mut buffer_page head_page; / read from head,
-    pub /: *mut *mut *mut buffer_page tail_page; / write to tail,
-    pub /: *mut *mut *mut buffer_page commit_page; / committed pages,
+//     pub /: *mut *mut *mut buffer_page head_page; / read from head,
+//     pub /: *mut *mut *mut buffer_page tail_page; / write to tail,
+//     pub /: *mut *mut *mut buffer_page commit_page; / committed pages,
     pub reader_page: *mut buffer_page,
     pub lost_events: c_ulong,
     pub last_overrun: c_ulong,
@@ -536,15 +775,15 @@ pub struct ring_buffer_per_cpu {
     pub read_stamp: u64,
 // pages removed since last reset
     pub pages_removed: c_ulong,
-    pub /: *mut *mut unsigned int user_mapped; / user space mapping,
+//     pub /: *mut *mut unsigned int user_mapped; / user space mapping,
     pub mapping_lock: mutex,
-    pub /: *mut *mut *mut *mut buffer_page subbuf_ids; / ID to subbuf VA,
+//     pub /: *mut *mut *mut *mut buffer_page subbuf_ids; / ID to subbuf VA,
     pub meta_page: *mut trace_buffer_meta,
     pub ring_meta: *mut ring_buffer_cpu_meta,
     pub remote: *mut ring_buffer_remote,
 // ring buffer pages to update, > 0 to add, < 0 to remove
     pub nr_pages_to_update: c_long,
-    pub /: *mut *mut list_head new_pages; / new pages to add,
+//     pub /: *mut *mut list_head new_pages; / new pages to add,
     pub update_pages_work: work_struct,
     pub update_done: completion,
     pub irq_work: rb_irq_work,
@@ -574,8 +813,6 @@ pub struct trace_buffer {
 
 #[no_mangle]
 unsafe extern "C" fn rb_subbuf_size(buffer: *mut trace_buffer) -> __always_inline unsigned int {
-    static __always_inline unsigned int rb_subbuf_size(struct trace_buffer *buffer)
-    {
     return PAGE_SIZE << buffer.subbuf_order;
     }
 //
@@ -589,8 +826,6 @@ unsafe extern "C" fn rb_subbuf_size(buffer: *mut trace_buffer) -> __always_inlin
 //
 #[no_mangle]
 unsafe extern "C" fn rb_subbuf_capacity(buffer: *mut trace_buffer) -> __always_inline unsigned int {
-    static __always_inline unsigned int rb_subbuf_capacity(struct trace_buffer *buffer)
-    {
     return rb_subbuf_size(buffer) - BUF_PAGE_HDR_SIZE;
     }
 //
@@ -601,14 +836,12 @@ unsafe extern "C" fn rb_subbuf_capacity(buffer: *mut trace_buffer) -> __always_i
 //
 #[no_mangle]
 unsafe extern "C" fn rb_subbuf_max_data_size(buffer: *mut trace_buffer) -> __always_inline unsigned int {
-    static __always_inline unsigned int rb_subbuf_max_data_size(struct trace_buffer *buffer)
-    {
-    struct ring_buffer_event *event;
+pub static mut event: *mut c_void = core::ptr::null_mut();
 //
 // surely rb_subbuf_capacity() is bigger than
 // RINGBUF_TYPE_DATA_TYPE_LEN_MAX (see ring_buffer_event_length).
 //
-    return rb_subbuf_capacity(buffer) - RB_EVNT_HDR_SIZE - sizeof(event.array[0]);
+    return rb_subbuf_capacity(buffer) - RB_EVNT_HDR_SIZE - sizeof!(event.array[0]);
     }
 //
 // rb_subbuf_start - Get the start address of a subbuffer
@@ -620,14 +853,10 @@ unsafe extern "C" fn rb_subbuf_max_data_size(buffer: *mut trace_buffer) -> __alw
     static __always_inline
 #[no_mangle]
 pub unsafe extern "C" fn rb_subbuf_start(buffer: *mut trace_buffer, addr: c_ulong) -> c_ulong {
-    unsigned long rb_subbuf_start(struct trace_buffer *buffer, unsigned long addr)
-    {
     return addr & ~((unsigned long)(rb_subbuf_size(buffer) - 1));
     }
 #[no_mangle]
 unsafe extern "C" fn rb_is_static(cpu_buffer: *mut ring_buffer_per_cpu) -> bool {
-    static bool rb_is_static(struct ring_buffer_per_cpu *cpu_buffer)
-    {
     return cpu_buffer.user_mapped || cpu_buffer.remote || cpu_buffer.ring_meta;
     }
 #[repr(C)]
@@ -649,17 +878,15 @@ pub struct ring_buffer_iter {
 
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_print_page_header(buffer: *mut trace_buffer, s: *mut trace_seq) -> c_int {
-    int ring_buffer_print_page_header(struct trace_buffer *buffer, struct trace_seq *s)
-    {
-    struct buffer_data_page field;
+pub static mut field: usize = 0;
     trace_seq_printf(s, "\tfield: u64 timestamp;\t"
     "offset:0;\tsize:%u;\tsigned:%u;\n",
-    (unsigned int)sizeof(field.time_stamp),
+    (unsigned int)sizeof!(field.time_stamp),
     (unsigned int)is_signed_type(u64));
     trace_seq_printf(s, "\tfield: local_t commit;\t"
     "offset:%u;\tsize:%u;\tsigned:%u;\n",
     (unsigned int)offsetof(typeof(field), commit),
-    (unsigned int)sizeof(field.commit),
+    (unsigned int)sizeof!(field.commit),
     (unsigned int)is_signed_type(long));
     trace_seq_printf(s, "\tfield: char overwrite;\t"
     "offset:%u;\tsize:%u;\tsigned:%u;\n",
@@ -676,14 +903,10 @@ pub unsafe extern "C" fn ring_buffer_print_page_header(buffer: *mut trace_buffer
     }
 #[no_mangle]
 pub unsafe extern "C" fn rb_time_read(t: *mut rb_time_t, ret: *mut u64) {
-    static inline void rb_time_read(rb_time_t *t, u64 *ret)
-    {
 // ret = local64_read(&t->time);
     }
 #[no_mangle]
 unsafe extern "C" fn rb_time_set(t: *mut rb_time_t, val: u64) {
-    static void rb_time_set(rb_time_t *t, u64 val)
-    {
     local64_set(&t.time, val);
     }
 //
@@ -693,35 +916,38 @@ unsafe extern "C" fn rb_time_set(t: *mut rb_time_t, val: u64) {
 //
 // #define RB_VERIFY_EVENT
 
-    static struct list_head *rb_list_head(struct list_head *list);
-    static void verify_event(struct ring_buffer_per_cpu *cpu_buffer,
-    void *event)
-    {
-    struct buffer_page *page = cpu_buffer.commit_page;
-    struct buffer_page *tail_page = READ_ONCE(cpu_buffer.tail_page);
-    struct list_head *next;
-    long commit, write;
-    let mut addr: c_ulong = (unsigned long)event;
-    let mut done: bool = false;
-    let mut stop: c_int = 0;
+// forward_decl: rb_list_head;
+#[no_mangle]
+pub unsafe extern "C" fn verify_event(cpu_buffer: *mut ring_buffer_per_cpu, event: *mut c_void) {
+    let mut page = cpu_buffer.commit_page;
+    let mut tail_page = READ_ONCE(cpu_buffer.tail_page);
+pub static mut next: *mut c_void = core::ptr::null_mut();
+    let mut commit = 0;
+    let mut write = 0;
+pub static mut addr: c_ulong = 0;
+pub static mut done: bool = false;
+pub static mut stop: c_int = 0;
 // Make sure the event exists and is not committed yet
     do {
-    if (page == tail_page || WARN_ON_ONCE(stop++ > 100))
+    if (page == tail_page || WARN_ON_ONCE!(stop++ > 100)) {
     done = true;
+    }
     commit = rb_page_commit(page);
     write = local_read(&page.write);
     if (addr >= (unsigned long)&page.page.data[commit] &&
-    addr < (unsigned long)&page.page.data[write])
+    addr < (unsigned long)&page.page.data[write]) {
     return;
+    }
     next = rb_list_head(page.list.next);
-    page = list_entry(next, struct buffer_page, list);
+    page = list_entry(next, buffer_page, list);
     } while (!done);
-    WARN_ON_ONCE(1);
+    WARN_ON_ONCE!(1);
     }
 
-    static inline void verify_event(struct ring_buffer_per_cpu *cpu_buffer,
-    void *event)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: verify_event
+pub unsafe extern "C" fn verify_event_dup(cpu_buffer: *mut ring_buffer_per_cpu, event: *mut c_void) {
     }
 
 //
@@ -734,17 +960,16 @@ unsafe extern "C" fn rb_time_set(t: *mut rb_time_t, val: u64) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn rb_fix_abs_ts(abs: u64, save_ts: u64) -> u64 {
-    static inline u64 rb_fix_abs_ts(u64 abs, u64 save_ts)
-    {
     if (save_ts & TS_MSB) {
     abs |= save_ts & TS_MSB;
 // Check for overflow
-    if (unlikely(abs < save_ts))
+    if (unlikely(abs < save_ts)) {
     abs += 1ULL << 59;
+    }
     }
     return abs;
     }
-    static inline u64 rb_time_stamp(struct trace_buffer *buffer);
+// forward_decl: rb_time_stamp;
 //
 // ring_buffer_event_time_stamp - return the event's current time stamp
 // @buffer: The buffer that the event is on
@@ -762,12 +987,11 @@ pub unsafe extern "C" fn rb_fix_abs_ts(abs: u64, save_ts: u64) -> u64 {
 // otherwise  current time is returned, but that really neither of
 // the last two cases should ever happen.
 //
-    u64 ring_buffer_event_time_stamp(struct trace_buffer *buffer,
-    struct ring_buffer_event *event)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer = buffer.buffers[smp_processor_id()];
-    unsigned int nest;
-    u64 ts;
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_event_time_stamp(buffer: *mut trace_buffer, event: *mut ring_buffer_event) -> u64 {
+    let mut cpu_buffer = buffer.buffers[smp_processor_id()];
+    let mut nest = 0;
+    let mut ts = 0;
 // If the event includes an absolute time, then just use that
     if (event.type_len == RINGBUF_TYPE_TIME_STAMP) {
     ts = rb_event_time_stamp(event);
@@ -775,14 +999,16 @@ pub unsafe extern "C" fn rb_fix_abs_ts(abs: u64, save_ts: u64) -> u64 {
     }
     nest = local_read(&cpu_buffer.committing);
     verify_event(cpu_buffer, event);
-    if (WARN_ON_ONCE(!nest))
-    goto fail;
+    if (WARN_ON_ONCE!(!nest)) {
+// goto;
+    }
 // Read the current saved nesting level time stamp
-    if (likely(--nest < MAX_NEST))
+    if (likely(--nest < MAX_NEST)) {
     return cpu_buffer.event_stamp[nest];
+    }
 // Shouldn't happen, warn if it does
     WARN_ONCE(1, "nest (%d) greater than max", nest);
-    fail:
+// label;
     rb_time_read(&cpu_buffer.write_stamp, &ts);
     return ts;
     }
@@ -795,34 +1021,32 @@ pub unsafe extern "C" fn rb_fix_abs_ts(abs: u64, save_ts: u64) -> u64 {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_nr_dirty_pages(buffer: *mut trace_buffer, cpu: c_int) -> usize {
-    size_t ring_buffer_nr_dirty_pages(struct trace_buffer *buffer, int cpu)
-    {
-    size_t read;
-    size_t lost;
-    size_t cnt;
+    let mut read = 0;
+    let mut lost = 0;
+    let mut cnt = 0;
     read = local_read(&buffer.buffers[cpu].pages_read);
     lost = local_read(&buffer.buffers[cpu].pages_lost);
     cnt = local_read(&buffer.buffers[cpu].pages_touched);
-    if (WARN_ON_ONCE(cnt < lost))
+    if (WARN_ON_ONCE!(cnt < lost)) {
     return 0;
+    }
     cnt -= lost;
 // The reader can read an empty page, but not more than that
     if (cnt < read) {
-    WARN_ON_ONCE(read > cnt + 1);
+    WARN_ON_ONCE!(read > cnt + 1);
     return 0;
     }
     return cnt - read;
     }
 #[no_mangle]
 unsafe extern "C" fn full_hit(buffer: *mut trace_buffer, cpu: c_int, full: c_int) -> __always_inline bool {
-    static __always_inline bool full_hit(struct trace_buffer *buffer, int cpu, int full)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer = buffer.buffers[cpu];
-    size_t nr_pages;
-    size_t dirty;
+    let mut cpu_buffer = buffer.buffers[cpu];
+    let mut nr_pages = 0;
+    let mut dirty = 0;
     nr_pages = cpu_buffer.nr_pages;
-    if (!nr_pages || !full)
+    if (!nr_pages || !full) {
     return true;
+    }
 //
 // Add one as dirty will never equal nr_pages, as the sub-buffer
 // that the writer is on is not counted as dirty.
@@ -839,16 +1063,13 @@ unsafe extern "C" fn full_hit(buffer: *mut trace_buffer, cpu: c_int, full: c_int
 //
 #[no_mangle]
 unsafe extern "C" fn rb_wake_up_waiters(work: *mut irq_work) {
-    static void rb_wake_up_waiters(struct irq_work *work)
-    {
-    struct rb_irq_work *rbwork = container_of(work, struct rb_irq_work, work);
+    let mut rbwork = container_of!(work, rb_irq_work, work);
 // For waiters waiting for the first wake up
     (void)atomic_fetch_inc_release(&rbwork.seq);
     wake_up_all(&rbwork.waiters);
     if (rbwork.full_waiters_pending || rbwork.wakeup_full) {
 // Only cpu_buffer sets the above flags
-    struct ring_buffer_per_cpu *cpu_buffer =
-    container_of(rbwork, struct ring_buffer_per_cpu, irq_work);
+    let mut cpu_buffer = container_of!(rbwork, ring_buffer_per_cpu, irq_work);
 // Called from interrupt context
     raw_spin_lock(&cpu_buffer.reader_lock);
     rbwork.wakeup_full = false;
@@ -869,26 +1090,29 @@ unsafe extern "C" fn rb_wake_up_waiters(work: *mut irq_work) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_wake_waiters(buffer: *mut trace_buffer, cpu: c_int) {
-    void ring_buffer_wake_waiters(struct trace_buffer *buffer, int cpu)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    struct rb_irq_work *rbwork;
-    if (!buffer)
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+pub static mut rbwork: *mut c_void = core::ptr::null_mut();
+    if (!buffer) {
     return;
+    }
     if (cpu == RING_BUFFER_ALL_CPUS) {
 // Wake up individual ones too. One level recursion
-    for_each_buffer_cpu(buffer, cpu)
+    for_each_buffer_cpu(buffer, cpu) {
     ring_buffer_wake_waiters(buffer, cpu);
+    }
     rbwork = &buffer.irq_work;
     } else {
-    if (WARN_ON_ONCE(!buffer.buffers))
+    if (WARN_ON_ONCE!(!buffer.buffers)) {
     return;
-    if (WARN_ON_ONCE(cpu >= nr_cpu_ids))
+    }
+    if (WARN_ON_ONCE!(cpu >= nr_cpu_ids)) {
     return;
+    }
     cpu_buffer = buffer.buffers[cpu];
 // The CPU buffer may not have been initialized yet
-    if (!cpu_buffer)
+    if (!cpu_buffer) {
     return;
+    }
     rbwork = &cpu_buffer.irq_work;
     }
 // This can be called in any context
@@ -896,19 +1120,19 @@ pub unsafe extern "C" fn ring_buffer_wake_waiters(buffer: *mut trace_buffer, cpu
     }
 #[no_mangle]
 unsafe extern "C" fn rb_watermark_hit(buffer: *mut trace_buffer, cpu: c_int, full: c_int) -> bool {
-    static bool rb_watermark_hit(struct trace_buffer *buffer, int cpu, int full)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    let mut ret: bool = false;
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+pub static mut ret: bool = false;
 // Reads of all CPUs always waits for any data
-    if (cpu == RING_BUFFER_ALL_CPUS)
+    if (cpu == RING_BUFFER_ALL_CPUS) {
     return !ring_buffer_empty(buffer);
+    }
     cpu_buffer = buffer.buffers[cpu];
     if (!ring_buffer_empty_cpu(buffer, cpu)) {
-    unsigned long flags;
-    bool pagebusy;
-    if (!full)
+    let mut flags = 0;
+    let mut pagebusy = 0;
+    if (!full) {
     return true;
+    }
     raw_spin_lock_irqsave(&cpu_buffer.reader_lock, flags);
     pagebusy = cpu_buffer.reader_page == cpu_buffer.commit_page;
     ret = !pagebusy && full_hit(buffer, cpu, full);
@@ -920,14 +1144,14 @@ unsafe extern "C" fn rb_watermark_hit(buffer: *mut trace_buffer, cpu: c_int, ful
     }
     return ret;
     }
-    static inline bool
-    rb_wait_cond(struct rb_irq_work *rbwork, struct trace_buffer *buffer,
-    int cpu, int full, ring_buffer_cond_fn cond, void *data)
-    {
-    if (rb_watermark_hit(buffer, cpu, full))
+#[no_mangle]
+pub unsafe extern "C" fn rb_wait_cond(rbwork: *mut rb_irq_work, buffer: *mut trace_buffer, cpu: c_int, full: c_int, cond: ring_buffer_cond_fn, data: *mut c_void) -> bool {
+    if (rb_watermark_hit(buffer, cpu, full)) {
     return true;
-    if (cond(data))
+    }
+    if (cond(data)) {
     return true;
+    }
 //
 // The events can happen in critical sections where
 // checking a work queue can cause deadlocks.
@@ -948,10 +1172,12 @@ unsafe extern "C" fn rb_watermark_hit(buffer: *mut trace_buffer, cpu: c_int, ful
 // that is necessary is that the wake up happens after
 // a task has been queued. It's OK for spurious wake ups.
 //
-    if (full)
+    if (full) {
     rbwork.full_waiters_pending = true;
-    else
+    }
+    else {
     rbwork.waiters_pending = true;
+    }
     return false;
     }
 #[repr(C)]
@@ -967,10 +1193,8 @@ pub struct rb_wait_data {
 //
 #[no_mangle]
 unsafe extern "C" fn rb_wait_once(data: *mut c_void) -> bool {
-    static bool rb_wait_once(void *data)
-    {
-    struct rb_wait_data *rdata = data;
-    struct rb_irq_work *rbwork = rdata.irq_work;
+    let mut rdata = data;
+    let mut rbwork = rdata.irq_work;
     return atomic_read_acquire(&rbwork.seq) != rdata.seq;
     }
 //
@@ -985,14 +1209,13 @@ unsafe extern "C" fn rb_wait_once(data: *mut c_void) -> bool {
 // as data is added to any of the @buffer's cpu buffers. Otherwise
 // it will wait for data to be added to a specific cpu buffer.
 //
-    int ring_buffer_wait(struct trace_buffer *buffer, int cpu, int full,
-    ring_buffer_cond_fn cond, void *data)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    struct wait_queue_head *waitq;
-    struct rb_irq_work *rbwork;
-    struct rb_wait_data rdata;
-    let mut ret: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_wait(buffer: *mut trace_buffer, cpu: c_int, full: c_int, cond: ring_buffer_cond_fn, data: *mut c_void) -> c_int {
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+pub static mut waitq: *mut c_void = core::ptr::null_mut();
+pub static mut rbwork: *mut c_void = core::ptr::null_mut();
+pub static mut rdata: usize = 0;
+pub static mut ret: c_int = 0;
 //
 // Depending on what the caller is waiting for, either any
 // data in any cpu buffer, or a specific buffer, put the
@@ -1003,15 +1226,18 @@ unsafe extern "C" fn rb_wait_once(data: *mut c_void) -> bool {
 // Full only makes sense on per cpu reads
     full = 0;
     } else {
-    if (!cpumask_test_cpu(cpu, buffer.cpumask))
+    if (!cpumask_test_cpu(cpu, buffer.cpumask)) {
     return -ENODEV;
+    }
     cpu_buffer = buffer.buffers[cpu];
     rbwork = &cpu_buffer.irq_work;
     }
-    if (full)
+    if (full) {
     waitq = &rbwork.full_waiters;
-    else
+    }
+    else {
     waitq = &rbwork.waiters;
+    }
 // Set up to exit loop as soon as it is woken
     if (!cond) {
     cond = rb_wait_once;
@@ -1038,24 +1264,25 @@ unsafe extern "C" fn rb_wait_once(data: *mut c_void) -> bool {
 // Returns EPOLLIN | EPOLLRDNORM if data exists in the buffers,
 // zero otherwise.
 //
-    __poll_t ring_buffer_poll_wait(struct trace_buffer *buffer, int cpu,
-    struct file *filp, poll_table *poll_table, int full)
+    __poll_t ring_buffer_poll_wait(trace_buffer *buffer, int cpu, file *filp, poll_table *poll_table, int full)
     {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    struct rb_irq_work *rbwork;
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+pub static mut rbwork: *mut c_void = core::ptr::null_mut();
     if (cpu == RING_BUFFER_ALL_CPUS) {
     rbwork = &buffer.irq_work;
     full = 0;
     } else {
-    if (!cpumask_test_cpu(cpu, buffer.cpumask))
+    if (!cpumask_test_cpu(cpu, buffer.cpumask)) {
     return EPOLLERR;
+    }
     cpu_buffer = buffer.buffers[cpu];
     rbwork = &cpu_buffer.irq_work;
     }
     if (full) {
     poll_wait(filp, &rbwork.full_waiters, poll_table);
-    if (rb_watermark_hit(buffer, cpu, full))
+    if (rb_watermark_hit(buffer, cpu, full)) {
     return EPOLLIN | EPOLLRDNORM;
+    }
 //
 // Only allow full_waiters_pending update to be seen after
 // the shortest_full is set (in rb_watermark_hit). If the
@@ -1089,54 +1316,52 @@ unsafe extern "C" fn rb_wait_once(data: *mut c_void) -> bool {
 //
     smp_mb();
     if ((cpu == RING_BUFFER_ALL_CPUS && !ring_buffer_empty(buffer)) ||
-    (cpu != RING_BUFFER_ALL_CPUS && !ring_buffer_empty_cpu(buffer, cpu)))
+    (cpu != RING_BUFFER_ALL_CPUS && !ring_buffer_empty_cpu(buffer, cpu))) {
     return EPOLLIN | EPOLLRDNORM;
+    }
     return 0;
     }
 // buffer may be either ring_buffer or ring_buffer_per_cpu
 
-    ({								\
-    int _____ret = unlikely(cond);				\
-    if (_____ret) {						\
-    if (__same_type(*(b), struct ring_buffer_per_cpu)) { \
-    struct ring_buffer_per_cpu *__b =	\
-    (void *)b;			\
-    atomic_inc(&__b.buffer.record_disabled); \
-    } else						\
-    atomic_inc(&b.record_disabled);	\
-    WARN_ON(1);					\
-    }							\
-    _____ret;						\
+    ({								
+    let mut _____ret = unlikely(cond);				
+    if (_____ret) {						
+    if (__same_type(*(b), ring_buffer_per_cpu)) { 
+    let mut __b = b;			
+    atomic_inc(&__b.buffer.record_disabled); 
+    } else {
+    atomic_inc(&b.record_disabled);	
+    }
+    WARN_ON!(1);					
+    }							
+    _____ret;						
     })
 // Up this if you want to test the TIME_EXTENTS and normalization
 pub const DEBUG_SHIFT: c_int = 0;
 #[no_mangle]
 pub unsafe extern "C" fn rb_time_stamp(buffer: *mut trace_buffer) -> u64 {
-    static inline u64 rb_time_stamp(struct trace_buffer *buffer)
-    {
-    u64 ts;
+    let mut ts = 0;
 // Skip retpolines :-(
-    if (IS_ENABLED(CONFIG_MITIGATION_RETPOLINE) && likely(buffer.clock == trace_clock_local))
+    if (IS_ENABLED!(CONFIG_MITIGATION_RETPOLINE) && likely(buffer.clock == trace_clock_local)) {
     ts = trace_clock_local();
-    else
+    }
+    else {
     ts = buffer.clock();
+    }
 // shift to debug/test normalization and TIME_EXTENTS
     return ts << DEBUG_SHIFT;
     }
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_time_stamp(buffer: *mut trace_buffer) -> u64 {
-    u64 ring_buffer_time_stamp(struct trace_buffer *buffer)
-    {
-    u64 time;
+    let mut time = 0;
     preempt_disable_notrace();
     time = rb_time_stamp(buffer);
     preempt_enable_notrace();
     return time;
     }
     EXPORT_SYMBOL_GPL(ring_buffer_time_stamp);
-    void ring_buffer_normalize_time_stamp(struct trace_buffer *buffer,
-    int cpu, u64 *ts)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_normalize_time_stamp(buffer: *mut trace_buffer, cpu: c_int, ts: *mut u64) {
 // Just stupid testing the normalize function and deltas
 // ts >>= DEBUG_SHIFT;
     }
@@ -1215,10 +1440,10 @@ pub unsafe extern "C" fn ring_buffer_time_stamp(buffer: *mut trace_buffer) -> u6
 //
 // rb_list_head - remove any bit
 //
-    static struct list_head *rb_list_head(struct list_head *list)
-    {
-    let mut val: c_ulong = (unsigned long)list;
-    return (struct list_head *)(val & ~RB_FLAG_MASK);
+#[no_mangle]
+pub unsafe extern "C" fn rb_list_head(list: *mut list_head) -> *mut c_void {
+pub static mut val: c_ulong = 0;
+    return (val & ~RB_FLAG_MASK);
     }
 //
 // rb_is_head_page - test if the given page is the head page
@@ -1228,13 +1453,13 @@ pub unsafe extern "C" fn ring_buffer_time_stamp(buffer: *mut trace_buffer) -> u6
 // the reader page). But if the next page is a header page,
 // its flags will be non zero.
 //
-    static inline int
-    rb_is_head_page(struct buffer_page *page, struct list_head *list)
-    {
-    unsigned long val;
+#[no_mangle]
+pub unsafe extern "C" fn rb_is_head_page(page: *mut buffer_page, list: *mut list_head) -> c_int {
+    let mut val = 0;
     val = (unsigned long)list.next;
-    if ((val & ~RB_FLAG_MASK) != (unsigned long)&page.list)
+    if ((val & ~RB_FLAG_MASK) != (unsigned long)&page.list) {
     return RB_PAGE_MOVED;
+    }
     return val & RB_FLAG_MASK;
     }
 //
@@ -1246,9 +1471,7 @@ pub unsafe extern "C" fn ring_buffer_time_stamp(buffer: *mut trace_buffer) -> u6
 //
 #[no_mangle]
 unsafe extern "C" fn rb_is_reader_page(page: *mut buffer_page) -> bool {
-    static bool rb_is_reader_page(struct buffer_page *page)
-    {
-    struct list_head *list = page.list.prev;
+    let mut list = page.list.prev;
     return rb_list_head(list.next) != &page.list;
     }
 //
@@ -1256,10 +1479,8 @@ unsafe extern "C" fn rb_is_reader_page(page: *mut buffer_page) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn rb_set_list_to_head(list: *mut list_head) {
-    static void rb_set_list_to_head(struct list_head *list)
-    {
-    unsigned long *ptr;
-    ptr = (unsigned long *)&list.next;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+    ptr = &list.next;
 // ptr |= RB_PAGE_HEAD;
 // ptr &= ~RB_PAGE_UPDATE;
     }
@@ -1268,108 +1489,91 @@ unsafe extern "C" fn rb_set_list_to_head(list: *mut list_head) {
 //
 #[no_mangle]
 unsafe extern "C" fn rb_head_page_activate(cpu_buffer: *mut ring_buffer_per_cpu) {
-    static void rb_head_page_activate(struct ring_buffer_per_cpu *cpu_buffer)
-    {
-    struct buffer_page *head;
+pub static mut head: *mut c_void = core::ptr::null_mut();
     head = cpu_buffer.head_page;
-    if (!head)
+    if (!head) {
     return;
+    }
 //
 // Set the previous list pointer to have the HEAD flag.
 //
     rb_set_list_to_head(head.list.prev);
     if (cpu_buffer.ring_meta) {
-    struct ring_buffer_cpu_meta *meta = cpu_buffer.ring_meta;
+    let mut meta = cpu_buffer.ring_meta;
     meta.head_buffer = (unsigned long)head.page;
     }
     }
 #[no_mangle]
 unsafe extern "C" fn rb_list_head_clear(list: *mut list_head) {
-    static void rb_list_head_clear(struct list_head *list)
-    {
-    unsigned long *ptr = (unsigned long *)&list.next;
+    let mut ptr = &list.next;
 // ptr &= ~RB_FLAG_MASK;
     }
 //
 // rb_head_page_deactivate - clears head page ptr (for free list)
 //
-    static void
-    rb_head_page_deactivate(struct ring_buffer_per_cpu *cpu_buffer)
-    {
-    struct list_head *hd;
+#[no_mangle]
+pub unsafe extern "C" fn rb_head_page_deactivate(cpu_buffer: *mut ring_buffer_per_cpu) {
+pub static mut hd: *mut c_void = core::ptr::null_mut();
 // Go through the whole list and clear any pointers found.
     rb_list_head_clear(cpu_buffer.pages);
-    list_for_each(hd, cpu_buffer.pages)
+    list_for_each(hd, cpu_buffer.pages) {
     rb_list_head_clear(hd);
     }
-    static int rb_head_page_set(struct ring_buffer_per_cpu *cpu_buffer,
-    struct buffer_page *head,
-    struct buffer_page *prev,
-    int old_flag, int new_flag)
-    {
-    struct list_head *list;
-    let mut val: c_ulong = (unsigned long)&head.list;
-    unsigned long ret;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn rb_head_page_set(cpu_buffer: *mut ring_buffer_per_cpu, head: *mut buffer_page, prev: *mut buffer_page, old_flag: c_int, new_flag: c_int) -> c_int {
+pub static mut list: *mut c_void = core::ptr::null_mut();
+pub static mut val: c_ulong = 0;
+    let mut ret = 0;
     list = &prev.list;
     val &= ~RB_FLAG_MASK;
-    ret = cmpxchg((unsigned long *)&list.next,
+    ret = cmpxchg(&list.next,
     val | old_flag, val | new_flag);
 // check if the reader took the page
-    if ((ret & ~RB_FLAG_MASK) != val)
+    if ((ret & ~RB_FLAG_MASK) != val) {
     return RB_PAGE_MOVED;
+    }
     return ret & RB_FLAG_MASK;
     }
-    static int rb_head_page_set_update(struct ring_buffer_per_cpu *cpu_buffer,
-    struct buffer_page *head,
-    struct buffer_page *prev,
-    int old_flag)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn rb_head_page_set_update(cpu_buffer: *mut ring_buffer_per_cpu, head: *mut buffer_page, prev: *mut buffer_page, old_flag: c_int) -> c_int {
     return rb_head_page_set(cpu_buffer, head, prev,
     old_flag, RB_PAGE_UPDATE);
     }
-    static int rb_head_page_set_head(struct ring_buffer_per_cpu *cpu_buffer,
-    struct buffer_page *head,
-    struct buffer_page *prev,
-    int old_flag)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn rb_head_page_set_head(cpu_buffer: *mut ring_buffer_per_cpu, head: *mut buffer_page, prev: *mut buffer_page, old_flag: c_int) -> c_int {
     return rb_head_page_set(cpu_buffer, head, prev,
     old_flag, RB_PAGE_HEAD);
     }
-    static int rb_head_page_set_normal(struct ring_buffer_per_cpu *cpu_buffer,
-    struct buffer_page *head,
-    struct buffer_page *prev,
-    int old_flag)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn rb_head_page_set_normal(cpu_buffer: *mut ring_buffer_per_cpu, head: *mut buffer_page, prev: *mut buffer_page, old_flag: c_int) -> c_int {
     return rb_head_page_set(cpu_buffer, head, prev,
     old_flag, RB_PAGE_NORMAL);
     }
 #[no_mangle]
 pub unsafe extern "C" fn rb_inc_page(bpage: *mut buffer_page) {
-    static inline void rb_inc_page(struct buffer_page **bpage)
-    {
-    struct list_head *p = rb_list_head((*bpage).list.next);
-// bpage = list_entry(p, struct buffer_page, list);
+    let mut p = rb_list_head((*bpage).list.next);
+// bpage = list_entry(p, buffer_page, list);
     }
 #[no_mangle]
 pub unsafe extern "C" fn rb_dec_page(bpage: *mut buffer_page) {
-    static inline void rb_dec_page(struct buffer_page **bpage)
-    {
-    struct list_head *p = rb_list_head((*bpage).list.prev);
-// bpage = list_entry(p, struct buffer_page, list);
+    let mut p = rb_list_head((*bpage).list.prev);
+// bpage = list_entry(p, buffer_page, list);
     }
-    static struct buffer_page *
-    rb_set_head_page(struct ring_buffer_per_cpu *cpu_buffer)
-    {
-    struct buffer_page *head;
-    struct buffer_page *page;
-    struct list_head *list;
-    int i;
-    if (RB_WARN_ON(cpu_buffer, !cpu_buffer.head_page))
+#[no_mangle]
+pub unsafe extern "C" fn rb_set_head_page(cpu_buffer: *mut ring_buffer_per_cpu) -> *mut c_void {
+pub static mut head: *mut c_void = core::ptr::null_mut();
+pub static mut page: *mut c_void = core::ptr::null_mut();
+pub static mut list: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    if (RB_WARN_ON(cpu_buffer, !cpu_buffer.head_page)) {
     return core::ptr::null_mut();
+    }
 // sanity check
     list = cpu_buffer.pages;
-    if (RB_WARN_ON(cpu_buffer, rb_list_head(list.prev.next) != list))
+    if (RB_WARN_ON(cpu_buffer, rb_list_head(list.prev.next) != list)) {
     return core::ptr::null_mut();
+    }
     page = head = cpu_buffer.head_page;
 //
 // It is possible that the writer moves the header behind
@@ -1377,7 +1581,7 @@ pub unsafe extern "C" fn rb_dec_page(bpage: *mut buffer_page) {
 // A second loop should grab the header, but we'll do
 // three loops just because I'm paranoid.
 //
-    for (i = 0; i < 3; i++) {
+    while (i < 3) {
     do {
     if (rb_is_head_page(page, page.list.prev)) {
     cpu_buffer.head_page = page;
@@ -1389,11 +1593,10 @@ pub unsafe extern "C" fn rb_dec_page(bpage: *mut buffer_page) {
     RB_WARN_ON(cpu_buffer, 1);
     return core::ptr::null_mut();
     }
-    static bool rb_head_page_replace(struct buffer_page *old,
-    struct buffer_page *new)
-    {
-    unsigned long *ptr = (unsigned long *)&old.list.prev.next;
-    unsigned long val;
+#[no_mangle]
+pub unsafe extern "C" fn rb_head_page_replace(old: *mut buffer_page, new: *mut buffer_page) -> bool {
+    let mut ptr = &old.list.prev.next;
+    let mut val = 0;
     val = *ptr & ~RB_FLAG_MASK;
     val |= RB_PAGE_HEAD;
     return try_cmpxchg(ptr, &val, (unsigned long)&new.list);
@@ -1401,12 +1604,10 @@ pub unsafe extern "C" fn rb_dec_page(bpage: *mut buffer_page) {
 //
 // rb_tail_page_update - move the tail page forward
 //
-    static void rb_tail_page_update(struct ring_buffer_per_cpu *cpu_buffer,
-    struct buffer_page *tail_page,
-    struct buffer_page *next_page)
-    {
-    unsigned long old_entries;
-    unsigned long old_write;
+#[no_mangle]
+pub unsafe extern "C" fn rb_tail_page_update(cpu_buffer: *mut ring_buffer_per_cpu, tail_page: *mut buffer_page, next_page: *mut buffer_page) {
+    let mut old_entries = 0;
+    let mut old_write = 0;
 //
 // The tail page now needs to be moved forward.
 //
@@ -1430,8 +1631,8 @@ pub unsafe extern "C" fn rb_dec_page(bpage: *mut buffer_page) {
 //
     if (tail_page == READ_ONCE(cpu_buffer.tail_page)) {
 // Zero the write counter
-    let mut val: c_ulong = old_write & ~RB_WRITE_MASK;
-    let mut eval: c_ulong = old_entries & ~RB_WRITE_MASK;
+pub static mut val: c_ulong = 0;
+pub static mut eval: c_ulong = 0;
 //
 // This will only succeed if an interrupt did
 // not come in and change it. In which case, we
@@ -1451,25 +1652,26 @@ pub unsafe extern "C" fn rb_dec_page(bpage: *mut buffer_page) {
 //
     local_set(&next_page.page.commit, 0);
 // Either we update tail_page or an interrupt does
-    if (try_cmpxchg(&cpu_buffer.tail_page, &tail_page, next_page))
+    if (try_cmpxchg(&cpu_buffer.tail_page, &tail_page, next_page)) {
     local_inc(&cpu_buffer.pages_touched);
     }
     }
-    static void rb_check_bpage(struct ring_buffer_per_cpu *cpu_buffer,
-    struct buffer_page *bpage)
-    {
-    let mut val: c_ulong = (unsigned long)bpage;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn rb_check_bpage(cpu_buffer: *mut ring_buffer_per_cpu, bpage: *mut buffer_page) {
+pub static mut val: c_ulong = 0;
     RB_WARN_ON(cpu_buffer, val & RB_FLAG_MASK);
     }
-    static bool rb_check_links(struct ring_buffer_per_cpu *cpu_buffer,
-    struct list_head *list)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn rb_check_links(cpu_buffer: *mut ring_buffer_per_cpu, list: *mut list_head) -> bool {
     if (RB_WARN_ON(cpu_buffer,
-    rb_list_head(rb_list_head(list.next).prev) != list))
+    rb_list_head(rb_list_head(list.next).prev) != list)) {
     return false;
+    }
     if (RB_WARN_ON(cpu_buffer,
-    rb_list_head(rb_list_head(list.prev).next) != list))
+    rb_list_head(rb_list_head(list.prev).next) != list)) {
     return false;
+    }
     return true;
     }
 //
@@ -1481,12 +1683,11 @@ pub unsafe extern "C" fn rb_dec_page(bpage: *mut buffer_page) {
 //
 #[no_mangle]
 unsafe extern "C" fn rb_check_pages(cpu_buffer: *mut ring_buffer_per_cpu) {
-    static void rb_check_pages(struct ring_buffer_per_cpu *cpu_buffer)
-    {
-    struct list_head *head, *tmp;
-    unsigned long buffer_cnt;
-    unsigned long flags;
-    let mut nr_loops: c_int = 0;
+    let mut head = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
+    let mut buffer_cnt = 0;
+    let mut flags = 0;
+pub static mut nr_loops: c_int = 0;
 //
 // Walk the linked list underpinning the ring buffer and validate all
 // its next and prev links.
@@ -1506,13 +1707,15 @@ unsafe extern "C" fn rb_check_pages(cpu_buffer: *mut ring_buffer_per_cpu) {
 // operations are fairly spaced, and so this check typically succeeds at
 // most on the second try.
 //
-    again:
-    if (++nr_loops > 3)
+// label;
+    if (++nr_loops > 3) {
     return;
+    }
     raw_spin_lock_irqsave(&cpu_buffer.reader_lock, flags);
     head = rb_list_head(cpu_buffer.pages);
-    if (!rb_check_links(cpu_buffer, head))
-    goto out_locked;
+    if (!rb_check_links(cpu_buffer, head)) {
+// goto;
+    }
     buffer_cnt = cpu_buffer.cnt;
     tmp = head;
     raw_spin_unlock_irqrestore(&cpu_buffer.reader_lock, flags);
@@ -1521,17 +1724,19 @@ unsafe extern "C" fn rb_check_pages(cpu_buffer: *mut ring_buffer_per_cpu) {
     if (buffer_cnt != cpu_buffer.cnt) {
 // The list was updated, try again.
     raw_spin_unlock_irqrestore(&cpu_buffer.reader_lock, flags);
-    goto again;
+// goto;
     }
     tmp = rb_list_head(tmp.next);
-    if (tmp == head)
+    if (tmp == head) {
 // The iteration circled back, all is done.
-    goto out_locked;
-    if (!rb_check_links(cpu_buffer, tmp))
-    goto out_locked;
+// goto;
+    }
+    if (!rb_check_links(cpu_buffer, tmp)) {
+// goto;
+    }
     raw_spin_unlock_irqrestore(&cpu_buffer.reader_lock, flags);
     }
-    out_locked:
+// label;
     raw_spin_unlock_irqrestore(&cpu_buffer.reader_lock, flags);
     }
 //
@@ -1540,28 +1745,28 @@ unsafe extern "C" fn rb_check_pages(cpu_buffer: *mut ring_buffer_per_cpu) {
 //
 // This is used to help find the next per cpu subbuffer within a mapped range.
 //
-    static unsigned long
-    rb_range_align_subbuf(unsigned long addr, int subbuf_size, int nr_subbufs)
-    {
-    addr += sizeof(struct ring_buffer_cpu_meta) +
-    sizeof(int) * nr_subbufs;
+#[no_mangle]
+pub unsafe extern "C" fn rb_range_align_subbuf(addr: c_ulong, subbuf_size: c_int, nr_subbufs: c_int) -> c_ulong {
+    addr += sizeof!(ring_buffer_cpu_meta) +
+    sizeof!(int) * nr_subbufs;
     return ALIGN(addr, subbuf_size);
     }
 //
 // Return the ring_buffer_meta for a given @cpu.
 //
-    static void *rb_range_meta(struct trace_buffer *buffer, int nr_pages, int cpu)
-    {
-    let mut subbuf_size: c_int = rb_subbuf_size(buffer);
-    struct ring_buffer_cpu_meta *meta;
-    struct ring_buffer_meta *bmeta;
-    unsigned long ptr;
-    int nr_subbufs;
+#[no_mangle]
+pub unsafe extern "C" fn rb_range_meta(buffer: *mut trace_buffer, nr_pages: c_int, cpu: c_int) -> *mut c_void {
+pub static mut subbuf_size: c_int = 0;
+pub static mut meta: *mut c_void = core::ptr::null_mut();
+pub static mut bmeta: *mut c_void = core::ptr::null_mut();
+    let mut ptr = 0;
+    let mut nr_subbufs = 0;
     bmeta = buffer.meta;
-    if (!bmeta)
+    if (!bmeta) {
     return core::ptr::null_mut();
+    }
     ptr = (unsigned long)bmeta + bmeta.buffers_offset;
-    meta = (struct ring_buffer_cpu_meta *)ptr;
+    meta = ptr;
 // When nr_pages passed in is zero, the first meta has already been initialized
     if (!nr_pages) {
     nr_subbufs = meta.nr_subbufs;
@@ -1578,8 +1783,8 @@ unsafe extern "C" fn rb_check_pages(cpu_buffer: *mut ring_buffer_per_cpu) {
     ptr += subbuf_size * nr_subbufs;
 // We can use multiplication to find chunks greater than 1
     if (cpu > 1) {
-    unsigned long size;
-    unsigned long p;
+    let mut size = 0;
+    let mut p = 0;
 // Save the beginning of this CPU chunk
     p = ptr;
     ptr = rb_range_align_subbuf(ptr, subbuf_size, nr_subbufs);
@@ -1589,38 +1794,41 @@ unsafe extern "C" fn rb_check_pages(cpu_buffer: *mut ring_buffer_per_cpu) {
     ptr += size * (cpu - 2);
     }
     }
-    return (void *)ptr;
+    return ptr;
     }
 // Return the start of subbufs given the meta pointer
-    static void *rb_subbufs_from_meta(struct ring_buffer_cpu_meta *meta)
-    {
-    let mut subbuf_size: c_int = meta.subbuf_size;
-    unsigned long ptr;
+#[no_mangle]
+pub unsafe extern "C" fn rb_subbufs_from_meta(meta: *mut ring_buffer_cpu_meta) -> *mut c_void {
+pub static mut subbuf_size: c_int = 0;
+    let mut ptr = 0;
     ptr = (unsigned long)meta;
     ptr = rb_range_align_subbuf(ptr, subbuf_size, meta.nr_subbufs);
-    return (void *)ptr;
+    return ptr;
     }
 //
 // Return a specific sub-buffer for a given @cpu defined by @idx.
 //
-    static void *rb_range_buffer(struct ring_buffer_per_cpu *cpu_buffer, int idx)
-    {
-    struct ring_buffer_cpu_meta *meta;
-    unsigned long ptr;
-    int subbuf_size;
+#[no_mangle]
+pub unsafe extern "C" fn rb_range_buffer(cpu_buffer: *mut ring_buffer_per_cpu, idx: c_int) -> *mut c_void {
+pub static mut meta: *mut c_void = core::ptr::null_mut();
+    let mut ptr = 0;
+    let mut subbuf_size = 0;
     meta = rb_range_meta(cpu_buffer.buffer, 0, cpu_buffer.cpu);
-    if (!meta)
+    if (!meta) {
     return core::ptr::null_mut();
-    if (WARN_ON_ONCE(idx >= meta.nr_subbufs))
+    }
+    if (WARN_ON_ONCE!(idx >= meta.nr_subbufs)) {
     return core::ptr::null_mut();
+    }
     subbuf_size = meta.subbuf_size;
 // Map this buffer to the order that's in meta->buffers[]
     idx = meta.buffers[idx];
     ptr = (unsigned long)rb_subbufs_from_meta(meta);
     ptr += subbuf_size * idx;
-    if (ptr + subbuf_size > cpu_buffer.buffer.range_addr_end)
+    if (ptr + subbuf_size > cpu_buffer.buffer.range_addr_end) {
     return core::ptr::null_mut();
-    return (void *)ptr;
+    }
+    return ptr;
     }
 //
 // See if the existing memory contains a valid meta section.
@@ -1628,49 +1836,47 @@ unsafe extern "C" fn rb_check_pages(cpu_buffer: *mut ring_buffer_per_cpu) {
 //
 #[no_mangle]
 unsafe extern "C" fn rb_meta_init(buffer: *mut trace_buffer, scratch_size: c_int) -> bool {
-    static bool rb_meta_init(struct trace_buffer *buffer, int scratch_size)
-    {
-    let mut ptr: c_ulong = buffer.range_addr_start;
-    struct ring_buffer_meta *bmeta;
-    unsigned long total_size;
-    int struct_sizes;
-    bmeta = (struct ring_buffer_meta *)ptr;
+pub static mut ptr: c_ulong = 0;
+pub static mut bmeta: *mut c_void = core::ptr::null_mut();
+    let mut total_size = 0;
+    let mut struct_sizes = 0;
+    bmeta = ptr;
     buffer.meta = bmeta;
     total_size = buffer.range_addr_end - buffer.range_addr_start;
-    struct_sizes = sizeof(struct ring_buffer_cpu_meta);
-    struct_sizes |= sizeof(*bmeta) << 16;
+    struct_sizes = sizeof!(ring_buffer_cpu_meta);
+    struct_sizes |= sizeof!(*bmeta) << 16;
 // The first buffer will start word size after the meta page
-    ptr += sizeof(*bmeta);
-    ptr = ALIGN(ptr, sizeof(long));
+    ptr += sizeof!(*bmeta);
+    ptr = ALIGN(ptr, sizeof!(long));
     ptr += scratch_size;
     if (bmeta.magic != RING_BUFFER_META_MAGIC) {
-    pr_info("Ring buffer boot meta mismatch of magic\n");
-    goto init;
+    pr_info!("Ring buffer boot meta mismatch of magic\n");
+// goto;
     }
     if (bmeta.struct_sizes != struct_sizes) {
-    pr_info("Ring buffer boot meta mismatch of struct size\n");
-    goto init;
+    pr_info!("Ring buffer boot meta mismatch of struct size\n");
+// goto;
     }
     if (bmeta.total_size != total_size) {
-    pr_info("Ring buffer boot meta mismatch of total size\n");
-    goto init;
+    pr_info!("Ring buffer boot meta mismatch of total size\n");
+// goto;
     }
     if (bmeta.buffers_offset > bmeta.total_size) {
-    pr_info("Ring buffer boot meta mismatch of offset outside of total size\n");
-    goto init;
+    pr_info!("Ring buffer boot meta mismatch of offset outside of total size\n");
+// goto;
     }
-    if (bmeta.buffers_offset != (void *)ptr - (void *)bmeta) {
-    pr_info("Ring buffer boot meta mismatch of first buffer offset\n");
-    goto init;
+    if (bmeta.buffers_offset != ptr - bmeta) {
+    pr_info!("Ring buffer boot meta mismatch of first buffer offset\n");
+// goto;
     }
     return true;
-    init:
+// label;
     bmeta.magic = RING_BUFFER_META_MAGIC;
     bmeta.struct_sizes = struct_sizes;
     bmeta.total_size = total_size;
-    bmeta.buffers_offset = (void *)ptr - (void *)bmeta;
+    bmeta.buffers_offset = ptr - bmeta;
 // Zero out the scratch pad
-    memset((void *)bmeta + sizeof(*bmeta), 0, bmeta.buffers_offset - sizeof(*bmeta));
+    memset(bmeta + sizeof!(*bmeta), 0, bmeta.buffers_offset - sizeof!(*bmeta));
     return false;
     }
 //
@@ -1679,18 +1885,17 @@ unsafe extern "C" fn rb_meta_init(buffer: *mut trace_buffer, scratch_size: c_int
 // the calculations (size of buffers and number of buffers)
 // must be the same.
 //
-    static bool rb_cpu_meta_valid(struct ring_buffer_cpu_meta *meta, int cpu,
-    struct trace_buffer *buffer, int nr_pages,
-    unsigned long *subbuf_mask)
-    {
-    let mut subbuf_size: c_int = PAGE_SIZE;
-    unsigned long buffers_start;
-    unsigned long buffers_end;
-    int i;
-    if (!subbuf_mask)
+#[no_mangle]
+pub unsafe extern "C" fn rb_cpu_meta_valid(meta: *mut ring_buffer_cpu_meta, cpu: c_int, buffer: *mut trace_buffer, nr_pages: c_int, subbuf_mask: *mut c_ulong) -> bool {
+pub static mut subbuf_size: c_int = 0;
+    let mut buffers_start = 0;
+    let mut buffers_end = 0;
+    let mut i = 0;
+    if (!subbuf_mask) {
     return false;
+    }
     if (meta.subbuf_size != PAGE_SIZE) {
-    pr_info("Ring buffer boot meta [%d] invalid subbuf_size\n", cpu);
+    pr_info!("Ring buffer boot meta [%d] invalid subbuf_size\n", cpu);
     return false;
     }
     buffers_start = meta.first_buffer;
@@ -1698,12 +1903,12 @@ unsafe extern "C" fn rb_meta_init(buffer: *mut trace_buffer, scratch_size: c_int
 // Is the head and commit buffers within the range of buffers?
     if (meta.head_buffer < buffers_start ||
     meta.head_buffer >= buffers_end) {
-    pr_info("Ring buffer boot meta [%d] head buffer out of range\n", cpu);
+    pr_info!("Ring buffer boot meta [%d] head buffer out of range\n", cpu);
     return false;
     }
     if (meta.commit_buffer < buffers_start ||
     meta.commit_buffer >= buffers_end) {
-    pr_info("Ring buffer boot meta [%d] commit buffer out of range\n", cpu);
+    pr_info!("Ring buffer boot meta [%d] commit buffer out of range\n", cpu);
     return false;
     }
     bitmap_clear(subbuf_mask, 0, meta.nr_subbufs);
@@ -1711,43 +1916,44 @@ unsafe extern "C" fn rb_meta_init(buffer: *mut trace_buffer, scratch_size: c_int
 // Ensure the meta::buffers array has correct data. The data in each subbufs
 // are checked later in rb_meta_validate_events().
 //
-    for (i = 0; i < meta.nr_subbufs; i++) {
+    while (i < meta.nr_subbufs) {
     if (meta.buffers[i] < 0 ||
     meta.buffers[i] >= meta.nr_subbufs) {
-    pr_info("Ring buffer boot meta [%d] array out of range\n", cpu);
+    pr_info!("Ring buffer boot meta [%d] array out of range\n", cpu);
     return false;
     }
     if (test_bit(meta.buffers[i], subbuf_mask)) {
-    pr_info("Ring buffer boot meta [%d] array has duplicates\n", cpu);
+    pr_info!("Ring buffer boot meta [%d] array has duplicates\n", cpu);
     return false;
     }
     set_bit(meta.buffers[i], subbuf_mask);
     }
     return true;
     }
-    static int rb_meta_subbuf_idx(struct ring_buffer_cpu_meta *meta, void *subbuf);
-    static int rb_read_data_buffer(struct buffer_data_page *dpage, int tail, int cpu,
-    unsigned long long *timestamp, u64 *delta_ptr)
-    {
-    struct ring_buffer_event *event;
+// forward_decl: rb_meta_subbuf_idx;
+#[no_mangle]
+pub unsafe extern "C" fn rb_read_data_buffer(dpage: *mut buffer_data_page, tail: c_int, cpu: c_int, timestamp: *mut unsigned long long, delta_ptr: *mut u64) -> c_int {
+pub static mut event: *mut c_void = core::ptr::null_mut();
     u64 ts, delta;
-    let mut events: c_int = 0;
-    int len;
-    int e;
+pub static mut events: c_int = 0;
+    let mut len = 0;
+    let mut e = 0;
 // delta_ptr = 0;
 // timestamp = 0;
     ts = dpage.time_stamp;
-    for (e = 0; e < tail; e += len) {
-    event = (struct ring_buffer_event *)(dpage.data + e);
+    while (e < tail) {
+    event = (dpage.data + e);
     len = rb_event_length(event);
-    if (len <= 0 || len > tail - e)
+    if (len <= 0 || len > tail - e) {
     return -1;
-    switch (event.type_len) {
-    case RINGBUF_TYPE_TIME_EXTEND:
+    }
+    match (event.type_len) {
+    RINGBUF_TYPE_TIME_EXTEND => {
     delta = rb_event_time_stamp(event);
     ts += delta;
-    break;
-    case RINGBUF_TYPE_TIME_STAMP:
+    // break;
+    }
+    RINGBUF_TYPE_TIME_STAMP => {
     delta = rb_event_time_stamp(event);
     delta = rb_fix_abs_ts(delta, ts);
     if (delta < ts) {
@@ -1756,17 +1962,22 @@ unsafe extern "C" fn rb_meta_init(buffer: *mut trace_buffer, scratch_size: c_int
     return -1;
     }
     ts = delta;
-    break;
-    case RINGBUF_TYPE_PADDING:
-    if (event.time_delta == 1)
-    break;
+    // break;
+    }
+    RINGBUF_TYPE_PADDING => {
+    if (event.time_delta == 1) {
+    // break;
+    }
     fallthrough;
-    case RINGBUF_TYPE_DATA:
-    events++;
+    }
+    RINGBUF_TYPE_DATA => {
+    events += 1;
     ts += event.time_delta;
-    break;
-    default:
+    // break;
+    }
+    _ => {
     return -1;
+    }
     }
     }
 // timestamp = ts;
@@ -1781,15 +1992,13 @@ pub struct rb_validation_state {
     pub ts: u64,
 }
 
-    static int __rb_validate_buffer(struct buffer_page *bpage, int cpu,
-    struct ring_buffer_cpu_meta *meta,
-    u64 prev_ts, u64 next_ts)
-    {
-    struct buffer_data_page *dpage = bpage.page;
+#[no_mangle]
+pub unsafe extern "C" fn __rb_validate_buffer(bpage: *mut buffer_page, cpu: c_int, meta: *mut ring_buffer_cpu_meta, prev_ts: u64, next_ts: u64) -> c_int {
+    let mut dpage = bpage.page;
     unsigned long long ts;
-    unsigned long tail;
-    u64 delta;
-    int ret;
+    let mut tail = 0;
+    let mut delta = 0;
+    let mut ret = 0;
 //
 // When a sub-buffer is recovered from a read, the commit value may
 // have RB_MISSED_* bits set, as these bits are reset on reuse.
@@ -1797,10 +2006,12 @@ pub struct rb_validation_state {
 // subbuf_size is considered invalid.
 //
     tail = rb_data_page_commit(dpage);
-    if (tail <= meta.subbuf_size - BUF_PAGE_HDR_SIZE)
+    if (tail <= meta.subbuf_size - BUF_PAGE_HDR_SIZE) {
     ret = rb_read_data_buffer(dpage, tail, cpu, &ts, &delta);
-    else
+    }
+    else {
     ret = -1;
+    }
 //
 // The timestamp must be greater than @prev_ts and smaller than @next_ts.
 // Since this function works in both forward (verify) and reverse (unwind)
@@ -1835,35 +2046,30 @@ pub struct rb_validation_state {
 // If the page is invalid (wrong event length or timestamp), it increments the
 // discarded counter and warns it. Otherwise, it updates the validation state.
 //
-    static void rb_validate_buffer(struct buffer_page *bpage,
-    struct ring_buffer_per_cpu *cpu_buffer,
-    struct ring_buffer_cpu_meta *meta,
-    struct rb_validation_state *state,
-    u64 prev_ts, u64 next_ts)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn rb_validate_buffer(bpage: *mut buffer_page, cpu_buffer: *mut ring_buffer_per_cpu, meta: *mut ring_buffer_cpu_meta, state: *mut rb_validation_state, prev_ts: u64, next_ts: u64) {
+    let mut ret = 0;
     ret = __rb_validate_buffer(bpage, cpu_buffer.cpu, meta, prev_ts, next_ts);
     if (ret < 0) {
-    if (!state.discarded)
-    pr_info("Ring buffer meta [%d] invalid buffer page detected\n",
+    if (!state.discarded) {
+    pr_info!("Ring buffer meta [%d] invalid buffer page detected\n",
     cpu_buffer.cpu);
-    state.discarded++;
+    }
+    state.discarded += 1;
     } else {
 // If the buffer has content, update pages_touched
-    if (ret)
+    if (ret) {
     local_inc(&cpu_buffer.pages_touched);
+    }
     state.entries += ret;
     state.entry_bytes += rb_page_size(bpage);
     state.ts = bpage.page.time_stamp;
     }
     }
-    static void rb_meta_inject_reader_page(struct ring_buffer_per_cpu *cpu_buffer,
-    struct ring_buffer_cpu_meta *meta,
-    struct buffer_page *orig_head,
-    struct buffer_page *head_page)
-    {
-    struct buffer_page *bpage = orig_head;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn rb_meta_inject_reader_page(cpu_buffer: *mut ring_buffer_per_cpu, meta: *mut ring_buffer_cpu_meta, orig_head: *mut buffer_page, head_page: *mut buffer_page) {
+    let mut bpage = orig_head;
+    let mut i = 0;
     rb_dec_page(&bpage);
 //
 // Insert the reader_page before the original head page.
@@ -1898,22 +2104,23 @@ pub struct rb_validation_state {
 // If the meta data has been validated, now validate the events
 #[no_mangle]
 unsafe extern "C" fn rb_meta_validate_events(cpu_buffer: *mut ring_buffer_per_cpu) {
-    static void rb_meta_validate_events(struct ring_buffer_per_cpu *cpu_buffer)
-    {
-    struct ring_buffer_cpu_meta *meta = cpu_buffer.ring_meta;
-    struct buffer_page *head_page, *orig_head, *orig_reader;
-    let mut state: rb_validation_state = { 0 };
-    let mut skip: bool = false;
-    int ret;
-    int i;
-    if (!meta || !meta.head_buffer)
+    let mut meta = cpu_buffer.ring_meta;
+    let mut head_page = core::ptr::null_mut();
+    let mut orig_head = core::ptr::null_mut();
+    let mut orig_reader = core::ptr::null_mut();
+pub static mut state: rb_validation_state = 0;
+pub static mut skip: bool = false;
+    let mut ret = 0;
+    let mut i = 0;
+    if (!meta || !meta.head_buffer) {
     return;
+    }
     orig_head = head_page = cpu_buffer.head_page;
     orig_reader = cpu_buffer.reader_page;
 // Do the head page first
     ret = __rb_validate_buffer(head_page, cpu_buffer.cpu, meta, 0, 0);
     if (ret < 0) {
-    pr_info("Ring buffer meta [%d] invalid head page detected\n",
+    pr_info!("Ring buffer meta [%d] invalid head page detected\n",
     cpu_buffer.cpu);
 // Don't bother rewinding
     skip = true;
@@ -1923,33 +2130,39 @@ unsafe extern "C" fn rb_meta_validate_events(cpu_buffer: *mut ring_buffer_per_cp
     }
 // Do the reader page - reader must be previous to head.
     rb_validate_buffer(orig_reader, cpu_buffer, meta, &state, 0, state.ts);
-    if (skip)
-    goto skip_rewind;
+    if (skip) {
+// goto;
+    }
 //
 // Try to rewind the head so that we can read the pages which are already
 // read in the previous boot.
 //
-    if (head_page == cpu_buffer.tail_page)
-    goto skip_rewind;
+    if (head_page == cpu_buffer.tail_page) {
+// goto;
+    }
     rb_dec_page(&head_page);
     for (i = 0; i < meta.nr_subbufs + 1; i++, rb_dec_page(&head_page)) {
 // Rewind until tail (writer) page.
-    if (head_page == cpu_buffer.tail_page)
+    if (head_page == cpu_buffer.tail_page) {
     break;
+    }
 // Rewind until unused page (no timestamp, no commit).
-    if (!head_page.page.time_stamp && rb_page_commit(head_page) == 0)
+    if (!head_page.page.time_stamp && rb_page_commit(head_page) == 0) {
     break;
+    }
 //
 // Skip if the page is invalid, or its timestamp is newer than the
 // previous valid page.
 //
     rb_validate_buffer(head_page, cpu_buffer, meta, &state, 0, state.ts);
     }
-    if (i)
-    pr_info("Ring buffer [%d] rewound %d pages\n", cpu_buffer.cpu, i);
+    if (i) {
+    pr_info!("Ring buffer [%d] rewound %d pages\n", cpu_buffer.cpu, i);
+    }
 // The last rewound page must be skipped.
-    if (head_page != orig_head)
+    if (head_page != orig_head) {
     rb_inc_page(&head_page);
+    }
 //
 // If the ring buffer was rewound, then inject the reader page
 // into the location just before the original head page.
@@ -1959,51 +2172,56 @@ unsafe extern "C" fn rb_meta_validate_events(cpu_buffer: *mut ring_buffer_per_cp
 // We'll restart verifying from orig_head
     head_page = orig_head;
     }
-    skip_rewind:
+// label;
 // If the commit_buffer is the reader page, update the commit page
     if (meta.commit_buffer == (unsigned long)cpu_buffer.reader_page.page) {
     cpu_buffer.commit_page = cpu_buffer.reader_page;
 // Nothing more to do, the only page is the reader page
-    goto done;
+// goto;
     }
     state.ts = head_page.page.time_stamp;
 // Iterate until finding the commit page
     for (i = 0; i < meta.nr_subbufs + 1; i++, rb_inc_page(&head_page)) {
 // The original reader page has already been checked/counted.
-    if (head_page == orig_reader)
+    if (head_page == orig_reader) {
     continue;
+    }
     rb_validate_buffer(head_page, cpu_buffer, meta, &state, state.ts, 0);
-    if (head_page == cpu_buffer.commit_page)
+    if (head_page == cpu_buffer.commit_page) {
     break;
     }
-    if (head_page != cpu_buffer.commit_page) {
-    pr_info("Ring buffer meta [%d] commit page not found\n",
-    cpu_buffer.cpu);
-    goto invalid;
     }
-    done:
+    if (head_page != cpu_buffer.commit_page) {
+    pr_info!("Ring buffer meta [%d] commit page not found\n",
+    cpu_buffer.cpu);
+// goto;
+    }
+// label;
     local_set(&cpu_buffer.entries, state.entries);
     local_set(&cpu_buffer.entries_bytes, state.entry_bytes);
-    pr_info("Ring buffer meta [%d] is from previous boot!", cpu_buffer.cpu);
-    if (state.discarded)
+    pr_info!("Ring buffer meta [%d] is from previous boot!", cpu_buffer.cpu);
+    if (state.discarded) {
     pr_cont(" (%d pages discarded)", state.discarded);
+    }
     pr_cont("\n");
 
-    if (meta.nr_invalid)
-    pr_warn("Ring buffer testing [%d] invalid pages: %s (%d/%d)\n",
+    if (meta.nr_invalid) {
+    pr_warn!("Ring buffer testing [%d] invalid pages: %s (%d/%d)\n",
     cpu_buffer.cpu,
     (state.discarded == meta.nr_invalid) ? "PASSED" : "FAILED",
     state.discarded, meta.nr_invalid);
-    if (meta.entry_bytes)
-    pr_warn("Ring buffer testing [%d] entry_bytes: %s (%ld/%ld)\n",
+    }
+    if (meta.entry_bytes) {
+    pr_warn!("Ring buffer testing [%d] entry_bytes: %s (%ld/%ld)\n",
     cpu_buffer.cpu,
     (state.entry_bytes == meta.entry_bytes) ? "PASSED" : "FAILED",
     (long)state.entry_bytes, (long)meta.entry_bytes);
+    }
     meta.nr_invalid = 0;
     meta.entry_bytes = 0;
 
     return;
-    invalid:
+// label;
 // The content of the buffers are invalid, reset the meta data
     meta.head_buffer = 0;
     meta.commit_buffer = 0;
@@ -2018,22 +2236,21 @@ unsafe extern "C" fn rb_meta_validate_events(cpu_buffer: *mut ring_buffer_per_cp
     }
 #[no_mangle]
 unsafe extern "C" fn rb_range_meta_init(buffer: *mut trace_buffer, nr_pages: c_int, scratch_size: c_int) {
-    static void rb_range_meta_init(struct trace_buffer *buffer, int nr_pages, int scratch_size)
-    {
-    struct ring_buffer_cpu_meta *meta;
-    unsigned long *subbuf_mask;
-    unsigned long delta;
-    void *subbuf;
-    let mut valid: bool = false;
-    int cpu;
-    int i;
+pub static mut meta: *mut c_void = core::ptr::null_mut();
+pub static mut subbuf_mask: *mut c_void = core::ptr::null_mut();
+    let mut delta = 0;
+pub static mut subbuf: *mut c_void = core::ptr::null_mut();
+pub static mut valid: bool = false;
+    let mut cpu = 0;
+    let mut i = 0;
 // Create a mask to test the subbuf array
     subbuf_mask = bitmap_alloc(nr_pages + 1, GFP_KERNEL);
 // If subbuf_mask fails to allocate, then rb_meta_valid() will return false
-    if (rb_meta_init(buffer, scratch_size))
+    if (rb_meta_init(buffer, scratch_size)) {
     valid = true;
-    for (cpu = 0; cpu < nr_cpu_ids; cpu++) {
-    void *next_meta;
+    }
+    while (cpu < nr_cpu_ids) {
+pub static mut next_meta: *mut c_void = core::ptr::null_mut();
     meta = rb_range_meta(buffer, nr_pages, cpu);
     if (valid && rb_cpu_meta_valid(meta, cpu, buffer, nr_pages, subbuf_mask)) {
 // Make the mappings match the current address
@@ -2044,11 +2261,13 @@ unsafe extern "C" fn rb_range_meta_init(buffer: *mut trace_buffer, nr_pages: c_i
     meta.commit_buffer += delta;
     continue;
     }
-    if (cpu < nr_cpu_ids - 1)
+    if (cpu < nr_cpu_ids - 1) {
     next_meta = rb_range_meta(buffer, nr_pages, cpu + 1);
-    else
-    next_meta = (void *)buffer.range_addr_end;
-    memset(meta, 0, next_meta - (void *)meta);
+    }
+    else {
+    next_meta = buffer.range_addr_end;
+    }
+    memset(meta, 0, next_meta - meta);
     meta.nr_subbufs = nr_pages + 1;
     meta.subbuf_size = PAGE_SIZE;
     subbuf = rb_subbufs_from_meta(meta);
@@ -2061,7 +2280,7 @@ unsafe extern "C" fn rb_range_meta_init(buffer: *mut trace_buffer, nr_pages: c_i
 // remain the same, the buffers[] array contains the
 // index into the sub-buffers holding their actual order.
 //
-    for (i = 0; i < meta.nr_subbufs; i++) {
+    while (i < meta.nr_subbufs) {
     meta.buffers[i] = i;
     rb_init_data_page(subbuf);
     subbuf += meta.subbuf_size;
@@ -2069,37 +2288,37 @@ unsafe extern "C" fn rb_range_meta_init(buffer: *mut trace_buffer, nr_pages: c_i
     }
     bitmap_free(subbuf_mask);
     }
-    static void *rbm_start(struct seq_file *m, loff_t *pos)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer = m.private;
-    struct ring_buffer_cpu_meta *meta = cpu_buffer.ring_meta;
-    unsigned long val;
-    if (!meta)
+#[no_mangle]
+pub unsafe extern "C" fn rbm_start(m: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
+    let mut cpu_buffer = m.private;
+    let mut meta = cpu_buffer.ring_meta;
+    let mut val = 0;
+    if (!meta) {
     return core::ptr::null_mut();
-    if (*pos > meta.nr_subbufs)
-    return core::ptr::null_mut();
-    val = *pos;
-    val++;
-    return (void *)val;
     }
-    static void *rbm_next(struct seq_file *m, void *v, loff_t *pos)
-    {
+    if (*pos > meta.nr_subbufs) {
+    return core::ptr::null_mut();
+    }
+    val = *pos;
+    val += 1;
+    return val;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn rbm_next(m: *mut seq_file, v: *mut c_void, pos: *mut loff_t) -> *mut c_void {
     (*pos)++;
     return rbm_start(m, pos);
     }
 #[no_mangle]
 unsafe extern "C" fn rbm_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int rbm_show(struct seq_file *m, void *v)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer = m.private;
-    struct ring_buffer_cpu_meta *meta = cpu_buffer.ring_meta;
-    let mut val: c_ulong = (unsigned long)v;
-    struct buffer_data_page *dpage;
+    let mut cpu_buffer = m.private;
+    let mut meta = cpu_buffer.ring_meta;
+pub static mut val: c_ulong = 0;
+pub static mut dpage: *mut c_void = core::ptr::null_mut();
     if (val == 1) {
     seq_printf(m, "head_buffer:   %d\n",
-    rb_meta_subbuf_idx(meta, (void *)meta.head_buffer));
+    rb_meta_subbuf_idx(meta, meta.head_buffer));
     seq_printf(m, "commit_buffer: %d\n",
-    rb_meta_subbuf_idx(meta, (void *)meta.commit_buffer));
+    rb_meta_subbuf_idx(meta, meta.commit_buffer));
     seq_printf(m, "subbuf_size:   %d\n", meta.subbuf_size);
     seq_printf(m, "nr_subbufs:    %d\n", meta.nr_subbufs);
     return 0;
@@ -2112,73 +2331,69 @@ unsafe extern "C" fn rbm_show(m: *mut seq_file, v: *mut c_void) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn rbm_stop(m: *mut seq_file, p: *mut c_void) {
-    static void rbm_stop(struct seq_file *m, void *p)
-    {
     }
-    static const struct seq_operations rb_meta_seq_ops = {
-    .start		= rbm_start,
-    .next		= rbm_next,
-    .show		= rbm_show,
-    .stop		= rbm_stop,
-    };
+pub static mut seq_operations: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_meta_seq_init(file: *mut file, buffer: *mut trace_buffer, cpu: c_int) -> c_int {
-    int ring_buffer_meta_seq_init(struct file *file, struct trace_buffer *buffer, int cpu)
-    {
-    struct seq_file *m;
-    int ret;
+pub static mut m: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     ret = seq_open(file, &rb_meta_seq_ops);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     m = file.private_data;
     m.private = buffer.buffers[cpu];
     return 0;
     }
 // Map the buffer_pages to the previous head and commit pages
-    static void rb_meta_buffer_update(struct ring_buffer_per_cpu *cpu_buffer,
-    struct buffer_page *bpage)
-    {
-    struct ring_buffer_cpu_meta *meta = cpu_buffer.ring_meta;
-    if (meta.head_buffer == (unsigned long)bpage.page)
+#[no_mangle]
+pub unsafe extern "C" fn rb_meta_buffer_update(cpu_buffer: *mut ring_buffer_per_cpu, bpage: *mut buffer_page) {
+    let mut meta = cpu_buffer.ring_meta;
+    if (meta.head_buffer == (unsigned long)bpage.page) {
     cpu_buffer.head_page = bpage;
+    }
     if (meta.commit_buffer == (unsigned long)bpage.page) {
     cpu_buffer.commit_page = bpage;
     cpu_buffer.tail_page = bpage;
     }
     }
-    static struct ring_buffer_desc *ring_buffer_desc(struct trace_buffer_desc *trace_desc, int cpu)
-    {
-    struct ring_buffer_desc *desc, *end;
-    size_t len;
-    int i;
-    if (!trace_desc || !trace_desc.nr_cpus)
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_desc(trace_desc: *mut trace_buffer_desc, cpu: c_int) -> *mut c_void {
+    let mut desc = core::ptr::null_mut();
+    let mut end = core::ptr::null_mut();
+    let mut len = 0;
+    let mut i = 0;
+    if (!trace_desc || !trace_desc.nr_cpus) {
     return core::ptr::null_mut();
-    end = (struct ring_buffer_desc *)((void *)trace_desc + trace_desc.struct_len);
+    }
+    end = (trace_desc + trace_desc.struct_len);
     desc = __first_ring_buffer_desc(trace_desc);
     len = struct_size(desc, page_va, desc.nr_page_va);
-    desc = (struct ring_buffer_desc *)((void *)desc + (len * cpu));
-    if (desc < end && desc.cpu == cpu)
+    desc = (desc + (len * cpu));
+    if (desc < end && desc.cpu == cpu) {
     return desc;
+    }
 // Missing CPUs, need to linear search
     for_each_ring_buffer_desc(desc, i, trace_desc) {
-    if (desc.cpu == cpu)
+    if (desc.cpu == cpu) {
     return desc;
+    }
     }
     return core::ptr::null_mut();
     }
-    static void *ring_buffer_desc_page(struct ring_buffer_desc *desc, unsigned int page_id)
-    {
-    return page_id >= desc.nr_page_va ? core::ptr::null_mut() : (void *)desc.page_va[page_id];
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_desc_page(desc: *mut ring_buffer_desc, page_id: c_uint) -> *mut c_void {
+    return page_id >= desc.nr_page_va ? core::ptr::null_mut() : desc.page_va[page_id];
     }
-    static int __rb_allocate_pages(struct ring_buffer_per_cpu *cpu_buffer,
-    long nr_pages, struct list_head *pages)
-    {
-    struct trace_buffer *buffer = cpu_buffer.buffer;
-    struct ring_buffer_cpu_meta *meta = core::ptr::null_mut();
-    struct buffer_page *bpage, *tmp;
-    let mut user_thread: bool = current.mm != core::ptr::null_mut();
-    struct ring_buffer_desc *desc = core::ptr::null_mut();
-    long i;
+#[no_mangle]
+pub unsafe extern "C" fn __rb_allocate_pages(cpu_buffer: *mut ring_buffer_per_cpu, nr_pages: c_long, pages: *mut list_head) -> c_int {
+    let mut buffer = cpu_buffer.buffer;
+    let mut meta = core::ptr::null_mut();
+    let mut bpage = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
+pub static mut user_thread: bool = false;
+    let mut desc = core::ptr::null_mut();
+    let mut i = 0;
 //
 // Check if the available memory is there first.
 // Note, si_mem_available() only gives us a rough estimate of available
@@ -2187,8 +2402,9 @@ pub unsafe extern "C" fn ring_buffer_meta_seq_init(file: *mut file, buffer: *mut
 // not going to succeed.
 //
     i = si_mem_available();
-    if (i < nr_pages)
+    if (i < nr_pages) {
     return -ENOMEM;
+    }
 //
 // If a user thread allocates too much, and si_mem_available()
 // reports there's enough memory, even though there is not.
@@ -2198,19 +2414,23 @@ pub unsafe extern "C" fn ring_buffer_meta_seq_init(file: *mut file, buffer: *mut
 // This is the task the OOM killer needs to take out during this
 // loop, even if it was triggered by an allocation somewhere else.
 //
-    if (user_thread)
+    if (user_thread) {
     set_current_oom_origin();
-    if (buffer.range_addr_start)
+    }
+    if (buffer.range_addr_start) {
     meta = rb_range_meta(buffer, nr_pages, cpu_buffer.cpu);
+    }
     if (buffer.remote) {
     desc = ring_buffer_desc(buffer.remote.desc, cpu_buffer.cpu);
-    if (!desc || WARN_ON(desc.nr_page_va != (nr_pages + 1)))
+    if (!desc || WARN_ON!(desc.nr_page_va != (nr_pages + 1))) {
     return -EINVAL;
     }
-    for (i = 0; i < nr_pages; i++) {
+    }
+    while (i < nr_pages) {
     bpage = alloc_cpu_page(cpu_buffer.cpu);
-    if (!bpage)
-    goto free_pages;
+    if (!bpage) {
+// goto;
+    }
     rb_check_bpage(cpu_buffer, bpage);
 //
 // Append the pages as for mapped buffers we want to keep
@@ -2220,17 +2440,20 @@ pub unsafe extern "C" fn ring_buffer_meta_seq_init(file: *mut file, buffer: *mut
     if (meta) {
 // A range was given. Use that for the buffer page
     bpage.page = rb_range_buffer(cpu_buffer, i + 1);
-    if (!bpage.page)
-    goto free_pages;
+    if (!bpage.page) {
+// goto;
+    }
 // If this is valid from a previous boot
-    if (meta.head_buffer)
+    if (meta.head_buffer) {
     rb_meta_buffer_update(cpu_buffer, bpage);
+    }
     bpage.range = 1;
     bpage.id = i + 1;
     } else if (desc) {
-    void *p = ring_buffer_desc_page(desc, i + 1);
-    if (WARN_ON(!p))
-    goto free_pages;
+    let mut p = ring_buffer_desc_page(desc, i + 1);
+    if (WARN_ON!(!p)) {
+// goto;
+    }
     bpage.page = p;
     bpage.range = 1; /* bpage.page can't be freed */
     bpage.id = i + 1;
@@ -2238,32 +2461,36 @@ pub unsafe extern "C" fn ring_buffer_meta_seq_init(file: *mut file, buffer: *mut
     } else {
     bpage.page = alloc_cpu_data(cpu_buffer.cpu,
     cpu_buffer.buffer.subbuf_order);
-    if (!bpage.page)
-    goto free_pages;
+    if (!bpage.page) {
+// goto;
+    }
     }
     bpage.order = cpu_buffer.buffer.subbuf_order;
-    if (user_thread && fatal_signal_pending(current))
-    goto free_pages;
+    if (user_thread && fatal_signal_pending(current)) {
+// goto;
     }
-    if (user_thread)
+    }
+    if (user_thread) {
     clear_current_oom_origin();
+    }
     return 0;
-    free_pages:
+// label;
     list_for_each_entry_safe(bpage, tmp, pages, list) {
     list_del_init(&bpage.list);
     free_buffer_page(bpage);
     }
-    if (user_thread)
+    if (user_thread) {
     clear_current_oom_origin();
+    }
     return -ENOMEM;
     }
-    static int rb_allocate_pages(struct ring_buffer_per_cpu *cpu_buffer,
-    unsigned long nr_pages)
-    {
-    LIST_HEAD(pages);
-    WARN_ON(!nr_pages);
-    if (__rb_allocate_pages(cpu_buffer, nr_pages, &pages))
+#[no_mangle]
+pub unsafe extern "C" fn rb_allocate_pages(cpu_buffer: *mut ring_buffer_per_cpu, nr_pages: c_ulong) -> c_int {
+pub static mut pages: usize = 0;
+    WARN_ON!(!nr_pages);
+    if (__rb_allocate_pages(cpu_buffer, nr_pages, &pages)) {
     return -ENOMEM;
+    }
 //
 // The ring buffer page list is a circular list that does not
 // start and end with a list head. All page list items point to
@@ -2275,16 +2502,16 @@ pub unsafe extern "C" fn ring_buffer_meta_seq_init(file: *mut file, buffer: *mut
     rb_check_pages(cpu_buffer);
     return 0;
     }
-    static struct ring_buffer_per_cpu *
-    rb_allocate_cpu_buffer(struct trace_buffer *buffer, long nr_pages, int cpu)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn rb_allocate_cpu_buffer(buffer: *mut trace_buffer, nr_pages: c_long, cpu: c_int) -> *mut c_void {
     struct ring_buffer_per_cpu *cpu_buffer __free(kfree) =
     alloc_cpu_buffer(cpu);
-    struct ring_buffer_cpu_meta *meta;
-    struct buffer_page *bpage;
-    int ret;
-    if (!cpu_buffer)
+pub static mut meta: *mut c_void = core::ptr::null_mut();
+pub static mut bpage: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (!cpu_buffer) {
     return core::ptr::null_mut();
+    }
     cpu_buffer.cpu = cpu;
     cpu_buffer.buffer = buffer;
     raw_spin_lock_init(&cpu_buffer.reader_lock);
@@ -2297,8 +2524,9 @@ pub unsafe extern "C" fn ring_buffer_meta_seq_init(file: *mut file, buffer: *mut
     init_waitqueue_head(&cpu_buffer.irq_work.full_waiters);
     mutex_init(&cpu_buffer.mapping_lock);
     bpage = alloc_cpu_page(cpu);
-    if (!bpage)
+    if (!bpage) {
     return core::ptr::null_mut();
+    }
     bpage.order = cpu_buffer.buffer.subbuf_order;
     rb_check_bpage(cpu_buffer, bpage);
     cpu_buffer.reader_page = bpage;
@@ -2309,41 +2537,48 @@ pub unsafe extern "C" fn ring_buffer_meta_seq_init(file: *mut file, buffer: *mut
 //
     cpu_buffer.ring_meta = rb_range_meta(buffer, nr_pages, cpu);
     bpage.page = rb_range_buffer(cpu_buffer, 0);
-    if (!bpage.page)
-    goto fail_free_reader;
-    if (cpu_buffer.ring_meta.head_buffer)
+    if (!bpage.page) {
+// goto;
+    }
+    if (cpu_buffer.ring_meta.head_buffer) {
     rb_meta_buffer_update(cpu_buffer, bpage);
+    }
     bpage.range = 1;
     atomic_inc(&cpu_buffer.resize_disabled);
     } else if (buffer.remote) {
-    struct ring_buffer_desc *desc = ring_buffer_desc(buffer.remote.desc, cpu);
-    if (!desc)
-    goto fail_free_reader;
+    let mut desc = ring_buffer_desc(buffer.remote.desc, cpu);
+    if (!desc) {
+// goto;
+    }
     cpu_buffer.remote = buffer.remote;
-    cpu_buffer.meta_page = (struct trace_buffer_meta *)(void *)desc.meta_va;
+    cpu_buffer.meta_page = desc.meta_va;
     cpu_buffer.nr_pages = nr_pages;
     cpu_buffer.subbuf_ids = kzalloc_objs(*cpu_buffer.subbuf_ids,
     cpu_buffer.nr_pages + 1);
-    if (!cpu_buffer.subbuf_ids)
-    goto fail_free_reader;
+    if (!cpu_buffer.subbuf_ids) {
+// goto;
+    }
 // Remote buffers are read-only and immutable
     atomic_inc(&cpu_buffer.record_disabled);
     atomic_inc(&cpu_buffer.resize_disabled);
     bpage.page = ring_buffer_desc_page(desc, cpu_buffer.meta_page.reader.id);
-    if (!bpage.page)
-    goto fail_free_reader;
+    if (!bpage.page) {
+// goto;
+    }
     bpage.range = 1;
     cpu_buffer.subbuf_ids[0] = bpage;
     } else {
     bpage.page = alloc_cpu_data(cpu, bpage.order);
-    if (!bpage.page)
-    goto fail_free_reader;
+    if (!bpage.page) {
+// goto;
+    }
     }
     INIT_LIST_HEAD(&cpu_buffer.reader_page.list);
     INIT_LIST_HEAD(&cpu_buffer.new_pages);
     ret = rb_allocate_pages(cpu_buffer, nr_pages);
-    if (ret < 0)
-    goto fail_free_reader;
+    if (ret < 0) {
+// goto;
+    }
     rb_meta_validate_events(cpu_buffer);
 // If the boot meta was valid then this has already been updated
     meta = cpu_buffer.ring_meta;
@@ -2351,39 +2586,43 @@ pub unsafe extern "C" fn ring_buffer_meta_seq_init(file: *mut file, buffer: *mut
     !cpu_buffer.head_page || !cpu_buffer.commit_page || !cpu_buffer.tail_page) {
     if (meta && meta.head_buffer &&
     (cpu_buffer.head_page || cpu_buffer.commit_page || cpu_buffer.tail_page)) {
-    pr_warn("Ring buffer meta buffers not all mapped\n");
-    if (!cpu_buffer.head_page)
-    pr_warn("   Missing head_page\n");
-    if (!cpu_buffer.commit_page)
-    pr_warn("   Missing commit_page\n");
-    if (!cpu_buffer.tail_page)
-    pr_warn("   Missing tail_page\n");
+    pr_warn!("Ring buffer meta buffers not all mapped\n");
+    if (!cpu_buffer.head_page) {
+    pr_warn!("   Missing head_page\n");
+    }
+    if (!cpu_buffer.commit_page) {
+    pr_warn!("   Missing commit_page\n");
+    }
+    if (!cpu_buffer.tail_page) {
+    pr_warn!("   Missing tail_page\n");
+    }
     }
     cpu_buffer.head_page
-    = list_entry(cpu_buffer.pages, struct buffer_page, list);
+    = list_entry(cpu_buffer.pages, buffer_page, list);
     cpu_buffer.tail_page = cpu_buffer.commit_page = cpu_buffer.head_page;
     rb_head_page_activate(cpu_buffer);
-    if (cpu_buffer.ring_meta)
+    if (cpu_buffer.ring_meta) {
     meta.commit_buffer = meta.head_buffer;
+    }
     } else {
 // The valid meta buffer still needs to activate the head page
     rb_head_page_activate(cpu_buffer);
     }
     return_ptr(cpu_buffer);
-    fail_free_reader:
+// label;
     kfree(cpu_buffer.subbuf_ids);
     free_buffer_page(cpu_buffer.reader_page);
     return core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn rb_free_cpu_buffer(cpu_buffer: *mut ring_buffer_per_cpu) {
-    static void rb_free_cpu_buffer(struct ring_buffer_per_cpu *cpu_buffer)
-    {
-    struct list_head *head = cpu_buffer.pages;
-    struct buffer_page *bpage, *tmp;
+    let mut head = cpu_buffer.pages;
+    let mut bpage = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
     irq_work_sync(&cpu_buffer.irq_work.work);
-    if (cpu_buffer.remote)
+    if (cpu_buffer.remote) {
     kfree(cpu_buffer.subbuf_ids);
+    }
     free_buffer_page(cpu_buffer.reader_page);
     if (head) {
     rb_head_page_deactivate(cpu_buffer);
@@ -2391,7 +2630,7 @@ unsafe extern "C" fn rb_free_cpu_buffer(cpu_buffer: *mut ring_buffer_per_cpu) {
     list_del_init(&bpage.list);
     free_buffer_page(bpage);
     }
-    bpage = list_entry(head, struct buffer_page, list);
+    bpage = list_entry(head, buffer_page, list);
     free_buffer_page(bpage);
     }
     free_pages((unsigned long)cpu_buffer.free_page.data, cpu_buffer.free_page.order);
@@ -2400,48 +2639,50 @@ unsafe extern "C" fn rb_free_cpu_buffer(cpu_buffer: *mut ring_buffer_per_cpu) {
 
 #[no_mangle]
 unsafe extern "C" fn rb_test_inject_invalid_pages(buffer: *mut trace_buffer) {
-    static void rb_test_inject_invalid_pages(struct trace_buffer *buffer)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    struct ring_buffer_cpu_meta *meta;
-    struct buffer_data_page *dpage;
-    let mut entry_bytes: c_ulong = 0;
-    unsigned long ptr;
-    int subbuf_size;
-    let mut invalid: c_int = 0;
-    int cpu;
-    int i;
-    if (!(buffer.flags & RB_FL_TESTING))
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+pub static mut meta: *mut c_void = core::ptr::null_mut();
+pub static mut dpage: *mut c_void = core::ptr::null_mut();
+pub static mut entry_bytes: c_ulong = 0;
+    let mut ptr = 0;
+    let mut subbuf_size = 0;
+pub static mut invalid: c_int = 0;
+    let mut cpu = 0;
+    let mut i = 0;
+    if (!(buffer.flags & RB_FL_TESTING)) {
     return;
+    }
     guard(preempt)();
     cpu = smp_processor_id();
     cpu_buffer = buffer.buffers[cpu];
-    if (!cpu_buffer)
+    if (!cpu_buffer) {
     return;
+    }
     meta = cpu_buffer.ring_meta;
-    if (!meta)
+    if (!meta) {
     return;
+    }
     ptr = (unsigned long)rb_subbufs_from_meta(meta);
     subbuf_size = meta.subbuf_size;
-    for (i = 0; i < meta.nr_subbufs; i++) {
-    let mut idx: c_ulong = meta.buffers[i];
-    dpage = (void *)(ptr + idx * subbuf_size);
+    while (i < meta.nr_subbufs) {
+pub static mut idx: c_ulong = 0;
+    dpage = (ptr + idx * subbuf_size);
 // Skip unused pages
-    if (!rb_data_page_commit(dpage))
+    if (!rb_data_page_commit(dpage)) {
     continue;
+    }
 //
 // Invalidate even pages or multiples of 5. This will cause 3
 // contiguous invalidated(empty) pages.
 //
     if (!(i & 0x1) || !(i % 5)) {
     local_add(subbuf_size + 1, &dpage.commit);
-    invalid++;
+    invalid += 1;
     } else {
 // Count total commit bytes.
     entry_bytes += rb_data_page_size(dpage);
     }
     }
-    pr_info("Inject invalidated %d pages on CPU%d, total size: %ld\n",
+    pr_info!("Inject invalidated %d pages on CPU%d, total size: %ld\n",
     invalid, cpu, (long)entry_bytes);
     meta.nr_invalid = invalid;
     meta.entry_bytes = entry_bytes;
@@ -2450,34 +2691,29 @@ unsafe extern "C" fn rb_test_inject_invalid_pages(buffer: *mut trace_buffer) {
 // Stop recording on a persistent buffer and flush cache if needed.
 #[no_mangle]
 unsafe extern "C" fn rb_flush_buffer_cb(nb: *mut notifier_block, event: c_ulong, data: *mut c_void) -> c_int {
-    static int rb_flush_buffer_cb(struct notifier_block *nb, unsigned long event, void *data)
-    {
-    struct trace_buffer *buffer = container_of(nb, struct trace_buffer, flush_nb);
+    let mut buffer = container_of!(nb, trace_buffer, flush_nb);
     ring_buffer_record_off(buffer);
     rb_test_inject_invalid_pages(buffer);
     arch_ring_buffer_flush_range(buffer.range_addr_start, buffer.range_addr_end);
     return NOTIFY_DONE;
     }
-    static struct trace_buffer *alloc_buffer(unsigned long size, unsigned flags,
-    int order, unsigned long start,
-    unsigned long end,
-    unsigned long scratch_size,
-    struct lock_class_key *key,
-    struct ring_buffer_remote *remote)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn alloc_buffer(size: c_ulong, flags: c_uint, order: c_int, start: c_ulong, end: c_ulong, scratch_size: c_ulong, key: *mut lock_class_key, remote: *mut ring_buffer_remote) -> *mut c_void {
     struct trace_buffer *buffer __free(kfree) = core::ptr::null_mut();
-    long nr_pages;
-    int subbuf_size;
-    int bsize;
-    int cpu;
-    int ret;
+    let mut nr_pages = 0;
+    let mut subbuf_size = 0;
+    let mut bsize = 0;
+    let mut cpu = 0;
+    let mut ret = 0;
 // keep it in its own cache line
-    buffer = kzalloc(ALIGN(sizeof(*buffer), cache_line_size()),
+    buffer = kzalloc(ALIGN(sizeof!(*buffer), cache_line_size()),
     GFP_KERNEL);
-    if (!buffer)
+    if (!buffer) {
     return core::ptr::null_mut();
-    if (!zalloc_cpumask_var(&buffer.cpumask, GFP_KERNEL))
+    }
+    if (!zalloc_cpumask_var(&buffer.cpumask, GFP_KERNEL)) {
     return core::ptr::null_mut();
+    }
     buffer.subbuf_order = order;
     subbuf_size = (PAGE_SIZE << order);
     buffer.flags = flags;
@@ -2485,24 +2721,25 @@ unsafe extern "C" fn rb_flush_buffer_cb(nb: *mut notifier_block, event: c_ulong,
     buffer.reader_lock_key = key;
     init_irq_work(&buffer.irq_work.work, rb_wake_up_waiters);
     init_waitqueue_head(&buffer.irq_work.waiters);
-    bsize = sizeof(void *) * nr_cpu_ids;
+    bsize = sizeof! * nr_cpu_ids;
     buffer.buffers = kzalloc(ALIGN(bsize, cache_line_size()),
     GFP_KERNEL);
-    if (!buffer.buffers)
-    goto fail_free_cpumask;
+    if (!buffer.buffers) {
+// goto;
+    }
     cpu = raw_smp_processor_id();
 // If start/end are specified, then that overrides size
     if (start && end) {
-    unsigned long buffers_start;
-    unsigned long ptr;
-    int n;
+    let mut buffers_start = 0;
+    let mut ptr = 0;
+    let mut n = 0;
 // Make sure that start is word aligned
-    start = ALIGN(start, sizeof(long));
+    start = ALIGN(start, sizeof!(long));
 // scratch_size needs to be aligned too
-    scratch_size = ALIGN(scratch_size, sizeof(long));
+    scratch_size = ALIGN(scratch_size, sizeof!(long));
 // Subtract the buffer meta data and word aligned
-    buffers_start = start + sizeof(struct ring_buffer_cpu_meta);
-    buffers_start = ALIGN(buffers_start, sizeof(long));
+    buffers_start = start + sizeof!(ring_buffer_cpu_meta);
+    buffers_start = ALIGN(buffers_start, sizeof!(long));
     buffers_start += scratch_size;
 // Calculate the size for the per CPU data
     size = end - buffers_start;
@@ -2514,51 +2751,57 @@ unsafe extern "C" fn rb_flush_buffer_cb(nb: *mut notifier_block, event: c_ulong,
 // needed, plus account for the integer array index that
 // will be appended to the meta data.
 //
-    nr_pages = (size - sizeof(struct ring_buffer_cpu_meta)) /
-    (subbuf_size + sizeof(int));
+    nr_pages = (size - sizeof!(ring_buffer_cpu_meta)) /
+    (subbuf_size + sizeof!(int));
 // Need at least two pages plus the reader page
-    if (nr_pages < 3)
-    goto fail_free_buffers;
-    again:
+    if (nr_pages < 3) {
+// goto;
+    }
+// label;
 // Make sure that the size fits aligned
-    for (n = 0, ptr = buffers_start; n < nr_cpu_ids; n++) {
-    ptr += sizeof(struct ring_buffer_cpu_meta) +
-    sizeof(int) * nr_pages;
+    while (n < nr_cpu_ids) {
+    ptr += sizeof!(ring_buffer_cpu_meta) +
+    sizeof!(int) * nr_pages;
     ptr = ALIGN(ptr, subbuf_size);
     ptr += subbuf_size * nr_pages;
     }
     if (ptr > end) {
-    if (nr_pages <= 3)
-    goto fail_free_buffers;
-    nr_pages--;
-    goto again;
+    if (nr_pages <= 3) {
+// goto;
+    }
+    nr_pages -= 1;
+// goto;
     }
 // nr_pages should not count the reader page
-    nr_pages--;
+    nr_pages -= 1;
     buffer.range_addr_start = start;
     buffer.range_addr_end = end;
     rb_range_meta_init(buffer, nr_pages, scratch_size);
     } else if (remote) {
-    struct ring_buffer_desc *desc = ring_buffer_desc(remote.desc, cpu);
+    let mut desc = ring_buffer_desc(remote.desc, cpu);
     buffer.remote = remote;
 // The writer is remote. This ring-buffer is read-only
     atomic_inc(&buffer.record_disabled);
     nr_pages = desc.nr_page_va - 1;
-    if (nr_pages < 2)
-    goto fail_free_buffers;
+    if (nr_pages < 2) {
+// goto;
+    }
     } else {
 // need at least two pages
     nr_pages = DIV_ROUND_UP(size, rb_subbuf_capacity(buffer));
-    if (nr_pages < 2)
+    if (nr_pages < 2) {
     nr_pages = 2;
+    }
     }
     cpumask_set_cpu(cpu, buffer.cpumask);
     buffer.buffers[cpu] = rb_allocate_cpu_buffer(buffer, nr_pages, cpu);
-    if (!buffer.buffers[cpu])
-    goto fail_free_buffers;
+    if (!buffer.buffers[cpu]) {
+// goto;
+    }
     ret = cpuhp_state_add_instance(CPUHP_TRACE_RB_PREPARE, &buffer.node);
-    if (ret < 0)
-    goto fail_free_buffers;
+    if (ret < 0) {
+// goto;
+    }
     mutex_init(&buffer.mutex);
 // Persistent ring buffer needs to flush cache before reboot.
     if (start && end) {
@@ -2566,13 +2809,14 @@ unsafe extern "C" fn rb_flush_buffer_cb(nb: *mut notifier_block, event: c_ulong,
     atomic_notifier_chain_register(&panic_notifier_list, &buffer.flush_nb);
     }
     return_ptr(buffer);
-    fail_free_buffers:
+// label;
     for_each_buffer_cpu(buffer, cpu) {
-    if (buffer.buffers[cpu])
+    if (buffer.buffers[cpu]) {
     rb_free_cpu_buffer(buffer.buffers[cpu]);
     }
+    }
     kfree(buffer.buffers);
-    fail_free_cpumask:
+// label;
     free_cpumask_var(buffer.cpumask);
     return core::ptr::null_mut();
     }
@@ -2587,9 +2831,8 @@ unsafe extern "C" fn rb_flush_buffer_cb(nb: *mut notifier_block, event: c_ulong,
 // when the buffer wraps. If this flag is not set, the buffer will
 // drop data when the tail hits the head.
 //
-    struct trace_buffer *__ring_buffer_alloc(unsigned long size, unsigned flags,
-    struct lock_class_key *key)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __ring_buffer_alloc(size: c_ulong, flags: c_uint, key: *mut lock_class_key) -> *mut c_void {
 // Default buffer page size - one system page
     return alloc_buffer(size, flags, 0, 0, 0, 0, key, core::ptr::null_mut());
     }
@@ -2609,12 +2852,8 @@ unsafe extern "C" fn rb_flush_buffer_cb(nb: *mut notifier_block, event: c_ulong,
 // when the buffer wraps. If this flag is not set, the buffer will
 // drop data when the tail hits the head.
 //
-    struct trace_buffer *__ring_buffer_alloc_range(unsigned long size, unsigned flags,
-    int order, unsigned long start,
-    unsigned long range_size,
-    unsigned long scratch_size,
-    struct lock_class_key *key)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __ring_buffer_alloc_range(size: c_ulong, flags: c_uint, order: c_int, start: c_ulong, range_size: c_ulong, scratch_size: c_ulong, key: *mut lock_class_key) -> *mut c_void {
     return alloc_buffer(size, flags, order, start, start + range_size,
     scratch_size, key, core::ptr::null_mut());
     }
@@ -2623,80 +2862,76 @@ unsafe extern "C" fn rb_flush_buffer_cb(nb: *mut notifier_block, event: c_ulong,
 // @remote: Contains a description of the ring-buffer pages and remote callbacks.
 // @key: ring buffer reader_lock_key.
 //
-    struct trace_buffer *__ring_buffer_alloc_remote(struct ring_buffer_remote *remote,
-    struct lock_class_key *key)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __ring_buffer_alloc_remote(remote: *mut ring_buffer_remote, key: *mut lock_class_key) -> *mut c_void {
     return alloc_buffer(0, 0, 0, 0, 0, 0, key, remote);
     }
-    void *ring_buffer_meta_scratch(struct trace_buffer *buffer, unsigned int *size)
-    {
-    struct ring_buffer_meta *meta;
-    void *ptr;
-    if (!buffer || !buffer.meta)
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_meta_scratch(buffer: *mut trace_buffer, size: *mut c_uint) -> *mut c_void {
+pub static mut meta: *mut c_void = core::ptr::null_mut();
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+    if (!buffer || !buffer.meta) {
     return core::ptr::null_mut();
+    }
     meta = buffer.meta;
-    ptr = (void *)ALIGN((unsigned long)meta + sizeof(*meta), sizeof(long));
-    if (size)
-// size = (void *)meta + meta->buffers_offset - ptr;
+    ptr = ALIGN((unsigned long)meta + sizeof!(*meta), sizeof!(long));
+    if (size) {
+// size = meta + meta->buffers_offset - ptr;
+    }
     return ptr;
     }
 //
 // ring_buffer_free - free a ring buffer.
 // @buffer: the buffer to free.
 //
-    void
-    ring_buffer_free(struct trace_buffer *buffer)
-    {
-    int cpu;
-    if (buffer.range_addr_start && buffer.range_addr_end)
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_free(buffer: *mut trace_buffer) {
+    let mut cpu = 0;
+    if (buffer.range_addr_start && buffer.range_addr_end) {
     atomic_notifier_chain_unregister(&panic_notifier_list, &buffer.flush_nb);
+    }
     cpuhp_state_remove_instance(CPUHP_TRACE_RB_PREPARE, &buffer.node);
     irq_work_sync(&buffer.irq_work.work);
-    for_each_buffer_cpu(buffer, cpu)
+    for_each_buffer_cpu(buffer, cpu) {
     rb_free_cpu_buffer(buffer.buffers[cpu]);
+    }
     kfree(buffer.buffers);
     free_cpumask_var(buffer.cpumask);
     kfree(buffer);
     }
     EXPORT_SYMBOL_GPL(ring_buffer_free);
-    void ring_buffer_set_clock(struct trace_buffer *buffer,
-    u64 (*clock)(void))
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_set_clock(buffer: *mut trace_buffer) {
     buffer.clock = clock;
     }
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_set_time_stamp_abs(buffer: *mut trace_buffer, abs: bool) {
-    void ring_buffer_set_time_stamp_abs(struct trace_buffer *buffer, bool abs)
-    {
     buffer.time_stamp_abs = abs;
     }
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_time_stamp_abs(buffer: *mut trace_buffer) -> bool {
-    bool ring_buffer_time_stamp_abs(struct trace_buffer *buffer)
-    {
     return buffer.time_stamp_abs;
     }
 #[no_mangle]
 pub unsafe extern "C" fn rb_page_entries(bpage: *mut buffer_page) -> c_ulong {
-    static inline unsigned long rb_page_entries(struct buffer_page *bpage)
-    {
     return local_read(&bpage.entries) & RB_WRITE_MASK;
     }
 #[no_mangle]
 pub unsafe extern "C" fn rb_page_write(bpage: *mut buffer_page) -> c_ulong {
-    static inline unsigned long rb_page_write(struct buffer_page *bpage)
-    {
     return local_read(&bpage.write) & RB_WRITE_MASK;
     }
-    static bool
-    rb_remove_pages(struct ring_buffer_per_cpu *cpu_buffer, unsigned long nr_pages)
-    {
-    struct list_head *tail_page, *to_remove, *next_page;
-    struct buffer_page *to_remove_page, *tmp_iter_page;
-    struct buffer_page *last_page, *first_page;
-    unsigned long nr_removed;
-    unsigned long head_bit;
-    int page_entries;
+#[no_mangle]
+pub unsafe extern "C" fn rb_remove_pages(cpu_buffer: *mut ring_buffer_per_cpu, nr_pages: c_ulong) -> bool {
+    let mut tail_page = core::ptr::null_mut();
+    let mut to_remove = core::ptr::null_mut();
+    let mut next_page = core::ptr::null_mut();
+    let mut to_remove_page = core::ptr::null_mut();
+    let mut tmp_iter_page = core::ptr::null_mut();
+    let mut last_page = core::ptr::null_mut();
+    let mut first_page = core::ptr::null_mut();
+    let mut nr_removed = 0;
+    let mut head_bit = 0;
+    let mut page_entries = 0;
     head_bit = 0;
     raw_spin_lock_irq(&cpu_buffer.reader_lock);
     atomic_inc(&cpu_buffer.record_disabled);
@@ -2714,13 +2949,13 @@ pub unsafe extern "C" fn rb_page_write(bpage: *mut buffer_page) -> c_ulong {
 // tail page might be on reader page, we remove the next page
 // from the ring buffer
 //
-    if (cpu_buffer.tail_page == cpu_buffer.reader_page)
+    if (cpu_buffer.tail_page == cpu_buffer.reader_page) {
     tail_page = rb_list_head(tail_page.next);
+    }
     to_remove = tail_page;
 // start of pages to remove
-    first_page = list_entry(rb_list_head(to_remove.next),
-    struct buffer_page, list);
-    for (nr_removed = 0; nr_removed < nr_pages; nr_removed++) {
+    first_page = list_entry(rb_list_head(to_remove.next), buffer_page, list);
+    while (nr_removed < nr_pages) {
     to_remove = rb_list_head(to_remove).next;
     head_bit |= (unsigned long)to_remove & RB_PAGE_HEAD;
     }
@@ -2732,23 +2967,23 @@ pub unsafe extern "C" fn rb_page_write(bpage: *mut buffer_page) -> c_ulong {
 // Make sure that we have head_bit value preserved for the
 // next page
 //
-    tail_page.next = (struct list_head *)((unsigned long)next_page |
+    tail_page.next = ((unsigned long)next_page |
     head_bit);
     next_page = rb_list_head(next_page);
     next_page.prev = tail_page;
 // make sure pages points to a valid page in the ring buffer
     cpu_buffer.pages = next_page;
-    cpu_buffer.cnt++;
+    cpu_buffer.cnt += 1;
 // update head page
-    if (head_bit)
-    cpu_buffer.head_page = list_entry(next_page,
-    struct buffer_page, list);
+    if (head_bit) {
+    cpu_buffer.head_page = list_entry(next_page, buffer_page, list);
+    }
 // pages are removed, resume tracing and then free the pages
     atomic_dec(&cpu_buffer.record_disabled);
     raw_spin_unlock_irq(&cpu_buffer.reader_lock);
     RB_WARN_ON(cpu_buffer, list_empty(cpu_buffer.pages));
 // last buffer page to remove
-    last_page = list_entry(rb_list_head(to_remove), struct buffer_page,
+    last_page = list_entry(rb_list_head(to_remove), buffer_page,
     list);
     tmp_iter_page = first_page;
     do {
@@ -2773,18 +3008,17 @@ pub unsafe extern "C" fn rb_page_write(bpage: *mut buffer_page) -> c_ulong {
 // free up the buffer_page and its page
 //
     free_buffer_page(to_remove_page);
-    nr_removed--;
+    nr_removed -= 1;
     } while (to_remove_page != last_page);
     RB_WARN_ON(cpu_buffer, nr_removed);
-    let mut nr_removed: return = = 0;
+pub static mut nr_removed: return = 0;
     }
-    static bool
-    rb_insert_pages(struct ring_buffer_per_cpu *cpu_buffer)
-    {
-    struct list_head *pages = &cpu_buffer.new_pages;
-    unsigned long flags;
-    bool success;
-    int retries;
+#[no_mangle]
+pub unsafe extern "C" fn rb_insert_pages(cpu_buffer: *mut ring_buffer_per_cpu) -> bool {
+    let mut pages = &cpu_buffer.new_pages;
+    let mut flags = 0;
+    let mut success = 0;
+    let mut retries = 0;
 // Can be called at early boot up, where interrupts must not been enabled
     raw_spin_lock_irqsave(&cpu_buffer.reader_lock, flags);
 //
@@ -2804,17 +3038,20 @@ pub unsafe extern "C" fn rb_page_write(bpage: *mut buffer_page) -> c_ulong {
     retries = 10;
     success = false;
     while (retries--) {
-    struct list_head *head_page, *prev_page;
-    struct list_head *last_page, *first_page;
-    struct list_head *head_page_with_bit;
-    struct buffer_page *hpage = rb_set_head_page(cpu_buffer);
-    if (!hpage)
+    let mut head_page = core::ptr::null_mut();
+    let mut prev_page = core::ptr::null_mut();
+    let mut last_page = core::ptr::null_mut();
+    let mut first_page = core::ptr::null_mut();
+pub static mut head_page_with_bit: *mut c_void = core::ptr::null_mut();
+    let mut hpage = rb_set_head_page(cpu_buffer);
+    if (!hpage) {
     break;
+    }
     head_page = &hpage.list;
     prev_page = head_page.prev;
     first_page = pages.next;
     last_page  = pages.prev;
-    head_page_with_bit = (struct list_head *)
+    head_page_with_bit = 
     ((unsigned long)head_page | RB_PAGE_HEAD);
     last_page.next = head_page_with_bit;
     first_page.prev = prev_page;
@@ -2827,13 +3064,14 @@ pub unsafe extern "C" fn rb_page_write(bpage: *mut buffer_page) -> c_ulong {
 // pointer to point to end of list
 //
     head_page.prev = last_page;
-    cpu_buffer.cnt++;
+    cpu_buffer.cnt += 1;
     success = true;
     break;
     }
     }
-    if (success)
+    if (success) {
     INIT_LIST_HEAD(pages);
+    }
 //
 // If we weren't successful in adding in new pages, warn and stop
 // tracing
@@ -2842,7 +3080,8 @@ pub unsafe extern "C" fn rb_page_write(bpage: *mut buffer_page) -> c_ulong {
     raw_spin_unlock_irqrestore(&cpu_buffer.reader_lock, flags);
 // free pages if they weren't inserted
     if (!success) {
-    struct buffer_page *bpage, *tmp;
+    let mut bpage = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
     list_for_each_entry_safe(bpage, tmp, &cpu_buffer.new_pages,
     list) {
     list_del_init(&bpage.list);
@@ -2853,23 +3092,21 @@ pub unsafe extern "C" fn rb_page_write(bpage: *mut buffer_page) -> c_ulong {
     }
 #[no_mangle]
 unsafe extern "C" fn rb_update_pages(cpu_buffer: *mut ring_buffer_per_cpu) {
-    static void rb_update_pages(struct ring_buffer_per_cpu *cpu_buffer)
-    {
-    bool success;
-    if (cpu_buffer.nr_pages_to_update > 0)
+    let mut success = 0;
+    if (cpu_buffer.nr_pages_to_update > 0) {
     success = rb_insert_pages(cpu_buffer);
-    else
+    }
+    else {
     success = rb_remove_pages(cpu_buffer,
     -cpu_buffer.nr_pages_to_update);
-    if (success)
+    }
+    if (success) {
     cpu_buffer.nr_pages += cpu_buffer.nr_pages_to_update;
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn update_pages_handler(work: *mut work_struct) {
-    static void update_pages_handler(struct work_struct *work)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer = container_of(work,
-    struct ring_buffer_per_cpu, update_pages_work);
+    let mut cpu_buffer = container_of!(work, ring_buffer_per_cpu, update_pages_work);
     rb_update_pages(cpu_buffer);
     complete(&cpu_buffer.update_done);
     }
@@ -2883,21 +3120,23 @@ unsafe extern "C" fn update_pages_handler(work: *mut work_struct) {
 //
 // Returns 0 on success and < 0 on failure.
 //
-    int ring_buffer_resize(struct trace_buffer *buffer, unsigned long size,
-    int cpu_id)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    unsigned long nr_pages;
-    int cpu, err;
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_resize(buffer: *mut trace_buffer, size: c_ulong, cpu_id: c_int) -> c_int {
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+    let mut nr_pages = 0;
+    let mut cpu = 0;
+    let mut err = 0;
 //
 // Always succeed at resizing a non-existent buffer:
 //
-    if (!buffer)
+    if (!buffer) {
     return 0;
+    }
 // Make sure the requested buffer exists
     if (cpu_id != RING_BUFFER_ALL_CPUS &&
-    !cpumask_test_cpu(cpu_id, buffer.cpumask))
+    !cpumask_test_cpu(cpu_id, buffer.cpumask)) {
     return 0;
+    }
 //
 // Keep CPUs from coming online while resizing to synchronize
 // with new per CPU buffers being created.
@@ -2908,8 +3147,9 @@ unsafe extern "C" fn update_pages_handler(work: *mut work_struct) {
     atomic_inc(&buffer.resizing);
     nr_pages = DIV_ROUND_UP(size, rb_subbuf_capacity(buffer));
 // we need a minimum of two pages
-    if (nr_pages < 2)
+    if (nr_pages < 2) {
     nr_pages = 2;
+    }
     if (cpu_id == RING_BUFFER_ALL_CPUS) {
 //
 // Don't succeed if resizing is disabled, as a reader might be
@@ -2920,7 +3160,7 @@ unsafe extern "C" fn update_pages_handler(work: *mut work_struct) {
     cpu_buffer = buffer.buffers[cpu];
     if (atomic_read(&cpu_buffer.resize_disabled)) {
     err = -EBUSY;
-    goto out_err_unlock;
+// goto;
     }
     }
 // calculate the pages to update
@@ -2931,8 +3171,9 @@ unsafe extern "C" fn update_pages_handler(work: *mut work_struct) {
 //
 // nothing more to do for removing pages or no update
 //
-    if (cpu_buffer.nr_pages_to_update <= 0)
+    if (cpu_buffer.nr_pages_to_update <= 0) {
     continue;
+    }
 //
 // to add pages, make sure all new pages can be
 // allocated without receiving ENOMEM
@@ -2942,7 +3183,7 @@ unsafe extern "C" fn update_pages_handler(work: *mut work_struct) {
     &cpu_buffer.new_pages)) {
 // not enough memory for new pages
     err = -ENOMEM;
-    goto out_err;
+// goto;
     }
     cond_resched();
     }
@@ -2953,8 +3194,9 @@ unsafe extern "C" fn update_pages_handler(work: *mut work_struct) {
 //
     for_each_buffer_cpu(buffer, cpu) {
     cpu_buffer = buffer.buffers[cpu];
-    if (!cpu_buffer.nr_pages_to_update)
+    if (!cpu_buffer.nr_pages_to_update) {
     continue;
+    }
 // Can't run something on an offline CPU.
     if (!cpu_online(cpu)) {
     rb_update_pages(cpu_buffer);
@@ -2975,16 +3217,19 @@ unsafe extern "C" fn update_pages_handler(work: *mut work_struct) {
 // wait for all the updates to complete
     for_each_buffer_cpu(buffer, cpu) {
     cpu_buffer = buffer.buffers[cpu];
-    if (!cpu_buffer.nr_pages_to_update)
+    if (!cpu_buffer.nr_pages_to_update) {
     continue;
-    if (cpu_online(cpu))
+    }
+    if (cpu_online(cpu)) {
     wait_for_completion(&cpu_buffer.update_done);
+    }
     cpu_buffer.nr_pages_to_update = 0;
     }
     } else {
     cpu_buffer = buffer.buffers[cpu_id];
-    if (nr_pages == cpu_buffer.nr_pages)
-    goto out;
+    if (nr_pages == cpu_buffer.nr_pages) {
+// goto;
+    }
 //
 // Don't succeed if resizing is disabled, as a reader might be
 // manipulating the ring buffer and is expecting a sane state while
@@ -2992,7 +3237,7 @@ unsafe extern "C" fn update_pages_handler(work: *mut work_struct) {
 //
     if (atomic_read(&cpu_buffer.resize_disabled)) {
     err = -EBUSY;
-    goto out_err_unlock;
+// goto;
     }
     cpu_buffer.nr_pages_to_update = nr_pages -
     cpu_buffer.nr_pages;
@@ -3001,11 +3246,12 @@ unsafe extern "C" fn update_pages_handler(work: *mut work_struct) {
     __rb_allocate_pages(cpu_buffer, cpu_buffer.nr_pages_to_update,
     &cpu_buffer.new_pages)) {
     err = -ENOMEM;
-    goto out_err;
+// goto;
     }
 // Can't run something on an offline CPU.
-    if (!cpu_online(cpu_id))
+    if (!cpu_online(cpu_id)) {
     rb_update_pages(cpu_buffer);
+    }
     else {
 // Run directly if possible.
     migrate_disable();
@@ -3021,7 +3267,7 @@ unsafe extern "C" fn update_pages_handler(work: *mut work_struct) {
     }
     cpu_buffer.nr_pages_to_update = 0;
     }
-    out:
+// label;
 //
 // The ring buffer resize can happen with the ring buffer
 // enabled, so that the update disturbs the tracing as little
@@ -3047,13 +3293,15 @@ unsafe extern "C" fn update_pages_handler(work: *mut work_struct) {
     atomic_dec(&buffer.resizing);
     mutex_unlock(&buffer.mutex);
     return 0;
-    out_err:
+// label;
     for_each_buffer_cpu(buffer, cpu) {
-    struct buffer_page *bpage, *tmp;
+    let mut bpage = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
     cpu_buffer = buffer.buffers[cpu];
     cpu_buffer.nr_pages_to_update = 0;
-    if (list_empty(&cpu_buffer.new_pages))
+    if (list_empty(&cpu_buffer.new_pages)) {
     continue;
+    }
     list_for_each_entry_safe(bpage, tmp, &cpu_buffer.new_pages,
     list) {
     list_del_init(&bpage.list);
@@ -3061,7 +3309,7 @@ unsafe extern "C" fn update_pages_handler(work: *mut work_struct) {
     cond_resched();
     }
     }
-    out_err_unlock:
+// label;
     atomic_dec(&buffer.resizing);
     mutex_unlock(&buffer.mutex);
     return err;
@@ -3069,35 +3317,35 @@ unsafe extern "C" fn update_pages_handler(work: *mut work_struct) {
     EXPORT_SYMBOL_GPL(ring_buffer_resize);
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_change_overwrite(buffer: *mut trace_buffer, val: c_int) {
-    void ring_buffer_change_overwrite(struct trace_buffer *buffer, int val)
-    {
     mutex_lock(&buffer.mutex);
-    if (val)
+    if (val) {
     buffer.flags |= RB_FL_OVERWRITE;
-    else
+    }
+    else {
     buffer.flags &= ~RB_FL_OVERWRITE;
+    }
     mutex_unlock(&buffer.mutex);
     }
     EXPORT_SYMBOL_GPL(ring_buffer_change_overwrite);
-    static __always_inline void *__rb_page_index(struct buffer_page *bpage, unsigned index)
+    static __always_inline void *__rb_page_index(buffer_page *bpage, unsigned index)
     {
     return bpage.page.data + index;
     }
     static __always_inline struct ring_buffer_event *
-    rb_reader_event(struct ring_buffer_per_cpu *cpu_buffer)
+    rb_reader_event(ring_buffer_per_cpu *cpu_buffer)
     {
     return __rb_page_index(cpu_buffer.reader_page,
     cpu_buffer.reader_page.read);
     }
-    static struct ring_buffer_event *
-    rb_iter_head_event(struct ring_buffer_iter *iter)
-    {
-    struct ring_buffer_event *event;
-    struct buffer_page *iter_head_page = iter.head_page;
-    unsigned long commit;
-    unsigned length;
-    if (iter.head != iter.next_event)
+#[no_mangle]
+pub unsafe extern "C" fn rb_iter_head_event(iter: *mut ring_buffer_iter) -> *mut c_void {
+pub static mut event: *mut c_void = core::ptr::null_mut();
+    let mut iter_head_page = iter.head_page;
+    let mut commit = 0;
+    let mut length: c_uint = 0;
+    if (iter.head != iter.next_event) {
     return iter.event;
+    }
 //
 // When the writer goes across pages, it issues a cmpxchg which
 // is a mb(), which will synchronize with the rmb here.
@@ -3106,8 +3354,9 @@ pub unsafe extern "C" fn ring_buffer_change_overwrite(buffer: *mut trace_buffer,
     commit = rb_page_size(iter_head_page);
     smp_rmb();
 // An event needs to be at least 8 bytes in size
-    if (iter.head > commit - 8)
-    goto reset;
+    if (iter.head > commit - 8) {
+// goto;
+    }
     event = __rb_page_index(iter_head_page, iter.head);
     length = rb_event_length(event);
 //
@@ -3115,9 +3364,10 @@ pub unsafe extern "C" fn ring_buffer_change_overwrite(buffer: *mut trace_buffer,
 // compiler doing any crazy optimizations with length.
 //
     barrier();
-    if ((iter.head + length) > commit || length > iter.event_size)
+    if ((iter.head + length) > commit || length > iter.event_size) {
 // Writer corrupted the read?
-    goto reset;
+// goto;
+    }
     memcpy(iter.event, event, length);
 //
 // If the page stamp is still the same after this rmb() then the
@@ -3126,11 +3376,12 @@ pub unsafe extern "C" fn ring_buffer_change_overwrite(buffer: *mut trace_buffer,
     smp_rmb();
 // Make sure the page didn't change since we read this
     if (iter.page_stamp != iter_head_page.page.time_stamp ||
-    commit > rb_page_size(iter_head_page))
-    goto reset;
+    commit > rb_page_size(iter_head_page)) {
+// goto;
+    }
     iter.next_event = iter.head + length;
     return iter.event;
-    reset:
+// label;
 // Reset to the beginning
     iter.page_stamp = iter.read_stamp = iter.head_page.page.time_stamp;
     iter.head = 0;
@@ -3139,34 +3390,35 @@ pub unsafe extern "C" fn ring_buffer_change_overwrite(buffer: *mut trace_buffer,
     return core::ptr::null_mut();
     }
     static __always_inline unsigned
-    rb_commit_index(struct ring_buffer_per_cpu *cpu_buffer)
+    rb_commit_index(ring_buffer_per_cpu *cpu_buffer)
     {
     return rb_page_commit(cpu_buffer.commit_page);
     }
     static __always_inline unsigned
-    rb_event_index(struct ring_buffer_per_cpu *cpu_buffer, struct ring_buffer_event *event)
+    rb_event_index(ring_buffer_per_cpu *cpu_buffer, ring_buffer_event *event)
     {
-    let mut addr: c_ulong = (unsigned long)event;
+pub static mut addr: c_ulong = 0;
     addr &= (unsigned long)rb_subbuf_size(cpu_buffer.buffer) - 1;
     return addr - BUF_PAGE_HDR_SIZE;
     }
 #[no_mangle]
 unsafe extern "C" fn rb_inc_iter(iter: *mut ring_buffer_iter) {
-    static void rb_inc_iter(struct ring_buffer_iter *iter)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer = iter.cpu_buffer;
+    let mut cpu_buffer = iter.cpu_buffer;
 //
 // The iterator could be on the reader page (it starts there).
 // But the head could have moved, since the reader was
 // found. Check for this case and assign the iterator
 // to the head page instead of next.
 //
-    if (iter.head_page == cpu_buffer.reader_page)
+    if (iter.head_page == cpu_buffer.reader_page) {
     iter.head_page = rb_set_head_page(cpu_buffer);
-    else
+    }
+    else {
     rb_inc_page(&iter.head_page);
-    if (rb_page_commit(iter.head_page) & RB_MISSED_EVENTS)
+    }
+    if (rb_page_commit(iter.head_page) & RB_MISSED_EVENTS) {
     iter.missed_events = -1;
+    }
     iter.page_stamp = iter.read_stamp = iter.head_page.page.time_stamp;
     iter.head = 0;
     iter.next_event = 0;
@@ -3174,19 +3426,16 @@ unsafe extern "C" fn rb_inc_iter(iter: *mut ring_buffer_iter) {
 // Return the index into the sub-buffers for a given sub-buffer
 #[no_mangle]
 unsafe extern "C" fn rb_meta_subbuf_idx(meta: *mut ring_buffer_cpu_meta, subbuf: *mut c_void) -> c_int {
-    static int rb_meta_subbuf_idx(struct ring_buffer_cpu_meta *meta, void *subbuf)
-    {
-    void *subbuf_array;
-    subbuf_array = (void *)meta + sizeof(int) * meta.nr_subbufs;
-    subbuf_array = (void *)ALIGN((unsigned long)subbuf_array, meta.subbuf_size);
+pub static mut subbuf_array: *mut c_void = core::ptr::null_mut();
+    subbuf_array = meta + sizeof!(int) * meta.nr_subbufs;
+    subbuf_array = ALIGN((unsigned long)subbuf_array, meta.subbuf_size);
     return (subbuf - subbuf_array) / meta.subbuf_size;
     }
-    static void rb_update_meta_head(struct ring_buffer_per_cpu *cpu_buffer,
-    struct buffer_page *next_page)
-    {
-    struct ring_buffer_cpu_meta *meta = cpu_buffer.ring_meta;
-    let mut old_head: c_ulong = (unsigned long)next_page.page;
-    unsigned long new_head;
+#[no_mangle]
+pub unsafe extern "C" fn rb_update_meta_head(cpu_buffer: *mut ring_buffer_per_cpu, next_page: *mut buffer_page) {
+    let mut meta = cpu_buffer.ring_meta;
+pub static mut old_head: c_ulong = 0;
+    let mut new_head = 0;
     rb_inc_page(&next_page);
     new_head = (unsigned long)next_page.page;
 //
@@ -3195,13 +3444,12 @@ unsafe extern "C" fn rb_meta_subbuf_idx(meta: *mut ring_buffer_cpu_meta, subbuf:
 //
     (void)cmpxchg(&meta.head_buffer, old_head, new_head);
     }
-    static void rb_update_meta_reader(struct ring_buffer_per_cpu *cpu_buffer,
-    struct buffer_page *reader)
-    {
-    struct ring_buffer_cpu_meta *meta = cpu_buffer.ring_meta;
-    void *old_reader = cpu_buffer.reader_page.page;
-    void *new_reader = reader.page;
-    int id;
+#[no_mangle]
+pub unsafe extern "C" fn rb_update_meta_reader(cpu_buffer: *mut ring_buffer_per_cpu, reader: *mut buffer_page) {
+    let mut meta = cpu_buffer.ring_meta;
+    let mut old_reader = cpu_buffer.reader_page.page;
+    let mut new_reader = reader.page;
+    let mut id = 0;
     id = reader.id;
     cpu_buffer.reader_page.id = id;
     reader.id = 0;
@@ -3217,15 +3465,12 @@ unsafe extern "C" fn rb_meta_subbuf_idx(meta: *mut ring_buffer_cpu_meta, subbuf:
 // 0 to continue
 // -1 on error
 //
-    static int
-    rb_handle_head_page(struct ring_buffer_per_cpu *cpu_buffer,
-    struct buffer_page *tail_page,
-    struct buffer_page *next_page)
-    {
-    struct buffer_page *new_head;
-    int entries;
-    int type;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn rb_handle_head_page(cpu_buffer: *mut ring_buffer_per_cpu, tail_page: *mut buffer_page, next_page: *mut buffer_page) -> c_int {
+pub static mut new_head: *mut c_void = core::ptr::null_mut();
+    let mut entries = 0;
+    let mut type = 0;
+    let mut ret = 0;
     entries = rb_page_entries(next_page);
 //
 // The hard part is here. We need to move the head
@@ -3244,8 +3489,8 @@ unsafe extern "C" fn rb_meta_subbuf_idx(meta: *mut ring_buffer_cpu_meta, subbuf:
 // pointer to its reader page. Give up
 // and try again.
 //
-    switch (type) {
-    case RB_PAGE_HEAD:
+    match (type) {
+    RB_PAGE_HEAD => {
 //
 // We changed the head to UPDATE, thus
 // it is our responsibility to update
@@ -3254,37 +3499,43 @@ unsafe extern "C" fn rb_meta_subbuf_idx(meta: *mut ring_buffer_cpu_meta, subbuf:
     local_add(entries, &cpu_buffer.overrun);
     local_sub(rb_page_commit(next_page), &cpu_buffer.entries_bytes);
     local_inc(&cpu_buffer.pages_lost);
-    if (cpu_buffer.ring_meta)
+    if (cpu_buffer.ring_meta) {
     rb_update_meta_head(cpu_buffer, next_page);
+    }
 //
 // The entries will be zeroed out when we move the
 // tail page.
 //
 // still more to do
-    break;
-    case RB_PAGE_UPDATE:
+    // break;
+    }
+    RB_PAGE_UPDATE => {
 //
 // This is an interrupt that interrupt the
 // previous update. Still more to do.
 //
-    break;
-    case RB_PAGE_NORMAL:
+    // break;
+    }
+    RB_PAGE_NORMAL => {
 //
 // An interrupt came in before the update
 // and processed this for us.
 // Nothing left to do.
 //
     return 1;
-    case RB_PAGE_MOVED:
+    }
+    RB_PAGE_MOVED => {
 //
 // The reader is on another CPU and just did
 // a swap with our next_page.
 // Try again.
 //
     return 1;
-    default:
+    }
+    _ => {
     RB_WARN_ON(cpu_buffer, 1); /* WTF??? */
     return -1;
+    }
     }
 //
 // Now that we are here, the old head pointer is
@@ -3312,14 +3563,17 @@ unsafe extern "C" fn rb_meta_subbuf_idx(meta: *mut ring_buffer_cpu_meta, subbuf:
 // 2) A bunch of interrupts came in and moved
 // the page forward again.
 //
-    switch (ret) {
-    case RB_PAGE_HEAD:
-    case RB_PAGE_NORMAL:
+    match (ret) {
+    RB_PAGE_HEAD => {
+    }
+    RB_PAGE_NORMAL => {
 // OK
-    break;
-    default:
+    // break;
+    }
+    _ => {
     RB_WARN_ON(cpu_buffer, 1);
     return -1;
+    }
     }
 //
 // It is possible that an interrupt came in,
@@ -3332,17 +3586,18 @@ unsafe extern "C" fn rb_meta_subbuf_idx(meta: *mut ring_buffer_cpu_meta, subbuf:
 // the tail page would have moved.
 //
     if (ret == RB_PAGE_NORMAL) {
-    struct buffer_page *buffer_tail_page;
+pub static mut buffer_tail_page: *mut c_void = core::ptr::null_mut();
     buffer_tail_page = READ_ONCE(cpu_buffer.tail_page);
 //
 // If the tail had moved passed next, then we need
 // to reset the pointer.
 //
     if (buffer_tail_page != tail_page &&
-    buffer_tail_page != next_page)
+    buffer_tail_page != next_page) {
     rb_head_page_set_normal(cpu_buffer, new_head,
     next_page,
     RB_PAGE_HEAD);
+    }
     }
 //
 // If this was the outer most commit (the one that
@@ -3354,19 +3609,18 @@ unsafe extern "C" fn rb_meta_subbuf_idx(meta: *mut ring_buffer_cpu_meta, subbuf:
     tail_page,
     RB_PAGE_UPDATE);
     if (RB_WARN_ON(cpu_buffer,
-    ret != RB_PAGE_UPDATE))
+    ret != RB_PAGE_UPDATE)) {
     return -1;
+    }
     }
     return 0;
     }
-    static inline void
-    rb_reset_tail(struct ring_buffer_per_cpu *cpu_buffer,
-    unsigned long tail, struct rb_event_info *info)
-    {
-    struct buffer_page *tail_page = info.tail_page;
-    let mut bsize: c_ulong = rb_page_capacity(tail_page);
-    struct ring_buffer_event *event;
-    let mut length: c_ulong = info.length;
+#[no_mangle]
+pub unsafe extern "C" fn rb_reset_tail(cpu_buffer: *mut ring_buffer_per_cpu, tail: c_ulong, info: *mut rb_event_info) {
+    let mut tail_page = info.tail_page;
+pub static mut bsize: c_ulong = 0;
+pub static mut event: *mut c_void = core::ptr::null_mut();
+pub static mut length: c_ulong = 0;
 //
 // Only the event that crossed the page boundary
 // must fill the old tail_page with padding.
@@ -3377,8 +3631,9 @@ unsafe extern "C" fn rb_meta_subbuf_idx(meta: *mut ring_buffer_cpu_meta, subbuf:
 // to update the real_end. Reset it to zero
 // and the reader will ignore it.
 //
-    if (tail == bsize)
+    if (tail == bsize) {
     tail_page.real_end = 0;
+    }
     local_sub(length, &tail_page.write);
     return;
     }
@@ -3424,19 +3679,19 @@ unsafe extern "C" fn rb_meta_subbuf_idx(meta: *mut ring_buffer_cpu_meta, subbuf:
     length = (tail + length) - bsize;
     local_sub(length, &tail_page.write);
     }
-    static inline void rb_end_commit(struct ring_buffer_per_cpu *cpu_buffer);
+// forward_decl: rb_end_commit;
 //
 // This is the slow path, force gcc not to inline it.
 //
     static noinline struct ring_buffer_event *
-    rb_move_tail(struct ring_buffer_per_cpu *cpu_buffer,
-    unsigned long tail, struct rb_event_info *info)
+    rb_move_tail(ring_buffer_per_cpu *cpu_buffer,
+    unsigned long tail, rb_event_info *info)
     {
-    struct buffer_page *tail_page = info.tail_page;
-    struct buffer_page *commit_page = cpu_buffer.commit_page;
-    struct trace_buffer *buffer = cpu_buffer.buffer;
-    struct buffer_page *next_page;
-    int ret;
+    let mut tail_page = info.tail_page;
+    let mut commit_page = cpu_buffer.commit_page;
+    let mut buffer = cpu_buffer.buffer;
+pub static mut next_page: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     next_page = tail_page;
     rb_inc_page(&next_page);
 //
@@ -3446,7 +3701,7 @@ unsafe extern "C" fn rb_meta_subbuf_idx(meta: *mut ring_buffer_cpu_meta, subbuf:
 //
     if (unlikely(next_page == commit_page)) {
     local_inc(&cpu_buffer.commit_overrun);
-    goto out_reset;
+// goto;
     }
 //
 // This is where the fun begins!
@@ -3474,15 +3729,17 @@ unsafe extern "C" fn rb_meta_subbuf_idx(meta: *mut ring_buffer_cpu_meta, subbuf:
 //
     if (!(buffer.flags & RB_FL_OVERWRITE)) {
     local_inc(&cpu_buffer.dropped_events);
-    goto out_reset;
+// goto;
     }
     ret = rb_handle_head_page(cpu_buffer,
     tail_page,
     next_page);
-    if (ret < 0)
-    goto out_reset;
-    if (ret)
-    goto out_again;
+    if (ret < 0) {
+// goto;
+    }
+    if (ret) {
+// goto;
+    }
     } else {
 //
 // We need to be careful here too. The
@@ -3499,12 +3756,12 @@ unsafe extern "C" fn rb_meta_subbuf_idx(meta: *mut ring_buffer_cpu_meta, subbuf:
     (cpu_buffer.commit_page ==
     cpu_buffer.reader_page))) {
     local_inc(&cpu_buffer.commit_overrun);
-    goto out_reset;
+// goto;
     }
     }
     }
     rb_tail_page_update(cpu_buffer, tail_page, next_page);
-    out_again:
+// label;
     rb_reset_tail(cpu_buffer, tail, info);
 // Commit what we have for now.
     rb_end_commit(cpu_buffer);
@@ -3512,20 +3769,20 @@ unsafe extern "C" fn rb_meta_subbuf_idx(meta: *mut ring_buffer_cpu_meta, subbuf:
     local_inc(&cpu_buffer.committing);
 // fail and let the caller try again
     return ERR_PTR(-EAGAIN);
-    out_reset:
+// label;
 // reset write
     rb_reset_tail(cpu_buffer, tail, info);
     return core::ptr::null_mut();
     }
 // Slow path
-    static struct ring_buffer_event *
-    rb_add_time_stamp(struct ring_buffer_per_cpu *cpu_buffer,
-    struct ring_buffer_event *event, u64 delta, bool abs)
-    {
-    if (abs)
+#[no_mangle]
+pub unsafe extern "C" fn rb_add_time_stamp(cpu_buffer: *mut ring_buffer_per_cpu, event: *mut ring_buffer_event, delta: u64, abs: bool) -> *mut c_void {
+    if (abs) {
     event.type_len = RINGBUF_TYPE_TIME_STAMP;
-    else
+    }
+    else {
     event.type_len = RINGBUF_TYPE_TIME_EXTEND;
+    }
 // Not the first event on the page, or not delta?
     if (abs || rb_event_index(cpu_buffer, event)) {
     event.time_delta = delta & TS_MASK;
@@ -3537,11 +3794,9 @@ unsafe extern "C" fn rb_meta_subbuf_idx(meta: *mut ring_buffer_cpu_meta, subbuf:
     }
     return skip_time_extend(event);
     }
-    static void
-    rb_check_timestamp(struct ring_buffer_per_cpu *cpu_buffer,
-    struct rb_event_info *info)
-    {
-    u64 write_stamp;
+#[no_mangle]
+pub unsafe extern "C" fn rb_check_timestamp(cpu_buffer: *mut ring_buffer_per_cpu, info: *mut rb_event_info) {
+    let mut write_stamp = 0;
     WARN_ONCE(1, "Delta way too big! %llu ts=%llu before=%llu after=%llu write stamp=%llu\n%s",
     (unsigned long long)info.delta,
     (unsigned long long)info.ts,
@@ -3554,13 +3809,9 @@ unsafe extern "C" fn rb_meta_subbuf_idx(meta: *mut ring_buffer_cpu_meta, subbuf:
     "  echo global > /sys/kernel/tracing/trace_clock\n"
     "or add trace_clock=global to the kernel command line\n");
     }
-    static void rb_add_timestamp(struct ring_buffer_per_cpu *cpu_buffer,
-    struct ring_buffer_event **event,
-    struct rb_event_info *info,
-    u64 *delta,
-    unsigned int *length)
-    {
-    bool abs = info.add_timestamp &
+#[no_mangle]
+pub unsafe extern "C" fn rb_add_timestamp(cpu_buffer: *mut ring_buffer_per_cpu, event: *mut *mut ring_buffer_event, info: *mut rb_event_info, delta: *mut u64, length: *mut c_uint) {
+    let mut abs = info.add_timestamp &
     (RB_ADD_STAMP_FORCE | RB_ADD_STAMP_ABSOLUTE);
     if (unlikely(info.delta > (1ULL << 59))) {
 //
@@ -3578,14 +3829,16 @@ unsafe extern "C" fn rb_meta_subbuf_idx(meta: *mut ring_buffer_cpu_meta, subbuf:
 // Do not produce a call stack, but just report it.
 //
     if (!once) {
-    once++;
-    pr_warn("Ring buffer clock went backwards: %llu . %llu\n",
+    once += 1;
+    pr_warn!("Ring buffer clock went backwards: %llu . %llu\n",
     info.before, info.ts);
     }
-    } else
+    } else {
     rb_check_timestamp(cpu_buffer, info);
-    if (!abs)
+    }
+    if (!abs) {
     info.delta = 0;
+    }
     }
 // event = rb_add_time_stamp(cpu_buffer, *event, info->delta, abs);
 // length -= RB_LEN_TIME_EXTEND;
@@ -3602,40 +3855,40 @@ unsafe extern "C" fn rb_meta_subbuf_idx(meta: *mut ring_buffer_cpu_meta, subbuf:
 // and with this, we can determine what to place into the
 // data field.
 //
-    static void
-    rb_update_event(struct ring_buffer_per_cpu *cpu_buffer,
-    struct ring_buffer_event *event,
-    struct rb_event_info *info)
-    {
-    let mut length: unsigned = info.length;
-    let mut delta: u64 = info.delta;
-    let mut nest: c_uint = local_read(&cpu_buffer.committing) - 1;
-    if (!WARN_ON_ONCE(nest >= MAX_NEST))
+#[no_mangle]
+pub unsafe extern "C" fn rb_update_event(cpu_buffer: *mut ring_buffer_per_cpu, event: *mut ring_buffer_event, info: *mut rb_event_info) {
+pub static mut length: unsigned = 0;
+pub static mut delta: u64 = 0;
+pub static mut nest: c_uint = 0;
+    if (!WARN_ON_ONCE!(nest >= MAX_NEST)) {
     cpu_buffer.event_stamp[nest] = info.ts;
+    }
 //
 // If we need to add a timestamp, then we
 // add it to the start of the reserved space.
 //
-    if (unlikely(info.add_timestamp))
+    if (unlikely(info.add_timestamp)) {
     rb_add_timestamp(cpu_buffer, &event, info, &delta, &length);
+    }
     event.time_delta = delta;
     length -= RB_EVNT_HDR_SIZE;
     if (length > RB_MAX_SMALL_DATA || RB_FORCE_8BYTE_ALIGNMENT) {
     event.type_len = 0;
     event.array[0] = length;
-    } else
+    } else {
     event.type_len = DIV_ROUND_UP(length, RB_ALIGNMENT);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn rb_calculate_event_length(length: unsigned) -> unsigned {
-    static unsigned rb_calculate_event_length(unsigned length)
-    {
-    struct ring_buffer_event event; /* Used only for sizeof array */
+pub static mut event: usize = 0; /* Used only for sizeof array */
 // zero length can cause confusions
-    if (!length)
-    length++;
-    if (length > RB_MAX_SMALL_DATA || RB_FORCE_8BYTE_ALIGNMENT)
-    length += sizeof(event.array[0]);
+    if (!length) {
+    length += 1;
+    }
+    if (length > RB_MAX_SMALL_DATA || RB_FORCE_8BYTE_ALIGNMENT) {
+    length += sizeof!(event.array[0]);
+    }
     length += RB_EVNT_HDR_SIZE;
     length = ALIGN(length, RB_ARCH_ALIGNMENT);
 //
@@ -3650,17 +3903,16 @@ unsafe extern "C" fn rb_calculate_event_length(length: unsigned) -> unsigned {
 // As length is a multiple of 4, we only need to worry if it
 // is 12 (RB_LEN_TIME_EXTEND + 4).
 //
-    if (length == RB_LEN_TIME_EXTEND + RB_ALIGNMENT)
+    if (length == RB_LEN_TIME_EXTEND + RB_ALIGNMENT) {
     length += RB_ALIGNMENT;
+    }
     return length;
     }
-    static inline bool
-    rb_try_to_discard(struct ring_buffer_per_cpu *cpu_buffer,
-    struct ring_buffer_event *event)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn rb_try_to_discard(cpu_buffer: *mut ring_buffer_per_cpu, event: *mut ring_buffer_event) -> bool {
     unsigned long new_index, old_index;
-    struct buffer_page *bpage;
-    unsigned long addr;
+pub static mut bpage: *mut c_void = core::ptr::null_mut();
+    let mut addr = 0;
     new_index = rb_event_index(cpu_buffer, event);
     old_index = new_index + rb_event_ts_length(event);
     addr = rb_subbuf_start(cpu_buffer.buffer, (unsigned long)event);
@@ -3669,10 +3921,9 @@ unsafe extern "C" fn rb_calculate_event_length(length: unsigned) -> unsigned {
 // Make sure the tail_page is still the same and
 // the next write location is the end of this event
 //
-    if (bpage.page == (void *)addr && rb_page_write(bpage) == old_index) {
-    unsigned long write_mask =
-    local_read(&bpage.write) & ~RB_WRITE_MASK;
-    let mut event_length: c_ulong = rb_event_length(event);
+    if (bpage.page == addr && rb_page_write(bpage) == old_index) {
+    let mut write_mask = local_read(&bpage.write) & ~RB_WRITE_MASK;
+pub static mut event_length: c_ulong = 0;
 //
 // For the before_stamp to be different than the write_stamp
 // to make sure that the next event adds an absolute
@@ -3711,15 +3962,13 @@ unsafe extern "C" fn rb_calculate_event_length(length: unsigned) -> unsigned {
     }
 #[no_mangle]
 unsafe extern "C" fn rb_start_commit(cpu_buffer: *mut ring_buffer_per_cpu) {
-    static void rb_start_commit(struct ring_buffer_per_cpu *cpu_buffer)
-    {
     local_inc(&cpu_buffer.committing);
     local_inc(&cpu_buffer.commits);
     }
     static __always_inline void
-    rb_set_commit_to_write(struct ring_buffer_per_cpu *cpu_buffer)
+    rb_set_commit_to_write(ring_buffer_per_cpu *cpu_buffer)
     {
-    unsigned long max_count;
+    let mut max_count = 0;
 //
 // We only race with interrupts and NMIs on this CPU.
 // If we own the commit event, then we can commit
@@ -3728,14 +3977,16 @@ unsafe extern "C" fn rb_start_commit(cpu_buffer: *mut ring_buffer_per_cpu) {
 // back to us). This allows us to do a simple loop to
 // assign the commit to the tail.
 //
-    again:
+// label;
     max_count = cpu_buffer.nr_pages * 100;
     while (cpu_buffer.commit_page != READ_ONCE(cpu_buffer.tail_page)) {
-    if (RB_WARN_ON(cpu_buffer, !(--max_count)))
+    if (RB_WARN_ON(cpu_buffer, !(--max_count))) {
     return;
+    }
     if (RB_WARN_ON(cpu_buffer,
-    rb_is_reader_page(cpu_buffer.tail_page)))
+    rb_is_reader_page(cpu_buffer.tail_page))) {
     return;
+    }
 //
 // No need for a memory barrier here, as the update
 // of the tail_page did it for this page.
@@ -3744,7 +3995,7 @@ unsafe extern "C" fn rb_start_commit(cpu_buffer: *mut ring_buffer_per_cpu) {
     rb_page_write(cpu_buffer.commit_page));
     rb_inc_page(&cpu_buffer.commit_page);
     if (cpu_buffer.ring_meta) {
-    struct ring_buffer_cpu_meta *meta = cpu_buffer.ring_meta;
+    let mut meta = cpu_buffer.ring_meta;
     meta.commit_buffer = (unsigned long)cpu_buffer.commit_page.page;
     }
 // add barrier to keep gcc from optimizing too much
@@ -3767,23 +4018,24 @@ unsafe extern "C" fn rb_start_commit(cpu_buffer: *mut ring_buffer_per_cpu) {
 // and pushed the tail page forward, we will be left with
 // a dangling commit that will never go forward.
 //
-    if (unlikely(cpu_buffer.commit_page != READ_ONCE(cpu_buffer.tail_page)))
-    goto again;
+    if (unlikely(cpu_buffer.commit_page != READ_ONCE(cpu_buffer.tail_page))) {
+// goto;
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn rb_end_commit(cpu_buffer: *mut ring_buffer_per_cpu) -> __always_inline void {
-    static __always_inline void rb_end_commit(struct ring_buffer_per_cpu *cpu_buffer)
-    {
-    unsigned long commits;
+    let mut commits = 0;
     if (RB_WARN_ON(cpu_buffer,
-    !local_read(&cpu_buffer.committing)))
+    !local_read(&cpu_buffer.committing))) {
     return;
-    again:
+    }
+// label;
     commits = local_read(&cpu_buffer.commits);
 // synchronize with interrupts
     barrier();
-    if (local_read(&cpu_buffer.committing) == 1)
+    if (local_read(&cpu_buffer.committing) == 1) {
     rb_set_commit_to_write(cpu_buffer);
+    }
     local_dec(&cpu_buffer.committing);
 // synchronize with interrupts
     barrier();
@@ -3795,36 +4047,34 @@ unsafe extern "C" fn rb_end_commit(cpu_buffer: *mut ring_buffer_per_cpu) -> __al
     if (unlikely(local_read(&cpu_buffer.commits) != commits) &&
     !local_read(&cpu_buffer.committing)) {
     local_inc(&cpu_buffer.committing);
-    goto again;
+// goto;
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn rb_event_discard(event: *mut ring_buffer_event) {
-    static inline void rb_event_discard(struct ring_buffer_event *event)
-    {
-    if (extended_time(event))
+    if (extended_time(event)) {
     event = skip_time_extend(event);
+    }
 // array[0] holds the actual length for the discarded event
     event.array[0] = rb_event_data_length(event) - RB_EVNT_HDR_SIZE;
     event.type_len = RINGBUF_TYPE_PADDING;
 // time delta must be non zero
-    if (!event.time_delta)
+    if (!event.time_delta) {
     event.time_delta = 1;
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn rb_commit(cpu_buffer: *mut ring_buffer_per_cpu) {
-    static void rb_commit(struct ring_buffer_per_cpu *cpu_buffer)
-    {
     local_inc(&cpu_buffer.entries);
     rb_end_commit(cpu_buffer);
     }
-    static bool
-    rb_irq_work_queue(struct rb_irq_work *irq_work)
-    {
-    int cpu;
+#[no_mangle]
+pub unsafe extern "C" fn rb_irq_work_queue(irq_work: *mut rb_irq_work) -> bool {
+    let mut cpu = 0;
 // irq_work_queue_on() is not NMI-safe
-    if (unlikely(in_nmi()))
+    if (unlikely(in_nmi())) {
     return irq_work_queue(&irq_work.work);
+    }
 //
 // If CPU isolation is not active, cpu is always the current
 // CPU, and the following is equivallent to irq_work_queue().
@@ -3833,7 +4083,7 @@ unsafe extern "C" fn rb_commit(cpu_buffer: *mut ring_buffer_per_cpu) {
     return irq_work_queue_on(&irq_work.work, cpu);
     }
     static __always_inline void
-    rb_wakeups(struct trace_buffer *buffer, struct ring_buffer_per_cpu *cpu_buffer)
+    rb_wakeups(trace_buffer *buffer, ring_buffer_per_cpu *cpu_buffer)
     {
     if (buffer.irq_work.waiters_pending) {
     buffer.irq_work.waiters_pending = false;
@@ -3845,15 +4095,19 @@ unsafe extern "C" fn rb_commit(cpu_buffer: *mut ring_buffer_per_cpu) {
 // irq_work_queue() supplies it's own memory barriers
     rb_irq_work_queue(&cpu_buffer.irq_work);
     }
-    if (cpu_buffer.last_pages_touch == local_read(&cpu_buffer.pages_touched))
+    if (cpu_buffer.last_pages_touch == local_read(&cpu_buffer.pages_touched)) {
     return;
-    if (cpu_buffer.reader_page == cpu_buffer.commit_page)
+    }
+    if (cpu_buffer.reader_page == cpu_buffer.commit_page) {
     return;
-    if (!cpu_buffer.irq_work.full_waiters_pending)
+    }
+    if (!cpu_buffer.irq_work.full_waiters_pending) {
     return;
+    }
     cpu_buffer.last_pages_touch = local_read(&cpu_buffer.pages_touched);
-    if (!full_hit(buffer, cpu_buffer.cpu, cpu_buffer.shortest_full))
+    if (!full_hit(buffer, cpu_buffer.cpu, cpu_buffer.shortest_full)) {
     return;
+    }
     cpu_buffer.irq_work.wakeup_full = true;
     cpu_buffer.irq_work.full_waiters_pending = false;
 // irq_work_queue() supplies it's own memory barriers
@@ -3924,10 +4178,10 @@ unsafe extern "C" fn rb_commit(cpu_buffer: *mut ring_buffer_per_cpu) {
 // Note: The TRANSITION bit only handles a single transition between context.
 //
     static __always_inline bool
-    trace_recursive_lock(struct ring_buffer_per_cpu *cpu_buffer)
+    trace_recursive_lock(ring_buffer_per_cpu *cpu_buffer)
     {
-    let mut val: c_uint = cpu_buffer.current_context;
-    let mut bit: c_int = interrupt_context_level();
+pub static mut val: c_uint = 0;
+pub static mut bit: c_int = 0;
     bit = RB_CTX_NORMAL - bit;
     if (unlikely(val & (1 << (bit + cpu_buffer.nest)))) {
 //
@@ -3946,7 +4200,7 @@ unsafe extern "C" fn rb_commit(cpu_buffer: *mut ring_buffer_per_cpu) {
     return false;
     }
     static __always_inline void
-    trace_recursive_unlock(struct ring_buffer_per_cpu *cpu_buffer)
+    trace_recursive_unlock(ring_buffer_per_cpu *cpu_buffer)
     {
     cpu_buffer.current_context &=
     cpu_buffer.current_context - (1 << cpu_buffer.nest);
@@ -3968,10 +4222,8 @@ pub const NESTED_BITS: c_int = 5;
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_nest_start(buffer: *mut trace_buffer) {
-    void ring_buffer_nest_start(struct trace_buffer *buffer)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    int cpu;
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
 // Enabled by ring_buffer_nest_end()
     preempt_disable_notrace();
     cpu = raw_smp_processor_id();
@@ -3988,10 +4240,8 @@ pub unsafe extern "C" fn ring_buffer_nest_start(buffer: *mut trace_buffer) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_nest_end(buffer: *mut trace_buffer) {
-    void ring_buffer_nest_end(struct trace_buffer *buffer)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    int cpu;
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
 // disabled by ring_buffer_nest_start()
     cpu = raw_smp_processor_id();
     cpu_buffer = buffer.buffers[cpu];
@@ -4009,10 +4259,8 @@ pub unsafe extern "C" fn ring_buffer_nest_end(buffer: *mut trace_buffer) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_unlock_commit(buffer: *mut trace_buffer) -> c_int {
-    int ring_buffer_unlock_commit(struct trace_buffer *buffer)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    let mut cpu: c_int = raw_smp_processor_id();
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+pub static mut cpu: c_int = 0;
     cpu_buffer = buffer.buffers[cpu];
     rb_commit(cpu_buffer);
     rb_wakeups(buffer, cpu_buffer);
@@ -4038,114 +4286,125 @@ pub unsafe extern "C" fn ring_buffer_unlock_commit(buffer: *mut trace_buffer) ->
     return type[bits];
     }
 // Assume this is a trace event
-    static const char *show_flags(struct ring_buffer_event *event)
+    static const char *show_flags(ring_buffer_event *event)
     {
-    struct trace_entry *entry;
-    let mut bits: c_int = 0;
-    if (rb_event_data_length(event) - RB_EVNT_HDR_SIZE < sizeof(*entry))
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut bits: c_int = 0;
+    if (rb_event_data_length(event) - RB_EVNT_HDR_SIZE < sizeof!(*entry)) {
     return "X";
+    }
     entry = ring_buffer_event_data(event);
-    if (entry.flags & TRACE_FLAG_SOFTIRQ)
+    if (entry.flags & TRACE_FLAG_SOFTIRQ) {
     bits |= 1;
-    if (entry.flags & TRACE_FLAG_HARDIRQ)
+    }
+    if (entry.flags & TRACE_FLAG_HARDIRQ) {
     bits |= 2;
-    if (entry.flags & TRACE_FLAG_NMI)
+    }
+    if (entry.flags & TRACE_FLAG_NMI) {
     bits |= 4;
+    }
     return show_irq_str(bits);
     }
-    static const char *show_irq(struct ring_buffer_event *event)
+    static const char *show_irq(ring_buffer_event *event)
     {
-    struct trace_entry *entry;
-    if (rb_event_data_length(event) - RB_EVNT_HDR_SIZE < sizeof(*entry))
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+    if (rb_event_data_length(event) - RB_EVNT_HDR_SIZE < sizeof!(*entry)) {
     return "";
+    }
     entry = ring_buffer_event_data(event);
-    if (entry.flags & TRACE_FLAG_IRQS_OFF)
+    if (entry.flags & TRACE_FLAG_IRQS_OFF) {
     return "d";
+    }
     return "";
     }
     static const char *show_interrupt_level(void)
     {
-    let mut pc: c_ulong = preempt_count();
-    let mut level: c_uchar = 0;
-    if (pc & SOFTIRQ_OFFSET)
+pub static mut pc: c_ulong = 0;
+pub static mut level: c_uchar = 0;
+    if (pc & SOFTIRQ_OFFSET) {
     level |= 1;
-    if (pc & HARDIRQ_MASK)
+    }
+    if (pc & HARDIRQ_MASK) {
     level |= 2;
-    if (pc & NMI_MASK)
+    }
+    if (pc & NMI_MASK) {
     level |= 4;
+    }
     return show_irq_str(level);
     }
-    static void dump_buffer_page(struct buffer_data_page *dpage,
-    struct rb_event_info *info,
-    unsigned long tail)
-    {
-    struct ring_buffer_event *event;
+#[no_mangle]
+pub unsafe extern "C" fn dump_buffer_page(dpage: *mut buffer_data_page, info: *mut rb_event_info, tail: c_ulong) {
+pub static mut event: *mut c_void = core::ptr::null_mut();
     u64 ts, delta;
-    int e;
+    let mut e = 0;
     ts = dpage.time_stamp;
-    pr_warn("  [%lld] PAGE TIME STAMP\n", ts);
+    pr_warn!("  [%lld] PAGE TIME STAMP\n", ts);
     for (e = 0; e < tail; e += rb_event_length(event)) {
-    event = (struct ring_buffer_event *)(dpage.data + e);
-    switch (event.type_len) {
-    case RINGBUF_TYPE_TIME_EXTEND:
+    event = (dpage.data + e);
+    match (event.type_len) {
+    RINGBUF_TYPE_TIME_EXTEND => {
     delta = rb_event_time_stamp(event);
     ts += delta;
-    pr_warn(" 0x%x: [%lld] delta:%lld TIME EXTEND\n",
+    pr_warn!(" 0x%x: [%lld] delta:%lld TIME EXTEND\n",
     e, ts, delta);
-    break;
-    case RINGBUF_TYPE_TIME_STAMP:
+    // break;
+    }
+    RINGBUF_TYPE_TIME_STAMP => {
     delta = rb_event_time_stamp(event);
     ts = rb_fix_abs_ts(delta, ts);
-    pr_warn(" 0x%x:  [%lld] absolute:%lld TIME STAMP\n",
+    pr_warn!(" 0x%x:  [%lld] absolute:%lld TIME STAMP\n",
     e, ts, delta);
-    break;
-    case RINGBUF_TYPE_PADDING:
+    // break;
+    }
+    RINGBUF_TYPE_PADDING => {
     ts += event.time_delta;
-    pr_warn(" 0x%x:  [%lld] delta:%d PADDING\n",
+    pr_warn!(" 0x%x:  [%lld] delta:%d PADDING\n",
     e, ts, event.time_delta);
-    break;
-    case RINGBUF_TYPE_DATA:
+    // break;
+    }
+    RINGBUF_TYPE_DATA => {
     ts += event.time_delta;
-    pr_warn(" 0x%x:  [%lld] delta:%d %s%s\n",
+    pr_warn!(" 0x%x:  [%lld] delta:%d %s%s\n",
     e, ts, event.time_delta,
     show_flags(event), show_irq(event));
-    break;
-    default:
-    break;
+    // break;
+    }
+    _ => {
+    // break;
     }
     }
-    pr_warn("expected end:0x%lx last event actually ended at:0x%x\n", tail, e);
     }
-    static DEFINE_PER_CPU(atomic_t, checking);
+    pr_warn!("expected end:0x%lx last event actually ended at:0x%x\n", tail, e);
+    }
+pub static mut atomic_t: usize = 0;
     static atomic_t ts_dump;
 
-    do {								\
-// If another report is happening, ignore this one */	\
-    if (atomic_inc_return(&ts_dump) != 1) {			\
-    atomic_dec(&ts_dump);				\
-    goto out;					\
-    }							\
-    atomic_inc(&cpu_buffer.record_disabled);		\
-    pr_warn(fmt, ##__VA_ARGS__);				\
-    dump_buffer_page(dpage, info, tail);			\
-    atomic_dec(&ts_dump);					\
-// There's some cases in boot up that this can happen */ \
-    if (WARN_ON_ONCE(system_state != SYSTEM_BOOTING))	\
-// Do not re-enable checking */			\
-    return;						\
+    do {								
+// If another report is happening, ignore this one */	
+    if (atomic_inc_return(&ts_dump) != 1) {			
+    atomic_dec(&ts_dump);				
+// goto;					
+    }							
+    atomic_inc(&cpu_buffer.record_disabled);		
+    pr_warn!(fmt, ##__VA_ARGS__);				
+    dump_buffer_page(dpage, info, tail);			
+    atomic_dec(&ts_dump);					
+// There's some cases in boot up that this can happen */ 
+    if (WARN_ON_ONCE!(system_state != SYSTEM_BOOTING))	 {
+// Do not re-enable checking */			
+    return;						
+    }
     } while (0)
 //
 // Check if the current event time stamp matches the deltas on
 // the buffer page.
 //
-    static void check_buffer(struct ring_buffer_per_cpu *cpu_buffer,
-    struct rb_event_info *info,
-    unsigned long tail)
-    {
-    struct buffer_data_page *dpage;
+#[no_mangle]
+pub unsafe extern "C" fn check_buffer(cpu_buffer: *mut ring_buffer_per_cpu, info: *mut rb_event_info, tail: c_ulong) {
+pub static mut dpage: *mut c_void = core::ptr::null_mut();
     u64 ts, delta;
-    let mut full: bool = false;
-    int ret;
+pub static mut full: bool = false;
+    let mut ret = 0;
     dpage = info.tail_page.page;
     if (tail == CHECK_FULL_PAGE) {
     full = true;
@@ -4159,20 +4418,22 @@ pub unsafe extern "C" fn ring_buffer_unlock_commit(buffer: *mut trace_buffer) ->
 // Do not check the first event (skip possible extends too).
 // Also do not check if previous events have not been committed.
 //
-    if (tail <= 8 || tail > rb_data_page_commit(dpage))
+    if (tail <= 8 || tail > rb_data_page_commit(dpage)) {
     return;
+    }
 //
 // If this interrupted another event,
 //
-    if (atomic_inc_return(this_cpu_ptr(&checking)) != 1)
-    goto out;
+    if (atomic_inc_return(this_cpu_ptr(&checking)) != 1) {
+// goto;
+    }
     ret = rb_read_data_buffer(dpage, tail, cpu_buffer.cpu, &ts, &delta);
     if (ret < 0) {
     if (delta < ts) {
     buffer_warn_return("[CPU: %d]ABSOLUTE TIME WENT BACKWARDS: last ts: %lld absolute ts: %lld clock:%pS\n",
     cpu_buffer.cpu, ts, delta,
     cpu_buffer.buffer.clock);
-    goto out;
+// goto;
     }
     }
     if ((full && ts > info.ts) ||
@@ -4184,22 +4445,20 @@ pub unsafe extern "C" fn ring_buffer_unlock_commit(buffer: *mut trace_buffer) ->
     full ? " (full)" : "", show_interrupt_level(),
     cpu_buffer.buffer.clock);
     }
-    out:
+// label;
     atomic_dec(this_cpu_ptr(&checking));
     }
 
-    static inline void check_buffer(struct ring_buffer_per_cpu *cpu_buffer,
-    struct rb_event_info *info,
-    unsigned long tail)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: check_buffer
+pub unsafe extern "C" fn check_buffer_dup(cpu_buffer: *mut ring_buffer_per_cpu, info: *mut rb_event_info, tail: c_ulong) {
     }
 
-    static struct ring_buffer_event *
-    __rb_reserve_next(struct ring_buffer_per_cpu *cpu_buffer,
-    struct rb_event_info *info)
-    {
-    struct ring_buffer_event *event;
-    struct buffer_page *tail_page;
+#[no_mangle]
+pub unsafe extern "C" fn __rb_reserve_next(cpu_buffer: *mut ring_buffer_per_cpu, info: *mut rb_event_info) -> *mut c_void {
+pub static mut event: *mut c_void = core::ptr::null_mut();
+pub static mut tail_page: *mut c_void = core::ptr::null_mut();
     unsigned long tail, write, w;
 // Don't let the compiler play games with cpu_buffer->tail_page
     tail_page = info.tail_page = READ_ONCE(cpu_buffer.tail_page);
@@ -4251,15 +4510,17 @@ pub unsafe extern "C" fn ring_buffer_unlock_commit(buffer: *mut trace_buffer) ->
 // to use an absolute timestamp.
 //
     if (likely(!(info.add_timestamp &
-    (RB_ADD_STAMP_FORCE | RB_ADD_STAMP_ABSOLUTE))))
+    (RB_ADD_STAMP_FORCE | RB_ADD_STAMP_ABSOLUTE)))) {
 // This did not interrupt any time update
     info.delta = info.ts - info.after;
-    else
+    }
+    else {
 // Just use full timestamp for interrupting event
     info.delta = info.ts;
+    }
     check_buffer(cpu_buffer, info, tail);
     } else {
-    u64 ts;
+    let mut ts = 0;
 // SLOW PATH - Interrupted between A and C
 // Save the old before_stamp
     rb_time_read(&cpu_buffer.before_stamp, &info.before);
@@ -4301,8 +4562,9 @@ pub unsafe extern "C" fn ring_buffer_unlock_commit(buffer: *mut trace_buffer) ->
 // timestamp as the page itself.
 //
     if (unlikely(!tail && !(info.add_timestamp &
-    (RB_ADD_STAMP_FORCE | RB_ADD_STAMP_ABSOLUTE))))
+    (RB_ADD_STAMP_FORCE | RB_ADD_STAMP_ABSOLUTE)))) {
     info.delta = 0;
+    }
 // We reserved something on the buffer
     event = __rb_page_index(tail_page, tail);
     rb_update_event(cpu_buffer, event, info);
@@ -4311,28 +4573,28 @@ pub unsafe extern "C" fn ring_buffer_unlock_commit(buffer: *mut trace_buffer) ->
 // If this is the first commit on the page, then update
 // its timestamp.
 //
-    if (unlikely(!tail))
+    if (unlikely(!tail)) {
     tail_page.page.time_stamp = info.ts;
+    }
 // account for these added bytes
     local_add(info.length, &cpu_buffer.entries_bytes);
     return event;
     }
     static __always_inline struct ring_buffer_event *
-    rb_reserve_next_event(struct trace_buffer *buffer,
-    struct ring_buffer_per_cpu *cpu_buffer,
+    rb_reserve_next_event(trace_buffer *buffer, ring_buffer_per_cpu *cpu_buffer,
     unsigned long length)
     {
-    struct ring_buffer_event *event;
-    struct rb_event_info info;
-    let mut nr_loops: c_int = 0;
-    int add_ts_default;
+pub static mut event: *mut c_void = core::ptr::null_mut();
+pub static mut info: usize = 0;
+pub static mut nr_loops: c_int = 0;
+    let mut add_ts_default = 0;
 //
 // ring buffer does cmpxchg as well as atomic64 operations
 // (which some archs use locking for atomic64), make sure this
 // is safe in NMI context
 //
-    if ((!IS_ENABLED(CONFIG_ARCH_HAVE_NMI_SAFE_CMPXCHG) ||
-    IS_ENABLED(CONFIG_GENERIC_ATOMIC64)) &&
+    if ((!IS_ENABLED!(CONFIG_ARCH_HAVE_NMI_SAFE_CMPXCHG) ||
+    IS_ENABLED!(CONFIG_GENERIC_ATOMIC64)) &&
     (unlikely(in_nmi()))) {
     return core::ptr::null_mut();
     }
@@ -4356,12 +4618,13 @@ pub unsafe extern "C" fn ring_buffer_unlock_commit(buffer: *mut trace_buffer) ->
     if (ring_buffer_time_stamp_abs(cpu_buffer.buffer)) {
     add_ts_default = RB_ADD_STAMP_ABSOLUTE;
     info.length += RB_LEN_TIME_EXTEND;
-    if (info.length > rb_subbuf_max_data_size(cpu_buffer.buffer))
-    goto out_fail;
+    if (info.length > rb_subbuf_max_data_size(cpu_buffer.buffer)) {
+// goto;
+    }
     } else {
     add_ts_default = RB_ADD_STAMP_NONE;
     }
-    again:
+// label;
     info.add_timestamp = add_ts_default;
     info.delta = 0;
 //
@@ -4373,17 +4636,20 @@ pub unsafe extern "C" fn ring_buffer_unlock_commit(buffer: *mut trace_buffer) ->
 // storm or we have something buggy.
 // Bail!
 //
-    if (RB_WARN_ON(cpu_buffer, ++nr_loops > 1000))
-    goto out_fail;
+    if (RB_WARN_ON(cpu_buffer, ++nr_loops > 1000)) {
+// goto;
+    }
     event = __rb_reserve_next(cpu_buffer, &info);
     if (unlikely(PTR_ERR(event) == -EAGAIN)) {
-    if (info.add_timestamp & (RB_ADD_STAMP_FORCE | RB_ADD_STAMP_EXTEND))
+    if (info.add_timestamp & (RB_ADD_STAMP_FORCE | RB_ADD_STAMP_EXTEND)) {
     info.length -= RB_LEN_TIME_EXTEND;
-    goto again;
     }
-    if (likely(event))
+// goto;
+    }
+    if (likely(event)) {
     return event;
-    out_fail:
+    }
+// label;
     rb_end_commit(cpu_buffer);
     return core::ptr::null_mut();
     }
@@ -4402,33 +4668,38 @@ pub unsafe extern "C" fn ring_buffer_unlock_commit(buffer: *mut trace_buffer) ->
 // Must be paired with ring_buffer_unlock_commit, unless NULL is returned.
 // If NULL is returned, then nothing has been allocated or locked.
 //
-    struct ring_buffer_event *
-    ring_buffer_lock_reserve(struct trace_buffer *buffer, unsigned long length)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    struct ring_buffer_event *event;
-    int cpu;
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_lock_reserve(buffer: *mut trace_buffer, length: c_ulong) -> *mut c_void {
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+pub static mut event: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
 // If we are tracing schedule, we don't want to recurse
     preempt_disable_notrace();
-    if (unlikely(atomic_read(&buffer.record_disabled)))
-    goto out;
+    if (unlikely(atomic_read(&buffer.record_disabled))) {
+// goto;
+    }
     cpu = raw_smp_processor_id();
-    if (unlikely(!cpumask_test_cpu(cpu, buffer.cpumask)))
-    goto out;
+    if (unlikely(!cpumask_test_cpu(cpu, buffer.cpumask))) {
+// goto;
+    }
     cpu_buffer = buffer.buffers[cpu];
-    if (unlikely(atomic_read(&cpu_buffer.record_disabled)))
-    goto out;
-    if (unlikely(length > rb_subbuf_max_data_size(buffer)))
-    goto out;
-    if (unlikely(trace_recursive_lock(cpu_buffer)))
-    goto out;
+    if (unlikely(atomic_read(&cpu_buffer.record_disabled))) {
+// goto;
+    }
+    if (unlikely(length > rb_subbuf_max_data_size(buffer))) {
+// goto;
+    }
+    if (unlikely(trace_recursive_lock(cpu_buffer))) {
+// goto;
+    }
     event = rb_reserve_next_event(buffer, cpu_buffer, length);
-    if (!event)
-    goto out_unlock;
+    if (!event) {
+// goto;
+    }
     return event;
-    out_unlock:
+// label;
     trace_recursive_unlock(cpu_buffer);
-    out:
+// label;
     preempt_enable_notrace();
     return core::ptr::null_mut();
     }
@@ -4439,16 +4710,14 @@ pub unsafe extern "C" fn ring_buffer_unlock_commit(buffer: *mut trace_buffer) ->
 // to the page it is on. This may only be called before the commit
 // takes place.
 //
-    static inline void
-    rb_decrement_entry(struct ring_buffer_per_cpu *cpu_buffer,
-    struct ring_buffer_event *event)
-    {
-    let mut addr: c_ulong = (unsigned long)event;
-    struct buffer_page *bpage = cpu_buffer.commit_page;
-    struct buffer_page *start;
+#[no_mangle]
+pub unsafe extern "C" fn rb_decrement_entry(cpu_buffer: *mut ring_buffer_per_cpu, event: *mut ring_buffer_event) {
+pub static mut addr: c_ulong = 0;
+    let mut bpage = cpu_buffer.commit_page;
+pub static mut start: *mut c_void = core::ptr::null_mut();
     addr = rb_subbuf_start(cpu_buffer.buffer, addr);
 // Do the likely case first
-    if (likely(bpage.page == (void *)addr)) {
+    if (likely(bpage.page == addr)) {
     local_dec(&bpage.entries);
     return;
     }
@@ -4459,7 +4728,7 @@ pub unsafe extern "C" fn ring_buffer_unlock_commit(buffer: *mut trace_buffer) ->
     rb_inc_page(&bpage);
     start = bpage;
     do {
-    if (bpage.page == (void *)addr) {
+    if (bpage.page == addr) {
     local_dec(&bpage.entries);
     return;
     }
@@ -4487,11 +4756,10 @@ pub unsafe extern "C" fn ring_buffer_unlock_commit(buffer: *mut trace_buffer) ->
 // If this function is called, do not call ring_buffer_unlock_commit on
 // the event.
 //
-    void ring_buffer_discard_commit(struct trace_buffer *buffer,
-    struct ring_buffer_event *event)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    int cpu;
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_discard_commit(buffer: *mut trace_buffer, event: *mut ring_buffer_event) {
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
 // The event is discarded regardless
     rb_event_discard(event);
     cpu = smp_processor_id();
@@ -4522,37 +4790,41 @@ pub unsafe extern "C" fn ring_buffer_unlock_commit(buffer: *mut trace_buffer) ->
 // Note, like ring_buffer_lock_reserve, the length is the length of the data
 // and not the length of the event which would hold the header.
 //
-    int ring_buffer_write(struct trace_buffer *buffer,
-    unsigned long length,
-    void *data)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    struct ring_buffer_event *event;
-    void *body;
-    let mut ret: c_int = -EBUSY;
-    int cpu;
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_write(buffer: *mut trace_buffer, length: c_ulong, data: *mut c_void) -> c_int {
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+pub static mut event: *mut c_void = core::ptr::null_mut();
+pub static mut body: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
+    let mut cpu = 0;
     guard(preempt_notrace)();
-    if (atomic_read(&buffer.record_disabled))
+    if (atomic_read(&buffer.record_disabled)) {
     return -EBUSY;
+    }
     cpu = raw_smp_processor_id();
-    if (!cpumask_test_cpu(cpu, buffer.cpumask))
+    if (!cpumask_test_cpu(cpu, buffer.cpumask)) {
     return -EBUSY;
+    }
     cpu_buffer = buffer.buffers[cpu];
-    if (atomic_read(&cpu_buffer.record_disabled))
+    if (atomic_read(&cpu_buffer.record_disabled)) {
     return -EBUSY;
-    if (length > rb_subbuf_max_data_size(buffer))
+    }
+    if (length > rb_subbuf_max_data_size(buffer)) {
     return -EBUSY;
-    if (unlikely(trace_recursive_lock(cpu_buffer)))
+    }
+    if (unlikely(trace_recursive_lock(cpu_buffer))) {
     return -EBUSY;
+    }
     event = rb_reserve_next_event(buffer, cpu_buffer, length);
-    if (!event)
-    goto out_unlock;
+    if (!event) {
+// goto;
+    }
     body = rb_event_data(event);
     memcpy(body, data, length);
     rb_commit(cpu_buffer);
     rb_wakeups(buffer, cpu_buffer);
     ret = 0;
-    out_unlock:
+// label;
     trace_recursive_unlock(cpu_buffer);
     return ret;
     }
@@ -4563,16 +4835,13 @@ pub unsafe extern "C" fn ring_buffer_unlock_commit(buffer: *mut trace_buffer) ->
 // the entries read from the ring buffer and the number of
 // entries that were overwritten.
 //
-    static inline unsigned long
-    rb_num_of_entries(struct ring_buffer_per_cpu *cpu_buffer)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn rb_num_of_entries(cpu_buffer: *mut ring_buffer_per_cpu) -> c_ulong {
     return local_read(&cpu_buffer.entries) -
     (local_read(&cpu_buffer.overrun) + cpu_buffer.read);
     }
 #[no_mangle]
 unsafe extern "C" fn rb_per_cpu_empty(cpu_buffer: *mut ring_buffer_per_cpu) -> bool {
-    static bool rb_per_cpu_empty(struct ring_buffer_per_cpu *cpu_buffer)
-    {
     return !rb_num_of_entries(cpu_buffer);
     }
 //
@@ -4586,8 +4855,6 @@ unsafe extern "C" fn rb_per_cpu_empty(cpu_buffer: *mut ring_buffer_per_cpu) -> b
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_record_disable(buffer: *mut trace_buffer) {
-    void ring_buffer_record_disable(struct trace_buffer *buffer)
-    {
     atomic_inc(&buffer.record_disabled);
     }
     EXPORT_SYMBOL_GPL(ring_buffer_record_disable);
@@ -4600,8 +4867,6 @@ pub unsafe extern "C" fn ring_buffer_record_disable(buffer: *mut trace_buffer) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_record_enable(buffer: *mut trace_buffer) {
-    void ring_buffer_record_enable(struct trace_buffer *buffer)
-    {
     atomic_dec(&buffer.record_disabled);
     }
     EXPORT_SYMBOL_GPL(ring_buffer_record_enable);
@@ -4618,10 +4883,8 @@ pub unsafe extern "C" fn ring_buffer_record_enable(buffer: *mut trace_buffer) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_record_off(buffer: *mut trace_buffer) {
-    void ring_buffer_record_off(struct trace_buffer *buffer)
-    {
-    unsigned int rd;
-    unsigned int new_rd;
+    let mut rd = 0;
+    let mut new_rd = 0;
     rd = atomic_read(&buffer.record_disabled);
     do {
     new_rd = rd | RB_BUFFER_OFF;
@@ -4641,10 +4904,8 @@ pub unsafe extern "C" fn ring_buffer_record_off(buffer: *mut trace_buffer) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_record_on(buffer: *mut trace_buffer) {
-    void ring_buffer_record_on(struct trace_buffer *buffer)
-    {
-    unsigned int rd;
-    unsigned int new_rd;
+    let mut rd = 0;
+    let mut new_rd = 0;
     rd = atomic_read(&buffer.record_disabled);
     do {
     new_rd = rd & ~RB_BUFFER_OFF;
@@ -4659,8 +4920,6 @@ pub unsafe extern "C" fn ring_buffer_record_on(buffer: *mut trace_buffer) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_record_is_on(buffer: *mut trace_buffer) -> bool {
-    bool ring_buffer_record_is_on(struct trace_buffer *buffer)
-    {
     return !atomic_read(&buffer.record_disabled);
     }
 //
@@ -4676,8 +4935,6 @@ pub unsafe extern "C" fn ring_buffer_record_is_on(buffer: *mut trace_buffer) -> 
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_record_is_set_on(buffer: *mut trace_buffer) -> bool {
-    bool ring_buffer_record_is_set_on(struct trace_buffer *buffer)
-    {
     return !(atomic_read(&buffer.record_disabled) & RB_BUFFER_OFF);
     }
 //
@@ -4690,9 +4947,7 @@ pub unsafe extern "C" fn ring_buffer_record_is_set_on(buffer: *mut trace_buffer)
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_record_is_on_cpu(buffer: *mut trace_buffer, cpu: c_int) -> bool {
-    bool ring_buffer_record_is_on_cpu(struct trace_buffer *buffer, int cpu)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
     cpu_buffer = buffer.buffers[cpu];
     return ring_buffer_record_is_set_on(buffer) &&
     !atomic_read(&cpu_buffer.record_disabled);
@@ -4709,11 +4964,10 @@ pub unsafe extern "C" fn ring_buffer_record_is_on_cpu(buffer: *mut trace_buffer,
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_record_disable_cpu(buffer: *mut trace_buffer, cpu: c_int) {
-    void ring_buffer_record_disable_cpu(struct trace_buffer *buffer, int cpu)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    if (!cpumask_test_cpu(cpu, buffer.cpumask))
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+    if (!cpumask_test_cpu(cpu, buffer.cpumask)) {
     return;
+    }
     cpu_buffer = buffer.buffers[cpu];
     atomic_inc(&cpu_buffer.record_disabled);
     }
@@ -4728,11 +4982,10 @@ pub unsafe extern "C" fn ring_buffer_record_disable_cpu(buffer: *mut trace_buffe
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_record_enable_cpu(buffer: *mut trace_buffer, cpu: c_int) {
-    void ring_buffer_record_enable_cpu(struct trace_buffer *buffer, int cpu)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    if (!cpumask_test_cpu(cpu, buffer.cpumask))
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+    if (!cpumask_test_cpu(cpu, buffer.cpumask)) {
     return;
+    }
     cpu_buffer = buffer.buffers[cpu];
     atomic_dec(&cpu_buffer.record_disabled);
     }
@@ -4744,26 +4997,28 @@ pub unsafe extern "C" fn ring_buffer_record_enable_cpu(buffer: *mut trace_buffer
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_oldest_event_ts(buffer: *mut trace_buffer, cpu: c_int) -> u64 {
-    u64 ring_buffer_oldest_event_ts(struct trace_buffer *buffer, int cpu)
-    {
-    unsigned long flags;
-    struct ring_buffer_per_cpu *cpu_buffer;
-    struct buffer_page *bpage;
-    let mut ret: u64 = 0;
-    if (!cpumask_test_cpu(cpu, buffer.cpumask))
+    let mut flags = 0;
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+pub static mut bpage: *mut c_void = core::ptr::null_mut();
+pub static mut ret: u64 = 0;
+    if (!cpumask_test_cpu(cpu, buffer.cpumask)) {
     return 0;
+    }
     cpu_buffer = buffer.buffers[cpu];
     raw_spin_lock_irqsave(&cpu_buffer.reader_lock, flags);
 //
 // if the tail is on reader_page, oldest time stamp is on the reader
 // page
 //
-    if (cpu_buffer.tail_page == cpu_buffer.reader_page)
+    if (cpu_buffer.tail_page == cpu_buffer.reader_page) {
     bpage = cpu_buffer.reader_page;
-    else
+    }
+    else {
     bpage = rb_set_head_page(cpu_buffer);
-    if (bpage)
+    }
+    if (bpage) {
     ret = bpage.page.time_stamp;
+    }
     raw_spin_unlock_irqrestore(&cpu_buffer.reader_lock, flags);
     return ret;
     }
@@ -4775,12 +5030,11 @@ pub unsafe extern "C" fn ring_buffer_oldest_event_ts(buffer: *mut trace_buffer, 
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_bytes_cpu(buffer: *mut trace_buffer, cpu: c_int) -> c_ulong {
-    unsigned long ring_buffer_bytes_cpu(struct trace_buffer *buffer, int cpu)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    unsigned long ret;
-    if (!cpumask_test_cpu(cpu, buffer.cpumask))
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (!cpumask_test_cpu(cpu, buffer.cpumask)) {
     return 0;
+    }
     cpu_buffer = buffer.buffers[cpu];
     ret = local_read(&cpu_buffer.entries_bytes) - cpu_buffer.read_bytes;
     return ret;
@@ -4793,11 +5047,10 @@ pub unsafe extern "C" fn ring_buffer_bytes_cpu(buffer: *mut trace_buffer, cpu: c
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_entries_cpu(buffer: *mut trace_buffer, cpu: c_int) -> c_ulong {
-    unsigned long ring_buffer_entries_cpu(struct trace_buffer *buffer, int cpu)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    if (!cpumask_test_cpu(cpu, buffer.cpumask))
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+    if (!cpumask_test_cpu(cpu, buffer.cpumask)) {
     return 0;
+    }
     cpu_buffer = buffer.buffers[cpu];
     return rb_num_of_entries(cpu_buffer);
     }
@@ -4810,12 +5063,11 @@ pub unsafe extern "C" fn ring_buffer_entries_cpu(buffer: *mut trace_buffer, cpu:
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_overrun_cpu(buffer: *mut trace_buffer, cpu: c_int) -> c_ulong {
-    unsigned long ring_buffer_overrun_cpu(struct trace_buffer *buffer, int cpu)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    unsigned long ret;
-    if (!cpumask_test_cpu(cpu, buffer.cpumask))
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (!cpumask_test_cpu(cpu, buffer.cpumask)) {
     return 0;
+    }
     cpu_buffer = buffer.buffers[cpu];
     ret = local_read(&cpu_buffer.overrun);
     return ret;
@@ -4828,13 +5080,13 @@ pub unsafe extern "C" fn ring_buffer_overrun_cpu(buffer: *mut trace_buffer, cpu:
 // @buffer: The ring buffer
 // @cpu: The per CPU buffer to get the number of overruns from
 //
-    unsigned long
-    ring_buffer_commit_overrun_cpu(struct trace_buffer *buffer, int cpu)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    unsigned long ret;
-    if (!cpumask_test_cpu(cpu, buffer.cpumask))
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_commit_overrun_cpu(buffer: *mut trace_buffer, cpu: c_int) -> c_ulong {
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (!cpumask_test_cpu(cpu, buffer.cpumask)) {
     return 0;
+    }
     cpu_buffer = buffer.buffers[cpu];
     ret = local_read(&cpu_buffer.commit_overrun);
     return ret;
@@ -4846,13 +5098,13 @@ pub unsafe extern "C" fn ring_buffer_overrun_cpu(buffer: *mut trace_buffer, cpu:
 // @buffer: The ring buffer
 // @cpu: The per CPU buffer to get the number of overruns from
 //
-    unsigned long
-    ring_buffer_dropped_events_cpu(struct trace_buffer *buffer, int cpu)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    unsigned long ret;
-    if (!cpumask_test_cpu(cpu, buffer.cpumask))
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_dropped_events_cpu(buffer: *mut trace_buffer, cpu: c_int) -> c_ulong {
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (!cpumask_test_cpu(cpu, buffer.cpumask)) {
     return 0;
+    }
     cpu_buffer = buffer.buffers[cpu];
     ret = local_read(&cpu_buffer.dropped_events);
     return ret;
@@ -4863,12 +5115,12 @@ pub unsafe extern "C" fn ring_buffer_overrun_cpu(buffer: *mut trace_buffer, cpu:
 // @buffer: The ring buffer
 // @cpu: The per CPU buffer to get the number of events read
 //
-    unsigned long
-    ring_buffer_read_events_cpu(struct trace_buffer *buffer, int cpu)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    if (!cpumask_test_cpu(cpu, buffer.cpumask))
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_read_events_cpu(buffer: *mut trace_buffer, cpu: c_int) -> c_ulong {
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+    if (!cpumask_test_cpu(cpu, buffer.cpumask)) {
     return 0;
+    }
     cpu_buffer = buffer.buffers[cpu];
     return cpu_buffer.read;
     }
@@ -4882,11 +5134,9 @@ pub unsafe extern "C" fn ring_buffer_overrun_cpu(buffer: *mut trace_buffer, cpu:
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_entries(buffer: *mut trace_buffer) -> c_ulong {
-    unsigned long ring_buffer_entries(struct trace_buffer *buffer)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    let mut entries: c_ulong = 0;
-    int cpu;
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+pub static mut entries: c_ulong = 0;
+    let mut cpu = 0;
 // if you care about this being correct, lock the buffer
     for_each_buffer_cpu(buffer, cpu) {
     cpu_buffer = buffer.buffers[cpu];
@@ -4904,11 +5154,9 @@ pub unsafe extern "C" fn ring_buffer_entries(buffer: *mut trace_buffer) -> c_ulo
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_overruns(buffer: *mut trace_buffer) -> c_ulong {
-    unsigned long ring_buffer_overruns(struct trace_buffer *buffer)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    let mut overruns: c_ulong = 0;
-    int cpu;
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+pub static mut overruns: c_ulong = 0;
+    let mut cpu = 0;
 // if you care about this being correct, lock the buffer
     for_each_buffer_cpu(buffer, cpu) {
     cpu_buffer = buffer.buffers[cpu];
@@ -4919,8 +5167,6 @@ pub unsafe extern "C" fn ring_buffer_overruns(buffer: *mut trace_buffer) -> c_ul
     EXPORT_SYMBOL_GPL(ring_buffer_overruns);
 #[no_mangle]
 unsafe extern "C" fn rb_read_remote_meta_page(cpu_buffer: *mut ring_buffer_per_cpu) -> bool {
-    static bool rb_read_remote_meta_page(struct ring_buffer_per_cpu *cpu_buffer)
-    {
     local_set(&cpu_buffer.entries, READ_ONCE(cpu_buffer.meta_page.entries));
     local_set(&cpu_buffer.overrun, READ_ONCE(cpu_buffer.meta_page.overrun));
     local_set(&cpu_buffer.pages_touched, READ_ONCE(cpu_buffer.meta_page.pages_touched));
@@ -4929,10 +5175,9 @@ unsafe extern "C" fn rb_read_remote_meta_page(cpu_buffer: *mut ring_buffer_per_c
     }
 #[no_mangle]
 unsafe extern "C" fn rb_update_remote_head(cpu_buffer: *mut ring_buffer_per_cpu) {
-    static void rb_update_remote_head(struct ring_buffer_per_cpu *cpu_buffer)
-    {
-    struct buffer_page *next, *orig;
-    let mut retry: c_int = 3;
+    let mut next = core::ptr::null_mut();
+    let mut orig = core::ptr::null_mut();
+pub static mut retry: c_int = 3;
     orig = next = cpu_buffer.head_page;
     rb_inc_page(&next);
 // Run after the writer
@@ -4942,8 +5187,9 @@ unsafe extern "C" fn rb_update_remote_head(cpu_buffer: *mut ring_buffer_per_cpu)
     rb_inc_page(&cpu_buffer.head_page);
     rb_set_list_to_head(cpu_buffer.head_page.list.prev);
     if (cpu_buffer.head_page == orig) {
-    if (WARN_ON_ONCE(!(--retry)))
+    if (WARN_ON_ONCE!(!(--retry))) {
     return;
+    }
     }
     }
     orig = cpu_buffer.commit_page = cpu_buffer.head_page;
@@ -4952,16 +5198,15 @@ unsafe extern "C" fn rb_update_remote_head(cpu_buffer: *mut ring_buffer_per_cpu)
     rb_inc_page(&next);
     rb_inc_page(&cpu_buffer.commit_page);
     if (cpu_buffer.commit_page == orig) {
-    if (WARN_ON_ONCE(!(--retry)))
+    if (WARN_ON_ONCE!(!(--retry))) {
     return;
+    }
     }
     }
     }
 #[no_mangle]
 unsafe extern "C" fn rb_iter_reset(iter: *mut ring_buffer_iter) {
-    static void rb_iter_reset(struct ring_buffer_iter *iter)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer = iter.cpu_buffer;
+    let mut cpu_buffer = iter.cpu_buffer;
     if (cpu_buffer.remote) {
     rb_read_remote_meta_page(cpu_buffer);
     rb_update_remote_head(cpu_buffer);
@@ -4991,12 +5236,11 @@ unsafe extern "C" fn rb_iter_reset(iter: *mut ring_buffer_iter) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_iter_reset(iter: *mut ring_buffer_iter) {
-    void ring_buffer_iter_reset(struct ring_buffer_iter *iter)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    unsigned long flags;
-    if (!iter)
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    if (!iter) {
     return;
+    }
     cpu_buffer = iter.cpu_buffer;
     raw_spin_lock_irqsave(&cpu_buffer.reader_lock, flags);
     rb_iter_reset(iter);
@@ -5009,16 +5253,14 @@ pub unsafe extern "C" fn ring_buffer_iter_reset(iter: *mut ring_buffer_iter) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_iter_empty(iter: *mut ring_buffer_iter) -> c_int {
-    int ring_buffer_iter_empty(struct ring_buffer_iter *iter)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    struct buffer_page *reader;
-    struct buffer_page *head_page;
-    struct buffer_page *commit_page;
-    struct buffer_page *curr_commit_page;
-    unsigned commit;
-    u64 curr_commit_ts;
-    u64 commit_ts;
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+pub static mut reader: *mut c_void = core::ptr::null_mut();
+pub static mut head_page: *mut c_void = core::ptr::null_mut();
+pub static mut commit_page: *mut c_void = core::ptr::null_mut();
+pub static mut curr_commit_page: *mut c_void = core::ptr::null_mut();
+    let mut commit: c_uint = 0;
+    let mut curr_commit_ts = 0;
+    let mut commit_ts = 0;
     cpu_buffer = iter.cpu_buffer;
     reader = cpu_buffer.reader_page;
     head_page = cpu_buffer.head_page;
@@ -5038,8 +5280,9 @@ pub unsafe extern "C" fn ring_buffer_iter_empty(iter: *mut ring_buffer_iter) -> 
     curr_commit_ts = READ_ONCE(curr_commit_page.page.time_stamp);
 // If the commit page changed, then there's more data
     if (curr_commit_page != commit_page ||
-    curr_commit_ts != commit_ts)
+    curr_commit_ts != commit_ts) {
     return 0;
+    }
 // Still racy, as it may return a false positive, but that's OK
     return ((iter.head_page == commit_page && iter.head >= commit) ||
     (iter.head_page == reader && commit_page == head_page &&
@@ -5047,64 +5290,75 @@ pub unsafe extern "C" fn ring_buffer_iter_empty(iter: *mut ring_buffer_iter) -> 
     iter.head == rb_page_size(cpu_buffer.reader_page)));
     }
     EXPORT_SYMBOL_GPL(ring_buffer_iter_empty);
-    static void
-    rb_update_read_stamp(struct ring_buffer_per_cpu *cpu_buffer,
-    struct ring_buffer_event *event)
-    {
-    u64 delta;
-    switch (event.type_len) {
-    case RINGBUF_TYPE_PADDING:
+#[no_mangle]
+pub unsafe extern "C" fn rb_update_read_stamp(cpu_buffer: *mut ring_buffer_per_cpu, event: *mut ring_buffer_event) {
+    let mut delta = 0;
+    match (event.type_len) {
+    RINGBUF_TYPE_PADDING => {
     return;
-    case RINGBUF_TYPE_TIME_EXTEND:
+    }
+    RINGBUF_TYPE_TIME_EXTEND => {
     delta = rb_event_time_stamp(event);
     cpu_buffer.read_stamp += delta;
     return;
-    case RINGBUF_TYPE_TIME_STAMP:
+    }
+    RINGBUF_TYPE_TIME_STAMP => {
     delta = rb_event_time_stamp(event);
     delta = rb_fix_abs_ts(delta, cpu_buffer.read_stamp);
     cpu_buffer.read_stamp = delta;
     return;
-    case RINGBUF_TYPE_DATA:
+    }
+    RINGBUF_TYPE_DATA => {
     cpu_buffer.read_stamp += event.time_delta;
     return;
-    default:
+    }
+    _ => {
     RB_WARN_ON(cpu_buffer, 1);
     }
     }
-    static void
-    rb_update_iter_read_stamp(struct ring_buffer_iter *iter,
-    struct ring_buffer_event *event)
-    {
-    u64 delta;
-    switch (event.type_len) {
-    case RINGBUF_TYPE_PADDING:
+    }
+#[no_mangle]
+pub unsafe extern "C" fn rb_update_iter_read_stamp(iter: *mut ring_buffer_iter, event: *mut ring_buffer_event) {
+    let mut delta = 0;
+    match (event.type_len) {
+    RINGBUF_TYPE_PADDING => {
     return;
-    case RINGBUF_TYPE_TIME_EXTEND:
+    }
+    RINGBUF_TYPE_TIME_EXTEND => {
     delta = rb_event_time_stamp(event);
     iter.read_stamp += delta;
     return;
-    case RINGBUF_TYPE_TIME_STAMP:
+    }
+    RINGBUF_TYPE_TIME_STAMP => {
     delta = rb_event_time_stamp(event);
     delta = rb_fix_abs_ts(delta, iter.read_stamp);
     iter.read_stamp = delta;
     return;
-    case RINGBUF_TYPE_DATA:
+    }
+    RINGBUF_TYPE_DATA => {
     iter.read_stamp += event.time_delta;
     return;
-    default:
+    }
+    _ => {
     RB_WARN_ON(iter.cpu_buffer, 1);
     }
     }
-    static struct buffer_page *
-    __rb_get_reader_page_from_remote(struct ring_buffer_per_cpu *cpu_buffer)
-    {
-    struct buffer_page *new_reader, *prev_reader, *prev_head, *new_head, *last;
-    if (!rb_read_remote_meta_page(cpu_buffer))
+    }
+#[no_mangle]
+pub unsafe extern "C" fn __rb_get_reader_page_from_remote(cpu_buffer: *mut ring_buffer_per_cpu) -> *mut c_void {
+    let mut new_reader = core::ptr::null_mut();
+    let mut prev_reader = core::ptr::null_mut();
+    let mut prev_head = core::ptr::null_mut();
+    let mut new_head = core::ptr::null_mut();
+    let mut last = core::ptr::null_mut();
+    if (!rb_read_remote_meta_page(cpu_buffer)) {
     return core::ptr::null_mut();
+    }
 // More to read on the reader page
     if (cpu_buffer.reader_page.read < rb_page_size(cpu_buffer.reader_page)) {
-    if (!cpu_buffer.reader_page.read)
+    if (!cpu_buffer.reader_page.read) {
     cpu_buffer.read_stamp = cpu_buffer.reader_page.page.time_stamp;
+    }
     return cpu_buffer.reader_page;
     }
     prev_reader = cpu_buffer.subbuf_ids[cpu_buffer.meta_page.reader.id];
@@ -5114,10 +5368,11 @@ pub unsafe extern "C" fn ring_buffer_iter_empty(iter: *mut ring_buffer_iter) -> 
     return core::ptr::null_mut();
     }
 // nr_pages doesn't include the reader page
-    if (WARN_ON_ONCE(cpu_buffer.meta_page.reader.id > cpu_buffer.nr_pages))
+    if (WARN_ON_ONCE!(cpu_buffer.meta_page.reader.id > cpu_buffer.nr_pages)) {
     return core::ptr::null_mut();
+    }
     new_reader = cpu_buffer.subbuf_ids[cpu_buffer.meta_page.reader.id];
-    WARN_ON_ONCE(prev_reader == new_reader);
+    WARN_ON_ONCE!(prev_reader == new_reader);
     prev_head = new_reader;  /* New reader was also the previous head */
     new_head = prev_head;
     rb_inc_page(&new_head);
@@ -5142,19 +5397,18 @@ pub unsafe extern "C" fn ring_buffer_iter_empty(iter: *mut ring_buffer_iter) -> 
     cpu_buffer.lost_events = cpu_buffer.meta_page.reader.lost_events;
     return rb_page_size(cpu_buffer.reader_page) ? cpu_buffer.reader_page : core::ptr::null_mut();
     }
-    static struct buffer_page *
-    __rb_get_reader_page(struct ring_buffer_per_cpu *cpu_buffer)
-    {
-    let mut max_loops: c_int = cpu_buffer.ring_meta ? cpu_buffer.nr_pages : 3;
-    struct buffer_page *reader = core::ptr::null_mut();
-    unsigned long overwrite;
-    unsigned long flags;
-    let mut missed_events: c_int = 0;
-    let mut nr_loops: c_int = 0;
-    bool ret;
+#[no_mangle]
+pub unsafe extern "C" fn __rb_get_reader_page(cpu_buffer: *mut ring_buffer_per_cpu) -> *mut c_void {
+pub static mut max_loops: c_int = 0;
+    let mut reader = core::ptr::null_mut();
+    let mut overwrite = 0;
+    let mut flags = 0;
+pub static mut missed_events: c_int = 0;
+pub static mut nr_loops: c_int = 0;
+    let mut ret = 0;
     local_irq_save(flags);
     arch_spin_lock(&cpu_buffer.lock);
-    again:
+// label;
 //
 // This should normally only loop twice. But because the
 // start of the reader inserts an empty page, it causes a
@@ -5166,23 +5420,27 @@ pub unsafe extern "C" fn ring_buffer_iter_empty(iter: *mut ring_buffer_iter) -> 
 //
     if (RB_WARN_ON(cpu_buffer, ++nr_loops > max_loops)) {
     reader = core::ptr::null_mut();
-    goto out;
+// goto;
     }
     reader = cpu_buffer.reader_page;
 // If there's more to read, return this page
-    if (cpu_buffer.reader_page.read < rb_page_size(reader))
-    goto out;
+    if (cpu_buffer.reader_page.read < rb_page_size(reader)) {
+// goto;
+    }
 // Never should we have an index greater than the size
     if (RB_WARN_ON(cpu_buffer,
-    cpu_buffer.reader_page.read > rb_page_size(reader)))
-    goto out;
+    cpu_buffer.reader_page.read > rb_page_size(reader))) {
+// goto;
+    }
 // check if we caught up to the tail
     reader = core::ptr::null_mut();
-    if (cpu_buffer.commit_page == cpu_buffer.reader_page)
-    goto out;
+    if (cpu_buffer.commit_page == cpu_buffer.reader_page) {
+// goto;
+    }
 // Don't bother swapping if the ring buffer is empty
-    if (rb_num_of_entries(cpu_buffer) == 0)
-    goto out;
+    if (rb_num_of_entries(cpu_buffer) == 0) {
+// goto;
+    }
 //
 // Reset the reader page to size zero.
 //
@@ -5190,13 +5448,14 @@ pub unsafe extern "C" fn ring_buffer_iter_empty(iter: *mut ring_buffer_iter) -> 
     local_set(&cpu_buffer.reader_page.entries, 0);
     rb_init_data_page(cpu_buffer.reader_page.page);
     cpu_buffer.reader_page.real_end = 0;
-    spin:
+// label;
 //
 // Splice the empty reader page into the list around the head.
 //
     reader = rb_set_head_page(cpu_buffer);
-    if (!reader)
-    goto out;
+    if (!reader) {
+// goto;
+    }
     cpu_buffer.reader_page.list.next = rb_list_head(reader.list.next);
     cpu_buffer.reader_page.list.prev = reader.list.prev;
 //
@@ -5232,12 +5491,15 @@ pub unsafe extern "C" fn ring_buffer_iter_empty(iter: *mut ring_buffer_iter) -> 
 //
 // If we did not convert it, then we must try again.
 //
-    if (!ret)
-    goto spin;
-    if (rb_page_commit(reader) & RB_MISSED_EVENTS)
+    if (!ret) {
+// goto;
+    }
+    if (rb_page_commit(reader) & RB_MISSED_EVENTS) {
     missed_events = -1;
-    if (cpu_buffer.ring_meta)
+    }
+    if (cpu_buffer.ring_meta) {
     rb_update_meta_reader(cpu_buffer, reader);
+    }
 //
 // Yay! We succeeded in replacing the page.
 //
@@ -5245,7 +5507,7 @@ pub unsafe extern "C" fn ring_buffer_iter_empty(iter: *mut ring_buffer_iter) -> 
 //
     rb_list_head(reader.list.next).prev = &cpu_buffer.reader_page.list;
     rb_inc_page(&cpu_buffer.head_page);
-    cpu_buffer.cnt++;
+    cpu_buffer.cnt += 1;
     local_inc(&cpu_buffer.pages_read);
 // Finally update the reader page to the new head
     cpu_buffer.reader_page = reader;
@@ -5254,11 +5516,12 @@ pub unsafe extern "C" fn ring_buffer_iter_empty(iter: *mut ring_buffer_iter) -> 
     cpu_buffer.lost_events = overwrite - cpu_buffer.last_overrun;
     cpu_buffer.last_overrun = overwrite;
     }
-    goto again;
-    out:
+// goto;
+// label;
 // Update the read_stamp on the first event
-    if (reader && reader.read == 0)
+    if (reader && reader.read == 0) {
     cpu_buffer.read_stamp = reader.page.time_stamp;
+    }
     arch_spin_unlock(&cpu_buffer.lock);
     local_irq_restore(flags);
 //
@@ -5266,17 +5529,19 @@ pub unsafe extern "C" fn ring_buffer_iter_empty(iter: *mut ring_buffer_iter) -> 
 // Although, 1 second is pretty much "forever"
 //
 pub const USECS_WAIT: c_int = 1000000;
-    for (nr_loops = 0; nr_loops < USECS_WAIT; nr_loops++) {
+    while (nr_loops < USECS_WAIT) {
 // If the write is past the end of page, a writer is still updating it
-    if (likely(!reader || rb_page_write(reader) <= rb_page_capacity(reader)))
+    if (likely(!reader || rb_page_write(reader) <= rb_page_capacity(reader))) {
     break;
+    }
     udelay(1);
 // Get the latest version of the reader write value
     smp_rmb();
     }
 // The writer is not moving forward? Something is wrong
-    if (RB_WARN_ON(cpu_buffer, nr_loops == USECS_WAIT))
+    if (RB_WARN_ON(cpu_buffer, nr_loops == USECS_WAIT)) {
     reader = core::ptr::null_mut();
+    }
 //
 // Make sure we see any padding after the write update
 // (see rb_reset_tail()).
@@ -5287,30 +5552,30 @@ pub const USECS_WAIT: c_int = 1000000;
 // committed by the writer (see rb_set_commit_to_write()).
 //
     smp_rmb();
-    if (!cpu_buffer.lost_events)
+    if (!cpu_buffer.lost_events) {
     cpu_buffer.lost_events = missed_events;
+    }
     return reader;
     }
-    static struct buffer_page *
-    rb_get_reader_page(struct ring_buffer_per_cpu *cpu_buffer)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn rb_get_reader_page(cpu_buffer: *mut ring_buffer_per_cpu) -> *mut c_void {
     return cpu_buffer.remote ? __rb_get_reader_page_from_remote(cpu_buffer) :
     __rb_get_reader_page(cpu_buffer);
     }
 #[no_mangle]
 unsafe extern "C" fn rb_advance_reader(cpu_buffer: *mut ring_buffer_per_cpu) {
-    static void rb_advance_reader(struct ring_buffer_per_cpu *cpu_buffer)
-    {
-    struct ring_buffer_event *event;
-    struct buffer_page *reader;
-    unsigned length;
+pub static mut event: *mut c_void = core::ptr::null_mut();
+pub static mut reader: *mut c_void = core::ptr::null_mut();
+    let mut length: c_uint = 0;
     reader = rb_get_reader_page(cpu_buffer);
 // This function should not be called when buffer is empty
-    if (RB_WARN_ON(cpu_buffer, !reader))
+    if (RB_WARN_ON(cpu_buffer, !reader)) {
     return;
+    }
     event = rb_reader_event(cpu_buffer);
-    if (event.type_len <= RINGBUF_TYPE_DATA_TYPE_LEN_MAX)
-    cpu_buffer.read++;
+    if (event.type_len <= RINGBUF_TYPE_DATA_TYPE_LEN_MAX) {
+    cpu_buffer.read += 1;
+    }
     rb_update_read_stamp(cpu_buffer, event);
     length = rb_event_length(event);
     cpu_buffer.reader_page.read += length;
@@ -5318,15 +5583,14 @@ unsafe extern "C" fn rb_advance_reader(cpu_buffer: *mut ring_buffer_per_cpu) {
     }
 #[no_mangle]
 unsafe extern "C" fn rb_advance_iter(iter: *mut ring_buffer_iter) {
-    static void rb_advance_iter(struct ring_buffer_iter *iter)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
     cpu_buffer = iter.cpu_buffer;
 // If head == next_event then we need to jump to the next event
     if (iter.head == iter.next_event) {
 // If the event gets overwritten again, there's nothing to do
-    if (rb_iter_head_event(iter) == core::ptr::null_mut())
+    if (rb_iter_head_event(iter) == core::ptr::null_mut()) {
     return;
+    }
     }
     iter.head = iter.next_event;
 //
@@ -5334,8 +5598,9 @@ unsafe extern "C" fn rb_advance_iter(iter: *mut ring_buffer_iter) {
 //
     if (iter.next_event >= rb_page_size(iter.head_page)) {
 // discarded commits can make the page empty
-    if (iter.head_page == cpu_buffer.commit_page)
+    if (iter.head_page == cpu_buffer.commit_page) {
     return;
+    }
     rb_inc_iter(iter);
     return;
     }
@@ -5343,36 +5608,36 @@ unsafe extern "C" fn rb_advance_iter(iter: *mut ring_buffer_iter) {
     }
 #[no_mangle]
 unsafe extern "C" fn rb_lost_events(cpu_buffer: *mut ring_buffer_per_cpu) -> c_int {
-    static int rb_lost_events(struct ring_buffer_per_cpu *cpu_buffer)
-    {
     return cpu_buffer.lost_events;
     }
-    static struct ring_buffer_event *
-    rb_buffer_peek(struct ring_buffer_per_cpu *cpu_buffer, u64 *ts,
-    unsigned long *lost_events)
-    {
-    struct ring_buffer_event *event;
-    struct buffer_page *reader;
-    let mut nr_loops: c_int = 0;
-    if (ts)
+#[no_mangle]
+pub unsafe extern "C" fn rb_buffer_peek(cpu_buffer: *mut ring_buffer_per_cpu, ts: *mut u64, lost_events: *mut c_ulong) -> *mut c_void {
+pub static mut event: *mut c_void = core::ptr::null_mut();
+pub static mut reader: *mut c_void = core::ptr::null_mut();
+pub static mut nr_loops: c_int = 0;
+    if (ts) {
 // ts = 0;
-    again:
+    }
+// label;
 //
 // We repeat when a time extend is encountered.
 // Since the time extend is always attached to a data event,
 // we should never loop more than once.
 // (We never hit the following condition more than twice).
 //
-    if (RB_WARN_ON(cpu_buffer, ++nr_loops > 2))
+    if (RB_WARN_ON(cpu_buffer, ++nr_loops > 2)) {
     return core::ptr::null_mut();
+    }
     reader = rb_get_reader_page(cpu_buffer);
-    if (!reader)
+    if (!reader) {
     return core::ptr::null_mut();
+    }
     event = rb_reader_event(cpu_buffer);
-    switch (event.type_len) {
-    case RINGBUF_TYPE_PADDING:
-    if (rb_null_event(event))
+    match (event.type_len) {
+    RINGBUF_TYPE_PADDING => {
+    if (rb_null_event(event)) {
     RB_WARN_ON(cpu_buffer, 1);
+    }
 //
 // Because the writer could be discarding every
 // event it creates (which would probably be bad)
@@ -5382,11 +5647,13 @@ unsafe extern "C" fn rb_lost_events(cpu_buffer: *mut ring_buffer_per_cpu) -> c_i
 // the current locks, and try again.
 //
     return event;
-    case RINGBUF_TYPE_TIME_EXTEND:
+    }
+    RINGBUF_TYPE_TIME_EXTEND => {
 // Internal data, OK to advance
     rb_advance_reader(cpu_buffer);
-    goto again;
-    case RINGBUF_TYPE_TIME_STAMP:
+// goto;
+    }
+    RINGBUF_TYPE_TIME_STAMP => {
     if (ts) {
 // ts = rb_event_time_stamp(event);
 // ts = rb_fix_abs_ts(*ts, reader->page->time_stamp);
@@ -5395,32 +5662,36 @@ unsafe extern "C" fn rb_lost_events(cpu_buffer: *mut ring_buffer_per_cpu) -> c_i
     }
 // Internal data, OK to advance
     rb_advance_reader(cpu_buffer);
-    goto again;
-    case RINGBUF_TYPE_DATA:
+// goto;
+    }
+    RINGBUF_TYPE_DATA => {
     if (ts && !(*ts)) {
 // ts = cpu_buffer->read_stamp + event->time_delta;
     ring_buffer_normalize_time_stamp(cpu_buffer.buffer,
     cpu_buffer.cpu, ts);
     }
-    if (lost_events)
+    if (lost_events) {
 // lost_events = rb_lost_events(cpu_buffer);
+    }
     return event;
-    default:
+    }
+    _ => {
     RB_WARN_ON(cpu_buffer, 1);
+    }
     }
     return core::ptr::null_mut();
     }
     EXPORT_SYMBOL_GPL(ring_buffer_peek);
-    static struct ring_buffer_event *
-    rb_iter_peek(struct ring_buffer_iter *iter, u64 *ts)
-    {
-    struct trace_buffer *buffer;
-    struct ring_buffer_per_cpu *cpu_buffer;
-    struct ring_buffer_event *event;
-    let mut nr_loops: c_int = 0;
-    int max_loops;
-    if (ts)
+#[no_mangle]
+pub unsafe extern "C" fn rb_iter_peek(iter: *mut ring_buffer_iter, ts: *mut u64) -> *mut c_void {
+pub static mut buffer: *mut c_void = core::ptr::null_mut();
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+pub static mut event: *mut c_void = core::ptr::null_mut();
+pub static mut nr_loops: c_int = 0;
+    let mut max_loops = 0;
+    if (ts) {
 // ts = 0;
+    }
     cpu_buffer = iter.cpu_buffer;
     buffer = cpu_buffer.buffer;
     max_loops = cpu_buffer.ring_meta ? cpu_buffer.nr_pages : 3;
@@ -5431,11 +5702,13 @@ unsafe extern "C" fn rb_lost_events(cpu_buffer: *mut ring_buffer_per_cpu) -> c_i
 //
     if (unlikely(iter.cache_read != cpu_buffer.read ||
     iter.cache_reader_page != cpu_buffer.reader_page ||
-    iter.cache_pages_removed != cpu_buffer.pages_removed))
+    iter.cache_pages_removed != cpu_buffer.pages_removed)) {
     rb_iter_reset(iter);
-    again:
-    if (ring_buffer_iter_empty(iter))
+    }
+// label;
+    if (ring_buffer_iter_empty(iter)) {
     return core::ptr::null_mut();
+    }
 //
 // As the writer can mess with what the iterator is trying
 // to read, just give up if we fail to get an event after
@@ -5443,30 +5716,35 @@ unsafe extern "C" fn rb_lost_events(cpu_buffer: *mut ring_buffer_per_cpu) -> c_i
 // the ring buffer with an active write as the consumer is.
 // Do not warn if the three failures is reached.
 //
-    if (++nr_loops > max_loops)
+    if (++nr_loops > max_loops) {
     return core::ptr::null_mut();
-    if (rb_per_cpu_empty(cpu_buffer))
+    }
+    if (rb_per_cpu_empty(cpu_buffer)) {
     return core::ptr::null_mut();
+    }
     if (iter.head >= rb_page_size(iter.head_page)) {
     rb_inc_iter(iter);
-    goto again;
+// goto;
     }
     event = rb_iter_head_event(iter);
-    if (!event)
-    goto again;
-    switch (event.type_len) {
-    case RINGBUF_TYPE_PADDING:
+    if (!event) {
+// goto;
+    }
+    match (event.type_len) {
+    RINGBUF_TYPE_PADDING => {
     if (rb_null_event(event)) {
     rb_inc_iter(iter);
-    goto again;
+// goto;
     }
     rb_advance_iter(iter);
     return event;
-    case RINGBUF_TYPE_TIME_EXTEND:
+    }
+    RINGBUF_TYPE_TIME_EXTEND => {
 // Internal data, OK to advance
     rb_advance_iter(iter);
-    goto again;
-    case RINGBUF_TYPE_TIME_STAMP:
+// goto;
+    }
+    RINGBUF_TYPE_TIME_STAMP => {
     if (ts) {
 // ts = rb_event_time_stamp(event);
 // ts = rb_fix_abs_ts(*ts, iter->head_page->page->time_stamp);
@@ -5475,24 +5753,25 @@ unsafe extern "C" fn rb_lost_events(cpu_buffer: *mut ring_buffer_per_cpu) -> c_i
     }
 // Internal data, OK to advance
     rb_advance_iter(iter);
-    goto again;
-    case RINGBUF_TYPE_DATA:
+// goto;
+    }
+    RINGBUF_TYPE_DATA => {
     if (ts && !(*ts)) {
 // ts = iter->read_stamp + event->time_delta;
     ring_buffer_normalize_time_stamp(buffer,
     cpu_buffer.cpu, ts);
     }
     return event;
-    default:
+    }
+    _ => {
     RB_WARN_ON(cpu_buffer, 1);
+    }
     }
     return core::ptr::null_mut();
     }
     EXPORT_SYMBOL_GPL(ring_buffer_iter_peek);
 #[no_mangle]
 pub unsafe extern "C" fn rb_reader_lock(cpu_buffer: *mut ring_buffer_per_cpu) -> bool {
-    static inline bool rb_reader_lock(struct ring_buffer_per_cpu *cpu_buffer)
-    {
     if (likely(!in_nmi())) {
     raw_spin_lock(&cpu_buffer.reader_lock);
     return true;
@@ -5506,17 +5785,18 @@ pub unsafe extern "C" fn rb_reader_lock(cpu_buffer: *mut ring_buffer_per_cpu) ->
 // so it must be permanently disabled from future writes.
 // Reading from NMI is a oneshot deal.
 //
-    if (raw_spin_trylock(&cpu_buffer.reader_lock))
+    if (raw_spin_trylock(&cpu_buffer.reader_lock)) {
     return true;
+    }
 // Continue without locking, but disable the ring buffer
     atomic_inc(&cpu_buffer.record_disabled);
     return false;
     }
-    static inline void
-    rb_reader_unlock(struct ring_buffer_per_cpu *cpu_buffer, bool locked)
-    {
-    if (likely(locked))
+#[no_mangle]
+pub unsafe extern "C" fn rb_reader_unlock(cpu_buffer: *mut ring_buffer_per_cpu, locked: bool) {
+    if (likely(locked)) {
     raw_spin_unlock(&cpu_buffer.reader_lock);
+    }
     }
 //
 // ring_buffer_peek - peek at the next event to be read
@@ -5528,26 +5808,27 @@ pub unsafe extern "C" fn rb_reader_lock(cpu_buffer: *mut ring_buffer_per_cpu) ->
 // This will return the event that will be read next, but does
 // not consume the data.
 //
-    struct ring_buffer_event *
-    ring_buffer_peek(struct trace_buffer *buffer, int cpu, u64 *ts,
-    unsigned long *lost_events)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer = buffer.buffers[cpu];
-    struct ring_buffer_event *event;
-    unsigned long flags;
-    bool dolock;
-    if (!cpumask_test_cpu(cpu, buffer.cpumask))
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_peek(buffer: *mut trace_buffer, cpu: c_int, ts: *mut u64, lost_events: *mut c_ulong) -> *mut c_void {
+    let mut cpu_buffer = buffer.buffers[cpu];
+pub static mut event: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut dolock = 0;
+    if (!cpumask_test_cpu(cpu, buffer.cpumask)) {
     return core::ptr::null_mut();
-    again:
+    }
+// label;
     local_irq_save(flags);
     dolock = rb_reader_lock(cpu_buffer);
     event = rb_buffer_peek(cpu_buffer, ts, lost_events);
-    if (event && event.type_len == RINGBUF_TYPE_PADDING)
+    if (event && event.type_len == RINGBUF_TYPE_PADDING) {
     rb_advance_reader(cpu_buffer);
+    }
     rb_reader_unlock(cpu_buffer, dolock);
     local_irq_restore(flags);
-    if (event && event.type_len == RINGBUF_TYPE_PADDING)
-    goto again;
+    if (event && event.type_len == RINGBUF_TYPE_PADDING) {
+// goto;
+    }
     return event;
     }
 // ring_buffer_iter_dropped - report if there are dropped events
@@ -5557,8 +5838,6 @@ pub unsafe extern "C" fn rb_reader_lock(cpu_buffer: *mut ring_buffer_per_cpu) ->
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_iter_dropped(iter: *mut ring_buffer_iter) -> bool {
-    bool ring_buffer_iter_dropped(struct ring_buffer_iter *iter)
-    {
     return iter.missed_events != 0;
     }
     EXPORT_SYMBOL_GPL(ring_buffer_iter_dropped);
@@ -5570,18 +5849,18 @@ pub unsafe extern "C" fn ring_buffer_iter_dropped(iter: *mut ring_buffer_iter) -
 // This will return the event that will be read next, but does
 // not increment the iterator.
 //
-    struct ring_buffer_event *
-    ring_buffer_iter_peek(struct ring_buffer_iter *iter, u64 *ts)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer = iter.cpu_buffer;
-    struct ring_buffer_event *event;
-    unsigned long flags;
-    again:
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_iter_peek(iter: *mut ring_buffer_iter, ts: *mut u64) -> *mut c_void {
+    let mut cpu_buffer = iter.cpu_buffer;
+pub static mut event: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+// label;
     raw_spin_lock_irqsave(&cpu_buffer.reader_lock, flags);
     event = rb_iter_peek(iter, ts);
     raw_spin_unlock_irqrestore(&cpu_buffer.reader_lock, flags);
-    if (event && event.type_len == RINGBUF_TYPE_PADDING)
-    goto again;
+    if (event && event.type_len == RINGBUF_TYPE_PADDING) {
+// goto;
+    }
     return event;
     }
 //
@@ -5595,19 +5874,18 @@ pub unsafe extern "C" fn ring_buffer_iter_dropped(iter: *mut ring_buffer_iter) -
 // Meaning, that sequential reads will keep returning a different event,
 // and eventually empty the ring buffer if the producer is slower.
 //
-    struct ring_buffer_event *
-    ring_buffer_consume(struct trace_buffer *buffer, int cpu, u64 *ts,
-    unsigned long *lost_events)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    struct ring_buffer_event *event = core::ptr::null_mut();
-    unsigned long flags;
-    bool dolock;
-    again:
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_consume(buffer: *mut trace_buffer, cpu: c_int, ts: *mut u64, lost_events: *mut c_ulong) -> *mut c_void {
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+    let mut event = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut dolock = 0;
+// label;
 // might be called in atomic
     preempt_disable();
-    if (!cpumask_test_cpu(cpu, buffer.cpumask))
-    goto out;
+    if (!cpumask_test_cpu(cpu, buffer.cpumask)) {
+// goto;
+    }
     cpu_buffer = buffer.buffers[cpu];
     local_irq_save(flags);
     dolock = rb_reader_lock(cpu_buffer);
@@ -5618,10 +5896,11 @@ pub unsafe extern "C" fn ring_buffer_iter_dropped(iter: *mut ring_buffer_iter) -
     }
     rb_reader_unlock(cpu_buffer, dolock);
     local_irq_restore(flags);
-    out:
+// label;
     preempt_enable();
-    if (event && event.type_len == RINGBUF_TYPE_PADDING)
-    goto again;
+    if (event && event.type_len == RINGBUF_TYPE_PADDING) {
+// goto;
+    }
     return event;
     }
     EXPORT_SYMBOL_GPL(ring_buffer_consume);
@@ -5638,25 +5917,28 @@ pub unsafe extern "C" fn ring_buffer_iter_dropped(iter: *mut ring_buffer_iter) -
 //
 // Must be paired with ring_buffer_read_finish.
 //
-    struct ring_buffer_iter *
-    ring_buffer_read_start(struct trace_buffer *buffer, int cpu, gfp_t flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_read_start(buffer: *mut trace_buffer, cpu: c_int, flags: gfp_t) -> *mut c_void {
     struct ring_buffer_iter *iter __free(kfree) = kzalloc_obj(*iter, flags);
-    struct ring_buffer_per_cpu *cpu_buffer;
-    if (!iter)
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+    if (!iter) {
     return core::ptr::null_mut();
-    if (!cpumask_test_cpu(cpu, buffer.cpumask))
+    }
+    if (!cpumask_test_cpu(cpu, buffer.cpumask)) {
     return core::ptr::null_mut();
+    }
     cpu_buffer = buffer.buffers[cpu];
 //
 // Only KDB is using GFP_ATOMIC, for the others, lock the buffer to
 // prevent concurrent resizing.
 //
-    if (gfpflags_allow_blocking(flags))
+    if (gfpflags_allow_blocking(flags)) {
     mutex_lock(&buffer.mutex);
+    }
     atomic_inc(&cpu_buffer.resize_disabled);
-    if (gfpflags_allow_blocking(flags))
+    if (gfpflags_allow_blocking(flags)) {
     mutex_unlock(&buffer.mutex);
+    }
 // Holds the entire event: data and meta data.
     iter.event_size = rb_page_capacity(READ_ONCE(cpu_buffer.reader_page));
     iter.event = kmalloc(iter.event_size, flags);
@@ -5678,10 +5960,9 @@ pub unsafe extern "C" fn ring_buffer_iter_dropped(iter: *mut ring_buffer_iter) -
 //
 // This re-enables resizing of the buffer, and frees the iterator.
 //
-    void
-    ring_buffer_read_finish(struct ring_buffer_iter *iter)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer = iter.cpu_buffer;
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_read_finish(iter: *mut ring_buffer_iter) {
+    let mut cpu_buffer = iter.cpu_buffer;
 // Use this opportunity to check the integrity of the ring buffer.
     rb_check_pages(cpu_buffer);
     atomic_dec(&cpu_buffer.resize_disabled);
@@ -5698,10 +5979,8 @@ pub unsafe extern "C" fn ring_buffer_iter_dropped(iter: *mut ring_buffer_iter) -
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_iter_advance(iter: *mut ring_buffer_iter) {
-    void ring_buffer_iter_advance(struct ring_buffer_iter *iter)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer = iter.cpu_buffer;
-    unsigned long flags;
+    let mut cpu_buffer = iter.cpu_buffer;
+    let mut flags = 0;
     raw_spin_lock_irqsave(&cpu_buffer.reader_lock, flags);
     iter.missed_events = 0;
     rb_advance_iter(iter);
@@ -5715,10 +5994,9 @@ pub unsafe extern "C" fn ring_buffer_iter_advance(iter: *mut ring_buffer_iter) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_size(buffer: *mut trace_buffer, cpu: c_int) -> c_ulong {
-    unsigned long ring_buffer_size(struct trace_buffer *buffer, int cpu)
-    {
-    if (!cpumask_test_cpu(cpu, buffer.cpumask))
+    if (!cpumask_test_cpu(cpu, buffer.cpumask)) {
     return 0;
+    }
     return rb_subbuf_capacity(buffer) * buffer.buffers[cpu].nr_pages;
     }
     EXPORT_SYMBOL_GPL(ring_buffer_size);
@@ -5730,18 +6008,15 @@ pub unsafe extern "C" fn ring_buffer_size(buffer: *mut trace_buffer, cpu: c_int)
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_max_event_size(buffer: *mut trace_buffer) -> c_ulong {
-    unsigned long ring_buffer_max_event_size(struct trace_buffer *buffer)
-    {
 // If abs timestamp is requested, events have a timestamp too
-    if (ring_buffer_time_stamp_abs(buffer))
+    if (ring_buffer_time_stamp_abs(buffer)) {
     return rb_subbuf_max_data_size(buffer) - RB_LEN_TIME_EXTEND;
+    }
     return rb_subbuf_max_data_size(buffer);
     }
     EXPORT_SYMBOL_GPL(ring_buffer_max_event_size);
 #[no_mangle]
 unsafe extern "C" fn rb_clear_buffer_page(page: *mut buffer_page) {
-    static void rb_clear_buffer_page(struct buffer_page *page)
-    {
     local_set(&page.write, 0);
     local_set(&page.entries, 0);
     rb_init_data_page(page.page);
@@ -5765,26 +6040,26 @@ unsafe extern "C" fn rb_clear_buffer_page(page: *mut buffer_page) {
 // For fixed memory mapped pages, get the page index in the memory layout
 // and return that as the id.
 //
-    static int rb_page_id(struct ring_buffer_per_cpu *cpu_buffer,
-    struct buffer_page *bpage, int id)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn rb_page_id(cpu_buffer: *mut ring_buffer_per_cpu, bpage: *mut buffer_page, id: c_int) -> c_int {
 //
 // For boot buffers, the id is the index,
 // otherwise, set the buffer page with this id
 //
-    if (cpu_buffer.ring_meta)
+    if (cpu_buffer.ring_meta) {
     id = rb_meta_subbuf_idx(cpu_buffer.ring_meta, bpage.page);
-    else
+    }
+    else {
     bpage.id = id;
+    }
     return id;
     }
 #[no_mangle]
 unsafe extern "C" fn rb_update_meta_page(cpu_buffer: *mut ring_buffer_per_cpu) {
-    static void rb_update_meta_page(struct ring_buffer_per_cpu *cpu_buffer)
-    {
-    struct trace_buffer_meta *meta = cpu_buffer.meta_page;
-    if (!meta)
+    let mut meta = cpu_buffer.meta_page;
+    if (!meta) {
     return;
+    }
     meta.reader.read = cpu_buffer.reader_page.read;
     meta.reader.id = rb_page_id(cpu_buffer, cpu_buffer.reader_page,
     cpu_buffer.reader_page.id);
@@ -5797,13 +6072,13 @@ unsafe extern "C" fn rb_update_meta_page(cpu_buffer: *mut ring_buffer_per_cpu) {
 // Some archs do not have data cache coherency between kernel and user-space
     flush_kernel_vmap_range(cpu_buffer.meta_page, PAGE_SIZE);
     }
-    static void
-    rb_reset_cpu(struct ring_buffer_per_cpu *cpu_buffer)
-    {
-    struct buffer_page *page;
+#[no_mangle]
+pub unsafe extern "C" fn rb_reset_cpu(cpu_buffer: *mut ring_buffer_per_cpu) {
+pub static mut page: *mut c_void = core::ptr::null_mut();
     if (cpu_buffer.remote) {
-    if (!cpu_buffer.remote.reset)
+    if (!cpu_buffer.remote.reset) {
     return;
+    }
     cpu_buffer.remote.reset(cpu_buffer.cpu, cpu_buffer.remote.priv);
     rb_read_remote_meta_page(cpu_buffer);
 // Read related values, not covered by the meta-page
@@ -5816,7 +6091,7 @@ unsafe extern "C" fn rb_update_meta_page(cpu_buffer: *mut ring_buffer_per_cpu) {
     }
     rb_head_page_deactivate(cpu_buffer);
     cpu_buffer.head_page
-    = list_entry(cpu_buffer.pages, struct buffer_page, list);
+    = list_entry(cpu_buffer.pages, buffer_page, list);
     rb_clear_buffer_page(cpu_buffer.head_page);
     list_for_each_entry(page, cpu_buffer.pages, list) {
     rb_clear_buffer_page(page);
@@ -5842,25 +6117,24 @@ unsafe extern "C" fn rb_update_meta_page(cpu_buffer: *mut ring_buffer_per_cpu) {
     cpu_buffer.read_bytes = 0;
     rb_time_set(&cpu_buffer.write_stamp, 0);
     rb_time_set(&cpu_buffer.before_stamp, 0);
-    memset(cpu_buffer.event_stamp, 0, sizeof(cpu_buffer.event_stamp));
+    memset(cpu_buffer.event_stamp, 0, sizeof!(cpu_buffer.event_stamp));
     cpu_buffer.lost_events = 0;
     cpu_buffer.last_overrun = 0;
     rb_head_page_activate(cpu_buffer);
     cpu_buffer.pages_removed = 0;
     rb_update_meta_page(cpu_buffer);
     if (cpu_buffer.ring_meta) {
-    struct ring_buffer_cpu_meta *meta = cpu_buffer.ring_meta;
+    let mut meta = cpu_buffer.ring_meta;
     meta.commit_buffer = meta.head_buffer;
     }
     }
 // Must have disabled the cpu buffer then done a synchronize_rcu
 #[no_mangle]
 unsafe extern "C" fn reset_disabled_cpu_buffer(cpu_buffer: *mut ring_buffer_per_cpu) {
-    static void reset_disabled_cpu_buffer(struct ring_buffer_per_cpu *cpu_buffer)
-    {
     guard(raw_spinlock_irqsave)(&cpu_buffer.reader_lock);
-    if (RB_WARN_ON(cpu_buffer, local_read(&cpu_buffer.committing)))
+    if (RB_WARN_ON(cpu_buffer, local_read(&cpu_buffer.committing))) {
     return;
+    }
     arch_spin_lock(&cpu_buffer.lock);
     rb_reset_cpu(cpu_buffer);
     arch_spin_unlock(&cpu_buffer.lock);
@@ -5872,11 +6146,10 @@ unsafe extern "C" fn reset_disabled_cpu_buffer(cpu_buffer: *mut ring_buffer_per_
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_reset_cpu(buffer: *mut trace_buffer, cpu: c_int) {
-    void ring_buffer_reset_cpu(struct trace_buffer *buffer, int cpu)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer = buffer.buffers[cpu];
-    if (!cpumask_test_cpu(cpu, buffer.cpumask))
+    let mut cpu_buffer = buffer.buffers[cpu];
+    if (!cpumask_test_cpu(cpu, buffer.cpumask)) {
     return;
+    }
 // prevent another thread from changing buffer sizes
     mutex_lock(&buffer.mutex);
     atomic_inc(&cpu_buffer.resize_disabled);
@@ -5897,10 +6170,8 @@ pub unsafe extern "C" fn ring_buffer_reset_cpu(buffer: *mut trace_buffer, cpu: c
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_reset_online_cpus(buffer: *mut trace_buffer) {
-    void ring_buffer_reset_online_cpus(struct trace_buffer *buffer)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    int cpu;
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
 // prevent another thread from changing buffer sizes
     mutex_lock(&buffer.mutex);
     for_each_online_buffer_cpu(buffer, cpu) {
@@ -5916,8 +6187,9 @@ pub unsafe extern "C" fn ring_buffer_reset_online_cpus(buffer: *mut trace_buffer
 // If a CPU came online during the synchronize_rcu(), then
 // ignore it.
 //
-    if (!(atomic_read(&cpu_buffer.resize_disabled) & RESET_BIT))
+    if (!(atomic_read(&cpu_buffer.resize_disabled) & RESET_BIT)) {
     continue;
+    }
     reset_disabled_cpu_buffer(cpu_buffer);
     atomic_dec(&cpu_buffer.record_disabled);
     atomic_sub(RESET_BIT, &cpu_buffer.resize_disabled);
@@ -5930,10 +6202,8 @@ pub unsafe extern "C" fn ring_buffer_reset_online_cpus(buffer: *mut trace_buffer
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_reset(buffer: *mut trace_buffer) {
-    void ring_buffer_reset(struct trace_buffer *buffer)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    int cpu;
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
 // prevent another thread from changing buffer sizes
     mutex_lock(&buffer.mutex);
     for_each_buffer_cpu(buffer, cpu) {
@@ -5958,13 +6228,11 @@ pub unsafe extern "C" fn ring_buffer_reset(buffer: *mut trace_buffer) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_empty(buffer: *mut trace_buffer) -> bool {
-    bool ring_buffer_empty(struct trace_buffer *buffer)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    unsigned long flags;
-    bool dolock;
-    bool ret;
-    int cpu;
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut dolock = 0;
+    let mut ret = 0;
+    let mut cpu = 0;
 // yes this is racy, but if you don't like the race, lock the buffer
     for_each_buffer_cpu(buffer, cpu) {
     cpu_buffer = buffer.buffers[cpu];
@@ -5973,8 +6241,9 @@ pub unsafe extern "C" fn ring_buffer_empty(buffer: *mut trace_buffer) -> bool {
     ret = rb_per_cpu_empty(cpu_buffer);
     rb_reader_unlock(cpu_buffer, dolock);
     local_irq_restore(flags);
-    if (!ret)
+    if (!ret) {
     return false;
+    }
     }
     return true;
     }
@@ -5986,14 +6255,13 @@ pub unsafe extern "C" fn ring_buffer_empty(buffer: *mut trace_buffer) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_empty_cpu(buffer: *mut trace_buffer, cpu: c_int) -> bool {
-    bool ring_buffer_empty_cpu(struct trace_buffer *buffer, int cpu)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    unsigned long flags;
-    bool dolock;
-    bool ret;
-    if (!cpumask_test_cpu(cpu, buffer.cpumask))
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut dolock = 0;
+    let mut ret = 0;
+    if (!cpumask_test_cpu(cpu, buffer.cpumask)) {
     return true;
+    }
     cpu_buffer = buffer.buffers[cpu];
     local_irq_save(flags);
     dolock = rb_reader_lock(cpu_buffer);
@@ -6005,16 +6273,16 @@ pub unsafe extern "C" fn ring_buffer_empty_cpu(buffer: *mut trace_buffer, cpu: c
     EXPORT_SYMBOL_GPL(ring_buffer_empty_cpu);
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_poll_remote(buffer: *mut trace_buffer, cpu: c_int) -> c_int {
-    int ring_buffer_poll_remote(struct trace_buffer *buffer, int cpu)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
     if (cpu != RING_BUFFER_ALL_CPUS) {
-    if (!cpumask_test_cpu(cpu, buffer.cpumask))
+    if (!cpumask_test_cpu(cpu, buffer.cpumask)) {
     return -EINVAL;
+    }
     cpu_buffer = buffer.buffers[cpu];
     guard(raw_spinlock)(&cpu_buffer.reader_lock);
-    if (rb_read_remote_meta_page(cpu_buffer))
+    if (rb_read_remote_meta_page(cpu_buffer)) {
     rb_wakeups(buffer, cpu_buffer);
+    }
     return 0;
     }
     guard(cpus_read_lock)();
@@ -6029,8 +6297,9 @@ pub unsafe extern "C" fn ring_buffer_poll_remote(buffer: *mut trace_buffer, cpu:
     }
     for_each_buffer_cpu(buffer, cpu) {
     cpu_buffer = buffer.buffers[cpu];
-    if (rb_num_of_entries(cpu_buffer))
+    if (rb_num_of_entries(cpu_buffer)) {
     rb_wakeups(buffer, cpu_buffer);
+    }
     }
     return 0;
     }
@@ -6046,33 +6315,40 @@ pub unsafe extern "C" fn ring_buffer_poll_remote(buffer: *mut trace_buffer, cpu:
 // it is expected that the tracer handles the cpu buffer not being
 // used at the moment.
 //
-    int ring_buffer_swap_cpu(struct trace_buffer *buffer_a,
-    struct trace_buffer *buffer_b, int cpu)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer_a;
-    struct ring_buffer_per_cpu *cpu_buffer_b;
-    let mut ret: c_int = -EBUSY;
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_swap_cpu(buffer_a: *mut trace_buffer, buffer_b: *mut trace_buffer, cpu: c_int) -> c_int {
+pub static mut cpu_buffer_a: *mut c_void = core::ptr::null_mut();
+pub static mut cpu_buffer_b: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     if (!cpumask_test_cpu(cpu, buffer_a.cpumask) ||
-    !cpumask_test_cpu(cpu, buffer_b.cpumask))
+    !cpumask_test_cpu(cpu, buffer_b.cpumask)) {
     return -EINVAL;
+    }
     cpu_buffer_a = buffer_a.buffers[cpu];
     cpu_buffer_b = buffer_b.buffers[cpu];
 // It's up to the callers to not try to swap static buffers
-    if (WARN_ON_ONCE(rb_is_static(cpu_buffer_a) || rb_is_static(cpu_buffer_b)))
+    if (WARN_ON_ONCE!(rb_is_static(cpu_buffer_a) || rb_is_static(cpu_buffer_b))) {
     return -EBUSY;
+    }
 // At least make sure the two buffers are somewhat the same
-    if (cpu_buffer_a.nr_pages != cpu_buffer_b.nr_pages)
+    if (cpu_buffer_a.nr_pages != cpu_buffer_b.nr_pages) {
     return -EINVAL;
-    if (buffer_a.subbuf_order != buffer_b.subbuf_order)
+    }
+    if (buffer_a.subbuf_order != buffer_b.subbuf_order) {
     return -EINVAL;
-    if (atomic_read(&buffer_a.record_disabled))
+    }
+    if (atomic_read(&buffer_a.record_disabled)) {
     return -EAGAIN;
-    if (atomic_read(&buffer_b.record_disabled))
+    }
+    if (atomic_read(&buffer_b.record_disabled)) {
     return -EAGAIN;
-    if (atomic_read(&cpu_buffer_a.record_disabled))
+    }
+    if (atomic_read(&cpu_buffer_a.record_disabled)) {
     return -EAGAIN;
-    if (atomic_read(&cpu_buffer_b.record_disabled))
+    }
+    if (atomic_read(&cpu_buffer_b.record_disabled)) {
     return -EAGAIN;
+    }
 //
 // We can't do a synchronize_rcu here because this
 // function can be called in atomic context.
@@ -6082,24 +6358,28 @@ pub unsafe extern "C" fn ring_buffer_poll_remote(buffer: *mut trace_buffer, cpu:
     atomic_inc(&cpu_buffer_a.record_disabled);
     atomic_inc(&cpu_buffer_b.record_disabled);
 // Do not swap if either buffer is in the process of writing
-    if (cpu_buffer_a.current_context)
-    goto out_dec;
-    if (cpu_buffer_b.current_context)
-    goto out_dec;
+    if (cpu_buffer_a.current_context) {
+// goto;
+    }
+    if (cpu_buffer_b.current_context) {
+// goto;
+    }
 //
 // When resize is in progress, we cannot swap it because
 // it will mess the state of the cpu buffer.
 //
-    if (atomic_read(&buffer_a.resizing))
-    goto out_dec;
-    if (atomic_read(&buffer_b.resizing))
-    goto out_dec;
+    if (atomic_read(&buffer_a.resizing)) {
+// goto;
+    }
+    if (atomic_read(&buffer_b.resizing)) {
+// goto;
+    }
     buffer_a.buffers[cpu] = cpu_buffer_b;
     buffer_b.buffers[cpu] = cpu_buffer_a;
     cpu_buffer_b.buffer = buffer_a;
     cpu_buffer_a.buffer = buffer_b;
     ret = 0;
-    out_dec:
+// label;
     atomic_dec(&cpu_buffer_a.record_disabled);
     atomic_dec(&cpu_buffer_b.record_disabled);
     return ret;
@@ -6122,17 +6402,18 @@ pub unsafe extern "C" fn ring_buffer_poll_remote(buffer: *mut trace_buffer, cpu:
 // Returns:
 // The page allocated, or ERR_PTR
 //
-    struct buffer_data_read_page *
-    ring_buffer_alloc_read_page(struct trace_buffer *buffer, int cpu)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    struct buffer_data_read_page *bpage = core::ptr::null_mut();
-    unsigned long flags;
-    if (!cpumask_test_cpu(cpu, buffer.cpumask))
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_alloc_read_page(buffer: *mut trace_buffer, cpu: c_int) -> *mut c_void {
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+    let mut bpage = core::ptr::null_mut();
+    let mut flags = 0;
+    if (!cpumask_test_cpu(cpu, buffer.cpumask)) {
     return ERR_PTR(-ENODEV);
+    }
     bpage = kzalloc_obj(*bpage);
-    if (!bpage)
+    if (!bpage) {
     return ERR_PTR(-ENOMEM);
+    }
     bpage.order = buffer.subbuf_order;
     cpu_buffer = buffer.buffers[cpu];
     local_irq_save(flags);
@@ -6163,23 +6444,24 @@ pub unsafe extern "C" fn ring_buffer_poll_remote(buffer: *mut trace_buffer, cpu:
 //
 // Free a page allocated from ring_buffer_alloc_read_page.
 //
-    void ring_buffer_free_read_page(struct trace_buffer *buffer, int cpu,
-    struct buffer_data_read_page *data_page)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    struct buffer_data_page *dpage = data_page.data;
-    struct page *page = virt_to_page(dpage);
-    unsigned long flags;
-    if (!buffer || !buffer.buffers || !buffer.buffers[cpu])
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_free_read_page(buffer: *mut trace_buffer, cpu: c_int, data_page: *mut buffer_data_read_page) {
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+    let mut dpage = data_page.data;
+    let mut page = virt_to_page(dpage);
+    let mut flags = 0;
+    if (!buffer || !buffer.buffers || !buffer.buffers[cpu]) {
     return;
+    }
     cpu_buffer = buffer.buffers[cpu];
 //
 // If the page is still in use someplace else, or order of the page
 // is different from the subbuffer order of the buffer -
 // we can't reuse it
 //
-    if (page_ref_count(page) > 1 || data_page.order != buffer.subbuf_order)
-    goto out;
+    if (page_ref_count(page) > 1 || data_page.order != buffer.subbuf_order) {
+// goto;
+    }
     local_irq_save(flags);
     arch_spin_lock(&cpu_buffer.lock);
     if (!cpu_buffer.free_page.data) {
@@ -6188,7 +6470,7 @@ pub unsafe extern "C" fn ring_buffer_poll_remote(buffer: *mut trace_buffer, cpu:
     }
     arch_spin_unlock(&cpu_buffer.lock);
     local_irq_restore(flags);
-    out:
+// label;
     free_pages((unsigned long)dpage, data_page.order);
     kfree(data_page);
     }
@@ -6227,39 +6509,43 @@ pub unsafe extern "C" fn ring_buffer_poll_remote(buffer: *mut trace_buffer, cpu:
 // >=0 if data has been transferred, returns the offset of consumed data.
 // <0 if no data has been transferred.
 //
-    int ring_buffer_read_page(struct trace_buffer *buffer,
-    struct buffer_data_read_page *data_page,
-    size_t len, int cpu, int full)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer = buffer.buffers[cpu];
-    struct ring_buffer_event *event;
-    struct buffer_data_page *dpage;
-    struct buffer_page *reader;
-    long missed_events;
-    unsigned int commit;
-    unsigned int size;
-    unsigned int read;
-    u64 save_timestamp;
-    if (!cpumask_test_cpu(cpu, buffer.cpumask))
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_read_page(buffer: *mut trace_buffer, data_page: *mut buffer_data_read_page, len: size_t, cpu: c_int, full: c_int) -> c_int {
+    let mut cpu_buffer = buffer.buffers[cpu];
+pub static mut event: *mut c_void = core::ptr::null_mut();
+pub static mut dpage: *mut c_void = core::ptr::null_mut();
+pub static mut reader: *mut c_void = core::ptr::null_mut();
+    let mut missed_events = 0;
+    let mut commit = 0;
+    let mut size = 0;
+    let mut read = 0;
+    let mut save_timestamp = 0;
+    if (!cpumask_test_cpu(cpu, buffer.cpumask)) {
     return -1;
+    }
 //
 // If len is not big enough to hold the page header, then
 // we can not copy anything.
 //
-    if (len <= BUF_PAGE_HDR_SIZE)
+    if (len <= BUF_PAGE_HDR_SIZE) {
     return -1;
+    }
     len -= BUF_PAGE_HDR_SIZE;
-    if (!data_page || !data_page.data)
+    if (!data_page || !data_page.data) {
     return -1;
+    }
     dpage = data_page.data;
-    if (!dpage)
+    if (!dpage) {
     return -1;
+    }
     guard(raw_spinlock_irqsave)(&cpu_buffer.reader_lock);
-    if (data_page.order != cpu_buffer.reader_page.order)
+    if (data_page.order != cpu_buffer.reader_page.order) {
     return -1;
+    }
     reader = rb_get_reader_page(cpu_buffer);
-    if (!reader)
+    if (!reader) {
     return -1;
+    }
     event = rb_reader_event(cpu_buffer);
     read = reader.read;
     commit = rb_page_commit(reader);
@@ -6276,11 +6562,11 @@ pub unsafe extern "C" fn ring_buffer_poll_remote(buffer: *mut trace_buffer, cpu:
     if (read || (len < (size - read)) ||
     cpu_buffer.reader_page == cpu_buffer.commit_page ||
     rb_is_static(cpu_buffer)) {
-    struct buffer_data_page *rpage = cpu_buffer.reader_page.page;
-    let mut rpos: c_uint = read;
-    let mut pos: c_uint = 0;
-    unsigned int event_size;
-    let mut flags: c_uint = 0;
+    let mut rpage = cpu_buffer.reader_page.page;
+pub static mut rpos: c_uint = 0;
+pub static mut pos: c_uint = 0;
+    let mut event_size = 0;
+pub static mut flags: c_uint = 0;
 //
 // If a full page is expected, this can still be returned
 // if there's been a previous partial read and the
@@ -6289,16 +6575,20 @@ pub unsafe extern "C" fn ring_buffer_poll_remote(buffer: *mut trace_buffer, cpu:
 //
     if (full &&
     (!read || (len < (size - read)) ||
-    cpu_buffer.reader_page == cpu_buffer.commit_page))
+    cpu_buffer.reader_page == cpu_buffer.commit_page)) {
     return -1;
-    if (len > (size - read))
+    }
+    if (len > (size - read)) {
     len = (size - read);
+    }
 // Always keep the time extend and data together
     event_size = rb_event_ts_length(event);
-    if (len < event_size)
+    if (len < event_size) {
     return -1;
-    if (commit & RB_MISSED_EVENTS)
+    }
+    if (commit & RB_MISSED_EVENTS) {
     flags = RB_MISSED_EVENTS;
+    }
 // save the current timestamp, since the user will need it
     save_timestamp = cpu_buffer.read_stamp;
 // Need to copy one event at a time
@@ -6315,8 +6605,9 @@ pub unsafe extern "C" fn ring_buffer_poll_remote(buffer: *mut trace_buffer, cpu:
     rb_advance_reader(cpu_buffer);
     rpos = reader.read;
     pos += event_size;
-    if (rpos >= size)
+    if (rpos >= size) {
     break;
+    }
     event = rb_reader_event(cpu_buffer);
 // Always keep the time extend and data together
     event_size = rb_event_ts_length(event);
@@ -6338,15 +6629,17 @@ pub unsafe extern "C" fn ring_buffer_poll_remote(buffer: *mut trace_buffer, cpu:
     local_set(&reader.entries, 0);
     reader.read = 0;
     data_page.data = dpage;
-    if (!missed_events && rb_data_page_commit(dpage) & RB_MISSED_EVENTS)
+    if (!missed_events && rb_data_page_commit(dpage) & RB_MISSED_EVENTS) {
     missed_events = -1;
+    }
 //
 // Use the real_end for the data size,
 // This gives us a chance to store the lost events
 // on the page.
 //
-    if (reader.real_end)
+    if (reader.real_end) {
     local_set(&dpage.commit, reader.real_end);
+    }
     }
     cpu_buffer.lost_events = 0;
     size = rb_data_page_size(dpage);
@@ -6359,11 +6652,11 @@ pub unsafe extern "C" fn ring_buffer_poll_remote(buffer: *mut trace_buffer, cpu:
 // missed events, then record it there.
 //
     if (missed_events > 0 &&
-    rb_page_capacity(reader) - size >= sizeof(missed_events)) {
+    rb_page_capacity(reader) - size >= sizeof!(missed_events)) {
     memcpy(&dpage.data[size], &missed_events,
-    sizeof(missed_events));
+    sizeof!(missed_events));
     local_add(RB_MISSED_STORED, &dpage.commit);
-    size += sizeof(missed_events);
+    size += sizeof!(missed_events);
     }
 //
 // Note, for the persistent ring buffer, the RB_MISSED_EVENTS
@@ -6378,8 +6671,9 @@ pub unsafe extern "C" fn ring_buffer_poll_remote(buffer: *mut trace_buffer, cpu:
 //
 // This page may be off to user land. Zero it out here.
 //
-    if (size < rb_page_capacity(reader))
+    if (size < rb_page_capacity(reader)) {
     memset(&dpage.data[size], 0, rb_page_capacity(reader) - size);
+    }
     return read;
     }
     EXPORT_SYMBOL_GPL(ring_buffer_read_page);
@@ -6389,8 +6683,8 @@ pub unsafe extern "C" fn ring_buffer_poll_remote(buffer: *mut trace_buffer, cpu:
 //
 // Returns pointer to the actual data in this page.
 //
-    void *ring_buffer_read_page_data(struct buffer_data_read_page *page)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_read_page_data(page: *mut buffer_data_read_page) -> *mut c_void {
     return page.data;
     }
     EXPORT_SYMBOL_GPL(ring_buffer_read_page_data);
@@ -6402,8 +6696,6 @@ pub unsafe extern "C" fn ring_buffer_poll_remote(buffer: *mut trace_buffer, cpu:
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_subbuf_size_get(buffer: *mut trace_buffer) -> c_int {
-    int ring_buffer_subbuf_size_get(struct trace_buffer *buffer)
-    {
     return rb_subbuf_size(buffer);
     }
     EXPORT_SYMBOL_GPL(ring_buffer_subbuf_size_get);
@@ -6421,10 +6713,9 @@ pub unsafe extern "C" fn ring_buffer_subbuf_size_get(buffer: *mut trace_buffer) 
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_subbuf_order_get(buffer: *mut trace_buffer) -> c_int {
-    int ring_buffer_subbuf_order_get(struct trace_buffer *buffer)
-    {
-    if (!buffer)
+    if (!buffer) {
     return -EINVAL;
+    }
     return buffer.subbuf_order;
     }
     EXPORT_SYMBOL_GPL(ring_buffer_subbuf_order_get);
@@ -6446,29 +6737,32 @@ pub unsafe extern "C" fn ring_buffer_subbuf_order_get(buffer: *mut trace_buffer)
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_subbuf_order_set(buffer: *mut trace_buffer, order: c_int) -> c_int {
-    int ring_buffer_subbuf_order_set(struct trace_buffer *buffer, int order)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    struct buffer_page *bpage, *tmp;
-    unsigned int old_capacity;
-    int old_order;
-    int nr_pages;
-    int psize;
-    int err;
-    int cpu;
-    if (!buffer || order < 0)
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+    let mut bpage = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
+    let mut old_capacity = 0;
+    let mut old_order = 0;
+    let mut nr_pages = 0;
+    let mut psize = 0;
+    let mut err = 0;
+    let mut cpu = 0;
+    if (!buffer || order < 0) {
     return -EINVAL;
+    }
     psize = (1 << order) * PAGE_SIZE;
-    if (psize <= BUF_PAGE_HDR_SIZE)
+    if (psize <= BUF_PAGE_HDR_SIZE) {
     return -EINVAL;
+    }
 // Size of a subbuf cannot be greater than the write counter
-    if (psize > RB_WRITE_MASK + 1)
+    if (psize > RB_WRITE_MASK + 1) {
     return -EINVAL;
+    }
 // prevent another thread from changing buffer sizes
     guard(mutex)(&buffer.mutex);
     old_order = buffer.subbuf_order;
-    if (old_order == order)
+    if (old_order == order) {
     return 0;
+    }
     old_capacity = rb_subbuf_capacity(buffer);
     atomic_inc(&buffer.record_disabled);
 // Make sure all commits have finished
@@ -6476,37 +6770,40 @@ pub unsafe extern "C" fn ring_buffer_subbuf_order_set(buffer: *mut trace_buffer,
     buffer.subbuf_order = order;
 // Make sure all new buffers are allocated, before deleting the old ones
     for_each_buffer_cpu(buffer, cpu) {
-    if (!cpumask_test_cpu(cpu, buffer.cpumask))
+    if (!cpumask_test_cpu(cpu, buffer.cpumask)) {
     continue;
+    }
     cpu_buffer = buffer.buffers[cpu];
     if (atomic_read(&cpu_buffer.resize_disabled)) {
     err = -EBUSY;
-    goto error;
+// goto;
     }
 // Update the number of pages to match the new size
     nr_pages = old_capacity * buffer.buffers[cpu].nr_pages;
     nr_pages = DIV_ROUND_UP(nr_pages, rb_subbuf_capacity(buffer));
 // we need a minimum of two pages
-    if (nr_pages < 2)
+    if (nr_pages < 2) {
     nr_pages = 2;
+    }
     cpu_buffer.nr_pages_to_update = nr_pages;
 // Include the reader page
-    nr_pages++;
+    nr_pages += 1;
 // Allocate the new size buffer
     INIT_LIST_HEAD(&cpu_buffer.new_pages);
     if (__rb_allocate_pages(cpu_buffer, nr_pages,
     &cpu_buffer.new_pages)) {
 // not enough memory for new pages
     err = -ENOMEM;
-    goto error;
+// goto;
     }
     }
     for_each_buffer_cpu(buffer, cpu) {
-    struct buffer_data_read_page old_free_data_page;
-    struct list_head old_pages;
-    unsigned long flags;
-    if (!cpumask_test_cpu(cpu, buffer.cpumask))
+pub static mut old_free_data_page: usize = 0;
+pub static mut old_pages: usize = 0;
+    let mut flags = 0;
+    if (!cpumask_test_cpu(cpu, buffer.cpumask)) {
     continue;
+    }
     cpu_buffer = buffer.buffers[cpu];
     raw_spin_lock_irqsave(&cpu_buffer.reader_lock, flags);
 // Clear the head bit to make the link list normal to read
@@ -6521,15 +6818,14 @@ pub unsafe extern "C" fn ring_buffer_subbuf_order_set(buffer: *mut trace_buffer,
     list_add(&old_pages, cpu_buffer.pages);
     list_add(&cpu_buffer.reader_page.list, &old_pages);
 // One page was allocated for the reader page
-    cpu_buffer.reader_page = list_entry(cpu_buffer.new_pages.next,
-    struct buffer_page, list);
+    cpu_buffer.reader_page = list_entry(cpu_buffer.new_pages.next, buffer_page, list);
     list_del_init(&cpu_buffer.reader_page.list);
 // Install the new pages, remove the head from the list
     cpu_buffer.pages = cpu_buffer.new_pages.next;
     list_del_init(&cpu_buffer.new_pages);
-    cpu_buffer.cnt++;
+    cpu_buffer.cnt += 1;
     cpu_buffer.head_page
-    = list_entry(cpu_buffer.pages, struct buffer_page, list);
+    = list_entry(cpu_buffer.pages, buffer_page, list);
     cpu_buffer.tail_page = cpu_buffer.commit_page = cpu_buffer.head_page;
     cpu_buffer.nr_pages = cpu_buffer.nr_pages_to_update;
     cpu_buffer.nr_pages_to_update = 0;
@@ -6549,13 +6845,14 @@ pub unsafe extern "C" fn ring_buffer_subbuf_order_set(buffer: *mut trace_buffer,
     }
     atomic_dec(&buffer.record_disabled);
     return 0;
-    error:
+// label;
     buffer.subbuf_order = old_order;
     atomic_dec(&buffer.record_disabled);
     for_each_buffer_cpu(buffer, cpu) {
     cpu_buffer = buffer.buffers[cpu];
-    if (!cpu_buffer.nr_pages_to_update)
+    if (!cpu_buffer.nr_pages_to_update) {
     continue;
+    }
     list_for_each_entry_safe(bpage, tmp, &cpu_buffer.new_pages, list) {
     list_del_init(&bpage.list);
     free_buffer_page(bpage);
@@ -6566,61 +6863,60 @@ pub unsafe extern "C" fn ring_buffer_subbuf_order_set(buffer: *mut trace_buffer,
     EXPORT_SYMBOL_GPL(ring_buffer_subbuf_order_set);
 #[no_mangle]
 unsafe extern "C" fn rb_alloc_meta_page(cpu_buffer: *mut ring_buffer_per_cpu) -> c_int {
-    static int rb_alloc_meta_page(struct ring_buffer_per_cpu *cpu_buffer)
-    {
-    struct page *page;
-    if (cpu_buffer.meta_page)
+pub static mut page: *mut c_void = core::ptr::null_mut();
+    if (cpu_buffer.meta_page) {
     return 0;
+    }
     page = alloc_page(GFP_USER | __GFP_ZERO);
-    if (!page)
+    if (!page) {
     return -ENOMEM;
+    }
     cpu_buffer.meta_page = page_to_virt(page);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn rb_free_meta_page(cpu_buffer: *mut ring_buffer_per_cpu) {
-    static void rb_free_meta_page(struct ring_buffer_per_cpu *cpu_buffer)
-    {
-    let mut addr: c_ulong = (unsigned long)cpu_buffer.meta_page;
+pub static mut addr: c_ulong = 0;
     free_page(addr);
     cpu_buffer.meta_page = core::ptr::null_mut();
     }
-    static void rb_setup_ids_meta_page(struct ring_buffer_per_cpu *cpu_buffer,
-    struct buffer_page **subbuf_ids)
-    {
-    struct trace_buffer_meta *meta = cpu_buffer.meta_page;
-    let mut nr_subbufs: c_uint = cpu_buffer.nr_pages + 1;
-    struct buffer_page *first_subbuf, *subbuf;
-    let mut cnt: c_int = 0;
-    let mut id: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn rb_setup_ids_meta_page(cpu_buffer: *mut ring_buffer_per_cpu, subbuf_ids: *mut *mut buffer_page) {
+    let mut meta = cpu_buffer.meta_page;
+pub static mut nr_subbufs: c_uint = 0;
+    let mut first_subbuf = core::ptr::null_mut();
+    let mut subbuf = core::ptr::null_mut();
+pub static mut cnt: c_int = 0;
+pub static mut id: c_int = 0;
     id = rb_page_id(cpu_buffer, cpu_buffer.reader_page, id);
     subbuf_ids[id++] = cpu_buffer.reader_page;
-    cnt++;
+    cnt += 1;
     first_subbuf = subbuf = rb_set_head_page(cpu_buffer);
     do {
     id = rb_page_id(cpu_buffer, subbuf, id);
-    if (WARN_ON(id >= nr_subbufs))
+    if (WARN_ON!(id >= nr_subbufs)) {
     break;
+    }
     subbuf_ids[id] = subbuf;
     rb_inc_page(&subbuf);
-    id++;
-    cnt++;
+    id += 1;
+    cnt += 1;
     } while (subbuf != first_subbuf);
-    WARN_ON(cnt != nr_subbufs);
+    WARN_ON!(cnt != nr_subbufs);
 // install subbuf ID to bpage translation
     cpu_buffer.subbuf_ids = subbuf_ids;
-    meta.meta_struct_len = sizeof(*meta);
+    meta.meta_struct_len = sizeof!(*meta);
     meta.nr_subbufs = nr_subbufs;
     meta.subbuf_size = rb_subbuf_size(cpu_buffer.buffer);
     meta.meta_page_size = meta.subbuf_size;
     rb_update_meta_page(cpu_buffer);
     }
-    static struct ring_buffer_per_cpu *
-    rb_get_mapped_buffer(struct trace_buffer *buffer, int cpu)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    if (!cpumask_test_cpu(cpu, buffer.cpumask))
+#[no_mangle]
+pub unsafe extern "C" fn rb_get_mapped_buffer(buffer: *mut trace_buffer, cpu: c_int) -> *mut c_void {
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+    if (!cpumask_test_cpu(cpu, buffer.cpumask)) {
     return ERR_PTR(-EINVAL);
+    }
     cpu_buffer = buffer.buffers[cpu];
     mutex_lock(&cpu_buffer.mapping_lock);
     if (!cpu_buffer.user_mapped) {
@@ -6631,29 +6927,30 @@ unsafe extern "C" fn rb_free_meta_page(cpu_buffer: *mut ring_buffer_per_cpu) {
     }
 #[no_mangle]
 unsafe extern "C" fn rb_put_mapped_buffer(cpu_buffer: *mut ring_buffer_per_cpu) {
-    static void rb_put_mapped_buffer(struct ring_buffer_per_cpu *cpu_buffer)
-    {
     mutex_unlock(&cpu_buffer.mapping_lock);
     }
 //
 // Fast-path for rb_buffer_(un)map(). Called whenever the meta-page doesn't need
 // to be set-up or torn-down.
 //
-    static int __rb_inc_dec_mapped(struct ring_buffer_per_cpu *cpu_buffer,
-    bool inc)
-    {
-    unsigned long flags;
+#[no_mangle]
+pub unsafe extern "C" fn __rb_inc_dec_mapped(cpu_buffer: *mut ring_buffer_per_cpu, inc: bool) -> c_int {
+    let mut flags = 0;
     lockdep_assert_held(&cpu_buffer.mapping_lock);
-    if (inc && cpu_buffer.user_mapped == UINT_MAX)
+    if (inc && cpu_buffer.user_mapped == UINT_MAX) {
     return -EBUSY;
-    if (WARN_ON(!inc && cpu_buffer.user_mapped == 0))
+    }
+    if (WARN_ON!(!inc && cpu_buffer.user_mapped == 0)) {
     return -EINVAL;
+    }
     mutex_lock(&cpu_buffer.buffer.mutex);
     raw_spin_lock_irqsave(&cpu_buffer.reader_lock, flags);
-    if (inc)
-    cpu_buffer.user_mapped++;
-    else
-    cpu_buffer.user_mapped--;
+    if (inc) {
+    cpu_buffer.user_mapped += 1;
+    }
+    else {
+    cpu_buffer.user_mapped -= 1;
+    }
     raw_spin_unlock_irqrestore(&cpu_buffer.reader_lock, flags);
     mutex_unlock(&cpu_buffer.buffer.mutex);
     return 0;
@@ -6670,23 +6967,25 @@ unsafe extern "C" fn rb_put_mapped_buffer(cpu_buffer: *mut ring_buffer_per_cpu) 
 // ...
 //
 
-    static int __rb_map_vma(struct ring_buffer_per_cpu *cpu_buffer,
-    struct vm_area_struct *vma)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __rb_map_vma(cpu_buffer: *mut ring_buffer_per_cpu, vma: *mut vm_area_struct) -> c_int {
     unsigned long nr_subbufs, nr_pages, nr_vma_pages;
-    let mut pgoff: pgoff_t = vma_start_pgoff(vma);
-    unsigned int subbuf_pages, subbuf_order;
+pub static mut pgoff: pgoff_t = 0;
+    let mut subbuf_pages = 0;
+    let mut subbuf_order = 0;
     struct page **pages __free(kfree) = core::ptr::null_mut();
-    let mut p: c_int = 0, s = 0;
-    int err;
+pub static mut p: c_int = 0;
+    let mut err = 0;
 // Refuse MP_PRIVATE or writable mappings
     if (vma.vm_flags & VM_WRITE || vma.vm_flags & VM_EXEC ||
-    !(vma.vm_flags & VM_MAYSHARE))
+    !(vma.vm_flags & VM_MAYSHARE)) {
     return -EPERM;
+    }
     subbuf_order = cpu_buffer.buffer.subbuf_order;
     subbuf_pages = 1 << subbuf_order;
-    if (subbuf_order && pgoff % subbuf_pages)
+    if (subbuf_order && pgoff % subbuf_pages) {
     return -EINVAL;
+    }
 //
 // Make sure the mapping cannot become writable later. Also tell the VM
 // to not touch these pages (VM_DONTCOPY | VM_DONTEXPAND).
@@ -6696,18 +6995,21 @@ unsafe extern "C" fn rb_put_mapped_buffer(cpu_buffer: *mut ring_buffer_per_cpu) 
     lockdep_assert_held(&cpu_buffer.mapping_lock);
     nr_subbufs = cpu_buffer.nr_pages + 1; /* + reader-subbuf */
     nr_pages = ((nr_subbufs + 1) << subbuf_order); /* + meta-page */
-    if (nr_pages <= pgoff)
+    if (nr_pages <= pgoff) {
     return -EINVAL;
+    }
     nr_pages -= pgoff;
     nr_vma_pages = vma_pages(vma);
-    if (!nr_vma_pages || nr_vma_pages > nr_pages)
+    if (!nr_vma_pages || nr_vma_pages > nr_pages) {
     return -EINVAL;
+    }
     nr_pages = nr_vma_pages;
     pages = kzalloc_objs(*pages, nr_pages);
-    if (!pages)
+    if (!pages) {
     return -ENOMEM;
+    }
     if (!pgoff) {
-    unsigned long meta_page_padding;
+    let mut meta_page_padding = 0;
     pages[p++] = virt_to_page(cpu_buffer.meta_page);
 //
 // Pad with the zero-page to align the meta-page with the
@@ -6725,54 +7027,59 @@ unsafe extern "C" fn rb_put_mapped_buffer(cpu_buffer: *mut ring_buffer_per_cpu) 
     s += pgoff / subbuf_pages;
     }
     while (p < nr_pages) {
-    struct buffer_page *subbuf;
-    struct page *page;
-    let mut off: c_int = 0;
-    if (WARN_ON_ONCE(s >= nr_subbufs))
+pub static mut subbuf: *mut c_void = core::ptr::null_mut();
+pub static mut page: *mut c_void = core::ptr::null_mut();
+pub static mut off: c_int = 0;
+    if (WARN_ON_ONCE!(s >= nr_subbufs)) {
     return -EINVAL;
+    }
     subbuf = cpu_buffer.subbuf_ids[s];
-    page = virt_to_page((void *)subbuf.page);
-    for (; off < (1 << (subbuf_order)); off++, page++) {
-    if (p >= nr_pages)
+    page = virt_to_page(subbuf.page);
+    while (off < (1 << (subbuf_order))) {
+    if (p >= nr_pages) {
     break;
+    }
     pages[p++] = page;
     }
-    s++;
+    s += 1;
     }
     err = vm_insert_pages(vma, vma.vm_start, pages, &nr_pages);
     return err;
     }
 
-    static int __rb_map_vma(struct ring_buffer_per_cpu *cpu_buffer,
-    struct vm_area_struct *vma)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: __rb_map_vma
+pub unsafe extern "C" fn __rb_map_vma_dup(cpu_buffer: *mut ring_buffer_per_cpu, vma: *mut vm_area_struct) -> c_int {
     return -EOPNOTSUPP;
     }
 
-    int ring_buffer_map(struct trace_buffer *buffer, int cpu,
-    struct vm_area_struct *vma)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    struct buffer_page **subbuf_ids;
-    unsigned long flags;
-    int err;
-    if (!cpumask_test_cpu(cpu, buffer.cpumask) || buffer.remote)
+#[no_mangle]
+pub unsafe extern "C" fn ring_buffer_map(buffer: *mut trace_buffer, cpu: c_int, vma: *mut vm_area_struct) -> c_int {
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+pub static mut subbuf_ids: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut err = 0;
+    if (!cpumask_test_cpu(cpu, buffer.cpumask) || buffer.remote) {
     return -EINVAL;
+    }
     cpu_buffer = buffer.buffers[cpu];
     guard(mutex)(&cpu_buffer.mapping_lock);
     if (cpu_buffer.user_mapped) {
     err = __rb_map_vma(cpu_buffer, vma);
-    if (!err)
+    if (!err) {
     err = __rb_inc_dec_mapped(cpu_buffer, true);
+    }
     return err;
     }
 // prevent another thread from changing buffer/sub-buffer sizes
     guard(mutex)(&buffer.mutex);
     err = rb_alloc_meta_page(cpu_buffer);
-    if (err)
+    if (err) {
     return err;
+    }
 // subbuf_ids includes the reader while nr_pages does not
-    subbuf_ids = kcalloc(cpu_buffer.nr_pages + 1, sizeof(*subbuf_ids), GFP_KERNEL);
+    subbuf_ids = kcalloc(cpu_buffer.nr_pages + 1, sizeof!(*subbuf_ids), GFP_KERNEL);
     if (!subbuf_ids) {
     rb_free_meta_page(cpu_buffer);
     return -ENOMEM;
@@ -6805,26 +7112,26 @@ unsafe extern "C" fn rb_put_mapped_buffer(cpu_buffer: *mut ring_buffer_per_cpu) 
 //
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_map_dup(buffer: *mut trace_buffer, cpu: c_int) {
-    void ring_buffer_map_dup(struct trace_buffer *buffer, int cpu)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    if (WARN_ON(!cpumask_test_cpu(cpu, buffer.cpumask)))
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+    if (WARN_ON!(!cpumask_test_cpu(cpu, buffer.cpumask))) {
     return;
+    }
     cpu_buffer = buffer.buffers[cpu];
     guard(mutex)(&cpu_buffer.mapping_lock);
-    if (cpu_buffer.user_mapped)
+    if (cpu_buffer.user_mapped) {
     __rb_inc_dec_mapped(cpu_buffer, true);
-    else
+    }
+    else {
     WARN(1, "Unexpected buffer stat, it should be mapped");
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_unmap(buffer: *mut trace_buffer, cpu: c_int) -> c_int {
-    int ring_buffer_unmap(struct trace_buffer *buffer, int cpu)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    unsigned long flags;
-    if (!cpumask_test_cpu(cpu, buffer.cpumask))
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    if (!cpumask_test_cpu(cpu, buffer.cpumask)) {
     return -EINVAL;
+    }
     cpu_buffer = buffer.buffers[cpu];
     guard(mutex)(&cpu_buffer.mapping_lock);
     if (!cpu_buffer.user_mapped) {
@@ -6846,20 +7153,20 @@ pub unsafe extern "C" fn ring_buffer_unmap(buffer: *mut trace_buffer, cpu: c_int
     }
 #[no_mangle]
 pub unsafe extern "C" fn ring_buffer_map_get_reader(buffer: *mut trace_buffer, cpu: c_int) -> c_int {
-    int ring_buffer_map_get_reader(struct trace_buffer *buffer, int cpu)
-    {
-    struct ring_buffer_per_cpu *cpu_buffer;
-    struct buffer_page *reader;
-    unsigned long missed_events;
-    unsigned long reader_size;
-    unsigned long flags;
+pub static mut cpu_buffer: *mut c_void = core::ptr::null_mut();
+pub static mut reader: *mut c_void = core::ptr::null_mut();
+    let mut missed_events = 0;
+    let mut reader_size = 0;
+    let mut flags = 0;
     cpu_buffer = rb_get_mapped_buffer(buffer, cpu);
-    if (IS_ERR(cpu_buffer))
+    if (IS_ERR(cpu_buffer)) {
     return (int)PTR_ERR(cpu_buffer);
+    }
     raw_spin_lock_irqsave(&cpu_buffer.reader_lock, flags);
-    consume:
-    if (rb_per_cpu_empty(cpu_buffer))
-    goto out;
+// label;
+    if (rb_per_cpu_empty(cpu_buffer)) {
+// goto;
+    }
     reader_size = rb_page_size(cpu_buffer.reader_page);
 //
 // There are data to be read on the current reader page, we can
@@ -6867,37 +7174,41 @@ pub unsafe extern "C" fn ring_buffer_map_get_reader(buffer: *mut trace_buffer, c
 // everything. Let's update the kernel reader accordingly.
 //
     if (cpu_buffer.reader_page.read < reader_size) {
-    while (cpu_buffer.reader_page.read < reader_size)
+    while (cpu_buffer.reader_page.read < reader_size) {
     rb_advance_reader(cpu_buffer);
-    goto out;
+    }
+// goto;
     }
 // Did the reader catch up with the writer?
-    if (cpu_buffer.reader_page == cpu_buffer.commit_page)
-    goto out;
+    if (cpu_buffer.reader_page == cpu_buffer.commit_page) {
+// goto;
+    }
     reader = rb_get_reader_page(cpu_buffer);
-    if (WARN_ON(!reader))
-    goto out;
+    if (WARN_ON!(!reader)) {
+// goto;
+    }
 // Check if any events were dropped
     missed_events = cpu_buffer.lost_events;
     if (missed_events) {
     if (cpu_buffer.reader_page != cpu_buffer.commit_page) {
-    struct buffer_data_page *dpage = reader.page;
-    unsigned int commit;
+    let mut dpage = reader.page;
+    let mut commit = 0;
 //
 // Use the real_end for the data size,
 // This gives us a chance to store the lost events
 // on the page.
 //
-    if (reader.real_end)
+    if (reader.real_end) {
     local_set(&dpage.commit, reader.real_end);
+    }
 //
 // If there is room at the end of the page to save the
 // missed events, then record it there.
 //
     commit = rb_page_size(reader);
-    if (rb_page_capacity(reader) - commit >= sizeof(missed_events)) {
+    if (rb_page_capacity(reader) - commit >= sizeof!(missed_events)) {
     memcpy(&dpage.data[commit], &missed_events,
-    sizeof(missed_events));
+    sizeof!(missed_events));
     local_add(RB_MISSED_STORED, &dpage.commit);
     }
     local_add(RB_MISSED_EVENTS, &dpage.commit);
@@ -6915,13 +7226,13 @@ pub unsafe extern "C" fn ring_buffer_map_get_reader(buffer: *mut trace_buffer, c
 //
 // TODO: Add missed events to the page for user space to know.
 //
-    pr_info("Ring buffer [%d] commit overrun lost %ld events at timestamp:%lld\n",
+    pr_info!("Ring buffer [%d] commit overrun lost %ld events at timestamp:%lld\n",
     cpu, missed_events, cpu_buffer.reader_page.page.time_stamp);
     }
     }
     cpu_buffer.lost_events = 0;
-    goto consume;
-    out:
+// goto;
+// label;
 // Some archs do not have data cache coherency between kernel and user-space
     flush_kernel_vmap_range(cpu_buffer.reader_page.page,
     rb_subbuf_size(buffer));
@@ -6932,8 +7243,6 @@ pub unsafe extern "C" fn ring_buffer_map_get_reader(buffer: *mut trace_buffer, c
     }
 #[no_mangle]
 unsafe extern "C" fn rb_cpu_sync(data: *mut c_void) {
-    static void rb_cpu_sync(void *data)
-    {
 // Not really needed, but documents what is happening
     smp_rmb();
     }
@@ -6944,30 +7253,31 @@ unsafe extern "C" fn rb_cpu_sync(data: *mut c_void) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn trace_rb_cpu_prepare(cpu: c_uint, node: *mut hlist_node) -> c_int {
-    int trace_rb_cpu_prepare(unsigned int cpu, struct hlist_node *node)
-    {
-    struct trace_buffer *buffer;
-    long nr_pages_same;
-    int cpu_i;
-    unsigned long nr_pages;
-    buffer = container_of(node, struct trace_buffer, node);
-    if (cpumask_test_cpu(cpu, buffer.cpumask))
+pub static mut buffer: *mut c_void = core::ptr::null_mut();
+    let mut nr_pages_same = 0;
+    let mut cpu_i = 0;
+    let mut nr_pages = 0;
+    buffer = container_of!(node, trace_buffer, node);
+    if (cpumask_test_cpu(cpu, buffer.cpumask)) {
     return 0;
+    }
     nr_pages = 0;
     nr_pages_same = 1;
 // check if all cpu sizes are same
     for_each_buffer_cpu(buffer, cpu_i) {
 // fill in the size from first enabled cpu
-    if (nr_pages == 0)
+    if (nr_pages == 0) {
     nr_pages = buffer.buffers[cpu_i].nr_pages;
+    }
     if (nr_pages != buffer.buffers[cpu_i].nr_pages) {
     nr_pages_same = 0;
     break;
     }
     }
 // allocate minimum pages, user can later expand it
-    if (!nr_pages_same)
+    if (!nr_pages_same) {
     nr_pages = 2;
+    }
     buffer.buffers[cpu] =
     rb_allocate_cpu_buffer(buffer, nr_pages, cpu);
     if (!buffer.buffers[cpu]) {
@@ -7037,25 +7347,23 @@ pub const RB_TEST_BUFFER_SIZE: c_int = 1048576;
 #[derive(Copy, Clone)]
 pub struct rb_item {
     pub size: c_int,
-    pub str: [c_char; ],
+    pub str: [c_char; 0],
 }
 
 #[no_mangle]
 unsafe extern "C" fn rb_write_something(data: *mut rb_test_data, nested: bool) -> __init int {
-    static __init int rb_write_something(struct rb_test_data *data, bool nested)
-    {
-    struct ring_buffer_event *event;
-    struct rb_item *item;
-    bool started;
-    int event_len;
-    int size;
-    int len;
-    int cnt;
+pub static mut event: *mut c_void = core::ptr::null_mut();
+pub static mut item: *mut c_void = core::ptr::null_mut();
+    let mut started = 0;
+    let mut event_len = 0;
+    let mut size = 0;
+    let mut len = 0;
+    let mut cnt = 0;
 // Have nested writes different that what is written
     cnt = data.cnt + (nested ? 27 : 0);
 // Multiply cnt by ~e, to make some unique increment
-    size = (cnt * 68 / 25) % (sizeof(rb_string) - 1);
-    len = size + sizeof(struct rb_item);
+    size = (cnt * 68 / 25) % (sizeof!(rb_string) - 1);
+    len = size + sizeof!(rb_item);
     started = rb_test_started;
 // read rb_test_started before checking buffer enabled
     smp_rmb();
@@ -7063,48 +7371,53 @@ unsafe extern "C" fn rb_write_something(data: *mut rb_test_data, nested: bool) -
     if (!event) {
 // Ignore dropped events before test starts.
     if (started) {
-    if (nested)
+    if (nested) {
     data.bytes_dropped_nested += len;
-    else
+    }
+    else {
     data.bytes_dropped += len;
+    }
     }
     return len;
     }
     event_len = ring_buffer_event_length(event);
-    if (RB_WARN_ON(data.buffer, event_len < len))
-    goto out;
+    if (RB_WARN_ON(data.buffer, event_len < len)) {
+// goto;
+    }
     item = ring_buffer_event_data(event);
     item.size = size;
     memcpy(item.str, rb_string, size);
     if (nested) {
     data.bytes_alloc_nested += event_len;
     data.bytes_written_nested += len;
-    data.events_nested++;
-    if (!data.min_size_nested || len < data.min_size_nested)
+    data.events_nested += 1;
+    if (!data.min_size_nested || len < data.min_size_nested) {
     data.min_size_nested = len;
-    if (len > data.max_size_nested)
+    }
+    if (len > data.max_size_nested) {
     data.max_size_nested = len;
+    }
     } else {
     data.bytes_alloc += event_len;
     data.bytes_written += len;
-    data.events++;
-    if (!data.min_size || len < data.min_size)
-    data.max_size = len;
-    if (len > data.max_size)
+    data.events += 1;
+    if (!data.min_size || len < data.min_size) {
     data.max_size = len;
     }
-    out:
+    if (len > data.max_size) {
+    data.max_size = len;
+    }
+    }
+// label;
     ring_buffer_unlock_commit(data.buffer);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn rb_test(arg: *mut c_void) -> __init int {
-    static __init int rb_test(void *arg)
-    {
-    struct rb_test_data *data = arg;
+    let mut data = arg;
     while (!kthread_should_stop()) {
     rb_write_something(data, false);
-    data.cnt++;
+    data.cnt += 1;
     set_current_state(TASK_INTERRUPTIBLE);
 // Now sleep between a min of 100-300us and a max of 1ms
     usleep_range(((data.cnt % 3) + 1) * 100, 1000);
@@ -7113,17 +7426,13 @@ unsafe extern "C" fn rb_test(arg: *mut c_void) -> __init int {
     }
 #[no_mangle]
 unsafe extern "C" fn rb_ipi(ignore: *mut c_void) -> __init void {
-    static __init void rb_ipi(void *ignore)
-    {
-    struct rb_test_data *data;
-    let mut cpu: c_int = smp_processor_id();
+pub static mut data: *mut c_void = core::ptr::null_mut();
+pub static mut cpu: c_int = 0;
     data = &rb_data[cpu];
     rb_write_something(data, true);
     }
 #[no_mangle]
 unsafe extern "C" fn rb_hammer_test(arg: *mut c_void) -> __init int {
-    static __init int rb_hammer_test(void *arg)
-    {
     while (!kthread_should_stop()) {
 // Send an IPI to all cpus to write data!
     smp_call_function(rb_ipi, core::ptr::null_mut(), 1);
@@ -7134,20 +7443,19 @@ unsafe extern "C" fn rb_hammer_test(arg: *mut c_void) -> __init int {
     }
 #[no_mangle]
 unsafe extern "C" fn test_ringbuffer() -> __init int {
-    static __init int test_ringbuffer(void)
-    {
-    struct task_struct *rb_hammer;
-    struct trace_buffer *buffer;
-    int cpu;
-    let mut ret: c_int = 0;
+pub static mut rb_hammer: *mut c_void = core::ptr::null_mut();
+pub static mut buffer: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
+pub static mut ret: c_int = 0;
     if (security_locked_down(LOCKDOWN_TRACEFS)) {
-    pr_warn("Lockdown is enabled, skipping ring buffer tests\n");
+    pr_warn!("Lockdown is enabled, skipping ring buffer tests\n");
     return 0;
     }
-    pr_info("Running ring buffer tests...\n");
+    pr_info!("Running ring buffer tests...\n");
     buffer = ring_buffer_alloc(RB_TEST_BUFFER_SIZE, RB_FL_OVERWRITE);
-    if (WARN_ON(!buffer))
+    if (WARN_ON!(!buffer)) {
     return 0;
+    }
 // Disable buffer so that threads can't write to it yet
     ring_buffer_record_off(buffer);
     for_each_online_cpu(cpu) {
@@ -7156,18 +7464,18 @@ unsafe extern "C" fn test_ringbuffer() -> __init int {
     rb_data[cpu].cnt = cpu;
     rb_threads[cpu] = kthread_run_on_cpu(rb_test, &rb_data[cpu],
     cpu, "rbtester/%u");
-    if (WARN_ON(IS_ERR(rb_threads[cpu]))) {
+    if (WARN_ON!(IS_ERR(rb_threads[cpu]))) {
     pr_cont("FAILED\n");
     ret = PTR_ERR(rb_threads[cpu]);
-    goto out_free;
+// goto;
     }
     }
 // Now create the rb hammer!
     rb_hammer = kthread_run(rb_hammer_test, core::ptr::null_mut(), "rbhammer");
-    if (WARN_ON(IS_ERR(rb_hammer))) {
+    if (WARN_ON!(IS_ERR(rb_hammer))) {
     pr_cont("FAILED\n");
     ret = PTR_ERR(rb_hammer);
-    goto out_free;
+// goto;
     }
     ring_buffer_record_on(buffer);
 //
@@ -7185,10 +7493,11 @@ unsafe extern "C" fn test_ringbuffer() -> __init int {
 // Just run for 10 seconds
     schedule_timeout(10 * HZ);
     kthread_stop(rb_hammer);
-    out_free:
+// label;
     for_each_online_cpu(cpu) {
-    if (IS_ERR_OR_NULL(rb_threads[cpu]))
+    if (IS_ERR_OR_NULL(rb_threads[cpu])) {
     break;
+    }
     kthread_stop(rb_threads[cpu]);
     }
     if (ret) {
@@ -7196,22 +7505,22 @@ unsafe extern "C" fn test_ringbuffer() -> __init int {
     return ret;
     }
 // Report!
-    pr_info("finished\n");
+    pr_info!("finished\n");
     for_each_online_cpu(cpu) {
-    struct ring_buffer_event *event;
-    struct rb_test_data *data = &rb_data[cpu];
-    struct rb_item *item;
-    unsigned long total_events;
-    unsigned long total_dropped;
-    unsigned long total_written;
-    unsigned long total_alloc;
-    let mut total_read: c_ulong = 0;
-    let mut total_size: c_ulong = 0;
-    let mut total_len: c_ulong = 0;
-    let mut total_lost: c_ulong = 0;
-    unsigned long lost;
-    int big_event_size;
-    int small_event_size;
+pub static mut event: *mut c_void = core::ptr::null_mut();
+    let mut data = &rb_data[cpu];
+pub static mut item: *mut c_void = core::ptr::null_mut();
+    let mut total_events = 0;
+    let mut total_dropped = 0;
+    let mut total_written = 0;
+    let mut total_alloc = 0;
+pub static mut total_read: c_ulong = 0;
+pub static mut total_size: c_ulong = 0;
+pub static mut total_len: c_ulong = 0;
+pub static mut total_lost: c_ulong = 0;
+    let mut lost = 0;
+    let mut big_event_size = 0;
+    let mut small_event_size = 0;
     ret = -1;
     total_events = data.events + data.events_nested;
     total_written = data.bytes_written + data.bytes_written_nested;
@@ -7219,54 +7528,59 @@ unsafe extern "C" fn test_ringbuffer() -> __init int {
     total_dropped = data.bytes_dropped + data.bytes_dropped_nested;
     big_event_size = data.max_size + data.max_size_nested;
     small_event_size = data.min_size + data.min_size_nested;
-    pr_info("CPU %d:\n", cpu);
-    pr_info("              events:    %ld\n", total_events);
-    pr_info("       dropped bytes:    %ld\n", total_dropped);
-    pr_info("       alloced bytes:    %ld\n", total_alloc);
-    pr_info("       written bytes:    %ld\n", total_written);
-    pr_info("       biggest event:    %d\n", big_event_size);
-    pr_info("      smallest event:    %d\n", small_event_size);
-    if (RB_WARN_ON(buffer, total_dropped))
+    pr_info!("CPU %d:\n", cpu);
+    pr_info!("              events:    %ld\n", total_events);
+    pr_info!("       dropped bytes:    %ld\n", total_dropped);
+    pr_info!("       alloced bytes:    %ld\n", total_alloc);
+    pr_info!("       written bytes:    %ld\n", total_written);
+    pr_info!("       biggest event:    %d\n", big_event_size);
+    pr_info!("      smallest event:    %d\n", small_event_size);
+    if (RB_WARN_ON(buffer, total_dropped)) {
     break;
+    }
     ret = 0;
     while ((event = ring_buffer_consume(buffer, cpu, core::ptr::null_mut(), &lost))) {
     total_lost += lost;
     item = ring_buffer_event_data(event);
     total_len += ring_buffer_event_length(event);
-    total_size += item.size + sizeof(struct rb_item);
+    total_size += item.size + sizeof!(rb_item);
     if (memcmp(&item.str[0], rb_string, item.size) != 0) {
-    pr_info("FAILED!\n");
-    pr_info("buffer had: %.*s\n", item.size, item.str);
-    pr_info("expected:   %.*s\n", item.size, rb_string);
+    pr_info!("FAILED!\n");
+    pr_info!("buffer had: %.*s\n", item.size, item.str);
+    pr_info!("expected:   %.*s\n", item.size, rb_string);
     RB_WARN_ON(buffer, 1);
     ret = -1;
     break;
     }
-    total_read++;
+    total_read += 1;
     }
-    if (ret)
+    if (ret) {
     break;
+    }
     ret = -1;
-    pr_info("         read events:   %ld\n", total_read);
-    pr_info("         lost events:   %ld\n", total_lost);
-    pr_info("        total events:   %ld\n", total_lost + total_read);
-    pr_info("  recorded len bytes:   %ld\n", total_len);
-    pr_info(" recorded size bytes:   %ld\n", total_size);
+    pr_info!("         read events:   %ld\n", total_read);
+    pr_info!("         lost events:   %ld\n", total_lost);
+    pr_info!("        total events:   %ld\n", total_lost + total_read);
+    pr_info!("  recorded len bytes:   %ld\n", total_len);
+    pr_info!(" recorded size bytes:   %ld\n", total_size);
     if (total_lost) {
-    pr_info(" With dropped events, record len and size may not match\n"
+    pr_info!(" With dropped events, record len and size may not match\n"
     " alloced and written from above\n");
     } else {
     if (RB_WARN_ON(buffer, total_len != total_alloc ||
-    total_size != total_written))
+    total_size != total_written)) {
     break;
     }
-    if (RB_WARN_ON(buffer, total_lost + total_read != total_events))
+    }
+    if (RB_WARN_ON(buffer, total_lost + total_read != total_events)) {
     break;
+    }
     ret = 0;
     }
-    if (!ret)
-    pr_info("Ring buffer PASSED!\n");
+    if (!ret) {
+    pr_info!("Ring buffer PASSED!\n");
+    }
     ring_buffer_free(buffer);
     return 0;
     }
-    late_initcall(test_ringbuffer);
+    late_initcall!(test_ringbuffer);

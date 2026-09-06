@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -46,8 +296,8 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     static bool multishot;
 // Fields set based on lines observed in the console.
     static struct {
-    bool report_found;
-    bool async_fault;
+    let mut report_found = 0;
+    let mut async_fault = 0;
     } test_status;
 //
 // Some tests use these global variables to store return values from function
@@ -58,21 +308,18 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Probe for console output: obtains test_status lines of interest.
 #[no_mangle]
 unsafe extern "C" fn probe_console(ignore: *mut c_void, buf: *const c_char, len: usize) {
-    static void probe_console(void *ignore, const char *buf, size_t len)
-    {
-    if (strnstr(buf, "BUG: KASAN: ", len))
+    if (strnstr(buf, "BUG: KASAN: ", len)) {
     WRITE_ONCE(test_status.report_found, true);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strnstr(buf, ": "Asynchronous fault:, _arg: len)) -> else {
-    else if (strnstr(buf, "Asynchronous fault: ", len))
+    }
+
+    else if (strnstr(buf, "Asynchronous fault: ", len)) {
     WRITE_ONCE(test_status.async_fault, true);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn kasan_suite_init(suite: *mut kunit_suite) -> c_int {
-    static int kasan_suite_init(struct kunit_suite *suite)
-    {
     if (!kasan_enabled()) {
-    pr_err("Can't run KASAN tests with KASAN disabled");
+    pr_err!("Can't run KASAN tests with KASAN disabled");
     return -1;
     }
 // Stop failing KUnit tests on KASAN reports.
@@ -88,8 +335,6 @@ unsafe extern "C" fn kasan_suite_init(suite: *mut kunit_suite) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn kasan_suite_exit(suite: *mut kunit_suite) {
-    static void kasan_suite_exit(struct kunit_suite *suite)
-    {
     kasan_kunit_test_suite_end();
     kasan_restore_multi_shot(multishot);
     unregister_trace_console(probe_console, core::ptr::null_mut());
@@ -97,8 +342,6 @@ unsafe extern "C" fn kasan_suite_exit(suite: *mut kunit_suite) {
     }
 #[no_mangle]
 unsafe extern "C" fn kasan_test_exit(test: *mut kunit) {
-    static void kasan_test_exit(struct kunit *test)
-    {
     KUNIT_EXPECT_FALSE(test, READ_ONCE(test_status.report_found));
     }
 //
@@ -127,33 +370,36 @@ unsafe extern "C" fn kasan_test_exit(test: *mut kunit) {
 // KUNIT_EXPECT_KASAN_RESULT and in kasan_test_exit.
 //
 
-    do {									\
-    if (IS_ENABLED(CONFIG_KASAN_HW_TAGS) &&				\
-    kasan_sync_fault_possible())				\
-    migrate_disable();					\
-    KUNIT_EXPECT_FALSE(test, READ_ONCE(test_status.report_found));	\
-    barrier();							\
-    expr;								\
-    barrier();							\
-    if (kasan_async_fault_possible())				\
-    kasan_force_async_fault();				\
-    if (READ_ONCE(test_status.report_found) != fail) {		\
-    KUNIT_FAIL(test, KUNIT_SUBTEST_INDENT "KASAN failure"	\
-    "%sexpected in \"" expr_str		\
-    "\", but %soccurred",			\
-    (fail ? " " : " not "),		\
-    (test_status.report_found ?		\
-    "" : "none "));			\
-    }								\
-    if (IS_ENABLED(CONFIG_KASAN_HW_TAGS) &&				\
-    kasan_sync_fault_possible()) {				\
-    if (READ_ONCE(test_status.report_found) &&		\
-    !READ_ONCE(test_status.async_fault))		\
-    kasan_enable_hw_tags();				\
-    migrate_enable();					\
-    }								\
-    WRITE_ONCE(test_status.report_found, false);			\
-    WRITE_ONCE(test_status.async_fault, false);			\
+    do {									
+    if (IS_ENABLED!(CONFIG_KASAN_HW_TAGS) &&				
+    kasan_sync_fault_possible())				 {
+    migrate_disable();					
+    }
+    KUNIT_EXPECT_FALSE(test, READ_ONCE(test_status.report_found));	
+    barrier();							
+    expr;								
+    barrier();							
+    if (kasan_async_fault_possible())				 {
+    kasan_force_async_fault();				
+    }
+    if (READ_ONCE(test_status.report_found) != fail) {		
+    KUNIT_FAIL(test, KUNIT_SUBTEST_INDENT "KASAN failure"	
+    "%sexpected in \"" expr_str		
+    "\", but %soccurred",			
+    (fail ? " " : " not "),		
+    (test_status.report_found ?		
+    "" : "none "));			
+    }								
+    if (IS_ENABLED!(CONFIG_KASAN_HW_TAGS) &&				
+    kasan_sync_fault_possible()) {				
+    if (READ_ONCE(test_status.report_found) &&		
+    !READ_ONCE(test_status.async_fault))		 {
+    kasan_enable_hw_tags();				
+    }
+    migrate_enable();					
+    }								
+    WRITE_ONCE(test_status.report_found, false);			
+    WRITE_ONCE(test_status.async_fault, false);			
     } while (0)
 //
 // KUNIT_EXPECT_KASAN_FAIL - check that the executed expression produces a
@@ -179,30 +425,33 @@ unsafe extern "C" fn kasan_test_exit(test: *mut kunit) {
 // when the write-only mode is not enabled.
 //
 
-    KUNIT_EXPECT_KASAN_RESULT(test, expr, #expr,			\
-    !kasan_write_only_enabled())			\
+    KUNIT_EXPECT_KASAN_RESULT(test, expr, #expr,			
+    !kasan_write_only_enabled())			
 
-    if (!IS_ENABLED(config))					\
-    kunit_skip((test), "Test requires " #config "=y");	\
+    if (!IS_ENABLED!(config))					 {
+    kunit_skip((test), "Test requires " #config "=y");	
+    }
     } while (0)
 
-    if (IS_ENABLED(config))						\
-    kunit_skip((test), "Test requires " #config "=n");	\
+    if (IS_ENABLED!(config))						 {
+    kunit_skip((test), "Test requires " #config "=n");	
+    }
     } while (0)
 
-    if (IS_ENABLED(CONFIG_KASAN_HW_TAGS))				\
-    break;  /* No compiler instrumentation. */		\
-    if (IS_ENABLED(CONFIG_CC_HAS_KASAN_MEMINTRINSIC_PREFIX))	\
-    break;  /* Should always be instrumented! */		\
-    if (IS_ENABLED(CONFIG_GENERIC_ENTRY))				\
-    kunit_skip((test), "Test requires checked mem*()");	\
+    if (IS_ENABLED!(CONFIG_KASAN_HW_TAGS))				 {
+    break;  /* No compiler instrumentation. */		
+    }
+    if (IS_ENABLED!(CONFIG_CC_HAS_KASAN_MEMINTRINSIC_PREFIX))	 {
+    break;  /* Should always be instrumented! */		
+    }
+    if (IS_ENABLED!(CONFIG_GENERIC_ENTRY))				 {
+    kunit_skip((test), "Test requires checked mem*()");	
+    }
     } while (0)
 #[no_mangle]
 unsafe extern "C" fn kmalloc_oob_right(test: *mut kunit) {
-    static void kmalloc_oob_right(struct kunit *test)
-    {
-    char *ptr;
-    let mut size: usize = 128 - KASAN_GRANULE_SIZE - 5;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 0;
     ptr = kmalloc(size, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
     OPTIMIZER_HIDE_VAR(ptr);
@@ -210,8 +459,9 @@ unsafe extern "C" fn kmalloc_oob_right(test: *mut kunit) {
 // An unaligned access past the requested kmalloc size.
 // Only generic KASAN can precisely detect these.
 //
-    if (IS_ENABLED(CONFIG_KASAN_GENERIC))
+    if (IS_ENABLED!(CONFIG_KASAN_GENERIC)) {
     KUNIT_EXPECT_KASAN_FAIL(test, ptr[size] = 'x');
+    }
 //
 // An aligned access into the first out-of-bounds granule that falls
 // within the aligned kmalloc object.
@@ -224,10 +474,8 @@ unsafe extern "C" fn kmalloc_oob_right(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn kmalloc_oob_left(test: *mut kunit) {
-    static void kmalloc_oob_left(struct kunit *test)
-    {
-    char *ptr;
-    let mut size: usize = 15;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 15;
     ptr = kmalloc(size, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
     OPTIMIZER_HIDE_VAR(ptr);
@@ -236,10 +484,8 @@ unsafe extern "C" fn kmalloc_oob_left(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn kmalloc_node_oob_right(test: *mut kunit) {
-    static void kmalloc_node_oob_right(struct kunit *test)
-    {
-    char *ptr;
-    let mut size: usize = 4096;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 4096;
     ptr = kmalloc_node(size, GFP_KERNEL, 0);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
     OPTIMIZER_HIDE_VAR(ptr);
@@ -248,10 +494,8 @@ unsafe extern "C" fn kmalloc_node_oob_right(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn kmalloc_track_caller_oob_right(test: *mut kunit) {
-    static void kmalloc_track_caller_oob_right(struct kunit *test)
-    {
-    char *ptr;
-    let mut size: usize = 128 - KASAN_GRANULE_SIZE;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 0;
 //
 // Check that KASAN detects out-of-bounds access for object allocated via
 // kmalloc_track_caller().
@@ -277,10 +521,8 @@ unsafe extern "C" fn kmalloc_track_caller_oob_right(test: *mut kunit) {
 //
 #[no_mangle]
 unsafe extern "C" fn kmalloc_big_oob_right(test: *mut kunit) {
-    static void kmalloc_big_oob_right(struct kunit *test)
-    {
-    char *ptr;
-    let mut size: usize = KMALLOC_MAX_CACHE_SIZE - 256;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 0;
     ptr = kmalloc(size, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
     OPTIMIZER_HIDE_VAR(ptr);
@@ -294,10 +536,8 @@ unsafe extern "C" fn kmalloc_big_oob_right(test: *mut kunit) {
 //
 #[no_mangle]
 unsafe extern "C" fn kmalloc_large_oob_right(test: *mut kunit) {
-    static void kmalloc_large_oob_right(struct kunit *test)
-    {
-    char *ptr;
-    let mut size: usize = KMALLOC_MAX_CACHE_SIZE + 10;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 0;
     ptr = kmalloc(size, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
     OPTIMIZER_HIDE_VAR(ptr);
@@ -306,33 +546,27 @@ unsafe extern "C" fn kmalloc_large_oob_right(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn kmalloc_large_uaf(test: *mut kunit) {
-    static void kmalloc_large_uaf(struct kunit *test)
-    {
-    char *ptr;
-    let mut size: usize = KMALLOC_MAX_CACHE_SIZE + 10;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 0;
     ptr = kmalloc(size, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
     kfree(ptr);
-    KUNIT_EXPECT_KASAN_FAIL_READ(test, ((volatile char *)ptr)[0]);
+    KUNIT_EXPECT_KASAN_FAIL_READ(test, (ptr)[0]);
     }
 #[no_mangle]
 unsafe extern "C" fn kmalloc_large_invalid_free(test: *mut kunit) {
-    static void kmalloc_large_invalid_free(struct kunit *test)
-    {
-    char *ptr;
-    let mut size: usize = KMALLOC_MAX_CACHE_SIZE + 10;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 0;
     ptr = kmalloc(size, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
     KUNIT_EXPECT_KASAN_FAIL(test, kfree(ptr + 1));
     }
 #[no_mangle]
 unsafe extern "C" fn page_alloc_oob_right(test: *mut kunit) {
-    static void page_alloc_oob_right(struct kunit *test)
-    {
-    char *ptr;
-    struct page *pages;
-    let mut order: usize = 4;
-    let mut size: usize = (1UL << (PAGE_SHIFT + order));
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut pages: *mut c_void = core::ptr::null_mut();
+pub static mut order: usize = 4;
+pub static mut size: usize = 0;
 //
 // With generic KASAN page allocations have no redzones, thus
 // out-of-bounds detection is not guaranteed.
@@ -347,22 +581,20 @@ unsafe extern "C" fn page_alloc_oob_right(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn page_alloc_uaf(test: *mut kunit) {
-    static void page_alloc_uaf(struct kunit *test)
-    {
-    char *ptr;
-    struct page *pages;
-    let mut order: usize = 4;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut pages: *mut c_void = core::ptr::null_mut();
+pub static mut order: usize = 4;
     pages = alloc_pages(GFP_KERNEL, order);
     ptr = page_address(pages);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
     free_pages((unsigned long)ptr, order);
-    KUNIT_EXPECT_KASAN_FAIL_READ(test, ((volatile char *)ptr)[0]);
+    KUNIT_EXPECT_KASAN_FAIL_READ(test, (ptr)[0]);
     }
-    static void krealloc_more_oob_helper(struct kunit *test,
-    size_t size1, size_t size2)
-    {
-    char *ptr1, *ptr2;
-    size_t middle;
+#[no_mangle]
+pub unsafe extern "C" fn krealloc_more_oob_helper(test: *mut kunit, size1: size_t, size2: size_t) {
+    let mut ptr1 = core::ptr::null_mut();
+    let mut ptr2 = core::ptr::null_mut();
+    let mut middle = 0;
     KUNIT_ASSERT_LT(test, size1, size2);
     middle = size1 + (size2 - size1) / 2;
     ptr1 = kmalloc(size1, GFP_KERNEL);
@@ -377,18 +609,19 @@ unsafe extern "C" fn page_alloc_uaf(test: *mut kunit) {
     ptr2[middle] = 'x';
     ptr2[size2 - 1] = 'x';
 // Generic mode is precise, so unaligned size2 must be inaccessible.
-    if (IS_ENABLED(CONFIG_KASAN_GENERIC))
+    if (IS_ENABLED!(CONFIG_KASAN_GENERIC)) {
     KUNIT_EXPECT_KASAN_FAIL(test, ptr2[size2] = 'x');
+    }
 // For all modes first aligned offset after size2 must be inaccessible.
     KUNIT_EXPECT_KASAN_FAIL(test,
     ptr2[round_up(size2, KASAN_GRANULE_SIZE)] = 'x');
     kfree(ptr2);
     }
-    static void krealloc_less_oob_helper(struct kunit *test,
-    size_t size1, size_t size2)
-    {
-    char *ptr1, *ptr2;
-    size_t middle;
+#[no_mangle]
+pub unsafe extern "C" fn krealloc_less_oob_helper(test: *mut kunit, size1: size_t, size2: size_t) {
+    let mut ptr1 = core::ptr::null_mut();
+    let mut ptr2 = core::ptr::null_mut();
+    let mut middle = 0;
     KUNIT_ASSERT_LT(test, size2, size1);
     middle = size2 + (size1 - size2) / 2;
     ptr1 = kmalloc(size1, GFP_KERNEL);
@@ -400,8 +633,9 @@ unsafe extern "C" fn page_alloc_uaf(test: *mut kunit) {
 // Must be accessible for all modes.
     ptr2[size2 - 1] = 'x';
 // Generic mode is precise, so unaligned size2 must be inaccessible.
-    if (IS_ENABLED(CONFIG_KASAN_GENERIC))
+    if (IS_ENABLED!(CONFIG_KASAN_GENERIC)) {
     KUNIT_EXPECT_KASAN_FAIL(test, ptr2[size2] = 'x');
+    }
 // For all modes first aligned offset after size2 must be inaccessible.
     KUNIT_EXPECT_KASAN_FAIL(test,
     ptr2[round_up(size2, KASAN_GRANULE_SIZE)] = 'x');
@@ -420,27 +654,19 @@ unsafe extern "C" fn page_alloc_uaf(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn krealloc_more_oob(test: *mut kunit) {
-    static void krealloc_more_oob(struct kunit *test)
-    {
     krealloc_more_oob_helper(test, 201, 235);
     }
 #[no_mangle]
 unsafe extern "C" fn krealloc_less_oob(test: *mut kunit) {
-    static void krealloc_less_oob(struct kunit *test)
-    {
     krealloc_less_oob_helper(test, 235, 201);
     }
 #[no_mangle]
 unsafe extern "C" fn krealloc_large_more_oob(test: *mut kunit) {
-    static void krealloc_large_more_oob(struct kunit *test)
-    {
     krealloc_more_oob_helper(test, KMALLOC_MAX_CACHE_SIZE + 201,
     KMALLOC_MAX_CACHE_SIZE + 235);
     }
 #[no_mangle]
 unsafe extern "C" fn krealloc_large_less_oob(test: *mut kunit) {
-    static void krealloc_large_less_oob(struct kunit *test)
-    {
     krealloc_less_oob_helper(test, KMALLOC_MAX_CACHE_SIZE + 235,
     KMALLOC_MAX_CACHE_SIZE + 201);
     }
@@ -450,22 +676,19 @@ unsafe extern "C" fn krealloc_large_less_oob(test: *mut kunit) {
 //
 #[no_mangle]
 unsafe extern "C" fn krealloc_uaf(test: *mut kunit) {
-    static void krealloc_uaf(struct kunit *test)
-    {
-    char *ptr1, *ptr2;
-    let mut size1: c_int = 201;
-    let mut size2: c_int = 235;
+    let mut ptr1 = core::ptr::null_mut();
+    let mut ptr2 = core::ptr::null_mut();
+pub static mut size1: c_int = 201;
+pub static mut size2: c_int = 235;
     ptr1 = kmalloc(size1, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr1);
     kfree(ptr1);
     KUNIT_EXPECT_KASAN_FAIL(test, ptr2 = krealloc(ptr1, size2, GFP_KERNEL));
     KUNIT_ASSERT_NULL(test, ptr2);
-    KUNIT_EXPECT_KASAN_FAIL_READ(test, *(volatile char *)ptr1);
+    KUNIT_EXPECT_KASAN_FAIL_READ(test, *ptr1);
     }
 #[no_mangle]
 unsafe extern "C" fn kmalloc_oob_16(test: *mut kunit) {
-    static void kmalloc_oob_16(struct kunit *test)
-    {
     struct {
     u64 words[2];
     } *ptr1, *ptr2;
@@ -473,7 +696,7 @@ unsafe extern "C" fn kmalloc_oob_16(test: *mut kunit) {
 // This test is specifically crafted for the generic mode.
     KASAN_TEST_NEEDS_CONFIG_ON(test, CONFIG_KASAN_GENERIC);
 // RELOC_HIDE to prevent gcc from warning about short alloc
-    ptr1 = RELOC_HIDE(kmalloc(sizeof(*ptr1) - 3, GFP_KERNEL), 0);
+    ptr1 = RELOC_HIDE(kmalloc(sizeof!(*ptr1) - 3, GFP_KERNEL), 0);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr1);
     ptr2 = kmalloc_obj(*ptr2);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr2);
@@ -485,8 +708,6 @@ unsafe extern "C" fn kmalloc_oob_16(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn kmalloc_uaf_16(test: *mut kunit) {
-    static void kmalloc_uaf_16(struct kunit *test)
-    {
     struct {
     u64 words[2];
     } *ptr1, *ptr2;
@@ -506,11 +727,9 @@ unsafe extern "C" fn kmalloc_uaf_16(test: *mut kunit) {
 //
 #[no_mangle]
 unsafe extern "C" fn kmalloc_oob_memset_2(test: *mut kunit) {
-    static void kmalloc_oob_memset_2(struct kunit *test)
-    {
-    char *ptr;
-    let mut size: usize = 128 - KASAN_GRANULE_SIZE;
-    let mut memset_size: usize = 2;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 0;
+pub static mut memset_size: usize = 2;
     KASAN_TEST_NEEDS_CHECKED_MEMINTRINSICS(test);
     ptr = kmalloc(size, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
@@ -522,11 +741,9 @@ unsafe extern "C" fn kmalloc_oob_memset_2(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn kmalloc_oob_memset_4(test: *mut kunit) {
-    static void kmalloc_oob_memset_4(struct kunit *test)
-    {
-    char *ptr;
-    let mut size: usize = 128 - KASAN_GRANULE_SIZE;
-    let mut memset_size: usize = 4;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 0;
+pub static mut memset_size: usize = 4;
     KASAN_TEST_NEEDS_CHECKED_MEMINTRINSICS(test);
     ptr = kmalloc(size, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
@@ -538,11 +755,9 @@ unsafe extern "C" fn kmalloc_oob_memset_4(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn kmalloc_oob_memset_8(test: *mut kunit) {
-    static void kmalloc_oob_memset_8(struct kunit *test)
-    {
-    char *ptr;
-    let mut size: usize = 128 - KASAN_GRANULE_SIZE;
-    let mut memset_size: usize = 8;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 0;
+pub static mut memset_size: usize = 8;
     KASAN_TEST_NEEDS_CHECKED_MEMINTRINSICS(test);
     ptr = kmalloc(size, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
@@ -554,11 +769,9 @@ unsafe extern "C" fn kmalloc_oob_memset_8(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn kmalloc_oob_memset_16(test: *mut kunit) {
-    static void kmalloc_oob_memset_16(struct kunit *test)
-    {
-    char *ptr;
-    let mut size: usize = 128 - KASAN_GRANULE_SIZE;
-    let mut memset_size: usize = 16;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 0;
+pub static mut memset_size: usize = 16;
     KASAN_TEST_NEEDS_CHECKED_MEMINTRINSICS(test);
     ptr = kmalloc(size, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
@@ -570,10 +783,8 @@ unsafe extern "C" fn kmalloc_oob_memset_16(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn kmalloc_oob_in_memset(test: *mut kunit) {
-    static void kmalloc_oob_in_memset(struct kunit *test)
-    {
-    char *ptr;
-    let mut size: usize = 128 - KASAN_GRANULE_SIZE;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 0;
     KASAN_TEST_NEEDS_CHECKED_MEMINTRINSICS(test);
     ptr = kmalloc(size, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
@@ -585,11 +796,9 @@ unsafe extern "C" fn kmalloc_oob_in_memset(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn kmalloc_memmove_negative_size(test: *mut kunit) {
-    static void kmalloc_memmove_negative_size(struct kunit *test)
-    {
-    char *ptr;
-    let mut size: usize = 64;
-    let mut invalid_size: usize = -2;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 64;
+pub static mut invalid_size: usize = 0;
     KASAN_TEST_NEEDS_CHECKED_MEMINTRINSICS(test);
 //
 // Hardware tag-based mode doesn't check memmove for negative size.
@@ -599,47 +808,41 @@ unsafe extern "C" fn kmalloc_memmove_negative_size(test: *mut kunit) {
     KASAN_TEST_NEEDS_CONFIG_OFF(test, CONFIG_KASAN_HW_TAGS);
     ptr = kmalloc(size, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
-    memset((char *)ptr, 0, 64);
+    memset(ptr, 0, 64);
     OPTIMIZER_HIDE_VAR(ptr);
     OPTIMIZER_HIDE_VAR(invalid_size);
     KUNIT_EXPECT_KASAN_FAIL(test,
-    memmove((char *)ptr, (char *)ptr + 4, invalid_size));
+    memmove(ptr, ptr + 4, invalid_size));
     kfree(ptr);
     }
 #[no_mangle]
 unsafe extern "C" fn kmalloc_memmove_invalid_size(test: *mut kunit) {
-    static void kmalloc_memmove_invalid_size(struct kunit *test)
-    {
-    char *ptr;
-    let mut size: usize = 64;
-    let mut invalid_size: usize = size;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 64;
+pub static mut invalid_size: usize = 0;
     KASAN_TEST_NEEDS_CHECKED_MEMINTRINSICS(test);
     ptr = kmalloc(size, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
-    memset((char *)ptr, 0, 64);
+    memset(ptr, 0, 64);
     OPTIMIZER_HIDE_VAR(ptr);
     OPTIMIZER_HIDE_VAR(invalid_size);
     KUNIT_EXPECT_KASAN_FAIL_READ(test,
-    memmove((char *)ptr, (char *)ptr + 4, invalid_size));
+    memmove(ptr, ptr + 4, invalid_size));
     kfree(ptr);
     }
 #[no_mangle]
 unsafe extern "C" fn kmalloc_uaf(test: *mut kunit) {
-    static void kmalloc_uaf(struct kunit *test)
-    {
-    char *ptr;
-    let mut size: usize = 10;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 10;
     ptr = kmalloc(size, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
     kfree(ptr);
-    KUNIT_EXPECT_KASAN_FAIL_READ(test, ((volatile char *)ptr)[8]);
+    KUNIT_EXPECT_KASAN_FAIL_READ(test, (ptr)[8]);
     }
 #[no_mangle]
 unsafe extern "C" fn kmalloc_uaf_memset(test: *mut kunit) {
-    static void kmalloc_uaf_memset(struct kunit *test)
-    {
-    char *ptr;
-    let mut size: usize = 33;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 33;
     KASAN_TEST_NEEDS_CHECKED_MEMINTRINSICS(test);
 //
 // Only generic KASAN uses quarantine, which is required to avoid a
@@ -653,12 +856,11 @@ unsafe extern "C" fn kmalloc_uaf_memset(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn kmalloc_uaf2(test: *mut kunit) {
-    static void kmalloc_uaf2(struct kunit *test)
-    {
-    char *ptr1, *ptr2;
-    let mut size: usize = 43;
-    let mut counter: c_int = 0;
-    again:
+    let mut ptr1 = core::ptr::null_mut();
+    let mut ptr2 = core::ptr::null_mut();
+pub static mut size: usize = 43;
+pub static mut counter: c_int = 0;
+// label;
     ptr1 = kmalloc(size, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr1);
     kfree(ptr1);
@@ -668,11 +870,11 @@ unsafe extern "C" fn kmalloc_uaf2(test: *mut kunit) {
 // For tag-based KASAN ptr1 and ptr2 tags might happen to be the same.
 // Allow up to 16 attempts at generating different tags.
 //
-    if (!IS_ENABLED(CONFIG_KASAN_GENERIC) && ptr1 == ptr2 && counter++ < 16) {
+    if (!IS_ENABLED!(CONFIG_KASAN_GENERIC) && ptr1 == ptr2 && counter++ < 16) {
     kfree(ptr2);
-    goto again;
+// goto;
     }
-    KUNIT_EXPECT_KASAN_FAIL_READ(test, ((volatile char *)ptr1)[40]);
+    KUNIT_EXPECT_KASAN_FAIL_READ(test, (ptr1)[40]);
     KUNIT_EXPECT_PTR_NE(test, ptr1, ptr2);
     kfree(ptr2);
     }
@@ -682,10 +884,9 @@ unsafe extern "C" fn kmalloc_uaf2(test: *mut kunit) {
 //
 #[no_mangle]
 unsafe extern "C" fn kmalloc_uaf3(test: *mut kunit) {
-    static void kmalloc_uaf3(struct kunit *test)
-    {
-    char *ptr1, *ptr2;
-    let mut size: usize = 100;
+    let mut ptr1 = core::ptr::null_mut();
+    let mut ptr2 = core::ptr::null_mut();
+pub static mut size: usize = 100;
 // This test is specifically crafted for tag-based modes.
     KASAN_TEST_NEEDS_CONFIG_OFF(test, CONFIG_KASAN_GENERIC);
     ptr1 = kmalloc(size, GFP_KERNEL);
@@ -694,13 +895,11 @@ unsafe extern "C" fn kmalloc_uaf3(test: *mut kunit) {
     ptr2 = kmalloc(size, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr2);
     kfree(ptr2);
-    KUNIT_EXPECT_KASAN_FAIL_READ(test, ((volatile char *)ptr1)[8]);
+    KUNIT_EXPECT_KASAN_FAIL_READ(test, (ptr1)[8]);
     }
 #[no_mangle]
 unsafe extern "C" fn kasan_atomics_helper(test: *mut kunit, unsafe: *mut c_void, safe: *mut c_void) {
-    static void kasan_atomics_helper(struct kunit *test, void *unsafe, void *safe)
-    {
-    int *i_unsafe = unsafe;
+    let mut i_unsafe = unsafe;
     KUNIT_EXPECT_KASAN_FAIL_READ(test, READ_ONCE(*i_unsafe));
     KUNIT_EXPECT_KASAN_FAIL(test, WRITE_ONCE(*i_unsafe, 42));
     KUNIT_EXPECT_KASAN_FAIL_READ(test, smp_load_acquire(i_unsafe));
@@ -723,8 +922,9 @@ unsafe extern "C" fn kasan_atomics_helper(test: *mut kunit, unsafe: *mut c_void,
 // unsafe in write-only mode.
 // Therefore, skip this test when KASAN is configured in write-only mode.
 //
-    if (!kasan_write_only_enabled())
+    if (!kasan_write_only_enabled()) {
     KUNIT_EXPECT_KASAN_FAIL(test, atomic_try_cmpxchg(safe, unsafe, 42));
+    }
     KUNIT_EXPECT_KASAN_FAIL(test, atomic_sub_and_test(42, unsafe));
     KUNIT_EXPECT_KASAN_FAIL(test, atomic_dec_and_test(unsafe));
     KUNIT_EXPECT_KASAN_FAIL(test, atomic_inc_and_test(unsafe));
@@ -759,8 +959,9 @@ unsafe extern "C" fn kasan_atomics_helper(test: *mut kunit, unsafe: *mut c_void,
 // unsafe in write-only mode.
 // Therefore, skip this test when KASAN is configured in write-only mode.
 //
-    if (!kasan_write_only_enabled())
+    if (!kasan_write_only_enabled()) {
     KUNIT_EXPECT_KASAN_FAIL(test, atomic_long_try_cmpxchg(safe, unsafe, 42));
+    }
     KUNIT_EXPECT_KASAN_FAIL(test, atomic_long_sub_and_test(42, unsafe));
     KUNIT_EXPECT_KASAN_FAIL(test, atomic_long_dec_and_test(unsafe));
     KUNIT_EXPECT_KASAN_FAIL(test, atomic_long_inc_and_test(unsafe));
@@ -780,9 +981,8 @@ unsafe extern "C" fn kasan_atomics_helper(test: *mut kunit, unsafe: *mut c_void,
     }
 #[no_mangle]
 unsafe extern "C" fn kasan_atomics(test: *mut kunit) {
-    static void kasan_atomics(struct kunit *test)
-    {
-    void *a1, *a2;
+    let mut a1 = core::ptr::null_mut();
+    let mut a2 = core::ptr::null_mut();
 //
 // Just as with kasan_bitops_tags(), we allocate 48 bytes of memory such
 // that the following 16 bytes will make up the redzone.
@@ -798,10 +998,8 @@ unsafe extern "C" fn kasan_atomics(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn kmalloc_double_kzfree(test: *mut kunit) {
-    static void kmalloc_double_kzfree(struct kunit *test)
-    {
-    char *ptr;
-    let mut size: usize = 16;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 16;
 //
 // With the tag-based KASAN modes, if the memory happens to be
 // reallocated between the two frees and the new allocation tag happens
@@ -819,11 +1017,9 @@ unsafe extern "C" fn kmalloc_double_kzfree(test: *mut kunit) {
 // Check that ksize() does NOT unpoison whole object.
 #[no_mangle]
 unsafe extern "C" fn ksize_unpoisons_memory(test: *mut kunit) {
-    static void ksize_unpoisons_memory(struct kunit *test)
-    {
-    char *ptr;
-    let mut size: usize = 128 - KASAN_GRANULE_SIZE - 5;
-    size_t real_size;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 0;
+    let mut real_size = 0;
     ptr = kmalloc(size, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
     real_size = ksize(ptr);
@@ -833,10 +1029,11 @@ unsafe extern "C" fn ksize_unpoisons_memory(test: *mut kunit) {
     ptr[0] = 'x';
     ptr[size - 1] = 'x';
 // These must trigger a KASAN report.
-    if (IS_ENABLED(CONFIG_KASAN_GENERIC))
-    KUNIT_EXPECT_KASAN_FAIL(test, ((volatile char *)ptr)[size]);
-    KUNIT_EXPECT_KASAN_FAIL_READ(test, ((volatile char *)ptr)[size + 5]);
-    KUNIT_EXPECT_KASAN_FAIL_READ(test, ((volatile char *)ptr)[real_size - 1]);
+    if (IS_ENABLED!(CONFIG_KASAN_GENERIC)) {
+    KUNIT_EXPECT_KASAN_FAIL(test, (ptr)[size]);
+    }
+    KUNIT_EXPECT_KASAN_FAIL_READ(test, (ptr)[size + 5]);
+    KUNIT_EXPECT_KASAN_FAIL_READ(test, (ptr)[real_size - 1]);
     kfree(ptr);
     }
 //
@@ -845,17 +1042,15 @@ unsafe extern "C" fn ksize_unpoisons_memory(test: *mut kunit) {
 //
 #[no_mangle]
 unsafe extern "C" fn ksize_uaf(test: *mut kunit) {
-    static void ksize_uaf(struct kunit *test)
-    {
-    char *ptr;
-    let mut size: c_int = 128 - KASAN_GRANULE_SIZE;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut size: c_int = 0;
     ptr = kmalloc(size, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
     kfree(ptr);
     OPTIMIZER_HIDE_VAR(ptr);
     KUNIT_EXPECT_KASAN_FAIL(test, ksize(ptr));
-    KUNIT_EXPECT_KASAN_FAIL_READ(test, ((volatile char *)ptr)[0]);
-    KUNIT_EXPECT_KASAN_FAIL_READ(test, ((volatile char *)ptr)[size]);
+    KUNIT_EXPECT_KASAN_FAIL_READ(test, (ptr)[0]);
+    KUNIT_EXPECT_KASAN_FAIL_READ(test, (ptr)[size]);
     }
 //
 // The two tests below check that Generic KASAN prints auxiliary stack traces
@@ -865,61 +1060,50 @@ unsafe extern "C" fn ksize_uaf(test: *mut kunit) {
 // modes report bad accesses in tested scenarios.
 //
     static struct kasan_rcu_info {
-    int i;
-    struct rcu_head rcu;
+    let mut i = 0;
+pub static mut rcu: usize = 0;
     } *global_rcu_ptr;
 #[no_mangle]
 unsafe extern "C" fn rcu_uaf_reclaim(rp: *mut rcu_head) {
-    static void rcu_uaf_reclaim(struct rcu_head *rp)
-    {
-    struct kasan_rcu_info *fp =
-    container_of(rp, struct kasan_rcu_info, rcu);
+    let mut fp = container_of!(rp, kasan_rcu_info, rcu);
     kfree(fp);
-    ((volatile struct kasan_rcu_info *)fp).i;
+    (fp).i;
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_uaf(test: *mut kunit) {
-    static void rcu_uaf(struct kunit *test)
-    {
-    struct kasan_rcu_info *ptr;
-    ptr = kmalloc_obj(struct kasan_rcu_info);
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+    ptr = kmalloc_obj(kasan_rcu_info);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
     global_rcu_ptr = rcu_dereference_protected(
-    (struct kasan_rcu_info __rcu *)ptr, core::ptr::null_mut());
+    ptr, core::ptr::null_mut());
     KUNIT_EXPECT_KASAN_FAIL_READ(test,
     call_rcu(&global_rcu_ptr.rcu, rcu_uaf_reclaim);
     rcu_barrier());
     }
 #[no_mangle]
 unsafe extern "C" fn workqueue_uaf_work(work: *mut work_struct) {
-    static void workqueue_uaf_work(struct work_struct *work)
-    {
     kfree(work);
     }
 #[no_mangle]
 unsafe extern "C" fn workqueue_uaf(test: *mut kunit) {
-    static void workqueue_uaf(struct kunit *test)
-    {
-    struct workqueue_struct *workqueue;
-    struct work_struct *work;
+pub static mut workqueue: *mut c_void = core::ptr::null_mut();
+pub static mut work: *mut c_void = core::ptr::null_mut();
     workqueue = create_workqueue("kasan_workqueue_test");
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, workqueue);
-    work = kmalloc_obj(struct work_struct);
+    work = kmalloc_obj(work_struct);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, work);
     INIT_WORK(work, workqueue_uaf_work);
     queue_work(workqueue, work);
     destroy_workqueue(workqueue);
     KUNIT_EXPECT_KASAN_FAIL_READ(test,
-    ((volatile struct work_struct *)work).data);
+    (work).data);
     }
 #[no_mangle]
 unsafe extern "C" fn kfree_via_page(test: *mut kunit) {
-    static void kfree_via_page(struct kunit *test)
-    {
-    char *ptr;
-    let mut size: usize = 8;
-    struct page *page;
-    unsigned long offset;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 8;
+pub static mut page: *mut c_void = core::ptr::null_mut();
+    let mut offset = 0;
     ptr = kmalloc(size, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
     page = virt_to_page(ptr);
@@ -928,11 +1112,9 @@ unsafe extern "C" fn kfree_via_page(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn kfree_via_phys(test: *mut kunit) {
-    static void kfree_via_phys(struct kunit *test)
-    {
-    char *ptr;
-    let mut size: usize = 8;
-    phys_addr_t phys;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 8;
+    let mut phys;
     ptr = kmalloc(size, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
     phys = virt_to_phys(ptr);
@@ -940,11 +1122,9 @@ unsafe extern "C" fn kfree_via_phys(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn kmem_cache_oob(test: *mut kunit) {
-    static void kmem_cache_oob(struct kunit *test)
-    {
-    char *p;
-    let mut size: usize = 200;
-    struct kmem_cache *cache;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 200;
+pub static mut cache: *mut c_void = core::ptr::null_mut();
     cache = kmem_cache_create("test_cache", size, 0, 0, core::ptr::null_mut());
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, cache);
     p = kmem_cache_alloc(cache, GFP_KERNEL);
@@ -959,11 +1139,9 @@ unsafe extern "C" fn kmem_cache_oob(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn kmem_cache_double_free(test: *mut kunit) {
-    static void kmem_cache_double_free(struct kunit *test)
-    {
-    char *p;
-    let mut size: usize = 200;
-    struct kmem_cache *cache;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 200;
+pub static mut cache: *mut c_void = core::ptr::null_mut();
     cache = kmem_cache_create("test_cache", size, 0, 0, core::ptr::null_mut());
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, cache);
     p = kmem_cache_alloc(cache, GFP_KERNEL);
@@ -978,11 +1156,9 @@ unsafe extern "C" fn kmem_cache_double_free(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn kmem_cache_invalid_free(test: *mut kunit) {
-    static void kmem_cache_invalid_free(struct kunit *test)
-    {
-    char *p;
-    let mut size: usize = 200;
-    struct kmem_cache *cache;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 200;
+pub static mut cache: *mut c_void = core::ptr::null_mut();
     cache = kmem_cache_create("test_cache", size, 0, SLAB_TYPESAFE_BY_RCU,
     core::ptr::null_mut());
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, cache);
@@ -1003,11 +1179,9 @@ unsafe extern "C" fn kmem_cache_invalid_free(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn kmem_cache_rcu_uaf(test: *mut kunit) {
-    static void kmem_cache_rcu_uaf(struct kunit *test)
-    {
-    char *p;
-    let mut size: usize = 200;
-    struct kmem_cache *cache;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 200;
+pub static mut cache: *mut c_void = core::ptr::null_mut();
     KASAN_TEST_NEEDS_CONFIG_ON(test, CONFIG_SLUB_RCU_DEBUG);
     cache = kmem_cache_create("test_cache", size, 0, SLAB_TYPESAFE_BY_RCU,
     core::ptr::null_mut());
@@ -1045,10 +1219,9 @@ unsafe extern "C" fn kmem_cache_rcu_uaf(test: *mut kunit) {
 //
 #[no_mangle]
 unsafe extern "C" fn kmem_cache_rcu_reuse(test: *mut kunit) {
-    static void kmem_cache_rcu_reuse(struct kunit *test)
-    {
-    char *p, *p2;
-    struct kmem_cache *cache;
+    let mut p = core::ptr::null_mut();
+    let mut p2 = core::ptr::null_mut();
+pub static mut cache: *mut c_void = core::ptr::null_mut();
     KASAN_TEST_NEEDS_CONFIG_OFF(test, CONFIG_SLUB_RCU_DEBUG);
     cache = kmem_cache_create("test_cache", 16, 0, SLAB_TYPESAFE_BY_RCU,
     core::ptr::null_mut());
@@ -1057,25 +1230,23 @@ unsafe extern "C" fn kmem_cache_rcu_reuse(test: *mut kunit) {
     p = kmem_cache_alloc(cache, GFP_KERNEL);
     if (!p) {
     kunit_err(test, "Allocation failed: %s\n", __func__);
-    goto out;
+// goto;
     }
     kmem_cache_free(cache, p);
     p2 = kmem_cache_alloc(cache, GFP_KERNEL);
     if (!p2) {
     kunit_err(test, "Allocation failed: %s\n", __func__);
-    goto out;
+// goto;
     }
     KUNIT_EXPECT_PTR_EQ(test, p, p2);
     kmem_cache_free(cache, p2);
-    out:
+// label;
     migrate_enable();
     kmem_cache_destroy(cache);
     }
 #[no_mangle]
 unsafe extern "C" fn kmem_cache_double_destroy(test: *mut kunit) {
-    static void kmem_cache_double_destroy(struct kunit *test)
-    {
-    struct kmem_cache *cache;
+pub static mut cache: *mut c_void = core::ptr::null_mut();
     cache = kmem_cache_create("test_cache", 200, 0, SLAB_NO_MERGE, core::ptr::null_mut());
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, cache);
     kmem_cache_destroy(cache);
@@ -1083,55 +1254,53 @@ unsafe extern "C" fn kmem_cache_double_destroy(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn kmem_cache_accounted(test: *mut kunit) {
-    static void kmem_cache_accounted(struct kunit *test)
-    {
-    int i;
-    char *p;
-    let mut size: usize = 200;
-    struct kmem_cache *cache;
+    let mut i = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 200;
+pub static mut cache: *mut c_void = core::ptr::null_mut();
     cache = kmem_cache_create("test_cache", size, 0, SLAB_ACCOUNT, core::ptr::null_mut());
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, cache);
 //
 // Several allocations with a delay to allow for lazy per memcg kmem
 // cache creation.
 //
-    for (i = 0; i < 5; i++) {
+    while (i < 5) {
     p = kmem_cache_alloc(cache, GFP_KERNEL);
-    if (!p)
-    goto free_cache;
+    if (!p) {
+// goto;
+    }
     kmem_cache_free(cache, p);
     msleep(100);
     }
-    free_cache:
+// label;
     kmem_cache_destroy(cache);
     }
 #[no_mangle]
 unsafe extern "C" fn kmem_cache_bulk(test: *mut kunit) {
-    static void kmem_cache_bulk(struct kunit *test)
-    {
-    struct kmem_cache *cache;
-    let mut size: usize = 200;
+pub static mut cache: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 200;
     char *p[10];
-    int i;
+    let mut i = 0;
     cache = kmem_cache_create("test_cache", size, 0, 0, core::ptr::null_mut());
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, cache);
-    if (!kmem_cache_alloc_bulk(cache, GFP_KERNEL, ARRAY_SIZE(p),
-    (void **)&p)) {
+    if (!kmem_cache_alloc_bulk(cache, GFP_KERNEL, ARRAY_SIZE!(p),
+    &p)) {
     kunit_err(test, "Allocation failed: %s\n", __func__);
     kmem_cache_destroy(cache);
     return;
     }
-    for (i = 0; i < ARRAY_SIZE(p); i++)
+    for (i = 0; i < ARRAY_SIZE!(p); i++) {
     p[i][0] = p[i][size - 1] = 42;
-    kmem_cache_free_bulk(cache, ARRAY_SIZE(p), (void **)&p);
+    }
+    kmem_cache_free_bulk(cache, ARRAY_SIZE!(p), &p);
     kmem_cache_destroy(cache);
     }
-    static void *mempool_prepare_kmalloc(struct kunit *test, mempool_t *pool, size_t size)
-    {
-    let mut pool_size: c_int = 4;
-    int ret;
-    void *elem;
-    memset(pool, 0, sizeof(*pool));
+#[no_mangle]
+pub unsafe extern "C" fn mempool_prepare_kmalloc(test: *mut kunit, pool: *mut mempool_t, size: size_t) -> *mut c_void {
+pub static mut pool_size: c_int = 4;
+    let mut ret = 0;
+pub static mut elem: *mut c_void = core::ptr::null_mut();
+    memset(pool, 0, sizeof!(*pool));
     ret = mempool_init_kmalloc_pool(pool, pool_size, size);
     KUNIT_ASSERT_EQ(test, ret, 0);
 //
@@ -1144,14 +1313,14 @@ unsafe extern "C" fn kmem_cache_bulk(test: *mut kunit) {
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, elem);
     return elem;
     }
-    static struct kmem_cache *mempool_prepare_slab(struct kunit *test, mempool_t *pool, size_t size)
-    {
-    struct kmem_cache *cache;
-    let mut pool_size: c_int = 4;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn mempool_prepare_slab(test: *mut kunit, pool: *mut mempool_t, size: size_t) -> *mut c_void {
+pub static mut cache: *mut c_void = core::ptr::null_mut();
+pub static mut pool_size: c_int = 4;
+    let mut ret = 0;
     cache = kmem_cache_create("test_cache", size, 0, 0, core::ptr::null_mut());
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, cache);
-    memset(pool, 0, sizeof(*pool));
+    memset(pool, 0, sizeof!(*pool));
     ret = mempool_init_slab_pool(pool, pool_size, cache);
     KUNIT_ASSERT_EQ(test, ret, 0);
 //
@@ -1160,12 +1329,12 @@ unsafe extern "C" fn kmem_cache_bulk(test: *mut kunit) {
 //
     return cache;
     }
-    static void *mempool_prepare_page(struct kunit *test, mempool_t *pool, int order)
-    {
-    let mut pool_size: c_int = 4;
-    int ret;
-    void *elem;
-    memset(pool, 0, sizeof(*pool));
+#[no_mangle]
+pub unsafe extern "C" fn mempool_prepare_page(test: *mut kunit, pool: *mut mempool_t, order: c_int) -> *mut c_void {
+pub static mut pool_size: c_int = 4;
+    let mut ret = 0;
+pub static mut elem: *mut c_void = core::ptr::null_mut();
+    memset(pool, 0, sizeof!(*pool));
     ret = mempool_init_page_pool(pool, pool_size, order);
     KUNIT_ASSERT_EQ(test, ret, 0);
     elem = mempool_alloc_preallocated(pool);
@@ -1174,27 +1343,25 @@ unsafe extern "C" fn kmem_cache_bulk(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn mempool_oob_right_helper(test: *mut kunit, pool: *mut mempool_t, size: usize) {
-    static void mempool_oob_right_helper(struct kunit *test, mempool_t *pool, size_t size)
-    {
-    char *elem;
+pub static mut elem: *mut c_void = core::ptr::null_mut();
     elem = mempool_alloc_preallocated(pool);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, elem);
     OPTIMIZER_HIDE_VAR(elem);
-    if (IS_ENABLED(CONFIG_KASAN_GENERIC))
+    if (IS_ENABLED!(CONFIG_KASAN_GENERIC)) {
     KUNIT_EXPECT_KASAN_FAIL(test,
-    ((volatile char *)&elem[size])[0]);
-    else
+    (&elem[size])[0]);
+    }
+    else {
     KUNIT_EXPECT_KASAN_FAIL_READ(test,
-    ((volatile char *)&elem[round_up(size, KASAN_GRANULE_SIZE)])[0]);
+    (&elem[round_up(size, KASAN_GRANULE_SIZE)])[0]);
+    }
     mempool_free(elem, pool);
     }
 #[no_mangle]
 unsafe extern "C" fn mempool_kmalloc_oob_right(test: *mut kunit) {
-    static void mempool_kmalloc_oob_right(struct kunit *test)
-    {
-    mempool_t pool;
-    let mut size: usize = 128 - KASAN_GRANULE_SIZE - 5;
-    void *extra_elem;
+    let mut pool;
+pub static mut size: usize = 0;
+pub static mut extra_elem: *mut c_void = core::ptr::null_mut();
     extra_elem = mempool_prepare_kmalloc(test, &pool, size);
     mempool_oob_right_helper(test, &pool, size);
     mempool_free(extra_elem, &pool);
@@ -1202,11 +1369,9 @@ unsafe extern "C" fn mempool_kmalloc_oob_right(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn mempool_kmalloc_large_oob_right(test: *mut kunit) {
-    static void mempool_kmalloc_large_oob_right(struct kunit *test)
-    {
-    mempool_t pool;
-    let mut size: usize = KMALLOC_MAX_CACHE_SIZE + 1;
-    void *extra_elem;
+    let mut pool;
+pub static mut size: usize = 0;
+pub static mut extra_elem: *mut c_void = core::ptr::null_mut();
     extra_elem = mempool_prepare_kmalloc(test, &pool, size);
     mempool_oob_right_helper(test, &pool, size);
     mempool_free(extra_elem, &pool);
@@ -1214,11 +1379,9 @@ unsafe extern "C" fn mempool_kmalloc_large_oob_right(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn mempool_slab_oob_right(test: *mut kunit) {
-    static void mempool_slab_oob_right(struct kunit *test)
-    {
-    mempool_t pool;
-    let mut size: usize = 123;
-    struct kmem_cache *cache;
+    let mut pool;
+pub static mut size: usize = 123;
+pub static mut cache: *mut c_void = core::ptr::null_mut();
     cache = mempool_prepare_slab(test, &pool, size);
     mempool_oob_right_helper(test, &pool, size);
     mempool_exit(&pool);
@@ -1233,22 +1396,19 @@ unsafe extern "C" fn mempool_slab_oob_right(test: *mut kunit) {
 //
 #[no_mangle]
 unsafe extern "C" fn mempool_uaf_helper(test: *mut kunit, pool: *mut mempool_t, page: bool) {
-    static void mempool_uaf_helper(struct kunit *test, mempool_t *pool, bool page)
-    {
-    char *elem, *ptr;
+    let mut elem = core::ptr::null_mut();
+    let mut ptr = core::ptr::null_mut();
     elem = mempool_alloc_preallocated(pool);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, elem);
     mempool_free(elem, pool);
-    ptr = page ? page_address((struct page *)elem) : elem;
-    KUNIT_EXPECT_KASAN_FAIL_READ(test, ((volatile char *)ptr)[0]);
+    ptr = page ? page_address(elem) : elem;
+    KUNIT_EXPECT_KASAN_FAIL_READ(test, (ptr)[0]);
     }
 #[no_mangle]
 unsafe extern "C" fn mempool_kmalloc_uaf(test: *mut kunit) {
-    static void mempool_kmalloc_uaf(struct kunit *test)
-    {
-    mempool_t pool;
-    let mut size: usize = 128;
-    void *extra_elem;
+    let mut pool;
+pub static mut size: usize = 128;
+pub static mut extra_elem: *mut c_void = core::ptr::null_mut();
     extra_elem = mempool_prepare_kmalloc(test, &pool, size);
     mempool_uaf_helper(test, &pool, false);
     mempool_free(extra_elem, &pool);
@@ -1256,11 +1416,9 @@ unsafe extern "C" fn mempool_kmalloc_uaf(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn mempool_kmalloc_large_uaf(test: *mut kunit) {
-    static void mempool_kmalloc_large_uaf(struct kunit *test)
-    {
-    mempool_t pool;
-    let mut size: usize = KMALLOC_MAX_CACHE_SIZE + 1;
-    void *extra_elem;
+    let mut pool;
+pub static mut size: usize = 0;
+pub static mut extra_elem: *mut c_void = core::ptr::null_mut();
     extra_elem = mempool_prepare_kmalloc(test, &pool, size);
     mempool_uaf_helper(test, &pool, false);
     mempool_free(extra_elem, &pool);
@@ -1268,11 +1426,9 @@ unsafe extern "C" fn mempool_kmalloc_large_uaf(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn mempool_slab_uaf(test: *mut kunit) {
-    static void mempool_slab_uaf(struct kunit *test)
-    {
-    mempool_t pool;
-    let mut size: usize = 123;
-    struct kmem_cache *cache;
+    let mut pool;
+pub static mut size: usize = 123;
+pub static mut cache: *mut c_void = core::ptr::null_mut();
     cache = mempool_prepare_slab(test, &pool, size);
     mempool_uaf_helper(test, &pool, false);
     mempool_exit(&pool);
@@ -1280,11 +1436,9 @@ unsafe extern "C" fn mempool_slab_uaf(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn mempool_page_alloc_uaf(test: *mut kunit) {
-    static void mempool_page_alloc_uaf(struct kunit *test)
-    {
-    mempool_t pool;
-    let mut order: c_int = 2;
-    void *extra_elem;
+    let mut pool;
+pub static mut order: c_int = 2;
+pub static mut extra_elem: *mut c_void = core::ptr::null_mut();
     extra_elem = mempool_prepare_page(test, &pool, order);
     mempool_uaf_helper(test, &pool, true);
     mempool_free(extra_elem, &pool);
@@ -1292,9 +1446,7 @@ unsafe extern "C" fn mempool_page_alloc_uaf(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn mempool_double_free_helper(test: *mut kunit, pool: *mut mempool_t) {
-    static void mempool_double_free_helper(struct kunit *test, mempool_t *pool)
-    {
-    char *elem;
+pub static mut elem: *mut c_void = core::ptr::null_mut();
     elem = mempool_alloc_preallocated(pool);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, elem);
     mempool_free(elem, pool);
@@ -1302,11 +1454,9 @@ unsafe extern "C" fn mempool_double_free_helper(test: *mut kunit, pool: *mut mem
     }
 #[no_mangle]
 unsafe extern "C" fn mempool_kmalloc_double_free(test: *mut kunit) {
-    static void mempool_kmalloc_double_free(struct kunit *test)
-    {
-    mempool_t pool;
-    let mut size: usize = 128;
-    char *extra_elem;
+    let mut pool;
+pub static mut size: usize = 128;
+pub static mut extra_elem: *mut c_void = core::ptr::null_mut();
     extra_elem = mempool_prepare_kmalloc(test, &pool, size);
     mempool_double_free_helper(test, &pool);
     mempool_free(extra_elem, &pool);
@@ -1314,11 +1464,9 @@ unsafe extern "C" fn mempool_kmalloc_double_free(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn mempool_kmalloc_large_double_free(test: *mut kunit) {
-    static void mempool_kmalloc_large_double_free(struct kunit *test)
-    {
-    mempool_t pool;
-    let mut size: usize = KMALLOC_MAX_CACHE_SIZE + 1;
-    char *extra_elem;
+    let mut pool;
+pub static mut size: usize = 0;
+pub static mut extra_elem: *mut c_void = core::ptr::null_mut();
     extra_elem = mempool_prepare_kmalloc(test, &pool, size);
     mempool_double_free_helper(test, &pool);
     mempool_free(extra_elem, &pool);
@@ -1326,11 +1474,9 @@ unsafe extern "C" fn mempool_kmalloc_large_double_free(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn mempool_page_alloc_double_free(test: *mut kunit) {
-    static void mempool_page_alloc_double_free(struct kunit *test)
-    {
-    mempool_t pool;
-    let mut order: c_int = 2;
-    char *extra_elem;
+    let mut pool;
+pub static mut order: c_int = 2;
+pub static mut extra_elem: *mut c_void = core::ptr::null_mut();
     extra_elem = mempool_prepare_page(test, &pool, order);
     mempool_double_free_helper(test, &pool);
     mempool_free(extra_elem, &pool);
@@ -1338,9 +1484,7 @@ unsafe extern "C" fn mempool_page_alloc_double_free(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn mempool_kmalloc_invalid_free_helper(test: *mut kunit, pool: *mut mempool_t) {
-    static void mempool_kmalloc_invalid_free_helper(struct kunit *test, mempool_t *pool)
-    {
-    char *elem;
+pub static mut elem: *mut c_void = core::ptr::null_mut();
     elem = mempool_alloc_preallocated(pool);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, elem);
     KUNIT_EXPECT_KASAN_FAIL(test, mempool_free(elem + 1, pool));
@@ -1348,11 +1492,9 @@ unsafe extern "C" fn mempool_kmalloc_invalid_free_helper(test: *mut kunit, pool:
     }
 #[no_mangle]
 unsafe extern "C" fn mempool_kmalloc_invalid_free(test: *mut kunit) {
-    static void mempool_kmalloc_invalid_free(struct kunit *test)
-    {
-    mempool_t pool;
-    let mut size: usize = 128;
-    char *extra_elem;
+    let mut pool;
+pub static mut size: usize = 128;
+pub static mut extra_elem: *mut c_void = core::ptr::null_mut();
     extra_elem = mempool_prepare_kmalloc(test, &pool, size);
     mempool_kmalloc_invalid_free_helper(test, &pool);
     mempool_free(extra_elem, &pool);
@@ -1360,11 +1502,9 @@ unsafe extern "C" fn mempool_kmalloc_invalid_free(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn mempool_kmalloc_large_invalid_free(test: *mut kunit) {
-    static void mempool_kmalloc_large_invalid_free(struct kunit *test)
-    {
-    mempool_t pool;
-    let mut size: usize = KMALLOC_MAX_CACHE_SIZE + 1;
-    char *extra_elem;
+    let mut pool;
+pub static mut size: usize = 0;
+pub static mut extra_elem: *mut c_void = core::ptr::null_mut();
     extra_elem = mempool_prepare_kmalloc(test, &pool, size);
     mempool_kmalloc_invalid_free_helper(test, &pool);
     mempool_free(extra_elem, &pool);
@@ -1378,8 +1518,6 @@ unsafe extern "C" fn mempool_kmalloc_large_invalid_free(test: *mut kunit) {
     static char global_array[10];
 #[no_mangle]
 unsafe extern "C" fn kasan_global_oob_right(test: *mut kunit) {
-    static void kasan_global_oob_right(struct kunit *test)
-    {
 //
 // Deliberate out-of-bounds access. To prevent CONFIG_UBSAN_LOCAL_BOUNDS
 // from failing here and panicking the kernel, access the array via a
@@ -1387,83 +1525,74 @@ unsafe extern "C" fn kasan_global_oob_right(test: *mut kunit) {
 // determine the array bounds.
 //
 // This access uses a volatile pointer to char (char *volatile) rather
-// than the more conventional pointer to volatile char (volatile char *)
+// than the more conventional pointer to volatile char 
 // because we want to prevent the compiler from making inferences about
 // the pointer itself (i.e. its array bounds), not the data that it
 // refers to.
 //
-    let mut array: *mut char volatile = global_array;
-    char *p = &array[ARRAY_SIZE(global_array) + 3];
+pub static mut array: *mut char volatile = core::ptr::null_mut();
+    let mut p = &array[ARRAY_SIZE!(global_array) + 3];
 // Only generic mode instruments globals.
     KASAN_TEST_NEEDS_CONFIG_ON(test, CONFIG_KASAN_GENERIC);
-    KUNIT_EXPECT_KASAN_FAIL(test, *(volatile char *)p);
+    KUNIT_EXPECT_KASAN_FAIL(test, *p);
     }
 #[no_mangle]
 unsafe extern "C" fn kasan_global_oob_left(test: *mut kunit) {
-    static void kasan_global_oob_left(struct kunit *test)
-    {
-    let mut array: *mut char volatile = global_array;
-    char *p = array - 3;
+pub static mut array: *mut char volatile = core::ptr::null_mut();
+    let mut p = array - 3;
 //
 // GCC is known to fail this test, skip it.
 // See https://bugzilla.kernel.org/show_bug.cgi?id=215051.
 //
     KASAN_TEST_NEEDS_CONFIG_ON(test, CONFIG_CC_IS_CLANG);
     KASAN_TEST_NEEDS_CONFIG_ON(test, CONFIG_KASAN_GENERIC);
-    KUNIT_EXPECT_KASAN_FAIL(test, *(volatile char *)p);
+    KUNIT_EXPECT_KASAN_FAIL(test, *p);
     }
 #[no_mangle]
 unsafe extern "C" fn kasan_stack_oob(test: *mut kunit) {
-    static void kasan_stack_oob(struct kunit *test)
-    {
     char stack_array[10];
 // See comment in kasan_global_oob_right.
-    let mut array: *mut char volatile = stack_array;
-    char *p = &array[ARRAY_SIZE(stack_array) + OOB_TAG_OFF];
+pub static mut array: *mut char volatile = core::ptr::null_mut();
+    let mut p = &array[ARRAY_SIZE!(stack_array) + OOB_TAG_OFF];
     KASAN_TEST_NEEDS_CONFIG_ON(test, CONFIG_KASAN_STACK);
-    KUNIT_EXPECT_KASAN_FAIL(test, *(volatile char *)p);
+    KUNIT_EXPECT_KASAN_FAIL(test, *p);
     }
 #[no_mangle]
 unsafe extern "C" fn kasan_alloca_oob_left(test: *mut kunit) {
-    static void kasan_alloca_oob_left(struct kunit *test)
-    {
-    let mut i: volatile int = 10;
+pub static mut i: volatile int = 10;
     char alloca_array[i];
 // See comment in kasan_global_oob_right.
-    let mut array: *mut char volatile = alloca_array;
-    char *p = array - 1;
+pub static mut array: *mut char volatile = core::ptr::null_mut();
+    let mut p = array - 1;
 // Only generic mode instruments dynamic allocas.
     KASAN_TEST_NEEDS_CONFIG_ON(test, CONFIG_KASAN_GENERIC);
     KASAN_TEST_NEEDS_CONFIG_ON(test, CONFIG_KASAN_STACK);
-    KUNIT_EXPECT_KASAN_FAIL(test, *(volatile char *)p);
+    KUNIT_EXPECT_KASAN_FAIL(test, *p);
     }
 #[no_mangle]
 unsafe extern "C" fn kasan_alloca_oob_right(test: *mut kunit) {
-    static void kasan_alloca_oob_right(struct kunit *test)
-    {
-    let mut i: volatile int = 10;
+pub static mut i: volatile int = 10;
     char alloca_array[i];
 // See comment in kasan_global_oob_right.
-    let mut array: *mut char volatile = alloca_array;
-    char *p = array + i;
+pub static mut array: *mut char volatile = core::ptr::null_mut();
+    let mut p = array + i;
 // Only generic mode instruments dynamic allocas.
     KASAN_TEST_NEEDS_CONFIG_ON(test, CONFIG_KASAN_GENERIC);
     KASAN_TEST_NEEDS_CONFIG_ON(test, CONFIG_KASAN_STACK);
-    KUNIT_EXPECT_KASAN_FAIL(test, *(volatile char *)p);
+    KUNIT_EXPECT_KASAN_FAIL(test, *p);
     }
 #[no_mangle]
 unsafe extern "C" fn kasan_memchr(test: *mut kunit) {
-    static void kasan_memchr(struct kunit *test)
-    {
-    char *ptr;
-    let mut size: usize = 24;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 24;
 //
 // str* functions are not instrumented with CONFIG_AMD_MEM_ENCRYPT.
 // See https://bugzilla.kernel.org/show_bug.cgi?id=206337 for details.
 //
     KASAN_TEST_NEEDS_CONFIG_OFF(test, CONFIG_AMD_MEM_ENCRYPT);
-    if (OOB_TAG_OFF)
+    if (OOB_TAG_OFF) {
     size = round_up(size, OOB_TAG_OFF);
+    }
     ptr = kmalloc(size, GFP_KERNEL | __GFP_ZERO);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
     OPTIMIZER_HIDE_VAR(ptr);
@@ -1474,21 +1603,20 @@ unsafe extern "C" fn kasan_memchr(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn kasan_memcmp(test: *mut kunit) {
-    static void kasan_memcmp(struct kunit *test)
-    {
-    char *ptr;
-    let mut size: usize = 24;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 24;
     int arr[9];
 //
 // str* functions are not instrumented with CONFIG_AMD_MEM_ENCRYPT.
 // See https://bugzilla.kernel.org/show_bug.cgi?id=206337 for details.
 //
     KASAN_TEST_NEEDS_CONFIG_OFF(test, CONFIG_AMD_MEM_ENCRYPT);
-    if (OOB_TAG_OFF)
+    if (OOB_TAG_OFF) {
     size = round_up(size, OOB_TAG_OFF);
+    }
     ptr = kmalloc(size, GFP_KERNEL | __GFP_ZERO);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
-    memset(arr, 0, sizeof(arr));
+    memset(arr, 0, sizeof!(arr));
     OPTIMIZER_HIDE_VAR(ptr);
     OPTIMIZER_HIDE_VAR(size);
     KUNIT_EXPECT_KASAN_FAIL_READ(test,
@@ -1497,11 +1625,9 @@ unsafe extern "C" fn kasan_memcmp(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn kasan_strings(test: *mut kunit) {
-    static void kasan_strings(struct kunit *test)
-    {
-    char *ptr;
-    char *src;
-    let mut size: usize = 24;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut src: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 24;
 //
 // str* functions are not instrumented with CONFIG_AMD_MEM_ENCRYPT.
 // See https://bugzilla.kernel.org/show_bug.cgi?id=206337 for details.
@@ -1544,8 +1670,6 @@ unsafe extern "C" fn kasan_strings(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn kasan_bitops_modify(test: *mut kunit, nr: c_int, addr: *mut c_void) {
-    static void kasan_bitops_modify(struct kunit *test, int nr, void *addr)
-    {
     KUNIT_EXPECT_KASAN_FAIL(test, set_bit(nr, addr));
     KUNIT_EXPECT_KASAN_FAIL(test, __set_bit(nr, addr));
     KUNIT_EXPECT_KASAN_FAIL(test, clear_bit(nr, addr));
@@ -1557,8 +1681,6 @@ unsafe extern "C" fn kasan_bitops_modify(test: *mut kunit, nr: c_int, addr: *mut
     }
 #[no_mangle]
 unsafe extern "C" fn kasan_bitops_test_and_modify(test: *mut kunit, nr: c_int, addr: *mut c_void) {
-    static void kasan_bitops_test_and_modify(struct kunit *test, int nr, void *addr)
-    {
     KUNIT_EXPECT_KASAN_FAIL(test, test_and_set_bit(nr, addr));
     KUNIT_EXPECT_KASAN_FAIL(test, __test_and_set_bit(nr, addr));
 //
@@ -1566,29 +1688,29 @@ unsafe extern "C" fn kasan_bitops_test_and_modify(test: *mut kunit, nr: c_int, a
 // a fault won't occur when the bit is set.
 // Therefore, skip the test_and_set_bit_lock test in write-only mode.
 //
-    if (!kasan_write_only_enabled())
+    if (!kasan_write_only_enabled()) {
     KUNIT_EXPECT_KASAN_FAIL(test, test_and_set_bit_lock(nr, addr));
+    }
     KUNIT_EXPECT_KASAN_FAIL(test, test_and_clear_bit(nr, addr));
     KUNIT_EXPECT_KASAN_FAIL(test, __test_and_clear_bit(nr, addr));
     KUNIT_EXPECT_KASAN_FAIL(test, test_and_change_bit(nr, addr));
     KUNIT_EXPECT_KASAN_FAIL(test, __test_and_change_bit(nr, addr));
     KUNIT_EXPECT_KASAN_FAIL_READ(test, kasan_int_result = test_bit(nr, addr));
-    if (nr < 7)
+    if (nr < 7) {
     KUNIT_EXPECT_KASAN_FAIL(test, kasan_int_result =
     xor_unlock_is_negative_byte(1 << nr, addr));
     }
+    }
 #[no_mangle]
 unsafe extern "C" fn kasan_bitops_generic(test: *mut kunit) {
-    static void kasan_bitops_generic(struct kunit *test)
-    {
-    long *bits;
+pub static mut bits: *mut c_void = core::ptr::null_mut();
 // This test is specifically crafted for the generic mode.
     KASAN_TEST_NEEDS_CONFIG_ON(test, CONFIG_KASAN_GENERIC);
 //
 // Allocate 1 more byte, which causes kzalloc to round up to 16 bytes;
 // this way we do not actually corrupt other memory.
 //
-    bits = kzalloc(sizeof(*bits) + 1, GFP_KERNEL);
+    bits = kzalloc(sizeof!(*bits) + 1, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, bits);
 //
 // Below calls try to access bit within allocated memory; however, the
@@ -1604,29 +1726,26 @@ unsafe extern "C" fn kasan_bitops_generic(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn kasan_bitops_tags(test: *mut kunit) {
-    static void kasan_bitops_tags(struct kunit *test)
-    {
-    long *bits;
+pub static mut bits: *mut c_void = core::ptr::null_mut();
 // This test is specifically crafted for tag-based modes.
     KASAN_TEST_NEEDS_CONFIG_OFF(test, CONFIG_KASAN_GENERIC);
 // kmalloc-64 cache will be used and the last 16 bytes will be the redzone.
     bits = kzalloc(48, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, bits);
 // Do the accesses past the 48 allocated bytes, but within the redone.
-    kasan_bitops_modify(test, BITS_PER_LONG, (void *)bits + 48);
-    kasan_bitops_test_and_modify(test, BITS_PER_LONG + BITS_PER_BYTE, (void *)bits + 48);
+    kasan_bitops_modify(test, BITS_PER_LONG, bits + 48);
+    kasan_bitops_test_and_modify(test, BITS_PER_LONG + BITS_PER_BYTE, bits + 48);
     kfree(bits);
     }
 #[no_mangle]
 unsafe extern "C" fn vmalloc_helpers_tags(test: *mut kunit) {
-    static void vmalloc_helpers_tags(struct kunit *test)
-    {
-    void *ptr;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
 // This test is intended for tag-based modes.
     KASAN_TEST_NEEDS_CONFIG_OFF(test, CONFIG_KASAN_GENERIC);
     KASAN_TEST_NEEDS_CONFIG_ON(test, CONFIG_KASAN_VMALLOC);
-    if (!kasan_vmalloc_enabled())
+    if (!kasan_vmalloc_enabled()) {
     kunit_skip(test, "Test requires kasan.vmalloc=on");
+    }
     ptr = vmalloc(PAGE_SIZE);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
 // Check that the returned pointer is tagged.
@@ -1637,7 +1756,7 @@ unsafe extern "C" fn vmalloc_helpers_tags(test: *mut kunit) {
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, vmalloc_to_page(ptr));
 
     {
-    int rv;
+    let mut rv = 0;
 // Make sure vmalloc'ed memory permissions can be changed.
     rv = set_memory_ro((unsigned long)ptr, 1);
     KUNIT_ASSERT_GE(test, rv, 0);
@@ -1649,8 +1768,6 @@ unsafe extern "C" fn vmalloc_helpers_tags(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn vmalloc_oob_helper(test: *mut kunit, v_ptr: *mut c_char, size: usize) {
-    static void vmalloc_oob_helper(struct kunit *test, char *v_ptr, size_t size)
-    {
 //
 // We have to be careful not to hit the guard page in vmalloc tests.
 // The MMU will catch that and crash us.
@@ -1662,22 +1779,23 @@ unsafe extern "C" fn vmalloc_oob_helper(test: *mut kunit, v_ptr: *mut c_char, si
 // An unaligned access past the requested vmalloc size.
 // Only generic KASAN can precisely detect these.
 //
-    if (IS_ENABLED(CONFIG_KASAN_GENERIC))
-    KUNIT_EXPECT_KASAN_FAIL(test, ((volatile char *)v_ptr)[size]);
+    if (IS_ENABLED!(CONFIG_KASAN_GENERIC)) {
+    KUNIT_EXPECT_KASAN_FAIL(test, (v_ptr)[size]);
+    }
 // An aligned access into the first out-of-bounds granule.
     size = round_up(size, KASAN_GRANULE_SIZE);
-    KUNIT_EXPECT_KASAN_FAIL_READ(test, ((volatile char *)v_ptr)[size]);
+    KUNIT_EXPECT_KASAN_FAIL_READ(test, (v_ptr)[size]);
     }
 #[no_mangle]
 unsafe extern "C" fn vmalloc_oob(test: *mut kunit) {
-    static void vmalloc_oob(struct kunit *test)
-    {
-    char *v_ptr, *p_ptr;
-    struct page *page;
-    let mut size: usize = PAGE_SIZE / 2 - KASAN_GRANULE_SIZE - 5;
+    let mut v_ptr = core::ptr::null_mut();
+    let mut p_ptr = core::ptr::null_mut();
+pub static mut page: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 0;
     KASAN_TEST_NEEDS_CONFIG_ON(test, CONFIG_KASAN_VMALLOC);
-    if (!kasan_vmalloc_enabled())
+    if (!kasan_vmalloc_enabled()) {
     kunit_skip(test, "Test requires kasan.vmalloc=on");
+    }
     v_ptr = vmalloc(size);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, v_ptr);
     OPTIMIZER_HIDE_VAR(v_ptr);
@@ -1706,18 +1824,19 @@ unsafe extern "C" fn vmalloc_oob(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn vmap_tags(test: *mut kunit) {
-    static void vmap_tags(struct kunit *test)
-    {
-    char *p_ptr, *v_ptr;
-    struct page *p_page, *v_page;
+    let mut p_ptr = core::ptr::null_mut();
+    let mut v_ptr = core::ptr::null_mut();
+    let mut p_page = core::ptr::null_mut();
+    let mut v_page = core::ptr::null_mut();
 //
 // This test is specifically crafted for the software tag-based mode,
 // the only tag-based mode that poisons vmap mappings.
 //
     KASAN_TEST_NEEDS_CONFIG_ON(test, CONFIG_KASAN_SW_TAGS);
     KASAN_TEST_NEEDS_CONFIG_ON(test, CONFIG_KASAN_VMALLOC);
-    if (!kasan_vmalloc_enabled())
+    if (!kasan_vmalloc_enabled()) {
     kunit_skip(test, "Test requires kasan.vmalloc=on");
+    }
     p_page = alloc_pages(GFP_KERNEL, 1);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, p_page);
     p_ptr = page_address(p_page);
@@ -1743,10 +1862,9 @@ unsafe extern "C" fn vmap_tags(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn vm_map_ram_tags(test: *mut kunit) {
-    static void vm_map_ram_tags(struct kunit *test)
-    {
-    char *p_ptr, *v_ptr;
-    struct page *page;
+    let mut p_ptr = core::ptr::null_mut();
+    let mut v_ptr = core::ptr::null_mut();
+pub static mut page: *mut c_void = core::ptr::null_mut();
 //
 // This test is specifically crafted for the software tag-based mode,
 // the only tag-based mode that poisons vm_map_ram mappings.
@@ -1773,13 +1891,13 @@ unsafe extern "C" fn vm_map_ram_tags(test: *mut kunit) {
 //
 #[no_mangle]
 unsafe extern "C" fn match_all_not_assigned(test: *mut kunit) {
-    static void match_all_not_assigned(struct kunit *test)
-    {
-    char *ptr;
-    struct page *pages;
-    int i, size, order;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+pub static mut pages: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    let mut size = 0;
+    let mut order = 0;
     KASAN_TEST_NEEDS_CONFIG_OFF(test, CONFIG_KASAN_GENERIC);
-    for (i = 0; i < 256; i++) {
+    while (i < 256) {
     size = get_random_u32_inclusive(1, 1024);
     ptr = kmalloc(size, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
@@ -1787,7 +1905,7 @@ unsafe extern "C" fn match_all_not_assigned(test: *mut kunit) {
     KUNIT_EXPECT_LT(test, (u8)get_tag(ptr), (u8)KASAN_TAG_KERNEL);
     kfree(ptr);
     }
-    for (i = 0; i < 256; i++) {
+    while (i < 256) {
     order = get_random_u32_inclusive(1, 4);
     pages = alloc_pages(GFP_KERNEL, order);
     ptr = page_address(pages);
@@ -1796,9 +1914,10 @@ unsafe extern "C" fn match_all_not_assigned(test: *mut kunit) {
     KUNIT_EXPECT_LT(test, (u8)get_tag(ptr), (u8)KASAN_TAG_KERNEL);
     free_pages((unsigned long)ptr, order);
     }
-    if (!kasan_vmalloc_enabled())
+    if (!kasan_vmalloc_enabled()) {
     return;
-    for (i = 0; i < 256; i++) {
+    }
+    while (i < 256) {
     size = get_random_u32_inclusive(1, 1024);
     ptr = vmalloc(size);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
@@ -1810,10 +1929,8 @@ unsafe extern "C" fn match_all_not_assigned(test: *mut kunit) {
 // Check that 0xff works as a match-all pointer tag for tag-based modes.
 #[no_mangle]
 unsafe extern "C" fn match_all_ptr_tag(test: *mut kunit) {
-    static void match_all_ptr_tag(struct kunit *test)
-    {
-    char *ptr;
-    u8 tag;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+    let mut tag = 0;
     KASAN_TEST_NEEDS_CONFIG_OFF(test, CONFIG_KASAN_GENERIC);
     ptr = kmalloc(128, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
@@ -1831,25 +1948,25 @@ unsafe extern "C" fn match_all_ptr_tag(test: *mut kunit) {
 // Check that there are no match-all memory tags for tag-based modes.
 #[no_mangle]
 unsafe extern "C" fn match_all_mem_tag(test: *mut kunit) {
-    static void match_all_mem_tag(struct kunit *test)
-    {
-    char *ptr;
-    int tag;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+    let mut tag = 0;
     KASAN_TEST_NEEDS_CONFIG_OFF(test, CONFIG_KASAN_GENERIC);
     ptr = kmalloc(128, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
     KUNIT_EXPECT_NE(test, (u8)get_tag(ptr), (u8)KASAN_TAG_KERNEL);
 // For each possible tag value not matching the pointer tag.
-    for (tag = KASAN_TAG_MIN; tag <= KASAN_TAG_KERNEL; tag++) {
+    while (tag <= KASAN_TAG_KERNEL) {
 //
 // For Software Tag-Based KASAN, skip the majority of tag
 // values to avoid the test printing too many reports.
 //
-    if (IS_ENABLED(CONFIG_KASAN_SW_TAGS) &&
-    tag >= KASAN_TAG_MIN + 8 && tag <= KASAN_TAG_KERNEL - 8)
+    if (IS_ENABLED!(CONFIG_KASAN_SW_TAGS) &&
+    tag >= KASAN_TAG_MIN + 8 && tag <= KASAN_TAG_KERNEL - 8) {
     continue;
-    if (tag == get_tag(ptr))
+    }
+    if (tag == get_tag(ptr)) {
     continue;
+    }
 // Mark the first memory granule with the chosen memory tag.
     kasan_poison(ptr, KASAN_GRANULE_SIZE, (u8)tag, false);
 // This access must cause a KASAN report.
@@ -1865,8 +1982,6 @@ unsafe extern "C" fn match_all_mem_tag(test: *mut kunit) {
 //
 #[no_mangle]
 unsafe extern "C" fn rust_uaf(test: *mut kunit) {
-    static void rust_uaf(struct kunit *test)
-    {
     KASAN_TEST_NEEDS_CONFIG_ON(test, CONFIG_RUST);
     KUNIT_EXPECT_KASAN_FAIL(test, kasan_test_rust_uaf());
     }
@@ -1877,11 +1992,9 @@ unsafe extern "C" fn rust_uaf(test: *mut kunit) {
 
 #[no_mangle]
 unsafe extern "C" fn copy_to_kernel_nofault_oob(test: *mut kunit) {
-    static void copy_to_kernel_nofault_oob(struct kunit *test)
-    {
-    char *ptr;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
     char buf[128];
-    let mut size: usize = sizeof(buf);
+pub static mut size: usize = 0;
 //
 // This test currently fails with the HW_TAGS mode. The reason is
 // unknown and needs to be investigated.
@@ -1910,12 +2023,10 @@ unsafe extern "C" fn copy_to_kernel_nofault_oob(test: *mut kunit) {
 
 #[no_mangle]
 unsafe extern "C" fn copy_user_test_oob(test: *mut kunit) {
-    static void copy_user_test_oob(struct kunit *test)
-    {
-    char *kmem;
-    char __user *usermem;
-    unsigned long useraddr;
-    let mut size: usize = 128 - KASAN_GRANULE_SIZE;
+pub static mut kmem: *mut c_void = core::ptr::null_mut();
+    let mut usermem = core::ptr::null_mut();
+    let mut useraddr = 0;
+pub static mut size: usize = 0;
     int __maybe_unused unused;
     kmem = kunit_kmalloc(test, size, GFP_KERNEL);
     KUNIT_ASSERT_NOT_ERR_OR_NULL(test, kmem);
@@ -1927,7 +2038,7 @@ unsafe extern "C" fn copy_user_test_oob(test: *mut kunit) {
     KUNIT_ASSERT_LT_MSG(test, useraddr, (unsigned long)TASK_SIZE,
     "Failed to allocate user memory");
     OPTIMIZER_HIDE_VAR(size);
-    usermem = (char __user *)useraddr;
+    usermem = useraddr;
     KUNIT_EXPECT_KASAN_FAIL(test,
     unused = copy_from_user(kmem, usermem, size + 1));
     KUNIT_EXPECT_KASAN_FAIL_READ(test,
@@ -1949,94 +2060,8 @@ unsafe extern "C" fn copy_user_test_oob(test: *mut kunit) {
     KUNIT_EXPECT_KASAN_FAIL(test,
     unused = strncpy_from_user(kmem, usermem, size + 1));
     }
-    static struct kunit_case kasan_kunit_test_cases[] = {
-    KUNIT_CASE(kmalloc_oob_right),
-    KUNIT_CASE(kmalloc_oob_left),
-    KUNIT_CASE(kmalloc_node_oob_right),
-    KUNIT_CASE(kmalloc_track_caller_oob_right),
-    KUNIT_CASE(kmalloc_big_oob_right),
-    KUNIT_CASE(kmalloc_large_oob_right),
-    KUNIT_CASE(kmalloc_large_uaf),
-    KUNIT_CASE(kmalloc_large_invalid_free),
-    KUNIT_CASE(page_alloc_oob_right),
-    KUNIT_CASE(page_alloc_uaf),
-    KUNIT_CASE(krealloc_more_oob),
-    KUNIT_CASE(krealloc_less_oob),
-    KUNIT_CASE(krealloc_large_more_oob),
-    KUNIT_CASE(krealloc_large_less_oob),
-    KUNIT_CASE(krealloc_uaf),
-    KUNIT_CASE(kmalloc_oob_16),
-    KUNIT_CASE(kmalloc_uaf_16),
-    KUNIT_CASE(kmalloc_oob_in_memset),
-    KUNIT_CASE(kmalloc_oob_memset_2),
-    KUNIT_CASE(kmalloc_oob_memset_4),
-    KUNIT_CASE(kmalloc_oob_memset_8),
-    KUNIT_CASE(kmalloc_oob_memset_16),
-    KUNIT_CASE(kmalloc_memmove_negative_size),
-    KUNIT_CASE(kmalloc_memmove_invalid_size),
-    KUNIT_CASE(kmalloc_uaf),
-    KUNIT_CASE(kmalloc_uaf_memset),
-    KUNIT_CASE(kmalloc_uaf2),
-    KUNIT_CASE(kmalloc_uaf3),
-    KUNIT_CASE(kmalloc_double_kzfree),
-    KUNIT_CASE(ksize_unpoisons_memory),
-    KUNIT_CASE(ksize_uaf),
-    KUNIT_CASE(rcu_uaf),
-    KUNIT_CASE(workqueue_uaf),
-    KUNIT_CASE(kfree_via_page),
-    KUNIT_CASE(kfree_via_phys),
-    KUNIT_CASE(kmem_cache_oob),
-    KUNIT_CASE(kmem_cache_double_free),
-    KUNIT_CASE(kmem_cache_invalid_free),
-    KUNIT_CASE(kmem_cache_rcu_uaf),
-    KUNIT_CASE(kmem_cache_rcu_reuse),
-    KUNIT_CASE(kmem_cache_double_destroy),
-    KUNIT_CASE(kmem_cache_accounted),
-    KUNIT_CASE(kmem_cache_bulk),
-    KUNIT_CASE(mempool_kmalloc_oob_right),
-    KUNIT_CASE(mempool_kmalloc_large_oob_right),
-    KUNIT_CASE(mempool_slab_oob_right),
-    KUNIT_CASE(mempool_kmalloc_uaf),
-    KUNIT_CASE(mempool_kmalloc_large_uaf),
-    KUNIT_CASE(mempool_slab_uaf),
-    KUNIT_CASE(mempool_page_alloc_uaf),
-    KUNIT_CASE(mempool_kmalloc_double_free),
-    KUNIT_CASE(mempool_kmalloc_large_double_free),
-    KUNIT_CASE(mempool_page_alloc_double_free),
-    KUNIT_CASE(mempool_kmalloc_invalid_free),
-    KUNIT_CASE(mempool_kmalloc_large_invalid_free),
-    KUNIT_CASE(kasan_global_oob_right),
-    KUNIT_CASE(kasan_global_oob_left),
-    KUNIT_CASE(kasan_stack_oob),
-    KUNIT_CASE(kasan_alloca_oob_left),
-    KUNIT_CASE(kasan_alloca_oob_right),
-    KUNIT_CASE(kasan_memchr),
-    KUNIT_CASE(kasan_memcmp),
-    KUNIT_CASE(kasan_strings),
-    KUNIT_CASE(kasan_bitops_generic),
-    KUNIT_CASE(kasan_bitops_tags),
-    KUNIT_CASE_SLOW(kasan_atomics),
-    KUNIT_CASE(vmalloc_helpers_tags),
-    KUNIT_CASE(vmalloc_oob),
-    KUNIT_CASE(vmap_tags),
-    KUNIT_CASE(vm_map_ram_tags),
-    KUNIT_CASE(match_all_not_assigned),
-    KUNIT_CASE(match_all_ptr_tag),
-    KUNIT_CASE(match_all_mem_tag),
-
-    KUNIT_CASE(copy_to_kernel_nofault_oob),
-
-    KUNIT_CASE(rust_uaf),
-    KUNIT_CASE(copy_user_test_oob),
-    {}
-    };
-    static struct kunit_suite kasan_kunit_test_suite = {
-    .name = "kasan",
-    .test_cases = kasan_kunit_test_cases,
-    .exit = kasan_test_exit,
-    .suite_init = kasan_suite_init,
-    .suite_exit = kasan_suite_exit,
-    };
+pub static mut kunit_case: usize = 0;
+pub static mut kunit_suite: usize = 0;
     kunit_test_suite(kasan_kunit_test_suite);
     MODULE_DESCRIPTION("KUnit tests for checking KASAN bug-detection capabilities");
     MODULE_LICENSE("GPL");

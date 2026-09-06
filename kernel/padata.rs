@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
 macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
@@ -76,11 +326,11 @@ macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
 #[derive(Copy, Clone)]
 pub struct padata_work {
     pub pw_work: work_struct,
-    pub /: *mut *mut list_head pw_list; / padata_free_works linkage,
+//     pub /: *mut *mut list_head pw_list; / padata_free_works linkage,
     pub pw_data: *mut c_void,
 }
 // static DEFINE_SPINLOCK(padata_works_lock);
-    static struct padata_work *padata_works;
+pub static mut padata_works: *mut c_void = core::ptr::null_mut();
 // static LIST_HEAD(padata_free_works);
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -93,16 +343,17 @@ pub struct padata_mt_job_state {
     pub chunk_size: c_ulong,
 }
 
-    static void padata_free_pd(struct parallel_data *pd);
-    static void __init padata_mt_helper(struct work_struct *work);
+// forward_decl: padata_free_pd;
+    static void __init padata_mt_helper(work_struct *work);
 #[no_mangle]
 pub unsafe extern "C" fn padata_get_pd(pd: *mut parallel_data) {
     refcount_inc(&pd.refcnt);
     }
 #[no_mangle]
 pub unsafe extern "C" fn padata_put_pd_cnt(pd: *mut parallel_data, cnt: c_int) {
-    if (refcount_sub_and_test(cnt, &pd.refcnt))
+    if (refcount_sub_and_test(cnt, &pd.refcnt)) {
     padata_free_pd(pd);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn padata_put_pd(pd: *mut parallel_data) {
@@ -114,16 +365,17 @@ unsafe extern "C" fn padata_cpu_hash(pd: *mut parallel_data, seq_nr: c_uint) -> 
 // Hash the sequence numbers to the cpus by taking
 // seq_nr mod. number of cpus in use.
 //
-    let mut cpu_index: c_int = seq_nr % cpumask_weight(pd.cpumask.pcpu);
+pub static mut cpu_index: c_int = 0;
     return cpumask_nth(cpu_index, pd.cpumask.pcpu);
     }
-    static struct padata_work *padata_work_alloc(void)
-    {
-    struct padata_work *pw;
+#[no_mangle]
+pub unsafe extern "C" fn padata_work_alloc() -> *mut c_void {
+pub static mut pw: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&padata_works_lock);
-    if (list_empty(&padata_free_works))
+    if (list_empty(&padata_free_works)) {
     return core::ptr::null_mut();	/* No more work items allowed to be queued. */
-    pw = list_first_entry(&padata_free_works, struct padata_work, pw_list);
+    }
+    pw = list_first_entry(&padata_free_works, padata_work, pw_list);
     list_del(&pw.pw_list);
     return pw;
     }
@@ -135,25 +387,27 @@ unsafe extern "C" fn padata_cpu_hash(pd: *mut parallel_data, seq_nr: c_uint) -> 
 // padata_mt_helper() because the calls to padata_work_init() with other work_fn
 // values were eliminated or inlined.
 //
-    static void __ref padata_work_init(struct padata_work *pw, work_func_t work_fn,
+    static void __ref padata_work_init(padata_work *pw, work_func_t work_fn,
     void *data, int flags)
     {
-    if (flags & PADATA_WORK_ONSTACK)
+    if (flags & PADATA_WORK_ONSTACK) {
     INIT_WORK_ONSTACK(&pw.pw_work, work_fn);
-    else
+    }
+    else {
     INIT_WORK(&pw.pw_work, work_fn);
+    }
     pw.pw_data = data;
     }
-    static int __init padata_work_alloc_mt(int nworks, void *data,
-    struct list_head *head)
+    static int __init padata_work_alloc_mt(int nworks, void *data, list_head *head)
     {
-    int i;
+    let mut i = 0;
     spin_lock_bh(&padata_works_lock);
 // Start at 1 because the current task participates in the job.
-    for (i = 1; i < nworks; ++i) {
-    struct padata_work *pw = padata_work_alloc();
-    if (!pw)
+    while (i < nworks) {
+    let mut pw = padata_work_alloc();
+    if (!pw) {
     break;
+    }
     padata_work_init(pw, padata_mt_helper, data, 0);
     list_add(&pw.pw_list, head);
     }
@@ -167,9 +421,11 @@ unsafe extern "C" fn padata_work_free(pw: *mut padata_work) {
     }
 #[no_mangle]
 unsafe extern "C" fn padata_works_free(works: *mut list_head) -> c_int {
-    struct padata_work *cur, *next;
-    if (list_empty(works))
+    let mut cur = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+    if (list_empty(works)) {
     return;
+    }
     spin_lock_bh(&padata_works_lock);
     list_for_each_entry_safe(cur, next, works, pw_list) {
     list_del(&cur.pw_list);
@@ -179,9 +435,9 @@ unsafe extern "C" fn padata_works_free(works: *mut list_head) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn padata_parallel_worker(parallel_work: *mut work_struct) {
-    struct padata_work *pw = container_of(parallel_work, struct padata_work,
+    let mut pw = container_of!(parallel_work, padata_work,
     pw_work);
-    struct padata_priv *padata = pw.pw_data;
+    let mut padata = pw.pw_data;
     local_bh_disable();
     padata.parallel(padata);
     spin_lock(&padata_works_lock);
@@ -205,28 +461,31 @@ unsafe extern "C" fn padata_parallel_worker(parallel_work: *mut work_struct) {
 //
 // Return: 0 on success or else negative error code.
 //
-    int padata_do_parallel(struct padata_shell *ps,
-    struct padata_priv *padata, int *cb_cpu)
-    {
-    struct padata_instance *pinst = ps.pinst;
-    struct parallel_data *pd;
-    struct padata_work *pw;
-    int cpu_index, err;
+#[no_mangle]
+pub unsafe extern "C" fn padata_do_parallel(ps: *mut padata_shell, padata: *mut padata_priv, cb_cpu: *mut c_int) -> c_int {
+    let mut pinst = ps.pinst;
+pub static mut pd: *mut c_void = core::ptr::null_mut();
+pub static mut pw: *mut c_void = core::ptr::null_mut();
+    let mut cpu_index = 0;
+    let mut err = 0;
     rcu_read_lock_bh();
     pd = rcu_dereference_bh(ps.pd);
     err = -EINVAL;
-    if (!(pinst.flags & PADATA_INIT) || pinst.flags & PADATA_INVALID)
-    goto out;
+    if (!(pinst.flags & PADATA_INIT) || pinst.flags & PADATA_INVALID) {
+// goto;
+    }
     if (!cpumask_test_cpu(*cb_cpu, pd.cpumask.cbcpu)) {
-    if (cpumask_empty(pd.cpumask.cbcpu))
-    goto out;
+    if (cpumask_empty(pd.cpumask.cbcpu)) {
+// goto;
+    }
 // Select an alternate fallback CPU and notify the caller.
     cpu_index = *cb_cpu % cpumask_weight(pd.cpumask.cbcpu);
 // cb_cpu = cpumask_nth(cpu_index, pd->cpumask.cbcpu);
     }
     err = -EBUSY;
-    if ((pinst.flags & PADATA_RESET))
-    goto out;
+    if ((pinst.flags & PADATA_RESET)) {
+// goto;
+    }
     padata_get_pd(pd);
     padata.pd = pd;
     padata.cb_cpu = *cb_cpu;
@@ -244,7 +503,7 @@ unsafe extern "C" fn padata_parallel_worker(parallel_work: *mut work_struct) {
     queue_work(pinst.parallel_wq, &pw.pw_work);
     }
     return 0;
-    out:
+// label;
     rcu_read_unlock_bh();
     return err;
     }
@@ -259,26 +518,27 @@ unsafe extern "C" fn padata_parallel_worker(parallel_work: *mut work_struct) {
 // be parallel processed by another cpu and is not yet present in
 // the cpu's reorder queue.
 //
-    static struct padata_priv *padata_find_next(struct parallel_data *pd, int cpu,
-    unsigned int processed)
-    {
-    struct padata_priv *padata;
-    struct padata_list *reorder;
+#[no_mangle]
+pub unsafe extern "C" fn padata_find_next(pd: *mut parallel_data, cpu: c_int, processed: c_uint) -> *mut c_void {
+pub static mut padata: *mut c_void = core::ptr::null_mut();
+pub static mut reorder: *mut c_void = core::ptr::null_mut();
     reorder = per_cpu_ptr(pd.reorder_list, cpu);
     spin_lock(&reorder.lock);
-    if (list_empty(&reorder.list))
-    goto notfound;
-    padata = list_entry(reorder.list.next, struct padata_priv, list);
+    if (list_empty(&reorder.list)) {
+// goto;
+    }
+    padata = list_entry(reorder.list.next, padata_priv, list);
 //
 // Checks the rare case where two or more parallel jobs have hashed to
 // the same CPU and one of the later ones finishes first.
 //
-    if (padata.seq_nr != processed)
-    goto notfound;
+    if (padata.seq_nr != processed) {
+// goto;
+    }
     list_del_init(&padata.list);
     spin_unlock(&reorder.lock);
     return padata;
-    notfound:
+// label;
     pd.processed = processed;
     pd.cpu = cpu;
     spin_unlock(&reorder.lock);
@@ -286,21 +546,23 @@ unsafe extern "C" fn padata_parallel_worker(parallel_work: *mut work_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn padata_reorder(padata: *mut padata_priv) {
-    struct parallel_data *pd = padata.pd;
-    struct padata_instance *pinst = pd.ps.pinst;
-    unsigned int processed;
-    int cpu;
+    let mut pd = padata.pd;
+    let mut pinst = pd.ps.pinst;
+    let mut processed = 0;
+    let mut cpu = 0;
     processed = pd.processed;
     cpu = pd.cpu;
     do {
-    struct padata_serial_queue *squeue;
-    int cb_cpu;
-    processed++;
+pub static mut squeue: *mut c_void = core::ptr::null_mut();
+    let mut cb_cpu = 0;
+    processed += 1;
 // When sequence wraps around, reset to the first CPU.
-    if (unlikely(processed == 0))
+    if (unlikely(processed == 0)) {
     cpu = cpumask_first(pd.cpumask.pcpu);
-    else
+    }
+    else {
     cpu = cpumask_next_wrap(cpu, pd.cpumask.pcpu);
+    }
     cb_cpu = padata.cb_cpu;
     squeue = per_cpu_ptr(pd.squeue, cb_cpu);
     spin_lock(&squeue.serial.lock);
@@ -317,24 +579,23 @@ unsafe extern "C" fn padata_reorder(padata: *mut padata_priv) {
     }
 #[no_mangle]
 unsafe extern "C" fn padata_serial_worker(serial_work: *mut work_struct) {
-    struct padata_serial_queue *squeue;
-    struct parallel_data *pd;
-    LIST_HEAD(local_list);
-    int cnt;
+pub static mut squeue: *mut c_void = core::ptr::null_mut();
+pub static mut pd: *mut c_void = core::ptr::null_mut();
+pub static mut local_list: usize = 0;
+    let mut cnt = 0;
     local_bh_disable();
-    squeue = container_of(serial_work, struct padata_serial_queue, work);
+    squeue = container_of!(serial_work, padata_serial_queue, work);
     pd = squeue.pd;
     spin_lock(&squeue.serial.lock);
     list_replace_init(&squeue.serial.list, &local_list);
     spin_unlock(&squeue.serial.lock);
     cnt = 0;
     while (!list_empty(&local_list)) {
-    struct padata_priv *padata;
-    padata = list_entry(local_list.next,
-    struct padata_priv, list);
+pub static mut padata: *mut c_void = core::ptr::null_mut();
+    padata = list_entry(local_list.next, padata_priv, list);
     list_del_init(&padata.list);
     padata.serial(padata);
-    cnt++;
+    cnt += 1;
     }
     local_bh_enable();
     padata_put_pd_cnt(pd, cnt);
@@ -349,36 +610,39 @@ unsafe extern "C" fn padata_serial_worker(serial_work: *mut work_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn padata_do_serial(padata: *mut padata_priv) {
-    struct parallel_data *pd = padata.pd;
-    let mut hashed_cpu: c_int = padata_cpu_hash(pd, padata.seq_nr);
-    struct padata_list *reorder = per_cpu_ptr(pd.reorder_list, hashed_cpu);
-    struct padata_priv *cur;
-    struct list_head *pos;
-    let mut gotit: bool = true;
+    let mut pd = padata.pd;
+pub static mut hashed_cpu: c_int = 0;
+    let mut reorder = per_cpu_ptr(pd.reorder_list, hashed_cpu);
+pub static mut cur: *mut c_void = core::ptr::null_mut();
+pub static mut pos: *mut c_void = core::ptr::null_mut();
+pub static mut gotit: bool = true;
     spin_lock(&reorder.lock);
 // Sort in ascending order of sequence number.
     list_for_each_prev(pos, &reorder.list) {
-    cur = list_entry(pos, struct padata_priv, list);
+    cur = list_entry(pos, padata_priv, list);
 // Compare by difference to consider integer wrap around
-    if ((signed int)(cur.seq_nr - padata.seq_nr) < 0)
+    if ((signed int)(cur.seq_nr - padata.seq_nr) < 0) {
     break;
+    }
     }
     if (padata.seq_nr != pd.processed) {
     gotit = false;
     list_add(&padata.list, pos);
     }
     spin_unlock(&reorder.lock);
-    if (gotit)
+    if (gotit) {
     padata_reorder(padata);
+    }
     }
     EXPORT_SYMBOL(padata_do_serial);
 #[no_mangle]
 unsafe extern "C" fn padata_setup_cpumasks(pinst: *mut padata_instance) -> c_int {
-    struct workqueue_attrs *attrs;
-    int err;
+pub static mut attrs: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
     attrs = alloc_workqueue_attrs();
-    if (!attrs)
+    if (!attrs) {
     return -ENOMEM;
+    }
 // Restrict parallel_wq workers to pd->cpumask.pcpu.
     cpumask_copy(attrs.cpumask, pinst.cpumask.pcpu);
     err = apply_workqueue_attrs(pinst.parallel_wq, attrs);
@@ -387,10 +651,10 @@ unsafe extern "C" fn padata_setup_cpumasks(pinst: *mut padata_instance) -> c_int
     }
 #[no_mangle]
 unsafe extern "C" fn padata_mt_helper(w: *mut work_struct) -> c_int {
-    struct padata_work *pw = container_of(w, struct padata_work, pw_work);
-    struct padata_mt_job_state *ps = pw.pw_data;
-    struct padata_mt_job *job = ps.job;
-    bool done;
+    let mut pw = container_of!(w, padata_work, pw_work);
+    let mut ps = pw.pw_data;
+    let mut job = ps.job;
+    let mut done = 0;
     spin_lock(&ps.lock);
     while (job.size > 0) {
     unsigned long start, size, end;
@@ -408,8 +672,9 @@ unsafe extern "C" fn padata_mt_helper(w: *mut work_struct) -> c_int {
     ++ps.nworks_fini;
     done = (ps.nworks_fini == ps.nworks);
     spin_unlock(&ps.lock);
-    if (done)
+    if (done) {
     complete(&ps.completion);
+    }
     }
 //
 // padata_do_multithreaded - run a multithreaded job
@@ -420,14 +685,16 @@ unsafe extern "C" fn padata_mt_helper(w: *mut work_struct) -> c_int {
 #[no_mangle]
 pub unsafe extern "C" fn padata_do_multithreaded(job: *mut padata_mt_job) -> c_int {
 // In case threads finish at different times.
-    let mut load_balance_factor: static unsigned long = 4;
+pub static mut load_balance_factor: unsigned long = 4;
     struct padata_work my_work, *pw;
-    struct padata_mt_job_state ps;
-    LIST_HEAD(works);
-    int nworks, nid;
+pub static mut ps: usize = 0;
+pub static mut works: usize = 0;
+    let mut nworks = 0;
+    let mut nid = 0;
     static atomic_t last_used_nid __initdata;
-    if (job.size == 0)
+    if (job.size == 0) {
     return;
+    }
 // Ensure at least one thread when size < min_chunk.
     nworks = max(job.size / max(job.min_chunk, job.align), 1ul);
     nworks = min(nworks, job.max_threads);
@@ -453,9 +720,10 @@ pub unsafe extern "C" fn padata_do_multithreaded(job: *mut padata_mt_job) -> c_i
     ps.chunk_size = max(ps.chunk_size, job.min_chunk);
     ps.chunk_size = max(ps.chunk_size, 1ul);
     ps.chunk_size = roundup(ps.chunk_size, job.align);
-    list_for_each_entry(pw, &works, pw_list)
+    list_for_each_entry(pw, &works, pw_list) {
     if (job.numa_aware) {
-    let mut old_node: c_int = atomic_read(&last_used_nid);
+    }
+pub static mut old_node: c_int = 0;
     do {
     nid = next_node_in(old_node, node_states[N_CPU]);
     } while (!atomic_try_cmpxchg(&last_used_nid, &old_node, nid));
@@ -474,8 +742,8 @@ pub unsafe extern "C" fn padata_do_multithreaded(job: *mut padata_mt_job) -> c_i
 // Initialize all percpu queues used by serial workers
 #[no_mangle]
 unsafe extern "C" fn padata_init_squeues(pd: *mut parallel_data) {
-    int cpu;
-    struct padata_serial_queue *squeue;
+    let mut cpu = 0;
+pub static mut squeue: *mut c_void = core::ptr::null_mut();
     for_each_cpu(cpu, pd.cpumask.cbcpu) {
     squeue = per_cpu_ptr(pd.squeue, cpu);
     squeue.pd = pd;
@@ -487,8 +755,8 @@ unsafe extern "C" fn padata_init_squeues(pd: *mut parallel_data) {
 // Initialize per-CPU reorder lists
 #[no_mangle]
 unsafe extern "C" fn padata_init_reorder_list(pd: *mut parallel_data) {
-    int cpu;
-    struct padata_list *list;
+    let mut cpu = 0;
+pub static mut list: *mut c_void = core::ptr::null_mut();
     for_each_cpu(cpu, pd.cpumask.pcpu) {
     list = per_cpu_ptr(pd.reorder_list, cpu);
     INIT_LIST_HEAD(&list.list);
@@ -496,25 +764,29 @@ unsafe extern "C" fn padata_init_reorder_list(pd: *mut parallel_data) {
     }
     }
 // Allocate and initialize the internal cpumask dependend resources.
-    static struct parallel_data *padata_alloc_pd(struct padata_shell *ps,
-    int offlining_cpu)
-    {
-    struct padata_instance *pinst = ps.pinst;
-    struct parallel_data *pd;
-    pd = kzalloc_obj(struct parallel_data);
-    if (!pd)
-    goto err;
-    pd.reorder_list = alloc_percpu(struct padata_list);
-    if (!pd.reorder_list)
-    goto err_free_pd;
-    pd.squeue = alloc_percpu(struct padata_serial_queue);
-    if (!pd.squeue)
-    goto err_free_reorder_list;
+#[no_mangle]
+pub unsafe extern "C" fn padata_alloc_pd(ps: *mut padata_shell, offlining_cpu: c_int) -> *mut c_void {
+    let mut pinst = ps.pinst;
+pub static mut pd: *mut c_void = core::ptr::null_mut();
+    pd = kzalloc_obj(parallel_data);
+    if (!pd) {
+// goto;
+    }
+    pd.reorder_list = alloc_percpu(padata_list);
+    if (!pd.reorder_list) {
+// goto;
+    }
+    pd.squeue = alloc_percpu(padata_serial_queue);
+    if (!pd.squeue) {
+// goto;
+    }
     pd.ps = ps;
-    if (!alloc_cpumask_var(&pd.cpumask.pcpu, GFP_KERNEL))
-    goto err_free_squeue;
-    if (!alloc_cpumask_var(&pd.cpumask.cbcpu, GFP_KERNEL))
-    goto err_free_pcpu;
+    if (!alloc_cpumask_var(&pd.cpumask.pcpu, GFP_KERNEL)) {
+// goto;
+    }
+    if (!alloc_cpumask_var(&pd.cpumask.cbcpu, GFP_KERNEL)) {
+// goto;
+    }
     cpumask_and(pd.cpumask.pcpu, pinst.cpumask.pcpu, cpu_online_mask);
     cpumask_and(pd.cpumask.cbcpu, pinst.cpumask.cbcpu, cpu_online_mask);
     if (offlining_cpu >= 0) {
@@ -527,15 +799,15 @@ unsafe extern "C" fn padata_init_reorder_list(pd: *mut parallel_data) {
     refcount_set(&pd.refcnt, 1);
     pd.cpu = cpumask_first(pd.cpumask.pcpu);
     return pd;
-    err_free_pcpu:
+// label;
     free_cpumask_var(pd.cpumask.pcpu);
-    err_free_squeue:
+// label;
     free_percpu(pd.squeue);
-    err_free_reorder_list:
+// label;
     free_percpu(pd.reorder_list);
-    err_free_pd:
+// label;
     kfree(pd);
-    err:
+// label;
     return core::ptr::null_mut();
     }
 #[no_mangle]
@@ -552,43 +824,45 @@ unsafe extern "C" fn __padata_start(pinst: *mut padata_instance) {
     }
 #[no_mangle]
 unsafe extern "C" fn __padata_stop(pinst: *mut padata_instance) {
-    if (!(pinst.flags & PADATA_INIT))
+    if (!(pinst.flags & PADATA_INIT)) {
     return;
+    }
     pinst.flags &= ~PADATA_INIT;
     synchronize_rcu();
     }
 // Replace the internal control structure with a new one.
 #[no_mangle]
 unsafe extern "C" fn padata_replace_one(ps: *mut padata_shell, offlining_cpu: c_int) -> c_int {
-    struct parallel_data *pd_new;
+pub static mut pd_new: *mut c_void = core::ptr::null_mut();
     pd_new = padata_alloc_pd(ps, offlining_cpu);
-    if (!pd_new)
+    if (!pd_new) {
     return -ENOMEM;
+    }
     ps.opd = rcu_dereference_protected(ps.pd, 1);
     rcu_assign_pointer(ps.pd, pd_new);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn padata_replace(pinst: *mut padata_instance, offlining_cpu: c_int) -> c_int {
-    struct padata_shell *ps;
-    let mut err: c_int = 0;
+pub static mut ps: *mut c_void = core::ptr::null_mut();
+pub static mut err: c_int = 0;
     pinst.flags |= PADATA_RESET;
     list_for_each_entry(ps, &pinst.pslist, list) {
     err = padata_replace_one(ps, offlining_cpu);
-    if (err)
+    if (err) {
     break;
     }
+    }
     synchronize_rcu();
-    list_for_each_entry_continue_reverse(ps, &pinst.pslist, list)
+    list_for_each_entry_continue_reverse(ps, &pinst.pslist, list) {
     padata_put_pd(ps.opd);
+    }
     pinst.flags &= ~PADATA_RESET;
     return err;
     }
 // If cpumask contains no active cpu, we mark the instance as invalid.
-    static bool padata_validate_cpumask(struct padata_instance *pinst,
-    const struct cpumask *cpumask,
-    int offlining_cpu)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn padata_validate_cpumask(pinst: *mut padata_instance, cpumask: *mut cpumask, offlining_cpu: c_int) -> bool {
     cpumask_copy(pinst.validate_cpumask, cpu_online_mask);
 //
 // @offlining_cpu is still in cpu_online_mask, so remove it here for
@@ -596,8 +870,9 @@ unsafe extern "C" fn padata_replace(pinst: *mut padata_instance, offlining_cpu: 
 // @offlining_cpu wouldn't be in the online mask doesn't work because
 // padata_cpu_offline() can fail but such a state doesn't allow failure.
 //
-    if (offlining_cpu >= 0)
+    if (offlining_cpu >= 0) {
     __cpumask_clear_cpu(offlining_cpu, pinst.validate_cpumask);
+    }
     if (!cpumask_intersects(cpumask, pinst.validate_cpumask)) {
     pinst.flags |= PADATA_INVALID;
     return false;
@@ -605,26 +880,26 @@ unsafe extern "C" fn padata_replace(pinst: *mut padata_instance, offlining_cpu: 
     pinst.flags &= ~PADATA_INVALID;
     return true;
     }
-    static int __padata_set_cpumasks(struct padata_instance *pinst,
-    cpumask_var_t pcpumask,
-    cpumask_var_t cbcpumask)
-    {
-    int valid;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn __padata_set_cpumasks(pinst: *mut padata_instance, pcpumask: cpumask_var_t, cbcpumask: cpumask_var_t) -> c_int {
+    let mut valid = 0;
+    let mut err = 0;
     valid = padata_validate_cpumask(pinst, pcpumask, -1);
     if (!valid) {
     __padata_stop(pinst);
-    goto out_replace;
+// goto;
     }
     valid = padata_validate_cpumask(pinst, cbcpumask, -1);
-    if (!valid)
+    if (!valid) {
     __padata_stop(pinst);
-    out_replace:
+    }
+// label;
     cpumask_copy(pinst.cpumask.pcpu, pcpumask);
     cpumask_copy(pinst.cpumask.cbcpu, cbcpumask);
     err = padata_setup_cpumasks(pinst) ?: padata_replace(pinst, -1);
-    if (valid)
+    if (valid) {
     __padata_start(pinst);
+    }
     return err;
     }
 //
@@ -637,27 +912,30 @@ unsafe extern "C" fn padata_replace(pinst: *mut padata_instance, offlining_cpu: 
 //
 // Return: 0 on success or negative error code
 //
-    int padata_set_cpumask(struct padata_instance *pinst, int cpumask_type,
-    cpumask_var_t cpumask)
-    {
-    struct cpumask *serial_mask, *parallel_mask;
-    let mut err: c_int = -EINVAL;
+#[no_mangle]
+pub unsafe extern "C" fn padata_set_cpumask(pinst: *mut padata_instance, cpumask_type: c_int, cpumask: cpumask_var_t) -> c_int {
+    let mut serial_mask = core::ptr::null_mut();
+    let mut parallel_mask = core::ptr::null_mut();
+pub static mut err: c_int = 0;
     cpus_read_lock();
     mutex_lock(&pinst.lock);
-    switch (cpumask_type) {
-    case PADATA_CPU_PARALLEL:
+    match (cpumask_type) {
+    PADATA_CPU_PARALLEL => {
     serial_mask = pinst.cpumask.cbcpu;
     parallel_mask = cpumask;
-    break;
-    case PADATA_CPU_SERIAL:
+    // break;
+    }
+    PADATA_CPU_SERIAL => {
     parallel_mask = pinst.cpumask.pcpu;
     serial_mask = cpumask;
-    break;
-    default:
-    goto out;
+    // break;
+    }
+    _ => {
+// goto;
+    }
     }
     err =  __padata_set_cpumasks(pinst, parallel_mask, serial_mask);
-    out:
+// label;
     mutex_unlock(&pinst.lock);
     cpus_read_unlock();
     return err;
@@ -671,30 +949,34 @@ pub unsafe extern "C" fn pinst_has_cpu(pinst: *mut padata_instance, cpu: c_int) 
     }
 #[no_mangle]
 unsafe extern "C" fn padata_cpu_online(cpu: c_uint, node: *mut hlist_node) -> c_int {
-    struct padata_instance *pinst;
-    int ret;
-    pinst = hlist_entry_safe(node, struct padata_instance, cpuhp_node);
-    if (!pinst_has_cpu(pinst, cpu))
+pub static mut pinst: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    pinst = hlist_entry_safe(node, padata_instance, cpuhp_node);
+    if (!pinst_has_cpu(pinst, cpu)) {
     return 0;
+    }
     mutex_lock(&pinst.lock);
     ret = padata_replace(pinst, -1);
     if (padata_validate_cpumask(pinst, pinst.cpumask.pcpu, -1) &&
-    padata_validate_cpumask(pinst, pinst.cpumask.cbcpu, -1))
+    padata_validate_cpumask(pinst, pinst.cpumask.cbcpu, -1)) {
     __padata_start(pinst);
+    }
     mutex_unlock(&pinst.lock);
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn padata_cpu_offline(cpu: c_uint, node: *mut hlist_node) -> c_int {
-    struct padata_instance *pinst;
-    int ret;
-    pinst = hlist_entry_safe(node, struct padata_instance, cpuhp_node);
-    if (!pinst_has_cpu(pinst, cpu))
+pub static mut pinst: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    pinst = hlist_entry_safe(node, padata_instance, cpuhp_node);
+    if (!pinst_has_cpu(pinst, cpu)) {
     return 0;
+    }
     mutex_lock(&pinst.lock);
     if (!padata_validate_cpumask(pinst, pinst.cpumask.pcpu, cpu) ||
-    !padata_validate_cpumask(pinst, pinst.cpumask.cbcpu, cpu))
+    !padata_validate_cpumask(pinst, pinst.cpumask.cbcpu, cpu)) {
     __padata_stop(pinst);
+    }
     ret = padata_replace(pinst, cpu);
     mutex_unlock(&pinst.lock);
     return ret;
@@ -706,7 +988,7 @@ unsafe extern "C" fn __padata_free(pinst: *mut padata_instance) {
 
     cpuhp_state_remove_instance_nocalls(hp_online, &pinst.cpuhp_node);
 
-    WARN_ON(!list_empty(&pinst.pslist));
+    WARN_ON!(!list_empty(&pinst.pslist));
     free_cpumask_var(pinst.cpumask.pcpu);
     free_cpumask_var(pinst.cpumask.cbcpu);
     free_cpumask_var(pinst.validate_cpumask);
@@ -715,65 +997,67 @@ unsafe extern "C" fn __padata_free(pinst: *mut padata_instance) {
     kfree(pinst);
     }
 
-    container_of(_kobj, struct padata_instance, kobj)
+    container_of!(_kobj, padata_instance, kobj)
 
-    container_of_const(_attr, struct padata_sysfs_entry, attr)
+    container_of_const(_attr, padata_sysfs_entry, attr)
 #[no_mangle]
 unsafe extern "C" fn padata_sysfs_release(kobj: *mut kobject) {
-    struct padata_instance *pinst = kobj2pinst(kobj);
+    let mut pinst = kobj2pinst(kobj);
     __padata_free(pinst);
     }
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct padata_sysfs_entry {
     pub attr: attribute,
-    pub ): *const *const *const *const ssize_t (show)(struct padata_instance , struct attribute , char,
-    ssize_t (*store)(struct padata_instance *, const struct attribute *,
+// fn ptr field
+    ssize_t (*store)(padata_instance *, const struct attribute *,
     pub size_t): *const *const char ,,
 }
 
-    static ssize_t show_cpumask(struct padata_instance *pinst,
-    const struct attribute *attr,  char *buf)
-    {
-    struct cpumask *cpumask;
-    ssize_t len;
+#[no_mangle]
+pub unsafe extern "C" fn show_cpumask(pinst: *mut padata_instance, attr: *mut attribute, buf: *mut c_char) -> ssize_t {
+pub static mut cpumask: *mut c_void = core::ptr::null_mut();
+    let mut len = 0;
     mutex_lock(&pinst.lock);
-    if (!strcmp(attr.name, "serial_cpumask"))
+    if (!strcmp(attr.name, "serial_cpumask")) {
     cpumask = pinst.cpumask.cbcpu;
-    else
+    }
+    else {
     cpumask = pinst.cpumask.pcpu;
+    }
     len = snprintf(buf, PAGE_SIZE, "%*pb\n",
     nr_cpu_ids, cpumask_bits(cpumask));
     mutex_unlock(&pinst.lock);
     return len < PAGE_SIZE ? len : -EINVAL;
     }
-    static ssize_t store_cpumask(struct padata_instance *pinst,
-    const struct attribute *attr,
-    const char *buf, size_t count)
-    {
-    cpumask_var_t new_cpumask;
-    ssize_t ret;
-    int mask_type;
-    if (!alloc_cpumask_var(&new_cpumask, GFP_KERNEL))
+#[no_mangle]
+pub unsafe extern "C" fn store_cpumask(pinst: *mut padata_instance, attr: *mut attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut new_cpumask;
+    let mut ret = 0;
+    let mut mask_type = 0;
+    if (!alloc_cpumask_var(&new_cpumask, GFP_KERNEL)) {
     return -ENOMEM;
+    }
     ret = bitmap_parse(buf, count, cpumask_bits(new_cpumask),
     nr_cpumask_bits);
-    if (ret < 0)
-    goto out;
+    if (ret < 0) {
+// goto;
+    }
     mask_type = !strcmp(attr.name, "serial_cpumask") ?
     PADATA_CPU_SERIAL : PADATA_CPU_PARALLEL;
     ret = padata_set_cpumask(pinst, mask_type, new_cpumask);
-    if (!ret)
+    if (!ret) {
     ret = count;
-    out:
+    }
+// label;
     free_cpumask_var(new_cpumask);
     return ret;
     }
 
-    static const struct padata_sysfs_entry _name##_attr =	\
+    static const struct padata_sysfs_entry _name##_attr =	
     __ATTR(_name, 0644, _show_name, _store_name)
 
-    static const struct padata_sysfs_entry _name##_attr =	\
+    static const struct padata_sysfs_entry _name##_attr =	
     __ATTR(_name, 0400, _show_name, core::ptr::null_mut())
     PADATA_ATTR_RW(serial_cpumask, show_cpumask, store_cpumask);
     PADATA_ATTR_RW(parallel_cpumask, show_cpumask, store_cpumask);
@@ -788,72 +1072,72 @@ pub struct padata_sysfs_entry {
     core::ptr::null_mut(),
     };
     ATTRIBUTE_GROUPS(padata_default);
-    static ssize_t padata_sysfs_show(struct kobject *kobj,
-    struct attribute *attr, char *buf)
-    {
-    const struct padata_sysfs_entry *pentry;
-    struct padata_instance *pinst;
-    let mut ret: isize = -EIO;
+#[no_mangle]
+pub unsafe extern "C" fn padata_sysfs_show(kobj: *mut kobject, attr: *mut attribute, buf: *mut c_char) -> ssize_t {
+pub static mut pentry: *mut c_void = core::ptr::null_mut();
+pub static mut pinst: *mut c_void = core::ptr::null_mut();
+pub static mut ret: isize = 0;
     pinst = kobj2pinst(kobj);
     pentry = attr2pentry(attr);
-    if (pentry.show)
+    if (pentry.show) {
     ret = pentry.show(pinst, attr, buf);
+    }
     return ret;
     }
-    static ssize_t padata_sysfs_store(struct kobject *kobj, struct attribute *attr,
-    const char *buf, size_t count)
-    {
-    const struct padata_sysfs_entry *pentry;
-    struct padata_instance *pinst;
-    let mut ret: isize = -EIO;
+#[no_mangle]
+pub unsafe extern "C" fn padata_sysfs_store(kobj: *mut kobject, attr: *mut attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+pub static mut pentry: *mut c_void = core::ptr::null_mut();
+pub static mut pinst: *mut c_void = core::ptr::null_mut();
+pub static mut ret: isize = 0;
     pinst = kobj2pinst(kobj);
     pentry = attr2pentry(attr);
-    if (pentry.store)
+    if (pentry.store) {
     ret = pentry.store(pinst, attr, buf, count);
+    }
     return ret;
     }
-    static const struct sysfs_ops padata_sysfs_ops = {
-    .show = padata_sysfs_show,
-    .store = padata_sysfs_store,
-    };
-    static const struct kobj_type padata_attr_type = {
-    .sysfs_ops = &padata_sysfs_ops,
-    .default_groups = padata_default_groups,
-    .release = padata_sysfs_release,
-    };
+pub static mut sysfs_ops: usize = 0;
+pub static mut kobj_type: usize = 0;
 //
 // padata_alloc - allocate and initialize a padata instance
 // @name: used to identify the instance
 //
 // Return: new instance on success, NULL on error
 //
-    struct padata_instance *padata_alloc(const char *name)
-    {
-    struct padata_instance *pinst;
-    pinst = kzalloc_obj(struct padata_instance);
-    if (!pinst)
-    goto err;
+#[no_mangle]
+pub unsafe extern "C" fn padata_alloc(name: *mut c_char) -> *mut c_void {
+pub static mut pinst: *mut c_void = core::ptr::null_mut();
+    pinst = kzalloc_obj(padata_instance);
+    if (!pinst) {
+// goto;
+    }
     pinst.parallel_wq = alloc_workqueue("%s_parallel", WQ_UNBOUND, 0,
     name);
-    if (!pinst.parallel_wq)
-    goto err_free_inst;
+    if (!pinst.parallel_wq) {
+// goto;
+    }
     cpus_read_lock();
     pinst.serial_wq = alloc_workqueue("%s_serial",
     WQ_MEM_RECLAIM | WQ_CPU_INTENSIVE | WQ_PERCPU,
     1, name);
-    if (!pinst.serial_wq)
-    goto err_put_cpus;
-    if (!alloc_cpumask_var(&pinst.cpumask.pcpu, GFP_KERNEL))
-    goto err_free_serial_wq;
-    if (!alloc_cpumask_var(&pinst.cpumask.cbcpu, GFP_KERNEL))
-    goto err_free_p_mask;
-    if (!alloc_cpumask_var(&pinst.validate_cpumask, GFP_KERNEL))
-    goto err_free_cb_mask;
+    if (!pinst.serial_wq) {
+// goto;
+    }
+    if (!alloc_cpumask_var(&pinst.cpumask.pcpu, GFP_KERNEL)) {
+// goto;
+    }
+    if (!alloc_cpumask_var(&pinst.cpumask.cbcpu, GFP_KERNEL)) {
+// goto;
+    }
+    if (!alloc_cpumask_var(&pinst.validate_cpumask, GFP_KERNEL)) {
+// goto;
+    }
     INIT_LIST_HEAD(&pinst.pslist);
     cpumask_copy(pinst.cpumask.pcpu, cpu_possible_mask);
     cpumask_copy(pinst.cpumask.cbcpu, cpu_possible_mask);
-    if (padata_setup_cpumasks(pinst))
-    goto err_free_v_mask;
+    if (padata_setup_cpumasks(pinst)) {
+// goto;
+    }
     __padata_start(pinst);
     kobject_init(&pinst.kobj, &padata_attr_type);
     mutex_init(&pinst.lock);
@@ -863,20 +1147,20 @@ pub struct padata_sysfs_entry {
 
     cpus_read_unlock();
     return pinst;
-    err_free_v_mask:
+// label;
     free_cpumask_var(pinst.validate_cpumask);
-    err_free_cb_mask:
+// label;
     free_cpumask_var(pinst.cpumask.cbcpu);
-    err_free_p_mask:
+// label;
     free_cpumask_var(pinst.cpumask.pcpu);
-    err_free_serial_wq:
+// label;
     destroy_workqueue(pinst.serial_wq);
-    err_put_cpus:
+// label;
     cpus_read_unlock();
     destroy_workqueue(pinst.parallel_wq);
-    err_free_inst:
+// label;
     kfree(pinst);
-    err:
+// label;
     return core::ptr::null_mut();
     }
     EXPORT_SYMBOL(padata_alloc);
@@ -897,27 +1181,29 @@ pub unsafe extern "C" fn padata_free(pinst: *mut padata_instance) {
 //
 // Return: new shell on success, NULL on error
 //
-    struct padata_shell *padata_alloc_shell(struct padata_instance *pinst)
-    {
-    struct parallel_data *pd;
-    struct padata_shell *ps;
+#[no_mangle]
+pub unsafe extern "C" fn padata_alloc_shell(pinst: *mut padata_instance) -> *mut c_void {
+pub static mut pd: *mut c_void = core::ptr::null_mut();
+pub static mut ps: *mut c_void = core::ptr::null_mut();
     ps = kzalloc_obj(*ps);
-    if (!ps)
-    goto out;
+    if (!ps) {
+// goto;
+    }
     ps.pinst = pinst;
     cpus_read_lock();
     pd = padata_alloc_pd(ps, -1);
     cpus_read_unlock();
-    if (!pd)
-    goto out_free_ps;
+    if (!pd) {
+// goto;
+    }
     mutex_lock(&pinst.lock);
     RCU_INIT_POINTER(ps.pd, pd);
     list_add(&ps.list, &pinst.pslist);
     mutex_unlock(&pinst.lock);
     return ps;
-    out_free_ps:
+// label;
     kfree(ps);
-    out:
+// label;
     return core::ptr::null_mut();
     }
     EXPORT_SYMBOL(padata_alloc_shell);
@@ -928,9 +1214,10 @@ pub unsafe extern "C" fn padata_free(pinst: *mut padata_instance) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn padata_free_shell(ps: *mut padata_shell) {
-    struct parallel_data *pd;
-    if (!ps)
+pub static mut pd: *mut c_void = core::ptr::null_mut();
+    if (!ps) {
     return;
+    }
     mutex_lock(&ps.pinst.lock);
     list_del(&ps.list);
     pd = rcu_dereference_protected(ps.pd, 1);
@@ -941,26 +1228,28 @@ pub unsafe extern "C" fn padata_free_shell(ps: *mut padata_shell) {
     EXPORT_SYMBOL(padata_free_shell);
 #[no_mangle]
 pub unsafe extern "C" fn padata_init() -> c_int {
-    unsigned int i, possible_cpus;
+    let mut i = 0;
+    let mut possible_cpus = 0;
 
-    int ret;
+    let mut ret = 0;
     ret = cpuhp_setup_state_multi(CPUHP_AP_ONLINE_DYN, "padata:online",
     padata_cpu_online, padata_cpu_offline);
-    if (ret < 0)
-    goto err;
+    if (ret < 0) {
+// goto;
+    }
     hp_online = ret;
 
     possible_cpus = num_possible_cpus();
-    padata_works = kmalloc_objs(struct padata_work, possible_cpus);
-    if (!padata_works)
-    goto remove_online_state;
-    for (i = 0; i < possible_cpus; ++i)
+    padata_works = kmalloc_objs(padata_work, possible_cpus);
+    if (!padata_works) {
+// goto;
+    }
+    for (i = 0; i < possible_cpus; ++i) {
     list_add(&padata_works[i].pw_list, &padata_free_works);
+    }
     return;
-    remove_online_state:
-
+// label;
     cpuhp_remove_multi_state(hp_online);
-    err:
-
-    pr_warn("padata: initialization failed\n");
+// label;
+    pr_warn!("padata: initialization failed\n");
     }

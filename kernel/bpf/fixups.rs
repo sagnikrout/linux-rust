@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -41,8 +291,6 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
 #[no_mangle]
 unsafe extern "C" fn is_cmpxchg_insn(insn: *const bpf_insn) -> bool {
-    static bool is_cmpxchg_insn(const struct bpf_insn *insn)
-    {
     return BPF_CLASS(insn.code) == BPF_STX &&
     BPF_MODE(insn.code) == BPF_ATOMIC &&
     insn.imm == BPF_CMPXCHG;
@@ -50,25 +298,24 @@ unsafe extern "C" fn is_cmpxchg_insn(insn: *const bpf_insn) -> bool {
 // Returns true if 'insn' is an address space cast instruction translated as BPF_ALU op
 #[no_mangle]
 unsafe extern "C" fn is_addr_space_cast32(prog: *mut bpf_prog, insn: *const bpf_insn) -> bool {
-    static bool is_addr_space_cast32(struct bpf_prog *prog, const struct bpf_insn *insn)
-    {
-    struct bpf_map *arena = (struct bpf_map *)prog.aux.arena;
-    if (insn.code != (BPF_ALU64 | BPF_MOV | BPF_X) || insn.off != BPF_ADDR_SPACE_CAST)
+    let mut arena = prog.aux.arena;
+    if (insn.code != (BPF_ALU64 | BPF_MOV | BPF_X) || insn.off != BPF_ADDR_SPACE_CAST) {
     return false;
+    }
 // cast from as(1) to as(0)
-    if (insn.imm == 1)
+    if (insn.imm == 1) {
     return true;
+    }
 // cast from as(0) to as(1)
-    if (insn.imm == 1 << 16)
+    if (insn.imm == 1 << 16) {
     return arena && arena.map_flags & BPF_F_NO_USER_CONV;
+    }
 // non-BPF_F_NO_USER_CONV cast from as(0) to as(1) should be handled by JIT
     return false;
     }
 // Return the regno defined by the insn, or -1.
 #[no_mangle]
 unsafe extern "C" fn insn_def_regno(insn: *const bpf_insn) -> c_int {
-    static int insn_def_regno(const struct bpf_insn *insn)
-    {
     switch (BPF_CLASS(insn.code)) {
     case BPF_JMP:
     case BPF_JMP32:
@@ -76,7 +323,7 @@ unsafe extern "C" fn insn_def_regno(insn: *const bpf_insn) -> c_int {
     return -1;
     case BPF_STX:
     return bpf_atomic_load_reg(insn);
-    default:
+// label;
     return insn.dst_reg;
     }
     }
@@ -87,32 +334,36 @@ unsafe extern "C" fn insn_def_regno(insn: *const bpf_insn) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn bpf_is_reg64(prog: *mut bpf_prog, insn: *mut bpf_insn) -> bool {
-    static bool bpf_is_reg64(struct bpf_prog *prog, struct bpf_insn *insn)
-    {
-    let mut class: u8 = BPF_CLASS(insn.code);
-    let mut mode: u8 = BPF_MODE(insn.code);
-    let mut size: u8 = BPF_SIZE(insn.code);
-    let mut op: u8 = BPF_OP(insn.code);
-    bool mode_mem;
+pub static mut class: u8 = 0;
+pub static mut mode: u8 = 0;
+pub static mut size: u8 = 0;
+pub static mut op: u8 = 0;
+    let mut mode_mem = 0;
 // subregister endiness swap
-    if ((class == BPF_ALU || class == BPF_ALU64) && op == BPF_END && insn.imm != 64)
+    if ((class == BPF_ALU || class == BPF_ALU64) && op == BPF_END && insn.imm != 64) {
     return false;
+    }
 // w0 += 1
-    if (class == BPF_ALU && op != BPF_END)
+    if (class == BPF_ALU && op != BPF_END) {
     return false;
+    }
 // address space casts converted to BPF_ALU, see bpf_do_misc_fixups()
-    if (is_addr_space_cast32(prog, insn))
+    if (is_addr_space_cast32(prog, insn)) {
     return false;
+    }
 // non 64-bit, non signed extended loads
     mode_mem = mode == BPF_MEM || mode == BPF_PROBE_MEM || mode == BPF_PROBE_MEM32;
-    if (class == BPF_LDX && mode_mem && size != BPF_DW)
+    if (class == BPF_LDX && mode_mem && size != BPF_DW) {
     return false;
+    }
 // atomics, see insn_def_regno()
-    if (class == BPF_STX && size != BPF_DW)
+    if (class == BPF_STX && size != BPF_DW) {
     return false;
+    }
 // both LD_IND and LD_ABS return 32-bit data.
-    if (class == BPF_LD && (mode == BPF_IND || mode == BPF_ABS))
+    if (class == BPF_LD && (mode == BPF_IND || mode == BPF_ABS)) {
     return false;
+    }
 // Conservatively return true at default.
     return true;
     }
@@ -122,45 +373,39 @@ unsafe extern "C" fn bpf_is_reg64(prog: *mut bpf_prog, insn: *mut bpf_insn) -> b
 //
 #[no_mangle]
 pub unsafe extern "C" fn bpf_insn_def32(prog: *mut bpf_prog, insn: *mut bpf_insn) -> c_int {
-    int bpf_insn_def32(struct bpf_prog *prog, struct bpf_insn *insn)
-    {
-    let mut dst_reg: c_int = insn_def_regno(insn);
-    if (dst_reg < 0 || bpf_is_reg64(prog, insn))
+pub static mut dst_reg: c_int = 0;
+    if (dst_reg < 0 || bpf_is_reg64(prog, insn)) {
     return -1;
+    }
     return dst_reg;
     }
 #[no_mangle]
 unsafe extern "C" fn kfunc_desc_cmp_by_imm_off(a: *const c_void, b: *const c_void) -> c_int {
-    static int kfunc_desc_cmp_by_imm_off(const void *a, const void *b)
-    {
-    const struct bpf_kfunc_desc *d0 = a;
-    const struct bpf_kfunc_desc *d1 = b;
-    if (d0.imm != d1.imm)
+    let mut d0 = a;
+    let mut d1 = b;
+    if (d0.imm != d1.imm) {
     return d0.imm < d1.imm ? -1 : 1;
-    if (d0.offset != d1.offset)
+    }
+    if (d0.offset != d1.offset) {
     return d0.offset < d1.offset ? -1 : 1;
+    }
     return 0;
     }
     const struct btf_func_model *
     bpf_jit_find_kfunc_model(const struct bpf_prog *prog,
     const struct bpf_insn *insn)
     {
-    const struct bpf_kfunc_desc desc = {
-    .imm = insn.imm,
-    .offset = insn.off,
-    };
-    const struct bpf_kfunc_desc *res;
-    struct bpf_kfunc_desc_tab *tab;
+pub static mut bpf_kfunc_desc: usize = 0;
+pub static mut res: *mut c_void = core::ptr::null_mut();
+pub static mut tab: *mut c_void = core::ptr::null_mut();
     tab = prog.aux.kfunc_tab;
     res = bsearch(&desc, tab.descs, tab.nr_descs,
-    sizeof(tab.descs[0]), kfunc_desc_cmp_by_imm_off);
+    sizeof!(tab.descs[0]), kfunc_desc_cmp_by_imm_off);
     return res ? &res.func_model : core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn set_kfunc_desc_imm(env: *mut bpf_verifier_env, desc: *mut bpf_kfunc_desc) -> c_int {
-    static int set_kfunc_desc_imm(struct bpf_verifier_env *env, struct bpf_kfunc_desc *desc)
-    {
-    unsigned long call_imm;
+    let mut call_imm = 0;
     if (bpf_jit_supports_far_kfunc_call()) {
     call_imm = desc.func_id;
     } else {
@@ -177,43 +422,45 @@ unsafe extern "C" fn set_kfunc_desc_imm(env: *mut bpf_verifier_env, desc: *mut b
     }
 #[no_mangle]
 unsafe extern "C" fn sort_kfunc_descs_by_imm_off(env: *mut bpf_verifier_env) -> c_int {
-    static int sort_kfunc_descs_by_imm_off(struct bpf_verifier_env *env)
-    {
-    struct bpf_kfunc_desc_tab *tab;
-    int i, err;
+pub static mut tab: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    let mut err = 0;
     tab = env.prog.aux.kfunc_tab;
-    if (!tab)
+    if (!tab) {
     return 0;
-    for (i = 0; i < tab.nr_descs; i++) {
+    }
+    while (i < tab.nr_descs) {
     err = set_kfunc_desc_imm(env, &tab.descs[i]);
-    if (err)
+    if (err) {
     return err;
     }
-    sort(tab.descs, tab.nr_descs, sizeof(tab.descs[0]),
+    }
+    sort(tab.descs, tab.nr_descs, sizeof!(tab.descs[0]),
     kfunc_desc_cmp_by_imm_off, core::ptr::null_mut());
     return 0;
     }
-    static int add_kfunc_in_insns(struct bpf_verifier_env *env,
-    struct bpf_insn *insn, int cnt)
-    {
-    int i, ret;
-    for (i = 0; i < cnt; i++, insn++) {
+#[no_mangle]
+pub unsafe extern "C" fn add_kfunc_in_insns(env: *mut bpf_verifier_env, insn: *mut bpf_insn, cnt: c_int) -> c_int {
+    let mut i = 0;
+    let mut ret = 0;
+    while (i < cnt) {
     if (bpf_pseudo_kfunc_call(insn)) {
     ret = bpf_add_kfunc_call(env, insn.imm, insn.off);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     }
     }
     return 0;
     }
 
-    static int get_callee_stack_depth(struct bpf_verifier_env *env,
-    const struct bpf_insn *insn, int idx)
-    {
-    let mut start: c_int = idx + insn.imm + 1, subprog;
+#[no_mangle]
+pub unsafe extern "C" fn get_callee_stack_depth(env: *mut bpf_verifier_env, insn: *mut bpf_insn, idx: c_int) -> c_int {
+pub static mut start: c_int = 0;
     subprog = bpf_find_subprog(env, start);
-    if (verifier_bug_if(subprog < 0, env, "get stack depth: no program at insn %d", start))
+    if (verifier_bug_if(subprog < 0, env, "get stack depth: no program at insn %d", start)) {
     return -EFAULT;
+    }
     return env.subprog_info[subprog].stack_depth;
     }
 
@@ -221,27 +468,27 @@ unsafe extern "C" fn sort_kfunc_descs_by_imm_off(env: *mut bpf_verifier_env) -> 
 // insni[off, off + cnt).  Adjust corresponding insn_aux_data by copying
 // [0, off) and [off, end) to new locations, so the patched range stays zero
 //
-    static void adjust_insn_aux_data(struct bpf_verifier_env *env,
-    struct bpf_prog *new_prog, u32 off, u32 cnt)
-    {
-    struct bpf_insn_aux_data *data = env.insn_aux_data;
-    struct bpf_insn *insn = new_prog.insnsi;
-    let mut old_seen: u32 = data[off].seen;
-    u32 prog_len;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn adjust_insn_aux_data(env: *mut bpf_verifier_env, new_prog: *mut bpf_prog, off: u32, cnt: u32) {
+    let mut data = env.insn_aux_data;
+    let mut insn = new_prog.insnsi;
+pub static mut old_seen: u32 = 0;
+    let mut prog_len = 0;
+    let mut i = 0;
 // aux info at OFF always needs adjustment, no matter fast path
 // (cnt == 1) is taken or not. There is no guarantee INSN at OFF is the
 // original insn at old prog.
 //
     data[off].zext_dst = bpf_insn_def32(new_prog, insn + off + cnt - 1) >= 0;
-    if (cnt == 1)
+    if (cnt == 1) {
     return;
+    }
     prog_len = new_prog.len;
     env.insn_aux_data_len = prog_len;
     memmove(data + off + cnt - 1, data + off,
-    sizeof(struct bpf_insn_aux_data) * (prog_len - off - cnt + 1));
-    memset(data + off, 0, sizeof(struct bpf_insn_aux_data) * (cnt - 1));
-    for (i = off; i < off + cnt - 1; i++) {
+    sizeof!(bpf_insn_aux_data) * (prog_len - off - cnt + 1));
+    memset(data + off, 0, sizeof!(bpf_insn_aux_data) * (cnt - 1));
+    while (i < off + cnt - 1) {
 // Expand insni[off]'s seen count to the patched range.
     data[i].seen = old_seen;
     data[i].zext_dst = bpf_insn_def32(new_prog, insn + i) >= 0;
@@ -260,70 +507,69 @@ unsafe extern "C" fn sort_kfunc_descs_by_imm_off(env: *mut bpf_verifier_env) -> 
     }
 #[no_mangle]
 unsafe extern "C" fn adjust_subprog_starts(env: *mut bpf_verifier_env, off: u32, len: u32) {
-    static void adjust_subprog_starts(struct bpf_verifier_env *env, u32 off, u32 len)
-    {
-    int i;
-    if (len == 1)
+    let mut i = 0;
+    if (len == 1) {
     return;
+    }
 // NOTE: fake 'exit' subprog should be updated as well.
-    for (i = 0; i <= env.subprog_cnt; i++) {
-    if (env.subprog_info[i].start <= off)
+    while (i <= env.subprog_cnt) {
+    if (env.subprog_info[i].start <= off) {
     continue;
+    }
     env.subprog_info[i].start += len - 1;
     }
     }
 #[no_mangle]
 unsafe extern "C" fn adjust_insn_arrays(env: *mut bpf_verifier_env, off: u32, len: u32) {
-    static void adjust_insn_arrays(struct bpf_verifier_env *env, u32 off, u32 len)
-    {
-    int i;
-    if (len == 1)
+    let mut i = 0;
+    if (len == 1) {
     return;
-    for (i = 0; i < env.insn_array_map_cnt; i++)
+    }
+    for (i = 0; i < env.insn_array_map_cnt; i++) {
     bpf_insn_array_adjust(env.insn_array_maps[i], off, len);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn adjust_insn_arrays_after_remove(env: *mut bpf_verifier_env, off: u32, len: u32) {
-    static void adjust_insn_arrays_after_remove(struct bpf_verifier_env *env, u32 off, u32 len)
-    {
-    int i;
-    for (i = 0; i < env.insn_array_map_cnt; i++)
+    let mut i = 0;
+    for (i = 0; i < env.insn_array_map_cnt; i++) {
     bpf_insn_array_adjust_after_remove(env.insn_array_maps[i], off, len);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn adjust_poke_descs(prog: *mut bpf_prog, off: u32, len: u32) {
-    static void adjust_poke_descs(struct bpf_prog *prog, u32 off, u32 len)
-    {
-    struct bpf_jit_poke_descriptor *tab = prog.aux.poke_tab;
+    let mut tab = prog.aux.poke_tab;
     int i, sz = prog.aux.size_poke_tab;
-    struct bpf_jit_poke_descriptor *desc;
-    for (i = 0; i < sz; i++) {
+pub static mut desc: *mut c_void = core::ptr::null_mut();
+    while (i < sz) {
     desc = &tab[i];
-    if (desc.insn_idx <= off)
+    if (desc.insn_idx <= off) {
     continue;
+    }
     desc.insn_idx += len - 1;
     }
     }
-    struct bpf_prog *bpf_patch_insn_data(struct bpf_verifier_env *env, u32 off,
-    const struct bpf_insn *patch, u32 len)
-    {
-    struct bpf_prog *new_prog;
-    struct bpf_insn_aux_data *new_data = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn bpf_patch_insn_data(env: *mut bpf_verifier_env, off: u32, patch: *mut bpf_insn, len: u32) -> *mut c_void {
+pub static mut new_prog: *mut c_void = core::ptr::null_mut();
+    let mut new_data = core::ptr::null_mut();
     if (len > 1) {
     new_data = vrealloc(env.insn_aux_data,
     array_size(env.prog.len + len - 1,
-    sizeof(struct bpf_insn_aux_data)),
+    sizeof!(bpf_insn_aux_data)),
     GFP_KERNEL_ACCOUNT | __GFP_ZERO);
-    if (!new_data)
+    if (!new_data) {
     return core::ptr::null_mut();
+    }
     env.insn_aux_data = new_data;
     }
     new_prog = bpf_patch_insn_single(env.prog, off, patch, len);
     if (IS_ERR(new_prog)) {
-    if (PTR_ERR(new_prog) == -ERANGE)
+    if (PTR_ERR(new_prog) == -ERANGE) {
     verbose(env,
     "insn %d cannot be patched due to 16-bit range\n",
     env.insn_aux_data[off].orig_idx);
+    }
     return core::ptr::null_mut();
     }
     adjust_insn_aux_data(env, new_prog, off, len);
@@ -338,71 +584,79 @@ unsafe extern "C" fn adjust_poke_descs(prog: *mut bpf_prog, off: u32, len: u32) 
 //
 #[no_mangle]
 unsafe extern "C" fn adjust_jmp_off(prog: *mut bpf_prog, tgt_idx: u32, delta: u32) -> c_int {
-    static int adjust_jmp_off(struct bpf_prog *prog, u32 tgt_idx, u32 delta)
-    {
-    struct bpf_insn *insn = prog.insnsi;
-    let mut insn_cnt: u32 = prog.len, i;
-    s32 imm;
-    s16 off;
-    for (i = 0; i < insn_cnt; i++, insn++) {
-    let mut code: u8 = insn.code;
-    if (tgt_idx <= i && i < tgt_idx + delta)
+    let mut insn = prog.insnsi;
+pub static mut insn_cnt: u32 = 0;
+    let mut imm = 0;
+    let mut off = 0;
+    while (i < insn_cnt) {
+pub static mut code: u8 = 0;
+    if (tgt_idx <= i && i < tgt_idx + delta) {
     continue;
+    }
     if ((BPF_CLASS(code) != BPF_JMP && BPF_CLASS(code) != BPF_JMP32) ||
-    BPF_OP(code) == BPF_CALL || BPF_OP(code) == BPF_EXIT)
+    BPF_OP(code) == BPF_CALL || BPF_OP(code) == BPF_EXIT) {
     continue;
+    }
     if (insn.code == (BPF_JMP32 | BPF_JA)) {
-    if (i + 1 + insn.imm != tgt_idx)
+    if (i + 1 + insn.imm != tgt_idx) {
     continue;
-    if (check_add_overflow(insn.imm, delta, &imm))
+    }
+    if (check_add_overflow(insn.imm, delta, &imm)) {
     return -ERANGE;
+    }
     insn.imm = imm;
     } else {
-    if (i + 1 + insn.off != tgt_idx)
+    if (i + 1 + insn.off != tgt_idx) {
     continue;
-    if (check_add_overflow(insn.off, delta, &off))
+    }
+    if (check_add_overflow(insn.off, delta, &off)) {
     return -ERANGE;
+    }
     insn.off = off;
     }
     }
     return 0;
     }
-    static int adjust_subprog_starts_after_remove(struct bpf_verifier_env *env,
-    u32 off, u32 cnt)
-    {
-    int i, j;
+#[no_mangle]
+pub unsafe extern "C" fn adjust_subprog_starts_after_remove(env: *mut bpf_verifier_env, off: u32, cnt: u32) -> c_int {
+    let mut i = 0;
+    let mut j = 0;
 // find first prog starting at or after off (first to remove)
-    for (i = 0; i < env.subprog_cnt; i++)
+    for (i = 0; i < env.subprog_cnt; i++) {
     if (env.subprog_info[i].start >= off)
     break;
+    }
 // find first prog starting at or after off + cnt (first to stay)
-    for (j = i; j < env.subprog_cnt; j++)
+    for (j = i; j < env.subprog_cnt; j++) {
     if (env.subprog_info[j].start >= off + cnt)
     break;
+    }
 // if j doesn't start exactly at off + cnt, we are just removing
 // the front of previous prog
 //
-    if (env.subprog_info[j].start != off + cnt)
-    j--;
+    if (env.subprog_info[j].start != off + cnt) {
+    j -= 1;
+    }
     if (j > i) {
-    struct bpf_prog_aux *aux = env.prog.aux;
-    int move;
+    let mut aux = env.prog.aux;
+    let mut move = 0;
 // move fake 'exit' subprog as well
     move = env.subprog_cnt + 1 - j;
     memmove(env.subprog_info + i,
     env.subprog_info + j,
-    sizeof(*env.subprog_info) * move);
+    sizeof!(*env.subprog_info) * move);
     env.subprog_cnt -= j - i;
 // remove func_info and its aux
     if (aux.func_info) {
     move = aux.func_info_cnt - j;
     memmove(aux.func_info + i,
     aux.func_info + j,
-    sizeof(*aux.func_info) * move);
-    if (aux.func_info_aux)
+    sizeof!(*aux.func_info) * move);
+    if (aux.func_info_aux) {
     memmove(aux.func_info_aux + i,
     aux.func_info_aux + j,
-    sizeof(*aux.func_info_aux) * move);
+    sizeof!(*aux.func_info_aux) * move);
+    }
     aux.func_info_cnt -= j - i;
 // func_info->insn_off is set after all code rewrites,
 // in adjust_btf_func() - no need to adjust
@@ -410,64 +664,73 @@ unsafe extern "C" fn adjust_jmp_off(prog: *mut bpf_prog, tgt_idx: u32, delta: u3
     }
     } else {
 // convert i from "first prog to remove" to "first to adjust"
-    if (env.subprog_info[i].start == off)
-    i++;
+    if (env.subprog_info[i].start == off) {
+    i += 1;
+    }
     }
 // update fake 'exit' subprog as well
-    for (; i <= env.subprog_cnt; i++)
+    for (; i <= env.subprog_cnt; i++) {
     env.subprog_info[i].start -= cnt;
+    }
     return 0;
     }
-    static int bpf_adj_linfo_after_remove(struct bpf_verifier_env *env, u32 off,
-    u32 cnt)
-    {
-    struct bpf_prog *prog = env.prog;
+#[no_mangle]
+pub unsafe extern "C" fn bpf_adj_linfo_after_remove(env: *mut bpf_verifier_env, off: u32, cnt: u32) -> c_int {
+    let mut prog = env.prog;
     u32 i, l_off, l_cnt, nr_linfo;
-    struct bpf_line_info *linfo;
+pub static mut linfo: *mut c_void = core::ptr::null_mut();
     nr_linfo = prog.aux.nr_linfo;
-    if (!nr_linfo)
+    if (!nr_linfo) {
     return 0;
+    }
     linfo = prog.aux.linfo;
 // find first line info to remove, count lines to be removed
-    for (i = 0; i < nr_linfo; i++)
+    for (i = 0; i < nr_linfo; i++) {
     if (linfo[i].insn_off >= off)
     break;
+    }
     l_off = i;
     l_cnt = 0;
-    for (; i < nr_linfo; i++)
+    for (; i < nr_linfo; i++) {
     if (linfo[i].insn_off < off + cnt)
-    l_cnt++;
-    else
+    l_cnt += 1;
+    }
+    else {
     break;
+    }
 // First live insn doesn't match first live linfo, it needs to "inherit"
 // last removed linfo.  prog is already modified, so prog->len == off
 // means no live instructions after (tail of the program was removed).
 //
     if (prog.len != off && l_cnt &&
     (i == nr_linfo || linfo[i].insn_off != off + cnt)) {
-    l_cnt--;
+    l_cnt -= 1;
     linfo[--i].insn_off = off + cnt;
     }
 // remove the line info which refer to the removed instructions
     if (l_cnt) {
     memmove(linfo + l_off, linfo + i,
-    sizeof(*linfo) * (nr_linfo - i));
+    sizeof!(*linfo) * (nr_linfo - i));
     prog.aux.nr_linfo -= l_cnt;
     nr_linfo = prog.aux.nr_linfo;
     }
 // pull all linfo[i].insn_off >= off + cnt in by cnt
-    for (i = l_off; i < nr_linfo; i++)
+    for (i = l_off; i < nr_linfo; i++) {
     linfo[i].insn_off -= cnt;
+    }
 // fix up all subprogs (incl. 'exit') which start >= off
-    for (i = 0; i <= env.subprog_cnt; i++)
+    for (i = 0; i <= env.subprog_cnt; i++) {
     if (env.subprog_info[i].linfo_idx > l_off) {
+    }
 // program may have started in the removed region but
 // may not be fully removed
 //
-    if (env.subprog_info[i].linfo_idx >= l_off + l_cnt)
+    if (env.subprog_info[i].linfo_idx >= l_off + l_cnt) {
     env.subprog_info[i].linfo_idx -= l_cnt;
-    else
+    }
+    else {
     env.subprog_info[i].linfo_idx = l_off;
+    }
     }
     return 0;
     }
@@ -476,12 +739,10 @@ unsafe extern "C" fn adjust_jmp_off(prog: *mut bpf_prog, tgt_idx: u32, delta: u3
 //
 #[no_mangle]
 pub unsafe extern "C" fn bpf_clear_insn_aux_data(env: *mut bpf_verifier_env, start: c_int, len: c_int) {
-    void bpf_clear_insn_aux_data(struct bpf_verifier_env *env, int start, int len)
-    {
-    struct bpf_insn_aux_data *aux_data = env.insn_aux_data;
-    let mut end: c_int = start + len;
-    int i;
-    for (i = start; i < end; i++) {
+    let mut aux_data = env.insn_aux_data;
+pub static mut end: c_int = 0;
+    let mut i = 0;
+    while (i < end) {
     if (aux_data[i].jt) {
     kvfree(aux_data[i].jt);
     aux_data[i].jt = core::ptr::null_mut();
@@ -490,160 +751,171 @@ pub unsafe extern "C" fn bpf_clear_insn_aux_data(env: *mut bpf_verifier_env, sta
     }
 #[no_mangle]
 unsafe extern "C" fn verifier_remove_insns(env: *mut bpf_verifier_env, off: u32, cnt: u32) -> c_int {
-    static int verifier_remove_insns(struct bpf_verifier_env *env, u32 off, u32 cnt)
-    {
-    struct bpf_insn_aux_data *aux_data = env.insn_aux_data;
-    let mut orig_prog_len: c_uint = env.prog.len;
-    int err;
-    if (bpf_prog_is_offloaded(env.prog.aux))
+    let mut aux_data = env.insn_aux_data;
+pub static mut orig_prog_len: c_uint = 0;
+    let mut err = 0;
+    if (bpf_prog_is_offloaded(env.prog.aux)) {
     bpf_prog_offload_remove_insns(env, off, cnt);
+    }
     bpf_clear_insn_aux_data(env, off, cnt);
     err = bpf_remove_insns(env.prog, off, cnt);
-    if (err)
+    if (err) {
     return err;
+    }
     err = adjust_subprog_starts_after_remove(env, off, cnt);
-    if (err)
+    if (err) {
     return err;
+    }
     err = bpf_adj_linfo_after_remove(env, off, cnt);
-    if (err)
+    if (err) {
     return err;
+    }
     adjust_insn_arrays_after_remove(env, off, cnt);
     memmove(aux_data + off,	aux_data + off + cnt,
-    sizeof(*aux_data) * (orig_prog_len - off - cnt));
+    sizeof!(*aux_data) * (orig_prog_len - off - cnt));
     env.insn_aux_data_len -= cnt;
     return 0;
     }
-    let mut NOP: static struct bpf_insn = BPF_JMP_IMM(BPF_JA, 0, 0, 0);
-    let mut MAY_GOTO_0: static struct bpf_insn = BPF_RAW_INSN(BPF_JMP | BPF_JCOND, 0, 0, 0, 0);
+pub static mut NOP: bpf_insn = 0;
+pub static mut MAY_GOTO_0: bpf_insn = 0;
 #[no_mangle]
 pub unsafe extern "C" fn bpf_insn_is_cond_jump(code: u8) -> bool {
-    bool bpf_insn_is_cond_jump(u8 code)
-    {
-    u8 op;
+    let mut op = 0;
     op = BPF_OP(code);
-    if (BPF_CLASS(code) == BPF_JMP32)
+    if (BPF_CLASS(code) == BPF_JMP32) {
     return op != BPF_JA;
-    if (BPF_CLASS(code) != BPF_JMP)
+    }
+    if (BPF_CLASS(code) != BPF_JMP) {
     return false;
+    }
     return op != BPF_JA && op != BPF_EXIT && op != BPF_CALL;
     }
 #[no_mangle]
 pub unsafe extern "C" fn bpf_opt_hard_wire_dead_code_branches(env: *mut bpf_verifier_env) {
-    void bpf_opt_hard_wire_dead_code_branches(struct bpf_verifier_env *env)
-    {
-    struct bpf_insn_aux_data *aux_data = env.insn_aux_data;
-    let mut ja: bpf_insn = BPF_JMP_IMM(BPF_JA, 0, 0, 0);
-    struct bpf_insn *insn = env.prog.insnsi;
-    let mut insn_cnt: c_int = env.prog.len;
-    int i;
-    for (i = 0; i < insn_cnt; i++, insn++) {
-    if (!bpf_insn_is_cond_jump(insn.code))
+    let mut aux_data = env.insn_aux_data;
+pub static mut ja: bpf_insn = 0;
+    let mut insn = env.prog.insnsi;
+pub static mut insn_cnt: c_int = 0;
+    let mut i = 0;
+    while (i < insn_cnt) {
+    if (!bpf_insn_is_cond_jump(insn.code)) {
     continue;
-    if (!aux_data[i + 1].seen)
+    }
+    if (!aux_data[i + 1].seen) {
     ja.off = insn.off;
-#[no_mangle]
-pub unsafe extern "C" fn if(insn->off].seen: !aux_data[i + 1 +) -> else {
-    else if (!aux_data[i + 1 + insn.off].seen)
+    }
+
+    else if (!aux_data[i + 1 + insn.off].seen) {
     ja.off = 0;
-    else
+    }
+    else {
     continue;
-    if (bpf_prog_is_offloaded(env.prog.aux))
+    }
+    if (bpf_prog_is_offloaded(env.prog.aux)) {
     bpf_prog_offload_replace_insn(env, i, &ja);
-    memcpy(insn, &ja, sizeof(ja));
+    }
+    memcpy(insn, &ja, sizeof!(ja));
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn bpf_opt_remove_dead_code(env: *mut bpf_verifier_env) -> c_int {
-    int bpf_opt_remove_dead_code(struct bpf_verifier_env *env)
-    {
-    struct bpf_insn_aux_data *aux_data = env.insn_aux_data;
-    let mut insn_cnt: c_int = env.prog.len;
-    int i, err;
-    for (i = 0; i < insn_cnt; i++) {
-    int j;
+    let mut aux_data = env.insn_aux_data;
+pub static mut insn_cnt: c_int = 0;
+    let mut i = 0;
+    let mut err = 0;
+    while (i < insn_cnt) {
+    let mut j = 0;
     j = 0;
-    while (i + j < insn_cnt && !aux_data[i + j].seen)
-    j++;
-    if (!j)
+    while (i + j < insn_cnt && !aux_data[i + j].seen) {
+    j += 1;
+    }
+    if (!j) {
     continue;
+    }
     err = verifier_remove_insns(env, i, j);
-    if (err)
+    if (err) {
     return err;
+    }
     insn_cnt = env.prog.len;
     }
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn bpf_opt_remove_nops(env: *mut bpf_verifier_env) -> c_int {
-    int bpf_opt_remove_nops(struct bpf_verifier_env *env)
-    {
-    struct bpf_insn *insn = env.prog.insnsi;
-    let mut insn_cnt: c_int = env.prog.len;
-    bool is_may_goto_0, is_ja;
-    int i, err;
-    for (i = 0; i < insn_cnt; i++) {
-    is_may_goto_0 = !memcmp(&insn[i], &MAY_GOTO_0, sizeof(MAY_GOTO_0));
-    is_ja = !memcmp(&insn[i], &NOP, sizeof(NOP));
-    if (!is_may_goto_0 && !is_ja)
+    let mut insn = env.prog.insnsi;
+pub static mut insn_cnt: c_int = 0;
+    let mut is_may_goto_0 = 0;
+    let mut is_ja = 0;
+    let mut i = 0;
+    let mut err = 0;
+    while (i < insn_cnt) {
+    is_may_goto_0 = !memcmp(&insn[i], &MAY_GOTO_0, sizeof!(MAY_GOTO_0));
+    is_ja = !memcmp(&insn[i], &NOP, sizeof!(NOP));
+    if (!is_may_goto_0 && !is_ja) {
     continue;
+    }
     err = verifier_remove_insns(env, i, 1);
-    if (err)
+    if (err) {
     return err;
-    insn_cnt--;
+    }
+    insn_cnt -= 1;
 // Go back one insn to catch may_goto +1; may_goto +0 sequence
     i -= (is_may_goto_0 && i > 0) ? 2 : 1;
     }
     return 0;
     }
-    int bpf_opt_subreg_zext_lo32_rnd_hi32(struct bpf_verifier_env *env,
-    const union bpf_attr *attr)
-    {
-    struct bpf_insn *patch;
+#[no_mangle]
+pub unsafe extern "C" fn bpf_opt_subreg_zext_lo32_rnd_hi32(env: *mut bpf_verifier_env, attr: *mut union bpf_attr) -> c_int {
+pub static mut patch: *mut c_void = core::ptr::null_mut();
 // use env->insn_buf as two independent buffers
-    struct bpf_insn *zext_patch = env.insn_buf;
-    struct bpf_insn *rnd_hi32_patch = &env.insn_buf[2];
-    struct bpf_insn_aux_data *aux = env.insn_aux_data;
+    let mut zext_patch = env.insn_buf;
+    let mut rnd_hi32_patch = &env.insn_buf[2];
+    let mut aux = env.insn_aux_data;
     int i, patch_len, delta = 0, len = env.prog.len;
-    struct bpf_insn *insns = env.prog.insnsi;
-    struct bpf_prog *new_prog;
-    bool rnd_hi32;
+    let mut insns = env.prog.insnsi;
+pub static mut new_prog: *mut c_void = core::ptr::null_mut();
+    let mut rnd_hi32 = 0;
     rnd_hi32 = attr.prog_flags & BPF_F_TEST_RND_HI32;
     zext_patch[1] = BPF_ZEXT_REG(0);
     rnd_hi32_patch[1] = BPF_ALU64_IMM(BPF_MOV, BPF_REG_AX, 0);
     rnd_hi32_patch[2] = BPF_ALU64_IMM(BPF_LSH, BPF_REG_AX, 32);
     rnd_hi32_patch[3] = BPF_ALU64_REG(BPF_OR, 0, BPF_REG_AX);
-    for (i = 0; i < len; i++) {
-    let mut adj_idx: c_int = i + delta;
-    struct bpf_insn insn;
-    int load_reg;
+    while (i < len) {
+pub static mut adj_idx: c_int = 0;
+pub static mut insn: usize = 0;
+    let mut load_reg = 0;
     insn = insns[adj_idx];
     load_reg = insn_def_regno(&insn);
     if (!aux[adj_idx].zext_dst) {
     u8 code, class;
-    u32 imm_rnd;
-    if (!rnd_hi32)
+    let mut imm_rnd = 0;
+    if (!rnd_hi32) {
     continue;
+    }
     code = insn.code;
     class = BPF_CLASS(code);
-    if (load_reg == -1)
+    if (load_reg == -1) {
     continue;
+    }
     if (bpf_is_reg64(env.prog, &insn)) {
     if (class == BPF_LD &&
-    BPF_MODE(code) == BPF_IMM)
-    i++;
+    BPF_MODE(code) == BPF_IMM) {
+    i += 1;
+    }
     continue;
     }
 // ctx load could be transformed into wider load.
     if (class == BPF_LDX &&
-    aux[adj_idx].ptr_type == PTR_TO_CTX)
+    aux[adj_idx].ptr_type == PTR_TO_CTX) {
     continue;
+    }
     imm_rnd = get_random_u32();
     rnd_hi32_patch[0] = insn;
     rnd_hi32_patch[1].imm = imm_rnd;
     rnd_hi32_patch[3].dst_reg = load_reg;
     patch = rnd_hi32_patch;
     patch_len = 4;
-    goto apply_patch_buffer;
+// goto;
     }
 // Add in an zero-extend instruction if a) the JIT has requested
 // it or b) it's a CMPXCHG.
@@ -655,23 +927,27 @@ pub unsafe extern "C" fn bpf_opt_remove_nops(env: *mut bpf_verifier_env) -> c_in
 // orthogonal to the general zero-extension behaviour of the
 // CPU, so it's treated independently of bpf_jit_needs_zext.
 //
-    if (!bpf_jit_needs_zext() && !is_cmpxchg_insn(&insn))
+    if (!bpf_jit_needs_zext() && !is_cmpxchg_insn(&insn)) {
     continue;
+    }
 // Zero-extension is done by the caller.
-    if (bpf_pseudo_kfunc_call(&insn))
+    if (bpf_pseudo_kfunc_call(&insn)) {
     continue;
+    }
     if (verifier_bug_if(load_reg == -1, env,
-    "zext_dst is set, but no reg is defined"))
+    "zext_dst is set, but no reg is defined")) {
     return -EFAULT;
+    }
     zext_patch[0] = insn;
     zext_patch[1].dst_reg = load_reg;
     zext_patch[1].src_reg = load_reg;
     patch = zext_patch;
     patch_len = 2;
-    apply_patch_buffer:
+// label;
     new_prog = bpf_patch_insn_data(env, adj_idx, patch, patch_len);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     env.prog = new_prog;
     insns = new_prog.insnsi;
     aux = env.insn_aux_data;
@@ -686,20 +962,18 @@ pub unsafe extern "C" fn bpf_opt_remove_nops(env: *mut bpf_verifier_env) -> c_in
 //
 #[no_mangle]
 pub unsafe extern "C" fn bpf_convert_ctx_accesses(env: *mut bpf_verifier_env) -> c_int {
-    int bpf_convert_ctx_accesses(struct bpf_verifier_env *env)
-    {
-    struct bpf_subprog_info *subprogs = env.subprog_info;
-    const struct bpf_verifier_ops *ops = env.ops;
+    let mut subprogs = env.subprog_info;
+    let mut ops = env.ops;
     int i, cnt, size, ctx_field_size, ret, delta = 0, epilogue_cnt = 0;
-    let mut insn_cnt: c_int = env.prog.len;
-    struct bpf_insn *epilogue_buf = env.epilogue_buf;
-    struct bpf_insn *insn_buf = env.insn_buf;
-    struct bpf_insn *insn;
+pub static mut insn_cnt: c_int = 0;
+    let mut epilogue_buf = env.epilogue_buf;
+    let mut insn_buf = env.insn_buf;
+pub static mut insn: *mut c_void = core::ptr::null_mut();
     u32 target_size, size_default, off;
-    struct bpf_prog *new_prog;
+pub static mut new_prog: *mut c_void = core::ptr::null_mut();
     enum bpf_access_type type;
-    bool is_narrower_load;
-    let mut epilogue_idx: c_int = 0;
+    let mut is_narrower_load = 0;
+pub static mut epilogue_idx: c_int = 0;
     if (ops.gen_epilogue) {
     epilogue_cnt = ops.gen_epilogue(epilogue_buf, env.prog,
     -(subprogs[0].stack_depth + 8));
@@ -714,13 +988,15 @@ pub unsafe extern "C" fn bpf_convert_ctx_accesses(env: *mut bpf_verifier_env) ->
     -subprogs[0].stack_depth);
     insn_buf[cnt++] = env.prog.insnsi[0];
     new_prog = bpf_patch_insn_data(env, 0, insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     env.prog = new_prog;
     delta += cnt - 1;
     ret = add_kfunc_in_insns(env, epilogue_buf, epilogue_cnt - 1);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     }
     }
     if (ops.gen_prologue || env.seen_direct_write) {
@@ -735,33 +1011,38 @@ pub unsafe extern "C" fn bpf_convert_ctx_accesses(env: *mut bpf_verifier_env) ->
     return -EFAULT;
     } else if (cnt) {
     new_prog = bpf_patch_insn_data(env, 0, insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     env.prog = new_prog;
     delta += cnt - 1;
     ret = add_kfunc_in_insns(env, insn_buf, cnt - 1);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
     }
     }
-    if (delta)
-    WARN_ON(adjust_jmp_off(env.prog, 0, delta));
-    if (bpf_prog_is_offloaded(env.prog.aux))
+    }
+    if (delta) {
+    WARN_ON!(adjust_jmp_off(env.prog, 0, delta));
+    }
+    if (bpf_prog_is_offloaded(env.prog.aux)) {
     return 0;
+    }
     insn = env.prog.insnsi + delta;
-    for (i = 0; i < insn_cnt; i++, insn++) {
-    bpf_convert_ctx_access_t convert_ctx_access;
+    while (i < insn_cnt) {
+    let mut convert_ctx_access;
     enum bpf_reg_type ptr_type;
-    u8 mode;
+    let mut mode = 0;
     if (env.insn_aux_data[i + delta].nospec) {
-    WARN_ON_ONCE(env.insn_aux_data[i + delta].alu_state);
-    struct bpf_insn *patch = insn_buf;
+    WARN_ON_ONCE!(env.insn_aux_data[i + delta].alu_state);
+    let mut patch = insn_buf;
 // patch++ = BPF_ST_NOSPEC();
 // patch++ = *insn;
     cnt = patch - insn_buf;
     new_prog = bpf_patch_insn_data(env, i + delta, insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     delta    += cnt - 1;
     env.prog = new_prog;
     insn      = new_prog.insnsi + i + delta;
@@ -795,7 +1076,7 @@ pub unsafe extern "C" fn bpf_convert_ctx_accesses(env: *mut bpf_verifier_env) ->
     insn.code == (BPF_STX | BPF_ATOMIC | BPF_DW)) &&
     env.insn_aux_data[i + delta].ptr_type == PTR_TO_ARENA) {
     insn.code = BPF_STX | BPF_PROBE_ATOMIC | BPF_SIZE(insn.code);
-    env.prog.aux.num_exentries++;
+    env.prog.aux.num_exentries += 1;
     continue;
     } else if (insn.code == (BPF_JMP | BPF_EXIT) &&
     epilogue_cnt &&
@@ -807,7 +1088,7 @@ pub unsafe extern "C" fn bpf_convert_ctx_accesses(env: *mut bpf_verifier_env) ->
     cnt = 1;
     } else {
     memcpy(insn_buf, epilogue_buf,
-    epilogue_cnt * sizeof(*epilogue_buf));
+    epilogue_cnt * sizeof!(*epilogue_buf));
     cnt = epilogue_cnt;
 // epilogue_idx cannot be 0. It must have at
 // least one ctx ptr saving insn before the
@@ -815,7 +1096,7 @@ pub unsafe extern "C" fn bpf_convert_ctx_accesses(env: *mut bpf_verifier_env) ->
 //
     epilogue_idx = i + delta;
     }
-    goto patch_insn_buf;
+// goto;
     } else {
     continue;
     }
@@ -824,13 +1105,14 @@ pub unsafe extern "C" fn bpf_convert_ctx_accesses(env: *mut bpf_verifier_env) ->
 // nospec_result is only used to mitigate Spectre v4 and
 // to limit verification-time for Spectre v1.
 //
-    struct bpf_insn *patch = insn_buf;
+    let mut patch = insn_buf;
 // patch++ = *insn;
 // patch++ = BPF_ST_NOSPEC();
     cnt = patch - insn_buf;
     new_prog = bpf_patch_insn_data(env, i + delta, insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     delta    += cnt - 1;
     env.prog = new_prog;
     insn      = new_prog.insnsi + i + delta;
@@ -839,8 +1121,9 @@ pub unsafe extern "C" fn bpf_convert_ctx_accesses(env: *mut bpf_verifier_env) ->
     ptr_type = env.insn_aux_data[i + delta].ptr_type;
     switch ((int)ptr_type) {
     case PTR_TO_CTX:
-    if (!ops.convert_ctx_access)
+    if (!ops.convert_ctx_access) {
     continue;
+    }
     convert_ctx_access = ops.convert_ctx_access;
     break;
     case PTR_TO_SOCKET:
@@ -863,9 +1146,9 @@ pub unsafe extern "C" fn bpf_convert_ctx_accesses(env: *mut bpf_verifier_env) ->
     } else {
     insn.code = BPF_CLASS(insn.code) | BPF_PROBE_MEM32 | BPF_SIZE(insn.code);
     }
-    env.prog.aux.num_exentries++;
+    env.prog.aux.num_exentries += 1;
     continue;
-    default:
+// label;
 //
 // A pointer which may fault on a dereference must not
 // be loaded from without fault protection, hence turn
@@ -877,18 +1160,21 @@ pub unsafe extern "C" fn bpf_convert_ctx_accesses(env: *mut bpf_verifier_env) ->
     if (bpf_is_ptr_to_mem_or_btf_id(ptr_type) &&
     bpf_may_fault_on_deref(ptr_type) &&
     type == BPF_READ) {
-    if (BPF_MODE(insn.code) == BPF_MEM)
+    if (BPF_MODE(insn.code) == BPF_MEM) {
     insn.code = BPF_LDX | BPF_PROBE_MEM |
     BPF_SIZE(insn.code);
-    else
+    }
+    else {
     insn.code = BPF_LDX | BPF_PROBE_MEMSX |
     BPF_SIZE(insn.code);
-    env.prog.aux.num_exentries++;
+    }
+    env.prog.aux.num_exentries += 1;
     continue;
     }
     if (verifier_bug_if(bpf_may_fault_on_deref(ptr_type), env,
-    "access to a fault prone pointer is not rewritten as a probed one"))
+    "access to a fault prone pointer is not rewritten as a probed one")) {
     return -EFAULT;
+    }
     continue;
     }
     ctx_field_size = env.insn_aux_data[i + delta].ctx_field_size;
@@ -903,18 +1189,19 @@ pub unsafe extern "C" fn bpf_convert_ctx_accesses(env: *mut bpf_verifier_env) ->
     size_default = bpf_ctx_off_adjust_machine(ctx_field_size);
     off = insn.off;
     if (is_narrower_load) {
-    u8 size_code;
+    let mut size_code = 0;
     if (type == BPF_WRITE) {
     verifier_bug(env, "narrow ctx access misconfigured");
     return -EFAULT;
     }
     size_code = BPF_H;
-    if (ctx_field_size == 4)
+    if (ctx_field_size == 4) {
     size_code = BPF_W;
-#[no_mangle]
-pub unsafe extern "C" fn if(8: ctx_field_size ==) -> else {
-    else if (ctx_field_size == 8)
+    }
+
+    else if (ctx_field_size == 8) {
     size_code = BPF_DW;
+    }
     insn.off = off & ~(size_default - 1);
     insn.code = BPF_LDX | BPF_MEM | size_code;
     }
@@ -934,29 +1221,33 @@ pub unsafe extern "C" fn if(8: ctx_field_size ==) -> else {
     return -EFAULT;
     }
     if (ctx_field_size <= 4) {
-    if (shift)
+    if (shift) {
     insn_buf[cnt++] = BPF_ALU32_IMM(BPF_RSH,
     insn.dst_reg,
     shift);
+    }
     insn_buf[cnt++] = BPF_ALU32_IMM(BPF_AND, insn.dst_reg,
     (1 << size * 8) - 1);
     } else {
-    if (shift)
+    if (shift) {
     insn_buf[cnt++] = BPF_ALU64_IMM(BPF_RSH,
     insn.dst_reg,
     shift);
+    }
     insn_buf[cnt++] = BPF_ALU32_IMM(BPF_AND, insn.dst_reg,
     (1ULL << size * 8) - 1);
     }
     }
-    if (mode == BPF_MEMSX)
+    if (mode == BPF_MEMSX) {
     insn_buf[cnt++] = BPF_RAW_INSN(BPF_ALU64 | BPF_MOV | BPF_X,
     insn.dst_reg, insn.dst_reg,
     size * 8, 0);
-    patch_insn_buf:
+    }
+// label;
     new_prog = bpf_patch_insn_data(env, i + delta, insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     delta += cnt - 1;
 // keep walking new program and skip insns we just inserted
     env.prog = new_prog;
@@ -964,46 +1255,47 @@ pub unsafe extern "C" fn if(8: ctx_field_size ==) -> else {
     }
     return 0;
     }
-    static u32 *bpf_dup_subprog_starts(struct bpf_verifier_env *env)
-    {
-    u32 *starts = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn bpf_dup_subprog_starts(env: *mut bpf_verifier_env) -> *mut c_void {
+    let mut starts = core::ptr::null_mut();
     starts = kvmalloc_objs(u32, env.subprog_cnt, GFP_KERNEL_ACCOUNT);
     if (starts) {
-    for (int i = 0; i < env.subprog_cnt; i++)
+    for (int i = 0; i < env.subprog_cnt; i++) {
     starts[i] = env.subprog_info[i].start;
+    }
     }
     return starts;
     }
 #[no_mangle]
 unsafe extern "C" fn bpf_restore_subprog_starts(env: *mut bpf_verifier_env, orig_starts: *mut u32) {
-    static void bpf_restore_subprog_starts(struct bpf_verifier_env *env, u32 *orig_starts)
-    {
-    for (int i = 0; i < env.subprog_cnt; i++)
+    for (int i = 0; i < env.subprog_cnt; i++) {
     env.subprog_info[i].start = orig_starts[i];
+    }
 // restore the start of fake 'exit' subprog as well
     env.subprog_info[env.subprog_cnt].start = env.prog.len;
     }
 #[no_mangle]
 unsafe extern "C" fn jit_subprogs(env: *mut bpf_verifier_env) -> c_int {
-    static int jit_subprogs(struct bpf_verifier_env *env)
-    {
-    struct bpf_prog *prog = env.prog, **func, *tmp;
+    let mut prog = env.prog, **func, *tmp;
     int i, j, subprog_start, subprog_end = 0, len, subprog;
-    struct bpf_map *map_ptr;
-    struct bpf_insn *insn;
-    void *old_bpf_func;
-    int err, num_exentries;
-    for (i = 0, insn = prog.insnsi; i < prog.len; i++, insn++) {
-    if (!bpf_pseudo_func(insn) && !bpf_pseudo_call(insn))
+pub static mut map_ptr: *mut c_void = core::ptr::null_mut();
+pub static mut insn: *mut c_void = core::ptr::null_mut();
+pub static mut old_bpf_func: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
+    let mut num_exentries = 0;
+    while (i < prog.len) {
+    if (!bpf_pseudo_func(insn) && !bpf_pseudo_call(insn)) {
     continue;
+    }
 // Upon error here we cannot fall back to interpreter but
 // need a hard reject of the program. Thus -EFAULT is
 // propagated in any case.
 //
     subprog = bpf_find_subprog(env, i + insn.imm + 1);
     if (verifier_bug_if(subprog < 0, env, "No program to jit at insn %d",
-    i + insn.imm + 1))
+    i + insn.imm + 1)) {
     return -EFAULT;
+    }
 // temporarily remember subprog id inside insn instead of
 // aux_data, since next loop will split up all insns into funcs
 //
@@ -1016,9 +1308,9 @@ unsafe extern "C" fn jit_subprogs(env: *mut bpf_verifier_env) -> c_int {
     insn.imm = 1;
     if (bpf_pseudo_func(insn)) {
 
-    let mut addr: u64 = MODULES_VADDR;
+pub static mut addr: u64 = 0;
 
-    let mut addr: u64 = VMALLOC_START;
+pub static mut addr: u64 = 0;
 
 // jit (e.g. x86_64) may emit fewer instructions
 // if it learns a u32 imm is the same as a u64 imm.
@@ -1029,13 +1321,15 @@ unsafe extern "C" fn jit_subprogs(env: *mut bpf_verifier_env) -> c_int {
     }
     }
     err = bpf_prog_alloc_jited_linfo(prog);
-    if (err)
-    goto out_undo_insn;
+    if (err) {
+// goto;
+    }
     err = -ENOMEM;
     func = kzalloc_objs(prog, env.subprog_cnt);
-    if (!func)
-    goto out_undo_insn;
-    for (i = 0; i < env.subprog_cnt; i++) {
+    if (!func) {
+// goto;
+    }
+    while (i < env.subprog_cnt) {
     subprog_start = subprog_end;
     subprog_end = env.subprog_info[i + 1].start;
     len = subprog_end - subprog_start;
@@ -1045,14 +1339,16 @@ unsafe extern "C" fn jit_subprogs(env: *mut bpf_verifier_env) -> c_int {
 // func[i]->stats will never be accessed and stays NULL
 //
     func[i] = bpf_prog_alloc_no_stats(bpf_prog_size(len), GFP_USER);
-    if (!func[i])
-    goto out_free;
+    if (!func[i]) {
+// goto;
+    }
     memcpy(func[i].insnsi, &prog.insnsi[subprog_start],
-    len * sizeof(struct bpf_insn));
+    len * sizeof!(bpf_insn));
     func[i].type = prog.type;
     func[i].len = len;
-    if (bpf_prog_calc_tag(func[i]))
-    goto out_free;
+    if (bpf_prog_calc_tag(func[i])) {
+// goto;
+    }
     func[i].is_func = 1;
     func[i].sleepable = prog.sleepable;
     func[i].blinded = prog.blinded;
@@ -1065,17 +1361,19 @@ unsafe extern "C" fn jit_subprogs(env: *mut bpf_verifier_env) -> c_int {
     func[i].aux.poke_tab = prog.aux.poke_tab;
     func[i].aux.size_poke_tab = prog.aux.size_poke_tab;
     func[i].aux.main_prog_aux = prog.aux;
-    for (j = 0; j < prog.aux.size_poke_tab; j++) {
-    struct bpf_jit_poke_descriptor *poke;
+    while (j < prog.aux.size_poke_tab) {
+pub static mut poke: *mut c_void = core::ptr::null_mut();
     poke = &prog.aux.poke_tab[j];
     if (poke.insn_idx < subprog_end &&
-    poke.insn_idx >= subprog_start)
+    poke.insn_idx >= subprog_start) {
     poke.aux = func[i].aux;
+    }
     }
     func[i].aux.name[0] = 'F';
     func[i].aux.stack_depth = env.subprog_info[i].stack_depth;
-    if (env.subprog_info[i].priv_stack_mode == PRIV_STACK_ADAPTIVE)
+    if (env.subprog_info[i].priv_stack_mode == PRIV_STACK_ADAPTIVE) {
     func[i].aux.jits_use_priv_stack = true;
+    }
     func[i].jit_requested = 1;
     func[i].blinding_requested = prog.blinding_requested;
     func[i].aux.kfunc_tab = prog.aux.kfunc_tab;
@@ -1089,20 +1387,23 @@ unsafe extern "C" fn jit_subprogs(env: *mut bpf_verifier_env) -> c_int {
     func[i].aux.used_map_cnt = env.used_map_cnt;
     num_exentries = 0;
     insn = func[i].insnsi;
-    for (j = 0; j < func[i].len; j++, insn++) {
+    while (j < func[i].len) {
     if (BPF_CLASS(insn.code) == BPF_LDX &&
     (BPF_MODE(insn.code) == BPF_PROBE_MEM ||
     BPF_MODE(insn.code) == BPF_PROBE_MEM32 ||
     BPF_MODE(insn.code) == BPF_PROBE_MEM32SX ||
-    BPF_MODE(insn.code) == BPF_PROBE_MEMSX))
-    num_exentries++;
+    BPF_MODE(insn.code) == BPF_PROBE_MEMSX)) {
+    num_exentries += 1;
+    }
     if ((BPF_CLASS(insn.code) == BPF_STX ||
     BPF_CLASS(insn.code) == BPF_ST) &&
-    BPF_MODE(insn.code) == BPF_PROBE_MEM32)
-    num_exentries++;
+    BPF_MODE(insn.code) == BPF_PROBE_MEM32) {
+    num_exentries += 1;
+    }
     if (BPF_CLASS(insn.code) == BPF_STX &&
-    BPF_MODE(insn.code) == BPF_PROBE_ATOMIC)
-    num_exentries++;
+    BPF_MODE(insn.code) == BPF_PROBE_ATOMIC) {
+    num_exentries += 1;
+    }
     }
     func[i].aux.num_exentries = num_exentries;
     func[i].aux.tail_call_reachable = env.subprog_info[i].tail_call_reachable;
@@ -1110,12 +1411,13 @@ unsafe extern "C" fn jit_subprogs(env: *mut bpf_verifier_env) -> c_int {
     func[i].aux.changes_pkt_data = env.subprog_info[i].changes_pkt_data;
     func[i].aux.might_sleep = env.subprog_info[i].might_sleep;
     func[i].aux.token = prog.aux.token;
-    if (!i)
+    if (!i) {
     func[i].aux.exception_boundary = env.seen_exception;
+    }
     func[i] = bpf_int_jit_compile(env, func[i]);
     if (!func[i].jited) {
     err = -ENOTSUPP;
-    goto out_free;
+// goto;
     }
     cond_resched();
     }
@@ -1123,17 +1425,18 @@ unsafe extern "C" fn jit_subprogs(env: *mut bpf_verifier_env) -> c_int {
 // now populate all bpf_calls with correct addresses and
 // run last pass of JIT
 //
-    for (i = 0; i < env.subprog_cnt; i++) {
+    while (i < env.subprog_cnt) {
     insn = func[i].insnsi;
-    for (j = 0; j < func[i].len; j++, insn++) {
+    while (j < func[i].len) {
     if (bpf_pseudo_func(insn)) {
     subprog = insn.off;
     insn[0].imm = (u32)(long)func[subprog].bpf_func;
     insn[1].imm = ((u64)(long)func[subprog].bpf_func) >> 32;
     continue;
     }
-    if (!bpf_pseudo_call(insn))
+    if (!bpf_pseudo_call(insn)) {
     continue;
+    }
     subprog = insn.off;
     insn.imm = BPF_CALL_IMM(func[subprog].bpf_func);
     }
@@ -1152,13 +1455,13 @@ unsafe extern "C" fn jit_subprogs(env: *mut bpf_verifier_env) -> c_int {
     func[i].aux.func_cnt = env.subprog_cnt - env.hidden_subprog_cnt;
     func[i].aux.real_func_cnt = env.subprog_cnt;
     }
-    for (i = 0; i < env.subprog_cnt; i++) {
+    while (i < env.subprog_cnt) {
     old_bpf_func = func[i].bpf_func;
     tmp = bpf_int_jit_compile(env, func[i]);
     if (tmp != func[i] || func[i].bpf_func != old_bpf_func) {
     verbose(env, "JIT doesn't support bpf-to-bpf calls\n");
     err = -ENOTSUPP;
-    goto out_free;
+// goto;
     }
     cond_resched();
     }
@@ -1166,7 +1469,7 @@ unsafe extern "C" fn jit_subprogs(env: *mut bpf_verifier_env) -> c_int {
 // Cleanup func[i]->aux fields which aren't required
 // or can become invalid in future
 //
-    for (i = 0; i < env.subprog_cnt; i++) {
+    while (i < env.subprog_cnt) {
     func[i].aux.used_maps = core::ptr::null_mut();
     func[i].aux.used_map_cnt = 0;
     }
@@ -1174,26 +1477,29 @@ unsafe extern "C" fn jit_subprogs(env: *mut bpf_verifier_env) -> c_int {
 // populate kallsysm. Begin at the first subprogram, since
 // bpf_prog_load will add the kallsyms for the main program.
 //
-    for (i = 1; i < env.subprog_cnt; i++) {
+    while (i < env.subprog_cnt) {
     err = bpf_prog_lock_ro(func[i]);
-    if (err)
-    goto out_free;
+    if (err) {
+// goto;
     }
-    for (i = 1; i < env.subprog_cnt; i++)
+    }
+    for (i = 1; i < env.subprog_cnt; i++) {
     bpf_prog_kallsyms_add(func[i]);
+    }
 // Last step: make now unused interpreter insns from main
 // prog consistent for later dump requests, so they can
 // later look the same as if they were interpreted only.
 //
-    for (i = 0, insn = prog.insnsi; i < prog.len; i++, insn++) {
+    while (i < prog.len) {
     if (bpf_pseudo_func(insn)) {
     insn[0].imm = env.insn_aux_data[i].call_imm;
     insn[1].imm = insn.off;
     insn.off = 0;
     continue;
     }
-    if (!bpf_pseudo_call(insn))
+    if (!bpf_pseudo_call(insn)) {
     continue;
+    }
     insn.imm = env.insn_aux_data[i].call_imm;
     subprog = bpf_find_subprog(env, i + insn.imm + 1);
     insn.off = subprog;
@@ -1206,17 +1512,17 @@ unsafe extern "C" fn jit_subprogs(env: *mut bpf_verifier_env) -> c_int {
     prog.aux.func = func;
     prog.aux.func_cnt = env.subprog_cnt - env.hidden_subprog_cnt;
     prog.aux.real_func_cnt = env.subprog_cnt;
-    prog.aux.bpf_exception_cb = (void *)func[env.exception_callback_subprog].bpf_func;
+    prog.aux.bpf_exception_cb = func[env.exception_callback_subprog].bpf_func;
     prog.aux.exception_boundary = func[0].aux.exception_boundary;
     prog.aux.stack_arg_sp_adjust = func[0].aux.stack_arg_sp_adjust;
     bpf_prog_jit_attempt_done(prog);
     return 0;
-    out_free:
+// label;
 // We failed JIT'ing, so at this point we need to unregister poke
 // descriptors from subprogs, so that kernel is not attempting to
 // patch it anymore as we're freeing the subprog JIT memory.
 //
-    for (i = 0; i < prog.aux.size_poke_tab; i++) {
+    while (i < prog.aux.size_poke_tab) {
     map_ptr = prog.aux.poke_tab[i].tail_call.map;
     map_ptr.ops.map_poke_untrack(map_ptr, prog.aux);
     }
@@ -1224,57 +1530,60 @@ unsafe extern "C" fn jit_subprogs(env: *mut bpf_verifier_env) -> c_int {
 // live anymore. We can just unlink its descriptor table as it's
 // released with the main prog.
 //
-    for (i = 0; i < env.subprog_cnt; i++) {
-    if (!func[i])
+    while (i < env.subprog_cnt) {
+    if (!func[i]) {
     continue;
+    }
     func[i].aux.poke_tab = core::ptr::null_mut();
     bpf_jit_free(func[i]);
     }
     kfree(func);
-    out_undo_insn:
+// label;
     bpf_prog_jit_attempt_done(prog);
     return err;
     }
 #[no_mangle]
 pub unsafe extern "C" fn bpf_jit_subprogs(env: *mut bpf_verifier_env) -> c_int {
-    int bpf_jit_subprogs(struct bpf_verifier_env *env)
-    {
-    int err, i;
-    let mut blinded: bool = false;
-    struct bpf_insn *insn;
-    struct bpf_prog *prog, *orig_prog;
-    u32 *orig_subprog_starts;
-    if (env.subprog_cnt <= 1)
+    let mut err = 0;
+    let mut i = 0;
+pub static mut blinded: bool = false;
+pub static mut insn: *mut c_void = core::ptr::null_mut();
+    let mut prog = core::ptr::null_mut();
+    let mut orig_prog = core::ptr::null_mut();
+pub static mut orig_subprog_starts: *mut c_void = core::ptr::null_mut();
+    if (env.subprog_cnt <= 1) {
     return 0;
+    }
     prog = orig_prog = env.prog;
     if (bpf_prog_need_blind(prog)) {
     orig_subprog_starts = bpf_dup_subprog_starts(env);
     if (!orig_subprog_starts) {
     err = -ENOMEM;
-    goto out_cleanup;
+// goto;
     }
     prog = bpf_jit_blind_constants(env, prog);
     if (IS_ERR(prog)) {
     err = -ENOMEM;
     prog = orig_prog;
-    goto out_restore;
+// goto;
     }
     blinded = true;
     }
     err = jit_subprogs(env);
-    if (err)
-    goto out_jit_err;
+    if (err) {
+// goto;
+    }
     if (blinded) {
     bpf_jit_prog_release_other(prog, orig_prog);
     kvfree(orig_subprog_starts);
     }
     return 0;
-    out_jit_err:
+// label;
     if (blinded) {
     bpf_jit_prog_release_other(orig_prog, prog);
 // roll back to the clean original prog
     prog = env.prog = orig_prog;
-    goto out_restore;
+// goto;
     } else {
     if (err != -EFAULT) {
 //
@@ -1282,19 +1591,20 @@ pub unsafe extern "C" fn bpf_jit_subprogs(env: *mut bpf_verifier_env) -> c_int {
 // that, insn->off and insn->imm should be restored to their original
 // values since they were modified by jit_subprogs.
 //
-    for (i = 0, insn = prog.insnsi; i < prog.len; i++, insn++) {
-    if (!bpf_pseudo_call(insn))
+    while (i < prog.len) {
+    if (!bpf_pseudo_call(insn)) {
     continue;
+    }
     insn.off = 0;
     insn.imm = env.insn_aux_data[i].call_imm;
     }
     }
-    goto out_cleanup;
+// goto;
     }
-    out_restore:
+// label;
     bpf_restore_subprog_starts(env, orig_subprog_starts);
     kvfree(orig_subprog_starts);
-    out_cleanup:
+// label;
 // cleanup main prog to be interpreted
     prog.jit_requested = 0;
     prog.blinding_requested = 0;
@@ -1302,17 +1612,15 @@ pub unsafe extern "C" fn bpf_jit_subprogs(env: *mut bpf_verifier_env) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn bpf_fixup_call_args(env: *mut bpf_verifier_env) -> c_int {
-    int bpf_fixup_call_args(struct bpf_verifier_env *env)
-    {
 
-    struct bpf_prog *prog = env.prog;
-    struct bpf_insn *insn = prog.insnsi;
-    int depth;
+    let mut prog = env.prog;
+    let mut insn = prog.insnsi;
+    let mut depth = 0;
 
     int i, err = 0;
-    for (i = 0; i < env.subprog_cnt; i++) {
-    struct bpf_subprog_info *subprog = &env.subprog_info[i];
-    let mut outgoing: u16 = subprog.stack_arg_cnt - bpf_in_stack_arg_cnt(subprog);
+    while (i < env.subprog_cnt) {
+    let mut subprog = &env.subprog_info[i];
+pub static mut outgoing: u16 = 0;
     if (subprog.max_out_stack_arg_cnt > outgoing) {
     verbose(env,
     "func#%d writes %u stack arg slots, but calls only require %u\n",
@@ -1323,17 +1631,19 @@ pub unsafe extern "C" fn bpf_fixup_call_args(env: *mut bpf_verifier_env) -> c_in
     if (env.prog.jit_requested &&
     !bpf_prog_is_offloaded(env.prog.aux)) {
     err = bpf_jit_subprogs(env);
-    if (err == 0)
+    if (err == 0) {
     return 0;
-    if (err == -EFAULT)
+    }
+    if (err == -EFAULT) {
     return err;
+    }
     }
 
     if (prog.jit_required) {
     verbose(env, "program requires BPF JIT compiler but it is not available\n");
     return -EINVAL;
     }
-    for (i = 0; i < env.subprog_cnt; i++) {
+    while (i < env.subprog_cnt) {
     if (bpf_in_stack_arg_cnt(&env.subprog_info[i])) {
     verbose(env, "stack args are not supported in non-JITed programs\n");
     return -EINVAL;
@@ -1346,7 +1656,7 @@ pub unsafe extern "C" fn bpf_fixup_call_args(env: *mut bpf_verifier_env) -> c_in
     verbose(env, "tail_calls are not allowed in non-JITed programs with bpf-to-bpf calls\n");
     return -EINVAL;
     }
-    for (i = 0; i < prog.len; i++, insn++) {
+    while (i < prog.len) {
     if (bpf_pseudo_func(insn)) {
 // When JIT fails the progs with callback calls
 // have to be rejected, since interpreter doesn't support them yet.
@@ -1354,11 +1664,13 @@ pub unsafe extern "C" fn bpf_fixup_call_args(env: *mut bpf_verifier_env) -> c_in
     verbose(env, "callbacks are not allowed in non-JITed programs\n");
     return -EINVAL;
     }
-    if (!bpf_pseudo_call(insn))
+    if (!bpf_pseudo_call(insn)) {
     continue;
+    }
     depth = get_callee_stack_depth(env, insn, i);
-    if (depth < 0)
+    if (depth < 0) {
     return depth;
+    }
     err = bpf_patch_call_args(insn, depth);
     if (err) {
     verbose(env, "stack depth %d exceeds interpreter stack depth limit\n",
@@ -1373,11 +1685,9 @@ pub unsafe extern "C" fn bpf_fixup_call_args(env: *mut bpf_verifier_env) -> c_in
 // The function requires that first instruction in 'patch' is insnsi[prog->len - 1]
 #[no_mangle]
 unsafe extern "C" fn add_hidden_subprog(env: *mut bpf_verifier_env, patch: *mut bpf_insn, len: c_int) -> c_int {
-    static int add_hidden_subprog(struct bpf_verifier_env *env, struct bpf_insn *patch, int len)
-    {
-    struct bpf_subprog_info *info = env.subprog_info;
-    let mut cnt: c_int = env.subprog_cnt;
-    struct bpf_prog *prog;
+    let mut info = env.subprog_info;
+pub static mut cnt: c_int = 0;
+pub static mut prog: *mut c_void = core::ptr::null_mut();
 // We only reserve one slot for hidden subprogs in subprog_info.
     if (env.hidden_subprog_cnt) {
     verifier_bug(env, "only one hidden subprog supported");
@@ -1388,13 +1698,14 @@ unsafe extern "C" fn add_hidden_subprog(env: *mut bpf_verifier_env, patch: *mut 
 // in bpf_patch_insn_data are no-ops.
 //
     prog = bpf_patch_insn_data(env, env.prog.len - 1, patch, len);
-    if (!prog)
+    if (!prog) {
     return -ENOMEM;
+    }
     env.prog = prog;
     info[cnt + 1].start = info[cnt].start;
     info[cnt].start = prog.len - len + 1;
-    env.subprog_cnt++;
-    env.hidden_subprog_cnt++;
+    env.subprog_cnt += 1;
+    env.hidden_subprog_cnt += 1;
     return 0;
     }
 // Do various post-verification rewrites in a single program pass.
@@ -1402,83 +1713,86 @@ unsafe extern "C" fn add_hidden_subprog(env: *mut bpf_verifier_env, patch: *mut 
 //
 #[no_mangle]
 pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int {
-    int bpf_do_misc_fixups(struct bpf_verifier_env *env)
-    {
-    struct bpf_prog *prog = env.prog;
-    let mut eatype: enum bpf_attach_type = prog.expected_attach_type;
-    let mut prog_type: enum bpf_prog_type = resolve_prog_type(prog);
-    struct bpf_insn *insn = prog.insnsi;
-    const struct bpf_func_proto *fn;
-    let mut insn_cnt: c_int = prog.len;
-    const struct bpf_map_ops *ops;
-    struct bpf_insn_aux_data *aux;
-    struct bpf_insn *insn_buf = env.insn_buf;
-    struct bpf_prog *new_prog;
-    struct bpf_map *map_ptr;
+    let mut prog = env.prog;
+pub static mut eatype: bpf_attach_type = 0;
+pub static mut prog_type: bpf_prog_type = 0;
+    let mut insn = prog.insnsi;
+pub static mut fn: *mut c_void = core::ptr::null_mut();
+pub static mut insn_cnt: c_int = 0;
+pub static mut ops: *mut c_void = core::ptr::null_mut();
+pub static mut aux: *mut c_void = core::ptr::null_mut();
+    let mut insn_buf = env.insn_buf;
+pub static mut new_prog: *mut c_void = core::ptr::null_mut();
+pub static mut map_ptr: *mut c_void = core::ptr::null_mut();
     int i, ret, cnt, delta = 0, cur_subprog = 0;
-    struct bpf_subprog_info *subprogs = env.subprog_info;
-    let mut stack_depth: u16 = subprogs[cur_subprog].stack_depth;
-    let mut stack_depth_extra: u16 = 0;
+    let mut subprogs = env.subprog_info;
+pub static mut stack_depth: u16 = 0;
+pub static mut stack_depth_extra: u16 = 0;
     if (env.seen_exception && !env.exception_callback_subprog) {
-    struct bpf_insn *patch = insn_buf;
+    let mut patch = insn_buf;
 // patch++ = env->prog->insnsi[insn_cnt - 1];
 // patch++ = BPF_MOV64_REG(BPF_REG_0, BPF_REG_1);
 // patch++ = BPF_EXIT_INSN();
     ret = add_hidden_subprog(env, insn_buf, patch - insn_buf);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     prog = env.prog;
     insn = prog.insnsi;
     env.exception_callback_subprog = env.subprog_cnt - 1;
 // Don't update insn_cnt, as add_hidden_subprog always appends insns
     bpf_mark_subprog_exc_cb(env, env.exception_callback_subprog);
     }
-    for (i = 0; i < insn_cnt;) {
+    while (i < insn_cnt) {
     if (is_addr_space_cast32(env.prog, insn)) {
 // convert to 32-bit mov that clears upper 32-bit
     insn.code = BPF_ALU | BPF_MOV | BPF_X;
 // clear off and imm, so it's a normal 'wX = wY' from JIT pov
     insn.off = 0;
     insn.imm = 0;
-    goto next_insn;
+// goto;
     }
-    if (env.insn_aux_data[i + delta].needs_zext)
+    if (env.insn_aux_data[i + delta].needs_zext) {
 // Convert BPF_CLASS(insn->code) == BPF_ALU64 to 32-bit ALU
     insn.code = BPF_ALU | BPF_OP(insn.code) | BPF_SRC(insn.code);
+    }
 // Make sdiv/smod divide-by-minus-one exceptions impossible.
     if ((insn.code == (BPF_ALU64 | BPF_MOD | BPF_K) ||
     insn.code == (BPF_ALU64 | BPF_DIV | BPF_K) ||
     insn.code == (BPF_ALU | BPF_MOD | BPF_K) ||
     insn.code == (BPF_ALU | BPF_DIV | BPF_K)) &&
     insn.off == 1 && insn.imm == -1) {
-    let mut is64: bool = BPF_CLASS(insn.code) == BPF_ALU64;
-    let mut isdiv: bool = BPF_OP(insn.code) == BPF_DIV;
-    struct bpf_insn *patch = insn_buf;
-    if (isdiv)
+pub static mut is64: bool = false;
+pub static mut isdiv: bool = false;
+    let mut patch = insn_buf;
+    if (isdiv) {
 // patch++ = BPF_RAW_INSN((is64 ? BPF_ALU64 : BPF_ALU) |
     BPF_NEG | BPF_K, insn.dst_reg,
     0, 0, 0);
-    else
+    }
+    else {
 // patch++ = BPF_MOV32_IMM(insn->dst_reg, 0);
+    }
     cnt = patch - insn_buf;
     new_prog = bpf_patch_insn_data(env, i + delta, insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     delta    += cnt - 1;
     env.prog = prog = new_prog;
     insn      = new_prog.insnsi + i + delta;
-    goto next_insn;
+// goto;
     }
 // Make divide-by-zero and divide-by-minus-one exceptions impossible.
     if (insn.code == (BPF_ALU64 | BPF_MOD | BPF_X) ||
     insn.code == (BPF_ALU64 | BPF_DIV | BPF_X) ||
     insn.code == (BPF_ALU | BPF_MOD | BPF_X) ||
     insn.code == (BPF_ALU | BPF_DIV | BPF_X)) {
-    let mut is64: bool = BPF_CLASS(insn.code) == BPF_ALU64;
-    let mut isdiv: bool = BPF_OP(insn.code) == BPF_DIV;
-    let mut is_sdiv: bool = isdiv && insn.off == 1;
-    let mut is_smod: bool = !isdiv && insn.off == 1;
-    struct bpf_insn *patch = insn_buf;
+pub static mut is64: bool = false;
+pub static mut isdiv: bool = false;
+pub static mut is_sdiv: bool = false;
+pub static mut is_smod: bool = false;
+    let mut patch = insn_buf;
     if (is_sdiv) {
 // [R,W]x sdiv 0 -> 0
 // LLONG_MIN sdiv -1 -> LLONG_MIN
@@ -1547,24 +1861,27 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
     cnt = patch - insn_buf;
     }
     new_prog = bpf_patch_insn_data(env, i + delta, insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     delta    += cnt - 1;
     env.prog = prog = new_prog;
     insn      = new_prog.insnsi + i + delta;
-    goto next_insn;
+// goto;
     }
 // Make it impossible to de-reference a userspace address
     if (BPF_CLASS(insn.code) == BPF_LDX &&
     (BPF_MODE(insn.code) == BPF_PROBE_MEM ||
     BPF_MODE(insn.code) == BPF_PROBE_MEMSX)) {
-    struct bpf_insn *patch = insn_buf;
-    let mut uaddress_limit: u64 = bpf_arch_uaddress_limit();
-    if (!uaddress_limit)
-    goto next_insn;
+    let mut patch = insn_buf;
+pub static mut uaddress_limit: u64 = 0;
+    if (!uaddress_limit) {
+// goto;
+    }
 // patch++ = BPF_MOV64_REG(BPF_REG_AX, insn->src_reg);
-    if (insn.off)
+    if (insn.off) {
 // patch++ = BPF_ALU64_IMM(BPF_ADD, BPF_REG_AX, insn->off);
+    }
 // patch++ = BPF_ALU64_IMM(BPF_RSH, BPF_REG_AX, 32);
 // patch++ = BPF_JMP_IMM(BPF_JLE, BPF_REG_AX, uaddress_limit >> 32, 2);
 // patch++ = *insn;
@@ -1572,12 +1889,13 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
 // patch++ = BPF_MOV64_IMM(insn->dst_reg, 0);
     cnt = patch - insn_buf;
     new_prog = bpf_patch_insn_data(env, i + delta, insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     delta    += cnt - 1;
     env.prog = prog = new_prog;
     insn      = new_prog.insnsi + i + delta;
-    goto next_insn;
+// goto;
     }
 // Implement LD_ABS and LD_IND with a rewrite, if supported by the program type.
     if (BPF_CLASS(insn.code) == BPF_LD &&
@@ -1589,25 +1907,29 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
     return -EFAULT;
     }
     new_prog = bpf_patch_insn_data(env, i + delta, insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     delta    += cnt - 1;
     env.prog = prog = new_prog;
     insn      = new_prog.insnsi + i + delta;
-    goto next_insn;
+// goto;
     }
 // Rewrite pointer arithmetic to mitigate speculation attacks.
     if (insn.code == (BPF_ALU64 | BPF_ADD | BPF_X) ||
     insn.code == (BPF_ALU64 | BPF_SUB | BPF_X)) {
-    let mut code_add: u8 = BPF_ALU64 | BPF_ADD | BPF_X;
-    let mut code_sub: u8 = BPF_ALU64 | BPF_SUB | BPF_X;
-    struct bpf_insn *patch = insn_buf;
-    bool issrc, isneg, isimm;
-    u32 off_reg;
+pub static mut code_add: u8 = 0;
+pub static mut code_sub: u8 = 0;
+    let mut patch = insn_buf;
+    let mut issrc = 0;
+    let mut isneg = 0;
+    let mut isimm = 0;
+    let mut off_reg = 0;
     aux = &env.insn_aux_data[i + delta];
     if (!aux.alu_state ||
-    aux.alu_state == BPF_ALU_NON_POINTER)
-    goto next_insn;
+    aux.alu_state == BPF_ALU_NON_POINTER) {
+// goto;
+    }
     isneg = aux.alu_state & BPF_ALU_NEG_VALUE;
     issrc = (aux.alu_state & BPF_ALU_SANITIZE) ==
     BPF_ALU_SANITIZE_SRC;
@@ -1616,8 +1938,9 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
     if (isimm) {
 // patch++ = BPF_MOV32_IMM(BPF_REG_AX, aux->alu_limit);
     } else {
-    if (isneg)
+    if (isneg) {
 // patch++ = BPF_ALU64_IMM(BPF_MUL, off_reg, -1);
+    }
 // patch++ = BPF_MOV32_IMM(BPF_REG_AX, aux->alu_limit);
 // patch++ = BPF_ALU64_REG(BPF_SUB, BPF_REG_AX, off_reg);
 // patch++ = BPF_ALU64_REG(BPF_OR, BPF_REG_AX, off_reg);
@@ -1625,26 +1948,30 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
 // patch++ = BPF_ALU64_IMM(BPF_ARSH, BPF_REG_AX, 63);
 // patch++ = BPF_ALU64_REG(BPF_AND, BPF_REG_AX, off_reg);
     }
-    if (!issrc)
+    if (!issrc) {
 // patch++ = BPF_MOV64_REG(insn->dst_reg, insn->src_reg);
+    }
     insn.src_reg = BPF_REG_AX;
-    if (isneg)
+    if (isneg) {
     insn.code = insn.code == code_add ?
     code_sub : code_add;
+    }
 // patch++ = *insn;
-    if (issrc && isneg && !isimm)
+    if (issrc && isneg && !isimm) {
 // patch++ = BPF_ALU64_IMM(BPF_MUL, off_reg, -1);
+    }
     cnt = patch - insn_buf;
     new_prog = bpf_patch_insn_data(env, i + delta, insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     delta    += cnt - 1;
     env.prog = prog = new_prog;
     insn      = new_prog.insnsi + i + delta;
-    goto next_insn;
+// goto;
     }
     if (bpf_is_may_goto_insn(insn) && bpf_jit_supports_timed_may_goto()) {
-    let mut stack_off_cnt: c_int = -stack_depth - 16;
+pub static mut stack_off_cnt: c_int = 0;
 //
 // Two 8 byte slots, depth-16 stores the count, and
 // depth-8 stores the start timestamp of the loop.
@@ -1661,10 +1988,12 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
 //
     stack_depth_extra = 16;
     insn_buf[0] = BPF_LDX_MEM(BPF_DW, BPF_REG_AX, BPF_REG_10, stack_off_cnt);
-    if (insn.off >= 0)
+    if (insn.off >= 0) {
     insn_buf[1] = BPF_JMP_IMM(BPF_JEQ, BPF_REG_AX, 0, insn.off + 5);
-    else
+    }
+    else {
     insn_buf[1] = BPF_JMP_IMM(BPF_JEQ, BPF_REG_AX, 0, insn.off - 1);
+    }
     insn_buf[2] = BPF_ALU64_IMM(BPF_SUB, BPF_REG_AX, 1);
     insn_buf[3] = BPF_JMP_IMM(BPF_JNE, BPF_REG_AX, 0, 2);
 //
@@ -1677,44 +2006,49 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
     insn_buf[6] = BPF_STX_MEM(BPF_DW, BPF_REG_10, BPF_REG_AX, stack_off_cnt);
     cnt = 7;
     new_prog = bpf_patch_insn_data(env, i + delta, insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     delta += cnt - 1;
     env.prog = prog = new_prog;
     insn = new_prog.insnsi + i + delta;
-    goto next_insn;
+// goto;
     } else if (bpf_is_may_goto_insn(insn)) {
-    let mut stack_off: c_int = -stack_depth - 8;
+pub static mut stack_off: c_int = 0;
     stack_depth_extra = 8;
     insn_buf[0] = BPF_LDX_MEM(BPF_DW, BPF_REG_AX, BPF_REG_10, stack_off);
-    if (insn.off >= 0)
+    if (insn.off >= 0) {
     insn_buf[1] = BPF_JMP_IMM(BPF_JEQ, BPF_REG_AX, 0, insn.off + 2);
-    else
+    }
+    else {
     insn_buf[1] = BPF_JMP_IMM(BPF_JEQ, BPF_REG_AX, 0, insn.off - 1);
+    }
     insn_buf[2] = BPF_ALU64_IMM(BPF_SUB, BPF_REG_AX, 1);
     insn_buf[3] = BPF_STX_MEM(BPF_DW, BPF_REG_10, BPF_REG_AX, stack_off);
     cnt = 4;
     new_prog = bpf_patch_insn_data(env, i + delta, insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     delta += cnt - 1;
     env.prog = prog = new_prog;
     insn = new_prog.insnsi + i + delta;
-    goto next_insn;
+// goto;
     }
     if (bpf_jit_supports_percpu_insn() &&
     insn.code == (BPF_LD | BPF_IMM | BPF_DW) &&
     (insn.src_reg == BPF_PSEUDO_MAP_VALUE ||
     insn.src_reg == BPF_PSEUDO_MAP_IDX_VALUE)) {
-    struct bpf_map *map;
+pub static mut map: *mut c_void = core::ptr::null_mut();
     aux = &env.insn_aux_data[i + delta];
     map = env.used_maps[aux.map_index];
-    if (map.map_type != BPF_MAP_TYPE_PERCPU_ARRAY)
-    goto next_insn;
+    if (map.map_type != BPF_MAP_TYPE_PERCPU_ARRAY) {
+// goto;
+    }
     prog.jit_required = true;
 //
 // We are *skipping* first half of ld_imm64 insn
-// with 'i++;', patching over second half of it
+// with 'i += 1;', patching over second half of it
 // with that same half + mov64_percpu_reg insn.
 // All because bpf_patch_insn_data() can only
 // replace one 8-byte insn, which does not work
@@ -1723,44 +2057,53 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
     insn_buf[0] = insn[1];
     insn_buf[1] = BPF_MOV64_PERCPU_REG(insn.dst_reg, insn.dst_reg);
     cnt = 2;
-    i++;
+    i += 1;
     new_prog = bpf_patch_insn_data(env, i + delta, insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     delta    += cnt - 1;
     env.prog = prog = new_prog;
     insn      = new_prog.insnsi + i + delta;
-    goto next_insn;
+// goto;
     }
-    if (insn.code != (BPF_JMP | BPF_CALL))
-    goto next_insn;
-    if (insn.src_reg == BPF_PSEUDO_CALL)
-    goto next_insn;
+    if (insn.code != (BPF_JMP | BPF_CALL)) {
+// goto;
+    }
+    if (insn.src_reg == BPF_PSEUDO_CALL) {
+// goto;
+    }
     if (insn.src_reg == BPF_PSEUDO_KFUNC_CALL) {
     ret = bpf_fixup_kfunc_call(env, insn, insn_buf, i + delta, &cnt);
-    if (ret)
+    if (ret) {
     return ret;
-    if (cnt == 0)
-    goto next_insn;
+    }
+    if (cnt == 0) {
+// goto;
+    }
     new_prog = bpf_patch_insn_data(env, i + delta, insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     delta	 += cnt - 1;
     env.prog = prog = new_prog;
     insn	  = new_prog.insnsi + i + delta;
-    goto next_insn;
+// goto;
     }
 // Skip inlining the helper call if the JIT does it.
     if (bpf_jit_inlines_helper_call(insn.imm)) {
     prog.jit_required = 1;
-    goto next_insn;
+// goto;
     }
-    if (insn.imm == BPF_FUNC_get_route_realm)
+    if (insn.imm == BPF_FUNC_get_route_realm) {
     prog.dst_needed = 1;
-    if (insn.imm == BPF_FUNC_get_prandom_u32)
+    }
+    if (insn.imm == BPF_FUNC_get_prandom_u32) {
     bpf_user_rnd_init_once();
-    if (insn.imm == BPF_FUNC_override_return)
+    }
+    if (insn.imm == BPF_FUNC_override_return) {
     prog.kprobe_override = 1;
+    }
     if (insn.imm == BPF_FUNC_tail_call) {
 // If we tail call into other programs, we
 // cannot make any assumptions since they can
@@ -1768,8 +2111,9 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
 // the program array.
 //
     prog.cb_access = 1;
-    if (!bpf_allow_tail_call_in_subprogs(env))
+    if (!bpf_allow_tail_call_in_subprogs(env)) {
     prog.aux.stack_depth = MAX_BPF_STACK;
+    }
     prog.aux.max_pkt_offset = MAX_PACKET_OFF;
 // mark bpf_tail_call as different opcode to avoid
 // conditional branch in the interpreter for every normal
@@ -1784,22 +2128,18 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
     !bpf_map_key_poisoned(aux) &&
     !bpf_map_ptr_poisoned(aux) &&
     !bpf_map_ptr_unpriv(aux)) {
-    struct bpf_jit_poke_descriptor desc = {
-    .reason = BPF_POKE_REASON_TAIL_CALL,
-    .tail_call.map = aux.map_ptr_state.map_ptr,
-    .tail_call.key = bpf_map_key_immediate(aux),
-    .insn_idx = i + delta,
-    };
+pub static mut bpf_jit_poke_descriptor: usize = 0;
     ret = bpf_jit_add_poke_descriptor(prog, &desc);
     if (ret < 0) {
     verbose(env, "adding tail call poke descriptor failed\n");
     return ret;
     }
     insn.imm = ret + 1;
-    goto next_insn;
+// goto;
     }
-    if (!bpf_map_ptr_unpriv(aux))
-    goto next_insn;
+    if (!bpf_map_ptr_unpriv(aux)) {
+// goto;
+    }
 // instead of changing every JIT dealing with tail_call
 // emit two extra insns:
 // if (index >= max_entries) goto out;
@@ -1814,18 +2154,18 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
     insn_buf[0] = BPF_JMP_IMM(BPF_JGE, BPF_REG_3,
     map_ptr.max_entries, 2);
     insn_buf[1] = BPF_ALU32_IMM(BPF_AND, BPF_REG_3,
-    container_of(map_ptr,
-    struct bpf_array,
+    container_of!(map_ptr, bpf_array,
     map).index_mask);
     insn_buf[2] = *insn;
     cnt = 3;
     new_prog = bpf_patch_insn_data(env, i + delta, insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     delta    += cnt - 1;
     env.prog = prog = new_prog;
     insn      = new_prog.insnsi + i + delta;
-    goto next_insn;
+// goto;
     }
     if (insn.imm == BPF_FUNC_timer_set_callback) {
 // The verifier will process callback_fn as many times as necessary
@@ -1841,36 +2181,36 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
 // Those that were not both bpf_timer_init-ed and
 // bpf_timer_set_callback-ed will return -EINVAL.
 //
-    struct bpf_insn ld_addrs[2] = {
-    BPF_LD_IMM64(BPF_REG_3, (long)prog.aux),
-    };
+pub static mut bpf_insn: usize = 0;
     insn_buf[0] = ld_addrs[0];
     insn_buf[1] = ld_addrs[1];
     insn_buf[2] = *insn;
     cnt = 3;
     new_prog = bpf_patch_insn_data(env, i + delta, insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     delta    += cnt - 1;
     env.prog = prog = new_prog;
     insn      = new_prog.insnsi + i + delta;
-    goto patch_call_imm;
+// goto;
     }
 // bpf_per_cpu_ptr() and bpf_this_cpu_ptr()
     if (env.insn_aux_data[i + delta].call_with_percpu_alloc_ptr) {
-// patch with 'r1 = *(u64 *)(r1 + 0)' since for percpu data,
+// patch with 'r1 = *(r1 + 0)' since for percpu data,
 // bpf_mem_alloc() returns a ptr to the percpu data ptr.
 //
     insn_buf[0] = BPF_LDX_MEM(BPF_DW, BPF_REG_1, BPF_REG_1, 0);
     insn_buf[1] = *insn;
     cnt = 2;
     new_prog = bpf_patch_insn_data(env, i + delta, insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     delta += cnt - 1;
     env.prog = prog = new_prog;
     insn = new_prog.insnsi + i + delta;
-    goto patch_call_imm;
+// goto;
     }
 // BPF_EMIT_CALL() assumptions in some of the map_gen_lookup
 // and other inlining handlers are currently limited to 64 bit
@@ -1887,92 +2227,102 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
     insn.imm == BPF_FUNC_for_each_map_elem ||
     insn.imm == BPF_FUNC_map_lookup_percpu_elem)) {
     aux = &env.insn_aux_data[i + delta];
-    if (bpf_map_ptr_poisoned(aux))
-    goto patch_call_imm;
+    if (bpf_map_ptr_poisoned(aux)) {
+// goto;
+    }
     map_ptr = aux.map_ptr_state.map_ptr;
     ops = map_ptr.ops;
     if (insn.imm == BPF_FUNC_map_lookup_elem &&
     ops.map_gen_lookup) {
     cnt = ops.map_gen_lookup(map_ptr, insn_buf);
-    if (cnt == -EOPNOTSUPP)
-    goto patch_map_ops_generic;
+    if (cnt == -EOPNOTSUPP) {
+// goto;
+    }
     if (cnt <= 0 || cnt >= INSN_BUF_SIZE) {
     verifier_bug(env, "%d insns generated for map lookup", cnt);
     return -EFAULT;
     }
-    if (bpf_map_is_percpu_map(map_ptr.map_type))
+    if (bpf_map_is_percpu_map(map_ptr.map_type)) {
     prog.jit_required = true;
+    }
     new_prog = bpf_patch_insn_data(env, i + delta,
     insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     delta    += cnt - 1;
     env.prog = prog = new_prog;
     insn      = new_prog.insnsi + i + delta;
-    goto next_insn;
+// goto;
     }
-    BUILD_BUG_ON(!__same_type(ops.map_lookup_elem,
-    (void *(*)(struct bpf_map *map, void *key))core::ptr::null_mut()));
-    BUILD_BUG_ON(!__same_type(ops.map_delete_elem,
-    (long (*)(struct bpf_map *map, void *key))core::ptr::null_mut()));
-    BUILD_BUG_ON(!__same_type(ops.map_update_elem,
-    (long (*)(struct bpf_map *map, void *key, void *value,
+    BUILD_BUG_ON!(!__same_type(ops.map_lookup_elem,
+    (void *(bpf_map *map, void *key))core::ptr::null_mut()));
+    BUILD_BUG_ON!(!__same_type(ops.map_delete_elem,
+    (long (bpf_map *map, void *key))core::ptr::null_mut()));
+    BUILD_BUG_ON!(!__same_type(ops.map_update_elem,
+    (long (bpf_map *map, void *key, void *value,
     u64 flags))core::ptr::null_mut()));
-    BUILD_BUG_ON(!__same_type(ops.map_push_elem,
-    (long (*)(struct bpf_map *map, void *value,
+    BUILD_BUG_ON!(!__same_type(ops.map_push_elem,
+    (long (bpf_map *map, void *value,
     u64 flags))core::ptr::null_mut()));
-    BUILD_BUG_ON(!__same_type(ops.map_pop_elem,
-    (long (*)(struct bpf_map *map, void *value))core::ptr::null_mut()));
-    BUILD_BUG_ON(!__same_type(ops.map_peek_elem,
-    (long (*)(struct bpf_map *map, void *value))core::ptr::null_mut()));
-    BUILD_BUG_ON(!__same_type(ops.map_redirect,
-    (long (*)(struct bpf_map *map, u64 index, u64 flags))core::ptr::null_mut()));
-    BUILD_BUG_ON(!__same_type(ops.map_for_each_callback,
-    (long (*)(struct bpf_map *map,
+    BUILD_BUG_ON!(!__same_type(ops.map_pop_elem,
+    (long (bpf_map *map, void *value))core::ptr::null_mut()));
+    BUILD_BUG_ON!(!__same_type(ops.map_peek_elem,
+    (long (bpf_map *map, void *value))core::ptr::null_mut()));
+    BUILD_BUG_ON!(!__same_type(ops.map_redirect,
+    (long (bpf_map *map, u64 index, u64 flags))core::ptr::null_mut()));
+    BUILD_BUG_ON!(!__same_type(ops.map_for_each_callback,
+    (long (bpf_map *map,
     bpf_callback_t callback_fn,
     void *callback_ctx,
     u64 flags))core::ptr::null_mut()));
-    BUILD_BUG_ON(!__same_type(ops.map_lookup_percpu_elem,
-    (void *(*)(struct bpf_map *map, void *key, u32 cpu))core::ptr::null_mut()));
-    patch_map_ops_generic:
-    switch (insn.imm) {
-    case BPF_FUNC_map_lookup_elem:
+    BUILD_BUG_ON!(!__same_type(ops.map_lookup_percpu_elem,
+    (void *(bpf_map *map, void *key, u32 cpu))core::ptr::null_mut()));
+// label;
+    match (insn.imm) {
+    BPF_FUNC_map_lookup_elem => {
     insn.imm = BPF_CALL_IMM(ops.map_lookup_elem);
-    goto next_insn;
-    case BPF_FUNC_map_update_elem:
-    insn.imm = BPF_CALL_IMM(ops.map_update_elem);
-    goto next_insn;
-    case BPF_FUNC_map_delete_elem:
-    insn.imm = BPF_CALL_IMM(ops.map_delete_elem);
-    goto next_insn;
-    case BPF_FUNC_map_push_elem:
-    insn.imm = BPF_CALL_IMM(ops.map_push_elem);
-    goto next_insn;
-    case BPF_FUNC_map_pop_elem:
-    insn.imm = BPF_CALL_IMM(ops.map_pop_elem);
-    goto next_insn;
-    case BPF_FUNC_map_peek_elem:
-    insn.imm = BPF_CALL_IMM(ops.map_peek_elem);
-    goto next_insn;
-    case BPF_FUNC_redirect_map:
-    insn.imm = BPF_CALL_IMM(ops.map_redirect);
-    goto next_insn;
-    case BPF_FUNC_for_each_map_elem:
-    insn.imm = BPF_CALL_IMM(ops.map_for_each_callback);
-    goto next_insn;
-    case BPF_FUNC_map_lookup_percpu_elem:
-    insn.imm = BPF_CALL_IMM(ops.map_lookup_percpu_elem);
-    goto next_insn;
+// goto;
     }
-    goto patch_call_imm;
+    BPF_FUNC_map_update_elem => {
+    insn.imm = BPF_CALL_IMM(ops.map_update_elem);
+// goto;
+    }
+    BPF_FUNC_map_delete_elem => {
+    insn.imm = BPF_CALL_IMM(ops.map_delete_elem);
+// goto;
+    }
+    BPF_FUNC_map_push_elem => {
+    insn.imm = BPF_CALL_IMM(ops.map_push_elem);
+// goto;
+    }
+    BPF_FUNC_map_pop_elem => {
+    insn.imm = BPF_CALL_IMM(ops.map_pop_elem);
+// goto;
+    }
+    BPF_FUNC_map_peek_elem => {
+    insn.imm = BPF_CALL_IMM(ops.map_peek_elem);
+// goto;
+    }
+    BPF_FUNC_redirect_map => {
+    insn.imm = BPF_CALL_IMM(ops.map_redirect);
+// goto;
+    }
+    BPF_FUNC_for_each_map_elem => {
+    insn.imm = BPF_CALL_IMM(ops.map_for_each_callback);
+// goto;
+    }
+    BPF_FUNC_map_lookup_percpu_elem => {
+    insn.imm = BPF_CALL_IMM(ops.map_lookup_percpu_elem);
+// goto;
+    }
+    }
+// goto;
     }
 // Implement bpf_jiffies64 inline.
     if (prog.jit_requested && BITS_PER_LONG == 64 &&
     insn.imm == BPF_FUNC_jiffies64) {
-    struct bpf_insn ld_jiffies_addr[2] = {
-    BPF_LD_IMM64(BPF_REG_0,
-    (unsigned long)&jiffies),
-    };
+pub static mut bpf_insn: usize = 0;
     insn_buf[0] = ld_jiffies_addr[0];
     insn_buf[1] = ld_jiffies_addr[1];
     insn_buf[2] = BPF_LDX_MEM(BPF_DW, BPF_REG_0,
@@ -1980,12 +2330,13 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
     cnt = 3;
     new_prog = bpf_patch_insn_data(env, i + delta, insn_buf,
     cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     delta    += cnt - 1;
     env.prog = prog = new_prog;
     insn      = new_prog.insnsi + i + delta;
-    goto next_insn;
+// goto;
     }
 
 // Implement bpf_get_smp_processor_id() inline.
@@ -2007,12 +2358,13 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
     cnt = 1;
 
     new_prog = bpf_patch_insn_data(env, i + delta, insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     delta    += cnt - 1;
     env.prog = prog = new_prog;
     insn      = new_prog.insnsi + i + delta;
-    goto next_insn;
+// goto;
     }
 // Implement bpf_get_current_task() and bpf_get_current_task_btf() inline.
     if ((insn.imm == BPF_FUNC_get_current_task || insn.imm == BPF_FUNC_get_current_task_btf) &&
@@ -2023,19 +2375,20 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
     insn_buf[2] = BPF_LDX_MEM(BPF_DW, BPF_REG_0, BPF_REG_0, 0);
     cnt = 3;
     new_prog = bpf_patch_insn_data(env, i + delta, insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     delta    += cnt - 1;
     env.prog = prog = new_prog;
     insn      = new_prog.insnsi + i + delta;
-    goto next_insn;
+// goto;
     }
 
 // Implement bpf_get_func_arg inline.
     if (prog_type == BPF_PROG_TYPE_TRACING &&
     insn.imm == BPF_FUNC_get_func_arg) {
     if (eatype == BPF_TRACE_RAW_TP) {
-    let mut nr_args: c_int = btf_type_vlen(prog.aux.attach_func_proto);
+pub static mut nr_args: c_int = 0;
 // skip 'void *__data' in btf_trace_##name() and save to reg0
     insn_buf[0] = BPF_MOV64_IMM(BPF_REG_0, nr_args - 1);
     cnt = 1;
@@ -2054,12 +2407,13 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
     insn_buf[cnt++] = BPF_JMP_A(1);
     insn_buf[cnt++] = BPF_MOV64_IMM(BPF_REG_0, -EINVAL);
     new_prog = bpf_patch_insn_data(env, i + delta, insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     delta    += cnt - 1;
     env.prog = prog = new_prog;
     insn      = new_prog.insnsi + i + delta;
-    goto next_insn;
+// goto;
     }
 // Implement bpf_get_func_ret inline.
     if (prog_type == BPF_PROG_TYPE_TRACING &&
@@ -2083,18 +2437,19 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
     cnt = 1;
     }
     new_prog = bpf_patch_insn_data(env, i + delta, insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     delta    += cnt - 1;
     env.prog = prog = new_prog;
     insn      = new_prog.insnsi + i + delta;
-    goto next_insn;
+// goto;
     }
 // Implement get_func_arg_cnt inline.
     if (prog_type == BPF_PROG_TYPE_TRACING &&
     insn.imm == BPF_FUNC_get_func_arg_cnt) {
     if (eatype == BPF_TRACE_RAW_TP) {
-    let mut nr_args: c_int = btf_type_vlen(prog.aux.attach_func_proto);
+pub static mut nr_args: c_int = 0;
 // skip 'void *__data' in btf_trace_##name() and save to reg0
     insn_buf[0] = BPF_MOV64_IMM(BPF_REG_0, nr_args - 1);
     cnt = 1;
@@ -2105,12 +2460,13 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
     cnt = 2;
     }
     new_prog = bpf_patch_insn_data(env, i + delta, insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     delta    += cnt - 1;
     env.prog = prog = new_prog;
     insn      = new_prog.insnsi + i + delta;
-    goto next_insn;
+// goto;
     }
 // Implement bpf_get_func_ip inline.
     if (prog_type == BPF_PROG_TYPE_TRACING &&
@@ -2118,26 +2474,27 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
 // Load IP address from ctx - 16
     insn_buf[0] = BPF_LDX_MEM(BPF_DW, BPF_REG_0, BPF_REG_1, -16);
     new_prog = bpf_patch_insn_data(env, i + delta, insn_buf, 1);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     env.prog = prog = new_prog;
     insn      = new_prog.insnsi + i + delta;
-    goto next_insn;
+// goto;
     }
 // Implement bpf_get_branch_snapshot inline.
-    if (IS_ENABLED(CONFIG_PERF_EVENTS) &&
+    if (IS_ENABLED!(CONFIG_PERF_EVENTS) &&
     prog.jit_requested && BITS_PER_LONG == 64 &&
     insn.imm == BPF_FUNC_get_branch_snapshot) {
 // We are dealing with the following func protos:
 // u64 bpf_get_branch_snapshot(void *buf, u32 size, u64 flags);
-// int perf_snapshot_branch_stack(struct perf_branch_entry *entries, u32 cnt);
+// int perf_snapshot_branch_stack(perf_branch_entry *entries, u32 cnt);
 //
-    let mut br_entry_size: u32 = sizeof(struct perf_branch_entry);
+pub static mut br_entry_size: u32 = 0;
 // struct perf_branch_entry is part of UAPI and is
 // used as an array element, so extremely unlikely to
 // ever grow or shrink
 //
-    BUILD_BUG_ON(br_entry_size != 24);
+    BUILD_BUG_ON!(br_entry_size != 24);
 // if (unlikely(flags)) return -EINVAL
     insn_buf[0] = BPF_JMP_IMM(BPF_JNE, BPF_REG_3, 0, 7);
 // Transform size (bytes) into number of entries (cnt = size / 24).
@@ -2156,7 +2513,7 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
     insn_buf[4] = BPF_EMIT_CALL(static_call_query(perf_snapshot_branch_stack));
 // if (entry_cnt == 0) return -ENOENT
     insn_buf[5] = BPF_JMP_IMM(BPF_JEQ, BPF_REG_0, 0, 4);
-// return entry_cnt * sizeof(struct perf_branch_entry)
+// return entry_cnt * sizeof!(perf_branch_entry)
     insn_buf[6] = BPF_ALU32_IMM(BPF_MUL, BPF_REG_0, br_entry_size);
     insn_buf[7] = BPF_JMP_A(3);
 // return -EINVAL;
@@ -2166,12 +2523,13 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
     insn_buf[10] = BPF_MOV64_IMM(BPF_REG_0, -ENOENT);
     cnt = 11;
     new_prog = bpf_patch_insn_data(env, i + delta, insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     delta    += cnt - 1;
     env.prog = prog = new_prog;
     insn      = new_prog.insnsi + i + delta;
-    goto next_insn;
+// goto;
     }
 // Implement bpf_kptr_xchg inline
     if (prog.jit_requested && BITS_PER_LONG == 64 &&
@@ -2181,14 +2539,15 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
     insn_buf[1] = BPF_ATOMIC_OP(BPF_DW, BPF_XCHG, BPF_REG_1, BPF_REG_0, 0);
     cnt = 2;
     new_prog = bpf_patch_insn_data(env, i + delta, insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     delta    += cnt - 1;
     env.prog = prog = new_prog;
     insn      = new_prog.insnsi + i + delta;
-    goto next_insn;
+// goto;
     }
-    patch_call_imm:
+// label;
     fn = env.ops.get_func_proto(insn.imm, env.prog);
 // all functions that have prototype and verifier allowed
 // programs to call them, must be real in-kernel functions
@@ -2200,7 +2559,7 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
     return -EFAULT;
     }
     insn.imm = BPF_CALL_IMM(fn.func);
-    next_insn:
+// label;
     if (subprogs[cur_subprog + 1].start == i + delta + 1) {
     subprogs[cur_subprog].stack_depth += stack_depth_extra;
     subprogs[cur_subprog].stack_extra = stack_depth_extra;
@@ -2210,21 +2569,22 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
     stack_depth, stack_depth_extra);
     return -EINVAL;
     }
-    cur_subprog++;
+    cur_subprog += 1;
     stack_depth = subprogs[cur_subprog].stack_depth;
     stack_depth_extra = 0;
     }
-    i++;
-    insn++;
+    i += 1;
+    insn += 1;
     }
     env.prog.aux.stack_depth = subprogs[0].stack_depth;
-    for (i = 0; i < env.subprog_cnt; i++) {
-    let mut delta: c_int = bpf_jit_supports_timed_may_goto() ? 2 : 1;
-    let mut subprog_start: c_int = subprogs[i].start;
-    let mut stack_slots: c_int = subprogs[i].stack_extra / 8;
-    let mut slots: c_int = delta, cnt = 0;
-    if (!stack_slots)
+    while (i < env.subprog_cnt) {
+pub static mut delta: c_int = 0;
+pub static mut subprog_start: c_int = 0;
+pub static mut stack_slots: c_int = 0;
+pub static mut slots: c_int = 0;
+    if (!stack_slots) {
     continue;
+    }
 // We need two slots in case timed may_goto is supported.
     if (stack_slots > slots) {
     verifier_bug(env, "stack_slots supports may_goto only");
@@ -2243,8 +2603,9 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
 // Copy first actual insn to preserve it
     insn_buf[cnt++] = env.prog.insnsi[subprog_start];
     new_prog = bpf_patch_insn_data(env, subprog_start, insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     env.prog = prog = new_prog;
 //
 // If may_goto is a first insn of a prog there could be a jmp
@@ -2252,10 +2613,10 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
 // to insn after BPF_ST that inits may_goto count.
 // Adjustment will succeed because bpf_patch_insn_data() didn't fail.
 //
-    WARN_ON(adjust_jmp_off(env.prog, subprog_start, delta));
+    WARN_ON!(adjust_jmp_off(env.prog, subprog_start, delta));
     }
 // Since poke tab is now finalized, publish aux to tracker.
-    for (i = 0; i < prog.aux.size_poke_tab; i++) {
+    while (i < prog.aux.size_poke_tab) {
     map_ptr = prog.aux.poke_tab[i].tail_call.map;
     if (!map_ptr.ops.map_poke_track ||
     !map_ptr.ops.map_poke_untrack ||
@@ -2270,28 +2631,25 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
     }
     }
     ret = sort_kfunc_descs_by_imm_off(env);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     return 0;
     }
-    static struct bpf_prog *inline_bpf_loop(struct bpf_verifier_env *env,
-    int position,
-    s32 stack_base,
-    u32 callback_subprogno,
-    u32 *total_cnt)
-    {
-    let mut r6_offset: i32 = stack_base + 0 * BPF_REG_SIZE;
-    let mut r7_offset: i32 = stack_base + 1 * BPF_REG_SIZE;
-    let mut r8_offset: i32 = stack_base + 2 * BPF_REG_SIZE;
-    let mut reg_loop_max: c_int = BPF_REG_6;
-    let mut reg_loop_cnt: c_int = BPF_REG_7;
-    let mut reg_loop_ctx: c_int = BPF_REG_8;
-    struct bpf_insn *insn_buf = env.insn_buf;
-    struct bpf_prog *new_prog;
-    u32 callback_start;
-    u32 call_insn_offset;
-    s32 callback_offset;
-    let mut cnt: u32 = 0;
+#[no_mangle]
+pub unsafe extern "C" fn inline_bpf_loop(env: *mut bpf_verifier_env, position: c_int, stack_base: s32, callback_subprogno: u32, total_cnt: *mut u32) -> *mut c_void {
+pub static mut r6_offset: i32 = 0;
+pub static mut r7_offset: i32 = 0;
+pub static mut r8_offset: i32 = 0;
+pub static mut reg_loop_max: c_int = 0;
+pub static mut reg_loop_cnt: c_int = 0;
+pub static mut reg_loop_ctx: c_int = 0;
+    let mut insn_buf = env.insn_buf;
+pub static mut new_prog: *mut c_void = core::ptr::null_mut();
+    let mut callback_start = 0;
+    let mut call_insn_offset = 0;
+    let mut callback_offset = 0;
+pub static mut cnt: u32 = 0;
 // This represents an inlined version of bpf_iter.c:bpf_loop,
 // be careful to modify this code in sync.
 //
@@ -2333,8 +2691,9 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
     insn_buf[cnt++] = BPF_LDX_MEM(BPF_DW, BPF_REG_8, BPF_REG_10, r8_offset);
 // total_cnt = cnt;
     new_prog = bpf_patch_insn_data(env, position, insn_buf, cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return new_prog;
+    }
 // callback start is known only after patching
     callback_start = env.subprog_info[callback_subprogno].start;
 // Note: insn_buf[12] is an offset of BPF_CALL_REL instruction
@@ -2345,8 +2704,6 @@ pub unsafe extern "C" fn bpf_do_misc_fixups(env: *mut bpf_verifier_env) -> c_int
     }
 #[no_mangle]
 unsafe extern "C" fn is_bpf_loop_call(insn: *mut bpf_insn) -> bool {
-    static bool is_bpf_loop_call(struct bpf_insn *insn)
-    {
     return insn.code == (BPF_JMP | BPF_CALL) &&
     insn.src_reg == 0 &&
     insn.imm == BPF_FUNC_loop;
@@ -2362,35 +2719,33 @@ unsafe extern "C" fn is_bpf_loop_call(insn: *mut bpf_insn) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn bpf_optimize_bpf_loop(env: *mut bpf_verifier_env) -> c_int {
-    int bpf_optimize_bpf_loop(struct bpf_verifier_env *env)
-    {
-    struct bpf_subprog_info *subprogs = env.subprog_info;
+    let mut subprogs = env.subprog_info;
     int i, cur_subprog = 0, cnt, delta = 0;
-    struct bpf_insn *insn = env.prog.insnsi;
-    let mut insn_cnt: c_int = env.prog.len;
-    let mut stack_depth: u16 = subprogs[cur_subprog].stack_depth;
-    let mut stack_depth_roundup: u16 = round_up(stack_depth, 8) - stack_depth;
-    let mut stack_depth_extra: u16 = 0;
-    for (i = 0; i < insn_cnt; i++, insn++) {
-    struct bpf_loop_inline_state *inline_state =
-    &env.insn_aux_data[i + delta].loop_inline_state;
+    let mut insn = env.prog.insnsi;
+pub static mut insn_cnt: c_int = 0;
+pub static mut stack_depth: u16 = 0;
+pub static mut stack_depth_roundup: u16 = 0;
+pub static mut stack_depth_extra: u16 = 0;
+    while (i < insn_cnt) {
+    let mut inline_state = &env.insn_aux_data[i + delta].loop_inline_state;
     if (is_bpf_loop_call(insn) && inline_state.fit_for_inline) {
-    struct bpf_prog *new_prog;
+pub static mut new_prog: *mut c_void = core::ptr::null_mut();
     stack_depth_extra = BPF_REG_SIZE * 3 + stack_depth_roundup;
     new_prog = inline_bpf_loop(env,
     i + delta,
     -(stack_depth + stack_depth_extra),
     inline_state.callback_subprogno,
     &cnt);
-    if (!new_prog)
+    if (!new_prog) {
     return -ENOMEM;
+    }
     delta     += cnt - 1;
     env.prog  = new_prog;
     insn       = new_prog.insnsi + i + delta;
     }
     if (subprogs[cur_subprog + 1].start == i + delta + 1) {
     subprogs[cur_subprog].stack_depth += stack_depth_extra;
-    cur_subprog++;
+    cur_subprog += 1;
     stack_depth = subprogs[cur_subprog].stack_depth;
     stack_depth_roundup = round_up(stack_depth, 8) - stack_depth;
     stack_depth_extra = 0;
@@ -2404,29 +2759,29 @@ pub unsafe extern "C" fn bpf_optimize_bpf_loop(env: *mut bpf_verifier_env) -> c_
 //
 #[no_mangle]
 pub unsafe extern "C" fn bpf_remove_fastcall_spills_fills(env: *mut bpf_verifier_env) -> c_int {
-    int bpf_remove_fastcall_spills_fills(struct bpf_verifier_env *env)
-    {
-    struct bpf_subprog_info *subprog = env.subprog_info;
-    struct bpf_insn_aux_data *aux = env.insn_aux_data;
-    struct bpf_insn *insn = env.prog.insnsi;
-    let mut insn_cnt: c_int = env.prog.len;
-    u32 spills_num;
-    let mut modified: bool = false;
-    int i, j;
-    for (i = 0; i < insn_cnt; i++, insn++) {
+    let mut subprog = env.subprog_info;
+    let mut aux = env.insn_aux_data;
+    let mut insn = env.prog.insnsi;
+pub static mut insn_cnt: c_int = 0;
+    let mut spills_num = 0;
+pub static mut modified: bool = false;
+    let mut i = 0;
+    let mut j = 0;
+    while (i < insn_cnt) {
     if (aux[i].fastcall_spills_num > 0) {
     spills_num = aux[i].fastcall_spills_num;
 // NOPs would be removed by opt_remove_nops()
-    for (j = 1; j <= spills_num; ++j) {
+    while (j <= spills_num) {
 // (insn - j) = NOP;
 // (insn + j) = NOP;
     }
     modified = true;
     }
     if ((subprog + 1).start == i + 1) {
-    if (modified && !subprog.keep_fastcall_stack)
+    if (modified && !subprog.keep_fastcall_stack) {
     subprog.stack_depth = -subprog.fastcall_stack_off;
-    subprog++;
+    }
+    subprog += 1;
     modified = false;
     }
     }

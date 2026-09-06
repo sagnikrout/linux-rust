@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -172,10 +422,10 @@ pub const FGRAPH_DATA_INDEX_BITS: c_int = 4;
 // ret_stack to store task specific state.
 //
 
-    ((unsigned long *)(&(ret_stack)[SHADOW_STACK_OFFSET - FGRAPH_ARRAY_SIZE]))
-    DEFINE_STATIC_KEY_FALSE(kill_ftrace_graph);
-    int ftrace_graph_active;
-    static struct kmem_cache *fgraph_stack_cachep;
+    ((&(ret_stack)[SHADOW_STACK_OFFSET - FGRAPH_ARRAY_SIZE]))
+pub static mut kill_ftrace_graph: usize = 0;
+    let mut ftrace_graph_active = 0;
+pub static mut fgraph_stack_cachep: *mut c_void = core::ptr::null_mut();
     static struct fgraph_ops *fgraph_array[FGRAPH_ARRAY_SIZE];
     static unsigned long fgraph_array_bitmask;
 // LRU index table for fgraph_array
@@ -185,20 +435,18 @@ pub const FGRAPH_DATA_INDEX_BITS: c_int = 4;
 // Initialize fgraph_lru_table with unused index
 #[no_mangle]
 unsafe extern "C" fn fgraph_lru_init() {
-    static void fgraph_lru_init(void)
-    {
-    int i;
-    for (i = 0; i < FGRAPH_ARRAY_SIZE; i++)
+    let mut i = 0;
+    for (i = 0; i < FGRAPH_ARRAY_SIZE; i++) {
     fgraph_lru_table[i] = i;
+    }
     }
 // Release the used index to the LRU table
 #[no_mangle]
 unsafe extern "C" fn fgraph_lru_release_index(idx: c_int) -> c_int {
-    static int fgraph_lru_release_index(int idx)
-    {
     if (idx < 0 || idx >= FGRAPH_ARRAY_SIZE ||
-    WARN_ON_ONCE(fgraph_lru_table[fgraph_lru_last] != -1))
+    WARN_ON_ONCE!(fgraph_lru_table[fgraph_lru_last] != -1)) {
     return -1;
+    }
     fgraph_lru_table[fgraph_lru_last] = idx;
     fgraph_lru_last = (fgraph_lru_last + 1) % FGRAPH_ARRAY_SIZE;
     clear_bit(idx, &fgraph_array_bitmask);
@@ -207,12 +455,11 @@ unsafe extern "C" fn fgraph_lru_release_index(idx: c_int) -> c_int {
 // Allocate a new index from LRU table
 #[no_mangle]
 unsafe extern "C" fn fgraph_lru_alloc_index() -> c_int {
-    static int fgraph_lru_alloc_index(void)
-    {
-    let mut idx: c_int = fgraph_lru_table[fgraph_lru_next];
+pub static mut idx: c_int = 0;
 // No id is available
-    if (idx == -1)
+    if (idx == -1) {
     return -1;
+    }
     fgraph_lru_table[fgraph_lru_next] = -1;
     fgraph_lru_next = (fgraph_lru_next + 1) % FGRAPH_ARRAY_SIZE;
     set_bit(idx, &fgraph_array_bitmask);
@@ -221,106 +468,84 @@ unsafe extern "C" fn fgraph_lru_alloc_index() -> c_int {
 // Get the offset to the fgraph frame from a ret_stack value
 #[no_mangle]
 pub unsafe extern "C" fn __get_offset(val: c_ulong) -> c_int {
-    static inline int __get_offset(unsigned long val)
-    {
     return val & FGRAPH_FRAME_OFFSET_MASK;
     }
 // Get the type of word from a ret_stack value
 #[no_mangle]
 pub unsafe extern "C" fn __get_type(val: c_ulong) -> c_int {
-    static inline int __get_type(unsigned long val)
-    {
     return (val >> FGRAPH_TYPE_SHIFT) & FGRAPH_TYPE_MASK;
     }
 // Get the data_index for a DATA type ret_stack word
 #[no_mangle]
 pub unsafe extern "C" fn __get_data_index(val: c_ulong) -> c_int {
-    static inline int __get_data_index(unsigned long val)
-    {
     return (val >> FGRAPH_DATA_INDEX_SHIFT) & FGRAPH_DATA_INDEX_MASK;
     }
 // Get the data_size for a DATA type ret_stack word
 #[no_mangle]
 pub unsafe extern "C" fn __get_data_size(val: c_ulong) -> c_int {
-    static inline int __get_data_size(unsigned long val)
-    {
     return ((val >> FGRAPH_DATA_SHIFT) & FGRAPH_DATA_MASK) + 1;
     }
 // Get the word from the ret_stack at @offset
 #[no_mangle]
 pub unsafe extern "C" fn get_fgraph_entry(t: *mut task_struct, offset: c_int) -> c_ulong {
-    static inline unsigned long get_fgraph_entry(struct task_struct *t, int offset)
-    {
     return t.ret_stack[offset];
     }
 // Get the FRAME_OFFSET from the word from the @offset on ret_stack
 #[no_mangle]
 pub unsafe extern "C" fn get_frame_offset(t: *mut task_struct, offset: c_int) -> c_int {
-    static inline int get_frame_offset(struct task_struct *t, int offset)
-    {
     return __get_offset(t.ret_stack[offset]);
     }
 // For BITMAP type: get the bitmask from the @offset at ret_stack
-    static inline unsigned long
-    get_bitmap_bits(struct task_struct *t, int offset)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn get_bitmap_bits(t: *mut task_struct, offset: c_int) -> c_ulong {
     return (t.ret_stack[offset] >> FGRAPH_INDEX_SHIFT) & FGRAPH_INDEX_MASK;
     }
 // Write the bitmap to the ret_stack at @offset (does index, offset and bitmask)
-    static inline void
-    set_bitmap(struct task_struct *t, int offset, unsigned long bitmap)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn set_bitmap(t: *mut task_struct, offset: c_int, bitmap: c_ulong) {
     t.ret_stack[offset] = (bitmap << FGRAPH_INDEX_SHIFT) |
     (FGRAPH_TYPE_BITMAP << FGRAPH_TYPE_SHIFT) | FGRAPH_FRAME_OFFSET;
     }
 // For DATA type: get the data saved under the ret_stack word at @offset
-    static inline void *get_data_type_data(struct task_struct *t, int offset)
-    {
-    let mut val: c_ulong = t.ret_stack[offset];
-    if (__get_type(val) != FGRAPH_TYPE_DATA)
+#[no_mangle]
+pub unsafe extern "C" fn get_data_type_data(t: *mut task_struct, offset: c_int) -> *mut c_void {
+pub static mut val: c_ulong = 0;
+    if (__get_type(val) != FGRAPH_TYPE_DATA) {
     return core::ptr::null_mut();
+    }
     offset -= __get_data_size(val);
-    return (void *)&t.ret_stack[offset];
+    return &t.ret_stack[offset];
     }
 // Create the ret_stack word for a DATA type
 #[no_mangle]
 pub unsafe extern "C" fn make_data_type_val(idx: c_int, size: c_int, offset: c_int) -> c_ulong {
-    static inline unsigned long make_data_type_val(int idx, int size, int offset)
-    {
     return (idx << FGRAPH_DATA_INDEX_SHIFT) |
     ((size - 1) << FGRAPH_DATA_SHIFT) |
     (FGRAPH_TYPE_DATA << FGRAPH_TYPE_SHIFT) | offset;
     }
 // ftrace_graph_entry set to this to tell some archs to run function graph
-    static int entry_run(struct ftrace_graph_ent *trace, struct fgraph_ops *ops,
-    struct ftrace_regs *fregs)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn entry_run(trace: *mut ftrace_graph_ent, ops: *mut fgraph_ops, fregs: *mut ftrace_regs) -> c_int {
     return 0;
     }
 // ftrace_graph_return set to this to tell some archs to run function graph
-    static void return_run(struct ftrace_graph_ret *trace, struct fgraph_ops *ops,
-    struct ftrace_regs *fregs)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn return_run(trace: *mut ftrace_graph_ret, ops: *mut fgraph_ops, fregs: *mut ftrace_regs) {
     }
 #[no_mangle]
 unsafe extern "C" fn ret_stack_set_task_var(t: *mut task_struct, idx: c_int, val: c_long) {
-    static void ret_stack_set_task_var(struct task_struct *t, int idx, long val)
-    {
-    unsigned long *gvals = SHADOW_STACK_TASK_VARS(t.ret_stack);
+    let mut gvals = SHADOW_STACK_TASK_VARS(t.ret_stack);
     gvals[idx] = val;
     }
-    static unsigned long *
-    ret_stack_get_task_var(struct task_struct *t, int idx)
-    {
-    unsigned long *gvals = SHADOW_STACK_TASK_VARS(t.ret_stack);
+#[no_mangle]
+pub unsafe extern "C" fn ret_stack_get_task_var(t: *mut task_struct, idx: c_int) -> *mut c_void {
+    let mut gvals = SHADOW_STACK_TASK_VARS(t.ret_stack);
     return &gvals[idx];
     }
 #[no_mangle]
 unsafe extern "C" fn ret_stack_init_task_vars(ret_stack: *mut c_ulong) {
-    static void ret_stack_init_task_vars(unsigned long *ret_stack)
-    {
-    unsigned long *gvals = SHADOW_STACK_TASK_VARS(ret_stack);
-    memset(gvals, 0, sizeof(*gvals) * FGRAPH_ARRAY_SIZE);
+    let mut gvals = SHADOW_STACK_TASK_VARS(ret_stack);
+    memset(gvals, 0, sizeof!(*gvals) * FGRAPH_ARRAY_SIZE);
     }
 //
 // fgraph_reserve_data - Reserve storage on the task's ret_stack
@@ -339,21 +564,23 @@ unsafe extern "C" fn ret_stack_init_task_vars(ret_stack: *mut c_ulong) {
 // ret_stack for the data, or if fgraph_reserve_data() was called
 // more than once for a single entryfunc() call.
 //
-    void *fgraph_reserve_data(int idx, int size_bytes)
-    {
-    unsigned long val;
-    void *data;
-    let mut curr_ret_stack: c_int = current.curr_ret_stack;
-    int data_size;
-    if (size_bytes > FGRAPH_MAX_DATA_SIZE)
+#[no_mangle]
+pub unsafe extern "C" fn fgraph_reserve_data(idx: c_int, size_bytes: c_int) -> *mut c_void {
+    let mut val = 0;
+pub static mut data: *mut c_void = core::ptr::null_mut();
+pub static mut curr_ret_stack: c_int = 0;
+    let mut data_size = 0;
+    if (size_bytes > FGRAPH_MAX_DATA_SIZE) {
     return core::ptr::null_mut();
+    }
 // Convert the data size to number of longs.
-    data_size = (size_bytes + sizeof(long) - 1) >> (sizeof(long) == 4 ? 2 : 3);
+    data_size = (size_bytes + sizeof!(long) - 1) >> (sizeof!(long) == 4 ? 2 : 3);
     val = get_fgraph_entry(current, curr_ret_stack - 1);
     data = &current.ret_stack[curr_ret_stack];
     curr_ret_stack += data_size + 1;
-    if (unlikely(curr_ret_stack >= SHADOW_STACK_MAX_OFFSET))
+    if (unlikely(curr_ret_stack >= SHADOW_STACK_MAX_OFFSET)) {
     return core::ptr::null_mut();
+    }
     val = make_data_type_val(idx, data_size, __get_offset(val) + data_size + 1);
 // Set the last word to be reserved
     current.ret_stack[curr_ret_stack - 1] = val;
@@ -379,8 +606,8 @@ unsafe extern "C" fn ret_stack_init_task_vars(ret_stack: *mut c_ulong) {
 // matching entryfunc() for the retfunc() this is called from.
 // Or NULL if there was nothing stored.
 //
-    void *fgraph_retrieve_data(int idx, int *size_bytes)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn fgraph_retrieve_data(idx: c_int, size_bytes: *mut c_int) -> *mut c_void {
     return fgraph_retrieve_parent_data(idx, size_bytes, 0);
     }
 //
@@ -394,8 +621,8 @@ unsafe extern "C" fn ret_stack_init_task_vars(ret_stack: *mut c_ulong) {
 // Returns the address to the fgraph_ops @gops tasks specific
 // unsigned long variable.
 //
-    unsigned long *fgraph_get_task_var(struct fgraph_ops *gops)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn fgraph_get_task_var(gops: *mut fgraph_ops) -> *mut c_void {
     return ret_stack_get_task_var(current, gops.idx);
     }
 //
@@ -415,16 +642,17 @@ unsafe extern "C" fn ret_stack_init_task_vars(ret_stack: *mut c_ulong) {
 // Will iterate through all the ret_stack entries from curr_ret_stack
 // down to the first one.
 //
-    static inline struct ftrace_ret_stack *
-    get_ret_stack(struct task_struct *t, int offset, int *frame_offset)
-    {
-    int offs;
-    BUILD_BUG_ON(FGRAPH_FRAME_SIZE % sizeof(long));
-    if (unlikely(offset <= 0))
+#[no_mangle]
+pub unsafe extern "C" fn get_ret_stack(t: *mut task_struct, offset: c_int, frame_offset: *mut c_int) -> *mut c_void {
+    let mut offs = 0;
+    BUILD_BUG_ON!(FGRAPH_FRAME_SIZE % sizeof!(long));
+    if (unlikely(offset <= 0)) {
     return core::ptr::null_mut();
+    }
     offs = get_frame_offset(t, --offset);
-    if (WARN_ON_ONCE(offs <= 0 || offs > offset))
+    if (WARN_ON_ONCE!(offs <= 0 || offs > offset)) {
     return core::ptr::null_mut();
+    }
     offset -= offs;
 // frame_offset = offset;
     return RET_STACK(t, offset);
@@ -440,34 +668,39 @@ unsafe extern "C" fn ret_stack_init_task_vars(ret_stack: *mut c_ulong) {
 //
 // Return: a pointer to the specified parent data or NULL if not found
 //
-    void *fgraph_retrieve_parent_data(int idx, int *size_bytes, int depth)
-    {
-    struct ftrace_ret_stack *ret_stack = core::ptr::null_mut();
-    let mut offset: c_int = current.curr_ret_stack;
-    unsigned long val;
-    if (offset <= 0)
+#[no_mangle]
+pub unsafe extern "C" fn fgraph_retrieve_parent_data(idx: c_int, size_bytes: *mut c_int, depth: c_int) -> *mut c_void {
+    let mut ret_stack = core::ptr::null_mut();
+pub static mut offset: c_int = 0;
+    let mut val = 0;
+    if (offset <= 0) {
     return core::ptr::null_mut();
+    }
     for (;;) {
-    int next_offset;
+    let mut next_offset = 0;
     ret_stack = get_ret_stack(current, offset, &next_offset);
-    if (!ret_stack || --depth < 0)
+    if (!ret_stack || --depth < 0) {
     break;
+    }
     offset = next_offset;
     }
-    if (!ret_stack)
+    if (!ret_stack) {
     return core::ptr::null_mut();
-    offset--;
+    }
+    offset -= 1;
     val = get_fgraph_entry(current, offset);
     while (__get_type(val) == FGRAPH_TYPE_DATA) {
-    if (__get_data_index(val) == idx)
-    goto found;
+    if (__get_data_index(val) == idx) {
+// goto;
+    }
     offset -= __get_data_size(val) + 1;
     val = get_fgraph_entry(current, offset);
     }
     return core::ptr::null_mut();
-    found:
-    if (size_bytes)
-// size_bytes = __get_data_size(val) * sizeof(long);
+// label;
+    if (size_bytes) {
+// size_bytes = __get_data_size(val) * sizeof!(long);
+    }
     return get_data_type_data(current, offset);
     }
 
@@ -477,8 +710,6 @@ unsafe extern "C" fn ret_stack_init_task_vars(ret_stack: *mut c_ulong) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_enable_ftrace_graph_caller() -> int __weak {
-    int __weak ftrace_enable_ftrace_graph_caller(void)
-    {
     return 0;
     }
 //
@@ -487,33 +718,24 @@ pub unsafe extern "C" fn ftrace_enable_ftrace_graph_caller() -> int __weak {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_disable_ftrace_graph_caller() -> int __weak {
-    int __weak ftrace_disable_ftrace_graph_caller(void)
-    {
     return 0;
     }
 
-    int ftrace_graph_entry_stub(struct ftrace_graph_ent *trace,
-    struct fgraph_ops *gops,
-    struct ftrace_regs *fregs)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_graph_entry_stub(trace: *mut ftrace_graph_ent, gops: *mut fgraph_ops, fregs: *mut ftrace_regs) -> c_int {
     return 0;
     }
-    static void ftrace_graph_ret_stub(struct ftrace_graph_ret *trace,
-    struct fgraph_ops *gops,
-    struct ftrace_regs *fregs)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_graph_ret_stub(trace: *mut ftrace_graph_ret, gops: *mut fgraph_ops, fregs: *mut ftrace_regs) {
     }
-    static struct fgraph_ops fgraph_stub = {
-    .entryfunc = ftrace_graph_entry_stub,
-    .retfunc = ftrace_graph_ret_stub,
-    };
+pub static mut fgraph_ops: usize = 0;
     static struct fgraph_ops *fgraph_direct_gops = &fgraph_stub;
-    DEFINE_STATIC_CALL(fgraph_func, ftrace_graph_entry_stub);
-    DEFINE_STATIC_CALL(fgraph_retfunc, ftrace_graph_ret_stub);
+pub static mut fgraph_func: usize = 0;
+pub static mut fgraph_retfunc: usize = 0;
 
-    static DEFINE_STATIC_KEY_FALSE(fgraph_do_direct);
+pub static mut fgraph_do_direct: usize = 0;
 
-    static DEFINE_STATIC_KEY_TRUE(fgraph_do_direct);
+pub static mut fgraph_do_direct: usize = 0;
 
 //
 // ftrace_graph_stop - set to permanently disable function graph tracing
@@ -525,24 +747,21 @@ pub unsafe extern "C" fn ftrace_disable_ftrace_graph_caller() -> int __weak {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_graph_stop() {
-    void ftrace_graph_stop(void)
-    {
     static_branch_enable(&kill_ftrace_graph);
     }
 // Add a function return address to the trace stack on thread info.
-    static int
-    ftrace_push_return_trace(unsigned long ret, unsigned long func,
-    unsigned long frame_pointer, unsigned long *retp,
-    int fgraph_idx)
-    {
-    struct ftrace_ret_stack *ret_stack;
-    unsigned long val;
-    int offset;
-    if (unlikely(ftrace_graph_is_dead()))
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_push_return_trace(ret: c_ulong, func: c_ulong, frame_pointer: c_ulong, retp: *mut c_ulong, fgraph_idx: c_int) -> c_int {
+pub static mut ret_stack: *mut c_void = core::ptr::null_mut();
+    let mut val = 0;
+    let mut offset = 0;
+    if (unlikely(ftrace_graph_is_dead())) {
     return -EBUSY;
-    if (!current.ret_stack)
+    }
+    if (!current.ret_stack) {
     return -EBUSY;
-    BUILD_BUG_ON(SHADOW_STACK_SIZE % sizeof(long));
+    }
+    BUILD_BUG_ON!(SHADOW_STACK_SIZE % sizeof!(long));
 // Set val to "reserved" with the delta to the new fgraph frame
     val = (FGRAPH_TYPE_RESERVED << FGRAPH_TYPE_SHIFT) | FGRAPH_FRAME_OFFSET;
 //
@@ -604,51 +823,58 @@ pub unsafe extern "C" fn ftrace_graph_stop() {
 // Make sure this only works without direct calls
 
 // If the caller does not use ftrace, call this function.
-    int function_graph_enter_regs(unsigned long ret, unsigned long func,
-    unsigned long frame_pointer, unsigned long *retp,
-    struct ftrace_regs *fregs)
-    {
-    struct ftrace_graph_ent trace;
-    let mut bitmap: c_ulong = 0;
-    int offset;
-    int bit;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn function_graph_enter_regs(ret: c_ulong, func: c_ulong, frame_pointer: c_ulong, retp: *mut c_ulong, fregs: *mut ftrace_regs) -> c_int {
+pub static mut trace: usize = 0;
+pub static mut bitmap: c_ulong = 0;
+    let mut offset = 0;
+    let mut bit = 0;
+    let mut i = 0;
     bit = ftrace_test_recursion_trylock(func, ret);
-    if (bit < 0)
+    if (bit < 0) {
     return -EBUSY;
+    }
     trace.func = func;
     trace.depth = ++current.curr_ret_depth;
     offset = ftrace_push_return_trace(ret, func, frame_pointer, retp, 0);
-    if (offset < 0)
-    goto out;
+    if (offset < 0) {
+// goto;
+    }
 
     if (static_branch_likely(&fgraph_do_direct)) {
-    let mut save_curr_ret_stack: c_int = current.curr_ret_stack;
-    if (static_call(fgraph_func)(&trace, fgraph_direct_gops, fregs))
+pub static mut save_curr_ret_stack: c_int = 0;
+    if (static_call(fgraph_func)(&trace, fgraph_direct_gops, fregs)) {
     bitmap |= BIT(fgraph_direct_gops.idx);
-    else
+    }
+    else {
 // Clear out any saved storage
     current.curr_ret_stack = save_curr_ret_stack;
-    } else
+    }
+    } else {
 
     {
+    }
     for_each_set_bit(i, &fgraph_array_bitmask,
-    sizeof(fgraph_array_bitmask) * BITS_PER_BYTE) {
-    struct fgraph_ops *gops = READ_ONCE(fgraph_array[i]);
-    int save_curr_ret_stack;
-    if (gops == &fgraph_stub)
+    sizeof!(fgraph_array_bitmask) * BITS_PER_BYTE) {
+    let mut gops = READ_ONCE(fgraph_array[i]);
+    let mut save_curr_ret_stack = 0;
+    if (gops == &fgraph_stub) {
     continue;
+    }
     save_curr_ret_stack = current.curr_ret_stack;
     if (ftrace_ops_test(&gops.ops, func, core::ptr::null_mut()) &&
-    gops.entryfunc(&trace, gops, fregs))
+    gops.entryfunc(&trace, gops, fregs)) {
     bitmap |= BIT(i);
-    else
+    }
+    else {
 // Clear out any saved storage
     current.curr_ret_stack = save_curr_ret_stack;
     }
     }
-    if (!bitmap)
-    goto out_ret;
+    }
+    if (!bitmap) {
+// goto;
+    }
 //
 // Since this function uses fgraph_idx = 0 as a tail-call checking
 // flag, set that bit always.
@@ -656,19 +882,17 @@ pub unsafe extern "C" fn ftrace_graph_stop() {
     set_bitmap(current, offset, bitmap | BIT(0));
     ftrace_test_recursion_unlock(bit);
     return 0;
-    out_ret:
+// label;
     current.curr_ret_stack -= FGRAPH_FRAME_OFFSET + 1;
-    out:
-    current.curr_ret_depth--;
+// label;
+    current.curr_ret_depth -= 1;
     ftrace_test_recursion_unlock(bit);
     return -EBUSY;
     }
 // Retrieve a function return address to the trace stack on thread info.
-    static struct ftrace_ret_stack *
-    ftrace_pop_return_trace(struct ftrace_graph_ret *trace, unsigned long *ret,
-    unsigned long frame_pointer, int *offset)
-    {
-    struct ftrace_ret_stack *ret_stack;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_pop_return_trace(trace: *mut ftrace_graph_ret, ret: *mut c_ulong, frame_pointer: c_ulong, offset: *mut c_int) -> *mut c_void {
+pub static mut ret_stack: *mut c_void = core::ptr::null_mut();
     ret_stack = get_ret_stack(current, current.curr_ret_stack, offset);
     if (unlikely(!ret_stack)) {
     ftrace_graph_stop();
@@ -699,7 +923,7 @@ pub unsafe extern "C" fn ftrace_graph_stop() {
     "  from func %ps return to %lx\n",
     ret_stack.fp,
     frame_pointer,
-    (void *)ret_stack.func,
+    ret_stack.func,
     ret_stack.ret);
 // ret = (unsigned long)panic;
     return core::ptr::null_mut();
@@ -723,74 +947,76 @@ pub unsafe extern "C" fn ftrace_graph_stop() {
 // The state of the current task is too much unstable during
 // suspend/restore to disk. We want to protect against that.
 //
-    static int
-    ftrace_suspend_notifier_call(struct notifier_block *bl, unsigned long state,
-    void *unused)
-    {
-    switch (state) {
-    case PM_HIBERNATION_PREPARE:
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_suspend_notifier_call(bl: *mut notifier_block, state: c_ulong, unused: *mut c_void) -> c_int {
+    match (state) {
+    PM_HIBERNATION_PREPARE => {
     pause_graph_tracing();
-    break;
-    case PM_POST_HIBERNATION:
+    // break;
+    }
+    PM_POST_HIBERNATION => {
     unpause_graph_tracing();
-    break;
+    // break;
+    }
     }
     return NOTIFY_DONE;
     }
-    static struct notifier_block ftrace_suspend_notifier = {
-    .notifier_call = ftrace_suspend_notifier_call,
-    };
+pub static mut notifier_block: usize = 0;
 //
 // Send the trace to the ring-buffer.
 // @return the original return address.
 //
-    static inline unsigned long
-    __ftrace_return_to_handler(struct ftrace_regs *fregs, unsigned long frame_pointer)
-    {
-    struct ftrace_ret_stack *ret_stack;
-    struct ftrace_graph_ret trace;
-    unsigned long bitmap;
-    unsigned long ret;
-    int offset;
-    int bit;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn __ftrace_return_to_handler(fregs: *mut ftrace_regs, frame_pointer: c_ulong) -> c_ulong {
+pub static mut ret_stack: *mut c_void = core::ptr::null_mut();
+pub static mut trace: usize = 0;
+    let mut bitmap = 0;
+    let mut ret = 0;
+    let mut offset = 0;
+    let mut bit = 0;
+    let mut i = 0;
     ret_stack = ftrace_pop_return_trace(&trace, &ret, frame_pointer, &offset);
     if (unlikely(!ret_stack)) {
     ftrace_graph_stop();
-    WARN_ON(1);
+    WARN_ON!(1);
 // Might as well panic. What else to do?
     return (unsigned long)panic;
     }
-    if (fregs)
+    if (fregs) {
     ftrace_regs_set_instruction_pointer(fregs, ret);
+    }
     bit = ftrace_test_recursion_trylock(trace.func, ret);
 //
 // This can fail because ftrace_test_recursion_trylock() allows one nest
 // call. If we are already in a nested call, then we don't probe this and
 // just return the original return address.
 //
-    if (unlikely(bit < 0))
-    goto out;
+    if (unlikely(bit < 0)) {
+// goto;
+    }
 
     trace.retval = ftrace_regs_get_return_value(fregs);
 
     bitmap = get_bitmap_bits(current, offset);
 
     if (!FGRAPH_NO_DIRECT && static_branch_likely(&fgraph_do_direct)) {
-    if (test_bit(fgraph_direct_gops.idx, &bitmap))
+    if (test_bit(fgraph_direct_gops.idx, &bitmap)) {
     static_call(fgraph_retfunc)(&trace, fgraph_direct_gops, fregs);
-    } else
+    }
+    } else {
 
     {
-    for_each_set_bit(i, &bitmap, sizeof(bitmap) * BITS_PER_BYTE) {
-    struct fgraph_ops *gops = READ_ONCE(fgraph_array[i]);
-    if (gops == &fgraph_stub)
+    }
+    for_each_set_bit(i, &bitmap, sizeof!(bitmap) * BITS_PER_BYTE) {
+    let mut gops = READ_ONCE(fgraph_array[i]);
+    if (gops == &fgraph_stub) {
     continue;
+    }
     gops.retfunc(&trace, gops, fregs);
     }
     }
     ftrace_test_recursion_unlock(bit);
-    out:
+// label;
 //
 // The ftrace_graph_return() may still access the current
 // ret_stack structure, we need to make sure the update of
@@ -798,7 +1024,7 @@ pub unsafe extern "C" fn ftrace_graph_stop() {
 //
     barrier();
     current.curr_ret_stack = offset - FGRAPH_FRAME_OFFSET;
-    current.curr_ret_depth--;
+    current.curr_ret_depth -= 1;
     return ret;
     }
 //
@@ -808,16 +1034,14 @@ pub unsafe extern "C" fn ftrace_graph_stop() {
 
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_return_to_handler(fregs: *mut ftrace_regs) -> c_ulong {
-    unsigned long ftrace_return_to_handler(struct ftrace_regs *fregs)
-    {
     return __ftrace_return_to_handler(fregs,
     ftrace_regs_get_frame_pointer(fregs));
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn ftrace_return_to_handler(frame_pointer: c_ulong) -> c_ulong {
-    unsigned long ftrace_return_to_handler(unsigned long frame_pointer)
-    {
+#[no_mangle]
+// duplicate fn: ftrace_return_to_handler
+pub unsafe extern "C" fn ftrace_return_to_handler_dup(frame_pointer: c_ulong) -> c_ulong {
     return __ftrace_return_to_handler(core::ptr::null_mut(), frame_pointer);
     }
 
@@ -832,13 +1056,13 @@ pub unsafe extern "C" fn ftrace_return_to_handler(frame_pointer: c_ulong) -> c_u
 // zero, it will return the corresponding ret_stack for the depth
 // of saved return addresses.
 //
-    struct ftrace_ret_stack *
-    ftrace_graph_get_ret_stack(struct task_struct *task, int idx)
-    {
-    struct ftrace_ret_stack *ret_stack = core::ptr::null_mut();
-    let mut offset: c_int = task.curr_ret_stack;
-    if (offset < 0)
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_graph_get_ret_stack(task: *mut task_struct, idx: c_int) -> *mut c_void {
+    let mut ret_stack = core::ptr::null_mut();
+pub static mut offset: c_int = 0;
+    if (offset < 0) {
     return core::ptr::null_mut();
+    }
     do {
     ret_stack = get_ret_stack(task, offset, &offset);
     } while (ret_stack && --idx >= 0);
@@ -853,13 +1077,12 @@ pub unsafe extern "C" fn ftrace_return_to_handler(frame_pointer: c_ulong) -> c_u
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_graph_top_ret_addr(task: *mut task_struct) -> c_ulong {
-    unsigned long ftrace_graph_top_ret_addr(struct task_struct *task)
-    {
-    let mut return_handler: c_ulong = (unsigned long)dereference_kernel_function_descriptor(return_to_handler);
-    struct ftrace_ret_stack *ret_stack = core::ptr::null_mut();
-    let mut offset: c_int = task.curr_ret_stack;
-    if (offset < 0)
+pub static mut return_handler: c_ulong = 0;
+    let mut ret_stack = core::ptr::null_mut();
+pub static mut offset: c_int = 0;
+    if (offset < 0) {
     return 0;
+    }
     do {
     ret_stack = get_ret_stack(task, offset, &offset);
     } while (ret_stack && ret_stack.ret == return_handler);
@@ -885,21 +1108,23 @@ pub unsafe extern "C" fn ftrace_graph_top_ret_addr(task: *mut task_struct) -> c_
 //
 // @retp is a pointer to the return address on the stack.
 //
-    unsigned long ftrace_graph_ret_addr(struct task_struct *task, int *idx,
-    unsigned long ret, unsigned long *retp)
-    {
-    struct ftrace_ret_stack *ret_stack;
-    let mut return_handler: c_ulong = (unsigned long)dereference_kernel_function_descriptor(return_to_handler);
-    int i;
-    if (ret != return_handler)
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_graph_ret_addr(task: *mut task_struct, idx: *mut c_int, ret: c_ulong, retp: *mut c_ulong) -> c_ulong {
+pub static mut ret_stack: *mut c_void = core::ptr::null_mut();
+pub static mut return_handler: c_ulong = 0;
+    let mut i = 0;
+    if (ret != return_handler) {
     return ret;
-    if (!idx)
+    }
+    if (!idx) {
     return ret;
+    }
     i = *idx ? : task.curr_ret_stack;
     while (i > 0) {
     ret_stack = get_ret_stack(task, i, &i);
-    if (!ret_stack)
+    if (!ret_stack) {
     break;
+    }
 //
 // For the tail-call, there would be 2 or more ftrace_ret_stacks on
 // the ret_stack, which records "return_to_handler" as the return
@@ -916,17 +1141,9 @@ pub unsafe extern "C" fn ftrace_graph_top_ret_addr(task: *mut task_struct) -> c_
     }
     return ret;
     }
-    static struct ftrace_ops graph_ops = {
-    .func			= ftrace_graph_func,
-    .flags			= FTRACE_OPS_GRAPH_STUB,
-
-    .trampoline		= FTRACE_GRAPH_TRAMP_ADDR,
-// trampoline_size is only needed for dynamically allocated tramps
-
-    };
-    void fgraph_init_ops(struct ftrace_ops *dst_ops,
-    struct ftrace_ops *src_ops)
-    {
+pub static mut ftrace_ops: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn fgraph_init_ops(dst_ops: *mut ftrace_ops, src_ops: *mut ftrace_ops) {
     dst_ops.flags = FTRACE_OPS_FL_PID | FTRACE_OPS_GRAPH_STUB;
 
     if (src_ops) {
@@ -942,36 +1159,35 @@ pub unsafe extern "C" fn ftrace_graph_top_ret_addr(task: *mut task_struct) -> c_
 // Simply points to ftrace_stub, but with the proper protocol.
 // Defined by the linker script in linux/vmlinux.lds.h
 //
-    void ftrace_stub_graph(struct ftrace_graph_ret *trace, struct fgraph_ops *gops,
-    struct ftrace_regs *fregs);
+// forward_decl: ftrace_stub_graph;
 // The callbacks that hook a function
-    let mut ftrace_graph_return: trace_func_graph_ret_t = ftrace_stub_graph;
-    let mut ftrace_graph_entry: trace_func_graph_ent_t = ftrace_graph_entry_stub;
+pub static mut ftrace_graph_return: trace_func_graph_ret_t = 0;
+pub static mut ftrace_graph_entry: trace_func_graph_ent_t = 0;
 // Try to assign a return stack array on FTRACE_RETSTACK_ALLOC_SIZE tasks.
 #[no_mangle]
 unsafe extern "C" fn alloc_retstack_tasklist(ret_stack_list: *mut c_ulong) -> c_int {
-    static int alloc_retstack_tasklist(unsigned long **ret_stack_list)
-    {
-    int i;
-    let mut ret: c_int = 0;
-    let mut start: c_int = 0, end = FTRACE_RETSTACK_ALLOC_SIZE;
-    struct task_struct *g, *t;
-    if (WARN_ON_ONCE(!fgraph_stack_cachep))
+    let mut i = 0;
+pub static mut ret: c_int = 0;
+pub static mut start: c_int = 0;
+    let mut g = core::ptr::null_mut();
+    let mut t = core::ptr::null_mut();
+    if (WARN_ON_ONCE!(!fgraph_stack_cachep)) {
     return -ENOMEM;
-    for (i = 0; i < FTRACE_RETSTACK_ALLOC_SIZE; i++) {
+    }
+    while (i < FTRACE_RETSTACK_ALLOC_SIZE) {
     ret_stack_list[i] = kmem_cache_alloc(fgraph_stack_cachep, GFP_KERNEL);
     if (!ret_stack_list[i]) {
     start = 0;
     end = i;
     ret = -ENOMEM;
-    goto free;
+// goto;
     }
     }
     rcu_read_lock();
     for_each_process_thread(g, t) {
     if (start == end) {
     ret = -EAGAIN;
-    goto unlock;
+// goto;
     }
     if (t.ret_stack == core::ptr::null_mut()) {
     atomic_set(&t.trace_overrun, 0);
@@ -983,37 +1199,35 @@ unsafe extern "C" fn alloc_retstack_tasklist(ret_stack_list: *mut c_ulong) -> c_
     t.ret_stack = ret_stack_list[start++];
     }
     }
-    unlock:
+// label;
     rcu_read_unlock();
-    free:
-    for (i = start; i < end; i++)
+// label;
+    for (i = start; i < end; i++) {
     kmem_cache_free(fgraph_stack_cachep, ret_stack_list[i]);
+    }
     return ret;
     }
-    static void
-    ftrace_graph_probe_sched_switch(void *ignore, bool preempt,
-    struct task_struct *prev,
-    struct task_struct *next,
-    unsigned int prev_state)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_graph_probe_sched_switch(ignore: *mut c_void, preempt: bool, prev: *mut task_struct, next: *mut task_struct, prev_state: c_uint) {
     unsigned long long timestamp;
 //
 // Does the user want to count the time a function was asleep.
 // If so, do not update the time stamps.
 //
-    if (!fgraph_no_sleep_time)
+    if (!fgraph_no_sleep_time) {
     return;
+    }
     timestamp = trace_clock_local();
     prev.ftrace_timestamp = timestamp;
 // only process tasks that we timestamped
-    if (!next.ftrace_timestamp)
+    if (!next.ftrace_timestamp) {
     return;
+    }
     next.ftrace_sleeptime += timestamp - next.ftrace_timestamp;
     }
-    static DEFINE_PER_CPU(unsigned long *, idle_ret_stack);
-    static void
-    graph_init_task(struct task_struct *t, unsigned long *ret_stack)
-    {
+pub static mut unsigned long *: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn graph_init_task(t: *mut task_struct, ret_stack: *mut c_ulong) {
     atomic_set(&t.trace_overrun, 0);
     ret_stack_init_task_vars(ret_stack);
     t.ftrace_timestamp = 0;
@@ -1029,25 +1243,26 @@ unsafe extern "C" fn alloc_retstack_tasklist(ret_stack_list: *mut c_ulong) -> c_
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_graph_init_idle_task(t: *mut task_struct, cpu: c_int) {
-    void ftrace_graph_init_idle_task(struct task_struct *t, int cpu)
-    {
     t.curr_ret_stack = 0;
     t.curr_ret_depth = -1;
 //
 // The idle task has no parent, it either has its own
 // stack or no stack at all.
 //
-    if (t.ret_stack)
-    WARN_ON(t.ret_stack != per_cpu(idle_ret_stack, cpu));
+    if (t.ret_stack) {
+    WARN_ON!(t.ret_stack != per_cpu(idle_ret_stack, cpu));
+    }
     if (ftrace_graph_active) {
-    unsigned long *ret_stack;
-    if (WARN_ON_ONCE(!fgraph_stack_cachep))
+pub static mut ret_stack: *mut c_void = core::ptr::null_mut();
+    if (WARN_ON_ONCE!(!fgraph_stack_cachep)) {
     return;
+    }
     ret_stack = per_cpu(idle_ret_stack, cpu);
     if (!ret_stack) {
     ret_stack = kmem_cache_alloc(fgraph_stack_cachep, GFP_KERNEL);
-    if (!ret_stack)
+    if (!ret_stack) {
     return;
+    }
     per_cpu(idle_ret_stack, cpu) = ret_stack;
     }
     graph_init_task(t, ret_stack);
@@ -1056,68 +1271,67 @@ pub unsafe extern "C" fn ftrace_graph_init_idle_task(t: *mut task_struct, cpu: c
 // Allocate a return stack for newly created task
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_graph_init_task(t: *mut task_struct) {
-    void ftrace_graph_init_task(struct task_struct *t)
-    {
 // Make sure we do not use the parent ret_stack
     t.ret_stack = core::ptr::null_mut();
     t.curr_ret_stack = 0;
     t.curr_ret_depth = -1;
     if (ftrace_graph_active) {
-    unsigned long *ret_stack;
-    if (WARN_ON_ONCE(!fgraph_stack_cachep))
+pub static mut ret_stack: *mut c_void = core::ptr::null_mut();
+    if (WARN_ON_ONCE!(!fgraph_stack_cachep)) {
     return;
+    }
     ret_stack = kmem_cache_alloc(fgraph_stack_cachep, GFP_KERNEL);
-    if (!ret_stack)
+    if (!ret_stack) {
     return;
+    }
     graph_init_task(t, ret_stack);
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_graph_exit_task(t: *mut task_struct) {
-    void ftrace_graph_exit_task(struct task_struct *t)
-    {
-    unsigned long *ret_stack = t.ret_stack;
+    let mut ret_stack = t.ret_stack;
     t.ret_stack = core::ptr::null_mut();
 // NULL must become visible to IRQs before we free it:
     barrier();
     if (ret_stack) {
-    if (WARN_ON_ONCE(!fgraph_stack_cachep))
+    if (WARN_ON_ONCE!(!fgraph_stack_cachep)) {
     return;
+    }
     kmem_cache_free(fgraph_stack_cachep, ret_stack);
     }
     }
 
-    static int fgraph_pid_func(struct ftrace_graph_ent *trace,
-    struct fgraph_ops *gops,
-    struct ftrace_regs *fregs)
-    {
-    struct trace_array *tr = gops.ops.private;
-    int pid;
+#[no_mangle]
+pub unsafe extern "C" fn fgraph_pid_func(trace: *mut ftrace_graph_ent, gops: *mut fgraph_ops, fregs: *mut ftrace_regs) -> c_int {
+    let mut tr = gops.ops.private;
+    let mut pid = 0;
     if (tr) {
     pid = this_cpu_read(tr.array_buffer.data.ftrace_ignore_pid);
-    if (pid == FTRACE_PID_IGNORE)
+    if (pid == FTRACE_PID_IGNORE) {
     return 0;
+    }
     if (pid != FTRACE_PID_TRACE &&
-    pid != current.pid)
+    pid != current.pid) {
     return 0;
+    }
     }
     return gops.saved_func(trace, gops, fregs);
     }
 #[no_mangle]
 pub unsafe extern "C" fn fgraph_update_pid_func() {
-    void fgraph_update_pid_func(void)
-    {
-    struct fgraph_ops *gops;
-    struct ftrace_ops *op;
-    if (!(graph_ops.flags & FTRACE_OPS_FL_INITIALIZED))
+pub static mut gops: *mut c_void = core::ptr::null_mut();
+pub static mut op: *mut c_void = core::ptr::null_mut();
+    if (!(graph_ops.flags & FTRACE_OPS_FL_INITIALIZED)) {
     return;
+    }
     list_for_each_entry(op, &graph_ops.subop_list, list) {
     if (op.flags & FTRACE_OPS_FL_PID) {
-    gops = container_of(op, struct fgraph_ops, ops);
+    gops = container_of!(op, fgraph_ops, ops);
     gops.entryfunc = ftrace_pids_enabled(op) ?
     fgraph_pid_func : gops.saved_func;
-    if (ftrace_graph_active == 1)
+    if (ftrace_graph_active == 1) {
     static_call_update(fgraph_func, gops.entryfunc);
+    }
     }
     }
     }
@@ -1125,84 +1339,88 @@ pub unsafe extern "C" fn fgraph_update_pid_func() {
 // Allocate a return stack for each task
 #[no_mangle]
 unsafe extern "C" fn start_graph_tracing() -> c_int {
-    static int start_graph_tracing(void)
-    {
-    unsigned long **ret_stack_list;
-    int ret, cpu;
+pub static mut ret_stack_list: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    let mut cpu = 0;
     ret_stack_list = kcalloc(FTRACE_RETSTACK_ALLOC_SIZE,
-    sizeof(*ret_stack_list), GFP_KERNEL);
-    if (!ret_stack_list)
+    sizeof!(*ret_stack_list), GFP_KERNEL);
+    if (!ret_stack_list) {
     return -ENOMEM;
+    }
 // The cpu_boot init_task->ret_stack will never be freed
     for_each_online_cpu(cpu) {
-    if (!idle_task(cpu).ret_stack)
+    if (!idle_task(cpu).ret_stack) {
     ftrace_graph_init_idle_task(idle_task(cpu), cpu);
+    }
     }
     do {
     ret = alloc_retstack_tasklist(ret_stack_list);
     } while (ret == -EAGAIN);
     if (!ret) {
     ret = register_trace_sched_switch(ftrace_graph_probe_sched_switch, core::ptr::null_mut());
-    if (ret)
-    pr_info("ftrace_graph: Couldn't activate tracepoint"
+    if (ret) {
+    pr_info!("ftrace_graph: Couldn't activate tracepoint"
     " probe to kernel_sched_switch\n");
+    }
     }
     kfree(ret_stack_list);
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn init_task_vars(idx: c_int) {
-    static void init_task_vars(int idx)
-    {
-    struct task_struct *g, *t;
-    int cpu;
+    let mut g = core::ptr::null_mut();
+    let mut t = core::ptr::null_mut();
+    let mut cpu = 0;
     for_each_online_cpu(cpu) {
-    if (idle_task(cpu).ret_stack)
+    if (idle_task(cpu).ret_stack) {
     ret_stack_set_task_var(idle_task(cpu), idx, 0);
+    }
     }
     read_lock(&tasklist_lock);
     for_each_process_thread(g, t) {
-    if (t.ret_stack)
+    if (t.ret_stack) {
     ret_stack_set_task_var(t, idx, 0);
+    }
     }
     read_unlock(&tasklist_lock);
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_graph_enable_direct(enable_branch: bool, gops: *mut fgraph_ops) {
-    static void ftrace_graph_enable_direct(bool enable_branch, struct fgraph_ops *gops)
-    {
-    let mut func: trace_func_graph_ent_t = core::ptr::null_mut();
-    let mut retfunc: trace_func_graph_ret_t = core::ptr::null_mut();
-    int i;
-    if (FGRAPH_NO_DIRECT)
+pub static mut func: trace_func_graph_ent_t = 0;
+pub static mut retfunc: trace_func_graph_ret_t = 0;
+    let mut i = 0;
+    if (FGRAPH_NO_DIRECT) {
     return;
+    }
     if (gops) {
     func = gops.entryfunc;
     retfunc = gops.retfunc;
     fgraph_direct_gops = gops;
     } else {
     for_each_set_bit(i, &fgraph_array_bitmask,
-    sizeof(fgraph_array_bitmask) * BITS_PER_BYTE) {
+    sizeof!(fgraph_array_bitmask) * BITS_PER_BYTE) {
     func = fgraph_array[i].entryfunc;
     retfunc = fgraph_array[i].retfunc;
     fgraph_direct_gops = fgraph_array[i];
     }
     }
-    if (WARN_ON_ONCE(!func))
+    if (WARN_ON_ONCE!(!func)) {
     return;
+    }
     static_call_update(fgraph_func, func);
     static_call_update(fgraph_retfunc, retfunc);
-    if (enable_branch)
+    if (enable_branch) {
     static_branch_enable(&fgraph_do_direct);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_graph_disable_direct(disable_branch: bool) {
-    static void ftrace_graph_disable_direct(bool disable_branch)
-    {
-    if (FGRAPH_NO_DIRECT)
+    if (FGRAPH_NO_DIRECT) {
     return;
-    if (disable_branch)
+    }
+    if (disable_branch) {
     static_branch_disable(&fgraph_do_direct);
+    }
     static_call_update(fgraph_func, ftrace_graph_entry_stub);
     static_call_update(fgraph_retfunc, ftrace_graph_ret_stub);
     fgraph_direct_gops = &fgraph_stub;
@@ -1210,36 +1428,35 @@ unsafe extern "C" fn ftrace_graph_disable_direct(disable_branch: bool) {
 // The cpu_boot init_task->ret_stack will never be freed
 #[no_mangle]
 unsafe extern "C" fn fgraph_cpu_init(cpu: c_uint) -> c_int {
-    static int fgraph_cpu_init(unsigned int cpu)
-    {
-    if (!idle_task(cpu).ret_stack)
+    if (!idle_task(cpu).ret_stack) {
     ftrace_graph_init_idle_task(idle_task(cpu), cpu);
+    }
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn register_ftrace_graph(gops: *mut fgraph_ops) -> c_int {
-    int register_ftrace_graph(struct fgraph_ops *gops)
-    {
     static bool fgraph_initialized;
-    let mut command: c_int = 0;
-    let mut ret: c_int = 0;
-    let mut i: c_int = -1;
+pub static mut command: c_int = 0;
+pub static mut ret: c_int = 0;
+pub static mut i: c_int = 0;
     if (WARN_ONCE(gops.ops.flags & FTRACE_OPS_FL_GRAPH,
-    "function graph ops registered again"))
+    "function graph ops registered again")) {
     return -EBUSY;
+    }
     guard(mutex)(&ftrace_lock);
     if (!fgraph_stack_cachep) {
     fgraph_stack_cachep = kmem_cache_create("fgraph_stack",
     SHADOW_STACK_SIZE,
     SHADOW_STACK_SIZE, 0, core::ptr::null_mut());
-    if (!fgraph_stack_cachep)
+    if (!fgraph_stack_cachep) {
     return -ENOMEM;
+    }
     }
     if (!fgraph_initialized) {
     ret = cpuhp_setup_state(CPUHP_AP_ONLINE_DYN, "fgraph:online",
     fgraph_cpu_init, core::ptr::null_mut());
     if (ret < 0) {
-    pr_warn("fgraph: Error to init cpu hotplug support\n");
+    pr_warn!("fgraph: Error to init cpu hotplug support\n");
     return ret;
     }
     fgraph_initialized = true;
@@ -1247,29 +1464,34 @@ pub unsafe extern "C" fn register_ftrace_graph(gops: *mut fgraph_ops) -> c_int {
     }
     if (!fgraph_array[0]) {
 // The array must always have real data on it
-    for (i = 0; i < FGRAPH_ARRAY_SIZE; i++)
+    for (i = 0; i < FGRAPH_ARRAY_SIZE; i++) {
     fgraph_array[i] = &fgraph_stub;
+    }
     fgraph_lru_init();
     }
     i = fgraph_lru_alloc_index();
-    if (i < 0 || WARN_ON_ONCE(fgraph_array[i] != &fgraph_stub))
+    if (i < 0 || WARN_ON_ONCE!(fgraph_array[i] != &fgraph_stub)) {
     return -ENOSPC;
+    }
     gops.idx = i;
-    ftrace_graph_active++;
+    ftrace_graph_active += 1;
 // Always save the function, and reset at unregistering
     gops.saved_func = gops.entryfunc;
 
-    if (ftrace_pids_enabled(&gops.ops))
+    if (ftrace_pids_enabled(&gops.ops)) {
     gops.entryfunc = fgraph_pid_func;
+    }
 
-    if (ftrace_graph_active == 2)
+    if (ftrace_graph_active == 2) {
     ftrace_graph_disable_direct(true);
+    }
     if (ftrace_graph_active == 1) {
     ftrace_graph_enable_direct(false, gops);
     register_pm_notifier(&ftrace_suspend_notifier);
     ret = start_graph_tracing();
-    if (ret)
-    goto error;
+    if (ret) {
+// goto;
+    }
 //
 // Some archs just test to see if these are not
 // the default function
@@ -1282,45 +1504,51 @@ pub unsafe extern "C" fn register_ftrace_graph(gops: *mut fgraph_ops) -> c_int {
     }
     gops.ops.flags |= FTRACE_OPS_FL_GRAPH;
     ret = ftrace_startup_subops(&graph_ops, &gops.ops, command);
-    if (!ret)
+    if (!ret) {
     fgraph_array[i] = gops;
-    error:
+    }
+// label;
     if (ret) {
-    ftrace_graph_active--;
+    ftrace_graph_active -= 1;
     gops.saved_func = core::ptr::null_mut();
     fgraph_lru_release_index(i);
-    if (!ftrace_graph_active)
+    if (!ftrace_graph_active) {
     unregister_pm_notifier(&ftrace_suspend_notifier);
+    }
     }
     return ret;
     }
 #[no_mangle]
 pub unsafe extern "C" fn unregister_ftrace_graph(gops: *mut fgraph_ops) {
-    void unregister_ftrace_graph(struct fgraph_ops *gops)
-    {
-    let mut command: c_int = 0;
+pub static mut command: c_int = 0;
     if (WARN_ONCE(!(gops.ops.flags & FTRACE_OPS_FL_GRAPH),
-    "function graph ops unregistered without registering"))
+    "function graph ops unregistered without registering")) {
     return;
+    }
     guard(mutex)(&ftrace_lock);
-    if (unlikely(!ftrace_graph_active))
-    goto out;
+    if (unlikely(!ftrace_graph_active)) {
+// goto;
+    }
     if (unlikely(gops.idx < 0 || gops.idx >= FGRAPH_ARRAY_SIZE ||
-    fgraph_array[gops.idx] != gops))
-    goto out;
-    if (fgraph_lru_release_index(gops.idx) < 0)
-    goto out;
+    fgraph_array[gops.idx] != gops)) {
+// goto;
+    }
+    if (fgraph_lru_release_index(gops.idx) < 0) {
+// goto;
+    }
     fgraph_array[gops.idx] = &fgraph_stub;
-    ftrace_graph_active--;
-    if (!ftrace_graph_active)
+    ftrace_graph_active -= 1;
+    if (!ftrace_graph_active) {
     command = FTRACE_STOP_FUNC_RET;
+    }
     ftrace_shutdown_subops(&graph_ops, &gops.ops, command);
-    if (ftrace_graph_active == 1)
+    if (ftrace_graph_active == 1) {
     ftrace_graph_enable_direct(true, core::ptr::null_mut());
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !ftrace_graph_active) -> else {
-    else if (!ftrace_graph_active)
+    }
+
+    else if (!ftrace_graph_active) {
     ftrace_graph_disable_direct(false);
+    }
     if (!ftrace_graph_active) {
     ftrace_graph_return = ftrace_stub_graph;
     ftrace_graph_entry = ftrace_graph_entry_stub;
@@ -1328,6 +1556,6 @@ pub unsafe extern "C" fn if(_arg: !ftrace_graph_active) -> else {
     unregister_trace_sched_switch(ftrace_graph_probe_sched_switch, core::ptr::null_mut());
     }
     gops.saved_func = core::ptr::null_mut();
-    out:
+// label;
     gops.ops.flags &= ~FTRACE_OPS_FL_GRAPH;
     }

@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -44,12 +294,9 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Swap reorganised 29.12.95, Stephen Tweedie
 //
 
-    static void swap_range_alloc(struct swap_info_struct *si,
-    unsigned int nr_entries);
-    static bool folio_swapcache_freeable(struct folio *folio);
-    static void move_cluster(struct swap_info_struct *si,
-    struct swap_cluster_info *ci, struct list_head *list,
-    enum swap_cluster_flags new_flags);
+// forward_decl: swap_range_alloc;
+// forward_decl: folio_swapcache_freeable;
+// forward_decl: move_cluster;
 //
 // Protects the swap_info array, and the SWP_USED flag. swap_info contains
 // lazily allocated & freed swap device info struts, and SWP_USED indicates
@@ -57,9 +304,9 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 // Also protects swap_active_head total_swap_pages, and the SWP_WRITEOK flag.
 //
-    static DEFINE_SPINLOCK(swap_lock);
+pub static mut swap_lock: usize = 0;
     static unsigned int nr_swapfiles;
-    atomic_long_t nr_swap_pages;
+    let mut nr_swap_pages;
 //
 // Some modules use swappable objects and may try to swap them out under
 // memory pressure (via the shrinker). Before doing so, they may wish to
@@ -67,11 +314,11 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
     EXPORT_SYMBOL_GPL(nr_swap_pages);
 // protected with swap_lock. reading in vm_swap_full() doesn't need lock
-    long total_swap_pages;
+    let mut total_swap_pages = 0;
 
-    unsigned long swapfile_maximum_size;
+    let mut swapfile_maximum_size = 0;
 
-    bool swap_migration_ad_supported;
+    let mut swap_migration_ad_supported = 0;
 
     static const char Bad_file[] = "Bad swap file entry ";
     static const char Bad_offset[] = "Bad swap offset entry ";
@@ -93,15 +340,15 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // before any swap_info_struct->lock.
 //
     static PLIST_HEAD(swap_avail_head);
-    static DEFINE_SPINLOCK(swap_avail_lock);
+pub static mut swap_avail_lock: usize = 0;
     struct swap_info_struct *swap_info[MAX_SWAPFILES];
-    static struct kmem_cache *swap_table_cachep;
+pub static mut swap_table_cachep: *mut c_void = core::ptr::null_mut();
 // Protects si->swap_file for /proc/swaps usage
-    static DEFINE_MUTEX(swapon_mutex);
-    static DECLARE_WAIT_QUEUE_HEAD(proc_poll_wait);
+pub static mut swapon_mutex: usize = 0;
+pub static mut proc_poll_wait: usize = 0;
 // Activity counter to indicate that a swapon or swapoff has occurred
-    let mut proc_poll_event: static atomic_t = ATOMIC_INIT(0);
-    let mut nr_rotate_swap: core::sync::atomic::AtomicI32 = ATOMIC_INIT(0);
+pub static mut proc_poll_event: atomic_t = 0;
+pub static mut nr_rotate_swap: core::sync::atomic::AtomicI32 = 0;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct percpu_swap_cluster {
@@ -110,21 +357,22 @@ pub struct percpu_swap_cluster {
     pub lock: local_lock_t,
 }
 
-    static DEFINE_PER_CPU(struct percpu_swap_cluster, percpu_swap_cluster) = {
+    static DEFINE_PER_CPU(percpu_swap_cluster, percpu_swap_cluster) = {
     .si = { core::ptr::null_mut() },
     .offset = { SWAP_ENTRY_INVALID },
     .lock = INIT_LOCAL_LOCK(),
     };
 // May return NULL on invalid type, caller must check for NULL return
-    static struct swap_info_struct *swap_type_to_info(int type)
-    {
-    if (type < 0 || type >= MAX_SWAPFILES)
+#[no_mangle]
+pub unsafe extern "C" fn swap_type_to_info(type: c_int) -> *mut c_void {
+    if (type < 0 || type >= MAX_SWAPFILES) {
     return core::ptr::null_mut();
+    }
     return READ_ONCE(swap_info[type]); /* rcu_dereference() */
     }
 // May return NULL on invalid entry, caller must check for NULL return
-    static struct swap_info_struct *swap_entry_to_info(swp_entry_t entry)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn swap_entry_to_info(entry: swp_entry_t) -> *mut c_void {
     return swap_type_to_info(swp_type(entry));
     }
 //
@@ -143,8 +391,6 @@ pub struct percpu_swap_cluster {
 
 #[no_mangle]
 unsafe extern "C" fn swap_usage_in_pages(si: *mut swap_info_struct) -> c_long {
-    static long swap_usage_in_pages(struct swap_info_struct *si)
-    {
     return atomic_long_read(&si.inuse_pages) & SWAP_USAGE_COUNTER_MASK;
     }
 // Reclaim the swap entry anyway if possible
@@ -156,17 +402,17 @@ pub const TTRS_ANYWAY: c_uint = 0x1;
 pub const TTRS_UNMAPPED: c_uint = 0x2;
 // Reclaim the swap entry if swap is getting full
 pub const TTRS_FULL: c_uint = 0x4;
-    static bool swap_only_has_cache(struct swap_cluster_info *ci,
-    unsigned long offset, int nr_pages)
-    {
-    let mut ci_off: c_uint = offset % SWAPFILE_CLUSTER;
-    let mut ci_end: c_uint = ci_off + nr_pages;
-    unsigned long swp_tb;
+#[no_mangle]
+pub unsafe extern "C" fn swap_only_has_cache(ci: *mut swap_cluster_info, offset: c_ulong, nr_pages: c_int) -> bool {
+pub static mut ci_off: c_uint = 0;
+pub static mut ci_end: c_uint = 0;
+    let mut swp_tb = 0;
     do {
     swp_tb = __swap_table_get(ci, ci_off);
     VM_WARN_ON_ONCE(!swp_tb_is_folio(swp_tb));
-    if (swp_tb_get_count(swp_tb))
+    if (swp_tb_get_count(swp_tb)) {
     return false;
+    }
     } while (++ci_off < ci_end);
     return true;
     }
@@ -175,18 +421,19 @@ pub const TTRS_FULL: c_uint = 0x4;
 // the folio was reclaimed. If negative, the folio was not reclaimed. If 0, no
 // folio was associated with the swap entry.
 //
-    static int __try_to_reclaim_swap(struct swap_info_struct *si,
-    unsigned long offset, unsigned long flags)
-    {
-    let mut entry: swp_entry_t = swp_entry(si.type, offset);
-    struct swap_cluster_info *ci;
-    struct folio *folio;
-    int ret, nr_pages;
-    bool need_reclaim;
-    again:
+#[no_mangle]
+pub unsafe extern "C" fn __try_to_reclaim_swap(si: *mut swap_info_struct, offset: c_ulong, flags: c_ulong) -> c_int {
+pub static mut entry: swp_entry_t = 0;
+pub static mut ci: *mut c_void = core::ptr::null_mut();
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    let mut nr_pages = 0;
+    let mut need_reclaim = 0;
+// label;
     folio = swap_cache_get_folio(entry);
-    if (!folio)
+    if (!folio) {
     return 0;
+    }
     nr_pages = folio_nr_pages(folio);
     ret = -nr_pages;
 //
@@ -195,8 +442,9 @@ pub const TTRS_FULL: c_uint = 0x4;
 // use folio_free_swap() with explicit folio_lock() in usual
 // operations.
 //
-    if (!folio_trylock(folio))
-    goto out;
+    if (!folio_trylock(folio)) {
+// goto;
+    }
 //
 // Offset could point to the middle of a large folio, or folio
 // may no longer point to the expected offset before it's locked.
@@ -204,14 +452,15 @@ pub const TTRS_FULL: c_uint = 0x4;
     if (!folio_matches_swap_entry(folio, entry)) {
     folio_unlock(folio);
     folio_put(folio);
-    goto again;
+// goto;
     }
     offset = swp_offset(folio.swap);
     need_reclaim = ((flags & TTRS_ANYWAY) ||
     ((flags & TTRS_UNMAPPED) && !folio_mapped(folio)) ||
     ((flags & TTRS_FULL) && mem_cgroup_swap_full(folio)));
-    if (!need_reclaim || !folio_swapcache_freeable(folio))
-    goto out_unlock;
+    if (!need_reclaim || !folio_swapcache_freeable(folio)) {
+// goto;
+    }
 //
 // It's safe to delete the folio from swap cache only if the folio
 // is in swap cache with swap count == 0. The slots have no page table
@@ -220,26 +469,27 @@ pub const TTRS_FULL: c_uint = 0x4;
     ci = swap_cluster_lock(si, offset);
     need_reclaim = swap_only_has_cache(ci, offset, nr_pages);
     swap_cluster_unlock(ci);
-    if (!need_reclaim)
-    goto out_unlock;
+    if (!need_reclaim) {
+// goto;
+    }
     swap_cache_del_folio(folio);
     folio_set_dirty(folio);
     ret = nr_pages;
-    out_unlock:
+// label;
     folio_unlock(folio);
-    out:
+// label;
     folio_put(folio);
     return ret;
     }
-    static inline struct swap_extent *first_se(struct swap_info_struct *sis)
-    {
-    struct rb_node *rb = rb_first(&sis.swap_extent_root);
-    return rb_entry(rb, struct swap_extent, rb_node);
+#[no_mangle]
+pub unsafe extern "C" fn first_se(sis: *mut swap_info_struct) -> *mut c_void {
+    let mut rb = rb_first(&sis.swap_extent_root);
+    return rb_entry(rb, swap_extent, rb_node);
     }
-    static inline struct swap_extent *next_se(struct swap_extent *se)
-    {
-    struct rb_node *rb = rb_next(&se.rb_node);
-    return rb ? rb_entry(rb, struct swap_extent, rb_node) : core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn next_se(se: *mut swap_extent) -> *mut c_void {
+    let mut rb = rb_next(&se.rb_node);
+    return rb ? rb_entry(rb, swap_extent, rb_node) : core::ptr::null_mut();
     }
 //
 // swapon tell device that all the old swap contents can be discarded,
@@ -247,12 +497,10 @@ pub const TTRS_FULL: c_uint = 0x4;
 //
 #[no_mangle]
 unsafe extern "C" fn discard_swap(si: *mut swap_info_struct) -> c_int {
-    static int discard_swap(struct swap_info_struct *si)
-    {
-    struct swap_extent *se;
-    sector_t start_block;
-    sector_t nr_blocks;
-    let mut err: c_int = 0;
+pub static mut se: *mut c_void = core::ptr::null_mut();
+    let mut start_block;
+    let mut nr_blocks;
+pub static mut err: c_int = 0;
 // Do not discard the swap header page!
     se = first_se(si);
     start_block = (se.start_block + 1) << (PAGE_SHIFT - 9);
@@ -260,8 +508,9 @@ unsafe extern "C" fn discard_swap(si: *mut swap_info_struct) -> c_int {
     if (nr_blocks) {
     err = blkdev_issue_discard(si.bdev, start_block,
     nr_blocks, GFP_KERNEL);
-    if (err)
+    if (err) {
     return err;
+    }
     cond_resched();
     }
     for (se = next_se(se); se; se = next_se(se)) {
@@ -269,40 +518,40 @@ unsafe extern "C" fn discard_swap(si: *mut swap_info_struct) -> c_int {
     nr_blocks = (sector_t)se.nr_pages << (PAGE_SHIFT - 9);
     err = blkdev_issue_discard(si.bdev, start_block,
     nr_blocks, GFP_KERNEL);
-    if (err)
+    if (err) {
     break;
+    }
     cond_resched();
     }
     return err;		/* That will often be -EOPNOTSUPP */
     }
-    static struct swap_extent *
-    offset_to_swap_extent(struct swap_info_struct *sis, unsigned long offset)
-    {
-    struct swap_extent *se;
-    struct rb_node *rb;
+#[no_mangle]
+pub unsafe extern "C" fn offset_to_swap_extent(sis: *mut swap_info_struct, offset: c_ulong) -> *mut c_void {
+pub static mut se: *mut c_void = core::ptr::null_mut();
+pub static mut rb: *mut c_void = core::ptr::null_mut();
     rb = sis.swap_extent_root.rb_node;
     while (rb) {
-    se = rb_entry(rb, struct swap_extent, rb_node);
-    if (offset < se.start_page)
+    se = rb_entry(rb, swap_extent, rb_node);
+    if (offset < se.start_page) {
     rb = rb.rb_left;
-#[no_mangle]
-pub unsafe extern "C" fn if(se->nr_pages: offset >= se->start_page +) -> else {
-    else if (offset >= se.start_page + se.nr_pages)
+    }
+
+    else if (offset >= se.start_page + se.nr_pages) {
     rb = rb.rb_right;
-    else
+    }
+    else {
     return se;
+    }
     }
 // It *must* be present
     BUG();
     }
 #[no_mangle]
 pub unsafe extern "C" fn swap_folio_sector(folio: *mut folio) -> sector_t {
-    sector_t swap_folio_sector(struct folio *folio)
-    {
-    struct swap_info_struct *sis = __swap_entry_to_info(folio.swap);
-    struct swap_extent *se;
-    sector_t sector;
-    pgoff_t offset;
+    let mut sis = __swap_entry_to_info(folio.swap);
+pub static mut se: *mut c_void = core::ptr::null_mut();
+    let mut sector;
+    let mut offset;
     offset = swp_offset(folio.swap);
     se = offset_to_swap_extent(sis, offset);
     sector = se.start_block + (offset - se.start_page);
@@ -312,80 +561,70 @@ pub unsafe extern "C" fn swap_folio_sector(folio: *mut folio) -> sector_t {
 // swap allocation tell device that a cluster of swap can now be discarded,
 // to allow the swap device to optimize its wear-levelling.
 //
-    static void discard_swap_cluster(struct swap_info_struct *si,
-    pgoff_t start_page, pgoff_t nr_pages)
-    {
-    struct swap_extent *se = offset_to_swap_extent(si, start_page);
+#[no_mangle]
+pub unsafe extern "C" fn discard_swap_cluster(si: *mut swap_info_struct, start_page: pgoff_t, nr_pages: pgoff_t) {
+    let mut se = offset_to_swap_extent(si, start_page);
     while (nr_pages) {
-    let mut offset: pgoff_t = start_page - se.start_page;
-    let mut start_block: sector_t = se.start_block + offset;
-    let mut nr_blocks: sector_t = se.nr_pages - offset;
-    if (nr_blocks > nr_pages)
+pub static mut offset: pgoff_t = 0;
+pub static mut start_block: sector_t = 0;
+pub static mut nr_blocks: sector_t = 0;
+    if (nr_blocks > nr_pages) {
     nr_blocks = nr_pages;
+    }
     start_page += nr_blocks;
     nr_pages -= nr_blocks;
     start_block <<= PAGE_SHIFT - 9;
     nr_blocks <<= PAGE_SHIFT - 9;
     if (blkdev_issue_discard(si.bdev, start_block,
-    nr_blocks, GFP_NOIO))
+    nr_blocks, GFP_NOIO)) {
     break;
+    }
     se = next_se(se);
     }
     }
 pub const LATENCY_LIMIT: c_int = 256;
 #[no_mangle]
 pub unsafe extern "C" fn cluster_is_empty(info: *mut swap_cluster_info) -> bool {
-    static inline bool cluster_is_empty(struct swap_cluster_info *info)
-    {
     return info.count == 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn cluster_is_discard(info: *mut swap_cluster_info) -> bool {
-    static inline bool cluster_is_discard(struct swap_cluster_info *info)
-    {
     return info.flags == CLUSTER_FLAG_DISCARD;
     }
 #[no_mangle]
 pub unsafe extern "C" fn cluster_table_is_alloced(ci: *mut swap_cluster_info) -> bool {
-    static inline bool cluster_table_is_alloced(struct swap_cluster_info *ci)
-    {
     return rcu_dereference_protected(ci.table, lockdep_is_held(&ci.lock));
     }
 #[no_mangle]
 pub unsafe extern "C" fn cluster_is_usable(ci: *mut swap_cluster_info, order: c_int) -> bool {
-    static inline bool cluster_is_usable(struct swap_cluster_info *ci, int order)
-    {
-    if (unlikely(ci.flags > CLUSTER_FLAG_USABLE))
+    if (unlikely(ci.flags > CLUSTER_FLAG_USABLE)) {
     return false;
-    if (!cluster_table_is_alloced(ci))
+    }
+    if (!cluster_table_is_alloced(ci)) {
     return false;
-    if (!order)
+    }
+    if (!order) {
     return true;
+    }
     return cluster_is_empty(ci) || order == ci.order;
     }
-    static inline unsigned int cluster_index(struct swap_info_struct *si,
-    struct swap_cluster_info *ci)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cluster_index(si: *mut swap_info_struct, ci: *mut swap_cluster_info) -> c_uint {
     return ci - si.cluster_info;
     }
-    static inline unsigned int cluster_offset(struct swap_info_struct *si,
-    struct swap_cluster_info *ci)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cluster_offset(si: *mut swap_info_struct, ci: *mut swap_cluster_info) -> c_uint {
     return cluster_index(si, ci) * SWAPFILE_CLUSTER;
     }
 #[no_mangle]
 unsafe extern "C" fn swap_cluster_free_table_folio_rcu_cb(head: *mut rcu_head) {
-    static void swap_cluster_free_table_folio_rcu_cb(struct rcu_head *head)
-    {
-    struct folio *folio;
-    folio = page_folio(container_of(head, struct page, rcu_head));
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    folio = page_folio(container_of!(head, page, rcu_head));
     folio_put(folio);
     }
 #[no_mangle]
 unsafe extern "C" fn swap_cluster_free_table(ci: *mut swap_cluster_info) {
-    static void swap_cluster_free_table(struct swap_cluster_info *ci)
-    {
-    struct swap_table *table;
+pub static mut table: *mut c_void = core::ptr::null_mut();
 
     kfree(ci.memcg_table);
     ci.memcg_table = core::ptr::null_mut();
@@ -393,9 +632,10 @@ unsafe extern "C" fn swap_cluster_free_table(ci: *mut swap_cluster_info) {
     kfree(ci.zero_bitmap);
     ci.zero_bitmap = core::ptr::null_mut();
 
-    table = (struct swap_table *)rcu_access_pointer(ci.table);
-    if (!table)
+    table = rcu_access_pointer(ci.table);
+    if (!table) {
     return;
+    }
     rcu_assign_pointer(ci.table, core::ptr::null_mut());
     if (!SWP_TABLE_USE_PAGE) {
     kmem_cache_free(swap_table_cachep, table);
@@ -406,23 +646,24 @@ unsafe extern "C" fn swap_cluster_free_table(ci: *mut swap_cluster_info) {
     }
 #[no_mangle]
 unsafe extern "C" fn swap_cluster_alloc_table(ci: *mut swap_cluster_info, gfp: gfp_t) -> c_int {
-    static int swap_cluster_alloc_table(struct swap_cluster_info *ci, gfp_t gfp)
-    {
-    struct swap_table *table = core::ptr::null_mut();
-    struct folio *folio;
+    let mut table = core::ptr::null_mut();
+pub static mut folio: *mut c_void = core::ptr::null_mut();
 // The cluster must be empty and not on any list during allocation.
     VM_WARN_ON_ONCE(ci.flags || !cluster_is_empty(ci));
-    if (rcu_access_pointer(ci.table))
+    if (rcu_access_pointer(ci.table)) {
     return 0;
+    }
     if (SWP_TABLE_USE_PAGE) {
     folio = folio_alloc(gfp | __GFP_ZERO, 0);
-    if (folio)
+    if (folio) {
     table = folio_address(folio);
+    }
     } else {
     table = kmem_cache_zalloc(swap_table_cachep, gfp);
     }
-    if (!table)
+    if (!table) {
     return -ENOMEM;
+    }
     rcu_assign_pointer(ci.table, table);
 
     if (!mem_cgroup_disabled()) {
@@ -448,54 +689,56 @@ unsafe extern "C" fn swap_cluster_alloc_table(ci: *mut swap_cluster_info, gfp: g
 // One special case is that bad slots can't be freed, so check the number of
 // bad slots for swapoff, and non-swapoff path must never free bad slots.
 //
-    static void swap_cluster_assert_empty(struct swap_cluster_info *ci,
-    unsigned int ci_off, unsigned int nr,
-    bool swapoff)
-    {
-    let mut ci_end: c_uint = ci_off + nr;
-    unsigned long swp_tb;
-    let mut bad_slots: c_int = 0;
-    if (!IS_ENABLED(CONFIG_DEBUG_VM) && !swapoff)
+#[no_mangle]
+pub unsafe extern "C" fn swap_cluster_assert_empty(ci: *mut swap_cluster_info, ci_off: c_uint, nr: c_uint, swapoff: bool) {
+pub static mut ci_end: c_uint = 0;
+    let mut swp_tb = 0;
+pub static mut bad_slots: c_int = 0;
+    if (!IS_ENABLED!(CONFIG_DEBUG_VM) && !swapoff) {
     return;
+    }
     do {
     swp_tb = __swap_table_get(ci, ci_off);
-    if (swp_tb_is_bad(swp_tb))
-    bad_slots++;
-    else
-    WARN_ON_ONCE(!swp_tb_is_null(swp_tb));
-    WARN_ON_ONCE(__swap_cgroup_get(ci, ci_off));
+    if (swp_tb_is_bad(swp_tb)) {
+    bad_slots += 1;
+    }
+    else {
+    WARN_ON_ONCE!(!swp_tb_is_null(swp_tb));
+    }
+    WARN_ON_ONCE!(__swap_cgroup_get(ci, ci_off));
     } while (++ci_off < ci_end);
-    WARN_ON_ONCE(bad_slots != (swapoff ? ci.count : 0));
-    WARN_ON_ONCE(nr == SWAPFILE_CLUSTER && ci.extend_table);
+    WARN_ON_ONCE!(bad_slots != (swapoff ? ci.count : 0));
+    WARN_ON_ONCE!(nr == SWAPFILE_CLUSTER && ci.extend_table);
     }
 //
 // Allocate swap table for one cluster. Attempt an atomic allocation first,
 // then fallback to sleeping allocation.
 //
-    static struct swap_cluster_info *
-    swap_cluster_populate(struct swap_info_struct *si,
-    struct swap_cluster_info *ci)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn swap_cluster_populate(si: *mut swap_info_struct, ci: *mut swap_cluster_info) -> *mut c_void {
+    let mut ret = 0;
 //
 // Only cluster isolation from the allocator does table allocation.
 // Swap allocator uses percpu clusters and holds the local lock.
 //
     lockdep_assert_held(&this_cpu_ptr(&percpu_swap_cluster).lock);
-    if (!(si.flags & SWP_SOLIDSTATE))
+    if (!(si.flags & SWP_SOLIDSTATE)) {
     lockdep_assert_held(&si.global_cluster_lock);
+    }
     lockdep_assert_held(&ci.lock);
     if (!swap_cluster_alloc_table(ci, __GFP_HIGH | __GFP_NOMEMALLOC |
-    __GFP_NOWARN))
+    __GFP_NOWARN)) {
     return ci;
+    }
 //
 // Try a sleep allocation. Each isolated free cluster may cause
 // a sleep allocation, but there is a limited number of them, so
 // the potential recursive allocation is limited.
 //
     spin_unlock(&ci.lock);
-    if (!(si.flags & SWP_SOLIDSTATE))
+    if (!(si.flags & SWP_SOLIDSTATE)) {
     spin_unlock(&si.global_cluster_lock);
+    }
     local_unlock(&percpu_swap_cluster.lock);
     ret = swap_cluster_alloc_table(ci, __GFP_HIGH | __GFP_NOMEMALLOC |
     GFP_KERNEL);
@@ -508,8 +751,9 @@ unsafe extern "C" fn swap_cluster_alloc_table(ci: *mut swap_cluster_info, gfp: g
 // which is acceptable since this fallback and race is rare.
 //
     local_lock(&percpu_swap_cluster.lock);
-    if (!(si.flags & SWP_SOLIDSTATE))
+    if (!(si.flags & SWP_SOLIDSTATE)) {
     spin_lock(&si.global_cluster_lock);
+    }
     spin_lock(&ci.lock);
     if (ret) {
     move_cluster(si, ci, &si.free_clusters, CLUSTER_FLAG_FREE);
@@ -518,33 +762,30 @@ unsafe extern "C" fn swap_cluster_alloc_table(ci: *mut swap_cluster_info, gfp: g
     }
     return ci;
     }
-    static void move_cluster(struct swap_info_struct *si,
-    struct swap_cluster_info *ci, struct list_head *list,
-    enum swap_cluster_flags new_flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn move_cluster(si: *mut swap_info_struct, ci: *mut swap_cluster_info, list: *mut list_head, new_flags: swap_cluster_flags) {
     VM_WARN_ON(ci.flags == new_flags);
-    BUILD_BUG_ON(1 << sizeof(ci.flags) * BITS_PER_BYTE < CLUSTER_FLAG_MAX);
+    BUILD_BUG_ON!(1 << sizeof!(ci.flags) * BITS_PER_BYTE < CLUSTER_FLAG_MAX);
     lockdep_assert_held(&ci.lock);
     spin_lock(&si.lock);
-    if (ci.flags == CLUSTER_FLAG_NONE)
+    if (ci.flags == CLUSTER_FLAG_NONE) {
     list_add_tail(&ci.list, list);
-    else
+    }
+    else {
     list_move_tail(&ci.list, list);
+    }
     spin_unlock(&si.lock);
     ci.flags = new_flags;
     }
 // Add a cluster to discard list and schedule it to do discard
-    static void swap_cluster_schedule_discard(struct swap_info_struct *si,
-    struct swap_cluster_info *ci)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn swap_cluster_schedule_discard(si: *mut swap_info_struct, ci: *mut swap_cluster_info) {
     VM_BUG_ON(ci.flags == CLUSTER_FLAG_FREE);
     move_cluster(si, ci, &si.discard_clusters, CLUSTER_FLAG_DISCARD);
     schedule_work(&si.discard_work);
     }
 #[no_mangle]
 unsafe extern "C" fn __free_cluster(si: *mut swap_info_struct, ci: *mut swap_cluster_info) {
-    static void __free_cluster(struct swap_info_struct *si, struct swap_cluster_info *ci)
-    {
     swap_cluster_assert_empty(ci, 0, SWAPFILE_CLUSTER, false);
     swap_cluster_free_table(ci);
     move_cluster(si, ci, &si.free_clusters, CLUSTER_FLAG_FREE);
@@ -559,15 +800,15 @@ unsafe extern "C" fn __free_cluster(si: *mut swap_info_struct, ci: *mut swap_clu
 // Note it's possible that all clusters on a list are contented so
 // this returns NULL for an non-empty list.
 //
-    static struct swap_cluster_info *isolate_lock_cluster(
-    struct swap_info_struct *si, struct list_head *list)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn isolate_lock_cluster(si: *mut swap_info_struct, list: *mut list_head) -> *mut c_void {
     struct swap_cluster_info *ci, *found = core::ptr::null_mut();
-    let mut flags: u8 = CLUSTER_FLAG_NONE;
+pub static mut flags: u8 = 0;
     spin_lock(&si.lock);
     list_for_each_entry(ci, list, list) {
-    if (!spin_trylock(&ci.lock))
+    if (!spin_trylock(&ci.lock)) {
     continue;
+    }
 // We may only isolate and clear flags of following lists
     VM_BUG_ON(!ci.flags);
     VM_BUG_ON(ci.flags > CLUSTER_FLAG_USABLE &&
@@ -595,14 +836,12 @@ unsafe extern "C" fn __free_cluster(si: *mut swap_info_struct, ci: *mut swap_clu
 //
 #[no_mangle]
 unsafe extern "C" fn swap_do_scheduled_discard(si: *mut swap_info_struct) -> bool {
-    static bool swap_do_scheduled_discard(struct swap_info_struct *si)
-    {
-    struct swap_cluster_info *ci;
-    let mut ret: bool = false;
-    unsigned int idx;
+pub static mut ci: *mut c_void = core::ptr::null_mut();
+pub static mut ret: bool = false;
+    let mut idx = 0;
     spin_lock(&si.lock);
     while (!list_empty(&si.discard_clusters)) {
-    ci = list_first_entry(&si.discard_clusters, struct swap_cluster_info, list);
+    ci = list_first_entry(&si.discard_clusters, swap_cluster_info, list);
 //
 // Delete the cluster from list to prepare for discard, but keep
 // the CLUSTER_FLAG_DISCARD flag, percpu_swap_cluster could be
@@ -629,18 +868,14 @@ unsafe extern "C" fn swap_do_scheduled_discard(si: *mut swap_info_struct) -> boo
     }
 #[no_mangle]
 unsafe extern "C" fn swap_discard_work(work: *mut work_struct) {
-    static void swap_discard_work(struct work_struct *work)
-    {
-    struct swap_info_struct *si;
-    si = container_of(work, struct swap_info_struct, discard_work);
+pub static mut si: *mut c_void = core::ptr::null_mut();
+    si = container_of!(work, swap_info_struct, discard_work);
     swap_do_scheduled_discard(si);
     }
 #[no_mangle]
 unsafe extern "C" fn swap_users_ref_free(ref: *mut percpu_ref) {
-    static void swap_users_ref_free(struct percpu_ref *ref)
-    {
-    struct swap_info_struct *si;
-    si = container_of(ref, struct swap_info_struct, users);
+pub static mut si: *mut c_void = core::ptr::null_mut();
+    si = container_of!(ref, swap_info_struct, users);
     complete(&si.comp);
     }
 //
@@ -649,8 +884,6 @@ unsafe extern "C" fn swap_users_ref_free(ref: *mut percpu_ref) {
 //
 #[no_mangle]
 unsafe extern "C" fn free_cluster(si: *mut swap_info_struct, ci: *mut swap_cluster_info) {
-    static void free_cluster(struct swap_info_struct *si, struct swap_cluster_info *ci)
-    {
     VM_BUG_ON(ci.count != 0);
     VM_BUG_ON(ci.flags == CLUSTER_FLAG_FREE);
     lockdep_assert_held(&ci.lock);
@@ -670,38 +903,41 @@ unsafe extern "C" fn free_cluster(si: *mut swap_info_struct, ci: *mut swap_clust
 // Must be called after freeing if ci->count != 0, moves the cluster to
 // nonfull list.
 //
-    static void partial_free_cluster(struct swap_info_struct *si,
-    struct swap_cluster_info *ci)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn partial_free_cluster(si: *mut swap_info_struct, ci: *mut swap_cluster_info) {
     VM_BUG_ON(!ci.count || ci.count == SWAPFILE_CLUSTER);
     lockdep_assert_held(&ci.lock);
-    if (ci.flags != CLUSTER_FLAG_NONFULL)
+    if (ci.flags != CLUSTER_FLAG_NONFULL) {
     move_cluster(si, ci, &si.nonfull_clusters[ci.order],
     CLUSTER_FLAG_NONFULL);
+    }
     }
 //
 // Must be called after allocation, moves the cluster to full or frag list.
 // Note: allocation doesn't acquire si lock, and may drop the ci lock for
 // reclaim, so the cluster could be any where when called.
 //
-    static void relocate_cluster(struct swap_info_struct *si,
-    struct swap_cluster_info *ci)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn relocate_cluster(si: *mut swap_info_struct, ci: *mut swap_cluster_info) {
     lockdep_assert_held(&ci.lock);
 // Discard cluster must remain off-list or on discard list
-    if (cluster_is_discard(ci))
+    if (cluster_is_discard(ci)) {
     return;
+    }
     if (!ci.count) {
-    if (ci.flags != CLUSTER_FLAG_FREE)
+    if (ci.flags != CLUSTER_FLAG_FREE) {
     free_cluster(si, ci);
+    }
     } else if (ci.count != SWAPFILE_CLUSTER) {
-    if (ci.flags != CLUSTER_FLAG_FRAG)
+    if (ci.flags != CLUSTER_FLAG_FRAG) {
     move_cluster(si, ci, &si.frag_clusters[ci.order],
     CLUSTER_FLAG_FRAG);
+    }
     } else {
-    if (ci.flags != CLUSTER_FLAG_FULL)
+    if (ci.flags != CLUSTER_FLAG_FULL) {
     move_cluster(si, ci, &si.full_clusters,
     CLUSTER_FLAG_FULL);
+    }
     }
     }
 //
@@ -709,17 +945,15 @@ unsafe extern "C" fn free_cluster(si: *mut swap_info_struct, ci: *mut swap_clust
 // slot. The cluster will not be added to the free cluster list, and its
 // usage counter will be increased by 1. Only used for initialization.
 //
-    static int swap_cluster_setup_bad_slot(struct swap_info_struct *si,
-    struct swap_cluster_info *cluster_info,
-    unsigned int offset, bool mask)
-    {
-    let mut ci_off: c_uint = offset % SWAPFILE_CLUSTER;
-    let mut idx: c_ulong = offset / SWAPFILE_CLUSTER;
-    struct swap_cluster_info *ci;
-    let mut ret: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn swap_cluster_setup_bad_slot(si: *mut swap_info_struct, cluster_info: *mut swap_cluster_info, offset: c_uint, mask: bool) -> c_int {
+pub static mut ci_off: c_uint = 0;
+pub static mut idx: c_ulong = 0;
+pub static mut ci: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
 // si->max may got shrunk by swap swap_activate()
     if (offset >= si.max && !mask) {
-    pr_debug("Ignoring bad slot %u (max: %u)\n", offset, si.max);
+    pr_debug!("Ignoring bad slot %u (max: %u)\n", offset, si.max);
     return 0;
     }
 //
@@ -727,49 +961,50 @@ unsafe extern "C" fn free_cluster(si: *mut swap_info_struct, ci: *mut swap_clust
 // si->max - 1. Also skip the masking of last cluster,
 // si->pages doesn't include that part.
 //
-    if (offset && !mask)
+    if (offset && !mask) {
     si.pages -= 1;
+    }
     if (!si.pages) {
-    pr_warn("Empty swap-file\n");
+    pr_warn!("Empty swap-file\n");
     return -EINVAL;
     }
     ci = cluster_info + idx;
 // Need to allocate swap table first for initial bad slot marking.
-    if (!ci.count && swap_cluster_alloc_table(ci, GFP_KERNEL))
+    if (!ci.count && swap_cluster_alloc_table(ci, GFP_KERNEL)) {
     return -ENOMEM;
+    }
     spin_lock(&ci.lock);
 // Check for duplicated bad swap slots.
     if (__swap_table_xchg(ci, ci_off, SWP_TB_BAD) != SWP_TB_NULL) {
-    pr_warn("Duplicated bad slot offset %d\n", offset);
+    pr_warn!("Duplicated bad slot offset %d\n", offset);
     ret = -EINVAL;
     } else {
-    ci.count++;
+    ci.count += 1;
     }
     spin_unlock(&ci.lock);
-    WARN_ON(ci.count > SWAPFILE_CLUSTER);
-    WARN_ON(ci.flags);
+    WARN_ON!(ci.count > SWAPFILE_CLUSTER);
+    WARN_ON!(ci.flags);
     return ret;
     }
 //
 // Reclaim drops the ci lock, so the cluster may become unusable (freed or
 // stolen by a lower order). @usable will be set to false if that happens.
 //
-    static bool cluster_reclaim_range(struct swap_info_struct *si,
-    struct swap_cluster_info *ci,
-    unsigned long start, unsigned int order,
-    bool *usable)
-    {
-    let mut nr_pages: c_uint = 1 << order;
-    let mut offset: c_ulong = start, end = start + nr_pages;
-    unsigned long swp_tb;
+#[no_mangle]
+pub unsafe extern "C" fn cluster_reclaim_range(si: *mut swap_info_struct, ci: *mut swap_cluster_info, start: c_ulong, order: c_uint, usable: *mut bool) -> bool {
+pub static mut nr_pages: c_uint = 0;
+pub static mut offset: c_ulong = 0;
+    let mut swp_tb = 0;
     spin_unlock(&ci.lock);
     do {
     swp_tb = swap_table_get(ci, offset % SWAPFILE_CLUSTER);
-    if (swp_tb_get_count(swp_tb))
+    if (swp_tb_get_count(swp_tb)) {
     break;
-    if (swp_tb_is_folio(swp_tb))
+    }
+    if (swp_tb_is_folio(swp_tb)) {
     if (__try_to_reclaim_swap(si, offset, TTRS_ANYWAY) < 0)
     break;
+    }
     } while (++offset < end);
     spin_lock(&ci.lock);
 //
@@ -782,34 +1017,35 @@ unsafe extern "C" fn free_cluster(si: *mut swap_info_struct, ci: *mut swap_clust
     }
 // usable = true;
 // Fast path, no need to scan if the whole cluster is empty
-    if (cluster_is_empty(ci))
+    if (cluster_is_empty(ci)) {
     return true;
+    }
 //
 // Recheck the range no matter reclaim succeeded or not, the slot
 // could have been be freed while we are not holding the lock.
 //
-    for (offset = start; offset < end; offset++) {
+    while (offset < end) {
     swp_tb = __swap_table_get(ci, offset % SWAPFILE_CLUSTER);
-    if (!swp_tb_is_null(swp_tb))
+    if (!swp_tb_is_null(swp_tb)) {
     return false;
+    }
     }
     return true;
     }
-    static bool cluster_scan_range(struct swap_info_struct *si,
-    struct swap_cluster_info *ci,
-    unsigned long offset, unsigned int nr_pages,
-    bool *need_reclaim)
-    {
-    let mut ci_off: c_uint = offset % SWAPFILE_CLUSTER;
-    let mut ci_end: c_uint = ci_off + nr_pages;
-    unsigned long swp_tb;
+#[no_mangle]
+pub unsafe extern "C" fn cluster_scan_range(si: *mut swap_info_struct, ci: *mut swap_cluster_info, offset: c_ulong, nr_pages: c_uint, need_reclaim: *mut bool) -> bool {
+pub static mut ci_off: c_uint = 0;
+pub static mut ci_end: c_uint = 0;
+    let mut swp_tb = 0;
     do {
     swp_tb = __swap_table_get(ci, ci_off);
-    if (swp_tb_is_null(swp_tb))
+    if (swp_tb_is_null(swp_tb)) {
     continue;
+    }
     if (swp_tb_is_folio(swp_tb) && !__swp_tb_get_count(swp_tb)) {
-    if (!vm_swap_full())
+    if (!vm_swap_full()) {
     return false;
+    }
 // need_reclaim = true;
     continue;
     }
@@ -819,16 +1055,14 @@ unsafe extern "C" fn free_cluster(si: *mut swap_info_struct, ci: *mut swap_clust
     } while (++ci_off < ci_end);
     return true;
     }
-    static bool __swap_cluster_alloc_entries(struct swap_info_struct *si,
-    struct swap_cluster_info *ci,
-    struct folio *folio,
-    unsigned int ci_off)
-    {
-    unsigned int order;
-    unsigned long nr_pages;
+#[no_mangle]
+pub unsafe extern "C" fn __swap_cluster_alloc_entries(si: *mut swap_info_struct, ci: *mut swap_cluster_info, folio: *mut folio, ci_off: c_uint) -> bool {
+    let mut order = 0;
+    let mut nr_pages = 0;
     lockdep_assert_held(&ci.lock);
-    if (!(si.flags & SWP_WRITEOK))
+    if (!(si.flags & SWP_WRITEOK)) {
     return false;
+    }
 //
 // All mm swap allocation starts with a folio (folio_alloc_swap),
 // it's also the only allocation path for large orders allocation.
@@ -844,7 +1078,7 @@ unsafe extern "C" fn free_cluster(si: *mut swap_info_struct, ci: *mut swap_clust
     swap_cluster_assert_empty(ci, ci_off, nr_pages, false);
     __swap_cache_add_folio(ci, folio, swp_entry(si.type,
     ci_off + cluster_offset(si, ci)));
-    } else if (IS_ENABLED(CONFIG_HIBERNATION)) {
+    } else if (IS_ENABLED!(CONFIG_HIBERNATION)) {
     order = 0;
     nr_pages = 1;
     swap_cluster_assert_empty(ci, ci_off, 1, false);
@@ -852,57 +1086,65 @@ unsafe extern "C" fn free_cluster(si: *mut swap_info_struct, ci: *mut swap_clust
     __swap_table_set(ci, ci_off, __swp_tb_mk_count(shadow_to_swp_tb(core::ptr::null_mut(), 0), 1));
     } else {
 // Allocation without folio is only possible with hibernation
-    WARN_ON_ONCE(1);
+    WARN_ON_ONCE!(1);
     return false;
     }
 //
 // The first allocation in a cluster makes the
 // cluster exclusive to this order
 //
-    if (cluster_is_empty(ci))
+    if (cluster_is_empty(ci)) {
     ci.order = order;
+    }
     ci.count += nr_pages;
     swap_range_alloc(si, nr_pages);
     return true;
     }
 // Try use a new cluster for current CPU and allocate from it.
-    static unsigned int alloc_swap_scan_cluster(struct swap_info_struct *si,
-    struct swap_cluster_info *ci,
-    struct folio *folio, unsigned long offset)
-    {
-    let mut next: c_uint = SWAP_ENTRY_INVALID, found = SWAP_ENTRY_INVALID;
-    let mut start: c_ulong = ALIGN_DOWN(offset, SWAPFILE_CLUSTER);
-    let mut order: c_uint = likely(folio) ? folio_order(folio) : 0;
-    let mut end: c_ulong = start + SWAPFILE_CLUSTER;
-    let mut nr_pages: c_uint = 1 << order;
-    bool need_reclaim, ret, usable;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_swap_scan_cluster(si: *mut swap_info_struct, ci: *mut swap_cluster_info, folio: *mut folio, offset: c_ulong) -> c_uint {
+pub static mut next: c_uint = 0;
+pub static mut start: c_ulong = 0;
+pub static mut order: c_uint = 0;
+pub static mut end: c_ulong = 0;
+pub static mut nr_pages: c_uint = 0;
+    let mut need_reclaim = 0;
+    let mut ret = 0;
+    let mut usable = 0;
     lockdep_assert_held(&ci.lock);
     VM_WARN_ON(!cluster_is_usable(ci, order));
-    if (end < nr_pages || ci.count + nr_pages > SWAPFILE_CLUSTER)
-    goto out;
-    for (end -= nr_pages; offset <= end; offset += nr_pages) {
+    if (end < nr_pages || ci.count + nr_pages > SWAPFILE_CLUSTER) {
+// goto;
+    }
+    while (offset <= end) {
     need_reclaim = false;
-    if (!cluster_scan_range(si, ci, offset, nr_pages, &need_reclaim))
+    if (!cluster_scan_range(si, ci, offset, nr_pages, &need_reclaim)) {
     continue;
+    }
     if (need_reclaim) {
     ret = cluster_reclaim_range(si, ci, offset, order, &usable);
-    if (!usable)
-    goto out;
-    if (cluster_is_empty(ci))
+    if (!usable) {
+// goto;
+    }
+    if (cluster_is_empty(ci)) {
     offset = start;
+    }
 // Reclaim failed but cluster is usable, try next
-    if (!ret)
+    if (!ret) {
     continue;
     }
-    if (!__swap_cluster_alloc_entries(si, ci, folio, offset % SWAPFILE_CLUSTER))
-    break;
-    found = offset;
-    offset += nr_pages;
-    if (ci.count < SWAPFILE_CLUSTER && offset <= end)
-    next = offset;
+    }
+    if (!__swap_cluster_alloc_entries(si, ci, folio, offset % SWAPFILE_CLUSTER)) {
     break;
     }
-    out:
+    found = offset;
+    offset += nr_pages;
+    if (ci.count < SWAPFILE_CLUSTER && offset <= end) {
+    next = offset;
+    }
+    break;
+    }
+// label;
     relocate_cluster(si, ci);
     swap_cluster_unlock(ci);
     if (si.flags & SWP_SOLIDSTATE) {
@@ -913,39 +1155,37 @@ unsafe extern "C" fn free_cluster(si: *mut swap_info_struct, ci: *mut swap_clust
     }
     return found;
     }
-    static unsigned int alloc_swap_scan_list(struct swap_info_struct *si,
-    struct list_head *list,
-    struct folio *folio,
-    bool scan_all)
-    {
-    let mut found: c_uint = SWAP_ENTRY_INVALID;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_swap_scan_list(si: *mut swap_info_struct, list: *mut list_head, folio: *mut folio, scan_all: bool) -> c_uint {
+pub static mut found: c_uint = 0;
     do {
-    struct swap_cluster_info *ci = isolate_lock_cluster(si, list);
-    unsigned long offset;
-    if (!ci)
+    let mut ci = isolate_lock_cluster(si, list);
+    let mut offset = 0;
+    if (!ci) {
     break;
+    }
     offset = cluster_offset(si, ci);
     found = alloc_swap_scan_cluster(si, ci, folio, offset);
-    if (found)
+    if (found) {
     break;
+    }
     } while (scan_all);
     return found;
     }
 #[no_mangle]
 unsafe extern "C" fn swap_reclaim_full_clusters(si: *mut swap_info_struct, force: bool) {
-    static void swap_reclaim_full_clusters(struct swap_info_struct *si, bool force)
-    {
-    let mut to_scan: c_long = 1;
+pub static mut to_scan: c_long = 1;
     unsigned long offset, end;
-    struct swap_cluster_info *ci;
-    unsigned long swp_tb;
-    int nr_reclaim;
-    if (force)
+pub static mut ci: *mut c_void = core::ptr::null_mut();
+    let mut swp_tb = 0;
+    let mut nr_reclaim = 0;
+    if (force) {
     to_scan = swap_usage_in_pages(si) / SWAPFILE_CLUSTER;
+    }
     while ((ci = isolate_lock_cluster(si, &si.full_clusters))) {
     offset = cluster_offset(si, ci);
     end = min(si.max, offset + SWAPFILE_CLUSTER);
-    to_scan--;
+    to_scan -= 1;
     while (offset < end) {
     swp_tb = swap_table_get(ci, offset % SWAPFILE_CLUSTER);
     if (swp_tb_is_folio(swp_tb) && !__swp_tb_get_count(swp_tb)) {
@@ -958,14 +1198,16 @@ unsafe extern "C" fn swap_reclaim_full_clusters(si: *mut swap_info_struct, force
     continue;
     }
     }
-    offset++;
+    offset += 1;
     }
 // in case no swap cache is reclaimed
-    if (ci.flags == CLUSTER_FLAG_NONE)
+    if (ci.flags == CLUSTER_FLAG_NONE) {
     relocate_cluster(si, ci);
+    }
     swap_cluster_unlock(ci);
-    if (to_scan <= 0)
+    if (to_scan <= 0) {
     break;
+    }
 //
 // When 'force' is false, 'to_scan' is initialized to 1.
 // The loop breaks above, making this cond_resched() unreachable
@@ -976,69 +1218,74 @@ unsafe extern "C" fn swap_reclaim_full_clusters(si: *mut swap_info_struct, force
     }
 #[no_mangle]
 unsafe extern "C" fn swap_reclaim_work(work: *mut work_struct) {
-    static void swap_reclaim_work(struct work_struct *work)
-    {
-    struct swap_info_struct *si;
-    si = container_of(work, struct swap_info_struct, reclaim_work);
+pub static mut si: *mut c_void = core::ptr::null_mut();
+    si = container_of!(work, swap_info_struct, reclaim_work);
     swap_reclaim_full_clusters(si, true);
     }
 //
 // Try to allocate swap entries with specified order and try set a new
 // cluster for current CPU too.
 //
-    static unsigned long cluster_alloc_swap_entry(struct swap_info_struct *si,
-    struct folio *folio)
-    {
-    struct swap_cluster_info *ci;
-    let mut order: c_uint = likely(folio) ? folio_order(folio) : 0;
-    let mut offset: c_uint = SWAP_ENTRY_INVALID, found = SWAP_ENTRY_INVALID;
+#[no_mangle]
+pub unsafe extern "C" fn cluster_alloc_swap_entry(si: *mut swap_info_struct, folio: *mut folio) -> c_ulong {
+pub static mut ci: *mut c_void = core::ptr::null_mut();
+pub static mut order: c_uint = 0;
+pub static mut offset: c_uint = 0;
 //
 // Swapfile is not block device so unable
 // to allocate large entries.
 //
-    if (order && !(si.flags & SWP_BLKDEV))
+    if (order && !(si.flags & SWP_BLKDEV)) {
     return 0;
+    }
     if (!(si.flags & SWP_SOLIDSTATE)) {
 // Serialize HDD SWAP allocation for each device.
     spin_lock(&si.global_cluster_lock);
     offset = si.global_cluster.next[order];
-    if (offset == SWAP_ENTRY_INVALID)
-    goto new_cluster;
+    if (offset == SWAP_ENTRY_INVALID) {
+// goto;
+    }
     ci = swap_cluster_lock(si, offset);
 // Cluster could have been used by another order
     if (cluster_is_usable(ci, order)) {
-    if (cluster_is_empty(ci))
+    if (cluster_is_empty(ci)) {
     offset = cluster_offset(si, ci);
+    }
     found = alloc_swap_scan_cluster(si, ci, folio, offset);
     } else {
     swap_cluster_unlock(ci);
     }
-    if (found)
-    goto done;
+    if (found) {
+// goto;
     }
-    new_cluster:
+    }
+// label;
 //
 // If the device need discard, prefer new cluster over nonfull
 // to spread out the writes.
 //
     if (si.flags & SWP_PAGE_DISCARD) {
     found = alloc_swap_scan_list(si, &si.free_clusters, folio, false);
-    if (found)
-    goto done;
+    if (found) {
+// goto;
+    }
     }
     if (order < PMD_ORDER) {
     found = alloc_swap_scan_list(si, &si.nonfull_clusters[order], folio, true);
-    if (found)
-    goto done;
+    if (found) {
+// goto;
+    }
     }
     if (!(si.flags & SWP_PAGE_DISCARD)) {
     found = alloc_swap_scan_list(si, &si.free_clusters, folio, false);
-    if (found)
-    goto done;
+    if (found) {
+// goto;
+    }
     }
 // Try reclaim full clusters if free and nonfull lists are drained
-    if (vm_swap_full())
+    if (vm_swap_full()) {
     swap_reclaim_full_clusters(si, false);
+    }
     if (order < PMD_ORDER) {
 //
 // Scan only one fragment cluster is good enough. Order 0
@@ -1047,35 +1294,38 @@ unsafe extern "C" fn swap_reclaim_work(work: *mut work_struct) {
 // keeps the list rotated and reclaimed (for clean swap cache).
 //
     found = alloc_swap_scan_list(si, &si.frag_clusters[order], folio, false);
-    if (found)
-    goto done;
+    if (found) {
+// goto;
     }
-    if (order)
-    goto done;
+    }
+    if (order) {
+// goto;
+    }
 // Order 0 stealing from higher order
-    for (int o = 1; o < SWAP_NR_ORDERS; o++) {
+    while (o < SWAP_NR_ORDERS) {
 //
 // Clusters here have at least one usable slots and can't fail order 0
 // allocation, but reclaim may drop si->lock and race with another user.
 //
     found = alloc_swap_scan_list(si, &si.frag_clusters[o], folio, true);
-    if (found)
-    goto done;
-    found = alloc_swap_scan_list(si, &si.nonfull_clusters[o], folio, true);
-    if (found)
-    goto done;
+    if (found) {
+// goto;
     }
-    done:
-    if (!(si.flags & SWP_SOLIDSTATE))
+    found = alloc_swap_scan_list(si, &si.nonfull_clusters[o], folio, true);
+    if (found) {
+// goto;
+    }
+    }
+// label;
+    if (!(si.flags & SWP_SOLIDSTATE)) {
     spin_unlock(&si.global_cluster_lock);
+    }
     return found;
     }
 // SWAP_USAGE_OFFLIST_BIT can only be set by this helper.
 #[no_mangle]
 unsafe extern "C" fn del_from_avail_list(si: *mut swap_info_struct, swapoff: bool) {
-    static void del_from_avail_list(struct swap_info_struct *si, bool swapoff)
-    {
-    unsigned long pages;
+    let mut pages = 0;
     spin_lock(&swap_avail_lock);
     if (swapoff) {
 //
@@ -1097,31 +1347,32 @@ unsafe extern "C" fn del_from_avail_list(si: *mut swap_info_struct, swapoff: boo
 //
     pages = si.pages;
     if (!atomic_long_try_cmpxchg(&si.inuse_pages, &pages,
-    pages | SWAP_USAGE_OFFLIST_BIT))
-    goto skip;
+    pages | SWAP_USAGE_OFFLIST_BIT)) {
+// goto;
+    }
     }
     plist_del(&si.avail_list, &swap_avail_head);
-    skip:
+// label;
     spin_unlock(&swap_avail_lock);
     }
 // SWAP_USAGE_OFFLIST_BIT can only be cleared by this helper.
 #[no_mangle]
 unsafe extern "C" fn add_to_avail_list(si: *mut swap_info_struct, swapon: bool) {
-    static void add_to_avail_list(struct swap_info_struct *si, bool swapon)
-    {
-    long val;
-    unsigned long pages;
+    let mut val = 0;
+    let mut pages = 0;
     spin_lock(&swap_avail_lock);
 // Corresponding to SWP_WRITEOK clearing in del_from_avail_list
     if (swapon) {
     lockdep_assert_held(&si.lock);
     si.flags |= SWP_WRITEOK;
     } else {
-    if (!(READ_ONCE(si.flags) & SWP_WRITEOK))
-    goto skip;
+    if (!(READ_ONCE(si.flags) & SWP_WRITEOK)) {
+// goto;
     }
-    if (!(atomic_long_read(&si.inuse_pages) & SWAP_USAGE_OFFLIST_BIT))
-    goto skip;
+    }
+    if (!(atomic_long_read(&si.inuse_pages) & SWAP_USAGE_OFFLIST_BIT)) {
+// goto;
+    }
     val = atomic_long_fetch_and_relaxed(~SWAP_USAGE_OFFLIST_BIT, &si.inuse_pages);
 //
 // When device is full and device is on the plist, only one updater will
@@ -1132,11 +1383,12 @@ unsafe extern "C" fn add_to_avail_list(si: *mut swap_info_struct, swapon: bool) 
     if (val == pages) {
 // Just like the cmpxchg in del_from_avail_list
     if (atomic_long_try_cmpxchg(&si.inuse_pages, &pages,
-    pages | SWAP_USAGE_OFFLIST_BIT))
-    goto skip;
+    pages | SWAP_USAGE_OFFLIST_BIT)) {
+// goto;
+    }
     }
     plist_add(&si.avail_list, &swap_avail_head);
-    skip:
+// label;
     spin_unlock(&swap_avail_lock);
     }
 //
@@ -1146,9 +1398,7 @@ unsafe extern "C" fn add_to_avail_list(si: *mut swap_info_struct, swapon: bool) 
 //
 #[no_mangle]
 unsafe extern "C" fn swap_usage_add(si: *mut swap_info_struct, nr_entries: c_uint) -> bool {
-    static bool swap_usage_add(struct swap_info_struct *si, unsigned int nr_entries)
-    {
-    let mut val: c_long = atomic_long_add_return_relaxed(nr_entries, &si.inuse_pages);
+pub static mut val: c_long = 0;
 //
 // If device is full, and SWAP_USAGE_OFFLIST_BIT is not set,
 // remove it from the plist.
@@ -1161,43 +1411,45 @@ unsafe extern "C" fn swap_usage_add(si: *mut swap_info_struct, nr_entries: c_uin
     }
 #[no_mangle]
 unsafe extern "C" fn swap_usage_sub(si: *mut swap_info_struct, nr_entries: c_uint) {
-    static void swap_usage_sub(struct swap_info_struct *si, unsigned int nr_entries)
-    {
-    let mut val: c_long = atomic_long_sub_return_relaxed(nr_entries, &si.inuse_pages);
+pub static mut val: c_long = 0;
 //
 // If device is not full, and SWAP_USAGE_OFFLIST_BIT is set,
 // add it to the plist.
 //
-    if (unlikely(val & SWAP_USAGE_OFFLIST_BIT))
+    if (unlikely(val & SWAP_USAGE_OFFLIST_BIT)) {
     add_to_avail_list(si, false);
     }
-    static void swap_range_alloc(struct swap_info_struct *si,
-    unsigned int nr_entries)
-    {
+    }
+#[no_mangle]
+pub unsafe extern "C" fn swap_range_alloc(si: *mut swap_info_struct, nr_entries: c_uint) {
     if (swap_usage_add(si, nr_entries)) {
-    if (vm_swap_full())
+    if (vm_swap_full()) {
     schedule_work(&si.reclaim_work);
+    }
     }
     atomic_long_sub(nr_entries, &nr_swap_pages);
     }
-    static void swap_range_free(struct swap_info_struct *si, unsigned long offset,
-    unsigned int nr_entries)
-    {
-    let mut end: c_ulong = offset + nr_entries - 1;
-    void (*swap_slot_free_notify)(struct block_device *, unsigned long);
-    unsigned int i;
-    for (i = 0; i < nr_entries; i++)
+#[no_mangle]
+pub unsafe extern "C" fn swap_range_free(si: *mut swap_info_struct, offset: c_ulong, nr_entries: c_uint) {
+pub static mut end: c_ulong = 0;
+    void (*swap_slot_free_notify)(block_device *, unsigned long);
+    let mut i = 0;
+    for (i = 0; i < nr_entries; i++) {
     zswap_invalidate(swp_entry(si.type, offset + i));
-    if (si.flags & SWP_BLKDEV)
+    }
+    if (si.flags & SWP_BLKDEV) {
     swap_slot_free_notify =
     si.bdev.bd_disk.fops.swap_slot_free_notify;
-    else
+    }
+    else {
     swap_slot_free_notify = core::ptr::null_mut();
+    }
     while (offset <= end) {
     arch_swap_invalidate_page(si.type, offset);
-    if (swap_slot_free_notify)
+    if (swap_slot_free_notify) {
     swap_slot_free_notify(si.bdev, offset);
-    offset++;
+    }
+    offset += 1;
     }
 //
 // Make sure that try_to_unuse() observes si->inuse_pages reaching 0
@@ -1209,10 +1461,9 @@ unsafe extern "C" fn swap_usage_sub(si: *mut swap_info_struct, nr_entries: c_uin
     }
 #[no_mangle]
 unsafe extern "C" fn get_swap_device_info(si: *mut swap_info_struct) -> bool {
-    static bool get_swap_device_info(struct swap_info_struct *si)
-    {
-    if (!percpu_ref_tryget_live(&si.users))
+    if (!percpu_ref_tryget_live(&si.users)) {
     return false;
+    }
 //
 // Guarantee the si->users are checked before accessing other
 // fields of swap_info_struct, and si->flags (SWP_WRITEOK) is
@@ -1230,24 +1481,24 @@ unsafe extern "C" fn get_swap_device_info(si: *mut swap_info_struct) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn swap_alloc_fast(folio: *mut folio) -> bool {
-    static bool swap_alloc_fast(struct folio *folio)
-    {
-    let mut order: c_uint = folio_order(folio);
-    struct swap_cluster_info *ci;
-    struct swap_info_struct *si;
-    unsigned int offset;
+pub static mut order: c_uint = 0;
+pub static mut ci: *mut c_void = core::ptr::null_mut();
+pub static mut si: *mut c_void = core::ptr::null_mut();
+    let mut offset = 0;
 //
 // Once allocated, swap_info_struct will never be completely freed,
 // so checking it's liveness by get_swap_device_info is enough.
 //
     si = this_cpu_read(percpu_swap_cluster.si[order]);
     offset = this_cpu_read(percpu_swap_cluster.offset[order]);
-    if (!si || !offset || !get_swap_device_info(si))
+    if (!si || !offset || !get_swap_device_info(si)) {
     return false;
+    }
     ci = swap_cluster_lock(si, offset);
     if (cluster_is_usable(ci, order)) {
-    if (cluster_is_empty(ci))
+    if (cluster_is_empty(ci)) {
     offset = cluster_offset(si, ci);
+    }
     alloc_swap_scan_cluster(si, ci, folio, offset);
     } else {
     swap_cluster_unlock(ci);
@@ -1258,11 +1509,10 @@ unsafe extern "C" fn swap_alloc_fast(folio: *mut folio) -> bool {
 // Rotate the device and switch to a new cluster
 #[no_mangle]
 unsafe extern "C" fn swap_alloc_slow(folio: *mut folio) {
-    static void swap_alloc_slow(struct folio *folio)
-    {
-    struct swap_info_struct *si, *next;
+    let mut si = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
     spin_lock(&swap_avail_lock);
-    start_over:
+// label;
     plist_for_each_entry_safe(si, next, &swap_avail_head, avail_list) {
 // Rotate the device and switch to a new cluster
     plist_requeue(&si.avail_list, &swap_avail_head);
@@ -1270,10 +1520,12 @@ unsafe extern "C" fn swap_alloc_slow(folio: *mut folio) {
     if (get_swap_device_info(si)) {
     cluster_alloc_swap_entry(si, folio);
     put_swap_device(si);
-    if (folio_test_swapcache(folio))
+    if (folio_test_swapcache(folio)) {
     return;
-    if (folio_test_large(folio))
+    }
+    if (folio_test_large(folio)) {
     return;
+    }
     }
     spin_lock(&swap_avail_lock);
 //
@@ -1286,8 +1538,9 @@ unsafe extern "C" fn swap_alloc_slow(folio: *mut folio) {
 // swap_avail_head list then try it, otherwise start over if we
 // have not gotten any slots.
 //
-    if (plist_node_empty(&next.avail_list))
-    goto start_over;
+    if (plist_node_empty(&next.avail_list)) {
+// goto;
+    }
     }
     spin_unlock(&swap_avail_lock);
     }
@@ -1297,37 +1550,38 @@ unsafe extern "C" fn swap_alloc_slow(folio: *mut folio) {
 //
 #[no_mangle]
 unsafe extern "C" fn swap_sync_discard() -> bool {
-    static bool swap_sync_discard(void)
-    {
-    let mut ret: bool = false;
-    struct swap_info_struct *si, *next;
+pub static mut ret: bool = false;
+    let mut si = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
     spin_lock(&swap_lock);
-    start_over:
+// label;
     plist_for_each_entry_safe(si, next, &swap_active_head, list) {
     spin_unlock(&swap_lock);
     if (get_swap_device_info(si)) {
-    if (si.flags & SWP_PAGE_DISCARD)
+    if (si.flags & SWP_PAGE_DISCARD) {
     ret = swap_do_scheduled_discard(si);
+    }
     put_swap_device(si);
     }
-    if (ret)
+    if (ret) {
     return true;
+    }
     spin_lock(&swap_lock);
-    if (plist_node_empty(&next.list))
-    goto start_over;
+    if (plist_node_empty(&next.list)) {
+// goto;
+    }
     }
     spin_unlock(&swap_lock);
     return false;
     }
-    static int swap_extend_table_alloc(struct swap_info_struct *si,
-    struct swap_cluster_info *ci,
-    unsigned int ci_off, gfp_t gfp)
-    {
-    int count;
-    void *table;
-    table = kzalloc(sizeof(ci.extend_table[0]) * SWAPFILE_CLUSTER, gfp);
-    if (!table)
+#[no_mangle]
+pub unsafe extern "C" fn swap_extend_table_alloc(si: *mut swap_info_struct, ci: *mut swap_cluster_info, ci_off: c_uint, gfp: gfp_t) -> c_int {
+    let mut count = 0;
+pub static mut table: *mut c_void = core::ptr::null_mut();
+    table = kzalloc(sizeof!(ci.extend_table[0]) * SWAPFILE_CLUSTER, gfp);
+    if (!table) {
     return -ENOMEM;
+    }
     spin_lock(&ci.lock);
 //
 // Extend table allocation requires releasing ci lock first so it's
@@ -1335,32 +1589,34 @@ unsafe extern "C" fn swap_sync_discard() -> bool {
 // a concurrent extend table allocation has already succeeded, so
 // the allocation is no longer needed.
 //
-    if (!cluster_table_is_alloced(ci))
-    goto out_free;
+    if (!cluster_table_is_alloced(ci)) {
+// goto;
+    }
     count = swp_tb_get_count(__swap_table_get(ci, ci_off));
-    if (count < (SWP_TB_COUNT_MAX - 1))
-    goto out_free;
-    if (ci.extend_table)
-    goto out_free;
+    if (count < (SWP_TB_COUNT_MAX - 1)) {
+// goto;
+    }
+    if (ci.extend_table) {
+// goto;
+    }
     ci.extend_table = table;
     spin_unlock(&ci.lock);
     return 0;
-    out_free:
+// label;
     spin_unlock(&ci.lock);
     kfree(table);
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn swap_retry_table_alloc(entry: swp_entry_t, gfp: gfp_t) -> c_int {
-    int swap_retry_table_alloc(swp_entry_t entry, gfp_t gfp)
-    {
-    int ret;
-    struct swap_info_struct *si;
-    struct swap_cluster_info *ci;
-    let mut offset: c_ulong = swp_offset(entry);
+    let mut ret = 0;
+pub static mut si: *mut c_void = core::ptr::null_mut();
+pub static mut ci: *mut c_void = core::ptr::null_mut();
+pub static mut offset: c_ulong = 0;
     si = get_swap_device(entry);
-    if (!si)
+    if (!si) {
     return 0;
+    }
     ci = __swap_offset_to_cluster(si, offset);
     ret = swap_extend_table_alloc(si, ci, swp_cluster_offset(entry), gfp);
     put_swap_device(si);
@@ -1368,15 +1624,15 @@ pub unsafe extern "C" fn swap_retry_table_alloc(entry: swp_entry_t, gfp: gfp_t) 
     }
 #[no_mangle]
 unsafe extern "C" fn swap_extend_table_try_free(ci: *mut swap_cluster_info) {
-    static void swap_extend_table_try_free(struct swap_cluster_info *ci)
-    {
-    unsigned long i;
-    let mut can_free: bool = true;
-    if (!ci.extend_table)
+    let mut i = 0;
+pub static mut can_free: bool = true;
+    if (!ci.extend_table) {
     return;
-    for (i = 0; i < SWAPFILE_CLUSTER; i++) {
-    if (ci.extend_table[i])
+    }
+    while (i < SWAPFILE_CLUSTER) {
+    if (ci.extend_table[i]) {
     can_free = false;
+    }
     }
     if (can_free) {
     kfree(ci.extend_table);
@@ -1384,11 +1640,10 @@ unsafe extern "C" fn swap_extend_table_try_free(ci: *mut swap_cluster_info) {
     }
     }
 // Decrease the swap count of one slot, without freeing it
-    static void __swap_cluster_put_entry(struct swap_cluster_info *ci,
-    unsigned int ci_off)
-    {
-    int count;
-    unsigned long swp_tb;
+#[no_mangle]
+pub unsafe extern "C" fn __swap_cluster_put_entry(ci: *mut swap_cluster_info, ci_off: c_uint) {
+    let mut count = 0;
+    let mut swp_tb = 0;
     lockdep_assert_held(&ci.lock);
     swp_tb = __swap_table_get(ci, ci_off);
     count = __swp_tb_get_count(swp_tb);
@@ -1398,7 +1653,7 @@ unsafe extern "C" fn swap_extend_table_try_free(ci: *mut swap_cluster_info) {
     count = ci.extend_table[ci_off];
 // Overflow starts with SWP_TB_COUNT_MAX
     VM_WARN_ON_ONCE(count < SWP_TB_COUNT_MAX);
-    count--;
+    count -= 1;
     if (count == (SWP_TB_COUNT_MAX - 1)) {
     ci.extend_table[ci_off] = 0;
     __swap_table_set(ci, ci_off, __swp_tb_mk_count(swp_tb, count));
@@ -1414,8 +1669,9 @@ unsafe extern "C" fn swap_extend_table_try_free(ci: *mut swap_cluster_info) {
 // so free it. And if we just put the count value from MAX - 1, it's
 // also possible that a pending dup just attached an extend table.
 //
-    if (unlikely(count == SWP_TB_COUNT_MAX - 2 || count == SWP_TB_COUNT_MAX - 1))
+    if (unlikely(count == SWP_TB_COUNT_MAX - 2 || count == SWP_TB_COUNT_MAX - 1)) {
     swap_extend_table_try_free(ci);
+    }
     }
 //
 // swap_put_entries_cluster - Decrease the swap count of slots within one cluster
@@ -1430,17 +1686,16 @@ unsafe extern "C" fn swap_extend_table_try_free(ci: *mut swap_cluster_info) {
 // Context: The specified slots must be pinned by existing swap count or swap
 // cache reference, so they won't be released until this helper returns.
 //
-    static void swap_put_entries_cluster(struct swap_info_struct *si,
-    pgoff_t offset, int nr,
-    bool reclaim_cache)
-    {
-    struct swap_cluster_info *ci;
-    unsigned int ci_off, ci_end;
-    let mut end: pgoff_t = offset + nr;
-    let mut need_reclaim: bool = false;
-    unsigned int nr_reclaimed;
-    unsigned long swp_tb;
-    let mut ci_batch: c_int = -1;
+#[no_mangle]
+pub unsafe extern "C" fn swap_put_entries_cluster(si: *mut swap_info_struct, offset: pgoff_t, nr: c_int, reclaim_cache: bool) {
+pub static mut ci: *mut c_void = core::ptr::null_mut();
+    let mut ci_off = 0;
+    let mut ci_end = 0;
+pub static mut end: pgoff_t = 0;
+pub static mut need_reclaim: bool = false;
+    let mut nr_reclaimed = 0;
+    let mut swp_tb = 0;
+pub static mut ci_batch: c_int = 0;
     ci = swap_cluster_lock(si, offset);
     ci_off = offset % SWAPFILE_CLUSTER;
     ci_end = ci_off + nr;
@@ -1449,8 +1704,9 @@ unsafe extern "C" fn swap_extend_table_try_free(ci: *mut swap_cluster_info) {
     if (swp_tb_get_count(swp_tb) == 1) {
 // count == 1 and non-cached slots will be batch freed.
     if (!swp_tb_is_folio(swp_tb)) {
-    if (ci_batch == -1)
+    if (ci_batch == -1) {
     ci_batch = ci_off;
+    }
     continue;
     }
 // count will be 0 after put, slot can be reclaimed
@@ -1468,34 +1724,38 @@ unsafe extern "C" fn swap_extend_table_try_free(ci: *mut swap_cluster_info) {
     ci_batch = -1;
     }
     } while (++ci_off < ci_end);
-    if (ci_batch != -1)
+    if (ci_batch != -1) {
     __swap_cluster_free_entries(si, ci, ci_batch, ci_off - ci_batch);
+    }
     swap_cluster_unlock(ci);
-    if (!need_reclaim || !reclaim_cache)
+    if (!need_reclaim || !reclaim_cache) {
     return;
+    }
     do {
     nr_reclaimed = __try_to_reclaim_swap(si, offset,
     TTRS_UNMAPPED | TTRS_FULL);
-    offset++;
-    if (nr_reclaimed)
+    offset += 1;
+    if (nr_reclaimed) {
     offset = round_up(offset, abs(nr_reclaimed));
+    }
     } while (offset < end);
     }
 // Increase the swap count of one slot.
-    static int __swap_cluster_dup_entry(struct swap_cluster_info *ci,
-    unsigned int ci_off)
-    {
-    int count;
-    unsigned long swp_tb;
+#[no_mangle]
+pub unsafe extern "C" fn __swap_cluster_dup_entry(ci: *mut swap_cluster_info, ci_off: c_uint) -> c_int {
+    let mut count = 0;
+    let mut swp_tb = 0;
     lockdep_assert_held(&ci.lock);
     swp_tb = __swap_table_get(ci, ci_off);
 // Bad or special slots can't be handled
-    if (WARN_ON_ONCE(swp_tb_is_bad(swp_tb)))
+    if (WARN_ON_ONCE!(swp_tb_is_bad(swp_tb))) {
     return -EINVAL;
+    }
     count = __swp_tb_get_count(swp_tb);
 // Must be either cached or have a count already
-    if (WARN_ON_ONCE(!count && !swp_tb_is_folio(swp_tb)))
+    if (WARN_ON_ONCE!(!count && !swp_tb_is_folio(swp_tb))) {
     return -ENOENT;
+    }
     if (likely(count < (SWP_TB_COUNT_MAX - 1))) {
     __swap_table_set(ci, ci_off, __swp_tb_mk_count(swp_tb, count + 1));
     VM_WARN_ON_ONCE(ci.extend_table && ci.extend_table[ci_off]);
@@ -1513,7 +1773,7 @@ unsafe extern "C" fn swap_extend_table_try_free(ci: *mut swap_cluster_info) {
     ++ci.extend_table[ci_off];
     } else {
 // Never happens unless counting went wrong
-    WARN_ON_ONCE(1);
+    WARN_ON_ONCE!(1);
     }
     return 0;
     }
@@ -1528,17 +1788,18 @@ unsafe extern "C" fn swap_extend_table_try_free(ci: *mut swap_cluster_info) {
 // Return: 0 on success. -ENOMEM if the swap count maxed out (SWP_TB_COUNT_MAX)
 // and failed to allocate an extended table, -EINVAL if any entry is bad entry.
 //
-    static int swap_dup_entries_cluster(struct swap_info_struct *si,
-    pgoff_t offset, int nr)
-    {
-    int err;
-    struct swap_cluster_info *ci;
-    unsigned int ci_start, ci_off, ci_end;
+#[no_mangle]
+pub unsafe extern "C" fn swap_dup_entries_cluster(si: *mut swap_info_struct, offset: pgoff_t, nr: c_int) -> c_int {
+    let mut err = 0;
+pub static mut ci: *mut c_void = core::ptr::null_mut();
+    let mut ci_start = 0;
+    let mut ci_off = 0;
+    let mut ci_end = 0;
     ci_start = offset % SWAPFILE_CLUSTER;
     ci_end = ci_start + nr;
     ci_off = ci_start;
     ci = swap_cluster_lock(si, offset);
-    restart:
+// label;
     do {
     err = __swap_cluster_dup_entry(ci, ci_off);
     if (unlikely(err)) {
@@ -1546,17 +1807,19 @@ unsafe extern "C" fn swap_extend_table_try_free(ci: *mut swap_cluster_info) {
     spin_unlock(&ci.lock);
     err = swap_extend_table_alloc(si, ci, ci_off, GFP_ATOMIC);
     spin_lock(&ci.lock);
-    if (!err)
-    goto restart;
+    if (!err) {
+// goto;
     }
-    goto failed;
+    }
+// goto;
     }
     } while (++ci_off < ci_end);
     swap_cluster_unlock(ci);
     return 0;
-    failed:
-    while (ci_off-- > ci_start)
+// label;
+    while (ci_off-- > ci_start) {
     __swap_cluster_put_entry(ci, ci_off);
+    }
     swap_extend_table_try_free(ci);
     swap_cluster_unlock(ci);
     return err;
@@ -1573,10 +1836,8 @@ unsafe extern "C" fn swap_extend_table_try_free(ci: *mut swap_cluster_info) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_alloc_swap(folio: *mut folio) -> c_int {
-    int folio_alloc_swap(struct folio *folio)
-    {
-    let mut order: c_uint = folio_order(folio);
-    let mut size: c_uint = 1 << order;
+pub static mut order: c_uint = 0;
+pub static mut size: c_uint = 0;
     VM_BUG_ON_FOLIO(!folio_test_locked(folio), folio);
     VM_BUG_ON_FOLIO(!folio_test_uptodate(folio), folio);
     if (order) {
@@ -1584,8 +1845,9 @@ pub unsafe extern "C" fn folio_alloc_swap(folio: *mut folio) -> c_int {
 // Reject large allocation when THP_SWAP is disabled,
 // the caller should split the folio and try again.
 //
-    if (!IS_ENABLED(CONFIG_THP_SWAP))
+    if (!IS_ENABLED!(CONFIG_THP_SWAP)) {
     return -EAGAIN;
+    }
 //
 // Allocation size should never exceed cluster size
 // (HPAGE_PMD_SIZE).
@@ -1595,20 +1857,24 @@ pub unsafe extern "C" fn folio_alloc_swap(folio: *mut folio) -> c_int {
     return -EINVAL;
     }
     }
-    again:
+// label;
     local_lock(&percpu_swap_cluster.lock);
-    if (!swap_alloc_fast(folio))
+    if (!swap_alloc_fast(folio)) {
     swap_alloc_slow(folio);
+    }
     local_unlock(&percpu_swap_cluster.lock);
     if (!order && unlikely(!folio_test_swapcache(folio))) {
-    if (swap_sync_discard())
-    goto again;
+    if (swap_sync_discard()) {
+// goto;
+    }
     }
 // Need to call this even if allocation failed, for MEMCG_SWAP_FAIL.
-    if (unlikely(mem_cgroup_try_charge_swap(folio)))
+    if (unlikely(mem_cgroup_try_charge_swap(folio))) {
     swap_cache_del_folio(folio);
-    if (unlikely(!folio_test_swapcache(folio)))
+    }
+    if (unlikely(!folio_test_swapcache(folio))) {
     return -ENOMEM;
+    }
     return 0;
     }
 //
@@ -1630,10 +1896,8 @@ pub unsafe extern "C" fn folio_alloc_swap(folio: *mut folio) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_dup_swap(folio: *mut folio, page: *mut page) -> c_int {
-    int folio_dup_swap(struct folio *folio, struct page *page)
-    {
-    let mut entry: swp_entry_t = folio.swap;
-    let mut nr_pages: c_ulong = folio_nr_pages(folio);
+pub static mut entry: swp_entry_t = 0;
+pub static mut nr_pages: c_ulong = 0;
     VM_WARN_ON_FOLIO(!folio_test_locked(folio), folio);
     VM_WARN_ON_FOLIO(!folio_test_swapcache(folio), folio);
     if (page) {
@@ -1654,11 +1918,9 @@ pub unsafe extern "C" fn folio_dup_swap(folio: *mut folio, page: *mut page) -> c
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_put_swap(folio: *mut folio, page: *mut page) {
-    void folio_put_swap(struct folio *folio, struct page *page)
-    {
-    let mut entry: swp_entry_t = folio.swap;
-    let mut nr_pages: c_ulong = folio_nr_pages(folio);
-    struct swap_info_struct *si = __swap_entry_to_info(entry);
+pub static mut entry: swp_entry_t = 0;
+pub static mut nr_pages: c_ulong = 0;
+    let mut si = __swap_entry_to_info(entry);
     VM_WARN_ON_FOLIO(!folio_test_locked(folio), folio);
     VM_WARN_ON_FOLIO(!folio_test_swapcache(folio), folio);
     if (page) {
@@ -1704,26 +1966,30 @@ pub unsafe extern "C" fn folio_put_swap(folio: *mut folio, page: *mut page) {
 // changed with the page table locked to check whether the swap device
 // has been swapoff or swapoff+swapon.
 //
-    struct swap_info_struct *get_swap_device(swp_entry_t entry)
-    {
-    struct swap_info_struct *si;
-    unsigned long offset;
-    if (!entry.val)
-    goto out;
+#[no_mangle]
+pub unsafe extern "C" fn get_swap_device(entry: swp_entry_t) -> *mut c_void {
+pub static mut si: *mut c_void = core::ptr::null_mut();
+    let mut offset = 0;
+    if (!entry.val) {
+// goto;
+    }
     si = swap_entry_to_info(entry);
-    if (!si)
-    goto bad_nofile;
-    if (!get_swap_device_info(si))
-    goto out;
+    if (!si) {
+// goto;
+    }
+    if (!get_swap_device_info(si)) {
+// goto;
+    }
     offset = swp_offset(entry);
-    if (offset >= si.max)
-    goto put_out;
+    if (offset >= si.max) {
+// goto;
+    }
     return si;
-    bad_nofile:
+// label;
     pr_err_ratelimited("%s: %s%08lx\n", __func__, Bad_file, entry.val);
-    out:
+// label;
     return core::ptr::null_mut();
-    put_out:
+// label;
     pr_err_ratelimited("%s: %s%08lx\n", __func__, Bad_offset, entry.val);
     percpu_ref_put(&si.users);
     return core::ptr::null_mut();
@@ -1732,15 +1998,13 @@ pub unsafe extern "C" fn folio_put_swap(folio: *mut folio, page: *mut page) {
 // Free a set of swap slots after their swap count dropped to zero, or will be
 // zero after putting the last ref (saves one __swap_cluster_put_entry call).
 //
-    void __swap_cluster_free_entries(struct swap_info_struct *si,
-    struct swap_cluster_info *ci,
-    unsigned int ci_start, unsigned int nr_pages)
-    {
-    unsigned long old_tb;
-    let mut batch_id: c_ushort = 0, id_cur;
-    let mut ci_off: c_uint = ci_start, ci_end = ci_start + nr_pages;
-    let mut ci_head: c_ulong = cluster_offset(si, ci);
-    let mut batch_off: c_uint = ci_off;
+#[no_mangle]
+pub unsafe extern "C" fn __swap_cluster_free_entries(si: *mut swap_info_struct, ci: *mut swap_cluster_info, ci_start: c_uint, nr_pages: c_uint) {
+    let mut old_tb = 0;
+pub static mut batch_id: c_ushort = 0;
+pub static mut ci_off: c_uint = 0;
+pub static mut ci_head: c_ulong = 0;
+pub static mut batch_off: c_uint = 0;
     VM_WARN_ON(ci.count < nr_pages);
     ci.count -= nr_pages;
     do {
@@ -1752,35 +2016,38 @@ pub unsafe extern "C" fn folio_put_swap(folio: *mut folio, page: *mut page) {
     VM_WARN_ON(!swp_tb_is_shadow(old_tb) || __swp_tb_get_count(old_tb) > 1);
 // Resetting the slot to NULL also clears the inline flags.
     __swap_table_set(ci, ci_off, null_to_swp_tb());
-    if (!SWAP_TABLE_HAS_ZEROFLAG)
+    if (!SWAP_TABLE_HAS_ZEROFLAG) {
     __swap_table_clear_zero(ci, ci_off);
+    }
 //
 // Uncharge swap slots by memcg in batches. Consecutive
 // slots with the same cgroup id are uncharged together.
 //
     id_cur = __swap_cgroup_clear(ci, ci_off, 1);
     if (batch_id != id_cur) {
-    if (batch_id)
+    if (batch_id) {
     mem_cgroup_uncharge_swap(batch_id, ci_off - batch_off);
+    }
     batch_id = id_cur;
     batch_off = ci_off;
     }
     } while (++ci_off < ci_end);
-    if (batch_id)
+    if (batch_id) {
     mem_cgroup_uncharge_swap(batch_id, ci_off - batch_off);
+    }
     swap_range_free(si, ci_head + ci_start, nr_pages);
     swap_cluster_assert_empty(ci, ci_start, nr_pages, false);
-    if (!ci.count)
+    if (!ci.count) {
     free_cluster(si, ci);
-    else
+    }
+    else {
     partial_free_cluster(si, ci);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn __swap_count(entry: swp_entry_t) -> c_int {
-    int __swap_count(swp_entry_t entry)
-    {
-    struct swap_cluster_info *ci = __swap_entry_to_cluster(entry);
-    let mut ci_off: c_uint = swp_cluster_offset(entry);
+    let mut ci = __swap_entry_to_cluster(entry);
+pub static mut ci_off: c_uint = 0;
     return swp_tb_get_count(__swap_table_get(ci, ci_off));
     }
 //
@@ -1790,11 +2057,9 @@ pub unsafe extern "C" fn __swap_count(entry: swp_entry_t) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn swap_entry_swapped(si: *mut swap_info_struct, entry: swp_entry_t) -> bool {
-    bool swap_entry_swapped(struct swap_info_struct *si, swp_entry_t entry)
-    {
-    let mut offset: pgoff_t = swp_offset(entry);
-    struct swap_cluster_info *ci;
-    unsigned long swp_tb;
+pub static mut offset: pgoff_t = 0;
+pub static mut ci: *mut c_void = core::ptr::null_mut();
+    let mut swp_tb = 0;
     ci = swap_cluster_lock(si, offset);
     swp_tb = swap_table_get(ci, offset % SWAPFILE_CLUSTER);
     swap_cluster_unlock(ci);
@@ -1806,20 +2071,20 @@ pub unsafe extern "C" fn swap_entry_swapped(si: *mut swap_info_struct, entry: sw
 //
 #[no_mangle]
 pub unsafe extern "C" fn swp_swapcount(entry: swp_entry_t) -> c_int {
-    int swp_swapcount(swp_entry_t entry)
-    {
-    struct swap_info_struct *si;
-    struct swap_cluster_info *ci;
-    unsigned long swp_tb;
-    int count;
+pub static mut si: *mut c_void = core::ptr::null_mut();
+pub static mut ci: *mut c_void = core::ptr::null_mut();
+    let mut swp_tb = 0;
+    let mut count = 0;
     si = get_swap_device(entry);
-    if (!si)
+    if (!si) {
     return 0;
+    }
     ci = swap_cluster_lock(si, swp_offset(entry));
     swp_tb = __swap_table_get(ci, swp_cluster_offset(entry));
     count = swp_tb_get_count(swp_tb);
-    if (count == SWP_TB_COUNT_MAX)
+    if (count == SWP_TB_COUNT_MAX) {
     count = ci.extend_table[swp_cluster_offset(entry)];
+    }
     swap_cluster_unlock(ci);
     put_swap_device(si);
     return count < 0 ? 0 : count;
@@ -1837,12 +2102,11 @@ pub unsafe extern "C" fn swp_swapcount(entry: swp_entry_t) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn folio_maybe_swapped(folio: *mut folio) -> bool {
-    static bool folio_maybe_swapped(struct folio *folio)
-    {
-    let mut entry: swp_entry_t = folio.swap;
-    struct swap_cluster_info *ci;
-    unsigned int ci_off, ci_end;
-    let mut ret: bool = false;
+pub static mut entry: swp_entry_t = 0;
+pub static mut ci: *mut c_void = core::ptr::null_mut();
+    let mut ci_off = 0;
+    let mut ci_end = 0;
+pub static mut ret: bool = false;
     VM_WARN_ON_ONCE_FOLIO(!folio_test_locked(folio), folio);
     VM_WARN_ON_ONCE_FOLIO(!folio_test_swapcache(folio), folio);
     ci = __swap_entry_to_cluster(entry);
@@ -1864,16 +2128,16 @@ unsafe extern "C" fn folio_maybe_swapped(folio: *mut folio) -> bool {
     }
 #[no_mangle]
 unsafe extern "C" fn folio_swapcache_freeable(folio: *mut folio) -> bool {
-    static bool folio_swapcache_freeable(struct folio *folio)
-    {
     VM_BUG_ON_FOLIO(!folio_test_locked(folio), folio);
-    if (!folio_test_swapcache(folio))
+    if (!folio_test_swapcache(folio)) {
     return false;
-    if (folio_test_writeback(folio))
+    }
+    if (folio_test_writeback(folio)) {
     return false;
+    }
 //
 // Once hibernation has begun to create its image of memory,
-// there's a danger that one of the calls to folio_free_swap()
+there's a danger that one of the calls to folio_free_swap()
 // - most probably a call from __try_to_reclaim_swap() while
 // hibernation is allocating its own swap pages for the image,
 // but conceivably even a call from memory reclaim - will free
@@ -1886,8 +2150,9 @@ unsafe extern "C" fn folio_swapcache_freeable(folio: *mut folio) -> bool {
 // Hibernation suspends storage while it is writing the image
 // to disk so check that here.
 //
-    if (pm_suspended_storage())
+    if (pm_suspended_storage()) {
     return false;
+    }
     return true;
     }
 //
@@ -1901,12 +2166,12 @@ unsafe extern "C" fn folio_swapcache_freeable(folio: *mut folio) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_free_swap(folio: *mut folio) -> bool {
-    bool folio_free_swap(struct folio *folio)
-    {
-    if (!folio_swapcache_freeable(folio))
+    if (!folio_swapcache_freeable(folio)) {
     return false;
-    if (folio_maybe_swapped(folio))
+    }
+    if (folio_maybe_swapped(folio)) {
     return false;
+    }
     swap_cache_del_folio(folio);
     folio_set_dirty(folio);
     return true;
@@ -1926,17 +2191,17 @@ pub unsafe extern "C" fn folio_free_swap(folio: *mut folio) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn swap_put_entries_direct(entry: swp_entry_t, nr: c_int) {
-    void swap_put_entries_direct(swp_entry_t entry, int nr)
-    {
-    let mut start_offset: c_ulong = swp_offset(entry);
-    let mut end_offset: c_ulong = start_offset + nr;
+pub static mut start_offset: c_ulong = 0;
+pub static mut end_offset: c_ulong = 0;
     unsigned long offset, cluster_end;
-    struct swap_info_struct *si;
+pub static mut si: *mut c_void = core::ptr::null_mut();
     si = get_swap_device(entry);
-    if (WARN_ON_ONCE(!si))
+    if (WARN_ON_ONCE!(!si)) {
     return;
-    if (WARN_ON_ONCE(end_offset > si.max))
-    goto out;
+    }
+    if (WARN_ON_ONCE!(end_offset > si.max)) {
+// goto;
+    }
 // Put entries and reclaim cache in each cluster
     offset = start_offset;
     do {
@@ -1944,7 +2209,7 @@ pub unsafe extern "C" fn swap_put_entries_direct(entry: swp_entry_t, nr: c_int) 
     swap_put_entries_cluster(si, offset, cluster_end - offset, true);
     offset = cluster_end;
     } while (offset < end_offset);
-    out:
+// label;
     put_swap_device(si);
     }
 
@@ -1960,14 +2225,13 @@ pub unsafe extern "C" fn swap_put_entries_direct(entry: swp_entry_t, nr: c_int) 
 //
 #[no_mangle]
 pub unsafe extern "C" fn swap_alloc_hibernation_slot(type: c_int) -> swp_entry_t {
-    swp_entry_t swap_alloc_hibernation_slot(int type)
-    {
     struct swap_info_struct *pcp_si, *si = swap_type_to_info(type);
     unsigned long pcp_offset, offset = SWAP_ENTRY_INVALID;
-    struct swap_cluster_info *ci;
-    let mut entry: swp_entry_t = {0};
-    if (!si)
-    goto fail;
+pub static mut ci: *mut c_void = core::ptr::null_mut();
+pub static mut entry: swp_entry_t = 0;
+    if (!si) {
+// goto;
+    }
 //
 // Try the local cluster first if it matches the device. If
 // not, try grab a new cluster and override local cluster.
@@ -1977,17 +2241,21 @@ pub unsafe extern "C" fn swap_alloc_hibernation_slot(type: c_int) -> swp_entry_t
     pcp_offset = this_cpu_read(percpu_swap_cluster.offset[0]);
     if (pcp_si == si && pcp_offset) {
     ci = swap_cluster_lock(si, pcp_offset);
-    if (cluster_is_usable(ci, 0))
+    if (cluster_is_usable(ci, 0)) {
     offset = alloc_swap_scan_cluster(si, ci, core::ptr::null_mut(), pcp_offset);
-    else
+    }
+    else {
     swap_cluster_unlock(ci);
     }
-    if (!offset)
+    }
+    if (!offset) {
     offset = cluster_alloc_swap_entry(si, core::ptr::null_mut());
+    }
     local_unlock(&percpu_swap_cluster.lock);
-    if (offset)
+    if (offset) {
     entry = swp_entry(si.type, offset);
-    fail:
+    }
+// label;
     return entry;
     }
 //
@@ -1998,11 +2266,9 @@ pub unsafe extern "C" fn swap_alloc_hibernation_slot(type: c_int) -> swp_entry_t
 //
 #[no_mangle]
 pub unsafe extern "C" fn swap_free_hibernation_slot(entry: swp_entry_t) {
-    void swap_free_hibernation_slot(swp_entry_t entry)
-    {
-    struct swap_info_struct *si = __swap_entry_to_info(entry);
-    struct swap_cluster_info *ci;
-    let mut offset: pgoff_t = swp_offset(entry);
+    let mut si = __swap_entry_to_info(entry);
+pub static mut ci: *mut c_void = core::ptr::null_mut();
+pub static mut offset: pgoff_t = 0;
     ci = swap_cluster_lock(si, offset);
     __swap_cluster_put_entry(ci, offset % SWAPFILE_CLUSTER);
 //
@@ -2011,28 +2277,30 @@ pub unsafe extern "C" fn swap_free_hibernation_slot(entry: swp_entry_t) {
 // Readahead can put a folio here, and freeing the slot now would
 // leave that folio with no entry behind it.
 //
-    if (!swp_tb_is_folio(__swap_table_get(ci, offset % SWAPFILE_CLUSTER)))
+    if (!swp_tb_is_folio(__swap_table_get(ci, offset % SWAPFILE_CLUSTER))) {
     __swap_cluster_free_entries(si, ci, offset % SWAPFILE_CLUSTER, 1);
+    }
     swap_cluster_unlock(ci);
 // In theory readahead might add it to the swap cache by accident
     __try_to_reclaim_swap(si, offset, TTRS_ANYWAY);
     }
 #[no_mangle]
 unsafe extern "C" fn __find_hibernation_swap_type(device: dev_t, offset: sector_t) -> c_int {
-    static int __find_hibernation_swap_type(dev_t device, sector_t offset)
-    {
-    int type;
+    let mut type = 0;
     lockdep_assert_held(&swap_lock);
-    if (!device)
+    if (!device) {
     return -EINVAL;
-    for (type = 0; type < nr_swapfiles; type++) {
-    struct swap_info_struct *sis = swap_info[type];
-    if (!(sis.flags & SWP_WRITEOK))
+    }
+    while (type < nr_swapfiles) {
+    let mut sis = swap_info[type];
+    if (!(sis.flags & SWP_WRITEOK)) {
     continue;
+    }
     if (device == sis.bdev.bd_dev) {
-    struct swap_extent *se = first_se(sis);
-    if (se.start_block == offset)
+    let mut se = first_se(sis);
+    if (se.start_block == offset) {
     return type;
+    }
     }
     }
     return -ENODEV;
@@ -2056,10 +2324,8 @@ unsafe extern "C" fn __find_hibernation_swap_type(device: dev_t, offset: sector_
 //
 #[no_mangle]
 pub unsafe extern "C" fn pin_hibernation_swap_type(device: dev_t, offset: sector_t) -> c_int {
-    int pin_hibernation_swap_type(dev_t device, sector_t offset)
-    {
-    int type;
-    struct swap_info_struct *si;
+    let mut type = 0;
+pub static mut si: *mut c_void = core::ptr::null_mut();
     spin_lock(&swap_lock);
     type = __find_hibernation_swap_type(device, offset);
     if (type < 0) {
@@ -2067,7 +2333,7 @@ pub unsafe extern "C" fn pin_hibernation_swap_type(device: dev_t, offset: sector
     return type;
     }
     si = swap_type_to_info(type);
-    if (WARN_ON_ONCE(!si)) {
+    if (WARN_ON_ONCE!(!si)) {
     spin_unlock(&swap_lock);
     return -ENODEV;
     }
@@ -2076,7 +2342,7 @@ pub unsafe extern "C" fn pin_hibernation_swap_type(device: dev_t, offset: sector
 // This check additionally guards against double-pinning within
 // the same session.
 //
-    if (WARN_ON_ONCE(si.flags & SWP_HIBERNATION)) {
+    if (WARN_ON_ONCE!(si.flags & SWP_HIBERNATION)) {
     spin_unlock(&swap_lock);
     return -EBUSY;
     }
@@ -2096,9 +2362,7 @@ pub unsafe extern "C" fn pin_hibernation_swap_type(device: dev_t, offset: sector
 //
 #[no_mangle]
 pub unsafe extern "C" fn unpin_hibernation_swap_type(type: c_int) {
-    void unpin_hibernation_swap_type(int type)
-    {
-    struct swap_info_struct *si;
+pub static mut si: *mut c_void = core::ptr::null_mut();
     spin_lock(&swap_lock);
     si = swap_type_to_info(type);
     if (!si) {
@@ -2128,9 +2392,7 @@ pub unsafe extern "C" fn unpin_hibernation_swap_type(type: c_int) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn find_hibernation_swap_type(device: dev_t, offset: sector_t) -> c_int {
-    int find_hibernation_swap_type(dev_t device, sector_t offset)
-    {
-    int type;
+    let mut type = 0;
     spin_lock(&swap_lock);
     type = __find_hibernation_swap_type(device, offset);
     spin_unlock(&swap_lock);
@@ -2138,14 +2400,13 @@ pub unsafe extern "C" fn find_hibernation_swap_type(device: dev_t, offset: secto
     }
 #[no_mangle]
 pub unsafe extern "C" fn find_first_swap(device: *mut dev_t) -> c_int {
-    int find_first_swap(dev_t *device)
-    {
-    int type;
+    let mut type = 0;
     spin_lock(&swap_lock);
-    for (type = 0; type < nr_swapfiles; type++) {
-    struct swap_info_struct *sis = swap_info[type];
-    if (!(sis.flags & SWP_WRITEOK))
+    while (type < nr_swapfiles) {
+    let mut sis = swap_info[type];
+    if (!(sis.flags & SWP_WRITEOK)) {
     continue;
+    }
 // device = sis->bdev->bd_dev;
     spin_unlock(&swap_lock);
     return type;
@@ -2159,12 +2420,11 @@ pub unsafe extern "C" fn find_first_swap(device: *mut dev_t) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn swapdev_block(type: c_int, offset: pgoff_t) -> sector_t {
-    sector_t swapdev_block(int type, pgoff_t offset)
-    {
-    struct swap_info_struct *si = swap_type_to_info(type);
-    struct swap_extent *se;
-    if (!si || !(si.flags & SWP_WRITEOK))
+    let mut si = swap_type_to_info(type);
+pub static mut se: *mut c_void = core::ptr::null_mut();
+    if (!si || !(si.flags & SWP_WRITEOK)) {
     return 0;
+    }
     se = offset_to_swap_extent(si, offset);
     return se.start_block + (offset - se.start_page);
     }
@@ -2176,17 +2436,16 @@ pub unsafe extern "C" fn swapdev_block(type: c_int, offset: pgoff_t) -> sector_t
 //
 #[no_mangle]
 pub unsafe extern "C" fn count_swap_pages(type: c_int, free: c_int) -> c_uint {
-    unsigned int count_swap_pages(int type, int free)
-    {
-    let mut n: c_uint = 0;
+pub static mut n: c_uint = 0;
     spin_lock(&swap_lock);
     if ((unsigned int)type < nr_swapfiles) {
-    struct swap_info_struct *sis = swap_info[type];
+    let mut sis = swap_info[type];
     spin_lock(&sis.lock);
     if (sis.flags & SWP_WRITEOK) {
     n = sis.pages;
-    if (free)
+    if (free) {
     n -= swap_usage_in_pages(sis);
+    }
     }
     spin_unlock(&sis.lock);
     }
@@ -2196,8 +2455,6 @@ pub unsafe extern "C" fn count_swap_pages(type: c_int, free: c_int) -> c_uint {
 
 #[no_mangle]
 pub unsafe extern "C" fn pte_same_as_swp(pte: pte_t, swp_pte: pte_t) -> c_int {
-    static inline int pte_same_as_swp(pte_t pte, pte_t swp_pte)
-    {
     return pte_same(pte_swp_clear_flags(pte), swp_pte);
     }
 //
@@ -2205,42 +2462,43 @@ pub unsafe extern "C" fn pte_same_as_swp(pte: pte_t, swp_pte: pte_t) -> c_int {
 // just let do_wp_page work it out if a write is requested later - to
 // force COW, vm_page_prot omits write permission from any private vma.
 //
-    static int unuse_pte(struct vm_area_struct *vma, pmd_t *pmd,
-    unsigned long addr, swp_entry_t entry, struct folio *folio)
-    {
-    struct page *page;
-    struct folio *swapcache;
-    spinlock_t *ptl;
+#[no_mangle]
+pub unsafe extern "C" fn unuse_pte(vma: *mut vm_area_struct, pmd: *mut pmd_t, addr: c_ulong, entry: swp_entry_t, folio: *mut folio) -> c_int {
+pub static mut page: *mut c_void = core::ptr::null_mut();
+pub static mut swapcache: *mut c_void = core::ptr::null_mut();
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
     pte_t *pte, new_pte, old_pte;
-    let mut hwpoisoned: bool = false;
-    let mut ret: c_int = 1;
+pub static mut hwpoisoned: bool = false;
+pub static mut ret: c_int = 1;
 //
 // If the folio is removed from swap cache by others, continue to
 // unuse other PTEs. try_to_unuse may try again if we missed this one.
 //
-    if (!folio_matches_swap_entry(folio, entry))
+    if (!folio_matches_swap_entry(folio, entry)) {
     return 0;
+    }
     swapcache = folio;
     folio = ksm_might_need_to_copy(folio, vma, addr);
-    if (unlikely(!folio))
+    if (unlikely(!folio)) {
     return -ENOMEM;
-#[no_mangle]
-pub unsafe extern "C" fn if(ERR_PTR(-EHWPOISON)): unlikely(folio ==) -> else {
+    }
+if true {
     hwpoisoned = true;
     folio = swapcache;
     }
     page = folio_file_page(folio, swp_offset(entry));
-    if (PageHWPoison(page))
+    if (PageHWPoison(page)) {
     hwpoisoned = true;
+    }
     pte = pte_offset_map_lock(vma.vm_mm, pmd, addr, &ptl);
     if (unlikely(!pte || !pte_same_as_swp(ptep_get(pte),
     swp_entry_to_pte(entry)))) {
     ret = 0;
-    goto out;
+// goto;
     }
     old_pte = ptep_get(pte);
     if (unlikely(hwpoisoned || !folio_test_uptodate(folio))) {
-    swp_entry_t swp_entry;
+    let mut swp_entry;
     dec_mm_counter(vma.vm_mm, MM_SWAPENTS);
     if (hwpoisoned) {
     swp_entry = make_hwpoison_entry(page);
@@ -2249,7 +2507,7 @@ pub unsafe extern "C" fn if(ERR_PTR(-EHWPOISON)): unlikely(folio ==) -> else {
     }
     new_pte = swp_entry_to_pte(swp_entry);
     ret = 0;
-    goto setpte;
+// goto;
     }
 //
 // Some architectures may have to restore extra metadata to the page
@@ -2261,15 +2519,16 @@ pub unsafe extern "C" fn if(ERR_PTR(-EHWPOISON)): unlikely(folio ==) -> else {
     inc_mm_counter(vma.vm_mm, MM_ANONPAGES);
     folio_get(folio);
     if (folio == swapcache) {
-    let mut rmap_flags: rmap_t = RMAP_NONE;
+pub static mut rmap_flags: rmap_t = 0;
 //
 // See do_swap_page(): writeback would be problematic.
 // However, we do a folio_wait_writeback() just before this
 // call and have the folio locked.
 //
     VM_BUG_ON_FOLIO(folio_test_writeback(folio), folio);
-    if (pte_swp_exclusive(old_pte))
+    if (pte_swp_exclusive(old_pte)) {
     rmap_flags |= RMAP_EXCLUSIVE;
+    }
 //
 // We currently only expect small !anon folios, which are either
 // fully exclusive or fully shared. If we ever get large folios
@@ -2287,65 +2546,66 @@ pub unsafe extern "C" fn if(ERR_PTR(-EHWPOISON)): unlikely(folio ==) -> else {
     folio_add_lru_vma(folio, vma);
     }
     new_pte = pte_mkold(mk_pte(page, vma.vm_page_prot));
-    if (pte_swp_soft_dirty(old_pte))
+    if (pte_swp_soft_dirty(old_pte)) {
     new_pte = pte_mksoft_dirty(new_pte);
-    if (pte_swp_uffd(old_pte))
+    }
+    if (pte_swp_uffd(old_pte)) {
     new_pte = pte_mkuffd(new_pte);
+    }
 // See do_swap_page(): restore PAGE_NONE for RWP
-    if (pte_swp_uffd(old_pte) && userfaultfd_rwp(vma))
+    if (pte_swp_uffd(old_pte) && userfaultfd_rwp(vma)) {
     new_pte = pte_modify(new_pte, PAGE_NONE);
-    setpte:
+    }
+// label;
     set_pte_at(vma.vm_mm, addr, pte, new_pte);
     folio_put_swap(swapcache, folio_file_page(swapcache, swp_offset(entry)));
-    out:
-    if (pte)
+// label;
+    if (pte) {
     pte_unmap_unlock(pte, ptl);
+    }
     if (folio != swapcache) {
     folio_unlock(folio);
     folio_put(folio);
     }
     return ret;
     }
-    static int unuse_pte_range(struct vm_area_struct *vma, pmd_t *pmd,
-    unsigned long addr, unsigned long end,
-    unsigned int type)
-    {
-    pte_t *pte = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn unuse_pte_range(vma: *mut vm_area_struct, pmd: *mut pmd_t, addr: c_ulong, end: c_ulong, type: c_uint) -> c_int {
+    let mut pte = core::ptr::null_mut();
     do {
-    struct folio *folio;
-    unsigned long swp_tb;
-    softleaf_t entry;
-    int ret;
-    pte_t ptent;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut swp_tb = 0;
+    let mut entry;
+    let mut ret = 0;
+    let mut ptent;
     if (!pte++) {
     pte = pte_offset_map(pmd, addr);
-    if (!pte)
+    if (!pte) {
     break;
+    }
     }
     ptent = ptep_get_lockless(pte);
     entry = softleaf_from_pte(ptent);
-    if (!softleaf_is_swap(entry))
+    if (!softleaf_is_swap(entry)) {
     continue;
-    if (swp_type(entry) != type)
+    }
+    if (swp_type(entry) != type) {
     continue;
+    }
     pte_unmap(pte);
     pte = core::ptr::null_mut();
     folio = swap_cache_get_folio(entry);
     if (!folio) {
-    struct vm_fault vmf = {
-    .vma = vma,
-    .address = addr,
-    .real_address = addr,
-    .pmd = pmd,
-    };
+pub static mut vm_fault: usize = 0;
     folio = swapin_readahead(entry, GFP_HIGHUSER_MOVABLE,
     &vmf);
     }
     if (!folio) {
     swp_tb = swap_table_get(__swap_entry_to_cluster(entry),
     swp_cluster_offset(entry));
-    if (swp_tb_get_count(swp_tb) <= 0)
+    if (swp_tb_get_count(swp_tb) <= 0) {
     continue;
+    }
     return -ENOMEM;
     }
     folio_lock(folio);
@@ -2360,102 +2620,102 @@ pub unsafe extern "C" fn if(ERR_PTR(-EHWPOISON)): unlikely(folio ==) -> else {
     folio_unlock(folio);
     folio_put(folio);
     } while (addr += PAGE_SIZE, addr != end);
-    if (pte)
+    if (pte) {
     pte_unmap(pte);
+    }
     return 0;
     }
-    static inline int unuse_pmd_range(struct vm_area_struct *vma, pud_t *pud,
-    unsigned long addr, unsigned long end,
-    unsigned int type)
-    {
-    pmd_t *pmd;
-    unsigned long next;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn unuse_pmd_range(vma: *mut vm_area_struct, pud: *mut pud_t, addr: c_ulong, end: c_ulong, type: c_uint) -> c_int {
+pub static mut pmd: *mut c_void = core::ptr::null_mut();
+    let mut next = 0;
+    let mut ret = 0;
     pmd = pmd_offset(pud, addr);
     do {
     cond_resched();
     next = pmd_addr_end(addr, end);
     ret = unuse_pte_range(vma, pmd, addr, next, type);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     } while (pmd++, addr = next, addr != end);
     return 0;
     }
-    static inline int unuse_pud_range(struct vm_area_struct *vma, p4d_t *p4d,
-    unsigned long addr, unsigned long end,
-    unsigned int type)
-    {
-    pud_t *pud;
-    unsigned long next;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn unuse_pud_range(vma: *mut vm_area_struct, p4d: *mut p4d_t, addr: c_ulong, end: c_ulong, type: c_uint) -> c_int {
+pub static mut pud: *mut c_void = core::ptr::null_mut();
+    let mut next = 0;
+    let mut ret = 0;
     pud = pud_offset(p4d, addr);
     do {
     next = pud_addr_end(addr, end);
-    if (pud_none_or_clear_bad(pud))
+    if (pud_none_or_clear_bad(pud)) {
     continue;
+    }
     ret = unuse_pmd_range(vma, pud, addr, next, type);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     } while (pud++, addr = next, addr != end);
     return 0;
     }
-    static inline int unuse_p4d_range(struct vm_area_struct *vma, pgd_t *pgd,
-    unsigned long addr, unsigned long end,
-    unsigned int type)
-    {
-    p4d_t *p4d;
-    unsigned long next;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn unuse_p4d_range(vma: *mut vm_area_struct, pgd: *mut pgd_t, addr: c_ulong, end: c_ulong, type: c_uint) -> c_int {
+pub static mut p4d: *mut c_void = core::ptr::null_mut();
+    let mut next = 0;
+    let mut ret = 0;
     p4d = p4d_offset(pgd, addr);
     do {
     next = p4d_addr_end(addr, end);
-    if (p4d_none_or_clear_bad(p4d))
+    if (p4d_none_or_clear_bad(p4d)) {
     continue;
+    }
     ret = unuse_pud_range(vma, p4d, addr, next, type);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     } while (p4d++, addr = next, addr != end);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn unuse_vma(vma: *mut vm_area_struct, type: c_uint) -> c_int {
-    static int unuse_vma(struct vm_area_struct *vma, unsigned int type)
-    {
-    pgd_t *pgd;
+pub static mut pgd: *mut c_void = core::ptr::null_mut();
     unsigned long addr, end, next;
-    int ret;
+    let mut ret = 0;
     addr = vma.vm_start;
     end = vma.vm_end;
     pgd = pgd_offset(vma.vm_mm, addr);
     do {
     next = pgd_addr_end(addr, end);
-    if (pgd_none_or_clear_bad(pgd))
+    if (pgd_none_or_clear_bad(pgd)) {
     continue;
+    }
     ret = unuse_p4d_range(vma, pgd, addr, next, type);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     } while (pgd++, addr = next, addr != end);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn unuse_mm(mm: *mut mm_struct, type: c_uint) -> c_int {
-    static int unuse_mm(struct mm_struct *mm, unsigned int type)
-    {
-    struct vm_area_struct *vma;
-    let mut ret: c_int = 0;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     VMA_ITERATOR(vmi, mm, 0);
     mmap_read_lock(mm);
-    if (check_stable_address_space(mm))
-    goto unlock;
+    if (check_stable_address_space(mm)) {
+// goto;
+    }
     for_each_vma(vmi, vma) {
     if (vma.anon_vma && !is_vm_hugetlb_page(vma)) {
     ret = unuse_vma(vma, type);
-    if (ret)
+    if (ret) {
     break;
+    }
     }
     cond_resched();
     }
-    unlock:
+// label;
     mmap_read_unlock(mm);
     return ret;
     }
@@ -2464,47 +2724,49 @@ unsafe extern "C" fn unuse_mm(mm: *mut mm_struct, type: c_uint) -> c_int {
 // Return 0 if there are no inuse entries after prev till end of
 // the map.
 //
-    static unsigned int find_next_to_unuse(struct swap_info_struct *si,
-    unsigned int prev)
-    {
-    unsigned int i;
-    unsigned long swp_tb;
+#[no_mangle]
+pub unsafe extern "C" fn find_next_to_unuse(si: *mut swap_info_struct, prev: c_uint) -> c_uint {
+    let mut i = 0;
+    let mut swp_tb = 0;
 //
 // No need for swap_lock here: we're just looking
 // for whether an entry is in use, not modifying it; false
 // hits are okay, and sys_swapoff() has already prevented new
 // allocations from this area (while holding swap_lock).
 //
-    for (i = prev + 1; i < si.max; i++) {
+    while (i < si.max) {
     swp_tb = swap_table_get(__swap_offset_to_cluster(si, i),
     i % SWAPFILE_CLUSTER);
-    if (!swp_tb_is_null(swp_tb) && !swp_tb_is_bad(swp_tb))
+    if (!swp_tb_is_null(swp_tb) && !swp_tb_is_bad(swp_tb)) {
     break;
-    if ((i % LATENCY_LIMIT) == 0)
+    }
+    if ((i % LATENCY_LIMIT) == 0) {
     cond_resched();
     }
-    if (i == si.max)
+    }
+    if (i == si.max) {
     i = 0;
+    }
     return i;
     }
 #[no_mangle]
 unsafe extern "C" fn try_to_unuse(type: c_uint) -> c_int {
-    static int try_to_unuse(unsigned int type)
-    {
-    struct mm_struct *prev_mm;
-    struct mm_struct *mm;
-    struct list_head *p;
-    let mut retval: c_int = 0;
-    struct swap_info_struct *si = swap_info[type];
-    struct folio *folio;
-    swp_entry_t entry;
-    unsigned int i;
-    if (!swap_usage_in_pages(si))
-    goto success;
-    retry:
+pub static mut prev_mm: *mut c_void = core::ptr::null_mut();
+pub static mut mm: *mut c_void = core::ptr::null_mut();
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut retval: c_int = 0;
+    let mut si = swap_info[type];
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut entry;
+    let mut i = 0;
+    if (!swap_usage_in_pages(si)) {
+// goto;
+    }
+// label;
     retval = shmem_unuse(type);
-    if (retval)
+    if (retval) {
     return retval;
+    }
     prev_mm = &init_mm;
     mmget(prev_mm);
     spin_lock(&mmlist_lock);
@@ -2512,9 +2774,10 @@ unsafe extern "C" fn try_to_unuse(type: c_uint) -> c_int {
     while (swap_usage_in_pages(si) &&
     !signal_pending(current) &&
     (p = p.next) != &init_mm.mmlist) {
-    mm = list_entry(p, struct mm_struct, mmlist);
-    if (!mmget_not_zero(mm))
+    mm = list_entry(p, mm_struct, mmlist);
+    if (!mmget_not_zero(mm)) {
     continue;
+    }
     spin_unlock(&mmlist_lock);
     mmput(prev_mm);
     prev_mm = mm;
@@ -2538,8 +2801,9 @@ unsafe extern "C" fn try_to_unuse(type: c_uint) -> c_int {
     (i = find_next_to_unuse(si, i)) != 0) {
     entry = swp_entry(type, i);
     folio = swap_cache_get_folio(entry);
-    if (!folio)
+    if (!folio) {
     continue;
+    }
 //
 // It is conceivable that a racing task removed this folio from
 // swap cache just before we acquired the page lock. The folio
@@ -2566,11 +2830,12 @@ unsafe extern "C" fn try_to_unuse(type: c_uint) -> c_int {
 // and robust (though cpu-intensive) just to keep retrying.
 //
     if (swap_usage_in_pages(si)) {
-    if (!signal_pending(current))
-    goto retry;
+    if (!signal_pending(current)) {
+// goto;
+    }
     return -EINTR;
     }
-    success:
+// label;
 //
 // Make sure that further cleanups after try_to_unuse() returns happen
 // after swap_range_free() reduces si->inuse_pages to 0.
@@ -2586,35 +2851,36 @@ unsafe extern "C" fn try_to_unuse(type: c_uint) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn drain_mmlist() {
-    static void drain_mmlist(void)
-    {
-    struct list_head *p, *next;
-    unsigned int type;
-    for (type = 0; type < nr_swapfiles; type++)
+    let mut p = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+    let mut type = 0;
+    for (type = 0; type < nr_swapfiles; type++) {
     if (swap_usage_in_pages(swap_info[type]))
     return;
+    }
     spin_lock(&mmlist_lock);
-    list_for_each_safe(p, next, &init_mm.mmlist)
+    list_for_each_safe(p, next, &init_mm.mmlist) {
     list_del_init(p);
+    }
     spin_unlock(&mmlist_lock);
     }
 //
 // Free all of a swapdev's extent information
 //
-    static void destroy_swap_extents(struct swap_info_struct *sis,
-    struct file *swap_file)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn destroy_swap_extents(sis: *mut swap_info_struct, swap_file: *mut file) {
     while (!RB_EMPTY_ROOT(&sis.swap_extent_root)) {
-    struct rb_node *rb = sis.swap_extent_root.rb_node;
-    struct swap_extent *se = rb_entry(rb, struct swap_extent, rb_node);
+    let mut rb = sis.swap_extent_root.rb_node;
+    let mut se = rb_entry(rb, swap_extent, rb_node);
     rb_erase(rb, &sis.swap_extent_root);
     kfree(se);
     }
     if (sis.flags & SWP_ACTIVATED) {
-    struct address_space *mapping = swap_file.f_mapping;
+    let mut mapping = swap_file.f_mapping;
     sis.flags &= ~SWP_ACTIVATED;
-    if (mapping.a_ops.swap_deactivate)
+    if (mapping.a_ops.swap_deactivate) {
     mapping.a_ops.swap_deactivate(swap_file);
+    }
     }
     }
 //
@@ -2623,13 +2889,11 @@ unsafe extern "C" fn drain_mmlist() {
 //
 // This function rather assumes that it is called in ascending page order.
 //
-    int
-    add_swap_extent(struct swap_info_struct *sis, unsigned long start_page,
-    unsigned long nr_pages, sector_t start_block)
-    {
-    struct rb_node **link = &sis.swap_extent_root.rb_node, *parent = core::ptr::null_mut();
-    struct swap_extent *se;
-    struct swap_extent *new_se;
+#[no_mangle]
+pub unsafe extern "C" fn add_swap_extent(sis: *mut swap_info_struct, start_page: c_ulong, nr_pages: c_ulong, start_block: sector_t) -> c_int {
+    let mut link = &sis.swap_extent_root.rb_node, *parent = core::ptr::null_mut();
+pub static mut se: *mut c_void = core::ptr::null_mut();
+pub static mut new_se: *mut c_void = core::ptr::null_mut();
 //
 // place the new node at the right most since the
 // function is called in ascending page order.
@@ -2639,8 +2903,8 @@ unsafe extern "C" fn drain_mmlist() {
     link = &parent.rb_right;
     }
     if (parent) {
-    se = rb_entry(parent, struct swap_extent, rb_node);
-    BUG_ON(se.start_page + se.nr_pages != start_page);
+    se = rb_entry(parent, swap_extent, rb_node);
+    BUG_ON!(se.start_page + se.nr_pages != start_page);
     if (se.start_block + se.nr_pages == start_block) {
 // Merge it
     se.nr_pages += nr_pages;
@@ -2649,8 +2913,9 @@ unsafe extern "C" fn drain_mmlist() {
     }
 // No merge, insert a new extent.
     new_se = kmalloc_obj(*se);
-    if (new_se == core::ptr::null_mut())
+    if (new_se == core::ptr::null_mut()) {
     return -ENOMEM;
+    }
     new_se.start_page = start_page;
     new_se.nr_pages = nr_pages;
     new_se.start_block = start_block;
@@ -2686,15 +2951,15 @@ unsafe extern "C" fn drain_mmlist() {
 // Typically it is in the 1-4 megabyte range.  So we can have hundreds of
 // extents in the rbtree. - akpm.
 //
-    static int setup_swap_extents(struct swap_info_struct *sis,
-    struct file *swap_file, sector_t *span)
-    {
-    struct address_space *mapping = swap_file.f_mapping;
-    struct inode *inode = mapping.host;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn setup_swap_extents(sis: *mut swap_info_struct, swap_file: *mut file, span: *mut sector_t) -> c_int {
+    let mut mapping = swap_file.f_mapping;
+    let mut inode = mapping.host;
+    let mut ret = 0;
     ret = sio_pool_init();
-    if (ret)
+    if (ret) {
     return ret;
+    }
     sis.ops = &swap_bdev_ops;
     if (S_ISBLK(inode.i_mode)) {
     ret = add_swap_extent(sis, 0, sis.max, 0);
@@ -2703,8 +2968,9 @@ unsafe extern "C" fn drain_mmlist() {
     }
     if (mapping.a_ops.swap_activate) {
     ret = mapping.a_ops.swap_activate(sis, swap_file, span);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     sis.flags |= SWP_ACTIVATED;
     return ret;
     }
@@ -2712,8 +2978,6 @@ unsafe extern "C" fn drain_mmlist() {
     }
 #[no_mangle]
 unsafe extern "C" fn _enable_swap_info(si: *mut swap_info_struct) {
-    static void _enable_swap_info(struct swap_info_struct *si)
-    {
     atomic_long_add(si.pages, &nr_swap_pages);
     total_swap_pages += si.pages;
     assert_spin_locked(&swap_lock);
@@ -2727,8 +2991,6 @@ unsafe extern "C" fn _enable_swap_info(si: *mut swap_info_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn enable_swap_info(si: *mut swap_info_struct) {
-    static void enable_swap_info(struct swap_info_struct *si)
-    {
     percpu_ref_resurrect(&si.users);
     spin_lock(&swap_lock);
     spin_lock(&si.lock);
@@ -2738,8 +3000,6 @@ unsafe extern "C" fn enable_swap_info(si: *mut swap_info_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn reinsert_swap_info(si: *mut swap_info_struct) {
-    static void reinsert_swap_info(struct swap_info_struct *si)
-    {
     spin_lock(&swap_lock);
     spin_lock(&si.lock);
     _enable_swap_info(si);
@@ -2752,25 +3012,23 @@ unsafe extern "C" fn reinsert_swap_info(si: *mut swap_info_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn wait_for_allocation(si: *mut swap_info_struct) {
-    static void wait_for_allocation(struct swap_info_struct *si)
-    {
-    unsigned long offset;
-    let mut end: c_ulong = ALIGN(si.max, SWAPFILE_CLUSTER);
-    struct swap_cluster_info *ci;
-    BUG_ON(si.flags & SWP_WRITEOK);
-    for (offset = 0; offset < end; offset += SWAPFILE_CLUSTER) {
+    let mut offset = 0;
+pub static mut end: c_ulong = 0;
+pub static mut ci: *mut c_void = core::ptr::null_mut();
+    BUG_ON!(si.flags & SWP_WRITEOK);
+    while (offset < end) {
     ci = swap_cluster_lock(si, offset);
     swap_cluster_unlock(ci);
     }
     }
-    static void free_swap_cluster_info(struct swap_cluster_info *cluster_info,
-    unsigned long maxpages)
-    {
-    struct swap_cluster_info *ci;
+#[no_mangle]
+pub unsafe extern "C" fn free_swap_cluster_info(cluster_info: *mut swap_cluster_info, maxpages: c_ulong) {
+pub static mut ci: *mut c_void = core::ptr::null_mut();
     int i, nr_clusters = DIV_ROUND_UP(maxpages, SWAPFILE_CLUSTER);
-    if (!cluster_info)
+    if (!cluster_info) {
     return;
-    for (i = 0; i < nr_clusters; i++) {
+    }
+    while (i < nr_clusters) {
     ci = cluster_info + i;
 // Cluster with bad marks count will have a remaining table
     spin_lock(&ci.lock);
@@ -2788,10 +3046,9 @@ unsafe extern "C" fn wait_for_allocation(si: *mut swap_info_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn flush_percpu_swap_cluster(si: *mut swap_info_struct) {
-    static void flush_percpu_swap_cluster(struct swap_info_struct *si)
-    {
-    int cpu, i;
-    struct swap_info_struct **pcp_si;
+    let mut cpu = 0;
+    let mut i = 0;
+pub static mut pcp_si: *mut c_void = core::ptr::null_mut();
     for_each_possible_cpu(cpu) {
     pcp_si = per_cpu_ptr(percpu_swap_cluster.si, cpu);
 //
@@ -2799,26 +3056,30 @@ unsafe extern "C" fn flush_percpu_swap_cluster(si: *mut swap_info_struct) {
 // is dead, so no new user will point to it, just flush
 // any existing user.
 //
-    for (i = 0; i < SWAP_NR_ORDERS; i++)
+    for (i = 0; i < SWAP_NR_ORDERS; i++) {
     cmpxchg(&pcp_si[i], si, core::ptr::null_mut());
     }
     }
-    SYSCALL_DEFINE1(swapoff, const char __user *, specialfile)
-    {
-    struct swap_info_struct *p = core::ptr::null_mut();
-    struct swap_cluster_info *cluster_info;
-    struct file *swap_file, *victim;
-    struct address_space *mapping;
-    struct inode *inode;
-    unsigned int maxpages;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn sys_swapoff(specialfile: usize) -> c_long {
+    let mut p = core::ptr::null_mut();
+pub static mut cluster_info: *mut c_void = core::ptr::null_mut();
+    let mut swap_file = core::ptr::null_mut();
+    let mut victim = core::ptr::null_mut();
+pub static mut mapping: *mut c_void = core::ptr::null_mut();
+pub static mut inode: *mut c_void = core::ptr::null_mut();
+    let mut maxpages = 0;
     int err, found = 0;
-    if (!capable(CAP_SYS_ADMIN))
+    if (!capable(CAP_SYS_ADMIN)) {
     return -EPERM;
-    BUG_ON(!current.mm);
+    }
+    BUG_ON!(!current.mm);
     CLASS(filename, pathname)(specialfile);
     victim = file_open_name(pathname, O_RDWR|O_LARGEFILE, 0);
-    if (IS_ERR(victim))
+    if (IS_ERR(victim)) {
     return PTR_ERR(victim);
+    }
     mapping = victim.f_mapping;
     spin_lock(&swap_lock);
     plist_for_each_entry(p, &swap_active_head, list) {
@@ -2832,20 +3093,21 @@ unsafe extern "C" fn flush_percpu_swap_cluster(si: *mut swap_info_struct) {
     if (!found) {
     err = -EINVAL;
     spin_unlock(&swap_lock);
-    goto out_dput;
+// goto;
     }
 // Refuse swapoff while the device is pinned for hibernation
     if (p.flags & SWP_HIBERNATION) {
     err = -EBUSY;
     spin_unlock(&swap_lock);
-    goto out_dput;
+// goto;
     }
-    if (!security_vm_enough_memory_mm(current.mm, p.pages))
+    if (!security_vm_enough_memory_mm(current.mm, p.pages)) {
     vm_unacct_memory(p.pages);
+    }
     else {
     err = -ENOMEM;
     spin_unlock(&swap_lock);
-    goto out_dput;
+// goto;
     }
     spin_lock(&p.lock);
     del_from_avail_list(p, true);
@@ -2861,7 +3123,7 @@ unsafe extern "C" fn flush_percpu_swap_cluster(si: *mut swap_info_struct) {
     if (err) {
 // re-insert swap space back into swap_list
     reinsert_swap_info(p);
-    goto out_dput;
+// goto;
     }
 //
 // Wait for swap operations protected by get/put_swap_device()
@@ -2878,8 +3140,9 @@ unsafe extern "C" fn flush_percpu_swap_cluster(si: *mut swap_info_struct) {
     flush_work(&p.reclaim_work);
     flush_percpu_swap_cluster(p);
     destroy_swap_extents(p, p.swap_file);
-    if (!(p.flags & SWP_SOLIDSTATE))
+    if (!(p.flags & SWP_SOLIDSTATE)) {
     atomic_dec(&nr_rotate_swap);
+    }
     mutex_lock(&swapon_mutex);
     spin_lock(&swap_lock);
     spin_lock(&p.lock);
@@ -2914,16 +3177,14 @@ unsafe extern "C" fn flush_percpu_swap_cluster(si: *mut swap_info_struct) {
     err = 0;
     atomic_inc(&proc_poll_event);
     wake_up_interruptible(&proc_poll_wait);
-    out_dput:
+// label;
     filp_close(victim, core::ptr::null_mut());
     return err;
     }
 
 #[no_mangle]
 unsafe extern "C" fn swaps_poll(file: *mut file, wait: *mut poll_table) -> __poll_t {
-    static __poll_t swaps_poll(struct file *file, poll_table *wait)
-    {
-    struct seq_file *seq = file.private_data;
+    let mut seq = file.private_data;
     poll_wait(file, &proc_poll_wait, wait);
     if (seq.poll_event != atomic_read(&proc_poll_event)) {
     seq.poll_event = atomic_read(&proc_poll_event);
@@ -2932,51 +3193,53 @@ unsafe extern "C" fn swaps_poll(file: *mut file, wait: *mut poll_table) -> __pol
     return EPOLLIN | EPOLLRDNORM;
     }
 // iterator
-    static void *swap_start(struct seq_file *swap, loff_t *pos)
-    {
-    struct swap_info_struct *si;
-    int type;
-    let mut l: loff_t = *pos;
+#[no_mangle]
+pub unsafe extern "C" fn swap_start(swap: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
+pub static mut si: *mut c_void = core::ptr::null_mut();
+    let mut type = 0;
+pub static mut l: loff_t = 0;
     mutex_lock(&swapon_mutex);
-    if (!l)
+    if (!l) {
     return SEQ_START_TOKEN;
-    for (type = 0; (si = swap_type_to_info(type)); type++) {
-    if (!(si.swap_file))
+    }
+    while ((si = swap_type_to_info(type))) {
+    if (!(si.swap_file)) {
     continue;
-    if (!--l)
+    }
+    if (!--l) {
     return si;
+    }
     }
     return core::ptr::null_mut();
     }
-    static void *swap_next(struct seq_file *swap, void *v, loff_t *pos)
-    {
-    struct swap_info_struct *si = v;
-    int type;
-    if (v == SEQ_START_TOKEN)
+#[no_mangle]
+pub unsafe extern "C" fn swap_next(swap: *mut seq_file, v: *mut c_void, pos: *mut loff_t) -> *mut c_void {
+    let mut si = v;
+    let mut type = 0;
+    if (v == SEQ_START_TOKEN) {
     type = 0;
-    else
+    }
+    else {
     type = si.type + 1;
+    }
     ++(*pos);
-    for (; (si = swap_type_to_info(type)); type++) {
-    if (!(si.swap_file))
+    while ((si = swap_type_to_info(type))) {
+    if (!(si.swap_file)) {
     continue;
+    }
     return si;
     }
     return core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn swap_stop(swap: *mut seq_file, v: *mut c_void) {
-    static void swap_stop(struct seq_file *swap, void *v)
-    {
     mutex_unlock(&swapon_mutex);
     }
 #[no_mangle]
 unsafe extern "C" fn swap_show(swap: *mut seq_file, v: *mut c_void) -> c_int {
-    static int swap_show(struct seq_file *swap, void *v)
-    {
-    struct swap_info_struct *si = v;
-    struct file *file;
-    int len;
+    let mut si = v;
+pub static mut file: *mut c_void = core::ptr::null_mut();
+    let mut len = 0;
     unsigned long bytes, inuse;
     if (si == SEQ_START_TOKEN) {
     seq_puts(swap, "Filename\t\t\t\tType\t\tSize\t\tUsed\t\tPriority\n");
@@ -2995,68 +3258,53 @@ unsafe extern "C" fn swap_show(swap: *mut seq_file, v: *mut c_void) -> c_int {
     si.prio);
     return 0;
     }
-    static const struct seq_operations swaps_op = {
-    .start =	swap_start,
-    .next =		swap_next,
-    .stop =		swap_stop,
-    .show =		swap_show
-    };
+pub static mut seq_operations: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn swaps_open(inode: *mut inode, file: *mut file) -> c_int {
-    static int swaps_open(struct inode *inode, struct file *file)
-    {
-    struct seq_file *seq;
-    int ret;
+pub static mut seq: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     ret = seq_open(file, &swaps_op);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     seq = file.private_data;
     seq.poll_event = atomic_read(&proc_poll_event);
     return 0;
     }
-    static const struct proc_ops swaps_proc_ops = {
-    .proc_flags	= PROC_ENTRY_PERMANENT,
-    .proc_open	= swaps_open,
-    .proc_read	= seq_read,
-    .proc_lseek	= seq_lseek,
-    .proc_release	= seq_release,
-    .proc_poll	= swaps_poll,
-    };
+pub static mut proc_ops: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn procswaps_init() -> int __init {
-    static int __init procswaps_init(void)
-    {
+unsafe extern "C" fn procswaps_init() -> c_int {
     proc_create("swaps", 0, core::ptr::null_mut(), &swaps_proc_ops);
     return 0;
     }
-    __initcall(procswaps_init);
+    __initcall!(procswaps_init);
 
 #[no_mangle]
-unsafe extern "C" fn max_swapfiles_check() -> int __init {
-    static int __init max_swapfiles_check(void)
-    {
+unsafe extern "C" fn max_swapfiles_check() -> c_int {
     MAX_SWAPFILES_CHECK();
     return 0;
     }
-    late_initcall(max_swapfiles_check);
+    late_initcall!(max_swapfiles_check);
 
-    static struct swap_info_struct *alloc_swap_info(void)
-    {
-    struct swap_info_struct *p;
-    struct swap_info_struct *defer = core::ptr::null_mut();
-    unsigned int type;
-    p = kvzalloc_obj(struct swap_info_struct);
-    if (!p)
+#[no_mangle]
+pub unsafe extern "C" fn alloc_swap_info() -> *mut c_void {
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    let mut defer = core::ptr::null_mut();
+    let mut type = 0;
+    p = kvzalloc_obj(swap_info_struct);
+    if (!p) {
     return ERR_PTR(-ENOMEM);
+    }
     if (percpu_ref_init(&p.users, swap_users_ref_free,
     PERCPU_REF_INIT_DEAD, GFP_KERNEL)) {
     kvfree(p);
     return ERR_PTR(-ENOMEM);
     }
     spin_lock(&swap_lock);
-    for (type = 0; type < nr_swapfiles; type++) {
-    if (!(swap_info[type].flags & SWP_USED))
+    while (type < nr_swapfiles) {
+    if (!(swap_info[type].flags & SWP_USED)) {
     break;
+    }
     }
     if (type >= MAX_SWAPFILES) {
     spin_unlock(&swap_lock);
@@ -3071,7 +3319,7 @@ unsafe extern "C" fn max_swapfiles_check() -> int __init {
 // Note that kvzalloc() above zeroes all its fields.
 //
     smp_store_release(&swap_info[type], p); /* rcu_assign_pointer() */
-    nr_swapfiles++;
+    nr_swapfiles += 1;
     } else {
     defer = p;
     p = swap_info[type];
@@ -3096,8 +3344,6 @@ unsafe extern "C" fn max_swapfiles_check() -> int __init {
     }
 #[no_mangle]
 unsafe extern "C" fn claim_swapfile(si: *mut swap_info_struct, inode: *mut inode) -> c_int {
-    static int claim_swapfile(struct swap_info_struct *si, struct inode *inode)
-    {
     if (S_ISBLK(inode.i_mode)) {
     si.bdev = I_BDEV(inode);
 //
@@ -3105,8 +3351,9 @@ unsafe extern "C" fn claim_swapfile(si: *mut swap_info_struct, inode: *mut inode
 // write only restriction.  Hence zoned block devices are not
 // suitable for swapping.  Disallow them here.
 //
-    if (bdev_is_zoned(si.bdev))
+    if (bdev_is_zoned(si.bdev)) {
     return -EINVAL;
+    }
     si.flags |= SWP_BLKDEV;
     } else if (S_ISREG(inode.i_mode)) {
     si.bdev = inode.i_sb.s_bdev;
@@ -3131,10 +3378,8 @@ unsafe extern "C" fn claim_swapfile(si: *mut swap_info_struct, inode: *mut inode
 //
 #[no_mangle]
 pub unsafe extern "C" fn generic_max_swapfile_size() -> c_ulong {
-    unsigned long generic_max_swapfile_size(void)
-    {
-    let mut entry: swp_entry_t = swp_entry(0, ~0UL);
-    let mut pte: pte_t = softleaf_to_pte(entry);
+pub static mut entry: swp_entry_t = 0;
+pub static mut pte: pte_t = 0;
 //
 // Since the PTE can be an invalid softleaf entry (e.g. the none PTE),
 // we need to do this manually.
@@ -3146,20 +3391,16 @@ pub unsafe extern "C" fn generic_max_swapfile_size() -> c_ulong {
 // Can be overridden by an architecture for additional checks.
 #[no_mangle]
 pub unsafe extern "C" fn arch_max_swapfile_size() -> __weak unsigned long {
-    __weak unsigned long arch_max_swapfile_size(void)
-    {
     return generic_max_swapfile_size();
     }
-    static unsigned long read_swap_header(struct swap_info_struct *si,
-    union swap_header *swap_header,
-    struct inode *inode)
-    {
-    int i;
-    unsigned long maxpages;
-    unsigned long swapfilepages;
-    unsigned long last_page;
+#[no_mangle]
+pub unsafe extern "C" fn read_swap_header(si: *mut swap_info_struct, swap_header: *mut union swap_header, inode: *mut inode) -> c_ulong {
+    let mut i = 0;
+    let mut maxpages = 0;
+    let mut swapfilepages = 0;
+    let mut last_page = 0;
     if (memcmp("SWAPSPACE2", swap_header.magic.magic, 10)) {
-    pr_err("Unable to find swap-space signature\n");
+    pr_err!("Unable to find swap-space signature\n");
     return 0;
     }
 // swap partition endianness hack...
@@ -3167,65 +3408,73 @@ pub unsafe extern "C" fn arch_max_swapfile_size() -> __weak unsigned long {
     swab32s(&swap_header.info.version);
     swab32s(&swap_header.info.last_page);
     swab32s(&swap_header.info.nr_badpages);
-    if (swap_header.info.nr_badpages > MAX_SWAP_BADPAGES)
+    if (swap_header.info.nr_badpages > MAX_SWAP_BADPAGES) {
     return 0;
-    for (i = 0; i < swap_header.info.nr_badpages; i++)
+    }
+    for (i = 0; i < swap_header.info.nr_badpages; i++) {
     swab32s(&swap_header.info.badpages[i]);
+    }
     }
 // Check the swap header's sub-version
     if (swap_header.info.version != 1) {
-    pr_warn("Unable to handle swap header version %d\n",
+    pr_warn!("Unable to handle swap header version %d\n",
     swap_header.info.version);
     return 0;
     }
     maxpages = swapfile_maximum_size;
     last_page = swap_header.info.last_page;
     if (!last_page) {
-    pr_warn("Empty swap-file\n");
+    pr_warn!("Empty swap-file\n");
     return 0;
     }
     if (last_page > maxpages) {
-    pr_warn("Truncating oversized swap area, only using %luk out of %luk\n",
+    pr_warn!("Truncating oversized swap area, only using %luk out of %luk\n",
     K(maxpages), K(last_page));
     }
     if (maxpages > last_page) {
     maxpages = last_page + 1;
 // p->max is an unsigned int: don't overflow it
-    if ((unsigned int)maxpages == 0)
+    if ((unsigned int)maxpages == 0) {
     maxpages = UINT_MAX;
     }
-    if (!maxpages)
+    }
+    if (!maxpages) {
     return 0;
+    }
     swapfilepages = i_size_read(inode) >> PAGE_SHIFT;
     if (swapfilepages && maxpages > swapfilepages) {
-    pr_warn("Swap area shorter than signature indicates\n");
+    pr_warn!("Swap area shorter than signature indicates\n");
     return 0;
     }
-    if (swap_header.info.nr_badpages && S_ISREG(inode.i_mode))
+    if (swap_header.info.nr_badpages && S_ISREG(inode.i_mode)) {
     return 0;
-    if (swap_header.info.nr_badpages > MAX_SWAP_BADPAGES)
+    }
+    if (swap_header.info.nr_badpages > MAX_SWAP_BADPAGES) {
     return 0;
+    }
     return maxpages;
     }
-    static int setup_swap_clusters_info(struct swap_info_struct *si,
-    union swap_header *swap_header,
-    unsigned long maxpages)
-    {
-    let mut nr_clusters: c_ulong = DIV_ROUND_UP(maxpages, SWAPFILE_CLUSTER);
-    struct swap_cluster_info *cluster_info;
-    let mut err: c_int = -ENOMEM;
-    unsigned long i;
+#[no_mangle]
+pub unsafe extern "C" fn setup_swap_clusters_info(si: *mut swap_info_struct, swap_header: *mut union swap_header, maxpages: c_ulong) -> c_int {
+pub static mut nr_clusters: c_ulong = 0;
+pub static mut cluster_info: *mut c_void = core::ptr::null_mut();
+pub static mut err: c_int = 0;
+    let mut i = 0;
     cluster_info = kvzalloc_objs(*cluster_info, nr_clusters);
-    if (!cluster_info)
-    goto err;
-    for (i = 0; i < nr_clusters; i++)
+    if (!cluster_info) {
+// goto;
+    }
+    for (i = 0; i < nr_clusters; i++) {
     spin_lock_init(&cluster_info[i].lock);
+    }
     if (!(si.flags & SWP_SOLIDSTATE)) {
     si.global_cluster = kmalloc_obj(*si.global_cluster);
-    if (!si.global_cluster)
-    goto err;
-    for (i = 0; i < SWAP_NR_ORDERS; i++)
+    if (!si.global_cluster) {
+// goto;
+    }
+    for (i = 0; i < SWAP_NR_ORDERS; i++) {
     si.global_cluster.next[i] = SWAP_ENTRY_INVALID;
+    }
     spin_lock_init(&si.global_cluster_lock);
     }
 //
@@ -3234,34 +3483,37 @@ pub unsafe extern "C" fn arch_max_swapfile_size() -> __weak unsigned long {
 // yet, so no list operations are involved yet.
 //
     err = swap_cluster_setup_bad_slot(si, cluster_info, 0, false);
-    if (err)
-    goto err;
-    for (i = 0; i < swap_header.info.nr_badpages; i++) {
-    let mut page_nr: c_uint = swap_header.info.badpages[i];
+    if (err) {
+// goto;
+    }
+    while (i < swap_header.info.nr_badpages) {
+pub static mut page_nr: c_uint = 0;
     if (!page_nr || page_nr > swap_header.info.last_page) {
-    pr_warn("Bad slot offset is out of border: %d (last_page: %d)\n",
+    pr_warn!("Bad slot offset is out of border: %d (last_page: %d)\n",
     page_nr, swap_header.info.last_page);
     err = -EINVAL;
-    goto err;
+// goto;
     }
     err = swap_cluster_setup_bad_slot(si, cluster_info, page_nr, false);
-    if (err)
-    goto err;
+    if (err) {
+// goto;
     }
-    for (i = maxpages; i < round_up(maxpages, SWAPFILE_CLUSTER); i++) {
+    }
+    while (i < round_up(maxpages, SWAPFILE_CLUSTER)) {
     err = swap_cluster_setup_bad_slot(si, cluster_info, i, true);
-    if (err)
-    goto err;
+    if (err) {
+// goto;
+    }
     }
     INIT_LIST_HEAD(&si.free_clusters);
     INIT_LIST_HEAD(&si.full_clusters);
     INIT_LIST_HEAD(&si.discard_clusters);
-    for (i = 0; i < SWAP_NR_ORDERS; i++) {
+    while (i < SWAP_NR_ORDERS) {
     INIT_LIST_HEAD(&si.nonfull_clusters[i]);
     INIT_LIST_HEAD(&si.frag_clusters[i]);
     }
-    for (i = 0; i < nr_clusters; i++) {
-    struct swap_cluster_info *ci = &cluster_info[i];
+    while (i < nr_clusters) {
+    let mut ci = &cluster_info[i];
     if (ci.count) {
     ci.flags = CLUSTER_FLAG_NONFULL;
     list_add_tail(&ci.list, &si.nonfull_clusters[0]);
@@ -3272,37 +3524,40 @@ pub unsafe extern "C" fn arch_max_swapfile_size() -> __weak unsigned long {
     }
     si.cluster_info = cluster_info;
     return 0;
-    err:
+// label;
     free_swap_cluster_info(cluster_info, maxpages);
     return err;
     }
-    SYSCALL_DEFINE2(swapon, const char __user *, specialfile, int, swap_flags)
-    {
-    struct swap_info_struct *si;
-    struct file *swap_file = core::ptr::null_mut();
-    struct address_space *mapping;
-    struct dentry *dentry;
-    int prio;
-    int error;
+#[no_mangle]
+pub unsafe extern "C" fn sys_swapon(specialfile: usize, swap_flags: usize) -> c_long {
+pub static mut si: *mut c_void = core::ptr::null_mut();
+    let mut swap_file = core::ptr::null_mut();
+pub static mut mapping: *mut c_void = core::ptr::null_mut();
+pub static mut dentry: *mut c_void = core::ptr::null_mut();
+    let mut prio = 0;
+    let mut error = 0;
     union swap_header *swap_header;
-    int nr_extents;
-    sector_t span;
-    unsigned long maxpages;
-    struct folio *folio = core::ptr::null_mut();
-    struct inode *inode = core::ptr::null_mut();
-    let mut inced_nr_rotate_swap: bool = false;
-    if (swap_flags & ~SWAP_FLAGS_VALID)
+    let mut nr_extents = 0;
+    let mut span;
+    let mut maxpages = 0;
+    let mut folio = core::ptr::null_mut();
+    let mut inode = core::ptr::null_mut();
+pub static mut inced_nr_rotate_swap: bool = false;
+    if (swap_flags & ~SWAP_FLAGS_VALID) {
     return -EINVAL;
-    if (!capable(CAP_SYS_ADMIN))
+    }
+    if (!capable(CAP_SYS_ADMIN)) {
     return -EPERM;
+    }
 //
 // Allocate or reuse existing !SWP_USED swap_info. The returned
 // si will stay in a dying status, so nothing will access its content
 // until enable_swap_info resurrects its percpu ref and expose it.
 //
     si = alloc_swap_info();
-    if (IS_ERR(si))
+    if (IS_ERR(si)) {
     return PTR_ERR(si);
+    }
     INIT_WORK(&si.discard_work, swap_discard_work);
     INIT_WORK(&si.reclaim_work, swap_reclaim_work);
     CLASS(filename, name)(specialfile);
@@ -3310,29 +3565,30 @@ pub unsafe extern "C" fn arch_max_swapfile_size() -> __weak unsigned long {
     if (IS_ERR(swap_file)) {
     error = PTR_ERR(swap_file);
     swap_file = core::ptr::null_mut();
-    goto bad_swap;
+// goto;
     }
     mapping = swap_file.f_mapping;
     dentry = swap_file.f_path.dentry;
     inode = mapping.host;
     error = claim_swapfile(si, inode);
-    if (unlikely(error))
-    goto bad_swap;
+    if (unlikely(error)) {
+// goto;
+    }
     inode_lock(inode);
     if (d_unlinked(dentry) || cant_mount(dentry)) {
     error = -ENOENT;
-    goto bad_swap_unlock_inode;
+// goto;
     }
     if (IS_SWAPFILE(inode)) {
     error = -EBUSY;
-    goto bad_swap_unlock_inode;
+// goto;
     }
     if (IS_ENCRYPTED(inode)) {
     pr_warn_once(
     "Filesystem-level encrypted swapfile '%s' is unsupported. Create a loop device over it, or use dm-crypt\n",
     name.name);
     error = -EINVAL;
-    goto bad_swap_unlock_inode;
+// goto;
     }
 //
 // The swap subsystem needs a major overhaul to support this.
@@ -3340,47 +3596,50 @@ pub unsafe extern "C" fn arch_max_swapfile_size() -> __weak unsigned long {
 //
     if (mapping_min_folio_order(mapping) > 0) {
     error = -EINVAL;
-    goto bad_swap_unlock_inode;
+// goto;
     }
 //
 // Read the swap header.
 //
     if (!mapping.a_ops.read_folio) {
     error = -EINVAL;
-    goto bad_swap_unlock_inode;
+// goto;
     }
     folio = read_mapping_folio(mapping, 0, swap_file);
     if (IS_ERR(folio)) {
     error = PTR_ERR(folio);
-    goto bad_swap_unlock_inode;
+// goto;
     }
     swap_header = kmap_local_folio(folio, 0);
     maxpages = read_swap_header(si, swap_header, inode);
     if (unlikely(!maxpages)) {
     error = -EINVAL;
-    goto bad_swap_unlock_inode;
+// goto;
     }
     si.max = maxpages;
     si.pages = maxpages - 1;
     nr_extents = setup_swap_extents(si, swap_file, &span);
     if (nr_extents < 0) {
     error = nr_extents;
-    goto bad_swap_unlock_inode;
+// goto;
     }
     if (si.pages != si.max - 1) {
-    pr_err("swap:%u != (max:%u - 1)\n", si.pages, si.max);
+    pr_err!("swap:%u != (max:%u - 1)\n", si.pages, si.max);
     error = -EINVAL;
-    goto bad_swap_unlock_inode;
+// goto;
     }
     maxpages = si.max;
 // Set up the swap cluster info
     error = setup_swap_clusters_info(si, swap_header, maxpages);
-    if (error)
-    goto bad_swap_unlock_inode;
-    if (si.bdev && bdev_stable_writes(si.bdev))
+    if (error) {
+// goto;
+    }
+    if (si.bdev && bdev_stable_writes(si.bdev)) {
     si.flags |= SWP_STABLE_WRITES;
-    if (si.bdev && bdev_synchronous(si.bdev))
+    }
+    if (si.bdev && bdev_synchronous(si.bdev)) {
     si.flags |= SWP_SYNCHRONOUS_IO;
+    }
     if (si.bdev && !bdev_rot(si.bdev)) {
     si.flags |= SWP_SOLIDSTATE;
     } else {
@@ -3403,23 +3662,26 @@ pub unsafe extern "C" fn arch_max_swapfile_size() -> __weak unsigned long {
 // perform discards for released swap page-clusters.
 // Now it's time to adjust the p->flags accordingly.
 //
-    if (swap_flags & SWAP_FLAG_DISCARD_ONCE)
+    if (swap_flags & SWAP_FLAG_DISCARD_ONCE) {
     si.flags &= ~SWP_PAGE_DISCARD;
-#[no_mangle]
-pub unsafe extern "C" fn if(SWAP_FLAG_DISCARD_PAGES: swap_flags &) -> else {
-    else if (swap_flags & SWAP_FLAG_DISCARD_PAGES)
+    }
+
+    else if (swap_flags & SWAP_FLAG_DISCARD_PAGES) {
     si.flags &= ~SWP_AREA_DISCARD;
+    }
 // issue a swapon-time discard if it's still required
     if (si.flags & SWP_AREA_DISCARD) {
-    let mut err: c_int = discard_swap(si);
-    if (unlikely(err))
-    pr_err("swapon: discard_swap(%p): %d\n",
+pub static mut err: c_int = 0;
+    if (unlikely(err)) {
+    pr_err!("swapon: discard_swap(%p): %d\n",
     si, err);
     }
     }
+    }
     error = zswap_swapon(si.type, maxpages);
-    if (error)
-    goto bad_swap_unlock_inode;
+    if (error) {
+// goto;
+    }
 //
 // Flush any pending IO and dirty mappings before we start using this
 // swap device.
@@ -3428,12 +3690,13 @@ pub unsafe extern "C" fn if(SWAP_FLAG_DISCARD_PAGES: swap_flags &) -> else {
     error = inode_drain_writes(inode);
     if (error) {
     inode.i_flags &= ~S_SWAPFILE;
-    goto free_swap_zswap;
+// goto;
     }
     mutex_lock(&swapon_mutex);
     prio = DEF_SWAP_PRIO;
-    if (swap_flags & SWAP_FLAG_PREFER)
+    if (swap_flags & SWAP_FLAG_PREFER) {
     prio = swap_flags & SWAP_FLAG_PRIO_MASK;
+    }
 //
 // The plist prio is negated because plist ordering is
 // low-to-high, while swap ordering is high-to-low
@@ -3444,7 +3707,7 @@ pub unsafe extern "C" fn if(SWAP_FLAG_DISCARD_PAGES: swap_flags &) -> else {
     si.swap_file = swap_file;
 // Sets SWP_WRITEOK, resurrect the percpu ref, expose the swap device
     enable_swap_info(si);
-    pr_info("Adding %uk swap on %s.  Priority:%d extents:%d across:%lluk %s%s%s%s\n",
+    pr_info!("Adding %uk swap on %s.  Priority:%d extents:%d across:%lluk %s%s%s%s\n",
     K(si.pages), name.name, si.prio, nr_extents,
     K((unsigned long long)span),
     (si.flags & SWP_SOLIDSTATE) ? "SS" : "",
@@ -3455,12 +3718,12 @@ pub unsafe extern "C" fn if(SWAP_FLAG_DISCARD_PAGES: swap_flags &) -> else {
     atomic_inc(&proc_poll_event);
     wake_up_interruptible(&proc_poll_wait);
     error = 0;
-    goto out;
-    free_swap_zswap:
+// goto;
+// label;
     zswap_swapoff(si.type);
-    bad_swap_unlock_inode:
+// label;
     inode_unlock(inode);
-    bad_swap:
+// label;
     kfree(si.global_cluster);
     si.global_cluster = core::ptr::null_mut();
     inode = core::ptr::null_mut();
@@ -3474,28 +3737,31 @@ pub unsafe extern "C" fn if(SWAP_FLAG_DISCARD_PAGES: swap_flags &) -> else {
     spin_lock(&swap_lock);
     si.flags = 0;
     spin_unlock(&swap_lock);
-    if (inced_nr_rotate_swap)
+    if (inced_nr_rotate_swap) {
     atomic_dec(&nr_rotate_swap);
-    if (swap_file)
+    }
+    if (swap_file) {
     filp_close(swap_file, core::ptr::null_mut());
-    out:
-    if (!IS_ERR_OR_NULL(folio))
+    }
+// label;
+    if (!IS_ERR_OR_NULL(folio)) {
     folio_release_kmap(folio, swap_header);
-    if (inode)
+    }
+    if (inode) {
     inode_unlock(inode);
+    }
     return error;
     }
 #[no_mangle]
 pub unsafe extern "C" fn si_swapinfo(val: *mut sysinfo) {
-    void si_swapinfo(struct sysinfo *val)
-    {
-    unsigned int type;
-    let mut nr_to_be_unused: c_ulong = 0;
+    let mut type = 0;
+pub static mut nr_to_be_unused: c_ulong = 0;
     spin_lock(&swap_lock);
-    for (type = 0; type < nr_swapfiles; type++) {
-    struct swap_info_struct *si = swap_info[type];
-    if ((si.flags & SWP_USED) && !(si.flags & SWP_WRITEOK))
+    while (type < nr_swapfiles) {
+    let mut si = swap_info[type];
+    if ((si.flags & SWP_USED) && !(si.flags & SWP_WRITEOK)) {
     nr_to_be_unused += swap_usage_in_pages(si);
+    }
     }
     val.freeswap = atomic_long_read(&nr_swap_pages) + nr_to_be_unused;
     val.totalswap = total_swap_pages + nr_to_be_unused;
@@ -3517,11 +3783,9 @@ pub unsafe extern "C" fn si_swapinfo(val: *mut sysinfo) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn swap_dup_entry_direct(entry: swp_entry_t) -> c_int {
-    int swap_dup_entry_direct(swp_entry_t entry)
-    {
-    struct swap_info_struct *si;
+pub static mut si: *mut c_void = core::ptr::null_mut();
     si = swap_entry_to_info(entry);
-    if (WARN_ON_ONCE(!si)) {
+    if (WARN_ON_ONCE!(!si)) {
     pr_err_ratelimited("%s%08lx\n", Bad_file, entry.val);
     return -EINVAL;
     }
@@ -3536,27 +3800,27 @@ pub unsafe extern "C" fn swap_dup_entry_direct(entry: swp_entry_t) -> c_int {
 
 #[no_mangle]
 unsafe extern "C" fn __has_usable_swap() -> bool {
-    static bool __has_usable_swap(void)
-    {
     return !plist_head_empty(&swap_active_head);
     }
 #[no_mangle]
 pub unsafe extern "C" fn __folio_throttle_swaprate(folio: *mut folio, gfp: gfp_t) {
-    void __folio_throttle_swaprate(struct folio *folio, gfp_t gfp)
-    {
-    struct swap_info_struct *si;
-    if (!(gfp & __GFP_IO))
+pub static mut si: *mut c_void = core::ptr::null_mut();
+    if (!(gfp & __GFP_IO)) {
     return;
-    if (!__has_usable_swap())
+    }
+    if (!__has_usable_swap()) {
     return;
-    if (!blk_cgroup_congested())
+    }
+    if (!blk_cgroup_congested()) {
     return;
+    }
 //
 // We've already scheduled a throttle, avoid taking the global swap
 // lock.
 //
-    if (current.throttle_disk)
+    if (current.throttle_disk) {
     return;
+    }
     spin_lock(&swap_avail_lock);
     plist_for_each_entry(si, &swap_avail_head, avail_list) {
     if (si.bdev) {
@@ -3568,23 +3832,23 @@ pub unsafe extern "C" fn __folio_throttle_swaprate(folio: *mut folio, gfp: gfp_t
     }
 
 #[no_mangle]
-unsafe extern "C" fn swapfile_init() -> int __init {
-    static int __init swapfile_init(void)
-    {
+unsafe extern "C" fn swapfile_init() -> c_int {
     swapfile_maximum_size = arch_max_swapfile_size();
 //
 // Once a cluster is freed, it's swap table content is read
 // only, and all swap cache readers (swap_cache_*) verifies
 // the content before use. So it's safe to use RCU slab here.
 //
-    if (!SWP_TABLE_USE_PAGE)
+    if (!SWP_TABLE_USE_PAGE) {
     swap_table_cachep = kmem_cache_create("swap_table",
-    sizeof(struct swap_table),
+    sizeof!(swap_table),
     0, SLAB_PANIC | SLAB_TYPESAFE_BY_RCU, core::ptr::null_mut());
+    }
 
-    if (swapfile_maximum_size >= (1UL << SWP_MIG_TOTAL_BITS))
+    if (swapfile_maximum_size >= (1UL << SWP_MIG_TOTAL_BITS)) {
     swap_migration_ad_supported = true;
+    }
 
     return 0;
     }
-    subsys_initcall(swapfile_init);
+    subsys_initcall!(swapfile_init);

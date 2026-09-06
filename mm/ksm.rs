@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -158,7 +408,7 @@ pub struct ksm_scan {
 #[derive(Copy, Clone)]
 pub struct ksm_stable_node {
     union {
-    pub /: *mut *mut rb_node node; / when node of stable tree,
+//     pub /: *mut *mut rb_node node; / when node of stable tree,
     struct {		/* when listed for migration */
     pub head: *mut list_head,
     struct {
@@ -168,10 +418,10 @@ pub struct ksm_stable_node {
 
     };
     };
-    struct hlist_head hlist;
+pub static mut hlist: usize = 0;
     union {
-    unsigned long kpfn;
-    unsigned long chain_prune_time;
+    let mut kpfn = 0;
+    let mut chain_prune_time = 0;
     };
 //
 // STABLE_NODE_CHAIN can be any negative number in
@@ -179,9 +429,9 @@ pub struct ksm_stable_node {
 // to reliably detect underflows.
 //
 
-    int rmap_hlist_len;
+    let mut rmap_hlist_len = 0;
 
-    int nid;
+    let mut nid = 0;
 
     };
 //
@@ -204,27 +454,27 @@ pub struct ksm_stable_node {
 pub struct ksm_rmap_item {
     pub rmap_list: *mut ksm_rmap_item,
     union {
-    pub /: *mut *mut *mut anon_vma anon_vma; / for reverse mapping, when stable,
+//     pub /: *mut *mut *mut anon_vma anon_vma; / for reverse mapping, when stable,
 
-    pub /: *mut *mut int nid; / when node of unstable tree,
+//     pub /: *mut *mut int nid; / when node of unstable tree,
 
 }
 
-    struct mm_struct *mm;
-    unsigned long address;		/* + low bits used for flags below */
+pub static mut mm: *mut c_void = core::ptr::null_mut();
+    let mut address = 0;		/* + low bits used for flags below */
     union {
     struct {
-    unsigned int oldchecksum;
-    rmap_age_t age;
-    rmap_age_t remaining_skips;
+    let mut oldchecksum = 0;
+    let mut age;
+    let mut remaining_skips;
     };			/* when unstable */
-    unsigned long linear_page_index;    /* for reverse mapping, when stable */
+    let mut linear_page_index = 0;    /* for reverse mapping, when stable */
     };
     union {
-    struct rb_node node;	/* when node of unstable tree */
+pub static mut node: usize = 0;	/* when node of unstable tree */
     struct {		/* when listed from stable tree */
-    struct ksm_stable_node *head;
-    struct hlist_node hlist;
+pub static mut head: *mut c_void = core::ptr::null_mut();
+pub static mut hlist: usize = 0;
     };
     };
     };
@@ -232,24 +482,20 @@ pub const SEQNR_MASK: c_uint = 0x0ff	/* low bits of unstable tree seqnr */;
 pub const UNSTABLE_FLAG: c_uint = 0x100	/* is a node of the unstable tree */;
 pub const STABLE_FLAG: c_uint = 0x200	/* is listed from the stable tree */;
 // The stable and unstable tree heads
-    static struct rb_root one_stable_tree[1] = { RB_ROOT };
-    static struct rb_root one_unstable_tree[1] = { RB_ROOT };
+pub static mut rb_root: usize = 0;
+pub static mut rb_root: usize = 0;
     static struct rb_root *root_stable_tree = one_stable_tree;
     static struct rb_root *root_unstable_tree = one_unstable_tree;
 // Recently migrated nodes of stable tree, pending proper placement
-    static LIST_HEAD(migrate_nodes);
+pub static mut migrate_nodes: usize = 0;
 
 pub const MM_SLOTS_HASH_BITS: c_int = 10;
-    static DEFINE_HASHTABLE(mm_slots_hash, MM_SLOTS_HASH_BITS);
-    static struct ksm_mm_slot ksm_mm_head = {
-    .slot.mm_node = LIST_HEAD_INIT(ksm_mm_head.slot.mm_node),
-    };
-    static struct ksm_scan ksm_scan = {
-    .mm_slot = &ksm_mm_head,
-    };
-    static struct kmem_cache *rmap_item_cache;
-    static struct kmem_cache *stable_node_cache;
-    static struct kmem_cache *mm_slot_cache;
+pub static mut mm_slots_hash: usize = 0;
+pub static mut ksm_mm_slot: usize = 0;
+pub static mut ksm_scan: usize = 0;
+pub static mut rmap_item_cache: *mut c_void = core::ptr::null_mut();
+pub static mut stable_node_cache: *mut c_void = core::ptr::null_mut();
+pub static mut mm_slot_cache: *mut c_void = core::ptr::null_mut();
 // Default number of pages to scan per batch
 pub const DEFAULT_PAGES_TO_SCAN: c_int = 100;
 // The number of pages scanned
@@ -267,32 +513,32 @@ pub const DEFAULT_PAGES_TO_SCAN: c_int = 100;
 // The number of stable_node dups linked to the stable_node chains
     static unsigned long ksm_stable_node_dups;
 // Delay in pruning stale stable_node_dups in the stable_node_chains
-    let mut ksm_stable_node_chains_prune_millisecs: static unsigned int = 2000;
+pub static mut ksm_stable_node_chains_prune_millisecs: unsigned int = 2000;
 // Maximum number of page slots sharing a stable node
-    let mut ksm_max_page_sharing: static int = 256;
+pub static mut ksm_max_page_sharing: int = 256;
 // Number of pages ksmd should scan in one batch
-    let mut ksm_thread_pages_to_scan: static unsigned int = DEFAULT_PAGES_TO_SCAN;
+pub static mut ksm_thread_pages_to_scan: unsigned int = 0;
 // Milliseconds ksmd should sleep between batches
-    let mut ksm_thread_sleep_millisecs: static unsigned int = 20;
+pub static mut ksm_thread_sleep_millisecs: unsigned int = 20;
 // Checksum of an empty (zeroed) page
-    static unsigned int zero_checksum __read_mostly;
+    static unsigned int zero_checksum ;
 // Whether to merge empty (zeroed) pages with actual zero pages
-    static bool ksm_use_zero_pages __read_mostly;
+    static bool ksm_use_zero_pages ;
 // Skip pages that couldn't be de-duplicated previously
 // Default to true at least temporarily, for testing
-    let mut ksm_smart_scan: static bool = true;
+pub static mut ksm_smart_scan: bool = true;
 // The number of zero pages which is placed by KSM
-    let mut ksm_zero_pages: atomic_long_t = ATOMIC_LONG_INIT(0);
+pub static mut ksm_zero_pages: atomic_long_t = 0;
 // The number of pages that have been skipped due to "smart scanning"
     static unsigned long ksm_pages_skipped;
 // Don't scan more than max pages per batch.
-    let mut ksm_advisor_max_pages_to_scan: static unsigned long = 30000;
+pub static mut ksm_advisor_max_pages_to_scan: unsigned long = 30000;
 // Min CPU for scanning pages per scan
 pub const KSM_ADVISOR_MIN_CPU: c_int = 10;
 // Max CPU for scanning pages per scan
-    let mut ksm_advisor_max_cpu: static unsigned int = 70;
+pub static mut ksm_advisor_max_cpu: unsigned int = 70;
 // Target scan time in seconds to analyze all KSM candidate pages.
-    let mut ksm_advisor_target_scan_time: static unsigned long = 200;
+pub static mut ksm_advisor_target_scan_time: unsigned long = 200;
 // Exponentially weighted moving average.
 pub const EWMA_WEIGHT: c_int = 30;
 //
@@ -311,7 +557,7 @@ pub struct advisor_ctx {
     pub cpu_time: c_ulonglong,
 }
 
-    static struct advisor_ctx advisor_ctx;
+pub static mut advisor_ctx: usize = 0;
 // Define different advisor's
     enum ksm_advisor_type {
     KSM_ADVISOR_NONE,
@@ -323,11 +569,9 @@ pub struct advisor_ctx {
 // Only called through the sysfs control interface:
 //
 // At least scan this many pages per batch.
-    let mut ksm_advisor_min_pages_to_scan: static unsigned long = 500;
+pub static mut ksm_advisor_min_pages_to_scan: unsigned long = 500;
 #[no_mangle]
 unsafe extern "C" fn set_advisor_defaults() {
-    static void set_advisor_defaults(void)
-    {
     if (ksm_advisor == KSM_ADVISOR_NONE) {
     ksm_thread_pages_to_scan = DEFAULT_PAGES_TO_SCAN;
     } else if (ksm_advisor == KSM_ADVISOR_SCAN_TIME) {
@@ -338,25 +582,21 @@ unsafe extern "C" fn set_advisor_defaults() {
 
 #[no_mangle]
 pub unsafe extern "C" fn advisor_start_scan() {
-    static inline void advisor_start_scan(void)
-    {
-    if (ksm_advisor == KSM_ADVISOR_SCAN_TIME)
+    if (ksm_advisor == KSM_ADVISOR_SCAN_TIME) {
     advisor_ctx.start_scan = ktime_get();
+    }
     }
 //
 // Use previous scan time if available, otherwise use current scan time as an
 // approximation for the previous scan time.
 //
-    static inline unsigned long prev_scan_time(struct advisor_ctx *ctx,
-    unsigned long scan_time)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn prev_scan_time(ctx: *mut advisor_ctx, scan_time: c_ulong) -> c_ulong {
     return ctx.scan_time ? ctx.scan_time : scan_time;
     }
 // Calculate exponential weighted moving average
 #[no_mangle]
 unsafe extern "C" fn ewma(prev: c_ulong, curr: c_ulong) -> c_ulong {
-    static unsigned long ewma(unsigned long prev, unsigned long curr)
-    {
     return ((100 - EWMA_WEIGHT) * prev + EWMA_WEIGHT * curr) / 100;
     }
 //
@@ -382,18 +622,16 @@ unsafe extern "C" fn ewma(prev: c_ulong, curr: c_ulong) -> c_ulong {
 //
 #[no_mangle]
 unsafe extern "C" fn scan_time_advisor() {
-    static void scan_time_advisor(void)
-    {
-    unsigned int cpu_percent;
-    unsigned long cpu_time;
-    unsigned long cpu_time_diff;
-    unsigned long cpu_time_diff_ms;
-    unsigned long pages;
-    unsigned long per_page_cost;
-    unsigned long factor;
-    unsigned long change;
-    unsigned long last_scan_time;
-    unsigned long scan_time;
+    let mut cpu_percent = 0;
+    let mut cpu_time = 0;
+    let mut cpu_time_diff = 0;
+    let mut cpu_time_diff_ms = 0;
+    let mut pages = 0;
+    let mut per_page_cost = 0;
+    let mut factor = 0;
+    let mut change = 0;
+    let mut last_scan_time = 0;
+    let mut scan_time = 0;
 // Convert scan time to seconds
     scan_time = div_s64(ktime_ms_delta(ktime_get(), advisor_ctx.start_scan),
     MSEC_PER_SEC);
@@ -434,15 +672,14 @@ unsafe extern "C" fn scan_time_advisor() {
     }
 #[no_mangle]
 unsafe extern "C" fn advisor_stop_scan() {
-    static void advisor_stop_scan(void)
-    {
-    if (ksm_advisor == KSM_ADVISOR_SCAN_TIME)
+    if (ksm_advisor == KSM_ADVISOR_SCAN_TIME) {
     scan_time_advisor();
+    }
     }
 
 // Zeroed when merging across nodes is not allowed
-    let mut ksm_merge_across_nodes: static unsigned int = 1;
-    let mut ksm_nr_node_ids: static int = 1;
+pub static mut ksm_merge_across_nodes: unsigned int = 1;
+pub static mut ksm_nr_node_ids: int = 1;
 
 pub const ksm_nr_node_ids: c_int = 1;
 
@@ -450,37 +687,36 @@ pub const KSM_RUN_STOP: c_int = 0;
 pub const KSM_RUN_MERGE: c_int = 1;
 pub const KSM_RUN_UNMERGE: c_int = 2;
 pub const KSM_RUN_OFFLINE: c_int = 4;
-    let mut ksm_run: static unsigned long = KSM_RUN_STOP;
-    static void wait_while_offlining(void);
-    static DECLARE_WAIT_QUEUE_HEAD(ksm_thread_wait);
-    static DECLARE_WAIT_QUEUE_HEAD(ksm_iter_wait);
-    static DEFINE_MUTEX(ksm_thread_mutex);
-    static DEFINE_SPINLOCK(ksm_mmlist_lock);
+pub static mut ksm_run: unsigned long = 0;
+// forward_decl: wait_while_offlining;
+pub static mut ksm_thread_wait: usize = 0;
+pub static mut ksm_iter_wait: usize = 0;
+pub static mut ksm_thread_mutex: usize = 0;
+pub static mut ksm_mmlist_lock: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn ksm_slab_init() -> int __init {
-    static int __init ksm_slab_init(void)
-    {
+unsafe extern "C" fn ksm_slab_init() -> c_int {
     rmap_item_cache = KMEM_CACHE(ksm_rmap_item, 0);
-    if (!rmap_item_cache)
-    goto out;
+    if (!rmap_item_cache) {
+// goto;
+    }
     stable_node_cache = KMEM_CACHE(ksm_stable_node, 0);
-    if (!stable_node_cache)
-    goto out_free1;
+    if (!stable_node_cache) {
+// goto;
+    }
     mm_slot_cache = KMEM_CACHE(ksm_mm_slot, 0);
-    if (!mm_slot_cache)
-    goto out_free2;
+    if (!mm_slot_cache) {
+// goto;
+    }
     return 0;
-    out_free2:
+// label;
     kmem_cache_destroy(stable_node_cache);
-    out_free1:
+// label;
     kmem_cache_destroy(rmap_item_cache);
-    out:
+// label;
     return -ENOMEM;
     }
 #[no_mangle]
-unsafe extern "C" fn ksm_slab_free() -> void __init {
-    static void __init ksm_slab_free(void)
-    {
+unsafe extern "C" fn ksm_slab_free()  {
     kmem_cache_destroy(mm_slot_cache);
     kmem_cache_destroy(stable_node_cache);
     kmem_cache_destroy(rmap_item_cache);
@@ -488,66 +724,58 @@ unsafe extern "C" fn ksm_slab_free() -> void __init {
     }
 #[no_mangle]
 unsafe extern "C" fn is_stable_node_chain(chain: *mut ksm_stable_node) -> __always_inline bool {
-    static __always_inline bool is_stable_node_chain(struct ksm_stable_node *chain)
-    {
     return chain.rmap_hlist_len == STABLE_NODE_CHAIN;
     }
 #[no_mangle]
 unsafe extern "C" fn is_stable_node_dup(dup: *mut ksm_stable_node) -> __always_inline bool {
-    static __always_inline bool is_stable_node_dup(struct ksm_stable_node *dup)
-    {
     return dup.head == STABLE_NODE_DUP_HEAD;
     }
-    static inline void stable_node_chain_add_dup(struct ksm_stable_node *dup,
-    struct ksm_stable_node *chain)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn stable_node_chain_add_dup(dup: *mut ksm_stable_node, chain: *mut ksm_stable_node) {
     VM_BUG_ON(is_stable_node_dup(dup));
     dup.head = STABLE_NODE_DUP_HEAD;
     VM_BUG_ON(!is_stable_node_chain(chain));
     hlist_add_head(&dup.hlist_dup, &chain.hlist);
-    ksm_stable_node_dups++;
+    ksm_stable_node_dups += 1;
     }
 #[no_mangle]
 pub unsafe extern "C" fn __stable_node_dup_del(dup: *mut ksm_stable_node) {
-    static inline void __stable_node_dup_del(struct ksm_stable_node *dup)
-    {
     VM_BUG_ON(!is_stable_node_dup(dup));
     hlist_del(&dup.hlist_dup);
-    ksm_stable_node_dups--;
+    ksm_stable_node_dups -= 1;
     }
 #[no_mangle]
 pub unsafe extern "C" fn stable_node_dup_del(dup: *mut ksm_stable_node) {
-    static inline void stable_node_dup_del(struct ksm_stable_node *dup)
-    {
     VM_BUG_ON(is_stable_node_chain(dup));
-    if (is_stable_node_dup(dup))
+    if (is_stable_node_dup(dup)) {
     __stable_node_dup_del(dup);
-    else
+    }
+    else {
     rb_erase(&dup.node, root_stable_tree + NUMA(dup.nid));
+    }
 
     dup.head = core::ptr::null_mut();
 
     }
-    static inline struct ksm_rmap_item *alloc_rmap_item(void)
-    {
-    struct ksm_rmap_item *rmap_item;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_rmap_item() -> *mut c_void {
+pub static mut rmap_item: *mut c_void = core::ptr::null_mut();
     rmap_item = kmem_cache_zalloc(rmap_item_cache, GFP_KERNEL |
     __GFP_NORETRY | __GFP_NOWARN);
-    if (rmap_item)
-    ksm_rmap_items++;
+    if (rmap_item) {
+    ksm_rmap_items += 1;
+    }
     return rmap_item;
     }
 #[no_mangle]
 pub unsafe extern "C" fn free_rmap_item(rmap_item: *mut ksm_rmap_item) {
-    static inline void free_rmap_item(struct ksm_rmap_item *rmap_item)
-    {
-    ksm_rmap_items--;
-    rmap_item.mm.ksm_rmap_items--;
+    ksm_rmap_items -= 1;
+    rmap_item.mm.ksm_rmap_items -= 1;
     rmap_item.mm = core::ptr::null_mut();	/* debug safety */
     kmem_cache_free(rmap_item_cache, rmap_item);
     }
-    static inline struct ksm_stable_node *alloc_stable_node(void)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn alloc_stable_node() -> *mut c_void {
 //
 // The allocation can take too long with GFP_KERNEL when memory is under
 // pressure, which may lead to hung task warnings.  Adding __GFP_HIGH
@@ -557,8 +785,6 @@ pub unsafe extern "C" fn free_rmap_item(rmap_item: *mut ksm_rmap_item) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn free_stable_node(stable_node: *mut ksm_stable_node) {
-    static inline void free_stable_node(struct ksm_stable_node *stable_node)
-    {
     VM_BUG_ON(stable_node.rmap_hlist_len &&
     !is_stable_node_chain(stable_node));
     kmem_cache_free(stable_node_cache, stable_node);
@@ -573,59 +799,55 @@ pub unsafe extern "C" fn free_stable_node(stable_node: *mut ksm_stable_node) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ksm_test_exit(mm: *mut mm_struct) -> bool {
-    static inline bool ksm_test_exit(struct mm_struct *mm)
-    {
     return atomic_read(&mm.mm_users) == 0;
     }
-    static int break_ksm_pmd_entry(pmd_t *pmdp, unsigned long addr, unsigned long end,
-    struct mm_walk *walk)
-    {
-    unsigned long *found_addr = (unsigned long *) walk.private;
-    struct mm_struct *mm = walk.mm;
-    pte_t *start_ptep, *ptep;
-    spinlock_t *ptl;
-    let mut found: c_int = 0;
-    if (ksm_test_exit(walk.mm))
+#[no_mangle]
+pub unsafe extern "C" fn break_ksm_pmd_entry(pmdp: *mut pmd_t, addr: c_ulong, end: c_ulong, walk: *mut mm_walk) -> c_int {
+    let mut found_addr =  walk.private;
+    let mut mm = walk.mm;
+    let mut start_ptep = core::ptr::null_mut();
+    let mut ptep = core::ptr::null_mut();
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
+pub static mut found: c_int = 0;
+    if (ksm_test_exit(walk.mm)) {
     return 0;
-    if (signal_pending(current))
+    }
+    if (signal_pending(current)) {
     return -ERESTARTSYS;
+    }
     start_ptep = pte_offset_map_lock(mm, pmdp, addr, &ptl);
-    if (!start_ptep)
+    if (!start_ptep) {
     return 0;
-    for (ptep = start_ptep; addr < end; ptep++, addr += PAGE_SIZE) {
-    let mut pte: pte_t = ptep_get(ptep);
-    struct folio *folio = core::ptr::null_mut();
+    }
+    while (addr < end) {
+pub static mut pte: pte_t = 0;
+    let mut folio = core::ptr::null_mut();
     if (pte_present(pte)) {
     folio = vm_normal_folio(walk.vma, addr, pte);
     } else if (!pte_none(pte)) {
-    let mut entry: softleaf_t = softleaf_from_pte(pte);
+pub static mut entry: softleaf_t = 0;
 //
 // As KSM pages remain KSM pages until freed, no need to wait
 // here for migration to end.
 //
-    if (softleaf_is_migration(entry))
+    if (softleaf_is_migration(entry)) {
     folio = softleaf_to_folio(entry);
+    }
     }
 // return 1 if the page is an normal ksm page or KSM-placed zero page
     found = (folio && folio_test_ksm(folio)) ||
     (pte_present(pte) && is_ksm_zero_pte(pte));
     if (found) {
 // found_addr = addr;
-    goto out_unlock;
+// goto;
     }
     }
-    out_unlock:
+// label;
     pte_unmap_unlock(start_ptep, ptl);
     return found;
     }
-    static const struct mm_walk_ops break_ksm_ops = {
-    .pmd_entry = break_ksm_pmd_entry,
-    .walk_lock = PGWALK_RDLOCK,
-    };
-    static const struct mm_walk_ops break_ksm_lock_vma_ops = {
-    .pmd_entry = break_ksm_pmd_entry,
-    .walk_lock = PGWALK_WRLOCK,
-    };
+pub static mut mm_walk_ops: usize = 0;
+pub static mut mm_walk_ops: usize = 0;
 //
 // Though it's very tempting to unmerge rmap_items from stable tree rather
 // than check every pte of a given vma, the locking doesn't quite work for
@@ -651,18 +873,18 @@ pub unsafe extern "C" fn ksm_test_exit(mm: *mut mm_struct) -> bool {
 // of the process that owns 'vma'.  We also do not want to enforce
 // protection keys here anyway.
 //
-    static int break_ksm(struct vm_area_struct *vma, unsigned long addr,
-    unsigned long end, bool lock_vma)
-    {
-    let mut ret: vm_fault_t = 0;
-    const struct mm_walk_ops *ops = lock_vma ?
+#[no_mangle]
+pub unsafe extern "C" fn break_ksm(vma: *mut vm_area_struct, addr: c_ulong, end: c_ulong, lock_vma: bool) -> c_int {
+pub static mut ret: vm_fault_t = 0;
+    let mut ops = lock_vma ?
     &break_ksm_lock_vma_ops : &break_ksm_ops;
     do {
-    int ksm_page;
+    let mut ksm_page = 0;
     cond_resched();
     ksm_page = walk_page_range_vma(vma, addr, end, ops, &addr);
-    if (ksm_page <= 0)
+    if (ksm_page <= 0) {
     return ksm_page;
+    }
     ret = handle_mm_fault(vma, addr,
     FAULT_FLAG_UNSHARE | FAULT_FLAG_REMOTE,
     core::ptr::null_mut());
@@ -696,42 +918,45 @@ pub unsafe extern "C" fn ksm_test_exit(mm: *mut mm_struct) -> bool {
     }
 #[no_mangle]
 unsafe extern "C" fn ksm_compatible(file: *const file, vma_flags: vma_flags_t) -> bool {
-    static bool ksm_compatible(const struct file *file, vma_flags_t vma_flags)
-    {
 // Just ignore the advice.
     if (vma_flags_test_any(&vma_flags, VMA_SHARED_BIT, VMA_MAYSHARE_BIT,
-    VMA_HUGETLB_BIT))
+    VMA_HUGETLB_BIT)) {
     return false;
-    if (vma_flags_test_single_mask(&vma_flags, VMA_DROPPABLE))
+    }
+    if (vma_flags_test_single_mask(&vma_flags, VMA_DROPPABLE)) {
     return false;
-    if (vma_flags_test_any_mask(&vma_flags, VMA_SPECIAL_FLAGS))
+    }
+    if (vma_flags_test_any_mask(&vma_flags, VMA_SPECIAL_FLAGS)) {
     return false;
-    if (file_is_dax(file))
+    }
+    if (file_is_dax(file)) {
     return false;
+    }
 
-    if (vma_flags_test(&vma_flags, VMA_SAO_BIT))
+    if (vma_flags_test(&vma_flags, VMA_SAO_BIT)) {
     return false;
+    }
 
-    if (vma_flags_test(&vma_flags, VMA_SPARC_ADI_BIT))
+    if (vma_flags_test(&vma_flags, VMA_SPARC_ADI_BIT)) {
     return false;
+    }
 
     return true;
     }
 #[no_mangle]
 unsafe extern "C" fn vma_ksm_compatible(vma: *mut vm_area_struct) -> bool {
-    static bool vma_ksm_compatible(struct vm_area_struct *vma)
-    {
     return ksm_compatible(vma.vm_file, vma.flags);
     }
-    static struct vm_area_struct *find_mergeable_vma(struct mm_struct *mm,
-    unsigned long addr)
-    {
-    struct vm_area_struct *vma;
-    if (ksm_test_exit(mm))
+#[no_mangle]
+pub unsafe extern "C" fn find_mergeable_vma(mm: *mut mm_struct, addr: c_ulong) -> *mut c_void {
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+    if (ksm_test_exit(mm)) {
     return core::ptr::null_mut();
+    }
     vma = vma_lookup(mm, addr);
-    if (!vma || !(vma.vm_flags & VM_MERGEABLE) || !vma.anon_vma)
+    if (!vma || !(vma.vm_flags & VM_MERGEABLE) || !vma.anon_vma) {
     return core::ptr::null_mut();
+    }
     return vma;
     }
 //
@@ -741,11 +966,9 @@ unsafe extern "C" fn vma_ksm_compatible(vma: *mut vm_area_struct) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn break_cow(rmap_item: *mut ksm_rmap_item) {
-    static void break_cow(struct ksm_rmap_item *rmap_item)
-    {
-    struct mm_struct *mm = rmap_item.mm;
-    let mut addr: c_ulong = rmap_item.address;
-    struct vm_area_struct *vma;
+    let mut mm = rmap_item.mm;
+pub static mut addr: c_ulong = 0;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
 //
 // It is not an accident that whenever we want to break COW
 // to undo, we also need to drop a reference to the anon_vma.
@@ -758,22 +981,24 @@ unsafe extern "C" fn break_cow(rmap_item: *mut ksm_rmap_item) {
     rmap_item.linear_page_index = 0;
     mmap_read_lock(mm);
     vma = find_mergeable_vma(mm, addr);
-    if (vma)
+    if (vma) {
     break_ksm(vma, addr, addr + PAGE_SIZE, false);
+    }
     mmap_read_unlock(mm);
     }
-    static struct page *get_mergeable_page(struct ksm_rmap_item *rmap_item)
-    {
-    struct mm_struct *mm = rmap_item.mm;
-    let mut addr: c_ulong = rmap_item.address;
-    struct vm_area_struct *vma;
-    struct page *page = core::ptr::null_mut();
-    struct folio_walk fw;
-    struct folio *folio;
+#[no_mangle]
+pub unsafe extern "C" fn get_mergeable_page(rmap_item: *mut ksm_rmap_item) -> *mut c_void {
+    let mut mm = rmap_item.mm;
+pub static mut addr: c_ulong = 0;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+    let mut page = core::ptr::null_mut();
+pub static mut fw: usize = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     mmap_read_lock(mm);
     vma = find_mergeable_vma(mm, addr);
-    if (!vma)
-    goto out;
+    if (!vma) {
+// goto;
+    }
     folio = folio_walk_start(&fw, vma, addr, 0);
     if (folio) {
     if (!folio_is_zone_device(folio) &&
@@ -783,7 +1008,7 @@ unsafe extern "C" fn break_cow(rmap_item: *mut ksm_rmap_item) {
     }
     folio_walk_end(&fw, vma);
     }
-    out:
+// label;
     if (page) {
     flush_anon_page(vma, page, addr);
     flush_dcache_page(page);
@@ -799,14 +1024,11 @@ unsafe extern "C" fn break_cow(rmap_item: *mut ksm_rmap_item) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn get_kpfn_nid(kpfn: c_ulong) -> c_int {
-    static inline int get_kpfn_nid(unsigned long kpfn)
-    {
     return ksm_merge_across_nodes ? 0 : NUMA(pfn_to_nid(kpfn));
     }
-    static struct ksm_stable_node *alloc_stable_node_chain(struct ksm_stable_node *dup,
-    struct rb_root *root)
-    {
-    struct ksm_stable_node *chain = alloc_stable_node();
+#[no_mangle]
+pub unsafe extern "C" fn alloc_stable_node_chain(dup: *mut ksm_stable_node, root: *mut rb_root) -> *mut c_void {
+    let mut chain = alloc_stable_node();
     VM_BUG_ON(is_stable_node_chain(dup));
     if (likely(chain)) {
     INIT_HLIST_HEAD(&chain.hlist);
@@ -815,7 +1037,7 @@ pub unsafe extern "C" fn get_kpfn_nid(kpfn: c_ulong) -> c_int {
 
     chain.nid = NUMA_NO_NODE; /* debug */
 
-    ksm_stable_node_chains++;
+    ksm_stable_node_chains += 1;
 //
 // Put the stable node chain in the first dimension of
 // the stable tree and at the same time remove the old
@@ -833,30 +1055,27 @@ pub unsafe extern "C" fn get_kpfn_nid(kpfn: c_ulong) -> c_int {
     }
     return chain;
     }
-    static inline void free_stable_node_chain(struct ksm_stable_node *chain,
-    struct rb_root *root)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn free_stable_node_chain(chain: *mut ksm_stable_node, root: *mut rb_root) {
     rb_erase(&chain.node, root);
     free_stable_node(chain);
-    ksm_stable_node_chains--;
+    ksm_stable_node_chains -= 1;
     }
 #[no_mangle]
 unsafe extern "C" fn remove_node_from_stable_tree(stable_node: *mut ksm_stable_node) {
-    static void remove_node_from_stable_tree(struct ksm_stable_node *stable_node)
-    {
-    struct ksm_rmap_item *rmap_item;
+pub static mut rmap_item: *mut c_void = core::ptr::null_mut();
 // check it's not STABLE_NODE_CHAIN or negative
-    BUG_ON(stable_node.rmap_hlist_len < 0);
+    BUG_ON!(stable_node.rmap_hlist_len < 0);
     hlist_for_each_entry(rmap_item, &stable_node.hlist, hlist) {
     if (rmap_item.hlist.next) {
-    ksm_pages_sharing--;
+    ksm_pages_sharing -= 1;
     trace_ksm_remove_rmap_item(stable_node.kpfn, rmap_item, rmap_item.mm);
     } else {
-    ksm_pages_shared--;
+    ksm_pages_shared -= 1;
     }
-    rmap_item.mm.ksm_merging_pages--;
+    rmap_item.mm.ksm_merging_pages -= 1;
     VM_BUG_ON(stable_node.rmap_hlist_len <= 0);
-    stable_node.rmap_hlist_len--;
+    stable_node.rmap_hlist_len -= 1;
     put_anon_vma(rmap_item.anon_vma);
 // Reset linear_page_index that might overlay age-related information.
     rmap_item.linear_page_index = 0;
@@ -870,13 +1089,15 @@ unsafe extern "C" fn remove_node_from_stable_tree(stable_node: *mut ksm_stable_n
 // from &migrate_nodes. This will verify that future list.h changes
 // don't break STABLE_NODE_DUP_HEAD. Only recent gcc can handle it.
 //
-    BUILD_BUG_ON(STABLE_NODE_DUP_HEAD <= &migrate_nodes);
-    BUILD_BUG_ON(STABLE_NODE_DUP_HEAD >= &migrate_nodes + 1);
+    BUILD_BUG_ON!(STABLE_NODE_DUP_HEAD <= &migrate_nodes);
+    BUILD_BUG_ON!(STABLE_NODE_DUP_HEAD >= &migrate_nodes + 1);
     trace_ksm_remove_ksm_page(stable_node.kpfn);
-    if (stable_node.head == &migrate_nodes)
+    if (stable_node.head == &migrate_nodes) {
     list_del(&stable_node.list);
-    else
+    }
+    else {
     stable_node_dup_del(stable_node);
+    }
     free_stable_node(stable_node);
     }
     enum ksm_get_folio_flags {
@@ -902,19 +1123,19 @@ unsafe extern "C" fn remove_node_from_stable_tree(stable_node: *mut ksm_stable_n
 // folio to reset its mapping to NULL, and relies on no other use of a
 // folio to put something that might look like our key in its mapping.
 //
-    static struct folio *ksm_get_folio(struct ksm_stable_node *stable_node,
-    enum ksm_get_folio_flags flags)
-    {
-    struct folio *folio;
-    void *expected_mapping;
-    unsigned long kpfn;
-    expected_mapping = (void *)((unsigned long)stable_node |
+#[no_mangle]
+pub unsafe extern "C" fn ksm_get_folio(stable_node: *mut ksm_stable_node, flags: ksm_get_folio_flags) -> *mut c_void {
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut expected_mapping: *mut c_void = core::ptr::null_mut();
+    let mut kpfn = 0;
+    expected_mapping = ((unsigned long)stable_node |
     FOLIO_MAPPING_KSM);
-    again:
+// label;
     kpfn = READ_ONCE(stable_node.kpfn); /* Address dependency. */
     folio = pfn_folio(kpfn);
-    if (READ_ONCE(folio.mapping) != expected_mapping)
-    goto stale;
+    if (READ_ONCE(folio.mapping) != expected_mapping) {
+// goto;
+    }
 //
 // We cannot do anything with the page while its refcount is 0.
 // Usually 0 means free, or tail of a higher-order page: in which
@@ -935,30 +1156,32 @@ unsafe extern "C" fn remove_node_from_stable_tree(stable_node: *mut ksm_stable_n
 // section of __remove_mapping(); but anon folio->mapping
 // is reset to NULL later, in free_pages_prepare().
 //
-    if (!folio_test_swapcache(folio))
-    goto stale;
+    if (!folio_test_swapcache(folio)) {
+// goto;
+    }
     cpu_relax();
     }
     if (READ_ONCE(folio.mapping) != expected_mapping) {
     folio_put(folio);
-    goto stale;
+// goto;
     }
     if (flags == KSM_GET_FOLIO_TRYLOCK) {
     if (!folio_trylock(folio)) {
     folio_put(folio);
     return ERR_PTR(-EBUSY);
     }
-    } else if (flags == KSM_GET_FOLIO_LOCK)
+    } else if (flags == KSM_GET_FOLIO_LOCK) {
     folio_lock(folio);
+    }
     if (flags != KSM_GET_FOLIO_NOLOCK) {
     if (READ_ONCE(folio.mapping) != expected_mapping) {
     folio_unlock(folio);
     folio_put(folio);
-    goto stale;
+// goto;
     }
     }
     return folio;
-    stale:
+// label;
 //
 // We come here from above when folio->mapping or the swapcache flag
 // suggests that the node is stale; but it might be under migration.
@@ -966,8 +1189,9 @@ unsafe extern "C" fn remove_node_from_stable_tree(stable_node: *mut ksm_stable_n
 // before checking whether node->kpfn has been changed.
 //
     smp_rmb();
-    if (READ_ONCE(stable_node.kpfn) != kpfn)
-    goto again;
+    if (READ_ONCE(stable_node.kpfn) != kpfn) {
+// goto;
+    }
     remove_node_from_stable_tree(stable_node);
     return core::ptr::null_mut();
     }
@@ -977,32 +1201,33 @@ unsafe extern "C" fn remove_node_from_stable_tree(stable_node: *mut ksm_stable_n
 //
 #[no_mangle]
 unsafe extern "C" fn remove_rmap_item_from_tree(rmap_item: *mut ksm_rmap_item) {
-    static void remove_rmap_item_from_tree(struct ksm_rmap_item *rmap_item)
-    {
     if (rmap_item.address & STABLE_FLAG) {
-    struct ksm_stable_node *stable_node;
-    struct folio *folio;
+pub static mut stable_node: *mut c_void = core::ptr::null_mut();
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     stable_node = rmap_item.head;
     folio = ksm_get_folio(stable_node, KSM_GET_FOLIO_LOCK);
-    if (!folio)
-    goto out;
+    if (!folio) {
+// goto;
+    }
     hlist_del(&rmap_item.hlist);
     folio_unlock(folio);
     folio_put(folio);
-    if (!hlist_empty(&stable_node.hlist))
-    ksm_pages_sharing--;
-    else
-    ksm_pages_shared--;
-    rmap_item.mm.ksm_merging_pages--;
+    if (!hlist_empty(&stable_node.hlist)) {
+    ksm_pages_sharing -= 1;
+    }
+    else {
+    ksm_pages_shared -= 1;
+    }
+    rmap_item.mm.ksm_merging_pages -= 1;
     VM_BUG_ON(stable_node.rmap_hlist_len <= 0);
-    stable_node.rmap_hlist_len--;
+    stable_node.rmap_hlist_len -= 1;
     put_anon_vma(rmap_item.anon_vma);
 // Reset linear_page_index that might overlay age-related information.
     rmap_item.linear_page_index = 0;
     rmap_item.head = core::ptr::null_mut();
     rmap_item.address &= PAGE_MASK;
     } else if (rmap_item.address & UNSTABLE_FLAG) {
-    unsigned char age;
+    let mut age = 0;
 //
 // Usually ksmd can and must skip the rb_erase, because
 // root_unstable_tree was already reset to RB_ROOT.
@@ -1011,37 +1236,34 @@ unsafe extern "C" fn remove_rmap_item_from_tree(rmap_item: *mut ksm_rmap_item) {
 // than left over from before.
 //
     age = (unsigned char)(ksm_scan.seqnr - rmap_item.address);
-    BUG_ON(age > 1);
-    if (!age)
+    BUG_ON!(age > 1);
+    if (!age) {
     rb_erase(&rmap_item.node,
     root_unstable_tree + NUMA(rmap_item.nid));
-    ksm_pages_unshared--;
+    }
+    ksm_pages_unshared -= 1;
     rmap_item.address &= PAGE_MASK;
     }
-    out:
+// label;
     cond_resched();		/* we're called from many long loops */
     }
 #[no_mangle]
 unsafe extern "C" fn remove_trailing_rmap_items(rmap_list: *mut ksm_rmap_item) {
-    static void remove_trailing_rmap_items(struct ksm_rmap_item **rmap_list)
-    {
     while (*rmap_list) {
-    struct ksm_rmap_item *rmap_item = *rmap_list;
+    let mut rmap_item = *rmap_list;
 // rmap_list = rmap_item->rmap_list;
     remove_rmap_item_from_tree(rmap_item);
     free_rmap_item(rmap_item);
     }
     }
-    static inline
-    struct ksm_stable_node *folio_stable_node(const struct folio *folio)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn folio_stable_node(folio: *mut folio) -> *mut c_void {
     return folio_test_ksm(folio) ? folio_raw_mapping(folio) : core::ptr::null_mut();
     }
-    static inline void folio_set_stable_node(struct folio *folio,
-    struct ksm_stable_node *stable_node)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn folio_set_stable_node(folio: *mut folio, stable_node: *mut ksm_stable_node) {
     VM_WARN_ON_FOLIO(folio_test_anon(folio) && PageAnonExclusive(&folio.page), folio);
-    folio.mapping = (void *)((unsigned long)stable_node | FOLIO_MAPPING_KSM);
+    folio.mapping = ((unsigned long)stable_node | FOLIO_MAPPING_KSM);
     }
 
 //
@@ -1049,10 +1271,8 @@ unsafe extern "C" fn remove_trailing_rmap_items(rmap_list: *mut ksm_rmap_item) {
 //
 #[no_mangle]
 unsafe extern "C" fn remove_stable_node(stable_node: *mut ksm_stable_node) -> c_int {
-    static int remove_stable_node(struct ksm_stable_node *stable_node)
-    {
-    struct folio *folio;
-    int err;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
     folio = ksm_get_folio(stable_node, KSM_GET_FOLIO_LOCK);
     if (!folio) {
 //
@@ -1083,39 +1303,39 @@ unsafe extern "C" fn remove_stable_node(stable_node: *mut ksm_stable_node) -> c_
     folio_put(folio);
     return err;
     }
-    static int remove_stable_node_chain(struct ksm_stable_node *stable_node,
-    struct rb_root *root)
-    {
-    struct ksm_stable_node *dup;
-    struct hlist_node *hlist_safe;
+#[no_mangle]
+pub unsafe extern "C" fn remove_stable_node_chain(stable_node: *mut ksm_stable_node, root: *mut rb_root) -> c_int {
+pub static mut dup: *mut c_void = core::ptr::null_mut();
+pub static mut hlist_safe: *mut c_void = core::ptr::null_mut();
     if (!is_stable_node_chain(stable_node)) {
     VM_BUG_ON(is_stable_node_dup(stable_node));
-    if (remove_stable_node(stable_node))
+    if (remove_stable_node(stable_node)) {
     return true;
-    else
+    }
+    else {
     return false;
+    }
     }
     hlist_for_each_entry_safe(dup, hlist_safe,
     &stable_node.hlist, hlist_dup) {
     VM_BUG_ON(!is_stable_node_dup(dup));
-    if (remove_stable_node(dup))
+    if (remove_stable_node(dup)) {
     return true;
     }
-    BUG_ON(!hlist_empty(&stable_node.hlist));
+    }
+    BUG_ON!(!hlist_empty(&stable_node.hlist));
     free_stable_node_chain(stable_node, root);
     return false;
     }
 #[no_mangle]
 unsafe extern "C" fn remove_all_stable_nodes() -> c_int {
-    static int remove_all_stable_nodes(void)
-    {
-    struct ksm_stable_node *stable_node, *next;
-    int nid;
-    let mut err: c_int = 0;
-    for (nid = 0; nid < ksm_nr_node_ids; nid++) {
+    let mut stable_node = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+    let mut nid = 0;
+pub static mut err: c_int = 0;
+    while (nid < ksm_nr_node_ids) {
     while (root_stable_tree[nid].rb_node) {
-    stable_node = rb_entry(root_stable_tree[nid].rb_node,
-    struct ksm_stable_node, node);
+    stable_node = rb_entry(root_stable_tree[nid].rb_node, ksm_stable_node, node);
     if (remove_stable_node_chain(stable_node,
     root_stable_tree + nid)) {
     err = -EBUSY;
@@ -1125,28 +1345,25 @@ unsafe extern "C" fn remove_all_stable_nodes() -> c_int {
     }
     }
     list_for_each_entry_safe(stable_node, next, &migrate_nodes, list) {
-    if (remove_stable_node(stable_node))
+    if (remove_stable_node(stable_node)) {
     err = -EBUSY;
+    }
     cond_resched();
     }
     return err;
     }
 #[no_mangle]
 unsafe extern "C" fn unmerge_and_remove_all_rmap_items() -> c_int {
-    static int unmerge_and_remove_all_rmap_items(void)
-    {
-    struct ksm_mm_slot *mm_slot;
-    struct mm_slot *slot;
-    struct mm_struct *mm;
-    struct vm_area_struct *vma;
-    let mut err: c_int = 0;
+pub static mut mm_slot: *mut c_void = core::ptr::null_mut();
+pub static mut slot: *mut c_void = core::ptr::null_mut();
+pub static mut mm: *mut c_void = core::ptr::null_mut();
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+pub static mut err: c_int = 0;
     spin_lock(&ksm_mmlist_lock);
-    slot = list_entry(ksm_mm_head.slot.mm_node.next,
-    struct mm_slot, mm_node);
-    ksm_scan.mm_slot = mm_slot_entry(slot, struct ksm_mm_slot, slot);
+    slot = list_entry(ksm_mm_head.slot.mm_node.next, mm_slot, mm_node);
+    ksm_scan.mm_slot = mm_slot_entry(slot, ksm_mm_slot, slot);
     spin_unlock(&ksm_mmlist_lock);
-    for (mm_slot = ksm_scan.mm_slot; mm_slot != &ksm_mm_head;
-    mm_slot = ksm_scan.mm_slot) {
+    while (mm_slot != &ksm_mm_head) {
     VMA_ITERATOR(vmi, mm_slot.slot.mm, 0);
     mm = mm_slot.slot.mm;
     mmap_read_lock(mm);
@@ -1154,22 +1371,24 @@ unsafe extern "C" fn unmerge_and_remove_all_rmap_items() -> c_int {
 // Exit right away if mm is exiting to avoid lockdep issue in
 // the maple tree
 //
-    if (ksm_test_exit(mm))
-    goto mm_exiting;
-    for_each_vma(vmi, vma) {
-    if (!(vma.vm_flags & VM_MERGEABLE) || !vma.anon_vma)
-    continue;
-    err = break_ksm(vma, vma.vm_start, vma.vm_end, false);
-    if (err)
-    goto error;
+    if (ksm_test_exit(mm)) {
+// goto;
     }
-    mm_exiting:
+    for_each_vma(vmi, vma) {
+    if (!(vma.vm_flags & VM_MERGEABLE) || !vma.anon_vma) {
+    continue;
+    }
+    err = break_ksm(vma, vma.vm_start, vma.vm_end, false);
+    if (err) {
+// goto;
+    }
+    }
+// label;
     remove_trailing_rmap_items(&mm_slot.rmap_list);
     mmap_read_unlock(mm);
     spin_lock(&ksm_mmlist_lock);
-    slot = list_entry(mm_slot.slot.mm_node.next,
-    struct mm_slot, mm_node);
-    ksm_scan.mm_slot = mm_slot_entry(slot, struct ksm_mm_slot, slot);
+    slot = list_entry(mm_slot.slot.mm_node.next, mm_slot, mm_node);
+    ksm_scan.mm_slot = mm_slot_entry(slot, ksm_mm_slot, slot);
     if (ksm_test_exit(mm)) {
     mm_slot_remove(&mm_slot.slot);
     spin_unlock(&ksm_mmlist_lock);
@@ -1177,14 +1396,15 @@ unsafe extern "C" fn unmerge_and_remove_all_rmap_items() -> c_int {
     mm_flags_clear(MMF_VM_MERGEABLE, mm);
     mm_flags_clear(MMF_VM_MERGE_ANY, mm);
     mmdrop(mm);
-    } else
+    } else {
     spin_unlock(&ksm_mmlist_lock);
+    }
     }
 // Clean up stable nodes, but don't worry if some are still busy
     remove_all_stable_nodes();
     ksm_scan.seqnr = 0;
     return 0;
-    error:
+// label;
     mmap_read_unlock(mm);
     spin_lock(&ksm_mmlist_lock);
     ksm_scan.mm_slot = &ksm_mm_head;
@@ -1194,43 +1414,45 @@ unsafe extern "C" fn unmerge_and_remove_all_rmap_items() -> c_int {
 
 #[no_mangle]
 unsafe extern "C" fn calc_checksum(page: *mut page) -> u32 {
-    static u32 calc_checksum(struct page *page)
-    {
-    u32 checksum;
-    void *addr = kmap_local_page(page);
+    let mut checksum = 0;
+    let mut addr = kmap_local_page(page);
     checksum = xxhash(addr, PAGE_SIZE, 0);
     kunmap_local(addr);
     return checksum;
     }
-    static int write_protect_page(struct vm_area_struct *vma, struct folio *folio,
-    pte_t *orig_pte)
-    {
-    struct mm_struct *mm = vma.vm_mm;
-    DEFINE_FOLIO_VMA_WALK(pvmw, folio, vma, 0, 0);
-    int swapped;
-    let mut err: c_int = -EFAULT;
-    struct mmu_notifier_range range;
-    bool anon_exclusive;
-    pte_t entry;
-    if (WARN_ON_ONCE(folio_test_large(folio)))
+#[no_mangle]
+pub unsafe extern "C" fn write_protect_page(vma: *mut vm_area_struct, folio: *mut folio, orig_pte: *mut pte_t) -> c_int {
+    let mut mm = vma.vm_mm;
+pub static mut pvmw: usize = 0;
+    let mut swapped = 0;
+pub static mut err: c_int = 0;
+pub static mut range: usize = 0;
+    let mut anon_exclusive = 0;
+    let mut entry;
+    if (WARN_ON_ONCE!(folio_test_large(folio))) {
     return err;
+    }
     pvmw.address = page_address_in_vma(folio, folio_page(folio, 0), vma);
-    if (pvmw.address == -EFAULT)
-    goto out;
+    if (pvmw.address == -EFAULT) {
+// goto;
+    }
     mmu_notifier_range_init(&range, MMU_NOTIFY_CLEAR, 0, mm, pvmw.address,
     pvmw.address + PAGE_SIZE);
     mmu_notifier_invalidate_range_start(&range);
-    if (!page_vma_mapped_walk(&pvmw))
-    goto out_mn;
-    if (WARN_ONCE(!pvmw.pte, "Unexpected PMD mapping?"))
-    goto out_unlock;
+    if (!page_vma_mapped_walk(&pvmw)) {
+// goto;
+    }
+    if (WARN_ONCE(!pvmw.pte, "Unexpected PMD mapping?")) {
+// goto;
+    }
     entry = ptep_get(pvmw.pte);
 //
 // Handle PFN swap PTEs, such as device-exclusive ones, that actually
 // map pages: give up just like the next folio_walk would.
 //
-    if (unlikely(!pte_present(entry)))
-    goto out_unlock;
+    if (unlikely(!pte_present(entry))) {
+// goto;
+    }
     anon_exclusive = PageAnonExclusive(&folio.page);
     if (pte_write(entry) || pte_dirty(entry) ||
     anon_exclusive || mm_tlb_flush_pending(mm)) {
@@ -1257,28 +1479,30 @@ unsafe extern "C" fn calc_checksum(page: *mut page) -> u32 {
 //
     if (folio_mapcount(folio) + 1 + swapped != folio_ref_count(folio)) {
     set_pte_at(mm, pvmw.address, pvmw.pte, entry);
-    goto out_unlock;
+// goto;
     }
 // See folio_try_share_anon_rmap_pte(): clear PTE first.
     if (anon_exclusive &&
     folio_try_share_anon_rmap_pte(folio, &folio.page)) {
     set_pte_at(mm, pvmw.address, pvmw.pte, entry);
-    goto out_unlock;
+// goto;
     }
-    if (pte_dirty(entry))
+    if (pte_dirty(entry)) {
     folio_mark_dirty(folio);
+    }
     entry = pte_mkclean(entry);
-    if (pte_write(entry))
+    if (pte_write(entry)) {
     entry = pte_wrprotect(entry);
+    }
     set_pte_at(mm, pvmw.address, pvmw.pte, entry);
     }
 // orig_pte = entry;
     err = 0;
-    out_unlock:
+// label;
     page_vma_mapped_walk_done(&pvmw);
-    out_mn:
+// label;
     mmu_notifier_invalidate_range_end(&range);
-    out:
+// label;
     return err;
     }
 //
@@ -1290,43 +1514,46 @@ unsafe extern "C" fn calc_checksum(page: *mut page) -> u32 {
 //
 // Returns 0 on success, -EFAULT on failure.
 //
-    static int replace_page(struct vm_area_struct *vma, struct page *page,
-    struct page *kpage, pte_t orig_pte)
-    {
-    struct folio *kfolio = page_folio(kpage);
-    struct mm_struct *mm = vma.vm_mm;
-    struct folio *folio = page_folio(page);
-    pmd_t *pmd;
-    pmd_t pmde;
-    pte_t *ptep;
-    pte_t newpte;
-    spinlock_t *ptl;
-    unsigned long addr;
-    let mut err: c_int = -EFAULT;
-    struct mmu_notifier_range range;
+#[no_mangle]
+pub unsafe extern "C" fn replace_page(vma: *mut vm_area_struct, page: *mut page, kpage: *mut page, orig_pte: pte_t) -> c_int {
+    let mut kfolio = page_folio(kpage);
+    let mut mm = vma.vm_mm;
+    let mut folio = page_folio(page);
+pub static mut pmd: *mut c_void = core::ptr::null_mut();
+    let mut pmde;
+pub static mut ptep: *mut c_void = core::ptr::null_mut();
+    let mut newpte;
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
+    let mut addr = 0;
+pub static mut err: c_int = 0;
+pub static mut range: usize = 0;
     addr = page_address_in_vma(folio, page, vma);
-    if (addr == -EFAULT)
-    goto out;
+    if (addr == -EFAULT) {
+// goto;
+    }
     pmd = mm_find_pmd(mm, addr);
-    if (!pmd)
-    goto out;
+    if (!pmd) {
+// goto;
+    }
 //
 // Some THP functions use the sequence pmdp_huge_clear_flush(), set_pmd_at()
 // without holding anon_vma lock for write.  So when looking for a
 // genuine pmde (in which to find pte), test present and !THP together.
 //
     pmde = pmdp_get_lockless(pmd);
-    if (!pmd_present(pmde) || pmd_trans_huge(pmde))
-    goto out;
+    if (!pmd_present(pmde) || pmd_trans_huge(pmde)) {
+// goto;
+    }
     mmu_notifier_range_init(&range, MMU_NOTIFY_CLEAR, 0, mm, addr,
     addr + PAGE_SIZE);
     mmu_notifier_invalidate_range_start(&range);
     ptep = pte_offset_map_lock(mm, pmd, addr, &ptl);
-    if (!ptep)
-    goto out_mn;
+    if (!ptep) {
+// goto;
+    }
     if (!pte_same(ptep_get(ptep), orig_pte)) {
     pte_unmap_unlock(ptep, ptl);
-    goto out_mn;
+// goto;
     }
     VM_BUG_ON_PAGE(PageAnonExclusive(page), page);
     VM_BUG_ON_FOLIO(folio_test_anon(kfolio) && PageAnonExclusive(kpage),
@@ -1365,14 +1592,15 @@ unsafe extern "C" fn calc_checksum(page: *mut page) -> u32 {
     ptep_clear_flush(vma, addr, ptep);
     set_pte_at(mm, addr, ptep, newpte);
     folio_remove_rmap_pte(folio, page, vma);
-    if (!folio_mapped(folio))
+    if (!folio_mapped(folio)) {
     folio_free_swap(folio);
+    }
     folio_put(folio);
     pte_unmap_unlock(ptep, ptl);
     err = 0;
-    out_mn:
+// label;
     mmu_notifier_invalidate_range_end(&range);
-    out:
+// label;
     return err;
     }
 //
@@ -1384,27 +1612,30 @@ unsafe extern "C" fn calc_checksum(page: *mut page) -> u32 {
 //
 // This function returns 0 if the pages were merged, -EFAULT otherwise.
 //
-    static int try_to_merge_one_page(struct vm_area_struct *vma,
-    struct page *page, struct page *kpage)
-    {
-    struct folio *folio = page_folio(page);
-    let mut orig_pte: pte_t = __pte(0);
-    let mut err: c_int = -EFAULT;
-    if (page == kpage)			/* ksm page forked */
+#[no_mangle]
+pub unsafe extern "C" fn try_to_merge_one_page(vma: *mut vm_area_struct, page: *mut page, kpage: *mut page) -> c_int {
+    let mut folio = page_folio(page);
+pub static mut orig_pte: pte_t = 0;
+pub static mut err: c_int = 0;
+    if (page == kpage)			/* ksm page forked */ {
     return 0;
-    if (!folio_test_anon(folio))
-    goto out;
+    }
+    if (!folio_test_anon(folio)) {
+// goto;
+    }
 //
 // We need the folio lock to read a stable swapcache flag in
 // write_protect_page().  We trylock because we don't want to wait
 // here - we prefer to continue scanning and merging different
 // pages, then come back to this page when it is unlocked.
 //
-    if (!folio_trylock(folio))
-    goto out;
+    if (!folio_trylock(folio)) {
+// goto;
+    }
     if (folio_test_large(folio)) {
-    if (split_huge_page(page))
-    goto out_unlock;
+    if (split_huge_page(page)) {
+// goto;
+    }
     folio = page_folio(page);
     }
 //
@@ -1426,32 +1657,33 @@ unsafe extern "C" fn calc_checksum(page: *mut page) -> u32 {
 // Page reclaim just frees a clean folio with no dirty
 // ptes: make sure that the ksm page would be swapped.
 //
-    if (!folio_test_dirty(folio))
+    if (!folio_test_dirty(folio)) {
     folio_mark_dirty(folio);
+    }
     err = 0;
-    } else if (pages_identical(page, kpage))
+    } else if (pages_identical(page, kpage)) {
     err = replace_page(vma, page, kpage, orig_pte);
     }
-    out_unlock:
+    }
+// label;
     folio_unlock(folio);
-    out:
+// label;
     return err;
     }
 //
 // This function returns 0 if the pages were merged or if they are
 // no longer merging candidates (e.g., VMA stale), -EFAULT otherwise.
 //
-    static int try_to_merge_with_zero_page(struct ksm_rmap_item *rmap_item,
-    struct page *page)
-    {
-    struct mm_struct *mm = rmap_item.mm;
-    let mut err: c_int = -EFAULT;
+#[no_mangle]
+pub unsafe extern "C" fn try_to_merge_with_zero_page(rmap_item: *mut ksm_rmap_item, page: *mut page) -> c_int {
+    let mut mm = rmap_item.mm;
+pub static mut err: c_int = 0;
 //
 // Same checksum as an empty page. We attempt to merge it with the
 // appropriate zero page if the user enabled this via sysfs.
 //
     if (ksm_use_zero_pages && (rmap_item.oldchecksum == zero_checksum)) {
-    struct vm_area_struct *vma;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
     mmap_read_lock(mm);
     vma = find_mergeable_vma(mm, rmap_item.address);
     if (vma) {
@@ -1477,19 +1709,20 @@ unsafe extern "C" fn calc_checksum(page: *mut page) -> u32 {
 //
 // This function returns 0 if the pages were merged, -EFAULT otherwise.
 //
-    static int try_to_merge_with_ksm_page(struct ksm_rmap_item *rmap_item,
-    struct page *page, struct page *kpage)
-    {
-    struct mm_struct *mm = rmap_item.mm;
-    struct vm_area_struct *vma;
-    let mut err: c_int = -EFAULT;
+#[no_mangle]
+pub unsafe extern "C" fn try_to_merge_with_ksm_page(rmap_item: *mut ksm_rmap_item, page: *mut page, kpage: *mut page) -> c_int {
+    let mut mm = rmap_item.mm;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+pub static mut err: c_int = 0;
     mmap_read_lock(mm);
     vma = find_mergeable_vma(mm, rmap_item.address);
-    if (!vma)
-    goto out;
+    if (!vma) {
+// goto;
+    }
     err = try_to_merge_one_page(vma, page, kpage);
-    if (err)
-    goto out;
+    if (err) {
+// goto;
+    }
 // Unstable nid is in union with stable anon_vma: remove first
     remove_rmap_item_from_tree(rmap_item);
 //
@@ -1502,7 +1735,7 @@ unsafe extern "C" fn calc_checksum(page: *mut page) -> u32 {
     rmap_item.anon_vma = vma.anon_vma;
     rmap_item.linear_page_index = linear_anon_page_index(vma, rmap_item.address);
     get_anon_vma(vma.anon_vma);
-    out:
+// label;
     mmap_read_unlock(mm);
     trace_ksm_merge_with_ksm_page(kpage, page_to_pfn(kpage ? kpage : page),
     rmap_item, mm, err);
@@ -1518,12 +1751,9 @@ unsafe extern "C" fn calc_checksum(page: *mut page) -> u32 {
 // Note that this function upgrades page to ksm page: if one of the pages
 // is already a ksm page, try_to_merge_with_ksm_page should be used.
 //
-    static struct folio *try_to_merge_two_pages(struct ksm_rmap_item *rmap_item,
-    struct page *page,
-    struct ksm_rmap_item *tree_rmap_item,
-    struct page *tree_page)
-    {
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn try_to_merge_two_pages(rmap_item: *mut ksm_rmap_item, page: *mut page, tree_rmap_item: *mut ksm_rmap_item, tree_page: *mut page) -> *mut c_void {
+    let mut err = 0;
     err = try_to_merge_with_ksm_page(rmap_item, page, core::ptr::null_mut());
     if (!err) {
     err = try_to_merge_with_ksm_page(tree_rmap_item,
@@ -1532,16 +1762,15 @@ unsafe extern "C" fn calc_checksum(page: *mut page) -> u32 {
 // If that fails, we have a ksm page with only one pte
 // pointing to it: so break it.
 //
-    if (err)
+    if (err) {
     break_cow(rmap_item);
+    }
     }
     return err ? core::ptr::null_mut() : page_folio(page);
     }
     static __always_inline
 #[no_mangle]
 pub unsafe extern "C" fn __is_page_sharing_candidate(stable_node: *mut ksm_stable_node, offset: c_int) -> bool {
-    bool __is_page_sharing_candidate(struct ksm_stable_node *stable_node, int offset)
-    {
     VM_BUG_ON(stable_node.rmap_hlist_len < 0);
 //
 // Check that at least one mapping still exists, otherwise
@@ -1555,26 +1784,23 @@ pub unsafe extern "C" fn __is_page_sharing_candidate(stable_node: *mut ksm_stabl
     static __always_inline
 #[no_mangle]
 pub unsafe extern "C" fn is_page_sharing_candidate(stable_node: *mut ksm_stable_node) -> bool {
-    bool is_page_sharing_candidate(struct ksm_stable_node *stable_node)
-    {
     return __is_page_sharing_candidate(stable_node, 0);
     }
-    static struct folio *stable_node_dup(struct ksm_stable_node **_stable_node_dup,
-    struct ksm_stable_node **_stable_node,
-    struct rb_root *root,
-    bool prune_stale_stable_nodes)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn stable_node_dup(_stable_node_dup: *mut *mut ksm_stable_node, _stable_node: *mut *mut ksm_stable_node, root: *mut rb_root, prune_stale_stable_nodes: bool) -> *mut c_void {
     struct ksm_stable_node *dup, *found = core::ptr::null_mut(), *stable_node = *_stable_node;
-    struct hlist_node *hlist_safe;
+pub static mut hlist_safe: *mut c_void = core::ptr::null_mut();
     struct folio *folio, *tree_folio = core::ptr::null_mut();
-    int found_rmap_hlist_len;
+    let mut found_rmap_hlist_len = 0;
     if (!prune_stale_stable_nodes ||
     time_before(jiffies, stable_node.chain_prune_time +
     msecs_to_jiffies(
-    ksm_stable_node_chains_prune_millisecs)))
+    ksm_stable_node_chains_prune_millisecs))) {
     prune_stale_stable_nodes = false;
-    else
+    }
+    else {
     stable_node.chain_prune_time = jiffies;
+    }
     hlist_for_each_entry_safe(dup, hlist_safe,
     &stable_node.hlist, hlist_dup) {
     cond_resched();
@@ -1589,21 +1815,24 @@ pub unsafe extern "C" fn is_page_sharing_candidate(stable_node: *mut ksm_stable_
 // under us if it returns NULL.
 //
     folio = ksm_get_folio(dup, KSM_GET_FOLIO_NOLOCK);
-    if (!folio)
+    if (!folio) {
     continue;
+    }
 // Pick the best candidate if possible.
     if (!found || (is_page_sharing_candidate(dup) &&
     (!is_page_sharing_candidate(found) ||
     dup.rmap_hlist_len > found_rmap_hlist_len))) {
-    if (found)
+    if (found) {
     folio_put(tree_folio);
+    }
     found = dup;
     found_rmap_hlist_len = found.rmap_hlist_len;
     tree_folio = folio;
 // skip put_page for found candidate
     if (!prune_stale_stable_nodes &&
-    is_page_sharing_candidate(found))
+    is_page_sharing_candidate(found)) {
     break;
+    }
     continue;
     }
     folio_put(folio);
@@ -1616,7 +1845,7 @@ pub unsafe extern "C" fn is_page_sharing_candidate(stable_node: *mut ksm_stable_
 // context with no lock held it's not even
 // fatal.
 //
-    BUG_ON(stable_node.hlist.first.next);
+    BUG_ON!(stable_node.hlist.first.next);
 //
 // There's just one entry and it is below the
 // deduplication limit so drop the chain.
@@ -1624,8 +1853,8 @@ pub unsafe extern "C" fn is_page_sharing_candidate(stable_node: *mut ksm_stable_
     rb_replace_node(&stable_node.node, &found.node,
     root);
     free_stable_node(stable_node);
-    ksm_stable_node_chains--;
-    ksm_stable_node_dups--;
+    ksm_stable_node_chains -= 1;
+    ksm_stable_node_dups -= 1;
 //
 // NOTE: the caller depends on the stable_node
 // to be equal to stable_node_dup if the chain
@@ -1681,12 +1910,9 @@ pub unsafe extern "C" fn is_page_sharing_candidate(stable_node: *mut ksm_stable_
 // function and will be overwritten in all cases, the caller doesn't
 // need to initialize it.
 //
-    static struct folio *__stable_node_chain(struct ksm_stable_node **_stable_node_dup,
-    struct ksm_stable_node **_stable_node,
-    struct rb_root *root,
-    bool prune_stale_stable_nodes)
-    {
-    struct ksm_stable_node *stable_node = *_stable_node;
+#[no_mangle]
+pub unsafe extern "C" fn __stable_node_chain(_stable_node_dup: *mut *mut ksm_stable_node, _stable_node: *mut *mut ksm_stable_node, root: *mut rb_root, prune_stale_stable_nodes: bool) -> *mut c_void {
+    let mut stable_node = *_stable_node;
     if (!is_stable_node_chain(stable_node)) {
 // _stable_node_dup = stable_node;
     return ksm_get_folio(stable_node, KSM_GET_FOLIO_NOLOCK);
@@ -1694,15 +1920,11 @@ pub unsafe extern "C" fn is_page_sharing_candidate(stable_node: *mut ksm_stable_
     return stable_node_dup(_stable_node_dup, _stable_node, root,
     prune_stale_stable_nodes);
     }
-    static __always_inline struct folio *chain_prune(struct ksm_stable_node **s_n_d,
-    struct ksm_stable_node **s_n,
-    struct rb_root *root)
+    static __always_inline struct folio *chain_prune(ksm_stable_node **s_n_d, ksm_stable_node **s_n, rb_root *root)
     {
     return __stable_node_chain(s_n_d, s_n, root, true);
     }
-    static __always_inline struct folio *chain(struct ksm_stable_node **s_n_d,
-    struct ksm_stable_node **s_n,
-    struct rb_root *root)
+    static __always_inline struct folio *chain(ksm_stable_node **s_n_d, ksm_stable_node **s_n, rb_root *root)
     {
     return __stable_node_chain(s_n_d, s_n, root, false);
     }
@@ -1715,15 +1937,16 @@ pub unsafe extern "C" fn is_page_sharing_candidate(stable_node: *mut ksm_stable_
 // This function returns the stable tree node of identical content if found,
 // -EBUSY if the stable node's page is being migrated, NULL otherwise.
 //
-    static struct folio *stable_tree_search(struct page *page)
-    {
-    int nid;
-    struct rb_root *root;
-    struct rb_node **new;
-    struct rb_node *parent;
-    struct ksm_stable_node *stable_node, *stable_node_dup;
-    struct ksm_stable_node *page_node;
-    struct folio *folio;
+#[no_mangle]
+pub unsafe extern "C" fn stable_tree_search(page: *mut page) -> *mut c_void {
+    let mut nid = 0;
+pub static mut root: *mut c_void = core::ptr::null_mut();
+pub static mut new: *mut c_void = core::ptr::null_mut();
+pub static mut parent: *mut c_void = core::ptr::null_mut();
+    let mut stable_node = core::ptr::null_mut();
+    let mut stable_node_dup = core::ptr::null_mut();
+pub static mut page_node: *mut c_void = core::ptr::null_mut();
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     folio = page_folio(page);
     page_node = folio_stable_node(folio);
     if (page_node && page_node.head != &migrate_nodes) {
@@ -1733,14 +1956,14 @@ pub unsafe extern "C" fn is_page_sharing_candidate(stable_node: *mut ksm_stable_
     }
     nid = get_kpfn_nid(folio_pfn(folio));
     root = root_stable_tree + nid;
-    again:
+// label;
     new = &root.rb_node;
     parent = core::ptr::null_mut();
     while (*new) {
-    struct folio *tree_folio;
-    int ret;
+pub static mut tree_folio: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     cond_resched();
-    stable_node = rb_entry(*new, struct ksm_stable_node, node);
+    stable_node = rb_entry(*new, ksm_stable_node, node);
     tree_folio = chain_prune(&stable_node_dup, &stable_node, root);
     if (!tree_folio) {
 //
@@ -1752,17 +1975,18 @@ pub unsafe extern "C" fn is_page_sharing_candidate(stable_node: *mut ksm_stable_
 // false negative insertions just because some
 // stable_node was stale.
 //
-    goto again;
+// goto;
     }
     ret = memcmp_pages(page, &tree_folio.page);
     folio_put(tree_folio);
     parent = *new;
-    if (ret < 0)
+    if (ret < 0) {
     new = &parent.rb_left;
-#[no_mangle]
-pub unsafe extern "C" fn if(0: ret >) -> else {
-    else if (ret > 0)
+    }
+
+    else if (ret > 0) {
     new = &parent.rb_right;
+    }
     else {
     if (page_node) {
     VM_BUG_ON(page_node.head != &migrate_nodes);
@@ -1775,8 +1999,9 @@ pub unsafe extern "C" fn if(0: ret >) -> else {
 // chain_prune(). This way, we can avoid adding
 // this stable node to the chain.
 //
-    if (folio_mapcount(folio) > 1)
-    goto chain_append;
+    if (folio_mapcount(folio) > 1) {
+// goto;
+    }
     }
     if (!is_page_sharing_candidate(stable_node_dup)) {
 //
@@ -1802,36 +2027,40 @@ pub unsafe extern "C" fn if(0: ret >) -> else {
 //
     tree_folio = ksm_get_folio(stable_node_dup,
     KSM_GET_FOLIO_TRYLOCK);
-    if (PTR_ERR(tree_folio) == -EBUSY)
+    if (PTR_ERR(tree_folio) == -EBUSY) {
     return ERR_PTR(-EBUSY);
-    if (unlikely(!tree_folio))
+    }
+    if (unlikely(!tree_folio)) {
 //
 // The tree may have been rebalanced,
 // so re-evaluate parent and new.
 //
-    goto again;
+// goto;
+    }
     folio_unlock(tree_folio);
     if (get_kpfn_nid(stable_node_dup.kpfn) !=
     NUMA(stable_node_dup.nid)) {
     folio_put(tree_folio);
-    goto replace;
+// goto;
     }
     return tree_folio;
     }
     }
-    if (!page_node)
+    if (!page_node) {
     return core::ptr::null_mut();
+    }
     list_del(&page_node.list);
     DO_NUMA(page_node.nid = nid);
     rb_link_node(&page_node.node, parent, new);
     rb_insert_color(&page_node.node, root);
-    out:
+// label;
     if (is_page_sharing_candidate(page_node)) {
     folio_get(folio);
     return folio;
-    } else
+    } else {
     return core::ptr::null_mut();
-    replace:
+    }
+// label;
 //
 // If stable_node was a chain and chain_prune collapsed it,
 // stable_node has been updated to be the new regular
@@ -1851,10 +2080,12 @@ pub unsafe extern "C" fn if(0: ret >) -> else {
     rb_replace_node(&stable_node_dup.node,
     &page_node.node,
     root);
-    if (is_page_sharing_candidate(page_node))
+    if (is_page_sharing_candidate(page_node)) {
     folio_get(folio);
-    else
+    }
+    else {
     folio = core::ptr::null_mut();
+    }
     } else {
     rb_erase(&stable_node_dup.node, root);
     folio = core::ptr::null_mut();
@@ -1867,10 +2098,12 @@ pub unsafe extern "C" fn if(0: ret >) -> else {
     list_del(&page_node.list);
     DO_NUMA(page_node.nid = nid);
     stable_node_chain_add_dup(page_node, stable_node);
-    if (is_page_sharing_candidate(page_node))
+    if (is_page_sharing_candidate(page_node)) {
     folio_get(folio);
-    else
+    }
+    else {
     folio = core::ptr::null_mut();
+    }
     } else {
     folio = core::ptr::null_mut();
     }
@@ -1878,7 +2111,7 @@ pub unsafe extern "C" fn if(0: ret >) -> else {
     stable_node_dup.head = &migrate_nodes;
     list_add(&stable_node_dup.list, stable_node_dup.head);
     return folio;
-    chain_append:
+// label;
 //
 // If stable_node was a chain and chain_prune collapsed it,
 // stable_node has been updated to be the new regular
@@ -1892,8 +2125,9 @@ pub unsafe extern "C" fn if(0: ret >) -> else {
 // chain is missing so create it
     stable_node = alloc_stable_node_chain(stable_node_dup,
     root);
-    if (!stable_node)
+    if (!stable_node) {
     return core::ptr::null_mut();
+    }
     }
 //
 // Add this stable_node dup that was
@@ -1906,7 +2140,7 @@ pub unsafe extern "C" fn if(0: ret >) -> else {
     list_del(&page_node.list);
     DO_NUMA(page_node.nid = nid);
     stable_node_chain_add_dup(page_node, stable_node);
-    goto out;
+// goto;
     }
 //
 // stable_tree_insert - insert stable tree node pointing to new ksm page
@@ -1915,26 +2149,27 @@ pub unsafe extern "C" fn if(0: ret >) -> else {
 // This function returns the stable tree node just allocated on success,
 // NULL otherwise.
 //
-    static struct ksm_stable_node *stable_tree_insert(struct folio *kfolio)
-    {
-    int nid;
-    unsigned long kpfn;
-    struct rb_root *root;
-    struct rb_node **new;
-    struct rb_node *parent;
-    struct ksm_stable_node *stable_node, *stable_node_dup;
-    let mut need_chain: bool = false;
+#[no_mangle]
+pub unsafe extern "C" fn stable_tree_insert(kfolio: *mut folio) -> *mut c_void {
+    let mut nid = 0;
+    let mut kpfn = 0;
+pub static mut root: *mut c_void = core::ptr::null_mut();
+pub static mut new: *mut c_void = core::ptr::null_mut();
+pub static mut parent: *mut c_void = core::ptr::null_mut();
+    let mut stable_node = core::ptr::null_mut();
+    let mut stable_node_dup = core::ptr::null_mut();
+pub static mut need_chain: bool = false;
     kpfn = folio_pfn(kfolio);
     nid = get_kpfn_nid(kpfn);
     root = root_stable_tree + nid;
-    again:
+// label;
     parent = core::ptr::null_mut();
     new = &root.rb_node;
     while (*new) {
-    struct folio *tree_folio;
-    int ret;
+pub static mut tree_folio: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     cond_resched();
-    stable_node = rb_entry(*new, struct ksm_stable_node, node);
+    stable_node = rb_entry(*new, ksm_stable_node, node);
     tree_folio = chain(&stable_node_dup, &stable_node, root);
     if (!tree_folio) {
 //
@@ -1946,25 +2181,27 @@ pub unsafe extern "C" fn if(0: ret >) -> else {
 // false negative insertions just because some
 // stable_node was stale.
 //
-    goto again;
+// goto;
     }
     ret = memcmp_pages(&kfolio.page, &tree_folio.page);
     folio_put(tree_folio);
     parent = *new;
-    if (ret < 0)
+    if (ret < 0) {
     new = &parent.rb_left;
-#[no_mangle]
-pub unsafe extern "C" fn if(0: ret >) -> else {
-    else if (ret > 0)
+    }
+
+    else if (ret > 0) {
     new = &parent.rb_right;
+    }
     else {
     need_chain = true;
     break;
     }
     }
     stable_node_dup = alloc_stable_node();
-    if (!stable_node_dup)
+    if (!stable_node_dup) {
     return core::ptr::null_mut();
+    }
     INIT_HLIST_HEAD(&stable_node_dup.hlist);
     stable_node_dup.kpfn = kpfn;
     stable_node_dup.rmap_hlist_len = 0;
@@ -1974,7 +2211,7 @@ pub unsafe extern "C" fn if(0: ret >) -> else {
     rb_insert_color(&stable_node_dup.node, root);
     } else {
     if (!is_stable_node_chain(stable_node)) {
-    struct ksm_stable_node *orig = stable_node;
+    let mut orig = stable_node;
 // chain is missing so create it
     stable_node = alloc_stable_node_chain(orig, root);
     if (!stable_node) {
@@ -2001,27 +2238,25 @@ pub unsafe extern "C" fn if(0: ret >) -> else {
 // This function does both searching and inserting, because they share
 // the same walking algorithm in an rbtree.
 //
-    static
-    struct ksm_rmap_item *unstable_tree_search_insert(struct ksm_rmap_item *rmap_item,
-    struct page *page,
-    struct page **tree_pagep)
-    {
-    struct rb_node **new;
-    struct rb_root *root;
-    struct rb_node *parent = core::ptr::null_mut();
-    int nid;
+#[no_mangle]
+pub unsafe extern "C" fn unstable_tree_search_insert(rmap_item: *mut ksm_rmap_item, page: *mut page, tree_pagep: *mut *mut page) -> *mut c_void {
+pub static mut new: *mut c_void = core::ptr::null_mut();
+pub static mut root: *mut c_void = core::ptr::null_mut();
+    let mut parent = core::ptr::null_mut();
+    let mut nid = 0;
     nid = get_kpfn_nid(page_to_pfn(page));
     root = root_unstable_tree + nid;
     new = &root.rb_node;
     while (*new) {
-    struct ksm_rmap_item *tree_rmap_item;
-    struct page *tree_page;
-    int ret;
+pub static mut tree_rmap_item: *mut c_void = core::ptr::null_mut();
+pub static mut tree_page: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     cond_resched();
-    tree_rmap_item = rb_entry(*new, struct ksm_rmap_item, node);
+    tree_rmap_item = rb_entry(*new, ksm_rmap_item, node);
     tree_page = get_mergeable_page(tree_rmap_item);
-    if (!tree_page)
+    if (!tree_page) {
     return core::ptr::null_mut();
+    }
 //
 // Don't substitute a ksm page for a forked page.
 //
@@ -2056,7 +2291,7 @@ pub unsafe extern "C" fn if(0: ret >) -> else {
     DO_NUMA(rmap_item.nid = nid);
     rb_link_node(&rmap_item.node, parent, new);
     rb_insert_color(&rmap_item.node, root);
-    ksm_pages_unshared++;
+    ksm_pages_unshared += 1;
     return core::ptr::null_mut();
     }
 //
@@ -2064,10 +2299,8 @@ pub unsafe extern "C" fn if(0: ret >) -> else {
 // rmap_items hanging off a given node of the stable tree, all sharing
 // the same ksm page.
 //
-    static void stable_tree_append(struct ksm_rmap_item *rmap_item,
-    struct ksm_stable_node *stable_node,
-    bool max_page_sharing_bypass)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn stable_tree_append(rmap_item: *mut ksm_rmap_item, stable_node: *mut ksm_stable_node, max_page_sharing_bypass: bool) {
 //
 // rmap won't find this mapping if we don't insert the
 // rmap_item in the right stable_node
@@ -2078,20 +2311,23 @@ pub unsafe extern "C" fn if(0: ret >) -> else {
 // for the first time (and not when decreasing rmap_hlist_len)
 // would be sign of memory corruption in the stable_node.
 //
-    BUG_ON(stable_node.rmap_hlist_len < 0);
-    stable_node.rmap_hlist_len++;
-    if (!max_page_sharing_bypass)
+    BUG_ON!(stable_node.rmap_hlist_len < 0);
+    stable_node.rmap_hlist_len += 1;
+    if (!max_page_sharing_bypass) {
 // possibly non fatal but unexpected overflow, only warn
-    WARN_ON_ONCE(stable_node.rmap_hlist_len >
+    WARN_ON_ONCE!(stable_node.rmap_hlist_len >
     ksm_max_page_sharing);
+    }
     rmap_item.head = stable_node;
     rmap_item.address |= STABLE_FLAG;
     hlist_add_head(&rmap_item.hlist, &stable_node.hlist);
-    if (rmap_item.hlist.next)
-    ksm_pages_sharing++;
-    else
-    ksm_pages_shared++;
-    rmap_item.mm.ksm_merging_pages++;
+    if (rmap_item.hlist.next) {
+    ksm_pages_sharing += 1;
+    }
+    else {
+    ksm_pages_shared += 1;
+    }
+    rmap_item.mm.ksm_merging_pages += 1;
     }
 //
 // cmp_and_merge_page - first see if page can be merged into the stable tree;
@@ -2104,16 +2340,14 @@ pub unsafe extern "C" fn if(0: ret >) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn cmp_and_merge_page(page: *mut page, rmap_item: *mut ksm_rmap_item) {
-    static void cmp_and_merge_page(struct page *page, struct ksm_rmap_item *rmap_item)
-    {
-    struct folio *folio = page_folio(page);
-    struct ksm_rmap_item *tree_rmap_item;
-    struct page *tree_page = core::ptr::null_mut();
-    struct ksm_stable_node *stable_node;
-    struct folio *kfolio;
-    unsigned int checksum;
-    int err;
-    let mut max_page_sharing_bypass: bool = false;
+    let mut folio = page_folio(page);
+pub static mut tree_rmap_item: *mut c_void = core::ptr::null_mut();
+    let mut tree_page = core::ptr::null_mut();
+pub static mut stable_node: *mut c_void = core::ptr::null_mut();
+pub static mut kfolio: *mut c_void = core::ptr::null_mut();
+    let mut checksum = 0;
+    let mut err = 0;
+pub static mut max_page_sharing_bypass: bool = false;
     stable_node = folio_stable_node(folio);
     if (stable_node) {
     if (stable_node.head != &migrate_nodes &&
@@ -2124,14 +2358,16 @@ unsafe extern "C" fn cmp_and_merge_page(page: *mut page, rmap_item: *mut ksm_rma
     list_add(&stable_node.list, stable_node.head);
     }
     if (stable_node.head != &migrate_nodes &&
-    rmap_item.head == stable_node)
+    rmap_item.head == stable_node) {
     return;
+    }
 //
 // If it's a KSM fork, allow it to go over the sharing limit
 // without warnings.
 //
-    if (!is_page_sharing_candidate(stable_node))
+    if (!is_page_sharing_candidate(stable_node)) {
     max_page_sharing_bypass = true;
+    }
     } else {
     remove_rmap_item_from_tree(rmap_item);
 //
@@ -2145,8 +2381,9 @@ unsafe extern "C" fn cmp_and_merge_page(page: *mut page, rmap_item: *mut ksm_rma
     rmap_item.oldchecksum = checksum;
     return;
     }
-    if (!try_to_merge_with_zero_page(rmap_item, page))
+    if (!try_to_merge_with_zero_page(rmap_item, page)) {
     return;
+    }
     }
 // Start by searching for the folio in the stable tree
     kfolio = stable_tree_search(page);
@@ -2156,8 +2393,9 @@ unsafe extern "C" fn cmp_and_merge_page(page: *mut page, rmap_item: *mut ksm_rma
     }
     remove_rmap_item_from_tree(rmap_item);
     if (kfolio) {
-    if (kfolio == ERR_PTR(-EBUSY))
+    if (kfolio == ERR_PTR(-EBUSY)) {
     return;
+    }
     err = try_to_merge_with_ksm_page(rmap_item, page, &kfolio.page);
     if (!err) {
 //
@@ -2175,8 +2413,8 @@ unsafe extern "C" fn cmp_and_merge_page(page: *mut page, rmap_item: *mut ksm_rma
     tree_rmap_item =
     unstable_tree_search_insert(rmap_item, page, &tree_page);
     if (tree_rmap_item) {
-    struct folio *tree_folio;
-    bool split;
+pub static mut tree_folio: *mut c_void = core::ptr::null_mut();
+    let mut split = 0;
     kfolio = try_to_merge_two_pages(rmap_item, page,
     tree_rmap_item, tree_page);
     tree_folio = page_folio(tree_page);
@@ -2226,25 +2464,26 @@ unsafe extern "C" fn cmp_and_merge_page(page: *mut page, rmap_item: *mut ksm_rma
 // the page is locked, it is better to skip it and
 // perhaps try again later.
 //
-    if (!folio_trylock(folio))
+    if (!folio_trylock(folio)) {
     return;
+    }
     split_huge_page(page);
     folio = page_folio(page);
     folio_unlock(folio);
     }
     }
     }
-    static struct ksm_rmap_item *get_next_rmap_item(struct ksm_mm_slot *mm_slot,
-    struct ksm_rmap_item **rmap_list,
-    unsigned long addr)
-    {
-    struct ksm_rmap_item *rmap_item;
+#[no_mangle]
+pub unsafe extern "C" fn get_next_rmap_item(mm_slot: *mut ksm_mm_slot, rmap_list: *mut *mut ksm_rmap_item, addr: c_ulong) -> *mut c_void {
+pub static mut rmap_item: *mut c_void = core::ptr::null_mut();
     while (*rmap_list) {
     rmap_item = *rmap_list;
-    if ((rmap_item.address & PAGE_MASK) == addr)
+    if ((rmap_item.address & PAGE_MASK) == addr) {
     return rmap_item;
-    if (rmap_item.address > addr)
+    }
+    if (rmap_item.address > addr) {
     break;
+    }
 // rmap_list = rmap_item->rmap_list;
     remove_rmap_item_from_tree(rmap_item);
     free_rmap_item(rmap_item);
@@ -2253,7 +2492,7 @@ unsafe extern "C" fn cmp_and_merge_page(page: *mut page, rmap_item: *mut ksm_rma
     if (rmap_item) {
 // It has already been zeroed
     rmap_item.mm = mm_slot.slot.mm;
-    rmap_item.mm.ksm_rmap_items++;
+    rmap_item.mm.ksm_rmap_items += 1;
     rmap_item.address = addr;
     rmap_item.rmap_list = *rmap_list;
 // rmap_list = rmap_item;
@@ -2269,14 +2508,15 @@ unsafe extern "C" fn cmp_and_merge_page(page: *mut page, rmap_item: *mut ksm_rma
 //
 #[no_mangle]
 unsafe extern "C" fn skip_age(age: rmap_age_t) -> c_uint {
-    static unsigned int skip_age(rmap_age_t age)
-    {
-    if (age <= 3)
+    if (age <= 3) {
     return 1;
-    if (age <= 5)
+    }
+    if (age <= 5) {
     return 2;
-    if (age <= 8)
+    }
+    if (age <= 8) {
     return 4;
+    }
     return 8;
     }
 //
@@ -2285,34 +2525,38 @@ unsafe extern "C" fn skip_age(age: rmap_age_t) -> c_uint {
 // @folio: folio containing the page to check
 // @rmap_item: associated rmap_item of page
 //
-    static bool should_skip_rmap_item(struct folio *folio,
-    struct ksm_rmap_item *rmap_item)
-    {
-    rmap_age_t age;
-    if (!ksm_smart_scan)
+#[no_mangle]
+pub unsafe extern "C" fn should_skip_rmap_item(folio: *mut folio, rmap_item: *mut ksm_rmap_item) -> bool {
+    let mut age;
+    if (!ksm_smart_scan) {
     return false;
+    }
 //
 // Never skip pages that are already KSM; pages cmp_and_merge_page()
 // will essentially ignore them, but we still have to process them
 // properly.
 //
-    if (folio_test_ksm(folio))
+    if (folio_test_ksm(folio)) {
     return false;
+    }
 //
 // There is no age information in stable-tree nodes. We might end up
 // here without a KSM page for example after COW.
 //
-    if (rmap_item.address & STABLE_FLAG)
+    if (rmap_item.address & STABLE_FLAG) {
     return false;
+    }
     age = rmap_item.age;
-    if (age != U8_MAX)
-    rmap_item.age++;
+    if (age != U8_MAX) {
+    rmap_item.age += 1;
+    }
 //
 // Smaller ages are not skipped, they need to get a chance to go
 // through the different phases of the KSM merging.
 //
-    if (age < 3)
+    if (age < 3) {
     return false;
+    }
 //
 // Are we still allowed to skip? If not, then don't skip it
 // and determine how much more often we are allowed to skip next.
@@ -2322,8 +2566,8 @@ unsafe extern "C" fn skip_age(age: rmap_age_t) -> c_uint {
     return false;
     }
 // Skip this page
-    ksm_pages_skipped++;
-    rmap_item.remaining_skips--;
+    ksm_pages_skipped += 1;
+    rmap_item.remaining_skips -= 1;
     remove_rmap_item_from_tree(rmap_item);
     return true;
     }
@@ -2335,85 +2579,92 @@ pub struct ksm_next_page_arg {
     pub addr: c_ulong,
 }
 
-    static int ksm_next_page_pmd_entry(pmd_t *pmdp, unsigned long addr, unsigned long end,
-    struct mm_walk *walk)
-    {
-    struct ksm_next_page_arg *private = walk.private;
-    struct vm_area_struct *vma = walk.vma;
-    pte_t *start_ptep = core::ptr::null_mut(), *ptep, pte;
-    struct mm_struct *mm = walk.mm;
-    struct folio *folio;
-    struct page *page;
-    spinlock_t *ptl;
-    pmd_t pmd;
-    if (ksm_test_exit(mm))
+#[no_mangle]
+pub unsafe extern "C" fn ksm_next_page_pmd_entry(pmdp: *mut pmd_t, addr: c_ulong, end: c_ulong, walk: *mut mm_walk) -> c_int {
+    let mut private = walk.private;
+    let mut vma = walk.vma;
+    let mut start_ptep = core::ptr::null_mut(), *ptep, pte;
+    let mut mm = walk.mm;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut page: *mut c_void = core::ptr::null_mut();
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
+    let mut pmd;
+    if (ksm_test_exit(mm)) {
     return 0;
+    }
     cond_resched();
     pmd = pmdp_get_lockless(pmdp);
-    if (!pmd_present(pmd))
+    if (!pmd_present(pmd)) {
     return 0;
-    if (IS_ENABLED(CONFIG_TRANSPARENT_HUGEPAGE) && pmd_leaf(pmd)) {
+    }
+    if (IS_ENABLED!(CONFIG_TRANSPARENT_HUGEPAGE) && pmd_leaf(pmd)) {
     ptl = pmd_lock(mm, pmdp);
     pmd = pmdp_get(pmdp);
     if (!pmd_present(pmd)) {
-    goto not_found_unlock;
+// goto;
     } else if (pmd_leaf(pmd)) {
     page = vm_normal_page_pmd(vma, addr, pmd);
-    if (!page)
-    goto not_found_unlock;
+    if (!page) {
+// goto;
+    }
     folio = page_folio(page);
-    if (folio_is_zone_device(folio) || !folio_test_anon(folio))
-    goto not_found_unlock;
+    if (folio_is_zone_device(folio) || !folio_test_anon(folio)) {
+// goto;
+    }
     page += ((addr & (PMD_SIZE - 1)) >> PAGE_SHIFT);
-    goto found_unlock;
+// goto;
     }
     spin_unlock(ptl);
     }
     start_ptep = pte_offset_map_lock(mm, pmdp, addr, &ptl);
-    if (!start_ptep)
+    if (!start_ptep) {
     return 0;
-    for (ptep = start_ptep; addr < end; ptep++, addr += PAGE_SIZE) {
-    pte = ptep_get(ptep);
-    if (!pte_present(pte))
-    continue;
-    page = vm_normal_page(vma, addr, pte);
-    if (!page)
-    continue;
-    folio = page_folio(page);
-    if (folio_is_zone_device(folio) || !folio_test_anon(folio))
-    continue;
-    goto found_unlock;
     }
-    not_found_unlock:
+    while (addr < end) {
+    pte = ptep_get(ptep);
+    if (!pte_present(pte)) {
+    continue;
+    }
+    page = vm_normal_page(vma, addr, pte);
+    if (!page) {
+    continue;
+    }
+    folio = page_folio(page);
+    if (folio_is_zone_device(folio) || !folio_test_anon(folio)) {
+    continue;
+    }
+// goto;
+    }
+// label;
     spin_unlock(ptl);
-    if (start_ptep)
+    if (start_ptep) {
     pte_unmap(start_ptep);
+    }
     return 0;
-    found_unlock:
+// label;
     folio_get(folio);
     spin_unlock(ptl);
-    if (start_ptep)
+    if (start_ptep) {
     pte_unmap(start_ptep);
+    }
     private.page = page;
     private.folio = folio;
     private.addr = addr;
     return 1;
     }
-    static struct mm_walk_ops ksm_next_page_ops = {
-    .pmd_entry = ksm_next_page_pmd_entry,
-    .walk_lock = PGWALK_RDLOCK,
-    };
-    static struct ksm_rmap_item *scan_get_next_rmap_item(struct page **page)
-    {
-    struct mm_struct *mm;
-    struct ksm_mm_slot *mm_slot;
-    struct mm_slot *slot;
-    struct vm_area_struct *vma;
-    struct ksm_rmap_item *rmap_item;
-    struct vma_iterator vmi;
-    int nid;
-    if (list_empty(&ksm_mm_head.slot.mm_node))
+pub static mut mm_walk_ops: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn scan_get_next_rmap_item(page: *mut *mut page) -> *mut c_void {
+pub static mut mm: *mut c_void = core::ptr::null_mut();
+pub static mut mm_slot: *mut c_void = core::ptr::null_mut();
+pub static mut slot: *mut c_void = core::ptr::null_mut();
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+pub static mut rmap_item: *mut c_void = core::ptr::null_mut();
+pub static mut vmi: usize = 0;
+    let mut nid = 0;
+    if (list_empty(&ksm_mm_head.slot.mm_node)) {
     return core::ptr::null_mut();
+    }
     mm_slot = ksm_scan.mm_slot;
     if (mm_slot == &ksm_mm_head) {
     advisor_start_scan();
@@ -2436,32 +2687,35 @@ pub struct ksm_next_page_arg {
 // so prune them once before each full scan.
 //
     if (!ksm_merge_across_nodes) {
-    struct ksm_stable_node *stable_node, *next;
-    struct folio *folio;
+    let mut stable_node = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     list_for_each_entry_safe(stable_node, next,
     &migrate_nodes, list) {
     folio = ksm_get_folio(stable_node,
     KSM_GET_FOLIO_NOLOCK);
-    if (folio)
+    if (folio) {
     folio_put(folio);
+    }
     cond_resched();
     }
     }
-    for (nid = 0; nid < ksm_nr_node_ids; nid++)
+    for (nid = 0; nid < ksm_nr_node_ids; nid++) {
     root_unstable_tree[nid] = RB_ROOT;
+    }
     spin_lock(&ksm_mmlist_lock);
-    slot = list_entry(mm_slot.slot.mm_node.next,
-    struct mm_slot, mm_node);
-    mm_slot = mm_slot_entry(slot, struct ksm_mm_slot, slot);
+    slot = list_entry(mm_slot.slot.mm_node.next, mm_slot, mm_node);
+    mm_slot = mm_slot_entry(slot, ksm_mm_slot, slot);
     ksm_scan.mm_slot = mm_slot;
     spin_unlock(&ksm_mmlist_lock);
 //
 // Although we tested list_empty() above, a racing __ksm_exit
 // of the last mm on the list may have removed it since then.
 //
-    if (mm_slot == &ksm_mm_head)
+    if (mm_slot == &ksm_mm_head) {
     return core::ptr::null_mut();
-    next_mm:
+    }
+// label;
     ksm_scan.address = 0;
     ksm_scan.rmap_list = &mm_slot.rmap_list;
     }
@@ -2469,22 +2723,27 @@ pub struct ksm_next_page_arg {
     mm = slot.mm;
     vma_iter_init(&vmi, mm, ksm_scan.address);
     mmap_read_lock(mm);
-    if (ksm_test_exit(mm))
-    goto no_vmas;
+    if (ksm_test_exit(mm)) {
+// goto;
+    }
     for_each_vma(vmi, vma) {
-    if (!(vma.vm_flags & VM_MERGEABLE))
+    if (!(vma.vm_flags & VM_MERGEABLE)) {
     continue;
-    if (ksm_scan.address < vma.vm_start)
+    }
+    if (ksm_scan.address < vma.vm_start) {
     ksm_scan.address = vma.vm_start;
-    if (!vma.anon_vma)
+    }
+    if (!vma.anon_vma) {
     ksm_scan.address = vma.vm_end;
+    }
     while (ksm_scan.address < vma.vm_end) {
-    struct ksm_next_page_arg ksm_next_page_arg;
-    struct page *tmp_page = core::ptr::null_mut();
-    struct folio *folio;
-    if (ksm_test_exit(mm))
-    goto no_vmas;
-    int found;
+pub static mut ksm_next_page_arg: usize = 0;
+    let mut tmp_page = core::ptr::null_mut();
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    if (ksm_test_exit(mm)) {
+// goto;
+    }
+    let mut found = 0;
     found = walk_page_range_vma(vma, ksm_scan.address,
     vma.vm_end,
     &ksm_next_page_ops,
@@ -2507,7 +2766,7 @@ pub struct ksm_next_page_arg {
     &rmap_item.rmap_list;
     if (should_skip_rmap_item(folio, rmap_item)) {
     folio_put(folio);
-    goto next_page;
+// goto;
     }
     ksm_scan.address += PAGE_SIZE;
 // page = tmp_page;
@@ -2517,13 +2776,13 @@ pub struct ksm_next_page_arg {
     mmap_read_unlock(mm);
     return rmap_item;
     }
-    next_page:
+// label;
     ksm_scan.address += PAGE_SIZE;
     cond_resched();
     }
     }
     if (ksm_test_exit(mm)) {
-    no_vmas:
+// label;
     ksm_scan.address = 0;
     ksm_scan.rmap_list = &mm_slot.rmap_list;
     }
@@ -2533,9 +2792,8 @@ pub struct ksm_next_page_arg {
 //
     remove_trailing_rmap_items(ksm_scan.rmap_list);
     spin_lock(&ksm_mmlist_lock);
-    slot = list_entry(mm_slot.slot.mm_node.next,
-    struct mm_slot, mm_node);
-    ksm_scan.mm_slot = mm_slot_entry(slot, struct ksm_mm_slot, slot);
+    slot = list_entry(mm_slot.slot.mm_node.next, mm_slot, mm_node);
+    ksm_scan.mm_slot = mm_slot_entry(slot, ksm_mm_slot, slot);
     if (ksm_scan.address == 0) {
 //
 // We've completed a full scan of all vmas, holding mmap_lock
@@ -2572,11 +2830,12 @@ pub struct ksm_next_page_arg {
     }
 // Repeat until we've completed scanning the whole list
     mm_slot = ksm_scan.mm_slot;
-    if (mm_slot != &ksm_mm_head)
-    goto next_mm;
+    if (mm_slot != &ksm_mm_head) {
+// goto;
+    }
     advisor_stop_scan();
     trace_ksm_stop_scan(ksm_scan.seqnr, ksm_rmap_items);
-    ksm_scan.seqnr++;
+    ksm_scan.seqnr += 1;
     return core::ptr::null_mut();
     }
 //
@@ -2585,38 +2844,34 @@ pub struct ksm_next_page_arg {
 //
 #[no_mangle]
 unsafe extern "C" fn ksm_do_scan(scan_npages: c_uint) {
-    static void ksm_do_scan(unsigned int scan_npages)
-    {
-    struct ksm_rmap_item *rmap_item;
-    struct page *page;
+pub static mut rmap_item: *mut c_void = core::ptr::null_mut();
+pub static mut page: *mut c_void = core::ptr::null_mut();
     while (scan_npages-- && likely(!freezing(current))) {
     cond_resched();
     rmap_item = scan_get_next_rmap_item(&page);
-    if (!rmap_item)
+    if (!rmap_item) {
     return;
+    }
     cmp_and_merge_page(page, rmap_item);
     put_page(page);
-    ksm_pages_scanned++;
+    ksm_pages_scanned += 1;
     }
     }
 #[no_mangle]
 unsafe extern "C" fn ksmd_should_run() -> c_int {
-    static int ksmd_should_run(void)
-    {
     return (ksm_run & KSM_RUN_MERGE) && !list_empty(&ksm_mm_head.slot.mm_node);
     }
 #[no_mangle]
 unsafe extern "C" fn ksm_scan_thread(nothing: *mut c_void) -> c_int {
-    static int ksm_scan_thread(void *nothing)
-    {
-    unsigned int sleep_ms;
+    let mut sleep_ms = 0;
     set_freezable();
     set_user_nice(current, 5);
     while (!kthread_should_stop()) {
     mutex_lock(&ksm_thread_mutex);
     wait_while_offlining();
-    if (ksmd_should_run())
+    if (ksmd_should_run()) {
     ksm_do_scan(ksm_thread_pages_to_scan);
+    }
     mutex_unlock(&ksm_thread_mutex);
     if (ksmd_should_run()) {
     sleep_ms = READ_ONCE(ksm_thread_sleep_millisecs);
@@ -2632,30 +2887,28 @@ unsafe extern "C" fn ksm_scan_thread(nothing: *mut c_void) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn __ksm_should_add_vma(file: *const file, vma_flags: vma_flags_t) -> bool {
-    static bool __ksm_should_add_vma(const struct file *file, vma_flags_t vma_flags)
-    {
-    if (vma_flags_test(&vma_flags, VMA_MERGEABLE_BIT))
+    if (vma_flags_test(&vma_flags, VMA_MERGEABLE_BIT)) {
     return false;
+    }
     return ksm_compatible(file, vma_flags);
     }
 #[no_mangle]
 unsafe extern "C" fn __ksm_add_vma(vma: *mut vm_area_struct) {
-    static void __ksm_add_vma(struct vm_area_struct *vma)
-    {
-    if (__ksm_should_add_vma(vma.vm_file, vma.flags))
+    if (__ksm_should_add_vma(vma.vm_file, vma.flags)) {
     vm_flags_set(vma, VM_MERGEABLE);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn __ksm_del_vma(vma: *mut vm_area_struct) -> c_int {
-    static int __ksm_del_vma(struct vm_area_struct *vma)
-    {
-    int err;
-    if (!(vma.vm_flags & VM_MERGEABLE))
+    let mut err = 0;
+    if (!(vma.vm_flags & VM_MERGEABLE)) {
     return 0;
+    }
     if (vma.anon_vma) {
     err = break_ksm(vma, vma.vm_start, vma.vm_end, true);
-    if (err)
+    if (err) {
     return err;
+    }
     }
     vm_flags_clear(vma, VM_MERGEABLE);
     return 0;
@@ -2669,7 +2922,7 @@ unsafe extern "C" fn __ksm_del_vma(vma: *mut vm_area_struct) -> c_int {
 //
 // Returns: @vma_flags possibly updated to mark mergeable.
 //
-    vma_flags_t ksm_vma_flags(struct mm_struct *mm, const struct file *file,
+    vma_flags_t ksm_vma_flags(mm_struct *mm, const struct file *file,
     vma_flags_t vma_flags)
     {
     if (mm_flags_test(MMF_VM_MERGE_ANY, mm) &&
@@ -2680,31 +2933,30 @@ unsafe extern "C" fn __ksm_del_vma(vma: *mut vm_area_struct) -> c_int {
 // However, in rare cases, this flag may be cleared by ksmd who
 // scans a cycle without finding any mergeable vma.
 //
-    if (unlikely(!mm_flags_test(MMF_VM_MERGEABLE, mm)))
+    if (unlikely(!mm_flags_test(MMF_VM_MERGEABLE, mm))) {
     __ksm_enter(mm);
+    }
     }
     return vma_flags;
     }
 #[no_mangle]
 unsafe extern "C" fn ksm_add_vmas(mm: *mut mm_struct) {
-    static void ksm_add_vmas(struct mm_struct *mm)
-    {
-    struct vm_area_struct *vma;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
     VMA_ITERATOR(vmi, mm, 0);
-    for_each_vma(vmi, vma)
+    for_each_vma(vmi, vma) {
     __ksm_add_vma(vma);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn ksm_del_vmas(mm: *mut mm_struct) -> c_int {
-    static int ksm_del_vmas(struct mm_struct *mm)
-    {
-    struct vm_area_struct *vma;
-    int err;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
     VMA_ITERATOR(vmi, mm, 0);
     for_each_vma(vmi, vma) {
     err = __ksm_del_vma(vma);
-    if (err)
+    if (err) {
     return err;
+    }
     }
     return 0;
     }
@@ -2718,15 +2970,15 @@ unsafe extern "C" fn ksm_del_vmas(mm: *mut mm_struct) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ksm_enable_merge_any(mm: *mut mm_struct) -> c_int {
-    int ksm_enable_merge_any(struct mm_struct *mm)
-    {
-    int err;
-    if (mm_flags_test(MMF_VM_MERGE_ANY, mm))
+    let mut err = 0;
+    if (mm_flags_test(MMF_VM_MERGE_ANY, mm)) {
     return 0;
+    }
     if (!mm_flags_test(MMF_VM_MERGEABLE, mm)) {
     err = __ksm_enter(mm);
-    if (err)
+    if (err) {
     return err;
+    }
     }
     mm_flags_set(MMF_VM_MERGE_ANY, mm);
     ksm_add_vmas(mm);
@@ -2746,11 +2998,10 @@ pub unsafe extern "C" fn ksm_enable_merge_any(mm: *mut mm_struct) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ksm_disable_merge_any(mm: *mut mm_struct) -> c_int {
-    int ksm_disable_merge_any(struct mm_struct *mm)
-    {
-    int err;
-    if (!mm_flags_test(MMF_VM_MERGE_ANY, mm))
+    let mut err = 0;
+    if (!mm_flags_test(MMF_VM_MERGE_ANY, mm)) {
     return 0;
+    }
     err = ksm_del_vmas(mm);
     if (err) {
     ksm_add_vmas(mm);
@@ -2761,57 +3012,62 @@ pub unsafe extern "C" fn ksm_disable_merge_any(mm: *mut mm_struct) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn ksm_disable(mm: *mut mm_struct) -> c_int {
-    int ksm_disable(struct mm_struct *mm)
-    {
     mmap_assert_write_locked(mm);
-    if (!mm_flags_test(MMF_VM_MERGEABLE, mm))
+    if (!mm_flags_test(MMF_VM_MERGEABLE, mm)) {
     return 0;
-    if (mm_flags_test(MMF_VM_MERGE_ANY, mm))
+    }
+    if (mm_flags_test(MMF_VM_MERGE_ANY, mm)) {
     return ksm_disable_merge_any(mm);
+    }
     return ksm_del_vmas(mm);
     }
-    int ksm_madvise(struct vm_area_struct *vma, unsigned long start,
-    unsigned long end, int advice, vm_flags_t *vm_flags)
-    {
-    struct mm_struct *mm = vma.vm_mm;
-    int err;
-    switch (advice) {
-    case MADV_MERGEABLE:
-    if (vma.vm_flags & VM_MERGEABLE)
+#[no_mangle]
+pub unsafe extern "C" fn ksm_madvise(vma: *mut vm_area_struct, start: c_ulong, end: c_ulong, advice: c_int, vm_flags: *mut vm_flags_t) -> c_int {
+    let mut mm = vma.vm_mm;
+    let mut err = 0;
+    match (advice) {
+    MADV_MERGEABLE => {
+    if (vma.vm_flags & VM_MERGEABLE) {
     return 0;
-    if (!vma_ksm_compatible(vma))
+    }
+    if (!vma_ksm_compatible(vma)) {
     return 0;
+    }
     if (!mm_flags_test(MMF_VM_MERGEABLE, mm)) {
     err = __ksm_enter(mm);
-    if (err)
+    if (err) {
     return err;
+    }
     }
 // vm_flags |= VM_MERGEABLE;
-    break;
-    case MADV_UNMERGEABLE:
-    if (!(*vm_flags & VM_MERGEABLE))
+    // break;
+    }
+    MADV_UNMERGEABLE => {
+    if (!(*vm_flags & VM_MERGEABLE)) {
     return 0;		/* just ignore the advice */
+    }
     if (vma.anon_vma) {
     err = break_ksm(vma, start, end, true);
-    if (err)
+    if (err) {
     return err;
     }
+    }
 // vm_flags &= ~VM_MERGEABLE;
-    break;
+    // break;
+    }
     }
     return 0;
     }
     EXPORT_SYMBOL_GPL(ksm_madvise);
 #[no_mangle]
 pub unsafe extern "C" fn __ksm_enter(mm: *mut mm_struct) -> c_int {
-    int __ksm_enter(struct mm_struct *mm)
-    {
-    struct ksm_mm_slot *mm_slot;
-    struct mm_slot *slot;
-    int needs_wakeup;
+pub static mut mm_slot: *mut c_void = core::ptr::null_mut();
+pub static mut slot: *mut c_void = core::ptr::null_mut();
+    let mut needs_wakeup = 0;
     mm_slot = mm_slot_alloc(mm_slot_cache);
-    if (!mm_slot)
+    if (!mm_slot) {
     return -ENOMEM;
+    }
     slot = &mm_slot.slot;
     spin_lock(&ksm_mmlist_lock);
 // Check ksm_run too?  Would need tighter locking
@@ -2827,25 +3083,26 @@ pub unsafe extern "C" fn __ksm_enter(mm: *mut mm_struct) -> c_int {
 // scanning cursor, otherwise KSM pages in newly forked mms will be
 // missed: then we might as well insert at the end of the list.
 //
-    if (ksm_run & KSM_RUN_UNMERGE)
+    if (ksm_run & KSM_RUN_UNMERGE) {
     list_add_tail(&slot.mm_node, &ksm_mm_head.slot.mm_node);
-    else
+    }
+    else {
     list_add_tail(&slot.mm_node, &ksm_scan.mm_slot.slot.mm_node);
+    }
     spin_unlock(&ksm_mmlist_lock);
     mm_flags_set(MMF_VM_MERGEABLE, mm);
     mmgrab(mm);
-    if (needs_wakeup)
+    if (needs_wakeup) {
     wake_up_interruptible(&ksm_thread_wait);
+    }
     trace_ksm_enter(mm);
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn __ksm_exit(mm: *mut mm_struct) {
-    void __ksm_exit(struct mm_struct *mm)
-    {
-    struct ksm_mm_slot *mm_slot = core::ptr::null_mut();
-    struct mm_slot *slot;
-    let mut easy_to_free: c_int = 0;
+    let mut mm_slot = core::ptr::null_mut();
+pub static mut slot: *mut c_void = core::ptr::null_mut();
+pub static mut easy_to_free: c_int = 0;
 //
 // This process is exiting: if it's straightforward (as is the
 // case when ksmd was never running), free mm_slot immediately.
@@ -2856,11 +3113,13 @@ pub unsafe extern "C" fn __ksm_exit(mm: *mut mm_struct) {
 //
     spin_lock(&ksm_mmlist_lock);
     slot = mm_slot_lookup(mm_slots_hash, mm);
-    if (!slot)
-    goto unlock;
-    mm_slot = mm_slot_entry(slot, struct ksm_mm_slot, slot);
-    if (ksm_scan.mm_slot == mm_slot)
-    goto unlock;
+    if (!slot) {
+// goto;
+    }
+    mm_slot = mm_slot_entry(slot, ksm_mm_slot, slot);
+    if (ksm_scan.mm_slot == mm_slot) {
+// goto;
+    }
     if (!mm_slot.rmap_list) {
     mm_slot_remove(slot);
     easy_to_free = 1;
@@ -2868,7 +3127,7 @@ pub unsafe extern "C" fn __ksm_exit(mm: *mut mm_struct) {
     list_move(&slot.mm_node,
     &ksm_scan.mm_slot.slot.mm_node);
     }
-    unlock:
+// label;
     spin_unlock(&ksm_mmlist_lock);
     if (easy_to_free) {
     mm_slot_free(mm_slot_cache, mm_slot);
@@ -2881,28 +3140,31 @@ pub unsafe extern "C" fn __ksm_exit(mm: *mut mm_struct) {
     }
     trace_ksm_exit(mm);
     }
-    struct folio *ksm_might_need_to_copy(struct folio *folio,
-    struct vm_area_struct *vma, unsigned long addr)
-    {
-    struct page *page = folio_page(folio, 0);
-    struct anon_vma *anon_vma = folio_anon_vma(folio);
-    struct folio *new_folio;
-    if (folio_test_large(folio))
+#[no_mangle]
+pub unsafe extern "C" fn ksm_might_need_to_copy(folio: *mut folio, vma: *mut vm_area_struct, addr: c_ulong) -> *mut c_void {
+    let mut page = folio_page(folio, 0);
+    let mut anon_vma = folio_anon_vma(folio);
+pub static mut new_folio: *mut c_void = core::ptr::null_mut();
+    if (folio_test_large(folio)) {
     return folio;
+    }
     if (folio_test_ksm(folio)) {
     if (folio_stable_node(folio) &&
-    !(ksm_run & KSM_RUN_UNMERGE))
+    !(ksm_run & KSM_RUN_UNMERGE)) {
     return folio;	/* no need to copy it */
+    }
     } else if (!anon_vma) {
     return folio;		/* no need to copy it */
     } else if (folio.index == linear_anon_page_index(vma, addr) &&
     anon_vma.root == vma.anon_vma.root) {
     return folio;		/* still no need to copy it */
     }
-    if (PageHWPoison(page))
+    if (PageHWPoison(page)) {
     return ERR_PTR(-EHWPOISON);
-    if (!folio_test_uptodate(folio))
+    }
+    if (!folio_test_uptodate(folio)) {
     return folio;		/* let do_swap_page report the error */
+    }
     new_folio = vma_alloc_folio(GFP_HIGHUSER_MOVABLE, 0, vma, addr);
     if (new_folio &&
     mem_cgroup_charge(new_folio, vma.vm_mm, GFP_KERNEL)) {
@@ -2926,11 +3188,9 @@ pub unsafe extern "C" fn __ksm_exit(mm: *mut mm_struct) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn rmap_walk_ksm(folio: *mut folio, rwc: *mut rmap_walk_control) {
-    void rmap_walk_ksm(struct folio *folio, struct rmap_walk_control *rwc)
-    {
-    struct ksm_stable_node *stable_node;
-    struct ksm_rmap_item *rmap_item;
-    let mut search_new_forks: c_int = 0;
+pub static mut stable_node: *mut c_void = core::ptr::null_mut();
+pub static mut rmap_item: *mut c_void = core::ptr::null_mut();
+pub static mut search_new_forks: c_int = 0;
     VM_BUG_ON_FOLIO(!folio_test_ksm(folio), folio);
 //
 // Rely on the page lock to protect against concurrent modifications
@@ -2938,16 +3198,17 @@ pub unsafe extern "C" fn rmap_walk_ksm(folio: *mut folio, rwc: *mut rmap_walk_co
 //
     VM_BUG_ON_FOLIO(!folio_test_locked(folio), folio);
     stable_node = folio_stable_node(folio);
-    if (!stable_node)
+    if (!stable_node) {
     return;
-    again:
+    }
+// label;
     hlist_for_each_entry(rmap_item, &stable_node.hlist, hlist) {
 // Ignore the stable/unstable/sqnr flags
-    let mut addr: c_ulong = rmap_item.address & PAGE_MASK;
-    let mut index: c_ulong = rmap_item.linear_page_index;
-    struct anon_vma *anon_vma = rmap_item.anon_vma;
-    struct anon_vma_chain *vmac;
-    struct vm_area_struct *vma;
+pub static mut addr: c_ulong = 0;
+pub static mut index: c_ulong = 0;
+    let mut anon_vma = rmap_item.anon_vma;
+pub static mut vmac: *mut c_void = core::ptr::null_mut();
+pub static mut vma: *mut c_void = core::ptr::null_mut();
     cond_resched();
     if (!anon_vma_trylock_read(anon_vma)) {
     if (rwc.try_lock) {
@@ -2969,18 +3230,21 @@ pub unsafe extern "C" fn rmap_walk_ksm(folio: *mut folio, rwc: *mut rmap_walk_co
     anon_rmap_tree_foreach(vmac, anon_vma, index, index) {
     cond_resched();
     vma = vmac.vma;
-    if (addr < vma.vm_start || addr >= vma.vm_end)
+    if (addr < vma.vm_start || addr >= vma.vm_end) {
     continue;
+    }
 //
 // Initially we examine only the vma which covers this
 // rmap_item; but later, if there is still work to do,
 // we examine covering vmas in other mms: in case they
 // were forked from the original since ksmd passed.
 //
-    if ((rmap_item.mm == vma.vm_mm) == search_new_forks)
+    if ((rmap_item.mm == vma.vm_mm) == search_new_forks) {
     continue;
-    if (rwc.invalid_vma && rwc.invalid_vma(vma, rwc.arg))
+    }
+    if (rwc.invalid_vma && rwc.invalid_vma(vma, rwc.arg)) {
     continue;
+    }
     if (!rwc.rmap_one(folio, vma, addr, rwc.arg)) {
     anon_vma_unlock_read(anon_vma);
     return;
@@ -2992,35 +3256,36 @@ pub unsafe extern "C" fn rmap_walk_ksm(folio: *mut folio, rwc: *mut rmap_walk_co
     }
     anon_vma_unlock_read(anon_vma);
     }
-    if (!search_new_forks++)
-    goto again;
+    if (!search_new_forks++) {
+// goto;
+    }
     }
 
 //
 // Collect processes when the error hit an ksm page.
 //
-    void collect_procs_ksm(const struct folio *folio, const struct page *page,
-    struct list_head *to_kill, int force_early)
-    {
-    struct ksm_stable_node *stable_node;
-    struct ksm_rmap_item *rmap_item;
-    struct vm_area_struct *vma;
-    struct task_struct *tsk;
+#[no_mangle]
+pub unsafe extern "C" fn collect_procs_ksm(folio: *mut folio, page: *mut page, to_kill: *mut list_head, force_early: c_int) {
+pub static mut stable_node: *mut c_void = core::ptr::null_mut();
+pub static mut rmap_item: *mut c_void = core::ptr::null_mut();
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+pub static mut tsk: *mut c_void = core::ptr::null_mut();
     stable_node = folio_stable_node(folio);
-    if (!stable_node)
+    if (!stable_node) {
     return;
+    }
     hlist_for_each_entry(rmap_item, &stable_node.hlist, hlist) {
-    struct anon_vma *av = rmap_item.anon_vma;
+    let mut av = rmap_item.anon_vma;
     anon_vma_lock_read(av);
     rcu_read_lock();
     for_each_process(tsk) {
-    struct anon_vma_chain *vmac;
-    let mut addr: c_ulong = rmap_item.address & PAGE_MASK;
-    let mut index: c_ulong = rmap_item.linear_page_index;
-    struct task_struct *t =
-    task_early_kill(tsk, force_early);
-    if (!t)
+pub static mut vmac: *mut c_void = core::ptr::null_mut();
+pub static mut addr: c_ulong = 0;
+pub static mut index: c_ulong = 0;
+    let mut t = task_early_kill(tsk, force_early);
+    if (!t) {
     continue;
+    }
     anon_rmap_tree_foreach(vmac, av, index, index)
     {
     vma = vmac.vma;
@@ -3037,9 +3302,7 @@ pub unsafe extern "C" fn rmap_walk_ksm(folio: *mut folio, rwc: *mut rmap_walk_co
 
 #[no_mangle]
 pub unsafe extern "C" fn folio_migrate_ksm(newfolio: *mut folio, folio: *mut folio) {
-    void folio_migrate_ksm(struct folio *newfolio, struct folio *folio)
-    {
-    struct ksm_stable_node *stable_node;
+pub static mut stable_node: *mut c_void = core::ptr::null_mut();
     VM_BUG_ON_FOLIO(!folio_test_locked(folio), folio);
     VM_BUG_ON_FOLIO(!folio_test_locked(newfolio), newfolio);
     VM_BUG_ON_FOLIO(newfolio.mapping != folio.mapping, newfolio);
@@ -3060,8 +3323,6 @@ pub unsafe extern "C" fn folio_migrate_ksm(newfolio: *mut folio, folio: *mut fol
 
 #[no_mangle]
 unsafe extern "C" fn wait_while_offlining() {
-    static void wait_while_offlining(void)
-    {
     while (ksm_run & KSM_RUN_OFFLINE) {
     mutex_unlock(&ksm_thread_mutex);
     wait_on_bit(&ksm_run, ilog2(KSM_RUN_OFFLINE),
@@ -3069,10 +3330,8 @@ unsafe extern "C" fn wait_while_offlining() {
     mutex_lock(&ksm_thread_mutex);
     }
     }
-    static bool stable_node_dup_remove_range(struct ksm_stable_node *stable_node,
-    unsigned long start_pfn,
-    unsigned long end_pfn)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn stable_node_dup_remove_range(stable_node: *mut ksm_stable_node, start_pfn: c_ulong, end_pfn: c_ulong) -> bool {
     if (stable_node.kpfn >= start_pfn &&
     stable_node.kpfn < end_pfn) {
 //
@@ -3084,13 +3343,10 @@ unsafe extern "C" fn wait_while_offlining() {
     }
     return false;
     }
-    static bool stable_node_chain_remove_range(struct ksm_stable_node *stable_node,
-    unsigned long start_pfn,
-    unsigned long end_pfn,
-    struct rb_root *root)
-    {
-    struct ksm_stable_node *dup;
-    struct hlist_node *hlist_safe;
+#[no_mangle]
+pub unsafe extern "C" fn stable_node_chain_remove_range(stable_node: *mut ksm_stable_node, start_pfn: c_ulong, end_pfn: c_ulong, root: *mut rb_root) -> bool {
+pub static mut dup: *mut c_void = core::ptr::null_mut();
+pub static mut hlist_safe: *mut c_void = core::ptr::null_mut();
     if (!is_stable_node_chain(stable_node)) {
     VM_BUG_ON(is_stable_node_dup(stable_node));
     return stable_node_dup_remove_range(stable_node, start_pfn,
@@ -3104,42 +3360,45 @@ unsafe extern "C" fn wait_while_offlining() {
     if (hlist_empty(&stable_node.hlist)) {
     free_stable_node_chain(stable_node, root);
     return true; /* notify caller that tree was rebalanced */
-    } else
+    } else {
     return false;
     }
-    static void ksm_check_stable_tree(unsigned long start_pfn,
-    unsigned long end_pfn)
-    {
-    struct ksm_stable_node *stable_node, *next;
-    struct rb_node *node;
-    int nid;
-    for (nid = 0; nid < ksm_nr_node_ids; nid++) {
+    }
+#[no_mangle]
+pub unsafe extern "C" fn ksm_check_stable_tree(start_pfn: c_ulong, end_pfn: c_ulong) {
+    let mut stable_node = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+pub static mut node: *mut c_void = core::ptr::null_mut();
+    let mut nid = 0;
+    while (nid < ksm_nr_node_ids) {
     node = rb_first(root_stable_tree + nid);
     while (node) {
-    stable_node = rb_entry(node, struct ksm_stable_node, node);
+    stable_node = rb_entry(node, ksm_stable_node, node);
     if (stable_node_chain_remove_range(stable_node,
     start_pfn, end_pfn,
     root_stable_tree +
-    nid))
+    nid)) {
     node = rb_first(root_stable_tree + nid);
-    else
+    }
+    else {
     node = rb_next(node);
+    }
     cond_resched();
     }
     }
     list_for_each_entry_safe(stable_node, next, &migrate_nodes, list) {
     if (stable_node.kpfn >= start_pfn &&
-    stable_node.kpfn < end_pfn)
+    stable_node.kpfn < end_pfn) {
     remove_node_from_stable_tree(stable_node);
+    }
     cond_resched();
     }
     }
-    static int ksm_memory_callback(struct notifier_block *self,
-    unsigned long action, void *arg)
-    {
-    struct memory_notify *mn = arg;
-    switch (action) {
-    case MEM_GOING_OFFLINE:
+#[no_mangle]
+pub unsafe extern "C" fn ksm_memory_callback(self: *mut notifier_block, action: c_ulong, arg: *mut c_void) -> c_int {
+    let mut mn = arg;
+    match (action) {
+    MEM_GOING_OFFLINE => {
 //
 // Prevent ksm_do_scan(), unmerge_and_remove_all_rmap_items()
 // and remove_all_stable_nodes() while memory is going offline:
@@ -3150,8 +3409,9 @@ unsafe extern "C" fn wait_while_offlining() {
     mutex_lock(&ksm_thread_mutex);
     ksm_run |= KSM_RUN_OFFLINE;
     mutex_unlock(&ksm_thread_mutex);
-    break;
-    case MEM_OFFLINE:
+    // break;
+    }
+    MEM_OFFLINE => {
 //
 // Most of the work is done by page migration; but there might
 // be a few stable_nodes left over, still pointing to struct
@@ -3162,21 +3422,21 @@ unsafe extern "C" fn wait_while_offlining() {
     ksm_check_stable_tree(mn.start_pfn,
     mn.start_pfn + mn.nr_pages);
     fallthrough;
-    case MEM_CANCEL_OFFLINE:
+    }
+    MEM_CANCEL_OFFLINE => {
     mutex_lock(&ksm_thread_mutex);
     ksm_run &= ~KSM_RUN_OFFLINE;
     mutex_unlock(&ksm_thread_mutex);
     smp_mb();	/* wake_up_bit advises this */
     wake_up_bit(&ksm_run, ilog2(KSM_RUN_OFFLINE));
-    break;
+    // break;
+    }
     }
     return NOTIFY_OK;
     }
 
 #[no_mangle]
 unsafe extern "C" fn wait_while_offlining() {
-    static void wait_while_offlining(void)
-    {
     }
 
 //
@@ -3187,22 +3447,19 @@ unsafe extern "C" fn wait_while_offlining() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ksm_process_mergeable(mm: *mut mm_struct) -> bool {
-    bool ksm_process_mergeable(struct mm_struct *mm)
-    {
-    struct vm_area_struct *vma;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
     mmap_assert_locked(mm);
     VMA_ITERATOR(vmi, mm, 0);
-    for_each_vma(vmi, vma)
+    for_each_vma(vmi, vma) {
     if (vma.vm_flags & VM_MERGEABLE)
     return true;
+    }
     return false;
     }
 #[no_mangle]
 pub unsafe extern "C" fn ksm_process_profit(mm: *mut mm_struct) -> c_long {
-    long ksm_process_profit(struct mm_struct *mm)
-    {
     return (long)(mm.ksm_merging_pages + mm_ksm_zero_pages(mm)) * PAGE_SIZE -
-    mm.ksm_rmap_items * sizeof(struct ksm_rmap_item);
+    mm.ksm_rmap_items * sizeof!(ksm_rmap_item);
     }
 
 //
@@ -3212,60 +3469,57 @@ pub unsafe extern "C" fn ksm_process_profit(mm: *mut mm_struct) -> c_long {
     static struct kobj_attribute _name##_attr = __ATTR_RO(_name)
 
     static struct kobj_attribute _name##_attr = __ATTR_RW(_name)
-    static ssize_t sleep_millisecs_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sleep_millisecs_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%u\n", ksm_thread_sleep_millisecs);
     }
-    static ssize_t sleep_millisecs_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
-    unsigned int msecs;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn sleep_millisecs_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut msecs = 0;
+    let mut err = 0;
     err = kstrtouint(buf, 10, &msecs);
-    if (err)
+    if (err) {
     return -EINVAL;
+    }
     ksm_thread_sleep_millisecs = msecs;
     wake_up_interruptible(&ksm_iter_wait);
     return count;
     }
     KSM_ATTR(sleep_millisecs);
-    static ssize_t pages_to_scan_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pages_to_scan_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%u\n", ksm_thread_pages_to_scan);
     }
-    static ssize_t pages_to_scan_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
-    unsigned int nr_pages;
-    int err;
-    if (ksm_advisor != KSM_ADVISOR_NONE)
+#[no_mangle]
+pub unsafe extern "C" fn pages_to_scan_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut nr_pages = 0;
+    let mut err = 0;
+    if (ksm_advisor != KSM_ADVISOR_NONE) {
     return -EINVAL;
+    }
     err = kstrtouint(buf, 10, &nr_pages);
-    if (err)
+    if (err) {
     return -EINVAL;
+    }
     ksm_thread_pages_to_scan = nr_pages;
     return count;
     }
     KSM_ATTR(pages_to_scan);
-    static ssize_t run_show(struct kobject *kobj, struct kobj_attribute *attr,
-    char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn run_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%lu\n", ksm_run);
     }
-    static ssize_t run_store(struct kobject *kobj, struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
-    unsigned int flags;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn run_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut flags = 0;
+    let mut err = 0;
     err = kstrtouint(buf, 10, &flags);
-    if (err)
+    if (err) {
     return -EINVAL;
-    if (flags > KSM_RUN_UNMERGE)
+    }
+    if (flags > KSM_RUN_UNMERGE) {
     return -EINVAL;
+    }
 //
 // KSM_RUN_MERGE sets ksmd running, and 0 stops it running.
 // KSM_RUN_UNMERGE stops it running and unmerges all rmap_items,
@@ -3287,36 +3541,36 @@ pub unsafe extern "C" fn ksm_process_profit(mm: *mut mm_struct) -> c_long {
     }
     }
     mutex_unlock(&ksm_thread_mutex);
-    if (flags & KSM_RUN_MERGE)
+    if (flags & KSM_RUN_MERGE) {
     wake_up_interruptible(&ksm_thread_wait);
+    }
     return count;
     }
     KSM_ATTR(run);
 
-    static ssize_t merge_across_nodes_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn merge_across_nodes_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%u\n", ksm_merge_across_nodes);
     }
-    static ssize_t merge_across_nodes_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
-    int err;
-    unsigned long knob;
+#[no_mangle]
+pub unsafe extern "C" fn merge_across_nodes_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut err = 0;
+    let mut knob = 0;
     err = kstrtoul(buf, 10, &knob);
-    if (err)
+    if (err) {
     return err;
-    if (knob > 1)
+    }
+    if (knob > 1) {
     return -EINVAL;
+    }
     mutex_lock(&ksm_thread_mutex);
     wait_while_offlining();
     if (ksm_merge_across_nodes != knob) {
-    if (ksm_pages_shared || remove_all_stable_nodes())
+    if (ksm_pages_shared || remove_all_stable_nodes()) {
     err = -EBUSY;
-#[no_mangle]
-pub unsafe extern "C" fn if(one_stable_tree: root_stable_tree ==) -> else {
-    struct rb_root *buf;
+    }
+if true {
+pub static mut buf: *mut c_void = core::ptr::null_mut();
 //
 // This is the first time that we switch away from the
 // default of merging across nodes: must now allocate
@@ -3326,8 +3580,9 @@ pub unsafe extern "C" fn if(one_stable_tree: root_stable_tree ==) -> else {
 //
     buf = kzalloc_objs(*buf, nr_node_ids + nr_node_ids);
 // Let us assume that RB_ROOT is NULL is zero
-    if (!buf)
+    if (!buf) {
     err = -ENOMEM;
+    }
     else {
     root_stable_tree = buf;
     root_unstable_tree = buf + nr_node_ids;
@@ -3345,275 +3600,253 @@ pub unsafe extern "C" fn if(one_stable_tree: root_stable_tree ==) -> else {
     }
     KSM_ATTR(merge_across_nodes);
 
-    static ssize_t use_zero_pages_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn use_zero_pages_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%u\n", ksm_use_zero_pages);
     }
-    static ssize_t use_zero_pages_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
-    int err;
-    bool value;
+#[no_mangle]
+pub unsafe extern "C" fn use_zero_pages_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut err = 0;
+    let mut value = 0;
     err = kstrtobool(buf, &value);
-    if (err)
+    if (err) {
     return -EINVAL;
+    }
     ksm_use_zero_pages = value;
     return count;
     }
     KSM_ATTR(use_zero_pages);
-    static ssize_t max_page_sharing_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn max_page_sharing_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%u\n", ksm_max_page_sharing);
     }
-    static ssize_t max_page_sharing_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
-    int err;
-    int knob;
+#[no_mangle]
+pub unsafe extern "C" fn max_page_sharing_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut err = 0;
+    let mut knob = 0;
     err = kstrtoint(buf, 10, &knob);
-    if (err)
+    if (err) {
     return err;
+    }
 //
 // When a KSM page is created it is shared by 2 mappings. This
 // being a signed comparison, it implicitly verifies it's not
 // negative.
 //
-    if (knob < 2)
+    if (knob < 2) {
     return -EINVAL;
-    if (READ_ONCE(ksm_max_page_sharing) == knob)
+    }
+    if (READ_ONCE(ksm_max_page_sharing) == knob) {
     return count;
+    }
     mutex_lock(&ksm_thread_mutex);
     wait_while_offlining();
     if (ksm_max_page_sharing != knob) {
-    if (ksm_pages_shared || remove_all_stable_nodes())
+    if (ksm_pages_shared || remove_all_stable_nodes()) {
     err = -EBUSY;
-    else
+    }
+    else {
     ksm_max_page_sharing = knob;
+    }
     }
     mutex_unlock(&ksm_thread_mutex);
     return err ? err : count;
     }
     KSM_ATTR(max_page_sharing);
-    static ssize_t pages_scanned_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pages_scanned_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%lu\n", ksm_pages_scanned);
     }
     KSM_ATTR_RO(pages_scanned);
-    static ssize_t pages_shared_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pages_shared_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%lu\n", ksm_pages_shared);
     }
     KSM_ATTR_RO(pages_shared);
-    static ssize_t pages_sharing_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pages_sharing_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%lu\n", ksm_pages_sharing);
     }
     KSM_ATTR_RO(pages_sharing);
-    static ssize_t pages_unshared_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pages_unshared_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%lu\n", ksm_pages_unshared);
     }
     KSM_ATTR_RO(pages_unshared);
-    static ssize_t pages_volatile_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    long ksm_pages_volatile;
+#[no_mangle]
+pub unsafe extern "C" fn pages_volatile_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut ksm_pages_volatile = 0;
     ksm_pages_volatile = ksm_rmap_items - ksm_pages_shared
     - ksm_pages_sharing - ksm_pages_unshared;
 //
 // It was not worth any locking to calculate that statistic,
 // but it might therefore sometimes be negative: conceal that.
 //
-    if (ksm_pages_volatile < 0)
+    if (ksm_pages_volatile < 0) {
     ksm_pages_volatile = 0;
+    }
     return sysfs_emit(buf, "%ld\n", ksm_pages_volatile);
     }
     KSM_ATTR_RO(pages_volatile);
-    static ssize_t pages_skipped_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pages_skipped_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%lu\n", ksm_pages_skipped);
     }
     KSM_ATTR_RO(pages_skipped);
-    static ssize_t ksm_zero_pages_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ksm_zero_pages_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%ld\n", atomic_long_read(&ksm_zero_pages));
     }
     KSM_ATTR_RO(ksm_zero_pages);
-    static ssize_t general_profit_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    long general_profit;
+#[no_mangle]
+pub unsafe extern "C" fn general_profit_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+    let mut general_profit = 0;
     general_profit = (ksm_pages_sharing + atomic_long_read(&ksm_zero_pages)) * PAGE_SIZE -
-    ksm_rmap_items * sizeof(struct ksm_rmap_item);
+    ksm_rmap_items * sizeof!(ksm_rmap_item);
     return sysfs_emit(buf, "%ld\n", general_profit);
     }
     KSM_ATTR_RO(general_profit);
-    static ssize_t stable_node_dups_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn stable_node_dups_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%lu\n", ksm_stable_node_dups);
     }
     KSM_ATTR_RO(stable_node_dups);
-    static ssize_t stable_node_chains_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn stable_node_chains_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%lu\n", ksm_stable_node_chains);
     }
     KSM_ATTR_RO(stable_node_chains);
-    static ssize_t
-    stable_node_chains_prune_millisecs_show(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn stable_node_chains_prune_millisecs_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%u\n", ksm_stable_node_chains_prune_millisecs);
     }
-    static ssize_t
-    stable_node_chains_prune_millisecs_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
-    unsigned int msecs;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn stable_node_chains_prune_millisecs_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut msecs = 0;
+    let mut err = 0;
     err = kstrtouint(buf, 10, &msecs);
-    if (err)
+    if (err) {
     return -EINVAL;
+    }
     ksm_stable_node_chains_prune_millisecs = msecs;
     return count;
     }
     KSM_ATTR(stable_node_chains_prune_millisecs);
-    static ssize_t full_scans_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn full_scans_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%lu\n", ksm_scan.seqnr);
     }
     KSM_ATTR_RO(full_scans);
-    static ssize_t smart_scan_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn smart_scan_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%u\n", ksm_smart_scan);
     }
-    static ssize_t smart_scan_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
-    int err;
-    bool value;
+#[no_mangle]
+pub unsafe extern "C" fn smart_scan_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut err = 0;
+    let mut value = 0;
     err = kstrtobool(buf, &value);
-    if (err)
+    if (err) {
     return -EINVAL;
+    }
     ksm_smart_scan = value;
     return count;
     }
     KSM_ATTR(smart_scan);
-    static ssize_t advisor_mode_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    const char *output;
-    if (ksm_advisor == KSM_ADVISOR_SCAN_TIME)
+#[no_mangle]
+pub unsafe extern "C" fn advisor_mode_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+pub static mut output: *mut c_void = core::ptr::null_mut();
+    if (ksm_advisor == KSM_ADVISOR_SCAN_TIME) {
     output = "none [scan-time]";
-    else
+    }
+    else {
     output = "[none] scan-time";
+    }
     return sysfs_emit(buf, "%s\n", output);
     }
-    static ssize_t advisor_mode_store(struct kobject *kobj,
-    struct kobj_attribute *attr, const char *buf,
-    size_t count)
-    {
-    let mut curr_advisor: enum ksm_advisor_type = ksm_advisor;
-    if (sysfs_streq("scan-time", buf))
-    ksm_advisor = KSM_ADVISOR_SCAN_TIME;
 #[no_mangle]
-pub unsafe extern "C" fn if(_arg: sysfs_streq("none", _arg: buf)) -> else {
-    else if (sysfs_streq("none", buf))
+pub unsafe extern "C" fn advisor_mode_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+pub static mut curr_advisor: ksm_advisor_type = 0;
+    if (sysfs_streq("scan-time", buf)) {
+    ksm_advisor = KSM_ADVISOR_SCAN_TIME;
+    }
+
+    else if (sysfs_streq("none", buf)) {
     ksm_advisor = KSM_ADVISOR_NONE;
-    else
+    }
+    else {
     return -EINVAL;
+    }
 // Set advisor default values
-    if (curr_advisor != ksm_advisor)
+    if (curr_advisor != ksm_advisor) {
     set_advisor_defaults();
+    }
     return count;
     }
     KSM_ATTR(advisor_mode);
-    static ssize_t advisor_max_cpu_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn advisor_max_cpu_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%u\n", ksm_advisor_max_cpu);
     }
-    static ssize_t advisor_max_cpu_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
-    int err;
-    unsigned long value;
+#[no_mangle]
+pub unsafe extern "C" fn advisor_max_cpu_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut err = 0;
+    let mut value = 0;
     err = kstrtoul(buf, 10, &value);
-    if (err)
+    if (err) {
     return -EINVAL;
+    }
     ksm_advisor_max_cpu = value;
     return count;
     }
     KSM_ATTR(advisor_max_cpu);
-    static ssize_t advisor_min_pages_to_scan_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn advisor_min_pages_to_scan_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%lu\n", ksm_advisor_min_pages_to_scan);
     }
-    static ssize_t advisor_min_pages_to_scan_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
-    int err;
-    unsigned long value;
+#[no_mangle]
+pub unsafe extern "C" fn advisor_min_pages_to_scan_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut err = 0;
+    let mut value = 0;
     err = kstrtoul(buf, 10, &value);
-    if (err)
+    if (err) {
     return -EINVAL;
+    }
     ksm_advisor_min_pages_to_scan = value;
     return count;
     }
     KSM_ATTR(advisor_min_pages_to_scan);
-    static ssize_t advisor_max_pages_to_scan_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn advisor_max_pages_to_scan_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%lu\n", ksm_advisor_max_pages_to_scan);
     }
-    static ssize_t advisor_max_pages_to_scan_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
-    int err;
-    unsigned long value;
+#[no_mangle]
+pub unsafe extern "C" fn advisor_max_pages_to_scan_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut err = 0;
+    let mut value = 0;
     err = kstrtoul(buf, 10, &value);
-    if (err)
+    if (err) {
     return -EINVAL;
+    }
     ksm_advisor_max_pages_to_scan = value;
     return count;
     }
     KSM_ATTR(advisor_max_pages_to_scan);
-    static ssize_t advisor_target_scan_time_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn advisor_target_scan_time_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%lu\n", ksm_advisor_target_scan_time);
     }
-    static ssize_t advisor_target_scan_time_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
-    int err;
-    unsigned long value;
+#[no_mangle]
+pub unsafe extern "C" fn advisor_target_scan_time_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut err = 0;
+    let mut value = 0;
     err = kstrtoul(buf, 10, &value);
-    if (err)
+    if (err) {
     return -EINVAL;
-    if (value < 1)
+    }
+    if (value < 1) {
     return -EINVAL;
+    }
     ksm_advisor_target_scan_time = value;
     return count;
     }
@@ -3647,36 +3880,32 @@ pub unsafe extern "C" fn if(_arg: sysfs_streq("none", _arg: buf)) -> else {
     &advisor_target_scan_time_attr.attr,
     core::ptr::null_mut(),
     };
-    static const struct attribute_group ksm_attr_group = {
-    .attrs = ksm_attrs,
-    .name = "ksm",
-    };
+pub static mut attribute_group: usize = 0;
 
 #[no_mangle]
-unsafe extern "C" fn ksm_init() -> int __init {
-    static int __init ksm_init(void)
-    {
-    struct task_struct *ksm_thread;
-    int err;
+unsafe extern "C" fn ksm_init() -> c_int {
+pub static mut ksm_thread: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
 // The correct value depends on page size and endianness
     zero_checksum = calc_checksum(ZERO_PAGE(0));
 // Default to false for backwards compatibility
     ksm_use_zero_pages = false;
     err = ksm_slab_init();
-    if (err)
-    goto out;
+    if (err) {
+// goto;
+    }
     ksm_thread = kthread_run(ksm_scan_thread, core::ptr::null_mut(), "ksmd");
     if (IS_ERR(ksm_thread)) {
-    pr_err("ksm: creating kthread failed\n");
+    pr_err!("ksm: creating kthread failed\n");
     err = PTR_ERR(ksm_thread);
-    goto out_free;
+// goto;
     }
 
     err = sysfs_create_group(mm_kobj, &ksm_attr_group);
     if (err) {
-    pr_err("ksm: register sysfs failed\n");
+    pr_err!("ksm: register sysfs failed\n");
     kthread_stop(ksm_thread);
-    goto out_free;
+// goto;
     }
 
     ksm_run = KSM_RUN_MERGE;	/* no way for user to start it */
@@ -3685,9 +3914,9 @@ unsafe extern "C" fn ksm_init() -> int __init {
     hotplug_memory_notifier(ksm_memory_callback, KSM_CALLBACK_PRI);
 
     return 0;
-    out_free:
+// label;
     ksm_slab_free();
-    out:
+// label;
     return err;
     }
-    subsys_initcall(ksm_init);
+    subsys_initcall!(ksm_init);

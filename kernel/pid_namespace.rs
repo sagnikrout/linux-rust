@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
 macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
@@ -69,74 +319,82 @@ macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
 // Many thanks to Oleg Nesterov for comments and help
 //
 // static DEFINE_MUTEX(pid_caches_mutex);
-    static struct kmem_cache *pid_ns_cachep;
+pub static mut pid_ns_cachep: *mut c_void = core::ptr::null_mut();
 // Write once array, filled from the beginning.
     static struct kmem_cache *pid_cache[MAX_PID_NS_LEVEL];
 //
 // creates the kmem cache to allocate pids from.
 // @level: pid namespace level
 //
-    static struct kmem_cache *create_pid_cachep(unsigned int level)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn create_pid_cachep(level: c_uint) -> *mut c_void {
 // Level 0 is init_pid_ns.pid_cachep
-    struct kmem_cache **pkc = &pid_cache[level - 1];
-    struct kmem_cache *kc;
+    let mut pkc = &pid_cache[level - 1];
+pub static mut kc: *mut c_void = core::ptr::null_mut();
     char name[4 + 10 + 1];
-    unsigned int len;
+    let mut len = 0;
     kc = READ_ONCE(*pkc);
-    if (kc)
+    if (kc) {
     return kc;
-    snprintf(name, sizeof(name), "pid_%u", level + 1);
-    len = struct_size_t(struct pid, numbers, level + 1);
+    }
+    snprintf(name, sizeof!(name), "pid_%u", level + 1);
+    len = struct_size_t(pid, numbers, level + 1);
     mutex_lock(&pid_caches_mutex);
 // Name collision forces to do allocation under mutex.
-    if (!*pkc)
+    if (!*pkc) {
 // pkc = kmem_cache_create(name, len, 0,
     SLAB_HWCACHE_ALIGN | SLAB_ACCOUNT, core::ptr::null_mut());
+    }
     mutex_unlock(&pid_caches_mutex);
 // current can fail, but someone else can succeed.
     return READ_ONCE(*pkc);
     }
-    static struct ucounts *inc_pid_namespaces(struct user_namespace *ns)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn inc_pid_namespaces(ns: *mut user_namespace) -> *mut c_void {
     return inc_ucount(ns, current_euid(), UCOUNT_PID_NAMESPACES);
     }
 #[no_mangle]
 unsafe extern "C" fn dec_pid_namespaces(ucounts: *mut ucounts) {
     dec_ucount(ucounts, UCOUNT_PID_NAMESPACES);
     }
-    static void destroy_pid_namespace_work(struct work_struct *work);
-    static struct pid_namespace *create_pid_namespace(struct user_namespace *user_ns,
-    struct pid_namespace *parent_pid_ns)
-    {
-    struct pid_namespace *ns;
-    let mut level: c_uint = parent_pid_ns.level + 1;
-    struct ucounts *ucounts;
-    int err;
+// forward_decl: destroy_pid_namespace_work;
+#[no_mangle]
+pub unsafe extern "C" fn create_pid_namespace(user_ns: *mut user_namespace, parent_pid_ns: *mut pid_namespace) -> *mut c_void {
+pub static mut ns: *mut c_void = core::ptr::null_mut();
+pub static mut level: c_uint = 0;
+pub static mut ucounts: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
     err = -EINVAL;
-    if (!in_userns(parent_pid_ns.user_ns, user_ns))
-    goto out;
+    if (!in_userns(parent_pid_ns.user_ns, user_ns)) {
+// goto;
+    }
     err = -ENOSPC;
-    if (level > MAX_PID_NS_LEVEL)
-    goto out;
+    if (level > MAX_PID_NS_LEVEL) {
+// goto;
+    }
     ucounts = inc_pid_namespaces(user_ns);
-    if (!ucounts)
-    goto out;
+    if (!ucounts) {
+// goto;
+    }
     err = -ENOMEM;
     ns = kmem_cache_zalloc(pid_ns_cachep, GFP_KERNEL);
-    if (ns == core::ptr::null_mut())
-    goto out_dec;
+    if (ns == core::ptr::null_mut()) {
+// goto;
+    }
     idr_init(&ns.idr);
     ns.pid_cachep = create_pid_cachep(level);
-    if (ns.pid_cachep == core::ptr::null_mut())
-    goto out_free_idr;
+    if (ns.pid_cachep == core::ptr::null_mut()) {
+// goto;
+    }
     err = ns_common_init(ns);
-    if (err)
-    goto out_free_idr;
+    if (err) {
+// goto;
+    }
     ns.pid_max = PID_MAX_LIMIT;
     err = register_pidns_sysctls(ns);
-    if (err)
-    goto out_free_inum;
+    if (err) {
+// goto;
+    }
     ns.level = level;
     ns.parent = get_pid_ns(parent_pid_ns);
     ns.user_ns = get_user_ns(user_ns);
@@ -148,19 +406,19 @@ unsafe extern "C" fn dec_pid_namespaces(ucounts: *mut ucounts) {
 
     ns_tree_add(ns);
     return ns;
-    out_free_inum:
+// label;
     ns_common_free(ns);
-    out_free_idr:
+// label;
     idr_destroy(&ns.idr);
     kmem_cache_free(pid_ns_cachep, ns);
-    out_dec:
+// label;
     dec_pid_namespaces(ucounts);
-    out:
+// label;
     return ERR_PTR(err);
     }
 #[no_mangle]
 unsafe extern "C" fn delayed_free_pidns(p: *mut rcu_head) {
-    struct pid_namespace *ns = container_of(p, struct pid_namespace, rcu);
+    let mut ns = container_of!(p, pid_namespace, rcu);
     dec_pid_namespaces(ns.ucounts);
     put_user_ns(ns.user_ns);
     kmem_cache_free(pid_ns_cachep, ns);
@@ -175,37 +433,38 @@ unsafe extern "C" fn destroy_pid_namespace(ns: *mut pid_namespace) {
     }
 #[no_mangle]
 unsafe extern "C" fn destroy_pid_namespace_work(work: *mut work_struct) {
-    struct pid_namespace *ns =
-    container_of(work, struct pid_namespace, work);
+    let mut ns = container_of!(work, pid_namespace, work);
     do {
-    struct pid_namespace *parent;
+pub static mut parent: *mut c_void = core::ptr::null_mut();
     parent = ns.parent;
     destroy_pid_namespace(ns);
     ns = parent;
     } while (ns != &init_pid_ns && ns_ref_put(ns));
     }
-    struct pid_namespace *copy_pid_ns(u64 flags,
-    struct user_namespace *user_ns, struct pid_namespace *old_ns)
-    {
-    if (!(flags & CLONE_NEWPID))
+#[no_mangle]
+pub unsafe extern "C" fn copy_pid_ns(flags: u64, user_ns: *mut user_namespace, old_ns: *mut pid_namespace) -> *mut c_void {
+    if (!(flags & CLONE_NEWPID)) {
     return get_pid_ns(old_ns);
-    if (task_active_pid_ns(current) != old_ns)
+    }
+    if (task_active_pid_ns(current) != old_ns) {
     return ERR_PTR(-EINVAL);
+    }
     return create_pid_namespace(user_ns, old_ns);
     }
 #[no_mangle]
 pub unsafe extern "C" fn put_pid_ns(ns: *mut pid_namespace) {
-    if (ns && ns_ref_put(ns))
+    if (ns && ns_ref_put(ns)) {
     schedule_work(&ns.work);
+    }
     }
     EXPORT_SYMBOL_GPL(put_pid_ns);
 #[no_mangle]
 pub unsafe extern "C" fn zap_pid_ns_processes(pid_ns: *mut pid_namespace) {
-    int nr;
-    int rc;
+    let mut nr = 0;
+    let mut rc = 0;
     struct task_struct *task, *me = current;
-    let mut init_pids: c_int = thread_group_leader(me) ? 1 : 2;
-    struct pid *pid;
+pub static mut init_pids: c_int = 0;
+pub static mut pid: *mut c_void = core::ptr::null_mut();
 // Don't allow any more processes into the pid namespace
     disable_pid_allocation(pid_ns);
 //
@@ -233,8 +492,9 @@ pub unsafe extern "C" fn zap_pid_ns_processes(pid_ns: *mut pid_namespace) {
     nr = 2;
     idr_for_each_entry_continue(&pid_ns.idr, pid, nr) {
     task = pid_task(pid, PIDTYPE_PID);
-    if (task && !__fatal_signal_pending(task))
+    if (task && !__fatal_signal_pending(task)) {
     group_send_sig_info(SIGKILL, SEND_SIG_PRIV, task, PIDTYPE_MAX);
+    }
     }
     read_unlock(&tasklist_lock);
     rcu_read_unlock();
@@ -273,59 +533,60 @@ pub unsafe extern "C" fn zap_pid_ns_processes(pid_ns: *mut pid_namespace) {
 //
     for (;;) {
     set_current_state(TASK_INTERRUPTIBLE);
-    if (pid_ns.pid_allocated == init_pids)
+    if (pid_ns.pid_allocated == init_pids) {
     break;
+    }
     schedule();
     }
     __set_current_state(TASK_RUNNING);
-    if (pid_ns.reboot)
+    if (pid_ns.reboot) {
     current.signal.group_exit_code = pid_ns.reboot;
+    }
     acct_exit_ns(pid_ns);
     return;
     }
 
-    static int pid_ns_ctl_handler(const struct ctl_table *table, int write,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
-    struct pid_namespace *pid_ns = task_active_pid_ns(current);
-    let mut tmp: ctl_table = *table;
-    int ret, next;
-    if (write && !checkpoint_restore_ns_capable(pid_ns.user_ns))
+#[no_mangle]
+pub unsafe extern "C" fn pid_ns_ctl_handler(table: *mut ctl_table, write: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
+    let mut pid_ns = task_active_pid_ns(current);
+pub static mut tmp: ctl_table = 0;
+    let mut ret = 0;
+    let mut next = 0;
+    if (write && !checkpoint_restore_ns_capable(pid_ns.user_ns)) {
     return -EPERM;
+    }
     next = idr_get_cursor(&pid_ns.idr) - 1;
     tmp.data = &next;
     tmp.extra2 = &pid_ns.pid_max;
     ret = proc_dointvec_minmax(&tmp, write, buffer, lenp, ppos);
-    if (!ret && write)
+    if (!ret && write) {
     idr_set_cursor(&pid_ns.idr, next + 1);
+    }
     return ret;
     }
-    static const struct ctl_table pid_ns_ctl_table[] = {
-    {
-    .procname = "ns_last_pid",
-    .maxlen = sizeof(int),
-    .mode = 0666, /* permissions are checked in the handler */
-    .proc_handler = pid_ns_ctl_handler,
-    .extra1 = SYSCTL_ZERO,
-    .extra2 = &init_pid_ns.pid_max,
-    },
-    };
+pub static mut ctl_table: usize = 0;
 
 #[no_mangle]
 pub unsafe extern "C" fn reboot_pid_ns(pid_ns: *mut pid_namespace, cmd: c_int) -> c_int {
-    if (pid_ns == &init_pid_ns)
+    if (pid_ns == &init_pid_ns) {
     return 0;
-    switch (cmd) {
-    case LINUX_REBOOT_CMD_RESTART2:
-    case LINUX_REBOOT_CMD_RESTART:
+    }
+    match (cmd) {
+    LINUX_REBOOT_CMD_RESTART2 => {
+    }
+    LINUX_REBOOT_CMD_RESTART => {
     pid_ns.reboot = SIGHUP;
-    break;
-    case LINUX_REBOOT_CMD_POWER_OFF:
-    case LINUX_REBOOT_CMD_HALT:
+    // break;
+    }
+    LINUX_REBOOT_CMD_POWER_OFF => {
+    }
+    LINUX_REBOOT_CMD_HALT => {
     pid_ns.reboot = SIGINT;
-    break;
-    default:
+    // break;
+    }
+    _ => {
     return -EINVAL;
+    }
     }
     read_lock(&tasklist_lock);
     send_sig(SIGKILL, pid_ns.child_reaper, 1);
@@ -334,19 +595,20 @@ pub unsafe extern "C" fn reboot_pid_ns(pid_ns: *mut pid_namespace, cmd: c_int) -
 // Not reached
     return 0;
     }
-    static struct ns_common *pidns_get(struct task_struct *task)
-    {
-    struct pid_namespace *ns;
+#[no_mangle]
+pub unsafe extern "C" fn pidns_get(task: *mut task_struct) -> *mut c_void {
+pub static mut ns: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     ns = task_active_pid_ns(task);
-    if (ns)
+    if (ns) {
     get_pid_ns(ns);
+    }
     rcu_read_unlock();
     return ns ? &ns.ns : core::ptr::null_mut();
     }
-    static struct ns_common *pidns_for_children_get(struct task_struct *task)
-    {
-    struct pid_namespace *ns = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn pidns_for_children_get(task: *mut task_struct) -> *mut c_void {
+    let mut ns = core::ptr::null_mut();
     task_lock(task);
     if (task.nsproxy) {
     ns = task.nsproxy.pid_ns_for_children;
@@ -359,24 +621,26 @@ pub unsafe extern "C" fn reboot_pid_ns(pid_ns: *mut pid_namespace, cmd: c_int) -
 unsafe extern "C" fn pidns_put(ns: *mut ns_common) {
     put_pid_ns(to_pid_ns(ns));
     }
-    bool pidns_is_ancestor(struct pid_namespace *child,
-    struct pid_namespace *ancestor)
-    {
-    struct pid_namespace *ns;
-    if (child.level < ancestor.level)
+#[no_mangle]
+pub unsafe extern "C" fn pidns_is_ancestor(child: *mut pid_namespace, ancestor: *mut pid_namespace) -> bool {
+pub static mut ns: *mut c_void = core::ptr::null_mut();
+    if (child.level < ancestor.level) {
     return false;
-    for (ns = child; ns.level > ancestor.level; ns = ns.parent)
+    }
+    for (ns = child; ns.level > ancestor.level; ns = ns.parent) {
     ;
-    let mut ns: return = = ancestor;
+    }
+pub static mut ns: return = 0;
     }
 #[no_mangle]
 unsafe extern "C" fn pidns_install(nsset: *mut nsset, ns: *mut ns_common) -> c_int {
-    struct nsproxy *nsproxy = nsset.nsproxy;
-    struct pid_namespace *active = task_active_pid_ns(current);
-    struct pid_namespace *new = to_pid_ns(ns);
+    let mut nsproxy = nsset.nsproxy;
+    let mut active = task_active_pid_ns(current);
+    let mut new = to_pid_ns(ns);
     if (!ns_capable(new.user_ns, CAP_SYS_ADMIN) ||
-    !ns_capable(nsset.cred.user_ns, CAP_SYS_ADMIN))
+    !ns_capable(nsset.cred.user_ns, CAP_SYS_ADMIN)) {
     return -EPERM;
+    }
 //
 // Only allow entering the current active pid namespace
 // or a child of the current active pid namespace.
@@ -385,48 +649,37 @@ unsafe extern "C" fn pidns_install(nsset: *mut nsset, ns: *mut ns_common) -> c_i
 // this maintains the property that processes and their
 // children can not escape their current pid namespace.
 //
-    if (!pidns_is_ancestor(new, active))
+    if (!pidns_is_ancestor(new, active)) {
     return -EINVAL;
+    }
     put_pid_ns(nsproxy.pid_ns_for_children);
     nsproxy.pid_ns_for_children = get_pid_ns(new);
     return 0;
     }
-    static struct ns_common *pidns_get_parent(struct ns_common *ns)
-    {
-    struct pid_namespace *active = task_active_pid_ns(current);
-    struct pid_namespace *pid_ns, *p;
+#[no_mangle]
+pub unsafe extern "C" fn pidns_get_parent(ns: *mut ns_common) -> *mut c_void {
+    let mut active = task_active_pid_ns(current);
+    let mut pid_ns = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
 // See if the parent is in the current namespace
     pid_ns = p = to_pid_ns(ns).parent;
     for (;;) {
-    if (!p)
+    if (!p) {
     return ERR_PTR(-EPERM);
-    if (p == active)
+    }
+    if (p == active) {
     break;
+    }
     p = p.parent;
     }
     return &get_pid_ns(pid_ns).ns;
     }
-    static struct user_namespace *pidns_owner(struct ns_common *ns)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pidns_owner(ns: *mut ns_common) -> *mut c_void {
     return to_pid_ns(ns).user_ns;
     }
-    const struct proc_ns_operations pidns_operations = {
-    .name		= "pid",
-    .get		= pidns_get,
-    .put		= pidns_put,
-    .install	= pidns_install,
-    .owner		= pidns_owner,
-    .get_parent	= pidns_get_parent,
-    };
-    const struct proc_ns_operations pidns_for_children_operations = {
-    .name		= "pid_for_children",
-    .real_ns_name	= "pid",
-    .get		= pidns_for_children_get,
-    .put		= pidns_put,
-    .install	= pidns_install,
-    .owner		= pidns_owner,
-    .get_parent	= pidns_get_parent,
-    };
+pub static mut proc_ns_operations: usize = 0;
+pub static mut proc_ns_operations: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn pid_namespaces_init() -> __init int {
     pid_ns_cachep = KMEM_CACHE(pid_namespace, SLAB_PANIC | SLAB_ACCOUNT);
@@ -437,4 +690,4 @@ unsafe extern "C" fn pid_namespaces_init() -> __init int {
     ns_tree_add(&init_pid_ns);
     return 0;
     }
-    __initcall(pid_namespaces_init);
+    __initcall!(pid_namespaces_init);

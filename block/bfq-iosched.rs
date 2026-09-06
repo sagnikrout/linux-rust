@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -77,7 +327,7 @@ pub const BFQ_MAX_ACTUATORS: c_int = 8;
 pub struct bfq_service_tree {
 // tree for active entities (i.e., those backlogged)
     pub active: rb_root,
-// tree for idle entities (i.e., not backlogged, with V < F_i)
+tree for idle entities (i.e., not backlogged, with V < F_i)
     pub idle: rb_root,
 // idle entity with minimum F_i
     pub first_idle: *mut bfq_entity,
@@ -123,7 +373,7 @@ pub struct bfq_service_tree {
 pub struct bfq_sched_data {
 // entity in service
     pub in_service_entity: *mut bfq_entity,
-// head-of-line entity (see comments above)
+head-of-line entity (see comments above)
     pub next_in_service: *mut bfq_entity,
 // array of service trees, one per ioprio_class
     pub service_tree: [bfq_service_tree; BFQ_IOPRIO_CLASSES],
@@ -138,8 +388,8 @@ pub struct bfq_sched_data {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct bfq_weight_counter {
-    pub /: *mut *mut unsigned int weight; / weight of the queues this counter refers to,
-    pub /: *mut *mut unsigned int num_active; / nr of active queues with this weight,
+//     pub /: *mut *mut unsigned int weight; / weight of the queues this counter refers to,
+//     pub /: *mut *mut unsigned int num_active; / nr of active queues with this weight,
 //
 // Weights tree member (see bfq_data's @queue_weights_tree)
 //
@@ -268,7 +518,7 @@ pub struct bfq_queue {
     pub ioprio_class: unsigned short ioprio,,
 // next ioprio and ioprio class if a change is in progress
     pub new_ioprio_class: unsigned short new_ioprio,,
-// last total-service-time sample, see bfq_update_inject_limit()
+last total-service-time sample, see bfq_update_inject_limit()
     pub last_serv_time_ns: u64,
 // limit for request injection
     pub inject_limit: c_uint,
@@ -279,9 +529,9 @@ pub struct bfq_queue {
 // other queues.
 //
     pub new_bfqq: *mut bfq_queue,
-// request-position tree member (see bfq_group's @rq_pos_tree)
+request-position tree member (see bfq_group's @rq_pos_tree)
     pub pos_node: rb_node,
-// request-position tree root (see bfq_group's @rq_pos_tree)
+request-position tree root (see bfq_group's @rq_pos_tree)
     pub pos_root: *mut rb_root,
 // sorted list of pending requests
     pub sort_list: rb_root,
@@ -299,7 +549,7 @@ pub struct bfq_queue {
     pub weight_counter: *mut bfq_weight_counter,
 // maximum budget allowed from the feedback mechanism
     pub max_budget: c_int,
-// budget expiration (in jiffies)
+budget expiration (in jiffies)
     pub budget_timeout: c_ulong,
 // number of requests on the dispatch list or inside driver
     pub dispatched: c_int,
@@ -370,9 +620,9 @@ pub struct bfq_queue {
 // Value of wr start time when switching to soft rt
 //
     pub wr_start_at_switch_to_srt: c_ulong,
-    pub /: *mut *mut unsigned long split_time; / time of last split,
-    pub /: *mut *mut unsigned long first_IO_time; / time of first I/O for this queue,
-    pub /: *mut *mut unsigned long creation_time; / when this queue is created,
+//     pub /: *mut *mut unsigned long split_time; / time of last split,
+//     pub /: *mut *mut unsigned long first_IO_time; / time of first I/O for this queue,
+//     pub /: *mut *mut unsigned long creation_time; / when this queue is created,
 //
 // Pointer to the waker queue for this queue, i.e., to the
 // queue Q such that this queue happens to get new I/O right
@@ -381,7 +631,7 @@ pub struct bfq_queue {
 // bfq_select_queue().
 //
     pub waker_bfqq: *mut bfq_queue,
-// pointer to the curr. tentative waker queue, see bfq_check_waker()
+pointer to the curr. tentative waker queue, see bfq_check_waker()
     pub tentative_waker_bfqq: *mut bfq_queue,
 // number of times the same tentative waker has been detected
     pub num_waker_detections: c_uint,
@@ -450,9 +700,9 @@ pub struct bfq_iocq_bfqq_data {
     pub saved_inject_limit: c_uint,
     pub saved_decrease_time_jif: c_ulong,
     pub saved_last_serv_time_ns: u64,
-// candidate queue for a stable merge (due to close creation time)
+candidate queue for a stable merge (due to close creation time)
     pub stable_merge_bfqq: *mut bfq_queue,
-    pub /: *mut *mut bool stably_merged; / non splittable if true,
+//     pub /: *mut *mut bool stably_merged; / non splittable if true,
 }
 
 //
@@ -462,7 +712,7 @@ pub struct bfq_iocq_bfqq_data {
 #[derive(Copy, Clone)]
 pub struct bfq_io_cq {
 // associated io_cq structure
-    pub /: *mut *mut io_cq icq; / must be the first member,
+//     pub /: *mut *mut io_cq icq; / must be the first member,
 //
 // Matrix of associated process queues: first row for async
 // queues, second row sync queues. Each row contains one
@@ -477,7 +727,7 @@ pub struct bfq_io_cq {
 // per (request_queue, blkcg) ioprio
     pub ioprio: c_int,
 
-    pub /: *mut *mut uint64_t blkcg_serial_nr; / the current blkcg serial,
+//     pub /: *mut *mut uint64_t blkcg_serial_nr; / the current blkcg serial,
 
 //
 // Persistent data for associated synchronous process queues
@@ -485,7 +735,7 @@ pub struct bfq_io_cq {
 // particular, each of these queues may undergo a merge.
 //
     pub bfqq_data: [bfq_iocq_bfqq_data; BFQ_MAX_ACTUATORS],
-    pub /: *mut *mut unsigned int requests; / Number of requests this process has in flight,
+//     pub /: *mut *mut unsigned int requests; / Number of requests this process has in flight,
 }
 
 //
@@ -601,13 +851,13 @@ pub struct bfq_data {
     pub last_position: sector_t,
 // position of the last served request for the in-service queue
     pub in_serv_last_pos: sector_t,
-// time of last request completion (ns)
+time of last request completion (ns)
     pub last_completion: u64,
 // bfqq owning the last completed rq
     pub last_completed_rq_bfqq: *mut bfq_queue,
 // last bfqq created, among those in the root group
     pub last_bfqq_created: *mut bfq_queue,
-// time of last transition from empty to non-empty (ns)
+time of last transition from empty to non-empty (ns)
     pub last_empty_occupied_ns: u64,
 //
 // Flag set to activate the sampling of the total service time
@@ -625,9 +875,9 @@ pub struct bfq_data {
 // True if some request has been injected during the last service hole.
 //
     pub rqs_injected: bool,
-// time of first rq dispatch in current observation interval (ns)
+time of first rq dispatch in current observation interval (ns)
     pub first_dispatch: u64,
-// time of last rq dispatch in current observation interval (ns)
+time of last rq dispatch in current observation interval (ns)
     pub last_dispatch: u64,
 // beginning of the last budget
     pub last_budget_start: ktime_t,
@@ -640,9 +890,9 @@ pub struct bfq_data {
     pub sequential_samples: u32,
 // total num of sectors transferred in current observation interval
     pub tot_sectors_dispatched: u64,
-// max rq size seen during current observation interval (sectors)
+max rq size seen during current observation interval (sectors)
     pub last_rq_max_size: u32,
-// time elapsed from first dispatch in current observ. interval (us)
+time elapsed from first dispatch in current observ. interval (us)
     pub delta_from_first: u64,
 //
 // Current estimate of the device peak rate, measured in
@@ -673,7 +923,7 @@ pub struct bfq_data {
     pub bfq_back_max: c_uint,
 // maximum idling time
     pub bfq_slice_idle: u32,
-// user-configured max budget value (0 for auto-tuning)
+user-configured max budget value (0 for auto-tuning)
     pub bfq_user_max_budget: c_int,
 //
 // Timeout for bfq_queues to consume their budget; used to
@@ -809,23 +1059,23 @@ pub enum bfqq_state_flags {
     BFQQF_just_created = 0,	/* queue just allocated */
     BFQQF_busy,		/* has requests or is in service */
     BFQQF_wait_request,	/* waiting for a request */
-    BFQQF_non_blocking_wait_rq, /*
+    BFQQF_non_blocking_wait_rq, //
 // waiting for a request
 // without idling the device
 //
     BFQQF_fifo_expire,	/* FIFO checked in this slice */
     BFQQF_has_short_ttime,	/* queue has a short think time */
     BFQQF_sync,		/* synchronous queue */
-    BFQQF_IO_bound,		/*
+    BFQQF_IO_bound,		//
 // bfqq has timed-out at least once
 // having consumed at most 2/10 of
 // its budget
 //
-    BFQQF_in_large_burst,	/*
+    BFQQF_in_large_burst,	//
 // bfqq activated in a large burst,
 // see comments to bfq_handle_burst.
 //
-    BFQQF_softrt_update,	/*
+    BFQQF_softrt_update,	//
 // may need softrt-next-start
 // update
 //
@@ -837,7 +1087,7 @@ pub enum bfqq_state_flags {
 #[repr(C)]
 #[derive(Copy, Clone, PartialEq, Eq)]
 pub enum bfqq_expiration {
-    BFQQE_TOO_IDLE = 0,		/*
+    BFQQE_TOO_IDLE = 0,		//
 // queue has been idling for
 // too long
 //
@@ -942,7 +1192,7 @@ pub struct bfq_group_data {
 pub struct bfq_group {
 // must be the first member
     pub pd: blkg_policy_data,
-// reference counter (see comments in bfq_bic_update_cgroup)
+reference counter (see comments in bfq_bic_update_cgroup)
     pub ref: refcount_t,
     pub entity: bfq_entity,
     pub sched_data: bfq_sched_data,
@@ -1086,4 +1336,3 @@ extern "C" {
 }
 // --------------- end of interface of B-WF2Q+ ----------------
 // Logging facilities.
-

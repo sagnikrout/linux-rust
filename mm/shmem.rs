@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -58,7 +308,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Copyright (c) 2004, 2008 Matt Mackall <mpm@selenic.com>
 //
 
-    static struct vfsmount *shm_mnt __ro_after_init;
+pub static mut shm_mnt: *mut c_void = core::ptr::null_mut();
 
 //
 // This virtual memory filesystem is heavily based on the ramfs. It
@@ -80,11 +330,11 @@ pub const SHORT_SYMLINK_LEN: c_int = 128;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct shmem_falloc {
-    pub /: *mut *mut *mut wait_queue_head_t waitq; / faults into hole wait for punch to end,
-    pub /: *mut *mut pgoff_t start; / start of range currently being fallocated,
-    pub /: *mut *mut pgoff_t next; / the next page offset to be fallocated,
-    pub /: *mut *mut pgoff_t nr_falloced; / how many new pages have been fallocated,
-    pub /: *mut *mut pgoff_t nr_unswapped; / how often writeout refused to swap out,
+//     pub /: *mut *mut *mut wait_queue_head_t waitq; / faults into hole wait for punch to end,
+//     pub /: *mut *mut pgoff_t start; / start of range currently being fallocated,
+//     pub /: *mut *mut pgoff_t next; / the next page offset to be fallocated,
+//     pub /: *mut *mut pgoff_t nr_falloced; / how many new pages have been fallocated,
+//     pub /: *mut *mut pgoff_t nr_unswapped; / how often writeout refused to swap out,
 }
 
 #[repr(C)]
@@ -113,32 +363,26 @@ pub const SHMEM_SEEN_INUMS: c_int = 8;
 pub const SHMEM_SEEN_QUOTA: c_int = 16;
 }
 
-    static unsigned long huge_shmem_orders_always __read_mostly;
-    static unsigned long huge_shmem_orders_madvise __read_mostly;
-    static unsigned long huge_shmem_orders_inherit __read_mostly;
-    static unsigned long huge_shmem_orders_within_size __read_mostly;
+    static unsigned long huge_shmem_orders_always ;
+    static unsigned long huge_shmem_orders_madvise ;
+    static unsigned long huge_shmem_orders_inherit ;
+    static unsigned long huge_shmem_orders_within_size ;
     static bool shmem_orders_configured __initdata;
 
 #[no_mangle]
 unsafe extern "C" fn shmem_default_max_blocks() -> c_ulong {
-    static unsigned long shmem_default_max_blocks(void)
-    {
     return totalram_pages() / 2;
     }
 #[no_mangle]
 unsafe extern "C" fn shmem_default_max_inodes() -> c_ulong {
-    static unsigned long shmem_default_max_inodes(void)
-    {
-    let mut nr_pages: c_ulong = totalram_pages();
+pub static mut nr_pages: c_ulong = 0;
     return min3(nr_pages - totalhigh_pages(), nr_pages / 2,
     ULONG_MAX / BOGO_INODE_SIZE);
     }
 
-    static int shmem_swapin_folio(struct inode *inode, pgoff_t index,
-    struct folio **foliop, enum sgp_type sgp, gfp_t gfp,
-    struct vm_fault *vmf, vm_fault_t *fault_type);
-    static inline struct shmem_sb_info *SHMEM_SB(struct super_block *sb)
-    {
+// forward_decl: shmem_swapin_folio;
+#[no_mangle]
+pub unsafe extern "C" fn SHMEM_SB(sb: *mut super_block) -> *mut c_void {
     return sb.s_fs_info;
     }
 //
@@ -149,29 +393,26 @@ unsafe extern "C" fn shmem_default_max_inodes() -> c_ulong {
 //
 #[no_mangle]
 pub unsafe extern "C" fn shmem_acct_size(flags: c_ulong, size: loff_t) -> c_int {
-    static inline int shmem_acct_size(unsigned long flags, loff_t size)
-    {
     return (flags & SHMEM_F_NORESERVE) ?
     0 : security_vm_enough_memory_mm(current.mm, VM_ACCT(size));
     }
 #[no_mangle]
 pub unsafe extern "C" fn shmem_unacct_size(flags: c_ulong, size: loff_t) {
-    static inline void shmem_unacct_size(unsigned long flags, loff_t size)
-    {
-    if (!(flags & SHMEM_F_NORESERVE))
+    if (!(flags & SHMEM_F_NORESERVE)) {
     vm_unacct_memory(VM_ACCT(size));
     }
-    static inline int shmem_reacct_size(unsigned long flags,
-    loff_t oldsize, loff_t newsize)
-    {
+    }
+#[no_mangle]
+pub unsafe extern "C" fn shmem_reacct_size(flags: c_ulong, oldsize: loff_t, newsize: loff_t) -> c_int {
     if (!(flags & SHMEM_F_NORESERVE)) {
-    if (VM_ACCT(newsize) > VM_ACCT(oldsize))
+    if (VM_ACCT(newsize) > VM_ACCT(oldsize)) {
     return security_vm_enough_memory_mm(current.mm,
     VM_ACCT(newsize) - VM_ACCT(oldsize));
-#[no_mangle]
-pub unsafe extern "C" fn if(VM_ACCT(oldsize): VM_ACCT(newsize) <) -> else {
-    else if (VM_ACCT(newsize) < VM_ACCT(oldsize))
+    }
+
+    else if (VM_ACCT(newsize) < VM_ACCT(oldsize)) {
     vm_unacct_memory(VM_ACCT(oldsize) - VM_ACCT(newsize));
+    }
     }
     return 0;
     }
@@ -183,123 +424,116 @@ pub unsafe extern "C" fn if(VM_ACCT(oldsize): VM_ACCT(newsize) <) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn shmem_acct_blocks(flags: c_ulong, pages: c_long) -> c_int {
-    static inline int shmem_acct_blocks(unsigned long flags, long pages)
-    {
-    if (!(flags & SHMEM_F_NORESERVE))
+    if (!(flags & SHMEM_F_NORESERVE)) {
     return 0;
+    }
     return security_vm_enough_memory_mm(current.mm,
     pages * VM_ACCT(PAGE_SIZE));
     }
 #[no_mangle]
 pub unsafe extern "C" fn shmem_unacct_blocks(flags: c_ulong, pages: c_long) {
-    static inline void shmem_unacct_blocks(unsigned long flags, long pages)
-    {
-    if (flags & SHMEM_F_NORESERVE)
+    if (flags & SHMEM_F_NORESERVE) {
     vm_unacct_memory(pages * VM_ACCT(PAGE_SIZE));
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn shmem_inode_acct_blocks(inode: *mut inode, pages: c_long) -> c_int {
-    int shmem_inode_acct_blocks(struct inode *inode, long pages)
-    {
-    struct shmem_inode_info *info = SHMEM_I(inode);
-    struct shmem_sb_info *sbinfo = SHMEM_SB(inode.i_sb);
-    let mut err: c_int = -ENOSPC;
-    if (shmem_acct_blocks(info.flags, pages))
+    let mut info = SHMEM_I(inode);
+    let mut sbinfo = SHMEM_SB(inode.i_sb);
+pub static mut err: c_int = 0;
+    if (shmem_acct_blocks(info.flags, pages)) {
     return err;
+    }
     might_sleep();	/* when quotas */
     if (sbinfo.max_blocks) {
     if (!percpu_counter_limited_add(&sbinfo.used_blocks,
-    sbinfo.max_blocks, pages))
-    goto unacct;
+    sbinfo.max_blocks, pages)) {
+// goto;
+    }
     err = dquot_alloc_block_nodirty(inode, pages);
     if (err) {
     percpu_counter_sub(&sbinfo.used_blocks, pages);
-    goto unacct;
+// goto;
     }
     } else {
     err = dquot_alloc_block_nodirty(inode, pages);
-    if (err)
-    goto unacct;
+    if (err) {
+// goto;
+    }
     }
     return 0;
-    unacct:
+// label;
     shmem_unacct_blocks(info.flags, pages);
     return err;
     }
 #[no_mangle]
 unsafe extern "C" fn shmem_inode_unacct_blocks(inode: *mut inode, pages: c_long) {
-    static void shmem_inode_unacct_blocks(struct inode *inode, long pages)
-    {
-    struct shmem_inode_info *info = SHMEM_I(inode);
-    struct shmem_sb_info *sbinfo = SHMEM_SB(inode.i_sb);
+    let mut info = SHMEM_I(inode);
+    let mut sbinfo = SHMEM_SB(inode.i_sb);
     might_sleep();	/* when quotas */
     dquot_free_block_nodirty(inode, pages);
-    if (sbinfo.max_blocks)
+    if (sbinfo.max_blocks) {
     percpu_counter_sub(&sbinfo.used_blocks, pages);
+    }
     shmem_unacct_blocks(info.flags, pages);
     }
-    static const struct super_operations shmem_ops;
-    static const struct address_space_operations shmem_aops;
-    static const struct file_operations shmem_file_operations;
-    static const struct inode_operations shmem_inode_operations;
-    static const struct inode_operations shmem_dir_inode_operations;
-    static const struct inode_operations shmem_special_inode_operations;
-    static const struct vm_operations_struct shmem_vm_ops;
-    static const struct vm_operations_struct shmem_anon_vm_ops;
-    static struct file_system_type shmem_fs_type;
+pub static mut shmem_ops: usize = 0;
+pub static mut shmem_aops: usize = 0;
+pub static mut shmem_file_operations: usize = 0;
+pub static mut shmem_inode_operations: usize = 0;
+pub static mut shmem_dir_inode_operations: usize = 0;
+pub static mut shmem_special_inode_operations: usize = 0;
+pub static mut shmem_vm_ops: usize = 0;
+pub static mut shmem_anon_vm_ops: usize = 0;
+pub static mut shmem_fs_type: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn shmem_mapping(mapping: *const address_space) -> bool {
-    bool shmem_mapping(const struct address_space *mapping)
-    {
     return mapping.a_ops == &shmem_aops;
     }
     EXPORT_SYMBOL_GPL(shmem_mapping);
 #[no_mangle]
 pub unsafe extern "C" fn vma_is_anon_shmem(vma: *const vm_area_struct) -> bool {
-    bool vma_is_anon_shmem(const struct vm_area_struct *vma)
-    {
     return vma.vm_ops == &shmem_anon_vm_ops;
     }
 #[no_mangle]
 pub unsafe extern "C" fn vma_is_shmem(vma: *const vm_area_struct) -> bool {
-    bool vma_is_shmem(const struct vm_area_struct *vma)
-    {
     return vma_is_anon_shmem(vma) || vma.vm_ops == &shmem_vm_ops;
     }
-    static LIST_HEAD(shmem_swaplist);
-    static DEFINE_SPINLOCK(shmem_swaplist_lock);
+pub static mut shmem_swaplist: usize = 0;
+pub static mut shmem_swaplist_lock: usize = 0;
 
-    static int shmem_enable_quotas(struct super_block *sb,
-    unsigned short quota_types)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn shmem_enable_quotas(sb: *mut super_block, quota_types: c_ushort) -> c_int {
     int type, err = 0;
     sb_dqopt(sb).flags |= DQUOT_QUOTA_SYS_FILE | DQUOT_NOLIST_DIRTY;
-    for (type = 0; type < SHMEM_MAXQUOTAS; type++) {
-    if (!(quota_types & (1 << type)))
+    while (type < SHMEM_MAXQUOTAS) {
+    if (!(quota_types & (1 << type))) {
     continue;
+    }
     err = dquot_load_quota_sb(sb, type, QFMT_SHMEM,
     DQUOT_USAGE_ENABLED |
     DQUOT_LIMITS_ENABLED);
-    if (err)
-    goto out_err;
+    if (err) {
+// goto;
+    }
     }
     return 0;
-    out_err:
-    pr_warn("tmpfs: failed to enable quota tracking (type=%d, err=%d)\n",
+// label;
+    pr_warn!("tmpfs: failed to enable quota tracking (type=%d, err=%d)\n",
     type, err);
-    for (type--; type >= 0; type--)
+    for (type -= 1; type >= 0; type--) {
     dquot_quota_off(sb, type);
+    }
     return err;
     }
 #[no_mangle]
 unsafe extern "C" fn shmem_disable_quotas(sb: *mut super_block) {
-    static void shmem_disable_quotas(struct super_block *sb)
-    {
-    int type;
-    for (type = 0; type < SHMEM_MAXQUOTAS; type++)
+    let mut type = 0;
+    for (type = 0; type < SHMEM_MAXQUOTAS; type++) {
     dquot_quota_off(sb, type);
     }
-    static struct dquot __rcu **shmem_get_dquots(struct inode *inode)
+    }
+    static struct dquot  **shmem_get_dquots(inode *inode)
     {
     return SHMEM_I(inode).i_dquot;
     }
@@ -316,10 +550,8 @@ unsafe extern "C" fn shmem_disable_quotas(sb: *mut super_block) {
 pub const SHMEM_INO_BATCH: c_int = 1024;
 #[no_mangle]
 unsafe extern "C" fn shmem_reserve_inode(sb: *mut super_block, inop: *mut ino_t) -> c_int {
-    static int shmem_reserve_inode(struct super_block *sb, ino_t *inop)
-    {
-    struct shmem_sb_info *sbinfo = SHMEM_SB(sb);
-    ino_t ino;
+    let mut sbinfo = SHMEM_SB(sb);
+    let mut ino;
     if (!(sb.s_flags & SB_KERNMOUNT)) {
     raw_spin_lock(&sbinfo.stat_lock);
     if (sbinfo.max_inodes) {
@@ -330,20 +562,22 @@ unsafe extern "C" fn shmem_reserve_inode(sb: *mut super_block, inop: *mut ino_t)
     sbinfo.free_ispace -= BOGO_INODE_SIZE;
     }
     if (inop) {
-    ino = sbinfo.next_ino++;
-    if (unlikely(is_zero_ino(ino)))
-    ino = sbinfo.next_ino++;
+    ino = sbinfo.next_ino += 1;
+    if (unlikely(is_zero_ino(ino))) {
+    ino = sbinfo.next_ino += 1;
+    }
     if (unlikely(!sbinfo.full_inums &&
     ino > UINT_MAX)) {
 //
 // Emulate get_next_ino uint wraparound for
 // compatibility
 //
-    if (IS_ENABLED(CONFIG_64BIT))
-    pr_warn("%s: inode number overflow on device %d, consider using inode64 mount option\n",
+    if (IS_ENABLED!(CONFIG_64BIT)) {
+    pr_warn!("%s: inode number overflow on device %d, consider using inode64 mount option\n",
     __func__, MINOR(sb.s_dev));
+    }
     sbinfo.next_ino = 1;
-    ino = sbinfo.next_ino++;
+    ino = sbinfo.next_ino += 1;
     }
 // inop = ino;
     }
@@ -361,7 +595,7 @@ unsafe extern "C" fn shmem_reserve_inode(sb: *mut super_block, inop: *mut ino_t)
 // shmem mounts are not exposed to userspace, so we don't need
 // to worry about things like glibc compatibility.
 //
-    ino_t *next_ino;
+pub static mut next_ino: *mut c_void = core::ptr::null_mut();
     next_ino = per_cpu_ptr(sbinfo.ino_batch, get_cpu());
     ino = *next_ino;
     if (unlikely(ino % SHMEM_INO_BATCH == 0)) {
@@ -369,20 +603,19 @@ unsafe extern "C" fn shmem_reserve_inode(sb: *mut super_block, inop: *mut ino_t)
     ino = sbinfo.next_ino;
     sbinfo.next_ino += SHMEM_INO_BATCH;
     raw_spin_unlock(&sbinfo.stat_lock);
-    if (unlikely(is_zero_ino(ino)))
-    ino++;
+    if (unlikely(is_zero_ino(ino))) {
+    ino += 1;
+    }
     }
 // inop = ino;
-// next_ino = ++ino;
+// next_ino = ino += 1;
     put_cpu();
     }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn shmem_free_inode(sb: *mut super_block, freed_ispace: usize) {
-    static void shmem_free_inode(struct super_block *sb, size_t freed_ispace)
-    {
-    struct shmem_sb_info *sbinfo = SHMEM_SB(sb);
+    let mut sbinfo = SHMEM_SB(sb);
     if (sbinfo.max_inodes) {
     raw_spin_lock(&sbinfo.stat_lock);
     sbinfo.free_ispace += BOGO_INODE_SIZE + freed_ispace;
@@ -405,11 +638,9 @@ unsafe extern "C" fn shmem_free_inode(sb: *mut super_block, freed_ispace: usize)
 //
 #[no_mangle]
 pub unsafe extern "C" fn shmem_recalc_inode(inode: *mut inode, alloced: c_long, swapped: c_long) -> bool {
-    bool shmem_recalc_inode(struct inode *inode, long alloced, long swapped)
-    {
-    struct shmem_inode_info *info = SHMEM_I(inode);
-    let mut first_swapped: bool = false;
-    long freed;
+    let mut info = SHMEM_I(inode);
+pub static mut first_swapped: bool = false;
+    let mut freed = 0;
     spin_lock(&info.lock);
     info.alloced += alloced;
     info.swapped += swapped;
@@ -423,25 +654,27 @@ pub unsafe extern "C" fn shmem_recalc_inode(inode: *mut inode, alloced: c_long, 
 // been freed.  Compensate here, to avoid the need for a followup call.
 //
     if (swapped > 0) {
-    if (info.swapped == swapped)
+    if (info.swapped == swapped) {
     first_swapped = true;
+    }
     freed += swapped;
     }
-    if (freed > 0)
+    if (freed > 0) {
     info.alloced -= freed;
+    }
     spin_unlock(&info.lock);
 // The quota case may block
-    if (freed > 0)
+    if (freed > 0) {
     shmem_inode_unacct_blocks(inode, freed);
+    }
     return first_swapped;
     }
 #[no_mangle]
 pub unsafe extern "C" fn shmem_charge(inode: *mut inode, pages: c_long) -> bool {
-    bool shmem_charge(struct inode *inode, long pages)
-    {
-    struct address_space *mapping = inode.i_mapping;
-    if (shmem_inode_acct_blocks(inode, pages))
+    let mut mapping = inode.i_mapping;
+    if (shmem_inode_acct_blocks(inode, pages)) {
     return false;
+    }
 // nrpages adjustment first, then shmem_recalc_inode() when balanced
     xa_lock_irq(&mapping.i_pages);
     mapping.nrpages += pages;
@@ -451,8 +684,6 @@ pub unsafe extern "C" fn shmem_charge(inode: *mut inode, pages: c_long) -> bool 
     }
 #[no_mangle]
 pub unsafe extern "C" fn shmem_uncharge(inode: *mut inode, pages: c_long) {
-    void shmem_uncharge(struct inode *inode, long pages)
-    {
 // pages argument is currently unused: keep it to help debugging
 // nrpages adjustment done by __filemap_remove_folio() or caller
     shmem_recalc_inode(inode, 0, 0);
@@ -460,16 +691,16 @@ pub unsafe extern "C" fn shmem_uncharge(inode: *mut inode, pages: c_long) {
 //
 // Replace item expected in xarray by a new item, while holding xa_lock.
 //
-    static int shmem_replace_entry(struct address_space *mapping,
-    pgoff_t index, void *expected, void *replacement)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn shmem_replace_entry(mapping: *mut address_space, index: pgoff_t, expected: *mut c_void, replacement: *mut c_void) -> c_int {
     XA_STATE(xas, &mapping.i_pages, index);
-    void *item;
+pub static mut item: *mut c_void = core::ptr::null_mut();
     VM_BUG_ON(!expected);
     VM_BUG_ON(!replacement);
     item = xas_load(&xas);
-    if (item != expected)
+    if (item != expected) {
     return -ENOENT;
+    }
     xas_store(&xas, replacement);
     return 0;
     }
@@ -481,17 +712,17 @@ pub unsafe extern "C" fn shmem_uncharge(inode: *mut inode, pages: c_long) {
 // might be reused, and again be swapcache, using the same swap as before.
 // Returns the swap entry's order if it still presents, else returns -1.
 //
-    static int shmem_confirm_swap(struct address_space *mapping, pgoff_t index,
-    swp_entry_t swap)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn shmem_confirm_swap(mapping: *mut address_space, index: pgoff_t, swap: swp_entry_t) -> c_int {
     XA_STATE(xas, &mapping.i_pages, index);
-    let mut ret: c_int = -1;
-    void *entry;
+pub static mut ret: c_int = 0;
+pub static mut entry: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     do {
     entry = xas_load(&xas);
-    if (entry == swp_to_radix_entry(swap))
+    if (entry == swp_to_radix_entry(swap)) {
     ret = xas_get_order(&xas);
+    }
     } while (xas_retry(&xas, entry));
     rcu_read_unlock();
     return ret;
@@ -525,42 +756,41 @@ pub const SHMEM_HUGE_ADVISE: c_int = 3;
 
 // ifdef here to avoid bloating shmem.o when not necessary
 
-    let mut __read_mostly: static int shmem_huge = SHMEM_HUGE_DEFAULT;
+pub static mut : int shmem_huge = 0;
 
-    let mut __read_mostly: static int tmpfs_huge = TMPFS_HUGE_DEFAULT;
+pub static mut : int tmpfs_huge = 0;
 
-    static unsigned int shmem_get_orders_within_size(struct inode *inode,
-    unsigned long within_size_orders, pgoff_t index,
-    loff_t write_end)
-    {
-    pgoff_t aligned_index;
-    unsigned long order;
-    loff_t i_size;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_get_orders_within_size(inode: *mut inode, within_size_orders: c_ulong, index: pgoff_t, write_end: loff_t) -> c_uint {
+    let mut aligned_index;
+    let mut order = 0;
+    let mut i_size = 0;
     order = highest_order(within_size_orders);
     while (within_size_orders) {
     aligned_index = round_up(index + 1, 1 << order);
     i_size = max(write_end, i_size_read(inode));
     i_size = round_up(i_size, PAGE_SIZE);
-    if (i_size >> PAGE_SHIFT >= aligned_index)
+    if (i_size >> PAGE_SHIFT >= aligned_index) {
     return within_size_orders;
+    }
     order = next_order(&within_size_orders, order);
     }
     return 0;
     }
-    static unsigned int shmem_huge_global_enabled(struct inode *inode, pgoff_t index,
-    loff_t write_end, bool shmem_huge_force,
-    struct vm_area_struct *vma,
-    vm_flags_t vm_flags)
-    {
-    unsigned int maybe_pmd_order = HPAGE_PMD_ORDER > MAX_PAGECACHE_ORDER ?
+#[no_mangle]
+pub unsafe extern "C" fn shmem_huge_global_enabled(inode: *mut inode, index: pgoff_t, write_end: loff_t, shmem_huge_force: bool, vma: *mut vm_area_struct, vm_flags: vm_flags_t) -> c_uint {
+    let mut maybe_pmd_order = HPAGE_PMD_ORDER > MAX_PAGECACHE_ORDER ?
     0 : BIT(HPAGE_PMD_ORDER);
-    unsigned long within_size_orders;
-    if (!S_ISREG(inode.i_mode))
+    let mut within_size_orders = 0;
+    if (!S_ISREG(inode.i_mode)) {
     return 0;
-    if (shmem_huge == SHMEM_HUGE_DENY)
+    }
+    if (shmem_huge == SHMEM_HUGE_DENY) {
     return 0;
-    if (shmem_huge_force || shmem_huge == SHMEM_HUGE_FORCE)
+    }
+    if (shmem_huge_force || shmem_huge == SHMEM_HUGE_FORCE) {
     return maybe_pmd_order;
+    }
 //
 // The huge order allocation for anon shmem is controlled through
 // the mTHP interface, so we still use PMD-sized huge order to
@@ -576,130 +806,145 @@ pub const SHMEM_HUGE_ADVISE: c_int = 3;
     case SHMEM_HUGE_WITHIN_SIZE:
     within_size_orders = shmem_get_orders_within_size(inode,
     THP_ORDERS_ALL_FILE_DEFAULT, index, write_end);
-    if (within_size_orders > 0)
+    if (within_size_orders > 0) {
     return within_size_orders;
+    }
     fallthrough;
     case SHMEM_HUGE_ADVISE:
-    if (vm_flags & VM_HUGEPAGE)
+    if (vm_flags & VM_HUGEPAGE) {
     return THP_ORDERS_ALL_FILE_DEFAULT;
+    }
     fallthrough;
-    default:
+// label;
     return 0;
     }
     }
 #[no_mangle]
 unsafe extern "C" fn shmem_parse_huge(str: *const c_char) -> c_int {
-    static int shmem_parse_huge(const char *str)
-    {
-    int huge;
-    if (!str)
+    let mut huge = 0;
+    if (!str) {
     return -EINVAL;
-    if (!strcmp(str, "never"))
+    }
+    if (!strcmp(str, "never")) {
     huge = SHMEM_HUGE_NEVER;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !strcmp(str, _arg: "always")) -> else {
-    else if (!strcmp(str, "always"))
+    }
+
+    else if (!strcmp(str, "always")) {
     huge = SHMEM_HUGE_ALWAYS;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !strcmp(str, _arg: "within_size")) -> else {
-    else if (!strcmp(str, "within_size"))
+    }
+
+    else if (!strcmp(str, "within_size")) {
     huge = SHMEM_HUGE_WITHIN_SIZE;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !strcmp(str, _arg: "advise")) -> else {
-    else if (!strcmp(str, "advise"))
+    }
+
+    else if (!strcmp(str, "advise")) {
     huge = SHMEM_HUGE_ADVISE;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !strcmp(str, _arg: "deny")) -> else {
-    else if (!strcmp(str, "deny"))
+    }
+
+    else if (!strcmp(str, "deny")) {
     huge = SHMEM_HUGE_DENY;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !strcmp(str, _arg: "force")) -> else {
-    else if (!strcmp(str, "force"))
+    }
+
+    else if (!strcmp(str, "force")) {
     huge = SHMEM_HUGE_FORCE;
-    else
+    }
+    else {
     return -EINVAL;
+    }
     if (!has_transparent_hugepage() &&
-    huge != SHMEM_HUGE_NEVER && huge != SHMEM_HUGE_DENY)
+    huge != SHMEM_HUGE_NEVER && huge != SHMEM_HUGE_DENY) {
     return -EINVAL;
+    }
 // Do not override huge allocation policy with non-PMD sized mTHP
     if (huge == SHMEM_HUGE_FORCE &&
-    huge_shmem_orders_inherit != BIT(HPAGE_PMD_ORDER))
+    huge_shmem_orders_inherit != BIT(HPAGE_PMD_ORDER)) {
     return -EINVAL;
+    }
     return huge;
     }
 
     static const char *shmem_format_huge(int huge)
     {
-    switch (huge) {
-    case SHMEM_HUGE_NEVER:
+    match (huge) {
+    SHMEM_HUGE_NEVER => {
     return "never";
-    case SHMEM_HUGE_ALWAYS:
+    }
+    SHMEM_HUGE_ALWAYS => {
     return "always";
-    case SHMEM_HUGE_WITHIN_SIZE:
+    }
+    SHMEM_HUGE_WITHIN_SIZE => {
     return "within_size";
-    case SHMEM_HUGE_ADVISE:
+    }
+    SHMEM_HUGE_ADVISE => {
     return "advise";
-    case SHMEM_HUGE_DENY:
+    }
+    SHMEM_HUGE_DENY => {
     return "deny";
-    case SHMEM_HUGE_FORCE:
+    }
+    SHMEM_HUGE_FORCE => {
     return "force";
-    default:
+    }
+    _ => {
     VM_BUG_ON(1);
     return "bad_val";
     }
     }
+    }
 
-    static unsigned long shmem_unused_huge_shrink(struct shmem_sb_info *sbinfo,
-    struct shrink_control *sc, unsigned long nr_to_free)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn shmem_unused_huge_shrink(sbinfo: *mut shmem_sb_info, sc: *mut shrink_control, nr_to_free: c_ulong) -> c_ulong {
     LIST_HEAD(list), *pos, *next;
-    struct inode *inode;
-    struct shmem_inode_info *info;
-    struct folio *folio;
-    let mut batch: c_ulong = sc ? sc.nr_to_scan : 128;
-    let mut split: c_ulong = 0, freed = 0;
-    if (list_empty(&sbinfo.shrinklist))
+pub static mut inode: *mut c_void = core::ptr::null_mut();
+pub static mut info: *mut c_void = core::ptr::null_mut();
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut batch: c_ulong = 0;
+pub static mut split: c_ulong = 0;
+    if (list_empty(&sbinfo.shrinklist)) {
     return SHRINK_STOP;
+    }
     spin_lock(&sbinfo.shrinklist_lock);
     list_for_each_safe(pos, next, &sbinfo.shrinklist) {
-    info = list_entry(pos, struct shmem_inode_info, shrinklist);
+    info = list_entry(pos, shmem_inode_info, shrinklist);
 // pin the inode
     inode = igrab(&info.vfs_inode);
 // inode is about to be evicted
     if (!inode) {
     list_del_init(&info.shrinklist);
-    goto next;
+// goto;
     }
     list_move(&info.shrinklist, &list);
-    next:
-    sbinfo.shrinklist_len--;
-    if (!--batch)
+// label;
+    sbinfo.shrinklist_len -= 1;
+    if (!--batch) {
     break;
+    }
     }
     spin_unlock(&sbinfo.shrinklist_lock);
     list_for_each_safe(pos, next, &list) {
     pgoff_t next, end;
-    loff_t i_size;
-    int ret;
-    info = list_entry(pos, struct shmem_inode_info, shrinklist);
+    let mut i_size = 0;
+    let mut ret = 0;
+    info = list_entry(pos, shmem_inode_info, shrinklist);
     inode = &info.vfs_inode;
-    if (nr_to_free && freed >= nr_to_free)
-    goto move_back;
+    if (nr_to_free && freed >= nr_to_free) {
+// goto;
+    }
     i_size = i_size_read(inode);
     folio = filemap_get_entry(inode.i_mapping, i_size / PAGE_SIZE);
-    if (!folio || xa_is_value(folio))
-    goto drop;
+    if (!folio || xa_is_value(folio)) {
+// goto;
+    }
 // No large folio at the end of the file: nothing to split
     if (!folio_test_large(folio)) {
     folio_put(folio);
-    goto drop;
+// goto;
     }
 // Check if there is anything to gain from splitting
     next = folio_next_index(folio);
     end = shmem_fallocend(inode, DIV_ROUND_UP(i_size, PAGE_SIZE));
     if (end <= folio.index || end >= next) {
     folio_put(folio);
-    goto drop;
+// goto;
     }
 //
 // Move the inode on the list back to shrinklist if we failed
@@ -710,20 +955,21 @@ pub unsafe extern "C" fn if(_arg: !strcmp(str, _arg: "force")) -> else {
 //
     if (!folio_trylock(folio)) {
     folio_put(folio);
-    goto move_back;
+// goto;
     }
     ret = split_folio(folio);
     folio_unlock(folio);
     folio_put(folio);
 // If split failed move the inode on the list back to shrinklist
-    if (ret)
-    goto move_back;
+    if (ret) {
+// goto;
+    }
     freed += next - end;
-    split++;
-    drop:
+    split += 1;
+// label;
     list_del_init(&info.shrinklist);
-    goto put;
-    move_back:
+// goto;
+// label;
 //
 // Make sure the inode is either on the global list or deleted
 // from any local list before iput() since it could be deleted
@@ -732,69 +978,66 @@ pub unsafe extern "C" fn if(_arg: !strcmp(str, _arg: "force")) -> else {
 //
     spin_lock(&sbinfo.shrinklist_lock);
     list_move(&info.shrinklist, &sbinfo.shrinklist);
-    sbinfo.shrinklist_len++;
+    sbinfo.shrinklist_len += 1;
     spin_unlock(&sbinfo.shrinklist_lock);
-    put:
+// label;
     iput(inode);
     }
     return split;
     }
-    static long shmem_unused_huge_scan(struct super_block *sb,
-    struct shrink_control *sc)
-    {
-    struct shmem_sb_info *sbinfo = SHMEM_SB(sb);
-    if (!READ_ONCE(sbinfo.shrinklist_len))
+#[no_mangle]
+pub unsafe extern "C" fn shmem_unused_huge_scan(sb: *mut super_block, sc: *mut shrink_control) -> c_long {
+    let mut sbinfo = SHMEM_SB(sb);
+    if (!READ_ONCE(sbinfo.shrinklist_len)) {
     return SHRINK_STOP;
+    }
     return shmem_unused_huge_shrink(sbinfo, sc, 0);
     }
-    static long shmem_unused_huge_count(struct super_block *sb,
-    struct shrink_control *sc)
-    {
-    struct shmem_sb_info *sbinfo = SHMEM_SB(sb);
+#[no_mangle]
+pub unsafe extern "C" fn shmem_unused_huge_count(sb: *mut super_block, sc: *mut shrink_control) -> c_long {
+    let mut sbinfo = SHMEM_SB(sb);
 //
 // The per-superblock shrinklist is filesystem-global and does not
 // honour sc->memcg, so it is only meaningful on the global (kswapd or
 // root direct reclaim) shrink path. Skip the per-memcg iterations of
 // shrink_slab_memcg() to avoid queueing duplicate global work.
 //
-    if (!mem_cgroup_shrink_is_root(sc))
+    if (!mem_cgroup_shrink_is_root(sc)) {
     return 0;
+    }
     return READ_ONCE(sbinfo.shrinklist_len);
     }
 
-    static unsigned long shmem_unused_huge_shrink(struct shmem_sb_info *sbinfo,
-    struct shrink_control *sc, unsigned long nr_to_free)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: shmem_unused_huge_shrink
+pub unsafe extern "C" fn shmem_unused_huge_shrink_dup(sbinfo: *mut shmem_sb_info, sc: *mut shrink_control, nr_to_free: c_ulong) -> c_ulong {
     return 0;
     }
-    static unsigned int shmem_huge_global_enabled(struct inode *inode, pgoff_t index,
-    loff_t write_end, bool shmem_huge_force,
-    struct vm_area_struct *vma,
-    vm_flags_t vm_flags)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: shmem_huge_global_enabled
+pub unsafe extern "C" fn shmem_huge_global_enabled_dup(inode: *mut inode, index: pgoff_t, write_end: loff_t, shmem_huge_force: bool, vma: *mut vm_area_struct, vm_flags: vm_flags_t) -> c_uint {
     return 0;
     }
 
 #[no_mangle]
 unsafe extern "C" fn shmem_update_stats(folio: *mut folio, nr_pages: c_int) {
-    static void shmem_update_stats(struct folio *folio, int nr_pages)
-    {
-    if (folio_test_pmd_mappable(folio))
+    if (folio_test_pmd_mappable(folio)) {
     lruvec_stat_mod_folio(folio, NR_SHMEM_THPS, nr_pages);
+    }
     lruvec_stat_mod_folio(folio, NR_FILE_PAGES, nr_pages);
     lruvec_stat_mod_folio(folio, NR_SHMEM, nr_pages);
     }
 //
 // Somewhat like filemap_add_folio, but error if expected item has gone.
 //
-    int shmem_add_to_page_cache(struct folio *folio,
-    struct address_space *mapping,
-    pgoff_t index, void *expected, gfp_t gfp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn shmem_add_to_page_cache(folio: *mut folio, mapping: *mut address_space, index: pgoff_t, expected: *mut c_void, gfp: gfp_t) -> c_int {
     XA_STATE_ORDER(xas, &mapping.i_pages, index, folio_order(folio));
-    let mut nr: c_ulong = folio_nr_pages(folio);
+pub static mut nr: c_ulong = 0;
     swp_entry_t iter, swap;
-    void *entry;
+pub static mut entry: *mut c_void = core::ptr::null_mut();
     VM_BUG_ON_FOLIO(index != round_down(index, nr), folio);
     VM_BUG_ON_FOLIO(!folio_test_locked(folio), folio);
     VM_BUG_ON_FOLIO(!folio_test_swapbacked(folio), folio);
@@ -816,20 +1059,21 @@ unsafe extern "C" fn shmem_update_stats(folio: *mut folio, nr_pages: c_int) {
 //
     if (!expected || entry != swp_to_radix_entry(iter)) {
     xas_set_err(&xas, -EEXIST);
-    goto unlock;
+// goto;
     }
     iter.val += 1 << xas_get_order(&xas);
     }
     if (expected && iter.val - nr != swap.val) {
     xas_set_err(&xas, -EEXIST);
-    goto unlock;
+// goto;
     }
     xas_store(&xas, folio);
-    if (xas_error(&xas))
-    goto unlock;
+    if (xas_error(&xas)) {
+// goto;
+    }
     shmem_update_stats(folio, nr);
     mapping.nrpages += nr;
-    unlock:
+// label;
     xas_unlock_irq(&xas);
     } while (xas_nomem(&xas, gfp));
     if (xas_error(&xas)) {
@@ -844,11 +1088,9 @@ unsafe extern "C" fn shmem_update_stats(folio: *mut folio, nr_pages: c_int) {
 //
 #[no_mangle]
 unsafe extern "C" fn shmem_delete_from_page_cache(folio: *mut folio, radswap: *mut c_void) {
-    static void shmem_delete_from_page_cache(struct folio *folio, void *radswap)
-    {
-    struct address_space *mapping = folio.mapping;
-    let mut nr: c_long = folio_nr_pages(folio);
-    int error;
+    let mut mapping = folio.mapping;
+pub static mut nr: c_long = 0;
+    let mut error = 0;
     xa_lock_irq(&mapping.i_pages);
     error = shmem_replace_entry(mapping, folio.index, folio, radswap);
     folio.mapping = core::ptr::null_mut();
@@ -856,33 +1098,35 @@ unsafe extern "C" fn shmem_delete_from_page_cache(folio: *mut folio, radswap: *m
     shmem_update_stats(folio, -nr);
     xa_unlock_irq(&mapping.i_pages);
     folio_put_refs(folio, nr);
-    BUG_ON(error);
+    BUG_ON!(error);
     }
 //
 // Remove swap entry from page cache, free the swap and its page cache. Returns
 // the number of pages being freed. 0 means entry not found in XArray (0 pages
 // being freed).
 //
-    static long shmem_free_swap(struct address_space *mapping,
-    pgoff_t index, pgoff_t end, void *radswap)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn shmem_free_swap(mapping: *mut address_space, index: pgoff_t, end: pgoff_t, radswap: *mut c_void) -> c_long {
     XA_STATE(xas, &mapping.i_pages, index);
-    let mut nr_pages: c_uint = 0;
-    pgoff_t base;
-    void *entry;
+pub static mut nr_pages: c_uint = 0;
+    let mut base;
+pub static mut entry: *mut c_void = core::ptr::null_mut();
     xas_lock_irq(&xas);
     entry = xas_load(&xas);
     if (entry == radswap) {
     nr_pages = 1 << xas_get_order(&xas);
     base = round_down(xas.xa_index, nr_pages);
-    if (base < index || base + nr_pages - 1 > end)
+    if (base < index || base + nr_pages - 1 > end) {
     nr_pages = 0;
-    else
+    }
+    else {
     xas_store(&xas, core::ptr::null_mut());
     }
+    }
     xas_unlock_irq(&xas);
-    if (nr_pages)
+    if (nr_pages) {
     swap_put_entries_direct(radix_to_swp_entry(radswap), nr_pages);
+    }
     return nr_pages;
     }
 //
@@ -892,21 +1136,23 @@ unsafe extern "C" fn shmem_delete_from_page_cache(folio: *mut folio, radswap: *m
 // This is safe to call without i_rwsem or the i_pages lock thanks to RCU,
 // as long as the inode doesn't go away and racy results are not a problem.
 //
-    unsigned long shmem_partial_swap_usage(struct address_space *mapping,
-    pgoff_t start, pgoff_t end)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn shmem_partial_swap_usage(mapping: *mut address_space, start: pgoff_t, end: pgoff_t) -> c_ulong {
     XA_STATE(xas, &mapping.i_pages, start);
-    struct folio *folio;
-    let mut swapped: c_ulong = 0;
-    let mut max: c_ulong = end - 1;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut swapped: c_ulong = 0;
+pub static mut max: c_ulong = 0;
     rcu_read_lock();
     xas_for_each(&xas, folio, max) {
-    if (xas_retry(&xas, folio))
+    if (xas_retry(&xas, folio)) {
     continue;
-    if (xa_is_value(folio))
+    }
+    if (xa_is_value(folio)) {
     swapped += 1 << xas_get_order(&xas);
-    if (xas.xa_index == max)
+    }
+    if (xas.xa_index == max) {
     break;
+    }
     if (need_resched()) {
     xas_pause(&xas);
     cond_resched_rcu();
@@ -924,14 +1170,12 @@ unsafe extern "C" fn shmem_delete_from_page_cache(folio: *mut folio, radswap: *m
 //
 #[no_mangle]
 pub unsafe extern "C" fn shmem_swap_usage(vma: *mut vm_area_struct) -> c_ulong {
-    unsigned long shmem_swap_usage(struct vm_area_struct *vma)
-    {
-    struct inode *inode = file_inode(vma.vm_file);
-    struct shmem_inode_info *info = SHMEM_I(inode);
-    struct address_space *mapping = inode.i_mapping;
-    let mut pgoff: pgoff_t = vma_start_pgoff(vma);
-    let mut pgoff_end: pgoff_t = vma_end_pgoff(vma);
-    unsigned long swapped;
+    let mut inode = file_inode(vma.vm_file);
+    let mut info = SHMEM_I(inode);
+    let mut mapping = inode.i_mapping;
+pub static mut pgoff: pgoff_t = 0;
+pub static mut pgoff_end: pgoff_t = 0;
+    let mut swapped = 0;
 // Be careful as we don't hold info->lock
     swapped = READ_ONCE(info.swapped);
 //
@@ -939,10 +1183,12 @@ pub unsafe extern "C" fn shmem_swap_usage(vma: *mut vm_area_struct) -> c_ulong {
 // the vma maps it whole. Then we can simply use the stats that we
 // already track.
 //
-    if (!swapped)
+    if (!swapped) {
     return 0;
-    if (!pgoff && vma.vm_end - vma.vm_start >= inode.i_size)
+    }
+    if (!pgoff && vma.vm_end - vma.vm_start >= inode.i_size) {
     return swapped << PAGE_SHIFT;
+    }
 // Here comes the more involved part
     return shmem_partial_swap_usage(mapping, pgoff, pgoff_end);
     }
@@ -951,10 +1197,8 @@ pub unsafe extern "C" fn shmem_swap_usage(vma: *mut vm_area_struct) -> c_ulong {
 //
 #[no_mangle]
 pub unsafe extern "C" fn shmem_unlock_mapping(mapping: *mut address_space) {
-    void shmem_unlock_mapping(struct address_space *mapping)
-    {
-    struct folio_batch fbatch;
-    let mut index: pgoff_t = 0;
+pub static mut fbatch: usize = 0;
+pub static mut index: pgoff_t = 0;
     folio_batch_init(&fbatch);
 //
 // Minor point, but we might as well stop if someone else SHM_LOCKs it.
@@ -966,20 +1210,22 @@ pub unsafe extern "C" fn shmem_unlock_mapping(mapping: *mut address_space) {
     cond_resched();
     }
     }
-    static struct folio *shmem_get_partial_folio(struct inode *inode, pgoff_t index)
-    {
-    struct folio *folio;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_get_partial_folio(inode: *mut inode, index: pgoff_t) -> *mut c_void {
+pub static mut folio: *mut c_void = core::ptr::null_mut();
 //
 // At first avoid shmem_get_folio(,,,SGP_READ): that fails
 // beyond i_size, and reports fallocated folios as holes.
 //
     folio = filemap_get_entry(inode.i_mapping, index);
-    if (!folio)
+    if (!folio) {
     return folio;
+    }
     if (!xa_is_value(folio)) {
     folio_lock(folio);
-    if (folio.mapping == inode.i_mapping)
+    if (folio.mapping == inode.i_mapping) {
     return folio;
+    }
 // The folio has been swapped out
     folio_unlock(folio);
     folio_put(folio);
@@ -996,39 +1242,42 @@ pub unsafe extern "C" fn shmem_unlock_mapping(mapping: *mut address_space) {
 // Remove range of pages and swap entries from page cache, and free them.
 // If !unfalloc, truncate or punch hole; if unfalloc, undo failed fallocate.
 //
-    static void shmem_undo_range(struct inode *inode, loff_t lstart, uoff_t lend,
-    bool unfalloc)
-    {
-    struct address_space *mapping = inode.i_mapping;
-    struct shmem_inode_info *info = SHMEM_I(inode);
-    let mut start: pgoff_t = (lstart + PAGE_SIZE - 1) >> PAGE_SHIFT;
-    let mut end: pgoff_t = (lend + 1) >> PAGE_SHIFT;
-    struct folio_batch fbatch;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_undo_range(inode: *mut inode, lstart: loff_t, lend: uoff_t, unfalloc: bool) {
+    let mut mapping = inode.i_mapping;
+    let mut info = SHMEM_I(inode);
+pub static mut start: pgoff_t = 0;
+pub static mut end: pgoff_t = 0;
+pub static mut fbatch: usize = 0;
     pgoff_t indices[FOLIO_BATCH_SIZE];
-    struct folio *folio;
-    bool same_folio;
-    let mut nr_swaps_freed: c_long = 0;
-    pgoff_t index;
-    int i;
-    if (lend == -1)
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut same_folio = 0;
+pub static mut nr_swaps_freed: c_long = 0;
+    let mut index;
+    let mut i = 0;
+    if (lend == -1) {
     end = -1;	/* unsigned, so actually very big */
-    if (info.fallocend > start && info.fallocend <= end && !unfalloc)
+    }
+    if (info.fallocend > start && info.fallocend <= end && !unfalloc) {
     info.fallocend = start;
+    }
     folio_batch_init(&fbatch);
     index = start;
     while (index < end && find_lock_entries(mapping, &index, end - 1,
     &fbatch, indices)) {
-    for (i = 0; i < folio_batch_count(&fbatch); i++) {
+    while (i < folio_batch_count(&fbatch)) {
     folio = fbatch.folios[i];
     if (xa_is_value(folio)) {
-    if (unfalloc)
+    if (unfalloc) {
     continue;
+    }
     nr_swaps_freed += shmem_free_swap(mapping, indices[i],
     end - 1, folio);
     continue;
     }
-    if (!unfalloc || !folio_test_uptodate(folio))
+    if (!unfalloc || !folio_test_uptodate(folio)) {
     truncate_inode_folio(mapping, folio);
+    }
     folio_unlock(folio);
     }
     folio_batch_remove_exceptionals(&fbatch);
@@ -1041,8 +1290,9 @@ pub unsafe extern "C" fn shmem_unlock_mapping(mapping: *mut address_space) {
 // folio when !uptodate indicates that it was added by this fallocate,
 // even when [lstart, lend] covers only a part of the folio.
 //
-    if (unfalloc)
-    goto whole_folios;
+    if (unfalloc) {
+// goto;
+    }
     same_folio = (lstart >> PAGE_SHIFT) == (lend >> PAGE_SHIFT);
     folio = shmem_get_partial_folio(inode, lstart >> PAGE_SHIFT);
     if (folio) {
@@ -1050,46 +1300,51 @@ pub unsafe extern "C" fn shmem_unlock_mapping(mapping: *mut address_space) {
     folio_mark_dirty(folio);
     if (!truncate_inode_partial_folio(folio, lstart, lend)) {
     start = folio_next_index(folio);
-    if (same_folio)
+    if (same_folio) {
     end = folio.index;
+    }
     }
     folio_unlock(folio);
     folio_put(folio);
     folio = core::ptr::null_mut();
     }
-    if (!same_folio)
+    if (!same_folio) {
     folio = shmem_get_partial_folio(inode, lend >> PAGE_SHIFT);
+    }
     if (folio) {
     folio_mark_dirty(folio);
-    if (!truncate_inode_partial_folio(folio, lstart, lend))
+    if (!truncate_inode_partial_folio(folio, lstart, lend)) {
     end = folio.index;
+    }
     folio_unlock(folio);
     folio_put(folio);
     }
-    whole_folios:
+// label;
     index = start;
     while (index < end) {
     cond_resched();
     if (!find_get_entries(mapping, &index, end - 1, &fbatch,
     indices)) {
 // If all gone or hole-punch or unfalloc, we're done
-    if (index == start || end != -1)
+    if (index == start || end != -1) {
     break;
+    }
 // But if truncating, restart to make sure all gone
     index = start;
     continue;
     }
-    for (i = 0; i < folio_batch_count(&fbatch); i++) {
+    while (i < folio_batch_count(&fbatch)) {
     folio = fbatch.folios[i];
     if (xa_is_value(folio)) {
-    int order;
-    long swaps_freed;
-    if (unfalloc)
+    let mut order = 0;
+    let mut swaps_freed = 0;
+    if (unfalloc) {
     continue;
+    }
     swaps_freed = shmem_free_swap(mapping, indices[i],
     end - 1, folio);
     if (!swaps_freed) {
-    let mut base: pgoff_t = indices[i];
+pub static mut base: pgoff_t = 0;
     order = shmem_confirm_swap(mapping, indices[i],
     radix_to_swp_entry(folio));
 //
@@ -1099,8 +1354,9 @@ pub unsafe extern "C" fn shmem_unlock_mapping(mapping: *mut address_space) {
 //
     if (order > 0) {
     base = round_down(base, 1 << order);
-    if (base < start || base + (1 << order) > end)
+    if (base < start || base + (1 << order) > end) {
     continue;
+    }
     }
 // Swap was replaced by page or extended, retry
     index = base;
@@ -1146,34 +1402,35 @@ pub unsafe extern "C" fn shmem_unlock_mapping(mapping: *mut address_space) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn shmem_truncate_range(inode: *mut inode, lstart: loff_t, lend: uoff_t) {
-    void shmem_truncate_range(struct inode *inode, loff_t lstart, uoff_t lend)
-    {
     shmem_undo_range(inode, lstart, lend, false);
     inode_set_mtime_to_ts(inode, inode_set_ctime_current(inode));
     inode_inc_iversion(inode);
     }
     EXPORT_SYMBOL_GPL(shmem_truncate_range);
-    static int shmem_getattr(struct mnt_idmap *idmap,
-    const struct path *path, struct kstat *stat,
-    u32 request_mask, unsigned int query_flags)
-    {
-    struct inode *inode = path.dentry.d_inode;
-    struct shmem_inode_info *info = SHMEM_I(inode);
+#[no_mangle]
+pub unsafe extern "C" fn shmem_getattr(idmap: *mut mnt_idmap, path: *mut path, stat: *mut kstat, request_mask: u32, query_flags: c_uint) -> c_int {
+    let mut inode = path.dentry.d_inode;
+    let mut info = SHMEM_I(inode);
 // Fast-path hint; recalc under info->lock corrects any stale read.
-    if (data_race(info.alloced - info.swapped != inode.i_mapping.nrpages))
+    if (data_race(info.alloced - info.swapped != inode.i_mapping.nrpages)) {
     shmem_recalc_inode(inode, 0, 0);
-    if (info.fsflags & FS_APPEND_FL)
+    }
+    if (info.fsflags & FS_APPEND_FL) {
     stat.attributes |= STATX_ATTR_APPEND;
-    if (info.fsflags & FS_IMMUTABLE_FL)
+    }
+    if (info.fsflags & FS_IMMUTABLE_FL) {
     stat.attributes |= STATX_ATTR_IMMUTABLE;
-    if (info.fsflags & FS_NODUMP_FL)
+    }
+    if (info.fsflags & FS_NODUMP_FL) {
     stat.attributes |= STATX_ATTR_NODUMP;
+    }
     stat.attributes_mask |= (STATX_ATTR_APPEND |
     STATX_ATTR_IMMUTABLE |
     STATX_ATTR_NODUMP);
     generic_fillattr(idmap, request_mask, inode, stat);
-    if (shmem_huge_global_enabled(inode, 0, 0, false, core::ptr::null_mut(), 0))
+    if (shmem_huge_global_enabled(inode, 0, 0, false, core::ptr::null_mut(), 0)) {
     stat.blksize = HPAGE_PMD_SIZE;
+    }
     if (request_mask & STATX_BTIME) {
     stat.result_mask |= STATX_BTIME;
     stat.btime.tv_sec = info.i_crtime.tv_sec;
@@ -1181,85 +1438,93 @@ pub unsafe extern "C" fn shmem_truncate_range(inode: *mut inode, lstart: loff_t,
     }
     return 0;
     }
-    static int shmem_setattr(struct mnt_idmap *idmap,
-    struct dentry *dentry, struct iattr *attr)
-    {
-    struct inode *inode = d_inode(dentry);
-    struct shmem_inode_info *info = SHMEM_I(inode);
-    int error;
-    let mut update_mtime: bool = false;
-    let mut update_ctime: bool = true;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_setattr(idmap: *mut mnt_idmap, dentry: *mut dentry, attr: *mut iattr) -> c_int {
+    let mut inode = d_inode(dentry);
+    let mut info = SHMEM_I(inode);
+    let mut error = 0;
+pub static mut update_mtime: bool = false;
+pub static mut update_ctime: bool = true;
     error = setattr_prepare(idmap, dentry, attr);
-    if (error)
+    if (error) {
     return error;
+    }
     if ((info.seals & F_SEAL_EXEC) && (attr.ia_valid & ATTR_MODE)) {
     if ((inode.i_mode ^ attr.ia_mode) & 0111) {
     return -EPERM;
     }
     }
     if (S_ISREG(inode.i_mode) && (attr.ia_valid & ATTR_SIZE)) {
-    let mut oldsize: loff_t = inode.i_size;
-    let mut newsize: loff_t = attr.ia_size;
+pub static mut oldsize: loff_t = 0;
+pub static mut newsize: loff_t = 0;
 // protected by i_rwsem
     if ((newsize < oldsize && (info.seals & F_SEAL_SHRINK)) ||
-    (newsize > oldsize && (info.seals & F_SEAL_GROW)))
+    (newsize > oldsize && (info.seals & F_SEAL_GROW))) {
     return -EPERM;
+    }
     if (newsize != oldsize) {
-    if (info.flags & SHMEM_F_MAPPING_FROZEN)
+    if (info.flags & SHMEM_F_MAPPING_FROZEN) {
     return -EPERM;
+    }
     error = shmem_reacct_size(SHMEM_I(inode).flags,
     oldsize, newsize);
-    if (error)
+    if (error) {
     return error;
+    }
     i_size_write(inode, newsize);
     update_mtime = true;
     } else {
     update_ctime = false;
     }
     if (newsize <= oldsize) {
-    let mut holebegin: loff_t = round_up(newsize, PAGE_SIZE);
-    if (oldsize > holebegin)
+pub static mut holebegin: loff_t = 0;
+    if (oldsize > holebegin) {
     unmap_mapping_range(inode.i_mapping,
     holebegin, 0, 1);
-    if (info.alloced)
+    }
+    if (info.alloced) {
     shmem_truncate_range(inode,
     newsize, (loff_t)-1);
+    }
 // unmap again to remove racily COWed private pages
-    if (oldsize > holebegin)
+    if (oldsize > holebegin) {
     unmap_mapping_range(inode.i_mapping,
     holebegin, 0, 1);
+    }
     }
     }
     if (is_quota_modification(idmap, inode, attr)) {
     error = dquot_initialize(inode);
-    if (error)
+    if (error) {
     return error;
+    }
     }
 // Transfer quota accounting
     if (i_uid_needs_update(idmap, attr, inode) ||
     i_gid_needs_update(idmap, attr, inode)) {
     error = dquot_transfer(idmap, inode, attr);
-    if (error)
+    if (error) {
     return error;
     }
+    }
     setattr_copy(idmap, inode, attr);
-    if (attr.ia_valid & ATTR_MODE)
+    if (attr.ia_valid & ATTR_MODE) {
     error = posix_acl_chmod(idmap, dentry, inode.i_mode);
+    }
     if (!error && update_ctime) {
     inode_set_ctime_current(inode);
-    if (update_mtime)
+    if (update_mtime) {
     inode_set_mtime_to_ts(inode, inode_get_ctime(inode));
+    }
     inode_inc_iversion(inode);
     }
     return error;
     }
 #[no_mangle]
 unsafe extern "C" fn shmem_evict_inode(inode: *mut inode) {
-    static void shmem_evict_inode(struct inode *inode)
-    {
-    struct shmem_inode_info *info = SHMEM_I(inode);
-    struct shmem_sb_info *sbinfo = SHMEM_SB(inode.i_sb);
-    let mut freed: usize = 0;
+    let mut info = SHMEM_I(inode);
+    let mut sbinfo = SHMEM_SB(inode.i_sb);
+pub static mut freed: usize = 0;
     if (shmem_mapping(inode.i_mapping)) {
     shmem_unacct_size(info.flags, inode.i_size);
     inode.i_size = 0;
@@ -1269,7 +1534,7 @@ unsafe extern "C" fn shmem_evict_inode(inode: *mut inode) {
     spin_lock(&sbinfo.shrinklist_lock);
     if (!list_empty(&info.shrinklist)) {
     list_del_init(&info.shrinklist);
-    sbinfo.shrinklist_len--;
+    sbinfo.shrinklist_len -= 1;
     }
     spin_unlock(&sbinfo.shrinklist_lock);
     }
@@ -1279,46 +1544,50 @@ unsafe extern "C" fn shmem_evict_inode(inode: *mut inode) {
     !atomic_read(&info.stop_eviction));
     spin_lock(&shmem_swaplist_lock);
 // ...but beware of the race if we peeked too early
-    if (!atomic_read(&info.stop_eviction))
+    if (!atomic_read(&info.stop_eviction)) {
     list_del_init(&info.swaplist);
+    }
     spin_unlock(&shmem_swaplist_lock);
     }
     }
     simple_xattrs_free(&sbinfo.xa_cache, &info.xattrs, sbinfo.max_inodes ? &freed : core::ptr::null_mut());
     shmem_free_inode(inode.i_sb, freed);
-    if (inode.i_blocks)
-    pr_warn("%s: ino=%llu i_blocks=%llu alloced=%lu swapped=%lu nrpages=%lu\n",
+    if (inode.i_blocks) {
+    pr_warn!("%s: ino=%llu i_blocks=%llu alloced=%lu swapped=%lu nrpages=%lu\n",
     __func__, inode.i_ino, inode.i_blocks,
     info.alloced, info.swapped, inode.i_mapping.nrpages);
+    }
     clear_inode(inode);
 
     dquot_free_inode(inode);
     dquot_drop(inode);
 
     }
-    static unsigned int shmem_find_swap_entries(struct address_space *mapping,
-    pgoff_t start, struct folio_batch *fbatch,
-    pgoff_t *indices, unsigned int type)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn shmem_find_swap_entries(mapping: *mut address_space, start: pgoff_t, fbatch: *mut folio_batch, indices: *mut pgoff_t, type: c_uint) -> c_uint {
     XA_STATE(xas, &mapping.i_pages, start);
-    struct folio *folio;
-    swp_entry_t entry;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut entry;
     rcu_read_lock();
     xas_for_each(&xas, folio, ULONG_MAX) {
-    if (xas_retry(&xas, folio))
+    if (xas_retry(&xas, folio)) {
     continue;
-    if (!xa_is_value(folio))
+    }
+    if (!xa_is_value(folio)) {
     continue;
+    }
     entry = radix_to_swp_entry(folio);
 //
 // swapin error entries can be found in the mapping. But they're
 // deliberately ignored here as we've done everything we can do.
 //
-    if (swp_type(entry) != type)
+    if (swp_type(entry) != type) {
     continue;
+    }
     indices[folio_batch_count(fbatch)] = xas.xa_index;
-    if (!folio_batch_add(fbatch, folio))
+    if (!folio_batch_add(fbatch, folio)) {
     break;
+    }
     if (need_resched()) {
     xas_pause(&xas);
     cond_resched_rcu();
@@ -1331,24 +1600,24 @@ unsafe extern "C" fn shmem_evict_inode(inode: *mut inode) {
 // Move the swapped pages for an inode to page cache. Returns the count
 // of pages swapped in, or the error in case of failure.
 //
-    static int shmem_unuse_swap_entries(struct inode *inode,
-    struct folio_batch *fbatch, pgoff_t *indices)
-    {
-    let mut i: c_int = 0;
-    let mut ret: c_int = 0;
-    let mut error: c_int = 0;
-    struct address_space *mapping = inode.i_mapping;
-    for (i = 0; i < folio_batch_count(fbatch); i++) {
-    struct folio *folio = fbatch.folios[i];
+#[no_mangle]
+pub unsafe extern "C" fn shmem_unuse_swap_entries(inode: *mut inode, fbatch: *mut folio_batch, indices: *mut pgoff_t) -> c_int {
+pub static mut i: c_int = 0;
+pub static mut ret: c_int = 0;
+pub static mut error: c_int = 0;
+    let mut mapping = inode.i_mapping;
+    while (i < folio_batch_count(fbatch)) {
+    let mut folio = fbatch.folios[i];
     error = shmem_swapin_folio(inode, indices[i], &folio, SGP_CACHE,
     mapping_gfp_mask(mapping), core::ptr::null_mut(), core::ptr::null_mut());
     if (error == 0) {
     folio_unlock(folio);
     folio_put(folio);
-    ret++;
+    ret += 1;
     }
-    if (error == -ENOMEM)
+    if (error == -ENOMEM) {
     break;
+    }
     error = 0;
     }
     return error ? error : ret;
@@ -1358,13 +1627,11 @@ unsafe extern "C" fn shmem_evict_inode(inode: *mut inode) {
 //
 #[no_mangle]
 unsafe extern "C" fn shmem_unuse_inode(inode: *mut inode, type: c_uint) -> c_int {
-    static int shmem_unuse_inode(struct inode *inode, unsigned int type)
-    {
-    struct address_space *mapping = inode.i_mapping;
-    let mut start: pgoff_t = 0;
-    struct folio_batch fbatch;
+    let mut mapping = inode.i_mapping;
+pub static mut start: pgoff_t = 0;
+pub static mut fbatch: usize = 0;
     pgoff_t indices[FOLIO_BATCH_SIZE];
-    let mut ret: c_int = 0;
+pub static mut ret: c_int = 0;
     do {
     folio_batch_init(&fbatch);
     if (!shmem_find_swap_entries(mapping, start, &fbatch,
@@ -1373,8 +1640,9 @@ unsafe extern "C" fn shmem_unuse_inode(inode: *mut inode, type: c_uint) -> c_int
     break;
     }
     ret = shmem_unuse_swap_entries(inode, &fbatch, indices);
-    if (ret < 0)
+    if (ret < 0) {
     break;
+    }
     start = indices[folio_batch_count(&fbatch) - 1];
     } while (true);
     return ret;
@@ -1386,14 +1654,14 @@ unsafe extern "C" fn shmem_unuse_inode(inode: *mut inode, type: c_uint) -> c_int
 //
 #[no_mangle]
 pub unsafe extern "C" fn shmem_unuse(type: c_uint) -> c_int {
-    int shmem_unuse(unsigned int type)
-    {
-    struct shmem_inode_info *info, *next;
-    let mut error: c_int = 0;
-    if (list_empty(&shmem_swaplist))
+    let mut info = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+pub static mut error: c_int = 0;
+    if (list_empty(&shmem_swaplist)) {
     return 0;
+    }
     spin_lock(&shmem_swaplist_lock);
-    start_over:
+// label;
     list_for_each_entry_safe(info, next, &shmem_swaplist, swaplist) {
     if (!info.swapped) {
     list_del_init(&info.swaplist);
@@ -1410,15 +1678,19 @@ pub unsafe extern "C" fn shmem_unuse(type: c_uint) -> c_int {
     error = shmem_unuse_inode(&info.vfs_inode, type);
     cond_resched();
     spin_lock(&shmem_swaplist_lock);
-    if (atomic_dec_and_test(&info.stop_eviction))
+    if (atomic_dec_and_test(&info.stop_eviction)) {
     wake_up_var(&info.stop_eviction);
-    if (error)
+    }
+    if (error) {
     break;
-    if (list_empty(&info.swaplist))
-    goto start_over;
+    }
+    if (list_empty(&info.swaplist)) {
+// goto;
+    }
     next = list_next_entry(info, swaplist);
-    if (!info.swapped)
+    if (!info.swapped) {
     list_del_init(&info.swaplist);
+    }
     }
     spin_unlock(&shmem_swaplist_lock);
     return error;
@@ -1431,20 +1703,21 @@ pub unsafe extern "C" fn shmem_unuse(type: c_uint) -> c_int {
 //
 // Move the folio from the page cache to the swap cache.
 //
-    int shmem_writeout(struct swap_io_ctx *ctx, struct folio *folio,
-    struct list_head *folio_list)
-    {
-    struct address_space *mapping = folio.mapping;
-    struct inode *inode = mapping.host;
-    struct shmem_inode_info *info = SHMEM_I(inode);
-    struct shmem_sb_info *sbinfo = SHMEM_SB(inode.i_sb);
-    pgoff_t index;
-    int nr_pages;
-    let mut split: bool = false;
-    if ((info.flags & SHMEM_F_LOCKED) || sbinfo.noswap)
-    goto redirty;
-    if (!total_swap_pages)
-    goto redirty;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_writeout(ctx: *mut swap_io_ctx, folio: *mut folio, folio_list: *mut list_head) -> c_int {
+    let mut mapping = folio.mapping;
+    let mut inode = mapping.host;
+    let mut info = SHMEM_I(inode);
+    let mut sbinfo = SHMEM_SB(inode.i_sb);
+    let mut index;
+    let mut nr_pages = 0;
+pub static mut split: bool = false;
+    if ((info.flags & SHMEM_F_LOCKED) || sbinfo.noswap) {
+// goto;
+    }
+    if (!total_swap_pages) {
+// goto;
+    }
 //
 // If CONFIG_THP_SWAP is not enabled, the large folio should be
 // split when swapping.
@@ -1457,17 +1730,19 @@ pub unsafe extern "C" fn shmem_unuse(type: c_uint) -> c_int {
     index = shmem_fallocend(inode,
     DIV_ROUND_UP(i_size_read(inode), PAGE_SIZE));
     if ((index > folio.index && index < folio_next_index(folio)) ||
-    !IS_ENABLED(CONFIG_THP_SWAP))
+    !IS_ENABLED!(CONFIG_THP_SWAP)) {
     split = true;
     }
+    }
     if (split) {
-    int order;
-    try_split:
+    let mut order = 0;
+// label;
     order = folio_order(folio);
 // Ensure the subpages are still dirty
     folio_test_set_dirty(folio);
-    if (split_folio_to_list(folio, folio_list))
-    goto redirty;
+    if (split_folio_to_list(folio, folio_list)) {
+// goto;
+    }
 
     if (order >= HPAGE_PMD_ORDER) {
     count_memcg_folio_events(folio, THP_SWPOUT_FALLBACK, 1);
@@ -1492,27 +1767,30 @@ pub unsafe extern "C" fn shmem_unuse(type: c_uint) -> c_int {
 //
     if (!folio_test_uptodate(folio)) {
     if (READ_ONCE(inode.i_private)) {
-    struct shmem_falloc *shmem_falloc;
+pub static mut shmem_falloc: *mut c_void = core::ptr::null_mut();
     spin_lock(&inode.i_lock);
     shmem_falloc = inode.i_private;
     if (shmem_falloc &&
     !shmem_falloc.waitq &&
     index >= shmem_falloc.start &&
-    index < shmem_falloc.next)
+    index < shmem_falloc.next) {
     shmem_falloc.nr_unswapped += nr_pages;
-    else
+    }
+    else {
     shmem_falloc = core::ptr::null_mut();
+    }
     spin_unlock(&inode.i_lock);
-    if (shmem_falloc)
-    goto redirty;
+    if (shmem_falloc) {
+// goto;
+    }
     }
     folio_zero_range(folio, 0, folio_size(folio));
     flush_dcache_folio(folio);
     folio_mark_uptodate(folio);
     }
     if (!folio_alloc_swap(folio)) {
-    let mut first_swapped: bool = shmem_recalc_inode(inode, 0, nr_pages);
-    int error;
+pub static mut first_swapped: bool = false;
+    let mut error = 0;
 //
 // Add inode to shmem_unuse()'s list of swapped-out inodes,
 // if it's not already there.  Do it now before the folio is
@@ -1523,13 +1801,14 @@ pub unsafe extern "C" fn shmem_unuse(type: c_uint) -> c_int {
 //
     if (first_swapped) {
     spin_lock(&shmem_swaplist_lock);
-    if (list_empty(&info.swaplist))
+    if (list_empty(&info.swaplist)) {
     list_add(&info.swaplist, &shmem_swaplist);
+    }
     spin_unlock(&shmem_swaplist_lock);
     }
     folio_dup_swap(folio, core::ptr::null_mut());
     shmem_delete_from_page_cache(folio, swp_to_radix_entry(folio.swap));
-    BUG_ON(folio_mapped(folio));
+    BUG_ON!(folio_mapped(folio));
     error = swap_writeout(ctx, folio);
     if (error != AOP_WRITEPAGE_ACTIVATE) {
 // folio has been unlocked
@@ -1556,20 +1835,19 @@ pub unsafe extern "C" fn shmem_unuse(type: c_uint) -> c_int {
 // e.g. folio_mapping(folio) might give an unexpected answer.
 //
     swap_cache_del_folio(folio);
-    goto redirty;
+// goto;
     }
-    if (nr_pages > 1)
-    goto try_split;
-    redirty:
+    if (nr_pages > 1) {
+// goto;
+    }
+// label;
     folio_mark_dirty(folio);
     return AOP_WRITEPAGE_ACTIVATE;	/* Return with folio locked */
     }
 #[no_mangle]
 pub unsafe extern "C" fn shmem_write_folio(folio: *mut folio) -> c_int {
-    int shmem_write_folio(struct folio *folio)
-    {
-    let mut ctx: swap_io_ctx = {};
-    int err;
+pub static mut ctx: swap_io_ctx = 0;
+    let mut err = 0;
     err = shmem_writeout(&ctx, folio, core::ptr::null_mut());
     swap_write_submit(&ctx);
     return err;
@@ -1578,17 +1856,16 @@ pub unsafe extern "C" fn shmem_write_folio(folio: *mut folio) -> c_int {
 
 #[no_mangle]
 unsafe extern "C" fn shmem_show_mpol(seq: *mut seq_file, mpol: *mut mempolicy) {
-    static void shmem_show_mpol(struct seq_file *seq, struct mempolicy *mpol)
-    {
     char buffer[64];
-    if (!mpol || mpol.mode == MPOL_DEFAULT)
+    if (!mpol || mpol.mode == MPOL_DEFAULT) {
     return;		/* show nothing */
-    mpol_to_str(buffer, sizeof(buffer), mpol);
+    }
+    mpol_to_str(buffer, sizeof!(buffer), mpol);
     seq_printf(seq, ",mpol=%s", buffer);
     }
-    static struct mempolicy *shmem_get_sbmpol(struct shmem_sb_info *sbinfo)
-    {
-    struct mempolicy *mpol = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn shmem_get_sbmpol(sbinfo: *mut shmem_sb_info) -> *mut c_void {
+    let mut mpol = core::ptr::null_mut();
     if (sbinfo.mpol) {
     raw_spin_lock(&sbinfo.stat_lock);	/* prevent replace/use races */
     mpol = sbinfo.mpol;
@@ -1600,22 +1877,20 @@ unsafe extern "C" fn shmem_show_mpol(seq: *mut seq_file, mpol: *mut mempolicy) {
 
 #[no_mangle]
 pub unsafe extern "C" fn shmem_show_mpol(seq: *mut seq_file, mpol: *mut mempolicy) {
-    static inline void shmem_show_mpol(struct seq_file *seq, struct mempolicy *mpol)
-    {
     }
-    static inline struct mempolicy *shmem_get_sbmpol(struct shmem_sb_info *sbinfo)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: shmem_get_sbmpol
+pub unsafe extern "C" fn shmem_get_sbmpol_dup(sbinfo: *mut shmem_sb_info) -> *mut c_void {
     return core::ptr::null_mut();
     }
 
-    static struct mempolicy *shmem_get_pgoff_policy(struct shmem_inode_info *info,
-    pgoff_t index, unsigned int order, pgoff_t *ilx);
-    static struct folio *shmem_swapin_cluster(swp_entry_t swap, gfp_t gfp,
-    struct shmem_inode_info *info, pgoff_t index)
-    {
-    struct mempolicy *mpol;
-    pgoff_t ilx;
-    struct folio *folio;
+// forward_decl: shmem_get_pgoff_policy;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_swapin_cluster(swap: swp_entry_t, gfp: gfp_t, info: *mut shmem_inode_info, index: pgoff_t) -> *mut c_void {
+pub static mut mpol: *mut c_void = core::ptr::null_mut();
+    let mut ilx;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     mpol = shmem_get_pgoff_policy(info, index, 0, &ilx);
     folio = swap_cluster_readahead(swap, gfp, mpol, ilx);
     mpol_cond_put(mpol);
@@ -1624,68 +1899,74 @@ pub unsafe extern "C" fn shmem_show_mpol(seq: *mut seq_file, mpol: *mut mempolic
 
 #[no_mangle]
 pub unsafe extern "C" fn shmem_hpage_pmd_enabled() -> bool {
-    bool shmem_hpage_pmd_enabled(void)
-    {
-    if (shmem_huge == SHMEM_HUGE_DENY)
-    return false;
-    if (test_bit(HPAGE_PMD_ORDER, &huge_shmem_orders_always))
-    return true;
-    if (test_bit(HPAGE_PMD_ORDER, &huge_shmem_orders_madvise))
-    return true;
-    if (test_bit(HPAGE_PMD_ORDER, &huge_shmem_orders_within_size))
-    return true;
-    if (test_bit(HPAGE_PMD_ORDER, &huge_shmem_orders_inherit) &&
-    shmem_huge != SHMEM_HUGE_NEVER)
-    return true;
+    if (shmem_huge == SHMEM_HUGE_DENY) {
     return false;
     }
-    unsigned long shmem_allowable_huge_orders(struct inode *inode,
-    struct vm_area_struct *vma, pgoff_t index,
-    loff_t write_end, bool shmem_huge_force)
-    {
-    let mut mask: c_ulong = READ_ONCE(huge_shmem_orders_always);
-    let mut within_size_orders: c_ulong = READ_ONCE(huge_shmem_orders_within_size);
-    let mut vm_flags: vm_flags_t = vma ? vma.vm_flags : 0;
-    unsigned int global_orders;
-    if (thp_disabled_by_hw() || (vma && vma_thp_disabled(vma, vm_flags, shmem_huge_force)))
+    if (test_bit(HPAGE_PMD_ORDER, &huge_shmem_orders_always)) {
+    return true;
+    }
+    if (test_bit(HPAGE_PMD_ORDER, &huge_shmem_orders_madvise)) {
+    return true;
+    }
+    if (test_bit(HPAGE_PMD_ORDER, &huge_shmem_orders_within_size)) {
+    return true;
+    }
+    if (test_bit(HPAGE_PMD_ORDER, &huge_shmem_orders_inherit) &&
+    shmem_huge != SHMEM_HUGE_NEVER) {
+    return true;
+    }
+    return false;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn shmem_allowable_huge_orders(inode: *mut inode, vma: *mut vm_area_struct, index: pgoff_t, write_end: loff_t, shmem_huge_force: bool) -> c_ulong {
+pub static mut mask: c_ulong = 0;
+pub static mut within_size_orders: c_ulong = 0;
+pub static mut vm_flags: vm_flags_t = 0;
+    let mut global_orders = 0;
+    if (thp_disabled_by_hw() || (vma && vma_thp_disabled(vma, vm_flags, shmem_huge_force))) {
     return 0;
+    }
     global_orders = shmem_huge_global_enabled(inode, index, write_end,
     shmem_huge_force, vma, vm_flags);
 // Tmpfs huge pages allocation
-    if (!vma || !vma_is_anon_shmem(vma))
+    if (!vma || !vma_is_anon_shmem(vma)) {
     return global_orders;
+    }
 //
 // Following the 'deny' semantics of the top level, force the huge
 // option off from all mounts.
 //
-    if (shmem_huge == SHMEM_HUGE_DENY)
+    if (shmem_huge == SHMEM_HUGE_DENY) {
     return 0;
+    }
 //
 // Only allow inherit orders if the top-level value is 'force', which
 // means non-PMD sized THP can not override 'huge' mount option now.
 //
-    if (shmem_huge == SHMEM_HUGE_FORCE)
+    if (shmem_huge == SHMEM_HUGE_FORCE) {
     return READ_ONCE(huge_shmem_orders_inherit);
+    }
 // Allow mTHP that will be fully within i_size.
     mask |= shmem_get_orders_within_size(inode, within_size_orders, index, 0);
-    if (vm_flags & VM_HUGEPAGE)
+    if (vm_flags & VM_HUGEPAGE) {
     mask |= READ_ONCE(huge_shmem_orders_madvise);
-    if (global_orders > 0)
+    }
+    if (global_orders > 0) {
     mask |= READ_ONCE(huge_shmem_orders_inherit);
+    }
     return THP_ORDERS_ALL_FILE_DEFAULT & mask;
     }
-    static unsigned long shmem_suitable_orders(struct inode *inode, struct vm_fault *vmf,
-    struct address_space *mapping, pgoff_t index,
-    unsigned long orders)
-    {
-    struct vm_area_struct *vma = vmf ? vmf.vma : core::ptr::null_mut();
-    pgoff_t aligned_index;
-    unsigned long pages;
-    int order;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_suitable_orders(inode: *mut inode, vmf: *mut vm_fault, mapping: *mut address_space, index: pgoff_t, orders: c_ulong) -> c_ulong {
+    let mut vma = vmf ? vmf.vma : core::ptr::null_mut();
+    let mut aligned_index;
+    let mut pages = 0;
+    let mut order = 0;
     if (vma) {
     orders = thp_vma_suitable_orders(vma, vmf.address, orders);
-    if (!orders)
+    if (!orders) {
     return 0;
+    }
     }
 // Find the highest order that can add into the page cache
     order = highest_order(orders);
@@ -1701,44 +1982,44 @@ pub unsafe extern "C" fn shmem_hpage_pmd_enabled() -> bool {
 // Elsewhere -EEXIST would be the right code, but not here.
 //
     if (!xa_find(&mapping.i_pages, &aligned_index,
-    aligned_index + pages - 1, XA_PRESENT))
+    aligned_index + pages - 1, XA_PRESENT)) {
     break;
+    }
     order = next_order(&orders, order);
     }
     return orders;
     }
 
-    static unsigned long shmem_suitable_orders(struct inode *inode, struct vm_fault *vmf,
-    struct address_space *mapping, pgoff_t index,
-    unsigned long orders)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: shmem_suitable_orders
+pub unsafe extern "C" fn shmem_suitable_orders_dup(inode: *mut inode, vmf: *mut vm_fault, mapping: *mut address_space, index: pgoff_t, orders: c_ulong) -> c_ulong {
     return 0;
     }
 
-    static struct folio *shmem_alloc_folio(gfp_t gfp, int order,
-    struct shmem_inode_info *info, pgoff_t index)
-    {
-    struct mempolicy *mpol;
-    pgoff_t ilx;
-    struct folio *folio;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_alloc_folio(gfp: gfp_t, order: c_int, info: *mut shmem_inode_info, index: pgoff_t) -> *mut c_void {
+pub static mut mpol: *mut c_void = core::ptr::null_mut();
+    let mut ilx;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     mpol = shmem_get_pgoff_policy(info, index, order, &ilx);
     folio = folio_alloc_mpol(gfp, order, mpol, ilx, numa_node_id());
     mpol_cond_put(mpol);
     return folio;
     }
-    static struct folio *shmem_alloc_and_add_folio(struct vm_fault *vmf,
-    gfp_t gfp, struct inode *inode, pgoff_t index,
-    struct mm_struct *fault_mm, unsigned long orders)
-    {
-    struct address_space *mapping = inode.i_mapping;
-    struct shmem_inode_info *info = SHMEM_I(inode);
-    let mut suitable_orders: c_ulong = 0;
-    struct folio *folio = core::ptr::null_mut();
-    pgoff_t aligned_index;
-    long pages;
-    int error, order;
-    if (!IS_ENABLED(CONFIG_TRANSPARENT_HUGEPAGE))
+#[no_mangle]
+pub unsafe extern "C" fn shmem_alloc_and_add_folio(vmf: *mut vm_fault, gfp: gfp_t, inode: *mut inode, index: pgoff_t, fault_mm: *mut mm_struct, orders: c_ulong) -> *mut c_void {
+    let mut mapping = inode.i_mapping;
+    let mut info = SHMEM_I(inode);
+pub static mut suitable_orders: c_ulong = 0;
+    let mut folio = core::ptr::null_mut();
+    let mut aligned_index;
+    let mut pages = 0;
+    let mut error = 0;
+    let mut order = 0;
+    if (!IS_ENABLED!(CONFIG_TRANSPARENT_HUGEPAGE)) {
     orders = 0;
+    }
     if (orders > 0) {
     suitable_orders = shmem_suitable_orders(inode, vmf,
     mapping, index, orders);
@@ -1749,10 +2030,11 @@ pub unsafe extern "C" fn shmem_hpage_pmd_enabled() -> bool {
     folio = shmem_alloc_folio(gfp, order, info, aligned_index);
     if (folio) {
     index = aligned_index;
-    goto allocated;
+// goto;
     }
-    if (pages == HPAGE_PMD_NR)
+    if (pages == HPAGE_PMD_NR) {
     count_vm_event(THP_FILE_FALLBACK);
+    }
     count_mthp_stat(order, MTHP_STAT_SHMEM_FALLBACK);
     order = next_order(&suitable_orders, order);
     }
@@ -1760,9 +2042,10 @@ pub unsafe extern "C" fn shmem_hpage_pmd_enabled() -> bool {
     pages = 1;
     folio = shmem_alloc_folio(gfp, 0, info, index);
     }
-    if (!folio)
+    if (!folio) {
     return ERR_PTR(-ENOMEM);
-    allocated:
+    }
+// label;
     __folio_set_locked(folio);
     __folio_set_swapbacked(folio);
     gfp &= GFP_RECLAIM_MASK;
@@ -1779,15 +2062,16 @@ pub unsafe extern "C" fn shmem_hpage_pmd_enabled() -> bool {
     count_mthp_stat(folio_order(folio), MTHP_STAT_SHMEM_FALLBACK);
     count_mthp_stat(folio_order(folio), MTHP_STAT_SHMEM_FALLBACK_CHARGE);
     }
-    goto unlock;
+// goto;
     }
     error = shmem_add_to_page_cache(folio, mapping, index, core::ptr::null_mut(), gfp);
-    if (error)
-    goto unlock;
+    if (error) {
+// goto;
+    }
     error = shmem_inode_acct_blocks(inode, pages);
     if (error) {
-    struct shmem_sb_info *sbinfo = SHMEM_SB(inode.i_sb);
-    long freed;
+    let mut sbinfo = SHMEM_SB(inode.i_sb);
+    let mut freed = 0;
 //
 // Try to reclaim some space by splitting a few
 // large folios beyond i_size on the filesystem.
@@ -1800,45 +2084,47 @@ pub unsafe extern "C" fn shmem_hpage_pmd_enabled() -> bool {
     spin_lock(&info.lock);
     freed = pages + info.alloced - info.swapped -
     READ_ONCE(mapping.nrpages);
-    if (freed > 0)
+    if (freed > 0) {
     info.alloced -= freed;
+    }
     spin_unlock(&info.lock);
-    if (freed > 0)
+    if (freed > 0) {
     shmem_inode_unacct_blocks(inode, freed);
+    }
     error = shmem_inode_acct_blocks(inode, pages);
     if (error) {
     filemap_remove_folio(folio);
-    goto unlock;
+// goto;
     }
     }
     shmem_recalc_inode(inode, pages, 0);
     folio_add_lru(folio);
     return folio;
-    unlock:
+// label;
     folio_unlock(folio);
     folio_put(folio);
     return ERR_PTR(error);
     }
-    static struct folio *shmem_swap_alloc_folio(struct inode *inode,
-    struct vm_fault *vmf, pgoff_t index,
-    swp_entry_t entry, int order, gfp_t gfp)
-    {
-    pgoff_t ilx;
-    struct folio *folio;
-    struct mempolicy *mpol;
-    struct shmem_inode_info *info = SHMEM_I(inode);
+#[no_mangle]
+pub unsafe extern "C" fn shmem_swap_alloc_folio(inode: *mut inode, vmf: *mut vm_fault, index: pgoff_t, entry: swp_entry_t, order: c_int, gfp: gfp_t) -> *mut c_void {
+    let mut ilx;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut mpol: *mut c_void = core::ptr::null_mut();
+    let mut info = SHMEM_I(inode);
     if ((vmf && unlikely(userfaultfd_armed(vmf.vma))) ||
-    !zswap_never_enabled())
+    !zswap_never_enabled()) {
     order = 0;
-    again:
+    }
+// label;
     mpol = shmem_get_pgoff_policy(info, index, order, &ilx);
     folio = swapin_sync(entry, gfp, BIT(order), vmf, mpol, ilx);
     mpol_cond_put(mpol);
-    if (!IS_ERR(folio))
+    if (!IS_ERR(folio)) {
     return folio;
+    }
     if (order) {
     order = 0;
-    goto again;
+// goto;
     }
     return folio;
     }
@@ -1856,19 +2142,15 @@ pub unsafe extern "C" fn shmem_hpage_pmd_enabled() -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn shmem_should_replace_folio(folio: *mut folio, gfp: gfp_t) -> bool {
-    static bool shmem_should_replace_folio(struct folio *folio, gfp_t gfp)
-    {
     return folio_zonenum(folio) > gfp_zone(gfp);
     }
-    static int shmem_replace_folio(struct folio **foliop, gfp_t gfp,
-    struct shmem_inode_info *info, pgoff_t index,
-    struct vm_area_struct *vma)
-    {
-    struct swap_cluster_info *ci;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_replace_folio(foliop: *mut *mut folio, gfp: gfp_t, info: *mut shmem_inode_info, index: pgoff_t, vma: *mut vm_area_struct) -> c_int {
+pub static mut ci: *mut c_void = core::ptr::null_mut();
     struct folio *new, *old = *foliop;
-    let mut entry: swp_entry_t = old.swap;
-    let mut nr_pages: c_int = folio_nr_pages(old);
-    let mut error: c_int = 0;
+pub static mut entry: swp_entry_t = 0;
+pub static mut nr_pages: c_int = 0;
+pub static mut error: c_int = 0;
 //
 // We have arrived here because our zones are constrained, so don't
 // limit chance of success by further cpuset and node constraints.
@@ -1876,13 +2158,14 @@ unsafe extern "C" fn shmem_should_replace_folio(folio: *mut folio, gfp: gfp_t) -
     gfp &= ~GFP_CONSTRAINT_MASK;
 
     if (nr_pages > 1) {
-    let mut huge_gfp: gfp_t = vma_thp_gfp_mask(vma);
+pub static mut huge_gfp: gfp_t = 0;
     gfp = thp_shmem_limit_gfp_mask(huge_gfp, gfp);
     }
 
     new = shmem_alloc_folio(gfp, folio_order(old), info, index);
-    if (!new)
+    if (!new) {
     return -ENOMEM;
+    }
     folio_ref_add(new, nr_pages);
     folio_copy(new, old);
     flush_dcache_folio(new);
@@ -1910,70 +2193,71 @@ unsafe extern "C" fn shmem_should_replace_folio(folio: *mut folio, gfp: gfp_t) -
     folio_put_refs(old, nr_pages + 1);
     return error;
     }
-    static void shmem_set_folio_swapin_error(struct inode *inode, pgoff_t index,
-    struct folio *folio, swp_entry_t swap)
-    {
-    struct address_space *mapping = inode.i_mapping;
-    swp_entry_t swapin_error;
-    void *old;
-    int nr_pages;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_set_folio_swapin_error(inode: *mut inode, index: pgoff_t, folio: *mut folio, swap: swp_entry_t) {
+    let mut mapping = inode.i_mapping;
+    let mut swapin_error;
+pub static mut old: *mut c_void = core::ptr::null_mut();
+    let mut nr_pages = 0;
     swapin_error = make_poisoned_swp_entry();
     old = xa_cmpxchg_irq(&mapping.i_pages, index,
     swp_to_radix_entry(swap),
     swp_to_radix_entry(swapin_error), 0);
-    if (old != swp_to_radix_entry(swap))
+    if (old != swp_to_radix_entry(swap)) {
     return;
+    }
     nr_pages = folio_nr_pages(folio);
     folio_wait_writeback(folio);
     folio_put_swap(folio, core::ptr::null_mut());
     swap_cache_del_folio(folio);
 //
 // Don't treat swapin error folio as alloced. Otherwise inode->i_blocks
-// won't be 0 when inode is released and thus trigger WARN_ON(i_blocks)
+// won't be 0 when inode is released and thus trigger WARN_ON!(i_blocks)
 // in shmem_evict_inode().
 //
     shmem_recalc_inode(inode, -nr_pages, -nr_pages);
     }
-    static int shmem_split_large_entry(struct inode *inode, pgoff_t index,
-    swp_entry_t swap, gfp_t gfp)
-    {
-    struct address_space *mapping = inode.i_mapping;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_split_large_entry(inode: *mut inode, index: pgoff_t, swap: swp_entry_t, gfp: gfp_t) -> c_int {
+    let mut mapping = inode.i_mapping;
     XA_STATE_ORDER(xas, &mapping.i_pages, index, 0);
-    let mut split_order: c_int = 0;
-    int i;
+pub static mut split_order: c_int = 0;
+    let mut i = 0;
 // Convert user data gfp flags to xarray node gfp flags
     gfp &= GFP_RECLAIM_MASK;
     for (;;) {
-    void *old = core::ptr::null_mut();
-    int cur_order;
-    pgoff_t swap_index;
+    let mut old = core::ptr::null_mut();
+    let mut cur_order = 0;
+    let mut swap_index;
     xas_lock_irq(&xas);
     old = xas_load(&xas);
     if (!xa_is_value(old) || swp_to_radix_entry(swap) != old) {
     xas_set_err(&xas, -EEXIST);
-    goto unlock;
+// goto;
     }
     cur_order = xas_get_order(&xas);
-    if (!cur_order)
-    goto unlock;
+    if (!cur_order) {
+// goto;
+    }
 // Try to split large swap entry in pagecache
     swap_index = round_down(index, 1 << cur_order);
     split_order = xas_try_split_min_order(cur_order);
     while (cur_order > 0) {
     pgoff_t aligned_index =
     round_down(index, 1 << cur_order);
-    let mut swap_offset: pgoff_t = aligned_index - swap_index;
+pub static mut swap_offset: pgoff_t = 0;
     xas_set_order(&xas, index, split_order);
     xas_try_split(&xas, old, cur_order);
-    if (xas_error(&xas))
-    goto unlock;
+    if (xas_error(&xas)) {
+// goto;
+    }
 //
 // Re-set the swap entry after splitting, and the swap
 // offset of the original large entry must be continuous.
 //
     for (i = 0; i < 1 << cur_order;
     i += (1 << split_order)) {
-    swp_entry_t tmp;
+    let mut tmp;
     tmp = swp_entry(swp_type(swap),
     swp_offset(swap) + swap_offset +
     i);
@@ -1983,13 +2267,15 @@ unsafe extern "C" fn shmem_should_replace_folio(folio: *mut folio, gfp: gfp_t) -
     cur_order = split_order;
     split_order = xas_try_split_min_order(split_order);
     }
-    unlock:
+// label;
     xas_unlock_irq(&xas);
-    if (!xas_nomem(&xas, gfp))
+    if (!xas_nomem(&xas, gfp)) {
     break;
     }
-    if (xas_error(&xas))
+    }
+    if (xas_error(&xas)) {
     return xas_error(&xas);
+    }
     return 0;
     }
 //
@@ -1998,34 +2284,36 @@ unsafe extern "C" fn shmem_should_replace_folio(folio: *mut folio, gfp: gfp_t) -
 // Returns 0 and the folio in foliop if success. On failure, returns the
 // error code and NULL in *foliop.
 //
-    static int shmem_swapin_folio(struct inode *inode, pgoff_t index,
-    struct folio **foliop, enum sgp_type sgp,
-    gfp_t gfp, struct vm_fault *vmf,
-    vm_fault_t *fault_type)
-    {
-    struct address_space *mapping = inode.i_mapping;
-    struct vm_area_struct *vma = vmf ? vmf.vma : core::ptr::null_mut();
-    struct mm_struct *fault_mm = vmf ? vmf.vma.vm_mm : core::ptr::null_mut();
-    struct shmem_inode_info *info = SHMEM_I(inode);
-    swp_entry_t swap;
-    softleaf_t index_entry;
-    struct swap_info_struct *si;
-    struct folio *folio = core::ptr::null_mut();
-    int error, nr_pages, order;
-    pgoff_t offset;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_swapin_folio(inode: *mut inode, index: pgoff_t, foliop: *mut *mut folio, sgp: sgp_type, gfp: gfp_t, vmf: *mut vm_fault, fault_type: *mut vm_fault_t) -> c_int {
+    let mut mapping = inode.i_mapping;
+    let mut vma = vmf ? vmf.vma : core::ptr::null_mut();
+    let mut fault_mm = vmf ? vmf.vma.vm_mm : core::ptr::null_mut();
+    let mut info = SHMEM_I(inode);
+    let mut swap;
+    let mut index_entry;
+pub static mut si: *mut c_void = core::ptr::null_mut();
+    let mut folio = core::ptr::null_mut();
+    let mut error = 0;
+    let mut nr_pages = 0;
+    let mut order = 0;
+    let mut offset;
     VM_BUG_ON(!*foliop || !xa_is_value(*foliop));
     index_entry = radix_to_swp_entry(*foliop);
     swap = index_entry;
 // foliop = NULL;
-    if (softleaf_is_poison_marker(index_entry))
+    if (softleaf_is_poison_marker(index_entry)) {
     return -EIO;
+    }
     si = get_swap_device(index_entry);
     order = shmem_confirm_swap(mapping, index, index_entry);
     if (unlikely(!si)) {
-    if (order < 0)
+    if (order < 0) {
     return -EEXIST;
-    else
+    }
+    else {
     return -EINVAL;
+    }
     }
     if (unlikely(order < 0)) {
     put_swap_device(si);
@@ -2048,12 +2336,14 @@ unsafe extern "C" fn shmem_should_replace_folio(folio: *mut folio, gfp: gfp_t) -
     folio = shmem_swapin_cluster(swap, gfp, info, index);
     }
     if (IS_ERR_OR_NULL(folio)) {
-    if (IS_ERR(folio))
+    if (IS_ERR(folio)) {
     error = PTR_ERR(folio);
-    else
+    }
+    else {
     error = -ENOMEM;
+    }
     folio = core::ptr::null_mut();
-    goto failed;
+// goto;
     }
     if (fault_type) {
 // fault_type |= VM_FAULT_MAJOR;
@@ -2073,8 +2363,9 @@ unsafe extern "C" fn shmem_should_replace_folio(folio: *mut folio, gfp: gfp_t) -
 // large swap entry to prevent possible data corruption.
 //
     error = shmem_split_large_entry(inode, index, index_entry, gfp);
-    if (error)
-    goto failed_nolock;
+    if (error) {
+// goto;
+    }
     }
 //
 // If the folio is large, round down swap and index by folio size.
@@ -2102,11 +2393,11 @@ unsafe extern "C" fn shmem_should_replace_folio(folio: *mut folio, gfp: gfp_t) -
     if (!folio_matches_swap_entry(folio, swap) ||
     shmem_confirm_swap(mapping, index, swap) < 0) {
     error = -EEXIST;
-    goto unlock;
+// goto;
     }
     if (!folio_test_uptodate(folio)) {
     error = -EIO;
-    goto failed;
+// goto;
     }
     folio_wait_writeback(folio);
 //
@@ -2116,33 +2407,40 @@ unsafe extern "C" fn shmem_should_replace_folio(folio: *mut folio, gfp: gfp_t) -
     arch_swap_restore(folio_swap(swap, folio), folio);
     if (shmem_should_replace_folio(folio, gfp)) {
     error = shmem_replace_folio(&folio, gfp, info, index, vma);
-    if (error)
-    goto failed;
+    if (error) {
+// goto;
+    }
     }
     error = shmem_add_to_page_cache(folio, mapping, index,
     swp_to_radix_entry(swap), gfp);
-    if (error)
-    goto failed;
+    if (error) {
+// goto;
+    }
     shmem_recalc_inode(inode, 0, -nr_pages);
-    if (sgp == SGP_WRITE)
+    if (sgp == SGP_WRITE) {
     folio_mark_accessed(folio);
+    }
     folio_put_swap(folio, core::ptr::null_mut());
     swap_cache_del_folio(folio);
     folio_mark_dirty(folio);
     put_swap_device(si);
 // foliop = folio;
     return 0;
-    failed:
-    if (shmem_confirm_swap(mapping, index, swap) < 0)
+// label;
+    if (shmem_confirm_swap(mapping, index, swap) < 0) {
     error = -EEXIST;
-    if (error == -EIO)
+    }
+    if (error == -EIO) {
     shmem_set_folio_swapin_error(inode, index, folio, swap);
-    unlock:
-    if (folio)
+    }
+// label;
+    if (folio) {
     folio_unlock(folio);
-    failed_nolock:
-    if (folio)
+    }
+// label;
+    if (folio) {
     folio_put(folio);
+    }
     put_swap_device(si);
     return error;
     }
@@ -2155,38 +2453,41 @@ unsafe extern "C" fn shmem_should_replace_folio(folio: *mut folio, gfp: gfp_t) -
 //
 // vmf and fault_type are only supplied by shmem_fault: otherwise they are NULL.
 //
-    static int shmem_get_folio_gfp(struct inode *inode, pgoff_t index,
-    loff_t write_end, struct folio **foliop, enum sgp_type sgp,
-    gfp_t gfp, struct vm_fault *vmf, vm_fault_t *fault_type)
-    {
-    struct vm_area_struct *vma = vmf ? vmf.vma : core::ptr::null_mut();
-    struct mm_struct *fault_mm;
-    struct folio *folio;
-    int error;
-    bool alloced;
-    let mut orders: c_ulong = 0;
-    if (WARN_ON_ONCE(!shmem_mapping(inode.i_mapping)))
+#[no_mangle]
+pub unsafe extern "C" fn shmem_get_folio_gfp(inode: *mut inode, index: pgoff_t, write_end: loff_t, foliop: *mut *mut folio, sgp: sgp_type, gfp: gfp_t, vmf: *mut vm_fault, fault_type: *mut vm_fault_t) -> c_int {
+    let mut vma = vmf ? vmf.vma : core::ptr::null_mut();
+pub static mut fault_mm: *mut c_void = core::ptr::null_mut();
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut error = 0;
+    let mut alloced = 0;
+pub static mut orders: c_ulong = 0;
+    if (WARN_ON_ONCE!(!shmem_mapping(inode.i_mapping))) {
     return -EINVAL;
-    if (index > (MAX_LFS_FILESIZE >> PAGE_SHIFT))
+    }
+    if (index > (MAX_LFS_FILESIZE >> PAGE_SHIFT)) {
     return -EFBIG;
-    repeat:
+    }
+// label;
     if (sgp <= SGP_CACHE &&
-    ((loff_t)index << PAGE_SHIFT) >= i_size_read(inode))
+    ((loff_t)index << PAGE_SHIFT) >= i_size_read(inode)) {
     return -EINVAL;
+    }
     alloced = false;
     fault_mm = vma ? vma.vm_mm : core::ptr::null_mut();
     folio = filemap_get_entry(inode.i_mapping, index);
     if (folio && vma && userfaultfd_minor(vma)) {
-    if (!xa_is_value(folio))
+    if (!xa_is_value(folio)) {
     folio_put(folio);
+    }
 // fault_type = handle_userfault(vmf, VM_UFFD_MINOR);
     return 0;
     }
     if (xa_is_value(folio)) {
     error = shmem_swapin_folio(inode, index, &folio,
     sgp, gfp, vmf, fault_type);
-    if (error == -EEXIST)
-    goto repeat;
+    if (error == -EEXIST) {
+// goto;
+    }
 // foliop = folio;
     return error;
     }
@@ -2196,15 +2497,18 @@ unsafe extern "C" fn shmem_should_replace_folio(folio: *mut folio, gfp: gfp_t) -
     if (unlikely(folio.mapping != inode.i_mapping)) {
     folio_unlock(folio);
     folio_put(folio);
-    goto repeat;
+// goto;
     }
-    if (sgp == SGP_WRITE)
+    if (sgp == SGP_WRITE) {
     folio_mark_accessed(folio);
-    if (folio_test_uptodate(folio))
-    goto out;
+    }
+    if (folio_test_uptodate(folio)) {
+// goto;
+    }
 // fallocated folio
-    if (sgp != SGP_READ)
-    goto clear;
+    if (sgp != SGP_READ) {
+// goto;
+    }
     folio_unlock(folio);
     folio_put(folio);
     }
@@ -2213,10 +2517,12 @@ unsafe extern "C" fn shmem_should_replace_folio(folio: *mut folio, gfp: gfp_t) -
 // SGP_NOALLOC: fail on hole, with NULL folio, letting caller fail.
 //
 // foliop = NULL;
-    if (sgp == SGP_READ)
+    if (sgp == SGP_READ) {
     return 0;
-    if (sgp == SGP_NOALLOC)
+    }
+    if (sgp == SGP_NOALLOC) {
     return -ENOENT;
+    }
 //
 // Fast cache lookup and swap lookup did not find it: allocate.
 //
@@ -2227,35 +2533,38 @@ unsafe extern "C" fn shmem_should_replace_folio(folio: *mut folio, gfp: gfp_t) -
 // Find hugepage orders that are allowed for anonymous shmem and tmpfs.
     orders = shmem_allowable_huge_orders(inode, vma, index, write_end, false);
     if (orders > 0) {
-    gfp_t huge_gfp;
+    let mut huge_gfp;
     huge_gfp = vma_thp_gfp_mask(vma);
     huge_gfp = thp_shmem_limit_gfp_mask(huge_gfp, gfp);
     folio = shmem_alloc_and_add_folio(vmf, huge_gfp,
     inode, index, fault_mm, orders);
     if (!IS_ERR(folio)) {
-    if (folio_test_pmd_mappable(folio))
+    if (folio_test_pmd_mappable(folio)) {
     count_vm_event(THP_FILE_ALLOC);
-    count_mthp_stat(folio_order(folio), MTHP_STAT_SHMEM_ALLOC);
-    goto alloced;
     }
-    if (PTR_ERR(folio) == -EEXIST)
-    goto repeat;
+    count_mthp_stat(folio_order(folio), MTHP_STAT_SHMEM_ALLOC);
+// goto;
+    }
+    if (PTR_ERR(folio) == -EEXIST) {
+// goto;
+    }
     }
     folio = shmem_alloc_and_add_folio(vmf, gfp, inode, index, fault_mm, 0);
     if (IS_ERR(folio)) {
     error = PTR_ERR(folio);
-    if (error == -EEXIST)
-    goto repeat;
-    folio = core::ptr::null_mut();
-    goto unlock;
+    if (error == -EEXIST) {
+// goto;
     }
-    alloced:
+    folio = core::ptr::null_mut();
+// goto;
+    }
+// label;
     alloced = true;
     if (folio_test_large(folio) &&
     DIV_ROUND_UP(i_size_read(inode), PAGE_SIZE) <
     folio_next_index(folio)) {
-    struct shmem_sb_info *sbinfo = SHMEM_SB(inode.i_sb);
-    struct shmem_inode_info *info = SHMEM_I(inode);
+    let mut sbinfo = SHMEM_SB(inode.i_sb);
+    let mut info = SHMEM_I(inode);
 //
 // Part of the large folio is beyond i_size: subject
 // to shrink under memory pressure.
@@ -2268,18 +2577,20 @@ unsafe extern "C" fn shmem_should_replace_folio(folio: *mut folio, gfp: gfp_t) -
     if (list_empty_careful(&info.shrinklist)) {
     list_add_tail(&info.shrinklist,
     &sbinfo.shrinklist);
-    sbinfo.shrinklist_len++;
+    sbinfo.shrinklist_len += 1;
     }
     spin_unlock(&sbinfo.shrinklist_lock);
     }
-    if (sgp == SGP_WRITE)
+    if (sgp == SGP_WRITE) {
     folio_set_referenced(folio);
+    }
 //
 // Let SGP_FALLOC use the SGP_WRITE optimization on a new folio.
 //
-    if (sgp == SGP_FALLOC)
+    if (sgp == SGP_FALLOC) {
     sgp = SGP_WRITE;
-    clear:
+    }
+// label;
 //
 // Let SGP_WRITE caller clear ends if write does not fill folio;
 // but SGP_FALLOC on a folio fallocated earlier must initialize
@@ -2287,8 +2598,9 @@ unsafe extern "C" fn shmem_should_replace_folio(folio: *mut folio, gfp: gfp_t) -
 //
     if (sgp != SGP_WRITE && !folio_test_uptodate(folio)) {
     long i, n = folio_nr_pages(folio);
-    for (i = 0; i < n; i++)
+    for (i = 0; i < n; i++) {
     clear_highpage(folio_page(folio, i));
+    }
     flush_dcache_folio(folio);
     folio_mark_uptodate(folio);
     }
@@ -2296,17 +2608,18 @@ unsafe extern "C" fn shmem_should_replace_folio(folio: *mut folio, gfp: gfp_t) -
     if (sgp <= SGP_CACHE &&
     ((loff_t)index << PAGE_SHIFT) >= i_size_read(inode)) {
     error = -EINVAL;
-    goto unlock;
+// goto;
     }
-    out:
+// label;
 // foliop = folio;
     return 0;
 //
 // Error recovery.
 //
-    unlock:
-    if (alloced)
+// label;
+    if (alloced) {
     filemap_remove_folio(folio);
+    }
     shmem_recalc_inode(inode, 0, 0);
     if (folio) {
     folio_unlock(folio);
@@ -2338,9 +2651,8 @@ unsafe extern "C" fn shmem_should_replace_folio(folio: *mut folio, gfp: gfp_t) -
 // Context: May sleep.
 // Return: 0 if successful, else a negative error code.
 //
-    int shmem_get_folio(struct inode *inode, pgoff_t index, loff_t write_end,
-    struct folio **foliop, enum sgp_type sgp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn shmem_get_folio(inode: *mut inode, index: pgoff_t, write_end: loff_t, foliop: *mut *mut folio, sgp: sgp_type) -> c_int {
     return shmem_get_folio_gfp(inode, index, write_end, foliop, sgp,
     mapping_gfp_mask(inode.i_mapping), core::ptr::null_mut(), core::ptr::null_mut());
     }
@@ -2350,10 +2662,9 @@ unsafe extern "C" fn shmem_should_replace_folio(folio: *mut folio, gfp: gfp_t) -
 // entry unconditionally - even if something else had already woken the
 // target.
 //
-    static int synchronous_wake_function(wait_queue_entry_t *wait,
-    unsigned int mode, int sync, void *key)
-    {
-    let mut ret: c_int = default_wake_function(wait, mode, sync, key);
+#[no_mangle]
+pub unsafe extern "C" fn synchronous_wake_function(wait: *mut wait_queue_entry_t, mode: c_uint, sync: c_int, key: *mut c_void) -> c_int {
+pub static mut ret: c_int = 0;
     list_del_init(&wait.entry);
     return ret;
     }
@@ -2376,19 +2687,17 @@ unsafe extern "C" fn shmem_should_replace_folio(folio: *mut folio, gfp: gfp_t) -
 //
 #[no_mangle]
 unsafe extern "C" fn shmem_falloc_wait(vmf: *mut vm_fault, inode: *mut inode) -> vm_fault_t {
-    static vm_fault_t shmem_falloc_wait(struct vm_fault *vmf, struct inode *inode)
-    {
-    struct shmem_falloc *shmem_falloc;
-    struct file *fpin = core::ptr::null_mut();
-    let mut ret: vm_fault_t = 0;
+pub static mut shmem_falloc: *mut c_void = core::ptr::null_mut();
+    let mut fpin = core::ptr::null_mut();
+pub static mut ret: vm_fault_t = 0;
     spin_lock(&inode.i_lock);
     shmem_falloc = inode.i_private;
     if (shmem_falloc &&
     shmem_falloc.waitq &&
     vmf.pgoff >= shmem_falloc.start &&
     vmf.pgoff < shmem_falloc.next) {
-    wait_queue_head_t *shmem_falloc_waitq;
-    DEFINE_WAIT_FUNC(shmem_fault_wait, synchronous_wake_function);
+pub static mut shmem_falloc_waitq: *mut c_void = core::ptr::null_mut();
+pub static mut shmem_fault_wait: usize = 0;
     ret = VM_FAULT_NOPAGE;
     fpin = maybe_unlock_mmap_for_io(vmf, core::ptr::null_mut());
     shmem_falloc_waitq = shmem_falloc.waitq;
@@ -2415,71 +2724,77 @@ unsafe extern "C" fn shmem_falloc_wait(vmf: *mut vm_fault, inode: *mut inode) ->
     }
 #[no_mangle]
 unsafe extern "C" fn shmem_fault(vmf: *mut vm_fault) -> vm_fault_t {
-    static vm_fault_t shmem_fault(struct vm_fault *vmf)
-    {
-    struct inode *inode = file_inode(vmf.vma.vm_file);
-    let mut gfp: gfp_t = mapping_gfp_mask(inode.i_mapping);
-    struct folio *folio = core::ptr::null_mut();
-    let mut ret: vm_fault_t = 0;
-    int err;
+    let mut inode = file_inode(vmf.vma.vm_file);
+pub static mut gfp: gfp_t = 0;
+    let mut folio = core::ptr::null_mut();
+pub static mut ret: vm_fault_t = 0;
+    let mut err = 0;
 //
 // Trinity finds that probing a hole which tmpfs is punching can
 // prevent the hole-punch from ever completing: noted in i_private.
 //
     if (unlikely(READ_ONCE(inode.i_private))) {
     ret = shmem_falloc_wait(vmf, inode);
-    if (ret)
+    if (ret) {
     return ret;
     }
-    WARN_ON_ONCE(vmf.page != core::ptr::null_mut());
+    }
+    WARN_ON_ONCE!(vmf.page != core::ptr::null_mut());
     err = shmem_get_folio_gfp(inode, vmf.pgoff, 0, &folio, SGP_CACHE,
     gfp, vmf, &ret);
-    if (err)
+    if (err) {
     return vmf_error(err);
+    }
     if (folio) {
     vmf.page = folio_file_page(folio, vmf.pgoff);
     ret |= VM_FAULT_LOCKED;
     }
     return ret;
     }
-    unsigned long shmem_get_unmapped_area(struct file *file,
-    unsigned long uaddr, unsigned long len,
-    unsigned long pgoff, unsigned long flags)
-    {
-    unsigned long addr;
-    unsigned long offset;
-    unsigned long inflated_len;
-    unsigned long inflated_addr;
-    unsigned long inflated_offset;
-    unsigned long hpage_size;
-    if (len > TASK_SIZE)
+#[no_mangle]
+pub unsafe extern "C" fn shmem_get_unmapped_area(file: *mut file, uaddr: c_ulong, len: c_ulong, pgoff: c_ulong, flags: c_ulong) -> c_ulong {
+    let mut addr = 0;
+    let mut offset = 0;
+    let mut inflated_len = 0;
+    let mut inflated_addr = 0;
+    let mut inflated_offset = 0;
+    let mut hpage_size = 0;
+    if (len > TASK_SIZE) {
     return -ENOMEM;
+    }
     addr = mm_get_unmapped_area(file, uaddr, len, pgoff, flags);
-    if (!IS_ENABLED(CONFIG_TRANSPARENT_HUGEPAGE))
+    if (!IS_ENABLED!(CONFIG_TRANSPARENT_HUGEPAGE)) {
     return addr;
-    if (IS_ERR_VALUE(addr))
+    }
+    if (IS_ERR_VALUE(addr)) {
     return addr;
-    if (addr & ~PAGE_MASK)
+    }
+    if (addr & ~PAGE_MASK) {
     return addr;
-    if (addr > TASK_SIZE - len)
+    }
+    if (addr > TASK_SIZE - len) {
     return addr;
-    if (shmem_huge == SHMEM_HUGE_DENY)
+    }
+    if (shmem_huge == SHMEM_HUGE_DENY) {
     return addr;
-    if (flags & MAP_FIXED)
+    }
+    if (flags & MAP_FIXED) {
     return addr;
+    }
 //
 // Our priority is to support MAP_SHARED mapped hugely;
 // and support MAP_PRIVATE mapped hugely too, until it is COWed.
 // But if caller specified an address hint and we allocated area there
 // successfully, respect that as before.
 //
-    if (uaddr == addr)
+    if (uaddr == addr) {
     return addr;
+    }
     hpage_size = HPAGE_PMD_SIZE;
     if (shmem_huge != SHMEM_HUGE_FORCE) {
-    struct super_block *sb;
+pub static mut sb: *mut c_void = core::ptr::null_mut();
     unsigned long __maybe_unused hpage_orders;
-    let mut order: c_int = 0;
+pub static mut order: c_int = 0;
     if (file) {
     VM_BUG_ON(file.f_op != &shmem_file_operations);
     sb = file_inode(file).i_sb;
@@ -2488,8 +2803,9 @@ unsafe extern "C" fn shmem_fault(vmf: *mut vm_fault) -> vm_fault_t {
 // Called directly from mm/mmap.c, or drivers/char/mem.c
 // for "/dev/zero", to create a shared anonymous object.
 //
-    if (IS_ERR(shm_mnt))
+    if (IS_ERR(shm_mnt)) {
     return addr;
+    }
     sb = shm_mnt.mnt_sb;
 //
 // Find the highest mTHP order used for anonymous shmem to
@@ -2499,55 +2815,63 @@ unsafe extern "C" fn shmem_fault(vmf: *mut vm_fault) -> vm_fault_t {
     hpage_orders = READ_ONCE(huge_shmem_orders_always);
     hpage_orders |= READ_ONCE(huge_shmem_orders_within_size);
     hpage_orders |= READ_ONCE(huge_shmem_orders_madvise);
-    if (SHMEM_SB(sb).huge != SHMEM_HUGE_NEVER)
+    if (SHMEM_SB(sb).huge != SHMEM_HUGE_NEVER) {
     hpage_orders |= READ_ONCE(huge_shmem_orders_inherit);
+    }
     if (hpage_orders > 0) {
     order = highest_order(hpage_orders);
     hpage_size = PAGE_SIZE << order;
     }
 
     }
-    if (SHMEM_SB(sb).huge == SHMEM_HUGE_NEVER && !order)
+    if (SHMEM_SB(sb).huge == SHMEM_HUGE_NEVER && !order) {
     return addr;
     }
-    if (len < hpage_size)
+    }
+    if (len < hpage_size) {
     return addr;
+    }
     offset = (pgoff << PAGE_SHIFT) & (hpage_size - 1);
-    if (offset && offset + len < 2 * hpage_size)
+    if (offset && offset + len < 2 * hpage_size) {
     return addr;
-    if ((addr & (hpage_size - 1)) == offset)
+    }
+    if ((addr & (hpage_size - 1)) == offset) {
     return addr;
+    }
     inflated_len = len + hpage_size - PAGE_SIZE;
-    if (inflated_len > TASK_SIZE)
+    if (inflated_len > TASK_SIZE) {
     return addr;
-    if (inflated_len < len)
+    }
+    if (inflated_len < len) {
     return addr;
+    }
     inflated_addr = mm_get_unmapped_area(core::ptr::null_mut(), uaddr, inflated_len, 0, flags);
-    if (IS_ERR_VALUE(inflated_addr))
+    if (IS_ERR_VALUE(inflated_addr)) {
     return addr;
-    if (inflated_addr & ~PAGE_MASK)
+    }
+    if (inflated_addr & ~PAGE_MASK) {
     return addr;
+    }
     inflated_offset = inflated_addr & (hpage_size - 1);
     inflated_addr += offset - inflated_offset;
-    if (inflated_offset > offset)
+    if (inflated_offset > offset) {
     inflated_addr += hpage_size;
-    if (inflated_addr > TASK_SIZE - len)
+    }
+    if (inflated_addr > TASK_SIZE - len) {
     return addr;
+    }
     return inflated_addr;
     }
 
 #[no_mangle]
 unsafe extern "C" fn shmem_set_policy(vma: *mut vm_area_struct, mpol: *mut mempolicy) -> c_int {
-    static int shmem_set_policy(struct vm_area_struct *vma, struct mempolicy *mpol)
-    {
-    struct inode *inode = file_inode(vma.vm_file);
+    let mut inode = file_inode(vma.vm_file);
     return mpol_set_shared_policy(&SHMEM_I(inode).policy, vma, mpol);
     }
-    static struct mempolicy *shmem_get_policy(struct vm_area_struct *vma,
-    unsigned long addr, pgoff_t *ilx)
-    {
-    struct inode *inode = file_inode(vma.vm_file);
-    pgoff_t index;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_get_policy(vma: *mut vm_area_struct, addr: c_ulong, ilx: *mut pgoff_t) -> *mut c_void {
+    let mut inode = file_inode(vma.vm_file);
+    let mut index;
 //
 // Bias interleave by inode number to distribute better across nodes;
 // but this interface is independent of which page order is used, so
@@ -2558,38 +2882,37 @@ unsafe extern "C" fn shmem_set_policy(vma: *mut vm_area_struct, mpol: *mut mempo
     index = linear_page_index(vma, addr);
     return mpol_shared_policy_lookup(&SHMEM_I(inode).policy, index);
     }
-    static struct mempolicy *shmem_get_pgoff_policy(struct shmem_inode_info *info,
-    pgoff_t index, unsigned int order, pgoff_t *ilx)
-    {
-    struct mempolicy *mpol;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_get_pgoff_policy(info: *mut shmem_inode_info, index: pgoff_t, order: c_uint, ilx: *mut pgoff_t) -> *mut c_void {
+pub static mut mpol: *mut c_void = core::ptr::null_mut();
 // Bias interleave by inode number to distribute better across nodes
 // ilx = info->vfs_inode.i_ino + (index >> order);
     mpol = mpol_shared_policy_lookup(&info.policy, index);
     return mpol ? mpol : get_task_policy(current);
     }
 
-    static struct mempolicy *shmem_get_pgoff_policy(struct shmem_inode_info *info,
-    pgoff_t index, unsigned int order, pgoff_t *ilx)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: shmem_get_pgoff_policy
+pub unsafe extern "C" fn shmem_get_pgoff_policy_dup(info: *mut shmem_inode_info, index: pgoff_t, order: c_uint, ilx: *mut pgoff_t) -> *mut c_void {
 // ilx = 0;
     return core::ptr::null_mut();
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn shmem_lock(file: *mut file, lock: c_int, ucounts: *mut ucounts) -> c_int {
-    int shmem_lock(struct file *file, int lock, struct ucounts *ucounts)
-    {
-    struct inode *inode = file_inode(file);
-    struct shmem_inode_info *info = SHMEM_I(inode);
-    let mut retval: c_int = -ENOMEM;
+    let mut inode = file_inode(file);
+    let mut info = SHMEM_I(inode);
+pub static mut retval: c_int = 0;
 //
 // What serializes the accesses to info->flags?
 // ipc_lock_object() when called from shmctl_do_lock(),
 // no serialization needed when called from shm_destroy().
 //
     if (lock && !(info.flags & SHMEM_F_LOCKED)) {
-    if (!user_shm_lock(inode.i_size, ucounts))
-    goto out_nomem;
+    if (!user_shm_lock(inode.i_size, ucounts)) {
+// goto;
+    }
     info.flags |= SHMEM_F_LOCKED;
     mapping_set_unevictable(file.f_mapping);
     }
@@ -2599,32 +2922,30 @@ pub unsafe extern "C" fn shmem_lock(file: *mut file, lock: c_int, ucounts: *mut 
     mapping_clear_unevictable(file.f_mapping);
     }
     retval = 0;
-    out_nomem:
+// label;
     return retval;
     }
 #[no_mangle]
 unsafe extern "C" fn shmem_mmap_prepare(desc: *mut vm_area_desc) -> c_int {
-    static int shmem_mmap_prepare(struct vm_area_desc *desc)
-    {
-    struct file *file = desc.file;
-    struct inode *inode = file_inode(file);
+    let mut file = desc.file;
+    let mut inode = file_inode(file);
     file_accessed(file);
 // This is anonymous shared memory if it is unlinked at the time of mmap
-    if (inode.i_nlink)
+    if (inode.i_nlink) {
     desc.vm_ops = &shmem_vm_ops;
-    else
+    }
+    else {
     desc.vm_ops = &shmem_anon_vm_ops;
+    }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn shmem_file_open(inode: *mut inode, file: *mut file) -> c_int {
-    static int shmem_file_open(struct inode *inode, struct file *file)
-    {
     file.f_mode |= FMODE_CAN_ODIRECT;
     return generic_file_open(inode, file);
     }
 
-    static int shmem_initxattrs(struct inode *, const struct xattr *, void *);
+// forward_decl: shmem_initxattrs;
 
 //
 // shmem_inode_casefold_flags - Deal with casefold file attribute flag
@@ -2632,33 +2953,38 @@ unsafe extern "C" fn shmem_file_open(inode: *mut inode, file: *mut file) -> c_in
 // The casefold file attribute needs some special checks. I can just be added to
 // an empty dir, and can't be removed from a non-empty dir.
 //
-    static int shmem_inode_casefold_flags(struct inode *inode, unsigned int fsflags,
-    struct dentry *dentry, unsigned int *i_flags)
-    {
-    let mut old: c_uint = inode.i_flags;
-    struct super_block *sb = inode.i_sb;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_inode_casefold_flags(inode: *mut inode, fsflags: c_uint, dentry: *mut dentry, i_flags: *mut c_uint) -> c_int {
+pub static mut old: c_uint = 0;
+    let mut sb = inode.i_sb;
     if (fsflags & FS_CASEFOLD_FL) {
     if (!(old & S_CASEFOLD)) {
-    if (!sb.s_encoding)
+    if (!sb.s_encoding) {
     return -EOPNOTSUPP;
-    if (!S_ISDIR(inode.i_mode))
+    }
+    if (!S_ISDIR(inode.i_mode)) {
     return -ENOTDIR;
-    if (dentry && !simple_empty(dentry))
+    }
+    if (dentry && !simple_empty(dentry)) {
     return -ENOTEMPTY;
+    }
     }
 // i_flags = *i_flags | S_CASEFOLD;
     } else if (old & S_CASEFOLD) {
-    if (dentry && !simple_empty(dentry))
+    if (dentry && !simple_empty(dentry)) {
     return -ENOTEMPTY;
+    }
     }
     return 0;
     }
 
-    static int shmem_inode_casefold_flags(struct inode *inode, unsigned int fsflags,
-    struct dentry *dentry, unsigned int *i_flags)
-    {
-    if (fsflags & FS_CASEFOLD_FL)
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: shmem_inode_casefold_flags
+pub unsafe extern "C" fn shmem_inode_casefold_flags_dup(inode: *mut inode, fsflags: c_uint, dentry: *mut dentry, i_flags: *mut c_uint) -> c_int {
+    if (fsflags & FS_CASEFOLD_FL) {
     return -EOPNOTSUPP;
+    }
     return 0;
     }
 
@@ -2668,19 +2994,21 @@ unsafe extern "C" fn shmem_file_open(inode: *mut inode, file: *mut file) -> c_in
 //
 #[no_mangle]
 unsafe extern "C" fn shmem_set_inode_flags(inode: *mut inode, fsflags: c_uint, dentry: *mut dentry) -> c_int {
-    static int shmem_set_inode_flags(struct inode *inode, unsigned int fsflags, struct dentry *dentry)
-    {
-    let mut i_flags: c_uint = 0;
-    int ret;
+pub static mut i_flags: c_uint = 0;
+    let mut ret = 0;
     ret = shmem_inode_casefold_flags(inode, fsflags, dentry, &i_flags);
-    if (ret)
+    if (ret) {
     return ret;
-    if (fsflags & FS_NOATIME_FL)
+    }
+    if (fsflags & FS_NOATIME_FL) {
     i_flags |= S_NOATIME;
-    if (fsflags & FS_APPEND_FL)
+    }
+    if (fsflags & FS_APPEND_FL) {
     i_flags |= S_APPEND;
-    if (fsflags & FS_IMMUTABLE_FL)
+    }
+    if (fsflags & FS_IMMUTABLE_FL) {
     i_flags |= S_IMMUTABLE;
+    }
 //
 // But FS_NODUMP_FL does not require any action in i_flags.
 //
@@ -2690,27 +3018,23 @@ unsafe extern "C" fn shmem_set_inode_flags(inode: *mut inode, fsflags: c_uint, d
 
 #[no_mangle]
 unsafe extern "C" fn shmem_set_inode_flags(inode: *mut inode, fsflags: c_uint, dentry: *mut dentry) {
-    static void shmem_set_inode_flags(struct inode *inode, unsigned int fsflags, struct dentry *dentry)
-    {
     }
 
-    static struct offset_ctx *shmem_get_offset_ctx(struct inode *inode)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn shmem_get_offset_ctx(inode: *mut inode) -> *mut c_void {
     return &SHMEM_I(inode).dir_offsets;
     }
-    static struct inode *__shmem_get_inode(struct mnt_idmap *idmap,
-    struct super_block *sb,
-    struct inode *dir, umode_t mode,
-    dev_t dev, vma_flags_t flags)
-    {
-    struct inode *inode;
-    struct shmem_inode_info *info;
-    struct shmem_sb_info *sbinfo = SHMEM_SB(sb);
-    ino_t ino;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn __shmem_get_inode(idmap: *mut mnt_idmap, sb: *mut super_block, dir: *mut inode, mode: umode_t, dev: dev_t, flags: vma_flags_t) -> *mut c_void {
+pub static mut inode: *mut c_void = core::ptr::null_mut();
+pub static mut info: *mut c_void = core::ptr::null_mut();
+    let mut sbinfo = SHMEM_SB(sb);
+    let mut ino;
+    let mut err = 0;
     err = shmem_reserve_inode(sb, &ino);
-    if (err)
+    if (err) {
     return ERR_PTR(err);
+    }
     inode = new_inode(sb);
     if (!inode) {
     shmem_free_inode(sb, 0);
@@ -2722,7 +3046,7 @@ unsafe extern "C" fn shmem_set_inode_flags(inode: *mut inode, fsflags: c_uint, d
     simple_inode_init_ts(inode);
     inode.i_generation = get_random_u32();
     info = SHMEM_I(inode);
-    memset(info, 0, (char *)inode - (char *)info);
+    memset(info, 0, inode - info);
     INIT_LIST_HEAD_RCU(&info.xattrs);
     spin_lock_init(&info.lock);
     atomic_set(&info.stop_eviction, 0);
@@ -2732,181 +3056,180 @@ unsafe extern "C" fn shmem_set_inode_flags(inode: *mut inode, fsflags: c_uint, d
     info.i_crtime = inode_get_mtime(inode);
     info.fsflags = (dir == core::ptr::null_mut()) ? 0 :
     SHMEM_I(dir).fsflags & SHMEM_FL_INHERITED;
-    if (info.fsflags)
+    if (info.fsflags) {
     shmem_set_inode_flags(inode, info.fsflags, core::ptr::null_mut());
+    }
     INIT_LIST_HEAD(&info.shrinklist);
     INIT_LIST_HEAD(&info.swaplist);
     cache_no_acl(inode);
-    if (sbinfo.noswap)
+    if (sbinfo.noswap) {
     mapping_set_unevictable(inode.i_mapping);
+    }
     mapping_set_large_folios(inode.i_mapping);
-    switch (mode & S_IFMT) {
-    default:
+    match (mode & S_IFMT) {
+    _ => {
     inode.i_op = &shmem_special_inode_operations;
     init_special_inode(inode, mode, dev);
-    break;
-    case S_IFREG:
+    // break;
+    }
+    S_IFREG => {
     inode.i_mapping.a_ops = &shmem_aops;
     inode.i_op = &shmem_inode_operations;
     inode.i_fop = &shmem_file_operations;
     mpol_shared_policy_init(&info.policy,
     shmem_get_sbmpol(sbinfo));
-    break;
-    case S_IFDIR:
+    // break;
+    }
+    S_IFDIR => {
     inc_nlink(inode);
 // Some things misbehave if size == 0 on a directory
     inode.i_size = 2 * BOGO_DIRENT_SIZE;
     inode.i_op = &shmem_dir_inode_operations;
     inode.i_fop = &simple_offset_dir_operations;
     simple_offset_init(shmem_get_offset_ctx(inode));
-    break;
-    case S_IFLNK:
+    // break;
+    }
+    S_IFLNK => {
 //
 // Must not load anything in the rbtree,
 // mpol_free_shared_policy will not be called.
 //
     mpol_shared_policy_init(&info.policy, core::ptr::null_mut());
-    break;
+    // break;
+    }
     }
     lockdep_annotate_inode_mutex_key(inode);
     return inode;
     }
 
-    static struct inode *shmem_get_inode(struct mnt_idmap *idmap,
-    struct super_block *sb, struct inode *dir,
-    umode_t mode, dev_t dev, vma_flags_t flags)
-    {
-    int err;
-    struct inode *inode;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_get_inode(idmap: *mut mnt_idmap, sb: *mut super_block, dir: *mut inode, mode: umode_t, dev: dev_t, flags: vma_flags_t) -> *mut c_void {
+    let mut err = 0;
+pub static mut inode: *mut c_void = core::ptr::null_mut();
     inode = __shmem_get_inode(idmap, sb, dir, mode, dev, flags);
-    if (IS_ERR(inode))
+    if (IS_ERR(inode)) {
     return inode;
+    }
     err = dquot_initialize(inode);
-    if (err)
-    goto errout;
+    if (err) {
+// goto;
+    }
     err = dquot_alloc_inode(inode);
     if (err) {
     dquot_drop(inode);
-    goto errout;
+// goto;
     }
     return inode;
-    errout:
+// label;
     inode.i_flags |= S_NOQUOTA;
     iput(inode);
     return ERR_PTR(err);
     }
 
-    static struct inode *shmem_get_inode(struct mnt_idmap *idmap,
-    struct super_block *sb, struct inode *dir,
-    umode_t mode, dev_t dev, vma_flags_t flags)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: shmem_get_inode
+pub unsafe extern "C" fn shmem_get_inode_dup(idmap: *mut mnt_idmap, sb: *mut super_block, dir: *mut inode, mode: umode_t, dev: dev_t, flags: vma_flags_t) -> *mut c_void {
     return __shmem_get_inode(idmap, sb, dir, mode, dev, flags);
     }
 
-    static struct folio *shmem_mfill_folio_alloc(struct vm_area_struct *vma,
-    unsigned long addr)
-    {
-    struct inode *inode = file_inode(vma.vm_file);
-    struct address_space *mapping = inode.i_mapping;
-    struct shmem_inode_info *info = SHMEM_I(inode);
-    let mut pgoff: pgoff_t = linear_page_index(vma, addr);
-    let mut gfp: gfp_t = mapping_gfp_mask(mapping);
-    struct folio *folio;
-    if (unlikely(pgoff >= DIV_ROUND_UP(i_size_read(inode), PAGE_SIZE)))
+#[no_mangle]
+pub unsafe extern "C" fn shmem_mfill_folio_alloc(vma: *mut vm_area_struct, addr: c_ulong) -> *mut c_void {
+    let mut inode = file_inode(vma.vm_file);
+    let mut mapping = inode.i_mapping;
+    let mut info = SHMEM_I(inode);
+pub static mut pgoff: pgoff_t = 0;
+pub static mut gfp: gfp_t = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    if (unlikely(pgoff >= DIV_ROUND_UP(i_size_read(inode), PAGE_SIZE))) {
     return core::ptr::null_mut();
+    }
     folio = shmem_alloc_folio(gfp, 0, info, pgoff);
-    if (!folio)
+    if (!folio) {
     return core::ptr::null_mut();
+    }
     if (mem_cgroup_charge(folio, vma.vm_mm, GFP_KERNEL)) {
     folio_put(folio);
     return core::ptr::null_mut();
     }
     return folio;
     }
-    static int shmem_mfill_filemap_add(struct folio *folio,
-    struct vm_area_struct *vma,
-    unsigned long addr)
-    {
-    struct inode *inode = file_inode(vma.vm_file);
-    struct address_space *mapping = inode.i_mapping;
-    let mut pgoff: pgoff_t = linear_page_index(vma, addr);
-    let mut gfp: gfp_t = mapping_gfp_mask(mapping);
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_mfill_filemap_add(folio: *mut folio, vma: *mut vm_area_struct, addr: c_ulong) -> c_int {
+    let mut inode = file_inode(vma.vm_file);
+    let mut mapping = inode.i_mapping;
+pub static mut pgoff: pgoff_t = 0;
+pub static mut gfp: gfp_t = 0;
+    let mut err = 0;
     __folio_set_locked(folio);
     __folio_set_swapbacked(folio);
     err = shmem_add_to_page_cache(folio, mapping, pgoff, core::ptr::null_mut(), gfp);
-    if (err)
-    goto err_unlock;
+    if (err) {
+// goto;
+    }
     if (shmem_inode_acct_blocks(inode, 1)) {
     err = -ENOMEM;
-    goto err_delete_from_cache;
+// goto;
     }
     folio_add_lru(folio);
     shmem_recalc_inode(inode, 1, 0);
     return 0;
-    err_delete_from_cache:
+// label;
     filemap_remove_folio(folio);
-    err_unlock:
+// label;
     folio_unlock(folio);
     return err;
     }
-    static void shmem_mfill_filemap_remove(struct folio *folio,
-    struct vm_area_struct *vma)
-    {
-    struct inode *inode = file_inode(vma.vm_file);
+#[no_mangle]
+pub unsafe extern "C" fn shmem_mfill_filemap_remove(folio: *mut folio, vma: *mut vm_area_struct) {
+    let mut inode = file_inode(vma.vm_file);
     filemap_remove_folio(folio);
     shmem_recalc_inode(inode, 0, 0);
     folio_unlock(folio);
     }
-    static struct folio *shmem_get_folio_noalloc(struct inode *inode, pgoff_t pgoff)
-    {
-    struct folio *folio;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_get_folio_noalloc(inode: *mut inode, pgoff: pgoff_t) -> *mut c_void {
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
     err = shmem_get_folio(inode, pgoff, 0, &folio, SGP_NOALLOC);
-    if (err)
+    if (err) {
     return ERR_PTR(err);
+    }
     return folio;
     }
 #[no_mangle]
 unsafe extern "C" fn shmem_can_userfault(vma: *mut vm_area_struct, vm_flags: vm_flags_t) -> bool {
-    static bool shmem_can_userfault(struct vm_area_struct *vma, vm_flags_t vm_flags)
-    {
     return true;
     }
-    static const struct vm_uffd_ops shmem_uffd_ops = {
-    .can_userfault		= shmem_can_userfault,
-    .get_folio_noalloc	= shmem_get_folio_noalloc,
-    .alloc_folio		= shmem_mfill_folio_alloc,
-    .filemap_add		= shmem_mfill_filemap_add,
-    .filemap_remove		= shmem_mfill_filemap_remove,
-    };
+pub static mut vm_uffd_ops: usize = 0;
 
-    static const struct inode_operations shmem_symlink_inode_operations;
-    static const struct inode_operations shmem_short_symlink_operations;
-    static int
-    shmem_write_begin(const struct kiocb *iocb, struct address_space *mapping,
-    loff_t pos, unsigned len,
-    struct folio **foliop, void **fsdata)
-    {
-    struct inode *inode = mapping.host;
-    struct shmem_inode_info *info = SHMEM_I(inode);
-    let mut index: pgoff_t = pos >> PAGE_SHIFT;
-    struct folio *folio;
-    let mut ret: c_int = 0;
+pub static mut shmem_symlink_inode_operations: usize = 0;
+pub static mut shmem_short_symlink_operations: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_write_begin(iocb: *mut kiocb, mapping: *mut address_space, pos: loff_t, len: c_uint, foliop: *mut *mut folio, fsdata: *mut *mut c_void) -> c_int {
+    let mut inode = mapping.host;
+    let mut info = SHMEM_I(inode);
+pub static mut index: pgoff_t = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
 // i_rwsem is held by caller
     if (unlikely(info.seals & (F_SEAL_GROW |
     F_SEAL_WRITE | F_SEAL_FUTURE_WRITE))) {
-    if (info.seals & (F_SEAL_WRITE | F_SEAL_FUTURE_WRITE))
-    return -EPERM;
-    if ((info.seals & F_SEAL_GROW) && pos + len > inode.i_size)
+    if (info.seals & (F_SEAL_WRITE | F_SEAL_FUTURE_WRITE)) {
     return -EPERM;
     }
-    if (unlikely((info.flags & SHMEM_F_MAPPING_FROZEN) &&
-    pos + len > inode.i_size))
+    if ((info.seals & F_SEAL_GROW) && pos + len > inode.i_size) {
     return -EPERM;
+    }
+    }
+    if (unlikely((info.flags & SHMEM_F_MAPPING_FROZEN) &&
+    pos + len > inode.i_size)) {
+    return -EPERM;
+    }
     ret = shmem_get_folio(inode, index, pos + len, &folio, SGP_WRITE);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     if (folio_contain_hwpoisoned_page(folio)) {
     folio_unlock(folio);
     folio_put(folio);
@@ -2915,17 +3238,15 @@ unsafe extern "C" fn shmem_can_userfault(vma: *mut vm_area_struct, vm_flags: vm_
 // foliop = folio;
     return 0;
     }
-    static int
-    shmem_write_end(const struct kiocb *iocb, struct address_space *mapping,
-    loff_t pos, unsigned len, unsigned copied,
-    struct folio *folio, void *fsdata)
-    {
-    struct inode *inode = mapping.host;
-    if (pos + copied > inode.i_size)
+#[no_mangle]
+pub unsafe extern "C" fn shmem_write_end(iocb: *mut kiocb, mapping: *mut address_space, pos: loff_t, len: c_uint, copied: c_uint, folio: *mut folio, fsdata: *mut c_void) -> c_int {
+    let mut inode = mapping.host;
+    if (pos + copied > inode.i_size) {
     i_size_write(inode, pos + copied);
+    }
     if (!folio_test_uptodate(folio)) {
     if (copied < folio_size(folio)) {
-    let mut from: usize = offset_in_folio(folio, pos);
+pub static mut from: usize = 0;
     folio_zero_segments(folio, 0, from,
     from + copied, folio_size(folio));
     }
@@ -2938,29 +3259,29 @@ unsafe extern "C" fn shmem_can_userfault(vma: *mut vm_area_struct, vm_flags: vm_
     }
 #[no_mangle]
 unsafe extern "C" fn shmem_file_read_iter(iocb: *mut kiocb, to: *mut iov_iter) -> isize {
-    static ssize_t shmem_file_read_iter(struct kiocb *iocb, struct iov_iter *to)
-    {
-    struct file *file = iocb.ki_filp;
-    struct inode *inode = file_inode(file);
-    struct address_space *mapping = inode.i_mapping;
-    pgoff_t index;
-    unsigned long offset;
-    let mut error: c_int = 0;
-    let mut retval: isize = 0;
+    let mut file = iocb.ki_filp;
+    let mut inode = file_inode(file);
+    let mut mapping = inode.i_mapping;
+    let mut index;
+    let mut offset = 0;
+pub static mut error: c_int = 0;
+pub static mut retval: isize = 0;
     for (;;) {
-    struct folio *folio = core::ptr::null_mut();
-    struct page *page = core::ptr::null_mut();
+    let mut folio = core::ptr::null_mut();
+    let mut page = core::ptr::null_mut();
     unsigned long nr, ret;
     loff_t end_offset, i_size = i_size_read(inode);
-    let mut fallback_page_copy: bool = false;
-    size_t fsize;
-    if (unlikely(iocb.ki_pos >= i_size))
+pub static mut fallback_page_copy: bool = false;
+    let mut fsize = 0;
+    if (unlikely(iocb.ki_pos >= i_size)) {
     break;
+    }
     index = iocb.ki_pos >> PAGE_SHIFT;
     error = shmem_get_folio(inode, index, 0, &folio, SGP_READ);
     if (error) {
-    if (error == -EINVAL)
+    if (error == -EINVAL) {
     error = 0;
+    }
     break;
     }
     if (folio) {
@@ -2972,8 +3293,9 @@ unsafe extern "C" fn shmem_file_read_iter(iocb: *mut kiocb, to: *mut iov_iter) -
     break;
     }
     if (folio_test_large(folio) &&
-    folio_test_has_hwpoisoned(folio))
+    folio_test_has_hwpoisoned(folio)) {
     fallback_page_copy = true;
+    }
     }
 //
 // We must evaluate after, since reads (unlike writes)
@@ -2981,15 +3303,18 @@ unsafe extern "C" fn shmem_file_read_iter(iocb: *mut kiocb, to: *mut iov_iter) -
 //
     i_size = i_size_read(inode);
     if (unlikely(iocb.ki_pos >= i_size)) {
-    if (folio)
+    if (folio) {
     folio_put(folio);
+    }
     break;
     }
     end_offset = min_t(loff_t, i_size, iocb.ki_pos + to.count);
-    if (folio && likely(!fallback_page_copy))
+    if (folio && likely(!fallback_page_copy)) {
     fsize = folio_size(folio);
-    else
+    }
+    else {
     fsize = PAGE_SIZE;
+    }
     offset = iocb.ki_pos & (fsize - 1);
     nr = min_t(loff_t, end_offset - iocb.ki_pos, fsize - offset);
     if (folio) {
@@ -2999,24 +3324,29 @@ unsafe extern "C" fn shmem_file_read_iter(iocb: *mut kiocb, to: *mut iov_iter) -
 // before reading the page on the kernel side.
 //
     if (mapping_writably_mapped(mapping)) {
-    if (likely(!fallback_page_copy))
+    if (likely(!fallback_page_copy)) {
     flush_dcache_folio(folio);
-    else
+    }
+    else {
     flush_dcache_page(page);
+    }
     }
 //
 // Mark the folio accessed if we read the beginning.
 //
-    if (!offset)
+    if (!offset) {
     folio_mark_accessed(folio);
+    }
 //
 // Ok, we have the page, and it's up-to-date, so
 // now we can copy it to user space...
 //
-    if (likely(!fallback_page_copy))
+    if (likely(!fallback_page_copy)) {
     ret = copy_folio_to_iter(folio, offset, nr, to);
-    else
+    }
+    else {
     ret = copy_page_to_iter(page, offset, nr, to);
+    }
     folio_put(folio);
     } else if (user_backed_iter(to)) {
 //
@@ -3035,8 +3365,9 @@ unsafe extern "C" fn shmem_file_read_iter(iocb: *mut kiocb, to: *mut iov_iter) -
     }
     retval += ret;
     iocb.ki_pos += ret;
-    if (!iov_iter_count(to))
+    if (!iov_iter_count(to)) {
     break;
+    }
     if (ret < nr) {
     error = -EFAULT;
     break;
@@ -3048,88 +3379,81 @@ unsafe extern "C" fn shmem_file_read_iter(iocb: *mut kiocb, to: *mut iov_iter) -
     }
 #[no_mangle]
 unsafe extern "C" fn shmem_file_write_iter(iocb: *mut kiocb, from: *mut iov_iter) -> isize {
-    static ssize_t shmem_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
-    {
-    struct file *file = iocb.ki_filp;
-    struct inode *inode = file.f_mapping.host;
-    ssize_t ret;
+    let mut file = iocb.ki_filp;
+    let mut inode = file.f_mapping.host;
+    let mut ret = 0;
     inode_lock(inode);
     ret = generic_write_checks(iocb, from);
-    if (ret <= 0)
-    goto unlock;
+    if (ret <= 0) {
+// goto;
+    }
     ret = file_remove_privs(file);
-    if (ret)
-    goto unlock;
+    if (ret) {
+// goto;
+    }
     ret = file_update_time(file);
-    if (ret)
-    goto unlock;
+    if (ret) {
+// goto;
+    }
     ret = generic_perform_write(iocb, from);
-    unlock:
+// label;
     inode_unlock(inode);
     return ret;
     }
-    static bool zero_pipe_buf_get(struct pipe_inode_info *pipe,
-    struct pipe_buffer *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn zero_pipe_buf_get(pipe: *mut pipe_inode_info, buf: *mut pipe_buffer) -> bool {
     return true;
     }
-    static void zero_pipe_buf_release(struct pipe_inode_info *pipe,
-    struct pipe_buffer *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn zero_pipe_buf_release(pipe: *mut pipe_inode_info, buf: *mut pipe_buffer) {
     }
-    static bool zero_pipe_buf_try_steal(struct pipe_inode_info *pipe,
-    struct pipe_buffer *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn zero_pipe_buf_try_steal(pipe: *mut pipe_inode_info, buf: *mut pipe_buffer) -> bool {
     return false;
     }
-    static const struct pipe_buf_operations zero_pipe_buf_ops = {
-    .release	= zero_pipe_buf_release,
-    .try_steal	= zero_pipe_buf_try_steal,
-    .get		= zero_pipe_buf_get,
-    };
-    static size_t splice_zeropage_into_pipe(struct pipe_inode_info *pipe,
-    loff_t fpos, size_t size)
-    {
-    let mut offset: usize = fpos & ~PAGE_MASK;
+pub static mut pipe_buf_operations: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn splice_zeropage_into_pipe(pipe: *mut pipe_inode_info, fpos: loff_t, size: size_t) -> size_t {
+pub static mut offset: usize = 0;
     size = min_t(size_t, size, PAGE_SIZE - offset);
     if (!pipe_is_full(pipe)) {
-    struct pipe_buffer *buf = pipe_head_buf(pipe);
-// buf = (struct pipe_buffer) {
+    let mut buf = pipe_head_buf(pipe);
+// buf = (pipe_buffer) {
     .ops	= &zero_pipe_buf_ops,
     .page	= ZERO_PAGE(0),
     .offset	= offset,
     .len	= size,
     };
-    pipe.head++;
+    pipe.head += 1;
     }
     return size;
     }
-    static ssize_t shmem_file_splice_read(struct file *in, loff_t *ppos,
-    struct pipe_inode_info *pipe,
-    size_t len, unsigned int flags)
-    {
-    struct inode *inode = file_inode(in);
-    struct address_space *mapping = inode.i_mapping;
-    struct folio *folio = core::ptr::null_mut();
-    let mut total_spliced: usize = 0, used, npages, n, part;
-    loff_t isize;
-    let mut error: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_file_splice_read(in: *mut file, ppos: *mut loff_t, pipe: *mut pipe_inode_info, len: size_t, flags: c_uint) -> ssize_t {
+    let mut inode = file_inode(in);
+    let mut mapping = inode.i_mapping;
+    let mut folio = core::ptr::null_mut();
+pub static mut total_spliced: usize = 0;
+    let mut isize = 0;
+pub static mut error: c_int = 0;
 // Work out how much data we can actually add into the pipe
     used = pipe_buf_usage(pipe);
     npages = max_t(ssize_t, pipe.max_usage - used, 0);
     len = min_t(size_t, len, npages * PAGE_SIZE);
     do {
-    let mut fallback_page_splice: bool = false;
-    struct page *page = core::ptr::null_mut();
-    pgoff_t index;
-    size_t size;
-    if (*ppos >= i_size_read(inode))
+pub static mut fallback_page_splice: bool = false;
+    let mut page = core::ptr::null_mut();
+    let mut index;
+    let mut size = 0;
+    if (*ppos >= i_size_read(inode)) {
     break;
+    }
     index = *ppos >> PAGE_SHIFT;
     error = shmem_get_folio(inode, index, 0, &folio, SGP_READ);
     if (error) {
-    if (error == -EINVAL)
+    if (error == -EINVAL) {
     error = 0;
+    }
     break;
     }
     if (folio) {
@@ -3140,8 +3464,9 @@ unsafe extern "C" fn shmem_file_write_iter(iocb: *mut kiocb, from: *mut iov_iter
     break;
     }
     if (folio_test_large(folio) &&
-    folio_test_has_hwpoisoned(folio))
+    folio_test_has_hwpoisoned(folio)) {
     fallback_page_splice = true;
+    }
     }
 //
 // i_size must be checked after we know the pages are Uptodate.
@@ -3152,15 +3477,16 @@ unsafe extern "C" fn shmem_file_write_iter(iocb: *mut kiocb, from: *mut iov_iter
 // another truncate extends the file - this is desired though).
 //
     isize = i_size_read(inode);
-    if (unlikely(*ppos >= isize))
+    if (unlikely(*ppos >= isize)) {
     break;
+    }
 //
 // Fallback to PAGE_SIZE splice if the large folio has hwpoisoned
 // pages.
 //
     size = len;
     if (unlikely(fallback_page_splice)) {
-    let mut offset: usize = *ppos & ~PAGE_MASK;
+pub static mut offset: usize = 0;
     size = umin(size, PAGE_SIZE - offset);
     }
     part = min_t(loff_t, isize - *ppos, size);
@@ -3171,10 +3497,12 @@ unsafe extern "C" fn shmem_file_write_iter(iocb: *mut kiocb, from: *mut iov_iter
 // before reading the page on the kernel side.
 //
     if (mapping_writably_mapped(mapping)) {
-    if (likely(!fallback_page_splice))
+    if (likely(!fallback_page_splice)) {
     flush_dcache_folio(folio);
-    else
+    }
+    else {
     flush_dcache_page(page);
+    }
     }
     folio_mark_accessed(folio);
 //
@@ -3187,66 +3515,70 @@ unsafe extern "C" fn shmem_file_write_iter(iocb: *mut kiocb, from: *mut iov_iter
     } else {
     n = splice_zeropage_into_pipe(pipe, *ppos, part);
     }
-    if (!n)
+    if (!n) {
     break;
+    }
     len -= n;
     total_spliced += n;
 // ppos += n;
     in.f_ra.prev_pos = *ppos;
-    if (pipe_is_full(pipe))
+    if (pipe_is_full(pipe)) {
     break;
+    }
     cond_resched();
     } while (len);
-    if (folio)
+    if (folio) {
     folio_put(folio);
+    }
     file_accessed(in);
     return total_spliced ? total_spliced : error;
     }
 #[no_mangle]
 unsafe extern "C" fn shmem_file_llseek(file: *mut file, offset: loff_t, whence: c_int) -> loff_t {
-    static loff_t shmem_file_llseek(struct file *file, loff_t offset, int whence)
-    {
-    struct address_space *mapping = file.f_mapping;
-    struct inode *inode = mapping.host;
-    if (whence != SEEK_DATA && whence != SEEK_HOLE)
+    let mut mapping = file.f_mapping;
+    let mut inode = mapping.host;
+    if (whence != SEEK_DATA && whence != SEEK_HOLE) {
     return generic_file_llseek_size(file, offset, whence,
     MAX_LFS_FILESIZE, i_size_read(inode));
-    if (offset < 0)
+    }
+    if (offset < 0) {
     return -ENXIO;
+    }
     inode_lock(inode);
 // We're holding i_rwsem so we can access i_size directly
     offset = mapping_seek_hole_data(mapping, offset, inode.i_size, whence);
-    if (offset >= 0)
+    if (offset >= 0) {
     offset = vfs_setpos(file, offset, MAX_LFS_FILESIZE);
+    }
     inode_unlock(inode);
     return offset;
     }
-    static long shmem_fallocate(struct file *file, int mode, loff_t offset,
-    loff_t len)
-    {
-    struct inode *inode = file_inode(file);
-    struct shmem_sb_info *sbinfo = SHMEM_SB(inode.i_sb);
-    struct shmem_inode_info *info = SHMEM_I(inode);
-    struct shmem_falloc shmem_falloc;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_fallocate(file: *mut file, mode: c_int, offset: loff_t, len: loff_t) -> c_long {
+    let mut inode = file_inode(file);
+    let mut sbinfo = SHMEM_SB(inode.i_sb);
+    let mut info = SHMEM_I(inode);
+pub static mut shmem_falloc: usize = 0;
     pgoff_t start, index, end, undo_fallocend;
-    loff_t aligned_end;
-    int error;
-    if (mode & ~(FALLOC_FL_KEEP_SIZE | FALLOC_FL_PUNCH_HOLE))
+    let mut aligned_end = 0;
+    let mut error = 0;
+    if (mode & ~(FALLOC_FL_KEEP_SIZE | FALLOC_FL_PUNCH_HOLE)) {
     return -EOPNOTSUPP;
+    }
     inode_lock(inode);
     if (info.flags & SHMEM_F_MAPPING_FROZEN) {
     error = -EPERM;
-    goto out;
+// goto;
     }
     if (mode & FALLOC_FL_PUNCH_HOLE) {
-    struct address_space *mapping = file.f_mapping;
-    let mut unmap_start: loff_t = round_up(offset, PAGE_SIZE);
-    let mut unmap_end: loff_t = round_down(offset + len, PAGE_SIZE) - 1;
-    DECLARE_WAIT_QUEUE_HEAD_ONSTACK(shmem_falloc_waitq);
+    let mut mapping = file.f_mapping;
+pub static mut unmap_start: loff_t = 0;
+pub static mut unmap_end: loff_t = 0;
+pub static mut shmem_falloc_waitq: usize = 0;
 // protected by i_rwsem
     if (info.seals & (F_SEAL_WRITE | F_SEAL_FUTURE_WRITE)) {
     error = -EPERM;
-    goto out;
+// goto;
     }
     shmem_falloc.waitq = &shmem_falloc_waitq;
     shmem_falloc.start = (u64)unmap_start >> PAGE_SHIFT;
@@ -3254,39 +3586,41 @@ unsafe extern "C" fn shmem_file_llseek(file: *mut file, offset: loff_t, whence: 
     spin_lock(&inode.i_lock);
     WRITE_ONCE(inode.i_private, &shmem_falloc);
     spin_unlock(&inode.i_lock);
-    if ((u64)unmap_end > (u64)unmap_start)
+    if ((u64)unmap_end > (u64)unmap_start) {
     unmap_mapping_range(mapping, unmap_start,
     1 + unmap_end - unmap_start, 0);
+    }
     shmem_truncate_range(inode, offset, offset + len - 1);
 // No need to unmap again: hole-punching leaves COWed pages
     spin_lock(&inode.i_lock);
     WRITE_ONCE(inode.i_private, core::ptr::null_mut());
     wake_up_all(&shmem_falloc_waitq);
-    WARN_ON_ONCE(!list_empty(&shmem_falloc_waitq.head));
+    WARN_ON_ONCE!(!list_empty(&shmem_falloc_waitq.head));
     spin_unlock(&inode.i_lock);
     error = 0;
-    goto out;
+// goto;
     }
 // We need to check rlimit even when FALLOC_FL_KEEP_SIZE
     error = inode_newsize_ok(inode, offset + len);
-    if (error)
-    goto out;
+    if (error) {
+// goto;
+    }
     if ((info.seals & F_SEAL_GROW) && offset + len > inode.i_size) {
     error = -EPERM;
-    goto out;
+// goto;
     }
 // Check for wraparound
     if (check_add_overflow(offset + len, (loff_t)PAGE_SIZE - 1,
     &aligned_end)) {
     error = -EFBIG;
-    goto out;
+// goto;
     }
     start = offset >> PAGE_SHIFT;
     end = aligned_end >> PAGE_SHIFT;
 // Try to avoid a swapstorm if len is impossible to satisfy
     if (sbinfo.max_blocks && end - start > sbinfo.max_blocks) {
     error = -ENOSPC;
-    goto out;
+// goto;
     }
     shmem_falloc.waitq = core::ptr::null_mut();
     shmem_falloc.start = start;
@@ -3302,10 +3636,11 @@ unsafe extern "C" fn shmem_file_llseek(file: *mut file, offset: loff_t, whence: 
 // pages when FALLOC_FL_KEEP_SIZE committed beyond i_size.
 //
     undo_fallocend = info.fallocend;
-    if (info.fallocend < end)
+    if (info.fallocend < end) {
     info.fallocend = end;
-    for (index = start; index < end; ) {
-    struct folio *folio;
+    }
+    while (index < end) {
+pub static mut folio: *mut c_void = core::ptr::null_mut();
 //
 // Check for fatal signal so that we abort early in OOM
 // situations. We don't want to abort in case of non-fatal
@@ -3313,15 +3648,17 @@ unsafe extern "C" fn shmem_file_llseek(file: *mut file, offset: loff_t, whence: 
 // e.g. periodic timers may result in fallocate constantly
 // restarting.
 //
-    if (fatal_signal_pending(current))
+    if (fatal_signal_pending(current)) {
     error = -EINTR;
-#[no_mangle]
-pub unsafe extern "C" fn if(shmem_falloc.nr_falloced: shmem_falloc.nr_unswapped >) -> else {
-    else if (shmem_falloc.nr_unswapped > shmem_falloc.nr_falloced)
+    }
+
+    else if (shmem_falloc.nr_unswapped > shmem_falloc.nr_falloced) {
     error = -ENOMEM;
-    else
+    }
+    else {
     error = shmem_get_folio(inode, index, offset + len,
     &folio, SGP_FALLOC);
+    }
     if (error) {
     info.fallocend = undo_fallocend;
 // Remove the !uptodate folios we added
@@ -3330,7 +3667,7 @@ pub unsafe extern "C" fn if(shmem_falloc.nr_falloced: shmem_falloc.nr_unswapped 
     (loff_t)start << PAGE_SHIFT,
     ((loff_t)index << PAGE_SHIFT) - 1, true);
     }
-    goto undone;
+// goto;
     }
 //
 // Here is a more important optimization than it appears:
@@ -3339,14 +3676,16 @@ pub unsafe extern "C" fn if(shmem_falloc.nr_falloced: shmem_falloc.nr_unswapped 
 //
     index = folio_next_index(folio);
 // Beware 32-bit wraparound
-    if (!index)
-    index--;
+    if (!index) {
+    index -= 1;
+    }
 //
 // Inform shmem_writeout() how far we have reached.
 // No need for lock or barrier: we have the page lock.
 //
-    if (!folio_test_uptodate(folio))
+    if (!folio_test_uptodate(folio)) {
     shmem_falloc.nr_falloced += index - shmem_falloc.next;
+    }
     shmem_falloc.next = index;
 //
 // If !uptodate, leave it that way so that freeable folios
@@ -3360,23 +3699,23 @@ pub unsafe extern "C" fn if(shmem_falloc.nr_falloced: shmem_falloc.nr_unswapped 
     folio_put(folio);
     cond_resched();
     }
-    if (!(mode & FALLOC_FL_KEEP_SIZE) && offset + len > inode.i_size)
+    if (!(mode & FALLOC_FL_KEEP_SIZE) && offset + len > inode.i_size) {
     i_size_write(inode, offset + len);
-    undone:
+    }
+// label;
     spin_lock(&inode.i_lock);
     WRITE_ONCE(inode.i_private, core::ptr::null_mut());
     spin_unlock(&inode.i_lock);
-    out:
-    if (!error)
+// label;
+    if (!error) {
     file_modified(file);
+    }
     inode_unlock(inode);
     return error;
     }
 #[no_mangle]
 unsafe extern "C" fn shmem_statfs(dentry: *mut dentry, buf: *mut kstatfs) -> c_int {
-    static int shmem_statfs(struct dentry *dentry, struct kstatfs *buf)
-    {
-    struct shmem_sb_info *sbinfo = SHMEM_SB(dentry.d_sb);
+    let mut sbinfo = SHMEM_SB(dentry.d_sb);
     buf.f_type = TMPFS_MAGIC;
     buf.f_bsize = PAGE_SIZE;
     buf.f_namelen = NAME_MAX;
@@ -3397,86 +3736,87 @@ unsafe extern "C" fn shmem_statfs(dentry: *mut dentry, buf: *mut kstatfs) -> c_i
 //
 // File creation. Allocate an inode, and we're done..
 //
-    static int
-    shmem_mknod(struct mnt_idmap *idmap, struct inode *dir,
-    struct dentry *dentry, umode_t mode, dev_t dev)
-    {
-    struct inode *inode;
-    int error;
-    if (!generic_ci_validate_strict_name(dir, &dentry.d_name))
+#[no_mangle]
+pub unsafe extern "C" fn shmem_mknod(idmap: *mut mnt_idmap, dir: *mut inode, dentry: *mut dentry, mode: umode_t, dev: dev_t) -> c_int {
+pub static mut inode: *mut c_void = core::ptr::null_mut();
+    let mut error = 0;
+    if (!generic_ci_validate_strict_name(dir, &dentry.d_name)) {
     return -EINVAL;
+    }
     inode = shmem_get_inode(idmap, dir.i_sb, dir, mode, dev,
     mk_vma_flags(VMA_NORESERVE_BIT));
-    if (IS_ERR(inode))
+    if (IS_ERR(inode)) {
     return PTR_ERR(inode);
+    }
     error = simple_acl_create(dir, inode);
-    if (error)
-    goto out_iput;
+    if (error) {
+// goto;
+    }
     error = security_inode_init_security(inode, dir, &dentry.d_name,
     shmem_initxattrs, core::ptr::null_mut());
-    if (error && error != -EOPNOTSUPP)
-    goto out_iput;
+    if (error && error != -EOPNOTSUPP) {
+// goto;
+    }
     error = simple_offset_add(shmem_get_offset_ctx(dir), dentry);
-    if (error)
-    goto out_iput;
+    if (error) {
+// goto;
+    }
     dir.i_size += BOGO_DIRENT_SIZE;
     inode_set_mtime_to_ts(dir, inode_set_ctime_current(dir));
     inode_inc_iversion(dir);
     d_make_persistent(dentry, inode);
     return error;
-    out_iput:
+// label;
     iput(inode);
     return error;
     }
-    static int
-    shmem_tmpfile(struct mnt_idmap *idmap, struct inode *dir,
-    struct file *file, umode_t mode)
-    {
-    struct inode *inode;
-    int error;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_tmpfile(idmap: *mut mnt_idmap, dir: *mut inode, file: *mut file, mode: umode_t) -> c_int {
+pub static mut inode: *mut c_void = core::ptr::null_mut();
+    let mut error = 0;
     inode = shmem_get_inode(idmap, dir.i_sb, dir, mode, 0,
     mk_vma_flags(VMA_NORESERVE_BIT));
     if (IS_ERR(inode)) {
     error = PTR_ERR(inode);
-    goto err_out;
+// goto;
     }
     error = security_inode_init_security(inode, dir, core::ptr::null_mut(),
     shmem_initxattrs, core::ptr::null_mut());
-    if (error && error != -EOPNOTSUPP)
-    goto out_iput;
+    if (error && error != -EOPNOTSUPP) {
+// goto;
+    }
     error = simple_acl_create(dir, inode);
-    if (error)
-    goto out_iput;
+    if (error) {
+// goto;
+    }
     d_tmpfile(file, inode);
-    err_out:
+// label;
     return finish_open_simple(file, error);
-    out_iput:
+// label;
     iput(inode);
     return error;
     }
-    static struct dentry *shmem_mkdir(struct mnt_idmap *idmap, struct inode *dir,
-    struct dentry *dentry, umode_t mode)
-    {
-    int error;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_mkdir(idmap: *mut mnt_idmap, dir: *mut inode, dentry: *mut dentry, mode: umode_t) -> *mut c_void {
+    let mut error = 0;
     error = shmem_mknod(idmap, dir, dentry, mode | S_IFDIR, 0);
-    if (error)
+    if (error) {
     return ERR_PTR(error);
+    }
     inc_nlink(dir);
     return core::ptr::null_mut();
     }
-    static int shmem_create(struct mnt_idmap *idmap, struct inode *dir,
-    struct dentry *dentry, umode_t mode)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn shmem_create(idmap: *mut mnt_idmap, dir: *mut inode, dentry: *mut dentry, mode: umode_t) -> c_int {
     return shmem_mknod(idmap, dir, dentry, mode | S_IFREG, 0);
     }
 //
 // Link a file..
 //
-    static int shmem_link(struct dentry *old_dentry, struct inode *dir,
-    struct dentry *dentry)
-    {
-    struct inode *inode = d_inode(old_dentry);
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_link(old_dentry: *mut dentry, dir: *mut inode, dentry: *mut dentry) -> c_int {
+    let mut inode = d_inode(old_dentry);
+    let mut ret = 0;
 //
 // No ordinary (disk based) filesystem counts links as inodes;
 // but each new link needs a new dentry, pinning lowmem, and
@@ -3486,13 +3826,15 @@ unsafe extern "C" fn shmem_statfs(dentry: *mut dentry, buf: *mut kstatfs) -> c_i
 //
     if (inode.i_nlink) {
     ret = shmem_reserve_inode(inode.i_sb, core::ptr::null_mut());
-    if (ret)
+    if (ret) {
     return ret;
+    }
     }
     ret = simple_offset_add(shmem_get_offset_ctx(dir), dentry);
     if (ret) {
-    if (inode.i_nlink)
+    if (inode.i_nlink) {
     shmem_free_inode(inode.i_sb, 0);
+    }
     return ret;
     }
     dir.i_size += BOGO_DIRENT_SIZE;
@@ -3501,11 +3843,10 @@ unsafe extern "C" fn shmem_statfs(dentry: *mut dentry, buf: *mut kstatfs) -> c_i
     }
 #[no_mangle]
 unsafe extern "C" fn shmem_unlink(dir: *mut inode, dentry: *mut dentry) -> c_int {
-    static int shmem_unlink(struct inode *dir, struct dentry *dentry)
-    {
-    struct inode *inode = d_inode(dentry);
-    if (inode.i_nlink > 1 && !S_ISDIR(inode.i_mode))
+    let mut inode = d_inode(dentry);
+    if (inode.i_nlink > 1 && !S_ISDIR(inode.i_mode)) {
     shmem_free_inode(inode.i_sb, 0);
+    }
     simple_offset_remove(shmem_get_offset_ctx(dir), dentry);
     dir.i_size -= BOGO_DIRENT_SIZE;
     inode_inc_iversion(dir);
@@ -3514,28 +3855,28 @@ unsafe extern "C" fn shmem_unlink(dir: *mut inode, dentry: *mut dentry) -> c_int
 // For now, VFS can't deal with case-insensitive negative dentries, so
 // we invalidate them
 //
-    if (IS_ENABLED(CONFIG_UNICODE) && IS_CASEFOLDED(dir))
+    if (IS_ENABLED!(CONFIG_UNICODE) && IS_CASEFOLDED(dir)) {
     d_invalidate(dentry);
+    }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn shmem_rmdir(dir: *mut inode, dentry: *mut dentry) -> c_int {
-    static int shmem_rmdir(struct inode *dir, struct dentry *dentry)
-    {
-    if (!simple_empty(dentry))
+    if (!simple_empty(dentry)) {
     return -ENOTEMPTY;
+    }
     drop_nlink(d_inode(dentry));
     drop_nlink(dir);
     return shmem_unlink(dir, dentry);
     }
-    static int shmem_whiteout(struct mnt_idmap *idmap,
-    struct inode *old_dir, struct dentry *old_dentry)
-    {
-    struct dentry *whiteout;
-    int error;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_whiteout(idmap: *mut mnt_idmap, old_dir: *mut inode, old_dentry: *mut dentry) -> c_int {
+pub static mut whiteout: *mut c_void = core::ptr::null_mut();
+    let mut error = 0;
     whiteout = d_alloc(old_dentry.d_parent, &old_dentry.d_name);
-    if (!whiteout)
+    if (!whiteout) {
     return -ENOMEM;
+    }
     error = shmem_mknod(idmap, old_dir, whiteout,
     S_IFCHR | WHITEOUT_MODE, WHITEOUT_DEV);
     dput(whiteout);
@@ -3547,35 +3888,37 @@ unsafe extern "C" fn shmem_rmdir(dir: *mut inode, dentry: *mut dentry) -> c_int 
 // it exists so that the VFS layer correctly free's it when it
 // gets overwritten.
 //
-    static int shmem_rename2(struct mnt_idmap *idmap,
-    struct inode *old_dir, struct dentry *old_dentry,
-    struct inode *new_dir, struct dentry *new_dentry,
-    unsigned int flags)
-    {
-    struct inode *inode = d_inode(old_dentry);
-    let mut they_are_dirs: c_int = S_ISDIR(inode.i_mode);
-    let mut had_offset: bool = false;
-    int error;
-    if (flags & ~(RENAME_NOREPLACE | RENAME_EXCHANGE | RENAME_WHITEOUT))
+#[no_mangle]
+pub unsafe extern "C" fn shmem_rename2(idmap: *mut mnt_idmap, old_dir: *mut inode, old_dentry: *mut dentry, new_dir: *mut inode, new_dentry: *mut dentry, flags: c_uint) -> c_int {
+    let mut inode = d_inode(old_dentry);
+pub static mut they_are_dirs: c_int = 0;
+pub static mut had_offset: bool = false;
+    let mut error = 0;
+    if (flags & ~(RENAME_NOREPLACE | RENAME_EXCHANGE | RENAME_WHITEOUT)) {
     return -EINVAL;
-    if (flags & RENAME_EXCHANGE)
+    }
+    if (flags & RENAME_EXCHANGE) {
     return simple_offset_rename_exchange(old_dir, old_dentry,
     new_dir, new_dentry);
-    if (!simple_empty(new_dentry))
+    }
+    if (!simple_empty(new_dentry)) {
     return -ENOTEMPTY;
+    }
     error = simple_offset_add(shmem_get_offset_ctx(new_dir), new_dentry);
-    if (error == -EBUSY)
+    if (error == -EBUSY) {
     had_offset = true;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: unlikely(error)) -> else {
-    else if (unlikely(error))
+    }
+
+    else if (unlikely(error)) {
     return error;
+    }
     if (flags & RENAME_WHITEOUT) {
     error = shmem_whiteout(idmap, old_dir, old_dentry);
     if (error) {
-    if (!had_offset)
+    if (!had_offset) {
     simple_offset_remove(shmem_get_offset_ctx(new_dir),
     new_dentry);
+    }
     return error;
     }
     }
@@ -3597,34 +3940,37 @@ pub unsafe extern "C" fn if(_arg: unlikely(error)) -> else {
     inode_inc_iversion(new_dir);
     return 0;
     }
-    static int shmem_symlink(struct mnt_idmap *idmap, struct inode *dir,
-    struct dentry *dentry, const char *symname)
-    {
-    int error;
-    int len;
-    struct inode *inode;
-    struct folio *folio;
-    char *link;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_symlink(idmap: *mut mnt_idmap, dir: *mut inode, dentry: *mut dentry, symname: *mut c_char) -> c_int {
+    let mut error = 0;
+    let mut len = 0;
+pub static mut inode: *mut c_void = core::ptr::null_mut();
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut link: *mut c_void = core::ptr::null_mut();
     len = strlen(symname) + 1;
-    if (len > PAGE_SIZE)
+    if (len > PAGE_SIZE) {
     return -ENAMETOOLONG;
+    }
     inode = shmem_get_inode(idmap, dir.i_sb, dir, S_IFLNK | 0777, 0,
     mk_vma_flags(VMA_NORESERVE_BIT));
-    if (IS_ERR(inode))
+    if (IS_ERR(inode)) {
     return PTR_ERR(inode);
+    }
     error = security_inode_init_security(inode, dir, &dentry.d_name,
     shmem_initxattrs, core::ptr::null_mut());
-    if (error && error != -EOPNOTSUPP)
-    goto out_iput;
+    if (error && error != -EOPNOTSUPP) {
+// goto;
+    }
     error = simple_offset_add(shmem_get_offset_ctx(dir), dentry);
-    if (error)
-    goto out_iput;
+    if (error) {
+// goto;
+    }
     inode.i_size = len-1;
     if (len <= SHORT_SYMLINK_LEN) {
     link = kmemdup(symname, len, GFP_KERNEL);
     if (!link) {
     error = -ENOMEM;
-    goto out_remove_offset;
+// goto;
     }
     inode.i_op = &shmem_short_symlink_operations;
     inode_set_cached_link(inode, link, len - 1);
@@ -3632,8 +3978,9 @@ pub unsafe extern "C" fn if(_arg: unlikely(error)) -> else {
     inode_nohighmem(inode);
     inode.i_mapping.a_ops = &shmem_aops;
     error = shmem_get_folio(inode, 0, 0, &folio, SGP_WRITE);
-    if (error)
-    goto out_remove_offset;
+    if (error) {
+// goto;
+    }
     inode.i_op = &shmem_symlink_inode_operations;
     memcpy(folio_address(folio), symname, len);
     folio_zero_range(folio, len, folio_size(folio) - len);
@@ -3647,28 +3994,26 @@ pub unsafe extern "C" fn if(_arg: unlikely(error)) -> else {
     inode_inc_iversion(dir);
     d_make_persistent(dentry, inode);
     return 0;
-    out_remove_offset:
+// label;
     simple_offset_remove(shmem_get_offset_ctx(dir), dentry);
-    out_iput:
+// label;
     iput(inode);
     return error;
     }
 #[no_mangle]
 unsafe extern "C" fn shmem_put_link(arg: *mut c_void) {
-    static void shmem_put_link(void *arg)
-    {
     folio_mark_accessed(arg);
     folio_put(arg);
     }
-    static const char *shmem_get_link(struct dentry *dentry, struct inode *inode,
-    struct delayed_call *done)
+    static const char *shmem_get_link(dentry *dentry, inode *inode, delayed_call *done)
     {
-    struct folio *folio = core::ptr::null_mut();
-    int error;
+    let mut folio = core::ptr::null_mut();
+    let mut error = 0;
     if (!dentry) {
     folio = filemap_get_folio(inode.i_mapping, 0);
-    if (IS_ERR(folio))
+    if (IS_ERR(folio)) {
     return ERR_PTR(-ECHILD);
+    }
     if (PageHWPoison(folio_page(folio, 0)) ||
     !folio_test_uptodate(folio)) {
     folio_put(folio);
@@ -3676,10 +4021,12 @@ unsafe extern "C" fn shmem_put_link(arg: *mut c_void) {
     }
     } else {
     error = shmem_get_folio(inode, 0, 0, &folio, SGP_READ);
-    if (error)
+    if (error) {
     return ERR_PTR(error);
-    if (!folio)
+    }
+    if (!folio) {
     return ERR_PTR(-ECHILD);
+    }
     if (PageHWPoison(folio_page(folio, 0))) {
     folio_unlock(folio);
     folio_put(folio);
@@ -3693,27 +4040,28 @@ unsafe extern "C" fn shmem_put_link(arg: *mut c_void) {
 
 #[no_mangle]
 unsafe extern "C" fn shmem_fileattr_get(dentry: *mut dentry, fa: *mut file_kattr) -> c_int {
-    static int shmem_fileattr_get(struct dentry *dentry, struct file_kattr *fa)
-    {
-    struct shmem_inode_info *info = SHMEM_I(d_inode(dentry));
+    let mut info = SHMEM_I(d_inode(dentry));
     fileattr_fill_flags(fa, info.fsflags & SHMEM_FL_USER_VISIBLE);
     return 0;
     }
-    static int shmem_fileattr_set(struct mnt_idmap *idmap,
-    struct dentry *dentry, struct file_kattr *fa)
-    {
-    struct inode *inode = d_inode(dentry);
-    struct shmem_inode_info *info = SHMEM_I(inode);
-    int ret, flags;
-    if (fileattr_has_fsx(fa))
+#[no_mangle]
+pub unsafe extern "C" fn shmem_fileattr_set(idmap: *mut mnt_idmap, dentry: *mut dentry, fa: *mut file_kattr) -> c_int {
+    let mut inode = d_inode(dentry);
+    let mut info = SHMEM_I(inode);
+    let mut ret = 0;
+    let mut flags = 0;
+    if (fileattr_has_fsx(fa)) {
     return -EOPNOTSUPP;
-    if (fa.flags & ~SHMEM_FL_USER_MODIFIABLE)
+    }
+    if (fa.flags & ~SHMEM_FL_USER_MODIFIABLE) {
     return -EOPNOTSUPP;
+    }
     flags = (info.fsflags & ~SHMEM_FL_USER_MODIFIABLE) |
     (fa.flags & SHMEM_FL_USER_MODIFIABLE);
     ret = shmem_set_inode_flags(inode, flags, dentry);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     info.fsflags = flags;
     inode_set_ctime_current(inode);
     inode_inc_iversion(inode);
@@ -3727,41 +4075,47 @@ unsafe extern "C" fn shmem_fileattr_get(dentry: *mut dentry, fa: *mut file_kattr
 //
 // Callback for security_inode_init_security() for acquiring xattrs.
 //
-    static int shmem_initxattrs(struct inode *inode,
-    const struct xattr *xattr_array, void *fs_info)
-    {
-    struct shmem_inode_info *info = SHMEM_I(inode);
-    struct shmem_sb_info *sbinfo = SHMEM_SB(inode.i_sb);
-    const struct xattr *xattr;
-    let mut ispace: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_initxattrs(inode: *mut inode, xattr_array: *mut xattr, fs_info: *mut c_void) -> c_int {
+    let mut info = SHMEM_I(inode);
+    let mut sbinfo = SHMEM_SB(inode.i_sb);
+pub static mut xattr: *mut c_void = core::ptr::null_mut();
+pub static mut ispace: usize = 0;
     if (sbinfo.max_inodes) {
-    for (xattr = xattr_array; xattr.name != core::ptr::null_mut(); xattr++) {
+    while (xattr.name != core::ptr::null_mut()) {
     ispace += simple_xattr_space(xattr.name,
     xattr.value_len + XATTR_SECURITY_PREFIX_LEN);
     }
     if (ispace) {
     raw_spin_lock(&sbinfo.stat_lock);
-    if (sbinfo.free_ispace < ispace)
+    if (sbinfo.free_ispace < ispace) {
     ispace = 0;
-    else
+    }
+    else {
     sbinfo.free_ispace -= ispace;
+    }
     raw_spin_unlock(&sbinfo.stat_lock);
-    if (!ispace)
+    if (!ispace) {
     return -ENOSPC;
     }
     }
-    for (xattr = xattr_array; xattr.name != core::ptr::null_mut(); xattr++) {
+    }
+    while (xattr.name != core::ptr::null_mut()) {
     CLASS(simple_xattr, new_xattr)(xattr.value, xattr.value_len);
-    if (IS_ERR(new_xattr))
+    if (IS_ERR(new_xattr)) {
     break;
+    }
     new_xattr.name = kasprintf(GFP_KERNEL_ACCOUNT,
     XATTR_SECURITY_PREFIX "%s", xattr.name);
-    if (!new_xattr.name)
+    if (!new_xattr.name) {
     break;
-    if (simple_xattr_add(&sbinfo.xa_cache, &info.xattrs, new_xattr))
+    }
+    if (simple_xattr_add(&sbinfo.xa_cache, &info.xattrs, new_xattr)) {
     break;
-    if (sbinfo.max_inodes)
+    }
+    if (sbinfo.max_inodes) {
     ispace -= simple_xattr_space(new_xattr.name, new_xattr.size);
+    }
     retain_and_null_ptr(new_xattr);
     }
     if (xattr.name != core::ptr::null_mut()) {
@@ -3772,46 +4126,44 @@ unsafe extern "C" fn shmem_fileattr_get(dentry: *mut dentry, fa: *mut file_kattr
     }
     return -ENOMEM;
     }
-    WARN_ON(ispace);
+    WARN_ON!(ispace);
     return 0;
     }
-    static int shmem_xattr_handler_get(const struct xattr_handler *handler,
-    struct dentry *unused, struct inode *inode,
-    const char *name, void *buffer, size_t size)
-    {
-    struct shmem_sb_info *sbinfo = SHMEM_SB(inode.i_sb);
-    struct shmem_inode_info *info = SHMEM_I(inode);
+#[no_mangle]
+pub unsafe extern "C" fn shmem_xattr_handler_get(handler: *mut xattr_handler, unused: *mut dentry, inode: *mut inode, name: *mut c_char, buffer: *mut c_void, size: size_t) -> c_int {
+    let mut sbinfo = SHMEM_SB(inode.i_sb);
+    let mut info = SHMEM_I(inode);
     name = xattr_full_name(handler, name);
     return simple_xattr_get(&sbinfo.xa_cache, &info.xattrs, name, buffer, size);
     }
-    static int shmem_xattr_handler_set(const struct xattr_handler *handler,
-    struct mnt_idmap *idmap,
-    struct dentry *unused, struct inode *inode,
-    const char *name, const void *value,
-    size_t size, int flags)
-    {
-    struct shmem_inode_info *info = SHMEM_I(inode);
-    struct shmem_sb_info *sbinfo = SHMEM_SB(inode.i_sb);
-    struct simple_xattr *old_xattr;
-    let mut ispace: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_xattr_handler_set(handler: *mut xattr_handler, idmap: *mut mnt_idmap, unused: *mut dentry, inode: *mut inode, name: *mut c_char, value: *mut c_void, size: size_t, flags: c_int) -> c_int {
+    let mut info = SHMEM_I(inode);
+    let mut sbinfo = SHMEM_SB(inode.i_sb);
+pub static mut old_xattr: *mut c_void = core::ptr::null_mut();
+pub static mut ispace: usize = 0;
     name = xattr_full_name(handler, name);
     if (value && sbinfo.max_inodes) {
     ispace = simple_xattr_space(name, size);
     raw_spin_lock(&sbinfo.stat_lock);
-    if (sbinfo.free_ispace < ispace)
+    if (sbinfo.free_ispace < ispace) {
     ispace = 0;
-    else
+    }
+    else {
     sbinfo.free_ispace -= ispace;
+    }
     raw_spin_unlock(&sbinfo.stat_lock);
-    if (!ispace)
+    if (!ispace) {
     return -ENOSPC;
+    }
     }
     old_xattr = simple_xattr_set(&sbinfo.xa_cache, &info.xattrs, name, value, size, flags);
     if (!IS_ERR(old_xattr)) {
     ispace = 0;
-    if (old_xattr && sbinfo.max_inodes)
+    if (old_xattr && sbinfo.max_inodes) {
     ispace = simple_xattr_space(old_xattr.name,
     old_xattr.size);
+    }
     simple_xattr_free_rcu(old_xattr);
     old_xattr = core::ptr::null_mut();
     inode_set_ctime_current(inode);
@@ -3824,21 +4176,9 @@ unsafe extern "C" fn shmem_fileattr_get(dentry: *mut dentry, fa: *mut file_kattr
     }
     return PTR_ERR(old_xattr);
     }
-    static const struct xattr_handler shmem_security_xattr_handler = {
-    .prefix = XATTR_SECURITY_PREFIX,
-    .get = shmem_xattr_handler_get,
-    .set = shmem_xattr_handler_set,
-    };
-    static const struct xattr_handler shmem_trusted_xattr_handler = {
-    .prefix = XATTR_TRUSTED_PREFIX,
-    .get = shmem_xattr_handler_get,
-    .set = shmem_xattr_handler_set,
-    };
-    static const struct xattr_handler shmem_user_xattr_handler = {
-    .prefix = XATTR_USER_PREFIX,
-    .get = shmem_xattr_handler_get,
-    .set = shmem_xattr_handler_set,
-    };
+pub static mut xattr_handler: usize = 0;
+pub static mut xattr_handler: usize = 0;
+pub static mut xattr_handler: usize = 0;
     static const struct xattr_handler * const shmem_xattr_handlers[] = {
     &shmem_security_xattr_handler,
     &shmem_trusted_xattr_handler,
@@ -3847,55 +4187,37 @@ unsafe extern "C" fn shmem_fileattr_get(dentry: *mut dentry, fa: *mut file_kattr
     };
 #[no_mangle]
 unsafe extern "C" fn shmem_listxattr(dentry: *mut dentry, buffer: *mut c_char, size: usize) -> isize {
-    static ssize_t shmem_listxattr(struct dentry *dentry, char *buffer, size_t size)
-    {
-    struct shmem_inode_info *info = SHMEM_I(d_inode(dentry));
+    let mut info = SHMEM_I(d_inode(dentry));
     return simple_xattr_list(d_inode(dentry), &info.xattrs, buffer, size);
     }
 
-    static const struct inode_operations shmem_short_symlink_operations = {
-    .getattr	= shmem_getattr,
-    .setattr	= shmem_setattr,
-    .get_link	= simple_get_link,
-
-    .listxattr	= shmem_listxattr,
-
-    };
-    static const struct inode_operations shmem_symlink_inode_operations = {
-    .getattr	= shmem_getattr,
-    .setattr	= shmem_setattr,
-    .get_link	= shmem_get_link,
-
-    .listxattr	= shmem_listxattr,
-
-    };
-    static struct dentry *shmem_get_parent(struct dentry *child)
-    {
+pub static mut inode_operations: usize = 0;
+pub static mut inode_operations: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_get_parent(child: *mut dentry) -> *mut c_void {
     return ERR_PTR(-ESTALE);
     }
 #[no_mangle]
 unsafe extern "C" fn shmem_match(ino: *mut inode, vfh: *mut c_void) -> c_int {
-    static int shmem_match(struct inode *ino, void *vfh)
-    {
-    __u32 *fh = vfh;
-    let mut inum: __u64 = fh[2];
+    let mut fh = vfh;
+pub static mut inum: __u64 = 0;
     inum = (inum << 32) | fh[1];
     return ino.i_ino == inum && fh[0] == ino.i_generation;
     }
 // Find any alias of inode, but prefer a hashed alias
-    static struct dentry *shmem_find_alias(struct inode *inode)
-    {
-    struct dentry *alias = d_find_alias(inode);
+#[no_mangle]
+pub unsafe extern "C" fn shmem_find_alias(inode: *mut inode) -> *mut c_void {
+    let mut alias = d_find_alias(inode);
     return alias ?: d_find_any_alias(inode);
     }
-    static struct dentry *shmem_fh_to_dentry(struct super_block *sb,
-    struct fid *fid, int fh_len, int fh_type)
-    {
-    struct inode *inode;
-    struct dentry *dentry = core::ptr::null_mut();
-    u64 inum;
-    if (fh_len < 3)
+#[no_mangle]
+pub unsafe extern "C" fn shmem_fh_to_dentry(sb: *mut super_block, fid: *mut fid, fh_len: c_int, fh_type: c_int) -> *mut c_void {
+pub static mut inode: *mut c_void = core::ptr::null_mut();
+    let mut dentry = core::ptr::null_mut();
+    let mut inum = 0;
+    if (fh_len < 3) {
     return core::ptr::null_mut();
+    }
     inum = fid.raw[2];
     inum = (inum << 32) | fid.raw[1];
     inode = ilookup5(sb, (unsigned long)(inum + fid.raw[0]),
@@ -3906,9 +4228,8 @@ unsafe extern "C" fn shmem_match(ino: *mut inode, vfh: *mut c_void) -> c_int {
     }
     return dentry;
     }
-    static int shmem_encode_fh(struct inode *inode, __u32 *fh, int *len,
-    struct inode *parent)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn shmem_encode_fh(inode: *mut inode, fh: *mut __u32, len: *mut c_int, parent: *mut inode) -> c_int {
     if (*len < 3) {
 // len = 3;
     return FILEID_INVALID;
@@ -3919,11 +4240,12 @@ unsafe extern "C" fn shmem_match(ino: *mut inode, vfh: *mut c_void) -> c_int {
 // time, we need a lock to ensure we only try
 // to do it once
 //
-    static DEFINE_SPINLOCK(lock);
+pub static mut lock: usize = 0;
     spin_lock(&lock);
-    if (inode_unhashed(inode))
+    if (inode_unhashed(inode)) {
     __insert_inode_hash(inode,
     inode.i_ino + inode.i_generation);
+    }
     spin_unlock(&lock);
     }
     fh[0] = inode.i_generation;
@@ -3932,11 +4254,7 @@ unsafe extern "C" fn shmem_match(ino: *mut inode, vfh: *mut c_void) -> c_int {
 // len = 3;
     return 1;
     }
-    static const struct export_operations shmem_export_ops = {
-    .get_parent     = shmem_get_parent,
-    .encode_fh      = shmem_encode_fh,
-    .fh_to_dentry	= shmem_fh_to_dentry,
-    };
+pub static mut export_operations: usize = 0;
     enum shmem_param {
     Opt_gid,
     Opt_huge,
@@ -3960,54 +4278,24 @@ unsafe extern "C" fn shmem_match(ino: *mut inode, vfh: *mut c_void) -> c_int {
     Opt_casefold,
     Opt_strict_encoding,
     };
-    static const struct constant_table shmem_param_enums_huge[] = {
-    {"never",	SHMEM_HUGE_NEVER },
-    {"always",	SHMEM_HUGE_ALWAYS },
-    {"within_size",	SHMEM_HUGE_WITHIN_SIZE },
-    {"advise",	SHMEM_HUGE_ADVISE },
-    {}
-    };
-    const struct fs_parameter_spec shmem_fs_parameters[] = {
-    fsparam_gid   ("gid",		Opt_gid),
-    fsparam_enum  ("huge",		Opt_huge,  shmem_param_enums_huge),
-    fsparam_u32oct("mode",		Opt_mode),
-    fsparam_string("mpol",		Opt_mpol),
-    fsparam_string("nr_blocks",	Opt_nr_blocks),
-    fsparam_string("nr_inodes",	Opt_nr_inodes),
-    fsparam_string("size",		Opt_size),
-    fsparam_uid   ("uid",		Opt_uid),
-    fsparam_flag  ("inode32",	Opt_inode32),
-    fsparam_flag  ("inode64",	Opt_inode64),
-    fsparam_flag  ("noswap",	Opt_noswap),
+pub static mut constant_table: usize = 0;
+pub static mut fs_parameter_spec: usize = 0;
 
-    fsparam_flag  ("quota",		Opt_quota),
-    fsparam_flag  ("usrquota",	Opt_usrquota),
-    fsparam_flag  ("grpquota",	Opt_grpquota),
-    fsparam_string("usrquota_block_hardlimit", Opt_usrquota_block_hardlimit),
-    fsparam_string("usrquota_inode_hardlimit", Opt_usrquota_inode_hardlimit),
-    fsparam_string("grpquota_block_hardlimit", Opt_grpquota_block_hardlimit),
-    fsparam_string("grpquota_inode_hardlimit", Opt_grpquota_inode_hardlimit),
-
-    fsparam_string("casefold",	Opt_casefold_version),
-    fsparam_flag  ("casefold",	Opt_casefold),
-    fsparam_flag  ("strict_encoding", Opt_strict_encoding),
-    {}
-    };
-
-    static int shmem_parse_opt_casefold(struct fs_context *fc, struct fs_parameter *param,
-    bool latest_version)
-    {
-    struct shmem_options *ctx = fc.fs_private;
-    let mut version: c_int = UTF8_LATEST;
-    struct unicode_map *encoding;
-    char *version_str = param.string + 5;
+#[no_mangle]
+pub unsafe extern "C" fn shmem_parse_opt_casefold(fc: *mut fs_context, param: *mut fs_parameter, latest_version: bool) -> c_int {
+    let mut ctx = fc.fs_private;
+pub static mut version: c_int = 0;
+pub static mut encoding: *mut c_void = core::ptr::null_mut();
+    let mut version_str = param.string + 5;
     if (!latest_version) {
-    if (strncmp(param.string, "utf8-", 5))
+    if (strncmp(param.string, "utf8-", 5)) {
     return invalfc(fc, "Only UTF-8 encodings are supported "
     "in the format: utf8-<version number>");
+    }
     version = utf8_parse_version(version_str);
-    if (version < 0)
+    if (version < 0) {
     return invalfc(fc, "Invalid UTF-8 version: %s", version_str);
+    }
     }
     encoding = utf8_load(version);
     if (IS_ERR(encoding)) {
@@ -4015,195 +4303,235 @@ unsafe extern "C" fn shmem_match(ino: *mut inode, vfh: *mut c_void) -> c_int {
     unicode_major(version), unicode_minor(version),
     unicode_rev(version));
     }
-    pr_info("tmpfs: Using encoding : utf8-%u.%u.%u\n",
+    pr_info!("tmpfs: Using encoding : utf8-%u.%u.%u\n",
     unicode_major(version), unicode_minor(version), unicode_rev(version));
     ctx.encoding = encoding;
     return 0;
     }
 
-    static int shmem_parse_opt_casefold(struct fs_context *fc, struct fs_parameter *param,
-    bool latest_version)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: shmem_parse_opt_casefold
+pub unsafe extern "C" fn shmem_parse_opt_casefold_dup(fc: *mut fs_context, param: *mut fs_parameter, latest_version: bool) -> c_int {
     return invalfc(fc, "tmpfs: Kernel not built with CONFIG_UNICODE\n");
     }
 
 #[no_mangle]
 unsafe extern "C" fn shmem_parse_one(fc: *mut fs_context, param: *mut fs_parameter) -> c_int {
-    static int shmem_parse_one(struct fs_context *fc, struct fs_parameter *param)
-    {
-    struct shmem_options *ctx = fc.fs_private;
-    struct fs_parse_result result;
+    let mut ctx = fc.fs_private;
+pub static mut result: usize = 0;
     unsigned long long size;
-    char *rest;
-    int opt;
-    kuid_t kuid;
-    kgid_t kgid;
+pub static mut rest: *mut c_void = core::ptr::null_mut();
+    let mut opt = 0;
+    let mut kuid;
+    let mut kgid;
     opt = fs_parse(fc, shmem_fs_parameters, param, &result);
-    if (opt < 0)
+    if (opt < 0) {
     return opt;
-    switch (opt) {
-    case Opt_size:
+    }
+    match (opt) {
+    Opt_size => {
     size = memparse(param.string, &rest);
     if (*rest == '%') {
     size <<= PAGE_SHIFT;
     size *= totalram_pages();
     do_div(size, 100);
-    rest++;
+    rest += 1;
     }
-    if (*rest)
-    goto bad_value;
+    if (*rest) {
+// goto;
+    }
     ctx.blocks = DIV_ROUND_UP(size, PAGE_SIZE);
     ctx.seen |= SHMEM_SEEN_BLOCKS;
-    break;
-    case Opt_nr_blocks:
+    // break;
+    }
+    Opt_nr_blocks => {
     ctx.blocks = memparse(param.string, &rest);
-    if (*rest || ctx.blocks > LONG_MAX)
-    goto bad_value;
+    if (*rest || ctx.blocks > LONG_MAX) {
+// goto;
+    }
     ctx.seen |= SHMEM_SEEN_BLOCKS;
-    break;
-    case Opt_nr_inodes:
+    // break;
+    }
+    Opt_nr_inodes => {
     ctx.inodes = memparse(param.string, &rest);
-    if (*rest || ctx.inodes > ULONG_MAX / BOGO_INODE_SIZE)
-    goto bad_value;
+    if (*rest || ctx.inodes > ULONG_MAX / BOGO_INODE_SIZE) {
+// goto;
+    }
     ctx.seen |= SHMEM_SEEN_INODES;
-    break;
-    case Opt_mode:
+    // break;
+    }
+    Opt_mode => {
     ctx.mode = result.uint_32 & 07777;
-    break;
-    case Opt_uid:
+    // break;
+    }
+    Opt_uid => {
     kuid = result.uid;
 //
 // The requested uid must be representable in the
 // filesystem's idmapping.
 //
-    if (!kuid_has_mapping(fc.user_ns, kuid))
-    goto bad_value;
+    if (!kuid_has_mapping(fc.user_ns, kuid)) {
+// goto;
+    }
     ctx.uid = kuid;
-    break;
-    case Opt_gid:
+    // break;
+    }
+    Opt_gid => {
     kgid = result.gid;
 //
 // The requested gid must be representable in the
 // filesystem's idmapping.
 //
-    if (!kgid_has_mapping(fc.user_ns, kgid))
-    goto bad_value;
+    if (!kgid_has_mapping(fc.user_ns, kgid)) {
+// goto;
+    }
     ctx.gid = kgid;
-    break;
-    case Opt_huge:
+    // break;
+    }
+    Opt_huge => {
     ctx.huge = result.uint_32;
     if (ctx.huge != SHMEM_HUGE_NEVER &&
-    !(IS_ENABLED(CONFIG_TRANSPARENT_HUGEPAGE) &&
-    has_transparent_hugepage()))
-    goto unsupported_parameter;
+    !(IS_ENABLED!(CONFIG_TRANSPARENT_HUGEPAGE) &&
+    has_transparent_hugepage())) {
+// goto;
+    }
     ctx.seen |= SHMEM_SEEN_HUGE;
-    break;
-    case Opt_mpol:
-    if (IS_ENABLED(CONFIG_NUMA)) {
+    // break;
+    }
+    Opt_mpol => {
+    if (IS_ENABLED!(CONFIG_NUMA)) {
     mpol_put(ctx.mpol);
     ctx.mpol = core::ptr::null_mut();
-    if (mpol_parse_str(param.string, &ctx.mpol))
-    goto bad_value;
-    break;
+    if (mpol_parse_str(param.string, &ctx.mpol)) {
+// goto;
     }
-    goto unsupported_parameter;
-    case Opt_inode32:
+    // break;
+    }
+// goto;
+    }
+    Opt_inode32 => {
     ctx.full_inums = false;
     ctx.seen |= SHMEM_SEEN_INUMS;
-    break;
-    case Opt_inode64:
-    if (sizeof(ino_t) < 8) {
+    // break;
+    }
+    Opt_inode64 => {
+    if (sizeof!(ino_t) < 8) {
     return invalfc(fc,
     "Cannot use inode64 with <64bit inums in kernel\n");
     }
     ctx.full_inums = true;
     ctx.seen |= SHMEM_SEEN_INUMS;
-    break;
-    case Opt_noswap:
+    // break;
+    }
+    Opt_noswap => {
     if ((fc.user_ns != &init_user_ns) || !capable(CAP_SYS_ADMIN)) {
     return invalfc(fc,
     "Turning off swap in unprivileged tmpfs mounts unsupported");
     }
     ctx.noswap = true;
-    break;
-    case Opt_quota:
-    if (fc.user_ns != &init_user_ns)
+    // break;
+    }
+    Opt_quota => {
+    if (fc.user_ns != &init_user_ns) {
     return invalfc(fc, "Quotas in unprivileged tmpfs mounts are unsupported");
+    }
     ctx.seen |= SHMEM_SEEN_QUOTA;
     ctx.quota_types |= (QTYPE_MASK_USR | QTYPE_MASK_GRP);
-    break;
-    case Opt_usrquota:
-    if (fc.user_ns != &init_user_ns)
+    // break;
+    }
+    Opt_usrquota => {
+    if (fc.user_ns != &init_user_ns) {
     return invalfc(fc, "Quotas in unprivileged tmpfs mounts are unsupported");
+    }
     ctx.seen |= SHMEM_SEEN_QUOTA;
     ctx.quota_types |= QTYPE_MASK_USR;
-    break;
-    case Opt_grpquota:
-    if (fc.user_ns != &init_user_ns)
+    // break;
+    }
+    Opt_grpquota => {
+    if (fc.user_ns != &init_user_ns) {
     return invalfc(fc, "Quotas in unprivileged tmpfs mounts are unsupported");
+    }
     ctx.seen |= SHMEM_SEEN_QUOTA;
     ctx.quota_types |= QTYPE_MASK_GRP;
-    break;
-    case Opt_usrquota_block_hardlimit:
+    // break;
+    }
+    Opt_usrquota_block_hardlimit => {
     size = memparse(param.string, &rest);
-    if (*rest || !size)
-    goto bad_value;
-    if (size > SHMEM_QUOTA_MAX_SPC_LIMIT)
+    if (*rest || !size) {
+// goto;
+    }
+    if (size > SHMEM_QUOTA_MAX_SPC_LIMIT) {
     return invalfc(fc,
     "User quota block hardlimit too large.");
+    }
     ctx.qlimits.usrquota_bhardlimit = size;
-    break;
-    case Opt_grpquota_block_hardlimit:
+    // break;
+    }
+    Opt_grpquota_block_hardlimit => {
     size = memparse(param.string, &rest);
-    if (*rest || !size)
-    goto bad_value;
-    if (size > SHMEM_QUOTA_MAX_SPC_LIMIT)
+    if (*rest || !size) {
+// goto;
+    }
+    if (size > SHMEM_QUOTA_MAX_SPC_LIMIT) {
     return invalfc(fc,
     "Group quota block hardlimit too large.");
+    }
     ctx.qlimits.grpquota_bhardlimit = size;
-    break;
-    case Opt_usrquota_inode_hardlimit:
+    // break;
+    }
+    Opt_usrquota_inode_hardlimit => {
     size = memparse(param.string, &rest);
-    if (*rest || !size)
-    goto bad_value;
-    if (size > SHMEM_QUOTA_MAX_INO_LIMIT)
+    if (*rest || !size) {
+// goto;
+    }
+    if (size > SHMEM_QUOTA_MAX_INO_LIMIT) {
     return invalfc(fc,
     "User quota inode hardlimit too large.");
+    }
     ctx.qlimits.usrquota_ihardlimit = size;
-    break;
-    case Opt_grpquota_inode_hardlimit:
+    // break;
+    }
+    Opt_grpquota_inode_hardlimit => {
     size = memparse(param.string, &rest);
-    if (*rest || !size)
-    goto bad_value;
-    if (size > SHMEM_QUOTA_MAX_INO_LIMIT)
+    if (*rest || !size) {
+// goto;
+    }
+    if (size > SHMEM_QUOTA_MAX_INO_LIMIT) {
     return invalfc(fc,
     "Group quota inode hardlimit too large.");
+    }
     ctx.qlimits.grpquota_ihardlimit = size;
-    break;
-    case Opt_casefold_version:
+    // break;
+    }
+    Opt_casefold_version => {
     return shmem_parse_opt_casefold(fc, param, false);
-    case Opt_casefold:
+    }
+    Opt_casefold => {
     return shmem_parse_opt_casefold(fc, param, true);
-    case Opt_strict_encoding:
+    }
+    Opt_strict_encoding => {
 
     ctx.strict_encoding = true;
-    break;
+    // break;
 
     return invalfc(fc, "tmpfs: Kernel not built with CONFIG_UNICODE\n");
 
     }
+    }
     return 0;
-    unsupported_parameter:
+// label;
     return invalfc(fc, "Unsupported parameter '%s'", param.key);
-    bad_value:
+// label;
     return invalfc(fc, "Bad value for '%s'", param.key);
     }
-    static char *shmem_next_opt(char **s)
-    {
-    char *sbegin = *s;
-    char *p;
-    if (sbegin == core::ptr::null_mut())
+#[no_mangle]
+pub unsafe extern "C" fn shmem_next_opt(s: *mut *mut c_char) -> *mut c_void {
+    let mut sbegin = *s;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    if (sbegin == core::ptr::null_mut()) {
     return core::ptr::null_mut();
+    }
 //
 // NUL-terminate this option: unfortunately,
 // mount options form a comma-separated list,
@@ -4211,8 +4539,9 @@ unsafe extern "C" fn shmem_parse_one(fc: *mut fs_context, param: *mut fs_paramet
 //
     for (;;) {
     p = strchr(*s, ',');
-    if (p == core::ptr::null_mut())
+    if (p == core::ptr::null_mut()) {
     break;
+    }
 // s = p + 1;
     if (!isdigit(*(p+1))) {
 // p = '\0';
@@ -4224,8 +4553,6 @@ unsafe extern "C" fn shmem_parse_one(fc: *mut fs_context, param: *mut fs_paramet
     }
 #[no_mangle]
 unsafe extern "C" fn shmem_parse_monolithic(fc: *mut fs_context, data: *mut c_void) -> c_int {
-    static int shmem_parse_monolithic(struct fs_context *fc, void *data)
-    {
     return vfs_parse_monolithic_sep(fc, data, shmem_next_opt);
     }
 //
@@ -4233,40 +4560,38 @@ unsafe extern "C" fn shmem_parse_monolithic(fc: *mut fs_context, data: *mut c_vo
 //
 #[no_mangle]
 unsafe extern "C" fn shmem_reconfigure(fc: *mut fs_context) -> c_int {
-    static int shmem_reconfigure(struct fs_context *fc)
-    {
-    struct shmem_options *ctx = fc.fs_private;
-    struct shmem_sb_info *sbinfo = SHMEM_SB(fc.root.d_sb);
-    unsigned long used_isp;
-    struct mempolicy *mpol = core::ptr::null_mut();
-    const char *err;
+    let mut ctx = fc.fs_private;
+    let mut sbinfo = SHMEM_SB(fc.root.d_sb);
+    let mut used_isp = 0;
+    let mut mpol = core::ptr::null_mut();
+pub static mut err: *mut c_void = core::ptr::null_mut();
     raw_spin_lock(&sbinfo.stat_lock);
     used_isp = sbinfo.max_inodes * BOGO_INODE_SIZE - sbinfo.free_ispace;
     if ((ctx.seen & SHMEM_SEEN_BLOCKS) && ctx.blocks) {
     if (!sbinfo.max_blocks) {
     err = "Cannot retroactively limit size";
-    goto out;
+// goto;
     }
     if (percpu_counter_compare(&sbinfo.used_blocks,
     ctx.blocks) > 0) {
     err = "Too small a size for current use";
-    goto out;
+// goto;
     }
     }
     if ((ctx.seen & SHMEM_SEEN_INODES) && ctx.inodes) {
     if (!sbinfo.max_inodes) {
     err = "Cannot retroactively limit inodes";
-    goto out;
+// goto;
     }
     if (ctx.inodes * BOGO_INODE_SIZE < used_isp) {
     err = "Too few inodes for current use";
-    goto out;
+// goto;
     }
     }
     if ((ctx.seen & SHMEM_SEEN_INUMS) && !ctx.full_inums &&
     sbinfo.next_ino > UINT_MAX) {
     err = "Current inum too high to switch to 32-bit inums";
-    goto out;
+// goto;
     }
 //
 // "noswap" doesn't use fsparam_flag_no, i.e. there's no "swap"
@@ -4274,28 +4599,31 @@ unsafe extern "C" fn shmem_reconfigure(fc: *mut fs_context) -> c_int {
 //
     if (ctx.noswap && !sbinfo.noswap) {
     err = "Cannot disable swap on remount";
-    goto out;
+// goto;
     }
     if (ctx.seen & SHMEM_SEEN_QUOTA &&
     !sb_any_quota_loaded(fc.root.d_sb)) {
     err = "Cannot enable quota on remount";
-    goto out;
+// goto;
     }
 
-    (ctx.qlimits.name## hardlimit &&				\
+    (ctx.qlimits.name## hardlimit &&				
     (ctx.qlimits.name## hardlimit != sbinfo.qlimits.name## hardlimit))
     if (CHANGED_LIMIT(usrquota_b) || CHANGED_LIMIT(usrquota_i) ||
     CHANGED_LIMIT(grpquota_b) || CHANGED_LIMIT(grpquota_i)) {
     err = "Cannot change global quota limit on remount";
-    goto out;
+// goto;
     }
 
-    if (ctx.seen & SHMEM_SEEN_HUGE)
+    if (ctx.seen & SHMEM_SEEN_HUGE) {
     sbinfo.huge = ctx.huge;
-    if (ctx.seen & SHMEM_SEEN_INUMS)
+    }
+    if (ctx.seen & SHMEM_SEEN_INUMS) {
     sbinfo.full_inums = ctx.full_inums;
-    if (ctx.seen & SHMEM_SEEN_BLOCKS)
+    }
+    if (ctx.seen & SHMEM_SEEN_BLOCKS) {
     sbinfo.max_blocks  = ctx.blocks;
+    }
     if (ctx.seen & SHMEM_SEEN_INODES) {
     sbinfo.max_inodes  = ctx.inodes;
     sbinfo.free_ispace = ctx.inodes * BOGO_INODE_SIZE - used_isp;
@@ -4308,33 +4636,37 @@ unsafe extern "C" fn shmem_reconfigure(fc: *mut fs_context) -> c_int {
     sbinfo.mpol = ctx.mpol;	/* transfers initial ref */
     ctx.mpol = core::ptr::null_mut();
     }
-    if (ctx.noswap)
+    if (ctx.noswap) {
     sbinfo.noswap = true;
+    }
     raw_spin_unlock(&sbinfo.stat_lock);
     mpol_put(mpol);
     return 0;
-    out:
+// label;
     raw_spin_unlock(&sbinfo.stat_lock);
     return invalfc(fc, "%s", err);
     }
 #[no_mangle]
 unsafe extern "C" fn shmem_show_options(seq: *mut seq_file, root: *mut dentry) -> c_int {
-    static int shmem_show_options(struct seq_file *seq, struct dentry *root)
-    {
-    struct shmem_sb_info *sbinfo = SHMEM_SB(root.d_sb);
-    struct mempolicy *mpol;
-    if (sbinfo.max_blocks != shmem_default_max_blocks())
+    let mut sbinfo = SHMEM_SB(root.d_sb);
+pub static mut mpol: *mut c_void = core::ptr::null_mut();
+    if (sbinfo.max_blocks != shmem_default_max_blocks()) {
     seq_printf(seq, ",size=%luk", K(sbinfo.max_blocks));
-    if (sbinfo.max_inodes != shmem_default_max_inodes())
+    }
+    if (sbinfo.max_inodes != shmem_default_max_inodes()) {
     seq_printf(seq, ",nr_inodes=%lu", sbinfo.max_inodes);
-    if (sbinfo.mode != (0777 | S_ISVTX))
+    }
+    if (sbinfo.mode != (0777 | S_ISVTX)) {
     seq_printf(seq, ",mode=%03ho", sbinfo.mode);
-    if (!uid_eq(sbinfo.uid, GLOBAL_ROOT_UID))
+    }
+    if (!uid_eq(sbinfo.uid, GLOBAL_ROOT_UID)) {
     seq_printf(seq, ",uid=%u",
     from_kuid_munged(&init_user_ns, sbinfo.uid));
-    if (!gid_eq(sbinfo.gid, GLOBAL_ROOT_GID))
+    }
+    if (!gid_eq(sbinfo.gid, GLOBAL_ROOT_GID)) {
     seq_printf(seq, ",gid=%u",
     from_kgid_munged(&init_user_ns, sbinfo.gid));
+    }
 //
 // Showing inode{64,32} might be useful even if it's the system default,
 // since then people don't have to resort to checking both here and
@@ -4354,47 +4686,55 @@ unsafe extern "C" fn shmem_show_options(seq: *mut seq_file, root: *mut dentry) -
 // | full_inums=false | show            | hide            |
 // +------------------+-----------------+-----------------+
 //
-    if (IS_ENABLED(CONFIG_TMPFS_INODE64) || sbinfo.full_inums)
+    if (IS_ENABLED!(CONFIG_TMPFS_INODE64) || sbinfo.full_inums) {
     seq_printf(seq, ",inode%d", (sbinfo.full_inums ? 64 : 32));
+    }
 
 // Rightly or wrongly, show huge mount option unmasked by shmem_huge
-    if (sbinfo.huge)
+    if (sbinfo.huge) {
     seq_printf(seq, ",huge=%s", shmem_format_huge(sbinfo.huge));
+    }
 
     mpol = shmem_get_sbmpol(sbinfo);
     shmem_show_mpol(seq, mpol);
     mpol_put(mpol);
-    if (sbinfo.noswap)
+    if (sbinfo.noswap) {
     seq_printf(seq, ",noswap");
+    }
 
-    if (sb_has_quota_active(root.d_sb, USRQUOTA))
+    if (sb_has_quota_active(root.d_sb, USRQUOTA)) {
     seq_printf(seq, ",usrquota");
-    if (sb_has_quota_active(root.d_sb, GRPQUOTA))
+    }
+    if (sb_has_quota_active(root.d_sb, GRPQUOTA)) {
     seq_printf(seq, ",grpquota");
-    if (sbinfo.qlimits.usrquota_bhardlimit)
+    }
+    if (sbinfo.qlimits.usrquota_bhardlimit) {
     seq_printf(seq, ",usrquota_block_hardlimit=%lld",
     sbinfo.qlimits.usrquota_bhardlimit);
-    if (sbinfo.qlimits.grpquota_bhardlimit)
+    }
+    if (sbinfo.qlimits.grpquota_bhardlimit) {
     seq_printf(seq, ",grpquota_block_hardlimit=%lld",
     sbinfo.qlimits.grpquota_bhardlimit);
-    if (sbinfo.qlimits.usrquota_ihardlimit)
+    }
+    if (sbinfo.qlimits.usrquota_ihardlimit) {
     seq_printf(seq, ",usrquota_inode_hardlimit=%lld",
     sbinfo.qlimits.usrquota_ihardlimit);
-    if (sbinfo.qlimits.grpquota_ihardlimit)
+    }
+    if (sbinfo.qlimits.grpquota_ihardlimit) {
     seq_printf(seq, ",grpquota_inode_hardlimit=%lld",
     sbinfo.qlimits.grpquota_ihardlimit);
+    }
 
     return 0;
     }
 
 #[no_mangle]
 unsafe extern "C" fn shmem_put_super(sb: *mut super_block) {
-    static void shmem_put_super(struct super_block *sb)
-    {
-    struct shmem_sb_info *sbinfo = SHMEM_SB(sb);
+    let mut sbinfo = SHMEM_SB(sb);
 
-    if (sb.s_encoding)
+    if (sb.s_encoding) {
     utf8_unload(sb.s_encoding);
+    }
 
     shmem_disable_quotas(sb);
 
@@ -4408,24 +4748,20 @@ unsafe extern "C" fn shmem_put_super(sb: *mut super_block) {
     sb.s_fs_info = core::ptr::null_mut();
     }
 
-    static const struct dentry_operations shmem_ci_dentry_ops = {
-    .d_hash = generic_ci_d_hash,
-    .d_compare = generic_ci_d_compare,
-    };
+pub static mut dentry_operations: usize = 0;
 
 #[no_mangle]
 unsafe extern "C" fn shmem_fill_super(sb: *mut super_block, fc: *mut fs_context) -> c_int {
-    static int shmem_fill_super(struct super_block *sb, struct fs_context *fc)
-    {
-    struct shmem_options *ctx = fc.fs_private;
-    struct inode *inode;
-    struct shmem_sb_info *sbinfo;
-    let mut error: c_int = -ENOMEM;
+    let mut ctx = fc.fs_private;
+pub static mut inode: *mut c_void = core::ptr::null_mut();
+pub static mut sbinfo: *mut c_void = core::ptr::null_mut();
+pub static mut error: c_int = 0;
 // Round up to L1_CACHE_BYTES to resist false sharing
-    sbinfo = kzalloc(max((int)sizeof(struct shmem_sb_info),
+    sbinfo = kzalloc(max((int)sizeof!(shmem_sb_info),
     L1_CACHE_BYTES), GFP_KERNEL);
-    if (!sbinfo)
+    if (!sbinfo) {
     return error;
+    }
     sb.s_fs_info = sbinfo;
 
 //
@@ -4434,12 +4770,15 @@ unsafe extern "C" fn shmem_fill_super(sb: *mut super_block, fc: *mut fs_context)
 // but the internal instance is left unlimited.
 //
     if (!(sb.s_flags & SB_KERNMOUNT)) {
-    if (!(ctx.seen & SHMEM_SEEN_BLOCKS))
+    if (!(ctx.seen & SHMEM_SEEN_BLOCKS)) {
     ctx.blocks = shmem_default_max_blocks();
-    if (!(ctx.seen & SHMEM_SEEN_INODES))
+    }
+    if (!(ctx.seen & SHMEM_SEEN_INODES)) {
     ctx.inodes = shmem_default_max_inodes();
-    if (!(ctx.seen & SHMEM_SEEN_INUMS))
-    ctx.full_inums = IS_ENABLED(CONFIG_TMPFS_INODE64);
+    }
+    if (!(ctx.seen & SHMEM_SEEN_INUMS)) {
+    ctx.full_inums = IS_ENABLED!(CONFIG_TMPFS_INODE64);
+    }
     sbinfo.noswap = ctx.noswap;
     } else {
     sb.s_flags |= SB_NOUSER;
@@ -4448,15 +4787,16 @@ unsafe extern "C" fn shmem_fill_super(sb: *mut super_block, fc: *mut fs_context)
     sb.s_flags |= SB_NOSEC;
 
     if (!ctx.encoding && ctx.strict_encoding) {
-    pr_err("tmpfs: strict_encoding option without encoding is forbidden\n");
+    pr_err!("tmpfs: strict_encoding option without encoding is forbidden\n");
     error = -EINVAL;
-    goto failed;
+// goto;
     }
     if (ctx.encoding) {
     sb.s_encoding = ctx.encoding;
     set_default_d_op(sb, &shmem_ci_dentry_ops);
-    if (ctx.strict_encoding)
+    if (ctx.strict_encoding) {
     sb.s_encoding_flags = SB_ENC_STRICT_MODE_FL;
+    }
     }
 
     sb.s_flags |= SB_NOUSER;
@@ -4467,24 +4807,28 @@ unsafe extern "C" fn shmem_fill_super(sb: *mut super_block, fc: *mut fs_context)
     sbinfo.free_ispace = sbinfo.max_inodes * BOGO_INODE_SIZE;
     if (sb.s_flags & SB_KERNMOUNT) {
     sbinfo.ino_batch = alloc_percpu(ino_t);
-    if (!sbinfo.ino_batch)
-    goto failed;
+    if (!sbinfo.ino_batch) {
+// goto;
+    }
     }
     sbinfo.uid = ctx.uid;
     sbinfo.gid = ctx.gid;
     sbinfo.full_inums = ctx.full_inums;
     sbinfo.mode = ctx.mode;
 
-    if (ctx.seen & SHMEM_SEEN_HUGE)
+    if (ctx.seen & SHMEM_SEEN_HUGE) {
     sbinfo.huge = ctx.huge;
-    else
+    }
+    else {
     sbinfo.huge = tmpfs_huge;
+    }
 
     sbinfo.mpol = ctx.mpol;
     ctx.mpol = core::ptr::null_mut();
     raw_spin_lock_init(&sbinfo.stat_lock);
-    if (percpu_counter_init(&sbinfo.used_blocks, 0, GFP_KERNEL))
-    goto failed;
+    if (percpu_counter_init(&sbinfo.used_blocks, 0, GFP_KERNEL)) {
+// goto;
+    }
     spin_lock_init(&sbinfo.shrinklist_lock);
     INIT_LIST_HEAD(&sbinfo.shrinklist);
     sb.s_maxbytes = MAX_LFS_FILESIZE;
@@ -4498,9 +4842,9 @@ unsafe extern "C" fn shmem_fill_super(sb: *mut super_block, fc: *mut fs_context)
 
     sb.s_flags |= SB_POSIXACL;
 
-    uuid_t uuid;
+    let mut uuid;
     uuid_gen(&uuid);
-    super_set_uuid(sb, uuid.b, sizeof(uuid));
+    super_set_uuid(sb, uuid.b, sizeof!(uuid));
 
     if (ctx.seen & SHMEM_SEEN_QUOTA) {
     sb.dq_op = &shmem_quota_operations;
@@ -4508,9 +4852,10 @@ unsafe extern "C" fn shmem_fill_super(sb: *mut super_block, fc: *mut fs_context)
     sb.s_quota_types = QTYPE_MASK_USR | QTYPE_MASK_GRP;
 // Copy the default limits from ctx into sbinfo
     memcpy(&sbinfo.qlimits, &ctx.qlimits,
-    sizeof(struct shmem_quota_limits));
-    if (shmem_enable_quotas(sb, ctx.quota_types))
-    goto failed;
+    sizeof!(shmem_quota_limits));
+    if (shmem_enable_quotas(sb, ctx.quota_types)) {
+// goto;
+    }
     }
 
     inode = shmem_get_inode(&nop_mnt_idmap, sb, core::ptr::null_mut(),
@@ -4518,209 +4863,93 @@ unsafe extern "C" fn shmem_fill_super(sb: *mut super_block, fc: *mut fs_context)
     mk_vma_flags(VMA_NORESERVE_BIT));
     if (IS_ERR(inode)) {
     error = PTR_ERR(inode);
-    goto failed;
+// goto;
     }
     inode.i_uid = sbinfo.uid;
     inode.i_gid = sbinfo.gid;
     sb.s_root = d_make_root(inode);
-    if (!sb.s_root)
-    goto failed;
+    if (!sb.s_root) {
+// goto;
+    }
     return 0;
-    failed:
+// label;
     shmem_put_super(sb);
     return error;
     }
 #[no_mangle]
 unsafe extern "C" fn shmem_get_tree(fc: *mut fs_context) -> c_int {
-    static int shmem_get_tree(struct fs_context *fc)
-    {
     return get_tree_nodev(fc, shmem_fill_super);
     }
 #[no_mangle]
 unsafe extern "C" fn shmem_free_fc(fc: *mut fs_context) {
-    static void shmem_free_fc(struct fs_context *fc)
-    {
-    struct shmem_options *ctx = fc.fs_private;
+    let mut ctx = fc.fs_private;
     if (ctx) {
     mpol_put(ctx.mpol);
     kfree(ctx);
     }
     }
-    static const struct fs_context_operations shmem_fs_context_ops = {
-    .free			= shmem_free_fc,
-    .get_tree		= shmem_get_tree,
-
-    .parse_monolithic	= shmem_parse_monolithic,
-    .parse_param		= shmem_parse_one,
-    .reconfigure		= shmem_reconfigure,
-
-    };
-    static struct kmem_cache *shmem_inode_cachep __ro_after_init;
-    static struct inode *shmem_alloc_inode(struct super_block *sb)
-    {
-    struct shmem_inode_info *info;
+pub static mut fs_context_operations: usize = 0;
+pub static mut shmem_inode_cachep: *mut c_void = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn shmem_alloc_inode(sb: *mut super_block) -> *mut c_void {
+pub static mut info: *mut c_void = core::ptr::null_mut();
     info = alloc_inode_sb(sb, shmem_inode_cachep, GFP_KERNEL);
-    if (!info)
+    if (!info) {
     return core::ptr::null_mut();
+    }
     return &info.vfs_inode;
     }
 #[no_mangle]
 unsafe extern "C" fn shmem_free_in_core_inode(inode: *mut inode) {
-    static void shmem_free_in_core_inode(struct inode *inode)
-    {
-    if (S_ISLNK(inode.i_mode))
+    if (S_ISLNK(inode.i_mode)) {
     kfree(inode.i_link);
+    }
     kmem_cache_free(shmem_inode_cachep, SHMEM_I(inode));
     }
 #[no_mangle]
 unsafe extern "C" fn shmem_destroy_inode(inode: *mut inode) {
-    static void shmem_destroy_inode(struct inode *inode)
-    {
-    if (S_ISREG(inode.i_mode))
+    if (S_ISREG(inode.i_mode)) {
     mpol_free_shared_policy(&SHMEM_I(inode).policy);
-    if (S_ISDIR(inode.i_mode))
+    }
+    if (S_ISDIR(inode.i_mode)) {
     simple_offset_destroy(shmem_get_offset_ctx(inode));
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn shmem_init_inode(foo: *mut c_void) {
-    static void shmem_init_inode(void *foo)
-    {
-    struct shmem_inode_info *info = foo;
+    let mut info = foo;
     inode_init_once(&info.vfs_inode);
     }
 #[no_mangle]
-unsafe extern "C" fn shmem_init_inodecache() -> void __init {
-    static void __init shmem_init_inodecache(void)
-    {
+unsafe extern "C" fn shmem_init_inodecache()  {
     shmem_inode_cachep = kmem_cache_create("shmem_inode_cache",
-    sizeof(struct shmem_inode_info),
+    sizeof!(shmem_inode_info),
     0, SLAB_PANIC|SLAB_ACCOUNT, shmem_init_inode);
     }
 #[no_mangle]
-unsafe extern "C" fn shmem_destroy_inodecache() -> void __init {
-    static void __init shmem_destroy_inodecache(void)
-    {
+unsafe extern "C" fn shmem_destroy_inodecache()  {
     kmem_cache_destroy(shmem_inode_cachep);
     }
 // Keep the page in page cache instead of truncating it
-    static int shmem_error_remove_folio(struct address_space *mapping,
-    struct folio *folio)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn shmem_error_remove_folio(mapping: *mut address_space, folio: *mut folio) -> c_int {
     return 0;
     }
-    static const struct address_space_operations shmem_aops = {
-    .dirty_folio	= noop_dirty_folio,
-
-    .write_begin	= shmem_write_begin,
-    .write_end	= shmem_write_end,
-
-    .migrate_folio	= migrate_folio,
-
-    .error_remove_folio = shmem_error_remove_folio,
-    };
-    static const struct file_operations shmem_file_operations = {
-    .mmap_prepare	= shmem_mmap_prepare,
-    .open		= shmem_file_open,
-    .get_unmapped_area = shmem_get_unmapped_area,
-
-    .llseek		= shmem_file_llseek,
-    .read_iter	= shmem_file_read_iter,
-    .write_iter	= shmem_file_write_iter,
-    .fsync		= noop_fsync,
-    .splice_read	= shmem_file_splice_read,
-    .splice_write	= iter_file_splice_write,
-    .fallocate	= shmem_fallocate,
-    .setlease	= generic_setlease,
-
-    };
-    static const struct inode_operations shmem_inode_operations = {
-    .getattr	= shmem_getattr,
-    .setattr	= shmem_setattr,
-
-    .listxattr	= shmem_listxattr,
-    .set_acl	= simple_set_acl,
-    .fileattr_get	= shmem_fileattr_get,
-    .fileattr_set	= shmem_fileattr_set,
-
-    };
-    static const struct inode_operations shmem_dir_inode_operations = {
-
-    .getattr	= shmem_getattr,
-    .create		= shmem_create,
-    .lookup		= simple_lookup,
-    .link		= shmem_link,
-    .unlink		= shmem_unlink,
-    .symlink	= shmem_symlink,
-    .mkdir		= shmem_mkdir,
-    .rmdir		= shmem_rmdir,
-    .mknod		= shmem_mknod,
-    .rename		= shmem_rename2,
-    .tmpfile	= shmem_tmpfile,
-    .get_offset_ctx	= shmem_get_offset_ctx,
-
-    .listxattr	= shmem_listxattr,
-    .fileattr_get	= shmem_fileattr_get,
-    .fileattr_set	= shmem_fileattr_set,
-
-    .setattr	= shmem_setattr,
-    .set_acl	= simple_set_acl,
-
-    };
-    static const struct inode_operations shmem_special_inode_operations = {
-    .getattr	= shmem_getattr,
-
-    .listxattr	= shmem_listxattr,
-
-    .setattr	= shmem_setattr,
-    .set_acl	= simple_set_acl,
-
-    };
-    static const struct super_operations shmem_ops = {
-    .alloc_inode	= shmem_alloc_inode,
-    .free_inode	= shmem_free_in_core_inode,
-    .destroy_inode	= shmem_destroy_inode,
-
-    .statfs		= shmem_statfs,
-    .show_options	= shmem_show_options,
-
-    .get_dquots	= shmem_get_dquots,
-
-    .evict_inode	= shmem_evict_inode,
-    .drop_inode	= inode_just_drop,
-    .put_super	= shmem_put_super,
-
-    .nr_cached_objects	= shmem_unused_huge_count,
-    .free_cached_objects	= shmem_unused_huge_scan,
-
-    };
-    static const struct vm_operations_struct shmem_vm_ops = {
-    .fault		= shmem_fault,
-    .map_pages	= filemap_map_pages,
-
-    .set_policy     = shmem_set_policy,
-    .get_policy     = shmem_get_policy,
-
-    .uffd_ops	= &shmem_uffd_ops,
-
-    };
-    static const struct vm_operations_struct shmem_anon_vm_ops = {
-    .fault		= shmem_fault,
-    .map_pages	= filemap_map_pages,
-
-    .set_policy     = shmem_set_policy,
-    .get_policy     = shmem_get_policy,
-
-    .uffd_ops	= &shmem_uffd_ops,
-
-    };
+pub static mut address_space_operations: usize = 0;
+pub static mut file_operations: usize = 0;
+pub static mut inode_operations: usize = 0;
+pub static mut inode_operations: usize = 0;
+pub static mut inode_operations: usize = 0;
+pub static mut super_operations: usize = 0;
+pub static mut vm_operations_struct: usize = 0;
+pub static mut vm_operations_struct: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn shmem_init_fs_context(fc: *mut fs_context) -> c_int {
-    int shmem_init_fs_context(struct fs_context *fc)
-    {
-    struct shmem_options *ctx;
-    ctx = kzalloc_obj(struct shmem_options);
-    if (!ctx)
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+    ctx = kzalloc_obj(shmem_options);
+    if (!ctx) {
     return -ENOMEM;
+    }
     ctx.mode = 0777 | S_ISVTX;
     ctx.uid = current_fsuid();
     ctx.gid = current_fsgid();
@@ -4734,35 +4963,25 @@ pub unsafe extern "C" fn shmem_init_fs_context(fc: *mut fs_context) -> c_int {
 
     return 0;
     }
-    static struct file_system_type shmem_fs_type = {
-    .owner		= THIS_MODULE,
-    .name		= "tmpfs",
-    .init_fs_context = shmem_init_fs_context,
+pub static mut file_system_type: usize = 0;
 
-    .parameters	= shmem_fs_parameters,
-
-    .kill_sb	= kill_anon_super,
-    .fs_flags	= FS_USERNS_MOUNT | FS_ALLOW_IDMAP | FS_MGTIME,
-    };
-
-    {									\
-    .attr	= { .name = __stringify(_name), .mode = _mode },	\
-    .show	= _show,						\
-    .store	= _store,						\
+    {									
+    .attr	= { .name = __stringify(_name), .mode = _mode },	
+    .show	= _show,						
+    .store	= _store,						
     }
 
-    static struct kobj_attribute tmpfs_attr_##_name =	\
+    static struct kobj_attribute tmpfs_attr_##_name =	
     __INIT_KOBJ_ATTR(_name, 0200, core::ptr::null_mut(), _store)
 
-    static struct kobj_attribute tmpfs_attr_##_name =	\
+    static struct kobj_attribute tmpfs_attr_##_name =	
     __INIT_KOBJ_ATTR(_name, 0644, _show, _store)
 
-    static struct kobj_attribute tmpfs_attr_##_name =	\
+    static struct kobj_attribute tmpfs_attr_##_name =	
     __INIT_KOBJ_ATTR(_name, 0444, _show, core::ptr::null_mut())
 
-    static ssize_t casefold_show(struct kobject *kobj, struct kobj_attribute *a,
-    char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn casefold_show(kobj: *mut kobject, a: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "supported\n");
     }
     TMPFS_ATTR_RO(casefold, casefold_show);
@@ -4773,77 +4992,73 @@ pub unsafe extern "C" fn shmem_init_fs_context(fc: *mut fs_context) -> c_int {
 
     core::ptr::null_mut()
     };
-    static const struct attribute_group tmpfs_attribute_group = {
-    .attrs = tmpfs_attributes,
-    .name = "features"
-    };
-    static struct kobject *tmpfs_kobj;
+pub static mut attribute_group: usize = 0;
+pub static mut tmpfs_kobj: *mut c_void = core::ptr::null_mut();
 #[no_mangle]
-unsafe extern "C" fn tmpfs_sysfs_init() -> int __init {
-    static int __init tmpfs_sysfs_init(void)
-    {
-    int ret;
+unsafe extern "C" fn tmpfs_sysfs_init() -> c_int {
+    let mut ret = 0;
     tmpfs_kobj = kobject_create_and_add("tmpfs", fs_kobj);
-    if (!tmpfs_kobj)
+    if (!tmpfs_kobj) {
     return -ENOMEM;
+    }
     ret = sysfs_create_group(tmpfs_kobj, &tmpfs_attribute_group);
-    if (ret)
+    if (ret) {
     kobject_put(tmpfs_kobj);
+    }
     return ret;
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn shmem_init() -> void __init {
-    void __init shmem_init(void)
-    {
-    int error;
+pub unsafe extern "C" fn shmem_init()  {
+    let mut error = 0;
     shmem_init_inodecache();
 
     register_quota_format(&shmem_quota_format);
 
     error = register_filesystem(&shmem_fs_type);
     if (error) {
-    pr_err("Could not register tmpfs\n");
-    goto out2;
+    pr_err!("Could not register tmpfs\n");
+// goto;
     }
     shm_mnt = kern_mount(&shmem_fs_type);
     if (IS_ERR(shm_mnt)) {
     error = PTR_ERR(shm_mnt);
-    pr_err("Could not kern_mount tmpfs\n");
-    goto out1;
+    pr_err!("Could not kern_mount tmpfs\n");
+// goto;
     }
 
     error = tmpfs_sysfs_init();
     if (error) {
-    pr_err("Could not init tmpfs sysfs\n");
-    goto out1;
+    pr_err!("Could not init tmpfs sysfs\n");
+// goto;
     }
 
-    if (has_transparent_hugepage() && shmem_huge > SHMEM_HUGE_DENY)
+    if (has_transparent_hugepage() && shmem_huge > SHMEM_HUGE_DENY) {
     SHMEM_SB(shm_mnt.mnt_sb).huge = shmem_huge;
-    else
+    }
+    else {
     shmem_huge = SHMEM_HUGE_NEVER; /* just in case it was patched */
+    }
 //
 // Default to setting PMD-sized THP to inherit the global setting and
 // disable all other multi-size THPs.
 //
-    if (!shmem_orders_configured)
+    if (!shmem_orders_configured) {
     huge_shmem_orders_inherit = BIT(HPAGE_PMD_ORDER);
+    }
 
     return;
-    out1:
+// label;
     unregister_filesystem(&shmem_fs_type);
-    out2:
-
+// label;
     unregister_quota_format(&shmem_quota_format);
 
     shmem_destroy_inodecache();
     shm_mnt = ERR_PTR(error);
     }
 
-    static ssize_t shmem_enabled_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn shmem_enabled_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     static const int values[] = {
     SHMEM_HUGE_ALWAYS,
     SHMEM_HUGE_WITHIN_SIZE,
@@ -4852,9 +5067,9 @@ pub unsafe extern "C" fn shmem_init() -> void __init {
     SHMEM_HUGE_DENY,
     SHMEM_HUGE_FORCE,
     };
-    let mut len: c_int = 0;
-    int i;
-    for (i = 0; i < ARRAY_SIZE(values); i++) {
+pub static mut len: c_int = 0;
+    let mut i = 0;
+    while (i < ARRAY_SIZE!(values)) {
     len += sysfs_emit_at(buf, len,
     shmem_huge == values[i] ? "%s[%s]" : "%s%s",
     i ? " " : "", shmem_format_huge(values[i]));
@@ -4862,28 +5077,32 @@ pub unsafe extern "C" fn shmem_init() -> void __init {
     len += sysfs_emit_at(buf, len, "\n");
     return len;
     }
-    static ssize_t shmem_enabled_store(struct kobject *kobj,
-    struct kobj_attribute *attr, const char *buf, size_t count)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn shmem_enabled_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
     char tmp[16];
-    int huge, err;
-    if (count + 1 > sizeof(tmp))
+    let mut huge = 0;
+    let mut err = 0;
+    if (count + 1 > sizeof!(tmp)) {
     return -EINVAL;
+    }
     memcpy(tmp, buf, count);
     tmp[count] = '\0';
-    if (count && tmp[count - 1] == '\n')
+    if (count && tmp[count - 1] == '\n') {
     tmp[count - 1] = '\0';
+    }
     huge = shmem_parse_huge(tmp);
-    if (huge == -EINVAL)
+    if (huge == -EINVAL) {
     return huge;
+    }
     shmem_huge = huge;
-    if (shmem_huge > SHMEM_HUGE_DENY)
+    if (shmem_huge > SHMEM_HUGE_DENY) {
     SHMEM_SB(shm_mnt.mnt_sb).huge = shmem_huge;
+    }
     err = start_stop_khugepaged();
     return err ? err : count;
     }
-    let mut shmem_enabled_attr: kobj_attribute = __ATTR_RW(shmem_enabled);
-    static DEFINE_SPINLOCK(huge_shmem_orders_lock);
+pub static mut shmem_enabled_attr: kobj_attribute = 0;
+pub static mut huge_shmem_orders_lock: usize = 0;
     enum huge_mode {
     HUGE_SHMEM_ENABLED_ALWAYS = 0,
     HUGE_SHMEM_ENABLED_INHERIT,
@@ -4904,64 +5123,66 @@ pub unsafe extern "C" fn shmem_init() -> void __init {
     [HUGE_SHMEM_ENABLED_WITHIN_SIZE] = &huge_shmem_orders_within_size,
     [HUGE_SHMEM_ENABLED_ADVISE]      = &huge_shmem_orders_madvise,
     };
-    static ssize_t thpsize_shmem_enabled_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
-    let mut order: c_int = to_thpsize(kobj).order;
-    let mut active: c_int = HUGE_SHMEM_ENABLED_NEVER;
-    let mut len: c_int = 0;
-    int i;
-    for (i = 0; i < ARRAY_SIZE(huge_mode_orders); i++) {
+#[no_mangle]
+pub unsafe extern "C" fn thpsize_shmem_enabled_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+pub static mut order: c_int = 0;
+pub static mut active: c_int = 0;
+pub static mut len: c_int = 0;
+    let mut i = 0;
+    while (i < ARRAY_SIZE!(huge_mode_orders)) {
     if (test_bit(order, huge_mode_orders[i])) {
     active = i;
     break;
     }
     }
-    for (i = 0; i < ARRAY_SIZE(huge_mode_strings); i++) {
-    if (i == active)
+    while (i < ARRAY_SIZE!(huge_mode_strings)) {
+    if (i == active) {
     len += sysfs_emit_at(buf, len, "[%s] ",
     huge_mode_strings[i]);
-    else
+    }
+    else {
     len += sysfs_emit_at(buf, len, "%s ",
     huge_mode_strings[i]);
+    }
     }
 // Replace trailing space with newline
     buf[len - 1] = '\n';
     return len;
     }
 #[no_mangle]
-unsafe extern "C" fn set_shmem_enabled_mode(order: c_int, mode: enum huge_mode) -> bool {
-    static bool set_shmem_enabled_mode(int order, enum huge_mode mode)
-    {
-    let mut changed: bool = false;
+unsafe extern "C" fn set_shmem_enabled_mode(order: c_int, mode: huge_mode) -> bool {
+pub static mut changed: bool = false;
     enum huge_mode idx;
     spin_lock(&huge_shmem_orders_lock);
-    for (idx = 0; idx < ARRAY_SIZE(huge_mode_orders); idx++) {
-    if (idx == mode)
+    while (idx < ARRAY_SIZE!(huge_mode_orders)) {
+    if (idx == mode) {
     changed |= !__test_and_set_bit(order, huge_mode_orders[idx]);
-    else
+    }
+    else {
     changed |= __test_and_clear_bit(order, huge_mode_orders[idx]);
+    }
     }
     spin_unlock(&huge_shmem_orders_lock);
     return changed;
     }
-    static ssize_t thpsize_shmem_enabled_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
-    let mut order: c_int = to_thpsize(kobj).order;
-    int mode;
+#[no_mangle]
+pub unsafe extern "C" fn thpsize_shmem_enabled_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+pub static mut order: c_int = 0;
+    let mut mode = 0;
     mode = sysfs_match_string(huge_mode_strings, buf);
-    if (mode < 0)
+    if (mode < 0) {
     return mode;
+    }
 // Do not override huge allocation policy with non-PMD sized mTHP
     if (mode == HUGE_SHMEM_ENABLED_INHERIT &&
-    shmem_huge == SHMEM_HUGE_FORCE && !is_pmd_order(order))
+    shmem_huge == SHMEM_HUGE_FORCE && !is_pmd_order(order)) {
     return -EINVAL;
+    }
     if (set_shmem_enabled_mode(order, mode)) {
-    let mut err: c_int = start_stop_khugepaged();
-    if (err)
+pub static mut err: c_int = 0;
+    if (err) {
     return err;
+    }
     } else {
 //
 // Recalculate watermarks even when the mode hasn't changed
@@ -4976,45 +5197,46 @@ unsafe extern "C" fn set_shmem_enabled_mode(order: c_int, mode: enum huge_mode) 
     __ATTR(shmem_enabled, 0644, thpsize_shmem_enabled_show, thpsize_shmem_enabled_store);
 
 #[no_mangle]
-unsafe extern "C" fn setup_transparent_hugepage_shmem(str: *mut c_char) -> int __init {
-    static int __init setup_transparent_hugepage_shmem(char *str)
-    {
-    int huge;
+unsafe extern "C" fn setup_transparent_hugepage_shmem(str: *mut c_char) -> c_int {
+    let mut huge = 0;
     huge = shmem_parse_huge(str);
     if (huge == -EINVAL) {
-    pr_warn("transparent_hugepage_shmem= cannot parse, ignored\n");
+    pr_warn!("transparent_hugepage_shmem= cannot parse, ignored\n");
     return huge;
     }
     shmem_huge = huge;
     return 1;
     }
-    __setup("transparent_hugepage_shmem=", setup_transparent_hugepage_shmem);
+    __setup!("transparent_hugepage_shmem=", setup_transparent_hugepage_shmem);
 #[no_mangle]
-unsafe extern "C" fn setup_transparent_hugepage_tmpfs(str: *mut c_char) -> int __init {
-    static int __init setup_transparent_hugepage_tmpfs(char *str)
-    {
-    int huge;
+unsafe extern "C" fn setup_transparent_hugepage_tmpfs(str: *mut c_char) -> c_int {
+    let mut huge = 0;
     huge = shmem_parse_huge(str);
     if (huge < 0) {
-    pr_warn("transparent_hugepage_tmpfs= cannot parse, ignored\n");
+    pr_warn!("transparent_hugepage_tmpfs= cannot parse, ignored\n");
     return huge;
     }
     tmpfs_huge = huge;
     return 1;
     }
-    __setup("transparent_hugepage_tmpfs=", setup_transparent_hugepage_tmpfs);
+    __setup!("transparent_hugepage_tmpfs=", setup_transparent_hugepage_tmpfs);
     static char str_dup[PAGE_SIZE] __initdata;
 #[no_mangle]
-unsafe extern "C" fn setup_thp_shmem(str: *mut c_char) -> int __init {
-    static int __init setup_thp_shmem(char *str)
-    {
-    char *token, *range, *policy, *subtoken;
+unsafe extern "C" fn setup_thp_shmem(str: *mut c_char) -> c_int {
+    let mut token = core::ptr::null_mut();
+    let mut range = core::ptr::null_mut();
+    let mut policy = core::ptr::null_mut();
+    let mut subtoken = core::ptr::null_mut();
     unsigned long always, inherit, madvise, within_size;
-    char *start_size, *end_size;
-    int start, end, nr;
-    char *p;
-    if (!str || strlen(str) + 1 > PAGE_SIZE)
-    goto err;
+    let mut start_size = core::ptr::null_mut();
+    let mut end_size = core::ptr::null_mut();
+    let mut start = 0;
+    let mut end = 0;
+    let mut nr = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    if (!str || strlen(str) + 1 > PAGE_SIZE) {
+// goto;
+    }
     strscpy(str_dup, str);
     always = huge_shmem_orders_always;
     inherit = huge_shmem_orders_inherit;
@@ -5024,8 +5246,9 @@ unsafe extern "C" fn setup_thp_shmem(str: *mut c_char) -> int __init {
     while ((token = strsep(&p, ";")) != core::ptr::null_mut()) {
     range = strsep(&token, ":");
     policy = token;
-    if (!policy)
-    goto err;
+    if (!policy) {
+// goto;
+    }
     while ((subtoken = strsep(&range, ",")) != core::ptr::null_mut()) {
     if (strchr(subtoken, '-')) {
     start_size = strsep(&subtoken, "-");
@@ -5040,17 +5263,18 @@ unsafe extern "C" fn setup_thp_shmem(str: *mut c_char) -> int __init {
     THP_ORDERS_ALL_FILE_DEFAULT);
     }
     if (start < 0) {
-    pr_err("invalid size %s in thp_shmem boot parameter\n",
+    pr_err!("invalid size %s in thp_shmem boot parameter\n",
     start_size);
-    goto err;
+// goto;
     }
     if (end < 0) {
-    pr_err("invalid size %s in thp_shmem boot parameter\n",
+    pr_err!("invalid size %s in thp_shmem boot parameter\n",
     end_size);
-    goto err;
+// goto;
     }
-    if (start > end)
-    goto err;
+    if (start > end) {
+// goto;
+    }
     nr = end - start + 1;
     if (!strcmp(policy, "always")) {
     bitmap_set(&always, start, nr);
@@ -5078,8 +5302,8 @@ unsafe extern "C" fn setup_thp_shmem(str: *mut c_char) -> int __init {
     bitmap_clear(&always, start, nr);
     bitmap_clear(&within_size, start, nr);
     } else {
-    pr_err("invalid policy %s in thp_shmem boot parameter\n", policy);
-    goto err;
+    pr_err!("invalid policy %s in thp_shmem boot parameter\n", policy);
+// goto;
     }
     }
     }
@@ -5089,11 +5313,11 @@ unsafe extern "C" fn setup_thp_shmem(str: *mut c_char) -> int __init {
     huge_shmem_orders_within_size = within_size;
     shmem_orders_configured = true;
     return 1;
-    err:
-    pr_warn("thp_shmem=%s: error parsing string, ignoring setting\n", str);
+// label;
+    pr_warn!("thp_shmem=%s: error parsing string, ignoring setting\n", str);
     return 0;
     }
-    __setup("thp_shmem=", setup_thp_shmem);
+    __setup!("thp_shmem=", setup_thp_shmem);
 
 //
 // tiny-shmem: simple shmemfs and tmpfs using ramfs code
@@ -5103,90 +5327,85 @@ unsafe extern "C" fn setup_thp_shmem(str: *mut c_char) -> int __init {
 // their complexity. On systems without swap this code should be
 // effectively equivalent, but much lighter weight.
 //
-    static struct file_system_type shmem_fs_type = {
-    .name		= "tmpfs",
-    .init_fs_context = ramfs_init_fs_context,
-    .parameters	= ramfs_fs_parameters,
-    .kill_sb	= ramfs_kill_sb,
-    .fs_flags	= FS_USERNS_MOUNT,
-    };
+pub static mut file_system_type: usize = 0;
 #[no_mangle]
-pub unsafe extern "C" fn shmem_init() -> void __init {
-    void __init shmem_init(void)
-    {
-    BUG_ON(register_filesystem(&shmem_fs_type) != 0);
+#[no_mangle]
+// duplicate fn: shmem_init
+pub unsafe extern "C" fn shmem_init_dup()  {
+    BUG_ON!(register_filesystem(&shmem_fs_type) != 0);
     shm_mnt = kern_mount(&shmem_fs_type);
-    BUG_ON(IS_ERR(shm_mnt));
+    BUG_ON!(IS_ERR(shm_mnt));
     }
 #[no_mangle]
-pub unsafe extern "C" fn shmem_unuse(type: c_uint) -> c_int {
-    int shmem_unuse(unsigned int type)
-    {
+#[no_mangle]
+// duplicate fn: shmem_unuse
+pub unsafe extern "C" fn shmem_unuse_dup(type: c_uint) -> c_int {
     return 0;
     }
 #[no_mangle]
-pub unsafe extern "C" fn shmem_lock(file: *mut file, lock: c_int, ucounts: *mut ucounts) -> c_int {
-    int shmem_lock(struct file *file, int lock, struct ucounts *ucounts)
-    {
+#[no_mangle]
+// duplicate fn: shmem_lock
+pub unsafe extern "C" fn shmem_lock_dup(file: *mut file, lock: c_int, ucounts: *mut ucounts) -> c_int {
     return 0;
     }
 #[no_mangle]
-pub unsafe extern "C" fn shmem_unlock_mapping(mapping: *mut address_space) {
-    void shmem_unlock_mapping(struct address_space *mapping)
-    {
+#[no_mangle]
+// duplicate fn: shmem_unlock_mapping
+pub unsafe extern "C" fn shmem_unlock_mapping_dup(mapping: *mut address_space) {
     }
 
-    unsigned long shmem_get_unmapped_area(struct file *file,
-    unsigned long addr, unsigned long len,
-    unsigned long pgoff, unsigned long flags)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: shmem_get_unmapped_area
+pub unsafe extern "C" fn shmem_get_unmapped_area_dup(file: *mut file, addr: c_ulong, len: c_ulong, pgoff: c_ulong, flags: c_ulong) -> c_ulong {
     return mm_get_unmapped_area(file, addr, len, pgoff, flags);
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn shmem_truncate_range(inode: *mut inode, lstart: loff_t, lend: uoff_t) {
-    void shmem_truncate_range(struct inode *inode, loff_t lstart, uoff_t lend)
-    {
+#[no_mangle]
+// duplicate fn: shmem_truncate_range
+pub unsafe extern "C" fn shmem_truncate_range_dup(inode: *mut inode, lstart: loff_t, lend: uoff_t) {
     truncate_inode_pages_range(inode.i_mapping, lstart, lend);
     }
     EXPORT_SYMBOL_GPL(shmem_truncate_range);
 
 #[no_mangle]
-pub unsafe extern "C" fn shmem_acct_size(flags: c_ulong, size: loff_t) -> c_int {
-    static inline int shmem_acct_size(unsigned long flags, loff_t size)
-    {
+#[no_mangle]
+// duplicate fn: shmem_acct_size
+pub unsafe extern "C" fn shmem_acct_size_dup(flags: c_ulong, size: loff_t) -> c_int {
     return 0;
     }
 #[no_mangle]
-pub unsafe extern "C" fn shmem_unacct_size(flags: c_ulong, size: loff_t) {
-    static inline void shmem_unacct_size(unsigned long flags, loff_t size)
-    {
+#[no_mangle]
+// duplicate fn: shmem_unacct_size
+pub unsafe extern "C" fn shmem_unacct_size_dup(flags: c_ulong, size: loff_t) {
     }
-    static inline struct inode *shmem_get_inode(struct mnt_idmap *idmap,
-    struct super_block *sb, struct inode *dir,
-    umode_t mode, dev_t dev, vma_flags_t flags)
-    {
-    struct inode *inode = ramfs_get_inode(sb, dir, mode, dev);
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: shmem_get_inode
+pub unsafe extern "C" fn shmem_get_inode_dup(idmap: *mut mnt_idmap, sb: *mut super_block, dir: *mut inode, mode: umode_t, dev: dev_t, flags: vma_flags_t) -> *mut c_void {
+    let mut inode = ramfs_get_inode(sb, dir, mode, dev);
     return inode ? inode : ERR_PTR(-ENOSPC);
     }
 
 // common code
-    static struct file *__shmem_file_setup(struct vfsmount *mnt, const char *name,
-    loff_t size, vma_flags_t flags,
-    unsigned int i_flags)
-    {
-    const unsigned long shmem_flags =
-    vma_flags_test(&flags, VMA_NORESERVE_BIT) ? SHMEM_F_NORESERVE : 0;
-    struct inode *inode;
-    struct file *res;
-    if (IS_ERR(mnt))
+#[no_mangle]
+pub unsafe extern "C" fn __shmem_file_setup(mnt: *mut vfsmount, name: *mut c_char, size: loff_t, flags: vma_flags_t, i_flags: c_uint) -> *mut c_void {
+    let mut shmem_flags = vma_flags_test(&flags, VMA_NORESERVE_BIT) ? SHMEM_F_NORESERVE : 0;
+pub static mut inode: *mut c_void = core::ptr::null_mut();
+pub static mut res: *mut c_void = core::ptr::null_mut();
+    if (IS_ERR(mnt)) {
     return ERR_CAST(mnt);
-    if (size < 0 || size > MAX_LFS_FILESIZE)
+    }
+    if (size < 0 || size > MAX_LFS_FILESIZE) {
     return ERR_PTR(-EINVAL);
-    if (is_idmapped_mnt(mnt))
+    }
+    if (is_idmapped_mnt(mnt)) {
     return ERR_PTR(-EINVAL);
-    if (shmem_acct_size(shmem_flags, size))
+    }
+    if (shmem_acct_size(shmem_flags, size)) {
     return ERR_PTR(-ENOMEM);
+    }
     inode = shmem_get_inode(&nop_mnt_idmap, mnt.mnt_sb, core::ptr::null_mut(),
     S_IFREG | S_IRWXUGO, 0, flags);
     if (IS_ERR(inode)) {
@@ -5197,11 +5416,13 @@ pub unsafe extern "C" fn shmem_unacct_size(flags: c_ulong, size: loff_t) {
     inode.i_size = size;
     clear_nlink(inode);	/* It is unlinked */
     res = ERR_PTR(ramfs_nommu_expand_for_mapping(inode, size));
-    if (!IS_ERR(res))
+    if (!IS_ERR(res)) {
     res = alloc_file_pseudo(inode, mnt, name, O_RDWR,
     &shmem_file_operations);
-    if (IS_ERR(res))
+    }
+    if (IS_ERR(res)) {
     iput(inode);
+    }
     return res;
     }
 //
@@ -5214,9 +5435,8 @@ pub unsafe extern "C" fn shmem_unacct_size(flags: c_ulong, size: loff_t) {
 // @size: size to be set for the file
 // @flags: VMA_NORESERVE_BIT suppresses pre-accounting of the entire object size
 //
-    struct file *shmem_kernel_file_setup(const char *name, loff_t size,
-    vma_flags_t flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn shmem_kernel_file_setup(name: *mut c_char, size: loff_t, flags: vma_flags_t) -> *mut c_void {
     return __shmem_file_setup(shm_mnt, name, size, flags, S_PRIVATE);
     }
     EXPORT_SYMBOL_GPL(shmem_kernel_file_setup);
@@ -5226,8 +5446,8 @@ pub unsafe extern "C" fn shmem_unacct_size(flags: c_ulong, size: loff_t) {
 // @size: size to be set for the file
 // @flags: VMA_NORESERVE_BIT suppresses pre-accounting of the entire object size
 //
-    struct file *shmem_file_setup(const char *name, loff_t size, vma_flags_t flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn shmem_file_setup(name: *mut c_char, size: loff_t, flags: vma_flags_t) -> *mut c_void {
     return __shmem_file_setup(shm_mnt, name, size, flags, 0);
     }
     EXPORT_SYMBOL_GPL(shmem_file_setup);
@@ -5238,16 +5458,14 @@ pub unsafe extern "C" fn shmem_unacct_size(flags: c_ulong, size: loff_t) {
 // @size: size to be set for the file
 // @flags: VMA_NORESERVE_BIT suppresses pre-accounting of the entire object size
 //
-    struct file *shmem_file_setup_with_mnt(struct vfsmount *mnt, const char *name,
-    loff_t size, vma_flags_t flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn shmem_file_setup_with_mnt(mnt: *mut vfsmount, name: *mut c_char, size: loff_t, flags: vma_flags_t) -> *mut c_void {
     return __shmem_file_setup(mnt, name, size, flags, 0);
     }
     EXPORT_SYMBOL_GPL(shmem_file_setup_with_mnt);
-    static struct file *__shmem_zero_setup(unsigned long start, unsigned long end,
-    vma_flags_t flags)
-    {
-    let mut size: loff_t = end - start;
+#[no_mangle]
+pub unsafe extern "C" fn __shmem_zero_setup(start: c_ulong, end: c_ulong, flags: vma_flags_t) -> *mut c_void {
+pub static mut size: loff_t = 0;
 //
 // Cloning a new file under mmap_lock leads to a lock ordering conflict
 // between XFS directory reading and selinux: since this file is only
@@ -5263,13 +5481,13 @@ pub unsafe extern "C" fn shmem_unacct_size(flags: c_ulong, size: loff_t) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn shmem_zero_setup(vma: *mut vm_area_struct) -> c_int {
-    int shmem_zero_setup(struct vm_area_struct *vma)
-    {
-    struct file *file = __shmem_zero_setup(vma.vm_start, vma.vm_end, vma.flags);
-    if (IS_ERR(file))
+    let mut file = __shmem_zero_setup(vma.vm_start, vma.vm_end, vma.flags);
+    if (IS_ERR(file)) {
     return PTR_ERR(file);
-    if (vma.vm_file)
+    }
+    if (vma.vm_file) {
     fput(vma.vm_file);
+    }
     vma.vm_file = file;
     vma.vm_ops = &shmem_anon_vm_ops;
     return 0;
@@ -5282,11 +5500,10 @@ pub unsafe extern "C" fn shmem_zero_setup(vma: *mut vm_area_struct) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn shmem_zero_setup_desc(desc: *mut vm_area_desc) -> c_int {
-    int shmem_zero_setup_desc(struct vm_area_desc *desc)
-    {
-    struct file *file = __shmem_zero_setup(desc.start, desc.end, desc.vma_flags);
-    if (IS_ERR(file))
+    let mut file = __shmem_zero_setup(desc.start, desc.end, desc.vma_flags);
+    if (IS_ERR(file)) {
     return PTR_ERR(file);
+    }
     desc.vm_file = file;
     desc.vm_ops = &shmem_anon_vm_ops;
     return 0;
@@ -5306,17 +5523,17 @@ pub unsafe extern "C" fn shmem_zero_setup_desc(desc: *mut vm_area_desc) -> c_int
 // i915_gem_object_get_pages_gtt() mixes __GFP_NORETRY | __GFP_NOWARN in
 // with the mapping_gfp_mask(), to avoid OOMing the machine unnecessarily.
 //
-    struct folio *shmem_read_folio_gfp(struct address_space *mapping,
-    pgoff_t index, gfp_t gfp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn shmem_read_folio_gfp(mapping: *mut address_space, index: pgoff_t, gfp: gfp_t) -> *mut c_void {
 
-    struct inode *inode = mapping.host;
-    struct folio *folio;
-    int error;
+    let mut inode = mapping.host;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut error = 0;
     error = shmem_get_folio_gfp(inode, index, i_size_read(inode),
     &folio, SGP_CACHE, gfp, core::ptr::null_mut(), core::ptr::null_mut());
-    if (error)
+    if (error) {
     return ERR_PTR(error);
+    }
     folio_unlock(folio);
     return folio;
 
@@ -5327,13 +5544,13 @@ pub unsafe extern "C" fn shmem_zero_setup_desc(desc: *mut vm_area_desc) -> c_int
 
     }
     EXPORT_SYMBOL_GPL(shmem_read_folio_gfp);
-    struct page *shmem_read_mapping_page_gfp(struct address_space *mapping,
-    pgoff_t index, gfp_t gfp)
-    {
-    struct folio *folio = shmem_read_folio_gfp(mapping, index, gfp);
-    struct page *page;
-    if (IS_ERR(folio))
+#[no_mangle]
+pub unsafe extern "C" fn shmem_read_mapping_page_gfp(mapping: *mut address_space, index: pgoff_t, gfp: gfp_t) -> *mut c_void {
+    let mut folio = shmem_read_folio_gfp(mapping, index, gfp);
+pub static mut page: *mut c_void = core::ptr::null_mut();
+    if (IS_ERR(folio)) {
     return &folio.page;
+    }
     page = folio_file_page(folio, index);
     if (PageHWPoison(page)) {
     folio_put(folio);

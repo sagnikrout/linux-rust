@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
 macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
@@ -71,8 +321,8 @@ macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
     EXPORT_SYMBOL_GPL(sysctl_long_vals);
 
 // Constants used for minimum and maximum
-    let mut ngroups_max: static int = NGROUPS_MAX;
-    let mut cap_last_cap: static int = CAP_LAST_CAP;
+pub static mut ngroups_max: int = 0;
+pub static mut cap_last_cap: int = 0;
 
 //
 // enum sysctl_writes_mode - supported sysctl write modes
@@ -99,16 +349,15 @@ macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
     SYSCTL_WRITES_WARN		= 0,
     SYSCTL_WRITES_STRICT		= 1,
     };
-    let mut sysctl_writes_strict: static enum sysctl_writes_mode = SYSCTL_WRITES_STRICT;
+pub static mut sysctl_writes_strict: sysctl_writes_mode = 0;
 
 //
 // /proc/sys support
 //
 
-    static int _proc_do_string(char *data, int maxlen, int dir,
-    char *buffer, size_t *lenp, loff_t *ppos)
-    {
-    size_t len;
+#[no_mangle]
+pub unsafe extern "C" fn _proc_do_string(data: *mut c_char, maxlen: c_int, dir: c_int, buffer: *mut c_char, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
+    let mut len = 0;
     char c, *p;
     if (!data || !maxlen || !*lenp) {
 // lenp = 0;
@@ -118,10 +367,12 @@ macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
     if (sysctl_writes_strict == SYSCTL_WRITES_STRICT) {
 // Only continue writes not past the end of buffer.
     len = strlen(data);
-    if (len > maxlen - 1)
+    if (len > maxlen - 1) {
     len = maxlen - 1;
-    if (*ppos > len)
+    }
+    if (*ppos > len) {
     return 0;
+    }
     len = *ppos;
     } else {
 // Start writing from beginning of buffer.
@@ -131,28 +382,32 @@ macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
     p = buffer;
     while ((p - buffer) < *lenp && len < maxlen - 1) {
     c = *(p++);
-    if (c == 0 || c == '\n')
+    if (c == 0 || c == '\n') {
     break;
+    }
     data[len++] = c;
     }
     data[len] = 0;
     } else {
     len = strlen(data);
-    if (len > maxlen)
+    if (len > maxlen) {
     len = maxlen;
+    }
     if (*ppos > len) {
 // lenp = 0;
     return 0;
     }
     data += *ppos;
     len  -= *ppos;
-    if (len > *lenp)
+    if (len > *lenp) {
     len = *lenp;
-    if (len)
+    }
+    if (len) {
     memcpy(buffer, data, len);
+    }
     if (len < *lenp) {
     buffer[len] = '\n';
-    len++;
+    len += 1;
     }
 // lenp = len;
 // ppos += len;
@@ -175,19 +430,22 @@ unsafe extern "C" fn warn_sysctl_write(table: *const ctl_table) {
 // mode indicates this is not allowed for numeric input types. String proc
 // handlers can ignore the return value.
 //
-    static bool proc_first_pos_non_zero_ignore(loff_t *ppos,
-    const struct ctl_table *table)
-    {
-    if (!*ppos)
+#[no_mangle]
+pub unsafe extern "C" fn proc_first_pos_non_zero_ignore(ppos: *mut loff_t, table: *mut ctl_table) -> bool {
+    if (!*ppos) {
     return false;
-    switch (sysctl_writes_strict) {
-    case SYSCTL_WRITES_STRICT:
+    }
+    match (sysctl_writes_strict) {
+    SYSCTL_WRITES_STRICT => {
     return true;
-    case SYSCTL_WRITES_WARN:
+    }
+    SYSCTL_WRITES_WARN => {
     warn_sysctl_write(table);
     return false;
-    default:
+    }
+    _ => {
     return false;
+    }
     }
     }
 //
@@ -207,19 +465,20 @@ unsafe extern "C" fn warn_sysctl_write(table: *const ctl_table) {
 //
 // Returns: %0 on success.
 //
-    int proc_dostring(const struct ctl_table *table, int dir,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
-    if (SYSCTL_USER_TO_KERN(dir))
+#[no_mangle]
+pub unsafe extern "C" fn proc_dostring(table: *mut ctl_table, dir: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
+    if (SYSCTL_USER_TO_KERN(dir)) {
     proc_first_pos_non_zero_ignore(ppos, table);
+    }
     return _proc_do_string(table.data, table.maxlen, dir, buffer, lenp,
     ppos);
     }
 #[no_mangle]
 unsafe extern "C" fn proc_skip_spaces(buf: *mut c_char, size: *mut usize) {
     while (*size) {
-    if (!isspace(**buf))
+    if (!isspace(**buf)) {
     break;
+    }
     (*size)--;
     (*buf)++;
     }
@@ -227,8 +486,9 @@ unsafe extern "C" fn proc_skip_spaces(buf: *mut c_char, size: *mut usize) {
 #[no_mangle]
 unsafe extern "C" fn proc_skip_char(buf: *mut c_char, size: *mut usize, v: c_char) {
     while (*size) {
-    if (**buf != v)
+    if (**buf != v) {
     break;
+    }
     (*size)--;
     (*buf)++;
     }
@@ -251,18 +511,19 @@ unsafe extern "C" fn proc_skip_char(buf: *mut c_char, size: *mut usize, v: c_cha
 // @endp will hold any trailing characters.
 // * %-ERANGE on overflow.
 //
-    static int strtoul_lenient(const char *cp, char **endp, unsigned int base,
-    unsigned long *res)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn strtoul_lenient(cp: *mut c_char, endp: *mut *mut c_char, base: c_uint, res: *mut c_ulong) -> c_int {
     unsigned long long result;
-    unsigned int rv;
+    let mut rv = 0;
     cp = _parse_integer_fixup_radix(cp, &base);
     rv = _parse_integer(cp, base, &result);
-    if ((rv & KSTRTOX_OVERFLOW) || (result != (unsigned long)result))
+    if ((rv & KSTRTOX_OVERFLOW) || (result != (unsigned long)result)) {
     return -ERANGE;
+    }
     cp += rv;
-    if (endp)
-// endp = (char *)cp;
+    if (endp) {
+// endp = cp;
+    }
 // res = (unsigned long)result;
     return 0;
     }
@@ -285,38 +546,44 @@ pub const TMPBUFLEN: c_int = 22;
 // function), @tr is updated with the trailing character.
 // * %-EINVAL on failure.
 //
-    static int proc_get_long(char **buf, size_t *size,
-    unsigned long *val, bool *neg,
-    const char *perm_tr, unsigned perm_tr_len, char *tr)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn proc_get_long(buf: *mut *mut c_char, size: *mut size_t, val: *mut c_ulong, neg: *mut bool, perm_tr: *mut c_char, perm_tr_len: c_uint, tr: *mut c_char) -> c_int {
     char *p, tmp[TMPBUFLEN];
-    let mut len: isize = *size;
-    if (len <= 0)
+pub static mut len: isize = 0;
+    if (len <= 0) {
     return -EINVAL;
-    if (len > TMPBUFLEN - 1)
+    }
+    if (len > TMPBUFLEN - 1) {
     len = TMPBUFLEN - 1;
+    }
     memcpy(tmp, *buf, len);
     tmp[len] = 0;
     p = tmp;
     if (*p == '-' && *size > 1) {
 // neg = true;
-    p++;
-    } else
+    p += 1;
+    } else {
 // neg = false;
-    if (!isdigit(*p))
+    }
+    if (!isdigit(*p)) {
     return -EINVAL;
-    if (strtoul_lenient(p, &p, 0, val))
+    }
+    if (strtoul_lenient(p, &p, 0, val)) {
     return -EINVAL;
+    }
     len = p - tmp;
 // We don't know if the next char is whitespace thus we may accept
 // invalid integers (e.g. 1234...a) or two integers instead of one
 // (e.g. 123...1). So lets not allow such large numbers.
-    if (len == TMPBUFLEN - 1)
+    if (len == TMPBUFLEN - 1) {
     return -EINVAL;
-    if (len < *size && perm_tr_len && !memchr(perm_tr, *p, perm_tr_len))
+    }
+    if (len < *size && perm_tr_len && !memchr(perm_tr, *p, perm_tr_len)) {
     return -EINVAL;
-    if (tr && (len < *size))
+    }
+    if (tr && (len < *size)) {
 // tr = *p;
+    }
 // buf += len;
 // size -= len;
     return 0;
@@ -334,12 +601,13 @@ pub const TMPBUFLEN: c_int = 22;
 //
 #[no_mangle]
 unsafe extern "C" fn proc_put_long(buf: *mut c_void, size: *mut usize, val: c_ulong, neg: bool) {
-    int len;
+    let mut len = 0;
     char tmp[TMPBUFLEN], *p = tmp;
     sprintf(p, "%s%lu", neg ? "-" : "", val);
     len = strlen(tmp);
-    if (len > *size)
+    if (len > *size) {
     len = *size;
+    }
     memcpy(*buf, tmp, len);
 // size -= len;
 // buf += len;
@@ -348,7 +616,7 @@ unsafe extern "C" fn proc_put_long(buf: *mut c_void, size: *mut usize, val: c_ul
 #[no_mangle]
 unsafe extern "C" fn proc_put_char(buf: *mut c_void, size: *mut usize, c: c_char) {
     if (*size) {
-    char **buffer = (char **)buf;
+    let mut buffer = buf;
 // buffer = c;
     (*size)--;
     (*buffer)++;
@@ -368,12 +636,12 @@ unsafe extern "C" fn proc_put_char(buf: *mut c_void, size: *mut usize, c: c_char
 //
 // Returns: %0 on success.
 //
-    int proc_uint_u2k_conv_uop(const ulong *u_ptr, uint *k_ptr,
-    ulong (*u_ptr_op)(const ulong))
-    {
-    let mut u: c_ulong = u_ptr_op ? u_ptr_op(*u_ptr) : *u_ptr;
-    if (u > UINT_MAX)
+#[no_mangle]
+pub unsafe extern "C" fn proc_uint_u2k_conv_uop(u_ptr: *mut c_ulong, k_ptr: *mut c_uint) -> c_int {
+pub static mut u: c_ulong = 0;
+    if (u > UINT_MAX) {
     return -EINVAL;
+    }
     WRITE_ONCE(*k_ptr, u);
     return 0;
     }
@@ -389,7 +657,7 @@ unsafe extern "C" fn proc_put_char(buf: *mut c_void, size: *mut usize, c: c_char
 //
 #[no_mangle]
 pub unsafe extern "C" fn proc_uint_k2u_conv(u_ptr: *mut c_ulong, k_ptr: *const c_uint) -> c_int {
-    let mut val: c_uint = READ_ONCE(*k_ptr);
+pub static mut val: c_uint = 0;
 // u_ptr = (ulong)val;
     return 0;
     }
@@ -409,44 +677,44 @@ pub unsafe extern "C" fn proc_uint_k2u_conv(u_ptr: *mut c_ulong, k_ptr: *const c
 //
 // Returns: %0 on success
 //
-    int proc_uint_conv(ulong *u_ptr, uint *k_ptr, int dir,
-    const struct ctl_table *tbl, bool k_ptr_range_check,
-    int (*user_to_kern)(const ulong *u_ptr, uint *k_ptr),
-    int (*kern_to_user)(ulong *u_ptr, const uint *k_ptr))
-    {
-    if (SYSCTL_KERN_TO_USER(dir))
+#[no_mangle]
+pub unsafe extern "C" fn proc_uint_conv(u_ptr: *mut c_ulong, k_ptr: *mut c_uint, dir: c_int, tbl: *mut ctl_table, k_ptr_range_check: bool, u_ptr: *mut *mut int (user_to_kern)( ulong, u_ptr: *mut *mut int (kern_to_user)(ulong) -> c_int {
+    if (SYSCTL_KERN_TO_USER(dir)) {
     return kern_to_user(u_ptr, k_ptr);
+    }
     if (k_ptr_range_check) {
-    uint tmp_k;
-    int ret;
-    if (!tbl)
+    let mut tmp_k;
+    let mut ret = 0;
+    if (!tbl) {
     return -EINVAL;
+    }
     ret = user_to_kern(u_ptr, &tmp_k);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     if ((tbl.extra1 &&
-// (uint *)tbl->extra1 > tmp_k) ||
+// tbl->extra1 > tmp_k) ||
     (tbl.extra2 &&
-// (uint *)tbl->extra2 < tmp_k))
+tbl.extra2 < tmp_k)) {
     return -ERANGE;
+    }
     WRITE_ONCE(*k_ptr, tmp_k);
-    } else
+    } else {
     return user_to_kern(u_ptr, k_ptr);
+    }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn proc_uint_u2k_conv(u_ptr: *const c_ulong, k_ptr: *mut c_uint) -> c_int {
     return proc_uint_u2k_conv_uop(u_ptr, k_ptr, core::ptr::null_mut());
     }
-    static int do_proc_uint_conv(bool *negp, ulong *u_ptr, uint *k_ptr, int dir,
-    const struct ctl_table *tbl)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn do_proc_uint_conv(negp: *mut bool, u_ptr: *mut c_ulong, k_ptr: *mut c_uint, dir: c_int, tbl: *mut ctl_table) -> c_int {
     return proc_uint_conv(u_ptr, k_ptr, dir, tbl, false,
     proc_uint_u2k_conv, proc_uint_k2u_conv);
     }
-    static int do_proc_uint_conv_minmax(bool *negp, ulong *u_ptr, uint *k_ptr,
-    int dir, const struct ctl_table *tbl)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn do_proc_uint_conv_minmax(negp: *mut bool, u_ptr: *mut c_ulong, k_ptr: *mut c_uint, dir: c_int, tbl: *mut ctl_table) -> c_int {
     return proc_uint_conv(u_ptr, k_ptr, dir, tbl, true,
     proc_uint_u2k_conv, proc_uint_k2u_conv);
     }
@@ -463,10 +731,9 @@ unsafe extern "C" fn proc_uint_u2k_conv(u_ptr: *const c_ulong, k_ptr: *mut c_uin
 //
 // Returns: 0 on success.
 //
-    int proc_int_k2u_conv_kop(ulong *u_ptr, const int *k_ptr, bool *negp,
-    ulong (*k_ptr_op)(const ulong))
-    {
-    let mut val: c_int = READ_ONCE(*k_ptr);
+#[no_mangle]
+pub unsafe extern "C" fn proc_int_k2u_conv_kop(u_ptr: *mut c_ulong, k_ptr: *mut c_int, negp: *mut bool) -> c_int {
+pub static mut val: c_int = 0;
     if (val < 0) {
 // negp = true;
 // u_ptr = k_ptr_op ? -k_ptr_op((ulong)val) : -(ulong)val;
@@ -488,17 +755,18 @@ unsafe extern "C" fn proc_uint_u2k_conv(u_ptr: *const c_ulong, k_ptr: *mut c_uin
 //
 // Returns: 0 on success.
 //
-    int proc_int_u2k_conv_uop(const ulong *u_ptr, int *k_ptr, const bool *negp,
-    ulong (*u_ptr_op)(const ulong))
-    {
-    let mut u: c_ulong = u_ptr_op ? u_ptr_op(*u_ptr) : *u_ptr;
+#[no_mangle]
+pub unsafe extern "C" fn proc_int_u2k_conv_uop(u_ptr: *mut c_ulong, k_ptr: *mut c_int, negp: *mut bool) -> c_int {
+pub static mut u: c_ulong = 0;
     if (*negp) {
-    if (u > (ulong) INT_MAX + 1)
+    if (u > (ulong) INT_MAX + 1) {
     return -EINVAL;
+    }
     WRITE_ONCE(*k_ptr, -u);
     } else {
-    if (u > (ulong) INT_MAX)
+    if (u > (ulong) INT_MAX) {
     return -EINVAL;
+    }
     WRITE_ONCE(*k_ptr, u);
     }
     return 0;
@@ -520,47 +788,47 @@ unsafe extern "C" fn proc_uint_u2k_conv(u_ptr: *const c_ulong, k_ptr: *mut c_uin
 //
 // Returns: 0 on success
 //
-    int proc_int_conv(bool *negp, ulong *u_ptr, int *k_ptr, int dir,
-    const struct ctl_table *tbl, bool k_ptr_range_check,
-    int (*user_to_kern)(const bool *negp, const ulong *u_ptr, int *k_ptr),
-    int (*kern_to_user)(bool *negp, ulong *u_ptr, const int *k_ptr))
-    {
-    if (SYSCTL_KERN_TO_USER(dir))
+#[no_mangle]
+pub unsafe extern "C" fn proc_int_conv(negp: *mut bool, u_ptr: *mut c_ulong, k_ptr: *mut c_int, dir: c_int, tbl: *mut ctl_table, k_ptr_range_check: bool, negp: *mut *mut int (user_to_kern)( bool, u_ptr: *mut c_ulong, negp: *mut *mut int (kern_to_user)(bool, u_ptr: *mut c_ulong) -> c_int {
+    if (SYSCTL_KERN_TO_USER(dir)) {
     return kern_to_user(negp, u_ptr, k_ptr);
+    }
     if (k_ptr_range_check) {
-    int tmp_k, ret;
-    if (!tbl)
+    let mut tmp_k = 0;
+    let mut ret = 0;
+    if (!tbl) {
     return -EINVAL;
+    }
     ret = user_to_kern(negp, u_ptr, &tmp_k);
-    if (ret)
+    if (ret) {
     return ret;
-    if ((tbl.extra1 && *(int *)tbl.extra1 > tmp_k) ||
-    (tbl.extra2 && *(int *)tbl.extra2 < tmp_k))
+    }
+    if ((tbl.extra1 && *tbl.extra1 > tmp_k) ||
+    (tbl.extra2 && *tbl.extra2 < tmp_k)) {
     return -EINVAL;
+    }
     WRITE_ONCE(*k_ptr, tmp_k);
-    } else
+    } else {
     return user_to_kern(negp, u_ptr, k_ptr);
+    }
     return 0;
     }
-    static int sysctl_user_to_kern_int_conv(const bool *negp, const ulong *u_ptr,
-    int *k_ptr)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sysctl_user_to_kern_int_conv(negp: *mut bool, u_ptr: *mut c_ulong, k_ptr: *mut c_int) -> c_int {
     return proc_int_u2k_conv_uop(u_ptr, k_ptr, negp, core::ptr::null_mut());
     }
 #[no_mangle]
 unsafe extern "C" fn sysctl_kern_to_user_int_conv(negp: *mut bool, u_ptr: *mut c_ulong, k_ptr: *const c_int) -> c_int {
     return proc_int_k2u_conv_kop(u_ptr, k_ptr, negp, core::ptr::null_mut());
     }
-    static int do_proc_int_conv(bool *negp, unsigned long *u_ptr, int *k_ptr,
-    int dir, const struct ctl_table *tbl)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn do_proc_int_conv(negp: *mut bool, u_ptr: *mut c_ulong, k_ptr: *mut c_int, dir: c_int, tbl: *mut ctl_table) -> c_int {
     return proc_int_conv(negp, u_ptr, k_ptr, dir, tbl, false,
     sysctl_user_to_kern_int_conv,
     sysctl_kern_to_user_int_conv);
     }
-    static int do_proc_int_conv_minmax(bool *negp, unsigned long *u_ptr, int *k_ptr,
-    int dir, const struct ctl_table *tbl)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn do_proc_int_conv_minmax(negp: *mut bool, u_ptr: *mut c_ulong, k_ptr: *mut c_int, dir: c_int, tbl: *mut ctl_table) -> c_int {
     return proc_int_conv(negp, u_ptr, k_ptr, dir, tbl, true,
     sysctl_user_to_kern_int_conv,
     sysctl_kern_to_user_int_conv);
@@ -592,17 +860,18 @@ unsafe extern "C" fn sysctl_kern_to_user_int_conv(negp: *mut bool, u_ptr: *mut c
 // Dispatch to the converter member selected by @type. @k_ptr walks
 // table->data as raw bytes and is cast back to the element type here.
 //
-    static int proc_vec_conv(enum proc_vec_type type, union proc_vec_conv conv,
-    bool *negp, ulong *u_ptr, char *k_ptr, int dir,
-    const struct ctl_table *table)
-    {
-    switch (type) {
-    case PROC_VEC_INT:
-    return conv.int_conv(negp, u_ptr, (int *)k_ptr, dir, table);
-    case PROC_VEC_UINT:
-    return conv.uint_conv(negp, u_ptr, (uint *)k_ptr, dir, table);
-    case PROC_VEC_ULONG:
-    return conv.ulong_conv(negp, u_ptr, (ulong *)k_ptr, dir, table);
+#[no_mangle]
+pub unsafe extern "C" fn proc_vec_conv(type: proc_vec_type, conv: union proc_vec_conv, negp: *mut bool, u_ptr: *mut c_ulong, k_ptr: *mut c_char, dir: c_int, table: *mut ctl_table) -> c_int {
+    match (type) {
+    PROC_VEC_INT => {
+    return conv.int_conv(negp, u_ptr, k_ptr, dir, table);
+    }
+    PROC_VEC_UINT => {
+    return conv.uint_conv(negp, u_ptr, k_ptr, dir, table);
+    }
+    PROC_VEC_ULONG => {
+    return conv.ulong_conv(negp, u_ptr, k_ptr, dir, table);
+    }
     }
     return -EINVAL;
     }
@@ -612,29 +881,32 @@ unsafe extern "C" fn sysctl_kern_to_user_int_conv(negp: *mut bool, u_ptr: *mut c
 // variants. table->data is walked as raw bytes (@i) advanced by @size; the
 // converter performs the actual typed load/store.
 //
-    static int do_proc_vec(const struct ctl_table *table, int dir,
-    void *buffer, size_t *lenp, loff_t *ppos,
-    enum proc_vec_type type, union proc_vec_conv conv)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn do_proc_vec(table: *mut ctl_table, dir: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t, type: proc_vec_type, conv: union proc_vec_conv) -> c_int {
     int vleft, first = 1, err = 0;
     size_t left, size;
-    bool is_unsigned;
-    char *i, *p;
-    switch (type) {
-    case PROC_VEC_INT:
-    size = sizeof(int);
+    let mut is_unsigned = 0;
+    let mut i = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
+    match (type) {
+    PROC_VEC_INT => {
+    size = sizeof!(int);
     is_unsigned = false;
-    break;
-    case PROC_VEC_UINT:
-    size = sizeof(uint);
+    // break;
+    }
+    PROC_VEC_UINT => {
+    size = sizeof!(uint);
     is_unsigned = true;
-    break;
-    case PROC_VEC_ULONG:
-    size = sizeof(ulong);
+    // break;
+    }
+    PROC_VEC_ULONG => {
+    size = sizeof!(ulong);
     is_unsigned = true;
-    break;
-    default:
+    // break;
+    }
+    _ => {
     return -EINVAL;
+    }
     }
     if (!table.data || !table.maxlen || !*lenp ||
     (*ppos && SYSCTL_KERN_TO_USER(dir))) {
@@ -645,29 +917,35 @@ unsafe extern "C" fn sysctl_kern_to_user_int_conv(negp: *mut bool, u_ptr: *mut c
     vleft = table.maxlen / size;
     left = *lenp;
 // uint arrays are not supported, *Do not* add support for them.
-    if (type == PROC_VEC_UINT && vleft != 1)
+    if (type == PROC_VEC_UINT && vleft != 1) {
     return -EINVAL;
+    }
     if (SYSCTL_USER_TO_KERN(dir)) {
-    if (proc_first_pos_non_zero_ignore(ppos, table))
-    goto out;
-    if (left > PAGE_SIZE - 1)
+    if (proc_first_pos_non_zero_ignore(ppos, table)) {
+// goto;
+    }
+    if (left > PAGE_SIZE - 1) {
     left = PAGE_SIZE - 1;
+    }
     p = buffer;
     }
-    for (; left && vleft--; i += size, first = 0) {
-    unsigned long lval;
-    let mut neg: bool = false;
+    while (left && vleft--) {
+    let mut lval = 0;
+pub static mut neg: bool = false;
     if (SYSCTL_USER_TO_KERN(dir)) {
     proc_skip_spaces(&p, &left);
-    if (!left)
+    if (!left) {
     break;
+    }
     err = proc_get_long(&p, &left, &lval, &neg,
     proc_wspace_sep,
-    sizeof(proc_wspace_sep), core::ptr::null_mut());
-    if (!err && neg && is_unsigned)
+    sizeof!(proc_wspace_sep), core::ptr::null_mut());
+    if (!err && neg && is_unsigned) {
     err = -EINVAL;
-    if (err)
+    }
+    if (err) {
     break;
+    }
     if (proc_vec_conv(type, conv, &neg, &lval, i, dir, table)) {
     err = -EINVAL;
     break;
@@ -677,19 +955,23 @@ unsafe extern "C" fn sysctl_kern_to_user_int_conv(negp: *mut bool, u_ptr: *mut c
     err = -EINVAL;
     break;
     }
-    if (!first)
+    if (!first) {
     proc_put_char(&buffer, &left, '\t');
+    }
     proc_put_long(&buffer, &left, lval, neg);
     }
     }
-    if (SYSCTL_KERN_TO_USER(dir) && !first && left && !err)
+    if (SYSCTL_KERN_TO_USER(dir) && !first && left && !err) {
     proc_put_char(&buffer, &left, '\n');
-    if (SYSCTL_USER_TO_KERN(dir) && !err && left)
+    }
+    if (SYSCTL_USER_TO_KERN(dir) && !err && left) {
     proc_skip_spaces(&p, &left);
-    if (SYSCTL_USER_TO_KERN(dir) && first)
+    }
+    if (SYSCTL_USER_TO_KERN(dir) && first) {
     return err ? : -EINVAL;
+    }
 // lenp -= left;
-    out:
+// label;
 // ppos += *lenp;
     return err;
     }
@@ -703,19 +985,17 @@ unsafe extern "C" fn sysctl_kern_to_user_int_conv(negp: *mut bool, u_ptr: *mut c
 // @ppos: file position
 // @conv: Custom converter call back
 //
-// Reads/writes up to table->maxlen/sizeof(unsigned int) unsigned integer
+// Reads/writes up to table->maxlen/sizeof!(unsigned int) unsigned integer
 // values from/to the user buffer, treated as an ASCII string. Negative
 // strings are not allowed.
 //
 // Returns: %0 on success
 //
-    int proc_douintvec_conv(const struct ctl_table *table, int dir, void *buffer,
-    size_t *lenp, loff_t *ppos,
-    int (*conv)(bool *negp, ulong *u_ptr, uint *k_ptr,
-    int dir, const struct ctl_table *table))
-    {
-    if (!conv)
+#[no_mangle]
+pub unsafe extern "C" fn proc_douintvec_conv(table: *mut ctl_table, dir: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t, negp: *mut *mut int (conv)(bool, u_ptr: *mut c_ulong, k_ptr: *mut c_uint, dir: c_int) -> c_int {
+    if (!conv) {
     conv = do_proc_uint_conv;
+    }
     return do_proc_vec(table, dir, buffer, lenp, ppos, PROC_VEC_UINT,
     (union proc_vec_conv){ .uint_conv = conv });
     }
@@ -731,28 +1011,31 @@ unsafe extern "C" fn sysctl_kern_to_user_int_conv(negp: *mut bool, u_ptr: *mut c
 // treated as an ASCII string.
 //
 // table->data must point to a bool variable and table->maxlen must
-// be sizeof(bool).
+// be sizeof!(bool).
 //
 // Returns: %0 on success.
 //
-    int proc_dobool(const struct ctl_table *table, int dir, void *buffer,
-    size_t *lenp, loff_t *ppos)
-    {
-    struct ctl_table tmp;
-    bool *data = table.data;
-    int res, val;
+#[no_mangle]
+pub unsafe extern "C" fn proc_dobool(table: *mut ctl_table, dir: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
+pub static mut tmp: usize = 0;
+    let mut data = table.data;
+    let mut res = 0;
+    let mut val = 0;
 // Do not support arrays yet.
-    if (table.maxlen != sizeof(bool))
+    if (table.maxlen != sizeof!(bool)) {
     return -EINVAL;
+    }
     tmp = *table;
-    tmp.maxlen = sizeof(val);
+    tmp.maxlen = sizeof!(val);
     tmp.data = &val;
     val = READ_ONCE(*data);
     res = proc_dointvec(&tmp, dir, buffer, lenp, ppos);
-    if (res)
+    if (res) {
     return res;
-    if (SYSCTL_USER_TO_KERN(dir))
+    }
+    if (SYSCTL_USER_TO_KERN(dir)) {
     WRITE_ONCE(*data, val);
+    }
     return 0;
     }
 //
@@ -763,14 +1046,13 @@ unsafe extern "C" fn sysctl_kern_to_user_int_conv(negp: *mut bool, u_ptr: *mut c
 // @lenp: the size of the user buffer
 // @ppos: file position
 //
-// Reads/writes up to table->maxlen/sizeof(unsigned int) integer
+// Reads/writes up to table->maxlen/sizeof!(unsigned int) integer
 // values from/to the user buffer, treated as an ASCII string.
 //
 // Returns: %0 on success.
 //
-    int proc_dointvec(const struct ctl_table *table, int dir, void *buffer,
-    size_t *lenp, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn proc_dointvec(table: *mut ctl_table, dir: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
     return do_proc_vec(table, dir, buffer, lenp, ppos, PROC_VEC_INT,
     (union proc_vec_conv){ .int_conv = do_proc_int_conv });
     }
@@ -782,14 +1064,13 @@ unsafe extern "C" fn sysctl_kern_to_user_int_conv(negp: *mut bool, u_ptr: *mut c
 // @lenp: the size of the user buffer
 // @ppos: file position
 //
-// Reads/writes up to table->maxlen/sizeof(unsigned int) unsigned integer
+// Reads/writes up to table->maxlen/sizeof!(unsigned int) unsigned integer
 // values from/to the user buffer, treated as an ASCII string.
 //
 // Returns: %0 on success.
 //
-    int proc_douintvec(const struct ctl_table *table, int dir, void *buffer,
-    size_t *lenp, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn proc_douintvec(table: *mut ctl_table, dir: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
     return do_proc_vec(table, dir, buffer, lenp, ppos, PROC_VEC_UINT,
     (union proc_vec_conv){ .uint_conv = do_proc_uint_conv });
     }
@@ -801,7 +1082,7 @@ unsafe extern "C" fn sysctl_kern_to_user_int_conv(negp: *mut bool, u_ptr: *mut c
 // @lenp: the size of the user buffer
 // @ppos: file position
 //
-// Reads/writes up to table->maxlen/sizeof(unsigned int) integer
+// Reads/writes up to table->maxlen/sizeof!(unsigned int) integer
 // values from/to the user buffer, treated as an ASCII string.
 //
 // This routine will ensure the values are within the range specified by
@@ -810,9 +1091,8 @@ unsafe extern "C" fn sysctl_kern_to_user_int_conv(negp: *mut bool, u_ptr: *mut c
 // Returns: %0 on success or -EINVAL when the range check fails and
 // SYSCTL_USER_TO_KERN(dir) == true
 //
-    int proc_dointvec_minmax(const struct ctl_table *table, int dir,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn proc_dointvec_minmax(table: *mut ctl_table, dir: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
     return do_proc_vec(table, dir, buffer, lenp, ppos, PROC_VEC_INT,
     (union proc_vec_conv){ .int_conv = do_proc_int_conv_minmax });
     }
@@ -824,7 +1104,7 @@ unsafe extern "C" fn sysctl_kern_to_user_int_conv(negp: *mut bool, u_ptr: *mut c
 // @lenp: the size of the user buffer
 // @ppos: file position
 //
-// Reads/writes up to table->maxlen/sizeof(unsigned int) unsigned integer
+// Reads/writes up to table->maxlen/sizeof!(unsigned int) unsigned integer
 // values from/to the user buffer, treated as an ASCII string. Negative
 // strings are not allowed.
 //
@@ -836,9 +1116,8 @@ unsafe extern "C" fn sysctl_kern_to_user_int_conv(negp: *mut bool, u_ptr: *mut c
 // Returns: %0 on success or -ERANGE when range check failes and
 // SYSCTL_USER_TO_KERN(dir) == true
 //
-    int proc_douintvec_minmax(const struct ctl_table *table, int dir,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn proc_douintvec_minmax(table: *mut ctl_table, dir: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
     return do_proc_vec(table, dir, buffer, lenp, ppos, PROC_VEC_UINT,
     (union proc_vec_conv){ .uint_conv = do_proc_uint_conv_minmax });
     }
@@ -850,7 +1129,7 @@ unsafe extern "C" fn sysctl_kern_to_user_int_conv(negp: *mut bool, u_ptr: *mut c
 // @lenp: the size of the user buffer
 // @ppos: file position
 //
-// Reads/writes up to table->maxlen/sizeof(u8) unsigned chars
+// Reads/writes up to table->maxlen/sizeof!(u8) unsigned chars
 // values from/to the user buffer, treated as an ASCII string. Negative
 // strings are not allowed.
 //
@@ -860,30 +1139,34 @@ unsafe extern "C" fn sysctl_kern_to_user_int_conv(negp: *mut bool, u_ptr: *mut c
 // Returns: %0 on success or an error on SYSCTL_USER_TO_KERN(dir) == true
 // and the range check fails.
 //
-    int proc_dou8vec_minmax(const struct ctl_table *table, int dir,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
-    struct ctl_table tmp;
-    let mut min: c_uint = 0, max = 255U, val;
-    u8 *data = table.data;
-    int res;
+#[no_mangle]
+pub unsafe extern "C" fn proc_dou8vec_minmax(table: *mut ctl_table, dir: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
+pub static mut tmp: usize = 0;
+pub static mut min: c_uint = 0;
+    let mut data = table.data;
+    let mut res = 0;
 // Do not support arrays yet.
-    if (table.maxlen != sizeof(u8))
+    if (table.maxlen != sizeof!(u8)) {
     return -EINVAL;
+    }
     tmp = *table;
-    tmp.maxlen = sizeof(val);
+    tmp.maxlen = sizeof!(val);
     tmp.data = &val;
-    if (!tmp.extra1)
-    tmp.extra1 = (unsigned int *) &min;
-    if (!tmp.extra2)
-    tmp.extra2 = (unsigned int *) &max;
+    if (!tmp.extra1) {
+    tmp.extra1 =  &min;
+    }
+    if (!tmp.extra2) {
+    tmp.extra2 =  &max;
+    }
     val = READ_ONCE(*data);
     res = do_proc_vec(&tmp, dir, buffer, lenp, ppos, PROC_VEC_UINT,
     (union proc_vec_conv){ .uint_conv = do_proc_uint_conv_minmax });
-    if (res)
+    if (res) {
     return res;
-    if (SYSCTL_USER_TO_KERN(dir))
+    }
+    if (SYSCTL_USER_TO_KERN(dir)) {
     WRITE_ONCE(*data, val);
+    }
     return 0;
     }
     EXPORT_SYMBOL_GPL(proc_dou8vec_minmax);
@@ -903,27 +1186,29 @@ unsafe extern "C" fn sysctl_kern_to_user_int_conv(negp: *mut bool, u_ptr: *mut c
 //
 // Returns: 0 on success
 //
-    int proc_ulong_conv(ulong *u_ptr, ulong *k_ptr, int dir,
-    const struct ctl_table *tbl, bool k_ptr_range_check,
-    int (*user_to_kern)(const ulong *u_ptr, ulong *k_ptr),
-    int (*kern_to_user)(ulong *u_ptr, const ulong *k_ptr))
-    {
-    if (SYSCTL_KERN_TO_USER(dir))
+#[no_mangle]
+pub unsafe extern "C" fn proc_ulong_conv(u_ptr: *mut c_ulong, k_ptr: *mut c_ulong, dir: c_int, tbl: *mut ctl_table, k_ptr_range_check: bool, u_ptr: *mut *mut int (user_to_kern)( ulong, u_ptr: *mut *mut int (kern_to_user)(ulong) -> c_int {
+    if (SYSCTL_KERN_TO_USER(dir)) {
     return kern_to_user(u_ptr, k_ptr);
+    }
     if (k_ptr_range_check) {
-    ulong tmp_k;
-    int ret;
-    if (!tbl)
+    let mut tmp_k;
+    let mut ret = 0;
+    if (!tbl) {
     return -EINVAL;
+    }
     ret = user_to_kern(u_ptr, &tmp_k);
-    if (ret)
+    if (ret) {
     return ret;
-    if ((tbl.extra1 && *(ulong *)tbl.extra1 > tmp_k) ||
-    (tbl.extra2 && *(ulong *)tbl.extra2 < tmp_k))
+    }
+    if ((tbl.extra1 && *tbl.extra1 > tmp_k) ||
+    (tbl.extra2 && *tbl.extra2 < tmp_k)) {
     return -ERANGE;
+    }
     WRITE_ONCE(*k_ptr, tmp_k);
-    } else
+    } else {
     return user_to_kern(u_ptr, k_ptr);
+    }
     return 0;
     }
 //
@@ -938,10 +1223,9 @@ unsafe extern "C" fn sysctl_kern_to_user_int_conv(negp: *mut bool, u_ptr: *mut c
 //
 // Returns: 0 on success.
 //
-    int proc_ulong_u2k_conv_uop(const ulong *u_ptr, ulong *k_ptr,
-    ulong (*u_ptr_op)(const ulong))
-    {
-    let mut u: c_ulong = u_ptr_op ? u_ptr_op(*u_ptr) : *u_ptr;
+#[no_mangle]
+pub unsafe extern "C" fn proc_ulong_u2k_conv_uop(u_ptr: *mut c_ulong, k_ptr: *mut c_ulong) -> c_int {
+pub static mut u: c_ulong = 0;
     WRITE_ONCE(*k_ptr, u);
     return 0;
     }
@@ -961,10 +1245,9 @@ unsafe extern "C" fn proc_ulong_u2k_conv(u_ptr: *const c_ulong, k_ptr: *mut c_ul
 //
 // Returns: 0 on success.
 //
-    int proc_ulong_k2u_conv_kop(ulong *u_ptr, const ulong *k_ptr,
-    ulong (*k_ptr_op)(const ulong))
-    {
-    let mut val: c_ulong = k_ptr_op ? k_ptr_op(READ_ONCE(*k_ptr)) : READ_ONCE(*k_ptr);
+#[no_mangle]
+pub unsafe extern "C" fn proc_ulong_k2u_conv_kop(u_ptr: *mut c_ulong, k_ptr: *mut c_ulong) -> c_int {
+pub static mut val: c_ulong = 0;
 // u_ptr = (ulong)val;
     return 0;
     }
@@ -972,9 +1255,8 @@ unsafe extern "C" fn proc_ulong_u2k_conv(u_ptr: *const c_ulong, k_ptr: *mut c_ul
 unsafe extern "C" fn proc_ulong_k2u_conv(u_ptr: *mut c_ulong, k_ptr: *const c_ulong) -> c_int {
     return proc_ulong_k2u_conv_kop(u_ptr, k_ptr, core::ptr::null_mut());
     }
-    static int do_proc_ulong_conv(bool *negp, ulong *u_ptr, ulong *k_ptr, int dir,
-    const struct ctl_table *tbl)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn do_proc_ulong_conv(negp: *mut bool, u_ptr: *mut c_ulong, k_ptr: *mut c_ulong, dir: c_int, tbl: *mut ctl_table) -> c_int {
     return proc_ulong_conv(u_ptr, k_ptr, dir, tbl, true,
     proc_ulong_u2k_conv, proc_ulong_k2u_conv);
     }
@@ -988,17 +1270,14 @@ unsafe extern "C" fn proc_ulong_k2u_conv(u_ptr: *mut c_ulong, k_ptr: *const c_ul
 // @ppos: file position
 // @conv: Custom converter call back
 //
-// Reads/writes up to table->maxlen/sizeof(unsigned long) unsigned long
+// Reads/writes up to table->maxlen/sizeof!(unsigned long) unsigned long
 // values from/to the user buffer, treated as an ASCII string. Negative
 // strings are not allowed.
 //
 // Returns: 0 on success
 //
-    int proc_doulongvec_conv(const struct ctl_table *table, int dir,
-    void *buffer, size_t *lenp, loff_t *ppos,
-    int (*conv)(bool *negp, ulong *u_ptr, ulong *k_ptr,
-    int dir, const struct ctl_table *table))
-    {
+#[no_mangle]
+pub unsafe extern "C" fn proc_doulongvec_conv(table: *mut ctl_table, dir: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t, negp: *mut *mut int (conv)(bool, u_ptr: *mut c_ulong, k_ptr: *mut c_ulong, dir: c_int) -> c_int {
     return do_proc_vec(table, dir, buffer, lenp, ppos, PROC_VEC_ULONG,
     (union proc_vec_conv){ .ulong_conv = conv });
     }
@@ -1010,7 +1289,7 @@ unsafe extern "C" fn proc_ulong_k2u_conv(u_ptr: *mut c_ulong, k_ptr: *const c_ul
 // @lenp: the size of the user buffer
 // @ppos: file position
 //
-// Reads/writes up to table->maxlen/sizeof(unsigned long) unsigned long
+// Reads/writes up to table->maxlen/sizeof!(unsigned long) unsigned long
 // values from/to the user buffer, treated as an ASCII string.
 //
 // This routine will ensure the values are within the range specified by
@@ -1018,9 +1297,8 @@ unsafe extern "C" fn proc_ulong_k2u_conv(u_ptr: *mut c_ulong, k_ptr: *const c_ul
 //
 // Returns: %0 on success.
 //
-    int proc_doulongvec_minmax(const struct ctl_table *table, int dir,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn proc_doulongvec_minmax(table: *mut ctl_table, dir: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
     return do_proc_vec(table, dir, buffer, lenp, ppos, PROC_VEC_ULONG,
     (union proc_vec_conv){ .ulong_conv = do_proc_ulong_conv });
     }
@@ -1033,18 +1311,16 @@ unsafe extern "C" fn proc_ulong_k2u_conv(u_ptr: *mut c_ulong, k_ptr: *const c_ul
 // @ppos: file position
 // @conv: Custom converter call back. Defaults to do_proc_int_conv
 //
-// Reads/writes up to table->maxlen/sizeof(int) integer values from/to the
+// Reads/writes up to table->maxlen/sizeof!(int) integer values from/to the
 // user buffer, treated as an ASCII string.
 //
 // Returns: 0 on success
 //
-    int proc_dointvec_conv(const struct ctl_table *table, int dir, void *buffer,
-    size_t *lenp, loff_t *ppos,
-    int (*conv)(bool *negp, unsigned long *u_ptr, int *k_ptr,
-    int dir, const struct ctl_table *table))
-    {
-    if (!conv)
+#[no_mangle]
+pub unsafe extern "C" fn proc_dointvec_conv(table: *mut ctl_table, dir: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t, negp: *mut *mut int (conv)(bool, u_ptr: *mut c_ulong, k_ptr: *mut c_int, dir: c_int) -> c_int {
+    if (!conv) {
     conv = do_proc_int_conv;
+    }
     return do_proc_vec(table, dir, buffer, lenp, ppos, PROC_VEC_INT,
     (union proc_vec_conv){ .int_conv = conv });
     }
@@ -1065,39 +1341,39 @@ unsafe extern "C" fn proc_ulong_k2u_conv(u_ptr: *mut c_ulong, k_ptr: *const c_ul
 //
 // Returns: %0 on success.
 //
-    int proc_do_large_bitmap(const struct ctl_table *table, int dir,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
-    let mut err: c_int = 0;
-    let mut left: usize = *lenp;
-    let mut bitmap_len: c_ulong = table.maxlen;
-    unsigned long *bitmap = *(unsigned long **) table.data;
-    unsigned long *tmp_bitmap = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn proc_do_large_bitmap(table: *mut ctl_table, dir: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
+pub static mut err: c_int = 0;
+pub static mut left: usize = 0;
+pub static mut bitmap_len: c_ulong = 0;
+    let mut bitmap = * table.data;
+    let mut tmp_bitmap = core::ptr::null_mut();
     char tr_a[] = { '-', ',', '\n' }, tr_b[] = { ',', '\n', 0 }, c = 0;
     if (!bitmap || !bitmap_len || !left || (*ppos && SYSCTL_KERN_TO_USER(dir))) {
 // lenp = 0;
     return 0;
     }
     if (SYSCTL_USER_TO_KERN(dir)) {
-    char *p = buffer;
-    let mut skipped: usize = 0;
+    let mut p = buffer;
+pub static mut skipped: usize = 0;
     if (left > PAGE_SIZE - 1) {
     left = PAGE_SIZE - 1;
 // How much of the buffer we'll skip this pass
     skipped = *lenp - left;
     }
     tmp_bitmap = bitmap_zalloc(bitmap_len, GFP_KERNEL);
-    if (!tmp_bitmap)
+    if (!tmp_bitmap) {
     return -ENOMEM;
+    }
     proc_skip_char(&p, &left, '\n');
     while (!err && left) {
     unsigned long val_a, val_b;
-    bool neg;
-    size_t saved_left;
+    let mut neg = 0;
+    let mut saved_left = 0;
 // In case we stop parsing mid-number, we can reset
     saved_left = left;
     err = proc_get_long(&p, &left, &val_a, &neg, tr_a,
-    sizeof(tr_a), &c);
+    sizeof!(tr_a), &c);
 //
 // If we consumed the entirety of a truncated buffer or
 // only one char is left (may be a "-"), then stop here,
@@ -1107,20 +1383,21 @@ unsafe extern "C" fn proc_ulong_k2u_conv(u_ptr: *mut c_ulong, k_ptr: *const c_ul
     left = saved_left;
     break;
     }
-    if (err)
+    if (err) {
     break;
+    }
     if (val_a >= bitmap_len || neg) {
     err = -EINVAL;
     break;
     }
     val_b = val_a;
     if (left) {
-    p++;
-    left--;
+    p += 1;
+    left -= 1;
     }
     if (c == '-') {
     err = proc_get_long(&p, &left, &val_b,
-    &neg, tr_b, sizeof(tr_b),
+    &neg, tr_b, sizeof!(tr_b),
     &c);
 //
 // If we consumed all of a truncated buffer or
@@ -1130,16 +1407,17 @@ unsafe extern "C" fn proc_ulong_k2u_conv(u_ptr: *mut c_ulong, k_ptr: *const c_ul
     left = saved_left;
     break;
     }
-    if (err)
+    if (err) {
     break;
+    }
     if (val_b >= bitmap_len || neg ||
     val_a > val_b) {
     err = -EINVAL;
     break;
     }
     if (left) {
-    p++;
-    left--;
+    p += 1;
+    left -= 1;
     }
     }
     bitmap_set(tmp_bitmap, val_a, val_b - val_a + 1);
@@ -1148,30 +1426,34 @@ unsafe extern "C" fn proc_ulong_k2u_conv(u_ptr: *mut c_ulong, k_ptr: *const c_ul
     left += skipped;
     } else {
     unsigned long bit_a, bit_b = 0;
-    let mut first: bool = 1;
+pub static mut first: bool = 1;
     while (left) {
     bit_a = find_next_bit(bitmap, bitmap_len, bit_b);
-    if (bit_a >= bitmap_len)
+    if (bit_a >= bitmap_len) {
     break;
+    }
     bit_b = find_next_zero_bit(bitmap, bitmap_len,
     bit_a + 1) - 1;
-    if (!first)
+    if (!first) {
     proc_put_char(&buffer, &left, ',');
+    }
     proc_put_long(&buffer, &left, bit_a, false);
     if (bit_a != bit_b) {
     proc_put_char(&buffer, &left, '-');
     proc_put_long(&buffer, &left, bit_b, false);
     }
-    first = 0; bit_b++;
+    first = 0; bit_b += 1;
     }
     proc_put_char(&buffer, &left, '\n');
     }
     if (!err) {
     if (SYSCTL_USER_TO_KERN(dir)) {
-    if (*ppos)
+    if (*ppos) {
     bitmap_or(bitmap, bitmap, tmp_bitmap, bitmap_len);
-    else
+    }
+    else {
     bitmap_copy(bitmap, tmp_bitmap, bitmap_len);
+    }
     }
 // lenp -= left;
 // ppos += *lenp;
@@ -1180,160 +1462,122 @@ unsafe extern "C" fn proc_ulong_k2u_conv(u_ptr: *mut c_ulong, k_ptr: *const c_ul
     return err;
     }
 
-    int proc_dostring(const struct ctl_table *table, int dir,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
-    return -ENOSYS;
-    }
-    int proc_dobool(const struct ctl_table *table, int dir,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
-    return -ENOSYS;
-    }
-    int proc_dointvec(const struct ctl_table *table, int dir,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
-    return -ENOSYS;
-    }
-    int proc_douintvec(const struct ctl_table *table, int dir,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
-    return -ENOSYS;
-    }
-    int proc_dointvec_minmax(const struct ctl_table *table, int dir,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
-    return -ENOSYS;
-    }
-    int proc_douintvec_minmax(const struct ctl_table *table, int dir,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
-    return -ENOSYS;
-    }
-    int proc_douintvec_conv(const struct ctl_table *table, int write, void *buffer,
-    size_t *lenp, loff_t *ppos,
-    int (*conv)(bool *negp, ulong *lvalp, uint *valp,
-    int write, const struct ctl_table *table))
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: proc_dostring
+pub unsafe extern "C" fn proc_dostring_dup(table: *mut ctl_table, dir: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
     return -ENOSYS;
     }
 #[no_mangle]
-pub unsafe extern "C" fn proc_uint_k2u_conv(u_ptr: *mut c_ulong, k_ptr: *const c_uint) -> c_int {
+#[no_mangle]
+// duplicate fn: proc_dobool
+pub unsafe extern "C" fn proc_dobool_dup(table: *mut ctl_table, dir: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
     return -ENOSYS;
     }
-    int proc_uint_u2k_conv_uop(const ulong *u_ptr, uint *k_ptr,
-    ulong (*u_ptr_op)(const ulong))
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: proc_dointvec
+pub unsafe extern "C" fn proc_dointvec_dup(table: *mut ctl_table, dir: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
     return -ENOSYS;
     }
-    int proc_uint_conv(ulong *u_ptr, uint *k_ptr, int dir,
-    const struct ctl_table *tbl, bool k_ptr_range_check,
-    int (*user_to_kern)(const ulong *u_ptr, uint *k_ptr),
-    int (*kern_to_user)(ulong *u_ptr, const uint *k_ptr))
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: proc_douintvec
+pub unsafe extern "C" fn proc_douintvec_dup(table: *mut ctl_table, dir: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
     return -ENOSYS;
     }
-    int proc_dou8vec_minmax(const struct ctl_table *table, int dir,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: proc_dointvec_minmax
+pub unsafe extern "C" fn proc_dointvec_minmax_dup(table: *mut ctl_table, dir: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
     return -ENOSYS;
     }
-    int proc_doulongvec_minmax(const struct ctl_table *table, int dir,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: proc_douintvec_minmax
+pub unsafe extern "C" fn proc_douintvec_minmax_dup(table: *mut ctl_table, dir: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
     return -ENOSYS;
     }
-    int proc_doulongvec_conv(const struct ctl_table *table, int dir,
-    void *buffer, size_t *lenp, loff_t *ppos,
-    int (*conv)(bool *negp, ulong *u_ptr, ulong *k_ptr,
-    int dir, const struct ctl_table *table))
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: proc_douintvec_conv
+pub unsafe extern "C" fn proc_douintvec_conv_dup(table: *mut ctl_table, write: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t, negp: *mut *mut int (conv)(bool, lvalp: *mut c_ulong, valp: *mut c_uint, write: c_int) -> c_int {
     return -ENOSYS;
     }
-    int proc_dointvec_conv(const struct ctl_table *table, int dir, void *buffer,
-    size_t *lenp, loff_t *ppos,
-    int (*conv)(bool *negp, unsigned long *u_ptr, int *k_ptr,
-    int dir, const struct ctl_table *table))
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: proc_uint_k2u_conv
+pub unsafe extern "C" fn proc_uint_k2u_conv_dup(u_ptr: *mut c_ulong, k_ptr: *const c_uint) -> c_int {
     return -ENOSYS;
     }
-    int proc_do_large_bitmap(const struct ctl_table *table, int dir,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: proc_uint_u2k_conv_uop
+pub unsafe extern "C" fn proc_uint_u2k_conv_uop_dup(u_ptr: *mut c_ulong, k_ptr: *mut c_uint) -> c_int {
+    return -ENOSYS;
+    }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: proc_uint_conv
+pub unsafe extern "C" fn proc_uint_conv_dup(u_ptr: *mut c_ulong, k_ptr: *mut c_uint, dir: c_int, tbl: *mut ctl_table, k_ptr_range_check: bool, u_ptr: *mut *mut int (user_to_kern)( ulong, u_ptr: *mut *mut int (kern_to_user)(ulong) -> c_int {
+    return -ENOSYS;
+    }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: proc_dou8vec_minmax
+pub unsafe extern "C" fn proc_dou8vec_minmax_dup(table: *mut ctl_table, dir: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
+    return -ENOSYS;
+    }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: proc_doulongvec_minmax
+pub unsafe extern "C" fn proc_doulongvec_minmax_dup(table: *mut ctl_table, dir: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
+    return -ENOSYS;
+    }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: proc_doulongvec_conv
+pub unsafe extern "C" fn proc_doulongvec_conv_dup(table: *mut ctl_table, dir: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t, negp: *mut *mut int (conv)(bool, u_ptr: *mut c_ulong, k_ptr: *mut c_ulong, dir: c_int) -> c_int {
+    return -ENOSYS;
+    }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: proc_dointvec_conv
+pub unsafe extern "C" fn proc_dointvec_conv_dup(table: *mut ctl_table, dir: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t, negp: *mut *mut int (conv)(bool, u_ptr: *mut c_ulong, k_ptr: *mut c_int, dir: c_int) -> c_int {
+    return -ENOSYS;
+    }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: proc_do_large_bitmap
+pub unsafe extern "C" fn proc_do_large_bitmap_dup(table: *mut ctl_table, dir: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
     return -ENOSYS;
     }
 
-    int proc_do_static_key(const struct ctl_table *table, int dir,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
-    struct static_key *key = (struct static_key *)table.data;
+#[no_mangle]
+pub unsafe extern "C" fn proc_do_static_key(table: *mut ctl_table, dir: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
+    let mut key = table.data;
 // static DEFINE_MUTEX(static_key_mutex);
-    int val, ret;
-    struct ctl_table tmp = {
-    .data   = &val,
-    .maxlen = sizeof(val),
-    .mode   = table.mode,
-    .extra1 = SYSCTL_ZERO,
-    .extra2 = SYSCTL_ONE,
-    };
-    if (SYSCTL_USER_TO_KERN(dir) && !capable(CAP_SYS_ADMIN))
+    let mut val = 0;
+    let mut ret = 0;
+pub static mut ctl_table: usize = 0;
+    if (SYSCTL_USER_TO_KERN(dir) && !capable(CAP_SYS_ADMIN)) {
     return -EPERM;
+    }
     mutex_lock(&static_key_mutex);
     val = static_key_enabled(key);
     ret = proc_dointvec_minmax(&tmp, dir, buffer, lenp, ppos);
     if (SYSCTL_USER_TO_KERN(dir) && !ret) {
-    if (val)
+    if (val) {
     static_key_enable(key);
-    else
+    }
+    else {
     static_key_disable(key);
+    }
     }
     mutex_unlock(&static_key_mutex);
     return ret;
     }
-    static const struct ctl_table sysctl_subsys_table[] = {
-
-    {
-    .procname	= "sysctl_writes_strict",
-    .data		= &sysctl_writes_strict,
-    .maxlen		= sizeof(int),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec_minmax,
-    .extra1		= SYSCTL_NEG_ONE,
-    .extra2		= SYSCTL_ONE,
-    },
-
-    {
-    .procname	= "ngroups_max",
-    .data		= (void *)&ngroups_max,
-    .maxlen		= sizeof (int),
-    .mode		= 0444,
-    .proc_handler	= proc_dointvec,
-    },
-    {
-    .procname	= "cap_last_cap",
-    .data		= (void *)&cap_last_cap,
-    .maxlen		= sizeof(int),
-    .mode		= 0444,
-    .proc_handler	= proc_dointvec,
-    },
-
-    {
-    .procname	= "unaligned-trap",
-    .data		= &unaligned_enabled,
-    .maxlen		= sizeof(int),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec,
-    },
-
-    {
-    .procname	= "ignore-unaligned-usertrap",
-    .data		= &no_unaligned_warning,
-    .maxlen		= sizeof (int),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec,
-    },
-
-    };
+pub static mut ctl_table: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn sysctl_init_bases() -> c_int {
     register_sysctl_init("kernel", sysctl_subsys_table);
@@ -1342,7 +1586,7 @@ pub unsafe extern "C" fn sysctl_init_bases() -> c_int {
 
 //
 // No sense putting this after each symbol definition, twice,
-// exception granted :-)
+exception granted :-)
 //
     EXPORT_SYMBOL(proc_dobool);
     EXPORT_SYMBOL(proc_dointvec);

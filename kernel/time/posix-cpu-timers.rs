@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -41,11 +291,9 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Implement CPU time clocks for the POSIX clock interface.
 //
 
-    static bool posix_cpu_timer_rearm(struct k_itimer *timer);
+// forward_decl: posix_cpu_timer_rearm;
 #[no_mangle]
 pub unsafe extern "C" fn posix_cputimers_group_init(pct: *mut posix_cputimers, cpu_limit: u64) {
-    void posix_cputimers_group_init(struct posix_cputimers *pct, u64 cpu_limit)
-    {
     posix_cputimers_init(pct);
     if (cpu_limit != RLIM_INFINITY) {
     pct.bases[CPUCLOCK_PROF].nextevt = cpu_limit * NSEC_PER_SEC;
@@ -63,12 +311,11 @@ pub unsafe extern "C" fn posix_cputimers_group_init(pct: *mut posix_cputimers, c
 //
 #[no_mangle]
 pub unsafe extern "C" fn update_rlimit_cpu(task: *mut task_struct, rlim_new: c_ulong) -> c_int {
-    int update_rlimit_cpu(struct task_struct *task, unsigned long rlim_new)
-    {
-    let mut nsecs: u64 = (u64)rlim_new * NSEC_PER_SEC;
-    unsigned long irq_fl;
-    if (!lock_task_sighand(task, &irq_fl))
+pub static mut nsecs: u64 = 0;
+    let mut irq_fl = 0;
+    if (!lock_task_sighand(task, &irq_fl)) {
     return -ESRCH;
+    }
     set_process_cpu_timer(task, CPUCLOCK_PROF, &nsecs, core::ptr::null_mut());
     unlock_task_sighand(task, &irq_fl);
     return 0;
@@ -76,24 +323,27 @@ pub unsafe extern "C" fn update_rlimit_cpu(task: *mut task_struct, rlim_new: c_u
 //
 // Functions for validating access to tasks.
 //
-    static struct pid *pid_for_clock(const clockid_t clock, bool gettime)
-    {
-    let mut thread: bool = !!CPUCLOCK_PERTHREAD(clock);
-    let mut upid: pid_t = CPUCLOCK_PID(clock);
-    struct pid *pid;
-    if (CPUCLOCK_WHICH(clock) >= CPUCLOCK_MAX)
+#[no_mangle]
+pub unsafe extern "C" fn pid_for_clock(clock: clockid_t, gettime: bool) -> *mut c_void {
+pub static mut thread: bool = false;
+pub static mut upid: pid_t = 0;
+pub static mut pid: *mut c_void = core::ptr::null_mut();
+    if (CPUCLOCK_WHICH(clock) >= CPUCLOCK_MAX) {
     return core::ptr::null_mut();
+    }
 //
 // If the encoded PID is 0, then the timer is targeted at current
 // or the process to which current belongs.
 //
-    if (upid == 0)
+    if (upid == 0) {
     return thread ? task_pid(current) : task_tgid(current);
+    }
     pid = find_vpid(upid);
-    if (!pid)
+    if (!pid) {
     return core::ptr::null_mut();
+    }
     if (thread) {
-    struct task_struct *tsk = pid_task(pid, PIDTYPE_PID);
+    let mut tsk = pid_task(pid, PIDTYPE_PID);
     return (tsk && same_thread_group(tsk, current)) ? pid : core::ptr::null_mut();
     }
 //
@@ -102,8 +352,9 @@ pub unsafe extern "C" fn update_rlimit_cpu(task: *mut task_struct, rlim_new: c_u
 // of the process so that pid_task(pid, PIDTYPE_TGID) can be
 // used to find the process.
 //
-    if (gettime && (pid == task_pid(current)))
+    if (gettime && (pid == task_pid(current))) {
     return task_tgid(current);
+    }
 //
 // For processes require that pid identifies a process.
 //
@@ -111,9 +362,7 @@ pub unsafe extern "C" fn update_rlimit_cpu(task: *mut task_struct, rlim_new: c_u
     }
 #[no_mangle]
 pub unsafe extern "C" fn validate_clock_permissions(clock: clockid_t) -> c_int {
-    static inline int validate_clock_permissions(const clockid_t clock)
-    {
-    int ret;
+    let mut ret = 0;
     rcu_read_lock();
     ret = pid_for_clock(clock, false) ? 0 : -EINVAL;
     rcu_read_unlock();
@@ -121,12 +370,10 @@ pub unsafe extern "C" fn validate_clock_permissions(clock: clockid_t) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn clock_pid_type(clock: clockid_t) -> enum pid_type {
-    static inline enum pid_type clock_pid_type(const clockid_t clock)
-    {
     return CPUCLOCK_PERTHREAD(clock) ? PIDTYPE_PID : PIDTYPE_TGID;
     }
-    static inline struct task_struct *cpu_timer_task_rcu(struct k_itimer *timer)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cpu_timer_task_rcu(timer: *mut k_itimer) -> *mut c_void {
     return pid_task(timer.it.cpu.pid, clock_pid_type(timer.it_clock));
     }
 //
@@ -135,22 +382,24 @@ pub unsafe extern "C" fn clock_pid_type(clock: clockid_t) -> enum pid_type {
 //
 #[no_mangle]
 unsafe extern "C" fn bump_cpu_timer(timer: *mut k_itimer, now: u64) -> u64 {
-    static u64 bump_cpu_timer(struct k_itimer *timer, u64 now)
-    {
     u64 delta, incr, expires = timer.it.cpu.node.expires;
-    int i;
-    if (!timer.it_interval)
+    let mut i = 0;
+    if (!timer.it_interval) {
     return expires;
-    if (now < expires)
+    }
+    if (now < expires) {
     return expires;
+    }
     incr = timer.it_interval;
     delta = now + incr - expires;
 // Don't use (incr*2 < delta), incr*2 might overflow.
-    for (i = 0; incr < delta - incr; i++)
+    for (i = 0; incr < delta - incr; i++) {
     incr = incr << 1;
-    for (; i >= 0; incr >>= 1, i--) {
-    if (delta < incr)
+    }
+    while (i >= 0) {
+    if (delta < incr) {
     continue;
+    }
     timer.it.cpu.node.expires += incr;
     timer.it_overrun += 1LL << i;
     delta -= incr;
@@ -160,16 +409,13 @@ unsafe extern "C" fn bump_cpu_timer(timer: *mut k_itimer, now: u64) -> u64 {
 // Check whether all cache entries contain U64_MAX, i.e. eternal expiry time
 #[no_mangle]
 pub unsafe extern "C" fn expiry_cache_is_inactive(pct: *const posix_cputimers) -> bool {
-    static inline bool expiry_cache_is_inactive(const struct posix_cputimers *pct)
-    {
     return !(~pct.bases[CPUCLOCK_PROF].nextevt |
     ~pct.bases[CPUCLOCK_VIRT].nextevt |
     ~pct.bases[CPUCLOCK_SCHED].nextevt);
     }
-    static int
-    posix_cpu_clock_getres(const clockid_t which_clock, struct timespec64 *tp)
-    {
-    let mut error: c_int = validate_clock_permissions(which_clock);
+#[no_mangle]
+pub unsafe extern "C" fn posix_cpu_clock_getres(which_clock: clockid_t, tp: *mut timespec64) -> c_int {
+pub static mut error: c_int = 0;
     if (!error) {
     tp.tv_sec = 0;
     tp.tv_nsec = ((NSEC_PER_SEC + HZ - 1) / HZ);
@@ -184,10 +430,9 @@ pub unsafe extern "C" fn expiry_cache_is_inactive(pct: *const posix_cputimers) -
     }
     return error;
     }
-    static int
-    posix_cpu_clock_set(const clockid_t clock, const struct timespec64 *tp)
-    {
-    let mut error: c_int = validate_clock_permissions(clock);
+#[no_mangle]
+pub unsafe extern "C" fn posix_cpu_clock_set(clock: clockid_t, tp: *mut timespec64) -> c_int {
+pub static mut error: c_int = 0;
 //
 // You can never reset a CPU clock, but we check for other errors
 // in the call before failing with EPERM.
@@ -199,41 +444,38 @@ pub unsafe extern "C" fn expiry_cache_is_inactive(pct: *const posix_cputimers) -
 //
 #[no_mangle]
 unsafe extern "C" fn cpu_clock_sample(clkid: clockid_t, p: *mut task_struct) -> u64 {
-    static u64 cpu_clock_sample(const clockid_t clkid, struct task_struct *p)
-    {
     u64 utime, stime;
-    if (clkid == CPUCLOCK_SCHED)
+    if (clkid == CPUCLOCK_SCHED) {
     return task_sched_runtime(p);
+    }
     task_cputime(p, &utime, &stime);
-    switch (clkid) {
-    case CPUCLOCK_PROF:
+    match (clkid) {
+    CPUCLOCK_PROF => {
     return utime + stime;
-    case CPUCLOCK_VIRT:
+    }
+    CPUCLOCK_VIRT => {
     return utime;
-    default:
-    WARN_ON_ONCE(1);
+    }
+    _ => {
+    WARN_ON_ONCE!(1);
+    }
     }
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn store_samples(samples: *mut u64, stime: u64, utime: u64, rtime: u64) {
-    static inline void store_samples(u64 *samples, u64 stime, u64 utime, u64 rtime)
-    {
     samples[CPUCLOCK_PROF] = stime + utime;
     samples[CPUCLOCK_VIRT] = utime;
     samples[CPUCLOCK_SCHED] = rtime;
     }
 #[no_mangle]
 unsafe extern "C" fn task_sample_cputime(p: *mut task_struct, samples: *mut u64) {
-    static void task_sample_cputime(struct task_struct *p, u64 *samples)
-    {
     u64 stime, utime;
     task_cputime(p, &utime, &stime);
     store_samples(samples, stime, utime, p.se.sum_exec_runtime);
     }
-    static void proc_sample_cputime_atomic(struct task_cputime_atomic *at,
-    u64 *samples)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn proc_sample_cputime_atomic(at: *mut task_cputime_atomic, samples: *mut u64) {
     u64 stime, utime, rtime;
     utime = atomic64_read(&at.utime);
     stime = atomic64_read(&at.stime);
@@ -246,17 +488,15 @@ unsafe extern "C" fn task_sample_cputime(p: *mut task_struct, samples: *mut u64)
 //
 #[no_mangle]
 pub unsafe extern "C" fn __update_gt_cputime(cputime: *mut core::sync::atomic::AtomicI64, sum_cputime: u64) {
-    static inline void __update_gt_cputime(atomic64_t *cputime, u64 sum_cputime)
-    {
-    let mut curr_cputime: u64 = atomic64_read(cputime);
+pub static mut curr_cputime: u64 = 0;
     do {
-    if (sum_cputime <= curr_cputime)
+    if (sum_cputime <= curr_cputime) {
     return;
+    }
     } while (!atomic64_try_cmpxchg(cputime, &curr_cputime, sum_cputime));
     }
-    static void update_gt_cputime(struct task_cputime_atomic *cputime_atomic,
-    struct task_cputime *sum)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn update_gt_cputime(cputime_atomic: *mut task_cputime_atomic, sum: *mut task_cputime) {
     __update_gt_cputime(&cputime_atomic.utime, sum.utime);
     __update_gt_cputime(&cputime_atomic.stime, sum.stime);
     __update_gt_cputime(&cputime_atomic.sum_exec_runtime, sum.sum_exec_runtime);
@@ -274,11 +514,9 @@ pub unsafe extern "C" fn __update_gt_cputime(cputime: *mut core::sync::atomic::A
 //
 #[no_mangle]
 pub unsafe extern "C" fn thread_group_sample_cputime(tsk: *mut task_struct, samples: *mut u64) {
-    void thread_group_sample_cputime(struct task_struct *tsk, u64 *samples)
-    {
-    struct thread_group_cputimer *cputimer = &tsk.signal.cputimer;
-    struct posix_cputimers *pct = &tsk.signal.posix_cputimers;
-    WARN_ON_ONCE(!pct.timers_active);
+    let mut cputimer = &tsk.signal.cputimer;
+    let mut pct = &tsk.signal.posix_cputimers;
+    WARN_ON_ONCE!(!pct.timers_active);
     proc_sample_cputime_atomic(&cputimer.cputime_atomic, samples);
     }
 //
@@ -295,14 +533,12 @@ pub unsafe extern "C" fn thread_group_sample_cputime(tsk: *mut task_struct, samp
 //
 #[no_mangle]
 unsafe extern "C" fn thread_group_start_cputime(tsk: *mut task_struct, samples: *mut u64) {
-    static void thread_group_start_cputime(struct task_struct *tsk, u64 *samples)
-    {
-    struct thread_group_cputimer *cputimer = &tsk.signal.cputimer;
-    struct posix_cputimers *pct = &tsk.signal.posix_cputimers;
+    let mut cputimer = &tsk.signal.cputimer;
+    let mut pct = &tsk.signal.posix_cputimers;
     lockdep_assert_task_sighand_held(tsk);
 // Check if cputimer isn't running. This is accessed without locking.
     if (!READ_ONCE(pct.timers_active)) {
-    struct task_cputime sum;
+pub static mut sum: usize = 0;
 //
 // The POSIX timer interface allows for absolute time expiry
 // values through the TIMER_ABSTIME flag, therefore we have
@@ -323,9 +559,7 @@ unsafe extern "C" fn thread_group_start_cputime(tsk: *mut task_struct, samples: 
     }
 #[no_mangle]
 unsafe extern "C" fn __thread_group_cputime(tsk: *mut task_struct, samples: *mut u64) {
-    static void __thread_group_cputime(struct task_struct *tsk, u64 *samples)
-    {
-    struct task_cputime ct;
+pub static mut ct: usize = 0;
     thread_group_cputime(tsk, &ct);
     store_samples(samples, ct.stime, ct.utime, ct.sum_exec_runtime);
     }
@@ -334,17 +568,18 @@ unsafe extern "C" fn __thread_group_cputime(tsk: *mut task_struct, samples: *mut
 // group's cputime accounting is already enabled, read the atomic
 // store. Otherwise a full update is required.  clkid is already validated.
 //
-    static u64 cpu_clock_sample_group(const clockid_t clkid, struct task_struct *p,
-    bool start)
-    {
-    struct thread_group_cputimer *cputimer = &p.signal.cputimer;
-    struct posix_cputimers *pct = &p.signal.posix_cputimers;
+#[no_mangle]
+pub unsafe extern "C" fn cpu_clock_sample_group(clkid: clockid_t, p: *mut task_struct, start: bool) -> u64 {
+    let mut cputimer = &p.signal.cputimer;
+    let mut pct = &p.signal.posix_cputimers;
     u64 samples[CPUCLOCK_MAX];
     if (!READ_ONCE(pct.timers_active)) {
-    if (start)
+    if (start) {
     thread_group_start_cputime(p, samples);
-    else
+    }
+    else {
     __thread_group_cputime(p, samples);
+    }
     } else {
     proc_sample_cputime_atomic(&cputimer.cputime_atomic, samples);
     }
@@ -352,21 +587,21 @@ unsafe extern "C" fn __thread_group_cputime(tsk: *mut task_struct, samples: *mut
     }
 #[no_mangle]
 unsafe extern "C" fn posix_cpu_clock_get(clock: clockid_t, tp: *mut timespec64) -> c_int {
-    static int posix_cpu_clock_get(const clockid_t clock, struct timespec64 *tp)
-    {
-    let mut clkid: clockid_t = CPUCLOCK_WHICH(clock);
-    struct task_struct *tsk;
-    u64 t;
+pub static mut clkid: clockid_t = 0;
+pub static mut tsk: *mut c_void = core::ptr::null_mut();
+    let mut t = 0;
     rcu_read_lock();
     tsk = pid_task(pid_for_clock(clock, true), clock_pid_type(clock));
     if (!tsk) {
     rcu_read_unlock();
     return -EINVAL;
     }
-    if (CPUCLOCK_PERTHREAD(clock))
+    if (CPUCLOCK_PERTHREAD(clock)) {
     t = cpu_clock_sample(clkid, tsk);
-    else
+    }
+    else {
     t = cpu_clock_sample_group(clkid, tsk, false);
+    }
     rcu_read_unlock();
 // tp = ns_to_timespec64(t);
     return 0;
@@ -378,10 +613,8 @@ unsafe extern "C" fn posix_cpu_clock_get(clock: clockid_t, tp: *mut timespec64) 
 //
 #[no_mangle]
 unsafe extern "C" fn posix_cpu_timer_create(new_timer: *mut k_itimer) -> c_int {
-    static int posix_cpu_timer_create(struct k_itimer *new_timer)
-    {
-    static struct lock_class_key posix_cpu_timers_key;
-    struct pid *pid;
+pub static mut posix_cpu_timers_key: usize = 0;
+pub static mut pid: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     pid = pid_for_clock(new_timer.it_clock, false);
     if (!pid) {
@@ -396,22 +629,24 @@ unsafe extern "C" fn posix_cpu_timer_create(new_timer: *mut k_itimer) -> c_int {
 // the lock class being taken in interrupt context and generate a
 // false positive warning.
 //
-    if (IS_ENABLED(CONFIG_POSIX_CPU_TIMERS_TASK_WORK))
+    if (IS_ENABLED!(CONFIG_POSIX_CPU_TIMERS_TASK_WORK)) {
     lockdep_set_class(&new_timer.it_lock, &posix_cpu_timers_key);
+    }
     new_timer.kclock = &clock_posix_cpu;
     timerqueue_init(&new_timer.it.cpu.node);
     new_timer.it.cpu.pid = get_pid(pid);
     rcu_read_unlock();
     return 0;
     }
-    static struct posix_cputimer_base *timer_base(struct k_itimer *timer,
-    struct task_struct *tsk)
-    {
-    let mut clkidx: c_int = CPUCLOCK_WHICH(timer.it_clock);
-    if (CPUCLOCK_PERTHREAD(timer.it_clock))
+#[no_mangle]
+pub unsafe extern "C" fn timer_base(timer: *mut k_itimer, tsk: *mut task_struct) -> *mut c_void {
+pub static mut clkidx: c_int = 0;
+    if (CPUCLOCK_PERTHREAD(timer.it_clock)) {
     return tsk.posix_cputimers.bases + clkidx;
-    else
+    }
+    else {
     return tsk.signal.posix_cputimers.bases + clkidx;
+    }
     }
 //
 // Force recalculating the base earliest expiration on the next tick.
@@ -419,10 +654,9 @@ unsafe extern "C" fn posix_cpu_timer_create(new_timer: *mut k_itimer) -> c_int {
 // cputime counter and tick dependency and eventually shut these down
 // if necessary.
 //
-    static void trigger_base_recalc_expires(struct k_itimer *timer,
-    struct task_struct *tsk)
-    {
-    struct posix_cputimer_base *base = timer_base(timer, tsk);
+#[no_mangle]
+pub unsafe extern "C" fn trigger_base_recalc_expires(timer: *mut k_itimer, tsk: *mut task_struct) {
+    let mut base = timer_base(timer, tsk);
     base.nextevt = 0;
     }
 //
@@ -437,15 +671,15 @@ unsafe extern "C" fn posix_cpu_timer_create(new_timer: *mut k_itimer) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn disarm_timer(timer: *mut k_itimer, p: *mut task_struct) {
-    static void disarm_timer(struct k_itimer *timer, struct task_struct *p)
-    {
-    struct cpu_timer *ctmr = &timer.it.cpu;
-    struct posix_cputimer_base *base;
-    if (!cpu_timer_dequeue(ctmr))
+    let mut ctmr = &timer.it.cpu;
+pub static mut base: *mut c_void = core::ptr::null_mut();
+    if (!cpu_timer_dequeue(ctmr)) {
     return;
+    }
     base = timer_base(timer, p);
-    if (cpu_timer_getexpires(ctmr) == base.nextevt)
+    if (cpu_timer_getexpires(ctmr) == base.nextevt) {
     trigger_base_recalc_expires(timer, p);
+    }
     }
 //
 // Lookup the task via timer->it.cpu.pid and attempt to lock the task's sighand.
@@ -506,19 +740,21 @@ unsafe extern "C" fn disarm_timer(timer: *mut k_itimer, p: *mut task_struct) {
 // silently ignores the rearm request, which is a functional problem as the
 // timer wont expire anymore.
 //
-    static struct task_struct *timer_lock_sighand(struct k_itimer *timer, unsigned long *flags)
-    {
-    let mut type: enum pid_type = clock_pid_type(timer.it_clock);
-    struct cpu_timer *ctmr = &timer.it.cpu;
+#[no_mangle]
+pub unsafe extern "C" fn timer_lock_sighand(timer: *mut k_itimer, flags: *mut c_ulong) -> *mut c_void {
+pub static mut type: pid_type = 0;
+    let mut ctmr = &timer.it.cpu;
     guard(rcu)();
     for (;;) {
-    struct task_struct *t = pid_task(timer.it.cpu.pid, type);
+    let mut t = pid_task(timer.it.cpu.pid, type);
 // Fail if the task cannot be found.
-    if (!t)
+    if (!t) {
     break;
+    }
 // Try to lock the task's sighand
-    if (lock_task_sighand(t, flags))
+    if (lock_task_sighand(t, flags)) {
     return t;
+    }
 //
 // The next PID lookup might either fail or return the new
 // leader. This is correct for both exit() and exec().
@@ -538,10 +774,10 @@ unsafe extern "C" fn disarm_timer(timer: *mut k_itimer, p: *mut task_struct) {
 // smp_wmb(); <-------
 // __unhash_process()	  |	!pid_task()
 // ---->	smp_rmb();
-// WARN_ON_ONCE(...)
+// WARN_ON_ONCE!(...)
 //
     smp_rmb();
-    WARN_ON_ONCE(ctmr.head || timerqueue_node_queued(&ctmr.node));
+    WARN_ON_ONCE!(ctmr.head || timerqueue_node_queued(&ctmr.node));
     return core::ptr::null_mut();
     }
 //
@@ -552,11 +788,9 @@ unsafe extern "C" fn disarm_timer(timer: *mut k_itimer, p: *mut task_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn posix_cpu_timer_del(timer: *mut k_itimer) -> c_int {
-    static int posix_cpu_timer_del(struct k_itimer *timer)
-    {
-    struct task_struct *p;
-    unsigned long flags;
-    let mut ret: c_int = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+pub static mut ret: c_int = 0;
     p = timer_lock_sighand(timer, &flags);
     if (likely(p)) {
     if (timer.it.cpu.firing) {
@@ -581,13 +815,11 @@ unsafe extern "C" fn posix_cpu_timer_del(timer: *mut k_itimer) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn cleanup_timerqueue(head: *mut timerqueue_head) {
-    static void cleanup_timerqueue(struct timerqueue_head *head)
-    {
-    struct timerqueue_node *node;
-    struct cpu_timer *ctmr;
+pub static mut node: *mut c_void = core::ptr::null_mut();
+pub static mut ctmr: *mut c_void = core::ptr::null_mut();
     while ((node = timerqueue_getnext(head))) {
     timerqueue_del(head, node);
-    ctmr = container_of(node, struct cpu_timer, node);
+    ctmr = container_of!(node, cpu_timer, node);
     ctmr.head = core::ptr::null_mut();
     }
     }
@@ -600,8 +832,6 @@ unsafe extern "C" fn cleanup_timerqueue(head: *mut timerqueue_head) {
 //
 #[no_mangle]
 unsafe extern "C" fn cleanup_timers(pct: *mut posix_cputimers) {
-    static void cleanup_timers(struct posix_cputimers *pct)
-    {
     cleanup_timerqueue(&pct.bases[CPUCLOCK_PROF].tqhead);
     cleanup_timerqueue(&pct.bases[CPUCLOCK_VIRT].tqhead);
     cleanup_timerqueue(&pct.bases[CPUCLOCK_SCHED].tqhead);
@@ -613,14 +843,10 @@ unsafe extern "C" fn cleanup_timers(pct: *mut posix_cputimers) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn posix_cpu_timers_exit(tsk: *mut task_struct) {
-    void posix_cpu_timers_exit(struct task_struct *tsk)
-    {
     cleanup_timers(&tsk.posix_cputimers);
     }
 #[no_mangle]
 pub unsafe extern "C" fn posix_cpu_timers_exit_group(tsk: *mut task_struct) {
-    void posix_cpu_timers_exit_group(struct task_struct *tsk)
-    {
     cleanup_timers(&tsk.signal.posix_cputimers);
     }
 //
@@ -629,35 +855,35 @@ pub unsafe extern "C" fn posix_cpu_timers_exit_group(tsk: *mut task_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn arm_timer(timer: *mut k_itimer, p: *mut task_struct) {
-    static void arm_timer(struct k_itimer *timer, struct task_struct *p)
-    {
-    struct posix_cputimer_base *base = timer_base(timer, p);
-    struct cpu_timer *ctmr = &timer.it.cpu;
-    let mut newexp: u64 = cpu_timer_getexpires(ctmr);
+    let mut base = timer_base(timer, p);
+    let mut ctmr = &timer.it.cpu;
+pub static mut newexp: u64 = 0;
     timer.it_status = POSIX_TIMER_ARMED;
-    if (!cpu_timer_enqueue(&base.tqhead, ctmr))
+    if (!cpu_timer_enqueue(&base.tqhead, ctmr)) {
     return;
+    }
 //
 // We are the new earliest-expiring POSIX 1.b timer, hence
 // need to update expiration cache. Take into account that
 // for process timers we share expiration cache with itimers
 // and RLIMIT_CPU and for thread timers with RLIMIT_RTTIME.
 //
-    if (newexp < base.nextevt)
+    if (newexp < base.nextevt) {
     base.nextevt = newexp;
-    if (CPUCLOCK_PERTHREAD(timer.it_clock))
+    }
+    if (CPUCLOCK_PERTHREAD(timer.it_clock)) {
     tick_dep_set_task(p, TICK_DEP_BIT_POSIX_TIMER);
-    else
+    }
+    else {
     tick_dep_set_signal(p, TICK_DEP_BIT_POSIX_TIMER);
+    }
     }
 //
 // The timer is locked, fire it and arrange for its reload.
 //
 #[no_mangle]
 unsafe extern "C" fn cpu_timer_fire(timer: *mut k_itimer) {
-    static void cpu_timer_fire(struct k_itimer *timer)
-    {
-    struct cpu_timer *ctmr = &timer.it.cpu;
+    let mut ctmr = &timer.it.cpu;
     timer.it_status = POSIX_TIMER_DISARMED;
     if (unlikely(ctmr.nanosleep)) {
 //
@@ -669,34 +895,35 @@ unsafe extern "C" fn cpu_timer_fire(timer: *mut k_itimer) {
     } else {
     posix_timer_queue_signal(timer);
 // Disable oneshot timers
-    if (!timer.it_interval)
+    if (!timer.it_interval) {
     cpu_timer_setexpires(ctmr, 0);
     }
     }
-    static void __posix_cpu_timer_get(struct k_itimer *timer, struct itimerspec64 *itp, u64 now);
+    }
+// forward_decl: __posix_cpu_timer_get;
 //
 // Guts of sys_timer_settime for CPU timers.
 // This is called with the timer locked and interrupts disabled.
 // If we return TIMER_RETRY, it's necessary to release the timer's lock
 // and try again.  (This happens when the timer is in the middle of firing.)
 //
-    static int posix_cpu_timer_set(struct k_itimer *timer, int timer_flags,
-    struct itimerspec64 *new, struct itimerspec64 *old)
-    {
-    let mut sigev_none: bool = timer.it_sigev_notify == SIGEV_NONE;
-    let mut clkid: clockid_t = CPUCLOCK_WHICH(timer.it_clock);
-    struct cpu_timer *ctmr = &timer.it.cpu;
+#[no_mangle]
+pub unsafe extern "C" fn posix_cpu_timer_set(timer: *mut k_itimer, timer_flags: c_int, new: *mut itimerspec64, old: *mut itimerspec64) -> c_int {
+pub static mut sigev_none: bool = false;
+pub static mut clkid: clockid_t = 0;
+    let mut ctmr = &timer.it.cpu;
     u64 old_expires, new_expires, now;
-    struct task_struct *p;
-    unsigned long flags;
-    let mut ret: c_int = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+pub static mut ret: c_int = 0;
     p = timer_lock_sighand(timer, &flags);
 //
 // If p has just been reaped, we can no longer get any information about
 // it at all.
 //
-    if (!p)
+    if (!p) {
     return -ESRCH;
+    }
 //
 // Use the to_ktime conversion because that clamps the maximum
 // value to KTIME_MAX and avoid multiplication overflows.
@@ -721,15 +948,18 @@ unsafe extern "C" fn cpu_timer_fire(timer: *mut k_itimer) {
 // Sample the current clock for saving the previous setting
 // and for rearming the timer.
 //
-    if (CPUCLOCK_PERTHREAD(timer.it_clock))
+    if (CPUCLOCK_PERTHREAD(timer.it_clock)) {
     now = cpu_clock_sample(clkid, p);
-    else
+    }
+    else {
     now = cpu_clock_sample_group(clkid, p, !sigev_none);
+    }
 // Retrieve the previous expiry value if requested.
     if (old) {
-    old.it_value = (struct timespec64){ };
-    if (old_expires)
+    old.it_value = (timespec64){ };
+    if (old_expires) {
     __posix_cpu_timer_get(timer, old, now);
+    }
     }
 // Retry if the timer expiry is running concurrently
     if (unlikely(ret)) {
@@ -737,8 +967,9 @@ unsafe extern "C" fn cpu_timer_fire(timer: *mut k_itimer) {
     return ret;
     }
 // Convert relative expiry time to absolute
-    if (new_expires && !(timer_flags & TIMER_ABSTIME))
+    if (new_expires && !(timer_flags & TIMER_ABSTIME)) {
     new_expires += now;
+    }
 // Set the new expiry time (might be 0)
     cpu_timer_setexpires(ctmr, new_expires);
 //
@@ -749,10 +980,12 @@ unsafe extern "C" fn cpu_timer_fire(timer: *mut k_itimer) {
 // process wide cputime counter can be disabled eventually.
 //
     if (likely(!sigev_none)) {
-    if (new_expires && now < new_expires)
+    if (new_expires && now < new_expires) {
     arm_timer(timer, p);
-    else
+    }
+    else {
     trigger_base_recalc_expires(timer, p);
+    }
     }
     unlock_task_sighand(p, &flags);
     posix_timer_set_common(timer, new);
@@ -761,15 +994,14 @@ unsafe extern "C" fn cpu_timer_fire(timer: *mut k_itimer) {
 // queued. Fire it immediately even if the thread never runs to
 // accumulate more time on this clock.
 //
-    if (!sigev_none && new_expires && now >= new_expires)
+    if (!sigev_none && new_expires && now >= new_expires) {
     cpu_timer_fire(timer);
+    }
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn __posix_cpu_timer_get(timer: *mut k_itimer, itp: *mut itimerspec64, now: u64) {
-    static void __posix_cpu_timer_get(struct k_itimer *timer, struct itimerspec64 *itp, u64 now)
-    {
-    let mut sigev_none: bool = timer.it_sigev_notify == SIGEV_NONE;
+pub static mut sigev_none: bool = false;
     u64 expires, iv = timer.it_interval;
 //
 // Make sure that interval timers are moved forward for the
@@ -778,10 +1010,12 @@ unsafe extern "C" fn __posix_cpu_timer_get(timer: *mut k_itimer, itp: *mut itime
 // - Timers which expired, but the signal has not yet been
 // delivered
 //
-    if (iv && timer.it_status != POSIX_TIMER_ARMED)
+    if (iv && timer.it_status != POSIX_TIMER_ARMED) {
     expires = bump_cpu_timer(timer, now);
-    else
+    }
+    else {
     expires = cpu_timer_getexpires(&timer.it.cpu);
+    }
 //
 // Expired interval timers cannot have a remaining time <= 0.
 // The kernel has to move them forward so that the next
@@ -796,43 +1030,44 @@ unsafe extern "C" fn __posix_cpu_timer_get(timer: *mut k_itimer, itp: *mut itime
 // must return a remaining time greater than 0 because the
 // signal has not yet been delivered.
 //
-    if (!sigev_none)
+    if (!sigev_none) {
     itp.it_value.tv_nsec = 1;
+    }
     }
     }
 #[no_mangle]
 unsafe extern "C" fn posix_cpu_timer_get(timer: *mut k_itimer, itp: *mut itimerspec64) {
-    static void posix_cpu_timer_get(struct k_itimer *timer, struct itimerspec64 *itp)
-    {
-    let mut clkid: clockid_t = CPUCLOCK_WHICH(timer.it_clock);
-    struct task_struct *p;
-    u64 now;
+pub static mut clkid: clockid_t = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    let mut now = 0;
     rcu_read_lock();
     p = cpu_timer_task_rcu(timer);
     if (p && cpu_timer_getexpires(&timer.it.cpu)) {
     itp.it_interval = ktime_to_timespec64(timer.it_interval);
-    if (CPUCLOCK_PERTHREAD(timer.it_clock))
+    if (CPUCLOCK_PERTHREAD(timer.it_clock)) {
     now = cpu_clock_sample(clkid, p);
-    else
+    }
+    else {
     now = cpu_clock_sample_group(clkid, p, false);
+    }
     __posix_cpu_timer_get(timer, itp, now);
     }
     rcu_read_unlock();
     }
 pub const MAX_COLLECTED: c_int = 20;
-    static u64 collect_timerqueue(struct timerqueue_head *head,
-    struct list_head *firing, u64 now)
-    {
-    struct timerqueue_node *next;
-    let mut i: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn collect_timerqueue(head: *mut timerqueue_head, firing: *mut list_head, now: u64) -> u64 {
+pub static mut next: *mut c_void = core::ptr::null_mut();
+pub static mut i: c_int = 0;
     while ((next = timerqueue_getnext(head))) {
-    struct cpu_timer *ctmr;
-    u64 expires;
-    ctmr = container_of(next, struct cpu_timer, node);
+pub static mut ctmr: *mut c_void = core::ptr::null_mut();
+    let mut expires = 0;
+    ctmr = container_of!(next, cpu_timer, node);
     expires = cpu_timer_getexpires(ctmr);
 // Limit the number of timers to expire at once
-    if (++i == MAX_COLLECTED || now < expires)
+    if (++i == MAX_COLLECTED || now < expires) {
     return expires;
+    }
     ctmr.firing = true;
 // See posix_cpu_timer_wait_running()
     rcu_assign_pointer(ctmr.handling, current);
@@ -841,20 +1076,17 @@ pub const MAX_COLLECTED: c_int = 20;
     }
     return U64_MAX;
     }
-    static void collect_posix_cputimers(struct posix_cputimers *pct, u64 *samples,
-    struct list_head *firing)
-    {
-    struct posix_cputimer_base *base = pct.bases;
-    int i;
-    for (i = 0; i < CPUCLOCK_MAX; i++, base++) {
+#[no_mangle]
+pub unsafe extern "C" fn collect_posix_cputimers(pct: *mut posix_cputimers, samples: *mut u64, firing: *mut list_head) {
+    let mut base = pct.bases;
+    let mut i = 0;
+    while (i < CPUCLOCK_MAX) {
     base.nextevt = collect_timerqueue(&base.tqhead, firing,
     samples[i]);
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn check_dl_overrun(tsk: *mut task_struct) {
-    static inline void check_dl_overrun(struct task_struct *tsk)
-    {
     if (tsk.dl.dl_overrun) {
     tsk.dl.dl_overrun = 0;
     send_signal_locked(SIGXCPU, SEND_SIG_PRIV, tsk, PIDTYPE_TGID);
@@ -862,12 +1094,11 @@ pub unsafe extern "C" fn check_dl_overrun(tsk: *mut task_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn check_rlimit(time: u64, limit: u64, signo: c_int, rt: bool, hard: bool) -> bool {
-    static bool check_rlimit(u64 time, u64 limit, int signo, bool rt, bool hard)
-    {
-    if (time < limit)
+    if (time < limit) {
     return false;
+    }
     if (print_fatal_signals) {
-    pr_info("%s Watchdog Timeout (%s): %s[%d]\n",
+    pr_info!("%s Watchdog Timeout (%s): %s[%d]\n",
     rt ? "RT" : "CPU", hard ? "hard" : "soft",
     current.comm, task_pid_nr(current));
     }
@@ -879,16 +1110,17 @@ unsafe extern "C" fn check_rlimit(time: u64, limit: u64, signo: c_int, rt: bool,
 // the tsk->cpu_timers[N] list onto the firing list.  Here we update the
 // tsk->it_*_expires values to reflect the remaining thread CPU timers.
 //
-    static void check_thread_timers(struct task_struct *tsk,
-    struct list_head *firing)
-    {
-    struct posix_cputimers *pct = &tsk.posix_cputimers;
+#[no_mangle]
+pub unsafe extern "C" fn check_thread_timers(tsk: *mut task_struct, firing: *mut list_head) {
+    let mut pct = &tsk.posix_cputimers;
     u64 samples[CPUCLOCK_MAX];
-    unsigned long soft;
-    if (dl_task(tsk))
+    let mut soft = 0;
+    if (dl_task(tsk)) {
     check_dl_overrun(tsk);
-    if (expiry_cache_is_inactive(pct))
+    }
+    if (expiry_cache_is_inactive(pct)) {
     return;
+    }
     task_sample_cputime(tsk, samples);
     collect_posix_cputimers(pct, samples, firing);
 //
@@ -897,67 +1129,70 @@ unsafe extern "C" fn check_rlimit(time: u64, limit: u64, signo: c_int, rt: bool,
     soft = task_rlimit(tsk, RLIMIT_RTTIME);
     if (soft != RLIM_INFINITY) {
 // Task RT timeout is accounted in jiffies. RTTIME is usec
-    let mut rttime: c_ulong = tsk.rt.timeout * (USEC_PER_SEC / HZ);
-    let mut hard: c_ulong = task_rlimit_max(tsk, RLIMIT_RTTIME);
+pub static mut rttime: c_ulong = 0;
+pub static mut hard: c_ulong = 0;
 // At the hard limit, send SIGKILL. No further action.
     if (hard != RLIM_INFINITY &&
-    check_rlimit(rttime, hard, SIGKILL, true, true))
+    check_rlimit(rttime, hard, SIGKILL, true, true)) {
     return;
+    }
 // At the soft limit, send a SIGXCPU every second
     if (check_rlimit(rttime, soft, SIGXCPU, true, false)) {
     soft += USEC_PER_SEC;
     tsk.signal.rlim[RLIMIT_RTTIME].rlim_cur = soft;
     }
     }
-    if (expiry_cache_is_inactive(pct))
+    if (expiry_cache_is_inactive(pct)) {
     tick_dep_clear_task(tsk, TICK_DEP_BIT_POSIX_TIMER);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn stop_process_timers(sig: *mut signal_struct) {
-    static inline void stop_process_timers(struct signal_struct *sig)
-    {
-    struct posix_cputimers *pct = &sig.posix_cputimers;
+    let mut pct = &sig.posix_cputimers;
 // Turn off the active flag. This is done without locking.
     WRITE_ONCE(pct.timers_active, false);
     tick_dep_clear_signal(sig, TICK_DEP_BIT_POSIX_TIMER);
     }
-    static void check_cpu_itimer(struct task_struct *tsk, struct cpu_itimer *it,
-    u64 *expires, u64 cur_time, int signo)
-    {
-    if (!it.expires)
+#[no_mangle]
+pub unsafe extern "C" fn check_cpu_itimer(tsk: *mut task_struct, it: *mut cpu_itimer, expires: *mut u64, cur_time: u64, signo: c_int) {
+    if (!it.expires) {
     return;
+    }
     if (cur_time >= it.expires) {
-    if (it.incr)
+    if (it.incr) {
     it.expires += it.incr;
-    else
+    }
+    else {
     it.expires = 0;
+    }
     trace_itimer_expire(signo == SIGPROF ?
     ITIMER_PROF : ITIMER_VIRTUAL,
     task_tgid(tsk), cur_time);
     send_signal_locked(signo, SEND_SIG_PRIV, tsk, PIDTYPE_TGID);
     }
-    if (it.expires && it.expires < *expires)
+    if (it.expires && it.expires < *expires) {
 // expires = it->expires;
+    }
     }
 //
 // Check for any per-thread CPU timers that have fired and move them
 // off the tsk->*_timers list onto the firing list.  Per-thread timers
 // have already been taken off.
 //
-    static void check_process_timers(struct task_struct *tsk,
-    struct list_head *firing)
-    {
-    let mut sig: *mut signal_const = tsk.signal;
-    struct posix_cputimers *pct = &sig.posix_cputimers;
+#[no_mangle]
+pub unsafe extern "C" fn check_process_timers(tsk: *mut task_struct, firing: *mut list_head) {
+pub static mut sig: *mut signal_const = core::ptr::null_mut();
+    let mut pct = &sig.posix_cputimers;
     u64 samples[CPUCLOCK_MAX];
-    unsigned long soft;
+    let mut soft = 0;
 //
 // If there are no active process wide timers (POSIX 1.b, itimers,
 // RLIMIT_CPU) nothing to check. Also skip the process wide timer
 // processing when there is already another task handling them.
 //
-    if (!READ_ONCE(pct.timers_active) || pct.expiry_active)
+    if (!READ_ONCE(pct.timers_active) || pct.expiry_active) {
     return;
+    }
 //
 // Signify that a thread is checking for process timers.
 // Write access to this field is protected by the sighand lock.
@@ -981,25 +1216,28 @@ pub unsafe extern "C" fn stop_process_timers(sig: *mut signal_struct) {
     soft = task_rlimit(tsk, RLIMIT_CPU);
     if (soft != RLIM_INFINITY) {
 // RLIMIT_CPU is in seconds. Samples are nanoseconds
-    let mut hard: c_ulong = task_rlimit_max(tsk, RLIMIT_CPU);
-    let mut ptime: u64 = samples[CPUCLOCK_PROF];
-    let mut softns: u64 = (u64)soft * NSEC_PER_SEC;
-    let mut hardns: u64 = (u64)hard * NSEC_PER_SEC;
+pub static mut hard: c_ulong = 0;
+pub static mut ptime: u64 = 0;
+pub static mut softns: u64 = 0;
+pub static mut hardns: u64 = 0;
 // At the hard limit, send SIGKILL. No further action.
     if (hard != RLIM_INFINITY &&
-    check_rlimit(ptime, hardns, SIGKILL, false, true))
+    check_rlimit(ptime, hardns, SIGKILL, false, true)) {
     return;
+    }
 // At the soft limit, send a SIGXCPU every second
     if (check_rlimit(ptime, softns, SIGXCPU, false, false)) {
     sig.rlim[RLIMIT_CPU].rlim_cur = soft + 1;
     softns += NSEC_PER_SEC;
     }
 // Update the expiry cache
-    if (softns < pct.bases[CPUCLOCK_PROF].nextevt)
+    if (softns < pct.bases[CPUCLOCK_PROF].nextevt) {
     pct.bases[CPUCLOCK_PROF].nextevt = softns;
     }
-    if (expiry_cache_is_inactive(pct))
+    }
+    if (expiry_cache_is_inactive(pct)) {
     stop_process_timers(sig);
+    }
     pct.expiry_active = false;
     }
 //
@@ -1011,22 +1249,23 @@ pub unsafe extern "C" fn stop_process_timers(sig: *mut signal_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn posix_cpu_timer_rearm(timer: *mut k_itimer) -> bool {
-    static bool posix_cpu_timer_rearm(struct k_itimer *timer)
-    {
-    let mut clkid: clockid_t = CPUCLOCK_WHICH(timer.it_clock);
-    struct task_struct *p;
-    unsigned long flags;
-    u64 now;
+pub static mut clkid: clockid_t = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut now = 0;
     p = timer_lock_sighand(timer, &flags);
-    if (unlikely(!p))
+    if (unlikely(!p)) {
     return true;
+    }
 //
 // Fetch the current sample and update the timer's expiry time.
 //
-    if (CPUCLOCK_PERTHREAD(timer.it_clock))
+    if (CPUCLOCK_PERTHREAD(timer.it_clock)) {
     now = cpu_clock_sample(clkid, p);
-    else
+    }
+    else {
     now = cpu_clock_sample_group(clkid, p, true);
+    }
     bump_cpu_timer(timer, now);
 //
 // Now re-arm for the new expiry time.
@@ -1044,13 +1283,13 @@ unsafe extern "C" fn posix_cpu_timer_rearm(timer: *mut k_itimer) -> bool {
 // Returns true if any member of @samples is greater than the corresponding
 // member of @pct->bases[CLK].nextevt. False otherwise
 //
-    static inline bool
-    task_cputimers_expired(const u64 *samples, struct posix_cputimers *pct)
-    {
-    int i;
-    for (i = 0; i < CPUCLOCK_MAX; i++) {
-    if (samples[i] >= pct.bases[i].nextevt)
+#[no_mangle]
+pub unsafe extern "C" fn task_cputimers_expired(samples: *mut u64, pct: *mut posix_cputimers) -> bool {
+    let mut i = 0;
+    while (i < CPUCLOCK_MAX) {
+    if (samples[i] >= pct.bases[i].nextevt) {
     return true;
+    }
     }
     return false;
     }
@@ -1066,15 +1305,14 @@ unsafe extern "C" fn posix_cpu_timer_rearm(timer: *mut k_itimer) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn fastpath_timer_check(tsk: *mut task_struct) -> bool {
-    static inline bool fastpath_timer_check(struct task_struct *tsk)
-    {
-    struct posix_cputimers *pct = &tsk.posix_cputimers;
-    struct signal_struct *sig;
+    let mut pct = &tsk.posix_cputimers;
+pub static mut sig: *mut c_void = core::ptr::null_mut();
     if (!expiry_cache_is_inactive(pct)) {
     u64 samples[CPUCLOCK_MAX];
     task_sample_cputime(tsk, samples);
-    if (task_cputimers_expired(samples, pct))
+    if (task_cputimers_expired(samples, pct)) {
     return true;
+    }
     }
     sig = tsk.signal;
     pct = &sig.posix_cputimers;
@@ -1097,20 +1335,20 @@ pub unsafe extern "C" fn fastpath_timer_check(tsk: *mut task_struct) -> bool {
     u64 samples[CPUCLOCK_MAX];
     proc_sample_cputime_atomic(&sig.cputimer.cputime_atomic,
     samples);
-    if (task_cputimers_expired(samples, pct))
+    if (task_cputimers_expired(samples, pct)) {
     return true;
     }
-    if (dl_task(tsk) && tsk.dl.dl_overrun)
+    }
+    if (dl_task(tsk) && tsk.dl.dl_overrun) {
     return true;
+    }
     return false;
     }
-    static void handle_posix_cpu_timers(struct task_struct *tsk);
+// forward_decl: handle_posix_cpu_timers;
 
 #[no_mangle]
 unsafe extern "C" fn posix_cpu_timers_work(work: *mut callback_head) {
-    static void posix_cpu_timers_work(struct callback_head *work)
-    {
-    struct posix_cputimers_work *cw = container_of(work, typeof(*cw), work);
+    let mut cw = container_of!(work, typeof(*cw), work);
     mutex_lock(&cw.mutex);
     handle_posix_cpu_timers(current);
     mutex_unlock(&cw.mutex);
@@ -1122,12 +1360,11 @@ unsafe extern "C" fn posix_cpu_timers_work(work: *mut callback_head) {
 //
 #[no_mangle]
 unsafe extern "C" fn posix_cpu_timer_wait_running(timr: *mut k_itimer) {
-    static void posix_cpu_timer_wait_running(struct k_itimer *timr)
-    {
-    struct task_struct *tsk = rcu_dereference(timr.it.cpu.handling);
+    let mut tsk = rcu_dereference(timr.it.cpu.handling);
 // Has the handling task completed expiry already?
-    if (!tsk)
+    if (!tsk) {
     return;
+    }
 // Ensure that the task cannot go away
     get_task_struct(tsk);
 // Now drop the RCU protection so the mutex can be locked
@@ -1143,8 +1380,6 @@ unsafe extern "C" fn posix_cpu_timer_wait_running(timr: *mut k_itimer) {
     }
 #[no_mangle]
 unsafe extern "C" fn posix_cpu_timer_wait_running_nsleep(timr: *mut k_itimer) {
-    static void posix_cpu_timer_wait_running_nsleep(struct k_itimer *timr)
-    {
 // Ensure that timr->it.cpu.handling task cannot go away
     rcu_read_lock();
     spin_unlock_irq(&timr.it_lock);
@@ -1158,14 +1393,12 @@ unsafe extern "C" fn posix_cpu_timer_wait_running_nsleep(timr: *mut k_itimer) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn clear_posix_cputimers_work(p: *mut task_struct) {
-    void clear_posix_cputimers_work(struct task_struct *p)
-    {
 //
 // A copied work entry from the old task is not meaningful, clear it.
 // N.B. init_task_work will not do this.
 //
     memset(&p.posix_cputimers_work.work, 0,
-    sizeof(p.posix_cputimers_work.work));
+    sizeof!(p.posix_cputimers_work.work));
     init_task_work(&p.posix_cputimers_work.work,
     posix_cpu_timers_work);
     mutex_init(&p.posix_cputimers_work.mutex);
@@ -1176,9 +1409,7 @@ pub unsafe extern "C" fn clear_posix_cputimers_work(p: *mut task_struct) {
 // keep the callback static and to avoid header recursion hell.
 //
 #[no_mangle]
-pub unsafe extern "C" fn posix_cputimers_init_work() -> void __init {
-    void __init posix_cputimers_init_work(void)
-    {
+pub unsafe extern "C" fn posix_cputimers_init_work()  {
     clear_posix_cputimers_work(current);
     }
 //
@@ -1189,30 +1420,26 @@ pub unsafe extern "C" fn posix_cputimers_init_work() -> void __init {
 //
 #[no_mangle]
 pub unsafe extern "C" fn posix_cpu_timers_work_scheduled(tsk: *mut task_struct) -> bool {
-    static inline bool posix_cpu_timers_work_scheduled(struct task_struct *tsk)
-    {
     return tsk.posix_cputimers_work.scheduled;
     }
 #[no_mangle]
 pub unsafe extern "C" fn __run_posix_cpu_timers(tsk: *mut task_struct) {
-    static inline void __run_posix_cpu_timers(struct task_struct *tsk)
-    {
-    if (WARN_ON_ONCE(tsk.posix_cputimers_work.scheduled))
+    if (WARN_ON_ONCE!(tsk.posix_cputimers_work.scheduled)) {
     return;
+    }
 // Schedule task work to actually expire the timers
     tsk.posix_cputimers_work.scheduled = true;
     task_work_add(tsk, &tsk.posix_cputimers_work.work, TWA_RESUME);
     }
-    static inline bool posix_cpu_timers_enable_work(struct task_struct *tsk,
-    unsigned long start)
-    {
-    let mut ret: bool = true;
+#[no_mangle]
+pub unsafe extern "C" fn posix_cpu_timers_enable_work(tsk: *mut task_struct, start: c_ulong) -> bool {
+pub static mut ret: bool = true;
 //
 // On !RT kernels interrupts are disabled while collecting expired
 // timers, so no tick can happen and the fast path check can be
 // reenabled without further checks.
 //
-    if (!IS_ENABLED(CONFIG_PREEMPT_RT)) {
+    if (!IS_ENABLED!(CONFIG_PREEMPT_RT)) {
     tsk.posix_cputimers_work.scheduled = false;
     return true;
     }
@@ -1230,55 +1457,53 @@ pub unsafe extern "C" fn __run_posix_cpu_timers(tsk: *mut task_struct) {
 // let the collection loop repeat.
 //
     local_irq_disable();
-    if (start != jiffies && fastpath_timer_check(tsk))
+    if (start != jiffies && fastpath_timer_check(tsk)) {
     ret = false;
-    else
+    }
+    else {
     tsk.posix_cputimers_work.scheduled = false;
+    }
     local_irq_enable();
     return ret;
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn __run_posix_cpu_timers(tsk: *mut task_struct) {
-    static inline void __run_posix_cpu_timers(struct task_struct *tsk)
-    {
+#[no_mangle]
+// duplicate fn: __run_posix_cpu_timers
+pub unsafe extern "C" fn __run_posix_cpu_timers_dup(tsk: *mut task_struct) {
     lockdep_posixtimer_enter();
     handle_posix_cpu_timers(tsk);
     lockdep_posixtimer_exit();
     }
 #[no_mangle]
 unsafe extern "C" fn posix_cpu_timer_wait_running(timr: *mut k_itimer) {
-    static void posix_cpu_timer_wait_running(struct k_itimer *timr)
-    {
     cpu_relax();
     }
 #[no_mangle]
 unsafe extern "C" fn posix_cpu_timer_wait_running_nsleep(timr: *mut k_itimer) {
-    static void posix_cpu_timer_wait_running_nsleep(struct k_itimer *timr)
-    {
     spin_unlock_irq(&timr.it_lock);
     cpu_relax();
     spin_lock_irq(&timr.it_lock);
     }
 #[no_mangle]
-pub unsafe extern "C" fn posix_cpu_timers_work_scheduled(tsk: *mut task_struct) -> bool {
-    static inline bool posix_cpu_timers_work_scheduled(struct task_struct *tsk)
-    {
+#[no_mangle]
+// duplicate fn: posix_cpu_timers_work_scheduled
+pub unsafe extern "C" fn posix_cpu_timers_work_scheduled_dup(tsk: *mut task_struct) -> bool {
     return false;
     }
-    static inline bool posix_cpu_timers_enable_work(struct task_struct *tsk,
-    unsigned long start)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: posix_cpu_timers_enable_work
+pub unsafe extern "C" fn posix_cpu_timers_enable_work_dup(tsk: *mut task_struct, start: c_ulong) -> bool {
     return true;
     }
 
 #[no_mangle]
 unsafe extern "C" fn handle_posix_cpu_timers(tsk: *mut task_struct) {
-    static void handle_posix_cpu_timers(struct task_struct *tsk)
-    {
-    struct k_itimer *timer, *next;
+    let mut timer = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
     unsigned long flags, start;
-    LIST_HEAD(firing);
+pub static mut firing: usize = 0;
 //
 // tsk is current and ->sighand is stable, see the
 // tsk->exit_state check in run_posix_cpu_timers()
@@ -1346,7 +1571,7 @@ unsafe extern "C" fn handle_posix_cpu_timers(tsk: *mut task_struct) {
 // timer call will interfere.
 //
     list_for_each_entry_safe(timer, next, &firing, it.cpu.elist) {
-    bool cpu_firing;
+    let mut cpu_firing = 0;
 //
 // spin_lock() is sufficient here even independent of the
 // expiry context. If expiry happens in hard interrupt
@@ -1363,8 +1588,9 @@ unsafe extern "C" fn handle_posix_cpu_timers(tsk: *mut task_struct) {
 // timer rearm/delete operation. So don't generate an
 // event.
 //
-    if (likely(cpu_firing))
+    if (likely(cpu_firing)) {
     cpu_timer_fire(timer);
+    }
 // See posix_cpu_timer_wait_running()
     rcu_assign_pointer(timer.it.cpu.handling, core::ptr::null_mut());
     spin_unlock(&timer.it_lock);
@@ -1377,9 +1603,7 @@ unsafe extern "C" fn handle_posix_cpu_timers(tsk: *mut task_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn run_posix_cpu_timers() {
-    void run_posix_cpu_timers(void)
-    {
-    struct task_struct *tsk = current;
+    let mut tsk = current;
     lockdep_assert_irqs_disabled();
 //
 // Ensure that release_task(tsk) can't happen while
@@ -1387,32 +1611,35 @@ pub unsafe extern "C" fn run_posix_cpu_timers() {
 // posix_cpu_timer_del() may fail to lock_task_sighand(tsk) and
 // miss timer->it.cpu.firing != 0.
 //
-    if (tsk.exit_state)
+    if (tsk.exit_state) {
     return;
+    }
 //
 // If the actual expiry is deferred to task work context and the
 // work is already scheduled there is no point to do anything here.
 //
-    if (posix_cpu_timers_work_scheduled(tsk))
+    if (posix_cpu_timers_work_scheduled(tsk)) {
     return;
+    }
 //
 // The fast path checks that there are no expired thread or thread
 // group timers.  If that's so, just return.
 //
-    if (!fastpath_timer_check(tsk))
+    if (!fastpath_timer_check(tsk)) {
     return;
+    }
     __run_posix_cpu_timers(tsk);
     }
 //
 // Set one of the process-wide special case CPU timers or RLIMIT_CPU.
 // The tsk->sighand->siglock must be held by the caller.
 //
-    void set_process_cpu_timer(struct task_struct *tsk, unsigned int clkid,
-    u64 *newval, u64 *oldval)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn set_process_cpu_timer(tsk: *mut task_struct, clkid: c_uint, newval: *mut u64, oldval: *mut u64) {
     u64 now, *nextevt;
-    if (WARN_ON_ONCE(clkid >= CPUCLOCK_SCHED))
+    if (WARN_ON_ONCE!(clkid >= CPUCLOCK_SCHED)) {
     return;
+    }
     nextevt = &tsk.signal.posix_cputimers.bases[clkid].nextevt;
     now = cpu_clock_sample_group(clkid, tsk, true);
     if (oldval) {
@@ -1429,24 +1656,25 @@ pub unsafe extern "C" fn run_posix_cpu_timers() {
 // oldval -= now;
     }
     }
-    if (*newval)
+    if (*newval) {
 // newval += now;
+    }
     }
 //
 // Update expiration cache if this is the earliest timer. CPUCLOCK_PROF
 // expiry cache is also used by RLIMIT_CPU!.
 //
-    if (*newval < *nextevt)
+    if (*newval < *nextevt) {
 // nextevt = *newval;
+    }
     tick_dep_set_signal(tsk, TICK_DEP_BIT_POSIX_TIMER);
     }
-    static int do_cpu_nanosleep(const clockid_t which_clock, int flags,
-    const struct timespec64 *rqtp)
-    {
-    struct itimerspec64 it;
-    struct k_itimer timer;
-    u64 expires;
-    int error;
+#[no_mangle]
+pub unsafe extern "C" fn do_cpu_nanosleep(which_clock: clockid_t, flags: c_int, rqtp: *mut timespec64) -> c_int {
+pub static mut it: usize = 0;
+pub static mut timer: usize = 0;
+    let mut expires = 0;
+    let mut error = 0;
 //
 // Set up a temporary timer and then wait for it to go off.
 //
@@ -1458,9 +1686,9 @@ pub unsafe extern "C" fn run_posix_cpu_timers() {
     timer.it_process = current;
     timer.it.cpu.nanosleep = true;
     if (!error) {
-    static struct itimerspec64 zero_it;
-    struct restart_block *restart;
-    memset(&it, 0, sizeof(it));
+pub static mut zero_it: usize = 0;
+pub static mut restart: *mut c_void = core::ptr::null_mut();
+    memset(&it, 0, sizeof!(it));
     it.it_value = *rqtp;
     spin_lock_irq(&timer.it_lock);
     error = posix_cpu_timer_set(&timer, flags, &it, core::ptr::null_mut());
@@ -1514,28 +1742,30 @@ pub unsafe extern "C" fn run_posix_cpu_timers() {
 //
     restart = &current.restart_block;
     restart.nanosleep.expires = ns_to_ktime(expires);
-    if (restart.nanosleep.type != TT_NONE)
+    if (restart.nanosleep.type != TT_NONE) {
     error = nanosleep_copyout(restart, &it.it_value);
+    }
     }
     return error;
     }
-    static long posix_cpu_nsleep_restart(struct restart_block *restart_block);
-    static int posix_cpu_nsleep(const clockid_t which_clock, int flags,
-    const struct timespec64 *rqtp)
-    {
-    struct restart_block *restart_block = &current.restart_block;
-    int error;
+// forward_decl: posix_cpu_nsleep_restart;
+#[no_mangle]
+pub unsafe extern "C" fn posix_cpu_nsleep(which_clock: clockid_t, flags: c_int, rqtp: *mut timespec64) -> c_int {
+    let mut restart_block = &current.restart_block;
+    let mut error = 0;
 //
 // Diagnose required errors first.
 //
     if (CPUCLOCK_PERTHREAD(which_clock) &&
     (CPUCLOCK_PID(which_clock) == 0 ||
-    CPUCLOCK_PID(which_clock) == task_pid_vnr(current)))
+    CPUCLOCK_PID(which_clock) == task_pid_vnr(current))) {
     return -EINVAL;
+    }
     error = do_cpu_nanosleep(which_clock, flags, rqtp);
     if (error == -ERESTART_RESTARTBLOCK) {
-    if (flags & TIMER_ABSTIME)
+    if (flags & TIMER_ABSTIME) {
     return -ERESTARTNOHAND;
+    }
     restart_block.nanosleep.clockid = which_clock;
     set_restart_fn(restart_block, posix_cpu_nsleep_restart);
     }
@@ -1543,73 +1773,42 @@ pub unsafe extern "C" fn run_posix_cpu_timers() {
     }
 #[no_mangle]
 unsafe extern "C" fn posix_cpu_nsleep_restart(restart_block: *mut restart_block) -> c_long {
-    static long posix_cpu_nsleep_restart(struct restart_block *restart_block)
-    {
-    let mut which_clock: clockid_t = restart_block.nanosleep.clockid;
-    struct timespec64 t;
+pub static mut which_clock: clockid_t = 0;
+pub static mut t: usize = 0;
     t = ktime_to_timespec64(restart_block.nanosleep.expires);
     return do_cpu_nanosleep(which_clock, TIMER_ABSTIME, &t);
     }
 
-    static int process_cpu_clock_getres(const clockid_t which_clock,
-    struct timespec64 *tp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn process_cpu_clock_getres(which_clock: clockid_t, tp: *mut timespec64) -> c_int {
     return posix_cpu_clock_getres(PROCESS_CLOCK, tp);
     }
-    static int process_cpu_clock_get(const clockid_t which_clock,
-    struct timespec64 *tp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn process_cpu_clock_get(which_clock: clockid_t, tp: *mut timespec64) -> c_int {
     return posix_cpu_clock_get(PROCESS_CLOCK, tp);
     }
 #[no_mangle]
 unsafe extern "C" fn process_cpu_timer_create(timer: *mut k_itimer) -> c_int {
-    static int process_cpu_timer_create(struct k_itimer *timer)
-    {
     timer.it_clock = PROCESS_CLOCK;
     return posix_cpu_timer_create(timer);
     }
-    static int process_cpu_nsleep(const clockid_t which_clock, int flags,
-    const struct timespec64 *rqtp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn process_cpu_nsleep(which_clock: clockid_t, flags: c_int, rqtp: *mut timespec64) -> c_int {
     return posix_cpu_nsleep(PROCESS_CLOCK, flags, rqtp);
     }
-    static int thread_cpu_clock_getres(const clockid_t which_clock,
-    struct timespec64 *tp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn thread_cpu_clock_getres(which_clock: clockid_t, tp: *mut timespec64) -> c_int {
     return posix_cpu_clock_getres(THREAD_CLOCK, tp);
     }
-    static int thread_cpu_clock_get(const clockid_t which_clock,
-    struct timespec64 *tp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn thread_cpu_clock_get(which_clock: clockid_t, tp: *mut timespec64) -> c_int {
     return posix_cpu_clock_get(THREAD_CLOCK, tp);
     }
 #[no_mangle]
 unsafe extern "C" fn thread_cpu_timer_create(timer: *mut k_itimer) -> c_int {
-    static int thread_cpu_timer_create(struct k_itimer *timer)
-    {
     timer.it_clock = THREAD_CLOCK;
     return posix_cpu_timer_create(timer);
     }
-    const struct k_clock clock_posix_cpu = {
-    .clock_getres		= posix_cpu_clock_getres,
-    .clock_set		= posix_cpu_clock_set,
-    .clock_get_timespec	= posix_cpu_clock_get,
-    .timer_create		= posix_cpu_timer_create,
-    .nsleep			= posix_cpu_nsleep,
-    .timer_set		= posix_cpu_timer_set,
-    .timer_del		= posix_cpu_timer_del,
-    .timer_get		= posix_cpu_timer_get,
-    .timer_rearm		= posix_cpu_timer_rearm,
-    .timer_wait_running	= posix_cpu_timer_wait_running,
-    };
-    const struct k_clock clock_process = {
-    .clock_getres		= process_cpu_clock_getres,
-    .clock_get_timespec	= process_cpu_clock_get,
-    .timer_create		= process_cpu_timer_create,
-    .nsleep			= process_cpu_nsleep,
-    };
-    const struct k_clock clock_thread = {
-    .clock_getres		= thread_cpu_clock_getres,
-    .clock_get_timespec	= thread_cpu_clock_get,
-    .timer_create		= thread_cpu_timer_create,
-    };
+pub static mut k_clock: usize = 0;
+pub static mut k_clock: usize = 0;
+pub static mut k_clock: usize = 0;

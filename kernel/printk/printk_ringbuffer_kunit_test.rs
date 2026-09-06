@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -68,8 +318,8 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Note that the test is performed on a separate printk_ringbuffer instance
 // and not the instance used by printk().
 //
-    let mut runtime_ms: static unsigned long = 10 * MSEC_PER_SEC;
-    module_param(runtime_ms, ulong, 0400);
+pub static mut runtime_ms: unsigned long = 0;
+    module_param!(runtime_ms, ulong, 0400);
 // test data structure
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -98,9 +348,7 @@ pub struct prbtest_thread_data {
 
 #[no_mangle]
 unsafe extern "C" fn prbtest_fail_record(test: *mut kunit, dat: *const prbtest_rbdata, seq: u64) {
-    static void prbtest_fail_record(struct kunit *test, const struct prbtest_rbdata *dat, u64 seq)
-    {
-    unsigned int len;
+    let mut len = 0;
     len = dat.size - 1;
     KUNIT_FAIL(test, "BAD RECORD: seq=%llu size=%u text=%.*s\n",
     seq, dat.size,
@@ -109,43 +357,44 @@ unsafe extern "C" fn prbtest_fail_record(test: *mut kunit, dat: *const prbtest_r
     }
 #[no_mangle]
 unsafe extern "C" fn prbtest_check_data(dat: *const prbtest_rbdata) -> bool {
-    static bool prbtest_check_data(const struct prbtest_rbdata *dat)
-    {
-    unsigned int len;
+    let mut len = 0;
 // Sane size? At least one character + trailing '\0'
-    if (dat.size < 2 || dat.size > MAX_RBDATA_TEXT_SIZE)
+    if (dat.size < 2 || dat.size > MAX_RBDATA_TEXT_SIZE) {
     return false;
+    }
     len = dat.size - 1;
-    if (dat.text[len] != '\0')
+    if (dat.text[len] != '\0') {
     return false;
+    }
 // String repeats with the same character?
     while (len--) {
-    if (dat.text[len] != dat.text[0])
+    if (dat.text[len] != dat.text[0]) {
     return false;
+    }
     }
     return true;
     }
 #[no_mangle]
 unsafe extern "C" fn prbtest_writer(data: *mut c_void) -> c_int {
-    static int prbtest_writer(void *data)
-    {
-    struct prbtest_thread_data *tr = data;
-    let mut text_id: c_char = 'A' + tr.num;
-    struct prb_reserved_entry e;
-    struct prbtest_rbdata *dat;
+    let mut tr = data;
+pub static mut text_id: c_char = 0;
+pub static mut e: usize = 0;
+pub static mut dat: *mut c_void = core::ptr::null_mut();
     u32 record_size, text_size;
-    let mut count: c_ulong = 0;
-    struct printk_record r;
+pub static mut count: c_ulong = 0;
+pub static mut r: usize = 0;
     kunit_info(tr.test_data.test, "start thread %03lu (writer)\n", tr.num);
     for (;;) {
 // ensure at least 1 character + trailing '\0'
     text_size = get_random_u32_inclusive(2, MAX_RBDATA_TEXT_SIZE);
-    if (WARN_ON_ONCE(text_size < 2))
+    if (WARN_ON_ONCE!(text_size < 2)) {
     text_size = 2;
-    if (WARN_ON_ONCE(text_size > MAX_RBDATA_TEXT_SIZE))
+    }
+    if (WARN_ON_ONCE!(text_size > MAX_RBDATA_TEXT_SIZE)) {
     text_size = MAX_RBDATA_TEXT_SIZE;
-    record_size = sizeof(struct prbtest_rbdata) + text_size;
-    WARN_ON_ONCE(record_size > MAX_PRB_RECORD_SIZE);
+    }
+    record_size = sizeof!(prbtest_rbdata) + text_size;
+    WARN_ON_ONCE!(record_size > MAX_PRB_RECORD_SIZE);
 // specify the text sizes for reservation
     prb_rec_init_wr(&r, record_size);
 //
@@ -163,17 +412,19 @@ unsafe extern "C" fn prbtest_writer(data: *mut c_void) -> c_int {
 //
     if (prb_reserve(&e, tr.test_data.ringbuffer, &r)) {
     r.info.text_len = record_size;
-    dat = (struct prbtest_rbdata *)r.text_buf;
+    dat = r.text_buf;
     dat.size = text_size;
     memset(dat.text, text_id, text_size - 1);
     dat.text[text_size - 1] = '\0';
     prb_commit(&e);
     wake_up_interruptible(&tr.test_data.new_record_wait);
     }
-    if ((count++ & 0x3fff) == 0)
+    if ((count++ & 0x3fff) == 0) {
     cond_resched();
-    if (kthread_should_stop())
+    }
+    if (kthread_should_stop()) {
     break;
+    }
     }
     kunit_info(tr.test_data.test, "end thread %03lu: wrote=%lu\n", tr.num, count);
     return 0;
@@ -187,38 +438,37 @@ pub struct prbtest_wakeup_timer {
 
 #[no_mangle]
 unsafe extern "C" fn prbtest_wakeup_callback(timer: *mut timer_list) {
-    static void prbtest_wakeup_callback(struct timer_list *timer)
-    {
-    struct prbtest_wakeup_timer *wakeup = timer_container_of(wakeup, timer, timer);
+    let mut wakeup = timer_container_of(wakeup, timer, timer);
     set_tsk_thread_flag(wakeup.task, TIF_NOTIFY_SIGNAL);
     wake_up_process(wakeup.task);
     }
 #[no_mangle]
 unsafe extern "C" fn prbtest_reader(test_data: *mut prbtest_data, timeout_ms: c_ulong) -> c_int {
-    static int prbtest_reader(struct prbtest_data *test_data, unsigned long timeout_ms)
-    {
-    struct prbtest_wakeup_timer wakeup;
+pub static mut wakeup: usize = 0;
     char text_buf[MAX_PRB_RECORD_SIZE];
-    let mut count: c_ulong = 0;
-    struct printk_info info;
-    struct printk_record r;
-    let mut seq: u64 = 0;
+pub static mut count: c_ulong = 0;
+pub static mut info: usize = 0;
+pub static mut r: usize = 0;
+pub static mut seq: u64 = 0;
     wakeup.task = current;
     timer_setup_on_stack(&wakeup.timer, prbtest_wakeup_callback, 0);
     mod_timer(&wakeup.timer, jiffies + msecs_to_jiffies(timeout_ms));
-    prb_rec_init_rd(&r, &info, text_buf, sizeof(text_buf));
+    prb_rec_init_rd(&r, &info, text_buf, sizeof!(text_buf));
     kunit_info(test_data.test, "start reader\n");
     while (!wait_event_interruptible(test_data.new_record_wait,
     prb_read_valid(test_data.ringbuffer, seq, &r))) {
 // check/track the sequence
-    if (info.seq < seq)
+    if (info.seq < seq) {
     KUNIT_FAIL(test_data.test, "BAD SEQ READ: request=%llu read=%llu\n",
     seq, info.seq);
-    if (!prbtest_check_data((struct prbtest_rbdata *)r.text_buf))
+    }
+    if (!prbtest_check_data(r.text_buf)) {
     prbtest_fail_record(test_data.test,
-    (struct prbtest_rbdata *)r.text_buf, info.seq);
-    if ((count++ & 0x3fff) == 0)
+    r.text_buf, info.seq);
+    }
+    if ((count++ & 0x3fff) == 0) {
     cond_resched();
+    }
     seq = info.seq + 1;
     }
     timer_delete_sync(&wakeup.timer);
@@ -226,42 +476,35 @@ unsafe extern "C" fn prbtest_reader(test_data: *mut prbtest_data, timeout_ms: c_
     kunit_info(test_data.test, "end reader: read=%lu seq=%llu\n", count, info.seq);
     return 0;
     }
-    KUNIT_DEFINE_ACTION_WRAPPER(prbtest_cpumask_cleanup, free_cpumask_var, struct cpumask *);
-    KUNIT_DEFINE_ACTION_WRAPPER(prbtest_kthread_cleanup, kthread_stop, struct task_struct *);
+    KUNIT_DEFINE_ACTION_WRAPPER(prbtest_cpumask_cleanup, free_cpumask_var, cpumask *);
+    KUNIT_DEFINE_ACTION_WRAPPER(prbtest_kthread_cleanup, kthread_stop, task_struct *);
 #[no_mangle]
 unsafe extern "C" fn prbtest_add_cpumask_cleanup(test: *mut kunit, mask: cpumask_var_t) {
-    static void prbtest_add_cpumask_cleanup(struct kunit *test, cpumask_var_t mask)
-    {
-    int err;
+    let mut err = 0;
     err = kunit_add_action_or_reset(test, prbtest_cpumask_cleanup, mask);
     KUNIT_ASSERT_EQ(test, err, 0);
     }
 #[no_mangle]
 unsafe extern "C" fn prbtest_add_kthread_cleanup(test: *mut kunit, kthread: *mut task_struct) {
-    static void prbtest_add_kthread_cleanup(struct kunit *test, struct task_struct *kthread)
-    {
-    int err;
+    let mut err = 0;
     err = kunit_add_action_or_reset(test, prbtest_kthread_cleanup, kthread);
     KUNIT_ASSERT_EQ(test, err, 0);
     }
 #[no_mangle]
 pub unsafe extern "C" fn prbtest_prb_reinit(rb: *mut printk_ringbuffer) {
-    static inline void prbtest_prb_reinit(struct printk_ringbuffer *rb)
-    {
     prb_init(rb, rb.text_data_ring.data, rb.text_data_ring.size_bits, rb.desc_ring.descs,
     rb.desc_ring.count_bits, rb.desc_ring.infos);
     }
 #[no_mangle]
 unsafe extern "C" fn test_readerwriter(test: *mut kunit) {
-    static void test_readerwriter(struct kunit *test)
-    {
 // Equivalent to CONFIG_LOG_BUF_SHIFT=13
-    DEFINE_PRINTKRB(test_rb, 8, 5);
-    struct prbtest_thread_data *thread_data;
-    struct prbtest_data *test_data;
-    struct task_struct *thread;
-    cpumask_var_t test_cpus;
-    int cpu, reader_cpu;
+pub static mut test_rb: usize = 0;
+pub static mut thread_data: *mut c_void = core::ptr::null_mut();
+pub static mut test_data: *mut c_void = core::ptr::null_mut();
+pub static mut thread: *mut c_void = core::ptr::null_mut();
+    let mut test_cpus;
+    let mut cpu = 0;
+    let mut reader_cpu = 0;
     KUNIT_ASSERT_TRUE(test, alloc_cpumask_var(&test_cpus, GFP_KERNEL));
     prbtest_add_cpumask_cleanup(test, test_cpus);
     cpus_read_lock();
@@ -275,20 +518,22 @@ unsafe extern "C" fn test_readerwriter(test: *mut kunit) {
     cpus_read_unlock();
 // One CPU is for the reader, all others are writers
     reader_cpu = cpumask_first(test_cpus);
-    if (cpumask_weight(test_cpus) == 1)
+    if (cpumask_weight(test_cpus) == 1) {
     kunit_warn(test, "more than one CPU is recommended");
-    else
+    }
+    else {
     cpumask_clear_cpu(reader_cpu, test_cpus);
+    }
 // KUnit test can get restarted more times.
     prbtest_prb_reinit(&test_rb);
-    test_data = kunit_kmalloc(test, sizeof(*test_data), GFP_KERNEL);
+    test_data = kunit_kmalloc(test, sizeof!(*test_data), GFP_KERNEL);
     KUNIT_ASSERT_NOT_NULL(test, test_data);
     test_data.test = test;
     test_data.ringbuffer = &test_rb;
     init_waitqueue_head(&test_data.new_record_wait);
     kunit_info(test, "running for %lu ms\n", runtime_ms);
     for_each_cpu(cpu, test_cpus) {
-    thread_data = kunit_kmalloc(test, sizeof(*thread_data), GFP_KERNEL);
+    thread_data = kunit_kmalloc(test, sizeof!(*thread_data), GFP_KERNEL);
     KUNIT_ASSERT_NOT_NULL(test, thread_data);
     thread_data.test_data = test_data;
     thread_data.num = cpu;
@@ -302,14 +547,8 @@ unsafe extern "C" fn test_readerwriter(test: *mut kunit) {
     prbtest_reader(test_data, runtime_ms);
     kunit_info(test, "completed test\n");
     }
-    static struct kunit_case prb_test_cases[] = {
-    KUNIT_CASE_SLOW(test_readerwriter),
-    {}
-    };
-    static struct kunit_suite prb_test_suite = {
-    .name       = "printk-ringbuffer",
-    .test_cases = prb_test_cases,
-    };
+pub static mut kunit_case: usize = 0;
+pub static mut kunit_suite: usize = 0;
     kunit_test_suite(prb_test_suite);
     MODULE_IMPORT_NS("EXPORTED_FOR_KUNIT_TESTING");
     MODULE_AUTHOR("John Ogness <john.ogness@linutronix.de>");

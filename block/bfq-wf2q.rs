@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -54,33 +304,26 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 #[no_mangle]
 unsafe extern "C" fn bfq_gt(a: u64, b: u64) -> c_int {
-    static int bfq_gt(u64 a, u64 b)
-    {
     return (s64)(a - b) > 0;
     }
-    static struct bfq_entity *bfq_root_active_entity(struct rb_root *tree)
-    {
-    struct rb_node *node = tree.rb_node;
-    return rb_entry(node, struct bfq_entity, rb_node);
+#[no_mangle]
+pub unsafe extern "C" fn bfq_root_active_entity(tree: *mut rb_root) -> *mut c_void {
+    let mut node = tree.rb_node;
+    return rb_entry(node, bfq_entity, rb_node);
     }
 #[no_mangle]
 unsafe extern "C" fn bfq_class_idx(entity: *mut bfq_entity) -> c_uint {
-    static unsigned int bfq_class_idx(struct bfq_entity *entity)
-    {
-    struct bfq_queue *bfqq = bfq_entity_to_bfqq(entity);
+    let mut bfqq = bfq_entity_to_bfqq(entity);
     return bfqq ? bfqq.ioprio_class - 1 :
     BFQ_DEFAULT_GRP_CLASS - 1;
     }
 #[no_mangle]
 pub unsafe extern "C" fn bfq_tot_busy_queues(bfqd: *mut bfq_data) -> c_uint {
-    unsigned int bfq_tot_busy_queues(struct bfq_data *bfqd)
-    {
     return bfqd.busy_queues[0] + bfqd.busy_queues[1] +
     bfqd.busy_queues[2];
     }
-    static struct bfq_entity *bfq_lookup_next_entity(struct bfq_sched_data *sd,
-    bool expiration);
-    static bool bfq_update_parent_budget(struct bfq_entity *next_in_service);
+// forward_decl: bfq_lookup_next_entity;
+// forward_decl: bfq_update_parent_budget;
 //
 // bfq_update_next_in_service - update sd->next_in_service
 // @sd: sched_data for which to perform the update.
@@ -106,13 +349,11 @@ pub unsafe extern "C" fn bfq_tot_busy_queues(bfqd: *mut bfq_data) -> c_uint {
 // entity->parent may become the next_in_service for its parent
 // entity.
 //
-    static bool bfq_update_next_in_service(struct bfq_sched_data *sd,
-    struct bfq_entity *new_entity,
-    bool expiration)
-    {
-    struct bfq_entity *next_in_service = sd.next_in_service;
-    let mut parent_sched_may_change: bool = false;
-    let mut change_without_lookup: bool = false;
+#[no_mangle]
+pub unsafe extern "C" fn bfq_update_next_in_service(sd: *mut bfq_sched_data, new_entity: *mut bfq_entity, expiration: bool) -> bool {
+    let mut next_in_service = sd.next_in_service;
+pub static mut parent_sched_may_change: bool = false;
+pub static mut change_without_lookup: bool = false;
 //
 // If this update is triggered by the activation, requeueing
 // or repositioning of an entity that does not coincide with
@@ -138,10 +379,8 @@ pub unsafe extern "C" fn bfq_tot_busy_queues(bfqd: *mut bfq_data) -> c_uint {
 // to replace sd->service_tree with new_entity.
 //
     if (next_in_service) {
-    unsigned int new_entity_class_idx =
-    bfq_class_idx(new_entity);
-    struct bfq_service_tree *st =
-    sd.service_tree + new_entity_class_idx;
+    let mut new_entity_class_idx = bfq_class_idx(new_entity);
+    let mut st = sd.service_tree + new_entity_class_idx;
     change_without_lookup =
     (new_entity_class_idx ==
     bfq_class_idx(next_in_service)
@@ -151,14 +390,15 @@ pub unsafe extern "C" fn bfq_tot_busy_queues(bfqd: *mut bfq_data) -> c_uint {
     bfq_gt(next_in_service.finish,
     new_entity.finish));
     }
-    if (change_without_lookup)
+    if (change_without_lookup) {
     next_in_service = new_entity;
     }
-    if (!change_without_lookup) /* lookup needed */
+    }
+    if (!change_without_lookup) /* lookup needed */ {
     next_in_service = bfq_lookup_next_entity(sd, expiration);
+    }
     if (next_in_service) {
-    bool new_budget_triggers_change =
-    bfq_update_parent_budget(next_in_service);
+    let mut new_budget_triggers_change = bfq_update_parent_budget(next_in_service);
     parent_sched_may_change = !sd.next_in_service ||
     new_budget_triggers_change;
     }
@@ -172,14 +412,12 @@ pub unsafe extern "C" fn bfq_tot_busy_queues(bfqd: *mut bfq_data) -> c_uint {
 //
 #[no_mangle]
 unsafe extern "C" fn bfq_update_parent_budget(next_in_service: *mut bfq_entity) -> bool {
-    static bool bfq_update_parent_budget(struct bfq_entity *next_in_service)
-    {
-    struct bfq_entity *bfqg_entity;
-    struct bfq_group *bfqg;
-    struct bfq_sched_data *group_sd;
-    let mut ret: bool = false;
+pub static mut bfqg_entity: *mut c_void = core::ptr::null_mut();
+pub static mut bfqg: *mut c_void = core::ptr::null_mut();
+pub static mut group_sd: *mut c_void = core::ptr::null_mut();
+pub static mut ret: bool = false;
     group_sd = next_in_service.sched_data;
-    bfqg = container_of(group_sd, struct bfq_group, sched_data);
+    bfqg = container_of!(group_sd, bfq_group, sched_data);
 //
 // bfq_group's my_entity field is not NULL only if the group
 // is not the root group. We must not touch the root entity
@@ -187,8 +425,9 @@ unsafe extern "C" fn bfq_update_parent_budget(next_in_service: *mut bfq_entity) 
 //
     bfqg_entity = bfqg.my_entity;
     if (bfqg_entity) {
-    if (bfqg_entity.budget > next_in_service.budget)
+    if (bfqg_entity.budget > next_in_service.budget) {
     ret = true;
+    }
     bfqg_entity.budget = next_in_service.budget;
     }
     return ret;
@@ -215,12 +454,11 @@ unsafe extern "C" fn bfq_update_parent_budget(next_in_service: *mut bfq_entity) 
 //
 #[no_mangle]
 unsafe extern "C" fn bfq_no_longer_next_in_service(entity: *mut bfq_entity) -> bool {
-    static bool bfq_no_longer_next_in_service(struct bfq_entity *entity)
-    {
-    struct bfq_group *bfqg;
-    if (bfq_entity_to_bfqq(entity))
+pub static mut bfqg: *mut c_void = core::ptr::null_mut();
+    if (bfq_entity_to_bfqq(entity)) {
     return true;
-    bfqg = container_of(entity, struct bfq_group, entity);
+    }
+    bfqg = container_of!(entity, bfq_group, entity);
 //
 // The field active_entities does not always contain the
 // actual number of active children entities: it happens to
@@ -233,50 +471,41 @@ unsafe extern "C" fn bfq_no_longer_next_in_service(entity: *mut bfq_entity) -> b
 // invoked, and thus active_entities still coincides with the
 // actual number of active entities.
 //
-    if (bfqg.active_entities == 1)
+    if (bfqg.active_entities == 1) {
     return true;
+    }
     return false;
     }
 #[no_mangle]
 unsafe extern "C" fn bfq_inc_active_entities(entity: *mut bfq_entity) {
-    static void bfq_inc_active_entities(struct bfq_entity *entity)
-    {
-    struct bfq_sched_data *sd = entity.sched_data;
-    struct bfq_group *bfqg = container_of(sd, struct bfq_group, sched_data);
-    if (bfqg != bfqg.bfqd.root_group)
-    bfqg.active_entities++;
+    let mut sd = entity.sched_data;
+    let mut bfqg = container_of!(sd, bfq_group, sched_data);
+    if (bfqg != bfqg.bfqd.root_group) {
+    bfqg.active_entities += 1;
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn bfq_dec_active_entities(entity: *mut bfq_entity) {
-    static void bfq_dec_active_entities(struct bfq_entity *entity)
-    {
-    struct bfq_sched_data *sd = entity.sched_data;
-    struct bfq_group *bfqg = container_of(sd, struct bfq_group, sched_data);
-    if (bfqg != bfqg.bfqd.root_group)
-    bfqg.active_entities--;
+    let mut sd = entity.sched_data;
+    let mut bfqg = container_of!(sd, bfq_group, sched_data);
+    if (bfqg != bfqg.bfqd.root_group) {
+    bfqg.active_entities -= 1;
+    }
     }
 
 #[no_mangle]
 unsafe extern "C" fn bfq_update_parent_budget(next_in_service: *mut bfq_entity) -> bool {
-    static bool bfq_update_parent_budget(struct bfq_entity *next_in_service)
-    {
     return false;
     }
 #[no_mangle]
 unsafe extern "C" fn bfq_no_longer_next_in_service(entity: *mut bfq_entity) -> bool {
-    static bool bfq_no_longer_next_in_service(struct bfq_entity *entity)
-    {
     return true;
     }
 #[no_mangle]
 unsafe extern "C" fn bfq_inc_active_entities(entity: *mut bfq_entity) {
-    static void bfq_inc_active_entities(struct bfq_entity *entity)
-    {
     }
 #[no_mangle]
 unsafe extern "C" fn bfq_dec_active_entities(entity: *mut bfq_entity) {
-    static void bfq_dec_active_entities(struct bfq_entity *entity)
-    {
     }
 
 //
@@ -287,11 +516,12 @@ unsafe extern "C" fn bfq_dec_active_entities(entity: *mut bfq_entity) {
 // wraparounds.
 //
 pub const WFQ_SERVICE_SHIFT: c_int = 22;
-    struct bfq_queue *bfq_entity_to_bfqq(struct bfq_entity *entity)
-    {
-    struct bfq_queue *bfqq = core::ptr::null_mut();
-    if (!entity.my_sched_data)
-    bfqq = container_of(entity, struct bfq_queue, entity);
+#[no_mangle]
+pub unsafe extern "C" fn bfq_entity_to_bfqq(entity: *mut bfq_entity) -> *mut c_void {
+    let mut bfqq = core::ptr::null_mut();
+    if (!entity.my_sched_data) {
+    bfqq = container_of!(entity, bfq_queue, entity);
+    }
     return bfqq;
     }
 //
@@ -301,8 +531,6 @@ pub const WFQ_SERVICE_SHIFT: c_int = 22;
 //
 #[no_mangle]
 unsafe extern "C" fn bfq_delta(service: c_ulong, weight: c_ulong) -> u64 {
-    static u64 bfq_delta(unsigned long service, unsigned long weight)
-    {
     return div64_ul((u64)service << WFQ_SERVICE_SHIFT, weight);
     }
 //
@@ -312,9 +540,7 @@ unsafe extern "C" fn bfq_delta(service: c_ulong, weight: c_ulong) -> u64 {
 //
 #[no_mangle]
 unsafe extern "C" fn bfq_calc_finish(entity: *mut bfq_entity, service: c_ulong) {
-    static void bfq_calc_finish(struct bfq_entity *entity, unsigned long service)
-    {
-    struct bfq_queue *bfqq = bfq_entity_to_bfqq(entity);
+    let mut bfqq = bfq_entity_to_bfqq(entity);
     entity.finish = entity.start +
     bfq_delta(service, entity.weight);
     if (bfqq) {
@@ -336,11 +562,12 @@ unsafe extern "C" fn bfq_calc_finish(entity: *mut bfq_entity, service: c_ulong) 
 // conversion mechanism because, e.g., in the tree walking functions,
 // the check for a %NULL value would be redundant.
 //
-    struct bfq_entity *bfq_entity_of(struct rb_node *node)
-    {
-    struct bfq_entity *entity = core::ptr::null_mut();
-    if (node)
-    entity = rb_entry(node, struct bfq_entity, rb_node);
+#[no_mangle]
+pub unsafe extern "C" fn bfq_entity_of(node: *mut rb_node) -> *mut c_void {
+    let mut entity = core::ptr::null_mut();
+    if (node) {
+    entity = rb_entry(node, bfq_entity, rb_node);
+    }
     return entity;
     }
 //
@@ -350,8 +577,6 @@ unsafe extern "C" fn bfq_calc_finish(entity: *mut bfq_entity, service: c_ulong) 
 //
 #[no_mangle]
 unsafe extern "C" fn bfq_extract(root: *mut rb_root, entity: *mut bfq_entity) {
-    static void bfq_extract(struct rb_root *root, struct bfq_entity *entity)
-    {
     entity.tree = core::ptr::null_mut();
     rb_erase(&entity.rb_node, root);
     }
@@ -360,11 +585,10 @@ unsafe extern "C" fn bfq_extract(root: *mut rb_root, entity: *mut bfq_entity) {
 // @st: the service tree of the owning @entity.
 // @entity: the entity being removed.
 //
-    static void bfq_idle_extract(struct bfq_service_tree *st,
-    struct bfq_entity *entity)
-    {
-    struct bfq_queue *bfqq = bfq_entity_to_bfqq(entity);
-    struct rb_node *next;
+#[no_mangle]
+pub unsafe extern "C" fn bfq_idle_extract(st: *mut bfq_service_tree, entity: *mut bfq_entity) {
+    let mut bfqq = bfq_entity_to_bfqq(entity);
+pub static mut next: *mut c_void = core::ptr::null_mut();
     if (entity == st.first_idle) {
     next = rb_next(&entity.rb_node);
     st.first_idle = bfq_entity_of(next);
@@ -374,8 +598,9 @@ unsafe extern "C" fn bfq_extract(root: *mut rb_root, entity: *mut bfq_entity) {
     st.last_idle = bfq_entity_of(next);
     }
     bfq_extract(&st.idle, entity);
-    if (bfqq)
+    if (bfqq) {
     list_del(&bfqq.bfqq_list);
+    }
     }
 //
 // bfq_insert - generic tree insertion.
@@ -387,18 +612,18 @@ unsafe extern "C" fn bfq_extract(root: *mut rb_root, entity: *mut bfq_entity) {
 //
 #[no_mangle]
 unsafe extern "C" fn bfq_insert(root: *mut rb_root, entity: *mut bfq_entity) {
-    static void bfq_insert(struct rb_root *root, struct bfq_entity *entity)
-    {
-    struct bfq_entity *entry;
-    struct rb_node **node = &root.rb_node;
-    struct rb_node *parent = core::ptr::null_mut();
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+    let mut node = &root.rb_node;
+    let mut parent = core::ptr::null_mut();
     while (*node) {
     parent = *node;
-    entry = rb_entry(parent, struct bfq_entity, rb_node);
-    if (bfq_gt(entry.finish, entity.finish))
+    entry = rb_entry(parent, bfq_entity, rb_node);
+    if (bfq_gt(entry.finish, entity.finish)) {
     node = &parent.rb_left;
-    else
+    }
+    else {
     node = &parent.rb_right;
+    }
     }
     rb_link_node(&entity.rb_node, parent, node);
     rb_insert_color(&entity.rb_node, root);
@@ -416,13 +641,12 @@ unsafe extern "C" fn bfq_insert(root: *mut rb_root, entity: *mut bfq_entity) {
 //
 #[no_mangle]
 unsafe extern "C" fn bfq_update_min(entity: *mut bfq_entity, node: *mut rb_node) {
-    static void bfq_update_min(struct bfq_entity *entity, struct rb_node *node)
-    {
-    struct bfq_entity *child;
+pub static mut child: *mut c_void = core::ptr::null_mut();
     if (node) {
-    child = rb_entry(node, struct bfq_entity, rb_node);
-    if (bfq_gt(entity.min_start, child.min_start))
+    child = rb_entry(node, bfq_entity, rb_node);
+    if (bfq_gt(entity.min_start, child.min_start)) {
     entity.min_start = child.min_start;
+    }
     }
     }
 //
@@ -435,9 +659,7 @@ unsafe extern "C" fn bfq_update_min(entity: *mut bfq_entity, node: *mut rb_node)
 //
 #[no_mangle]
 unsafe extern "C" fn bfq_update_active_node(node: *mut rb_node) {
-    static void bfq_update_active_node(struct rb_node *node)
-    {
-    struct bfq_entity *entity = rb_entry(node, struct bfq_entity, rb_node);
+    let mut entity = rb_entry(node, bfq_entity, rb_node);
     entity.min_start = entity.start;
     bfq_update_min(entity, node.rb_right);
     bfq_update_min(entity, node.rb_left);
@@ -454,22 +676,22 @@ unsafe extern "C" fn bfq_update_active_node(node: *mut rb_node) {
 //
 #[no_mangle]
 unsafe extern "C" fn bfq_update_active_tree(node: *mut rb_node) {
-    static void bfq_update_active_tree(struct rb_node *node)
-    {
-    struct rb_node *parent;
-    up:
+pub static mut parent: *mut c_void = core::ptr::null_mut();
+// label;
     bfq_update_active_node(node);
     parent = rb_parent(node);
-    if (!parent)
+    if (!parent) {
     return;
-    if (node == parent.rb_left && parent.rb_right)
+    }
+    if (node == parent.rb_left && parent.rb_right) {
     bfq_update_active_node(parent.rb_right);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: parent->rb_left) -> else {
-    else if (parent.rb_left)
+    }
+
+    else if (parent.rb_left) {
     bfq_update_active_node(parent.rb_left);
+    }
     node = parent;
-    goto up;
+// goto;
     }
 //
 // bfq_active_insert - insert an entity in the active tree of its
@@ -482,21 +704,22 @@ pub unsafe extern "C" fn if(_arg: parent->rb_left) -> else {
 // its children (and the node itself), so it's possible to search for
 // the eligible node with the lowest finish time in logarithmic time.
 //
-    static void bfq_active_insert(struct bfq_service_tree *st,
-    struct bfq_entity *entity)
-    {
-    struct bfq_queue *bfqq = bfq_entity_to_bfqq(entity);
-    struct rb_node *node = &entity.rb_node;
-    bfq_insert(&st.active, entity);
-    if (node.rb_left)
-    node = node.rb_left;
 #[no_mangle]
-pub unsafe extern "C" fn if(_arg: node->rb_right) -> else {
-    else if (node.rb_right)
+pub unsafe extern "C" fn bfq_active_insert(st: *mut bfq_service_tree, entity: *mut bfq_entity) {
+    let mut bfqq = bfq_entity_to_bfqq(entity);
+    let mut node = &entity.rb_node;
+    bfq_insert(&st.active, entity);
+    if (node.rb_left) {
+    node = node.rb_left;
+    }
+
+    else if (node.rb_right) {
     node = node.rb_right;
+    }
     bfq_update_active_tree(node);
-    if (bfqq)
+    if (bfqq) {
     list_add(&bfqq.bfqq_list, &bfqq.bfqd.active_list[bfqq.actuator_idx]);
+    }
     bfq_inc_active_entities(entity);
     }
 //
@@ -505,8 +728,6 @@ pub unsafe extern "C" fn if(_arg: node->rb_right) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn bfq_ioprio_to_weight(ioprio: c_int) -> c_ushort {
-    unsigned short bfq_ioprio_to_weight(int ioprio)
-    {
     return (IOPRIO_NR_LEVELS - ioprio) * BFQ_WEIGHT_CONVERSION_COEFF;
     }
 //
@@ -519,18 +740,14 @@ pub unsafe extern "C" fn bfq_ioprio_to_weight(ioprio: c_int) -> c_ushort {
 //
 #[no_mangle]
 unsafe extern "C" fn bfq_weight_to_ioprio(weight: c_int) -> c_ushort {
-    static unsigned short bfq_weight_to_ioprio(int weight)
-    {
     return max_t(int, 0,
     IOPRIO_NR_LEVELS - weight / BFQ_WEIGHT_CONVERSION_COEFF);
     }
 #[no_mangle]
 unsafe extern "C" fn bfq_get_entity(entity: *mut bfq_entity) {
-    static void bfq_get_entity(struct bfq_entity *entity)
-    {
-    struct bfq_queue *bfqq = bfq_entity_to_bfqq(entity);
+    let mut bfqq = bfq_entity_to_bfqq(entity);
     if (bfqq) {
-    bfqq.ref++;
+    bfqq.ref += 1;
     bfq_log_bfqq(bfqq.bfqd, bfqq, "get_entity: %p %d",
     bfqq, bfqq.ref);
     }
@@ -544,27 +761,29 @@ unsafe extern "C" fn bfq_get_entity(entity: *mut bfq_entity) {
 // the following modifications to the tree can touch.  If @node is the
 // last node in the tree return %NULL.
 //
-    static struct rb_node *bfq_find_deepest(struct rb_node *node)
-    {
-    struct rb_node *deepest;
-    if (!node.rb_right && !node.rb_left)
+#[no_mangle]
+pub unsafe extern "C" fn bfq_find_deepest(node: *mut rb_node) -> *mut c_void {
+pub static mut deepest: *mut c_void = core::ptr::null_mut();
+    if (!node.rb_right && !node.rb_left) {
     deepest = rb_parent(node);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !node->rb_right) -> else {
-    else if (!node.rb_right)
+    }
+
+    else if (!node.rb_right) {
     deepest = node.rb_left;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !node->rb_left) -> else {
-    else if (!node.rb_left)
+    }
+
+    else if (!node.rb_left) {
     deepest = node.rb_right;
+    }
     else {
     deepest = rb_next(node);
-    if (deepest.rb_right)
+    if (deepest.rb_right) {
     deepest = deepest.rb_right;
-#[no_mangle]
-pub unsafe extern "C" fn if(node: rb_parent(deepest) !=) -> else {
-    else if (rb_parent(deepest) != node)
+    }
+
+    else if (rb_parent(deepest) != node) {
     deepest = rb_parent(deepest);
+    }
     }
     return deepest;
     }
@@ -573,17 +792,18 @@ pub unsafe extern "C" fn if(node: rb_parent(deepest) !=) -> else {
 // @st: the service_tree containing the tree.
 // @entity: the entity being removed.
 //
-    static void bfq_active_extract(struct bfq_service_tree *st,
-    struct bfq_entity *entity)
-    {
-    struct bfq_queue *bfqq = bfq_entity_to_bfqq(entity);
-    struct rb_node *node;
+#[no_mangle]
+pub unsafe extern "C" fn bfq_active_extract(st: *mut bfq_service_tree, entity: *mut bfq_entity) {
+    let mut bfqq = bfq_entity_to_bfqq(entity);
+pub static mut node: *mut c_void = core::ptr::null_mut();
     node = bfq_find_deepest(&entity.rb_node);
     bfq_extract(&st.active, entity);
-    if (node)
+    if (node) {
     bfq_update_active_tree(node);
-    if (bfqq)
+    }
+    if (bfqq) {
     list_del(&bfqq.bfqq_list);
+    }
     bfq_dec_active_entities(entity);
     }
 //
@@ -591,19 +811,21 @@ pub unsafe extern "C" fn if(node: rb_parent(deepest) !=) -> else {
 // @st: the service tree containing the tree.
 // @entity: the entity to insert.
 //
-    static void bfq_idle_insert(struct bfq_service_tree *st,
-    struct bfq_entity *entity)
-    {
-    struct bfq_queue *bfqq = bfq_entity_to_bfqq(entity);
-    struct bfq_entity *first_idle = st.first_idle;
-    struct bfq_entity *last_idle = st.last_idle;
-    if (!first_idle || bfq_gt(first_idle.finish, entity.finish))
+#[no_mangle]
+pub unsafe extern "C" fn bfq_idle_insert(st: *mut bfq_service_tree, entity: *mut bfq_entity) {
+    let mut bfqq = bfq_entity_to_bfqq(entity);
+    let mut first_idle = st.first_idle;
+    let mut last_idle = st.last_idle;
+    if (!first_idle || bfq_gt(first_idle.finish, entity.finish)) {
     st.first_idle = entity;
-    if (!last_idle || bfq_gt(entity.finish, last_idle.finish))
+    }
+    if (!last_idle || bfq_gt(entity.finish, last_idle.finish)) {
     st.last_idle = entity;
+    }
     bfq_insert(&st.idle, entity);
-    if (bfqq)
+    if (bfqq) {
     list_add(&bfqq.bfqq_list, &bfqq.bfqd.idle_list);
+    }
     }
 //
 // bfq_forget_entity - do not consider entity any longer for scheduling
@@ -620,15 +842,14 @@ pub unsafe extern "C" fn if(node: rb_parent(deepest) !=) -> else {
 // will take care of putting the reference when the queue finally
 // stops being served.
 //
-    static void bfq_forget_entity(struct bfq_service_tree *st,
-    struct bfq_entity *entity,
-    bool is_in_service)
-    {
-    struct bfq_queue *bfqq = bfq_entity_to_bfqq(entity);
+#[no_mangle]
+pub unsafe extern "C" fn bfq_forget_entity(st: *mut bfq_service_tree, entity: *mut bfq_entity, is_in_service: bool) {
+    let mut bfqq = bfq_entity_to_bfqq(entity);
     entity.on_st_or_in_serv = false;
     st.wsum -= entity.weight;
-    if (bfqq && !is_in_service)
+    if (bfqq && !is_in_service) {
     bfq_put_queue(bfqq);
+    }
     }
 //
 // bfq_put_idle_entity - release the idle tree ref of an entity.
@@ -637,8 +858,6 @@ pub unsafe extern "C" fn if(node: rb_parent(deepest) !=) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn bfq_put_idle_entity(st: *mut bfq_service_tree, entity: *mut bfq_entity) {
-    void bfq_put_idle_entity(struct bfq_service_tree *st, struct bfq_entity *entity)
-    {
     bfq_idle_extract(st, entity);
     bfq_forget_entity(st, entity,
     entity == entity.sched_data.in_service_entity);
@@ -652,10 +871,8 @@ pub unsafe extern "C" fn bfq_put_idle_entity(st: *mut bfq_service_tree, entity: 
 //
 #[no_mangle]
 unsafe extern "C" fn bfq_forget_idle(st: *mut bfq_service_tree) {
-    static void bfq_forget_idle(struct bfq_service_tree *st)
-    {
-    struct bfq_entity *first_idle = st.first_idle;
-    struct bfq_entity *last_idle = st.last_idle;
+    let mut first_idle = st.first_idle;
+    let mut last_idle = st.last_idle;
     if (RB_EMPTY_ROOT(&st.active) && last_idle &&
     !bfq_gt(last_idle.finish, st.vtime)) {
 //
@@ -664,13 +881,14 @@ unsafe extern "C" fn bfq_forget_idle(st: *mut bfq_service_tree) {
 //
     st.vtime = last_idle.finish;
     }
-    if (first_idle && !bfq_gt(first_idle.finish, st.vtime))
+    if (first_idle && !bfq_gt(first_idle.finish, st.vtime)) {
     bfq_put_idle_entity(st, first_idle);
     }
-    struct bfq_service_tree *bfq_entity_service_tree(struct bfq_entity *entity)
-    {
-    struct bfq_sched_data *sched_data = entity.sched_data;
-    let mut idx: c_uint = bfq_class_idx(entity);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn bfq_entity_service_tree(entity: *mut bfq_entity) -> *mut c_void {
+    let mut sched_data = entity.sched_data;
+pub static mut idx: c_uint = 0;
     return sched_data.service_tree + idx;
     }
 //
@@ -691,15 +909,13 @@ unsafe extern "C" fn bfq_forget_idle(st: *mut bfq_service_tree) {
 // invoked with update_class_too unset in the points in the code where
 // entity may happen to be on some tree.
 //
-    struct bfq_service_tree *
-    __bfq_entity_update_weight_prio(struct bfq_service_tree *old_st,
-    struct bfq_entity *entity,
-    bool update_class_too)
-    {
-    struct bfq_service_tree *new_st = old_st;
+#[no_mangle]
+pub unsafe extern "C" fn __bfq_entity_update_weight_prio(old_st: *mut bfq_service_tree, entity: *mut bfq_entity, update_class_too: bool) -> *mut c_void {
+    let mut new_st = old_st;
     if (entity.prio_changed) {
-    struct bfq_queue *bfqq = bfq_entity_to_bfqq(entity);
-    unsigned int prev_weight, new_weight;
+    let mut bfqq = bfq_entity_to_bfqq(entity);
+    let mut prev_weight = 0;
+    let mut new_weight = 0;
 // Matches the smp_wmb() in bfq_group_set_weight.
     smp_rmb();
     old_st.wsum -= entity.weight;
@@ -708,24 +924,29 @@ unsafe extern "C" fn bfq_forget_idle(st: *mut bfq_service_tree) {
     entity.new_weight > BFQ_MAX_WEIGHT) {
     pr_crit("update_weight_prio: new_weight %d\n",
     entity.new_weight);
-    if (entity.new_weight < BFQ_MIN_WEIGHT)
+    if (entity.new_weight < BFQ_MIN_WEIGHT) {
     entity.new_weight = BFQ_MIN_WEIGHT;
-    else
+    }
+    else {
     entity.new_weight = BFQ_MAX_WEIGHT;
     }
+    }
     entity.orig_weight = entity.new_weight;
-    if (bfqq)
+    if (bfqq) {
     bfqq.ioprio =
     bfq_weight_to_ioprio(entity.orig_weight);
     }
-    if (bfqq && update_class_too)
+    }
+    if (bfqq && update_class_too) {
     bfqq.ioprio_class = bfqq.new_ioprio_class;
+    }
 //
 // Reset prio_changed only if the ioprio_class change
 // is not pending any longer.
 //
-    if (!bfqq || bfqq.ioprio_class == bfqq.new_ioprio_class)
+    if (!bfqq || bfqq.ioprio_class == bfqq.new_ioprio_class) {
     entity.prio_changed = 0;
+    }
 //
 // NOTE: here we may be changing the weight too early,
 // this will cause unfairness.  The correct approach
@@ -742,18 +963,21 @@ unsafe extern "C" fn bfq_forget_idle(st: *mut bfq_service_tree) {
 // queue, remove the entity from its old weight counter (if
 // there is a counter associated with the entity).
 //
-    if (prev_weight != new_weight && bfqq)
+    if (prev_weight != new_weight && bfqq) {
     bfq_weights_tree_remove(bfqq);
+    }
     entity.weight = new_weight;
 //
 // Add the entity, if it is not a weight-raised queue,
 // to the counter associated with its new weight.
 //
-    if (prev_weight != new_weight && bfqq && bfqq.wr_coeff == 1)
+    if (prev_weight != new_weight && bfqq && bfqq.wr_coeff == 1) {
     bfq_weights_tree_add(bfqq);
+    }
     new_st.wsum += entity.weight;
-    if (new_st != old_st)
+    if (new_st != old_st) {
     entity.start = new_st.vtime;
+    }
     }
     return new_st;
     }
@@ -769,14 +993,14 @@ unsafe extern "C" fn bfq_forget_idle(st: *mut bfq_service_tree) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn bfq_bfqq_served(bfqq: *mut bfq_queue, served: c_int) {
-    void bfq_bfqq_served(struct bfq_queue *bfqq, int served)
-    {
-    struct bfq_entity *entity = &bfqq.entity;
-    struct bfq_service_tree *st;
-    if (!bfqq.service_from_backlogged)
+    let mut entity = &bfqq.entity;
+pub static mut st: *mut c_void = core::ptr::null_mut();
+    if (!bfqq.service_from_backlogged) {
     bfqq.first_IO_time = jiffies;
-    if (bfqq.wr_coeff > 1)
+    }
+    if (bfqq.wr_coeff > 1) {
     bfqq.service_from_wr += served;
+    }
     bfqq.service_from_backlogged += served;
     for_each_entity(entity) {
     st = bfq_entity_service_tree(entity);
@@ -813,26 +1037,23 @@ pub unsafe extern "C" fn bfq_bfqq_served(bfqq: *mut bfq_queue, served: c_int) {
 // correlated with the duration of the service slot. This is
 // especially true for short service slots.
 //
-    void bfq_bfqq_charge_time(struct bfq_data *bfqd, struct bfq_queue *bfqq,
-    unsigned long time_ms)
-    {
-    struct bfq_entity *entity = &bfqq.entity;
-    let mut timeout_ms: c_ulong = jiffies_to_msecs(bfq_timeout);
-    let mut bounded_time_ms: c_ulong = min(time_ms, timeout_ms);
-    int serv_to_charge_for_time =
-    (bfqd.bfq_max_budget * bounded_time_ms) / timeout_ms;
-    let mut tot_serv_to_charge: c_int = max(serv_to_charge_for_time, entity.service);
+#[no_mangle]
+pub unsafe extern "C" fn bfq_bfqq_charge_time(bfqd: *mut bfq_data, bfqq: *mut bfq_queue, time_ms: c_ulong) {
+    let mut entity = &bfqq.entity;
+pub static mut timeout_ms: c_ulong = 0;
+pub static mut bounded_time_ms: c_ulong = 0;
+    let mut serv_to_charge_for_time = (bfqd.bfq_max_budget * bounded_time_ms) / timeout_ms;
+pub static mut tot_serv_to_charge: c_int = 0;
 // Increase budget to avoid inconsistencies
-    if (tot_serv_to_charge > entity.budget)
+    if (tot_serv_to_charge > entity.budget) {
     entity.budget = tot_serv_to_charge;
+    }
     bfq_bfqq_served(bfqq,
     max_t(int, 0, tot_serv_to_charge - entity.service));
     }
-    static void bfq_update_fin_time_enqueue(struct bfq_entity *entity,
-    struct bfq_service_tree *st,
-    bool backshifted)
-    {
-    struct bfq_queue *bfqq = bfq_entity_to_bfqq(entity);
+#[no_mangle]
+pub unsafe extern "C" fn bfq_update_fin_time_enqueue(entity: *mut bfq_entity, st: *mut bfq_service_tree, backshifted: bool) {
+    let mut bfqq = bfq_entity_to_bfqq(entity);
 //
 // When this function is invoked, entity is not in any service
 // tree, then it is safe to invoke next function with the last
@@ -874,9 +1095,10 @@ pub unsafe extern "C" fn bfq_bfqq_served(bfqq: *mut bfq_queue, served: c_int) {
 // finish timestamps of non weight-raised queues.
 //
     if (backshifted && bfq_gt(st.vtime, entity.finish)) {
-    let mut delta: c_ulong = st.vtime - entity.finish;
-    if (bfqq)
+pub static mut delta: c_ulong = 0;
+    if (bfqq) {
     delta /= bfqq.wr_coeff;
+    }
     entity.start += delta;
     entity.finish += delta;
     }
@@ -894,18 +1116,18 @@ pub unsafe extern "C" fn bfq_bfqq_served(bfqq: *mut bfq_queue, served: c_int) {
 // inserts entity into its active tree, after possibly extracting it
 // from its idle tree.
 //
-    static void __bfq_activate_entity(struct bfq_entity *entity,
-    bool non_blocking_wait_rq)
-    {
-    struct bfq_service_tree *st = bfq_entity_service_tree(entity);
-    let mut backshifted: bool = false;
+#[no_mangle]
+pub unsafe extern "C" fn __bfq_activate_entity(entity: *mut bfq_entity, non_blocking_wait_rq: bool) {
+    let mut st = bfq_entity_service_tree(entity);
+pub static mut backshifted: bool = false;
     unsigned long long min_vstart;
 // See comments on bfq_fqq_update_budg_for_activation
     if (non_blocking_wait_rq && bfq_gt(st.vtime, entity.finish)) {
     backshifted = true;
     min_vstart = entity.finish;
-    } else
+    } else {
     min_vstart = st.vtime;
+    }
     if (entity.tree == &st.idle) {
 //
 // Must be on the idle tree, bfq_idle_extract() will
@@ -950,10 +1172,8 @@ pub unsafe extern "C" fn bfq_bfqq_served(bfqq: *mut bfq_queue, served: c_int) {
 //
 #[no_mangle]
 unsafe extern "C" fn __bfq_requeue_entity(entity: *mut bfq_entity) {
-    static void __bfq_requeue_entity(struct bfq_entity *entity)
-    {
-    struct bfq_sched_data *sd = entity.sched_data;
-    struct bfq_service_tree *st = bfq_entity_service_tree(entity);
+    let mut sd = entity.sched_data;
+    let mut st = bfq_entity_service_tree(entity);
     if (entity == sd.in_service_entity) {
 //
 // We are requeueing the current in-service entity,
@@ -992,8 +1212,9 @@ unsafe extern "C" fn __bfq_requeue_entity(entity: *mut bfq_entity) {
 // entity here, 2) update the finish time and requeue
 // the entity according to the new timestamps below.
 //
-    if (entity.tree)
+    if (entity.tree) {
     bfq_active_extract(st, entity);
+    }
     } else { /* The entity is already active, and not in service */
 //
 // In this case, this function gets called only if the
@@ -1013,23 +1234,24 @@ unsafe extern "C" fn __bfq_requeue_entity(entity: *mut bfq_entity) {
     }
     bfq_update_fin_time_enqueue(entity, st, false);
     }
-    static void __bfq_activate_requeue_entity(struct bfq_entity *entity,
-    bool non_blocking_wait_rq)
-    {
-    struct bfq_service_tree *st = bfq_entity_service_tree(entity);
+#[no_mangle]
+pub unsafe extern "C" fn __bfq_activate_requeue_entity(entity: *mut bfq_entity, non_blocking_wait_rq: bool) {
+    let mut st = bfq_entity_service_tree(entity);
     if (entity.sched_data.in_service_entity == entity ||
-    entity.tree == &st.active)
+    entity.tree == &st.active) {
 //
 // in service or already queued on the active tree,
 // requeue or reposition
 //
     __bfq_requeue_entity(entity);
-    else
+    }
+    else {
 //
 // Not in service and not queued on its active tree:
 // the activity is idle and this is a true activation.
 //
     __bfq_activate_entity(entity, non_blocking_wait_rq);
+    }
     }
 //
 // bfq_activate_requeue_entity - activate or requeue an entity representing a
@@ -1044,15 +1266,14 @@ unsafe extern "C" fn __bfq_requeue_entity(entity: *mut bfq_entity) {
 // @expiration: true if this function is being invoked in the expiration path
 // of the in-service queue
 //
-    static void bfq_activate_requeue_entity(struct bfq_entity *entity,
-    bool non_blocking_wait_rq,
-    bool requeue, bool expiration)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn bfq_activate_requeue_entity(entity: *mut bfq_entity, non_blocking_wait_rq: bool, requeue: bool, expiration: bool) {
     for_each_entity(entity) {
     __bfq_activate_requeue_entity(entity, non_blocking_wait_rq);
     if (!bfq_update_next_in_service(entity.sched_data, entity,
-    expiration) && !requeue)
+    expiration) && !requeue) {
     break;
+    }
     }
     }
 //
@@ -1067,16 +1288,15 @@ unsafe extern "C" fn __bfq_requeue_entity(entity: *mut bfq_entity) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __bfq_deactivate_entity(entity: *mut bfq_entity, ins_into_idle_tree: bool) -> bool {
-    bool __bfq_deactivate_entity(struct bfq_entity *entity, bool ins_into_idle_tree)
-    {
-    struct bfq_sched_data *sd = entity.sched_data;
-    struct bfq_service_tree *st;
-    bool is_in_service;
-    if (!entity.on_st_or_in_serv) /*
+    let mut sd = entity.sched_data;
+pub static mut st: *mut c_void = core::ptr::null_mut();
+    let mut is_in_service = 0;
+    if (!entity.on_st_or_in_serv) // {
 // entity never activated, or
 // already inactive
 //
     return false;
+    }
 //
 // If we get here, then entity is active, which implies that
 // bfq_group_set_parent has already been invoked for the group
@@ -1086,25 +1306,30 @@ pub unsafe extern "C" fn __bfq_deactivate_entity(entity: *mut bfq_entity, ins_in
     st = bfq_entity_service_tree(entity);
     is_in_service = entity == sd.in_service_entity;
     bfq_calc_finish(entity, entity.service);
-    if (is_in_service)
+    if (is_in_service) {
     sd.in_service_entity = core::ptr::null_mut();
-    else
+    }
+    else {
 //
 // Non in-service entity: nobody will take care of
 // resetting its service counter on expiration. Do it
 // now.
 //
     entity.service = 0;
-    if (entity.tree == &st.active)
+    }
+    if (entity.tree == &st.active) {
     bfq_active_extract(st, entity);
-#[no_mangle]
-pub unsafe extern "C" fn if(&st->idle: !is_in_service && entity->tree ==) -> else {
-    else if (!is_in_service && entity.tree == &st.idle)
+    }
+
+    else if (!is_in_service && entity.tree == &st.idle) {
     bfq_idle_extract(st, entity);
-    if (!ins_into_idle_tree || !bfq_gt(entity.finish, st.vtime))
+    }
+    if (!ins_into_idle_tree || !bfq_gt(entity.finish, st.vtime)) {
     bfq_forget_entity(st, entity, is_in_service);
-    else
+    }
+    else {
     bfq_idle_insert(st, entity);
+    }
     return true;
     }
 //
@@ -1114,12 +1339,10 @@ pub unsafe extern "C" fn if(&st->idle: !is_in_service && entity->tree ==) -> els
 // @expiration: true if this function is being invoked in the expiration path
 // of the in-service queue
 //
-    static void bfq_deactivate_entity(struct bfq_entity *entity,
-    bool ins_into_idle_tree,
-    bool expiration)
-    {
-    struct bfq_sched_data *sd;
-    struct bfq_entity *parent = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn bfq_deactivate_entity(entity: *mut bfq_entity, ins_into_idle_tree: bool, expiration: bool) {
+pub static mut sd: *mut c_void = core::ptr::null_mut();
+    let mut parent = core::ptr::null_mut();
     for_each_entity_safe(entity, parent) {
     sd = entity.sched_data;
     if (!__bfq_deactivate_entity(entity, ins_into_idle_tree)) {
@@ -1132,13 +1355,14 @@ pub unsafe extern "C" fn if(&st->idle: !is_in_service && entity->tree ==) -> els
 //
     return;
     }
-    if (sd.next_in_service == entity)
+    if (sd.next_in_service == entity) {
 //
 // entity was the next_in_service entity,
 // then, since entity has just been
 // deactivated, a new one must be found.
 //
     bfq_update_next_in_service(sd, core::ptr::null_mut(), expiration);
+    }
     if (sd.next_in_service || sd.in_service_entity) {
 //
 // The parent entity is still active, because
@@ -1192,7 +1416,7 @@ pub unsafe extern "C" fn if(&st->idle: !is_in_service && entity->tree ==) -> els
     __bfq_requeue_entity(entity);
     sd = entity.sched_data;
     if (!bfq_update_next_in_service(sd, entity, expiration) &&
-    !expiration)
+    !expiration) {
 //
 // next_in_service unchanged or not causing
 // any change in entity->parent->sd, and no
@@ -1200,6 +1424,7 @@ pub unsafe extern "C" fn if(&st->idle: !is_in_service && entity->tree ==) -> els
 // here.
 //
     break;
+    }
     }
     }
 //
@@ -1211,17 +1436,14 @@ pub unsafe extern "C" fn if(&st->idle: !is_in_service && entity->tree ==) -> els
 //
 #[no_mangle]
 unsafe extern "C" fn bfq_calc_vtime_jump(st: *mut bfq_service_tree) -> u64 {
-    static u64 bfq_calc_vtime_jump(struct bfq_service_tree *st)
-    {
-    struct bfq_entity *root_entity = bfq_root_active_entity(&st.active);
-    if (bfq_gt(root_entity.min_start, st.vtime))
+    let mut root_entity = bfq_root_active_entity(&st.active);
+    if (bfq_gt(root_entity.min_start, st.vtime)) {
     return root_entity.min_start;
+    }
     return st.vtime;
     }
 #[no_mangle]
 unsafe extern "C" fn bfq_update_vtime(st: *mut bfq_service_tree, new_value: u64) {
-    static void bfq_update_vtime(struct bfq_service_tree *st, u64 new_value)
-    {
     if (new_value > st.vtime) {
     st.vtime = new_value;
     bfq_forget_idle(st);
@@ -1239,26 +1461,26 @@ unsafe extern "C" fn bfq_update_vtime(st: *mut bfq_service_tree, new_value: u64)
 // the right is followed only if a) the left subtree contains no eligible
 // entities and b) no eligible entity has been found yet.
 //
-    static struct bfq_entity *bfq_first_active_entity(struct bfq_service_tree *st,
-    u64 vtime)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn bfq_first_active_entity(st: *mut bfq_service_tree, vtime: u64) -> *mut c_void {
     struct bfq_entity *entry, *first = core::ptr::null_mut();
-    struct rb_node *node = st.active.rb_node;
+    let mut node = st.active.rb_node;
     while (node) {
-    entry = rb_entry(node, struct bfq_entity, rb_node);
-    left:
-    if (!bfq_gt(entry.start, vtime))
+    entry = rb_entry(node, bfq_entity, rb_node);
+// label;
+    if (!bfq_gt(entry.start, vtime)) {
     first = entry;
+    }
     if (node.rb_left) {
-    entry = rb_entry(node.rb_left,
-    struct bfq_entity, rb_node);
+    entry = rb_entry(node.rb_left, bfq_entity, rb_node);
     if (!bfq_gt(entry.min_start, vtime)) {
     node = node.rb_left;
-    goto left;
+// goto;
     }
     }
-    if (first)
+    if (first) {
     break;
+    }
     node = node.rb_right;
     }
     return first;
@@ -1287,13 +1509,13 @@ unsafe extern "C" fn bfq_update_vtime(st: *mut bfq_service_tree, new_value: u64)
 // 2) is not eligible any more, or
 // 3) is idle.
 //
-    static struct bfq_entity *
-    __bfq_lookup_next_entity(struct bfq_service_tree *st, bool in_service)
-    {
-    struct bfq_entity *entity;
-    u64 new_vtime;
-    if (RB_EMPTY_ROOT(&st.active))
+#[no_mangle]
+pub unsafe extern "C" fn __bfq_lookup_next_entity(st: *mut bfq_service_tree, in_service: bool) -> *mut c_void {
+pub static mut entity: *mut c_void = core::ptr::null_mut();
+    let mut new_vtime = 0;
+    if (RB_EMPTY_ROOT(&st.active)) {
     return core::ptr::null_mut();
+    }
 //
 // Get the value of the system virtual time for which at
 // least one entity is eligible.
@@ -1309,8 +1531,9 @@ unsafe extern "C" fn bfq_update_vtime(st: *mut bfq_service_tree, new_value: u64)
 // entity is not on st, because it was extracted when set in
 // service).
 //
-    if (!in_service)
+    if (!in_service) {
     bfq_update_vtime(st, new_vtime);
+    }
     entity = bfq_first_active_entity(st, new_vtime);
     return entity;
     }
@@ -1323,13 +1546,12 @@ unsafe extern "C" fn bfq_update_vtime(st: *mut bfq_service_tree, new_value: u64)
 // for sd, and we need to know what is the new next entity to serve
 // after this change.
 //
-    static struct bfq_entity *bfq_lookup_next_entity(struct bfq_sched_data *sd,
-    bool expiration)
-    {
-    struct bfq_service_tree *st = sd.service_tree;
-    struct bfq_service_tree *idle_class_st = st + (BFQ_IOPRIO_CLASSES - 1);
-    struct bfq_entity *entity = core::ptr::null_mut();
-    let mut class_idx: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn bfq_lookup_next_entity(sd: *mut bfq_sched_data, expiration: bool) -> *mut c_void {
+    let mut st = sd.service_tree;
+    let mut idle_class_st = st + (BFQ_IOPRIO_CLASSES - 1);
+    let mut entity = core::ptr::null_mut();
+pub static mut class_idx: c_int = 0;
 //
 // Choose from idle class, if needed to guarantee a minimum
 // bandwidth to this class (and if there is some active entity
@@ -1339,8 +1561,9 @@ unsafe extern "C" fn bfq_update_vtime(st: *mut bfq_service_tree, new_value: u64)
 //
     if (time_is_before_jiffies(sd.bfq_class_idle_last_service +
     BFQ_CL_IDLE_TIMEOUT)) {
-    if (!RB_EMPTY_ROOT(&idle_class_st.active))
+    if (!RB_EMPTY_ROOT(&idle_class_st.active)) {
     class_idx = BFQ_IOPRIO_CLASSES - 1;
+    }
 // About to be served if backlogged, or not yet backlogged
     sd.bfq_class_idle_last_service = jiffies;
     }
@@ -1348,7 +1571,7 @@ unsafe extern "C" fn bfq_update_vtime(st: *mut bfq_service_tree, new_value: u64)
 // Find the next entity to serve for the highest-priority
 // class, unless the idle class needs to be served.
 //
-    for (; class_idx < BFQ_IOPRIO_CLASSES; class_idx++) {
+    while (class_idx < BFQ_IOPRIO_CLASSES) {
 //
 // If expiration is true, then bfq_lookup_next_entity
 // is being invoked as a part of the expiration path
@@ -1367,35 +1590,35 @@ unsafe extern "C" fn bfq_update_vtime(st: *mut bfq_service_tree, new_value: u64)
     entity = __bfq_lookup_next_entity(st + class_idx,
     sd.in_service_entity &&
     !expiration);
-    if (entity)
+    if (entity) {
     break;
+    }
     }
     return entity;
     }
 #[no_mangle]
 pub unsafe extern "C" fn next_queue_may_preempt(bfqd: *mut bfq_data) -> bool {
-    bool next_queue_may_preempt(struct bfq_data *bfqd)
-    {
-    struct bfq_sched_data *sd = &bfqd.root_group.sched_data;
+    let mut sd = &bfqd.root_group.sched_data;
     return sd.next_in_service != sd.in_service_entity;
     }
 //
 // Get next queue for service.
 //
-    struct bfq_queue *bfq_get_next_queue(struct bfq_data *bfqd)
-    {
-    struct bfq_entity *entity = core::ptr::null_mut();
-    struct bfq_sched_data *sd;
-    struct bfq_queue *bfqq;
-    if (bfq_tot_busy_queues(bfqd) == 0)
+#[no_mangle]
+pub unsafe extern "C" fn bfq_get_next_queue(bfqd: *mut bfq_data) -> *mut c_void {
+    let mut entity = core::ptr::null_mut();
+pub static mut sd: *mut c_void = core::ptr::null_mut();
+pub static mut bfqq: *mut c_void = core::ptr::null_mut();
+    if (bfq_tot_busy_queues(bfqd) == 0) {
     return core::ptr::null_mut();
+    }
 //
 // Traverse the path from the root to the leaf entity to
 // serve. Set in service all the entities visited along the
 // way.
 //
     sd = &bfqd.root_group.sched_data;
-    for (; sd ; sd = entity.my_sched_data) {
+    while (sd ) {
 //
 // WARNING. We are about to set the in-service entity
 // to sd->next_in_service, i.e., to the (cached) value
@@ -1430,9 +1653,10 @@ pub unsafe extern "C" fn next_queue_may_preempt(bfqd: *mut bfq_data) -> bool {
 // comments on the function
 // bfq_no_longer_next_in_service() for details.
 //
-    if (bfq_no_longer_next_in_service(entity))
+    if (bfq_no_longer_next_in_service(entity)) {
     bfq_active_extract(bfq_entity_service_tree(entity),
     entity);
+    }
 //
 // Even if entity is not to be extracted according to
 // the above check, a descendant entity may get
@@ -1458,20 +1682,19 @@ pub unsafe extern "C" fn next_queue_may_preempt(bfqd: *mut bfq_data) -> bool {
 // path from the leaf entity just set in service to the root.
 //
     for_each_entity(entity) {
-    struct bfq_sched_data *sd = entity.sched_data;
-    if (!bfq_update_next_in_service(sd, core::ptr::null_mut(), false))
+    let mut sd = entity.sched_data;
+    if (!bfq_update_next_in_service(sd, core::ptr::null_mut(), false)) {
     break;
+    }
     }
     return bfqq;
     }
 // returns true if the in-service queue gets freed
 #[no_mangle]
 pub unsafe extern "C" fn __bfq_bfqd_reset_in_service(bfqd: *mut bfq_data) -> bool {
-    bool __bfq_bfqd_reset_in_service(struct bfq_data *bfqd)
-    {
-    struct bfq_queue *in_serv_bfqq = bfqd.in_service_queue;
-    struct bfq_entity *in_serv_entity = &in_serv_bfqq.entity;
-    struct bfq_entity *entity = in_serv_entity;
+    let mut in_serv_bfqq = bfqd.in_service_queue;
+    let mut in_serv_entity = &in_serv_bfqq.entity;
+    let mut entity = in_serv_entity;
     bfq_clear_bfqq_wait_request(in_serv_bfqq);
     hrtimer_try_to_cancel(&bfqd.idle_slice_timer);
     bfqd.in_service_queue = core::ptr::null_mut();
@@ -1481,8 +1704,9 @@ pub unsafe extern "C" fn __bfq_bfqd_reset_in_service(bfqd: *mut bfq_data) -> boo
 // execute the final step: reset in_service_entity along the
 // path from entity to the root.
 //
-    for_each_entity(entity)
+    for_each_entity(entity) {
     entity.sched_data.in_service_entity = core::ptr::null_mut();
+    }
 //
 // in_serv_entity is no longer in service, so, if it is in no
 // service tree either, then release the service reference to
@@ -1495,58 +1719,53 @@ pub unsafe extern "C" fn __bfq_bfqd_reset_in_service(bfqd: *mut bfq_data) -> boo
 // reference to the queue. If this is the case, then
 // bfqq gets freed here.
 //
-    let mut ref: c_int = in_serv_bfqq.ref;
+pub static mut ref: c_int = 0;
     bfq_put_queue(in_serv_bfqq);
-    if (ref == 1)
+    if (ref == 1) {
     return true;
+    }
     }
     return false;
     }
-    void bfq_deactivate_bfqq(struct bfq_data *bfqd, struct bfq_queue *bfqq,
-    bool ins_into_idle_tree, bool expiration)
-    {
-    struct bfq_entity *entity = &bfqq.entity;
+#[no_mangle]
+pub unsafe extern "C" fn bfq_deactivate_bfqq(bfqd: *mut bfq_data, bfqq: *mut bfq_queue, ins_into_idle_tree: bool, expiration: bool) {
+    let mut entity = &bfqq.entity;
     bfq_deactivate_entity(entity, ins_into_idle_tree, expiration);
     }
 #[no_mangle]
 pub unsafe extern "C" fn bfq_activate_bfqq(bfqd: *mut bfq_data, bfqq: *mut bfq_queue) {
-    void bfq_activate_bfqq(struct bfq_data *bfqd, struct bfq_queue *bfqq)
-    {
-    struct bfq_entity *entity = &bfqq.entity;
+    let mut entity = &bfqq.entity;
     bfq_activate_requeue_entity(entity, bfq_bfqq_non_blocking_wait_rq(bfqq),
     false, false);
     bfq_clear_bfqq_non_blocking_wait_rq(bfqq);
     }
-    void bfq_requeue_bfqq(struct bfq_data *bfqd, struct bfq_queue *bfqq,
-    bool expiration)
-    {
-    struct bfq_entity *entity = &bfqq.entity;
+#[no_mangle]
+pub unsafe extern "C" fn bfq_requeue_bfqq(bfqd: *mut bfq_data, bfqq: *mut bfq_queue, expiration: bool) {
+    let mut entity = &bfqq.entity;
     bfq_activate_requeue_entity(entity, false,
     bfqq == bfqd.in_service_queue, expiration);
     }
 #[no_mangle]
 pub unsafe extern "C" fn bfq_add_bfqq_in_groups_with_pending_reqs(bfqq: *mut bfq_queue) {
-    void bfq_add_bfqq_in_groups_with_pending_reqs(struct bfq_queue *bfqq)
-    {
 
-    struct bfq_entity *entity = &bfqq.entity;
+    let mut entity = &bfqq.entity;
     if (!entity.in_groups_with_pending_reqs) {
     entity.in_groups_with_pending_reqs = true;
-    if (!(bfqq_group(bfqq).num_queues_with_pending_reqs++))
-    bfqq.bfqd.num_groups_with_pending_reqs++;
+    if (!(bfqq_group(bfqq).num_queues_with_pending_reqs++)) {
+    bfqq.bfqd.num_groups_with_pending_reqs += 1;
+    }
     }
 
     }
 #[no_mangle]
 pub unsafe extern "C" fn bfq_del_bfqq_in_groups_with_pending_reqs(bfqq: *mut bfq_queue) {
-    void bfq_del_bfqq_in_groups_with_pending_reqs(struct bfq_queue *bfqq)
-    {
 
-    struct bfq_entity *entity = &bfqq.entity;
+    let mut entity = &bfqq.entity;
     if (entity.in_groups_with_pending_reqs) {
     entity.in_groups_with_pending_reqs = false;
-    if (!(--bfqq_group(bfqq).num_queues_with_pending_reqs))
-    bfqq.bfqd.num_groups_with_pending_reqs--;
+    if (!(--bfqq_group(bfqq).num_queues_with_pending_reqs)) {
+    bfqq.bfqd.num_groups_with_pending_reqs -= 1;
+    }
     }
 
     }
@@ -1557,14 +1776,13 @@ pub unsafe extern "C" fn bfq_del_bfqq_in_groups_with_pending_reqs(bfqq: *mut bfq
 //
 #[no_mangle]
 pub unsafe extern "C" fn bfq_del_bfqq_busy(bfqq: *mut bfq_queue, expiration: bool) {
-    void bfq_del_bfqq_busy(struct bfq_queue *bfqq, bool expiration)
-    {
-    struct bfq_data *bfqd = bfqq.bfqd;
+    let mut bfqd = bfqq.bfqd;
     bfq_log_bfqq(bfqd, bfqq, "del from busy");
     bfq_clear_bfqq_busy(bfqq);
     bfqd.busy_queues[bfqq.ioprio_class - 1]--;
-    if (bfqq.wr_coeff > 1)
-    bfqd.wr_busy_queues--;
+    if (bfqq.wr_coeff > 1) {
+    bfqd.wr_busy_queues -= 1;
+    }
     bfqg_stats_update_dequeue(bfqq_group(bfqq));
     bfq_deactivate_bfqq(bfqd, bfqq, true, expiration);
     if (!bfqq.dispatched) {
@@ -1581,20 +1799,20 @@ pub unsafe extern "C" fn bfq_del_bfqq_busy(bfqq: *mut bfq_queue, expiration: boo
 //
 #[no_mangle]
 pub unsafe extern "C" fn bfq_add_bfqq_busy(bfqq: *mut bfq_queue) {
-    void bfq_add_bfqq_busy(struct bfq_queue *bfqq)
-    {
-    struct bfq_data *bfqd = bfqq.bfqd;
+    let mut bfqd = bfqq.bfqd;
     bfq_log_bfqq(bfqd, bfqq, "add to busy");
     bfq_activate_bfqq(bfqd, bfqq);
     bfq_mark_bfqq_busy(bfqq);
     bfqd.busy_queues[bfqq.ioprio_class - 1]++;
     if (!bfqq.dispatched) {
     bfq_add_bfqq_in_groups_with_pending_reqs(bfqq);
-    if (bfqq.wr_coeff == 1)
+    if (bfqq.wr_coeff == 1) {
     bfq_weights_tree_add(bfqq);
     }
-    if (bfqq.wr_coeff > 1)
-    bfqd.wr_busy_queues++;
+    }
+    if (bfqq.wr_coeff > 1) {
+    bfqd.wr_busy_queues += 1;
+    }
 // Move bfqq to the head of the woken list of its waker
     if (!hlist_unhashed(&bfqq.woken_list_node) &&
     &bfqq.woken_list_node != bfqq.waker_bfqq.woken_list.first) {

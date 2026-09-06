@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0+
@@ -63,10 +313,10 @@ pub const RCUTORTURE_RDR_RCU_2: c_uint = 0x40	//  ... entering another RCU reade
 pub const RCUTORTURE_RDR_UPDOWN: c_uint = 0x80	//  ... up-read from task, down-read from timer.;
 // Note: Manual start, automatic end.
 
-    (RCUTORTURE_RDR_BH | RCUTORTURE_RDR_IRQ | RCUTORTURE_RDR_PREEMPT | \
+    (RCUTORTURE_RDR_BH | RCUTORTURE_RDR_IRQ | RCUTORTURE_RDR_PREEMPT | 
     RCUTORTURE_RDR_RBH | RCUTORTURE_RDR_SCHED)  // Intentionally omit RCUTORTURE_RDR_UPDOWN.
 
-    (RCUTORTURE_MAX_EXTEND | RCUTORTURE_RDR_RCU_1 | RCUTORTURE_RDR_RCU_2 | \
+    (RCUTORTURE_MAX_EXTEND | RCUTORTURE_RDR_RCU_1 | RCUTORTURE_RDR_RCU_2 | 
     RCUTORTURE_RDR_MASK_1 | RCUTORTURE_RDR_MASK_2)
 pub const RCUTORTURE_RDR_MAX_LOOPS: c_uint = 0x7	/* Maximum reader extensions. */;
 // Must be power of two minus one.
@@ -143,25 +393,25 @@ pub const RCUTORTURE_RDR_MAX_LOOPS: c_uint = 0x7	/* Maximum reader extensions. *
     torture_param(int, test_srcu_lockdep, 0, "Test specified SRCU deadlock scenario.");
     torture_param(int, verbose, 1, "Enable verbose debugging printk()s");
     static char *torture_type = "rcu";
-    module_param(torture_type, charp, 0444);
+    module_param!(torture_type, charp, 0444);
     MODULE_PARM_DESC(torture_type, "Type of RCU to torture (rcu, srcu, ...)");
     static int nrealnocbers;
     static int nrealreaders;
     static int nrealfakewriters;
-    static struct task_struct *writer_task;
-    static struct task_struct **fakewriter_tasks;
-    static struct task_struct **reader_tasks;
-    static struct task_struct *updown_task;
-    static struct task_struct **nocb_tasks;
-    static struct task_struct *stats_task;
-    static struct task_struct *fqs_task;
+pub static mut writer_task: *mut c_void = core::ptr::null_mut();
+pub static mut fakewriter_tasks: *mut c_void = core::ptr::null_mut();
+pub static mut reader_tasks: *mut c_void = core::ptr::null_mut();
+pub static mut updown_task: *mut c_void = core::ptr::null_mut();
+pub static mut nocb_tasks: *mut c_void = core::ptr::null_mut();
+pub static mut stats_task: *mut c_void = core::ptr::null_mut();
+pub static mut fqs_task: *mut c_void = core::ptr::null_mut();
     static struct task_struct *boost_tasks[NR_CPUS];
-    static struct task_struct *stall_task;
-    static struct task_struct **fwd_prog_tasks;
-    static struct task_struct **barrier_cbs_tasks;
-    static struct task_struct *barrier_task;
-    static struct task_struct *read_exit_task;
-    static struct task_struct *preempt_task;
+pub static mut stall_task: *mut c_void = core::ptr::null_mut();
+pub static mut fwd_prog_tasks: *mut c_void = core::ptr::null_mut();
+pub static mut barrier_cbs_tasks: *mut c_void = core::ptr::null_mut();
+pub static mut barrier_task: *mut c_void = core::ptr::null_mut();
+pub static mut read_exit_task: *mut c_void = core::ptr::null_mut();
+pub static mut preempt_task: *mut c_void = core::ptr::null_mut();
 pub const RCU_TORTURE_PIPE_LEN: c_int = 10;
 // Mailbox-like structure to check RCU global memory ordering.
 #[repr(C)]
@@ -172,7 +422,7 @@ pub struct rcu_torture_reader_check {
     pub rtc_chkloops: c_ulong,
     pub rtc_ready: c_int,
     pub rtc_assigner: *mut rcu_torture_reader_check,
-    pub ____cacheline_internodealigned_in_smp: },
+}
 // Update-side data structure used to check RCU readers.
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -184,15 +434,15 @@ pub struct rcu_torture {
     pub rtort_chkp: *mut rcu_torture_reader_check,
 }
 
-    static LIST_HEAD(rcu_torture_freelist);
-    static struct rcu_torture __rcu *rcu_torture_current;
+pub static mut rcu_torture_freelist: usize = 0;
+    static struct rcu_torture  *rcu_torture_current;
     static unsigned long rcu_torture_current_version;
     static struct rcu_torture rcu_tortures[10 * RCU_TORTURE_PIPE_LEN];
-    static DEFINE_SPINLOCK(rcu_torture_lock);
-    static DEFINE_PER_CPU(long [RCU_TORTURE_PIPE_LEN + 1], rcu_torture_count);
-    static DEFINE_PER_CPU(long [RCU_TORTURE_PIPE_LEN + 1], rcu_torture_batch);
+pub static mut rcu_torture_lock: usize = 0;
+pub static mut long [RCU_TORTURE_PIPE_LEN + 1]: usize = 0;
+pub static mut long [RCU_TORTURE_PIPE_LEN + 1]: usize = 0;
     static atomic_t rcu_torture_wcount[RCU_TORTURE_PIPE_LEN + 1];
-    static struct rcu_torture_reader_check *rcu_torture_reader_mbchk;
+pub static mut rcu_torture_reader_mbchk: *mut c_void = core::ptr::null_mut();
     static atomic_t n_rcu_torture_alloc;
     static atomic_t n_rcu_torture_alloc_fail;
     static atomic_t n_rcu_torture_free;
@@ -209,7 +459,7 @@ pub struct rcu_torture {
     static long n_barrier_attempts;
     static long n_barrier_successes; /* did rcu_barrier test succeed? */
     static unsigned long n_read_exits;
-    static struct list_head rcu_torture_removed;
+pub static mut rcu_torture_removed: usize = 0;
     static unsigned long shutdown_jiffies;
     static unsigned long start_gp_seq;
     static atomic_long_t n_nocb_offload;
@@ -287,25 +537,22 @@ pub struct rt_read_seg {
     static int rt_read_preempted;
     static const char *rcu_torture_writer_state_getname(void)
     {
-    let mut i: c_uint = READ_ONCE(rcu_torture_writer_state);
-    if (i >= ARRAY_SIZE(rcu_torture_writer_state_names))
+pub static mut i: c_uint = 0;
+    if (i >= ARRAY_SIZE!(rcu_torture_writer_state_names)) {
     return "???";
+    }
     return rcu_torture_writer_state_names[i];
     }
 
 #[no_mangle]
 unsafe extern "C" fn rcu_trace_clock_local() -> u64 notrace {
-    static u64 notrace rcu_trace_clock_local(void)
-    {
-    let mut ts: u64 = trace_clock_local();
+pub static mut ts: u64 = 0;
     (void)do_div(ts, NSEC_PER_USEC);
     return ts;
     }
 
 #[no_mangle]
 unsafe extern "C" fn rcu_trace_clock_local() -> u64 notrace {
-    static u64 notrace rcu_trace_clock_local(void)
-    {
     return 0ULL;
     }
 
@@ -315,26 +562,23 @@ unsafe extern "C" fn rcu_trace_clock_local() -> u64 notrace {
 //
 #[no_mangle]
 unsafe extern "C" fn shutdown_time_arrived() -> bool {
-    static bool shutdown_time_arrived(void)
-    {
     return shutdown_secs && time_after(jiffies, shutdown_jiffies - 30 * HZ);
     }
     static unsigned long boost_starttime;	/* jiffies of next boost test start. */
-    static DEFINE_MUTEX(boost_mutex);	/* protect setting boost_starttime */
+pub static mut boost_mutex: usize = 0;	/* protect setting boost_starttime */
 // and boost task create/destroy.
     static atomic_t barrier_cbs_count;	/* Barrier callbacks registered. */
     static bool barrier_phase;		/* Test phase. */
     static atomic_t barrier_cbs_invoked;	/* Barrier callbacks invoked. */
-    static wait_queue_head_t *barrier_cbs_wq; /* Coordinate barrier testing. */
-    static DECLARE_WAIT_QUEUE_HEAD(barrier_wq);
+pub static mut barrier_cbs_wq: *mut c_void = core::ptr::null_mut(); /* Coordinate barrier testing. */
+pub static mut barrier_wq: usize = 0;
     static atomic_t rcu_fwd_cb_nodelay;	/* Short rcu_torture_delay() delays. */
 //
 // Allocate an element from the rcu_tortures pool.
 //
-    static struct rcu_torture *
-    rcu_torture_alloc(void)
-    {
-    struct list_head *p;
+#[no_mangle]
+pub unsafe extern "C" fn rcu_torture_alloc() -> *mut c_void {
+pub static mut p: *mut c_void = core::ptr::null_mut();
     spin_lock_bh(&rcu_torture_lock);
     if (list_empty(&rcu_torture_freelist)) {
     atomic_inc(&n_rcu_torture_alloc_fail);
@@ -345,14 +589,13 @@ unsafe extern "C" fn shutdown_time_arrived() -> bool {
     p = rcu_torture_freelist.next;
     list_del_init(p);
     spin_unlock_bh(&rcu_torture_lock);
-    return container_of(p, struct rcu_torture, rtort_free);
+    return container_of!(p, rcu_torture, rtort_free);
     }
 //
 // Free an element to the rcu_tortures pool.
 //
-    static void
-    rcu_torture_free(struct rcu_torture *p)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn rcu_torture_free(p: *mut rcu_torture) {
     atomic_inc(&n_rcu_torture_free);
     spin_lock_bh(&rcu_torture_lock);
     list_add_tail(&p.rtort_free, &rcu_torture_freelist);
@@ -368,38 +611,38 @@ pub struct rcu_torture_ops {
     pub (*init)(void): *mut c_void,
     pub (*cleanup)(void): *mut c_void,
     pub (*readlock)(void): *mut c_int,
-    void (*read_delay)(struct torture_random_state *rrsp,
+    void (*read_delay)(torture_random_state *rrsp,
     pub rtrsp): *mut rt_read_seg,
-    pub idx): *mut *mut void (readunlock)(int,
+    pub idx): *mut *mut c_void (readunlock)(int,
     pub lockdep.: *mut *mut int (readlock_held)(void); //,
     pub not.: *mut *mut int (readlock_nesting)(void); // actual nesting, if available, -1 if,
     pub (*down_read)(void): *mut c_int,
-    pub idx): *mut *mut void (up_read)(int,
+    pub idx): *mut *mut c_void (up_read)(int,
     pub (*get_gp_seq)(void): *mut c_ulong,
     pub old): *mut *mut unsigned long (gp_diff)(unsigned long new, unsigned long,
-    pub p): *mut *mut void (deferred_free)(struct rcu_torture,
+    pub p): *mut *mut c_void (deferred_free)(rcu_torture,
     pub (*sync)(void): *mut c_void,
     pub (*exp_sync)(void): *mut c_void,
     pub (*exp_current)(void): *mut c_void,
     pub (*get_gp_state_exp)(void): *mut c_ulong,
     pub (*start_gp_poll_exp)(void): *mut c_ulong,
-    pub gsp): *mut *mut void (start_gp_poll_exp_full)(struct rcu_gp_seq,
+    pub gsp): *mut *mut c_void (start_gp_poll_exp_full)(rcu_gp_seq,
     pub oldstate): *mut *mut bool (poll_gp_state_exp)(unsigned long,
-    pub oldstate): *mut *mut void (cond_sync_exp)(unsigned long,
-    pub gsp): *mut *mut void (cond_sync_exp_full)(struct rcu_gp_seq,
+    pub oldstate): *mut *mut c_void (cond_sync_exp)(unsigned long,
+    pub gsp): *mut *mut c_void (cond_sync_exp_full)(rcu_gp_seq,
     pub (*get_comp_state)(void): *mut c_ulong,
-    pub gsp): *mut *mut void (get_comp_state_full)(struct rcu_gp_seq,
+    pub gsp): *mut *mut c_void (get_comp_state_full)(rcu_gp_seq,
     pub oldstate2): *mut *mut bool (same_gp_state)(unsigned long oldstate1, unsigned long,
-    pub rgosp2): *mut *mut *mut bool (same_gp_state_full)(struct rcu_gp_seq rgosp1, struct rcu_gp_seq,
+    pub rgosp2): *mut *mut *mut bool (same_gp_state_full)(rcu_gp_seq rgosp1, rcu_gp_seq,
     pub (*get_gp_state)(void): *mut c_ulong,
-    pub gsp): *mut *mut void (get_gp_state_full)(struct rcu_gp_seq,
+    pub gsp): *mut *mut c_void (get_gp_state_full)(rcu_gp_seq,
     pub (*start_gp_poll)(void): *mut c_ulong,
-    pub gsp): *mut *mut void (start_gp_poll_full)(struct rcu_gp_seq,
+    pub gsp): *mut *mut c_void (start_gp_poll_full)(rcu_gp_seq,
     pub oldstate): *mut *mut bool (poll_gp_state)(unsigned long,
-    pub gsp): *mut *mut bool (poll_gp_state_full)(struct rcu_gp_seq,
+    pub gsp): *mut *mut bool (poll_gp_state_full)(rcu_gp_seq,
     pub poll_full): *mut *mut bool (poll_need_2gp)(bool poll, bool,
-    pub oldstate): *mut *mut void (cond_sync)(unsigned long,
-    pub gsp): *mut *mut void (cond_sync_full)(struct rcu_gp_seq,
+    pub oldstate): *mut *mut c_void (cond_sync)(unsigned long,
+    pub gsp): *mut *mut c_void (cond_sync_full)(rcu_gp_seq,
     pub poll_active: c_int,
     pub poll_active_full: c_int,
     pub call: call_rcu_func_t,
@@ -409,13 +652,13 @@ pub struct rcu_torture_ops {
     pub (*gp_kthread_dbg)(void): *mut c_void,
     pub cpup): *mut *mut bool (check_boost_failed)(unsigned long gp_state, int,
     pub (*stall_dur)(void): *mut c_int,
-    pub gp_seq): *mut *mut *mut void (get_gp_data)(int flags, unsigned long,
-    pub rgssp): *mut *mut void (gp_slow_register)(atomic_t,
-    pub rgssp): *mut *mut void (gp_slow_unregister)(atomic_t,
+    pub gp_seq): *mut *mut *mut c_void (get_gp_data)(int flags, unsigned long,
+    pub rgssp): *mut *mut c_void (gp_slow_register)(atomic_t,
+    pub rgssp): *mut *mut c_void (gp_slow_unregister)(atomic_t,
     pub (*reader_blocked)(void): *mut bool,
     pub (*gather_gp_seqs)(void): *mut c_ulonglong,
-    pub len): *mut *mut *mut void (format_gp_seqs)(unsigned long long seqs, char cp, size_t,
-    pub lag): *mut *mut void (set_gpwrap_lag)(unsigned long,
+    pub len): *mut *mut *mut c_void (format_gp_seqs)(unsigned long long seqs, char cp, size_t,
+    pub lag): *mut *mut c_void (set_gpwrap_lag)(unsigned long,
     pub cpu): *mut *mut int (get_gpwrap_count)(int,
     pub (*is_task_rcu_boosted)(void): *mut bool,
     pub cbflood_max: c_long,
@@ -430,42 +673,39 @@ pub struct rcu_torture_ops {
     pub name: *const c_char,
 }
 
-    static struct rcu_torture_ops *cur_ops;
+pub static mut cur_ops: *mut c_void = core::ptr::null_mut();
 //
 // Definitions for rcu torture testing.
 //
 #[no_mangle]
 unsafe extern "C" fn torture_readlock_not_held() -> c_int {
-    static int torture_readlock_not_held(void)
-    {
     return rcu_read_lock_bh_held() || rcu_read_lock_sched_held();
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_read_lock() -> c_int {
-    static int rcu_torture_read_lock(void)
-    {
     rcu_read_lock();
     return 0;
     }
-    static void
-    rcu_read_delay(struct torture_random_state *rrsp, struct rt_read_seg *rtrsp)
-    {
-    unsigned long started;
-    unsigned long completed;
-    let mut shortdelay_us: c_ulong = 200;
-    let mut longdelay_ms: c_ulong = 300;
+#[no_mangle]
+pub unsafe extern "C" fn rcu_read_delay(rrsp: *mut torture_random_state, rtrsp: *mut rt_read_seg) {
+    let mut started = 0;
+    let mut completed = 0;
+pub static mut shortdelay_us: c_ulong = 200;
+pub static mut longdelay_ms: c_ulong = 300;
     unsigned long long ts;
 // If there is a forward-progress test in flight, don't delay.
-    if (atomic_read(&rcu_fwd_cb_nodelay))
+    if (atomic_read(&rcu_fwd_cb_nodelay)) {
     return;
+    }
 // We want a short delay sometimes to make a reader delay the grace
 // period, and we want a long delay occasionally to trigger
 // force_quiescent_state.
     if (!(torture_random(rrsp) % (nrealreaders * 2000 * longdelay_ms))) {
     started = cur_ops.get_gp_seq();
     ts = rcu_trace_clock_local();
-    if ((preempt_count() & HARDIRQ_MASK) || softirq_count())
+    if ((preempt_count() & HARDIRQ_MASK) || softirq_count()) {
     longdelay_ms = 5; /* Avoid triggering BH limits. */
+    }
     mdelay(longdelay_ms);
     rtrsp.rt_delay_ms = longdelay_ms;
     completed = cur_ops.get_gp_seq();
@@ -477,40 +717,39 @@ unsafe extern "C" fn rcu_torture_read_lock() -> c_int {
     rtrsp.rt_delay_us = shortdelay_us;
     }
     if (!preempt_count() &&
-    !(torture_random(rrsp) % (nrealreaders * 500)))
+    !(torture_random(rrsp) % (nrealreaders * 500))) {
     torture_preempt_schedule();  /* QS only if preemptible. */
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_read_unlock(idx: c_int) {
-    static void rcu_torture_read_unlock(int idx)
-    {
     rcu_read_unlock();
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_readlock_nesting() -> c_int {
-    static int rcu_torture_readlock_nesting(void)
-    {
-    if (IS_ENABLED(CONFIG_PREEMPT_RCU))
+    if (IS_ENABLED!(CONFIG_PREEMPT_RCU)) {
     return rcu_preempt_depth();
-    if (IS_ENABLED(CONFIG_PREEMPT_COUNT))
+    }
+    if (IS_ENABLED!(CONFIG_PREEMPT_COUNT)) {
     return (preempt_count() & PREEMPT_MASK);
+    }
     return -1;
     }
 //
 // Update callback in the pipe.  This should be invoked after a grace period.
 //
-    static bool
-    rcu_torture_pipe_update_one(struct rcu_torture *rp)
-    {
-    int i;
-    struct rcu_torture_reader_check *rtrcp = READ_ONCE(rp.rtort_chkp);
+#[no_mangle]
+pub unsafe extern "C" fn rcu_torture_pipe_update_one(rp: *mut rcu_torture) -> bool {
+    let mut i = 0;
+    let mut rtrcp = READ_ONCE(rp.rtort_chkp);
     if (rtrcp) {
     WRITE_ONCE(rp.rtort_chkp, core::ptr::null_mut());
     smp_store_release(&rtrcp.rtc_ready, 1); // Pair with smp_load_acquire().
     }
     i = rp.rtort_pipe_count;
-    if (i > RCU_TORTURE_PIPE_LEN)
+    if (i > RCU_TORTURE_PIPE_LEN) {
     i = RCU_TORTURE_PIPE_LEN;
+    }
     atomic_inc(&rcu_torture_wcount[i]);
     WRITE_ONCE(rp.rtort_pipe_count, i + 1);
     ASSERT_EXCLUSIVE_WRITER(rp.rtort_pipe_count);
@@ -524,13 +763,13 @@ unsafe extern "C" fn rcu_torture_readlock_nesting() -> c_int {
 // Update all callbacks in the pipe.  Suitable for synchronous grace-period
 // primitives.
 //
-    static void
-    rcu_torture_pipe_update(struct rcu_torture *old_rp)
-    {
-    struct rcu_torture *rp;
-    struct rcu_torture *rp1;
-    if (old_rp)
+#[no_mangle]
+pub unsafe extern "C" fn rcu_torture_pipe_update(old_rp: *mut rcu_torture) {
+pub static mut rp: *mut c_void = core::ptr::null_mut();
+pub static mut rp1: *mut c_void = core::ptr::null_mut();
+    if (old_rp) {
     list_add(&old_rp.rtort_free, &rcu_torture_removed);
+    }
     list_for_each_entry_safe(rp, rp1, &rcu_torture_removed, rtort_free) {
     if (rcu_torture_pipe_update_one(rp)) {
     list_del(&rp.rtort_free);
@@ -538,102 +777,38 @@ unsafe extern "C" fn rcu_torture_readlock_nesting() -> c_int {
     }
     }
     }
-    static void
-    rcu_torture_cb(struct rcu_head *p)
-    {
-    struct rcu_torture *rp = container_of(p, struct rcu_torture, rtort_rcu);
+#[no_mangle]
+pub unsafe extern "C" fn rcu_torture_cb(p: *mut rcu_head) {
+    let mut rp = container_of!(p, rcu_torture, rtort_rcu);
     if (torture_must_stop_irq()) {
 // Test is ending, just drop callbacks on the floor.
 // The next initialization will pick up the pieces.
     return;
     }
-    if (rcu_torture_pipe_update_one(rp))
+    if (rcu_torture_pipe_update_one(rp)) {
     rcu_torture_free(rp);
-    else
+    }
+    else {
     cur_ops.deferred_free(rp);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_no_completed() -> c_ulong {
-    static unsigned long rcu_no_completed(void)
-    {
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_deferred_free(p: *mut rcu_torture) {
-    static void rcu_torture_deferred_free(struct rcu_torture *p)
-    {
     call_rcu(&p.rtort_rcu, rcu_torture_cb);
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_sync_torture_init() {
-    static void rcu_sync_torture_init(void)
-    {
     INIT_LIST_HEAD(&rcu_torture_removed);
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_poll_need_2gp(poll: bool, poll_full: bool) -> bool {
-    static bool rcu_poll_need_2gp(bool poll, bool poll_full)
-    {
     return poll;
     }
-    static struct rcu_torture_ops rcu_ops = {
-    .ttype			= RCU_FLAVOR,
-    .init			= rcu_sync_torture_init,
-    .readlock		= rcu_torture_read_lock,
-    .read_delay		= rcu_read_delay,
-    .readunlock		= rcu_torture_read_unlock,
-    .readlock_held		= torture_readlock_not_held,
-    .readlock_nesting	= rcu_torture_readlock_nesting,
-    .get_gp_seq		= rcu_get_gp_seq,
-    .gp_diff		= rcu_seq_diff,
-    .deferred_free		= rcu_torture_deferred_free,
-    .sync			= synchronize_rcu,
-    .exp_sync		= synchronize_rcu_expedited,
-    .same_gp_state		= same_state_synchronize_rcu,
-    .same_gp_state_full	= same_state_synchronize_rcu_full,
-    .get_comp_state		= get_completed_synchronize_rcu,
-    .get_comp_state_full	= get_completed_synchronize_rcu_full,
-    .get_gp_state		= get_state_synchronize_rcu,
-    .get_gp_state_full	= get_state_synchronize_rcu_full,
-    .start_gp_poll		= start_poll_synchronize_rcu,
-    .start_gp_poll_full	= start_poll_synchronize_rcu_full,
-    .poll_gp_state		= poll_state_synchronize_rcu,
-    .poll_gp_state_full	= poll_state_synchronize_rcu_full,
-    .poll_need_2gp		= rcu_poll_need_2gp,
-    .cond_sync		= cond_synchronize_rcu,
-    .cond_sync_full		= cond_synchronize_rcu_full,
-    .poll_active		= NUM_ACTIVE_RCU_POLL_OLDSTATE,
-    .poll_active_full	= NUM_ACTIVE_RCU_POLL_FULL_OLDSTATE,
-    .get_gp_state_exp	= get_state_synchronize_rcu,
-    .start_gp_poll_exp	= start_poll_synchronize_rcu_expedited,
-    .start_gp_poll_exp_full	= start_poll_synchronize_rcu_expedited_full,
-    .poll_gp_state_exp	= poll_state_synchronize_rcu,
-    .cond_sync_exp		= cond_synchronize_rcu_expedited,
-    .cond_sync_exp_full	= cond_synchronize_rcu_expedited_full,
-    .call			= call_rcu,
-    .cb_barrier		= rcu_barrier,
-    .fqs			= rcu_force_quiescent_state,
-    .gp_kthread_dbg		= show_rcu_gp_kthreads,
-    .check_boost_failed	= rcu_check_boost_fail,
-    .stall_dur		= rcu_jiffies_till_stall_check,
-    .get_gp_data		= rcutorture_get_gp_data,
-    .gp_slow_register	= rcu_gp_slow_register,
-    .gp_slow_unregister	= rcu_gp_slow_unregister,
-    .reader_blocked		= IS_ENABLED(CONFIG_RCU_TORTURE_TEST_LOG_CPU)
-    ? has_rcu_reader_blocked
-    : core::ptr::null_mut(),
-    .gather_gp_seqs		= rcutorture_gather_gp_seqs,
-    .format_gp_seqs		= rcutorture_format_gp_seqs,
-    .set_gpwrap_lag		= rcu_set_gpwrap_lag,
-    .get_gpwrap_count	= rcu_get_gpwrap_count,
-    .is_task_rcu_boosted	= rcu_is_task_rcu_boosted,
-    .irq_capable		= 1,
-    .can_boost		= IS_ENABLED(CONFIG_RCU_BOOST),
-    .extendables		= RCUTORTURE_MAX_EXTEND,
-    .debug_objects		= 1,
-    .start_poll_irqsoff	= 1,
-    .name			= "rcu"
-    };
+pub static mut rcu_torture_ops: usize = 0;
 //
 // Don't even think about trying any of these in real life!!!
 // The names includes "busted", and they really means it!
@@ -643,59 +818,37 @@ unsafe extern "C" fn rcu_poll_need_2gp(poll: bool, poll_full: bool) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn rcu_busted_torture_deferred_free(p: *mut rcu_torture) {
-    static void rcu_busted_torture_deferred_free(struct rcu_torture *p)
-    {
 // This is a deliberate bug for testing purposes only!
     rcu_torture_cb(&p.rtort_rcu);
     }
 #[no_mangle]
 unsafe extern "C" fn synchronize_rcu_busted() {
-    static void synchronize_rcu_busted(void)
-    {
 // This is a deliberate bug for testing purposes only!
     }
-    static void
-    call_rcu_busted(struct rcu_head *head, rcu_callback_t func)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn call_rcu_busted(head: *mut rcu_head, func: rcu_callback_t) {
 // This is a deliberate bug for testing purposes only!
     func(head);
     }
-    static struct rcu_torture_ops rcu_busted_ops = {
-    .ttype		= INVALID_RCU_FLAVOR,
-    .init		= rcu_sync_torture_init,
-    .readlock	= rcu_torture_read_lock,
-    .read_delay	= rcu_read_delay,  /* just reuse rcu's version. */
-    .readunlock	= rcu_torture_read_unlock,
-    .readlock_held	= torture_readlock_not_held,
-    .get_gp_seq	= rcu_no_completed,
-    .deferred_free	= rcu_busted_torture_deferred_free,
-    .sync		= synchronize_rcu_busted,
-    .exp_sync	= synchronize_rcu_busted,
-    .call		= call_rcu_busted,
-    .gather_gp_seqs	= rcutorture_gather_gp_seqs,
-    .format_gp_seqs	= rcutorture_format_gp_seqs,
-    .irq_capable	= 1,
-    .extendables	= RCUTORTURE_MAX_EXTEND,
-    .name		= "busted"
-    };
+pub static mut rcu_torture_ops: usize = 0;
 //
 // Definitions for srcu torture testing.
 //
-    DEFINE_STATIC_SRCU(srcu_ctl);
-    DEFINE_STATIC_SRCU_FAST(srcu_ctlf);
-    DEFINE_STATIC_SRCU_FAST_UPDOWN(srcu_ctlfud);
-    static struct srcu_struct srcu_ctld;
+pub static mut srcu_ctl: usize = 0;
+pub static mut srcu_ctlf: usize = 0;
+pub static mut srcu_ctlfud: usize = 0;
+pub static mut srcu_ctld: usize = 0;
     static struct srcu_struct *srcu_ctlp = &srcu_ctl;
-    static struct rcu_torture_ops srcud_ops;
+pub static mut srcud_ops: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn srcu_torture_init() {
-    static void srcu_torture_init(void)
-    {
     rcu_sync_torture_init();
-    if (!reader_flavor || (reader_flavor & SRCU_READ_FLAVOR_NORMAL))
+    if (!reader_flavor || (reader_flavor & SRCU_READ_FLAVOR_NORMAL)) {
     VERBOSE_TOROUT_STRING("srcu_torture_init normal SRCU");
-    if (reader_flavor & SRCU_READ_FLAVOR_NMI)
+    }
+    if (reader_flavor & SRCU_READ_FLAVOR_NMI) {
     VERBOSE_TOROUT_STRING("srcu_torture_init NMI-safe SRCU");
+    }
     if (reader_flavor & SRCU_READ_FLAVOR_FAST) {
     srcu_ctlp = &srcu_ctlf;
     VERBOSE_TOROUT_STRING("srcu_torture_init fast SRCU");
@@ -707,51 +860,47 @@ unsafe extern "C" fn srcu_torture_init() {
     }
 #[no_mangle]
 unsafe extern "C" fn srcu_get_gp_data(flags: *mut c_int, gp_seq: *mut c_ulong) {
-    static void srcu_get_gp_data(int *flags, unsigned long *gp_seq)
-    {
     srcutorture_get_gp_data(srcu_ctlp, flags, gp_seq);
     }
 #[no_mangle]
 unsafe extern "C" fn srcu_torture_read_lock() -> c_int {
-    static int srcu_torture_read_lock(void)
-    {
-    int idx;
-    struct srcu_ctr __percpu *scp;
-    let mut ret: c_int = 0;
-    WARN_ON_ONCE(reader_flavor & ~SRCU_READ_FLAVOR_ALL);
+    let mut idx = 0;
+    let mut scp = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
+    WARN_ON_ONCE!(reader_flavor & ~SRCU_READ_FLAVOR_ALL);
     if ((reader_flavor & SRCU_READ_FLAVOR_NORMAL) || !(reader_flavor & SRCU_READ_FLAVOR_ALL)) {
     idx = srcu_read_lock(srcu_ctlp);
-    WARN_ON_ONCE(idx & ~0x1);
+    WARN_ON_ONCE!(idx & ~0x1);
     ret += idx;
     }
     if (reader_flavor & SRCU_READ_FLAVOR_NMI) {
     idx = srcu_read_lock_nmisafe(srcu_ctlp);
-    WARN_ON_ONCE(idx & ~0x1);
+    WARN_ON_ONCE!(idx & ~0x1);
     ret += idx << 1;
     }
     if (reader_flavor & SRCU_READ_FLAVOR_FAST) {
     scp = srcu_read_lock_fast(srcu_ctlp);
     idx = __srcu_ptr_to_ctr(srcu_ctlp, scp);
-    WARN_ON_ONCE(idx & ~0x1);
+    WARN_ON_ONCE!(idx & ~0x1);
     ret += idx << 2;
     }
     if (reader_flavor & SRCU_READ_FLAVOR_FAST_UPDOWN) {
     scp = srcu_read_lock_fast_updown(srcu_ctlp);
     idx = __srcu_ptr_to_ctr(srcu_ctlp, scp);
-    WARN_ON_ONCE(idx & ~0x1);
+    WARN_ON_ONCE!(idx & ~0x1);
     ret += idx << 3;
     }
     return ret;
     }
-    static void
-    srcu_read_delay(struct torture_random_state *rrsp, struct rt_read_seg *rtrsp)
-    {
-    long delay;
-    let mut uspertick: c_long = 1000000 / HZ;
-    let mut longdelay: c_long = 10;
+#[no_mangle]
+pub unsafe extern "C" fn srcu_read_delay(rrsp: *mut torture_random_state, rtrsp: *mut rt_read_seg) {
+    let mut delay = 0;
+pub static mut uspertick: c_long = 0;
+pub static mut longdelay: c_long = 10;
 // If there is a forward-progress test in flight, don't delay.
-    if (atomic_read(&rcu_fwd_cb_nodelay))
+    if (atomic_read(&rcu_fwd_cb_nodelay)) {
     return;
+    }
 // We want there to be long-running readers, but not all the time.
 // The !rcu_preempt_depth() is for RCU Tasks Trace.
     delay = torture_random(rrsp) %
@@ -765,258 +914,149 @@ unsafe extern "C" fn srcu_torture_read_lock() -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn srcu_torture_read_unlock(idx: c_int) {
-    static void srcu_torture_read_unlock(int idx)
-    {
-    WARN_ON_ONCE((reader_flavor && (idx & ~reader_flavor)) || (!reader_flavor && (idx & ~0x1)));
-    if (reader_flavor & SRCU_READ_FLAVOR_FAST_UPDOWN)
+    WARN_ON_ONCE!((reader_flavor && (idx & ~reader_flavor)) || (!reader_flavor && (idx & ~0x1)));
+    if (reader_flavor & SRCU_READ_FLAVOR_FAST_UPDOWN) {
     srcu_read_unlock_fast_updown(srcu_ctlp,
     __srcu_ctr_to_ptr(srcu_ctlp, (idx & 0x8) >> 3));
-    if (reader_flavor & SRCU_READ_FLAVOR_FAST)
+    }
+    if (reader_flavor & SRCU_READ_FLAVOR_FAST) {
     srcu_read_unlock_fast(srcu_ctlp, __srcu_ctr_to_ptr(srcu_ctlp, (idx & 0x4) >> 2));
-    if (reader_flavor & SRCU_READ_FLAVOR_NMI)
+    }
+    if (reader_flavor & SRCU_READ_FLAVOR_NMI) {
     srcu_read_unlock_nmisafe(srcu_ctlp, (idx & 0x2) >> 1);
-    if ((reader_flavor & SRCU_READ_FLAVOR_NORMAL) || !(reader_flavor & SRCU_READ_FLAVOR_ALL))
+    }
+    if ((reader_flavor & SRCU_READ_FLAVOR_NORMAL) || !(reader_flavor & SRCU_READ_FLAVOR_ALL)) {
     srcu_read_unlock(srcu_ctlp, idx & 0x1);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn torture_srcu_read_lock_held() -> c_int {
-    static int torture_srcu_read_lock_held(void)
-    {
     return srcu_read_lock_held(srcu_ctlp);
     }
 #[no_mangle]
 unsafe extern "C" fn srcu_torture_have_up_down() -> bool {
-    static bool srcu_torture_have_up_down(void)
-    {
-    let mut rf: c_int = reader_flavor;
-    if (!rf)
+pub static mut rf: c_int = 0;
+    if (!rf) {
     rf = SRCU_READ_FLAVOR_NORMAL;
+    }
     return !!(cur_ops.have_up_down & rf);
     }
 #[no_mangle]
 unsafe extern "C" fn srcu_torture_down_read() -> c_int {
-    static int srcu_torture_down_read(void)
-    {
-    int idx;
-    struct srcu_ctr __percpu *scp;
-    WARN_ON_ONCE(reader_flavor & ~SRCU_READ_FLAVOR_ALL);
-    WARN_ON_ONCE(reader_flavor & (reader_flavor - 1));
+    let mut idx = 0;
+    let mut scp = core::ptr::null_mut();
+    WARN_ON_ONCE!(reader_flavor & ~SRCU_READ_FLAVOR_ALL);
+    WARN_ON_ONCE!(reader_flavor & (reader_flavor - 1));
     if ((reader_flavor & SRCU_READ_FLAVOR_NORMAL) || !(reader_flavor & SRCU_READ_FLAVOR_ALL)) {
     idx = srcu_down_read(srcu_ctlp);
-    WARN_ON_ONCE(idx & ~0x1);
+    WARN_ON_ONCE!(idx & ~0x1);
     return idx;
     }
     if (reader_flavor & SRCU_READ_FLAVOR_FAST_UPDOWN) {
     scp = srcu_down_read_fast(srcu_ctlp);
     idx = __srcu_ptr_to_ctr(srcu_ctlp, scp);
-    WARN_ON_ONCE(idx & ~0x1);
+    WARN_ON_ONCE!(idx & ~0x1);
     return idx << 3;
     }
-    WARN_ON_ONCE(1);
+    WARN_ON_ONCE!(1);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn srcu_torture_up_read(idx: c_int) {
-    static void srcu_torture_up_read(int idx)
-    {
-    WARN_ON_ONCE((reader_flavor && (idx & ~reader_flavor)) || (!reader_flavor && (idx & ~0x1)));
-    if (reader_flavor & SRCU_READ_FLAVOR_FAST_UPDOWN)
+    WARN_ON_ONCE!((reader_flavor && (idx & ~reader_flavor)) || (!reader_flavor && (idx & ~0x1)));
+    if (reader_flavor & SRCU_READ_FLAVOR_FAST_UPDOWN) {
     srcu_up_read_fast(srcu_ctlp, __srcu_ctr_to_ptr(srcu_ctlp, (idx & 0x8) >> 3));
+    }
     else if ((reader_flavor & SRCU_READ_FLAVOR_NORMAL) ||
-    !(reader_flavor & SRCU_READ_FLAVOR_ALL))
+    !(reader_flavor & SRCU_READ_FLAVOR_ALL)) {
     srcu_up_read(srcu_ctlp, idx & 0x1);
-    else
-    WARN_ON_ONCE(1);
+    }
+    else {
+    WARN_ON_ONCE!(1);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn srcu_torture_completed() -> c_ulong {
-    static unsigned long srcu_torture_completed(void)
-    {
     return srcu_batches_completed(srcu_ctlp);
     }
 #[no_mangle]
 unsafe extern "C" fn srcu_torture_deferred_free(rp: *mut rcu_torture) {
-    static void srcu_torture_deferred_free(struct rcu_torture *rp)
-    {
-    unsigned long flags;
-    let mut lockit: bool = jiffies & 0x1;
-    if (lockit)
+    let mut flags = 0;
+pub static mut lockit: bool = false;
+    if (lockit) {
     raw_spin_lock_irqsave(&current.pi_lock, flags);
+    }
     call_srcu(srcu_ctlp, &rp.rtort_rcu, rcu_torture_cb);
-    if (lockit)
+    if (lockit) {
     raw_spin_unlock_irqrestore(&current.pi_lock, flags);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn srcu_torture_synchronize() {
-    static void srcu_torture_synchronize(void)
-    {
     synchronize_srcu(srcu_ctlp);
     }
 #[no_mangle]
 unsafe extern "C" fn srcu_torture_get_gp_state() -> c_ulong {
-    static unsigned long srcu_torture_get_gp_state(void)
-    {
     return get_state_synchronize_srcu(srcu_ctlp);
     }
 #[no_mangle]
 unsafe extern "C" fn srcu_torture_start_gp_poll() -> c_ulong {
-    static unsigned long srcu_torture_start_gp_poll(void)
-    {
     return start_poll_synchronize_srcu(srcu_ctlp);
     }
 #[no_mangle]
 unsafe extern "C" fn srcu_torture_poll_gp_state(oldstate: c_ulong) -> bool {
-    static bool srcu_torture_poll_gp_state(unsigned long oldstate)
-    {
     return poll_state_synchronize_srcu(srcu_ctlp, oldstate);
     }
-    static void srcu_torture_call(struct rcu_head *head,
-    rcu_callback_t func)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn srcu_torture_call(head: *mut rcu_head, func: rcu_callback_t) {
     call_srcu(srcu_ctlp, head, func);
     }
 #[no_mangle]
 unsafe extern "C" fn srcu_torture_barrier() {
-    static void srcu_torture_barrier(void)
-    {
     srcu_barrier(srcu_ctlp);
     }
 #[no_mangle]
 unsafe extern "C" fn srcu_torture_stats() {
-    static void srcu_torture_stats(void)
-    {
     srcu_torture_stats_print(srcu_ctlp, torture_type, TORTURE_FLAG);
     }
 #[no_mangle]
 unsafe extern "C" fn srcu_torture_synchronize_expedited() {
-    static void srcu_torture_synchronize_expedited(void)
-    {
     synchronize_srcu_expedited(srcu_ctlp);
     }
 #[no_mangle]
 unsafe extern "C" fn srcu_torture_expedite_current() {
-    static void srcu_torture_expedite_current(void)
-    {
     srcu_expedite_current(srcu_ctlp);
     }
-    static struct rcu_torture_ops srcu_ops = {
-    .ttype		= SRCU_FLAVOR,
-    .init		= srcu_torture_init,
-    .readlock	= srcu_torture_read_lock,
-    .read_delay	= srcu_read_delay,
-    .readunlock	= srcu_torture_read_unlock,
-    .down_read	= srcu_torture_down_read,
-    .up_read	= srcu_torture_up_read,
-    .readlock_held	= torture_srcu_read_lock_held,
-    .get_gp_seq	= srcu_torture_completed,
-    .gp_diff	= rcu_seq_diff,
-    .deferred_free	= srcu_torture_deferred_free,
-    .sync		= srcu_torture_synchronize,
-    .exp_sync	= srcu_torture_synchronize_expedited,
-    .exp_current	= srcu_torture_expedite_current,
-    .same_gp_state	= same_state_synchronize_srcu,
-    .get_comp_state = get_completed_synchronize_srcu,
-    .get_gp_state	= srcu_torture_get_gp_state,
-    .start_gp_poll	= srcu_torture_start_gp_poll,
-    .poll_gp_state	= srcu_torture_poll_gp_state,
-    .poll_active	= NUM_ACTIVE_SRCU_POLL_OLDSTATE,
-    .call		= srcu_torture_call,
-    .cb_barrier	= srcu_torture_barrier,
-    .stats		= srcu_torture_stats,
-    .get_gp_data	= srcu_get_gp_data,
-    .cbflood_max	= 50000,
-    .irq_capable	= 1,
-    .no_pi_lock	= IS_ENABLED(CONFIG_TINY_SRCU),
-    .debug_objects	= 1,
-    .have_up_down	= IS_ENABLED(CONFIG_TINY_SRCU)
-    ? 0 : SRCU_READ_FLAVOR_NORMAL | SRCU_READ_FLAVOR_FAST_UPDOWN,
-    .name		= "srcu"
-    };
+pub static mut rcu_torture_ops: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn srcud_torture_init() {
-    static void srcud_torture_init(void)
-    {
     rcu_sync_torture_init();
     if (!reader_flavor || (reader_flavor & SRCU_READ_FLAVOR_NORMAL)) {
-    WARN_ON(init_srcu_struct(&srcu_ctld));
+    WARN_ON!(init_srcu_struct(&srcu_ctld));
     VERBOSE_TOROUT_STRING("srcud_torture_init normal SRCU");
     } else if (reader_flavor & SRCU_READ_FLAVOR_NMI) {
-    WARN_ON(init_srcu_struct(&srcu_ctld));
+    WARN_ON!(init_srcu_struct(&srcu_ctld));
     VERBOSE_TOROUT_STRING("srcud_torture_init NMI-safe SRCU");
     } else if (reader_flavor & SRCU_READ_FLAVOR_FAST) {
-    WARN_ON(init_srcu_struct_fast(&srcu_ctld));
+    WARN_ON!(init_srcu_struct_fast(&srcu_ctld));
     VERBOSE_TOROUT_STRING("srcud_torture_init fast SRCU");
     } else if (reader_flavor & SRCU_READ_FLAVOR_FAST_UPDOWN) {
-    WARN_ON(init_srcu_struct_fast_updown(&srcu_ctld));
+    WARN_ON!(init_srcu_struct_fast_updown(&srcu_ctld));
     VERBOSE_TOROUT_STRING("srcud_torture_init fast-up/down SRCU");
     } else {
-    WARN_ON(init_srcu_struct(&srcu_ctld));
+    WARN_ON!(init_srcu_struct(&srcu_ctld));
     }
     srcu_ctlp = &srcu_ctld;
     }
 #[no_mangle]
 unsafe extern "C" fn srcu_torture_cleanup() {
-    static void srcu_torture_cleanup(void)
-    {
     cleanup_srcu_struct(&srcu_ctld);
     srcu_ctlp = &srcu_ctl; /* In case of a later rcutorture run. */
     }
 // As above, but dynamically allocated.
-    static struct rcu_torture_ops srcud_ops = {
-    .ttype		= SRCU_FLAVOR,
-    .init		= srcud_torture_init,
-    .cleanup	= srcu_torture_cleanup,
-    .readlock	= srcu_torture_read_lock,
-    .read_delay	= srcu_read_delay,
-    .readunlock	= srcu_torture_read_unlock,
-    .readlock_held	= torture_srcu_read_lock_held,
-    .down_read	= srcu_torture_down_read,
-    .up_read	= srcu_torture_up_read,
-    .get_gp_seq	= srcu_torture_completed,
-    .gp_diff	= rcu_seq_diff,
-    .deferred_free	= srcu_torture_deferred_free,
-    .sync		= srcu_torture_synchronize,
-    .exp_sync	= srcu_torture_synchronize_expedited,
-    .exp_current	= srcu_torture_expedite_current,
-    .same_gp_state	= same_state_synchronize_srcu,
-    .get_comp_state = get_completed_synchronize_srcu,
-    .get_gp_state	= srcu_torture_get_gp_state,
-    .start_gp_poll	= srcu_torture_start_gp_poll,
-    .poll_gp_state	= srcu_torture_poll_gp_state,
-    .poll_active	= NUM_ACTIVE_SRCU_POLL_OLDSTATE,
-    .call		= srcu_torture_call,
-    .cb_barrier	= srcu_torture_barrier,
-    .stats		= srcu_torture_stats,
-    .get_gp_data	= srcu_get_gp_data,
-    .cbflood_max	= 50000,
-    .irq_capable	= 1,
-    .no_pi_lock	= IS_ENABLED(CONFIG_TINY_SRCU),
-    .debug_objects	= 1,
-    .have_up_down	= IS_ENABLED(CONFIG_TINY_SRCU)
-    ? 0 : SRCU_READ_FLAVOR_NORMAL | SRCU_READ_FLAVOR_FAST_UPDOWN,
-    .name		= "srcud"
-    };
+pub static mut rcu_torture_ops: usize = 0;
 // As above, but broken due to inappropriate reader extension.
-    static struct rcu_torture_ops busted_srcud_ops = {
-    .ttype		= SRCU_FLAVOR,
-    .init		= srcu_torture_init,
-    .cleanup	= srcu_torture_cleanup,
-    .readlock	= srcu_torture_read_lock,
-    .read_delay	= rcu_read_delay,
-    .readunlock	= srcu_torture_read_unlock,
-    .readlock_held	= torture_srcu_read_lock_held,
-    .get_gp_seq	= srcu_torture_completed,
-    .deferred_free	= srcu_torture_deferred_free,
-    .sync		= srcu_torture_synchronize,
-    .exp_sync	= srcu_torture_synchronize_expedited,
-    .call		= srcu_torture_call,
-    .cb_barrier	= srcu_torture_barrier,
-    .stats		= srcu_torture_stats,
-    .irq_capable	= 1,
-    .no_pi_lock	= IS_ENABLED(CONFIG_TINY_SRCU),
-    .extendables	= RCUTORTURE_MAX_EXTEND,
-    .name		= "busted_srcud"
-    };
+pub static mut rcu_torture_ops: usize = 0;
 //
 // Definitions for trivial CONFIG_PREEMPT=n-only torture testing.
 // This implementation does not work well with CPU hotplug nor
@@ -1024,18 +1064,14 @@ unsafe extern "C" fn srcu_torture_cleanup() {
 //
 #[no_mangle]
 unsafe extern "C" fn synchronize_rcu_trivial() {
-    static void synchronize_rcu_trivial(void)
-    {
-    int cpu;
+    let mut cpu = 0;
     for_each_online_cpu(cpu) {
     torture_sched_setaffinity(current.pid, cpumask_of(cpu), true);
-    WARN_ON_ONCE(raw_smp_processor_id() != cpu);
+    WARN_ON_ONCE!(raw_smp_processor_id() != cpu);
     }
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_sync_torture_init_trivial() {
-    static void rcu_sync_torture_init_trivial(void)
-    {
     rcu_sync_torture_init();
 // if (onoff_interval || shuffle_interval) {
     if (WARN_ONCE(onoff_interval || shuffle_interval, "%s: Non-zero onoff_interval (%d) or shuffle_interval (%d) breaks trivial RCU, resetting to zero", __func__, onoff_interval, shuffle_interval)) {
@@ -1045,30 +1081,14 @@ unsafe extern "C" fn rcu_sync_torture_init_trivial() {
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_read_lock_trivial() -> c_int {
-    static int rcu_torture_read_lock_trivial(void)
-    {
     preempt_disable();
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_read_unlock_trivial(idx: c_int) {
-    static void rcu_torture_read_unlock_trivial(int idx)
-    {
     preempt_enable();
     }
-    static struct rcu_torture_ops trivial_ops = {
-    .ttype		= RCU_TRIVIAL_FLAVOR,
-    .init		= rcu_sync_torture_init_trivial,
-    .readlock	= rcu_torture_read_lock_trivial,
-    .read_delay	= rcu_read_delay,  /* just reuse rcu's version. */
-    .readunlock	= rcu_torture_read_unlock_trivial,
-    .readlock_held	= torture_readlock_not_held,
-    .get_gp_seq	= rcu_no_completed,
-    .sync		= synchronize_rcu_trivial,
-    .exp_sync	= synchronize_rcu_trivial,
-    .irq_capable	= 1,
-    .name		= "trivial"
-    };
+pub static mut rcu_torture_ops: usize = 0;
 
 //
 // Definitions for trivial CONFIG_PREEMPT=y torture testing.  This
@@ -1077,8 +1097,6 @@ unsafe extern "C" fn rcu_torture_read_unlock_trivial(idx: c_int) {
 //
 #[no_mangle]
 unsafe extern "C" fn rcu_sync_torture_init_trivial_preempt() {
-    static void rcu_sync_torture_init_trivial_preempt(void)
-    {
     rcu_sync_torture_init();
     if (WARN_ONCE(onoff_interval || shuffle_interval, "%s: Non-zero onoff_interval (%d) or shuffle_interval (%d) breaks trivial RCU, resetting to zero", __func__, onoff_interval, shuffle_interval)) {
     onoff_interval = 0;
@@ -1087,33 +1105,17 @@ unsafe extern "C" fn rcu_sync_torture_init_trivial_preempt() {
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_read_lock_trivial_preempt() -> c_int {
-    static int rcu_torture_read_lock_trivial_preempt(void)
-    {
-    struct task_struct *t = current;
+    let mut t = current;
     WRITE_ONCE(t.rcu_trivial_preempt_nesting, t.rcu_trivial_preempt_nesting + 1);
     smp_mb();
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_read_unlock_trivial_preempt(idx: c_int) {
-    static void rcu_torture_read_unlock_trivial_preempt(int idx)
-    {
-    struct task_struct *t = current;
+    let mut t = current;
     smp_store_release(&t.rcu_trivial_preempt_nesting, t.rcu_trivial_preempt_nesting - 1);
     }
-    static struct rcu_torture_ops trivial_preempt_ops = {
-    .ttype		= RCU_TRIVIAL_FLAVOR,
-    .init		= rcu_sync_torture_init_trivial_preempt,
-    .readlock	= rcu_torture_read_lock_trivial_preempt,
-    .read_delay	= rcu_read_delay,  // just reuse rcu's version.
-    .readunlock	= rcu_torture_read_unlock_trivial_preempt,
-    .readlock_held	= torture_readlock_not_held,
-    .get_gp_seq	= rcu_no_completed,
-    .sync		= synchronize_rcu_trivial_preempt,
-    .exp_sync	= synchronize_rcu_trivial_preempt,
-    .irq_capable	= 0, // In theory it should be, but let's keep it trivial.
-    .name		= "trivial-preempt"
-    };
+pub static mut rcu_torture_ops: usize = 0;
 
 // Macro flag: #define TRIVIAL_PREEMPT_OPS
 
@@ -1122,66 +1124,27 @@ unsafe extern "C" fn rcu_torture_read_unlock_trivial_preempt(idx: c_int) {
 //
 #[no_mangle]
 unsafe extern "C" fn tasks_torture_read_lock() -> c_int {
-    static int tasks_torture_read_lock(void)
-    {
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn tasks_torture_read_unlock(idx: c_int) {
-    static void tasks_torture_read_unlock(int idx)
-    {
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_tasks_torture_deferred_free(p: *mut rcu_torture) {
-    static void rcu_tasks_torture_deferred_free(struct rcu_torture *p)
-    {
     call_rcu_tasks(&p.rtort_rcu, rcu_torture_cb);
     }
 #[no_mangle]
 unsafe extern "C" fn synchronize_rcu_mult_test() {
-    static void synchronize_rcu_mult_test(void)
-    {
     synchronize_rcu_mult(call_rcu_tasks, call_rcu);
     }
-    static struct rcu_torture_ops tasks_ops = {
-    .ttype		= RCU_TASKS_FLAVOR,
-    .init		= rcu_sync_torture_init,
-    .readlock	= tasks_torture_read_lock,
-    .read_delay	= rcu_read_delay,  /* just reuse rcu's version. */
-    .readunlock	= tasks_torture_read_unlock,
-    .get_gp_seq	= rcu_no_completed,
-    .deferred_free	= rcu_tasks_torture_deferred_free,
-    .sync		= synchronize_rcu_tasks,
-    .exp_sync	= synchronize_rcu_mult_test,
-    .call		= call_rcu_tasks,
-    .cb_barrier	= rcu_barrier_tasks,
-    .gp_kthread_dbg	= show_rcu_tasks_classic_gp_kthread,
-    .get_gp_data	= rcu_tasks_get_gp_data,
-    .irq_capable	= 1,
-    .slow_gps	= 1,
-    .name		= "tasks"
-    };
+pub static mut rcu_torture_ops: usize = 0;
 
 // Macro flag: #define TASKS_OPS
 
 //
 // Definitions for rude RCU-tasks torture testing.
 //
-    static struct rcu_torture_ops tasks_rude_ops = {
-    .ttype		= RCU_TASKS_RUDE_FLAVOR,
-    .init		= rcu_sync_torture_init,
-    .readlock	= rcu_torture_read_lock_trivial,
-    .read_delay	= rcu_read_delay,  /* just reuse rcu's version. */
-    .readunlock	= rcu_torture_read_unlock_trivial,
-    .get_gp_seq	= rcu_no_completed,
-    .sync		= synchronize_rcu_tasks_rude,
-    .exp_sync	= synchronize_rcu_tasks_rude,
-    .gp_kthread_dbg	= show_rcu_tasks_rude_gp_kthread,
-    .get_gp_data	= rcu_tasks_rude_get_gp_data,
-    .cbflood_max	= 50000,
-    .irq_capable	= 1,
-    .name		= "tasks-rude"
-    };
+pub static mut rcu_torture_ops: usize = 0;
 
 // Macro flag: #define TASKS_RUDE_OPS
 
@@ -1191,59 +1154,37 @@ unsafe extern "C" fn synchronize_rcu_mult_test() {
 // Note that an RCU Tasks Trace GP must imply an RCU GP.
 #[no_mangle]
 unsafe extern "C" fn tasks_tracing_torture_read_lock() -> c_int {
-    static int tasks_tracing_torture_read_lock(void)
-    {
-    let mut use_rcu: c_int = !(jiffies & 0xff);
-    if (use_rcu)
+pub static mut use_rcu: c_int = 0;
+    if (use_rcu) {
     rcu_read_lock();
-    else
+    }
+    else {
     rcu_read_lock_trace();
+    }
     return use_rcu;
     }
 #[no_mangle]
 unsafe extern "C" fn tasks_tracing_torture_read_unlock(use_rcu: c_int) {
-    static void tasks_tracing_torture_read_unlock(int use_rcu)
-    {
-    if (use_rcu)
+    if (use_rcu) {
     rcu_read_unlock();
-    else
+    }
+    else {
     rcu_read_unlock_trace();
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_tasks_tracing_torture_deferred_free(p: *mut rcu_torture) {
-    static void rcu_tasks_tracing_torture_deferred_free(struct rcu_torture *p)
-    {
     call_rcu_tasks_trace(&p.rtort_rcu, rcu_torture_cb);
     }
-    static struct rcu_torture_ops tasks_tracing_ops = {
-    .ttype		= RCU_TASKS_TRACING_FLAVOR,
-    .init		= rcu_sync_torture_init,
-    .readlock	= tasks_tracing_torture_read_lock,
-    .read_delay	= srcu_read_delay,  /* just reuse srcu's version. */
-    .readunlock	= tasks_tracing_torture_read_unlock,
-    .readlock_held	= rcu_read_lock_trace_held,
-    .get_gp_seq	= rcu_tasks_trace_batches_completed,
-    .gp_diff	= rcu_seq_diff,
-    .deferred_free	= rcu_tasks_tracing_torture_deferred_free,
-    .sync		= synchronize_rcu_tasks_trace,
-    .exp_sync	= synchronize_rcu_tasks_trace,
-    .exp_current	= rcu_tasks_trace_expedite_current,
-    .call		= call_rcu_tasks_trace,
-    .cb_barrier	= rcu_barrier_tasks_trace,
-    .cbflood_max	= 50000,
-    .irq_capable	= 1,
-    .slow_gps	= 1,
-    .name		= "tasks-tracing"
-    };
+pub static mut rcu_torture_ops: usize = 0;
 
 // Macro flag: #define TASKS_TRACING_OPS
 
 #[no_mangle]
 unsafe extern "C" fn rcutorture_seq_diff(new: c_ulong, old: c_ulong) -> c_ulong {
-    static unsigned long rcutorture_seq_diff(unsigned long new, unsigned long old)
-    {
-    if (!cur_ops.gp_diff)
+    if (!cur_ops.gp_diff) {
     return new - old;
+    }
     return cur_ops.gp_diff(new, old);
     }
 //
@@ -1252,70 +1193,69 @@ unsafe extern "C" fn rcutorture_seq_diff(new: c_ulong, old: c_ulong) -> c_ulong 
 // for them to complete.  If a given grace period takes too long, we assume
 // that priority inversion has occurred.
 //
-    let mut old_rt_runtime: static int = -1;
+pub static mut old_rt_runtime: int = 0;
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_disable_rt_throttle() {
-    static void rcu_torture_disable_rt_throttle(void)
-    {
 //
 // Disable RT throttling so that rcutorture's boost threads don't get
 // throttled. Only possible if rcutorture is built-in otherwise the
 // user should manually do this by setting the sched_rt_period_us and
 // sched_rt_runtime sysctls.
 //
-    if (!IS_BUILTIN(CONFIG_RCU_TORTURE_TEST) || old_rt_runtime != -1)
+    if (!IS_BUILTIN(CONFIG_RCU_TORTURE_TEST) || old_rt_runtime != -1) {
     return;
+    }
     old_rt_runtime = sysctl_sched_rt_runtime;
     sysctl_sched_rt_runtime = -1;
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_enable_rt_throttle() {
-    static void rcu_torture_enable_rt_throttle(void)
-    {
-    if (!IS_BUILTIN(CONFIG_RCU_TORTURE_TEST) || old_rt_runtime == -1)
+    if (!IS_BUILTIN(CONFIG_RCU_TORTURE_TEST) || old_rt_runtime == -1) {
     return;
+    }
     sysctl_sched_rt_runtime = old_rt_runtime;
     old_rt_runtime = -1;
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_boost_failed(gp_state: c_ulong, start: *mut c_ulong) -> bool {
-    static bool rcu_torture_boost_failed(unsigned long gp_state, unsigned long *start)
-    {
-    int cpu;
+    let mut cpu = 0;
     static int dbg_done;
-    let mut end: c_ulong = jiffies;
-    bool gp_done;
-    unsigned long j;
+pub static mut end: c_ulong = 0;
+    let mut gp_done = 0;
+    let mut j = 0;
     static unsigned long last_persist;
-    unsigned long lp;
-    let mut mininterval: c_ulong = test_boost_duration * HZ - HZ / 2;
+    let mut lp = 0;
+pub static mut mininterval: c_ulong = 0;
     if (end - *start > mininterval) {
 // Recheck after checking time to avoid false positives.
     smp_mb(); // Time check before grace-period check.
-    if (cur_ops.poll_gp_state(gp_state))
+    if (cur_ops.poll_gp_state(gp_state)) {
     return false; // passed, though perhaps just barely
+    }
     if (cur_ops.check_boost_failed && !cur_ops.check_boost_failed(gp_state, &cpu)) {
 // At most one persisted message per boost test.
     j = jiffies;
     lp = READ_ONCE(last_persist);
     if (time_after(j, lp + mininterval) &&
     cmpxchg(&last_persist, lp, j) == lp) {
-    if (cpu < 0)
-    pr_info("Boost inversion persisted: QS from all CPUs\n");
-    else
-    pr_info("Boost inversion persisted: No QS from CPU %d\n", cpu);
+    if (cpu < 0) {
+    pr_info!("Boost inversion persisted: QS from all CPUs\n");
+    }
+    else {
+    pr_info!("Boost inversion persisted: No QS from CPU %d\n", cpu);
+    }
     }
     return false; // passed on a technicality
     }
     VERBOSE_TOROUT_STRING("rcu_torture_boost boosting failed");
-    n_rcu_torture_boost_failure++;
+    n_rcu_torture_boost_failure += 1;
     if (!xchg(&dbg_done, 1) && cur_ops.gp_kthread_dbg) {
-    pr_info("Boost inversion thread .rt_priority %u gp_state %lu jiffies %lu\n",
+    pr_info!("Boost inversion thread .rt_priority %u gp_state %lu jiffies %lu\n",
     current.rt_priority, gp_state, end - *start);
     cur_ops.gp_kthread_dbg();
 // Recheck after print to flag grace period ending during splat.
     gp_done = cur_ops.poll_gp_state(gp_state);
-    pr_info("Boost inversion: GP %lu %s.\n", gp_state,
+    pr_info!("Boost inversion: GP %lu %s.\n", gp_state,
     gp_done ? "ended already" : "still pending");
     }
     return true; // failed
@@ -1326,21 +1266,20 @@ unsafe extern "C" fn rcu_torture_boost_failed(gp_state: c_ulong, start: *mut c_u
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_boost(arg: *mut c_void) -> c_int {
-    static int rcu_torture_boost(void *arg)
-    {
-    unsigned long endtime;
-    unsigned long gp_state;
-    unsigned long gp_state_time;
-    unsigned long oldstarttime;
-    let mut booststarttime: c_ulong = get_torture_init_jiffies() + test_boost_holdoff * HZ;
+    let mut endtime = 0;
+    let mut gp_state = 0;
+    let mut gp_state_time = 0;
+    let mut oldstarttime = 0;
+pub static mut booststarttime: c_ulong = 0;
     if (test_boost_holdoff <= 0 || time_after(jiffies, booststarttime)) {
     VERBOSE_TOROUT_STRING("rcu_torture_boost started");
     } else {
     VERBOSE_TOROUT_STRING("rcu_torture_boost started holdoff period");
     while (time_before(jiffies, booststarttime)) {
     schedule_timeout_idle(HZ);
-    if (kthread_should_stop())
-    goto cleanup;
+    if (kthread_should_stop()) {
+// goto;
+    }
     }
     VERBOSE_TOROUT_STRING("rcu_torture_boost finished holdoff period");
     }
@@ -1348,25 +1287,29 @@ unsafe extern "C" fn rcu_torture_boost(arg: *mut c_void) -> c_int {
     sched_set_fifo_low(current);
 // Each pass through the following loop does one boost-test cycle.
     do {
-    bool failed = false; // Test failed already in this test interval
-    let mut gp_initiated: bool = false;
-    if (kthread_should_stop())
-    goto checkwait;
+    let mut failed = false; // Test failed already in this test interval
+pub static mut gp_initiated: bool = false;
+    if (kthread_should_stop()) {
+// goto;
+    }
 // Wait for the next test interval.
     oldstarttime = READ_ONCE(boost_starttime);
     while (time_before(jiffies, oldstarttime)) {
     schedule_timeout_interruptible(oldstarttime - jiffies);
-    if (stutter_wait("rcu_torture_boost"))
+    if (stutter_wait("rcu_torture_boost")) {
     sched_set_fifo_low(current);
-    if (torture_must_stop())
-    goto checkwait;
+    }
+    if (torture_must_stop()) {
+// goto;
+    }
     }
 // Do one boost-test interval.
     endtime = oldstarttime + test_boost_duration * HZ;
     while (time_before(jiffies, endtime)) {
 // Has current GP gone too long?
-    if (gp_initiated && !failed && !cur_ops.poll_gp_state(gp_state))
+    if (gp_initiated && !failed && !cur_ops.poll_gp_state(gp_state)) {
     failed = rcu_torture_boost_failed(gp_state, &gp_state_time);
+    }
 // If we don't have a grace period in flight, start one.
     if (!gp_initiated || cur_ops.poll_gp_state(gp_state)) {
     gp_state = cur_ops.start_gp_poll();
@@ -1378,15 +1321,18 @@ unsafe extern "C" fn rcu_torture_boost(arg: *mut c_void) -> c_int {
 // If the grace period already ended,
 // we don't know when that happened, so
 // start over.
-    if (cur_ops.poll_gp_state(gp_state))
+    if (cur_ops.poll_gp_state(gp_state)) {
     gp_initiated = false;
     }
-    if (torture_must_stop())
-    goto checkwait;
+    }
+    if (torture_must_stop()) {
+// goto;
+    }
     }
 // In case the grace period extended beyond the end of the loop.
-    if (gp_initiated && !failed && !cur_ops.poll_gp_state(gp_state))
+    if (gp_initiated && !failed && !cur_ops.poll_gp_state(gp_state)) {
     rcu_torture_boost_failed(gp_state, &gp_state_time);
+    }
 //
 // Set the start time of the next test interval.
 // Yes, this is vulnerable to long delays, but such
@@ -1399,7 +1345,7 @@ unsafe extern "C" fn rcu_torture_boost(arg: *mut c_void) -> c_int {
     if (oldstarttime == boost_starttime) {
     WRITE_ONCE(boost_starttime,
     jiffies + test_boost_interval * HZ);
-    n_rcu_torture_boosts++;
+    n_rcu_torture_boosts += 1;
     }
     mutex_unlock(&boost_mutex);
     break;
@@ -1410,7 +1356,7 @@ unsafe extern "C" fn rcu_torture_boost(arg: *mut c_void) -> c_int {
     checkwait:	if (stutter_wait("rcu_torture_boost"))
     sched_set_fifo_low(current);
     } while (!torture_must_stop());
-    cleanup:
+// label;
 // Clean up and exit.
     while (!kthread_should_stop()) {
     torture_shutdown_absorb("rcu_torture_boost");
@@ -1424,12 +1370,11 @@ unsafe extern "C" fn rcu_torture_boost(arg: *mut c_void) -> c_int {
 // bursts of calls to force_quiescent_state(), increasing the probability
 // of occurrence of some important types of race conditions.
 //
-    static int
-    rcu_torture_fqs(void *arg)
-    {
-    unsigned long fqs_resume_time;
-    int fqs_burst_remaining;
-    let mut oldnice: c_int = task_nice(current);
+#[no_mangle]
+pub unsafe extern "C" fn rcu_torture_fqs(arg: *mut c_void) -> c_int {
+    let mut fqs_resume_time = 0;
+    let mut fqs_burst_remaining = 0;
+pub static mut oldnice: c_int = 0;
     VERBOSE_TOROUT_STRING("rcu_torture_fqs task started");
     do {
     fqs_resume_time = jiffies + fqs_stutter * HZ;
@@ -1444,26 +1389,25 @@ unsafe extern "C" fn rcu_torture_boost(arg: *mut c_void) -> c_int {
     udelay(fqs_holdoff);
     fqs_burst_remaining -= fqs_holdoff;
     }
-    if (stutter_wait("rcu_torture_fqs"))
+    if (stutter_wait("rcu_torture_fqs")) {
     sched_set_normal(current, oldnice);
+    }
     } while (!torture_must_stop());
     torture_kthread_stopping("rcu_torture_fqs");
     return 0;
     }
 // Used by writers to randomly choose from the available grace-period primitives.
-    static int synctype[ARRAY_SIZE(rcu_torture_writer_state_names)] = { };
+    static int synctype[ARRAY_SIZE!(rcu_torture_writer_state_names)] = { };
     static int nsynctypes;
 //
 // Determine which grace-period primitives are available.
 //
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_write_types() {
-    static void rcu_torture_write_types(void)
-    {
-    let mut gp_cond1: bool = gp_cond, gp_cond_exp1 = gp_cond_exp, gp_cond_full1 = gp_cond_full;
-    let mut gp_cond_exp_full1: bool = gp_cond_exp_full, gp_exp1 = gp_exp, gp_poll_exp1 = gp_poll_exp;
-    let mut gp_poll_exp_full1: bool = gp_poll_exp_full, gp_normal1 = gp_normal, gp_poll1 = gp_poll;
-    let mut gp_poll_full1: bool = gp_poll_full, gp_sync1 = gp_sync;
+pub static mut gp_cond1: bool = false;
+pub static mut gp_cond_exp_full1: bool = false;
+pub static mut gp_poll_exp_full1: bool = false;
+pub static mut gp_poll_full1: bool = false;
 // Initialize synctype[] array.  If none set, take default.
     if (!gp_cond1 &&
     !gp_cond_exp1 &&
@@ -1490,76 +1434,76 @@ unsafe extern "C" fn rcu_torture_write_types() {
     }
     if (gp_cond1 && cur_ops.get_gp_state && cur_ops.cond_sync) {
     synctype[nsynctypes++] = RTWS_COND_GET;
-    pr_info("%s: Testing conditional GPs.\n", __func__);
+    pr_info!("%s: Testing conditional GPs.\n", __func__);
     } else if (gp_cond && (!cur_ops.get_gp_state || !cur_ops.cond_sync)) {
     pr_alert("%s: gp_cond without primitives.\n", __func__);
     }
     if (gp_cond_exp1 && cur_ops.get_gp_state_exp && cur_ops.cond_sync_exp) {
     synctype[nsynctypes++] = RTWS_COND_GET_EXP;
-    pr_info("%s: Testing conditional expedited GPs.\n", __func__);
+    pr_info!("%s: Testing conditional expedited GPs.\n", __func__);
     } else if (gp_cond_exp && (!cur_ops.get_gp_state_exp || !cur_ops.cond_sync_exp)) {
     pr_alert("%s: gp_cond_exp without primitives.\n", __func__);
     }
     if (gp_cond_full1 && cur_ops.get_gp_state && cur_ops.cond_sync_full) {
     synctype[nsynctypes++] = RTWS_COND_GET_FULL;
-    pr_info("%s: Testing conditional full-state GPs.\n", __func__);
+    pr_info!("%s: Testing conditional full-state GPs.\n", __func__);
     } else if (gp_cond_full && (!cur_ops.get_gp_state || !cur_ops.cond_sync_full)) {
     pr_alert("%s: gp_cond_full without primitives.\n", __func__);
     }
     if (gp_cond_exp_full1 && cur_ops.get_gp_state_exp && cur_ops.cond_sync_exp_full) {
     synctype[nsynctypes++] = RTWS_COND_GET_EXP_FULL;
-    pr_info("%s: Testing conditional full-state expedited GPs.\n", __func__);
+    pr_info!("%s: Testing conditional full-state expedited GPs.\n", __func__);
     } else if (gp_cond_exp_full &&
     (!cur_ops.get_gp_state_exp || !cur_ops.cond_sync_exp_full)) {
     pr_alert("%s: gp_cond_exp_full without primitives.\n", __func__);
     }
     if (gp_exp1 && cur_ops.exp_sync) {
     synctype[nsynctypes++] = RTWS_EXP_SYNC;
-    pr_info("%s: Testing expedited GPs.\n", __func__);
+    pr_info!("%s: Testing expedited GPs.\n", __func__);
     } else if (gp_exp && !cur_ops.exp_sync) {
     pr_alert("%s: gp_exp without primitives.\n", __func__);
     }
     if (gp_normal1 && cur_ops.deferred_free) {
     synctype[nsynctypes++] = RTWS_DEF_FREE;
-    pr_info("%s: Testing asynchronous GPs.\n", __func__);
+    pr_info!("%s: Testing asynchronous GPs.\n", __func__);
     } else if (gp_normal && !cur_ops.deferred_free) {
     pr_alert("%s: gp_normal without primitives.\n", __func__);
     }
     if (gp_poll1 && cur_ops.get_comp_state && cur_ops.same_gp_state &&
     cur_ops.start_gp_poll && cur_ops.poll_gp_state) {
     synctype[nsynctypes++] = RTWS_POLL_GET;
-    pr_info("%s: Testing polling GPs.\n", __func__);
+    pr_info!("%s: Testing polling GPs.\n", __func__);
     } else if (gp_poll && (!cur_ops.start_gp_poll || !cur_ops.poll_gp_state)) {
     pr_alert("%s: gp_poll without primitives.\n", __func__);
     }
     if (gp_poll_full1 && cur_ops.get_comp_state_full && cur_ops.same_gp_state_full
     && cur_ops.start_gp_poll_full && cur_ops.poll_gp_state_full) {
     synctype[nsynctypes++] = RTWS_POLL_GET_FULL;
-    pr_info("%s: Testing polling full-state GPs.\n", __func__);
+    pr_info!("%s: Testing polling full-state GPs.\n", __func__);
     } else if (gp_poll_full && (!cur_ops.start_gp_poll_full || !cur_ops.poll_gp_state_full)) {
     pr_alert("%s: gp_poll_full without primitives.\n", __func__);
     }
     if (gp_poll_exp1 && cur_ops.start_gp_poll_exp && cur_ops.poll_gp_state_exp) {
     synctype[nsynctypes++] = RTWS_POLL_GET_EXP;
-    pr_info("%s: Testing polling expedited GPs.\n", __func__);
+    pr_info!("%s: Testing polling expedited GPs.\n", __func__);
     } else if (gp_poll_exp && (!cur_ops.start_gp_poll_exp || !cur_ops.poll_gp_state_exp)) {
     pr_alert("%s: gp_poll_exp without primitives.\n", __func__);
     }
     if (gp_poll_exp_full1 && cur_ops.start_gp_poll_exp_full && cur_ops.poll_gp_state_full) {
     synctype[nsynctypes++] = RTWS_POLL_GET_EXP_FULL;
-    pr_info("%s: Testing polling full-state expedited GPs.\n", __func__);
+    pr_info!("%s: Testing polling full-state expedited GPs.\n", __func__);
     } else if (gp_poll_exp_full &&
     (!cur_ops.start_gp_poll_exp_full || !cur_ops.poll_gp_state_full)) {
     pr_alert("%s: gp_poll_exp_full without primitives.\n", __func__);
     }
     if (gp_sync1 && cur_ops.sync) {
     synctype[nsynctypes++] = RTWS_SYNC;
-    pr_info("%s: Testing normal GPs.\n", __func__);
+    pr_info!("%s: Testing normal GPs.\n", __func__);
     } else if (gp_sync && !cur_ops.sync) {
     pr_alert("%s: gp_sync without primitives.\n", __func__);
     }
     pr_alert("%s: Testing %d update types.\n", __func__, nsynctypes);
-    pr_info("%s: gp_cond_wi %d gp_cond_wi_exp %d gp_poll_wi %d gp_poll_wi_exp %d\n", __func__, gp_cond_wi, gp_cond_wi_exp, gp_poll_wi, gp_poll_wi_exp);
+    pr_info!("%s: gp_cond_wi %d gp_cond_wi_exp %d gp_poll_wi %d gp_poll_wi_exp %d\n", __func__, gp_cond_wi, gp_cond_wi_exp, gp_poll_wi, gp_poll_wi_exp);
     }
 //
 // Do the specified rcu_torture_writer() synchronous grace period,
@@ -1568,23 +1512,27 @@ unsafe extern "C" fn rcu_torture_write_types() {
 //
 #[no_mangle]
 unsafe extern "C" fn do_rtws_sync(trsp: *mut torture_random_state, (*sync)(void): *mut c_void) {
-    static void do_rtws_sync(struct torture_random_state *trsp, void (*sync)(void))
-    {
-    unsigned long cookie;
-    struct rcu_gp_seq cookie_full;
-    bool dopoll;
-    bool dopoll_full;
-    let mut r: c_ulong = torture_random(trsp);
+#[no_mangle]
+pub unsafe extern "C" fn do_rtws_sync(trsp: *mut torture_random_state) {
+    let mut cookie = 0;
+pub static mut cookie_full: usize = 0;
+    let mut dopoll = 0;
+    let mut dopoll_full = 0;
+pub static mut r: c_ulong = 0;
     dopoll = cur_ops.get_gp_state && cur_ops.poll_gp_state && !(r & 0x300);
     dopoll_full = cur_ops.get_gp_state_full && cur_ops.poll_gp_state_full && !(r & 0xc00);
-    if (dopoll || dopoll_full)
+    if (dopoll || dopoll_full) {
     cpus_read_lock();
-    if (dopoll)
+    }
+    if (dopoll) {
     cookie = cur_ops.get_gp_state();
-    if (dopoll_full)
+    }
+    if (dopoll_full) {
     cur_ops.get_gp_state_full(&cookie_full);
-    if (cur_ops.poll_need_2gp && cur_ops.poll_need_2gp(dopoll, dopoll_full))
+    }
+    if (cur_ops.poll_need_2gp && cur_ops.poll_need_2gp(dopoll, dopoll_full)) {
     sync();
+    }
     sync();
     WARN_ONCE(dopoll && !cur_ops.poll_gp_state(cookie),
     "%s: Cookie check 3 failed %pS() online %*pbl.",
@@ -1592,8 +1540,9 @@ unsafe extern "C" fn do_rtws_sync(trsp: *mut torture_random_state, (*sync)(void)
     WARN_ONCE(dopoll_full && !cur_ops.poll_gp_state_full(&cookie_full),
     "%s: Cookie check 4 failed %pS() online %*pbl",
     __func__, sync, cpumask_pr_args(cpu_online_mask));
-    if (dopoll || dopoll_full)
+    if (dopoll || dopoll_full) {
     cpus_read_unlock();
+    }
     }
 //
 // Do an rcu_barrier() to motivate lazy callbacks during a stutter
@@ -1602,51 +1551,51 @@ unsafe extern "C" fn do_rtws_sync(trsp: *mut torture_random_state, (*sync)(void)
 //
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_writer_work(work: *mut work_struct) {
-    static void rcu_torture_writer_work(struct work_struct *work)
-    {
-    if (cur_ops.cb_barrier)
+    if (cur_ops.cb_barrier) {
     cur_ops.cb_barrier();
+    }
     }
 //
 // RCU torture writer kthread.  Repeatedly substitutes a new structure
 // for that pointed to by rcu_torture_current, freeing the old structure
 // after a series of grace periods (the "pipeline").
 //
-    static int
-    rcu_torture_writer(void *arg)
-    {
-    let mut booting_still: bool = false;
-    let mut can_expedite: bool = !rcu_gp_is_expedited() && !rcu_gp_is_normal();
-    unsigned long cookie;
-    struct rcu_gp_seq cookie_full;
-    let mut expediting: c_int = 0;
-    unsigned long gp_snap;
-    unsigned long gp_snap1;
-    struct rcu_gp_seq gp_snap_full;
-    struct rcu_gp_seq gp_snap1_full;
-    int i;
-    int idx;
-    unsigned long j;
-    struct work_struct lazy_work;
-    let mut oldnice: c_int = task_nice(current);
-    struct rcu_gp_seq *rgo = core::ptr::null_mut();
-    let mut rgo_size: c_int = 0;
-    struct rcu_torture *rp;
-    struct rcu_torture *old_rp;
-    static DEFINE_TORTURE_RANDOM(rand);
-    let mut stallsdone: c_ulong = jiffies;
-    bool stutter_waited;
-    unsigned long *ulo = core::ptr::null_mut();
-    let mut ulo_size: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn rcu_torture_writer(arg: *mut c_void) -> c_int {
+pub static mut booting_still: bool = false;
+pub static mut can_expedite: bool = false;
+    let mut cookie = 0;
+pub static mut cookie_full: usize = 0;
+pub static mut expediting: c_int = 0;
+    let mut gp_snap = 0;
+    let mut gp_snap1 = 0;
+pub static mut gp_snap_full: usize = 0;
+pub static mut gp_snap1_full: usize = 0;
+    let mut i = 0;
+    let mut idx = 0;
+    let mut j = 0;
+pub static mut lazy_work: usize = 0;
+pub static mut oldnice: c_int = 0;
+    let mut rgo = core::ptr::null_mut();
+pub static mut rgo_size: c_int = 0;
+pub static mut rp: *mut c_void = core::ptr::null_mut();
+pub static mut old_rp: *mut c_void = core::ptr::null_mut();
+pub static mut rand: usize = 0;
+pub static mut stallsdone: c_ulong = 0;
+    let mut stutter_waited = 0;
+    let mut ulo = core::ptr::null_mut();
+pub static mut ulo_size: c_int = 0;
 // If a new stall test is added, this must be adjusted.
-    if (stall_cpu_holdoff + stall_gp_kthread + stall_cpu)
+    if (stall_cpu_holdoff + stall_gp_kthread + stall_cpu) {
     stallsdone += (stall_cpu_holdoff + stall_gp_kthread + stall_cpu + 60) *
     HZ * (stall_cpu_repeat + 1);
+    }
     VERBOSE_TOROUT_STRING("rcu_torture_writer task started");
-    if (!can_expedite)
+    if (!can_expedite) {
     pr_alert("%s" TORTURE_FLAG
     " GP expediting controlled from boot/sysfs for %s.\n",
     torture_type, cur_ops.name);
+    }
     if (WARN_ONCE(nsynctypes == 0,
     "%s: No update-side primitives.\n", __func__)) {
 //
@@ -1659,14 +1608,16 @@ unsafe extern "C" fn rcu_torture_writer_work(work: *mut work_struct) {
     return 0;
     }
     if (cur_ops.poll_active > 0) {
-    ulo = kcalloc(cur_ops.poll_active, sizeof(*ulo), GFP_KERNEL);
-    if (!WARN_ON(!ulo))
+    ulo = kcalloc(cur_ops.poll_active, sizeof!(*ulo), GFP_KERNEL);
+    if (!WARN_ON!(!ulo)) {
     ulo_size = cur_ops.poll_active;
+    }
     }
     if (cur_ops.poll_active_full > 0) {
     rgo = kzalloc_objs(*rgo, cur_ops.poll_active_full);
-    if (!WARN_ON(!rgo))
+    if (!WARN_ON!(!rgo)) {
     rgo_size = cur_ops.poll_active_full;
+    }
     }
 // If the system is still booting, let it finish.
     j = jiffies;
@@ -1674,17 +1625,20 @@ unsafe extern "C" fn rcu_torture_writer_work(work: *mut work_struct) {
     booting_still = true;
     schedule_timeout_interruptible(HZ);
     }
-    if (booting_still)
+    if (booting_still) {
     pr_alert("%s" TORTURE_FLAG " Waited %lu jiffies for boot to complete.\n",
     torture_type, jiffies - j);
-    if (IS_ENABLED(CONFIG_RCU_LAZY))
+    }
+    if (IS_ENABLED!(CONFIG_RCU_LAZY)) {
     INIT_WORK_ONSTACK(&lazy_work, rcu_torture_writer_work);
+    }
     do {
     rcu_torture_writer_state = RTWS_FIXED_DELAY;
     torture_hrtimeout_us(500, 1000, &rand);
     rp = rcu_torture_alloc();
-    if (rp == core::ptr::null_mut())
+    if (rp == core::ptr::null_mut()) {
     continue;
+    }
     rp.rtort_pipe_count = 0;
     ASSERT_EXCLUSIVE_WRITER(rp.rtort_pipe_count);
     rcu_torture_writer_state = RTWS_DELAY;
@@ -1697,8 +1651,9 @@ unsafe extern "C" fn rcu_torture_writer_work(work: *mut work_struct) {
     smp_wmb(); /* Mods to old_rp must follow rcu_assign_pointer() */
     if (old_rp) {
     i = old_rp.rtort_pipe_count;
-    if (i > RCU_TORTURE_PIPE_LEN)
+    if (i > RCU_TORTURE_PIPE_LEN) {
     i = RCU_TORTURE_PIPE_LEN;
+    }
     atomic_inc(&rcu_torture_wcount[i]);
     WRITE_ONCE(old_rp.rtort_pipe_count,
     old_rp.rtort_pipe_count + 1);
@@ -1715,7 +1670,7 @@ unsafe extern "C" fn rcu_torture_writer_work(work: *mut work_struct) {
     cookie, cur_ops.get_gp_state());
     if (cur_ops.get_comp_state) {
     cookie = cur_ops.get_comp_state();
-    WARN_ON_ONCE(!cur_ops.poll_gp_state(cookie));
+    WARN_ON_ONCE!(!cur_ops.poll_gp_state(cookie));
     }
     cur_ops.readunlock(idx);
     }
@@ -1730,7 +1685,7 @@ unsafe extern "C" fn rcu_torture_writer_work(work: *mut work_struct) {
     cpumask_pr_args(cpu_online_mask));
     if (cur_ops.get_comp_state_full) {
     cur_ops.get_comp_state_full(&cookie_full);
-    WARN_ON_ONCE(!cur_ops.poll_gp_state_full(&cookie_full));
+    WARN_ON_ONCE!(!cur_ops.poll_gp_state_full(&cookie_full));
     }
     cur_ops.readunlock(idx);
     }
@@ -1782,21 +1737,24 @@ unsafe extern "C" fn rcu_torture_writer_work(work: *mut work_struct) {
     break;
     case RTWS_POLL_GET:
     rcu_torture_writer_state = RTWS_POLL_GET;
-    for (i = 0; i < ulo_size; i++)
+    for (i = 0; i < ulo_size; i++) {
     ulo[i] = cur_ops.get_comp_state();
+    }
     gp_snap = cur_ops.start_gp_poll();
     rcu_torture_writer_state = RTWS_POLL_WAIT;
-    if (cur_ops.exp_current && !(torture_random(&rand) & 0xff))
+    if (cur_ops.exp_current && !(torture_random(&rand) & 0xff)) {
     cur_ops.exp_current();
+    }
     while (!cur_ops.poll_gp_state(gp_snap)) {
     gp_snap1 = cur_ops.get_gp_state();
-    for (i = 0; i < ulo_size; i++)
+    for (i = 0; i < ulo_size; i++) {
     if (cur_ops.poll_gp_state(ulo[i]) ||
     cur_ops.same_gp_state(ulo[i], gp_snap1)) {
+    }
     ulo[i] = gp_snap1;
     break;
     }
-    WARN_ON_ONCE(ulo_size > 0 && i >= ulo_size);
+    WARN_ON_ONCE!(ulo_size > 0 && i >= ulo_size);
     torture_hrtimeout_us(torture_random(&rand) % gp_poll_wi,
     1000, &rand);
     }
@@ -1804,22 +1762,25 @@ unsafe extern "C" fn rcu_torture_writer_work(work: *mut work_struct) {
     break;
     case RTWS_POLL_GET_FULL:
     rcu_torture_writer_state = RTWS_POLL_GET_FULL;
-    for (i = 0; i < rgo_size; i++)
+    for (i = 0; i < rgo_size; i++) {
     cur_ops.get_comp_state_full(&rgo[i]);
+    }
     cur_ops.start_gp_poll_full(&gp_snap_full);
     rcu_torture_writer_state = RTWS_POLL_WAIT_FULL;
-    if (cur_ops.exp_current && !(torture_random(&rand) & 0xff))
+    if (cur_ops.exp_current && !(torture_random(&rand) & 0xff)) {
     cur_ops.exp_current();
+    }
     while (!cur_ops.poll_gp_state_full(&gp_snap_full)) {
     cur_ops.get_gp_state_full(&gp_snap1_full);
-    for (i = 0; i < rgo_size; i++)
+    for (i = 0; i < rgo_size; i++) {
     if (cur_ops.poll_gp_state_full(&rgo[i]) ||
     cur_ops.same_gp_state_full(&rgo[i],
     &gp_snap1_full)) {
+    }
     rgo[i] = gp_snap1_full;
     break;
     }
-    WARN_ON_ONCE(rgo_size > 0 && i >= rgo_size);
+    WARN_ON_ONCE!(rgo_size > 0 && i >= rgo_size);
     torture_hrtimeout_us(torture_random(&rand) % gp_poll_wi,
     1000, &rand);
     }
@@ -1829,18 +1790,20 @@ unsafe extern "C" fn rcu_torture_writer_work(work: *mut work_struct) {
     rcu_torture_writer_state = RTWS_POLL_GET_EXP;
     gp_snap = cur_ops.start_gp_poll_exp();
     rcu_torture_writer_state = RTWS_POLL_WAIT_EXP;
-    while (!cur_ops.poll_gp_state_exp(gp_snap))
+    while (!cur_ops.poll_gp_state_exp(gp_snap)) {
     torture_hrtimeout_us(torture_random(&rand) % gp_poll_wi_exp,
     1000, &rand);
+    }
     rcu_torture_pipe_update(old_rp);
     break;
     case RTWS_POLL_GET_EXP_FULL:
     rcu_torture_writer_state = RTWS_POLL_GET_EXP_FULL;
     cur_ops.start_gp_poll_exp_full(&gp_snap_full);
     rcu_torture_writer_state = RTWS_POLL_WAIT_EXP_FULL;
-    while (!cur_ops.poll_gp_state_full(&gp_snap_full))
+    while (!cur_ops.poll_gp_state_full(&gp_snap_full)) {
     torture_hrtimeout_us(torture_random(&rand) % gp_poll_wi_exp,
     1000, &rand);
+    }
     rcu_torture_pipe_update(old_rp);
     break;
     case RTWS_SYNC:
@@ -1848,8 +1811,8 @@ unsafe extern "C" fn rcu_torture_writer_work(work: *mut work_struct) {
     do_rtws_sync(&rand, cur_ops.sync);
     rcu_torture_pipe_update(old_rp);
     break;
-    default:
-    WARN_ON_ONCE(1);
+// label;
+    WARN_ON_ONCE!(1);
     break;
     }
     }
@@ -1858,51 +1821,62 @@ unsafe extern "C" fn rcu_torture_writer_work(work: *mut work_struct) {
 // Cycle through nesting levels of rcu_expedite_gp() calls.
     if (can_expedite &&
     !(torture_random(&rand) & 0xff & (!!expediting - 1))) {
-    WARN_ON_ONCE(expediting == 0 && rcu_gp_is_expedited());
-    if (expediting >= 0)
+    WARN_ON_ONCE!(expediting == 0 && rcu_gp_is_expedited());
+    if (expediting >= 0) {
     rcu_expedite_gp();
-    else
+    }
+    else {
     rcu_unexpedite_gp();
-    if (++expediting > 3)
+    }
+    if (++expediting > 3) {
     expediting = -expediting;
-    } else if (!can_expedite) { /* Disabled during boot, recheck. */
+    }
+    } else if (!can_expedite) { /* Disabled during boot, recheck. */ {
     can_expedite = !rcu_gp_is_expedited() &&
     !rcu_gp_is_normal();
     }
+    }
     rcu_torture_writer_state = RTWS_STUTTER;
-    if (IS_ENABLED(CONFIG_RCU_LAZY))
+    if (IS_ENABLED!(CONFIG_RCU_LAZY)) {
     queue_work(system_percpu_wq, &lazy_work);
+    }
     stutter_waited = stutter_wait("rcu_torture_writer");
     if (stutter_waited &&
     !atomic_read(&rcu_fwd_cb_nodelay) &&
     !cur_ops.slow_gps &&
     !torture_must_stop() &&
-    time_after(jiffies, stallsdone))
-    for (i = 0; i < ARRAY_SIZE(rcu_tortures); i++)
+    time_after(jiffies, stallsdone)) {
+    for (i = 0; i < ARRAY_SIZE!(rcu_tortures); i++)
+    }
     if (list_empty(&rcu_tortures[i].rtort_free) &&
     rcu_access_pointer(rcu_torture_current) != &rcu_tortures[i]) {
     tracing_off();
-    if (cur_ops.gp_kthread_dbg)
+    if (cur_ops.gp_kthread_dbg) {
     cur_ops.gp_kthread_dbg();
+    }
     WARN(1, "%s: rtort_pipe_count: %d\n", __func__, rcu_tortures[i].rtort_pipe_count);
     rcu_ftrace_dump(DUMP_ALL);
     break;
     }
-    if (stutter_waited)
+    if (stutter_waited) {
     sched_set_normal(current, oldnice);
+    }
     } while (!torture_must_stop());
     rcu_torture_current = core::ptr::null_mut();  // Let stats task know that we are done.
 // Reset expediting back to unexpedited.
-    if (expediting > 0)
+    if (expediting > 0) {
     expediting = -expediting;
-    while (can_expedite && expediting++ < 0)
+    }
+    while (can_expedite && expediting++ < 0) {
     rcu_unexpedite_gp();
-    WARN_ON_ONCE(can_expedite && rcu_gp_is_expedited());
-    if (!can_expedite)
+    }
+    WARN_ON_ONCE!(can_expedite && rcu_gp_is_expedited());
+    if (!can_expedite) {
     pr_alert("%s" TORTURE_FLAG
     " Dynamic grace-period expediting was disabled.\n",
     torture_type);
-    if (IS_ENABLED(CONFIG_RCU_LAZY)) {
+    }
+    if (IS_ENABLED!(CONFIG_RCU_LAZY)) {
     cancel_work_sync(&lazy_work);
     destroy_work_on_stack(&lazy_work);
     }
@@ -1916,12 +1890,11 @@ unsafe extern "C" fn rcu_torture_writer_work(work: *mut work_struct) {
 // RCU torture fake writer kthread.  Repeatedly calls sync, with a random
 // delay between calls.
 //
-    static int
-    rcu_torture_fakewriter(void *arg)
-    {
-    unsigned long gp_snap;
-    struct rcu_gp_seq gp_snap_full;
-    DEFINE_TORTURE_RANDOM(rand);
+#[no_mangle]
+pub unsafe extern "C" fn rcu_torture_fakewriter(arg: *mut c_void) -> c_int {
+    let mut gp_snap = 0;
+pub static mut gp_snap_full: usize = 0;
+pub static mut rand: usize = 0;
     VERBOSE_TOROUT_STRING("rcu_torture_fakewriter task started");
     set_user_nice(current, MAX_NICE);
     if (WARN_ONCE(nsynctypes == 0,
@@ -1967,22 +1940,26 @@ unsafe extern "C" fn rcu_torture_writer_work(work: *mut work_struct) {
     cur_ops.cond_sync_exp_full(&gp_snap_full);
     break;
     case RTWS_POLL_GET:
-    if (cur_ops.start_poll_irqsoff)
+    if (cur_ops.start_poll_irqsoff) {
     local_irq_disable();
+    }
     gp_snap = cur_ops.start_gp_poll();
-    if (cur_ops.start_poll_irqsoff)
+    if (cur_ops.start_poll_irqsoff) {
     local_irq_enable();
+    }
     while (!cur_ops.poll_gp_state(gp_snap)) {
     torture_hrtimeout_jiffies(torture_random(&rand) % 16,
     &rand);
     }
     break;
     case RTWS_POLL_GET_FULL:
-    if (cur_ops.start_poll_irqsoff)
+    if (cur_ops.start_poll_irqsoff) {
     local_irq_disable();
+    }
     cur_ops.start_gp_poll_full(&gp_snap_full);
-    if (cur_ops.start_poll_irqsoff)
+    if (cur_ops.start_poll_irqsoff) {
     local_irq_enable();
+    }
     while (!cur_ops.poll_gp_state_full(&gp_snap_full)) {
     torture_hrtimeout_jiffies(torture_random(&rand) % 16,
     &rand);
@@ -2005,8 +1982,8 @@ unsafe extern "C" fn rcu_torture_writer_work(work: *mut work_struct) {
     case RTWS_SYNC:
     cur_ops.sync();
     break;
-    default:
-    WARN_ON_ONCE(1);
+// label;
+    WARN_ON_ONCE!(1);
     break;
     }
     }
@@ -2017,24 +1994,22 @@ unsafe extern "C" fn rcu_torture_writer_work(work: *mut work_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_timer_cb(rhp: *mut rcu_head) {
-    static void rcu_torture_timer_cb(struct rcu_head *rhp)
-    {
     kfree(rhp);
     }
 // Set up and carry out testing of RCU's global memory ordering
-    static void rcu_torture_reader_do_mbchk(long myid, struct rcu_torture *rtp,
-    struct torture_random_state *trsp)
-    {
-    unsigned long loops;
-    let mut noc: c_int = torture_num_online_cpus();
-    int rdrchked;
-    int rdrchker;
-    struct rcu_torture_reader_check *rtrcp; // Me.
-    struct rcu_torture_reader_check *rtrcp_assigner; // Assigned us to do checking.
-    struct rcu_torture_reader_check *rtrcp_chked; // Reader being checked.
-    struct rcu_torture_reader_check *rtrcp_chker; // Reader doing checking when not me.
-    if (myid < 0)
+#[no_mangle]
+pub unsafe extern "C" fn rcu_torture_reader_do_mbchk(myid: c_long, rtp: *mut rcu_torture, trsp: *mut torture_random_state) {
+    let mut loops = 0;
+pub static mut noc: c_int = 0;
+    let mut rdrchked = 0;
+    let mut rdrchker = 0;
+pub static mut rtrcp: *mut c_void = core::ptr::null_mut(); // Me.
+pub static mut rtrcp_assigner: *mut c_void = core::ptr::null_mut(); // Assigned us to do checking.
+pub static mut rtrcp_chked: *mut c_void = core::ptr::null_mut(); // Reader being checked.
+pub static mut rtrcp_chker: *mut c_void = core::ptr::null_mut(); // Reader doing checking when not me.
+    if (myid < 0) {
     return; // Don't try this from timer handlers.
+    }
 // Increment my counter.
     rtrcp = &rcu_torture_reader_mbchk[myid];
     WRITE_ONCE(rtrcp.rtc_myloops, rtrcp.rtc_myloops + 1);
@@ -2046,47 +2021,52 @@ unsafe extern "C" fn rcu_torture_timer_cb(rhp: *mut rcu_head) {
     if (rdrchked != myid && rdrchked != rdrchker && noc >= rdrchked && noc >= rdrchker &&
     smp_load_acquire(&rtrcp.rtc_chkrdr) < 0 && // Pairs with smp_store_release below.
     !READ_ONCE(rtp.rtort_chkp) &&
-    !smp_load_acquire(&rtrcp_chker.rtc_assigner)) { // Pairs with smp_store_release below.
+    !smp_load_acquire(&rtrcp_chker.rtc_assigner)) { // Pairs with smp_store_release below. {
     rtrcp.rtc_chkloops = READ_ONCE(rtrcp_chked.rtc_myloops);
-    WARN_ON_ONCE(rtrcp.rtc_chkrdr >= 0);
+    }
+    WARN_ON_ONCE!(rtrcp.rtc_chkrdr >= 0);
     rtrcp.rtc_chkrdr = rdrchked;
-    WARN_ON_ONCE(rtrcp.rtc_ready); // This gets set after the grace period ends.
+    WARN_ON_ONCE!(rtrcp.rtc_ready); // This gets set after the grace period ends.
     if (cmpxchg_relaxed(&rtrcp_chker.rtc_assigner, core::ptr::null_mut(), rtrcp) ||
-    cmpxchg_relaxed(&rtp.rtort_chkp, core::ptr::null_mut(), rtrcp))
+    cmpxchg_relaxed(&rtp.rtort_chkp, core::ptr::null_mut(), rtrcp)) {
     (void)cmpxchg_relaxed(&rtrcp_chker.rtc_assigner, rtrcp, core::ptr::null_mut()); // Back out.
+    }
     }
 // If assigned some completed work, do it!
     rtrcp_assigner = READ_ONCE(rtrcp.rtc_assigner);
-    if (!rtrcp_assigner || !smp_load_acquire(&rtrcp_assigner.rtc_ready))
+    if (!rtrcp_assigner || !smp_load_acquire(&rtrcp_assigner.rtc_ready)) {
     return; // No work or work not yet ready.
+    }
     rdrchked = rtrcp_assigner.rtc_chkrdr;
-    if (WARN_ON_ONCE(rdrchked < 0))
+    if (WARN_ON_ONCE!(rdrchked < 0)) {
     return;
+    }
     rtrcp_chked = &rcu_torture_reader_mbchk[rdrchked];
     loops = READ_ONCE(rtrcp_chked.rtc_myloops);
     atomic_inc(&n_rcu_torture_mbchk_tries);
-    if (ULONG_CMP_LT(loops, rtrcp_assigner.rtc_chkloops))
+    if (ULONG_CMP_LT(loops, rtrcp_assigner.rtc_chkloops)) {
     atomic_inc(&n_rcu_torture_mbchk_fail);
+    }
     rtrcp_assigner.rtc_chkloops = loops + ULONG_MAX / 2;
     rtrcp_assigner.rtc_ready = 0;
     smp_store_release(&rtrcp.rtc_assigner, core::ptr::null_mut()); // Someone else can assign us work.
     smp_store_release(&rtrcp_assigner.rtc_chkrdr, -1); // Assigner can again assign.
     }
-    static DEFINE_PER_CPU(bool, torture_in_scf_handler);
+pub static mut bool: usize = 0;
 // Verify the specified RCUTORTURE_RDR* state.
 
 #[no_mangle]
 unsafe extern "C" fn rcutorture_one_extend_check(s: *mut c_char, curstate: c_int, new: c_int, old: c_int) {
-    static void rcutorture_one_extend_check(char *s, int curstate, int new, int old)
-    {
-    int mask;
-    if (!IS_ENABLED(CONFIG_RCU_TORTURE_TEST_CHK_RDR_STATE) || in_nmi())
+    let mut mask = 0;
+    if (!IS_ENABLED!(CONFIG_RCU_TORTURE_TEST_CHK_RDR_STATE) || in_nmi()) {
     return;
+    }
     WARN_ONCE(!(curstate & RCUTORTURE_RDR_IRQ) && irqs_disabled() && !in_hardirq() && !this_cpu_read(torture_in_scf_handler), ROEC_ARGS);
     WARN_ONCE((curstate & RCUTORTURE_RDR_IRQ) && !irqs_disabled(), ROEC_ARGS);
 // If CONFIG_PREEMPT_COUNT=n, further checks are unreliable.
-    if (!IS_ENABLED(CONFIG_PREEMPT_COUNT))
+    if (!IS_ENABLED!(CONFIG_PREEMPT_COUNT)) {
     return;
+    }
     WARN_ONCE((curstate & (RCUTORTURE_RDR_BH | RCUTORTURE_RDR_RBH)) &&
     !softirq_count(), ROEC_ARGS);
     WARN_ONCE((curstate & (RCUTORTURE_RDR_PREEMPT | RCUTORTURE_RDR_SCHED)) &&
@@ -2096,8 +2076,9 @@ unsafe extern "C" fn rcutorture_one_extend_check(s: *mut c_char, curstate: c_int
     cur_ops.readlock_nesting() == 0, ROEC_ARGS);
 // Interrupt handlers have all sorts of stuff disabled, so ignore
 // unintended disabling.
-    if (in_serving_softirq() || in_hardirq() || this_cpu_read(torture_in_scf_handler))
+    if (in_serving_softirq() || in_hardirq() || this_cpu_read(torture_in_scf_handler)) {
     return;
+    }
     WARN_ONCE(cur_ops.extendables &&
     !(curstate & (RCUTORTURE_RDR_BH | RCUTORTURE_RDR_RBH)) &&
     softirq_count(), ROEC_ARGS);
@@ -2106,8 +2087,9 @@ unsafe extern "C" fn rcutorture_one_extend_check(s: *mut c_char, curstate: c_int
 // as rcu_read_lock().
 //
     mask = RCUTORTURE_RDR_PREEMPT | RCUTORTURE_RDR_SCHED;
-    if (!IS_ENABLED(CONFIG_PREEMPT_RCU))
+    if (!IS_ENABLED!(CONFIG_PREEMPT_RCU)) {
     mask |= RCUTORTURE_RDR_RCU_1 | RCUTORTURE_RDR_RCU_2;
+    }
     WARN_ONCE(cur_ops.extendables && !(curstate & mask) &&
     (preempt_count() & PREEMPT_MASK), ROEC_ARGS);
 //
@@ -2115,10 +2097,12 @@ unsafe extern "C" fn rcutorture_one_extend_check(s: *mut c_char, curstate: c_int
 // PREEMPT_MASK" as ->readlock_nesting().
 //
     mask = RCUTORTURE_RDR_RCU_1 | RCUTORTURE_RDR_RCU_2;
-    if (!IS_ENABLED(CONFIG_PREEMPT_RCU))
+    if (!IS_ENABLED!(CONFIG_PREEMPT_RCU)) {
     mask |= RCUTORTURE_RDR_PREEMPT | RCUTORTURE_RDR_SCHED;
-    if (IS_ENABLED(CONFIG_PREEMPT_RT) && softirq_count())
+    }
+    if (IS_ENABLED!(CONFIG_PREEMPT_RT) && softirq_count()) {
     mask |= RCUTORTURE_RDR_BH | RCUTORTURE_RDR_RBH;
+    }
     WARN_ONCE(cur_ops.readlock_nesting && !(curstate & mask) &&
     cur_ops.readlock_nesting() > 0, ROEC_ARGS);
     }
@@ -2131,55 +2115,63 @@ unsafe extern "C" fn rcutorture_one_extend_check(s: *mut c_char, curstate: c_int
 // beginning or end of the critical section and if there was actually a
 // change, do a ->read_delay().
 //
-    static void rcutorture_one_extend(int *readstate, int newstate, struct torture_random_state *trsp,
-    struct rt_read_seg *rtrsp)
-    {
-    bool first;
-    unsigned long flags;
-    let mut idxnew1: c_int = -1;
-    let mut idxnew2: c_int = -1;
-    let mut idxold1: c_int = *readstate;
-    let mut idxold2: c_int = idxold1;
-    let mut statesnew: c_int = ~*readstate & newstate;
-    let mut statesold: c_int = *readstate & ~newstate;
+#[no_mangle]
+pub unsafe extern "C" fn rcutorture_one_extend(readstate: *mut c_int, newstate: c_int, trsp: *mut torture_random_state, rtrsp: *mut rt_read_seg) {
+    let mut first = 0;
+    let mut flags = 0;
+pub static mut idxnew1: c_int = 0;
+pub static mut idxnew2: c_int = 0;
+pub static mut idxold1: c_int = 0;
+pub static mut idxold2: c_int = 0;
+pub static mut statesnew: c_int = 0;
+pub static mut statesold: c_int = 0;
     first = idxold1 == 0;
-    WARN_ON_ONCE(idxold2 < 0);
-    WARN_ON_ONCE(idxold2 & ~(RCUTORTURE_RDR_ALLBITS | RCUTORTURE_RDR_UPDOWN));
+    WARN_ON_ONCE!(idxold2 < 0);
+    WARN_ON_ONCE!(idxold2 & ~(RCUTORTURE_RDR_ALLBITS | RCUTORTURE_RDR_UPDOWN));
     rcutorture_one_extend_check("before change", idxold1, statesnew, statesold);
     rtrsp.rt_readstate = newstate;
 // First, put new protection in place to avoid critical-section gap.
-    if (statesnew & RCUTORTURE_RDR_BH)
+    if (statesnew & RCUTORTURE_RDR_BH) {
     local_bh_disable();
-    if (statesnew & RCUTORTURE_RDR_RBH)
+    }
+    if (statesnew & RCUTORTURE_RDR_RBH) {
     rcu_read_lock_bh();
-    if (statesnew & RCUTORTURE_RDR_IRQ)
+    }
+    if (statesnew & RCUTORTURE_RDR_IRQ) {
     local_irq_disable();
-    if (statesnew & RCUTORTURE_RDR_PREEMPT)
+    }
+    if (statesnew & RCUTORTURE_RDR_PREEMPT) {
     preempt_disable();
-    if (statesnew & RCUTORTURE_RDR_SCHED)
+    }
+    if (statesnew & RCUTORTURE_RDR_SCHED) {
     rcu_read_lock_sched();
-    if (statesnew & RCUTORTURE_RDR_RCU_1)
+    }
+    if (statesnew & RCUTORTURE_RDR_RCU_1) {
     idxnew1 = (cur_ops.readlock() << RCUTORTURE_RDR_SHIFT_1) & RCUTORTURE_RDR_MASK_1;
-    if (statesnew & RCUTORTURE_RDR_RCU_2)
+    }
+    if (statesnew & RCUTORTURE_RDR_RCU_2) {
     idxnew2 = (cur_ops.readlock() << RCUTORTURE_RDR_SHIFT_2) & RCUTORTURE_RDR_MASK_2;
+    }
 // Complain unless both the old and the new protection is in place.
     rcutorture_one_extend_check("during change", idxold1 | statesnew, statesnew, statesold);
 // Sample CPU under both sets of protections to reduce confusion.
-    if (IS_ENABLED(CONFIG_RCU_TORTURE_TEST_LOG_CPU)) {
-    let mut cpu: c_int = raw_smp_processor_id();
+    if (IS_ENABLED!(CONFIG_RCU_TORTURE_TEST_LOG_CPU)) {
+pub static mut cpu: c_int = 0;
     rtrsp.rt_cpu = cpu;
     if (!first) {
     rtrsp[-1].rt_end_cpu = cpu;
-    if (cur_ops.reader_blocked)
+    if (cur_ops.reader_blocked) {
     rtrsp[-1].rt_preempted = cur_ops.reader_blocked();
     }
     }
+    }
 // Sample grace-period sequence number, as good a place as any.
-    if (IS_ENABLED(CONFIG_RCU_TORTURE_TEST_LOG_GP) && cur_ops.gather_gp_seqs) {
+    if (IS_ENABLED!(CONFIG_RCU_TORTURE_TEST_LOG_GP) && cur_ops.gather_gp_seqs) {
     rtrsp.rt_gp_seq = cur_ops.gather_gp_seqs();
     rtrsp.rt_ts = ktime_get_mono_fast_ns();
-    if (!first)
+    if (!first) {
     rtrsp[-1].rt_gp_seq_end = rtrsp.rt_gp_seq;
+    }
     }
 //
 // Next, remove old protection, in decreasing order of strength
@@ -2188,108 +2180,124 @@ unsafe extern "C" fn rcutorture_one_extend_check(s: *mut c_char, curstate: c_int
 // Additionally PREEMPT_RT requires that BH is enabled in preemptible
 // context.
 //
-    if (statesold & RCUTORTURE_RDR_IRQ)
+    if (statesold & RCUTORTURE_RDR_IRQ) {
     local_irq_enable();
-    if (statesold & RCUTORTURE_RDR_PREEMPT)
+    }
+    if (statesold & RCUTORTURE_RDR_PREEMPT) {
     preempt_enable();
-    if (statesold & RCUTORTURE_RDR_SCHED)
+    }
+    if (statesold & RCUTORTURE_RDR_SCHED) {
     rcu_read_unlock_sched();
-    if (statesold & RCUTORTURE_RDR_BH)
+    }
+    if (statesold & RCUTORTURE_RDR_BH) {
     local_bh_enable();
-    if (statesold & RCUTORTURE_RDR_RBH)
+    }
+    if (statesold & RCUTORTURE_RDR_RBH) {
     rcu_read_unlock_bh();
+    }
     if (statesold & RCUTORTURE_RDR_RCU_2) {
     cur_ops.readunlock((idxold2 & RCUTORTURE_RDR_MASK_2) >> RCUTORTURE_RDR_SHIFT_2);
-    WARN_ON_ONCE(idxnew2 != -1);
+    WARN_ON_ONCE!(idxnew2 != -1);
     idxold2 = 0;
     }
     if (statesold & RCUTORTURE_RDR_RCU_1) {
-    bool lockit;
+    let mut lockit = 0;
     lockit = !cur_ops.no_pi_lock && !statesnew && !(torture_random(trsp) & 0xffff);
-    if (lockit)
+    if (lockit) {
     raw_spin_lock_irqsave(&current.pi_lock, flags);
+    }
     cur_ops.readunlock((idxold1 & RCUTORTURE_RDR_MASK_1) >> RCUTORTURE_RDR_SHIFT_1);
-    WARN_ON_ONCE(idxnew1 != -1);
+    WARN_ON_ONCE!(idxnew1 != -1);
     idxold1 = 0;
-    if (lockit)
+    if (lockit) {
     raw_spin_unlock_irqrestore(&current.pi_lock, flags);
+    }
     }
     if (statesold & RCUTORTURE_RDR_UPDOWN) {
     cur_ops.up_read((idxold1 & RCUTORTURE_RDR_MASK_1) >> RCUTORTURE_RDR_SHIFT_1);
-    WARN_ON_ONCE(idxnew1 != -1);
+    WARN_ON_ONCE!(idxnew1 != -1);
     idxold1 = 0;
     }
 // Delay if neither beginning nor end and there was a change.
-    if ((statesnew || statesold) && *readstate && newstate)
+    if ((statesnew || statesold) && *readstate && newstate) {
     cur_ops.read_delay(trsp, rtrsp);
+    }
 // Update the reader state.
-    if (idxnew1 == -1)
+    if (idxnew1 == -1) {
     idxnew1 = idxold1 & RCUTORTURE_RDR_MASK_1;
-    WARN_ON_ONCE(idxnew1 < 0);
-    if (idxnew2 == -1)
+    }
+    WARN_ON_ONCE!(idxnew1 < 0);
+    if (idxnew2 == -1) {
     idxnew2 = idxold2 & RCUTORTURE_RDR_MASK_2;
-    WARN_ON_ONCE(idxnew2 < 0);
+    }
+    WARN_ON_ONCE!(idxnew2 < 0);
 // readstate = idxnew1 | idxnew2 | newstate;
-    WARN_ON_ONCE(*readstate < 0);
-    if (WARN_ON_ONCE(*readstate & ~RCUTORTURE_RDR_ALLBITS))
-    pr_info("Unexpected readstate value of %#x\n", *readstate);
+    WARN_ON_ONCE!(*readstate < 0);
+    if (WARN_ON_ONCE!(*readstate & ~RCUTORTURE_RDR_ALLBITS)) {
+    pr_info!("Unexpected readstate value of %#x\n", *readstate);
+    }
     rcutorture_one_extend_check("after change", *readstate, statesnew, statesold);
     }
 // Return the biggest extendables mask given current RCU and boot parameters.
 #[no_mangle]
 unsafe extern "C" fn rcutorture_extend_mask_max() -> c_int {
-    static int rcutorture_extend_mask_max(void)
-    {
-    int mask;
-    WARN_ON_ONCE(extendables & ~RCUTORTURE_MAX_EXTEND);
+    let mut mask = 0;
+    WARN_ON_ONCE!(extendables & ~RCUTORTURE_MAX_EXTEND);
     mask = extendables & RCUTORTURE_MAX_EXTEND & cur_ops.extendables;
     mask = mask | RCUTORTURE_RDR_RCU_1 | RCUTORTURE_RDR_RCU_2;
     return mask;
     }
 // Return a random protection state mask, but with at least one bit set.
-    static int
-    rcutorture_extend_mask(int oldmask, struct torture_random_state *trsp)
-    {
-    let mut mask: c_int = rcutorture_extend_mask_max();
-    let mut randmask1: c_ulong = torture_random(trsp);
-    let mut randmask2: c_ulong = randmask1 >> 3;
-    let mut preempts: c_ulong = RCUTORTURE_RDR_PREEMPT | RCUTORTURE_RDR_SCHED;
-    let mut preempts_irq: c_ulong = preempts | RCUTORTURE_RDR_IRQ;
-    let mut bhs: c_ulong = RCUTORTURE_RDR_BH | RCUTORTURE_RDR_RBH;
-    WARN_ON_ONCE(mask >> RCUTORTURE_RDR_SHIFT_1);  // Can't have reader idx bits.
+#[no_mangle]
+pub unsafe extern "C" fn rcutorture_extend_mask(oldmask: c_int, trsp: *mut torture_random_state) -> c_int {
+pub static mut mask: c_int = 0;
+pub static mut randmask1: c_ulong = 0;
+pub static mut randmask2: c_ulong = 0;
+pub static mut preempts: c_ulong = 0;
+pub static mut preempts_irq: c_ulong = 0;
+pub static mut bhs: c_ulong = 0;
+    WARN_ON_ONCE!(mask >> RCUTORTURE_RDR_SHIFT_1);  // Can't have reader idx bits.
 // Mostly only one bit (need preemption!), sometimes lots of bits.
-    if (!(randmask1 & 0x7))
+    if (!(randmask1 & 0x7)) {
     mask = mask & randmask2;
-    else
+    }
+    else {
     mask = mask & (1 << (randmask2 % RCUTORTURE_RDR_NBITS));
+    }
 // Can't have nested RCU reader without outer RCU reader.
     if (!(mask & RCUTORTURE_RDR_RCU_1) && (mask & RCUTORTURE_RDR_RCU_2)) {
-    if (oldmask & RCUTORTURE_RDR_RCU_1)
+    if (oldmask & RCUTORTURE_RDR_RCU_1) {
     mask &= ~RCUTORTURE_RDR_RCU_2;
-    else
+    }
+    else {
     mask |= RCUTORTURE_RDR_RCU_1;
+    }
     }
 //
 // Don't mess with interrupt masking in interrupt handlers.
 //
-    if (in_hardirq() || this_cpu_read(torture_in_scf_handler))
+    if (in_hardirq() || this_cpu_read(torture_in_scf_handler)) {
     mask &= ~(preempts_irq | bhs);
+    }
 //
 // Can't enable bh w/irq disabled.
 //
-    if (mask & RCUTORTURE_RDR_IRQ)
+    if (mask & RCUTORTURE_RDR_IRQ) {
     mask |= oldmask & bhs;
+    }
 //
 // Ideally these sequences would be detected in debug builds
 // (regardless of RT), but until then don't stop testing
 // them on non-RT.
 //
-    if (IS_ENABLED(CONFIG_PREEMPT_RT)) {
+    if (IS_ENABLED!(CONFIG_PREEMPT_RT)) {
 // Can't modify BH in atomic context
-    if (oldmask & preempts_irq)
+    if (oldmask & preempts_irq) {
     mask &= ~bhs;
-    if ((oldmask | mask) & preempts_irq)
+    }
+    if ((oldmask | mask) & preempts_irq) {
     mask |= oldmask & bhs;
+    }
     }
     return mask ?: RCUTORTURE_RDR_RCU_1;
     }
@@ -2297,21 +2305,21 @@ unsafe extern "C" fn rcutorture_extend_mask_max() -> c_int {
 // Do a randomly selected number of extensions of an existing RCU read-side
 // critical section.
 //
-    static struct rt_read_seg *
-    rcutorture_loop_extend(int *readstate, struct torture_random_state *trsp, struct rt_read_seg *rtrsp)
-    {
-    int i;
-    int j;
-    let mut mask: c_int = rcutorture_extend_mask_max();
-    WARN_ON_ONCE(!*readstate); /* -Existing- RCU read-side critsect! */
-    if (!((mask - 1) & mask))
+#[no_mangle]
+pub unsafe extern "C" fn rcutorture_loop_extend(readstate: *mut c_int, trsp: *mut torture_random_state, rtrsp: *mut rt_read_seg) -> *mut c_void {
+    let mut i = 0;
+    let mut j = 0;
+pub static mut mask: c_int = 0;
+    WARN_ON_ONCE!(!*readstate); /* -Existing- RCU read-side critsect! */
+    if (!((mask - 1) & mask)) {
     return rtrsp;  /* Current RCU reader not extendable. */
+    }
 // Bias towards larger numbers of loops.
     i = torture_random(trsp);
     i = ((i | (i >> 3)) & RCUTORTURE_RDR_MAX_LOOPS) + 1;
-    for (j = 0; j < i; j++) {
+    while (j < i) {
     mask = rcutorture_extend_mask(*readstate, trsp);
-    WARN_ON_ONCE(mask & RCUTORTURE_RDR_UPDOWN);
+    WARN_ON_ONCE!(mask & RCUTORTURE_RDR_UPDOWN);
     rcutorture_one_extend(readstate, mask, trsp, &rtrsp[j]);
     }
     return &rtrsp[j];
@@ -2332,43 +2340,47 @@ pub struct rcu_torture_one_read_state {
 
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_dump_read_segs(rrsp: *mut rt_read_seg, nsegs: c_int) {
-    static void rcu_torture_dump_read_segs(struct rt_read_seg *rrsp, int nsegs)
-    {
-    bool firsttime;
-    int i;
-    int j;
+    let mut firsttime = 0;
+    let mut i = 0;
+    let mut j = 0;
     firsttime = 1;
-    for (i = 0; i < nsegs; i++) {
-    if (IS_ENABLED(CONFIG_RCU_TORTURE_TEST_LOG_GP))
+    while (i < nsegs) {
+    if (IS_ENABLED!(CONFIG_RCU_TORTURE_TEST_LOG_GP)) {
     pr_alert("\t%lluus ", div64_u64(rrsp[i].rt_ts, 1000ULL));
-    else
+    }
+    else {
     pr_alert("\t");
+    }
     pr_cont("%d: %#4x", i, rrsp[i].rt_readstate);
     if (rrsp[i].rt_delay_jiffies != 0) {
     pr_cont("%s%ldjiffies", firsttime ? "" : "+",
     rrsp[i].rt_delay_jiffies);
     firsttime = 0;
     }
-    if (IS_ENABLED(CONFIG_RCU_TORTURE_TEST_LOG_CPU)) {
+    if (IS_ENABLED!(CONFIG_RCU_TORTURE_TEST_LOG_CPU)) {
     pr_cont(" CPU %2d", rrsp[i].rt_cpu);
-    if (rrsp[i].rt_cpu != rrsp[i].rt_end_cpu)
+    if (rrsp[i].rt_cpu != rrsp[i].rt_end_cpu) {
     pr_cont(".%-2d", rrsp[i].rt_end_cpu);
-    else
+    }
+    else {
     pr_cont(" ...");
     }
-    if (IS_ENABLED(CONFIG_RCU_TORTURE_TEST_LOG_GP) &&
+    }
+    if (IS_ENABLED!(CONFIG_RCU_TORTURE_TEST_LOG_GP) &&
     cur_ops.gather_gp_seqs && cur_ops.format_gp_seqs) {
     char buf1[20+1];
     char buf2[20+1];
-    let mut sepchar: c_char = '-';
-    cur_ops.format_gp_seqs(rrsp[i].rt_gp_seq, buf1, ARRAY_SIZE(buf1));
-    cur_ops.format_gp_seqs(rrsp[i].rt_gp_seq_end, buf2, ARRAY_SIZE(buf2));
+pub static mut sepchar: c_char = '-';
+    cur_ops.format_gp_seqs(rrsp[i].rt_gp_seq, buf1, ARRAY_SIZE!(buf1));
+    cur_ops.format_gp_seqs(rrsp[i].rt_gp_seq_end, buf2, ARRAY_SIZE!(buf2));
     if (rrsp[i].rt_gp_seq == rrsp[i].rt_gp_seq_end) {
     if (buf2[0]) {
-    for (j = 0; buf2[j]; j++)
+    for (j = 0; buf2[j]; j++) {
     buf2[j] = '.';
-    if (j)
+    }
+    if (j) {
     buf2[j - 1] = ' ';
+    }
     }
     sepchar = ' ';
     }
@@ -2383,29 +2395,36 @@ unsafe extern "C" fn rcu_torture_dump_read_segs(rrsp: *mut rt_read_seg, nsegs: c
     firsttime = 0;
     }
     pr_cont("%s", rrsp[i].rt_preempted ? " preempted" : "");
-    if (rrsp[i].rt_readstate & RCUTORTURE_RDR_BH)
+    if (rrsp[i].rt_readstate & RCUTORTURE_RDR_BH) {
     pr_cont(" BH");
-    if (rrsp[i].rt_readstate & RCUTORTURE_RDR_IRQ)
+    }
+    if (rrsp[i].rt_readstate & RCUTORTURE_RDR_IRQ) {
     pr_cont(" IRQ");
-    if (rrsp[i].rt_readstate & RCUTORTURE_RDR_PREEMPT)
+    }
+    if (rrsp[i].rt_readstate & RCUTORTURE_RDR_PREEMPT) {
     pr_cont(" PREEMPT");
-    if (rrsp[i].rt_readstate & RCUTORTURE_RDR_RBH)
+    }
+    if (rrsp[i].rt_readstate & RCUTORTURE_RDR_RBH) {
     pr_cont(" RBH");
-    if (rrsp[i].rt_readstate & RCUTORTURE_RDR_SCHED)
+    }
+    if (rrsp[i].rt_readstate & RCUTORTURE_RDR_SCHED) {
     pr_cont(" SCHED");
-    if (rrsp[i].rt_readstate & RCUTORTURE_RDR_RCU_1)
+    }
+    if (rrsp[i].rt_readstate & RCUTORTURE_RDR_RCU_1) {
     pr_cont(" RCU_1");
-    if (rrsp[i].rt_readstate & RCUTORTURE_RDR_RCU_2)
+    }
+    if (rrsp[i].rt_readstate & RCUTORTURE_RDR_RCU_2) {
     pr_cont(" RCU_2");
+    }
     pr_cont("\n");
     }
-    if (rt_read_preempted)
+    if (rt_read_preempted) {
     pr_alert("\tReader was preempted.\n");
     }
-    static void init_rcu_torture_one_read_state(struct rcu_torture_one_read_state *rtorsp,
-    struct torture_random_state *trsp)
-    {
-    memset(rtorsp, 0, sizeof(*rtorsp));
+    }
+#[no_mangle]
+pub unsafe extern "C" fn init_rcu_torture_one_read_state(rtorsp: *mut rcu_torture_one_read_state, trsp: *mut torture_random_state) {
+    memset(rtorsp, 0, sizeof!(*rtorsp));
     rtorsp.checkpolling = !(torture_random(trsp) & 0xfff);
     rtorsp.rtrsp = &rtorsp.rtseg[0];
     }
@@ -2414,14 +2433,15 @@ unsafe extern "C" fn rcu_torture_dump_read_segs(rrsp: *mut rt_read_seg, nsegs: c
 // critical sections.  The caller must have actually initiated the
 // outermost read-side critical section.
 //
-    static bool rcu_torture_one_read_start(struct rcu_torture_one_read_state *rtorsp,
-    struct torture_random_state *trsp, long myid)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn rcu_torture_one_read_start(rtorsp: *mut rcu_torture_one_read_state, trsp: *mut torture_random_state, myid: c_long) -> bool {
     if (rtorsp.checkpolling) {
-    if (cur_ops.get_gp_state && cur_ops.poll_gp_state)
+    if (cur_ops.get_gp_state && cur_ops.poll_gp_state) {
     rtorsp.cookie = cur_ops.get_gp_state();
-    if (cur_ops.get_gp_state_full && cur_ops.poll_gp_state_full)
+    }
+    if (cur_ops.get_gp_state_full && cur_ops.poll_gp_state_full) {
     cur_ops.get_gp_state_full(&rtorsp.cookie_full);
+    }
     }
     rtorsp.started = cur_ops.get_gp_seq();
     rtorsp.ts = rcu_trace_clock_local();
@@ -2433,8 +2453,9 @@ unsafe extern "C" fn rcu_torture_dump_read_segs(rrsp: *mut rt_read_seg, nsegs: c
     rcutorture_one_extend(&rtorsp.readstate, 0, trsp, rtorsp.rtrsp);
     return false;
     }
-    if (rtorsp.p.rtort_mbtest == 0)
+    if (rtorsp.p.rtort_mbtest == 0) {
     atomic_inc(&n_rcu_torture_mberror);
+    }
     rcu_torture_reader_do_mbchk(myid, rtorsp.p, trsp);
     return true;
     }
@@ -2442,14 +2463,13 @@ unsafe extern "C" fn rcu_torture_dump_read_segs(rrsp: *mut rt_read_seg, nsegs: c
 // Complete the last segment of a series of overlapping read-side
 // critical sections and check for errors.
 //
-    static void rcu_torture_one_read_end(struct rcu_torture_one_read_state *rtorsp,
-    struct torture_random_state *trsp)
-    {
-    int i;
-    unsigned long completed;
-    int pipe_count;
-    let mut preempted: bool = false;
-    struct rt_read_seg *rtrsp1;
+#[no_mangle]
+pub unsafe extern "C" fn rcu_torture_one_read_end(rtorsp: *mut rcu_torture_one_read_state, trsp: *mut torture_random_state) {
+    let mut i = 0;
+    let mut completed = 0;
+    let mut pipe_count = 0;
+pub static mut preempted: bool = false;
+pub static mut rtrsp1: *mut c_void = core::ptr::null_mut();
     preempt_disable();
     pipe_count = READ_ONCE(rtorsp.p.rtort_pipe_count);
     if (pipe_count > RCU_TORTURE_PIPE_LEN) {
@@ -2472,14 +2492,15 @@ unsafe extern "C" fn rcu_torture_dump_read_segs(rrsp: *mut rt_read_seg, nsegs: c
     this_cpu_inc(rcu_torture_batch[completed]);
     preempt_enable();
     if (rtorsp.checkpolling) {
-    if (cur_ops.get_gp_state && cur_ops.poll_gp_state)
+    if (cur_ops.get_gp_state && cur_ops.poll_gp_state) {
     WARN_ONCE(cur_ops.poll_gp_state(rtorsp.cookie),
     "%s: Cookie check 2 failed %s(%d) %lu.%lu\n",
     __func__,
     rcu_torture_writer_state_getname(),
     rcu_torture_writer_state,
     rtorsp.cookie, cur_ops.get_gp_state());
-    if (cur_ops.get_gp_state_full && cur_ops.poll_gp_state_full)
+    }
+    if (cur_ops.get_gp_state_full && cur_ops.poll_gp_state_full) {
     WARN_ONCE(cur_ops.poll_gp_state_full(&rtorsp.cookie_full),
     "%s: Cookie check 6 failed %s(%d) online %*pbl\n",
     __func__,
@@ -2487,18 +2508,21 @@ unsafe extern "C" fn rcu_torture_dump_read_segs(rrsp: *mut rt_read_seg, nsegs: c
     rcu_torture_writer_state,
     cpumask_pr_args(cpu_online_mask));
     }
-    if (cur_ops.reader_blocked)
+    }
+    if (cur_ops.reader_blocked) {
     preempted = cur_ops.reader_blocked();
+    }
     rcutorture_one_extend(&rtorsp.readstate, 0, trsp, rtorsp.rtrsp);
-    WARN_ON_ONCE(rtorsp.readstate);
+    WARN_ON_ONCE!(rtorsp.readstate);
 // This next splat is expected behavior if leakpointer, especially
 // for CONFIG_RCU_STRICT_GRACE_PERIOD=y kernels.
-    WARN_ON_ONCE(leakpointer && READ_ONCE(rtorsp.p.rtort_pipe_count) > 1);
+    WARN_ON_ONCE!(leakpointer && READ_ONCE(rtorsp.p.rtort_pipe_count) > 1);
 // If error or close call, record the sequence of reader protections.
     if ((pipe_count > 1 || completed > 1) && !xchg(&err_segs_recorded, 1)) {
     i = 0;
-    for (rtrsp1 = &rtorsp.rtseg[0]; rtrsp1 < rtorsp.rtrsp; rtrsp1++)
+    for (rtrsp1 = &rtorsp.rtseg[0]; rtrsp1 < rtorsp.rtrsp; rtrsp1++) {
     err_segs[i++] = *rtrsp1;
+    }
     rt_read_nsegs = i;
     rt_read_preempted = preempted;
     }
@@ -2510,19 +2534,18 @@ unsafe extern "C" fn rcu_torture_dump_read_segs(rrsp: *mut rt_read_seg, nsegs: c
 //
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_one_read(trsp: *mut torture_random_state, myid: c_long) -> bool {
-    static bool rcu_torture_one_read(struct torture_random_state *trsp, long myid)
-    {
-    let mut firsttime: static int = 1;
-    int newstate;
-    unsigned int nsegs;
-    struct rcu_torture_one_read_state rtors;
-    WARN_ON_ONCE(!rcu_is_watching());
+pub static mut firsttime: int = 1;
+    let mut newstate = 0;
+    let mut nsegs = 0;
+pub static mut rtors: usize = 0;
+    WARN_ON_ONCE!(!rcu_is_watching());
     init_rcu_torture_one_read_state(&rtors, trsp);
     newstate = rcutorture_extend_mask(rtors.readstate, trsp);
-    WARN_ON_ONCE(newstate & RCUTORTURE_RDR_UPDOWN);
+    WARN_ON_ONCE!(newstate & RCUTORTURE_RDR_UPDOWN);
     rcutorture_one_extend(&rtors.readstate, newstate, trsp, rtors.rtrsp++);
-    if (!rcu_torture_one_read_start(&rtors, trsp, myid))
+    if (!rcu_torture_one_read_start(&rtors, trsp, myid)) {
     return false;
+    }
     rtors.rtrsp = rcutorture_loop_extend(&rtors.readstate, trsp, rtors.rtrsp);
     rcu_torture_one_read_end(&rtors, trsp);
 // This splat will happen on systems built with CONFIG_IRQ_WORK=n
@@ -2538,7 +2561,7 @@ unsafe extern "C" fn rcu_torture_one_read(trsp: *mut torture_random_state, myid:
     if (cur_ops.is_task_rcu_boosted && cur_ops.is_task_rcu_boosted() &&
     !in_serving_softirq() && !in_hardirq() && !in_nmi() &&
     READ_ONCE(firsttime) && xchg(&firsttime, 0)) {
-    WARN_ON_ONCE(deboost_timeliness_check);
+    WARN_ON_ONCE!(deboost_timeliness_check);
     nsegs = rtors.rtrsp - rtors.rtseg;
     nsegs = clamp_val(nsegs, 0, RCUTORTURE_RDR_MAX_SEGS);
     pr_alert("Slow-deboost rcutorture reader segments:\n");
@@ -2546,7 +2569,7 @@ unsafe extern "C" fn rcu_torture_one_read(trsp: *mut torture_random_state, myid:
     }
     return true;
     }
-    static DEFINE_TORTURE_RANDOM_PERCPU(rcu_torture_timer_rand);
+pub static mut rcu_torture_timer_rand: usize = 0;
 //
 // RCU torture reader from timer handler.  Dereferences rcu_torture_current,
 // incrementing the corresponding element of the pipeline array.  The
@@ -2555,21 +2578,20 @@ unsafe extern "C" fn rcu_torture_one_read(trsp: *mut torture_random_state, myid:
 //
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_timer(unused: *mut timer_list) {
-    static void rcu_torture_timer(struct timer_list *unused)
-    {
-    WARN_ON_ONCE(!in_serving_softirq());
-    WARN_ON_ONCE(in_hardirq());
-    WARN_ON_ONCE(in_nmi());
+    WARN_ON_ONCE!(!in_serving_softirq());
+    WARN_ON_ONCE!(in_hardirq());
+    WARN_ON_ONCE!(in_nmi());
     atomic_long_inc(&n_rcu_torture_timers);
     (void)rcu_torture_one_read(this_cpu_ptr(&rcu_torture_timer_rand), -1);
 // Test call_rcu() invocation from softirq handler.
     if (cur_ops.call) {
-    struct rcu_head *rhp = kmalloc_obj(*rhp, GFP_NOWAIT);
-    if (rhp)
+    let mut rhp = kmalloc_obj(*rhp, GFP_NOWAIT);
+    if (rhp) {
     cur_ops.call(rhp, rcu_torture_timer_cb);
     }
     }
-    static DEFINE_TORTURE_RANDOM_PERCPU(rcu_torture_irq_rand);
+    }
+pub static mut rcu_torture_irq_rand: usize = 0;
 //
 // RCU torture reader from timer handler.  Dereferences rcu_torture_current,
 // incrementing the corresponding element of the pipeline array.  The
@@ -2582,9 +2604,7 @@ unsafe extern "C" fn rcu_torture_timer(unused: *mut timer_list) {
 //
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_irq(unused: *mut c_void) {
-    static void rcu_torture_irq(void *unused)
-    {
-    WARN_ON_ONCE(in_nmi());
+    WARN_ON_ONCE!(in_nmi());
     lockdep_assert_irqs_disabled();
     atomic_long_inc(&n_rcu_torture_irqs);
     this_cpu_write(torture_in_scf_handler, true);
@@ -2596,10 +2616,11 @@ unsafe extern "C" fn rcu_torture_irq(unused: *mut c_void) {
 // lockless or raw-spinlock-protected allocator, but in the meantime,
 // skip testing call_rcu() from interrupt handlers in kernels built
 // with either CONFIG_PREEMPT_RT=y or CONFIG_PROVE_LOCKING=y.
-    if (cur_ops.call && !IS_ENABLED(CONFIG_PROVE_LOCKING) && !IS_ENABLED(CONFIG_PREEMPT_RT)) {
-    struct rcu_head *rhp = kmalloc_obj(*rhp, GFP_NOWAIT);
-    if (rhp)
+    if (cur_ops.call && !IS_ENABLED!(CONFIG_PROVE_LOCKING) && !IS_ENABLED!(CONFIG_PREEMPT_RT)) {
+    let mut rhp = kmalloc_obj(*rhp, GFP_NOWAIT);
+    if (rhp) {
     cur_ops.call(rhp, rcu_torture_timer_cb);
+    }
     }
     }
 //
@@ -2608,31 +2629,32 @@ unsafe extern "C" fn rcu_torture_irq(unused: *mut c_void) {
 // counter in the element should never be greater than 1, otherwise, the
 // RCU implementation is broken.
 //
-    static int
-    rcu_torture_reader(void *arg)
-    {
-    let mut lastscf: c_ulong = jiffies;
-    let mut lastsleep: c_ulong = jiffies;
-    let mut myid: c_long = (long)arg;
-    let mut mynumonline: c_int = myid;
-    DEFINE_TORTURE_RANDOM(rand);
-    struct timer_list t;
+#[no_mangle]
+pub unsafe extern "C" fn rcu_torture_reader(arg: *mut c_void) -> c_int {
+pub static mut lastscf: c_ulong = 0;
+pub static mut lastsleep: c_ulong = 0;
+pub static mut myid: c_long = 0;
+pub static mut mynumonline: c_int = 0;
+pub static mut rand: usize = 0;
+pub static mut t: usize = 0;
     VERBOSE_TOROUT_STRING("rcu_torture_reader task started");
     set_user_nice(current, MAX_NICE);
-    if (irqreader && cur_ops.irq_capable)
+    if (irqreader && cur_ops.irq_capable) {
     timer_setup_on_stack(&t, rcu_torture_timer, 0);
+    }
     tick_dep_set_task(current, TICK_DEP_BIT_RCU);  // CPU bound, so need tick.
     do {
     if (irqreader && cur_ops.irq_capable) {
     if (!timer_pending(&t)) {
-    int cpu;
+    let mut cpu = 0;
     mod_timer(&t, jiffies + 1);
     preempt_disable();
     cpu = torture_random(&rand) % nr_cpu_ids;
     if (!cpu_online(cpu)) {
     cpu = cpumask_next(cpu, cpu_online_mask);
-    if (cpu >= nr_cpu_ids)
+    if (cpu >= nr_cpu_ids) {
     cpu = cpumask_next(-1, cpu_online_mask);
+    }
     }
 // An smp_call_function_single() to self is not an interrupt!
     if (cpu != smp_processor_id() &&
@@ -2643,15 +2665,17 @@ unsafe extern "C" fn rcu_torture_irq(unused: *mut c_void) {
     preempt_enable();
     }
     }
-    if (!rcu_torture_one_read(&rand, myid) && !torture_must_stop())
+    if (!rcu_torture_one_read(&rand, myid) && !torture_must_stop()) {
     schedule_timeout_interruptible(HZ);
+    }
     if (time_after(jiffies, lastsleep) && !torture_must_stop()) {
     torture_hrtimeout_us(500, 1000, &rand);
     lastsleep = jiffies + 10;
     }
     while (!torture_must_stop() &&
-    (torture_num_online_cpus() < mynumonline || !rcu_inkernel_boot_has_ended()))
+    (torture_num_online_cpus() < mynumonline || !rcu_inkernel_boot_has_ended())) {
     schedule_timeout_interruptible(HZ / 5);
+    }
     stutter_wait("rcu_torture_reader");
     } while (!torture_must_stop());
     if (irqreader && cur_ops.irq_capable) {
@@ -2677,16 +2701,14 @@ pub struct rcu_torture_one_read_state_updown {
     pub rtorsu_rtors: rcu_torture_one_read_state,
 }
 
-    static struct rcu_torture_one_read_state_updown *updownreaders;
-    static DEFINE_TORTURE_RANDOM(rcu_torture_updown_rand);
-    static int rcu_torture_updown(void *arg);
+pub static mut updownreaders: *mut c_void = core::ptr::null_mut();
+pub static mut rcu_torture_updown_rand: usize = 0;
+// forward_decl: rcu_torture_updown;
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_updown_hrt(hrtp: *mut hrtimer) -> enum hrtimer_restart {
-    static enum hrtimer_restart rcu_torture_updown_hrt(struct hrtimer *hrtp)
-    {
-    let mut cpu: c_int = raw_smp_processor_id();
-    struct rcu_torture_one_read_state_updown *rtorsup;
-    rtorsup = container_of(hrtp, struct rcu_torture_one_read_state_updown, rtorsu_hrt);
+pub static mut cpu: c_int = 0;
+pub static mut rtorsup: *mut c_void = core::ptr::null_mut();
+    rtorsup = container_of!(hrtp, rcu_torture_one_read_state_updown, rtorsu_hrt);
     rcu_torture_one_read_end(&rtorsup.rtorsu_rtors, &rtorsup.rtorsu_trs);
     WARN_ONCE(rtorsup.rtorsu_nups >= rtorsup.rtorsu_ndowns, "%s: Up without matching down #%zu.\n", __func__, rtorsup - updownreaders);
     WRITE_ONCE(rtorsup.rtorsu_nups, rtorsup.rtorsu_nups + 1);
@@ -2697,13 +2719,12 @@ unsafe extern "C" fn rcu_torture_updown_hrt(hrtp: *mut hrtimer) -> enum hrtimer_
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_updown_init() -> c_int {
-    static int rcu_torture_updown_init(void)
-    {
-    int i;
-    struct torture_random_state *rand = &rcu_torture_updown_rand;
-    int ret;
-    if (n_up_down < 0)
+    let mut i = 0;
+    let mut rand = &rcu_torture_updown_rand;
+    let mut ret = 0;
+    if (n_up_down < 0) {
     return 0;
+    }
     if (!srcu_torture_have_up_down()) {
     VERBOSE_TOROUT_STRING("rcu_torture_updown_init: Disabling up/down reader tests due to lack of primitives");
     return 0;
@@ -2713,7 +2734,7 @@ unsafe extern "C" fn rcu_torture_updown_init() -> c_int {
     VERBOSE_TOROUT_STRING("rcu_torture_updown_init: Out of memory, disabling up/down reader tests");
     return -ENOMEM;
     }
-    for (i = 0; i < n_up_down; i++) {
+    while (i < n_up_down) {
     init_rcu_torture_one_read_state(&updownreaders[i].rtorsu_rtors, rand);
     hrtimer_setup(&updownreaders[i].rtorsu_hrt, rcu_torture_updown_hrt, CLOCK_MONOTONIC,
     HRTIMER_MODE_REL | HRTIMER_MODE_HARD);
@@ -2730,13 +2751,12 @@ unsafe extern "C" fn rcu_torture_updown_init() -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_updown_cleanup() {
-    static void rcu_torture_updown_cleanup(void)
-    {
-    struct rcu_torture_one_read_state_updown *rtorsup;
-    for (rtorsup = updownreaders; rtorsup < &updownreaders[n_up_down]; rtorsup++) {
-    if (!smp_load_acquire(&rtorsup.rtorsu_inuse))
+pub static mut rtorsup: *mut c_void = core::ptr::null_mut();
+    while (rtorsup < &updownreaders[n_up_down]) {
+    if (!smp_load_acquire(&rtorsup.rtorsu_inuse)) {
     continue;
-    if (hrtimer_cancel(&rtorsup.rtorsu_hrt) || WARN_ON_ONCE(rtorsup.rtorsu_inuse)) {
+    }
+    if (hrtimer_cancel(&rtorsup.rtorsu_hrt) || WARN_ON_ONCE!(rtorsup.rtorsu_inuse)) {
     rcu_torture_one_read_end(&rtorsup.rtorsu_rtors, &rtorsup.rtorsu_trs);
     WARN_ONCE(rtorsup.rtorsu_nups >= rtorsup.rtorsu_ndowns, "%s: Up without matching down #%zu.\n", __func__, rtorsup - updownreaders);
     WRITE_ONCE(rtorsup.rtorsu_nups, rtorsup.rtorsu_nups + 1);
@@ -2749,17 +2769,15 @@ unsafe extern "C" fn rcu_torture_updown_cleanup() {
 // Do one reader for rcu_torture_updown().
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_updown_one(rtorsup: *mut rcu_torture_one_read_state_updown) {
-    static void rcu_torture_updown_one(struct rcu_torture_one_read_state_updown *rtorsup)
-    {
-    int idx;
-    int rawidx;
-    ktime_t t;
+    let mut idx = 0;
+    let mut rawidx = 0;
+    let mut t;
     init_rcu_torture_one_read_state(&rtorsup.rtorsu_rtors, &rtorsup.rtorsu_trs);
     rawidx = cur_ops.down_read();
     WRITE_ONCE(rtorsup.rtorsu_ndowns, rtorsup.rtorsu_ndowns + 1);
     idx = (rawidx << RCUTORTURE_RDR_SHIFT_1) & RCUTORTURE_RDR_MASK_1;
     rtorsup.rtorsu_rtors.readstate = idx | RCUTORTURE_RDR_UPDOWN;
-    rtorsup.rtorsu_rtors.rtrsp++;
+    rtorsup.rtorsu_rtors.rtrsp += 1;
     rtorsup.rtorsu_cpu = raw_smp_processor_id();
     if (!rcu_torture_one_read_start(&rtorsup.rtorsu_rtors, &rtorsup.rtorsu_trs, -1)) {
     WARN_ONCE(rtorsup.rtorsu_nups >= rtorsup.rtorsu_ndowns, "%s: Up without matching down #%zu.\n", __func__, rtorsup - updownreaders);
@@ -2769,8 +2787,9 @@ unsafe extern "C" fn rcu_torture_updown_one(rtorsup: *mut rcu_torture_one_read_s
     }
     smp_store_release(&rtorsup.rtorsu_inuse, true);
     t = torture_random(&rtorsup.rtorsu_trs) & 0xfffff; // One per million.
-    if (t < 10 * 1000)
+    if (t < 10 * 1000) {
     t = 200 * 1000 * 1000;
+    }
     hrtimer_start(&rtorsup.rtorsu_hrt, t, HRTIMER_MODE_REL | HRTIMER_MODE_HARD);
     smp_mb(); // Sample jiffies after posting hrtimer.
     rtorsup.rtorsu_j = jiffies;  // Not used by hrtimer handler.
@@ -2781,16 +2800,16 @@ unsafe extern "C" fn rcu_torture_updown_one(rtorsup: *mut rcu_torture_one_read_s
 // context and ending them in hrtimer handlers.  Otherwise similar to
 // rcu_torture_reader().
 //
-    static int
-    rcu_torture_updown(void *arg)
-    {
-    unsigned long j;
-    struct rcu_torture_one_read_state_updown *rtorsup;
+#[no_mangle]
+pub unsafe extern "C" fn rcu_torture_updown(arg: *mut c_void) -> c_int {
+    let mut j = 0;
+pub static mut rtorsup: *mut c_void = core::ptr::null_mut();
     VERBOSE_TOROUT_STRING("rcu_torture_updown task started");
     do {
-    for (rtorsup = updownreaders; rtorsup < &updownreaders[n_up_down]; rtorsup++) {
-    if (torture_must_stop())
+    while (rtorsup < &updownreaders[n_up_down]) {
+    if (torture_must_stop()) {
     break;
+    }
     j = smp_load_acquire(&jiffies); // Time before .rtorsu_inuse.
     if (smp_load_acquire(&rtorsup.rtorsu_inuse)) {
     WARN_ONCE(time_after(j, rtorsup.rtorsu_j + 1 + HZ * 10),
@@ -2812,28 +2831,31 @@ unsafe extern "C" fn rcu_torture_updown_one(rtorsup: *mut rcu_torture_one_read_s
 //
 #[no_mangle]
 unsafe extern "C" fn rcu_nocb_toggle(arg: *mut c_void) -> c_int {
-    static int rcu_nocb_toggle(void *arg)
-    {
-    int cpu;
-    let mut maxcpu: c_int = -1;
-    let mut oldnice: c_int = task_nice(current);
-    long r;
-    DEFINE_TORTURE_RANDOM(rand);
-    ktime_t toggle_delay;
-    unsigned long toggle_fuzz;
-    let mut toggle_interval: ktime_t = ms_to_ktime(nocbs_toggle);
+    let mut cpu = 0;
+pub static mut maxcpu: c_int = 0;
+pub static mut oldnice: c_int = 0;
+    let mut r = 0;
+pub static mut rand: usize = 0;
+    let mut toggle_delay;
+    let mut toggle_fuzz = 0;
+pub static mut toggle_interval: ktime_t = 0;
     VERBOSE_TOROUT_STRING("rcu_nocb_toggle task started");
-    while (!rcu_inkernel_boot_has_ended())
+    while (!rcu_inkernel_boot_has_ended()) {
     schedule_timeout_interruptible(HZ / 10);
-    for_each_possible_cpu(cpu)
+    }
+    for_each_possible_cpu(cpu) {
     maxcpu = cpu;
-    WARN_ON(maxcpu < 0);
-    if (toggle_interval > ULONG_MAX)
+    }
+    WARN_ON!(maxcpu < 0);
+    if (toggle_interval > ULONG_MAX) {
     toggle_fuzz = ULONG_MAX >> 3;
-    else
+    }
+    else {
     toggle_fuzz = toggle_interval >> 3;
-    if (toggle_fuzz <= 0)
+    }
+    if (toggle_fuzz <= 0) {
     toggle_fuzz = NSEC_PER_USEC;
+    }
     do {
     r = torture_random(&rand);
     cpu = (r >> 1) % (maxcpu + 1);
@@ -2847,8 +2869,9 @@ unsafe extern "C" fn rcu_nocb_toggle(arg: *mut c_void) -> c_int {
     toggle_delay = torture_random(&rand) % toggle_fuzz + toggle_interval;
     set_current_state(TASK_INTERRUPTIBLE);
     schedule_hrtimeout(&toggle_delay, HRTIMER_MODE_REL);
-    if (stutter_wait("rcu_nocb_toggle"))
+    if (stutter_wait("rcu_nocb_toggle")) {
     sched_set_normal(current, oldnice);
+    }
     } while (!torture_must_stop());
     torture_kthread_stopping("rcu_nocb_toggle");
     return 0;
@@ -2861,41 +2884,42 @@ unsafe extern "C" fn rcu_nocb_toggle(arg: *mut c_void) -> c_int {
 // kthread full control (or the init/cleanup functions when rcu_torture_stats
 // thread is not running).
 //
-    static void
-    rcu_torture_stats_print(void)
-    {
-    int cpu;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn rcu_torture_stats_print() {
+    let mut cpu = 0;
+    let mut i = 0;
     long pipesummary[RCU_TORTURE_PIPE_LEN + 1] = { 0 };
     long batchsummary[RCU_TORTURE_PIPE_LEN + 1] = { 0 };
-    let mut n_gpwraps: c_long = 0;
-    let mut ndowns: c_ulong = 0;
-    let mut nunexpired: c_ulong = 0;
-    let mut nmigrates: c_ulong = 0;
-    let mut nups: c_ulong = 0;
-    struct rcu_torture *rtcp;
-    let mut rtcv_snap: static unsigned long = ULONG_MAX;
+pub static mut n_gpwraps: c_long = 0;
+pub static mut ndowns: c_ulong = 0;
+pub static mut nunexpired: c_ulong = 0;
+pub static mut nmigrates: c_ulong = 0;
+pub static mut nups: c_ulong = 0;
+pub static mut rtcp: *mut c_void = core::ptr::null_mut();
+pub static mut rtcv_snap: unsigned long = 0;
     static bool splatted;
-    struct task_struct *wtp;
+pub static mut wtp: *mut c_void = core::ptr::null_mut();
     for_each_possible_cpu(cpu) {
-    for (i = 0; i < RCU_TORTURE_PIPE_LEN + 1; i++) {
+    while (i < RCU_TORTURE_PIPE_LEN + 1) {
     pipesummary[i] += READ_ONCE(per_cpu(rcu_torture_count, cpu)[i]);
     batchsummary[i] += READ_ONCE(per_cpu(rcu_torture_batch, cpu)[i]);
     }
-    if (cur_ops.get_gpwrap_count)
+    if (cur_ops.get_gpwrap_count) {
     n_gpwraps += cur_ops.get_gpwrap_count(cpu);
     }
+    }
     if (updownreaders) {
-    for (i = 0; i < n_up_down; i++) {
+    while (i < n_up_down) {
     ndowns += READ_ONCE(updownreaders[i].rtorsu_ndowns);
     nups += READ_ONCE(updownreaders[i].rtorsu_nups);
     nunexpired += READ_ONCE(updownreaders[i].rtorsu_inuse);
     nmigrates += READ_ONCE(updownreaders[i].rtorsu_nmigrates);
     }
     }
-    for (i = RCU_TORTURE_PIPE_LEN; i >= 0; i--) {
-    if (pipesummary[i] != 0)
+    while (i >= 0) {
+    if (pipesummary[i] != 0) {
     break;
+    }
     } // The value of variable "i" is used later, so don't clobber it!
     pr_alert("%s%s ", torture_type, TORTURE_FLAG);
     rtcp = rcu_access_pointer(rcu_torture_current);
@@ -2917,8 +2941,9 @@ unsafe extern "C" fn rcu_nocb_toggle(arg: *mut c_void) -> c_int {
     n_rcu_torture_boosts,
     atomic_long_read(&n_rcu_torture_timers),
     atomic_long_read(&n_rcu_torture_irqs));
-    if (updownreaders)
+    if (updownreaders) {
     pr_cont("ndowns: %lu nups: %lu nhrt: %lu nmigrates: %lu ", ndowns, nups, nunexpired,  nmigrates);
+    }
     torture_onoff_stats();
     pr_cont("barrier: %ld/%ld:%ld ",
     data_race(n_barrier_successes),
@@ -2935,38 +2960,42 @@ unsafe extern "C" fn rcu_nocb_toggle(arg: *mut c_void) -> c_int {
     n_rcu_torture_boost_failure || i > 1) {
     pr_cont("%s", "!!! ");
     atomic_inc(&n_rcu_torture_error);
-    WARN_ON_ONCE(atomic_read(&n_rcu_torture_mberror));
-    WARN_ON_ONCE(atomic_read(&n_rcu_torture_mbchk_fail));
-    WARN_ON_ONCE(n_rcu_torture_barrier_error);  // rcu_barrier()
-    WARN_ON_ONCE(n_rcu_torture_boost_ktrerror); // no boost kthread
-    WARN_ON_ONCE(n_rcu_torture_boost_failure); // boost failed (TIMER_SOFTIRQ RT prio?)
-    WARN_ON_ONCE(i > 1); // Too-short grace period
+    WARN_ON_ONCE!(atomic_read(&n_rcu_torture_mberror));
+    WARN_ON_ONCE!(atomic_read(&n_rcu_torture_mbchk_fail));
+    WARN_ON_ONCE!(n_rcu_torture_barrier_error);  // rcu_barrier()
+    WARN_ON_ONCE!(n_rcu_torture_boost_ktrerror); // no boost kthread
+    WARN_ON_ONCE!(n_rcu_torture_boost_failure); // boost failed (TIMER_SOFTIRQ RT prio?)
+    WARN_ON_ONCE!(i > 1); // Too-short grace period
     }
     pr_cont("Reader Pipe: ");
-    for (i = 0; i < RCU_TORTURE_PIPE_LEN + 1; i++)
+    for (i = 0; i < RCU_TORTURE_PIPE_LEN + 1; i++) {
     pr_cont(" %ld", pipesummary[i]);
+    }
     pr_cont("\n");
     pr_alert("%s%s ", torture_type, TORTURE_FLAG);
     pr_cont("Reader Batch: ");
-    for (i = 0; i < RCU_TORTURE_PIPE_LEN + 1; i++)
+    for (i = 0; i < RCU_TORTURE_PIPE_LEN + 1; i++) {
     pr_cont(" %ld", batchsummary[i]);
+    }
     pr_cont("\n");
     pr_alert("%s%s ", torture_type, TORTURE_FLAG);
     pr_cont("Free-Block Circulation: ");
-    for (i = 0; i < RCU_TORTURE_PIPE_LEN + 1; i++) {
+    while (i < RCU_TORTURE_PIPE_LEN + 1) {
     pr_cont(" %d", atomic_read(&rcu_torture_wcount[i]));
     }
     pr_cont("\n");
-    if (cur_ops.stats)
+    if (cur_ops.stats) {
     cur_ops.stats();
+    }
     if (rtcv_snap == rcu_torture_current_version &&
     rcu_access_pointer(rcu_torture_current) &&
     !rcu_stall_is_suppressed() &&
     rcu_inkernel_boot_has_ended()) {
-    let mut flags: int __maybe_unused = 0;
-    let mut gp_seq: unsigned long __maybe_unused = 0;
-    if (cur_ops.get_gp_data)
+pub static mut flags: int __maybe_unused = 0;
+pub static mut gp_seq: unsigned long __maybe_unused = 0;
+    if (cur_ops.get_gp_data) {
     cur_ops.get_gp_data(&flags, &gp_seq);
+    }
     wtp = READ_ONCE(writer_task);
     pr_alert("??? Writer stall state %s(%d) g%lu f%#x .state %c cpu %d\n",
     rcu_torture_writer_state_getname(),
@@ -2977,8 +3006,9 @@ unsafe extern "C" fn rcu_nocb_toggle(arg: *mut c_void) -> c_int {
     sched_show_task(wtp);
     splatted = true;
     }
-    if (cur_ops.gp_kthread_dbg)
+    if (cur_ops.gp_kthread_dbg) {
     cur_ops.gp_kthread_dbg();
+    }
     rcu_ftrace_dump(DUMP_ALL);
     }
     rtcv_snap = rcu_torture_current_version;
@@ -2987,9 +3017,8 @@ unsafe extern "C" fn rcu_nocb_toggle(arg: *mut c_void) -> c_int {
 // Periodically prints torture statistics, if periodic statistics printing
 // was specified via the stat_interval module parameter.
 //
-    static int
-    rcu_torture_stats(void *arg)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn rcu_torture_stats(arg: *mut c_void) -> c_int {
     VERBOSE_TOROUT_STRING("rcu_torture_stats task started");
     do {
     schedule_timeout_interruptible(stat_interval * HZ);
@@ -3002,16 +3031,15 @@ unsafe extern "C" fn rcu_nocb_toggle(arg: *mut c_void) -> c_int {
 // Test mem_dump_obj() and friends.
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_mem_dump_obj() {
-    static void rcu_torture_mem_dump_obj(void)
-    {
-    struct rcu_head *rhp;
-    struct kmem_cache *kcp;
+pub static mut rhp: *mut c_void = core::ptr::null_mut();
+pub static mut kcp: *mut c_void = core::ptr::null_mut();
     static int z;
     kcp = kmem_cache_create("rcuscale", 136, 8, SLAB_STORE_USER, core::ptr::null_mut());
-    if (WARN_ON_ONCE(!kcp))
+    if (WARN_ON_ONCE!(!kcp)) {
     return;
+    }
     rhp = kmem_cache_alloc(kcp, GFP_KERNEL);
-    if (WARN_ON_ONCE(!rhp)) {
+    if (WARN_ON_ONCE!(!rhp)) {
     kmem_cache_destroy(kcp);
     return;
     }
@@ -3031,8 +3059,9 @@ unsafe extern "C" fn rcu_torture_mem_dump_obj() {
     kmem_cache_free(kcp, rhp);
     kmem_cache_destroy(kcp);
     rhp = kmalloc_obj(*rhp);
-    if (WARN_ON_ONCE(!rhp))
+    if (WARN_ON_ONCE!(!rhp)) {
     return;
+    }
     pr_alert("mem_dump_obj() kmalloc test: rcu_torture_stats = %px, &rhp = %px, rhp = %px\n", stats_task, &rhp, rhp);
     pr_alert("mem_dump_obj(kmalloc %px):", rhp);
     mem_dump_obj(rhp);
@@ -3040,8 +3069,9 @@ unsafe extern "C" fn rcu_torture_mem_dump_obj() {
     mem_dump_obj(&rhp.func);
     kfree(rhp);
     rhp = vmalloc(4096);
-    if (WARN_ON_ONCE(!rhp))
+    if (WARN_ON_ONCE!(!rhp)) {
     return;
+    }
     pr_alert("mem_dump_obj() vmalloc test: rcu_torture_stats = %px, &rhp = %px, rhp = %px\n", stats_task, &rhp, rhp);
     pr_alert("mem_dump_obj(vmalloc %px):", rhp);
     mem_dump_obj(rhp);
@@ -3049,9 +3079,8 @@ unsafe extern "C" fn rcu_torture_mem_dump_obj() {
     mem_dump_obj(&rhp.func);
     vfree(rhp);
     }
-    static void
-    rcu_torture_print_module_parms(struct rcu_torture_ops *cur_ops, const char *tag)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn rcu_torture_print_module_parms(cur_ops: *mut rcu_torture_ops, tag: *mut c_char) {
     pr_alert("%s" TORTURE_FLAG
     "--- %s: nreaders=%d nwriters=%d nfakewriters=%d "
     "stat_interval=%d verbose=%d test_no_idle_hz=%d "
@@ -3085,11 +3114,10 @@ unsafe extern "C" fn rcu_torture_mem_dump_obj() {
     }
 #[no_mangle]
 unsafe extern "C" fn rcutorture_booster_cleanup(cpu: c_uint) -> c_int {
-    static int rcutorture_booster_cleanup(unsigned int cpu)
-    {
-    struct task_struct *t;
-    if (boost_tasks[cpu] == core::ptr::null_mut())
+pub static mut t: *mut c_void = core::ptr::null_mut();
+    if (boost_tasks[cpu] == core::ptr::null_mut()) {
     return 0;
+    }
     mutex_lock(&boost_mutex);
     t = boost_tasks[cpu];
     boost_tasks[cpu] = core::ptr::null_mut();
@@ -3101,25 +3129,24 @@ unsafe extern "C" fn rcutorture_booster_cleanup(cpu: c_uint) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn rcutorture_booster_init(cpu: c_uint) -> c_int {
-    static int rcutorture_booster_init(unsigned int cpu)
-    {
-    int retval;
-    if (boost_tasks[cpu] != core::ptr::null_mut())
+    let mut retval = 0;
+    if (boost_tasks[cpu] != core::ptr::null_mut()) {
     return 0;  /* Already created, nothing more to do. */
+    }
 // Testing RCU priority boosting requires rcutorture do
 // some serious abuse.  Counter this by running ksoftirqd
 // at higher priority.
     if (IS_BUILTIN(CONFIG_RCU_TORTURE_TEST)) {
-    struct sched_param sp;
-    struct task_struct *t;
+pub static mut sp: usize = 0;
+pub static mut t: *mut c_void = core::ptr::null_mut();
     t = per_cpu(ksoftirqd, cpu);
-    WARN_ON_ONCE(!t);
+    WARN_ON_ONCE!(!t);
     sp.sched_priority = 2;
     sched_setscheduler_nocheck(t, SCHED_FIFO, &sp);
 
     if (force_irqthreads()) {
     t = per_cpu(ktimerd, cpu);
-    WARN_ON_ONCE(!t);
+    WARN_ON_ONCE!(!t);
     sp.sched_priority = 2;
     sched_setscheduler_nocheck(t, SCHED_FIFO, &sp);
     }
@@ -3134,7 +3161,7 @@ unsafe extern "C" fn rcutorture_booster_init(cpu: c_uint) -> c_int {
     if (IS_ERR(boost_tasks[cpu])) {
     retval = PTR_ERR(boost_tasks[cpu]);
     VERBOSE_TOROUT_STRING("rcu_torture_boost task create failed");
-    n_rcu_torture_boost_ktrerror++;
+    n_rcu_torture_boost_ktrerror += 1;
     boost_tasks[cpu] = core::ptr::null_mut();
     mutex_unlock(&boost_mutex);
     return retval;
@@ -3144,14 +3171,10 @@ unsafe extern "C" fn rcutorture_booster_init(cpu: c_uint) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_stall_nf(nb: *mut notifier_block, v: c_ulong, ptr: *mut c_void) -> c_int {
-    static int rcu_torture_stall_nf(struct notifier_block *nb, unsigned long v, void *ptr)
-    {
-    pr_info("%s: v=%lu, duration=%lu.\n", __func__, v, (unsigned long)ptr);
+    pr_info!("%s: v=%lu, duration=%lu.\n", __func__, v, (unsigned long)ptr);
     return NOTIFY_OK;
     }
-    static struct notifier_block rcu_torture_stall_block = {
-    .notifier_call = rcu_torture_stall_nf,
-    };
+pub static mut notifier_block: usize = 0;
 //
 // CPU-stall kthread.  It waits as specified by stall_cpu_holdoff, then
 // induces a CPU stall for the time specified by stall_cpu.  If a new
@@ -3159,10 +3182,8 @@ unsafe extern "C" fn rcu_torture_stall_nf(nb: *mut notifier_block, v: c_ulong, p
 //
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_stall_one(rep: c_int, irqsoff: c_int) {
-    static void rcu_torture_stall_one(int rep, int irqsoff)
-    {
-    int idx;
-    unsigned long stop_at;
+    let mut idx = 0;
+    let mut stop_at = 0;
     if (stall_cpu_holdoff > 0) {
     VERBOSE_TOROUT_STRING("rcu_torture_stall begin holdoff");
     schedule_timeout_interruptible(stall_cpu_holdoff * HZ);
@@ -3171,9 +3192,10 @@ unsafe extern "C" fn rcu_torture_stall_one(rep: c_int, irqsoff: c_int) {
     if (!kthread_should_stop() && stall_gp_kthread > 0) {
     VERBOSE_TOROUT_STRING("rcu_torture_stall begin GP stall");
     rcu_gp_set_torture_wait(stall_gp_kthread * HZ);
-    for (idx = 0; idx < stall_gp_kthread + 2; idx++) {
-    if (kthread_should_stop())
+    while (idx < stall_gp_kthread + 2) {
+    if (kthread_should_stop()) {
     break;
+    }
     schedule_timeout_uninterruptible(HZ);
     }
     }
@@ -3182,17 +3204,19 @@ unsafe extern "C" fn rcu_torture_stall_one(rep: c_int, irqsoff: c_int) {
     stop_at = ktime_get_seconds() + stall_cpu;
 // RCU CPU stall is expected behavior in following code.
     idx = cur_ops.readlock();
-    if (irqsoff)
+    if (irqsoff) {
     local_irq_disable();
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !stall_cpu_block) -> else {
-    else if (!stall_cpu_block)
+    }
+
+    else if (!stall_cpu_block) {
     preempt_disable();
+    }
     pr_alert("%s start stall episode %d on CPU %d.\n",
     __func__, rep + 1, raw_smp_processor_id());
     while (ULONG_CMP_LT((unsigned long)ktime_get_seconds(), stop_at) &&
-    !kthread_should_stop())
+    !kthread_should_stop()) {
     if (stall_cpu_block) {
+    }
 
     preempt_schedule();
 
@@ -3201,12 +3225,13 @@ pub unsafe extern "C" fn if(_arg: !stall_cpu_block) -> else {
     } else if (stall_no_softlockup) {
     touch_softlockup_watchdog();
     }
-    if (irqsoff)
+    if (irqsoff) {
     local_irq_enable();
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !stall_cpu_block) -> else {
-    else if (!stall_cpu_block)
+    }
+
+    else if (!stall_cpu_block) {
     preempt_enable();
+    }
     cur_ops.readunlock(idx);
     }
     }
@@ -3218,45 +3243,46 @@ pub unsafe extern "C" fn if(_arg: !stall_cpu_block) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_stall(args: *mut c_void) -> c_int {
-    static int rcu_torture_stall(void *args)
-    {
-    int i;
-    let mut repeat: c_int = stall_cpu_repeat;
-    int ret;
+    let mut i = 0;
+pub static mut repeat: c_int = 0;
+    let mut ret = 0;
     VERBOSE_TOROUT_STRING("rcu_torture_stall task started");
     if (repeat < 0) {
     repeat = 0;
-    WARN_ON_ONCE(IS_BUILTIN(CONFIG_RCU_TORTURE_TEST));
+    WARN_ON_ONCE!(IS_BUILTIN(CONFIG_RCU_TORTURE_TEST));
     }
     if (rcu_cpu_stall_notifiers) {
     ret = rcu_stall_chain_notifier_register(&rcu_torture_stall_block);
-    if (ret)
-    pr_info("%s: rcu_stall_chain_notifier_register() returned %d, %sexpected.\n",
-    __func__, ret, !IS_ENABLED(CONFIG_RCU_STALL_COMMON) ? "un" : "");
+    if (ret) {
+    pr_info!("%s: rcu_stall_chain_notifier_register() returned %d, %sexpected.\n",
+    __func__, ret, !IS_ENABLED!(CONFIG_RCU_STALL_COMMON) ? "un" : "");
     }
-    for (i = 0; i <= repeat; i++) {
-    if (kthread_should_stop())
+    }
+    while (i <= repeat) {
+    if (kthread_should_stop()) {
     break;
+    }
     rcu_torture_stall_one(i, i == 0 ? stall_cpu_irqsoff : 0);
     }
     pr_alert("%s end.\n", __func__);
     if (rcu_cpu_stall_notifiers && !ret) {
     ret = rcu_stall_chain_notifier_unregister(&rcu_torture_stall_block);
-    if (ret)
-    pr_info("%s: rcu_stall_chain_notifier_unregister() returned %d.\n", __func__, ret);
+    if (ret) {
+    pr_info!("%s: rcu_stall_chain_notifier_unregister() returned %d.\n", __func__, ret);
+    }
     }
     torture_shutdown_absorb("rcu_torture_stall");
-    while (!kthread_should_stop())
+    while (!kthread_should_stop()) {
     schedule_timeout_interruptible(10 * HZ);
+    }
     return 0;
     }
 // Spawn CPU-stall kthread, if stall_cpu specified.
 #[no_mangle]
-unsafe extern "C" fn rcu_torture_stall_init() -> int __init {
-    static int __init rcu_torture_stall_init(void)
-    {
-    if (stall_cpu <= 0 && stall_gp_kthread <= 0)
+unsafe extern "C" fn rcu_torture_stall_init() -> c_int {
+    if (stall_cpu <= 0 && stall_gp_kthread <= 0) {
     return 0;
+    }
     return torture_create_kthread(rcu_torture_stall, core::ptr::null_mut(), stall_task);
     }
 // State structure for forward-progress self-propagating RCU callback.
@@ -3274,9 +3300,7 @@ pub struct fwd_cb_state {
 //
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_fwd_prog_cb(rhp: *mut rcu_head) {
-    static void rcu_torture_fwd_prog_cb(struct rcu_head *rhp)
-    {
-    struct fwd_cb_state *fcsp = container_of(rhp, struct fwd_cb_state, rh);
+    let mut fcsp = container_of!(rhp, fwd_cb_state, rh);
     if (READ_ONCE(fcsp.stop)) {
     WRITE_ONCE(fcsp.stop, 2);
     return;
@@ -3313,26 +3337,25 @@ pub struct rcu_fwd {
     pub rcu_fwd_id: c_int,
 }
 
-    static DEFINE_MUTEX(rcu_fwd_mutex);
-    static struct rcu_fwd *rcu_fwds;
+pub static mut rcu_fwd_mutex: usize = 0;
+pub static mut rcu_fwds: *mut c_void = core::ptr::null_mut();
     static unsigned long rcu_fwd_seq;
     static atomic_long_t rcu_fwd_max_cbs;
     static bool rcu_fwd_emergency_stop;
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_fwd_cb_hist(rfp: *mut rcu_fwd) {
-    static void rcu_torture_fwd_cb_hist(struct rcu_fwd *rfp)
-    {
-    unsigned long gps;
-    unsigned long gps_old;
-    int i;
-    int j;
-    for (i = ARRAY_SIZE(rfp.n_launders_hist) - 1; i > 0; i--)
+    let mut gps = 0;
+    let mut gps_old = 0;
+    let mut i = 0;
+    let mut j = 0;
+    for (i = ARRAY_SIZE!(rfp.n_launders_hist) - 1; i > 0; i--) {
     if (rfp.n_launders_hist[i].n_launders > 0)
     break;
+    }
     pr_alert("%s: Callback-invocation histogram %d (duration %lu jiffies):",
     __func__, rfp.rcu_fwd_id, jiffies - rfp.rcu_fwd_startat);
     gps_old = rfp.rcu_launder_gp_seq_start;
-    for (j = 0; j <= i; j++) {
+    while (j <= i) {
     gps = rfp.n_launders_hist[j].launder_gp_seq;
     pr_cont(" %ds/%d: %ld:%ld",
     j + 1, FWD_CBS_HIST_DIV,
@@ -3345,36 +3368,34 @@ unsafe extern "C" fn rcu_torture_fwd_cb_hist(rfp: *mut rcu_fwd) {
 // Callback function for continuous-flood RCU callbacks.
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_fwd_cb_cr(rhp: *mut rcu_head) {
-    static void rcu_torture_fwd_cb_cr(struct rcu_head *rhp)
-    {
-    unsigned long flags;
-    int i;
-    struct rcu_fwd_cb *rfcp = container_of(rhp, struct rcu_fwd_cb, rh);
-    struct rcu_fwd_cb **rfcpp;
-    struct rcu_fwd *rfp = rfcp.rfc_rfp;
+    let mut flags = 0;
+    let mut i = 0;
+    let mut rfcp = container_of!(rhp, rcu_fwd_cb, rh);
+pub static mut rfcpp: *mut c_void = core::ptr::null_mut();
+    let mut rfp = rfcp.rfc_rfp;
     rfcp.rfc_next = core::ptr::null_mut();
-    rfcp.rfc_gps++;
+    rfcp.rfc_gps += 1;
     spin_lock_irqsave(&rfp.rcu_fwd_lock, flags);
     rfcpp = rfp.rcu_fwd_cb_tail;
     rfp.rcu_fwd_cb_tail = &rfcp.rfc_next;
     smp_store_release(rfcpp, rfcp);
     WRITE_ONCE(rfp.n_launders_cb, rfp.n_launders_cb + 1);
     i = ((jiffies - rfp.rcu_fwd_startat) / (HZ / FWD_CBS_HIST_DIV));
-    if (i >= ARRAY_SIZE(rfp.n_launders_hist))
-    i = ARRAY_SIZE(rfp.n_launders_hist) - 1;
-    rfp.n_launders_hist[i].n_launders++;
+    if (i >= ARRAY_SIZE!(rfp.n_launders_hist)) {
+    i = ARRAY_SIZE!(rfp.n_launders_hist) - 1;
+    }
+    rfp.n_launders_hist[i].n_launders += 1;
     rfp.n_launders_hist[i].launder_gp_seq = cur_ops.get_gp_seq();
     spin_unlock_irqrestore(&rfp.rcu_fwd_lock, flags);
     }
 // Give the scheduler a chance, even on nohz_full CPUs.
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_fwd_prog_cond_resched(iter: c_ulong) {
-    static void rcu_torture_fwd_prog_cond_resched(unsigned long iter)
-    {
-    if (IS_ENABLED(CONFIG_PREEMPTION) && IS_ENABLED(CONFIG_NO_HZ_FULL)) {
+    if (IS_ENABLED!(CONFIG_PREEMPTION) && IS_ENABLED!(CONFIG_NO_HZ_FULL)) {
 // Real call_rcu() floods hit userspace, so emulate that.
-    if (need_resched() || (iter & 0xfff))
+    if (need_resched() || (iter & 0xfff)) {
     schedule();
+    }
     return;
     }
 // No userspace emulation: CB invocation throttles call_rcu()
@@ -3386,11 +3407,9 @@ unsafe extern "C" fn rcu_torture_fwd_prog_cond_resched(iter: c_ulong) {
 //
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_fwd_prog_cbfree(rfp: *mut rcu_fwd) -> c_ulong {
-    static unsigned long rcu_torture_fwd_prog_cbfree(struct rcu_fwd *rfp)
-    {
-    unsigned long flags;
-    let mut freed: c_ulong = 0;
-    struct rcu_fwd_cb *rfcp;
+    let mut flags = 0;
+pub static mut freed: c_ulong = 0;
+pub static mut rfcp: *mut c_void = core::ptr::null_mut();
     for (;;) {
     spin_lock_irqsave(&rfp.rcu_fwd_lock, flags);
     rfcp = rfp.rcu_fwd_cb_head;
@@ -3399,11 +3418,12 @@ unsafe extern "C" fn rcu_torture_fwd_prog_cbfree(rfp: *mut rcu_fwd) -> c_ulong {
     break;
     }
     rfp.rcu_fwd_cb_head = rfcp.rfc_next;
-    if (!rfp.rcu_fwd_cb_head)
+    if (!rfp.rcu_fwd_cb_head) {
     rfp.rcu_fwd_cb_tail = &rfp.rcu_fwd_cb_head;
+    }
     spin_unlock_irqrestore(&rfp.rcu_fwd_lock, flags);
     kfree(rfcp);
-    freed++;
+    freed += 1;
     rcu_torture_fwd_prog_cond_resched(freed);
     if (tick_nohz_full_enabled()) {
     local_irq_save(flags);
@@ -3414,22 +3434,22 @@ unsafe extern "C" fn rcu_torture_fwd_prog_cbfree(rfp: *mut rcu_fwd) -> c_ulong {
     return freed;
     }
 // Carry out need_resched()/cond_resched() forward-progress testing.
-    static void rcu_torture_fwd_prog_nr(struct rcu_fwd *rfp,
-    int *tested, int *tested_tries)
-    {
-    unsigned long cver;
-    unsigned long dur;
-    struct fwd_cb_state fcs;
-    unsigned long gps;
-    int idx;
-    int sd;
-    int sd4;
-    let mut selfpropcb: bool = false;
-    unsigned long stopat;
-    static DEFINE_TORTURE_RANDOM(trs);
+#[no_mangle]
+pub unsafe extern "C" fn rcu_torture_fwd_prog_nr(rfp: *mut rcu_fwd, tested: *mut c_int, tested_tries: *mut c_int) {
+    let mut cver = 0;
+    let mut dur = 0;
+pub static mut fcs: usize = 0;
+    let mut gps = 0;
+    let mut idx = 0;
+    let mut sd = 0;
+    let mut sd4 = 0;
+pub static mut selfpropcb: bool = false;
+    let mut stopat = 0;
+pub static mut trs: usize = 0;
     pr_alert("%s: Starting forward-progress test %d\n", __func__, rfp.rcu_fwd_id);
-    if (!cur_ops.sync)
+    if (!cur_ops.sync) {
     return; // Cannot do need_resched() forward progress testing without .sync.
+    }
     if (cur_ops.call && cur_ops.cb_barrier) {
     init_rcu_head_on_stack(&fcs.rh);
     selfpropcb = true;
@@ -3454,8 +3474,9 @@ unsafe extern "C" fn rcu_torture_fwd_prog_cbfree(rfp: *mut rcu_fwd) -> c_ulong {
     idx = cur_ops.readlock();
     udelay(10);
     cur_ops.readunlock(idx);
-    if (!fwd_progress_need_resched || need_resched())
+    if (!fwd_progress_need_resched || need_resched()) {
     cond_resched();
+    }
     }
     (*tested_tries)++;
     if (!time_before(jiffies, stopat) &&
@@ -3464,7 +3485,7 @@ unsafe extern "C" fn rcu_torture_fwd_prog_cbfree(rfp: *mut rcu_fwd) -> c_ulong {
     (*tested)++;
     cver = READ_ONCE(rcu_torture_current_version) - cver;
     gps = rcutorture_seq_diff(cur_ops.get_gp_seq(), gps);
-    WARN_ON(!cver && gps < 2);
+    WARN_ON!(!cver && gps < 2);
     pr_alert("%s: %d Duration %ld cver %ld gps %ld\n", __func__,
     rfp.rcu_fwd_id, dur, cver, gps);
     }
@@ -3475,7 +3496,7 @@ unsafe extern "C" fn rcu_torture_fwd_prog_cbfree(rfp: *mut rcu_fwd) -> c_ulong {
     cur_ops.cb_barrier(); /* Wait for queued callbacks. */
     }
     if (selfpropcb) {
-    WARN_ON(READ_ONCE(fcs.stop) != 2);
+    WARN_ON!(READ_ONCE(fcs.stop) != 2);
     destroy_rcu_head_on_stack(&fcs.rh);
     }
     schedule_timeout_uninterruptible(HZ / 10); /* Let kthreads recover. */
@@ -3484,21 +3505,19 @@ unsafe extern "C" fn rcu_torture_fwd_prog_cbfree(rfp: *mut rcu_fwd) -> c_ulong {
 // Carry out call_rcu() forward-progress testing.
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_fwd_prog_cr(rfp: *mut rcu_fwd) {
-    static void rcu_torture_fwd_prog_cr(struct rcu_fwd *rfp)
-    {
-    unsigned long cver;
-    unsigned long flags;
-    unsigned long gps;
-    int i;
-    long n_launders;
-    long n_launders_cb_snap;
-    long n_launders_sa;
-    long n_max_cbs;
-    long n_max_gps;
-    struct rcu_fwd_cb *rfcp;
-    struct rcu_fwd_cb *rfcpn;
-    unsigned long stopat;
-    unsigned long stoppedat;
+    let mut cver = 0;
+    let mut flags = 0;
+    let mut gps = 0;
+    let mut i = 0;
+    let mut n_launders = 0;
+    let mut n_launders_cb_snap = 0;
+    let mut n_launders_sa = 0;
+    let mut n_max_cbs = 0;
+    let mut n_max_gps = 0;
+pub static mut rfcp: *mut c_void = core::ptr::null_mut();
+pub static mut rfcpn: *mut c_void = core::ptr::null_mut();
+    let mut stopat = 0;
+    let mut stoppedat = 0;
     if (READ_ONCE(rcu_fwd_emergency_stop)) {
     pr_alert("%s: Emergency stop, so no forward-progress test %d\n", __func__, rfp.rcu_fwd_id);
     return; /* Get out of the way quickly, no GP wait! */
@@ -3518,8 +3537,9 @@ unsafe extern "C" fn rcu_torture_fwd_prog_cr(rfp: *mut rcu_fwd) {
     n_launders_sa = 0;
     n_max_cbs = 0;
     n_max_gps = 0;
-    for (i = 0; i < ARRAY_SIZE(rfp.n_launders_hist); i++)
+    for (i = 0; i < ARRAY_SIZE!(rfp.n_launders_hist); i++) {
     rfp.n_launders_hist[i].n_launders = 0;
+    }
     cver = READ_ONCE(rcu_torture_current_version);
     gps = cur_ops.get_gp_seq();
     rfp.rcu_launder_gp_seq_start = gps;
@@ -3529,30 +3549,33 @@ unsafe extern "C" fn rcu_torture_fwd_prog_cr(rfp: *mut rcu_fwd) {
     !READ_ONCE(rcu_fwd_emergency_stop) && !torture_must_stop()) {
     rfcp = READ_ONCE(rfp.rcu_fwd_cb_head);
     rfcpn = core::ptr::null_mut();
-    if (rfcp)
+    if (rfcp) {
     rfcpn = READ_ONCE(rfcp.rfc_next);
+    }
     if (rfcpn) {
     if (rfcp.rfc_gps >= MIN_FWD_CB_LAUNDERS &&
-    ++n_max_gps >= MIN_FWD_CBS_LAUNDERED)
+    ++n_max_gps >= MIN_FWD_CBS_LAUNDERED) {
     break;
+    }
     rfp.rcu_fwd_cb_head = rfcpn;
-    n_launders++;
-    n_launders_sa++;
+    n_launders += 1;
+    n_launders_sa += 1;
     } else if (!cur_ops.cbflood_max || cur_ops.cbflood_max > n_max_cbs) {
     rfcp = kmalloc_obj(*rfcp);
-    if (WARN_ON_ONCE(!rfcp)) {
+    if (WARN_ON_ONCE!(!rfcp)) {
     schedule_timeout_interruptible(1);
     continue;
     }
-    n_max_cbs++;
+    n_max_cbs += 1;
     n_launders_sa = 0;
     rfcp.rfc_gps = 0;
     rfcp.rfc_rfp = rfp;
     } else {
     rfcp = core::ptr::null_mut();
     }
-    if (rfcp)
+    if (rfcp) {
     cur_ops.call(&rfcp.rh, rcu_torture_fwd_cb_cr);
+    }
     rcu_torture_fwd_prog_cond_resched(n_launders + n_max_cbs);
     if (tick_nohz_full_enabled()) {
     local_irq_save(flags);
@@ -3569,8 +3592,9 @@ unsafe extern "C" fn rcu_torture_fwd_prog_cr(rfp: *mut rcu_fwd) {
     (void)rcu_torture_fwd_prog_cbfree(rfp);
     if (!torture_must_stop() && !READ_ONCE(rcu_fwd_emergency_stop) &&
     !shutdown_time_arrived()) {
-    if (WARN_ON(n_max_gps < MIN_FWD_CBS_LAUNDERED) && cur_ops.gp_kthread_dbg)
+    if (WARN_ON!(n_max_gps < MIN_FWD_CBS_LAUNDERED) && cur_ops.gp_kthread_dbg) {
     cur_ops.gp_kthread_dbg();
+    }
     pr_alert("%s Duration %lu barrier: %lu pending %ld n_launders: %ld n_launders_sa: %ld n_max_gps: %ld n_max_cbs: %ld cver %ld gps %ld #online %u\n",
     __func__,
     stoppedat - rfp.rcu_fwd_startat, jiffies - stoppedat,
@@ -3590,12 +3614,11 @@ unsafe extern "C" fn rcu_torture_fwd_prog_cr(rfp: *mut rcu_fwd) {
 // OOM notifier, but this only prints diagnostic information for the
 // current forward-progress test.
 //
-    static int rcutorture_oom_notify(struct notifier_block *self,
-    unsigned long notused, void *nfreed)
-    {
-    int i;
-    long ncbs;
-    struct rcu_fwd *rfp;
+#[no_mangle]
+pub unsafe extern "C" fn rcutorture_oom_notify(self: *mut notifier_block, notused: c_ulong, nfreed: *mut c_void) -> c_int {
+    let mut i = 0;
+    let mut ncbs = 0;
+pub static mut rfp: *mut c_void = core::ptr::null_mut();
     mutex_lock(&rcu_fwd_mutex);
     rfp = rcu_fwds;
     if (!rfp) {
@@ -3604,53 +3627,54 @@ unsafe extern "C" fn rcu_torture_fwd_prog_cr(rfp: *mut rcu_fwd) {
     }
     WARN(1, "%s invoked upon OOM during forward-progress testing.\n",
     __func__);
-    for (i = 0; i < fwd_progress; i++) {
+    while (i < fwd_progress) {
     rcu_torture_fwd_cb_hist(&rfp[i]);
     rcu_fwd_progress_check(1 + (jiffies - READ_ONCE(rfp[i].rcu_fwd_startat)) / 2);
     }
     WRITE_ONCE(rcu_fwd_emergency_stop, true);
     smp_mb(); /* Emergency stop before free and wait to avoid hangs. */
     ncbs = 0;
-    for (i = 0; i < fwd_progress; i++)
+    for (i = 0; i < fwd_progress; i++) {
     ncbs += rcu_torture_fwd_prog_cbfree(&rfp[i]);
-    pr_info("%s: Freed %lu RCU callbacks.\n", __func__, ncbs);
+    }
+    pr_info!("%s: Freed %lu RCU callbacks.\n", __func__, ncbs);
     cur_ops.cb_barrier();
     ncbs = 0;
-    for (i = 0; i < fwd_progress; i++)
+    for (i = 0; i < fwd_progress; i++) {
     ncbs += rcu_torture_fwd_prog_cbfree(&rfp[i]);
-    pr_info("%s: Freed %lu RCU callbacks.\n", __func__, ncbs);
+    }
+    pr_info!("%s: Freed %lu RCU callbacks.\n", __func__, ncbs);
     cur_ops.cb_barrier();
     ncbs = 0;
-    for (i = 0; i < fwd_progress; i++)
+    for (i = 0; i < fwd_progress; i++) {
     ncbs += rcu_torture_fwd_prog_cbfree(&rfp[i]);
-    pr_info("%s: Freed %lu RCU callbacks.\n", __func__, ncbs);
+    }
+    pr_info!("%s: Freed %lu RCU callbacks.\n", __func__, ncbs);
     smp_mb(); /* Frees before return to avoid redoing OOM. */
-    (*(unsigned long *)nfreed)++; /* Forward progress CBs freed! */
-    pr_info("%s returning after OOM processing.\n", __func__);
+    (*nfreed)++; /* Forward progress CBs freed! */
+    pr_info!("%s returning after OOM processing.\n", __func__);
     mutex_unlock(&rcu_fwd_mutex);
     return NOTIFY_OK;
     }
-    static struct notifier_block rcutorture_oom_nb = {
-    .notifier_call = rcutorture_oom_notify
-    };
+pub static mut notifier_block: usize = 0;
 // Carry out grace-period forward-progress testing.
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_fwd_prog(args: *mut c_void) -> c_int {
-    static int rcu_torture_fwd_prog(void *args)
-    {
-    let mut firsttime: bool = true;
-    long max_cbs;
-    let mut oldnice: c_int = task_nice(current);
-    let mut oldseq: c_ulong = READ_ONCE(rcu_fwd_seq);
-    struct rcu_fwd *rfp = args;
-    let mut tested: c_int = 0;
-    let mut tested_tries: c_int = 0;
+pub static mut firsttime: bool = true;
+    let mut max_cbs = 0;
+pub static mut oldnice: c_int = 0;
+pub static mut oldseq: c_ulong = 0;
+    let mut rfp = args;
+pub static mut tested: c_int = 0;
+pub static mut tested_tries: c_int = 0;
     VERBOSE_TOROUT_STRING("rcu_torture_fwd_progress task started");
-    while (!rcu_inkernel_boot_has_ended())
+    while (!rcu_inkernel_boot_has_ended()) {
     schedule_timeout_interruptible(HZ / 10);
+    }
     rcu_bind_current_to_nocb();
-    if (!IS_ENABLED(CONFIG_SMP) || !IS_ENABLED(CONFIG_RCU_BOOST))
+    if (!IS_ENABLED!(CONFIG_SMP) || !IS_ENABLED!(CONFIG_RCU_BOOST)) {
     set_user_nice(current, MAX_NICE);
+    }
     do {
     if (!rfp.rcu_fwd_id) {
     schedule_timeout_interruptible(fwd_progress_holdoff * HZ);
@@ -3662,25 +3686,29 @@ unsafe extern "C" fn rcu_torture_fwd_prog(args: *mut c_void) -> c_int {
     firsttime = false;
     WRITE_ONCE(rcu_fwd_seq, rcu_fwd_seq + 1);
     } else {
-    while (READ_ONCE(rcu_fwd_seq) == oldseq && !torture_must_stop())
+    while (READ_ONCE(rcu_fwd_seq) == oldseq && !torture_must_stop()) {
     schedule_timeout_interruptible(HZ / 20);
+    }
     oldseq = READ_ONCE(rcu_fwd_seq);
     }
     pr_alert("%s: Starting forward-progress test %d\n", __func__, rfp.rcu_fwd_id);
-    if (rcu_inkernel_boot_has_ended() && torture_num_online_cpus() > rfp.rcu_fwd_id)
+    if (rcu_inkernel_boot_has_ended() && torture_num_online_cpus() > rfp.rcu_fwd_id) {
     rcu_torture_fwd_prog_cr(rfp);
+    }
     if ((cur_ops.stall_dur && cur_ops.stall_dur() > 0) &&
-    (!IS_ENABLED(CONFIG_TINY_RCU) ||
+    (!IS_ENABLED!(CONFIG_TINY_RCU) ||
     (rcu_inkernel_boot_has_ended() &&
-    torture_num_online_cpus() > rfp.rcu_fwd_id)))
+    torture_num_online_cpus() > rfp.rcu_fwd_id))) {
     rcu_torture_fwd_prog_nr(rfp, &tested, &tested_tries);
+    }
 // Avoid slow periods, better to test when busy.
-    if (stutter_wait("rcu_torture_fwd_prog"))
+    if (stutter_wait("rcu_torture_fwd_prog")) {
     sched_set_normal(current, oldnice);
+    }
     } while (!torture_must_stop());
 // Short runs might not contain a valid forward-progress attempt.
     if (!rfp.rcu_fwd_id) {
-    WARN_ON(!tested && tested_tries >= 5);
+    WARN_ON!(!tested && tested_tries >= 5);
     pr_alert("%s: tested %d tested_tries %d\n", __func__, tested, tested_tries);
     }
     torture_kthread_stopping("rcu_torture_fwd_prog");
@@ -3688,14 +3716,13 @@ unsafe extern "C" fn rcu_torture_fwd_prog(args: *mut c_void) -> c_int {
     }
 // If forward-progress checking is requested and feasible, spawn the thread.
 #[no_mangle]
-unsafe extern "C" fn rcu_torture_fwd_prog_init() -> int __init {
-    static int __init rcu_torture_fwd_prog_init(void)
-    {
-    int i;
-    let mut ret: c_int = 0;
-    struct rcu_fwd *rfp;
-    if (!fwd_progress)
+unsafe extern "C" fn rcu_torture_fwd_prog_init() -> c_int {
+    let mut i = 0;
+pub static mut ret: c_int = 0;
+pub static mut rfp: *mut c_void = core::ptr::null_mut();
+    if (!fwd_progress) {
     return 0; /* Not requested, so don't do it. */
+    }
     if (fwd_progress >= nr_cpu_ids) {
     VERBOSE_TOROUT_STRING("rcu_torture_fwd_prog_init: Limiting fwd_progress to # CPUs.\n");
     fwd_progress = nr_cpu_ids;
@@ -3709,18 +3736,21 @@ unsafe extern "C" fn rcu_torture_fwd_prog_init() -> int __init {
     fwd_progress = 0;
     return 0;
     }
-    if (stall_cpu > 0 || (preempt_duration > 0 && IS_ENABLED(CONFIG_RCU_NOCB_CPU))) {
+    if (stall_cpu > 0 || (preempt_duration > 0 && IS_ENABLED!(CONFIG_RCU_NOCB_CPU))) {
     VERBOSE_TOROUT_STRING("rcu_torture_fwd_prog_init: Disabled, conflicts with CPU-stall and/or preemption testing");
     fwd_progress = 0;
-    if (IS_MODULE(CONFIG_RCU_TORTURE_TEST))
+    if (IS_MODULE(CONFIG_RCU_TORTURE_TEST)) {
     return -EINVAL; /* In module, can fail back to user. */
-    WARN_ON(1); /* Make sure rcutorture scripting notices conflict. */
+    }
+    WARN_ON!(1); /* Make sure rcutorture scripting notices conflict. */
     return 0;
     }
-    if (fwd_progress_holdoff <= 0)
+    if (fwd_progress_holdoff <= 0) {
     fwd_progress_holdoff = 1;
-    if (fwd_progress_div <= 0)
+    }
+    if (fwd_progress_div <= 0) {
     fwd_progress_div = 4;
+    }
     rfp = kzalloc_objs(*rfp, fwd_progress);
     fwd_prog_tasks = kzalloc_objs(*fwd_prog_tasks, fwd_progress);
     if (!rfp || !fwd_prog_tasks) {
@@ -3730,7 +3760,7 @@ unsafe extern "C" fn rcu_torture_fwd_prog_init() -> int __init {
     fwd_progress = 0;
     return -ENOMEM;
     }
-    for (i = 0; i < fwd_progress; i++) {
+    while (i < fwd_progress) {
     spin_lock_init(&rfp[i].rcu_fwd_lock);
     rfp[i].rcu_fwd_cb_tail = &rfp[i].rcu_fwd_cb_head;
     rfp[i].rcu_fwd_id = i;
@@ -3739,7 +3769,7 @@ unsafe extern "C" fn rcu_torture_fwd_prog_init() -> int __init {
     rcu_fwds = rfp;
     mutex_unlock(&rcu_fwd_mutex);
     register_oom_notifier(&rcutorture_oom_nb);
-    for (i = 0; i < fwd_progress; i++) {
+    while (i < fwd_progress) {
     ret = torture_create_kthread(rcu_torture_fwd_prog, &rcu_fwds[i], fwd_prog_tasks[i]);
     if (ret) {
     fwd_progress = i;
@@ -3750,14 +3780,14 @@ unsafe extern "C" fn rcu_torture_fwd_prog_init() -> int __init {
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_fwd_prog_cleanup() {
-    static void rcu_torture_fwd_prog_cleanup(void)
-    {
-    int i;
-    struct rcu_fwd *rfp;
-    if (!rcu_fwds || !fwd_prog_tasks)
+    let mut i = 0;
+pub static mut rfp: *mut c_void = core::ptr::null_mut();
+    if (!rcu_fwds || !fwd_prog_tasks) {
     return;
-    for (i = 0; i < fwd_progress; i++)
+    }
+    for (i = 0; i < fwd_progress; i++) {
     torture_stop_kthread(rcu_torture_fwd_prog, fwd_prog_tasks[i]);
+    }
     unregister_oom_notifier(&rcutorture_oom_nb);
     mutex_lock(&rcu_fwd_mutex);
     rfp = rcu_fwds;
@@ -3770,28 +3800,22 @@ unsafe extern "C" fn rcu_torture_fwd_prog_cleanup() {
 // Callback function for RCU barrier testing.
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_barrier_cbf(rcu: *mut rcu_head) {
-    static void rcu_torture_barrier_cbf(struct rcu_head *rcu)
-    {
     atomic_inc(&barrier_cbs_invoked);
     }
 // IPI handler to get callback posted on desired CPU, if online.
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_barrier1cb(rcu_void: *mut c_void) -> c_int {
-    static int rcu_torture_barrier1cb(void *rcu_void)
-    {
-    struct rcu_head *rhp = rcu_void;
+    let mut rhp = rcu_void;
     cur_ops.call(rhp, rcu_torture_barrier_cbf);
     return 0;
     }
 // kthread function to register callbacks used to test RCU barriers.
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_barrier_cbs(arg: *mut c_void) -> c_int {
-    static int rcu_torture_barrier_cbs(void *arg)
-    {
-    let mut myid: c_long = (long)arg;
-    let mut lastphase: bool = false;
-    bool newphase;
-    struct rcu_head rcu;
+pub static mut myid: c_long = 0;
+pub static mut lastphase: bool = false;
+    let mut newphase = 0;
+pub static mut rcu: usize = 0;
     init_rcu_head_on_stack(&rcu);
     VERBOSE_TOROUT_STRING("rcu_torture_barrier_cbs task started");
     set_user_nice(current, MAX_NICE);
@@ -3801,19 +3825,23 @@ unsafe extern "C" fn rcu_torture_barrier_cbs(arg: *mut c_void) -> c_int {
     smp_load_acquire(&barrier_phase)) != lastphase ||
     torture_must_stop());
     lastphase = newphase;
-    if (torture_must_stop())
+    if (torture_must_stop()) {
     break;
+    }
 //
 // The above smp_load_acquire() ensures barrier_phase load
 // is ordered before the following ->call().
 //
-    if (smp_call_on_cpu(myid, rcu_torture_barrier1cb, &rcu, 1))
+    if (smp_call_on_cpu(myid, rcu_torture_barrier1cb, &rcu, 1)) {
     cur_ops.call(&rcu, rcu_torture_barrier_cbf);
-    if (atomic_dec_and_test(&barrier_cbs_count))
+    }
+    if (atomic_dec_and_test(&barrier_cbs_count)) {
     wake_up(&barrier_wq);
+    }
     } while (!torture_must_stop());
-    if (cur_ops.cb_barrier != core::ptr::null_mut())
+    if (cur_ops.cb_barrier != core::ptr::null_mut()) {
     cur_ops.cb_barrier();
+    }
     destroy_rcu_head_on_stack(&rcu);
     torture_kthread_stopping("rcu_torture_barrier_cbs");
     return 0;
@@ -3821,46 +3849,48 @@ unsafe extern "C" fn rcu_torture_barrier_cbs(arg: *mut c_void) -> c_int {
 // kthread function to drive and coordinate RCU barrier testing.
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_barrier(arg: *mut c_void) -> c_int {
-    static int rcu_torture_barrier(void *arg)
-    {
-    int i;
+    let mut i = 0;
     VERBOSE_TOROUT_STRING("rcu_torture_barrier task starting");
     do {
     atomic_set(&barrier_cbs_invoked, 0);
     atomic_set(&barrier_cbs_count, n_barrier_cbs);
 // Ensure barrier_phase ordered after prior assignments.
     smp_store_release(&barrier_phase, !barrier_phase);
-    for (i = 0; i < n_barrier_cbs; i++)
+    for (i = 0; i < n_barrier_cbs; i++) {
     wake_up(&barrier_cbs_wq[i]);
+    }
     wait_event(barrier_wq,
     atomic_read(&barrier_cbs_count) == 0 ||
     torture_must_stop());
-    if (torture_must_stop())
+    if (torture_must_stop()) {
     break;
-    n_barrier_attempts++;
+    }
+    n_barrier_attempts += 1;
     cur_ops.cb_barrier(); /* Implies smp_mb() for wait_event(). */
     if (atomic_read(&barrier_cbs_invoked) != n_barrier_cbs) {
-    n_rcu_torture_barrier_error++;
-    pr_err("barrier_cbs_invoked = %d, n_barrier_cbs = %d\n",
+    n_rcu_torture_barrier_error += 1;
+    pr_err!("barrier_cbs_invoked = %d, n_barrier_cbs = %d\n",
     atomic_read(&barrier_cbs_invoked),
     n_barrier_cbs);
-    WARN_ON(1);
+    WARN_ON!(1);
 // Wait manually for the remaining callbacks
     i = 0;
     do {
-    if (WARN_ON(i++ > HZ))
+    if (WARN_ON!(i++ > HZ)) {
     i = INT_MIN;
+    }
     schedule_timeout_interruptible(1);
     cur_ops.cb_barrier();
     } while (atomic_read(&barrier_cbs_invoked) !=
     n_barrier_cbs &&
     !torture_must_stop());
     smp_mb(); // Can't trust ordering if broken.
-    if (!torture_must_stop())
-    pr_err("Recovered: barrier_cbs_invoked = %d\n",
+    if (!torture_must_stop()) {
+    pr_err!("Recovered: barrier_cbs_invoked = %d\n",
     atomic_read(&barrier_cbs_invoked));
+    }
     } else {
-    n_barrier_successes++;
+    n_barrier_successes += 1;
     }
     schedule_timeout_interruptible(HZ / 10);
     } while (!torture_must_stop());
@@ -3870,12 +3900,11 @@ unsafe extern "C" fn rcu_torture_barrier(arg: *mut c_void) -> c_int {
 // Initialize RCU barrier testing.
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_barrier_init() -> c_int {
-    static int rcu_torture_barrier_init(void)
-    {
-    int i;
-    int ret;
-    if (n_barrier_cbs <= 0)
+    let mut i = 0;
+    let mut ret = 0;
+    if (n_barrier_cbs <= 0) {
     return 0;
+    }
     if (cur_ops.call == core::ptr::null_mut() || cur_ops.cb_barrier == core::ptr::null_mut()) {
     pr_alert("%s" TORTURE_FLAG
     " Call or barrier ops missing for %s,\n",
@@ -3891,29 +3920,30 @@ unsafe extern "C" fn rcu_torture_barrier_init() -> c_int {
     kzalloc_objs(barrier_cbs_tasks[0], n_barrier_cbs);
     barrier_cbs_wq =
     kzalloc_objs(barrier_cbs_wq[0], n_barrier_cbs);
-    if (barrier_cbs_tasks == core::ptr::null_mut() || !barrier_cbs_wq)
+    if (barrier_cbs_tasks == core::ptr::null_mut() || !barrier_cbs_wq) {
     return -ENOMEM;
-    for (i = 0; i < n_barrier_cbs; i++) {
+    }
+    while (i < n_barrier_cbs) {
     init_waitqueue_head(&barrier_cbs_wq[i]);
     ret = torture_create_kthread(rcu_torture_barrier_cbs,
-    (void *)(long)i,
+    (long)i,
     barrier_cbs_tasks[i]);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     }
     return torture_create_kthread(rcu_torture_barrier, core::ptr::null_mut(), barrier_task);
     }
 // Clean up after RCU barrier testing.
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_barrier_cleanup() {
-    static void rcu_torture_barrier_cleanup(void)
-    {
-    int i;
+    let mut i = 0;
     torture_stop_kthread(rcu_torture_barrier, barrier_task);
     if (barrier_cbs_tasks != core::ptr::null_mut()) {
-    for (i = 0; i < n_barrier_cbs; i++)
+    for (i = 0; i < n_barrier_cbs; i++) {
     torture_stop_kthread(rcu_torture_barrier_cbs,
     barrier_cbs_tasks[i]);
+    }
     kfree(barrier_cbs_tasks);
     barrier_cbs_tasks = core::ptr::null_mut();
     }
@@ -3924,20 +3954,22 @@ unsafe extern "C" fn rcu_torture_barrier_cleanup() {
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_can_boost() -> bool {
-    static bool rcu_torture_can_boost(void)
-    {
     static int boost_warn_once;
-    int prio;
-    if (!(test_boost == 1 && cur_ops.can_boost) && test_boost != 2)
+    let mut prio = 0;
+    if (!(test_boost == 1 && cur_ops.can_boost) && test_boost != 2) {
     return false;
-    if (!cur_ops.start_gp_poll || !cur_ops.poll_gp_state)
+    }
+    if (!cur_ops.start_gp_poll || !cur_ops.poll_gp_state) {
     return false;
+    }
     prio = rcu_get_gp_kthreads_prio();
-    if (!prio)
+    if (!prio) {
     return false;
+    }
     if (prio < 2) {
-    if (boost_warn_once == 1)
+    if (boost_warn_once == 1) {
     return false;
+    }
     pr_alert("%s: WARN: RCU kthread priority too low to test boosting.  Skipping RCU boost test. Try passing rcutree.kthread_prio > 1 on the kernel command line.\n", KBUILD_MODNAME);
     boost_warn_once = 1;
     return false;
@@ -3950,34 +3982,32 @@ unsafe extern "C" fn rcu_torture_can_boost() -> bool {
 // Child kthread which just does an rcutorture reader and exits.
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_read_exit_child(trsp_in: *mut c_void) -> c_int {
-    static int rcu_torture_read_exit_child(void *trsp_in)
-    {
-    struct torture_random_state *trsp = trsp_in;
+    let mut trsp = trsp_in;
     set_user_nice(current, MAX_NICE);
 // Minimize time between reading and exiting.
-    while (!kthread_should_stop())
+    while (!kthread_should_stop()) {
     schedule_timeout_uninterruptible(HZ / 20);
+    }
     (void)rcu_torture_one_read(trsp, -1);
     return 0;
     }
 // Parent kthread which creates and destroys read-exit child kthreads.
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_read_exit(unused: *mut c_void) -> c_int {
-    static int rcu_torture_read_exit(void *unused)
-    {
-    let mut errexit: bool = false;
-    int i;
-    struct task_struct *tsp;
-    DEFINE_TORTURE_RANDOM(trs);
+pub static mut errexit: bool = false;
+    let mut i = 0;
+pub static mut tsp: *mut c_void = core::ptr::null_mut();
+pub static mut trs: usize = 0;
 // Allocate and initialize.
     set_user_nice(current, MAX_NICE);
     VERBOSE_TOROUT_STRING("rcu_torture_read_exit: Start of test");
 // Each pass through this loop does one read-exit episode.
     do {
     VERBOSE_TOROUT_STRING("rcu_torture_read_exit: Start of episode");
-    for (i = 0; i < read_exit_burst; i++) {
-    if (READ_ONCE(read_exit_child_stop))
+    while (i < read_exit_burst) {
+    if (READ_ONCE(read_exit_child_stop)) {
     break;
+    }
     stutter_wait("rcu_torture_read_exit");
 // Spawn child.
     tsp = kthread_run(rcu_torture_read_exit_child,
@@ -3989,29 +4019,30 @@ unsafe extern "C" fn rcu_torture_read_exit(unused: *mut c_void) -> c_int {
     }
     cond_resched();
     kthread_stop(tsp);
-    n_read_exits++;
+    n_read_exits += 1;
     }
     VERBOSE_TOROUT_STRING("rcu_torture_read_exit: End of episode");
     rcu_barrier(); // Wait for task_struct free, avoid OOM.
     i = 0;
-    for (; !errexit && !READ_ONCE(read_exit_child_stop) && i < read_exit_delay; i++)
+    for (; !errexit && !READ_ONCE(read_exit_child_stop) && i < read_exit_delay; i++) {
     schedule_timeout_uninterruptible(HZ);
+    }
     } while (!errexit && !READ_ONCE(read_exit_child_stop));
 // Clean up and exit.
     smp_store_release(&read_exit_child_stopped, true); // After reaping.
     smp_mb(); // Store before wakeup.
     wake_up(&read_exit_wq);
-    while (!torture_must_stop())
+    while (!torture_must_stop()) {
     schedule_timeout_uninterruptible(HZ / 20);
+    }
     torture_kthread_stopping("rcu_torture_read_exit");
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_read_exit_init() -> c_int {
-    static int rcu_torture_read_exit_init(void)
-    {
-    if (read_exit_burst <= 0)
+    if (read_exit_burst <= 0) {
     return 0;
+    }
     init_waitqueue_head(&read_exit_wq);
     read_exit_child_stop = false;
     read_exit_child_stopped = false;
@@ -4020,10 +4051,9 @@ unsafe extern "C" fn rcu_torture_read_exit_init() -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_read_exit_cleanup() {
-    static void rcu_torture_read_exit_cleanup(void)
-    {
-    if (!read_exit_task)
+    if (!read_exit_task) {
     return;
+    }
     WRITE_ONCE(read_exit_child_stop, true);
     smp_mb(); // Above write before wait.
     wait_event(read_exit_wq, smp_load_acquire(&read_exit_child_stopped));
@@ -4031,18 +4061,17 @@ unsafe extern "C" fn rcu_torture_read_exit_cleanup() {
     }
 #[no_mangle]
 unsafe extern "C" fn rcutorture_test_nmis(n: c_int) {
-    static void rcutorture_test_nmis(int n)
-    {
 
-    int cpu;
-    int dumpcpu;
-    int i;
-    for (i = 0; i < n; i++) {
+    let mut cpu = 0;
+    let mut dumpcpu = 0;
+    let mut i = 0;
+    while (i < n) {
     preempt_disable();
     cpu = smp_processor_id();
     dumpcpu = cpu + 1;
-    if (dumpcpu >= nr_cpu_ids)
+    if (dumpcpu >= nr_cpu_ids) {
     dumpcpu = 0;
+    }
     pr_alert("%s: CPU %d invoking dump_cpu_task(%d)\n", __func__, cpu, dumpcpu);
     dump_cpu_task(dumpcpu);
     preempt_enable();
@@ -4055,20 +4084,19 @@ unsafe extern "C" fn rcutorture_test_nmis(n: c_int) {
 // Randomly preempt online CPUs.
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_preempt(unused: *mut c_void) -> c_int {
-    static int rcu_torture_preempt(void *unused)
-    {
-    let mut cpu: c_int = -1;
-    DEFINE_TORTURE_RANDOM(rand);
+pub static mut cpu: c_int = 0;
+pub static mut rand: usize = 0;
     schedule_timeout_idle(stall_cpu_holdoff);
     do {
 // Wait for preempt_interval ms with up to 100us fuzz.
     torture_hrtimeout_ms(preempt_interval, 100, &rand);
 // Select online CPU.
     cpu = cpumask_next_wrap(cpu, cpu_online_mask);
-    WARN_ON_ONCE(cpu >= nr_cpu_ids);
+    WARN_ON_ONCE!(cpu >= nr_cpu_ids);
 // Move to that CPU, if can't do so, retry later.
-    if (torture_sched_setaffinity(current.pid, cpumask_of(cpu), false))
+    if (torture_sched_setaffinity(current.pid, cpumask_of(cpu), false)) {
     continue;
+    }
 // Preempt at high-ish priority, then reset to normal.
     sched_set_fifo(current);
     torture_sched_setaffinity(current.pid, cpu_present_mask, true);
@@ -4080,14 +4108,12 @@ unsafe extern "C" fn rcu_torture_preempt(unused: *mut c_void) -> c_int {
     return 0;
     }
     static enum cpuhp_state rcutor_hp;
-    static struct hrtimer gpwrap_lag_timer;
+pub static mut gpwrap_lag_timer: usize = 0;
     static bool gpwrap_lag_active;
 // Timer handler for toggling RCU grace-period sequence overflow test lag value
 #[no_mangle]
 unsafe extern "C" fn rcu_gpwrap_lag_timer(timer: *mut hrtimer) -> enum hrtimer_restart {
-    static enum hrtimer_restart rcu_gpwrap_lag_timer(struct hrtimer *timer)
-    {
-    ktime_t next_delay;
+    let mut next_delay;
     if (gpwrap_lag_active) {
     pr_alert("rcu-torture: Disabling gpwrap lag (value=0)\n");
     cur_ops.set_gpwrap_lag(0);
@@ -4099,17 +4125,17 @@ unsafe extern "C" fn rcu_gpwrap_lag_timer(timer: *mut hrtimer) -> enum hrtimer_r
     gpwrap_lag_active = true;
     next_delay = ktime_set(gpwrap_lag_active_mins * 60, 0);
     }
-    if (torture_must_stop_irq())
+    if (torture_must_stop_irq()) {
     return HRTIMER_NORESTART;
+    }
     hrtimer_forward_now(timer, next_delay);
     return HRTIMER_RESTART;
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_gpwrap_lag_init() -> c_int {
-    static int rcu_gpwrap_lag_init(void)
-    {
-    if (!gpwrap_lag)
+    if (!gpwrap_lag) {
     return 0;
+    }
     if (gpwrap_lag_cycle_mins <= 0 || gpwrap_lag_active_mins <= 0) {
     pr_alert("rcu-torture: lag timing parameters must be positive\n");
     return -EINVAL;
@@ -4122,25 +4148,23 @@ unsafe extern "C" fn rcu_gpwrap_lag_init() -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_gpwrap_lag_cleanup() {
-    static void rcu_gpwrap_lag_cleanup(void)
-    {
     hrtimer_cancel(&gpwrap_lag_timer);
     cur_ops.set_gpwrap_lag(0);
     gpwrap_lag_active = false;
     }
-    static void
-    rcu_torture_cleanup(void)
-    {
-    let mut flags: c_int = 0;
-    let mut gp_seq: c_ulong = 0;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn rcu_torture_cleanup() {
+pub static mut flags: c_int = 0;
+pub static mut gp_seq: c_ulong = 0;
+    let mut i = 0;
     if (torture_cleanup_begin()) {
     if (cur_ops.cb_barrier != core::ptr::null_mut()) {
-    pr_info("%s: Invoking %pS().\n", __func__, cur_ops.cb_barrier);
+    pr_info!("%s: Invoking %pS().\n", __func__, cur_ops.cb_barrier);
     cur_ops.cb_barrier();
     }
-    if (cur_ops.gp_slow_unregister)
+    if (cur_ops.gp_slow_unregister) {
     cur_ops.gp_slow_unregister(core::ptr::null_mut());
+    }
     return;
     }
     if (!cur_ops) {
@@ -4148,8 +4172,9 @@ unsafe extern "C" fn rcu_gpwrap_lag_cleanup() {
     return;
     }
     rcutorture_test_nmis(test_nmis);
-    if (cur_ops.gp_kthread_dbg)
+    if (cur_ops.gp_kthread_dbg) {
     cur_ops.gp_kthread_dbg();
+    }
     torture_stop_kthread(rcu_torture_preempt, preempt_task);
     rcu_torture_read_exit_cleanup();
     rcu_torture_barrier_cleanup();
@@ -4157,8 +4182,9 @@ unsafe extern "C" fn rcu_gpwrap_lag_cleanup() {
     torture_stop_kthread(rcu_torture_stall, stall_task);
     torture_stop_kthread(rcu_torture_writer, writer_task);
     if (nocb_tasks) {
-    for (i = 0; i < nrealnocbers; i++)
+    for (i = 0; i < nrealnocbers; i++) {
     torture_stop_kthread(rcu_nocb_toggle, nocb_tasks[i]);
+    }
     kfree(nocb_tasks);
     nocb_tasks = core::ptr::null_mut();
     }
@@ -4167,73 +4193,80 @@ unsafe extern "C" fn rcu_gpwrap_lag_cleanup() {
     updown_task = core::ptr::null_mut();
     }
     if (reader_tasks) {
-    for (i = 0; i < nrealreaders; i++)
+    for (i = 0; i < nrealreaders; i++) {
     torture_stop_kthread(rcu_torture_reader,
     reader_tasks[i]);
+    }
     kfree(reader_tasks);
     reader_tasks = core::ptr::null_mut();
     }
     kfree(rcu_torture_reader_mbchk);
     rcu_torture_reader_mbchk = core::ptr::null_mut();
     if (fakewriter_tasks) {
-    for (i = 0; i < nrealfakewriters; i++)
+    for (i = 0; i < nrealfakewriters; i++) {
     torture_stop_kthread(rcu_torture_fakewriter,
     fakewriter_tasks[i]);
+    }
     kfree(fakewriter_tasks);
     fakewriter_tasks = core::ptr::null_mut();
     }
-    if (cur_ops.get_gp_data)
+    if (cur_ops.get_gp_data) {
     cur_ops.get_gp_data(&flags, &gp_seq);
+    }
     pr_alert("%s:  End-test grace-period state: g%ld f%#x total-gps=%ld\n",
     cur_ops.name, (long)gp_seq, flags,
     rcutorture_seq_diff(gp_seq, start_gp_seq));
     torture_stop_kthread(rcu_torture_stats, stats_task);
     torture_stop_kthread(rcu_torture_fqs, fqs_task);
-    if (rcu_torture_can_boost() && rcutor_hp >= 0)
+    if (rcu_torture_can_boost() && rcutor_hp >= 0) {
     cpuhp_remove_state(rcutor_hp);
+    }
 //
 // Wait for all RCU callbacks to fire, then do torture-type-specific
 // cleanup operations.
 //
     if (cur_ops.cb_barrier != core::ptr::null_mut()) {
-    pr_info("%s: Invoking %pS().\n", __func__, cur_ops.cb_barrier);
+    pr_info!("%s: Invoking %pS().\n", __func__, cur_ops.cb_barrier);
     cur_ops.cb_barrier();
     }
-    if (cur_ops.cleanup != core::ptr::null_mut())
+    if (cur_ops.cleanup != core::ptr::null_mut()) {
     cur_ops.cleanup();
+    }
     rcu_torture_mem_dump_obj();
     rcu_torture_stats_print();  /* -After- the stats thread is stopped! */
     if (err_segs_recorded) {
     pr_alert("Failure/close-call rcutorture reader segments:\n");
-    if (rt_read_nsegs == 0)
+    if (rt_read_nsegs == 0) {
     pr_alert("\t: No segments recorded!!!\n");
-    else
+    }
+    else {
     rcu_torture_dump_read_segs(err_segs, rt_read_nsegs);
     }
-    if (atomic_read(&n_rcu_torture_error) || n_rcu_torture_barrier_error)
+    }
+    if (atomic_read(&n_rcu_torture_error) || n_rcu_torture_barrier_error) {
     rcu_torture_print_module_parms(cur_ops, "End of test: FAILURE");
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: torture_onoff_failures()) -> else {
-    else if (torture_onoff_failures())
+    }
+
+    else if (torture_onoff_failures()) {
     rcu_torture_print_module_parms(cur_ops,
     "End of test: RCU_HOTPLUG");
-    else
+    }
+    else {
     rcu_torture_print_module_parms(cur_ops, "End of test: SUCCESS");
+    }
     torture_cleanup_end();
-    if (cur_ops.gp_slow_unregister)
+    if (cur_ops.gp_slow_unregister) {
     cur_ops.gp_slow_unregister(core::ptr::null_mut());
-    if (gpwrap_lag && cur_ops.set_gpwrap_lag)
+    }
+    if (gpwrap_lag && cur_ops.set_gpwrap_lag) {
     rcu_gpwrap_lag_cleanup();
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_leak_cb(rhp: *mut rcu_head) {
-    static void rcu_torture_leak_cb(struct rcu_head *rhp)
-    {
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_err_cb(rhp: *mut rcu_head) {
-    static void rcu_torture_err_cb(struct rcu_head *rhp)
-    {
 //
 // This -might- happen due to race conditions, but is unlikely.
 // The scenario that leads to this happening is that the
@@ -4252,20 +4285,19 @@ unsafe extern "C" fn rcu_torture_err_cb(rhp: *mut rcu_head) {
 //
 #[no_mangle]
 unsafe extern "C" fn rcu_test_debug_objects() {
-    static void rcu_test_debug_objects(void)
-    {
-    struct rcu_head rh1;
-    struct rcu_head rh2;
-    int idx;
-    if (!IS_ENABLED(CONFIG_DEBUG_OBJECTS_RCU_HEAD)) {
+pub static mut rh1: usize = 0;
+pub static mut rh2: usize = 0;
+    let mut idx = 0;
+    if (!IS_ENABLED!(CONFIG_DEBUG_OBJECTS_RCU_HEAD)) {
     pr_alert("%s: !CONFIG_DEBUG_OBJECTS_RCU_HEAD, not testing duplicate call_%s()\n",
     KBUILD_MODNAME, cur_ops.name);
     return;
     }
-    if (WARN_ON_ONCE(cur_ops.debug_objects &&
-    (!cur_ops.call || !cur_ops.cb_barrier)))
+    if (WARN_ON_ONCE!(cur_ops.debug_objects &&
+    (!cur_ops.call || !cur_ops.cb_barrier))) {
     return;
-    struct rcu_head *rhp = kmalloc_obj(*rhp);
+    }
+    let mut rhp = kmalloc_obj(*rhp);
     init_rcu_head_on_stack(&rh1);
     init_rcu_head_on_stack(&rh2);
     pr_alert("%s: WARN: Duplicate call_%s() test starting.\n", KBUILD_MODNAME, cur_ops.name);
@@ -4288,108 +4320,113 @@ unsafe extern "C" fn rcu_test_debug_objects() {
     }
 #[no_mangle]
 unsafe extern "C" fn rcutorture_sync() {
-    static void rcutorture_sync(void)
-    {
     static unsigned long n;
-    if (cur_ops.sync && !(++n & 0xfff))
+    if (cur_ops.sync && !(++n & 0xfff)) {
     cur_ops.sync();
     }
-    static DEFINE_MUTEX(mut0);
-    static DEFINE_MUTEX(mut1);
-    static DEFINE_MUTEX(mut2);
-    static DEFINE_MUTEX(mut3);
-    static DEFINE_MUTEX(mut4);
-    static DEFINE_MUTEX(mut5);
-    static DEFINE_MUTEX(mut6);
-    static DEFINE_MUTEX(mut7);
-    static DEFINE_MUTEX(mut8);
-    static DEFINE_MUTEX(mut9);
-    static DECLARE_RWSEM(rwsem0);
-    static DECLARE_RWSEM(rwsem1);
-    static DECLARE_RWSEM(rwsem2);
-    static DECLARE_RWSEM(rwsem3);
-    static DECLARE_RWSEM(rwsem4);
-    static DECLARE_RWSEM(rwsem5);
-    static DECLARE_RWSEM(rwsem6);
-    static DECLARE_RWSEM(rwsem7);
-    static DECLARE_RWSEM(rwsem8);
-    static DECLARE_RWSEM(rwsem9);
-    DEFINE_STATIC_SRCU(srcu0);
-    DEFINE_STATIC_SRCU(srcu1);
-    DEFINE_STATIC_SRCU(srcu2);
-    DEFINE_STATIC_SRCU(srcu3);
-    DEFINE_STATIC_SRCU(srcu4);
-    DEFINE_STATIC_SRCU(srcu5);
-    DEFINE_STATIC_SRCU(srcu6);
-    DEFINE_STATIC_SRCU(srcu7);
-    DEFINE_STATIC_SRCU(srcu8);
-    DEFINE_STATIC_SRCU(srcu9);
-    static int srcu_lockdep_next(const char *f, const char *fl, const char *fs, const char *fu, int i,
-    int cyclelen, int deadlock)
-    {
-    let mut j: c_int = i + 1;
-    if (j >= cyclelen)
+    }
+pub static mut mut0: usize = 0;
+pub static mut mut1: usize = 0;
+pub static mut mut2: usize = 0;
+pub static mut mut3: usize = 0;
+pub static mut mut4: usize = 0;
+pub static mut mut5: usize = 0;
+pub static mut mut6: usize = 0;
+pub static mut mut7: usize = 0;
+pub static mut mut8: usize = 0;
+pub static mut mut9: usize = 0;
+pub static mut rwsem0: usize = 0;
+pub static mut rwsem1: usize = 0;
+pub static mut rwsem2: usize = 0;
+pub static mut rwsem3: usize = 0;
+pub static mut rwsem4: usize = 0;
+pub static mut rwsem5: usize = 0;
+pub static mut rwsem6: usize = 0;
+pub static mut rwsem7: usize = 0;
+pub static mut rwsem8: usize = 0;
+pub static mut rwsem9: usize = 0;
+pub static mut srcu0: usize = 0;
+pub static mut srcu1: usize = 0;
+pub static mut srcu2: usize = 0;
+pub static mut srcu3: usize = 0;
+pub static mut srcu4: usize = 0;
+pub static mut srcu5: usize = 0;
+pub static mut srcu6: usize = 0;
+pub static mut srcu7: usize = 0;
+pub static mut srcu8: usize = 0;
+pub static mut srcu9: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn srcu_lockdep_next(f: *mut c_char, fl: *mut c_char, fs: *mut c_char, fu: *mut c_char, i: c_int, cyclelen: c_int, deadlock: c_int) -> c_int {
+pub static mut j: c_int = 0;
+    if (j >= cyclelen) {
     j = deadlock ? 0 : -1;
-    if (j >= 0)
-    pr_info("%s: %s(%d), %s(%d), %s(%d)\n", f, fl, i, fs, j, fu, i);
-    else
-    pr_info("%s: %s(%d), %s(%d)\n", f, fl, i, fu, i);
+    }
+    if (j >= 0) {
+    pr_info!("%s: %s(%d), %s(%d), %s(%d)\n", f, fl, i, fs, j, fu, i);
+    }
+    else {
+    pr_info!("%s: %s(%d), %s(%d)\n", f, fl, i, fu, i);
+    }
     return j;
     }
 // Test lockdep on SRCU-based deadlock scenarios.
 #[no_mangle]
 unsafe extern "C" fn rcu_torture_init_srcu_lockdep() {
-    static void rcu_torture_init_srcu_lockdep(void)
-    {
-    int cyclelen;
-    int deadlock;
-    let mut err: bool = false;
-    int i;
-    int j;
-    int idx;
+    let mut cyclelen = 0;
+    let mut deadlock = 0;
+pub static mut err: bool = false;
+    let mut i = 0;
+    let mut j = 0;
+    let mut idx = 0;
     struct mutex *muts[] = { &mut0, &mut1, &mut2, &mut3, &mut4,
     &mut5, &mut6, &mut7, &mut8, &mut9 };
     struct rw_semaphore *rwsems[] = { &rwsem0, &rwsem1, &rwsem2, &rwsem3, &rwsem4,
     &rwsem5, &rwsem6, &rwsem7, &rwsem8, &rwsem9 };
     struct srcu_struct *srcus[] = { &srcu0, &srcu1, &srcu2, &srcu3, &srcu4,
     &srcu5, &srcu6, &srcu7, &srcu8, &srcu9 };
-    int testtype;
-    if (!test_srcu_lockdep)
+    let mut testtype = 0;
+    if (!test_srcu_lockdep) {
     return;
+    }
     deadlock = test_srcu_lockdep / 1000;
     testtype = (test_srcu_lockdep / 10) % 100;
     cyclelen = test_srcu_lockdep % 10;
-    WARN_ON_ONCE(ARRAY_SIZE(muts) != ARRAY_SIZE(srcus));
+    WARN_ON_ONCE!(ARRAY_SIZE!(muts) != ARRAY_SIZE!(srcus));
     if (WARN_ONCE(deadlock != !!deadlock,
     "%s: test_srcu_lockdep=%d and deadlock digit %d must be zero or one.\n",
-    __func__, test_srcu_lockdep, deadlock))
+    __func__, test_srcu_lockdep, deadlock)) {
     err = true;
+    }
     if (WARN_ONCE(cyclelen <= 0,
     "%s: test_srcu_lockdep=%d and cycle-length digit %d must be greater than zero.\n",
-    __func__, test_srcu_lockdep, cyclelen))
+    __func__, test_srcu_lockdep, cyclelen)) {
     err = true;
-    if (err)
-    goto err_out;
+    }
+    if (err) {
+// goto;
+    }
     if (testtype == 0) {
-    pr_info("%s: test_srcu_lockdep = %05d: SRCU %d-way %sdeadlock.\n",
+    pr_info!("%s: test_srcu_lockdep = %05d: SRCU %d-way %sdeadlock.\n",
     __func__, test_srcu_lockdep, cyclelen, deadlock ? "" : "non-");
-    if (deadlock && cyclelen == 1)
-    pr_info("%s: Expect hang.\n", __func__);
-    for (i = 0; i < cyclelen; i++) {
+    if (deadlock && cyclelen == 1) {
+    pr_info!("%s: Expect hang.\n", __func__);
+    }
+    while (i < cyclelen) {
     j = srcu_lockdep_next(__func__, "srcu_read_lock", "synchronize_srcu",
     "srcu_read_unlock", i, cyclelen, deadlock);
     idx = srcu_read_lock(srcus[i]);
-    if (j >= 0)
+    if (j >= 0) {
     synchronize_srcu(srcus[j]);
+    }
     srcu_read_unlock(srcus[i], idx);
     }
     return;
     }
     if (testtype == 1) {
-    pr_info("%s: test_srcu_lockdep = %05d: SRCU/mutex %d-way %sdeadlock.\n",
+    pr_info!("%s: test_srcu_lockdep = %05d: SRCU/mutex %d-way %sdeadlock.\n",
     __func__, test_srcu_lockdep, cyclelen, deadlock ? "" : "non-");
-    for (i = 0; i < cyclelen; i++) {
-    pr_info("%s: srcu_read_lock(%d), mutex_lock(%d), mutex_unlock(%d), srcu_read_unlock(%d)\n",
+    while (i < cyclelen) {
+    pr_info!("%s: srcu_read_lock(%d), mutex_lock(%d), mutex_unlock(%d), srcu_read_unlock(%d)\n",
     __func__, i, i, i, i);
     idx = srcu_read_lock(srcus[i]);
     mutex_lock(muts[i]);
@@ -4398,17 +4435,18 @@ unsafe extern "C" fn rcu_torture_init_srcu_lockdep() {
     j = srcu_lockdep_next(__func__, "mutex_lock", "synchronize_srcu",
     "mutex_unlock", i, cyclelen, deadlock);
     mutex_lock(muts[i]);
-    if (j >= 0)
+    if (j >= 0) {
     synchronize_srcu(srcus[j]);
+    }
     mutex_unlock(muts[i]);
     }
     return;
     }
     if (testtype == 2) {
-    pr_info("%s: test_srcu_lockdep = %05d: SRCU/rwsem %d-way %sdeadlock.\n",
+    pr_info!("%s: test_srcu_lockdep = %05d: SRCU/rwsem %d-way %sdeadlock.\n",
     __func__, test_srcu_lockdep, cyclelen, deadlock ? "" : "non-");
-    for (i = 0; i < cyclelen; i++) {
-    pr_info("%s: srcu_read_lock(%d), down_read(%d), up_read(%d), srcu_read_unlock(%d)\n",
+    while (i < cyclelen) {
+    pr_info!("%s: srcu_read_lock(%d), down_read(%d), up_read(%d), srcu_read_unlock(%d)\n",
     __func__, i, i, i, i);
     idx = srcu_read_lock(srcus[i]);
     down_read(rwsems[i]);
@@ -4417,82 +4455,94 @@ unsafe extern "C" fn rcu_torture_init_srcu_lockdep() {
     j = srcu_lockdep_next(__func__, "down_write", "synchronize_srcu",
     "up_write", i, cyclelen, deadlock);
     down_write(rwsems[i]);
-    if (j >= 0)
+    if (j >= 0) {
     synchronize_srcu(srcus[j]);
+    }
     up_write(rwsems[i]);
     }
     return;
     }
 
     if (testtype == 3) {
-    pr_info("%s: test_srcu_lockdep = %05d: SRCU and Tasks Trace RCU %d-way %sdeadlock.\n",
+    pr_info!("%s: test_srcu_lockdep = %05d: SRCU and Tasks Trace RCU %d-way %sdeadlock.\n",
     __func__, test_srcu_lockdep, cyclelen, deadlock ? "" : "non-");
-    if (deadlock && cyclelen == 1)
-    pr_info("%s: Expect hang.\n", __func__);
-    for (i = 0; i < cyclelen; i++) {
-    char *fl = i == 0 ? "rcu_read_lock_trace" : "srcu_read_lock";
-    char *fs = i == cyclelen - 1 ? "synchronize_rcu_tasks_trace"
+    if (deadlock && cyclelen == 1) {
+    pr_info!("%s: Expect hang.\n", __func__);
+    }
+    while (i < cyclelen) {
+    let mut fl = i == 0 ? "rcu_read_lock_trace" : "srcu_read_lock";
+    let mut fs = i == cyclelen - 1 ? "synchronize_rcu_tasks_trace"
     : "synchronize_srcu";
-    char *fu = i == 0 ? "rcu_read_unlock_trace" : "srcu_read_unlock";
+    let mut fu = i == 0 ? "rcu_read_unlock_trace" : "srcu_read_unlock";
     j = srcu_lockdep_next(__func__, fl, fs, fu, i, cyclelen, deadlock);
-    if (i == 0)
+    if (i == 0) {
     rcu_read_lock_trace();
-    else
+    }
+    else {
     idx = srcu_read_lock(srcus[i]);
+    }
     if (j >= 0) {
-    if (i == cyclelen - 1)
+    if (i == cyclelen - 1) {
     synchronize_rcu_tasks_trace();
-    else
+    }
+    else {
     synchronize_srcu(srcus[j]);
     }
-    if (i == 0)
+    }
+    if (i == 0) {
     rcu_read_unlock_trace();
-    else
+    }
+    else {
     srcu_read_unlock(srcus[i], idx);
+    }
     }
     return;
     }
 
-    err_out:
-    pr_info("%s: test_srcu_lockdep = %05d does nothing.\n", __func__, test_srcu_lockdep);
-    pr_info("%s: test_srcu_lockdep = DNNL.\n", __func__);
-    pr_info("%s: D: Deadlock if nonzero.\n", __func__);
-    pr_info("%s: NN: Test number, 0=SRCU, 1=SRCU/mutex, 2=SRCU/rwsem, 3=SRCU/Tasks Trace RCU.\n", __func__);
-    pr_info("%s: L: Cycle length.\n", __func__);
-    if (!IS_ENABLED(CONFIG_TASKS_TRACE_RCU))
-    pr_info("%s: NN=3 disallowed because kernel is built with CONFIG_TASKS_TRACE_RCU=n\n", __func__);
+// label;
+    pr_info!("%s: test_srcu_lockdep = %05d does nothing.\n", __func__, test_srcu_lockdep);
+    pr_info!("%s: test_srcu_lockdep = DNNL.\n", __func__);
+    pr_info!("%s: D: Deadlock if nonzero.\n", __func__);
+    pr_info!("%s: NN: Test number, 0=SRCU, 1=SRCU/mutex, 2=SRCU/rwsem, 3=SRCU/Tasks Trace RCU.\n", __func__);
+    pr_info!("%s: L: Cycle length.\n", __func__);
+    if (!IS_ENABLED!(CONFIG_TASKS_TRACE_RCU)) {
+    pr_info!("%s: NN=3 disallowed because kernel is built with CONFIG_TASKS_TRACE_RCU=n\n", __func__);
+    }
     }
     static int __init
     rcu_torture_init(void)
     {
-    long i;
-    int cpu;
-    let mut firsterr: c_int = 0;
-    let mut flags: c_int = 0;
-    let mut gp_seq: c_ulong = 0;
+    let mut i = 0;
+    let mut cpu = 0;
+pub static mut firsterr: c_int = 0;
+pub static mut flags: c_int = 0;
+pub static mut gp_seq: c_ulong = 0;
     static struct rcu_torture_ops *torture_ops[] = {
     &rcu_ops, &rcu_busted_ops, &srcu_ops, &srcud_ops, &busted_srcud_ops,
     TASKS_OPS TASKS_RUDE_OPS TASKS_TRACING_OPS
     &trivial_ops, TRIVIAL_PREEMPT_OPS
     };
-    if (!torture_init_begin(torture_type, verbose))
+    if (!torture_init_begin(torture_type, verbose)) {
     return -EBUSY;
+    }
 // Process args and tell the world that the torturer is on the job.
-    for (i = 0; i < ARRAY_SIZE(torture_ops); i++) {
+    while (i < ARRAY_SIZE!(torture_ops)) {
     cur_ops = torture_ops[i];
-    if (strcmp(torture_type, cur_ops.name) == 0)
+    if (strcmp(torture_type, cur_ops.name) == 0) {
     break;
     }
-    if (i == ARRAY_SIZE(torture_ops)) {
+    }
+    if (i == ARRAY_SIZE!(torture_ops)) {
     pr_alert("rcu-torture: invalid torture type: \"%s\"\n",
     torture_type);
     pr_alert("rcu-torture types:");
-    for (i = 0; i < ARRAY_SIZE(torture_ops); i++)
+    for (i = 0; i < ARRAY_SIZE!(torture_ops); i++) {
     pr_cont(" %s", torture_ops[i].name);
+    }
     pr_cont("\n");
     firsterr = -EINVAL;
     cur_ops = core::ptr::null_mut();
-    goto unwind;
+// goto;
     }
     if (stall_only) {
     pr_alert("rcu-torture: stall_only specified, suppressing all else.\n");
@@ -4516,37 +4566,41 @@ unsafe extern "C" fn rcu_torture_init_srcu_lockdep() {
     fqs_duration = 0;
     }
     if (nocbs_nthreads != 0 && (cur_ops != &rcu_ops ||
-    !IS_ENABLED(CONFIG_RCU_NOCB_CPU))) {
+    !IS_ENABLED!(CONFIG_RCU_NOCB_CPU))) {
     pr_alert("rcu-torture types: %s and CONFIG_RCU_NOCB_CPU=%d, nocb toggle disabled.\n",
-    cur_ops.name, IS_ENABLED(CONFIG_RCU_NOCB_CPU));
+    cur_ops.name, IS_ENABLED!(CONFIG_RCU_NOCB_CPU));
     nocbs_nthreads = 0;
     }
-    if (cur_ops.init)
+    if (cur_ops.init) {
     cur_ops.init();
+    }
     rcu_torture_init_srcu_lockdep();
     if (nfakewriters >= 0) {
     nrealfakewriters = nfakewriters;
     } else {
     nrealfakewriters = num_online_cpus() - 2 - nfakewriters;
-    if (nrealfakewriters <= 0)
+    if (nrealfakewriters <= 0) {
     nrealfakewriters = 1;
+    }
     }
     if (nreaders >= 0) {
     nrealreaders = nreaders;
     } else {
     nrealreaders = num_online_cpus() - 2 - nreaders;
-    if (nrealreaders <= 0)
+    if (nrealreaders <= 0) {
     nrealreaders = 1;
     }
+    }
     rcu_torture_print_module_parms(cur_ops, "Start of test");
-    if (cur_ops.get_gp_data)
+    if (cur_ops.get_gp_data) {
     cur_ops.get_gp_data(&flags, &gp_seq);
+    }
     start_gp_seq = gp_seq;
     pr_alert("%s:  Start-test grace-period state: g%ld f%#x\n",
     cur_ops.name, (long)gp_seq, flags);
 // Set up the freelist.
     INIT_LIST_HEAD(&rcu_torture_freelist);
-    for (i = 0; i < ARRAY_SIZE(rcu_tortures); i++) {
+    while (i < ARRAY_SIZE!(rcu_tortures)) {
     rcu_tortures[i].rtort_mbtest = 0;
     list_add_tail(&rcu_tortures[i].rtort_free,
     &rcu_torture_freelist);
@@ -4565,10 +4619,11 @@ unsafe extern "C" fn rcu_torture_init_srcu_lockdep() {
     n_rcu_torture_boost_ktrerror = 0;
     n_rcu_torture_boost_failure = 0;
     n_rcu_torture_boosts = 0;
-    for (i = 0; i < RCU_TORTURE_PIPE_LEN + 1; i++)
-    atomic_set(&rcu_torture_wcount[i], 0);
-    for_each_possible_cpu(cpu) {
     for (i = 0; i < RCU_TORTURE_PIPE_LEN + 1; i++) {
+    atomic_set(&rcu_torture_wcount[i], 0);
+    }
+    for_each_possible_cpu(cpu) {
+    while (i < RCU_TORTURE_PIPE_LEN + 1) {
     per_cpu(rcu_torture_count, cpu)[i] = 0;
     per_cpu(rcu_torture_batch, cpu)[i] = 0;
     }
@@ -4583,14 +4638,15 @@ unsafe extern "C" fn rcu_torture_init_srcu_lockdep() {
     if (fakewriter_tasks == core::ptr::null_mut()) {
     TOROUT_ERRSTRING("out of memory");
     firsterr = -ENOMEM;
-    goto unwind;
+// goto;
     }
     }
-    for (i = 0; i < nrealfakewriters; i++) {
+    while (i < nrealfakewriters) {
     firsterr = torture_create_kthread(rcu_torture_fakewriter,
     core::ptr::null_mut(), fakewriter_tasks[i]);
-    if (torture_init_error(firsterr))
-    goto unwind;
+    if (torture_init_error(firsterr)) {
+// goto;
+    }
     }
     reader_tasks = kzalloc_objs(reader_tasks[0], nrealreaders);
     rcu_torture_reader_mbchk = kzalloc_objs(*rcu_torture_reader_mbchk,
@@ -4598,131 +4654,159 @@ unsafe extern "C" fn rcu_torture_init_srcu_lockdep() {
     if (!reader_tasks || !rcu_torture_reader_mbchk) {
     TOROUT_ERRSTRING("out of memory");
     firsterr = -ENOMEM;
-    goto unwind;
+// goto;
     }
-    for (i = 0; i < nrealreaders; i++) {
+    while (i < nrealreaders) {
     rcu_torture_reader_mbchk[i].rtc_chkrdr = -1;
-    firsterr = torture_create_kthread(rcu_torture_reader, (void *)i,
+    firsterr = torture_create_kthread(rcu_torture_reader, i,
     reader_tasks[i]);
-    if (torture_init_error(firsterr))
-    goto unwind;
+    if (torture_init_error(firsterr)) {
+// goto;
+    }
     }
     if (nwriters) {
     firsterr = torture_create_kthread(rcu_torture_writer, core::ptr::null_mut(), writer_task);
-    if (torture_init_error(firsterr))
-    goto unwind;
+    if (torture_init_error(firsterr)) {
+// goto;
+    }
     }
     firsterr = rcu_torture_updown_init();
-    if (torture_init_error(firsterr))
-    goto unwind;
+    if (torture_init_error(firsterr)) {
+// goto;
+    }
     nrealnocbers = nocbs_nthreads;
-    if (WARN_ON(nrealnocbers < 0))
+    if (WARN_ON!(nrealnocbers < 0)) {
     nrealnocbers = 1;
-    if (WARN_ON(nocbs_toggle < 0))
+    }
+    if (WARN_ON!(nocbs_toggle < 0)) {
     nocbs_toggle = HZ;
+    }
     if (nrealnocbers > 0) {
     nocb_tasks = kzalloc_objs(nocb_tasks[0], nrealnocbers);
     if (nocb_tasks == core::ptr::null_mut()) {
     TOROUT_ERRSTRING("out of memory");
     firsterr = -ENOMEM;
-    goto unwind;
+// goto;
     }
     } else {
     nocb_tasks = core::ptr::null_mut();
     }
-    for (i = 0; i < nrealnocbers; i++) {
+    while (i < nrealnocbers) {
     firsterr = torture_create_kthread(rcu_nocb_toggle, core::ptr::null_mut(), nocb_tasks[i]);
-    if (torture_init_error(firsterr))
-    goto unwind;
+    if (torture_init_error(firsterr)) {
+// goto;
+    }
     }
     if (stat_interval > 0) {
     firsterr = torture_create_kthread(rcu_torture_stats, core::ptr::null_mut(),
     stats_task);
-    if (torture_init_error(firsterr))
-    goto unwind;
+    if (torture_init_error(firsterr)) {
+// goto;
+    }
     }
     if (test_no_idle_hz && shuffle_interval > 0) {
     firsterr = torture_shuffle_init(shuffle_interval * HZ);
-    if (torture_init_error(firsterr))
-    goto unwind;
+    if (torture_init_error(firsterr)) {
+// goto;
     }
-    if (stutter < 0)
+    }
+    if (stutter < 0) {
     stutter = 0;
+    }
     if (stutter) {
-    int t;
+    let mut t = 0;
     t = cur_ops.stall_dur ? cur_ops.stall_dur() : stutter * HZ;
     firsterr = torture_stutter_init(stutter * HZ, t);
-    if (torture_init_error(firsterr))
-    goto unwind;
+    if (torture_init_error(firsterr)) {
+// goto;
     }
-    if (fqs_duration < 0)
+    }
+    if (fqs_duration < 0) {
     fqs_duration = 0;
-    if (fqs_holdoff < 0)
+    }
+    if (fqs_holdoff < 0) {
     fqs_holdoff = 0;
+    }
     if (fqs_duration && fqs_holdoff) {
 // Create the fqs thread
     firsterr = torture_create_kthread(rcu_torture_fqs, core::ptr::null_mut(),
     fqs_task);
-    if (torture_init_error(firsterr))
-    goto unwind;
+    if (torture_init_error(firsterr)) {
+// goto;
     }
-    if (test_boost_interval < 1)
+    }
+    if (test_boost_interval < 1) {
     test_boost_interval = 1;
-    if (test_boost_duration < 2)
+    }
+    if (test_boost_duration < 2) {
     test_boost_duration = 2;
+    }
     if (rcu_torture_can_boost()) {
     boost_starttime = jiffies + test_boost_interval * HZ;
     firsterr = cpuhp_setup_state(CPUHP_AP_ONLINE_DYN, "RCU_TORTURE",
     rcutorture_booster_init,
     rcutorture_booster_cleanup);
     rcutor_hp = firsterr;
-    if (torture_init_error(firsterr))
-    goto unwind;
+    if (torture_init_error(firsterr)) {
+// goto;
+    }
     }
     shutdown_jiffies = jiffies + shutdown_secs * HZ;
     firsterr = torture_shutdown_init(shutdown_secs, rcu_torture_cleanup);
-    if (torture_init_error(firsterr))
-    goto unwind;
+    if (torture_init_error(firsterr)) {
+// goto;
+    }
     firsterr = torture_onoff_init(onoff_holdoff * HZ, onoff_interval,
     rcutorture_sync);
-    if (torture_init_error(firsterr))
-    goto unwind;
+    if (torture_init_error(firsterr)) {
+// goto;
+    }
     firsterr = rcu_torture_stall_init();
-    if (torture_init_error(firsterr))
-    goto unwind;
+    if (torture_init_error(firsterr)) {
+// goto;
+    }
     firsterr = rcu_torture_fwd_prog_init();
-    if (torture_init_error(firsterr))
-    goto unwind;
+    if (torture_init_error(firsterr)) {
+// goto;
+    }
     firsterr = rcu_torture_barrier_init();
-    if (torture_init_error(firsterr))
-    goto unwind;
+    if (torture_init_error(firsterr)) {
+// goto;
+    }
     firsterr = rcu_torture_read_exit_init();
-    if (torture_init_error(firsterr))
-    goto unwind;
+    if (torture_init_error(firsterr)) {
+// goto;
+    }
     if (preempt_duration > 0) {
     firsterr = torture_create_kthread(rcu_torture_preempt, core::ptr::null_mut(), preempt_task);
-    if (torture_init_error(firsterr))
-    goto unwind;
+    if (torture_init_error(firsterr)) {
+// goto;
     }
-    if (object_debug)
+    }
+    if (object_debug) {
     rcu_test_debug_objects();
-    if (cur_ops.gp_slow_register && !WARN_ON_ONCE(!cur_ops.gp_slow_unregister))
+    }
+    if (cur_ops.gp_slow_register && !WARN_ON_ONCE!(!cur_ops.gp_slow_unregister)) {
     cur_ops.gp_slow_register(&rcu_fwd_cb_nodelay);
+    }
     if (gpwrap_lag && cur_ops.set_gpwrap_lag) {
     firsterr = rcu_gpwrap_lag_init();
-    if (torture_init_error(firsterr))
-    goto unwind;
+    if (torture_init_error(firsterr)) {
+// goto;
+    }
     }
     torture_init_end();
     return 0;
-    unwind:
+// label;
     torture_init_end();
     rcu_torture_cleanup();
     if (shutdown_secs) {
-    WARN_ON(!IS_MODULE(CONFIG_RCU_TORTURE_TEST));
+    WARN_ON!(!IS_MODULE(CONFIG_RCU_TORTURE_TEST));
     kernel_power_off();
     }
     return firsterr;
     }
-    module_init(rcu_torture_init);
-    module_exit(rcu_torture_cleanup);
+    module_init!(rcu_torture_init);
+    module_exit!(rcu_torture_cleanup);
+}
+}

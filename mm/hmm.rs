@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -79,11 +329,10 @@ pub struct hmm_vma_walk {
     HMM_PFN_INOUT_FLAGS = HMM_PFN_DMA_MAPPED | HMM_PFN_P2PDMA |
     HMM_PFN_P2PDMA_BUS,
     };
-    static int hmm_pfns_fill(unsigned long addr, unsigned long end,
-    struct hmm_range *range, unsigned long cpu_flags)
-    {
-    let mut i: c_ulong = (addr - range.start) >> PAGE_SHIFT;
-    for (; addr < end; addr += PAGE_SIZE, i++) {
+#[no_mangle]
+pub unsafe extern "C" fn hmm_pfns_fill(addr: c_ulong, end: c_ulong, range: *mut hmm_range, cpu_flags: c_ulong) -> c_int {
+pub static mut i: c_ulong = 0;
+    while (addr < end) {
     range.hmm_pfns[i] &= HMM_PFN_INOUT_FLAGS;
     range.hmm_pfns[i] |= cpu_flags;
     }
@@ -98,22 +347,18 @@ pub struct hmm_vma_walk {
 // back out of walk_page_range() and invokes handle_mm_fault() from a context
 // where no page-table or hugetlb_vma_lock is held.
 //
-    static int hmm_record_fault(unsigned long addr, unsigned long end,
-    unsigned int required_fault,
-    struct mm_walk *walk)
-    {
-    struct hmm_vma_walk *hmm_vma_walk = walk.private;
-    WARN_ON_ONCE(!required_fault);
+#[no_mangle]
+pub unsafe extern "C" fn hmm_record_fault(addr: c_ulong, end: c_ulong, required_fault: c_uint, walk: *mut mm_walk) -> c_int {
+    let mut hmm_vma_walk = walk.private;
+    WARN_ON_ONCE!(!required_fault);
     hmm_vma_walk.last = addr;
     hmm_vma_walk.end = end;
     hmm_vma_walk.required_fault = required_fault;
     return HMM_FAULT_PENDING;
     }
-    static unsigned int hmm_pte_need_fault(const struct hmm_vma_walk *hmm_vma_walk,
-    unsigned long pfn_req_flags,
-    unsigned long cpu_flags)
-    {
-    struct hmm_range *range = hmm_vma_walk.range;
+#[no_mangle]
+pub unsafe extern "C" fn hmm_pte_need_fault(hmm_vma_walk: *mut hmm_vma_walk, pfn_req_flags: c_ulong, cpu_flags: c_ulong) -> c_uint {
+    let mut range = hmm_vma_walk.range;
 //
 // So we not only consider the individual per page request we also
 // consider the default flags requested for the range. The API can
@@ -127,96 +372,96 @@ pub struct hmm_vma_walk {
     pfn_req_flags &= range.pfn_flags_mask;
     pfn_req_flags |= range.default_flags;
 // We aren't ask to do anything ...
-    if (!(pfn_req_flags & HMM_PFN_REQ_FAULT))
-    return 0;
-// Need to write fault ?
-    if ((pfn_req_flags & HMM_PFN_REQ_WRITE) &&
-    !(cpu_flags & HMM_PFN_WRITE))
-    return HMM_NEED_FAULT | HMM_NEED_WRITE_FAULT;
-// If CPU page table is not valid then we need to fault
-    if (!(cpu_flags & HMM_PFN_VALID))
-    return HMM_NEED_FAULT;
+    if (!(pfn_req_flags & HMM_PFN_REQ_FAULT)) {
     return 0;
     }
-    static unsigned int
-    hmm_range_need_fault(const struct hmm_vma_walk *hmm_vma_walk,
-    const unsigned long hmm_pfns[], unsigned long npages,
-    unsigned long cpu_flags)
-    {
-    struct hmm_range *range = hmm_vma_walk.range;
-    let mut required_fault: c_uint = 0;
-    unsigned long i;
+// Need to write fault ?
+    if ((pfn_req_flags & HMM_PFN_REQ_WRITE) &&
+    !(cpu_flags & HMM_PFN_WRITE)) {
+    return HMM_NEED_FAULT | HMM_NEED_WRITE_FAULT;
+    }
+// If CPU page table is not valid then we need to fault
+    if (!(cpu_flags & HMM_PFN_VALID)) {
+    return HMM_NEED_FAULT;
+    }
+    return 0;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn hmm_range_need_fault(hmm_vma_walk: *mut hmm_vma_walk, npages: c_ulong, cpu_flags: c_ulong) -> c_uint {
+    let mut range = hmm_vma_walk.range;
+pub static mut required_fault: c_uint = 0;
+    let mut i = 0;
 //
 // If the default flags do not request to fault pages, and the mask does
 // not allow for individual pages to be faulted, then
 // hmm_pte_need_fault() will always return 0.
 //
     if (!((range.default_flags | range.pfn_flags_mask) &
-    HMM_PFN_REQ_FAULT))
+    HMM_PFN_REQ_FAULT)) {
     return 0;
-    for (i = 0; i < npages; ++i) {
+    }
+    while (i < npages) {
     required_fault |= hmm_pte_need_fault(hmm_vma_walk, hmm_pfns[i],
     cpu_flags);
-    if (required_fault == HMM_NEED_ALL_BITS)
+    if (required_fault == HMM_NEED_ALL_BITS) {
     return required_fault;
+    }
     }
     return required_fault;
     }
-    static int hmm_vma_walk_hole(unsigned long addr, unsigned long end,
-    __always_unused int depth, struct mm_walk *walk)
-    {
-    struct hmm_vma_walk *hmm_vma_walk = walk.private;
-    struct hmm_range *range = hmm_vma_walk.range;
-    unsigned int required_fault;
+#[no_mangle]
+pub unsafe extern "C" fn hmm_vma_walk_hole(addr: c_ulong, end: c_ulong, depth: __always_unused int, walk: *mut mm_walk) -> c_int {
+    let mut hmm_vma_walk = walk.private;
+    let mut range = hmm_vma_walk.range;
+    let mut required_fault = 0;
     unsigned long i, npages;
-    unsigned long *hmm_pfns;
+pub static mut hmm_pfns: *mut c_void = core::ptr::null_mut();
     i = (addr - range.start) >> PAGE_SHIFT;
     npages = (end - addr) >> PAGE_SHIFT;
     hmm_pfns = &range.hmm_pfns[i];
     required_fault =
     hmm_range_need_fault(hmm_vma_walk, hmm_pfns, npages, 0);
     if (!walk.vma) {
-    if (required_fault)
+    if (required_fault) {
     return -EFAULT;
+    }
     return hmm_pfns_fill(addr, end, range, HMM_PFN_ERROR);
     }
-    if (required_fault)
+    if (required_fault) {
     return hmm_record_fault(addr, end, required_fault, walk);
+    }
     return hmm_pfns_fill(addr, end, range, 0);
     }
 #[no_mangle]
 pub unsafe extern "C" fn hmm_pfn_flags_order(order: c_ulong) -> c_ulong {
-    static inline unsigned long hmm_pfn_flags_order(unsigned long order)
-    {
     return order << HMM_PFN_ORDER_SHIFT;
     }
 
-    static inline unsigned long pmd_to_hmm_pfn_flags(struct hmm_range *range,
-    pmd_t pmd)
-    {
-    if (pmd_protnone(pmd))
+#[no_mangle]
+pub unsafe extern "C" fn pmd_to_hmm_pfn_flags(range: *mut hmm_range, pmd: pmd_t) -> c_ulong {
+    if (pmd_protnone(pmd)) {
     return 0;
+    }
     return (pmd_write(pmd) ? (HMM_PFN_VALID | HMM_PFN_WRITE) :
     HMM_PFN_VALID) |
     hmm_pfn_flags_order(PMD_SHIFT - PAGE_SHIFT);
     }
-    static int hmm_vma_handle_pmd(struct mm_walk *walk, unsigned long addr,
-    unsigned long end, unsigned long hmm_pfns[],
-    pmd_t pmd)
-    {
-    struct hmm_vma_walk *hmm_vma_walk = walk.private;
-    struct hmm_range *range = hmm_vma_walk.range;
+#[no_mangle]
+pub unsafe extern "C" fn hmm_vma_handle_pmd(walk: *mut mm_walk, addr: c_ulong, end: c_ulong, pmd: pmd_t) -> c_int {
+    let mut hmm_vma_walk = walk.private;
+    let mut range = hmm_vma_walk.range;
     unsigned long pfn, npages, i;
-    unsigned int required_fault;
-    unsigned long cpu_flags;
+    let mut required_fault = 0;
+    let mut cpu_flags = 0;
     npages = (end - addr) >> PAGE_SHIFT;
     cpu_flags = pmd_to_hmm_pfn_flags(range, pmd);
     required_fault =
     hmm_range_need_fault(hmm_vma_walk, hmm_pfns, npages, cpu_flags);
-    if (required_fault)
+    if (required_fault) {
     return hmm_record_fault(addr, end, required_fault, walk);
+    }
     pfn = pmd_pfn(pmd) + ((addr & ~PMD_MASK) >> PAGE_SHIFT);
-    for (i = 0; addr < end; addr += PAGE_SIZE, i++, pfn++) {
+    while (addr < end) {
     hmm_pfns[i] &= HMM_PFN_INOUT_FLAGS;
     hmm_pfns[i] |= pfn | cpu_flags;
     }
@@ -224,27 +469,24 @@ pub unsafe extern "C" fn hmm_pfn_flags_order(order: c_ulong) -> c_ulong {
     }
 
 // stub to allow the code below to compile
-    int hmm_vma_handle_pmd(struct mm_walk *walk, unsigned long addr,
-    unsigned long end, unsigned long hmm_pfns[], pmd_t pmd);
+// forward_decl: hmm_vma_handle_pmd;
 
-    static inline unsigned long pte_to_hmm_pfn_flags(struct hmm_range *range,
-    pte_t pte)
-    {
-    if (pte_none(pte) || !pte_present(pte) || pte_protnone(pte))
+#[no_mangle]
+pub unsafe extern "C" fn pte_to_hmm_pfn_flags(range: *mut hmm_range, pte: pte_t) -> c_ulong {
+    if (pte_none(pte) || !pte_present(pte) || pte_protnone(pte)) {
     return 0;
+    }
     return pte_write(pte) ? (HMM_PFN_VALID | HMM_PFN_WRITE) : HMM_PFN_VALID;
     }
-    static int hmm_vma_handle_pte(struct mm_walk *walk, unsigned long addr,
-    unsigned long end, pmd_t *pmdp, pte_t *ptep,
-    unsigned long *hmm_pfn)
-    {
-    struct hmm_vma_walk *hmm_vma_walk = walk.private;
-    struct hmm_range *range = hmm_vma_walk.range;
-    unsigned int required_fault;
-    unsigned long cpu_flags;
-    let mut pte: pte_t = ptep_get(ptep);
-    let mut pfn_req_flags: u64 = *hmm_pfn;
-    let mut new_pfn_flags: u64 = 0;
+#[no_mangle]
+pub unsafe extern "C" fn hmm_vma_handle_pte(walk: *mut mm_walk, addr: c_ulong, end: c_ulong, pmdp: *mut pmd_t, ptep: *mut pte_t, hmm_pfn: *mut c_ulong) -> c_int {
+    let mut hmm_vma_walk = walk.private;
+    let mut range = hmm_vma_walk.range;
+    let mut required_fault = 0;
+    let mut cpu_flags = 0;
+pub static mut pte: pte_t = 0;
+pub static mut pfn_req_flags: u64 = 0;
+pub static mut new_pfn_flags: u64 = 0;
 //
 // Any other marker than a UFFD WP marker will result in a fault error
 // that will be correctly handled, so we need only check for UFFD WP
@@ -253,12 +495,13 @@ pub unsafe extern "C" fn hmm_pfn_flags_order(order: c_ulong) -> c_ulong {
     if (pte_none(pte) || pte_is_uffd_wp_marker(pte)) {
     required_fault =
     hmm_pte_need_fault(hmm_vma_walk, pfn_req_flags, 0);
-    if (required_fault)
-    goto fault;
-    goto out;
+    if (required_fault) {
+// goto;
+    }
+// goto;
     }
     if (!pte_present(pte)) {
-    let mut entry: softleaf_t = softleaf_from_pte(pte);
+pub static mut entry: softleaf_t = 0;
 //
 // Don't fault in device private pages owned by the caller,
 // just report the PFN.
@@ -267,21 +510,26 @@ pub unsafe extern "C" fn hmm_pfn_flags_order(order: c_ulong) -> c_ulong {
     page_pgmap(softleaf_to_page(entry)).owner ==
     range.dev_private_owner) {
     cpu_flags = HMM_PFN_VALID;
-    if (softleaf_is_device_private_write(entry))
+    if (softleaf_is_device_private_write(entry)) {
     cpu_flags |= HMM_PFN_WRITE;
+    }
     new_pfn_flags = softleaf_to_pfn(entry) | cpu_flags;
-    goto out;
+// goto;
     }
     required_fault =
     hmm_pte_need_fault(hmm_vma_walk, pfn_req_flags, 0);
-    if (!required_fault)
-    goto out;
-    if (softleaf_is_swap(entry))
-    goto fault;
-    if (softleaf_is_device_private(entry))
-    goto fault;
-    if (softleaf_is_device_exclusive(entry))
-    goto fault;
+    if (!required_fault) {
+// goto;
+    }
+    if (softleaf_is_swap(entry)) {
+// goto;
+    }
+    if (softleaf_is_device_private(entry)) {
+// goto;
+    }
+    if (softleaf_is_device_exclusive(entry)) {
+// goto;
+    }
     if (softleaf_is_migration(entry)) {
     pte_unmap(ptep);
     hmm_vma_walk.last = addr;
@@ -295,8 +543,9 @@ pub unsafe extern "C" fn hmm_pfn_flags_order(order: c_ulong) -> c_ulong {
     cpu_flags = pte_to_hmm_pfn_flags(range, pte);
     required_fault =
     hmm_pte_need_fault(hmm_vma_walk, pfn_req_flags, cpu_flags);
-    if (required_fault)
-    goto fault;
+    if (required_fault) {
+// goto;
+    }
 //
 // Since each architecture defines a struct page for the zero page, just
 // fall through and treat it like a normal page.
@@ -308,43 +557,42 @@ pub unsafe extern "C" fn hmm_pfn_flags_order(order: c_ulong) -> c_ulong {
     return -EFAULT;
     }
     new_pfn_flags = HMM_PFN_ERROR;
-    goto out;
+// goto;
     }
     new_pfn_flags = pte_pfn(pte) | cpu_flags;
-    out:
+// label;
 // hmm_pfn = (*hmm_pfn & HMM_PFN_INOUT_FLAGS) | new_pfn_flags;
     return 0;
-    fault:
+// label;
     pte_unmap(ptep);
 // Fault any virtual address we were asked to fault
     return hmm_record_fault(addr, end, required_fault, walk);
     }
 
-    static int hmm_vma_handle_absent_pmd(struct mm_walk *walk, unsigned long start,
-    unsigned long end, unsigned long *hmm_pfns,
-    pmd_t pmd)
-    {
-    struct hmm_vma_walk *hmm_vma_walk = walk.private;
-    struct hmm_range *range = hmm_vma_walk.range;
-    let mut npages: c_ulong = (end - start) >> PAGE_SHIFT;
-    let mut entry: softleaf_t = softleaf_from_pmd(pmd);
-    let mut addr: c_ulong = start;
-    unsigned int required_fault;
+#[no_mangle]
+pub unsafe extern "C" fn hmm_vma_handle_absent_pmd(walk: *mut mm_walk, start: c_ulong, end: c_ulong, hmm_pfns: *mut c_ulong, pmd: pmd_t) -> c_int {
+    let mut hmm_vma_walk = walk.private;
+    let mut range = hmm_vma_walk.range;
+pub static mut npages: c_ulong = 0;
+pub static mut entry: softleaf_t = 0;
+pub static mut addr: c_ulong = 0;
+    let mut required_fault = 0;
     if (softleaf_is_device_private(entry) &&
     softleaf_to_folio(entry).pgmap.owner ==
     range.dev_private_owner) {
-    unsigned long cpu_flags = HMM_PFN_VALID |
+    let mut cpu_flags = HMM_PFN_VALID |
     hmm_pfn_flags_order(PMD_SHIFT - PAGE_SHIFT);
-    let mut pfn: c_ulong = softleaf_to_pfn(entry);
-    unsigned long i;
-    if (softleaf_is_device_private_write(entry))
+pub static mut pfn: c_ulong = 0;
+    let mut i = 0;
+    if (softleaf_is_device_private_write(entry)) {
     cpu_flags |= HMM_PFN_WRITE;
+    }
 //
 // Fully populate the PFN list though subsequent PFNs could be
 // inferred, because drivers which are not yet aware of large
 // folios probably do not support sparsely populated PFN lists.
 //
-    for (i = 0; addr < end; addr += PAGE_SIZE, i++, pfn++) {
+    while (addr < end) {
     hmm_pfns[i] &= HMM_PFN_INOUT_FLAGS;
     hmm_pfns[i] |= pfn | cpu_flags;
     }
@@ -353,43 +601,43 @@ pub unsafe extern "C" fn hmm_pfn_flags_order(order: c_ulong) -> c_ulong {
     required_fault = hmm_range_need_fault(hmm_vma_walk, hmm_pfns,
     npages, 0);
     if (required_fault) {
-    if (softleaf_is_device_private(entry))
+    if (softleaf_is_device_private(entry)) {
     return hmm_record_fault(addr, end, required_fault, walk);
-    else
+    }
+    else {
+    return -EFAULT;
+    }
+    }
+    return hmm_pfns_fill(start, end, range, HMM_PFN_ERROR);
+    }
+
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: hmm_vma_handle_absent_pmd
+pub unsafe extern "C" fn hmm_vma_handle_absent_pmd_dup(walk: *mut mm_walk, start: c_ulong, end: c_ulong, hmm_pfns: *mut c_ulong, pmd: pmd_t) -> c_int {
+    let mut hmm_vma_walk = walk.private;
+    let mut range = hmm_vma_walk.range;
+pub static mut npages: c_ulong = 0;
+    if (hmm_range_need_fault(hmm_vma_walk, hmm_pfns, npages, 0)) {
     return -EFAULT;
     }
     return hmm_pfns_fill(start, end, range, HMM_PFN_ERROR);
     }
 
-    static int hmm_vma_handle_absent_pmd(struct mm_walk *walk, unsigned long start,
-    unsigned long end, unsigned long *hmm_pfns,
-    pmd_t pmd)
-    {
-    struct hmm_vma_walk *hmm_vma_walk = walk.private;
-    struct hmm_range *range = hmm_vma_walk.range;
-    let mut npages: c_ulong = (end - start) >> PAGE_SHIFT;
-    if (hmm_range_need_fault(hmm_vma_walk, hmm_pfns, npages, 0))
-    return -EFAULT;
-    return hmm_pfns_fill(start, end, range, HMM_PFN_ERROR);
-    }
-
-    static int hmm_vma_walk_pmd(pmd_t *pmdp,
-    unsigned long start,
-    unsigned long end,
-    struct mm_walk *walk)
-    {
-    struct hmm_vma_walk *hmm_vma_walk = walk.private;
-    struct hmm_range *range = hmm_vma_walk.range;
-    unsigned long *hmm_pfns =
-    &range.hmm_pfns[(start - range.start) >> PAGE_SHIFT];
-    let mut npages: c_ulong = (end - start) >> PAGE_SHIFT;
-    let mut addr: c_ulong = start;
-    pte_t *ptep;
-    pmd_t pmd;
-    again:
+#[no_mangle]
+pub unsafe extern "C" fn hmm_vma_walk_pmd(pmdp: *mut pmd_t, start: c_ulong, end: c_ulong, walk: *mut mm_walk) -> c_int {
+    let mut hmm_vma_walk = walk.private;
+    let mut range = hmm_vma_walk.range;
+    let mut hmm_pfns = &range.hmm_pfns[(start - range.start) >> PAGE_SHIFT];
+pub static mut npages: c_ulong = 0;
+pub static mut addr: c_ulong = 0;
+pub static mut ptep: *mut c_void = core::ptr::null_mut();
+    let mut pmd;
+// label;
     pmd = pmdp_get_lockless(pmdp);
-    if (pmd_none(pmd))
+    if (pmd_none(pmd)) {
     return hmm_vma_walk_hole(start, end, -1, walk);
+    }
     if (thp_migration_supported() && pmd_is_migration_entry(pmd)) {
     if (hmm_range_need_fault(hmm_vma_walk, hmm_pfns, npages, 0)) {
     hmm_vma_walk.last = addr;
@@ -398,9 +646,10 @@ pub unsafe extern "C" fn hmm_pfn_flags_order(order: c_ulong) -> c_ulong {
     }
     return hmm_pfns_fill(start, end, range, 0);
     }
-    if (!pmd_present(pmd))
+    if (!pmd_present(pmd)) {
     return hmm_vma_handle_absent_pmd(walk, start, end, hmm_pfns,
     pmd);
+    }
     if (pmd_trans_huge(pmd)) {
 //
 // No need to take pmd_lock here, even if some other thread
@@ -412,8 +661,9 @@ pub unsafe extern "C" fn hmm_pfn_flags_order(order: c_ulong) -> c_ulong {
 // values.
 //
     pmd = pmdp_get_lockless(pmdp);
-    if (!pmd_trans_huge(pmd))
-    goto again;
+    if (!pmd_trans_huge(pmd)) {
+// goto;
+    }
     return hmm_vma_handle_pmd(walk, addr, end, hmm_pfns, pmd);
     }
 //
@@ -423,15 +673,17 @@ pub unsafe extern "C" fn hmm_pfn_flags_order(order: c_ulong) -> c_ulong {
 // recover.
 //
     if (pmd_bad(pmd)) {
-    if (hmm_range_need_fault(hmm_vma_walk, hmm_pfns, npages, 0))
+    if (hmm_range_need_fault(hmm_vma_walk, hmm_pfns, npages, 0)) {
     return -EFAULT;
+    }
     return hmm_pfns_fill(start, end, range, HMM_PFN_ERROR);
     }
     ptep = pte_offset_map(pmdp, addr);
-    if (!ptep)
-    goto again;
-    for (; addr < end; addr += PAGE_SIZE, ptep++, hmm_pfns++) {
-    int r;
+    if (!ptep) {
+// goto;
+    }
+    while (addr < end) {
+    let mut r = 0;
     r = hmm_vma_handle_pte(walk, addr, end, pmdp, ptep, hmm_pfns);
     if (r) {
 // hmm_vma_handle_pte() did pte_unmap()
@@ -442,25 +694,25 @@ pub unsafe extern "C" fn hmm_pfn_flags_order(order: c_ulong) -> c_ulong {
     return 0;
     }
 
-    static inline unsigned long pud_to_hmm_pfn_flags(struct hmm_range *range,
-    pud_t pud)
-    {
-    if (!pud_present(pud))
+#[no_mangle]
+pub unsafe extern "C" fn pud_to_hmm_pfn_flags(range: *mut hmm_range, pud: pud_t) -> c_ulong {
+    if (!pud_present(pud)) {
     return 0;
+    }
     return (pud_write(pud) ? (HMM_PFN_VALID | HMM_PFN_WRITE) :
     HMM_PFN_VALID) |
     hmm_pfn_flags_order(PUD_SHIFT - PAGE_SHIFT);
     }
-    static int hmm_vma_walk_pud(pud_t *pudp, unsigned long start, unsigned long end,
-    struct mm_walk *walk)
-    {
-    struct hmm_vma_walk *hmm_vma_walk = walk.private;
-    struct hmm_range *range = hmm_vma_walk.range;
-    let mut addr: c_ulong = start;
-    pud_t pud;
-    spinlock_t *ptl = pud_trans_huge_lock(pudp, walk.vma);
-    if (!ptl)
+#[no_mangle]
+pub unsafe extern "C" fn hmm_vma_walk_pud(pudp: *mut pud_t, start: c_ulong, end: c_ulong, walk: *mut mm_walk) -> c_int {
+    let mut hmm_vma_walk = walk.private;
+    let mut range = hmm_vma_walk.range;
+pub static mut addr: c_ulong = 0;
+    let mut pud;
+    let mut ptl = pud_trans_huge_lock(pudp, walk.vma);
+    if (!ptl) {
     return 0;
+    }
 // Normally we don't want to split the huge page
     walk.action = ACTION_CONTINUE;
     pud = pudp_get(pudp);
@@ -470,9 +722,9 @@ pub unsafe extern "C" fn hmm_pfn_flags_order(order: c_ulong) -> c_ulong {
     }
     if (pud_leaf(pud)) {
     unsigned long i, npages, pfn;
-    unsigned int required_fault;
-    unsigned long *hmm_pfns;
-    unsigned long cpu_flags;
+    let mut required_fault = 0;
+pub static mut hmm_pfns: *mut c_void = core::ptr::null_mut();
+    let mut cpu_flags = 0;
     i = (addr - range.start) >> PAGE_SHIFT;
     npages = (end - addr) >> PAGE_SHIFT;
     hmm_pfns = &range.hmm_pfns[i];
@@ -484,32 +736,30 @@ pub unsafe extern "C" fn hmm_pfn_flags_order(order: c_ulong) -> c_ulong {
     return hmm_record_fault(addr, end, required_fault, walk);
     }
     pfn = pud_pfn(pud) + ((addr & ~PUD_MASK) >> PAGE_SHIFT);
-    for (i = 0; i < npages; ++i, ++pfn) {
+    while (i < npages) {
     hmm_pfns[i] &= HMM_PFN_INOUT_FLAGS;
     hmm_pfns[i] |= pfn | cpu_flags;
     }
-    goto out_unlock;
+// goto;
     }
 // Ask for the PUD to be split
     walk.action = ACTION_SUBTREE;
-    out_unlock:
+// label;
     spin_unlock(ptl);
     return 0;
     }
 
-    static int hmm_vma_walk_hugetlb_entry(pte_t *pte, unsigned long hmask,
-    unsigned long start, unsigned long end,
-    struct mm_walk *walk)
-    {
-    let mut addr: c_ulong = start, i, pfn;
-    struct hmm_vma_walk *hmm_vma_walk = walk.private;
-    struct hmm_range *range = hmm_vma_walk.range;
-    struct vm_area_struct *vma = walk.vma;
-    unsigned int required_fault;
-    unsigned long pfn_req_flags;
-    unsigned long cpu_flags;
-    spinlock_t *ptl;
-    pte_t entry;
+#[no_mangle]
+pub unsafe extern "C" fn hmm_vma_walk_hugetlb_entry(pte: *mut pte_t, hmask: c_ulong, start: c_ulong, end: c_ulong, walk: *mut mm_walk) -> c_int {
+pub static mut addr: c_ulong = 0;
+    let mut hmm_vma_walk = walk.private;
+    let mut range = hmm_vma_walk.range;
+    let mut vma = walk.vma;
+    let mut required_fault = 0;
+    let mut pfn_req_flags = 0;
+    let mut cpu_flags = 0;
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
+    let mut entry;
     ptl = huge_pte_lock(hstate_vma(vma), walk.mm, pte);
     entry = huge_ptep_get(walk.mm, addr, pte);
     i = (start - range.start) >> PAGE_SHIFT;
@@ -523,7 +773,7 @@ pub unsafe extern "C" fn hmm_pfn_flags_order(order: c_ulong) -> c_ulong {
     return hmm_record_fault(addr, end, required_fault, walk);
     }
     pfn = pte_pfn(entry) + ((start & ~hmask) >> PAGE_SHIFT);
-    for (; addr < end; addr += PAGE_SIZE, i++, pfn++) {
+    while (addr < end) {
     range.hmm_pfns[i] &= HMM_PFN_INOUT_FLAGS;
     range.hmm_pfns[i] |= pfn | cpu_flags;
     }
@@ -531,15 +781,15 @@ pub unsafe extern "C" fn hmm_pfn_flags_order(order: c_ulong) -> c_ulong {
     return 0;
     }
 
-    static int hmm_vma_walk_test(unsigned long start, unsigned long end,
-    struct mm_walk *walk)
-    {
-    struct hmm_vma_walk *hmm_vma_walk = walk.private;
-    struct hmm_range *range = hmm_vma_walk.range;
-    struct vm_area_struct *vma = walk.vma;
+#[no_mangle]
+pub unsafe extern "C" fn hmm_vma_walk_test(start: c_ulong, end: c_ulong, walk: *mut mm_walk) -> c_int {
+    let mut hmm_vma_walk = walk.private;
+    let mut range = hmm_vma_walk.range;
+    let mut vma = walk.vma;
     if (!(vma.vm_flags & (VM_IO | VM_PFNMAP)) &&
-    vma.vm_flags & VM_READ)
+    vma.vm_flags & VM_READ) {
     return 0;
+    }
 //
 // vma ranges that don't have struct page backing them or map I/O
 // devices directly cannot be handled by hmm_range_fault().
@@ -554,20 +804,14 @@ pub unsafe extern "C" fn hmm_pfn_flags_order(order: c_ulong) -> c_ulong {
     if (hmm_range_need_fault(hmm_vma_walk,
     range.hmm_pfns +
     ((start - range.start) >> PAGE_SHIFT),
-    (end - start) >> PAGE_SHIFT, 0))
+    (end - start) >> PAGE_SHIFT, 0)) {
     return -EFAULT;
+    }
     hmm_pfns_fill(start, end, range, HMM_PFN_ERROR);
 // Skip this vma and continue processing the next vma.
     return 1;
     }
-    static const struct mm_walk_ops hmm_walk_ops = {
-    .pud_entry	= hmm_vma_walk_pud,
-    .pmd_entry	= hmm_vma_walk_pmd,
-    .pte_hole	= hmm_vma_walk_hole,
-    .hugetlb_entry	= hmm_vma_walk_hugetlb_entry,
-    .test_walk	= hmm_vma_walk_test,
-    .walk_lock	= PGWALK_RDLOCK,
-    };
+pub static mut mm_walk_ops: usize = 0;
 //
 // hmm_do_fault - fault in a range recorded by a walk callback
 //
@@ -579,38 +823,43 @@ pub unsafe extern "C" fn hmm_pfn_flags_order(order: c_ulong) -> c_ulong {
 // Returns -EBUSY on success (all pages faulted, caller should re-walk).
 // Returns a negative errno on failure.
 //
-    static int hmm_do_fault(struct mm_struct *mm,
-    struct hmm_vma_walk *hmm_vma_walk)
-    {
-    let mut addr: c_ulong = hmm_vma_walk.last;
-    let mut end: c_ulong = hmm_vma_walk.end;
-    let mut required_fault: c_uint = hmm_vma_walk.required_fault;
-    let mut fault_flags: c_uint = FAULT_FLAG_REMOTE;
-    struct vm_area_struct *vma;
-    if (hmm_vma_walk.locked)
+#[no_mangle]
+pub unsafe extern "C" fn hmm_do_fault(mm: *mut mm_struct, hmm_vma_walk: *mut hmm_vma_walk) -> c_int {
+pub static mut addr: c_ulong = 0;
+pub static mut end: c_ulong = 0;
+pub static mut required_fault: c_uint = 0;
+pub static mut fault_flags: c_uint = 0;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+    if (hmm_vma_walk.locked) {
     fault_flags |= FAULT_FLAG_ALLOW_RETRY | FAULT_FLAG_KILLABLE;
+    }
     vma = vma_lookup(mm, addr);
-    if (!vma)
+    if (!vma) {
     return -EFAULT;
+    }
     if (required_fault & HMM_NEED_WRITE_FAULT) {
-    if (!(vma.vm_flags & VM_WRITE))
+    if (!(vma.vm_flags & VM_WRITE)) {
     return -EPERM;
+    }
     fault_flags |= FAULT_FLAG_WRITE;
     }
-    for (; addr < end; addr += PAGE_SIZE) {
-    vm_fault_t ret;
+    while (addr < end) {
+    let mut ret;
     ret = handle_mm_fault(vma, addr, fault_flags, core::ptr::null_mut());
     if (ret & (VM_FAULT_COMPLETED | VM_FAULT_RETRY)) {
-    if (hmm_vma_walk.locked)    /* needed by sparse */
+    if (hmm_vma_walk.locked)    /* needed by sparse */ {
 // hmm_vma_walk->locked = false;
-    else
-    WARN_ON_ONCE(1);    /* broken fault handler */
+    }
+    else {
+    WARN_ON_ONCE!(1);    /* broken fault handler */
+    }
     return HMM_FAULT_UNLOCKED;
     }
     if (ret & VM_FAULT_ERROR) {
-    let mut err: c_int = vm_fault_to_errno(ret, 0);
-    if (WARN_ON(!err))
+pub static mut err: c_int = 0;
+    if (WARN_ON!(!err)) {
     err = -EINVAL;
+    }
     return err;
     }
     }
@@ -618,21 +867,16 @@ pub unsafe extern "C" fn hmm_pfn_flags_order(order: c_ulong) -> c_ulong {
     }
 #[no_mangle]
 unsafe extern "C" fn hmm_range_fault_locked(range: *mut hmm_range, locked: *mut bool) -> c_int {
-    static int hmm_range_fault_locked(struct hmm_range *range, bool *locked)
-    {
-    struct hmm_vma_walk hmm_vma_walk = {
-    .range = range,
-    .locked = locked,
-    .last = range.start,
-    };
-    struct mm_struct *mm = range.notifier.mm;
-    int ret;
+pub static mut hmm_vma_walk: usize = 0;
+    let mut mm = range.notifier.mm;
+    let mut ret = 0;
     mmap_assert_locked(mm);
     do {
 // If range is no longer valid force retry.
     if (mmu_interval_check_retry(range.notifier,
-    range.notifier_seq))
+    range.notifier_seq)) {
     return -EBUSY;
+    }
     ret = walk_page_range(mm, hmm_vma_walk.last, range.end,
     &hmm_walk_ops, &hmm_vma_walk);
 //
@@ -646,8 +890,9 @@ unsafe extern "C" fn hmm_range_fault_locked(range: *mut hmm_range, locked: *mut 
     if (ret == HMM_FAULT_PENDING) {
     ret = hmm_do_fault(mm, &hmm_vma_walk);
     if (ret == HMM_FAULT_UNLOCKED) {
-    if (fatal_signal_pending(current))
+    if (fatal_signal_pending(current)) {
     return -EINTR;
+    }
     return -EBUSY;
     }
     }
@@ -686,8 +931,6 @@ unsafe extern "C" fn hmm_range_fault_locked(range: *mut hmm_range, locked: *mut 
 //
 #[no_mangle]
 pub unsafe extern "C" fn hmm_range_fault(range: *mut hmm_range) -> c_int {
-    int hmm_range_fault(struct hmm_range *range)
-    {
     return hmm_range_fault_locked(range, core::ptr::null_mut());
     }
     EXPORT_SYMBOL(hmm_range_fault);
@@ -711,13 +954,12 @@ pub unsafe extern "C" fn hmm_range_fault(range: *mut hmm_range) -> c_int {
 // hmm_range_fault(). -EINTR is returned if mmap_lock acquisition is
 // interrupted or a fatal signal is pending during retry handling.
 //
-    int hmm_range_fault_unlocked_timeout(struct hmm_range *range,
-    unsigned long timeout)
-    {
-    struct mm_struct *mm = range.notifier.mm;
-    let mut deadline: c_ulong = 0;
-    let mut locked: bool = false;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn hmm_range_fault_unlocked_timeout(range: *mut hmm_range, timeout: c_ulong) -> c_int {
+    let mut mm = range.notifier.mm;
+pub static mut deadline: c_ulong = 0;
+pub static mut locked: bool = false;
+    let mut ret = 0;
     do {
 //
 // If the previous fault dropped mmap_lock, then the fault
@@ -725,13 +967,15 @@ pub unsafe extern "C" fn hmm_range_fault(range: *mut hmm_range) -> c_int {
 // case, but keep the existing deadline for ordinary -EBUSY
 // retries.
 //
-    if (timeout && !locked)
+    if (timeout && !locked) {
     deadline = jiffies + timeout;
+    }
     range.notifier_seq =
     mmu_interval_read_begin(range.notifier);
     ret = mmap_read_lock_killable(mm);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     if (check_stable_address_space(mm)) {
     mmap_read_unlock(mm);
     return -EFAULT;
@@ -742,8 +986,9 @@ pub unsafe extern "C" fn hmm_range_fault(range: *mut hmm_range) -> c_int {
     }
     locked = true;
     ret = hmm_range_fault_locked(range, &locked);
-    if (locked)
+    if (locked) {
     mmap_read_unlock(mm);
+    }
     } while (ret == -EBUSY);
     return ret;
     }
@@ -758,12 +1003,11 @@ pub unsafe extern "C" fn hmm_range_fault(range: *mut hmm_range) -> c_int {
 // Allocate the HMM map structure and all the lists it contains.
 // Return 0 on success, -ENOMEM on failure.
 //
-    int hmm_dma_map_alloc(struct device *dev, struct hmm_dma_map *map,
-    size_t nr_entries, size_t dma_entry_size)
-    {
-    let mut dma_need_sync: bool = false;
-    bool use_iova;
-    WARN_ON_ONCE(!(nr_entries * PAGE_SIZE / dma_entry_size));
+#[no_mangle]
+pub unsafe extern "C" fn hmm_dma_map_alloc(dev: *mut device, map: *mut hmm_dma_map, nr_entries: size_t, dma_entry_size: size_t) -> c_int {
+pub static mut dma_need_sync: bool = false;
+    let mut use_iova = 0;
+    WARN_ON_ONCE!(!(nr_entries * PAGE_SIZE / dma_entry_size));
 //
 // The HMM API violates our normal DMA buffer ownership rules and can't
 // transfer buffer ownership.  The dma_addressing_limited() check is a
@@ -772,23 +1016,26 @@ pub unsafe extern "C" fn hmm_range_fault(range: *mut hmm_range) -> c_int {
 
     dma_need_sync = !dev_dma_skip_sync(dev);
 
-    if (dma_need_sync || dma_addressing_limited(dev))
+    if (dma_need_sync || dma_addressing_limited(dev)) {
     return -EOPNOTSUPP;
+    }
     map.dma_entry_size = dma_entry_size;
-    map.pfn_list = kvcalloc(nr_entries, sizeof(*map.pfn_list),
+    map.pfn_list = kvcalloc(nr_entries, sizeof!(*map.pfn_list),
     GFP_KERNEL | __GFP_NOWARN);
-    if (!map.pfn_list)
+    if (!map.pfn_list) {
     return -ENOMEM;
+    }
     use_iova = dma_iova_try_alloc(dev, &map.state, 0,
     nr_entries * PAGE_SIZE);
     if (!use_iova && dma_need_unmap(dev)) {
     map.dma_list = kvzalloc_objs(*map.dma_list, nr_entries,
     GFP_KERNEL | __GFP_NOWARN);
-    if (!map.dma_list)
-    goto err_dma;
+    if (!map.dma_list) {
+// goto;
+    }
     }
     return 0;
-    err_dma:
+// label;
     kvfree(map.pfn_list);
     return -ENOMEM;
     }
@@ -802,10 +1049,9 @@ pub unsafe extern "C" fn hmm_range_fault(range: *mut hmm_range) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn hmm_dma_map_free(dev: *mut device, map: *mut hmm_dma_map) {
-    void hmm_dma_map_free(struct device *dev, struct hmm_dma_map *map)
-    {
-    if (dma_use_iova(&map.state))
+    if (dma_use_iova(&map.state)) {
     dma_iova_free(dev, &map.state);
+    }
     kvfree(map.pfn_list);
     kvfree(map.dma_list);
     }
@@ -826,19 +1072,18 @@ pub unsafe extern "C" fn hmm_dma_map_free(dev: *mut device, map: *mut hmm_dma_ma
 // page that was linked + DMA address returned for the previous page that was
 // linked by this function.
 //
-    dma_addr_t hmm_dma_map_pfn(struct device *dev, struct hmm_dma_map *map,
-    size_t idx,
-    struct pci_p2pdma_map_state *p2pdma_state)
+    dma_addr_t hmm_dma_map_pfn(device *dev, hmm_dma_map *map,
+    size_t idx, pci_p2pdma_map_state *p2pdma_state)
     {
-    struct dma_iova_state *state = &map.state;
-    dma_addr_t *dma_addrs = map.dma_list;
-    unsigned long *pfns = map.pfn_list;
-    struct page *page = hmm_pfn_to_page(pfns[idx]);
-    let mut paddr: phys_addr_t = hmm_pfn_to_phys(pfns[idx]);
-    let mut offset: usize = idx * map.dma_entry_size;
-    let mut attrs: c_ulong = DMA_ATTR_REQUIRE_COHERENT;
-    dma_addr_t dma_addr;
-    int ret;
+    let mut state = &map.state;
+    let mut dma_addrs = map.dma_list;
+    let mut pfns = map.pfn_list;
+    let mut page = hmm_pfn_to_page(pfns[idx]);
+pub static mut paddr: phys_addr_t = 0;
+pub static mut offset: usize = 0;
+pub static mut attrs: c_ulong = 0;
+    let mut dma_addr;
+    let mut ret = 0;
     if ((pfns[idx] & HMM_PFN_DMA_MAPPED) &&
     !(pfns[idx] & HMM_PFN_P2PDMA_BUS)) {
 //
@@ -849,16 +1094,18 @@ pub unsafe extern "C" fn hmm_dma_map_free(dev: *mut device, map: *mut hmm_dma_ma
 // This page was already programmed to HW and we don't want/need
 // to unlink and link it again just to resync flags.
 //
-    if (dma_use_iova(state))
+    if (dma_use_iova(state)) {
     return state.addr + offset;
+    }
 //
 // Without dma_need_unmap, the dma_addrs array is NULL, thus we
 // need to regenerate the address below even if there already
 // was a mapping. But !dma_need_unmap implies that the
 // mapping stateless, so this is fine.
 //
-    if (dma_need_unmap(dev))
+    if (dma_need_unmap(dev)) {
     return dma_addrs[idx];
+    }
 // Continue to remapping
     }
     switch (pci_p2pdma_state(p2pdma_state, dev, page)) {
@@ -871,35 +1118,39 @@ pub unsafe extern "C" fn hmm_dma_map_free(dev: *mut device, map: *mut hmm_dma_ma
     case PCI_P2PDMA_MAP_BUS_ADDR:
     pfns[idx] |= HMM_PFN_P2PDMA_BUS | HMM_PFN_DMA_MAPPED;
     return pci_p2pdma_bus_addr_map(p2pdma_state.mem, paddr);
-    default:
+// label;
     return DMA_MAPPING_ERROR;
     }
     if (dma_use_iova(state)) {
     ret = dma_iova_link(dev, state, paddr, offset,
     map.dma_entry_size, DMA_BIDIRECTIONAL,
     attrs);
-    if (ret)
-    goto error;
+    if (ret) {
+// goto;
+    }
     ret = dma_iova_sync(dev, state, offset, map.dma_entry_size);
     if (ret) {
     dma_iova_unlink(dev, state, offset, map.dma_entry_size,
     DMA_BIDIRECTIONAL, attrs);
-    goto error;
+// goto;
     }
     dma_addr = state.addr + offset;
     } else {
-    if (WARN_ON_ONCE(dma_need_unmap(dev) && !dma_addrs))
-    goto error;
+    if (WARN_ON_ONCE!(dma_need_unmap(dev) && !dma_addrs)) {
+// goto;
+    }
     dma_addr = dma_map_phys(dev, paddr, map.dma_entry_size,
     DMA_BIDIRECTIONAL, attrs);
-    if (dma_mapping_error(dev, dma_addr))
-    goto error;
-    if (dma_need_unmap(dev))
+    if (dma_mapping_error(dev, dma_addr)) {
+// goto;
+    }
+    if (dma_need_unmap(dev)) {
     dma_addrs[idx] = dma_addr;
+    }
     }
     pfns[idx] |= HMM_PFN_DMA_MAPPED;
     return dma_addr;
-    error:
+// label;
     pfns[idx] &= ~HMM_PFN_P2PDMA;
     return DMA_MAPPING_ERROR;
     }
@@ -914,29 +1165,30 @@ pub unsafe extern "C" fn hmm_dma_map_free(dev: *mut device, map: *mut hmm_dma_ma
 //
 #[no_mangle]
 pub unsafe extern "C" fn hmm_dma_unmap_pfn(dev: *mut device, map: *mut hmm_dma_map, idx: usize) -> bool {
-    bool hmm_dma_unmap_pfn(struct device *dev, struct hmm_dma_map *map, size_t idx)
-    {
-    let mut valid_dma: c_ulong = HMM_PFN_VALID | HMM_PFN_DMA_MAPPED;
-    struct dma_iova_state *state = &map.state;
-    dma_addr_t *dma_addrs = map.dma_list;
-    unsigned long *pfns = map.pfn_list;
-    let mut attrs: c_ulong = DMA_ATTR_REQUIRE_COHERENT;
-    if ((pfns[idx] & valid_dma) != valid_dma)
+pub static mut valid_dma: c_ulong = 0;
+    let mut state = &map.state;
+    let mut dma_addrs = map.dma_list;
+    let mut pfns = map.pfn_list;
+pub static mut attrs: c_ulong = 0;
+    if ((pfns[idx] & valid_dma) != valid_dma) {
     return false;
-    if (pfns[idx] & HMM_PFN_P2PDMA)
+    }
+    if (pfns[idx] & HMM_PFN_P2PDMA) {
     attrs |= DMA_ATTR_MMIO;
-    if (pfns[idx] & HMM_PFN_P2PDMA_BUS)
+    }
+    if (pfns[idx] & HMM_PFN_P2PDMA_BUS) {
     ; /* no need to unmap bus address P2P mappings */
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: dma_use_iova(state)) -> else {
-    else if (dma_use_iova(state))
+    }
+
+    else if (dma_use_iova(state)) {
     dma_iova_unlink(dev, state, idx * map.dma_entry_size,
     map.dma_entry_size, DMA_BIDIRECTIONAL, attrs);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: dma_need_unmap(dev)) -> else {
-    else if (dma_need_unmap(dev))
+    }
+
+    else if (dma_need_unmap(dev)) {
     dma_unmap_phys(dev, dma_addrs[idx], map.dma_entry_size,
     DMA_BIDIRECTIONAL, attrs);
+    }
     pfns[idx] &=
     ~(HMM_PFN_DMA_MAPPED | HMM_PFN_P2PDMA | HMM_PFN_P2PDMA_BUS);
     return true;

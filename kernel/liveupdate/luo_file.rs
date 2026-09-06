@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -128,9 +378,9 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // discarded.
 //
 
-    static LIST_HEAD(luo_file_handler_list);
+pub static mut luo_file_handler_list: usize = 0;
 // Keep track of files being preserved by LUO
-    static DEFINE_XARRAY(luo_preserved_files);
+pub static mut luo_preserved_files: usize = 0;
 //
 // struct luo_file - Represents a single preserved file instance.
 // @fh:            Pointer to the &struct liveupdate_file_handler that manages
@@ -162,7 +412,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // This structure is the core in-kernel representation of a single file being
 // managed through a live update. An instance is created by luo_preserve_file()
 // to link a 'struct file' to its corresponding handler, a user-provided token,
-// and the serialized state handle returned by the handler's .preserve()
+and the serialized state handle returned by the handler's .preserve()
 // operation.
 //
 // These instances are tracked in a per-file_set list. The @serialized_data
@@ -184,19 +434,17 @@ pub struct luo_file {
     pub token: u64,
 }
 
-    static unsigned long luo_get_id(struct liveupdate_file_handler *fh,
-    struct file *file)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn luo_get_id(fh: *mut liveupdate_file_handler, file: *mut file) -> c_ulong {
     return fh.ops.get_id ? fh.ops.get_id(file) : (unsigned long)file;
     }
 #[no_mangle]
 unsafe extern "C" fn luo_token_is_used(file_set: *mut luo_file_set, token: u64) -> bool {
-    static bool luo_token_is_used(struct luo_file_set *file_set, u64 token)
-    {
-    struct luo_file *iter;
+pub static mut iter: *mut c_void = core::ptr::null_mut();
     list_for_each_entry(iter, &file_set.files_list, list) {
-    if (iter.token == token)
+    if (iter.token == token) {
     return true;
+    }
     }
     return false;
     }
@@ -242,47 +490,51 @@ unsafe extern "C" fn luo_token_is_used(file_set: *mut luo_file_set, token: u64) 
 //
 #[no_mangle]
 pub unsafe extern "C" fn luo_preserve_file(file_set: *mut luo_file_set, token: u64, fd: c_int) -> c_int {
-    int luo_preserve_file(struct luo_file_set *file_set, u64 token, int fd)
-    {
-    let mut args: liveupdate_file_op_args = {0};
-    struct liveupdate_file_handler *fh;
-    struct luo_file *luo_file;
-    struct file *file;
-    int err;
-    if (luo_token_is_used(file_set, token))
+pub static mut args: liveupdate_file_op_args = 0;
+pub static mut fh: *mut c_void = core::ptr::null_mut();
+pub static mut luo_file: *mut c_void = core::ptr::null_mut();
+pub static mut file: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
+    if (luo_token_is_used(file_set, token)) {
     return -EEXIST;
+    }
     err = kho_block_set_grow(&file_set.block_set, file_set.count + 1);
-    if (err)
+    if (err) {
     return err;
+    }
     file = fget(fd);
     if (!file) {
     err = -EBADF;
-    goto err_shrink;
+// goto;
     }
     err = -ENOENT;
     down_read(&luo_register_rwlock);
     list_private_for_each_entry(fh, &luo_file_handler_list, list) {
     if (fh.ops.can_preserve(fh, file)) {
-    if (try_module_get(fh.ops.owner))
+    if (try_module_get(fh.ops.owner)) {
     err = 0;
+    }
     break;
     }
     }
     up_read(&luo_register_rwlock);
 // err is still -ENOENT if no handler was found
-    if (err)
-    goto err_fput;
+    if (err) {
+// goto;
+    }
     err = xa_insert(&luo_preserved_files, luo_get_id(fh, file),
     file, GFP_KERNEL);
-    if (err)
-    goto err_module_put;
+    if (err) {
+// goto;
+    }
     err = luo_flb_file_preserve(fh);
-    if (err)
-    goto err_erase_xa;
+    if (err) {
+// goto;
+    }
     luo_file = kzalloc_obj(*luo_file);
     if (!luo_file) {
     err = -ENOMEM;
-    goto err_flb_unpreserve;
+// goto;
     }
     luo_file.file = file;
     luo_file.fh = fh;
@@ -291,24 +543,25 @@ pub unsafe extern "C" fn luo_preserve_file(file_set: *mut luo_file_set, token: u
     args.handler = fh;
     args.file = file;
     err = fh.ops.preserve(&args);
-    if (err)
-    goto err_kfree;
+    if (err) {
+// goto;
+    }
     luo_file.serialized_data = args.serialized_data;
     luo_file.private_data = args.private_data;
     list_add_tail(&luo_file.list, &file_set.files_list);
-    file_set.count++;
+    file_set.count += 1;
     return 0;
-    err_kfree:
+// label;
     kfree(luo_file);
-    err_flb_unpreserve:
+// label;
     luo_flb_file_unpreserve(fh);
-    err_erase_xa:
+// label;
     xa_erase(&luo_preserved_files, luo_get_id(fh, file));
-    err_module_put:
-    module_put(fh.ops.owner);
-    err_fput:
+// label;
+    module_put!(fh.ops.owner);
+// label;
     fput(file);
-    err_shrink:
+// label;
     kho_block_set_shrink(&file_set.block_set, file_set.count);
     return err;
     }
@@ -332,13 +585,10 @@ pub unsafe extern "C" fn luo_preserve_file(file_set: *mut luo_file_set, token: u
 //
 #[no_mangle]
 pub unsafe extern "C" fn luo_file_unpreserve_files(file_set: *mut luo_file_set) {
-    void luo_file_unpreserve_files(struct luo_file_set *file_set)
-    {
-    struct luo_file *luo_file;
+pub static mut luo_file: *mut c_void = core::ptr::null_mut();
     while (!list_empty(&file_set.files_list)) {
-    let mut args: liveupdate_file_op_args = {0};
-    luo_file = list_last_entry(&file_set.files_list,
-    struct luo_file, list);
+pub static mut args: liveupdate_file_op_args = 0;
+    luo_file = list_last_entry(&file_set.files_list, luo_file, list);
     args.handler = luo_file.fh;
     args.file = luo_file.file;
     args.serialized_data = luo_file.serialized_data;
@@ -347,9 +597,9 @@ pub unsafe extern "C" fn luo_file_unpreserve_files(file_set: *mut luo_file_set) 
     luo_flb_file_unpreserve(luo_file.fh);
     xa_erase(&luo_preserved_files,
     luo_get_id(luo_file.fh, luo_file.file));
-    module_put(luo_file.fh.ops.owner);
+    module_put!(luo_file.fh.ops.owner);
     list_del(&luo_file.list);
-    file_set.count--;
+    file_set.count -= 1;
     kho_block_set_shrink(&file_set.block_set, file_set.count);
     fput(luo_file.file);
     mutex_destroy(&luo_file.mutex);
@@ -357,29 +607,28 @@ pub unsafe extern "C" fn luo_file_unpreserve_files(file_set: *mut luo_file_set) 
     }
     kho_block_set_destroy(&file_set.block_set);
     }
-    static int luo_file_freeze_one(struct luo_file_set *file_set,
-    struct luo_file *luo_file)
-    {
-    let mut err: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn luo_file_freeze_one(file_set: *mut luo_file_set, luo_file: *mut luo_file) -> c_int {
+pub static mut err: c_int = 0;
     guard(mutex)(&luo_file.mutex);
     if (luo_file.fh.ops.freeze) {
-    let mut args: liveupdate_file_op_args = {0};
+pub static mut args: liveupdate_file_op_args = 0;
     args.handler = luo_file.fh;
     args.file = luo_file.file;
     args.serialized_data = luo_file.serialized_data;
     args.private_data = luo_file.private_data;
     err = luo_file.fh.ops.freeze(&args);
-    if (!err)
+    if (!err) {
     luo_file.serialized_data = args.serialized_data;
+    }
     }
     return err;
     }
-    static void luo_file_unfreeze_one(struct luo_file_set *file_set,
-    struct luo_file *luo_file)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn luo_file_unfreeze_one(file_set: *mut luo_file_set, luo_file: *mut luo_file) {
     guard(mutex)(&luo_file.mutex);
     if (luo_file.fh.ops.unfreeze) {
-    let mut args: liveupdate_file_op_args = {0};
+pub static mut args: liveupdate_file_op_args = 0;
     args.handler = luo_file.fh;
     args.file = luo_file.file;
     args.serialized_data = luo_file.serialized_data;
@@ -387,14 +636,14 @@ pub unsafe extern "C" fn luo_file_unpreserve_files(file_set: *mut luo_file_set) 
     luo_file.fh.ops.unfreeze(&args);
     }
     }
-    static void __luo_file_unfreeze(struct luo_file_set *file_set,
-    struct luo_file *failed_entry)
-    {
-    struct list_head *files_list = &file_set.files_list;
-    struct luo_file *luo_file;
+#[no_mangle]
+pub unsafe extern "C" fn __luo_file_unfreeze(file_set: *mut luo_file_set, failed_entry: *mut luo_file) {
+    let mut files_list = &file_set.files_list;
+pub static mut luo_file: *mut c_void = core::ptr::null_mut();
     list_for_each_entry(luo_file, files_list, list) {
-    if (luo_file == failed_entry)
+    if (luo_file == failed_entry) {
     break;
+    }
     luo_file_unfreeze_one(file_set, luo_file);
     }
     kho_block_set_clear(&file_set.block_set);
@@ -432,38 +681,38 @@ pub unsafe extern "C" fn luo_file_unpreserve_files(file_set: *mut luo_file_set) 
 // Context: Called only from the liveupdate_reboot() path.
 // Return: 0 on success, or a negative errno on failure.
 //
-    int luo_file_freeze(struct luo_file_set *file_set,
-    struct luo_file_set_ser *file_set_ser)
-    {
-    struct luo_file *luo_file;
-    struct kho_block_set_it it;
-    int err;
-    if (!file_set.count)
+#[no_mangle]
+pub unsafe extern "C" fn luo_file_freeze(file_set: *mut luo_file_set, file_set_ser: *mut luo_file_set_ser) -> c_int {
+pub static mut luo_file: *mut c_void = core::ptr::null_mut();
+pub static mut it: usize = 0;
+    let mut err = 0;
+    if (!file_set.count) {
     return 0;
+    }
     kho_block_set_it_init(&it, &file_set.block_set);
     list_for_each_entry(luo_file, &file_set.files_list, list) {
-    struct luo_file_ser *file_ser = kho_block_set_it_reserve_entry(&it);
+    let mut file_ser = kho_block_set_it_reserve_entry(&it);
 // This should not fail normally as blocks were pre-allocated
-    if (WARN_ON_ONCE(!file_ser)) {
+    if (WARN_ON_ONCE!(!file_ser)) {
     err = -ENOSPC;
-    goto err_unfreeze;
+// goto;
     }
     err = luo_file_freeze_one(file_set, luo_file);
     if (err < 0) {
-    pr_warn("Freeze failed for token[%#0llx] handler[%s] err[%pe]\n",
+    pr_warn!("Freeze failed for token[%#0llx] handler[%s] err[%pe]\n",
     luo_file.token, luo_file.fh.compatible,
     ERR_PTR(err));
-    goto err_unfreeze;
+// goto;
     }
     strscpy(file_ser.compatible, luo_file.fh.compatible,
-    sizeof(file_ser.compatible));
+    sizeof!(file_ser.compatible));
     file_ser.data = luo_file.serialized_data;
     file_ser.token = luo_file.token;
     }
     file_set_ser.count = file_set.count;
     file_set_ser.files = kho_block_set_head_pa(&file_set.block_set);
     return 0;
-    err_unfreeze:
+// label;
     __luo_file_unfreeze(file_set, luo_file);
     return err;
     }
@@ -483,13 +732,13 @@ pub unsafe extern "C" fn luo_file_unpreserve_files(file_set: *mut luo_file_set) 
 // Context: This is called when the live update is aborted during
 // the reboot() syscall, after luo_file_freeze() has been called.
 //
-    void luo_file_unfreeze(struct luo_file_set *file_set,
-    struct luo_file_set_ser *file_set_ser)
-    {
-    if (!file_set.count)
+#[no_mangle]
+pub unsafe extern "C" fn luo_file_unfreeze(file_set: *mut luo_file_set, file_set_ser: *mut luo_file_set_ser) {
+    if (!file_set.count) {
     return;
+    }
     __luo_file_unfreeze(file_set, core::ptr::null_mut());
-    memset(file_set_ser, 0, sizeof(*file_set_ser));
+    memset(file_set_ser, 0, sizeof!(*file_set_ser));
     }
 //
 // luo_retrieve_file - Restores a preserved file from a file_set by its token.
@@ -516,23 +765,24 @@ pub unsafe extern "C" fn luo_file_unpreserve_files(file_set: *mut luo_file_set) 
 // -ENOENT if no file with the matching token is found.
 // Any error code returned by the handler's .retrieve() op.
 //
-    int luo_retrieve_file(struct luo_file_set *file_set, u64 token,
-    struct file **filep)
-    {
-    let mut args: liveupdate_file_op_args = {0};
-    struct luo_file *luo_file;
-    let mut found: bool = false;
-    int err;
-    if (list_empty(&file_set.files_list))
+#[no_mangle]
+pub unsafe extern "C" fn luo_retrieve_file(file_set: *mut luo_file_set, token: u64, filep: *mut *mut file) -> c_int {
+pub static mut args: liveupdate_file_op_args = 0;
+pub static mut luo_file: *mut c_void = core::ptr::null_mut();
+pub static mut found: bool = false;
+    let mut err = 0;
+    if (list_empty(&file_set.files_list)) {
     return -ENOENT;
+    }
     list_for_each_entry(luo_file, &file_set.files_list, list) {
     if (luo_file.token == token) {
     found = true;
     break;
     }
     }
-    if (!found)
+    if (!found) {
     return -ENOENT;
+    }
     guard(mutex)(&luo_file.mutex);
     if (luo_file.retrieve_status < 0) {
 // Retrieve was attempted and it failed. Return the error code.
@@ -558,20 +808,19 @@ pub unsafe extern "C" fn luo_file_unpreserve_files(file_set: *mut luo_file_set) 
     luo_file.file = args.file;
 // Get reference so we can keep this file in LUO until finish
     get_file(luo_file.file);
-    WARN_ON(xa_insert(&luo_preserved_files,
+    WARN_ON!(xa_insert(&luo_preserved_files,
     luo_get_id(luo_file.fh, luo_file.file),
     luo_file.file, GFP_KERNEL));
 // filep = luo_file->file;
     luo_file.retrieve_status = 1;
     return 0;
     }
-    static int luo_file_can_finish_one(struct luo_file_set *file_set,
-    struct luo_file *luo_file)
-    {
-    let mut can_finish: bool = true;
+#[no_mangle]
+pub unsafe extern "C" fn luo_file_can_finish_one(file_set: *mut luo_file_set, luo_file: *mut luo_file) -> c_int {
+pub static mut can_finish: bool = true;
     guard(mutex)(&luo_file.mutex);
     if (luo_file.fh.ops.can_finish) {
-    let mut args: liveupdate_file_op_args = {0};
+pub static mut args: liveupdate_file_op_args = 0;
     args.handler = luo_file.fh;
     args.file = luo_file.file;
     args.serialized_data = luo_file.serialized_data;
@@ -580,10 +829,9 @@ pub unsafe extern "C" fn luo_file_unpreserve_files(file_set: *mut luo_file_set) 
     }
     return can_finish ? 0 : -EBUSY;
     }
-    static void luo_file_finish_one(struct luo_file_set *file_set,
-    struct luo_file *luo_file)
-    {
-    let mut args: liveupdate_file_op_args = {0};
+#[no_mangle]
+pub unsafe extern "C" fn luo_file_finish_one(file_set: *mut luo_file_set, luo_file: *mut luo_file) {
+pub static mut args: liveupdate_file_op_args = 0;
     guard(mutex)(&luo_file.mutex);
     args.handler = luo_file.fh;
     args.file = luo_file.file;
@@ -626,30 +874,29 @@ pub unsafe extern "C" fn luo_file_unpreserve_files(file_set: *mut luo_file_set) 
 //
 #[no_mangle]
 pub unsafe extern "C" fn luo_file_finish(file_set: *mut luo_file_set) -> c_int {
-    int luo_file_finish(struct luo_file_set *file_set)
-    {
-    struct list_head *files_list = &file_set.files_list;
-    struct luo_file *luo_file;
-    int err;
-    if (!file_set.count)
+    let mut files_list = &file_set.files_list;
+pub static mut luo_file: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
+    if (!file_set.count) {
     return 0;
+    }
     list_for_each_entry(luo_file, files_list, list) {
     err = luo_file_can_finish_one(file_set, luo_file);
-    if (err)
+    if (err) {
     return err;
     }
+    }
     while (!list_empty(&file_set.files_list)) {
-    luo_file = list_last_entry(&file_set.files_list,
-    struct luo_file, list);
+    luo_file = list_last_entry(&file_set.files_list, luo_file, list);
     luo_file_finish_one(file_set, luo_file);
     if (luo_file.file) {
     xa_erase(&luo_preserved_files,
     luo_get_id(luo_file.fh, luo_file.file));
     fput(luo_file.file);
     }
-    module_put(luo_file.fh.ops.owner);
+    module_put!(luo_file.fh.ops.owner);
     list_del(&luo_file.list);
-    file_set.count--;
+    file_set.count -= 1;
     kho_block_set_shrink(&file_set.block_set, file_set.count);
     mutex_destroy(&luo_file.mutex);
     kfree(luo_file);
@@ -657,30 +904,30 @@ pub unsafe extern "C" fn luo_file_finish(file_set: *mut luo_file_set) -> c_int {
     kho_block_set_destroy(&file_set.block_set);
     return 0;
     }
-    static int luo_file_deserialize_one(struct luo_file_set *file_set,
-    struct luo_file_ser *ser)
-    {
-    struct liveupdate_file_handler *fh;
-    let mut handler_found: bool = false;
-    struct luo_file *luo_file;
+#[no_mangle]
+pub unsafe extern "C" fn luo_file_deserialize_one(file_set: *mut luo_file_set, ser: *mut luo_file_ser) -> c_int {
+pub static mut fh: *mut c_void = core::ptr::null_mut();
+pub static mut handler_found: bool = false;
+pub static mut luo_file: *mut c_void = core::ptr::null_mut();
     down_read(&luo_register_rwlock);
     list_private_for_each_entry(fh, &luo_file_handler_list, list) {
     if (!strcmp(fh.compatible, ser.compatible)) {
-    if (try_module_get(fh.ops.owner))
+    if (try_module_get(fh.ops.owner)) {
     handler_found = true;
+    }
     break;
     }
     }
     up_read(&luo_register_rwlock);
     if (!handler_found) {
-    pr_warn("No registered handler for compatible '%.*s'\n",
-    (int)sizeof(ser.compatible),
+    pr_warn!("No registered handler for compatible '%.*s'\n",
+    (int)sizeof!(ser.compatible),
     ser.compatible);
     return -ENOENT;
     }
     luo_file = kzalloc_obj(*luo_file);
     if (!luo_file) {
-    module_put(fh.ops.owner);
+    module_put!(fh.ops.owner);
     return -ENOMEM;
     }
     luo_file.fh = fh;
@@ -716,20 +963,20 @@ pub unsafe extern "C" fn luo_file_finish(file_set: *mut luo_file_set) -> c_int {
 //
 // Context: Called from session deserialization.
 //
-    int luo_file_deserialize(struct luo_file_set *file_set,
-    struct luo_file_set_ser *file_set_ser)
-    {
-    struct luo_file_ser *file_ser;
-    struct kho_block_set_it it;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn luo_file_deserialize(file_set: *mut luo_file_set, file_set_ser: *mut luo_file_set_ser) -> c_int {
+pub static mut file_ser: *mut c_void = core::ptr::null_mut();
+pub static mut it: usize = 0;
+    let mut err = 0;
     if (!file_set_ser.files) {
-    WARN_ON(file_set_ser.count);
+    WARN_ON!(file_set_ser.count);
     return 0;
     }
     file_set.count = 0;
     err = kho_block_set_restore(&file_set.block_set, file_set_ser.files);
-    if (err)
+    if (err) {
     return err;
+    }
 //
 // Note on error handling:
 //
@@ -748,24 +995,24 @@ pub unsafe extern "C" fn luo_file_finish(file_set: *mut luo_file_set) -> c_int {
     kho_block_set_it_init(&it, &file_set.block_set);
     while ((file_ser = kho_block_set_it_read_entry(&it))) {
     err = luo_file_deserialize_one(file_set, file_ser);
-    if (err)
-    goto err_destroy_blocks;
-    file_set.count++;
+    if (err) {
+// goto;
+    }
+    file_set.count += 1;
     }
     if (file_set.count != file_set_ser.count) {
-    pr_warn("File count mismatch: expected %llu, found %llu\n",
+    pr_warn!("File count mismatch: expected %llu, found %llu\n",
     file_set_ser.count, file_set.count);
     err = -EINVAL;
-    goto err_destroy_blocks;
+// goto;
     }
     return 0;
-    err_destroy_blocks:
+// label;
     while (!list_empty(&file_set.files_list)) {
-    struct luo_file *luo_file;
-    luo_file = list_first_entry(&file_set.files_list,
-    struct luo_file, list);
+pub static mut luo_file: *mut c_void = core::ptr::null_mut();
+    luo_file = list_first_entry(&file_set.files_list, luo_file, list);
     list_del(&luo_file.list);
-    module_put(luo_file.fh.ops.owner);
+    module_put!(luo_file.fh.ops.owner);
     mutex_destroy(&luo_file.mutex);
     kfree(luo_file);
     }
@@ -775,18 +1022,14 @@ pub unsafe extern "C" fn luo_file_finish(file_set: *mut luo_file_set) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn luo_file_set_init(file_set: *mut luo_file_set) {
-    void luo_file_set_init(struct luo_file_set *file_set)
-    {
     INIT_LIST_HEAD(&file_set.files_list);
-    kho_block_set_init(&file_set.block_set, sizeof(struct luo_file_ser));
+    kho_block_set_init(&file_set.block_set, sizeof!(luo_file_ser));
     }
 #[no_mangle]
 pub unsafe extern "C" fn luo_file_set_destroy(file_set: *mut luo_file_set) {
-    void luo_file_set_destroy(struct luo_file_set *file_set)
-    {
-    WARN_ON(file_set.count);
-    WARN_ON(!list_empty(&file_set.files_list));
-    WARN_ON(!kho_block_set_is_empty(&file_set.block_set));
+    WARN_ON!(file_set.count);
+    WARN_ON!(!list_empty(&file_set.files_list));
+    WARN_ON!(!kho_block_set_is_empty(&file_set.block_set));
     }
 //
 // liveupdate_register_file_handler - Register a file handler with LUO.
@@ -802,12 +1045,11 @@ pub unsafe extern "C" fn luo_file_set_destroy(file_set: *mut luo_file_set) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn liveupdate_register_file_handler(fh: *mut liveupdate_file_handler) -> c_int {
-    int liveupdate_register_file_handler(struct liveupdate_file_handler *fh)
-    {
-    struct liveupdate_file_handler *fh_iter;
-    int err;
-    if (!liveupdate_enabled())
+pub static mut fh_iter: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
+    if (!liveupdate_enabled()) {
     return -EOPNOTSUPP;
+    }
 // Sanity check that all required callbacks are set
     if (!fh.ops.preserve || !fh.ops.unpreserve || !fh.ops.retrieve ||
     !fh.ops.finish || !fh.ops.can_preserve) {
@@ -817,10 +1059,10 @@ pub unsafe extern "C" fn liveupdate_register_file_handler(fh: *mut liveupdate_fi
 // Check for duplicate compatible strings
     list_private_for_each_entry(fh_iter, &luo_file_handler_list, list) {
     if (!strcmp(fh_iter.compatible, fh.compatible)) {
-    pr_err("File handler registration failed: Compatible string '%s' already registered.\n",
+    pr_err!("File handler registration failed: Compatible string '%s' already registered.\n",
     fh.compatible);
     err = -EEXIST;
-    goto err_unlock;
+// goto;
     }
     }
     INIT_LIST_HEAD(&ACCESS_PRIVATE(fh, flb_list));
@@ -829,7 +1071,7 @@ pub unsafe extern "C" fn liveupdate_register_file_handler(fh: *mut liveupdate_fi
     up_write(&luo_register_rwlock);
     liveupdate_test_register(fh);
     return 0;
-    err_unlock:
+// label;
     up_write(&luo_register_rwlock);
     return err;
     }
@@ -842,10 +1084,9 @@ pub unsafe extern "C" fn liveupdate_register_file_handler(fh: *mut liveupdate_fi
 //
 #[no_mangle]
 pub unsafe extern "C" fn liveupdate_unregister_file_handler(fh: *mut liveupdate_file_handler) {
-    void liveupdate_unregister_file_handler(struct liveupdate_file_handler *fh)
-    {
-    if (!liveupdate_enabled())
+    if (!liveupdate_enabled()) {
     return;
+    }
     guard(rwsem_write)(&luo_register_rwlock);
     luo_flb_unregister_all(fh);
     list_del(&ACCESS_PRIVATE(fh, list));

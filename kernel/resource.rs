@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
 macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
@@ -69,27 +319,11 @@ macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
 // Arbitrary resource management.
 //
 
-    struct resource ioport_resource = {
-    .name	= "PCI IO",
-    .start	= 0,
-    .end	= IO_SPACE_LIMIT,
-    .flags	= IORESOURCE_IO,
-    };
+pub static mut resource: usize = 0;
     EXPORT_SYMBOL(ioport_resource);
-    struct resource iomem_resource = {
-    .name	= "PCI mem",
-    .start	= 0,
-    .end	= -1,
-    .flags	= IORESOURCE_MEM,
-    };
+pub static mut resource: usize = 0;
     EXPORT_SYMBOL(iomem_resource);
-    struct resource soft_reserve_resource = {
-    .name	= "Soft Reserved",
-    .start	= 0,
-    .end	= -1,
-    .desc	= IORES_DESC_SOFT_RESERVED,
-    .flags	= IORESOURCE_MEM,
-    };
+pub static mut resource: usize = 0;
 // static DEFINE_RWLOCK(resource_lock);
 //
 // Return the next node of @p in pre-order tree traversal.  If
@@ -97,15 +331,16 @@ macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
 // traversal.  If @p is a descendant of @subtree_root, only traverse
 // the subtree under @subtree_root.
 //
-    static struct resource *next_resource(struct resource *p, bool skip_children,
-    struct resource *subtree_root)
-    {
-    if (!skip_children && p.child)
+#[no_mangle]
+pub unsafe extern "C" fn next_resource(p: *mut resource, skip_children: bool, subtree_root: *mut resource) -> *mut c_void {
+    if (!skip_children && p.child) {
     return p.child;
+    }
     while (!p.sibling && p.parent) {
     p = p.parent;
-    if (p == subtree_root)
+    if (p == subtree_root) {
     return core::ptr::null_mut();
+    }
     }
     return p.sibling;
     }
@@ -117,28 +352,30 @@ macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
 // And it is referenced to avoid unused variable warning.
 //
 
-    for (typeof(_root) __root = (_root), __p = _p = __root.child;	\
-    __p && _p; _p = next_resource(_p, _skip_children, __root))
+    for (typeof(_root) __root = (_root), __p = _p = __root.child;	
+    __p && _p; _p = next_resource(_p, _skip_children, __root)) {
 
     enum { MAX_IORES_LEVEL = 8 };
-    static void *r_start(struct seq_file *m, loff_t *pos)
-    __acquires(resource_lock)
-    {
-    struct resource *root = pde_data(file_inode(m.file));
-    struct resource *p;
-    let mut l: loff_t = *pos;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn r_start(m: *mut seq_file, resource_lock: *mut loff_tpos)
+    __acquires() -> *mut c_void {
+    let mut root = pde_data(file_inode(m.file));
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut l: loff_t = 0;
     read_lock(&resource_lock);
     for_each_resource(root, p, false) {
-    if (l-- == 0)
+    if (l-- == 0) {
     break;
+    }
     }
     return p;
     }
-    static void *r_next(struct seq_file *m, void *v, loff_t *pos)
-    {
-    struct resource *p = v;
+#[no_mangle]
+pub unsafe extern "C" fn r_next(m: *mut seq_file, v: *mut c_void, pos: *mut loff_t) -> *mut c_void {
+    let mut p = v;
     (*pos)++;
-    return (void *)next_resource(p, false, core::ptr::null_mut());
+    return next_resource(p, false, core::ptr::null_mut());
     }
 #[no_mangle]
 unsafe extern "C" fn r_stop(m: *mut seq_file, v: *mut c_void) {
@@ -146,14 +383,15 @@ unsafe extern "C" fn r_stop(m: *mut seq_file, v: *mut c_void) {
     }
 #[no_mangle]
 unsafe extern "C" fn r_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    struct resource *root = pde_data(file_inode(m.file));
-    struct resource *r = v, *p;
+    let mut root = pde_data(file_inode(m.file));
+    let mut r = v, *p;
     unsigned long long start, end;
-    let mut width: c_int = root.end < 0x10000 ? 4 : 8;
-    int depth;
-    for (depth = 0, p = r; depth < MAX_IORES_LEVEL; depth++, p = p.parent)
+pub static mut width: c_int = 0;
+    let mut depth = 0;
+    for (depth = 0, p = r; depth < MAX_IORES_LEVEL; depth++, p = p.parent) {
     if (p.parent == root)
     break;
+    }
     if (file_ns_capable(m.file, &init_user_ns, CAP_SYS_ADMIN)) {
     start = r.start;
     end = r.end;
@@ -167,12 +405,7 @@ unsafe extern "C" fn r_show(m: *mut seq_file, v: *mut c_void) -> c_int {
     r.name ? r.name : "<BAD>");
     return 0;
     }
-    static const struct seq_operations resource_op = {
-    .start	= r_start,
-    .next	= r_next,
-    .stop	= r_stop,
-    .show	= r_show,
-    };
+pub static mut seq_operations: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn ioresources_init() -> c_int {
     proc_create_seq_data("ioports", 0, core::ptr::null_mut(), &resource_op,
@@ -180,7 +413,7 @@ unsafe extern "C" fn ioresources_init() -> c_int {
     proc_create_seq_data("iomem", 0, core::ptr::null_mut(), &resource_op, &iomem_resource);
     return 0;
     }
-    __initcall(ioresources_init);
+    __initcall!(ioresources_init);
 
 #[no_mangle]
 unsafe extern "C" fn free_resource(res: *mut resource) {
@@ -190,25 +423,30 @@ unsafe extern "C" fn free_resource(res: *mut resource) {
 // buddy and trying to be smart and reusing them eventually in
 // alloc_resource() overcomplicates resource handling.
 //
-    if (res && PageSlab(virt_to_head_page(res)))
+    if (res && PageSlab(virt_to_head_page(res))) {
     kfree(res);
     }
-    static struct resource *alloc_resource(gfp_t flags)
-    {
-    return kzalloc_obj(struct resource, flags);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn alloc_resource(flags: gfp_t) -> *mut c_void {
+    return kzalloc_obj(resource, flags);
     }
 // Return the conflict entry if you can't request it
 #[no_mangle]
 unsafe extern "C" fn __request_resource(root: *mut resource, new: *mut resource) -> *mut resource {
-    let mut start: resource_size_t = new.start;
-    let mut end: resource_size_t = new.end;
-    struct resource *tmp, **p;
-    if (end < start)
+pub static mut start: resource_size_t = 0;
+pub static mut end: resource_size_t = 0;
+    let mut tmp = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
+    if (end < start) {
     return root;
-    if (start < root.start)
+    }
+    if (start < root.start) {
     return root;
-    if (end > root.end)
+    }
+    if (end > root.end) {
     return root;
+    }
     p = &root.child;
     for (;;) {
     tmp = *p;
@@ -219,27 +457,32 @@ unsafe extern "C" fn __request_resource(root: *mut resource, new: *mut resource)
     return core::ptr::null_mut();
     }
     p = &tmp.sibling;
-    if (tmp.end < start)
+    if (tmp.end < start) {
     continue;
+    }
     return tmp;
     }
     }
 #[no_mangle]
 unsafe extern "C" fn __release_resource(old: *mut resource, release_child: bool) -> c_int {
-    struct resource *tmp, **p, *chd;
+    let mut tmp = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
+    let mut chd = core::ptr::null_mut();
     p = &old.parent.child;
     for (;;) {
     tmp = *p;
-    if (!tmp)
+    if (!tmp) {
     break;
+    }
     if (tmp == old) {
     if (release_child || !(tmp.child)) {
 // p = tmp->sibling;
     } else {
     for (chd = tmp.child;; chd = chd.sibling) {
     chd.parent = tmp.parent;
-    if (!(chd.sibling))
+    if (!(chd.sibling)) {
     break;
+    }
     }
 // p = tmp->child;
     chd.sibling = tmp.sibling;
@@ -253,8 +496,9 @@ unsafe extern "C" fn __release_resource(old: *mut resource, release_child: bool)
     }
 #[no_mangle]
 unsafe extern "C" fn __release_child_resources(r: *mut resource) {
-    struct resource *tmp, *p;
-    resource_size_t size;
+    let mut tmp = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
+    let mut size;
     p = r.child;
     r.child = core::ptr::null_mut();
     while (p) {
@@ -263,7 +507,7 @@ unsafe extern "C" fn __release_child_resources(r: *mut resource) {
     tmp.parent = core::ptr::null_mut();
     tmp.sibling = core::ptr::null_mut();
     __release_child_resources(tmp);
-    printk(KERN_DEBUG "release child resource %pR\n", tmp);
+    printk("release child resource %pR\n", tmp);
 // need to restore size, and keep flags
     size = resource_size(tmp);
     tmp.start = 0;
@@ -283,9 +527,9 @@ pub unsafe extern "C" fn release_child_resources(r: *mut resource) {
 //
 // Returns 0 for success, conflict resource on error.
 //
-    struct resource *request_resource_conflict(struct resource *root, struct resource *new)
-    {
-    struct resource *conflict;
+#[no_mangle]
+pub unsafe extern "C" fn request_resource_conflict(root: *mut resource, new: *mut resource) -> *mut c_void {
+pub static mut conflict: *mut c_void = core::ptr::null_mut();
     write_lock(&resource_lock);
     conflict = __request_resource(root, new);
     write_unlock(&resource_lock);
@@ -300,7 +544,7 @@ pub unsafe extern "C" fn release_child_resources(r: *mut resource) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn request_resource(root: *mut resource, new: *mut resource) -> c_int {
-    struct resource *conflict;
+pub static mut conflict: *mut c_void = core::ptr::null_mut();
     conflict = request_resource_conflict(root, new);
     return conflict ? -EBUSY : 0;
     }
@@ -311,7 +555,7 @@ pub unsafe extern "C" fn request_resource(root: *mut resource, new: *mut resourc
 //
 #[no_mangle]
 pub unsafe extern "C" fn release_resource(old: *mut resource) -> c_int {
-    int retval;
+    let mut retval = 0;
     write_lock(&resource_lock);
     retval = __release_resource(old, true);
     write_unlock(&resource_lock);
@@ -340,17 +584,17 @@ unsafe extern "C" fn is_type_match(p: *mut resource, flags: c_ulong, desc: c_ulo
 // The caller must specify @start, @end, @flags, and @desc
 // (which may be IORES_DESC_NONE).
 //
-    static int find_next_res(struct resource *parent, resource_size_t start,
-    resource_size_t end, unsigned long flags,
-    unsigned long desc, struct resource *res)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn find_next_res(parent: *mut resource, start: resource_size_t, end: resource_size_t, flags: c_ulong, desc: c_ulong, res: *mut resource) -> c_int {
 // Skip children until we find a top level range that matches
-    let mut skip_children: bool = true;
-    struct resource *p;
-    if (!res)
+pub static mut skip_children: bool = true;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    if (!res) {
     return -EINVAL;
-    if (start >= end)
+    }
+    if (start >= end) {
     return -EINVAL;
+    }
     read_lock(&resource_lock);
     for_each_resource(parent, p, skip_children) {
 // If we passed the resource we are looking for, stop
@@ -359,20 +603,22 @@ unsafe extern "C" fn is_type_match(p: *mut resource, flags: c_ulong, desc: c_ulo
     break;
     }
 // Skip until we find a range that matches what we look for
-    if (p.end < start)
+    if (p.end < start) {
     continue;
+    }
 //
 // We found a top level range that matches what we are looking
 // for. Time to start checking children too.
 //
     skip_children = false;
 // Found a match, break
-    if (is_type_match(p, flags, desc))
+    if (is_type_match(p, flags, desc)) {
     break;
+    }
     }
     if (p) {
 // copy data
-// res = (struct resource) {
+// res = (resource) {
     .start = max(start, p.start),
     .end = min(end, p.end),
     .flags = p.flags,
@@ -383,33 +629,26 @@ unsafe extern "C" fn is_type_match(p: *mut resource, flags: c_ulong, desc: c_ulo
     read_unlock(&resource_lock);
     return p ? 0 : -ENODEV;
     }
-    static int find_next_iomem_res(resource_size_t start, resource_size_t end,
-    unsigned long flags, unsigned long desc,
-    struct resource *res)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn find_next_iomem_res(start: resource_size_t, end: resource_size_t, flags: c_ulong, desc: c_ulong, res: *mut resource) -> c_int {
     return find_next_res(&iomem_resource, start, end, flags, desc, res);
     }
-    static int walk_res_desc(struct resource *parent, resource_size_t start,
-    resource_size_t end, unsigned long flags,
-    unsigned long desc, void *arg,
-    int (*func)(struct resource *, void *))
-    {
-    struct resource res;
-    let mut ret: c_int = -EINVAL;
+#[no_mangle]
+pub unsafe extern "C" fn walk_res_desc(parent: *mut resource, start: resource_size_t, end: resource_size_t, flags: c_ulong, desc: c_ulong, arg: *mut c_void) -> c_int {
+pub static mut res: usize = 0;
+pub static mut ret: c_int = 0;
     while (start < end &&
     !find_next_res(parent, start, end, flags, desc, &res)) {
     ret = (*func)(&res, arg);
-    if (ret)
+    if (ret) {
     break;
+    }
     start = res.end + 1;
     }
     return ret;
     }
-    static int __walk_iomem_res_desc(resource_size_t start, resource_size_t end,
-    unsigned long flags, unsigned long desc,
-    void *arg,
-    int (*func)(struct resource *, void *))
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __walk_iomem_res_desc(start: resource_size_t, end: resource_size_t, flags: c_ulong, desc: c_ulong, arg: *mut c_void) -> c_int {
     return walk_res_desc(&iomem_resource, start, end, flags, desc, arg, func);
     }
 //
@@ -429,9 +668,8 @@ unsafe extern "C" fn is_type_match(p: *mut resource, flags: c_ulong, desc: c_ulo
 // NOTE: For a new descriptor search, define a new IORES_DESC in
 // <linux/ioport.h> and set it in 'desc' of a target resource entry.
 //
-    int walk_iomem_res_desc(unsigned long desc, unsigned long flags, u64 start,
-    u64 end, void *arg, int (*func)(struct resource *, void *))
-    {
+#[no_mangle]
+pub unsafe extern "C" fn walk_iomem_res_desc(desc: c_ulong, flags: c_ulong, start: u64, end: u64, arg: *mut c_void) -> c_int {
     return __walk_iomem_res_desc(start, end, flags, desc, arg, func);
     }
     EXPORT_SYMBOL_GPL(walk_iomem_res_desc);
@@ -439,9 +677,8 @@ unsafe extern "C" fn is_type_match(p: *mut resource, flags: c_ulong, desc: c_ulo
 // In support of device drivers claiming Soft Reserved resources, walk the Soft
 // Reserved resource deferral tree.
 //
-    int walk_soft_reserve_res(u64 start, u64 end, void *arg,
-    int (*func)(struct resource *, void *))
-    {
+#[no_mangle]
+pub unsafe extern "C" fn walk_soft_reserve_res(start: u64, end: u64, arg: *mut c_void) -> c_int {
     return walk_res_desc(&soft_reserve_resource, start, end, IORESOURCE_MEM,
     IORES_DESC_SOFT_RESERVED, arg, func);
     }
@@ -453,10 +690,9 @@ unsafe extern "C" fn is_type_match(p: *mut resource, flags: c_ulong, desc: c_ulo
 // not PFNs. If resources are not PFN-aligned, dealing with PFNs can truncate
 // ranges.
 //
-    int walk_system_ram_res(u64 start, u64 end, void *arg,
-    int (*func)(struct resource *, void *))
-    {
-    let mut flags: c_ulong = IORESOURCE_SYSTEM_RAM | IORESOURCE_BUSY;
+#[no_mangle]
+pub unsafe extern "C" fn walk_system_ram_res(start: u64, end: u64, arg: *mut c_void) -> c_int {
+pub static mut flags: c_ulong = 0;
     return __walk_iomem_res_desc(start, end, flags, IORES_DESC_NONE, arg,
     func);
     }
@@ -466,28 +702,29 @@ unsafe extern "C" fn is_type_match(p: *mut resource, flags: c_ulong, desc: c_ulo
 // IORESOURCE_SYSTEM_RAM and IORESOUCE_BUSY in reversed order, i.e., from
 // higher to lower.
 //
-    int walk_system_ram_res_rev(u64 start, u64 end, void *arg,
-    int (*func)(struct resource *, void *))
-    {
+#[no_mangle]
+pub unsafe extern "C" fn walk_system_ram_res_rev(start: u64, end: u64, arg: *mut c_void) -> c_int {
     struct resource res, *rams;
-    let mut rams_size: c_int = 16, i;
-    unsigned long flags;
-    let mut ret: c_int = -1;
+pub static mut rams_size: c_int = 0;
+    let mut flags = 0;
+pub static mut ret: c_int = 0;
 // create a list
-    rams = kvzalloc_objs(struct resource, rams_size);
-    if (!rams)
+    rams = kvzalloc_objs(resource, rams_size);
+    if (!rams) {
     return ret;
+    }
     flags = IORESOURCE_SYSTEM_RAM | IORESOURCE_BUSY;
     i = 0;
     while ((start < end) &&
     (!find_next_iomem_res(start, end, flags, IORES_DESC_NONE, &res))) {
     if (i >= rams_size) {
 // re-alloc
-    struct resource *rams_new;
-    rams_new = kvrealloc(rams, (rams_size + 16) * sizeof(struct resource),
+pub static mut rams_new: *mut c_void = core::ptr::null_mut();
+    rams_new = kvrealloc(rams, (rams_size + 16) * sizeof!(resource),
     GFP_KERNEL);
-    if (!rams_new)
-    goto out;
+    if (!rams_new) {
+// goto;
+    }
     rams = rams_new;
     rams_size += 16;
     }
@@ -495,12 +732,13 @@ unsafe extern "C" fn is_type_match(p: *mut resource, flags: c_ulong, desc: c_ulo
     start = res.end + 1;
     }
 // go reverse
-    for (i--; i >= 0; i--) {
+    while (i >= 0) {
     ret = (*func)(&rams[i], arg);
-    if (ret)
+    if (ret) {
     break;
     }
-    out:
+    }
+// label;
     kvfree(rams);
     return ret;
     }
@@ -508,10 +746,9 @@ unsafe extern "C" fn is_type_match(p: *mut resource, flags: c_ulong, desc: c_ulo
 // This function calls the @func callback against all memory ranges, which
 // are ranges marked as IORESOURCE_MEM and IORESOUCE_BUSY.
 //
-    int walk_mem_res(u64 start, u64 end, void *arg,
-    int (*func)(struct resource *, void *))
-    {
-    let mut flags: c_ulong = IORESOURCE_MEM | IORESOURCE_BUSY;
+#[no_mangle]
+pub unsafe extern "C" fn walk_mem_res(start: u64, end: u64, arg: *mut c_void) -> c_int {
+pub static mut flags: c_ulong = 0;
     return __walk_iomem_res_desc(start, end, flags, IORES_DESC_NONE, arg,
     func);
     }
@@ -520,14 +757,13 @@ unsafe extern "C" fn is_type_match(p: *mut resource, flags: c_ulong, desc: c_ulo
 // System RAM which are marked as IORESOURCE_SYSTEM_RAM and IORESOUCE_BUSY.
 // It is to be used only for System RAM.
 //
-    int walk_system_ram_range(unsigned long start_pfn, unsigned long nr_pages,
-    void *arg, int (*func)(unsigned long, unsigned long, void *))
-    {
+#[no_mangle]
+pub unsafe extern "C" fn walk_system_ram_range(start_pfn: c_ulong, nr_pages: c_ulong, arg: *mut c_void, long: *mut int (func)(unsigned, long: c_uint) -> c_int {
     resource_size_t start, end;
-    unsigned long flags;
-    struct resource res;
+    let mut flags = 0;
+pub static mut res: usize = 0;
     unsigned long pfn, end_pfn;
-    let mut ret: c_int = -EINVAL;
+pub static mut ret: c_int = 0;
     start = (u64) start_pfn << PAGE_SHIFT;
     end = ((u64)(start_pfn + nr_pages) << PAGE_SHIFT) - 1;
     flags = IORESOURCE_SYSTEM_RAM | IORESOURCE_BUSY;
@@ -535,10 +771,12 @@ unsafe extern "C" fn is_type_match(p: *mut resource, flags: c_ulong, desc: c_ulo
     !find_next_iomem_res(start, end, flags, IORES_DESC_NONE, &res)) {
     pfn = PFN_UP(res.start);
     end_pfn = PFN_DOWN(res.end + 1);
-    if (end_pfn > pfn)
+    if (end_pfn > pfn) {
     ret = (*func)(pfn, end_pfn - pfn, arg);
-    if (ret)
+    }
+    if (ret) {
     break;
+    }
     start = res.end + 1;
     }
     return ret;
@@ -556,20 +794,20 @@ pub unsafe extern "C" fn page_is_ram(pfn: c_ulong) -> int __weak {
     return walk_system_ram_range(pfn, 1, core::ptr::null_mut(), __is_ram) == 1;
     }
     EXPORT_SYMBOL_GPL(page_is_ram);
-    static int __region_intersects(struct resource *parent, resource_size_t start,
-    size_t size, unsigned long flags,
-    unsigned long desc)
-    {
-    let mut type: c_int = 0; int other = 0;
-    struct resource *p, *dp;
+#[no_mangle]
+pub unsafe extern "C" fn __region_intersects(parent: *mut resource, start: resource_size_t, size: size_t, flags: c_ulong, desc: c_ulong) -> c_int {
+pub static mut type: c_int = 0; int other = 0;
+    let mut p = core::ptr::null_mut();
+    let mut dp = core::ptr::null_mut();
     struct resource res, o;
-    bool covered;
+    let mut covered = 0;
     res = DEFINE_RES(start, size, 0);
-    for (p = parent.child; p ; p = p.sibling) {
-    if (!resource_intersection(p, &res, &o))
+    while (p ) {
+    if (!resource_intersection(p, &res, &o)) {
     continue;
+    }
     if (is_type_match(p, flags, desc)) {
-    type++;
+    type += 1;
     continue;
     }
 //
@@ -586,16 +824,18 @@ pub unsafe extern "C" fn page_is_ram(pfn: c_ulong) -> int __weak {
 //
     covered = false;
     for_each_resource(p, dp, false) {
-    if (!resource_overlaps(dp, &res))
+    if (!resource_overlaps(dp, &res)) {
     continue;
+    }
     if (is_type_match(dp, flags, desc)) {
-    type++;
+    type += 1;
 //
 // Range from 'o.start' to 'dp->start'
 // isn't covered by matched resource.
 //
-    if (dp.start > o.start)
+    if (dp.start > o.start) {
     break;
+    }
     if (dp.end >= o.end) {
     covered = true;
     break;
@@ -604,13 +844,16 @@ pub unsafe extern "C" fn page_is_ram(pfn: c_ulong) -> int __weak {
     o.start = max(o.start, dp.end + 1);
     }
     }
-    if (!covered)
-    other++;
+    if (!covered) {
+    other += 1;
     }
-    if (type == 0)
+    }
+    if (type == 0) {
     return REGION_DISJOINT;
-    if (other == 0)
+    }
+    if (other == 0) {
     return REGION_INTERSECTS;
+    }
     return REGION_MIXED;
     }
 //
@@ -633,10 +876,9 @@ pub unsafe extern "C" fn page_is_ram(pfn: c_ulong) -> int __weak {
 // the user is not remapping RAM and is a vast speed up over walking
 // through the resource table page by page.
 //
-    int region_intersects(resource_size_t start, size_t size, unsigned long flags,
-    unsigned long desc)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn region_intersects(start: resource_size_t, size: size_t, flags: c_ulong, desc: c_ulong) -> c_int {
+    let mut ret = 0;
     read_lock(&resource_lock);
     ret = __region_intersects(&iomem_resource, start, size, flags, desc);
     read_unlock(&resource_lock);
@@ -657,25 +899,24 @@ pub unsafe extern "C" fn region_intersects_soft_reserve(start: resource_size_t, 
 #[no_mangle]
 pub unsafe extern "C" fn arch_remove_reservations(avail: *mut resource) -> void __weak {
     }
-    static void resource_clip(struct resource *res, resource_size_t min,
-    resource_size_t max)
-    {
-    if (res.start < min)
+#[no_mangle]
+pub unsafe extern "C" fn resource_clip(res: *mut resource, min: resource_size_t, max: resource_size_t) {
+    if (res.start < min) {
     res.start = min;
-    if (res.end > max)
+    }
+    if (res.end > max) {
     res.end = max;
+    }
     }
 //
 // Find empty space in the resource tree with the given range and
 // alignment constraints
 //
-    static int __find_resource_space(struct resource *root, struct resource *old,
-    struct resource *new, resource_size_t size,
-    struct resource_constraint *constraint)
-    {
-    struct resource *this = root.child;
-    let mut full_avail: resource = *new, avail, alloc;
-    let mut alignf: resource_alignf = constraint.alignf;
+#[no_mangle]
+pub unsafe extern "C" fn __find_resource_space(root: *mut resource, old: *mut resource, new: *mut resource, size: resource_size_t, constraint: *mut resource_constraint) -> c_int {
+    let mut this = root.child;
+pub static mut full_avail: resource = 0;
+pub static mut alignf: resource_alignf = 0;
     full_avail.start = root.start;
 //
 // Skip past an allocated resource that starts at 0, since the assignment
@@ -686,12 +927,15 @@ pub unsafe extern "C" fn arch_remove_reservations(avail: *mut resource) -> void 
     this = this.sibling;
     }
     for(;;) {
-    if (this)
+    if (this) {
     full_avail.end = (this == old) ?  this.end : this.start - 1;
-    else
+    }
+    else {
     full_avail.end = root.end;
-    if (full_avail.end < full_avail.start)
-    goto next;
+    }
+    if (full_avail.end < full_avail.start) {
+// goto;
+    }
     resource_clip(&full_avail, constraint.min, constraint.max);
     arch_remove_reservations(&full_avail);
 // Check for overflow after ALIGN()
@@ -717,8 +961,9 @@ pub unsafe extern "C" fn arch_remove_reservations(avail: *mut resource) -> void 
     }
     next:		if (!this || this.end == root.end)
     break;
-    if (this != old)
+    if (this != old) {
     full_avail.start = this.end + 1;
+    }
     this = this.sibling;
     }
     return -EBUSY;
@@ -737,10 +982,8 @@ pub unsafe extern "C" fn arch_remove_reservations(avail: *mut resource) -> void 
 // * %0		- if successful, @new members start, end, and flags are altered.
 // * %-EBUSY	- if no empty space was found.
 //
-    int find_resource_space(struct resource *root, struct resource *new,
-    resource_size_t size,
-    struct resource_constraint *constraint)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn find_resource_space(root: *mut resource, new: *mut resource, size: resource_size_t, constraint: *mut resource_constraint) -> c_int {
     return  __find_resource_space(root, core::ptr::null_mut(), new, size, constraint);
     }
     EXPORT_SYMBOL_GPL(find_resource_space);
@@ -754,24 +997,23 @@ pub unsafe extern "C" fn arch_remove_reservations(avail: *mut resource) -> void 
 // @newsize: new size of the resource descriptor
 // @constraint: the memory range and alignment constraints to be met.
 //
-    static int reallocate_resource(struct resource *root, struct resource *old,
-    resource_size_t newsize,
-    struct resource_constraint *constraint)
-    {
-    let mut err: c_int = 0;
-    let mut new: resource = *old;
-    struct resource *conflict;
+#[no_mangle]
+pub unsafe extern "C" fn reallocate_resource(root: *mut resource, old: *mut resource, newsize: resource_size_t, constraint: *mut resource_constraint) -> c_int {
+pub static mut err: c_int = 0;
+pub static mut new: resource = 0;
+pub static mut conflict: *mut c_void = core::ptr::null_mut();
     write_lock(&resource_lock);
-    if ((err = __find_resource_space(root, old, &new, newsize, constraint)))
-    goto out;
+    if ((err = __find_resource_space(root, old, &new, newsize, constraint))) {
+// goto;
+    }
     if (resource_contains(&new, old)) {
     old.start = new.start;
     old.end = new.end;
-    goto out;
+// goto;
     }
     if (old.child) {
     err = -EBUSY;
-    goto out;
+// goto;
     }
     if (resource_contains(old, &new)) {
     old.start = new.start;
@@ -780,9 +1022,9 @@ pub unsafe extern "C" fn arch_remove_reservations(avail: *mut resource) -> void 
     __release_resource(old, true);
 // old = new;
     conflict = __request_resource(root, old);
-    BUG_ON(conflict);
+    BUG_ON!(conflict);
     }
-    out:
+// label;
     write_unlock(&resource_lock);
     return err;
     }
@@ -798,14 +1040,10 @@ pub unsafe extern "C" fn arch_remove_reservations(avail: *mut resource) -> void 
 // @alignf: alignment function, optional, called if not NULL
 // @alignf_data: arbitrary data to pass to the @alignf function
 //
-    int allocate_resource(struct resource *root, struct resource *new,
-    resource_size_t size, resource_size_t min,
-    resource_size_t max, resource_size_t align,
-    resource_alignf alignf,
-    void *alignf_data)
-    {
-    int err;
-    struct resource_constraint constraint;
+#[no_mangle]
+pub unsafe extern "C" fn allocate_resource(root: *mut resource, new: *mut resource, size: resource_size_t, min: resource_size_t, max: resource_size_t, align: resource_size_t, alignf: resource_alignf, alignf_data: *mut c_void) -> c_int {
+    let mut err = 0;
+pub static mut constraint: usize = 0;
     constraint.min = min;
     constraint.max = max;
     constraint.align = align;
@@ -818,8 +1056,9 @@ pub unsafe extern "C" fn arch_remove_reservations(avail: *mut resource) -> void 
     }
     write_lock(&resource_lock);
     err = find_resource_space(root, new, size, &constraint);
-    if (err >= 0 && __request_resource(root, new))
+    if (err >= 0 && __request_resource(root, new)) {
     err = -EBUSY;
+    }
     write_unlock(&resource_lock);
     return err;
     }
@@ -831,58 +1070,70 @@ pub unsafe extern "C" fn arch_remove_reservations(avail: *mut resource) -> void 
 //
 // Returns a pointer to the resource if found, NULL otherwise
 //
-    struct resource *lookup_resource(struct resource *root, resource_size_t start)
-    {
-    struct resource *res;
+#[no_mangle]
+pub unsafe extern "C" fn lookup_resource(root: *mut resource, start: resource_size_t) -> *mut c_void {
+pub static mut res: *mut c_void = core::ptr::null_mut();
     read_lock(&resource_lock);
-    for (res = root.child; res; res = res.sibling) {
-    if (res.start == start)
+    while (res) {
+    if (res.start == start) {
     break;
+    }
     }
     read_unlock(&resource_lock);
     return res;
     }
 //
 // Insert a resource into the resource tree. If successful, return NULL,
-// otherwise return the conflicting resource (compare to __request_resource())
+otherwise return the conflicting resource (compare to __request_resource())
 //
 #[no_mangle]
 unsafe extern "C" fn __insert_resource(parent: *mut resource, new: *mut resource) -> *mut resource {
-    struct resource *first, *next;
+    let mut first = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
     for (;; parent = first) {
     first = __request_resource(parent, new);
-    if (!first)
+    if (!first) {
     return first;
-    if (first == parent)
+    }
+    if (first == parent) {
     return first;
-    if (WARN_ON(first == new))	/* duplicated insertion */
+    }
+    if (WARN_ON!(first == new))	/* duplicated insertion */ {
     return first;
-    if ((first.start > new.start) || (first.end < new.end))
-    break;
-    if ((first.start == new.start) && (first.end == new.end))
+    }
+    if ((first.start > new.start) || (first.end < new.end)) {
     break;
     }
-    for (next = first; ; next = next.sibling) {
+    if ((first.start == new.start) && (first.end == new.end)) {
+    break;
+    }
+    }
+    while ( ) {
 // Partial overlap? Bad, and unfixable
-    if (next.start < new.start || next.end > new.end)
+    if (next.start < new.start || next.end > new.end) {
     return next;
-    if (!next.sibling)
+    }
+    if (!next.sibling) {
     break;
-    if (next.sibling.start > new.end)
+    }
+    if (next.sibling.start > new.end) {
     break;
+    }
     }
     new.parent = parent;
     new.sibling = next.sibling;
     new.child = first;
     next.sibling = core::ptr::null_mut();
-    for (next = first; next; next = next.sibling)
+    for (next = first; next; next = next.sibling) {
     next.parent = new;
+    }
     if (parent.child == first) {
     parent.child = new;
     } else {
     next = parent.child;
-    while (next.sibling != first)
+    while (next.sibling != first) {
     next = next.sibling;
+    }
     next.sibling = new;
     }
     return core::ptr::null_mut();
@@ -903,9 +1154,9 @@ unsafe extern "C" fn __insert_resource(parent: *mut resource, new: *mut resource
 // This function is intended for producers of resources, such as FW modules
 // and bus drivers.
 //
-    struct resource *insert_resource_conflict(struct resource *parent, struct resource *new)
-    {
-    struct resource *conflict;
+#[no_mangle]
+pub unsafe extern "C" fn insert_resource_conflict(parent: *mut resource, new: *mut resource) -> *mut c_void {
+pub static mut conflict: *mut c_void = core::ptr::null_mut();
     write_lock(&resource_lock);
     conflict = __insert_resource(parent, new);
     write_unlock(&resource_lock);
@@ -923,7 +1174,7 @@ unsafe extern "C" fn __insert_resource(parent: *mut resource, new: *mut resource
 //
 #[no_mangle]
 pub unsafe extern "C" fn insert_resource(parent: *mut resource, new: *mut resource) -> c_int {
-    struct resource *conflict;
+pub static mut conflict: *mut c_void = core::ptr::null_mut();
     conflict = insert_resource_conflict(parent, new);
     return conflict ? -EBUSY : 0;
     }
@@ -938,22 +1189,27 @@ pub unsafe extern "C" fn insert_resource(parent: *mut resource, new: *mut resour
 //
 #[no_mangle]
 pub unsafe extern "C" fn insert_resource_expand_to_fit(root: *mut resource, new: *mut resource) {
-    if (new.parent)
+    if (new.parent) {
     return;
+    }
     write_lock(&resource_lock);
     for (;;) {
-    struct resource *conflict;
+pub static mut conflict: *mut c_void = core::ptr::null_mut();
     conflict = __insert_resource(root, new);
-    if (!conflict)
+    if (!conflict) {
     break;
-    if (conflict == root)
+    }
+    if (conflict == root) {
     break;
+    }
 // Ok, expand resource to cover the conflict, then try again ..
-    if (conflict.start < new.start)
+    if (conflict.start < new.start) {
     new.start = conflict.start;
-    if (conflict.end > new.end)
+    }
+    if (conflict.end > new.end) {
     new.end = conflict.end;
-    pr_info("Expanded resource %s due to conflict with %s\n", new.name, conflict.name);
+    }
+    pr_info!("Expanded resource %s due to conflict with %s\n", new.name, conflict.name);
     }
     write_unlock(&resource_lock);
     }
@@ -981,40 +1237,45 @@ pub unsafe extern "C" fn insert_resource_expand_to_fit(root: *mut resource, new:
 //
 #[no_mangle]
 pub unsafe extern "C" fn remove_resource(old: *mut resource) -> c_int {
-    int retval;
+    let mut retval = 0;
     write_lock(&resource_lock);
     retval = __release_resource(old, false);
     write_unlock(&resource_lock);
     return retval;
     }
     EXPORT_SYMBOL_GPL(remove_resource);
-    static int __adjust_resource(struct resource *res, resource_size_t start,
-    resource_size_t size)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __adjust_resource(res: *mut resource, start: resource_size_t, size: resource_size_t) -> c_int {
     struct resource *tmp, *parent = res.parent;
-    let mut end: resource_size_t = start + size - 1;
-    let mut result: c_int = -EBUSY;
-    if (!parent)
-    goto skip;
-    if ((start < parent.start) || (end > parent.end))
-    goto out;
-    if (res.sibling && (res.sibling.start <= end))
-    goto out;
+pub static mut end: resource_size_t = 0;
+pub static mut result: c_int = 0;
+    if (!parent) {
+// goto;
+    }
+    if ((start < parent.start) || (end > parent.end)) {
+// goto;
+    }
+    if (res.sibling && (res.sibling.start <= end)) {
+// goto;
+    }
     tmp = parent.child;
     if (tmp != res) {
-    while (tmp.sibling != res)
+    while (tmp.sibling != res) {
     tmp = tmp.sibling;
-    if (start <= tmp.end)
-    goto out;
     }
-    skip:
-    for (tmp = res.child; tmp; tmp = tmp.sibling)
+    if (start <= tmp.end) {
+// goto;
+    }
+    }
+// label;
+    for (tmp = res.child; tmp; tmp = tmp.sibling) {
     if ((tmp.start < start) || (tmp.end > end))
-    goto out;
+// goto;
+    }
     res.start = start;
     res.end = end;
     result = 0;
-    out:
+// label;
     return result;
     }
 //
@@ -1027,10 +1288,9 @@ pub unsafe extern "C" fn remove_resource(old: *mut resource) -> c_int {
 // arguments.  Returns 0 on success, -EBUSY if it can't fit.
 // Existing children of the resource are assumed to be immutable.
 //
-    int adjust_resource(struct resource *res, resource_size_t start,
-    resource_size_t size)
-    {
-    int result;
+#[no_mangle]
+pub unsafe extern "C" fn adjust_resource(res: *mut resource, start: resource_size_t, size: resource_size_t) -> c_int {
+    let mut result = 0;
     write_lock(&resource_lock);
     result = __adjust_resource(res, start, size);
     write_unlock(&resource_lock);
@@ -1038,16 +1298,17 @@ pub unsafe extern "C" fn remove_resource(old: *mut resource) -> c_int {
     }
     EXPORT_SYMBOL(adjust_resource);
     static void __init
-    __reserve_region_with_split(struct resource *root, resource_size_t start,
+    __reserve_region_with_split(resource *root, resource_size_t start,
     resource_size_t end, const char *name)
     {
-    struct resource *parent = root;
-    struct resource *conflict;
-    struct resource *res = alloc_resource(GFP_ATOMIC);
-    struct resource *next_res = core::ptr::null_mut();
-    let mut type: c_int = resource_type(root);
-    if (!res)
+    let mut parent = root;
+pub static mut conflict: *mut c_void = core::ptr::null_mut();
+    let mut res = alloc_resource(GFP_ATOMIC);
+    let mut next_res = core::ptr::null_mut();
+pub static mut type: c_int = 0;
+    if (!res) {
     return;
+    }
     res.name = name;
     res.start = start;
     res.end = end;
@@ -1056,8 +1317,9 @@ pub unsafe extern "C" fn remove_resource(old: *mut resource) -> c_int {
     while (1) {
     conflict = __request_resource(parent, res);
     if (!conflict) {
-    if (!next_res)
+    if (!next_res) {
     break;
+    }
     res = next_res;
     next_res = core::ptr::null_mut();
     continue;
@@ -1066,7 +1328,7 @@ pub unsafe extern "C" fn remove_resource(old: *mut resource) -> c_int {
     if (conflict.start <= res.start &&
     conflict.end >= res.end) {
     free_resource(res);
-    WARN_ON(next_res);
+    WARN_ON!(next_res);
     break;
     }
 // failed, split and try again
@@ -1091,30 +1353,34 @@ pub unsafe extern "C" fn remove_resource(old: *mut resource) -> c_int {
     }
     }
     void __init
-    reserve_region_with_split(struct resource *root, resource_size_t start,
+    reserve_region_with_split(resource *root, resource_size_t start,
     resource_size_t end, const char *name)
     {
-    let mut abort: c_int = 0;
+pub static mut abort: c_int = 0;
     write_lock(&resource_lock);
     if (root.start > start || root.end < end) {
-    pr_err("requested range [0x%llx-0x%llx] not in root %pr\n",
+    pr_err!("requested range [0x%llx-0x%llx] not in root %pr\n",
     (unsigned long long)start, (unsigned long long)end,
     root);
-    if (start > root.end || end < root.start)
+    if (start > root.end || end < root.start) {
     abort = 1;
+    }
     else {
-    if (end > root.end)
+    if (end > root.end) {
     end = root.end;
-    if (start < root.start)
+    }
+    if (start < root.start) {
     start = root.start;
-    pr_err("fixing request to [0x%llx-0x%llx]\n",
+    }
+    pr_err!("fixing request to [0x%llx-0x%llx]\n",
     (unsigned long long)start,
     (unsigned long long)end);
     }
     dump_stack();
     }
-    if (!abort)
+    if (!abort) {
     __reserve_region_with_split(root, start, end, name);
+    }
     write_unlock(&resource_lock);
     }
 //
@@ -1130,7 +1396,7 @@ pub unsafe extern "C" fn resource_alignment(res: *const resource) -> resource_si
     return resource_size(res);
     case IORESOURCE_STARTALIGN:
     return res.start;
-    default:
+// label;
     return 0;
     }
     }
@@ -1145,20 +1411,21 @@ pub unsafe extern "C" fn resource_alignment(res: *const resource) -> resource_si
 // release_region releases a matching busy region.
 //
 // static DECLARE_WAIT_QUEUE_HEAD(muxed_resource_wait);
-    static struct inode *iomem_inode;
+pub static mut iomem_inode: *mut c_void = core::ptr::null_mut();
 
 #[no_mangle]
 unsafe extern "C" fn revoke_iomem(res: *mut resource) {
 // pairs with smp_store_release() in iomem_init_inode()
-    struct inode *inode = smp_load_acquire(&iomem_inode);
+    let mut inode = smp_load_acquire(&iomem_inode);
 //
 // Check that the initialization has completed. Losing the race
 // is ok because it means drivers are claiming resources before
 // the fs_initcall level of init and prevent iomem_get_mapping users
 // from establishing mappings.
 //
-    if (!inode)
+    if (!inode) {
     return;
+    }
 //
 // The expectation is that the driver has successfully marked
 // the resource busy by this point, so devmem_is_allowed()
@@ -1176,10 +1443,11 @@ unsafe extern "C" fn revoke_iomem(res: *mut resource) {
     unmap_mapping_range(inode.i_mapping, res.start, resource_size(res), 1);
     }
 
-    static void revoke_iomem(struct resource *res) {}
+#[no_mangle]
+pub unsafe extern "C" fn revoke_iomem(res: *mut resource) {}
 
-    struct address_space *iomem_get_mapping(void)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn iomem_get_mapping() -> *mut c_void {
 //
 // This function is only called from file open paths, hence guaranteed
 // that fs_initcalls have completed and no need to check for NULL. But
@@ -1188,22 +1456,21 @@ unsafe extern "C" fn revoke_iomem(res: *mut resource) {
 //
     return smp_load_acquire(&iomem_inode).i_mapping;
     }
-    static int __request_region_locked(struct resource *res, struct resource *parent,
-    resource_size_t start, resource_size_t n,
-    const char *name, int flags)
-    {
-    DECLARE_WAITQUEUE(wait, current);
+#[no_mangle]
+pub unsafe extern "C" fn __request_region_locked(res: *mut resource, parent: *mut resource, start: resource_size_t, n: resource_size_t, name: *mut c_char, flags: c_int) -> c_int {
+pub static mut wait: usize = 0;
     res.name = name;
     res.start = start;
     res.end = start + n - 1;
     for (;;) {
-    struct resource *conflict;
+pub static mut conflict: *mut c_void = core::ptr::null_mut();
     res.flags = resource_type(parent) | resource_ext_type(parent);
     res.flags |= IORESOURCE_BUSY | flags;
     res.desc = parent.desc;
     conflict = __request_resource(parent, res);
-    if (!conflict)
+    if (!conflict) {
     break;
+    }
 //
 // mm/hmm.c reserves physical addresses which then
 // become unavailable to other users.  Conflicts are
@@ -1211,7 +1478,7 @@ unsafe extern "C" fn revoke_iomem(res: *mut resource) {
 //
     if (parent == &iomem_resource &&
     conflict.desc == IORES_DESC_DEVICE_PRIVATE_MEMORY) {
-    pr_warn("Unaddressable device %s %pR conflicts with %pR\n",
+    pr_warn!("Unaddressable device %s %pR conflicts with %pR\n",
     conflict.name, conflict, res);
     }
     if (conflict != parent) {
@@ -1242,14 +1509,13 @@ unsafe extern "C" fn revoke_iomem(res: *mut resource) {
 // @name: reserving caller's ID string
 // @flags: IO resource flags
 //
-    struct resource *__request_region(struct resource *parent,
-    resource_size_t start, resource_size_t n,
-    const char *name, int flags)
-    {
-    struct resource *res = alloc_resource(GFP_KERNEL);
-    int ret;
-    if (!res)
+#[no_mangle]
+pub unsafe extern "C" fn __request_region(parent: *mut resource, start: resource_size_t, n: resource_size_t, name: *mut c_char, flags: c_int) -> *mut c_void {
+    let mut res = alloc_resource(GFP_KERNEL);
+    let mut ret = 0;
+    if (!res) {
     return core::ptr::null_mut();
+    }
     write_lock(&resource_lock);
     ret = __request_region_locked(res, parent, start, n, name, flags);
     write_unlock(&resource_lock);
@@ -1257,8 +1523,9 @@ unsafe extern "C" fn revoke_iomem(res: *mut resource) {
     free_resource(res);
     return core::ptr::null_mut();
     }
-    if (parent == &iomem_resource)
+    if (parent == &iomem_resource) {
     revoke_iomem(res);
+    }
     return res;
     }
     EXPORT_SYMBOL(__request_region);
@@ -1270,46 +1537,49 @@ unsafe extern "C" fn revoke_iomem(res: *mut resource) {
 //
 // The described resource region must match a currently busy region.
 //
-    void __release_region(struct resource *parent, resource_size_t start,
-    resource_size_t n)
-    {
-    struct resource **p;
-    resource_size_t end;
+#[no_mangle]
+pub unsafe extern "C" fn __release_region(parent: *mut resource, start: resource_size_t, n: resource_size_t) {
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    let mut end;
     p = &parent.child;
     end = start + n - 1;
     write_lock(&resource_lock);
     for (;;) {
-    struct resource *res = *p;
-    if (!res)
+    let mut res = *p;
+    if (!res) {
     break;
+    }
     if (res.start <= start && res.end >= end) {
     if (!(res.flags & IORESOURCE_BUSY)) {
     p = &res.child;
     continue;
     }
-    if (res.start != start || res.end != end)
+    if (res.start != start || res.end != end) {
     break;
+    }
 // p = res->sibling;
     write_unlock(&resource_lock);
-    if (res.flags & IORESOURCE_MUXED)
+    if (res.flags & IORESOURCE_MUXED) {
     wake_up(&muxed_resource_wait);
+    }
     free_resource(res);
     return;
     }
     p = &res.sibling;
     }
     write_unlock(&resource_lock);
-    pr_warn("Trying to free nonexistent resource <%pa-%pa>\n", &start, &end);
+    pr_warn!("Trying to free nonexistent resource <%pa-%pa>\n", &start, &end);
     }
     EXPORT_SYMBOL(__release_region);
 
 #[no_mangle]
 unsafe extern "C" fn append_child_to_parent(new_parent: *mut resource, new_child: *mut resource) {
-    struct resource *child;
+pub static mut child: *mut c_void = core::ptr::null_mut();
     child = new_parent.child;
     if (child) {
-    while (child.sibling)
+    while (child.sibling) {
     child = child.sibling;
+    }
     child.sibling = new_child;
     } else {
     new_parent.child = new_child;
@@ -1323,11 +1593,11 @@ unsafe extern "C" fn append_child_to_parent(new_parent: *mut resource, new_child
 // original resource and "high" is a new resource. Treat "low" as the original
 // resource being split and defer its range adjustment to __adjust_resource().
 //
-    static void reparent_children_after_split(struct resource *low,
-    struct resource *high,
-    resource_size_t split_addr)
-    {
-    struct resource *child, *next, **p;
+#[no_mangle]
+pub unsafe extern "C" fn reparent_children_after_split(low: *mut resource, high: *mut resource, split_addr: resource_size_t) {
+    let mut child = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
     p = &low.child;
     while ((child = *p)) {
     next = child.sibling;
@@ -1359,15 +1629,16 @@ unsafe extern "C" fn append_child_to_parent(new_parent: *mut resource, new_child
 //
 #[no_mangle]
 pub unsafe extern "C" fn release_mem_region_adjustable(start: resource_size_t, size: resource_size_t) {
-    struct resource *parent = &iomem_resource;
-    struct resource *new_res = core::ptr::null_mut();
-    let mut alloc_nofail: bool = false;
-    struct resource **p;
-    struct resource *res;
-    resource_size_t end;
+    let mut parent = &iomem_resource;
+    let mut new_res = core::ptr::null_mut();
+pub static mut alloc_nofail: bool = false;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut res: *mut c_void = core::ptr::null_mut();
+    let mut end;
     end = start + size - 1;
-    if (WARN_ON_ONCE((start < parent.start) || (end > parent.end)))
+    if (WARN_ON_ONCE!((start < parent.start) || (end > parent.end))) {
     return;
+    }
 //
 // We free up quite a lot of memory on memory hotunplug (esp., memap),
 // just before releasing the region. This is highly unlikely to
@@ -1375,20 +1646,22 @@ pub unsafe extern "C" fn release_mem_region_adjustable(start: resource_size_t, s
 // perform any error handling (e.g., trying to re-add memory will fail
 // similarly).
 //
-    retry:
+// label;
     new_res = alloc_resource(GFP_KERNEL | (alloc_nofail ? __GFP_NOFAIL : 0));
     p = &parent.child;
     write_lock(&resource_lock);
     while ((res = *p)) {
-    if (res.start >= end)
+    if (res.start >= end) {
     break;
+    }
 // look for the next resource if it does not fit into
     if (res.start > start || res.end < end) {
     p = &res.sibling;
     continue;
     }
-    if (!(res.flags & IORESOURCE_MEM))
+    if (!(res.flags & IORESOURCE_MEM)) {
     break;
+    }
     if (!(res.flags & IORESOURCE_BUSY)) {
     p = &res.child;
     continue;
@@ -1400,11 +1673,11 @@ pub unsafe extern "C" fn release_mem_region_adjustable(start: resource_size_t, s
     free_resource(res);
     } else if (res.start == start && res.end != end) {
 // adjust the start
-    WARN_ON_ONCE(__adjust_resource(res, end + 1,
+    WARN_ON_ONCE!(__adjust_resource(res, end + 1,
     res.end - end));
     } else if (res.start != start && res.end == end) {
 // adjust the end
-    WARN_ON_ONCE(__adjust_resource(res, res.start,
+    WARN_ON_ONCE!(__adjust_resource(res, res.start,
     start - res.start));
     } else {
 // split into two entries - we need a new resource
@@ -1413,7 +1686,7 @@ pub unsafe extern "C" fn release_mem_region_adjustable(start: resource_size_t, s
     if (!new_res) {
     alloc_nofail = true;
     write_unlock(&resource_lock);
-    goto retry;
+// goto;
     }
     }
     new_res.name = res.name;
@@ -1425,9 +1698,10 @@ pub unsafe extern "C" fn release_mem_region_adjustable(start: resource_size_t, s
     new_res.sibling = res.sibling;
     new_res.child = core::ptr::null_mut();
     reparent_children_after_split(res, new_res, end);
-    if (WARN_ON_ONCE(__adjust_resource(res, res.start,
-    start - res.start)))
+    if (WARN_ON_ONCE!(__adjust_resource(res, res.start,
+    start - res.start))) {
     break;
+    }
     res.sibling = new_res;
     new_res = core::ptr::null_mut();
     }
@@ -1437,9 +1711,8 @@ pub unsafe extern "C" fn release_mem_region_adjustable(start: resource_size_t, s
     free_resource(new_res);
     }
 
-    static bool system_ram_resources_mergeable(struct resource *r1,
-    struct resource *r2)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn system_ram_resources_mergeable(r1: *mut resource, r2: *mut resource) -> bool {
 // We assume either r1 or r2 is IORESOURCE_SYSRAM_MERGEABLE.
     return r1.flags == r2.flags && r1.end + 1 == r2.start &&
     r1.name == r2.name && r1.desc == r2.desc &&
@@ -1465,10 +1738,11 @@ pub unsafe extern "C" fn release_mem_region_adjustable(start: resource_size_t, s
 //
 #[no_mangle]
 pub unsafe extern "C" fn merge_system_ram_resource(res: *mut resource) {
-    let mut flags: c_ulong = IORESOURCE_SYSTEM_RAM | IORESOURCE_BUSY;
-    struct resource *cur;
-    if (WARN_ON_ONCE((res.flags & flags) != flags))
+pub static mut flags: c_ulong = 0;
+pub static mut cur: *mut c_void = core::ptr::null_mut();
+    if (WARN_ON_ONCE!((res.flags & flags) != flags)) {
     return;
+    }
     write_lock(&resource_lock);
     res.flags |= IORESOURCE_SYSRAM_MERGEABLE;
 // Try to merge with next item in the list.
@@ -1480,8 +1754,9 @@ pub unsafe extern "C" fn merge_system_ram_resource(res: *mut resource) {
     }
 // Try to merge with previous item in the list.
     cur = res.parent.child;
-    while (cur && cur.sibling != res)
+    while (cur && cur.sibling != res) {
     cur = cur.sibling;
+    }
     if (cur && system_ram_resources_mergeable(cur, res)) {
     cur.end = res.end;
     cur.sibling = res.sibling;
@@ -1495,7 +1770,7 @@ pub unsafe extern "C" fn merge_system_ram_resource(res: *mut resource) {
 //
 #[no_mangle]
 unsafe extern "C" fn devm_resource_release(dev: *mut device, ptr: *mut c_void) {
-    struct resource **r = ptr;
+    let mut r = ptr;
     release_resource(*r);
     }
 //
@@ -1516,13 +1791,14 @@ unsafe extern "C" fn devm_resource_release(dev: *mut device, ptr: *mut c_void) {
 //
 // Returns 0 on success or a negative error code on failure.
 //
-    int devm_request_resource(struct device *dev, struct resource *root,
-    struct resource *new)
-    {
-    struct resource *conflict, **ptr;
-    ptr = devres_alloc(devm_resource_release, sizeof(*ptr), GFP_KERNEL);
-    if (!ptr)
+#[no_mangle]
+pub unsafe extern "C" fn devm_request_resource(dev: *mut device, root: *mut resource, new: *mut resource) -> c_int {
+    let mut conflict = core::ptr::null_mut();
+    let mut ptr = core::ptr::null_mut();
+    ptr = devres_alloc(devm_resource_release, sizeof!(*ptr), GFP_KERNEL);
+    if (!ptr) {
     return -ENOMEM;
+    }
 // ptr = new;
     conflict = request_resource_conflict(root, new);
     if (conflict) {
@@ -1537,8 +1813,8 @@ unsafe extern "C" fn devm_resource_release(dev: *mut device, ptr: *mut c_void) {
     EXPORT_SYMBOL(devm_request_resource);
 #[no_mangle]
 unsafe extern "C" fn devm_resource_match(dev: *mut device, res: *mut c_void, data: *mut c_void) -> c_int {
-    struct resource **ptr = res;
-    return *ptr == data;
+    let mut ptr = res;
+    let mut ptr = = data;
     }
 //
 // devm_release_resource() - release a previously requested resource
@@ -1549,7 +1825,7 @@ unsafe extern "C" fn devm_resource_match(dev: *mut device, res: *mut c_void, dat
 //
 #[no_mangle]
 pub unsafe extern "C" fn devm_release_resource(dev: *mut device, new: *mut resource) {
-    WARN_ON(devres_release(dev, devm_resource_release, devm_resource_match,
+    WARN_ON!(devres_release(dev, devm_resource_release, devm_resource_match,
     new));
     }
     EXPORT_SYMBOL(devm_release_resource);
@@ -1563,41 +1839,41 @@ pub struct region_devres {
 
 #[no_mangle]
 unsafe extern "C" fn devm_region_release(dev: *mut device, res: *mut c_void) {
-    struct region_devres *this = res;
+    let mut this = res;
     __release_region(this.parent, this.start, this.n);
     }
 #[no_mangle]
 unsafe extern "C" fn devm_region_match(dev: *mut device, res: *mut c_void, match_data: *mut c_void) -> c_int {
-    struct region_devres *this = res, *match = match_data;
+    let mut this = res, *match = match_data;
     return this.parent == match.parent &&
     this.start == match.start && this.n == match.n;
     }
-    struct resource *
-    __devm_request_region(struct device *dev, struct resource *parent,
-    resource_size_t start, resource_size_t n, const char *name)
-    {
-    struct region_devres *dr = core::ptr::null_mut();
-    struct resource *res;
-    dr = devres_alloc(devm_region_release, sizeof(struct region_devres),
+#[no_mangle]
+pub unsafe extern "C" fn __devm_request_region(dev: *mut device, parent: *mut resource, start: resource_size_t, n: resource_size_t, name: *mut c_char) -> *mut c_void {
+    let mut dr = core::ptr::null_mut();
+pub static mut res: *mut c_void = core::ptr::null_mut();
+    dr = devres_alloc(devm_region_release, sizeof!(region_devres),
     GFP_KERNEL);
-    if (!dr)
+    if (!dr) {
     return core::ptr::null_mut();
+    }
     dr.parent = parent;
     dr.start = start;
     dr.n = n;
     res = __request_region(parent, start, n, name, 0);
-    if (res)
+    if (res) {
     devres_add(dev, dr);
-    else
+    }
+    else {
     devres_free(dr);
+    }
     return res;
     }
     EXPORT_SYMBOL(__devm_request_region);
-    void __devm_release_region(struct device *dev, struct resource *parent,
-    resource_size_t start, resource_size_t n)
-    {
-    let mut match_data: region_devres = { parent, start, n };
-    WARN_ON(devres_release(dev, devm_region_release, devm_region_match,
+#[no_mangle]
+pub unsafe extern "C" fn __devm_release_region(dev: *mut device, parent: *mut resource, start: resource_size_t, n: resource_size_t) {
+pub static mut match_data: region_devres = 0;
+    WARN_ON!(devres_release(dev, devm_region_release, devm_region_match,
     &match_data));
     }
     EXPORT_SYMBOL(__devm_release_region);
@@ -1610,15 +1886,18 @@ unsafe extern "C" fn reserve_setup(str: *mut c_char) -> c_int {
     static int reserved;
     static struct resource reserve[MAXRESERVE];
     for (;;) {
-    unsigned int io_start, io_num;
-    let mut x: c_int = reserved;
-    struct resource *parent;
-    if (get_option(&str, &io_start) != 2)
+    let mut io_start = 0;
+    let mut io_num = 0;
+pub static mut x: c_int = 0;
+pub static mut parent: *mut c_void = core::ptr::null_mut();
+    if (get_option(&str, &io_start) != 2) {
     break;
-    if (get_option(&str, &io_num) == 0)
+    }
+    if (get_option(&str, &io_num) == 0) {
     break;
+    }
     if (x < MAXRESERVE) {
-    struct resource *res = reserve + x;
+    let mut res = reserve + x;
 //
 // If the region starts below 0x10000, we assume it's
 // I/O port space; otherwise assume it's memory.
@@ -1631,44 +1910,49 @@ unsafe extern "C" fn reserve_setup(str: *mut c_char) -> c_int {
     parent = &iomem_resource;
     }
     res.flags |= IORESOURCE_BUSY;
-    if (request_resource(parent, res) == 0)
+    if (request_resource(parent, res) == 0) {
     reserved = x+1;
+    }
     }
     }
     return 1;
     }
-    __setup("reserve=", reserve_setup);
+    __setup!("reserve=", reserve_setup);
 //
 // Check if the requested addr and size spans more than any slot in the
 // iomem resource tree.
 //
 #[no_mangle]
 pub unsafe extern "C" fn iomem_map_sanity_check(addr: resource_size_t, size: c_ulong) -> c_int {
-    let mut end: resource_size_t = addr + size - 1;
-    struct resource *p;
-    let mut err: c_int = 0;
+pub static mut end: resource_size_t = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut err: c_int = 0;
     read_lock(&resource_lock);
     for_each_resource(&iomem_resource, p, false) {
 //
 // We can probably skip the resources without
 // IORESOURCE_IO attribute?
 //
-    if (p.start > end)
+    if (p.start > end) {
     continue;
-    if (p.end < addr)
+    }
+    if (p.end < addr) {
     continue;
+    }
     if (PFN_DOWN(p.start) <= PFN_DOWN(addr) &&
-    PFN_DOWN(p.end) >= PFN_DOWN(end))
+    PFN_DOWN(p.end) >= PFN_DOWN(end)) {
     continue;
+    }
 //
 // if a resource is "BUSY", it's not a hardware resource
 // but a driver mapping of such a resource; we don't want
 // to warn for those; some drivers legitimately map only
 // partial hardware resources. (example: vesafb)
 //
-    if (p.flags & IORESOURCE_BUSY)
+    if (p.flags & IORESOURCE_BUSY) {
     continue;
-    pr_debug("resource sanity check: requesting [mem %pa-%pa], which spans more than %s %pR\n",
+    }
+    pr_debug!("resource sanity check: requesting [mem %pa-%pa], which spans more than %s %pR\n",
     &addr, &end, p.name, p);
     err = -1;
     break;
@@ -1677,7 +1961,7 @@ pub unsafe extern "C" fn iomem_map_sanity_check(addr: resource_size_t, size: c_u
     return err;
     }
 
-    let mut strict_iomem_checks: static int = 1;
+pub static mut strict_iomem_checks: int = 1;
 
     static int strict_iomem_checks;
 
@@ -1689,14 +1973,15 @@ pub unsafe extern "C" fn iomem_map_sanity_check(addr: resource_size_t, size: c_u
 //
 #[no_mangle]
 pub unsafe extern "C" fn resource_is_exclusive(root: *mut resource, addr: u64, size: resource_size_t) -> bool {
-    const unsigned int exclusive_system_ram = IORESOURCE_SYSTEM_RAM |
+    let mut exclusive_system_ram = IORESOURCE_SYSTEM_RAM |
     IORESOURCE_EXCLUSIVE;
-    let mut skip_children: bool = false, err = false;
-    struct resource *p;
+pub static mut skip_children: bool = false;
+pub static mut p: *mut c_void = core::ptr::null_mut();
     read_lock(&resource_lock);
     for_each_resource(root, p, skip_children) {
-    if (p.start >= addr + size)
+    if (p.start >= addr + size) {
     break;
+    }
     if (p.end < addr) {
     skip_children = true;
     continue;
@@ -1718,9 +2003,10 @@ pub unsafe extern "C" fn resource_is_exclusive(root: *mut resource, addr: u64, s
 // or CONFIG_IO_STRICT_DEVMEM is enabled and the
 // resource is busy.
 //
-    if (!strict_iomem_checks || !(p.flags & IORESOURCE_BUSY))
+    if (!strict_iomem_checks || !(p.flags & IORESOURCE_BUSY)) {
     continue;
-    if (IS_ENABLED(CONFIG_IO_STRICT_DEVMEM)
+    }
+    if (IS_ENABLED!(CONFIG_IO_STRICT_DEVMEM)
     || p.flags & IORESOURCE_EXCLUSIVE) {
     err = true;
     break;
@@ -1734,11 +2020,10 @@ pub unsafe extern "C" fn iomem_is_exclusive(addr: u64) -> bool {
     return resource_is_exclusive(&iomem_resource, addr & PAGE_MASK,
     PAGE_SIZE);
     }
-    struct resource_entry *resource_list_create_entry(struct resource *res,
-    size_t extra_size)
-    {
-    struct resource_entry *entry;
-    entry = kzalloc(sizeof(*entry) + extra_size, GFP_KERNEL);
+#[no_mangle]
+pub unsafe extern "C" fn resource_list_create_entry(res: *mut resource, extra_size: size_t) -> *mut c_void {
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+    entry = kzalloc(sizeof!(*entry) + extra_size, GFP_KERNEL);
     if (entry) {
     INIT_LIST_HEAD(&entry.node);
     entry.res = res ? res : &entry.__res;
@@ -1748,27 +2033,29 @@ pub unsafe extern "C" fn iomem_is_exclusive(addr: u64) -> bool {
     EXPORT_SYMBOL(resource_list_create_entry);
 #[no_mangle]
 pub unsafe extern "C" fn resource_list_free(head: *mut list_head) {
-    struct resource_entry *entry, *tmp;
-    list_for_each_entry_safe(entry, tmp, head, node)
+    let mut entry = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
+    list_for_each_entry_safe(entry, tmp, head, node) {
     resource_list_destroy_entry(entry);
+    }
     }
     EXPORT_SYMBOL(resource_list_free);
 
-    static resource_size_t gfr_start(struct resource *base, resource_size_t size,
+    static resource_size_t gfr_start(resource *base, resource_size_t size,
     resource_size_t align, unsigned long flags)
     {
     if (flags & GFR_DESCENDING) {
-    resource_size_t end;
+    let mut end;
     end = min_t(resource_size_t, base.end, DIRECT_MAP_PHYSMEM_END);
     return end - size + 1;
     }
     return ALIGN(max(base.start, align), align);
     }
-    static bool gfr_continue(struct resource *base, resource_size_t addr,
-    resource_size_t size, unsigned long flags)
-    {
-    if (flags & GFR_DESCENDING)
+#[no_mangle]
+pub unsafe extern "C" fn gfr_continue(base: *mut resource, addr: resource_size_t, size: resource_size_t, flags: c_ulong) -> bool {
+    if (flags & GFR_DESCENDING) {
     return addr > size && addr >= base.start;
+    }
 //
 // In the ascend case be careful that the last increment by
 // @size did not wrap 0.
@@ -1779,52 +2066,54 @@ pub unsafe extern "C" fn resource_list_free(head: *mut list_head) {
     static resource_size_t gfr_next(resource_size_t addr, resource_size_t size,
     unsigned long flags)
     {
-    if (flags & GFR_DESCENDING)
+    if (flags & GFR_DESCENDING) {
     return addr - size;
+    }
     return addr + size;
     }
 #[no_mangle]
 unsafe extern "C" fn remove_free_mem_region(_res: *mut c_void) {
-    struct resource *res = _res;
-    if (res.parent)
+    let mut res = _res;
+    if (res.parent) {
     remove_resource(res);
+    }
     free_resource(res);
     }
-    static struct resource *
-    get_free_mem_region(struct device *dev, struct resource *base,
-    resource_size_t size, const unsigned long align,
-    const char *name, const unsigned long desc,
-    const unsigned long flags)
-    {
-    resource_size_t addr;
-    struct resource *res;
-    struct region_devres *dr = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn get_free_mem_region(dev: *mut device, base: *mut resource, size: resource_size_t, align: c_ulong, name: *mut c_char, desc: c_ulong, flags: c_ulong) -> *mut c_void {
+    let mut addr;
+pub static mut res: *mut c_void = core::ptr::null_mut();
+    let mut dr = core::ptr::null_mut();
     size = ALIGN(size, align);
     res = alloc_resource(GFP_KERNEL);
-    if (!res)
+    if (!res) {
     return ERR_PTR(-ENOMEM);
+    }
     if (dev && (flags & GFR_REQUEST_REGION)) {
     dr = devres_alloc(devm_region_release,
-    sizeof(struct region_devres), GFP_KERNEL);
+    sizeof!(region_devres), GFP_KERNEL);
     if (!dr) {
     free_resource(res);
     return ERR_PTR(-ENOMEM);
     }
     } else if (dev) {
-    if (devm_add_action_or_reset(dev, remove_free_mem_region, res))
+    if (devm_add_action_or_reset(dev, remove_free_mem_region, res)) {
     return ERR_PTR(-ENOMEM);
+    }
     }
     write_lock(&resource_lock);
     for (addr = gfr_start(base, size, align, flags);
     gfr_continue(base, addr, align, flags);
     addr = gfr_next(addr, align, flags)) {
     if (__region_intersects(base, addr, size, 0, IORES_DESC_NONE) !=
-    REGION_DISJOINT)
+    REGION_DISJOINT) {
     continue;
+    }
     if (flags & GFR_REQUEST_REGION) {
     if (__request_region_locked(res, &iomem_resource, addr,
-    size, name, 0))
+    size, name, 0)) {
     break;
+    }
     if (dev) {
     dr.parent = &iomem_resource;
     dr.start = addr;
@@ -1844,8 +2133,9 @@ unsafe extern "C" fn remove_free_mem_region(_res: *mut c_void) {
 // Only succeed if the resource hosts an exclusive
 // range after the insert
 //
-    if (__insert_resource(base, res) || res.child)
+    if (__insert_resource(base, res) || res.child) {
     break;
+    }
     write_unlock(&resource_lock);
     }
     return res;
@@ -1854,8 +2144,9 @@ unsafe extern "C" fn remove_free_mem_region(_res: *mut c_void) {
     if (flags & GFR_REQUEST_REGION) {
     free_resource(res);
     devres_free(dr);
-    } else if (dev)
+    } else if (dev) {
     devm_release_action(dev, remove_free_mem_region, res);
+    }
     return ERR_PTR(-ERANGE);
     }
 //
@@ -1869,19 +2160,17 @@ unsafe extern "C" fn remove_free_mem_region(_res: *mut c_void) {
 // contain the new resource, so that it can later be hotplugged as ZONE_DEVICE
 // memory, which in turn allocates struct pages.
 //
-    struct resource *devm_request_free_mem_region(struct device *dev,
-    struct resource *base, unsigned long size)
-    {
-    let mut flags: c_ulong = GFR_DESCENDING | GFR_REQUEST_REGION;
+#[no_mangle]
+pub unsafe extern "C" fn devm_request_free_mem_region(dev: *mut device, base: *mut resource, size: c_ulong) -> *mut c_void {
+pub static mut flags: c_ulong = 0;
     return get_free_mem_region(dev, base, size, GFR_DEFAULT_ALIGN,
     dev_name(dev),
     IORES_DESC_DEVICE_PRIVATE_MEMORY, flags);
     }
     EXPORT_SYMBOL_GPL(devm_request_free_mem_region);
-    struct resource *request_free_mem_region(struct resource *base,
-    unsigned long size, const char *name)
-    {
-    let mut flags: c_ulong = GFR_DESCENDING | GFR_REQUEST_REGION;
+#[no_mangle]
+pub unsafe extern "C" fn request_free_mem_region(base: *mut resource, size: c_ulong, name: *mut c_char) -> *mut c_void {
+pub static mut flags: c_ulong = 0;
     return get_free_mem_region(core::ptr::null_mut(), base, size, GFR_DEFAULT_ALIGN, name,
     IORES_DESC_DEVICE_PRIVATE_MEMORY, flags);
     }
@@ -1898,12 +2187,10 @@ unsafe extern "C" fn remove_free_mem_region(_res: *mut c_void) {
 // Allocate and insert a new resource to cover a free, unclaimed by a
 // descendant of @base, range in the span of @base.
 //
-    struct resource *alloc_free_mem_region(struct resource *base,
-    unsigned long size, unsigned long align,
-    const char *name)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn alloc_free_mem_region(base: *mut resource, size: c_ulong, align: c_ulong, name: *mut c_char) -> *mut c_void {
 // Default of ascending direction and insert resource
-    let mut flags: c_ulong = 0;
+pub static mut flags: c_ulong = 0;
     return get_free_mem_region(core::ptr::null_mut(), base, size, align, name,
     IORES_DESC_NONE, flags);
     }
@@ -1911,37 +2198,34 @@ unsafe extern "C" fn remove_free_mem_region(_res: *mut c_void) {
 
 #[no_mangle]
 unsafe extern "C" fn strict_iomem(str: *mut c_char) -> c_int {
-    if (strstr(str, "relaxed"))
+    if (strstr(str, "relaxed")) {
     strict_iomem_checks = 0;
-    if (strstr(str, "strict"))
+    }
+    if (strstr(str, "strict")) {
     strict_iomem_checks = 1;
+    }
     return 1;
     }
 #[no_mangle]
 unsafe extern "C" fn iomem_fs_init_fs_context(fc: *mut fs_context) -> c_int {
     return init_pseudo(fc, DEVMEM_MAGIC) ? 0 : -ENOMEM;
     }
-    static struct file_system_type iomem_fs_type = {
-    .name		= "iomem",
-    .owner		= THIS_MODULE,
-    .init_fs_context = iomem_fs_init_fs_context,
-    .kill_sb	= kill_anon_super,
-    };
+pub static mut file_system_type: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn iomem_init_inode() -> c_int {
-    static struct vfsmount *iomem_vfs_mount;
+pub static mut iomem_vfs_mount: *mut c_void = core::ptr::null_mut();
     static int iomem_fs_cnt;
-    struct inode *inode;
-    int rc;
+pub static mut inode: *mut c_void = core::ptr::null_mut();
+    let mut rc = 0;
     rc = simple_pin_fs(&iomem_fs_type, &iomem_vfs_mount, &iomem_fs_cnt);
     if (rc < 0) {
-    pr_err("Cannot mount iomem pseudo filesystem: %d\n", rc);
+    pr_err!("Cannot mount iomem pseudo filesystem: %d\n", rc);
     return rc;
     }
     inode = alloc_anon_inode(iomem_vfs_mount.mnt_sb);
     if (IS_ERR(inode)) {
     rc = PTR_ERR(inode);
-    pr_err("Cannot allocate inode for iomem: %d\n", rc);
+    pr_err!("Cannot allocate inode for iomem: %d\n", rc);
     simple_release_fs(&iomem_vfs_mount, &iomem_fs_cnt);
     return rc;
     }
@@ -1952,5 +2236,5 @@ unsafe extern "C" fn iomem_init_inode() -> c_int {
     smp_store_release(&iomem_inode, inode);
     return 0;
     }
-    fs_initcall(iomem_init_inode);
-    __setup("iomem=", strict_iomem);
+    fs_initcall!(iomem_init_inode);
+    __setup!("iomem=", strict_iomem);

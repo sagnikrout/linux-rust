@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
 macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
@@ -85,26 +335,28 @@ pub struct tp_transition_snapshot {
     pub ongoing: bool,
 }
 
-    DEFINE_SRCU_FAST(tracepoint_srcu);
+pub static mut tracepoint_srcu: usize = 0;
     EXPORT_SYMBOL_GPL(tracepoint_srcu);
 // Protected by tracepoints_mutex
     static struct tp_transition_snapshot tp_transition_snapshot[_NR_TP_TRANSITION_SYNC];
 #[no_mangle]
-unsafe extern "C" fn tp_rcu_get_state(sync: enum tp_transition_sync) {
-    struct tp_transition_snapshot *snapshot = &tp_transition_snapshot[sync];
+unsafe extern "C" fn tp_rcu_get_state(sync: tp_transition_sync) {
+    let mut snapshot = &tp_transition_snapshot[sync];
 // Keep the latest get_state snapshot.
     snapshot.rcu = get_state_synchronize_rcu();
     snapshot.srcu_gp = start_poll_synchronize_srcu(&tracepoint_srcu);
     snapshot.ongoing = true;
     }
 #[no_mangle]
-unsafe extern "C" fn tp_rcu_cond_sync(sync: enum tp_transition_sync) {
-    struct tp_transition_snapshot *snapshot = &tp_transition_snapshot[sync];
-    if (!snapshot.ongoing)
+unsafe extern "C" fn tp_rcu_cond_sync(sync: tp_transition_sync) {
+    let mut snapshot = &tp_transition_snapshot[sync];
+    if (!snapshot.ongoing) {
     return;
+    }
     cond_synchronize_rcu(snapshot.rcu);
-    if (!poll_state_synchronize_srcu(&tracepoint_srcu, snapshot.srcu_gp))
+    if (!poll_state_synchronize_srcu(&tracepoint_srcu, snapshot.srcu_gp)) {
     synchronize_srcu(&tracepoint_srcu);
+    }
     snapshot.ongoing = false;
     }
 // Set to 1 to enable tracepoint debug output
@@ -131,7 +383,7 @@ unsafe extern "C" fn tp_rcu_cond_sync(sync: enum tp_transition_sync) {
 #[derive(Copy, Clone)]
 pub struct tp_probes {
     pub rcu: rcu_head,
-    pub probes: [tracepoint_func; ],
+    pub probes: [tracepoint_func; 0],
 }
 
 // Called in removal of a func but failed to allocate a new tp_funcs
@@ -139,20 +391,19 @@ pub struct tp_probes {
 unsafe extern "C" fn tp_stub_func() {
     return;
     }
-    static inline void *allocate_probes(int count)
-    {
-    struct tp_probes *p  = kmalloc_flex(*p, probes, count);
-    let mut p: return = = core::ptr::null_mut() ? core::ptr::null_mut() : p.probes;
+#[no_mangle]
+pub unsafe extern "C" fn allocate_probes(count: c_int) -> *mut c_void {
+    let mut p = kmalloc_flex(*p, probes, count);
+pub static mut p: return = 0;
     }
 #[no_mangle]
 unsafe extern "C" fn rcu_free_old_probes(head: *mut rcu_head) {
-    kfree(container_of(head, struct tp_probes, rcu));
+    kfree(container_of!(head, tp_probes, rcu));
     }
 #[no_mangle]
 pub unsafe extern "C" fn release_probes(tp: *mut tracepoint, old: *mut tracepoint_func) {
     if (old) {
-    struct tp_probes *tp_probes = container_of(old,
-    struct tp_probes, probes[0]);
+    let mut tp_probes = container_of!(old, tp_probes, probes[0]);
     if (tracepoint_is_faultable(tp)) {
     call_rcu_tasks_trace(&tp_probes.rcu,
     rcu_free_old_probes);
@@ -164,51 +415,59 @@ pub unsafe extern "C" fn release_probes(tp: *mut tracepoint, old: *mut tracepoin
     }
 #[no_mangle]
 unsafe extern "C" fn debug_print_probes(funcs: *mut tracepoint_func) {
-    int i;
-    if (!tracepoint_debug || !funcs)
+    let mut i = 0;
+    if (!tracepoint_debug || !funcs) {
     return;
-    for (i = 0; funcs[i].func; i++)
-    printk(KERN_DEBUG "Probe %d : %pSb\n", i, funcs[i].func);
     }
-    static struct tracepoint_func *
-    func_add(struct tracepoint_func **funcs, struct tracepoint_func *tp_func,
-    int prio)
-    {
-    struct tracepoint_func *old, *new;
-    int iter_probes;	/* Iterate over old probe array. */
-    int nr_probes = 0;	/* Counter for probes */
-    int pos = -1;		/* Insertion position into new array */
-    if (WARN_ON(!tp_func.func))
+    for (i = 0; funcs[i].func; i++) {
+    printk("Probe %d : %pSb\n", i, funcs[i].func);
+    }
+    }
+#[no_mangle]
+pub unsafe extern "C" fn func_add(funcs: *mut *mut tracepoint_func, tp_func: *mut tracepoint_func, prio: c_int) -> *mut c_void {
+    let mut old = core::ptr::null_mut();
+    let mut new = core::ptr::null_mut();
+    let mut iter_probes = 0;	/* Iterate over old probe array. */
+    let mut nr_probes = 0;	/* Counter for probes */
+    let mut pos = -1;		/* Insertion position into new array */
+    if (WARN_ON!(!tp_func.func)) {
     return ERR_PTR(-EINVAL);
+    }
     debug_print_probes(*funcs);
     old = *funcs;
     if (old) {
 // (N -> N+1), (N != 0, 1) probes
-    for (iter_probes = 0; old[iter_probes].func; iter_probes++) {
-    if (old[iter_probes].func == tp_stub_func)
+    while (old[iter_probes].func) {
+    if (old[iter_probes].func == tp_stub_func) {
     continue;	/* Skip stub functions. */
+    }
     if (old[iter_probes].func == tp_func.func &&
-    old[iter_probes].data == tp_func.data)
+    old[iter_probes].data == tp_func.data) {
     return ERR_PTR(-EEXIST);
-    nr_probes++;
+    }
+    nr_probes += 1;
     }
     }
 // + 2 : one for new probe, one for NULL func
     new = allocate_probes(nr_probes + 2);
-    if (new == core::ptr::null_mut())
+    if (new == core::ptr::null_mut()) {
     return ERR_PTR(-ENOMEM);
+    }
     if (old) {
     nr_probes = 0;
-    for (iter_probes = 0; old[iter_probes].func; iter_probes++) {
-    if (old[iter_probes].func == tp_stub_func)
+    while (old[iter_probes].func) {
+    if (old[iter_probes].func == tp_stub_func) {
     continue;
+    }
 // Insert before probes of lower priority
-    if (pos < 0 && old[iter_probes].prio < prio)
-    pos = nr_probes++;
+    if (pos < 0 && old[iter_probes].prio < prio) {
+    pos = nr_probes += 1;
+    }
     new[nr_probes++] = old[iter_probes];
     }
-    if (pos < 0)
-    pos = nr_probes++;
+    if (pos < 0) {
+    pos = nr_probes += 1;
+    }
 // nr_probes now points to the end of the new array
     } else {
     pos = 0;
@@ -220,22 +479,24 @@ unsafe extern "C" fn debug_print_probes(funcs: *mut tracepoint_func) {
     debug_print_probes(*funcs);
     return old;
     }
-    static void *func_remove(struct tracepoint_func **funcs,
-    struct tracepoint_func *tp_func)
-    {
-    let mut nr_probes: c_int = 0, nr_del = 0, i;
-    struct tracepoint_func *old, *new;
+#[no_mangle]
+pub unsafe extern "C" fn func_remove(funcs: *mut *mut tracepoint_func, tp_func: *mut tracepoint_func) -> *mut c_void {
+pub static mut nr_probes: c_int = 0;
+    let mut old = core::ptr::null_mut();
+    let mut new = core::ptr::null_mut();
     old = *funcs;
-    if (!old)
+    if (!old) {
     return ERR_PTR(-ENOENT);
+    }
     debug_print_probes(*funcs);
 // (N -> M), (N > 1, M >= 0) probes
     if (tp_func.func) {
-    for (nr_probes = 0; old[nr_probes].func; nr_probes++) {
+    while (old[nr_probes].func) {
     if ((old[nr_probes].func == tp_func.func &&
     old[nr_probes].data == tp_func.data) ||
-    old[nr_probes].func == tp_stub_func)
-    nr_del++;
+    old[nr_probes].func == tp_stub_func) {
+    nr_del += 1;
+    }
     }
     }
 //
@@ -248,16 +509,17 @@ unsafe extern "C" fn debug_print_probes(funcs: *mut tracepoint_func) {
     debug_print_probes(*funcs);
     return old;
     } else {
-    let mut j: c_int = 0;
+pub static mut j: c_int = 0;
 // N -> M, (N > 1, M > 0)
 // + 1 for NULL
     new = allocate_probes(nr_probes - nr_del + 1);
     if (new) {
-    for (i = 0; old[i].func; i++) {
+    while (old[i].func) {
     if ((old[i].func != tp_func.func ||
     old[i].data != tp_func.data) &&
-    old[i].func != tp_stub_func)
+    old[i].func != tp_stub_func) {
     new[j++] = old[i];
+    }
     }
     new[nr_probes - nr_del].func = core::ptr::null_mut();
 // funcs = new;
@@ -266,10 +528,11 @@ unsafe extern "C" fn debug_print_probes(funcs: *mut tracepoint_func) {
 // Failed to allocate, replace the old function
 // with calls to tp_stub_func.
 //
-    for (i = 0; old[i].func; i++) {
+    while (old[i].func) {
     if (old[i].func == tp_func.func &&
-    old[i].data == tp_func.data)
+    old[i].data == tp_func.data) {
     WRITE_ONCE(old[i].func, tp_stub_func);
+    }
     }
 // funcs = old;
     }
@@ -282,45 +545,51 @@ unsafe extern "C" fn debug_print_probes(funcs: *mut tracepoint_func) {
 //
 #[no_mangle]
 unsafe extern "C" fn nr_func_state(tp_funcs: *const tracepoint_func) -> enum tp_func_state {
-    if (!tp_funcs)
+    if (!tp_funcs) {
     return TP_FUNC_0;
-    if (!tp_funcs[1].func)
+    }
+    if (!tp_funcs[1].func) {
     return TP_FUNC_1;
-    if (!tp_funcs[2].func)
+    }
+    if (!tp_funcs[2].func) {
     return TP_FUNC_2;
+    }
     return TP_FUNC_N;	/* 3 or more */
     }
 #[no_mangle]
 unsafe extern "C" fn tracepoint_update_call(tp: *mut tracepoint, tp_funcs: *mut tracepoint_func) {
-    void *func = tp.iterator;
+    let mut func = tp.iterator;
 // Synthetic events do not have static call sites
-    if (!tp.static_call_key)
+    if (!tp.static_call_key) {
     return;
-    if (nr_func_state(tp_funcs) == TP_FUNC_1)
+    }
+    if (nr_func_state(tp_funcs) == TP_FUNC_1) {
     func = tp_funcs[0].func;
+    }
     __static_call_update(tp.static_call_key, tp.static_call_tramp, func);
     }
 //
 // Add the probe function to a tracepoint.
 //
-    static int tracepoint_add_func(struct tracepoint *tp,
-    struct tracepoint_func *func, int prio,
-    bool warn)
-    {
-    struct tracepoint_func *old, *tp_funcs;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn tracepoint_add_func(tp: *mut tracepoint, func: *mut tracepoint_func, prio: c_int, warn: bool) -> c_int {
+    let mut old = core::ptr::null_mut();
+    let mut tp_funcs = core::ptr::null_mut();
+    let mut ret = 0;
     if (tp.ext && tp.ext.regfunc && !static_key_enabled(&tp.key)) {
     ret = tp.ext.regfunc();
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     }
     tp_funcs = rcu_dereference_protected(tp.funcs,
     lockdep_is_held(&tracepoints_mutex));
     old = func_add(&tp_funcs, func, prio);
     if (IS_ERR(old)) {
-    if (tp.ext && tp.ext.unregfunc && !static_key_enabled(&tp.key))
+    if (tp.ext && tp.ext.unregfunc && !static_key_enabled(&tp.key)) {
     tp.ext.unregfunc();
-    WARN_ON_ONCE(warn && PTR_ERR(old) != -ENOMEM);
+    }
+    WARN_ON_ONCE!(warn && PTR_ERR(old) != -ENOMEM);
     return PTR_ERR(old);
     }
 //
@@ -357,11 +626,12 @@ unsafe extern "C" fn tracepoint_update_call(tp: *mut tracepoint, tp_funcs: *mut 
 // Make sure static func never uses incorrect data after a
 // N->...->2->1 (N>1) transition sequence.
 //
-    if (tp_funcs[0].data != old[0].data)
+    if (tp_funcs[0].data != old[0].data) {
     tp_rcu_get_state(TP_TRANSITION_SYNC_N_2_1);
+    }
     break;
-    default:
-    WARN_ON_ONCE(1);
+// label;
+    WARN_ON_ONCE!(1);
     break;
     }
     release_probes(tp, old);
@@ -373,23 +643,26 @@ unsafe extern "C" fn tracepoint_update_call(tp: *mut tracepoint, tp_funcs: *mut 
 // function insures that the original callback is not used anymore. This insured
 // by preempt_disable around the call site.
 //
-    static int tracepoint_remove_func(struct tracepoint *tp,
-    struct tracepoint_func *func)
-    {
-    struct tracepoint_func *old, *tp_funcs;
+#[no_mangle]
+pub unsafe extern "C" fn tracepoint_remove_func(tp: *mut tracepoint, func: *mut tracepoint_func) -> c_int {
+    let mut old = core::ptr::null_mut();
+    let mut tp_funcs = core::ptr::null_mut();
     tp_funcs = rcu_dereference_protected(tp.funcs,
     lockdep_is_held(&tracepoints_mutex));
     old = func_remove(&tp_funcs, func);
-    if (WARN_ON_ONCE(IS_ERR(old)))
+    if (WARN_ON_ONCE!(IS_ERR(old))) {
     return PTR_ERR(old);
-    if (tp_funcs == old)
+    }
+    if (tp_funcs == old) {
 // Failed allocating new tp_funcs, replaced func with stub
     return 0;
+    }
     switch (nr_func_state(tp_funcs)) {
     case TP_FUNC_0:		/* 1.0 */
 // Removed last function
-    if (tp.ext && tp.ext.unregfunc && static_key_enabled(&tp.key))
+    if (tp.ext && tp.ext.unregfunc && static_key_enabled(&tp.key)) {
     tp.ext.unregfunc();
+    }
     static_branch_disable(&tp.key);
 // Set iterator static call
     tracepoint_update_call(tp, tp_funcs);
@@ -410,8 +683,9 @@ unsafe extern "C" fn tracepoint_update_call(tp: *mut tracepoint, tp_funcs: *mut 
 // to prevent current readers that have loaded the old data
 // from calling the new function.
 //
-    if (tp_funcs[0].data != old[0].data)
+    if (tp_funcs[0].data != old[0].data) {
     tp_rcu_get_state(TP_TRANSITION_SYNC_N_2_1);
+    }
     tp_rcu_cond_sync(TP_TRANSITION_SYNC_N_2_1);
 // Set static call to first function
     tracepoint_update_call(tp, tp_funcs);
@@ -424,11 +698,12 @@ unsafe extern "C" fn tracepoint_update_call(tp: *mut tracepoint, tp_funcs: *mut 
 // Make sure static func never uses incorrect data after a
 // N->...->2->1 (N>2) transition sequence.
 //
-    if (tp_funcs[0].data != old[0].data)
+    if (tp_funcs[0].data != old[0].data) {
     tp_rcu_get_state(TP_TRANSITION_SYNC_N_2_1);
+    }
     break;
-    default:
-    WARN_ON_ONCE(1);
+// label;
+    WARN_ON_ONCE!(1);
     break;
     }
     release_probes(tp, old);
@@ -444,11 +719,10 @@ unsafe extern "C" fn tracepoint_update_call(tp: *mut tracepoint, tp_funcs: *mut 
 // Same as tracepoint_probe_register_prio() except that it will not warn
 // if the tracepoint is already registered.
 //
-    int tracepoint_probe_register_prio_may_exist(struct tracepoint *tp, void *probe,
-    void *data, int prio)
-    {
-    struct tracepoint_func tp_func;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn tracepoint_probe_register_prio_may_exist(tp: *mut tracepoint, probe: *mut c_void, data: *mut c_void, prio: c_int) -> c_int {
+pub static mut tp_func: usize = 0;
+    let mut ret = 0;
     mutex_lock(&tracepoints_mutex);
     tp_func.func = probe;
     tp_func.data = data;
@@ -471,11 +745,10 @@ unsafe extern "C" fn tracepoint_update_call(tp: *mut tracepoint, tp_funcs: *mut 
 // performed either with a tracepoint module going notifier, or from
 // within module exit functions.
 //
-    int tracepoint_probe_register_prio(struct tracepoint *tp, void *probe,
-    void *data, int prio)
-    {
-    struct tracepoint_func tp_func;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn tracepoint_probe_register_prio(tp: *mut tracepoint, probe: *mut c_void, data: *mut c_void, prio: c_int) -> c_int {
+pub static mut tp_func: usize = 0;
+    let mut ret = 0;
     mutex_lock(&tracepoints_mutex);
     tp_func.func = probe;
     tp_func.data = data;
@@ -512,8 +785,8 @@ pub unsafe extern "C" fn tracepoint_probe_register(tp: *mut tracepoint, probe: *
 //
 #[no_mangle]
 pub unsafe extern "C" fn tracepoint_probe_unregister(tp: *mut tracepoint, probe: *mut c_void, data: *mut c_void) -> c_int {
-    struct tracepoint_func tp_func;
-    int ret;
+pub static mut tp_func: usize = 0;
+    let mut ret = 0;
     mutex_lock(&tracepoints_mutex);
     tp_func.func = probe;
     tp_func.data = data;
@@ -522,16 +795,15 @@ pub unsafe extern "C" fn tracepoint_probe_unregister(tp: *mut tracepoint, probe:
     return ret;
     }
     EXPORT_SYMBOL_GPL(tracepoint_probe_unregister);
-    static void for_each_tracepoint_range(
-    tracepoint_ptr_t *begin, tracepoint_ptr_t *end,
-    void (*fct)(struct tracepoint *tp, void *priv),
-    void *priv)
-    {
-    tracepoint_ptr_t *iter;
-    if (!begin)
+#[no_mangle]
+pub unsafe extern "C" fn for_each_tracepoint_range(begin: *mut tracepoint_ptr_t, end: *mut tracepoint_ptr_t, tp: *mut *mut c_void (fct)( tracepoint, priv: *mut c_void) {
+pub static mut iter: *mut c_void = core::ptr::null_mut();
+    if (!begin) {
     return;
-    for (iter = begin; iter < end; iter++)
+    }
+    for (iter = begin; iter < end; iter++) {
     fct(tracepoint_ptr_deref(iter), priv);
+    }
     }
 
 #[no_mangle]
@@ -552,15 +824,17 @@ pub unsafe extern "C" fn trace_module_has_bad_taint(mod: *mut module) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn register_tracepoint_module_notifier(nb: *mut notifier_block) -> c_int {
-    struct tp_module *tp_mod;
-    int ret;
+pub static mut tp_mod: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     mutex_lock(&tracepoint_module_list_mutex);
     ret = blocking_notifier_chain_register(&tracepoint_notify_list, nb);
-    if (ret)
-    goto end;
-    list_for_each_entry(tp_mod, &tracepoint_module_list, list)
+    if (ret) {
+// goto;
+    }
+    list_for_each_entry(tp_mod, &tracepoint_module_list, list) {
     (void) nb.notifier_call(nb, MODULE_STATE_COMING, tp_mod);
-    end:
+    }
+// label;
     mutex_unlock(&tracepoint_module_list_mutex);
     return ret;
     }
@@ -574,15 +848,17 @@ pub unsafe extern "C" fn register_tracepoint_module_notifier(nb: *mut notifier_b
 //
 #[no_mangle]
 pub unsafe extern "C" fn unregister_tracepoint_module_notifier(nb: *mut notifier_block) -> c_int {
-    struct tp_module *tp_mod;
-    int ret;
+pub static mut tp_mod: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     mutex_lock(&tracepoint_module_list_mutex);
     ret = blocking_notifier_chain_unregister(&tracepoint_notify_list, nb);
-    if (ret)
-    goto end;
-    list_for_each_entry(tp_mod, &tracepoint_module_list, list)
+    if (ret) {
+// goto;
+    }
+    list_for_each_entry(tp_mod, &tracepoint_module_list, list) {
     (void) nb.notifier_call(nb, MODULE_STATE_GOING, tp_mod);
-    end:
+    }
+// label;
     mutex_unlock(&tracepoint_module_list_mutex);
     return ret;
     }
@@ -593,23 +869,26 @@ pub unsafe extern "C" fn unregister_tracepoint_module_notifier(nb: *mut notifier
 //
 #[no_mangle]
 unsafe extern "C" fn tp_module_going_check_quiescent(tp: *mut tracepoint, priv: *mut c_void) {
-    WARN_ON_ONCE(tp.funcs);
+    WARN_ON_ONCE!(tp.funcs);
     }
 #[no_mangle]
 unsafe extern "C" fn tracepoint_module_coming(mod: *mut module) -> c_int {
-    struct tp_module *tp_mod;
-    if (!mod.num_tracepoints)
+pub static mut tp_mod: *mut c_void = core::ptr::null_mut();
+    if (!mod.num_tracepoints) {
     return 0;
+    }
 //
 // We skip modules that taint the kernel, especially those with different
 // module headers (for forced load), to make sure we don't cause a crash.
 // Staging, out-of-tree, unsigned GPL, and test modules are fine.
 //
-    if (trace_module_has_bad_taint(mod))
+    if (trace_module_has_bad_taint(mod)) {
     return 0;
-    tp_mod = kmalloc_obj(struct tp_module);
-    if (!tp_mod)
+    }
+    tp_mod = kmalloc_obj(tp_module);
+    if (!tp_mod) {
     return -ENOMEM;
+    }
     tp_mod.mod = mod;
     mutex_lock(&tracepoint_module_list_mutex);
     list_add_tail(&tp_mod.list, &tracepoint_module_list);
@@ -620,9 +899,10 @@ unsafe extern "C" fn tracepoint_module_coming(mod: *mut module) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn tracepoint_module_going(mod: *mut module) {
-    struct tp_module *tp_mod;
-    if (!mod.num_tracepoints)
+pub static mut tp_mod: *mut c_void = core::ptr::null_mut();
+    if (!mod.num_tracepoints) {
     return;
+    }
     mutex_lock(&tracepoint_module_list_mutex);
     list_for_each_entry(tp_mod, &tracepoint_module_list, list) {
     if (tp_mod.mod == mod) {
@@ -636,8 +916,9 @@ unsafe extern "C" fn tracepoint_module_going(mod: *mut module) {
 //
     for_each_tracepoint_range(mod.tracepoints_ptrs,
     mod.tracepoints_ptrs + mod.num_tracepoints,
-    tp_module_going_check_quiescent, core::ptr::null_mut());
+    tp_module_going_check_quiescent, core::ptr::null_mut()); {
     break;
+    }
     }
     }
 //
@@ -648,71 +929,72 @@ unsafe extern "C" fn tracepoint_module_going(mod: *mut module) {
 //
     mutex_unlock(&tracepoint_module_list_mutex);
     }
-    static int tracepoint_module_notify(struct notifier_block *self,
-    unsigned long val, void *data)
-    {
-    struct module *mod = data;
-    let mut ret: c_int = 0;
-    switch (val) {
-    case MODULE_STATE_COMING:
+#[no_mangle]
+pub unsafe extern "C" fn tracepoint_module_notify(self: *mut notifier_block, val: c_ulong, data: *mut c_void) -> c_int {
+    let mut mod = data;
+pub static mut ret: c_int = 0;
+    match (val) {
+    MODULE_STATE_COMING => {
     ret = tracepoint_module_coming(mod);
-    break;
-    case MODULE_STATE_LIVE:
-    break;
-    case MODULE_STATE_GOING:
+    // break;
+    }
+    MODULE_STATE_LIVE => {
+    // break;
+    }
+    MODULE_STATE_GOING => {
     tracepoint_module_going(mod);
-    break;
-    case MODULE_STATE_UNFORMED:
-    break;
+    // break;
+    }
+    MODULE_STATE_UNFORMED => {
+    // break;
+    }
     }
     return notifier_from_errno(ret);
     }
-    static struct notifier_block tracepoint_module_nb = {
-    .notifier_call = tracepoint_module_notify,
-    .priority = 0,
-    };
+pub static mut notifier_block: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn init_tracepoints() -> __init int {
-    int ret;
+    let mut ret = 0;
     ret = register_module_notifier(&tracepoint_module_nb);
-    if (ret)
-    pr_warn("Failed to register tracepoint module enter notifier\n");
+    if (ret) {
+    pr_warn!("Failed to register tracepoint module enter notifier\n");
+    }
     return ret;
     }
-    __initcall(init_tracepoints);
+    __initcall!(init_tracepoints);
 //
 // for_each_tracepoint_in_module - iteration on all tracepoints in a module
 // @mod: module
 // @fct: callback
 // @priv: private data
 //
-    void for_each_tracepoint_in_module(struct module *mod,
-    void (*fct)(struct tracepoint *tp,
-    struct module *mod, void *priv),
-    void *priv)
-    {
-    tracepoint_ptr_t *begin, *end, *iter;
+#[no_mangle]
+pub unsafe extern "C" fn for_each_tracepoint_in_module(mod: *mut module, tp: *mut *mut c_void (fct)( tracepoint, mod: *mut module, priv: *mut c_void) {
+    let mut begin = core::ptr::null_mut();
+    let mut end = core::ptr::null_mut();
+    let mut iter = core::ptr::null_mut();
     lockdep_assert_held(&tracepoint_module_list_mutex);
-    if (!mod)
+    if (!mod) {
     return;
+    }
     begin = mod.tracepoints_ptrs;
     end = mod.tracepoints_ptrs + mod.num_tracepoints;
-    for (iter = begin; iter < end; iter++)
+    for (iter = begin; iter < end; iter++) {
     fct(tracepoint_ptr_deref(iter), mod, priv);
+    }
     }
 //
 // for_each_module_tracepoint - iteration on all tracepoints in all modules
 // @fct: callback
 // @priv: private data
 //
-    void for_each_module_tracepoint(void (*fct)(struct tracepoint *tp,
-    struct module *mod, void *priv),
-    void *priv)
-    {
-    struct tp_module *tp_mod;
+#[no_mangle]
+pub unsafe extern "C" fn for_each_module_tracepoint(tp: *mut *mut c_void (fct)( tracepoint, mod: *mut module, priv: *mut c_void) {
+pub static mut tp_mod: *mut c_void = core::ptr::null_mut();
     mutex_lock(&tracepoint_module_list_mutex);
-    list_for_each_entry(tp_mod, &tracepoint_module_list, list)
+    list_for_each_entry(tp_mod, &tracepoint_module_list, list) {
     for_each_tracepoint_in_module(tp_mod.mod, fct, priv);
+    }
     mutex_unlock(&tracepoint_module_list_mutex);
     }
 
@@ -721,19 +1003,20 @@ unsafe extern "C" fn init_tracepoints() -> __init int {
 // @fct: callback
 // @priv: private data
 //
-    void for_each_kernel_tracepoint(void (*fct)(struct tracepoint *tp, void *priv),
-    void *priv)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn for_each_kernel_tracepoint(tp: *mut *mut c_void (fct)( tracepoint, priv: *mut c_void) {
     for_each_tracepoint_range(__start___tracepoints_ptrs,
-    __stop___tracepoints_ptrs, fct, priv);
+    __stop___tracepoints_ptrs, fct, priv); {
     }
     EXPORT_SYMBOL_GPL(for_each_kernel_tracepoint);
+    }
 
 // NB: reg/unreg are called while guarded with the tracepoints_mutex
     static int sys_tracepoint_refcount;
 #[no_mangle]
 pub unsafe extern "C" fn syscall_regfunc() -> c_int {
-    struct task_struct *p, *t;
+    let mut p = core::ptr::null_mut();
+    let mut t = core::ptr::null_mut();
     if (!sys_tracepoint_refcount) {
     read_lock(&tasklist_lock);
     for_each_process_thread(p, t) {
@@ -741,13 +1024,14 @@ pub unsafe extern "C" fn syscall_regfunc() -> c_int {
     }
     read_unlock(&tasklist_lock);
     }
-    sys_tracepoint_refcount++;
+    sys_tracepoint_refcount += 1;
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn syscall_unregfunc() {
-    struct task_struct *p, *t;
-    sys_tracepoint_refcount--;
+    let mut p = core::ptr::null_mut();
+    let mut t = core::ptr::null_mut();
+    sys_tracepoint_refcount -= 1;
     if (!sys_tracepoint_refcount) {
     read_lock(&tasklist_lock);
     for_each_process_thread(p, t) {

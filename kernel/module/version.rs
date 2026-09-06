@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -43,66 +293,66 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Copyright (C) 2008 Rusty Russell
 //
 
-    int check_version(const struct load_info *info,
-    const char *symname,
-    struct module *mod,
-    const u32 *crc)
-    {
-    Elf_Shdr *sechdrs = info.sechdrs;
-    let mut versindex: c_uint = info.index.vers;
-    unsigned int i, num_versions;
-    struct modversion_info *versions;
-    struct modversion_info_ext version_ext;
+#[no_mangle]
+pub unsafe extern "C" fn check_version(info: *mut load_info, symname: *mut c_char, mod: *mut module, crc: *mut u32) -> c_int {
+    let mut sechdrs = info.sechdrs;
+pub static mut versindex: c_uint = 0;
+    let mut i = 0;
+    let mut num_versions = 0;
+pub static mut versions: *mut c_void = core::ptr::null_mut();
+pub static mut version_ext: usize = 0;
 // Exporting module didn't supply crcs?  OK, we're already tainted.
-    if (!crc)
+    if (!crc) {
     return 1;
+    }
 // If we have extended version info, rely on it
     if (info.index.vers_ext_crc) {
     for_each_modversion_info_ext(version_ext, info) {
-    if (strcmp(version_ext.name, symname) != 0)
+    if (strcmp(version_ext.name, symname) != 0) {
     continue;
-    if (*version_ext.crc == *crc)
+    }
+    if (*version_ext.crc == *crc) {
     return 1;
-    pr_debug("Found checksum %X vs module %X\n",
+    }
+    pr_debug!("Found checksum %X vs module %X\n",
 // crc, *version_ext.crc);
-    goto bad_version;
+// goto;
     }
     pr_warn_once("%s: no extended symbol version for %s\n",
     info.name, symname);
     return 1;
     }
 // No versions at all?  modprobe --force does this.
-    if (versindex == 0)
+    if (versindex == 0) {
     return try_to_force_load(mod, symname) == 0;
-    versions = (void *)sechdrs[versindex].sh_addr;
+    }
+    versions = sechdrs[versindex].sh_addr;
     num_versions = sechdrs[versindex].sh_size
-    / sizeof(struct modversion_info);
-    for (i = 0; i < num_versions; i++) {
-    u32 crcval;
-    if (strcmp(versions[i].name, symname) != 0)
+    / sizeof!(modversion_info);
+    while (i < num_versions) {
+    let mut crcval = 0;
+    if (strcmp(versions[i].name, symname) != 0) {
     continue;
+    }
     crcval = *crc;
-    if (versions[i].crc == crcval)
+    if (versions[i].crc == crcval) {
     return 1;
-    pr_debug("Found checksum %X vs module %lX\n",
+    }
+    pr_debug!("Found checksum %X vs module %lX\n",
     crcval, versions[i].crc);
-    goto bad_version;
+// goto;
     }
 // Broken toolchain. Warn once, then let it go..
     pr_warn_once("%s: no symbol version for %s\n", info.name, symname);
     return 1;
-    bad_version:
-    pr_warn("%s: disagrees about version of symbol %s\n", info.name, symname);
+// label;
+    pr_warn!("%s: disagrees about version of symbol %s\n", info.name, symname);
     return 0;
     }
-    int check_modstruct_version(const struct load_info *info,
-    struct module *mod)
-    {
-    struct find_symbol_arg fsa = {
-    .name	= "module_layout",
-    .gplok	= true,
-    };
-    bool have_symbol;
+#[no_mangle]
+pub unsafe extern "C" fn check_modstruct_version(info: *mut load_info, mod: *mut module) -> c_int {
+pub static mut find_symbol_arg: usize = 0;
+    let mut have_symbol = 0;
 //
 // Since this should be found in kernel (which can't be removed), no
 // locking is necessary. Regardless use a RCU read section to keep
@@ -110,25 +360,23 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
     scoped_guard(rcu)
     have_symbol = find_symbol(&fsa);
-    BUG_ON(!have_symbol);
+    BUG_ON!(!have_symbol);
     return check_version(info, "module_layout", mod, fsa.crc);
     }
 // First part is kernel version, which we ignore if module has crcs.
-    int same_magic(const char *amagic, const char *bmagic,
-    bool has_crcs)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn same_magic(amagic: *mut c_char, bmagic: *mut c_char, has_crcs: bool) -> c_int {
     if (has_crcs) {
     amagic += strcspn(amagic, " ");
     bmagic += strcspn(bmagic, " ");
     }
     return strcmp(amagic, bmagic) == 0;
     }
-    void modversion_ext_start(const struct load_info *info,
-    struct modversion_info_ext *start)
-    {
-    let mut crc_idx: c_uint = info.index.vers_ext_crc;
-    let mut name_idx: c_uint = info.index.vers_ext_name;
-    Elf_Shdr *sechdrs = info.sechdrs;
+#[no_mangle]
+pub unsafe extern "C" fn modversion_ext_start(info: *mut load_info, start: *mut modversion_info_ext) {
+pub static mut crc_idx: c_uint = 0;
+pub static mut name_idx: c_uint = 0;
+    let mut sechdrs = info.sechdrs;
 //
 // Both of these fields are needed for this to be useful
 // Any future fields should be initialized to NULL if absent.
@@ -137,27 +385,21 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     start.remaining = 0;
     return;
     }
-    start.crc = (const u32 *)sechdrs[crc_idx].sh_addr;
-    start.name = (const char *)sechdrs[name_idx].sh_addr;
-    start.remaining = sechdrs[crc_idx].sh_size / sizeof(*start.crc);
+    start.crc = sechdrs[crc_idx].sh_addr;
+    start.name = sechdrs[name_idx].sh_addr;
+    start.remaining = sechdrs[crc_idx].sh_size / sizeof!(*start.crc);
     }
 #[no_mangle]
 pub unsafe extern "C" fn modversion_ext_advance(vers: *mut modversion_info_ext) {
-    void modversion_ext_advance(struct modversion_info_ext *vers)
-    {
-    vers.remaining--;
-    vers.crc++;
+    vers.remaining -= 1;
+    vers.crc += 1;
     vers.name += strlen(vers.name) + 1;
     }
 //
 // Generate the signature for all relevant module structures here.
 // If these change, we don't want to try to parse the module.
 //
-    void module_layout(struct module *mod,
-    struct modversion_info *ver,
-    struct kernel_param *kp,
-    struct kernel_symbol *ks,
-    struct tracepoint * const *tp)
+    void module_layout!(module *mod, modversion_info *ver, kernel_param *kp, kernel_symbol *ks, tracepoint * const *tp)
     {
     }
     EXPORT_SYMBOL(module_layout);

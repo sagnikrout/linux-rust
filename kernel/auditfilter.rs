@@ -34,6 +34,216 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
 macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
@@ -154,55 +364,56 @@ pub type atomic_long_t = core::sync::atomic::AtomicI64;
 // be written directly provided audit_filter_mutex is held.
 //
 // Audit filter lists, defined in <linux/audit.h>
-    struct list_head audit_filter_list[AUDIT_NR_FILTERS] = {
-    LIST_HEAD_INIT(audit_filter_list[0]),
-    LIST_HEAD_INIT(audit_filter_list[1]),
-    LIST_HEAD_INIT(audit_filter_list[2]),
-    LIST_HEAD_INIT(audit_filter_list[3]),
-    LIST_HEAD_INIT(audit_filter_list[4]),
-    LIST_HEAD_INIT(audit_filter_list[5]),
-    LIST_HEAD_INIT(audit_filter_list[6]),
-    LIST_HEAD_INIT(audit_filter_list[7]),
-
-    };
+pub static mut list_head: usize = 0;
 pub static mut list_head: usize = 0;
 // DEFINE_MUTEX;
 #[no_mangle]
 unsafe extern "C" fn audit_free_lsm_field(f: *mut audit_field) {
     match (f.type) {
     AUDIT_SUBJ_USER => {
+    }
     AUDIT_SUBJ_ROLE => {
+    }
     AUDIT_SUBJ_TYPE => {
+    }
     AUDIT_SUBJ_SEN => {
+    }
     AUDIT_SUBJ_CLR => {
+    }
     AUDIT_OBJ_USER => {
+    }
     AUDIT_OBJ_ROLE => {
+    }
     AUDIT_OBJ_TYPE => {
+    }
     AUDIT_OBJ_LEV_LOW => {
+    }
     AUDIT_OBJ_LEV_HIGH => {
     kfree(f.lsm_str);
     security_audit_rule_free(f.lsm_rule);
     }
     }
+    }
 #[no_mangle]
 pub unsafe extern "C" fn audit_free_rule(e: *mut audit_entry) {
     let mut i = 0;
-    struct audit_krule *erule = &e.rule;
+    let mut erule = &e.rule;
 // some rules don't have associated watches
     if (erule.watch) {
     audit_put_watch(erule.watch);
     }
     if (erule.fields) {
-    for (i = 0; i < erule.field_count; i++)
+    for (i = 0; i < erule.field_count; i++) {
     }
     audit_free_lsm_field(&erule.fields[i]);
+    }
     kfree(erule.fields);
     kfree(erule.filterkey);
     kfree(e);
     }
 #[no_mangle]
 pub unsafe extern "C" fn audit_free_rule_rcu(head: *mut rcu_head) {
-    struct audit_entry *e = container_of(head, struct audit_entry, rcu);
+    let mut e = container_of!(head, audit_entry, rcu);
     audit_free_rule(e);
     }
 // Initialize an audit filterlist entry.
@@ -252,20 +463,21 @@ pub unsafe extern "C" fn audit_to_inode() {
     if ((krule.listnr != AUDIT_FILTER_EXIT &&
     krule.listnr != AUDIT_FILTER_URING_EXIT) ||
     krule.inode_f || krule.watch || krule.tree ||
-    (f.op != Audit_equal && f.op != Audit_not_equal))
+    (f.op != Audit_equal && f.op != Audit_not_equal)) {
     return -EINVAL;
+    }
     krule.inode_f = f;
     return 0;
     }
     static __u32 *classes[AUDIT_SYSCALL_CLASSES];
 #[no_mangle]
 pub unsafe extern "C" fn audit_register_class(class: c_int, list: *mut c_uint) -> c_int {
-    __u32 *p = kcalloc(AUDIT_BITMASK_SIZE, sizeof(__u32), GFP_KERNEL);
+    let mut p = kcalloc(AUDIT_BITMASK_SIZE, sizeof!(__u32), GFP_KERNEL);
     if (!p) {
     return -ENOMEM;
     }
     while (*list != ~0U) {
-pub static mut n: c_uint = *list++;
+pub static mut n: c_uint = 0;
     if (n >= AUDIT_BITMASK_SIZE * 32 - AUDIT_SYSCALL_CLASSES) {
     kfree(p);
     return -EINVAL;
@@ -294,8 +506,9 @@ pub unsafe extern "C" fn audit_match_class(class: c_int, syscall: c_uint) -> c_i
 pub unsafe extern "C" fn audit_match_class_bits(class: c_int, mask: *mut u32) -> c_int {
     let mut i = 0;
     if (classes[class]) {
-    for (i = 0; i < AUDIT_BITMASK_SIZE; i++)
+    for (i = 0; i < AUDIT_BITMASK_SIZE; i++) {
     if (mask[i] & classes[class][i]) {
+    }
     return 0;
     }
     }
@@ -303,7 +516,7 @@ pub unsafe extern "C" fn audit_match_class_bits(class: c_int, mask: *mut u32) ->
     }
 #[no_mangle]
 unsafe extern "C" fn audit_match_signal(entry: *mut audit_entry) -> c_int {
-    struct audit_field *arch = entry.rule.arch_f;
+    let mut arch = entry.rule.arch_f;
     if (!arch) {
 // When arch is unspecified, we must check both masks on biarch
 // as syscall number alone is ambiguous.
@@ -329,49 +542,59 @@ unsafe extern "C" fn audit_match_signal(entry: *mut audit_entry) -> c_int {
 pub unsafe extern "C" fn audit_to_entry_common() {
     let mut listnr = 0;
     let mut entry = core::ptr::null_mut();
-    int i, err;
+    let mut i = 0;
+    let mut err = 0;
     err = -EINVAL;
     listnr = rule.flags & ~AUDIT_FILTER_PREPEND;
     match (listnr) {
     _ => {
-    goto exit_err;
+// goto;
 
+    }
     AUDIT_FILTER_ENTRY => {
-    pr_err("AUDIT_FILTER_ENTRY is deprecated\n");
-    goto exit_err;
+    pr_err!("AUDIT_FILTER_ENTRY is deprecated\n");
+// goto;
+    }
     AUDIT_FILTER_EXIT => {
+    }
     AUDIT_FILTER_URING_EXIT => {
+    }
     AUDIT_FILTER_TASK => {
 
+    }
     AUDIT_FILTER_USER => {
+    }
     AUDIT_FILTER_EXCLUDE => {
+    }
     AUDIT_FILTER_FS => {
     ;
     }
+    }
     if (unlikely(rule.action == AUDIT_POSSIBLE)) {
-    pr_err("AUDIT_POSSIBLE is deprecated\n");
-    goto exit_err;
+    pr_err!("AUDIT_POSSIBLE is deprecated\n");
+// goto;
     }
     if (rule.action != AUDIT_NEVER && rule.action != AUDIT_ALWAYS) {
-    goto exit_err;
+// goto;
     }
     if (rule.field_count > AUDIT_MAX_FIELDS) {
-    goto exit_err;
+// goto;
     }
     err = -ENOMEM;
     entry = audit_init_entry(rule.field_count);
     if (!entry) {
-    goto exit_err;
+// goto;
     }
     entry.rule.flags = rule.flags & AUDIT_FILTER_PREPEND;
     entry.rule.listnr = listnr;
     entry.rule.action = rule.action;
     entry.rule.field_count = rule.field_count;
-    for (i = 0; i < AUDIT_BITMASK_SIZE; i++)
+    for (i = 0; i < AUDIT_BITMASK_SIZE; i++) {
     entry.rule.mask[i] = rule.mask[i];
-    for (i = 0; i < AUDIT_SYSCALL_CLASSES; i++) {
-pub static mut bit: c_int = AUDIT_BITMASK_SIZE * 32 - i - 1;
-    __u32 *p = &entry.rule.mask[AUDIT_WORD(bit)];
+    }
+    while (i < AUDIT_SYSCALL_CLASSES) {
+pub static mut bit: c_int = 0;
+    let mut p = &entry.rule.mask[AUDIT_WORD(bit)];
     let mut class = core::ptr::null_mut();
     if (!(*p & AUDIT_BIT(bit))) {
     continue;
@@ -380,12 +603,13 @@ pub static mut bit: c_int = AUDIT_BITMASK_SIZE * 32 - i - 1;
     class = classes[i];
     if (class) {
     let mut j = 0;
-    for (j = 0; j < AUDIT_BITMASK_SIZE; j++)
+    for (j = 0; j < AUDIT_BITMASK_SIZE; j++) {
     entry.rule.mask[j] |= class[j];
     }
     }
+    }
     return entry;
-    exit_err:
+// label;
     return ERR_PTR(err);
     }
     static u32 audit_ops[] = {
@@ -401,8 +625,9 @@ pub static mut bit: c_int = AUDIT_BITMASK_SIZE * 32 - i - 1;
 #[no_mangle]
 unsafe extern "C" fn audit_to_op(op: u32) -> u32 {
     let mut n = 0;
-    for (n = Audit_equal; n < Audit_bad && audit_ops[n] != op; n++)
+    for (n = Audit_equal; n < Audit_bad && audit_ops[n] != op; n++) {
     ;
+    }
     return n;
     }
 // check if an audit field is valid
@@ -411,93 +636,147 @@ unsafe extern "C" fn audit_field_valid(entry: *mut audit_entry, f: *mut audit_fi
     match (f.type) {
     AUDIT_MSGTYPE => {
     if (entry.rule.listnr != AUDIT_FILTER_EXCLUDE &&
-    entry.rule.listnr != AUDIT_FILTER_USER)
+    entry.rule.listnr != AUDIT_FILTER_USER) {
     return -EINVAL;
-    break;
+    }
+    // break;
+    }
     AUDIT_FSTYPE => {
     if (entry.rule.listnr != AUDIT_FILTER_FS) {
     return -EINVAL;
     }
-    break;
+    // break;
+    }
     AUDIT_PERM => {
     if (entry.rule.listnr == AUDIT_FILTER_URING_EXIT) {
     return -EINVAL;
     }
-    break;
+    // break;
+    }
     }
     match (entry.rule.listnr) {
     AUDIT_FILTER_FS => {
     match (f.type) {
     AUDIT_FSTYPE => {
+    }
     AUDIT_FILTERKEY => {
-    break;
+    // break;
+    }
     _ => {
     return -EINVAL;
+    }
     }
     }
 // Check for valid field type and op
     match (f.type) {
     AUDIT_ARG0 => {
+    }
     AUDIT_ARG1 => {
+    }
     AUDIT_ARG2 => {
+    }
     AUDIT_ARG3 => {
-    AUDIT_PERS => { /* <uapi/linux/personality.h> */
+    }
+    AUDIT_PERS => {
+    }
     AUDIT_DEVMINOR => {
 // all ops are valid
-    break;
+    // break;
+    }
     AUDIT_UID => {
+    }
     AUDIT_EUID => {
+    }
     AUDIT_SUID => {
+    }
     AUDIT_FSUID => {
+    }
     AUDIT_LOGINUID => {
+    }
     AUDIT_OBJ_UID => {
+    }
     AUDIT_GID => {
+    }
     AUDIT_EGID => {
+    }
     AUDIT_SGID => {
+    }
     AUDIT_FSGID => {
+    }
     AUDIT_OBJ_GID => {
+    }
     AUDIT_PID => {
+    }
     AUDIT_MSGTYPE => {
+    }
     AUDIT_PPID => {
+    }
     AUDIT_DEVMAJOR => {
+    }
     AUDIT_EXIT => {
+    }
     AUDIT_SUCCESS => {
+    }
     AUDIT_INODE => {
+    }
     AUDIT_SESSIONID => {
+    }
     AUDIT_SUBJ_SEN => {
+    }
     AUDIT_SUBJ_CLR => {
+    }
     AUDIT_OBJ_LEV_LOW => {
+    }
     AUDIT_OBJ_LEV_HIGH => {
+    }
     AUDIT_SADDR_FAM => {
 // bit ops are only useful on syscall args
     if (f.op == Audit_bitmask || f.op == Audit_bittest) {
     return -EINVAL;
     }
-    break;
+    // break;
+    }
     AUDIT_SUBJ_USER => {
+    }
     AUDIT_SUBJ_ROLE => {
+    }
     AUDIT_SUBJ_TYPE => {
+    }
     AUDIT_OBJ_USER => {
+    }
     AUDIT_OBJ_ROLE => {
+    }
     AUDIT_OBJ_TYPE => {
+    }
     AUDIT_WATCH => {
+    }
     AUDIT_DIR => {
+    }
     AUDIT_FILTERKEY => {
+    }
     AUDIT_LOGINUID_SET => {
+    }
     AUDIT_ARCH => {
+    }
     AUDIT_FSTYPE => {
+    }
     AUDIT_PERM => {
+    }
     AUDIT_FILETYPE => {
+    }
     AUDIT_FIELD_COMPARE => {
+    }
     AUDIT_EXE => {
 // only equal and not equal valid ops
     if (f.op != Audit_not_equal && f.op != Audit_equal) {
     return -EINVAL;
     }
-    break;
+    // break;
+    }
     _ => {
 // field not recognized
     return -EINVAL;
+    }
     }
 // Check for select valid field values
     match (f.type) {
@@ -505,29 +784,35 @@ unsafe extern "C" fn audit_field_valid(entry: *mut audit_entry, f: *mut audit_fi
     if ((f.val != 0) && (f.val != 1)) {
     return -EINVAL;
     }
-    break;
+    // break;
+    }
     AUDIT_PERM => {
     if (f.val & ~15) {
     return -EINVAL;
     }
-    break;
+    // break;
+    }
     AUDIT_FILETYPE => {
     if (f.val & ~S_IFMT) {
     return -EINVAL;
     }
-    break;
+    // break;
+    }
     AUDIT_FIELD_COMPARE => {
     if (f.val > AUDIT_MAX_FIELD_COMPARE) {
     return -EINVAL;
     }
-    break;
+    // break;
+    }
     AUDIT_SADDR_FAM => {
     if (f.val >= AF_MAX) {
     return -EINVAL;
     }
-    break;
+    // break;
+    }
     _ => {
-    break;
+    // break;
+    }
     }
     return 0;
     }
@@ -537,22 +822,22 @@ pub unsafe extern "C" fn audit_data_to_entry() {
 pub static mut err: c_int = 0;
     let mut entry = core::ptr::null_mut();
     let mut bufp = core::ptr::null_mut();
-pub static mut remain: usize = datasz - sizeof(struct audit_rule_data);
+pub static mut remain: usize = 0;
     let mut i = 0;
     let mut str = core::ptr::null_mut();
     let mut audit_mark = core::ptr::null_mut();
     entry = audit_to_entry_common(data);
     if (IS_ERR(entry)) {
-    goto exit_nofree;
+// goto;
     }
     bufp = data.buf;
-    for (i = 0; i < data.field_count; i++) {
-    struct audit_field *f = &entry.rule.fields[i];
+    while (i < data.field_count) {
+    let mut f = &entry.rule.fields[i];
     let mut f_val = 0;
     err = -EINVAL;
     f.op = audit_to_op(data.fieldflags[i]);
     if (f.op == Audit_bad) {
-    goto exit_free;
+// goto;
     }
     f.type = data.fields[i];
     f_val = data.values[i];
@@ -564,49 +849,70 @@ pub static mut remain: usize = datasz - sizeof(struct audit_rule_data);
     }
     err = audit_field_valid(entry, f);
     if (err) {
-    goto exit_free;
+// goto;
     }
     err = -EINVAL;
     match (f.type) {
     AUDIT_LOGINUID => {
+    }
     AUDIT_UID => {
+    }
     AUDIT_EUID => {
+    }
     AUDIT_SUID => {
+    }
     AUDIT_FSUID => {
+    }
     AUDIT_OBJ_UID => {
     f.uid = make_kuid(current_user_ns(), f_val);
     if (!uid_valid(f.uid)) {
-    goto exit_free;
+// goto;
     }
-    break;
+    // break;
+    }
     AUDIT_GID => {
+    }
     AUDIT_EGID => {
+    }
     AUDIT_SGID => {
+    }
     AUDIT_FSGID => {
+    }
     AUDIT_OBJ_GID => {
     f.gid = make_kgid(current_user_ns(), f_val);
     if (!gid_valid(f.gid)) {
-    goto exit_free;
+// goto;
     }
-    break;
+    // break;
+    }
     AUDIT_ARCH => {
     f.val = f_val;
     entry.rule.arch_f = f;
-    break;
+    // break;
+    }
     AUDIT_SUBJ_USER => {
+    }
     AUDIT_SUBJ_ROLE => {
+    }
     AUDIT_SUBJ_TYPE => {
+    }
     AUDIT_SUBJ_SEN => {
+    }
     AUDIT_SUBJ_CLR => {
+    }
     AUDIT_OBJ_USER => {
+    }
     AUDIT_OBJ_ROLE => {
+    }
     AUDIT_OBJ_TYPE => {
+    }
     AUDIT_OBJ_LEV_LOW => {
+    }
     AUDIT_OBJ_LEV_HIGH => {
     str = audit_unpack_string(&bufp, &remain, f_val);
     if (IS_ERR(str)) {
     err = PTR_ERR(str);
-    goto exit_free;
+// goto;
     }
     entry.rule.buflen += f_val;
     f.lsm_str = str;
@@ -616,86 +922,94 @@ pub static mut remain: usize = datasz - sizeof(struct audit_rule_data);
 // Keep currently invalid fields around in case they
 // become valid after a policy reload.
     if (err == -EINVAL) {
-    pr_warn("audit rule for LSM \'%s\' is invalid\n",
+    pr_warn!("audit rule for LSM \'%s\' is invalid\n",
     str);
     err = 0;
-    } else if (err)
-    goto exit_free;
-    break;
+    } else if (err) {
+// goto;
+    }
+    // break;
+    }
     AUDIT_WATCH => {
     str = audit_unpack_string(&bufp, &remain, f_val);
     if (IS_ERR(str)) {
     err = PTR_ERR(str);
-    goto exit_free;
+// goto;
     }
     err = audit_to_watch(&entry.rule, str, f_val, f.op);
     if (err) {
     kfree(str);
-    goto exit_free;
+// goto;
     }
     entry.rule.buflen += f_val;
-    break;
+    // break;
+    }
     AUDIT_DIR => {
     str = audit_unpack_string(&bufp, &remain, f_val);
     if (IS_ERR(str)) {
     err = PTR_ERR(str);
-    goto exit_free;
+// goto;
     }
     err = audit_make_tree(&entry.rule, str, f.op);
     kfree(str);
     if (err) {
-    goto exit_free;
+// goto;
     }
     entry.rule.buflen += f_val;
-    break;
+    // break;
+    }
     AUDIT_INODE => {
     f.val = f_val;
     err = audit_to_inode(&entry.rule, f);
     if (err) {
-    goto exit_free;
+// goto;
     }
-    break;
+    // break;
+    }
     AUDIT_FILTERKEY => {
     if (entry.rule.filterkey || f_val > AUDIT_MAX_KEY_LEN) {
-    goto exit_free;
+// goto;
     }
     str = audit_unpack_string(&bufp, &remain, f_val);
     if (IS_ERR(str)) {
     err = PTR_ERR(str);
-    goto exit_free;
+// goto;
     }
     entry.rule.buflen += f_val;
     entry.rule.filterkey = str;
-    break;
+    // break;
+    }
     AUDIT_EXE => {
     if (entry.rule.exe || f_val > PATH_MAX) {
-    goto exit_free;
+// goto;
     }
     str = audit_unpack_string(&bufp, &remain, f_val);
     if (IS_ERR(str)) {
     err = PTR_ERR(str);
-    goto exit_free;
+// goto;
     }
     audit_mark = audit_alloc_mark(&entry.rule, str, f_val, core::ptr::null_mut());
     if (IS_ERR(audit_mark)) {
     kfree(str);
     err = PTR_ERR(audit_mark);
-    goto exit_free;
+// goto;
     }
     entry.rule.buflen += f_val;
     entry.rule.exe = audit_mark;
-    break;
+    // break;
+    }
     _ => {
     f.val = f_val;
-    break;
+    // break;
+    }
     }
     }
     if (entry.rule.inode_f && entry.rule.inode_f.op == Audit_not_equal) {
     entry.rule.inode_f = core::ptr::null_mut();
     }
-    exit_nofree:
+// label;
     return entry;
-    exit_free:
+// label;
     if (entry.rule.tree) {
     audit_put_tree(entry.rule.tree); /* that's the temporary one */
     }
@@ -708,7 +1022,7 @@ pub static mut remain: usize = datasz - sizeof(struct audit_rule_data);
 // Pack a filter field's string representation into data block.
 #[no_mangle]
 pub unsafe extern "C" fn audit_pack_string(bufp: *mut c_void, str: *const c_char) -> usize {
-pub static mut len: usize = strlen(str);
+pub static mut len: usize = 0;
     memcpy(*bufp, str, len);
 // bufp += len;
     return len;
@@ -727,55 +1041,72 @@ pub unsafe extern "C" fn audit_krule_to_data() {
     data.action = krule.action;
     data.field_count = krule.field_count;
     bufp = data.buf;
-    for (i = 0; i < data.field_count; i++) {
-    struct audit_field *f = &krule.fields[i];
+    while (i < data.field_count) {
+    let mut f = &krule.fields[i];
     data.fields[i] = f.type;
     data.fieldflags[i] = audit_ops[f.op];
     match (f.type) {
     AUDIT_SUBJ_USER => {
+    }
     AUDIT_SUBJ_ROLE => {
+    }
     AUDIT_SUBJ_TYPE => {
+    }
     AUDIT_SUBJ_SEN => {
+    }
     AUDIT_SUBJ_CLR => {
+    }
     AUDIT_OBJ_USER => {
+    }
     AUDIT_OBJ_ROLE => {
+    }
     AUDIT_OBJ_TYPE => {
+    }
     AUDIT_OBJ_LEV_LOW => {
+    }
     AUDIT_OBJ_LEV_HIGH => {
     data.buflen += data.values[i] =
     audit_pack_string(&bufp, f.lsm_str);
-    break;
+    // break;
+    }
     AUDIT_WATCH => {
     data.buflen += data.values[i] =
     audit_pack_string(&bufp,
     audit_watch_path(krule.watch));
-    break;
+    // break;
+    }
     AUDIT_DIR => {
     data.buflen += data.values[i] =
     audit_pack_string(&bufp,
     audit_tree_path(krule.tree));
-    break;
+    // break;
+    }
     AUDIT_FILTERKEY => {
     data.buflen += data.values[i] =
     audit_pack_string(&bufp, krule.filterkey);
-    break;
+    // break;
+    }
     AUDIT_EXE => {
     data.buflen += data.values[i] =
     audit_pack_string(&bufp, audit_mark_path(krule.exe));
-    break;
+    // break;
+    }
     AUDIT_LOGINUID_SET => {
     if (krule.pflags & AUDIT_LOGINUID_LEGACY && !f.val) {
     data.fields[i] = AUDIT_LOGINUID;
     data.values[i] = AUDIT_UID_UNSET;
-    break;
+    // break;
     }
     fallthrough;	/* if set */
+    }
     _ => {
     data.values[i] = f.val;
     }
     }
-    for (i = 0; i < AUDIT_BITMASK_SIZE; i++)
+    }
+    for (i = 0; i < AUDIT_BITMASK_SIZE; i++) {
     data.mask[i] = krule.mask[i];
+    }
     return data;
     }
 // Compare two rules in kernel format.  Considered success if rules
@@ -787,76 +1118,108 @@ unsafe extern "C" fn audit_compare_rule(a: *mut audit_krule, b: *mut audit_krule
     a.pflags != b.pflags ||
     a.listnr != b.listnr ||
     a.action != b.action ||
-    a.field_count != b.field_count)
+    a.field_count != b.field_count) {
     return 1;
-    for (i = 0; i < a.field_count; i++) {
+    }
+    while (i < a.field_count) {
     if (a.fields[i].type != b.fields[i].type ||
-    a.fields[i].op != b.fields[i].op)
+    a.fields[i].op != b.fields[i].op) {
     return 1;
+    }
     match (a.fields[i].type) {
     AUDIT_SUBJ_USER => {
+    }
     AUDIT_SUBJ_ROLE => {
+    }
     AUDIT_SUBJ_TYPE => {
+    }
     AUDIT_SUBJ_SEN => {
+    }
     AUDIT_SUBJ_CLR => {
+    }
     AUDIT_OBJ_USER => {
+    }
     AUDIT_OBJ_ROLE => {
+    }
     AUDIT_OBJ_TYPE => {
+    }
     AUDIT_OBJ_LEV_LOW => {
+    }
     AUDIT_OBJ_LEV_HIGH => {
     if (strcmp(a.fields[i].lsm_str, b.fields[i].lsm_str)) {
     return 1;
     }
-    break;
+    // break;
+    }
     AUDIT_WATCH => {
     if (strcmp(audit_watch_path(a.watch),
-    audit_watch_path(b.watch)))
+    audit_watch_path(b.watch))) {
     return 1;
-    break;
+    }
+    // break;
+    }
     AUDIT_DIR => {
     if (strcmp(audit_tree_path(a.tree),
-    audit_tree_path(b.tree)))
+    audit_tree_path(b.tree))) {
     return 1;
-    break;
+    }
+    // break;
+    }
     AUDIT_FILTERKEY => {
 // both filterkeys exist based on above type compare
     if (strcmp(a.filterkey, b.filterkey)) {
     return 1;
     }
-    break;
+    // break;
+    }
     AUDIT_EXE => {
 // both paths exist based on above type compare
     if (strcmp(audit_mark_path(a.exe),
-    audit_mark_path(b.exe)))
+    audit_mark_path(b.exe))) {
     return 1;
-    break;
+    }
+    // break;
+    }
     AUDIT_UID => {
+    }
     AUDIT_EUID => {
+    }
     AUDIT_SUID => {
+    }
     AUDIT_FSUID => {
+    }
     AUDIT_LOGINUID => {
+    }
     AUDIT_OBJ_UID => {
     if (!uid_eq(a.fields[i].uid, b.fields[i].uid)) {
     return 1;
     }
-    break;
+    // break;
+    }
     AUDIT_GID => {
+    }
     AUDIT_EGID => {
+    }
     AUDIT_SGID => {
+    }
     AUDIT_FSGID => {
+    }
     AUDIT_OBJ_GID => {
     if (!gid_eq(a.fields[i].gid, b.fields[i].gid)) {
     return 1;
     }
-    break;
+    // break;
+    }
     _ => {
     if (a.fields[i].val != b.fields[i].val) {
     return 1;
     }
     }
     }
-    for (i = 0; i < AUDIT_BITMASK_SIZE; i++)
+    }
+    for (i = 0; i < AUDIT_BITMASK_SIZE; i++) {
     if (a.mask[i] != b.mask[i]) {
+    }
     return 1;
     }
     return 0;
@@ -879,7 +1242,7 @@ pub unsafe extern "C" fn audit_dupe_lsm_field() {
 // Keep currently invalid fields around in case they
 // become valid after a policy reload.
     if (ret == -EINVAL) {
-    pr_warn("audit rule for LSM \'%s\' is invalid\n",
+    pr_warn!("audit rule for LSM \'%s\' is invalid\n",
     df.lsm_str);
     ret = 0;
     }
@@ -893,7 +1256,7 @@ pub unsafe extern "C" fn audit_dupe_lsm_field() {
 // the initial copy.
 #[no_mangle]
 pub unsafe extern "C" fn audit_dupe_rule() {
-pub static mut fcount: u32 = old.field_count;
+pub static mut fcount: u32 = 0;
     let mut entry = core::ptr::null_mut();
     let mut new = core::ptr::null_mut();
     let mut fk = core::ptr::null_mut();
@@ -907,8 +1270,9 @@ pub static mut fcount: u32 = old.field_count;
     new.pflags = old.pflags;
     new.listnr = old.listnr;
     new.action = old.action;
-    for (i = 0; i < AUDIT_BITMASK_SIZE; i++)
+    for (i = 0; i < AUDIT_BITMASK_SIZE; i++) {
     new.mask[i] = old.mask[i];
+    }
     new.prio = old.prio;
     new.buflen = old.buflen;
     new.inode_f = old.inode_f;
@@ -921,24 +1285,34 @@ pub static mut fcount: u32 = old.field_count;
 // the beginning of list scan.
 //
     new.tree = old.tree;
-    memcpy(new.fields, old.fields, sizeof(struct audit_field) * fcount);
+    memcpy(new.fields, old.fields, sizeof!(audit_field) * fcount);
 // deep copy this information, updating the lsm_rule fields, because
 // the originals will all be freed when the old rule is freed.
-    for (i = 0; i < fcount; i++) {
+    while (i < fcount) {
     match (new.fields[i].type) {
     AUDIT_SUBJ_USER => {
+    }
     AUDIT_SUBJ_ROLE => {
+    }
     AUDIT_SUBJ_TYPE => {
+    }
     AUDIT_SUBJ_SEN => {
+    }
     AUDIT_SUBJ_CLR => {
+    }
     AUDIT_OBJ_USER => {
+    }
     AUDIT_OBJ_ROLE => {
+    }
     AUDIT_OBJ_TYPE => {
+    }
     AUDIT_OBJ_LEV_LOW => {
+    }
     AUDIT_OBJ_LEV_HIGH => {
     err = audit_dupe_lsm_field(&new.fields[i],
     &old.fields[i]);
-    break;
+    // break;
+    }
     AUDIT_FILTERKEY => {
     fk = kstrdup(old.filterkey, GFP_KERNEL);
     if (unlikely(!fk)) {
@@ -947,10 +1321,12 @@ pub static mut fcount: u32 = old.field_count;
     else {
     new.filterkey = fk;
     }
-    break;
+    // break;
+    }
     AUDIT_EXE => {
     err = audit_dupe_exe(new, old, ctx);
-    break;
+    // break;
+    }
     }
     if (err) {
     if (new.exe) {
@@ -978,34 +1354,36 @@ pub unsafe extern "C" fn audit_find_rule() {
 // p = list = &audit_inode_hash[h];
     } else if (entry.rule.watch) {
 // we don't know the inode number, so must walk entire hash
-    for (h = 0; h < AUDIT_INODE_BUCKETS; h++) {
+    while (h < AUDIT_INODE_BUCKETS) {
     list = &audit_inode_hash[h];
-    list_for_each_entry(e, list, list)
+    list_for_each_entry(e, list, list) {
     if (!audit_compare_rule(&entry.rule, &e.rule)) {
+    }
     found = e;
-    goto out;
+// goto;
     }
     }
-    goto out;
+// goto;
     } else {
 // p = list = &audit_filter_list[entry->rule.listnr];
     }
-    list_for_each_entry(e, list, list)
+    list_for_each_entry(e, list, list) {
     if (!audit_compare_rule(&entry.rule, &e.rule)) {
-    found = e;
-    goto out;
     }
-    out:
+    found = e;
+// goto;
+    }
+// label;
     return found;
     }
-pub static mut prio_low: u64 = ~0ULL/2;
-pub static mut prio_high: u64 = ~0ULL/2 - 1;
+pub static mut prio_low: u64 = 0;
+pub static mut prio_high: u64 = 0;
 // Add rule to given filterlist if not a duplicate.
 #[no_mangle]
 pub unsafe extern "C" fn audit_add_rule(entry: *mut audit_entry) -> c_int {
     let mut e = core::ptr::null_mut();
-    struct audit_watch *watch = entry.rule.watch;
-    struct audit_tree *tree = entry.rule.tree;
+    let mut watch = entry.rule.watch;
+    let mut tree = entry.rule.tree;
     let mut list = core::ptr::null_mut();
 pub static mut err: c_int = 0;
 
@@ -1013,9 +1391,12 @@ pub static mut dont_count: c_int = 0;
 // If any of these, don't count towards total
     match (entry.rule.listnr) {
     AUDIT_FILTER_USER => {
+    }
     AUDIT_FILTER_EXCLUDE => {
+    }
     AUDIT_FILTER_FS => {
     dont_count = 1;
+    }
     }
 
     mutex_lock(&audit_filter_mutex);
@@ -1055,10 +1436,10 @@ pub static mut dont_count: c_int = 0;
     if (entry.rule.listnr == AUDIT_FILTER_EXIT ||
     entry.rule.listnr == AUDIT_FILTER_URING_EXIT) {
     if (entry.rule.flags & AUDIT_FILTER_PREPEND) {
-    entry.rule.prio = ++prio_high;
+    entry.rule.prio = prio_high += 1;
     }
     else {
-    entry.rule.prio = --prio_low;
+    entry.rule.prio = prio_low -= 1;
     }
     }
     if (entry.rule.flags & AUDIT_FILTER_PREPEND) {
@@ -1073,10 +1454,10 @@ pub static mut dont_count: c_int = 0;
     }
 
     if (!dont_count) {
-    audit_n_rules++;
+    audit_n_rules += 1;
     }
     if (!audit_match_signal(entry)) {
-    audit_signals++;
+    audit_signals += 1;
     }
 
     mutex_unlock(&audit_filter_mutex);
@@ -1093,16 +1474,19 @@ pub static mut dont_count: c_int = 0;
 // If any of these, don't count towards total
     match (entry.rule.listnr) {
     AUDIT_FILTER_USER => {
+    }
     AUDIT_FILTER_EXCLUDE => {
+    }
     AUDIT_FILTER_FS => {
     dont_count = 1;
+    }
     }
 
     mutex_lock(&audit_filter_mutex);
     e = audit_find_rule(entry, &list);
     if (!e) {
     ret = -ENOENT;
-    goto out;
+// goto;
     }
     list_del_rcu(&e.list);
     list_del(&e.rule.list);
@@ -1118,14 +1502,14 @@ pub static mut dont_count: c_int = 0;
     }
 
     if (!dont_count) {
-    audit_n_rules--;
+    audit_n_rules -= 1;
     }
     if (!audit_match_signal(entry)) {
-    audit_signals--;
+    audit_signals -= 1;
     }
 
     call_rcu(&e.rcu, audit_free_rule_rcu);
-    out:
+// label;
     mutex_unlock(&audit_filter_mutex);
     return ret;
     }
@@ -1137,7 +1521,7 @@ unsafe extern "C" fn audit_list_rules(seq: c_int, q: *mut sk_buff_head) {
     let mut i = 0;
 // This is a blocking read, so use audit_filter_mutex instead of rcu
 // iterator to sync with list writers.
-    for (i = 0; i < AUDIT_NR_FILTERS; i++) {
+    while (i < AUDIT_NR_FILTERS) {
     list_for_each_entry(r, &audit_rules_list[i], list) {
     let mut data = core::ptr::null_mut();
     data = audit_krule_to_data(r);
@@ -1195,7 +1579,8 @@ pub static mut err: c_int = 0;
     }
     err = audit_add_rule(entry);
     audit_log_rule_change("add_rule", &entry.rule, !err);
-    break;
+    // break;
+    }
     AUDIT_DEL_RULE => {
     entry = audit_data_to_entry(data, datasz);
     if (IS_ERR(entry)) {
@@ -1203,10 +1588,12 @@ pub static mut err: c_int = 0;
     }
     err = audit_del_rule(entry);
     audit_log_rule_change("remove_rule", &entry.rule, !err);
-    break;
+    // break;
+    }
     _ => {
 // WARN_ON;
     return -EINVAL;
+    }
     }
     if (err || type == AUDIT_DEL_RULE) {
     if (type == AUDIT_DEL_RULE && entry.rule.tree) {
@@ -1331,14 +1718,16 @@ pub unsafe extern "C" fn parent_len(path: *const c_char) -> c_int {
     }
 // disregard trailing slashes
     p = path + plen - 1;
-    while ((*p == '/') && (p > path))
-    p--;
+    while ((*p == '/') && (p > path)) {
+    p -= 1;
+    }
 // walk backward until we find the next slash or hit beginning
-    while ((*p != '/') && (p > path))
-    p--;
+    while ((*p != '/') && (p > path)) {
+    p -= 1;
+    }
 // did we find a slash? Then increment to include it in path
     if (*p == '/') {
-    p++;
+    p += 1;
     }
     return p - path;
     }
@@ -1352,7 +1741,8 @@ pub unsafe extern "C" fn parent_len(path: *const c_char) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn audit_compare_dname_path(dname: *const qstr, path: *const c_char, parentlen: c_int) -> c_int {
-    int dlen, pathlen;
+    let mut dlen = 0;
+    let mut pathlen = 0;
     let mut p = core::ptr::null_mut();
     dlen = dname.len;
     pathlen = strlen(path);
@@ -1365,8 +1755,9 @@ pub unsafe extern "C" fn audit_compare_dname_path(dname: *const qstr, path: *con
     p = path + parentlen;
 // handle trailing slashes
     pathlen -= parentlen;
-    while (pathlen > 0 && p[pathlen - 1] == '/')
-    pathlen--;
+    while (pathlen > 0 && p[pathlen - 1] == '/') {
+    pathlen -= 1;
+    }
     if (pathlen != dlen) {
     return 1;
     }
@@ -1375,40 +1766,50 @@ pub unsafe extern "C" fn audit_compare_dname_path(dname: *const qstr, path: *con
 #[no_mangle]
 pub unsafe extern "C" fn audit_filter(msgtype: c_int, listtype: c_uint) -> c_int {
     let mut e = core::ptr::null_mut();
-    int ret = 1; /* Audit by default */
+    let mut ret = 1; /* Audit by default */
     rcu_read_lock();
     list_for_each_entry_rcu(e, &audit_filter_list[listtype], list) {
     int i, result = 0;
-    for (i = 0; i < e.rule.field_count; i++) {
-    struct audit_field *f = &e.rule.fields[i];
-pub static mut prop: lsm_prop = { };
+    while (i < e.rule.field_count) {
+    let mut f = &e.rule.fields[i];
+pub static mut prop: lsm_prop = 0;
     let mut pid = 0;
     match (f.type) {
     AUDIT_PID => {
     pid = task_tgid_nr(current);
     result = audit_comparator(pid, f.op, f.val);
-    break;
+    // break;
+    }
     AUDIT_UID => {
     result = audit_uid_comparator(current_uid(), f.op, f.uid);
-    break;
+    // break;
+    }
     AUDIT_GID => {
     result = audit_gid_comparator(current_gid(), f.op, f.gid);
-    break;
+    // break;
+    }
     AUDIT_LOGINUID => {
     result = audit_uid_comparator(audit_get_loginuid(current),
     f.op, f.uid);
-    break;
+    // break;
+    }
     AUDIT_LOGINUID_SET => {
     result = audit_comparator(audit_loginuid_set(current),
     f.op, f.val);
-    break;
+    // break;
+    }
     AUDIT_MSGTYPE => {
     result = audit_comparator(msgtype, f.op, f.val);
-    break;
+    // break;
+    }
     AUDIT_SUBJ_USER => {
+    }
     AUDIT_SUBJ_ROLE => {
+    }
     AUDIT_SUBJ_TYPE => {
+    }
     AUDIT_SUBJ_SEN => {
+    }
     AUDIT_SUBJ_CLR => {
     if (f.lsm_rule) {
     security_current_getlsmprop_subj(&prop);
@@ -1416,18 +1817,22 @@ pub static mut prop: lsm_prop = { };
     &prop, f.type, f.op,
     f.lsm_rule);
     }
-    break;
+    // break;
+    }
     AUDIT_EXE => {
     result = audit_exe_compare(current, e.rule.exe);
     if (f.op == Audit_not_equal) {
     result = !result;
     }
-    break;
-    _ => {
-    goto unlock_and_return;
+    // break;
     }
-    if (result < 0) /* error */
-    goto unlock_and_return;
+    _ => {
+// goto;
+    }
+    }
+    if (result < 0) /* error */ {
+// goto;
+    }
     if (!result) {
     break;
     }
@@ -1439,13 +1844,13 @@ pub static mut prop: lsm_prop = { };
     break;
     }
     }
-    unlock_and_return:
+// label;
     rcu_read_unlock();
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn update_lsm_rule(r: *mut audit_krule) -> c_int {
-    struct audit_entry *entry = container_of(r, struct audit_entry, rule);
+    let mut entry = container_of!(r, audit_entry, rule);
     let mut nentry = core::ptr::null_mut();
 pub static mut err: c_int = 0;
     if (!security_audit_rule_known(r)) {
@@ -1482,13 +1887,14 @@ pub static mut err: c_int = 0;
 // updated rule.
 #[no_mangle]
 pub unsafe extern "C" fn audit_update_lsm_rules() -> c_int {
-    struct audit_krule *r, *n;
+    let mut r = core::ptr::null_mut();
+    let mut n = core::ptr::null_mut();
     int i, err = 0;
 // audit_filter_mutex synchronizes the writers
     mutex_lock(&audit_filter_mutex);
-    for (i = 0; i < AUDIT_NR_FILTERS; i++) {
+    while (i < AUDIT_NR_FILTERS) {
     list_for_each_entry_safe(r, n, &audit_rules_list[i], list) {
-pub static mut res: c_int = update_lsm_rule(r);
+pub static mut res: c_int = 0;
     if (!err) {
     err = res;
     }
@@ -1497,187 +1903,6 @@ pub static mut res: c_int = update_lsm_rule(r);
     mutex_unlock(&audit_filter_mutex);
     return err;
     }
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
 }
 }
 }

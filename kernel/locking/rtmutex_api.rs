@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -46,48 +296,36 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 // Max number of times we'll walk the boosting chain:
 //
-    let mut max_lock_depth: c_int = 1024;
-    static const struct ctl_table rtmutex_sysctl_table[] = {
-    {
-    .procname	= "max_lock_depth",
-    .data		= &max_lock_depth,
-    .maxlen		= sizeof(int),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec,
-    },
-    };
+pub static mut max_lock_depth: c_int = 1024;
+pub static mut ctl_table: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn init_rtmutex_sysctl() -> int __init {
-    static int __init init_rtmutex_sysctl(void)
-    {
+unsafe extern "C" fn init_rtmutex_sysctl() -> c_int {
     register_sysctl_init("kernel", rtmutex_sysctl_table);
     return 0;
     }
-    subsys_initcall(init_rtmutex_sysctl);
+    subsys_initcall!(init_rtmutex_sysctl);
 //
 // Debug aware fast / slowpath lock,trylock,unlock
 //
 // The atomic acquire/release ops are compiled away, when either the
 // architecture does not support cmpxchg or when debugging is enabled.
 //
-    static __always_inline int __rt_mutex_lock_common(struct rt_mutex *lock,
-    unsigned int state,
-    struct lockdep_map *nest_lock,
+    static __always_inline int __rt_mutex_lock_common(rt_mutex *lock,
+    unsigned int state, lockdep_map *nest_lock,
     unsigned int subclass)
     __cond_acquires(0, lock)
     {
-    int ret;
+    let mut ret = 0;
     might_sleep();
     mutex_acquire_nest(&lock.dep_map, subclass, 0, nest_lock, _RET_IP_);
     ret = __rt_mutex_lock(&lock.rtmutex, state);
-    if (ret)
+    if (ret) {
     mutex_release(&lock.dep_map, _RET_IP_);
+    }
     return ret;
     }
 #[no_mangle]
 pub unsafe extern "C" fn rt_mutex_base_init(rtb: *mut rt_mutex_base) {
-    void rt_mutex_base_init(struct rt_mutex_base *rtb)
-    {
     __rt_mutex_base_init(rtb);
     }
     EXPORT_SYMBOL(rt_mutex_base_init);
@@ -100,29 +338,27 @@ pub unsafe extern "C" fn rt_mutex_base_init(rtb: *mut rt_mutex_base) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn rt_mutex_lock_nested(lock: *mut rt_mutex, subclass: c_uint) -> void __sched {
-    void __sched rt_mutex_lock_nested(struct rt_mutex *lock, unsigned int subclass)
-    {
-    if (__rt_mutex_lock_common(lock, TASK_UNINTERRUPTIBLE, core::ptr::null_mut(), subclass) == 0)
+    if (__rt_mutex_lock_common(lock, TASK_UNINTERRUPTIBLE, core::ptr::null_mut(), subclass) == 0) {
     return;
+    }
 //
 // The code below is never reached because __rt_mutex_lock_common() only
 // returns an error code if interrupted by a signal or upon a timeout.
 //
-    WARN_ON_ONCE(true);
+    WARN_ON_ONCE!(true);
     __acquire(lock);
     }
     EXPORT_SYMBOL_GPL(rt_mutex_lock_nested);
 #[no_mangle]
 pub unsafe extern "C" fn _rt_mutex_lock_nest_lock(lock: *mut rt_mutex, nest_lock: *mut lockdep_map) -> void __sched {
-    void __sched _rt_mutex_lock_nest_lock(struct rt_mutex *lock, struct lockdep_map *nest_lock)
-    {
-    if (__rt_mutex_lock_common(lock, TASK_UNINTERRUPTIBLE, nest_lock, 0) == 0)
+    if (__rt_mutex_lock_common(lock, TASK_UNINTERRUPTIBLE, nest_lock, 0) == 0) {
     return;
+    }
 //
 // The code below is never reached because __rt_mutex_lock_common() only
 // returns an error code if interrupted by a signal or upon a timeout.
 //
-    WARN_ON_ONCE(true);
+    WARN_ON_ONCE!(true);
     __acquire(lock);
     }
     EXPORT_SYMBOL_GPL(_rt_mutex_lock_nest_lock);
@@ -134,15 +370,14 @@ pub unsafe extern "C" fn _rt_mutex_lock_nest_lock(lock: *mut rt_mutex, nest_lock
 //
 #[no_mangle]
 pub unsafe extern "C" fn rt_mutex_lock(lock: *mut rt_mutex) -> void __sched {
-    void __sched rt_mutex_lock(struct rt_mutex *lock)
-    {
-    if (__rt_mutex_lock_common(lock, TASK_UNINTERRUPTIBLE, core::ptr::null_mut(), 0) == 0)
+    if (__rt_mutex_lock_common(lock, TASK_UNINTERRUPTIBLE, core::ptr::null_mut(), 0) == 0) {
     return;
+    }
 //
 // The code below is never reached because __rt_mutex_lock_common() only
 // returns an error code if interrupted by a signal or upon a timeout.
 //
-    WARN_ON_ONCE(true);
+    WARN_ON_ONCE!(true);
     __acquire(lock);
     }
     EXPORT_SYMBOL_GPL(rt_mutex_lock);
@@ -158,8 +393,6 @@ pub unsafe extern "C" fn rt_mutex_lock(lock: *mut rt_mutex) -> void __sched {
 //
 #[no_mangle]
 pub unsafe extern "C" fn rt_mutex_lock_interruptible(lock: *mut rt_mutex) -> int __sched {
-    int __sched rt_mutex_lock_interruptible(struct rt_mutex *lock)
-    {
     return __rt_mutex_lock_common(lock, TASK_INTERRUPTIBLE, core::ptr::null_mut(), 0);
     }
     EXPORT_SYMBOL_GPL(rt_mutex_lock_interruptible);
@@ -174,8 +407,6 @@ pub unsafe extern "C" fn rt_mutex_lock_interruptible(lock: *mut rt_mutex) -> int
 //
 #[no_mangle]
 pub unsafe extern "C" fn rt_mutex_lock_killable(lock: *mut rt_mutex) -> int __sched {
-    int __sched rt_mutex_lock_killable(struct rt_mutex *lock)
-    {
     return __rt_mutex_lock_common(lock, TASK_KILLABLE, core::ptr::null_mut(), 0);
     }
     EXPORT_SYMBOL_GPL(rt_mutex_lock_killable);
@@ -193,14 +424,14 @@ pub unsafe extern "C" fn rt_mutex_lock_killable(lock: *mut rt_mutex) -> int __sc
 //
 #[no_mangle]
 pub unsafe extern "C" fn rt_mutex_trylock(lock: *mut rt_mutex) -> int __sched {
-    int __sched rt_mutex_trylock(struct rt_mutex *lock)
-    {
-    int ret;
-    if (IS_ENABLED(CONFIG_DEBUG_RT_MUTEXES) && WARN_ON_ONCE(!in_task()))
+    let mut ret = 0;
+    if (IS_ENABLED!(CONFIG_DEBUG_RT_MUTEXES) && WARN_ON_ONCE!(!in_task())) {
     return 0;
+    }
     ret = __rt_mutex_trylock(&lock.rtmutex);
-    if (ret)
+    if (ret) {
     mutex_acquire(&lock.dep_map, 0, 1, _RET_IP_);
+    }
     return ret;
     }
     EXPORT_SYMBOL_GPL(rt_mutex_trylock);
@@ -211,8 +442,6 @@ pub unsafe extern "C" fn rt_mutex_trylock(lock: *mut rt_mutex) -> int __sched {
 //
 #[no_mangle]
 pub unsafe extern "C" fn rt_mutex_unlock(lock: *mut rt_mutex) -> void __sched {
-    void __sched rt_mutex_unlock(struct rt_mutex *lock)
-    {
     mutex_release(&lock.dep_map, _RET_IP_);
     __rt_mutex_unlock(&lock.rtmutex);
     __release(lock);
@@ -223,14 +452,10 @@ pub unsafe extern "C" fn rt_mutex_unlock(lock: *mut rt_mutex) -> void __sched {
 //
 #[no_mangle]
 pub unsafe extern "C" fn rt_mutex_futex_trylock(lock: *mut rt_mutex_base) -> int __sched {
-    int __sched rt_mutex_futex_trylock(struct rt_mutex_base *lock)
-    {
     return rt_mutex_slowtrylock(lock);
     }
 #[no_mangle]
 pub unsafe extern "C" fn __rt_mutex_futex_trylock(lock: *mut rt_mutex_base) -> int __sched {
-    int __sched __rt_mutex_futex_trylock(struct rt_mutex_base *lock)
-    {
     return __rt_mutex_slowtrylock(lock);
     }
 //
@@ -240,8 +465,7 @@ pub unsafe extern "C" fn __rt_mutex_futex_trylock(lock: *mut rt_mutex_base) -> i
 // @lock:	The rt_mutex to be unlocked
 // @wqh:	The wake queue head from which to get the next lock waiter
 //
-    bool __sched __rt_mutex_futex_unlock(struct rt_mutex_base *lock,
-    struct rt_wake_q_head *wqh)
+    bool __sched __rt_mutex_futex_unlock(rt_mutex_base *lock, rt_wake_q_head *wqh)
     __must_hold(&lock.wait_lock)
     {
     lockdep_assert_held(&lock.wait_lock);
@@ -261,16 +485,15 @@ pub unsafe extern "C" fn __rt_mutex_futex_trylock(lock: *mut rt_mutex_base) -> i
     }
 #[no_mangle]
 pub unsafe extern "C" fn rt_mutex_futex_unlock(lock: *mut rt_mutex_base) -> void __sched {
-    void __sched rt_mutex_futex_unlock(struct rt_mutex_base *lock)
-    {
-    DEFINE_RT_WAKE_Q(wqh);
-    unsigned long flags;
-    bool postunlock;
+pub static mut wqh: usize = 0;
+    let mut flags = 0;
+    let mut postunlock = 0;
     raw_spin_lock_irqsave(&lock.wait_lock, flags);
     postunlock = __rt_mutex_futex_unlock(lock, &wqh);
     raw_spin_unlock_irqrestore(&lock.wait_lock, flags);
-    if (postunlock)
+    if (postunlock) {
     rt_mutex_postunlock(&wqh);
+    }
     }
 //
 // __rt_mutex_init - initialize the rt_mutex
@@ -283,10 +506,9 @@ pub unsafe extern "C" fn rt_mutex_futex_unlock(lock: *mut rt_mutex_base) -> void
 //
 // Initializing of a locked rt_mutex is not allowed
 //
-    void __sched __rt_mutex_init(struct rt_mutex *lock, const char *name,
-    struct lock_class_key *key)
+    void __sched __rt_mutex_init(rt_mutex *lock, const char *name, lock_class_key *key)
     {
-    debug_check_no_locks_freed((void *)lock, sizeof(*lock));
+    debug_check_no_locks_freed(lock, sizeof!(*lock));
     __rt_mutex_base_init(&lock.rtmutex);
     lockdep_init_map_wait(&lock.dep_map, name, key, 0, LD_WAIT_SLEEP);
     }
@@ -305,10 +527,9 @@ pub unsafe extern "C" fn rt_mutex_futex_unlock(lock: *mut rt_mutex_base) -> void
 // possible at this point because the pi_state which contains the rtmutex
 // is not yet visible to other tasks.
 //
-    void __sched rt_mutex_init_proxy_locked(struct rt_mutex_base *lock,
-    struct task_struct *proxy_owner)
+    void __sched rt_mutex_init_proxy_locked(rt_mutex_base *lock, task_struct *proxy_owner)
     {
-    static struct lock_class_key pi_futex_key;
+pub static mut pi_futex_key: usize = 0;
     __rt_mutex_base_init(lock);
 //
 // On PREEMPT_RT the futex hashbucket spinlock becomes 'sleeping'
@@ -336,8 +557,6 @@ pub unsafe extern "C" fn rt_mutex_futex_unlock(lock: *mut rt_mutex_base) -> void
 //
 #[no_mangle]
 pub unsafe extern "C" fn rt_mutex_proxy_unlock(lock: *mut rt_mutex_base) -> void __sched {
-    void __sched rt_mutex_proxy_unlock(struct rt_mutex_base *lock)
-    {
     debug_rt_mutex_proxy_unlock(lock);
     rt_mutex_clear_owner(lock);
     }
@@ -361,16 +580,14 @@ pub unsafe extern "C" fn rt_mutex_proxy_unlock(lock: *mut rt_mutex_base) -> void
 //
 // Special API call for PI-futex support.
 //
-    int __sched __rt_mutex_start_proxy_lock(struct rt_mutex_base *lock,
-    struct rt_mutex_waiter *waiter,
-    struct task_struct *task,
-    struct wake_q_head *wake_q)
+    int __sched __rt_mutex_start_proxy_lock(rt_mutex_base *lock, rt_mutex_waiter *waiter, task_struct *task, wake_q_head *wake_q)
     __must_hold(&lock.wait_lock)
     {
-    int ret;
+    let mut ret = 0;
     lockdep_assert_held(&lock.wait_lock);
-    if (try_to_take_rt_mutex(lock, task, core::ptr::null_mut()))
+    if (try_to_take_rt_mutex(lock, task, core::ptr::null_mut())) {
     return 1;
+    }
 // We enforce deadlock detection for futexes
     ret = task_blocks_on_rt_mutex(lock, waiter, task, core::ptr::null_mut(),
     RT_MUTEX_FULL_CHAINWALK, wake_q);
@@ -404,16 +621,15 @@ pub unsafe extern "C" fn rt_mutex_proxy_unlock(lock: *mut rt_mutex_base) -> void
 //
 // Special API call for PI-futex support.
 //
-    int __sched rt_mutex_start_proxy_lock(struct rt_mutex_base *lock,
-    struct rt_mutex_waiter *waiter,
-    struct task_struct *task)
+    int __sched rt_mutex_start_proxy_lock(rt_mutex_base *lock, rt_mutex_waiter *waiter, task_struct *task)
     {
-    int ret;
-    DEFINE_WAKE_Q(wake_q);
+    let mut ret = 0;
+pub static mut wake_q: usize = 0;
     raw_spin_lock_irq(&lock.wait_lock);
     ret = __rt_mutex_start_proxy_lock(lock, waiter, task, &wake_q);
-    if (unlikely(ret < 0))
+    if (unlikely(ret < 0)) {
     remove_waiter(lock, waiter);
+    }
     preempt_disable();
     raw_spin_unlock_irq(&lock.wait_lock);
     wake_up_q(&wake_q);
@@ -437,11 +653,9 @@ pub unsafe extern "C" fn rt_mutex_proxy_unlock(lock: *mut rt_mutex_base) -> void
 //
 // Special API call for PI-futex support
 //
-    int __sched rt_mutex_wait_proxy_lock(struct rt_mutex_base *lock,
-    struct hrtimer_sleeper *to,
-    struct rt_mutex_waiter *waiter)
+    int __sched rt_mutex_wait_proxy_lock(rt_mutex_base *lock, hrtimer_sleeper *to, rt_mutex_waiter *waiter)
     {
-    int ret;
+    let mut ret = 0;
     raw_spin_lock_irq(&lock.wait_lock);
 // sleep on the mutex
     set_current_state(TASK_INTERRUPTIBLE);
@@ -474,10 +688,9 @@ pub unsafe extern "C" fn rt_mutex_proxy_unlock(lock: *mut rt_mutex_base) -> void
 //
 // Special API call for PI-futex support
 //
-    bool __sched rt_mutex_cleanup_proxy_lock(struct rt_mutex_base *lock,
-    struct rt_mutex_waiter *waiter)
+    bool __sched rt_mutex_cleanup_proxy_lock(rt_mutex_base *lock, rt_mutex_waiter *waiter)
     {
-    let mut cleanup: bool = false;
+pub static mut cleanup: bool = false;
     raw_spin_lock_irq(&lock.wait_lock);
 //
 // Do an unconditional try-lock, this deals with the lock stealing
@@ -514,11 +727,9 @@ pub unsafe extern "C" fn rt_mutex_proxy_unlock(lock: *mut rt_mutex_base) -> void
 //
 #[no_mangle]
 pub unsafe extern "C" fn rt_mutex_adjust_pi(task: *mut task_struct) -> void __sched {
-    void __sched rt_mutex_adjust_pi(struct task_struct *task)
-    {
-    struct rt_mutex_waiter *waiter;
-    struct rt_mutex_base *next_lock;
-    unsigned long flags;
+pub static mut waiter: *mut c_void = core::ptr::null_mut();
+pub static mut next_lock: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
     raw_spin_lock_irqsave(&task.pi_lock, flags);
     waiter = task.pi_blocked_on;
     if (!waiter || rt_waiter_node_equal(&waiter.tree, task_to_waiter_node(task))) {
@@ -537,15 +748,11 @@ pub unsafe extern "C" fn rt_mutex_adjust_pi(task: *mut task_struct) -> void __sc
 //
 #[no_mangle]
 pub unsafe extern "C" fn rt_mutex_postunlock(wqh: *mut rt_wake_q_head) -> void __sched {
-    void __sched rt_mutex_postunlock(struct rt_wake_q_head *wqh)
-    {
     rt_mutex_wake_up_q(wqh);
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn rt_mutex_debug_task_free(task: *mut task_struct) {
-    void rt_mutex_debug_task_free(struct task_struct *task)
-    {
     DEBUG_LOCKS_WARN_ON(!RB_EMPTY_ROOT(&task.pi_waiters.rb_root));
     DEBUG_LOCKS_WARN_ON(task.pi_blocked_on);
     }
@@ -553,139 +760,121 @@ pub unsafe extern "C" fn rt_mutex_debug_task_free(task: *mut task_struct) {
 // Mutexes
 #[no_mangle]
 unsafe extern "C" fn __mutex_rt_init_generic(mutex: *mut mutex) {
-    static void __mutex_rt_init_generic(struct mutex *mutex)
-    {
     rt_mutex_base_init(&mutex.rtmutex);
-    debug_check_no_locks_freed((void *)mutex, sizeof(*mutex));
+    debug_check_no_locks_freed(mutex, sizeof!(*mutex));
     }
-    static __always_inline int __mutex_lock_common(struct mutex *lock,
+    static __always_inline int __mutex_lock_common(mutex *lock,
     unsigned int state,
-    unsigned int subclass,
-    struct lockdep_map *nest_lock,
+    unsigned int subclass, lockdep_map *nest_lock,
     unsigned long ip)
     __acquires(lock) __no_context_analysis
     {
-    int ret;
+    let mut ret = 0;
     might_sleep();
     mutex_acquire_nest(&lock.dep_map, subclass, 0, nest_lock, ip);
     ret = __rt_mutex_lock(&lock.rtmutex, state);
-    if (ret)
+    if (ret) {
     mutex_release(&lock.dep_map, ip);
-    else
+    }
+    else {
     lock_acquired(&lock.dep_map, ip);
+    }
     return ret;
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn mutex_rt_init_lockdep(mutex: *mut mutex, name: *const c_char, key: *mut lock_class_key) {
-    void mutex_rt_init_lockdep(struct mutex *mutex, const char *name, struct lock_class_key *key)
-    {
     __mutex_rt_init_generic(mutex);
     lockdep_init_map_wait(&mutex.dep_map, name, key, 0, LD_WAIT_SLEEP);
     }
     EXPORT_SYMBOL(mutex_rt_init_lockdep);
 #[no_mangle]
 pub unsafe extern "C" fn mutex_lock_nested(lock: *mut mutex, subclass: c_uint) -> void __sched {
-    void __sched mutex_lock_nested(struct mutex *lock, unsigned int subclass)
-    {
     __mutex_lock_common(lock, TASK_UNINTERRUPTIBLE, subclass, core::ptr::null_mut(), _RET_IP_);
     }
     EXPORT_SYMBOL_GPL(mutex_lock_nested);
-    void __sched _mutex_lock_nest_lock(struct mutex *lock,
-    struct lockdep_map *nest_lock)
+    void __sched _mutex_lock_nest_lock(mutex *lock, lockdep_map *nest_lock)
     {
     __mutex_lock_common(lock, TASK_UNINTERRUPTIBLE, 0, nest_lock, _RET_IP_);
     }
     EXPORT_SYMBOL_GPL(_mutex_lock_nest_lock);
-    int __sched mutex_lock_interruptible_nested(struct mutex *lock,
+    int __sched mutex_lock_interruptible_nested(mutex *lock,
     unsigned int subclass)
     {
     return __mutex_lock_common(lock, TASK_INTERRUPTIBLE, subclass, core::ptr::null_mut(), _RET_IP_);
     }
     EXPORT_SYMBOL_GPL(mutex_lock_interruptible_nested);
-    int __sched _mutex_lock_killable(struct mutex *lock, unsigned int subclass,
-    struct lockdep_map *nest_lock)
+    int __sched _mutex_lock_killable(mutex *lock, unsigned int subclass, lockdep_map *nest_lock)
     {
     return __mutex_lock_common(lock, TASK_KILLABLE, subclass, nest_lock, _RET_IP_);
     }
     EXPORT_SYMBOL_GPL(_mutex_lock_killable);
 #[no_mangle]
 pub unsafe extern "C" fn mutex_lock_io_nested(lock: *mut mutex, subclass: c_uint) -> void __sched {
-    void __sched mutex_lock_io_nested(struct mutex *lock, unsigned int subclass)
-    {
-    int token;
+    let mut token = 0;
     might_sleep();
     token = io_schedule_prepare();
     __mutex_lock_common(lock, TASK_UNINTERRUPTIBLE, subclass, core::ptr::null_mut(), _RET_IP_);
     io_schedule_finish(token);
     }
     EXPORT_SYMBOL_GPL(mutex_lock_io_nested);
-    int __sched _mutex_trylock_nest_lock(struct mutex *lock,
-    struct lockdep_map *nest_lock)
+    int __sched _mutex_trylock_nest_lock(mutex *lock, lockdep_map *nest_lock)
     {
-    int ret;
-    if (IS_ENABLED(CONFIG_DEBUG_RT_MUTEXES) && WARN_ON_ONCE(!in_task()))
+    let mut ret = 0;
+    if (IS_ENABLED!(CONFIG_DEBUG_RT_MUTEXES) && WARN_ON_ONCE!(!in_task())) {
     return 0;
+    }
     ret = __rt_mutex_trylock(&lock.rtmutex);
-    if (ret)
+    if (ret) {
     mutex_acquire_nest(&lock.dep_map, 0, 1, nest_lock, _RET_IP_);
+    }
     return ret;
     }
     EXPORT_SYMBOL_GPL(_mutex_trylock_nest_lock);
 
 #[no_mangle]
 pub unsafe extern "C" fn mutex_rt_init_generic(mutex: *mut mutex) {
-    void mutex_rt_init_generic(struct mutex *mutex)
-    {
     __mutex_rt_init_generic(mutex);
     }
     EXPORT_SYMBOL(mutex_rt_init_generic);
 #[no_mangle]
 pub unsafe extern "C" fn mutex_lock(lock: *mut mutex) -> void __sched {
-    void __sched mutex_lock(struct mutex *lock)
-    {
     __mutex_lock_common(lock, TASK_UNINTERRUPTIBLE, 0, core::ptr::null_mut(), _RET_IP_);
     }
     EXPORT_SYMBOL(mutex_lock);
 #[no_mangle]
 pub unsafe extern "C" fn mutex_lock_interruptible(lock: *mut mutex) -> int __sched {
-    int __sched mutex_lock_interruptible(struct mutex *lock)
-    {
     return __mutex_lock_common(lock, TASK_INTERRUPTIBLE, 0, core::ptr::null_mut(), _RET_IP_);
     }
     EXPORT_SYMBOL(mutex_lock_interruptible);
 #[no_mangle]
 pub unsafe extern "C" fn mutex_lock_killable(lock: *mut mutex) -> int __sched {
-    int __sched mutex_lock_killable(struct mutex *lock)
-    {
     return __mutex_lock_common(lock, TASK_KILLABLE, 0, core::ptr::null_mut(), _RET_IP_);
     }
     EXPORT_SYMBOL(mutex_lock_killable);
 #[no_mangle]
 pub unsafe extern "C" fn mutex_lock_io(lock: *mut mutex) -> void __sched {
-    void __sched mutex_lock_io(struct mutex *lock)
-    {
-    let mut token: c_int = io_schedule_prepare();
+pub static mut token: c_int = 0;
     __mutex_lock_common(lock, TASK_UNINTERRUPTIBLE, 0, core::ptr::null_mut(), _RET_IP_);
     io_schedule_finish(token);
     }
     EXPORT_SYMBOL(mutex_lock_io);
 #[no_mangle]
 pub unsafe extern "C" fn mutex_trylock(lock: *mut mutex) -> int __sched {
-    int __sched mutex_trylock(struct mutex *lock)
-    {
-    if (IS_ENABLED(CONFIG_DEBUG_RT_MUTEXES) && WARN_ON_ONCE(!in_task()))
+    if (IS_ENABLED!(CONFIG_DEBUG_RT_MUTEXES) && WARN_ON_ONCE!(!in_task())) {
     return 0;
+    }
     return __rt_mutex_trylock(&lock.rtmutex);
     }
     EXPORT_SYMBOL(mutex_trylock);
 
 #[no_mangle]
 pub unsafe extern "C" fn mutex_unlock(lock: *mut mutex) -> void __sched {
-    void __sched mutex_unlock(struct mutex *lock)
+    void __sched mutex_unlock(mutex *lock)
     __releases(lock) __no_context_analysis
     {
     mutex_release(&lock.dep_map, _RET_IP_);
     __rt_mutex_unlock(&lock.rtmutex);
     }
     EXPORT_SYMBOL(mutex_unlock);
+}

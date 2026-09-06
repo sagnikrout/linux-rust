@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -45,151 +295,152 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // us dozens of seconds (minutes for 5-level config) while checking for
 // W+X mapping or reading kernel_page_tables debugfs file.
 //
-    static inline int note_kasan_page_table(struct mm_walk *walk,
-    unsigned long addr)
-    {
-    struct ptdump_state *st = walk.private;
+#[no_mangle]
+pub unsafe extern "C" fn note_kasan_page_table(walk: *mut mm_walk, addr: c_ulong) -> c_int {
+    let mut st = walk.private;
     st.note_page_pte(st, addr, kasan_early_shadow_pte[0]);
     walk.action = ACTION_CONTINUE;
     return 0;
     }
 
-    static int ptdump_pgd_entry(pgd_t *pgd, unsigned long addr,
-    unsigned long next, struct mm_walk *walk)
-    {
-    struct ptdump_state *st = walk.private;
-    let mut val: pgd_t = pgdp_get(pgd);
+#[no_mangle]
+pub unsafe extern "C" fn ptdump_pgd_entry(pgd: *mut pgd_t, addr: c_ulong, next: c_ulong, walk: *mut mm_walk) -> c_int {
+    let mut st = walk.private;
+pub static mut val: pgd_t = 0;
 
     (defined(CONFIG_KASAN_GENERIC) || defined(CONFIG_KASAN_SW_TAGS))
-    if (pgd_page(val) == virt_to_page(lm_alias(kasan_early_shadow_p4d)))
+    if (pgd_page(val) == virt_to_page(lm_alias(kasan_early_shadow_p4d))) {
     return note_kasan_page_table(walk, addr);
+    }
 
-    if (st.effective_prot_pgd)
+    if (st.effective_prot_pgd) {
     st.effective_prot_pgd(st, val);
+    }
     if (pgd_leaf(val)) {
     st.note_page_pgd(st, addr, val);
     walk.action = ACTION_CONTINUE;
     }
     return 0;
     }
-    static int ptdump_p4d_entry(p4d_t *p4d, unsigned long addr,
-    unsigned long next, struct mm_walk *walk)
-    {
-    struct ptdump_state *st = walk.private;
-    let mut val: p4d_t = p4dp_get(p4d);
+#[no_mangle]
+pub unsafe extern "C" fn ptdump_p4d_entry(p4d: *mut p4d_t, addr: c_ulong, next: c_ulong, walk: *mut mm_walk) -> c_int {
+    let mut st = walk.private;
+pub static mut val: p4d_t = 0;
 
     (defined(CONFIG_KASAN_GENERIC) || defined(CONFIG_KASAN_SW_TAGS))
-    if (p4d_page(val) == virt_to_page(lm_alias(kasan_early_shadow_pud)))
+    if (p4d_page(val) == virt_to_page(lm_alias(kasan_early_shadow_pud))) {
     return note_kasan_page_table(walk, addr);
+    }
 
-    if (st.effective_prot_p4d)
+    if (st.effective_prot_p4d) {
     st.effective_prot_p4d(st, val);
+    }
     if (p4d_leaf(val)) {
     st.note_page_p4d(st, addr, val);
     walk.action = ACTION_CONTINUE;
     }
     return 0;
     }
-    static int ptdump_pud_entry(pud_t *pud, unsigned long addr,
-    unsigned long next, struct mm_walk *walk)
-    {
-    struct ptdump_state *st = walk.private;
-    let mut val: pud_t = pudp_get(pud);
+#[no_mangle]
+pub unsafe extern "C" fn ptdump_pud_entry(pud: *mut pud_t, addr: c_ulong, next: c_ulong, walk: *mut mm_walk) -> c_int {
+    let mut st = walk.private;
+pub static mut val: pud_t = 0;
 
     (defined(CONFIG_KASAN_GENERIC) || defined(CONFIG_KASAN_SW_TAGS))
-    if (pud_page(val) == virt_to_page(lm_alias(kasan_early_shadow_pmd)))
+    if (pud_page(val) == virt_to_page(lm_alias(kasan_early_shadow_pmd))) {
     return note_kasan_page_table(walk, addr);
+    }
 
-    if (st.effective_prot_pud)
+    if (st.effective_prot_pud) {
     st.effective_prot_pud(st, val);
+    }
     if (pud_leaf(val)) {
     st.note_page_pud(st, addr, val);
     walk.action = ACTION_CONTINUE;
     }
     return 0;
     }
-    static int ptdump_pmd_entry(pmd_t *pmd, unsigned long addr,
-    unsigned long next, struct mm_walk *walk)
-    {
-    struct ptdump_state *st = walk.private;
-    let mut val: pmd_t = pmdp_get(pmd);
+#[no_mangle]
+pub unsafe extern "C" fn ptdump_pmd_entry(pmd: *mut pmd_t, addr: c_ulong, next: c_ulong, walk: *mut mm_walk) -> c_int {
+    let mut st = walk.private;
+pub static mut val: pmd_t = 0;
 
-    if (pmd_page(val) == virt_to_page(lm_alias(kasan_early_shadow_pte)))
+    if (pmd_page(val) == virt_to_page(lm_alias(kasan_early_shadow_pte))) {
     return note_kasan_page_table(walk, addr);
+    }
 
-    if (st.effective_prot_pmd)
+    if (st.effective_prot_pmd) {
     st.effective_prot_pmd(st, val);
+    }
     if (pmd_leaf(val)) {
     st.note_page_pmd(st, addr, val);
     walk.action = ACTION_CONTINUE;
     }
     return 0;
     }
-    static int ptdump_pte_entry(pte_t *pte, unsigned long addr,
-    unsigned long next, struct mm_walk *walk)
-    {
-    struct ptdump_state *st = walk.private;
-    let mut val: pte_t = ptep_get(pte);
-    if (st.effective_prot_pte)
+#[no_mangle]
+pub unsafe extern "C" fn ptdump_pte_entry(pte: *mut pte_t, addr: c_ulong, next: c_ulong, walk: *mut mm_walk) -> c_int {
+    let mut st = walk.private;
+pub static mut val: pte_t = 0;
+    if (st.effective_prot_pte) {
     st.effective_prot_pte(st, val);
+    }
     st.note_page_pte(st, addr, val);
     return 0;
     }
-    static int ptdump_hole(unsigned long addr, unsigned long next,
-    int depth, struct mm_walk *walk)
-    {
-    struct ptdump_state *st = walk.private;
-    let mut pte_zero: pte_t = {0};
-    let mut pmd_zero: pmd_t = {0};
-    let mut pud_zero: pud_t = {0};
-    let mut p4d_zero: p4d_t = {0};
-    let mut pgd_zero: pgd_t = {0};
-    switch (depth) {
-    case 4:
+#[no_mangle]
+pub unsafe extern "C" fn ptdump_hole(addr: c_ulong, next: c_ulong, depth: c_int, walk: *mut mm_walk) -> c_int {
+    let mut st = walk.private;
+pub static mut pte_zero: pte_t = 0;
+pub static mut pmd_zero: pmd_t = 0;
+pub static mut pud_zero: pud_t = 0;
+pub static mut p4d_zero: p4d_t = 0;
+pub static mut pgd_zero: pgd_t = 0;
+    match (depth) {
+    4 => {
     st.note_page_pte(st, addr, pte_zero);
-    break;
-    case 3:
+    // break;
+    }
+    3 => {
     st.note_page_pmd(st, addr, pmd_zero);
-    break;
-    case 2:
+    // break;
+    }
+    2 => {
     st.note_page_pud(st, addr, pud_zero);
-    break;
-    case 1:
+    // break;
+    }
+    1 => {
     st.note_page_p4d(st, addr, p4d_zero);
-    break;
-    case 0:
+    // break;
+    }
+    0 => {
     st.note_page_pgd(st, addr, pgd_zero);
-    break;
-    default:
-    break;
+    // break;
+    }
+    _ => {
+    // break;
+    }
     }
     return 0;
     }
-    static const struct mm_walk_ops ptdump_ops = {
-    .pgd_entry	= ptdump_pgd_entry,
-    .p4d_entry	= ptdump_p4d_entry,
-    .pud_entry	= ptdump_pud_entry,
-    .pmd_entry	= ptdump_pmd_entry,
-    .pte_entry	= ptdump_pte_entry,
-    .pte_hole	= ptdump_hole,
-    };
+pub static mut mm_walk_ops: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn ptdump_walk_pgd(st: *mut ptdump_state, mm: *mut mm_struct, pgd: *mut pgd_t) {
-    void ptdump_walk_pgd(struct ptdump_state *st, struct mm_struct *mm, pgd_t *pgd)
-    {
-    const struct ptdump_range *range = st.range;
+    let mut range = st.range;
     get_online_mems();
     mmap_write_lock(mm);
 // To stabilise kernel page tables we must hold the init_mm lock too.
-    if (mm != &init_mm)
+    if (mm != &init_mm) {
     mmap_write_lock_nested(&init_mm, SINGLE_DEPTH_NESTING);
+    }
     while (range.start != range.end) {
     walk_page_range_debug(mm, range.start, range.end,
     &ptdump_ops, pgd, st);
-    range++;
+    range += 1;
     }
-    if (mm != &init_mm)
+    if (mm != &init_mm) {
     mmap_write_unlock(&init_mm);
+    }
     mmap_write_unlock(mm);
     put_online_mems();
 // Flush out the last page
@@ -197,20 +448,18 @@ pub unsafe extern "C" fn ptdump_walk_pgd(st: *mut ptdump_state, mm: *mut mm_stru
     }
 #[no_mangle]
 unsafe extern "C" fn check_wx_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int check_wx_show(struct seq_file *m, void *v)
-    {
-    if (ptdump_check_wx())
+    if (ptdump_check_wx()) {
     seq_puts(m, "SUCCESS\n");
-    else
+    }
+    else {
     seq_puts(m, "FAILED\n");
+    }
     return 0;
     }
-    DEFINE_SHOW_ATTRIBUTE(check_wx);
+pub static mut check_wx: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn ptdump_debugfs_init() -> c_int {
-    static int ptdump_debugfs_init(void)
-    {
     debugfs_create_file("check_wx_pages", 0400, core::ptr::null_mut(), core::ptr::null_mut(), &check_wx_fops);
     return 0;
     }
-    device_initcall(ptdump_debugfs_init);
+    device_initcall!(ptdump_debugfs_init);

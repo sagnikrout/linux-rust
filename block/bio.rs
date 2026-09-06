@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -54,37 +304,42 @@ pub struct bio_alloc_cache {
 
 pub const BIO_INLINE_VECS: c_int = 4;
     static struct biovec_slab {
-    int nr_vecs;
-    char *name;
-    struct kmem_cache *slab;
-    } bvec_slabs[] __read_mostly = {
+    let mut nr_vecs = 0;
+pub static mut name: *mut c_void = core::ptr::null_mut();
+pub static mut slab: *mut c_void = core::ptr::null_mut();
+    } bvec_slabs[]  = {
     { .nr_vecs = 16, .name = "biovec-16" },
     { .nr_vecs = 64, .name = "biovec-64" },
     { .nr_vecs = 128, .name = "biovec-128" },
     { .nr_vecs = BIO_MAX_VECS, .name = "biovec-max" },
     };
-    static struct biovec_slab *biovec_slab(unsigned short nr_vecs)
-    {
-    switch (nr_vecs) {
+#[no_mangle]
+pub unsafe extern "C" fn biovec_slab(nr_vecs: c_ushort) -> *mut c_void {
+    match (nr_vecs) {
 // smaller bios use inline vecs
-    case 5 ... 16:
+    5 ... 16 => {
     return &bvec_slabs[0];
-    case 17 ... 64:
+    }
+    17 ... 64 => {
     return &bvec_slabs[1];
-    case 65 ... 128:
+    }
+    65 ... 128 => {
     return &bvec_slabs[2];
-    case 129 ... BIO_MAX_VECS:
+    }
+    129 ... BIO_MAX_VECS => {
     return &bvec_slabs[3];
-    default:
+    }
+    _ => {
     BUG();
     return core::ptr::null_mut();
+    }
     }
     }
 //
 // fs_bio_set is the bio_set containing bio and iovec memory pools used by
 // IO code that does not need private memory pools.
 //
-    struct bio_set fs_bio_set;
+pub static mut fs_bio_set: usize = 0;
     EXPORT_SYMBOL(fs_bio_set);
 //
 // Our slab pool management
@@ -98,71 +353,75 @@ pub struct bio_slab {
     pub name: [c_char; 12],
 }
 
-    static DEFINE_MUTEX(bio_slab_lock);
-    static DEFINE_XARRAY(bio_slabs);
-    static struct bio_slab *create_bio_slab(unsigned int size)
-    {
-    struct bio_slab *bslab = kzalloc_obj(*bslab);
-    if (!bslab)
+pub static mut bio_slab_lock: usize = 0;
+pub static mut bio_slabs: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn create_bio_slab(size: c_uint) -> *mut c_void {
+    let mut bslab = kzalloc_obj(*bslab);
+    if (!bslab) {
     return core::ptr::null_mut();
-    snprintf(bslab.name, sizeof(bslab.name), "bio-%d", size);
+    }
+    snprintf(bslab.name, sizeof!(bslab.name), "bio-%d", size);
     bslab.slab = kmem_cache_create(bslab.name, size,
     ARCH_KMALLOC_MINALIGN,
     SLAB_HWCACHE_ALIGN | SLAB_TYPESAFE_BY_RCU, core::ptr::null_mut());
-    if (!bslab.slab)
-    goto fail_alloc_slab;
+    if (!bslab.slab) {
+// goto;
+    }
     bslab.slab_ref = 1;
     bslab.slab_size = size;
-    if (!xa_err(xa_store(&bio_slabs, size, bslab, GFP_KERNEL)))
+    if (!xa_err(xa_store(&bio_slabs, size, bslab, GFP_KERNEL))) {
     return bslab;
+    }
     kmem_cache_destroy(bslab.slab);
-    fail_alloc_slab:
+// label;
     kfree(bslab);
     return core::ptr::null_mut();
     }
 #[no_mangle]
 pub unsafe extern "C" fn bs_bio_slab_size(bs: *mut bio_set) -> c_uint {
-    static inline unsigned int bs_bio_slab_size(struct bio_set *bs)
-    {
-    return bs.front_pad + sizeof(struct bio) + bs.back_pad;
+    return bs.front_pad + sizeof!(bio) + bs.back_pad;
     }
-    static inline void *bio_slab_addr(struct bio *bio)
-    {
-    return (void *)bio - bio.bi_pool.front_pad;
+#[no_mangle]
+pub unsafe extern "C" fn bio_slab_addr(bio: *mut bio) -> *mut c_void {
+    return bio - bio.bi_pool.front_pad;
     }
-    static struct kmem_cache *bio_find_or_create_slab(struct bio_set *bs)
-    {
-    let mut size: c_uint = bs_bio_slab_size(bs);
-    struct bio_slab *bslab;
+#[no_mangle]
+pub unsafe extern "C" fn bio_find_or_create_slab(bs: *mut bio_set) -> *mut c_void {
+pub static mut size: c_uint = 0;
+pub static mut bslab: *mut c_void = core::ptr::null_mut();
     mutex_lock(&bio_slab_lock);
     bslab = xa_load(&bio_slabs, size);
-    if (bslab)
-    bslab.slab_ref++;
-    else
+    if (bslab) {
+    bslab.slab_ref += 1;
+    }
+    else {
     bslab = create_bio_slab(size);
+    }
     mutex_unlock(&bio_slab_lock);
-    if (bslab)
+    if (bslab) {
     return bslab.slab;
+    }
     return core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn bio_put_slab(bs: *mut bio_set) {
-    static void bio_put_slab(struct bio_set *bs)
-    {
-    struct bio_slab *bslab = core::ptr::null_mut();
-    let mut slab_size: c_uint = bs_bio_slab_size(bs);
+    let mut bslab = core::ptr::null_mut();
+pub static mut slab_size: c_uint = 0;
     mutex_lock(&bio_slab_lock);
     bslab = xa_load(&bio_slabs, slab_size);
-    if (WARN(!bslab, KERN_ERR "bio: unable to find slab!\n"))
-    goto out;
-    WARN_ON_ONCE(bslab.slab != bs.bio_slab);
-    WARN_ON(!bslab.slab_ref);
-    if (--bslab.slab_ref)
-    goto out;
+    if (WARN(!bslab, "bio: unable to find slab!\n")) {
+// goto;
+    }
+    WARN_ON_ONCE!(bslab.slab != bs.bio_slab);
+    WARN_ON!(!bslab.slab_ref);
+    if (--bslab.slab_ref) {
+// goto;
+    }
     xa_erase(&bio_slabs, slab_size);
     kmem_cache_destroy(bslab.slab);
     kfree(bslab);
-    out:
+// label;
     mutex_unlock(&bio_slab_lock);
     }
 //
@@ -171,52 +430,47 @@ unsafe extern "C" fn bio_put_slab(bs: *mut bio_set) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn try_alloc_gfp(gfp: gfp_t) -> gfp_t {
-    static inline gfp_t try_alloc_gfp(gfp_t gfp)
-    {
     return (gfp & ~(__GFP_DIRECT_RECLAIM | __GFP_IO)) |
     __GFP_NOMEMALLOC | __GFP_NORETRY | __GFP_NOWARN;
     }
 #[no_mangle]
 pub unsafe extern "C" fn bio_uninit(bio: *mut bio) {
-    void bio_uninit(struct bio *bio)
-    {
 
     if (bio.bi_blkg) {
     blkg_put(bio.bi_blkg);
     bio.bi_blkg = core::ptr::null_mut();
     }
 
-    if (bio_integrity(bio))
+    if (bio_integrity(bio)) {
     bio_integrity_free(bio);
+    }
     bio_crypt_free_ctx(bio);
     }
     EXPORT_SYMBOL(bio_uninit);
 #[no_mangle]
 unsafe extern "C" fn bio_free(bio: *mut bio) {
-    static void bio_free(struct bio *bio)
-    {
-    struct bio_set *bs = bio.bi_pool;
-    void *p = bio;
-    WARN_ON_ONCE(!bs);
-    WARN_ON_ONCE(bio.bi_max_vecs > BIO_MAX_VECS);
+    let mut bs = bio.bi_pool;
+    let mut p = bio;
+    WARN_ON_ONCE!(!bs);
+    WARN_ON_ONCE!(bio.bi_max_vecs > BIO_MAX_VECS);
     bio_uninit(bio);
-    if (bio.bi_max_vecs == BIO_MAX_VECS)
+    if (bio.bi_max_vecs == BIO_MAX_VECS) {
     mempool_free(bio.bi_io_vec, &bs.bvec_pool);
-#[no_mangle]
-pub unsafe extern "C" fn if(BIO_INLINE_VECS: bio->bi_max_vecs >) -> else {
-    else if (bio.bi_max_vecs > BIO_INLINE_VECS)
+    }
+
+    else if (bio.bi_max_vecs > BIO_INLINE_VECS) {
     kmem_cache_free(biovec_slab(bio.bi_max_vecs).slab,
     bio.bi_io_vec);
+    }
     mempool_free(p - bs.front_pad, &bs.bio_pool);
     }
 //
 // Users of this function have their own bio allocation. Subsequently,
-// they must remember to pair any call to bio_init() with bio_uninit()
+they must remember to pair any call to bio_init() with bio_uninit()
 // when IO has completed, or when the bio is released.
 //
-    void bio_init(struct bio *bio, struct block_device *bdev, struct bio_vec *table,
-    unsigned short max_vecs, blk_opf_t opf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn bio_init(bio: *mut bio, bdev: *mut block_device, table: *mut bio_vec, max_vecs: c_ushort, opf: blk_opf_t) {
     bio.bi_next = core::ptr::null_mut();
     bio.bi_bdev = bdev;
     bio.bi_opf = opf;
@@ -235,8 +489,9 @@ pub unsafe extern "C" fn if(BIO_INLINE_VECS: bio->bi_max_vecs >) -> else {
 
     bio.bi_blkg = core::ptr::null_mut();
     bio.issue_time_ns = 0;
-    if (bdev)
+    if (bdev) {
     bio_associate_blkg(bio);
+    }
 
     bio.bi_iocost_cost = 0;
 
@@ -267,16 +522,15 @@ pub unsafe extern "C" fn if(BIO_INLINE_VECS: bio->bi_max_vecs >) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn bio_reset(bio: *mut bio, bdev: *mut block_device, opf: blk_opf_t) {
-    void bio_reset(struct bio *bio, struct block_device *bdev, blk_opf_t opf)
-    {
-    struct bio_vec          *bv = bio.bi_io_vec;
+    let mut bv = bio.bi_io_vec;
     bio_uninit(bio);
     memset(bio, 0, BIO_RESET_BYTES);
     atomic_set(&bio.__bi_remaining, 1);
     bio.bi_io_vec = bv;
     bio.bi_bdev = bdev;
-    if (bio.bi_bdev)
+    if (bio.bi_bdev) {
     bio_associate_blkg(bio);
+    }
     bio.bi_opf = opf;
     }
     EXPORT_SYMBOL(bio_reset);
@@ -297,27 +551,27 @@ pub unsafe extern "C" fn bio_reset(bio: *mut bio, bdev: *mut block_device, opf: 
 //
 #[no_mangle]
 pub unsafe extern "C" fn bio_reuse(bio: *mut bio, opf: blk_opf_t) {
-    void bio_reuse(struct bio *bio, blk_opf_t opf)
-    {
-    let mut vcnt: c_ushort = bio.bi_vcnt, i;
-    bio_end_io_t *end_io = bio.bi_end_io;
-    void *private = bio.bi_private;
-    WARN_ON_ONCE(bio_flagged(bio, BIO_CLONED));
-    WARN_ON_ONCE(bio_integrity(bio));
-    WARN_ON_ONCE(bio_has_crypt_ctx(bio));
+pub static mut vcnt: c_ushort = 0;
+    let mut end_io = bio.bi_end_io;
+    let mut private = bio.bi_private;
+    WARN_ON_ONCE!(bio_flagged(bio, BIO_CLONED));
+    WARN_ON_ONCE!(bio_integrity(bio));
+    WARN_ON_ONCE!(bio_has_crypt_ctx(bio));
     bio_reset(bio, bio.bi_bdev, opf);
-    for (i = 0; i < vcnt; i++)
+    for (i = 0; i < vcnt; i++) {
     bio.bi_iter.bi_size += bio.bi_io_vec[i].bv_len;
+    }
     bio.bi_vcnt = vcnt;
     bio.bi_private = private;
     bio.bi_end_io = end_io;
     }
     EXPORT_SYMBOL_GPL(bio_reuse);
-    static struct bio *__bio_chain_endio(struct bio *bio)
-    {
-    struct bio *parent = bio.bi_private;
-    if (bio.bi_status && !parent.bi_status)
+#[no_mangle]
+pub unsafe extern "C" fn __bio_chain_endio(bio: *mut bio) -> *mut c_void {
+    let mut parent = bio.bi_private;
+    if (bio.bi_status && !parent.bi_status) {
     parent.bi_status = bio.bi_status;
+    }
     bio_put(bio);
     return parent;
     }
@@ -327,8 +581,6 @@ pub unsafe extern "C" fn bio_reuse(bio: *mut bio, opf: blk_opf_t) {
 //
 #[no_mangle]
 unsafe extern "C" fn bio_chain_endio(bio: *mut bio) {
-    static void bio_chain_endio(struct bio *bio)
-    {
     BUG();
     }
 //
@@ -344,9 +596,7 @@ unsafe extern "C" fn bio_chain_endio(bio: *mut bio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn bio_chain(bio: *mut bio, parent: *mut bio) {
-    void bio_chain(struct bio *bio, struct bio *parent)
-    {
-    BUG_ON(bio.bi_private || bio.bi_end_io);
+    BUG_ON!(bio.bi_private || bio.bi_end_io);
     bio.bi_private = parent;
     bio.bi_end_io	= bio_chain_endio;
     bio_inc_remaining(parent);
@@ -361,32 +611,30 @@ pub unsafe extern "C" fn bio_chain(bio: *mut bio, parent: *mut bio) {
 //
 // Return: @new.
 //
-    struct bio *bio_chain_and_submit(struct bio *prev, struct bio *new)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn bio_chain_and_submit(prev: *mut bio, new: *mut bio) -> *mut c_void {
     if (prev) {
     bio_chain(prev, new);
     submit_bio(prev);
     }
     return new;
     }
-    struct bio *blk_next_bio(struct bio *bio, struct block_device *bdev,
-    unsigned int nr_pages, blk_opf_t opf, gfp_t gfp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn blk_next_bio(bio: *mut bio, bdev: *mut block_device, nr_pages: c_uint, opf: blk_opf_t, gfp: gfp_t) -> *mut c_void {
     return bio_chain_and_submit(bio, bio_alloc(bdev, nr_pages, opf, gfp));
     }
     EXPORT_SYMBOL_GPL(blk_next_bio);
 #[no_mangle]
 unsafe extern "C" fn bio_alloc_rescue(work: *mut work_struct) {
-    static void bio_alloc_rescue(struct work_struct *work)
-    {
-    struct bio_set *bs = container_of(work, struct bio_set, rescue_work);
-    struct bio *bio;
+    let mut bs = container_of!(work, bio_set, rescue_work);
+pub static mut bio: *mut c_void = core::ptr::null_mut();
     while (1) {
     spin_lock(&bs.rescue_lock);
     bio = bio_list_pop(&bs.rescue_list);
     spin_unlock(&bs.rescue_lock);
-    if (!bio)
+    if (!bio) {
     break;
+    }
     submit_bio_noacct(bio);
     }
     }
@@ -406,15 +654,15 @@ unsafe extern "C" fn bio_alloc_rescue(work: *mut work_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn punt_bios_to_rescuer(bs: *mut bio_set) {
-    static void punt_bios_to_rescuer(struct bio_set *bs)
-    {
     struct bio_list punt, nopunt;
-    struct bio *bio;
-    if (!current.bio_list || !bs.rescue_workqueue)
+pub static mut bio: *mut c_void = core::ptr::null_mut();
+    if (!current.bio_list || !bs.rescue_workqueue) {
     return;
+    }
     if (bio_list_empty(&current.bio_list[0]) &&
-    bio_list_empty(&current.bio_list[1]))
+    bio_list_empty(&current.bio_list[1])) {
     return;
+    }
 //
 // In order to guarantee forward progress we must punt only bios that
 // were allocated from this bio_set; otherwise, if there was a bio on
@@ -427,12 +675,14 @@ unsafe extern "C" fn punt_bios_to_rescuer(bs: *mut bio_set) {
 //
     bio_list_init(&punt);
     bio_list_init(&nopunt);
-    while ((bio = bio_list_pop(&current.bio_list[0])))
+    while ((bio = bio_list_pop(&current.bio_list[0]))) {
     bio_list_add(bio.bi_pool == bs ? &punt : &nopunt, bio);
+    }
     current.bio_list[0] = nopunt;
     bio_list_init(&nopunt);
-    while ((bio = bio_list_pop(&current.bio_list[1])))
+    while ((bio = bio_list_pop(&current.bio_list[1]))) {
     bio_list_add(bio.bi_pool == bs ? &punt : &nopunt, bio);
+    }
     current.bio_list[1] = nopunt;
     spin_lock(&bs.rescue_lock);
     bio_list_merge(&bs.rescue_list, &punt);
@@ -441,12 +691,11 @@ unsafe extern "C" fn punt_bios_to_rescuer(bs: *mut bio_set) {
     }
 #[no_mangle]
 unsafe extern "C" fn bio_alloc_irq_cache_splice(cache: *mut bio_alloc_cache) {
-    static void bio_alloc_irq_cache_splice(struct bio_alloc_cache *cache)
-    {
-    unsigned long flags;
+    let mut flags = 0;
 // cache->free_list must be empty
-    if (WARN_ON_ONCE(cache.free_list))
+    if (WARN_ON_ONCE!(cache.free_list)) {
     return;
+    }
     local_irq_save(flags);
     cache.free_list = cache.free_list_irq;
     cache.free_list_irq = core::ptr::null_mut();
@@ -454,14 +703,15 @@ unsafe extern "C" fn bio_alloc_irq_cache_splice(cache: *mut bio_alloc_cache) {
     cache.nr_irq = 0;
     local_irq_restore(flags);
     }
-    static struct bio *bio_alloc_percpu_cache(struct bio_set *bs)
-    {
-    struct bio_alloc_cache *cache;
-    struct bio *bio;
+#[no_mangle]
+pub unsafe extern "C" fn bio_alloc_percpu_cache(bs: *mut bio_set) -> *mut c_void {
+pub static mut cache: *mut c_void = core::ptr::null_mut();
+pub static mut bio: *mut c_void = core::ptr::null_mut();
     cache = per_cpu_ptr(bs.cache, get_cpu());
     if (!cache.free_list) {
-    if (READ_ONCE(cache.nr_irq) >= ALLOC_CACHE_THRESHOLD)
+    if (READ_ONCE(cache.nr_irq) >= ALLOC_CACHE_THRESHOLD) {
     bio_alloc_irq_cache_splice(cache);
+    }
     if (!cache.free_list) {
     put_cpu();
     return core::ptr::null_mut();
@@ -469,7 +719,7 @@ unsafe extern "C" fn bio_alloc_irq_cache_splice(cache: *mut bio_alloc_cache) {
     }
     bio = cache.free_list;
     cache.free_list = bio.bi_next;
-    cache.nr--;
+    cache.nr -= 1;
     put_cpu();
     bio.bi_pool = bs;
     kmemleak_alloc(bio_slab_addr(bio),
@@ -510,18 +760,19 @@ unsafe extern "C" fn bio_alloc_irq_cache_splice(cache: *mut bio_alloc_cache) {
 //
 // Returns: Pointer to new bio on success, NULL on failure.
 //
-    struct bio *bio_alloc_bioset(struct block_device *bdev, unsigned short nr_vecs,
-    blk_opf_t opf, gfp_t gfp, struct bio_set *bs)
-    {
-    struct bio_vec *bvecs = core::ptr::null_mut();
-    struct bio *bio = core::ptr::null_mut();
-    let mut saved_gfp: gfp_t = gfp;
-    void *p;
+#[no_mangle]
+pub unsafe extern "C" fn bio_alloc_bioset(bdev: *mut block_device, nr_vecs: c_ushort, opf: blk_opf_t, gfp: gfp_t, bs: *mut bio_set) -> *mut c_void {
+    let mut bvecs = core::ptr::null_mut();
+    let mut bio = core::ptr::null_mut();
+pub static mut saved_gfp: gfp_t = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
 // should not use nobvec bioset for nr_vecs > 0
-    if (WARN_ON_ONCE(!mempool_initialized(&bs.bvec_pool) && nr_vecs > 0))
+    if (WARN_ON_ONCE!(!mempool_initialized(&bs.bvec_pool) && nr_vecs > 0)) {
     return core::ptr::null_mut();
-    if (saved_gfp & __GFP_DIRECT_RECLAIM)
+    }
+    if (saved_gfp & __GFP_DIRECT_RECLAIM) {
     gfp = try_alloc_gfp(gfp);
+    }
     if (bs.cache && nr_vecs <= BIO_INLINE_VECS) {
 //
 // Set REQ_ALLOC_CACHE even if no cached bio is available to
@@ -539,11 +790,12 @@ unsafe extern "C" fn bio_alloc_irq_cache_splice(cache: *mut bio_alloc_cache) {
 //
     if (!bio) {
     p = kmem_cache_alloc(bs.bio_slab, gfp);
-    if (p)
+    if (p) {
     bio = p + bs.front_pad;
     }
+    }
     if (bio && nr_vecs > BIO_INLINE_VECS) {
-    struct biovec_slab *bvs = biovec_slab(nr_vecs);
+    let mut bvs = biovec_slab(nr_vecs);
 //
 // Upgrade nr_vecs to take full advantage of the allocation.
 // We also rely on this in bio_free().
@@ -560,8 +812,9 @@ unsafe extern "C" fn bio_alloc_irq_cache_splice(cache: *mut bio_alloc_cache) {
 // Give up if we are not allow to sleep as non-blocking mempool
 // allocations just go back to the slab allocation.
 //
-    if (!(saved_gfp & __GFP_DIRECT_RECLAIM))
+    if (!(saved_gfp & __GFP_DIRECT_RECLAIM)) {
     return core::ptr::null_mut();
+    }
     punt_bios_to_rescuer(bs);
 //
 // Don't rob the mempools by returning to the per-CPU cache if
@@ -575,10 +828,12 @@ unsafe extern "C" fn bio_alloc_irq_cache_splice(cache: *mut bio_alloc_cache) {
     bvecs = mempool_alloc(&bs.bvec_pool, saved_gfp);
     }
     }
-    if (nr_vecs && nr_vecs <= BIO_INLINE_VECS)
+    if (nr_vecs && nr_vecs <= BIO_INLINE_VECS) {
     bio_init_inline(bio, bdev, nr_vecs, opf);
-    else
+    }
+    else {
     bio_init(bio, bdev, bvecs, nr_vecs, opf);
+    }
     bio.bi_pool = bs;
     return bio;
     }
@@ -599,21 +854,20 @@ unsafe extern "C" fn bio_alloc_irq_cache_splice(cache: *mut bio_alloc_cache) {
 //
 // Returns: Pointer to new bio on success, NULL on failure.
 //
-    struct bio *bio_kmalloc(unsigned short nr_vecs, gfp_t gfp_mask)
-    {
-    struct bio *bio;
-    if (nr_vecs > BIO_MAX_INLINE_VECS)
+#[no_mangle]
+pub unsafe extern "C" fn bio_kmalloc(nr_vecs: c_ushort, gfp_mask: gfp_t) -> *mut c_void {
+pub static mut bio: *mut c_void = core::ptr::null_mut();
+    if (nr_vecs > BIO_MAX_INLINE_VECS) {
     return core::ptr::null_mut();
-    return kmalloc(sizeof(*bio) + nr_vecs * sizeof(struct bio_vec),
+    }
+    return kmalloc(sizeof!(*bio) + nr_vecs * sizeof!(bio_vec),
     gfp_mask);
     }
     EXPORT_SYMBOL(bio_kmalloc);
 #[no_mangle]
 pub unsafe extern "C" fn zero_fill_bio(bio: *mut bio) {
-    void zero_fill_bio(struct bio *bio)
-    {
-    struct bio_vec bv;
-    struct bvec_iter iter;
+pub static mut bv: usize = 0;
+pub static mut iter: usize = 0;
     bio_for_each_segment(bv, bio, iter)
     memzero_bvec(&bv);
     }
@@ -630,30 +884,32 @@ pub unsafe extern "C" fn zero_fill_bio(bio: *mut bio) {
 //
 #[no_mangle]
 unsafe extern "C" fn bio_truncate(bio: *mut bio, new_size: unsigned) {
-    static void bio_truncate(struct bio *bio, unsigned new_size)
-    {
-    struct bio_vec bv;
-    struct bvec_iter iter;
-    let mut done: c_uint = 0;
-    let mut truncated: bool = false;
-    if (new_size >= bio.bi_iter.bi_size)
+pub static mut bv: usize = 0;
+pub static mut iter: usize = 0;
+pub static mut done: c_uint = 0;
+pub static mut truncated: bool = false;
+    if (new_size >= bio.bi_iter.bi_size) {
     return;
-    if (bio_op(bio) != REQ_OP_READ)
-    goto exit;
+    }
+    if (bio_op(bio) != REQ_OP_READ) {
+// goto;
+    }
     bio_for_each_segment(bv, bio, iter) {
     if (done + bv.bv_len > new_size) {
-    size_t offset;
-    if (!truncated)
+    let mut offset = 0;
+    if (!truncated) {
     offset = new_size - done;
-    else
+    }
+    else {
     offset = 0;
+    }
     memzero_page(bv.bv_page, bv.bv_offset + offset,
     bv.bv_len - offset);
     truncated = true;
     }
     done += bv.bv_len;
     }
-    exit:
+// label;
 //
 // Don't touch bvec table here and make it really immutable, since
 // fs bio user has to retrieve all pages via bio_for_each_segment_all
@@ -678,43 +934,43 @@ unsafe extern "C" fn bio_truncate(bio: *mut bio, new_size: unsigned) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn guard_bio_eod(bio: *mut bio) {
-    void guard_bio_eod(struct bio *bio)
-    {
-    let mut maxsector: sector_t = bdev_nr_sectors(bio.bi_bdev);
-    if (!maxsector)
+pub static mut maxsector: sector_t = 0;
+    if (!maxsector) {
     return;
+    }
 //
 // If the *whole* IO is past the end of the device,
 // let it through, and the IO layer will turn it into
 // an EIO.
 //
-    if (unlikely(bio.bi_iter.bi_sector >= maxsector))
+    if (unlikely(bio.bi_iter.bi_sector >= maxsector)) {
     return;
+    }
     maxsector -= bio.bi_iter.bi_sector;
-    if (likely((bio.bi_iter.bi_size >> 9) <= maxsector))
+    if (likely((bio.bi_iter.bi_size >> 9) <= maxsector)) {
     return;
+    }
     bio_truncate(bio, maxsector << 9);
     }
-    static int __bio_alloc_cache_prune(struct bio_alloc_cache *cache,
-    unsigned int nr)
-    {
-    let mut i: c_uint = 0;
-    struct bio *bio;
+#[no_mangle]
+pub unsafe extern "C" fn __bio_alloc_cache_prune(cache: *mut bio_alloc_cache, nr: c_uint) -> c_int {
+pub static mut i: c_uint = 0;
+pub static mut bio: *mut c_void = core::ptr::null_mut();
     while ((bio = cache.free_list) != core::ptr::null_mut()) {
     cache.free_list = bio.bi_next;
-    cache.nr--;
+    cache.nr -= 1;
     kmemleak_alloc(bio_slab_addr(bio),
     kmem_cache_size(bio.bi_pool.bio_slab),
     1, GFP_KERNEL);
     bio_free(bio);
-    if (++i == nr)
+    if (++i == nr) {
     break;
+    }
     }
     return i;
     }
-    static void bio_alloc_cache_prune(struct bio_alloc_cache *cache,
-    unsigned int nr)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn bio_alloc_cache_prune(cache: *mut bio_alloc_cache, nr: c_uint) {
     nr -= __bio_alloc_cache_prune(cache, nr);
     if (!READ_ONCE(cache.free_list)) {
     bio_alloc_irq_cache_splice(cache);
@@ -723,26 +979,23 @@ pub unsafe extern "C" fn guard_bio_eod(bio: *mut bio) {
     }
 #[no_mangle]
 unsafe extern "C" fn bio_cpu_dead(cpu: c_uint, node: *mut hlist_node) -> c_int {
-    static int bio_cpu_dead(unsigned int cpu, struct hlist_node *node)
-    {
-    struct bio_set *bs;
-    bs = hlist_entry_safe(node, struct bio_set, cpuhp_dead);
+pub static mut bs: *mut c_void = core::ptr::null_mut();
+    bs = hlist_entry_safe(node, bio_set, cpuhp_dead);
     if (bs.cache) {
-    struct bio_alloc_cache *cache = per_cpu_ptr(bs.cache, cpu);
+    let mut cache = per_cpu_ptr(bs.cache, cpu);
     bio_alloc_cache_prune(cache, -1U);
     }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn bio_alloc_cache_destroy(bs: *mut bio_set) {
-    static void bio_alloc_cache_destroy(struct bio_set *bs)
-    {
-    int cpu;
-    if (!bs.cache)
+    let mut cpu = 0;
+    if (!bs.cache) {
     return;
+    }
     cpuhp_state_remove_instance_nocalls(CPUHP_BIO_DEAD, &bs.cpuhp_dead);
     for_each_possible_cpu(cpu) {
-    struct bio_alloc_cache *cache;
+pub static mut cache: *mut c_void = core::ptr::null_mut();
     cache = per_cpu_ptr(bs.cache, cpu);
     bio_alloc_cache_prune(cache, -1U);
     }
@@ -751,33 +1004,32 @@ unsafe extern "C" fn bio_alloc_cache_destroy(bs: *mut bio_set) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn bio_put_percpu_cache(bio: *mut bio) {
-    static inline void bio_put_percpu_cache(struct bio *bio)
-    {
-    struct bio_alloc_cache *cache;
+pub static mut cache: *mut c_void = core::ptr::null_mut();
     cache = per_cpu_ptr(bio.bi_pool.cache, get_cpu());
-    if (READ_ONCE(cache.nr_irq) + cache.nr > ALLOC_CACHE_MAX)
-    goto out_free;
+    if (READ_ONCE(cache.nr_irq) + cache.nr > ALLOC_CACHE_MAX) {
+// goto;
+    }
     if (in_task()) {
     bio_uninit(bio);
     bio.bi_next = cache.free_list;
 // Not necessary but helps not to iopoll already freed bios
     bio.bi_bdev = core::ptr::null_mut();
     cache.free_list = bio;
-    cache.nr++;
+    cache.nr += 1;
     kmemleak_free(bio_slab_addr(bio));
     } else if (in_hardirq()) {
     lockdep_assert_irqs_disabled();
     bio_uninit(bio);
     bio.bi_next = cache.free_list_irq;
     cache.free_list_irq = bio;
-    cache.nr_irq++;
+    cache.nr_irq += 1;
     kmemleak_free(bio_slab_addr(bio));
     } else {
-    goto out_free;
+// goto;
     }
     put_cpu();
     return;
-    out_free:
+// label;
     put_cpu();
     bio_free(bio);
     }
@@ -791,23 +1043,22 @@ pub unsafe extern "C" fn bio_put_percpu_cache(bio: *mut bio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn bio_put(bio: *mut bio) {
-    void bio_put(struct bio *bio)
-    {
     if (unlikely(bio_flagged(bio, BIO_REFFED))) {
-    BUG_ON(!atomic_read(&bio.__bi_cnt));
-    if (!atomic_dec_and_test(&bio.__bi_cnt))
+    BUG_ON!(!atomic_read(&bio.__bi_cnt));
+    if (!atomic_dec_and_test(&bio.__bi_cnt)) {
     return;
     }
-    if (bio.bi_opf & REQ_ALLOC_CACHE)
+    }
+    if (bio.bi_opf & REQ_ALLOC_CACHE) {
     bio_put_percpu_cache(bio);
-    else
+    }
+    else {
     bio_free(bio);
+    }
     }
     EXPORT_SYMBOL(bio_put);
 #[no_mangle]
 unsafe extern "C" fn __bio_clone(bio: *mut bio, bio_src: *mut bio, gfp: gfp_t) -> c_int {
-    static int __bio_clone(struct bio *bio, struct bio *bio_src, gfp_t gfp)
-    {
     bio_set_flag(bio, BIO_CLONED);
     bio.bi_ioprio = bio_src.bi_ioprio;
     bio.bi_write_hint = bio_src.bi_write_hint;
@@ -817,15 +1068,18 @@ unsafe extern "C" fn __bio_clone(bio: *mut bio, bio_src: *mut bio, gfp: gfp_t) -
     bio.bi_io_vec = bio_src.bi_io_vec;
     if (bio.bi_bdev) {
     if (bio.bi_bdev == bio_src.bi_bdev &&
-    bio_flagged(bio_src, BIO_REMAPPED))
+    bio_flagged(bio_src, BIO_REMAPPED)) {
     bio_set_flag(bio, BIO_REMAPPED);
+    }
     bio_clone_blkg_association(bio, bio_src);
     }
-    if (bio_crypt_clone(bio, bio_src, gfp) < 0)
+    if (bio_crypt_clone(bio, bio_src, gfp) < 0) {
     return -ENOMEM;
+    }
     if (bio_integrity(bio_src) &&
-    bio_integrity_clone(bio, bio_src, gfp) < 0)
+    bio_integrity_clone(bio, bio_src, gfp) < 0) {
     return -ENOMEM;
+    }
     return 0;
     }
 //
@@ -841,13 +1095,13 @@ unsafe extern "C" fn __bio_clone(bio: *mut bio, bio_src: *mut bio, gfp: gfp_t) -
 // the bio_vecs, and must ensure the bio is freed before the memory
 // pointed to by @bio_Src->bi_io_vecs.
 //
-    struct bio *bio_alloc_clone(struct block_device *bdev, struct bio *bio_src,
-    gfp_t gfp, struct bio_set *bs)
-    {
-    struct bio *bio;
+#[no_mangle]
+pub unsafe extern "C" fn bio_alloc_clone(bdev: *mut block_device, bio_src: *mut bio, gfp: gfp_t, bs: *mut bio_set) -> *mut c_void {
+pub static mut bio: *mut c_void = core::ptr::null_mut();
     bio = bio_alloc_bioset(bdev, 0, bio_src.bi_opf, gfp, bs);
-    if (!bio)
+    if (!bio) {
     return core::ptr::null_mut();
+    }
     if (__bio_clone(bio, bio_src, gfp) < 0) {
     bio_put(bio);
     return core::ptr::null_mut();
@@ -865,14 +1119,14 @@ unsafe extern "C" fn __bio_clone(bio: *mut bio, bio_src: *mut bio, gfp: gfp_t) -
 // Initialize a new bio in caller provided memory that is a clone of @bio_src.
 // The same bio_vecs reuse and bio lifetime rules as bio_alloc_clone() apply.
 //
-    int bio_init_clone(struct block_device *bdev, struct bio *bio,
-    struct bio *bio_src, gfp_t gfp)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn bio_init_clone(bdev: *mut block_device, bio: *mut bio, bio_src: *mut bio, gfp: gfp_t) -> c_int {
+    let mut ret = 0;
     bio_init(bio, bdev, core::ptr::null_mut(), 0, bio_src.bi_opf);
     ret = __bio_clone(bio, bio_src, gfp);
-    if (ret)
+    if (ret) {
     bio_uninit(bio);
+    }
     return ret;
     }
     EXPORT_SYMBOL(bio_init_clone);
@@ -886,29 +1140,32 @@ unsafe extern "C" fn __bio_clone(bio: *mut bio, bio_src: *mut bio, gfp: gfp_t) -
 //
 #[no_mangle]
 pub unsafe extern "C" fn bio_full(bio: *mut bio, len: unsigned) -> bool {
-    static inline bool bio_full(struct bio *bio, unsigned len)
-    {
-    if (bio.bi_vcnt >= bio.bi_max_vecs)
+    if (bio.bi_vcnt >= bio.bi_max_vecs) {
     return true;
-    if (bio.bi_iter.bi_size > BIO_MAX_SIZE - len)
+    }
+    if (bio.bi_iter.bi_size > BIO_MAX_SIZE - len) {
     return true;
+    }
     return false;
     }
-    static bool bvec_try_merge_page(struct bio_vec *bv, struct page *page,
-    unsigned int len, unsigned int off)
-    {
-    let mut bv_end: usize = bv.bv_offset + bv.bv_len;
-    let mut vec_end_addr: phys_addr_t = page_to_phys(bv.bv_page) + bv_end - 1;
-    let mut page_addr: phys_addr_t = page_to_phys(page);
-    if (vec_end_addr + 1 != page_addr + off)
+#[no_mangle]
+pub unsafe extern "C" fn bvec_try_merge_page(bv: *mut bio_vec, page: *mut page, len: c_uint, off: c_uint) -> bool {
+pub static mut bv_end: usize = 0;
+pub static mut vec_end_addr: phys_addr_t = 0;
+pub static mut page_addr: phys_addr_t = 0;
+    if (vec_end_addr + 1 != page_addr + off) {
     return false;
-    if (xen_domain() && !xen_biovec_phys_mergeable(bv, page))
+    }
+    if (xen_domain() && !xen_biovec_phys_mergeable(bv, page)) {
     return false;
+    }
     if ((vec_end_addr & PAGE_MASK) != ((page_addr + off) & PAGE_MASK)) {
-    if (IS_ENABLED(CONFIG_KMSAN))
+    if (IS_ENABLED!(CONFIG_KMSAN)) {
     return false;
-    if (bv.bv_page + bv_end / PAGE_SIZE != page + off / PAGE_SIZE)
+    }
+    if (bv.bv_page + bv_end / PAGE_SIZE != page + off / PAGE_SIZE) {
     return false;
+    }
     }
     bv.bv_len += len;
     return true;
@@ -921,16 +1178,17 @@ pub unsafe extern "C" fn bio_full(bio: *mut bio, len: unsigned) -> bool {
 // to build the initial bio to the hardware limit and doesn't have proper
 // helpers to split.  Hopefully this will go away soon.
 //
-    bool bvec_try_merge_hw_page(struct request_queue *q, struct bio_vec *bv,
-    struct page *page, unsigned len, unsigned offset)
-    {
-    let mut mask: c_ulong = queue_segment_boundary(q);
-    let mut addr1: phys_addr_t = bvec_phys(bv);
-    let mut addr2: phys_addr_t = page_to_phys(page) + offset + len - 1;
-    if ((addr1 | mask) != (addr2 | mask))
+#[no_mangle]
+pub unsafe extern "C" fn bvec_try_merge_hw_page(q: *mut request_queue, bv: *mut bio_vec, page: *mut page, len: c_uint, offset: c_uint) -> bool {
+pub static mut mask: c_ulong = 0;
+pub static mut addr1: phys_addr_t = 0;
+pub static mut addr2: phys_addr_t = 0;
+    if ((addr1 | mask) != (addr2 | mask)) {
     return false;
-    if (len > queue_max_segment_size(q) - bv.bv_len)
+    }
+    if (len > queue_max_segment_size(q) - bv.bv_len) {
     return false;
+    }
     return bvec_try_merge_page(bv, page, len, offset);
     }
 //
@@ -943,16 +1201,16 @@ pub unsafe extern "C" fn bio_full(bio: *mut bio, len: unsigned) -> bool {
 // Add the data at @page + @off to @bio as a new bvec.  The caller must ensure
 // that @bio has space for another bvec.
 //
-    void __bio_add_page(struct bio *bio, struct page *page,
-    unsigned int len, unsigned int off)
-    {
-    WARN_ON_ONCE(bio_flagged(bio, BIO_CLONED));
-    WARN_ON_ONCE(bio_full(bio, len));
-    if (is_pci_p2pdma_page(page))
+#[no_mangle]
+pub unsafe extern "C" fn __bio_add_page(bio: *mut bio, page: *mut page, len: c_uint, off: c_uint) {
+    WARN_ON_ONCE!(bio_flagged(bio, BIO_CLONED));
+    WARN_ON_ONCE!(bio_full(bio, len));
+    if (is_pci_p2pdma_page(page)) {
     bio.bi_opf |= REQ_NOMERGE;
+    }
     bvec_set_page(&bio.bi_io_vec[bio.bi_vcnt], page, len, off);
     bio.bi_iter.bi_size += len;
-    bio.bi_vcnt++;
+    bio.bi_vcnt += 1;
     }
     EXPORT_SYMBOL_GPL(__bio_add_page);
 //
@@ -967,8 +1225,6 @@ pub unsafe extern "C" fn bio_full(bio: *mut bio, len: unsigned) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn bio_add_virt_nofail(bio: *mut bio, vaddr: *mut c_void, len: unsigned) {
-    void bio_add_virt_nofail(struct bio *bio, void *vaddr, unsigned len)
-    {
     __bio_add_page(bio, virt_to_page(vaddr), len, offset_in_page(vaddr));
     }
     EXPORT_SYMBOL_GPL(bio_add_virt_nofail);
@@ -982,36 +1238,39 @@ pub unsafe extern "C" fn bio_add_virt_nofail(bio: *mut bio, vaddr: *mut c_void, 
 // Attempt to add page(s) to the bio_vec maplist. This will only fail
 // if either bio->bi_vcnt == bio->bi_max_vecs or it's a cloned bio.
 //
-    int bio_add_page(struct bio *bio, struct page *page,
-    unsigned int len, unsigned int offset)
-    {
-    if (WARN_ON_ONCE(bio_flagged(bio, BIO_CLONED)))
+#[no_mangle]
+pub unsafe extern "C" fn bio_add_page(bio: *mut bio, page: *mut page, len: c_uint, offset: c_uint) -> c_int {
+    if (WARN_ON_ONCE!(bio_flagged(bio, BIO_CLONED))) {
     return 0;
-    if (WARN_ON_ONCE(len == 0))
+    }
+    if (WARN_ON_ONCE!(len == 0)) {
     return 0;
-    if (bio.bi_iter.bi_size > BIO_MAX_SIZE - len)
+    }
+    if (bio.bi_iter.bi_size > BIO_MAX_SIZE - len) {
     return 0;
+    }
     if (bio.bi_vcnt > 0) {
-    struct bio_vec *bv = &bio.bi_io_vec[bio.bi_vcnt - 1];
-    if (!zone_device_pages_compatible(bv.bv_page, page))
+    let mut bv = &bio.bi_io_vec[bio.bi_vcnt - 1];
+    if (!zone_device_pages_compatible(bv.bv_page, page)) {
     return 0;
+    }
     if (zone_device_pages_have_same_pgmap(bv.bv_page, page) &&
     bvec_try_merge_page(bv, page, len, offset)) {
     bio.bi_iter.bi_size += len;
     return len;
     }
     }
-    if (bio.bi_vcnt >= bio.bi_max_vecs)
+    if (bio.bi_vcnt >= bio.bi_max_vecs) {
     return 0;
+    }
     __bio_add_page(bio, page, len, offset);
     return len;
     }
     EXPORT_SYMBOL(bio_add_page);
-    void bio_add_folio_nofail(struct bio *bio, struct folio *folio, size_t len,
-    size_t off)
-    {
-    let mut nr: c_ulong = off / PAGE_SIZE;
-    WARN_ON_ONCE(len > BIO_MAX_SIZE);
+#[no_mangle]
+pub unsafe extern "C" fn bio_add_folio_nofail(bio: *mut bio, folio: *mut folio, len: size_t, off: size_t) {
+pub static mut nr: c_ulong = 0;
+    WARN_ON_ONCE!(len > BIO_MAX_SIZE);
     __bio_add_page(bio, folio_page(folio, nr), len, off % PAGE_SIZE);
     }
     EXPORT_SYMBOL_GPL(bio_add_folio_nofail);
@@ -1029,12 +1288,12 @@ pub unsafe extern "C" fn bio_add_virt_nofail(bio: *mut bio, vaddr: *mut c_void, 
 //
 // Return: Whether the addition was successful.
 //
-    bool bio_add_folio(struct bio *bio, struct folio *folio, size_t len,
-    size_t off)
-    {
-    let mut nr: c_ulong = off / PAGE_SIZE;
-    if (len > BIO_MAX_SIZE)
+#[no_mangle]
+pub unsafe extern "C" fn bio_add_folio(bio: *mut bio, folio: *mut folio, len: size_t, off: size_t) -> bool {
+pub static mut nr: c_ulong = 0;
+    if (len > BIO_MAX_SIZE) {
     return false;
+    }
     return bio_add_page(bio, folio_page(folio, nr), len, off % PAGE_SIZE) > 0;
     }
     EXPORT_SYMBOL(bio_add_folio);
@@ -1054,14 +1313,14 @@ pub unsafe extern "C" fn bio_add_virt_nofail(bio: *mut bio, vaddr: *mut c_void, 
 //
 #[no_mangle]
 pub unsafe extern "C" fn bio_add_vmalloc_chunk(bio: *mut bio, vaddr: *mut c_void, len: unsigned) -> c_uint {
-    unsigned int bio_add_vmalloc_chunk(struct bio *bio, void *vaddr, unsigned len)
-    {
-    let mut offset: c_uint = offset_in_page(vaddr);
+pub static mut offset: c_uint = 0;
     len = min(len, PAGE_SIZE - offset);
-    if (bio_add_page(bio, vmalloc_to_page(vaddr), len, offset) < len)
+    if (bio_add_page(bio, vmalloc_to_page(vaddr), len, offset) < len) {
     return 0;
-    if (op_is_write(bio_op(bio)))
+    }
+    if (op_is_write(bio_op(bio))) {
     flush_kernel_vmap_range(vaddr, len);
+    }
     return len;
     }
     EXPORT_SYMBOL_GPL(bio_add_vmalloc_chunk);
@@ -1080,12 +1339,11 @@ pub unsafe extern "C" fn bio_add_vmalloc_chunk(bio: *mut bio, vaddr: *mut c_void
 //
 #[no_mangle]
 pub unsafe extern "C" fn bio_add_vmalloc(bio: *mut bio, vaddr: *mut c_void, len: c_uint) -> bool {
-    bool bio_add_vmalloc(struct bio *bio, void *vaddr, unsigned int len)
-    {
     do {
-    let mut added: c_uint = bio_add_vmalloc_chunk(bio, vaddr, len);
-    if (!added)
+pub static mut added: c_uint = 0;
+    if (!added) {
     return false;
+    }
     vaddr += added;
     len -= added;
     } while (len);
@@ -1094,11 +1352,9 @@ pub unsafe extern "C" fn bio_add_vmalloc(bio: *mut bio, vaddr: *mut c_void, len:
     EXPORT_SYMBOL_GPL(bio_add_vmalloc);
 #[no_mangle]
 pub unsafe extern "C" fn __bio_release_pages(bio: *mut bio, mark_dirty: bool) {
-    void __bio_release_pages(struct bio *bio, bool mark_dirty)
-    {
-    struct folio_iter fi;
+pub static mut fi: usize = 0;
     bio_for_each_folio_all(fi, bio) {
-    size_t nr_pages;
+    let mut nr_pages = 0;
     if (mark_dirty) {
     folio_lock(fi.folio);
     folio_mark_dirty(fi.folio);
@@ -1112,12 +1368,11 @@ pub unsafe extern "C" fn __bio_release_pages(bio: *mut bio, mark_dirty: bool) {
     EXPORT_SYMBOL_GPL(__bio_release_pages);
 #[no_mangle]
 pub unsafe extern "C" fn bio_iov_iter_set(bio: *mut bio, iter: *const iov_iter) -> bool {
-    bool bio_iov_iter_set(struct bio *bio, const struct iov_iter *iter)
-    {
-    if (!iov_iter_is_bvec(iter))
+    if (!iov_iter_is_bvec(iter)) {
     return false;
-    WARN_ON_ONCE(bio.bi_max_vecs);
-    bio.bi_io_vec = (struct bio_vec *)iter.bvec;
+    }
+    WARN_ON_ONCE!(bio.bi_max_vecs);
+    bio.bi_io_vec = iter.bvec;
     bio.bi_iter.bi_idx = 0;
     bio.bi_iter.bi_offset = iter.iov_offset;
     bio.bi_iter.bi_size = iov_iter_count(iter);
@@ -1129,44 +1384,47 @@ pub unsafe extern "C" fn bio_iov_iter_set(bio: *mut bio, iter: *const iov_iter) 
 // __bio_iov_iter_get_pages may have inserted, and reverts the trimmed length
 // for the next iteration.
 //
-    static int bio_iov_iter_align_down(struct bio *bio, struct iov_iter *iter,
-    struct bio_vec *bv, unsigned len_align_mask)
-    {
-    let mut nbytes: usize = bio.bi_iter.bi_size & len_align_mask;
-    if (!nbytes)
+#[no_mangle]
+pub unsafe extern "C" fn bio_iov_iter_align_down(bio: *mut bio, iter: *mut iov_iter, bv: *mut bio_vec, len_align_mask: c_uint) -> c_int {
+pub static mut nbytes: usize = 0;
+    if (!nbytes) {
     return 0;
+    }
     iov_iter_revert(iter, nbytes);
     bio.bi_iter.bi_size -= nbytes;
     while (nbytes >= bv.bv_len) {
-    if (bio_flagged(bio, BIO_PAGE_PINNED))
+    if (bio_flagged(bio, BIO_PAGE_PINNED)) {
     unpin_user_page(bv.bv_page);
-    if (!--bio.bi_vcnt)
+    }
+    if (!--bio.bi_vcnt) {
     return -EFAULT;
+    }
     nbytes -= bv.bv_len;
-    bv--;
+    bv -= 1;
     }
     bv.bv_len -= nbytes;
     return 0;
     }
 
-    static inline bool bio_iov_bvec_aligned(const struct bio *bio,
-    unsigned mem_align_mask)
-    {
-    struct bvec_iter iter;
-    struct bio_vec bv;
+#[no_mangle]
+pub unsafe extern "C" fn bio_iov_bvec_aligned(bio: *mut bio, mem_align_mask: c_uint) -> bool {
+pub static mut iter: usize = 0;
+pub static mut bv: usize = 0;
 //
 // Correct callers never break the alignment requirements, so this
 // exhaustive check is only paid for in debug builds.
 //
-    for_each_mp_bvec(bv, bio.bi_io_vec, iter, bio.bi_iter)
+    for_each_mp_bvec(bv, bio.bi_io_vec, iter, bio.bi_iter) {
     if ((bv.bv_offset | bv.bv_len) & mem_align_mask)
     return false;
+    }
     return true;
     }
 
-    static inline bool bio_iov_bvec_aligned(const struct bio *bio,
-    unsigned mem_align_mask)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: bio_iov_bvec_aligned
+pub unsafe extern "C" fn bio_iov_bvec_aligned_dup(bio: *mut bio, mem_align_mask: c_uint) -> bool {
 //
 // We forward the bio_vec as-is, so ITER_BVEC callers must provide
 // segments already aligned to the device's DMA alignment. The only
@@ -1202,25 +1460,28 @@ pub unsafe extern "C" fn bio_iov_iter_set(bio: *mut bio, iter: *const iov_iter) 
 // MM encounters an error pinning the requested pages, it stops. Error
 // is returned only if 0 pages could be pinned.
 //
-    int bio_iov_iter_get_pages(struct bio *bio, struct iov_iter *iter,
-    unsigned mem_align_mask, unsigned len_align_mask)
-    {
-    let mut flags: iov_iter_extraction_t = 0;
-    if (WARN_ON_ONCE(bio_flagged(bio, BIO_CLONED)))
+#[no_mangle]
+pub unsafe extern "C" fn bio_iov_iter_get_pages(bio: *mut bio, iter: *mut iov_iter, mem_align_mask: c_uint, len_align_mask: c_uint) -> c_int {
+pub static mut flags: iov_iter_extraction_t = 0;
+    if (WARN_ON_ONCE!(bio_flagged(bio, BIO_CLONED))) {
     return -EIO;
+    }
     if (bio_iov_iter_set(bio, iter)) {
     if (iov_iter_is_bvec(iter) &&
-    !bio_iov_bvec_aligned(bio, mem_align_mask))
+    !bio_iov_bvec_aligned(bio, mem_align_mask)) {
     return -EINVAL;
+    }
     iov_iter_advance(iter, bio.bi_iter.bi_size);
     return 0;
     }
-    if (iov_iter_extract_will_pin(iter))
+    if (iov_iter_extract_will_pin(iter)) {
     bio_set_flag(bio, BIO_PAGE_PINNED);
-    if (bio.bi_bdev && blk_queue_pci_p2pdma(bio.bi_bdev.bd_disk.queue))
+    }
+    if (bio.bi_bdev && blk_queue_pci_p2pdma(bio.bi_bdev.bd_disk.queue)) {
     flags |= ITER_ALLOW_P2PDMA;
+    }
     do {
-    ssize_t ret;
+    let mut ret = 0;
     ret = iov_iter_extract_bvecs(iter, bio.bi_io_vec,
     BIO_MAX_SIZE - bio.bi_iter.bi_size,
     &bio.bi_vcnt, bio.bi_max_vecs,
@@ -1236,69 +1497,77 @@ pub unsafe extern "C" fn bio_iov_iter_set(bio: *mut bio, iter: *const iov_iter) 
     bio_clear_flag(bio, BIO_PAGE_PINNED);
     bio.bi_vcnt = 0;
     }
-    if (!bio.bi_vcnt)
+    if (!bio.bi_vcnt) {
     return ret;
+    }
     break;
     }
     bio.bi_iter.bi_size += ret;
     } while (iov_iter_count(iter) && !bio_full(bio, 0));
-    if (is_pci_p2pdma_page(bio.bi_io_vec.bv_page))
+    if (is_pci_p2pdma_page(bio.bi_io_vec.bv_page)) {
     bio.bi_opf |= REQ_NOMERGE;
+    }
     return bio_iov_iter_align_down(bio, iter,
     &bio.bi_io_vec[bio.bi_vcnt - 1], len_align_mask);
     }
-    static struct folio *folio_alloc_greedy(gfp_t gfp, size_t *size,
-    size_t minsize)
-    {
-    struct folio *folio;
+#[no_mangle]
+pub unsafe extern "C" fn folio_alloc_greedy(gfp: gfp_t, size: *mut size_t, minsize: size_t) -> *mut c_void {
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     while (*size > minsize) {
     folio = folio_alloc(gfp | __GFP_NORETRY | __GFP_NOWARN,
     get_order(*size));
-    if (folio)
+    if (folio) {
     return folio;
+    }
 // size = rounddown_pow_of_two(*size - 1);
     }
     return folio_alloc(gfp, get_order(*size));
     }
 #[no_mangle]
 unsafe extern "C" fn bio_free_folios(bio: *mut bio) {
-    static void bio_free_folios(struct bio *bio)
-    {
-    struct bio_vec *bv;
-    int i;
+pub static mut bv: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
     bio_for_each_bvec_all(bv, bio, i) {
-    struct folio *folio = bvec_folio(bv);
-    if (!is_zero_folio(folio) && !is_huge_zero_folio(folio))
+    let mut folio = bvec_folio(bv);
+    if (!is_zero_folio(folio) && !is_huge_zero_folio(folio)) {
     folio_put(folio);
     }
     }
-    static int bio_iov_iter_bounce_write(struct bio *bio, struct iov_iter *iter,
-    size_t maxlen, size_t minsize)
-    {
-    let mut total_len: usize = min(maxlen, iov_iter_count(iter));
-    if (WARN_ON_ONCE(bio_flagged(bio, BIO_CLONED)))
+    }
+#[no_mangle]
+pub unsafe extern "C" fn bio_iov_iter_bounce_write(bio: *mut bio, iter: *mut iov_iter, maxlen: size_t, minsize: size_t) -> c_int {
+pub static mut total_len: usize = 0;
+    if (WARN_ON_ONCE!(bio_flagged(bio, BIO_CLONED))) {
     return -EINVAL;
-    if (WARN_ON_ONCE(bio.bi_iter.bi_size))
+    }
+    if (WARN_ON_ONCE!(bio.bi_iter.bi_size)) {
     return -EINVAL;
-    if (WARN_ON_ONCE(bio.bi_vcnt >= bio.bi_max_vecs))
+    }
+    if (WARN_ON_ONCE!(bio.bi_vcnt >= bio.bi_max_vecs)) {
     return -EINVAL;
+    }
     do {
-    let mut this_len: usize = min(total_len, SZ_1M);
-    size_t copied;
-    struct folio *folio;
-    if (this_len > minsize * 2)
+pub static mut this_len: usize = 0;
+    let mut copied = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    if (this_len > minsize * 2) {
     this_len = rounddown_pow_of_two(this_len);
-    if (bio.bi_iter.bi_size > BIO_MAX_SIZE - this_len)
+    }
+    if (bio.bi_iter.bi_size > BIO_MAX_SIZE - this_len) {
     break;
+    }
     folio = folio_alloc_greedy(GFP_KERNEL, &this_len, minsize);
-    if (!folio)
+    if (!folio) {
     break;
+    }
     bio_add_folio_nofail(bio, folio, this_len, 0);
-    if (iter.nofault)
+    if (iter.nofault) {
     copied = copy_folio_from_iter_atomic(folio, 0, this_len,
     iter);
-    else
+    }
+    else {
     copied = copy_folio_from_iter(folio, 0, this_len, iter);
+    }
     if (copied < this_len) {
 //
 // Need to revert the iov iter for all bytes we have
@@ -1316,26 +1585,28 @@ unsafe extern "C" fn bio_free_folios(bio: *mut bio) {
     }
     total_len -= this_len;
     } while (total_len && bio.bi_vcnt < bio.bi_max_vecs);
-    if (!bio.bi_iter.bi_size)
+    if (!bio.bi_iter.bi_size) {
     return -ENOMEM;
+    }
     return bio_iov_iter_align_down(bio, iter,
     &bio.bi_io_vec[bio.bi_vcnt - 1], minsize - 1);
     }
-    static int bio_iov_iter_bounce_read(struct bio *bio, struct iov_iter *iter,
-    size_t maxlen, size_t minsize)
-    {
-    let mut len: usize = min3(iov_iter_count(iter), maxlen, SZ_1M);
-    struct folio *folio;
-    ssize_t ret;
+#[no_mangle]
+pub unsafe extern "C" fn bio_iov_iter_bounce_read(bio: *mut bio, iter: *mut iov_iter, maxlen: size_t, minsize: size_t) -> c_int {
+pub static mut len: usize = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     folio = folio_alloc_greedy(GFP_KERNEL, &len, minsize);
-    if (!folio)
+    if (!folio) {
     return -ENOMEM;
+    }
     do {
     ret = iov_iter_extract_bvecs(iter, bio.bi_io_vec + 1, len,
     &bio.bi_vcnt, bio.bi_max_vecs - 1, 0, 0);
     if (ret <= 0) {
-    if (!bio.bi_vcnt)
-    goto out_folio_put;
+    if (!bio.bi_vcnt) {
+// goto;
+    }
     break;
     }
     len -= ret;
@@ -1348,17 +1619,19 @@ unsafe extern "C" fn bio_free_folios(bio: *mut bio) {
 // I/O path.
 //
     bvec_set_folio(&bio.bi_io_vec[0], folio, bio.bi_iter.bi_size, 0);
-    if (iov_iter_extract_will_pin(iter))
+    if (iov_iter_extract_will_pin(iter)) {
     bio_set_flag(bio, BIO_PAGE_PINNED);
+    }
 // The first vec stores the bounce buffer, so do not subtract 1 here.
     ret = bio_iov_iter_align_down(bio, iter,
     &bio.bi_io_vec[bio.bi_vcnt], minsize - 1);
-    if (ret)
-    goto out_folio_put;
+    if (ret) {
+// goto;
+    }
 // Update the bounc buffer bv_len to the aligned down size.
     bio.bi_io_vec[0].bv_len = bio.bi_iter.bi_size;
     return 0;
-    out_folio_put:
+// label;
     folio_put(folio);
     return ret;
     }
@@ -1375,43 +1648,42 @@ unsafe extern "C" fn bio_free_folios(bio: *mut bio) {
 // copies the data into it.  Needs to be paired with bio_iov_iter_unbounce()
 // called on completion.
 //
-    int bio_iov_iter_bounce(struct bio *bio, struct iov_iter *iter, size_t maxlen,
-    size_t minsize)
-    {
-    if (op_is_write(bio_op(bio)))
+#[no_mangle]
+pub unsafe extern "C" fn bio_iov_iter_bounce(bio: *mut bio, iter: *mut iov_iter, maxlen: size_t, minsize: size_t) -> c_int {
+    if (op_is_write(bio_op(bio))) {
     return bio_iov_iter_bounce_write(bio, iter, maxlen, minsize);
+    }
     return bio_iov_iter_bounce_read(bio, iter, maxlen, minsize);
     }
 #[no_mangle]
 unsafe extern "C" fn bvec_unpin(bv: *mut bio_vec, mark_dirty: bool) {
-    static void bvec_unpin(struct bio_vec *bv, bool mark_dirty)
-    {
-    struct folio *folio = bvec_folio(bv);
+    let mut folio = bvec_folio(bv);
     size_t nr_pages = (bv.bv_offset + bv.bv_len - 1) / PAGE_SIZE -
     bv.bv_offset / PAGE_SIZE + 1;
-    if (mark_dirty)
+    if (mark_dirty) {
     folio_mark_dirty_lock(folio);
+    }
     unpin_user_folio(folio, nr_pages);
     }
-    static void bio_iov_iter_unbounce_read(struct bio *bio, bool is_error,
-    bool mark_dirty)
-    {
-    let mut len: c_uint = bio.bi_io_vec[0].bv_len;
+#[no_mangle]
+pub unsafe extern "C" fn bio_iov_iter_unbounce_read(bio: *mut bio, is_error: bool, mark_dirty: bool) {
+pub static mut len: c_uint = 0;
     if (likely(!is_error)) {
-    void *buf = bvec_virt(&bio.bi_io_vec[0]);
-    struct iov_iter to;
+    let mut buf = bvec_virt(&bio.bi_io_vec[0]);
+pub static mut to: usize = 0;
     iov_iter_bvec(&to, ITER_DEST, bio.bi_io_vec + 1, bio.bi_vcnt,
     len);
 // copying to pinned pages should always work
-    WARN_ON_ONCE(copy_to_iter(buf, len, &to) != len);
+    WARN_ON_ONCE!(copy_to_iter(buf, len, &to) != len);
     } else {
 // No need to mark folios dirty if never copied to them
     mark_dirty = false;
     }
     if (bio_flagged(bio, BIO_PAGE_PINNED)) {
-    int i;
-    for (i = 0; i < bio.bi_vcnt; i++)
+    let mut i = 0;
+    for (i = 0; i < bio.bi_vcnt; i++) {
     bvec_unpin(&bio.bi_io_vec[1 + i], mark_dirty);
+    }
     }
     folio_put(bvec_folio(&bio.bi_io_vec[0]));
     }
@@ -1429,17 +1701,15 @@ unsafe extern "C" fn bvec_unpin(bv: *mut bio_vec, mark_dirty: bool) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn bio_iov_iter_unbounce(bio: *mut bio, is_error: bool, mark_dirty: bool) {
-    void bio_iov_iter_unbounce(struct bio *bio, bool is_error, bool mark_dirty)
-    {
-    if (op_is_write(bio_op(bio)))
+    if (op_is_write(bio_op(bio))) {
     bio_free_folios(bio);
-    else
+    }
+    else {
     bio_iov_iter_unbounce_read(bio, is_error, mark_dirty);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn bio_wait_end_io(bio: *mut bio) {
-    static void bio_wait_end_io(struct bio *bio)
-    {
     complete(bio.bi_private);
     }
 //
@@ -1455,18 +1725,18 @@ unsafe extern "C" fn bio_wait_end_io(bio: *mut bio) {
 //
 // Note: this overrides the bi_private and bi_end_io fields in the bio.
 //
-    void bio_await(struct bio *bio, void *priv,
-    void (*submit)(struct bio *bio, void *priv))
-    {
-    DECLARE_COMPLETION_ONSTACK_MAP(done,
-    bio.bi_bdev.bd_disk.lockdep_map);
+#[no_mangle]
+pub unsafe extern "C" fn bio_await(bio: *mut bio, priv: *mut c_void, bio: *mut *mut c_void (submit)( bio) {
+pub static mut done: usize = 0;
     bio.bi_private = &done;
     bio.bi_end_io = bio_wait_end_io;
     bio.bi_opf |= REQ_SYNC;
-    if (submit)
+    if (submit) {
     submit(bio, priv);
-    else
+    }
+    else {
     submit_bio(bio);
+    }
     blk_wait_io(&done);
     }
     EXPORT_SYMBOL_GPL(bio_await);
@@ -1483,16 +1753,12 @@ unsafe extern "C" fn bio_wait_end_io(bio: *mut bio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn submit_bio_wait(bio: *mut bio) -> c_int {
-    int submit_bio_wait(struct bio *bio)
-    {
     bio_await(bio, core::ptr::null_mut(), core::ptr::null_mut());
     return blk_status_to_errno(bio.bi_status);
     }
     EXPORT_SYMBOL(submit_bio_wait);
 #[no_mangle]
 unsafe extern "C" fn bio_endio_cb(bio: *mut bio, priv: *mut c_void) {
-    static void bio_endio_cb(struct bio *bio, void *priv)
-    {
     bio_endio(bio);
     }
 //
@@ -1501,8 +1767,6 @@ unsafe extern "C" fn bio_endio_cb(bio: *mut bio, priv: *mut c_void) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn bio_submit_or_kill(bio: *mut bio, flags: c_uint) -> c_int {
-    int bio_submit_or_kill(struct bio *bio, unsigned int flags)
-    {
     if ((flags & BLKDEV_ZERO_KILLABLE) && fatal_signal_pending(current)) {
     bio_await(bio, core::ptr::null_mut(), bio_endio_cb);
     return -EINTR;
@@ -1520,14 +1784,14 @@ pub unsafe extern "C" fn bio_submit_or_kill(bio: *mut bio, flags: c_uint) -> c_i
 // Performs synchronous I/O to @bdev for @data/@len.  @data must be in
 // the kernel direct mapping and not a vmalloc address.
 //
-    int bdev_rw_virt(struct block_device *bdev, sector_t sector, void *data,
-    size_t len, enum req_op op)
-    {
-    struct bio_vec bv;
-    struct bio bio;
-    int error;
-    if (WARN_ON_ONCE(is_vmalloc_addr(data)))
+#[no_mangle]
+pub unsafe extern "C" fn bdev_rw_virt(bdev: *mut block_device, sector: sector_t, data: *mut c_void, len: size_t, op: req_op) -> c_int {
+pub static mut bv: usize = 0;
+pub static mut bio: usize = 0;
+    let mut error = 0;
+    if (WARN_ON_ONCE!(is_vmalloc_addr(data))) {
     return -EIO;
+    }
     bio_init(&bio, bdev, &bv, 1, op);
     bio.bi_iter.bi_sector = sector;
     bio_add_virt_nofail(&bio, data, len);
@@ -1538,10 +1802,9 @@ pub unsafe extern "C" fn bio_submit_or_kill(bio: *mut bio, flags: c_uint) -> c_i
     EXPORT_SYMBOL_GPL(bdev_rw_virt);
 #[no_mangle]
 pub unsafe extern "C" fn __bio_advance(bio: *mut bio, bytes: unsigned) {
-    void __bio_advance(struct bio *bio, unsigned bytes)
-    {
-    if (bio_integrity(bio))
+    if (bio_integrity(bio)) {
     bio_integrity_advance(bio, bytes);
+    }
     bio_crypt_advance(bio, bytes);
     bio_advance_iter(bio, &bio.bi_iter, bytes);
     }
@@ -1556,16 +1819,14 @@ pub unsafe extern "C" fn __bio_advance(bio: *mut bio, bytes: unsigned) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn bio_copy_data(dst: *mut bio, src: *mut bio) {
-    void bio_copy_data(struct bio *dst, struct bio *src)
-    {
-    let mut src_iter: bvec_iter = src.bi_iter;
-    let mut dst_iter: bvec_iter = dst.bi_iter;
+pub static mut src_iter: bvec_iter = 0;
+pub static mut dst_iter: bvec_iter = 0;
     while (src_iter.bi_size && dst_iter.bi_size) {
-    let mut src_bv: bio_vec = bio_iter_iovec(src, src_iter);
-    let mut dst_bv: bio_vec = bio_iter_iovec(dst, dst_iter);
-    let mut bytes: c_uint = min(src_bv.bv_len, dst_bv.bv_len);
-    void *src_buf = bvec_kmap_local(&src_bv);
-    void *dst_buf = bvec_kmap_local(&dst_bv);
+pub static mut src_bv: bio_vec = 0;
+pub static mut dst_bv: bio_vec = 0;
+pub static mut bytes: c_uint = 0;
+    let mut src_buf = bvec_kmap_local(&src_bv);
+    let mut dst_buf = bvec_kmap_local(&dst_bv);
     memcpy(dst_buf, src_buf, bytes);
     kunmap_local(dst_buf);
     kunmap_local(src_buf);
@@ -1576,10 +1837,8 @@ pub unsafe extern "C" fn bio_copy_data(dst: *mut bio, src: *mut bio) {
     EXPORT_SYMBOL(bio_copy_data);
 #[no_mangle]
 pub unsafe extern "C" fn bio_free_pages(bio: *mut bio) {
-    void bio_free_pages(struct bio *bio)
-    {
-    struct bio_vec *bvec;
-    struct bvec_iter_all iter_all;
+pub static mut bvec: *mut c_void = core::ptr::null_mut();
+pub static mut iter_all: usize = 0;
     bio_for_each_segment_all(bvec, bio, iter_all)
     __free_page(bvec.bv_page);
     }
@@ -1607,9 +1866,7 @@ pub unsafe extern "C" fn bio_free_pages(bio: *mut bio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn bio_set_pages_dirty(bio: *mut bio) {
-    void bio_set_pages_dirty(struct bio *bio)
-    {
-    struct folio_iter fi;
+pub static mut fi: usize = 0;
     bio_for_each_folio_all(fi, bio) {
     folio_lock(fi.folio);
     folio_mark_dirty(fi.folio);
@@ -1626,18 +1883,17 @@ pub unsafe extern "C" fn bio_set_pages_dirty(bio: *mut bio) {
 // here on.  It will unpin each page and will run one bio_put() against the
 // BIO.
 //
-    static void bio_dirty_fn(struct work_struct *work);
-    static DECLARE_WORK(bio_dirty_work, bio_dirty_fn);
-    static DEFINE_SPINLOCK(bio_dirty_lock);
-    static struct bio *bio_dirty_list;
+// forward_decl: bio_dirty_fn;
+pub static mut bio_dirty_work: usize = 0;
+pub static mut bio_dirty_lock: usize = 0;
+pub static mut bio_dirty_list: *mut c_void = core::ptr::null_mut();
 //
 // This runs in process context
 //
 #[no_mangle]
 unsafe extern "C" fn bio_dirty_fn(work: *mut work_struct) {
-    static void bio_dirty_fn(struct work_struct *work)
-    {
-    struct bio *bio, *next;
+    let mut bio = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
     spin_lock_irq(&bio_dirty_lock);
     next = bio_dirty_list;
     bio_dirty_list = core::ptr::null_mut();
@@ -1650,18 +1906,17 @@ unsafe extern "C" fn bio_dirty_fn(work: *mut work_struct) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn bio_check_pages_dirty(bio: *mut bio) {
-    void bio_check_pages_dirty(struct bio *bio)
-    {
-    struct folio_iter fi;
-    unsigned long flags;
+pub static mut fi: usize = 0;
+    let mut flags = 0;
     bio_for_each_folio_all(fi, bio) {
-    if (!folio_test_dirty(fi.folio))
-    goto defer;
+    if (!folio_test_dirty(fi.folio)) {
+// goto;
+    }
     }
     bio_release_pages(bio, false);
     bio_put(bio);
     return;
-    defer:
+// label;
     spin_lock_irqsave(&bio_dirty_lock, flags);
     bio.bi_private = bio_dirty_list;
     bio_dirty_list = bio;
@@ -1682,54 +1937,51 @@ pub struct bio_complete_batch {
     pub cpu: c_int,
 }
 
-    static DEFINE_PER_CPU(struct bio_complete_batch, bio_complete_batch);
-    static struct workqueue_struct *bio_complete_wq;
+pub static mut struct bio_complete_batch: usize = 0;
+pub static mut bio_complete_wq: *mut c_void = core::ptr::null_mut();
 #[no_mangle]
 unsafe extern "C" fn bio_complete_work_fn(w: *mut work_struct) {
-    static void bio_complete_work_fn(struct work_struct *w)
-    {
-    struct bio_complete_batch *batch =
-    container_of(w, struct bio_complete_batch, work);
+    let mut batch = container_of!(w, bio_complete_batch, work);
     while (1) {
-    struct bio_list list;
-    struct bio *bio;
+pub static mut list: usize = 0;
+pub static mut bio: *mut c_void = core::ptr::null_mut();
     local_irq_disable();
     list = batch.list;
     bio_list_init(&batch.list);
     local_irq_enable();
-    if (bio_list_empty(&list))
+    if (bio_list_empty(&list)) {
     break;
-    while ((bio = bio_list_pop(&list)))
+    }
+    while ((bio = bio_list_pop(&list))) {
     bio.bi_end_io(bio);
+    }
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn __bio_complete_in_task(bio: *mut bio) {
-    void __bio_complete_in_task(struct bio *bio)
-    {
-    struct bio_complete_batch *batch;
-    unsigned long flags;
-    bool was_empty;
+pub static mut batch: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut was_empty = 0;
     local_irq_save(flags);
     batch = this_cpu_ptr(&bio_complete_batch);
     was_empty = bio_list_empty(&batch.list);
     bio_list_add(&batch.list, bio);
     local_irq_restore(flags);
-    if (was_empty)
+    if (was_empty) {
     queue_work_on(batch.cpu, bio_complete_wq, &batch.work);
+    }
     }
     EXPORT_SYMBOL_GPL(__bio_complete_in_task);
 #[no_mangle]
 pub unsafe extern "C" fn bio_remaining_done(bio: *mut bio) -> bool {
-    static inline bool bio_remaining_done(struct bio *bio)
-    {
 //
 // If we're not chaining, then ->__bi_remaining is always 1 and
 // we always end io on the first invocation.
 //
-    if (!bio_flagged(bio, BIO_CHAIN))
+    if (!bio_flagged(bio, BIO_CHAIN)) {
     return true;
-    BUG_ON(atomic_read(&bio.__bi_remaining) <= 0);
+    }
+    BUG_ON!(atomic_read(&bio.__bi_remaining) <= 0);
     if (atomic_dec_and_test(&bio.__bi_remaining)) {
     bio_clear_flag(bio, BIO_CHAIN);
     return true;
@@ -1751,13 +2003,13 @@ pub unsafe extern "C" fn bio_remaining_done(bio: *mut bio) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn bio_endio(bio: *mut bio) {
-    void bio_endio(struct bio *bio)
-    {
-    again:
-    if (!bio_remaining_done(bio))
+// label;
+    if (!bio_remaining_done(bio)) {
     return;
-    if (!bio_integrity_endio(bio))
+    }
+    if (!bio_integrity_endio(bio)) {
     return;
+    }
     blk_zone_bio_endio(bio);
     rq_qos_done_bio(bio);
     if (bio.bi_bdev && bio_flagged(bio, BIO_TRACE_COMPLETION)) {
@@ -1774,7 +2026,7 @@ pub unsafe extern "C" fn bio_endio(bio: *mut bio) {
 //
     if (bio.bi_end_io == bio_chain_endio) {
     bio = __bio_chain_endio(bio);
-    goto again;
+// goto;
     }
 
 //
@@ -1787,12 +2039,13 @@ pub unsafe extern "C" fn bio_endio(bio: *mut bio) {
     bio.bi_blkg = core::ptr::null_mut();
     }
 
-    if (bio_flagged(bio, BIO_COMPLETE_IN_TASK) && bio_in_atomic())
+    if (bio_flagged(bio, BIO_COMPLETE_IN_TASK) && bio_in_atomic()) {
     __bio_complete_in_task(bio);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: bio->bi_end_io) -> else {
-    else if (bio.bi_end_io)
+    }
+
+    else if (bio.bi_end_io) {
     bio.bi_end_io(bio);
+    }
     }
     EXPORT_SYMBOL(bio_endio);
 //
@@ -1809,26 +2062,31 @@ pub unsafe extern "C" fn if(_arg: bio->bi_end_io) -> else {
 // to @bio's bi_io_vec. It is the caller's responsibility to ensure that
 // neither @bio nor @bs are freed before the split bio.
 //
-    struct bio *bio_split(struct bio *bio, int sectors,
-    gfp_t gfp, struct bio_set *bs)
-    {
-    struct bio *split;
-    if (WARN_ON_ONCE(sectors <= 0))
+#[no_mangle]
+pub unsafe extern "C" fn bio_split(bio: *mut bio, sectors: c_int, gfp: gfp_t, bs: *mut bio_set) -> *mut c_void {
+pub static mut split: *mut c_void = core::ptr::null_mut();
+    if (WARN_ON_ONCE!(sectors <= 0)) {
     return ERR_PTR(-EINVAL);
-    if (WARN_ON_ONCE(sectors >= bio_sectors(bio)))
+    }
+    if (WARN_ON_ONCE!(sectors >= bio_sectors(bio))) {
     return ERR_PTR(-EINVAL);
+    }
 // Zone append commands cannot be split
-    if (WARN_ON_ONCE(bio_op(bio) == REQ_OP_ZONE_APPEND))
+    if (WARN_ON_ONCE!(bio_op(bio) == REQ_OP_ZONE_APPEND)) {
     return ERR_PTR(-EINVAL);
+    }
 // atomic writes cannot be split
-    if (bio.bi_opf & REQ_ATOMIC)
+    if (bio.bi_opf & REQ_ATOMIC) {
     return ERR_PTR(-EINVAL);
+    }
     split = bio_alloc_clone(bio.bi_bdev, bio, gfp, bs);
-    if (!split)
+    if (!split) {
     return ERR_PTR(-ENOMEM);
+    }
     split.bi_iter.bi_size = sectors << 9;
-    if (bio_integrity(split))
+    if (bio_integrity(split)) {
     bio_integrity_trim(split);
+    }
     bio_advance(bio, split.bi_iter.bi_size);
 //
 // The gap bit is set when splitting to limits and only applies to the
@@ -1837,8 +2095,9 @@ pub unsafe extern "C" fn if(_arg: bio->bi_end_io) -> else {
 // re-initialize the value back to 0.
 //
     bio.bi_bvec_gap_bit = 0;
-    if (bio_flagged(bio, BIO_TRACE_COMPLETION))
+    if (bio_flagged(bio, BIO_TRACE_COMPLETION)) {
     bio_set_flag(split, BIO_TRACE_COMPLETION);
+    }
     return split;
     }
     EXPORT_SYMBOL(bio_split);
@@ -1853,21 +2112,23 @@ pub unsafe extern "C" fn if(_arg: bio->bi_end_io) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn bio_trim(bio: *mut bio, offset: sector_t, size: sector_t) {
-    void bio_trim(struct bio *bio, sector_t offset, sector_t size)
-    {
 // We should never trim an atomic write
-    if (WARN_ON_ONCE(bio.bi_opf & REQ_ATOMIC && size))
+    if (WARN_ON_ONCE!(bio.bi_opf & REQ_ATOMIC && size)) {
     return;
-    if (WARN_ON_ONCE(offset > BIO_MAX_SECTORS || size > BIO_MAX_SECTORS ||
-    offset + size > bio_sectors(bio)))
+    }
+    if (WARN_ON_ONCE!(offset > BIO_MAX_SECTORS || size > BIO_MAX_SECTORS ||
+    offset + size > bio_sectors(bio))) {
     return;
+    }
     size <<= 9;
-    if (offset == 0 && size == bio.bi_iter.bi_size)
+    if (offset == 0 && size == bio.bi_iter.bi_size) {
     return;
+    }
     bio_advance(bio, offset << 9);
     bio.bi_iter.bi_size = size;
-    if (bio_integrity(bio))
+    if (bio_integrity(bio)) {
     bio_integrity_trim(bio);
+    }
     }
     EXPORT_SYMBOL_GPL(bio_trim);
 //
@@ -1876,9 +2137,7 @@ pub unsafe extern "C" fn bio_trim(bio: *mut bio, offset: sector_t, size: sector_
 //
 #[no_mangle]
 unsafe extern "C" fn biovec_init_pool(pool: *mut mempool_t, pool_entries: c_int) -> c_int {
-    static int biovec_init_pool(mempool_t *pool, int pool_entries)
-    {
-    struct biovec_slab *bp = bvec_slabs + ARRAY_SIZE(bvec_slabs) - 1;
+    let mut bp = bvec_slabs + ARRAY_SIZE!(bvec_slabs) - 1;
     return mempool_init_slab_pool(pool, pool_entries, bp.slab);
     }
 //
@@ -1889,16 +2148,16 @@ unsafe extern "C" fn biovec_init_pool(pool: *mut mempool_t, pool_entries: c_int)
 //
 #[no_mangle]
 pub unsafe extern "C" fn bioset_exit(bs: *mut bio_set) {
-    void bioset_exit(struct bio_set *bs)
-    {
     bio_alloc_cache_destroy(bs);
-    if (bs.rescue_workqueue)
+    if (bs.rescue_workqueue) {
     destroy_workqueue(bs.rescue_workqueue);
+    }
     bs.rescue_workqueue = core::ptr::null_mut();
     mempool_exit(&bs.bio_pool);
     mempool_exit(&bs.bvec_pool);
-    if (bs.bio_slab)
+    if (bs.bio_slab) {
     bio_put_slab(bs);
+    }
     bs.bio_slab = core::ptr::null_mut();
     }
     EXPORT_SYMBOL(bioset_exit);
@@ -1922,53 +2181,56 @@ pub unsafe extern "C" fn bioset_exit(bs: *mut bio_set) {
 // If %BIOSET_NEED_RESCUER is set, a workqueue is created which can be used
 // to dispatch queued requests when the mempool runs out of space.
 //
-    int bioset_init(struct bio_set *bs,
-    unsigned int pool_size,
-    unsigned int front_pad,
-    int flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn bioset_init(bs: *mut bio_set, pool_size: c_uint, front_pad: c_uint, flags: c_int) -> c_int {
     bs.front_pad = front_pad;
-    if (flags & BIOSET_NEED_BVECS)
-    bs.back_pad = BIO_INLINE_VECS * sizeof(struct bio_vec);
-    else
+    if (flags & BIOSET_NEED_BVECS) {
+    bs.back_pad = BIO_INLINE_VECS * sizeof!(bio_vec);
+    }
+    else {
     bs.back_pad = 0;
+    }
     spin_lock_init(&bs.rescue_lock);
     bio_list_init(&bs.rescue_list);
     INIT_WORK(&bs.rescue_work, bio_alloc_rescue);
     bs.bio_slab = bio_find_or_create_slab(bs);
-    if (!bs.bio_slab)
+    if (!bs.bio_slab) {
     return -ENOMEM;
-    if (mempool_init_slab_pool(&bs.bio_pool, pool_size, bs.bio_slab))
-    goto bad;
+    }
+    if (mempool_init_slab_pool(&bs.bio_pool, pool_size, bs.bio_slab)) {
+// goto;
+    }
     if ((flags & BIOSET_NEED_BVECS) &&
-    biovec_init_pool(&bs.bvec_pool, pool_size))
-    goto bad;
+    biovec_init_pool(&bs.bvec_pool, pool_size)) {
+// goto;
+    }
     if (flags & BIOSET_NEED_RESCUER) {
     bs.rescue_workqueue = alloc_workqueue("bioset",
     WQ_MEM_RECLAIM | WQ_PERCPU, 0);
-    if (!bs.rescue_workqueue)
-    goto bad;
+    if (!bs.rescue_workqueue) {
+// goto;
+    }
     }
     if (flags & BIOSET_PERCPU_CACHE) {
-    bs.cache = alloc_percpu(struct bio_alloc_cache);
-    if (!bs.cache)
-    goto bad;
+    bs.cache = alloc_percpu(bio_alloc_cache);
+    if (!bs.cache) {
+// goto;
+    }
     cpuhp_state_add_instance_nocalls(CPUHP_BIO_DEAD, &bs.cpuhp_dead);
     }
     return 0;
-    bad:
+// label;
     bioset_exit(bs);
     return -ENOMEM;
     }
     EXPORT_SYMBOL(bioset_init);
 #[no_mangle]
 unsafe extern "C" fn bio_complete_batch_cpu_online(cpu: c_uint) -> c_int {
-    static int bio_complete_batch_cpu_online(unsigned int cpu)
-    {
-    struct bio_complete_batch *batch = &per_cpu(bio_complete_batch, cpu);
+    let mut batch = &per_cpu(bio_complete_batch, cpu);
     enable_work(&batch.work);
-    if (!bio_list_empty(&batch.list))
+    if (!bio_list_empty(&batch.list)) {
     queue_work_on(cpu, bio_complete_wq, &batch.work);
+    }
     return 0;
     }
 //
@@ -1977,8 +2239,6 @@ unsafe extern "C" fn bio_complete_batch_cpu_online(cpu: c_uint) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn bio_complete_batch_cpu_down_prep(cpu: c_uint) -> c_int {
-    static int bio_complete_batch_cpu_down_prep(unsigned int cpu)
-    {
     disable_work_sync(&per_cpu(bio_complete_batch, cpu).work);
     return 0;
     }
@@ -1988,45 +2248,41 @@ unsafe extern "C" fn bio_complete_batch_cpu_down_prep(cpu: c_uint) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn bio_complete_batch_cpu_dead(cpu: c_uint) -> c_int {
-    static int bio_complete_batch_cpu_dead(unsigned int cpu)
-    {
-    struct bio_complete_batch *batch =
-    per_cpu_ptr(&bio_complete_batch, cpu);
-    struct bio *bio;
-    while ((bio = bio_list_pop(&batch.list)))
+    let mut batch = per_cpu_ptr(&bio_complete_batch, cpu);
+pub static mut bio: *mut c_void = core::ptr::null_mut();
+    while ((bio = bio_list_pop(&batch.list))) {
     bio.bi_end_io(bio);
+    }
     return 0;
     }
 #[no_mangle]
-unsafe extern "C" fn bio_complete_batch_init(cpu: c_int) -> void __init {
-    static void __init bio_complete_batch_init(int cpu)
-    {
-    struct bio_complete_batch *batch =
-    per_cpu_ptr(&bio_complete_batch, cpu);
+unsafe extern "C" fn bio_complete_batch_init(cpu: c_int)  {
+    let mut batch = per_cpu_ptr(&bio_complete_batch, cpu);
     bio_list_init(&batch.list);
     INIT_WORK(&batch.work, bio_complete_work_fn);
     batch.cpu = cpu;
-    if (!cpu_online(cpu))
+    if (!cpu_online(cpu)) {
     disable_work_sync(&batch.work);
     }
+    }
 #[no_mangle]
-unsafe extern "C" fn init_bio() -> int __init {
-    static int __init init_bio(void)
-    {
-    int i;
-    BUILD_BUG_ON(BIO_FLAG_LAST > 8 * sizeof_field(struct bio, bi_flags));
-    for (i = 0; i < ARRAY_SIZE(bvec_slabs); i++) {
-    struct biovec_slab *bvs = bvec_slabs + i;
+unsafe extern "C" fn init_bio() -> c_int {
+    let mut i = 0;
+    BUILD_BUG_ON!(BIO_FLAG_LAST > 8 * sizeof_field(bio, bi_flags));
+    while (i < ARRAY_SIZE!(bvec_slabs)) {
+    let mut bvs = bvec_slabs + i;
     bvs.slab = kmem_cache_create(bvs.name,
-    bvs.nr_vecs * sizeof(struct bio_vec), 0,
+    bvs.nr_vecs * sizeof!(bio_vec), 0,
     SLAB_HWCACHE_ALIGN | SLAB_PANIC, core::ptr::null_mut());
     }
-    for_each_possible_cpu(i)
+    for_each_possible_cpu(i) {
     bio_complete_batch_init(i);
+    }
     bio_complete_wq = alloc_workqueue("bio_complete",
     WQ_MEM_RECLAIM | WQ_PERCPU, 0);
-    if (!bio_complete_wq)
+    if (!bio_complete_wq) {
     panic("bio: can't allocate bio_complete workqueue\n");
+    }
 //
 // bio task-context completion draining on hot-unplugged CPUs:
 //
@@ -2045,8 +2301,9 @@ unsafe extern "C" fn init_bio() -> int __init {
     cpuhp_setup_state_multi(CPUHP_BIO_DEAD, "block/bio:dead", core::ptr::null_mut(),
     bio_cpu_dead);
     if (bioset_init(&fs_bio_set, BIO_POOL_SIZE, 0,
-    BIOSET_NEED_BVECS | BIOSET_PERCPU_CACHE))
+    BIOSET_NEED_BVECS | BIOSET_PERCPU_CACHE)) {
     panic("bio: can't allocate bios\n");
+    }
     return 0;
     }
-    subsys_initcall(init_bio);
+    subsys_initcall!(init_bio);

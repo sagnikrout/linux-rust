@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -51,17 +301,17 @@ pub struct mlock_fbatch {
     pub fbatch: folio_batch,
 }
 
-    static DEFINE_PER_CPU(struct mlock_fbatch, mlock_fbatch) = {
+    static DEFINE_PER_CPU(mlock_fbatch, mlock_fbatch) = {
     .lock = INIT_LOCAL_LOCK(lock),
     };
 #[no_mangle]
 pub unsafe extern "C" fn can_do_mlock() -> bool {
-    bool can_do_mlock(void)
-    {
-    if (rlimit(RLIMIT_MEMLOCK) != 0)
+    if (rlimit(RLIMIT_MEMLOCK) != 0) {
     return true;
-    if (capable(CAP_IPC_LOCK))
+    }
+    if (capable(CAP_IPC_LOCK)) {
     return true;
+    }
     return false;
     }
     EXPORT_SYMBOL(can_do_mlock);
@@ -75,11 +325,12 @@ pub unsafe extern "C" fn can_do_mlock() -> bool {
 // list exists), rather than the [in]active lists. PG_unevictable is set to
 // indicate the unevictable state.
 //
-    static struct lruvec *__mlock_folio(struct folio *folio, struct lruvec *lruvec)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __mlock_folio(folio: *mut folio, lruvec: *mut lruvec) -> *mut c_void {
 // There is nothing more we can do while it's off LRU
-    if (!folio_test_clear_lru(folio))
+    if (!folio_test_clear_lru(folio)) {
     return lruvec;
+    }
     lruvec = folio_lruvec_relock_irq(folio, lruvec);
     if (unlikely(folio_evictable(folio))) {
 //
@@ -94,12 +345,13 @@ pub unsafe extern "C" fn can_do_mlock() -> bool {
     __count_vm_events(UNEVICTABLE_PGRESCUED,
     folio_nr_pages(folio));
     }
-    goto out;
+// goto;
     }
     if (folio_test_unevictable(folio)) {
-    if (folio_test_mlocked(folio))
-    folio.mlock_count++;
-    goto out;
+    if (folio_test_mlocked(folio)) {
+    folio.mlock_count += 1;
+    }
+// goto;
     }
     lruvec_del_folio(lruvec, folio);
     folio_clear_active(folio);
@@ -107,48 +359,54 @@ pub unsafe extern "C" fn can_do_mlock() -> bool {
     folio.mlock_count = !!folio_test_mlocked(folio);
     lruvec_add_folio(lruvec, folio);
     __count_vm_events(UNEVICTABLE_PGCULLED, folio_nr_pages(folio));
-    out:
+// label;
     folio_set_lru(folio);
     return lruvec;
     }
-    static struct lruvec *__mlock_new_folio(struct folio *folio, struct lruvec *lruvec)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __mlock_new_folio(folio: *mut folio, lruvec: *mut lruvec) -> *mut c_void {
     VM_BUG_ON_FOLIO(folio_test_lru(folio), folio);
     lruvec = folio_lruvec_relock_irq(folio, lruvec);
 // As above, this is a little surprising, but possible
-    if (unlikely(folio_evictable(folio)))
-    goto out;
+    if (unlikely(folio_evictable(folio))) {
+// goto;
+    }
     folio_set_unevictable(folio);
     folio.mlock_count = !!folio_test_mlocked(folio);
     __count_vm_events(UNEVICTABLE_PGCULLED, folio_nr_pages(folio));
-    out:
+// label;
     lruvec_add_folio(lruvec, folio);
     folio_set_lru(folio);
     return lruvec;
     }
-    static struct lruvec *__munlock_folio(struct folio *folio, struct lruvec *lruvec)
-    {
-    let mut nr_pages: c_int = folio_nr_pages(folio);
-    let mut isolated: bool = false;
-    if (!folio_test_clear_lru(folio))
-    goto munlock;
+#[no_mangle]
+pub unsafe extern "C" fn __munlock_folio(folio: *mut folio, lruvec: *mut lruvec) -> *mut c_void {
+pub static mut nr_pages: c_int = 0;
+pub static mut isolated: bool = false;
+    if (!folio_test_clear_lru(folio)) {
+// goto;
+    }
     isolated = true;
     lruvec = folio_lruvec_relock_irq(folio, lruvec);
     if (folio_test_unevictable(folio)) {
 // Then mlock_count is maintained, but might undercount
-    if (folio.mlock_count)
-    folio.mlock_count--;
-    if (folio.mlock_count)
-    goto out;
+    if (folio.mlock_count) {
+    folio.mlock_count -= 1;
+    }
+    if (folio.mlock_count) {
+// goto;
+    }
     }
 // else assume that was the last mlock: reclaim will fix it if not
-    munlock:
+// label;
     if (folio_test_clear_mlocked(folio)) {
     __zone_stat_mod_folio(folio, NR_MLOCK, -nr_pages);
-    if (isolated || !folio_test_unevictable(folio))
+    if (isolated || !folio_test_unevictable(folio)) {
     __count_vm_events(UNEVICTABLE_PGMUNLOCKED, nr_pages);
-    else
+    }
+    else {
     __count_vm_events(UNEVICTABLE_PGSTRANDED, nr_pages);
+    }
     }
 // folio_evictable() has to be checked *after* clearing Mlocked
     if (isolated && folio_test_unevictable(folio) && folio_evictable(folio)) {
@@ -157,9 +415,10 @@ pub unsafe extern "C" fn can_do_mlock() -> bool {
     lruvec_add_folio(lruvec, folio);
     __count_vm_events(UNEVICTABLE_PGRESCUED, nr_pages);
     }
-    out:
-    if (isolated)
+// label;
+    if (isolated) {
     folio_set_lru(folio);
+    }
     return lruvec;
     }
 //
@@ -167,13 +426,13 @@ pub unsafe extern "C" fn can_do_mlock() -> bool {
 //
 pub const LRU_FOLIO: c_uint = 0x1;
 pub const NEW_FOLIO: c_uint = 0x2;
-    static inline struct folio *mlock_lru(struct folio *folio)
-    {
-    return (struct folio *)((unsigned long)folio + LRU_FOLIO);
+#[no_mangle]
+pub unsafe extern "C" fn mlock_lru(folio: *mut folio) -> *mut c_void {
+    return ((unsigned long)folio + LRU_FOLIO);
     }
-    static inline struct folio *mlock_new(struct folio *folio)
-    {
-    return (struct folio *)((unsigned long)folio + NEW_FOLIO);
+#[no_mangle]
+pub unsafe extern "C" fn mlock_new(folio: *mut folio) -> *mut c_void {
+    return ((unsigned long)folio + NEW_FOLIO);
     }
 //
 // mlock_folio_batch() is derived from folio_batch_move_lru(): perhaps that can
@@ -184,55 +443,52 @@ pub const NEW_FOLIO: c_uint = 0x2;
 //
 #[no_mangle]
 unsafe extern "C" fn mlock_folio_batch(fbatch: *mut folio_batch) {
-    static void mlock_folio_batch(struct folio_batch *fbatch)
-    {
-    struct lruvec *lruvec = core::ptr::null_mut();
-    unsigned long mlock;
-    struct folio *folio;
-    int i;
-    for (i = 0; i < folio_batch_count(fbatch); i++) {
+    let mut lruvec = core::ptr::null_mut();
+    let mut mlock = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    while (i < folio_batch_count(fbatch)) {
     folio = fbatch.folios[i];
     mlock = (unsigned long)folio & (LRU_FOLIO | NEW_FOLIO);
-    folio = (struct folio *)((unsigned long)folio - mlock);
+    folio = ((unsigned long)folio - mlock);
     fbatch.folios[i] = folio;
-    if (mlock & LRU_FOLIO)
+    if (mlock & LRU_FOLIO) {
     lruvec = __mlock_folio(folio, lruvec);
-#[no_mangle]
-pub unsafe extern "C" fn if(NEW_FOLIO: mlock &) -> else {
-    else if (mlock & NEW_FOLIO)
+    }
+
+    else if (mlock & NEW_FOLIO) {
     lruvec = __mlock_new_folio(folio, lruvec);
-    else
+    }
+    else {
     lruvec = __munlock_folio(folio, lruvec);
     }
-    if (lruvec)
+    }
+    if (lruvec) {
     lruvec_unlock_irq(lruvec);
+    }
     folios_put(fbatch);
     }
 #[no_mangle]
 pub unsafe extern "C" fn mlock_drain_local() {
-    void mlock_drain_local(void)
-    {
-    struct folio_batch *fbatch;
+pub static mut fbatch: *mut c_void = core::ptr::null_mut();
     local_lock(&mlock_fbatch.lock);
     fbatch = this_cpu_ptr(&mlock_fbatch.fbatch);
-    if (folio_batch_count(fbatch))
+    if (folio_batch_count(fbatch)) {
     mlock_folio_batch(fbatch);
+    }
     local_unlock(&mlock_fbatch.lock);
     }
 #[no_mangle]
 pub unsafe extern "C" fn mlock_drain_remote(cpu: c_int) {
-    void mlock_drain_remote(int cpu)
-    {
-    struct folio_batch *fbatch;
-    WARN_ON_ONCE(cpu_online(cpu));
+pub static mut fbatch: *mut c_void = core::ptr::null_mut();
+    WARN_ON_ONCE!(cpu_online(cpu));
     fbatch = &per_cpu(mlock_fbatch.fbatch, cpu);
-    if (folio_batch_count(fbatch))
+    if (folio_batch_count(fbatch)) {
     mlock_folio_batch(fbatch);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn need_mlock_drain(cpu: c_int) -> bool {
-    bool need_mlock_drain(int cpu)
-    {
     return folio_batch_count(&per_cpu(mlock_fbatch.fbatch, cpu));
     }
 //
@@ -241,20 +497,19 @@ pub unsafe extern "C" fn need_mlock_drain(cpu: c_int) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn mlock_folio(folio: *mut folio) {
-    void mlock_folio(struct folio *folio)
-    {
-    struct folio_batch *fbatch;
+pub static mut fbatch: *mut c_void = core::ptr::null_mut();
     local_lock(&mlock_fbatch.lock);
     fbatch = this_cpu_ptr(&mlock_fbatch.fbatch);
     if (!folio_test_set_mlocked(folio)) {
-    let mut nr_pages: c_int = folio_nr_pages(folio);
+pub static mut nr_pages: c_int = 0;
     zone_stat_mod_folio(folio, NR_MLOCK, nr_pages);
     __count_vm_events(UNEVICTABLE_PGMLOCKED, nr_pages);
     }
     folio_get(folio);
     if (!folio_batch_add(fbatch, mlock_lru(folio)) ||
-    !folio_may_be_lru_cached(folio) || lru_cache_disabled())
+    !folio_may_be_lru_cached(folio) || lru_cache_disabled()) {
     mlock_folio_batch(fbatch);
+    }
     local_unlock(&mlock_fbatch.lock);
     }
 //
@@ -263,10 +518,8 @@ pub unsafe extern "C" fn mlock_folio(folio: *mut folio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn mlock_new_folio(folio: *mut folio) {
-    void mlock_new_folio(struct folio *folio)
-    {
-    struct folio_batch *fbatch;
-    let mut nr_pages: c_int = folio_nr_pages(folio);
+pub static mut fbatch: *mut c_void = core::ptr::null_mut();
+pub static mut nr_pages: c_int = 0;
     local_lock(&mlock_fbatch.lock);
     fbatch = this_cpu_ptr(&mlock_fbatch.fbatch);
     folio_set_mlocked(folio);
@@ -274,8 +527,9 @@ pub unsafe extern "C" fn mlock_new_folio(folio: *mut folio) {
     __count_vm_events(UNEVICTABLE_PGMLOCKED, nr_pages);
     folio_get(folio);
     if (!folio_batch_add(fbatch, mlock_new(folio)) ||
-    !folio_may_be_lru_cached(folio) || lru_cache_disabled())
+    !folio_may_be_lru_cached(folio) || lru_cache_disabled()) {
     mlock_folio_batch(fbatch);
+    }
     local_unlock(&mlock_fbatch.lock);
     }
 //
@@ -284,9 +538,7 @@ pub unsafe extern "C" fn mlock_new_folio(folio: *mut folio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn munlock_folio(folio: *mut folio) {
-    void munlock_folio(struct folio *folio)
-    {
-    struct folio_batch *fbatch;
+pub static mut fbatch: *mut c_void = core::ptr::null_mut();
     local_lock(&mlock_fbatch.lock);
     fbatch = this_cpu_ptr(&mlock_fbatch.fbatch);
 //
@@ -295,23 +547,22 @@ pub unsafe extern "C" fn munlock_folio(folio: *mut folio) {
 //
     folio_get(folio);
     if (!folio_batch_add(fbatch, folio) ||
-    !folio_may_be_lru_cached(folio) || lru_cache_disabled())
+    !folio_may_be_lru_cached(folio) || lru_cache_disabled()) {
     mlock_folio_batch(fbatch);
+    }
     local_unlock(&mlock_fbatch.lock);
     }
-    static inline unsigned int folio_mlock_step(struct folio *folio,
-    pte_t *pte, unsigned long addr, unsigned long end)
-    {
-    let mut count: c_uint = (end - addr) >> PAGE_SHIFT;
-    let mut ptent: pte_t = ptep_get(pte);
-    if (!folio_test_large(folio))
+#[no_mangle]
+pub unsafe extern "C" fn folio_mlock_step(folio: *mut folio, pte: *mut pte_t, addr: c_ulong, end: c_ulong) -> c_uint {
+pub static mut count: c_uint = 0;
+pub static mut ptent: pte_t = 0;
+    if (!folio_test_large(folio)) {
     return 1;
+    }
     return folio_pte_batch(folio, pte, ptent, count);
     }
-    static inline bool allow_mlock_munlock(struct folio *folio,
-    struct vm_area_struct *vma, unsigned long start,
-    unsigned long end, unsigned int step)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn allow_mlock_munlock(folio: *mut folio, vma: *mut vm_area_struct, start: c_ulong, end: c_ulong, step: c_uint) -> bool {
 //
 // For unlock, allow munlock large folio which is partially
 // mapped to VMA. As it's possible that large folio is
@@ -321,69 +572,83 @@ pub unsafe extern "C" fn munlock_folio(folio: *mut folio) {
 // be split. And the pages are not in VM_LOCKed VMA
 // can be reclaimed.
 //
-    if (!vma_test(vma, VMA_LOCKED_BIT))
-    return true;
-// folio_within_range() cannot take KSM, but any small folio is OK
-    if (!folio_test_large(folio))
-    return true;
-// folio not in range [start, end), skip mlock
-    if (!folio_within_range(folio, vma, start, end))
-    return false;
-// folio is not fully mapped, skip mlock
-    if (step != folio_nr_pages(folio))
-    return false;
+    if (!vma_test(vma, VMA_LOCKED_BIT)) {
     return true;
     }
-    static int mlock_pte_range(pmd_t *pmd, unsigned long addr,
-    unsigned long end, struct mm_walk *walk)
-    {
-    struct vm_area_struct *vma = walk.vma;
-    spinlock_t *ptl;
-    pte_t *start_pte, *pte;
-    pte_t ptent;
-    struct folio *folio;
-    let mut step: c_uint = 1;
-    let mut start: c_ulong = addr;
+// folio_within_range() cannot take KSM, but any small folio is OK
+    if (!folio_test_large(folio)) {
+    return true;
+    }
+// folio not in range [start, end), skip mlock
+    if (!folio_within_range(folio, vma, start, end)) {
+    return false;
+    }
+// folio is not fully mapped, skip mlock
+    if (step != folio_nr_pages(folio)) {
+    return false;
+    }
+    return true;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn mlock_pte_range(pmd: *mut pmd_t, addr: c_ulong, end: c_ulong, walk: *mut mm_walk) -> c_int {
+    let mut vma = walk.vma;
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
+    let mut start_pte = core::ptr::null_mut();
+    let mut pte = core::ptr::null_mut();
+    let mut ptent;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut step: c_uint = 1;
+pub static mut start: c_ulong = 0;
     ptl = pmd_trans_huge_lock(pmd, vma);
     if (ptl) {
-    if (!pmd_present(*pmd))
-    goto out;
-    if (is_huge_zero_pmd(*pmd))
-    goto out;
+    if (!pmd_present(*pmd)) {
+// goto;
+    }
+    if (is_huge_zero_pmd(*pmd)) {
+// goto;
+    }
     folio = pmd_folio(*pmd);
-    if (folio_is_zone_device(folio))
-    goto out;
-    if (vma_test(vma, VMA_LOCKED_BIT))
+    if (folio_is_zone_device(folio)) {
+// goto;
+    }
+    if (vma_test(vma, VMA_LOCKED_BIT)) {
     mlock_folio(folio);
-    else
+    }
+    else {
     munlock_folio(folio);
-    goto out;
+    }
+// goto;
     }
     start_pte = pte_offset_map_lock(vma.vm_mm, pmd, addr, &ptl);
     if (!start_pte) {
     walk.action = ACTION_AGAIN;
     return 0;
     }
-    for (pte = start_pte; addr != end; pte++, addr += PAGE_SIZE) {
+    while (addr != end) {
     ptent = ptep_get(pte);
-    if (!pte_present(ptent))
+    if (!pte_present(ptent)) {
     continue;
+    }
     folio = vm_normal_folio(vma, addr, ptent);
-    if (!folio || folio_is_zone_device(folio))
+    if (!folio || folio_is_zone_device(folio)) {
     continue;
+    }
     step = folio_mlock_step(folio, pte, addr, end);
-    if (!allow_mlock_munlock(folio, vma, start, end, step))
-    goto next_entry;
-    if (vma_test(vma, VMA_LOCKED_BIT))
+    if (!allow_mlock_munlock(folio, vma, start, end, step)) {
+// goto;
+    }
+    if (vma_test(vma, VMA_LOCKED_BIT)) {
     mlock_folio(folio);
-    else
+    }
+    else {
     munlock_folio(folio);
-    next_entry:
+    }
+// label;
     pte += step - 1;
     addr += (step - 1) << PAGE_SHIFT;
     }
     pte_unmap(start_pte);
-    out:
+// label;
     spin_unlock(ptl);
     cond_resched();
     return 0;
@@ -399,14 +664,9 @@ pub unsafe extern "C" fn munlock_folio(folio: *mut folio) {
 // Called for mlock(), mlock2() and mlockall(), to set @vma VMA_LOCKED_BIT;
 // called for munlock() and munlockall(), to clear VMA_LOCKED_BIT from @vma.
 //
-    static void mlock_vma_pages_range(struct vm_area_struct *vma,
-    unsigned long start, unsigned long end,
-    vma_flags_t *new_vma_flags)
-    {
-    static const struct mm_walk_ops mlock_walk_ops = {
-    .pmd_entry = mlock_pte_range,
-    .walk_lock = PGWALK_WRLOCK_VERIFY,
-    };
+#[no_mangle]
+pub unsafe extern "C" fn mlock_vma_pages_range(vma: *mut vm_area_struct, start: c_ulong, end: c_ulong, new_vma_flags: *mut vma_flags_t) {
+pub static mut mm_walk_ops: usize = 0;
 //
 // There is a slight chance that concurrent page migration,
 // or page reclaim finding a page of this now-VMA_LOCKED_BIT vma,
@@ -418,8 +678,9 @@ pub unsafe extern "C" fn munlock_folio(folio: *mut folio) {
 // combination should not be visible to other mmap_lock users;
 // but WRITE_ONCE so rmap walkers must see VMA_IO_BIT if VMA_LOCKED_BIT.
 //
-    if (vma_flags_test(new_vma_flags, VMA_LOCKED_BIT))
+    if (vma_flags_test(new_vma_flags, VMA_LOCKED_BIT)) {
     vma_flags_set(new_vma_flags, VMA_IO_BIT);
+    }
     vma_start_write(vma);
     vma_flags_reset_once(vma, new_vma_flags);
     lru_add_drain();
@@ -439,37 +700,36 @@ pub unsafe extern "C" fn munlock_folio(folio: *mut folio) {
 //
 // For vmas that pass the filters, merge/split as appropriate.
 //
-    static int mlock_fixup(struct vma_iterator *vmi, struct vm_area_struct *vma,
-    struct vm_area_struct **prev, unsigned long start,
-    unsigned long end, vma_flags_t *new_vma_flags)
-    {
-    let mut old_vma_flags: vma_flags_t = vma.flags;
-    struct mm_struct *mm = vma.vm_mm;
-    int nr_pages;
-    let mut ret: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn mlock_fixup(vmi: *mut vma_iterator, vma: *mut vm_area_struct, prev: *mut *mut vm_area_struct, start: c_ulong, end: c_ulong, new_vma_flags: *mut vma_flags_t) -> c_int {
+pub static mut old_vma_flags: vma_flags_t = 0;
+    let mut mm = vma.vm_mm;
+    let mut nr_pages = 0;
+pub static mut ret: c_int = 0;
     if (vma_flags_same_pair(&old_vma_flags, new_vma_flags) ||
     vma_is_secretmem(vma) || !vma_supports_mlock(vma)) {
 //
 // Don't set VMA_LOCKED_BIT or VMA_LOCKONFAULT_BIT and don't
 // count.  For secretmem, don't allow the memory to be unlocked.
 //
-    goto out;
+// goto;
     }
     vma = vma_modify_flags(vmi, *prev, vma, start, end, new_vma_flags);
     if (IS_ERR(vma)) {
     ret = PTR_ERR(vma);
-    goto out;
+// goto;
     }
 //
 // Keep track of amount of locked VM.
 //
     nr_pages = (end - start) >> PAGE_SHIFT;
-    if (!vma_flags_test(new_vma_flags, VMA_LOCKED_BIT))
+    if (!vma_flags_test(new_vma_flags, VMA_LOCKED_BIT)) {
     nr_pages = -nr_pages;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: vma_flags_test(&old_vma_flags, _arg: VMA_LOCKED_BIT)) -> else {
-    else if (vma_flags_test(&old_vma_flags, VMA_LOCKED_BIT))
+    }
+
+    else if (vma_flags_test(&old_vma_flags, VMA_LOCKED_BIT)) {
     nr_pages = 0;
+    }
     mm.locked_vm += nr_pages;
 //
 // vm_flags is protected by the mmap_lock held in write mode.
@@ -484,51 +744,59 @@ pub unsafe extern "C" fn if(_arg: vma_flags_test(&old_vma_flags, _arg: VMA_LOCKE
     } else {
     mlock_vma_pages_range(vma, start, end, new_vma_flags);
     }
-    out:
+// label;
 // prev = vma;
     return ret;
     }
-    static int apply_vma_lock_flags(unsigned long start, size_t len,
-    const vma_flags_t *flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn apply_vma_lock_flags(start: c_ulong, len: size_t, flags: *mut vma_flags_t) -> c_int {
     unsigned long nstart, end, tmp;
-    struct vm_area_struct *vma, *prev;
+    let mut vma = core::ptr::null_mut();
+    let mut prev = core::ptr::null_mut();
     VMA_ITERATOR(vmi, current.mm, start);
     VM_BUG_ON(offset_in_page(start));
     VM_BUG_ON(len != PAGE_ALIGN(len));
     end = start + len;
-    if (end < start)
+    if (end < start) {
     return -EINVAL;
-    if (end == start)
+    }
+    if (end == start) {
     return 0;
+    }
     vma = vma_iter_load(&vmi);
-    if (!vma)
+    if (!vma) {
     return -ENOMEM;
+    }
     prev = vma_prev(&vmi);
-    if (start > vma.vm_start)
+    if (start > vma.vm_start) {
     prev = vma;
+    }
     nstart = start;
     tmp = vma.vm_start;
     for_each_vma_range(vmi, vma, end) {
-    int error;
-    vma_flags_t newflags;
-    if (vma.vm_start != tmp)
+    let mut error = 0;
+    let mut newflags;
+    if (vma.vm_start != tmp) {
     return -ENOMEM;
+    }
     newflags = vma.flags;
     vma_flags_clear_mask(&newflags, VMA_LOCKED_MASK);
     vma_flags_set_mask(&newflags, *flags);
 // Here we know that  vma->vm_start <= nstart < vma->vm_end.
     tmp = vma.vm_end;
-    if (tmp > end)
+    if (tmp > end) {
     tmp = end;
+    }
     error = mlock_fixup(&vmi, vma, &prev, nstart, tmp, &newflags);
-    if (error)
+    if (error) {
     return error;
+    }
     tmp = vma_iter_end(&vmi);
     nstart = tmp;
     }
-    if (tmp < end)
+    if (tmp < end) {
     return -ENOMEM;
+    }
     return 0;
     }
 //
@@ -538,22 +806,24 @@ pub unsafe extern "C" fn if(_arg: vma_flags_test(&old_vma_flags, _arg: VMA_LOCKE
 // is also counted.
 // Return value: previously mlocked page counts
 //
-    static unsigned long count_mm_mlocked_page_nr(struct mm_struct *mm,
-    unsigned long start, size_t len)
-    {
-    struct vm_area_struct *vma;
-    let mut count: c_ulong = 0;
-    unsigned long end;
+#[no_mangle]
+pub unsafe extern "C" fn count_mm_mlocked_page_nr(mm: *mut mm_struct, start: c_ulong, len: size_t) -> c_ulong {
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+pub static mut count: c_ulong = 0;
+    let mut end = 0;
     VMA_ITERATOR(vmi, mm, start);
 // Don't overflow past ULONG_MAX
-    if (unlikely(ULONG_MAX - len < start))
+    if (unlikely(ULONG_MAX - len < start)) {
     end = ULONG_MAX;
-    else
+    }
+    else {
     end = start + len;
+    }
     for_each_vma_range(vmi, vma, end) {
     if (vma_test(vma, VMA_LOCKED_BIT)) {
-    if (start > vma.vm_start)
+    if (start > vma.vm_start) {
     count -= (start - vma.vm_start);
+    }
     if (end < vma.vm_end) {
     count += end - vma.vm_start;
     break;
@@ -568,32 +838,33 @@ pub unsafe extern "C" fn if(_arg: vma_flags_test(&old_vma_flags, _arg: VMA_LOCKE
 //
 #[no_mangle]
 unsafe extern "C" fn __mlock_posix_error_return(retval: c_long) -> c_int {
-    static int __mlock_posix_error_return(long retval)
-    {
-    if (retval == -EFAULT)
+    if (retval == -EFAULT) {
     retval = -ENOMEM;
-#[no_mangle]
-pub unsafe extern "C" fn if(-ENOMEM: retval ==) -> else {
-    else if (retval == -ENOMEM)
+    }
+
+    else if (retval == -ENOMEM) {
     retval = -EAGAIN;
+    }
     return retval;
     }
     static __must_check int do_mlock(unsigned long start, size_t len,
     vma_flags_t *flags)
     {
-    unsigned long locked;
-    unsigned long lock_limit;
-    let mut error: c_int = -ENOMEM;
+    let mut locked = 0;
+    let mut lock_limit = 0;
+pub static mut error: c_int = 0;
     start = untagged_addr(start);
-    if (!can_do_mlock())
+    if (!can_do_mlock()) {
     return -EPERM;
+    }
     len = PAGE_ALIGN(len + (offset_in_page(start)));
     start &= PAGE_MASK;
     lock_limit = rlimit(RLIMIT_MEMLOCK);
     lock_limit >>= PAGE_SHIFT;
     locked = len >> PAGE_SHIFT;
-    if (mmap_write_lock_killable(current.mm))
+    if (mmap_write_lock_killable(current.mm)) {
     return -EINTR;
+    }
     locked += current.mm.locked_vm;
     if ((locked > lock_limit) && (!capable(CAP_IPC_LOCK))) {
 //
@@ -606,39 +877,45 @@ pub unsafe extern "C" fn if(-ENOMEM: retval ==) -> else {
     start, len);
     }
 // check against resource limits
-    if ((locked <= lock_limit) || capable(CAP_IPC_LOCK))
+    if ((locked <= lock_limit) || capable(CAP_IPC_LOCK)) {
     error = apply_vma_lock_flags(start, len, flags);
+    }
     mmap_write_unlock(current.mm);
-    if (error)
+    if (error) {
     return error;
+    }
     error = __mm_populate(start, len, 0);
-    if (error)
+    if (error) {
     return __mlock_posix_error_return(error);
+    }
     return 0;
     }
-    SYSCALL_DEFINE2(mlock, unsigned long, start, size_t, len)
-    {
-    let mut flags: vma_flags_t = mk_vma_flags(VMA_LOCKED_BIT);
+#[no_mangle]
+pub unsafe extern "C" fn sys_mlock(start: usize, len: usize) -> c_long {
+pub static mut flags: vma_flags_t = 0;
     return do_mlock(start, len, &flags);
     }
-    SYSCALL_DEFINE3(mlock2, unsigned long, start, size_t, len, int, flags)
-    {
-    let mut vma_flags: vma_flags_t = mk_vma_flags(VMA_LOCKED_BIT);
-    if (flags & ~MLOCK_ONFAULT)
+#[no_mangle]
+pub unsafe extern "C" fn sys_mlock2(start: usize, len: usize, flags: usize) -> c_long {
+pub static mut vma_flags: vma_flags_t = 0;
+    if (flags & ~MLOCK_ONFAULT) {
     return -EINVAL;
-    if (flags & MLOCK_ONFAULT)
+    }
+    if (flags & MLOCK_ONFAULT) {
     vma_flags_set(&vma_flags, VMA_LOCKONFAULT_BIT);
+    }
     return do_mlock(start, len, &vma_flags);
     }
-    SYSCALL_DEFINE2(munlock, unsigned long, start, size_t, len)
-    {
-    let mut flags: vma_flags_t = EMPTY_VMA_FLAGS;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn sys_munlock(start: usize, len: usize) -> c_long {
+pub static mut flags: vma_flags_t = 0;
+    let mut ret = 0;
     start = untagged_addr(start);
     len = PAGE_ALIGN(len + (offset_in_page(start)));
     start &= PAGE_MASK;
-    if (mmap_write_lock_killable(current.mm))
+    if (mmap_write_lock_killable(current.mm)) {
     return -EINTR;
+    }
     ret = apply_vma_lock_flags(start, len, &flags);
     mmap_write_unlock(current.mm);
     return ret;
@@ -656,67 +933,75 @@ pub unsafe extern "C" fn if(-ENOMEM: retval ==) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn apply_mlockall_flags(flags: c_int) -> c_int {
-    static int apply_mlockall_flags(int flags)
-    {
     VMA_ITERATOR(vmi, current.mm, 0);
-    struct mm_struct *mm = current.mm;
+    let mut mm = current.mm;
     struct vm_area_struct *vma, *prev = core::ptr::null_mut();
-    let mut to_add: vma_flags_t = EMPTY_VMA_FLAGS;
+pub static mut to_add: vma_flags_t = 0;
     vma_flags_clear_mask(&mm.def_vma_flags, VMA_LOCKED_MASK);
     if (flags & MCL_FUTURE) {
     vma_flags_set(&mm.def_vma_flags, VMA_LOCKED_BIT);
-    if (flags & MCL_ONFAULT)
+    if (flags & MCL_ONFAULT) {
     vma_flags_set(&mm.def_vma_flags, VMA_LOCKONFAULT_BIT);
-    if (!(flags & MCL_CURRENT))
-    goto out;
+    }
+    if (!(flags & MCL_CURRENT)) {
+// goto;
+    }
     }
     if (flags & MCL_CURRENT) {
     vma_flags_set(&to_add, VMA_LOCKED_BIT);
-    if (flags & MCL_ONFAULT)
+    if (flags & MCL_ONFAULT) {
     vma_flags_set(&to_add, VMA_LOCKONFAULT_BIT);
     }
+    }
     for_each_vma(vmi, vma) {
-    int error;
-    let mut newflags: vma_flags_t = vma.flags;
+    let mut error = 0;
+pub static mut newflags: vma_flags_t = 0;
     vma_flags_clear_mask(&newflags, VMA_LOCKED_MASK);
     vma_flags_set_mask(&newflags, to_add);
     error = mlock_fixup(&vmi, vma, &prev, vma.vm_start, vma.vm_end,
     &newflags);
 // Ignore errors, but prev needs fixing up.
-    if (error)
+    if (error) {
     prev = vma;
+    }
     cond_resched();
     }
-    out:
+// label;
     return 0;
     }
-    SYSCALL_DEFINE1(mlockall, int, flags)
-    {
-    unsigned long lock_limit;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn sys_mlockall(flags: usize) -> c_long {
+    let mut lock_limit = 0;
+    let mut ret = 0;
     if (!flags || (flags & ~(MCL_CURRENT | MCL_FUTURE | MCL_ONFAULT)) ||
-    flags == MCL_ONFAULT)
+    flags == MCL_ONFAULT) {
     return -EINVAL;
-    if (!can_do_mlock())
+    }
+    if (!can_do_mlock()) {
     return -EPERM;
+    }
     lock_limit = rlimit(RLIMIT_MEMLOCK);
     lock_limit >>= PAGE_SHIFT;
-    if (mmap_write_lock_killable(current.mm))
+    if (mmap_write_lock_killable(current.mm)) {
     return -EINTR;
+    }
     ret = -ENOMEM;
     if (!(flags & MCL_CURRENT) || (current.mm.total_vm <= lock_limit) ||
-    capable(CAP_IPC_LOCK))
+    capable(CAP_IPC_LOCK)) {
     ret = apply_mlockall_flags(flags);
+    }
     mmap_write_unlock(current.mm);
-    if (!ret && (flags & MCL_CURRENT))
+    if (!ret && (flags & MCL_CURRENT)) {
     mm_populate(0, TASK_SIZE);
+    }
     return ret;
     }
-    SYSCALL_DEFINE0(munlockall)
-    {
-    int ret;
-    if (mmap_write_lock_killable(current.mm))
+#[no_mangle]
+pub unsafe extern "C" fn sys_munlockall() -> c_long {
+    let mut ret = 0;
+    if (mmap_write_lock_killable(current.mm)) {
     return -EINTR;
+    }
     ret = apply_mlockall_flags(0);
     mmap_write_unlock(current.mm);
     return ret;
@@ -725,38 +1010,35 @@ unsafe extern "C" fn apply_mlockall_flags(flags: c_int) -> c_int {
 // Objects with different lifetime than processes (SHM_LOCK and SHM_HUGETLB
 // shm segments) get accounted against the user_struct instead.
 //
-    static DEFINE_SPINLOCK(shmlock_user_lock);
+pub static mut shmlock_user_lock: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn user_shm_lock(size: usize, ucounts: *mut ucounts) -> c_int {
-    int user_shm_lock(size_t size, struct ucounts *ucounts)
-    {
     unsigned long lock_limit, locked;
-    long memlock;
-    let mut allowed: c_int = 0;
+    let mut memlock = 0;
+pub static mut allowed: c_int = 0;
     locked = (size + PAGE_SIZE - 1) >> PAGE_SHIFT;
     lock_limit = rlimit(RLIMIT_MEMLOCK);
-    if (lock_limit != RLIM_INFINITY)
+    if (lock_limit != RLIM_INFINITY) {
     lock_limit >>= PAGE_SHIFT;
+    }
     spin_lock(&shmlock_user_lock);
     memlock = inc_rlimit_ucounts(ucounts, UCOUNT_RLIMIT_MEMLOCK, locked);
     if ((memlock == LONG_MAX || memlock > lock_limit) && !capable(CAP_IPC_LOCK)) {
     dec_rlimit_ucounts(ucounts, UCOUNT_RLIMIT_MEMLOCK, locked);
-    goto out;
+// goto;
     }
     if (!get_ucounts(ucounts)) {
     dec_rlimit_ucounts(ucounts, UCOUNT_RLIMIT_MEMLOCK, locked);
     allowed = 0;
-    goto out;
+// goto;
     }
     allowed = 1;
-    out:
+// label;
     spin_unlock(&shmlock_user_lock);
     return allowed;
     }
 #[no_mangle]
 pub unsafe extern "C" fn user_shm_unlock(size: usize, ucounts: *mut ucounts) {
-    void user_shm_unlock(size_t size, struct ucounts *ucounts)
-    {
     spin_lock(&shmlock_user_lock);
     dec_rlimit_ucounts(ucounts, UCOUNT_RLIMIT_MEMLOCK, (size + PAGE_SIZE - 1) >> PAGE_SHIFT);
     spin_unlock(&shmlock_user_lock);

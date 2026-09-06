@@ -34,6 +34,216 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
 macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
@@ -139,7 +349,7 @@ pub type atomic_long_t = core::sync::atomic::AtomicI64;
 // Copyright (C) 2002-2004 Eric Biederman  <ebiederm@xmission.com>
 //
 
-pub static mut __kexec_lock: core::sync::atomic::AtomicI32 = ATOMIC_INIT(0);
+pub static mut __kexec_lock: core::sync::atomic::AtomicI32 = 0;
 // Flag to indicate we are going to kexec a new kernel
 pub static mut kexec_in_progress: bool = false;
     let mut kexec_file_dbg_print = 0;
@@ -186,15 +396,13 @@ pub static mut kexec_in_progress: bool = false;
 // allocating pages whose destination address we do not care about.
 //
 
-    static struct page *kimage_alloc_page(struct kimage *image,
-    gfp_t gfp_mask,
-    unsigned long dest);
+// forward_decl: kimage_alloc_page;
 #[no_mangle]
 pub unsafe extern "C" fn sanity_check_segment_list(image: *mut kimage) -> c_int {
     let mut i = 0;
-pub static mut nr_segments: c_ulong = image.nr_segments;
+pub static mut nr_segments: c_ulong = 0;
 pub static mut total_pages: c_ulong = 0;
-pub static mut nr_pages: c_ulong = totalram_pages();
+pub static mut nr_pages: c_ulong = 0;
 //
 // Verify we have good destination addresses.  The caller is
 // responsible for making certain we don't attempt to load
@@ -208,7 +416,7 @@ pub static mut nr_pages: c_ulong = totalram_pages();
 // simply because addresses are changed to page size
 // granularity.
 //
-    for (i = 0; i < nr_segments; i++) {
+    while (i < nr_segments) {
     unsigned long mstart, mend;
     mstart = image.segment[i].mem;
     mend   = mstart + image.segment[i].memsz;
@@ -227,12 +435,12 @@ pub static mut nr_pages: c_ulong = totalram_pages();
 // through very weird things can happen with no
 // easy explanation as one segment stops on another.
 //
-    for (i = 0; i < nr_segments; i++) {
+    while (i < nr_segments) {
     unsigned long mstart, mend;
     let mut j = 0;
     mstart = image.segment[i].mem;
     mend   = mstart + image.segment[i].memsz;
-    for (j = 0; j < i; j++) {
+    while (j < i) {
     unsigned long pstart, pend;
     pstart = image.segment[j].mem;
     pend   = pstart + image.segment[j].memsz;
@@ -247,7 +455,7 @@ pub static mut nr_pages: c_ulong = totalram_pages();
 // and it is easier to check up front than to be surprised
 // later on.
 //
-    for (i = 0; i < nr_segments; i++) {
+    while (i < nr_segments) {
     if (image.segment[i].bufsz > image.segment[i].memsz) {
     return -EINVAL;
     }
@@ -257,7 +465,7 @@ pub static mut nr_pages: c_ulong = totalram_pages();
 // request from userspace is too large, a large amount of time will be
 // wasted allocating pages, which can cause a soft lockup.
 //
-    for (i = 0; i < nr_segments; i++) {
+    while (i < nr_segments) {
     if (PAGE_COUNT(image.segment[i].memsz) > nr_pages / 2) {
     return -EINVAL;
     }
@@ -277,14 +485,15 @@ pub static mut nr_pages: c_ulong = totalram_pages();
 // kernel could corrupt things.
 //
     if (image.type == KEXEC_TYPE_CRASH) {
-    for (i = 0; i < nr_segments; i++) {
+    while (i < nr_segments) {
     unsigned long mstart, mend;
     mstart = image.segment[i].mem;
     mend = mstart + image.segment[i].memsz - 1;
 // Ensure we are within the crash kernel limits
     if ((mstart < phys_to_boot_phys(crashk_res.start)) ||
-    (mend > phys_to_boot_phys(crashk_res.end)))
+    (mend > phys_to_boot_phys(crashk_res.end))) {
     return -EADDRNOTAVAIL;
+    }
     }
     }
 
@@ -295,8 +504,9 @@ pub static mut nr_pages: c_ulong = totalram_pages();
 // addresses before kexec swaps their content with the segments' source
 // pages to avoid accessing memory before it is accepted.
 //
-    for (i = 0; i < nr_segments; i++)
+    for (i = 0; i < nr_segments; i++) {
     accept_memory(image.segment[i].mem, image.segment[i].memsz);
+    }
     return 0;
     }
 #[no_mangle]
@@ -327,7 +537,7 @@ pub unsafe extern "C" fn do_kimage_alloc_init() {
 #[no_mangle]
 pub unsafe extern "C" fn kimage_is_destination_range() {
     let mut i = 0;
-    for (i = 0; i < image.nr_segments; i++) {
+    while (i < image.nr_segments) {
     unsigned long mstart, mend;
     mstart = image.segment[i].mem;
     mend = mstart + image.segment[i].memsz - 1;
@@ -345,34 +555,41 @@ pub unsafe extern "C" fn kimage_alloc_pages() {
     }
     pages = alloc_pages(gfp_mask & ~__GFP_ZERO, order);
     if (pages) {
-    unsigned int count, i;
+    let mut count = 0;
+    let mut i = 0;
     pages.mapping = core::ptr::null_mut();
     set_page_private(pages, order);
     count = 1 << order;
-    for (i = 0; i < count; i++)
+    for (i = 0; i < count; i++) {
     SetPageReserved(pages + i);
+    }
     arch_kexec_post_alloc_pages(page_address(pages), count,
     gfp_mask);
     if (gfp_mask & __GFP_ZERO) {
-    for (i = 0; i < count; i++)
+    for (i = 0; i < count; i++) {
     }
     clear_highpage(pages + i);
+    }
     }
     return pages;
     }
 #[no_mangle]
 unsafe extern "C" fn kimage_free_pages(page: *mut page) {
-    unsigned int order, count, i;
+    let mut order = 0;
+    let mut count = 0;
+    let mut i = 0;
     order = page_private(page);
     count = 1 << order;
     arch_kexec_pre_free_pages(page_address(page), count);
-    for (i = 0; i < count; i++)
+    for (i = 0; i < count; i++) {
     ClearPageReserved(page + i);
+    }
     __free_pages(page, order);
     }
 #[no_mangle]
 pub unsafe extern "C" fn kimage_free_page_list(list: *mut list_head) {
-    struct page *page, *next;
+    let mut page = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
     list_for_each_entry_safe(page, next, list, lru) {
     list_del(&page.lru);
     kimage_free_pages(page);
@@ -474,7 +691,7 @@ pub unsafe extern "C" fn kimage_alloc_crash_control_pages() {
     break;
     }
 // See if I overlap any of the segments
-    for (i = 0; i < image.nr_segments; i++) {
+    while (i < image.nr_segments) {
     unsigned long mstart, mend;
     mstart = image.segment[i].mem;
     mend   = mstart + image.segment[i].memsz - 1;
@@ -501,23 +718,25 @@ pub unsafe extern "C" fn kimage_alloc_crash_control_pages() {
 
 #[no_mangle]
 pub unsafe extern "C" fn kimage_alloc_control_pages() {
-    struct page *pages = core::ptr::null_mut();
+    let mut pages = core::ptr::null_mut();
     match (image.type) {
     KEXEC_TYPE_DEFAULT => {
     pages = kimage_alloc_normal_control_pages(image, order);
-    break;
+    // break;
 
+    }
     KEXEC_TYPE_CRASH => {
     pages = kimage_alloc_crash_control_pages(image, order);
-    break;
+    // break;
 
+    }
     }
     return pages;
     }
 #[no_mangle]
 unsafe extern "C" fn kimage_add_entry(image: *mut kimage, entry: kimage_entry_t) -> c_int {
     if (*image.entry != 0) {
-    image.entry++;
+    image.entry += 1;
     }
     if (image.entry == image.last_entry) {
     let mut ind_page = core::ptr::null_mut();
@@ -530,10 +749,10 @@ unsafe extern "C" fn kimage_add_entry(image: *mut kimage, entry: kimage_entry_t)
 // image->entry = virt_to_boot_phys(ind_page) | IND_INDIRECTION;
     image.entry = ind_page;
     image.last_entry = ind_page +
-    ((PAGE_SIZE/sizeof(kimage_entry_t)) - 1);
+    ((PAGE_SIZE/sizeof!(kimage_entry_t)) - 1);
     }
 // image->entry = entry;
-    image.entry++;
+    image.entry += 1;
 // image->entry = 0;
     return 0;
     }
@@ -557,16 +776,17 @@ unsafe extern "C" fn kimage_free_extra_pages(image: *mut kimage) {
 #[no_mangle]
 pub unsafe extern "C" fn kimage_terminate(image: *mut kimage) {
     if (*image.entry != 0) {
-    image.entry++;
+    image.entry += 1;
     }
 // image->entry = IND_DONE;
     }
 
     for (ptr = &image.head; (entry = *ptr) && !(entry & IND_DONE); 
     ptr = (entry & IND_INDIRECTION) ? 
-    boot_phys_to_virt((entry & PAGE_MASK)) : ptr + 1)
+    boot_phys_to_virt((entry & PAGE_MASK)) : ptr + 1) {
 #[no_mangle]
 unsafe extern "C" fn kimage_free_entry(entry: kimage_entry_t) {
+    }
     let mut page = core::ptr::null_mut();
     page = boot_pfn_to_page(entry >> PAGE_SHIFT);
     kimage_free_pages(page);
@@ -574,9 +794,9 @@ unsafe extern "C" fn kimage_free_entry(entry: kimage_entry_t) {
 #[no_mangle]
 unsafe extern "C" fn kimage_free_cma(image: *mut kimage) {
     let mut i = 0;
-    for (i = 0; i < image.nr_segments; i++) {
-    struct page *cma = image.segment_cma[i];
-pub static mut nr_pages: u32 = image.segment[i].memsz >> PAGE_SHIFT;
+    while (i < image.nr_segments) {
+    let mut cma = image.segment_cma[i];
+pub static mut nr_pages: u32 = 0;
     if (!cma) {
     continue;
     }
@@ -609,8 +829,9 @@ pub static mut ind: kimage_entry_t = 0;
 // done with it.
 //
     ind = entry;
-    } else if (entry & IND_SOURCE)
+    } else if (entry & IND_SOURCE) {
     kimage_free_entry(entry);
+    }
     }
 // Free the final indirection page
     if (ind & IND_INDIRECTION) {
@@ -639,8 +860,7 @@ pub static mut destination: c_ulong = 0;
     if (entry & IND_DESTINATION) {
     destination = entry & PAGE_MASK;
     }
-#[no_mangle]
-pub unsafe extern "C" fn if(IND_SOURCE: entry &) -> else {
+if true {
     if (page == destination) {
     return ptr;
     }
@@ -703,8 +923,9 @@ pub unsafe extern "C" fn kimage_alloc_page() {
     }
 // If the page is not a destination page use it
     if (!kimage_is_destination_range(image, addr,
-    addr + PAGE_SIZE - 1))
+    addr + PAGE_SIZE - 1)) {
     break;
+    }
 //
 // I know that the page is someones destination page.
 // See if there is already a source page for this
@@ -738,13 +959,13 @@ pub unsafe extern "C" fn kimage_alloc_page() {
     }
 #[no_mangle]
 unsafe extern "C" fn kimage_load_cma_segment(image: *mut kimage, idx: c_int) -> c_int {
-    struct kexec_segment *segment = &image.segment[idx];
-    struct page *cma = image.segment_cma[idx];
-    char *ptr = page_address(cma);
+    let mut segment = &image.segment[idx];
+    let mut cma = image.segment_cma[idx];
+    let mut ptr = page_address(cma);
     size_t ubytes, mbytes;
 pub static mut result: c_int = 0;
-    unsigned char __user *buf = core::ptr::null_mut();
-    unsigned char *kbuf = core::ptr::null_mut();
+    let mut buf = core::ptr::null_mut();
+    let mut kbuf = core::ptr::null_mut();
     if (image.file_mode) {
     kbuf = segment.kbuf;
     }
@@ -776,7 +997,7 @@ pub static mut result: c_int = 0;
     }
     if (result) {
     result = -EFAULT;
-    goto out;
+// goto;
     }
     ptr    += mchunk;
     mbytes -= mchunk;
@@ -784,17 +1005,17 @@ pub static mut result: c_int = 0;
     }
 // Clear any remainder
     memset(ptr, 0, mbytes);
-    out:
+// label;
     return result;
     }
 #[no_mangle]
 unsafe extern "C" fn kimage_load_normal_segment(image: *mut kimage, idx: c_int) -> c_int {
-    struct kexec_segment *segment = &image.segment[idx];
+    let mut segment = &image.segment[idx];
     let mut maddr = 0;
     size_t ubytes, mbytes;
     let mut result = 0;
-    unsigned char __user *buf = core::ptr::null_mut();
-    unsigned char *kbuf = core::ptr::null_mut();
+    let mut buf = core::ptr::null_mut();
+    let mut kbuf = core::ptr::null_mut();
     if (image.file_mode) {
     kbuf = segment.kbuf;
     }
@@ -809,7 +1030,7 @@ unsafe extern "C" fn kimage_load_normal_segment(image: *mut kimage, idx: c_int) 
     }
     result = kimage_set_destination(image, maddr);
     if (result < 0) {
-    goto out;
+// goto;
     }
     while (mbytes) {
     let mut page = core::ptr::null_mut();
@@ -818,12 +1039,12 @@ unsafe extern "C" fn kimage_load_normal_segment(image: *mut kimage, idx: c_int) 
     page = kimage_alloc_page(image, GFP_HIGHUSER, maddr);
     if (!page) {
     result  = -ENOMEM;
-    goto out;
+// goto;
     }
     result = kimage_add_page(image, page_to_boot_pfn(page)
     << PAGE_SHIFT);
     if (result < 0) {
-    goto out;
+// goto;
     }
     ptr = kmap_local_page(page);
 // Start with a clear page
@@ -849,13 +1070,13 @@ unsafe extern "C" fn kimage_load_normal_segment(image: *mut kimage, idx: c_int) 
     kunmap_local(ptr);
     if (result) {
     result = -EFAULT;
-    goto out;
+// goto;
     }
     maddr  += mchunk;
     mbytes -= mchunk;
     cond_resched();
     }
-    out:
+// label;
     return result;
     }
 
@@ -865,12 +1086,12 @@ unsafe extern "C" fn kimage_load_crash_segment(image: *mut kimage, idx: c_int) -
 // user space to it's destination.
 // We do things a page at a time for the sake of kmap.
 //
-    struct kexec_segment *segment = &image.segment[idx];
+    let mut segment = &image.segment[idx];
     let mut maddr = 0;
     size_t ubytes, mbytes;
     let mut result = 0;
-    unsigned char __user *buf = core::ptr::null_mut();
-    unsigned char *kbuf = core::ptr::null_mut();
+    let mut buf = core::ptr::null_mut();
+    let mut kbuf = core::ptr::null_mut();
     result = 0;
     if (image.file_mode) {
     kbuf = segment.kbuf;
@@ -888,7 +1109,7 @@ unsafe extern "C" fn kimage_load_crash_segment(image: *mut kimage, idx: c_int) -
     page = boot_pfn_to_page(maddr >> PAGE_SHIFT);
     if (!page) {
     result  = -ENOMEM;
-    goto out;
+// goto;
     }
     arch_kexec_post_alloc_pages(page_address(page), 1, 0);
     ptr = kmap_local_page(page);
@@ -919,28 +1140,30 @@ unsafe extern "C" fn kimage_load_crash_segment(image: *mut kimage, idx: c_int) -
     arch_kexec_pre_free_pages(page_address(page), 1);
     if (result) {
     result = -EFAULT;
-    goto out;
+// goto;
     }
     maddr  += mchunk;
     mbytes -= mchunk;
     cond_resched();
     }
-    out:
+// label;
     return result;
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn kimage_load_segment(image: *mut kimage, idx: c_int) -> c_int {
-pub static mut result: c_int = -ENOMEM;
+pub static mut result: c_int = 0;
     match (image.type) {
     KEXEC_TYPE_DEFAULT => {
     result = kimage_load_normal_segment(image, idx);
-    break;
+    // break;
 
+    }
     KEXEC_TYPE_CRASH => {
     result = kimage_load_crash_segment(image, idx);
-    break;
+    // break;
 
+    }
     }
     return result;
     }
@@ -952,7 +1175,7 @@ pub unsafe extern "C" fn kimage_map_segment() {
     let mut src_pages = core::ptr::null_mut();
     let mut npages = 0;
     let mut cma = core::ptr::null_mut();
-    void *vaddr = core::ptr::null_mut();
+    let mut vaddr = core::ptr::null_mut();
     let mut i = 0;
     cma = image.segment_cma[idx];
     if (cma) {
@@ -967,7 +1190,7 @@ pub unsafe extern "C" fn kimage_map_segment() {
     npages = PFN_UP(eaddr) - PFN_DOWN(addr);
     src_pages = kmalloc_objs(*src_pages, npages);
     if (!src_pages) {
-    pr_err("Could not allocate ima pages array.\n");
+    pr_err!("Could not allocate ima pages array.\n");
     return core::ptr::null_mut();
     }
     i = 0;
@@ -991,7 +1214,7 @@ pub unsafe extern "C" fn kimage_map_segment() {
     vaddr = vmap(src_pages, npages, VM_MAP, PAGE_KERNEL);
     kfree(src_pages);
     if (!vaddr) {
-    pr_err("Could not map ima buffer.\n");
+    pr_err!("Could not map ima buffer.\n");
     }
     return vaddr;
     }
@@ -1017,13 +1240,9 @@ pub static mut kexec_load_limit: usize = 0;
 
 #[no_mangle]
 pub unsafe extern "C" fn kexec_limit_handler() {
-    struct kexec_load_limit *limit = table.data;
+    let mut limit = table.data;
     let mut val = 0;
-    struct ctl_table tmp = {
-    .data = &val,
-    .maxlen = sizeof(val),
-    .mode = table.mode,
-    };
+pub static mut ctl_table: usize = 0;
     let mut ret = 0;
     if (write) {
     ret = proc_dointvec(&tmp, write, buffer, lenp, ppos);
@@ -1075,7 +1294,7 @@ pub unsafe extern "C" fn kexec_load_permitted(kexec_image_type: c_int) -> bool {
     return false;
     }
     if (limit.limit != -1) {
-    limit.limit--;
+    limit.limit -= 1;
     }
     mutex_unlock(&limit.mutex);
     return true;
@@ -1092,12 +1311,12 @@ pub static mut error: c_int = 0;
     }
     if (!kexec_image) {
     error = -EINVAL;
-    goto Unlock;
+// goto;
     }
     if (!kexec_image.preserve_context) {
     error = liveupdate_reboot();
     if (error) {
-    goto Unlock;
+// goto;
     }
     }
 
@@ -1112,12 +1331,12 @@ pub static mut error: c_int = 0;
     error = freeze_processes();
     if (error) {
     error = -EBUSY;
-    goto Restore_console;
+// goto;
     }
     console_suspend_all();
     error = dpm_suspend_start(PMSG_FREEZE);
     if (error) {
-    goto Resume_devices;
+// goto;
     }
 //
 // dpm_suspend_end() must be called after dpm_suspend_start()
@@ -1126,16 +1345,16 @@ pub static mut error: c_int = 0;
 //
     error = dpm_suspend_end(PMSG_FREEZE);
     if (error) {
-    goto Resume_devices;
+// goto;
     }
     error = suspend_disable_secondary_cpus();
     if (error) {
-    goto Enable_cpus;
+// goto;
     }
     local_irq_disable();
     error = syscore_suspend();
     if (error) {
-    goto Enable_irqs;
+// goto;
     }
     } else {
 
@@ -1167,20 +1386,20 @@ pub static mut error: c_int = 0;
 // used by the latter.
 //
     syscore_resume();
-    Enable_irqs:
+// label;
     local_irq_enable();
-    Enable_cpus:
+// label;
     suspend_enable_secondary_cpus();
     dpm_resume_start(PMSG_RESTORE);
-    Resume_devices:
+// label;
     dpm_resume_end(PMSG_RESTORE);
     console_resume_all();
     thaw_processes();
-    Restore_console:
+// label;
     pm_restore_console();
     }
 
-    Unlock:
+// label;
     kexec_unlock();
     return error;
     }
@@ -1188,30 +1407,30 @@ pub static mut error: c_int = 0;
 pub unsafe extern "C" fn loaded_show() {
     return sysfs_emit(buf, "%d\n", !!kexec_image);
     }
-pub static mut loaded_attr: kobj_attribute = __ATTR_RO(loaded);
+pub static mut loaded_attr: kobj_attribute = 0;
 
 #[no_mangle]
 pub unsafe extern "C" fn crash_loaded_show() {
     return sysfs_emit(buf, "%d\n", kexec_crash_loaded());
     }
-pub static mut crash_loaded_attr: kobj_attribute = __ATTR_RO(crash_loaded);
+pub static mut crash_loaded_attr: kobj_attribute = 0;
 
 #[no_mangle]
 pub unsafe extern "C" fn crash_cma_ranges_show() {
 pub static mut len: isize = 0;
     let mut i = 0;
-    for (i = 0; i < crashk_cma_cnt; ++i) {
+    while (i < crashk_cma_cnt) {
     len += sysfs_emit_at(buf, len, "%08llx-%08llx\n",
     crashk_cma_ranges[i].start,
     crashk_cma_ranges[i].end);
     }
     return len;
     }
-pub static mut crash_cma_ranges_attr: kobj_attribute = __ATTR_RO(crash_cma_ranges);
+pub static mut crash_cma_ranges_attr: kobj_attribute = 0;
 
 #[no_mangle]
 pub unsafe extern "C" fn crash_size_show() {
-pub static mut size: isize = crash_get_memory_size();
+pub static mut size: isize = 0;
     if (size < 0) {
     return size;
     }
@@ -1227,14 +1446,14 @@ pub unsafe extern "C" fn crash_size_store() {
     ret = crash_shrink_memory(cnt);
     return ret < 0 ? ret : count;
     }
-pub static mut crash_size_attr: kobj_attribute = __ATTR_RW(crash_size);
+pub static mut crash_size_attr: kobj_attribute = 0;
 
 #[no_mangle]
 pub unsafe extern "C" fn crash_elfcorehdr_size_show() {
-pub static mut sz: c_uint = crash_get_elfcorehdr_size();
+pub static mut sz: c_uint = 0;
     return sysfs_emit(buf, "%u\n", sz);
     }
-pub static mut crash_elfcorehdr_size_attr: kobj_attribute = __ATTR_RO(crash_elfcorehdr_size);
+pub static mut crash_elfcorehdr_size_attr: kobj_attribute = 0;
 
     static struct attribute *kexec_attrs[] = {
     &loaded_attr.attr,
@@ -1256,7 +1475,7 @@ pub struct kexec_link_entry {
 }
 
 pub static mut kexec_link_entry: usize = 0;
-    static struct kobject *kexec_kobj;
+pub static mut kexec_kobj: *mut c_void = core::ptr::null_mut();
 // ATTRIBUTE_GROUPS;
 #[no_mangle]
 unsafe extern "C" fn init_kexec_sysctl() -> c_int {
@@ -1264,28 +1483,24 @@ unsafe extern "C" fn init_kexec_sysctl() -> c_int {
     let mut i = 0;
     kexec_kobj = kobject_create_and_add("kexec", kernel_kobj);
     if (!kexec_kobj) {
-    pr_err("failed to create kexec kobject\n");
+    pr_err!("failed to create kexec kobject\n");
     return -ENOMEM;
     }
     error = sysfs_create_groups(kexec_kobj, kexec_groups);
     if (error) {
-    goto kset_exit;
+// goto;
     }
-    for (i = 0; i < ARRAY_SIZE(kexec_links); i++) {
+    while (i < ARRAY_SIZE!(kexec_links)) {
     error = compat_only_sysfs_link_entry_to_kobj(kernel_kobj, kexec_kobj,
     kexec_links[i].target,
     kexec_links[i].name);
     if (error) {
-    pr_err("Unable to create %s symlink (%d)", kexec_links[i].name, error);
+    pr_err!("Unable to create %s symlink (%d)", kexec_links[i].name, error);
     }
     }
     return 0;
-    kset_exit:
+// label;
     kobject_put(kexec_kobj);
     return error;
     }
 // subsys_initcall;
-}
-}
-}
-}

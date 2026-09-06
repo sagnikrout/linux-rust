@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -46,11 +296,9 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 
 // global SRCU for all MMs
-    DEFINE_STATIC_SRCU(srcu);
+pub static mut srcu: usize = 0;
 
-    struct lockdep_map __mmu_notifier_invalidate_range_start_map = {
-    .name = "mmu_notifier_invalidate_range_start"
-    };
+pub static mut lockdep_map: usize = 0;
 
 //
 // The mmu_notifier_subscriptions structure is allocated and installed in
@@ -109,49 +357,42 @@ pub struct mmu_notifier_subscriptions {
 // The later state avoids some expensive work on inv_end in the common case of
 // no mmu_interval_notifier monitoring the VA.
 //
-    static bool
-    mn_itree_is_invalidating(struct mmu_notifier_subscriptions *subscriptions)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn mn_itree_is_invalidating(subscriptions: *mut mmu_notifier_subscriptions) -> bool {
     lockdep_assert_held(&subscriptions.lock);
     return subscriptions.invalidate_seq & 1;
     }
-    static struct mmu_interval_notifier *
-    mn_itree_inv_start_range(struct mmu_notifier_subscriptions *subscriptions,
-    const struct mmu_notifier_range *range,
-    unsigned long *seq)
-    {
-    struct interval_tree_node *node;
-    struct mmu_interval_notifier *res = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn mn_itree_inv_start_range(subscriptions: *mut mmu_notifier_subscriptions, range: *mut mmu_notifier_range, seq: *mut c_ulong) -> *mut c_void {
+pub static mut node: *mut c_void = core::ptr::null_mut();
+    let mut res = core::ptr::null_mut();
     spin_lock(&subscriptions.lock);
-    subscriptions.active_invalidate_ranges++;
+    subscriptions.active_invalidate_ranges += 1;
     node = interval_tree_iter_first(&subscriptions.itree, range.start,
     range.end - 1);
     if (node) {
     subscriptions.invalidate_seq |= 1;
-    res = container_of(node, struct mmu_interval_notifier,
+    res = container_of!(node, mmu_interval_notifier,
     interval_tree);
     }
 // seq = subscriptions->invalidate_seq;
     spin_unlock(&subscriptions.lock);
     return res;
     }
-    static struct mmu_interval_notifier *
-    mn_itree_inv_next(struct mmu_interval_notifier *interval_sub,
-    const struct mmu_notifier_range *range)
-    {
-    struct interval_tree_node *node;
+#[no_mangle]
+pub unsafe extern "C" fn mn_itree_inv_next(interval_sub: *mut mmu_interval_notifier, range: *mut mmu_notifier_range) -> *mut c_void {
+pub static mut node: *mut c_void = core::ptr::null_mut();
     node = interval_tree_iter_next(&interval_sub.interval_tree,
     range.start, range.end - 1);
-    if (!node)
+    if (!node) {
     return core::ptr::null_mut();
-    return container_of(node, struct mmu_interval_notifier, interval_tree);
+    }
+    return container_of!(node, mmu_interval_notifier, interval_tree);
     }
 #[no_mangle]
 unsafe extern "C" fn mn_itree_inv_end(subscriptions: *mut mmu_notifier_subscriptions) {
-    static void mn_itree_inv_end(struct mmu_notifier_subscriptions *subscriptions)
-    {
-    struct mmu_interval_notifier *interval_sub;
-    struct hlist_node *next;
+pub static mut interval_sub: *mut c_void = core::ptr::null_mut();
+pub static mut next: *mut c_void = core::ptr::null_mut();
     spin_lock(&subscriptions.lock);
     if (--subscriptions.active_invalidate_ranges ||
     !mn_itree_is_invalidating(subscriptions)) {
@@ -159,7 +400,7 @@ unsafe extern "C" fn mn_itree_inv_end(subscriptions: *mut mmu_notifier_subscript
     return;
     }
 // Make invalidate_seq even
-    subscriptions.invalidate_seq++;
+    subscriptions.invalidate_seq += 1;
 //
 // The inv_end incorporates a deferred mechanism like rtnl_unlock().
 // Adds and removes are queued until the final inv_end happens then
@@ -169,12 +410,12 @@ unsafe extern "C" fn mn_itree_inv_end(subscriptions: *mut mmu_notifier_subscript
     hlist_for_each_entry_safe(interval_sub, next,
     &subscriptions.deferred_list,
     deferred_item) {
-    if (RB_EMPTY_NODE(&interval_sub.interval_tree.rb))
-    interval_tree_insert(&interval_sub.interval_tree,
-    &subscriptions.itree);
-    else
-    interval_tree_remove(&interval_sub.interval_tree,
-    &subscriptions.itree);
+    if (RB_EMPTY_NODE(&interval_sub.interval_tree.rb)) {
+// forward_decl: erval_tree_insert;
+    }
+    else {
+// forward_decl: erval_tree_remove;
+    }
     hlist_del(&interval_sub.deferred_item);
     }
     spin_unlock(&subscriptions.lock);
@@ -199,13 +440,11 @@ unsafe extern "C" fn mn_itree_inv_end(subscriptions: *mut mmu_notifier_subscript
 //
 // The return value should be passed to mmu_interval_read_retry().
 //
-    unsigned long
-    mmu_interval_read_begin(struct mmu_interval_notifier *interval_sub)
-    {
-    struct mmu_notifier_subscriptions *subscriptions =
-    interval_sub.mm.notifier_subscriptions;
-    unsigned long seq;
-    bool is_invalidating;
+#[no_mangle]
+pub unsafe extern "C" fn mmu_interval_read_begin(interval_sub: *mut mmu_interval_notifier) -> c_ulong {
+    let mut subscriptions = interval_sub.mm.notifier_subscriptions;
+    let mut seq = 0;
+    let mut is_invalidating = 0;
 //
 // If the subscription has a different seq value under the user_lock
 // than we started with then it has collided.
@@ -259,9 +498,10 @@ unsafe extern "C" fn mn_itree_inv_end(subscriptions: *mut mmu_notifier_subscript
 //
     lock_map_acquire(&__mmu_notifier_invalidate_range_start_map);
     lock_map_release(&__mmu_notifier_invalidate_range_start_map);
-    if (is_invalidating)
+    if (is_invalidating) {
     wait_event(subscriptions.wq,
     READ_ONCE(subscriptions.invalidate_seq) != seq);
+    }
 //
 // Notice that mmu_interval_read_retry() can already be true at this
 // point, avoiding loops here allows the caller to provide a global
@@ -272,33 +512,26 @@ unsafe extern "C" fn mn_itree_inv_end(subscriptions: *mut mmu_notifier_subscript
     EXPORT_SYMBOL_GPL(mmu_interval_read_begin);
 #[no_mangle]
 unsafe extern "C" fn mn_itree_finish_pass(finish_passes: *mut llist_head) {
-    static void mn_itree_finish_pass(struct llist_head *finish_passes)
-    {
-    struct llist_node *first = llist_reverse_order(__llist_del_all(finish_passes));
-    struct mmu_interval_notifier_finish *f, *next;
-    llist_for_each_entry_safe(f, next, first, link)
+    let mut first = llist_reverse_order(__llist_del_all(finish_passes));
+    let mut f = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+    llist_for_each_entry_safe(f, next, first, link) {
     f.notifier.ops.invalidate_finish(f);
     }
-    static void mn_itree_release(struct mmu_notifier_subscriptions *subscriptions,
-    struct mm_struct *mm)
-    {
-    struct mmu_notifier_range range = {
-    .flags = MMU_NOTIFIER_RANGE_BLOCKABLE,
-    .event = MMU_NOTIFY_RELEASE,
-    .mm = mm,
-    .start = 0,
-    .end = ULONG_MAX,
-    };
-    struct mmu_interval_notifier *interval_sub;
-    LLIST_HEAD(finish_passes);
-    unsigned long cur_seq;
-    bool ret;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn mn_itree_release(subscriptions: *mut mmu_notifier_subscriptions, mm: *mut mm_struct) {
+pub static mut mmu_notifier_range: usize = 0;
+pub static mut interval_sub: *mut c_void = core::ptr::null_mut();
+pub static mut finish_passes: usize = 0;
+    let mut cur_seq = 0;
+    let mut ret = 0;
     for (interval_sub =
     mn_itree_inv_start_range(subscriptions, &range, &cur_seq);
     interval_sub;
     interval_sub = mn_itree_inv_next(interval_sub, &range)) {
     if (interval_sub.ops.invalidate_start) {
-    struct mmu_interval_notifier_finish *finish = core::ptr::null_mut();
+    let mut finish = core::ptr::null_mut();
     ret = interval_sub.ops.invalidate_start(interval_sub,
     &range,
     cur_seq,
@@ -312,7 +545,7 @@ unsafe extern "C" fn mn_itree_finish_pass(finish_passes: *mut llist_head) {
     &range,
     cur_seq);
     }
-    WARN_ON(!ret);
+    WARN_ON!(!ret);
     }
     mn_itree_finish_pass(&finish_passes);
     mn_itree_inv_end(subscriptions);
@@ -329,11 +562,10 @@ unsafe extern "C" fn mn_itree_finish_pass(finish_passes: *mut llist_head) {
 // can't go away from under us as exit_mmap holds an mm_count pin
 // itself.
 //
-    static void mn_hlist_release(struct mmu_notifier_subscriptions *subscriptions,
-    struct mm_struct *mm)
-    {
-    struct mmu_notifier *subscription;
-    int id;
+#[no_mangle]
+pub unsafe extern "C" fn mn_hlist_release(subscriptions: *mut mmu_notifier_subscriptions, mm: *mut mm_struct) {
+pub static mut subscription: *mut c_void = core::ptr::null_mut();
+    let mut id = 0;
 //
 // SRCU here will block mmu_notifier_unregister until
 // ->release returns.
@@ -347,12 +579,12 @@ unsafe extern "C" fn mn_itree_finish_pass(finish_passes: *mut llist_head) {
 // existing sptes and stop the driver from establishing any more
 // sptes before all the pages in the mm are freed.
 //
-    if (subscription.ops.release)
+    if (subscription.ops.release) {
     subscription.ops.release(subscription, mm);
+    }
     spin_lock(&subscriptions.lock);
     while (unlikely(!hlist_empty(&subscriptions.list))) {
-    subscription = hlist_entry(subscriptions.list.first,
-    struct mmu_notifier, hlist);
+    subscription = hlist_entry(subscriptions.list.first, mmu_notifier, hlist);
 //
 // We arrived before mmu_notifier_unregister so
 // mmu_notifier_unregister will do nothing other than to wait
@@ -376,60 +608,58 @@ unsafe extern "C" fn mn_itree_finish_pass(finish_passes: *mut llist_head) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __mmu_notifier_release(mm: *mut mm_struct) {
-    void __mmu_notifier_release(struct mm_struct *mm)
-    {
-    struct mmu_notifier_subscriptions *subscriptions =
-    mm.notifier_subscriptions;
-    if (subscriptions.has_itree)
+    let mut subscriptions = mm.notifier_subscriptions;
+    if (subscriptions.has_itree) {
     mn_itree_release(subscriptions, mm);
-    if (!hlist_empty(&subscriptions.list))
+    }
+    if (!hlist_empty(&subscriptions.list)) {
     mn_hlist_release(subscriptions, mm);
+    }
     }
 //
 // If no young bitflag is supported by the hardware, ->clear_flush_young can
 // unmap the address and return 1 or 0 depending if the mapping previously
 // existed or not.
 //
-    bool __mmu_notifier_clear_flush_young(struct mm_struct *mm,
-    unsigned long start, unsigned long end)
-    {
-    struct mmu_notifier *subscription;
-    let mut young: bool = false;
-    int id;
+#[no_mangle]
+pub unsafe extern "C" fn __mmu_notifier_clear_flush_young(mm: *mut mm_struct, start: c_ulong, end: c_ulong) -> bool {
+pub static mut subscription: *mut c_void = core::ptr::null_mut();
+pub static mut young: bool = false;
+    let mut id = 0;
     id = srcu_read_lock(&srcu);
     hlist_for_each_entry_srcu(subscription,
     &mm.notifier_subscriptions.list, hlist,
     srcu_read_lock_held(&srcu)) {
-    if (subscription.ops.clear_flush_young)
+    if (subscription.ops.clear_flush_young) {
     young |= subscription.ops.clear_flush_young(
     subscription, mm, start, end);
     }
+    }
     srcu_read_unlock(&srcu, id);
     return young;
     }
-    bool __mmu_notifier_clear_young(struct mm_struct *mm,
-    unsigned long start, unsigned long end)
-    {
-    struct mmu_notifier *subscription;
-    let mut young: bool = false;
-    int id;
+#[no_mangle]
+pub unsafe extern "C" fn __mmu_notifier_clear_young(mm: *mut mm_struct, start: c_ulong, end: c_ulong) -> bool {
+pub static mut subscription: *mut c_void = core::ptr::null_mut();
+pub static mut young: bool = false;
+    let mut id = 0;
     id = srcu_read_lock(&srcu);
     hlist_for_each_entry_srcu(subscription,
     &mm.notifier_subscriptions.list, hlist,
     srcu_read_lock_held(&srcu)) {
-    if (subscription.ops.clear_young)
+    if (subscription.ops.clear_young) {
     young |= subscription.ops.clear_young(subscription,
     mm, start, end);
+    }
     }
     srcu_read_unlock(&srcu, id);
     return young;
     }
-    bool __mmu_notifier_test_young(struct mm_struct *mm,
-    unsigned long address)
-    {
-    struct mmu_notifier *subscription;
-    let mut young: bool = false;
-    int id;
+#[no_mangle]
+pub unsafe extern "C" fn __mmu_notifier_test_young(mm: *mut mm_struct, address: c_ulong) -> bool {
+pub static mut subscription: *mut c_void = core::ptr::null_mut();
+pub static mut young: bool = false;
+    let mut id = 0;
     id = srcu_read_lock(&srcu);
     hlist_for_each_entry_srcu(subscription,
     &mm.notifier_subscriptions.list, hlist,
@@ -437,27 +667,27 @@ pub unsafe extern "C" fn __mmu_notifier_release(mm: *mut mm_struct) {
     if (subscription.ops.test_young) {
     young = subscription.ops.test_young(subscription, mm,
     address);
-    if (young)
+    if (young) {
     break;
+    }
     }
     }
     srcu_read_unlock(&srcu, id);
     return young;
     }
-    static int mn_itree_invalidate(struct mmu_notifier_subscriptions *subscriptions,
-    const struct mmu_notifier_range *range)
-    {
-    struct mmu_interval_notifier *interval_sub;
-    LLIST_HEAD(finish_passes);
-    unsigned long cur_seq;
-    let mut err: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn mn_itree_invalidate(subscriptions: *mut mmu_notifier_subscriptions, range: *mut mmu_notifier_range) -> c_int {
+pub static mut interval_sub: *mut c_void = core::ptr::null_mut();
+pub static mut finish_passes: usize = 0;
+    let mut cur_seq = 0;
+pub static mut err: c_int = 0;
     for (interval_sub =
     mn_itree_inv_start_range(subscriptions, range, &cur_seq);
     interval_sub;
     interval_sub = mn_itree_inv_next(interval_sub, range)) {
-    bool ret;
+    let mut ret = 0;
     if (interval_sub.ops.invalidate_start) {
-    struct mmu_interval_notifier_finish *finish = core::ptr::null_mut();
+    let mut finish = core::ptr::null_mut();
     ret = interval_sub.ops.invalidate_start(interval_sub,
     range,
     cur_seq,
@@ -472,8 +702,9 @@ pub unsafe extern "C" fn __mmu_notifier_release(mm: *mut mm_struct) {
     cur_seq);
     }
     if (!ret) {
-    if (WARN_ON(mmu_notifier_range_blockable(range)))
+    if (WARN_ON!(mmu_notifier_range_blockable(range))) {
     continue;
+    }
     err = -EAGAIN;
     break;
     }
@@ -483,35 +714,36 @@ pub unsafe extern "C" fn __mmu_notifier_release(mm: *mut mm_struct) {
 // On -EAGAIN the non-blocking caller is not allowed to call
 // invalidate_range_end()
 //
-    if (err)
+    if (err) {
     mn_itree_inv_end(subscriptions);
+    }
     return err;
     }
-    static int mn_hlist_invalidate_range_start(
-    struct mmu_notifier_subscriptions *subscriptions,
-    struct mmu_notifier_range *range)
-    {
-    struct mmu_notifier *subscription;
-    let mut ret: c_int = 0;
-    int id;
+#[no_mangle]
+pub unsafe extern "C" fn mn_hlist_invalidate_range_start(subscriptions: *mut mmu_notifier_subscriptions, range: *mut mmu_notifier_range) -> c_int {
+pub static mut subscription: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
+    let mut id = 0;
     id = srcu_read_lock(&srcu);
     hlist_for_each_entry_srcu(subscription, &subscriptions.list, hlist,
     srcu_read_lock_held(&srcu)) {
-    const struct mmu_notifier_ops *ops = subscription.ops;
+    let mut ops = subscription.ops;
     if (ops.invalidate_range_start) {
-    int _ret;
-    if (!mmu_notifier_range_blockable(range))
+    let mut _ret = 0;
+    if (!mmu_notifier_range_blockable(range)) {
     non_block_start();
+    }
     _ret = ops.invalidate_range_start(subscription, range);
-    if (!mmu_notifier_range_blockable(range))
+    if (!mmu_notifier_range_blockable(range)) {
     non_block_end();
+    }
     if (_ret) {
-    pr_info("%pS callback failed with %d in %sblockable context.\n",
+    pr_info!("%pS callback failed with %d in %sblockable context.\n",
     ops.invalidate_range_start, _ret,
     !mmu_notifier_range_blockable(range) ?
     "non-" :
     "");
-    WARN_ON(mmu_notifier_range_blockable(range) ||
+    WARN_ON!(mmu_notifier_range_blockable(range) ||
     _ret != -EAGAIN);
 //
 // We call all the notifiers on any EAGAIN,
@@ -519,7 +751,7 @@ pub unsafe extern "C" fn __mmu_notifier_release(mm: *mut mm_struct) {
 // its start method failed, thus a start that
 // does EAGAIN can't also do end.
 //
-    WARN_ON(ops.invalidate_range_end);
+    WARN_ON!(ops.invalidate_range_end);
     ret = _ret;
     }
     }
@@ -532,8 +764,9 @@ pub unsafe extern "C" fn __mmu_notifier_release(mm: *mut mm_struct) {
 //
     hlist_for_each_entry_srcu(subscription, &subscriptions.list,
     hlist, srcu_read_lock_held(&srcu)) {
-    if (!subscription.ops.invalidate_range_end)
+    if (!subscription.ops.invalidate_range_end) {
     continue;
+    }
     subscription.ops.invalidate_range_end(subscription,
     range);
     }
@@ -543,66 +776,64 @@ pub unsafe extern "C" fn __mmu_notifier_release(mm: *mut mm_struct) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __mmu_notifier_invalidate_range_start(range: *mut mmu_notifier_range) -> c_int {
-    int __mmu_notifier_invalidate_range_start(struct mmu_notifier_range *range)
-    {
-    struct mmu_notifier_subscriptions *subscriptions =
-    range.mm.notifier_subscriptions;
-    int ret;
+    let mut subscriptions = range.mm.notifier_subscriptions;
+    let mut ret = 0;
     if (subscriptions.has_itree) {
     ret = mn_itree_invalidate(subscriptions, range);
-    if (ret)
+    if (ret) {
     return ret;
     }
-    if (!hlist_empty(&subscriptions.list))
+    }
+    if (!hlist_empty(&subscriptions.list)) {
     return mn_hlist_invalidate_range_start(subscriptions, range);
+    }
     return 0;
     }
-    static void
-    mn_hlist_invalidate_end(struct mmu_notifier_subscriptions *subscriptions,
-    struct mmu_notifier_range *range)
-    {
-    struct mmu_notifier *subscription;
-    int id;
+#[no_mangle]
+pub unsafe extern "C" fn mn_hlist_invalidate_end(subscriptions: *mut mmu_notifier_subscriptions, range: *mut mmu_notifier_range) {
+pub static mut subscription: *mut c_void = core::ptr::null_mut();
+    let mut id = 0;
     id = srcu_read_lock(&srcu);
     hlist_for_each_entry_srcu(subscription, &subscriptions.list, hlist,
     srcu_read_lock_held(&srcu)) {
     if (subscription.ops.invalidate_range_end) {
-    if (!mmu_notifier_range_blockable(range))
+    if (!mmu_notifier_range_blockable(range)) {
     non_block_start();
+    }
     subscription.ops.invalidate_range_end(subscription,
     range);
-    if (!mmu_notifier_range_blockable(range))
+    if (!mmu_notifier_range_blockable(range)) {
     non_block_end();
+    }
     }
     }
     srcu_read_unlock(&srcu, id);
     }
 #[no_mangle]
 pub unsafe extern "C" fn __mmu_notifier_invalidate_range_end(range: *mut mmu_notifier_range) {
-    void __mmu_notifier_invalidate_range_end(struct mmu_notifier_range *range)
-    {
-    struct mmu_notifier_subscriptions *subscriptions =
-    range.mm.notifier_subscriptions;
+    let mut subscriptions = range.mm.notifier_subscriptions;
     lock_map_acquire(&__mmu_notifier_invalidate_range_start_map);
-    if (subscriptions.has_itree)
+    if (subscriptions.has_itree) {
     mn_itree_inv_end(subscriptions);
-    if (!hlist_empty(&subscriptions.list))
+    }
+    if (!hlist_empty(&subscriptions.list)) {
     mn_hlist_invalidate_end(subscriptions, range);
+    }
     lock_map_release(&__mmu_notifier_invalidate_range_start_map);
     }
-    void __mmu_notifier_arch_invalidate_secondary_tlbs(struct mm_struct *mm,
-    unsigned long start, unsigned long end)
-    {
-    struct mmu_notifier *subscription;
-    int id;
+#[no_mangle]
+pub unsafe extern "C" fn __mmu_notifier_arch_invalidate_secondary_tlbs(mm: *mut mm_struct, start: c_ulong, end: c_ulong) {
+pub static mut subscription: *mut c_void = core::ptr::null_mut();
+    let mut id = 0;
     id = srcu_read_lock(&srcu);
     hlist_for_each_entry_srcu(subscription,
     &mm.notifier_subscriptions.list, hlist,
     srcu_read_lock_held(&srcu)) {
-    if (subscription.ops.arch_invalidate_secondary_tlbs)
+    if (subscription.ops.arch_invalidate_secondary_tlbs) {
     subscription.ops.arch_invalidate_secondary_tlbs(
     subscription, mm,
     start, end);
+    }
     }
     srcu_read_unlock(&srcu, id);
     }
@@ -611,31 +842,32 @@ pub unsafe extern "C" fn __mmu_notifier_invalidate_range_end(range: *mut mmu_not
 // write mode. A NULL mn signals the notifier is being registered for itree
 // mode.
 //
-    int __mmu_notifier_register(struct mmu_notifier *subscription,
-    struct mm_struct *mm)
-    {
-    struct mmu_notifier_subscriptions *subscriptions = core::ptr::null_mut();
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn __mmu_notifier_register(subscription: *mut mmu_notifier, mm: *mut mm_struct) -> c_int {
+    let mut subscriptions = core::ptr::null_mut();
+    let mut ret = 0;
     mmap_assert_write_locked(mm);
-    BUG_ON(atomic_read(&mm.mm_users) <= 0);
+    BUG_ON!(atomic_read(&mm.mm_users) <= 0);
 //
 // Subsystems should only register for invalidate_secondary_tlbs() or
 // invalidate_range_start()/end() callbacks, not both.
 //
-    if (WARN_ON_ONCE(subscription &&
+    if (WARN_ON_ONCE!(subscription &&
     (subscription.ops.arch_invalidate_secondary_tlbs &&
     (subscription.ops.invalidate_range_start ||
-    subscription.ops.invalidate_range_end))))
+    subscription.ops.invalidate_range_end)))) {
     return -EINVAL;
+    }
     if (!mm.notifier_subscriptions) {
 //
 // kmalloc cannot be called under mm_take_all_locks(), but we
 // know that mm->notifier_subscriptions can't change while we
 // hold the write side of the mmap_lock.
 //
-    subscriptions = kzalloc_obj(struct mmu_notifier_subscriptions);
-    if (!subscriptions)
+    subscriptions = kzalloc_obj(mmu_notifier_subscriptions);
+    if (!subscriptions) {
     return -ENOMEM;
+    }
     INIT_HLIST_HEAD(&subscriptions.list);
     spin_lock_init(&subscriptions.lock);
     subscriptions.invalidate_seq = 2;
@@ -644,8 +876,9 @@ pub unsafe extern "C" fn __mmu_notifier_invalidate_range_end(range: *mut mmu_not
     INIT_HLIST_HEAD(&subscriptions.deferred_list);
     }
     ret = mm_take_all_locks(mm);
-    if (unlikely(ret))
-    goto out_clean;
+    if (unlikely(ret)) {
+// goto;
+    }
 //
 // Serialize the update against mmu_notifier_unregister. A
 // side note: mmu_notifier_release can't run concurrently with
@@ -662,8 +895,9 @@ pub unsafe extern "C" fn __mmu_notifier_invalidate_range_end(range: *mut mmu_not
 // As above, users holding the mmap_lock or one of the
 // mm_take_all_locks() do not need to use acquire semantics.
 //
-    if (subscriptions)
+    if (subscriptions) {
     smp_store_release(&mm.notifier_subscriptions, subscriptions);
+    }
     if (subscription) {
 // Pairs with the mmdrop in mmu_notifier_unregister_*
     mmgrab(mm);
@@ -673,12 +907,13 @@ pub unsafe extern "C" fn __mmu_notifier_invalidate_range_end(range: *mut mmu_not
     hlist_add_head_rcu(&subscription.hlist,
     &mm.notifier_subscriptions.list);
     spin_unlock(&mm.notifier_subscriptions.lock);
-    } else
+    } else {
     mm.notifier_subscriptions.has_itree = true;
+    }
     mm_drop_all_locks(mm);
-    BUG_ON(atomic_read(&mm.mm_users) <= 0);
+    BUG_ON!(atomic_read(&mm.mm_users) <= 0);
     return 0;
-    out_clean:
+// label;
     kfree(subscriptions);
     return ret;
     }
@@ -702,30 +937,31 @@ pub unsafe extern "C" fn __mmu_notifier_invalidate_range_end(range: *mut mmu_not
 // While the caller has a mmu_notifier get the subscription->mm pointer will remain
 // valid, and can be converted to an active mm pointer via mmget_not_zero().
 //
-    int mmu_notifier_register(struct mmu_notifier *subscription,
-    struct mm_struct *mm)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn mmu_notifier_register(subscription: *mut mmu_notifier, mm: *mut mm_struct) -> c_int {
+    let mut ret = 0;
     mmap_write_lock(mm);
     ret = __mmu_notifier_register(subscription, mm);
     mmap_write_unlock(mm);
     return ret;
     }
     EXPORT_SYMBOL_GPL(mmu_notifier_register);
-    static struct mmu_notifier *
-    find_get_mmu_notifier(struct mm_struct *mm, const struct mmu_notifier_ops *ops)
-    {
-    struct mmu_notifier *subscription;
+#[no_mangle]
+pub unsafe extern "C" fn find_get_mmu_notifier(mm: *mut mm_struct, ops: *mut mmu_notifier_ops) -> *mut c_void {
+pub static mut subscription: *mut c_void = core::ptr::null_mut();
     spin_lock(&mm.notifier_subscriptions.lock);
     hlist_for_each_entry_srcu(subscription,
     &mm.notifier_subscriptions.list, hlist,
     lockdep_is_held(&mm.notifier_subscriptions.lock)) {
-    if (subscription.ops != ops)
+    if (subscription.ops != ops) {
     continue;
-    if (likely(subscription.users != UINT_MAX))
-    subscription.users++;
-    else
+    }
+    if (likely(subscription.users != UINT_MAX)) {
+    subscription.users += 1;
+    }
+    else {
     subscription = ERR_PTR(-EOVERFLOW);
+    }
     spin_unlock(&mm.notifier_subscriptions.lock);
     return subscription;
     }
@@ -749,26 +985,28 @@ pub unsafe extern "C" fn __mmu_notifier_invalidate_range_end(range: *mut mmu_not
 // While the caller has a mmu_notifier get the mm pointer will remain valid,
 // and can be converted to an active mm pointer via mmget_not_zero().
 //
-    struct mmu_notifier *mmu_notifier_get_locked(const struct mmu_notifier_ops *ops,
-    struct mm_struct *mm)
-    {
-    struct mmu_notifier *subscription;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn mmu_notifier_get_locked(ops: *mut mmu_notifier_ops, mm: *mut mm_struct) -> *mut c_void {
+pub static mut subscription: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     mmap_assert_write_locked(mm);
     if (mm.notifier_subscriptions) {
     subscription = find_get_mmu_notifier(mm, ops);
-    if (subscription)
+    if (subscription) {
     return subscription;
     }
+    }
     subscription = ops.alloc_notifier(mm);
-    if (IS_ERR(subscription))
+    if (IS_ERR(subscription)) {
     return subscription;
+    }
     subscription.ops = ops;
     ret = __mmu_notifier_register(subscription, mm);
-    if (ret)
-    goto out_free;
+    if (ret) {
+// goto;
+    }
     return subscription;
-    out_free:
+// label;
     subscription.ops.free_notifier(subscription);
     return ERR_PTR(ret);
     }
@@ -776,9 +1014,7 @@ pub unsafe extern "C" fn __mmu_notifier_invalidate_range_end(range: *mut mmu_not
 // this is called after the last mmu_notifier_unregister() returned
 #[no_mangle]
 pub unsafe extern "C" fn __mmu_notifier_subscriptions_destroy(mm: *mut mm_struct) {
-    void __mmu_notifier_subscriptions_destroy(struct mm_struct *mm)
-    {
-    BUG_ON(!hlist_empty(&mm.notifier_subscriptions.list));
+    BUG_ON!(!hlist_empty(&mm.notifier_subscriptions.list));
     kfree(mm.notifier_subscriptions);
     mm.notifier_subscriptions = LIST_POISON1; /* debug */
     }
@@ -792,23 +1028,23 @@ pub unsafe extern "C" fn __mmu_notifier_subscriptions_destroy(mm: *mut mm_struct
 // and only after mmu_notifier_unregister returned we're guaranteed
 // that ->release or any other method can't run anymore.
 //
-    void mmu_notifier_unregister(struct mmu_notifier *subscription,
-    struct mm_struct *mm)
-    {
-    BUG_ON(atomic_read(&mm.mm_count) <= 0);
+#[no_mangle]
+pub unsafe extern "C" fn mmu_notifier_unregister(subscription: *mut mmu_notifier, mm: *mut mm_struct) {
+    BUG_ON!(atomic_read(&mm.mm_count) <= 0);
     if (!hlist_unhashed(&subscription.hlist)) {
 //
 // SRCU here will force exit_mmap to wait for ->release to
 // finish before freeing the pages.
 //
-    int id;
+    let mut id = 0;
     id = srcu_read_lock(&srcu);
 //
 // exit_mmap will block in mmu_notifier_release to guarantee
 // that ->release is called before freeing the pages.
 //
-    if (subscription.ops.release)
+    if (subscription.ops.release) {
     subscription.ops.release(subscription, mm);
+    }
     srcu_read_unlock(&srcu, id);
     spin_lock(&mm.notifier_subscriptions.lock);
 //
@@ -823,17 +1059,14 @@ pub unsafe extern "C" fn __mmu_notifier_subscriptions_destroy(mm: *mut mm_struct
 // ->release if it was run by mmu_notifier_release instead of us.
 //
     synchronize_srcu(&srcu);
-    BUG_ON(atomic_read(&mm.mm_count) <= 0);
+    BUG_ON!(atomic_read(&mm.mm_count) <= 0);
     mmdrop(mm);
     }
     EXPORT_SYMBOL_GPL(mmu_notifier_unregister);
 #[no_mangle]
 unsafe extern "C" fn mmu_notifier_free_rcu(rcu: *mut rcu_head) {
-    static void mmu_notifier_free_rcu(struct rcu_head *rcu)
-    {
-    struct mmu_notifier *subscription =
-    container_of(rcu, struct mmu_notifier, rcu);
-    struct mm_struct *mm = subscription.mm;
+    let mut subscription = container_of!(rcu, mmu_notifier, rcu);
+    let mut mm = subscription.mm;
     subscription.ops.free_notifier(subscription);
 // Pairs with the get in __mmu_notifier_register()
     mmdrop(mm);
@@ -862,25 +1095,21 @@ unsafe extern "C" fn mmu_notifier_free_rcu(rcu: *mut rcu_head) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn mmu_notifier_put(subscription: *mut mmu_notifier) {
-    void mmu_notifier_put(struct mmu_notifier *subscription)
-    {
-    struct mm_struct *mm = subscription.mm;
+    let mut mm = subscription.mm;
     spin_lock(&mm.notifier_subscriptions.lock);
-    if (WARN_ON(!subscription.users) || --subscription.users)
-    goto out_unlock;
+    if (WARN_ON!(!subscription.users) || --subscription.users) {
+// goto;
+    }
     hlist_del_init_rcu(&subscription.hlist);
     spin_unlock(&mm.notifier_subscriptions.lock);
     call_srcu(&srcu, &subscription.rcu, mmu_notifier_free_rcu);
     return;
-    out_unlock:
+// label;
     spin_unlock(&mm.notifier_subscriptions.lock);
     }
     EXPORT_SYMBOL_GPL(mmu_notifier_put);
-    static int __mmu_interval_notifier_insert(
-    struct mmu_interval_notifier *interval_sub, struct mm_struct *mm,
-    struct mmu_notifier_subscriptions *subscriptions, unsigned long start,
-    unsigned long length, const struct mmu_interval_notifier_ops *ops)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __mmu_interval_notifier_insert(interval_sub: *mut mmu_interval_notifier, mm: *mut mm_struct, subscriptions: *mut mmu_notifier_subscriptions, start: c_ulong, length: c_ulong, ops: *mut mmu_interval_notifier_ops) -> c_int {
     interval_sub.mm = mm;
     interval_sub.ops = ops;
     RB_CLEAR_NODE(&interval_sub.interval_tree.rb);
@@ -891,11 +1120,13 @@ pub unsafe extern "C" fn mmu_notifier_put(subscription: *mut mmu_notifier) {
 //
     if (length == 0 ||
     check_add_overflow(start, length - 1,
-    &interval_sub.interval_tree.last))
+    &interval_sub.interval_tree.last)) {
     return -EOVERFLOW;
+    }
 // Must call with a mmget() held
-    if (WARN_ON(atomic_read(&mm.mm_users) <= 0))
+    if (WARN_ON!(atomic_read(&mm.mm_users) <= 0)) {
     return -EINVAL;
+    }
 // pairs with mmdrop in mmu_interval_notifier_remove()
     mmgrab(mm);
 //
@@ -913,17 +1144,17 @@ pub unsafe extern "C" fn mmu_notifier_put(subscription: *mut mmu_notifier) {
 //
     spin_lock(&subscriptions.lock);
     if (subscriptions.active_invalidate_ranges) {
-    if (mn_itree_is_invalidating(subscriptions))
+    if (mn_itree_is_invalidating(subscriptions)) {
     hlist_add_head(&interval_sub.deferred_item,
     &subscriptions.deferred_list);
+    }
     else {
     subscriptions.invalidate_seq |= 1;
-    interval_tree_insert(&interval_sub.interval_tree,
-    &subscriptions.itree);
+// forward_decl: erval_tree_insert;
     }
     interval_sub.invalidate_seq = subscriptions.invalidate_seq;
     } else {
-    WARN_ON(mn_itree_is_invalidating(subscriptions));
+    WARN_ON!(mn_itree_is_invalidating(subscriptions));
 //
 // The starting seq for a subscription not under invalidation
 // should be odd, not equal to the current invalidate_seq and
@@ -932,8 +1163,7 @@ pub unsafe extern "C" fn mmu_notifier_put(subscription: *mut mmu_notifier) {
 //
     interval_sub.invalidate_seq =
     subscriptions.invalidate_seq - 1;
-    interval_tree_insert(&interval_sub.interval_tree,
-    &subscriptions.itree);
+// forward_decl: erval_tree_insert;
     }
     spin_unlock(&subscriptions.lock);
     return 0;
@@ -954,50 +1184,43 @@ pub unsafe extern "C" fn mmu_notifier_put(subscription: *mut mmu_notifier) {
 // The caller must use the normal interval notifier read flow via
 // mmu_interval_read_begin() to establish SPTEs for this range.
 //
-    int mmu_interval_notifier_insert(struct mmu_interval_notifier *interval_sub,
-    struct mm_struct *mm, unsigned long start,
-    unsigned long length,
-    const struct mmu_interval_notifier_ops *ops)
-    {
-    struct mmu_notifier_subscriptions *subscriptions;
-    int ret;
-    WARN_ON_ONCE(ops.invalidate_start && !ops.invalidate_finish);
+#[no_mangle]
+pub unsafe extern "C" fn mmu_interval_notifier_insert(interval_sub: *mut mmu_interval_notifier, mm: *mut mm_struct, start: c_ulong, length: c_ulong, ops: *mut mmu_interval_notifier_ops) -> c_int {
+pub static mut subscriptions: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    WARN_ON_ONCE!(ops.invalidate_start && !ops.invalidate_finish);
     might_lock(&mm.mmap_lock);
     subscriptions = smp_load_acquire(&mm.notifier_subscriptions);
     if (!subscriptions || !subscriptions.has_itree) {
     ret = mmu_notifier_register(core::ptr::null_mut(), mm);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     subscriptions = mm.notifier_subscriptions;
     }
     return __mmu_interval_notifier_insert(interval_sub, mm, subscriptions,
     start, length, ops);
     }
     EXPORT_SYMBOL_GPL(mmu_interval_notifier_insert);
-    int mmu_interval_notifier_insert_locked(
-    struct mmu_interval_notifier *interval_sub, struct mm_struct *mm,
-    unsigned long start, unsigned long length,
-    const struct mmu_interval_notifier_ops *ops)
-    {
-    struct mmu_notifier_subscriptions *subscriptions =
-    mm.notifier_subscriptions;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn mmu_interval_notifier_insert_locked(interval_sub: *mut mmu_interval_notifier, mm: *mut mm_struct, start: c_ulong, length: c_ulong, ops: *mut mmu_interval_notifier_ops) -> c_int {
+    let mut subscriptions = mm.notifier_subscriptions;
+    let mut ret = 0;
     mmap_assert_write_locked(mm);
     if (!subscriptions || !subscriptions.has_itree) {
     ret = __mmu_notifier_register(core::ptr::null_mut(), mm);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     subscriptions = mm.notifier_subscriptions;
     }
     return __mmu_interval_notifier_insert(interval_sub, mm, subscriptions,
     start, length, ops);
     }
     EXPORT_SYMBOL_GPL(mmu_interval_notifier_insert_locked);
-    static bool
-    mmu_interval_seq_released(struct mmu_notifier_subscriptions *subscriptions,
-    unsigned long seq)
-    {
-    bool ret;
+#[no_mangle]
+pub unsafe extern "C" fn mmu_interval_seq_released(subscriptions: *mut mmu_notifier_subscriptions, seq: c_ulong) -> bool {
+    let mut ret = 0;
     spin_lock(&subscriptions.lock);
     ret = subscriptions.invalidate_seq != seq;
     spin_unlock(&subscriptions.lock);
@@ -1015,12 +1238,9 @@ pub unsafe extern "C" fn mmu_notifier_put(subscription: *mut mmu_notifier) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn mmu_interval_notifier_remove(interval_sub: *mut mmu_interval_notifier) {
-    void mmu_interval_notifier_remove(struct mmu_interval_notifier *interval_sub)
-    {
-    struct mm_struct *mm = interval_sub.mm;
-    struct mmu_notifier_subscriptions *subscriptions =
-    mm.notifier_subscriptions;
-    let mut seq: c_ulong = 0;
+    let mut mm = interval_sub.mm;
+    let mut subscriptions = mm.notifier_subscriptions;
+pub static mut seq: c_ulong = 0;
     might_sleep();
     spin_lock(&subscriptions.lock);
     if (mn_itree_is_invalidating(subscriptions)) {
@@ -1036,9 +1256,8 @@ pub unsafe extern "C" fn mmu_interval_notifier_remove(interval_sub: *mut mmu_int
     seq = subscriptions.invalidate_seq;
     }
     } else {
-    WARN_ON(RB_EMPTY_NODE(&interval_sub.interval_tree.rb));
-    interval_tree_remove(&interval_sub.interval_tree,
-    &subscriptions.itree);
+    WARN_ON!(RB_EMPTY_NODE(&interval_sub.interval_tree.rb));
+// forward_decl: erval_tree_remove;
     }
     spin_unlock(&subscriptions.lock);
 //
@@ -1047,9 +1266,10 @@ pub unsafe extern "C" fn mmu_interval_notifier_remove(interval_sub: *mut mmu_int
 //
     lock_map_acquire(&__mmu_notifier_invalidate_range_start_map);
     lock_map_release(&__mmu_notifier_invalidate_range_start_map);
-    if (seq)
+    if (seq) {
     wait_event(subscriptions.wq,
     mmu_interval_seq_released(subscriptions, seq));
+    }
 // pairs with mmgrab in mmu_interval_notifier_insert()
     mmdrop(mm);
     }
@@ -1069,8 +1289,6 @@ pub unsafe extern "C" fn mmu_interval_notifier_remove(interval_sub: *mut mmu_int
 //
 #[no_mangle]
 pub unsafe extern "C" fn mmu_notifier_synchronize() {
-    void mmu_notifier_synchronize(void)
-    {
     synchronize_srcu(&srcu);
     }
     EXPORT_SYMBOL_GPL(mmu_notifier_synchronize);

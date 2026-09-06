@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -58,7 +308,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
 // Macro flag: #define CREATE_TRACE_POINTS
 
-    let mut __cacheline_aligned_in_smp: __visible u64 jiffies_64 = INITIAL_JIFFIES;
+pub static mut __cacheline_aligned_in_smp: __visible u64 jiffies_64 = 0;
     EXPORT_SYMBOL(jiffies_64);
 //
 // The timer wheel has LVL_DEPTH array levels. Each level provides an array of
@@ -235,403 +485,46 @@ pub struct timer_base {
     pub timers_pending: bool,
     pub WHEEL_SIZE): DECLARE_BITMAP(pending_map,,
     pub vectors: [hlist_head; WHEEL_SIZE],
-    pub ____cacheline_aligned: },
-    pub timer_bases[NR_BASES]): static DEFINE_PER_CPU(struct timer_base,,
+}
+    pub timer_bases[NR_BASES]): DEFINE_PER_CPU(timer_base,,
 
     pub DEFINE_STATIC_KEY_FALSE(timers_nohz_active): static,
     pub DEFINE_MUTEX(timer_keys_mutex): static,
-    pub work): *mut static void timer_update_keys(struct work_struct,
-    pub timer_update_keys): static DECLARE_WORK(timer_update_work,,
+    pub work): *mut static void timer_update_keys(work_struct,
+    pub timer_update_keys): DECLARE_WORK(timer_update_work,,
 
-    pub 1: static unsigned int sysctl_timer_migration =,
+    pub 1: unsigned int sysctl_timer_migration =,
 #[no_mangle]
 unsafe extern "C" fn timers_update_migration() {
-    static void timers_update_migration(void)
-    {
-    if (sysctl_timer_migration && tick_nohz_is_active())
+    if (sysctl_timer_migration && tick_nohz_is_active()) {
     else
     }
 
-    static int timer_migration_handler(const struct ctl_table *table, int write,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn timer_migration_handler(table: *mut ctl_table, write: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
+    }
     pub ret: c_int,
     pub ppos): ret = proc_dointvec_minmax(table, write, buffer, lenp,,
-    if (!ret && write)
+    if (!ret && write) {
     pub ret: return,
     }
-    static const struct ctl_table timer_sysctl[] = {
-    {
-    .procname	= "timer_migration",
-    .data		= &sysctl_timer_migration,
-    .maxlen		= sizeof(unsigned int),
-    .mode		= 0644,
-    .proc_handler	= timer_migration_handler,
-    .extra1		= SYSCTL_ZERO,
-    .extra2		= SYSCTL_ONE,
-    },
-}
-
-#[no_mangle]
-unsafe extern "C" fn timer_sysctl_init() -> int __init {
-    static int __init timer_sysctl_init(void)
-    {
-    register_sysctl("kernel", timer_sysctl);
-    return 0;
-    }
-    device_initcall(timer_sysctl_init);
-
-    static inline void timers_update_migration(void) { }
-
-#[no_mangle]
-unsafe extern "C" fn timer_update_keys(work: *mut work_struct) {
-    static void timer_update_keys(struct work_struct *work)
-    {
-    mutex_lock(&timer_keys_mutex);
-    timers_update_migration();
-    static_branch_enable(&timers_nohz_active);
-    mutex_unlock(&timer_keys_mutex);
+pub static mut ctl_table: usize = 0;
     }
 #[no_mangle]
-pub unsafe extern "C" fn timers_update_nohz() {
-    void timers_update_nohz(void)
-    {
-    schedule_work(&timer_update_work);
-    }
-#[no_mangle]
-pub unsafe extern "C" fn is_timers_nohz_active() -> bool {
-    static inline bool is_timers_nohz_active(void)
-    {
-    return static_branch_unlikely(&timers_nohz_active);
-    }
-
-    static inline bool is_timers_nohz_active(void) { return false; }
-
-    static unsigned long round_jiffies_common(unsigned long j, int cpu,
-    bool force_up)
-    {
-    int rem;
-    let mut original: c_ulong = j;
-//
-// We don't want all cpus firing their timers at once hitting the
-// same lock or cachelines, so we skew each extra cpu with an extra
-// 3 jiffies. This 3 jiffies came originally from the mm/ code which
-// already did this.
-// The skew is done by adding 3*cpunr, then round, then subtract this
-// extra offset again.
-//
-    j += cpu * 3;
-    rem = j % HZ;
-//
-// If the target jiffy is just after a whole second (which can happen
-// due to delays of the timer irq, long irq off times etc etc) then
-// we should round down to the whole second, not up. Use 1/4th second
-// as cutoff for this rounding as an extreme upper bound for this.
-// But never round down if @force_up is set.
-//
-    if (rem < HZ/4 && !force_up) /* round down */
-    j = j - rem;
-    else /* round up */
-    j = j - rem + HZ;
-// now that we have rounded, subtract the extra skew again
-    j -= cpu * 3;
-//
-// Make sure j is still in the future. Otherwise return the
-// unmodified value.
-//
-    return time_is_after_jiffies(j) ? j : original;
-    }
-//
-// __round_jiffies_relative - function to round jiffies to a full second
-// @j: the time in (relative) jiffies that should be rounded
-// @cpu: the processor number on which the timeout will happen
-//
-// __round_jiffies_relative() rounds a time delta  in the future (in jiffies)
-// up or down to (approximately) full seconds. This is useful for timers
-// for which the exact time they fire does not matter too much, as long as
-// they fire approximately every X seconds.
-//
-// By rounding these timers to whole seconds, all such timers will fire
-// at the same time, rather than at various times spread out. The goal
-// of this is to have the CPU wake up less, which saves power.
-//
-// The exact rounding is skewed for each processor to avoid all
-// processors firing at the exact same time, which could lead
-// to lock contention or spurious cache line bouncing.
-//
-// The return value is the rounded version of the @j parameter.
-//
-#[no_mangle]
-pub unsafe extern "C" fn __round_jiffies_relative(j: c_ulong, cpu: c_int) -> c_ulong {
-    unsigned long __round_jiffies_relative(unsigned long j, int cpu)
-    {
-    let mut j0: c_ulong = jiffies;
-// Use j0 because jiffies might change while we run
-    return round_jiffies_common(j + j0, cpu, false) - j0;
-    }
-    EXPORT_SYMBOL_GPL(__round_jiffies_relative);
-//
-// round_jiffies - function to round jiffies to a full second
-// @j: the time in (absolute) jiffies that should be rounded
-//
-// round_jiffies() rounds an absolute time in the future (in jiffies)
-// up or down to (approximately) full seconds. This is useful for timers
-// for which the exact time they fire does not matter too much, as long as
-// they fire approximately every X seconds.
-//
-// By rounding these timers to whole seconds, all such timers will fire
-// at the same time, rather than at various times spread out. The goal
-// of this is to have the CPU wake up less, which saves power.
-//
-// The return value is the rounded version of the @j parameter.
-//
-#[no_mangle]
-pub unsafe extern "C" fn round_jiffies(j: c_ulong) -> c_ulong {
-    unsigned long round_jiffies(unsigned long j)
-    {
-    return round_jiffies_common(j, raw_smp_processor_id(), false);
-    }
-    EXPORT_SYMBOL_GPL(round_jiffies);
-//
-// round_jiffies_relative - function to round jiffies to a full second
-// @j: the time in (relative) jiffies that should be rounded
-//
-// round_jiffies_relative() rounds a time delta  in the future (in jiffies)
-// up or down to (approximately) full seconds. This is useful for timers
-// for which the exact time they fire does not matter too much, as long as
-// they fire approximately every X seconds.
-//
-// By rounding these timers to whole seconds, all such timers will fire
-// at the same time, rather than at various times spread out. The goal
-// of this is to have the CPU wake up less, which saves power.
-//
-// The return value is the rounded version of the @j parameter.
-//
-#[no_mangle]
-pub unsafe extern "C" fn round_jiffies_relative(j: c_ulong) -> c_ulong {
-    unsigned long round_jiffies_relative(unsigned long j)
-    {
-    return __round_jiffies_relative(j, raw_smp_processor_id());
-    }
-    EXPORT_SYMBOL_GPL(round_jiffies_relative);
-//
-// __round_jiffies_up_relative - function to round jiffies up to a full second
-// @j: the time in (relative) jiffies that should be rounded
-// @cpu: the processor number on which the timeout will happen
-//
-// This is the same as __round_jiffies_relative() except that it will never
-// round down.  This is useful for timeouts for which the exact time
-// of firing does not matter too much, as long as they don't fire too
-// early.
-//
-#[no_mangle]
-pub unsafe extern "C" fn __round_jiffies_up_relative(j: c_ulong, cpu: c_int) -> c_ulong {
-    unsigned long __round_jiffies_up_relative(unsigned long j, int cpu)
-    {
-    let mut j0: c_ulong = jiffies;
-// Use j0 because jiffies might change while we run
-    return round_jiffies_common(j + j0, cpu, true) - j0;
-    }
-    EXPORT_SYMBOL_GPL(__round_jiffies_up_relative);
-//
-// round_jiffies_up - function to round jiffies up to a full second
-// @j: the time in (absolute) jiffies that should be rounded
-//
-// This is the same as round_jiffies() except that it will never
-// round down.  This is useful for timeouts for which the exact time
-// of firing does not matter too much, as long as they don't fire too
-// early.
-//
-#[no_mangle]
-pub unsafe extern "C" fn round_jiffies_up(j: c_ulong) -> c_ulong {
-    unsigned long round_jiffies_up(unsigned long j)
-    {
-    return round_jiffies_common(j, raw_smp_processor_id(), true);
-    }
-    EXPORT_SYMBOL_GPL(round_jiffies_up);
-//
-// round_jiffies_up_relative - function to round jiffies up to a full second
-// @j: the time in (relative) jiffies that should be rounded
-//
-// This is the same as round_jiffies_relative() except that it will never
-// round down.  This is useful for timeouts for which the exact time
-// of firing does not matter too much, as long as they don't fire too
-// early.
-//
-#[no_mangle]
-pub unsafe extern "C" fn round_jiffies_up_relative(j: c_ulong) -> c_ulong {
-    unsigned long round_jiffies_up_relative(unsigned long j)
-    {
-    return __round_jiffies_up_relative(j, raw_smp_processor_id());
-    }
-    EXPORT_SYMBOL_GPL(round_jiffies_up_relative);
-#[no_mangle]
-pub unsafe extern "C" fn timer_get_idx(timer: *mut timer_list) -> c_uint {
-    static inline unsigned int timer_get_idx(struct timer_list *timer)
-    {
-    return (timer.flags & TIMER_ARRAYMASK) >> TIMER_ARRAYSHIFT;
-    }
-#[no_mangle]
-pub unsafe extern "C" fn timer_set_idx(timer: *mut timer_list, idx: c_uint) {
-    static inline void timer_set_idx(struct timer_list *timer, unsigned int idx)
-    {
-    timer.flags = (timer.flags & ~TIMER_ARRAYMASK) |
-    idx << TIMER_ARRAYSHIFT;
-    }
-//
-// Helper function to calculate the array index for a given expiry
-// time.
-//
-    static inline unsigned calc_index(unsigned long expires, unsigned lvl,
-    unsigned long *bucket_expiry)
-    {
-//
-// The timer wheel has to guarantee that a timer does not fire
-// early. Early expiry can happen due to:
-// - Timer is armed at the edge of a tick
-// - Truncation of the expiry time in the outer wheel levels
-//
-// Round up with level granularity to prevent this.
-//
-    expires = (expires >> LVL_SHIFT(lvl)) + 1;
-// bucket_expiry = expires << LVL_SHIFT(lvl);
-    return LVL_OFFS(lvl) + (expires & LVL_MASK);
-    }
-    static int calc_wheel_index(unsigned long expires, unsigned long clk,
-    unsigned long *bucket_expiry)
-    {
-    let mut delta: c_ulong = expires - clk;
-    unsigned int idx;
-    if (delta < LVL_START(1)) {
-    idx = calc_index(expires, 0, bucket_expiry);
-    } else if (delta < LVL_START(2)) {
-    idx = calc_index(expires, 1, bucket_expiry);
-    } else if (delta < LVL_START(3)) {
-    idx = calc_index(expires, 2, bucket_expiry);
-    } else if (delta < LVL_START(4)) {
-    idx = calc_index(expires, 3, bucket_expiry);
-    } else if (delta < LVL_START(5)) {
-    idx = calc_index(expires, 4, bucket_expiry);
-    } else if (delta < LVL_START(6)) {
-    idx = calc_index(expires, 5, bucket_expiry);
-    } else if (delta < LVL_START(7)) {
-    idx = calc_index(expires, 6, bucket_expiry);
-    } else if (LVL_DEPTH > 8 && delta < LVL_START(8)) {
-    idx = calc_index(expires, 7, bucket_expiry);
-    } else if ((long) delta < 0) {
-    idx = clk & LVL_MASK;
-// bucket_expiry = clk;
-    } else {
-//
-// Force expire obscene large timeouts to expire at the
-// capacity limit of the wheel.
-//
-    if (delta >= WHEEL_TIMEOUT_CUTOFF)
-    expires = clk + WHEEL_TIMEOUT_MAX;
-    idx = calc_index(expires, LVL_DEPTH - 1, bucket_expiry);
-    }
-    return idx;
-    }
-    static void
-    trigger_dyntick_cpu(struct timer_base *base, struct timer_list *timer)
-    {
-//
-// Deferrable timers do not prevent the CPU from entering dynticks and
-// are not taken into account on the idle/nohz_full path. An IPI when a
-// new deferrable timer is enqueued will wake up the remote CPU but
-// nothing will be done with the deferrable timer base. Therefore skip
-// the remote IPI for deferrable timers completely.
-//
-    if (!is_timers_nohz_active() || timer.flags & TIMER_DEFERRABLE)
-    return;
-//
-// We might have to IPI the remote CPU if the base is idle and the
-// timer is pinned. If it is a non pinned timer, it is only queued
-// on the remote CPU, when timer was running during queueing. Then
-// everything is handled by remote CPU anyway. If the other CPU is
-// on the way to idle then it can't set base->is_idle as we hold
-// the base lock:
-//
-    if (base.is_idle) {
-    WARN_ON_ONCE(!(timer.flags & TIMER_PINNED ||
-    tick_nohz_full_cpu(base.cpu)));
-    wake_up_nohz_cpu(base.cpu);
-    }
-    }
-//
-// Enqueue the timer into the hash bucket, mark it pending in
-// the bitmap, store the index in the timer flags then wake up
-// the target CPU if needed.
-//
-    static void enqueue_timer(struct timer_base *base, struct timer_list *timer,
-    unsigned int idx, unsigned long bucket_expiry)
-    {
-    hlist_add_head(&timer.entry, base.vectors + idx);
-    __set_bit(idx, base.pending_map);
-    timer_set_idx(timer, idx);
-    trace_timer_start(timer, bucket_expiry);
-//
-// Check whether this is the new first expiring timer. The
-// effective expiry time of the timer is required here
-// (bucket_expiry) instead of timer->expires.
-//
-    if (time_before(bucket_expiry, base.next_expiry)) {
-//
-// Set the next expiry time and kick the CPU so it
-// can reevaluate the wheel:
-//
-    WRITE_ONCE(base.next_expiry, bucket_expiry);
-    base.timers_pending = true;
-    base.next_expiry_recalc = false;
-    trigger_dyntick_cpu(base, timer);
-    }
-    }
-#[no_mangle]
-unsafe extern "C" fn internal_add_timer(base: *mut timer_base, timer: *mut timer_list) {
-    static void internal_add_timer(struct timer_base *base, struct timer_list *timer)
-    {
-    unsigned long bucket_expiry;
-    unsigned int idx;
-    idx = calc_wheel_index(timer.expires, base.clk, &bucket_expiry);
-    enqueue_timer(base, timer, idx, bucket_expiry);
-    }
-
-    static const struct debug_obj_descr timer_debug_descr;
-#[repr(C)]
-#[derive(Copy, Clone)]
-pub struct timer_hint {
-    pub t): *mut *mut void (function)(struct timer_list,
-    pub offset: c_long,
-}
-
-    {							\
-    .function = fn,					\
-    .offset	  = offsetof(container, hintfn) -	\
-    offsetof(container, timr)		\
-    }
-    static const struct timer_hint timer_hints[] = {
-    TIMER_HINT(delayed_work_timer_fn,
-    struct delayed_work, timer, work.func),
-    TIMER_HINT(kthread_delayed_work_timer_fn,
-    struct kthread_delayed_work, timer, work.func),
-    };
-    static void *timer_debug_hint(void *addr)
-    {
-    struct timer_list *timer = addr;
-    int i;
-    for (i = 0; i < ARRAY_SIZE(timer_hints); i++) {
+pub unsafe extern "C" fn timer_debug_hint(addr: *mut c_void) -> *mut c_void {
+    let mut timer = addr;
+    let mut i = 0;
+    while (i < ARRAY_SIZE!(timer_hints)) {
     if (timer_hints[i].function == timer.function) {
     void (**fn)(void) = addr + timer_hints[i].offset;
-    return *fn;
+pub static mut fn: *mut c_void = core::ptr::null_mut();
     }
     }
     return timer.function;
     }
 #[no_mangle]
 unsafe extern "C" fn timer_is_static_object(addr: *mut c_void) -> bool {
-    static bool timer_is_static_object(void *addr)
-    {
-    struct timer_list *timer = addr;
+    let mut timer = addr;
     return (timer.entry.pprev == core::ptr::null_mut() &&
     timer.entry.next == TIMER_ENTRY_STATIC);
     }
@@ -640,25 +533,23 @@ unsafe extern "C" fn timer_is_static_object(addr: *mut c_void) -> bool {
 // - an active object is initialized
 //
 #[no_mangle]
-unsafe extern "C" fn timer_fixup_init(addr: *mut c_void, state: enum debug_obj_state) -> bool {
-    static bool timer_fixup_init(void *addr, enum debug_obj_state state)
-    {
-    struct timer_list *timer = addr;
-    switch (state) {
-    case ODEBUG_STATE_ACTIVE:
+unsafe extern "C" fn timer_fixup_init(addr: *mut c_void, state: debug_obj_state) -> bool {
+    let mut timer = addr;
+    match (state) {
+    ODEBUG_STATE_ACTIVE => {
     timer_delete_sync(timer);
     debug_object_init(timer, &timer_debug_descr);
     return true;
-    default:
+    }
+    _ => {
     return false;
+    }
     }
     }
 // Stub timer callback for improperly used timers.
 #[no_mangle]
 unsafe extern "C" fn stub_timer(unused: *mut timer_list) {
-    static void stub_timer(struct timer_list *unused)
-    {
-    WARN_ON(1);
+    WARN_ON!(1);
     }
 //
 // timer_fixup_activate is called when:
@@ -666,19 +557,20 @@ unsafe extern "C" fn stub_timer(unused: *mut timer_list) {
 // - an unknown non-static object is activated
 //
 #[no_mangle]
-unsafe extern "C" fn timer_fixup_activate(addr: *mut c_void, state: enum debug_obj_state) -> bool {
-    static bool timer_fixup_activate(void *addr, enum debug_obj_state state)
-    {
-    struct timer_list *timer = addr;
-    switch (state) {
-    case ODEBUG_STATE_NOTAVAILABLE:
+unsafe extern "C" fn timer_fixup_activate(addr: *mut c_void, state: debug_obj_state) -> bool {
+    let mut timer = addr;
+    match (state) {
+    ODEBUG_STATE_NOTAVAILABLE => {
     timer_setup(timer, stub_timer, 0);
     return true;
-    case ODEBUG_STATE_ACTIVE:
-    WARN_ON(1);
+    }
+    ODEBUG_STATE_ACTIVE => {
+    WARN_ON!(1);
     fallthrough;
-    default:
+    }
+    _ => {
     return false;
+    }
     }
     }
 //
@@ -686,17 +578,17 @@ unsafe extern "C" fn timer_fixup_activate(addr: *mut c_void, state: enum debug_o
 // - an active object is freed
 //
 #[no_mangle]
-unsafe extern "C" fn timer_fixup_free(addr: *mut c_void, state: enum debug_obj_state) -> bool {
-    static bool timer_fixup_free(void *addr, enum debug_obj_state state)
-    {
-    struct timer_list *timer = addr;
-    switch (state) {
-    case ODEBUG_STATE_ACTIVE:
+unsafe extern "C" fn timer_fixup_free(addr: *mut c_void, state: debug_obj_state) -> bool {
+    let mut timer = addr;
+    match (state) {
+    ODEBUG_STATE_ACTIVE => {
     timer_delete_sync(timer);
     debug_object_free(timer, &timer_debug_descr);
     return true;
-    default:
+    }
+    _ => {
     return false;
+    }
     }
     }
 //
@@ -704,106 +596,86 @@ unsafe extern "C" fn timer_fixup_free(addr: *mut c_void, state: enum debug_obj_s
 // - an untracked/uninit-ed object is found
 //
 #[no_mangle]
-unsafe extern "C" fn timer_fixup_assert_init(addr: *mut c_void, state: enum debug_obj_state) -> bool {
-    static bool timer_fixup_assert_init(void *addr, enum debug_obj_state state)
-    {
-    struct timer_list *timer = addr;
-    switch (state) {
-    case ODEBUG_STATE_NOTAVAILABLE:
+unsafe extern "C" fn timer_fixup_assert_init(addr: *mut c_void, state: debug_obj_state) -> bool {
+    let mut timer = addr;
+    match (state) {
+    ODEBUG_STATE_NOTAVAILABLE => {
     timer_setup(timer, stub_timer, 0);
     return true;
-    default:
+    }
+    _ => {
     return false;
     }
     }
-    static const struct debug_obj_descr timer_debug_descr = {
-    .name			= "timer_list",
-    .debug_hint		= timer_debug_hint,
-    .is_static_object	= timer_is_static_object,
-    .fixup_init		= timer_fixup_init,
-    .fixup_activate		= timer_fixup_activate,
-    .fixup_free		= timer_fixup_free,
-    .fixup_assert_init	= timer_fixup_assert_init,
-    };
+    }
+pub static mut debug_obj_descr: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn debug_timer_init(timer: *mut timer_list) {
-    static inline void debug_timer_init(struct timer_list *timer)
-    {
     debug_object_init(timer, &timer_debug_descr);
     }
 #[no_mangle]
 pub unsafe extern "C" fn debug_timer_activate(timer: *mut timer_list) {
-    static inline void debug_timer_activate(struct timer_list *timer)
-    {
     debug_object_activate(timer, &timer_debug_descr);
     }
 #[no_mangle]
 pub unsafe extern "C" fn debug_timer_deactivate(timer: *mut timer_list) {
-    static inline void debug_timer_deactivate(struct timer_list *timer)
-    {
     debug_object_deactivate(timer, &timer_debug_descr);
     }
 #[no_mangle]
 pub unsafe extern "C" fn debug_timer_assert_init(timer: *mut timer_list) {
-    static inline void debug_timer_assert_init(struct timer_list *timer)
-    {
     debug_object_assert_init(timer, &timer_debug_descr);
     }
-    static void do_init_timer(struct timer_list *timer,
-    void (*func)(struct timer_list *),
-    unsigned int flags,
-    const char *name, struct lock_class_key *key);
-    void timer_init_key_on_stack(struct timer_list *timer,
-    void (*func)(struct timer_list *),
-    unsigned int flags,
-    const char *name, struct lock_class_key *key)
-    {
+// forward_decl: do_init_timer;
+#[no_mangle]
+pub unsafe extern "C" fn timer_init_key_on_stack(timer: *mut timer_list, flags: c_uint, name: *mut c_char, key: *mut lock_class_key) {
     debug_object_init_on_stack(timer, &timer_debug_descr);
     do_init_timer(timer, func, flags, name, key);
     }
     EXPORT_SYMBOL_GPL(timer_init_key_on_stack);
 #[no_mangle]
 pub unsafe extern "C" fn timer_destroy_on_stack(timer: *mut timer_list) {
-    void timer_destroy_on_stack(struct timer_list *timer)
-    {
     debug_object_free(timer, &timer_debug_descr);
     }
     EXPORT_SYMBOL_GPL(timer_destroy_on_stack);
 
-    static inline void debug_timer_init(struct timer_list *timer) { }
-    static inline void debug_timer_activate(struct timer_list *timer) { }
-    static inline void debug_timer_deactivate(struct timer_list *timer) { }
-    static inline void debug_timer_assert_init(struct timer_list *timer) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: debug_timer_init
+pub unsafe extern "C" fn debug_timer_init_dup(timer: *mut timer_list) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: debug_timer_activate
+pub unsafe extern "C" fn debug_timer_activate_dup(timer: *mut timer_list) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: debug_timer_deactivate
+pub unsafe extern "C" fn debug_timer_deactivate_dup(timer: *mut timer_list) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: debug_timer_assert_init
+pub unsafe extern "C" fn debug_timer_assert_init_dup(timer: *mut timer_list) { }
 
 #[no_mangle]
 pub unsafe extern "C" fn debug_init(timer: *mut timer_list) {
-    static inline void debug_init(struct timer_list *timer)
-    {
     debug_timer_init(timer);
     trace_timer_init(timer);
     }
 #[no_mangle]
 pub unsafe extern "C" fn debug_deactivate(timer: *mut timer_list) {
-    static inline void debug_deactivate(struct timer_list *timer)
-    {
     debug_timer_deactivate(timer);
     trace_timer_cancel(timer);
     }
 #[no_mangle]
 pub unsafe extern "C" fn debug_assert_init(timer: *mut timer_list) {
-    static inline void debug_assert_init(struct timer_list *timer)
-    {
     debug_timer_assert_init(timer);
     }
-    static void do_init_timer(struct timer_list *timer,
-    void (*func)(struct timer_list *),
-    unsigned int flags,
-    const char *name, struct lock_class_key *key)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn do_init_timer(timer: *mut timer_list, flags: c_uint, name: *mut c_char, key: *mut lock_class_key) {
     timer.entry.pprev = core::ptr::null_mut();
     timer.function = func;
-    if (WARN_ON_ONCE(flags & ~TIMER_INIT_FLAGS))
+    if (WARN_ON_ONCE!(flags & ~TIMER_INIT_FLAGS)) {
     flags &= TIMER_INIT_FLAGS;
+    }
     timer.flags = flags | raw_smp_processor_id();
     lockdep_init_map(&timer.lockdep_map, name, key, 0);
     }
@@ -819,31 +691,28 @@ pub unsafe extern "C" fn debug_assert_init(timer: *mut timer_list) {
 // timer_init_key() must be done to a timer prior to calling *any* of the
 // other timer functions.
 //
-    void timer_init_key(struct timer_list *timer,
-    void (*func)(struct timer_list *), unsigned int flags,
-    const char *name, struct lock_class_key *key)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn timer_init_key(timer: *mut timer_list, flags: c_uint, name: *mut c_char, key: *mut lock_class_key) {
     debug_init(timer);
     do_init_timer(timer, func, flags, name, key);
     }
     EXPORT_SYMBOL(timer_init_key);
 #[no_mangle]
 pub unsafe extern "C" fn detach_timer(timer: *mut timer_list, clear_pending: bool) {
-    static inline void detach_timer(struct timer_list *timer, bool clear_pending)
-    {
-    struct hlist_node *entry = &timer.entry;
+    let mut entry = &timer.entry;
     debug_deactivate(timer);
     __hlist_del(entry);
-    if (clear_pending)
+    if (clear_pending) {
     entry.pprev = core::ptr::null_mut();
+    }
     entry.next = LIST_POISON2;
     }
-    static int detach_if_pending(struct timer_list *timer, struct timer_base *base,
-    bool clear_pending)
-    {
-    let mut idx: unsigned = timer_get_idx(timer);
-    if (!timer_pending(timer))
+#[no_mangle]
+pub unsafe extern "C" fn detach_if_pending(timer: *mut timer_list, base: *mut timer_base, clear_pending: bool) -> c_int {
+pub static mut idx: unsigned = 0;
+    if (!timer_pending(timer)) {
     return 0;
+    }
     if (hlist_is_singular_node(&timer.entry, base.vectors + idx)) {
     __clear_bit(idx, base.pending_map);
     base.next_expiry_recalc = true;
@@ -851,41 +720,43 @@ pub unsafe extern "C" fn detach_timer(timer: *mut timer_list, clear_pending: boo
     detach_timer(timer, clear_pending);
     return 1;
     }
-    static inline struct timer_base *get_timer_cpu_base(u32 tflags, u32 cpu)
-    {
-    let mut index: c_int = tflags & TIMER_PINNED ? BASE_LOCAL : BASE_GLOBAL;
+#[no_mangle]
+pub unsafe extern "C" fn get_timer_cpu_base(tflags: u32, cpu: u32) -> *mut c_void {
+pub static mut index: c_int = 0;
 //
 // If the timer is deferrable and NO_HZ_COMMON is set then we need
 // to use the deferrable base.
 //
-    if (IS_ENABLED(CONFIG_NO_HZ_COMMON) && (tflags & TIMER_DEFERRABLE))
+    if (IS_ENABLED!(CONFIG_NO_HZ_COMMON) && (tflags & TIMER_DEFERRABLE)) {
     index = BASE_DEF;
+    }
     return per_cpu_ptr(&timer_bases[index], cpu);
     }
-    static inline struct timer_base *get_timer_this_cpu_base(u32 tflags)
-    {
-    let mut index: c_int = tflags & TIMER_PINNED ? BASE_LOCAL : BASE_GLOBAL;
+#[no_mangle]
+pub unsafe extern "C" fn get_timer_this_cpu_base(tflags: u32) -> *mut c_void {
+pub static mut index: c_int = 0;
 //
 // If the timer is deferrable and NO_HZ_COMMON is set then we need
 // to use the deferrable base.
 //
-    if (IS_ENABLED(CONFIG_NO_HZ_COMMON) && (tflags & TIMER_DEFERRABLE))
+    if (IS_ENABLED!(CONFIG_NO_HZ_COMMON) && (tflags & TIMER_DEFERRABLE)) {
     index = BASE_DEF;
+    }
     return this_cpu_ptr(&timer_bases[index]);
     }
-    static inline struct timer_base *get_timer_base(u32 tflags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn get_timer_base(tflags: u32) -> *mut c_void {
     return get_timer_cpu_base(tflags, tflags & TIMER_CPUMASK);
     }
-    static inline void __forward_timer_base(struct timer_base *base,
-    unsigned long basej)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __forward_timer_base(base: *mut timer_base, basej: c_ulong) {
 //
 // Check whether we can forward the base. We can only do that when
 // @basej is past base->clk otherwise we might rewind base->clk.
 //
-    if (time_before_eq(basej, base.clk))
+    if (time_before_eq(basej, base.clk)) {
     return;
+    }
 //
 // If the next expiry value is > jiffies, then we fast forward to
 // jiffies otherwise we forward to the next expiry value.
@@ -893,15 +764,14 @@ pub unsafe extern "C" fn detach_timer(timer: *mut timer_list, clear_pending: boo
     if (time_after(base.next_expiry, basej)) {
     base.clk = basej;
     } else {
-    if (WARN_ON_ONCE(time_before(base.next_expiry, base.clk)))
+    if (WARN_ON_ONCE!(time_before(base.next_expiry, base.clk))) {
     return;
+    }
     base.clk = base.next_expiry;
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn forward_timer_base(base: *mut timer_base) {
-    static inline void forward_timer_base(struct timer_base *base)
-    {
     __forward_timer_base(base, READ_ONCE(jiffies));
     }
 //
@@ -915,13 +785,12 @@ pub unsafe extern "C" fn forward_timer_base(base: *mut timer_base) {
 // When a timer is migrating then the TIMER_MIGRATING flag is set and we need
 // to wait until the migration is done.
 //
-    static struct timer_base *lock_timer_base(struct timer_list *timer,
-    unsigned long *flags)
-    __acquires(timer.base.lock)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn lock_timer_base(timer: *mut timer_list, lock: *mut unsigned longflags)
+    __acquires(timer.base.) -> *mut c_void {
     for (;;) {
-    struct timer_base *base;
-    u32 tf;
+pub static mut base: *mut c_void = core::ptr::null_mut();
+    let mut tf = 0;
 //
 // We need to use READ_ONCE() here, otherwise the compiler
 // might re-read @tf between the check for TIMER_MIGRATING
@@ -931,8 +800,9 @@ pub unsafe extern "C" fn forward_timer_base(base: *mut timer_base) {
     if (!(tf & TIMER_MIGRATING)) {
     base = get_timer_base(tf);
     raw_spin_lock_irqsave(&base.lock, *flags);
-    if (timer.flags == tf)
+    if (timer.flags == tf) {
     return base;
+    }
     raw_spin_unlock_irqrestore(&base.lock, *flags);
     }
     cpu_relax();
@@ -941,13 +811,13 @@ pub unsafe extern "C" fn forward_timer_base(base: *mut timer_base) {
 pub const MOD_TIMER_PENDING_ONLY: c_uint = 0x01;
 pub const MOD_TIMER_REDUCE: c_uint = 0x02;
 pub const MOD_TIMER_NOTPENDING: c_uint = 0x04;
-    static inline int
-    __mod_timer(struct timer_list *timer, unsigned long expires, unsigned int options)
-    {
-    let mut clk: c_ulong = 0, flags, bucket_expiry;
-    struct timer_base *base, *new_base;
-    let mut idx: c_uint = UINT_MAX;
-    let mut ret: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn __mod_timer(timer: *mut timer_list, expires: c_ulong, options: c_uint) -> c_int {
+pub static mut clk: c_ulong = 0;
+    let mut base = core::ptr::null_mut();
+    let mut new_base = core::ptr::null_mut();
+pub static mut idx: c_uint = 0;
+pub static mut ret: c_int = 0;
     debug_assert_init(timer);
 //
 // This is a common optimization triggered by the networking code - if
@@ -960,11 +830,13 @@ pub const MOD_TIMER_NOTPENDING: c_uint = 0x04;
 // larger granularity than you would get from adding a new
 // timer with this expiry.
 //
-    let mut diff: c_long = timer.expires - expires;
-    if (!diff)
+pub static mut diff: c_long = 0;
+    if (!diff) {
     return 1;
-    if (options & MOD_TIMER_REDUCE && diff <= 0)
+    }
+    if (options & MOD_TIMER_REDUCE && diff <= 0) {
     return 1;
+    }
 //
 // We lock timer base and calculate the bucket index right
 // here. If the timer ends up in the same bucket, then we
@@ -977,13 +849,14 @@ pub const MOD_TIMER_NOTPENDING: c_uint = 0x04;
 // while holding base lock to prevent a race against the
 // shutdown code.
 //
-    if (!timer.function)
-    goto out_unlock;
+    if (!timer.function) {
+// goto;
+    }
     forward_timer_base(base);
     if (timer_pending(timer) && (options & MOD_TIMER_REDUCE) &&
     time_before_eq(timer.expires, expires)) {
     ret = 1;
-    goto out_unlock;
+// goto;
     }
     clk = base.clk;
     idx = calc_wheel_index(expires, clk, &bucket_expiry);
@@ -993,14 +866,15 @@ pub const MOD_TIMER_NOTPENDING: c_uint = 0x04;
 // subsequent call will exit in the expires check above.
 //
     if (idx == timer_get_idx(timer)) {
-    if (!(options & MOD_TIMER_REDUCE))
+    if (!(options & MOD_TIMER_REDUCE)) {
     timer.expires = expires;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: time_after(timer->expires, _arg: expires)) -> else {
-    else if (time_after(timer.expires, expires))
+    }
+
+    else if (time_after(timer.expires, expires)) {
     timer.expires = expires;
+    }
     ret = 1;
-    goto out_unlock;
+// goto;
     }
     } else {
     base = lock_timer_base(timer, &flags);
@@ -1009,13 +883,15 @@ pub unsafe extern "C" fn if(_arg: time_after(timer->expires, _arg: expires)) -> 
 // while holding base lock to prevent a race against the
 // shutdown code.
 //
-    if (!timer.function)
-    goto out_unlock;
+    if (!timer.function) {
+// goto;
+    }
     forward_timer_base(base);
     }
     ret = detach_if_pending(timer, base, false);
-    if (!ret && (options & MOD_TIMER_PENDING_ONLY))
-    goto out_unlock;
+    if (!ret && (options & MOD_TIMER_PENDING_ONLY)) {
+// goto;
+    }
     new_base = get_timer_this_cpu_base(timer.flags);
     if (base != new_base) {
 //
@@ -1044,11 +920,13 @@ pub unsafe extern "C" fn if(_arg: time_after(timer->expires, _arg: expires)) -> 
 // enqueue_timer() is required. Otherwise we need to (re)calculate
 // the wheel index via internal_add_timer().
 //
-    if (idx != UINT_MAX && clk == base.clk)
+    if (idx != UINT_MAX && clk == base.clk) {
     enqueue_timer(base, timer, idx, bucket_expiry);
-    else
-    internal_add_timer(base, timer);
-    out_unlock:
+    }
+    else {
+// forward_decl: ernal_add_timer;
+    }
+// label;
     raw_spin_unlock_irqrestore(&base.lock, flags);
     return ret;
     }
@@ -1070,8 +948,6 @@ pub unsafe extern "C" fn if(_arg: time_after(timer->expires, _arg: expires)) -> 
 //
 #[no_mangle]
 pub unsafe extern "C" fn mod_timer_pending(timer: *mut timer_list, expires: c_ulong) -> c_int {
-    int mod_timer_pending(struct timer_list *timer, unsigned long expires)
-    {
     return __mod_timer(timer, expires, MOD_TIMER_PENDING_ONLY);
     }
     EXPORT_SYMBOL(mod_timer_pending);
@@ -1104,8 +980,6 @@ pub unsafe extern "C" fn mod_timer_pending(timer: *mut timer_list, expires: c_ul
 //
 #[no_mangle]
 pub unsafe extern "C" fn mod_timer(timer: *mut timer_list, expires: c_ulong) -> c_int {
-    int mod_timer(struct timer_list *timer, unsigned long expires)
-    {
     return __mod_timer(timer, expires, 0);
     }
     EXPORT_SYMBOL(mod_timer);
@@ -1131,8 +1005,6 @@ pub unsafe extern "C" fn mod_timer(timer: *mut timer_list, expires: c_ulong) -> 
 //
 #[no_mangle]
 pub unsafe extern "C" fn timer_reduce(timer: *mut timer_list, expires: c_ulong) -> c_int {
-    int timer_reduce(struct timer_list *timer, unsigned long expires)
-    {
     return __mod_timer(timer, expires, MOD_TIMER_REDUCE);
     }
     EXPORT_SYMBOL(timer_reduce);
@@ -1158,10 +1030,9 @@ pub unsafe extern "C" fn timer_reduce(timer: *mut timer_list, expires: c_ulong) 
 //
 #[no_mangle]
 pub unsafe extern "C" fn add_timer(timer: *mut timer_list) {
-    void add_timer(struct timer_list *timer)
-    {
-    if (WARN_ON_ONCE(timer_pending(timer)))
+    if (WARN_ON_ONCE!(timer_pending(timer))) {
     return;
+    }
     __mod_timer(timer, timer.expires, MOD_TIMER_NOTPENDING);
     }
     EXPORT_SYMBOL(add_timer);
@@ -1175,10 +1046,9 @@ pub unsafe extern "C" fn add_timer(timer: *mut timer_list) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn add_timer_local(timer: *mut timer_list) {
-    void add_timer_local(struct timer_list *timer)
-    {
-    if (WARN_ON_ONCE(timer_pending(timer)))
+    if (WARN_ON_ONCE!(timer_pending(timer))) {
     return;
+    }
     timer.flags |= TIMER_PINNED;
     __mod_timer(timer, timer.expires, MOD_TIMER_NOTPENDING);
     }
@@ -1193,10 +1063,9 @@ pub unsafe extern "C" fn add_timer_local(timer: *mut timer_list) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn add_timer_global(timer: *mut timer_list) {
-    void add_timer_global(struct timer_list *timer)
-    {
-    if (WARN_ON_ONCE(timer_pending(timer)))
+    if (WARN_ON_ONCE!(timer_pending(timer))) {
     return;
+    }
     timer.flags &= ~TIMER_PINNED;
     __mod_timer(timer, timer.expires, MOD_TIMER_NOTPENDING);
     }
@@ -1215,13 +1084,13 @@ pub unsafe extern "C" fn add_timer_global(timer: *mut timer_list) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn add_timer_on(timer: *mut timer_list, cpu: c_int) {
-    void add_timer_on(struct timer_list *timer, int cpu)
-    {
-    struct timer_base *new_base, *base;
-    unsigned long flags;
+    let mut new_base = core::ptr::null_mut();
+    let mut base = core::ptr::null_mut();
+    let mut flags = 0;
     debug_assert_init(timer);
-    if (WARN_ON_ONCE(timer_pending(timer)))
+    if (WARN_ON_ONCE!(timer_pending(timer))) {
     return;
+    }
 // Make sure timer flags have TIMER_PINNED flag set
     timer.flags |= TIMER_PINNED;
     new_base = get_timer_cpu_base(timer.flags, cpu);
@@ -1235,8 +1104,9 @@ pub unsafe extern "C" fn add_timer_on(timer: *mut timer_list, cpu: c_int) {
 // Has @timer been shutdown? This needs to be evaluated while
 // holding base lock to prevent a race against the shutdown code.
 //
-    if (!timer.function)
-    goto out_unlock;
+    if (!timer.function) {
+// goto;
+    }
     if (base != new_base) {
     timer.flags |= TIMER_MIGRATING;
     raw_spin_unlock(&base.lock);
@@ -1247,8 +1117,8 @@ pub unsafe extern "C" fn add_timer_on(timer: *mut timer_list, cpu: c_int) {
     }
     forward_timer_base(base);
     debug_timer_activate(timer);
-    internal_add_timer(base, timer);
-    out_unlock:
+// forward_decl: ernal_add_timer;
+// label;
     raw_spin_unlock_irqrestore(&base.lock, flags);
     }
     EXPORT_SYMBOL_GPL(add_timer_on);
@@ -1269,11 +1139,9 @@ pub unsafe extern "C" fn add_timer_on(timer: *mut timer_list, cpu: c_int) {
 //
 #[no_mangle]
 unsafe extern "C" fn __timer_delete(timer: *mut timer_list, shutdown: bool) -> c_int {
-    static int __timer_delete(struct timer_list *timer, bool shutdown)
-    {
-    struct timer_base *base;
-    unsigned long flags;
-    let mut ret: c_int = 0;
+pub static mut base: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+pub static mut ret: c_int = 0;
     debug_assert_init(timer);
 //
 // If @shutdown is set then the lock has to be taken whether the
@@ -1289,8 +1157,9 @@ unsafe extern "C" fn __timer_delete(timer: *mut timer_list, shutdown: bool) -> c
     if (timer_pending(timer) || shutdown) {
     base = lock_timer_base(timer, &flags);
     ret = detach_if_pending(timer, base, true);
-    if (shutdown)
+    if (shutdown) {
     timer.function = core::ptr::null_mut();
+    }
     raw_spin_unlock_irqrestore(&base.lock, flags);
     }
     return ret;
@@ -1311,8 +1180,6 @@ unsafe extern "C" fn __timer_delete(timer: *mut timer_list, shutdown: bool) -> c
 //
 #[no_mangle]
 pub unsafe extern "C" fn timer_delete(timer: *mut timer_list) -> c_int {
-    int timer_delete(struct timer_list *timer)
-    {
     return __timer_delete(timer, false);
     }
     EXPORT_SYMBOL(timer_delete);
@@ -1333,8 +1200,6 @@ pub unsafe extern "C" fn timer_delete(timer: *mut timer_list) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn timer_shutdown(timer: *mut timer_list) -> c_int {
-    int timer_shutdown(struct timer_list *timer)
-    {
     return __timer_delete(timer, true);
     }
     EXPORT_SYMBOL_GPL(timer_shutdown);
@@ -1360,17 +1225,16 @@ pub unsafe extern "C" fn timer_shutdown(timer: *mut timer_list) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn __try_to_del_timer_sync(timer: *mut timer_list, shutdown: bool) -> c_int {
-    static int __try_to_del_timer_sync(struct timer_list *timer, bool shutdown)
-    {
-    struct timer_base *base;
-    unsigned long flags;
-    let mut ret: c_int = -1;
+pub static mut base: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+pub static mut ret: c_int = 0;
     debug_assert_init(timer);
     base = lock_timer_base(timer, &flags);
     if (base.running_timer != timer) {
     ret = detach_if_pending(timer, base, true);
-    if (shutdown)
+    if (shutdown) {
     timer.function = core::ptr::null_mut();
+    }
     }
     raw_spin_unlock_irqrestore(&base.lock, flags);
     return ret;
@@ -1393,28 +1257,20 @@ unsafe extern "C" fn __try_to_del_timer_sync(timer: *mut timer_list, shutdown: b
 //
 #[no_mangle]
 pub unsafe extern "C" fn timer_delete_sync_try(timer: *mut timer_list) -> c_int {
-    int timer_delete_sync_try(struct timer_list *timer)
-    {
     return __try_to_del_timer_sync(timer, false);
     }
     EXPORT_SYMBOL(timer_delete_sync_try);
 
 #[no_mangle]
 unsafe extern "C" fn timer_base_init_expiry_lock(base: *mut timer_base) -> __init void {
-    static __init void timer_base_init_expiry_lock(struct timer_base *base)
-    {
     spin_lock_init(&base.expiry_lock);
     }
 #[no_mangle]
 pub unsafe extern "C" fn timer_base_lock_expiry(base: *mut timer_base) {
-    static inline void timer_base_lock_expiry(struct timer_base *base)
-    {
     spin_lock(&base.expiry_lock);
     }
 #[no_mangle]
 pub unsafe extern "C" fn timer_base_unlock_expiry(base: *mut timer_base) {
-    static inline void timer_base_unlock_expiry(struct timer_base *base)
-    {
     spin_unlock(&base.expiry_lock);
     }
 //
@@ -1426,10 +1282,6 @@ pub unsafe extern "C" fn timer_base_unlock_expiry(base: *mut timer_base) {
 //
 #[no_mangle]
 unsafe extern "C" fn timer_sync_wait_running(base: *mut timer_base) {
-    static void timer_sync_wait_running(struct timer_base *base)
-    __releases(&base.lock) __releases(&base.expiry_lock)
-    __acquires(&base.expiry_lock) __acquires(&base.lock)
-    {
     if (atomic_read(&base.timer_waiters)) {
     raw_spin_unlock_irq(&base.lock);
     spin_unlock(&base.expiry_lock);
@@ -1449,12 +1301,10 @@ unsafe extern "C" fn timer_sync_wait_running(base: *mut timer_base) {
 //
 #[no_mangle]
 unsafe extern "C" fn del_timer_wait_running(timer: *mut timer_list) {
-    static void del_timer_wait_running(struct timer_list *timer)
-    {
-    u32 tf;
+    let mut tf = 0;
     tf = READ_ONCE(timer.flags);
     if (!(tf & (TIMER_MIGRATING | TIMER_IRQSAFE))) {
-    struct timer_base *base = get_timer_base(tf);
+    let mut base = get_timer_base(tf);
 //
 // Mark the base as contended and grab the expiry lock,
 // which is held by the softirq across the timer
@@ -1470,11 +1320,20 @@ unsafe extern "C" fn del_timer_wait_running(timer: *mut timer_list) {
     }
     }
 
-    static inline void timer_base_init_expiry_lock(struct timer_base *base) { }
-    static inline void timer_base_lock_expiry(struct timer_base *base) { }
-    static inline void timer_base_unlock_expiry(struct timer_base *base) { }
-    static inline void timer_sync_wait_running(struct timer_base *base) { }
-    static inline void del_timer_wait_running(struct timer_list *timer) { }
+#[no_mangle]
+pub unsafe extern "C" fn timer_base_init_expiry_lock(base: *mut timer_base) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: timer_base_lock_expiry
+pub unsafe extern "C" fn timer_base_lock_expiry_dup(base: *mut timer_base) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: timer_base_unlock_expiry
+pub unsafe extern "C" fn timer_base_unlock_expiry_dup(base: *mut timer_base) { }
+#[no_mangle]
+pub unsafe extern "C" fn timer_sync_wait_running(base: *mut timer_base) { }
+#[no_mangle]
+pub unsafe extern "C" fn del_timer_wait_running(timer: *mut timer_list) { }
 
 //
 // __timer_delete_sync - Internal function: Deactivate a timer and wait
@@ -1500,11 +1359,9 @@ unsafe extern "C" fn del_timer_wait_running(timer: *mut timer_list) {
 //
 #[no_mangle]
 unsafe extern "C" fn __timer_delete_sync(timer: *mut timer_list, shutdown: bool) -> c_int {
-    static int __timer_delete_sync(struct timer_list *timer, bool shutdown)
-    {
-    int ret;
+    let mut ret = 0;
 
-    unsigned long flags;
+    let mut flags = 0;
 //
 // If lockdep gives a backtrace here, please reference
 // the synchronization rules above.
@@ -1518,13 +1375,14 @@ unsafe extern "C" fn __timer_delete_sync(timer: *mut timer_list, shutdown: bool)
 // don't use it in hardirq context, because it
 // could lead to deadlock.
 //
-    WARN_ON(in_hardirq() && !(timer.flags & TIMER_IRQSAFE));
+    WARN_ON!(in_hardirq() && !(timer.flags & TIMER_IRQSAFE));
 //
 // Must be able to sleep on PREEMPT_RT because of the slowpath in
 // del_timer_wait_running().
 //
-    if (IS_ENABLED(CONFIG_PREEMPT_RT) && !(timer.flags & TIMER_IRQSAFE))
+    if (IS_ENABLED!(CONFIG_PREEMPT_RT) && !(timer.flags & TIMER_IRQSAFE)) {
     lockdep_assert_preemption_enabled();
+    }
     do {
     ret = __try_to_del_timer_sync(timer, shutdown);
     if (unlikely(ret < 0)) {
@@ -1578,8 +1436,6 @@ unsafe extern "C" fn __timer_delete_sync(timer: *mut timer_list, shutdown: bool)
 //
 #[no_mangle]
 pub unsafe extern "C" fn timer_delete_sync(timer: *mut timer_list) -> c_int {
-    int timer_delete_sync(struct timer_list *timer)
-    {
     return __timer_delete_sync(timer, false);
     }
     EXPORT_SYMBOL(timer_delete_sync);
@@ -1621,16 +1477,12 @@ pub unsafe extern "C" fn timer_delete_sync(timer: *mut timer_list) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn timer_shutdown_sync(timer: *mut timer_list) -> c_int {
-    int timer_shutdown_sync(struct timer_list *timer)
-    {
     return __timer_delete_sync(timer, true);
     }
     EXPORT_SYMBOL_GPL(timer_shutdown_sync);
-    static void call_timer_fn(struct timer_list *timer,
-    void (*fn)(struct timer_list *),
-    unsigned long baseclk)
-    {
-    let mut count: c_int = preempt_count();
+#[no_mangle]
+pub unsafe extern "C" fn call_timer_fn(timer: *mut timer_list, baseclk: c_ulong) {
+pub static mut count: c_int = 0;
 
 //
 // It is permissible to free the timer from inside the
@@ -1639,7 +1491,7 @@ pub unsafe extern "C" fn timer_shutdown_sync(timer: *mut timer_list) -> c_int {
 // warnings as well as problems when looking into
 // timer->lockdep_map, make a copy and use that here.
 //
-    struct lockdep_map lockdep_map;
+pub static mut lockdep_map: usize = 0;
     lockdep_copy_map(&lockdep_map, &timer.lockdep_map);
 
 //
@@ -1666,22 +1518,20 @@ pub unsafe extern "C" fn timer_shutdown_sync(timer: *mut timer_list) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn expire_timers(base: *mut timer_base, head: *mut hlist_head) {
-    static void expire_timers(struct timer_base *base, struct hlist_head *head)
-    {
 //
 // This value is required only for tracing. base->clk was
 // incremented directly before expire_timers was called. But expiry
 // is related to the old base->clk value.
 //
-    let mut baseclk: c_ulong = base.clk - 1;
+pub static mut baseclk: c_ulong = 0;
     while (!hlist_empty(head)) {
-    struct timer_list *timer;
-    void (*fn)(struct timer_list *);
-    timer = hlist_entry(head.first, struct timer_list, entry);
+pub static mut timer: *mut c_void = core::ptr::null_mut();
+    void (*fn);
+    timer = hlist_entry(head.first, timer_list, entry);
     base.running_timer = timer;
     detach_timer(timer, true);
     fn = timer.function;
-    if (WARN_ON_ONCE(!fn)) {
+    if (WARN_ON_ONCE!(!fn)) {
 // Should never happen. Emphasis on should!
     base.running_timer = core::ptr::null_mut();
     continue;
@@ -1700,23 +1550,23 @@ unsafe extern "C" fn expire_timers(base: *mut timer_base, head: *mut hlist_head)
     }
     }
     }
-    static int collect_expired_timers(struct timer_base *base,
-    struct hlist_head *heads)
-    {
-    let mut clk: c_ulong = base.clk = base.next_expiry;
-    struct hlist_head *vec;
+#[no_mangle]
+pub unsafe extern "C" fn collect_expired_timers(base: *mut timer_base, heads: *mut hlist_head) -> c_int {
+pub static mut clk: c_ulong = 0;
+pub static mut vec: *mut c_void = core::ptr::null_mut();
     int i, levels = 0;
-    unsigned int idx;
-    for (i = 0; i < LVL_DEPTH; i++) {
+    let mut idx = 0;
+    while (i < LVL_DEPTH) {
     idx = (clk & LVL_MASK) + i * LVL_SIZE;
     if (__test_and_clear_bit(idx, base.pending_map)) {
     vec = base.vectors + idx;
     hlist_move_list(vec, heads++);
-    levels++;
+    levels += 1;
     }
 // Is it time to look at the next level?
-    if (clk & LVL_CLK_MASK)
+    if (clk & LVL_CLK_MASK) {
     break;
+    }
 // Shift clock for the next level granularity
     clk >>= LVL_CLK_SHIFT;
     }
@@ -1727,14 +1577,14 @@ unsafe extern "C" fn expire_timers(base: *mut timer_base, head: *mut hlist_head)
 // + @clk upwards and if nothing there, search from start of the level
 // (@offset) up to @offset + clk.
 //
-    static int next_pending_bucket(struct timer_base *base, unsigned offset,
-    unsigned clk)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn next_pending_bucket(base: *mut timer_base, offset: c_uint, clk: c_uint) -> c_int {
     unsigned pos, start = offset + clk;
-    let mut end: unsigned = offset + LVL_SIZE;
+pub static mut end: unsigned = 0;
     pos = find_next_bit(base.pending_map, end, start);
-    if (pos < end)
+    if (pos < end) {
     return pos - start;
+    }
     pos = find_next_bit(base.pending_map, start, offset);
     return pos < start ? pos + LVL_SIZE - start : -1;
     }
@@ -1746,26 +1596,26 @@ unsafe extern "C" fn expire_timers(base: *mut timer_base, head: *mut hlist_head)
 //
 #[no_mangle]
 unsafe extern "C" fn timer_recalc_next_expiry(base: *mut timer_base) {
-    static void timer_recalc_next_expiry(struct timer_base *base)
-    {
     unsigned long clk, next, adj;
     unsigned lvl, offset = 0;
     next = base.clk + TIMER_NEXT_MAX_DELTA;
     clk = base.clk;
-    for (lvl = 0; lvl < LVL_DEPTH; lvl++, offset += LVL_SIZE) {
-    let mut pos: c_int = next_pending_bucket(base, offset, clk & LVL_MASK);
-    let mut lvl_clk: c_ulong = clk & LVL_CLK_MASK;
+    while (lvl < LVL_DEPTH) {
+pub static mut pos: c_int = 0;
+pub static mut lvl_clk: c_ulong = 0;
     if (pos >= 0) {
-    let mut tmp: c_ulong = clk + (unsigned long) pos;
+pub static mut tmp: c_ulong = 0;
     tmp <<= LVL_SHIFT(lvl);
-    if (time_before(tmp, next))
+    if (time_before(tmp, next)) {
     next = tmp;
+    }
 //
 // If the next expiration happens before we reach
 // the next level, no need to check further.
 //
-    if (pos <= ((LVL_CLK_DIV - lvl_clk) & LVL_CLK_MASK))
+    if (pos <= ((LVL_CLK_DIV - lvl_clk) & LVL_CLK_MASK)) {
     break;
+    }
     }
 //
 // Clock for the next level. If the current level clock lower
@@ -1818,21 +1668,21 @@ unsafe extern "C" fn timer_recalc_next_expiry(base: *mut timer_base) {
 //
 #[no_mangle]
 unsafe extern "C" fn cmp_next_hrtimer_event(basem: u64, expires: u64) -> u64 {
-    static u64 cmp_next_hrtimer_event(u64 basem, u64 expires)
-    {
-    let mut nextevt: u64 = ktime_to_ns(hrtimer_get_next_event());
+pub static mut nextevt: u64 = 0;
 //
 // If high resolution timers are enabled
 // hrtimer_get_next_event() returns KTIME_MAX.
 //
-    if (expires <= nextevt)
+    if (expires <= nextevt) {
     return expires;
+    }
 //
 // If the next timer is already expired, return the tick base
 // time so the tick is fired immediately.
 //
-    if (nextevt <= basem)
+    if (nextevt <= basem) {
     return basem;
+    }
 //
 // Round up to the next jiffy. High resolution timers are
 // off, so the hrtimers are expired in the tick and we need to
@@ -1843,11 +1693,11 @@ unsafe extern "C" fn cmp_next_hrtimer_event(basem: u64, expires: u64) -> u64 {
 //
     return DIV_ROUND_UP_ULL(nextevt, TICK_NSEC) * TICK_NSEC;
     }
-    static unsigned long next_timer_interrupt(struct timer_base *base,
-    unsigned long basej)
-    {
-    if (base.next_expiry_recalc)
+#[no_mangle]
+pub unsafe extern "C" fn next_timer_interrupt(base: *mut timer_base, basej: c_ulong) -> c_ulong {
+    if (base.next_expiry_recalc) {
     timer_recalc_next_expiry(base);
+    }
 //
 // Move next_expiry for the empty base into the future to prevent an
 // unnecessary raise of the timer softirq when the next_expiry value
@@ -1856,17 +1706,15 @@ unsafe extern "C" fn cmp_next_hrtimer_event(basem: u64, expires: u64) -> u64 {
 // This update is also required to make timer_base::next_expiry values
 // easy comparable to find out which base holds the first pending timer.
 //
-    if (!base.timers_pending)
+    if (!base.timers_pending) {
     WRITE_ONCE(base.next_expiry, basej + TIMER_NEXT_MAX_DELTA);
+    }
     return base.next_expiry;
     }
-    static unsigned long fetch_next_timer_interrupt(unsigned long basej, u64 basem,
-    struct timer_base *base_local,
-    struct timer_base *base_global,
-    struct timer_events *tevt)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn fetch_next_timer_interrupt(basej: c_ulong, basem: u64, base_local: *mut timer_base, base_global: *mut timer_base, tevt: *mut timer_events) -> c_ulong {
     unsigned long nextevt, nextevt_local, nextevt_global;
-    bool local_first;
+    let mut local_first = 0;
     nextevt_local = next_timer_interrupt(base_local, basej);
     nextevt_global = next_timer_interrupt(base_global, basej);
     local_first = time_before_eq(nextevt_local, nextevt_global);
@@ -1878,8 +1726,9 @@ unsafe extern "C" fn cmp_next_hrtimer_event(basem: u64, expires: u64) -> u64 {
 //
     if (time_before_eq(nextevt, basej + 1)) {
 // If we missed a tick already, force 0 delta
-    if (time_before(nextevt, basej))
+    if (time_before(nextevt, basej)) {
     nextevt = basej;
+    }
     tevt.local = basem + (u64)(nextevt - basej) * TICK_NSEC;
 //
 // This is required for the remote check only but it doesn't
@@ -1893,8 +1742,9 @@ unsafe extern "C" fn cmp_next_hrtimer_event(basem: u64, expires: u64) -> u64 {
 // * The local callers will ignore the tevt->global anyway, when
 // nextevt is max. one tick away.
 //
-    if (!local_first)
+    if (!local_first) {
     tevt.global = tevt.local;
+    }
     return nextevt;
     }
 //
@@ -1903,10 +1753,12 @@ unsafe extern "C" fn cmp_next_hrtimer_event(basem: u64, expires: u64) -> u64 {
 // If the local queue expires first, then the global event can be
 // ignored. If the global queue is empty, nothing to do either.
 //
-    if (!local_first && base_global.timers_pending)
+    if (!local_first && base_global.timers_pending) {
     tevt.global = basem + (u64)(nextevt_global - basej) * TICK_NSEC;
-    if (base_local.timers_pending)
+    }
+    if (base_local.timers_pending) {
     tevt.local = basem + (u64)(nextevt_local - basej) * TICK_NSEC;
+    }
     return nextevt;
     }
 
@@ -1925,11 +1777,10 @@ unsafe extern "C" fn cmp_next_hrtimer_event(basem: u64, expires: u64) -> u64 {
 // Caller needs to make sure timer base locks are held (use
 // timer_lock_remote_bases() for this purpose).
 //
-    void fetch_next_timer_interrupt_remote(unsigned long basej, u64 basem,
-    struct timer_events *tevt,
-    unsigned int cpu)
-    {
-    struct timer_base *base_local, *base_global;
+#[no_mangle]
+pub unsafe extern "C" fn fetch_next_timer_interrupt_remote(basej: c_ulong, basem: u64, tevt: *mut timer_events, cpu: c_uint) {
+    let mut base_local = core::ptr::null_mut();
+    let mut base_global = core::ptr::null_mut();
 // Preset local / global events
     tevt.local = tevt.global = KTIME_MAX;
     base_local = per_cpu_ptr(&timer_bases[BASE_LOCAL], cpu);
@@ -1946,11 +1797,8 @@ unsafe extern "C" fn cmp_next_hrtimer_event(basem: u64, expires: u64) -> u64 {
 //
 #[no_mangle]
 pub unsafe extern "C" fn timer_unlock_remote_bases(cpu: c_uint) {
-    void timer_unlock_remote_bases(unsigned int cpu)
-    __releases(timer_bases[BASE_LOCAL].lock)
-    __releases(timer_bases[BASE_GLOBAL].lock)
-    {
-    struct timer_base *base_local, *base_global;
+    let mut base_local = core::ptr::null_mut();
+    let mut base_global = core::ptr::null_mut();
     base_local = per_cpu_ptr(&timer_bases[BASE_LOCAL], cpu);
     base_global = per_cpu_ptr(&timer_bases[BASE_GLOBAL], cpu);
     raw_spin_unlock(&base_global.lock);
@@ -1964,11 +1812,8 @@ pub unsafe extern "C" fn timer_unlock_remote_bases(cpu: c_uint) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn timer_lock_remote_bases(cpu: c_uint) {
-    void timer_lock_remote_bases(unsigned int cpu)
-    __acquires(timer_bases[BASE_LOCAL].lock)
-    __acquires(timer_bases[BASE_GLOBAL].lock)
-    {
-    struct timer_base *base_local, *base_global;
+    let mut base_local = core::ptr::null_mut();
+    let mut base_global = core::ptr::null_mut();
     base_local = per_cpu_ptr(&timer_bases[BASE_LOCAL], cpu);
     base_global = per_cpu_ptr(&timer_bases[BASE_GLOBAL], cpu);
     lockdep_assert_irqs_disabled();
@@ -1982,11 +1827,9 @@ pub unsafe extern "C" fn timer_lock_remote_bases(cpu: c_uint) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn timer_base_is_idle() -> bool {
-    bool timer_base_is_idle(void)
-    {
     return __this_cpu_read(timer_bases[BASE_LOCAL].is_idle);
     }
-    static void __run_timer_base(struct timer_base *base);
+// forward_decl: __run_timer_base;
 //
 // timer_expire_remote() - expire global timers of cpu
 // @cpu:	Remote CPU
@@ -1995,44 +1838,43 @@ pub unsafe extern "C" fn timer_base_is_idle() -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn timer_expire_remote(cpu: c_uint) {
-    void timer_expire_remote(unsigned int cpu)
-    {
-    struct timer_base *base = per_cpu_ptr(&timer_bases[BASE_GLOBAL], cpu);
+    let mut base = per_cpu_ptr(&timer_bases[BASE_GLOBAL], cpu);
     __run_timer_base(base);
     }
-    static void timer_use_tmigr(unsigned long basej, u64 basem,
-    unsigned long *nextevt, bool *tick_stop_path,
-    bool timer_base_idle, struct timer_events *tevt)
-    {
-    u64 next_tmigr;
-    if (timer_base_idle)
-    next_tmigr = tmigr_cpu_new_timer(tevt.global);
 #[no_mangle]
-pub unsafe extern "C" fn if(_arg: tick_stop_path) -> else {
-    else if (tick_stop_path)
+pub unsafe extern "C" fn timer_use_tmigr(basej: c_ulong, basem: u64, nextevt: *mut c_ulong, tick_stop_path: *mut bool, timer_base_idle: bool, tevt: *mut timer_events) {
+    let mut next_tmigr = 0;
+    if (timer_base_idle) {
+    next_tmigr = tmigr_cpu_new_timer(tevt.global);
+    }
+
+    else if (tick_stop_path) {
     next_tmigr = tmigr_cpu_deactivate(tevt.global);
-    else
+    }
+    else {
     next_tmigr = tmigr_quick_check(tevt.global);
+    }
 //
 // If the CPU is the last going idle in timer migration hierarchy, make
 // sure the CPU will wake up in time to handle remote timers.
 // next_tmigr == KTIME_MAX if other CPUs are still active.
 //
     if (next_tmigr < tevt.local) {
-    u64 tmp;
+    let mut tmp = 0;
 // If we missed a tick already, force 0 delta
-    if (next_tmigr < basem)
+    if (next_tmigr < basem) {
     next_tmigr = basem;
+    }
     tmp = div_u64(next_tmigr - basem, TICK_NSEC);
 // nextevt = basej + (unsigned long)tmp;
     tevt.local = next_tmigr;
     }
     }
 
-    static void timer_use_tmigr(unsigned long basej, u64 basem,
-    unsigned long *nextevt, bool *tick_stop_path,
-    bool timer_base_idle, struct timer_events *tevt)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: timer_use_tmigr
+pub unsafe extern "C" fn timer_use_tmigr_dup(basej: c_ulong, basem: u64, nextevt: *mut c_ulong, tick_stop_path: *mut bool, timer_base_idle: bool, tevt: *mut timer_events) {
 //
 // Make sure first event is written into tevt->local to not miss a
 // timer on !SMP systems.
@@ -2040,20 +1882,21 @@ pub unsafe extern "C" fn if(_arg: tick_stop_path) -> else {
     tevt.local = min_t(u64, tevt.local, tevt.global);
     }
 
-    static inline u64 __get_next_timer_interrupt(unsigned long basej, u64 basem,
-    bool *idle)
-    {
-    let mut tevt: timer_events = { .local = KTIME_MAX, .global = KTIME_MAX };
-    struct timer_base *base_local, *base_global;
-    unsigned long nextevt;
-    bool idle_is_possible;
+#[no_mangle]
+pub unsafe extern "C" fn __get_next_timer_interrupt(basej: c_ulong, basem: u64, idle: *mut bool) -> u64 {
+pub static mut tevt: timer_events = 0;
+    let mut base_local = core::ptr::null_mut();
+    let mut base_global = core::ptr::null_mut();
+    let mut nextevt = 0;
+    let mut idle_is_possible = 0;
 //
 // When the CPU is offline, the tick is cancelled and nothing is supposed
 // to try to stop it.
 //
-    if (WARN_ON_ONCE(cpu_is_offline(smp_processor_id()))) {
-    if (idle)
+    if (WARN_ON_ONCE!(cpu_is_offline(smp_processor_id()))) {
+    if (idle) {
 // idle = true;
+    }
     return tevt.local;
     }
     base_local = this_cpu_ptr(&timer_bases[BASE_LOCAL]);
@@ -2074,9 +1917,10 @@ pub unsafe extern "C" fn if(_arg: tick_stop_path) -> else {
 // event. See timer_use_tmigr() for detailed information.
 //
     idle_is_possible = time_after(nextevt, basej + 1);
-    if (idle_is_possible)
+    if (idle_is_possible) {
     timer_use_tmigr(basej, basem, &nextevt, idle,
     base_local.is_idle, &tevt);
+    }
 //
 // We have a fresh next event. Check whether we can forward the
 // base.
@@ -2106,8 +1950,9 @@ pub unsafe extern "C" fn if(_arg: tick_stop_path) -> else {
 // in nohz_full mode need a self-IPI to kick reprogramming
 // in IRQ tail.
 //
-    if (tick_nohz_full_cpu(base_local.cpu))
+    if (tick_nohz_full_cpu(base_local.cpu)) {
     base_global.is_idle = true;
+    }
     trace_timer_base_idle(true, base_local.cpu);
     }
 // idle = base_local->is_idle;
@@ -2119,8 +1964,9 @@ pub unsafe extern "C" fn if(_arg: tick_stop_path) -> else {
 // When timer base was already marked idle, nothing will be
 // changed here.
 //
-    if (!base_local.is_idle && idle_is_possible)
+    if (!base_local.is_idle && idle_is_possible) {
     tmigr_cpu_activate();
+    }
     }
     raw_spin_unlock(&base_global.lock);
     raw_spin_unlock(&base_local.lock);
@@ -2139,8 +1985,6 @@ pub unsafe extern "C" fn if(_arg: tick_stop_path) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn get_next_timer_interrupt(basej: c_ulong, basem: u64) -> u64 {
-    u64 get_next_timer_interrupt(unsigned long basej, u64 basem)
-    {
     return __get_next_timer_interrupt(basej, basem, core::ptr::null_mut());
     }
 //
@@ -2156,10 +2000,9 @@ pub unsafe extern "C" fn get_next_timer_interrupt(basej: c_ulong, basem: u64) ->
 //
 #[no_mangle]
 pub unsafe extern "C" fn timer_base_try_to_set_idle(basej: c_ulong, basem: u64, idle: *mut bool) -> u64 {
-    u64 timer_base_try_to_set_idle(unsigned long basej, u64 basem, bool *idle)
-    {
-    if (*idle)
+    if (*idle) {
     return KTIME_MAX;
+    }
     return __get_next_timer_interrupt(basej, basem, idle);
     }
 //
@@ -2169,9 +2012,7 @@ pub unsafe extern "C" fn timer_base_try_to_set_idle(basej: c_ulong, basem: u64, 
 //
 #[no_mangle]
 pub unsafe extern "C" fn timer_clear_idle() {
-    void timer_clear_idle(void)
-    {
-    let mut this_cpu: c_int = smp_processor_id();
+pub static mut this_cpu: c_int = 0;
 //
 // We do this unlocked. The worst outcome is a remote pinned timer
 // enqueue sending a pointless IPI, but taking the lock would just
@@ -2180,8 +2021,9 @@ pub unsafe extern "C" fn timer_clear_idle() {
 // path. Required for BASE_LOCAL only.
 //
     __this_cpu_write(timer_bases[BASE_LOCAL].is_idle, false);
-    if (tick_nohz_full_cpu(this_cpu))
+    if (tick_nohz_full_cpu(this_cpu)) {
     __this_cpu_write(timer_bases[BASE_GLOBAL].is_idle, false);
+    }
     trace_timer_base_idle(false, this_cpu);
 // Activate without holding the timer_base->lock
     tmigr_cpu_activate();
@@ -2193,13 +2035,12 @@ pub unsafe extern "C" fn timer_clear_idle() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __run_timers(base: *mut timer_base) {
-    static inline void __run_timers(struct timer_base *base)
-    {
     struct hlist_head heads[LVL_DEPTH];
-    int levels;
+    let mut levels = 0;
     lockdep_assert_held(&base.lock);
-    if (base.running_timer)
+    if (base.running_timer) {
     return;
+    }
     while (time_after_eq(jiffies, base.clk) &&
     time_after_eq(jiffies, base.next_expiry)) {
     levels = collect_expired_timers(base, heads);
@@ -2210,25 +2051,25 @@ pub unsafe extern "C" fn __run_timers(base: *mut timer_base) {
 // base::next_expiry was set to base::clk +
 // TIMER_NEXT_MAX_DELTA.
 //
-    WARN_ON_ONCE(!levels && !base.next_expiry_recalc
+    WARN_ON_ONCE!(!levels && !base.next_expiry_recalc
     && base.timers_pending);
 //
 // While executing timers, base->clk is set 1 offset ahead of
 // jiffies to avoid endless requeuing to current jiffies.
 //
-    base.clk++;
+    base.clk += 1;
     timer_recalc_next_expiry(base);
-    while (levels--)
+    while (levels--) {
     expire_timers(base, heads + levels);
+    }
     }
     }
 #[no_mangle]
 unsafe extern "C" fn __run_timer_base(base: *mut timer_base) {
-    static void __run_timer_base(struct timer_base *base)
-    {
 // Can race against a remote CPU updating next_expiry under the lock
-    if (time_before(jiffies, READ_ONCE(base.next_expiry)))
+    if (time_before(jiffies, READ_ONCE(base.next_expiry))) {
     return;
+    }
     timer_base_lock_expiry(base);
     raw_spin_lock_irq(&base.lock);
     __run_timers(base);
@@ -2237,9 +2078,7 @@ unsafe extern "C" fn __run_timer_base(base: *mut timer_base) {
     }
 #[no_mangle]
 unsafe extern "C" fn run_timer_base(index: c_int) {
-    static void run_timer_base(int index)
-    {
-    struct timer_base *base = this_cpu_ptr(&timer_bases[index]);
+    let mut base = this_cpu_ptr(&timer_bases[index]);
     __run_timer_base(base);
     }
 //
@@ -2247,14 +2086,13 @@ unsafe extern "C" fn run_timer_base(index: c_int) {
 //
 #[no_mangle]
 unsafe extern "C" fn run_timer_softirq() -> __latent_entropy void {
-    static __latent_entropy void run_timer_softirq(void)
-    {
     run_timer_base(BASE_LOCAL);
-    if (IS_ENABLED(CONFIG_NO_HZ_COMMON)) {
+    if (IS_ENABLED!(CONFIG_NO_HZ_COMMON)) {
     run_timer_base(BASE_GLOBAL);
     run_timer_base(BASE_DEF);
-    if (is_timers_nohz_active())
+    if (is_timers_nohz_active()) {
     tmigr_handle_remote();
+    }
     }
     }
 //
@@ -2262,11 +2100,9 @@ unsafe extern "C" fn run_timer_softirq() -> __latent_entropy void {
 //
 #[no_mangle]
 unsafe extern "C" fn run_local_timers() {
-    static void run_local_timers(void)
-    {
-    struct timer_base *base = this_cpu_ptr(&timer_bases[BASE_LOCAL]);
+    let mut base = this_cpu_ptr(&timer_bases[BASE_LOCAL]);
     hrtimer_run_queues();
-    for (int i = 0; i < NR_BASES; i++, base++) {
+    while (i < NR_BASES) {
 //
 // Raise the softirq only if required.
 //
@@ -2313,43 +2149,39 @@ unsafe extern "C" fn run_local_timers() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn update_process_times(user_tick: c_int) {
-    void update_process_times(int user_tick)
-    {
-    struct task_struct *p = current;
+    let mut p = current;
 // Note: this timer irq context must be accounted for as well.
     account_process_tick(p, user_tick);
     run_local_timers();
     rcu_sched_clock_irq(user_tick);
 
-    if (in_hardirq())
+    if (in_hardirq()) {
     irq_work_tick();
+    }
 
     sched_tick();
-    if (IS_ENABLED(CONFIG_POSIX_TIMERS))
+    if (IS_ENABLED!(CONFIG_POSIX_TIMERS)) {
     run_posix_cpu_timers();
+    }
     }
 
 #[no_mangle]
 unsafe extern "C" fn migrate_timer_list(new_base: *mut timer_base, head: *mut hlist_head) {
-    static void migrate_timer_list(struct timer_base *new_base, struct hlist_head *head)
-    {
-    struct timer_list *timer;
-    let mut cpu: c_int = new_base.cpu;
+pub static mut timer: *mut c_void = core::ptr::null_mut();
+pub static mut cpu: c_int = 0;
     while (!hlist_empty(head)) {
-    timer = hlist_entry(head.first, struct timer_list, entry);
+    timer = hlist_entry(head.first, timer_list, entry);
     detach_timer(timer, false);
     timer.flags = (timer.flags & ~TIMER_BASEMASK) | cpu;
     debug_timer_activate(timer);
-    internal_add_timer(new_base, timer);
+// forward_decl: ernal_add_timer;
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn timers_prepare_cpu(cpu: c_uint) -> c_int {
-    int timers_prepare_cpu(unsigned int cpu)
-    {
-    struct timer_base *base;
-    int b;
-    for (b = 0; b < NR_BASES; b++) {
+pub static mut base: *mut c_void = core::ptr::null_mut();
+    let mut b = 0;
+    while (b < NR_BASES) {
     base = per_cpu_ptr(&timer_bases[b], cpu);
     base.clk = jiffies;
     base.next_expiry = base.clk + TIMER_NEXT_MAX_DELTA;
@@ -2361,12 +2193,11 @@ pub unsafe extern "C" fn timers_prepare_cpu(cpu: c_uint) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn timers_dead_cpu(cpu: c_uint) -> c_int {
-    int timers_dead_cpu(unsigned int cpu)
-    {
-    struct timer_base *old_base;
-    struct timer_base *new_base;
-    int b, i;
-    for (b = 0; b < NR_BASES; b++) {
+pub static mut old_base: *mut c_void = core::ptr::null_mut();
+pub static mut new_base: *mut c_void = core::ptr::null_mut();
+    let mut b = 0;
+    let mut i = 0;
+    while (b < NR_BASES) {
     old_base = per_cpu_ptr(&timer_bases[b], cpu);
     new_base = get_cpu_ptr(&timer_bases[b]);
 //
@@ -2380,10 +2211,11 @@ pub unsafe extern "C" fn timers_dead_cpu(cpu: c_uint) -> c_int {
 // before moving the timers over.
 //
     forward_timer_base(new_base);
-    WARN_ON_ONCE(old_base.running_timer);
+    WARN_ON_ONCE!(old_base.running_timer);
     old_base.running_timer = core::ptr::null_mut();
-    for (i = 0; i < WHEEL_SIZE; i++)
+    for (i = 0; i < WHEEL_SIZE; i++) {
     migrate_timer_list(new_base, old_base.vectors + i);
+    }
     raw_spin_unlock(&old_base.lock);
     raw_spin_unlock_irq(&new_base.lock);
     put_cpu_ptr(&timer_bases);
@@ -2392,12 +2224,10 @@ pub unsafe extern "C" fn timers_dead_cpu(cpu: c_uint) -> c_int {
     }
 
 #[no_mangle]
-unsafe extern "C" fn init_timer_cpu(cpu: c_int) -> void __init {
-    static void __init init_timer_cpu(int cpu)
-    {
-    struct timer_base *base;
-    int i;
-    for (i = 0; i < NR_BASES; i++) {
+unsafe extern "C" fn init_timer_cpu(cpu: c_int)  {
+pub static mut base: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    while (i < NR_BASES) {
     base = per_cpu_ptr(&timer_bases[i], cpu);
     base.cpu = cpu;
     raw_spin_lock_init(&base.lock);
@@ -2407,17 +2237,14 @@ unsafe extern "C" fn init_timer_cpu(cpu: c_int) -> void __init {
     }
     }
 #[no_mangle]
-unsafe extern "C" fn init_timer_cpus() -> void __init {
-    static void __init init_timer_cpus(void)
-    {
-    int cpu;
-    for_each_possible_cpu(cpu)
+unsafe extern "C" fn init_timer_cpus()  {
+    let mut cpu = 0;
+    for_each_possible_cpu(cpu) {
     init_timer_cpu(cpu);
     }
+    }
 #[no_mangle]
-pub unsafe extern "C" fn timers_init() -> void __init {
-    void __init timers_init(void)
-    {
+pub unsafe extern "C" fn timers_init()  {
     init_timer_cpus();
     posix_cputimers_init_work();
     open_softirq(TIMER_SOFTIRQ, run_timer_softirq);

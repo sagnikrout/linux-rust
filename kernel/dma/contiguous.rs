@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0+
@@ -79,10 +329,9 @@ pub const CMA_SIZE_MBYTES: c_int = 0;
     static unsigned int dma_contiguous_areas_num;
 #[no_mangle]
 unsafe extern "C" fn dma_contiguous_insert_area(cma: *mut cma) -> c_int {
-    static int dma_contiguous_insert_area(struct cma *cma)
-    {
-    if (dma_contiguous_areas_num >= ARRAY_SIZE(dma_contiguous_areas))
+    if (dma_contiguous_areas_num >= ARRAY_SIZE!(dma_contiguous_areas)) {
     return -EINVAL;
+    }
     dma_contiguous_areas[dma_contiguous_areas_num++] = cma;
     return 0;
     }
@@ -95,14 +344,15 @@ unsafe extern "C" fn dma_contiguous_insert_area(cma: *mut cma) -> c_int {
 // Returns:
 // A pointer to the requested contiguous area, or NULL otherwise.
 //
-    struct cma *dma_contiguous_get_area_by_idx(unsigned int idx)
-    {
-    if (idx >= dma_contiguous_areas_num)
+#[no_mangle]
+pub unsafe extern "C" fn dma_contiguous_get_area_by_idx(idx: c_uint) -> *mut c_void {
+    if (idx >= dma_contiguous_areas_num) {
     return core::ptr::null_mut();
+    }
     return dma_contiguous_areas[idx];
     }
     EXPORT_SYMBOL_GPL(dma_contiguous_get_area_by_idx);
-    static struct cma *dma_contiguous_default_area;
+pub static mut dma_contiguous_default_area: *mut c_void = core::ptr::null_mut();
 //
 // Default global CMA area size can be defined in kernel's .config.
 // This is useful mainly for distro maintainers to create a kernel
@@ -114,20 +364,19 @@ unsafe extern "C" fn dma_contiguous_insert_area(cma: *mut cma) -> c_int {
 // should use cma= kernel parameter.
 //
 
-    let mut __initdata: static phys_addr_t  size_cmdline = -1;
+pub static mut __initdata: phys_addr_t  size_cmdline = 0;
     static phys_addr_t base_cmdline __initdata;
     static phys_addr_t limit_cmdline __initdata;
 #[no_mangle]
-unsafe extern "C" fn early_cma(p: *mut c_char) -> int __init {
-    static int __init early_cma(char *p)
-    {
+unsafe extern "C" fn early_cma(p: *mut c_char) -> c_int {
     if (!p) {
-    pr_err("Config string not provided\n");
+    pr_err!("Config string not provided\n");
     return -EINVAL;
     }
     size_cmdline = memparse(p, &p);
-    if (*p != '@')
+    if (*p != '@') {
     return 0;
+    }
     base_cmdline = memparse(p + 1, &p);
     if (*p != '-') {
     limit_cmdline = base_cmdline + size_cmdline;
@@ -136,11 +385,12 @@ unsafe extern "C" fn early_cma(p: *mut c_char) -> int __init {
     limit_cmdline = memparse(p + 1, &p);
     return 0;
     }
-    early_param("cma", early_cma);
-    struct cma *dev_get_cma_area(struct device *dev)
-    {
-    if (dev && dev.cma_area)
+    early_param!("cma", early_cma);
+#[no_mangle]
+pub unsafe extern "C" fn dev_get_cma_area(dev: *mut device) -> *mut c_void {
+    if (dev && dev.cma_area) {
     return dev.cma_area;
+    }
     return dma_contiguous_default_area;
     }
     EXPORT_SYMBOL_GPL(dev_get_cma_area);
@@ -150,95 +400,92 @@ unsafe extern "C" fn early_cma(p: *mut c_char) -> int __init {
     static phys_addr_t pernuma_size_bytes __initdata;
     static bool numa_cma_configured __initdata;
 #[no_mangle]
-unsafe extern "C" fn early_numa_cma(p: *mut c_char) -> int __init {
-    static int __init early_numa_cma(char *p)
-    {
+unsafe extern "C" fn early_numa_cma(p: *mut c_char) -> c_int {
     int nid, count = 0;
-    unsigned long node;
-    phys_addr_t size;
-    char *s = p;
+    let mut node = 0;
+    let mut size;
+    let mut s = p;
     while (*s) {
-    if (sscanf(s, "%lu%n", &node, &count) != 1)
+    if (sscanf(s, "%lu%n", &node, &count) != 1) {
     break;
+    }
     if (s[count] == ':') {
-    if (node >= MAX_NUMNODES)
+    if (node >= MAX_NUMNODES) {
     break;
+    }
     nid = array_index_nospec(node, MAX_NUMNODES);
     s += count + 1;
     size = memparse(s, &s);
     numa_cma_size[nid] = size;
-    if (*s == ',')
-    s++;
-    else
+    if (*s == ',') {
+    s += 1;
+    }
+    else {
     break;
-    } else
+    }
+    } else {
     break;
+    }
     }
     numa_cma_configured = true;
     return 0;
     }
-    early_param("numa_cma", early_numa_cma);
+    early_param!("numa_cma", early_numa_cma);
 #[no_mangle]
-unsafe extern "C" fn early_cma_pernuma(p: *mut c_char) -> int __init {
-    static int __init early_cma_pernuma(char *p)
-    {
+unsafe extern "C" fn early_cma_pernuma(p: *mut c_char) -> c_int {
     pernuma_size_bytes = memparse(p, &p);
     numa_cma_configured = true;
     return 0;
     }
-    early_param("cma_pernuma", early_cma_pernuma);
+    early_param!("cma_pernuma", early_cma_pernuma);
 
 #[no_mangle]
 unsafe extern "C" fn cma_early_percent_memory() -> phys_addr_t __init __maybe_unused {
-    static phys_addr_t __init __maybe_unused cma_early_percent_memory(void)
-    {
-    let mut total_pages: c_ulong = PHYS_PFN(memblock_phys_mem_size());
+pub static mut total_pages: c_ulong = 0;
     return (total_pages * CONFIG_CMA_SIZE_PERCENTAGE / 100) << PAGE_SHIFT;
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn cma_early_percent_memory() -> __maybe_unused phys_addr_t {
-    static inline __maybe_unused phys_addr_t cma_early_percent_memory(void)
-    {
     return 0;
     }
 
 #[no_mangle]
-unsafe extern "C" fn dma_numa_cma_reserve() -> void __init {
-    static void __init dma_numa_cma_reserve(void)
-    {
-    int nid;
-    if (IS_ENABLED(CONFIG_CMA_SIZE_PERNUMA) &&
+unsafe extern "C" fn dma_numa_cma_reserve()  {
+    let mut nid = 0;
+    if (IS_ENABLED!(CONFIG_CMA_SIZE_PERNUMA) &&
     !numa_cma_configured && dma_contiguous_default_area &&
-    nr_online_nodes > 1)
+    nr_online_nodes > 1) {
     pernuma_size_bytes = cma_get_size(dma_contiguous_default_area);
+    }
     for_each_node(nid) {
-    phys_addr_t size;
+    let mut size;
     char name[CMA_MAX_NAME];
-    struct cma **cma;
-    int ret;
+pub static mut cma: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     if (!node_online(nid)) {
-    if (pernuma_size_bytes || numa_cma_size[nid])
-    pr_warn("invalid node %d specified\n", nid);
+    if (pernuma_size_bytes || numa_cma_size[nid]) {
+    pr_warn!("invalid node %d specified\n", nid);
+    }
     continue;
     }
 // per-node numa setting has the priority
     size = numa_cma_size[nid] ?: pernuma_size_bytes;
-    if (!size)
+    if (!size) {
     continue;
+    }
     cma = &dma_contiguous_numa_area[nid];
-    snprintf(name, sizeof(name), "numa%d", nid);
+    snprintf(name, sizeof!(name), "numa%d", nid);
     ret = cma_declare_contiguous_nid(0, size, 0, 0, 0, false, name, cma, nid);
-    if (ret)
-    pr_warn("%s: reservation failed: err %d, node %d", __func__,
+    if (ret) {
+    pr_warn!("%s: reservation failed: err %d, node %d", __func__,
     ret, nid);
+    }
     }
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn dma_numa_cma_reserve() -> void __init {
-    static inline void __init dma_numa_cma_reserve(void)
-    {
+pub unsafe extern "C" fn dma_numa_cma_reserve()  {
     }
 
 //
@@ -251,21 +498,20 @@ pub unsafe extern "C" fn dma_numa_cma_reserve() -> void __init {
 // memory.
 //
 #[no_mangle]
-pub unsafe extern "C" fn dma_contiguous_reserve(limit: phys_addr_t) -> void __init {
-    void __init dma_contiguous_reserve(phys_addr_t limit)
-    {
-    let mut selected_size: phys_addr_t = 0;
-    let mut selected_base: phys_addr_t = 0;
-    let mut selected_limit: phys_addr_t = limit;
-    let mut fixed: bool = false;
-    pr_debug("%s(limit %08lx)\n", __func__, (unsigned long)limit);
+pub unsafe extern "C" fn dma_contiguous_reserve(limit: phys_addr_t)  {
+pub static mut selected_size: phys_addr_t = 0;
+pub static mut selected_base: phys_addr_t = 0;
+pub static mut selected_limit: phys_addr_t = 0;
+pub static mut fixed: bool = false;
+    pr_debug!("%s(limit %08lx)\n", __func__, (unsigned long)limit);
     if (size_cmdline != -1) {
     selected_size = size_cmdline;
     selected_base = base_cmdline;
 // Hornor the user setup dma address limit
     selected_limit = limit_cmdline ?: limit;
-    if (base_cmdline + size_cmdline == limit_cmdline)
+    if (base_cmdline + size_cmdline == limit_cmdline) {
     fixed = true;
+    }
     } else {
 
     selected_size = size_bytes;
@@ -278,15 +524,16 @@ pub unsafe extern "C" fn dma_contiguous_reserve(limit: phys_addr_t) -> void __in
 
     }
     if (selected_size && !dma_contiguous_default_area) {
-    int ret;
-    pr_debug("%s: reserving %ld MiB for global area\n", __func__,
+    let mut ret = 0;
+    pr_debug!("%s: reserving %ld MiB for global area\n", __func__,
     (unsigned long)selected_size / SZ_1M);
     ret = dma_contiguous_reserve_area(selected_size, selected_base,
     selected_limit,
     &dma_contiguous_default_area,
     fixed);
-    if (ret)
+    if (ret) {
     return;
+    }
 //
 // We need to insert the new area in our list to avoid
 // any inconsistencies between having the default area
@@ -303,8 +550,9 @@ pub unsafe extern "C" fn dma_contiguous_reserve(limit: phys_addr_t) -> void __in
 // having a default area but an empty list.
 //
     ret = dma_contiguous_insert_area(dma_contiguous_default_area);
-    if (ret)
-    pr_warn("Couldn't queue default CMA region for heap creation.");
+    if (ret) {
+    pr_warn!("Couldn't queue default CMA region for heap creation.");
+    }
     }
     dma_numa_cma_reserve();
     }
@@ -330,14 +578,15 @@ pub unsafe extern "C" fn dma_contiguous_reserve(limit: phys_addr_t) -> void __in
 // reserve in range from @base to @limit.
 //
     int __init dma_contiguous_reserve_area(phys_addr_t size, phys_addr_t base,
-    phys_addr_t limit, struct cma **res_cma,
+    phys_addr_t limit, cma **res_cma,
     bool fixed)
     {
-    int ret;
+    let mut ret = 0;
     ret = cma_declare_contiguous(base, size, limit, 0, 0, fixed,
     "reserved", res_cma);
-    if (ret)
+    if (ret) {
     return ret;
+    }
 // Architecture specific contiguous memory fixup.
     dma_contiguous_early_fixup(cma_get_base(*res_cma),
     cma_get_size(*res_cma));
@@ -355,11 +604,11 @@ pub unsafe extern "C" fn dma_contiguous_reserve(limit: phys_addr_t) -> void __in
 // global one. Requires architecture specific dev_get_cma_area() helper
 // function.
 //
-    struct page *dma_alloc_from_contiguous(struct device *dev, size_t count,
-    unsigned int align, bool no_warn)
-    {
-    if (align > CONFIG_CMA_ALIGNMENT)
+#[no_mangle]
+pub unsafe extern "C" fn dma_alloc_from_contiguous(dev: *mut device, count: size_t, align: c_uint, no_warn: bool) -> *mut c_void {
+    if (align > CONFIG_CMA_ALIGNMENT) {
     align = CONFIG_CMA_ALIGNMENT;
+    }
     return cma_alloc(dev_get_cma_area(dev), count, align, no_warn);
     }
 //
@@ -372,14 +621,13 @@ pub unsafe extern "C" fn dma_contiguous_reserve(limit: phys_addr_t) -> void __in
 // It returns false when provided pages do not belong to contiguous area and
 // true otherwise.
 //
-    bool dma_release_from_contiguous(struct device *dev, struct page *pages,
-    int count)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn dma_release_from_contiguous(dev: *mut device, pages: *mut page, count: c_int) -> bool {
     return cma_release(dev_get_cma_area(dev), pages, count);
     }
-    static struct page *cma_alloc_aligned(struct cma *cma, size_t size, gfp_t gfp)
-    {
-    let mut align: c_uint = min(get_order(size), CONFIG_CMA_ALIGNMENT);
+#[no_mangle]
+pub unsafe extern "C" fn cma_alloc_aligned(cma: *mut cma, size: size_t, gfp: gfp_t) -> *mut c_void {
+pub static mut align: c_uint = 0;
     return cma_alloc(cma, size >> PAGE_SHIFT, align, gfp & __GFP_NOWARN);
     }
 //
@@ -397,31 +645,36 @@ pub unsafe extern "C" fn dma_contiguous_reserve(limit: phys_addr_t) -> void __in
 // there is no need to waste CMA pages for that kind; it also helps reduce
 // fragmentations.
 //
-    struct page *dma_alloc_contiguous(struct device *dev, size_t size, gfp_t gfp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn dma_alloc_contiguous(dev: *mut device, size: size_t, gfp: gfp_t) -> *mut c_void {
 
-    let mut nid: c_int = dev_to_node(dev);
+pub static mut nid: c_int = 0;
 
 // CMA can be used only in the context which permits sleeping
-    if (!gfpflags_allow_blocking(gfp))
+    if (!gfpflags_allow_blocking(gfp)) {
     return core::ptr::null_mut();
-    if (dev.cma_area)
+    }
+    if (dev.cma_area) {
     return cma_alloc_aligned(dev.cma_area, size, gfp);
-    if (size <= PAGE_SIZE)
+    }
+    if (size <= PAGE_SIZE) {
     return core::ptr::null_mut();
+    }
 
     if (nid != NUMA_NO_NODE && !(gfp & (GFP_DMA | GFP_DMA32))) {
-    struct cma *cma = dma_contiguous_numa_area[nid];
-    struct page *page;
+    let mut cma = dma_contiguous_numa_area[nid];
+pub static mut page: *mut c_void = core::ptr::null_mut();
     if (cma) {
     page = cma_alloc_aligned(cma, size, gfp);
-    if (page)
+    if (page) {
     return page;
     }
     }
+    }
 
-    if (!dma_contiguous_default_area)
+    if (!dma_contiguous_default_area) {
     return core::ptr::null_mut();
+    }
     return cma_alloc_aligned(dma_contiguous_default_area, size, gfp);
     }
 //
@@ -437,24 +690,25 @@ pub unsafe extern "C" fn dma_contiguous_reserve(limit: phys_addr_t) -> void __in
 //
 #[no_mangle]
 pub unsafe extern "C" fn dma_free_contiguous(dev: *mut device, page: *mut page, size: usize) {
-    void dma_free_contiguous(struct device *dev, struct page *page, size_t size)
-    {
-    let mut count: c_uint = PAGE_ALIGN(size) >> PAGE_SHIFT;
+pub static mut count: c_uint = 0;
 // if dev has its own cma, free page from there
     if (dev.cma_area) {
-    if (cma_release(dev.cma_area, page, count))
+    if (cma_release(dev.cma_area, page, count)) {
     return;
+    }
     } else {
 //
 // otherwise, page is from either per-numa cma or default cma
 //
 
     if (cma_release(dma_contiguous_numa_area[page_to_nid(page)],
-    page, count))
+    page, count)) {
     return;
+    }
 
-    if (cma_release(dma_contiguous_default_area, page, count))
+    if (cma_release(dma_contiguous_default_area, page, count)) {
     return;
+    }
     }
 // not in any cma, free from buddy
     __free_pages(page, get_order(size));
@@ -465,85 +719,77 @@ pub unsafe extern "C" fn dma_free_contiguous(dev: *mut device, page: *mut page, 
 
 #[no_mangle]
 unsafe extern "C" fn rmem_cma_device_init(rmem: *mut reserved_mem, dev: *mut device) -> c_int {
-    static int rmem_cma_device_init(struct reserved_mem *rmem, struct device *dev)
-    {
     dev.cma_area = rmem.priv;
     return 0;
     }
-    static void rmem_cma_device_release(struct reserved_mem *rmem,
-    struct device *dev)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn rmem_cma_device_release(rmem: *mut reserved_mem, dev: *mut device) {
     dev.cma_area = core::ptr::null_mut();
     }
 #[no_mangle]
-unsafe extern "C" fn __rmem_cma_verify_node(node: c_ulong) -> int __init {
-    static int __init __rmem_cma_verify_node(unsigned long node)
-    {
+unsafe extern "C" fn __rmem_cma_verify_node(node: c_ulong) -> c_int {
     if (!of_get_flat_dt_prop(node, "reusable", core::ptr::null_mut()) ||
-    of_get_flat_dt_prop(node, "no-map", core::ptr::null_mut()))
+    of_get_flat_dt_prop(node, "no-map", core::ptr::null_mut())) {
     return -ENODEV;
+    }
     if (size_cmdline != -1 &&
     of_get_flat_dt_prop(node, "linux,cma-default", core::ptr::null_mut())) {
-    pr_err("Skipping dt linux,cma-default node in favor for \"cma=\" kernel param.\n");
+    pr_err!("Skipping dt linux,cma-default node in favor for \"cma=\" kernel param.\n");
     return -EBUSY;
     }
     return 0;
     }
 #[no_mangle]
-unsafe extern "C" fn rmem_cma_validate(node: c_ulong, align: *mut phys_addr_t) -> int __init {
-    static int __init rmem_cma_validate(unsigned long node, phys_addr_t *align)
-    {
-    let mut ret: c_int = __rmem_cma_verify_node(node);
-    if (ret)
+unsafe extern "C" fn rmem_cma_validate(node: c_ulong, align: *mut phys_addr_t) -> c_int {
+pub static mut ret: c_int = 0;
+    if (ret) {
     return ret;
-    if (align)
+    }
+    if (align) {
 // align = max_t(phys_addr_t, *align, CMA_MIN_ALIGNMENT_BYTES);
+    }
     return 0;
     }
     static int __init rmem_cma_fixup(unsigned long node, phys_addr_t base,
     phys_addr_t size)
     {
-    let mut ret: c_int = __rmem_cma_verify_node(node);
-    if (ret)
+pub static mut ret: c_int = 0;
+    if (ret) {
     return ret;
+    }
 // Architecture specific contiguous memory fixup.
     dma_contiguous_early_fixup(base, size);
     return 0;
     }
 #[no_mangle]
-unsafe extern "C" fn rmem_cma_setup(node: c_ulong, rmem: *mut reserved_mem) -> int __init {
-    static int __init rmem_cma_setup(unsigned long node, struct reserved_mem *rmem)
-    {
-    let mut default_cma: bool = of_get_flat_dt_prop(node, "linux,cma-default", core::ptr::null_mut());
-    struct cma *cma;
-    int ret;
+unsafe extern "C" fn rmem_cma_setup(node: c_ulong, rmem: *mut reserved_mem) -> c_int {
+pub static mut default_cma: bool = false;
+pub static mut cma: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     ret = __rmem_cma_verify_node(node);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     if (!IS_ALIGNED(rmem.base | rmem.size, CMA_MIN_ALIGNMENT_BYTES)) {
-    pr_err("Reserved memory: incorrect alignment of CMA region\n");
+    pr_err!("Reserved memory: incorrect alignment of CMA region\n");
     return -EINVAL;
     }
     ret = cma_init_reserved_mem(rmem.base, rmem.size, 0, rmem.name, &cma);
     if (ret) {
-    pr_err("Reserved memory: unable to setup CMA region\n");
+    pr_err!("Reserved memory: unable to setup CMA region\n");
     return ret;
     }
-    if (default_cma)
+    if (default_cma) {
     dma_contiguous_default_area = cma;
+    }
     rmem.priv = cma;
-    pr_info("Reserved memory: created CMA memory pool at %pa, size %ld MiB\n",
+    pr_info!("Reserved memory: created CMA memory pool at %pa, size %ld MiB\n",
     &rmem.base, (unsigned long)rmem.size / SZ_1M);
     ret = dma_contiguous_insert_area(cma);
-    if (ret)
-    pr_warn("Couldn't store CMA reserved area.");
+    if (ret) {
+    pr_warn!("Couldn't store CMA reserved area.");
+    }
     return 0;
     }
-    static const struct reserved_mem_ops rmem_cma_ops = {
-    .node_validate  = rmem_cma_validate,
-    .node_fixup	= rmem_cma_fixup,
-    .node_init	= rmem_cma_setup,
-    .device_init	= rmem_cma_device_init,
-    .device_release = rmem_cma_device_release,
-    };
+pub static mut reserved_mem_ops: usize = 0;
     RESERVEDMEM_OF_DECLARE(cma, "shared-dma-pool", &rmem_cma_ops);

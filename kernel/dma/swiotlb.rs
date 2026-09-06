@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -85,17 +335,12 @@ pub struct io_tlb_slot {
     static bool swiotlb_force_bounce;
     static bool swiotlb_force_disable;
 
-    static void swiotlb_dyn_alloc(struct work_struct *work);
-    static struct io_tlb_mem io_tlb_default_mem = {
-    .lock = __SPIN_LOCK_UNLOCKED(io_tlb_default_mem.lock),
-    .pools = LIST_HEAD_INIT(io_tlb_default_mem.pools),
-    .dyn_alloc = __WORK_INITIALIZER(io_tlb_default_mem.dyn_alloc,
-    swiotlb_dyn_alloc),
-    };
+// forward_decl: swiotlb_dyn_alloc;
+pub static mut io_tlb_mem: usize = 0;
 
-    static struct io_tlb_mem io_tlb_default_mem;
+pub static mut io_tlb_default_mem: usize = 0;
 
-    let mut default_nslabs: static unsigned long = IO_TLB_DEFAULT_SIZE >> IO_TLB_SHIFT;
+pub static mut default_nslabs: unsigned long = 0;
     static unsigned long default_nareas;
 //
 // struct io_tlb_area - IO TLB memory area descriptor
@@ -127,16 +372,16 @@ pub struct io_tlb_area {
 //
 #[no_mangle]
 unsafe extern "C" fn round_up_default_nslabs() -> bool {
-    static bool round_up_default_nslabs(void)
-    {
-    if (!default_nareas)
+    if (!default_nareas) {
     return false;
-    if (default_nslabs < IO_TLB_SEGSIZE * default_nareas)
+    }
+    if (default_nslabs < IO_TLB_SEGSIZE * default_nareas) {
     default_nslabs = IO_TLB_SEGSIZE * default_nareas;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: is_power_of_2(default_nslabs)) -> else {
-    else if (is_power_of_2(default_nslabs))
+    }
+
+    else if (is_power_of_2(default_nslabs)) {
     return false;
+    }
     default_nslabs = roundup_pow_of_two(default_nslabs);
     return true;
     }
@@ -150,19 +395,19 @@ pub unsafe extern "C" fn if(_arg: is_power_of_2(default_nslabs)) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn swiotlb_adjust_nareas(nareas: c_uint) {
-    static void swiotlb_adjust_nareas(unsigned int nareas)
-    {
-    if (!nareas)
+    if (!nareas) {
     nareas = 1;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !is_power_of_2(nareas)) -> else {
-    else if (!is_power_of_2(nareas))
+    }
+
+    else if (!is_power_of_2(nareas)) {
     nareas = roundup_pow_of_two(nareas);
+    }
     default_nareas = nareas;
-    pr_info("area num %d.\n", nareas);
-    if (round_up_default_nslabs())
-    pr_info("SWIOTLB bounce buffer size roundup to %luMB",
+    pr_info!("area num %d.\n", nareas);
+    if (round_up_default_nslabs()) {
+    pr_info!("SWIOTLB bounce buffer size roundup to %luMB",
     (default_nslabs << IO_TLB_SHIFT) >> 20);
+    }
     }
 //
 // limit_nareas() - get the maximum number of areas for a given memory pool size
@@ -176,10 +421,9 @@ pub unsafe extern "C" fn if(_arg: !is_power_of_2(nareas)) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn limit_nareas(nareas: c_uint, nslots: c_ulong) -> c_uint {
-    static unsigned int limit_nareas(unsigned int nareas, unsigned long nslots)
-    {
-    if (nslots < nareas * IO_TLB_SEGSIZE)
+    if (nslots < nareas * IO_TLB_SEGSIZE) {
     return nslots / IO_TLB_SEGSIZE;
+    }
     return nareas;
     }
 
@@ -187,52 +431,47 @@ unsafe extern "C" fn limit_nareas(nareas: c_uint, nslots: c_ulong) -> c_uint {
 // Track the total used slots with a global atomic value in order to have
 // correct information to determine the high water mark.
 //
-    static void inc_used_and_hiwater_real(struct io_tlb_mem *mem,
-    unsigned int nslots)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn inc_used_and_hiwater_real(mem: *mut io_tlb_mem, nslots: c_uint) {
     unsigned long old_hiwater, new_used;
     new_used = atomic_long_add_return(nslots, &mem.total_used);
     old_hiwater = atomic_long_read(&mem.used_hiwater);
     do {
-    if (new_used <= old_hiwater)
+    if (new_used <= old_hiwater) {
     break;
+    }
     } while (!atomic_long_try_cmpxchg(&mem.used_hiwater,
     &old_hiwater, new_used));
     }
 #[no_mangle]
 unsafe extern "C" fn dec_used_real(mem: *mut io_tlb_mem, nslots: c_uint) {
-    static void dec_used_real(struct io_tlb_mem *mem, unsigned int nslots)
-    {
     atomic_long_sub(nslots, &mem.total_used);
     }
-    static void inc_used_and_hiwater_nop(struct io_tlb_mem *mem,
-    unsigned int nslots)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn inc_used_and_hiwater_nop(mem: *mut io_tlb_mem, nslots: c_uint) {
     }
 #[no_mangle]
 unsafe extern "C" fn dec_used_nop(mem: *mut io_tlb_mem, nslots: c_uint) {
-    static void dec_used_nop(struct io_tlb_mem *mem, unsigned int nslots)
-    {
     }
-    DEFINE_STATIC_CALL(swiotlb_inc_used, inc_used_and_hiwater_nop);
-    DEFINE_STATIC_CALL(swiotlb_dec_used, dec_used_nop);
-    static __always_inline void inc_used_and_hiwater(struct io_tlb_mem *mem,
+pub static mut swiotlb_inc_used: usize = 0;
+pub static mut swiotlb_dec_used: usize = 0;
+    static __always_inline void inc_used_and_hiwater(io_tlb_mem *mem,
     unsigned int nslots)
     {
     static_call(swiotlb_inc_used)(mem, nslots);
     }
-    static __always_inline void dec_used(struct io_tlb_mem *mem,
+    static __always_inline void dec_used(io_tlb_mem *mem,
     unsigned int nslots)
     {
     static_call(swiotlb_dec_used)(mem, nslots);
     }
-    static bool track_hiwater_enabled __read_mostly;
+    static bool track_hiwater_enabled ;
 
-    static __always_inline void inc_used_and_hiwater(struct io_tlb_mem *mem,
+    static __always_inline void inc_used_and_hiwater(io_tlb_mem *mem,
     unsigned int nslots)
     {
     }
-    static __always_inline void dec_used(struct io_tlb_mem *mem,
+    static __always_inline void dec_used(io_tlb_mem *mem,
     unsigned int nslots)
     {
     }
@@ -251,12 +490,15 @@ unsafe extern "C" fn dec_used_nop(mem: *mut io_tlb_mem, nslots: c_uint) {
     default_nslabs =
     ALIGN(simple_strtoul(str, &str, 0), IO_TLB_SEGSIZE);
     }
-    if (*str == ',')
-    ++str;
-    if (isdigit(*str))
+    if (*str == ',') {
+    str += 1;
+    }
+    if (isdigit(*str)) {
     swiotlb_adjust_nareas(simple_strtoul(str, &str, 0));
-    if (*str == ',')
-    ++str;
+    }
+    if (*str == ',') {
+    str += 1;
+    }
     if (!strncmp(str, "force", 5)) {
     swiotlb_force_bounce = true;
     str += 5;
@@ -265,8 +507,9 @@ unsafe extern "C" fn dec_used_nop(mem: *mut io_tlb_mem, nslots: c_uint) {
     str += 7;
     }
 
-    if (*str == ',')
-    ++str;
+    if (*str == ',') {
+    str += 1;
+    }
     if (!strncmp(str, "track_hiwater", 13)) {
     track_hiwater_enabled = true;
     static_call_update(swiotlb_inc_used,
@@ -276,64 +519,54 @@ unsafe extern "C" fn dec_used_nop(mem: *mut io_tlb_mem, nslots: c_uint) {
 
     return 0;
     }
-    early_param("swiotlb", setup_io_tlb_npages);
+    early_param!("swiotlb", setup_io_tlb_npages);
 #[no_mangle]
 pub unsafe extern "C" fn swiotlb_size_or_default() -> c_ulong {
-    unsigned long swiotlb_size_or_default(void)
-    {
     return default_nslabs << IO_TLB_SHIFT;
     }
 #[no_mangle]
-pub unsafe extern "C" fn swiotlb_adjust_size(size: c_ulong) -> void __init {
-    void __init swiotlb_adjust_size(unsigned long size)
-    {
+pub unsafe extern "C" fn swiotlb_adjust_size(size: c_ulong)  {
 //
 // If swiotlb parameter has not been specified, give a chance to
 // architectures such as those supporting memory encryption to
 // adjust/expand SWIOTLB size for their use.
 //
-    if (default_nslabs != IO_TLB_DEFAULT_SIZE >> IO_TLB_SHIFT)
+    if (default_nslabs != IO_TLB_DEFAULT_SIZE >> IO_TLB_SHIFT) {
     return;
+    }
     size = ALIGN(size, IO_TLB_SIZE);
     default_nslabs = ALIGN(size >> IO_TLB_SHIFT, IO_TLB_SEGSIZE);
-    if (round_up_default_nslabs())
+    if (round_up_default_nslabs()) {
     size = default_nslabs << IO_TLB_SHIFT;
-    pr_info("SWIOTLB bounce buffer size adjusted to %luMB", size >> 20);
+    }
+    pr_info!("SWIOTLB bounce buffer size adjusted to %luMB", size >> 20);
     }
 #[no_mangle]
 pub unsafe extern "C" fn swiotlb_print_info() {
-    void swiotlb_print_info(void)
-    {
-    struct io_tlb_pool *mem = &io_tlb_default_mem.defpool;
+    let mut mem = &io_tlb_default_mem.defpool;
     if (!mem.nslabs) {
-    pr_warn("No low mem\n");
+    pr_warn!("No low mem\n");
     return;
     }
-    pr_info("mapped [mem %pa-%pa] (%luMB)\n", &mem.start, &mem.end,
+    pr_info!("mapped [mem %pa-%pa] (%luMB)\n", &mem.start, &mem.end,
     (mem.nslabs << IO_TLB_SHIFT) >> 20);
     }
 #[no_mangle]
 pub unsafe extern "C" fn io_tlb_offset(val: c_ulong) -> c_ulong {
-    static inline unsigned long io_tlb_offset(unsigned long val)
-    {
     return val & (IO_TLB_SEGSIZE - 1);
     }
 #[no_mangle]
 pub unsafe extern "C" fn nr_slots(val: u64) -> c_ulong {
-    static inline unsigned long nr_slots(u64 val)
-    {
     return DIV_ROUND_UP(val, IO_TLB_SIZE);
     }
 #[no_mangle]
 unsafe extern "C" fn swiotlb_mark_pool_used(pool: *mut io_tlb_pool) {
-    static void swiotlb_mark_pool_used(struct io_tlb_pool *pool)
-    {
-    unsigned long i;
-    for (i = 0; i < pool.nareas; i++) {
+    let mut i = 0;
+    while (i < pool.nareas) {
     pool.areas[i].index = 0;
     pool.areas[i].used = pool.area_nslabs;
     }
-    for (i = 0; i < pool.nslabs; i++) {
+    while (i < pool.nslabs) {
     pool.slots[i].list = 0;
     pool.slots[i].orig_addr = INVALID_PHYS_ADDR;
     pool.slots[i].alloc_size = 0;
@@ -347,49 +580,48 @@ unsafe extern "C" fn swiotlb_mark_pool_used(pool: *mut io_tlb_pool) {
 // before the SWIOTLB memory is used.
 //
 #[no_mangle]
-pub unsafe extern "C" fn swiotlb_update_mem_attributes() -> void __init {
-    void __init swiotlb_update_mem_attributes(void)
-    {
-    struct io_tlb_pool *mem = &io_tlb_default_mem.defpool;
-    unsigned long bytes;
+pub unsafe extern "C" fn swiotlb_update_mem_attributes()  {
+    let mut mem = &io_tlb_default_mem.defpool;
+    let mut bytes = 0;
 //
 // if platform support memory encryption, swiotlb buffers are
 // shared by default.
 //
-    if (cc_platform_has(CC_ATTR_MEM_ENCRYPT))
+    if (cc_platform_has(CC_ATTR_MEM_ENCRYPT)) {
     io_tlb_default_mem.cc_shared = true;
-    else
+    }
+    else {
     io_tlb_default_mem.cc_shared = false;
-    if (!mem.nslabs || mem.late_alloc)
+    }
+    if (!mem.nslabs || mem.late_alloc) {
     return;
+    }
     bytes = PAGE_ALIGN(mem.nslabs << IO_TLB_SHIFT);
     if (io_tlb_default_mem.cc_shared) {
-    int ret;
+    let mut ret = 0;
     ret = set_memory_decrypted((unsigned long)mem.vaddr,
     bytes >> PAGE_SHIFT);
     if (ret) {
-    pr_warn("Failed to decrypt default memory pool, disabling it\n");
+    pr_warn!("Failed to decrypt default memory pool, disabling it\n");
     swiotlb_mark_pool_used(mem);
     }
     }
     }
-    static void swiotlb_init_io_tlb_pool(struct io_tlb_pool *mem, phys_addr_t start,
-    void *vaddr, unsigned long nslabs, bool late_alloc,
-    unsigned int nareas)
-    {
-    let mut bytes: c_ulong = nslabs << IO_TLB_SHIFT, i;
+#[no_mangle]
+pub unsafe extern "C" fn swiotlb_init_io_tlb_pool(mem: *mut io_tlb_pool, start: phys_addr_t, vaddr: *mut c_void, nslabs: c_ulong, late_alloc: bool, nareas: c_uint) {
+pub static mut bytes: c_ulong = 0;
     mem.nslabs = nslabs;
     mem.start = start;
     mem.end = mem.start + bytes;
     mem.late_alloc = late_alloc;
     mem.nareas = nareas;
     mem.area_nslabs = nslabs / mem.nareas;
-    for (i = 0; i < mem.nareas; i++) {
+    while (i < mem.nareas) {
     spin_lock_init(&mem.areas[i].lock);
     mem.areas[i].index = 0;
     mem.areas[i].used = 0;
     }
-    for (i = 0; i < mem.nslabs; i++) {
+    while (i < mem.nslabs) {
     mem.slots[i].list = min(IO_TLB_SEGSIZE - io_tlb_offset(i),
     mem.nslabs - i);
     mem.slots[i].orig_addr = INVALID_PHYS_ADDR;
@@ -407,8 +639,6 @@ pub unsafe extern "C" fn swiotlb_update_mem_attributes() -> void __init {
 //
 #[no_mangle]
 unsafe extern "C" fn add_mem_pool(mem: *mut io_tlb_mem, pool: *mut io_tlb_pool) {
-    static void add_mem_pool(struct io_tlb_mem *mem, struct io_tlb_pool *pool)
-    {
 
     spin_lock(&mem.lock);
     list_add_rcu(&pool.node, &mem.pools);
@@ -422,25 +652,27 @@ unsafe extern "C" fn add_mem_pool(mem: *mut io_tlb_mem, pool: *mut io_tlb_pool) 
     unsigned int flags,
     int (*remap)(void *tlb, unsigned long nslabs))
     {
-    let mut bytes: usize = PAGE_ALIGN(nslabs << IO_TLB_SHIFT);
-    void *tlb;
+pub static mut bytes: usize = 0;
+pub static mut tlb: *mut c_void = core::ptr::null_mut();
 //
 // By default allocate the bounce buffer memory from low memory, but
 // allow to pick a location everywhere for hypervisors with guest
 // memory encryption.
 //
-    if (flags & SWIOTLB_ANY)
+    if (flags & SWIOTLB_ANY) {
     tlb = memblock_alloc(bytes, PAGE_SIZE);
-    else
+    }
+    else {
     tlb = memblock_alloc_low(bytes, PAGE_SIZE);
+    }
     if (!tlb) {
-    pr_warn("%s: Failed to allocate %zu bytes tlb structure\n",
+    pr_warn!("%s: Failed to allocate %zu bytes tlb structure\n",
     __func__, bytes);
     return core::ptr::null_mut();
     }
     if (remap && remap(tlb, nslabs) < 0) {
     memblock_free(tlb, PAGE_ALIGN(bytes));
-    pr_warn("%s: Failed to remap %zu bytes\n", __func__, bytes);
+    pr_warn!("%s: Failed to remap %zu bytes\n", __func__, bytes);
     return core::ptr::null_mut();
     }
     return tlb;
@@ -452,61 +684,67 @@ unsafe extern "C" fn add_mem_pool(mem: *mut io_tlb_mem, pool: *mut io_tlb_pool) 
     void __init swiotlb_init_remap(bool addressing_limit, unsigned int flags,
     int (*remap)(void *tlb, unsigned long nslabs))
     {
-    struct io_tlb_pool *mem = &io_tlb_default_mem.defpool;
-    unsigned long nslabs;
-    unsigned int nareas;
-    size_t alloc_size;
-    void *tlb;
-    if (!addressing_limit && !swiotlb_force_bounce)
+    let mut mem = &io_tlb_default_mem.defpool;
+    let mut nslabs = 0;
+    let mut nareas = 0;
+    let mut alloc_size = 0;
+pub static mut tlb: *mut c_void = core::ptr::null_mut();
+    if (!addressing_limit && !swiotlb_force_bounce) {
     return;
-    if (swiotlb_force_disable)
+    }
+    if (swiotlb_force_disable) {
     return;
+    }
     io_tlb_default_mem.force_bounce = swiotlb_force_bounce;
 
-    if (!remap)
+    if (!remap) {
     io_tlb_default_mem.can_grow = true;
-    if (flags & SWIOTLB_ANY)
+    }
+    if (flags & SWIOTLB_ANY) {
     io_tlb_default_mem.phys_limit = virt_to_phys(high_memory - 1);
-    else
+    }
+    else {
     io_tlb_default_mem.phys_limit = ARCH_LOW_ADDRESS_LIMIT;
+    }
 
-    if (!default_nareas)
+    if (!default_nareas) {
     swiotlb_adjust_nareas(num_possible_cpus());
+    }
     nslabs = default_nslabs;
     nareas = limit_nareas(default_nareas, nslabs);
     while ((tlb = swiotlb_memblock_alloc(nslabs, flags, remap)) == core::ptr::null_mut()) {
-    if (nslabs <= IO_TLB_MIN_SLABS)
+    if (nslabs <= IO_TLB_MIN_SLABS) {
     return;
+    }
     nslabs = ALIGN(nslabs >> 1, IO_TLB_SEGSIZE);
     nareas = limit_nareas(nareas, nslabs);
     }
     if (default_nslabs != nslabs) {
-    pr_info("SWIOTLB bounce buffer size adjusted %lu . %lu slabs",
+    pr_info!("SWIOTLB bounce buffer size adjusted %lu . %lu slabs",
     default_nslabs, nslabs);
     default_nslabs = nslabs;
     }
-    alloc_size = PAGE_ALIGN(array_size(sizeof(*mem.slots), nslabs));
+    alloc_size = PAGE_ALIGN(array_size(sizeof!(*mem.slots), nslabs));
     mem.slots = memblock_alloc(alloc_size, PAGE_SIZE);
     if (!mem.slots) {
-    pr_warn("%s: Failed to allocate %zu bytes align=0x%lx\n",
+    pr_warn!("%s: Failed to allocate %zu bytes align=0x%lx\n",
     __func__, alloc_size, PAGE_SIZE);
     return;
     }
-    mem.areas = memblock_alloc(array_size(sizeof(struct io_tlb_area),
+    mem.areas = memblock_alloc(array_size(sizeof!(io_tlb_area),
     nareas), SMP_CACHE_BYTES);
     if (!mem.areas) {
-    pr_warn("%s: Failed to allocate mem.areas.\n", __func__);
+    pr_warn!("%s: Failed to allocate mem.areas.\n", __func__);
     return;
     }
     swiotlb_init_io_tlb_pool(mem, __pa(tlb), tlb, nslabs, false, nareas);
     add_mem_pool(&io_tlb_default_mem, mem);
-    if (flags & SWIOTLB_VERBOSE)
+    if (flags & SWIOTLB_VERBOSE) {
     swiotlb_print_info();
     }
+    }
 #[no_mangle]
-pub unsafe extern "C" fn swiotlb_init(addressing_limit: bool, flags: c_uint) -> void __init {
-    void __init swiotlb_init(bool addressing_limit, unsigned int flags)
-    {
+pub unsafe extern "C" fn swiotlb_init(addressing_limit: bool, flags: c_uint)  {
     swiotlb_init_remap(addressing_limit, flags, core::ptr::null_mut());
     }
 //
@@ -514,82 +752,95 @@ pub unsafe extern "C" fn swiotlb_init(addressing_limit: bool, flags: c_uint) -> 
 // initialize the swiotlb later using the slab allocator if needed.
 // This should be just like above, but with some error catching.
 //
-    int swiotlb_init_late(size_t size, gfp_t gfp_mask,
-    int (*remap)(void *tlb, unsigned long nslabs))
-    {
-    struct io_tlb_pool *mem = &io_tlb_default_mem.defpool;
-    let mut nslabs: c_ulong = ALIGN(size >> IO_TLB_SHIFT, IO_TLB_SEGSIZE);
-    unsigned int order, area_order, slot_order;
-    let mut leak_pages: bool = false;
-    unsigned int nareas;
-    unsigned char *vstart = core::ptr::null_mut();
-    let mut retried: bool = false;
-    let mut rc: c_int = 0;
-    if (io_tlb_default_mem.nslabs)
+#[no_mangle]
+pub unsafe extern "C" fn swiotlb_init_late(size: size_t, gfp_mask: gfp_t, tlb: *mut *mut int (remap)(void) -> c_int {
+    let mut mem = &io_tlb_default_mem.defpool;
+pub static mut nslabs: c_ulong = 0;
+    let mut order = 0;
+    let mut area_order = 0;
+    let mut slot_order = 0;
+pub static mut leak_pages: bool = false;
+    let mut nareas = 0;
+    let mut vstart = core::ptr::null_mut();
+pub static mut retried: bool = false;
+pub static mut rc: c_int = 0;
+    if (io_tlb_default_mem.nslabs) {
     return 0;
-    if (swiotlb_force_disable)
+    }
+    if (swiotlb_force_disable) {
     return 0;
+    }
     io_tlb_default_mem.force_bounce = swiotlb_force_bounce;
 
-    if (!remap)
+    if (!remap) {
     io_tlb_default_mem.can_grow = true;
-    if (IS_ENABLED(CONFIG_ZONE_DMA) && (gfp_mask & __GFP_DMA))
+    }
+    if (IS_ENABLED!(CONFIG_ZONE_DMA) && (gfp_mask & __GFP_DMA)) {
     io_tlb_default_mem.phys_limit = zone_dma_limit;
-#[no_mangle]
-pub unsafe extern "C" fn if(__GFP_DMA32): IS_ENABLED(CONFIG_ZONE_DMA32) && (gfp_mask &) -> else {
-    else if (IS_ENABLED(CONFIG_ZONE_DMA32) && (gfp_mask & __GFP_DMA32))
-    io_tlb_default_mem.phys_limit = max(DMA_BIT_MASK(32), zone_dma_limit);
-    else
-    io_tlb_default_mem.phys_limit = virt_to_phys(high_memory - 1);
+    }
 
-    if (!default_nareas)
+    else if (IS_ENABLED!(CONFIG_ZONE_DMA32) && (gfp_mask & __GFP_DMA32)) {
+    io_tlb_default_mem.phys_limit = max(DMA_BIT_MASK(32), zone_dma_limit);
+    }
+    else {
+    io_tlb_default_mem.phys_limit = virt_to_phys(high_memory - 1);
+    }
+
+    if (!default_nareas) {
     swiotlb_adjust_nareas(num_possible_cpus());
-    retry:
+    }
+// label;
     order = get_order(nslabs << IO_TLB_SHIFT);
     nslabs = SLABS_PER_PAGE << order;
     while ((SLABS_PER_PAGE << order) > IO_TLB_MIN_SLABS) {
-    vstart = (void *)__get_free_pages(gfp_mask | __GFP_NOWARN,
+    vstart = __get_free_pages(gfp_mask | __GFP_NOWARN,
     order);
-    if (vstart)
+    if (vstart) {
     break;
-    order--;
+    }
+    order -= 1;
     nslabs = SLABS_PER_PAGE << order;
     retried = true;
     }
-    if (!vstart)
+    if (!vstart) {
     return -ENOMEM;
-    if (remap)
+    }
+    if (remap) {
     rc = remap(vstart, nslabs);
+    }
     if (rc) {
     free_pages((unsigned long)vstart, order);
     nslabs = ALIGN(nslabs >> 1, IO_TLB_SEGSIZE);
-    if (nslabs < IO_TLB_MIN_SLABS)
+    if (nslabs < IO_TLB_MIN_SLABS) {
     return rc;
+    }
     retried = true;
-    goto retry;
+// goto;
     }
     if (retried) {
-    pr_warn("only able to allocate %ld MB\n",
+    pr_warn!("only able to allocate %ld MB\n",
     (PAGE_SIZE << order) >> 20);
     }
     rc = -ENOMEM;
     nareas = limit_nareas(default_nareas, nslabs);
-    area_order = get_order(array_size(sizeof(*mem.areas), nareas));
-    mem.areas = (struct io_tlb_area *)
+    area_order = get_order(array_size(sizeof!(*mem.areas), nareas));
+    mem.areas = 
     __get_free_pages(GFP_KERNEL | __GFP_ZERO, area_order);
-    if (!mem.areas)
-    goto error_area;
-    slot_order = get_order(array_size(sizeof(*mem.slots), nslabs));
-    mem.slots = (void *)__get_free_pages(GFP_KERNEL | __GFP_ZERO,
+    if (!mem.areas) {
+// goto;
+    }
+    slot_order = get_order(array_size(sizeof!(*mem.slots), nslabs));
+    mem.slots = __get_free_pages(GFP_KERNEL | __GFP_ZERO,
     slot_order);
-    if (!mem.slots)
-    goto error_slots;
+    if (!mem.slots) {
+// goto;
+    }
     if (io_tlb_default_mem.cc_shared) {
     rc = set_memory_decrypted((unsigned long)vstart,
     (nslabs << IO_TLB_SHIFT) >> PAGE_SHIFT);
     if (rc) {
     leak_pages = true;
-    goto error_decrypt;
+// goto;
     }
     }
     swiotlb_init_io_tlb_pool(mem, virt_to_phys(vstart), vstart, nslabs, true,
@@ -597,51 +848,55 @@ pub unsafe extern "C" fn if(__GFP_DMA32): IS_ENABLED(CONFIG_ZONE_DMA32) && (gfp_
     add_mem_pool(&io_tlb_default_mem, mem);
     swiotlb_print_info();
     return 0;
-    error_decrypt:
+// label;
     free_pages((unsigned long)mem.slots, slot_order);
-    error_slots:
+// label;
     free_pages((unsigned long)mem.areas, area_order);
-    error_area:
-    if (!leak_pages)
+// label;
+    if (!leak_pages) {
     free_pages((unsigned long)vstart, order);
+    }
     return rc;
     }
 #[no_mangle]
-pub unsafe extern "C" fn swiotlb_exit() -> void __init {
-    void __init swiotlb_exit(void)
-    {
-    struct io_tlb_pool *mem = &io_tlb_default_mem.defpool;
-    let mut leak_pages: bool = false;
-    unsigned long tbl_vaddr;
+pub unsafe extern "C" fn swiotlb_exit()  {
+    let mut mem = &io_tlb_default_mem.defpool;
+pub static mut leak_pages: bool = false;
+    let mut tbl_vaddr = 0;
     size_t tbl_size, slots_size;
-    unsigned int area_order;
-    if (swiotlb_force_bounce)
+    let mut area_order = 0;
+    if (swiotlb_force_bounce) {
     return;
-    if (!mem.nslabs)
+    }
+    if (!mem.nslabs) {
     return;
-    pr_info("tearing down default memory pool\n");
+    }
+    pr_info!("tearing down default memory pool\n");
     tbl_vaddr = (unsigned long)phys_to_virt(mem.start);
     tbl_size = PAGE_ALIGN(mem.end - mem.start);
-    slots_size = PAGE_ALIGN(array_size(sizeof(*mem.slots), mem.nslabs));
+    slots_size = PAGE_ALIGN(array_size(sizeof!(*mem.slots), mem.nslabs));
     if (io_tlb_default_mem.cc_shared) {
-    if (set_memory_encrypted(tbl_vaddr, tbl_size >> PAGE_SHIFT))
+    if (set_memory_encrypted(tbl_vaddr, tbl_size >> PAGE_SHIFT)) {
     leak_pages = true;
     }
+    }
     if (mem.late_alloc) {
-    area_order = get_order(array_size(sizeof(*mem.areas),
+    area_order = get_order(array_size(sizeof!(*mem.areas),
     mem.nareas));
     free_pages((unsigned long)mem.areas, area_order);
-    if (!leak_pages)
+    if (!leak_pages) {
     free_pages(tbl_vaddr, get_order(tbl_size));
+    }
     free_pages((unsigned long)mem.slots, get_order(slots_size));
     } else {
     memblock_free(mem.areas,
-    array_size(sizeof(*mem.areas), mem.nareas));
-    if (!leak_pages)
+    array_size(sizeof!(*mem.areas), mem.nareas));
+    if (!leak_pages) {
     memblock_phys_free(mem.start, tbl_size);
+    }
     memblock_free(mem.slots, slots_size);
     }
-    memset(mem, 0, sizeof(*mem));
+    memset(mem, 0, sizeof!(*mem));
     }
 
 //
@@ -657,30 +912,32 @@ pub unsafe extern "C" fn swiotlb_exit() -> void __init {
 // Return: Decrypted pages, %NULL on allocation failure, or ERR_PTR(-EAGAIN)
 // if the allocated physical address was above @phys_limit.
 //
-    static struct page *alloc_dma_pages(gfp_t gfp, size_t bytes,
-    u64 phys_limit, unsigned long attrs)
-    {
-    let mut order: c_uint = get_order(bytes);
-    let mut cc_shared: bool = attrs & __DMA_ATTR_ALLOC_CC_SHARED;
-    struct page *page;
-    phys_addr_t paddr;
-    void *vaddr;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_dma_pages(gfp: gfp_t, bytes: size_t, phys_limit: u64, attrs: c_ulong) -> *mut c_void {
+pub static mut order: c_uint = 0;
+pub static mut cc_shared: bool = false;
+pub static mut page: *mut c_void = core::ptr::null_mut();
+    let mut paddr;
+pub static mut vaddr: *mut c_void = core::ptr::null_mut();
     page = alloc_pages(gfp, order);
-    if (!page)
+    if (!page) {
     return core::ptr::null_mut();
+    }
     paddr = page_to_phys(page);
     if (paddr + bytes - 1 > phys_limit) {
     __free_pages(page, order);
     return ERR_PTR(-EAGAIN);
     }
     vaddr = phys_to_virt(paddr);
-    if (cc_shared && set_memory_decrypted((unsigned long)vaddr, PFN_UP(bytes)))
-    goto error;
+    if (cc_shared && set_memory_decrypted((unsigned long)vaddr, PFN_UP(bytes))) {
+// goto;
+    }
     return page;
-    error:
+// label;
 // Intentional leak if pages cannot be encrypted again.
-    if (cc_shared && !set_memory_encrypted((unsigned long)vaddr, PFN_UP(bytes)))
+    if (cc_shared && !set_memory_encrypted((unsigned long)vaddr, PFN_UP(bytes))) {
     __free_pages(page, order);
+    }
     return core::ptr::null_mut();
     }
 //
@@ -694,43 +951,47 @@ pub unsafe extern "C" fn swiotlb_exit() -> void __init {
 //
 // Return: Allocated pages, or %NULL on allocation failure.
 //
-    static struct page *swiotlb_alloc_tlb(struct device *dev,
-    struct io_tlb_mem *mem, size_t bytes,
-    u64 phys_limit, gfp_t gfp, void **vaddr)
-    {
-    struct page *page;
-    let mut attrs: c_ulong = mem.cc_shared ? __DMA_ATTR_ALLOC_CC_SHARED : 0;
+#[no_mangle]
+pub unsafe extern "C" fn swiotlb_alloc_tlb(dev: *mut device, mem: *mut io_tlb_mem, bytes: size_t, phys_limit: u64, gfp: gfp_t, vaddr: *mut *mut c_void) -> *mut c_void {
+pub static mut page: *mut c_void = core::ptr::null_mut();
+pub static mut attrs: c_ulong = 0;
 // vaddr = NULL;
 //
 // Allocate from the atomic pools if memory is encrypted and
 // the allocation is atomic, because decrypting may block.
 //
     if (!gfpflags_allow_blocking(gfp) && dev && mem.cc_shared) {
-    if (!IS_ENABLED(CONFIG_DMA_COHERENT_POOL))
+    if (!IS_ENABLED!(CONFIG_DMA_COHERENT_POOL)) {
     return core::ptr::null_mut();
+    }
     return dma_alloc_from_pool(dev, bytes, vaddr, gfp,
     attrs, dma_coherent_ok);
     }
     gfp &= ~GFP_ZONEMASK;
-    if (phys_limit <= zone_dma_limit)
+    if (phys_limit <= zone_dma_limit) {
     gfp |= __GFP_DMA;
-#[no_mangle]
-pub unsafe extern "C" fn if(DMA_BIT_MASK(32): phys_limit <=) -> else {
-    else if (phys_limit <= DMA_BIT_MASK(32))
+    }
+
+    else if (phys_limit <= DMA_BIT_MASK(32)) {
     gfp |= __GFP_DMA32;
+    }
     while (IS_ERR(page = alloc_dma_pages(gfp, bytes, phys_limit, attrs))) {
-    if (IS_ENABLED(CONFIG_ZONE_DMA32) &&
+    if (IS_ENABLED!(CONFIG_ZONE_DMA32) &&
     phys_limit < DMA_BIT_MASK(64) &&
-    !(gfp & (__GFP_DMA32 | __GFP_DMA)))
+    !(gfp & (__GFP_DMA32 | __GFP_DMA))) {
     gfp |= __GFP_DMA32;
-    else if (IS_ENABLED(CONFIG_ZONE_DMA) &&
-    !(gfp & __GFP_DMA))
+    }
+    else if (IS_ENABLED!(CONFIG_ZONE_DMA) &&
+    !(gfp & __GFP_DMA)) {
     gfp = (gfp & ~__GFP_DMA32) | __GFP_DMA;
-    else
+    }
+    else {
     return core::ptr::null_mut();
     }
-    if (page)
+    }
+    if (page) {
 // vaddr = phys_to_virt(page_to_phys(page));
+    }
     return page;
     }
 //
@@ -742,15 +1003,15 @@ pub unsafe extern "C" fn if(DMA_BIT_MASK(32): phys_limit <=) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn swiotlb_free_tlb(vaddr: *mut c_void, bytes: usize, cc_shared: bool) {
-    static void swiotlb_free_tlb(void *vaddr, size_t bytes, bool cc_shared)
-    {
-    if (IS_ENABLED(CONFIG_DMA_COHERENT_POOL) &&
-    dma_free_from_pool(core::ptr::null_mut(), vaddr, bytes))
+    if (IS_ENABLED!(CONFIG_DMA_COHERENT_POOL) &&
+    dma_free_from_pool(core::ptr::null_mut(), vaddr, bytes)) {
     return;
+    }
 // Intentional leak if pages cannot be encrypted again.
     if (!cc_shared ||
-    !set_memory_encrypted((unsigned long)vaddr, PFN_UP(bytes)))
+    !set_memory_encrypted((unsigned long)vaddr, PFN_UP(bytes))) {
     __free_pages(virt_to_page(vaddr), get_order(bytes));
+    }
     }
 //
 // swiotlb_alloc_pool() - allocate a new IO TLB memory pool
@@ -768,49 +1029,49 @@ unsafe extern "C" fn swiotlb_free_tlb(vaddr: *mut c_void, bytes: usize, cc_share
 //
 // Return: New memory pool, or %NULL on allocation failure.
 //
-    static struct io_tlb_pool *swiotlb_alloc_pool(struct device *dev,
-    struct io_tlb_mem *mem, unsigned long minslabs,
-    unsigned long nslabs, unsigned int nareas, u64 phys_limit,
-    gfp_t gfp)
-    {
-    struct io_tlb_pool *pool;
-    unsigned int slot_order;
-    void *tlb_vaddr;
-    struct page *tlb;
-    size_t pool_size;
-    size_t tlb_size;
+#[no_mangle]
+pub unsafe extern "C" fn swiotlb_alloc_pool(dev: *mut device, mem: *mut io_tlb_mem, minslabs: c_ulong, nslabs: c_ulong, nareas: c_uint, phys_limit: u64, gfp: gfp_t) -> *mut c_void {
+pub static mut pool: *mut c_void = core::ptr::null_mut();
+    let mut slot_order = 0;
+pub static mut tlb_vaddr: *mut c_void = core::ptr::null_mut();
+pub static mut tlb: *mut c_void = core::ptr::null_mut();
+    let mut pool_size = 0;
+    let mut tlb_size = 0;
     if (nslabs > SLABS_PER_PAGE << MAX_PAGE_ORDER) {
     nslabs = SLABS_PER_PAGE << MAX_PAGE_ORDER;
     nareas = limit_nareas(nareas, nslabs);
     }
-    pool_size = sizeof(*pool) + array_size(sizeof(*pool.areas), nareas);
+    pool_size = sizeof!(*pool) + array_size(sizeof!(*pool.areas), nareas);
     pool = kzalloc(pool_size, gfp);
-    if (!pool)
-    goto error;
-    pool.areas = (void *)pool + sizeof(*pool);
+    if (!pool) {
+// goto;
+    }
+    pool.areas = pool + sizeof!(*pool);
     pool.cc_shared = mem.cc_shared;
     tlb_size = nslabs << IO_TLB_SHIFT;
     while (!(tlb = swiotlb_alloc_tlb(dev, mem, tlb_size,
     phys_limit, gfp, &tlb_vaddr))) {
-    if (nslabs <= minslabs)
-    goto error_tlb;
+    if (nslabs <= minslabs) {
+// goto;
+    }
     nslabs = ALIGN(nslabs >> 1, IO_TLB_SEGSIZE);
     nareas = limit_nareas(nareas, nslabs);
     tlb_size = nslabs << IO_TLB_SHIFT;
     }
-    slot_order = get_order(array_size(sizeof(*pool.slots), nslabs));
-    pool.slots = (struct io_tlb_slot *)
+    slot_order = get_order(array_size(sizeof!(*pool.slots), nslabs));
+    pool.slots = 
     __get_free_pages(gfp, slot_order);
-    if (!pool.slots)
-    goto error_slots;
+    if (!pool.slots) {
+// goto;
+    }
     swiotlb_init_io_tlb_pool(pool, page_to_phys(tlb), tlb_vaddr, nslabs,
     true, nareas);
     return pool;
-    error_slots:
+// label;
     swiotlb_free_tlb(tlb_vaddr, tlb_size, mem.cc_shared);
-    error_tlb:
+// label;
     kfree(pool);
-    error:
+// label;
     return core::ptr::null_mut();
     }
 //
@@ -819,11 +1080,8 @@ unsafe extern "C" fn swiotlb_free_tlb(vaddr: *mut c_void, bytes: usize, cc_share
 //
 #[no_mangle]
 unsafe extern "C" fn swiotlb_dyn_alloc(work: *mut work_struct) {
-    static void swiotlb_dyn_alloc(struct work_struct *work)
-    {
-    struct io_tlb_mem *mem =
-    container_of(work, struct io_tlb_mem, dyn_alloc);
-    struct io_tlb_pool *pool;
+    let mut mem = container_of!(work, io_tlb_mem, dyn_alloc);
+pub static mut pool: *mut c_void = core::ptr::null_mut();
     pool = swiotlb_alloc_pool(core::ptr::null_mut(), mem, IO_TLB_MIN_SLABS, default_nslabs,
     default_nareas, mem.phys_limit, GFP_KERNEL);
     if (!pool) {
@@ -834,20 +1092,15 @@ unsafe extern "C" fn swiotlb_dyn_alloc(work: *mut work_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn swiotlb_dyn_free_work(work: *mut work_struct) {
-    static void swiotlb_dyn_free_work(struct work_struct *work)
-    {
-    struct io_tlb_pool *pool =
-    container_of(to_rcu_work(work), struct io_tlb_pool, dyn_free);
-    let mut slots_size: usize = array_size(sizeof(*pool.slots), pool.nslabs);
-    let mut tlb_size: usize = pool.end - pool.start;
+    let mut pool = container_of!(to_rcu_work(work), io_tlb_pool, dyn_free);
+pub static mut slots_size: usize = 0;
+pub static mut tlb_size: usize = 0;
     free_pages((unsigned long)pool.slots, get_order(slots_size));
     swiotlb_free_tlb(pool.vaddr, tlb_size, pool.cc_shared);
     kfree(pool);
     }
 #[no_mangle]
 unsafe extern "C" fn swiotlb_schedule_dyn_free(pool: *mut io_tlb_pool) {
-    static void swiotlb_schedule_dyn_free(struct io_tlb_pool *pool)
-    {
     INIT_RCU_WORK(&pool.dyn_free, swiotlb_dyn_free_work);
     queue_rcu_work(system_wq, &pool.dyn_free);
     }
@@ -863,21 +1116,23 @@ unsafe extern "C" fn swiotlb_schedule_dyn_free(pool: *mut io_tlb_pool) {
 //
 // Return: Memory pool which contains @paddr, or %NULL if none.
 //
-    struct io_tlb_pool *__swiotlb_find_pool(struct device *dev, phys_addr_t paddr)
-    {
-    struct io_tlb_mem *mem = dev.dma_io_tlb_mem;
-    struct io_tlb_pool *pool;
+#[no_mangle]
+pub unsafe extern "C" fn __swiotlb_find_pool(dev: *mut device, paddr: phys_addr_t) -> *mut c_void {
+    let mut mem = dev.dma_io_tlb_mem;
+pub static mut pool: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     list_for_each_entry_rcu(pool, &mem.pools, node) {
-    if (paddr >= pool.start && paddr < pool.end)
-    goto out;
+    if (paddr >= pool.start && paddr < pool.end) {
+// goto;
+    }
     }
     list_for_each_entry_rcu(pool, &dev.dma_io_tlb_pools, node) {
-    if (paddr >= pool.start && paddr < pool.end)
-    goto out;
+    if (paddr >= pool.start && paddr < pool.end) {
+// goto;
+    }
     }
     pool = core::ptr::null_mut();
-    out:
+// label;
     rcu_read_unlock();
     return pool;
     }
@@ -888,9 +1143,7 @@ unsafe extern "C" fn swiotlb_schedule_dyn_free(pool: *mut io_tlb_pool) {
 //
 #[no_mangle]
 unsafe extern "C" fn swiotlb_del_pool(dev: *mut device, pool: *mut io_tlb_pool) {
-    static void swiotlb_del_pool(struct device *dev, struct io_tlb_pool *pool)
-    {
-    unsigned long flags;
+    let mut flags = 0;
     spin_lock_irqsave(&dev.dma_io_tlb_lock, flags);
     list_del_rcu(&pool.node);
     spin_unlock_irqrestore(&dev.dma_io_tlb_lock, flags);
@@ -903,8 +1156,6 @@ unsafe extern "C" fn swiotlb_del_pool(dev: *mut device, pool: *mut io_tlb_pool) 
 //
 #[no_mangle]
 pub unsafe extern "C" fn swiotlb_dev_init(dev: *mut device) {
-    void swiotlb_dev_init(struct device *dev)
-    {
     dev.dma_io_tlb_mem = &io_tlb_default_mem;
 
     INIT_LIST_HEAD(&dev.dma_io_tlb_pools);
@@ -931,28 +1182,28 @@ pub unsafe extern "C" fn swiotlb_dev_init(dev: *mut device) {
 // be zero. This may require allocating additional padding slots, and then the
 // offset (in bytes) from the first such padding slot is returned.
 //
-    static unsigned int swiotlb_align_offset(struct device *dev,
-    unsigned int align_mask, u64 addr)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn swiotlb_align_offset(dev: *mut device, align_mask: c_uint, addr: u64) -> c_uint {
     return addr & dma_get_min_align_mask(dev) &
     (align_mask | (IO_TLB_SIZE - 1));
     }
 //
 // Bounce: copy the swiotlb buffer from or back to the original dma location
 //
-    static void swiotlb_bounce(struct device *dev, phys_addr_t tlb_addr, size_t size,
-    enum dma_data_direction dir, struct io_tlb_pool *mem)
-    {
-    let mut index: c_int = (tlb_addr - mem.start) >> IO_TLB_SHIFT;
-    let mut orig_addr: phys_addr_t = mem.slots[index].orig_addr;
-    let mut alloc_size: usize = mem.slots[index].alloc_size;
-    let mut pfn: c_ulong = PFN_DOWN(orig_addr);
-    unsigned char *vaddr = mem.vaddr + tlb_addr - mem.start;
-    int tlb_offset;
-    if (orig_addr == INVALID_PHYS_ADDR)
+#[no_mangle]
+pub unsafe extern "C" fn swiotlb_bounce(dev: *mut device, tlb_addr: phys_addr_t, size: size_t, dir: dma_data_direction, mem: *mut io_tlb_pool) {
+pub static mut index: c_int = 0;
+pub static mut orig_addr: phys_addr_t = 0;
+pub static mut alloc_size: usize = 0;
+pub static mut pfn: c_ulong = 0;
+    let mut vaddr = mem.vaddr + tlb_addr - mem.start;
+    let mut tlb_offset = 0;
+    if (orig_addr == INVALID_PHYS_ADDR) {
     return;
-    if (dir == DMA_FROM_DEVICE && !dev_is_dma_coherent(dev))
+    }
+    if (dir == DMA_FROM_DEVICE && !dev_is_dma_coherent(dev)) {
     arch_sync_dma_flush();
+    }
 //
 // It's valid for tlb_offset to be negative. This can happen when the
 // "offset" returned by swiotlb_align_offset() is non-zero, and the
@@ -974,10 +1225,10 @@ pub unsafe extern "C" fn swiotlb_dev_init(dev: *mut device) {
     size = alloc_size;
     }
     if (PageHighMem(pfn_to_page(pfn))) {
-    let mut offset: c_uint = orig_addr & ~PAGE_MASK;
-    struct page *page;
-    let mut sz: c_uint = 0;
-    unsigned long flags;
+pub static mut offset: c_uint = 0;
+pub static mut page: *mut c_void = core::ptr::null_mut();
+pub static mut sz: c_uint = 0;
+    let mut flags = 0;
     while (size) {
     sz = min_t(size_t, PAGE_SIZE - offset, size);
     local_irq_save(flags);
@@ -997,7 +1248,7 @@ pub unsafe extern "C" fn swiotlb_dev_init(dev: *mut device) {
     }
     local_irq_restore(flags);
     size -= sz;
-    pfn++;
+    pfn += 1;
     vaddr += sz;
     offset = 0;
     }
@@ -1016,8 +1267,6 @@ pub unsafe extern "C" fn swiotlb_dev_init(dev: *mut device) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn slot_addr(start: phys_addr_t, idx: phys_addr_t) -> phys_addr_t {
-    static inline phys_addr_t slot_addr(phys_addr_t start, phys_addr_t idx)
-    {
     return start + (idx << IO_TLB_SHIFT);
     }
 //
@@ -1025,41 +1274,30 @@ pub unsafe extern "C" fn slot_addr(start: phys_addr_t, idx: phys_addr_t) -> phys
 //
 #[no_mangle]
 pub unsafe extern "C" fn get_max_slots(boundary_mask: c_ulong) -> c_ulong {
-    static inline unsigned long get_max_slots(unsigned long boundary_mask)
-    {
     return (boundary_mask >> IO_TLB_SHIFT) + 1;
     }
 #[no_mangle]
 unsafe extern "C" fn wrap_area_index(mem: *mut io_tlb_pool, index: c_uint) -> c_uint {
-    static unsigned int wrap_area_index(struct io_tlb_pool *mem, unsigned int index)
-    {
-    if (index >= mem.area_nslabs)
+    if (index >= mem.area_nslabs) {
     return 0;
+    }
     return index;
     }
 
 #[no_mangle]
 unsafe extern "C" fn inc_transient_used(mem: *mut io_tlb_mem, nslots: c_uint) {
-    static void inc_transient_used(struct io_tlb_mem *mem, unsigned int nslots)
-    {
     atomic_long_add(nslots, &mem.transient_nslabs);
     }
 #[no_mangle]
 unsafe extern "C" fn dec_transient_used(mem: *mut io_tlb_mem, nslots: c_uint) {
-    static void dec_transient_used(struct io_tlb_mem *mem, unsigned int nslots)
-    {
     atomic_long_sub(nslots, &mem.transient_nslabs);
     }
 
 #[no_mangle]
 unsafe extern "C" fn inc_transient_used(mem: *mut io_tlb_mem, nslots: c_uint) {
-    static void inc_transient_used(struct io_tlb_mem *mem, unsigned int nslots)
-    {
     }
 #[no_mangle]
 unsafe extern "C" fn dec_transient_used(mem: *mut io_tlb_mem, nslots: c_uint) {
-    static void dec_transient_used(struct io_tlb_mem *mem, unsigned int nslots)
-    {
     }
 
 //
@@ -1079,22 +1317,20 @@ unsafe extern "C" fn dec_transient_used(mem: *mut io_tlb_mem, nslots: c_uint) {
 //
 // Return: Index of the first allocated slot, or -1 on error.
 //
-    static int swiotlb_search_pool_area(struct device *dev, struct io_tlb_pool *pool,
-    int area_index, phys_addr_t orig_addr, dma_addr_t tbl_dma_addr,
-    size_t alloc_size, unsigned int alloc_align_mask)
-    {
-    struct io_tlb_area *area = pool.areas + area_index;
-    let mut boundary_mask: c_ulong = dma_get_seg_boundary(dev);
-    let mut max_slots: c_ulong = get_max_slots(boundary_mask);
-    let mut iotlb_align_mask: c_uint = dma_get_min_align_mask(dev);
-    let mut nslots: c_uint = nr_slots(alloc_size), stride;
-    let mut offset: c_uint = swiotlb_align_offset(dev, 0, orig_addr);
+#[no_mangle]
+pub unsafe extern "C" fn swiotlb_search_pool_area(dev: *mut device, pool: *mut io_tlb_pool, area_index: c_int, orig_addr: phys_addr_t, tbl_dma_addr: dma_addr_t, alloc_size: size_t, alloc_align_mask: c_uint) -> c_int {
+    let mut area = pool.areas + area_index;
+pub static mut boundary_mask: c_ulong = 0;
+pub static mut max_slots: c_ulong = 0;
+pub static mut iotlb_align_mask: c_uint = 0;
+pub static mut nslots: c_uint = 0;
+pub static mut offset: c_uint = 0;
     unsigned int index, slots_checked, count = 0, i;
-    unsigned long flags;
-    unsigned int slot_base;
-    unsigned int slot_index;
-    BUG_ON(!nslots);
-    BUG_ON(area_index >= pool.nareas);
+    let mut flags = 0;
+    let mut slot_base = 0;
+    let mut slot_index = 0;
+    BUG_ON!(!nslots);
+    BUG_ON!(area_index >= pool.nareas);
     tbl_dma_addr &= boundary_mask;
 //
 // Historically, swiotlb allocations >= PAGE_SIZE were guaranteed to be
@@ -1104,8 +1340,9 @@ unsafe extern "C" fn dec_transient_used(mem: *mut io_tlb_mem, nslots: c_uint) {
 // and so we preserve the old behaviour there in case any drivers are
 // relying on it.
 //
-    if (!alloc_align_mask && !iotlb_align_mask && alloc_size >= PAGE_SIZE)
+    if (!alloc_align_mask && !iotlb_align_mask && alloc_size >= PAGE_SIZE) {
     alloc_align_mask = PAGE_SIZE - 1;
+    }
 //
 // Ensure that the allocation is at least slot-aligned and update
 // 'iotlb_align_mask' to ignore bits that will be preserved when
@@ -1119,48 +1356,51 @@ unsafe extern "C" fn dec_transient_used(mem: *mut io_tlb_mem, nslots: c_uint) {
 //
     stride = get_max_slots(max(alloc_align_mask, iotlb_align_mask));
     spin_lock_irqsave(&area.lock, flags);
-    if (unlikely(nslots > pool.area_nslabs - area.used))
-    goto not_found;
+    if (unlikely(nslots > pool.area_nslabs - area.used)) {
+// goto;
+    }
     slot_base = area_index * pool.area_nslabs;
     index = area.index;
-    for (slots_checked = 0; slots_checked < pool.area_nslabs; ) {
-    phys_addr_t tlb_addr;
+    while (slots_checked < pool.area_nslabs) {
+    let mut tlb_addr;
     slot_index = slot_base + index;
     tlb_addr = slot_addr(tbl_dma_addr, slot_index);
     if ((tlb_addr & alloc_align_mask) ||
     (orig_addr && (tlb_addr & iotlb_align_mask) !=
     (orig_addr & iotlb_align_mask))) {
     index = wrap_area_index(pool, index + 1);
-    slots_checked++;
+    slots_checked += 1;
     continue;
     }
     if (!iommu_is_span_boundary(slot_index, nslots,
     nr_slots(tbl_dma_addr),
     max_slots)) {
-    if (pool.slots[slot_index].list >= nslots)
-    goto found;
+    if (pool.slots[slot_index].list >= nslots) {
+// goto;
+    }
     }
     index = wrap_area_index(pool, index + stride);
     slots_checked += stride;
     }
-    not_found:
+// label;
     spin_unlock_irqrestore(&area.lock, flags);
     return -1;
-    found:
+// label;
 //
 // If we find a slot that indicates we have 'nslots' number of
 // contiguous buffers, we allocate the buffers from that slot onwards
 // and set the list of free entries to '0' indicating unavailable.
 //
-    for (i = slot_index; i < slot_index + nslots; i++) {
+    while (i < slot_index + nslots) {
     pool.slots[i].list = 0;
     pool.slots[i].alloc_size = alloc_size - (offset +
     ((i - slot_index) << IO_TLB_SHIFT));
     }
     for (i = slot_index - 1;
     io_tlb_offset(i) != IO_TLB_SEGSIZE - 1 &&
-    pool.slots[i].list; i--)
-    pool.slots[i].list = ++count;
+    pool.slots[i].list; i--) {
+    pool.slots[i].list = count += 1;
+    }
 //
 // Update the indices to avoid searching in the next round.
 //
@@ -1187,24 +1427,25 @@ unsafe extern "C" fn dec_transient_used(mem: *mut io_tlb_mem, nslots: c_uint) {
 //
 // Return: Index of the first allocated slot, or -1 on error.
 //
-    static int swiotlb_search_area(struct device *dev, int start_cpu,
-    int cpu_offset, phys_addr_t orig_addr, size_t alloc_size,
-    unsigned int alloc_align_mask, struct io_tlb_pool **retpool)
-    {
-    struct io_tlb_mem *mem = dev.dma_io_tlb_mem;
-    struct io_tlb_pool *pool;
-    dma_addr_t tbl_dma_addr;
-    int area_index;
-    let mut index: c_int = -1;
+#[no_mangle]
+pub unsafe extern "C" fn swiotlb_search_area(dev: *mut device, start_cpu: c_int, cpu_offset: c_int, orig_addr: phys_addr_t, alloc_size: size_t, alloc_align_mask: c_uint, retpool: *mut *mut io_tlb_pool) -> c_int {
+    let mut mem = dev.dma_io_tlb_mem;
+pub static mut pool: *mut c_void = core::ptr::null_mut();
+    let mut tbl_dma_addr;
+    let mut area_index = 0;
+pub static mut index: c_int = 0;
     rcu_read_lock();
     list_for_each_entry_rcu(pool, &mem.pools, node) {
-    if (cpu_offset >= pool.nareas)
+    if (cpu_offset >= pool.nareas) {
     continue;
+    }
     area_index = (start_cpu + cpu_offset) & (pool.nareas - 1);
-    if (mem.cc_shared)
+    if (mem.cc_shared) {
     tbl_dma_addr = phys_to_dma_unencrypted(dev, pool.start);
-    else
+    }
+    else {
     tbl_dma_addr = phys_to_dma_encrypted(dev, pool.start);
+    }
     index = swiotlb_search_pool_area(dev, pool, area_index,
     orig_addr, tbl_dma_addr,
     alloc_size, alloc_align_mask);
@@ -1230,40 +1471,45 @@ unsafe extern "C" fn dec_transient_used(mem: *mut io_tlb_mem, nslots: c_uint) {
 //
 // Return: Index of the first allocated slot, or -1 on error.
 //
-    static int swiotlb_find_slots(struct device *dev, phys_addr_t orig_addr,
-    size_t alloc_size, unsigned int alloc_align_mask,
-    struct io_tlb_pool **retpool)
-    {
-    struct io_tlb_mem *mem = dev.dma_io_tlb_mem;
-    struct io_tlb_pool *pool;
-    dma_addr_t tbl_dma_addr;
-    unsigned long nslabs;
-    unsigned long flags;
-    u64 phys_limit;
-    int cpu, i;
-    int index;
-    if (alloc_size > IO_TLB_SEGSIZE * IO_TLB_SIZE)
+#[no_mangle]
+pub unsafe extern "C" fn swiotlb_find_slots(dev: *mut device, orig_addr: phys_addr_t, alloc_size: size_t, alloc_align_mask: c_uint, retpool: *mut *mut io_tlb_pool) -> c_int {
+    let mut mem = dev.dma_io_tlb_mem;
+pub static mut pool: *mut c_void = core::ptr::null_mut();
+    let mut tbl_dma_addr;
+    let mut nslabs = 0;
+    let mut flags = 0;
+    let mut phys_limit = 0;
+    let mut cpu = 0;
+    let mut i = 0;
+    let mut index = 0;
+    if (alloc_size > IO_TLB_SEGSIZE * IO_TLB_SIZE) {
     return -1;
+    }
     cpu = raw_smp_processor_id();
-    for (i = 0; i < default_nareas; ++i) {
+    while (i < default_nareas) {
     index = swiotlb_search_area(dev, cpu, i, orig_addr, alloc_size,
     alloc_align_mask, &pool);
-    if (index >= 0)
-    goto found;
+    if (index >= 0) {
+// goto;
     }
-    if (!mem.can_grow)
+    }
+    if (!mem.can_grow) {
     return -1;
+    }
     schedule_work(&mem.dyn_alloc);
     nslabs = nr_slots(alloc_size);
     phys_limit = min_not_zero(*dev.dma_mask, dev.bus_dma_limit);
     pool = swiotlb_alloc_pool(dev, mem, nslabs, nslabs, 1, phys_limit,
     GFP_NOWAIT);
-    if (!pool)
+    if (!pool) {
     return -1;
-    if (mem.cc_shared)
+    }
+    if (mem.cc_shared) {
     tbl_dma_addr = phys_to_dma_unencrypted(dev, pool.start);
-    else
+    }
+    else {
     tbl_dma_addr = phys_to_dma_encrypted(dev, pool.start);
+    }
     index = swiotlb_search_pool_area(dev, pool, 0, orig_addr, tbl_dma_addr,
     alloc_size, alloc_align_mask);
     if (index < 0) {
@@ -1275,7 +1521,7 @@ unsafe extern "C" fn dec_transient_used(mem: *mut io_tlb_mem, nslots: c_uint) {
     list_add_rcu(&pool.node, &dev.dma_io_tlb_pools);
     spin_unlock_irqrestore(&dev.dma_io_tlb_lock, flags);
     inc_transient_used(mem, pool.nslabs);
-    found:
+// label;
     WRITE_ONCE(dev.dma_uses_io_tlb, true);
 //
 // The general barrier orders reads and writes against a presumed store
@@ -1299,29 +1545,34 @@ unsafe extern "C" fn dec_transient_used(mem: *mut io_tlb_mem, nslots: c_uint) {
     return index;
     }
 
-    static int swiotlb_find_slots(struct device *dev, phys_addr_t orig_addr,
-    size_t alloc_size, unsigned int alloc_align_mask,
-    struct io_tlb_pool **retpool)
-    {
-    struct io_tlb_mem *mem = dev.dma_io_tlb_mem;
-    struct io_tlb_pool *pool;
-    dma_addr_t tbl_dma_addr;
-    int start, i;
-    int index;
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: swiotlb_find_slots
+pub unsafe extern "C" fn swiotlb_find_slots_dup(dev: *mut device, orig_addr: phys_addr_t, alloc_size: size_t, alloc_align_mask: c_uint, retpool: *mut *mut io_tlb_pool) -> c_int {
+    let mut mem = dev.dma_io_tlb_mem;
+pub static mut pool: *mut c_void = core::ptr::null_mut();
+    let mut tbl_dma_addr;
+    let mut start = 0;
+    let mut i = 0;
+    let mut index = 0;
 // retpool = pool = &mem->defpool;
-    if (mem.cc_shared)
+    if (mem.cc_shared) {
     tbl_dma_addr = phys_to_dma_unencrypted(dev, pool.start);
-    else
+    }
+    else {
     tbl_dma_addr = phys_to_dma_encrypted(dev, pool.start);
+    }
     i = start = raw_smp_processor_id() & (pool.nareas - 1);
     do {
     index = swiotlb_search_pool_area(dev, pool, i, orig_addr,
     tbl_dma_addr, alloc_size,
     alloc_align_mask);
-    if (index >= 0)
+    if (index >= 0) {
     return index;
-    if (++i >= pool.nareas)
+    }
+    if (++i >= pool.nareas) {
     i = 0;
+    }
     } while (i != start);
     return -1;
     }
@@ -1336,12 +1587,11 @@ unsafe extern "C" fn dec_transient_used(mem: *mut io_tlb_mem, nslots: c_uint) {
 //
 #[no_mangle]
 unsafe extern "C" fn mem_pool_used(pool: *mut io_tlb_pool) -> c_ulong {
-    static unsigned long mem_pool_used(struct io_tlb_pool *pool)
-    {
-    int i;
-    let mut used: c_ulong = 0;
-    for (i = 0; i < pool.nareas; i++)
+    let mut i = 0;
+pub static mut used: c_ulong = 0;
+    for (i = 0; i < pool.nareas; i++) {
     used += pool.areas[i].used;
+    }
     return used;
     }
 //
@@ -1357,17 +1607,17 @@ unsafe extern "C" fn mem_pool_used(pool: *mut io_tlb_pool) -> c_ulong {
 //
 #[no_mangle]
 unsafe extern "C" fn mem_used(mem: *mut io_tlb_mem) -> c_ulong {
-    static unsigned long mem_used(struct io_tlb_mem *mem)
-    {
 
-    if (track_hiwater_enabled)
+    if (track_hiwater_enabled) {
     return atomic_long_read(&mem.total_used);
+    }
 
-    struct io_tlb_pool *pool;
-    let mut used: c_ulong = 0;
+pub static mut pool: *mut c_void = core::ptr::null_mut();
+pub static mut used: c_ulong = 0;
     rcu_read_lock();
-    list_for_each_entry_rcu(pool, &mem.pools, node)
+    list_for_each_entry_rcu(pool, &mem.pools, node) {
     used += mem_pool_used(pool);
+    }
     rcu_read_unlock();
     return used;
 
@@ -1409,29 +1659,31 @@ unsafe extern "C" fn mem_used(mem: *mut io_tlb_mem) -> c_ulong {
 // area. Any pre-padding (due to an offset) and any post-padding (due to
 // rounding-up the size) is not initialized.
 //
-    phys_addr_t swiotlb_tbl_map_single(struct device *dev, phys_addr_t orig_addr,
+    phys_addr_t swiotlb_tbl_map_single(device *dev, phys_addr_t orig_addr,
     size_t mapping_size, unsigned int alloc_align_mask,
     enum dma_data_direction dir, unsigned long *attrs)
     {
-    struct io_tlb_mem *mem = dev.dma_io_tlb_mem;
-    unsigned int offset;
-    struct io_tlb_pool *pool;
-    unsigned int i;
-    size_t size;
-    int index;
-    phys_addr_t tlb_addr;
-    unsigned short pad_slots;
+    let mut mem = dev.dma_io_tlb_mem;
+    let mut offset = 0;
+pub static mut pool: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    let mut size = 0;
+    let mut index = 0;
+    let mut tlb_addr;
+    let mut pad_slots = 0;
     if (!mem || !mem.nslabs) {
     dev_warn_ratelimited(dev,
     "Can not allocate SWIOTLB buffer earlier and can't now provide you with the DMA bounce buffer");
     return (phys_addr_t)DMA_MAPPING_ERROR;
     }
-    if (cc_platform_has(CC_ATTR_MEM_ENCRYPT))
+    if (cc_platform_has(CC_ATTR_MEM_ENCRYPT)) {
     pr_warn_once("Memory encryption is active and system is using DMA bounce buffers\n");
+    }
     if (cc_platform_has(CC_ATTR_GUEST_MEM_ENCRYPT)) {
 // swiotlb pool is incorrect for this device
-    if (unlikely(mem.cc_shared != force_dma_unencrypted(dev)))
+    if (unlikely(mem.cc_shared != force_dma_unencrypted(dev))) {
     return (phys_addr_t)DMA_MAPPING_ERROR;
+    }
     } else if (cc_platform_has(CC_ATTR_HOST_MEM_ENCRYPT)) {
 //
 // On hosts with memory encryption, SWIOTLB-backed memory is
@@ -1440,14 +1692,17 @@ unsafe extern "C" fn mem_used(mem: *mut io_tlb_mem) -> c_ulong {
 // address encrypted memory. This also preserves swiotlb=force
 // behavior for those devices.
 //
-    if (unlikely(!mem.cc_shared))
+    if (unlikely(!mem.cc_shared)) {
     return (phys_addr_t)DMA_MAPPING_ERROR;
     }
+    }
 // Force attrs to match the kind of memory in the pool
-    if (mem.cc_shared)
+    if (mem.cc_shared) {
 // attrs |= DMA_ATTR_CC_SHARED;
-    else
+    }
+    else {
 // attrs &= ~DMA_ATTR_CC_SHARED;
+    }
 //
 // The default swiotlb memory pool is allocated with PAGE_SIZE
 // alignment. If a mapping is requested with larger alignment,
@@ -1461,10 +1716,11 @@ unsafe extern "C" fn mem_used(mem: *mut io_tlb_mem) -> c_ulong {
     size = ALIGN(mapping_size + offset, alloc_align_mask + 1);
     index = swiotlb_find_slots(dev, orig_addr, size, alloc_align_mask, &pool);
     if (index == -1) {
-    if (!(*attrs & DMA_ATTR_NO_WARN))
+    if (!(*attrs & DMA_ATTR_NO_WARN)) {
     dev_warn_ratelimited(dev,
     "swiotlb buffer is full (sz: %zd bytes), total %lu (slots), used %lu (slots)\n",
     size, mem.nslabs, mem_used(mem));
+    }
     return (phys_addr_t)DMA_MAPPING_ERROR;
     }
 //
@@ -1481,8 +1737,9 @@ unsafe extern "C" fn mem_used(mem: *mut io_tlb_mem) -> c_ulong {
     offset &= (IO_TLB_SIZE - 1);
     index += pad_slots;
     pool.slots[index].pad_slots = pad_slots;
-    for (i = 0; i < (nr_slots(size) - pad_slots); i++)
+    for (i = 0; i < (nr_slots(size) - pad_slots); i++) {
     pool.slots[index + i].orig_addr = slot_addr(orig_addr, i);
+    }
     tlb_addr = slot_addr(pool.start, index) + offset;
 //
 // When the device is writing memory, i.e. dir == DMA_FROM_DEVICE, copy
@@ -1496,14 +1753,16 @@ unsafe extern "C" fn mem_used(mem: *mut io_tlb_mem) -> c_ulong {
     swiotlb_bounce(dev, tlb_addr, mapping_size, DMA_TO_DEVICE, pool);
     return tlb_addr;
     }
-    static void swiotlb_release_slots(struct device *dev, phys_addr_t tlb_addr,
-    struct io_tlb_pool *mem)
-    {
-    unsigned long flags;
-    let mut offset: c_uint = swiotlb_align_offset(dev, 0, tlb_addr);
-    int index, nslots, aindex;
-    struct io_tlb_area *area;
-    int count, i;
+#[no_mangle]
+pub unsafe extern "C" fn swiotlb_release_slots(dev: *mut device, tlb_addr: phys_addr_t, mem: *mut io_tlb_pool) {
+    let mut flags = 0;
+pub static mut offset: c_uint = 0;
+    let mut index = 0;
+    let mut nslots = 0;
+    let mut aindex = 0;
+pub static mut area: *mut c_void = core::ptr::null_mut();
+    let mut count = 0;
+    let mut i = 0;
     index = (tlb_addr - offset - mem.start) >> IO_TLB_SHIFT;
     index -= mem.slots[index].pad_slots;
     nslots = nr_slots(mem.slots[index].alloc_size + offset);
@@ -1515,18 +1774,20 @@ unsafe extern "C" fn mem_used(mem: *mut io_tlb_mem) -> c_ulong {
 // While returning the entries to the free list, we merge the entries
 // with slots below and above the pool being returned.
 //
-    BUG_ON(aindex >= mem.nareas);
+    BUG_ON!(aindex >= mem.nareas);
     spin_lock_irqsave(&area.lock, flags);
-    if (index + nslots < ALIGN(index + 1, IO_TLB_SEGSIZE))
+    if (index + nslots < ALIGN(index + 1, IO_TLB_SEGSIZE)) {
     count = mem.slots[index + nslots].list;
-    else
+    }
+    else {
     count = 0;
+    }
 //
 // Step 1: return the slots to the free list, merging the slots with
 // superceeding slots
 //
-    for (i = index + nslots - 1; i >= index; i--) {
-    mem.slots[i].list = ++count;
+    while (i >= index) {
+    mem.slots[i].list = count += 1;
     mem.slots[i].orig_addr = INVALID_PHYS_ADDR;
     mem.slots[i].alloc_size = 0;
     mem.slots[i].pad_slots = 0;
@@ -1537,8 +1798,9 @@ unsafe extern "C" fn mem_used(mem: *mut io_tlb_mem) -> c_ulong {
 //
     for (i = index - 1;
     io_tlb_offset(i) != IO_TLB_SEGSIZE - 1 && mem.slots[i].list;
-    i--)
-    mem.slots[i].list = ++count;
+    i--) {
+    mem.slots[i].list = count += 1;
+    }
     area.used -= nslots;
     spin_unlock_irqrestore(&area.lock, flags);
     dec_used(dev.dma_io_tlb_mem, nslots);
@@ -1555,76 +1817,80 @@ unsafe extern "C" fn mem_used(mem: *mut io_tlb_mem) -> c_ulong {
 //
 // Return: %true if @tlb_addr belonged to a transient pool that was released.
 //
-    static bool swiotlb_del_transient(struct device *dev, phys_addr_t tlb_addr,
-    struct io_tlb_pool *pool)
-    {
-    if (!pool.transient)
+#[no_mangle]
+pub unsafe extern "C" fn swiotlb_del_transient(dev: *mut device, tlb_addr: phys_addr_t, pool: *mut io_tlb_pool) -> bool {
+    if (!pool.transient) {
     return false;
+    }
     dec_used(dev.dma_io_tlb_mem, pool.nslabs);
     swiotlb_del_pool(dev, pool);
     dec_transient_used(dev.dma_io_tlb_mem, pool.nslabs);
     return true;
     }
 
-    static inline bool swiotlb_del_transient(struct device *dev,
-    phys_addr_t tlb_addr, struct io_tlb_pool *pool)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: swiotlb_del_transient
+pub unsafe extern "C" fn swiotlb_del_transient_dup(dev: *mut device, tlb_addr: phys_addr_t, pool: *mut io_tlb_pool) -> bool {
     return false;
     }
 
 //
 // tlb_addr is the physical address of the bounce buffer to unmap.
 //
-    void __swiotlb_tbl_unmap_single(struct device *dev, phys_addr_t tlb_addr,
-    size_t mapping_size, enum dma_data_direction dir,
-    unsigned long attrs, struct io_tlb_pool *pool)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __swiotlb_tbl_unmap_single(dev: *mut device, tlb_addr: phys_addr_t, mapping_size: size_t, dir: dma_data_direction, attrs: c_ulong, pool: *mut io_tlb_pool) {
 //
 // First, sync the memory before unmapping the entry
 //
     if (!(attrs & DMA_ATTR_SKIP_CPU_SYNC) &&
-    (dir == DMA_FROM_DEVICE || dir == DMA_BIDIRECTIONAL))
+    (dir == DMA_FROM_DEVICE || dir == DMA_BIDIRECTIONAL)) {
     swiotlb_bounce(dev, tlb_addr, mapping_size,
     DMA_FROM_DEVICE, pool);
-    if (swiotlb_del_transient(dev, tlb_addr, pool))
+    }
+    if (swiotlb_del_transient(dev, tlb_addr, pool)) {
     return;
+    }
     swiotlb_release_slots(dev, tlb_addr, pool);
     }
-    void __swiotlb_sync_single_for_device(struct device *dev, phys_addr_t tlb_addr,
-    size_t size, enum dma_data_direction dir,
-    struct io_tlb_pool *pool)
-    {
-    if (dir == DMA_TO_DEVICE || dir == DMA_BIDIRECTIONAL)
+#[no_mangle]
+pub unsafe extern "C" fn __swiotlb_sync_single_for_device(dev: *mut device, tlb_addr: phys_addr_t, size: size_t, dir: dma_data_direction, pool: *mut io_tlb_pool) {
+    if (dir == DMA_TO_DEVICE || dir == DMA_BIDIRECTIONAL) {
     swiotlb_bounce(dev, tlb_addr, size, DMA_TO_DEVICE, pool);
-    else
-    BUG_ON(dir != DMA_FROM_DEVICE);
     }
-    void __swiotlb_sync_single_for_cpu(struct device *dev, phys_addr_t tlb_addr,
-    size_t size, enum dma_data_direction dir,
-    struct io_tlb_pool *pool)
-    {
-    if (dir == DMA_FROM_DEVICE || dir == DMA_BIDIRECTIONAL)
+    else {
+    BUG_ON!(dir != DMA_FROM_DEVICE);
+    }
+    }
+#[no_mangle]
+pub unsafe extern "C" fn __swiotlb_sync_single_for_cpu(dev: *mut device, tlb_addr: phys_addr_t, size: size_t, dir: dma_data_direction, pool: *mut io_tlb_pool) {
+    if (dir == DMA_FROM_DEVICE || dir == DMA_BIDIRECTIONAL) {
     swiotlb_bounce(dev, tlb_addr, size, DMA_FROM_DEVICE, pool);
-    else
-    BUG_ON(dir != DMA_TO_DEVICE);
+    }
+    else {
+    BUG_ON!(dir != DMA_TO_DEVICE);
+    }
     }
 //
 // Create a swiotlb mapping for the buffer at @paddr, and in case of DMAing
 // to the device copy the data into it as well.
 //
-    dma_addr_t swiotlb_map(struct device *dev, phys_addr_t paddr, size_t size,
+    dma_addr_t swiotlb_map(device *dev, phys_addr_t paddr, size_t size,
     enum dma_data_direction dir, unsigned long attrs)
     {
-    phys_addr_t swiotlb_addr;
-    dma_addr_t dma_addr;
+    let mut swiotlb_addr;
+    let mut dma_addr;
     trace_swiotlb_bounced(dev, phys_to_dma(dev, paddr), size);
     swiotlb_addr = swiotlb_tbl_map_single(dev, paddr, size, 0, dir, &attrs);
-    if (swiotlb_addr == (phys_addr_t)DMA_MAPPING_ERROR)
+    if (swiotlb_addr == (phys_addr_t)DMA_MAPPING_ERROR) {
     return DMA_MAPPING_ERROR;
-    if (attrs & DMA_ATTR_CC_SHARED)
+    }
+    if (attrs & DMA_ATTR_CC_SHARED) {
     dma_addr = phys_to_dma_unencrypted(dev, swiotlb_addr);
-    else
+    }
+    else {
     dma_addr = phys_to_dma_encrypted(dev, swiotlb_addr);
+    }
     if (unlikely(!dma_capable(dev, dma_addr, size, true, attrs))) {
     __swiotlb_tbl_unmap_single(dev, swiotlb_addr, size, dir,
     attrs | DMA_ATTR_SKIP_CPU_SYNC,
@@ -1642,17 +1908,16 @@ unsafe extern "C" fn mem_used(mem: *mut io_tlb_mem) -> c_ulong {
     }
 #[no_mangle]
 pub unsafe extern "C" fn swiotlb_max_mapping_size(dev: *mut device) -> usize {
-    size_t swiotlb_max_mapping_size(struct device *dev)
-    {
-    let mut min_align_mask: c_int = dma_get_min_align_mask(dev);
-    let mut min_align: c_int = 0;
+pub static mut min_align_mask: c_int = 0;
+pub static mut min_align: c_int = 0;
 //
 // swiotlb_find_slots() skips slots according to
 // min align mask. This affects max mapping size.
 // Take it into acount here.
 //
-    if (min_align_mask)
+    if (min_align_mask) {
     min_align = roundup(min_align_mask, IO_TLB_SIZE);
+    }
     return ((size_t)IO_TLB_SIZE) * IO_TLB_SEGSIZE - min_align;
     }
 //
@@ -1660,15 +1925,11 @@ pub unsafe extern "C" fn swiotlb_max_mapping_size(dev: *mut device) -> usize {
 //
 #[no_mangle]
 pub unsafe extern "C" fn is_swiotlb_allocated() -> bool {
-    bool is_swiotlb_allocated(void)
-    {
     return io_tlb_default_mem.nslabs;
     }
 #[no_mangle]
 pub unsafe extern "C" fn is_swiotlb_active(dev: *mut device) -> bool {
-    bool is_swiotlb_active(struct device *dev)
-    {
-    struct io_tlb_mem *mem = dev.dma_io_tlb_mem;
+    let mut mem = dev.dma_io_tlb_mem;
     return mem && mem.nslabs;
     }
 //
@@ -1678,8 +1939,6 @@ pub unsafe extern "C" fn is_swiotlb_active(dev: *mut device) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn default_swiotlb_base() -> phys_addr_t {
-    phys_addr_t default_swiotlb_base(void)
-    {
 
     io_tlb_default_mem.can_grow = false;
 
@@ -1692,8 +1951,6 @@ pub unsafe extern "C" fn default_swiotlb_base() -> phys_addr_t {
 //
 #[no_mangle]
 pub unsafe extern "C" fn default_swiotlb_limit() -> phys_addr_t {
-    phys_addr_t default_swiotlb_limit(void)
-    {
 
     return io_tlb_default_mem.phys_limit;
 
@@ -1703,15 +1960,11 @@ pub unsafe extern "C" fn default_swiotlb_limit() -> phys_addr_t {
 
 #[no_mangle]
 unsafe extern "C" fn mem_transient_used(mem: *mut io_tlb_mem) -> c_ulong {
-    static unsigned long mem_transient_used(struct io_tlb_mem *mem)
-    {
     return atomic_long_read(&mem.transient_nslabs);
     }
 #[no_mangle]
 unsafe extern "C" fn io_tlb_transient_used_get(data: *mut c_void, val: *mut u64) -> c_int {
-    static int io_tlb_transient_used_get(void *data, u64 *val)
-    {
-    struct io_tlb_mem *mem = data;
+    let mut mem = data;
 // val = mem_transient_used(mem);
     return 0;
     }
@@ -1720,40 +1973,34 @@ unsafe extern "C" fn io_tlb_transient_used_get(data: *mut c_void, val: *mut u64)
 
 #[no_mangle]
 unsafe extern "C" fn io_tlb_used_get(data: *mut c_void, val: *mut u64) -> c_int {
-    static int io_tlb_used_get(void *data, u64 *val)
-    {
-    struct io_tlb_mem *mem = data;
+    let mut mem = data;
 // val = mem_used(mem);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn io_tlb_hiwater_get(data: *mut c_void, val: *mut u64) -> c_int {
-    static int io_tlb_hiwater_get(void *data, u64 *val)
-    {
-    struct io_tlb_mem *mem = data;
+    let mut mem = data;
 // val = atomic_long_read(&mem->used_hiwater);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn io_tlb_hiwater_set(data: *mut c_void, val: u64) -> c_int {
-    static int io_tlb_hiwater_set(void *data, u64 val)
-    {
-    struct io_tlb_mem *mem = data;
+    let mut mem = data;
 // Only allow setting to zero
-    if (val != 0)
+    if (val != 0) {
     return -EINVAL;
+    }
     atomic_long_set(&mem.used_hiwater, val);
     return 0;
     }
     DEFINE_DEBUGFS_ATTRIBUTE(fops_io_tlb_used, io_tlb_used_get, core::ptr::null_mut(), "%llu\n");
-    DEFINE_DEBUGFS_ATTRIBUTE(fops_io_tlb_hiwater, io_tlb_hiwater_get,
-    io_tlb_hiwater_set, "%llu\n");
-    static void swiotlb_create_debugfs_files(struct io_tlb_mem *mem,
-    const char *dirname)
-    {
+pub static mut fops_io_tlb_hiwater: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn swiotlb_create_debugfs_files(mem: *mut io_tlb_mem, dirname: *mut c_char) {
     mem.debugfs = debugfs_create_dir(dirname, io_tlb_default_mem.debugfs);
-    if (!mem.nslabs)
+    if (!mem.nslabs) {
     return;
+    }
     debugfs_create_ulong("io_tlb_nslabs", 0400, mem.debugfs, &mem.nslabs);
     debugfs_create_file("io_tlb_used", 0400, mem.debugfs, mem,
     &fops_io_tlb_used);
@@ -1765,34 +2012,36 @@ unsafe extern "C" fn io_tlb_hiwater_set(data: *mut c_void, val: u64) -> c_int {
 
     }
 #[no_mangle]
-unsafe extern "C" fn swiotlb_create_default_debugfs() -> int __init {
-    static int __init swiotlb_create_default_debugfs(void)
-    {
+unsafe extern "C" fn swiotlb_create_default_debugfs() -> c_int {
     swiotlb_create_debugfs_files(&io_tlb_default_mem, "swiotlb");
     return 0;
     }
-    late_initcall(swiotlb_create_default_debugfs);
+    late_initcall!(swiotlb_create_default_debugfs);
 
-    static inline void swiotlb_create_debugfs_files(struct io_tlb_mem *mem,
-    const char *dirname)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: swiotlb_create_debugfs_files
+pub unsafe extern "C" fn swiotlb_create_debugfs_files_dup(mem: *mut io_tlb_mem, dirname: *mut c_char) {
     }
 
-    struct page *swiotlb_alloc(struct device *dev, size_t size, unsigned long attrs)
-    {
-    struct io_tlb_mem *mem = dev.dma_io_tlb_mem;
-    struct io_tlb_pool *pool;
-    phys_addr_t tlb_addr;
-    unsigned int align;
-    int index;
-    if (!mem)
+#[no_mangle]
+pub unsafe extern "C" fn swiotlb_alloc(dev: *mut device, size: size_t, attrs: c_ulong) -> *mut c_void {
+    let mut mem = dev.dma_io_tlb_mem;
+pub static mut pool: *mut c_void = core::ptr::null_mut();
+    let mut tlb_addr;
+    let mut align = 0;
+    let mut index = 0;
+    if (!mem) {
     return core::ptr::null_mut();
-    if (mem.cc_shared != !!(attrs & __DMA_ATTR_ALLOC_CC_SHARED))
+    }
+    if (mem.cc_shared != !!(attrs & __DMA_ATTR_ALLOC_CC_SHARED)) {
     return core::ptr::null_mut();
+    }
     align = (1 << (get_order(size) + PAGE_SHIFT)) - 1;
     index = swiotlb_find_slots(dev, 0, size, align, &pool);
-    if (index == -1)
+    if (index == -1) {
     return core::ptr::null_mut();
+    }
     tlb_addr = slot_addr(pool.start, index);
     if (unlikely(!PAGE_ALIGNED(tlb_addr))) {
     dev_WARN_ONCE(dev, 1, "Cannot allocate pages from non page-aligned swiotlb addr 0x%pa.\n",
@@ -1804,28 +2053,25 @@ unsafe extern "C" fn swiotlb_create_default_debugfs() -> int __init {
     }
 #[no_mangle]
 pub unsafe extern "C" fn swiotlb_free(dev: *mut device, page: *mut page, size: usize) -> bool {
-    bool swiotlb_free(struct device *dev, struct page *page, size_t size)
-    {
-    let mut tlb_addr: phys_addr_t = page_to_phys(page);
-    struct io_tlb_pool *pool;
+pub static mut tlb_addr: phys_addr_t = 0;
+pub static mut pool: *mut c_void = core::ptr::null_mut();
     pool = swiotlb_find_pool(dev, tlb_addr);
-    if (!pool)
+    if (!pool) {
     return false;
+    }
     swiotlb_release_slots(dev, tlb_addr, pool);
     return true;
     }
-    void swiotlb_free_from_pool(struct device *dev,
-    phys_addr_t tlb_addr, struct io_tlb_pool *pool)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn swiotlb_free_from_pool(dev: *mut device, tlb_addr: phys_addr_t, pool: *mut io_tlb_pool) {
     swiotlb_release_slots(dev, tlb_addr, pool);
     }
-    static int rmem_swiotlb_device_init(struct reserved_mem *rmem,
-    struct device *dev)
-    {
-    struct io_tlb_mem *mem = rmem.priv;
-    let mut nslabs: c_ulong = rmem.size >> IO_TLB_SHIFT;
+#[no_mangle]
+pub unsafe extern "C" fn rmem_swiotlb_device_init(rmem: *mut reserved_mem, dev: *mut device) -> c_int {
+    let mut mem = rmem.priv;
+pub static mut nslabs: c_ulong = 0;
 // Set Per-device io tlb area to one
-    let mut nareas: c_uint = 1;
+pub static mut nareas: c_uint = 1;
     if (PageHighMem(pfn_to_page(PHYS_PFN(rmem.base)))) {
     dev_err(dev, "Restricted DMA pool must be accessible within the linear mapping.");
     return -EINVAL;
@@ -1836,10 +2082,11 @@ pub unsafe extern "C" fn swiotlb_free(dev: *mut device, page: *mut page, size: u
 // to it.
 //
     if (!mem) {
-    struct io_tlb_pool *pool;
+pub static mut pool: *mut c_void = core::ptr::null_mut();
     mem = kzalloc_obj(*mem);
-    if (!mem)
+    if (!mem) {
     return -ENOMEM;
+    }
     pool = &mem.defpool;
     pool.slots = kzalloc_objs(*pool.slots, nslabs);
     if (!pool.slots) {
@@ -1857,7 +2104,7 @@ pub unsafe extern "C" fn swiotlb_free(dev: *mut device, page: *mut page, size: u
 // restricted mem pool is shared by default
 //
     if (cc_platform_has(CC_ATTR_MEM_ENCRYPT)) {
-    int ret;
+    let mut ret = 0;
     mem.cc_shared = true;
     ret = set_memory_decrypted((unsigned long)phys_to_virt(rmem.base),
     rmem.size >> PAGE_SHIFT);
@@ -1886,26 +2133,21 @@ pub unsafe extern "C" fn swiotlb_free(dev: *mut device, page: *mut page, size: u
     dev.dma_io_tlb_mem = mem;
     return 0;
     }
-    static void rmem_swiotlb_device_release(struct reserved_mem *rmem,
-    struct device *dev)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn rmem_swiotlb_device_release(rmem: *mut reserved_mem, dev: *mut device) {
     dev.dma_io_tlb_mem = &io_tlb_default_mem;
     }
-    static int __init rmem_swiotlb_setup(unsigned long node,
-    struct reserved_mem *rmem)
+    static int __init rmem_swiotlb_setup(unsigned long node, reserved_mem *rmem)
     {
     if (of_get_flat_dt_prop(node, "reusable", core::ptr::null_mut()) ||
     of_get_flat_dt_prop(node, "linux,cma-default", core::ptr::null_mut()) ||
     of_get_flat_dt_prop(node, "linux,dma-default", core::ptr::null_mut()) ||
-    of_get_flat_dt_prop(node, "no-map", core::ptr::null_mut()))
+    of_get_flat_dt_prop(node, "no-map", core::ptr::null_mut())) {
     return -EINVAL;
-    pr_info("Reserved memory: created restricted DMA pool at %pa, size %ld MiB\n",
+    }
+    pr_info!("Reserved memory: created restricted DMA pool at %pa, size %ld MiB\n",
     &rmem.base, (unsigned long)rmem.size / SZ_1M);
     return 0;
     }
-    static const struct reserved_mem_ops rmem_swiotlb_ops = {
-    .node_init = rmem_swiotlb_setup,
-    .device_init = rmem_swiotlb_device_init,
-    .device_release = rmem_swiotlb_device_release,
-    };
+pub static mut reserved_mem_ops: usize = 0;
     RESERVEDMEM_OF_DECLARE(dma, "restricted-dma-pool", &rmem_swiotlb_ops);

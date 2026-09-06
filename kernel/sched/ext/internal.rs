@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -382,7 +632,7 @@ pub struct sched_ext_ops {
 // the option to select a different CPU. See select_task_rq() for
 // details.
 //
-    pub wake_flags): *mut *mut *mut s32 (select_cpu)(struct task_struct p, s32 prev_cpu, u64,
+    pub wake_flags): *mut *mut *mut s32 (select_cpu)(task_struct p, s32 prev_cpu, u64,
 //
 // @enqueue: Enqueue a task on the BPF scheduler
 // @p: task being enqueued
@@ -396,7 +646,7 @@ pub struct sched_ext_ops {
 // If @p was inserted into a DSQ from ops.select_cpu(), this callback is
 // skipped.
 //
-    pub enq_flags): *mut *mut *mut void (enqueue)(struct task_struct p, u64,
+    pub enq_flags): *mut *mut *mut c_void (enqueue)(task_struct p, u64,
 //
 // @dequeue: Remove a task from the BPF scheduler
 // @p: task being dequeued
@@ -411,7 +661,7 @@ pub struct sched_ext_ops {
 // on the scheduling logic, this can lead to confusing behaviors - e.g.
 // scheduling position not being updated across a priority change.
 //
-    pub deq_flags): *mut *mut *mut void (dequeue)(struct task_struct p, u64,
+    pub deq_flags): *mut *mut *mut c_void (dequeue)(task_struct p, u64,
 //
 // @dispatch: Dispatch tasks from the BPF scheduler and/or user DSQs
 // @cpu: CPU to dispatch tasks for
@@ -433,7 +683,7 @@ pub struct sched_ext_ops {
 // ops.dispatch() returns. To keep executing @prev, return without
 // dispatching or moving any tasks. Also see %SCX_OPS_ENQ_LAST.
 //
-    pub prev): *mut *mut void (dispatch)(s32 cpu, struct task_struct,
+    pub prev): *mut *mut c_void (dispatch)(s32 cpu, task_struct,
 //
 // @tick: Periodic tick
 // @p: task running currently
@@ -443,7 +693,7 @@ pub struct sched_ext_ops {
 // scx_bpf_task_set_slice() will trigger an immediate dispatch cycle on
 // the CPU.
 //
-    pub p): *mut *mut void (tick)(struct task_struct,
+    pub p): *mut *mut c_void (tick)(task_struct,
 //
 // @runnable: A task is becoming runnable on its associated CPU
 // @p: task becoming runnable
@@ -469,7 +719,7 @@ pub struct sched_ext_ops {
 // task may be ->enqueue()'d without being preceded by this operation
 // e.g. after exhausting its slice.
 //
-    pub enq_flags): *mut *mut *mut void (runnable)(struct task_struct p, u64,
+    pub enq_flags): *mut *mut *mut c_void (runnable)(task_struct p, u64,
 //
 // @running: A task is starting to run on its associated CPU
 // @p: task starting to run
@@ -485,7 +735,7 @@ pub struct sched_ext_ops {
 //
 // See ->runnable() for explanation on the task state notifiers.
 //
-    pub p): *mut *mut void (running)(struct task_struct,
+    pub p): *mut *mut c_void (running)(task_struct,
 //
 // @stopping: A task is stopping execution
 // @p: task stopping to run
@@ -504,7 +754,7 @@ pub struct sched_ext_ops {
 // !@runnable, ->quiescent() will be invoked after this operation
 // returns.
 //
-    pub runnable): *mut *mut *mut void (stopping)(struct task_struct p, bool,
+    pub runnable): *mut *mut *mut c_void (stopping)(task_struct p, bool,
 //
 // @quiescent: A task is becoming not runnable on its associated CPU
 // @p: task becoming not runnable
@@ -523,7 +773,7 @@ pub struct sched_ext_ops {
 // notifies @p's state transition and may not be preceded by ->dequeue()
 // e.g. when @p is being dispatched to a remote CPU.
 //
-    pub deq_flags): *mut *mut *mut void (quiescent)(struct task_struct p, u64,
+    pub deq_flags): *mut *mut *mut c_void (quiescent)(task_struct p, u64,
 //
 // @yield: Yield CPU
 // @from: yielding task
@@ -537,7 +787,7 @@ pub struct sched_ext_ops {
 // If @to is not-NULL, @from wants to yield the CPU to @to. If the bpf
 // scheduler can implement the request, return %true; otherwise, %false.
 //
-    pub to): *mut *mut *mut bool (yield)(struct task_struct from, struct task_struct,
+    pub to): *mut *mut *mut bool (yield)(task_struct from, task_struct,
 //
 // @core_sched_before: Task ordering for core-sched
 // @a: task A
@@ -559,7 +809,7 @@ pub struct sched_ext_ops {
 // If not specified, the default is ordering them according to when they
 // became runnable.
 //
-    pub b): *mut *mut *mut bool (core_sched_before)(struct task_struct a, struct task_struct,
+    pub b): *mut *mut *mut bool (core_sched_before)(task_struct a, task_struct,
 //
 // @set_weight: Set task weight
 // @p: task to set weight for
@@ -567,7 +817,7 @@ pub struct sched_ext_ops {
 //
 // Update @p's weight to @weight.
 //
-    pub weight): *mut *mut *mut void (set_weight)(struct task_struct p, u32,
+    pub weight): *mut *mut *mut c_void (set_weight)(task_struct p, u32,
 //
 // @set_cpumask: Set CPU affinity
 // @p: task to set CPU affinity for
@@ -596,7 +846,7 @@ pub struct sched_ext_ops {
 // Specify the %SCX_OPS_KEEP_BUILTIN_IDLE flag to keep the built-in idle
 // tracking.
 //
-    pub idle): *mut *mut void (update_idle)(s32 cpu, bool,
+    pub idle): *mut *mut c_void (update_idle)(s32 cpu, bool,
 //
 // @init_task: Initialize a task to run in a BPF scheduler
 // @p: task to initialize for BPF scheduling
@@ -610,7 +860,7 @@ pub struct sched_ext_ops {
 // loading will abort loading of the BPF scheduler. During a fork, it
 // will abort that specific fork.
 //
-    pub args): *mut *mut *mut s32 (init_task)(struct task_struct p, struct scx_init_task_args,
+    pub args): *mut *mut *mut s32 (init_task)(task_struct p, scx_init_task_args,
 //
 // @exit_task: Exit a previously-running task from the system
 // @p: task to exit
@@ -619,7 +869,7 @@ pub struct sched_ext_ops {
 // @p is exiting or the BPF scheduler is being unloaded. Perform any
 // necessary cleanup for @p.
 //
-    pub args): *mut *mut *mut void (exit_task)(struct task_struct p, struct scx_exit_task_args,
+    pub args): *mut *mut *mut c_void (exit_task)(task_struct p, scx_exit_task_args,
 //
 // @enable: Enable BPF scheduling for a task
 // @p: task to enable BPF scheduling for
@@ -627,7 +877,7 @@ pub struct sched_ext_ops {
 // Enable @p for BPF scheduling. enable() is called on @p any time it
 // enters SCX, and is always paired with a matching disable().
 //
-    pub p): *mut *mut void (enable)(struct task_struct,
+    pub p): *mut *mut c_void (enable)(task_struct,
 //
 // @disable: Disable BPF scheduling for a task
 // @p: task to disable BPF scheduling for
@@ -636,14 +886,14 @@ pub struct sched_ext_ops {
 // Disable BPF scheduling for @p. A disable() call is always matched
 // with a prior enable() call.
 //
-    pub p): *mut *mut void (disable)(struct task_struct,
+    pub p): *mut *mut c_void (disable)(task_struct,
 //
 // @dump: Dump BPF scheduler state on error
 // @ctx: debug dump context
 //
 // Use scx_bpf_dump() to generate BPF scheduler specific debug dump.
 //
-    pub ctx): *mut *mut void (dump)(struct scx_dump_ctx,
+    pub ctx): *mut *mut c_void (dump)(scx_dump_ctx,
 //
 // @dump_cpu: Dump BPF scheduler state for a CPU on error
 // @ctx: debug dump context
@@ -654,7 +904,7 @@ pub struct sched_ext_ops {
 // @cpu. If @idle is %true and this operation doesn't produce any
 // output, @cpu is skipped for dump.
 //
-    pub idle): *mut *mut *mut void (dump_cpu)(struct scx_dump_ctx ctx, s32 cpu, bool,
+    pub idle): *mut *mut *mut c_void (dump_cpu)(scx_dump_ctx ctx, s32 cpu, bool,
 //
 // @dump_task: Dump BPF scheduler state for a runnable task on error
 // @ctx: debug dump context
@@ -663,7 +913,7 @@ pub struct sched_ext_ops {
 // Use scx_bpf_dump() to generate BPF scheduler specific debug dump for
 // @p.
 //
-    pub p): *mut *mut *mut void (dump_task)(struct scx_dump_ctx ctx, struct task_struct,
+    pub p): *mut *mut *mut c_void (dump_task)(scx_dump_ctx ctx, task_struct,
 
 //
 // @cgroup_init: Initialize a cgroup
@@ -701,7 +951,7 @@ pub struct sched_ext_ops {
 // it: a removed cgroup stays schedulable until its dying tasks finish
 // their final context switches.
 //
-    pub cgrp): *mut *mut void (cgroup_exit)(struct cgroup,
+    pub cgrp): *mut *mut c_void (cgroup_exit)(cgroup,
 //
 // @cgroup_prep_move: Prepare a task to be moved to a different cgroup
 // @p: task being moved
@@ -752,7 +1002,7 @@ pub struct sched_ext_ops {
 // ops.cgroup_init() for @cgrp - at a sub-scheduler attach point, the
 // parent sched tracks @cgrp through ops.sub_attach() instead.
 //
-    pub weight): *mut *mut *mut void (cgroup_set_weight)(struct cgroup cgrp, u32,
+    pub weight): *mut *mut *mut c_void (cgroup_set_weight)(cgroup cgrp, u32,
 //
 // @cgroup_set_bandwidth: A cgroup's bandwidth is being changed
 // @cgrp: cgroup whose bandwidth is being updated
@@ -785,7 +1035,7 @@ pub struct sched_ext_ops {
 //
 // Delivery follows the same rule as cgroup_set_weight().
 //
-    pub idle): *mut *mut *mut void (cgroup_set_idle)(struct cgroup cgrp, bool,
+    pub idle): *mut *mut *mut c_void (cgroup_set_idle)(cgroup cgrp, bool,
 
 //
 // @sub_attach: Attach a sub-scheduler
@@ -793,12 +1043,12 @@ pub struct sched_ext_ops {
 //
 // Return 0 to accept the sub-scheduler. -errno to reject.
 //
-    pub args): *mut *mut s32 (sub_attach)(struct scx_sub_attach_args,
+    pub args): *mut *mut s32 (sub_attach)(scx_sub_attach_args,
 //
 // @sub_detach: Detach a sub-scheduler
 // @args: argument container, see the struct definition
 //
-    pub args): *mut *mut void (sub_detach)(struct scx_sub_detach_args,
+    pub args): *mut *mut c_void (sub_detach)(scx_sub_detach_args,
 //
 // @sub_caps_updated: Caps on this sub-sched's shard changed
 // @cmask: cids whose caps changed (cmask->base identifies the shard)
@@ -817,7 +1067,7 @@ pub struct sched_ext_ops {
 //
 // May call scx_bpf_sub_grant() / scx_bpf_sub_revoke() on children.
 //
-    pub caps): *const *const *const void (sub_caps_updated)(struct scx_cmask cmask, u64,
+    pub caps): *const *const *const c_void (sub_caps_updated)(scx_cmask cmask, u64,
 //
 // @sub_ecaps_updated: This sub-sched's effective caps on a cid changed
 // @cid: the cid whose effective caps changed
@@ -829,7 +1079,7 @@ pub struct sched_ext_ops {
 // held, and can perform all operations allowed in ops.dispatch()
 // including inserting/moving tasks.
 //
-    pub after): *mut *mut void (sub_ecaps_updated)(s32 cid, u64 before, u64,
+    pub after): *mut *mut c_void (sub_ecaps_updated)(s32 cid, u64 before, u64,
 //
 // All online ops must come before ops.cpu_online().
 //
@@ -839,7 +1089,7 @@ pub struct sched_ext_ops {
 // @cpu just came online. @cpu will not call ops.enqueue() or
 // ops.dispatch(), nor run tasks associated with other CPUs beforehand.
 //
-    pub cpu): *mut *mut void (cpu_online)(s32,
+    pub cpu): *mut *mut c_void (cpu_online)(s32,
 //
 // @cpu_offline: A CPU is going offline
 // @cpu: CPU which is going offline
@@ -847,7 +1097,7 @@ pub struct sched_ext_ops {
 // @cpu is going offline. @cpu will not call ops.enqueue() or
 // ops.dispatch(), nor run tasks associated with other CPUs afterwards.
 //
-    pub cpu): *mut *mut void (cpu_offline)(s32,
+    pub cpu): *mut *mut c_void (cpu_offline)(s32,
 //
 // All CPU hotplug ops must come before ops.init_cids().
 //
@@ -870,7 +1120,7 @@ pub struct sched_ext_ops {
 // unusual. This is to allow rich reporting through @info on how
 // ops.init() failed.
 //
-    pub info): *mut *mut void (exit)(struct scx_exit_info,
+    pub info): *mut *mut c_void (exit)(scx_exit_info,
 //
 // Data fields must comes after all ops fields.
 //
@@ -957,7 +1207,7 @@ pub struct sched_ext_ops {
 //
     pub name: [c_char; SCX_OPS_NAME_LEN],
 // internal use only, must be NULL
-    pub priv: *mut void __rcu,
+    pub priv: *mut c_void ,
 //
 // Deprecated callbacks. Kept at the end of the struct so the cid-form
 // struct (sched_ext_ops_cid) can omit them without affecting the
@@ -973,7 +1223,7 @@ pub struct sched_ext_ops {
 // A CPU that was previously released from the BPF scheduler is now once
 // again under its control. Deprecated; use SCX_ENQ_IMMED instead.
 //
-    pub args): *mut *mut void (cpu_acquire)(s32 cpu, struct scx_cpu_acquire_args,
+    pub args): *mut *mut c_void (cpu_acquire)(s32 cpu, scx_cpu_acquire_args,
 //
 // @cpu_release: A CPU is taken away from the BPF scheduler
 // @cpu: The CPU being released by the BPF scheduler.
@@ -985,7 +1235,7 @@ pub struct sched_ext_ops {
 // caller should consult @args->reason to determine the cause.
 // Deprecated; use SCX_ENQ_IMMED instead.
 //
-    pub args): *mut *mut void (cpu_release)(s32 cpu, struct scx_cpu_release_args,
+    pub args): *mut *mut c_void (cpu_release)(s32 cpu, scx_cpu_release_args,
 }
 
 //
@@ -1018,46 +1268,46 @@ pub struct sched_ext_ops {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct sched_ext_ops_cid {
-    pub wake_flags): *mut *mut *mut s32 (select_cid)(struct task_struct p, s32 prev_cid, u64,
-    pub enq_flags): *mut *mut *mut void (enqueue)(struct task_struct p, u64,
-    pub deq_flags): *mut *mut *mut void (dequeue)(struct task_struct p, u64,
-    pub prev): *mut *mut void (dispatch)(s32 cid, struct task_struct,
-    pub p): *mut *mut void (tick)(struct task_struct,
-    pub enq_flags): *mut *mut *mut void (runnable)(struct task_struct p, u64,
-    pub p): *mut *mut void (running)(struct task_struct,
-    pub runnable): *mut *mut *mut void (stopping)(struct task_struct p, bool,
-    pub deq_flags): *mut *mut *mut void (quiescent)(struct task_struct p, u64,
-    pub to): *mut *mut *mut bool (yield)(struct task_struct from, struct task_struct,
+    pub wake_flags): *mut *mut *mut s32 (select_cid)(task_struct p, s32 prev_cid, u64,
+    pub enq_flags): *mut *mut *mut c_void (enqueue)(task_struct p, u64,
+    pub deq_flags): *mut *mut *mut c_void (dequeue)(task_struct p, u64,
+    pub prev): *mut *mut c_void (dispatch)(s32 cid, task_struct,
+    pub p): *mut *mut c_void (tick)(task_struct,
+    pub enq_flags): *mut *mut *mut c_void (runnable)(task_struct p, u64,
+    pub p): *mut *mut c_void (running)(task_struct,
+    pub runnable): *mut *mut *mut c_void (stopping)(task_struct p, bool,
+    pub deq_flags): *mut *mut *mut c_void (quiescent)(task_struct p, u64,
+    pub to): *mut *mut *mut bool (yield)(task_struct from, task_struct,
     pub b): *mut task_struct,
-    pub weight): *mut *mut *mut void (set_weight)(struct task_struct p, u32,
+    pub weight): *mut *mut *mut c_void (set_weight)(task_struct p, u32,
     pub cmask__arena): *const scx_cmask,
-    pub idle): *mut *mut void (update_idle)(s32 cid, bool,
+    pub idle): *mut *mut c_void (update_idle)(s32 cid, bool,
     pub args): *mut scx_init_task_args,
     pub args): *mut scx_exit_task_args,
-    pub p): *mut *mut void (enable)(struct task_struct,
-    pub p): *mut *mut void (disable)(struct task_struct,
-    pub ctx): *mut *mut void (dump)(struct scx_dump_ctx,
-    pub idle): *mut *mut *mut void (dump_cid)(struct scx_dump_ctx ctx, s32 cid, bool,
-    pub p): *mut *mut *mut void (dump_task)(struct scx_dump_ctx ctx, struct task_struct,
+    pub p): *mut *mut c_void (enable)(task_struct,
+    pub p): *mut *mut c_void (disable)(task_struct,
+    pub ctx): *mut *mut c_void (dump)(scx_dump_ctx,
+    pub idle): *mut *mut *mut c_void (dump_cid)(scx_dump_ctx ctx, s32 cid, bool,
+    pub p): *mut *mut *mut c_void (dump_task)(scx_dump_ctx ctx, task_struct,
 
-    pub args): *mut *mut *mut s32 (cpuctl_init)(struct cgroup cgrp, struct scx_cgroup_init_args,
-    pub cgrp): *mut *mut void (cpuctl_exit)(struct cgroup,
+    pub args): *mut *mut *mut s32 (cpuctl_init)(cgroup cgrp, scx_cgroup_init_args,
+    pub cgrp): *mut *mut c_void (cpuctl_exit)(cgroup,
     pub to): *mut cgroup,
-    pub to): *mut *mut *mut *mut void (cpuctl_move)(struct task_struct p, struct cgroup from, struct cgroup,
+    pub to): *mut *mut *mut *mut c_void (cpuctl_move)(task_struct p, cgroup from, cgroup,
     pub to): *mut cgroup,
-    pub weight): *mut *mut *mut void (cpuctl_set_weight)(struct cgroup cgrp, u32,
+    pub weight): *mut *mut *mut c_void (cpuctl_set_weight)(cgroup cgrp, u32,
     pub burst_us): u64,
-    pub idle): *mut *mut *mut void (cpuctl_set_idle)(struct cgroup cgrp, bool,
+    pub idle): *mut *mut *mut c_void (cpuctl_set_idle)(cgroup cgrp, bool,
 
-    pub args): *mut *mut s32 (sub_attach)(struct scx_sub_attach_args,
-    pub args): *mut *mut void (sub_detach)(struct scx_sub_detach_args,
-    pub caps): *const *const *const void (sub_caps_updated)(struct scx_cmask cmask__arena, u64,
-    pub after): *mut *mut void (sub_ecaps_updated)(s32 cid, u64 before, u64,
-    pub cid): *mut *mut void (cid_online)(s32,
-    pub cid): *mut *mut void (cid_offline)(s32,
+    pub args): *mut *mut s32 (sub_attach)(scx_sub_attach_args,
+    pub args): *mut *mut c_void (sub_detach)(scx_sub_detach_args,
+    pub caps): *const *const *const c_void (sub_caps_updated)(scx_cmask cmask__arena, u64,
+    pub after): *mut *mut c_void (sub_ecaps_updated)(s32 cid, u64 before, u64,
+    pub cid): *mut *mut c_void (cid_online)(s32,
+    pub cid): *mut *mut c_void (cid_offline)(s32,
     pub (*init_cids)(void): *mut i32,
     pub (*init)(void): *mut i32,
-    pub info): *mut *mut void (exit)(struct scx_exit_info,
+    pub info): *mut *mut c_void (exit)(scx_exit_info,
 // Data fields - must match sched_ext_ops layout exactly
     pub dispatch_max_batch: u32,
     pub flags: u64,
@@ -1070,7 +1320,7 @@ pub struct sched_ext_ops_cid {
     pub sub_cgroup_id: u64,
     pub name: [c_char; SCX_OPS_NAME_LEN],
 // internal use only, must be NULL
-    pub priv: *mut void __rcu,
+    pub priv: *mut c_void ,
 // layout end anchor for the BUILD_BUG_ON in scx_init(); keep last
     pub __end: [c_char; 0],
 }
@@ -1234,7 +1484,7 @@ pub struct scx_dsp_ctx {
     pub rq: *mut rq,
     pub cursor: u32,
     pub nr_tasks: u32,
-    pub buf: [scx_dsp_buf_ent; ],
+    pub buf: [scx_dsp_buf_ent; 0],
 }
 
 #[repr(C)]
@@ -1248,7 +1498,7 @@ pub struct scx_deferred_reenq_local {
 #[derive(Copy, Clone)]
 pub struct scx_sched_pcpu {
     pub sch: *mut scx_sched,
-    pub /: *mut *mut u64 flags; / protected by rq lock,
+//     pub /: *mut *mut u64 flags; / protected by rq lock,
 //
 // Kick state owned by this cpu for this sched. scx_kick_cpu() records
 // targets here and links @to_kick_node onto the cpu's
@@ -1287,7 +1537,7 @@ pub struct scx_sched_pcpu {
 // largest value. Accessed only under this cpu's rq lock.
 //
     pub rescue_avg: u64,
-    pub /: *mut *mut u64 rescue_avg_at; / last decay, jiffies_64,
+//     pub /: *mut *mut u64 rescue_avg_at; / last decay, jiffies_64,
 
 //
 // The event counters are in a per-CPU variable to minimize the
@@ -1425,8 +1675,8 @@ pub struct scx_caps_updated {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct scx_pshard {
-    pub /: *mut *mut raw_spinlock_t lock; / serializes caps,
-    pub /: *mut *mut *mut scx_sched sch; / backpointer,
+//     pub /: *mut *mut raw_spinlock_t lock; / serializes caps,
+//     pub /: *mut *mut *mut scx_sched sch; / backpointer,
     pub caps_updated: scx_caps_updated,
 //
 // Per-cap cmask, inline via TRAILING_OVERLAP so cmask.bits[] overlaps
@@ -2069,7 +2319,7 @@ extern "C" {
 // So if kf_tasks[] is set, @p's scheduler-protected fields are stable.
 //
 // kf_tasks[] can not stack, so task-based SCX ops must not nest. The
-// WARN_ON_ONCE() in each macro catches a re-entry of any of the three variants
+// WARN_ON_ONCE!() in each macro catches a re-entry of any of the three variants
 // while a previous one is still in progress.
 //
 
@@ -2136,4 +2386,4 @@ extern "C" {
 extern "C" {
     pub fn rcu_dereference_all(_arg: scx_root) -> return;
 }
-
+}

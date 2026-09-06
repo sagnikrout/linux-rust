@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -68,89 +318,85 @@ pub struct eprobe_data {
     pub ep: *mut trace_eprobe,
 }
 
-    list_for_each_entry(ep, trace_probe_probe_list(_tp), tp.list)
-    static int __trace_eprobe_create(int argc, const char *argv[]);
+    list_for_each_entry(ep, trace_probe_probe_list(_tp), tp.list) {
+// forward_decl: __trace_eprobe_create;
+    }
 #[no_mangle]
 unsafe extern "C" fn trace_event_probe_cleanup(ep: *mut trace_eprobe) {
-    static void trace_event_probe_cleanup(struct trace_eprobe *ep)
-    {
-    if (!ep)
+    if (!ep) {
     return;
+    }
     trace_probe_cleanup(&ep.tp);
     kfree(ep.event_name);
     kfree(ep.event_system);
-    if (ep.event)
+    if (ep.event) {
     trace_event_put_ref(ep.event);
+    }
     kfree(ep.filter_str);
     kfree(ep);
     }
-    DEFINE_FREE(trace_event_probe_cleanup, struct trace_eprobe *,
+    DEFINE_FREE(trace_event_probe_cleanup, trace_eprobe *,
     if (!IS_ERR_OR_NULL(_T)) trace_event_probe_cleanup(_T))
-    static struct trace_eprobe *to_trace_eprobe(struct dyn_event *ev)
-    {
-    return container_of(ev, struct trace_eprobe, devent);
+#[no_mangle]
+pub unsafe extern "C" fn to_trace_eprobe(ev: *mut dyn_event) -> *mut c_void {
+    return container_of!(ev, trace_eprobe, devent);
     }
 #[no_mangle]
 unsafe extern "C" fn eprobe_dyn_event_create(raw_command: *const c_char) -> c_int {
-    static int eprobe_dyn_event_create(const char *raw_command)
-    {
     return trace_probe_create(raw_command, __trace_eprobe_create);
     }
 #[no_mangle]
 unsafe extern "C" fn eprobe_dyn_event_show(m: *mut seq_file, ev: *mut dyn_event) -> c_int {
-    static int eprobe_dyn_event_show(struct seq_file *m, struct dyn_event *ev)
-    {
-    struct trace_eprobe *ep = to_trace_eprobe(ev);
-    int i;
-    seq_printf(m, "e:%s/%s", trace_probe_group_name(&ep.tp),
+    let mut ep = to_trace_eprobe(ev);
+    let mut i = 0;
+    seq_printf(m, "e:%s/%s", trace_probe_group_name(&ep.tp), {
     trace_probe_name(&ep.tp));
+    }
     seq_printf(m, " %s.%s", ep.event_system, ep.event_name);
-    for (i = 0; i < ep.tp.nr_args; i++)
+    for (i = 0; i < ep.tp.nr_args; i++) {
     seq_printf(m, " %s=%s", ep.tp.args[i].name, ep.tp.args[i].comm);
+    }
     seq_putc(m, '\n');
     trace_probe_dump_args(m, &ep.tp);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn unregister_trace_eprobe(ep: *mut trace_eprobe) -> c_int {
-    static int unregister_trace_eprobe(struct trace_eprobe *ep)
-    {
 // If other probes are on the event, just unregister eprobe
-    if (trace_probe_has_sibling(&ep.tp))
-    goto unreg;
+    if (trace_probe_has_sibling(&ep.tp)) {
+// goto;
+    }
 // Enabled event can not be unregistered
-    if (trace_probe_is_enabled(&ep.tp))
+    if (trace_probe_is_enabled(&ep.tp)) {
     return -EBUSY;
+    }
 // Will fail if probe is being used by ftrace or perf
-    if (trace_probe_unregister_event_call(&ep.tp))
+    if (trace_probe_unregister_event_call(&ep.tp)) {
     return -EBUSY;
-    unreg:
+    }
+// label;
     dyn_event_remove(&ep.devent);
     trace_probe_unlink(&ep.tp);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn eprobe_dyn_event_release(ev: *mut dyn_event) -> c_int {
-    static int eprobe_dyn_event_release(struct dyn_event *ev)
-    {
-    struct trace_eprobe *ep = to_trace_eprobe(ev);
-    let mut ret: c_int = unregister_trace_eprobe(ep);
-    if (!ret)
+    let mut ep = to_trace_eprobe(ev);
+pub static mut ret: c_int = 0;
+    if (!ret) {
     trace_event_probe_cleanup(ep);
+    }
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn eprobe_dyn_event_is_busy(ev: *mut dyn_event) -> bool {
-    static bool eprobe_dyn_event_is_busy(struct dyn_event *ev)
-    {
-    struct trace_eprobe *ep = to_trace_eprobe(ev);
+    let mut ep = to_trace_eprobe(ev);
     return trace_probe_is_enabled(&ep.tp);
     }
-    static bool eprobe_dyn_event_match(const char *system, const char *event,
-    int argc, const char **argv, struct dyn_event *ev)
-    {
-    struct trace_eprobe *ep = to_trace_eprobe(ev);
-    const char *slash;
+#[no_mangle]
+pub unsafe extern "C" fn eprobe_dyn_event_match(system: *mut c_char, event: *mut c_char, argc: c_int, argv: *mut *mut c_char, ev: *mut dyn_event) -> bool {
+    let mut ep = to_trace_eprobe(ev);
+pub static mut slash: *mut c_void = core::ptr::null_mut();
 //
 // We match the following:
 // event only			- match all eprobes with event name
@@ -168,50 +414,50 @@ unsafe extern "C" fn eprobe_dyn_event_is_busy(ev: *mut dyn_event) -> bool {
 // If system exists, but this probe is not part of that system
 // do not match.
 //
-    if (system && strcmp(trace_probe_group_name(&ep.tp), system) != 0)
+    if (system && strcmp(trace_probe_group_name(&ep.tp), system) != 0) {
     return false;
+    }
 // Must match the event name
-    if (event[0] != '\0' && strcmp(trace_probe_name(&ep.tp), event) != 0)
+    if (event[0] != '\0' && strcmp(trace_probe_name(&ep.tp), event) != 0) {
     return false;
+    }
 // No arguments match all
-    if (argc < 1)
+    if (argc < 1) {
     return true;
+    }
 // First argument is the system/event the probe is attached to
     slash = strchr(argv[0], '/');
-    if (!slash)
+    if (!slash) {
     slash = strchr(argv[0], '.');
-    if (!slash)
+    }
+    if (!slash) {
     return false;
+    }
     if (strncmp(ep.event_system, argv[0], slash - argv[0]) ||
-    ep.event_system[slash - argv[0]] != '\0')
+    ep.event_system[slash - argv[0]] != '\0') {
     return false;
-    if (strcmp(ep.event_name, slash + 1))
+    }
+    if (strcmp(ep.event_name, slash + 1)) {
     return false;
-    argc--;
-    argv++;
+    }
+    argc -= 1;
+    argv += 1;
 // If there are no other args, then match
-    if (argc < 1)
+    if (argc < 1) {
     return true;
+    }
     return trace_probe_match_command_args(&ep.tp, argc, argv);
     }
-    static struct dyn_event_operations eprobe_dyn_event_ops = {
-    .create = eprobe_dyn_event_create,
-    .show = eprobe_dyn_event_show,
-    .is_busy = eprobe_dyn_event_is_busy,
-    .free = eprobe_dyn_event_release,
-    .match = eprobe_dyn_event_match,
-    };
-    static struct trace_eprobe *alloc_event_probe(const char *group,
-    const char *this_event,
-    struct trace_event_call *event,
-    int nargs)
-    {
+pub static mut dyn_event_operations: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_event_probe(group: *mut c_char, this_event: *mut c_char, event: *mut trace_event_call, nargs: c_int) -> *mut c_void {
     struct trace_eprobe *ep __free(trace_event_probe_cleanup) = core::ptr::null_mut();
-    const char *event_name;
-    const char *sys_name;
-    int ret;
-    if (!event)
+pub static mut event_name: *mut c_void = core::ptr::null_mut();
+pub static mut sys_name: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (!event) {
     return ERR_PTR(-ENODEV);
+    }
     sys_name = event.class.system;
     event_name = trace_event_name(event);
     ep = kzalloc_flex(*ep, tp.args, nargs);
@@ -221,56 +467,54 @@ unsafe extern "C" fn eprobe_dyn_event_is_busy(ev: *mut dyn_event) -> bool {
     }
     ep.event = event;
     ep.event_name = kstrdup(event_name, GFP_KERNEL);
-    if (!ep.event_name)
+    if (!ep.event_name) {
     return ERR_PTR(-ENOMEM);
+    }
     ep.event_system = kstrdup(sys_name, GFP_KERNEL);
-    if (!ep.event_system)
+    if (!ep.event_system) {
     return ERR_PTR(-ENOMEM);
+    }
     ret = trace_probe_init(&ep.tp, this_event, group, false, nargs);
-    if (ret < 0)
+    if (ret < 0) {
     return ERR_PTR(ret);
+    }
     dyn_event_init(&ep.devent, &eprobe_dyn_event_ops);
     return_ptr(ep);
     }
 #[no_mangle]
 unsafe extern "C" fn eprobe_event_define_fields(event_call: *mut trace_event_call) -> c_int {
-    static int eprobe_event_define_fields(struct trace_event_call *event_call)
-    {
-    struct eprobe_trace_entry_head field;
-    struct trace_probe *tp;
+pub static mut field: usize = 0;
+pub static mut tp: *mut c_void = core::ptr::null_mut();
     tp = trace_probe_primary_from_call(event_call);
-    if (WARN_ON_ONCE(!tp))
+    if (WARN_ON_ONCE!(!tp)) {
     return -ENOENT;
-    return traceprobe_define_arg_fields(event_call, sizeof(field), tp);
     }
-    static struct trace_event_fields eprobe_fields_array[] = {
-    { .type = TRACE_FUNCTION_TYPE,
-    .define_fields = eprobe_event_define_fields },
-    {}
-    };
+    return traceprobe_define_arg_fields(event_call, sizeof!(field), tp);
+    }
+pub static mut trace_event_fields: usize = 0;
 // Event entry printers
     static enum print_line_t
-    print_eprobe_event(struct trace_iterator *iter, int flags,
-    struct trace_event *event)
+    print_eprobe_event(trace_iterator *iter, int flags, trace_event *event)
     {
-    struct eprobe_trace_entry_head *field;
-    struct trace_event_call *pevent;
-    struct trace_event *probed_event;
-    struct trace_seq *s = &iter.seq;
-    struct trace_eprobe *ep;
-    struct trace_probe *tp;
-    unsigned int type;
-    field = (struct eprobe_trace_entry_head *)iter.ent;
+pub static mut field: *mut c_void = core::ptr::null_mut();
+pub static mut pevent: *mut c_void = core::ptr::null_mut();
+pub static mut probed_event: *mut c_void = core::ptr::null_mut();
+    let mut s = &iter.seq;
+pub static mut ep: *mut c_void = core::ptr::null_mut();
+pub static mut tp: *mut c_void = core::ptr::null_mut();
+    let mut type = 0;
+    field = iter.ent;
     tp = trace_probe_primary_from_call(
-    container_of(event, struct trace_event_call, event));
-    if (WARN_ON_ONCE(!tp))
-    goto out;
-    ep = container_of(tp, struct trace_eprobe, tp);
+    container_of!(event, trace_event_call, event));
+    if (WARN_ON_ONCE!(!tp)) {
+// goto;
+    }
+    ep = container_of!(tp, trace_eprobe, tp);
     type = ep.event.event.type;
     trace_seq_printf(s, "%s: (", trace_probe_name(tp));
     probed_event = ftrace_find_event(type);
     if (probed_event) {
-    pevent = container_of(probed_event, struct trace_event_call, event);
+    pevent = container_of!(probed_event, trace_event_call, event);
     trace_seq_printf(s, "%s.%s", pevent.class.system,
     trace_event_name(pevent));
     } else {
@@ -278,148 +522,173 @@ unsafe extern "C" fn eprobe_event_define_fields(event_call: *mut trace_event_cal
     }
     trace_seq_putc(s, ')');
     if (trace_probe_print_args(s, tp.args, tp.nr_args,
-    (u8 *)&field[1], field) < 0)
-    goto out;
+    &field[1], field) < 0) {
+// goto;
+    }
     trace_seq_putc(s, '\n');
-    out:
+// label;
     return trace_handle_return(s);
     }
     static nokprobe_inline unsigned long
-    get_event_field(struct fetch_insn *code, void *rec)
+    get_event_field(fetch_insn *code, void *rec)
     {
-    struct ftrace_event_field *field = code.data;
-    unsigned long val;
-    void *addr;
+    let mut field = code.data;
+    let mut val = 0;
+pub static mut addr: *mut c_void = core::ptr::null_mut();
     addr = rec + field.offset;
     if (is_string_field(field)) {
-    switch (field.filter_type) {
-    case FILTER_DYN_STRING:
-    val = (unsigned long)(rec + (*(unsigned int *)addr & 0xffff));
-    break;
-    case FILTER_RDYN_STRING:
-    val = (unsigned long)(addr + (*(unsigned int *)addr & 0xffff));
-    break;
-    case FILTER_STATIC_STRING:
+    match (field.filter_type) {
+    FILTER_DYN_STRING => {
+    val = (unsigned long)(rec + (*addr & 0xffff));
+    // break;
+    }
+    FILTER_RDYN_STRING => {
+    val = (unsigned long)(addr + (*addr & 0xffff));
+    // break;
+    }
+    FILTER_STATIC_STRING => {
     val = (unsigned long)addr;
-    break;
-    case FILTER_PTR_STRING:
-    val = *(unsigned long *)addr;
-    break;
-    default:
-    WARN_ON_ONCE(1);
+    // break;
+    }
+    FILTER_PTR_STRING => {
+    val = *addr;
+    // break;
+    }
+    _ => {
+    WARN_ON_ONCE!(1);
     return 0;
+    }
     }
     return val;
     }
-    switch (field.size) {
-    case 1:
-    if (field.is_signed)
-    val = *(char *)addr;
-    else
-    val = *(unsigned char *)addr;
-    break;
-    case 2:
-    if (field.is_signed)
-    val = *(short *)addr;
-    else
-    val = *(unsigned short *)addr;
-    break;
-    case 4:
-    if (field.is_signed)
-    val = *(int *)addr;
-    else
-    val = *(unsigned int *)addr;
-    break;
-    default:
-    if (field.size == sizeof(long)) {
-    if (field.is_signed)
-    val = *(long *)addr;
-    else
-    val = *(unsigned long *)addr;
-    break;
+    match (field.size) {
+    1 => {
+    if (field.is_signed) {
+    val = *addr;
+    }
+    else {
+    val = *addr;
+    }
+    // break;
+    }
+    2 => {
+    if (field.is_signed) {
+    val = *addr;
+    }
+    else {
+    val = *addr;
+    }
+    // break;
+    }
+    4 => {
+    if (field.is_signed) {
+    val = *addr;
+    }
+    else {
+    val = *addr;
+    }
+    // break;
+    }
+    _ => {
+    if (field.size == sizeof!(long)) {
+    if (field.is_signed) {
+    val = *addr;
+    }
+    else {
+    val = *addr;
+    }
+    // break;
     }
 // This is an array, point to the addr itself
     val = (unsigned long)addr;
-    break;
+    // break;
+    }
     }
     return val;
     }
 #[no_mangle]
 unsafe extern "C" fn get_eprobe_size(tp: *mut trace_probe, rec: *mut c_void) -> c_int {
-    static int get_eprobe_size(struct trace_probe *tp, void *rec)
-    {
-    struct fetch_insn *code;
-    struct probe_arg *arg;
+pub static mut code: *mut c_void = core::ptr::null_mut();
+pub static mut arg: *mut c_void = core::ptr::null_mut();
     int i, len, ret = 0;
-    for (i = 0; i < tp.nr_args; i++) {
+    while (i < tp.nr_args) {
     arg = tp.args + i;
     if (arg.dynamic) {
-    unsigned long val;
+    let mut val = 0;
     code = arg.code;
-    retry:
-    switch (code.op) {
-    case FETCH_OP_TP_ARG:
+// label;
+    match (code.op) {
+    FETCH_OP_TP_ARG => {
     val = get_event_field(code, rec);
-    break;
-    case FETCH_NOP_SYMBOL:	/* Ignore a place holder */
-    code++;
-    goto retry;
-    default:
-    if (process_common_fetch_insn(code, &val) < 0)
+    // break;
+    }
+    FETCH_NOP_SYMBOL => {
+    code += 1;
+// goto;
+    }
+    _ => {
+    if (process_common_fetch_insn(code, &val) < 0) {
     continue;
     }
-    code++;
+    }
+    }
+    code += 1;
     len = process_fetch_insn_bottom(code, val, core::ptr::null_mut(), core::ptr::null_mut());
-    if (len > 0)
+    if (len > 0) {
     ret += len;
+    }
     }
     }
     return ret;
     }
 // Kprobe specific fetch functions
 // Note that we don't verify it, since the code does not come from user space
-    static int
-    process_fetch_insn(struct fetch_insn *code, void *rec, void *edata,
-    void *dest, void *base)
-    {
-    unsigned long val;
-    int ret;
-    retry:
-    switch (code.op) {
-    case FETCH_OP_TP_ARG:
+#[no_mangle]
+pub unsafe extern "C" fn process_fetch_insn(code: *mut fetch_insn, rec: *mut c_void, edata: *mut c_void, dest: *mut c_void, base: *mut c_void) -> c_int {
+    let mut val = 0;
+    let mut ret = 0;
+// label;
+    match (code.op) {
+    FETCH_OP_TP_ARG => {
     val = get_event_field(code, rec);
-    break;
-    case FETCH_NOP_SYMBOL:	/* Ignore a place holder */
-    code++;
-    goto retry;
-    default:
+    // break;
+    }
+    FETCH_NOP_SYMBOL => {
+    code += 1;
+// goto;
+    }
+    _ => {
     ret = process_common_fetch_insn(code, &val);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
     }
-    code++;
+    }
+    }
+    code += 1;
     return process_fetch_insn_bottom(code, val, dest, base);
     }
     NOKPROBE_SYMBOL(process_fetch_insn)
 // eprobe handler
-    static inline void
-    __eprobe_trace_func(struct eprobe_data *edata, void *rec)
-    {
-    struct eprobe_trace_entry_head *entry;
-    struct trace_event_call *call = trace_probe_event_call(&edata.ep.tp);
-    struct trace_event_buffer fbuffer;
-    int dsize;
-    if (WARN_ON_ONCE(call != edata.file.event_call))
+#[no_mangle]
+pub unsafe extern "C" fn __eprobe_trace_func(edata: *mut eprobe_data, rec: *mut c_void) {
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+    let mut call = trace_probe_event_call(&edata.ep.tp);
+pub static mut fbuffer: usize = 0;
+    let mut dsize = 0;
+    if (WARN_ON_ONCE!(call != edata.file.event_call)) {
     return;
-    if (trace_trigger_soft_disabled(edata.file))
+    }
+    if (trace_trigger_soft_disabled(edata.file)) {
     return;
+    }
     dsize = get_eprobe_size(&edata.ep.tp, rec);
     entry = trace_event_buffer_reserve(&fbuffer, edata.file,
-    sizeof(*entry) + edata.ep.tp.size + dsize);
-    if (!entry)
+    sizeof!(*entry) + edata.ep.tp.size + dsize);
+    if (!entry) {
     return;
+    }
     entry = fbuffer.entry = ring_buffer_event_data(fbuffer.event);
-    store_trace_args(&entry[1], &edata.ep.tp, rec, core::ptr::null_mut(), sizeof(*entry), dsize);
+    store_trace_args(&entry[1], &edata.ep.tp, rec, core::ptr::null_mut(), sizeof!(*entry), dsize);
     trace_event_buffer_commit(&fbuffer);
     }
 //
@@ -430,74 +699,47 @@ unsafe extern "C" fn get_eprobe_size(tp: *mut trace_probe, rec: *mut c_void) -> 
 //
 #[no_mangle]
 unsafe extern "C" fn eprobe_trigger_init(data: *mut event_trigger_data) -> c_int {
-    static int eprobe_trigger_init(struct event_trigger_data *data)
-    {
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn eprobe_trigger_free(data: *mut event_trigger_data) {
-    static void eprobe_trigger_free(struct event_trigger_data *data)
-    {
     }
-    static int eprobe_trigger_print(struct seq_file *m,
-    struct event_trigger_data *data)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn eprobe_trigger_print(m: *mut seq_file, data: *mut event_trigger_data) -> c_int {
 // Do not print eprobe event triggers
     return 0;
     }
-    static void eprobe_trigger_func(struct event_trigger_data *data,
-    struct trace_buffer *buffer, void *rec,
-    struct ring_buffer_event *rbe)
-    {
-    struct eprobe_data *edata = data.private_data;
-    if (unlikely(!rec))
+#[no_mangle]
+pub unsafe extern "C" fn eprobe_trigger_func(data: *mut event_trigger_data, buffer: *mut trace_buffer, rec: *mut c_void, rbe: *mut ring_buffer_event) {
+    let mut edata = data.private_data;
+    if (unlikely(!rec)) {
     return;
+    }
     __eprobe_trace_func(edata, rec);
     }
-    static int eprobe_trigger_cmd_parse(struct event_command *cmd_ops,
-    struct trace_event_file *file,
-    char *glob, char *cmd,
-    char *param_and_filter)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn eprobe_trigger_cmd_parse(cmd_ops: *mut event_command, file: *mut trace_event_file, glob: *mut c_char, cmd: *mut c_char, param_and_filter: *mut c_char) -> c_int {
     return -1;
     }
-    static int eprobe_trigger_reg_func(char *glob,
-    struct event_trigger_data *data,
-    struct trace_event_file *file)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn eprobe_trigger_reg_func(glob: *mut c_char, data: *mut event_trigger_data, file: *mut trace_event_file) -> c_int {
     return -1;
     }
-    static void eprobe_trigger_unreg_func(char *glob,
-    struct event_trigger_data *data,
-    struct trace_event_file *file)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn eprobe_trigger_unreg_func(glob: *mut c_char, data: *mut event_trigger_data, file: *mut trace_event_file) {
     }
-    static struct event_command event_trigger_cmd = {
-    .name			= "eprobe",
-    .trigger_type		= ETT_EVENT_EPROBE,
-    .flags			= EVENT_CMD_FL_NEEDS_REC,
-    .parse			= eprobe_trigger_cmd_parse,
-    .reg			= eprobe_trigger_reg_func,
-    .unreg			= eprobe_trigger_unreg_func,
-    .unreg_all		= core::ptr::null_mut(),
-    .set_filter		= core::ptr::null_mut(),
-    .trigger		= eprobe_trigger_func,
-    .print			= eprobe_trigger_print,
-    .init			= eprobe_trigger_init,
-    .free			= eprobe_trigger_free,
-    };
-    static struct event_trigger_data *
-    new_eprobe_trigger(struct trace_eprobe *ep, struct trace_event_file *file)
-    {
-    struct event_trigger_data *trigger;
-    struct event_filter *filter = core::ptr::null_mut();
-    struct eprobe_data *edata;
-    int ret;
+pub static mut event_command: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn new_eprobe_trigger(ep: *mut trace_eprobe, file: *mut trace_event_file) -> *mut c_void {
+pub static mut trigger: *mut c_void = core::ptr::null_mut();
+    let mut filter = core::ptr::null_mut();
+pub static mut edata: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     edata = kzalloc_obj(*edata);
     trigger = kzalloc_obj(*trigger);
     if (!trigger || !edata) {
     ret = -ENOMEM;
-    goto error;
+// goto;
     }
     trigger.flags = EVENT_TRIGGER_FL_PROBE;
     trigger.count = -1;
@@ -511,100 +753,107 @@ unsafe extern "C" fn eprobe_trigger_free(data: *mut event_trigger_data) {
     if (ep.filter_str) {
     ret = create_event_filter(file.tr, ep.event,
     ep.filter_str, false, &filter);
-    if (ret)
-    goto error;
+    if (ret) {
+// goto;
+    }
     }
     RCU_INIT_POINTER(trigger.filter, filter);
     edata.file = file;
     edata.ep = ep;
     trigger.private_data = edata;
     return trigger;
-    error:
+// label;
     free_event_filter(filter);
     kfree(edata);
     kfree(trigger);
     return ERR_PTR(ret);
     }
-    static int enable_eprobe(struct trace_eprobe *ep,
-    struct trace_event_file *eprobe_file)
-    {
-    struct event_trigger_data *trigger;
-    struct trace_event_file *file;
-    struct trace_array *tr = eprobe_file.tr;
+#[no_mangle]
+pub unsafe extern "C" fn enable_eprobe(ep: *mut trace_eprobe, eprobe_file: *mut trace_event_file) -> c_int {
+pub static mut trigger: *mut c_void = core::ptr::null_mut();
+pub static mut file: *mut c_void = core::ptr::null_mut();
+    let mut tr = eprobe_file.tr;
     file = find_event_file(tr, ep.event_system, ep.event_name);
-    if (!file)
+    if (!file) {
     return -ENOENT;
+    }
     trigger = new_eprobe_trigger(ep, eprobe_file);
-    if (IS_ERR(trigger))
+    if (IS_ERR(trigger)) {
     return PTR_ERR(trigger);
+    }
     list_add_tail_rcu(&trigger.list, &file.triggers);
     trace_event_trigger_enable_disable(file, 1);
     update_cond_flag(file);
     return 0;
     }
-    static struct trace_event_functions eprobe_funcs = {
-    .trace		= print_eprobe_event
-    };
-    static int disable_eprobe(struct trace_eprobe *ep,
-    struct trace_array *tr)
-    {
-    struct event_trigger_data *trigger = core::ptr::null_mut(), *iter;
-    struct trace_event_file *file;
-    struct event_filter *filter;
-    struct eprobe_data *edata;
+pub static mut trace_event_functions: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn disable_eprobe(ep: *mut trace_eprobe, tr: *mut trace_array) -> c_int {
+    let mut trigger = core::ptr::null_mut(), *iter;
+pub static mut file: *mut c_void = core::ptr::null_mut();
+pub static mut filter: *mut c_void = core::ptr::null_mut();
+pub static mut edata: *mut c_void = core::ptr::null_mut();
     file = find_event_file(tr, ep.event_system, ep.event_name);
-    if (!file)
+    if (!file) {
     return -ENOENT;
+    }
     list_for_each_entry(iter, &file.triggers, list) {
-    if (!(iter.flags & EVENT_TRIGGER_FL_PROBE))
+    if (!(iter.flags & EVENT_TRIGGER_FL_PROBE)) {
     continue;
+    }
     edata = iter.private_data;
     if (edata.ep == ep) {
     trigger = iter;
     break;
     }
     }
-    if (!trigger)
+    if (!trigger) {
     return -ENODEV;
+    }
     list_del_rcu(&trigger.list);
     trace_event_trigger_enable_disable(file, 0);
     update_cond_flag(file);
 // Make sure nothing is using the edata or trigger
     tracepoint_synchronize_unregister();
     filter = rcu_access_pointer(trigger.filter);
-    if (filter)
+    if (filter) {
     free_event_filter(filter);
+    }
     kfree(edata);
     kfree(trigger);
     return 0;
     }
-    static int enable_trace_eprobe(struct trace_event_call *call,
-    struct trace_event_file *file)
-    {
-    struct trace_probe *tp;
-    struct trace_eprobe *ep;
-    bool enabled;
-    let mut ret: c_int = 0;
-    let mut cnt: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn enable_trace_eprobe(call: *mut trace_event_call, file: *mut trace_event_file) -> c_int {
+pub static mut tp: *mut c_void = core::ptr::null_mut();
+pub static mut ep: *mut c_void = core::ptr::null_mut();
+    let mut enabled = 0;
+pub static mut ret: c_int = 0;
+pub static mut cnt: c_int = 0;
     tp = trace_probe_primary_from_call(call);
-    if (WARN_ON_ONCE(!tp))
+    if (WARN_ON_ONCE!(!tp)) {
     return -ENODEV;
+    }
     enabled = trace_probe_is_enabled(tp);
 // This also changes "enabled" state
     if (file) {
     ret = trace_probe_add_file(tp, file);
-    if (ret)
+    if (ret) {
     return ret;
-    } else
+    }
+    } else {
     trace_probe_set_flag(tp, TP_FLAG_PROFILE);
-    if (enabled)
+    }
+    if (enabled) {
     return 0;
+    }
     for_each_trace_eprobe_tp(ep, tp) {
     ret = enable_eprobe(ep, file);
-    if (ret)
+    if (ret) {
     break;
+    }
     enabled = true;
-    cnt++;
+    cnt += 1;
     }
     if (ret) {
 // Failed to enable one of them. Roll back all
@@ -613,42 +862,49 @@ unsafe extern "C" fn eprobe_trigger_free(data: *mut event_trigger_data) {
 // It's a bug if one failed for something other than memory
 // not being available but another eprobe succeeded.
 //
-    WARN_ON_ONCE(ret != -ENOMEM);
+    WARN_ON_ONCE!(ret != -ENOMEM);
     for_each_trace_eprobe_tp(ep, tp) {
     disable_eprobe(ep, file.tr);
-    if (!--cnt)
+    if (!--cnt) {
     break;
     }
     }
-    if (file)
+    }
+    if (file) {
     trace_probe_remove_file(tp, file);
-    else
+    }
+    else {
     trace_probe_clear_flag(tp, TP_FLAG_PROFILE);
+    }
     }
     return ret;
     }
-    static int disable_trace_eprobe(struct trace_event_call *call,
-    struct trace_event_file *file)
-    {
-    struct trace_probe *tp;
-    struct trace_eprobe *ep;
+#[no_mangle]
+pub unsafe extern "C" fn disable_trace_eprobe(call: *mut trace_event_call, file: *mut trace_event_file) -> c_int {
+pub static mut tp: *mut c_void = core::ptr::null_mut();
+pub static mut ep: *mut c_void = core::ptr::null_mut();
     tp = trace_probe_primary_from_call(call);
-    if (WARN_ON_ONCE(!tp))
+    if (WARN_ON_ONCE!(!tp)) {
     return -ENODEV;
+    }
     if (file) {
-    if (!trace_probe_get_file_link(tp, file))
+    if (!trace_probe_get_file_link(tp, file)) {
     return -ENOENT;
-    if (!trace_probe_has_single_file(tp))
-    goto out;
+    }
+    if (!trace_probe_has_single_file(tp)) {
+// goto;
+    }
     trace_probe_clear_flag(tp, TP_FLAG_TRACE);
-    } else
+    } else {
     trace_probe_clear_flag(tp, TP_FLAG_PROFILE);
+    }
     if (!trace_probe_is_enabled(tp)) {
-    for_each_trace_eprobe_tp(ep, tp)
+    for_each_trace_eprobe_tp(ep, tp) {
     disable_eprobe(ep, file.tr);
     }
-    out:
-    if (file)
+    }
+// label;
+    if (file) {
 //
 // Synchronization is done in below function. For perf event,
 // file == NULL and perf_trace_event_unreg() calls
@@ -656,87 +912,98 @@ unsafe extern "C" fn eprobe_trigger_free(data: *mut event_trigger_data) {
 // event. We don't need to care about it.
 //
     trace_probe_remove_file(tp, file);
+    }
     return 0;
     }
-    static int eprobe_register(struct trace_event_call *event,
-    enum trace_reg type, void *data)
-    {
-    struct trace_event_file *file = data;
-    switch (type) {
-    case TRACE_REG_REGISTER:
+#[no_mangle]
+pub unsafe extern "C" fn eprobe_register(event: *mut trace_event_call, type: trace_reg, data: *mut c_void) -> c_int {
+    let mut file = data;
+    match (type) {
+    TRACE_REG_REGISTER => {
     return enable_trace_eprobe(event, file);
-    case TRACE_REG_UNREGISTER:
+    }
+    TRACE_REG_UNREGISTER => {
     return disable_trace_eprobe(event, file);
 
-    case TRACE_REG_PERF_REGISTER:
-    case TRACE_REG_PERF_UNREGISTER:
-    case TRACE_REG_PERF_OPEN:
-    case TRACE_REG_PERF_CLOSE:
-    case TRACE_REG_PERF_ADD:
-    case TRACE_REG_PERF_DEL:
+    }
+    TRACE_REG_PERF_REGISTER => {
+    }
+    TRACE_REG_PERF_UNREGISTER => {
+    }
+    TRACE_REG_PERF_OPEN => {
+    }
+    TRACE_REG_PERF_CLOSE => {
+    }
+    TRACE_REG_PERF_ADD => {
+    }
+    TRACE_REG_PERF_DEL => {
     return 0;
 
+    }
     }
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn init_trace_eprobe_call(ep: *mut trace_eprobe) {
-    static inline void init_trace_eprobe_call(struct trace_eprobe *ep)
-    {
-    struct trace_event_call *call = trace_probe_event_call(&ep.tp);
+    let mut call = trace_probe_event_call(&ep.tp);
     call.flags = TRACE_EVENT_FL_EPROBE;
     call.event.funcs = &eprobe_funcs;
     call.class.fields_array = eprobe_fields_array;
     call.class.reg = eprobe_register;
     }
-    static struct trace_event_call *
-    find_and_get_event(const char *system, const char *event_name)
-    {
-    struct trace_event_call *tp_event;
-    const char *name;
+#[no_mangle]
+pub unsafe extern "C" fn find_and_get_event(system: *mut c_char, event_name: *mut c_char) -> *mut c_void {
+pub static mut tp_event: *mut c_void = core::ptr::null_mut();
+pub static mut name: *mut c_void = core::ptr::null_mut();
     list_for_each_entry(tp_event, &ftrace_events, list) {
 // Skip other probes and ftrace events
     if (tp_event.flags &
     (TRACE_EVENT_FL_IGNORE_ENABLE |
     TRACE_EVENT_FL_KPROBE |
     TRACE_EVENT_FL_UPROBE |
-    TRACE_EVENT_FL_EPROBE))
+    TRACE_EVENT_FL_EPROBE)) {
     continue;
+    }
     if (!tp_event.class.system ||
-    strcmp(system, tp_event.class.system))
+    strcmp(system, tp_event.class.system)) {
     continue;
+    }
     name = trace_event_name(tp_event);
-    if (!name || strcmp(event_name, name))
+    if (!name || strcmp(event_name, name)) {
     continue;
-    if (!trace_event_try_get_ref(tp_event))
+    }
+    if (!trace_event_try_get_ref(tp_event)) {
     return core::ptr::null_mut();
+    }
     return tp_event;
     }
     return core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn trace_eprobe_parse_filter(ep: *mut trace_eprobe, argc: c_int, argv[]: *const c_char) -> c_int {
-    static int trace_eprobe_parse_filter(struct trace_eprobe *ep, int argc, const char *argv[])
-    {
-    struct event_filter *dummy = core::ptr::null_mut();
+    let mut dummy = core::ptr::null_mut();
     int i, ret, len = 0;
-    char *p;
+pub static mut p: *mut c_void = core::ptr::null_mut();
     if (argc == 0) {
     trace_probe_log_err(0, NO_EP_FILTER);
     return -EINVAL;
     }
 // Recover the filter string
-    for (i = 0; i < argc; i++)
-    len += strlen(argv[i]) + 1;
-    ep.filter_str = kzalloc(len, GFP_KERNEL);
-    if (!ep.filter_str)
-    return -ENOMEM;
-    p = ep.filter_str;
     for (i = 0; i < argc; i++) {
-    if (i)
+    len += strlen(argv[i]) + 1;
+    }
+    ep.filter_str = kzalloc(len, GFP_KERNEL);
+    if (!ep.filter_str) {
+    return -ENOMEM;
+    }
+    p = ep.filter_str;
+    while (i < argc) {
+    if (i) {
     ret = snprintf(p, len, " %s", argv[i]);
-    else
+    }
+    else {
     ret = snprintf(p, len, "%s", argv[i]);
+    }
     p += ret;
     len -= ret;
     }
@@ -755,8 +1022,6 @@ unsafe extern "C" fn trace_eprobe_parse_filter(ep: *mut trace_eprobe, argc: c_in
     }
 #[no_mangle]
 unsafe extern "C" fn __trace_eprobe_create(argc: c_int, argv[]: *const c_char) -> c_int {
-    static int __trace_eprobe_create(int argc, const char *argv[])
-    {
 //
 // Argument syntax:
 // e[:[GRP/][ENAME]] SYSTEM.EVENT [FETCHARGS] [if FILTER]
@@ -766,33 +1031,38 @@ unsafe extern "C" fn __trace_eprobe_create(argc: c_int, argv[]: *const c_char) -
     struct traceprobe_parse_context *ctx __free(traceprobe_parse_context) = core::ptr::null_mut();
     struct trace_eprobe *ep __free(trace_event_probe_cleanup) = core::ptr::null_mut();
     const char *trlog __free(trace_probe_log_clear) = core::ptr::null_mut();
-    const char *event = core::ptr::null_mut(), *group = EPROBE_EVENT_SYSTEM;
-    const char *sys_event = core::ptr::null_mut(), *sys_name = core::ptr::null_mut();
-    struct trace_event_call *event_call;
+    let mut event = core::ptr::null_mut(), *group = EPROBE_EVENT_SYSTEM;
+    let mut sys_event = core::ptr::null_mut(), *sys_name = core::ptr::null_mut();
+pub static mut event_call: *mut c_void = core::ptr::null_mut();
     char *buf1 __free(kfree) = core::ptr::null_mut();
     char *buf2 __free(kfree) = core::ptr::null_mut();
     char *gbuf __free(kfree) = core::ptr::null_mut();
-    let mut ret: c_int = 0, filter_idx = 0;
-    int i, filter_cnt;
-    if (argc < 2 || argv[0][0] != 'e')
+pub static mut ret: c_int = 0;
+    let mut i = 0;
+    let mut filter_cnt = 0;
+    if (argc < 2 || argv[0][0] != 'e') {
     return -ECANCELED;
+    }
     trlog = trace_probe_log_init("event_probe", argc, argv);
     event = strchr(&argv[0][1], ':');
     if (event) {
     gbuf = kmalloc(MAX_EVENT_NAME_LEN, GFP_KERNEL);
-    if (!gbuf)
+    if (!gbuf) {
     return -ENOMEM;
-    event++;
+    }
+    event += 1;
     ret = traceprobe_parse_event_name(&event, &group, gbuf,
     event - argv[0]);
-    if (ret)
+    if (ret) {
     return -EINVAL;
+    }
     }
     trace_probe_log_set_index(1);
     sys_event = argv[1];
     buf2 = kmalloc(MAX_EVENT_NAME_LEN, GFP_KERNEL);
-    if (!buf2)
+    if (!buf2) {
     return -ENOMEM;
+    }
     ret = traceprobe_parse_event_name(&sys_event, &sys_name, buf2, 0);
     if (ret || !sys_event || !sys_name) {
     trace_probe_log_err(0, NO_EVENT_INFO);
@@ -800,11 +1070,12 @@ unsafe extern "C" fn __trace_eprobe_create(argc: c_int, argv[]: *const c_char) -
     }
     if (!event) {
     buf1 = kstrdup(sys_event, GFP_KERNEL);
-    if (!buf1)
+    if (!buf1) {
     return -ENOMEM;
+    }
     event = buf1;
     }
-    for (i = 2; i < argc; i++) {
+    while (i < argc) {
     if (!strcmp(argv[i], "if")) {
     filter_idx = i + 1;
     filter_cnt = argc - filter_idx;
@@ -823,38 +1094,45 @@ unsafe extern "C" fn __trace_eprobe_create(argc: c_int, argv[]: *const c_char) -
     }
     if (IS_ERR(ep)) {
     ret = PTR_ERR(ep);
-    if (ret == -ENODEV)
+    if (ret == -ENODEV) {
     trace_probe_log_err(0, BAD_ATTACH_EVENT);
+    }
 // This must return -ENOMEM or missing event, else there is a bug
-    WARN_ON_ONCE(ret != -ENOMEM && ret != -ENODEV);
+    WARN_ON_ONCE!(ret != -ENOMEM && ret != -ENODEV);
     return ret;
     }
     if (filter_idx) {
     trace_probe_log_set_index(filter_idx);
     ret = trace_eprobe_parse_filter(ep, filter_cnt, argv + filter_idx);
-    if (ret)
+    if (ret) {
     return -EINVAL;
-    } else
+    }
+    } else {
     ep.filter_str = core::ptr::null_mut();
+    }
     ctx = kzalloc_obj(*ctx);
-    if (!ctx)
+    if (!ctx) {
     return -ENOMEM;
+    }
     ctx.event = ep.event;
     ctx.flags = TPARG_FL_KERNEL | TPARG_FL_TEVENT;
     argc -= 2; argv += 2;
 // parse arguments
-    for (i = 0; i < argc; i++) {
+    while (i < argc) {
     trace_probe_log_set_index(i + 2);
     ret = traceprobe_parse_probe_arg(&ep.tp, i, argv[i], ctx);
 // Handle symbols "@"
-    if (!ret)
+    if (!ret) {
     ret = traceprobe_update_arg(&ep.tp.args[i]);
-    if (ret)
+    }
+    if (ret) {
     return ret;
     }
+    }
     ret = traceprobe_set_print_fmt(&ep.tp, PROBE_PRINT_EVENT);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     init_trace_eprobe_call(ep);
     scoped_guard(mutex, &event_mutex) {
     ret = trace_probe_register_event_call(&ep.tp);
@@ -881,12 +1159,11 @@ unsafe extern "C" fn __trace_eprobe_create(argc: c_int, argv[]: *const c_char) -
 //
 #[no_mangle]
 unsafe extern "C" fn trace_events_eprobe_init_early() -> __init int {
-    static __init int trace_events_eprobe_init_early(void)
-    {
-    let mut err: c_int = 0;
+pub static mut err: c_int = 0;
     err = dyn_event_register(&eprobe_dyn_event_ops);
-    if (err)
-    pr_warn("Could not register eprobe_dyn_event_ops\n");
+    if (err) {
+    pr_warn!("Could not register eprobe_dyn_event_ops\n");
+    }
     return err;
     }
-    core_initcall(trace_events_eprobe_init_early);
+    core_initcall!(trace_events_eprobe_init_early);

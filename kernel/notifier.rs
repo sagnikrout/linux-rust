@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
 macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
@@ -67,34 +317,33 @@ macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
 // Notifier chain core routines.  The exported routines below
 // are layered on top of these, with appropriate locking added.
 //
-    static int notifier_chain_register(struct notifier_block **nl,
-    struct notifier_block *n,
-    bool unique_priority)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn notifier_chain_register(nl: *mut *mut notifier_block, n: *mut notifier_block, unique_priority: bool) -> c_int {
     while ((*nl) != core::ptr::null_mut()) {
     if (unlikely((*nl) == n)) {
     WARN(1, "notifier callback %ps already registered",
     n.notifier_call);
     return -EEXIST;
     }
-    if (n.priority > (*nl).priority)
+    if (n.priority > (*nl).priority) {
     break;
-    if (n.priority == (*nl).priority && unique_priority)
+    }
+    if (n.priority == (*nl).priority && unique_priority) {
     return -EBUSY;
+    }
     nl = &((*nl).next);
     }
     n.next = *nl;
     rcu_assign_pointer(*nl, n);
-    trace_notifier_register((void *)n.notifier_call);
+    trace_notifier_register(n.notifier_call);
     return 0;
     }
-    static int notifier_chain_unregister(struct notifier_block **nl,
-    struct notifier_block *n)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn notifier_chain_unregister(nl: *mut *mut notifier_block, n: *mut notifier_block) -> c_int {
     while ((*nl) != core::ptr::null_mut()) {
     if ((*nl) == n) {
     rcu_assign_pointer(*nl, n.next);
-    trace_notifier_unregister((void *)n.notifier_call);
+    trace_notifier_unregister(n.notifier_call);
     return 0;
     }
     nl = &((*nl).next);
@@ -113,12 +362,11 @@ macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
 // Return:		notifier_call_chain returns the value returned by the
 // last notifier function called.
 //
-    static int notifier_call_chain(struct notifier_block **nl,
-    unsigned long val, void *v,
-    int nr_to_call, int *nr_calls)
-    {
-    let mut ret: c_int = NOTIFY_DONE;
-    struct notifier_block *nb, *next_nb;
+#[no_mangle]
+pub unsafe extern "C" fn notifier_call_chain(nl: *mut *mut notifier_block, val: c_ulong, v: *mut c_void, nr_to_call: c_int, nr_calls: *mut c_int) -> c_int {
+pub static mut ret: c_int = 0;
+    let mut nb = core::ptr::null_mut();
+    let mut next_nb = core::ptr::null_mut();
     nb = rcu_dereference_raw(*nl);
     while (nb && nr_to_call) {
     next_nb = rcu_dereference_raw(nb.next);
@@ -129,14 +377,16 @@ macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
     continue;
     }
 
-    trace_notifier_run((void *)nb.notifier_call);
+    trace_notifier_run(nb.notifier_call);
     ret = nb.notifier_call(nb, val, v);
-    if (nr_calls)
+    if (nr_calls) {
     (*nr_calls)++;
-    if (ret & NOTIFY_STOP_MASK)
+    }
+    if (ret & NOTIFY_STOP_MASK) {
     break;
+    }
     nb = next_nb;
-    nr_to_call--;
+    nr_to_call -= 1;
     }
     return ret;
     }
@@ -156,14 +406,13 @@ macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
 //
 // Return:	the return value of the @val_up call.
 //
-    static int notifier_call_chain_robust(struct notifier_block **nl,
-    unsigned long val_up, unsigned long val_down,
-    void *v)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn notifier_call_chain_robust(nl: *mut *mut notifier_block, val_up: c_ulong, val_down: c_ulong, v: *mut c_void) -> c_int {
     int ret, nr = 0;
     ret = notifier_call_chain(nl, val_up, v, -1, &nr);
-    if (ret & NOTIFY_STOP_MASK)
+    if (ret & NOTIFY_STOP_MASK) {
     notifier_call_chain(nl, val_down, v, nr-1, core::ptr::null_mut());
+    }
     return ret;
     }
 //
@@ -178,11 +427,10 @@ macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
 //
 // Returns 0 on success, %-EEXIST on error.
 //
-    int atomic_notifier_chain_register(struct atomic_notifier_head *nh,
-    struct notifier_block *n)
-    {
-    unsigned long flags;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn atomic_notifier_chain_register(nh: *mut atomic_notifier_head, n: *mut notifier_block) -> c_int {
+    let mut flags = 0;
+    let mut ret = 0;
     spin_lock_irqsave(&nh.lock, flags);
     ret = notifier_chain_register(&nh.head, n, false);
     spin_unlock_irqrestore(&nh.lock, flags);
@@ -199,11 +447,10 @@ macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
 //
 // Returns 0 on success, %-EEXIST or %-EBUSY on error.
 //
-    int atomic_notifier_chain_register_unique_prio(struct atomic_notifier_head *nh,
-    struct notifier_block *n)
-    {
-    unsigned long flags;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn atomic_notifier_chain_register_unique_prio(nh: *mut atomic_notifier_head, n: *mut notifier_block) -> c_int {
+    let mut flags = 0;
+    let mut ret = 0;
     spin_lock_irqsave(&nh.lock, flags);
     ret = notifier_chain_register(&nh.head, n, true);
     spin_unlock_irqrestore(&nh.lock, flags);
@@ -219,11 +466,10 @@ macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
 //
 // Returns zero on success or %-ENOENT on failure.
 //
-    int atomic_notifier_chain_unregister(struct atomic_notifier_head *nh,
-    struct notifier_block *n)
-    {
-    unsigned long flags;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn atomic_notifier_chain_unregister(nh: *mut atomic_notifier_head, n: *mut notifier_block) -> c_int {
+    let mut flags = 0;
+    let mut ret = 0;
     spin_lock_irqsave(&nh.lock, flags);
     ret = notifier_chain_unregister(&nh.head, n);
     spin_unlock_irqrestore(&nh.lock, flags);
@@ -248,10 +494,9 @@ macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
 // Otherwise the return value is the return value
 // of the last notifier function called.
 //
-    int atomic_notifier_call_chain(struct atomic_notifier_head *nh,
-    unsigned long val, void *v)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn atomic_notifier_call_chain(nh: *mut atomic_notifier_head, val: c_ulong, v: *mut c_void) -> c_int {
+    let mut ret = 0;
     rcu_read_lock();
     ret = notifier_call_chain(&nh.head, val, v, -1, core::ptr::null_mut());
     rcu_read_unlock();
@@ -275,18 +520,17 @@ pub unsafe extern "C" fn atomic_notifier_call_chain_is_empty(nh: *mut atomic_not
 // Blocking notifier chain routines.  All access to the chain is
 // synchronized by an rwsem.
 //
-    static int __blocking_notifier_chain_register(struct blocking_notifier_head *nh,
-    struct notifier_block *n,
-    bool unique_priority)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn __blocking_notifier_chain_register(nh: *mut blocking_notifier_head, n: *mut notifier_block, unique_priority: bool) -> c_int {
+    let mut ret = 0;
 //
 // This code gets used during boot-up, when task switching is
 // not yet working and interrupts must remain disabled.  At
 // such times we must not call down_write().
 //
-    if (unlikely(system_state == SYSTEM_BOOTING))
+    if (unlikely(system_state == SYSTEM_BOOTING)) {
     return notifier_chain_register(&nh.head, n, unique_priority);
+    }
     down_write(&nh.rwsem);
     ret = notifier_chain_register(&nh.head, n, unique_priority);
     up_write(&nh.rwsem);
@@ -302,9 +546,8 @@ pub unsafe extern "C" fn atomic_notifier_call_chain_is_empty(nh: *mut atomic_not
 //
 // Returns 0 on success, %-EEXIST on error.
 //
-    int blocking_notifier_chain_register(struct blocking_notifier_head *nh,
-    struct notifier_block *n)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn blocking_notifier_chain_register(nh: *mut blocking_notifier_head, n: *mut notifier_block) -> c_int {
     return __blocking_notifier_chain_register(nh, n, false);
     }
     EXPORT_SYMBOL_GPL(blocking_notifier_chain_register);
@@ -318,9 +561,8 @@ pub unsafe extern "C" fn atomic_notifier_call_chain_is_empty(nh: *mut atomic_not
 //
 // Returns 0 on success, %-EEXIST or %-EBUSY on error.
 //
-    int blocking_notifier_chain_register_unique_prio(struct blocking_notifier_head *nh,
-    struct notifier_block *n)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn blocking_notifier_chain_register_unique_prio(nh: *mut blocking_notifier_head, n: *mut notifier_block) -> c_int {
     return __blocking_notifier_chain_register(nh, n, true);
     }
     EXPORT_SYMBOL_GPL(blocking_notifier_chain_register_unique_prio);
@@ -334,27 +576,26 @@ pub unsafe extern "C" fn atomic_notifier_call_chain_is_empty(nh: *mut atomic_not
 //
 // Returns zero on success or %-ENOENT on failure.
 //
-    int blocking_notifier_chain_unregister(struct blocking_notifier_head *nh,
-    struct notifier_block *n)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn blocking_notifier_chain_unregister(nh: *mut blocking_notifier_head, n: *mut notifier_block) -> c_int {
+    let mut ret = 0;
 //
 // This code gets used during boot-up, when task switching is
 // not yet working and interrupts must remain disabled.  At
 // such times we must not call down_write().
 //
-    if (unlikely(system_state == SYSTEM_BOOTING))
+    if (unlikely(system_state == SYSTEM_BOOTING)) {
     return notifier_chain_unregister(&nh.head, n);
+    }
     down_write(&nh.rwsem);
     ret = notifier_chain_unregister(&nh.head, n);
     up_write(&nh.rwsem);
     return ret;
     }
     EXPORT_SYMBOL_GPL(blocking_notifier_chain_unregister);
-    int blocking_notifier_call_chain_robust(struct blocking_notifier_head *nh,
-    unsigned long val_up, unsigned long val_down, void *v)
-    {
-    let mut ret: c_int = NOTIFY_DONE;
+#[no_mangle]
+pub unsafe extern "C" fn blocking_notifier_call_chain_robust(nh: *mut blocking_notifier_head, val_up: c_ulong, val_down: c_ulong, v: *mut c_void) -> c_int {
+pub static mut ret: c_int = 0;
 //
 // We check the head outside the lock, but if this access is
 // racy then it does not matter what the result of the test
@@ -384,10 +625,9 @@ pub unsafe extern "C" fn atomic_notifier_call_chain_is_empty(nh: *mut atomic_not
 // Otherwise the return value is the return value
 // of the last notifier function called.
 //
-    int blocking_notifier_call_chain(struct blocking_notifier_head *nh,
-    unsigned long val, void *v)
-    {
-    let mut ret: c_int = NOTIFY_DONE;
+#[no_mangle]
+pub unsafe extern "C" fn blocking_notifier_call_chain(nh: *mut blocking_notifier_head, val: c_ulong, v: *mut c_void) -> c_int {
+pub static mut ret: c_int = 0;
 //
 // We check the head outside the lock, but if this access is
 // racy then it does not matter what the result of the test
@@ -414,9 +654,8 @@ pub unsafe extern "C" fn atomic_notifier_call_chain_is_empty(nh: *mut atomic_not
 //
 // Returns 0 on success, %-EEXIST on error.
 //
-    int raw_notifier_chain_register(struct raw_notifier_head *nh,
-    struct notifier_block *n)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn raw_notifier_chain_register(nh: *mut raw_notifier_head, n: *mut notifier_block) -> c_int {
     return notifier_chain_register(&nh.head, n, false);
     }
     EXPORT_SYMBOL_GPL(raw_notifier_chain_register);
@@ -430,15 +669,13 @@ pub unsafe extern "C" fn atomic_notifier_call_chain_is_empty(nh: *mut atomic_not
 //
 // Returns zero on success or %-ENOENT on failure.
 //
-    int raw_notifier_chain_unregister(struct raw_notifier_head *nh,
-    struct notifier_block *n)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn raw_notifier_chain_unregister(nh: *mut raw_notifier_head, n: *mut notifier_block) -> c_int {
     return notifier_chain_unregister(&nh.head, n);
     }
     EXPORT_SYMBOL_GPL(raw_notifier_chain_unregister);
-    int raw_notifier_call_chain_robust(struct raw_notifier_head *nh,
-    unsigned long val_up, unsigned long val_down, void *v)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn raw_notifier_call_chain_robust(nh: *mut raw_notifier_head, val_up: c_ulong, val_down: c_ulong, v: *mut c_void) -> c_int {
     return notifier_call_chain_robust(&nh.head, val_up, val_down, v);
     }
     EXPORT_SYMBOL_GPL(raw_notifier_call_chain_robust);
@@ -459,9 +696,8 @@ pub unsafe extern "C" fn atomic_notifier_call_chain_is_empty(nh: *mut atomic_not
 // Otherwise the return value is the return value
 // of the last notifier function called.
 //
-    int raw_notifier_call_chain(struct raw_notifier_head *nh,
-    unsigned long val, void *v)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn raw_notifier_call_chain(nh: *mut raw_notifier_head, val: c_ulong, v: *mut c_void) -> c_int {
     return notifier_call_chain(&nh.head, val, v, -1, core::ptr::null_mut());
     }
     EXPORT_SYMBOL_GPL(raw_notifier_call_chain);
@@ -478,17 +714,17 @@ pub unsafe extern "C" fn atomic_notifier_call_chain_is_empty(nh: *mut atomic_not
 //
 // Returns 0 on success, %-EEXIST on error.
 //
-    int srcu_notifier_chain_register(struct srcu_notifier_head *nh,
-    struct notifier_block *n)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn srcu_notifier_chain_register(nh: *mut srcu_notifier_head, n: *mut notifier_block) -> c_int {
+    let mut ret = 0;
 //
 // This code gets used during boot-up, when task switching is
 // not yet working and interrupts must remain disabled.  At
 // such times we must not call mutex_lock().
 //
-    if (unlikely(system_state == SYSTEM_BOOTING))
+    if (unlikely(system_state == SYSTEM_BOOTING)) {
     return notifier_chain_register(&nh.head, n, false);
+    }
     mutex_lock(&nh.mutex);
     ret = notifier_chain_register(&nh.head, n, false);
     mutex_unlock(&nh.mutex);
@@ -505,17 +741,17 @@ pub unsafe extern "C" fn atomic_notifier_call_chain_is_empty(nh: *mut atomic_not
 //
 // Returns zero on success or %-ENOENT on failure.
 //
-    int srcu_notifier_chain_unregister(struct srcu_notifier_head *nh,
-    struct notifier_block *n)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn srcu_notifier_chain_unregister(nh: *mut srcu_notifier_head, n: *mut notifier_block) -> c_int {
+    let mut ret = 0;
 //
 // This code gets used during boot-up, when task switching is
 // not yet working and interrupts must remain disabled.  At
 // such times we must not call mutex_lock().
 //
-    if (unlikely(system_state == SYSTEM_BOOTING))
+    if (unlikely(system_state == SYSTEM_BOOTING)) {
     return notifier_chain_unregister(&nh.head, n);
+    }
     mutex_lock(&nh.mutex);
     ret = notifier_chain_unregister(&nh.head, n);
     mutex_unlock(&nh.mutex);
@@ -539,11 +775,10 @@ pub unsafe extern "C" fn atomic_notifier_call_chain_is_empty(nh: *mut atomic_not
 // Otherwise the return value is the return value
 // of the last notifier function called.
 //
-    int srcu_notifier_call_chain(struct srcu_notifier_head *nh,
-    unsigned long val, void *v)
-    {
-    int ret;
-    int idx;
+#[no_mangle]
+pub unsafe extern "C" fn srcu_notifier_call_chain(nh: *mut srcu_notifier_head, val: c_ulong, v: *mut c_void) -> c_int {
+    let mut ret = 0;
+    let mut idx = 0;
     idx = srcu_read_lock(&nh.srcu);
     ret = notifier_call_chain(&nh.head, val, v, -1, core::ptr::null_mut());
     srcu_read_unlock(&nh.srcu, idx);
@@ -565,22 +800,16 @@ pub unsafe extern "C" fn atomic_notifier_call_chain_is_empty(nh: *mut atomic_not
 #[no_mangle]
 pub unsafe extern "C" fn srcu_init_notifier_head(nh: *mut srcu_notifier_head) {
     mutex_init(&nh.mutex);
-    if (init_srcu_struct(&nh.srcu) < 0)
+    if (init_srcu_struct(&nh.srcu) < 0) {
     BUG();
+    }
     nh.head = core::ptr::null_mut();
     }
     EXPORT_SYMBOL_GPL(srcu_init_notifier_head);
 // static ATOMIC_NOTIFIER_HEAD(die_chain);
-    int notrace notify_die(enum die_val val, const char *str,
-    struct pt_regs *regs, long err, int trap, int sig)
+    int notrace notify_die(enum die_val val, const char *str, pt_regs *regs, long err, int trap, int sig)
     {
-    struct die_args args = {
-    .regs	= regs,
-    .str	= str,
-    .err	= err,
-    .trapnr	= trap,
-    .signr	= sig,
-    };
+pub static mut die_args: usize = 0;
     RCU_LOCKDEP_WARN(!rcu_is_watching(),
     "notify_die called but RCU thinks we're quiescent");
     return atomic_notifier_call_chain(&die_chain, val, &args);

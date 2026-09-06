@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -45,184 +295,149 @@ pub struct bpf_iter_seq_map_info {
     pub map_id: u32,
 }
 
-    static void *bpf_map_seq_start(struct seq_file *seq, loff_t *pos)
-    {
-    struct bpf_iter_seq_map_info *info = seq.private;
-    struct bpf_map *map;
+#[no_mangle]
+pub unsafe extern "C" fn bpf_map_seq_start(seq: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
+    let mut info = seq.private;
+pub static mut map: *mut c_void = core::ptr::null_mut();
     map = bpf_map_get_curr_or_next(&info.map_id);
-    if (!map)
+    if (!map) {
     return core::ptr::null_mut();
-    if (*pos == 0)
+    }
+    if (*pos == 0) {
     ++*pos;
+    }
     return map;
     }
-    static void *bpf_map_seq_next(struct seq_file *seq, void *v, loff_t *pos)
-    {
-    struct bpf_iter_seq_map_info *info = seq.private;
+#[no_mangle]
+pub unsafe extern "C" fn bpf_map_seq_next(seq: *mut seq_file, v: *mut c_void, pos: *mut loff_t) -> *mut c_void {
+    let mut info = seq.private;
     ++*pos;
     ++info.map_id;
-    bpf_map_put((struct bpf_map *)v);
+    bpf_map_put(v);
     return bpf_map_get_curr_or_next(&info.map_id);
     }
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct bpf_iter__bpf_map {
-    pub meta): *mut *mut __bpf_md_ptr(struct bpf_iter_meta ,,
-    pub map): *mut *mut __bpf_md_ptr(struct bpf_map ,,
+    pub meta): *mut *mut __bpf_md_ptr(bpf_iter_meta ,,
+    pub map): *mut *mut __bpf_md_ptr(bpf_map ,,
 }
 
-    DEFINE_BPF_ITER_FUNC(bpf_map, struct bpf_iter_meta *meta, struct bpf_map *map)
+    DEFINE_BPF_ITER_FUNC(bpf_map, bpf_iter_meta *meta, bpf_map *map)
 #[no_mangle]
 unsafe extern "C" fn __bpf_map_seq_show(seq: *mut seq_file, v: *mut c_void, in_stop: bool) -> c_int {
-    static int __bpf_map_seq_show(struct seq_file *seq, void *v, bool in_stop)
-    {
-    struct bpf_iter__bpf_map ctx;
-    struct bpf_iter_meta meta;
-    struct bpf_prog *prog;
-    let mut ret: c_int = 0;
+pub static mut ctx: usize = 0;
+pub static mut meta: usize = 0;
+pub static mut prog: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     ctx.meta = &meta;
     ctx.map = v;
     meta.seq = seq;
     prog = bpf_iter_get_info(&meta, in_stop);
-    if (prog)
+    if (prog) {
     ret = bpf_iter_run_prog(prog, &ctx);
+    }
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn bpf_map_seq_show(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int bpf_map_seq_show(struct seq_file *seq, void *v)
-    {
     return __bpf_map_seq_show(seq, v, false);
     }
 #[no_mangle]
 unsafe extern "C" fn bpf_map_seq_stop(seq: *mut seq_file, v: *mut c_void) {
-    static void bpf_map_seq_stop(struct seq_file *seq, void *v)
-    {
-    if (!v)
+    if (!v) {
     (void)__bpf_map_seq_show(seq, v, true);
-    else
-    bpf_map_put((struct bpf_map *)v);
     }
-    static const struct seq_operations bpf_map_seq_ops = {
-    .start	= bpf_map_seq_start,
-    .next	= bpf_map_seq_next,
-    .stop	= bpf_map_seq_stop,
-    .show	= bpf_map_seq_show,
-    };
+    else {
+    bpf_map_put(v);
+    }
+    }
+pub static mut seq_operations: usize = 0;
     BTF_ID_LIST_GLOBAL_SINGLE(btf_bpf_map_id, struct, bpf_map)
-    static const struct bpf_iter_seq_info bpf_map_seq_info = {
-    .seq_ops		= &bpf_map_seq_ops,
-    .init_seq_private	= core::ptr::null_mut(),
-    .fini_seq_private	= core::ptr::null_mut(),
-    .seq_priv_size		= sizeof(struct bpf_iter_seq_map_info),
-    };
-    static struct bpf_iter_reg bpf_map_reg_info = {
-    .target			= "bpf_map",
-    .ctx_arg_info_size	= 1,
-    .ctx_arg_info		= {
-    { offsetof(struct bpf_iter__bpf_map, map),
-    PTR_TO_BTF_ID_OR_NULL | PTR_TRUSTED },
-    },
-    .seq_info		= &bpf_map_seq_info,
-    };
-    static int bpf_iter_attach_map(struct bpf_prog *prog,
-    union bpf_iter_link_info *linfo,
-    struct bpf_iter_aux_info *aux)
-    {
+pub static mut bpf_iter_seq_info: usize = 0;
+pub static mut bpf_iter_reg: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn bpf_iter_attach_map(prog: *mut bpf_prog, linfo: *mut union bpf_iter_link_info, aux: *mut bpf_iter_aux_info) -> c_int {
     u32 key_acc_size, value_acc_size, key_size, value_size;
-    struct bpf_map *map;
-    let mut is_percpu: bool = false;
-    let mut err: c_int = -EINVAL;
-    if (!linfo.map.map_fd)
+pub static mut map: *mut c_void = core::ptr::null_mut();
+pub static mut is_percpu: bool = false;
+pub static mut err: c_int = 0;
+    if (!linfo.map.map_fd) {
     return -EBADF;
+    }
     map = bpf_map_get_with_uref(linfo.map.map_fd);
-    if (IS_ERR(map))
+    if (IS_ERR(map)) {
     return PTR_ERR(map);
+    }
     if (map.excl_prog_sha) {
     err = -EPERM;
-    goto put_map;
+// goto;
     }
     if (map.map_type == BPF_MAP_TYPE_PERCPU_HASH ||
     map.map_type == BPF_MAP_TYPE_LRU_PERCPU_HASH ||
-    map.map_type == BPF_MAP_TYPE_PERCPU_ARRAY)
+    map.map_type == BPF_MAP_TYPE_PERCPU_ARRAY) {
     is_percpu = true;
+    }
     else if (map.map_type != BPF_MAP_TYPE_HASH &&
     map.map_type != BPF_MAP_TYPE_LRU_HASH &&
     map.map_type != BPF_MAP_TYPE_ARRAY &&
-    map.map_type != BPF_MAP_TYPE_RHASH)
-    goto put_map;
+    map.map_type != BPF_MAP_TYPE_RHASH) {
+// goto;
+    }
     key_acc_size = prog.aux.max_rdonly_access;
     value_acc_size = prog.aux.max_rdwr_access;
     key_size = map.key_size;
-    if (!is_percpu)
+    if (!is_percpu) {
     value_size = map.value_size;
-    else
+    }
+    else {
     value_size = round_up(map.value_size, 8) * num_possible_cpus();
+    }
     if (key_acc_size > key_size || value_acc_size > value_size) {
     err = -EACCES;
-    goto put_map;
+// goto;
     }
     aux.map = map;
     return 0;
-    put_map:
+// label;
     bpf_map_put_with_uref(map);
     return err;
     }
 #[no_mangle]
 unsafe extern "C" fn bpf_iter_detach_map(aux: *mut bpf_iter_aux_info) {
-    static void bpf_iter_detach_map(struct bpf_iter_aux_info *aux)
-    {
     bpf_map_put_with_uref(aux.map);
     }
-    void bpf_iter_map_show_fdinfo(const struct bpf_iter_aux_info *aux,
-    struct seq_file *seq)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn bpf_iter_map_show_fdinfo(aux: *mut bpf_iter_aux_info, seq: *mut seq_file) {
     seq_printf(seq, "map_id:\t%u\n", aux.map.id);
     }
-    int bpf_iter_map_fill_link_info(const struct bpf_iter_aux_info *aux,
-    struct bpf_link_info *info)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn bpf_iter_map_fill_link_info(aux: *mut bpf_iter_aux_info, info: *mut bpf_link_info) -> c_int {
     info.iter.map.map_id = aux.map.id;
     return 0;
     }
-    DEFINE_BPF_ITER_FUNC(bpf_map_elem, struct bpf_iter_meta *meta,
-    struct bpf_map *map, void *key, void *value)
-    static const struct bpf_iter_reg bpf_map_elem_reg_info = {
-    .target			= "bpf_map_elem",
-    .attach_target		= bpf_iter_attach_map,
-    .detach_target		= bpf_iter_detach_map,
-    .show_fdinfo		= bpf_iter_map_show_fdinfo,
-    .fill_link_info		= bpf_iter_map_fill_link_info,
-    .ctx_arg_info_size	= 2,
-    .ctx_arg_info		= {
-    { offsetof(struct bpf_iter__bpf_map_elem, key),
-    PTR_TO_BUF | PTR_MAYBE_NULL | MEM_RDONLY },
-    { offsetof(struct bpf_iter__bpf_map_elem, value),
-    PTR_TO_BUF | PTR_MAYBE_NULL },
-    },
-    };
+    DEFINE_BPF_ITER_FUNC(bpf_map_elem, bpf_iter_meta *meta, bpf_map *map, void *key, void *value)
+pub static mut bpf_iter_reg: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn bpf_map_iter_init() -> int __init {
-    static int __init bpf_map_iter_init(void)
-    {
-    int ret;
+unsafe extern "C" fn bpf_map_iter_init() -> c_int {
+    let mut ret = 0;
     bpf_map_reg_info.ctx_arg_info[0].btf_id = *btf_bpf_map_id;
     ret = bpf_iter_reg_target(&bpf_map_reg_info);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     return bpf_iter_reg_target(&bpf_map_elem_reg_info);
     }
-    late_initcall(bpf_map_iter_init);
+    late_initcall!(bpf_map_iter_init);
     __bpf_kfunc_start_defs();
 #[no_mangle]
 pub unsafe extern "C" fn bpf_map_sum_elem_count(map: *const bpf_map) -> __bpf_kfunc s64 {
-    __bpf_kfunc s64 bpf_map_sum_elem_count(const struct bpf_map *map)
-    {
-    s64 *pcount;
-    let mut ret: i64 = 0;
-    int cpu;
-    if (!map || !map.elem_count)
+pub static mut pcount: *mut c_void = core::ptr::null_mut();
+pub static mut ret: i64 = 0;
+    let mut cpu = 0;
+    if (!map || !map.elem_count) {
     return 0;
+    }
     for_each_possible_cpu(cpu) {
     pcount = per_cpu_ptr(map.elem_count, cpu);
     ret += READ_ONCE(*pcount);
@@ -233,14 +448,9 @@ pub unsafe extern "C" fn bpf_map_sum_elem_count(map: *const bpf_map) -> __bpf_kf
     BTF_KFUNCS_START(bpf_map_iter_kfunc_ids)
     BTF_ID_FLAGS(func, bpf_map_sum_elem_count)
     BTF_KFUNCS_END(bpf_map_iter_kfunc_ids)
-    static const struct btf_kfunc_id_set bpf_map_iter_kfunc_set = {
-    .owner = THIS_MODULE,
-    .set   = &bpf_map_iter_kfunc_ids,
-    };
+pub static mut btf_kfunc_id_set: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn init_subsystem() -> c_int {
-    static int init_subsystem(void)
-    {
     return register_btf_kfunc_id_set(BPF_PROG_TYPE_UNSPEC, &bpf_map_iter_kfunc_set);
     }
-    late_initcall(init_subsystem);
+    late_initcall!(init_subsystem);

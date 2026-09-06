@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -62,31 +312,31 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // @base_clockid:	clockid for the base
 //
     static struct alarm_base {
-    spinlock_t		lock;
-    struct timerqueue_head	timerqueue;
+    let mut lock;
+pub static mut timerqueue: usize = 0;
     ktime_t			(*get_ktime)(void);
-    void			(*get_timespec)(struct timespec64 *tp);
-    clockid_t		base_clockid;
+    void			(*get_timespec)(timespec64 *tp);
+    let mut base_clockid;
     } alarm_bases[ALARM_NUMTYPE];
 
 // freezer information to handle clock_nanosleep triggered wakeups
     static enum alarmtimer_type freezer_alarmtype;
     static ktime_t freezer_expires;
     static ktime_t freezer_delta;
-    static DEFINE_SPINLOCK(freezer_delta_lock);
+pub static mut freezer_delta_lock: usize = 0;
 
 // rtc timer and device for setting alarm wakeups at suspend
-    static struct rtc_timer		rtctimer;
-    static struct rtc_device	*rtcdev;
-    static DEFINE_SPINLOCK(rtcdev_lock);
+pub static mut rtctimer: usize = 0;
+pub static mut rtcdev: *mut c_void = core::ptr::null_mut();
+pub static mut rtcdev_lock: usize = 0;
 //
 // alarmtimer_get_rtcdev - Return selected rtcdevice
 //
 // This function returns the rtc device to use for wakealarms.
 //
-    struct rtc_device *alarmtimer_get_rtcdev(void)
-    {
-    struct rtc_device *ret;
+#[no_mangle]
+pub unsafe extern "C" fn alarmtimer_get_rtcdev() -> *mut c_void {
+pub static mut ret: *mut c_void = core::ptr::null_mut();
     guard(spinlock_irqsave)(&rtcdev_lock);
     ret = rtcdev;
     return ret;
@@ -94,21 +344,23 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     EXPORT_SYMBOL_GPL(alarmtimer_get_rtcdev);
 #[no_mangle]
 unsafe extern "C" fn alarmtimer_rtc_add_device(dev: *mut device) -> c_int {
-    static int alarmtimer_rtc_add_device(struct device *dev)
-    {
-    struct rtc_device *rtc = to_rtc_device(dev);
-    struct platform_device *pdev;
-    let mut ret: c_int = 0;
-    if (rtcdev)
+    let mut rtc = to_rtc_device(dev);
+pub static mut pdev: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
+    if (rtcdev) {
     return -EBUSY;
-    if (!test_bit(RTC_FEATURE_ALARM, rtc.features))
+    }
+    if (!test_bit(RTC_FEATURE_ALARM, rtc.features)) {
     return -1;
-    if (!device_may_wakeup(rtc.dev.parent))
+    }
+    if (!device_may_wakeup(rtc.dev.parent)) {
     return -1;
+    }
     pdev = platform_device_register_data(dev, "alarmtimer",
     PLATFORM_DEVID_AUTO, core::ptr::null_mut(), 0);
-    if (!IS_ERR(pdev))
+    if (!IS_ERR(pdev)) {
     device_init_wakeup(&pdev.dev, true);
+    }
     scoped_guard(spinlock_irqsave, &rtcdev_lock) {
     if (!IS_ERR(pdev) && !rtcdev && try_module_get(rtc.owner)) {
     rtcdev = rtc;
@@ -124,30 +376,27 @@ unsafe extern "C" fn alarmtimer_rtc_add_device(dev: *mut device) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn alarmtimer_rtc_timer_init() {
-    static inline void alarmtimer_rtc_timer_init(void)
-    {
     rtc_timer_init(&rtctimer, core::ptr::null_mut(), core::ptr::null_mut());
     }
-    static struct class_interface alarmtimer_rtc_interface = {
-    .add_dev = &alarmtimer_rtc_add_device,
-    };
+pub static mut class_interface: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn alarmtimer_rtc_interface_setup() -> c_int {
-    static int alarmtimer_rtc_interface_setup(void)
-    {
     alarmtimer_rtc_interface.class = &rtc_class;
     return class_interface_register(&alarmtimer_rtc_interface);
     }
 #[no_mangle]
 unsafe extern "C" fn alarmtimer_rtc_interface_remove() {
-    static void alarmtimer_rtc_interface_remove(void)
-    {
     class_interface_unregister(&alarmtimer_rtc_interface);
     }
 
-    static inline int alarmtimer_rtc_interface_setup(void) { return 0; }
-    static inline void alarmtimer_rtc_interface_remove(void) { }
-    static inline void alarmtimer_rtc_timer_init(void) { }
+#[no_mangle]
+pub unsafe extern "C" fn alarmtimer_rtc_interface_setup() -> c_int { return 0; }
+#[no_mangle]
+pub unsafe extern "C" fn alarmtimer_rtc_interface_remove() { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: alarmtimer_rtc_timer_init
+pub unsafe extern "C" fn alarmtimer_rtc_timer_init_dup() { }
 
 //
 // alarmtimer_enqueue - Adds an alarm timer to an alarm_base timerqueue
@@ -160,10 +409,9 @@ unsafe extern "C" fn alarmtimer_rtc_interface_remove() {
 //
 #[no_mangle]
 unsafe extern "C" fn alarmtimer_enqueue(base: *mut alarm_base, alarm: *mut alarm) {
-    static void alarmtimer_enqueue(struct alarm_base *base, struct alarm *alarm)
-    {
-    if (alarm.state & ALARMTIMER_STATE_ENQUEUED)
+    if (alarm.state & ALARMTIMER_STATE_ENQUEUED) {
     timerqueue_del(&base.timerqueue, &alarm.node);
+    }
     timerqueue_add(&base.timerqueue, &alarm.node);
     alarm.state |= ALARMTIMER_STATE_ENQUEUED;
     }
@@ -178,10 +426,9 @@ unsafe extern "C" fn alarmtimer_enqueue(base: *mut alarm_base, alarm: *mut alarm
 //
 #[no_mangle]
 unsafe extern "C" fn alarmtimer_dequeue(base: *mut alarm_base, alarm: *mut alarm) {
-    static void alarmtimer_dequeue(struct alarm_base *base, struct alarm *alarm)
-    {
-    if (!(alarm.state & ALARMTIMER_STATE_ENQUEUED))
+    if (!(alarm.state & ALARMTIMER_STATE_ENQUEUED)) {
     return;
+    }
     timerqueue_del(&base.timerqueue, &alarm.node);
     alarm.state &= ~ALARMTIMER_STATE_ENQUEUED;
     }
@@ -196,22 +443,19 @@ unsafe extern "C" fn alarmtimer_dequeue(base: *mut alarm_base, alarm: *mut alarm
 //
 #[no_mangle]
 unsafe extern "C" fn alarmtimer_fired(timer: *mut hrtimer) -> enum hrtimer_restart {
-    static enum hrtimer_restart alarmtimer_fired(struct hrtimer *timer)
-    {
-    struct alarm *alarm = container_of(timer, struct alarm, timer);
-    struct alarm_base *base = &alarm_bases[alarm.type];
+    let mut alarm = container_of!(timer, alarm, timer);
+    let mut base = &alarm_bases[alarm.type];
     scoped_guard(spinlock_irqsave, &base.lock)
     alarmtimer_dequeue(base, alarm);
-    if (alarm.function)
+    if (alarm.function) {
     alarm.function(alarm, base.get_ktime());
+    }
     trace_alarmtimer_fired(alarm, base.get_ktime());
     return HRTIMER_NORESTART;
     }
 #[no_mangle]
 pub unsafe extern "C" fn alarm_expires_remaining(alarm: *const alarm) -> ktime_t {
-    ktime_t alarm_expires_remaining(const struct alarm *alarm)
-    {
-    struct alarm_base *base = &alarm_bases[alarm.type];
+    let mut base = &alarm_bases[alarm.type];
     return ktime_sub(alarm.node.expires, base.get_ktime());
     }
     EXPORT_SYMBOL_GPL(alarm_expires_remaining);
@@ -227,12 +471,12 @@ pub unsafe extern "C" fn alarm_expires_remaining(alarm: *const alarm) -> ktime_t
 //
 #[no_mangle]
 unsafe extern "C" fn alarmtimer_suspend(dev: *mut device) -> c_int {
-    static int alarmtimer_suspend(struct device *dev)
-    {
     ktime_t min, now, expires;
-    struct rtc_device *rtc;
-    struct rtc_time tm;
-    int i, ret, type;
+pub static mut rtc: *mut c_void = core::ptr::null_mut();
+pub static mut tm: usize = 0;
+    let mut i = 0;
+    let mut ret = 0;
+    let mut type = 0;
     scoped_guard(spinlock_irqsave, &freezer_delta_lock) {
     min = freezer_delta;
     expires = freezer_expires;
@@ -241,21 +485,24 @@ unsafe extern "C" fn alarmtimer_suspend(dev: *mut device) -> c_int {
     }
     rtc = alarmtimer_get_rtcdev();
 // If we have no rtcdev, just return
-    if (!rtc)
+    if (!rtc) {
     return 0;
+    }
 // Find the soonest timer to expire
-    for (i = 0; i < ALARM_NUMTYPE; i++) {
-    struct alarm_base *base = &alarm_bases[i];
-    struct timerqueue_node *next;
-    ktime_t next_expires;
-    ktime_t delta;
+    while (i < ALARM_NUMTYPE) {
+    let mut base = &alarm_bases[i];
+pub static mut next: *mut c_void = core::ptr::null_mut();
+    let mut next_expires;
+    let mut delta;
     scoped_guard(spinlock_irqsave, &base.lock) {
     next = timerqueue_getnext(&base.timerqueue);
-    if (next)
+    if (next) {
     next_expires = next.expires;
     }
-    if (!next)
+    }
+    if (!next) {
     continue;
+    }
     delta = ktime_sub(next_expires, base.get_ktime());
     if (!min || (delta < min)) {
     expires = next_expires;
@@ -263,8 +510,9 @@ unsafe extern "C" fn alarmtimer_suspend(dev: *mut device) -> c_int {
     type = i;
     }
     }
-    if (min == 0)
+    if (min == 0) {
     return 0;
+    }
     if (ktime_to_ns(min) < 2 * NSEC_PER_SEC) {
     pm_wakeup_event(dev, 2 * MSEC_PER_SEC);
     return -EBUSY;
@@ -286,38 +534,32 @@ unsafe extern "C" fn alarmtimer_suspend(dev: *mut device) -> c_int {
     now = ktime_add(now, min);
 // Set alarm, if in the past reject suspend briefly to handle
     ret = rtc_timer_start(rtc, &rtctimer, now, 0);
-    if (ret < 0)
+    if (ret < 0) {
     pm_wakeup_event(dev, MSEC_PER_SEC);
+    }
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn alarmtimer_resume(dev: *mut device) -> c_int {
-    static int alarmtimer_resume(struct device *dev)
-    {
-    struct rtc_device *rtc;
+pub static mut rtc: *mut c_void = core::ptr::null_mut();
     rtc = alarmtimer_get_rtcdev();
-    if (rtc)
+    if (rtc) {
     rtc_timer_cancel(rtc, &rtctimer);
+    }
     return 0;
     }
 
 #[no_mangle]
 unsafe extern "C" fn alarmtimer_suspend(dev: *mut device) -> c_int {
-    static int alarmtimer_suspend(struct device *dev)
-    {
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn alarmtimer_resume(dev: *mut device) -> c_int {
-    static int alarmtimer_resume(struct device *dev)
-    {
     return 0;
     }
 
-    static void
-    __alarm_init(struct alarm *alarm, enum alarmtimer_type type,
-    void (*function)(struct alarm *, ktime_t))
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __alarm_init(alarm: *mut alarm, type: alarmtimer_type) {
     timerqueue_init(&alarm.node);
     alarm.function = function;
     alarm.type = type;
@@ -329,9 +571,8 @@ unsafe extern "C" fn alarmtimer_resume(dev: *mut device) -> c_int {
 // @type: the type of the alarm
 // @function: callback that is run when the alarm fires
 //
-    void alarm_init(struct alarm *alarm, enum alarmtimer_type type,
-    void (*function)(struct alarm *, ktime_t))
-    {
+#[no_mangle]
+pub unsafe extern "C" fn alarm_init(alarm: *mut alarm, type: alarmtimer_type) {
     hrtimer_setup(&alarm.timer, alarmtimer_fired, alarm_bases[type].base_clockid,
     HRTIMER_MODE_ABS);
     __alarm_init(alarm, type, function);
@@ -347,11 +588,10 @@ unsafe extern "C" fn alarmtimer_resume(dev: *mut device) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn alarm_start_timer(alarm: *mut alarm, expires: ktime_t, relative: bool) -> bool {
-    bool alarm_start_timer(struct alarm *alarm, ktime_t expires, bool relative)
-    {
-    struct alarm_base *base = &alarm_bases[alarm.type];
-    if (relative)
+    let mut base = &alarm_bases[alarm.type];
+    if (relative) {
     expires = ktime_add_safe(expires, base.get_ktime());
+    }
     trace_alarmtimer_start(alarm, base.get_ktime());
     guard(spinlock_irqsave)(&base.lock);
     alarm.node.expires = expires;
@@ -372,14 +612,13 @@ pub unsafe extern "C" fn alarm_start_timer(alarm: *mut alarm, expires: ktime_t, 
 //
 #[no_mangle]
 pub unsafe extern "C" fn alarm_try_to_cancel(alarm: *mut alarm) -> c_int {
-    int alarm_try_to_cancel(struct alarm *alarm)
-    {
-    struct alarm_base *base = &alarm_bases[alarm.type];
-    int ret;
+    let mut base = &alarm_bases[alarm.type];
+    let mut ret = 0;
     scoped_guard(spinlock_irqsave, &base.lock) {
     ret = hrtimer_try_to_cancel(&alarm.timer);
-    if (ret >= 0)
+    if (ret >= 0) {
     alarmtimer_dequeue(base, alarm);
+    }
     }
     trace_alarmtimer_cancel(alarm, base.get_ktime());
     return ret;
@@ -393,37 +632,36 @@ pub unsafe extern "C" fn alarm_try_to_cancel(alarm: *mut alarm) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn alarm_cancel(alarm: *mut alarm) -> c_int {
-    int alarm_cancel(struct alarm *alarm)
-    {
     for (;;) {
-    let mut ret: c_int = alarm_try_to_cancel(alarm);
-    if (ret >= 0)
+pub static mut ret: c_int = 0;
+    if (ret >= 0) {
     return ret;
+    }
     hrtimer_cancel_wait_running(&alarm.timer);
     }
     }
     EXPORT_SYMBOL_GPL(alarm_cancel);
 #[no_mangle]
 pub unsafe extern "C" fn alarm_forward(alarm: *mut alarm, now: ktime_t, interval: ktime_t) -> u64 {
-    u64 alarm_forward(struct alarm *alarm, ktime_t now, ktime_t interval)
-    {
-    let mut overrun: u64 = 1;
-    ktime_t delta;
+pub static mut overrun: u64 = 1;
+    let mut delta;
     delta = ktime_sub(now, alarm.node.expires);
-    if (delta < 0)
+    if (delta < 0) {
     return 0;
+    }
     if (unlikely(delta >= interval)) {
-    let mut incr: i64 = ktime_to_ns(interval);
+pub static mut incr: i64 = 0;
     overrun = ktime_divns(delta, incr);
     alarm.node.expires = ktime_add_ns(alarm.node.expires,
     incr*overrun);
-    if (alarm.node.expires > now)
+    if (alarm.node.expires > now) {
     return overrun;
+    }
 //
 // This (and the ktime_add() below) is the
 // correction for exact:
 //
-    overrun++;
+    overrun += 1;
     }
     alarm.node.expires = ktime_add_safe(alarm.node.expires, interval);
     return overrun;
@@ -431,31 +669,30 @@ pub unsafe extern "C" fn alarm_forward(alarm: *mut alarm, now: ktime_t, interval
     EXPORT_SYMBOL_GPL(alarm_forward);
 #[no_mangle]
 pub unsafe extern "C" fn alarm_forward_now(alarm: *mut alarm, interval: ktime_t) -> u64 {
-    u64 alarm_forward_now(struct alarm *alarm, ktime_t interval)
-    {
-    struct alarm_base *base = &alarm_bases[alarm.type];
+    let mut base = &alarm_bases[alarm.type];
     return alarm_forward(alarm, base.get_ktime(), interval);
     }
     EXPORT_SYMBOL_GPL(alarm_forward_now);
 
 #[no_mangle]
-unsafe extern "C" fn alarmtimer_freezerset(absexp: ktime_t, type: enum alarmtimer_type) {
-    static void alarmtimer_freezerset(ktime_t absexp, enum alarmtimer_type type)
-    {
-    struct alarm_base *base;
-    ktime_t delta;
-    switch(type) {
-    case ALARM_REALTIME:
+unsafe extern "C" fn alarmtimer_freezerset(absexp: ktime_t, type: alarmtimer_type) {
+pub static mut base: *mut c_void = core::ptr::null_mut();
+    let mut delta;
+    match (type) {
+    ALARM_REALTIME => {
     base = &alarm_bases[ALARM_REALTIME];
     type = ALARM_REALTIME_FREEZER;
-    break;
-    case ALARM_BOOTTIME:
+    // break;
+    }
+    ALARM_BOOTTIME => {
     base = &alarm_bases[ALARM_BOOTTIME];
     type = ALARM_BOOTTIME_FREEZER;
-    break;
-    default:
+    // break;
+    }
+    _ => {
     WARN_ONCE(1, "Invalid alarm type: %d\n", type);
     return;
+    }
     }
     delta = ktime_sub(absexp, base.get_ktime());
     guard(spinlock_irqsave)(&freezer_delta_lock);
@@ -471,11 +708,10 @@ unsafe extern "C" fn alarmtimer_freezerset(absexp: ktime_t, type: enum alarmtime
 //
 #[no_mangle]
 unsafe extern "C" fn clock2alarm(clockid: clockid_t) -> enum alarmtimer_type {
-    static enum alarmtimer_type clock2alarm(clockid_t clockid)
-    {
-    if (clockid == CLOCK_REALTIME_ALARM)
+    if (clockid == CLOCK_REALTIME_ALARM) {
     return ALARM_REALTIME;
-    WARN_ON_ONCE(clockid != CLOCK_BOOTTIME_ALARM);
+    }
+    WARN_ON_ONCE!(clockid != CLOCK_BOOTTIME_ALARM);
     return ALARM_BOOTTIME;
     }
 //
@@ -487,9 +723,7 @@ unsafe extern "C" fn clock2alarm(clockid: clockid_t) -> enum alarmtimer_type {
 //
 #[no_mangle]
 unsafe extern "C" fn alarm_handle_timer(alarm: *mut alarm, now: ktime_t) {
-    static void alarm_handle_timer(struct alarm *alarm, ktime_t now)
-    {
-    struct k_itimer *ptr = container_of(alarm, struct k_itimer, it.alarm.alarmtimer);
+    let mut ptr = container_of!(alarm, k_itimer, it.alarm.alarmtimer);
     guard(spinlock_irqsave)(&ptr.it_lock);
     posix_timer_queue_signal(ptr);
     }
@@ -499,9 +733,7 @@ unsafe extern "C" fn alarm_handle_timer(alarm: *mut alarm, now: ktime_t) {
 //
 #[no_mangle]
 unsafe extern "C" fn alarm_timer_rearm(timr: *mut k_itimer) -> bool {
-    static bool alarm_timer_rearm(struct k_itimer *timr)
-    {
-    struct alarm *alarm = &timr.it.alarm.alarmtimer;
+    let mut alarm = &timr.it.alarm.alarmtimer;
     timr.it_overrun += alarm_forward_now(alarm, timr.it_interval);
     return alarm_start_timer(alarm, alarm.node.expires, false);
     }
@@ -512,9 +744,7 @@ unsafe extern "C" fn alarm_timer_rearm(timr: *mut k_itimer) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn alarm_timer_forward(timr: *mut k_itimer, now: ktime_t) -> i64 {
-    static s64 alarm_timer_forward(struct k_itimer *timr, ktime_t now)
-    {
-    struct alarm *alarm = &timr.it.alarm.alarmtimer;
+    let mut alarm = &timr.it.alarm.alarmtimer;
     return alarm_forward(alarm, now, timr.it_interval);
     }
 //
@@ -524,9 +754,7 @@ unsafe extern "C" fn alarm_timer_forward(timr: *mut k_itimer, now: ktime_t) -> i
 //
 #[no_mangle]
 unsafe extern "C" fn alarm_timer_remaining(timr: *mut k_itimer, now: ktime_t) -> ktime_t {
-    static ktime_t alarm_timer_remaining(struct k_itimer *timr, ktime_t now)
-    {
-    struct alarm *alarm = &timr.it.alarm.alarmtimer;
+    let mut alarm = &timr.it.alarm.alarmtimer;
     return ktime_sub(alarm.node.expires, now);
     }
 //
@@ -535,8 +763,6 @@ unsafe extern "C" fn alarm_timer_remaining(timr: *mut k_itimer, now: ktime_t) ->
 //
 #[no_mangle]
 unsafe extern "C" fn alarm_timer_try_to_cancel(timr: *mut k_itimer) -> c_int {
-    static int alarm_timer_try_to_cancel(struct k_itimer *timr)
-    {
     return alarm_try_to_cancel(&timr.it.alarm.alarmtimer);
     }
 //
@@ -549,8 +775,6 @@ unsafe extern "C" fn alarm_timer_try_to_cancel(timr: *mut k_itimer) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn alarm_timer_wait_running(timr: *mut k_itimer) {
-    static void alarm_timer_wait_running(struct k_itimer *timr)
-    {
     hrtimer_cancel_wait_running(&timr.it.alarm.alarmtimer.timer);
     }
 //
@@ -560,13 +784,13 @@ unsafe extern "C" fn alarm_timer_wait_running(timr: *mut k_itimer) {
 // @absolute:	Expiry value is absolute time
 // @sigev_none:	Posix timer does not deliver signals
 //
-    static bool alarm_timer_arm(struct k_itimer *timr, ktime_t expires,
-    bool absolute, bool sigev_none)
-    {
-    struct alarm *alarm = &timr.it.alarm.alarmtimer;
-    struct alarm_base *base = &alarm_bases[alarm.type];
-    if (!absolute)
+#[no_mangle]
+pub unsafe extern "C" fn alarm_timer_arm(timr: *mut k_itimer, expires: ktime_t, absolute: bool, sigev_none: bool) -> bool {
+    let mut alarm = &timr.it.alarm.alarmtimer;
+    let mut base = &alarm_bases[alarm.type];
+    if (!absolute) {
     expires = ktime_add_safe(expires, base.get_ktime());
+    }
 //
 // sigev_none needs to update the expires value and pretend
 // that the timer is queued
@@ -586,10 +810,9 @@ unsafe extern "C" fn alarm_timer_wait_running(timr: *mut k_itimer) {
 //
 #[no_mangle]
 unsafe extern "C" fn alarm_clock_getres(which_clock: clockid_t, tp: *mut timespec64) -> c_int {
-    static int alarm_clock_getres(const clockid_t which_clock, struct timespec64 *tp)
-    {
-    if (!alarmtimer_get_rtcdev())
+    if (!alarmtimer_get_rtcdev()) {
     return -EINVAL;
+    }
     tp.tv_sec = 0;
     tp.tv_nsec = hrtimer_resolution;
     return 0;
@@ -603,11 +826,10 @@ unsafe extern "C" fn alarm_clock_getres(which_clock: clockid_t, tp: *mut timespe
 //
 #[no_mangle]
 unsafe extern "C" fn alarm_clock_get_timespec(which_clock: clockid_t, tp: *mut timespec64) -> c_int {
-    static int alarm_clock_get_timespec(clockid_t which_clock, struct timespec64 *tp)
-    {
-    struct alarm_base *base = &alarm_bases[clock2alarm(which_clock)];
-    if (!alarmtimer_get_rtcdev())
+    let mut base = &alarm_bases[clock2alarm(which_clock)];
+    if (!alarmtimer_get_rtcdev()) {
     return -EINVAL;
+    }
     base.get_timespec(tp);
     return 0;
     }
@@ -619,11 +841,10 @@ unsafe extern "C" fn alarm_clock_get_timespec(which_clock: clockid_t, tp: *mut t
 //
 #[no_mangle]
 unsafe extern "C" fn alarm_clock_get_ktime(which_clock: clockid_t) -> ktime_t {
-    static ktime_t alarm_clock_get_ktime(clockid_t which_clock)
-    {
-    struct alarm_base *base = &alarm_bases[clock2alarm(which_clock)];
-    if (!alarmtimer_get_rtcdev())
+    let mut base = &alarm_bases[clock2alarm(which_clock)];
+    if (!alarmtimer_get_rtcdev()) {
     return -EINVAL;
+    }
     return base.get_ktime();
     }
 //
@@ -634,13 +855,13 @@ unsafe extern "C" fn alarm_clock_get_ktime(which_clock: clockid_t) -> ktime_t {
 //
 #[no_mangle]
 unsafe extern "C" fn alarm_timer_create(new_timer: *mut k_itimer) -> c_int {
-    static int alarm_timer_create(struct k_itimer *new_timer)
-    {
     enum  alarmtimer_type type;
-    if (!alarmtimer_get_rtcdev())
+    if (!alarmtimer_get_rtcdev()) {
     return -EOPNOTSUPP;
-    if (!capable(CAP_WAKE_ALARM))
+    }
+    if (!capable(CAP_WAKE_ALARM)) {
     return -EPERM;
+    }
     type = clock2alarm(new_timer.it_clock);
     alarm_init(&new_timer.it.alarm.alarmtimer, type, alarm_handle_timer);
     return 0;
@@ -654,12 +875,11 @@ unsafe extern "C" fn alarm_timer_create(new_timer: *mut k_itimer) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn alarmtimer_nsleep_wakeup(alarm: *mut alarm, now: ktime_t) {
-    static void alarmtimer_nsleep_wakeup(struct alarm *alarm, ktime_t now)
-    {
-    struct task_struct *task = alarm.data;
+    let mut task = alarm.data;
     alarm.data = core::ptr::null_mut();
-    if (task)
+    if (task) {
     wake_up_process(task);
+    }
     }
 //
 // alarmtimer_do_nsleep - Internal alarmtimer nsleep implementation
@@ -669,41 +889,43 @@ unsafe extern "C" fn alarmtimer_nsleep_wakeup(alarm: *mut alarm, now: ktime_t) {
 //
 // Sets the alarm timer and sleeps until it is fired or interrupted.
 //
-    static int alarmtimer_do_nsleep(struct alarm *alarm, ktime_t absexp,
-    enum alarmtimer_type type)
-    {
-    struct restart_block *restart;
-    alarm.data = (void *)current;
+#[no_mangle]
+pub unsafe extern "C" fn alarmtimer_do_nsleep(alarm: *mut alarm, absexp: ktime_t, type: alarmtimer_type) -> c_int {
+pub static mut restart: *mut c_void = core::ptr::null_mut();
+    alarm.data = current;
     do {
     set_current_state(TASK_INTERRUPTIBLE);
-    if (!alarm_start_timer(alarm, absexp, false))
+    if (!alarm_start_timer(alarm, absexp, false)) {
     alarm.data = core::ptr::null_mut();
-    if (likely(alarm.data))
+    }
+    if (likely(alarm.data)) {
     schedule();
+    }
     alarm_cancel(alarm);
     } while (alarm.data && !signal_pending(current));
     __set_current_state(TASK_RUNNING);
     destroy_hrtimer_on_stack(&alarm.timer);
-    if (!alarm.data)
+    if (!alarm.data) {
     return 0;
-    if (freezing(current))
+    }
+    if (freezing(current)) {
     alarmtimer_freezerset(absexp, type);
+    }
     restart = &current.restart_block;
     if (restart.nanosleep.type != TT_NONE) {
-    struct timespec64 rmt;
-    ktime_t rem;
+pub static mut rmt: usize = 0;
+    let mut rem;
     rem = ktime_sub(absexp, alarm_bases[type].get_ktime());
-    if (rem <= 0)
+    if (rem <= 0) {
     return 0;
+    }
     rmt = ktime_to_timespec64(rem);
     return nanosleep_copyout(restart, &rmt);
     }
     return -ERESTART_RESTARTBLOCK;
     }
-    static void
-    alarm_init_on_stack(struct alarm *alarm, enum alarmtimer_type type,
-    void (*function)(struct alarm *, ktime_t))
-    {
+#[no_mangle]
+pub unsafe extern "C" fn alarm_init_on_stack(alarm: *mut alarm, type: alarmtimer_type) {
     hrtimer_setup_on_stack(&alarm.timer, alarmtimer_fired, alarm_bases[type].base_clockid,
     HRTIMER_MODE_ABS);
     __alarm_init(alarm, type, function);
@@ -716,11 +938,9 @@ unsafe extern "C" fn alarmtimer_nsleep_wakeup(alarm: *mut alarm, now: ktime_t) {
 //
 #[no_mangle]
 unsafe extern "C" fn alarm_timer_nsleep_restart(restart: *mut restart_block) -> long __sched {
-    static long __sched alarm_timer_nsleep_restart(struct restart_block *restart)
-    {
-    let mut type: enum  alarmtimer_type = restart.nanosleep.clockid;
-    let mut exp: ktime_t = restart.nanosleep.expires;
-    struct alarm alarm;
+pub static mut type: alarmtimer_type = 0;
+pub static mut exp: ktime_t = 0;
+pub static mut alarm: usize = 0;
     alarm_init_on_stack(&alarm, type, alarmtimer_nsleep_wakeup);
     return alarmtimer_do_nsleep(&alarm, exp, type);
     }
@@ -732,72 +952,51 @@ unsafe extern "C" fn alarm_timer_nsleep_restart(restart: *mut restart_block) -> 
 //
 // Handles clock_nanosleep calls against _ALARM clockids
 //
-    static int alarm_timer_nsleep(const clockid_t which_clock, int flags,
-    const struct timespec64 *tsreq)
-    {
-    let mut type: enum  alarmtimer_type = clock2alarm(which_clock);
-    struct restart_block *restart = &current.restart_block;
-    struct alarm alarm;
-    ktime_t exp;
-    int ret;
-    if (!alarmtimer_get_rtcdev())
+#[no_mangle]
+pub unsafe extern "C" fn alarm_timer_nsleep(which_clock: clockid_t, flags: c_int, tsreq: *mut timespec64) -> c_int {
+pub static mut type: alarmtimer_type = 0;
+    let mut restart = &current.restart_block;
+pub static mut alarm: usize = 0;
+    let mut exp;
+    let mut ret = 0;
+    if (!alarmtimer_get_rtcdev()) {
     return -EOPNOTSUPP;
-    if (flags & ~TIMER_ABSTIME)
+    }
+    if (flags & ~TIMER_ABSTIME) {
     return -EINVAL;
-    if (!capable(CAP_WAKE_ALARM))
+    }
+    if (!capable(CAP_WAKE_ALARM)) {
     return -EPERM;
+    }
     alarm_init_on_stack(&alarm, type, alarmtimer_nsleep_wakeup);
     exp = timespec64_to_ktime(*tsreq);
 // Convert (if necessary) to absolute time
     if (flags != TIMER_ABSTIME) {
-    let mut now: ktime_t = alarm_bases[type].get_ktime();
+pub static mut now: ktime_t = 0;
     exp = ktime_add_safe(now, exp);
     } else {
     exp = timens_ktime_to_host(which_clock, exp);
     }
     ret = alarmtimer_do_nsleep(&alarm, exp, type);
-    if (ret != -ERESTART_RESTARTBLOCK)
+    if (ret != -ERESTART_RESTARTBLOCK) {
     return ret;
+    }
 // abs timers don't set remaining time or restart
-    if (flags == TIMER_ABSTIME)
+    if (flags == TIMER_ABSTIME) {
     return -ERESTARTNOHAND;
+    }
     restart.nanosleep.clockid = type;
     restart.nanosleep.expires = exp;
     set_restart_fn(restart, alarm_timer_nsleep_restart);
     return ret;
     }
-    const struct k_clock alarm_clock = {
-    .clock_getres		= alarm_clock_getres,
-    .clock_get_ktime	= alarm_clock_get_ktime,
-    .clock_get_timespec	= alarm_clock_get_timespec,
-    .timer_create		= alarm_timer_create,
-    .timer_set		= common_timer_set,
-    .timer_del		= common_timer_del,
-    .timer_get		= common_timer_get,
-    .timer_arm		= alarm_timer_arm,
-    .timer_rearm		= alarm_timer_rearm,
-    .timer_forward		= alarm_timer_forward,
-    .timer_remaining	= alarm_timer_remaining,
-    .timer_try_to_cancel	= alarm_timer_try_to_cancel,
-    .timer_wait_running	= alarm_timer_wait_running,
-    .nsleep			= alarm_timer_nsleep,
-    };
+pub static mut k_clock: usize = 0;
 
 // Suspend hook structures
-    static const struct dev_pm_ops alarmtimer_pm_ops = {
-    .suspend = alarmtimer_suspend,
-    .resume = alarmtimer_resume,
-    };
-    static struct platform_driver alarmtimer_driver = {
-    .driver = {
-    .name = "alarmtimer",
-    .pm = &alarmtimer_pm_ops,
-    }
-    };
+pub static mut dev_pm_ops: usize = 0;
+pub static mut platform_driver: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn get_boottime_timespec(tp: *mut timespec64) {
-    static void get_boottime_timespec(struct timespec64 *tp)
-    {
     ktime_get_boottime_ts64(tp);
     timens_add_boottime(tp);
     }
@@ -808,11 +1007,9 @@ unsafe extern "C" fn get_boottime_timespec(tp: *mut timespec64) {
 // the posix clock ids.
 //
 #[no_mangle]
-unsafe extern "C" fn alarmtimer_init() -> int __init {
-    static int __init alarmtimer_init(void)
-    {
-    int error;
-    int i;
+unsafe extern "C" fn alarmtimer_init() -> c_int {
+    let mut error = 0;
+    let mut i = 0;
     alarmtimer_rtc_timer_init();
 // Initialize alarm bases
     alarm_bases[ALARM_REALTIME].base_clockid = CLOCK_REALTIME;
@@ -821,19 +1018,21 @@ unsafe extern "C" fn alarmtimer_init() -> int __init {
     alarm_bases[ALARM_BOOTTIME].base_clockid = CLOCK_BOOTTIME;
     alarm_bases[ALARM_BOOTTIME].get_ktime = &ktime_get_boottime;
     alarm_bases[ALARM_BOOTTIME].get_timespec = get_boottime_timespec;
-    for (i = 0; i < ALARM_NUMTYPE; i++) {
+    while (i < ALARM_NUMTYPE) {
     timerqueue_init_head(&alarm_bases[i].timerqueue);
     spin_lock_init(&alarm_bases[i].lock);
     }
     error = alarmtimer_rtc_interface_setup();
-    if (error)
+    if (error) {
     return error;
+    }
     error = platform_driver_register(&alarmtimer_driver);
-    if (error)
-    goto out_if;
+    if (error) {
+// goto;
+    }
     return 0;
-    out_if:
+// label;
     alarmtimer_rtc_interface_remove();
     return error;
     }
-    device_initcall(alarmtimer_init);
+    device_initcall!(alarmtimer_init);

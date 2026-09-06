@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -49,7 +299,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Maximum reclaim attempts before giving up when lowering dmem.max.
 pub const DMEM_MAX_RECLAIM_RETRIES: c_int = 16;
 // SRCU domain serialising reclaim callbacks against region unregistration.
-    DEFINE_STATIC_SRCU(dmemcg_srcu);
+pub static mut dmemcg_srcu: usize = 0;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct dmem_cgroup_region {
@@ -121,92 +371,84 @@ pub struct dmem_cgroup_pool_state {
 // do not think more granular locking makes sense. Most protection is offered
 // by RCU and the lockless operating page_counter.
 //
-    static DEFINE_SPINLOCK(dmemcg_lock);
-    static LIST_HEAD(dmem_cgroup_regions);
-    static void dmemcg_free_region(struct kref *ref);
-    static void dmemcg_pool_free_rcu(struct rcu_head *rcu);
-    static inline struct dmemcg_state *
-    css_to_dmemcs(struct cgroup_subsys_state *css)
-    {
-    return container_of(css, struct dmemcg_state, css);
+pub static mut dmemcg_lock: usize = 0;
+pub static mut dmem_cgroup_regions: usize = 0;
+// forward_decl: dmemcg_free_region;
+// forward_decl: dmemcg_pool_free_rcu;
+#[no_mangle]
+pub unsafe extern "C" fn css_to_dmemcs(css: *mut cgroup_subsys_state) -> *mut c_void {
+    return container_of!(css, dmemcg_state, css);
     }
-    static inline struct dmemcg_state *get_current_dmemcs(void)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn get_current_dmemcs() -> *mut c_void {
     return css_to_dmemcs(task_get_css(current, dmem_cgrp_id));
     }
-    static struct dmemcg_state *parent_dmemcs(struct dmemcg_state *cg)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn parent_dmemcs(cg: *mut dmemcg_state) -> *mut c_void {
     return cg.css.parent ? css_to_dmemcs(cg.css.parent) : core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn dmemcg_pool_get(pool: *mut dmem_cgroup_pool_state) {
-    static void dmemcg_pool_get(struct dmem_cgroup_pool_state *pool)
-    {
     refcount_inc(&pool.ref);
     }
 #[no_mangle]
 unsafe extern "C" fn dmemcg_pool_tryget(pool: *mut dmem_cgroup_pool_state) -> bool {
-    static bool dmemcg_pool_tryget(struct dmem_cgroup_pool_state *pool)
-    {
     return refcount_inc_not_zero(&pool.ref);
     }
 #[no_mangle]
 unsafe extern "C" fn dmemcg_pool_put(pool: *mut dmem_cgroup_pool_state) {
-    static void dmemcg_pool_put(struct dmem_cgroup_pool_state *pool)
-    {
-    if (!refcount_dec_and_test(&pool.ref))
+    if (!refcount_dec_and_test(&pool.ref)) {
     return;
+    }
     call_rcu(&pool.rcu, dmemcg_pool_free_rcu);
     }
 #[no_mangle]
 unsafe extern "C" fn dmemcg_pool_free_rcu(rcu: *mut rcu_head) {
-    static void dmemcg_pool_free_rcu(struct rcu_head *rcu)
-    {
-    struct dmem_cgroup_pool_state *pool = container_of(rcu, typeof(*pool), rcu);
-    if (pool.parent)
+    let mut pool = container_of!(rcu, typeof(*pool), rcu);
+    if (pool.parent) {
     dmemcg_pool_put(pool.parent);
+    }
     kref_put(&pool.region.ref, dmemcg_free_region);
     kfree(pool);
     }
 #[no_mangle]
 unsafe extern "C" fn free_cg_pool(pool: *mut dmem_cgroup_pool_state) {
-    static void free_cg_pool(struct dmem_cgroup_pool_state *pool)
-    {
     list_del(&pool.region_node);
     dmemcg_pool_put(pool);
     }
-    static void
-    set_resource_min(struct dmem_cgroup_pool_state *pool, u64 val, bool nonblock)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn set_resource_min(pool: *mut dmem_cgroup_pool_state, val: u64, nonblock: bool) {
     page_counter_set_min(&pool.cnt, val);
     }
-    static void
-    set_resource_low(struct dmem_cgroup_pool_state *pool, u64 val, bool nonblock)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn set_resource_low(pool: *mut dmem_cgroup_pool_state, val: u64, nonblock: bool) {
     page_counter_set_low(&pool.cnt, val);
     }
-    static void
-    set_resource_max(struct dmem_cgroup_pool_state *pool, u64 val, bool nonblock)
-    {
-    struct dmem_cgroup_region *region = pool.region;
-    let mut limit: c_ulong = (unsigned long)val;
+#[no_mangle]
+pub unsafe extern "C" fn set_resource_max(pool: *mut dmem_cgroup_pool_state, val: u64, nonblock: bool) {
+    let mut region = pool.region;
+pub static mut limit: c_ulong = 0;
 // Apply the new limit immediately so concurrent allocations are throttled.
     xchg(&pool.cnt.max, limit);
-    if (nonblock)
+    if (nonblock) {
     return;
-    let mut srcu_idx: c_int = srcu_read_lock(&dmemcg_srcu);
+    }
+pub static mut srcu_idx: c_int = 0;
     if (!READ_ONCE(region.unregistered) && region.ops && region.ops.reclaim) {
-    for (int retries = DMEM_MAX_RECLAIM_RETRIES; ; ) {
-    let mut usage: u64 = page_counter_read(&pool.cnt);
-    int ret;
-    if (usage <= limit)
+    while ( ) {
+pub static mut usage: u64 = 0;
+    let mut ret = 0;
+    if (usage <= limit) {
     break;
-    if (signal_pending(current))
+    }
+    if (signal_pending(current)) {
     break;
+    }
     ret = region.ops.reclaim(pool, usage - limit, region.reclaim_priv);
 // -ENOSPC means no progress; other errors are fatal.
-    if (ret && (ret != -ENOSPC || !retries--))
+    if (ret && (ret != -ENOSPC || !retries--)) {
     break;
+    }
     cond_resched();
     }
     }
@@ -214,38 +456,26 @@ unsafe extern "C" fn free_cg_pool(pool: *mut dmem_cgroup_pool_state) {
     }
 #[no_mangle]
 unsafe extern "C" fn get_resource_low(pool: *mut dmem_cgroup_pool_state) -> u64 {
-    static u64 get_resource_low(struct dmem_cgroup_pool_state *pool)
-    {
     return pool ? READ_ONCE(pool.cnt.low) : 0;
     }
 #[no_mangle]
 unsafe extern "C" fn get_resource_min(pool: *mut dmem_cgroup_pool_state) -> u64 {
-    static u64 get_resource_min(struct dmem_cgroup_pool_state *pool)
-    {
     return pool ? READ_ONCE(pool.cnt.min) : 0;
     }
 #[no_mangle]
 unsafe extern "C" fn get_resource_max(pool: *mut dmem_cgroup_pool_state) -> u64 {
-    static u64 get_resource_max(struct dmem_cgroup_pool_state *pool)
-    {
     return pool ? READ_ONCE(pool.cnt.max) : PAGE_COUNTER_MAX;
     }
 #[no_mangle]
 unsafe extern "C" fn get_resource_current(pool: *mut dmem_cgroup_pool_state) -> u64 {
-    static u64 get_resource_current(struct dmem_cgroup_pool_state *pool)
-    {
     return pool ? page_counter_read(&pool.cnt) : 0;
     }
 #[no_mangle]
 unsafe extern "C" fn get_resource_peak(pool: *mut dmem_cgroup_pool_state) -> u64 {
-    static u64 get_resource_peak(struct dmem_cgroup_pool_state *pool)
-    {
     return pool ? READ_ONCE(pool.cnt.watermark) : 0;
     }
 #[no_mangle]
 unsafe extern "C" fn reset_all_resource_limits(rpool: *mut dmem_cgroup_pool_state) {
-    static void reset_all_resource_limits(struct dmem_cgroup_pool_state *rpool)
-    {
     set_resource_min(rpool, 0, false);
     set_resource_low(rpool, 0, false);
 // nonblock: raising to max makes reclaim a no-op; sleeping is forbidden here.
@@ -253,21 +483,19 @@ unsafe extern "C" fn reset_all_resource_limits(rpool: *mut dmem_cgroup_pool_stat
     }
 #[no_mangle]
 unsafe extern "C" fn dmemcs_offline(css: *mut cgroup_subsys_state) {
-    static void dmemcs_offline(struct cgroup_subsys_state *css)
-    {
-    struct dmemcg_state *dmemcs = css_to_dmemcs(css);
-    struct dmem_cgroup_pool_state *pool;
+    let mut dmemcs = css_to_dmemcs(css);
+pub static mut pool: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
-    list_for_each_entry_rcu(pool, &dmemcs.pools, css_node)
+    list_for_each_entry_rcu(pool, &dmemcs.pools, css_node) {
     reset_all_resource_limits(pool);
+    }
     rcu_read_unlock();
     }
 #[no_mangle]
 unsafe extern "C" fn dmemcs_free(css: *mut cgroup_subsys_state) {
-    static void dmemcs_free(struct cgroup_subsys_state *css)
-    {
-    struct dmemcg_state *dmemcs = css_to_dmemcs(css);
-    struct dmem_cgroup_pool_state *pool, *next;
+    let mut dmemcs = css_to_dmemcs(css);
+    let mut pool = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
     spin_lock(&dmemcg_lock);
     list_for_each_entry_safe(pool, next, &dmemcs.pools, css_node) {
 //
@@ -280,42 +508,42 @@ unsafe extern "C" fn dmemcs_free(css: *mut cgroup_subsys_state) {
     spin_unlock(&dmemcg_lock);
     kfree(dmemcs);
     }
-    static struct cgroup_subsys_state *
-    dmemcs_alloc(struct cgroup_subsys_state *parent_css)
-    {
-    struct dmemcg_state *dmemcs = kzalloc_obj(*dmemcs);
-    if (!dmemcs)
+#[no_mangle]
+pub unsafe extern "C" fn dmemcs_alloc(parent_css: *mut cgroup_subsys_state) -> *mut c_void {
+    let mut dmemcs = kzalloc_obj(*dmemcs);
+    if (!dmemcs) {
     return ERR_PTR(-ENOMEM);
+    }
     INIT_LIST_HEAD(&dmemcs.pools);
     return &dmemcs.css;
     }
-    static struct dmem_cgroup_pool_state *
-    find_cg_pool_locked(struct dmemcg_state *dmemcs, struct dmem_cgroup_region *region)
-    {
-    struct dmem_cgroup_pool_state *pool;
-    list_for_each_entry_rcu(pool, &dmemcs.pools, css_node, spin_is_locked(&dmemcg_lock))
+#[no_mangle]
+pub unsafe extern "C" fn find_cg_pool_locked(dmemcs: *mut dmemcg_state, region: *mut dmem_cgroup_region) -> *mut c_void {
+pub static mut pool: *mut c_void = core::ptr::null_mut();
+    list_for_each_entry_rcu(pool, &dmemcs.pools, css_node, spin_is_locked(&dmemcg_lock)) {
     if (pool.region == region)
     return pool;
+    }
     return core::ptr::null_mut();
     }
-    static struct dmem_cgroup_pool_state *pool_parent(struct dmem_cgroup_pool_state *pool)
-    {
-    if (!pool.cnt.parent)
+#[no_mangle]
+pub unsafe extern "C" fn pool_parent(pool: *mut dmem_cgroup_pool_state) -> *mut c_void {
+    if (!pool.cnt.parent) {
     return core::ptr::null_mut();
-    return container_of(pool.cnt.parent, typeof(*pool), cnt);
     }
-    static void
-    dmem_cgroup_calculate_protection(struct dmem_cgroup_pool_state *limit_pool,
-    struct dmem_cgroup_pool_state *test_pool)
-    {
-    struct page_counter *climit;
-    struct cgroup_subsys_state *css;
-    struct dmemcg_state *dmemcg_iter;
-    struct dmem_cgroup_pool_state *pool, *found_pool;
+    return container_of!(pool.cnt.parent, typeof(*pool), cnt);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn dmem_cgroup_calculate_protection(limit_pool: *mut dmem_cgroup_pool_state, test_pool: *mut dmem_cgroup_pool_state) {
+pub static mut climit: *mut c_void = core::ptr::null_mut();
+pub static mut css: *mut c_void = core::ptr::null_mut();
+pub static mut dmemcg_iter: *mut c_void = core::ptr::null_mut();
+    let mut pool = core::ptr::null_mut();
+    let mut found_pool = core::ptr::null_mut();
     climit = &limit_pool.cnt;
     rcu_read_lock();
     css_for_each_descendant_pre(css, &limit_pool.cs.css) {
-    dmemcg_iter = container_of(css, struct dmemcg_state, css);
+    dmemcg_iter = container_of!(css, dmemcg_state, css);
     found_pool = core::ptr::null_mut();
     list_for_each_entry_rcu(pool, &dmemcg_iter.pools, css_node) {
     if (pool.region == limit_pool.region) {
@@ -323,12 +551,14 @@ unsafe extern "C" fn dmemcs_free(css: *mut cgroup_subsys_state) {
     break;
     }
     }
-    if (!found_pool)
+    if (!found_pool) {
     continue;
+    }
     page_counter_calculate_protection(
     climit, &found_pool.cnt, true);
-    if (found_pool == test_pool)
+    if (found_pool == test_pool) {
     break;
+    }
     }
     rcu_read_unlock();
     }
@@ -346,65 +576,70 @@ unsafe extern "C" fn dmemcs_free(css: *mut cgroup_subsys_state) {
 //
 // Return: bool
 //
-    bool dmem_cgroup_state_evict_valuable(struct dmem_cgroup_pool_state *limit_pool,
-    struct dmem_cgroup_pool_state *test_pool,
-    bool ignore_low, bool *ret_hit_low)
-    {
-    struct dmem_cgroup_pool_state *pool = test_pool;
-    struct page_counter *ctest;
+#[no_mangle]
+pub unsafe extern "C" fn dmem_cgroup_state_evict_valuable(limit_pool: *mut dmem_cgroup_pool_state, test_pool: *mut dmem_cgroup_pool_state, ignore_low: bool, ret_hit_low: *mut bool) -> bool {
+    let mut pool = test_pool;
+pub static mut ctest: *mut c_void = core::ptr::null_mut();
     u64 used, min, low;
 // Can always evict from current pool, despite limits
-    if (limit_pool == test_pool)
+    if (limit_pool == test_pool) {
     return true;
+    }
     if (limit_pool) {
-    if (!parent_dmemcs(limit_pool.cs))
+    if (!parent_dmemcs(limit_pool.cs)) {
     return true;
-    for (pool = test_pool; pool && limit_pool != pool; pool = pool_parent(pool))
+    }
+    for (pool = test_pool; pool && limit_pool != pool; pool = pool_parent(pool)) {
     {}
-    if (!pool)
+    }
+    if (!pool) {
     return false;
+    }
     } else {
 //
 // If there is no cgroup limiting memory usage, use the root
 // cgroup instead for limit calculations.
 //
-    for (limit_pool = test_pool; pool_parent(limit_pool); limit_pool = pool_parent(limit_pool))
+    for (limit_pool = test_pool; pool_parent(limit_pool); limit_pool = pool_parent(limit_pool)) {
     {}
+    }
     }
     ctest = &test_pool.cnt;
     dmem_cgroup_calculate_protection(limit_pool, test_pool);
     used = page_counter_read(ctest);
     min = READ_ONCE(ctest.emin);
-    if (used <= min)
+    if (used <= min) {
     return false;
+    }
     if (!ignore_low) {
     low = READ_ONCE(ctest.elow);
-    if (used > low)
+    if (used > low) {
     return true;
+    }
 // ret_hit_low = true;
     return false;
     }
     return true;
     }
     EXPORT_SYMBOL_GPL(dmem_cgroup_state_evict_valuable);
-    static struct dmem_cgroup_pool_state *
-    alloc_pool_single(struct dmemcg_state *dmemcs, struct dmem_cgroup_region *region,
-    struct dmem_cgroup_pool_state **allocpool)
-    {
-    struct dmemcg_state *parent = parent_dmemcs(dmemcs);
+#[no_mangle]
+pub unsafe extern "C" fn alloc_pool_single(dmemcs: *mut dmemcg_state, region: *mut dmem_cgroup_region, allocpool: *mut *mut dmem_cgroup_pool_state) -> *mut c_void {
+    let mut parent = parent_dmemcs(dmemcs);
     struct dmem_cgroup_pool_state *pool, *ppool = core::ptr::null_mut();
     if (!*allocpool) {
     pool = kzalloc_obj(*pool, GFP_NOWAIT);
-    if (!pool)
+    if (!pool) {
     return ERR_PTR(-ENOMEM);
+    }
     } else {
     pool = *allocpool;
 // allocpool = NULL;
     }
     pool.region = region;
     pool.cs = dmemcs;
-    if (parent)
+    if (parent) {
     ppool = find_cg_pool_locked(parent, region);
+    }
     page_counter_init(&pool.cnt,
     ppool ? &ppool.cnt : core::ptr::null_mut(), true);
     reset_all_resource_limits(pool);
@@ -416,37 +651,45 @@ unsafe extern "C" fn dmemcs_free(css: *mut cgroup_subsys_state) {
     }
     list_add_tail_rcu(&pool.css_node, &dmemcs.pools);
     list_add_tail(&pool.region_node, &region.pools);
-    if (!parent)
+    if (!parent) {
     pool.inited = true;
-    else
+    }
+    else {
     pool.inited = ppool ? ppool.inited : false;
+    }
     return pool;
     }
-    static struct dmem_cgroup_pool_state *
-    get_cg_pool_locked(struct dmemcg_state *dmemcs, struct dmem_cgroup_region *region,
-    struct dmem_cgroup_pool_state **allocpool)
-    {
-    struct dmem_cgroup_pool_state *pool, *ppool, *retpool;
-    struct dmemcg_state *p, *pp;
+#[no_mangle]
+pub unsafe extern "C" fn get_cg_pool_locked(dmemcs: *mut dmemcg_state, region: *mut dmem_cgroup_region, allocpool: *mut *mut dmem_cgroup_pool_state) -> *mut c_void {
+    let mut pool = core::ptr::null_mut();
+    let mut ppool = core::ptr::null_mut();
+    let mut retpool = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
+    let mut pp = core::ptr::null_mut();
 //
 // Recursively create pool, we may not initialize yet on
 // recursion, this is done as a separate step.
 //
     for (p = dmemcs; p; p = parent_dmemcs(p)) {
     pool = find_cg_pool_locked(p, region);
-    if (!pool)
+    if (!pool) {
     pool = alloc_pool_single(p, region, allocpool);
-    if (IS_ERR(pool))
+    }
+    if (IS_ERR(pool)) {
     return pool;
-    if (p == dmemcs && pool.inited)
+    }
+    if (p == dmemcs && pool.inited) {
     return pool;
-    if (pool.inited)
+    }
+    if (pool.inited) {
     break;
+    }
     }
     retpool = pool = find_cg_pool_locked(dmemcs, region);
     for (p = dmemcs, pp = parent_dmemcs(dmemcs); pp; p = pp, pp = parent_dmemcs(p)) {
-    if (pool.inited)
+    if (pool.inited) {
     break;
+    }
 // ppool was created if it didn't exist by above loop.
     ppool = find_cg_pool_locked(pp, region);
 // Fix up parent links, mark as inited.
@@ -462,20 +705,18 @@ unsafe extern "C" fn dmemcs_free(css: *mut cgroup_subsys_state) {
     }
 #[no_mangle]
 unsafe extern "C" fn dmemcg_free_rcu(rcu: *mut rcu_head) {
-    static void dmemcg_free_rcu(struct rcu_head *rcu)
-    {
-    struct dmem_cgroup_region *region = container_of(rcu, typeof(*region), rcu);
-    struct dmem_cgroup_pool_state *pool, *next;
-    list_for_each_entry_safe(pool, next, &region.pools, region_node)
+    let mut region = container_of!(rcu, typeof(*region), rcu);
+    let mut pool = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+    list_for_each_entry_safe(pool, next, &region.pools, region_node) {
     free_cg_pool(pool);
+    }
     kfree(region.name);
     kfree(region);
     }
 #[no_mangle]
 unsafe extern "C" fn dmemcg_free_region(ref: *mut kref) {
-    static void dmemcg_free_region(struct kref *ref)
-    {
-    struct dmem_cgroup_region *cgregion = container_of(ref, typeof(*cgregion), ref);
+    let mut cgregion = container_of!(ref, typeof(*cgregion), ref);
     call_rcu(&cgregion.rcu, dmemcg_free_rcu);
     }
 //
@@ -489,11 +730,11 @@ unsafe extern "C" fn dmemcg_free_region(ref: *mut kref) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn dmem_cgroup_unregister_region(region: *mut dmem_cgroup_region) {
-    void dmem_cgroup_unregister_region(struct dmem_cgroup_region *region)
-    {
-    struct dmem_cgroup_pool_state *pool, *next;
-    if (!region)
+    let mut pool = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+    if (!region) {
     return;
+    }
     spin_lock(&dmemcg_lock);
 // Remove from global region list
     list_del_rcu(&region.region_node);
@@ -524,20 +765,20 @@ pub unsafe extern "C" fn dmem_cgroup_unregister_region(region: *mut dmem_cgroup_
 //
 // Return: NULL or a struct on success, PTR_ERR on failure.
 //
-    struct dmem_cgroup_region *
-    dmem_cgroup_register_region(const struct dmem_cgroup_init *init,
-    const char *fmt, ...)
-    {
-    struct dmem_cgroup_region *ret;
-    char *region_name;
-    va_list ap;
-    if (!init || !init.size)
+#[no_mangle]
+pub unsafe extern "C" fn dmem_cgroup_register_region(init: *mut dmem_cgroup_init, fmt: *mut c_char) -> *mut c_void {
+pub static mut ret: *mut c_void = core::ptr::null_mut();
+pub static mut region_name: *mut c_void = core::ptr::null_mut();
+    let mut ap;
+    if (!init || !init.size) {
     return core::ptr::null_mut();
+    }
     va_start(ap, fmt);
     region_name = kvasprintf(GFP_KERNEL, fmt, ap);
     va_end(ap);
-    if (!region_name)
+    if (!region_name) {
     return ERR_PTR(-ENOMEM);
+    }
     ret = kzalloc_obj(*ret);
     if (!ret) {
     kfree(region_name);
@@ -555,13 +796,14 @@ pub unsafe extern "C" fn dmem_cgroup_unregister_region(region: *mut dmem_cgroup_
     return ret;
     }
     EXPORT_SYMBOL_GPL(dmem_cgroup_register_region);
-    static struct dmem_cgroup_region *dmemcg_get_region_by_name(const char *name)
-    {
-    struct dmem_cgroup_region *region;
-    list_for_each_entry_rcu(region, &dmem_cgroup_regions, region_node, spin_is_locked(&dmemcg_lock))
+#[no_mangle]
+pub unsafe extern "C" fn dmemcg_get_region_by_name(name: *mut c_char) -> *mut c_void {
+pub static mut region: *mut c_void = core::ptr::null_mut();
+    list_for_each_entry_rcu(region, &dmem_cgroup_regions, region_node, spin_is_locked(&dmemcg_lock)) {
     if (!strcmp(name, region.name) &&
     kref_get_unless_zero(&region.ref))
     return region;
+    }
     return core::ptr::null_mut();
     }
 //
@@ -573,39 +815,42 @@ pub unsafe extern "C" fn dmem_cgroup_unregister_region(region: *mut dmem_cgroup_
 //
 #[no_mangle]
 pub unsafe extern "C" fn dmem_cgroup_pool_state_put(pool: *mut dmem_cgroup_pool_state) {
-    void dmem_cgroup_pool_state_put(struct dmem_cgroup_pool_state *pool)
-    {
     if (pool) {
     css_put(&pool.cs.css);
     dmemcg_pool_put(pool);
     }
     }
     EXPORT_SYMBOL_GPL(dmem_cgroup_pool_state_put);
-    static struct dmem_cgroup_pool_state *
-    get_cg_pool_unlocked(struct dmemcg_state *cg, struct dmem_cgroup_region *region)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn get_cg_pool_unlocked(cg: *mut dmemcg_state, region: *mut dmem_cgroup_region) -> *mut c_void {
     struct dmem_cgroup_pool_state *pool, *allocpool = core::ptr::null_mut();
 // fastpath lookup?
     rcu_read_lock();
     pool = find_cg_pool_locked(cg, region);
-    if (pool && !READ_ONCE(pool.inited))
+    if (pool && !READ_ONCE(pool.inited)) {
     pool = core::ptr::null_mut();
-    if (pool && !dmemcg_pool_tryget(pool))
+    }
+    if (pool && !dmemcg_pool_tryget(pool)) {
     pool = core::ptr::null_mut();
+    }
     rcu_read_unlock();
     while (!pool) {
     spin_lock(&dmemcg_lock);
-    if (!region.unregistered)
+    if (!region.unregistered) {
     pool = get_cg_pool_locked(cg, region, &allocpool);
-    else
+    }
+    else {
     pool = ERR_PTR(-ENODEV);
-    if (!IS_ERR(pool))
+    }
+    if (!IS_ERR(pool)) {
     dmemcg_pool_get(pool);
+    }
     spin_unlock(&dmemcg_lock);
     if (pool == ERR_PTR(-ENOMEM)) {
     pool = core::ptr::null_mut();
-    if (WARN_ON(allocpool))
+    if (WARN_ON!(allocpool)) {
     continue;
+    }
     allocpool = kzalloc_obj(*allocpool);
     if (allocpool) {
     pool = core::ptr::null_mut();
@@ -628,10 +873,9 @@ pub unsafe extern "C" fn dmem_cgroup_pool_state_put(pool: *mut dmem_cgroup_pool_
 //
 #[no_mangle]
 pub unsafe extern "C" fn dmem_cgroup_uncharge(pool: *mut dmem_cgroup_pool_state, size: u64) {
-    void dmem_cgroup_uncharge(struct dmem_cgroup_pool_state *pool, u64 size)
-    {
-    if (!pool)
+    if (!pool) {
     return;
+    }
     page_counter_uncharge(&pool.cnt, size);
     css_put(&pool.cs.css);
     dmemcg_pool_put(pool);
@@ -656,17 +900,16 @@ pub unsafe extern "C" fn dmem_cgroup_uncharge(pool: *mut dmem_cgroup_pool_state,
 //
 // Return: 0 on success, -EAGAIN on hitting a limit, or a negative errno on failure.
 //
-    int dmem_cgroup_try_charge(struct dmem_cgroup_region *region, u64 size,
-    struct dmem_cgroup_pool_state **ret_pool,
-    struct dmem_cgroup_pool_state **ret_limit_pool)
-    {
-    struct dmemcg_state *cg;
-    struct dmem_cgroup_pool_state *pool;
-    struct page_counter *fail;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn dmem_cgroup_try_charge(region: *mut dmem_cgroup_region, size: u64, ret_pool: *mut *mut dmem_cgroup_pool_state, ret_limit_pool: *mut *mut dmem_cgroup_pool_state) -> c_int {
+pub static mut cg: *mut c_void = core::ptr::null_mut();
+pub static mut pool: *mut c_void = core::ptr::null_mut();
+pub static mut fail: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
 // ret_pool = NULL;
-    if (ret_limit_pool)
+    if (ret_limit_pool) {
 // ret_limit_pool = NULL;
+    }
 //
 // hold on to css, as cgroup can be removed but resource
 // accounting happens on css.
@@ -675,22 +918,22 @@ pub unsafe extern "C" fn dmem_cgroup_uncharge(pool: *mut dmem_cgroup_pool_state,
     pool = get_cg_pool_unlocked(cg, region);
     if (IS_ERR(pool)) {
     ret = PTR_ERR(pool);
-    goto err;
+// goto;
     }
     if (!page_counter_try_charge(&pool.cnt, size, &fail)) {
     if (ret_limit_pool) {
-// ret_limit_pool = container_of(fail, struct dmem_cgroup_pool_state, cnt);
+// ret_limit_pool = container_of!(fail, dmem_cgroup_pool_state, cnt);
     css_get(&(*ret_limit_pool).cs.css);
     dmemcg_pool_get(*ret_limit_pool);
     }
     dmemcg_pool_put(pool);
     ret = -EAGAIN;
-    goto err;
+// goto;
     }
 // On success, reference from get_current_dmemcs is transferred to *ret_pool
 // ret_pool = pool;
     return 0;
-    err:
+// label;
     css_put(&cg.css);
     return ret;
     }
@@ -703,14 +946,15 @@ pub unsafe extern "C" fn dmem_cgroup_uncharge(pool: *mut dmem_cgroup_pool_state,
 //
 // Return: true if usage is below min and the cgroup is protected, false otherwise.
 //
-    bool dmem_cgroup_below_min(struct dmem_cgroup_pool_state *root,
-    struct dmem_cgroup_pool_state *test)
-    {
-    if (root == test || !pool_parent(test))
+#[no_mangle]
+pub unsafe extern "C" fn dmem_cgroup_below_min(root: *mut dmem_cgroup_pool_state, test: *mut dmem_cgroup_pool_state) -> bool {
+    if (root == test || !pool_parent(test)) {
     return false;
+    }
     if (!root) {
-    for (root = test; pool_parent(root); root = pool_parent(root))
+    for (root = test; pool_parent(root); root = pool_parent(root)) {
     {}
+    }
     }
 //
 // In mem_cgroup_below_min(), the memcg pendant, this call is missing.
@@ -731,14 +975,15 @@ pub unsafe extern "C" fn dmem_cgroup_uncharge(pool: *mut dmem_cgroup_pool_state,
 //
 // Return: true if usage is below low and the cgroup is protected, false otherwise.
 //
-    bool dmem_cgroup_below_low(struct dmem_cgroup_pool_state *root,
-    struct dmem_cgroup_pool_state *test)
-    {
-    if (root == test || !pool_parent(test))
+#[no_mangle]
+pub unsafe extern "C" fn dmem_cgroup_below_low(root: *mut dmem_cgroup_pool_state, test: *mut dmem_cgroup_pool_state) -> bool {
+    if (root == test || !pool_parent(test)) {
     return false;
+    }
     if (!root) {
-    for (root = test; pool_parent(root); root = pool_parent(root))
+    for (root = test; pool_parent(root); root = pool_parent(root)) {
     {}
+    }
     }
 //
 // In mem_cgroup_below_low(), the memcg pendant, this call is missing.
@@ -760,27 +1005,29 @@ pub unsafe extern "C" fn dmem_cgroup_uncharge(pool: *mut dmem_cgroup_pool_state,
 // or if such a pool does not exist. A reference to the returned pool is grabbed and must be
 // released by the caller when it is done using the pool.
 //
-    struct dmem_cgroup_pool_state *dmem_cgroup_get_common_ancestor(struct dmem_cgroup_pool_state *a,
-    struct dmem_cgroup_pool_state *b)
-    {
-    struct cgroup *ancestor_cgroup;
-    struct cgroup_subsys_state *ancestor_css;
-    struct dmemcg_state *ancestor_dmemcs = core::ptr::null_mut();
-    struct dmem_cgroup_pool_state *pool = core::ptr::null_mut();
-    if (!a || !b)
+#[no_mangle]
+pub unsafe extern "C" fn dmem_cgroup_get_common_ancestor(a: *mut dmem_cgroup_pool_state, b: *mut dmem_cgroup_pool_state) -> *mut c_void {
+pub static mut ancestor_cgroup: *mut c_void = core::ptr::null_mut();
+pub static mut ancestor_css: *mut c_void = core::ptr::null_mut();
+    let mut ancestor_dmemcs = core::ptr::null_mut();
+    let mut pool = core::ptr::null_mut();
+    if (!a || !b) {
     return core::ptr::null_mut();
+    }
     ancestor_cgroup = cgroup_common_ancestor(a.cs.css.cgroup, b.cs.css.cgroup);
-    if (!ancestor_cgroup)
+    if (!ancestor_cgroup) {
     return core::ptr::null_mut();
+    }
     rcu_read_lock();
     ancestor_css = cgroup_e_css(ancestor_cgroup, &dmem_cgrp_subsys);
-    if (css_tryget(ancestor_css))
+    if (css_tryget(ancestor_css)) {
     ancestor_dmemcs = css_to_dmemcs(ancestor_css);
+    }
     rcu_read_unlock();
     if (ancestor_dmemcs) {
     pool = get_cg_pool_unlocked(css_to_dmemcs(ancestor_css),
     a.region);
-    if (WARN_ON(IS_ERR(pool))) {
+    if (WARN_ON!(IS_ERR(pool))) {
     pool = core::ptr::null_mut();
     css_put(ancestor_css);
     }
@@ -790,9 +1037,7 @@ pub unsafe extern "C" fn dmem_cgroup_uncharge(pool: *mut dmem_cgroup_pool_state,
     EXPORT_SYMBOL_GPL(dmem_cgroup_get_common_ancestor);
 #[no_mangle]
 unsafe extern "C" fn dmem_cgroup_region_capacity_show(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int dmem_cgroup_region_capacity_show(struct seq_file *sf, void *v)
-    {
-    struct dmem_cgroup_region *region;
+pub static mut region: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     list_for_each_entry_rcu(region, &dmem_cgroup_regions, region_node) {
     seq_puts(sf, region.name);
@@ -803,155 +1048,103 @@ unsafe extern "C" fn dmem_cgroup_region_capacity_show(sf: *mut seq_file, v: *mut
     }
 #[no_mangle]
 unsafe extern "C" fn dmemcg_parse_limit(options: *mut c_char, new_limit: *mut u64) -> c_int {
-    static int dmemcg_parse_limit(char *options, u64 *new_limit)
-    {
-    char *end;
+pub static mut end: *mut c_void = core::ptr::null_mut();
     if (!strcmp(options, "max")) {
 // new_limit = PAGE_COUNTER_MAX;
     return 0;
     }
 // new_limit = memparse(options, &end);
-    if (*end != '\0')
+    if (*end != '\0') {
     return -EINVAL;
+    }
     return 0;
     }
-    static ssize_t dmemcg_limit_write(struct kernfs_open_file *of,
-    char *buf, size_t nbytes, loff_t off,
-    void (*apply)(struct dmem_cgroup_pool_state *, u64, bool))
-    {
-    struct dmemcg_state *dmemcs = css_to_dmemcs(of_css(of));
-    struct dmem_cgroup_pool_state *pool;
-    struct dmem_cgroup_region *region;
-    let mut nonblock: bool = of.file.f_flags & O_NONBLOCK;
-    char *region_name;
-    u64 new_limit;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn dmemcg_limit_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t, u64: c_void) -> ssize_t {
+    let mut dmemcs = css_to_dmemcs(of_css(of));
+pub static mut pool: *mut c_void = core::ptr::null_mut();
+pub static mut region: *mut c_void = core::ptr::null_mut();
+pub static mut nonblock: bool = false;
+pub static mut region_name: *mut c_void = core::ptr::null_mut();
+    let mut new_limit = 0;
+    let mut err = 0;
     buf = strstrip(buf);
     region_name = strsep(&buf, " \t");
-    if (!buf || !region_name[0])
+    if (!buf || !region_name[0]) {
     return -EINVAL;
+    }
     rcu_read_lock();
     region = dmemcg_get_region_by_name(region_name);
     rcu_read_unlock();
-    if (!region)
+    if (!region) {
     return -EINVAL;
+    }
     err = dmemcg_parse_limit(buf, &new_limit);
-    if (err < 0)
-    goto out_put;
+    if (err < 0) {
+// goto;
+    }
     pool = get_cg_pool_unlocked(dmemcs, region);
     if (IS_ERR(pool)) {
     err = PTR_ERR(pool);
-    goto out_put;
+// goto;
     }
     apply(pool, new_limit, nonblock);
     dmemcg_pool_put(pool);
-    out_put:
+// label;
     kref_put(&region.ref, dmemcg_free_region);
     return err ?: nbytes;
     }
-    static int dmemcg_limit_show(struct seq_file *sf, void *v,
-    u64 (*fn)(struct dmem_cgroup_pool_state *))
-    {
-    struct dmemcg_state *dmemcs = css_to_dmemcs(seq_css(sf));
-    struct dmem_cgroup_region *region;
+#[no_mangle]
+pub unsafe extern "C" fn dmemcg_limit_show(sf: *mut seq_file, v: *mut c_void) -> c_int {
+    let mut dmemcs = css_to_dmemcs(seq_css(sf));
+pub static mut region: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     list_for_each_entry_rcu(region, &dmem_cgroup_regions, region_node) {
-    struct dmem_cgroup_pool_state *pool = find_cg_pool_locked(dmemcs, region);
-    u64 val;
+    let mut pool = find_cg_pool_locked(dmemcs, region);
+    let mut val = 0;
     seq_puts(sf, region.name);
     val = fn(pool);
-    if (val < PAGE_COUNTER_MAX)
+    if (val < PAGE_COUNTER_MAX) {
     seq_printf(sf, " %lld\n", val);
-    else
+    }
+    else {
     seq_puts(sf, " max\n");
+    }
     }
     rcu_read_unlock();
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn dmem_cgroup_region_peak_show(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int dmem_cgroup_region_peak_show(struct seq_file *sf, void *v)
-    {
     return dmemcg_limit_show(sf, v, get_resource_peak);
     }
 #[no_mangle]
 unsafe extern "C" fn dmem_cgroup_region_current_show(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int dmem_cgroup_region_current_show(struct seq_file *sf, void *v)
-    {
     return dmemcg_limit_show(sf, v, get_resource_current);
     }
 #[no_mangle]
 unsafe extern "C" fn dmem_cgroup_region_min_show(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int dmem_cgroup_region_min_show(struct seq_file *sf, void *v)
-    {
     return dmemcg_limit_show(sf, v, get_resource_min);
     }
-    static ssize_t dmem_cgroup_region_min_write(struct kernfs_open_file *of,
-    char *buf, size_t nbytes, loff_t off)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn dmem_cgroup_region_min_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
     return dmemcg_limit_write(of, buf, nbytes, off, set_resource_min);
     }
 #[no_mangle]
 unsafe extern "C" fn dmem_cgroup_region_low_show(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int dmem_cgroup_region_low_show(struct seq_file *sf, void *v)
-    {
     return dmemcg_limit_show(sf, v, get_resource_low);
     }
-    static ssize_t dmem_cgroup_region_low_write(struct kernfs_open_file *of,
-    char *buf, size_t nbytes, loff_t off)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn dmem_cgroup_region_low_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
     return dmemcg_limit_write(of, buf, nbytes, off, set_resource_low);
     }
 #[no_mangle]
 unsafe extern "C" fn dmem_cgroup_region_max_show(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int dmem_cgroup_region_max_show(struct seq_file *sf, void *v)
-    {
     return dmemcg_limit_show(sf, v, get_resource_max);
     }
-    static ssize_t dmem_cgroup_region_max_write(struct kernfs_open_file *of,
-    char *buf, size_t nbytes, loff_t off)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn dmem_cgroup_region_max_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
     return dmemcg_limit_write(of, buf, nbytes, off, set_resource_max);
     }
-    static struct cftype files[] = {
-    {
-    .name = "capacity",
-    .seq_show = dmem_cgroup_region_capacity_show,
-    .flags = CFTYPE_ONLY_ON_ROOT,
-    },
-    {
-    .name = "current",
-    .seq_show = dmem_cgroup_region_current_show,
-    },
-    {
-    .name = "peak",
-    .seq_show = dmem_cgroup_region_peak_show,
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    {
-    .name = "min",
-    .write = dmem_cgroup_region_min_write,
-    .seq_show = dmem_cgroup_region_min_show,
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    {
-    .name = "low",
-    .write = dmem_cgroup_region_low_write,
-    .seq_show = dmem_cgroup_region_low_show,
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    {
-    .name = "max",
-    .write = dmem_cgroup_region_max_write,
-    .seq_show = dmem_cgroup_region_max_show,
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    { } /* Zero entry terminates. */
-    };
-    struct cgroup_subsys dmem_cgrp_subsys = {
-    .css_alloc	= dmemcs_alloc,
-    .css_free	= dmemcs_free,
-    .css_offline	= dmemcs_offline,
-    .legacy_cftypes	= files,
-    .dfl_cftypes	= files,
-    };
+pub static mut cftype: usize = 0;
+pub static mut cgroup_subsys: usize = 0;

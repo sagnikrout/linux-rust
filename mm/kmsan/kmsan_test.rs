@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -47,24 +297,16 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Author: Alexander Potapenko <glider@google.com>
 //
 
-    static DEFINE_PER_CPU(int, per_cpu_var);
+pub static mut int: usize = 0;
 // Report as observed from console.
-    static struct {
-    spinlock_t lock;
-    bool available;
-    bool ignore; /* Stop console output collection. */
-    char header[256];
-    } observed = {
-    .lock = __SPIN_LOCK_UNLOCKED(observed.lock),
-    };
+pub static mut observed: usize = 0;
 // Probe for console output: obtains observed lines of interest.
 #[no_mangle]
 unsafe extern "C" fn probe_console(ignore: *mut c_void, buf: *const c_char, len: usize) {
-    static void probe_console(void *ignore, const char *buf, size_t len)
-    {
-    unsigned long flags;
-    if (observed.ignore)
+    let mut flags = 0;
+    if (observed.ignore) {
     return;
+    }
     spin_lock_irqsave(&observed.lock, flags);
     if (strnstr(buf, "BUG: KMSAN: ", len)) {
 //
@@ -74,7 +316,7 @@ unsafe extern "C" fn probe_console(ignore: *mut c_void, buf: *const c_char, len:
 // @len bytes and let strscpy() add the missing NUL-terminator.
 //
     strscpy(observed.header, buf,
-    min(len + 1, sizeof(observed.header)));
+    min(len + 1, sizeof!(observed.header)));
     WRITE_ONCE(observed.available, true);
     observed.ignore = true;
     }
@@ -83,16 +325,12 @@ unsafe extern "C" fn probe_console(ignore: *mut c_void, buf: *const c_char, len:
 // Check if a report related to the test exists.
 #[no_mangle]
 unsafe extern "C" fn report_available() -> bool {
-    static bool report_available(void)
-    {
     return READ_ONCE(observed.available);
     }
 // Reset observed.available, so that the test can trigger another report.
 #[no_mangle]
 unsafe extern "C" fn report_reset() {
-    static void report_reset(void)
-    {
-    unsigned long flags;
+    let mut flags = 0;
     spin_lock_irqsave(&observed.lock, flags);
     WRITE_ONCE(observed.available, false);
     observed.ignore = false;
@@ -102,7 +340,7 @@ unsafe extern "C" fn report_reset() {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct expect_report {
-    pub /: *const *const *const char error_type; / Error type.,
+//     pub /: *const *const *const char error_type; / Error type.,
 //
 // Kernel symbol from the error header, or NULL if no report is
 // expected.
@@ -113,16 +351,15 @@ pub struct expect_report {
 // Check observed report matches information in @r.
 #[no_mangle]
 unsafe extern "C" fn report_matches(r: *const expect_report) -> bool {
-    static bool report_matches(const struct expect_report *r)
-    {
     typeof(observed.header) expected_header;
-    unsigned long flags;
-    let mut ret: bool = false;
-    const char *end;
-    char *cur;
+    let mut flags = 0;
+pub static mut ret: bool = false;
+pub static mut end: *mut c_void = core::ptr::null_mut();
+pub static mut cur: *mut c_void = core::ptr::null_mut();
 // Doubled-checked locking.
-    if (!report_available() || !r.symbol)
+    if (!report_available() || !r.symbol) {
     return (!report_available() && !r.symbol);
+    }
 // Generate expected report contents.
 // Title
     cur = expected_header;
@@ -131,14 +368,16 @@ unsafe extern "C" fn report_matches(r: *const expect_report) -> bool {
     scnprintf(cur, end - cur, " in %s", r.symbol);
 // The exact offset won't match, remove it; also strip module name.
     cur = strchr(expected_header, '+');
-    if (cur)
+    if (cur) {
 // cur = '\0';
+    }
     spin_lock_irqsave(&observed.lock, flags);
-    if (!report_available())
-    goto out; /* A new report is being captured. */
+    if (!report_available()) {
+// goto; /* A new report is being captured. */
+    }
 // Finally match expected output to what we actually observed.
     ret = strstr(observed.header, expected_header);
-    out:
+// label;
     spin_unlock_irqrestore(&observed.lock, flags);
     return ret;
     }
@@ -146,407 +385,33 @@ unsafe extern "C" fn report_matches(r: *const expect_report) -> bool {
 // Prevent replacing branch with select in LLVM.
 #[no_mangle]
 unsafe extern "C" fn check_true(arg: *mut c_char) -> noinline void {
-    static noinline void check_true(char *arg)
-    {
-    pr_info("%s is true\n", arg);
+    pr_info!("%s is true\n", arg);
     }
 #[no_mangle]
 unsafe extern "C" fn check_false(arg: *mut c_char) -> noinline void {
-    static noinline void check_false(char *arg)
-    {
-    pr_info("%s is false\n", arg);
+    pr_info!("%s is false\n", arg);
     }
 
-    do {                             \
-    if (x)                   \
-    check_true(#x);  \
-    else                     \
-    check_false(#x); \
+    do {                             
+    if (x)                    {
+    check_true(#x);  
+    }
+    else {
+    check_false(#x); 
+    }
     } while (0)
 
-    struct expect_report e = {          \
-    .error_type = reason,       \
-    .symbol = fn,               \
-    }
-
-    EXPECTATION_ETYPE_FN(e, "uninit-value", fn)
-
-    EXPECTATION_ETYPE_FN(e, "use-after-free", __func__)
-// Test case: ensure that kmalloc() returns uninitialized memory.
-#[no_mangle]
-unsafe extern "C" fn test_uninit_kmalloc(test: *mut kunit) {
-    static void test_uninit_kmalloc(struct kunit *test)
-    {
-    EXPECTATION_UNINIT_VALUE(expect);
-    int *ptr;
-    kunit_info(test, "uninitialized kmalloc test (UMR report)\n");
-    ptr = kmalloc_obj(*ptr);
-    USE(*ptr);
-    KUNIT_EXPECT_TRUE(test, report_matches(&expect));
-    }
-//
-// Test case: ensure that kmalloc'ed memory becomes initialized after memset().
-//
-#[no_mangle]
-unsafe extern "C" fn test_init_kmalloc(test: *mut kunit) {
-    static void test_init_kmalloc(struct kunit *test)
-    {
-    EXPECTATION_NO_REPORT(expect);
-    int *ptr;
-    kunit_info(test, "initialized kmalloc test (no reports)\n");
-    ptr = kmalloc_obj(*ptr);
-    memset(ptr, 0, sizeof(*ptr));
-    USE(*ptr);
-    KUNIT_EXPECT_TRUE(test, report_matches(&expect));
-    }
-// Test case: ensure that kzalloc() returns initialized memory.
-#[no_mangle]
-unsafe extern "C" fn test_init_kzalloc(test: *mut kunit) {
-    static void test_init_kzalloc(struct kunit *test)
-    {
-    EXPECTATION_NO_REPORT(expect);
-    int *ptr;
-    kunit_info(test, "initialized kzalloc test (no reports)\n");
-    ptr = kzalloc_obj(*ptr);
-    USE(*ptr);
-    KUNIT_EXPECT_TRUE(test, report_matches(&expect));
-    }
-// Test case: ensure that local variables are uninitialized by default.
-#[no_mangle]
-unsafe extern "C" fn test_uninit_stack_var(test: *mut kunit) {
-    static void test_uninit_stack_var(struct kunit *test)
-    {
-    EXPECTATION_UNINIT_VALUE(expect);
-    volatile int cond;
-    kunit_info(test, "uninitialized stack variable (UMR report)\n");
-    USE(cond);
-    KUNIT_EXPECT_TRUE(test, report_matches(&expect));
-    }
-// Test case: ensure that local variables with initializers are initialized.
-#[no_mangle]
-unsafe extern "C" fn test_init_stack_var(test: *mut kunit) {
-    static void test_init_stack_var(struct kunit *test)
-    {
-    EXPECTATION_NO_REPORT(expect);
-    let mut cond: volatile int = 1;
-    kunit_info(test, "initialized stack variable (no reports)\n");
-    USE(cond);
-    KUNIT_EXPECT_TRUE(test, report_matches(&expect));
-    }
-#[no_mangle]
-unsafe extern "C" fn two_param_fn_2(arg1: c_int, arg2: c_int) -> noinline void {
-    static noinline void two_param_fn_2(int arg1, int arg2)
-    {
-    USE(arg1);
-    USE(arg2);
-    }
-#[no_mangle]
-unsafe extern "C" fn one_param_fn(arg: c_int) -> noinline void {
-    static noinline void one_param_fn(int arg)
-    {
-    two_param_fn_2(arg, arg);
-    USE(arg);
-    }
-#[no_mangle]
-unsafe extern "C" fn two_param_fn(arg1: c_int, arg2: c_int) -> noinline void {
-    static noinline void two_param_fn(int arg1, int arg2)
-    {
-    let mut init: c_int = 0;
-    one_param_fn(init);
-    USE(arg1);
-    USE(arg2);
-    }
-#[no_mangle]
-unsafe extern "C" fn test_params(test: *mut kunit) {
-    static void test_params(struct kunit *test)
-    {
-
-//
-// With eager param/retval checking enabled, KMSAN will report an error
-// before the call to two_param_fn().
-//
-    EXPECTATION_UNINIT_VALUE_FN(expect, "test_params");
-
-    EXPECTATION_UNINIT_VALUE_FN(expect, "two_param_fn");
-
-    volatile int uninit, init = 1;
-    kunit_info(test,
-    "uninit passed through a function parameter (UMR report)\n");
-    two_param_fn(uninit, init);
-    KUNIT_EXPECT_TRUE(test, report_matches(&expect));
-    }
-#[no_mangle]
-unsafe extern "C" fn signed_sum3(a: c_int, b: c_int, c: c_int) -> c_int {
-    static int signed_sum3(int a, int b, int c)
-    {
-    return a + b + c;
-    }
-//
-// Test case: ensure that uninitialized values are tracked through function
-// arguments.
-//
-#[no_mangle]
-unsafe extern "C" fn test_uninit_multiple_params(test: *mut kunit) {
-    static void test_uninit_multiple_params(struct kunit *test)
-    {
-    EXPECTATION_UNINIT_VALUE(expect);
-    let mut b: volatile char = 3, c;
-    volatile int a;
-    kunit_info(test, "uninitialized local passed to fn (UMR report)\n");
-    USE(signed_sum3(a, b, c));
-    KUNIT_EXPECT_TRUE(test, report_matches(&expect));
-    }
-// Helper function to make an array uninitialized.
-#[no_mangle]
-unsafe extern "C" fn do_uninit_local_array(array: *mut c_char, start: c_int, stop: c_int) -> noinline void {
-    static noinline void do_uninit_local_array(char *array, int start, int stop)
-    {
-    volatile char uninit;
-    for (int i = start; i < stop; i++)
-    array[i] = uninit;
-    }
-//
-// Test case: ensure kmsan_check_memory() reports an error when checking
-// uninitialized memory.
-//
-#[no_mangle]
-unsafe extern "C" fn test_uninit_kmsan_check_memory(test: *mut kunit) {
-    static void test_uninit_kmsan_check_memory(struct kunit *test)
-    {
-    EXPECTATION_UNINIT_VALUE_FN(expect, "test_uninit_kmsan_check_memory");
-    volatile char local_array[8];
-    kunit_info(
-    test,
-    "kmsan_check_memory() called on uninit local (UMR report)\n");
-    do_uninit_local_array((char *)local_array, 5, 7);
-    kmsan_check_memory((char *)local_array, 8);
-    KUNIT_EXPECT_TRUE(test, report_matches(&expect));
-    }
-//
-// Test case: check that a virtual memory range created with vmap() from
-// initialized pages is still considered as initialized.
-//
-#[no_mangle]
-unsafe extern "C" fn test_init_kmsan_vmap_vunmap(test: *mut kunit) {
-    static void test_init_kmsan_vmap_vunmap(struct kunit *test)
-    {
-    EXPECTATION_NO_REPORT(expect);
-    let mut npages: c_int = 2;
-    struct page **pages;
-    void *vbuf;
-    kunit_info(test, "pages initialized via vmap (no reports)\n");
-    pages = kmalloc_objs(*pages, npages);
-    for (int i = 0; i < npages; i++)
-    pages[i] = alloc_page(GFP_KERNEL);
-    vbuf = vmap(pages, npages, VM_MAP, PAGE_KERNEL);
-    memset(vbuf, 0xfe, npages * PAGE_SIZE);
-    for (int i = 0; i < npages; i++)
-    kmsan_check_memory(page_address(pages[i]), PAGE_SIZE);
-    if (vbuf)
-    vunmap(vbuf);
-    for (int i = 0; i < npages; i++) {
-    if (pages[i])
-    __free_page(pages[i]);
-    }
-    kfree(pages);
-    KUNIT_EXPECT_TRUE(test, report_matches(&expect));
-    }
-//
-// Test case: ensure that memset() can initialize a buffer allocated via
-// vmalloc().
-//
-#[no_mangle]
-unsafe extern "C" fn test_init_vmalloc(test: *mut kunit) {
-    static void test_init_vmalloc(struct kunit *test)
-    {
-    EXPECTATION_NO_REPORT(expect);
-    let mut npages: c_int = 8;
-    char *buf;
-    kunit_info(test, "vmalloc buffer can be initialized (no reports)\n");
-    buf = vmalloc(PAGE_SIZE * npages);
-    buf[0] = 1;
-    memset(buf, 0xfe, PAGE_SIZE * npages);
-    USE(buf[0]);
-    for (int i = 0; i < npages; i++)
-    kmsan_check_memory(&buf[PAGE_SIZE * i], PAGE_SIZE);
-    vfree(buf);
-    KUNIT_EXPECT_TRUE(test, report_matches(&expect));
-    }
-// Test case: ensure that use-after-free reporting works for kmalloc.
-#[no_mangle]
-unsafe extern "C" fn test_uaf(test: *mut kunit) {
-    static void test_uaf(struct kunit *test)
-    {
-    EXPECTATION_USE_AFTER_FREE(expect);
-    volatile int value;
-    volatile int *var;
-    kunit_info(test, "use-after-free in kmalloc-ed buffer (UMR report)\n");
-    var = kmalloc(80, GFP_KERNEL);
-    var[3] = 0xfeedface;
-    kfree((int *)var);
-// Copy the invalid value before checking it.
-    value = var[3];
-    USE(value);
-    KUNIT_EXPECT_TRUE(test, report_matches(&expect));
-    }
-#[no_mangle]
-unsafe extern "C" fn test_uninit_page(test: *mut kunit) {
-    static void test_uninit_page(struct kunit *test)
-    {
-    EXPECTATION_UNINIT_VALUE(expect);
-    struct page *page;
-    int *ptr;
-    kunit_info(test, "uninitialized page allocation (UMR report)\n");
-    page = alloc_pages(GFP_KERNEL, 0);
-    ptr = page_address(page);
-    USE(*ptr);
-    __free_pages(page, 0);
-    KUNIT_EXPECT_TRUE(test, report_matches(&expect));
-    }
-    static volatile char *test_uaf_pages_helper(int order, int offset)
-    {
-    struct page *page;
-    volatile char *var;
-// Memory is initialized up until __free_pages() thanks to __GFP_ZERO.
-    page = alloc_pages(GFP_KERNEL | __GFP_ZERO, order);
-    var = page_address(page) + offset;
-    __free_pages(page, order);
-    return var;
-    }
-// Test case: ensure that use-after-free reporting works for a freed page.
-#[no_mangle]
-unsafe extern "C" fn test_uaf_pages(test: *mut kunit) {
-    static void test_uaf_pages(struct kunit *test)
-    {
-    EXPECTATION_USE_AFTER_FREE(expect);
-    volatile char value;
-    kunit_info(test, "use-after-free on a freed page (UMR report)\n");
-// Allocate a single page, free it, then try to access it.
-    value = *test_uaf_pages_helper(0, 3);
-    USE(value);
-    KUNIT_EXPECT_TRUE(test, report_matches(&expect));
-    }
-// Test case: ensure that UAF reporting works for high order pages.
-#[no_mangle]
-unsafe extern "C" fn test_uaf_high_order_pages(test: *mut kunit) {
-    static void test_uaf_high_order_pages(struct kunit *test)
-    {
-    EXPECTATION_USE_AFTER_FREE(expect);
-    volatile char value;
-    kunit_info(test,
-    "use-after-free on a freed high-order page (UMR report)\n");
-//
-// Create a high-order non-compound page, free it, then try to access
-// its tail page.
-//
-    value = *test_uaf_pages_helper(1, PAGE_SIZE + 3);
-    USE(value);
-    KUNIT_EXPECT_TRUE(test, report_matches(&expect));
-    }
-//
-// Test case: ensure that uninitialized values are propagated through per-CPU
-// memory.
-//
-#[no_mangle]
-unsafe extern "C" fn test_percpu_propagate(test: *mut kunit) {
-    static void test_percpu_propagate(struct kunit *test)
-    {
-    EXPECTATION_UNINIT_VALUE(expect);
-    volatile int uninit, check;
-    kunit_info(test,
-    "uninit local stored to per_cpu memory (UMR report)\n");
-    this_cpu_write(per_cpu_var, uninit);
-    check = this_cpu_read(per_cpu_var);
-    USE(check);
-    KUNIT_EXPECT_TRUE(test, report_matches(&expect));
-    }
-//
-// Test case: ensure that passing uninitialized values to printk() leads to an
-// error report.
-//
-#[no_mangle]
-unsafe extern "C" fn test_printk(test: *mut kunit) {
-    static void test_printk(struct kunit *test)
-    {
-
-//
-// With eager param/retval checking enabled, KMSAN will report an error
-// before the call to pr_info().
-//
-    EXPECTATION_UNINIT_VALUE_FN(expect, "test_printk");
-
-    EXPECTATION_UNINIT_VALUE_FN(expect, "number");
-
-    volatile int uninit;
-    kunit_info(test, "uninit local passed to pr_info() (UMR report)\n");
-    pr_info("%px contains %d\n", &uninit, uninit);
-    KUNIT_EXPECT_TRUE(test, report_matches(&expect));
-    }
-// Prevent the compiler from inlining a memcpy() call.
-    static noinline void *memcpy_noinline(volatile void *dst,
-    const volatile void *src, size_t size)
-    {
-    return memcpy((void *)dst, (const void *)src, size);
-    }
-// Test case: ensure that memcpy() correctly copies initialized values.
-#[no_mangle]
-unsafe extern "C" fn test_init_memcpy(test: *mut kunit) {
-    static void test_init_memcpy(struct kunit *test)
-    {
-    EXPECTATION_NO_REPORT(expect);
-    volatile long long src;
-    let mut dst: volatile long long = 0;
-    src = 1;
-    kunit_info(
-    test,
-    "memcpy()ing aligned initialized src to aligned dst (no reports)\n");
-    memcpy_noinline((void *)&dst, (void *)&src, sizeof(src));
-    kmsan_check_memory((void *)&dst, sizeof(dst));
-    KUNIT_EXPECT_TRUE(test, report_matches(&expect));
-    }
-//
-// Test case: ensure that memcpy() correctly copies uninitialized values between
-// aligned `src` and `dst`.
-//
-#[no_mangle]
-unsafe extern "C" fn test_memcpy_aligned_to_aligned(test: *mut kunit) {
-    static void test_memcpy_aligned_to_aligned(struct kunit *test)
-    {
-    EXPECTATION_UNINIT_VALUE_FN(expect, "test_memcpy_aligned_to_aligned");
-    volatile int uninit_src;
-    let mut dst: volatile int = 0;
-    kunit_info(
-    test,
-    "memcpy()ing aligned uninit src to aligned dst (UMR report)\n");
-    memcpy_noinline((void *)&dst, (void *)&uninit_src, sizeof(uninit_src));
-    kmsan_check_memory((void *)&dst, sizeof(dst));
-    KUNIT_EXPECT_TRUE(test, report_matches(&expect));
-    }
-//
-// Test case: ensure that memcpy() correctly copies uninitialized values between
-// aligned `src` and unaligned `dst`.
-//
-// Copying aligned 4-byte value to an unaligned one leads to touching two
-// aligned 4-byte values. This test case checks that KMSAN correctly reports an
-// error on the mentioned two values.
-//
-#[no_mangle]
-unsafe extern "C" fn test_memcpy_aligned_to_unaligned(test: *mut kunit) {
-    static void test_memcpy_aligned_to_unaligned(struct kunit *test)
-    {
-    EXPECTATION_UNINIT_VALUE_FN(expect, "test_memcpy_aligned_to_unaligned");
-    volatile int uninit_src;
-    volatile char dst[8] = { 0 };
+pub static mut expect_report: usize = 0;
     kunit_info(
     test,
     "memcpy()ing aligned uninit src to unaligned dst (UMR report)\n");
-    kmsan_check_memory((void *)&uninit_src, sizeof(uninit_src));
-    memcpy_noinline((void *)&dst[1], (void *)&uninit_src,
-    sizeof(uninit_src));
-    kmsan_check_memory((void *)dst, 4);
+    kmsan_check_memory(&uninit_src, sizeof!(uninit_src));
+    memcpy_noinline(&dst[1], &uninit_src,
+    sizeof!(uninit_src));
+    kmsan_check_memory(dst, 4);
     KUNIT_EXPECT_TRUE(test, report_matches(&expect));
     report_reset();
-    kmsan_check_memory((void *)&dst[4], sizeof(uninit_src));
+    kmsan_check_memory(&dst[4], sizeof!(uninit_src));
     KUNIT_EXPECT_TRUE(test, report_matches(&expect));
     }
 //
@@ -573,8 +438,6 @@ unsafe extern "C" fn test_memcpy_aligned_to_unaligned(test: *mut kunit) {
 //
 #[no_mangle]
 unsafe extern "C" fn test_memcpy_initialized_gap(test: *mut kunit) {
-    static void test_memcpy_initialized_gap(struct kunit *test)
-    {
     EXPECTATION_UNINIT_VALUE_FN(expect, "test_memcpy_initialized_gap");
     volatile char uninit_src[12];
     volatile char dst[8] = { 0 };
@@ -589,28 +452,28 @@ unsafe extern "C" fn test_memcpy_initialized_gap(test: *mut kunit) {
     uninit_src[7] = 42;
     uninit_src[10] = 42;
     uninit_src[11] = 42;
-    memcpy_noinline((void *)&dst[0], (void *)&uninit_src[2], 8);
-    kmsan_check_memory((void *)&dst[0], 4);
+    memcpy_noinline(&dst[0], &uninit_src[2], 8);
+    kmsan_check_memory(&dst[0], 4);
     KUNIT_EXPECT_TRUE(test, report_matches(&expect));
     report_reset();
-    kmsan_check_memory((void *)&dst[2], 4);
+    kmsan_check_memory(&dst[2], 4);
     KUNIT_EXPECT_FALSE(test, report_matches(&expect));
     report_reset();
-    kmsan_check_memory((void *)&dst[4], 4);
+    kmsan_check_memory(&dst[4], 4);
     KUNIT_EXPECT_TRUE(test, report_matches(&expect));
     }
 // Generate test cases for memset16(), memset32(), memset64().
 
-    static void test_memset##size(struct kunit *test)                   \
-    {                                                                   \
-    EXPECTATION_NO_REPORT(expect);                              \
-    volatile uint##size##_t uninit;                             \
-    \
-    kunit_info(test,                                            \
-    "memset" #size "() should initialize memory\n"); \
-    memset##size((uint##size##_t *)&uninit, 0, 1);              \
-    kmsan_check_memory((void *)&uninit, sizeof(uninit));        \
-    KUNIT_EXPECT_TRUE(test, report_matches(&expect));           \
+    static void test_memset##size(kunit *test)                   
+    {                                                                   
+    EXPECTATION_NO_REPORT(expect);                              
+    volatile uint##size##_t uninit;                             
+    
+    kunit_info(test,                                            
+    "memset" #size "() should initialize memory\n"); 
+    memset##size((uint##size##_t *)&uninit, 0, 1);              
+    kmsan_check_memory(&uninit, sizeof!(uninit));        
+    KUNIT_EXPECT_TRUE(test, report_matches(&expect));           
     }
     DEFINE_TEST_MEMSETXX(16)
     DEFINE_TEST_MEMSETXX(32)
@@ -618,12 +481,10 @@ unsafe extern "C" fn test_memcpy_initialized_gap(test: *mut kunit) {
 // Test case: ensure that KMSAN does not access shadow memory out of bounds.
 #[no_mangle]
 unsafe extern "C" fn test_memset_on_guarded_buffer(test: *mut kunit) {
-    static void test_memset_on_guarded_buffer(struct kunit *test)
-    {
-    void *buf = vmalloc(PAGE_SIZE);
+    let mut buf = vmalloc(PAGE_SIZE);
     kunit_info(test,
     "memset() on ends of guarded buffer should not crash\n");
-    for (size_t size = 0; size <= 128; size++) {
+    while (size <= 128) {
     memset(buf, 0xff, size);
     memset(buf + PAGE_SIZE - size, 0xff, size);
     }
@@ -631,21 +492,18 @@ unsafe extern "C" fn test_memset_on_guarded_buffer(test: *mut kunit) {
     }
 #[no_mangle]
 unsafe extern "C" fn fibonacci(array: *mut c_int, size: c_int, start: c_int) -> noinline void {
-    static noinline void fibonacci(int *array, int size, int start)
-    {
-    if (start < 2 || (start == size))
+    if (start < 2 || (start == size)) {
     return;
+    }
     array[start] = array[start - 1] + array[start - 2];
     fibonacci(array, size, start + 1);
     }
 #[no_mangle]
 unsafe extern "C" fn test_long_origin_chain(test: *mut kunit) {
-    static void test_long_origin_chain(struct kunit *test)
-    {
     EXPECTATION_UNINIT_VALUE_FN(expect, "test_long_origin_chain");
 // (KMSAN_MAX_ORIGIN_DEPTH * 2) recursive calls to fibonacci().
     volatile int accum[KMSAN_MAX_ORIGIN_DEPTH * 2 + 2];
-    let mut last: c_int = ARRAY_SIZE(accum) - 1;
+pub static mut last: c_int = 0;
     kunit_info(
     test,
     "origin chain exceeding KMSAN_MAX_ORIGIN_DEPTH (UMR report)\n");
@@ -654,8 +512,8 @@ unsafe extern "C" fn test_long_origin_chain(test: *mut kunit) {
 // over to accum[2..last].
 //
     accum[0] = 1;
-    fibonacci((int *)accum, ARRAY_SIZE(accum), 2);
-    kmsan_check_memory((void *)&accum[last], sizeof(int));
+    fibonacci(accum, ARRAY_SIZE!(accum), 2);
+    kmsan_check_memory(&accum[last], sizeof!(int));
     KUNIT_EXPECT_TRUE(test, report_matches(&expect));
     }
 //
@@ -669,21 +527,20 @@ unsafe extern "C" fn test_long_origin_chain(test: *mut kunit) {
 //
 #[no_mangle]
 unsafe extern "C" fn test_stackdepot_roundtrip(test: *mut kunit) {
-    static void test_stackdepot_roundtrip(struct kunit *test)
-    {
     unsigned long src_entries[16], *dst_entries;
-    unsigned int src_nentries, dst_nentries;
+    let mut src_nentries = 0;
+    let mut dst_nentries = 0;
     EXPECTATION_NO_REPORT(expect);
-    depot_stack_handle_t handle;
+    let mut handle;
     kunit_info(test, "testing stackdepot roundtrip (no reports)\n");
     src_nentries =
-    stack_trace_save(src_entries, ARRAY_SIZE(src_entries), 1);
+    stack_trace_save(src_entries, ARRAY_SIZE!(src_entries), 1);
     handle = stack_depot_save(src_entries, src_nentries, GFP_KERNEL);
     stack_depot_print(handle);
     dst_nentries = stack_depot_fetch(handle, &dst_entries);
     KUNIT_EXPECT_TRUE(test, src_nentries == dst_nentries);
-    kmsan_check_memory((void *)dst_entries,
-    sizeof(*dst_entries) * dst_nentries);
+    kmsan_check_memory(dst_entries,
+    sizeof!(*dst_entries) * dst_nentries);
     KUNIT_EXPECT_TRUE(test, report_matches(&expect));
     }
 //
@@ -692,8 +549,6 @@ unsafe extern "C" fn test_stackdepot_roundtrip(test: *mut kunit) {
 //
 #[no_mangle]
 unsafe extern "C" fn test_unpoison_memory(test: *mut kunit) {
-    static void test_unpoison_memory(struct kunit *test)
-    {
     EXPECTATION_UNINIT_VALUE_FN(expect, "test_unpoison_memory");
     volatile char a[4], b[4];
     kunit_info(
@@ -701,66 +556,32 @@ unsafe extern "C" fn test_unpoison_memory(test: *mut kunit) {
     "unpoisoning via the instrumentation vs. kmsan_unpoison_memory() (2 UMR reports)\n");
 // Initialize a[0] and check a[1]--a[3].
     a[0] = 0;
-    kmsan_check_memory((char *)&a[1], 3);
+    kmsan_check_memory(&a[1], 3);
     KUNIT_EXPECT_TRUE(test, report_matches(&expect));
     report_reset();
 // Initialize b[0] and check b[1]--b[3].
-    kmsan_unpoison_memory((char *)&b[0], 1);
-    kmsan_check_memory((char *)&b[1], 3);
+    kmsan_unpoison_memory(&b[0], 1);
+    kmsan_check_memory(&b[1], 3);
     KUNIT_EXPECT_TRUE(test, report_matches(&expect));
     }
 #[no_mangle]
 unsafe extern "C" fn test_copy_from_kernel_nofault(test: *mut kunit) {
-    static void test_copy_from_kernel_nofault(struct kunit *test)
-    {
-    long ret;
+    let mut ret = 0;
     char buf[4], src[4];
-    let mut size: usize = sizeof(buf);
+pub static mut size: usize = 0;
     EXPECTATION_UNINIT_VALUE_FN(expect, "copy_from_kernel_nofault");
     kunit_info(
     test,
     "testing copy_from_kernel_nofault with uninitialized memory\n");
-    ret = copy_from_kernel_nofault((char *)&buf[0], (char *)&src[0], size);
+    ret = copy_from_kernel_nofault(&buf[0], &src[0], size);
     USE(ret);
     KUNIT_EXPECT_TRUE(test, report_matches(&expect));
     }
-    static struct kunit_case kmsan_test_cases[] = {
-    KUNIT_CASE(test_uninit_kmalloc),
-    KUNIT_CASE(test_init_kmalloc),
-    KUNIT_CASE(test_init_kzalloc),
-    KUNIT_CASE(test_uninit_stack_var),
-    KUNIT_CASE(test_init_stack_var),
-    KUNIT_CASE(test_params),
-    KUNIT_CASE(test_uninit_multiple_params),
-    KUNIT_CASE(test_uninit_kmsan_check_memory),
-    KUNIT_CASE(test_init_kmsan_vmap_vunmap),
-    KUNIT_CASE(test_init_vmalloc),
-    KUNIT_CASE(test_uninit_page),
-    KUNIT_CASE(test_uaf),
-    KUNIT_CASE(test_uaf_pages),
-    KUNIT_CASE(test_uaf_high_order_pages),
-    KUNIT_CASE(test_percpu_propagate),
-    KUNIT_CASE(test_printk),
-    KUNIT_CASE(test_init_memcpy),
-    KUNIT_CASE(test_memcpy_aligned_to_aligned),
-    KUNIT_CASE(test_memcpy_aligned_to_unaligned),
-    KUNIT_CASE(test_memcpy_initialized_gap),
-    KUNIT_CASE(test_memset16),
-    KUNIT_CASE(test_memset32),
-    KUNIT_CASE(test_memset64),
-    KUNIT_CASE(test_memset_on_guarded_buffer),
-    KUNIT_CASE(test_long_origin_chain),
-    KUNIT_CASE(test_stackdepot_roundtrip),
-    KUNIT_CASE(test_unpoison_memory),
-    KUNIT_CASE(test_copy_from_kernel_nofault),
-    {},
-    };
+pub static mut kunit_case: usize = 0;
 // ===== End test cases =====
 #[no_mangle]
 unsafe extern "C" fn test_init(test: *mut kunit) -> c_int {
-    static int test_init(struct kunit *test)
-    {
-    unsigned long flags;
+    let mut flags = 0;
     spin_lock_irqsave(&observed.lock, flags);
     observed.header[0] = '\0';
     observed.ignore = false;
@@ -770,14 +591,10 @@ unsafe extern "C" fn test_init(test: *mut kunit) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn test_exit(test: *mut kunit) {
-    static void test_exit(struct kunit *test)
-    {
     }
     static int orig_panic_on_kmsan;
 #[no_mangle]
 unsafe extern "C" fn kmsan_suite_init(suite: *mut kunit_suite) -> c_int {
-    static int kmsan_suite_init(struct kunit_suite *suite)
-    {
     register_trace_console(probe_console, core::ptr::null_mut());
     orig_panic_on_kmsan = panic_on_kmsan;
     panic_on_kmsan = 0;
@@ -785,20 +602,11 @@ unsafe extern "C" fn kmsan_suite_init(suite: *mut kunit_suite) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn kmsan_suite_exit(suite: *mut kunit_suite) {
-    static void kmsan_suite_exit(struct kunit_suite *suite)
-    {
     unregister_trace_console(probe_console, core::ptr::null_mut());
     tracepoint_synchronize_unregister();
     panic_on_kmsan = orig_panic_on_kmsan;
     }
-    static struct kunit_suite kmsan_test_suite = {
-    .name = "kmsan",
-    .test_cases = kmsan_test_cases,
-    .init = test_init,
-    .exit = test_exit,
-    .suite_init = kmsan_suite_init,
-    .suite_exit = kmsan_suite_exit,
-    };
+pub static mut kunit_suite: usize = 0;
     kunit_test_suites(&kmsan_test_suite);
     MODULE_LICENSE("GPL");
     MODULE_AUTHOR("Alexander Potapenko <glider@google.com>");

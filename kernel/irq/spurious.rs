@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -43,42 +293,43 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // This file contains spurious interrupt handling.
 //
 
-    static int irqfixup __read_mostly;
+    static int irqfixup ;
 
-    static void poll_spurious_irqs(struct timer_list *unused);
-    static DEFINE_TIMER(poll_spurious_irq_timer, poll_spurious_irqs);
-    int irq_poll_cpu;
+// forward_decl: poll_spurious_irqs;
+pub static mut poll_spurious_irq_timer: usize = 0;
+    let mut irq_poll_cpu = 0;
     static atomic_t irq_poll_active;
 //
 // Recovery handler for misrouted interrupts.
 //
 #[no_mangle]
 unsafe extern "C" fn try_one_irq(desc: *mut irq_desc, force: bool) -> bool {
-    static bool try_one_irq(struct irq_desc *desc, bool force)
-    {
-    struct irqaction *action;
-    let mut ret: bool = false;
+pub static mut action: *mut c_void = core::ptr::null_mut();
+pub static mut ret: bool = false;
     guard(raw_spinlock)(&desc.lock);
 //
 // PER_CPU, nested thread interrupts and interrupts explicitly
 // marked polled are excluded from polling.
 //
     if (irq_settings_is_per_cpu(desc) || irq_settings_is_nested_thread(desc) ||
-    irq_settings_is_polled(desc))
+    irq_settings_is_polled(desc)) {
     return false;
+    }
 //
 // Do not poll disabled interrupts unless the spurious
 // disabled poller asks explicitly.
 //
-    if (irqd_irq_disabled(&desc.irq_data) && !force)
+    if (irqd_irq_disabled(&desc.irq_data) && !force) {
     return false;
+    }
 //
 // All handlers must agree on IRQF_SHARED, so we test just the
 // first.
 //
     action = desc.action;
-    if (!action || !(action.flags & IRQF_SHARED) || (action.flags & __IRQF_TIMER))
+    if (!action || !(action.flags & IRQF_SHARED) || (action.flags & __IRQF_TIMER)) {
     return false;
+    }
 // Already running on another processor
     if (irqd_irq_inprogress(&desc.irq_data)) {
 //
@@ -91,8 +342,9 @@ unsafe extern "C" fn try_one_irq(desc: *mut irq_desc, force: bool) -> bool {
 // Mark it poll in progress
     desc.istate |= IRQS_POLL_INPROGRESS;
     do {
-    if (handle_irq_event(desc) == IRQ_HANDLED)
+    if (handle_irq_event(desc) == IRQ_HANDLED) {
     ret = true;
+    }
 // Make sure that there is still a valid action
     action = desc.action;
     } while ((desc.istate & IRQS_PENDING) && action);
@@ -101,58 +353,60 @@ unsafe extern "C" fn try_one_irq(desc: *mut irq_desc, force: bool) -> bool {
     }
 #[no_mangle]
 unsafe extern "C" fn misrouted_irq(irq: c_int) -> c_int {
-    static int misrouted_irq(int irq)
-    {
-    struct irq_desc *desc;
+pub static mut desc: *mut c_void = core::ptr::null_mut();
     int i, ok = 0;
-    if (atomic_inc_return(&irq_poll_active) != 1)
-    goto out;
+    if (atomic_inc_return(&irq_poll_active) != 1) {
+// goto;
+    }
     irq_poll_cpu = smp_processor_id();
     for_each_irq_desc(i, desc) {
-    if (!i)
+    if (!i) {
     continue;
-    if (i == irq)	/* Already tried */
+    }
+    if (i == irq)	/* Already tried */ {
     continue;
-    if (try_one_irq(desc, false))
+    }
+    if (try_one_irq(desc, false)) {
     ok = 1;
     }
-    out:
+    }
+// label;
     atomic_dec(&irq_poll_active);
 // So the caller can adjust the irq error counts
     return ok;
     }
 #[no_mangle]
 unsafe extern "C" fn poll_spurious_irqs(unused: *mut timer_list) {
-    static void poll_spurious_irqs(struct timer_list *unused)
-    {
-    struct irq_desc *desc;
-    int i;
-    if (atomic_inc_return(&irq_poll_active) != 1)
-    goto out;
+pub static mut desc: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    if (atomic_inc_return(&irq_poll_active) != 1) {
+// goto;
+    }
     irq_poll_cpu = smp_processor_id();
     for_each_irq_desc(i, desc) {
-    unsigned int state;
-    if (!i)
+    let mut state = 0;
+    if (!i) {
     continue;
+    }
 // Racy but it doesn't matter
     state = READ_ONCE(desc.istate);
-    if (!(state & IRQS_SPURIOUS_DISABLED))
+    if (!(state & IRQS_SPURIOUS_DISABLED)) {
     continue;
+    }
     local_irq_disable();
     try_one_irq(desc, true);
     local_irq_enable();
     }
-    out:
+// label;
     atomic_dec(&irq_poll_active);
     mod_timer(&poll_spurious_irq_timer, jiffies + POLL_SPURIOUS_IRQ_INTERVAL);
     }
 #[no_mangle]
 pub unsafe extern "C" fn bad_action_ret(action_ret: irqreturn_t) -> c_int {
-    static inline int bad_action_ret(irqreturn_t action_ret)
-    {
-    let mut r: c_uint = action_ret;
-    if (likely(r <= (IRQ_HANDLED | IRQ_WAKE_THREAD)))
+pub static mut r: c_uint = 0;
+    if (likely(r <= (IRQ_HANDLED | IRQ_WAKE_THREAD))) {
     return 0;
+    }
     return 1;
     }
 //
@@ -165,16 +419,16 @@ pub unsafe extern "C" fn bad_action_ret(action_ret: irqreturn_t) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn __report_bad_irq(desc: *mut irq_desc, action_ret: irqreturn_t) {
-    static void __report_bad_irq(struct irq_desc *desc, irqreturn_t action_ret)
-    {
-    let mut irq: c_uint = irq_desc_get_irq(desc);
-    struct irqaction *action;
-    if (bad_action_ret(action_ret))
-    pr_err("irq event %d: bogus return value %x\n", irq, action_ret);
-    else
-    pr_err("irq %d: nobody cared (try booting with the \"irqpoll\" option)\n", irq);
+pub static mut irq: c_uint = 0;
+pub static mut action: *mut c_void = core::ptr::null_mut();
+    if (bad_action_ret(action_ret)) {
+    pr_err!("irq event %d: bogus return value %x\n", irq, action_ret);
+    }
+    else {
+    pr_err!("irq %d: nobody cared (try booting with the \"irqpoll\" option)\n", irq);
+    }
     dump_stack();
-    pr_err("handlers:\n");
+    pr_err!("handlers:\n");
 //
 // We need to take desc->lock here. note_interrupt() is called
 // w/o desc->lock held, but IRQ_PROGRESS set. We might race
@@ -183,40 +437,42 @@ unsafe extern "C" fn __report_bad_irq(desc: *mut irq_desc, action_ret: irqreturn
 //
     guard(raw_spinlock_irqsave)(&desc.lock);
     for_each_action_of_desc(desc, action) {
-    pr_err("[<%p>] %ps", action.handler, action.handler);
-    if (action.thread_fn)
+    pr_err!("[<%p>] %ps", action.handler, action.handler);
+    if (action.thread_fn) {
     pr_cont(" threaded [<%p>] %ps", action.thread_fn, action.thread_fn);
+    }
     pr_cont("\n");
     }
     }
 #[no_mangle]
 unsafe extern "C" fn report_bad_irq(desc: *mut irq_desc, action_ret: irqreturn_t) {
-    static void report_bad_irq(struct irq_desc *desc, irqreturn_t action_ret)
-    {
-    let mut count: static int = 100;
+pub static mut count: int = 100;
     if (count > 0) {
-    count--;
+    count -= 1;
     __report_bad_irq(desc, action_ret);
     }
     }
-    static inline bool try_misrouted_irq(unsigned int irq, struct irq_desc *desc,
-    irqreturn_t action_ret)
-    {
-    struct irqaction *action;
-    if (!irqfixup)
+#[no_mangle]
+pub unsafe extern "C" fn try_misrouted_irq(irq: c_uint, desc: *mut irq_desc, action_ret: irqreturn_t) -> bool {
+pub static mut action: *mut c_void = core::ptr::null_mut();
+    if (!irqfixup) {
     return false;
+    }
 // We didn't actually handle the IRQ - see if it was misrouted?
-    if (action_ret == IRQ_NONE)
+    if (action_ret == IRQ_NONE) {
     return true;
+    }
 //
 // But for 'irqfixup == 2' we also do it for handled interrupts if
 // they are marked as IRQF_IRQPOLL (or for irq zero, which is the
 // traditional PC timer interrupt.. Legacy)
 //
-    if (irqfixup < 2)
+    if (irqfixup < 2) {
     return false;
-    if (!irq)
+    }
+    if (!irq) {
     return true;
+    }
 //
 // Since we don't get the descriptor lock, "action" can
 // change under us.
@@ -227,11 +483,10 @@ unsafe extern "C" fn report_bad_irq(desc: *mut irq_desc, action_ret: irqreturn_t
 pub const SPURIOUS_DEFERRED: c_uint = 0x80000000;
 #[no_mangle]
 pub unsafe extern "C" fn note_interrupt(desc: *mut irq_desc, action_ret: irqreturn_t) {
-    void note_interrupt(struct irq_desc *desc, irqreturn_t action_ret)
-    {
-    unsigned int irq;
-    if (desc.istate & IRQS_POLL_INPROGRESS || irq_settings_is_polled(desc))
+    let mut irq = 0;
+    if (desc.istate & IRQS_POLL_INPROGRESS || irq_settings_is_polled(desc)) {
     return;
+    }
     if (bad_action_ret(action_ret)) {
     report_bad_irq(desc, action_ret);
     return;
@@ -264,7 +519,7 @@ pub unsafe extern "C" fn note_interrupt(desc: *mut irq_desc, action_ret: irqretu
 // interrupt.
 //
     if (action_ret == IRQ_WAKE_THREAD) {
-    int handled;
+    let mut handled = 0;
 //
 // We use bit 31 of thread_handled_last to
 // denote the deferred spurious detection
@@ -342,24 +597,29 @@ pub unsafe extern "C" fn note_interrupt(desc: *mut irq_desc, action_ret: irqretu
 // otherwise the counter becomes a doomsday timer for otherwise
 // working systems
 //
-    if (time_after(jiffies, desc.last_unhandled + HZ/10))
+    if (time_after(jiffies, desc.last_unhandled + HZ/10)) {
     desc.irqs_unhandled = 1;
-    else
-    desc.irqs_unhandled++;
+    }
+    else {
+    desc.irqs_unhandled += 1;
+    }
     desc.last_unhandled = jiffies;
     }
     irq = irq_desc_get_irq(desc);
     if (unlikely(try_misrouted_irq(irq, desc, action_ret))) {
-    let mut ok: c_int = misrouted_irq(irq);
-    if (action_ret == IRQ_NONE)
+pub static mut ok: c_int = 0;
+    if (action_ret == IRQ_NONE) {
     desc.irqs_unhandled -= ok;
     }
-    if (likely(!desc.irqs_unhandled))
+    }
+    if (likely(!desc.irqs_unhandled)) {
     return;
+    }
 // Now getting into unhandled irq detection
-    desc.irq_count++;
-    if (likely(desc.irq_count < 100000))
+    desc.irq_count += 1;
+    if (likely(desc.irq_count < 100000)) {
     return;
+    }
     desc.irq_count = 0;
     if (unlikely(desc.irqs_unhandled > 99900)) {
 //
@@ -371,50 +631,44 @@ pub unsafe extern "C" fn note_interrupt(desc: *mut irq_desc, action_ret: irqretu
 //
     pr_emerg("Disabling IRQ #%d\n", irq);
     desc.istate |= IRQS_SPURIOUS_DISABLED;
-    desc.depth++;
+    desc.depth += 1;
     irq_disable(desc);
     mod_timer(&poll_spurious_irq_timer, jiffies + POLL_SPURIOUS_IRQ_INTERVAL);
     }
     desc.irqs_unhandled = 0;
     }
-    bool noirqdebug __read_mostly;
+    let mut noirqdebug = 0;
 #[no_mangle]
 pub unsafe extern "C" fn noirqdebug_setup(str: *mut c_char) -> c_int {
-    int noirqdebug_setup(char *str)
-    {
     noirqdebug = 1;
-    pr_info("IRQ lockup detection disabled\n");
+    pr_info!("IRQ lockup detection disabled\n");
     return 1;
     }
-    __setup("noirqdebug", noirqdebug_setup);
-    module_param(noirqdebug, bool, 0644);
+    __setup!("noirqdebug", noirqdebug_setup);
+    module_param!(noirqdebug, bool, 0644);
     MODULE_PARM_DESC(noirqdebug, "Disable irq lockup detection when true");
 #[no_mangle]
-unsafe extern "C" fn irqfixup_setup(str: *mut c_char) -> int __init {
-    static int __init irqfixup_setup(char *str)
-    {
-    if (IS_ENABLED(CONFIG_PREEMPT_RT)) {
-    pr_warn("irqfixup boot option not supported with PREEMPT_RT\n");
+unsafe extern "C" fn irqfixup_setup(str: *mut c_char) -> c_int {
+    if (IS_ENABLED!(CONFIG_PREEMPT_RT)) {
+    pr_warn!("irqfixup boot option not supported with PREEMPT_RT\n");
     return 1;
     }
     irqfixup = 1;
-    pr_warn("Misrouted IRQ fixup support enabled.\n");
-    pr_warn("This may impact system performance.\n");
+    pr_warn!("Misrouted IRQ fixup support enabled.\n");
+    pr_warn!("This may impact system performance.\n");
     return 1;
     }
-    __setup("irqfixup", irqfixup_setup);
-    module_param(irqfixup, int, 0644);
+    __setup!("irqfixup", irqfixup_setup);
+    module_param!(irqfixup, int, 0644);
 #[no_mangle]
-unsafe extern "C" fn irqpoll_setup(str: *mut c_char) -> int __init {
-    static int __init irqpoll_setup(char *str)
-    {
-    if (IS_ENABLED(CONFIG_PREEMPT_RT)) {
-    pr_warn("irqpoll boot option not supported with PREEMPT_RT\n");
+unsafe extern "C" fn irqpoll_setup(str: *mut c_char) -> c_int {
+    if (IS_ENABLED!(CONFIG_PREEMPT_RT)) {
+    pr_warn!("irqpoll boot option not supported with PREEMPT_RT\n");
     return 1;
     }
     irqfixup = 2;
-    pr_warn("Misrouted IRQ fixup and polling support enabled\n");
-    pr_warn("This may significantly impact system performance\n");
+    pr_warn!("Misrouted IRQ fixup and polling support enabled\n");
+    pr_warn!("This may significantly impact system performance\n");
     return 1;
     }
-    __setup("irqpoll", irqpoll_setup);
+    __setup!("irqpoll", irqpoll_setup);

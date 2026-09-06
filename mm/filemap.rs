@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -111,11 +361,10 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ->inode->i_lock		(zap_pte_range->set_page_dirty)
 // ->private_lock		(zap_pte_range->block_dirty_folio)
 //
-    static void page_cache_delete(struct address_space *mapping,
-    struct folio *folio, void *shadow)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn page_cache_delete(mapping: *mut address_space, folio: *mut folio, shadow: *mut c_void) {
     XA_STATE(xas, &mapping.i_pages, folio.index);
-    let mut nr: c_long = 1;
+pub static mut nr: c_long = 1;
     mapping_set_update(&xas, mapping);
     xas_set_order(&xas, folio.index, folio_order(folio));
     nr = folio_nr_pages(folio);
@@ -126,19 +375,18 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Leave folio->index set: truncation lookup relies upon it
     mapping.nrpages -= nr;
     }
-    static void filemap_unaccount_folio(struct address_space *mapping,
-    struct folio *folio)
-    {
-    long nr;
+#[no_mangle]
+pub unsafe extern "C" fn filemap_unaccount_folio(mapping: *mut address_space, folio: *mut folio) {
+    let mut nr = 0;
     VM_BUG_ON_FOLIO(folio_mapped(folio), folio);
-    if (!IS_ENABLED(CONFIG_DEBUG_VM) && unlikely(folio_mapped(folio))) {
+    if (!IS_ENABLED!(CONFIG_DEBUG_VM) && unlikely(folio_mapped(folio))) {
     pr_alert("BUG: Bad page cache in process %s  pfn:%05lx\n",
     current.comm, folio_pfn(folio));
     dump_page(&folio.page, "still mapped when deleted");
     dump_stack();
     add_taint(TAINT_BAD_PAGE, LOCKDEP_NOW_UNRELIABLE);
     if (mapping_exiting(mapping) && !folio_test_large(folio)) {
-    let mut mapcount: c_int = folio_mapcount(folio);
+pub static mut mapcount: c_int = 0;
     if (folio_ref_count(folio) >= mapcount + 2) {
 //
 // All vmas have already been torn down, so it's
@@ -152,20 +400,23 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     }
     }
 // hugetlb folios do not participate in page cache accounting.
-    if (folio_test_hugetlb(folio))
+    if (folio_test_hugetlb(folio)) {
     return;
+    }
     nr = folio_nr_pages(folio);
     lruvec_stat_mod_folio(folio, NR_FILE_PAGES, -nr);
     if (folio_test_swapbacked(folio)) {
     lruvec_stat_mod_folio(folio, NR_SHMEM, -nr);
-    if (folio_test_pmd_mappable(folio))
+    if (folio_test_pmd_mappable(folio)) {
     lruvec_stat_mod_folio(folio, NR_SHMEM_THPS, -nr);
+    }
     } else if (folio_test_pmd_mappable(folio)) {
     lruvec_stat_mod_folio(folio, NR_FILE_THPS, -nr);
     }
-    if (test_bit(AS_KERNEL_FILE, &folio.mapping.flags))
+    if (test_bit(AS_KERNEL_FILE, &folio.mapping.flags)) {
     mod_node_page_state(folio_pgdat(folio),
     NR_KERNEL_FILE_PAGES, -nr);
+    }
 //
 // At this point folio must be either written or cleaned by
 // truncate.  Dirty folio here signals a bug and loss of
@@ -180,9 +431,10 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // folio and anyway will be cleared before returning folio to
 // buddy allocator.
 //
-    if (WARN_ON_ONCE(folio_test_dirty(folio) &&
-    mapping_can_writeback(mapping)))
+    if (WARN_ON_ONCE!(folio_test_dirty(folio) &&
+    mapping_can_writeback(mapping))) {
     folio_account_cleaned(folio, inode_to_wb(mapping.host));
+    }
     }
 //
 // Delete a page from the page cache and free it. Caller has to make
@@ -191,20 +443,18 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 #[no_mangle]
 pub unsafe extern "C" fn __filemap_remove_folio(folio: *mut folio, shadow: *mut c_void) {
-    void __filemap_remove_folio(struct folio *folio, void *shadow)
-    {
-    struct address_space *mapping = folio.mapping;
+    let mut mapping = folio.mapping;
     trace_mm_filemap_delete_from_page_cache(folio);
     filemap_unaccount_folio(mapping, folio);
     page_cache_delete(mapping, folio, shadow);
     }
-    static void filemap_free_folio(const struct address_space *mapping,
-    struct folio *folio)
-    {
-    void (*free_folio)(struct folio *);
+#[no_mangle]
+pub unsafe extern "C" fn filemap_free_folio(mapping: *mut address_space, folio: *mut folio) {
+    void (*free_folio);
     free_folio = mapping.a_ops.free_folio;
-    if (free_folio)
+    if (free_folio) {
     free_folio(folio);
+    }
     folio_put_refs(folio, folio_nr_pages(folio));
     }
 //
@@ -217,16 +467,15 @@ pub unsafe extern "C" fn __filemap_remove_folio(folio: *mut folio, shadow: *mut 
 //
 #[no_mangle]
 pub unsafe extern "C" fn filemap_remove_folio(folio: *mut folio) {
-    void filemap_remove_folio(struct folio *folio)
-    {
-    struct address_space *mapping = folio.mapping;
-    BUG_ON(!folio_test_locked(folio));
+    let mut mapping = folio.mapping;
+    BUG_ON!(!folio_test_locked(folio));
     spin_lock(&mapping.host.i_lock);
     xa_lock_irq(&mapping.i_pages);
     __filemap_remove_folio(folio, core::ptr::null_mut());
     xa_unlock_irq(&mapping.i_pages);
-    if (mapping_shrinkable(mapping))
+    if (mapping_shrinkable(mapping)) {
     inode_lru_list_add(mapping.host);
+    }
     spin_unlock(&mapping.host.i_lock);
     filemap_free_folio(mapping, folio);
     }
@@ -243,20 +492,21 @@ pub unsafe extern "C" fn filemap_remove_folio(folio: *mut folio) {
 //
 // The function expects the i_pages lock to be held.
 //
-    static void page_cache_delete_batch(struct address_space *mapping,
-    struct folio_batch *fbatch)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn page_cache_delete_batch(mapping: *mut address_space, fbatch: *mut folio_batch) {
     XA_STATE(xas, &mapping.i_pages, fbatch.folios[0].index);
-    let mut total_pages: c_long = 0;
-    let mut i: c_int = 0;
-    struct folio *folio;
+pub static mut total_pages: c_long = 0;
+pub static mut i: c_int = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     mapping_set_update(&xas, mapping);
     xas_for_each(&xas, folio, ULONG_MAX) {
-    if (i >= folio_batch_count(fbatch))
+    if (i >= folio_batch_count(fbatch)) {
     break;
+    }
 // A swap/dax/shadow entry got inserted? Skip it.
-    if (xa_is_value(folio))
+    if (xa_is_value(folio)) {
     continue;
+    }
 //
 // A page got inserted in our range? Skip it. We have our
 // pages locked so they are protected from being removed.
@@ -269,81 +519,78 @@ pub unsafe extern "C" fn filemap_remove_folio(folio: *mut folio) {
     fbatch.folios[i].index, folio);
     continue;
     }
-    WARN_ON_ONCE(!folio_test_locked(folio));
+    WARN_ON_ONCE!(!folio_test_locked(folio));
     folio.mapping = core::ptr::null_mut();
 // Leave folio->index set: truncation lookup relies on it
-    i++;
+    i += 1;
     xas_store(&xas, core::ptr::null_mut());
     total_pages += folio_nr_pages(folio);
     }
     mapping.nrpages -= total_pages;
     }
-    void delete_from_page_cache_batch(struct address_space *mapping,
-    struct folio_batch *fbatch)
-    {
-    int i;
-    if (!folio_batch_count(fbatch))
+#[no_mangle]
+pub unsafe extern "C" fn delete_from_page_cache_batch(mapping: *mut address_space, fbatch: *mut folio_batch) {
+    let mut i = 0;
+    if (!folio_batch_count(fbatch)) {
     return;
+    }
     spin_lock(&mapping.host.i_lock);
     xa_lock_irq(&mapping.i_pages);
-    for (i = 0; i < folio_batch_count(fbatch); i++) {
-    struct folio *folio = fbatch.folios[i];
+    while (i < folio_batch_count(fbatch)) {
+    let mut folio = fbatch.folios[i];
     trace_mm_filemap_delete_from_page_cache(folio);
     filemap_unaccount_folio(mapping, folio);
     }
     page_cache_delete_batch(mapping, fbatch);
     xa_unlock_irq(&mapping.i_pages);
-    if (mapping_shrinkable(mapping))
+    if (mapping_shrinkable(mapping)) {
     inode_lru_list_add(mapping.host);
+    }
     spin_unlock(&mapping.host.i_lock);
-    for (i = 0; i < folio_batch_count(fbatch); i++)
+    for (i = 0; i < folio_batch_count(fbatch); i++) {
     filemap_free_folio(mapping, fbatch.folios[i]);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn filemap_check_errors(mapping: *mut address_space) -> c_int {
-    int filemap_check_errors(struct address_space *mapping)
-    {
-    let mut ret: c_int = 0;
+pub static mut ret: c_int = 0;
 // Check for outstanding write errors
     if (test_bit(AS_ENOSPC, &mapping.flags) &&
-    test_and_clear_bit(AS_ENOSPC, &mapping.flags))
+    test_and_clear_bit(AS_ENOSPC, &mapping.flags)) {
     ret = -ENOSPC;
+    }
     if (test_bit(AS_EIO, &mapping.flags) &&
-    test_and_clear_bit(AS_EIO, &mapping.flags))
+    test_and_clear_bit(AS_EIO, &mapping.flags)) {
     ret = -EIO;
+    }
     return ret;
     }
     EXPORT_SYMBOL(filemap_check_errors);
 #[no_mangle]
 unsafe extern "C" fn filemap_check_and_keep_errors(mapping: *mut address_space) -> c_int {
-    static int filemap_check_and_keep_errors(struct address_space *mapping)
-    {
 // Check for outstanding write errors
-    if (test_bit(AS_EIO, &mapping.flags))
+    if (test_bit(AS_EIO, &mapping.flags)) {
     return -EIO;
-    if (test_bit(AS_ENOSPC, &mapping.flags))
+    }
+    if (test_bit(AS_ENOSPC, &mapping.flags)) {
     return -ENOSPC;
+    }
     return 0;
     }
-    static int filemap_writeback(struct address_space *mapping, loff_t start,
-    loff_t end, enum writeback_sync_modes sync_mode,
-    long *nr_to_write)
-    {
-    struct writeback_control wbc = {
-    .sync_mode	= sync_mode,
-    .nr_to_write	= nr_to_write ? *nr_to_write : LONG_MAX,
-    .range_start	= start,
-    .range_end	= end,
-    };
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn filemap_writeback(mapping: *mut address_space, start: loff_t, end: loff_t, sync_mode: writeback_sync_modes, nr_to_write: *mut c_long) -> c_int {
+pub static mut writeback_control: usize = 0;
+    let mut ret = 0;
     if (!mapping_can_writeback(mapping) ||
-    !mapping_tagged(mapping, PAGECACHE_TAG_DIRTY))
+    !mapping_tagged(mapping, PAGECACHE_TAG_DIRTY)) {
     return 0;
+    }
     wbc_attach_fdatawrite_inode(&wbc, mapping.host);
     ret = do_writepages(mapping, &wbc);
     wbc_detach_inode(&wbc);
-    if (!ret && nr_to_write)
+    if (!ret && nr_to_write) {
 // nr_to_write = wbc.nr_to_write;
+    }
     return ret;
     }
 //
@@ -360,16 +607,13 @@ unsafe extern "C" fn filemap_check_and_keep_errors(mapping: *mut address_space) 
 //
 // Return: %0 on success, negative error code otherwise.
 //
-    int filemap_fdatawrite_range(struct address_space *mapping, loff_t start,
-    loff_t end)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn filemap_fdatawrite_range(mapping: *mut address_space, start: loff_t, end: loff_t) -> c_int {
     return filemap_writeback(mapping, start, end, WB_SYNC_ALL, core::ptr::null_mut());
     }
     EXPORT_SYMBOL(filemap_fdatawrite_range);
 #[no_mangle]
 pub unsafe extern "C" fn filemap_fdatawrite(mapping: *mut address_space) -> c_int {
-    int filemap_fdatawrite(struct address_space *mapping)
-    {
     return filemap_fdatawrite_range(mapping, 0, LLONG_MAX);
     }
     EXPORT_SYMBOL(filemap_fdatawrite);
@@ -384,9 +628,8 @@ pub unsafe extern "C" fn filemap_fdatawrite(mapping: *mut address_space) -> c_in
 //
 // Return: %0 on success, negative error code otherwise.
 //
-    int filemap_flush_range(struct address_space *mapping, loff_t start,
-    loff_t end)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn filemap_flush_range(mapping: *mut address_space, start: loff_t, end: loff_t) -> c_int {
     return filemap_writeback(mapping, start, end, WB_SYNC_NONE, core::ptr::null_mut());
     }
     EXPORT_SYMBOL_GPL(filemap_flush_range);
@@ -401,8 +644,6 @@ pub unsafe extern "C" fn filemap_fdatawrite(mapping: *mut address_space) -> c_in
 //
 #[no_mangle]
 pub unsafe extern "C" fn filemap_flush(mapping: *mut address_space) -> c_int {
-    int filemap_flush(struct address_space *mapping)
-    {
     return filemap_flush_range(mapping, 0, LLONG_MAX);
     }
     EXPORT_SYMBOL(filemap_flush);
@@ -413,8 +654,6 @@ pub unsafe extern "C" fn filemap_flush(mapping: *mut address_space) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn filemap_flush_nr(mapping: *mut address_space, nr_to_write: *mut c_long) -> c_int {
-    int filemap_flush_nr(struct address_space *mapping, long *nr_to_write)
-    {
     return filemap_writeback(mapping, 0, LLONG_MAX, WB_SYNC_NONE,
     nr_to_write);
     }
@@ -431,22 +670,24 @@ pub unsafe extern "C" fn filemap_flush_nr(mapping: *mut address_space, nr_to_wri
 // Return: %true if at least one page exists in the specified range,
 // %false otherwise.
 //
-    bool filemap_range_has_page(struct address_space *mapping,
-    loff_t start_byte, loff_t end_byte)
-    {
-    struct folio *folio;
+#[no_mangle]
+pub unsafe extern "C" fn filemap_range_has_page(mapping: *mut address_space, start_byte: loff_t, end_byte: loff_t) -> bool {
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     XA_STATE(xas, &mapping.i_pages, start_byte >> PAGE_SHIFT);
-    let mut max: pgoff_t = end_byte >> PAGE_SHIFT;
-    if (end_byte < start_byte)
+pub static mut max: pgoff_t = 0;
+    if (end_byte < start_byte) {
     return false;
+    }
     rcu_read_lock();
     for (;;) {
     folio = xas_find(&xas, max);
-    if (xas_retry(&xas, folio))
+    if (xas_retry(&xas, folio)) {
     continue;
+    }
 // Shadow entries don't count
-    if (xa_is_value(folio))
+    if (xa_is_value(folio)) {
     continue;
+    }
 //
 // We don't need to try to pin this page; we're about to
 // release the RCU lock anyway.  It is enough to know that
@@ -458,22 +699,22 @@ pub unsafe extern "C" fn filemap_flush_nr(mapping: *mut address_space, nr_to_wri
     return folio != core::ptr::null_mut();
     }
     EXPORT_SYMBOL(filemap_range_has_page);
-    static void __filemap_fdatawait_range(struct address_space *mapping,
-    loff_t start_byte, loff_t end_byte)
-    {
-    let mut index: pgoff_t = start_byte >> PAGE_SHIFT;
-    let mut end: pgoff_t = end_byte >> PAGE_SHIFT;
-    struct folio_batch fbatch;
-    unsigned nr_folios;
+#[no_mangle]
+pub unsafe extern "C" fn __filemap_fdatawait_range(mapping: *mut address_space, start_byte: loff_t, end_byte: loff_t) {
+pub static mut index: pgoff_t = 0;
+pub static mut end: pgoff_t = 0;
+pub static mut fbatch: usize = 0;
+    let mut nr_folios: c_uint = 0;
     folio_batch_init(&fbatch);
     while (index <= end) {
-    unsigned i;
+    let mut i: c_uint = 0;
     nr_folios = filemap_get_folios_tag(mapping, &index, end,
     PAGECACHE_TAG_WRITEBACK, &fbatch);
-    if (!nr_folios)
+    if (!nr_folios) {
     break;
-    for (i = 0; i < nr_folios; i++) {
-    struct folio *folio = fbatch.folios[i];
+    }
+    while (i < nr_folios) {
+    let mut folio = fbatch.folios[i];
     folio_wait_writeback(folio);
     }
     folio_batch_release(&fbatch);
@@ -496,9 +737,8 @@ pub unsafe extern "C" fn filemap_flush_nr(mapping: *mut address_space, nr_to_wri
 //
 // Return: error status of the address space.
 //
-    int filemap_fdatawait_range(struct address_space *mapping, loff_t start_byte,
-    loff_t end_byte)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn filemap_fdatawait_range(mapping: *mut address_space, start_byte: loff_t, end_byte: loff_t) -> c_int {
     __filemap_fdatawait_range(mapping, start_byte, end_byte);
     return filemap_check_errors(mapping);
     }
@@ -515,11 +755,10 @@ pub unsafe extern "C" fn filemap_flush_nr(mapping: *mut address_space, nr_to_wri
 //
 // Use this function if callers don't handle errors themselves.  Expected
 // call sites are system-wide / filesystem-wide data flushers: e.g. sync(2),
-// fsfreeze(8)
+fsfreeze(8)
 //
-    int filemap_fdatawait_range_keep_errors(struct address_space *mapping,
-    loff_t start_byte, loff_t end_byte)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn filemap_fdatawait_range_keep_errors(mapping: *mut address_space, start_byte: loff_t, end_byte: loff_t) -> c_int {
     __filemap_fdatawait_range(mapping, start_byte, end_byte);
     return filemap_check_and_keep_errors(mapping);
     }
@@ -542,9 +781,7 @@ pub unsafe extern "C" fn filemap_flush_nr(mapping: *mut address_space, nr_to_wri
 //
 #[no_mangle]
 pub unsafe extern "C" fn file_fdatawait_range(file: *mut file, start_byte: loff_t, end_byte: loff_t) -> c_int {
-    int file_fdatawait_range(struct file *file, loff_t start_byte, loff_t end_byte)
-    {
-    struct address_space *mapping = file.f_mapping;
+    let mut mapping = file.f_mapping;
     __filemap_fdatawait_range(mapping, start_byte, end_byte);
     return file_check_and_advance_wb_err(file);
     }
@@ -559,14 +796,12 @@ pub unsafe extern "C" fn file_fdatawait_range(file: *mut file, start_byte: loff_
 //
 // Use this function if callers don't handle errors themselves.  Expected
 // call sites are system-wide / filesystem-wide data flushers: e.g. sync(2),
-// fsfreeze(8)
+fsfreeze(8)
 //
 // Return: error status of the address space.
 //
 #[no_mangle]
 pub unsafe extern "C" fn filemap_fdatawait_keep_errors(mapping: *mut address_space) -> c_int {
-    int filemap_fdatawait_keep_errors(struct address_space *mapping)
-    {
     __filemap_fdatawait_range(mapping, 0, LLONG_MAX);
     return filemap_check_and_keep_errors(mapping);
     }
@@ -574,27 +809,28 @@ pub unsafe extern "C" fn filemap_fdatawait_keep_errors(mapping: *mut address_spa
 // Returns true if writeback might be needed or already in progress.
 #[no_mangle]
 unsafe extern "C" fn mapping_needs_writeback(mapping: *mut address_space) -> bool {
-    static bool mapping_needs_writeback(struct address_space *mapping)
-    {
     return mapping.nrpages;
     }
-    bool filemap_range_has_writeback(struct address_space *mapping,
-    loff_t start_byte, loff_t end_byte)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn filemap_range_has_writeback(mapping: *mut address_space, start_byte: loff_t, end_byte: loff_t) -> bool {
     XA_STATE(xas, &mapping.i_pages, start_byte >> PAGE_SHIFT);
-    let mut max: pgoff_t = end_byte >> PAGE_SHIFT;
-    struct folio *folio;
-    if (end_byte < start_byte)
+pub static mut max: pgoff_t = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    if (end_byte < start_byte) {
     return false;
+    }
     rcu_read_lock();
     xas_for_each(&xas, folio, max) {
-    if (xas_retry(&xas, folio))
+    if (xas_retry(&xas, folio)) {
     continue;
-    if (xa_is_value(folio))
+    }
+    if (xa_is_value(folio)) {
     continue;
+    }
     if (folio_test_dirty(folio) || folio_test_locked(folio) ||
-    folio_test_writeback(folio))
+    folio_test_writeback(folio)) {
     break;
+    }
     }
     rcu_read_unlock();
     return folio != core::ptr::null_mut();
@@ -613,12 +849,12 @@ unsafe extern "C" fn mapping_needs_writeback(mapping: *mut address_space) -> boo
 //
 // Return: error status of the address space.
 //
-    int filemap_write_and_wait_range(struct address_space *mapping,
-    loff_t lstart, loff_t lend)
-    {
-    let mut err: c_int = 0, err2;
-    if (lend < lstart)
+#[no_mangle]
+pub unsafe extern "C" fn filemap_write_and_wait_range(mapping: *mut address_space, lstart: loff_t, lend: loff_t) -> c_int {
+pub static mut err: c_int = 0;
+    if (lend < lstart) {
     return 0;
+    }
     if (mapping_needs_writeback(mapping)) {
     err = filemap_fdatawrite_range(mapping, lstart, lend);
 //
@@ -627,27 +863,27 @@ unsafe extern "C" fn mapping_needs_writeback(mapping: *mut address_space) -> boo
 // But the -EIO is special case, it may indicate the worst
 // thing (e.g. bug) happened, so we avoid waiting for it.
 //
-    if (err != -EIO)
+    if (err != -EIO) {
     __filemap_fdatawait_range(mapping, lstart, lend);
     }
+    }
     err2 = filemap_check_errors(mapping);
-    if (!err)
+    if (!err) {
     err = err2;
+    }
     return err;
     }
     EXPORT_SYMBOL(filemap_write_and_wait_range);
 #[no_mangle]
 pub unsafe extern "C" fn __filemap_set_wb_err(mapping: *mut address_space, err: c_int) {
-    void __filemap_set_wb_err(struct address_space *mapping, int err)
-    {
-    let mut eseq: errseq_t = errseq_set(&mapping.wb_err, err);
+pub static mut eseq: errseq_t = 0;
     trace_filemap_set_wb_err(mapping, eseq);
     }
     EXPORT_SYMBOL(__filemap_set_wb_err);
 //
 // file_check_and_advance_wb_err - report wb error (if any) that was previously
 // and advance wb_err to current one
-// @file: struct file on which the error is being reported
+// @file: file on which the error is being reported
 //
 // When userland calls fsync (or something like nfsd does the equivalent), we
 // want to report any writeback errors that occurred since the last fsync (or
@@ -670,11 +906,9 @@ pub unsafe extern "C" fn __filemap_set_wb_err(mapping: *mut address_space, err: 
 //
 #[no_mangle]
 pub unsafe extern "C" fn file_check_and_advance_wb_err(file: *mut file) -> c_int {
-    int file_check_and_advance_wb_err(struct file *file)
-    {
-    let mut err: c_int = 0;
-    let mut old: errseq_t = READ_ONCE(file.f_wb_err);
-    struct address_space *mapping = file.f_mapping;
+pub static mut err: c_int = 0;
+pub static mut old: errseq_t = 0;
+    let mut mapping = file.f_mapping;
 // Locklessly handle the common case where nothing has changed
     if (errseq_check(&mapping.wb_err, old)) {
 // Something changed, must use slow path
@@ -713,21 +947,22 @@ pub unsafe extern "C" fn file_check_and_advance_wb_err(file: *mut file) -> c_int
 //
 #[no_mangle]
 pub unsafe extern "C" fn file_write_and_wait_range(file: *mut file, lstart: loff_t, lend: loff_t) -> c_int {
-    int file_write_and_wait_range(struct file *file, loff_t lstart, loff_t lend)
-    {
-    let mut err: c_int = 0, err2;
-    struct address_space *mapping = file.f_mapping;
-    if (lend < lstart)
+pub static mut err: c_int = 0;
+    let mut mapping = file.f_mapping;
+    if (lend < lstart) {
     return 0;
+    }
     if (mapping_needs_writeback(mapping)) {
     err = filemap_fdatawrite_range(mapping, lstart, lend);
 // See comment of filemap_write_and_wait()
-    if (err != -EIO)
+    if (err != -EIO) {
     __filemap_fdatawait_range(mapping, lstart, lend);
     }
+    }
     err2 = file_check_and_advance_wb_err(file);
-    if (!err)
+    if (!err) {
     err = err2;
+    }
     return err;
     }
     EXPORT_SYMBOL(file_write_and_wait_range);
@@ -746,11 +981,9 @@ pub unsafe extern "C" fn file_write_and_wait_range(file: *mut file, lstart: loff
 //
 #[no_mangle]
 pub unsafe extern "C" fn replace_page_cache_folio(old: *mut folio, new: *mut folio) {
-    void replace_page_cache_folio(struct folio *old, struct folio *new)
-    {
-    struct address_space *mapping = old.mapping;
-    void (*free_folio)(struct folio *) = mapping.a_ops.free_folio;
-    let mut offset: pgoff_t = old.index;
+    let mut mapping = old.mapping;
+    void (*free_folio) = mapping.a_ops.free_folio;
+pub static mut offset: pgoff_t = 0;
     XA_STATE(xas, &mapping.i_pages, offset);
     VM_BUG_ON_FOLIO(!folio_test_locked(old), old);
     VM_BUG_ON_FOLIO(!folio_test_locked(new), new);
@@ -763,27 +996,31 @@ pub unsafe extern "C" fn replace_page_cache_folio(old: *mut folio, new: *mut fol
     xas_store(&xas, new);
     old.mapping = core::ptr::null_mut();
 // hugetlb pages do not participate in page cache accounting.
-    if (!folio_test_hugetlb(old))
+    if (!folio_test_hugetlb(old)) {
     lruvec_stat_sub_folio(old, NR_FILE_PAGES);
-    if (!folio_test_hugetlb(new))
+    }
+    if (!folio_test_hugetlb(new)) {
     lruvec_stat_add_folio(new, NR_FILE_PAGES);
-    if (folio_test_swapbacked(old))
+    }
+    if (folio_test_swapbacked(old)) {
     lruvec_stat_sub_folio(old, NR_SHMEM);
-    if (folio_test_swapbacked(new))
+    }
+    if (folio_test_swapbacked(new)) {
     lruvec_stat_add_folio(new, NR_SHMEM);
+    }
     xas_unlock_irq(&xas);
-    if (free_folio)
+    if (free_folio) {
     free_folio(old);
+    }
     folio_put(old);
     }
     EXPORT_SYMBOL_GPL(replace_page_cache_folio);
-    noinline int __filemap_add_folio(struct address_space *mapping,
-    struct folio *folio, pgoff_t index, gfp_t gfp, void **shadowp)
+    noinline int __filemap_add_folio(address_space *mapping, folio *folio, pgoff_t index, gfp_t gfp, void **shadowp)
     {
     XA_STATE_ORDER(xas, &mapping.i_pages, index, folio_order(folio));
-    bool huge;
-    long nr;
-    let mut forder: c_uint = folio_order(folio);
+    let mut huge = 0;
+    let mut nr = 0;
+pub static mut forder: c_uint = 0;
     VM_BUG_ON_FOLIO(!folio_test_locked(folio), folio);
     VM_BUG_ON_FOLIO(folio_test_swapbacked(folio), folio);
     VM_BUG_ON_FOLIO(folio_order(folio) < mapping_min_folio_order(mapping),
@@ -797,33 +1034,35 @@ pub unsafe extern "C" fn replace_page_cache_folio(old: *mut folio, new: *mut fol
     folio.mapping = mapping;
     folio.index = xas.xa_index;
     for (;;) {
-    let mut order: c_int = -1;
+pub static mut order: c_int = 0;
     void *entry, *old = core::ptr::null_mut();
     xas_lock_irq(&xas);
     xas_for_each_conflict(&xas, entry) {
     old = entry;
     if (!xa_is_value(entry)) {
     xas_set_err(&xas, -EEXIST);
-    goto unlock;
+// goto;
     }
 //
 // If a larger entry exists,
 // it will be the first and only entry iterated.
 //
-    if (order == -1)
+    if (order == -1) {
     order = xas_get_order(&xas);
+    }
     }
     if (old) {
     if (order > 0 && order > forder) {
-    unsigned int split_order = max(forder,
+    let mut split_order = max(forder,
     xas_try_split_min_order(order));
 // How to handle large swap entries?
-    BUG_ON(shmem_mapping(mapping));
+    BUG_ON!(shmem_mapping(mapping));
     while (order > forder) {
     xas_set_order(&xas, index, split_order);
     xas_try_split(&xas, old, order);
-    if (xas_error(&xas))
-    goto unlock;
+    if (xas_error(&xas)) {
+// goto;
+    }
     order = split_order;
     split_order =
     max(xas_try_split_min_order(
@@ -832,55 +1071,62 @@ pub unsafe extern "C" fn replace_page_cache_folio(old: *mut folio, new: *mut fol
     }
     xas_reset(&xas);
     }
-    if (shadowp)
+    if (shadowp) {
 // shadowp = old;
     }
+    }
     xas_store(&xas, folio);
-    if (xas_error(&xas))
-    goto unlock;
+    if (xas_error(&xas)) {
+// goto;
+    }
     mapping.nrpages += nr;
 // hugetlb pages do not participate in page cache accounting
     if (!huge) {
     lruvec_stat_mod_folio(folio, NR_FILE_PAGES, nr);
-    if (folio_test_pmd_mappable(folio))
+    if (folio_test_pmd_mappable(folio)) {
     lruvec_stat_mod_folio(folio,
     NR_FILE_THPS, nr);
     }
-    unlock:
+    }
+// label;
     xas_unlock_irq(&xas);
-    if (!xas_nomem(&xas, gfp))
+    if (!xas_nomem(&xas, gfp)) {
     break;
+    }
 //
 // Lock has been dropped: start again with the original index
 // and order (but now with the memory reserved by xas_nomem()).
 //
     xas_set_order(&xas, index, forder);
     }
-    if (xas_error(&xas))
-    goto error;
+    if (xas_error(&xas)) {
+// goto;
+    }
     trace_mm_filemap_add_to_page_cache(folio);
     return 0;
-    error:
+// label;
     folio.mapping = core::ptr::null_mut();
 // Leave folio->index set: truncation relies upon it
     folio_put_refs(folio, nr);
     return xas_error(&xas);
     }
     ALLOW_ERROR_INJECTION(__filemap_add_folio, ERRNO);
-    int filemap_add_folio(struct address_space *mapping, struct folio *folio,
-    pgoff_t index, gfp_t gfp)
-    {
-    void *shadow = core::ptr::null_mut();
-    int ret;
-    struct mem_cgroup *tmp;
-    let mut kernel_file: bool = test_bit(AS_KERNEL_FILE, &mapping.flags);
-    if (kernel_file)
+#[no_mangle]
+pub unsafe extern "C" fn filemap_add_folio(mapping: *mut address_space, folio: *mut folio, index: pgoff_t, gfp: gfp_t) -> c_int {
+    let mut shadow = core::ptr::null_mut();
+    let mut ret = 0;
+pub static mut tmp: *mut c_void = core::ptr::null_mut();
+pub static mut kernel_file: bool = false;
+    if (kernel_file) {
     tmp = set_active_memcg(root_mem_cgroup);
+    }
     ret = mem_cgroup_charge(folio, core::ptr::null_mut(), gfp);
-    if (kernel_file)
+    if (kernel_file) {
     set_active_memcg(tmp);
-    if (ret)
+    }
+    if (ret) {
     return ret;
+    }
     __folio_set_locked(folio);
     ret = __filemap_add_folio(mapping, folio, index, gfp, &shadow);
     if (unlikely(ret)) {
@@ -895,29 +1141,31 @@ pub unsafe extern "C" fn replace_page_cache_folio(old: *mut folio, new: *mut fol
 // data from the working set, only to cache data that will
 // get overwritten with something else, is a waste of memory.
 //
-    WARN_ON_ONCE(folio_test_active(folio));
-    if (!(gfp & __GFP_WRITE) && shadow)
+    WARN_ON_ONCE!(folio_test_active(folio));
+    if (!(gfp & __GFP_WRITE) && shadow) {
     workingset_refault(folio, shadow);
+    }
     folio_add_lru(folio);
-    if (kernel_file)
+    if (kernel_file) {
     mod_node_page_state(folio_pgdat(folio),
     NR_KERNEL_FILE_PAGES,
     folio_nr_pages(folio));
+    }
     }
     return ret;
     }
     EXPORT_SYMBOL_GPL(filemap_add_folio);
 
-    struct folio *filemap_alloc_folio_noprof(gfp_t gfp, unsigned int order,
-    struct mempolicy *policy)
-    {
-    int n;
-    struct folio *folio;
-    if (policy)
+#[no_mangle]
+pub unsafe extern "C" fn filemap_alloc_folio_noprof(gfp: gfp_t, order: c_uint, policy: *mut mempolicy) -> *mut c_void {
+    let mut n = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    if (policy) {
     return folio_alloc_mpol_noprof(gfp, order, policy,
     NO_INTERLEAVE_INDEX, numa_node_id());
+    }
     if (cpuset_do_page_mem_spread()) {
-    unsigned int cpuset_mems_cookie;
+    let mut cpuset_mems_cookie = 0;
     do {
     cpuset_mems_cookie = read_mems_allowed_begin();
     n = cpuset_mem_spread_node();
@@ -937,15 +1185,17 @@ pub unsafe extern "C" fn replace_page_cache_folio(old: *mut folio, new: *mut fol
 // @mapping1: the first mapping to lock
 // @mapping2: the second mapping to lock
 //
-    void filemap_invalidate_lock_two(struct address_space *mapping1,
-    struct address_space *mapping2)
-    {
-    if (mapping1 > mapping2)
+#[no_mangle]
+pub unsafe extern "C" fn filemap_invalidate_lock_two(mapping1: *mut address_space, mapping2: *mut address_space) {
+    if (mapping1 > mapping2) {
     swap(mapping1, mapping2);
-    if (mapping1)
+    }
+    if (mapping1) {
     down_write(&mapping1.invalidate_lock);
-    if (mapping2 && mapping1 != mapping2)
+    }
+    if (mapping2 && mapping1 != mapping2) {
     down_write_nested(&mapping2.invalidate_lock, 1);
+    }
     }
     EXPORT_SYMBOL(filemap_invalidate_lock_two);
 //
@@ -956,13 +1206,14 @@ pub unsafe extern "C" fn replace_page_cache_folio(old: *mut folio, new: *mut fol
 // @mapping1: the first mapping to unlock
 // @mapping2: the second mapping to unlock
 //
-    void filemap_invalidate_unlock_two(struct address_space *mapping1,
-    struct address_space *mapping2)
-    {
-    if (mapping1)
+#[no_mangle]
+pub unsafe extern "C" fn filemap_invalidate_unlock_two(mapping1: *mut address_space, mapping2: *mut address_space) {
+    if (mapping1) {
     up_write(&mapping1.invalidate_lock);
-    if (mapping2 && mapping1 != mapping2)
+    }
+    if (mapping2 && mapping1 != mapping2) {
     up_write(&mapping2.invalidate_lock);
+    }
     }
     EXPORT_SYMBOL(filemap_invalidate_unlock_two);
 //
@@ -978,29 +1229,19 @@ pub unsafe extern "C" fn replace_page_cache_folio(old: *mut folio, new: *mut fol
 pub const PAGE_WAIT_TABLE_BITS: c_int = 8;
 
     static wait_queue_head_t folio_wait_table[PAGE_WAIT_TABLE_SIZE] __cacheline_aligned;
-    static wait_queue_head_t *folio_waitqueue(struct folio *folio)
+    static wait_queue_head_t *folio_waitqueue(folio *folio)
     {
     return &folio_wait_table[hash_ptr(folio, PAGE_WAIT_TABLE_BITS)];
     }
 // How many times do we accept lock stealing from under a waiter?
-    let mut sysctl_page_lock_unfairness: static int = 5;
-    static const struct ctl_table filemap_sysctl_table[] = {
-    {
-    .procname	= "page_lock_unfairness",
-    .data		= &sysctl_page_lock_unfairness,
-    .maxlen		= sizeof(sysctl_page_lock_unfairness),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec_minmax,
-    .extra1		= SYSCTL_ZERO,
-    }
-    };
+pub static mut sysctl_page_lock_unfairness: int = 5;
+pub static mut ctl_table: usize = 0;
 #[no_mangle]
-pub unsafe extern "C" fn pagecache_init() -> void __init {
-    void __init pagecache_init(void)
-    {
-    int i;
-    for (i = 0; i < PAGE_WAIT_TABLE_SIZE; i++)
+pub unsafe extern "C" fn pagecache_init()  {
+    let mut i = 0;
+    for (i = 0; i < PAGE_WAIT_TABLE_SIZE; i++) {
     init_waitqueue_head(&folio_wait_table[i]);
+    }
     page_writeback_init();
     register_sysctl_init("vm", filemap_sysctl_table);
     }
@@ -1040,25 +1281,25 @@ pub unsafe extern "C" fn pagecache_init() -> void __init {
 //
 #[no_mangle]
 unsafe extern "C" fn wake_page_function(wait: *mut wait_queue_entry_t, mode: unsigned, sync: c_int, arg: *mut c_void) -> c_int {
-    static int wake_page_function(wait_queue_entry_t *wait, unsigned mode, int sync, void *arg)
-    {
-    unsigned int flags;
-    struct wait_page_key *key = arg;
-    struct wait_page_queue *wait_page
-    = container_of(wait, struct wait_page_queue, wait);
-    if (!wake_page_match(wait_page, key))
+    let mut flags = 0;
+    let mut key = arg;
+    let mut wait_page = container_of!(wait, wait_page_queue, wait);
+    if (!wake_page_match(wait_page, key)) {
     return 0;
+    }
 //
 // If it's a lock handoff wait, we get the bit for it, and
 // stop walking (and do not wake it up) if we can't.
 //
     flags = wait.flags;
     if (flags & WQ_FLAG_EXCLUSIVE) {
-    if (test_bit(key.bit_nr, &key.folio.flags.f))
+    if (test_bit(key.bit_nr, &key.folio.flags.f)) {
     return -1;
+    }
     if (flags & WQ_FLAG_CUSTOM) {
-    if (test_and_set_bit(key.bit_nr, &key.folio.flags.f))
+    if (test_and_set_bit(key.bit_nr, &key.folio.flags.f)) {
     return -1;
+    }
     flags |= WQ_FLAG_DONE;
     }
     }
@@ -1088,11 +1329,9 @@ unsafe extern "C" fn wake_page_function(wait: *mut wait_queue_entry_t, mode: uns
     }
 #[no_mangle]
 unsafe extern "C" fn folio_wake_bit(folio: *mut folio, bit_nr: c_int) {
-    static void folio_wake_bit(struct folio *folio, int bit_nr)
-    {
-    wait_queue_head_t *q = folio_waitqueue(folio);
-    struct wait_page_key key;
-    unsigned long flags;
+    let mut q = folio_waitqueue(folio);
+pub static mut key: usize = 0;
+    let mut flags = 0;
     key.folio = folio;
     key.bit_nr = bit_nr;
     key.page_match = 0;
@@ -1107,21 +1346,22 @@ unsafe extern "C" fn folio_wake_bit(folio: *mut folio, bit_nr: c_int) {
 // other), the flag may be cleared in the course of freeing the page;
 // but that is not required for correctness.
 //
-    if (!waitqueue_active(q) || !key.page_match)
+    if (!waitqueue_active(q) || !key.page_match) {
     folio_clear_waiters(folio);
+    }
     spin_unlock_irqrestore(&q.lock, flags);
     }
 //
 // A choice of three behaviors for folio_wait_bit_common():
 //
     enum behavior {
-    EXCLUSIVE,	/* Hold ref to page and take the bit when woken, like
+    EXCLUSIVE,	// Hold ref to page and take the bit when woken, like
 // __folio_lock() waiting on then setting PG_locked.
 //
-    SHARED,		/* Hold ref to page and check the bit when woken, like
+    SHARED,		// Hold ref to page and check the bit when woken, like
 // folio_wait_writeback() waiting on PG_writeback.
 //
-    DROP,		/* Drop ref to page before wait, no check when woken,
+    DROP,		// Drop ref to page before wait, no check when woken,
 // like folio_put_wait_locked() on PG_locked.
 //
     };
@@ -1129,27 +1369,27 @@ unsafe extern "C" fn folio_wake_bit(folio: *mut folio, bit_nr: c_int) {
 // Attempt to check (or get) the folio flag, and mark us done
 // if successful.
 //
-    static inline bool folio_trylock_flag(struct folio *folio, int bit_nr,
-    struct wait_queue_entry *wait)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn folio_trylock_flag(folio: *mut folio, bit_nr: c_int, wait: *mut wait_queue_entry) -> bool {
     if (wait.flags & WQ_FLAG_EXCLUSIVE) {
-    if (test_and_set_bit(bit_nr, &folio.flags.f))
+    if (test_and_set_bit(bit_nr, &folio.flags.f)) {
     return false;
-    } else if (test_bit(bit_nr, &folio.flags.f))
+    }
+    } else if (test_bit(bit_nr, &folio.flags.f)) {
     return false;
+    }
     wait.flags |= WQ_FLAG_WOKEN | WQ_FLAG_DONE;
     return true;
     }
-    static inline int folio_wait_bit_common(struct folio *folio, int bit_nr,
-    int state, enum behavior behavior)
-    {
-    wait_queue_head_t *q = folio_waitqueue(folio);
-    let mut unfairness: c_int = sysctl_page_lock_unfairness;
-    struct wait_page_queue wait_page;
-    wait_queue_entry_t *wait = &wait_page.wait;
-    let mut thrashing: bool = false;
-    unsigned long pflags;
-    bool in_thrashing;
+#[no_mangle]
+pub unsafe extern "C" fn folio_wait_bit_common(folio: *mut folio, bit_nr: c_int, state: c_int, behavior: behavior) -> c_int {
+    let mut q = folio_waitqueue(folio);
+pub static mut unfairness: c_int = 0;
+pub static mut wait_page: usize = 0;
+    let mut wait = &wait_page.wait;
+pub static mut thrashing: bool = false;
+    let mut pflags = 0;
+    let mut in_thrashing = 0;
     if (bit_nr == PG_locked &&
     !folio_test_uptodate(folio) && folio_test_workingset(folio)) {
     delayacct_thrashing_start(&in_thrashing);
@@ -1160,12 +1400,13 @@ unsafe extern "C" fn folio_wake_bit(folio: *mut folio, bit_nr: c_int) {
     wait.func = wake_page_function;
     wait_page.folio = folio;
     wait_page.bit_nr = bit_nr;
-    repeat:
+// label;
     wait.flags = 0;
     if (behavior == EXCLUSIVE) {
     wait.flags = WQ_FLAG_EXCLUSIVE;
-    if (--unfairness < 0)
+    if (--unfairness < 0) {
     wait.flags |= WQ_FLAG_CUSTOM;
+    }
     }
 //
 // Do one last check whether we can get the
@@ -1183,8 +1424,9 @@ unsafe extern "C" fn folio_wake_bit(folio: *mut folio, bit_nr: c_int) {
 //
     spin_lock_irq(&q.lock);
     folio_set_waiters(folio);
-    if (!folio_trylock_flag(folio, bit_nr, wait))
+    if (!folio_trylock_flag(folio, bit_nr, wait)) {
     __add_wait_queue_entry_tail(q, wait);
+    }
     spin_unlock_irq(&q.lock);
 //
 // From now on, all the logic will be based on
@@ -1194,8 +1436,9 @@ unsafe extern "C" fn folio_wake_bit(folio: *mut folio, bit_nr: c_int) {
 //
 // We can drop our reference to the folio.
 //
-    if (behavior == DROP)
+    if (behavior == DROP) {
     folio_put(folio);
+    }
 //
 // Note that until the "finish_wait()", or until
 // we see the WQ_FLAG_WOKEN flag, we need to
@@ -1203,30 +1446,34 @@ unsafe extern "C" fn folio_wake_bit(folio: *mut folio, bit_nr: c_int) {
 // we may race with a waker that sets them.
 //
     for (;;) {
-    unsigned int flags;
+    let mut flags = 0;
     set_current_state(state);
 // Loop until we've been woken or interrupted
     flags = smp_load_acquire(&wait.flags);
     if (!(flags & WQ_FLAG_WOKEN)) {
-    if (signal_pending_state(state, current))
+    if (signal_pending_state(state, current)) {
     break;
+    }
     io_schedule();
     continue;
     }
 // If we were non-exclusive, we're done
-    if (behavior != EXCLUSIVE)
+    if (behavior != EXCLUSIVE) {
     break;
+    }
 // If the waker got the lock for us, we're done
-    if (flags & WQ_FLAG_DONE)
+    if (flags & WQ_FLAG_DONE) {
     break;
+    }
 //
 // Otherwise, if we're getting the lock, we need to
 // try to get it ourselves.
 //
 // And if that fails, we'll have to retry this all.
 //
-    if (unlikely(test_and_set_bit(bit_nr, folio_flags(folio, 0))))
-    goto repeat;
+    if (unlikely(test_and_set_bit(bit_nr, folio_flags(folio, 0)))) {
+// goto;
+    }
     wait.flags |= WQ_FLAG_DONE;
     break;
     }
@@ -1254,8 +1501,9 @@ unsafe extern "C" fn folio_wake_bit(folio: *mut folio, bit_nr: c_int) {
 // Also note that WQ_FLAG_WOKEN is sufficient for a non-exclusive
 // waiter, but an exclusive one requires WQ_FLAG_DONE.
 //
-    if (behavior == EXCLUSIVE)
+    if (behavior == EXCLUSIVE) {
     return wait.flags & WQ_FLAG_DONE ? 0 : -EINTR;
+    }
     return wait.flags & WQ_FLAG_WOKEN ? 0 : -EINTR;
     }
 
@@ -1279,16 +1527,13 @@ unsafe extern "C" fn folio_wake_bit(folio: *mut folio, bit_nr: c_int) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn softleaf_entry_wait_on_locked(entry: softleaf_t, ptl: *mut spinlock_t) {
-    void softleaf_entry_wait_on_locked(softleaf_t entry, spinlock_t *ptl)
-    __releases(ptl)
-    {
-    struct wait_page_queue wait_page;
-    wait_queue_entry_t *wait = &wait_page.wait;
-    let mut thrashing: bool = false;
-    unsigned long pflags;
-    bool in_thrashing;
-    wait_queue_head_t *q;
-    struct folio *folio = softleaf_to_folio(entry);
+pub static mut wait_page: usize = 0;
+    let mut wait = &wait_page.wait;
+pub static mut thrashing: bool = false;
+    let mut pflags = 0;
+    let mut in_thrashing = 0;
+pub static mut q: *mut c_void = core::ptr::null_mut();
+    let mut folio = softleaf_to_folio(entry);
     q = folio_waitqueue(folio);
     if (!folio_test_uptodate(folio) && folio_test_workingset(folio)) {
     delayacct_thrashing_start(&in_thrashing);
@@ -1302,8 +1547,9 @@ pub unsafe extern "C" fn softleaf_entry_wait_on_locked(entry: softleaf_t, ptl: *
     wait.flags = 0;
     spin_lock_irq(&q.lock);
     folio_set_waiters(folio);
-    if (!folio_trylock_flag(folio, PG_locked, wait))
+    if (!folio_trylock_flag(folio, PG_locked, wait)) {
     __add_wait_queue_entry_tail(q, wait);
+    }
     spin_unlock_irq(&q.lock);
 //
 // If a migration entry exists for the page the migration path must hold
@@ -1315,13 +1561,14 @@ pub unsafe extern "C" fn softleaf_entry_wait_on_locked(entry: softleaf_t, ptl: *
 //
     spin_unlock(ptl);
     for (;;) {
-    unsigned int flags;
+    let mut flags = 0;
     set_current_state(TASK_UNINTERRUPTIBLE);
 // Loop until we've been woken or interrupted
     flags = smp_load_acquire(&wait.flags);
     if (!(flags & WQ_FLAG_WOKEN)) {
-    if (signal_pending_state(TASK_UNINTERRUPTIBLE, current))
+    if (signal_pending_state(TASK_UNINTERRUPTIBLE, current)) {
     break;
+    }
     io_schedule();
     continue;
     }
@@ -1336,15 +1583,11 @@ pub unsafe extern "C" fn softleaf_entry_wait_on_locked(entry: softleaf_t, ptl: *
 
 #[no_mangle]
 pub unsafe extern "C" fn folio_wait_bit(folio: *mut folio, bit_nr: c_int) {
-    void folio_wait_bit(struct folio *folio, int bit_nr)
-    {
     folio_wait_bit_common(folio, bit_nr, TASK_UNINTERRUPTIBLE, SHARED);
     }
     EXPORT_SYMBOL(folio_wait_bit);
 #[no_mangle]
 pub unsafe extern "C" fn folio_wait_bit_killable(folio: *mut folio, bit_nr: c_int) -> c_int {
-    int folio_wait_bit_killable(struct folio *folio, int bit_nr)
-    {
     return folio_wait_bit_common(folio, bit_nr, TASK_KILLABLE, SHARED);
     }
     EXPORT_SYMBOL(folio_wait_bit_killable);
@@ -1363,8 +1606,6 @@ pub unsafe extern "C" fn folio_wait_bit_killable(folio: *mut folio, bit_nr: c_in
 //
 #[no_mangle]
 unsafe extern "C" fn folio_put_wait_locked(folio: *mut folio, state: c_int) -> c_int {
-    static int folio_put_wait_locked(struct folio *folio, int state)
-    {
     return folio_wait_bit_common(folio, PG_locked, state, DROP);
     }
 //
@@ -1378,14 +1619,13 @@ unsafe extern "C" fn folio_put_wait_locked(folio: *mut folio, state: c_int) -> c
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_unlock(folio: *mut folio) {
-    void folio_unlock(struct folio *folio)
-    {
 // Bit 7 allows x86 to check the byte's sign bit
-    BUILD_BUG_ON(PG_waiters != 7);
-    BUILD_BUG_ON(PG_locked > 7);
+    BUILD_BUG_ON!(PG_waiters != 7);
+    BUILD_BUG_ON!(PG_locked > 7);
     VM_BUG_ON_FOLIO(!folio_test_locked(folio), folio);
-    if (folio_xor_flags_has_waiters(folio, 1 << PG_locked))
+    if (folio_xor_flags_has_waiters(folio, 1 << PG_locked)) {
     folio_wake_bit(folio, PG_locked);
+    }
     }
     EXPORT_SYMBOL(folio_unlock);
 //
@@ -1404,17 +1644,17 @@ pub unsafe extern "C" fn folio_unlock(folio: *mut folio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_end_read(folio: *mut folio, success: bool) {
-    void folio_end_read(struct folio *folio, bool success)
-    {
-    let mut mask: c_ulong = 1 << PG_locked;
+pub static mut mask: c_ulong = 0;
 // Must be in bottom byte for x86 to work
-    BUILD_BUG_ON(PG_uptodate > 7);
+    BUILD_BUG_ON!(PG_uptodate > 7);
     VM_BUG_ON_FOLIO(!folio_test_locked(folio), folio);
     VM_BUG_ON_FOLIO(success && folio_test_uptodate(folio), folio);
-    if (likely(success))
+    if (likely(success)) {
     mask |= 1 << PG_uptodate;
-    if (folio_xor_flags_has_waiters(folio, mask))
+    }
+    if (folio_xor_flags_has_waiters(folio, mask)) {
     folio_wake_bit(folio, PG_locked);
+    }
     }
     EXPORT_SYMBOL(folio_end_read);
 //
@@ -1430,8 +1670,6 @@ pub unsafe extern "C" fn folio_end_read(folio: *mut folio, success: bool) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_end_private_2(folio: *mut folio) {
-    void folio_end_private_2(struct folio *folio)
-    {
     VM_BUG_ON_FOLIO(!folio_test_private_2(folio), folio);
     clear_bit_unlock(PG_private_2, folio_flags(folio, 0));
     folio_wake_bit(folio, PG_private_2);
@@ -1446,10 +1684,9 @@ pub unsafe extern "C" fn folio_end_private_2(folio: *mut folio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_wait_private_2(folio: *mut folio) {
-    void folio_wait_private_2(struct folio *folio)
-    {
-    while (folio_test_private_2(folio))
+    while (folio_test_private_2(folio)) {
     folio_wait_bit(folio, PG_private_2);
+    }
     }
     EXPORT_SYMBOL(folio_wait_private_2);
 //
@@ -1465,29 +1702,29 @@ pub unsafe extern "C" fn folio_wait_private_2(folio: *mut folio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_wait_private_2_killable(folio: *mut folio) -> c_int {
-    int folio_wait_private_2_killable(struct folio *folio)
-    {
-    let mut ret: c_int = 0;
+pub static mut ret: c_int = 0;
     while (folio_test_private_2(folio)) {
     ret = folio_wait_bit_killable(folio, PG_private_2);
-    if (ret < 0)
+    if (ret < 0) {
     break;
+    }
     }
     return ret;
     }
     EXPORT_SYMBOL(folio_wait_private_2_killable);
 #[no_mangle]
 unsafe extern "C" fn filemap_end_dropbehind(folio: *mut folio) {
-    static void filemap_end_dropbehind(struct folio *folio)
-    {
-    struct address_space *mapping = folio.mapping;
+    let mut mapping = folio.mapping;
     VM_BUG_ON_FOLIO(!folio_test_locked(folio), folio);
-    if (folio_test_writeback(folio) || folio_test_dirty(folio))
+    if (folio_test_writeback(folio) || folio_test_dirty(folio)) {
     return;
-    if (!folio_test_clear_dropbehind(folio))
+    }
+    if (!folio_test_clear_dropbehind(folio)) {
     return;
-    if (mapping)
+    }
+    if (mapping) {
     folio_unmap_invalidate(mapping, folio, 0);
+    }
     }
 //
 // If folio was marked as dropbehind, then pages should be dropped when writeback
@@ -1496,10 +1733,9 @@ unsafe extern "C" fn filemap_end_dropbehind(folio: *mut folio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_end_dropbehind(folio: *mut folio) {
-    void folio_end_dropbehind(struct folio *folio)
-    {
-    if (!folio_test_dropbehind(folio))
+    if (!folio_test_dropbehind(folio)) {
     return;
+    }
 //
 // Hitting !in_task() should not happen off RWF_DONTCACHE writeback,
 // but can happen if normal writeback just happens to find dirty folios
@@ -1524,8 +1760,6 @@ pub unsafe extern "C" fn folio_end_dropbehind(folio: *mut folio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_end_writeback_no_dropbehind(folio: *mut folio) {
-    void folio_end_writeback_no_dropbehind(struct folio *folio)
-    {
     VM_BUG_ON_FOLIO(!folio_test_writeback(folio), folio);
 //
 // folio_test_clear_reclaim() could be used here but it is an
@@ -1538,8 +1772,9 @@ pub unsafe extern "C" fn folio_end_writeback_no_dropbehind(folio: *mut folio) {
     folio_clear_reclaim(folio);
     folio_rotate_reclaimable(folio);
     }
-    if (__folio_end_writeback(folio))
+    if (__folio_end_writeback(folio)) {
     folio_wake_bit(folio, PG_writeback);
+    }
     acct_reclaim_writeback(folio);
     }
     EXPORT_SYMBOL_GPL(folio_end_writeback_no_dropbehind);
@@ -1553,8 +1788,6 @@ pub unsafe extern "C" fn folio_end_writeback_no_dropbehind(folio: *mut folio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_end_writeback(folio: *mut folio) {
-    void folio_end_writeback(struct folio *folio)
-    {
     VM_BUG_ON_FOLIO(!folio_test_writeback(folio), folio);
 //
 // Writeback does not hold a folio reference of its own, relying
@@ -1574,26 +1807,20 @@ pub unsafe extern "C" fn folio_end_writeback(folio: *mut folio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __folio_lock(folio: *mut folio) {
-    void __folio_lock(struct folio *folio)
-    {
     folio_wait_bit_common(folio, PG_locked, TASK_UNINTERRUPTIBLE,
     EXCLUSIVE);
     }
     EXPORT_SYMBOL(__folio_lock);
 #[no_mangle]
 pub unsafe extern "C" fn __folio_lock_killable(folio: *mut folio) -> c_int {
-    int __folio_lock_killable(struct folio *folio)
-    {
     return folio_wait_bit_common(folio, PG_locked, TASK_KILLABLE,
     EXCLUSIVE);
     }
     EXPORT_SYMBOL_GPL(__folio_lock_killable);
 #[no_mangle]
 unsafe extern "C" fn __folio_lock_async(folio: *mut folio, wait: *mut wait_page_queue) -> c_int {
-    static int __folio_lock_async(struct folio *folio, struct wait_page_queue *wait)
-    {
-    struct wait_queue_head *q = folio_waitqueue(folio);
-    int ret;
+    let mut q = folio_waitqueue(folio);
+    let mut ret = 0;
     wait.folio = folio;
     wait.bit_nr = PG_locked;
     spin_lock_irq(&q.lock);
@@ -1606,10 +1833,12 @@ unsafe extern "C" fn __folio_lock_async(folio: *mut folio, wait: *mut wait_page_
 // safe to remove and return success, we know the callback
 // isn't going to trigger.
 //
-    if (!ret)
+    if (!ret) {
     __remove_wait_queue(q, &wait.wait);
-    else
+    }
+    else {
     ret = -EIOCBQUEUED;
+    }
     spin_unlock_irq(&q.lock);
     return ret;
     }
@@ -1626,25 +1855,26 @@ unsafe extern "C" fn __folio_lock_async(folio: *mut folio, wait: *mut wait_page_
 //
 #[no_mangle]
 pub unsafe extern "C" fn __folio_lock_or_retry(folio: *mut folio, vmf: *mut vm_fault) -> vm_fault_t {
-    vm_fault_t __folio_lock_or_retry(struct folio *folio, struct vm_fault *vmf)
-    {
-    let mut flags: c_uint = vmf.flags;
+pub static mut flags: c_uint = 0;
     if (fault_flag_allow_retry_first(flags)) {
 //
 // CAUTION! In this case, mmap_lock/per-VMA lock is not
 // released even though returning VM_FAULT_RETRY.
 //
-    if (flags & FAULT_FLAG_RETRY_NOWAIT)
+    if (flags & FAULT_FLAG_RETRY_NOWAIT) {
     return VM_FAULT_RETRY;
+    }
     release_fault_lock(vmf);
-    if (flags & FAULT_FLAG_KILLABLE)
+    if (flags & FAULT_FLAG_KILLABLE) {
     folio_wait_locked_killable(folio);
-    else
+    }
+    else {
     folio_wait_locked(folio);
+    }
     return VM_FAULT_RETRY;
     }
     if (flags & FAULT_FLAG_KILLABLE) {
-    bool ret;
+    let mut ret = 0;
     ret = __folio_lock_killable(folio);
     if (ret) {
     release_fault_lock(vmf);
@@ -1674,16 +1904,18 @@ pub unsafe extern "C" fn __folio_lock_or_retry(folio: *mut folio, vmf: *mut vm_f
 // range specified (in which case 'return - index >= max_scan' will be true).
 // In the rare case of index wrap-around, 0 will be returned.
 //
-    pgoff_t page_cache_next_miss(struct address_space *mapping,
+    pgoff_t page_cache_next_miss(address_space *mapping,
     pgoff_t index, unsigned long max_scan)
     {
     XA_STATE(xas, &mapping.i_pages, index);
     while (max_scan--) {
-    void *entry = xas_next(&xas);
-    if (!entry || xa_is_value(entry))
+    let mut entry = xas_next(&xas);
+    if (!entry || xa_is_value(entry)) {
     return xas.xa_index;
-    if (xas.xa_index == 0)
+    }
+    if (xas.xa_index == 0) {
     return 0;
+    }
     }
 // Return end of the range + 1 when no hole is found
     return xas.xa_index + 1;
@@ -1708,16 +1940,18 @@ pub unsafe extern "C" fn __folio_lock_or_retry(folio: *mut folio, vmf: *mut vm_f
 // range specified (in which case 'index - return >= max_scan' will be true).
 // In the rare case of wrap-around, ULONG_MAX will be returned.
 //
-    pgoff_t page_cache_prev_miss(struct address_space *mapping,
+    pgoff_t page_cache_prev_miss(address_space *mapping,
     pgoff_t index, unsigned long max_scan)
     {
     XA_STATE(xas, &mapping.i_pages, index);
     while (max_scan--) {
-    void *entry = xas_prev(&xas);
-    if (!entry || xa_is_value(entry))
+    let mut entry = xas_prev(&xas);
+    if (!entry || xa_is_value(entry)) {
     return xas.xa_index;
-    if (xas.xa_index == ULONG_MAX)
+    }
+    if (xas.xa_index == ULONG_MAX) {
     return ULONG_MAX;
+    }
     }
 // Return start of the range - 1 when no hole is found
     return xas.xa_index - 1;
@@ -1753,29 +1987,32 @@ pub unsafe extern "C" fn __folio_lock_or_retry(folio: *mut folio, vmf: *mut vm_f
 //
 // Return: The folio, swap or shadow entry, %NULL if nothing is found.
 //
-    void *filemap_get_entry(struct address_space *mapping, pgoff_t index)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn filemap_get_entry(mapping: *mut address_space, index: pgoff_t) -> *mut c_void {
     XA_STATE(xas, &mapping.i_pages, index);
-    struct folio *folio;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
-    repeat:
+// label;
     xas_reset(&xas);
     folio = xas_load(&xas);
-    if (xas_retry(&xas, folio))
-    goto repeat;
+    if (xas_retry(&xas, folio)) {
+// goto;
+    }
 //
 // A shadow entry of a recently evicted page, or a swap entry from
 // shmem/tmpfs.  Return it without attempting to raise page count.
 //
-    if (!folio || xa_is_value(folio))
-    goto out;
-    if (!folio_try_get(folio))
-    goto repeat;
+    if (!folio || xa_is_value(folio)) {
+// goto;
+    }
+    if (!folio_try_get(folio)) {
+// goto;
+    }
     if (unlikely(folio != xas_reload(&xas))) {
     folio_put(folio);
-    goto repeat;
+// goto;
     }
-    out:
+// label;
     rcu_read_unlock();
     return folio;
     }
@@ -1796,16 +2033,17 @@ pub unsafe extern "C" fn __folio_lock_or_retry(folio: *mut folio, vmf: *mut vm_f
 //
 // Return: The found folio or an ERR_PTR() otherwise.
 //
-    struct folio *__filemap_get_folio_mpol(struct address_space *mapping,
-    pgoff_t index, fgf_t fgp_flags, gfp_t gfp, struct mempolicy *policy)
-    {
-    struct folio *folio;
-    repeat:
+#[no_mangle]
+pub unsafe extern "C" fn __filemap_get_folio_mpol(mapping: *mut address_space, index: pgoff_t, fgp_flags: fgf_t, gfp: gfp_t, policy: *mut mempolicy) -> *mut c_void {
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+// label;
     folio = filemap_get_entry(mapping, index);
-    if (xa_is_value(folio))
+    if (xa_is_value(folio)) {
     folio = core::ptr::null_mut();
-    if (!folio)
-    goto no_page;
+    }
+    if (!folio) {
+// goto;
+    }
     if (fgp_flags & FGP_LOCK) {
     if (fgp_flags & FGP_NOWAIT) {
     if (!folio_trylock(folio)) {
@@ -1819,62 +2057,75 @@ pub unsafe extern "C" fn __folio_lock_or_retry(folio: *mut folio, vmf: *mut vm_f
     if (unlikely(folio.mapping != mapping)) {
     folio_unlock(folio);
     folio_put(folio);
-    goto repeat;
+// goto;
     }
     VM_BUG_ON_FOLIO(!folio_contains(folio, index), folio);
     }
-    if (fgp_flags & FGP_ACCESSED)
+    if (fgp_flags & FGP_ACCESSED) {
     folio_mark_accessed(folio);
-#[no_mangle]
-pub unsafe extern "C" fn if(FGP_WRITE: fgp_flags &) -> else {
+    }
+if true {
 // Clear idle flag for buffer write
-    if (folio_test_idle(folio))
+    if (folio_test_idle(folio)) {
     folio_clear_idle(folio);
     }
-    if (fgp_flags & FGP_STABLE)
+    }
+    if (fgp_flags & FGP_STABLE) {
     folio_wait_stable(folio);
-    no_page:
+    }
+// label;
     if (!folio && (fgp_flags & FGP_CREAT)) {
-    let mut min_order: c_uint = mapping_min_folio_order(mapping);
-    let mut order: c_uint = max(min_order, FGF_GET_ORDER(fgp_flags));
-    int err;
+pub static mut min_order: c_uint = 0;
+pub static mut order: c_uint = 0;
+    let mut err = 0;
     index = mapping_align_index(mapping, index);
-    if ((fgp_flags & FGP_WRITE) && mapping_can_writeback(mapping))
+    if ((fgp_flags & FGP_WRITE) && mapping_can_writeback(mapping)) {
     gfp |= __GFP_WRITE;
-    if (fgp_flags & FGP_NOFS)
+    }
+    if (fgp_flags & FGP_NOFS) {
     gfp &= ~__GFP_FS;
+    }
     if (fgp_flags & FGP_NOWAIT) {
     gfp &= ~GFP_KERNEL;
     gfp |= GFP_NOWAIT;
     }
-    if (WARN_ON_ONCE(!(fgp_flags & (FGP_LOCK | FGP_FOR_MMAP))))
+    if (WARN_ON_ONCE!(!(fgp_flags & (FGP_LOCK | FGP_FOR_MMAP)))) {
     fgp_flags |= FGP_LOCK;
-    if (order > mapping_max_folio_order(mapping))
+    }
+    if (order > mapping_max_folio_order(mapping)) {
     order = mapping_max_folio_order(mapping);
+    }
 // If we're not aligned, allocate a smaller folio
-    if (index & ((1UL << order) - 1))
+    if (index & ((1UL << order) - 1)) {
     order = __ffs(index);
+    }
     do {
-    let mut alloc_gfp: gfp_t = gfp;
+pub static mut alloc_gfp: gfp_t = 0;
     err = -ENOMEM;
-    if (order > min_order)
+    if (order > min_order) {
     alloc_gfp |= __GFP_NORETRY | __GFP_NOWARN;
+    }
     folio = filemap_alloc_folio(alloc_gfp, order, policy);
-    if (!folio)
+    if (!folio) {
     continue;
+    }
 // Init accessed so avoid atomic mark_page_accessed later
-    if (fgp_flags & FGP_ACCESSED)
+    if (fgp_flags & FGP_ACCESSED) {
     __folio_set_referenced(folio);
-    if (fgp_flags & FGP_DONTCACHE)
+    }
+    if (fgp_flags & FGP_DONTCACHE) {
     __folio_set_dropbehind(folio);
+    }
     err = filemap_add_folio(mapping, folio, index, gfp);
-    if (!err)
+    if (!err) {
     break;
+    }
     folio_put(folio);
     folio = core::ptr::null_mut();
     } while (order-- > min_order);
-    if (err == -EEXIST)
-    goto repeat;
+    if (err == -EEXIST) {
+// goto;
+    }
     if (err) {
 //
 // When NOWAIT I/O fails to allocate folios this could
@@ -1884,27 +2135,30 @@ pub unsafe extern "C" fn if(FGP_WRITE: fgp_flags &) -> else {
 // blocking fashion instead of propagating -ENOMEM
 // to the application.
 //
-    if ((fgp_flags & FGP_NOWAIT) && err == -ENOMEM)
+    if ((fgp_flags & FGP_NOWAIT) && err == -ENOMEM) {
     err = -EAGAIN;
+    }
     return ERR_PTR(err);
     }
 //
 // filemap_add_folio locks the page, and for mmap
 // we expect an unlocked page.
 //
-    if (folio && (fgp_flags & FGP_FOR_MMAP))
+    if (folio && (fgp_flags & FGP_FOR_MMAP)) {
     folio_unlock(folio);
     }
-    if (!folio)
+    }
+    if (!folio) {
     return ERR_PTR(-ENOENT);
+    }
 // not an uncached lookup, clear uncached if set
     if (!(fgp_flags & FGP_DONTCACHE) && folio_test_clear_dropbehind(folio)) {
     if (folio_test_dirty(folio) &&
     mapping_can_writeback(mapping)) {
-    struct inode *inode = mapping.host;
-    struct bdi_writeback *wb;
-    let mut cookie: wb_lock_cookie = {};
-    let mut nr: c_long = folio_nr_pages(folio);
+    let mut inode = mapping.host;
+pub static mut wb: *mut c_void = core::ptr::null_mut();
+pub static mut cookie: wb_lock_cookie = 0;
+pub static mut nr: c_long = 0;
     wb = unlocked_inode_to_wb_begin(inode, &cookie);
     wb_stat_mod(wb, WB_DONTCACHE_DIRTY, -nr);
     unlocked_inode_to_wb_end(inode, &cookie);
@@ -1913,34 +2167,38 @@ pub unsafe extern "C" fn if(FGP_WRITE: fgp_flags &) -> else {
     return folio;
     }
     EXPORT_SYMBOL(__filemap_get_folio_mpol);
-    static inline struct folio *find_get_entry(struct xa_state *xas, pgoff_t max,
-    xa_mark_t mark)
-    {
-    struct folio *folio;
-    retry:
-    if (mark == XA_PRESENT)
+#[no_mangle]
+pub unsafe extern "C" fn find_get_entry(xas: *mut xa_state, max: pgoff_t, mark: xa_mark_t) -> *mut c_void {
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+// label;
+    if (mark == XA_PRESENT) {
     folio = xas_find(xas, max);
-    else
+    }
+    else {
     folio = xas_find_marked(xas, max, mark);
-    if (xas_retry(xas, folio))
-    goto retry;
+    }
+    if (xas_retry(xas, folio)) {
+// goto;
+    }
 //
 // A shadow entry of a recently evicted page, a swap
 // entry from shmem/tmpfs or a DAX entry.  Return it
 // without attempting to raise page count.
 //
-    if (!folio || xa_is_value(folio))
+    if (!folio || xa_is_value(folio)) {
     return folio;
-    if (!folio_try_get(folio))
-    goto reset;
+    }
+    if (!folio_try_get(folio)) {
+// goto;
+    }
     if (unlikely(folio != xas_reload(xas))) {
     folio_put(folio);
-    goto reset;
+// goto;
     }
     return folio;
-    reset:
+// label;
     xas_reset(xas);
-    goto retry;
+// goto;
     }
 //
 // find_get_entries - gang pagecache lookup
@@ -1962,25 +2220,27 @@ pub unsafe extern "C" fn if(FGP_WRITE: fgp_flags &) -> else {
 //
 // Return: The number of entries which were found.
 //
-    unsigned find_get_entries(struct address_space *mapping, pgoff_t *start,
-    pgoff_t end, struct folio_batch *fbatch, pgoff_t *indices)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn find_get_entries(mapping: *mut address_space, start: *mut pgoff_t, end: pgoff_t, fbatch: *mut folio_batch, indices: *mut pgoff_t) -> c_uint {
     XA_STATE(xas, &mapping.i_pages, *start);
-    struct folio *folio;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     while ((folio = find_get_entry(&xas, end, XA_PRESENT)) != core::ptr::null_mut()) {
     indices[fbatch.nr] = xas.xa_index;
-    if (!folio_batch_add(fbatch, folio))
+    if (!folio_batch_add(fbatch, folio)) {
     break;
     }
+    }
     if (folio_batch_count(fbatch)) {
-    unsigned long nr;
-    let mut idx: c_int = folio_batch_count(fbatch) - 1;
+    let mut nr = 0;
+pub static mut idx: c_int = 0;
     folio = fbatch.folios[idx];
-    if (!xa_is_value(folio))
+    if (!xa_is_value(folio)) {
     nr = folio_nr_pages(folio);
-    else
+    }
+    else {
     nr = 1 << xa_get_order(&mapping.i_pages, indices[idx]);
+    }
 // start = round_down(indices[idx] + nr, nr);
     }
     rcu_read_unlock();
@@ -2006,50 +2266,56 @@ pub unsafe extern "C" fn if(FGP_WRITE: fgp_flags &) -> else {
 //
 // Return: The number of entries which were found.
 //
-    unsigned find_lock_entries(struct address_space *mapping, pgoff_t *start,
-    pgoff_t end, struct folio_batch *fbatch, pgoff_t *indices)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn find_lock_entries(mapping: *mut address_space, start: *mut pgoff_t, end: pgoff_t, fbatch: *mut folio_batch, indices: *mut pgoff_t) -> c_uint {
     XA_STATE(xas, &mapping.i_pages, *start);
-    struct folio *folio;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     while ((folio = find_get_entry(&xas, end, XA_PRESENT))) {
-    unsigned long base;
-    unsigned long nr;
+    let mut base = 0;
+    let mut nr = 0;
     if (!xa_is_value(folio)) {
     nr = folio_nr_pages(folio);
     base = folio.index;
 // Omit large folio which begins before the start
-    if (base < *start)
-    goto put;
+    if (base < *start) {
+// goto;
+    }
 // Omit large folio which extends beyond the end
-    if (base + nr - 1 > end)
-    goto put;
-    if (!folio_trylock(folio))
-    goto put;
+    if (base + nr - 1 > end) {
+// goto;
+    }
+    if (!folio_trylock(folio)) {
+// goto;
+    }
     if (folio.mapping != mapping ||
-    folio_test_writeback(folio))
-    goto unlock;
+    folio_test_writeback(folio)) {
+// goto;
+    }
     VM_BUG_ON_FOLIO(!folio_contains(folio, xas.xa_index),
     folio);
     } else {
     nr = 1 << xas_get_order(&xas);
     base = xas.xa_index & ~(nr - 1);
 // Omit order>0 value which begins before the start
-    if (base < *start)
+    if (base < *start) {
     continue;
+    }
 // Omit order>0 value which extends beyond the end
-    if (base + nr - 1 > end)
+    if (base + nr - 1 > end) {
     break;
+    }
     }
 // Update start now so that last update is correct on return
 // start = base + nr;
     indices[fbatch.nr] = xas.xa_index;
-    if (!folio_batch_add(fbatch, folio))
+    if (!folio_batch_add(fbatch, folio)) {
     break;
+    }
     continue;
-    unlock:
+// label;
     folio_unlock(folio);
-    put:
+// label;
     folio_put(folio);
     }
     rcu_read_unlock();
@@ -2069,9 +2335,8 @@ pub unsafe extern "C" fn if(FGP_WRITE: fgp_flags &) -> else {
 // Return: The number of folios which were found.
 // We also update @start to index the next folio for the traversal.
 //
-    unsigned filemap_get_folios(struct address_space *mapping, pgoff_t *start,
-    pgoff_t end, struct folio_batch *fbatch)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn filemap_get_folios(mapping: *mut address_space, start: *mut pgoff_t, end: pgoff_t, fbatch: *mut folio_batch) -> c_uint {
     return filemap_get_folios_tag(mapping, start, end, XA_PRESENT, fbatch);
     }
     EXPORT_SYMBOL(filemap_get_folios);
@@ -2089,40 +2354,47 @@ pub unsafe extern "C" fn if(FGP_WRITE: fgp_flags &) -> else {
 // Return: The number of folios found.
 // Also update @start to be positioned for traversal of the next folio.
 //
-    unsigned filemap_get_folios_contig(struct address_space *mapping,
-    pgoff_t *start, pgoff_t end, struct folio_batch *fbatch)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn filemap_get_folios_contig(mapping: *mut address_space, start: *mut pgoff_t, end: pgoff_t, fbatch: *mut folio_batch) -> c_uint {
     XA_STATE(xas, &mapping.i_pages, *start);
-    unsigned long nr;
-    struct folio *folio;
-    if (*start > end)
+    let mut nr = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    if (*start > end) {
     return 0;
+    }
     rcu_read_lock();
     for (folio = xas_load(&xas); folio; folio = xas_next(&xas)) {
-    if (xas_retry(&xas, folio))
+    if (xas_retry(&xas, folio)) {
     continue;
+    }
 //
 // If the entry has been swapped out, we can stop looking.
 // No current caller is looking for DAX entries.
 //
-    if (xa_is_value(folio))
+    if (xa_is_value(folio)) {
     break;
+    }
 // If we landed in the middle of a THP, continue at its end.
-    if (xa_is_sibling(folio))
+    if (xa_is_sibling(folio)) {
     break;
-    if (!folio_try_get(folio))
-    goto retry;
-    if (unlikely(folio != xas_reload(&xas)))
-    goto put_folio;
-    if (!folio_batch_add(fbatch, folio))
+    }
+    if (!folio_try_get(folio)) {
+// goto;
+    }
+    if (unlikely(folio != xas_reload(&xas))) {
+// goto;
+    }
+    if (!folio_batch_add(fbatch, folio)) {
     break;
+    }
     xas_advance(&xas, folio_next_index(folio) - 1);
-    if (xas.xa_index >= end)
+    if (xas.xa_index >= end) {
     break;
+    }
     continue;
-    put_folio:
+// label;
     folio_put(folio);
-    retry:
+// label;
     xas_reset(&xas);
     }
     rcu_read_unlock();
@@ -2153,11 +2425,10 @@ pub unsafe extern "C" fn if(FGP_WRITE: fgp_flags &) -> else {
 // Return: The number of folios found.
 // Also update @start to index the next folio for traversal.
 //
-    unsigned filemap_get_folios_tag(struct address_space *mapping, pgoff_t *start,
-    pgoff_t end, xa_mark_t tag, struct folio_batch *fbatch)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn filemap_get_folios_tag(mapping: *mut address_space, start: *mut pgoff_t, end: pgoff_t, tag: xa_mark_t, fbatch: *mut folio_batch) -> c_uint {
     XA_STATE(xas, &mapping.i_pages, *start);
-    struct folio *folio;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     while ((folio = find_get_entry(&xas, end, tag)) != core::ptr::null_mut()) {
 //
@@ -2165,11 +2436,12 @@ pub unsafe extern "C" fn if(FGP_WRITE: fgp_flags &) -> else {
 // is lockless so there is a window for page reclaim to evict
 // a page we saw tagged. Skip over it.
 //
-    if (xa_is_value(folio))
+    if (xa_is_value(folio)) {
     continue;
+    }
     if (!folio_batch_add(fbatch, folio)) {
 // start = folio_next_index(folio);
-    goto out;
+// goto;
     }
     }
 //
@@ -2178,11 +2450,13 @@ pub unsafe extern "C" fn if(FGP_WRITE: fgp_flags &) -> else {
 // breaks the iteration when there is a page at index -1 but that is
 // already broke anyway.
 //
-    if (end == (pgoff_t)-1)
+    if (end == (pgoff_t)-1) {
 // start = (pgoff_t)-1;
-    else
+    }
+    else {
 // start = end + 1;
-    out:
+    }
+// label;
     rcu_read_unlock();
     return folio_batch_count(fbatch);
     }
@@ -2204,17 +2478,17 @@ pub unsafe extern "C" fn if(FGP_WRITE: fgp_flags &) -> else {
 // Return: The number of folios found.
 // Also update @start to be positioned for traversal of the next folio.
 //
-    unsigned filemap_get_folios_dirty(struct address_space *mapping, pgoff_t *start,
-    pgoff_t end, struct folio_batch *fbatch)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn filemap_get_folios_dirty(mapping: *mut address_space, start: *mut pgoff_t, end: pgoff_t, fbatch: *mut folio_batch) -> c_uint {
     XA_STATE(xas, &mapping.i_pages, *start);
-    struct folio *folio;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     while ((folio = find_get_entry(&xas, end, XA_PRESENT)) != core::ptr::null_mut()) {
-    if (xa_is_value(folio))
+    if (xa_is_value(folio)) {
     continue;
+    }
     if (folio_trylock(folio)) {
-    bool clean = !folio_test_dirty(folio) &&
+    let mut clean = !folio_test_dirty(folio) &&
     !folio_test_writeback(folio);
     folio_unlock(folio);
     if (clean) {
@@ -2224,7 +2498,7 @@ pub unsafe extern "C" fn if(FGP_WRITE: fgp_flags &) -> else {
     }
     if (!folio_batch_add(fbatch, folio)) {
 // start = folio_next_index(folio);
-    goto out;
+// goto;
     }
     }
 //
@@ -2233,11 +2507,13 @@ pub unsafe extern "C" fn if(FGP_WRITE: fgp_flags &) -> else {
 // breaks the iteration when there is a folio at index -1 but that is
 // already broke anyway.
 //
-    if (end == (pgoff_t)-1)
+    if (end == (pgoff_t)-1) {
 // start = (pgoff_t)-1;
-    else
+    }
+    else {
 // start = end + 1;
-    out:
+    }
+// label;
     rcu_read_unlock();
     return folio_batch_count(fbatch);
     }
@@ -2258,8 +2534,6 @@ pub unsafe extern "C" fn if(FGP_WRITE: fgp_flags &) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn shrink_readahead_size_eio(ra: *mut file_ra_state) {
-    static void shrink_readahead_size_eio(struct file_ra_state *ra)
-    {
     ra.ra_pages /= 4;
     }
 //
@@ -2271,103 +2545,120 @@ unsafe extern "C" fn shrink_readahead_size_eio(ra: *mut file_ra_state) {
 // folio in the batch may have the readahead flag set or the uptodate flag
 // clear so that the caller can take the appropriate action.
 //
-    static void filemap_get_read_batch(struct address_space *mapping,
-    pgoff_t index, pgoff_t max, struct folio_batch *fbatch)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn filemap_get_read_batch(mapping: *mut address_space, index: pgoff_t, max: pgoff_t, fbatch: *mut folio_batch) {
     XA_STATE(xas, &mapping.i_pages, index);
-    struct folio *folio;
-    if (index > max)
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    if (index > max) {
     return;
+    }
     rcu_read_lock();
     for (folio = xas_load(&xas); folio; folio = xas_next(&xas)) {
-    if (xas_retry(&xas, folio))
+    if (xas_retry(&xas, folio)) {
     continue;
-    if (xa_is_value(folio))
+    }
+    if (xa_is_value(folio)) {
     break;
-    if (xa_is_sibling(folio))
+    }
+    if (xa_is_sibling(folio)) {
     break;
-    if (!folio_try_get(folio))
-    goto retry;
-    if (unlikely(folio != xas_reload(&xas)))
-    goto put_folio;
-    if (!folio_batch_add(fbatch, folio))
+    }
+    if (!folio_try_get(folio)) {
+// goto;
+    }
+    if (unlikely(folio != xas_reload(&xas))) {
+// goto;
+    }
+    if (!folio_batch_add(fbatch, folio)) {
     break;
-    if (!folio_test_uptodate(folio))
+    }
+    if (!folio_test_uptodate(folio)) {
     break;
-    if (folio_test_readahead(folio))
+    }
+    if (folio_test_readahead(folio)) {
     break;
+    }
     xas_advance(&xas, folio_next_index(folio) - 1);
-    if (xas.xa_index >= max)
+    if (xas.xa_index >= max) {
     break;
+    }
     continue;
-    put_folio:
+// label;
     folio_put(folio);
-    retry:
+// label;
     xas_reset(&xas);
     }
     rcu_read_unlock();
     }
-    static int filemap_read_folio(struct file *file, filler_t filler,
-    struct folio *folio)
-    {
-    let mut workingset: bool = folio_test_workingset(folio);
-    unsigned long pflags;
-    int error;
+#[no_mangle]
+pub unsafe extern "C" fn filemap_read_folio(file: *mut file, filler: filler_t, folio: *mut folio) -> c_int {
+pub static mut workingset: bool = false;
+    let mut pflags = 0;
+    let mut error = 0;
 // Start the actual read. The read will unlock the page.
-    if (unlikely(workingset))
+    if (unlikely(workingset)) {
     psi_memstall_enter(&pflags);
+    }
     error = filler(file, folio);
-    if (unlikely(workingset))
+    if (unlikely(workingset)) {
     psi_memstall_leave(&pflags);
-    if (error)
+    }
+    if (error) {
     return error;
+    }
     error = folio_wait_locked_killable(folio);
-    if (error)
+    if (error) {
     return error;
-    if (folio_test_uptodate(folio))
+    }
+    if (folio_test_uptodate(folio)) {
     return 0;
-    if (file)
+    }
+    if (file) {
     shrink_readahead_size_eio(&file.f_ra);
+    }
     return -EIO;
     }
-    static bool filemap_range_uptodate(struct address_space *mapping,
-    loff_t pos, size_t count, struct folio *folio,
-    bool need_uptodate)
-    {
-    if (folio_test_uptodate(folio))
+#[no_mangle]
+pub unsafe extern "C" fn filemap_range_uptodate(mapping: *mut address_space, pos: loff_t, count: size_t, folio: *mut folio, need_uptodate: bool) -> bool {
+    if (folio_test_uptodate(folio)) {
     return true;
+    }
 // pipes can't handle partially uptodate pages
-    if (need_uptodate)
+    if (need_uptodate) {
     return false;
-    if (!mapping.a_ops.is_partially_uptodate)
+    }
+    if (!mapping.a_ops.is_partially_uptodate) {
     return false;
-    if (mapping.host.i_blkbits >= folio_shift(folio))
+    }
+    if (mapping.host.i_blkbits >= folio_shift(folio)) {
     return false;
+    }
     if (folio_pos(folio) > pos) {
     count -= folio_pos(folio) - pos;
     pos = 0;
     } else {
     pos -= folio_pos(folio);
     }
-    if (pos == 0 && count >= folio_size(folio))
+    if (pos == 0 && count >= folio_size(folio)) {
     return false;
+    }
     return mapping.a_ops.is_partially_uptodate(folio, pos, count);
     }
-    static int filemap_update_page(struct kiocb *iocb,
-    struct address_space *mapping, size_t count,
-    struct folio *folio, bool need_uptodate)
-    {
-    int error;
+#[no_mangle]
+pub unsafe extern "C" fn filemap_update_page(iocb: *mut kiocb, mapping: *mut address_space, count: size_t, folio: *mut folio, need_uptodate: bool) -> c_int {
+    let mut error = 0;
     if (iocb.ki_flags & IOCB_NOWAIT) {
-    if (!filemap_invalidate_trylock_shared(mapping))
+    if (!filemap_invalidate_trylock_shared(mapping)) {
     return -EAGAIN;
+    }
     } else {
     filemap_invalidate_lock_shared(mapping);
     }
     if (!folio_trylock(folio)) {
     error = -EAGAIN;
-    if (iocb.ki_flags & (IOCB_NOWAIT | IOCB_NOIO))
-    goto unlock_mapping;
+    if (iocb.ki_flags & (IOCB_NOWAIT | IOCB_NOIO)) {
+// goto;
+    }
     if (!(iocb.ki_flags & IOCB_WAITQ)) {
     filemap_invalidate_unlock_shared(mapping);
 //
@@ -2378,46 +2669,52 @@ unsafe extern "C" fn shrink_readahead_size_eio(ra: *mut file_ra_state) {
     return AOP_TRUNCATED_PAGE;
     }
     error = __folio_lock_async(folio, iocb.ki_waitq);
-    if (error)
-    goto unlock_mapping;
+    if (error) {
+// goto;
+    }
     }
     error = AOP_TRUNCATED_PAGE;
-    if (!folio.mapping)
-    goto unlock;
+    if (!folio.mapping) {
+// goto;
+    }
     error = 0;
     if (filemap_range_uptodate(mapping, iocb.ki_pos, count, folio,
-    need_uptodate))
-    goto unlock;
+    need_uptodate)) {
+// goto;
+    }
     error = -EAGAIN;
-    if (iocb.ki_flags & (IOCB_NOIO | IOCB_NOWAIT | IOCB_WAITQ))
-    goto unlock;
+    if (iocb.ki_flags & (IOCB_NOIO | IOCB_NOWAIT | IOCB_WAITQ)) {
+// goto;
+    }
     error = filemap_read_folio(iocb.ki_filp, mapping.a_ops.read_folio,
     folio);
-    goto unlock_mapping;
-    unlock:
+// goto;
+// label;
     folio_unlock(folio);
-    unlock_mapping:
+// label;
     filemap_invalidate_unlock_shared(mapping);
-    if (error == AOP_TRUNCATED_PAGE)
+    if (error == AOP_TRUNCATED_PAGE) {
     folio_put(folio);
+    }
     return error;
     }
 #[no_mangle]
 unsafe extern "C" fn filemap_create_folio(iocb: *mut kiocb, fbatch: *mut folio_batch) -> c_int {
-    static int filemap_create_folio(struct kiocb *iocb, struct folio_batch *fbatch)
-    {
-    struct address_space *mapping = iocb.ki_filp.f_mapping;
-    struct folio *folio;
-    int error;
-    let mut min_order: c_uint = mapping_min_folio_order(mapping);
-    pgoff_t index;
-    if (iocb.ki_flags & (IOCB_NOWAIT | IOCB_WAITQ))
+    let mut mapping = iocb.ki_filp.f_mapping;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut error = 0;
+pub static mut min_order: c_uint = 0;
+    let mut index;
+    if (iocb.ki_flags & (IOCB_NOWAIT | IOCB_WAITQ)) {
     return -EAGAIN;
+    }
     folio = filemap_alloc_folio(mapping_gfp_mask(mapping), min_order, core::ptr::null_mut());
-    if (!folio)
+    if (!folio) {
     return -ENOMEM;
-    if (iocb.ki_flags & IOCB_DONTCACHE)
+    }
+    if (iocb.ki_flags & IOCB_DONTCACHE) {
     __folio_set_dropbehind(folio);
+    }
 //
 // Protect against truncate / hole punch. Grabbing invalidate_lock
 // here assures we cannot instantiate and bring uptodate new
@@ -2435,112 +2732,123 @@ unsafe extern "C" fn filemap_create_folio(iocb: *mut kiocb, fbatch: *mut folio_b
     index = (iocb.ki_pos >> (PAGE_SHIFT + min_order)) << min_order;
     error = filemap_add_folio(mapping, folio, index,
     mapping_gfp_constraint(mapping, GFP_KERNEL));
-    if (error == -EEXIST)
+    if (error == -EEXIST) {
     error = AOP_TRUNCATED_PAGE;
-    if (error)
-    goto error;
+    }
+    if (error) {
+// goto;
+    }
     error = filemap_read_folio(iocb.ki_filp, mapping.a_ops.read_folio,
     folio);
-    if (error)
-    goto error;
+    if (error) {
+// goto;
+    }
     filemap_invalidate_unlock_shared(mapping);
     folio_batch_add(fbatch, folio);
     return 0;
-    error:
+// label;
     filemap_invalidate_unlock_shared(mapping);
     folio_put(folio);
     return error;
     }
-    static int filemap_readahead(struct kiocb *iocb, struct file *file,
-    struct address_space *mapping, struct folio *folio,
-    pgoff_t last_index)
-    {
-    DEFINE_READAHEAD(ractl, file, &file.f_ra, mapping, folio.index);
-    if (iocb.ki_flags & IOCB_NOIO)
+#[no_mangle]
+pub unsafe extern "C" fn filemap_readahead(iocb: *mut kiocb, file: *mut file, mapping: *mut address_space, folio: *mut folio, last_index: pgoff_t) -> c_int {
+pub static mut ractl: usize = 0;
+    if (iocb.ki_flags & IOCB_NOIO) {
     return -EAGAIN;
-    if (iocb.ki_flags & IOCB_DONTCACHE)
+    }
+    if (iocb.ki_flags & IOCB_DONTCACHE) {
     ractl.dropbehind = 1;
+    }
     page_cache_async_ra(&ractl, folio, last_index - folio.index);
     return 0;
     }
-    static int filemap_get_pages(struct kiocb *iocb, size_t count,
-    struct folio_batch *fbatch, bool need_uptodate)
-    {
-    struct file *filp = iocb.ki_filp;
-    struct address_space *mapping = filp.f_mapping;
-    let mut index: pgoff_t = iocb.ki_pos >> PAGE_SHIFT;
-    pgoff_t last_index;
-    struct folio *folio;
-    unsigned int flags;
-    let mut err: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn filemap_get_pages(iocb: *mut kiocb, count: size_t, fbatch: *mut folio_batch, need_uptodate: bool) -> c_int {
+    let mut filp = iocb.ki_filp;
+    let mut mapping = filp.f_mapping;
+pub static mut index: pgoff_t = 0;
+    let mut last_index;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+pub static mut err: c_int = 0;
 // "last_index" is the index of the folio beyond the end of the read
     last_index = round_up(iocb.ki_pos + count,
     mapping_min_folio_nrbytes(mapping)) >> PAGE_SHIFT;
-    retry:
-    if (fatal_signal_pending(current))
+// label;
+    if (fatal_signal_pending(current)) {
     return -EINTR;
+    }
     filemap_get_read_batch(mapping, index, last_index - 1, fbatch);
     if (!folio_batch_count(fbatch)) {
-    DEFINE_READAHEAD(ractl, filp, &filp.f_ra, mapping, index);
-    if (iocb.ki_flags & IOCB_NOIO)
+pub static mut ractl: usize = 0;
+    if (iocb.ki_flags & IOCB_NOIO) {
     return -EAGAIN;
-    if (iocb.ki_flags & IOCB_NOWAIT)
+    }
+    if (iocb.ki_flags & IOCB_NOWAIT) {
     flags = memalloc_noio_save();
-    if (iocb.ki_flags & IOCB_DONTCACHE)
+    }
+    if (iocb.ki_flags & IOCB_DONTCACHE) {
     ractl.dropbehind = 1;
+    }
     page_cache_sync_ra(&ractl, last_index - index);
-    if (iocb.ki_flags & IOCB_NOWAIT)
+    if (iocb.ki_flags & IOCB_NOWAIT) {
     memalloc_noio_restore(flags);
+    }
     filemap_get_read_batch(mapping, index, last_index - 1, fbatch);
     }
     if (!folio_batch_count(fbatch)) {
     err = filemap_create_folio(iocb, fbatch);
-    if (err == AOP_TRUNCATED_PAGE)
-    goto retry;
+    if (err == AOP_TRUNCATED_PAGE) {
+// goto;
+    }
     return err;
     }
     folio = fbatch.folios[folio_batch_count(fbatch) - 1];
     if (folio_test_readahead(folio)) {
     err = filemap_readahead(iocb, filp, mapping, folio, last_index);
-    if (err)
-    goto err;
+    if (err) {
+// goto;
+    }
     }
     if (!folio_test_uptodate(folio)) {
     if (folio_batch_count(fbatch) > 1) {
     err = -EAGAIN;
-    goto err;
+// goto;
     }
     err = filemap_update_page(iocb, mapping, count, folio,
     need_uptodate);
-    if (err)
-    goto err;
+    if (err) {
+// goto;
+    }
     }
     trace_mm_filemap_get_pages(mapping, index, last_index - 1);
     return 0;
-    err:
-    if (err < 0)
+// label;
+    if (err < 0) {
     folio_put(folio);
-    if (likely(--fbatch.nr))
+    }
+    if (likely(--fbatch.nr)) {
     return 0;
-    if (err == AOP_TRUNCATED_PAGE)
-    goto retry;
+    }
+    if (err == AOP_TRUNCATED_PAGE) {
+// goto;
+    }
     return err;
     }
 #[no_mangle]
 pub unsafe extern "C" fn pos_same_folio(pos1: loff_t, pos2: loff_t, folio: *mut folio) -> bool {
-    static inline bool pos_same_folio(loff_t pos1, loff_t pos2, struct folio *folio)
-    {
-    let mut shift: c_uint = folio_shift(folio);
+pub static mut shift: c_uint = 0;
     return (pos1 >> shift == pos2 >> shift);
     }
 #[no_mangle]
 unsafe extern "C" fn filemap_end_dropbehind_read(folio: *mut folio) {
-    static void filemap_end_dropbehind_read(struct folio *folio)
-    {
-    if (!folio_test_dropbehind(folio))
+    if (!folio_test_dropbehind(folio)) {
     return;
-    if (folio_test_writeback(folio) || folio_test_dirty(folio))
+    }
+    if (folio_test_writeback(folio) || folio_test_dirty(folio)) {
     return;
+    }
     if (folio_trylock(folio)) {
     filemap_end_dropbehind(folio);
     folio_unlock(folio);
@@ -2559,24 +2867,26 @@ unsafe extern "C" fn filemap_end_dropbehind_read(folio: *mut folio) {
 // the caller.  If an error happens before any bytes are copied, returns
 // a negative error number.
 //
-    ssize_t filemap_read(struct kiocb *iocb, struct iov_iter *iter,
-    ssize_t already_read)
-    {
-    struct file *filp = iocb.ki_filp;
-    struct file_ra_state *ra = &filp.f_ra;
-    struct address_space *mapping = filp.f_mapping;
-    struct inode *inode = mapping.host;
-    struct folio_batch fbatch;
+#[no_mangle]
+pub unsafe extern "C" fn filemap_read(iocb: *mut kiocb, iter: *mut iov_iter, already_read: ssize_t) -> ssize_t {
+    let mut filp = iocb.ki_filp;
+    let mut ra = &filp.f_ra;
+    let mut mapping = filp.f_mapping;
+    let mut inode = mapping.host;
+pub static mut fbatch: usize = 0;
     int i, error = 0;
-    bool writably_mapped;
+    let mut writably_mapped = 0;
     loff_t isize, end_offset;
-    let mut last_pos: loff_t = ra.prev_pos;
-    if (unlikely(iocb.ki_pos < 0))
+pub static mut last_pos: loff_t = 0;
+    if (unlikely(iocb.ki_pos < 0)) {
     return -EINVAL;
-    if (unlikely(iocb.ki_pos >= inode.i_sb.s_maxbytes))
+    }
+    if (unlikely(iocb.ki_pos >= inode.i_sb.s_maxbytes)) {
     return 0;
-    if (unlikely(!iov_iter_count(iter)))
+    }
+    if (unlikely(!iov_iter_count(iter))) {
     return 0;
+    }
     iov_iter_truncate(iter, inode.i_sb.s_maxbytes - iocb.ki_pos);
     folio_batch_init(&fbatch);
     do {
@@ -2586,13 +2896,16 @@ unsafe extern "C" fn filemap_end_dropbehind_read(folio: *mut folio) {
 // can no longer safely return -EIOCBQUEUED. Hence mark
 // an async read NOWAIT at that point.
 //
-    if ((iocb.ki_flags & IOCB_WAITQ) && already_read)
+    if ((iocb.ki_flags & IOCB_WAITQ) && already_read) {
     iocb.ki_flags |= IOCB_NOWAIT;
-    if (unlikely(iocb.ki_pos >= i_size_read(inode)))
+    }
+    if (unlikely(iocb.ki_pos >= i_size_read(inode))) {
     break;
+    }
     error = filemap_get_pages(iocb, iter.count, &fbatch, false);
-    if (error < 0)
+    if (error < 0) {
     break;
+    }
 //
 // i_size must be checked after we know the pages are Uptodate.
 //
@@ -2602,8 +2915,9 @@ unsafe extern "C" fn filemap_end_dropbehind_read(folio: *mut folio) {
 // another truncate extends the file - this is desired though).
 //
     isize = i_size_read(inode);
-    if (unlikely(iocb.ki_pos >= isize))
-    goto put_folios;
+    if (unlikely(iocb.ki_pos >= isize)) {
+// goto;
+    }
     end_offset = min_t(loff_t, isize, iocb.ki_pos + iter.count);
 //
 // Once we start copying data, we don't want to be touching any
@@ -2615,26 +2929,30 @@ unsafe extern "C" fn filemap_end_dropbehind_read(folio: *mut folio) {
 // mark it as accessed the first time.
 //
     if (!pos_same_folio(iocb.ki_pos, last_pos - 1,
-    fbatch.folios[0]))
+    fbatch.folios[0])) {
     folio_mark_accessed(fbatch.folios[0]);
-    for (i = 0; i < folio_batch_count(&fbatch); i++) {
-    struct folio *folio = fbatch.folios[i];
-    let mut fsize: usize = folio_size(folio);
-    let mut offset: usize = iocb.ki_pos & (fsize - 1);
+    }
+    while (i < folio_batch_count(&fbatch)) {
+    let mut folio = fbatch.folios[i];
+pub static mut fsize: usize = 0;
+pub static mut offset: usize = 0;
     size_t bytes = min_t(loff_t, end_offset - iocb.ki_pos,
     fsize - offset);
-    size_t copied;
-    if (end_offset < folio_pos(folio))
+    let mut copied = 0;
+    if (end_offset < folio_pos(folio)) {
     break;
-    if (i > 0)
+    }
+    if (i > 0) {
     folio_mark_accessed(folio);
+    }
 //
 // If users can be writing to this folio using arbitrary
 // virtual addresses, take care of potential aliasing
 // before reading the folio on the kernel side.
 //
-    if (writably_mapped)
+    if (writably_mapped) {
     flush_dcache_folio(folio);
+    }
     copied = copy_folio_to_iter(folio, offset, bytes, iter);
     already_read += copied;
     iocb.ki_pos += copied;
@@ -2644,9 +2962,9 @@ unsafe extern "C" fn filemap_end_dropbehind_read(folio: *mut folio) {
     break;
     }
     }
-    put_folios:
-    for (i = 0; i < folio_batch_count(&fbatch); i++) {
-    struct folio *folio = fbatch.folios[i];
+// label;
+    while (i < folio_batch_count(&fbatch)) {
+    let mut folio = fbatch.folios[i];
     filemap_end_dropbehind_read(folio);
     folio_put(folio);
     }
@@ -2659,31 +2977,31 @@ unsafe extern "C" fn filemap_end_dropbehind_read(folio: *mut folio) {
     EXPORT_SYMBOL_GPL(filemap_read);
 #[no_mangle]
 pub unsafe extern "C" fn kiocb_write_and_wait(iocb: *mut kiocb, count: usize) -> c_int {
-    int kiocb_write_and_wait(struct kiocb *iocb, size_t count)
-    {
-    struct address_space *mapping = iocb.ki_filp.f_mapping;
-    let mut pos: loff_t = iocb.ki_pos;
-    let mut end: loff_t = pos + count - 1;
+    let mut mapping = iocb.ki_filp.f_mapping;
+pub static mut pos: loff_t = 0;
+pub static mut end: loff_t = 0;
     if (iocb.ki_flags & IOCB_NOWAIT) {
-    if (filemap_range_needs_writeback(mapping, pos, end))
+    if (filemap_range_needs_writeback(mapping, pos, end)) {
     return -EAGAIN;
+    }
     return 0;
     }
     return filemap_write_and_wait_range(mapping, pos, end);
     }
     EXPORT_SYMBOL_GPL(kiocb_write_and_wait);
-    int filemap_invalidate_pages(struct address_space *mapping,
-    loff_t pos, loff_t end, bool nowait)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn filemap_invalidate_pages(mapping: *mut address_space, pos: loff_t, end: loff_t, nowait: bool) -> c_int {
+    let mut ret = 0;
     if (nowait) {
 // we could block if there are any pages in the range
-    if (filemap_range_has_page(mapping, pos, end))
+    if (filemap_range_has_page(mapping, pos, end)) {
     return -EAGAIN;
+    }
     } else {
     ret = filemap_write_and_wait_range(mapping, pos, end);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     }
 //
 // After a write we want buffered reads to be sure to go to disk to get
@@ -2696,9 +3014,7 @@ pub unsafe extern "C" fn kiocb_write_and_wait(iocb: *mut kiocb, count: usize) ->
     }
 #[no_mangle]
 pub unsafe extern "C" fn kiocb_invalidate_pages(iocb: *mut kiocb, count: usize) -> c_int {
-    int kiocb_invalidate_pages(struct kiocb *iocb, size_t count)
-    {
-    struct address_space *mapping = iocb.ki_filp.f_mapping;
+    let mut mapping = iocb.ki_filp.f_mapping;
     return filemap_invalidate_pages(mapping, iocb.ki_pos,
     iocb.ki_pos + count - 1,
     iocb.ki_flags & IOCB_NOWAIT);
@@ -2725,28 +3041,30 @@ pub unsafe extern "C" fn kiocb_invalidate_pages(iocb: *mut kiocb, count: usize) 
 // * number of bytes copied, even for partial reads
 // * negative error code (or 0 if IOCB_NOIO) if nothing was read
 //
-    ssize_t
-    generic_file_read_iter(struct kiocb *iocb, struct iov_iter *iter)
-    {
-    let mut count: usize = iov_iter_count(iter);
-    let mut retval: isize = 0;
-    if (!count)
+#[no_mangle]
+pub unsafe extern "C" fn generic_file_read_iter(iocb: *mut kiocb, iter: *mut iov_iter) -> ssize_t {
+pub static mut count: usize = 0;
+pub static mut retval: isize = 0;
+    if (!count) {
     return 0; /* skip atime */
+    }
     if (iocb.ki_flags & IOCB_DIRECT) {
-    struct file *file = iocb.ki_filp;
-    struct address_space *mapping = file.f_mapping;
-    struct inode *inode = mapping.host;
+    let mut file = iocb.ki_filp;
+    let mut mapping = file.f_mapping;
+    let mut inode = mapping.host;
     retval = kiocb_write_and_wait(iocb, count);
-    if (retval < 0)
+    if (retval < 0) {
     return retval;
+    }
     file_accessed(file);
     retval = mapping.a_ops.direct_IO(iocb, iter);
     if (retval >= 0) {
     iocb.ki_pos += retval;
     count -= retval;
     }
-    if (retval != -EIOCBQUEUED)
+    if (retval != -EIOCBQUEUED) {
     iov_iter_revert(iter, count - iov_iter_count(iter));
+    }
 //
 // Btrfs can have a short DIO read if we encounter
 // compressed extents, so if there was an error, or if
@@ -2756,10 +3074,12 @@ pub unsafe extern "C" fn kiocb_invalidate_pages(iocb: *mut kiocb, count: usize) 
 // the rest of the read.  Buffered reads will not work for
 // DAX files, so don't bother trying.
 //
-    if (retval < 0 || !count || IS_DAX(inode))
+    if (retval < 0 || !count || IS_DAX(inode)) {
     return retval;
-    if (iocb.ki_pos >= i_size_read(inode))
+    }
+    if (iocb.ki_pos >= i_size_read(inode)) {
     return retval;
+    }
     }
     return filemap_read(iocb, iter, retval);
     }
@@ -2767,26 +3087,25 @@ pub unsafe extern "C" fn kiocb_invalidate_pages(iocb: *mut kiocb, count: usize) 
 //
 // Splice subpages from a folio into a pipe.
 //
-    size_t splice_folio_into_pipe(struct pipe_inode_info *pipe,
-    struct folio *folio, loff_t fpos, size_t size)
-    {
-    struct page *page;
-    let mut spliced: usize = 0, offset = offset_in_folio(folio, fpos);
+#[no_mangle]
+pub unsafe extern "C" fn splice_folio_into_pipe(pipe: *mut pipe_inode_info, folio: *mut folio, fpos: loff_t, size: size_t) -> size_t {
+pub static mut page: *mut c_void = core::ptr::null_mut();
+pub static mut spliced: usize = 0;
     page = folio_page(folio, offset / PAGE_SIZE);
     size = min(size, folio_size(folio) - offset);
     offset %= PAGE_SIZE;
     while (spliced < size && !pipe_is_full(pipe)) {
-    struct pipe_buffer *buf = pipe_head_buf(pipe);
-    let mut part: usize = min_t(size_t, PAGE_SIZE - offset, size - spliced);
-// buf = (struct pipe_buffer) {
+    let mut buf = pipe_head_buf(pipe);
+pub static mut part: usize = 0;
+// buf = (pipe_buffer) {
     .ops	= &page_cache_pipe_buf_ops,
     .page	= page,
     .offset	= offset,
     .len	= part,
     };
     folio_get(folio);
-    pipe.head++;
-    page++;
+    pipe.head += 1;
+    page += 1;
     spliced += part;
     offset = 0;
     }
@@ -2811,18 +3130,17 @@ pub unsafe extern "C" fn kiocb_invalidate_pages(iocb: *mut kiocb, count: usize) 
 // if the pipe has insufficient space, we reach the end of the data or we hit a
 // hole.
 //
-    ssize_t filemap_splice_read(struct file *in, loff_t *ppos,
-    struct pipe_inode_info *pipe,
-    size_t len, unsigned int flags)
-    {
-    struct folio_batch fbatch;
-    struct kiocb iocb;
-    let mut total_spliced: usize = 0, used, npages;
+#[no_mangle]
+pub unsafe extern "C" fn filemap_splice_read(in: *mut file, ppos: *mut loff_t, pipe: *mut pipe_inode_info, len: size_t, flags: c_uint) -> ssize_t {
+pub static mut fbatch: usize = 0;
+pub static mut iocb: usize = 0;
+pub static mut total_spliced: usize = 0;
     loff_t isize, end_offset;
-    bool writably_mapped;
+    let mut writably_mapped = 0;
     int i, error = 0;
-    if (unlikely(*ppos >= in.f_mapping.host.i_sb.s_maxbytes))
+    if (unlikely(*ppos >= in.f_mapping.host.i_sb.s_maxbytes)) {
     return 0;
+    }
     init_sync_kiocb(&iocb, in);
     iocb.ki_pos = *ppos;
 // Work out how much data we can actually add into the pipe
@@ -2832,12 +3150,14 @@ pub unsafe extern "C" fn kiocb_invalidate_pages(iocb: *mut kiocb, count: usize) 
     folio_batch_init(&fbatch);
     do {
     cond_resched();
-    if (*ppos >= i_size_read(in.f_mapping.host))
+    if (*ppos >= i_size_read(in.f_mapping.host)) {
     break;
+    }
     iocb.ki_pos = *ppos;
     error = filemap_get_pages(&iocb, len, &fbatch, true);
-    if (error < 0)
+    if (error < 0) {
     break;
+    }
 //
 // i_size must be checked after we know the pages are Uptodate.
 //
@@ -2847,80 +3167,86 @@ pub unsafe extern "C" fn kiocb_invalidate_pages(iocb: *mut kiocb, count: usize) 
 // another truncate extends the file - this is desired though).
 //
     isize = i_size_read(in.f_mapping.host);
-    if (unlikely(*ppos >= isize))
+    if (unlikely(*ppos >= isize)) {
     break;
+    }
     end_offset = min_t(loff_t, isize, *ppos + len);
 //
 // Once we start copying data, we don't want to be touching any
 // cachelines that might be contended:
 //
     writably_mapped = mapping_writably_mapped(in.f_mapping);
-    for (i = 0; i < folio_batch_count(&fbatch); i++) {
-    struct folio *folio = fbatch.folios[i];
-    size_t n;
-    if (folio_pos(folio) >= end_offset)
-    goto out;
+    while (i < folio_batch_count(&fbatch)) {
+    let mut folio = fbatch.folios[i];
+    let mut n = 0;
+    if (folio_pos(folio) >= end_offset) {
+// goto;
+    }
     folio_mark_accessed(folio);
 //
 // If users can be writing to this folio using arbitrary
 // virtual addresses, take care of potential aliasing
 // before reading the folio on the kernel side.
 //
-    if (writably_mapped)
+    if (writably_mapped) {
     flush_dcache_folio(folio);
+    }
     n = min_t(loff_t, len, isize - *ppos);
     n = splice_folio_into_pipe(pipe, folio, *ppos, n);
-    if (!n)
-    goto out;
+    if (!n) {
+// goto;
+    }
     len -= n;
     total_spliced += n;
 // ppos += n;
     in.f_ra.prev_pos = *ppos;
-    if (pipe_is_full(pipe))
-    goto out;
+    if (pipe_is_full(pipe)) {
+// goto;
+    }
     }
     folio_batch_release(&fbatch);
     } while (len);
-    out:
+// label;
     folio_batch_release(&fbatch);
     file_accessed(in);
     return total_spliced ? total_spliced : error;
     }
     EXPORT_SYMBOL(filemap_splice_read);
-    static inline loff_t folio_seek_hole_data(struct xa_state *xas,
-    struct address_space *mapping, struct folio *folio,
-    loff_t start, loff_t end, bool seek_data)
-    {
-    const struct address_space_operations *ops = mapping.a_ops;
+#[no_mangle]
+pub unsafe extern "C" fn folio_seek_hole_data(xas: *mut xa_state, mapping: *mut address_space, folio: *mut folio, start: loff_t, end: loff_t, seek_data: bool) -> loff_t {
+    let mut ops = mapping.a_ops;
     size_t offset, bsz = i_blocksize(mapping.host);
-    if (xa_is_value(folio) || folio_test_uptodate(folio))
+    if (xa_is_value(folio) || folio_test_uptodate(folio)) {
     return seek_data ? start : end;
-    if (!ops.is_partially_uptodate)
+    }
+    if (!ops.is_partially_uptodate) {
     return seek_data ? end : start;
+    }
     xas_pause(xas);
     rcu_read_unlock();
     folio_lock(folio);
-    if (unlikely(folio.mapping != mapping))
-    goto unlock;
+    if (unlikely(folio.mapping != mapping)) {
+// goto;
+    }
     offset = offset_in_folio(folio, start) & ~(bsz - 1);
     do {
     if (ops.is_partially_uptodate(folio, offset, bsz) ==
-    seek_data)
+    seek_data) {
     break;
+    }
     start = (start + bsz) & ~((u64)bsz - 1);
     offset += bsz;
     } while (offset < folio_size(folio));
-    unlock:
+// label;
     folio_unlock(folio);
     rcu_read_lock();
     return start;
     }
 #[no_mangle]
 pub unsafe extern "C" fn seek_folio_size(xas: *mut xa_state, folio: *mut folio) -> usize {
-    static inline size_t seek_folio_size(struct xa_state *xas, struct folio *folio)
-    {
-    if (xa_is_value(folio))
+    if (xa_is_value(folio)) {
     return PAGE_SIZE << xas_get_order(xas);
+    }
     return folio_size(folio);
     }
 //
@@ -2941,50 +3267,60 @@ pub unsafe extern "C" fn seek_folio_size(xas: *mut xa_state, folio: *mut folio) 
 // after @end - 1, so SEEK_HOLE returns @end if all the bytes between @start
 // and @end contain data.
 //
-    loff_t mapping_seek_hole_data(struct address_space *mapping, loff_t start,
-    loff_t end, int whence)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn mapping_seek_hole_data(mapping: *mut address_space, start: loff_t, end: loff_t, whence: c_int) -> loff_t {
     XA_STATE(xas, &mapping.i_pages, start >> PAGE_SHIFT);
-    let mut max: pgoff_t = (end - 1) >> PAGE_SHIFT;
-    let mut seek_data: bool = (whence == SEEK_DATA);
-    struct folio *folio;
-    if (end <= start)
+pub static mut max: pgoff_t = 0;
+pub static mut seek_data: bool = false;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    if (end <= start) {
     return -ENXIO;
+    }
     rcu_read_lock();
     while ((folio = find_get_entry(&xas, max, XA_PRESENT))) {
-    let mut pos: loff_t = (u64)xas.xa_index << PAGE_SHIFT;
-    size_t seek_size;
-    u64 next;
+pub static mut pos: loff_t = 0;
+    let mut seek_size = 0;
+    let mut next = 0;
     if (start < pos) {
-    if (!seek_data)
-    goto unlock;
+    if (!seek_data) {
+// goto;
+    }
     start = pos;
     }
     seek_size = seek_folio_size(&xas, folio);
     next = round_up((u64)pos + 1, seek_size);
-    if (next > (u64)end)
+    if (next > (u64)end) {
     pos = end;
-    else
+    }
+    else {
     pos = next;
+    }
     start = folio_seek_hole_data(&xas, mapping, folio, start, pos,
     seek_data);
-    if (start < pos)
-    goto unlock;
-    if (start >= end)
+    if (start < pos) {
+// goto;
+    }
+    if (start >= end) {
     break;
-    if (seek_size > PAGE_SIZE)
+    }
+    if (seek_size > PAGE_SIZE) {
     xas_set(&xas, pos >> PAGE_SHIFT);
-    if (!xa_is_value(folio))
+    }
+    if (!xa_is_value(folio)) {
     folio_put(folio);
     }
-    if (seek_data)
+    }
+    if (seek_data) {
     start = -ENXIO;
-    unlock:
+    }
+// label;
     rcu_read_unlock();
-    if (folio && !xa_is_value(folio))
+    if (folio && !xa_is_value(folio)) {
     folio_put(folio);
-    if (start > end)
+    }
+    if (start > end) {
     return end;
+    }
     return start;
     }
 
@@ -3000,18 +3336,19 @@ pub unsafe extern "C" fn seek_folio_size(xas: *mut xa_state, folio: *mut folio) 
 // to drop the mmap_lock then fpin will point to the pinned file and
 // needs to be fput()'ed at a later point.
 //
-    static int lock_folio_maybe_drop_mmap(struct vm_fault *vmf, struct folio *folio,
-    struct file **fpin)
-    {
-    if (folio_trylock(folio))
+#[no_mangle]
+pub unsafe extern "C" fn lock_folio_maybe_drop_mmap(vmf: *mut vm_fault, folio: *mut folio, fpin: *mut *mut file) -> c_int {
+    if (folio_trylock(folio)) {
     return 1;
+    }
 //
 // NOTE! This will make us return with VM_FAULT_RETRY, but with
 // the fault lock still held. That's how FAULT_FLAG_RETRY_NOWAIT
 // is supposed to work. We have way too many special cases..
 //
-    if (vmf.flags & FAULT_FLAG_RETRY_NOWAIT)
+    if (vmf.flags & FAULT_FLAG_RETRY_NOWAIT) {
     return 0;
+    }
 // fpin = maybe_unlock_mmap_for_io(vmf, *fpin);
     if (vmf.flags & FAULT_FLAG_KILLABLE) {
     if (__folio_lock_killable(folio)) {
@@ -3022,12 +3359,14 @@ pub unsafe extern "C" fn seek_folio_size(xas: *mut xa_state, folio: *mut folio) 
 // so we need to drop the fault lock here and
 // return 0 if we don't have a fpin.
 //
-    if (*fpin == core::ptr::null_mut())
+    if (*fpin == core::ptr::null_mut()) {
     release_fault_lock(vmf);
+    }
     return 0;
     }
-    } else
+    } else {
     __folio_lock(folio);
+    }
     return 1;
     }
 //
@@ -3037,19 +3376,19 @@ pub unsafe extern "C" fn seek_folio_size(xas: *mut xa_state, folio: *mut folio) 
 // that.  If we didn't pin a file then we return NULL.  The file that is
 // returned needs to be fput()'ed when we're done with it.
 //
-    static struct file *do_sync_mmap_readahead(struct vm_fault *vmf)
-    {
-    struct file *file = vmf.vma.vm_file;
-    struct file_ra_state *ra = &file.f_ra;
-    struct address_space *mapping = file.f_mapping;
-    DEFINE_READAHEAD(ractl, file, ra, mapping, vmf.pgoff);
-    struct file *fpin = core::ptr::null_mut();
-    let mut vm_flags: vm_flags_t = vmf.vma.vm_flags;
-    let mut force_thp_readahead: bool = false;
-    let mut thp_order: c_uint = 0;
-    unsigned short mmap_miss;
+#[no_mangle]
+pub unsafe extern "C" fn do_sync_mmap_readahead(vmf: *mut vm_fault) -> *mut c_void {
+    let mut file = vmf.vma.vm_file;
+    let mut ra = &file.f_ra;
+    let mut mapping = file.f_mapping;
+pub static mut ractl: usize = 0;
+    let mut fpin = core::ptr::null_mut();
+pub static mut vm_flags: vm_flags_t = 0;
+pub static mut force_thp_readahead: bool = false;
+pub static mut thp_order: c_uint = 0;
+    let mut mmap_miss = 0;
 // Use the readahead code, even if readahead is disabled
-    if (IS_ENABLED(CONFIG_TRANSPARENT_HUGEPAGE) && (vm_flags & VM_HUGEPAGE)) {
+    if (IS_ENABLED!(CONFIG_TRANSPARENT_HUGEPAGE) && (vm_flags & VM_HUGEPAGE)) {
 //
 // Cap max THP order at 2MB: this is the common PMD-sized
 // hugepage size, and it avoids memory pressure from very
@@ -3068,10 +3407,12 @@ pub unsafe extern "C" fn seek_folio_size(xas: *mut xa_state, folio: *mut folio) 
 // If we don't want any read-ahead, don't bother.
 // VM_EXEC case below is already intended for random access.
 //
-    if ((vm_flags & (VM_RAND_READ | VM_EXEC)) == VM_RAND_READ)
+    if ((vm_flags & (VM_RAND_READ | VM_EXEC)) == VM_RAND_READ) {
     return fpin;
-    if (!ra.ra_pages)
+    }
+    if (!ra.ra_pages) {
     return fpin;
+    }
     if (vm_flags & VM_SEQ_READ) {
     fpin = maybe_unlock_mmap_for_io(vmf, fpin);
     page_cache_sync_ra(&ractl, ra.ra_pages);
@@ -3081,17 +3422,19 @@ pub unsafe extern "C" fn seek_folio_size(xas: *mut xa_state, folio: *mut folio) 
     if (!(vm_flags & (VM_SEQ_READ | VM_EXEC))) {
 // Avoid banging the cache line if not needed
     mmap_miss = READ_ONCE(ra.mmap_miss);
-    if (mmap_miss < MMAP_LOTSAMISS * 10)
+    if (mmap_miss < MMAP_LOTSAMISS * 10) {
     WRITE_ONCE(ra.mmap_miss, ++mmap_miss);
+    }
 //
 // Do we miss much more than hit in this file? If so,
 // stop bothering with read-ahead. It will only hurt.
 //
-    if (mmap_miss > MMAP_LOTSAMISS)
+    if (mmap_miss > MMAP_LOTSAMISS) {
     return fpin;
     }
+    }
     if (force_thp_readahead) {
-    let mut folio_nr_pages: c_ulong = 1UL << thp_order;
+pub static mut folio_nr_pages: c_ulong = 0;
     fpin = maybe_unlock_mmap_for_io(vmf, fpin);
     ractl._index &= ~(folio_nr_pages - 1);
     ra.size = folio_nr_pages;
@@ -3099,8 +3442,9 @@ pub unsafe extern "C" fn seek_folio_size(xas: *mut xa_state, folio: *mut folio) 
 // Fetch two folios so we get the chance to actually
 // readahead, unless we've been told not to.
 //
-    if (!(vm_flags & VM_RAND_READ))
+    if (!(vm_flags & VM_RAND_READ)) {
     ra.size *= 2;
+    }
     ra.async_size = folio_nr_pages;
     ra.order = thp_order;
     page_cache_ra_order(&ractl, ra);
@@ -3118,10 +3462,10 @@ pub unsafe extern "C" fn seek_folio_size(xas: *mut xa_state, folio: *mut folio) 
 // pad that might exist between sections, which would be a waste
 // of memory.
 //
-    struct vm_area_struct *vma = vmf.vma;
-    let mut start: c_ulong = vma_start_pgoff(vma);
-    let mut end: c_ulong = vma_end_pgoff(vma);
-    unsigned long ra_end;
+    let mut vma = vmf.vma;
+pub static mut start: c_ulong = 0;
+pub static mut end: c_ulong = 0;
+    let mut ra_end = 0;
     ra.order = exec_folio_order();
     ra.start = round_down(vmf.pgoff, 1UL << ra.order);
     ra.start = max(ra.start, start);
@@ -3148,17 +3492,17 @@ pub unsafe extern "C" fn seek_folio_size(xas: *mut xa_state, folio: *mut folio) 
 // so we want to possibly extend the readahead further.  We return the file that
 // was pinned if we have to drop the mmap_lock in order to do IO.
 //
-    static struct file *do_async_mmap_readahead(struct vm_fault *vmf,
-    struct folio *folio)
-    {
-    struct file *file = vmf.vma.vm_file;
-    struct file_ra_state *ra = &file.f_ra;
-    DEFINE_READAHEAD(ractl, file, ra, file.f_mapping, vmf.pgoff);
-    struct file *fpin = core::ptr::null_mut();
-    unsigned short mmap_miss;
+#[no_mangle]
+pub unsafe extern "C" fn do_async_mmap_readahead(vmf: *mut vm_fault, folio: *mut folio) -> *mut c_void {
+    let mut file = vmf.vma.vm_file;
+    let mut ra = &file.f_ra;
+pub static mut ractl: usize = 0;
+    let mut fpin = core::ptr::null_mut();
+    let mut mmap_miss = 0;
 // If we don't want any read-ahead, don't bother
-    if (vmf.vma.vm_flags & VM_RAND_READ || !ra.ra_pages)
+    if (vmf.vma.vm_flags & VM_RAND_READ || !ra.ra_pages) {
     return fpin;
+    }
 //
 // If the folio is locked, we're likely racing against another fault.
 // Don't touch the mmap_miss counter to avoid decreasing it multiple
@@ -3172,8 +3516,9 @@ pub unsafe extern "C" fn seek_folio_size(xas: *mut xa_state, folio: *mut folio) 
     if (likely(!folio_test_locked(folio)) &&
     !(vmf.vma.vm_flags & (VM_SEQ_READ | VM_EXEC))) {
     mmap_miss = READ_ONCE(ra.mmap_miss);
-    if (mmap_miss)
+    if (mmap_miss) {
     WRITE_ONCE(ra.mmap_miss, --mmap_miss);
+    }
     }
     if (folio_test_readahead(folio)) {
     fpin = maybe_unlock_mmap_for_io(vmf, fpin);
@@ -3183,11 +3528,9 @@ pub unsafe extern "C" fn seek_folio_size(xas: *mut xa_state, folio: *mut folio) 
     }
 #[no_mangle]
 unsafe extern "C" fn filemap_fault_recheck_pte_none(vmf: *mut vm_fault) -> vm_fault_t {
-    static vm_fault_t filemap_fault_recheck_pte_none(struct vm_fault *vmf)
-    {
-    struct vm_area_struct *vma = vmf.vma;
-    let mut ret: vm_fault_t = 0;
-    pte_t *ptep;
+    let mut vma = vmf.vma;
+pub static mut ret: vm_fault_t = 0;
+pub static mut ptep: *mut c_void = core::ptr::null_mut();
 //
 // We might have COW'ed a pagecache folio and might now have an mlocked
 // anon folio mapped. The original pagecache folio is not mlocked and
@@ -3202,20 +3545,24 @@ unsafe extern "C" fn filemap_fault_recheck_pte_none(vmf: *mut vm_fault) -> vm_fa
 // scenarios. Recheck the PTE without PT lock firstly, thereby reducing
 // the number of times we hold PT lock.
 //
-    if (!(vma.vm_flags & VM_LOCKED))
+    if (!(vma.vm_flags & VM_LOCKED)) {
     return 0;
-    if (!(vmf.flags & FAULT_FLAG_ORIG_PTE_VALID))
+    }
+    if (!(vmf.flags & FAULT_FLAG_ORIG_PTE_VALID)) {
     return 0;
+    }
     ptep = pte_offset_map_ro_nolock(vma.vm_mm, vmf.pmd, vmf.address,
     &vmf.ptl);
-    if (unlikely(!ptep))
+    if (unlikely(!ptep)) {
     return VM_FAULT_NOPAGE;
+    }
     if (unlikely(!pte_none(ptep_get_lockless(ptep)))) {
     ret = VM_FAULT_NOPAGE;
     } else {
     spin_lock(vmf.ptl);
-    if (unlikely(!pte_none(ptep_get(ptep))))
+    if (unlikely(!pte_none(ptep_get(ptep)))) {
     ret = VM_FAULT_NOPAGE;
+    }
     spin_unlock(vmf.ptl);
     }
     pte_unmap(ptep);
@@ -3223,7 +3570,7 @@ unsafe extern "C" fn filemap_fault_recheck_pte_none(vmf: *mut vm_fault) -> vm_fa
     }
 //
 // filemap_fault - read in file data for page fault handling
-// @vmf:	struct vm_fault containing details of the fault
+// @vmf: vm_fault containing details of the fault
 //
 // filemap_fault() is invoked via the vma operations vector for a
 // mapped memory region to read in file data during a page fault.
@@ -3246,20 +3593,19 @@ unsafe extern "C" fn filemap_fault_recheck_pte_none(vmf: *mut vm_fault) -> vm_fa
 //
 #[no_mangle]
 pub unsafe extern "C" fn filemap_fault(vmf: *mut vm_fault) -> vm_fault_t {
-    vm_fault_t filemap_fault(struct vm_fault *vmf)
-    {
-    int error;
-    struct file *file = vmf.vma.vm_file;
-    struct file *fpin = core::ptr::null_mut();
-    struct address_space *mapping = file.f_mapping;
-    struct inode *inode = mapping.host;
+    let mut error = 0;
+    let mut file = vmf.vma.vm_file;
+    let mut fpin = core::ptr::null_mut();
+    let mut mapping = file.f_mapping;
+    let mut inode = mapping.host;
     pgoff_t max_idx, index = vmf.pgoff;
-    struct folio *folio;
-    let mut ret: vm_fault_t = 0;
-    let mut mapping_locked: bool = false;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut ret: vm_fault_t = 0;
+pub static mut mapping_locked: bool = false;
     max_idx = DIV_ROUND_UP(i_size_read(inode), PAGE_SIZE);
-    if (unlikely(index >= max_idx))
+    if (unlikely(index >= max_idx)) {
     return VM_FAULT_SIGBUS;
+    }
     trace_mm_filemap_fault(mapping, index);
 //
 // Do we have something in the page cache already?
@@ -3270,22 +3616,24 @@ pub unsafe extern "C" fn filemap_fault(vmf: *mut vm_fault) -> vm_fault_t {
 // We found the page, so try async readahead before waiting for
 // the lock.
 //
-    if (!(vmf.flags & FAULT_FLAG_TRIED))
+    if (!(vmf.flags & FAULT_FLAG_TRIED)) {
     fpin = do_async_mmap_readahead(vmf, folio);
+    }
     if (unlikely(!folio_test_uptodate(folio))) {
     filemap_invalidate_lock_shared(mapping);
     mapping_locked = true;
     }
     } else {
     ret = filemap_fault_recheck_pte_none(vmf);
-    if (unlikely(ret))
+    if (unlikely(ret)) {
     return ret;
+    }
 // No page in the page cache at all
     count_vm_event(PGMAJFAULT);
     count_memcg_event_mm(vmf.vma.vm_mm, PGMAJFAULT);
     ret = VM_FAULT_MAJOR;
     fpin = do_sync_mmap_readahead(vmf);
-    retry_find:
+// label;
 //
 // See comment in filemap_create_folio() why we need
 // invalidate_lock
@@ -3298,19 +3646,21 @@ pub unsafe extern "C" fn filemap_fault(vmf: *mut vm_fault) -> vm_fault_t {
     FGP_CREAT|FGP_FOR_MMAP,
     vmf.gfp_mask);
     if (IS_ERR(folio)) {
-    if (fpin)
-    goto out_retry;
+    if (fpin) {
+// goto;
+    }
     filemap_invalidate_unlock_shared(mapping);
     return VM_FAULT_OOM;
     }
     }
-    if (!lock_folio_maybe_drop_mmap(vmf, folio, &fpin))
-    goto out_retry;
+    if (!lock_folio_maybe_drop_mmap(vmf, folio, &fpin)) {
+// goto;
+    }
 // Did it get truncated?
     if (unlikely(folio.mapping != mapping)) {
     folio_unlock(folio);
     folio_put(folio);
-    goto retry_find;
+// goto;
     }
     VM_BUG_ON_FOLIO(!folio_contains(folio, index), folio);
 //
@@ -3328,14 +3678,14 @@ pub unsafe extern "C" fn filemap_fault(vmf: *mut vm_fault) -> vm_fault_t {
     if (!mapping_locked) {
     folio_unlock(folio);
     folio_put(folio);
-    goto retry_find;
+// goto;
     }
 //
 // OK, the folio is really not uptodate. This can be because the
 // VMA has the VM_RAND_READ flag set, or because an error
 // arose. Let's read it in directly.
 //
-    goto page_not_uptodate;
+// goto;
     }
 //
 // We've made it this far and we had to drop our mmap_lock, now is the
@@ -3344,10 +3694,11 @@ pub unsafe extern "C" fn filemap_fault(vmf: *mut vm_fault) -> vm_fault_t {
 //
     if (fpin) {
     folio_unlock(folio);
-    goto out_retry;
+// goto;
     }
-    if (mapping_locked)
+    if (mapping_locked) {
     filemap_invalidate_unlock_shared(mapping);
+    }
 //
 // Found the page and have a reference on it.
 // We must recheck i_size under page lock.
@@ -3360,7 +3711,7 @@ pub unsafe extern "C" fn filemap_fault(vmf: *mut vm_fault) -> vm_fault_t {
     }
     vmf.page = folio_file_page(folio, index);
     return ret | VM_FAULT_LOCKED;
-    page_not_uptodate:
+// label;
 //
 // Umm, take care of errors if the page isn't up-to-date.
 // Try to re-read it _once_. We do this synchronously,
@@ -3369,32 +3720,36 @@ pub unsafe extern "C" fn filemap_fault(vmf: *mut vm_fault) -> vm_fault_t {
 //
     fpin = maybe_unlock_mmap_for_io(vmf, fpin);
     error = filemap_read_folio(file, mapping.a_ops.read_folio, folio);
-    if (fpin)
-    goto out_retry;
+    if (fpin) {
+// goto;
+    }
     folio_put(folio);
-    if (!error || error == AOP_TRUNCATED_PAGE)
-    goto retry_find;
+    if (!error || error == AOP_TRUNCATED_PAGE) {
+// goto;
+    }
     filemap_invalidate_unlock_shared(mapping);
     return VM_FAULT_SIGBUS;
-    out_retry:
+// label;
 //
 // We dropped the mmap_lock, we need to return to the fault handler to
 // re-find the vma and come back and find our hopefully still populated
 // page.
 //
-    if (!IS_ERR(folio))
+    if (!IS_ERR(folio)) {
     folio_put(folio);
-    if (mapping_locked)
+    }
+    if (mapping_locked) {
     filemap_invalidate_unlock_shared(mapping);
-    if (fpin)
+    }
+    if (fpin) {
     fput(fpin);
+    }
     return ret | VM_FAULT_RETRY;
     }
     EXPORT_SYMBOL(filemap_fault);
-    static bool filemap_map_pmd(struct vm_fault *vmf, struct folio *folio,
-    pgoff_t start)
-    {
-    struct mm_struct *mm = vmf.vma.vm_mm;
+#[no_mangle]
+pub unsafe extern "C" fn filemap_map_pmd(vmf: *mut vm_fault, folio: *mut folio, start: pgoff_t) -> bool {
+    let mut mm = vmf.vma.vm_mm;
 // Huge page is mapped? No need to proceed.
     if (pmd_trans_huge(*vmf.pmd)) {
     folio_unlock(folio);
@@ -3402,52 +3757,63 @@ pub unsafe extern "C" fn filemap_fault(vmf: *mut vm_fault) -> vm_fault_t {
     return true;
     }
     if (pmd_none(*vmf.pmd) && folio_test_pmd_mappable(folio)) {
-    struct page *page = folio_file_page(folio, start);
-    let mut ret: vm_fault_t = do_set_pmd(vmf, folio, page);
+    let mut page = folio_file_page(folio, start);
+pub static mut ret: vm_fault_t = 0;
     if (!ret) {
 // The page is mapped successfully, reference consumed.
     folio_unlock(folio);
     return true;
     }
     }
-    if (pmd_none(*vmf.pmd) && vmf.prealloc_pte)
+    if (pmd_none(*vmf.pmd) && vmf.prealloc_pte) {
     pmd_install(mm, vmf.pmd, &vmf.prealloc_pte);
+    }
     return false;
     }
-    static struct folio *next_uptodate_folio(struct xa_state *xas,
-    struct address_space *mapping, pgoff_t end_pgoff)
-    {
-    struct folio *folio = xas_next_entry(xas, end_pgoff);
-    unsigned long max_idx;
+#[no_mangle]
+pub unsafe extern "C" fn next_uptodate_folio(xas: *mut xa_state, mapping: *mut address_space, end_pgoff: pgoff_t) -> *mut c_void {
+    let mut folio = xas_next_entry(xas, end_pgoff);
+    let mut max_idx = 0;
     do {
-    if (!folio)
+    if (!folio) {
     return core::ptr::null_mut();
-    if (xas_retry(xas, folio))
+    }
+    if (xas_retry(xas, folio)) {
     continue;
-    if (xa_is_value(folio))
+    }
+    if (xa_is_value(folio)) {
     continue;
-    if (!folio_try_get(folio))
+    }
+    if (!folio_try_get(folio)) {
     continue;
-    if (folio_test_locked(folio))
-    goto skip;
+    }
+    if (folio_test_locked(folio)) {
+// goto;
+    }
 // Has the page moved or been split?
-    if (unlikely(folio != xas_reload(xas)))
-    goto skip;
-    if (!folio_test_uptodate(folio) || folio_test_readahead(folio))
-    goto skip;
-    if (!folio_trylock(folio))
-    goto skip;
-    if (folio.mapping != mapping)
-    goto unlock;
-    if (!folio_test_uptodate(folio))
-    goto unlock;
+    if (unlikely(folio != xas_reload(xas))) {
+// goto;
+    }
+    if (!folio_test_uptodate(folio) || folio_test_readahead(folio)) {
+// goto;
+    }
+    if (!folio_trylock(folio)) {
+// goto;
+    }
+    if (folio.mapping != mapping) {
+// goto;
+    }
+    if (!folio_test_uptodate(folio)) {
+// goto;
+    }
     max_idx = DIV_ROUND_UP(i_size_read(mapping.host), PAGE_SIZE);
-    if (xas.xa_index >= max_idx)
-    goto unlock;
+    if (xas.xa_index >= max_idx) {
+// goto;
+    }
     return folio;
-    unlock:
+// label;
     folio_unlock(folio);
-    skip:
+// label;
     folio_put(folio);
     } while ((folio = xas_next_entry(xas, end_pgoff)) != core::ptr::null_mut());
     return core::ptr::null_mut();
@@ -3456,18 +3822,17 @@ pub unsafe extern "C" fn filemap_fault(vmf: *mut vm_fault) -> vm_fault_t {
 // Map page range [start_page, start_page + nr_pages) of folio.
 // start_page is gotten from start by folio_page(folio, start)
 //
-    static vm_fault_t filemap_map_folio_range(struct vm_fault *vmf,
-    struct folio *folio, unsigned long start,
+    static vm_fault_t filemap_map_folio_range(vm_fault *vmf, folio *folio, unsigned long start,
     unsigned long addr, unsigned int nr_pages,
     unsigned long *rss, pgoff_t file_end)
     {
-    struct address_space *mapping = folio.mapping;
-    let mut ref_from_caller: c_uint = 1;
-    let mut ret: vm_fault_t = 0;
-    struct page *page = folio_page(folio, start);
-    let mut count: c_uint = 0;
-    pte_t *old_ptep = vmf.pte;
-    unsigned long addr0;
+    let mut mapping = folio.mapping;
+pub static mut ref_from_caller: c_uint = 1;
+pub static mut ret: vm_fault_t = 0;
+    let mut page = folio_page(folio, start);
+pub static mut count: c_uint = 0;
+    let mut old_ptep = vmf.pte;
+    let mut addr0 = 0;
 //
 // Map the large folio fully where possible:
 //
@@ -3486,27 +3851,30 @@ pub unsafe extern "C" fn filemap_fault(vmf: *mut vm_fault) -> vm_fault_t {
     nr_pages = folio_nr_pages(folio);
     }
     do {
-    if (PageHWPoison(page + count))
-    goto skip;
+    if (PageHWPoison(page + count)) {
+// goto;
+    }
 //
 // NOTE: If there're PTE markers, we'll leave them to be
 // handled in the specific fault path, and it'll prohibit the
 // fault-around logic.
 //
-    if (!pte_none(ptep_get(&vmf.pte[count])))
-    goto skip;
-    count++;
+    if (!pte_none(ptep_get(&vmf.pte[count]))) {
+// goto;
+    }
+    count += 1;
     continue;
-    skip:
+// label;
     if (count) {
     set_pte_range(vmf, folio, page, count, addr);
 // rss += count;
     folio_ref_add(folio, count - ref_from_caller);
     ref_from_caller = 0;
-    if (in_range(vmf.address, addr, count * PAGE_SIZE))
+    if (in_range(vmf.address, addr, count * PAGE_SIZE)) {
     ret = VM_FAULT_NOPAGE;
     }
-    count++;
+    }
+    count += 1;
     page += count;
     vmf.pte += count;
     addr += count * PAGE_SIZE;
@@ -3517,53 +3885,57 @@ pub unsafe extern "C" fn filemap_fault(vmf: *mut vm_fault) -> vm_fault_t {
 // rss += count;
     folio_ref_add(folio, count - ref_from_caller);
     ref_from_caller = 0;
-    if (in_range(vmf.address, addr, count * PAGE_SIZE))
+    if (in_range(vmf.address, addr, count * PAGE_SIZE)) {
     ret = VM_FAULT_NOPAGE;
     }
+    }
     vmf.pte = old_ptep;
-    if (ref_from_caller)
+    if (ref_from_caller) {
 // Locked folios cannot get truncated.
     folio_ref_dec(folio);
+    }
     return ret;
     }
-    static vm_fault_t filemap_map_order0_folio(struct vm_fault *vmf,
-    struct folio *folio, unsigned long addr,
+    static vm_fault_t filemap_map_order0_folio(vm_fault *vmf, folio *folio, unsigned long addr,
     unsigned long *rss)
     {
-    let mut ret: vm_fault_t = 0;
-    struct page *page = &folio.page;
-    if (PageHWPoison(page))
-    goto out;
+pub static mut ret: vm_fault_t = 0;
+    let mut page = &folio.page;
+    if (PageHWPoison(page)) {
+// goto;
+    }
 //
 // NOTE: If there're PTE markers, we'll leave them to be
 // handled in the specific fault path, and it'll prohibit
 // the fault-around logic.
 //
-    if (!pte_none(ptep_get(vmf.pte)))
-    goto out;
-    if (vmf.address == addr)
+    if (!pte_none(ptep_get(vmf.pte))) {
+// goto;
+    }
+    if (vmf.address == addr) {
     ret = VM_FAULT_NOPAGE;
+    }
     set_pte_range(vmf, folio, page, 1, addr);
     (*rss)++;
     return ret;
-    out:
+// label;
 // Locked folios cannot get truncated.
     folio_ref_dec(folio);
     return ret;
     }
-    vm_fault_t filemap_map_pages(struct vm_fault *vmf,
+    vm_fault_t filemap_map_pages(vm_fault *vmf,
     pgoff_t start_pgoff, pgoff_t end_pgoff)
     {
-    struct vm_area_struct *vma = vmf.vma;
-    struct file *file = vma.vm_file;
-    struct address_space *mapping = file.f_mapping;
+    let mut vma = vmf.vma;
+    let mut file = vma.vm_file;
+    let mut mapping = file.f_mapping;
     pgoff_t file_end, last_pgoff = start_pgoff;
-    unsigned long addr;
+    let mut addr = 0;
     XA_STATE(xas, &mapping.i_pages, start_pgoff);
-    struct folio *folio;
-    let mut ret: vm_fault_t = 0;
-    let mut rss: c_ulong = 0;
-    let mut nr_pages: c_uint = 0, folio_type;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut ret: vm_fault_t = 0;
+pub static mut rss: c_ulong = 0;
+pub static mut nr_pages: c_uint = 0;
 //
 // Recalculate end_pgoff based on file_end before calling
 // next_uptodate_folio() to avoid races with concurrent
@@ -3573,8 +3945,9 @@ pub unsafe extern "C" fn filemap_fault(vmf: *mut vm_fault) -> vm_fault_t {
     end_pgoff = min(end_pgoff, file_end);
     rcu_read_lock();
     folio = next_uptodate_folio(&xas, mapping, end_pgoff);
-    if (!folio)
-    goto out;
+    if (!folio) {
+// goto;
+    }
 //
 // Do not allow to map with PMD across i_size to preserve
 // SIGBUS semantics.
@@ -3585,7 +3958,7 @@ pub unsafe extern "C" fn filemap_fault(vmf: *mut vm_fault) -> vm_fault_t {
     if ((file_end >= folio_next_index(folio) || shmem_mapping(mapping)) &&
     filemap_map_pmd(vmf, folio, start_pgoff)) {
     ret = VM_FAULT_NOPAGE;
-    goto out;
+// goto;
     }
     addr = vma.vm_start +
     ((start_pgoff - vma_start_pgoff(vma)) << PAGE_SHIFT);
@@ -3593,12 +3966,12 @@ pub unsafe extern "C" fn filemap_fault(vmf: *mut vm_fault) -> vm_fault_t {
     if (!vmf.pte) {
     folio_unlock(folio);
     folio_put(folio);
-    goto out;
+// goto;
     }
     folio_type = mm_counter_file(folio);
     do {
-    unsigned long end;
-    vm_fault_t map_ret;
+    let mut end = 0;
+    let mut map_ret;
     addr += (xas.xa_index - last_pgoff) << PAGE_SHIFT;
     vmf.pte += xas.xa_index - last_pgoff;
     last_pgoff = xas.xa_index;
@@ -3608,7 +3981,7 @@ pub unsafe extern "C" fn filemap_fault(vmf: *mut vm_fault) -> vm_fault_t {
     map_ret = filemap_map_order0_folio(vmf, folio, addr,
     &rss);
     } else {
-    let mut start: c_ulong = xas.xa_index - folio.index;
+pub static mut start: c_ulong = 0;
     map_ret = filemap_map_folio_range(vmf, folio, start,
     addr, nr_pages, &rss,
     file_end);
@@ -3629,36 +4002,35 @@ pub unsafe extern "C" fn filemap_fault(vmf: *mut vm_fault) -> vm_fault_t {
     !(vmf.flags & FAULT_FLAG_TRIED) &&
     !folio_test_workingset(folio) &&
     !(vma.vm_flags & (VM_SEQ_READ | VM_EXEC))) {
-    unsigned short mmap_miss;
+    let mut mmap_miss = 0;
     mmap_miss = READ_ONCE(file.f_ra.mmap_miss);
-    if (mmap_miss)
+    if (mmap_miss) {
     WRITE_ONCE(file.f_ra.mmap_miss,
     mmap_miss - 1);
+    }
     }
     folio_unlock(folio);
     } while ((folio = next_uptodate_folio(&xas, mapping, end_pgoff)) != core::ptr::null_mut());
     add_mm_counter(vma.vm_mm, folio_type, rss);
     pte_unmap_unlock(vmf.pte, vmf.ptl);
     trace_mm_filemap_map_pages(mapping, start_pgoff, end_pgoff);
-    out:
+// label;
     rcu_read_unlock();
     return ret;
     }
     EXPORT_SYMBOL(filemap_map_pages);
 #[no_mangle]
 pub unsafe extern "C" fn filemap_page_mkwrite(vmf: *mut vm_fault) -> vm_fault_t {
-    vm_fault_t filemap_page_mkwrite(struct vm_fault *vmf)
-    {
-    struct address_space *mapping = vmf.vma.vm_file.f_mapping;
-    struct folio *folio = page_folio(vmf.page);
-    let mut ret: vm_fault_t = VM_FAULT_LOCKED;
+    let mut mapping = vmf.vma.vm_file.f_mapping;
+    let mut folio = page_folio(vmf.page);
+pub static mut ret: vm_fault_t = 0;
     sb_start_pagefault(mapping.host.i_sb);
     file_update_time(vmf.vma.vm_file);
     folio_lock(folio);
     if (folio.mapping != mapping) {
     folio_unlock(folio);
     ret = VM_FAULT_NOPAGE;
-    goto out;
+// goto;
     }
 //
 // We mark the folio dirty already here so that when freeze is in
@@ -3667,35 +4039,29 @@ pub unsafe extern "C" fn filemap_page_mkwrite(vmf: *mut vm_fault) -> vm_fault_t 
 //
     folio_mark_dirty(folio);
     folio_wait_stable(folio);
-    out:
+// label;
     sb_end_pagefault(mapping.host.i_sb);
     return ret;
     }
-    const struct vm_operations_struct generic_file_vm_ops = {
-    .fault		= filemap_fault,
-    .map_pages	= filemap_map_pages,
-    .page_mkwrite	= filemap_page_mkwrite,
-    };
+pub static mut vm_operations_struct: usize = 0;
 // This is used for a general mmap of a disk file
 #[no_mangle]
 pub unsafe extern "C" fn generic_file_mmap(file: *mut file, vma: *mut vm_area_struct) -> c_int {
-    int generic_file_mmap(struct file *file, struct vm_area_struct *vma)
-    {
-    struct address_space *mapping = file.f_mapping;
-    if (!mapping.a_ops.read_folio)
+    let mut mapping = file.f_mapping;
+    if (!mapping.a_ops.read_folio) {
     return -ENOEXEC;
+    }
     file_accessed(file);
     vma.vm_ops = &generic_file_vm_ops;
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn generic_file_mmap_prepare(desc: *mut vm_area_desc) -> c_int {
-    int generic_file_mmap_prepare(struct vm_area_desc *desc)
-    {
-    struct file *file = desc.file;
-    struct address_space *mapping = file.f_mapping;
-    if (!mapping.a_ops.read_folio)
+    let mut file = desc.file;
+    let mut mapping = file.f_mapping;
+    if (!mapping.a_ops.read_folio) {
     return -ENOEXEC;
+    }
     file_accessed(file);
     desc.vm_ops = &generic_file_vm_ops;
     return 0;
@@ -3705,49 +4071,47 @@ pub unsafe extern "C" fn generic_file_mmap_prepare(desc: *mut vm_area_desc) -> c
 //
 #[no_mangle]
 pub unsafe extern "C" fn generic_file_readonly_mmap(file: *mut file, vma: *mut vm_area_struct) -> c_int {
-    int generic_file_readonly_mmap(struct file *file, struct vm_area_struct *vma)
-    {
-    if (vma_is_shared_maywrite(vma))
+    if (vma_is_shared_maywrite(vma)) {
     return -EINVAL;
+    }
     return generic_file_mmap(file, vma);
     }
 #[no_mangle]
 pub unsafe extern "C" fn generic_file_readonly_mmap_prepare(desc: *mut vm_area_desc) -> c_int {
-    int generic_file_readonly_mmap_prepare(struct vm_area_desc *desc)
-    {
-    if (is_shared_maywrite(&desc.vma_flags))
+    if (is_shared_maywrite(&desc.vma_flags)) {
     return -EINVAL;
+    }
     return generic_file_mmap_prepare(desc);
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn filemap_page_mkwrite(vmf: *mut vm_fault) -> vm_fault_t {
-    vm_fault_t filemap_page_mkwrite(struct vm_fault *vmf)
-    {
+#[no_mangle]
+// duplicate fn: filemap_page_mkwrite
+pub unsafe extern "C" fn filemap_page_mkwrite_dup(vmf: *mut vm_fault) -> vm_fault_t {
     return VM_FAULT_SIGBUS;
     }
 #[no_mangle]
-pub unsafe extern "C" fn generic_file_mmap(file: *mut file, vma: *mut vm_area_struct) -> c_int {
-    int generic_file_mmap(struct file *file, struct vm_area_struct *vma)
-    {
+#[no_mangle]
+// duplicate fn: generic_file_mmap
+pub unsafe extern "C" fn generic_file_mmap_dup(file: *mut file, vma: *mut vm_area_struct) -> c_int {
     return -ENOSYS;
     }
 #[no_mangle]
-pub unsafe extern "C" fn generic_file_mmap_prepare(desc: *mut vm_area_desc) -> c_int {
-    int generic_file_mmap_prepare(struct vm_area_desc *desc)
-    {
+#[no_mangle]
+// duplicate fn: generic_file_mmap_prepare
+pub unsafe extern "C" fn generic_file_mmap_prepare_dup(desc: *mut vm_area_desc) -> c_int {
     return -ENOSYS;
     }
 #[no_mangle]
-pub unsafe extern "C" fn generic_file_readonly_mmap(file: *mut file, vma: *mut vm_area_struct) -> c_int {
-    int generic_file_readonly_mmap(struct file *file, struct vm_area_struct *vma)
-    {
+#[no_mangle]
+// duplicate fn: generic_file_readonly_mmap
+pub unsafe extern "C" fn generic_file_readonly_mmap_dup(file: *mut file, vma: *mut vm_area_struct) -> c_int {
     return -ENOSYS;
     }
 #[no_mangle]
-pub unsafe extern "C" fn generic_file_readonly_mmap_prepare(desc: *mut vm_area_desc) -> c_int {
-    int generic_file_readonly_mmap_prepare(struct vm_area_desc *desc)
-    {
+#[no_mangle]
+// duplicate fn: generic_file_readonly_mmap_prepare
+pub unsafe extern "C" fn generic_file_readonly_mmap_prepare_dup(desc: *mut vm_area_desc) -> c_int {
     return -ENOSYS;
     }
 
@@ -3756,56 +4120,60 @@ pub unsafe extern "C" fn generic_file_readonly_mmap_prepare(desc: *mut vm_area_d
     EXPORT_SYMBOL(generic_file_mmap_prepare);
     EXPORT_SYMBOL(generic_file_readonly_mmap);
     EXPORT_SYMBOL(generic_file_readonly_mmap_prepare);
-    static struct folio *do_read_cache_folio(struct address_space *mapping,
-    pgoff_t index, filler_t filler, struct file *file, gfp_t gfp)
-    {
-    struct folio *folio;
-    int err;
-    if (!filler)
+#[no_mangle]
+pub unsafe extern "C" fn do_read_cache_folio(mapping: *mut address_space, index: pgoff_t, filler: filler_t, file: *mut file, gfp: gfp_t) -> *mut c_void {
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
+    if (!filler) {
     filler = mapping.a_ops.read_folio;
-    repeat:
+    }
+// label;
     folio = filemap_get_folio(mapping, index);
     if (IS_ERR(folio)) {
     folio = filemap_alloc_folio(gfp, mapping_min_folio_order(mapping), core::ptr::null_mut());
-    if (!folio)
+    if (!folio) {
     return ERR_PTR(-ENOMEM);
+    }
     index = mapping_align_index(mapping, index);
     err = filemap_add_folio(mapping, folio, index, gfp);
     if (unlikely(err)) {
     folio_put(folio);
-    if (err == -EEXIST)
-    goto repeat;
+    if (err == -EEXIST) {
+// goto;
+    }
 // Presumably ENOMEM for xarray node
     return ERR_PTR(err);
     }
-    goto filler;
+// goto;
     }
-    if (folio_test_uptodate(folio))
-    goto out;
+    if (folio_test_uptodate(folio)) {
+// goto;
+    }
     if (!folio_trylock(folio)) {
     folio_put_wait_locked(folio, TASK_UNINTERRUPTIBLE);
-    goto repeat;
+// goto;
     }
 // Folio was truncated from mapping
     if (!folio.mapping) {
     folio_unlock(folio);
     folio_put(folio);
-    goto repeat;
+// goto;
     }
 // Someone else locked and filled the page in a very small window
     if (folio_test_uptodate(folio)) {
     folio_unlock(folio);
-    goto out;
+// goto;
     }
-    filler:
+// label;
     err = filemap_read_folio(file, filler, folio);
     if (err) {
     folio_put(folio);
-    if (err == AOP_TRUNCATED_PAGE)
-    goto repeat;
+    if (err == AOP_TRUNCATED_PAGE) {
+// goto;
+    }
     return ERR_PTR(err);
     }
-    out:
+// label;
     folio_mark_accessed(folio);
     return folio;
     }
@@ -3825,9 +4193,8 @@ pub unsafe extern "C" fn generic_file_readonly_mmap_prepare(desc: *mut vm_area_d
 // Context: May sleep.  Expects mapping->invalidate_lock to be held.
 // Return: An uptodate folio on success, ERR_PTR() on failure.
 //
-    struct folio *read_cache_folio(struct address_space *mapping, pgoff_t index,
-    filler_t filler, struct file *file)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn read_cache_folio(mapping: *mut address_space, index: pgoff_t, filler: filler_t, file: *mut file) -> *mut c_void {
     return do_read_cache_folio(mapping, index, filler, file,
     mapping_gfp_mask(mapping));
     }
@@ -3849,24 +4216,22 @@ pub unsafe extern "C" fn generic_file_readonly_mmap_prepare(desc: *mut vm_area_d
 //
 // Return: Uptodate folio on success, ERR_PTR() on failure.
 //
-    struct folio *mapping_read_folio_gfp(struct address_space *mapping,
-    pgoff_t index, gfp_t gfp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn mapping_read_folio_gfp(mapping: *mut address_space, index: pgoff_t, gfp: gfp_t) -> *mut c_void {
     return do_read_cache_folio(mapping, index, core::ptr::null_mut(), core::ptr::null_mut(), gfp);
     }
     EXPORT_SYMBOL(mapping_read_folio_gfp);
-    static struct page *do_read_cache_page(struct address_space *mapping,
-    pgoff_t index, filler_t *filler, struct file *file, gfp_t gfp)
-    {
-    struct folio *folio;
+#[no_mangle]
+pub unsafe extern "C" fn do_read_cache_page(mapping: *mut address_space, index: pgoff_t, filler: *mut filler_t, file: *mut file, gfp: gfp_t) -> *mut c_void {
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     folio = do_read_cache_folio(mapping, index, filler, file, gfp);
-    if (IS_ERR(folio))
+    if (IS_ERR(folio)) {
     return &folio.page;
+    }
     return folio_file_page(folio, index);
     }
-    struct page *read_cache_page(struct address_space *mapping,
-    pgoff_t index, filler_t *filler, struct file *file)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn read_cache_page(mapping: *mut address_space, index: pgoff_t, filler: *mut filler_t, file: *mut file) -> *mut c_void {
     return do_read_cache_page(mapping, index, filler, file,
     mapping_gfp_mask(mapping));
     }
@@ -3886,10 +4251,8 @@ pub unsafe extern "C" fn generic_file_readonly_mmap_prepare(desc: *mut vm_area_d
 //
 // Return: up to date page on success, ERR_PTR() on failure.
 //
-    struct page *read_cache_page_gfp(struct address_space *mapping,
-    pgoff_t index,
-    gfp_t gfp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn read_cache_page_gfp(mapping: *mut address_space, index: pgoff_t, gfp: gfp_t) -> *mut c_void {
     return do_read_cache_page(mapping, index, core::ptr::null_mut(), core::ptr::null_mut(), gfp);
     }
     EXPORT_SYMBOL(read_cache_page_gfp);
@@ -3898,16 +4261,15 @@ pub unsafe extern "C" fn generic_file_readonly_mmap_prepare(desc: *mut vm_area_d
 //
 #[no_mangle]
 unsafe extern "C" fn dio_warn_stale_pagecache(filp: *mut file) {
-    static void dio_warn_stale_pagecache(struct file *filp)
-    {
-    static DEFINE_RATELIMIT_STATE(_rs, 86400 * HZ, DEFAULT_RATELIMIT_BURST);
+pub static mut _rs: usize = 0;
     char pathname[128];
-    char *path;
+pub static mut path: *mut c_void = core::ptr::null_mut();
     errseq_set(&filp.f_mapping.wb_err, -EIO);
     if (__ratelimit(&_rs)) {
-    path = file_path(filp, pathname, sizeof(pathname));
-    if (IS_ERR(path))
+    path = file_path(filp, pathname, sizeof!(pathname));
+    if (IS_ERR(path)) {
     path = "(unknown)";
+    }
     pr_crit("Page cache invalidation failure on direct I/O.  Possible data corruption due to collision with buffered I/O!\n");
     pr_crit("File: %s PID: %d Comm: %.20s\n", path, current.pid,
     current.comm);
@@ -3915,29 +4277,28 @@ unsafe extern "C" fn dio_warn_stale_pagecache(filp: *mut file) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn kiocb_invalidate_post_direct_write(iocb: *mut kiocb, count: usize) {
-    void kiocb_invalidate_post_direct_write(struct kiocb *iocb, size_t count)
-    {
-    struct address_space *mapping = iocb.ki_filp.f_mapping;
+    let mut mapping = iocb.ki_filp.f_mapping;
     if (mapping.nrpages &&
     invalidate_inode_pages2_range(mapping,
     iocb.ki_pos >> PAGE_SHIFT,
-    (iocb.ki_pos + count - 1) >> PAGE_SHIFT))
+    (iocb.ki_pos + count - 1) >> PAGE_SHIFT)) {
     dio_warn_stale_pagecache(iocb.ki_filp);
     }
-    ssize_t
-    generic_file_direct_write(struct kiocb *iocb, struct iov_iter *from)
-    {
-    struct address_space *mapping = iocb.ki_filp.f_mapping;
-    let mut write_len: usize = iov_iter_count(from);
-    ssize_t written;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn generic_file_direct_write(iocb: *mut kiocb, from: *mut iov_iter) -> ssize_t {
+    let mut mapping = iocb.ki_filp.f_mapping;
+pub static mut write_len: usize = 0;
+    let mut written = 0;
 //
 // If a page can not be invalidated, return 0 to fall back
 // to buffered write.
 //
     written = kiocb_invalidate_pages(iocb, write_len);
     if (written) {
-    if (written == -EBUSY)
+    if (written == -EBUSY) {
     return 0;
+    }
     return written;
     }
     written = mapping.a_ops.direct_IO(iocb, from);
@@ -3959,8 +4320,8 @@ pub unsafe extern "C" fn kiocb_invalidate_post_direct_write(iocb: *mut kiocb, co
 // Skip invalidation for async writes or if mapping has no pages.
 //
     if (written > 0) {
-    struct inode *inode = mapping.host;
-    let mut pos: loff_t = iocb.ki_pos;
+    let mut inode = mapping.host;
+pub static mut pos: loff_t = 0;
     kiocb_invalidate_post_direct_write(iocb, written);
     pos += written;
     write_len -= written;
@@ -3970,30 +4331,29 @@ pub unsafe extern "C" fn kiocb_invalidate_post_direct_write(iocb: *mut kiocb, co
     }
     iocb.ki_pos = pos;
     }
-    if (written != -EIOCBQUEUED)
+    if (written != -EIOCBQUEUED) {
     iov_iter_revert(from, write_len - iov_iter_count(from));
+    }
     return written;
     }
     EXPORT_SYMBOL(generic_file_direct_write);
 #[no_mangle]
 pub unsafe extern "C" fn generic_perform_write(iocb: *mut kiocb, i: *mut iov_iter) -> isize {
-    ssize_t generic_perform_write(struct kiocb *iocb, struct iov_iter *i)
-    {
-    struct file *file = iocb.ki_filp;
-    let mut pos: loff_t = iocb.ki_pos;
-    struct address_space *mapping = file.f_mapping;
-    const struct address_space_operations *a_ops = mapping.a_ops;
-    let mut chunk: usize = mapping_max_folio_size(mapping);
-    let mut status: c_long = 0;
-    let mut written: isize = 0;
+    let mut file = iocb.ki_filp;
+pub static mut pos: loff_t = 0;
+    let mut mapping = file.f_mapping;
+    let mut a_ops = mapping.a_ops;
+pub static mut chunk: usize = 0;
+pub static mut status: c_long = 0;
+pub static mut written: isize = 0;
     do {
-    struct folio *folio;
-    size_t offset;		/* Offset into folio */
-    size_t bytes;		/* Bytes to write to folio */
-    size_t copied;		/* Bytes copied from user */
-    void *fsdata = core::ptr::null_mut();
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut offset = 0;		/* Offset into folio */
+    let mut bytes = 0;		/* Bytes to write to folio */
+    let mut copied = 0;		/* Bytes copied from user */
+    let mut fsdata = core::ptr::null_mut();
     bytes = iov_iter_count(i);
-    retry:
+// label;
     offset = pos & (chunk - 1);
     bytes = min(chunk - offset, bytes);
     balance_dirty_pages_ratelimited(mapping);
@@ -4003,13 +4363,16 @@ pub unsafe extern "C" fn generic_perform_write(iocb: *mut kiocb, i: *mut iov_ite
     }
     status = a_ops.write_begin(iocb, mapping, pos, bytes,
     &folio, &fsdata);
-    if (unlikely(status < 0))
+    if (unlikely(status < 0)) {
     break;
+    }
     offset = offset_in_folio(folio, pos);
-    if (bytes > folio_size(folio) - offset)
+    if (bytes > folio_size(folio) - offset) {
     bytes = folio_size(folio) - offset;
-    if (mapping_writably_mapped(mapping))
+    }
+    if (mapping_writably_mapped(mapping)) {
     flush_dcache_folio(folio);
+    }
 //
 // Faults here on mmap()s can recurse into arbitrary
 // filesystem code. Lots of locks are held that can
@@ -4022,8 +4385,9 @@ pub unsafe extern "C" fn generic_perform_write(iocb: *mut kiocb, i: *mut iov_ite
     folio, fsdata);
     if (unlikely(status != copied)) {
     iov_iter_revert(i, copied - max(status, 0L));
-    if (unlikely(status < 0))
+    if (unlikely(status < 0)) {
     break;
+    }
     }
     cond_resched();
     if (unlikely(status == 0)) {
@@ -4033,11 +4397,12 @@ pub unsafe extern "C" fn generic_perform_write(iocb: *mut kiocb, i: *mut iov_ite
 // halfway through, might be a race with munmap,
 // might be severe memory pressure.
 //
-    if (chunk > PAGE_SIZE)
+    if (chunk > PAGE_SIZE) {
     chunk /= 2;
+    }
     if (copied) {
     bytes = copied;
-    goto retry;
+// goto;
     }
 //
 // 'folio' is now unlocked and faults on it can be
@@ -4053,8 +4418,9 @@ pub unsafe extern "C" fn generic_perform_write(iocb: *mut kiocb, i: *mut iov_ite
     written += status;
     }
     } while (iov_iter_count(i));
-    if (!written)
+    if (!written) {
     return status;
+    }
     iocb.ki_pos += written;
     return written;
     }
@@ -4082,18 +4448,18 @@ pub unsafe extern "C" fn generic_perform_write(iocb: *mut kiocb, i: *mut iov_ite
 //
 #[no_mangle]
 pub unsafe extern "C" fn __generic_file_write_iter(iocb: *mut kiocb, from: *mut iov_iter) -> isize {
-    ssize_t __generic_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
-    {
-    struct file *file = iocb.ki_filp;
-    struct address_space *mapping = file.f_mapping;
-    struct inode *inode = mapping.host;
-    ssize_t ret;
+    let mut file = iocb.ki_filp;
+    let mut mapping = file.f_mapping;
+    let mut inode = mapping.host;
+    let mut ret = 0;
     ret = file_remove_privs(file);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     ret = file_update_time(file);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     if (iocb.ki_flags & IOCB_DIRECT) {
     ret = generic_file_direct_write(iocb, from);
 //
@@ -4103,8 +4469,9 @@ pub unsafe extern "C" fn __generic_file_write_iter(iocb: *mut kiocb, from: *mut 
 // not succeed (even if it did, DAX does not handle dirty
 // page-cache pages correctly).
 //
-    if (ret < 0 || !iov_iter_count(from) || IS_DAX(inode))
+    if (ret < 0 || !iov_iter_count(from) || IS_DAX(inode)) {
     return ret;
+    }
     return direct_write_fallback(iocb, from, ret,
     generic_perform_write(iocb, from));
     }
@@ -4126,18 +4493,18 @@ pub unsafe extern "C" fn __generic_file_write_iter(iocb: *mut kiocb, from: *mut 
 //
 #[no_mangle]
 pub unsafe extern "C" fn generic_file_write_iter(iocb: *mut kiocb, from: *mut iov_iter) -> isize {
-    ssize_t generic_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
-    {
-    struct file *file = iocb.ki_filp;
-    struct inode *inode = file.f_mapping.host;
-    ssize_t ret;
+    let mut file = iocb.ki_filp;
+    let mut inode = file.f_mapping.host;
+    let mut ret = 0;
     inode_lock(inode);
     ret = generic_write_checks(iocb, from);
-    if (ret > 0)
+    if (ret > 0) {
     ret = __generic_file_write_iter(iocb, from);
+    }
     inode_unlock(inode);
-    if (ret > 0)
+    if (ret > 0) {
     ret = generic_write_sync(iocb, ret);
+    }
     return ret;
     }
     EXPORT_SYMBOL(generic_file_write_iter);
@@ -4160,16 +4527,17 @@ pub unsafe extern "C" fn generic_file_write_iter(iocb: *mut kiocb, from: *mut io
 //
 #[no_mangle]
 pub unsafe extern "C" fn filemap_release_folio(folio: *mut folio, gfp: gfp_t) -> bool {
-    bool filemap_release_folio(struct folio *folio, gfp_t gfp)
-    {
-    let mut mapping: *mut address_space  const = folio.mapping;
-    BUG_ON(!folio_test_locked(folio));
-    if (!folio_needs_release(folio))
+pub static mut mapping: *mut address_space  const = core::ptr::null_mut();
+    BUG_ON!(!folio_test_locked(folio));
+    if (!folio_needs_release(folio)) {
     return true;
-    if (folio_test_writeback(folio))
+    }
+    if (folio_test_writeback(folio)) {
     return false;
-    if (mapping && mapping.a_ops.release_folio)
+    }
+    if (mapping && mapping.a_ops.release_folio) {
     return mapping.a_ops.release_folio(folio, gfp);
+    }
     return try_to_free_buffers(folio);
     }
     EXPORT_SYMBOL(filemap_release_folio);
@@ -4186,28 +4554,30 @@ pub unsafe extern "C" fn filemap_release_folio(folio: *mut folio, gfp: gfp_t) ->
 // undertaken, the invalidate lock is held to prevent new folios from being
 // installed.
 //
-    int filemap_invalidate_inode(struct inode *inode, bool flush,
-    loff_t start, loff_t end)
-    {
-    struct address_space *mapping = inode.i_mapping;
-    let mut first: pgoff_t = start >> PAGE_SHIFT;
-    let mut last: pgoff_t = end >> PAGE_SHIFT;
-    let mut nr: pgoff_t = end == LLONG_MAX ? ULONG_MAX : last - first + 1;
-    if (!mapping || !mapping.nrpages || end < start)
-    goto out;
+#[no_mangle]
+pub unsafe extern "C" fn filemap_invalidate_inode(inode: *mut inode, flush: bool, start: loff_t, end: loff_t) -> c_int {
+    let mut mapping = inode.i_mapping;
+pub static mut first: pgoff_t = 0;
+pub static mut last: pgoff_t = 0;
+pub static mut nr: pgoff_t = 0;
+    if (!mapping || !mapping.nrpages || end < start) {
+// goto;
+    }
 // Prevent new folios from being added to the inode.
     filemap_invalidate_lock(mapping);
-    if (!mapping.nrpages)
-    goto unlock;
+    if (!mapping.nrpages) {
+// goto;
+    }
     unmap_mapping_pages(mapping, first, nr, false);
 // Write back the data if we're asked to.
-    if (flush)
+    if (flush) {
     filemap_fdatawrite_range(mapping, start, end);
+    }
 // Wait for writeback to complete on all folios and discard.
     invalidate_inode_pages2_range(mapping, start / PAGE_SIZE, end / PAGE_SIZE);
-    unlock:
+// label;
     filemap_invalidate_unlock(mapping);
-    out:
+// label;
     return filemap_check_errors(mapping);
     }
     EXPORT_SYMBOL_GPL(filemap_invalidate_inode);
@@ -4224,17 +4594,16 @@ pub unsafe extern "C" fn filemap_release_folio(folio: *mut folio, gfp: gfp_t) ->
 // queried include: number of dirty pages, number of pages marked for
 // writeback, and the number of (recently) evicted pages.
 //
-    static void filemap_cachestat(struct address_space *mapping,
-    pgoff_t first_index, pgoff_t last_index, struct cachestat *cs)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn filemap_cachestat(mapping: *mut address_space, first_index: pgoff_t, last_index: pgoff_t, cs: *mut cachestat) {
     XA_STATE(xas, &mapping.i_pages, first_index);
-    struct folio *folio;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
 // Flush stats (and potentially sleep) outside the RCU read section.
     mem_cgroup_flush_stats_ratelimited(core::ptr::null_mut());
     rcu_read_lock();
     xas_for_each(&xas, folio, last_index) {
-    int order;
-    unsigned long nr_pages;
+    let mut order = 0;
+    let mut nr_pages = 0;
     pgoff_t folio_first_index, folio_last_index;
 //
 // Don't deref the folio. It is not pinned, and might
@@ -4246,29 +4615,33 @@ pub unsafe extern "C" fn filemap_release_folio(folio: *mut folio, gfp: gfp_t) ->
 // Instead, derive all information of interest from
 // the rcu-protected xarray.
 //
-    if (xas_retry(&xas, folio))
+    if (xas_retry(&xas, folio)) {
     continue;
+    }
     order = xas_get_order(&xas);
     nr_pages = 1 << order;
     folio_first_index = round_down(xas.xa_index, 1 << order);
     folio_last_index = folio_first_index + nr_pages - 1;
 // Folios might straddle the range boundaries, only count covered pages
-    if (folio_first_index < first_index)
+    if (folio_first_index < first_index) {
     nr_pages -= first_index - folio_first_index;
-    if (folio_last_index > last_index)
+    }
+    if (folio_last_index > last_index) {
     nr_pages -= folio_last_index - last_index;
+    }
     if (xa_is_value(folio)) {
 // page is evicted
-    void *shadow = (void *)folio;
-    bool workingset; /* not used */
+    let mut shadow = folio;
+    let mut workingset = 0; /* not used */
     cs.nr_evicted += nr_pages;
 
     if (shmem_mapping(mapping)) {
 // shmem file - in swap cache
-    let mut swp: swp_entry_t = radix_to_swp_entry(folio);
+pub static mut swp: swp_entry_t = 0;
 // swapin error results in poisoned entry
-    if (!softleaf_is_swap(swp))
-    goto resched;
+    if (!softleaf_is_swap(swp)) {
+// goto;
+    }
 //
 // Getting a swap entry from the shmem
 // inode means we beat
@@ -4280,21 +4653,25 @@ pub unsafe extern "C" fn filemap_release_folio(folio: *mut folio, gfp: gfp_t) ->
 // a shadow in the swapcache (yet).
 //
     shadow = swap_cache_get_shadow(swp);
-    if (!shadow)
-    goto resched;
+    if (!shadow) {
+// goto;
+    }
     }
 
-    if (workingset_test_recent(shadow, true, &workingset, false))
+    if (workingset_test_recent(shadow, true, &workingset, false)) {
     cs.nr_recently_evicted += nr_pages;
-    goto resched;
+    }
+// goto;
     }
 // page is in cache
     cs.nr_cache += nr_pages;
-    if (xas_get_mark(&xas, PAGECACHE_TAG_DIRTY))
+    if (xas_get_mark(&xas, PAGECACHE_TAG_DIRTY)) {
     cs.nr_dirty += nr_pages;
-    if (xas_get_mark(&xas, PAGECACHE_TAG_WRITEBACK))
+    }
+    if (xas_get_mark(&xas, PAGECACHE_TAG_WRITEBACK)) {
     cs.nr_writeback += nr_pages;
-    resched:
+    }
+// label;
     if (need_resched()) {
     xas_pause(&xas);
     cond_resched_rcu();
@@ -4309,12 +4686,12 @@ pub unsafe extern "C" fn filemap_release_folio(folio: *mut folio, gfp: gfp_t) ->
 //
 #[no_mangle]
 pub unsafe extern "C" fn can_do_cachestat(f: *mut file) -> bool {
-    static inline bool can_do_cachestat(struct file *f)
-    {
-    if (f.f_mode & FMODE_WRITE)
+    if (f.f_mode & FMODE_WRITE) {
     return true;
-    if (file_owner_or_capable(f))
+    }
+    if (file_owner_or_capable(f)) {
     return true;
+    }
     return file_permission(f, MAY_WRITE) == 0;
     }
 //
@@ -4351,34 +4728,38 @@ pub unsafe extern "C" fn can_do_cachestat(f: *mut file) -> bool {
 // -EBADF      - invalid file descriptor
 // -EOPNOTSUPP - file descriptor is of a hugetlbfs file
 //
-    SYSCALL_DEFINE4(cachestat, unsigned int, fd,
-    struct cachestat_range __user *, cstat_range,
-    struct cachestat __user *, cstat, unsigned int, flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_cachestat(fd: usize, cstat_range: usize, cstat: usize, flags: usize) -> c_long {
     CLASS(fd, f)(fd);
-    struct address_space *mapping;
-    struct cachestat_range csr;
-    struct cachestat cs;
+pub static mut mapping: *mut c_void = core::ptr::null_mut();
+pub static mut csr: usize = 0;
+pub static mut cs: usize = 0;
     pgoff_t first_index, last_index;
-    if (fd_empty(f))
+    if (fd_empty(f)) {
     return -EBADF;
+    }
     if (copy_from_user(&csr, cstat_range,
-    sizeof(struct cachestat_range)))
+    sizeof!(cachestat_range))) {
     return -EFAULT;
+    }
 // hugetlbfs is not supported
-    if (is_file_hugepages(fd_file(f)))
+    if (is_file_hugepages(fd_file(f))) {
     return -EOPNOTSUPP;
-    if (!can_do_cachestat(fd_file(f)))
+    }
+    if (!can_do_cachestat(fd_file(f))) {
     return -EPERM;
-    if (flags != 0)
+    }
+    if (flags != 0) {
     return -EINVAL;
+    }
     first_index = csr.off >> PAGE_SHIFT;
     last_index =
     csr.len == 0 ? ULONG_MAX : (csr.off + csr.len - 1) >> PAGE_SHIFT;
-    memset(&cs, 0, sizeof(struct cachestat));
+    memset(&cs, 0, sizeof!(cachestat));
     mapping = fd_file(f).f_mapping;
     filemap_cachestat(mapping, first_index, last_index, &cs);
-    if (copy_to_user(cstat, &cs, sizeof(struct cachestat)))
+    if (copy_to_user(cstat, &cs, sizeof!(cachestat))) {
     return -EFAULT;
+    }
     return 0;
     }

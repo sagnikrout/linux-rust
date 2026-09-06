@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -71,7 +321,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // barrier()
 // r1 = x
 //
-// BUG_ON(r1 == 0 && r2 == 0)
+// BUG_ON!(r1 == 0 && r2 == 0)
 //
 // The write to y and load from x by CPU1 are unordered by the hardware,
 // so it's possible to have "r1 = x" reordered before "y = 1" at any
@@ -106,7 +356,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // b: send IPI                       IPI-induced mb
 // c: smp_mb()
 // r1 = x
-// BUG_ON(r1 == 0 && r2 == 1)
+// BUG_ON!(r1 == 0 && r2 == 1)
 //
 // The writes to x and y are unordered by the hardware, so it's possible to
 // have "r2 = 1" even though the write to x doesn't execute until (b).  If
@@ -174,51 +424,46 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // except MEMBARRIER_CMD_QUERY.
 //
 
-    (MEMBARRIER_CMD_PRIVATE_EXPEDITED_SYNC_CORE			\
+    (MEMBARRIER_CMD_PRIVATE_EXPEDITED_SYNC_CORE			
     | MEMBARRIER_CMD_REGISTER_PRIVATE_EXPEDITED_SYNC_CORE)
 
 pub const MEMBARRIER_PRIVATE_EXPEDITED_SYNC_CORE_BITMASK: c_int = 0;
 
-    (MEMBARRIER_CMD_PRIVATE_EXPEDITED_RSEQ			\
+    (MEMBARRIER_CMD_PRIVATE_EXPEDITED_RSEQ			
     | MEMBARRIER_CMD_REGISTER_PRIVATE_EXPEDITED_RSEQ)
 
 pub const MEMBARRIER_PRIVATE_EXPEDITED_RSEQ_BITMASK: c_int = 0;
 
-    (MEMBARRIER_CMD_GLOBAL | MEMBARRIER_CMD_GLOBAL_EXPEDITED	\
-    | MEMBARRIER_CMD_REGISTER_GLOBAL_EXPEDITED			\
-    | MEMBARRIER_CMD_PRIVATE_EXPEDITED				\
-    | MEMBARRIER_CMD_REGISTER_PRIVATE_EXPEDITED			\
-    | MEMBARRIER_PRIVATE_EXPEDITED_SYNC_CORE_BITMASK		\
-    | MEMBARRIER_PRIVATE_EXPEDITED_RSEQ_BITMASK			\
+    (MEMBARRIER_CMD_GLOBAL | MEMBARRIER_CMD_GLOBAL_EXPEDITED	
+    | MEMBARRIER_CMD_REGISTER_GLOBAL_EXPEDITED			
+    | MEMBARRIER_CMD_PRIVATE_EXPEDITED				
+    | MEMBARRIER_CMD_REGISTER_PRIVATE_EXPEDITED			
+    | MEMBARRIER_PRIVATE_EXPEDITED_SYNC_CORE_BITMASK		
+    | MEMBARRIER_PRIVATE_EXPEDITED_RSEQ_BITMASK			
     | MEMBARRIER_CMD_GET_REGISTRATIONS)
 //
 // Scoped guard for memory barriers on entry and exit.
 // Matches memory barriers before & after rq->curr modification in scheduler.
 //
     DEFINE_LOCK_GUARD_0(mb, smp_mb(), smp_mb())
-    static DEFINE_MUTEX(membarrier_ipi_mutex);
-    static DEFINE_PER_CPU(struct mutex, membarrier_cpu_mutexes);
+pub static mut membarrier_ipi_mutex: usize = 0;
+pub static mut struct mutex: usize = 0;
 
 #[no_mangle]
-unsafe extern "C" fn membarrier_init() -> int __init {
-    static int __init membarrier_init(void)
-    {
-    int i;
-    for_each_possible_cpu(i)
+unsafe extern "C" fn membarrier_init() -> c_int {
+    let mut i = 0;
+    for_each_possible_cpu(i) {
     mutex_init(&per_cpu(membarrier_cpu_mutexes, i));
+    }
     return 0;
     }
-    core_initcall(membarrier_init);
+    core_initcall!(membarrier_init);
 #[no_mangle]
 unsafe extern "C" fn ipi_mb(info: *mut c_void) {
-    static void ipi_mb(void *info)
-    {
     smp_mb();	/* IPIs should be serializing but paranoid. */
     }
 #[no_mangle]
 unsafe extern "C" fn ipi_sync_core(info: *mut c_void) {
-    static void ipi_sync_core(void *info)
-    {
 //
 // The smp_mb() in membarrier after all the IPIs is supposed to
 // ensure that memory on remote CPUs that occur before the IPI
@@ -234,8 +479,6 @@ unsafe extern "C" fn ipi_sync_core(info: *mut c_void) {
     }
 #[no_mangle]
 unsafe extern "C" fn ipi_rseq(info: *mut c_void) {
-    static void ipi_rseq(void *info)
-    {
 //
 // Ensure that all stores done by the calling thread are visible
 // to the current task before the current task resumes.  We could
@@ -250,18 +493,19 @@ unsafe extern "C" fn ipi_rseq(info: *mut c_void) {
 // only updated if they change as a consequence of preemption after
 // return from this IPI.
 //
-    if (rseq_v2(current))
+    if (rseq_v2(current)) {
     rseq_sched_switch_event(current);
-    else
+    }
+    else {
     rseq_force_update();
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn ipi_sync_rq_state(info: *mut c_void) {
-    static void ipi_sync_rq_state(void *info)
-    {
-    struct mm_struct *mm = (struct mm_struct *) info;
-    if (current.mm != mm)
+    let mut mm =  info;
+    if (current.mm != mm) {
     return;
+    }
     this_cpu_write(runqueues.membarrier_state,
     atomic_read(&mm.membarrier_state));
 //
@@ -274,8 +518,6 @@ unsafe extern "C" fn ipi_sync_rq_state(info: *mut c_void) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn membarrier_exec_mmap(mm: *mut mm_struct) {
-    void membarrier_exec_mmap(struct mm_struct *mm)
-    {
 //
 // Issue a memory barrier before clearing membarrier_state to
 // guarantee that no memory access prior to exec is reordered after
@@ -291,32 +533,32 @@ pub unsafe extern "C" fn membarrier_exec_mmap(mm: *mut mm_struct) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn membarrier_update_current_mm(next_mm: *mut mm_struct) {
-    void membarrier_update_current_mm(struct mm_struct *next_mm)
-    {
-    struct rq *rq = this_rq();
-    let mut membarrier_state: c_int = 0;
-    if (next_mm)
+    let mut rq = this_rq();
+pub static mut membarrier_state: c_int = 0;
+    if (next_mm) {
     membarrier_state = atomic_read(&next_mm.membarrier_state);
-    if (READ_ONCE(rq.membarrier_state) == membarrier_state)
+    }
+    if (READ_ONCE(rq.membarrier_state) == membarrier_state) {
     return;
+    }
     WRITE_ONCE(rq.membarrier_state, membarrier_state);
     }
 #[no_mangle]
 unsafe extern "C" fn membarrier_global_expedited() -> c_int {
-    static int membarrier_global_expedited(void)
-    {
     cpumask_var_t __free(free_cpumask_var) tmpmask = CPUMASK_VAR_NULL;
-    int cpu;
-    if (num_online_cpus() == 1)
+    let mut cpu = 0;
+    if (num_online_cpus() == 1) {
     return 0;
-    if (!zalloc_cpumask_var(&tmpmask, GFP_KERNEL))
+    }
+    if (!zalloc_cpumask_var(&tmpmask, GFP_KERNEL)) {
     return -ENOMEM;
+    }
     guard(mb)();
     SERIALIZE_IPI();
     guard(cpus_read_lock)();
     rcu_read_lock();
     for_each_online_cpu(cpu) {
-    struct task_struct *p;
+pub static mut p: *mut c_void = core::ptr::null_mut();
 //
 // Skipping the current CPU is OK even through we can be
 // migrated at any point. The current CPU, at the point
@@ -325,18 +567,21 @@ unsafe extern "C" fn membarrier_global_expedited() -> c_int {
 // thread. Therefore, we can skip this CPU from the
 // iteration.
 //
-    if (cpu == raw_smp_processor_id())
+    if (cpu == raw_smp_processor_id()) {
     continue;
+    }
     if (!(READ_ONCE(cpu_rq(cpu).membarrier_state) &
-    MEMBARRIER_STATE_GLOBAL_EXPEDITED))
+    MEMBARRIER_STATE_GLOBAL_EXPEDITED)) {
     continue;
+    }
 //
 // Skip the CPU if it runs a kernel thread which is not using
 // a task mm.
 //
     p = rcu_dereference(cpu_rq(cpu).curr);
-    if (!p.mm)
+    if (!p.mm) {
     continue;
+    }
     __cpumask_set_cpu(cpu, tmpmask);
     }
     rcu_read_unlock();
@@ -347,34 +592,38 @@ unsafe extern "C" fn membarrier_global_expedited() -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn membarrier_private_expedited(flags: c_int, cpu_id: c_int) -> c_int {
-    static int membarrier_private_expedited(int flags, int cpu_id)
-    {
-    struct mm_struct *mm = current.mm;
-    let mut ipi_func: smp_call_func_t = ipi_mb;
+    let mut mm = current.mm;
+pub static mut ipi_func: smp_call_func_t = 0;
     if (flags == MEMBARRIER_FLAG_SYNC_CORE) {
-    if (!IS_ENABLED(CONFIG_ARCH_HAS_MEMBARRIER_SYNC_CORE))
+    if (!IS_ENABLED!(CONFIG_ARCH_HAS_MEMBARRIER_SYNC_CORE)) {
     return -EINVAL;
+    }
     if (!(atomic_read(&mm.membarrier_state) &
-    MEMBARRIER_STATE_PRIVATE_EXPEDITED_SYNC_CORE_READY))
+    MEMBARRIER_STATE_PRIVATE_EXPEDITED_SYNC_CORE_READY)) {
     return -EPERM;
+    }
     ipi_func = ipi_sync_core;
     prepare_sync_core_cmd(mm);
     } else if (flags == MEMBARRIER_FLAG_RSEQ) {
-    if (!IS_ENABLED(CONFIG_RSEQ))
+    if (!IS_ENABLED!(CONFIG_RSEQ)) {
     return -EINVAL;
+    }
     if (!(atomic_read(&mm.membarrier_state) &
-    MEMBARRIER_STATE_PRIVATE_EXPEDITED_RSEQ_READY))
-    return -EPERM;
-    ipi_func = ipi_rseq;
-    } else {
-    WARN_ON_ONCE(flags);
-    if (!(atomic_read(&mm.membarrier_state) &
-    MEMBARRIER_STATE_PRIVATE_EXPEDITED_READY))
+    MEMBARRIER_STATE_PRIVATE_EXPEDITED_RSEQ_READY)) {
     return -EPERM;
     }
+    ipi_func = ipi_rseq;
+    } else {
+    WARN_ON_ONCE!(flags);
+    if (!(atomic_read(&mm.membarrier_state) &
+    MEMBARRIER_STATE_PRIVATE_EXPEDITED_READY)) {
+    return -EPERM;
+    }
+    }
     if (flags != MEMBARRIER_FLAG_SYNC_CORE &&
-    (atomic_read(&mm.mm_users) == 1 || num_online_cpus() == 1))
+    (atomic_read(&mm.mm_users) == 1 || num_online_cpus() == 1)) {
     return 0;
+    }
 //
 // Matches memory barriers after rq->curr modification in
 // scheduler.
@@ -389,13 +638,15 @@ unsafe extern "C" fn membarrier_private_expedited(flags: c_int, cpu_id: c_int) -
 //
     guard(mb)();
     if (cpu_id >= 0) {
-    if (cpu_id >= nr_cpu_ids || !cpu_possible(cpu_id))
+    if (cpu_id >= nr_cpu_ids || !cpu_possible(cpu_id)) {
     return 0;
+    }
     SERIALIZE_IPI_CPU(cpu_id);
     guard(cpus_read_lock)();
-    struct task_struct *p;
-    if (!cpu_online(cpu_id))
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    if (!cpu_online(cpu_id)) {
     return 0;
+    }
     rcu_read_lock();
     p = rcu_dereference(cpu_rq(cpu_id).curr);
     if (!p || p.mm != mm) {
@@ -410,17 +661,19 @@ unsafe extern "C" fn membarrier_private_expedited(flags: c_int, cpu_id: c_int) -
     smp_call_function_single(cpu_id, ipi_func, core::ptr::null_mut(), 1);
     } else {
     cpumask_var_t __free(free_cpumask_var) tmpmask = CPUMASK_VAR_NULL;
-    int cpu;
-    if (!zalloc_cpumask_var(&tmpmask, GFP_KERNEL))
+    let mut cpu = 0;
+    if (!zalloc_cpumask_var(&tmpmask, GFP_KERNEL)) {
     return -ENOMEM;
+    }
     SERIALIZE_IPI();
     guard(cpus_read_lock)();
     rcu_read_lock();
     for_each_online_cpu(cpu) {
-    struct task_struct *p;
+pub static mut p: *mut c_void = core::ptr::null_mut();
     p = rcu_dereference(cpu_rq(cpu).curr);
-    if (p && p.mm == mm)
+    if (p && p.mm == mm) {
     __cpumask_set_cpu(cpu, tmpmask);
+    }
     }
     rcu_read_unlock();
 //
@@ -452,11 +705,9 @@ unsafe extern "C" fn membarrier_private_expedited(flags: c_int, cpu_id: c_int) -
     }
 #[no_mangle]
 unsafe extern "C" fn sync_runqueues_membarrier_state(mm: *mut mm_struct) -> c_int {
-    static int sync_runqueues_membarrier_state(struct mm_struct *mm)
-    {
-    let mut membarrier_state: c_int = atomic_read(&mm.membarrier_state);
-    cpumask_var_t tmpmask;
-    int cpu;
+pub static mut membarrier_state: c_int = 0;
+    let mut tmpmask;
+    let mut cpu = 0;
     if (atomic_read(&mm.mm_users) == 1 || num_online_cpus() == 1) {
     this_cpu_write(runqueues.membarrier_state, membarrier_state);
 //
@@ -469,8 +720,9 @@ unsafe extern "C" fn sync_runqueues_membarrier_state(mm: *mut mm_struct) -> c_in
     smp_mb();
     return 0;
     }
-    if (!zalloc_cpumask_var(&tmpmask, GFP_KERNEL))
+    if (!zalloc_cpumask_var(&tmpmask, GFP_KERNEL)) {
     return -ENOMEM;
+    }
 //
 // For mm with multiple users, we need to ensure all future
 // scheduler executions will observe @mm's new membarrier
@@ -488,11 +740,12 @@ unsafe extern "C" fn sync_runqueues_membarrier_state(mm: *mut mm_struct) -> c_in
     cpus_read_lock();
     rcu_read_lock();
     for_each_online_cpu(cpu) {
-    struct rq *rq = cpu_rq(cpu);
-    struct task_struct *p;
+    let mut rq = cpu_rq(cpu);
+pub static mut p: *mut c_void = core::ptr::null_mut();
     p = rcu_dereference(rq.curr);
-    if (p && p.mm == mm)
+    if (p && p.mm == mm) {
     __cpumask_set_cpu(cpu, tmpmask);
+    }
     }
     rcu_read_unlock();
     on_each_cpu_mask(tmpmask, ipi_sync_rq_state, mm, true);
@@ -502,69 +755,71 @@ unsafe extern "C" fn sync_runqueues_membarrier_state(mm: *mut mm_struct) -> c_in
     }
 #[no_mangle]
 unsafe extern "C" fn membarrier_register_global_expedited() -> c_int {
-    static int membarrier_register_global_expedited(void)
-    {
-    struct task_struct *p = current;
-    struct mm_struct *mm = p.mm;
-    int ret;
+    let mut p = current;
+    let mut mm = p.mm;
+    let mut ret = 0;
     if (atomic_read(&mm.membarrier_state) &
-    MEMBARRIER_STATE_GLOBAL_EXPEDITED_READY)
+    MEMBARRIER_STATE_GLOBAL_EXPEDITED_READY) {
     return 0;
+    }
     atomic_or(MEMBARRIER_STATE_GLOBAL_EXPEDITED, &mm.membarrier_state);
     ret = sync_runqueues_membarrier_state(mm);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     atomic_or(MEMBARRIER_STATE_GLOBAL_EXPEDITED_READY,
     &mm.membarrier_state);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn membarrier_register_private_expedited(flags: c_int) -> c_int {
-    static int membarrier_register_private_expedited(int flags)
-    {
-    struct task_struct *p = current;
-    struct mm_struct *mm = p.mm;
-    int ready_state = MEMBARRIER_STATE_PRIVATE_EXPEDITED_READY,
+    let mut p = current;
+    let mut mm = p.mm;
+    let mut ready_state = MEMBARRIER_STATE_PRIVATE_EXPEDITED_READY,
     set_state = MEMBARRIER_STATE_PRIVATE_EXPEDITED,
     ret;
     if (flags == MEMBARRIER_FLAG_SYNC_CORE) {
-    if (!IS_ENABLED(CONFIG_ARCH_HAS_MEMBARRIER_SYNC_CORE))
+    if (!IS_ENABLED!(CONFIG_ARCH_HAS_MEMBARRIER_SYNC_CORE)) {
     return -EINVAL;
+    }
     ready_state =
     MEMBARRIER_STATE_PRIVATE_EXPEDITED_SYNC_CORE_READY;
     } else if (flags == MEMBARRIER_FLAG_RSEQ) {
-    if (!IS_ENABLED(CONFIG_RSEQ))
+    if (!IS_ENABLED!(CONFIG_RSEQ)) {
     return -EINVAL;
+    }
     ready_state =
     MEMBARRIER_STATE_PRIVATE_EXPEDITED_RSEQ_READY;
     } else {
-    WARN_ON_ONCE(flags);
+    WARN_ON_ONCE!(flags);
     }
 //
 // We need to consider threads belonging to different thread
 // groups, which use the same mm. (CLONE_VM but not
 // CLONE_THREAD).
 //
-    if ((atomic_read(&mm.membarrier_state) & ready_state) == ready_state)
+    if ((atomic_read(&mm.membarrier_state) & ready_state) == ready_state) {
     return 0;
-    if (flags & MEMBARRIER_FLAG_SYNC_CORE)
+    }
+    if (flags & MEMBARRIER_FLAG_SYNC_CORE) {
     set_state |= MEMBARRIER_STATE_PRIVATE_EXPEDITED_SYNC_CORE;
-    if (flags & MEMBARRIER_FLAG_RSEQ)
+    }
+    if (flags & MEMBARRIER_FLAG_RSEQ) {
     set_state |= MEMBARRIER_STATE_PRIVATE_EXPEDITED_RSEQ;
+    }
     atomic_or(set_state, &mm.membarrier_state);
     ret = sync_runqueues_membarrier_state(mm);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     atomic_or(ready_state, &mm.membarrier_state);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn membarrier_get_registrations() -> c_int {
-    static int membarrier_get_registrations(void)
-    {
-    struct task_struct *p = current;
-    struct mm_struct *mm = p.mm;
-    let mut registrations_mask: c_int = 0, membarrier_state, i;
+    let mut p = current;
+    let mut mm = p.mm;
+pub static mut registrations_mask: c_int = 0;
     static const int states[] = {
     MEMBARRIER_STATE_GLOBAL_EXPEDITED |
     MEMBARRIER_STATE_GLOBAL_EXPEDITED_READY,
@@ -581,15 +836,15 @@ unsafe extern "C" fn membarrier_get_registrations() -> c_int {
     MEMBARRIER_CMD_REGISTER_PRIVATE_EXPEDITED_SYNC_CORE,
     MEMBARRIER_CMD_REGISTER_PRIVATE_EXPEDITED_RSEQ
     };
-    BUILD_BUG_ON(ARRAY_SIZE(states) != ARRAY_SIZE(registration_cmds));
+    BUILD_BUG_ON!(ARRAY_SIZE!(states) != ARRAY_SIZE!(registration_cmds));
     membarrier_state = atomic_read(&mm.membarrier_state);
-    for (i = 0; i < ARRAY_SIZE(states); ++i) {
+    while (i < ARRAY_SIZE!(states)) {
     if (membarrier_state & states[i]) {
     registrations_mask |= registration_cmds[i];
     membarrier_state &= ~states[i];
     }
     }
-    WARN_ON_ONCE(membarrier_state != 0);
+    WARN_ON_ONCE!(membarrier_state != 0);
     return registrations_mask;
     }
 //
@@ -628,53 +883,73 @@ unsafe extern "C" fn membarrier_get_registrations() -> c_int {
 // smp_mb()           X           O            O
 // sys_membarrier()   O           O            O
 //
-    SYSCALL_DEFINE3(membarrier, int, cmd, unsigned int, flags, int, cpu_id)
-    {
-    switch (cmd) {
-    case MEMBARRIER_CMD_PRIVATE_EXPEDITED_RSEQ:
-    if (unlikely(flags && flags != MEMBARRIER_CMD_FLAG_CPU))
-    return -EINVAL;
-    break;
-    default:
-    if (unlikely(flags))
+#[no_mangle]
+pub unsafe extern "C" fn sys_membarrier(cmd: usize, flags: usize, cpu_id: usize) -> c_long {
+    match (cmd) {
+    MEMBARRIER_CMD_PRIVATE_EXPEDITED_RSEQ => {
+    if (unlikely(flags && flags != MEMBARRIER_CMD_FLAG_CPU)) {
     return -EINVAL;
     }
-    if (!(flags & MEMBARRIER_CMD_FLAG_CPU))
+    // break;
+    }
+    _ => {
+    if (unlikely(flags)) {
+    return -EINVAL;
+    }
+    }
+    }
+    if (!(flags & MEMBARRIER_CMD_FLAG_CPU)) {
     cpu_id = -1;
-    switch (cmd) {
-    case MEMBARRIER_CMD_QUERY:
+    }
+    match (cmd) {
+    MEMBARRIER_CMD_QUERY => {
     {
-    let mut cmd_mask: c_int = MEMBARRIER_CMD_BITMASK;
-    if (tick_nohz_full_enabled())
+pub static mut cmd_mask: c_int = 0;
+    if (tick_nohz_full_enabled()) {
     cmd_mask &= ~MEMBARRIER_CMD_GLOBAL;
+    }
     return cmd_mask;
     }
-    case MEMBARRIER_CMD_GLOBAL:
+    }
+    MEMBARRIER_CMD_GLOBAL => {
 // MEMBARRIER_CMD_GLOBAL is not compatible with nohz_full.
-    if (tick_nohz_full_enabled())
+    if (tick_nohz_full_enabled()) {
     return -EINVAL;
-    if (num_online_cpus() > 1)
+    }
+    if (num_online_cpus() > 1) {
     synchronize_rcu();
+    }
     return 0;
-    case MEMBARRIER_CMD_GLOBAL_EXPEDITED:
+    }
+    MEMBARRIER_CMD_GLOBAL_EXPEDITED => {
     return membarrier_global_expedited();
-    case MEMBARRIER_CMD_REGISTER_GLOBAL_EXPEDITED:
+    }
+    MEMBARRIER_CMD_REGISTER_GLOBAL_EXPEDITED => {
     return membarrier_register_global_expedited();
-    case MEMBARRIER_CMD_PRIVATE_EXPEDITED:
+    }
+    MEMBARRIER_CMD_PRIVATE_EXPEDITED => {
     return membarrier_private_expedited(0, cpu_id);
-    case MEMBARRIER_CMD_REGISTER_PRIVATE_EXPEDITED:
+    }
+    MEMBARRIER_CMD_REGISTER_PRIVATE_EXPEDITED => {
     return membarrier_register_private_expedited(0);
-    case MEMBARRIER_CMD_PRIVATE_EXPEDITED_SYNC_CORE:
+    }
+    MEMBARRIER_CMD_PRIVATE_EXPEDITED_SYNC_CORE => {
     return membarrier_private_expedited(MEMBARRIER_FLAG_SYNC_CORE, cpu_id);
-    case MEMBARRIER_CMD_REGISTER_PRIVATE_EXPEDITED_SYNC_CORE:
+    }
+    MEMBARRIER_CMD_REGISTER_PRIVATE_EXPEDITED_SYNC_CORE => {
     return membarrier_register_private_expedited(MEMBARRIER_FLAG_SYNC_CORE);
-    case MEMBARRIER_CMD_PRIVATE_EXPEDITED_RSEQ:
+    }
+    MEMBARRIER_CMD_PRIVATE_EXPEDITED_RSEQ => {
     return membarrier_private_expedited(MEMBARRIER_FLAG_RSEQ, cpu_id);
-    case MEMBARRIER_CMD_REGISTER_PRIVATE_EXPEDITED_RSEQ:
+    }
+    MEMBARRIER_CMD_REGISTER_PRIVATE_EXPEDITED_RSEQ => {
     return membarrier_register_private_expedited(MEMBARRIER_FLAG_RSEQ);
-    case MEMBARRIER_CMD_GET_REGISTRATIONS:
+    }
+    MEMBARRIER_CMD_GET_REGISTRATIONS => {
     return membarrier_get_registrations();
-    default:
+    }
+    _ => {
     return -EINVAL;
+    }
     }
     }

@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -65,7 +315,7 @@ pub const GCOV_UNIT_SIZE: c_int = 4;
 
 pub const GCOV_UNIT_SIZE: c_int = 1;
 
-    static struct gcov_info *gcov_info_head;
+pub static mut gcov_info_head: *mut c_void = core::ptr::null_mut();
 //
 // struct gcov_ctr_info - information about counters for a single function
 // @num: number of counter values for this type
@@ -105,7 +355,7 @@ pub struct gcov_fn_info {
     pub ident: c_uint,
     pub lineno_checksum: c_uint,
     pub cfg_checksum: c_uint,
-    pub ctrs: [gcov_ctr_info; ],
+    pub ctrs: [gcov_ctr_info; 0],
 }
 
 //
@@ -133,7 +383,7 @@ pub struct gcov_info {
     pub checksum: c_uint,
 
     pub filename: *const c_char,
-    pub int): *mut *mut *mut void (merge[GCOV_COUNTERS])(gcov_type , unsigned,
+    pub int): *mut *mut *mut c_void (merge[GCOV_COUNTERS])(gcov_type , unsigned,
     pub n_functions: c_uint,
     pub functions: *mut gcov_fn_info,
 }
@@ -142,7 +392,7 @@ pub struct gcov_info {
 // gcov_info_filename - return info filename
 // @info: profiling data set
 //
-    const char *gcov_info_filename(struct gcov_info *info)
+    const char *gcov_info_filename(gcov_info *info)
     {
     return info.filename;
     }
@@ -152,8 +402,6 @@ pub struct gcov_info {
 //
 #[no_mangle]
 pub unsafe extern "C" fn gcov_info_version(info: *mut gcov_info) -> c_uint {
-    unsigned int gcov_info_version(struct gcov_info *info)
-    {
     return info.version;
     }
 //
@@ -163,10 +411,11 @@ pub unsafe extern "C" fn gcov_info_version(info: *mut gcov_info) -> c_uint {
 // Returns next gcov_info following @info or first gcov_info in the chain if
 // @info is %NULL.
 //
-    struct gcov_info *gcov_info_next(struct gcov_info *info)
-    {
-    if (!info)
+#[no_mangle]
+pub unsafe extern "C" fn gcov_info_next(info: *mut gcov_info) -> *mut c_void {
+    if (!info) {
     return gcov_info_head;
+    }
     return info.next;
     }
 //
@@ -175,8 +424,6 @@ pub unsafe extern "C" fn gcov_info_version(info: *mut gcov_info) -> c_uint {
 //
 #[no_mangle]
 pub unsafe extern "C" fn gcov_info_link(info: *mut gcov_info) {
-    void gcov_info_link(struct gcov_info *info)
-    {
     info.next = gcov_info_head;
     gcov_info_head = info;
     }
@@ -187,12 +434,12 @@ pub unsafe extern "C" fn gcov_info_link(info: *mut gcov_info) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn gcov_info_unlink(prev: *mut gcov_info, info: *mut gcov_info) {
-    void gcov_info_unlink(struct gcov_info *prev, struct gcov_info *info)
-    {
-    if (prev)
+    if (prev) {
     prev.next = info.next;
-    else
+    }
+    else {
     gcov_info_head = info.next;
+    }
     }
 //
 // gcov_info_within_module - check if a profiling data set belongs to a module
@@ -203,34 +450,26 @@ pub unsafe extern "C" fn gcov_info_unlink(prev: *mut gcov_info, info: *mut gcov_
 //
 #[no_mangle]
 pub unsafe extern "C" fn gcov_info_within_module(info: *mut gcov_info, mod: *mut module) -> bool {
-    bool gcov_info_within_module(struct gcov_info *info, struct module *mod)
-    {
     return within_module((unsigned long)info, mod);
     }
 // Symbolic links to be created for each profiling data file.
-    const struct gcov_link gcov_link[] = {
-    { OBJ_TREE, "gcno" },	/* Link to .gcno file in $(objtree). */
-    { 0, core::ptr::null_mut()},
-    };
+pub static mut gcov_link: usize = 0;
 //
 // Determine whether a counter is active. Doesn't change at run-time.
 //
 #[no_mangle]
 unsafe extern "C" fn counter_active(info: *mut gcov_info, type: c_uint) -> c_int {
-    static int counter_active(struct gcov_info *info, unsigned int type)
-    {
     return info.merge[type] ? 1 : 0;
     }
 // Determine number of active counters. Based on gcc magic.
 #[no_mangle]
 unsafe extern "C" fn num_counter_active(info: *mut gcov_info) -> c_uint {
-    static unsigned int num_counter_active(struct gcov_info *info)
-    {
-    unsigned int i;
-    let mut result: c_uint = 0;
-    for (i = 0; i < GCOV_COUNTERS; i++) {
-    if (counter_active(info, i))
-    result++;
+    let mut i = 0;
+pub static mut result: c_uint = 0;
+    while (i < GCOV_COUNTERS) {
+    if (counter_active(info, i)) {
+    result += 1;
+    }
     }
     return result;
     }
@@ -240,19 +479,18 @@ unsafe extern "C" fn num_counter_active(info: *mut gcov_info) -> c_uint {
 //
 #[no_mangle]
 pub unsafe extern "C" fn gcov_info_reset(info: *mut gcov_info) {
-    void gcov_info_reset(struct gcov_info *info)
-    {
-    struct gcov_ctr_info *ci_ptr;
-    unsigned int fi_idx;
-    unsigned int ct_idx;
-    for (fi_idx = 0; fi_idx < info.n_functions; fi_idx++) {
+pub static mut ci_ptr: *mut c_void = core::ptr::null_mut();
+    let mut fi_idx = 0;
+    let mut ct_idx = 0;
+    while (fi_idx < info.n_functions) {
     ci_ptr = info.functions[fi_idx].ctrs;
-    for (ct_idx = 0; ct_idx < GCOV_COUNTERS; ct_idx++) {
-    if (!counter_active(info, ct_idx))
+    while (ct_idx < GCOV_COUNTERS) {
+    if (!counter_active(info, ct_idx)) {
     continue;
+    }
     memset(ci_ptr.values, 0,
-    sizeof(gcov_type) * ci_ptr.num);
-    ci_ptr++;
+    sizeof!(gcov_type) * ci_ptr.num);
+    ci_ptr += 1;
     }
     }
     }
@@ -265,8 +503,6 @@ pub unsafe extern "C" fn gcov_info_reset(info: *mut gcov_info) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn gcov_info_is_compatible(info1: *mut gcov_info, info2: *mut gcov_info) -> c_int {
-    int gcov_info_is_compatible(struct gcov_info *info1, struct gcov_info *info2)
-    {
     return (info1.stamp == info2.stamp);
     }
 //
@@ -278,24 +514,24 @@ pub unsafe extern "C" fn gcov_info_is_compatible(info1: *mut gcov_info, info2: *
 //
 #[no_mangle]
 pub unsafe extern "C" fn gcov_info_add(dst: *mut gcov_info, src: *mut gcov_info) {
-    void gcov_info_add(struct gcov_info *dst, struct gcov_info *src)
-    {
-    struct gcov_ctr_info *dci_ptr;
-    struct gcov_ctr_info *sci_ptr;
-    unsigned int fi_idx;
-    unsigned int ct_idx;
-    unsigned int val_idx;
-    for (fi_idx = 0; fi_idx < src.n_functions; fi_idx++) {
+pub static mut dci_ptr: *mut c_void = core::ptr::null_mut();
+pub static mut sci_ptr: *mut c_void = core::ptr::null_mut();
+    let mut fi_idx = 0;
+    let mut ct_idx = 0;
+    let mut val_idx = 0;
+    while (fi_idx < src.n_functions) {
     dci_ptr = dst.functions[fi_idx].ctrs;
     sci_ptr = src.functions[fi_idx].ctrs;
-    for (ct_idx = 0; ct_idx < GCOV_COUNTERS; ct_idx++) {
-    if (!counter_active(src, ct_idx))
+    while (ct_idx < GCOV_COUNTERS) {
+    if (!counter_active(src, ct_idx)) {
     continue;
-    for (val_idx = 0; val_idx < sci_ptr.num; val_idx++)
+    }
+    for (val_idx = 0; val_idx < sci_ptr.num; val_idx++) {
     dci_ptr.values[val_idx] +=
     sci_ptr.values[val_idx];
-    dci_ptr++;
-    sci_ptr++;
+    }
+    dci_ptr += 1;
+    sci_ptr += 1;
     }
     }
     }
@@ -305,51 +541,56 @@ pub unsafe extern "C" fn gcov_info_add(dst: *mut gcov_info, src: *mut gcov_info)
 //
 // Return newly allocated duplicate on success, %NULL on error.
 //
-    struct gcov_info *gcov_info_dup(struct gcov_info *info)
-    {
-    struct gcov_info *dup;
-    struct gcov_ctr_info *dci_ptr; /* dst counter info */
-    struct gcov_ctr_info *sci_ptr; /* src counter info */
-    unsigned int active;
-    unsigned int fi_idx; /* function info idx */
-    unsigned int ct_idx; /* counter type idx */
-    size_t fi_size; /* function info size */
-    size_t cv_size; /* counter values size */
-    dup = kmemdup(info, sizeof(*dup), GFP_KERNEL);
-    if (!dup)
+#[no_mangle]
+pub unsafe extern "C" fn gcov_info_dup(info: *mut gcov_info) -> *mut c_void {
+pub static mut dup: *mut c_void = core::ptr::null_mut();
+pub static mut dci_ptr: *mut c_void = core::ptr::null_mut(); /* dst counter info */
+pub static mut sci_ptr: *mut c_void = core::ptr::null_mut(); /* src counter info */
+    let mut active = 0;
+    let mut fi_idx = 0; /* function info idx */
+    let mut ct_idx = 0; /* counter type idx */
+    let mut fi_size = 0; /* function info size */
+    let mut cv_size = 0; /* counter values size */
+    dup = kmemdup(info, sizeof!(*dup), GFP_KERNEL);
+    if (!dup) {
     return core::ptr::null_mut();
+    }
     dup.next = core::ptr::null_mut();
     dup.filename = core::ptr::null_mut();
     dup.functions = core::ptr::null_mut();
     dup.filename = kstrdup(info.filename, GFP_KERNEL);
-    if (!dup.filename)
-    goto err_free;
-    dup.functions = kzalloc_objs(struct gcov_fn_info *, info.n_functions);
-    if (!dup.functions)
-    goto err_free;
+    if (!dup.filename) {
+// goto;
+    }
+    dup.functions = kzalloc_objs(gcov_fn_info *, info.n_functions);
+    if (!dup.functions) {
+// goto;
+    }
     active = num_counter_active(info);
-    fi_size = sizeof(struct gcov_fn_info);
-    fi_size += sizeof(struct gcov_ctr_info) * active;
-    for (fi_idx = 0; fi_idx < info.n_functions; fi_idx++) {
+    fi_size = sizeof!(gcov_fn_info);
+    fi_size += sizeof!(gcov_ctr_info) * active;
+    while (fi_idx < info.n_functions) {
     dup.functions[fi_idx] = kzalloc(fi_size, GFP_KERNEL);
-    if (!dup.functions[fi_idx])
-    goto err_free;
+    if (!dup.functions[fi_idx]) {
+// goto;
+    }
 // (dup->functions[fi_idx]) = *(info->functions[fi_idx]);
     sci_ptr = info.functions[fi_idx].ctrs;
     dci_ptr = dup.functions[fi_idx].ctrs;
-    for (ct_idx = 0; ct_idx < active; ct_idx++) {
-    cv_size = sizeof(gcov_type) * sci_ptr.num;
+    while (ct_idx < active) {
+    cv_size = sizeof!(gcov_type) * sci_ptr.num;
     dci_ptr.values = kvmalloc(cv_size, GFP_KERNEL);
-    if (!dci_ptr.values)
-    goto err_free;
+    if (!dci_ptr.values) {
+// goto;
+    }
     dci_ptr.num = sci_ptr.num;
     memcpy(dci_ptr.values, sci_ptr.values, cv_size);
-    sci_ptr++;
-    dci_ptr++;
+    sci_ptr += 1;
+    dci_ptr += 1;
     }
     }
     return dup;
-    err_free:
+// label;
     gcov_info_free(dup);
     return core::ptr::null_mut();
     }
@@ -359,24 +600,25 @@ pub unsafe extern "C" fn gcov_info_add(dst: *mut gcov_info, src: *mut gcov_info)
 //
 #[no_mangle]
 pub unsafe extern "C" fn gcov_info_free(info: *mut gcov_info) {
-    void gcov_info_free(struct gcov_info *info)
-    {
-    unsigned int active;
-    unsigned int fi_idx;
-    unsigned int ct_idx;
-    struct gcov_ctr_info *ci_ptr;
-    if (!info.functions)
-    goto free_info;
+    let mut active = 0;
+    let mut fi_idx = 0;
+    let mut ct_idx = 0;
+pub static mut ci_ptr: *mut c_void = core::ptr::null_mut();
+    if (!info.functions) {
+// goto;
+    }
     active = num_counter_active(info);
-    for (fi_idx = 0; fi_idx < info.n_functions; fi_idx++) {
-    if (!info.functions[fi_idx])
+    while (fi_idx < info.n_functions) {
+    if (!info.functions[fi_idx]) {
     continue;
+    }
     ci_ptr = info.functions[fi_idx].ctrs;
-    for (ct_idx = 0; ct_idx < active; ct_idx++, ci_ptr++)
+    for (ct_idx = 0; ct_idx < active; ct_idx++, ci_ptr++) {
     kvfree(ci_ptr.values);
+    }
     kfree(info.functions[fi_idx]);
     }
-    free_info:
+// label;
     kfree(info.functions);
     kfree(info.filename);
     kfree(info);
@@ -390,14 +632,12 @@ pub unsafe extern "C" fn gcov_info_free(info: *mut gcov_info) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn convert_to_gcda(buffer: *mut c_char, info: *mut gcov_info) -> usize {
-    size_t convert_to_gcda(char *buffer, struct gcov_info *info)
-    {
-    struct gcov_fn_info *fi_ptr;
-    struct gcov_ctr_info *ci_ptr;
-    unsigned int fi_idx;
-    unsigned int ct_idx;
-    unsigned int cv_idx;
-    let mut pos: usize = 0;
+pub static mut fi_ptr: *mut c_void = core::ptr::null_mut();
+pub static mut ci_ptr: *mut c_void = core::ptr::null_mut();
+    let mut fi_idx = 0;
+    let mut ct_idx = 0;
+    let mut cv_idx = 0;
+pub static mut pos: usize = 0;
 // File header.
     pos += store_gcov_u32(buffer, pos, GCOV_DATA_MAGIC);
     pos += store_gcov_u32(buffer, pos, info.version);
@@ -406,7 +646,7 @@ pub unsafe extern "C" fn convert_to_gcda(buffer: *mut c_char, info: *mut gcov_in
 // Use zero as checksum of the compilation unit.
     pos += store_gcov_u32(buffer, pos, 0);
 
-    for (fi_idx = 0; fi_idx < info.n_functions; fi_idx++) {
+    while (fi_idx < info.n_functions) {
     fi_ptr = info.functions[fi_idx];
 // Function record.
     pos += store_gcov_u32(buffer, pos, GCOV_TAG_FUNCTION);
@@ -416,19 +656,20 @@ pub unsafe extern "C" fn convert_to_gcda(buffer: *mut c_char, info: *mut gcov_in
     pos += store_gcov_u32(buffer, pos, fi_ptr.lineno_checksum);
     pos += store_gcov_u32(buffer, pos, fi_ptr.cfg_checksum);
     ci_ptr = fi_ptr.ctrs;
-    for (ct_idx = 0; ct_idx < GCOV_COUNTERS; ct_idx++) {
-    if (!counter_active(info, ct_idx))
+    while (ct_idx < GCOV_COUNTERS) {
+    if (!counter_active(info, ct_idx)) {
     continue;
+    }
 // Counter record.
     pos += store_gcov_u32(buffer, pos,
     GCOV_TAG_FOR_COUNTER(ct_idx));
     pos += store_gcov_u32(buffer, pos,
     ci_ptr.num * 2 * GCOV_UNIT_SIZE);
-    for (cv_idx = 0; cv_idx < ci_ptr.num; cv_idx++) {
+    while (cv_idx < ci_ptr.num) {
     pos += store_gcov_u64(buffer, pos,
     ci_ptr.values[cv_idx]);
     }
-    ci_ptr++;
+    ci_ptr += 1;
     }
     }
     return pos;

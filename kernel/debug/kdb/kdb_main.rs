@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -46,27 +296,27 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Copyright (c) 2009 Wind River Systems, Inc.  All Rights Reserved.
 //
 
-    let mut kdb_cmd_enabled: static int = CONFIG_KDB_DEFAULT_ENABLE;
-    module_param_named(cmd_enable, kdb_cmd_enabled, int, 0600);
+pub static mut kdb_cmd_enabled: int = 0;
+    module_param_named!(cmd_enable, kdb_cmd_enabled, int, 0600);
     char kdb_grep_string[KDB_GREP_STRLEN];
-    int kdb_grepping_flag;
+    let mut kdb_grepping_flag = 0;
     EXPORT_SYMBOL(kdb_grepping_flag);
-    int kdb_grep_leading;
-    int kdb_grep_trailing;
+    let mut kdb_grep_leading = 0;
+    let mut kdb_grep_trailing = 0;
 //
 // Kernel debugger state flags
 //
-    unsigned int kdb_flags;
+    let mut kdb_flags = 0;
 //
 // kdb_lock protects updates to kdb_initial_cpu.  Used to
 // single thread processors through the kernel debugger.
 //
-    int kdb_initial_cpu = -1;	/* cpu number that owns kdb */
-    let mut kdb_nextline: c_int = 1;
-    int kdb_state;			/* General KDB state */
-    struct task_struct *kdb_current_task;
-    struct pt_regs *kdb_current_regs;
-    const char *kdb_diemsg;
+    let mut kdb_initial_cpu = -1;	/* cpu number that owns kdb */
+pub static mut kdb_nextline: c_int = 1;
+    let mut kdb_state = 0;			/* General KDB state */
+pub static mut kdb_current_task: *mut c_void = core::ptr::null_mut();
+pub static mut kdb_current_regs: *mut c_void = core::ptr::null_mut();
+pub static mut kdb_diemsg: *mut c_void = core::ptr::null_mut();
     static int kdb_go_count;
 
     static unsigned int kdb_continue_catastrophic =
@@ -75,10 +325,10 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     static unsigned int kdb_continue_catastrophic;
 
 // kdb_cmds_head describes the available commands.
-    static LIST_HEAD(kdb_cmds_head);
+pub static mut kdb_cmds_head: usize = 0;
     typedef struct _kdbmsg {
-    int	km_diag;	/* kdb diagnostic */
-    char	*km_msg;	/* Corresponding message text */
+    let mut km_diag = 0;	/* kdb diagnostic */
+pub static mut km_msg: *mut c_void = core::ptr::null_mut();	/* Corresponding message text */
     } kdbmsg_t;
 
     { KDB_##msgnum, text }
@@ -112,7 +362,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     KDBMSG(NOPERM, "Permission denied"),
     };
 
-    let mut __nkdb_err: static int = ARRAY_SIZE(kdbmsgs);
+pub static mut __nkdb_err: int = 0;
 //
 // Initial environment. This is all kept static and local to this file.
 // The entire environment is limited to a fixed number of entries
@@ -131,7 +381,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     "DTABCOUNT=30",
     "NOSECT=1",
     };
-    let mut __nenv: static int = ARRAY_SIZE(__env);
+pub static mut __nenv: int = 0;
 //
 // Update the permissions flags (kdb_cmd_enabled) to match the
 // current lockdown state.
@@ -155,43 +405,46 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_check_for_lockdown() {
-    static void kdb_check_for_lockdown(void)
-    {
-    const int write_flags = KDB_ENABLE_MEM_WRITE |
+    let mut write_flags = KDB_ENABLE_MEM_WRITE |
     KDB_ENABLE_REG_WRITE |
     KDB_ENABLE_FLOW_CTRL;
-    const int read_flags = KDB_ENABLE_MEM_READ |
+    let mut read_flags = KDB_ENABLE_MEM_READ |
     KDB_ENABLE_REG_READ;
-    let mut need_to_lockdown_write: bool = false;
-    let mut need_to_lockdown_read: bool = false;
-    if (kdb_cmd_enabled & (KDB_ENABLE_ALL | write_flags))
+pub static mut need_to_lockdown_write: bool = false;
+pub static mut need_to_lockdown_read: bool = false;
+    if (kdb_cmd_enabled & (KDB_ENABLE_ALL | write_flags)) {
     need_to_lockdown_write =
     security_locked_down(LOCKDOWN_DBG_WRITE_KERNEL);
-    if (kdb_cmd_enabled & (KDB_ENABLE_ALL | read_flags))
+    }
+    if (kdb_cmd_enabled & (KDB_ENABLE_ALL | read_flags)) {
     need_to_lockdown_read =
     security_locked_down(LOCKDOWN_DBG_READ_KERNEL);
+    }
 // De-compose KDB_ENABLE_ALL if required
-    if (need_to_lockdown_write || need_to_lockdown_read)
+    if (need_to_lockdown_write || need_to_lockdown_read) {
     if (kdb_cmd_enabled & KDB_ENABLE_ALL)
     kdb_cmd_enabled = KDB_ENABLE_MASK & ~KDB_ENABLE_ALL;
-    if (need_to_lockdown_write)
+    }
+    if (need_to_lockdown_write) {
     kdb_cmd_enabled &= ~write_flags;
-    if (need_to_lockdown_read)
+    }
+    if (need_to_lockdown_read) {
     kdb_cmd_enabled &= ~read_flags;
+    }
     }
 //
 // Check whether the flags of the current command, the permissions of the kdb
 // console and the lockdown state allow a command to be run.
 //
-    static bool kdb_check_flags(kdb_cmdflags_t flags, int permissions,
-    bool no_args)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn kdb_check_flags(flags: kdb_cmdflags_t, permissions: c_int, no_args: bool) -> bool {
 // permissions comes from userspace so needs massaging slightly
     permissions &= KDB_ENABLE_MASK;
     permissions |= KDB_ENABLE_ALWAYS_SAFE;
 // some commands change group when launched with no arguments
-    if (no_args)
+    if (no_args) {
     permissions |= permissions << KDB_ENABLE_NO_ARGS_SHIFT;
+    }
     flags |= KDB_ENABLE_ALL;
     return permissions & flags;
     }
@@ -204,19 +457,20 @@ unsafe extern "C" fn kdb_check_for_lockdown() {
 // NULL	No environment variable matches 'match'
 // char*	Pointer to string value of environment variable.
 //
-    char *kdbgetenv(const char *match)
-    {
-    char **ep = __env;
-    let mut matchlen: c_int = strlen(match);
-    int i;
-    for (i = 0; i < __nenv; i++) {
-    char *e = *ep++;
-    if (!e)
+#[no_mangle]
+pub unsafe extern "C" fn kdbgetenv(match: *mut c_char) -> *mut c_void {
+    let mut ep = __env;
+pub static mut matchlen: c_int = 0;
+    let mut i = 0;
+    while (i < __nenv) {
+    let mut e = *ep += 1;
+    if (!e) {
     continue;
+    }
     if ((strncmp(match, e, matchlen) == 0)
     && ((e[matchlen] == '\0')
     || (e[matchlen] == '='))) {
-    char *cp = strchr(e, '=');
+    let mut cp = strchr(e, '=');
     return cp ? ++cp : "";
     }
     }
@@ -234,16 +488,17 @@ unsafe extern "C" fn kdb_check_for_lockdown() {
 //
 #[no_mangle]
 unsafe extern "C" fn kdbgetulenv(match: *const c_char, value: *mut c_ulong) -> c_int {
-    static int kdbgetulenv(const char *match, unsigned long *value)
-    {
-    char *ep;
+pub static mut ep: *mut c_void = core::ptr::null_mut();
     ep = kdbgetenv(match);
-    if (!ep)
+    if (!ep) {
     return KDB_NOTENV;
-    if (strlen(ep) == 0)
+    }
+    if (strlen(ep) == 0) {
     return KDB_NOENVVALUE;
-    if (kstrtoul(ep, 0, value))
+    }
+    if (kstrtoul(ep, 0, value)) {
     return KDB_BADINT;
+    }
     return 0;
     }
 //
@@ -258,13 +513,12 @@ unsafe extern "C" fn kdbgetulenv(match: *const c_char, value: *mut c_ulong) -> c
 //
 #[no_mangle]
 pub unsafe extern "C" fn kdbgetintenv(match: *const c_char, value: *mut c_int) -> c_int {
-    int kdbgetintenv(const char *match, int *value)
-    {
-    unsigned long val;
-    int diag;
+    let mut val = 0;
+    let mut diag = 0;
     diag = kdbgetulenv(match, &val);
-    if (!diag)
+    if (!diag) {
 // value = (int) val;
+    }
     return diag;
     }
 //
@@ -276,18 +530,17 @@ pub unsafe extern "C" fn kdbgetintenv(match: *const c_char, value: *mut c_int) -
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_setenv(var: *const c_char, val: *const c_char) -> c_int {
-    static int kdb_setenv(const char *var, const char *val)
-    {
-    int i;
-    char *ep;
+    let mut i = 0;
+pub static mut ep: *mut c_void = core::ptr::null_mut();
     size_t varlen, vallen;
     varlen = strlen(var);
     vallen = strlen(val);
     ep = kmalloc(varlen + vallen + 2, GFP_KDB);
-    if (!ep)
+    if (!ep) {
     return KDB_KMALLOCFAILED;
+    }
     sprintf(ep, "%s=%s", var, val);
-    for (i = 0; i < __nenv; i++) {
+    while (i < __nenv) {
     if (__env[i]
     && ((strncmp(__env[i], var, varlen) == 0)
     && ((__env[i][varlen] == '\0')
@@ -300,8 +553,8 @@ unsafe extern "C" fn kdb_setenv(var: *const c_char, val: *const c_char) -> c_int
 //
 // Wasn't existing variable.  Fit into slot.
 //
-    for (i = 0; i < __nenv-1; i++) {
-    if (__env[i] == (char *)0) {
+    while (i < __nenv-1) {
+    if (__env[i] == 0) {
     __env[i] = ep;
     return 0;
     }
@@ -313,12 +566,11 @@ unsafe extern "C" fn kdb_setenv(var: *const c_char, val: *const c_char) -> c_int
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_printenv() {
-    static void kdb_printenv(void)
-    {
-    int i;
-    for (i = 0; i < __nenv; i++) {
-    if (__env[i])
+    let mut i = 0;
+    while (i < __nenv) {
+    if (__env[i]) {
     kdb_printf("%s\n", __env[i]);
+    }
     }
     }
 //
@@ -333,18 +585,16 @@ unsafe extern "C" fn kdb_printenv() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kdbgetularg(arg: *const c_char, value: *mut c_ulong) -> c_int {
-    int kdbgetularg(const char *arg, unsigned long *value)
-    {
-    if (kstrtoul(arg, 0, value))
+    if (kstrtoul(arg, 0, value)) {
     return KDB_BADINT;
+    }
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn kdbgetu64arg(arg: *const c_char, value: *mut u64) -> c_int {
-    int kdbgetu64arg(const char *arg, u64 *value)
-    {
-    if (kstrtou64(arg, 0, value))
+    if (kstrtou64(arg, 0, value)) {
     return KDB_BADINT;
+    }
     return 0;
     }
 //
@@ -353,8 +603,6 @@ pub unsafe extern "C" fn kdbgetu64arg(arg: *const c_char, value: *mut u64) -> c_
 //
 #[no_mangle]
 pub unsafe extern "C" fn kdb_set(argc: c_int, argv: *const c_char) -> c_int {
-    int kdb_set(int argc, const char **argv)
-    {
 //
 // we can be invoked two ways:
 // set var=value    argv[1]="var", argv[2]="value"
@@ -363,22 +611,24 @@ pub unsafe extern "C" fn kdb_set(argc: c_int, argv: *const c_char) -> c_int {
 //
     if (argc == 3) {
     argv[2] = argv[3];
-    argc--;
+    argc -= 1;
     }
-    if (argc != 2)
+    if (argc != 2) {
     return KDB_ARGCOUNT;
+    }
 //
 // Censor sensitive variables
 //
     if (strcmp(argv[1], "PROMPT") == 0 &&
-    !kdb_check_flags(KDB_ENABLE_MEM_READ, kdb_cmd_enabled, false))
+    !kdb_check_flags(KDB_ENABLE_MEM_READ, kdb_cmd_enabled, false)) {
     return KDB_NOPERM;
+    }
 //
 // Check for internal variables
 //
     if (strcmp(argv[1], "KDBDEBUG") == 0) {
-    unsigned int debugflags;
-    int ret;
+    let mut debugflags = 0;
+    let mut ret = 0;
     ret = kstrtouint(argv[2], 0, &debugflags);
     if (ret || debugflags & ~KDB_DEBUG_FLAG_MASK) {
     kdb_printf("kdb: illegal debug flags '%s'\n",
@@ -397,8 +647,6 @@ pub unsafe extern "C" fn kdb_set(argc: c_int, argv: *const c_char) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn kdb_check_regs() -> c_int {
-    static int kdb_check_regs(void)
-    {
     if (!kdb_current_regs) {
     kdb_printf("No current kdb registers."
     "  You may need to select another task\n");
@@ -431,27 +679,26 @@ unsafe extern "C" fn kdb_check_regs() -> c_int {
 // zero is returned on success, a kdb diagnostic code is
 // returned on error.
 //
-    int kdbgetaddrarg(int argc, const char **argv, int *nextarg,
-    unsigned long *value,  long *offset,
-    char **name)
-    {
-    unsigned long addr;
-    let mut off: c_ulong = 0;
-    int positive;
-    int diag;
-    let mut found: c_int = 0;
-    char *symname;
-    let mut symbol: c_char = '\0';
-    char *cp;
-    kdb_symtab_t symtab;
+#[no_mangle]
+pub unsafe extern "C" fn kdbgetaddrarg(argc: c_int, argv: *mut *mut c_char, nextarg: *mut c_int, value: *mut c_ulong, offset: *mut c_long, name: *mut *mut c_char) -> c_int {
+    let mut addr = 0;
+pub static mut off: c_ulong = 0;
+    let mut positive = 0;
+    let mut diag = 0;
+pub static mut found: c_int = 0;
+pub static mut symname: *mut c_void = core::ptr::null_mut();
+pub static mut symbol: c_char = '\0';
+pub static mut cp: *mut c_void = core::ptr::null_mut();
+    let mut symtab;
 //
 // If the enable flags prohibit both arbitrary memory access
 // and flow control then there are no reasonable grounds to
 // provide symbol lookup.
 //
     if (!kdb_check_flags(KDB_ENABLE_MEM_READ | KDB_ENABLE_FLOW_CTRL,
-    kdb_cmd_enabled, false))
+    kdb_cmd_enabled, false)) {
     return KDB_NOPERM;
+    }
 //
 // Process arguments which follow the following syntax:
 //
@@ -459,9 +706,10 @@ unsafe extern "C" fn kdb_check_regs() -> c_int {
 // %register
 // $environment-variable
 //
-    if (*nextarg > argc)
+    if (*nextarg > argc) {
     return KDB_ARGCOUNT;
-    symname = (char *)argv[*nextarg];
+    }
+    symname = argv[*nextarg];
 //
 // If there is no whitespace between the symbol
 // or address and the '+' or '-' symbols, we
@@ -475,12 +723,14 @@ unsafe extern "C" fn kdb_check_regs() -> c_int {
     }
     if (symname[0] == '$') {
     diag = kdbgetulenv(&symname[1], &addr);
-    if (diag)
+    if (diag) {
     return diag;
+    }
     } else if (symname[0] == '%') {
     diag = kdb_check_regs();
-    if (diag)
+    if (diag) {
     return diag;
+    }
 // Implement register values with % at a later time as it is
 // arch optional.
 //
@@ -491,22 +741,28 @@ unsafe extern "C" fn kdb_check_regs() -> c_int {
     addr = symtab.sym_start;
     } else {
     diag = kdbgetularg(argv[*nextarg], &addr);
-    if (diag)
+    if (diag) {
     return diag;
     }
     }
-    if (!found)
+    }
+    if (!found) {
     found = kdbnearsym(addr, &symtab);
+    }
     (*nextarg)++;
-    if (name)
+    if (name) {
 // name = symname;
-    if (value)
+    }
+    if (value) {
 // value = addr;
-    if (offset && name && *name)
+    }
+    if (offset && name && *name) {
 // offset = addr - symtab.sym_start;
+    }
     if ((*nextarg > argc)
-    && (symbol == '\0'))
+    && (symbol == '\0')) {
     return 0;
+    }
 //
 // check for +/- and offset
 //
@@ -521,8 +777,9 @@ unsafe extern "C" fn kdb_check_regs() -> c_int {
     positive = (argv[*nextarg][0] == '+');
     (*nextarg)++;
     }
-    } else
+    } else {
     positive = (symbol == '+');
+    }
 //
 // Now there must be an offset!
 //
@@ -531,30 +788,32 @@ unsafe extern "C" fn kdb_check_regs() -> c_int {
     return KDB_INVADDRFMT;
     }
     if (!symbol) {
-    cp = (char *)argv[*nextarg];
+    cp = argv[*nextarg];
     (*nextarg)++;
     }
     diag = kdbgetularg(cp, &off);
-    if (diag)
+    if (diag) {
     return diag;
-    if (!positive)
+    }
+    if (!positive) {
     off = -off;
-    if (offset)
+    }
+    if (offset) {
 // offset += off;
-    if (value)
+    }
+    if (value) {
 // value += off;
+    }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn kdb_cmderror(diag: c_int) {
-    static void kdb_cmderror(int diag)
-    {
-    int i;
+    let mut i = 0;
     if (diag >= 0) {
     kdb_printf("no error detected (diagnostic is %d)\n", diag);
     return;
     }
-    for (i = 0; i < __nkdb_err; i++) {
+    while (i < __nkdb_err) {
     if (kdbmsgs[i].km_diag == diag) {
     kdb_printf("diag: %d: %s\n", diag, kdbmsgs[i].km_msg);
     return;
@@ -577,32 +836,32 @@ unsafe extern "C" fn kdb_cmderror(diag: c_int) {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct kdb_macro {
-    pub /: *mut *mut kdbtab_t cmd; / Macro command,
-    pub /: *mut *mut list_head statements; / Associated statement list,
+//     pub /: *mut *mut kdbtab_t cmd; / Macro command,
+//     pub /: *mut *mut list_head statements; / Associated statement list,
 }
 
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct kdb_macro_statement {
-    pub /: *mut *mut *mut char statement; / Statement text,
-    pub /: *mut *mut list_head list_node; / Statement list node,
+//     pub /: *mut *mut *mut char statement; / Statement text,
+//     pub /: *mut *mut list_head list_node; / Statement list node,
 }
 
-    static struct kdb_macro *kdb_macro;
+pub static mut kdb_macro: *mut c_void = core::ptr::null_mut();
     static bool defcmd_in_progress;
 // Forward references
-    static int kdb_exec_defcmd(int argc, const char **argv);
+// forward_decl: kdb_exec_defcmd;
 #[no_mangle]
 unsafe extern "C" fn kdb_defcmd2(cmdstr: *const c_char, argv0: *const c_char) -> c_int {
-    static int kdb_defcmd2(const char *cmdstr, const char *argv0)
-    {
-    struct kdb_macro_statement *kms;
-    if (!kdb_macro)
+pub static mut kms: *mut c_void = core::ptr::null_mut();
+    if (!kdb_macro) {
     return KDB_NOTIMP;
+    }
     if (strcmp(argv0, "endefcmd") == 0) {
     defcmd_in_progress = false;
-    if (!list_empty(&kdb_macro.statements))
+    if (!list_empty(&kdb_macro.statements)) {
     kdb_register(&kdb_macro.cmd);
+    }
     return 0;
     }
     kms = kmalloc_obj(*kms, GFP_KDB);
@@ -617,63 +876,67 @@ unsafe extern "C" fn kdb_defcmd2(cmdstr: *const c_char, argv0: *const c_char) ->
     }
 #[no_mangle]
 unsafe extern "C" fn kdb_defcmd(argc: c_int, argv: *const c_char) -> c_int {
-    static int kdb_defcmd(int argc, const char **argv)
-    {
-    kdbtab_t *mp;
+pub static mut mp: *mut c_void = core::ptr::null_mut();
     if (defcmd_in_progress) {
     kdb_printf("kdb: nested defcmd detected, assuming missing "
     "endefcmd\n");
     kdb_defcmd2("endefcmd", "endefcmd");
     }
     if (argc == 0) {
-    kdbtab_t *kp;
-    struct kdb_macro *kmp;
-    struct kdb_macro_statement *kms;
+pub static mut kp: *mut c_void = core::ptr::null_mut();
+pub static mut kmp: *mut c_void = core::ptr::null_mut();
+pub static mut kms: *mut c_void = core::ptr::null_mut();
     list_for_each_entry(kp, &kdb_cmds_head, list_node) {
     if (kp.func == kdb_exec_defcmd) {
     kdb_printf("defcmd %s \"%s\" \"%s\"\n",
     kp.name, kp.usage, kp.help);
-    kmp = container_of(kp, struct kdb_macro, cmd);
+    kmp = container_of!(kp, kdb_macro, cmd);
     list_for_each_entry(kms, &kmp.statements,
-    list_node)
+    list_node) {
     kdb_printf("%s", kms.statement);
+    }
     kdb_printf("endefcmd\n");
     }
     }
     return 0;
     }
-    if (argc != 3)
+    if (argc != 3) {
     return KDB_ARGCOUNT;
+    }
     if (in_dbg_master()) {
     kdb_printf("Command only available during kdb_init()\n");
     return KDB_NOTIMP;
     }
     kdb_macro = kzalloc_obj(*kdb_macro, GFP_KDB);
-    if (!kdb_macro)
-    goto fail_defcmd;
+    if (!kdb_macro) {
+// goto;
+    }
     mp = &kdb_macro.cmd;
     mp.func = kdb_exec_defcmd;
     mp.minlen = 0;
     mp.flags = KDB_ENABLE_ALWAYS_SAFE;
     mp.name = kdb_strdup(argv[1], GFP_KDB);
-    if (!mp.name)
-    goto fail_name;
+    if (!mp.name) {
+// goto;
+    }
     mp.usage = kdb_strdup_dequote(argv[2], GFP_KDB);
-    if (!mp.usage)
-    goto fail_usage;
+    if (!mp.usage) {
+// goto;
+    }
     mp.help = kdb_strdup_dequote(argv[3], GFP_KDB);
-    if (!mp.help)
-    goto fail_help;
+    if (!mp.help) {
+// goto;
+    }
     INIT_LIST_HEAD(&kdb_macro.statements);
     defcmd_in_progress = true;
     return 0;
-    fail_help:
+// label;
     kfree(mp.usage);
-    fail_usage:
+// label;
     kfree(mp.name);
-    fail_name:
+// label;
     kfree(kdb_macro);
-    fail_defcmd:
+// label;
     kdb_printf("Could not allocate new kdb_macro entry for %s\n", argv[1]);
     return KDB_NOTIMP;
     }
@@ -688,24 +951,24 @@ unsafe extern "C" fn kdb_defcmd(argc: c_int, argv: *const c_char) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_exec_defcmd(argc: c_int, argv: *const c_char) -> c_int {
-    static int kdb_exec_defcmd(int argc, const char **argv)
-    {
-    int ret;
-    kdbtab_t *kp;
-    struct kdb_macro *kmp;
-    struct kdb_macro_statement *kms;
-    if (argc != 0)
+    let mut ret = 0;
+pub static mut kp: *mut c_void = core::ptr::null_mut();
+pub static mut kmp: *mut c_void = core::ptr::null_mut();
+pub static mut kms: *mut c_void = core::ptr::null_mut();
+    if (argc != 0) {
     return KDB_ARGCOUNT;
+    }
     list_for_each_entry(kp, &kdb_cmds_head, list_node) {
-    if (strcmp(kp.name, argv[0]) == 0)
+    if (strcmp(kp.name, argv[0]) == 0) {
     break;
+    }
     }
     if (list_entry_is_head(kp, &kdb_cmds_head, list_node)) {
     kdb_printf("kdb_exec_defcmd: could not find commands for %s\n",
     argv[0]);
     return KDB_NOTIMP;
     }
-    kmp = container_of(kp, struct kdb_macro, cmd);
+    kmp = container_of!(kp, kdb_macro, cmd);
     list_for_each_entry(kms, &kmp.statements, list_node) {
 //
 // Recursive use of kdb_parse, do not use argv after this point.
@@ -713,8 +976,9 @@ unsafe extern "C" fn kdb_exec_defcmd(argc: c_int, argv: *const c_char) -> c_int 
     argv = core::ptr::null_mut();
     kdb_printf("[%s]kdb> %s\n", kmp.cmd.name, kms.statement);
     ret = kdb_parse(kms.statement);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     }
     return 0;
     }
@@ -731,26 +995,28 @@ pub const KDB_CMD_HISTORY_COUNT: c_int = 32;
 //
 #[no_mangle]
 unsafe extern "C" fn parse_grep(str: *const c_char) {
-    static void parse_grep(const char *str)
-    {
-    int	len;
-    char	*cp = (char *)str, *cp2;
+    let mut len = 0;
+    let mut cp = str, *cp2;
 // sanity check: we should have been called with the \ first
-    if (*cp != '|')
+    if (*cp != '|') {
     return;
-    cp++;
-    while (isspace(*cp))
-    cp++;
+    }
+    cp += 1;
+    while (isspace(*cp)) {
+    cp += 1;
+    }
     if (!str_has_prefix(cp, "grep ")) {
     kdb_printf("invalid 'pipe', see grephelp\n");
     return;
     }
     cp += 5;
-    while (isspace(*cp))
-    cp++;
+    while (isspace(*cp)) {
+    cp += 1;
+    }
     cp2 = strchr(cp, '\n');
-    if (cp2)
-// cp2 = '\0'; /* remove the trailing newline
+    if (cp2) {
+// cp2 = '\0'; // remove the trailing newline
+    }
     len = strlen(cp);
     if (len == 0) {
     kdb_printf("invalid 'pipe', see grephelp\n");
@@ -760,18 +1026,18 @@ unsafe extern "C" fn parse_grep(str: *const c_char) {
     if (*cp == '"') {
 // allow it be "x y z" by removing the "'s - there must
     be two of them */
-    cp++;
+    cp += 1;
     cp2 = strchr(cp, '"');
     if (!cp2) {
     kdb_printf("invalid quoted string, see grephelp\n");
     return;
     }
-// cp2 = '\0'; /* end the string where the 2nd " was
+// cp2 = '\0'; // end the string where the 2nd " was
     }
     kdb_grep_leading = 0;
     if (*cp == '^') {
     kdb_grep_leading = 1;
-    cp++;
+    cp += 1;
     }
     len = strlen(cp);
     kdb_grep_trailing = 0;
@@ -780,14 +1046,15 @@ unsafe extern "C" fn parse_grep(str: *const c_char) {
 // (cp+len-1) = '\0';
     }
     len = strlen(cp);
-    if (!len)
+    if (!len) {
     return;
+    }
     if (len >= KDB_GREP_STRLEN) {
     kdb_printf("search string too long\n");
     return;
     }
     memcpy(kdb_grep_string, cp, len + 1);
-    kdb_grepping_flag++;
+    kdb_grepping_flag += 1;
     return;
     }
 //
@@ -818,19 +1085,17 @@ unsafe extern "C" fn parse_grep(str: *const c_char) {
 pub const MAXARGC: c_int = 20;
 #[no_mangle]
 pub unsafe extern "C" fn kdb_parse(cmdstr: *const c_char) -> c_int {
-    int kdb_parse(const char *cmdstr)
-    {
     static char *argv[MAXARGC];
     static int argc;
     static char cbuf[CMD_BUFLEN+2];
-    char *cp;
+pub static mut cp: *mut c_void = core::ptr::null_mut();
     char *cpp, quoted;
-    kdbtab_t *tp;
+pub static mut tp: *mut c_void = core::ptr::null_mut();
     int escaped, ignore_errors = 0, check_grep = 0;
 //
 // First tokenize the command string.
 //
-    cp = (char *)cmdstr;
+    cp = cmdstr;
     if (KDB_FLAG(CMD_INTERRUPT)) {
 // Previous command was interrupted, newline must not
 // repeat the command
@@ -843,14 +1108,16 @@ pub unsafe extern "C" fn kdb_parse(cmdstr: *const c_char) -> c_int {
     cpp = cbuf;
     while (*cp) {
 // skip whitespace
-    while (isspace(*cp))
-    cp++;
+    while (isspace(*cp)) {
+    cp += 1;
+    }
     if ((*cp == '\0') || (*cp == '\n') ||
-    (*cp == '#' && !defcmd_in_progress))
+    (*cp == '#' && !defcmd_in_progress)) {
     break;
+    }
 // special case: check for | grep pattern
     if (*cp == '|') {
-    check_grep++;
+    check_grep += 1;
     break;
     }
     if (cpp >= cbuf + CMD_BUFLEN) {
@@ -871,38 +1138,43 @@ pub unsafe extern "C" fn kdb_parse(cmdstr: *const c_char) -> c_int {
 // whitespace or '='
     while (*cp && *cp != '\n' &&
     (escaped || quoted || !isspace(*cp))) {
-    if (cpp >= cbuf + CMD_BUFLEN)
+    if (cpp >= cbuf + CMD_BUFLEN) {
     break;
+    }
     if (escaped) {
     escaped = 0;
-// cpp++ = *cp++;
+// cpp++ = *cp += 1;
     continue;
     }
     if (*cp == '\\') {
     escaped = 1;
-    ++cp;
+    cp += 1;
     continue;
     }
-    if (*cp == quoted)
+    if (*cp == quoted) {
     quoted = '\0';
-#[no_mangle]
-pub unsafe extern "C" fn if('"': *mut *mut *mut cp == '\'' || cp ==) -> else {
-    else if (*cp == '\'' || *cp == '"')
+    }
+
+    else if (*cp == '\'' || *cp == '"') {
     quoted = *cp;
-// cpp = *cp++;
-    if (*cpp == '=' && !quoted)
+    }
+// cpp = *cp += 1;
+    if (*cpp == '=' && !quoted) {
     break;
-    ++cpp;
     }
-// cpp++ = '\0';	/* Squash a ws or '=' character
+    cpp += 1;
+    }
+// cpp++ = '\0';	// Squash a ws or '=' character
     }
     }
-    if (!argc)
+    if (!argc) {
     return 0;
-    if (check_grep)
+    }
+    if (check_grep) {
     parse_grep(cp);
+    }
     if (defcmd_in_progress) {
-    let mut result: c_int = kdb_defcmd2(cmdstr, argv[0]);
+pub static mut result: c_int = 0;
     if (!defcmd_in_progress) {
     argc = 0;	/* avoid repeat on endefcmd */
 // (argv[0]) = '\0';
@@ -920,10 +1192,12 @@ pub unsafe extern "C" fn if('"': *mut *mut *mut cp == '\'' || cp ==) -> else {
 // check to see if this is it.
 //
     if (tp.minlen && (strlen(argv[0]) <= tp.minlen) &&
-    (strncmp(argv[0], tp.name, tp.minlen) == 0))
+    (strncmp(argv[0], tp.name, tp.minlen) == 0)) {
     break;
-    if (strcmp(argv[0], tp.name) == 0)
+    }
+    if (strcmp(argv[0], tp.name) == 0) {
     break;
+    }
     }
 //
 // If we don't find a command by this name, see if the first
@@ -932,24 +1206,29 @@ pub unsafe extern "C" fn if('"': *mut *mut *mut cp == '\'' || cp ==) -> else {
 //
     if (list_entry_is_head(tp, &kdb_cmds_head, list_node)) {
     list_for_each_entry(tp, &kdb_cmds_head, list_node) {
-    if (strncmp(argv[0], tp.name, strlen(tp.name)) == 0)
+    if (strncmp(argv[0], tp.name, strlen(tp.name)) == 0) {
     break;
     }
     }
+    }
     if (!list_entry_is_head(tp, &kdb_cmds_head, list_node)) {
-    int result;
-    if (!kdb_check_flags(tp.flags, kdb_cmd_enabled, argc <= 1))
+    let mut result = 0;
+    if (!kdb_check_flags(tp.flags, kdb_cmd_enabled, argc <= 1)) {
     return KDB_NOPERM;
+    }
     KDB_STATE_SET(CMD);
-    result = (*tp.func)(argc-1, (const char **)argv);
-    if (result && ignore_errors && result > KDB_CMD_GO)
+    result = (*tp.func)(argc-1, argv);
+    if (result && ignore_errors && result > KDB_CMD_GO) {
     result = 0;
+    }
     KDB_STATE_CLEAR(CMD);
-    if (tp.flags & KDB_REPEAT_WITH_ARGS)
+    if (tp.flags & KDB_REPEAT_WITH_ARGS) {
     return result;
+    }
     argc = tp.flags & KDB_REPEAT_NO_ARGS ? 1 : 0;
-    if (argv[argc])
+    if (argv[argc]) {
 // (argv[argc]) = '\0';
+    }
     return result;
     }
 //
@@ -960,11 +1239,11 @@ pub unsafe extern "C" fn if('"': *mut *mut *mut cp == '\'' || cp ==) -> else {
 // to an address contained in a register.
 //
     {
-    unsigned long value;
-    char *name = core::ptr::null_mut();
-    long offset;
-    let mut nextarg: c_int = 0;
-    if (kdbgetaddrarg(0, (const char **)argv, &nextarg,
+    let mut value = 0;
+    let mut name = core::ptr::null_mut();
+    let mut offset = 0;
+pub static mut nextarg: c_int = 0;
+    if (kdbgetaddrarg(0, argv, &nextarg,
     &value, &offset, &name)) {
     return KDB_NOTFOUND;
     }
@@ -976,25 +1255,28 @@ pub unsafe extern "C" fn if('"': *mut *mut *mut cp == '\'' || cp ==) -> else {
     }
 #[no_mangle]
 unsafe extern "C" fn handle_ctrl_cmd(cmd: *mut c_char) -> c_int {
-    static int handle_ctrl_cmd(char *cmd)
-    {
 pub const CTRL_P: c_int = 16;
 pub const CTRL_N: c_int = 14;
 // initial situation
-    if (cmd_head == cmd_tail)
+    if (cmd_head == cmd_tail) {
     return 0;
-    switch (*cmd) {
-    case CTRL_P:
-    if (cmdptr != cmd_tail)
+    }
+    match (*cmd) {
+    CTRL_P => {
+    if (cmdptr != cmd_tail) {
     cmdptr = (cmdptr + KDB_CMD_HISTORY_COUNT - 1) %
     KDB_CMD_HISTORY_COUNT;
+    }
     strscpy(cmd_cur, cmd_hist[cmdptr], CMD_BUFLEN);
     return 1;
-    case CTRL_N:
-    if (cmdptr != cmd_head)
+    }
+    CTRL_N => {
+    if (cmdptr != cmd_head) {
     cmdptr = (cmdptr+1) % KDB_CMD_HISTORY_COUNT;
+    }
     strscpy(cmd_cur, cmd_hist[cmdptr], CMD_BUFLEN);
     return 1;
+    }
     }
     return 0;
     }
@@ -1004,31 +1286,26 @@ pub const CTRL_N: c_int = 14;
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_reboot(argc: c_int, argv: *const c_char) -> c_int {
-    static int kdb_reboot(int argc, const char **argv)
-    {
     emergency_restart();
     kdb_printf("Hmm, kdb_reboot did not reboot, spinning here\n");
-    while (1)
+    while (1) {
     cpu_relax();
+    }
 // NOTREACHED
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn kdb_dumpregs(regs: *mut pt_regs) {
-    static void kdb_dumpregs(struct pt_regs *regs)
-    {
-    let mut old_lvl: c_int = console_loglevel;
+pub static mut old_lvl: c_int = 0;
     console_loglevel = CONSOLE_LOGLEVEL_MOTORMOUTH;
-    kdb_trap_printk++;
+    kdb_trap_printk += 1;
     show_regs(regs);
-    kdb_trap_printk--;
+    kdb_trap_printk -= 1;
     kdb_printf("\n");
     console_loglevel = old_lvl;
     }
 #[no_mangle]
 unsafe extern "C" fn kdb_set_current_task(p: *mut task_struct) {
-    static void kdb_set_current_task(struct task_struct *p)
-    {
     kdb_current_task = p;
     if (kdb_task_has_cpu(p)) {
     kdb_current_regs = KDB_TSKREGS(kdb_process_cpu(p));
@@ -1038,13 +1315,13 @@ unsafe extern "C" fn kdb_set_current_task(p: *mut task_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn drop_newline(buf: *mut c_char) {
-    static void drop_newline(char *buf)
-    {
-    let mut len: usize = strlen(buf);
-    if (len == 0)
+pub static mut len: usize = 0;
+    if (len == 0) {
     return;
-    if (*(buf + len - 1) == '\n')
+    }
+    if (*(buf + len - 1) == '\n') {
 // (buf + len - 1) = '\0';
+    }
     }
 //
 // kdb_local - The main code for kdb.  This routine is invoked on a
@@ -1065,13 +1342,11 @@ unsafe extern "C" fn drop_newline(buf: *mut c_char) {
 // KDB_CMD_CPU	User switched to another cpu.
 // KDB_CMD_SS	Single step.
 //
-    static int kdb_local(kdb_reason_t reason, int error, struct pt_regs *regs,
-    kdb_dbtrap_t db_result)
-    {
-    char *cmdbuf;
-    int diag;
-    struct task_struct *kdb_current =
-    curr_task(raw_smp_processor_id());
+#[no_mangle]
+pub unsafe extern "C" fn kdb_local(reason: kdb_reason_t, error: c_int, regs: *mut pt_regs, db_result: kdb_dbtrap_t) -> c_int {
+pub static mut cmdbuf: *mut c_void = core::ptr::null_mut();
+    let mut diag = 0;
+    let mut kdb_current = curr_task(raw_smp_processor_id());
     KDB_DEBUG_STATE("kdb_local 1", reason);
     kdb_check_for_lockdown();
     kdb_go_count = 0;
@@ -1084,15 +1359,15 @@ unsafe extern "C" fn drop_newline(buf: *mut c_char) {
     kdb_printf("on processor %d ", raw_smp_processor_id());
 
     }
-    switch (reason) {
-    case KDB_REASON_DEBUG:
+    match (reason) {
+    KDB_REASON_DEBUG => {
     {
 //
 // If re-entering kdb after a single step
 // command, don't print the message.
 //
-    switch (db_result) {
-    case KDB_DB_BPT:
+    match (db_result) {
+    KDB_DB_BPT => {
     kdb_printf("\nEntering kdb (0x%px, pid %d) ",
     kdb_current, kdb_current.pid);
 
@@ -1100,24 +1375,30 @@ unsafe extern "C" fn drop_newline(buf: *mut c_char) {
 
     kdb_printf("due to Debug @ " kdb_machreg_fmt "\n",
     instruction_pointer(regs));
-    break;
-    case KDB_DB_SS:
-    break;
-    case KDB_DB_SSBPT:
+    // break;
+    }
+    KDB_DB_SS => {
+    // break;
+    }
+    KDB_DB_SSBPT => {
     KDB_DEBUG_STATE("kdb_local 4", reason);
     return 1;	/* kdba_db_trap did the work */
-    default:
+    }
+    _ => {
     kdb_printf("kdb: Bad result from kdba_db_trap: %d\n",
     db_result);
-    break;
+    // break;
+    }
     }
     }
     break;
     case KDB_REASON_ENTER:
-    if (KDB_STATE(KEYBOARD))
+    if (KDB_STATE(KEYBOARD)) {
     kdb_printf("due to Keyboard Entry\n");
-    else
+    }
+    else {
     kdb_printf("due to KDB_ENTER()\n");
+    }
     break;
     case KDB_REASON_KEYBOARD:
     KDB_STATE_SET(KEYBOARD);
@@ -1162,7 +1443,7 @@ unsafe extern "C" fn drop_newline(buf: *mut c_char) {
     kdb_printf("due to Recursion @ " kdb_machreg_fmt "\n",
     instruction_pointer(regs));
     break;
-    default:
+// label;
     kdb_printf("kdb: unexpected reason code: %d\n", reason);
     KDB_DEBUG_STATE("kdb_local 8", reason);
     return 0;	/* Not for us, dismiss it */
@@ -1179,7 +1460,7 @@ unsafe extern "C" fn drop_newline(buf: *mut c_char) {
     cmdbuf = cmd_cur;
 // cmdbuf = '\0';
 // (cmd_hist[cmd_head]) = '\0';
-    do_full_getstr:
+// label;
 // PROMPT can only be set if we have MEM_READ permission.
     snprintf(kdb_prompt_str, CMD_BUFLEN, kdbgetenv("PROMPT"),
     raw_smp_processor_id());
@@ -1195,17 +1476,19 @@ unsafe extern "C" fn drop_newline(buf: *mut c_char) {
 // (cmd_hist[cmd_head] +
     strlen(cmd_hist[cmd_head])-1) = '\0';
     }
-    if (!handle_ctrl_cmd(cmdbuf))
+    if (!handle_ctrl_cmd(cmdbuf)) {
 // (cmd_cur+strlen(cmd_cur)-1) = '\0';
+    }
     cmdbuf = cmd_cur;
-    goto do_full_getstr;
+// goto;
     } else {
     strscpy(cmd_hist[cmd_head], cmd_cur,
     CMD_BUFLEN);
     }
     cmd_head = (cmd_head+1) % KDB_CMD_HISTORY_COUNT;
-    if (cmd_head == cmd_tail)
+    if (cmd_head == cmd_tail) {
     cmd_tail = (cmd_tail+1) % KDB_CMD_HISTORY_COUNT;
+    }
     }
     cmdptr = cmd_head;
     diag = kdb_parse(cmdbuf);
@@ -1217,10 +1500,12 @@ unsafe extern "C" fn drop_newline(buf: *mut c_char) {
     if (diag == KDB_CMD_GO
     || diag == KDB_CMD_CPU
     || diag == KDB_CMD_SS
-    || diag == KDB_CMD_KGDB)
+    || diag == KDB_CMD_KGDB) {
     break;
-    if (diag)
+    }
+    if (diag) {
     kdb_cmderror(diag);
+    }
     }
     KDB_DEBUG_STATE("kdb_local 9", diag);
     return diag;
@@ -1234,8 +1519,6 @@ unsafe extern "C" fn drop_newline(buf: *mut c_char) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kdb_print_state(text: *const c_char, value: c_int) {
-    void kdb_print_state(const char *text, int value)
-    {
     kdb_printf("state: %s cpu %d value %d initial %d state %x\n",
     text, raw_smp_processor_id(), value, kdb_initial_cpu,
     kdb_state);
@@ -1265,10 +1548,9 @@ pub unsafe extern "C" fn kdb_print_state(text: *const c_char, value: c_int) {
 // 0	KDB was invoked for an event which it wasn't responsible
 // 1	KDB handled the event for which it was invoked.
 //
-    int kdb_main_loop(kdb_reason_t reason, kdb_reason_t reason2, int error,
-    kdb_dbtrap_t db_result, struct pt_regs *regs)
-    {
-    let mut result: c_int = 1;
+#[no_mangle]
+pub unsafe extern "C" fn kdb_main_loop(reason: kdb_reason_t, reason2: kdb_reason_t, error: c_int, db_result: kdb_dbtrap_t, regs: *mut pt_regs) -> c_int {
+pub static mut result: c_int = 1;
 // Stay in kdb() until 'go', 'ss[b]' or an error
     while (1) {
 //
@@ -1281,36 +1563,42 @@ pub unsafe extern "C" fn kdb_print_state(text: *const c_char, value: c_int) {
 // other cpus are still live, each cpu in this loop
 // turns it back on.
 //
-    if (!KDB_STATE(KDB))
+    if (!KDB_STATE(KDB)) {
     KDB_STATE_SET(KDB);
+    }
     }
     KDB_STATE_CLEAR(SUPPRESS);
     KDB_DEBUG_STATE("kdb_main_loop 2", reason);
-    if (KDB_STATE(LEAVING))
+    if (KDB_STATE(LEAVING)) {
     break;	/* Another cpu said 'go' */
+    }
 // Still using kdb, this processor is in control
     result = kdb_local(reason2, error, regs, db_result);
     KDB_DEBUG_STATE("kdb_main_loop 3", result);
-    if (result == KDB_CMD_CPU)
+    if (result == KDB_CMD_CPU) {
     break;
+    }
     if (result == KDB_CMD_SS) {
     KDB_STATE_SET(DOING_SS);
     break;
     }
     if (result == KDB_CMD_KGDB) {
-    if (!KDB_STATE(DOING_KGDB))
+    if (!KDB_STATE(DOING_KGDB)) {
     kdb_printf("Entering please attach debugger "
     "or use $D#44+ or $3#33\n");
+    }
     break;
     }
-    if (result && result != 1 && result != KDB_CMD_GO)
+    if (result && result != 1 && result != KDB_CMD_GO) {
     kdb_printf("\nUnexpected kdb_local return code %d\n",
     result);
+    }
     KDB_DEBUG_STATE("kdb_main_loop 4", reason);
     break;
     }
-    if (KDB_STATE(DOING_SS))
+    if (KDB_STATE(DOING_SS)) {
     KDB_STATE_CLEAR(SSBPT);
+    }
 // Clean up any keyboard devices before leaving
     kdb_kbd_cleanup_state();
     return result;
@@ -1327,14 +1615,13 @@ pub unsafe extern "C" fn kdb_print_state(text: *const c_char, value: c_int) {
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_mdr(addr: c_ulong, count: c_uint) -> c_int {
-    static int kdb_mdr(unsigned long addr, unsigned int count)
-    {
-    unsigned char c;
+    let mut c = 0;
     while (count--) {
-    if (kdb_getarea(c, addr))
+    if (kdb_getarea(c, addr)) {
     return 0;
+    }
     kdb_printf("%02x", c);
-    addr++;
+    addr += 1;
     }
     kdb_printf("\n");
     return 0;
@@ -1349,33 +1636,37 @@ unsafe extern "C" fn kdb_mdr(addr: c_ulong, count: c_uint) -> c_int {
 // for eg., md1c20 reads 20 bytes, 1 at a time.
 // mdr  <addr arg>,<byte count>
 //
-    static void kdb_md_line(const char *fmtstr, unsigned long addr,
-    int symbolic, int nosect, int bytesperword,
-    int num, int repeat, int phys)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn kdb_md_line(fmtstr: *mut c_char, addr: c_ulong, symbolic: c_int, nosect: c_int, bytesperword: c_int, num: c_int, repeat: c_int, phys: c_int) {
 // print just one line of data
-    kdb_symtab_t symtab;
+    let mut symtab;
     char cbuf[32];
-    char *c = cbuf;
-    int i;
-    int j;
-    unsigned long word;
-    memset(cbuf, '\0', sizeof(cbuf));
-    if (phys)
-    kdb_printf("phys " kdb_machreg_fmt0 " ", addr);
-    else
-    kdb_printf(kdb_machreg_fmt0 " ", addr);
-    for (i = 0; i < num && repeat--; i++) {
+    let mut c = cbuf;
+    let mut i = 0;
+    let mut j = 0;
+    let mut word = 0;
+    memset(cbuf, '\0', sizeof!(cbuf));
     if (phys) {
-    if (kdb_getphysword(&word, addr, bytesperword))
+    kdb_printf("phys " kdb_machreg_fmt0 " ", addr);
+    }
+    else {
+    kdb_printf(kdb_machreg_fmt0 " ", addr);
+    }
+    while (i < num && repeat--) {
+    if (phys) {
+    if (kdb_getphysword(&word, addr, bytesperword)) {
     break;
-    } else if (kdb_getword(&word, addr, bytesperword))
+    }
+    } else if (kdb_getword(&word, addr, bytesperword)) {
     break;
+    }
     kdb_printf(fmtstr, word);
-    if (symbolic)
+    if (symbolic) {
     kdbnearsym(word, &symtab);
-    else
-    memset(&symtab, 0, sizeof(symtab));
+    }
+    else {
+    memset(&symtab, 0, sizeof!(symtab));
+    }
     if (symtab.sym_name) {
     kdb_symbol_print(word, &symtab, 0);
     if (!nosect) {
@@ -1390,10 +1681,10 @@ unsafe extern "C" fn kdb_mdr(addr: c_ulong, count: c_uint) -> c_int {
     addr += bytesperword;
     } else {
     union {
-    u64 word;
+    let mut word = 0;
     unsigned char c[8];
     } wc;
-    unsigned char *cp;
+pub static mut cp: *mut c_void = core::ptr::null_mut();
 
     cp = wc.c + 8 - bytesperword;
 
@@ -1402,8 +1693,9 @@ unsafe extern "C" fn kdb_mdr(addr: c_ulong, count: c_uint) -> c_int {
     wc.word = word;
 
     ({unsigned char __c = c; isascii(__c) && isprint(__c) ? __c : '.'; })
-    for (j = 0; j < bytesperword; j++)
+    for (j = 0; j < bytesperword; j++) {
 // c++ = printable_char(*cp++);
+    }
     addr += bytesperword;
 
     }
@@ -1413,100 +1705,111 @@ unsafe extern "C" fn kdb_mdr(addr: c_ulong, count: c_uint) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn kdb_md(argc: c_int, argv: *const c_char) -> c_int {
-    static int kdb_md(int argc, const char **argv)
-    {
     static unsigned long last_addr;
     static int last_radix, last_bytesperword, last_repeat;
-    let mut radix: c_int = 16, mdcount = 8, bytesperword = KDB_WORD_SIZE, repeat;
-    let mut nosect: c_int = 0;
+pub static mut radix: c_int = 0;
+pub static mut nosect: c_int = 0;
     char fmtchar, fmtstr[64];
-    unsigned long addr;
-    unsigned long word;
-    let mut offset: c_long = 0;
-    let mut symbolic: c_int = 0;
-    let mut valid: c_int = 0;
-    let mut phys: c_int = 0;
-    let mut raw: c_int = 0;
+    let mut addr = 0;
+    let mut word = 0;
+pub static mut offset: c_long = 0;
+pub static mut symbolic: c_int = 0;
+pub static mut valid: c_int = 0;
+pub static mut phys: c_int = 0;
+pub static mut raw: c_int = 0;
     kdbgetintenv("MDCOUNT", &mdcount);
     kdbgetintenv("RADIX", &radix);
     kdbgetintenv("BYTESPERWORD", &bytesperword);
 // Assume 'md <addr>' and start with environment values
     repeat = mdcount * 16 / bytesperword;
     if (strcmp(argv[0], "mdr") == 0) {
-    if (argc == 2 || (argc == 0 && last_addr != 0))
+    if (argc == 2 || (argc == 0 && last_addr != 0)) {
     valid = raw = 1;
-    else
+    }
+    else {
     return KDB_ARGCOUNT;
+    }
     } else if (isdigit(argv[0][2])) {
     bytesperword = (int)(argv[0][2] - '0');
     if (bytesperword == 0) {
     bytesperword = last_bytesperword;
-    if (bytesperword == 0)
+    if (bytesperword == 0) {
     bytesperword = 4;
+    }
     }
     last_bytesperword = bytesperword;
     repeat = mdcount * 16 / bytesperword;
-    if (!argv[0][3])
+    if (!argv[0][3]) {
     valid = 1;
-#[no_mangle]
-pub unsafe extern "C" fn if(argv[0][4]: argv[0][3] == 'c' &&) -> else {
-    if (kstrtouint(argv[0] + 4, 10, &repeat))
+    }
+if true {
+    if (kstrtouint(argv[0] + 4, 10, &repeat)) {
     return KDB_BADINT;
+    }
     mdcount = ((repeat * bytesperword) + 15) / 16;
     valid = 1;
     }
     last_repeat = repeat;
-    } else if (strcmp(argv[0], "md") == 0)
+    } else if (strcmp(argv[0], "md") == 0) {
     valid = 1;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(argv[0], 0: "mds") ==) -> else {
-    else if (strcmp(argv[0], "mds") == 0)
+    }
+
+    else if (strcmp(argv[0], "mds") == 0) {
     valid = 1;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(argv[0], 0: "mdp") ==) -> else {
+    }
+if true {
     phys = valid = 1;
     }
-    if (!valid)
+    if (!valid) {
     return KDB_NOTFOUND;
+    }
     if (argc == 0) {
-    if (last_addr == 0)
+    if (last_addr == 0) {
     return KDB_ARGCOUNT;
+    }
     addr = last_addr;
     radix = last_radix;
     bytesperword = last_bytesperword;
     repeat = last_repeat;
-    if (raw)
+    if (raw) {
     mdcount = repeat;
-    else
+    }
+    else {
     mdcount = ((repeat * bytesperword) + 15) / 16;
     }
+    }
     if (argc) {
-    unsigned long val;
+    let mut val = 0;
     int diag, nextarg = 1;
     diag = kdbgetaddrarg(argc, argv, &nextarg, &addr,
     &offset, core::ptr::null_mut());
-    if (diag)
+    if (diag) {
     return diag;
-    if (argc > nextarg+2)
+    }
+    if (argc > nextarg+2) {
     return KDB_ARGCOUNT;
+    }
     if (argc >= nextarg) {
     diag = kdbgetularg(argv[nextarg], &val);
     if (!diag) {
     mdcount = (int) val;
-    if (raw)
+    if (raw) {
     repeat = mdcount;
-    else
+    }
+    else {
     repeat = mdcount * 16 / bytesperword;
+    }
     }
     }
     if (argc >= nextarg+1) {
     diag = kdbgetularg(argv[nextarg+1], &val);
-    if (!diag)
+    if (!diag) {
     radix = (int) val;
     }
     }
+    }
     if (strcmp(argv[0], "mdr") == 0) {
-    int ret;
+    let mut ret = 0;
     last_addr = addr;
     ret = kdb_mdr(addr, mdcount);
     last_addr += mdcount;
@@ -1514,37 +1817,47 @@ pub unsafe extern "C" fn if(_arg: strcmp(argv[0], 0: "mdp") ==) -> else {
     last_bytesperword = bytesperword; // to make REPEAT happy
     return ret;
     }
-    switch (radix) {
-    case 10:
+    match (radix) {
+    10 => {
     fmtchar = 'd';
-    break;
-    case 16:
+    // break;
+    }
+    16 => {
     fmtchar = 'x';
-    break;
-    case 8:
+    // break;
+    }
+    8 => {
     fmtchar = 'o';
-    break;
-    default:
+    // break;
+    }
+    _ => {
     return KDB_BADRADIX;
     }
+    }
     last_radix = radix;
-    if (bytesperword > KDB_WORD_SIZE)
+    if (bytesperword > KDB_WORD_SIZE) {
     return KDB_BADWIDTH;
-    switch (bytesperword) {
-    case 8:
+    }
+    match (bytesperword) {
+    8 => {
     sprintf(fmtstr, "%%16.16l%c ", fmtchar);
-    break;
-    case 4:
+    // break;
+    }
+    4 => {
     sprintf(fmtstr, "%%8.8l%c ", fmtchar);
-    break;
-    case 2:
+    // break;
+    }
+    2 => {
     sprintf(fmtstr, "%%4.4l%c ", fmtchar);
-    break;
-    case 1:
+    // break;
+    }
+    1 => {
     sprintf(fmtstr, "%%2.2l%c ", fmtchar);
-    break;
-    default:
+    // break;
+    }
+    _ => {
     return KDB_BADWIDTH;
+    }
     }
     last_repeat = repeat;
     last_bytesperword = bytesperword;
@@ -1560,17 +1873,20 @@ pub unsafe extern "C" fn if(_arg: strcmp(argv[0], 0: "mdp") ==) -> else {
 // Round address down modulo BYTESPERWORD
     addr &= ~(bytesperword-1);
     while (repeat > 0) {
-    unsigned long a;
+    let mut a = 0;
     int n, z, num = (symbolic ? 1 : (16 / bytesperword));
-    if (KDB_FLAG(CMD_INTERRUPT))
+    if (KDB_FLAG(CMD_INTERRUPT)) {
     return 0;
-    for (a = addr, z = 0; z < repeat; a += bytesperword, ++z) {
+    }
+    while (z < repeat) {
     if (phys) {
     if (kdb_getphysword(&word, a, bytesperword)
-    || word)
+    || word) {
     break;
-    } else if (kdb_getword(&word, a, bytesperword) || word)
+    }
+    } else if (kdb_getword(&word, a, bytesperword) || word) {
     break;
+    }
     }
     n = min(num, repeat);
     kdb_md_line(fmtstr, addr, symbolic, nosect, bytesperword,
@@ -1579,7 +1895,7 @@ pub unsafe extern "C" fn if(_arg: strcmp(argv[0], 0: "mdp") ==) -> else {
     repeat -= n;
     z = (z + num - 1) / num;
     if (z > 2) {
-    let mut s: c_int = num * (z-2);
+pub static mut s: c_int = 0;
     kdb_printf(kdb_machreg_fmt0 "-" kdb_machreg_fmt0
     " zero suppressed\n",
     addr, addr + bytesperword * s - 1);
@@ -1598,33 +1914,38 @@ pub unsafe extern "C" fn if(_arg: strcmp(argv[0], 0: "mdp") ==) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_mm(argc: c_int, argv: *const c_char) -> c_int {
-    static int kdb_mm(int argc, const char **argv)
-    {
-    int diag;
-    unsigned long addr;
-    let mut offset: c_long = 0;
-    unsigned long contents;
-    int nextarg;
-    int width;
-    if (argv[0][2] && !isdigit(argv[0][2]))
+    let mut diag = 0;
+    let mut addr = 0;
+pub static mut offset: c_long = 0;
+    let mut contents = 0;
+    let mut nextarg = 0;
+    let mut width = 0;
+    if (argv[0][2] && !isdigit(argv[0][2])) {
     return KDB_NOTFOUND;
-    if (argc < 2)
+    }
+    if (argc < 2) {
     return KDB_ARGCOUNT;
+    }
     nextarg = 1;
     diag = kdbgetaddrarg(argc, argv, &nextarg, &addr, &offset, core::ptr::null_mut());
-    if (diag)
+    if (diag) {
     return diag;
-    if (nextarg > argc)
+    }
+    if (nextarg > argc) {
     return KDB_ARGCOUNT;
+    }
     diag = kdbgetaddrarg(argc, argv, &nextarg, &contents, core::ptr::null_mut(), core::ptr::null_mut());
-    if (diag)
+    if (diag) {
     return diag;
-    if (nextarg != argc + 1)
+    }
+    if (nextarg != argc + 1) {
     return KDB_ARGCOUNT;
+    }
     width = argv[0][2] ? (argv[0][2] - '0') : (KDB_WORD_SIZE);
     diag = kdb_putword(addr, contents, width);
-    if (diag)
+    if (diag) {
     return diag;
+    }
     kdb_printf(kdb_machreg_fmt " = " kdb_machreg_fmt "\n", addr, contents);
     return 0;
     }
@@ -1634,12 +1955,10 @@ unsafe extern "C" fn kdb_mm(argc: c_int, argv: *const c_char) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_go(argc: c_int, argv: *const c_char) -> c_int {
-    static int kdb_go(int argc, const char **argv)
-    {
-    unsigned long addr;
-    int diag;
-    int nextarg;
-    long offset;
+    let mut addr = 0;
+    let mut diag = 0;
+    let mut nextarg = 0;
+    let mut offset = 0;
     if (raw_smp_processor_id() != kdb_initial_cpu) {
     kdb_printf("go must execute on the entry cpu, "
     "please use \"cpu %d\" and then execute go\n",
@@ -1650,8 +1969,9 @@ unsafe extern "C" fn kdb_go(argc: c_int, argv: *const c_char) -> c_int {
     nextarg = 1;
     diag = kdbgetaddrarg(argc, argv, &nextarg,
     &addr, &offset, core::ptr::null_mut());
-    if (diag)
+    if (diag) {
     return diag;
+    }
     } else if (argc) {
     return KDB_ARGCOUNT;
     }
@@ -1678,62 +1998,73 @@ unsafe extern "C" fn kdb_go(argc: c_int, argv: *const c_char) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_rd(argc: c_int, argv: *const c_char) -> c_int {
-    static int kdb_rd(int argc, const char **argv)
-    {
-    let mut len: c_int = kdb_check_regs();
+pub static mut len: c_int = 0;
 
-    int i;
-    char *rname;
-    int rsize;
-    u64 reg64;
-    u32 reg32;
-    u16 reg16;
-    u8 reg8;
-    if (len)
+    let mut i = 0;
+pub static mut rname: *mut c_void = core::ptr::null_mut();
+    let mut rsize = 0;
+    let mut reg64 = 0;
+    let mut reg32 = 0;
+    let mut reg16 = 0;
+    let mut reg8 = 0;
+    if (len) {
     return len;
-    for (i = 0; i < DBG_MAX_REG_NUM; i++) {
+    }
+    while (i < DBG_MAX_REG_NUM) {
     rsize = dbg_reg_def[i].size * 2;
-    if (rsize > 16)
+    if (rsize > 16) {
     rsize = 2;
+    }
     if (len + strlen(dbg_reg_def[i].name) + 4 + rsize > 80) {
     len = 0;
     kdb_printf("\n");
     }
-    if (len)
+    if (len) {
     len += kdb_printf("  ");
-    switch(dbg_reg_def[i].size * 8) {
-    case 8:
+    }
+    match (dbg_reg_def[i].size * 8) {
+    8 => {
     rname = dbg_get_reg(i, &reg8, kdb_current_regs);
-    if (!rname)
-    break;
+    if (!rname) {
+    // break;
+    }
     len += kdb_printf("%s: %02x", rname, reg8);
-    break;
-    case 16:
+    // break;
+    }
+    16 => {
     rname = dbg_get_reg(i, &reg16, kdb_current_regs);
-    if (!rname)
-    break;
+    if (!rname) {
+    // break;
+    }
     len += kdb_printf("%s: %04x", rname, reg16);
-    break;
-    case 32:
+    // break;
+    }
+    32 => {
     rname = dbg_get_reg(i, &reg32, kdb_current_regs);
-    if (!rname)
-    break;
+    if (!rname) {
+    // break;
+    }
     len += kdb_printf("%s: %08x", rname, reg32);
-    break;
-    case 64:
+    // break;
+    }
+    64 => {
     rname = dbg_get_reg(i, &reg64, kdb_current_regs);
-    if (!rname)
-    break;
+    if (!rname) {
+    // break;
+    }
     len += kdb_printf("%s: %016llx", rname, reg64);
-    break;
-    default:
+    // break;
+    }
+    _ => {
     len += kdb_printf("%s: ??", dbg_reg_def[i].name);
+    }
     }
     }
     kdb_printf("\n");
 
-    if (len)
+    if (len) {
     return len;
+    }
     kdb_dumpregs(kdb_current_regs);
 
     return 0;
@@ -1746,54 +2077,60 @@ unsafe extern "C" fn kdb_rd(argc: c_int, argv: *const c_char) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_rm(argc: c_int, argv: *const c_char) -> c_int {
-    static int kdb_rm(int argc, const char **argv)
-    {
 
-    int diag;
-    const char *rname;
-    int i;
-    u64 reg64;
-    u32 reg32;
-    u16 reg16;
-    u8 reg8;
-    if (argc != 2)
+    let mut diag = 0;
+pub static mut rname: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    let mut reg64 = 0;
+    let mut reg32 = 0;
+    let mut reg16 = 0;
+    let mut reg8 = 0;
+    if (argc != 2) {
     return KDB_ARGCOUNT;
+    }
 //
 // Allow presence or absence of leading '%' symbol.
 //
     rname = argv[1];
-    if (*rname == '%')
-    rname++;
+    if (*rname == '%') {
+    rname += 1;
+    }
     diag = kdbgetu64arg(argv[2], &reg64);
-    if (diag)
+    if (diag) {
     return diag;
+    }
     diag = kdb_check_regs();
-    if (diag)
+    if (diag) {
     return diag;
+    }
     diag = KDB_BADREG;
-    for (i = 0; i < DBG_MAX_REG_NUM; i++) {
+    while (i < DBG_MAX_REG_NUM) {
     if (strcmp(rname, dbg_reg_def[i].name) == 0) {
     diag = 0;
     break;
     }
     }
     if (!diag) {
-    switch(dbg_reg_def[i].size * 8) {
-    case 8:
+    match (dbg_reg_def[i].size * 8) {
+    8 => {
     reg8 = reg64;
     dbg_set_reg(i, &reg8, kdb_current_regs);
-    break;
-    case 16:
+    // break;
+    }
+    16 => {
     reg16 = reg64;
     dbg_set_reg(i, &reg16, kdb_current_regs);
-    break;
-    case 32:
+    // break;
+    }
+    32 => {
     reg32 = reg64;
     dbg_set_reg(i, &reg32, kdb_current_regs);
-    break;
-    case 64:
+    // break;
+    }
+    64 => {
     dbg_set_reg(i, &reg64, kdb_current_regs);
-    break;
+    // break;
+    }
     }
     }
     return diag;
@@ -1810,15 +2147,13 @@ unsafe extern "C" fn kdb_rm(argc: c_int, argv: *const c_char) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_sr(argc: c_int, argv: *const c_char) -> c_int {
-    static int kdb_sr(int argc, const char **argv)
-    {
-    bool check_mask =
-    !kdb_check_flags(KDB_ENABLE_ALL, kdb_cmd_enabled, false);
-    if (argc != 1)
+    let mut check_mask = !kdb_check_flags(KDB_ENABLE_ALL, kdb_cmd_enabled, false);
+    if (argc != 1) {
     return KDB_ARGCOUNT;
-    kdb_trap_printk++;
+    }
+    kdb_trap_printk += 1;
     __handle_sysrq(*argv[1], check_mask);
-    kdb_trap_printk--;
+    kdb_trap_printk -= 1;
     return 0;
     }
 
@@ -1833,19 +2168,19 @@ unsafe extern "C" fn kdb_sr(argc: c_int, argv: *const c_char) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_ef(argc: c_int, argv: *const c_char) -> c_int {
-    static int kdb_ef(int argc, const char **argv)
-    {
-    int diag;
-    unsigned long addr;
-    long offset;
-    int nextarg;
-    if (argc != 1)
+    let mut diag = 0;
+    let mut addr = 0;
+    let mut offset = 0;
+    let mut nextarg = 0;
+    if (argc != 1) {
     return KDB_ARGCOUNT;
+    }
     nextarg = 1;
     diag = kdbgetaddrarg(argc, argv, &nextarg, &addr, &offset, core::ptr::null_mut());
-    if (diag)
+    if (diag) {
     return diag;
-    show_regs((struct pt_regs *)addr);
+    }
+    show_regs(addr);
     return 0;
     }
 //
@@ -1854,12 +2189,11 @@ unsafe extern "C" fn kdb_ef(argc: c_int, argv: *const c_char) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_env(argc: c_int, argv: *const c_char) -> c_int {
-    static int kdb_env(int argc, const char **argv)
-    {
     kdb_printenv();
-    if (KDB_DEBUG(MASK))
+    if (KDB_DEBUG(MASK)) {
     kdb_printf("KDBDEBUG=0x%x\n",
     (kdb_flags & KDB_DEBUG(MASK)) >> KDB_DEBUG_FLAG_SHIFT);
+    }
     return 0;
     }
 
@@ -1870,24 +2204,25 @@ unsafe extern "C" fn kdb_env(argc: c_int, argv: *const c_char) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_dmesg(argc: c_int, argv: *const c_char) -> c_int {
-    static int kdb_dmesg(int argc, const char **argv)
-    {
-    int diag;
-    int logging;
-    let mut lines: c_int = 0;
-    let mut adjust: c_int = 0;
-    let mut n: c_int = 0;
-    let mut skip: c_int = 0;
-    struct kmsg_dump_iter iter;
-    size_t len;
+    let mut diag = 0;
+    let mut logging = 0;
+pub static mut lines: c_int = 0;
+pub static mut adjust: c_int = 0;
+pub static mut n: c_int = 0;
+pub static mut skip: c_int = 0;
+pub static mut iter: usize = 0;
+    let mut len = 0;
     char buf[201];
-    if (argc > 2)
+    if (argc > 2) {
     return KDB_ARGCOUNT;
+    }
     if (argc) {
-    if (kstrtoint(argv[1], 0, &lines))
+    if (kstrtoint(argv[1], 0, &lines)) {
     lines = 0;
-    if (argc > 1 && (kstrtoint(argv[2], 0, &adjust) || adjust < 0))
+    }
+    if (argc > 1 && (kstrtoint(argv[2], 0, &adjust) || adjust < 0)) {
     adjust = 0;
+    }
     }
 // disable LOGGING if set
     diag = kdbgetintenv("LOGGING", &logging);
@@ -1896,17 +2231,19 @@ unsafe extern "C" fn kdb_dmesg(argc: c_int, argv: *const c_char) -> c_int {
     kdb_set(2, setargs);
     }
     kmsg_dump_rewind(&iter);
-    while (kmsg_dump_get_line(&iter, 1, core::ptr::null_mut(), 0, core::ptr::null_mut()))
-    n++;
+    while (kmsg_dump_get_line(&iter, 1, core::ptr::null_mut(), 0, core::ptr::null_mut())) {
+    n += 1;
+    }
     if (lines < 0) {
-    if (adjust >= n)
+    if (adjust >= n) {
     kdb_printf("buffer only contains %d lines, nothing "
     "printed\n", n);
-#[no_mangle]
-pub unsafe extern "C" fn if(n: adjust - lines >=) -> else {
-    else if (adjust - lines >= n)
+    }
+
+    else if (adjust - lines >= n) {
     kdb_printf("buffer only contains %d lines, last %d "
     "lines printed\n", n, n - adjust);
+    }
     skip = adjust;
     lines = abs(lines);
     } else if (lines > 0) {
@@ -1925,18 +2262,21 @@ pub unsafe extern "C" fn if(n: adjust - lines >=) -> else {
     } else {
     lines = n;
     }
-    if (skip >= n || skip < 0)
+    if (skip >= n || skip < 0) {
     return 0;
+    }
     kmsg_dump_rewind(&iter);
-    while (kmsg_dump_get_line(&iter, 1, buf, sizeof(buf), &len)) {
+    while (kmsg_dump_get_line(&iter, 1, buf, sizeof!(buf), &len)) {
     if (skip) {
-    skip--;
+    skip -= 1;
     continue;
     }
-    if (!lines--)
+    if (!lines--) {
     break;
-    if (KDB_FLAG(CMD_INTERRUPT))
+    }
+    if (KDB_FLAG(CMD_INTERRUPT)) {
     return 0;
+    }
     kdb_printf("%.*s\n", (int)len - 1, buf);
     }
     return 0;
@@ -1950,32 +2290,34 @@ pub unsafe extern "C" fn if(n: adjust - lines >=) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_cpu_status() {
-    static void kdb_cpu_status(void)
-    {
     int i, start_cpu, first_print = 1;
     char state, prev_state = '?';
     kdb_printf("Currently on cpu %d\n", raw_smp_processor_id());
     kdb_printf("Available cpus: ");
-    for (start_cpu = -1, i = 0; i < NR_CPUS; i++) {
+    while (i < NR_CPUS) {
     if (!cpu_online(i)) {
     state = 'F';	/* cpu is offline */
     } else if (!kgdb_info[i].enter_kgdb) {
     state = 'D';	/* cpu is online but unresponsive */
     } else {
     state = ' ';	/* cpu is responding to kdb */
-    if (kdb_task_state_char(KDB_TSK(i)) == '-')
+    if (kdb_task_state_char(KDB_TSK(i)) == '-') {
     state = '-';	/* idle task */
+    }
     }
     if (state != prev_state) {
     if (prev_state != '?') {
-    if (!first_print)
+    if (!first_print) {
     kdb_printf(", ");
+    }
     first_print = 0;
     kdb_printf("%d", start_cpu);
-    if (start_cpu < i-1)
+    if (start_cpu < i-1) {
     kdb_printf("-%d", i-1);
-    if (prev_state != ' ')
+    }
+    if (prev_state != ' ') {
     kdb_printf("(%c)", prev_state);
+    }
     }
     prev_state = state;
     start_cpu = i;
@@ -1983,36 +2325,40 @@ unsafe extern "C" fn kdb_cpu_status() {
     }
 // print the trailing cpus, ignoring them if they are all offline
     if (prev_state != 'F') {
-    if (!first_print)
+    if (!first_print) {
     kdb_printf(", ");
+    }
     kdb_printf("%d", start_cpu);
-    if (start_cpu < i-1)
+    if (start_cpu < i-1) {
     kdb_printf("-%d", i-1);
-    if (prev_state != ' ')
+    }
+    if (prev_state != ' ') {
     kdb_printf("(%c)", prev_state);
+    }
     }
     kdb_printf("\n");
     }
 #[no_mangle]
 unsafe extern "C" fn kdb_cpu(argc: c_int, argv: *const c_char) -> c_int {
-    static int kdb_cpu(int argc, const char **argv)
-    {
-    unsigned long cpunum;
-    int diag;
+    let mut cpunum = 0;
+    let mut diag = 0;
     if (argc == 0) {
     kdb_cpu_status();
     return 0;
     }
-    if (argc != 1)
+    if (argc != 1) {
     return KDB_ARGCOUNT;
+    }
     diag = kdbgetularg(argv[1], &cpunum);
-    if (diag)
+    if (diag) {
     return diag;
+    }
 //
 // Validate cpunum
 //
-    if ((cpunum >= CONFIG_NR_CPUS) || !kgdb_info[cpunum].enter_kgdb)
+    if ((cpunum >= CONFIG_NR_CPUS) || !kgdb_info[cpunum].enter_kgdb) {
     return KDB_BADCPUNUM;
+    }
     dbg_switch_cpu = cpunum;
 //
 // Switch to other cpu
@@ -2024,56 +2370,59 @@ unsafe extern "C" fn kdb_cpu(argc: c_int, argv: *const c_char) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kdb_ps_suppressed() {
-    void kdb_ps_suppressed(void)
-    {
-    let mut idle: c_int = 0, daemon = 0;
-    unsigned long cpu;
-    const struct task_struct *p, *g;
+pub static mut idle: c_int = 0;
+    let mut cpu = 0;
+    let mut p = core::ptr::null_mut();
+    let mut g = core::ptr::null_mut();
     for_each_online_cpu(cpu) {
     p = curr_task(cpu);
-    if (kdb_task_state(p, "-"))
-    ++idle;
+    if (kdb_task_state(p, "-")) {
+    idle += 1;
+    }
     }
     for_each_process_thread(g, p) {
-    if (kdb_task_state(p, "ims"))
-    ++daemon;
+    if (kdb_task_state(p, "ims")) {
+    daemon += 1;
+    }
     }
     if (idle || daemon) {
-    if (idle)
+    if (idle) {
     kdb_printf("%d idle process%s (state -)%s\n",
     idle, idle == 1 ? "" : "es",
     daemon ? " and " : "");
-    if (daemon)
+    }
+    if (daemon) {
     kdb_printf("%d sleeping system daemon (state [ims]) "
     "process%s", daemon,
     daemon == 1 ? "" : "es");
+    }
     kdb_printf(" suppressed,\nuse 'ps A' to see all.\n");
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn kdb_ps1(p: *const task_struct) {
-    void kdb_ps1(const struct task_struct *p)
-    {
-    int cpu;
-    unsigned long tmp;
+    let mut cpu = 0;
+    let mut tmp = 0;
     if (!p ||
-    copy_from_kernel_nofault(&tmp, (char *)p, sizeof(unsigned long)))
+    copy_from_kernel_nofault(&tmp, p, sizeof!(unsigned long))) {
     return;
+    }
     cpu = kdb_process_cpu(p);
     kdb_printf("0x%px %8d %8d  %d %4d   %c  0x%px %c%s\n",
-    (void *)p, p.pid, p.parent.pid,
+    p, p.pid, p.parent.pid,
     kdb_task_has_cpu(p), kdb_process_cpu(p),
     kdb_task_state_char(p),
-    (void *)(&p.thread),
+    (&p.thread),
     p == curr_task(raw_smp_processor_id()) ? '*' : ' ',
     p.comm);
     if (kdb_task_has_cpu(p)) {
     if (!KDB_TSK(cpu)) {
     kdb_printf("  Error: no saved data for this cpu\n");
     } else {
-    if (KDB_TSK(cpu) != p)
+    if (KDB_TSK(cpu) != p) {
     kdb_printf("  Error: does not match running "
     "process table (0x%px)\n", KDB_TSK(cpu));
+    }
     }
     }
     }
@@ -2086,32 +2435,36 @@ pub unsafe extern "C" fn kdb_ps1(p: *const task_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_ps(argc: c_int, argv: *const c_char) -> c_int {
-    static int kdb_ps(int argc, const char **argv)
-    {
-    struct task_struct *g, *p;
-    const char *mask;
-    unsigned long cpu;
-    if (argc == 0)
+    let mut g = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
+pub static mut mask: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
+    if (argc == 0) {
     kdb_ps_suppressed();
+    }
     kdb_printf("%-*s      Pid   Parent [*] cpu State %-*s Command\n",
-    (int)(2*sizeof(void *))+2, "Task Addr",
-    (int)(2*sizeof(void *))+2, "Thread");
+    (int)(2*sizeof!)+2, "Task Addr",
+    (int)(2*sizeof!)+2, "Thread");
     mask = argc ? argv[1] : kdbgetenv("PS");
 // Run the active tasks first
     for_each_online_cpu(cpu) {
-    if (KDB_FLAG(CMD_INTERRUPT))
+    if (KDB_FLAG(CMD_INTERRUPT)) {
     return 0;
+    }
     p = curr_task(cpu);
-    if (kdb_task_state(p, mask))
+    if (kdb_task_state(p, mask)) {
     kdb_ps1(p);
+    }
     }
     kdb_printf("\n");
 // Now the real tasks
     for_each_process_thread(g, p) {
-    if (KDB_FLAG(CMD_INTERRUPT))
+    if (KDB_FLAG(CMD_INTERRUPT)) {
     return 0;
-    if (kdb_task_state(p, mask))
+    }
+    if (kdb_task_state(p, mask)) {
     kdb_ps1(p);
+    }
     }
     return 0;
     }
@@ -2122,20 +2475,20 @@ unsafe extern "C" fn kdb_ps(argc: c_int, argv: *const c_char) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_pid(argc: c_int, argv: *const c_char) -> c_int {
-    static int kdb_pid(int argc, const char **argv)
-    {
-    struct task_struct *p;
-    unsigned long val;
-    int diag;
-    if (argc > 1)
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    let mut val = 0;
+    let mut diag = 0;
+    if (argc > 1) {
     return KDB_ARGCOUNT;
+    }
     if (argc) {
     if (strcmp(argv[1], "R") == 0) {
     p = KDB_TSK(kdb_initial_cpu);
     } else {
     diag = kdbgetularg(argv[1], &val);
-    if (diag)
+    if (diag) {
     return KDB_BADINT;
+    }
     p = find_task_by_pid_ns((pid_t)val,	&init_pid_ns);
     if (!p) {
     kdb_printf("No task with pid=%d\n", (pid_t)val);
@@ -2151,8 +2504,6 @@ unsafe extern "C" fn kdb_pid(argc: c_int, argv: *const c_char) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn kdb_kgdb(argc: c_int, argv: *const c_char) -> c_int {
-    static int kdb_kgdb(int argc, const char **argv)
-    {
     return KDB_CMD_KGDB;
     }
 //
@@ -2160,20 +2511,21 @@ unsafe extern "C" fn kdb_kgdb(argc: c_int, argv: *const c_char) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_help(argc: c_int, argv: *const c_char) -> c_int {
-    static int kdb_help(int argc, const char **argv)
-    {
-    kdbtab_t *kt;
+pub static mut kt: *mut c_void = core::ptr::null_mut();
     kdb_printf("%-15.15s %-20.20s %s\n", "Command", "Usage", "Description");
     kdb_printf("-----------------------------"
     "-----------------------------\n");
     list_for_each_entry(kt, &kdb_cmds_head, list_node) {
-    char *space = "";
-    if (KDB_FLAG(CMD_INTERRUPT))
+    let mut space = "";
+    if (KDB_FLAG(CMD_INTERRUPT)) {
     return 0;
-    if (!kdb_check_flags(kt.flags, kdb_cmd_enabled, true))
+    }
+    if (!kdb_check_flags(kt.flags, kdb_cmd_enabled, true)) {
     continue;
-    if (strlen(kt.usage) > 20)
+    }
+    if (strlen(kt.usage) > 20) {
     space = "\n                                    ";
+    }
     kdb_printf("%-15.15s %-20s%s%s\n", kt.name,
     kt.usage, space, kt.help);
     }
@@ -2184,21 +2536,23 @@ unsafe extern "C" fn kdb_help(argc: c_int, argv: *const c_char) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_kill(argc: c_int, argv: *const c_char) -> c_int {
-    static int kdb_kill(int argc, const char **argv)
-    {
-    long sig, pid;
-    struct task_struct *p;
-    if (argc != 2)
+    let mut sig = 0;
+    let mut pid = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    if (argc != 2) {
     return KDB_ARGCOUNT;
-    if (kstrtol(argv[1], 0, &sig))
+    }
+    if (kstrtol(argv[1], 0, &sig)) {
     return KDB_BADINT;
+    }
     if ((sig >= 0) || !valid_signal(-sig)) {
     kdb_printf("Invalid signal parameter.<-signal>\n");
     return 0;
     }
     sig = -sig;
-    if (kstrtol(argv[2], 0, &pid))
+    if (kstrtol(argv[2], 0, &pid)) {
     return KDB_BADINT;
+    }
     if (pid <= 0) {
     kdb_printf("Process ID must be large than 0.\n");
     return 0;
@@ -2220,10 +2574,8 @@ unsafe extern "C" fn kdb_kill(argc: c_int, argv: *const c_char) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_sysinfo(val: *mut sysinfo) {
-    static void kdb_sysinfo(struct sysinfo *val)
-    {
-    let mut uptime: u64 = ktime_get_mono_fast_ns();
-    memset(val, 0, sizeof(*val));
+pub static mut uptime: u64 = 0;
+    memset(val, 0, sizeof!(*val));
     val.uptime = div_u64(uptime, NSEC_PER_SEC);
     val.loads[0] = avenrun[0];
     val.loads[1] = avenrun[1];
@@ -2237,12 +2589,11 @@ unsafe extern "C" fn kdb_sysinfo(val: *mut sysinfo) {
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_summary(argc: c_int, argv: *const c_char) -> c_int {
-    static int kdb_summary(int argc, const char **argv)
-    {
-    time64_t now;
-    struct sysinfo val;
-    if (argc)
+    let mut now;
+pub static mut val: usize = 0;
+    if (argc) {
     return KDB_ARGCOUNT;
+    }
     kdb_printf("sysname    %s\n", init_uts_ns.name.sysname);
     kdb_printf("release    %s\n", init_uts_ns.name.release);
     kdb_printf("version    %s\n", init_uts_ns.name.version);
@@ -2254,7 +2605,7 @@ unsafe extern "C" fn kdb_summary(argc: c_int, argv: *const c_char) -> c_int {
     kdb_sysinfo(&val);
     kdb_printf("uptime     ");
     if (val.uptime > (24*60*60)) {
-    let mut days: c_int = val.uptime / (24*60*60);
+pub static mut days: c_int = 0;
     val.uptime %= (24*60*60);
     kdb_printf("%d day%s ", days, str_plural(days));
     }
@@ -2275,32 +2626,35 @@ unsafe extern "C" fn kdb_summary(argc: c_int, argv: *const c_char) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_per_cpu(argc: c_int, argv: *const c_char) -> c_int {
-    static int kdb_per_cpu(int argc, const char **argv)
-    {
     char fmtstr[64];
     int cpu, diag, nextarg = 1;
     unsigned long addr, symaddr, val, bytesperword = 0, whichcpu = ~0UL;
-    if (argc < 1 || argc > 3)
+    if (argc < 1 || argc > 3) {
     return KDB_ARGCOUNT;
+    }
     diag = kdbgetaddrarg(argc, argv, &nextarg, &symaddr, core::ptr::null_mut(), core::ptr::null_mut());
-    if (diag)
-    return diag;
-    if (argc >= 2) {
-    diag = kdbgetularg(argv[2], &bytesperword);
-    if (diag)
+    if (diag) {
     return diag;
     }
-    if (!bytesperword)
+    if (argc >= 2) {
+    diag = kdbgetularg(argv[2], &bytesperword);
+    if (diag) {
+    return diag;
+    }
+    }
+    if (!bytesperword) {
     bytesperword = KDB_WORD_SIZE;
-#[no_mangle]
-pub unsafe extern "C" fn if(KDB_WORD_SIZE: bytesperword >) -> else {
-    else if (bytesperword > KDB_WORD_SIZE)
+    }
+
+    else if (bytesperword > KDB_WORD_SIZE) {
     return KDB_BADWIDTH;
+    }
     sprintf(fmtstr, "%%0%dlx ", (int)(2*bytesperword));
     if (argc >= 3) {
     diag = kdbgetularg(argv[3], &whichcpu);
-    if (diag)
+    if (diag) {
     return diag;
+    }
     if (whichcpu >= nr_cpu_ids || !cpu_online(whichcpu)) {
     kdb_printf("cpu %ld is not online\n", whichcpu);
     return KDB_BADCPUNUM;
@@ -2313,10 +2667,12 @@ pub unsafe extern "C" fn if(KDB_WORD_SIZE: bytesperword >) -> else {
 pub const KDB_PCU(cpu): c_int = 0;
 
     for_each_online_cpu(cpu) {
-    if (KDB_FLAG(CMD_INTERRUPT))
+    if (KDB_FLAG(CMD_INTERRUPT)) {
     return 0;
-    if (whichcpu != ~0UL && whichcpu != cpu)
+    }
+    if (whichcpu != ~0UL && whichcpu != cpu) {
     continue;
+    }
     addr = symaddr + KDB_PCU(cpu);
     diag = kdb_getword(&val, addr, bytesperword);
     if (diag) {
@@ -2337,8 +2693,6 @@ pub const KDB_PCU(cpu): c_int = 0;
 //
 #[no_mangle]
 unsafe extern "C" fn kdb_grep_help(argc: c_int, argv: *const c_char) -> c_int {
-    static int kdb_grep_help(int argc, const char **argv)
-    {
     kdb_printf("Usage of  cmd args | grep pattern:\n");
     kdb_printf("  Any command's output may be filtered through an ");
     kdb_printf("emulated 'pipe'.\n");
@@ -2362,9 +2716,7 @@ unsafe extern "C" fn kdb_grep_help(argc: c_int, argv: *const c_char) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kdb_register(cmd: *mut kdbtab_t) -> c_int {
-    int kdb_register(kdbtab_t *cmd)
-    {
-    kdbtab_t *kp;
+pub static mut kp: *mut c_void = core::ptr::null_mut();
     list_for_each_entry(kp, &kdb_cmds_head, list_node) {
     if (strcmp(kp.name, cmd.name) == 0) {
     kdb_printf("Duplicate kdb cmd: %s, func %p help %s\n",
@@ -2384,11 +2736,9 @@ pub unsafe extern "C" fn kdb_register(cmd: *mut kdbtab_t) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kdb_register_table(kp: *mut kdbtab_t, len: usize) {
-    void kdb_register_table(kdbtab_t *kp, size_t len)
-    {
     while (len--) {
     list_add_tail(&kp.list_node, &kdb_cmds_head);
-    kp++;
+    kp += 1;
     }
     }
 //
@@ -2399,8 +2749,6 @@ pub unsafe extern "C" fn kdb_register_table(kp: *mut kdbtab_t, len: usize) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kdb_unregister(cmd: *mut kdbtab_t) {
-    void kdb_unregister(kdbtab_t *cmd)
-    {
     list_del(&cmd.list_node);
     }
     EXPORT_SYMBOL_GPL(kdb_unregister);
@@ -2610,22 +2958,20 @@ pub unsafe extern "C" fn kdb_unregister(cmd: *mut kdbtab_t) {
     };
 // Initialize the kdb command table.
 #[no_mangle]
-unsafe extern "C" fn kdb_inittab() -> void __init {
-    static void __init kdb_inittab(void)
-    {
-    kdb_register_table(maintab, ARRAY_SIZE(maintab));
+unsafe extern "C" fn kdb_inittab()  {
+    kdb_register_table(maintab, ARRAY_SIZE!(maintab));
     }
 // Execute any commands defined in kdb_cmds.
 #[no_mangle]
-unsafe extern "C" fn kdb_cmd_init() -> void __init {
-    static void __init kdb_cmd_init(void)
-    {
-    int i, diag;
-    for (i = 0; kdb_cmds[i]; ++i) {
+unsafe extern "C" fn kdb_cmd_init()  {
+    let mut i = 0;
+    let mut diag = 0;
+    while (kdb_cmds[i]) {
     diag = kdb_parse(kdb_cmds[i]);
-    if (diag)
+    if (diag) {
     kdb_printf("kdb command %s failed, kdb diag %d\n",
     kdb_cmds[i], diag);
+    }
     }
     if (defcmd_in_progress) {
     kdb_printf("Incomplete 'defcmd' set, forcing endefcmd\n");
@@ -2634,23 +2980,25 @@ unsafe extern "C" fn kdb_cmd_init() -> void __init {
     }
 // Initialize kdb_printf, breakpoint tables and kdb state
 #[no_mangle]
-pub unsafe extern "C" fn kdb_init(lvl: c_int) -> void __init {
-    void __init kdb_init(int lvl)
-    {
-    let mut kdb_init_lvl: static int = KDB_NOT_INITIALIZED;
-    int i;
-    if (kdb_init_lvl == KDB_INIT_FULL || lvl <= kdb_init_lvl)
+pub unsafe extern "C" fn kdb_init(lvl: c_int)  {
+pub static mut kdb_init_lvl: int = 0;
+    let mut i = 0;
+    if (kdb_init_lvl == KDB_INIT_FULL || lvl <= kdb_init_lvl) {
     return;
-    for (i = kdb_init_lvl; i < lvl; i++) {
-    switch (i) {
-    case KDB_NOT_INITIALIZED:
+    }
+    while (i < lvl) {
+    match (i) {
+    KDB_NOT_INITIALIZED => {
     kdb_inittab();		/* Initialize Command Table */
     kdb_initbptab();	/* Initialize Breakpoints */
-    break;
-    case KDB_INIT_EARLY:
+    // break;
+    }
+    KDB_INIT_EARLY => {
     kdb_cmd_init();		/* Build kdb_cmds tables */
-    break;
+    // break;
+    }
     }
     }
     kdb_init_lvl = lvl;
     }
+}

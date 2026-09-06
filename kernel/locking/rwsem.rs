@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -81,13 +331,14 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // - the handoff isn't set.
 //
 
-    if (!debug_locks_silent &&				\
-    WARN_ONCE(c, "DEBUG_RWSEMS_WARN_ON(%s): count = 0x%lx, magic = 0x%lx, owner = 0x%lx, curr 0x%lx, list %sempty\n",\
+    if (!debug_locks_silent &&				
+    WARN_ONCE(c, "DEBUG_RWSEMS_WARN_ON(%s): count = 0x%lx, magic = 0x%lx, owner = 0x%lx, curr 0x%lx, list %sempty\n",
 
-    (unsigned long) sem.magic,			\
-    atomic_long_read(&(sem).owner), (long)current,	\
-    rwsem_is_contended(sem) ? "" : "not "))		\
-    debug_locks_off();			\
+    (unsigned long) sem.magic,			
+    atomic_long_read(&(sem).owner), (long)current,	
+    rwsem_is_contended(sem) ? "" : "not "))		 {
+    debug_locks_off();			
+    }
     } while (0)
 
 //
@@ -142,15 +393,11 @@ pub const RWSEM_READER_SHIFT: c_int = 8;
 //
 #[no_mangle]
 pub unsafe extern "C" fn rwsem_set_owner(sem: *mut rw_semaphore) {
-    static inline void rwsem_set_owner(struct rw_semaphore *sem)
-    {
     lockdep_assert_preemption_disabled();
     atomic_long_set(&sem.owner, (long)current);
     }
 #[no_mangle]
 pub unsafe extern "C" fn rwsem_clear_owner(sem: *mut rw_semaphore) {
-    static inline void rwsem_clear_owner(struct rw_semaphore *sem)
-    {
     lockdep_assert_preemption_disabled();
     atomic_long_set(&sem.owner, 0);
     }
@@ -159,8 +406,6 @@ pub unsafe extern "C" fn rwsem_clear_owner(sem: *mut rw_semaphore) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn rwsem_test_oflags(sem: *mut rw_semaphore, flags: c_long) -> bool {
-    static inline bool rwsem_test_oflags(struct rw_semaphore *sem, long flags)
-    {
     return atomic_long_read(&sem.owner) & flags;
     }
 //
@@ -173,26 +418,23 @@ pub unsafe extern "C" fn rwsem_test_oflags(sem: *mut rw_semaphore, flags: c_long
 //
 // The reader non-spinnable bit is preserved.
 //
-    static inline void __rwsem_set_reader_owned(struct rw_semaphore *sem,
-    struct task_struct *owner)
-    {
-    unsigned long val = (unsigned long)owner | RWSEM_READER_OWNED |
+#[no_mangle]
+pub unsafe extern "C" fn __rwsem_set_reader_owned(sem: *mut rw_semaphore, owner: *mut task_struct) {
+    let mut val = (unsigned long)owner | RWSEM_READER_OWNED |
     (atomic_long_read(&sem.owner) & RWSEM_NONSPINNABLE);
     atomic_long_set(&sem.owner, val);
     }
 #[no_mangle]
 pub unsafe extern "C" fn rwsem_set_reader_owned(sem: *mut rw_semaphore) {
-    static inline void rwsem_set_reader_owned(struct rw_semaphore *sem)
-    {
     __rwsem_set_reader_owned(sem, current);
     }
 
 //
 // Return just the real task structure pointer of the owner
 //
-    struct task_struct *rwsem_owner(struct rw_semaphore *sem)
-    {
-    return (struct task_struct *)
+#[no_mangle]
+pub unsafe extern "C" fn rwsem_owner(sem: *mut rw_semaphore) -> *mut c_void {
+    return 
     (atomic_long_read(&sem.owner) & ~RWSEM_OWNER_FLAGS_MASK);
     }
 //
@@ -200,14 +442,13 @@ pub unsafe extern "C" fn rwsem_set_reader_owned(sem: *mut rw_semaphore) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn is_rwsem_reader_owned(sem: *mut rw_semaphore) -> bool {
-    bool is_rwsem_reader_owned(struct rw_semaphore *sem)
-    {
 //
 // Check the count to see if it is write-locked.
 //
-    let mut count: c_long = atomic_long_read(&sem.count);
-    if (count & RWSEM_WRITER_MASK)
+pub static mut count: c_long = 0;
+    if (count & RWSEM_WRITER_MASK) {
     return false;
+    }
     return rwsem_test_oflags(sem, RWSEM_READER_OWNED);
     }
 //
@@ -218,20 +459,19 @@ pub unsafe extern "C" fn is_rwsem_reader_owned(sem: *mut rw_semaphore) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn rwsem_clear_reader_owned(sem: *mut rw_semaphore) {
-    static inline void rwsem_clear_reader_owned(struct rw_semaphore *sem)
-    {
-    let mut val: c_ulong = atomic_long_read(&sem.owner);
+pub static mut val: c_ulong = 0;
     while ((val & ~RWSEM_OWNER_FLAGS_MASK) == (unsigned long)current) {
     if (atomic_long_try_cmpxchg(&sem.owner, &val,
-    val & RWSEM_OWNER_FLAGS_MASK))
+    val & RWSEM_OWNER_FLAGS_MASK)) {
     return;
+    }
     }
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn rwsem_clear_reader_owned(sem: *mut rw_semaphore) {
-    static inline void rwsem_clear_reader_owned(struct rw_semaphore *sem)
-    {
+#[no_mangle]
+// duplicate fn: rwsem_clear_reader_owned
+pub unsafe extern "C" fn rwsem_clear_reader_owned_dup(sem: *mut rw_semaphore) {
     }
 
 //
@@ -240,24 +480,23 @@ pub unsafe extern "C" fn rwsem_clear_reader_owned(sem: *mut rw_semaphore) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn rwsem_set_nonspinnable(sem: *mut rw_semaphore) {
-    static inline void rwsem_set_nonspinnable(struct rw_semaphore *sem)
-    {
-    let mut owner: c_ulong = atomic_long_read(&sem.owner);
+pub static mut owner: c_ulong = 0;
     do {
-    if (!(owner & RWSEM_READER_OWNED))
+    if (!(owner & RWSEM_READER_OWNED)) {
     break;
-    if (owner & RWSEM_NONSPINNABLE)
+    }
+    if (owner & RWSEM_NONSPINNABLE) {
     break;
+    }
     } while (!atomic_long_try_cmpxchg(&sem.owner, &owner,
     owner | RWSEM_NONSPINNABLE));
     }
 #[no_mangle]
 pub unsafe extern "C" fn rwsem_read_trylock(sem: *mut rw_semaphore, cntp: *mut c_long) -> bool {
-    static inline bool rwsem_read_trylock(struct rw_semaphore *sem, long *cntp)
-    {
 // cntp = atomic_long_add_return_acquire(RWSEM_READER_BIAS, &sem->count);
-    if (WARN_ON_ONCE(*cntp < 0))
+    if (WARN_ON_ONCE!(*cntp < 0)) {
     rwsem_set_nonspinnable(sem);
+    }
     if (!(*cntp & RWSEM_READ_FAILED_MASK)) {
     rwsem_set_reader_owned(sem);
     return true;
@@ -266,9 +505,7 @@ pub unsafe extern "C" fn rwsem_read_trylock(sem: *mut rw_semaphore, cntp: *mut c
     }
 #[no_mangle]
 pub unsafe extern "C" fn rwsem_write_trylock(sem: *mut rw_semaphore) -> bool {
-    static inline bool rwsem_write_trylock(struct rw_semaphore *sem)
-    {
-    let mut tmp: c_long = RWSEM_UNLOCKED_VALUE;
+pub static mut tmp: c_long = 0;
     if (atomic_long_try_cmpxchg_acquire(&sem.count, &tmp, RWSEM_WRITER_LOCKED)) {
     rwsem_set_owner(sem);
     return true;
@@ -279,12 +516,11 @@ pub unsafe extern "C" fn rwsem_write_trylock(sem: *mut rw_semaphore) -> bool {
 // Return the real task structure pointer of the owner and the embedded
 // flags in the owner. pflags must be non-NULL.
 //
-    static inline struct task_struct *
-    rwsem_owner_flags(struct rw_semaphore *sem, unsigned long *pflags)
-    {
-    let mut owner: c_ulong = atomic_long_read(&sem.owner);
+#[no_mangle]
+pub unsafe extern "C" fn rwsem_owner_flags(sem: *mut rw_semaphore, pflags: *mut c_ulong) -> *mut c_void {
+pub static mut owner: c_ulong = 0;
 // pflags = owner & RWSEM_OWNER_FLAGS_MASK;
-    return (struct task_struct *)(owner & ~RWSEM_OWNER_FLAGS_MASK);
+    return (owner & ~RWSEM_OWNER_FLAGS_MASK);
     }
 //
 // Guide to the rw_semaphore's count field.
@@ -304,14 +540,13 @@ pub unsafe extern "C" fn rwsem_write_trylock(sem: *mut rw_semaphore) -> bool {
 //
 // Initialize an rwsem:
 //
-    void __init_rwsem(struct rw_semaphore *sem, const char *name,
-    struct lock_class_key *key)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __init_rwsem(sem: *mut rw_semaphore, name: *mut c_char, key: *mut lock_class_key) {
 
 //
 // Make sure we are not reinitializing a held semaphore:
 //
-    debug_check_no_locks_freed((void *)sem, sizeof(*sem));
+    debug_check_no_locks_freed(sem, sizeof!(*sem));
     lockdep_init_map_wait(&sem.dep_map, name, key, 0, LD_WAIT_SLEEP);
 
     sem.magic = sem;
@@ -335,7 +570,7 @@ pub unsafe extern "C" fn rwsem_write_trylock(sem: *mut rw_semaphore) -> bool {
 pub struct rwsem_waiter {
     pub list: list_head,
     pub task: *mut task_struct,
-    pub type: enum rwsem_waiter_type,
+    pub type: rwsem_waiter_type,
     pub timeout: c_ulong,
     pub handoff_set: bool,
 }
@@ -361,16 +596,12 @@ pub const MAX_READERS_WAKEUP: c_uint = 0x100;
     static inline
 #[no_mangle]
 pub unsafe extern "C" fn __rwsem_del_waiter(sem: *mut rw_semaphore, waiter: *mut rwsem_waiter) -> bool {
-    bool __rwsem_del_waiter(struct rw_semaphore *sem, struct rwsem_waiter *waiter)
-    __must_hold(&sem.wait_lock)
-    {
     if (list_empty(&waiter.list)) {
     sem.first_waiter = core::ptr::null_mut();
     return false;
     }
     if (sem.first_waiter == waiter) {
-    sem.first_waiter = list_first_entry(&waiter.list,
-    struct rwsem_waiter, list);
+    sem.first_waiter = list_first_entry(&waiter.list, rwsem_waiter, list);
     }
     list_del(&waiter.list);
     return true;
@@ -383,24 +614,22 @@ pub unsafe extern "C" fn __rwsem_del_waiter(sem: *mut rw_semaphore, waiter: *mut
 //
 // Return: true if wait_list isn't empty and false otherwise
 //
-    static inline bool
-    rwsem_del_waiter(struct rw_semaphore *sem, struct rwsem_waiter *waiter)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn rwsem_del_waiter(sem: *mut rw_semaphore, waiter: *mut rwsem_waiter) -> bool {
     lockdep_assert_held(&sem.wait_lock);
-    if (__rwsem_del_waiter(sem, waiter))
+    if (__rwsem_del_waiter(sem, waiter)) {
     return true;
+    }
     atomic_long_andnot(RWSEM_FLAG_HANDOFF | RWSEM_FLAG_WAITERS, &sem.count);
     return false;
     }
-    static inline
-    struct rwsem_waiter *next_waiter(const struct rw_semaphore *sem,
-    const struct rwsem_waiter *waiter)
-    __must_hold(&sem.wait_lock)
-    {
-    struct rwsem_waiter *next = list_first_entry(&waiter.list,
-    struct rwsem_waiter, list);
-    if (next == sem.first_waiter)
+#[no_mangle]
+pub unsafe extern "C" fn next_waiter(sem: *mut rw_semaphore, wait_lock: *mut rwsem_waiterwaiter)
+    __must_hold(&sem.) -> *mut c_void {
+    let mut next = list_first_entry(&waiter.list, rwsem_waiter, list);
+    if (next == sem.first_waiter) {
     return core::ptr::null_mut();
+    }
     return next;
     }
 //
@@ -417,13 +646,12 @@ pub unsafe extern "C" fn __rwsem_del_waiter(sem: *mut rw_semaphore, waiter: *mut
 //
 // Implies rwsem_del_waiter() for all woken readers.
 //
-    static void rwsem_mark_wake(struct rw_semaphore *sem,
-    enum rwsem_wake_type wake_type,
-    struct wake_q_head *wake_q)
-    {
-    struct rwsem_waiter *waiter, *next;
+#[no_mangle]
+pub unsafe extern "C" fn rwsem_mark_wake(sem: *mut rw_semaphore, wake_type: rwsem_wake_type, wake_q: *mut wake_q_head) {
+    let mut waiter = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
     long oldcount, woken = 0, adjustment = 0;
-    struct list_head wlist;
+pub static mut wlist: usize = 0;
     lockdep_assert_held(&sem.wait_lock);
 //
 // Take a peek at the queue head waiter such that we can determine
@@ -447,15 +675,16 @@ pub unsafe extern "C" fn __rwsem_del_waiter(sem: *mut rw_semaphore, waiter: *mut
 //
 // No reader wakeup if there are too many of them already.
 //
-    if (unlikely(atomic_long_read(&sem.count) < 0))
+    if (unlikely(atomic_long_read(&sem.count) < 0)) {
     return;
+    }
 //
 // Writers might steal the lock before we grant it to the next reader.
 // We prefer to do the first reader grant before counting readers
 // so we can bail out early if a writer stole the lock.
 //
     if (wake_type != RWSEM_WAKE_READ_OWNED) {
-    struct task_struct *owner;
+pub static mut owner: *mut c_void = core::ptr::null_mut();
     adjustment = RWSEM_READER_BIAS;
     oldcount = atomic_long_fetch_add(adjustment, &sem.count);
     if (unlikely(oldcount & RWSEM_WRITER_MASK)) {
@@ -509,17 +738,20 @@ pub unsafe extern "C" fn __rwsem_del_waiter(sem: *mut rw_semaphore, waiter: *mut
     INIT_LIST_HEAD(&wlist);
     do {
     next = next_waiter(sem, waiter);
-    if (waiter.type == RWSEM_WAITING_FOR_WRITE)
+    if (waiter.type == RWSEM_WAITING_FOR_WRITE) {
     continue;
-    woken++;
+    }
+    woken += 1;
     list_move_tail(&waiter.list, &wlist);
-    if (sem.first_waiter == waiter)
+    if (sem.first_waiter == waiter) {
     sem.first_waiter = next;
+    }
 //
 // Limit # of readers that can be woken up per wakeup call.
 //
-    if (unlikely(woken >= MAX_READERS_WAKEUP))
+    if (unlikely(woken >= MAX_READERS_WAKEUP)) {
     break;
+    }
     } while ((waiter = next) != core::ptr::null_mut());
     adjustment = woken * RWSEM_READER_BIAS - adjustment;
     lockevent_cond_inc(rwsem_wake_reader, woken);
@@ -530,21 +762,24 @@ pub unsafe extern "C" fn __rwsem_del_waiter(sem: *mut rw_semaphore, waiter: *mut
 // rwsem_del_waiter().
 //
     adjustment -= RWSEM_FLAG_WAITERS;
-    if (oldcount & RWSEM_FLAG_HANDOFF)
+    if (oldcount & RWSEM_FLAG_HANDOFF) {
     adjustment -= RWSEM_FLAG_HANDOFF;
+    }
     } else if (woken) {
 //
 // When we've woken a reader, we no longer need to force
 // writers to give up the lock and we can clear HANDOFF.
 //
-    if (oldcount & RWSEM_FLAG_HANDOFF)
+    if (oldcount & RWSEM_FLAG_HANDOFF) {
     adjustment -= RWSEM_FLAG_HANDOFF;
     }
-    if (adjustment)
+    }
+    if (adjustment) {
     atomic_long_add(adjustment, &sem.count);
+    }
 // 2nd pass
     list_for_each_entry_safe(waiter, next, &wlist, list) {
-    struct task_struct *tsk;
+pub static mut tsk: *mut c_void = core::ptr::null_mut();
     tsk = waiter.task;
     get_task_struct(tsk);
 //
@@ -567,23 +802,23 @@ pub unsafe extern "C" fn __rwsem_del_waiter(sem: *mut rw_semaphore, waiter: *mut
 // writer slowpaths with wait_lock held. It releases the wait_lock and
 // optionally wake up waiters before it returns.
 //
-    static inline void
-    rwsem_del_wake_waiter(struct rw_semaphore *sem, struct rwsem_waiter *waiter,
-    struct wake_q_head *wake_q)
-    __releases(&sem.wait_lock)
-    {
-    let mut first: bool = sem.first_waiter == waiter;
+#[no_mangle]
+pub unsafe extern "C" fn rwsem_del_wake_waiter(sem: *mut rw_semaphore, waiter: *mut rwsem_waiter, wait_lock: *mut wake_q_headwake_q)
+    __releases(&sem.) {
+pub static mut first: bool = false;
     wake_q_init(wake_q);
 //
 // If the wait_list isn't empty and the waiter to be deleted is
 // the first waiter, we wake up the remaining waiters as they may
 // be eligible to acquire or spin on the lock.
 //
-    if (rwsem_del_waiter(sem, waiter) && first)
+    if (rwsem_del_waiter(sem, waiter) && first) {
     rwsem_mark_wake(sem, RWSEM_WAKE_ANY, wake_q);
+    }
     raw_spin_unlock_irq(&sem.wait_lock);
-    if (!wake_q_empty(wake_q))
+    if (!wake_q_empty(wake_q)) {
     wake_up_q(wake_q);
+    }
     }
 //
 // This function must be called with the sem->wait_lock held to prevent
@@ -592,24 +827,25 @@ pub unsafe extern "C" fn __rwsem_del_waiter(sem: *mut rw_semaphore, waiter: *mut
 //
 // Implies rwsem_del_waiter() on success.
 //
-    static inline bool rwsem_try_write_lock(struct rw_semaphore *sem,
-    struct rwsem_waiter *waiter)
-    __must_hold(&sem.wait_lock)
-    {
-    struct rwsem_waiter *first = sem.first_waiter;
-    long count, new;
+#[no_mangle]
+pub unsafe extern "C" fn rwsem_try_write_lock(sem: *mut rw_semaphore, wait_lock: *mut rwsem_waiterwaiter)
+    __must_hold(&sem.) -> bool {
+    let mut first = sem.first_waiter;
+    let mut count = 0;
+    let mut new = 0;
     lockdep_assert_held(&sem.wait_lock);
     count = atomic_long_read(&sem.count);
     do {
-    let mut has_handoff: bool = !!(count & RWSEM_FLAG_HANDOFF);
+pub static mut has_handoff: bool = false;
     if (has_handoff) {
 //
 // Honor handoff bit and yield only when the first
 // waiter is the one that set it. Otherwisee, we
 // still try to acquire the rwsem.
 //
-    if (first.handoff_set && (waiter != first))
+    if (first.handoff_set && (waiter != first)) {
     return false;
+    }
     }
     new = count;
     if (count & RWSEM_LOCK_MASK) {
@@ -619,14 +855,16 @@ pub unsafe extern "C" fn __rwsem_del_waiter(sem: *mut rw_semaphore, waiter: *mut
 // for too long.
 //
     if (has_handoff || (!rt_or_dl_task(waiter.task) &&
-    !time_after(jiffies, waiter.timeout)))
+    !time_after(jiffies, waiter.timeout))) {
     return false;
+    }
     new |= RWSEM_FLAG_HANDOFF;
     } else {
     new |= RWSEM_WRITER_LOCKED;
     new &= ~RWSEM_FLAG_HANDOFF;
-    if (list_empty(&first.list))
+    if (list_empty(&first.list)) {
     new &= ~RWSEM_FLAG_WAITERS;
+    }
     }
     } while (!atomic_long_try_cmpxchg_acquire(&sem.count, &count, new));
 //
@@ -670,9 +908,7 @@ pub unsafe extern "C" fn __rwsem_del_waiter(sem: *mut rw_semaphore, waiter: *mut
 //
 #[no_mangle]
 pub unsafe extern "C" fn rwsem_try_write_lock_unqueued(sem: *mut rw_semaphore) -> bool {
-    static inline bool rwsem_try_write_lock_unqueued(struct rw_semaphore *sem)
-    {
-    let mut count: c_long = atomic_long_read(&sem.count);
+pub static mut count: c_long = 0;
     while (!(count & (RWSEM_LOCK_MASK|RWSEM_FLAG_HANDOFF))) {
     if (atomic_long_try_cmpxchg_acquire(&sem.count, &count,
     count | RWSEM_WRITER_LOCKED)) {
@@ -685,11 +921,9 @@ pub unsafe extern "C" fn rwsem_try_write_lock_unqueued(sem: *mut rw_semaphore) -
     }
 #[no_mangle]
 pub unsafe extern "C" fn rwsem_can_spin_on_owner(sem: *mut rw_semaphore) -> bool {
-    static inline bool rwsem_can_spin_on_owner(struct rw_semaphore *sem)
-    {
-    struct task_struct *owner;
-    unsigned long flags;
-    let mut ret: bool = true;
+pub static mut owner: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+pub static mut ret: bool = true;
     if (need_resched()) {
     lockevent_inc(rwsem_opt_fail);
     return false;
@@ -703,31 +937,36 @@ pub unsafe extern "C" fn rwsem_can_spin_on_owner(sem: *mut rw_semaphore) -> bool
 // Don't check the read-owner as the entry may be stale.
 //
     if ((flags & RWSEM_NONSPINNABLE) ||
-    (owner && !(flags & RWSEM_READER_OWNED) && !owner_on_cpu(owner)))
+    (owner && !(flags & RWSEM_READER_OWNED) && !owner_on_cpu(owner))) {
     ret = false;
+    }
     lockevent_cond_inc(rwsem_opt_fail, !ret);
     return ret;
     }
     static inline enum owner_state
-    rwsem_owner_state(struct task_struct *owner, unsigned long flags)
+    rwsem_owner_state(task_struct *owner, unsigned long flags)
     {
-    if (flags & RWSEM_NONSPINNABLE)
+    if (flags & RWSEM_NONSPINNABLE) {
     return OWNER_NONSPINNABLE;
-    if (flags & RWSEM_READER_OWNED)
+    }
+    if (flags & RWSEM_READER_OWNED) {
     return OWNER_READER;
+    }
     return owner ? OWNER_WRITER : OWNER_NULL;
     }
     static noinline enum owner_state
-    rwsem_spin_on_owner(struct rw_semaphore *sem)
+    rwsem_spin_on_owner(rw_semaphore *sem)
     {
-    struct task_struct *new, *owner;
+    let mut new = core::ptr::null_mut();
+    let mut owner = core::ptr::null_mut();
     unsigned long flags, new_flags;
     enum owner_state state;
     lockdep_assert_preemption_disabled();
     owner = rwsem_owner_flags(sem, &flags);
     state = rwsem_owner_state(owner, flags);
-    if (state != OWNER_WRITER)
+    if (state != OWNER_WRITER) {
     return state;
+    }
     for (;;) {
 //
 // When a waiting writer set the handoff flag, it may spin
@@ -771,27 +1010,25 @@ pub unsafe extern "C" fn rwsem_can_spin_on_owner(sem: *mut rw_semaphore) -> bool
 //
 #[no_mangle]
 pub unsafe extern "C" fn rwsem_rspin_threshold(sem: *mut rw_semaphore) -> u64 {
-    static inline u64 rwsem_rspin_threshold(struct rw_semaphore *sem)
-    {
-    let mut count: c_long = atomic_long_read(&sem.count);
-    let mut readers: c_int = count >> RWSEM_READER_SHIFT;
-    u64 delta;
-    if (readers > 30)
+pub static mut count: c_long = 0;
+pub static mut readers: c_int = 0;
+    let mut delta = 0;
+    if (readers > 30) {
     readers = 30;
+    }
     delta = (20 + readers) * NSEC_PER_USEC / 2;
     return sched_clock() + delta;
     }
 #[no_mangle]
 unsafe extern "C" fn rwsem_optimistic_spin(sem: *mut rw_semaphore) -> bool {
-    static bool rwsem_optimistic_spin(struct rw_semaphore *sem)
-    {
-    let mut taken: bool = false;
-    let mut prev_owner_state: c_int = OWNER_NULL;
-    let mut loop: c_int = 0;
-    let mut rspin_threshold: u64 = 0;
+pub static mut taken: bool = false;
+pub static mut prev_owner_state: c_int = 0;
+pub static mut loop: c_int = 0;
+pub static mut rspin_threshold: u64 = 0;
 // sem->wait_lock should not be held when doing optimistic spinning
-    if (!osq_lock(&sem.osq))
-    goto done;
+    if (!osq_lock(&sem.osq)) {
+// goto;
+    }
 //
 // Optimistically spin on the owner field and attempt to acquire the
 // lock whenever the owner changes. Spinning will be stopped when:
@@ -801,14 +1038,16 @@ unsafe extern "C" fn rwsem_optimistic_spin(sem: *mut rw_semaphore) -> bool {
     for (;;) {
     enum owner_state owner_state;
     owner_state = rwsem_spin_on_owner(sem);
-    if (owner_state == OWNER_NONSPINNABLE)
+    if (owner_state == OWNER_NONSPINNABLE) {
     break;
+    }
 //
 // Try to acquire the lock
 //
     taken = rwsem_try_write_lock_unqueued(sem);
-    if (taken)
+    if (taken) {
     break;
+    }
 //
 // Time-based reader-owned rwsem optimistic spinning
 //
@@ -821,8 +1060,9 @@ unsafe extern "C" fn rwsem_optimistic_spin(sem: *mut rw_semaphore) -> bool {
 // the beginning of the 2nd reader phase.
 //
     if (prev_owner_state != OWNER_READER) {
-    if (rwsem_test_oflags(sem, RWSEM_NONSPINNABLE))
+    if (rwsem_test_oflags(sem, RWSEM_NONSPINNABLE)) {
     break;
+    }
     rspin_threshold = rwsem_rspin_threshold(sem);
     loop = 0;
     }
@@ -833,8 +1073,7 @@ unsafe extern "C" fn rwsem_optimistic_spin(sem: *mut rw_semaphore) -> bool {
 // when the lock becomes free and when the spinner
 // is ready to do a trylock.
 //
-#[no_mangle]
-pub unsafe extern "C" fn if(rspin_threshold): !(++loop & 0xf) && (sched_clock() >) -> else {
+if true {
     rwsem_set_nonspinnable(sem);
     lockevent_inc(rwsem_opt_nospin);
     break;
@@ -872,11 +1111,13 @@ pub unsafe extern "C" fn if(rspin_threshold): !(++loop & 0xf) && (sched_clock() 
 // a writer, need_resched() check needs to be done here.
 //
     if (owner_state != OWNER_WRITER) {
-    if (need_resched())
+    if (need_resched()) {
     break;
+    }
     if (rt_or_dl_task(current) &&
-    (prev_owner_state != OWNER_WRITER))
+    (prev_owner_state != OWNER_WRITER)) {
     break;
+    }
     }
     prev_owner_state = owner_state;
 //
@@ -888,7 +1129,7 @@ pub unsafe extern "C" fn if(rspin_threshold): !(++loop & 0xf) && (sched_clock() 
     cpu_relax();
     }
     osq_unlock(&sem.osq);
-    done:
+// label;
     lockevent_cond_inc(rwsem_opt_fail, !taken);
     return taken;
     }
@@ -898,27 +1139,27 @@ pub unsafe extern "C" fn if(rspin_threshold): !(++loop & 0xf) && (sched_clock() 
 //
 #[no_mangle]
 pub unsafe extern "C" fn clear_nonspinnable(sem: *mut rw_semaphore) {
-    static inline void clear_nonspinnable(struct rw_semaphore *sem)
-    {
-    if (unlikely(rwsem_test_oflags(sem, RWSEM_NONSPINNABLE)))
+    if (unlikely(rwsem_test_oflags(sem, RWSEM_NONSPINNABLE))) {
     atomic_long_andnot(RWSEM_NONSPINNABLE, &sem.owner);
+    }
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn rwsem_can_spin_on_owner(sem: *mut rw_semaphore) -> bool {
-    static inline bool rwsem_can_spin_on_owner(struct rw_semaphore *sem)
-    {
+#[no_mangle]
+// duplicate fn: rwsem_can_spin_on_owner
+pub unsafe extern "C" fn rwsem_can_spin_on_owner_dup(sem: *mut rw_semaphore) -> bool {
     return false;
     }
 #[no_mangle]
 pub unsafe extern "C" fn rwsem_optimistic_spin(sem: *mut rw_semaphore) -> bool {
-    static inline bool rwsem_optimistic_spin(struct rw_semaphore *sem)
-    {
     return false;
     }
-    static inline void clear_nonspinnable(struct rw_semaphore *sem) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: clear_nonspinnable
+pub unsafe extern "C" fn clear_nonspinnable_dup(sem: *mut rw_semaphore) { }
     static inline enum owner_state
-    rwsem_spin_on_owner(struct rw_semaphore *sem)
+    rwsem_spin_on_owner(rw_semaphore *sem)
     {
     return OWNER_NONSPINNABLE;
     }
@@ -930,12 +1171,12 @@ pub unsafe extern "C" fn rwsem_optimistic_spin(sem: *mut rw_semaphore) -> bool {
 // front waiter otherwise.
 // This is being called from both reader and writer slow paths.
 //
-    static inline void rwsem_cond_wake_waiter(struct rw_semaphore *sem, long count,
-    struct wake_q_head *wake_q)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn rwsem_cond_wake_waiter(sem: *mut rw_semaphore, count: c_long, wake_q: *mut wake_q_head) {
     enum rwsem_wake_type wake_type;
-    if (count & RWSEM_WRITER_MASK)
+    if (count & RWSEM_WRITER_MASK) {
     return;
+    }
     if (count & RWSEM_READER_MASK) {
     wake_type = RWSEM_WAKE_READERS;
     } else {
@@ -948,20 +1189,21 @@ pub unsafe extern "C" fn rwsem_optimistic_spin(sem: *mut rw_semaphore) -> bool {
 // Wait for the read lock to be granted
 //
     static struct rw_semaphore __sched *
-    rwsem_down_read_slowpath(struct rw_semaphore *sem, long count, unsigned int state)
+    rwsem_down_read_slowpath(rw_semaphore *sem, long count, unsigned int state)
     {
-    let mut adjustment: c_long = -RWSEM_READER_BIAS;
-    let mut rcnt: c_long = (count >> RWSEM_READER_SHIFT);
+pub static mut adjustment: c_long = 0;
+pub static mut rcnt: c_long = 0;
     struct rwsem_waiter waiter, *first;
-    DEFINE_WAKE_Q(wake_q);
+pub static mut wake_q: usize = 0;
 //
 // To prevent a constant stream of readers from starving a sleeping
 // writer, don't attempt optimistic lock stealing if the lock is
 // very likely owned by readers.
 //
     if ((atomic_long_read(&sem.owner) & RWSEM_READER_OWNED) &&
-    (rcnt > 1) && !(count & RWSEM_WRITER_LOCKED))
-    goto queue;
+    (rcnt > 1) && !(count & RWSEM_WRITER_LOCKED)) {
+// goto;
+    }
 //
 // Reader optimistic lock stealing.
 //
@@ -974,15 +1216,16 @@ pub unsafe extern "C" fn rwsem_optimistic_spin(sem: *mut rw_semaphore) -> bool {
 //
     if ((rcnt == 1) && (count & RWSEM_FLAG_WAITERS)) {
     raw_spin_lock_irq(&sem.wait_lock);
-    if (sem.first_waiter)
+    if (sem.first_waiter) {
     rwsem_mark_wake(sem, RWSEM_WAKE_READ_OWNED,
     &wake_q);
+    }
     raw_spin_unlock_irq(&sem.wait_lock);
     wake_up_q(&wake_q);
     }
     return sem;
     }
-    queue:
+// label;
     waiter.task = current;
     waiter.type = RWSEM_WAITING_FOR_READ;
     waiter.timeout = jiffies + RWSEM_WAIT_TIMEOUT;
@@ -1014,12 +1257,14 @@ pub unsafe extern "C" fn rwsem_optimistic_spin(sem: *mut rw_semaphore) -> bool {
     count = atomic_long_add_return(adjustment, &sem.count);
     rwsem_cond_wake_waiter(sem, count, &wake_q);
     raw_spin_unlock_irq(&sem.wait_lock);
-    if (!wake_q_empty(&wake_q))
+    if (!wake_q_empty(&wake_q)) {
     wake_up_q(&wake_q);
+    }
     trace_contention_begin(sem, LCB_F_READ);
     set_current_state(state);
-    if (state == TASK_UNINTERRUPTIBLE)
+    if (state == TASK_UNINTERRUPTIBLE) {
     hung_task_set_blocker(sem, BLOCKER_TYPE_RWSEM_READER);
+    }
 // wait to be given the lock
     for (;;) {
     if (!smp_load_acquire(&waiter.task)) {
@@ -1028,8 +1273,9 @@ pub unsafe extern "C" fn rwsem_optimistic_spin(sem: *mut rw_semaphore) -> bool {
     }
     if (signal_pending_state(state, current)) {
     raw_spin_lock_irq(&sem.wait_lock);
-    if (waiter.task)
-    goto out_nolock;
+    if (waiter.task) {
+// goto;
+    }
     raw_spin_unlock_irq(&sem.wait_lock);
 // Ordered by sem->wait_lock against rwsem_mark_wake().
     break;
@@ -1038,13 +1284,14 @@ pub unsafe extern "C" fn rwsem_optimistic_spin(sem: *mut rw_semaphore) -> bool {
     lockevent_inc(rwsem_sleep_reader);
     set_current_state(state);
     }
-    if (state == TASK_UNINTERRUPTIBLE)
+    if (state == TASK_UNINTERRUPTIBLE) {
     hung_task_clear_blocker();
+    }
     __set_current_state(TASK_RUNNING);
     lockevent_inc(rwsem_rlock);
     trace_contention_end(sem, 0);
     return sem;
-    out_nolock:
+// label;
     rwsem_del_wake_waiter(sem, &waiter, &wake_q);
     __set_current_state(TASK_RUNNING);
     lockevent_inc(rwsem_rlock_fail);
@@ -1055,10 +1302,10 @@ pub unsafe extern "C" fn rwsem_optimistic_spin(sem: *mut rw_semaphore) -> bool {
 // Wait until we successfully acquire the write lock
 //
     static struct rw_semaphore __sched *
-    rwsem_down_write_slowpath(struct rw_semaphore *sem, int state)
+    rwsem_down_write_slowpath(rw_semaphore *sem, int state)
     {
     struct rwsem_waiter waiter, *first;
-    DEFINE_WAKE_Q(wake_q);
+pub static mut wake_q: usize = 0;
 // do optimistic spinning and steal lock if possible
     if (rwsem_can_spin_on_owner(sem) && rwsem_optimistic_spin(sem)) {
 // rwsem_optimistic_spin() implies ACQUIRE on success
@@ -1095,16 +1342,18 @@ pub unsafe extern "C" fn rwsem_optimistic_spin(sem: *mut rw_semaphore) -> bool {
 // wait until we successfully acquire the lock
     set_current_state(state);
     trace_contention_begin(sem, LCB_F_WRITE);
-    if (state == TASK_UNINTERRUPTIBLE)
+    if (state == TASK_UNINTERRUPTIBLE) {
     hung_task_set_blocker(sem, BLOCKER_TYPE_RWSEM_WRITER);
+    }
     for (;;) {
     if (rwsem_try_write_lock(sem, &waiter)) {
 // rwsem_try_write_lock() implies ACQUIRE on success
     break;
     }
     raw_spin_unlock_irq(&sem.wait_lock);
-    if (signal_pending_state(state, current))
-    goto out_nolock;
+    if (signal_pending_state(state, current)) {
+// goto;
+    }
 //
 // After setting the handoff bit and failing to acquire
 // the lock, attempt to spin on owner to accelerate lock
@@ -1116,23 +1365,25 @@ pub unsafe extern "C" fn rwsem_optimistic_spin(sem: *mut rw_semaphore) -> bool {
     if (waiter.handoff_set) {
     enum owner_state owner_state;
     owner_state = rwsem_spin_on_owner(sem);
-    if (owner_state == OWNER_NULL)
-    goto trylock_again;
+    if (owner_state == OWNER_NULL) {
+// goto;
+    }
     }
     schedule_preempt_disabled();
     lockevent_inc(rwsem_sleep_writer);
     set_current_state(state);
-    trylock_again:
+// label;
     raw_spin_lock_irq(&sem.wait_lock);
     }
-    if (state == TASK_UNINTERRUPTIBLE)
+    if (state == TASK_UNINTERRUPTIBLE) {
     hung_task_clear_blocker();
+    }
     __set_current_state(TASK_RUNNING);
     raw_spin_unlock_irq(&sem.wait_lock);
     lockevent_inc(rwsem_wlock);
     trace_contention_end(sem, 0);
     return sem;
-    out_nolock:
+// label;
     __set_current_state(TASK_RUNNING);
     raw_spin_lock_irq(&sem.wait_lock);
     rwsem_del_wake_waiter(sem, &waiter, &wake_q);
@@ -1144,13 +1395,14 @@ pub unsafe extern "C" fn rwsem_optimistic_spin(sem: *mut rw_semaphore) -> bool {
 // handle waking up a waiter on the semaphore
 // - up_read/up_write has decremented the active part of count if we come here
 //
-    static struct rw_semaphore *rwsem_wake(struct rw_semaphore *sem)
-    {
-    unsigned long flags;
-    DEFINE_WAKE_Q(wake_q);
+#[no_mangle]
+pub unsafe extern "C" fn rwsem_wake(sem: *mut rw_semaphore) -> *mut c_void {
+    let mut flags = 0;
+pub static mut wake_q: usize = 0;
     raw_spin_lock_irqsave(&sem.wait_lock, flags);
-    if (sem.first_waiter)
+    if (sem.first_waiter) {
     rwsem_mark_wake(sem, RWSEM_WAKE_ANY, &wake_q);
+    }
     raw_spin_unlock_irqrestore(&sem.wait_lock, flags);
     wake_up_q(&wake_q);
     return sem;
@@ -1160,13 +1412,14 @@ pub unsafe extern "C" fn rwsem_optimistic_spin(sem: *mut rw_semaphore) -> bool {
 // - caller incremented waiting part of count and discovered it still negative
 // - just wake up any readers at the front of the queue
 //
-    static struct rw_semaphore *rwsem_downgrade_wake(struct rw_semaphore *sem)
-    {
-    unsigned long flags;
-    DEFINE_WAKE_Q(wake_q);
+#[no_mangle]
+pub unsafe extern "C" fn rwsem_downgrade_wake(sem: *mut rw_semaphore) -> *mut c_void {
+    let mut flags = 0;
+pub static mut wake_q: usize = 0;
     raw_spin_lock_irqsave(&sem.wait_lock, flags);
-    if (sem.first_waiter)
+    if (sem.first_waiter) {
     rwsem_mark_wake(sem, RWSEM_WAKE_READ_OWNED, &wake_q);
+    }
     raw_spin_unlock_irqrestore(&sem.wait_lock, flags);
     wake_up_q(&wake_q);
     return sem;
@@ -1176,46 +1429,36 @@ pub unsafe extern "C" fn rwsem_optimistic_spin(sem: *mut rw_semaphore) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn __down_read_common(sem: *mut rw_semaphore, state: c_int) -> __always_inline int {
-    static __always_inline int __down_read_common(struct rw_semaphore *sem, int state)
-    {
-    let mut ret: c_int = 0;
-    long count;
+pub static mut ret: c_int = 0;
+    let mut count = 0;
     preempt_disable();
     if (!rwsem_read_trylock(sem, &count)) {
     if (IS_ERR(rwsem_down_read_slowpath(sem, count, state))) {
     ret = -EINTR;
-    goto out;
+// goto;
     }
     DEBUG_RWSEMS_WARN_ON(!is_rwsem_reader_owned(sem), sem);
     }
-    out:
+// label;
     preempt_enable();
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn __down_read(sem: *mut rw_semaphore) -> __always_inline void {
-    static __always_inline void __down_read(struct rw_semaphore *sem)
-    {
     __down_read_common(sem, TASK_UNINTERRUPTIBLE);
     }
 #[no_mangle]
 unsafe extern "C" fn __down_read_interruptible(sem: *mut rw_semaphore) -> __always_inline int {
-    static __always_inline int __down_read_interruptible(struct rw_semaphore *sem)
-    {
     return __down_read_common(sem, TASK_INTERRUPTIBLE);
     }
 #[no_mangle]
 unsafe extern "C" fn __down_read_killable(sem: *mut rw_semaphore) -> __always_inline int {
-    static __always_inline int __down_read_killable(struct rw_semaphore *sem)
-    {
     return __down_read_common(sem, TASK_KILLABLE);
     }
 #[no_mangle]
 pub unsafe extern "C" fn __down_read_trylock(sem: *mut rw_semaphore) -> c_int {
-    static inline int __down_read_trylock(struct rw_semaphore *sem)
-    {
-    let mut ret: c_int = 0;
-    long tmp;
+pub static mut ret: c_int = 0;
+    let mut tmp = 0;
     DEBUG_RWSEMS_WARN_ON(sem.magic != sem, sem);
     preempt_disable();
     tmp = atomic_long_read(&sem.count);
@@ -1235,34 +1478,27 @@ pub unsafe extern "C" fn __down_read_trylock(sem: *mut rw_semaphore) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn __down_write_common(sem: *mut rw_semaphore, state: c_int) -> __always_inline int {
-    static __always_inline int __down_write_common(struct rw_semaphore *sem, int state)
-    {
-    let mut ret: c_int = 0;
+pub static mut ret: c_int = 0;
     preempt_disable();
     if (unlikely(!rwsem_write_trylock(sem))) {
-    if (IS_ERR(rwsem_down_write_slowpath(sem, state)))
+    if (IS_ERR(rwsem_down_write_slowpath(sem, state))) {
     ret = -EINTR;
+    }
     }
     preempt_enable();
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn __down_write(sem: *mut rw_semaphore) -> __always_inline void {
-    static __always_inline void __down_write(struct rw_semaphore *sem)
-    {
     __down_write_common(sem, TASK_UNINTERRUPTIBLE);
     }
 #[no_mangle]
 unsafe extern "C" fn __down_write_killable(sem: *mut rw_semaphore) -> __always_inline int {
-    static __always_inline int __down_write_killable(struct rw_semaphore *sem)
-    {
     return __down_write_common(sem, TASK_KILLABLE);
     }
 #[no_mangle]
 pub unsafe extern "C" fn __down_write_trylock(sem: *mut rw_semaphore) -> c_int {
-    static inline int __down_write_trylock(struct rw_semaphore *sem)
-    {
-    int ret;
+    let mut ret = 0;
     preempt_disable();
     DEBUG_RWSEMS_WARN_ON(sem.magic != sem, sem);
     ret = rwsem_write_trylock(sem);
@@ -1274,17 +1510,16 @@ pub unsafe extern "C" fn __down_write_trylock(sem: *mut rw_semaphore) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __up_read(sem: *mut rw_semaphore) {
-    static inline void __up_read(struct rw_semaphore *sem)
-    {
-    long tmp;
+    let mut tmp = 0;
     DEBUG_RWSEMS_WARN_ON(sem.magic != sem, sem);
     DEBUG_RWSEMS_WARN_ON(!is_rwsem_reader_owned(sem), sem);
     preempt_disable();
     rwsem_clear_reader_owned(sem);
     tmp = atomic_long_add_return_release(-RWSEM_READER_BIAS, &sem.count);
     DEBUG_RWSEMS_WARN_ON(tmp < 0, sem);
-    if (trace_contended_release_enabled() && (tmp & RWSEM_FLAG_WAITERS))
+    if (trace_contended_release_enabled() && (tmp & RWSEM_FLAG_WAITERS)) {
     trace_call__contended_release(sem);
+    }
     if (unlikely((tmp & (RWSEM_LOCK_MASK|RWSEM_FLAG_WAITERS)) ==
     RWSEM_FLAG_WAITERS)) {
     clear_nonspinnable(sem);
@@ -1297,9 +1532,7 @@ pub unsafe extern "C" fn __up_read(sem: *mut rw_semaphore) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __up_write(sem: *mut rw_semaphore) {
-    static inline void __up_write(struct rw_semaphore *sem)
-    {
-    long tmp;
+    let mut tmp = 0;
     DEBUG_RWSEMS_WARN_ON(sem.magic != sem, sem);
 //
 // sem->owner may differ from current if the ownership is transferred
@@ -1321,9 +1554,7 @@ pub unsafe extern "C" fn __up_write(sem: *mut rw_semaphore) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __downgrade_write(sem: *mut rw_semaphore) {
-    static inline void __downgrade_write(struct rw_semaphore *sem)
-    {
-    long tmp;
+    let mut tmp = 0;
 //
 // When downgrading from exclusive to shared ownership,
 // anything inside the write-locked region cannot leak
@@ -1365,87 +1596,79 @@ pub unsafe extern "C" fn __downgrade_write(sem: *mut rw_semaphore) {
 
     rt_mutex_post_schedule()
 
-    void __init_rwsem(struct rw_semaphore *sem, const char *name,
-    struct lock_class_key *key)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: __init_rwsem
+pub unsafe extern "C" fn __init_rwsem_dup(sem: *mut rw_semaphore, name: *mut c_char, key: *mut lock_class_key) {
     init_rwbase_rt(&(sem).rwbase);
 
-    debug_check_no_locks_freed((void *)sem, sizeof(*sem));
+    debug_check_no_locks_freed(sem, sizeof!(*sem));
     lockdep_init_map_wait(&sem.dep_map, name, key, 0, LD_WAIT_SLEEP);
 
     }
     EXPORT_SYMBOL(__init_rwsem);
 #[no_mangle]
 pub unsafe extern "C" fn __down_read(sem: *mut rw_semaphore) {
-    static inline void __down_read(struct rw_semaphore *sem)
-    {
     rwbase_read_lock(&sem.rwbase, TASK_UNINTERRUPTIBLE);
     }
 #[no_mangle]
 pub unsafe extern "C" fn __down_read_interruptible(sem: *mut rw_semaphore) -> c_int {
-    static inline int __down_read_interruptible(struct rw_semaphore *sem)
-    {
     return rwbase_read_lock(&sem.rwbase, TASK_INTERRUPTIBLE);
     }
 #[no_mangle]
 pub unsafe extern "C" fn __down_read_killable(sem: *mut rw_semaphore) -> c_int {
-    static inline int __down_read_killable(struct rw_semaphore *sem)
-    {
     return rwbase_read_lock(&sem.rwbase, TASK_KILLABLE);
     }
 #[no_mangle]
-pub unsafe extern "C" fn __down_read_trylock(sem: *mut rw_semaphore) -> c_int {
-    static inline int __down_read_trylock(struct rw_semaphore *sem)
-    {
+#[no_mangle]
+// duplicate fn: __down_read_trylock
+pub unsafe extern "C" fn __down_read_trylock_dup(sem: *mut rw_semaphore) -> c_int {
     return rwbase_read_trylock(&sem.rwbase);
     }
 #[no_mangle]
-pub unsafe extern "C" fn __up_read(sem: *mut rw_semaphore) {
-    static inline void __up_read(struct rw_semaphore *sem)
-    {
+#[no_mangle]
+// duplicate fn: __up_read
+pub unsafe extern "C" fn __up_read_dup(sem: *mut rw_semaphore) {
     rwbase_read_unlock(&sem.rwbase, TASK_NORMAL);
     }
 #[no_mangle]
 pub unsafe extern "C" fn __down_write(sem: *mut rw_semaphore) -> void __sched {
-    static inline void __sched __down_write(struct rw_semaphore *sem)
-    {
     rwbase_write_lock(&sem.rwbase, TASK_UNINTERRUPTIBLE);
     }
 #[no_mangle]
 pub unsafe extern "C" fn __down_write_killable(sem: *mut rw_semaphore) -> int __sched {
-    static inline int __sched __down_write_killable(struct rw_semaphore *sem)
-    {
     return rwbase_write_lock(&sem.rwbase, TASK_KILLABLE);
     }
 #[no_mangle]
-pub unsafe extern "C" fn __down_write_trylock(sem: *mut rw_semaphore) -> c_int {
-    static inline int __down_write_trylock(struct rw_semaphore *sem)
-    {
+#[no_mangle]
+// duplicate fn: __down_write_trylock
+pub unsafe extern "C" fn __down_write_trylock_dup(sem: *mut rw_semaphore) -> c_int {
     return rwbase_write_trylock(&sem.rwbase);
     }
 #[no_mangle]
-pub unsafe extern "C" fn __up_write(sem: *mut rw_semaphore) {
-    static inline void __up_write(struct rw_semaphore *sem)
-    {
+#[no_mangle]
+// duplicate fn: __up_write
+pub unsafe extern "C" fn __up_write_dup(sem: *mut rw_semaphore) {
     rwbase_write_unlock(&sem.rwbase);
     }
 #[no_mangle]
-pub unsafe extern "C" fn __downgrade_write(sem: *mut rw_semaphore) {
-    static inline void __downgrade_write(struct rw_semaphore *sem)
-    {
+#[no_mangle]
+// duplicate fn: __downgrade_write
+pub unsafe extern "C" fn __downgrade_write_dup(sem: *mut rw_semaphore) {
     rwbase_write_downgrade(&sem.rwbase);
     }
 // Debug stubs for the common API
 
-    static inline void __rwsem_set_reader_owned(struct rw_semaphore *sem,
-    struct task_struct *owner)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: __rwsem_set_reader_owned
+pub unsafe extern "C" fn __rwsem_set_reader_owned_dup(sem: *mut rw_semaphore, owner: *mut task_struct) {
     }
 #[no_mangle]
-pub unsafe extern "C" fn is_rwsem_reader_owned(sem: *mut rw_semaphore) -> bool {
-    static inline bool is_rwsem_reader_owned(struct rw_semaphore *sem)
-    {
-    let mut count: c_int = atomic_read(&sem.rwbase.readers);
+#[no_mangle]
+// duplicate fn: is_rwsem_reader_owned
+pub unsafe extern "C" fn is_rwsem_reader_owned_dup(sem: *mut rw_semaphore) -> bool {
+pub static mut count: c_int = 0;
     return count < 0 && count != READER_BIAS;
     }
 
@@ -1454,7 +1677,7 @@ pub unsafe extern "C" fn is_rwsem_reader_owned(sem: *mut rw_semaphore) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn down_read(sem: *mut rw_semaphore) -> void __sched {
-    void __sched down_read(struct rw_semaphore *sem)
+    void __sched down_read(rw_semaphore *sem)
     __no_context_analysis
     {
     might_sleep();
@@ -1464,7 +1687,7 @@ pub unsafe extern "C" fn down_read(sem: *mut rw_semaphore) -> void __sched {
     EXPORT_SYMBOL(down_read);
 #[no_mangle]
 pub unsafe extern "C" fn down_read_interruptible(sem: *mut rw_semaphore) -> int __sched {
-    int __sched down_read_interruptible(struct rw_semaphore *sem)
+    int __sched down_read_interruptible(rw_semaphore *sem)
     __no_context_analysis
     {
     might_sleep();
@@ -1478,7 +1701,7 @@ pub unsafe extern "C" fn down_read_interruptible(sem: *mut rw_semaphore) -> int 
     EXPORT_SYMBOL(down_read_interruptible);
 #[no_mangle]
 pub unsafe extern "C" fn down_read_killable(sem: *mut rw_semaphore) -> int __sched {
-    int __sched down_read_killable(struct rw_semaphore *sem)
+    int __sched down_read_killable(rw_semaphore *sem)
     __no_context_analysis
     {
     might_sleep();
@@ -1495,12 +1718,13 @@ pub unsafe extern "C" fn down_read_killable(sem: *mut rw_semaphore) -> int __sch
 //
 #[no_mangle]
 pub unsafe extern "C" fn down_read_trylock(sem: *mut rw_semaphore) -> c_int {
-    int down_read_trylock(struct rw_semaphore *sem)
+    int down_read_trylock(rw_semaphore *sem)
     __no_context_analysis
     {
-    let mut ret: c_int = __down_read_trylock(sem);
-    if (ret == 1)
+pub static mut ret: c_int = 0;
+    if (ret == 1) {
     rwsem_acquire_read(&sem.dep_map, 0, 1, _RET_IP_);
+    }
     return ret;
     }
     EXPORT_SYMBOL(down_read_trylock);
@@ -1509,7 +1733,7 @@ pub unsafe extern "C" fn down_read_trylock(sem: *mut rw_semaphore) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn down_write(sem: *mut rw_semaphore) -> void __sched {
-    void __sched down_write(struct rw_semaphore *sem)
+    void __sched down_write(rw_semaphore *sem)
     __no_context_analysis
     {
     might_sleep();
@@ -1522,7 +1746,7 @@ pub unsafe extern "C" fn down_write(sem: *mut rw_semaphore) -> void __sched {
 //
 #[no_mangle]
 pub unsafe extern "C" fn down_write_killable(sem: *mut rw_semaphore) -> int __sched {
-    int __sched down_write_killable(struct rw_semaphore *sem)
+    int __sched down_write_killable(rw_semaphore *sem)
     __no_context_analysis
     {
     might_sleep();
@@ -1540,12 +1764,13 @@ pub unsafe extern "C" fn down_write_killable(sem: *mut rw_semaphore) -> int __sc
 //
 #[no_mangle]
 pub unsafe extern "C" fn down_write_trylock(sem: *mut rw_semaphore) -> c_int {
-    int down_write_trylock(struct rw_semaphore *sem)
+    int down_write_trylock(rw_semaphore *sem)
     __no_context_analysis
     {
-    let mut ret: c_int = __down_write_trylock(sem);
-    if (ret == 1)
+pub static mut ret: c_int = 0;
+    if (ret == 1) {
     rwsem_acquire(&sem.dep_map, 0, 1, _RET_IP_);
+    }
     return ret;
     }
     EXPORT_SYMBOL(down_write_trylock);
@@ -1554,7 +1779,7 @@ pub unsafe extern "C" fn down_write_trylock(sem: *mut rw_semaphore) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn up_read(sem: *mut rw_semaphore) {
-    void up_read(struct rw_semaphore *sem)
+    void up_read(rw_semaphore *sem)
     __no_context_analysis
     {
     rwsem_release(&sem.dep_map, _RET_IP_);
@@ -1566,7 +1791,7 @@ pub unsafe extern "C" fn up_read(sem: *mut rw_semaphore) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn up_write(sem: *mut rw_semaphore) {
-    void up_write(struct rw_semaphore *sem)
+    void up_write(rw_semaphore *sem)
     __no_context_analysis
     {
     rwsem_release(&sem.dep_map, _RET_IP_);
@@ -1578,7 +1803,7 @@ pub unsafe extern "C" fn up_write(sem: *mut rw_semaphore) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn downgrade_write(sem: *mut rw_semaphore) {
-    void downgrade_write(struct rw_semaphore *sem)
+    void downgrade_write(rw_semaphore *sem)
     __no_context_analysis
     {
     lock_downgrade(&sem.dep_map, _RET_IP_);
@@ -1588,7 +1813,7 @@ pub unsafe extern "C" fn downgrade_write(sem: *mut rw_semaphore) {
 
 #[no_mangle]
 pub unsafe extern "C" fn down_read_nested(sem: *mut rw_semaphore, subclass: c_int) {
-    void down_read_nested(struct rw_semaphore *sem, int subclass)
+    void down_read_nested(rw_semaphore *sem, int subclass)
     __no_context_analysis
     {
     might_sleep();
@@ -1598,7 +1823,7 @@ pub unsafe extern "C" fn down_read_nested(sem: *mut rw_semaphore, subclass: c_in
     EXPORT_SYMBOL(down_read_nested);
 #[no_mangle]
 pub unsafe extern "C" fn down_read_killable_nested(sem: *mut rw_semaphore, subclass: c_int) -> c_int {
-    int down_read_killable_nested(struct rw_semaphore *sem, int subclass)
+    int down_read_killable_nested(rw_semaphore *sem, int subclass)
     __no_context_analysis
     {
     might_sleep();
@@ -1612,7 +1837,7 @@ pub unsafe extern "C" fn down_read_killable_nested(sem: *mut rw_semaphore, subcl
     EXPORT_SYMBOL(down_read_killable_nested);
 #[no_mangle]
 pub unsafe extern "C" fn _down_write_nest_lock(sem: *mut rw_semaphore, nest: *mut lockdep_map) {
-    void _down_write_nest_lock(struct rw_semaphore *sem, struct lockdep_map *nest)
+    void _down_write_nest_lock(rw_semaphore *sem, lockdep_map *nest)
     __no_context_analysis
     {
     might_sleep();
@@ -1622,7 +1847,7 @@ pub unsafe extern "C" fn _down_write_nest_lock(sem: *mut rw_semaphore, nest: *mu
     EXPORT_SYMBOL(_down_write_nest_lock);
 #[no_mangle]
 pub unsafe extern "C" fn down_read_non_owner(sem: *mut rw_semaphore) {
-    void down_read_non_owner(struct rw_semaphore *sem)
+    void down_read_non_owner(rw_semaphore *sem)
     __no_context_analysis
     {
     might_sleep();
@@ -1638,7 +1863,7 @@ pub unsafe extern "C" fn down_read_non_owner(sem: *mut rw_semaphore) {
     EXPORT_SYMBOL(down_read_non_owner);
 #[no_mangle]
 pub unsafe extern "C" fn down_write_nested(sem: *mut rw_semaphore, subclass: c_int) {
-    void down_write_nested(struct rw_semaphore *sem, int subclass)
+    void down_write_nested(rw_semaphore *sem, int subclass)
     __no_context_analysis
     {
     might_sleep();
@@ -1648,7 +1873,7 @@ pub unsafe extern "C" fn down_write_nested(sem: *mut rw_semaphore, subclass: c_i
     EXPORT_SYMBOL(down_write_nested);
 #[no_mangle]
 pub unsafe extern "C" fn down_write_killable_nested(sem: *mut rw_semaphore, subclass: c_int) -> int __sched {
-    int __sched down_write_killable_nested(struct rw_semaphore *sem, int subclass)
+    int __sched down_write_killable_nested(rw_semaphore *sem, int subclass)
     __no_context_analysis
     {
     might_sleep();
@@ -1663,10 +1888,26 @@ pub unsafe extern "C" fn down_write_killable_nested(sem: *mut rw_semaphore, subc
     EXPORT_SYMBOL(down_write_killable_nested);
 #[no_mangle]
 pub unsafe extern "C" fn up_read_non_owner(sem: *mut rw_semaphore) {
-    void up_read_non_owner(struct rw_semaphore *sem)
+    void up_read_non_owner(rw_semaphore *sem)
     __no_context_analysis
     {
     DEBUG_RWSEMS_WARN_ON(!is_rwsem_reader_owned(sem), sem);
     __up_read(sem);
     }
     EXPORT_SYMBOL(up_read_non_owner);
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}

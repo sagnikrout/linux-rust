@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0+
@@ -69,8 +319,8 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     torture_param(int, writer_fifo, 0, "Run writers at sched_set_fifo() priority");
 // Going much higher trips "BUG: MAX_LOCKDEP_CHAIN_HLOCKS too low!" errors
 pub const MAX_NESTED_LOCKS: c_int = 8;
-    static char *torture_type = IS_ENABLED(CONFIG_PREEMPT_RT) ? "raw_spin_lock" : "spin_lock";
-    module_param(torture_type, charp, 0444);
+    static char *torture_type = IS_ENABLED!(CONFIG_PREEMPT_RT) ? "raw_spin_lock" : "spin_lock";
+    module_param!(torture_type, charp, 0444);
     MODULE_PARM_DESC(torture_type,
     "Type of lock to torture (spin_lock, spin_lock_irq, mutex_lock, ...)");
     static cpumask_var_t bind_readers; // Bind the readers to the specified set of CPUs.
@@ -79,49 +329,41 @@ pub const MAX_NESTED_LOCKS: c_int = 8;
 // this might need to got to a more central location.
 #[no_mangle]
 unsafe extern "C" fn param_set_cpumask(val: *const c_char, kp: *const kernel_param) -> c_int {
-    static int param_set_cpumask(const char *val, const struct kernel_param *kp)
-    {
-    cpumask_var_t *cm_bind = kp.arg;
-    int ret;
-    char *s;
+    let mut cm_bind = kp.arg;
+    let mut ret = 0;
+pub static mut s: *mut c_void = core::ptr::null_mut();
     if (!alloc_cpumask_var(cm_bind, GFP_KERNEL)) {
     s = "Out of memory";
     ret = -ENOMEM;
-    goto out_err;
+// goto;
     }
     ret = cpulist_parse(val, *cm_bind);
-    if (!ret)
+    if (!ret) {
     return ret;
+    }
     s = "Bad CPU range";
-    out_err:
-    pr_warn("%s: %s, all CPUs set\n", kp.name, s);
+// label;
+    pr_warn!("%s: %s, all CPUs set\n", kp.name, s);
     cpumask_setall(*cm_bind);
     return ret;
     }
 // Output a cpumask kernel parameter.
 #[no_mangle]
 unsafe extern "C" fn param_get_cpumask(buffer: *mut c_char, kp: *const kernel_param) -> c_int {
-    static int param_get_cpumask(char *buffer, const struct kernel_param *kp)
-    {
-    cpumask_var_t *cm_bind = kp.arg;
+    let mut cm_bind = kp.arg;
     return sprintf(buffer, "%*pbl", cpumask_pr_args(*cm_bind));
     }
 #[no_mangle]
 unsafe extern "C" fn cpumask_nonempty(mask: cpumask_var_t) -> bool {
-    static bool cpumask_nonempty(cpumask_var_t mask)
-    {
     return cpumask_available(mask) && !cpumask_empty(mask);
     }
-    static const struct kernel_param_ops lt_bind_ops = {
-    .set = param_set_cpumask,
-    .get = param_get_cpumask,
-    };
-    module_param_cb(bind_readers, &lt_bind_ops, &bind_readers, 0444);
-    module_param_cb(bind_writers, &lt_bind_ops, &bind_writers, 0444);
-    long torture_sched_setaffinity(pid_t pid, const struct cpumask *in_mask, bool dowarn);
-    static struct task_struct *stats_task;
-    static struct task_struct **writer_tasks;
-    static struct task_struct **reader_tasks;
+pub static mut kernel_param_ops: usize = 0;
+    module_param_cb!(bind_readers, &lt_bind_ops, &bind_readers, 0444);
+    module_param_cb!(bind_writers, &lt_bind_ops, &bind_writers, 0444);
+// forward_decl: torture_sched_setaffinity;
+pub static mut stats_task: *mut c_void = core::ptr::null_mut();
+pub static mut writer_tasks: *mut c_void = core::ptr::null_mut();
+pub static mut reader_tasks: *mut c_void = core::ptr::null_mut();
     static bool lock_is_write_held;
     static atomic_t lock_is_read_held;
     static unsigned long last_lock_release;
@@ -139,9 +381,9 @@ pub struct call_rcu_chain {
     pub crc_stop: bool,
 }
 
-    struct call_rcu_chain *call_rcu_chain_list;
+pub static mut call_rcu_chain_list: *mut c_void = core::ptr::null_mut();
 // Forward reference.
-    static void lock_torture_cleanup(void);
+// forward_decl: lock_torture_cleanup;
 //
 // Operations vector for selecting different types of tests.
 //
@@ -152,14 +394,14 @@ pub struct lock_torture_ops {
     pub (*exit)(void): *mut c_void,
     pub lockset): *mut *mut int (nested_lock)(int tid, u32,
     pub tid): *mut *mut int (writelock)(int,
-    pub trsp): *mut *mut void (write_delay)(struct torture_random_state,
-    pub trsp): *mut *mut void (task_boost)(struct torture_random_state,
-    pub tid): *mut *mut void (writeunlock)(int,
-    pub lockset): *mut *mut void (nested_unlock)(int tid, u32,
+    pub trsp): *mut *mut c_void (write_delay)(torture_random_state,
+    pub trsp): *mut *mut c_void (task_boost)(torture_random_state,
+    pub tid): *mut *mut c_void (writeunlock)(int,
+    pub lockset): *mut *mut c_void (nested_unlock)(int tid, u32,
     pub tid): *mut *mut int (readlock)(int,
-    pub trsp): *mut *mut void (read_delay)(struct torture_random_state,
-    pub tid): *mut *mut void (readunlock)(int,
-    pub /: *mut *mut unsigned long flags; / for irq spinlocks,
+    pub trsp): *mut *mut c_void (read_delay)(torture_random_state,
+    pub tid): *mut *mut c_void (readunlock)(int,
+//     pub /: *mut *mut unsigned long flags; / for irq spinlocks,
     pub name: *const c_char,
 }
 
@@ -172,43 +414,35 @@ pub struct lock_torture_cxt {
     pub init_called: bool,
     pub n_lock_torture_errors: core::sync::atomic::AtomicI32,
     pub cur_ops: *mut lock_torture_ops,
-    pub /: *mut *mut *mut lock_stress_stats lwsa; / writer statistics,
-    pub /: *mut *mut *mut lock_stress_stats lrsa; / reader statistics,
+//     pub /: *mut *mut *mut lock_stress_stats lwsa; / writer statistics,
+//     pub /: *mut *mut *mut lock_stress_stats lrsa; / reader statistics,
 }
 
-    static struct lock_torture_cxt cxt = { 0, 0, false, false,
-    ATOMIC_INIT(0),
-    core::ptr::null_mut(), core::ptr::null_mut()};
+pub static mut lock_torture_cxt: usize = 0;
 //
 // Definitions for lock torture testing.
 //
 #[no_mangle]
 unsafe extern "C" fn torture_lock_busted_write_lock(__maybe_unused: int tid) -> c_int {
-    static int torture_lock_busted_write_lock(int tid __maybe_unused)
-    {
     return 0;  /* BUGGY, do not use in real life!!! */
     }
 #[no_mangle]
 unsafe extern "C" fn torture_lock_busted_write_delay(trsp: *mut torture_random_state) {
-    static void torture_lock_busted_write_delay(struct torture_random_state *trsp)
-    {
 // We want a long delay occasionally to force massive contention.
-    if (long_hold && !(torture_random(trsp) % (cxt.nrealwriters_stress * 2000 * long_hold)))
+    if (long_hold && !(torture_random(trsp) % (cxt.nrealwriters_stress * 2000 * long_hold))) {
     mdelay(long_hold);
-    if (!(torture_random(trsp) % (cxt.nrealwriters_stress * 20000)))
+    }
+    if (!(torture_random(trsp) % (cxt.nrealwriters_stress * 20000))) {
     torture_preempt_schedule();  /* Allow test to be preempted. */
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn torture_lock_busted_write_unlock(__maybe_unused: int tid) {
-    static void torture_lock_busted_write_unlock(int tid __maybe_unused)
-    {
 // BUGGY, do not use in real life!!!
     }
 #[no_mangle]
 unsafe extern "C" fn __torture_rt_boost(trsp: *mut torture_random_state) {
-    static void __torture_rt_boost(struct torture_random_state *trsp)
-    {
-    let mut factor: c_uint = rt_boost_factor;
+pub static mut factor: c_uint = 0;
     if (!rt_task(current)) {
 //
 // Boost priority once every rt_boost_factor operations. When
@@ -238,37 +472,22 @@ unsafe extern "C" fn __torture_rt_boost(trsp: *mut torture_random_state) {
     }
 #[no_mangle]
 unsafe extern "C" fn torture_rt_boost(trsp: *mut torture_random_state) {
-    static void torture_rt_boost(struct torture_random_state *trsp)
-    {
-    if (rt_boost != 2)
+    if (rt_boost != 2) {
     return;
+    }
     __torture_rt_boost(trsp);
     }
-    static struct lock_torture_ops lock_busted_ops = {
-    .writelock	= torture_lock_busted_write_lock,
-    .write_delay	= torture_lock_busted_write_delay,
-    .task_boost     = torture_rt_boost,
-    .writeunlock	= torture_lock_busted_write_unlock,
-    .readlock       = core::ptr::null_mut(),
-    .read_delay     = core::ptr::null_mut(),
-    .readunlock     = core::ptr::null_mut(),
-    .name		= "lock_busted"
-    };
-    static DEFINE_SPINLOCK(torture_spinlock);
+pub static mut lock_torture_ops: usize = 0;
+pub static mut torture_spinlock: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn torture_spin_lock_write_lock(__maybe_unused: int tid) -> c_int {
-    static int torture_spin_lock_write_lock(int tid __maybe_unused)
-    __acquires(torture_spinlock)
-    {
     spin_lock(&torture_spinlock);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn torture_spin_lock_write_delay(trsp: *mut torture_random_state) {
-    static void torture_spin_lock_write_delay(struct torture_random_state *trsp)
-    {
-    let mut shortdelay_us: c_ulong = 2;
-    unsigned long j;
+pub static mut shortdelay_us: c_ulong = 2;
+    let mut j = 0;
 // We want a short delay mostly to emulate likely code, and
 // we want a long delay occasionally to force massive contention.
 //
@@ -277,372 +496,222 @@ unsafe extern "C" fn torture_spin_lock_write_delay(trsp: *mut torture_random_sta
     mdelay(long_hold);
     pr_alert("%s: delay = %lu jiffies.\n", __func__, jiffies - j);
     }
-    if (!(torture_random(trsp) % (cxt.nrealwriters_stress * 200 * shortdelay_us)))
+    if (!(torture_random(trsp) % (cxt.nrealwriters_stress * 200 * shortdelay_us))) {
     udelay(shortdelay_us);
-    if (!(torture_random(trsp) % (cxt.nrealwriters_stress * 20000)))
+    }
+    if (!(torture_random(trsp) % (cxt.nrealwriters_stress * 20000))) {
     torture_preempt_schedule();  /* Allow test to be preempted. */
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn torture_spin_lock_write_unlock(__maybe_unused: int tid) {
-    static void torture_spin_lock_write_unlock(int tid __maybe_unused)
-    __releases(torture_spinlock)
-    {
     spin_unlock(&torture_spinlock);
     }
-    static struct lock_torture_ops spin_lock_ops = {
-    .writelock	= torture_spin_lock_write_lock,
-    .write_delay	= torture_spin_lock_write_delay,
-    .task_boost     = torture_rt_boost,
-    .writeunlock	= torture_spin_lock_write_unlock,
-    .readlock       = core::ptr::null_mut(),
-    .read_delay     = core::ptr::null_mut(),
-    .readunlock     = core::ptr::null_mut(),
-    .name		= "spin_lock"
-    };
+pub static mut lock_torture_ops: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn torture_spin_lock_write_lock_irq(__maybe_unused: int tid) -> c_int {
-    static int torture_spin_lock_write_lock_irq(int tid __maybe_unused)
-    __acquires(torture_spinlock)
-    {
-    unsigned long flags;
+    let mut flags = 0;
     spin_lock_irqsave(&torture_spinlock, flags);
     cxt.cur_ops.flags = flags;
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn torture_lock_spin_write_unlock_irq(__maybe_unused: int tid) {
-    static void torture_lock_spin_write_unlock_irq(int tid __maybe_unused)
-    __releases(torture_spinlock)
-    {
     spin_unlock_irqrestore(&torture_spinlock, cxt.cur_ops.flags);
     }
-    static struct lock_torture_ops spin_lock_irq_ops = {
-    .writelock	= torture_spin_lock_write_lock_irq,
-    .write_delay	= torture_spin_lock_write_delay,
-    .task_boost     = torture_rt_boost,
-    .writeunlock	= torture_lock_spin_write_unlock_irq,
-    .readlock       = core::ptr::null_mut(),
-    .read_delay     = core::ptr::null_mut(),
-    .readunlock     = core::ptr::null_mut(),
-    .name		= "spin_lock_irq"
-    };
-    static DEFINE_RAW_SPINLOCK(torture_raw_spinlock);
+pub static mut lock_torture_ops: usize = 0;
+pub static mut torture_raw_spinlock: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn torture_raw_spin_lock_write_lock(__maybe_unused: int tid) -> c_int {
-    static int torture_raw_spin_lock_write_lock(int tid __maybe_unused)
-    __acquires(torture_raw_spinlock)
-    {
     raw_spin_lock(&torture_raw_spinlock);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn torture_raw_spin_lock_write_unlock(__maybe_unused: int tid) {
-    static void torture_raw_spin_lock_write_unlock(int tid __maybe_unused)
-    __releases(torture_raw_spinlock)
-    {
     raw_spin_unlock(&torture_raw_spinlock);
     }
-    static struct lock_torture_ops raw_spin_lock_ops = {
-    .writelock	= torture_raw_spin_lock_write_lock,
-    .write_delay	= torture_spin_lock_write_delay,
-    .task_boost	= torture_rt_boost,
-    .writeunlock	= torture_raw_spin_lock_write_unlock,
-    .readlock	= core::ptr::null_mut(),
-    .read_delay	= core::ptr::null_mut(),
-    .readunlock	= core::ptr::null_mut(),
-    .name		= "raw_spin_lock"
-    };
+pub static mut lock_torture_ops: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn torture_raw_spin_lock_write_lock_irq(__maybe_unused: int tid) -> c_int {
-    static int torture_raw_spin_lock_write_lock_irq(int tid __maybe_unused)
-    __acquires(torture_raw_spinlock)
-    {
-    unsigned long flags;
+    let mut flags = 0;
     raw_spin_lock_irqsave(&torture_raw_spinlock, flags);
     cxt.cur_ops.flags = flags;
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn torture_raw_spin_lock_write_unlock_irq(__maybe_unused: int tid) {
-    static void torture_raw_spin_lock_write_unlock_irq(int tid __maybe_unused)
-    __releases(torture_raw_spinlock)
-    {
     raw_spin_unlock_irqrestore(&torture_raw_spinlock, cxt.cur_ops.flags);
     }
-    static struct lock_torture_ops raw_spin_lock_irq_ops = {
-    .writelock	= torture_raw_spin_lock_write_lock_irq,
-    .write_delay	= torture_spin_lock_write_delay,
-    .task_boost	= torture_rt_boost,
-    .writeunlock	= torture_raw_spin_lock_write_unlock_irq,
-    .readlock	= core::ptr::null_mut(),
-    .read_delay	= core::ptr::null_mut(),
-    .readunlock	= core::ptr::null_mut(),
-    .name		= "raw_spin_lock_irq"
-    };
+pub static mut lock_torture_ops: usize = 0;
 
     static rqspinlock_t rqspinlock;
 #[no_mangle]
 unsafe extern "C" fn torture_raw_res_spin_write_lock(__maybe_unused: int tid) -> c_int {
-    static int torture_raw_res_spin_write_lock(int tid __maybe_unused)
-    {
     raw_res_spin_lock(&rqspinlock);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn torture_raw_res_spin_write_unlock(__maybe_unused: int tid) {
-    static void torture_raw_res_spin_write_unlock(int tid __maybe_unused)
-    {
     raw_res_spin_unlock(&rqspinlock);
     }
-    static struct lock_torture_ops raw_res_spin_lock_ops = {
-    .writelock	= torture_raw_res_spin_write_lock,
-    .write_delay	= torture_spin_lock_write_delay,
-    .task_boost     = torture_rt_boost,
-    .writeunlock	= torture_raw_res_spin_write_unlock,
-    .readlock       = core::ptr::null_mut(),
-    .read_delay     = core::ptr::null_mut(),
-    .readunlock     = core::ptr::null_mut(),
-    .name		= "raw_res_spin_lock"
-    };
+pub static mut lock_torture_ops: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn torture_raw_res_spin_write_lock_irq(__maybe_unused: int tid) -> c_int {
-    static int torture_raw_res_spin_write_lock_irq(int tid __maybe_unused)
-    {
-    unsigned long flags;
+    let mut flags = 0;
     raw_res_spin_lock_irqsave(&rqspinlock, flags);
     cxt.cur_ops.flags = flags;
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn torture_raw_res_spin_write_unlock_irq(__maybe_unused: int tid) {
-    static void torture_raw_res_spin_write_unlock_irq(int tid __maybe_unused)
-    {
     raw_res_spin_unlock_irqrestore(&rqspinlock, cxt.cur_ops.flags);
     }
-    static struct lock_torture_ops raw_res_spin_lock_irq_ops = {
-    .writelock	= torture_raw_res_spin_write_lock_irq,
-    .write_delay	= torture_spin_lock_write_delay,
-    .task_boost     = torture_rt_boost,
-    .writeunlock	= torture_raw_res_spin_write_unlock_irq,
-    .readlock       = core::ptr::null_mut(),
-    .read_delay     = core::ptr::null_mut(),
-    .readunlock     = core::ptr::null_mut(),
-    .name		= "raw_res_spin_lock_irq"
-    };
+pub static mut lock_torture_ops: usize = 0;
 
-    static DEFINE_RWLOCK(torture_rwlock);
+pub static mut torture_rwlock: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn torture_rwlock_write_lock(__maybe_unused: int tid) -> c_int {
-    static int torture_rwlock_write_lock(int tid __maybe_unused)
-    __acquires(torture_rwlock)
-    {
     write_lock(&torture_rwlock);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn torture_rwlock_write_delay(trsp: *mut torture_random_state) {
-    static void torture_rwlock_write_delay(struct torture_random_state *trsp)
-    {
-    let mut shortdelay_us: c_ulong = 2;
+pub static mut shortdelay_us: c_ulong = 2;
 // We want a short delay mostly to emulate likely code, and
 // we want a long delay occasionally to force massive contention.
 //
-    if (long_hold && !(torture_random(trsp) % (cxt.nrealwriters_stress * 2000 * long_hold)))
+    if (long_hold && !(torture_random(trsp) % (cxt.nrealwriters_stress * 2000 * long_hold))) {
     mdelay(long_hold);
-    else
+    }
+    else {
     udelay(shortdelay_us);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn torture_rwlock_write_unlock(__maybe_unused: int tid) {
-    static void torture_rwlock_write_unlock(int tid __maybe_unused)
-    __releases(torture_rwlock)
-    {
     write_unlock(&torture_rwlock);
     }
 #[no_mangle]
 unsafe extern "C" fn torture_rwlock_read_lock(__maybe_unused: int tid) -> c_int {
-    static int torture_rwlock_read_lock(int tid __maybe_unused)
-    __acquires(torture_rwlock)
-    {
     read_lock(&torture_rwlock);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn torture_rwlock_read_delay(trsp: *mut torture_random_state) {
-    static void torture_rwlock_read_delay(struct torture_random_state *trsp)
-    {
-    let mut shortdelay_us: c_ulong = 10;
+pub static mut shortdelay_us: c_ulong = 10;
 // We want a short delay mostly to emulate likely code, and
 // we want a long delay occasionally to force massive contention.
 //
-    if (long_hold && !(torture_random(trsp) % (cxt.nrealreaders_stress * 2000 * long_hold)))
+    if (long_hold && !(torture_random(trsp) % (cxt.nrealreaders_stress * 2000 * long_hold))) {
     mdelay(long_hold);
-    else
+    }
+    else {
     udelay(shortdelay_us);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn torture_rwlock_read_unlock(__maybe_unused: int tid) {
-    static void torture_rwlock_read_unlock(int tid __maybe_unused)
-    __releases(torture_rwlock)
-    {
     read_unlock(&torture_rwlock);
     }
-    static struct lock_torture_ops rw_lock_ops = {
-    .writelock	= torture_rwlock_write_lock,
-    .write_delay	= torture_rwlock_write_delay,
-    .task_boost     = torture_rt_boost,
-    .writeunlock	= torture_rwlock_write_unlock,
-    .readlock       = torture_rwlock_read_lock,
-    .read_delay     = torture_rwlock_read_delay,
-    .readunlock     = torture_rwlock_read_unlock,
-    .name		= "rw_lock"
-    };
+pub static mut lock_torture_ops: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn torture_rwlock_write_lock_irq(__maybe_unused: int tid) -> c_int {
-    static int torture_rwlock_write_lock_irq(int tid __maybe_unused)
-    __acquires(torture_rwlock)
-    {
-    unsigned long flags;
+    let mut flags = 0;
     write_lock_irqsave(&torture_rwlock, flags);
     cxt.cur_ops.flags = flags;
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn torture_rwlock_write_unlock_irq(__maybe_unused: int tid) {
-    static void torture_rwlock_write_unlock_irq(int tid __maybe_unused)
-    __releases(torture_rwlock)
-    {
     write_unlock_irqrestore(&torture_rwlock, cxt.cur_ops.flags);
     }
 #[no_mangle]
 unsafe extern "C" fn torture_rwlock_read_lock_irq(__maybe_unused: int tid) -> c_int {
-    static int torture_rwlock_read_lock_irq(int tid __maybe_unused)
-    __acquires(torture_rwlock)
-    {
-    unsigned long flags;
+    let mut flags = 0;
     read_lock_irqsave(&torture_rwlock, flags);
     cxt.cur_ops.flags = flags;
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn torture_rwlock_read_unlock_irq(__maybe_unused: int tid) {
-    static void torture_rwlock_read_unlock_irq(int tid __maybe_unused)
-    __releases(torture_rwlock)
-    {
     read_unlock_irqrestore(&torture_rwlock, cxt.cur_ops.flags);
     }
-    static struct lock_torture_ops rw_lock_irq_ops = {
-    .writelock	= torture_rwlock_write_lock_irq,
-    .write_delay	= torture_rwlock_write_delay,
-    .task_boost     = torture_rt_boost,
-    .writeunlock	= torture_rwlock_write_unlock_irq,
-    .readlock       = torture_rwlock_read_lock_irq,
-    .read_delay     = torture_rwlock_read_delay,
-    .readunlock     = torture_rwlock_read_unlock_irq,
-    .name		= "rw_lock_irq"
-    };
-    static DEFINE_MUTEX(torture_mutex);
+pub static mut lock_torture_ops: usize = 0;
+pub static mut torture_mutex: usize = 0;
     static struct mutex torture_nested_mutexes[MAX_NESTED_LOCKS];
     static struct lock_class_key nested_mutex_keys[MAX_NESTED_LOCKS];
 #[no_mangle]
 unsafe extern "C" fn torture_mutex_init() {
-    static void torture_mutex_init(void)
-    {
-    int i;
-    for (i = 0; i < MAX_NESTED_LOCKS; i++)
+    let mut i = 0;
+    for (i = 0; i < MAX_NESTED_LOCKS; i++) {
     __mutex_init(&torture_nested_mutexes[i], __func__,
     &nested_mutex_keys[i]);
     }
-    static int torture_mutex_nested_lock(int tid __maybe_unused,
-    u32 lockset)
-    {
-    int i;
-    for (i = 0; i < nested_locks; i++)
+    }
+#[no_mangle]
+pub unsafe extern "C" fn torture_mutex_nested_lock(__maybe_unused: int tid, lockset: u32) -> c_int {
+    let mut i = 0;
+    for (i = 0; i < nested_locks; i++) {
     if (lockset & (1 << i))
     mutex_lock(&torture_nested_mutexes[i]);
+    }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn torture_mutex_lock(__maybe_unused: int tid) -> c_int {
-    static int torture_mutex_lock(int tid __maybe_unused)
-    __acquires(torture_mutex)
-    {
     mutex_lock(&torture_mutex);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn torture_mutex_delay(trsp: *mut torture_random_state) {
-    static void torture_mutex_delay(struct torture_random_state *trsp)
-    {
 // We want a long delay occasionally to force massive contention.
-    if (long_hold && !(torture_random(trsp) % (cxt.nrealwriters_stress * 2000 * long_hold)))
+    if (long_hold && !(torture_random(trsp) % (cxt.nrealwriters_stress * 2000 * long_hold))) {
     mdelay(long_hold * 5);
-    if (!(torture_random(trsp) % (cxt.nrealwriters_stress * 20000)))
+    }
+    if (!(torture_random(trsp) % (cxt.nrealwriters_stress * 20000))) {
     torture_preempt_schedule();  /* Allow test to be preempted. */
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn torture_mutex_unlock(__maybe_unused: int tid) {
-    static void torture_mutex_unlock(int tid __maybe_unused)
-    __releases(torture_mutex)
-    {
     mutex_unlock(&torture_mutex);
     }
-    static void torture_mutex_nested_unlock(int tid __maybe_unused,
-    u32 lockset)
-    {
-    int i;
-    for (i = nested_locks - 1; i >= 0; i--)
+#[no_mangle]
+pub unsafe extern "C" fn torture_mutex_nested_unlock(__maybe_unused: int tid, lockset: u32) {
+    let mut i = 0;
+    for (i = nested_locks - 1; i >= 0; i--) {
     if (lockset & (1 << i))
     mutex_unlock(&torture_nested_mutexes[i]);
     }
-    static struct lock_torture_ops mutex_lock_ops = {
-    .init		= torture_mutex_init,
-    .nested_lock	= torture_mutex_nested_lock,
-    .writelock	= torture_mutex_lock,
-    .write_delay	= torture_mutex_delay,
-    .task_boost     = torture_rt_boost,
-    .writeunlock	= torture_mutex_unlock,
-    .nested_unlock	= torture_mutex_nested_unlock,
-    .readlock       = core::ptr::null_mut(),
-    .read_delay     = core::ptr::null_mut(),
-    .readunlock     = core::ptr::null_mut(),
-    .name		= "mutex_lock"
-    };
+    }
+pub static mut lock_torture_ops: usize = 0;
 
 //
 // The torture ww_mutexes should belong to the same lock class as
 // torture_ww_class to avoid lockdep problem. The ww_mutex_init()
 // function is called for initialization to ensure that.
 //
-    static DEFINE_WD_CLASS(torture_ww_class);
+pub static mut torture_ww_class: usize = 0;
     static struct ww_mutex torture_ww_mutex_0, torture_ww_mutex_1, torture_ww_mutex_2;
-    static struct ww_acquire_ctx *ww_acquire_ctxs;
+pub static mut ww_acquire_ctxs: *mut c_void = core::ptr::null_mut();
 #[no_mangle]
 unsafe extern "C" fn torture_ww_mutex_init() {
-    static void torture_ww_mutex_init(void)
-    {
     ww_mutex_init(&torture_ww_mutex_0, &torture_ww_class);
     ww_mutex_init(&torture_ww_mutex_1, &torture_ww_class);
     ww_mutex_init(&torture_ww_mutex_2, &torture_ww_class);
     ww_acquire_ctxs = kmalloc_objs(*ww_acquire_ctxs,
     cxt.nrealwriters_stress);
-    if (!ww_acquire_ctxs)
+    if (!ww_acquire_ctxs) {
     VERBOSE_TOROUT_STRING("ww_acquire_ctx: Out of memory");
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn torture_ww_mutex_exit() {
-    static void torture_ww_mutex_exit(void)
-    {
     kfree(ww_acquire_ctxs);
     }
 #[no_mangle]
 unsafe extern "C" fn torture_ww_mutex_lock(tid: c_int) -> c_int {
-    static int torture_ww_mutex_lock(int tid)
-    __acquires(torture_ww_mutex_0)
-    __acquires(torture_ww_mutex_1)
-    __acquires(torture_ww_mutex_2)
-    {
-    LIST_HEAD(list);
+pub static mut list: usize = 0;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct reorder_lock {
@@ -660,7 +729,7 @@ pub struct reorder_lock {
     list_for_each_entry(ll, &list, link) {
     pub err: c_int,
     pub ctx): err = ww_mutex_lock(ll->lock,,
-    if (!err)
+    if (!err) {
     pub ll: ln =,
     list_for_each_entry_continue_reverse(ln, &list, link)
     if (err != -EDEADLK)
@@ -672,249 +741,104 @@ pub struct reorder_lock {
     }
 #[no_mangle]
 unsafe extern "C" fn torture_ww_mutex_unlock(tid: c_int) {
-    static void torture_ww_mutex_unlock(int tid)
-    __releases(torture_ww_mutex_0)
-    __releases(torture_ww_mutex_1)
-    __releases(torture_ww_mutex_2)
-    {
+    }
     pub &ww_acquire_ctxs[tid]: *mut *mut ww_acquire_ctx ctx =,
     }
-    static struct lock_torture_ops ww_mutex_lock_ops = {
-    .init		= torture_ww_mutex_init,
-    .exit		= torture_ww_mutex_exit,
-    .writelock	= torture_ww_mutex_lock,
-    .write_delay	= torture_mutex_delay,
-    .task_boost     = torture_rt_boost,
-    .writeunlock	= torture_ww_mutex_unlock,
-    .readlock       = core::ptr::null_mut(),
-    .read_delay     = core::ptr::null_mut(),
-    .readunlock     = core::ptr::null_mut(),
-    .name		= "ww_mutex_lock"
-}
+pub static mut lock_torture_ops: usize = 0;
 
-    static DEFINE_RT_MUTEX(torture_rtmutex);
-    static struct rt_mutex torture_nested_rtmutexes[MAX_NESTED_LOCKS];
-    static struct lock_class_key nested_rtmutex_keys[MAX_NESTED_LOCKS];
-#[no_mangle]
-unsafe extern "C" fn torture_rtmutex_init() {
-    static void torture_rtmutex_init(void)
-    {
-    int i;
-    for (i = 0; i < MAX_NESTED_LOCKS; i++)
-    __rt_mutex_init(&torture_nested_rtmutexes[i], __func__,
-    &nested_rtmutex_keys[i]);
-    }
-    static int torture_rtmutex_nested_lock(int tid __maybe_unused,
-    u32 lockset)
-    {
-    int i;
-    for (i = 0; i < nested_locks; i++)
-    if (lockset & (1 << i))
-    rt_mutex_lock(&torture_nested_rtmutexes[i]);
-    return 0;
-    }
-#[no_mangle]
-unsafe extern "C" fn torture_rtmutex_lock(__maybe_unused: int tid) -> c_int {
-    static int torture_rtmutex_lock(int tid __maybe_unused)
-    __acquires(torture_rtmutex)
-    {
-    rt_mutex_lock(&torture_rtmutex);
-    return 0;
-    }
-#[no_mangle]
-unsafe extern "C" fn torture_rtmutex_delay(trsp: *mut torture_random_state) {
-    static void torture_rtmutex_delay(struct torture_random_state *trsp)
-    {
-    let mut shortdelay_us: c_ulong = 2;
-//
-// We want a short delay mostly to emulate likely code, and
-// we want a long delay occasionally to force massive contention.
-//
-    if (long_hold && !(torture_random(trsp) % (cxt.nrealwriters_stress * 2000 * long_hold)))
-    mdelay(long_hold);
-    if (!(torture_random(trsp) %
-    (cxt.nrealwriters_stress * 200 * shortdelay_us)))
-    udelay(shortdelay_us);
-    if (!(torture_random(trsp) % (cxt.nrealwriters_stress * 20000)))
-    torture_preempt_schedule();  /* Allow test to be preempted. */
-    }
-#[no_mangle]
-unsafe extern "C" fn torture_rtmutex_unlock(__maybe_unused: int tid) {
-    static void torture_rtmutex_unlock(int tid __maybe_unused)
-    __releases(torture_rtmutex)
-    {
-    rt_mutex_unlock(&torture_rtmutex);
-    }
-#[no_mangle]
-unsafe extern "C" fn torture_rt_boost_rtmutex(trsp: *mut torture_random_state) {
-    static void torture_rt_boost_rtmutex(struct torture_random_state *trsp)
-    {
-    if (!rt_boost)
-    return;
-    __torture_rt_boost(trsp);
-    }
-    static void torture_rtmutex_nested_unlock(int tid __maybe_unused,
-    u32 lockset)
-    {
-    int i;
-    for (i = nested_locks - 1; i >= 0; i--)
-    if (lockset & (1 << i))
-    rt_mutex_unlock(&torture_nested_rtmutexes[i]);
-    }
-    static struct lock_torture_ops rtmutex_lock_ops = {
-    .init		= torture_rtmutex_init,
-    .nested_lock	= torture_rtmutex_nested_lock,
-    .writelock	= torture_rtmutex_lock,
-    .write_delay	= torture_rtmutex_delay,
-    .task_boost     = torture_rt_boost_rtmutex,
-    .writeunlock	= torture_rtmutex_unlock,
-    .nested_unlock	= torture_rtmutex_nested_unlock,
-    .readlock       = core::ptr::null_mut(),
-    .read_delay     = core::ptr::null_mut(),
-    .readunlock     = core::ptr::null_mut(),
-    .name		= "rtmutex_lock"
-    };
-
-    static DECLARE_RWSEM(torture_rwsem);
+pub static mut torture_rwsem: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn torture_rwsem_down_write(__maybe_unused: int tid) -> c_int {
-    static int torture_rwsem_down_write(int tid __maybe_unused)
-    __acquires(torture_rwsem)
-    {
     down_write(&torture_rwsem);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn torture_rwsem_write_delay(trsp: *mut torture_random_state) {
-    static void torture_rwsem_write_delay(struct torture_random_state *trsp)
-    {
 // We want a long delay occasionally to force massive contention.
-    if (long_hold && !(torture_random(trsp) % (cxt.nrealwriters_stress * 2000 * long_hold)))
+    if (long_hold && !(torture_random(trsp) % (cxt.nrealwriters_stress * 2000 * long_hold))) {
     mdelay(long_hold * 10);
-    if (!(torture_random(trsp) % (cxt.nrealwriters_stress * 20000)))
+    }
+    if (!(torture_random(trsp) % (cxt.nrealwriters_stress * 20000))) {
     torture_preempt_schedule();  /* Allow test to be preempted. */
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn torture_rwsem_up_write(__maybe_unused: int tid) {
-    static void torture_rwsem_up_write(int tid __maybe_unused)
-    __releases(torture_rwsem)
-    {
     up_write(&torture_rwsem);
     }
 #[no_mangle]
 unsafe extern "C" fn torture_rwsem_down_read(__maybe_unused: int tid) -> c_int {
-    static int torture_rwsem_down_read(int tid __maybe_unused)
-    __acquires(torture_rwsem)
-    {
     down_read(&torture_rwsem);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn torture_rwsem_read_delay(trsp: *mut torture_random_state) {
-    static void torture_rwsem_read_delay(struct torture_random_state *trsp)
-    {
 // We want a long delay occasionally to force massive contention.
-    if (long_hold && !(torture_random(trsp) % (cxt.nrealreaders_stress * 2000 * long_hold)))
+    if (long_hold && !(torture_random(trsp) % (cxt.nrealreaders_stress * 2000 * long_hold))) {
     mdelay(long_hold * 2);
-    else
+    }
+    else {
     mdelay(long_hold / 2);
-    if (!(torture_random(trsp) % (cxt.nrealreaders_stress * 20000)))
+    }
+    if (!(torture_random(trsp) % (cxt.nrealreaders_stress * 20000))) {
     torture_preempt_schedule();  /* Allow test to be preempted. */
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn torture_rwsem_up_read(__maybe_unused: int tid) {
-    static void torture_rwsem_up_read(int tid __maybe_unused)
-    __releases(torture_rwsem)
-    {
     up_read(&torture_rwsem);
     }
-    static struct lock_torture_ops rwsem_lock_ops = {
-    .writelock	= torture_rwsem_down_write,
-    .write_delay	= torture_rwsem_write_delay,
-    .task_boost     = torture_rt_boost,
-    .writeunlock	= torture_rwsem_up_write,
-    .readlock       = torture_rwsem_down_read,
-    .read_delay     = torture_rwsem_read_delay,
-    .readunlock     = torture_rwsem_up_read,
-    .name		= "rwsem_lock"
-    };
+pub static mut lock_torture_ops: usize = 0;
 
-    static struct percpu_rw_semaphore pcpu_rwsem;
+pub static mut pcpu_rwsem: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn torture_percpu_rwsem_init() {
-    static void torture_percpu_rwsem_init(void)
-    {
-    BUG_ON(percpu_init_rwsem(&pcpu_rwsem));
+    BUG_ON!(percpu_init_rwsem(&pcpu_rwsem));
     }
 #[no_mangle]
 unsafe extern "C" fn torture_percpu_rwsem_exit() {
-    static void torture_percpu_rwsem_exit(void)
-    {
     percpu_free_rwsem(&pcpu_rwsem);
     }
 #[no_mangle]
 unsafe extern "C" fn torture_percpu_rwsem_down_write(__maybe_unused: int tid) -> c_int {
-    static int torture_percpu_rwsem_down_write(int tid __maybe_unused)
-    __acquires(pcpu_rwsem)
-    {
     percpu_down_write(&pcpu_rwsem);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn torture_percpu_rwsem_up_write(__maybe_unused: int tid) {
-    static void torture_percpu_rwsem_up_write(int tid __maybe_unused)
-    __releases(pcpu_rwsem)
-    {
     percpu_up_write(&pcpu_rwsem);
     }
 #[no_mangle]
 unsafe extern "C" fn torture_percpu_rwsem_down_read(__maybe_unused: int tid) -> c_int {
-    static int torture_percpu_rwsem_down_read(int tid __maybe_unused)
-    __acquires(pcpu_rwsem)
-    {
     percpu_down_read(&pcpu_rwsem);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn torture_percpu_rwsem_up_read(__maybe_unused: int tid) {
-    static void torture_percpu_rwsem_up_read(int tid __maybe_unused)
-    __releases(pcpu_rwsem)
-    {
     percpu_up_read(&pcpu_rwsem);
     }
-    static struct lock_torture_ops percpu_rwsem_lock_ops = {
-    .init		= torture_percpu_rwsem_init,
-    .exit		= torture_percpu_rwsem_exit,
-    .writelock	= torture_percpu_rwsem_down_write,
-    .write_delay	= torture_rwsem_write_delay,
-    .task_boost     = torture_rt_boost,
-    .writeunlock	= torture_percpu_rwsem_up_write,
-    .readlock       = torture_percpu_rwsem_down_read,
-    .read_delay     = torture_rwsem_read_delay,
-    .readunlock     = torture_percpu_rwsem_up_read,
-    .name		= "percpu_rwsem_lock"
-    };
+pub static mut lock_torture_ops: usize = 0;
 //
 // Lock torture writer kthread.  Repeatedly acquires and releases
 // the lock, checking for duplicate acquisitions.
 //
 #[no_mangle]
 unsafe extern "C" fn lock_torture_writer(arg: *mut c_void) -> c_int {
-    static int lock_torture_writer(void *arg)
-    {
-    unsigned long j;
-    unsigned long j1;
-    u32 lockset_mask;
-    struct lock_stress_stats *lwsp = arg;
-    DEFINE_TORTURE_RANDOM(rand);
-    bool skip_main_lock;
-    let mut tid: c_int = lwsp - cxt.lwsa;
+    let mut j = 0;
+    let mut j1 = 0;
+    let mut lockset_mask = 0;
+    let mut lwsp = arg;
+pub static mut rand: usize = 0;
+    let mut skip_main_lock = 0;
+pub static mut tid: c_int = 0;
     VERBOSE_TOROUT_STRING("lock_torture_writer task started");
-    if (!rt_task(current))
+    if (!rt_task(current)) {
     set_user_nice(current, MAX_NICE);
+    }
     do {
-    if ((torture_random(&rand) & 0xfffff) == 0)
+    if ((torture_random(&rand) & 0xfffff) == 0) {
     schedule_timeout_uninterruptible(1);
+    }
     lockset_mask = torture_random(&rand);
 //
 // When using nested_locks, we want to occasionally
@@ -927,31 +851,36 @@ unsafe extern "C" fn lock_torture_writer(arg: *mut c_void) -> c_int {
     skip_main_lock = (nested_locks &&
     !(torture_random(&rand) % 100));
     cxt.cur_ops.task_boost(&rand);
-    if (cxt.cur_ops.nested_lock)
+    if (cxt.cur_ops.nested_lock) {
     cxt.cur_ops.nested_lock(tid, lockset_mask);
+    }
     if (!skip_main_lock) {
-    if (acq_writer_lim > 0)
+    if (acq_writer_lim > 0) {
     j = jiffies;
+    }
     cxt.cur_ops.writelock(tid);
-    if (WARN_ON_ONCE(lock_is_write_held))
-    lwsp.n_lock_fail++;
+    if (WARN_ON_ONCE!(lock_is_write_held)) {
+    lwsp.n_lock_fail += 1;
+    }
     lock_is_write_held = true;
-    if (WARN_ON_ONCE(atomic_read(&lock_is_read_held)))
-    lwsp.n_lock_fail++; /* rare, but... */
+    if (WARN_ON_ONCE!(atomic_read(&lock_is_read_held))) {
+    lwsp.n_lock_fail += 1; /* rare, but... */
+    }
     if (acq_writer_lim > 0) {
     j1 = jiffies;
     WARN_ONCE(time_after(j1, j + acq_writer_lim),
     "%s: Lock acquisition took %lu jiffies.\n",
     __func__, j1 - j);
     }
-    lwsp.n_lock_acquired++;
+    lwsp.n_lock_acquired += 1;
     cxt.cur_ops.write_delay(&rand);
     lock_is_write_held = false;
     WRITE_ONCE(last_lock_release, jiffies);
     cxt.cur_ops.writeunlock(tid);
     }
-    if (cxt.cur_ops.nested_unlock)
+    if (cxt.cur_ops.nested_unlock) {
     cxt.cur_ops.nested_unlock(tid, lockset_mask);
+    }
     stutter_wait("lock_torture_writer");
     } while (!torture_must_stop());
     cxt.cur_ops.task_boost(core::ptr::null_mut()); /* reset prio */
@@ -964,21 +893,21 @@ unsafe extern "C" fn lock_torture_writer(arg: *mut c_void) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn lock_torture_reader(arg: *mut c_void) -> c_int {
-    static int lock_torture_reader(void *arg)
-    {
-    struct lock_stress_stats *lrsp = arg;
-    let mut tid: c_int = lrsp - cxt.lrsa;
-    DEFINE_TORTURE_RANDOM(rand);
+    let mut lrsp = arg;
+pub static mut tid: c_int = 0;
+pub static mut rand: usize = 0;
     VERBOSE_TOROUT_STRING("lock_torture_reader task started");
     set_user_nice(current, MAX_NICE);
     do {
-    if ((torture_random(&rand) & 0xfffff) == 0)
+    if ((torture_random(&rand) & 0xfffff) == 0) {
     schedule_timeout_uninterruptible(1);
+    }
     cxt.cur_ops.readlock(tid);
     atomic_inc(&lock_is_read_held);
-    if (WARN_ON_ONCE(lock_is_write_held))
-    lrsp.n_lock_fail++; /* rare, but... */
-    lrsp.n_lock_acquired++;
+    if (WARN_ON_ONCE!(lock_is_write_held)) {
+    lrsp.n_lock_fail += 1; /* rare, but... */
+    }
+    lrsp.n_lock_acquired += 1;
     cxt.cur_ops.read_delay(&rand);
     atomic_dec(&lock_is_read_held);
     cxt.cur_ops.readunlock(tid);
@@ -990,24 +919,27 @@ unsafe extern "C" fn lock_torture_reader(arg: *mut c_void) -> c_int {
 //
 // Create an lock-torture-statistics message in the specified buffer.
 //
-    static void __torture_print_stats(char *page,
-    struct lock_stress_stats *statp, bool write)
-    {
-    long cur;
-    let mut fail: bool = false;
-    int i, n_stress;
-    let mut max: c_long = 0, min = statp ? data_race(statp[0].n_lock_acquired) : 0;
-    let mut sum: c_longlong = 0;
+#[no_mangle]
+pub unsafe extern "C" fn __torture_print_stats(page: *mut c_char, statp: *mut lock_stress_stats, write: bool) {
+    let mut cur = 0;
+pub static mut fail: bool = false;
+    let mut i = 0;
+    let mut n_stress = 0;
+pub static mut max: c_long = 0;
+pub static mut sum: c_longlong = 0;
     n_stress = write ? cxt.nrealwriters_stress : cxt.nrealreaders_stress;
-    for (i = 0; i < n_stress; i++) {
-    if (data_race(statp[i].n_lock_fail))
+    while (i < n_stress) {
+    if (data_race(statp[i].n_lock_fail)) {
     fail = true;
+    }
     cur = data_race(statp[i].n_lock_acquired);
     sum += cur;
-    if (max < cur)
+    if (max < cur) {
     max = cur;
-    if (min > cur)
+    }
+    if (min > cur) {
     min = cur;
+    }
     }
     page += sprintf(page,
     "%s:  Total: %lld  Max/Min: %ld/%ld %s  Fail: %d %s\n",
@@ -1015,8 +947,9 @@ unsafe extern "C" fn lock_torture_reader(arg: *mut c_void) -> c_int {
     sum, max, min,
     !onoff_interval && max / 2 > min ? "???" : "",
     fail, fail ? "!!!" : "");
-    if (fail)
+    if (fail) {
     atomic_inc(&cxt.n_lock_torture_errors);
+    }
     }
 //
 // Print torture statistics.  Caller must ensure that there is only one
@@ -1028,15 +961,14 @@ unsafe extern "C" fn lock_torture_reader(arg: *mut c_void) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn lock_torture_stats_print() {
-    static void lock_torture_stats_print(void)
-    {
-    let mut size: c_int = cxt.nrealwriters_stress * 200 + 8192;
-    char *buf;
-    if (cxt.cur_ops.readlock)
+pub static mut size: c_int = 0;
+pub static mut buf: *mut c_void = core::ptr::null_mut();
+    if (cxt.cur_ops.readlock) {
     size += cxt.nrealreaders_stress * 200 + 8192;
+    }
     buf = kmalloc(size, GFP_KERNEL);
     if (!buf) {
-    pr_err("lock_torture_stats_print: Out of memory, need: %d",
+    pr_err!("lock_torture_stats_print: Out of memory, need: %d",
     size);
     return;
     }
@@ -1046,7 +978,7 @@ unsafe extern "C" fn lock_torture_stats_print() {
     if (cxt.cur_ops.readlock) {
     buf = kmalloc(size, GFP_KERNEL);
     if (!buf) {
-    pr_err("lock_torture_stats_print: Out of memory, need: %d",
+    pr_err!("lock_torture_stats_print: Out of memory, need: %d",
     size);
     return;
     }
@@ -1064,8 +996,6 @@ unsafe extern "C" fn lock_torture_stats_print() {
 //
 #[no_mangle]
 unsafe extern "C" fn lock_torture_stats(arg: *mut c_void) -> c_int {
-    static int lock_torture_stats(void *arg)
-    {
     VERBOSE_TOROUT_STRING("lock_torture_stats task started");
     do {
     schedule_timeout_interruptible(stat_interval * HZ);
@@ -1075,13 +1005,11 @@ unsafe extern "C" fn lock_torture_stats(arg: *mut c_void) -> c_int {
     torture_kthread_stopping("lock_torture_stats");
     return 0;
     }
-    static inline void
-    lock_torture_print_module_parms(struct lock_torture_ops *cur_ops,
-    const char *tag)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn lock_torture_print_module_parms(cur_ops: *mut lock_torture_ops, tag: *mut c_char) {
     static cpumask_t cpumask_all;
-    cpumask_t *rcmp = cpumask_nonempty(bind_readers) ? bind_readers : &cpumask_all;
-    cpumask_t *wcmp = cpumask_nonempty(bind_writers) ? bind_writers : &cpumask_all;
+    let mut rcmp = cpumask_nonempty(bind_readers) ? bind_readers : &cpumask_all;
+    let mut wcmp = cpumask_nonempty(bind_writers) ? bind_writers : &cpumask_all;
     cpumask_setall(&cpumask_all);
     pr_alert("%s" TORTURE_FLAG
     "--- %s%s: acq_writer_lim=%d bind_readers=%*pbl bind_writers=%*pbl call_rcu_chains=%d long_hold=%d nested_locks=%d nreaders_stress=%d nwriters_stress=%d onoff_holdoff=%d onoff_interval=%d rt_boost=%d rt_boost_factor=%d shuffle_interval=%d shutdown_secs=%d stat_interval=%d stutter=%d verbose=%d writer_fifo=%d\n",
@@ -1097,9 +1025,7 @@ unsafe extern "C" fn lock_torture_stats(arg: *mut c_void) -> c_int {
 // warning and associated diagnostics when a locking primitive stalls.
 #[no_mangle]
 unsafe extern "C" fn call_rcu_chain_cb(rhp: *mut rcu_head) {
-    static void call_rcu_chain_cb(struct rcu_head *rhp)
-    {
-    struct call_rcu_chain *crcp = container_of(rhp, struct call_rcu_chain, crc_rh);
+    let mut crcp = container_of!(rhp, call_rcu_chain, crc_rh);
     if (!smp_load_acquire(&crcp.crc_stop)) {
     (void)start_poll_synchronize_rcu(); // Start one grace period...
     call_rcu(&crcp.crc_rh, call_rcu_chain_cb); // ... and later start another.
@@ -1108,16 +1034,16 @@ unsafe extern "C" fn call_rcu_chain_cb(rhp: *mut rcu_head) {
 // Start the requested number of call_rcu() chains.
 #[no_mangle]
 unsafe extern "C" fn call_rcu_chain_init() -> c_int {
-    static int call_rcu_chain_init(void)
-    {
-    int i;
-    if (call_rcu_chains <= 0)
+    let mut i = 0;
+    if (call_rcu_chains <= 0) {
     return 0;
+    }
     call_rcu_chain_list = kzalloc_objs(*call_rcu_chain_list,
     call_rcu_chains);
-    if (!call_rcu_chain_list)
+    if (!call_rcu_chain_list) {
     return -ENOMEM;
-    for (i = 0; i < call_rcu_chains; i++) {
+    }
+    while (i < call_rcu_chains) {
     call_rcu_chain_list[i].crc_stop = false;
     call_rcu(&call_rcu_chain_list[i].crc_rh, call_rcu_chain_cb);
     }
@@ -1126,24 +1052,23 @@ unsafe extern "C" fn call_rcu_chain_init() -> c_int {
 // Stop all of the call_rcu() chains.
 #[no_mangle]
 unsafe extern "C" fn call_rcu_chain_cleanup() {
-    static void call_rcu_chain_cleanup(void)
-    {
-    int i;
-    if (!call_rcu_chain_list)
+    let mut i = 0;
+    if (!call_rcu_chain_list) {
     return;
-    for (i = 0; i < call_rcu_chains; i++)
+    }
+    for (i = 0; i < call_rcu_chains; i++) {
     smp_store_release(&call_rcu_chain_list[i].crc_stop, true);
+    }
     rcu_barrier();
     kfree(call_rcu_chain_list);
     call_rcu_chain_list = core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn lock_torture_cleanup() {
-    static void lock_torture_cleanup(void)
-    {
-    int i;
-    if (torture_cleanup_begin())
+    let mut i = 0;
+    if (torture_cleanup_begin()) {
     return;
+    }
 //
 // Indicates early cleanup, meaning that the test has not run,
 // such as when passing bogus args when loading the module.
@@ -1151,43 +1076,49 @@ unsafe extern "C" fn lock_torture_cleanup() {
 // perform the underlying torture-specific cleanups, cur_ops.exit()
 // will be invoked if needed.
 //
-    if (!cxt.lwsa && !cxt.lrsa)
-    goto end;
+    if (!cxt.lwsa && !cxt.lrsa) {
+// goto;
+    }
     if (writer_tasks) {
-    for (i = 0; i < cxt.nrealwriters_stress; i++)
+    for (i = 0; i < cxt.nrealwriters_stress; i++) {
     torture_stop_kthread(lock_torture_writer, writer_tasks[i]);
+    }
     kfree(writer_tasks);
     writer_tasks = core::ptr::null_mut();
     }
     if (reader_tasks) {
-    for (i = 0; i < cxt.nrealreaders_stress; i++)
+    for (i = 0; i < cxt.nrealreaders_stress; i++) {
     torture_stop_kthread(lock_torture_reader,
     reader_tasks[i]);
+    }
     kfree(reader_tasks);
     reader_tasks = core::ptr::null_mut();
     }
     torture_stop_kthread(lock_torture_stats, stats_task);
     lock_torture_stats_print();  /* -After- the stats thread is stopped! */
-    if (atomic_read(&cxt.n_lock_torture_errors))
+    if (atomic_read(&cxt.n_lock_torture_errors)) {
     lock_torture_print_module_parms(cxt.cur_ops,
     "End of test: FAILURE");
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: torture_onoff_failures()) -> else {
-    else if (torture_onoff_failures())
+    }
+
+    else if (torture_onoff_failures()) {
     lock_torture_print_module_parms(cxt.cur_ops,
     "End of test: LOCK_HOTPLUG");
-    else
+    }
+    else {
     lock_torture_print_module_parms(cxt.cur_ops,
     "End of test: SUCCESS");
+    }
     kfree(cxt.lwsa);
     cxt.lwsa = core::ptr::null_mut();
     kfree(cxt.lrsa);
     cxt.lrsa = core::ptr::null_mut();
     call_rcu_chain_cleanup();
-    end:
+// label;
     if (cxt.init_called) {
-    if (cxt.cur_ops.exit)
+    if (cxt.cur_ops.exit) {
     cxt.cur_ops.exit();
+    }
     cxt.init_called = false;
     }
     free_cpumask_var(bind_readers);
@@ -1195,11 +1126,10 @@ pub unsafe extern "C" fn if(_arg: torture_onoff_failures()) -> else {
     torture_cleanup_end();
     }
 #[no_mangle]
-unsafe extern "C" fn lock_torture_init() -> int __init {
-    static int __init lock_torture_init(void)
-    {
-    int i, j;
-    let mut firsterr: c_int = 0;
+unsafe extern "C" fn lock_torture_init() -> c_int {
+    let mut i = 0;
+    let mut j = 0;
+pub static mut firsterr: c_int = 0;
     static struct lock_torture_ops *torture_ops[] = {
     &lock_busted_ops,
     &spin_lock_ops, &spin_lock_irq_ops,
@@ -1216,48 +1146,56 @@ unsafe extern "C" fn lock_torture_init() -> int __init {
     &rwsem_lock_ops,
     &percpu_rwsem_lock_ops,
     };
-    if (!torture_init_begin(torture_type, verbose))
+    if (!torture_init_begin(torture_type, verbose)) {
     return -EBUSY;
+    }
 // Process args and tell the world that the torturer is on the job.
-    for (i = 0; i < ARRAY_SIZE(torture_ops); i++) {
+    while (i < ARRAY_SIZE!(torture_ops)) {
     cxt.cur_ops = torture_ops[i];
-    if (strcmp(torture_type, cxt.cur_ops.name) == 0)
+    if (strcmp(torture_type, cxt.cur_ops.name) == 0) {
     break;
     }
-    if (i == ARRAY_SIZE(torture_ops)) {
+    }
+    if (i == ARRAY_SIZE!(torture_ops)) {
     pr_alert("lock-torture: invalid torture type: \"%s\"\n",
     torture_type);
     pr_alert("lock-torture types:");
-    for (i = 0; i < ARRAY_SIZE(torture_ops); i++)
+    for (i = 0; i < ARRAY_SIZE!(torture_ops); i++) {
     pr_alert(" %s", torture_ops[i].name);
+    }
     pr_alert("\n");
     firsterr = -EINVAL;
-    goto unwind;
+// goto;
     }
     if (nwriters_stress == 0 &&
     (!cxt.cur_ops.readlock || nreaders_stress == 0)) {
     pr_alert("lock-torture: must run at least one locking thread\n");
     firsterr = -EINVAL;
-    goto unwind;
+// goto;
     }
-    if (nwriters_stress >= 0)
+    if (nwriters_stress >= 0) {
     cxt.nrealwriters_stress = nwriters_stress;
-    else
+    }
+    else {
     cxt.nrealwriters_stress = 2 * num_online_cpus();
+    }
     if (cxt.cur_ops.init) {
     cxt.cur_ops.init();
     cxt.init_called = true;
     }
 
-    if (str_has_prefix(torture_type, "mutex"))
+    if (str_has_prefix(torture_type, "mutex")) {
     cxt.debug_lock = true;
+    }
 
-    if (str_has_prefix(torture_type, "rtmutex"))
+    if (str_has_prefix(torture_type, "rtmutex")) {
     cxt.debug_lock = true;
+    }
 
     if ((str_has_prefix(torture_type, "spin")) ||
-    (str_has_prefix(torture_type, "rw_lock")))
+    (str_has_prefix(torture_type, "rw_lock"))) {
     cxt.debug_lock = true;
+    }
 
 // Initialize the statistics so that each run gets its own numbers.
     if (nwriters_stress) {
@@ -1266,24 +1204,26 @@ unsafe extern "C" fn lock_torture_init() -> int __init {
     if (cxt.lwsa == core::ptr::null_mut()) {
     VERBOSE_TOROUT_STRING("cxt.lwsa: Out of memory");
     firsterr = -ENOMEM;
-    goto unwind;
+// goto;
     }
-    for (i = 0; i < cxt.nrealwriters_stress; i++) {
+    while (i < cxt.nrealwriters_stress) {
     cxt.lwsa[i].n_lock_fail = 0;
     cxt.lwsa[i].n_lock_acquired = 0;
     }
     }
     if (cxt.cur_ops.readlock) {
-    if (nreaders_stress >= 0)
+    if (nreaders_stress >= 0) {
     cxt.nrealreaders_stress = nreaders_stress;
+    }
     else {
 //
 // By default distribute evenly the number of
 // readers and writers. We still run the same number
 // of threads as the writer-only locks default.
 //
-    if (nwriters_stress < 0) /* user doesn't care */
+    if (nwriters_stress < 0) /* user doesn't care */ {
     cxt.nrealwriters_stress = num_online_cpus();
+    }
     cxt.nrealreaders_stress = cxt.nrealwriters_stress;
     }
     if (nreaders_stress) {
@@ -1294,40 +1234,45 @@ unsafe extern "C" fn lock_torture_init() -> int __init {
     firsterr = -ENOMEM;
     kfree(cxt.lwsa);
     cxt.lwsa = core::ptr::null_mut();
-    goto unwind;
+// goto;
     }
-    for (i = 0; i < cxt.nrealreaders_stress; i++) {
+    while (i < cxt.nrealreaders_stress) {
     cxt.lrsa[i].n_lock_fail = 0;
     cxt.lrsa[i].n_lock_acquired = 0;
     }
     }
     }
     firsterr = call_rcu_chain_init();
-    if (torture_init_error(firsterr))
-    goto unwind;
+    if (torture_init_error(firsterr)) {
+// goto;
+    }
     lock_torture_print_module_parms(cxt.cur_ops, "Start of test");
 // Prepare torture context.
     if (onoff_interval > 0) {
     firsterr = torture_onoff_init(onoff_holdoff * HZ,
     onoff_interval * HZ, core::ptr::null_mut());
-    if (torture_init_error(firsterr))
-    goto unwind;
+    if (torture_init_error(firsterr)) {
+// goto;
+    }
     }
     if (shuffle_interval > 0) {
     firsterr = torture_shuffle_init(shuffle_interval);
-    if (torture_init_error(firsterr))
-    goto unwind;
+    if (torture_init_error(firsterr)) {
+// goto;
+    }
     }
     if (shutdown_secs > 0) {
     firsterr = torture_shutdown_init(shutdown_secs,
     lock_torture_cleanup);
-    if (torture_init_error(firsterr))
-    goto unwind;
+    if (torture_init_error(firsterr)) {
+// goto;
+    }
     }
     if (stutter > 0) {
     firsterr = torture_stutter_init(stutter, stutter);
-    if (torture_init_error(firsterr))
-    goto unwind;
+    if (torture_init_error(firsterr)) {
+// goto;
+    }
     }
     if (nwriters_stress) {
     writer_tasks = kzalloc_objs(writer_tasks[0],
@@ -1335,12 +1280,13 @@ unsafe extern "C" fn lock_torture_init() -> int __init {
     if (writer_tasks == core::ptr::null_mut()) {
     TOROUT_ERRSTRING("writer_tasks: Out of memory");
     firsterr = -ENOMEM;
-    goto unwind;
+// goto;
     }
     }
 // cap nested_locks to MAX_NESTED_LOCKS
-    if (nested_locks > MAX_NESTED_LOCKS)
+    if (nested_locks > MAX_NESTED_LOCKS) {
     nested_locks = MAX_NESTED_LOCKS;
+    }
     if (cxt.cur_ops.readlock) {
     reader_tasks = kzalloc_objs(reader_tasks[0],
     cxt.nrealreaders_stress);
@@ -1349,7 +1295,7 @@ unsafe extern "C" fn lock_torture_init() -> int __init {
     kfree(writer_tasks);
     writer_tasks = core::ptr::null_mut();
     firsterr = -ENOMEM;
-    goto unwind;
+// goto;
     }
     }
 //
@@ -1360,45 +1306,52 @@ unsafe extern "C" fn lock_torture_init() -> int __init {
 // for very specific needs, or even let the user choose the policy, if
 // ever wanted.
 //
-    for (i = 0, j = 0; i < cxt.nrealwriters_stress ||
-    j < cxt.nrealreaders_stress; i++, j++) {
-    if (i >= cxt.nrealwriters_stress)
-    goto create_reader;
+    while (i < cxt.nrealwriters_stress ||
+    j < cxt.nrealreaders_stress) {
+    if (i >= cxt.nrealwriters_stress) {
+// goto;
+    }
 // Create writer.
     firsterr = torture_create_kthread_cb(lock_torture_writer, &cxt.lwsa[i],
     writer_tasks[i],
     writer_fifo ? sched_set_fifo : core::ptr::null_mut());
-    if (torture_init_error(firsterr))
-    goto unwind;
-    if (cpumask_nonempty(bind_writers))
+    if (torture_init_error(firsterr)) {
+// goto;
+    }
+    if (cpumask_nonempty(bind_writers)) {
     torture_sched_setaffinity(writer_tasks[i].pid, bind_writers, true);
-    create_reader:
-    if (cxt.cur_ops.readlock == core::ptr::null_mut() || (j >= cxt.nrealreaders_stress))
+    }
+// label;
+    if (cxt.cur_ops.readlock == core::ptr::null_mut() || (j >= cxt.nrealreaders_stress)) {
     continue;
+    }
 // Create reader.
     firsterr = torture_create_kthread(lock_torture_reader, &cxt.lrsa[j],
     reader_tasks[j]);
-    if (torture_init_error(firsterr))
-    goto unwind;
-    if (cpumask_nonempty(bind_readers))
+    if (torture_init_error(firsterr)) {
+// goto;
+    }
+    if (cpumask_nonempty(bind_readers)) {
     torture_sched_setaffinity(reader_tasks[j].pid, bind_readers, true);
+    }
     }
     if (stat_interval > 0) {
     firsterr = torture_create_kthread(lock_torture_stats, core::ptr::null_mut(),
     stats_task);
-    if (torture_init_error(firsterr))
-    goto unwind;
+    if (torture_init_error(firsterr)) {
+// goto;
+    }
     }
     torture_init_end();
     return 0;
-    unwind:
+// label;
     torture_init_end();
     lock_torture_cleanup();
     if (shutdown_secs) {
-    WARN_ON(!IS_MODULE(CONFIG_LOCK_TORTURE_TEST));
+    WARN_ON!(!IS_MODULE(CONFIG_LOCK_TORTURE_TEST));
     kernel_power_off();
     }
     return firsterr;
     }
-    module_init(lock_torture_init);
-    module_exit(lock_torture_cleanup);
+    module_init!(lock_torture_init);
+    module_exit!(lock_torture_cleanup);

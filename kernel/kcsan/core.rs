@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -43,24 +293,24 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Copyright (C) 2019, Google LLC.
 //
 
-    let mut kcsan_early_enable: static bool = IS_ENABLED(CONFIG_KCSAN_EARLY_ENABLE);
-    let mut kcsan_udelay_task: c_uint = CONFIG_KCSAN_UDELAY_TASK;
-    let mut kcsan_udelay_interrupt: c_uint = CONFIG_KCSAN_UDELAY_INTERRUPT;
-    let mut kcsan_skip_watch: static long = CONFIG_KCSAN_SKIP_WATCH;
-    let mut kcsan_interrupt_watcher: static bool = IS_ENABLED(CONFIG_KCSAN_INTERRUPT_WATCHER);
+pub static mut kcsan_early_enable: bool = false;
+pub static mut kcsan_udelay_task: c_uint = 0;
+pub static mut kcsan_udelay_interrupt: c_uint = 0;
+pub static mut kcsan_skip_watch: long = 0;
+pub static mut kcsan_interrupt_watcher: bool = false;
 
-    module_param_named(early_enable, kcsan_early_enable, bool, 0);
-    module_param_named(udelay_task, kcsan_udelay_task, uint, 0644);
-    module_param_named(udelay_interrupt, kcsan_udelay_interrupt, uint, 0644);
-    module_param_named(skip_watch, kcsan_skip_watch, long, 0644);
-    module_param_named(interrupt_watcher, kcsan_interrupt_watcher, bool, 0444);
+    module_param_named!(early_enable, kcsan_early_enable, bool, 0);
+    module_param_named!(udelay_task, kcsan_udelay_task, uint, 0644);
+    module_param_named!(udelay_interrupt, kcsan_udelay_interrupt, uint, 0644);
+    module_param_named!(skip_watch, kcsan_skip_watch, long, 0644);
+    module_param_named!(interrupt_watcher, kcsan_interrupt_watcher, bool, 0444);
 
-    let mut kcsan_weak_memory: static bool = true;
-    module_param_named(weak_memory, kcsan_weak_memory, bool, 0644);
+pub static mut kcsan_weak_memory: bool = true;
+    module_param_named!(weak_memory, kcsan_weak_memory, bool, 0644);
 
-    bool kcsan_enabled;
+    let mut kcsan_enabled = 0;
 // Per-CPU kcsan_ctx for interrupts
-    static DEFINE_PER_CPU(struct kcsan_ctx, kcsan_cpu_ctx) = {
+    static DEFINE_PER_CPU(kcsan_ctx, kcsan_cpu_ctx) = {
     .scoped_accesses	= {LIST_POISON1, core::ptr::null_mut()},
     };
 //
@@ -110,54 +360,58 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Instructions to skip watching counter, used in should_watch(). We use a
 // per-CPU counter to avoid excessive contention.
 //
-    static DEFINE_PER_CPU(long, kcsan_skip);
+pub static mut long: usize = 0;
 // For kcsan_prandom_u32_max().
-    static DEFINE_PER_CPU(u32, kcsan_rand_state);
+pub static mut u32: usize = 0;
     static __always_inline atomic_long_t *find_watchpoint(unsigned long addr,
     size_t size,
     bool expect_write,
     long *encoded_watchpoint)
     {
-    let mut slot: c_int = watchpoint_slot(addr);
-    let mut addr_masked: c_ulong = addr & WATCHPOINT_ADDR_MASK;
-    atomic_long_t *watchpoint;
-    unsigned long wp_addr_masked;
-    size_t wp_size;
-    bool is_write;
-    int i;
-    BUILD_BUG_ON(CONFIG_KCSAN_NUM_WATCHPOINTS < NUM_SLOTS);
-    for (i = 0; i < NUM_SLOTS; ++i) {
+pub static mut slot: c_int = 0;
+pub static mut addr_masked: c_ulong = 0;
+pub static mut watchpoint: *mut c_void = core::ptr::null_mut();
+    let mut wp_addr_masked = 0;
+    let mut wp_size = 0;
+    let mut is_write = 0;
+    let mut i = 0;
+    BUILD_BUG_ON!(CONFIG_KCSAN_NUM_WATCHPOINTS < NUM_SLOTS);
+    while (i < NUM_SLOTS) {
     watchpoint = &watchpoints[SLOT_IDX_FAST(slot, i)];
 // encoded_watchpoint = atomic_long_read(watchpoint);
     if (!decode_watchpoint(*encoded_watchpoint, &wp_addr_masked,
-    &wp_size, &is_write))
+    &wp_size, &is_write)) {
     continue;
-    if (expect_write && !is_write)
+    }
+    if (expect_write && !is_write) {
     continue;
+    }
 // Check if the watchpoint matches the access.
-    if (matching_access(wp_addr_masked, wp_size, addr_masked, size))
+    if (matching_access(wp_addr_masked, wp_size, addr_masked, size)) {
     return watchpoint;
+    }
     }
     return core::ptr::null_mut();
     }
     static inline atomic_long_t *
     insert_watchpoint(unsigned long addr, size_t size, bool is_write)
     {
-    let mut slot: c_int = watchpoint_slot(addr);
-    let mut encoded_watchpoint: c_long = encode_watchpoint(addr, size, is_write);
-    atomic_long_t *watchpoint;
-    int i;
+pub static mut slot: c_int = 0;
+pub static mut encoded_watchpoint: c_long = 0;
+pub static mut watchpoint: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
 // Check slot index logic, ensuring we stay within array bounds.
-    BUILD_BUG_ON(SLOT_IDX(0, 0) != KCSAN_CHECK_ADJACENT);
-    BUILD_BUG_ON(SLOT_IDX(0, KCSAN_CHECK_ADJACENT+1) != 0);
-    BUILD_BUG_ON(SLOT_IDX(CONFIG_KCSAN_NUM_WATCHPOINTS-1, KCSAN_CHECK_ADJACENT) != ARRAY_SIZE(watchpoints)-1);
-    BUILD_BUG_ON(SLOT_IDX(CONFIG_KCSAN_NUM_WATCHPOINTS-1, KCSAN_CHECK_ADJACENT+1) != ARRAY_SIZE(watchpoints) - NUM_SLOTS);
-    for (i = 0; i < NUM_SLOTS; ++i) {
-    let mut expect_val: c_long = INVALID_WATCHPOINT;
+    BUILD_BUG_ON!(SLOT_IDX(0, 0) != KCSAN_CHECK_ADJACENT);
+    BUILD_BUG_ON!(SLOT_IDX(0, KCSAN_CHECK_ADJACENT+1) != 0);
+    BUILD_BUG_ON!(SLOT_IDX(CONFIG_KCSAN_NUM_WATCHPOINTS-1, KCSAN_CHECK_ADJACENT) != ARRAY_SIZE!(watchpoints)-1);
+    BUILD_BUG_ON!(SLOT_IDX(CONFIG_KCSAN_NUM_WATCHPOINTS-1, KCSAN_CHECK_ADJACENT+1) != ARRAY_SIZE!(watchpoints) - NUM_SLOTS);
+    while (i < NUM_SLOTS) {
+pub static mut expect_val: c_long = 0;
 // Try to acquire this slot.
     watchpoint = &watchpoints[SLOT_IDX(slot, i)];
-    if (atomic_long_try_cmpxchg_relaxed(watchpoint, &expect_val, encoded_watchpoint))
+    if (atomic_long_try_cmpxchg_relaxed(watchpoint, &expect_val, encoded_watchpoint)) {
     return watchpoint;
+    }
     }
     return core::ptr::null_mut();
     }
@@ -178,15 +432,11 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Return true if watchpoint was not touched, false if already consumed.
 #[no_mangle]
 pub unsafe extern "C" fn consume_watchpoint(watchpoint: *mut atomic_long_t) -> bool {
-    static inline bool consume_watchpoint(atomic_long_t *watchpoint)
-    {
     return atomic_long_xchg_relaxed(watchpoint, CONSUMED_WATCHPOINT) != CONSUMED_WATCHPOINT;
     }
 // Remove the watchpoint -- its slot may be reused after.
 #[no_mangle]
 pub unsafe extern "C" fn remove_watchpoint(watchpoint: *mut atomic_long_t) {
-    static inline void remove_watchpoint(atomic_long_t *watchpoint)
-    {
     atomic_long_set(watchpoint, INVALID_WATCHPOINT);
     }
     static __always_inline struct kcsan_ctx *get_ctx(void)
@@ -202,36 +452,38 @@ pub unsafe extern "C" fn remove_watchpoint(watchpoint: *mut atomic_long_t) {
 // Check scoped accesses; never inline because this is a slow-path!
 #[no_mangle]
 unsafe extern "C" fn kcsan_check_scoped_accesses() -> noinline void {
-    static noinline void kcsan_check_scoped_accesses(void)
-    {
-    struct kcsan_ctx *ctx = get_ctx();
-    struct kcsan_scoped_access *scoped_access;
-    if (ctx.disable_scoped)
+    let mut ctx = get_ctx();
+pub static mut scoped_access: *mut c_void = core::ptr::null_mut();
+    if (ctx.disable_scoped) {
     return;
-    ctx.disable_scoped++;
+    }
+    ctx.disable_scoped += 1;
     list_for_each_entry(scoped_access, &ctx.scoped_accesses, list) {
     check_access(scoped_access.ptr, scoped_access.size,
     scoped_access.type, scoped_access.ip);
     }
-    ctx.disable_scoped--;
+    ctx.disable_scoped -= 1;
     }
 // Rules for generic atomic accesses. Called from fast-path.
     static __always_inline bool
-    is_atomic(struct kcsan_ctx *ctx, const volatile void *ptr, size_t size, int type)
+    is_atomic(kcsan_ctx *ctx, const volatile void *ptr, size_t size, int type)
     {
-    if (type & KCSAN_ACCESS_ATOMIC)
+    if (type & KCSAN_ACCESS_ATOMIC) {
     return true;
+    }
 //
 // Unless explicitly declared atomic, never consider an assertion access
 // as atomic. This allows using them also in atomic regions, such as
 // seqlocks, without implicitly changing their semantics.
 //
-    if (type & KCSAN_ACCESS_ASSERT)
+    if (type & KCSAN_ACCESS_ASSERT) {
     return false;
-    if (IS_ENABLED(CONFIG_KCSAN_ASSUME_PLAIN_WRITES_ATOMIC) &&
-    (type & KCSAN_ACCESS_WRITE) && size <= sizeof(long) &&
-    !(type & KCSAN_ACCESS_COMPOUND) && IS_ALIGNED((unsigned long)ptr, size))
+    }
+    if (IS_ENABLED!(CONFIG_KCSAN_ASSUME_PLAIN_WRITES_ATOMIC) &&
+    (type & KCSAN_ACCESS_WRITE) && size <= sizeof!(long) &&
+    !(type & KCSAN_ACCESS_COMPOUND) && IS_ALIGNED((unsigned long)ptr, size)) {
     return true; /* Assume aligned writes up to word size are atomic. */
+    }
     if (ctx.atomic_next > 0) {
 //
 // Because we do not have separate contexts for nested
@@ -242,14 +494,15 @@ unsafe extern "C" fn kcsan_check_scoped_accesses() -> noinline void {
 // extremely rare; however, even if extremely rare, it could
 // lead to false positives otherwise.
 //
-    if ((hardirq_count() >> HARDIRQ_SHIFT) < 2)
+    if ((hardirq_count() >> HARDIRQ_SHIFT) < 2) {
     --ctx.atomic_next; /* in task, or outer interrupt */
+    }
     return true;
     }
     return ctx.atomic_nest_count > 0 || ctx.in_flat_atomic;
     }
     static __always_inline bool
-    should_watch(struct kcsan_ctx *ctx, const volatile void *ptr, size_t size, int type)
+    should_watch(kcsan_ctx *ctx, const volatile void *ptr, size_t size, int type)
     {
 //
 // Never set up watchpoints when memory operations are atomic.
@@ -258,10 +511,12 @@ unsafe extern "C" fn kcsan_check_scoped_accesses() -> noinline void {
 // should not count towards skipped instructions, and (2) to actually
 // decrement kcsan_atomic_next for consecutive instruction stream.
 //
-    if (is_atomic(ctx, ptr, size, type))
+    if (is_atomic(ctx, ptr, size, type)) {
     return false;
-    if (this_cpu_dec_return(kcsan_skip) >= 0)
+    }
+    if (this_cpu_dec_return(kcsan_skip) >= 0) {
     return false;
+    }
 //
 // NOTE: If we get here, kcsan_skip must always be reset in slow path
 // via reset_kcsan_skip() to avoid underflow.
@@ -275,39 +530,30 @@ unsafe extern "C" fn kcsan_check_scoped_accesses() -> noinline void {
 //
 #[no_mangle]
 unsafe extern "C" fn kcsan_prandom_u32_max(ep_ro: u32) -> u32 {
-    static u32 kcsan_prandom_u32_max(u32 ep_ro)
-    {
-    let mut state: u32 = this_cpu_read(kcsan_rand_state);
+pub static mut state: u32 = 0;
     state = 1664525 * state + 1013904223;
     this_cpu_write(kcsan_rand_state, state);
     return state % ep_ro;
     }
 #[no_mangle]
 pub unsafe extern "C" fn reset_kcsan_skip() {
-    static inline void reset_kcsan_skip(void)
-    {
-    long skip_count = kcsan_skip_watch -
-    (IS_ENABLED(CONFIG_KCSAN_SKIP_WATCH_RANDOMIZE) ?
+    let mut skip_count = kcsan_skip_watch -
+    (IS_ENABLED!(CONFIG_KCSAN_SKIP_WATCH_RANDOMIZE) ?
     kcsan_prandom_u32_max(kcsan_skip_watch) :
     0);
     this_cpu_write(kcsan_skip, skip_count);
     }
 #[no_mangle]
 unsafe extern "C" fn kcsan_is_enabled(ctx: *mut kcsan_ctx) -> __always_inline bool {
-    static __always_inline bool kcsan_is_enabled(struct kcsan_ctx *ctx)
-    {
     return READ_ONCE(kcsan_enabled) && !ctx.disable_count;
     }
 // Introduce delay depending on context and configuration.
 #[no_mangle]
 unsafe extern "C" fn delay_access(type: c_int) {
-    static void delay_access(int type)
-    {
-    let mut delay: c_uint = in_task() ? kcsan_udelay_task : kcsan_udelay_interrupt;
+pub static mut delay: c_uint = 0;
 // For certain access types, skew the random delay to be longer.
-    unsigned int skew_delay_order =
-    (type & (KCSAN_ACCESS_COMPOUND | KCSAN_ACCESS_ASSERT)) ? 1 : 0;
-    delay -= IS_ENABLED(CONFIG_KCSAN_DELAY_RANDOMIZE) ?
+    let mut skew_delay_order = (type & (KCSAN_ACCESS_COMPOUND | KCSAN_ACCESS_ASSERT)) ? 1 : 0;
+    delay -= IS_ENABLED!(CONFIG_KCSAN_DELAY_RANDOMIZE) ?
     kcsan_prandom_u32_max(delay >> skew_delay_order) :
     0;
     udelay(delay);
@@ -318,8 +564,6 @@ unsafe extern "C" fn delay_access(type: c_int) {
 //
 #[no_mangle]
 unsafe extern "C" fn read_instrumented_memory(ptr: *const volatile void, size: usize) -> __always_inline u64 {
-    static __always_inline u64 read_instrumented_memory(const volatile void *ptr, size_t size)
-    {
 //
 // In the below we don't necessarily need the read of the location to
 // be atomic, and we don't use READ_ONCE(), since all we need for race
@@ -329,34 +573,33 @@ unsafe extern "C" fn read_instrumented_memory(ptr: *const volatile void, size: u
 // may turn into more complex instructions than a plain load that cannot
 // do unaligned accesses.
 //
-    switch (size) {
-    case 1:  return *(const volatile u8 *)ptr;
-    case 2:  return *(const volatile u16 *)ptr;
-    case 4:  return *(const volatile u32 *)ptr;
-    case 8:  return *(const volatile u64 *)ptr;
-    default: return 0; /* Ignore; we do not diff the values. */
+    match (size) {
+    1 => {
+    }
+    2 => {
+    }
+    4 => {
+    }
+    8 => {
+    }
+    _ => {
+    }
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn kcsan_save_irqtrace(task: *mut task_struct) {
-    void kcsan_save_irqtrace(struct task_struct *task)
-    {
 
     task.kcsan_save_irqtrace = task.irqtrace;
 
     }
 #[no_mangle]
 pub unsafe extern "C" fn kcsan_restore_irqtrace(task: *mut task_struct) {
-    void kcsan_restore_irqtrace(struct task_struct *task)
-    {
 
     task.irqtrace = task.kcsan_save_irqtrace;
 
     }
 #[no_mangle]
 unsafe extern "C" fn get_kcsan_stack_depth() -> __always_inline int {
-    static __always_inline int get_kcsan_stack_depth(void)
-    {
 
     return current.kcsan_stack_depth;
 
@@ -366,15 +609,13 @@ unsafe extern "C" fn get_kcsan_stack_depth() -> __always_inline int {
     }
 #[no_mangle]
 unsafe extern "C" fn add_kcsan_stack_depth(val: c_int) -> __always_inline void {
-    static __always_inline void add_kcsan_stack_depth(int val)
-    {
 
     current.kcsan_stack_depth += val;
 
     BUILD_BUG();
 
     }
-    static __always_inline struct kcsan_scoped_access *get_reorder_access(struct kcsan_ctx *ctx)
+    static __always_inline struct kcsan_scoped_access *get_reorder_access(kcsan_ctx *ctx)
     {
 
     return ctx.disable_scoped ? core::ptr::null_mut() : &ctx.reorder_access;
@@ -383,12 +624,13 @@ unsafe extern "C" fn add_kcsan_stack_depth(val: c_int) -> __always_inline void {
 
     }
     static __always_inline bool
-    find_reorder_access(struct kcsan_ctx *ctx, const volatile void *ptr, size_t size,
+    find_reorder_access(kcsan_ctx *ctx, const volatile void *ptr, size_t size,
     int type, unsigned long ip)
     {
-    struct kcsan_scoped_access *reorder_access = get_reorder_access(ctx);
-    if (!reorder_access)
+    let mut reorder_access = get_reorder_access(ctx);
+    if (!reorder_access) {
     return false;
+    }
 //
 // Note: If accesses are repeated while reorder_access is identical,
 // never matches the new access, because !(type & KCSAN_ACCESS_SCOPED).
@@ -396,19 +638,18 @@ unsafe extern "C" fn add_kcsan_stack_depth(val: c_int) -> __always_inline void {
     return reorder_access.ptr == ptr && reorder_access.size == size &&
     reorder_access.type == type && reorder_access.ip == ip;
     }
-    static inline void
-    set_reorder_access(struct kcsan_ctx *ctx, const volatile void *ptr, size_t size,
-    int type, unsigned long ip)
-    {
-    struct kcsan_scoped_access *reorder_access = get_reorder_access(ctx);
-    if (!reorder_access || !kcsan_weak_memory)
+#[no_mangle]
+pub unsafe extern "C" fn set_reorder_access(ctx: *mut kcsan_ctx, ptr: *mut c_void, size: size_t, type: c_int, ip: c_ulong) {
+    let mut reorder_access = get_reorder_access(ctx);
+    if (!reorder_access || !kcsan_weak_memory) {
     return;
+    }
 //
 // To avoid nested interrupts or scheduler (which share kcsan_ctx)
 // reading an inconsistent reorder_access, ensure that the below has
 // exclusive access to reorder_access by disallowing concurrent use.
 //
-    ctx.disable_scoped++;
+    ctx.disable_scoped += 1;
     barrier();
     reorder_access.ptr		= ptr;
     reorder_access.size		= size;
@@ -416,7 +657,7 @@ unsafe extern "C" fn add_kcsan_stack_depth(val: c_int) -> __always_inline void {
     reorder_access.ip		= ip;
     reorder_access.stack_depth	= get_kcsan_stack_depth();
     barrier();
-    ctx.disable_scoped--;
+    ctx.disable_scoped -= 1;
     }
 //
 // Pull everything together: check_access() below contains the performance
@@ -437,17 +678,18 @@ unsafe extern "C" fn add_kcsan_stack_depth(val: c_int) -> __always_inline void {
     atomic_long_t *watchpoint,
     long encoded_watchpoint)
     {
-    let mut is_assert: bool = (type & KCSAN_ACCESS_ASSERT) != 0;
-    struct kcsan_ctx *ctx = get_ctx();
-    unsigned long flags;
-    bool consumed;
+pub static mut is_assert: bool = false;
+    let mut ctx = get_ctx();
+    let mut flags = 0;
+    let mut consumed = 0;
 //
 // We know a watchpoint exists. Let's try to keep the race-window
 // between here and finally consuming the watchpoint below as small as
 // possible -- avoid unneccessarily complex code until consumed.
 //
-    if (!kcsan_is_enabled(ctx))
+    if (!kcsan_is_enabled(ctx)) {
     return;
+    }
 //
 // The access_mask check relies on value-change comparison. To avoid
 // reporting a race where e.g. the writer set up the watchpoint, but the
@@ -455,8 +697,9 @@ unsafe extern "C" fn add_kcsan_stack_depth(val: c_int) -> __always_inline void {
 //
 // reorder_access is never created from an access with access_mask set.
 //
-    if (ctx.access_mask && !find_reorder_access(ctx, ptr, size, type, ip))
+    if (ctx.access_mask && !find_reorder_access(ctx, ptr, size, type, ip)) {
     return;
+    }
 //
 // If the other thread does not want to ignore the access, and there was
 // a value change as a result of this thread's operation, we will still
@@ -464,8 +707,9 @@ unsafe extern "C" fn add_kcsan_stack_depth(val: c_int) -> __always_inline void {
 //
 // Use CONFIG_KCSAN_REPORT_RACE_UNKNOWN_ORIGIN=n to filter.
 //
-    if (!is_assert && kcsan_ignore_address(ptr))
+    if (!is_assert && kcsan_ignore_address(ptr)) {
     return;
+    }
 //
 // Consuming the watchpoint must be guarded by kcsan_is_enabled() to
 // avoid erroneously triggering reports if the context is disabled.
@@ -485,42 +729,46 @@ unsafe extern "C" fn add_kcsan_stack_depth(val: c_int) -> __always_inline void {
 //
     atomic_long_inc(&kcsan_counters[KCSAN_COUNTER_REPORT_RACES]);
     }
-    if (is_assert)
+    if (is_assert) {
     atomic_long_inc(&kcsan_counters[KCSAN_COUNTER_ASSERT_FAILURES]);
-    else
+    }
+    else {
     atomic_long_inc(&kcsan_counters[KCSAN_COUNTER_DATA_RACES]);
+    }
     user_access_restore(flags);
     }
     static noinline void
     kcsan_setup_watchpoint(const volatile void *ptr, size_t size, int type, unsigned long ip)
     {
-    let mut is_write: bool = (type & KCSAN_ACCESS_WRITE) != 0;
-    let mut is_assert: bool = (type & KCSAN_ACCESS_ASSERT) != 0;
-    atomic_long_t *watchpoint;
+pub static mut is_write: bool = false;
+pub static mut is_assert: bool = false;
+pub static mut watchpoint: *mut c_void = core::ptr::null_mut();
     u64 old, new, diff;
-    let mut value_change: enum kcsan_value_change = KCSAN_VALUE_CHANGE_MAYBE;
-    let mut interrupt_watcher: bool = kcsan_interrupt_watcher;
-    let mut ua_flags: c_ulong = user_access_save();
-    struct kcsan_ctx *ctx = get_ctx();
-    let mut access_mask: c_ulong = ctx.access_mask;
-    let mut irq_flags: c_ulong = 0;
-    bool is_reorder_access;
+pub static mut value_change: kcsan_value_change = 0;
+pub static mut interrupt_watcher: bool = false;
+pub static mut ua_flags: c_ulong = 0;
+    let mut ctx = get_ctx();
+pub static mut access_mask: c_ulong = 0;
+pub static mut irq_flags: c_ulong = 0;
+    let mut is_reorder_access = 0;
 //
 // Always reset kcsan_skip counter in slow-path to avoid underflow; see
 // should_watch().
 //
     reset_kcsan_skip();
-    if (!kcsan_is_enabled(ctx))
-    goto out;
+    if (!kcsan_is_enabled(ctx)) {
+// goto;
+    }
 //
 // Check to-ignore addresses after kcsan_is_enabled(), as we may access
 // memory that is not yet initialized during early boot.
 //
-    if (!is_assert && kcsan_ignore_address(ptr))
-    goto out;
+    if (!is_assert && kcsan_ignore_address(ptr)) {
+// goto;
+    }
     if (!check_encodable((unsigned long)ptr, size)) {
     atomic_long_inc(&kcsan_counters[KCSAN_COUNTER_UNENCODABLE_ACCESSES]);
-    goto out;
+// goto;
     }
 //
 // The local CPU cannot observe reordering of its own accesses, and
@@ -531,8 +779,9 @@ unsafe extern "C" fn add_kcsan_stack_depth(val: c_int) -> __always_inline void {
 // 2. Avoid races of scoped accesses from nested interrupts (below).
 //
     is_reorder_access = find_reorder_access(ctx, ptr, size, type, ip);
-    if (is_reorder_access)
+    if (is_reorder_access) {
     interrupt_watcher = false;
+    }
 //
 // Avoid races of scoped accesses from nested interrupts (or scheduler).
 // Assume setting up a watchpoint for a non-scoped (normal) access that
@@ -540,7 +789,7 @@ unsafe extern "C" fn add_kcsan_stack_depth(val: c_int) -> __always_inline void {
 // which shares the context, it would check a conflicting scoped access.
 // To avoid, disable scoped access checking.
 //
-    ctx.disable_scoped++;
+    ctx.disable_scoped += 1;
 //
 // Save and restore the IRQ state trace touched by KCSAN, since KCSAN's
 // runtime is entered for every memory access, and potentially useful
@@ -553,7 +802,7 @@ unsafe extern "C" fn add_kcsan_stack_depth(val: c_int) -> __always_inline void {
 // NMIs can still fire, disable checking for all interrupt
 // contexts.
 //
-    raw_cpu_ptr(&kcsan_cpu_ctx).disable_count++;
+    raw_cpu_ptr(&kcsan_cpu_ctx).disable_count += 1;
     }
     watchpoint = insert_watchpoint((unsigned long)ptr, size, is_write);
     if (watchpoint == core::ptr::null_mut()) {
@@ -563,7 +812,7 @@ unsafe extern "C" fn add_kcsan_stack_depth(val: c_int) -> __always_inline void {
 // that this case happens very rarely.
 //
     atomic_long_inc(&kcsan_counters[KCSAN_COUNTER_NO_CAPACITY]);
-    goto out_unlock;
+// goto;
     }
     atomic_long_inc(&kcsan_counters[KCSAN_COUNTER_SETUP_WATCHPOINTS]);
     atomic_long_inc(&kcsan_counters[KCSAN_COUNTER_USED_WATCHPOINTS]);
@@ -593,8 +842,9 @@ unsafe extern "C" fn add_kcsan_stack_depth(val: c_int) -> __always_inline void {
     access_mask = 0;
     }
     diff = old ^ new;
-    if (access_mask)
+    if (access_mask) {
     diff &= access_mask;
+    }
 //
 // Check if we observed a value change.
 //
@@ -602,8 +852,9 @@ unsafe extern "C" fn add_kcsan_stack_depth(val: c_int) -> __always_inline void {
 // non-zero diff); if it is to be ignored, the below rules for
 // KCSAN_VALUE_CHANGE_MAYBE apply.
 //
-    if (diff && !kcsan_ignore_data_race(size, type, old, new, diff))
+    if (diff && !kcsan_ignore_data_race(size, type, old, new, diff)) {
     value_change = KCSAN_VALUE_CHANGE_TRUE;
+    }
 // Check if this access raced with another.
     if (!consume_watchpoint(watchpoint)) {
 //
@@ -631,17 +882,19 @@ unsafe extern "C" fn add_kcsan_stack_depth(val: c_int) -> __always_inline void {
 // therefore both this thread and the racing thread may
 // increment this counter.
 //
-    if (is_assert && value_change == KCSAN_VALUE_CHANGE_TRUE)
+    if (is_assert && value_change == KCSAN_VALUE_CHANGE_TRUE) {
     atomic_long_inc(&kcsan_counters[KCSAN_COUNTER_ASSERT_FAILURES]);
+    }
     kcsan_report_known_origin(ptr, size, type, ip,
     value_change, watchpoint - watchpoints,
     old, new, access_mask);
     } else if (value_change == KCSAN_VALUE_CHANGE_TRUE) {
 // Inferring a race, since the value should not have changed.
     atomic_long_inc(&kcsan_counters[KCSAN_COUNTER_RACES_UNKNOWN_ORIGIN]);
-    if (is_assert)
+    if (is_assert) {
     atomic_long_inc(&kcsan_counters[KCSAN_COUNTER_ASSERT_FAILURES]);
-    if (IS_ENABLED(CONFIG_KCSAN_REPORT_RACE_UNKNOWN_ORIGIN) || is_assert) {
+    }
+    if (IS_ENABLED!(CONFIG_KCSAN_REPORT_RACE_UNKNOWN_ORIGIN) || is_assert) {
     kcsan_report_unknown_origin(ptr, size, type, ip,
     old, new, access_mask);
     }
@@ -652,35 +905,37 @@ unsafe extern "C" fn add_kcsan_stack_depth(val: c_int) -> __always_inline void {
 //
     remove_watchpoint(watchpoint);
     atomic_long_dec(&kcsan_counters[KCSAN_COUNTER_USED_WATCHPOINTS]);
-    out_unlock:
+// label;
     if (!interrupt_watcher) {
-    raw_cpu_ptr(&kcsan_cpu_ctx).disable_count--;
+    raw_cpu_ptr(&kcsan_cpu_ctx).disable_count -= 1;
     local_irq_restore(irq_flags);
     }
     kcsan_restore_irqtrace(current);
-    ctx.disable_scoped--;
+    ctx.disable_scoped -= 1;
 //
 // Reordered accesses cannot be used for value change detection,
 // therefore never consider for reordering if access_mask is set.
 // ASSERT_EXCLUSIVE are not real accesses, ignore them as well.
 //
-    if (!access_mask && !is_assert)
+    if (!access_mask && !is_assert) {
     set_reorder_access(ctx, ptr, size, type, ip);
-    out:
+    }
+// label;
     user_access_restore(ua_flags);
     }
     static __always_inline void
     check_access(const volatile void *ptr, size_t size, int type, unsigned long ip)
     {
-    atomic_long_t *watchpoint;
-    long encoded_watchpoint;
+pub static mut watchpoint: *mut c_void = core::ptr::null_mut();
+    let mut encoded_watchpoint = 0;
 //
 // Do nothing for 0 sized check; this comparison will be optimized out
 // for constant sized instrumentation (__tsan_{read,write}N).
 //
-    if (unlikely(size == 0))
+    if (unlikely(size == 0)) {
     return;
-    again:
+    }
+// label;
 //
 // Avoid user_access_save in fast-path: find_watchpoint is safe without
 // user_access_save, as the address that ptr points to is only used to
@@ -695,16 +950,17 @@ unsafe extern "C" fn add_kcsan_stack_depth(val: c_int) -> __always_inline void {
 // detected and reported have occurred until kcsan_is_enabled() is
 // checked.
 //
-    if (unlikely(watchpoint != core::ptr::null_mut()))
+    if (unlikely(watchpoint != core::ptr::null_mut())) {
     kcsan_found_watchpoint(ptr, size, type, ip, watchpoint, encoded_watchpoint);
+    }
     else {
-    struct kcsan_ctx *ctx = get_ctx(); /* Call only once in fast-path. */
+    let mut ctx = get_ctx(); /* Call only once in fast-path. */
     if (unlikely(should_watch(ctx, ptr, size, type))) {
     kcsan_setup_watchpoint(ptr, size, type, ip);
     return;
     }
     if (!(type & KCSAN_ACCESS_SCOPED)) {
-    struct kcsan_scoped_access *reorder_access = get_reorder_access(ctx);
+    let mut reorder_access = get_reorder_access(ctx);
     if (reorder_access) {
 //
 // reorder_access check: simulates reordering of
@@ -723,56 +979,53 @@ unsafe extern "C" fn add_kcsan_stack_depth(val: c_int) -> __always_inline void {
 //
     barrier();
     size = READ_ONCE(reorder_access.size);
-    if (size)
-    goto again;
+    if (size) {
+// goto;
+    }
     }
     }
 //
 // Always checked last, right before returning from runtime;
 // if reorder_access is valid, checked after it was checked.
 //
-    if (unlikely(ctx.scoped_accesses.prev))
+    if (unlikely(ctx.scoped_accesses.prev)) {
     kcsan_check_scoped_accesses();
+    }
     }
     }
 // === Public interface =====================================================
 #[no_mangle]
-pub unsafe extern "C" fn kcsan_init() -> void __init {
-    void __init kcsan_init(void)
-    {
-    int cpu;
-    BUG_ON(!in_task());
-    for_each_possible_cpu(cpu)
+pub unsafe extern "C" fn kcsan_init()  {
+    let mut cpu = 0;
+    BUG_ON!(!in_task());
+    for_each_possible_cpu(cpu) {
     per_cpu(kcsan_rand_state, cpu) = (u32)get_cycles();
+    }
 //
 // We are in the init task, and no other tasks should be running;
 // WRITE_ONCE without memory barrier is sufficient.
 //
     if (kcsan_early_enable) {
-    pr_info("enabled early\n");
+    pr_info!("enabled early\n");
     WRITE_ONCE(kcsan_enabled, true);
     }
-    if (IS_ENABLED(CONFIG_KCSAN_REPORT_VALUE_CHANGE_ONLY) ||
-    IS_ENABLED(CONFIG_KCSAN_ASSUME_PLAIN_WRITES_ATOMIC) ||
-    IS_ENABLED(CONFIG_KCSAN_PERMISSIVE) ||
-    IS_ENABLED(CONFIG_KCSAN_IGNORE_ATOMICS)) {
-    pr_warn("non-strict mode configured - use CONFIG_KCSAN_STRICT=y to see all data races\n");
+    if (IS_ENABLED!(CONFIG_KCSAN_REPORT_VALUE_CHANGE_ONLY) ||
+    IS_ENABLED!(CONFIG_KCSAN_ASSUME_PLAIN_WRITES_ATOMIC) ||
+    IS_ENABLED!(CONFIG_KCSAN_PERMISSIVE) ||
+    IS_ENABLED!(CONFIG_KCSAN_IGNORE_ATOMICS)) {
+    pr_warn!("non-strict mode configured - use CONFIG_KCSAN_STRICT=y to see all data races\n");
     } else {
-    pr_info("strict mode configured\n");
+    pr_info!("strict mode configured\n");
     }
     }
 // === Exported interface ===================================================
 #[no_mangle]
 pub unsafe extern "C" fn kcsan_disable_current() {
-    void kcsan_disable_current(void)
-    {
     ++get_ctx().disable_count;
     }
     EXPORT_SYMBOL(kcsan_disable_current);
 #[no_mangle]
 pub unsafe extern "C" fn kcsan_enable_current() {
-    void kcsan_enable_current(void)
-    {
     if (get_ctx().disable_count-- == 0) {
 //
 // Warn if kcsan_enable_current() calls are unbalanced with
@@ -788,20 +1041,17 @@ pub unsafe extern "C" fn kcsan_enable_current() {
     EXPORT_SYMBOL(kcsan_enable_current);
 #[no_mangle]
 pub unsafe extern "C" fn kcsan_enable_current_nowarn() {
-    void kcsan_enable_current_nowarn(void)
-    {
-    if (get_ctx().disable_count-- == 0)
+    if (get_ctx().disable_count-- == 0) {
     kcsan_disable_current();
+    }
     }
     EXPORT_SYMBOL(kcsan_enable_current_nowarn);
 #[no_mangle]
 pub unsafe extern "C" fn kcsan_nestable_atomic_begin() {
-    void kcsan_nestable_atomic_begin(void)
-    {
 //
 // Do *not* check and warn if we are in a flat atomic region: nestable
 // and flat atomic regions are independent from each other.
-// See include/linux/kcsan.h: struct kcsan_ctx comments for more
+// See include/linux/kcsan.h: kcsan_ctx comments for more
 // comments.
 //
     ++get_ctx().atomic_nest_count;
@@ -809,8 +1059,6 @@ pub unsafe extern "C" fn kcsan_nestable_atomic_begin() {
     EXPORT_SYMBOL(kcsan_nestable_atomic_begin);
 #[no_mangle]
 pub unsafe extern "C" fn kcsan_nestable_atomic_end() {
-    void kcsan_nestable_atomic_end(void)
-    {
     if (get_ctx().atomic_nest_count-- == 0) {
 //
 // Warn if kcsan_nestable_atomic_end() calls are unbalanced with
@@ -826,61 +1074,51 @@ pub unsafe extern "C" fn kcsan_nestable_atomic_end() {
     EXPORT_SYMBOL(kcsan_nestable_atomic_end);
 #[no_mangle]
 pub unsafe extern "C" fn kcsan_flat_atomic_begin() {
-    void kcsan_flat_atomic_begin(void)
-    {
     get_ctx().in_flat_atomic = true;
     }
     EXPORT_SYMBOL(kcsan_flat_atomic_begin);
 #[no_mangle]
 pub unsafe extern "C" fn kcsan_flat_atomic_end() {
-    void kcsan_flat_atomic_end(void)
-    {
     get_ctx().in_flat_atomic = false;
     }
     EXPORT_SYMBOL(kcsan_flat_atomic_end);
 #[no_mangle]
 pub unsafe extern "C" fn kcsan_atomic_next(n: c_int) {
-    void kcsan_atomic_next(int n)
-    {
     get_ctx().atomic_next = n;
     }
     EXPORT_SYMBOL(kcsan_atomic_next);
 #[no_mangle]
 pub unsafe extern "C" fn kcsan_set_access_mask(mask: c_ulong) {
-    void kcsan_set_access_mask(unsigned long mask)
-    {
     get_ctx().access_mask = mask;
     }
     EXPORT_SYMBOL(kcsan_set_access_mask);
-    struct kcsan_scoped_access *
-    kcsan_begin_scoped_access(const volatile void *ptr, size_t size, int type,
-    struct kcsan_scoped_access *sa)
-    {
-    struct kcsan_ctx *ctx = get_ctx();
+#[no_mangle]
+pub unsafe extern "C" fn kcsan_begin_scoped_access(ptr: *mut c_void, size: size_t, type: c_int, sa: *mut kcsan_scoped_access) -> *mut c_void {
+    let mut ctx = get_ctx();
     check_access(ptr, size, type, _RET_IP_);
-    ctx.disable_count++; /* Disable KCSAN, in case list debugging is on. */
+    ctx.disable_count += 1; /* Disable KCSAN, in case list debugging is on. */
     INIT_LIST_HEAD(&sa.list);
     sa.ptr = ptr;
     sa.size = size;
     sa.type = type;
     sa.ip = _RET_IP_;
-    if (!ctx.scoped_accesses.prev) /* Lazy initialize list head. */
+    if (!ctx.scoped_accesses.prev) /* Lazy initialize list head. */ {
     INIT_LIST_HEAD(&ctx.scoped_accesses);
+    }
     list_add(&sa.list, &ctx.scoped_accesses);
-    ctx.disable_count--;
+    ctx.disable_count -= 1;
     return sa;
     }
     EXPORT_SYMBOL(kcsan_begin_scoped_access);
 #[no_mangle]
 pub unsafe extern "C" fn kcsan_end_scoped_access(sa: *mut kcsan_scoped_access) {
-    void kcsan_end_scoped_access(struct kcsan_scoped_access *sa)
-    {
-    struct kcsan_ctx *ctx = get_ctx();
-    if (WARN(!ctx.scoped_accesses.prev, "Unbalanced %s()?", __func__))
+    let mut ctx = get_ctx();
+    if (WARN(!ctx.scoped_accesses.prev, "Unbalanced %s()?", __func__)) {
     return;
-    ctx.disable_count++; /* Disable KCSAN, in case list debugging is on. */
+    }
+    ctx.disable_count += 1; /* Disable KCSAN, in case list debugging is on. */
     list_del(&sa.list);
-    if (list_empty(&ctx.scoped_accesses))
+    if (list_empty(&ctx.scoped_accesses)) {
 //
 // Ensure we do not enter kcsan_check_scoped_accesses()
 // slow-path if unnecessary, and avoids requiring list_empty()
@@ -888,31 +1126,32 @@ pub unsafe extern "C" fn kcsan_end_scoped_access(sa: *mut kcsan_scoped_access) {
 // uaccess warning).
 //
     ctx.scoped_accesses.prev = core::ptr::null_mut();
-    ctx.disable_count--;
+    }
+    ctx.disable_count -= 1;
     check_access(sa.ptr, sa.size, sa.type, sa.ip);
     }
     EXPORT_SYMBOL(kcsan_end_scoped_access);
 #[no_mangle]
 pub unsafe extern "C" fn __kcsan_check_access(ptr: *const volatile void, size: usize, type: c_int) {
-    void __kcsan_check_access(const volatile void *ptr, size_t size, int type)
-    {
     check_access(ptr, size, type, _RET_IP_);
     }
     EXPORT_SYMBOL(__kcsan_check_access);
 
-    void __kcsan_##name(void)						\
-    {									\
-    struct kcsan_scoped_access *sa = get_reorder_access(get_ctx());	\
-    if (!sa)							\
-    return;							\
-    if (order_before_cond)						\
-    sa.size = 0;						\
-    }									\
+    void __kcsan_##name(void)						
+    {									
+    let mut sa = get_reorder_access(get_ctx());	
+    if (!sa)							 {
+    return;							
+    }
+    if (order_before_cond)						 {
+    sa.size = 0;						
+    }
+    }									
     EXPORT_SYMBOL(__kcsan_##name)
-    DEFINE_MEMORY_BARRIER(mb, true);
+pub static mut mb: usize = 0;
     DEFINE_MEMORY_BARRIER(wmb, sa.type & (KCSAN_ACCESS_WRITE | KCSAN_ACCESS_COMPOUND));
     DEFINE_MEMORY_BARRIER(rmb, !(sa.type & KCSAN_ACCESS_WRITE) || (sa.type & KCSAN_ACCESS_COMPOUND));
-    DEFINE_MEMORY_BARRIER(release, true);
+pub static mut release: usize = 0;
 //
 // KCSAN uses the same instrumentation that is emitted by supported compilers
 // for ThreadSanitizer (TSAN).
@@ -926,53 +1165,49 @@ pub unsafe extern "C" fn __kcsan_check_access(ptr: *const volatile void, size: u
 // version to the generic version, which can handle both.
 //
 
-    void __tsan_read##size(void *ptr);                                     \
-    void __tsan_read##size(void *ptr)                                      \
-    {                                                                      \
-    check_access(ptr, size, 0, _RET_IP_);                          \
-    }                                                                      \
-    EXPORT_SYMBOL(__tsan_read##size);                                      \
-    void __tsan_unaligned_read##size(void *ptr)                            \
-    __alias(__tsan_read##size);                                    \
-    EXPORT_SYMBOL(__tsan_unaligned_read##size);                            \
-    void __tsan_write##size(void *ptr);                                    \
-    void __tsan_write##size(void *ptr)                                     \
-    {                                                                      \
-    check_access(ptr, size, KCSAN_ACCESS_WRITE, _RET_IP_);         \
-    }                                                                      \
-    EXPORT_SYMBOL(__tsan_write##size);                                     \
-    void __tsan_unaligned_write##size(void *ptr)                           \
-    __alias(__tsan_write##size);                                   \
-    EXPORT_SYMBOL(__tsan_unaligned_write##size);                           \
-    void __tsan_read_write##size(void *ptr);                               \
-    void __tsan_read_write##size(void *ptr)                                \
-    {                                                                      \
-    check_access(ptr, size,                                        \
-    KCSAN_ACCESS_COMPOUND | KCSAN_ACCESS_WRITE,       \
-    _RET_IP_);                                        \
-    }                                                                      \
-    EXPORT_SYMBOL(__tsan_read_write##size);                                \
-    void __tsan_unaligned_read_write##size(void *ptr)                      \
-    __alias(__tsan_read_write##size);                              \
+    void __tsan_read##size(void *ptr);                                     
+    void __tsan_read##size(void *ptr)                                      
+    {                                                                      
+    check_access(ptr, size, 0, _RET_IP_);                          
+    }                                                                      
+    EXPORT_SYMBOL(__tsan_read##size);                                      
+    void __tsan_unaligned_read##size(void *ptr)                            
+    __alias(__tsan_read##size);                                    
+    EXPORT_SYMBOL(__tsan_unaligned_read##size);                            
+    void __tsan_write##size(void *ptr);                                    
+    void __tsan_write##size(void *ptr)                                     
+    {                                                                      
+    check_access(ptr, size, KCSAN_ACCESS_WRITE, _RET_IP_);         
+    }                                                                      
+    EXPORT_SYMBOL(__tsan_write##size);                                     
+    void __tsan_unaligned_write##size(void *ptr)                           
+    __alias(__tsan_write##size);                                   
+    EXPORT_SYMBOL(__tsan_unaligned_write##size);                           
+    void __tsan_read_write##size(void *ptr);                               
+    void __tsan_read_write##size(void *ptr)                                
+    {                                                                      
+    check_access(ptr, size,                                        
+    KCSAN_ACCESS_COMPOUND | KCSAN_ACCESS_WRITE,       
+    _RET_IP_);                                        
+    }                                                                      
+    EXPORT_SYMBOL(__tsan_read_write##size);                                
+    void __tsan_unaligned_read_write##size(void *ptr)                      
+    __alias(__tsan_read_write##size);                              
     EXPORT_SYMBOL(__tsan_unaligned_read_write##size)
-    DEFINE_TSAN_READ_WRITE(1);
-    DEFINE_TSAN_READ_WRITE(2);
-    DEFINE_TSAN_READ_WRITE(4);
-    DEFINE_TSAN_READ_WRITE(8);
-    DEFINE_TSAN_READ_WRITE(16);
-    void __tsan_read_range(void *ptr, size_t size);
+pub static mut 1: usize = 0;
+pub static mut 2: usize = 0;
+pub static mut 4: usize = 0;
+pub static mut 8: usize = 0;
+pub static mut 16: usize = 0;
+// forward_decl: __tsan_read_range;
 #[no_mangle]
 pub unsafe extern "C" fn __tsan_read_range(ptr: *mut c_void, size: usize) {
-    void __tsan_read_range(void *ptr, size_t size)
-    {
     check_access(ptr, size, 0, _RET_IP_);
     }
     EXPORT_SYMBOL(__tsan_read_range);
-    void __tsan_write_range(void *ptr, size_t size);
+// forward_decl: __tsan_write_range;
 #[no_mangle]
 pub unsafe extern "C" fn __tsan_write_range(ptr: *mut c_void, size: usize) {
-    void __tsan_write_range(void *ptr, size_t size)
-    {
     check_access(ptr, size, KCSAN_ACCESS_WRITE, _RET_IP_);
     }
     EXPORT_SYMBOL(__tsan_write_range);
@@ -986,41 +1221,43 @@ pub unsafe extern "C" fn __tsan_write_range(ptr: *mut c_void, size: usize) {
 // the size-check of compiletime_assert_rwonce_type().
 //
 
-    void __tsan_volatile_read##size(void *ptr);                            \
-    void __tsan_volatile_read##size(void *ptr)                             \
-    {                                                                      \
-    const bool is_atomic = size <= sizeof(long long) &&            \
-    IS_ALIGNED((unsigned long)ptr, size);   \
-    if (IS_ENABLED(CONFIG_KCSAN_IGNORE_ATOMICS) && is_atomic)      \
-    return;                                                \
-    check_access(ptr, size, is_atomic ? KCSAN_ACCESS_ATOMIC : 0,   \
-    _RET_IP_);                                        \
-    }                                                                      \
-    EXPORT_SYMBOL(__tsan_volatile_read##size);                             \
-    void __tsan_unaligned_volatile_read##size(void *ptr)                   \
-    __alias(__tsan_volatile_read##size);                           \
-    EXPORT_SYMBOL(__tsan_unaligned_volatile_read##size);                   \
-    void __tsan_volatile_write##size(void *ptr);                           \
-    void __tsan_volatile_write##size(void *ptr)                            \
-    {                                                                      \
-    const bool is_atomic = size <= sizeof(long long) &&            \
-    IS_ALIGNED((unsigned long)ptr, size);   \
-    if (IS_ENABLED(CONFIG_KCSAN_IGNORE_ATOMICS) && is_atomic)      \
-    return;                                                \
-    check_access(ptr, size,                                        \
-    KCSAN_ACCESS_WRITE |                              \
-    (is_atomic ? KCSAN_ACCESS_ATOMIC : 0),    \
-    _RET_IP_);                                        \
-    }                                                                      \
-    EXPORT_SYMBOL(__tsan_volatile_write##size);                            \
-    void __tsan_unaligned_volatile_write##size(void *ptr)                  \
-    __alias(__tsan_volatile_write##size);                          \
+    void __tsan_volatile_read##size(void *ptr);                            
+    void __tsan_volatile_read##size(void *ptr)                             
+    {                                                                      
+    let mut is_atomic = size <= sizeof!(long long) &&            
+    IS_ALIGNED((unsigned long)ptr, size);   
+    if (IS_ENABLED!(CONFIG_KCSAN_IGNORE_ATOMICS) && is_atomic)       {
+    return;                                                
+    }
+    check_access(ptr, size, is_atomic ? KCSAN_ACCESS_ATOMIC : 0,   
+    _RET_IP_);                                        
+    }                                                                      
+    EXPORT_SYMBOL(__tsan_volatile_read##size);                             
+    void __tsan_unaligned_volatile_read##size(void *ptr)                   
+    __alias(__tsan_volatile_read##size);                           
+    EXPORT_SYMBOL(__tsan_unaligned_volatile_read##size);                   
+    void __tsan_volatile_write##size(void *ptr);                           
+    void __tsan_volatile_write##size(void *ptr)                            
+    {                                                                      
+    let mut is_atomic = size <= sizeof!(long long) &&            
+    IS_ALIGNED((unsigned long)ptr, size);   
+    if (IS_ENABLED!(CONFIG_KCSAN_IGNORE_ATOMICS) && is_atomic)       {
+    return;                                                
+    }
+    check_access(ptr, size,                                        
+    KCSAN_ACCESS_WRITE |                              
+    (is_atomic ? KCSAN_ACCESS_ATOMIC : 0),    
+    _RET_IP_);                                        
+    }                                                                      
+    EXPORT_SYMBOL(__tsan_volatile_write##size);                            
+    void __tsan_unaligned_volatile_write##size(void *ptr)                  
+    __alias(__tsan_volatile_write##size);                          
     EXPORT_SYMBOL(__tsan_unaligned_volatile_write##size)
-    DEFINE_TSAN_VOLATILE_READ_WRITE(1);
-    DEFINE_TSAN_VOLATILE_READ_WRITE(2);
-    DEFINE_TSAN_VOLATILE_READ_WRITE(4);
-    DEFINE_TSAN_VOLATILE_READ_WRITE(8);
-    DEFINE_TSAN_VOLATILE_READ_WRITE(16);
+pub static mut 1: usize = 0;
+pub static mut 2: usize = 0;
+pub static mut 4: usize = 0;
+pub static mut 8: usize = 0;
+pub static mut 16: usize = 0;
 //
 // Function entry and exit are used to determine the validty of reorder_access.
 // Reordering of the access ends at the end of the function scope where the
@@ -1032,27 +1269,26 @@ pub unsafe extern "C" fn __tsan_write_range(ptr: *mut c_void, size: usize) {
 //
 // 2. Simplifies generating the stack trace of the access.
 //
-    void __tsan_func_entry(void *call_pc);
+// forward_decl: __tsan_func_entry;
 #[no_mangle]
 pub unsafe extern "C" fn __tsan_func_entry(call_pc: *mut c_void) -> noinline void {
-    noinline void __tsan_func_entry(void *call_pc)
-    {
-    if (!IS_ENABLED(CONFIG_KCSAN_WEAK_MEMORY))
+    if (!IS_ENABLED!(CONFIG_KCSAN_WEAK_MEMORY)) {
     return;
+    }
     add_kcsan_stack_depth(1);
     }
     EXPORT_SYMBOL(__tsan_func_entry);
-    void __tsan_func_exit(void);
+// forward_decl: __tsan_func_exit;
 #[no_mangle]
 pub unsafe extern "C" fn __tsan_func_exit() -> noinline void {
-    noinline void __tsan_func_exit(void)
-    {
-    struct kcsan_scoped_access *reorder_access;
-    if (!IS_ENABLED(CONFIG_KCSAN_WEAK_MEMORY))
+pub static mut reorder_access: *mut c_void = core::ptr::null_mut();
+    if (!IS_ENABLED!(CONFIG_KCSAN_WEAK_MEMORY)) {
     return;
+    }
     reorder_access = get_reorder_access(get_ctx());
-    if (!reorder_access)
-    goto out;
+    if (!reorder_access) {
+// goto;
+    }
     if (get_kcsan_stack_depth() <= reorder_access.stack_depth) {
 //
 // Access check to catch cases where write without a barrier
@@ -1066,15 +1302,13 @@ pub unsafe extern "C" fn __tsan_func_exit() -> noinline void {
     reorder_access.size = 0;
     reorder_access.stack_depth = INT_MIN;
     }
-    out:
+// label;
     add_kcsan_stack_depth(-1);
     }
     EXPORT_SYMBOL(__tsan_func_exit);
-    void __tsan_init(void);
+// forward_decl: __tsan_init;
 #[no_mangle]
 pub unsafe extern "C" fn __tsan_init() {
-    void __tsan_init(void)
-    {
     }
     EXPORT_SYMBOL(__tsan_init);
 //
@@ -1094,47 +1328,46 @@ pub unsafe extern "C" fn __tsan_init() {
 //
 #[no_mangle]
 unsafe extern "C" fn kcsan_atomic_builtin_memorder(memorder: c_int) -> __always_inline void {
-    static __always_inline void kcsan_atomic_builtin_memorder(int memorder)
-    {
     if (memorder == __ATOMIC_RELEASE ||
     memorder == __ATOMIC_SEQ_CST ||
-    memorder == __ATOMIC_ACQ_REL)
+    memorder == __ATOMIC_ACQ_REL) {
     __kcsan_release();
     }
+    }
 
-    u##bits __tsan_atomic##bits##_load(const u##bits *ptr, int memorder);                      \
-    u##bits __tsan_atomic##bits##_load(const u##bits *ptr, int memorder)                       \
-    {                                                                                          \
-    kcsan_atomic_builtin_memorder(memorder);                                           \
-    if (!IS_ENABLED(CONFIG_KCSAN_IGNORE_ATOMICS)) {                                    \
-    check_access(ptr, bits / BITS_PER_BYTE, KCSAN_ACCESS_ATOMIC, _RET_IP_);    \
-    }                                                                                  \
-    return __atomic_load_n(ptr, memorder);                                             \
-    }                                                                                          \
-    EXPORT_SYMBOL(__tsan_atomic##bits##_load);                                                 \
-    void __tsan_atomic##bits##_store(u##bits *ptr, u##bits v, int memorder);                   \
-    void __tsan_atomic##bits##_store(u##bits *ptr, u##bits v, int memorder)                    \
-    {                                                                                          \
-    kcsan_atomic_builtin_memorder(memorder);                                           \
-    if (!IS_ENABLED(CONFIG_KCSAN_IGNORE_ATOMICS)) {                                    \
-    check_access(ptr, bits / BITS_PER_BYTE,                                    \
-    KCSAN_ACCESS_WRITE | KCSAN_ACCESS_ATOMIC, _RET_IP_);          \
-    }                                                                                  \
-    __atomic_store_n(ptr, v, memorder);                                                \
-    }                                                                                          \
+    u##bits __tsan_atomic##bits##_load(const u##bits *ptr, int memorder);                      
+    u##bits __tsan_atomic##bits##_load(const u##bits *ptr, int memorder)                       
+    {                                                                                          
+    kcsan_atomic_builtin_memorder(memorder);                                           
+    if (!IS_ENABLED!(CONFIG_KCSAN_IGNORE_ATOMICS)) {                                    
+    check_access(ptr, bits / BITS_PER_BYTE, KCSAN_ACCESS_ATOMIC, _RET_IP_);    
+    }                                                                                  
+    return __atomic_load_n(ptr, memorder);                                             
+    }                                                                                          
+    EXPORT_SYMBOL(__tsan_atomic##bits##_load);                                                 
+    void __tsan_atomic##bits##_store(u##bits *ptr, u##bits v, int memorder);                   
+    void __tsan_atomic##bits##_store(u##bits *ptr, u##bits v, int memorder)                    
+    {                                                                                          
+    kcsan_atomic_builtin_memorder(memorder);                                           
+    if (!IS_ENABLED!(CONFIG_KCSAN_IGNORE_ATOMICS)) {                                    
+    check_access(ptr, bits / BITS_PER_BYTE,                                    
+    KCSAN_ACCESS_WRITE | KCSAN_ACCESS_ATOMIC, _RET_IP_);          
+    }                                                                                  
+    __atomic_store_n(ptr, v, memorder);                                                
+    }                                                                                          
     EXPORT_SYMBOL(__tsan_atomic##bits##_store)
 
-    u##bits __tsan_atomic##bits##_##op(u##bits *ptr, u##bits v, int memorder);                 \
-    u##bits __tsan_atomic##bits##_##op(u##bits *ptr, u##bits v, int memorder)                  \
-    {                                                                                          \
-    kcsan_atomic_builtin_memorder(memorder);                                           \
-    if (!IS_ENABLED(CONFIG_KCSAN_IGNORE_ATOMICS)) {                                    \
-    check_access(ptr, bits / BITS_PER_BYTE,                                    \
-    KCSAN_ACCESS_COMPOUND | KCSAN_ACCESS_WRITE |                  \
-    KCSAN_ACCESS_ATOMIC, _RET_IP_);                       \
-    }                                                                                  \
-    return __atomic_##op##suffix(ptr, v, memorder);                                    \
-    }                                                                                          \
+    u##bits __tsan_atomic##bits##_##op(u##bits *ptr, u##bits v, int memorder);                 
+    u##bits __tsan_atomic##bits##_##op(u##bits *ptr, u##bits v, int memorder)                  
+    {                                                                                          
+    kcsan_atomic_builtin_memorder(memorder);                                           
+    if (!IS_ENABLED!(CONFIG_KCSAN_IGNORE_ATOMICS)) {                                    
+    check_access(ptr, bits / BITS_PER_BYTE,                                    
+    KCSAN_ACCESS_COMPOUND | KCSAN_ACCESS_WRITE |                  
+    KCSAN_ACCESS_ATOMIC, _RET_IP_);                       
+    }                                                                                  
+    return __atomic_##op##suffix(ptr, v, memorder);                                    
+    }                                                                                          
     EXPORT_SYMBOL(__tsan_atomic##bits##_##op)
 //
 // Note: CAS operations are always classified as write, even in case they
@@ -1154,59 +1387,57 @@ unsafe extern "C" fn kcsan_atomic_builtin_memorder(memorder: c_int) -> __always_
 // all CAS can succeed in some other execution, the data race is still valid.
 //
 
-    int __tsan_atomic##bits##_compare_exchange_##strength(u##bits *ptr, u##bits *exp,          \
-    u##bits val, int mo, int fail_mo);   \
-    int __tsan_atomic##bits##_compare_exchange_##strength(u##bits *ptr, u##bits *exp,          \
-    u##bits val, int mo, int fail_mo)    \
-    {                                                                                          \
-    kcsan_atomic_builtin_memorder(mo);                                                 \
-    if (!IS_ENABLED(CONFIG_KCSAN_IGNORE_ATOMICS)) {                                    \
-    check_access(ptr, bits / BITS_PER_BYTE,                                    \
-    KCSAN_ACCESS_COMPOUND | KCSAN_ACCESS_WRITE |                  \
-    KCSAN_ACCESS_ATOMIC, _RET_IP_);                       \
-    }                                                                                  \
-    return __atomic_compare_exchange_n(ptr, exp, val, weak, mo, fail_mo);              \
-    }                                                                                          \
+    int __tsan_atomic##bits##_compare_exchange_##strength(u##bits *ptr, u##bits *exp,          
+    u##bits val, int mo, int fail_mo);   
+    int __tsan_atomic##bits##_compare_exchange_##strength(u##bits *ptr, u##bits *exp,          
+    u##bits val, int mo, int fail_mo)    
+    {                                                                                          
+    kcsan_atomic_builtin_memorder(mo);                                                 
+    if (!IS_ENABLED!(CONFIG_KCSAN_IGNORE_ATOMICS)) {                                    
+    check_access(ptr, bits / BITS_PER_BYTE,                                    
+    KCSAN_ACCESS_COMPOUND | KCSAN_ACCESS_WRITE |                  
+    KCSAN_ACCESS_ATOMIC, _RET_IP_);                       
+    }                                                                                  
+    return __atomic_compare_exchange_n(ptr, exp, val, weak, mo, fail_mo);              
+    }                                                                                          
     EXPORT_SYMBOL(__tsan_atomic##bits##_compare_exchange_##strength)
 
-    u##bits __tsan_atomic##bits##_compare_exchange_val(u##bits *ptr, u##bits exp, u##bits val, \
-    int mo, int fail_mo);                   \
-    u##bits __tsan_atomic##bits##_compare_exchange_val(u##bits *ptr, u##bits exp, u##bits val, \
-    int mo, int fail_mo)                    \
-    {                                                                                          \
-    kcsan_atomic_builtin_memorder(mo);                                                 \
-    if (!IS_ENABLED(CONFIG_KCSAN_IGNORE_ATOMICS)) {                                    \
-    check_access(ptr, bits / BITS_PER_BYTE,                                    \
-    KCSAN_ACCESS_COMPOUND | KCSAN_ACCESS_WRITE |                  \
-    KCSAN_ACCESS_ATOMIC, _RET_IP_);                       \
-    }                                                                                  \
-    __atomic_compare_exchange_n(ptr, &exp, val, 0, mo, fail_mo);                       \
-    return exp;                                                                        \
-    }                                                                                          \
+    u##bits __tsan_atomic##bits##_compare_exchange_val(u##bits *ptr, u##bits exp, u##bits val, 
+    int mo, int fail_mo);                   
+    u##bits __tsan_atomic##bits##_compare_exchange_val(u##bits *ptr, u##bits exp, u##bits val, 
+    int mo, int fail_mo)                    
+    {                                                                                          
+    kcsan_atomic_builtin_memorder(mo);                                                 
+    if (!IS_ENABLED!(CONFIG_KCSAN_IGNORE_ATOMICS)) {                                    
+    check_access(ptr, bits / BITS_PER_BYTE,                                    
+    KCSAN_ACCESS_COMPOUND | KCSAN_ACCESS_WRITE |                  
+    KCSAN_ACCESS_ATOMIC, _RET_IP_);                       
+    }                                                                                  
+    __atomic_compare_exchange_n(ptr, &exp, val, 0, mo, fail_mo);                       
+    return exp;                                                                        
+    }                                                                                          
     EXPORT_SYMBOL(__tsan_atomic##bits##_compare_exchange_val)
 
-    DEFINE_TSAN_ATOMIC_LOAD_STORE(bits);                                                       \
-    DEFINE_TSAN_ATOMIC_RMW(exchange, bits, _n);                                                \
-    DEFINE_TSAN_ATOMIC_RMW(fetch_add, bits, );                                                 \
-    DEFINE_TSAN_ATOMIC_RMW(fetch_sub, bits, );                                                 \
-    DEFINE_TSAN_ATOMIC_RMW(fetch_and, bits, );                                                 \
-    DEFINE_TSAN_ATOMIC_RMW(fetch_or, bits, );                                                  \
-    DEFINE_TSAN_ATOMIC_RMW(fetch_xor, bits, );                                                 \
-    DEFINE_TSAN_ATOMIC_RMW(fetch_nand, bits, );                                                \
-    DEFINE_TSAN_ATOMIC_CMPXCHG(bits, strong, 0);                                               \
-    DEFINE_TSAN_ATOMIC_CMPXCHG(bits, weak, 1);                                                 \
+pub static mut bits: usize = 0;                                                       
+pub static mut exchange: usize = 0;                                                
+pub static mut fetch_add: usize = 0;                                                 
+pub static mut fetch_sub: usize = 0;                                                 
+pub static mut fetch_and: usize = 0;                                                 
+pub static mut fetch_or: usize = 0;                                                  
+pub static mut fetch_xor: usize = 0;                                                 
+pub static mut fetch_nand: usize = 0;                                                
+pub static mut bits: usize = 0;                                               
+pub static mut bits: usize = 0;                                                 
     DEFINE_TSAN_ATOMIC_CMPXCHG_VAL(bits)
-    DEFINE_TSAN_ATOMIC_OPS(8);
-    DEFINE_TSAN_ATOMIC_OPS(16);
-    DEFINE_TSAN_ATOMIC_OPS(32);
+pub static mut 8: usize = 0;
+pub static mut 16: usize = 0;
+pub static mut 32: usize = 0;
 
-    DEFINE_TSAN_ATOMIC_OPS(64);
+pub static mut 64: usize = 0;
 
-    void __tsan_atomic_thread_fence(int memorder);
+// forward_decl: __tsan_atomic_thread_fence;
 #[no_mangle]
 pub unsafe extern "C" fn __tsan_atomic_thread_fence(memorder: c_int) {
-    void __tsan_atomic_thread_fence(int memorder)
-    {
     kcsan_atomic_builtin_memorder(memorder);
     __atomic_thread_fence(memorder);
     }
@@ -1229,68 +1460,71 @@ pub unsafe extern "C" fn __tsan_atomic_thread_fence(memorder: c_int) {
 // couldn't optimize much anyway. The result of a hypothetical architecture
 // using __atomic_signal_fence() in normal code would be KCSAN false negatives.
 //
-    void __tsan_atomic_signal_fence(int memorder);
+// forward_decl: __tsan_atomic_signal_fence;
 #[no_mangle]
 pub unsafe extern "C" fn __tsan_atomic_signal_fence(memorder: c_int) -> noinline void {
-    noinline void __tsan_atomic_signal_fence(int memorder)
-    {
-    switch (memorder) {
-    case __KCSAN_BARRIER_TO_SIGNAL_FENCE_mb:
+    match (memorder) {
+    __KCSAN_BARRIER_TO_SIGNAL_FENCE_mb => {
     __kcsan_mb();
-    break;
-    case __KCSAN_BARRIER_TO_SIGNAL_FENCE_wmb:
+    // break;
+    }
+    __KCSAN_BARRIER_TO_SIGNAL_FENCE_wmb => {
     __kcsan_wmb();
-    break;
-    case __KCSAN_BARRIER_TO_SIGNAL_FENCE_rmb:
+    // break;
+    }
+    __KCSAN_BARRIER_TO_SIGNAL_FENCE_rmb => {
     __kcsan_rmb();
-    break;
-    case __KCSAN_BARRIER_TO_SIGNAL_FENCE_release:
+    // break;
+    }
+    __KCSAN_BARRIER_TO_SIGNAL_FENCE_release => {
     __kcsan_release();
-    break;
-    default:
-    break;
+    // break;
+    }
+    _ => {
+    // break;
+    }
     }
     }
     EXPORT_SYMBOL(__tsan_atomic_signal_fence);
 
-    void *__tsan_memset(void *s, int c, size_t count);
+// forward_decl: __tsan_memset;
     noinline void *__tsan_memset(void *s, int c, size_t count)
     {
 //
 // Instead of not setting up watchpoints where accessed size is greater
 // than MAX_ENCODABLE_SIZE, truncate checked size to MAX_ENCODABLE_SIZE.
 //
-    let mut check_len: usize = min_t(size_t, count, MAX_ENCODABLE_SIZE);
+pub static mut check_len: usize = 0;
     check_access(s, check_len, KCSAN_ACCESS_WRITE, _RET_IP_);
     return memset(s, c, count);
     }
 
-    void *__tsan_memset(void *s, int c, size_t count) __alias(memset);
+// forward_decl: __tsan_memset;
 
     EXPORT_SYMBOL(__tsan_memset);
 
-    void *__tsan_memmove(void *dst, const void *src, size_t len);
+// forward_decl: __tsan_memmove;
     noinline void *__tsan_memmove(void *dst, const void *src, size_t len)
     {
-    let mut check_len: usize = min_t(size_t, len, MAX_ENCODABLE_SIZE);
+pub static mut check_len: usize = 0;
     check_access(dst, check_len, KCSAN_ACCESS_WRITE, _RET_IP_);
     check_access(src, check_len, 0, _RET_IP_);
     return memmove(dst, src, len);
     }
 
-    void *__tsan_memmove(void *dst, const void *src, size_t len) __alias(memmove);
+// forward_decl: __tsan_memmove;
 
     EXPORT_SYMBOL(__tsan_memmove);
 
-    void *__tsan_memcpy(void *dst, const void *src, size_t len);
+// forward_decl: __tsan_memcpy;
     noinline void *__tsan_memcpy(void *dst, const void *src, size_t len)
     {
-    let mut check_len: usize = min_t(size_t, len, MAX_ENCODABLE_SIZE);
+pub static mut check_len: usize = 0;
     check_access(dst, check_len, KCSAN_ACCESS_WRITE, _RET_IP_);
     check_access(src, check_len, 0, _RET_IP_);
     return memcpy(dst, src, len);
     }
 
-    void *__tsan_memcpy(void *dst, const void *src, size_t len) __alias(memcpy);
+// forward_decl: __tsan_memcpy;
 
     EXPORT_SYMBOL(__tsan_memcpy);

@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -52,15 +302,14 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Copyright (c) 2007-2010 Paul Mundt <lethal@linux-sh.org>
 //
 
-    unsigned long highest_memmap_pfn;
-    let mut heap_stack_gap: c_int = 0;
-    atomic_long_t mmap_pages_allocated;
+    let mut highest_memmap_pfn = 0;
+pub static mut heap_stack_gap: c_int = 0;
+    let mut mmap_pages_allocated;
 // list of mapped, potentially shareable regions
-    static struct kmem_cache *vm_region_jar;
-    let mut nommu_region_tree: rb_root = RB_ROOT;
-    DECLARE_RWSEM(nommu_region_sem);
-    const struct vm_operations_struct generic_file_vm_ops = {
-    };
+pub static mut vm_region_jar: *mut c_void = core::ptr::null_mut();
+pub static mut nommu_region_tree: rb_root = 0;
+pub static mut nommu_region_sem: usize = 0;
+pub static mut vm_operations_struct: usize = 0;
 //
 // Return the total memory allocated for this pointer, not
 // just what the caller asked for.
@@ -69,22 +318,22 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 #[no_mangle]
 pub unsafe extern "C" fn kobjsize(objp: *const c_void) -> c_uint {
-    unsigned int kobjsize(const void *objp)
-    {
-    struct folio *folio;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
 //
 // If the object we have should not have ksize performed on it,
 // return size of 0
 //
-    if (!objp || !virt_addr_valid(objp))
+    if (!objp || !virt_addr_valid(objp)) {
     return 0;
+    }
     folio = virt_to_folio(objp);
 //
 // If the allocator sets PageSlab, we know the pointer came from
 // kmalloc().
 //
-    if (folio_test_slab(folio))
+    if (folio_test_slab(folio)) {
     return ksize(objp);
+    }
 //
 // If it's not a large folio, see if we have a matching VMA
 // region. This test is intentionally done in reverse order,
@@ -92,10 +341,11 @@ pub unsafe extern "C" fn kobjsize(objp: *const c_void) -> c_uint {
 // PAGE_SIZE for 0-order folios.
 //
     if (!folio_test_large(folio)) {
-    struct vm_area_struct *vma;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
     vma = find_vma(current.mm, (unsigned long)objp);
-    if (vma)
+    if (vma) {
     return vma.vm_end - vma.vm_start;
+    }
     }
 //
 // The ksize() function is only guaranteed to work for pointers
@@ -105,13 +355,11 @@ pub unsafe extern "C" fn kobjsize(objp: *const c_void) -> c_uint {
     }
 #[no_mangle]
 pub unsafe extern "C" fn vfree(addr: *const c_void) {
-    void vfree(const void *addr)
-    {
     kfree(addr);
     }
     EXPORT_SYMBOL(vfree);
-    void *__vmalloc_noprof(unsigned long size, gfp_t gfp_mask)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __vmalloc_noprof(size: c_ulong, gfp_mask: gfp_t) -> *mut c_void {
 //
 // You can't specify __GFP_HIGHMEM with kmalloc() since kmalloc()
 // returns only a logical address.
@@ -119,61 +367,54 @@ pub unsafe extern "C" fn vfree(addr: *const c_void) {
     return kmalloc_noprof(size, (gfp_mask | __GFP_COMP) & ~__GFP_HIGHMEM);
     }
     EXPORT_SYMBOL(__vmalloc_noprof);
-    void *vrealloc_node_align_noprof(const void *p, size_t size, unsigned long align,
-    gfp_t flags, int node)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn vrealloc_node_align_noprof(p: *mut c_void, size: size_t, align: c_ulong, flags: gfp_t, node: c_int) -> *mut c_void {
     return krealloc_noprof(p, size, (flags | __GFP_COMP) & ~__GFP_HIGHMEM);
     }
-    void *__vmalloc_node_range_noprof(unsigned long size, unsigned long align,
-    unsigned long start, unsigned long end, gfp_t gfp_mask,
-    pgprot_t prot, unsigned long vm_flags, int node,
-    const void *caller)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __vmalloc_node_range_noprof(size: c_ulong, align: c_ulong, start: c_ulong, end: c_ulong, gfp_mask: gfp_t, prot: pgprot_t, vm_flags: c_ulong, node: c_int, caller: *mut c_void) -> *mut c_void {
     return __vmalloc_noprof(size, gfp_mask);
     }
-    void *__vmalloc_node_noprof(unsigned long size, unsigned long align, gfp_t gfp_mask,
-    int node, const void *caller)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __vmalloc_node_noprof(size: c_ulong, align: c_ulong, gfp_mask: gfp_t, node: c_int, caller: *mut c_void) -> *mut c_void {
     return __vmalloc_noprof(size, gfp_mask);
     }
-    static void *__vmalloc_user_flags(unsigned long size, gfp_t flags)
-    {
-    void *ret;
+#[no_mangle]
+pub unsafe extern "C" fn __vmalloc_user_flags(size: c_ulong, flags: gfp_t) -> *mut c_void {
+pub static mut ret: *mut c_void = core::ptr::null_mut();
     ret = __vmalloc(size, flags);
     if (ret) {
-    struct vm_area_struct *vma;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
     mmap_write_lock(current.mm);
     vma = find_vma(current.mm, (unsigned long)ret);
-    if (vma)
+    if (vma) {
     vm_flags_set(vma, VM_USERMAP);
+    }
     mmap_write_unlock(current.mm);
     }
     return ret;
     }
-    void *vmalloc_user_noprof(unsigned long size)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn vmalloc_user_noprof(size: c_ulong) -> *mut c_void {
     return __vmalloc_user_flags(size, GFP_KERNEL | __GFP_ZERO);
     }
     EXPORT_SYMBOL(vmalloc_user_noprof);
-    struct page *vmalloc_to_page(const void *addr)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn vmalloc_to_page(addr: *mut c_void) -> *mut c_void {
     return virt_to_page(addr);
     }
     EXPORT_SYMBOL(vmalloc_to_page);
 #[no_mangle]
 pub unsafe extern "C" fn vmalloc_to_pfn(addr: *const c_void) -> c_ulong {
-    unsigned long vmalloc_to_pfn(const void *addr)
-    {
     return page_to_pfn(virt_to_page(addr));
     }
     EXPORT_SYMBOL(vmalloc_to_pfn);
 #[no_mangle]
 pub unsafe extern "C" fn vread_iter(iter: *mut iov_iter, addr: *const c_char, count: usize) -> c_long {
-    long vread_iter(struct iov_iter *iter, const char *addr, size_t count)
-    {
 // Don't allow overflow
-    if ((unsigned long) addr + count < count)
+    if ((unsigned long) addr + count < count) {
     count = -(unsigned long) addr;
+    }
     return copy_to_iter(addr, count, iter);
     }
 //
@@ -187,8 +428,8 @@ pub unsafe extern "C" fn vread_iter(iter: *mut iov_iter, addr: *const c_char, co
 // For tight control over page level allocator and protection flags
 // use __vmalloc() instead.
 //
-    void *vmalloc_noprof(unsigned long size)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn vmalloc_noprof(size: c_ulong) -> *mut c_void {
     return __vmalloc_noprof(size, GFP_KERNEL);
     }
     EXPORT_SYMBOL(vmalloc_noprof);
@@ -205,8 +446,8 @@ pub unsafe extern "C" fn vread_iter(iter: *mut iov_iter, addr: *const c_char, co
 // Due to NOMMU implications the node argument and HUGE page attribute is
 // ignored.
 //
-    void *vmalloc_huge_node_noprof(unsigned long size, gfp_t gfp_mask, int node)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn vmalloc_huge_node_noprof(size: c_ulong, gfp_mask: gfp_t, node: c_int) -> *mut c_void {
     return __vmalloc_noprof(size, gfp_mask);
     }
 //
@@ -221,8 +462,8 @@ pub unsafe extern "C" fn vread_iter(iter: *mut iov_iter, addr: *const c_char, co
 // For tight control over page level allocator and protection flags
 // use __vmalloc() instead.
 //
-    void *vzalloc_noprof(unsigned long size)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn vzalloc_noprof(size: c_ulong) -> *mut c_void {
     return __vmalloc_noprof(size, GFP_KERNEL | __GFP_ZERO);
     }
     EXPORT_SYMBOL(vzalloc_noprof);
@@ -237,8 +478,8 @@ pub unsafe extern "C" fn vread_iter(iter: *mut iov_iter, addr: *const c_char, co
 // For tight control over page level allocator and protection flags
 // use __vmalloc() instead.
 //
-    void *vmalloc_node_noprof(unsigned long size, int node)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn vmalloc_node_noprof(size: c_ulong, node: c_int) -> *mut c_void {
     return vmalloc_noprof(size);
     }
     EXPORT_SYMBOL(vmalloc_node_noprof);
@@ -254,8 +495,8 @@ pub unsafe extern "C" fn vread_iter(iter: *mut iov_iter, addr: *const c_char, co
 // For tight control over page level allocator and protection flags
 // use __vmalloc() instead.
 //
-    void *vzalloc_node_noprof(unsigned long size, int node)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn vzalloc_node_noprof(size: c_ulong, node: c_int) -> *mut c_void {
     return vzalloc_noprof(size);
     }
     EXPORT_SYMBOL(vzalloc_node_noprof);
@@ -266,8 +507,8 @@ pub unsafe extern "C" fn vread_iter(iter: *mut iov_iter, addr: *const c_char, co
 // Allocate enough 32bit PA addressable pages to cover @size from the
 // page level allocator and map them into contiguous kernel virtual space.
 //
-    void *vmalloc_32_noprof(unsigned long size)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn vmalloc_32_noprof(size: c_ulong) -> *mut c_void {
     return __vmalloc_noprof(size, GFP_KERNEL);
     }
     EXPORT_SYMBOL(vmalloc_32_noprof);
@@ -281,8 +522,8 @@ pub unsafe extern "C" fn vread_iter(iter: *mut iov_iter, addr: *const c_char, co
 // VM_USERMAP is set on the corresponding VMA so that subsequent calls to
 // remap_vmalloc_range() are permissible.
 //
-    void *vmalloc_32_user_noprof(unsigned long size)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn vmalloc_32_user_noprof(size: c_ulong) -> *mut c_void {
 //
 // We'll have to sort out the ZONE_DMA bits for 64-bit,
 // but for now this can simply use vmalloc_user() directly.
@@ -290,66 +531,54 @@ pub unsafe extern "C" fn vread_iter(iter: *mut iov_iter, addr: *const c_char, co
     return vmalloc_user_noprof(size);
     }
     EXPORT_SYMBOL(vmalloc_32_user_noprof);
-    void *vmap(struct page **pages, unsigned int count, unsigned long flags, pgprot_t prot)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn vmap(pages: *mut *mut page, count: c_uint, flags: c_ulong, prot: pgprot_t) -> *mut c_void {
     BUG();
     return core::ptr::null_mut();
     }
     EXPORT_SYMBOL(vmap);
 #[no_mangle]
 pub unsafe extern "C" fn vunmap(addr: *const c_void) {
-    void vunmap(const void *addr)
-    {
     BUG();
     }
     EXPORT_SYMBOL(vunmap);
-    void *vm_map_ram(struct page **pages, unsigned int count, int node)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn vm_map_ram(pages: *mut *mut page, count: c_uint, node: c_int) -> *mut c_void {
     BUG();
     return core::ptr::null_mut();
     }
     EXPORT_SYMBOL(vm_map_ram);
 #[no_mangle]
 pub unsafe extern "C" fn vm_unmap_ram(mem: *const c_void, count: c_uint) {
-    void vm_unmap_ram(const void *mem, unsigned int count)
-    {
     BUG();
     }
     EXPORT_SYMBOL(vm_unmap_ram);
 #[no_mangle]
 pub unsafe extern "C" fn vm_unmap_aliases() {
-    void vm_unmap_aliases(void)
-    {
     }
     EXPORT_SYMBOL_GPL(vm_unmap_aliases);
 #[no_mangle]
 pub unsafe extern "C" fn free_vm_area(area: *mut vm_struct) {
-    void free_vm_area(struct vm_struct *area)
-    {
     BUG();
     }
     EXPORT_SYMBOL_GPL(free_vm_area);
-    int vm_insert_page(struct vm_area_struct *vma, unsigned long addr,
-    struct page *page)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn vm_insert_page(vma: *mut vm_area_struct, addr: c_ulong, page: *mut page) -> c_int {
     return -EINVAL;
     }
     EXPORT_SYMBOL(vm_insert_page);
-    int vm_insert_pages(struct vm_area_struct *vma, unsigned long addr,
-    struct page **pages, unsigned long *num)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn vm_insert_pages(vma: *mut vm_area_struct, addr: c_ulong, pages: *mut *mut page, num: *mut c_ulong) -> c_int {
     return -EINVAL;
     }
     EXPORT_SYMBOL(vm_insert_pages);
-    int vm_map_pages(struct vm_area_struct *vma, struct page **pages,
-    unsigned long num)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn vm_map_pages(vma: *mut vm_area_struct, pages: *mut *mut page, num: c_ulong) -> c_int {
     return -EINVAL;
     }
     EXPORT_SYMBOL(vm_map_pages);
-    int vm_map_pages_zero(struct vm_area_struct *vma, struct page **pages,
-    unsigned long num)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn vm_map_pages_zero(vma: *mut vm_area_struct, pages: *mut *mut page, num: c_ulong) -> c_int {
     return -EINVAL;
     }
     EXPORT_SYMBOL(vm_map_pages_zero);
@@ -360,13 +589,15 @@ pub unsafe extern "C" fn free_vm_area(area: *mut vm_struct) {
 // to a regular file.  in this case, the unmapping will need
 // to invoke file system routines that need the global lock.
 //
-    SYSCALL_DEFINE1(brk, unsigned long, brk)
-    {
-    struct mm_struct *mm = current.mm;
-    if (brk < mm.start_brk || brk > mm.context.end_brk)
+#[no_mangle]
+pub unsafe extern "C" fn sys_brk(brk: usize) -> c_long {
+    let mut mm = current.mm;
+    if (brk < mm.start_brk || brk > mm.context.end_brk) {
     return mm.brk;
-    if (mm.brk == brk)
+    }
+    if (mm.brk == brk) {
     return mm.brk;
+    }
 //
 // Always allow shrinking brk
 //
@@ -380,26 +611,15 @@ pub unsafe extern "C" fn free_vm_area(area: *mut vm_struct) {
     flush_icache_user_range(mm.brk, brk);
     return mm.brk = brk;
     }
-    let mut sysctl_nr_trim_pages: static int = CONFIG_NOMMU_INITIAL_TRIM_EXCESS;
-    static const struct ctl_table nommu_table[] = {
-    {
-    .procname	= "nr_trim_pages",
-    .data		= &sysctl_nr_trim_pages,
-    .maxlen		= sizeof(sysctl_nr_trim_pages),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec_minmax,
-    .extra1		= SYSCTL_ZERO,
-    },
-    };
+pub static mut sysctl_nr_trim_pages: int = 0;
+pub static mut ctl_table: usize = 0;
 //
 // initialise the percpu counter for VM and region record slabs, initialise VMA
 // state.
 //
 #[no_mangle]
-pub unsafe extern "C" fn mmap_init() -> void __init {
-    void __init mmap_init(void)
-    {
-    int ret;
+pub unsafe extern "C" fn mmap_init()  {
+    let mut ret = 0;
     ret = percpu_counter_init(&vm_committed_as, 0, GFP_KERNEL);
     VM_BUG_ON(ret);
     vm_region_jar = KMEM_CACHE(vm_region, SLAB_PANIC|SLAB_ACCOUNT);
@@ -413,30 +633,29 @@ pub unsafe extern "C" fn mmap_init() -> void __init {
 
 #[no_mangle]
 unsafe extern "C" fn validate_nommu_regions() -> noinline void {
-    static noinline void validate_nommu_regions(void)
-    {
-    struct vm_region *region, *last;
-    struct rb_node *p, *lastp;
+    let mut region = core::ptr::null_mut();
+    let mut last = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
+    let mut lastp = core::ptr::null_mut();
     lastp = rb_first(&nommu_region_tree);
-    if (!lastp)
+    if (!lastp) {
     return;
-    last = rb_entry(lastp, struct vm_region, vm_rb);
-    BUG_ON(last.vm_end <= last.vm_start);
-    BUG_ON(last.vm_top < last.vm_end);
+    }
+    last = rb_entry(lastp, vm_region, vm_rb);
+    BUG_ON!(last.vm_end <= last.vm_start);
+    BUG_ON!(last.vm_top < last.vm_end);
     while ((p = rb_next(lastp))) {
-    region = rb_entry(p, struct vm_region, vm_rb);
-    last = rb_entry(lastp, struct vm_region, vm_rb);
-    BUG_ON(region.vm_end <= region.vm_start);
-    BUG_ON(region.vm_top < region.vm_end);
-    BUG_ON(region.vm_start < last.vm_top);
+    region = rb_entry(p, vm_region, vm_rb);
+    last = rb_entry(lastp, vm_region, vm_rb);
+    BUG_ON!(region.vm_end <= region.vm_start);
+    BUG_ON!(region.vm_top < region.vm_end);
+    BUG_ON!(region.vm_start < last.vm_top);
     lastp = p;
     }
     }
 
 #[no_mangle]
 unsafe extern "C" fn validate_nommu_regions() {
-    static void validate_nommu_regions(void)
-    {
     }
 
 //
@@ -444,28 +663,29 @@ unsafe extern "C" fn validate_nommu_regions() {
 //
 #[no_mangle]
 unsafe extern "C" fn add_nommu_region(region: *mut vm_region) {
-    static void add_nommu_region(struct vm_region *region)
-    {
-    struct vm_region *pregion;
-    struct rb_node **p, *parent;
+pub static mut pregion: *mut c_void = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
+    let mut parent = core::ptr::null_mut();
     validate_nommu_regions();
     parent = core::ptr::null_mut();
     p = &nommu_region_tree.rb_node;
     while (*p) {
     parent = *p;
-    pregion = rb_entry(parent, struct vm_region, vm_rb);
-    if (region.vm_start < pregion.vm_start)
+    pregion = rb_entry(parent, vm_region, vm_rb);
+    if (region.vm_start < pregion.vm_start) {
     p = &(*p).rb_left;
-#[no_mangle]
-pub unsafe extern "C" fn if(pregion->vm_start: region->vm_start >) -> else {
-    else if (region.vm_start > pregion.vm_start)
+    }
+
+    else if (region.vm_start > pregion.vm_start) {
     p = &(*p).rb_right;
-#[no_mangle]
-pub unsafe extern "C" fn if(region: pregion ==) -> else {
-    else if (pregion == region)
+    }
+
+    else if (pregion == region) {
     return;
-    else
+    }
+    else {
     BUG();
+    }
     }
     rb_link_node(&region.vm_rb, parent, p);
     rb_insert_color(&region.vm_rb, &nommu_region_tree);
@@ -476,9 +696,7 @@ pub unsafe extern "C" fn if(region: pregion ==) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn delete_nommu_region(region: *mut vm_region) {
-    static void delete_nommu_region(struct vm_region *region)
-    {
-    BUG_ON(!nommu_region_tree.rb_node);
+    BUG_ON!(!nommu_region_tree.rb_node);
     validate_nommu_regions();
     rb_erase(&region.vm_rb, &nommu_region_tree);
     validate_nommu_regions();
@@ -488,10 +706,8 @@ unsafe extern "C" fn delete_nommu_region(region: *mut vm_region) {
 //
 #[no_mangle]
 unsafe extern "C" fn free_page_series(from: c_ulong, to: c_ulong) {
-    static void free_page_series(unsigned long from, unsigned long to)
-    {
-    for (; from < to; from += PAGE_SIZE) {
-    struct page *page = virt_to_page((void *)from);
+    while (from < to) {
+    let mut page = virt_to_page(from);
     atomic_long_dec(&mmap_pages_allocated);
     put_page(page);
     }
@@ -504,20 +720,20 @@ unsafe extern "C" fn free_page_series(from: c_ulong, to: c_ulong) {
 //
 #[no_mangle]
 unsafe extern "C" fn __put_nommu_region(region: *mut vm_region) {
-    static void __put_nommu_region(struct vm_region *region)
-    __releases(nommu_region_sem)
-    {
-    BUG_ON(!nommu_region_tree.rb_node);
+    BUG_ON!(!nommu_region_tree.rb_node);
     if (--region.vm_usage == 0) {
-    if (region.vm_top > region.vm_start)
+    if (region.vm_top > region.vm_start) {
     delete_nommu_region(region);
+    }
     up_write(&nommu_region_sem);
-    if (region.vm_file)
+    if (region.vm_file) {
     fput(region.vm_file);
+    }
 // IO memory and memory shared directly out of the pagecache
 // from ramfs/tmpfs mustn't be released here
-    if (region.vm_flags & VM_MAPPED_COPY)
+    if (region.vm_flags & VM_MAPPED_COPY) {
     free_page_series(region.vm_start, region.vm_top);
+    }
     kmem_cache_free(vm_region_jar, region);
     } else {
     up_write(&nommu_region_sem);
@@ -528,19 +744,15 @@ unsafe extern "C" fn __put_nommu_region(region: *mut vm_region) {
 //
 #[no_mangle]
 unsafe extern "C" fn put_nommu_region(region: *mut vm_region) {
-    static void put_nommu_region(struct vm_region *region)
-    {
     down_write(&nommu_region_sem);
     __put_nommu_region(region);
     }
 #[no_mangle]
 unsafe extern "C" fn setup_vma_to_mm(vma: *mut vm_area_struct, mm: *mut mm_struct) {
-    static void setup_vma_to_mm(struct vm_area_struct *vma, struct mm_struct *mm)
-    {
     vma.vm_mm = mm;
 // add the VMA to the mapping
     if (vma.vm_file) {
-    struct address_space *mapping = vma.vm_file.f_mapping;
+    let mut mapping = vma.vm_file.f_mapping;
     i_mmap_lock_write(mapping);
     flush_dcache_mmap_lock(mapping);
     mapping_rmap_tree_insert(vma, mapping);
@@ -550,12 +762,10 @@ unsafe extern "C" fn setup_vma_to_mm(vma: *mut vm_area_struct, mm: *mut mm_struc
     }
 #[no_mangle]
 unsafe extern "C" fn cleanup_vma_from_mm(vma: *mut vm_area_struct) {
-    static void cleanup_vma_from_mm(struct vm_area_struct *vma)
-    {
-    vma.vm_mm.map_count--;
+    vma.vm_mm.map_count -= 1;
 // remove the VMA from the mapping
     if (vma.vm_file) {
-    struct address_space *mapping;
+pub static mut mapping: *mut c_void = core::ptr::null_mut();
     mapping = vma.vm_file.f_mapping;
     i_mmap_lock_write(mapping);
     flush_dcache_mmap_lock(mapping);
@@ -569,12 +779,10 @@ unsafe extern "C" fn cleanup_vma_from_mm(vma: *mut vm_area_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn delete_vma_from_mm(vma: *mut vm_area_struct) -> c_int {
-    static int delete_vma_from_mm(struct vm_area_struct *vma)
-    {
     VMA_ITERATOR(vmi, vma.vm_mm, vma.vm_start);
     vma_iter_config(&vmi, vma.vm_start, vma.vm_end);
     if (vma_iter_prealloc(&vmi, core::ptr::null_mut())) {
-    pr_warn("Allocation of vma tree for process %d failed\n",
+    pr_warn!("Allocation of vma tree for process %d failed\n",
     current.pid);
     return -ENOMEM;
     }
@@ -588,19 +796,16 @@ unsafe extern "C" fn delete_vma_from_mm(vma: *mut vm_area_struct) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn delete_vma(mm: *mut mm_struct, vma: *mut vm_area_struct) {
-    static void delete_vma(struct mm_struct *mm, struct vm_area_struct *vma)
-    {
     vma_close(vma);
-    if (vma.vm_file)
+    if (vma.vm_file) {
     fput(vma.vm_file);
+    }
     put_nommu_region(vma.vm_region);
     vm_area_free(vma);
     }
-    struct vm_area_struct *find_vma_intersection(struct mm_struct *mm,
-    unsigned long start_addr,
-    unsigned long end_addr)
-    {
-    let mut index: c_ulong = start_addr;
+#[no_mangle]
+pub unsafe extern "C" fn find_vma_intersection(mm: *mut mm_struct, start_addr: c_ulong, end_addr: c_ulong) -> *mut c_void {
+pub static mut index: c_ulong = 0;
     mmap_assert_locked(mm);
     return mt_find(&mm.mm_mt, &index, end_addr - 1);
     }
@@ -609,8 +814,8 @@ unsafe extern "C" fn delete_vma(mm: *mut mm_struct, vma: *mut vm_area_struct) {
 // look up the first VMA in which addr resides, NULL if none
 // - should be called with mm->mmap_lock at least held readlocked
 //
-    struct vm_area_struct *find_vma(struct mm_struct *mm, unsigned long addr)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn find_vma(mm: *mut mm_struct, addr: c_ulong) -> *mut c_void {
     VMA_ITERATOR(vmi, mm, addr);
     return vma_iter_load(&vmi);
     }
@@ -621,12 +826,10 @@ unsafe extern "C" fn delete_vma(mm: *mut mm_struct, vma: *mut vm_area_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn expand_stack_locked(vma: *mut vm_area_struct, addr: c_ulong) -> c_int {
-    int expand_stack_locked(struct vm_area_struct *vma, unsigned long addr)
-    {
     return -ENOMEM;
     }
-    struct vm_area_struct *expand_stack(struct mm_struct *mm, unsigned long addr)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn expand_stack(mm: *mut mm_struct, addr: c_ulong) -> *mut c_void {
     mmap_read_unlock(mm);
     return core::ptr::null_mut();
     }
@@ -634,55 +837,56 @@ pub unsafe extern "C" fn expand_stack_locked(vma: *mut vm_area_struct, addr: c_u
 // look up the first VMA exactly that exactly matches addr
 // - should be called with mm->mmap_lock at least held readlocked
 //
-    static struct vm_area_struct *find_vma_exact(struct mm_struct *mm,
-    unsigned long addr,
-    unsigned long len)
-    {
-    struct vm_area_struct *vma;
-    let mut end: c_ulong = addr + len;
+#[no_mangle]
+pub unsafe extern "C" fn find_vma_exact(mm: *mut mm_struct, addr: c_ulong, len: c_ulong) -> *mut c_void {
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+pub static mut end: c_ulong = 0;
     VMA_ITERATOR(vmi, mm, addr);
     vma = vma_iter_load(&vmi);
-    if (!vma)
+    if (!vma) {
     return core::ptr::null_mut();
-    if (vma.vm_start != addr)
+    }
+    if (vma.vm_start != addr) {
     return core::ptr::null_mut();
-    if (vma.vm_end != end)
+    }
+    if (vma.vm_end != end) {
     return core::ptr::null_mut();
+    }
     return vma;
     }
 //
 // determine whether a mapping should be permitted and, if so, what sort of
 // mapping we're capable of supporting
 //
-    static int validate_mmap_request(struct file *file,
-    unsigned long addr,
-    unsigned long len,
-    unsigned long prot,
-    unsigned long flags,
-    unsigned long pgoff,
-    unsigned long *_capabilities)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn validate_mmap_request(file: *mut file, addr: c_ulong, len: c_ulong, prot: c_ulong, flags: c_ulong, pgoff: c_ulong, _capabilities: *mut c_ulong) -> c_int {
     unsigned long capabilities, rlen;
-    int ret;
+    let mut ret = 0;
 // do the simple checks first
-    if (flags & MAP_FIXED)
+    if (flags & MAP_FIXED) {
     return -EINVAL;
+    }
     if ((flags & MAP_TYPE) != MAP_PRIVATE &&
-    (flags & MAP_TYPE) != MAP_SHARED)
+    (flags & MAP_TYPE) != MAP_SHARED) {
     return -EINVAL;
-    if (!len)
+    }
+    if (!len) {
     return -EINVAL;
+    }
 // Careful about overflows..
     rlen = PAGE_ALIGN(len);
-    if (!rlen || rlen > TASK_SIZE)
+    if (!rlen || rlen > TASK_SIZE) {
     return -ENOMEM;
+    }
 // offset overflow?
-    if ((pgoff + (rlen >> PAGE_SHIFT)) < pgoff)
+    if ((pgoff + (rlen >> PAGE_SHIFT)) < pgoff) {
     return -EOVERFLOW;
+    }
     if (file) {
 // files must support mmap
-    if (!can_mmap_file(file))
+    if (!can_mmap_file(file)) {
     return -ENODEV;
+    }
 // work out if what we've got could possibly be shared
 // - we support chardevs that provide their own "memory"
 // - we support files/blockdevs that are memory backed
@@ -703,40 +907,48 @@ pub unsafe extern "C" fn expand_stack_locked(vma: *mut vm_area_struct, addr: c_u
     NOMMU_MAP_READ |
     NOMMU_MAP_WRITE;
     break;
-    default:
+// label;
     return -EINVAL;
     }
     }
 // eliminate any capabilities that we can't support on this
 // device
-    if (!file.f_op.get_unmapped_area)
+    if (!file.f_op.get_unmapped_area) {
     capabilities &= ~NOMMU_MAP_DIRECT;
-    if (!(file.f_mode & FMODE_CAN_READ))
+    }
+    if (!(file.f_mode & FMODE_CAN_READ)) {
     capabilities &= ~NOMMU_MAP_COPY;
+    }
 // The file shall have been opened with read permission.
-    if (!(file.f_mode & FMODE_READ))
+    if (!(file.f_mode & FMODE_READ)) {
     return -EACCES;
+    }
     if (flags & MAP_SHARED) {
 // do checks for writing, appending and locking
     if ((prot & PROT_WRITE) &&
-    !(file.f_mode & FMODE_WRITE))
+    !(file.f_mode & FMODE_WRITE)) {
     return -EACCES;
+    }
     if (IS_APPEND(file_inode(file)) &&
-    (file.f_mode & FMODE_WRITE))
+    (file.f_mode & FMODE_WRITE)) {
     return -EACCES;
-    if (!(capabilities & NOMMU_MAP_DIRECT))
+    }
+    if (!(capabilities & NOMMU_MAP_DIRECT)) {
     return -ENODEV;
+    }
 // we mustn't privatise shared mappings
     capabilities &= ~NOMMU_MAP_COPY;
     } else {
 // we're going to read the file into private memory we
 // allocate
-    if (!(capabilities & NOMMU_MAP_COPY))
+    if (!(capabilities & NOMMU_MAP_COPY)) {
     return -ENODEV;
+    }
 // we don't permit a private writable mapping to be
 // shared with the backing device
-    if (prot & PROT_WRITE)
+    if (prot & PROT_WRITE) {
     capabilities &= ~NOMMU_MAP_DIRECT;
+    }
     }
     if (capabilities & NOMMU_MAP_DIRECT) {
     if (((prot & PROT_READ)  && !(capabilities & NOMMU_MAP_READ))  ||
@@ -745,7 +957,7 @@ pub unsafe extern "C" fn expand_stack_locked(vma: *mut vm_area_struct, addr: c_u
     ) {
     capabilities &= ~NOMMU_MAP_DIRECT;
     if (flags & MAP_SHARED) {
-    pr_warn("MAP_SHARED not completely supported on !MMU\n");
+    pr_warn!("MAP_SHARED not completely supported on !MMU\n");
     return -EINVAL;
     }
     }
@@ -753,13 +965,15 @@ pub unsafe extern "C" fn expand_stack_locked(vma: *mut vm_area_struct, addr: c_u
 // handle executable mappings and implied executable
 // mappings
     if (path_noexec(&file.f_path)) {
-    if (prot & PROT_EXEC)
+    if (prot & PROT_EXEC) {
     return -EPERM;
+    }
     } else if ((prot & PROT_READ) && !(prot & PROT_EXEC)) {
 // handle implication of PROT_EXEC by PROT_READ
     if (current.personality & READ_IMPLIES_EXEC) {
-    if (capabilities & NOMMU_MAP_EXEC)
+    if (capabilities & NOMMU_MAP_EXEC) {
     prot |= PROT_EXEC;
+    }
     }
     } else if ((prot & PROT_READ) &&
     (prot & PROT_EXEC) &&
@@ -775,13 +989,15 @@ pub unsafe extern "C" fn expand_stack_locked(vma: *mut vm_area_struct, addr: c_u
     capabilities = NOMMU_MAP_COPY;
 // handle PROT_EXEC implication by PROT_READ
     if ((prot & PROT_READ) &&
-    (current.personality & READ_IMPLIES_EXEC))
+    (current.personality & READ_IMPLIES_EXEC)) {
     prot |= PROT_EXEC;
+    }
     }
 // allow the security API to have its say
     ret = security_mmap_addr(addr);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
 // looks okay
 // _capabilities = capabilities;
     return 0;
@@ -790,12 +1006,12 @@ pub unsafe extern "C" fn expand_stack_locked(vma: *mut vm_area_struct, addr: c_u
 // we've determined that we can make the mapping, now translate what we
 // now know into VMA flags
 //
-    static vm_flags_t determine_vm_flags(struct file *file,
+    static vm_flags_t determine_vm_flags(file *file,
     unsigned long prot,
     unsigned long flags,
     unsigned long capabilities)
     {
-    vm_flags_t vm_flags;
+    let mut vm_flags;
     vm_flags = calc_vm_prot_bits(prot, 0) | calc_vm_flag_bits(file, flags);
     if (!file) {
 //
@@ -805,11 +1021,13 @@ pub unsafe extern "C" fn expand_stack_locked(vma: *mut vm_area_struct, addr: c_u
     vm_flags |= VM_MAYREAD | VM_MAYWRITE | VM_MAYEXEC;
     } else if (flags & MAP_PRIVATE) {
 // MAP_PRIVATE file mapping
-    if (capabilities & NOMMU_MAP_DIRECT)
+    if (capabilities & NOMMU_MAP_DIRECT) {
     vm_flags |= (capabilities & NOMMU_VMFLAGS);
-    else
+    }
+    else {
     vm_flags |= VM_MAYREAD | VM_MAYWRITE | VM_MAYEXEC;
-    if (!(prot & PROT_WRITE) && !current.ptrace)
+    }
+    if (!(prot & PROT_WRITE) && !current.ptrace) {
 //
 // R/O private file mapping which cannot be used to
 // modify memory, especially also not via active ptrace
@@ -819,6 +1037,7 @@ pub unsafe extern "C" fn expand_stack_locked(vma: *mut vm_area_struct, addr: c_u
 // ramfs/tmpfs/shmfs and romfs/cramf.
 //
     vm_flags |= VM_MAYOVERLAY;
+    }
     } else {
 // MAP_SHARED file mapping: NOMMU_MAP_DIRECT is set.
     vm_flags |= VM_SHARED | VM_MAYSHARE |
@@ -832,16 +1051,15 @@ pub unsafe extern "C" fn expand_stack_locked(vma: *mut vm_area_struct, addr: c_u
 //
 #[no_mangle]
 unsafe extern "C" fn do_mmap_shared_file(vma: *mut vm_area_struct) -> c_int {
-    static int do_mmap_shared_file(struct vm_area_struct *vma)
-    {
-    int ret;
+    let mut ret = 0;
     ret = mmap_file(vma.vm_file, vma);
     if (ret == 0) {
     vma.vm_region.vm_top = vma.vm_region.vm_end;
     return 0;
     }
-    if (ret != -ENOSYS)
+    if (ret != -ENOSYS) {
     return ret;
+    }
 // getting -ENOSYS indicates that direct mmap isn't possible (as
 // opposed to tried but failed) so we can only give a suitable error as
 // it's not possible to make a private copy if MAP_SHARED was given
@@ -850,14 +1068,12 @@ unsafe extern "C" fn do_mmap_shared_file(vma: *mut vm_area_struct) -> c_int {
 //
 // set up a private mapping or an anonymous shared mapping
 //
-    static int do_mmap_private(struct vm_area_struct *vma,
-    struct vm_region *region,
-    unsigned long len,
-    unsigned long capabilities)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn do_mmap_private(vma: *mut vm_area_struct, region: *mut vm_region, len: c_ulong, capabilities: c_ulong) -> c_int {
     unsigned long total, point;
-    void *base;
-    int ret, order;
+pub static mut base: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    let mut order = 0;
 //
 // Invoke the file's mapping function so that it can keep track of
 // shared mappings on devices or memory. VM_MAYOVERLAY will be set if
@@ -867,14 +1083,16 @@ unsafe extern "C" fn do_mmap_shared_file(vma: *mut vm_area_struct) -> c_int {
     if (capabilities & NOMMU_MAP_DIRECT) {
     ret = mmap_file(vma.vm_file, vma);
 // shouldn't return success if we're not sharing
-    if (WARN_ON_ONCE(!is_nommu_shared_mapping(vma.vm_flags)))
+    if (WARN_ON_ONCE!(!is_nommu_shared_mapping(vma.vm_flags))) {
     ret = -ENOSYS;
+    }
     if (ret == 0) {
     vma.vm_region.vm_top = vma.vm_region.vm_end;
     return 0;
     }
-    if (ret != -ENOSYS)
+    if (ret != -ENOSYS) {
     return ret;
+    }
 // getting an ENOSYS error indicates that direct mmap isn't
 // possible (as opposed to tried but failed) so we'll try to
 // make a private copy of the data and map that instead
@@ -887,11 +1105,13 @@ unsafe extern "C" fn do_mmap_shared_file(vma: *mut vm_area_struct) -> c_int {
     total = 1 << order;
     point = len >> PAGE_SHIFT;
 // we don't want to allocate a power-of-2 sized page set
-    if (sysctl_nr_trim_pages && total - point >= sysctl_nr_trim_pages)
+    if (sysctl_nr_trim_pages && total - point >= sysctl_nr_trim_pages) {
     total = point;
+    }
     base = alloc_pages_exact(total << PAGE_SHIFT, GFP_KERNEL);
-    if (!base)
-    goto enomem;
+    if (!base) {
+// goto;
+    }
     atomic_long_add(total, &mmap_pages_allocated);
     vm_flags_set(vma, VM_MAPPED_COPY);
     region.vm_flags = vma.vm_flags;
@@ -902,27 +1122,29 @@ unsafe extern "C" fn do_mmap_shared_file(vma: *mut vm_area_struct) -> c_int {
     vma.vm_end   = region.vm_start + len;
     if (vma.vm_file) {
 // read the contents of a file into the copy
-    loff_t fpos;
+    let mut fpos = 0;
     fpos = vma_start_pgoff(vma);
     fpos <<= PAGE_SHIFT;
     ret = kernel_read(vma.vm_file, base, len, &fpos);
-    if (ret < 0)
-    goto error_free;
+    if (ret < 0) {
+// goto;
+    }
 // clear the last little bit
-    if (ret < len)
+    if (ret < len) {
     memset(base + ret, 0, len - ret);
+    }
     } else {
     vma_set_anonymous(vma);
     }
     return 0;
-    error_free:
+// label;
     free_page_series(region.vm_start, region.vm_top);
     region.vm_start = vma.vm_start = 0;
     region.vm_end   = vma.vm_end = 0;
     region.vm_top   = 0;
     return ret;
-    enomem:
-    pr_err("Allocation of length %lu from process %d (%s) failed\n",
+// label;
+    pr_err!("Allocation of length %lu from process %d (%s) failed\n",
     len, current.pid, current.comm);
     show_mem();
     return -ENOMEM;
@@ -930,32 +1152,26 @@ unsafe extern "C" fn do_mmap_shared_file(vma: *mut vm_area_struct) -> c_int {
 //
 // handle mapping creation for uClinux
 //
-    unsigned long do_mmap(struct file *file,
-    unsigned long addr,
-    unsigned long len,
-    unsigned long prot,
-    unsigned long flags,
-    vma_flags_t vma_flags,
-    unsigned long pgoff,
-    unsigned long *populate,
-    struct list_head *uf)
-    {
-    let mut vm_flags: vm_flags_t = vma_flags_to_legacy(vma_flags);
-    struct vm_area_struct *vma;
-    struct vm_region *region;
-    struct rb_node *rb;
+#[no_mangle]
+pub unsafe extern "C" fn do_mmap(file: *mut file, addr: c_ulong, len: c_ulong, prot: c_ulong, flags: c_ulong, vma_flags: vma_flags_t, pgoff: c_ulong, populate: *mut c_ulong, uf: *mut list_head) -> c_ulong {
+pub static mut vm_flags: vm_flags_t = 0;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+pub static mut region: *mut c_void = core::ptr::null_mut();
+pub static mut rb: *mut c_void = core::ptr::null_mut();
     unsigned long capabilities, result;
-    int ret;
+    let mut ret = 0;
     VMA_ITERATOR(vmi, current.mm, 0);
 // populate = 0;
 // decide whether we should attempt the mapping, and if so what sort of
 // mapping
     ret = validate_mmap_request(file, addr, len, prot, flags, pgoff,
     &capabilities);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
-    if (current.mm.map_count >= get_sysctl_max_map_count())
+    }
+    if (current.mm.map_count >= get_sysctl_max_map_count()) {
     return -ENOMEM;
+    }
 // we ignore the address hint
     addr = 0;
     len = PAGE_ALIGN(len);
@@ -964,11 +1180,13 @@ unsafe extern "C" fn do_mmap_shared_file(vma: *mut vm_area_struct) -> c_int {
     vm_flags |= determine_vm_flags(file, prot, flags, capabilities);
 // we're going to need to record the mapping
     region = kmem_cache_zalloc(vm_region_jar, GFP_KERNEL);
-    if (!region)
-    goto error_getting_region;
+    if (!region) {
+// goto;
+    }
     vma = vm_area_alloc(current.mm);
-    if (!vma)
-    goto error_getting_vma;
+    if (!vma) {
+// goto;
+    }
     region.vm_usage = 1;
     region.vm_flags = vm_flags;
     region.vm_pgoff = pgoff;
@@ -988,59 +1206,65 @@ unsafe extern "C" fn do_mmap_shared_file(vma: *mut vm_area_struct) -> c_int {
 // than here
 //
     if (is_nommu_shared_mapping(vm_flags)) {
-    struct vm_region *pregion;
+pub static mut pregion: *mut c_void = core::ptr::null_mut();
     unsigned long pglen, rpglen, pgend, rpgend, start;
     pglen = (len + PAGE_SIZE - 1) >> PAGE_SHIFT;
     pgend = pgoff + pglen;
     for (rb = rb_first(&nommu_region_tree); rb; rb = rb_next(rb)) {
-    pregion = rb_entry(rb, struct vm_region, vm_rb);
-    if (!is_nommu_shared_mapping(pregion.vm_flags))
+    pregion = rb_entry(rb, vm_region, vm_rb);
+    if (!is_nommu_shared_mapping(pregion.vm_flags)) {
     continue;
+    }
 // search for overlapping mappings on the same file
     if (file_inode(pregion.vm_file) !=
-    file_inode(file))
+    file_inode(file)) {
     continue;
-    if (pregion.vm_pgoff >= pgend)
+    }
+    if (pregion.vm_pgoff >= pgend) {
     continue;
+    }
     rpglen = pregion.vm_end - pregion.vm_start;
     rpglen = (rpglen + PAGE_SIZE - 1) >> PAGE_SHIFT;
     rpgend = pregion.vm_pgoff + rpglen;
-    if (pgoff >= rpgend)
+    if (pgoff >= rpgend) {
     continue;
+    }
 // handle inexactly overlapping matches between
 // mappings
     if ((pregion.vm_pgoff != pgoff || rpglen != pglen) &&
     !(pgoff >= pregion.vm_pgoff && pgend <= rpgend)) {
 // new mapping is not a subset of the region
-    if (!(capabilities & NOMMU_MAP_DIRECT))
-    goto sharing_violation;
+    if (!(capabilities & NOMMU_MAP_DIRECT)) {
+// goto;
+    }
     continue;
     }
 // we've found a region we can share
-    pregion.vm_usage++;
+    pregion.vm_usage += 1;
     vma.vm_region = pregion;
     start = pregion.vm_start;
     start += (pgoff - pregion.vm_pgoff) << PAGE_SHIFT;
     vma.vm_start = start;
     vma.vm_end = start + len;
-    if (pregion.vm_flags & VM_MAPPED_COPY)
+    if (pregion.vm_flags & VM_MAPPED_COPY) {
     vm_flags_set(vma, VM_MAPPED_COPY);
+    }
     else {
     ret = do_mmap_shared_file(vma);
     if (ret < 0) {
     vma.vm_region = core::ptr::null_mut();
     vma.vm_start = 0;
     vma.vm_end = 0;
-    pregion.vm_usage--;
+    pregion.vm_usage -= 1;
     pregion = core::ptr::null_mut();
-    goto error_just_free;
+// goto;
     }
     }
     fput(region.vm_file);
     kmem_cache_free(vm_region_jar, region);
     region = pregion;
     result = start;
-    goto share;
+// goto;
     }
 // obtain the address at which to make a shared mapping
 // - this is the hook for quasi-memory character devices to
@@ -1051,14 +1275,16 @@ unsafe extern "C" fn do_mmap_shared_file(vma: *mut vm_area_struct) -> c_int {
     pgoff, flags);
     if (IS_ERR_VALUE(addr)) {
     ret = addr;
-    if (ret != -ENOSYS)
-    goto error_just_free;
+    if (ret != -ENOSYS) {
+// goto;
+    }
 // the driver refused to tell us where to site
 // the mapping so we'll have to attempt to copy
 // it
     ret = -ENODEV;
-    if (!(capabilities & NOMMU_MAP_COPY))
-    goto error_just_free;
+    if (!(capabilities & NOMMU_MAP_COPY)) {
+// goto;
+    }
     capabilities &= ~NOMMU_MAP_DIRECT;
     } else {
     vma.vm_start = region.vm_start = addr;
@@ -1070,29 +1296,34 @@ unsafe extern "C" fn do_mmap_shared_file(vma: *mut vm_area_struct) -> c_int {
 // set up the mapping
 // - the region is filled in if NOMMU_MAP_DIRECT is still set
 //
-    if (file && vma.vm_flags & VM_SHARED)
+    if (file && vma.vm_flags & VM_SHARED) {
     ret = do_mmap_shared_file(vma);
-    else
+    }
+    else {
     ret = do_mmap_private(vma, region, len, capabilities);
-    if (ret < 0)
-    goto error_just_free;
+    }
+    if (ret < 0) {
+// goto;
+    }
 // clear anonymous mappings that don't ask for uninitialized data
     if (!vma.vm_file &&
-    (!IS_ENABLED(CONFIG_MMAP_ALLOW_UNINITIALIZED) ||
-    !(flags & MAP_UNINITIALIZED)))
-    memset((void *)region.vm_start, 0,
+    (!IS_ENABLED!(CONFIG_MMAP_ALLOW_UNINITIALIZED) ||
+    !(flags & MAP_UNINITIALIZED))) {
+    memset(region.vm_start, 0,
     region.vm_end - region.vm_start);
+    }
 // okay... we have a mapping; now we have to register it
     result = vma.vm_start;
     current.mm.total_vm += len >> PAGE_SHIFT;
-    share:
-    BUG_ON(!vma.vm_region);
+// label;
+    BUG_ON!(!vma.vm_region);
     vma_iter_config(&vmi, vma.vm_start, vma.vm_end);
-    if (vma_iter_prealloc(&vmi, vma))
-    goto error_vma_iter_prealloc;
+    if (vma_iter_prealloc(&vmi, vma)) {
+// goto;
+    }
     add_nommu_region(region);
     setup_vma_to_mm(vma, current.mm);
-    current.mm.map_count++;
+    current.mm.map_count += 1;
 // add the VMA to the tree
     vma_iter_store_new(&vmi, vma);
 // we flush the region from the icache only when the first executable
@@ -1103,69 +1334,71 @@ unsafe extern "C" fn do_mmap_shared_file(vma: *mut vm_area_struct) -> c_int {
     }
     up_write(&nommu_region_sem);
     return result;
-    error_just_free:
+// label;
     vma_close(vma);
 // if the error was from shared mapping/existing region, don't free the region.
 // this has to be before releasing semaphore.
 //
     if (region.vm_usage == 1) {
-    if (region.vm_file)
+    if (region.vm_file) {
     fput(region.vm_file);
+    }
     kmem_cache_free(vm_region_jar, region);
-    } else
-    region.vm_usage--;
+    } else {
+    region.vm_usage -= 1;
+    }
     up_write(&nommu_region_sem);
     vma_iter_free(&vmi);
-    if (vma.vm_file)
+    if (vma.vm_file) {
     fput(vma.vm_file);
+    }
     vm_area_free(vma);
     return ret;
-    sharing_violation:
-    pr_warn("Attempt to share mismatched mappings\n");
+// label;
+    pr_warn!("Attempt to share mismatched mappings\n");
     ret = -EINVAL;
-    goto error_just_free;
-    error_vma_iter_prealloc:
-    pr_warn("Allocation of vma iterator for process %d failed\n", current.pid);
+// goto;
+// label;
+    pr_warn!("Allocation of vma iterator for process %d failed\n", current.pid);
     show_mem();
     ret = -ENOMEM;
 // in case that the region is allocated via do_mmap_private()
-    if ((region.vm_usage == 1) && (region.vm_flags & VM_MAPPED_COPY))
+    if ((region.vm_usage == 1) && (region.vm_flags & VM_MAPPED_COPY)) {
     free_page_series(region.vm_start, region.vm_top);
-    goto error_just_free;
-    error_getting_vma:
+    }
+// goto;
+// label;
     kmem_cache_free(vm_region_jar, region);
-    pr_warn("Allocation of vma for %lu byte allocation from process %d failed\n",
+    pr_warn!("Allocation of vma for %lu byte allocation from process %d failed\n",
     len, current.pid);
     show_mem();
     return -ENOMEM;
-    error_getting_region:
-    pr_warn("Allocation of vm region for %lu byte allocation from process %d failed\n",
+// label;
+    pr_warn!("Allocation of vm region for %lu byte allocation from process %d failed\n",
     len, current.pid);
     show_mem();
     return -ENOMEM;
     }
-    unsigned long ksys_mmap_pgoff(unsigned long addr, unsigned long len,
-    unsigned long prot, unsigned long flags,
-    unsigned long fd, unsigned long pgoff)
-    {
-    struct file *file = core::ptr::null_mut();
-    let mut retval: c_ulong = -EBADF;
+#[no_mangle]
+pub unsafe extern "C" fn ksys_mmap_pgoff(addr: c_ulong, len: c_ulong, prot: c_ulong, flags: c_ulong, fd: c_ulong, pgoff: c_ulong) -> c_ulong {
+    let mut file = core::ptr::null_mut();
+pub static mut retval: c_ulong = 0;
     audit_mmap_fd(fd, flags);
     if (!(flags & MAP_ANONYMOUS)) {
     file = fget(fd);
-    if (!file)
-    goto out;
+    if (!file) {
+// goto;
+    }
     }
     retval = vm_mmap_pgoff(file, addr, len, prot, flags, pgoff);
-    if (file)
+    if (file) {
     fput(file);
-    out:
+    }
+// label;
     return retval;
     }
-    SYSCALL_DEFINE6(mmap_pgoff, unsigned long, addr, unsigned long, len,
-    unsigned long, prot, unsigned long, flags,
-    unsigned long, fd, unsigned long, pgoff)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_mmap_pgoff(addr: usize, len: usize, prot: usize, flags: usize, fd: usize, pgoff: usize) -> c_long {
     return ksys_mmap_pgoff(addr, len, prot, flags, fd, pgoff);
     }
 
@@ -1180,13 +1413,15 @@ pub struct mmap_arg_struct {
     pub offset: c_ulong,
 }
 
-    SYSCALL_DEFINE1(old_mmap, struct mmap_arg_struct __user *, arg)
-    {
-    struct mmap_arg_struct a;
-    if (copy_from_user(&a, arg, sizeof(a)))
+#[no_mangle]
+pub unsafe extern "C" fn sys_old_mmap(arg: usize) -> c_long {
+pub static mut a: usize = 0;
+    if (copy_from_user(&a, arg, sizeof!(a))) {
     return -EFAULT;
-    if (offset_in_page(a.offset))
+    }
+    if (offset_in_page(a.offset)) {
     return -EINVAL;
+    }
     return ksys_mmap_pgoff(a.addr, a.len, a.prot, a.flags, a.fd,
     a.offset >> PAGE_SHIFT);
     }
@@ -1195,26 +1430,29 @@ pub struct mmap_arg_struct {
 // split a vma into two pieces at address 'addr', a new vma is allocated either
 // for the first part or the tail.
 //
-    static int split_vma(struct vma_iterator *vmi, struct vm_area_struct *vma,
-    unsigned long addr, int new_below)
-    {
-    struct vm_area_struct *new;
-    struct vm_region *region;
-    unsigned long npages;
-    struct mm_struct *mm;
+#[no_mangle]
+pub unsafe extern "C" fn split_vma(vmi: *mut vma_iterator, vma: *mut vm_area_struct, addr: c_ulong, new_below: c_int) -> c_int {
+pub static mut new: *mut c_void = core::ptr::null_mut();
+pub static mut region: *mut c_void = core::ptr::null_mut();
+    let mut npages = 0;
+pub static mut mm: *mut c_void = core::ptr::null_mut();
 // we're only permitted to split anonymous regions (these should have
 // only a single usage on the region)
-    if (vma.vm_file)
+    if (vma.vm_file) {
     return -ENOMEM;
+    }
     mm = vma.vm_mm;
-    if (mm.map_count >= get_sysctl_max_map_count())
+    if (mm.map_count >= get_sysctl_max_map_count()) {
     return -ENOMEM;
+    }
     region = kmem_cache_alloc(vm_region_jar, GFP_KERNEL);
-    if (!region)
+    if (!region) {
     return -ENOMEM;
+    }
     new = vm_area_dup(vma);
-    if (!new)
-    goto err_vma_dup;
+    if (!new) {
+// goto;
+    }
 // most fields are the same, copy all, and then fixup
 // region = *vma->vm_region;
     new.vm_region = region;
@@ -1228,12 +1466,13 @@ pub struct mmap_arg_struct {
     }
     vma_iter_config(vmi, new.vm_start, new.vm_end);
     if (vma_iter_prealloc(vmi, vma)) {
-    pr_warn("Allocation of vma tree for process %d failed\n",
+    pr_warn!("Allocation of vma tree for process %d failed\n",
     current.pid);
-    goto err_vmi_preallocate;
+// goto;
     }
-    if (new.vm_ops && new.vm_ops.open)
+    if (new.vm_ops && new.vm_ops.open) {
     new.vm_ops.open(new);
+    }
     down_write(&nommu_region_sem);
     delete_nommu_region(vma.vm_region);
     if (new_below) {
@@ -1251,13 +1490,14 @@ pub struct mmap_arg_struct {
     setup_vma_to_mm(new, mm);
     vma_iter_store_new(vmi, new);
 // vmi should point lower address
-    if (new_below)
+    if (new_below) {
     vma_next(vmi);
-    mm.map_count++;
+    }
+    mm.map_count += 1;
     return 0;
-    err_vmi_preallocate:
+// label;
     vm_area_free(new);
-    err_vma_dup:
+// label;
     kmem_cache_free(vm_region_jar, region);
     return -ENOMEM;
     }
@@ -1265,25 +1505,25 @@ pub struct mmap_arg_struct {
 // shrink a VMA by removing the specified chunk from either the beginning or
 // the end
 //
-    static int vmi_shrink_vma(struct vma_iterator *vmi,
-    struct vm_area_struct *vma,
-    unsigned long from, unsigned long to)
-    {
-    struct vm_region *region;
+#[no_mangle]
+pub unsafe extern "C" fn vmi_shrink_vma(vmi: *mut vma_iterator, vma: *mut vm_area_struct, from: c_ulong, to: c_ulong) -> c_int {
+pub static mut region: *mut c_void = core::ptr::null_mut();
 // adjust the VMA's pointers, which may reposition it in the MM's tree
 // and list
     if (from > vma.vm_start) {
-    if (vma_iter_clear_gfp(vmi, from, vma.vm_end, GFP_KERNEL))
+    if (vma_iter_clear_gfp(vmi, from, vma.vm_end, GFP_KERNEL)) {
     return -ENOMEM;
+    }
     vma.vm_end = from;
     } else {
-    if (vma_iter_clear_gfp(vmi, vma.vm_start, to, GFP_KERNEL))
+    if (vma_iter_clear_gfp(vmi, vma.vm_start, to, GFP_KERNEL)) {
     return -ENOMEM;
+    }
     vma.vm_start = to;
     }
 // cut the backing region down to size
     region = vma.vm_region;
-    BUG_ON(region.vm_usage != 1);
+    BUG_ON!(region.vm_usage != 1);
     down_write(&nommu_region_sem);
     delete_nommu_region(region);
     if (from > region.vm_start) {
@@ -1304,76 +1544,82 @@ pub struct mmap_arg_struct {
 //
 #[no_mangle]
 pub unsafe extern "C" fn do_munmap(mm: *mut mm_struct, start: c_ulong, len: usize, uf: *mut list_head) -> c_int {
-    int do_munmap(struct mm_struct *mm, unsigned long start, size_t len, struct list_head *uf)
-    {
     VMA_ITERATOR(vmi, mm, start);
-    struct vm_area_struct *vma;
-    unsigned long end;
-    let mut ret: c_int = 0;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+    let mut end = 0;
+pub static mut ret: c_int = 0;
     len = PAGE_ALIGN(len);
-    if (len == 0)
+    if (len == 0) {
     return -EINVAL;
+    }
     end = start + len;
 // find the first potentially overlapping VMA
     vma = vma_find(&vmi, end);
     if (!vma) {
     static int limit;
     if (limit < 5) {
-    pr_warn("munmap of memory not mmapped by process %d (%s): 0x%lx-0x%lx\n",
+    pr_warn!("munmap of memory not mmapped by process %d (%s): 0x%lx-0x%lx\n",
     current.pid, current.comm,
     start, start + len - 1);
-    limit++;
+    limit += 1;
     }
     return -EINVAL;
     }
 // we're allowed to split an anonymous VMA but not a file-backed one
     if (vma.vm_file) {
     do {
-    if (start > vma.vm_start)
+    if (start > vma.vm_start) {
     return -EINVAL;
-    if (end == vma.vm_end)
-    goto erase_whole_vma;
+    }
+    if (end == vma.vm_end) {
+// goto;
+    }
     vma = vma_find(&vmi, end);
     } while (vma);
     return -EINVAL;
     } else {
 // the chunk must be a subset of the VMA found
-    if (start == vma.vm_start && end == vma.vm_end)
-    goto erase_whole_vma;
-    if (start < vma.vm_start || end > vma.vm_end)
+    if (start == vma.vm_start && end == vma.vm_end) {
+// goto;
+    }
+    if (start < vma.vm_start || end > vma.vm_end) {
     return -EINVAL;
-    if (offset_in_page(start))
+    }
+    if (offset_in_page(start)) {
     return -EINVAL;
-    if (end != vma.vm_end && offset_in_page(end))
+    }
+    if (end != vma.vm_end && offset_in_page(end)) {
     return -EINVAL;
+    }
     if (start != vma.vm_start && end != vma.vm_end) {
     ret = split_vma(&vmi, vma, start, 1);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     }
     return vmi_shrink_vma(&vmi, vma, start, end);
     }
-    erase_whole_vma:
-    if (delete_vma_from_mm(vma))
+// label;
+    if (delete_vma_from_mm(vma)) {
     ret = -ENOMEM;
-    else
+    }
+    else {
     delete_vma(mm, vma);
+    }
     return ret;
     }
 #[no_mangle]
 pub unsafe extern "C" fn vm_munmap(addr: c_ulong, len: usize) -> c_int {
-    int vm_munmap(unsigned long addr, size_t len)
-    {
-    struct mm_struct *mm = current.mm;
-    int ret;
+    let mut mm = current.mm;
+    let mut ret = 0;
     mmap_write_lock(mm);
     ret = do_munmap(mm, addr, len, core::ptr::null_mut());
     mmap_write_unlock(mm);
     return ret;
     }
     EXPORT_SYMBOL(vm_munmap);
-    SYSCALL_DEFINE2(munmap, unsigned long, addr, size_t, len)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_munmap(addr: usize, len: usize) -> c_long {
     return vm_munmap(addr, len);
     }
 //
@@ -1381,12 +1627,11 @@ pub unsafe extern "C" fn vm_munmap(addr: c_ulong, len: usize) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn exit_mmap(mm: *mut mm_struct) {
-    void exit_mmap(struct mm_struct *mm)
-    {
     VMA_ITERATOR(vmi, mm, 0);
-    struct vm_area_struct *vma;
-    if (!mm)
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+    if (!mm) {
     return;
+    }
     mm.total_vm = 0;
 //
 // Lock the mm to avoid assert complaining even though this is the only
@@ -1411,68 +1656,69 @@ pub unsafe extern "C" fn exit_mmap(mm: *mut mm_struct) {
 //
 // MREMAP_FIXED is not supported under NOMMU conditions
 //
-    static unsigned long do_mremap(unsigned long addr,
-    unsigned long old_len, unsigned long new_len,
-    unsigned long flags, unsigned long new_addr)
-    {
-    struct vm_area_struct *vma;
+#[no_mangle]
+pub unsafe extern "C" fn do_mremap(addr: c_ulong, old_len: c_ulong, new_len: c_ulong, flags: c_ulong, new_addr: c_ulong) -> c_ulong {
+pub static mut vma: *mut c_void = core::ptr::null_mut();
 // insanity checks first
     old_len = PAGE_ALIGN(old_len);
     new_len = PAGE_ALIGN(new_len);
-    if (old_len == 0 || new_len == 0)
+    if (old_len == 0 || new_len == 0) {
     return (unsigned long) -EINVAL;
-    if (offset_in_page(addr))
+    }
+    if (offset_in_page(addr)) {
     return -EINVAL;
-    if (flags & MREMAP_FIXED && new_addr != addr)
+    }
+    if (flags & MREMAP_FIXED && new_addr != addr) {
     return (unsigned long) -EINVAL;
+    }
     vma = find_vma_exact(current.mm, addr, old_len);
-    if (!vma)
+    if (!vma) {
     return (unsigned long) -EINVAL;
-    if (vma.vm_end != vma.vm_start + old_len)
+    }
+    if (vma.vm_end != vma.vm_start + old_len) {
     return (unsigned long) -EFAULT;
-    if (is_nommu_shared_mapping(vma.vm_flags))
+    }
+    if (is_nommu_shared_mapping(vma.vm_flags)) {
     return (unsigned long) -EPERM;
-    if (new_len > vma.vm_region.vm_end - vma.vm_region.vm_start)
+    }
+    if (new_len > vma.vm_region.vm_end - vma.vm_region.vm_start) {
     return (unsigned long) -ENOMEM;
+    }
 // all checks complete - do it
     vma.vm_end = vma.vm_start + new_len;
     return vma.vm_start;
     }
-    SYSCALL_DEFINE5(mremap, unsigned long, addr, unsigned long, old_len,
-    unsigned long, new_len, unsigned long, flags,
-    unsigned long, new_addr)
-    {
-    unsigned long ret;
+#[no_mangle]
+pub unsafe extern "C" fn sys_mremap(addr: usize, old_len: usize, new_len: usize, flags: usize, new_addr: usize) -> c_long {
+    let mut ret = 0;
     mmap_write_lock(current.mm);
     ret = do_mremap(addr, old_len, new_len, flags, new_addr);
     mmap_write_unlock(current.mm);
     return ret;
     }
-    int remap_pfn_range(struct vm_area_struct *vma, unsigned long addr,
-    unsigned long pfn, unsigned long size, pgprot_t prot)
-    {
-    if (addr != (pfn << PAGE_SHIFT))
+#[no_mangle]
+pub unsafe extern "C" fn remap_pfn_range(vma: *mut vm_area_struct, addr: c_ulong, pfn: c_ulong, size: c_ulong, prot: pgprot_t) -> c_int {
+    if (addr != (pfn << PAGE_SHIFT)) {
     return -EINVAL;
+    }
     vm_flags_set(vma, VM_IO | VM_PFNMAP | VM_DONTEXPAND | VM_DONTDUMP);
     return 0;
     }
     EXPORT_SYMBOL(remap_pfn_range);
 #[no_mangle]
 pub unsafe extern "C" fn vm_iomap_memory(vma: *mut vm_area_struct, start: phys_addr_t, len: c_ulong) -> c_int {
-    int vm_iomap_memory(struct vm_area_struct *vma, phys_addr_t start, unsigned long len)
-    {
-    let mut pfn: c_ulong = start >> PAGE_SHIFT;
-    let mut vm_len: c_ulong = vma.vm_end - vma.vm_start;
+pub static mut pfn: c_ulong = 0;
+pub static mut vm_len: c_ulong = 0;
     pfn += vma_start_pgoff(vma);
     return io_remap_pfn_range(vma, vma.vm_start, pfn, vm_len, vma.vm_page_prot);
     }
     EXPORT_SYMBOL(vm_iomap_memory);
-    int remap_vmalloc_range(struct vm_area_struct *vma, void *addr,
-    unsigned long pgoff)
-    {
-    let mut size: c_uint = vma.vm_end - vma.vm_start;
-    if (!(vma.vm_flags & VM_USERMAP))
+#[no_mangle]
+pub unsafe extern "C" fn remap_vmalloc_range(vma: *mut vm_area_struct, addr: *mut c_void, pgoff: c_ulong) -> c_int {
+pub static mut size: c_uint = 0;
+    if (!(vma.vm_flags & VM_USERMAP)) {
     return -EINVAL;
+    }
     vma.vm_start = (unsigned long)(addr + (pgoff << PAGE_SHIFT));
     vma.vm_end = vma.vm_start + size;
     return 0;
@@ -1480,43 +1726,44 @@ pub unsafe extern "C" fn vm_iomap_memory(vma: *mut vm_area_struct, start: phys_a
     EXPORT_SYMBOL(remap_vmalloc_range);
 #[no_mangle]
 pub unsafe extern "C" fn filemap_fault(vmf: *mut vm_fault) -> vm_fault_t {
-    vm_fault_t filemap_fault(struct vm_fault *vmf)
-    {
     BUG();
     return 0;
     }
     EXPORT_SYMBOL(filemap_fault);
-    vm_fault_t filemap_map_pages(struct vm_fault *vmf,
+    vm_fault_t filemap_map_pages(vm_fault *vmf,
     pgoff_t start_pgoff, pgoff_t end_pgoff)
     {
     BUG();
     return 0;
     }
     EXPORT_SYMBOL(filemap_map_pages);
-    static int __access_remote_vm(struct mm_struct *mm, unsigned long addr,
-    void *buf, int len, unsigned int gup_flags)
-    {
-    struct vm_area_struct *vma;
-    let mut write: c_int = gup_flags & FOLL_WRITE;
-    if (mmap_read_lock_killable(mm))
+#[no_mangle]
+pub unsafe extern "C" fn __access_remote_vm(mm: *mut mm_struct, addr: c_ulong, buf: *mut c_void, len: c_int, gup_flags: c_uint) -> c_int {
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+pub static mut write: c_int = 0;
+    if (mmap_read_lock_killable(mm)) {
     return 0;
+    }
 // the access must start within one of the target process's mappings
     vma = find_vma(mm, addr);
     if (vma) {
 // don't overrun this mapping
-    if (addr + len >= vma.vm_end)
+    if (addr + len >= vma.vm_end) {
     len = vma.vm_end - addr;
+    }
 // only read or write mappings where it is permitted
-    if (write && vma.vm_flags & VM_MAYWRITE)
+    if (write && vma.vm_flags & VM_MAYWRITE) {
     copy_to_user_page(vma, core::ptr::null_mut(), addr,
-    (void *) addr, buf, len);
-#[no_mangle]
-pub unsafe extern "C" fn if(VM_MAYREAD: !write && vma->vm_flags &) -> else {
-    else if (!write && vma.vm_flags & VM_MAYREAD)
+     addr, buf, len);
+    }
+
+    else if (!write && vma.vm_flags & VM_MAYREAD) {
     copy_from_user_page(vma, core::ptr::null_mut(), addr,
-    buf, (void *) addr, len);
-    else
+    buf,  addr, len);
+    }
+    else {
     len = 0;
+    }
     } else {
     len = 0;
     }
@@ -1533,24 +1780,24 @@ pub unsafe extern "C" fn if(VM_MAYREAD: !write && vma->vm_flags &) -> else {
 //
 // The caller must hold a reference on @mm.
 //
-    int access_remote_vm(struct mm_struct *mm, unsigned long addr,
-    void *buf, int len, unsigned int gup_flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn access_remote_vm(mm: *mut mm_struct, addr: c_ulong, buf: *mut c_void, len: c_int, gup_flags: c_uint) -> c_int {
     return __access_remote_vm(mm, addr, buf, len, gup_flags);
     }
 //
 // Access another process' address space.
 // - source/target buffer must be kernel space
 //
-    int access_process_vm(struct task_struct *tsk, unsigned long addr, void *buf, int len,
-    unsigned int gup_flags)
-    {
-    struct mm_struct *mm;
-    if (addr + len < addr)
+#[no_mangle]
+pub unsafe extern "C" fn access_process_vm(tsk: *mut task_struct, addr: c_ulong, buf: *mut c_void, len: c_int, gup_flags: c_uint) -> c_int {
+pub static mut mm: *mut c_void = core::ptr::null_mut();
+    if (addr + len < addr) {
     return 0;
+    }
     mm = get_task_mm(tsk);
-    if (!mm)
+    if (!mm) {
     return 0;
+    }
     len = __access_remote_vm(mm, addr, buf, len, gup_flags);
     mmput(mm);
     return len;
@@ -1561,31 +1808,35 @@ pub unsafe extern "C" fn if(VM_MAYREAD: !write && vma->vm_flags &) -> else {
 // Copy a string from another process's address space as given in mm.
 // If there is any error return -EFAULT.
 //
-    static int __copy_remote_vm_str(struct mm_struct *mm, unsigned long addr,
-    void *buf, int len)
-    {
-    unsigned long addr_end;
-    struct vm_area_struct *vma;
-    let mut ret: c_int = -EFAULT;
-// (char *)buf = '\0';
-    if (mmap_read_lock_killable(mm))
+#[no_mangle]
+pub unsafe extern "C" fn __copy_remote_vm_str(mm: *mut mm_struct, addr: c_ulong, buf: *mut c_void, len: c_int) -> c_int {
+    let mut addr_end = 0;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
+// buf = '\0';
+    if (mmap_read_lock_killable(mm)) {
     return ret;
+    }
 // the access must start within one of the target process's mappings
     vma = find_vma(mm, addr);
-    if (!vma)
-    goto out;
-    if (check_add_overflow(addr, len, &addr_end))
-    goto out;
+    if (!vma) {
+// goto;
+    }
+    if (check_add_overflow(addr, len, &addr_end)) {
+// goto;
+    }
 // don't overrun this mapping
-    if (addr_end > vma.vm_end)
+    if (addr_end > vma.vm_end) {
     len = vma.vm_end - addr;
+    }
 // only read mappings where it is permitted
     if (vma.vm_flags & VM_MAYREAD) {
-    ret = strscpy(buf, (char *)addr, len);
-    if (ret < 0)
+    ret = strscpy(buf, addr, len);
+    if (ret < 0) {
     ret = len - 1;
     }
-    out:
+    }
+// label;
     mmap_read_unlock(mm);
     return ret;
     }
@@ -1603,16 +1854,16 @@ pub unsafe extern "C" fn if(VM_MAYREAD: !write && vma->vm_flags &) -> else {
 // not including the trailing NUL. Always guaranteed to leave NUL-terminated
 // buffer. On any error, return -EFAULT.
 //
-    int copy_remote_vm_str(struct task_struct *tsk, unsigned long addr,
-    void *buf, int len, unsigned int gup_flags)
-    {
-    struct mm_struct *mm;
-    int ret;
-    if (unlikely(len == 0))
+#[no_mangle]
+pub unsafe extern "C" fn copy_remote_vm_str(tsk: *mut task_struct, addr: c_ulong, buf: *mut c_void, len: c_int, gup_flags: c_uint) -> c_int {
+pub static mut mm: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (unlikely(len == 0)) {
     return 0;
+    }
     mm = get_task_mm(tsk);
     if (!mm) {
-// (char *)buf = '\0';
+// buf = '\0';
     return -EFAULT;
     }
     ret = __copy_remote_vm_str(mm, addr, buf, len);
@@ -1632,11 +1883,10 @@ pub unsafe extern "C" fn if(VM_MAYREAD: !write && vma->vm_flags &) -> else {
 // vm_regions that extend beyond so that do_mmap() doesn't
 // automatically grant mappings that are too large.
 //
-    int nommu_shrink_inode_mappings(struct inode *inode, size_t size,
-    size_t newsize)
-    {
-    struct vm_area_struct *vma;
-    struct vm_region *region;
+#[no_mangle]
+pub unsafe extern "C" fn nommu_shrink_inode_mappings(inode: *mut inode, size: size_t, newsize: size_t) -> c_int {
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+pub static mut region: *mut c_void = core::ptr::null_mut();
     pgoff_t low, high;
     size_t r_size, r_top;
     low = newsize >> PAGE_SHIFT;
@@ -1660,15 +1910,17 @@ pub unsafe extern "C" fn if(VM_MAYREAD: !write && vma->vm_flags &) -> else {
 // shouldn't be any
 //
     mapping_rmap_tree_foreach(vma, inode.i_mapping, 0, ULONG_MAX) {
-    if (!(vma.vm_flags & VM_SHARED))
+    if (!(vma.vm_flags & VM_SHARED)) {
     continue;
+    }
     region = vma.vm_region;
     r_size = region.vm_top - region.vm_start;
     r_top = (region.vm_pgoff << PAGE_SHIFT) + r_size;
     if (r_top > newsize) {
     region.vm_top -= r_top - newsize;
-    if (region.vm_end > region.vm_top)
+    if (region.vm_end > region.vm_top) {
     region.vm_end = region.vm_top;
+    }
     }
     }
     i_mmap_unlock_read(inode.i_mapping);
@@ -1687,14 +1939,12 @@ pub unsafe extern "C" fn if(VM_MAYREAD: !write && vma->vm_flags &) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn init_user_reserve() -> int __meminit {
-    static int __meminit init_user_reserve(void)
-    {
-    unsigned long free_kbytes;
+    let mut free_kbytes = 0;
     free_kbytes = K(global_zone_page_state(NR_FREE_PAGES));
     sysctl_user_reserve_kbytes = min(free_kbytes / 32, 1UL << 17);
     return 0;
     }
-    subsys_initcall(init_user_reserve);
+    subsys_initcall!(init_user_reserve);
 //
 // Initialise sysctl_admin_reserve_kbytes.
 //
@@ -1707,18 +1957,14 @@ unsafe extern "C" fn init_user_reserve() -> int __meminit {
 //
 #[no_mangle]
 unsafe extern "C" fn init_admin_reserve() -> int __meminit {
-    static int __meminit init_admin_reserve(void)
-    {
-    unsigned long free_kbytes;
+    let mut free_kbytes = 0;
     free_kbytes = K(global_zone_page_state(NR_FREE_PAGES));
     sysctl_admin_reserve_kbytes = min(free_kbytes / 32, 1UL << 13);
     return 0;
     }
-    subsys_initcall(init_admin_reserve);
+    subsys_initcall!(init_admin_reserve);
 #[no_mangle]
 pub unsafe extern "C" fn dup_mmap(mm: *mut mm_struct, oldmm: *mut mm_struct) -> c_int {
-    int dup_mmap(struct mm_struct *mm, struct mm_struct *oldmm)
-    {
     mmap_write_lock(oldmm);
     dup_mm_exe_file(mm, oldmm);
     mmap_write_unlock(oldmm);

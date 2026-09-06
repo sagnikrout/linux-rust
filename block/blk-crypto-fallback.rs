@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -43,16 +293,16 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Refer to Documentation/block/inline-encryption.rst for detailed explanation.
 //
 
-    let mut num_prealloc_bounce_pg: static unsigned int = BIO_MAX_VECS;
-    module_param(num_prealloc_bounce_pg, uint, 0);
+pub static mut num_prealloc_bounce_pg: unsigned int = 0;
+    module_param!(num_prealloc_bounce_pg, uint, 0);
     MODULE_PARM_DESC(num_prealloc_bounce_pg,
     "Number of preallocated bounce pages for the blk-crypto crypto API fallback");
-    let mut blk_crypto_num_keyslots: static unsigned int = 100;
-    module_param_named(num_keyslots, blk_crypto_num_keyslots, uint, 0);
+pub static mut blk_crypto_num_keyslots: unsigned int = 100;
+    module_param_named!(num_keyslots, blk_crypto_num_keyslots, uint, 0);
     MODULE_PARM_DESC(num_keyslots,
     "Number of keyslots for the blk-crypto crypto API fallback");
-    let mut num_prealloc_fallback_crypt_ctxs: static unsigned int = 128;
-    module_param(num_prealloc_fallback_crypt_ctxs, uint, 0);
+pub static mut num_prealloc_fallback_crypt_ctxs: unsigned int = 128;
+    module_param!(num_prealloc_fallback_crypt_ctxs, uint, 0);
     MODULE_PARM_DESC(num_prealloc_crypt_fallback_ctxs,
     "Number of preallocated bio fallback crypto contexts for blk-crypto to use during crypto API fallback");
 #[repr(C)]
@@ -73,13 +323,13 @@ pub struct bio_fallback_crypt_ctx {
 }
 
     struct {
-    void *bi_private_orig;
-    bio_end_io_t *bi_end_io_orig;
+pub static mut bi_private_orig: *mut c_void = core::ptr::null_mut();
+pub static mut bi_end_io_orig: *mut c_void = core::ptr::null_mut();
     };
     };
     };
-    static struct kmem_cache *bio_fallback_crypt_ctx_cache;
-    static mempool_t *bio_fallback_crypt_ctx_pool;
+pub static mut bio_fallback_crypt_ctx_cache: *mut c_void = core::ptr::null_mut();
+pub static mut bio_fallback_crypt_ctx_pool: *mut c_void = core::ptr::null_mut();
 //
 // Allocating a crypto tfm during I/O can deadlock, so we have to preallocate
 // all of a mode's tfms when that mode starts being used. Since each mode may
@@ -89,16 +339,16 @@ pub struct bio_fallback_crypt_ctx {
 // single encryption context per keyslot), we only allow one tfm per keyslot to
 // be used at a time - the rest of the unused tfms have their keys cleared.
 //
-    static DEFINE_MUTEX(tfms_init_lock);
+pub static mut tfms_init_lock: usize = 0;
     static bool tfms_inited[BLK_ENCRYPTION_MODE_MAX];
     static struct blk_crypto_fallback_keyslot {
     enum blk_crypto_mode_num crypto_mode;
     struct crypto_sync_skcipher *tfms[BLK_ENCRYPTION_MODE_MAX];
     } *blk_crypto_keyslots;
-    static struct blk_crypto_profile *blk_crypto_fallback_profile;
-    static struct workqueue_struct *blk_crypto_wq;
-    static mempool_t *blk_crypto_bounce_page_pool;
-    static struct bio_set enc_bio_set;
+pub static mut blk_crypto_fallback_profile: *mut c_void = core::ptr::null_mut();
+pub static mut blk_crypto_wq: *mut c_void = core::ptr::null_mut();
+pub static mut blk_crypto_bounce_page_pool: *mut c_void = core::ptr::null_mut();
+pub static mut enc_bio_set: usize = 0;
 //
 // This is the key we set when evicting a keyslot. This *should* be the all 0's
 // key, but AES-XTS rejects that key, so we use some random bytes instead.
@@ -106,30 +356,26 @@ pub struct bio_fallback_crypt_ctx {
     static u8 blank_key[BLK_CRYPTO_MAX_RAW_KEY_SIZE];
 #[no_mangle]
 unsafe extern "C" fn blk_crypto_fallback_evict_keyslot(slot: c_uint) {
-    static void blk_crypto_fallback_evict_keyslot(unsigned int slot)
-    {
-    struct blk_crypto_fallback_keyslot *slotp = &blk_crypto_keyslots[slot];
-    let mut crypto_mode: enum blk_crypto_mode_num = slotp.crypto_mode;
-    int err;
-    WARN_ON(slotp.crypto_mode == BLK_ENCRYPTION_MODE_INVALID);
+    let mut slotp = &blk_crypto_keyslots[slot];
+pub static mut crypto_mode: blk_crypto_mode_num = 0;
+    let mut err = 0;
+    WARN_ON!(slotp.crypto_mode == BLK_ENCRYPTION_MODE_INVALID);
 // Clear the key in the skcipher
     err = crypto_sync_skcipher_setkey(slotp.tfms[crypto_mode], blank_key,
     blk_crypto_modes[crypto_mode].keysize);
-    WARN_ON(err);
+    WARN_ON!(err);
     slotp.crypto_mode = BLK_ENCRYPTION_MODE_INVALID;
     }
-    static int
-    blk_crypto_fallback_keyslot_program(struct blk_crypto_profile *profile,
-    const struct blk_crypto_key *key,
-    unsigned int slot)
-    {
-    struct blk_crypto_fallback_keyslot *slotp = &blk_crypto_keyslots[slot];
+#[no_mangle]
+pub unsafe extern "C" fn blk_crypto_fallback_keyslot_program(profile: *mut blk_crypto_profile, key: *mut blk_crypto_key, slot: c_uint) -> c_int {
+    let mut slotp = &blk_crypto_keyslots[slot];
     const enum blk_crypto_mode_num crypto_mode =
     key.crypto_cfg.crypto_mode;
-    int err;
+    let mut err = 0;
     if (crypto_mode != slotp.crypto_mode &&
-    slotp.crypto_mode != BLK_ENCRYPTION_MODE_INVALID)
+    slotp.crypto_mode != BLK_ENCRYPTION_MODE_INVALID) {
     blk_crypto_fallback_evict_keyslot(slot);
+    }
     slotp.crypto_mode = crypto_mode;
     err = crypto_sync_skcipher_setkey(slotp.tfms[crypto_mode], key.bytes,
     key.size);
@@ -139,52 +385,47 @@ unsafe extern "C" fn blk_crypto_fallback_evict_keyslot(slot: c_uint) {
     }
     return 0;
     }
-    static int blk_crypto_fallback_keyslot_evict(struct blk_crypto_profile *profile,
-    const struct blk_crypto_key *key,
-    unsigned int slot)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn blk_crypto_fallback_keyslot_evict(profile: *mut blk_crypto_profile, key: *mut blk_crypto_key, slot: c_uint) -> c_int {
     blk_crypto_fallback_evict_keyslot(slot);
     return 0;
     }
-    static const struct blk_crypto_ll_ops blk_crypto_fallback_ll_ops = {
-    .keyslot_program        = blk_crypto_fallback_keyslot_program,
-    .keyslot_evict          = blk_crypto_fallback_keyslot_evict,
-    };
+pub static mut blk_crypto_ll_ops: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn blk_crypto_fallback_encrypt_endio(enc_bio: *mut bio) {
-    static void blk_crypto_fallback_encrypt_endio(struct bio *enc_bio)
-    {
-    struct bio *src_bio = enc_bio.bi_private;
-    struct page **pages = (struct page **)enc_bio.bi_io_vec;
-    struct bio_vec *bv;
-    unsigned int i;
+    let mut src_bio = enc_bio.bi_private;
+    let mut pages = enc_bio.bi_io_vec;
+pub static mut bv: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
 //
 // Use the same trick as the alloc side to avoid the need for an extra
 // pages array.
 //
     bio_for_each_bvec_all(bv, enc_bio, i)
     pages[i] = bv.bv_page;
-    i = mempool_free_bulk(blk_crypto_bounce_page_pool, (void **)pages,
+    i = mempool_free_bulk(blk_crypto_bounce_page_pool, pages,
     enc_bio.bi_vcnt);
-    if (i < enc_bio.bi_vcnt)
+    if (i < enc_bio.bi_vcnt) {
     release_pages(pages + i, enc_bio.bi_vcnt - i);
-    if (enc_bio.bi_status)
+    }
+    if (enc_bio.bi_status) {
     cmpxchg(&src_bio.bi_status, 0, enc_bio.bi_status);
+    }
     bio_put(enc_bio);
     bio_endio(src_bio);
     }
 
-    static struct bio *blk_crypto_alloc_enc_bio(struct bio *bio_src,
-    unsigned int nr_segs, struct page ***pages_ret)
-    {
-    let mut memflags: c_uint = memalloc_noio_save();
-    unsigned int nr_allocated;
-    struct page **pages;
-    struct bio *bio;
+#[no_mangle]
+pub unsafe extern "C" fn blk_crypto_alloc_enc_bio(bio_src: *mut bio, nr_segs: c_uint, pages_ret: *mut *mut *mut page) -> *mut c_void {
+pub static mut memflags: c_uint = 0;
+    let mut nr_allocated = 0;
+pub static mut pages: *mut c_void = core::ptr::null_mut();
+pub static mut bio: *mut c_void = core::ptr::null_mut();
     bio = bio_alloc_bioset(bio_src.bi_bdev, nr_segs, bio_src.bi_opf,
     GFP_NOIO, &enc_bio_set);
-    if (bio_flagged(bio_src, BIO_REMAPPED))
+    if (bio_flagged(bio_src, BIO_REMAPPED)) {
     bio_set_flag(bio, BIO_REMAPPED);
+    }
     bio.bi_private		= bio_src;
     bio.bi_end_io		= blk_crypto_fallback_encrypt_endio;
     bio.bi_ioprio		= bio_src.bi_ioprio;
@@ -198,7 +439,7 @@ unsafe extern "C" fn blk_crypto_fallback_encrypt_endio(enc_bio: *mut bio) {
 // without overwriting the temporary page array.
 //
     static_assert(PAGE_PTRS_PER_BVEC > 1);
-    pages = (struct page **)bio.bi_io_vec;
+    pages = bio.bi_io_vec;
     pages += nr_segs * (PAGE_PTRS_PER_BVEC - 1);
 //
 // Try a bulk allocation first.  This might not fill all allocated
@@ -207,51 +448,50 @@ unsafe extern "C" fn blk_crypto_fallback_encrypt_endio(enc_bio: *mut bio) {
 // Note: alloc_pages_bulk needs the array to be zeroed, as it assumes
 // any non-zero slot already contains a valid allocation.
 //
-    memset(pages, 0, sizeof(struct page *) * nr_segs);
+    memset(pages, 0, sizeof! * nr_segs);
     nr_allocated = alloc_pages_bulk(GFP_KERNEL, nr_segs, pages);
-    if (nr_allocated < nr_segs)
+    if (nr_allocated < nr_segs) {
     mempool_alloc_bulk(blk_crypto_bounce_page_pool,
-    (void **)pages + nr_allocated,
+    pages + nr_allocated,
     nr_segs - nr_allocated);
+    }
     memalloc_noio_restore(memflags);
 // pages_ret = pages;
     return bio;
     }
-    static struct crypto_sync_skcipher *
-    blk_crypto_fallback_tfm(struct blk_crypto_keyslot *slot)
-    {
-    const struct blk_crypto_fallback_keyslot *slotp =
-    &blk_crypto_keyslots[blk_crypto_keyslot_index(slot)];
+#[no_mangle]
+pub unsafe extern "C" fn blk_crypto_fallback_tfm(slot: *mut blk_crypto_keyslot) -> *mut c_void {
+    let mut slotp = &blk_crypto_keyslots[blk_crypto_keyslot_index(slot)];
     return slotp.tfms[slotp.crypto_mode];
     }
     union blk_crypto_iv {
     __le64 dun[BLK_CRYPTO_DUN_ARRAY_SIZE];
     u8 bytes[BLK_CRYPTO_MAX_IV_SIZE];
     };
-    static void blk_crypto_dun_to_iv(const u64 dun[BLK_CRYPTO_DUN_ARRAY_SIZE],
-    union blk_crypto_iv *iv)
-    {
-    int i;
-    for (i = 0; i < BLK_CRYPTO_DUN_ARRAY_SIZE; i++)
+#[no_mangle]
+pub unsafe extern "C" fn blk_crypto_dun_to_iv(iv: *mut union blk_crypto_iv) {
+    let mut i = 0;
+    for (i = 0; i < BLK_CRYPTO_DUN_ARRAY_SIZE; i++) {
     iv.dun[i] = cpu_to_le64(dun[i]);
     }
-    static void __blk_crypto_fallback_encrypt_bio(struct bio *src_bio,
-    struct crypto_sync_skcipher *tfm)
-    {
-    struct bio_crypt_ctx *bc = src_bio.bi_crypt_context;
-    let mut data_unit_size: c_int = bc.bc_key.crypto_cfg.data_unit_size;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn __blk_crypto_fallback_encrypt_bio(src_bio: *mut bio, tfm: *mut crypto_sync_skcipher) {
+    let mut bc = src_bio.bi_crypt_context;
+pub static mut data_unit_size: c_int = 0;
     SYNC_SKCIPHER_REQUEST_ON_STACK(ciph_req, tfm);
     u64 curr_dun[BLK_CRYPTO_DUN_ARRAY_SIZE];
     struct scatterlist src, dst;
     union blk_crypto_iv iv;
-    unsigned int nr_enc_pages, enc_idx;
-    struct page **enc_pages;
-    struct bio *enc_bio;
-    unsigned int i;
+    let mut nr_enc_pages = 0;
+    let mut enc_idx = 0;
+pub static mut enc_pages: *mut c_void = core::ptr::null_mut();
+pub static mut enc_bio: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
     skcipher_request_set_callback(ciph_req,
     CRYPTO_TFM_REQ_MAY_BACKLOG | CRYPTO_TFM_REQ_MAY_SLEEP,
     core::ptr::null_mut(), core::ptr::null_mut());
-    memcpy(curr_dun, bc.bc_dun, sizeof(curr_dun));
+    memcpy(curr_dun, bc.bc_dun, sizeof!(curr_dun));
     sg_init_table(&src, 1);
     sg_init_table(&dst, 1);
     skcipher_request_set_crypt(ciph_req, &src, &dst, data_unit_size,
@@ -262,18 +502,18 @@ unsafe extern "C" fn blk_crypto_fallback_encrypt_endio(enc_bio: *mut bio) {
 // bios are limited to a single page per bio_vec, this can generate
 // more than a single encrypted bio per source bio.
 //
-    new_bio:
+// label;
     nr_enc_pages = min(bio_segments(src_bio), BIO_MAX_VECS);
     enc_bio = blk_crypto_alloc_enc_bio(src_bio, nr_enc_pages, &enc_pages);
     enc_idx = 0;
     for (;;) {
     struct bio_vec src_bv =
     bio_iter_iovec(src_bio, src_bio.bi_iter);
-    struct page *enc_page = enc_pages[enc_idx];
+    let mut enc_page = enc_pages[enc_idx];
     if (!IS_ALIGNED(src_bv.bv_len | src_bv.bv_offset,
     data_unit_size)) {
     enc_bio.bi_status = BLK_STS_INVAL;
-    goto out_free_enc_bio;
+// goto;
     }
     __bio_add_page(enc_bio, enc_page, src_bv.bv_len,
     src_bv.bv_offset);
@@ -284,15 +524,15 @@ unsafe extern "C" fn blk_crypto_fallback_encrypt_endio(enc_bio: *mut bio) {
 // Increment the index now that the encrypted page is added to
 // the bio.  This is important for the error unwind path.
 //
-    enc_idx++;
+    enc_idx += 1;
 //
 // Encrypt each data unit in this page.
 //
-    for (i = 0; i < src_bv.bv_len; i += data_unit_size) {
+    while (i < src_bv.bv_len) {
     blk_crypto_dun_to_iv(curr_dun, &iv);
     if (crypto_skcipher_encrypt(ciph_req)) {
     enc_bio.bi_status = BLK_STS_IOERR;
-    goto out_free_enc_bio;
+// goto;
     }
     bio_crypt_dun_increment(curr_dun, 1);
     src.offset += data_unit_size;
@@ -300,8 +540,9 @@ unsafe extern "C" fn blk_crypto_fallback_encrypt_endio(enc_bio: *mut bio) {
     }
     bio_advance_iter_single(src_bio, &src_bio.bi_iter,
     src_bv.bv_len);
-    if (!src_bio.bi_iter.bi_size)
+    if (!src_bio.bi_iter.bi_size) {
     break;
+    }
     if (enc_idx == nr_enc_pages) {
 //
 // For each additional encrypted bio submitted,
@@ -312,20 +553,21 @@ unsafe extern "C" fn blk_crypto_fallback_encrypt_endio(enc_bio: *mut bio) {
 //
     bio_inc_remaining(src_bio);
     submit_bio(enc_bio);
-    goto new_bio;
+// goto;
     }
     }
     submit_bio(enc_bio);
     return;
-    out_free_enc_bio:
+// label;
 //
 // Add the remaining pages to the bio so that the normal completion path
 // in blk_crypto_fallback_encrypt_endio frees them.  The exact data
 // layout does not matter for that, so don't bother iterating the source
 // bio.
 //
-    for (; enc_idx < nr_enc_pages; enc_idx++)
+    for (; enc_idx < nr_enc_pages; enc_idx++) {
     __bio_add_page(enc_bio, enc_pages[enc_idx], PAGE_SIZE, 0);
+    }
     bio_endio(enc_bio);
     }
 //
@@ -337,11 +579,9 @@ unsafe extern "C" fn blk_crypto_fallback_encrypt_endio(enc_bio: *mut bio) {
 //
 #[no_mangle]
 unsafe extern "C" fn blk_crypto_fallback_encrypt_bio(src_bio: *mut bio) {
-    static void blk_crypto_fallback_encrypt_bio(struct bio *src_bio)
-    {
-    struct bio_crypt_ctx *bc = src_bio.bi_crypt_context;
-    struct blk_crypto_keyslot *slot;
-    blk_status_t status;
+    let mut bc = src_bio.bi_crypt_context;
+pub static mut slot: *mut c_void = core::ptr::null_mut();
+    let mut status;
     status = blk_crypto_get_keyslot(blk_crypto_fallback_profile,
     bc.bc_key, &slot);
     if (status != BLK_STS_OK) {
@@ -352,35 +592,35 @@ unsafe extern "C" fn blk_crypto_fallback_encrypt_bio(src_bio: *mut bio) {
     blk_crypto_fallback_tfm(slot));
     blk_crypto_put_keyslot(slot);
     }
-    static blk_status_t __blk_crypto_fallback_decrypt_bio(struct bio *bio,
-    struct bio_crypt_ctx *bc, struct bvec_iter iter,
-    struct crypto_sync_skcipher *tfm)
+    static blk_status_t __blk_crypto_fallback_decrypt_bio(bio *bio, bio_crypt_ctx *bc, bvec_iter iter, crypto_sync_skcipher *tfm)
     {
     SYNC_SKCIPHER_REQUEST_ON_STACK(ciph_req, tfm);
     u64 curr_dun[BLK_CRYPTO_DUN_ARRAY_SIZE];
     union blk_crypto_iv iv;
-    struct scatterlist sg;
-    struct bio_vec bv;
-    let mut data_unit_size: c_int = bc.bc_key.crypto_cfg.data_unit_size;
-    unsigned int i;
+pub static mut sg: usize = 0;
+pub static mut bv: usize = 0;
+pub static mut data_unit_size: c_int = 0;
+    let mut i = 0;
     skcipher_request_set_callback(ciph_req,
     CRYPTO_TFM_REQ_MAY_BACKLOG | CRYPTO_TFM_REQ_MAY_SLEEP,
     core::ptr::null_mut(), core::ptr::null_mut());
-    memcpy(curr_dun, bc.bc_dun, sizeof(curr_dun));
+    memcpy(curr_dun, bc.bc_dun, sizeof!(curr_dun));
     sg_init_table(&sg, 1);
     skcipher_request_set_crypt(ciph_req, &sg, &sg, data_unit_size,
     iv.bytes);
 // Decrypt each segment in the bio
     __bio_for_each_segment(bv, bio, iter, iter) {
-    struct page *page = bv.bv_page;
-    if (!IS_ALIGNED(bv.bv_len | bv.bv_offset, data_unit_size))
+    let mut page = bv.bv_page;
+    if (!IS_ALIGNED(bv.bv_len | bv.bv_offset, data_unit_size)) {
     return BLK_STS_INVAL;
+    }
     sg_set_page(&sg, page, data_unit_size, bv.bv_offset);
 // Decrypt each data unit in the segment
-    for (i = 0; i < bv.bv_len; i += data_unit_size) {
+    while (i < bv.bv_len) {
     blk_crypto_dun_to_iv(curr_dun, &iv);
-    if (crypto_skcipher_decrypt(ciph_req))
+    if (crypto_skcipher_decrypt(ciph_req)) {
     return BLK_STS_IOERR;
+    }
     bio_crypt_dun_increment(curr_dun, 1);
     sg.offset += data_unit_size;
     }
@@ -394,14 +634,11 @@ unsafe extern "C" fn blk_crypto_fallback_encrypt_bio(src_bio: *mut bio) {
 //
 #[no_mangle]
 unsafe extern "C" fn blk_crypto_fallback_decrypt_bio(work: *mut work_struct) {
-    static void blk_crypto_fallback_decrypt_bio(struct work_struct *work)
-    {
-    struct bio_fallback_crypt_ctx *f_ctx =
-    container_of(work, struct bio_fallback_crypt_ctx, work);
-    struct bio *bio = f_ctx.bio;
-    struct bio_crypt_ctx *bc = &f_ctx.crypt_ctx;
-    struct blk_crypto_keyslot *slot;
-    blk_status_t status;
+    let mut f_ctx = container_of!(work, bio_fallback_crypt_ctx, work);
+    let mut bio = f_ctx.bio;
+    let mut bc = &f_ctx.crypt_ctx;
+pub static mut slot: *mut c_void = core::ptr::null_mut();
+    let mut status;
     status = blk_crypto_get_keyslot(blk_crypto_fallback_profile,
     bc.bc_key, &slot);
     if (status == BLK_STS_OK) {
@@ -423,9 +660,7 @@ unsafe extern "C" fn blk_crypto_fallback_decrypt_bio(work: *mut work_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn blk_crypto_fallback_decrypt_endio(bio: *mut bio) {
-    static void blk_crypto_fallback_decrypt_endio(struct bio *bio)
-    {
-    struct bio_fallback_crypt_ctx *f_ctx = bio.bi_private;
+    let mut f_ctx = bio.bi_private;
     bio.bi_private = f_ctx.bi_private_orig;
     bio.bi_end_io = f_ctx.bi_end_io_orig;
 // If there was an IO error, don't queue for decrypt.
@@ -458,11 +693,9 @@ unsafe extern "C" fn blk_crypto_fallback_decrypt_endio(bio: *mut bio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn blk_crypto_fallback_bio_prep(bio: *mut bio) -> bool {
-    bool blk_crypto_fallback_bio_prep(struct bio *bio)
-    {
-    struct bio_crypt_ctx *bc = bio.bi_crypt_context;
-    struct bio_fallback_crypt_ctx *f_ctx;
-    if (WARN_ON_ONCE(!tfms_inited[bc.bc_key.crypto_cfg.crypto_mode])) {
+    let mut bc = bio.bi_crypt_context;
+pub static mut f_ctx: *mut c_void = core::ptr::null_mut();
+    if (WARN_ON_ONCE!(!tfms_inited[bc.bc_key.crypto_cfg.crypto_mode])) {
 // User didn't call blk_crypto_start_using_key() first
     bio_io_error(bio);
     return false;
@@ -484,86 +717,91 @@ pub unsafe extern "C" fn blk_crypto_fallback_bio_prep(bio: *mut bio) -> bool {
     f_ctx.crypt_iter = bio.bi_iter;
     f_ctx.bi_private_orig = bio.bi_private;
     f_ctx.bi_end_io_orig = bio.bi_end_io;
-    bio.bi_private = (void *)f_ctx;
+    bio.bi_private = f_ctx;
     bio.bi_end_io = blk_crypto_fallback_decrypt_endio;
     bio_crypt_free_ctx(bio);
     return true;
     }
 #[no_mangle]
 pub unsafe extern "C" fn blk_crypto_fallback_evict_key(key: *const blk_crypto_key) -> c_int {
-    int blk_crypto_fallback_evict_key(const struct blk_crypto_key *key)
-    {
     return __blk_crypto_evict_key(blk_crypto_fallback_profile, key);
     }
     static bool blk_crypto_fallback_inited;
 #[no_mangle]
 unsafe extern "C" fn blk_crypto_fallback_init() -> c_int {
-    static int blk_crypto_fallback_init(void)
-    {
-    int i;
-    int err;
-    if (blk_crypto_fallback_inited)
+    let mut i = 0;
+    let mut err = 0;
+    if (blk_crypto_fallback_inited) {
     return 0;
-    get_random_bytes(blank_key, sizeof(blank_key));
+    }
+    get_random_bytes(blank_key, sizeof!(blank_key));
     err = bioset_init(&enc_bio_set, 64, 0, BIOSET_NEED_BVECS);
-    if (err)
-    goto out;
+    if (err) {
+// goto;
+    }
 // Dynamic allocation is needed because of lockdep_register_key().
     blk_crypto_fallback_profile = kzalloc_obj(*blk_crypto_fallback_profile);
     if (!blk_crypto_fallback_profile) {
     err = -ENOMEM;
-    goto fail_free_bioset;
+// goto;
     }
     err = blk_crypto_profile_init(blk_crypto_fallback_profile,
     blk_crypto_num_keyslots);
-    if (err)
-    goto fail_free_profile;
+    if (err) {
+// goto;
+    }
     err = -ENOMEM;
     blk_crypto_fallback_profile.ll_ops = blk_crypto_fallback_ll_ops;
     blk_crypto_fallback_profile.max_dun_bytes_supported = BLK_CRYPTO_MAX_IV_SIZE;
     blk_crypto_fallback_profile.key_types_supported = BLK_CRYPTO_KEY_TYPE_RAW;
 // All blk-crypto modes have a crypto API fallback.
-    for (i = 0; i < BLK_ENCRYPTION_MODE_MAX; i++)
+    for (i = 0; i < BLK_ENCRYPTION_MODE_MAX; i++) {
     blk_crypto_fallback_profile.modes_supported[i] = 0xFFFFFFFF;
+    }
     blk_crypto_fallback_profile.modes_supported[BLK_ENCRYPTION_MODE_INVALID] = 0;
     blk_crypto_wq = alloc_workqueue("blk_crypto_wq",
     WQ_UNBOUND | WQ_HIGHPRI |
     WQ_MEM_RECLAIM, num_online_cpus());
-    if (!blk_crypto_wq)
-    goto fail_destroy_profile;
+    if (!blk_crypto_wq) {
+// goto;
+    }
     blk_crypto_keyslots = kzalloc_objs(blk_crypto_keyslots[0],
     blk_crypto_num_keyslots);
-    if (!blk_crypto_keyslots)
-    goto fail_free_wq;
+    if (!blk_crypto_keyslots) {
+// goto;
+    }
     blk_crypto_bounce_page_pool =
     mempool_create_page_pool(num_prealloc_bounce_pg, 0);
-    if (!blk_crypto_bounce_page_pool)
-    goto fail_free_keyslots;
+    if (!blk_crypto_bounce_page_pool) {
+// goto;
+    }
     bio_fallback_crypt_ctx_cache = KMEM_CACHE(bio_fallback_crypt_ctx, 0);
-    if (!bio_fallback_crypt_ctx_cache)
-    goto fail_free_bounce_page_pool;
+    if (!bio_fallback_crypt_ctx_cache) {
+// goto;
+    }
     bio_fallback_crypt_ctx_pool =
     mempool_create_slab_pool(num_prealloc_fallback_crypt_ctxs,
     bio_fallback_crypt_ctx_cache);
-    if (!bio_fallback_crypt_ctx_pool)
-    goto fail_free_crypt_ctx_cache;
+    if (!bio_fallback_crypt_ctx_pool) {
+// goto;
+    }
     blk_crypto_fallback_inited = true;
     return 0;
-    fail_free_crypt_ctx_cache:
+// label;
     kmem_cache_destroy(bio_fallback_crypt_ctx_cache);
-    fail_free_bounce_page_pool:
+// label;
     mempool_destroy(blk_crypto_bounce_page_pool);
-    fail_free_keyslots:
+// label;
     kfree(blk_crypto_keyslots);
-    fail_free_wq:
+// label;
     destroy_workqueue(blk_crypto_wq);
-    fail_destroy_profile:
+// label;
     blk_crypto_profile_destroy(blk_crypto_fallback_profile);
-    fail_free_profile:
+// label;
     kfree(blk_crypto_fallback_profile);
-    fail_free_bioset:
+// label;
     bioset_exit(&enc_bio_set);
-    out:
+// label;
     return err;
     }
 //
@@ -571,27 +809,28 @@ unsafe extern "C" fn blk_crypto_fallback_init() -> c_int {
 // Returns -ENOPKG if the needed crypto API support is missing.
 //
 #[no_mangle]
-pub unsafe extern "C" fn blk_crypto_fallback_start_using_mode(mode_num: enum blk_crypto_mode_num) -> c_int {
-    int blk_crypto_fallback_start_using_mode(enum blk_crypto_mode_num mode_num)
-    {
-    const char *cipher_str = blk_crypto_modes[mode_num].cipher_str;
-    struct blk_crypto_fallback_keyslot *slotp;
-    unsigned int i;
-    let mut err: c_int = 0;
+pub unsafe extern "C" fn blk_crypto_fallback_start_using_mode(mode_num: blk_crypto_mode_num) -> c_int {
+    let mut cipher_str = blk_crypto_modes[mode_num].cipher_str;
+pub static mut slotp: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+pub static mut err: c_int = 0;
 //
 // Fast path
 // Ensure that updates to blk_crypto_keyslots[i].tfms[mode_num]
 // for each i are visible before we try to access them.
 //
-    if (likely(smp_load_acquire(&tfms_inited[mode_num])))
+    if (likely(smp_load_acquire(&tfms_inited[mode_num]))) {
     return 0;
+    }
     mutex_lock(&tfms_init_lock);
-    if (tfms_inited[mode_num])
-    goto out;
+    if (tfms_inited[mode_num]) {
+// goto;
+    }
     err = blk_crypto_fallback_init();
-    if (err)
-    goto out;
-    for (i = 0; i < blk_crypto_num_keyslots; i++) {
+    if (err) {
+// goto;
+    }
+    while (i < blk_crypto_num_keyslots) {
     slotp = &blk_crypto_keyslots[i];
     slotp.tfms[mode_num] = crypto_alloc_sync_skcipher(cipher_str,
     0, 0);
@@ -603,7 +842,7 @@ pub unsafe extern "C" fn blk_crypto_fallback_start_using_mode(mode_num: enum blk
     err = -ENOPKG;
     }
     slotp.tfms[mode_num] = core::ptr::null_mut();
-    goto out_free_tfms;
+// goto;
     }
     crypto_sync_skcipher_set_flags(slotp.tfms[mode_num],
     CRYPTO_TFM_REQ_FORBID_WEAK_KEYS);
@@ -613,14 +852,14 @@ pub unsafe extern "C" fn blk_crypto_fallback_start_using_mode(mode_num: enum blk
 // for each i are visible before we set tfms_inited[mode_num].
 //
     smp_store_release(&tfms_inited[mode_num], true);
-    goto out;
-    out_free_tfms:
-    for (i = 0; i < blk_crypto_num_keyslots; i++) {
+// goto;
+// label;
+    while (i < blk_crypto_num_keyslots) {
     slotp = &blk_crypto_keyslots[i];
     crypto_free_sync_skcipher(slotp.tfms[mode_num]);
     slotp.tfms[mode_num] = core::ptr::null_mut();
     }
-    out:
+// label;
     mutex_unlock(&tfms_init_lock);
     return err;
     }

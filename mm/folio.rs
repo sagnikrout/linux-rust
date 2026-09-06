@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -68,13 +318,12 @@ pub struct cpu_fbatches {
     pub lru_move_tail: folio_batch,
 }
 
-    static DEFINE_PER_CPU(struct cpu_fbatches, cpu_fbatches) = {
+    static DEFINE_PER_CPU(cpu_fbatches, cpu_fbatches) = {
     .lock = INIT_LOCAL_LOCK(lock),
     .lock_irq = INIT_LOCAL_LOCK(lock_irq),
     };
-    static void __page_cache_release(struct folio *folio, struct lruvec **lruvecp,
-    unsigned long *flagsp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __page_cache_release(folio: *mut folio, lruvecp: *mut *mut lruvec, flagsp: *mut c_ulong) {
     if (folio_test_lru(folio)) {
     folio_lruvec_relock_irqsave(folio, lruvecp, flagsp);
     lruvec_del_folio(*lruvecp, folio);
@@ -87,18 +336,15 @@ pub struct cpu_fbatches {
 //
 #[no_mangle]
 unsafe extern "C" fn page_cache_release(folio: *mut folio) {
-    static void page_cache_release(struct folio *folio)
-    {
-    struct lruvec *lruvec = core::ptr::null_mut();
-    unsigned long flags;
+    let mut lruvec = core::ptr::null_mut();
+    let mut flags = 0;
     __page_cache_release(folio, &lruvec, &flags);
-    if (lruvec)
+    if (lruvec) {
     lruvec_unlock_irqrestore(lruvec, flags);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn __folio_put(folio: *mut folio) {
-    void __folio_put(struct folio *folio)
-    {
     if (unlikely(folio_is_zone_device(folio))) {
     free_zone_device_folio(folio);
     return;
@@ -113,13 +359,11 @@ pub unsafe extern "C" fn __folio_put(folio: *mut folio) {
     free_frozen_pages(&folio.page, folio_order(folio));
     }
     EXPORT_SYMBOL(__folio_put);
-    typedef void (*move_fn_t)(struct lruvec *lruvec, struct folio *folio);
+    typedef void (*move_fn_t)(lruvec *lruvec, folio *folio);
 #[no_mangle]
 unsafe extern "C" fn lru_add(lruvec: *mut lruvec, folio: *mut folio) {
-    static void lru_add(struct lruvec *lruvec, struct folio *folio)
-    {
-    let mut was_unevictable: c_int = folio_test_clear_unevictable(folio);
-    let mut nr_pages: c_long = folio_nr_pages(folio);
+pub static mut was_unevictable: c_int = 0;
+pub static mut nr_pages: c_long = 0;
     VM_BUG_ON_FOLIO(folio_test_lru(folio), folio);
 //
 // Is an smp_mb__after_atomic() still required here, before
@@ -133,8 +377,9 @@ unsafe extern "C" fn lru_add(lruvec: *mut lruvec, folio: *mut folio) {
 // folio_put_testzero() has excluded any other users of the folio.)
 //
     if (folio_evictable(folio)) {
-    if (was_unevictable)
+    if (was_unevictable) {
     __count_vm_events(UNEVICTABLE_PGRESCUED, nr_pages);
+    }
     } else {
     folio_clear_active(folio);
     folio_set_unevictable(folio);
@@ -146,32 +391,33 @@ unsafe extern "C" fn lru_add(lruvec: *mut lruvec, folio: *mut folio) {
 // than leaving a page on the unevictable LRU indefinitely.
 //
     folio.mlock_count = 0;
-    if (!was_unevictable)
+    if (!was_unevictable) {
     __count_vm_events(UNEVICTABLE_PGCULLED, nr_pages);
+    }
     }
     lruvec_add_folio(lruvec, folio);
     trace_mm_lru_insertion(folio);
     }
 #[no_mangle]
 unsafe extern "C" fn folio_batch_move_lru(fbatch: *mut folio_batch, move_fn: move_fn_t) {
-    static void folio_batch_move_lru(struct folio_batch *fbatch, move_fn_t move_fn)
-    {
-    int i;
-    struct lruvec *lruvec = core::ptr::null_mut();
-    let mut flags: c_ulong = 0;
-    struct folio_batch free_fbatch;
-    let mut is_lru_add: bool = (move_fn == lru_add);
+    let mut i = 0;
+    let mut lruvec = core::ptr::null_mut();
+pub static mut flags: c_ulong = 0;
+pub static mut free_fbatch: usize = 0;
+pub static mut is_lru_add: bool = false;
 //
 // If we're adding to the LRU, preemptively filter dead folios. Use
 // this dedicated folio batch for temp storage and deferred cleanup.
 //
-    if (is_lru_add)
+    if (is_lru_add) {
     folio_batch_init(&free_fbatch);
-    for (i = 0; i < folio_batch_count(fbatch); i++) {
-    struct folio *folio = fbatch.folios[i];
+    }
+    while (i < folio_batch_count(fbatch)) {
+    let mut folio = fbatch.folios[i];
 // block memcg migration while the folio moves between lru
-    if (!is_lru_add && !folio_test_clear_lru(folio))
+    if (!is_lru_add && !folio_test_clear_lru(folio)) {
     continue;
+    }
 //
 // Filter dead folios by moving them from the add batch to the temp
 // batch for freeing after this loop.
@@ -194,8 +440,9 @@ unsafe extern "C" fn folio_batch_move_lru(fbatch: *mut folio_batch, move_fn: mov
     move_fn(lruvec, folio);
     folio_set_lru(folio);
     }
-    if (lruvec)
+    if (lruvec) {
     lruvec_unlock_irqrestore(lruvec, flags);
+    }
 // Cleanup filtered dead folios.
     if (is_lru_add) {
     mem_cgroup_uncharge_folios(&free_fbatch);
@@ -203,37 +450,40 @@ unsafe extern "C" fn folio_batch_move_lru(fbatch: *mut folio_batch, move_fn: mov
     }
     folios_put(fbatch);
     }
-    static void __folio_batch_add_and_move(struct folio_batch __percpu *fbatch,
-    struct folio *folio, move_fn_t move_fn, bool disable_irq)
-    {
-    unsigned long flags;
+#[no_mangle]
+pub unsafe extern "C" fn __folio_batch_add_and_move(fbatch: *mut folio_batch, folio: *mut folio, move_fn: move_fn_t, disable_irq: bool) {
+    let mut flags = 0;
     folio_get(folio);
-    if (disable_irq)
+    if (disable_irq) {
     local_lock_irqsave(&cpu_fbatches.lock_irq, flags);
-    else
+    }
+    else {
     local_lock(&cpu_fbatches.lock);
+    }
     if (!folio_batch_add(this_cpu_ptr(fbatch), folio) ||
-    !folio_may_be_lru_cached(folio) || lru_cache_disabled())
+    !folio_may_be_lru_cached(folio) || lru_cache_disabled()) {
     folio_batch_move_lru(this_cpu_ptr(fbatch), move_fn);
-    if (disable_irq)
+    }
+    if (disable_irq) {
     local_unlock_irqrestore(&cpu_fbatches.lock_irq, flags);
-    else
+    }
+    else {
     local_unlock(&cpu_fbatches.lock);
     }
+    }
 
-    __folio_batch_add_and_move(			\
-    &cpu_fbatches.op,			\
-    folio,					\
-    op,					\
-    offsetof(struct cpu_fbatches, op) >=	\
-    offsetof(struct cpu_fbatches, lock_irq)	\
+    __folio_batch_add_and_move(			
+    &cpu_fbatches.op,			
+    folio,					
+    op,					
+    offsetof(cpu_fbatches, op) >=	
+    offsetof(cpu_fbatches, lock_irq)	
     )
 #[no_mangle]
 unsafe extern "C" fn lru_move_tail(lruvec: *mut lruvec, folio: *mut folio) {
-    static void lru_move_tail(struct lruvec *lruvec, struct folio *folio)
-    {
-    if (folio_test_unevictable(folio))
+    if (folio_test_unevictable(folio)) {
     return;
+    }
     lruvec_del_folio(lruvec, folio);
     folio_clear_active(folio);
     lruvec_add_folio_tail(lruvec, folio);
@@ -248,20 +498,18 @@ unsafe extern "C" fn lru_move_tail(lruvec: *mut lruvec, folio: *mut folio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_rotate_reclaimable(folio: *mut folio) {
-    void folio_rotate_reclaimable(struct folio *folio)
-    {
     if (folio_test_locked(folio) || folio_test_dirty(folio) ||
-    folio_test_unevictable(folio) || !folio_test_lru(folio))
+    folio_test_unevictable(folio) || !folio_test_lru(folio)) {
     return;
+    }
     folio_batch_add_and_move(folio, lru_move_tail);
     }
 #[no_mangle]
 unsafe extern "C" fn lru_activate(lruvec: *mut lruvec, folio: *mut folio) {
-    static void lru_activate(struct lruvec *lruvec, struct folio *folio)
-    {
-    let mut nr_pages: c_long = folio_nr_pages(folio);
-    if (folio_test_active(folio) || folio_test_unevictable(folio))
+pub static mut nr_pages: c_long = 0;
+    if (folio_test_active(folio) || folio_test_unevictable(folio)) {
     return;
+    }
     lruvec_del_folio(lruvec, folio);
     folio_set_active(folio);
     lruvec_add_folio(lruvec, folio);
@@ -272,34 +520,31 @@ unsafe extern "C" fn lru_activate(lruvec: *mut lruvec, folio: *mut folio) {
 
 #[no_mangle]
 unsafe extern "C" fn folio_activate_drain(cpu: c_int) {
-    static void folio_activate_drain(int cpu)
-    {
-    struct folio_batch *fbatch = &per_cpu(cpu_fbatches.lru_activate, cpu);
-    if (folio_batch_count(fbatch))
+    let mut fbatch = &per_cpu(cpu_fbatches.lru_activate, cpu);
+    if (folio_batch_count(fbatch)) {
     folio_batch_move_lru(fbatch, lru_activate);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn folio_activate(folio: *mut folio) {
-    void folio_activate(struct folio *folio)
-    {
     if (folio_test_active(folio) || folio_test_unevictable(folio) ||
-    !folio_test_lru(folio))
+    !folio_test_lru(folio)) {
     return;
+    }
     folio_batch_add_and_move(folio, lru_activate);
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn folio_activate_drain(cpu: c_int) {
-    static inline void folio_activate_drain(int cpu)
-    {
     }
 #[no_mangle]
-pub unsafe extern "C" fn folio_activate(folio: *mut folio) {
-    void folio_activate(struct folio *folio)
-    {
-    struct lruvec *lruvec;
-    if (!folio_test_clear_lru(folio))
+#[no_mangle]
+// duplicate fn: folio_activate
+pub unsafe extern "C" fn folio_activate_dup(folio: *mut folio) {
+pub static mut lruvec: *mut c_void = core::ptr::null_mut();
+    if (!folio_test_clear_lru(folio)) {
     return;
+    }
     lruvec = folio_lruvec_lock_irq(folio);
     lru_activate(lruvec, folio);
     lruvec_unlock_irq(lruvec);
@@ -308,10 +553,8 @@ pub unsafe extern "C" fn folio_activate(folio: *mut folio) {
 
 #[no_mangle]
 unsafe extern "C" fn __lru_cache_activate_folio(folio: *mut folio) {
-    static void __lru_cache_activate_folio(struct folio *folio)
-    {
-    struct folio_batch *fbatch;
-    int i;
+pub static mut fbatch: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
     local_lock(&cpu_fbatches.lock);
     fbatch = this_cpu_ptr(&cpu_fbatches.lru_add);
 //
@@ -324,8 +567,8 @@ unsafe extern "C" fn __lru_cache_activate_folio(folio: *mut folio) {
 // a folio is marked active just after it is added to the inactive
 // list causing accounting errors and BUG_ON checks to trigger.
 //
-    for (i = folio_batch_count(fbatch) - 1; i >= 0; i--) {
-    struct folio *batch_folio = fbatch.folios[i];
+    while (i >= 0) {
+    let mut batch_folio = fbatch.folios[i];
     if (batch_folio == folio) {
     folio_set_active(folio);
     break;
@@ -336,11 +579,10 @@ unsafe extern "C" fn __lru_cache_activate_folio(folio: *mut folio) {
 
 #[no_mangle]
 unsafe extern "C" fn lru_gen_inc_refs(folio: *mut folio) {
-    static void lru_gen_inc_refs(struct folio *folio)
-    {
     unsigned long new_flags, old_flags = READ_ONCE(folio.flags.f);
-    if (folio_test_unevictable(folio))
+    if (folio_test_unevictable(folio)) {
     return;
+    }
 // see the comment on LRU_REFS_FLAGS
     if (!folio_test_referenced(folio)) {
     set_mask_bits(&folio.flags.f, LRU_REFS_MASK, BIT(PG_referenced));
@@ -348,8 +590,9 @@ unsafe extern "C" fn lru_gen_inc_refs(folio: *mut folio) {
     }
     do {
     if ((old_flags & LRU_REFS_MASK) == LRU_REFS_MASK) {
-    if (!folio_test_workingset(folio))
+    if (!folio_test_workingset(folio)) {
     folio_set_workingset(folio);
+    }
     return;
     }
     new_flags = old_flags + BIT(LRU_REFS_PGOFF);
@@ -357,30 +600,25 @@ unsafe extern "C" fn lru_gen_inc_refs(folio: *mut folio) {
     }
 #[no_mangle]
 unsafe extern "C" fn lru_gen_clear_refs(folio: *mut folio) -> bool {
-    static bool lru_gen_clear_refs(struct folio *folio)
-    {
-    let mut gen: c_int = folio_lru_gen(folio);
-    let mut type: c_int = folio_is_file_lru(folio);
-    unsigned long seq;
-    if (gen < 0)
+pub static mut gen: c_int = 0;
+pub static mut type: c_int = 0;
+    let mut seq = 0;
+    if (gen < 0) {
     return true;
+    }
     set_mask_bits(&folio.flags.f, LRU_REFS_FLAGS | BIT(PG_workingset), 0);
     rcu_read_lock();
     seq = READ_ONCE(folio_lruvec(folio).lrugen.min_seq[type]);
     rcu_read_unlock();
 // whether can do without shuffling under the LRU lock
-    let mut gen: return = = lru_gen_from_seq(seq);
+pub static mut gen: return = 0;
     }
 
 #[no_mangle]
 unsafe extern "C" fn lru_gen_inc_refs(folio: *mut folio) {
-    static void lru_gen_inc_refs(struct folio *folio)
-    {
     }
 #[no_mangle]
 unsafe extern "C" fn lru_gen_clear_refs(folio: *mut folio) -> bool {
-    static bool lru_gen_clear_refs(struct folio *folio)
-    {
     return false;
     }
 
@@ -399,10 +637,9 @@ unsafe extern "C" fn lru_gen_clear_refs(folio: *mut folio) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_mark_accessed(folio: *mut folio) {
-    void folio_mark_accessed(struct folio *folio)
-    {
-    if (folio_test_dropbehind(folio))
+    if (folio_test_dropbehind(folio)) {
     return;
+    }
     if (lru_gen_enabled()) {
     lru_gen_inc_refs(folio);
     return;
@@ -422,15 +659,18 @@ pub unsafe extern "C" fn folio_mark_accessed(folio: *mut folio) {
 // folio_batch, mark it active and it'll be moved to the active
 // LRU on the next drain.
 //
-    if (folio_test_lru(folio))
+    if (folio_test_lru(folio)) {
     folio_activate(folio);
-    else
+    }
+    else {
     __lru_cache_activate_folio(folio);
+    }
     folio_clear_referenced(folio);
     workingset_activation(folio);
     }
-    if (folio_test_idle(folio))
+    if (folio_test_idle(folio)) {
     folio_clear_idle(folio);
+    }
     }
     EXPORT_SYMBOL(folio_mark_accessed);
 //
@@ -444,8 +684,6 @@ pub unsafe extern "C" fn folio_mark_accessed(folio: *mut folio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_add_lru(folio: *mut folio) {
-    void folio_add_lru(struct folio *folio)
-    {
     VM_BUG_ON_FOLIO(folio_test_active(folio) &&
     folio_test_unevictable(folio), folio);
     VM_BUG_ON_FOLIO(folio_test_lru(folio), folio);
@@ -458,12 +696,13 @@ pub unsafe extern "C" fn folio_add_lru(folio: *mut folio) {
 //
     if (lru_gen_enabled() && !folio_test_unevictable(folio) &&
     lru_gen_in_fault() && !(current.flags & PF_MEMALLOC)) {
-    if (folio_test_workingset(folio))
+    if (folio_test_workingset(folio)) {
     folio_set_active(folio);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !folio_test_referenced(folio)) -> else {
-    else if (!folio_test_referenced(folio))
+    }
+
+    else if (!folio_test_referenced(folio)) {
     folio_mark_accessed(folio);
+    }
     }
     folio_batch_add_and_move(folio, lru_add);
     }
@@ -478,13 +717,13 @@ pub unsafe extern "C" fn if(_arg: !folio_test_referenced(folio)) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_add_lru_vma(folio: *mut folio, vma: *mut vm_area_struct) {
-    void folio_add_lru_vma(struct folio *folio, struct vm_area_struct *vma)
-    {
     VM_BUG_ON_FOLIO(folio_test_lru(folio), folio);
-    if (unlikely((vma.vm_flags & (VM_LOCKED | VM_SPECIAL)) == VM_LOCKED))
+    if (unlikely((vma.vm_flags & (VM_LOCKED | VM_SPECIAL)) == VM_LOCKED)) {
     mlock_new_folio(folio);
-    else
+    }
+    else {
     folio_add_lru(folio);
+    }
     }
 //
 // If the folio cannot be invalidated, it is moved to the
@@ -509,15 +748,15 @@ pub unsafe extern "C" fn folio_add_lru_vma(folio: *mut folio, vma: *mut vm_area_
 //
 #[no_mangle]
 unsafe extern "C" fn lru_deactivate_file(lruvec: *mut lruvec, folio: *mut folio) {
-    static void lru_deactivate_file(struct lruvec *lruvec, struct folio *folio)
-    {
-    let mut active: bool = folio_test_active(folio) || lru_gen_enabled();
-    let mut nr_pages: c_long = folio_nr_pages(folio);
-    if (folio_test_unevictable(folio))
+pub static mut active: bool = false;
+pub static mut nr_pages: c_long = 0;
+    if (folio_test_unevictable(folio)) {
     return;
+    }
 // Some processes are using the folio
-    if (folio_mapped(folio))
+    if (folio_mapped(folio)) {
     return;
+    }
     lruvec_del_folio(lruvec, folio);
     folio_clear_active(folio);
     folio_clear_referenced(folio);
@@ -546,11 +785,10 @@ unsafe extern "C" fn lru_deactivate_file(lruvec: *mut lruvec, folio: *mut folio)
     }
 #[no_mangle]
 unsafe extern "C" fn lru_deactivate(lruvec: *mut lruvec, folio: *mut folio) {
-    static void lru_deactivate(struct lruvec *lruvec, struct folio *folio)
-    {
-    let mut nr_pages: c_long = folio_nr_pages(folio);
-    if (folio_test_unevictable(folio) || !(folio_test_active(folio) || lru_gen_enabled()))
+pub static mut nr_pages: c_long = 0;
+    if (folio_test_unevictable(folio) || !(folio_test_active(folio) || lru_gen_enabled())) {
     return;
+    }
     lruvec_del_folio(lruvec, folio);
     folio_clear_active(folio);
     folio_clear_referenced(folio);
@@ -560,18 +798,19 @@ unsafe extern "C" fn lru_deactivate(lruvec: *mut lruvec, folio: *mut folio) {
     }
 #[no_mangle]
 unsafe extern "C" fn lru_lazyfree(lruvec: *mut lruvec, folio: *mut folio) {
-    static void lru_lazyfree(struct lruvec *lruvec, struct folio *folio)
-    {
-    let mut nr_pages: c_long = folio_nr_pages(folio);
+pub static mut nr_pages: c_long = 0;
     if (!folio_test_anon(folio) || !folio_test_swapbacked(folio) ||
-    folio_test_swapcache(folio) || folio_test_unevictable(folio))
+    folio_test_swapcache(folio) || folio_test_unevictable(folio)) {
     return;
+    }
     lruvec_del_folio(lruvec, folio);
     folio_clear_active(folio);
-    if (lru_gen_enabled())
+    if (lru_gen_enabled()) {
     lru_gen_clear_refs(folio);
-    else
+    }
+    else {
     folio_clear_referenced(folio);
+    }
 //
 // Lazyfree folios are clean anonymous folios.  They have
 // the swapbacked flag cleared, to distinguish them from normal
@@ -589,11 +828,9 @@ unsafe extern "C" fn lru_lazyfree(lruvec: *mut lruvec, folio: *mut folio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn lru_add_drain_cpu(cpu: c_int) {
-    void lru_add_drain_cpu(int cpu)
-    {
-    struct cpu_fbatches *fbatches = &per_cpu(cpu_fbatches, cpu);
-    struct folio_batch *fbatch = &fbatches.lru_add;
-    let mut nr_folios: c_uint = folio_batch_count(fbatch);
+    let mut fbatches = &per_cpu(cpu_fbatches, cpu);
+    let mut fbatch = &fbatches.lru_add;
+pub static mut nr_folios: c_uint = 0;
     if (nr_folios) {
     folio_batch_move_lru(fbatch, lru_add);
     trace_mm_lru_add_drain_tp(cpu, nr_folios);
@@ -601,21 +838,24 @@ pub unsafe extern "C" fn lru_add_drain_cpu(cpu: c_int) {
     fbatch = &fbatches.lru_move_tail;
 // Disabling interrupts below acts as a compiler barrier.
     if (data_race(folio_batch_count(fbatch))) {
-    unsigned long flags;
+    let mut flags = 0;
 // No harm done if a racing interrupt already did this
     local_lock_irqsave(&cpu_fbatches.lock_irq, flags);
     folio_batch_move_lru(fbatch, lru_move_tail);
     local_unlock_irqrestore(&cpu_fbatches.lock_irq, flags);
     }
     fbatch = &fbatches.lru_deactivate_file;
-    if (folio_batch_count(fbatch))
+    if (folio_batch_count(fbatch)) {
     folio_batch_move_lru(fbatch, lru_deactivate_file);
+    }
     fbatch = &fbatches.lru_deactivate;
-    if (folio_batch_count(fbatch))
+    if (folio_batch_count(fbatch)) {
     folio_batch_move_lru(fbatch, lru_deactivate);
+    }
     fbatch = &fbatches.lru_lazyfree;
-    if (folio_batch_count(fbatch))
+    if (folio_batch_count(fbatch)) {
     folio_batch_move_lru(fbatch, lru_lazyfree);
+    }
     folio_activate_drain(cpu);
     }
 //
@@ -630,13 +870,13 @@ pub unsafe extern "C" fn lru_add_drain_cpu(cpu: c_int) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn deactivate_file_folio(folio: *mut folio) {
-    void deactivate_file_folio(struct folio *folio)
-    {
 // Deactivating an unevictable folio will not accelerate reclaim
-    if (folio_test_unevictable(folio) || !folio_test_lru(folio))
+    if (folio_test_unevictable(folio) || !folio_test_lru(folio)) {
     return;
-    if (lru_gen_enabled() && lru_gen_clear_refs(folio))
+    }
+    if (lru_gen_enabled() && lru_gen_clear_refs(folio)) {
     return;
+    }
     folio_batch_add_and_move(folio, lru_deactivate_file);
     }
 //
@@ -649,12 +889,12 @@ pub unsafe extern "C" fn deactivate_file_folio(folio: *mut folio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_deactivate(folio: *mut folio) {
-    void folio_deactivate(struct folio *folio)
-    {
-    if (folio_test_unevictable(folio) || !folio_test_lru(folio))
+    if (folio_test_unevictable(folio) || !folio_test_lru(folio)) {
     return;
-    if (lru_gen_enabled() ? lru_gen_clear_refs(folio) : !folio_test_active(folio))
+    }
+    if (lru_gen_enabled() ? lru_gen_clear_refs(folio) : !folio_test_active(folio)) {
     return;
+    }
     folio_batch_add_and_move(folio, lru_deactivate);
     }
 //
@@ -666,18 +906,15 @@ pub unsafe extern "C" fn folio_deactivate(folio: *mut folio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_mark_lazyfree(folio: *mut folio) {
-    void folio_mark_lazyfree(struct folio *folio)
-    {
     if (!folio_test_anon(folio) || !folio_test_swapbacked(folio) ||
     !folio_test_lru(folio) ||
-    folio_test_swapcache(folio) || folio_test_unevictable(folio))
+    folio_test_swapcache(folio) || folio_test_unevictable(folio)) {
     return;
+    }
     folio_batch_add_and_move(folio, lru_lazyfree);
     }
 #[no_mangle]
 pub unsafe extern "C" fn lru_add_drain() {
-    void lru_add_drain(void)
-    {
     local_lock(&cpu_fbatches.lock);
     lru_add_drain_cpu(smp_processor_id());
     local_unlock(&cpu_fbatches.lock);
@@ -691,8 +928,6 @@ pub unsafe extern "C" fn lru_add_drain() {
 //
 #[no_mangle]
 unsafe extern "C" fn lru_add_and_bh_lrus_drain() {
-    static void lru_add_and_bh_lrus_drain(void)
-    {
     local_lock(&cpu_fbatches.lock);
     lru_add_drain_cpu(smp_processor_id());
     local_unlock(&cpu_fbatches.lock);
@@ -701,8 +936,6 @@ unsafe extern "C" fn lru_add_and_bh_lrus_drain() {
     }
 #[no_mangle]
 pub unsafe extern "C" fn lru_add_drain_cpu_zone(zone: *mut zone) {
-    void lru_add_drain_cpu_zone(struct zone *zone)
-    {
     local_lock(&cpu_fbatches.lock);
     lru_add_drain_cpu(smp_processor_id());
     drain_local_pages(zone);
@@ -710,18 +943,14 @@ pub unsafe extern "C" fn lru_add_drain_cpu_zone(zone: *mut zone) {
     mlock_drain_local();
     }
 
-    static DEFINE_PER_CPU(struct work_struct, lru_add_drain_work);
+pub static mut struct work_struct: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn lru_add_drain_per_cpu(dummy: *mut work_struct) {
-    static void lru_add_drain_per_cpu(struct work_struct *dummy)
-    {
     lru_add_and_bh_lrus_drain();
     }
 #[no_mangle]
 unsafe extern "C" fn cpu_needs_drain(cpu: c_uint) -> bool {
-    static bool cpu_needs_drain(unsigned int cpu)
-    {
-    struct cpu_fbatches *fbatches = &per_cpu(cpu_fbatches, cpu);
+    let mut fbatches = &per_cpu(cpu_fbatches, cpu);
 // Check these in order of likelihood that they're not zero
     return data_race(folio_batch_count(&fbatches.lru_add) ||
     folio_batch_count(&fbatches.lru_move_tail) ||
@@ -741,8 +970,6 @@ unsafe extern "C" fn cpu_needs_drain(cpu: c_uint) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __lru_add_drain_all(force_all_cpus: bool) {
-    static inline void __lru_add_drain_all(bool force_all_cpus)
-    {
 //
 // lru_drain_gen - Global pages generation number
 //
@@ -754,15 +981,17 @@ pub unsafe extern "C" fn __lru_add_drain_all(force_all_cpus: bool) {
 // each CPU.
 //
     static unsigned int lru_drain_gen;
-    static struct cpumask has_work;
-    static DEFINE_MUTEX(lock);
-    unsigned cpu, this_gen;
+pub static mut has_work: usize = 0;
+pub static mut lock: usize = 0;
+    let mut cpu = 0;
+    let mut this_gen = 0;
 //
 // Make sure nobody triggers this path before mm_percpu_wq is fully
 // initialized.
 //
-    if (WARN_ON(!mm_percpu_wq))
+    if (WARN_ON!(!mm_percpu_wq)) {
     return;
+    }
     trace_mm_lru_add_drain_all_tp(force_all_cpus);
 //
 // Guarantee folio_batch counter stores visible by this CPU
@@ -785,8 +1014,9 @@ pub unsafe extern "C" fn __lru_add_drain_all(force_all_cpus: bool) {
 // (C) Exit the draining operation if a newer generation, from another
 // lru_add_drain_all(), was already scheduled for draining. Check (A).
 //
-    if (unlikely(this_gen != lru_drain_gen && !force_all_cpus))
-    goto done;
+    if (unlikely(this_gen != lru_drain_gen && !force_all_cpus)) {
+// goto;
+    }
 //
 // (D) Increment global generation number
 //
@@ -812,29 +1042,28 @@ pub unsafe extern "C" fn __lru_add_drain_all(force_all_cpus: bool) {
     smp_mb();
     cpumask_clear(&has_work);
     for_each_online_cpu(cpu) {
-    struct work_struct *work = &per_cpu(lru_add_drain_work, cpu);
+    let mut work = &per_cpu(lru_add_drain_work, cpu);
     if (cpu_needs_drain(cpu)) {
     INIT_WORK(work, lru_add_drain_per_cpu);
     queue_work_on(cpu, mm_percpu_wq, work);
     __cpumask_set_cpu(cpu, &has_work);
     }
     }
-    for_each_cpu(cpu, &has_work)
+    for_each_cpu(cpu, &has_work) {
     flush_work(&per_cpu(lru_add_drain_work, cpu));
-    done:
+    }
+// label;
     mutex_unlock(&lock);
     }
 #[no_mangle]
 pub unsafe extern "C" fn lru_add_drain_all() {
-    void lru_add_drain_all(void)
-    {
     __lru_add_drain_all(false);
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn lru_add_drain_all() {
-    void lru_add_drain_all(void)
-    {
+#[no_mangle]
+// duplicate fn: lru_add_drain_all
+pub unsafe extern "C" fn lru_add_drain_all_dup() {
     lru_add_drain();
     }
 
@@ -860,29 +1089,33 @@ pub unsafe extern "C" fn lru_add_drain_all() {
 // @drained points at must be initialized to LRU_CACHE_NOT_DRAINED before
 // the first invocation by the caller.
 //
-    void lru_cache_drain_for_folio(const struct folio *folio,
-    unsigned int extra_refs, enum lru_cache_drained *drained)
-    {
-    if (!folio_may_be_lru_cached(folio))
+#[no_mangle]
+pub unsafe extern "C" fn lru_cache_drain_for_folio(folio: *mut folio, extra_refs: c_uint, drained: *mut lru_cache_drained) {
+    if (!folio_may_be_lru_cached(folio)) {
     return;
+    }
     if (!drained || *drained == LRU_CACHE_NOT_DRAINED) {
     if (folio_ref_count(folio) ==
-    folio_expected_ref_count(folio) + extra_refs)
+    folio_expected_ref_count(folio) + extra_refs) {
     return;
+    }
     lru_add_drain();
-    if (drained)
+    if (drained) {
 // drained = LRU_CACHE_DRAINED;
+    }
     }
     if (!drained || *drained == LRU_CACHE_DRAINED) {
     if (folio_ref_count(folio) ==
-    folio_expected_ref_count(folio) + extra_refs)
+    folio_expected_ref_count(folio) + extra_refs) {
     return;
+    }
     lru_add_drain_all();
-    if (drained)
+    if (drained) {
 // drained = LRU_CACHE_DRAINED_ALL;
     }
     }
-    let mut lru_disable_count: core::sync::atomic::AtomicI32 = ATOMIC_INIT(0);
+    }
+pub static mut lru_disable_count: core::sync::atomic::AtomicI32 = 0;
 //
 // lru_cache_disable() needs to be called before we start compiling
 // a list of folios to be migrated using folio_isolate_lru().
@@ -893,8 +1126,6 @@ pub unsafe extern "C" fn lru_add_drain_all() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn lru_cache_disable() {
-    void lru_cache_disable(void)
-    {
     atomic_inc(&lru_disable_count);
 //
 // Readers of lru_disable_count are protected by either disabling
@@ -933,30 +1164,33 @@ pub unsafe extern "C" fn lru_cache_disable() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn folios_put_refs(folios: *mut folio_batch, refs: *mut c_uint) {
-    void folios_put_refs(struct folio_batch *folios, unsigned int *refs)
-    {
-    int i, j;
-    struct lruvec *lruvec = core::ptr::null_mut();
-    let mut flags: c_ulong = 0;
-    for (i = 0, j = 0; i < folios.nr; i++) {
-    struct folio *folio = folios.folios[i];
-    let mut nr_refs: c_uint = refs ? refs[i] : 1;
+    let mut i = 0;
+    let mut j = 0;
+    let mut lruvec = core::ptr::null_mut();
+pub static mut flags: c_ulong = 0;
+    while (i < folios.nr) {
+    let mut folio = folios.folios[i];
+pub static mut nr_refs: c_uint = 0;
 // Folio batch entry may have been preemptively removed during drain.
-    if (!folio)
+    if (!folio) {
     continue;
-    if (is_huge_zero_folio(folio))
+    }
+    if (is_huge_zero_folio(folio)) {
     continue;
+    }
     if (folio_is_zone_device(folio)) {
     if (lruvec) {
     lruvec_unlock_irqrestore(lruvec, flags);
     lruvec = core::ptr::null_mut();
     }
-    if (folio_ref_sub_and_test(folio, nr_refs))
+    if (folio_ref_sub_and_test(folio, nr_refs)) {
     free_zone_device_folio(folio);
+    }
     continue;
     }
-    if (!folio_ref_sub_and_test(folio, nr_refs))
+    if (!folio_ref_sub_and_test(folio, nr_refs)) {
     continue;
+    }
 // hugetlb has its own memcg
     if (folio_test_hugetlb(folio)) {
     if (lruvec) {
@@ -968,12 +1202,14 @@ pub unsafe extern "C" fn folios_put_refs(folios: *mut folio_batch, refs: *mut c_
     }
     folio_unqueue_deferred_split(folio);
     __page_cache_release(folio, &lruvec, &flags);
-    if (j != i)
+    if (j != i) {
     folios.folios[j] = folio;
-    j++;
     }
-    if (lruvec)
+    j += 1;
+    }
+    if (lruvec) {
     lruvec_unlock_irqrestore(lruvec, flags);
+    }
     if (!j) {
     folio_batch_reinit(folios);
     return;
@@ -997,27 +1233,28 @@ pub unsafe extern "C" fn folios_put_refs(folios: *mut folio_batch, refs: *mut c_
 //
 #[no_mangle]
 pub unsafe extern "C" fn release_pages(arg: release_pages_arg, nr: c_int) {
-    void release_pages(release_pages_arg arg, int nr)
-    {
-    struct folio_batch fbatch;
+pub static mut fbatch: usize = 0;
     int refs[FOLIO_BATCH_SIZE];
-    struct encoded_page **encoded = arg.encoded_pages;
-    int i;
+    let mut encoded = arg.encoded_pages;
+    let mut i = 0;
     folio_batch_init(&fbatch);
-    for (i = 0; i < nr; i++) {
+    while (i < nr) {
 // Turn any of the argument types into a folio
-    struct folio *folio = page_folio(encoded_page_ptr(encoded[i]));
+    let mut folio = page_folio(encoded_page_ptr(encoded[i]));
 // Is our next entry actually "nr_pages" -> "nr_refs" ?
     refs[fbatch.nr] = 1;
     if (unlikely(encoded_page_flags(encoded[i]) &
-    ENCODED_PAGE_BIT_NR_PAGES_NEXT))
+    ENCODED_PAGE_BIT_NR_PAGES_NEXT)) {
     refs[fbatch.nr] = encoded_nr_pages(encoded[++i]);
-    if (folio_batch_add(&fbatch, folio) > 0)
+    }
+    if (folio_batch_add(&fbatch, folio) > 0) {
     continue;
+    }
     folios_put_refs(&fbatch, refs);
     }
-    if (fbatch.nr)
+    if (fbatch.nr) {
     folios_put_refs(&fbatch, refs);
+    }
     }
     EXPORT_SYMBOL(release_pages);
 //
@@ -1032,8 +1269,6 @@ pub unsafe extern "C" fn release_pages(arg: release_pages_arg, nr: c_int) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __folio_batch_release(fbatch: *mut folio_batch) {
-    void __folio_batch_release(struct folio_batch *fbatch)
-    {
     if (!fbatch.percpu_pvec_drained) {
     lru_add_drain();
     fbatch.percpu_pvec_drained = true;
@@ -1052,29 +1287,29 @@ pub unsafe extern "C" fn __folio_batch_release(fbatch: *mut folio_batch) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_batch_remove_exceptionals(fbatch: *mut folio_batch) {
-    void folio_batch_remove_exceptionals(struct folio_batch *fbatch)
-    {
-    unsigned int i, j;
-    for (i = 0, j = 0; i < folio_batch_count(fbatch); i++) {
-    struct folio *folio = fbatch.folios[i];
-    if (!xa_is_value(folio))
+    let mut i = 0;
+    let mut j = 0;
+    while (i < folio_batch_count(fbatch)) {
+    let mut folio = fbatch.folios[i];
+    if (!xa_is_value(folio)) {
     fbatch.folios[j++] = folio;
+    }
     }
     fbatch.nr = j;
     }
 
-    static void lruvec_reparent_lru(struct lruvec *child_lruvec,
-    struct lruvec *parent_lruvec,
-    enum lru_list lru, int nid)
-    {
-    int zid;
-    struct zone *zone;
-    if (lru != LRU_UNEVICTABLE)
+#[no_mangle]
+pub unsafe extern "C" fn lruvec_reparent_lru(child_lruvec: *mut lruvec, parent_lruvec: *mut lruvec, lru: lru_list, nid: c_int) {
+    let mut zid = 0;
+pub static mut zone: *mut c_void = core::ptr::null_mut();
+    if (lru != LRU_UNEVICTABLE) {
     list_splice_tail_init(&child_lruvec.lists[lru], &parent_lruvec.lists[lru]);
+    }
     for_each_managed_zone_pgdat(zone, NODE_DATA(nid), zid, MAX_NR_ZONES - 1) {
-    let mut size: c_ulong = mem_cgroup_get_zone_lru_size(child_lruvec, lru, zid);
-    if (!size)
+pub static mut size: c_ulong = 0;
+    if (!size) {
     continue;
+    }
 //
 // The folios are accounted to the parent from now on, so the
 // size has to be moved, not just copied. Leaving it behind
@@ -1086,12 +1321,12 @@ pub unsafe extern "C" fn folio_batch_remove_exceptionals(fbatch: *mut folio_batc
     }
 #[no_mangle]
 pub unsafe extern "C" fn lru_reparent_memcg(memcg: *mut mem_cgroup, parent: *mut mem_cgroup, nid: c_int) {
-    void lru_reparent_memcg(struct mem_cgroup *memcg, struct mem_cgroup *parent, int nid)
-    {
     enum lru_list lru;
-    struct lruvec *child_lruvec, *parent_lruvec;
+    let mut child_lruvec = core::ptr::null_mut();
+    let mut parent_lruvec = core::ptr::null_mut();
     child_lruvec = mem_cgroup_lruvec(memcg, NODE_DATA(nid));
     parent_lruvec = mem_cgroup_lruvec(parent, NODE_DATA(nid));
-    for_each_lru(lru)
+    for_each_lru(lru) {
     lruvec_reparent_lru(child_lruvec, parent_lruvec, lru, nid);
+    }
     }

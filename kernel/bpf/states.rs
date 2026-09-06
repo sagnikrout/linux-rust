@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -42,21 +292,15 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 pub const BPF_COMPLEXITY_LIMIT_STATES: c_int = 64;
 #[no_mangle]
 unsafe extern "C" fn is_may_goto_insn_at(env: *mut bpf_verifier_env, insn_idx: c_int) -> bool {
-    static bool is_may_goto_insn_at(struct bpf_verifier_env *env, int insn_idx)
-    {
     return bpf_is_may_goto_insn(&env.prog.insnsi[insn_idx]);
     }
 #[no_mangle]
 unsafe extern "C" fn is_iter_next_insn(env: *mut bpf_verifier_env, insn_idx: c_int) -> bool {
-    static bool is_iter_next_insn(struct bpf_verifier_env *env, int insn_idx)
-    {
     return env.insn_aux_data[insn_idx].is_iter_next;
     }
 #[no_mangle]
 unsafe extern "C" fn update_peak_states(env: *mut bpf_verifier_env) {
-    static void update_peak_states(struct bpf_verifier_env *env)
-    {
-    u32 cur_states;
+    let mut cur_states = 0;
     cur_states = env.explored_states_size + env.free_list_size + env.num_backedges;
     env.peak_states = max(env.peak_states, cur_states);
     }
@@ -64,29 +308,29 @@ unsafe extern "C" fn update_peak_states(env: *mut bpf_verifier_env) {
 // that are in either of env->{expored_states,free_list}.
 // In both cases the state is contained in struct bpf_verifier_state_list.
 //
-    static struct bpf_verifier_state_list *state_parent_as_list(struct bpf_verifier_state *st)
-    {
-    if (st.parent)
-    return container_of(st.parent, struct bpf_verifier_state_list, state);
+#[no_mangle]
+pub unsafe extern "C" fn state_parent_as_list(st: *mut bpf_verifier_state) -> *mut c_void {
+    if (st.parent) {
+    return container_of!(st.parent, bpf_verifier_state_list, state);
+    }
     return core::ptr::null_mut();
     }
-    static bool incomplete_read_marks(struct bpf_verifier_env *env,
-    struct bpf_verifier_state *st);
+// forward_decl: incomplete_read_marks;
 // A state can be freed if it is no longer referenced:
 // - is in the env->free_list;
 // - has no children states;
 //
-    static void maybe_free_verifier_state(struct bpf_verifier_env *env,
-    struct bpf_verifier_state_list *sl)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn maybe_free_verifier_state(env: *mut bpf_verifier_env, sl: *mut bpf_verifier_state_list) {
     if (!sl.in_free_list
     || sl.state.branches != 0
-    || incomplete_read_marks(env, &sl.state))
+    || incomplete_read_marks(env, &sl.state)) {
     return;
+    }
     list_del(&sl.node);
     bpf_free_verifier_state(&sl.state, false);
     kfree(sl);
-    env.free_list_size--;
+    env.free_list_size -= 1;
     }
 // For state @st look for a topmost frame with frame_insn_idx() in some SCC,
 // if such frame exists form a corresponding @callchain as an array of
@@ -101,13 +345,11 @@ unsafe extern "C" fn update_peak_states(env: *mut bpf_verifier_env) {
 // @callchain at (A) would be either (F,SCC#2) or (F,SCC#3) depending
 // on @st frame call sites being (F,C,A) or (F,E,A).
 //
-    static bool compute_scc_callchain(struct bpf_verifier_env *env,
-    struct bpf_verifier_state *st,
-    struct bpf_scc_callchain *callchain)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn compute_scc_callchain(env: *mut bpf_verifier_env, st: *mut bpf_verifier_state, callchain: *mut bpf_scc_callchain) -> bool {
     u32 i, scc, insn_idx;
-    memset(callchain, 0, sizeof(*callchain));
-    for (i = 0; i <= st.curframe; i++) {
+    memset(callchain, 0, sizeof!(*callchain));
+    while (i <= st.curframe) {
     insn_idx = bpf_frame_insn_idx(st, i);
     scc = env.insn_aux_data[insn_idx].scc;
     if (scc) {
@@ -122,53 +364,55 @@ unsafe extern "C" fn update_peak_states(env: *mut bpf_verifier_env) {
     return true;
     }
 // Check if bpf_scc_visit instance for @callchain exists.
-    static struct bpf_scc_visit *scc_visit_lookup(struct bpf_verifier_env *env,
-    struct bpf_scc_callchain *callchain)
-    {
-    struct bpf_scc_info *info = env.scc_info[callchain.scc];
-    struct bpf_scc_visit *visits = info.visits;
-    u32 i;
-    if (!info)
+#[no_mangle]
+pub unsafe extern "C" fn scc_visit_lookup(env: *mut bpf_verifier_env, callchain: *mut bpf_scc_callchain) -> *mut c_void {
+    let mut info = env.scc_info[callchain.scc];
+    let mut visits = info.visits;
+    let mut i = 0;
+    if (!info) {
     return core::ptr::null_mut();
-    for (i = 0; i < info.num_visits; i++)
-    if (memcmp(callchain, &visits[i].callchain, sizeof(*callchain)) == 0)
+    }
+    for (i = 0; i < info.num_visits; i++) {
+    if (memcmp(callchain, &visits[i].callchain, sizeof!(*callchain)) == 0)
     return &visits[i];
+    }
     return core::ptr::null_mut();
     }
 // Allocate a new bpf_scc_visit instance corresponding to @callchain.
 // Allocated instances are alive for a duration of the do_check_common()
 // call and are freed by free_states().
 //
-    static struct bpf_scc_visit *scc_visit_alloc(struct bpf_verifier_env *env,
-    struct bpf_scc_callchain *callchain)
-    {
-    struct bpf_scc_visit *visit;
-    struct bpf_scc_info *info;
+#[no_mangle]
+pub unsafe extern "C" fn scc_visit_alloc(env: *mut bpf_verifier_env, callchain: *mut bpf_scc_callchain) -> *mut c_void {
+pub static mut visit: *mut c_void = core::ptr::null_mut();
+pub static mut info: *mut c_void = core::ptr::null_mut();
     u32 scc, num_visits;
-    u64 new_sz;
+    let mut new_sz = 0;
     scc = callchain.scc;
     info = env.scc_info[scc];
     num_visits = info ? info.num_visits : 0;
-    new_sz = sizeof(*info) + sizeof(struct bpf_scc_visit) * (num_visits + 1);
+    new_sz = sizeof!(*info) + sizeof!(bpf_scc_visit) * (num_visits + 1);
     info = kvrealloc(env.scc_info[scc], new_sz, GFP_KERNEL_ACCOUNT);
-    if (!info)
+    if (!info) {
     return core::ptr::null_mut();
+    }
     env.scc_info[scc] = info;
     info.num_visits = num_visits + 1;
     visit = &info.visits[num_visits];
-    memset(visit, 0, sizeof(*visit));
-    memcpy(&visit.callchain, callchain, sizeof(*callchain));
+    memset(visit, 0, sizeof!(*visit));
+    memcpy(&visit.callchain, callchain, sizeof!(*callchain));
     return visit;
     }
 // Form a string '(callsite#1,callsite#2,...,scc)' in env->tmp_str_buf
-    static char *format_callchain(struct bpf_verifier_env *env, struct bpf_scc_callchain *callchain)
-    {
-    char *buf = env.tmp_str_buf;
+#[no_mangle]
+pub unsafe extern "C" fn format_callchain(env: *mut bpf_verifier_env, callchain: *mut bpf_scc_callchain) -> *mut c_void {
+    let mut buf = env.tmp_str_buf;
     int i, delta = 0;
     delta += snprintf(buf + delta, TMP_STR_BUF_LEN - delta, "(");
-    for (i = 0; i < ARRAY_SIZE(callchain.callsites); i++) {
-    if (!callchain.callsites[i])
+    while (i < ARRAY_SIZE!(callchain.callsites)) {
+    if (!callchain.callsites[i]) {
     break;
+    }
     delta += snprintf(buf + delta, TMP_STR_BUF_LEN - delta, "%u,",
     callchain.callsites[i]);
     }
@@ -181,36 +425,36 @@ unsafe extern "C" fn update_peak_states(env: *mut bpf_verifier_env) {
 //
 #[no_mangle]
 unsafe extern "C" fn maybe_enter_scc(env: *mut bpf_verifier_env, st: *mut bpf_verifier_state) -> c_int {
-    static int maybe_enter_scc(struct bpf_verifier_env *env, struct bpf_verifier_state *st)
-    {
-    struct bpf_scc_callchain *callchain = &env.callchain_buf;
-    struct bpf_scc_visit *visit;
-    if (!compute_scc_callchain(env, st, callchain))
+    let mut callchain = &env.callchain_buf;
+pub static mut visit: *mut c_void = core::ptr::null_mut();
+    if (!compute_scc_callchain(env, st, callchain)) {
     return 0;
+    }
     visit = scc_visit_lookup(env, callchain);
     visit = visit ?: scc_visit_alloc(env, callchain);
-    if (!visit)
+    if (!visit) {
     return -ENOMEM;
+    }
     if (!visit.entry_state) {
     visit.entry_state = st;
-    if (env.log.level & BPF_LOG_LEVEL2)
+    if (env.log.level & BPF_LOG_LEVEL2) {
     verbose(env, "SCC enter %s\n", format_callchain(env, callchain));
+    }
     }
     return 0;
     }
-    static int propagate_backedges(struct bpf_verifier_env *env, struct bpf_scc_visit *visit);
+// forward_decl: propagate_backedges;
 // If callchain for @st exists (@st is in some SCC), make it empty:
 // - set visit->entry_state to NULL;
 // - flush accumulated backedges.
 //
 #[no_mangle]
 unsafe extern "C" fn maybe_exit_scc(env: *mut bpf_verifier_env, st: *mut bpf_verifier_state) -> c_int {
-    static int maybe_exit_scc(struct bpf_verifier_env *env, struct bpf_verifier_state *st)
-    {
-    struct bpf_scc_callchain *callchain = &env.callchain_buf;
-    struct bpf_scc_visit *visit;
-    if (!compute_scc_callchain(env, st, callchain))
+    let mut callchain = &env.callchain_buf;
+pub static mut visit: *mut c_void = core::ptr::null_mut();
+    if (!compute_scc_callchain(env, st, callchain)) {
     return 0;
+    }
     visit = scc_visit_lookup(env, callchain);
     if (!visit) {
 //
@@ -232,10 +476,12 @@ unsafe extern "C" fn maybe_exit_scc(env: *mut bpf_verifier_env, st: *mut bpf_ver
     }
     return 0;
     }
-    if (visit.entry_state != st)
+    if (visit.entry_state != st) {
     return 0;
-    if (env.log.level & BPF_LOG_LEVEL2)
+    }
+    if (env.log.level & BPF_LOG_LEVEL2) {
     verbose(env, "SCC exit %s\n", format_callchain(env, callchain));
+    }
     visit.entry_state = core::ptr::null_mut();
     env.num_backedges -= visit.num_backedges;
     visit.num_backedges = 0;
@@ -245,12 +491,10 @@ unsafe extern "C" fn maybe_exit_scc(env: *mut bpf_verifier_env, st: *mut bpf_ver
 // Lookup an bpf_scc_visit instance corresponding to @st callchain
 // and add @backedge to visit->backedges. @st callchain must exist.
 //
-    static int add_scc_backedge(struct bpf_verifier_env *env,
-    struct bpf_verifier_state *st,
-    struct bpf_scc_backedge *backedge)
-    {
-    struct bpf_scc_callchain *callchain = &env.callchain_buf;
-    struct bpf_scc_visit *visit;
+#[no_mangle]
+pub unsafe extern "C" fn add_scc_backedge(env: *mut bpf_verifier_env, st: *mut bpf_verifier_state, backedge: *mut bpf_scc_backedge) -> c_int {
+    let mut callchain = &env.callchain_buf;
+pub static mut visit: *mut c_void = core::ptr::null_mut();
     if (!compute_scc_callchain(env, st, callchain)) {
     verifier_bug(env, "add backedge: no SCC in verification path, insn_idx %d",
     st.insn_idx);
@@ -262,12 +506,13 @@ unsafe extern "C" fn maybe_exit_scc(env: *mut bpf_verifier_env, st: *mut bpf_ver
     format_callchain(env, callchain));
     return -EFAULT;
     }
-    if (env.log.level & BPF_LOG_LEVEL2)
+    if (env.log.level & BPF_LOG_LEVEL2) {
     verbose(env, "SCC backedge %s\n", format_callchain(env, callchain));
+    }
     backedge.next = visit.backedges;
     visit.backedges = backedge;
-    visit.num_backedges++;
-    env.num_backedges++;
+    visit.num_backedges += 1;
+    env.num_backedges += 1;
     update_peak_states(env);
     return 0;
     }
@@ -275,49 +520,50 @@ unsafe extern "C" fn maybe_exit_scc(env: *mut bpf_verifier_env, st: *mut bpf_ver
 // if state @st is in some SCC and not all execution paths starting at this
 // SCC are fully explored.
 //
-    static bool incomplete_read_marks(struct bpf_verifier_env *env,
-    struct bpf_verifier_state *st)
-    {
-    struct bpf_scc_callchain *callchain = &env.callchain_buf;
-    struct bpf_scc_visit *visit;
-    if (!compute_scc_callchain(env, st, callchain))
+#[no_mangle]
+pub unsafe extern "C" fn incomplete_read_marks(env: *mut bpf_verifier_env, st: *mut bpf_verifier_state) -> bool {
+    let mut callchain = &env.callchain_buf;
+pub static mut visit: *mut c_void = core::ptr::null_mut();
+    if (!compute_scc_callchain(env, st, callchain)) {
     return false;
+    }
     visit = scc_visit_lookup(env, callchain);
-    if (!visit)
+    if (!visit) {
     return false;
+    }
     return !!visit.backedges;
     }
 #[no_mangle]
 pub unsafe extern "C" fn bpf_update_branch_counts(env: *mut bpf_verifier_env, st: *mut bpf_verifier_state) -> c_int {
-    int bpf_update_branch_counts(struct bpf_verifier_env *env, struct bpf_verifier_state *st)
-    {
-    struct bpf_verifier_state_list *sl = core::ptr::null_mut(), *parent_sl;
-    struct bpf_verifier_state *parent;
-    int err;
+    let mut sl = core::ptr::null_mut(), *parent_sl;
+pub static mut parent: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
     while (st) {
-    let mut br: u32 = --st.branches;
+pub static mut br: u32 = 0;
 // verifier_bug_if(br > 1, ...) technically makes sense here,
 // but see comment in push_stack(), hence:
 //
     verifier_bug_if((int)br < 0, env, "%s:branches_to_explore=%d", __func__, br);
-    if (br)
+    if (br) {
     break;
+    }
     err = maybe_exit_scc(env, st);
-    if (err)
+    if (err) {
     return err;
+    }
     parent = st.parent;
     parent_sl = state_parent_as_list(st);
-    if (sl)
+    if (sl) {
     maybe_free_verifier_state(env, sl);
+    }
     st = parent;
     sl = parent_sl;
     }
     return 0;
     }
 // check %cur's range satisfies %old's
-    static bool range_within(const struct bpf_reg_state *old,
-    const struct bpf_reg_state *cur)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn range_within(old: *mut bpf_reg_state, cur: *mut bpf_reg_state) -> bool {
     return cnum64_is_subset(old.r64, cur.r64) &&
     cnum32_is_subset(old.r32, cur.r32);
     }
@@ -333,26 +579,28 @@ pub unsafe extern "C" fn bpf_update_branch_counts(env: *mut bpf_verifier_env, st
 //
 #[no_mangle]
 unsafe extern "C" fn check_ids(old_id: u32, cur_id: u32, idmap: *mut bpf_idmap) -> bool {
-    static bool check_ids(u32 old_id, u32 cur_id, struct bpf_idmap *idmap)
-    {
-    struct bpf_id_pair *map = idmap.map;
-    unsigned int i;
+    let mut map = idmap.map;
+    let mut i = 0;
 // either both IDs should be set or both should be zero
-    if (!!old_id != !!cur_id)
+    if (!!old_id != !!cur_id) {
     return false;
-    if (old_id == 0) /* cur_id == 0 as well */
+    }
+    if (old_id == 0) /* cur_id == 0 as well */ {
     return true;
-    for (i = 0; i < idmap.cnt; i++) {
-    if (map[i].old == old_id)
+    }
+    while (i < idmap.cnt) {
+    if (map[i].old == old_id) {
     return map[i].cur == cur_id;
-    if (map[i].cur == cur_id)
+    }
+    if (map[i].cur == cur_id) {
     return false;
+    }
     }
 // Reached the end of known mappings; haven't seen this id before
     if (idmap.cnt < BPF_ID_MAP_SIZE) {
     map[idmap.cnt].old = old_id;
     map[idmap.cnt].cur = cur_id;
-    idmap.cnt++;
+    idmap.cnt += 1;
     return true;
     }
 //
@@ -390,46 +638,47 @@ unsafe extern "C" fn check_ids(old_id: u32, cur_id: u32, idmap: *mut bpf_idmap) 
 //
 #[no_mangle]
 unsafe extern "C" fn check_scalar_ids(old_id: u32, cur_id: u32, idmap: *mut bpf_idmap) -> bool {
-    static bool check_scalar_ids(u32 old_id, u32 cur_id, struct bpf_idmap *idmap)
-    {
-    if (!old_id)
+    if (!old_id) {
     return true;
+    }
     cur_id = cur_id ? cur_id : ++idmap.tmp_id_gen;
-    if (!check_ids(old_id, cur_id, idmap))
+    if (!check_ids(old_id, cur_id, idmap)) {
     return false;
+    }
     if (old_id & BPF_ADD_CONST) {
     old_id &= ~BPF_ADD_CONST;
     cur_id &= ~BPF_ADD_CONST;
-    if (!check_ids(old_id, cur_id, idmap))
+    if (!check_ids(old_id, cur_id, idmap)) {
     return false;
+    }
     }
     return true;
     }
-    static void __clean_func_state(struct bpf_verifier_env *env,
-    struct bpf_func_state *st,
-    u16 live_regs, int frame)
-    {
-    int i, j;
-    for (i = 0; i < BPF_REG_FP; i++) {
+#[no_mangle]
+pub unsafe extern "C" fn __clean_func_state(env: *mut bpf_verifier_env, st: *mut bpf_func_state, live_regs: u16, frame: c_int) {
+    let mut i = 0;
+    let mut j = 0;
+    while (i < BPF_REG_FP) {
 // liveness must not touch this register anymore
-    if (!(live_regs & BIT(i)))
+    if (!(live_regs & BIT(i))) {
 // since the register is unused, clear its state
 // to make further comparison simpler
 //
     bpf_mark_reg_not_init(env, &st.regs[i]);
+    }
     }
 //
 // Clean dead 4-byte halves within each SPI independently.
 // half_spi 2*i   → lower half: slot_type[0..3] (closer to FP)
 // half_spi 2*i+1 → upper half: slot_type[4..7] (farther from FP)
 //
-    for (i = 0; i < st.allocated_stack / BPF_REG_SIZE; i++) {
-    let mut lo_live: bool = bpf_stack_slot_alive(env, frame, i * 2);
-    let mut hi_live: bool = bpf_stack_slot_alive(env, frame, i * 2 + 1);
+    while (i < st.allocated_stack / BPF_REG_SIZE) {
+pub static mut lo_live: bool = false;
+pub static mut hi_live: bool = false;
     if (!hi_live || !lo_live) {
-    let mut start: c_int = !lo_live ? 0 : BPF_REG_SIZE / 2;
-    let mut end: c_int = !hi_live ? BPF_REG_SIZE : BPF_REG_SIZE / 2;
-    let mut stype: u8 = st.stack[i].slot_type[7];
+pub static mut start: c_int = 0;
+pub static mut end: c_int = 0;
+pub static mut stype: u8 = 0;
 //
 // Don't clear special slots.
 // destroy_if_dynptr_stack_slot() needs STACK_DYNPTR to
@@ -438,8 +687,9 @@ unsafe extern "C" fn check_scalar_ids(old_id: u32, cur_id: u32, idmap: *mut bpf_
 // check for their respective slot types to detect double-create.
 //
     if (stype == STACK_DYNPTR || stype == STACK_ITER ||
-    stype == STACK_IRQ_FLAG)
+    stype == STACK_IRQ_FLAG) {
     continue;
+    }
 //
 // Only scalar spills can be degraded to raw stack bytes
 // when their high half is dead. Pointer spills need the
@@ -447,49 +697,52 @@ unsafe extern "C" fn check_scalar_ids(old_id: u32, cur_id: u32, idmap: *mut bpf_
 // rejecting as non-scalar register fills.
 //
     if (!hi_live) {
-    struct bpf_reg_state *spill = &st.stack[i].spilled_ptr;
+    let mut spill = &st.stack[i].spilled_ptr;
     if (lo_live && stype == STACK_SPILL) {
-    let mut val: u8 = STACK_MISC;
-    if (spill.type != SCALAR_VALUE)
+pub static mut val: u8 = 0;
+    if (spill.type != SCALAR_VALUE) {
     continue;
+    }
 //
 // 8 byte spill of scalar 0 where half slot is dead
 // should become STACK_ZERO in lo 4 bytes.
 //
-    if (bpf_register_is_null(spill))
+    if (bpf_register_is_null(spill)) {
     val = STACK_ZERO;
-    for (j = 0; j < 4; j++) {
-    u8 *t = &st.stack[i].slot_type[j];
-    if (*t == STACK_SPILL)
+    }
+    while (j < 4) {
+    let mut t = &st.stack[i].slot_type[j];
+    if (*t == STACK_SPILL) {
 // t = val;
+    }
     }
     }
     bpf_mark_reg_not_init(env, spill);
     }
-    for (j = start; j < end; j++)
+    for (j = start; j < end; j++) {
     st.stack[i].slot_type[j] = STACK_POISON;
     }
     }
     }
-    static int clean_verifier_state(struct bpf_verifier_env *env,
-    struct bpf_verifier_state *st)
-    {
-    int i, err;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn clean_verifier_state(env: *mut bpf_verifier_env, st: *mut bpf_verifier_state) -> c_int {
+    let mut i = 0;
+    let mut err = 0;
     err = bpf_live_stack_query_init(env, st);
-    if (err)
+    if (err) {
     return err;
-    for (i = 0; i <= st.curframe; i++) {
-    let mut ip: u32 = bpf_frame_insn_idx(st, i);
-    let mut live_regs: u16 = env.insn_aux_data[ip].live_regs_before;
+    }
+    while (i <= st.curframe) {
+pub static mut ip: u32 = 0;
+pub static mut live_regs: u16 = 0;
     __clean_func_state(env, st.frame[i], live_regs, i);
     }
     return 0;
     }
-    static bool regs_exact(const struct bpf_reg_state *rold,
-    const struct bpf_reg_state *rcur,
-    struct bpf_idmap *idmap)
-    {
-    return memcmp(rold, rcur, offsetof(struct bpf_reg_state, id)) == 0 &&
+#[no_mangle]
+pub unsafe extern "C" fn regs_exact(rold: *mut bpf_reg_state, rcur: *mut bpf_reg_state, idmap: *mut bpf_idmap) -> bool {
+    return memcmp(rold, rcur, offsetof(bpf_reg_state, id)) == 0 &&
     check_ids(rold.id, rcur.id, idmap) &&
     check_ids(rold.parent_id, rcur.parent_id, idmap);
     }
@@ -499,15 +752,15 @@ unsafe extern "C" fn check_scalar_ids(old_id: u32, cur_id: u32, idmap: *mut bpf_
     RANGE_WITHIN
     };
 // Returns true if (rold safe implies rcur safe)
-    static bool regsafe(struct bpf_verifier_env *env, struct bpf_reg_state *rold,
-    struct bpf_reg_state *rcur, struct bpf_idmap *idmap,
-    enum exact_level exact)
-    {
-    if (exact == EXACT)
+#[no_mangle]
+pub unsafe extern "C" fn regsafe(env: *mut bpf_verifier_env, rold: *mut bpf_reg_state, rcur: *mut bpf_reg_state, idmap: *mut bpf_idmap, exact: exact_level) -> bool {
+    if (exact == EXACT) {
     return regs_exact(rold, rcur, idmap);
-    if (rold.type == NOT_INIT)
+    }
+    if (rold.type == NOT_INIT) {
 // explored state can't have used this
     return true;
+    }
 // Enforce that register types have to match exactly, including their
 // modifiers (like PTR_MAYBE_NULL, MEM_RDONLY, etc), as a general
 // rule.
@@ -529,19 +782,21 @@ unsafe extern "C" fn check_scalar_ids(old_id: u32, cur_id: u32, idmap: *mut bpf_
 // So, as a general rule we don't allow mixing MAYBE_NULL and
 // non-MAYBE_NULL registers as well.
 //
-    if (rold.type != rcur.type)
+    if (rold.type != rcur.type) {
     return false;
+    }
     switch (base_type(rold.type)) {
     case SCALAR_VALUE:
     if (env.explore_alu_limits) {
 // explore_alu_limits disables tnum_in() and range_within()
 // logic and requires everything to be strict
 //
-    return memcmp(rold, rcur, offsetof(struct bpf_reg_state, id)) == 0 &&
+    return memcmp(rold, rcur, offsetof(bpf_reg_state, id)) == 0 &&
     check_scalar_ids(rold.id, rcur.id, idmap);
     }
-    if (!rold.precise && exact == NOT_EXACT)
+    if (!rold.precise && exact == NOT_EXACT) {
     return true;
+    }
 //
 // Linked register tracking uses rold->id to detect relationships.
 // When rold->id == 0, the register is independent and any linking
@@ -586,13 +841,16 @@ unsafe extern "C" fn check_scalar_ids(old_id: u32, cur_id: u32, idmap: *mut bpf_
 // so pruning across different flag types is unsafe.
 //
     if (rold.id &&
-    (rold.id & BPF_ADD_CONST) != (rcur.id & BPF_ADD_CONST))
+    (rold.id & BPF_ADD_CONST) != (rcur.id & BPF_ADD_CONST)) {
     return false;
+    }
 // Both have offset linkage: offsets must match
-    if ((rold.id & BPF_ADD_CONST) && rold.delta != rcur.delta)
+    if ((rold.id & BPF_ADD_CONST) && rold.delta != rcur.delta) {
     return false;
-    if (!check_scalar_ids(rold.id, rcur.id, idmap))
+    }
+    if (!check_scalar_ids(rold.id, rcur.id, idmap)) {
     return false;
+    }
     return range_within(rold, rcur) && tnum_in(rold.var_off, rcur.var_off);
     case PTR_TO_MAP_KEY:
     case PTR_TO_MAP_VALUE:
@@ -602,7 +860,7 @@ unsafe extern "C" fn check_scalar_ids(old_id: u32, cur_id: u32, idmap: *mut bpf_
 // If the new min/max/var_off satisfy the old ones and
 // everything else matches, we are OK.
 //
-    return memcmp(rold, rcur, offsetof(struct bpf_reg_state, var_off)) == 0 &&
+    return memcmp(rold, rcur, offsetof(bpf_reg_state, var_off)) == 0 &&
     range_within(rold, rcur) &&
     tnum_in(rold.var_off, rcur.var_off) &&
     check_ids(rold.id, rcur.id, idmap) &&
@@ -617,14 +875,16 @@ unsafe extern "C" fn check_scalar_ids(old_id: u32, cur_id: u32, idmap: *mut bpf_
 //
     if (rold.range < 0 || rcur.range < 0) {
 // special case for [BEYOND|AT]_PKT_END
-    if (rold.range != rcur.range)
+    if (rold.range != rcur.range) {
     return false;
+    }
     } else if (rold.range > rcur.range) {
     return false;
     }
 // id relations must be preserved
-    if (!check_ids(rold.id, rcur.id, idmap))
+    if (!check_ids(rold.id, rcur.id, idmap)) {
     return false;
+    }
 // new val must satisfy old val knowledge
     return range_within(rold, rcur) &&
     tnum_in(rold.var_off, rcur.var_off);
@@ -636,86 +896,89 @@ unsafe extern "C" fn check_scalar_ids(old_id: u32, cur_id: u32, idmap: *mut bpf_
     case PTR_TO_ARENA:
     return true;
     case PTR_TO_INSN:
-    return memcmp(rold, rcur, offsetof(struct bpf_reg_state, var_off)) == 0 &&
+    return memcmp(rold, rcur, offsetof(bpf_reg_state, var_off)) == 0 &&
     range_within(rold, rcur) && tnum_in(rold.var_off, rcur.var_off);
-    default:
+// label;
     return regs_exact(rold, rcur, idmap);
     }
     }
-    static struct bpf_reg_state unbound_reg;
+pub static mut unbound_reg: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn unbound_reg_init() -> __init int {
-    static __init int unbound_reg_init(void)
-    {
     bpf_mark_reg_unknown_imprecise(&unbound_reg);
     return 0;
     }
-    late_initcall(unbound_reg_init);
+    late_initcall!(unbound_reg_init);
 #[no_mangle]
 unsafe extern "C" fn is_spilled_scalar_after(stack: *const bpf_stack_state, im: c_int) -> bool {
-    static bool is_spilled_scalar_after(const struct bpf_stack_state *stack, int im)
-    {
     return stack.slot_type[im] == STACK_SPILL &&
     stack.spilled_ptr.type == SCALAR_VALUE;
     }
-    static bool is_stack_misc_after(struct bpf_verifier_env *env,
-    struct bpf_stack_state *stack, int im)
-    {
-    u32 i;
-    for (i = im; i < ARRAY_SIZE(stack.slot_type); ++i) {
+#[no_mangle]
+pub unsafe extern "C" fn is_stack_misc_after(env: *mut bpf_verifier_env, stack: *mut bpf_stack_state, im: c_int) -> bool {
+    let mut i = 0;
+    while (i < ARRAY_SIZE!(stack.slot_type)) {
     if ((stack.slot_type[i] == STACK_MISC) ||
     ((stack.slot_type[i] == STACK_INVALID || stack.slot_type[i] == STACK_POISON) &&
-    env.allow_uninit_stack))
+    env.allow_uninit_stack)) {
     continue;
+    }
     return false;
     }
     return true;
     }
-    static struct bpf_reg_state *scalar_reg_for_stack(struct bpf_verifier_env *env,
-    struct bpf_stack_state *stack, int im)
-    {
-    if (is_spilled_scalar_after(stack, im))
+#[no_mangle]
+pub unsafe extern "C" fn scalar_reg_for_stack(env: *mut bpf_verifier_env, stack: *mut bpf_stack_state, im: c_int) -> *mut c_void {
+    if (is_spilled_scalar_after(stack, im)) {
     return &stack.spilled_ptr;
-    if (is_stack_misc_after(env, stack, im))
+    }
+    if (is_stack_misc_after(env, stack, im)) {
     return &unbound_reg;
+    }
     return core::ptr::null_mut();
     }
-    static bool stacksafe(struct bpf_verifier_env *env, struct bpf_func_state *old,
-    struct bpf_func_state *cur, struct bpf_idmap *idmap,
-    enum exact_level exact)
-    {
-    int i, spi;
+#[no_mangle]
+pub unsafe extern "C" fn stacksafe(env: *mut bpf_verifier_env, old: *mut bpf_func_state, cur: *mut bpf_func_state, idmap: *mut bpf_idmap, exact: exact_level) -> bool {
+    let mut i = 0;
+    let mut spi = 0;
 // walk slots of the explored stack and ignore any additional
 // slots in the current stack, since explored(safe) state
 // didn't use them
 //
-    for (i = 0; i < old.allocated_stack; i++) {
-    struct bpf_reg_state *old_reg, *cur_reg;
-    let mut im: c_int = i % BPF_REG_SIZE;
+    while (i < old.allocated_stack) {
+    let mut old_reg = core::ptr::null_mut();
+    let mut cur_reg = core::ptr::null_mut();
+pub static mut im: c_int = 0;
     spi = i / BPF_REG_SIZE;
     if (exact == EXACT) {
-    let mut old_type: u8 = old.stack[spi].slot_type[i % BPF_REG_SIZE];
+pub static mut old_type: u8 = 0;
     u8 cur_type = i < cur.allocated_stack ?
     cur.stack[spi].slot_type[i % BPF_REG_SIZE] : STACK_INVALID;
 // STACK_INVALID and STACK_POISON are equivalent for pruning
-    if (old_type == STACK_POISON)
+    if (old_type == STACK_POISON) {
     old_type = STACK_INVALID;
-    if (cur_type == STACK_POISON)
+    }
+    if (cur_type == STACK_POISON) {
     cur_type = STACK_INVALID;
-    if (i >= cur.allocated_stack || old_type != cur_type)
+    }
+    if (i >= cur.allocated_stack || old_type != cur_type) {
     return false;
     }
+    }
     if (old.stack[spi].slot_type[i % BPF_REG_SIZE] == STACK_INVALID ||
-    old.stack[spi].slot_type[i % BPF_REG_SIZE] == STACK_POISON)
+    old.stack[spi].slot_type[i % BPF_REG_SIZE] == STACK_POISON) {
     continue;
+    }
     if (env.allow_uninit_stack &&
-    old.stack[spi].slot_type[i % BPF_REG_SIZE] == STACK_MISC)
+    old.stack[spi].slot_type[i % BPF_REG_SIZE] == STACK_MISC) {
     continue;
+    }
 // explored stack has more populated slots than current stack
 // and these slots were used
 //
-    if (i >= cur.allocated_stack)
+    if (i >= cur.allocated_stack) {
     return false;
+    }
 //
 // 64 and 32-bit scalar spills vs MISC/INVALID slots and vice versa.
 // Load from MISC/INVALID slots produces unbound scalar.
@@ -726,8 +989,9 @@ unsafe extern "C" fn is_spilled_scalar_after(stack: *const bpf_stack_state, im: 
     old_reg = scalar_reg_for_stack(env, &old.stack[spi], im);
     cur_reg = scalar_reg_for_stack(env, &cur.stack[spi], im);
     if (old_reg && cur_reg) {
-    if (!regsafe(env, old_reg, cur_reg, idmap, exact))
+    if (!regsafe(env, old_reg, cur_reg, idmap, exact)) {
     return false;
+    }
     i += (im == 0 ? BPF_REG_SIZE - 1 : 3);
     continue;
     }
@@ -737,21 +1001,24 @@ unsafe extern "C" fn is_spilled_scalar_after(stack: *const bpf_stack_state, im: 
 // The opposite is not true
 //
     if (old.stack[spi].slot_type[i % BPF_REG_SIZE] == STACK_MISC &&
-    cur.stack[spi].slot_type[i % BPF_REG_SIZE] == STACK_ZERO)
+    cur.stack[spi].slot_type[i % BPF_REG_SIZE] == STACK_ZERO) {
     continue;
+    }
     if (old.stack[spi].slot_type[i % BPF_REG_SIZE] !=
-    cur.stack[spi].slot_type[i % BPF_REG_SIZE])
+    cur.stack[spi].slot_type[i % BPF_REG_SIZE]) {
 // Ex: old explored (safe) state has STACK_SPILL in
 // this stack slot, but current has STACK_MISC ->
 // this verifier states are not equivalent,
 // return false to continue verification of this path
 //
     return false;
-    if (i % BPF_REG_SIZE != BPF_REG_SIZE - 1)
+    }
+    if (i % BPF_REG_SIZE != BPF_REG_SIZE - 1) {
     continue;
+    }
 // Both old and cur are having same slot_type
-    switch (old.stack[spi].slot_type[BPF_REG_SIZE - 1]) {
-    case STACK_SPILL:
+    match (old.stack[spi].slot_type[BPF_REG_SIZE - 1]) {
+    STACK_SPILL => {
 // when explored and current stack slot are both storing
 // spilled registers, check that stored pointers types
 // are the same as well.
@@ -763,19 +1030,23 @@ unsafe extern "C" fn is_spilled_scalar_after(stack: *const bpf_stack_state, im: 
 // return false to continue verification of this path
 //
     if (!regsafe(env, &old.stack[spi].spilled_ptr,
-    &cur.stack[spi].spilled_ptr, idmap, exact))
+    &cur.stack[spi].spilled_ptr, idmap, exact)) {
     return false;
-    break;
-    case STACK_DYNPTR:
+    }
+    // break;
+    }
+    STACK_DYNPTR => {
     old_reg = &old.stack[spi].spilled_ptr;
     cur_reg = &cur.stack[spi].spilled_ptr;
     if (old_reg.dynptr.type != cur_reg.dynptr.type ||
     old_reg.dynptr.first_slot != cur_reg.dynptr.first_slot ||
     !check_ids(old_reg.id, cur_reg.id, idmap) ||
-    !check_ids(old_reg.parent_id, cur_reg.parent_id, idmap))
+    !check_ids(old_reg.parent_id, cur_reg.parent_id, idmap)) {
     return false;
-    break;
-    case STACK_ITER:
+    }
+    // break;
+    }
+    STACK_ITER => {
     old_reg = &old.stack[spi].spilled_ptr;
     cur_reg = &cur.stack[spi].spilled_ptr;
 // iter.depth is not compared between states as it
@@ -789,24 +1060,33 @@ unsafe extern "C" fn is_spilled_scalar_after(stack: *const bpf_stack_state, im: 
     old_reg.iter.btf_id != cur_reg.iter.btf_id ||
     old_reg.iter.state != cur_reg.iter.state ||
 // ignore {old_reg,cur_reg}->iter.depth, see above
-    !check_ids(old_reg.id, cur_reg.id, idmap))
+    !check_ids(old_reg.id, cur_reg.id, idmap)) {
     return false;
-    break;
-    case STACK_IRQ_FLAG:
+    }
+    // break;
+    }
+    STACK_IRQ_FLAG => {
     old_reg = &old.stack[spi].spilled_ptr;
     cur_reg = &cur.stack[spi].spilled_ptr;
     if (!check_ids(old_reg.id, cur_reg.id, idmap) ||
-    old_reg.irq.kfunc_class != cur_reg.irq.kfunc_class)
+    old_reg.irq.kfunc_class != cur_reg.irq.kfunc_class) {
     return false;
-    break;
-    case STACK_MISC:
-    case STACK_ZERO:
-    case STACK_INVALID:
-    case STACK_POISON:
+    }
+    // break;
+    }
+    STACK_MISC => {
+    }
+    STACK_ZERO => {
+    }
+    STACK_INVALID => {
+    }
+    STACK_POISON => {
     continue;
 // Ensure that new unhandled slot types return false by default
-    default:
+    }
+    _ => {
     return false;
+    }
     }
     }
     return true;
@@ -815,61 +1095,76 @@ unsafe extern "C" fn is_spilled_scalar_after(stack: *const bpf_stack_state, im: 
 // Compare stack arg slots between old and current states.
 // Outgoing stack args are path-local state and must agree for pruning.
 //
-    static bool stack_arg_safe(struct bpf_verifier_env *env, struct bpf_func_state *old,
-    struct bpf_func_state *cur, struct bpf_idmap *idmap,
-    enum exact_level exact)
-    {
-    int i, nslots;
+#[no_mangle]
+pub unsafe extern "C" fn stack_arg_safe(env: *mut bpf_verifier_env, old: *mut bpf_func_state, cur: *mut bpf_func_state, idmap: *mut bpf_idmap, exact: exact_level) -> bool {
+    let mut i = 0;
+    let mut nslots = 0;
     nslots = max(old.out_stack_arg_cnt, cur.out_stack_arg_cnt);
-    for (i = 0; i < nslots; i++) {
-    struct bpf_reg_state *old_arg, *cur_arg;
-    let mut not_init: bpf_reg_state = { .type = NOT_INIT };
+    while (i < nslots) {
+    let mut old_arg = core::ptr::null_mut();
+    let mut cur_arg = core::ptr::null_mut();
+pub static mut not_init: bpf_reg_state = 0;
     old_arg = i < old.out_stack_arg_cnt ?
     &old.stack_arg_regs[i] : &not_init;
     cur_arg = i < cur.out_stack_arg_cnt ?
     &cur.stack_arg_regs[i] : &not_init;
-    if (!regsafe(env, old_arg, cur_arg, idmap, exact))
+    if (!regsafe(env, old_arg, cur_arg, idmap, exact)) {
     return false;
+    }
     }
     return true;
     }
-    static bool refsafe(struct bpf_verifier_state *old, struct bpf_verifier_state *cur,
-    struct bpf_idmap *idmap)
-    {
-    int i;
-    if (old.acquired_refs != cur.acquired_refs)
+#[no_mangle]
+pub unsafe extern "C" fn refsafe(old: *mut bpf_verifier_state, cur: *mut bpf_verifier_state, idmap: *mut bpf_idmap) -> bool {
+    let mut i = 0;
+    if (old.acquired_refs != cur.acquired_refs) {
     return false;
-    if (old.active_locks != cur.active_locks)
+    }
+    if (old.active_locks != cur.active_locks) {
     return false;
-    if (old.active_preempt_locks != cur.active_preempt_locks)
+    }
+    if (old.active_preempt_locks != cur.active_preempt_locks) {
     return false;
-    if (old.active_rcu_locks != cur.active_rcu_locks)
+    }
+    if (old.active_rcu_locks != cur.active_rcu_locks) {
     return false;
-    if (!check_ids(old.active_irq_id, cur.active_irq_id, idmap))
+    }
+    if (!check_ids(old.active_irq_id, cur.active_irq_id, idmap)) {
     return false;
+    }
     if (!check_ids(old.active_lock_id, cur.active_lock_id, idmap) ||
-    old.active_lock_ptr != cur.active_lock_ptr)
+    old.active_lock_ptr != cur.active_lock_ptr) {
     return false;
-    for (i = 0; i < old.acquired_refs; i++) {
+    }
+    while (i < old.acquired_refs) {
     if (!check_ids(old.refs[i].id, cur.refs[i].id, idmap) ||
-    old.refs[i].type != cur.refs[i].type)
+    old.refs[i].type != cur.refs[i].type) {
     return false;
-    switch (old.refs[i].type) {
-    case REF_TYPE_PTR:
-    if (!check_ids(old.refs[i].parent_id, cur.refs[i].parent_id, idmap))
+    }
+    match (old.refs[i].type) {
+    REF_TYPE_PTR => {
+    if (!check_ids(old.refs[i].parent_id, cur.refs[i].parent_id, idmap)) {
     return false;
-    break;
-    case REF_TYPE_IRQ:
-    break;
-    case REF_TYPE_LOCK:
-    case REF_TYPE_RES_LOCK:
-    case REF_TYPE_RES_LOCK_IRQ:
-    if (old.refs[i].ptr != cur.refs[i].ptr)
+    }
+    // break;
+    }
+    REF_TYPE_IRQ => {
+    // break;
+    }
+    REF_TYPE_LOCK => {
+    }
+    REF_TYPE_RES_LOCK => {
+    }
+    REF_TYPE_RES_LOCK_IRQ => {
+    if (old.refs[i].ptr != cur.refs[i].ptr) {
     return false;
-    break;
-    default:
+    }
+    // break;
+    }
+    _ => {
     WARN_ONCE(1, "Unhandled enum type for reference state: %d\n", old.refs[i].type);
     return false;
+    }
     }
     }
     return true;
@@ -900,117 +1195,128 @@ unsafe extern "C" fn is_spilled_scalar_after(stack: *const bpf_stack_state, im: 
 // whereas register type in current state is meaningful, it means that
 // the current state will reach 'bpf_exit' instruction safely
 //
-    static bool func_states_equal(struct bpf_verifier_env *env, struct bpf_func_state *old,
-    struct bpf_func_state *cur, u32 insn_idx, enum exact_level exact)
-    {
-    let mut live_regs: u16 = env.insn_aux_data[insn_idx].live_regs_before;
-    u16 i;
-    if (old.callback_depth > cur.callback_depth)
+#[no_mangle]
+pub unsafe extern "C" fn func_states_equal(env: *mut bpf_verifier_env, old: *mut bpf_func_state, cur: *mut bpf_func_state, insn_idx: u32, exact: exact_level) -> bool {
+pub static mut live_regs: u16 = 0;
+    let mut i = 0;
+    if (old.callback_depth > cur.callback_depth) {
     return false;
-    if (!old.no_stack_arg_load && cur.no_stack_arg_load)
+    }
+    if (!old.no_stack_arg_load && cur.no_stack_arg_load) {
     return false;
-    for (i = 0; i < MAX_BPF_REG; i++)
+    }
+    for (i = 0; i < MAX_BPF_REG; i++) {
     if (((1 << i) & live_regs) &&
     !regsafe(env, &old.regs[i], &cur.regs[i],
     &env.idmap_scratch, exact))
     return false;
-    if (!stacksafe(env, old, cur, &env.idmap_scratch, exact))
+    }
+    if (!stacksafe(env, old, cur, &env.idmap_scratch, exact)) {
     return false;
-    if (!stack_arg_safe(env, old, cur, &env.idmap_scratch, exact))
+    }
+    if (!stack_arg_safe(env, old, cur, &env.idmap_scratch, exact)) {
     return false;
+    }
     return true;
     }
 #[no_mangle]
 unsafe extern "C" fn reset_idmap_scratch(env: *mut bpf_verifier_env) {
-    static void reset_idmap_scratch(struct bpf_verifier_env *env)
-    {
-    struct bpf_idmap *idmap = &env.idmap_scratch;
+    let mut idmap = &env.idmap_scratch;
     idmap.tmp_id_gen = env.id_gen;
     idmap.cnt = 0;
     }
-    static bool states_equal(struct bpf_verifier_env *env,
-    struct bpf_verifier_state *old,
-    struct bpf_verifier_state *cur,
-    enum exact_level exact)
-    {
-    u32 insn_idx;
-    int i;
-    if (old.curframe != cur.curframe)
+#[no_mangle]
+pub unsafe extern "C" fn states_equal(env: *mut bpf_verifier_env, old: *mut bpf_verifier_state, cur: *mut bpf_verifier_state, exact: exact_level) -> bool {
+    let mut insn_idx = 0;
+    let mut i = 0;
+    if (old.curframe != cur.curframe) {
     return false;
+    }
     reset_idmap_scratch(env);
 // Verification state from speculative execution simulation
 // must never prune a non-speculative execution one.
 //
-    if (old.speculative && !cur.speculative)
+    if (old.speculative && !cur.speculative) {
     return false;
-    if (old.in_sleepable != cur.in_sleepable)
+    }
+    if (old.in_sleepable != cur.in_sleepable) {
     return false;
-    if (!refsafe(old, cur, &env.idmap_scratch))
+    }
+    if (!refsafe(old, cur, &env.idmap_scratch)) {
     return false;
+    }
 // for states to be equal callsites have to be the same
 // and all frame states need to be equivalent
 //
-    for (i = 0; i <= old.curframe; i++) {
+    while (i <= old.curframe) {
     insn_idx = bpf_frame_insn_idx(old, i);
-    if (old.frame[i].callsite != cur.frame[i].callsite)
+    if (old.frame[i].callsite != cur.frame[i].callsite) {
     return false;
-    if (!func_states_equal(env, old.frame[i], cur.frame[i], insn_idx, exact))
+    }
+    if (!func_states_equal(env, old.frame[i], cur.frame[i], insn_idx, exact)) {
     return false;
+    }
     }
     return true;
     }
 // find precise scalars in the previous equivalent state and
 // propagate them into the current state
 //
-    static int propagate_precision(struct bpf_verifier_env *env,
-    const struct bpf_verifier_state *old,
-    struct bpf_verifier_state *cur,
-    bool *changed)
-    {
-    struct bpf_reg_state *state_reg;
-    struct bpf_func_state *state;
+#[no_mangle]
+pub unsafe extern "C" fn propagate_precision(env: *mut bpf_verifier_env, old: *mut bpf_verifier_state, cur: *mut bpf_verifier_state, changed: *mut bool) -> c_int {
+pub static mut state_reg: *mut c_void = core::ptr::null_mut();
+pub static mut state: *mut c_void = core::ptr::null_mut();
     int i, err = 0, fr;
-    bool first;
-    for (fr = old.curframe; fr >= 0; fr--) {
+    let mut first = 0;
+    while (fr >= 0) {
     state = old.frame[fr];
     state_reg = state.regs;
     first = true;
-    for (i = 0; i < BPF_REG_FP; i++, state_reg++) {
+    while (i < BPF_REG_FP) {
     if (state_reg.type != SCALAR_VALUE ||
-    !state_reg.precise)
+    !state_reg.precise) {
     continue;
+    }
     if (env.log.level & BPF_LOG_LEVEL2) {
-    if (first)
+    if (first) {
     verbose(env, "frame %d: propagating r%d", fr, i);
-    else
+    }
+    else {
     verbose(env, ",r%d", i);
+    }
     }
     bpf_bt_set_frame_reg(&env.bt, fr, i);
     first = false;
     }
-    for (i = 0; i < state.allocated_stack / BPF_REG_SIZE; i++) {
-    if (!bpf_is_spilled_reg(&state.stack[i]))
+    while (i < state.allocated_stack / BPF_REG_SIZE) {
+    if (!bpf_is_spilled_reg(&state.stack[i])) {
     continue;
+    }
     state_reg = &state.stack[i].spilled_ptr;
     if (state_reg.type != SCALAR_VALUE ||
-    !state_reg.precise)
+    !state_reg.precise) {
     continue;
+    }
     if (env.log.level & BPF_LOG_LEVEL2) {
-    if (first)
+    if (first) {
     verbose(env, "frame %d: propagating fp%d",
     fr, (-i - 1) * BPF_REG_SIZE);
-    else
+    }
+    else {
     verbose(env, ",fp%d", (-i - 1) * BPF_REG_SIZE);
+    }
     }
     bpf_bt_set_frame_slot(&env.bt, fr, i);
     first = false;
     }
-    if (!first && (env.log.level & BPF_LOG_LEVEL2))
+    if (!first && (env.log.level & BPF_LOG_LEVEL2)) {
     verbose(env, "\n");
     }
+    }
     err = bpf_mark_chain_precision(env, cur, -1, changed);
-    if (err < 0)
+    if (err < 0) {
     return err;
+    }
     return 0;
     }
 pub const MAX_BACKEDGE_ITERS: c_int = 64;
@@ -1022,45 +1328,49 @@ pub const MAX_BACKEDGE_ITERS: c_int = 64;
 //
 #[no_mangle]
 unsafe extern "C" fn propagate_backedges(env: *mut bpf_verifier_env, visit: *mut bpf_scc_visit) -> c_int {
-    static int propagate_backedges(struct bpf_verifier_env *env, struct bpf_scc_visit *visit)
-    {
-    struct bpf_scc_backedge *backedge;
-    struct bpf_verifier_state *st;
-    bool changed;
-    int i, err;
+pub static mut backedge: *mut c_void = core::ptr::null_mut();
+pub static mut st: *mut c_void = core::ptr::null_mut();
+    let mut changed = 0;
+    let mut i = 0;
+    let mut err = 0;
     i = 0;
     do {
     if (i++ > MAX_BACKEDGE_ITERS) {
-    if (env.log.level & BPF_LOG_LEVEL2)
+    if (env.log.level & BPF_LOG_LEVEL2) {
     verbose(env, "%s: too many iterations\n", __func__);
-    for (backedge = visit.backedges; backedge; backedge = backedge.next)
+    }
+    for (backedge = visit.backedges; backedge; backedge = backedge.next) {
     bpf_mark_all_scalars_precise(env, &backedge.state);
+    }
     break;
     }
     changed = false;
-    for (backedge = visit.backedges; backedge; backedge = backedge.next) {
+    while (backedge) {
     st = &backedge.state;
     err = propagate_precision(env, st.equal_state, st, &changed);
-    if (err)
+    if (err) {
     return err;
+    }
     }
     } while (changed);
     bpf_free_backedges(visit);
     return 0;
     }
-    static bool states_maybe_looping(struct bpf_verifier_state *old,
-    struct bpf_verifier_state *cur)
-    {
-    struct bpf_func_state *fold, *fcur;
+#[no_mangle]
+pub unsafe extern "C" fn states_maybe_looping(old: *mut bpf_verifier_state, cur: *mut bpf_verifier_state) -> bool {
+    let mut fold = core::ptr::null_mut();
+    let mut fcur = core::ptr::null_mut();
     int i, fr = cur.curframe;
-    if (old.curframe != fr)
+    if (old.curframe != fr) {
     return false;
+    }
     fold = old.frame[fr];
     fcur = cur.frame[fr];
-    for (i = 0; i < MAX_BPF_REG; i++)
+    for (i = 0; i < MAX_BPF_REG; i++) {
     if (memcmp(&fold.regs[i], &fcur.regs[i],
-    offsetof(struct bpf_reg_state, frameno)))
+    offsetof(bpf_reg_state, frameno)))
     return false;
+    }
     return true;
     }
 // is_state_visited() handles iter_next() (see process_iter_next_call() for
@@ -1122,61 +1432,68 @@ unsafe extern "C" fn propagate_backedges(env: *mut bpf_verifier_env, visit: *mut
 //
 #[no_mangle]
 unsafe extern "C" fn iter_active_depths_differ(old: *mut bpf_verifier_state, cur: *mut bpf_verifier_state) -> bool {
-    static bool iter_active_depths_differ(struct bpf_verifier_state *old, struct bpf_verifier_state *cur)
-    {
-    struct bpf_reg_state *slot, *cur_slot;
-    struct bpf_func_state *state;
-    int i, fr;
-    for (fr = old.curframe; fr >= 0; fr--) {
+    let mut slot = core::ptr::null_mut();
+    let mut cur_slot = core::ptr::null_mut();
+pub static mut state: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    let mut fr = 0;
+    while (fr >= 0) {
     state = old.frame[fr];
-    for (i = 0; i < state.allocated_stack / BPF_REG_SIZE; i++) {
-    if (state.stack[i].slot_type[0] != STACK_ITER)
+    while (i < state.allocated_stack / BPF_REG_SIZE) {
+    if (state.stack[i].slot_type[0] != STACK_ITER) {
     continue;
+    }
     slot = &state.stack[i].spilled_ptr;
-    if (slot.iter.state != BPF_ITER_STATE_ACTIVE)
+    if (slot.iter.state != BPF_ITER_STATE_ACTIVE) {
     continue;
+    }
     cur_slot = &cur.frame[fr].stack[i].spilled_ptr;
-    if (cur_slot.iter.depth != slot.iter.depth)
+    if (cur_slot.iter.depth != slot.iter.depth) {
     return true;
+    }
     }
     }
     return false;
     }
 #[no_mangle]
 unsafe extern "C" fn mark_all_scalars_imprecise(env: *mut bpf_verifier_env, st: *mut bpf_verifier_state) {
-    static void mark_all_scalars_imprecise(struct bpf_verifier_env *env, struct bpf_verifier_state *st)
-    {
-    struct bpf_func_state *func;
-    struct bpf_reg_state *reg;
-    int i, j;
-    for (i = 0; i <= st.curframe; i++) {
+pub static mut func: *mut c_void = core::ptr::null_mut();
+pub static mut reg: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    let mut j = 0;
+    while (i <= st.curframe) {
     func = st.frame[i];
-    for (j = 0; j < BPF_REG_FP; j++) {
+    while (j < BPF_REG_FP) {
     reg = &func.regs[j];
-    if (reg.type != SCALAR_VALUE)
+    if (reg.type != SCALAR_VALUE) {
     continue;
+    }
     reg.precise = false;
     }
-    for (j = 0; j < func.allocated_stack / BPF_REG_SIZE; j++) {
-    if (!bpf_is_spilled_reg(&func.stack[j]))
+    while (j < func.allocated_stack / BPF_REG_SIZE) {
+    if (!bpf_is_spilled_reg(&func.stack[j])) {
     continue;
+    }
     reg = &func.stack[j].spilled_ptr;
-    if (reg.type != SCALAR_VALUE)
+    if (reg.type != SCALAR_VALUE) {
     continue;
+    }
     reg.precise = false;
     }
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn bpf_is_state_visited(env: *mut bpf_verifier_env, insn_idx: c_int) -> c_int {
-    int bpf_is_state_visited(struct bpf_verifier_env *env, int insn_idx)
-    {
-    struct bpf_verifier_state_list *new_sl;
-    struct bpf_verifier_state_list *sl;
-    struct bpf_verifier_state *cur = env.cur_state, *new;
-    bool force_new_state, add_new_state, loop;
+pub static mut new_sl: *mut c_void = core::ptr::null_mut();
+pub static mut sl: *mut c_void = core::ptr::null_mut();
+    let mut cur = env.cur_state, *new;
+    let mut force_new_state = 0;
+    let mut add_new_state = 0;
+    let mut loop = 0;
     int n, err, states_cnt = 0;
-    struct list_head *pos, *tmp, *head;
+    let mut pos = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
+    let mut head = core::ptr::null_mut();
     force_new_state = env.test_state_freq || bpf_is_force_checkpoint(env, insn_idx) ||
 // Avoid accumulating infinitely long jmp history
     cur.jmp_history_cnt > 40;
@@ -1190,21 +1507,24 @@ pub unsafe extern "C" fn bpf_is_state_visited(env: *mut bpf_verifier_env, insn_i
 //
     add_new_state = force_new_state;
     if (env.jmps_processed - env.prev_jmps_processed >= 2 &&
-    env.insn_processed - env.prev_insn_processed >= 8)
+    env.insn_processed - env.prev_insn_processed >= 8) {
     add_new_state = true;
+    }
 // keep cleaning the current state as registers/stack become dead
     err = clean_verifier_state(env, cur);
-    if (err)
+    if (err) {
     return err;
+    }
     loop = false;
     head = bpf_explored_state(env, insn_idx);
     list_for_each_safe(pos, tmp, head) {
-    sl = container_of(pos, struct bpf_verifier_state_list, node);
-    states_cnt++;
-    if (sl.state.insn_idx != insn_idx)
+    sl = container_of!(pos, bpf_verifier_state_list, node);
+    states_cnt += 1;
+    if (sl.state.insn_idx != insn_idx) {
     continue;
+    }
     if (sl.state.branches) {
-    struct bpf_func_state *frame = sl.state.frame[sl.state.curframe];
+    let mut frame = sl.state.frame[sl.state.curframe];
     if (frame.in_async_callback_fn &&
     frame.async_entry_cnt != cur.frame[cur.curframe].async_entry_cnt) {
 // Different async_entry_cnt means that the verifier is
@@ -1218,7 +1538,7 @@ pub unsafe extern "C" fn bpf_is_state_visited(env: *mut bpf_verifier_env, insn_i
 // Since the verifier still needs to catch infinite loops
 // inside async callbacks.
 //
-    goto skip_inf_loop_check;
+// goto;
     }
 // BPF open-coded iterators loop detection is special.
 // states_maybe_looping() logic is too simplistic in detecting
@@ -1246,7 +1566,7 @@ pub unsafe extern "C" fn bpf_is_state_visited(env: *mut bpf_verifier_env, insn_i
 // 8.   }
 // 9.   r0 = r10
 // 10.   r0 += r7
-// 11.   r8 = *(u64 *)(r0 + 0)
+// 11.   r8 = *(r0 + 0)
 // 12.   r6 = bpf_get_prandom_u32()
 // 13. }
 //
@@ -1258,9 +1578,10 @@ pub unsafe extern "C" fn bpf_is_state_visited(env: *mut bpf_verifier_env, insn_i
 //
     if (is_iter_next_insn(env, insn_idx)) {
     if (states_equal(env, &sl.state, cur, RANGE_WITHIN)) {
-    struct bpf_func_state *cur_frame;
-    struct bpf_reg_state *iter_state, *iter_reg;
-    int spi;
+pub static mut cur_frame: *mut c_void = core::ptr::null_mut();
+    let mut iter_state = core::ptr::null_mut();
+    let mut iter_reg = core::ptr::null_mut();
+    let mut spi = 0;
     cur_frame = cur.frame[cur.curframe];
 // btf_check_iter_kfuncs() enforces that
 // iter state pointer is always the first arg
@@ -1274,24 +1595,24 @@ pub unsafe extern "C" fn bpf_is_state_visited(env: *mut bpf_verifier_env, insn_i
     iter_state = &bpf_func(env, iter_reg).stack[spi].spilled_ptr;
     if (iter_state.iter.state == BPF_ITER_STATE_ACTIVE) {
     loop = true;
-    goto hit;
+// goto;
     }
     }
-    goto skip_inf_loop_check;
+// goto;
     }
     if (is_may_goto_insn_at(env, insn_idx)) {
     if (sl.state.may_goto_depth != cur.may_goto_depth &&
     states_equal(env, &sl.state, cur, RANGE_WITHIN)) {
     loop = true;
-    goto hit;
+// goto;
     }
     }
     if (bpf_calls_callback(env, insn_idx)) {
     if (states_equal(env, &sl.state, cur, RANGE_WITHIN)) {
     loop = true;
-    goto hit;
+// goto;
     }
-    goto skip_inf_loop_check;
+// goto;
     }
 // attempt to detect infinite loop to avoid unnecessary doomed work
     if (states_maybe_looping(&sl.state, cur) &&
@@ -1319,29 +1640,32 @@ pub unsafe extern "C" fn bpf_is_state_visited(env: *mut bpf_verifier_env, insn_i
 // This threshold shouldn't be too high either, since states
 // at the end of the loop are likely to be useful in pruning.
 //
-    skip_inf_loop_check:
+// label;
     if (!force_new_state &&
     env.jmps_processed - env.prev_jmps_processed < 20 &&
-    env.insn_processed - env.prev_insn_processed < 100)
+    env.insn_processed - env.prev_insn_processed < 100) {
     add_new_state = false;
-    goto miss;
+    }
+// goto;
     }
 // See comments for mark_all_regs_read_and_precise()
     loop = incomplete_read_marks(env, &sl.state);
     if (states_equal(env, &sl.state, cur, loop ? RANGE_WITHIN : NOT_EXACT)) {
-    hit:
-    sl.hit_cnt++;
+// label;
+    sl.hit_cnt += 1;
 // if previous state reached the exit with precision and
 // current state is equivalent to it (except precision marks)
 // the precision needs to be propagated back in
 // the current state.
 //
     err = 0;
-    if (bpf_is_jmp_point(env, env.insn_idx))
+    if (bpf_is_jmp_point(env, env.insn_idx)) {
     err = bpf_push_jmp_history(env, cur, 0, 0, 0, 0);
+    }
     err = err ? : propagate_precision(env, &sl.state, cur, core::ptr::null_mut());
-    if (err)
+    if (err) {
     return err;
+    }
 // When processing iterator based loops above propagate_liveness and
 // propagate_precision calls are not sufficient to transfer all relevant
 // read and precision marks. E.g. consider the following case:
@@ -1381,7 +1705,7 @@ pub unsafe extern "C" fn bpf_is_state_visited(env: *mut bpf_verifier_env, insn_i
 // called, which propagates read and precision marks through the
 // backedges until a fixed point is reached.
 // (In the earlier example, this would propagate marks from A to B,
-// from C to A, and then again from A to B.)
+from C to A, and then again from A to B.)
 //
 // A note on callchains
 // --------------------
@@ -1415,11 +1739,12 @@ pub unsafe extern "C" fn bpf_is_state_visited(env: *mut bpf_verifier_env, insn_i
 // links for states from `C: foo()` to become invalid.
 //
     if (loop) {
-    struct bpf_scc_backedge *backedge;
+pub static mut backedge: *mut c_void = core::ptr::null_mut();
     backedge = kzalloc_obj(*backedge,
     GFP_KERNEL_ACCOUNT);
-    if (!backedge)
+    if (!backedge) {
     return -ENOMEM;
+    }
     err = bpf_copy_verifier_state(&backedge.state, cur);
     backedge.state.equal_state = &sl.state;
     backedge.state.insn_idx = insn_idx;
@@ -1432,15 +1757,16 @@ pub unsafe extern "C" fn bpf_is_state_visited(env: *mut bpf_verifier_env, insn_i
     }
     return 1;
     }
-    miss:
+// label;
 // when new state is not going to be added do not increase miss count.
 // Otherwise several loop iterations will remove the state
 // recorded earlier. The goal of these heuristics is to have
 // states from some iterations of the loop (some in the beginning
 // and some at the end) to help pruning.
 //
-    if (add_new_state)
-    sl.miss_cnt++;
+    if (add_new_state) {
+    sl.miss_cnt += 1;
+    }
 // heuristic to determine whether this state is beneficial
 // to keep checking from state equivalence point of view.
 // Higher numbers increase max_states_per_insn and verification time,
@@ -1457,37 +1783,42 @@ pub unsafe extern "C" fn bpf_is_state_visited(env: *mut bpf_verifier_env, insn_i
     sl.in_free_list = true;
     list_del(&sl.node);
     list_add(&sl.node, &env.free_list);
-    env.free_list_size++;
-    env.explored_states_size--;
+    env.free_list_size += 1;
+    env.explored_states_size -= 1;
     maybe_free_verifier_state(env, sl);
     }
     }
-    if (env.max_states_per_insn < states_cnt)
+    if (env.max_states_per_insn < states_cnt) {
     env.max_states_per_insn = states_cnt;
-    if (!env.bpf_capable && states_cnt > BPF_COMPLEXITY_LIMIT_STATES)
+    }
+    if (!env.bpf_capable && states_cnt > BPF_COMPLEXITY_LIMIT_STATES) {
     return 0;
-    if (!add_new_state)
+    }
+    if (!add_new_state) {
     return 0;
+    }
 // There were no equivalent states, remember the current one.
 // Technically the current state is not proven to be safe yet,
-// but it will either reach outer most bpf_exit (which means it's safe)
+but it will either reach outer most bpf_exit (which means it's safe)
 // or it will be rejected. When there are no loops the verifier won't be
 // seeing this tuple (frame[0].callsite, frame[1].callsite, .. insn_idx)
 // again on the way to bpf_exit.
 // When looping the sl->state.branches will be > 0 and this state
 // will not be considered for equivalence until branches == 0.
 //
-    new_sl = kzalloc_obj(struct bpf_verifier_state_list, GFP_KERNEL_ACCOUNT);
-    if (!new_sl)
+    new_sl = kzalloc_obj(bpf_verifier_state_list, GFP_KERNEL_ACCOUNT);
+    if (!new_sl) {
     return -ENOMEM;
-    env.total_states++;
-    env.explored_states_size++;
+    }
+    env.total_states += 1;
+    env.explored_states_size += 1;
     update_peak_states(env);
     env.prev_jmps_processed = env.jmps_processed;
     env.prev_insn_processed = env.insn_processed;
 // forget precise markings we inherited, see __mark_chain_precision
-    if (env.bpf_capable)
+    if (env.bpf_capable) {
     mark_all_scalars_imprecise(env, cur);
+    }
     bpf_clear_singular_ids(env, cur);
 // add new state to the head of linked list
     new = &new_sl.state;

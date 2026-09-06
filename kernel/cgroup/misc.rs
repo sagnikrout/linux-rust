@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -57,7 +307,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
     };
 // Root misc cgroup
-    static struct misc_cg root_cg;
+pub static mut root_cg: usize = 0;
 //
 // Miscellaneous resources capacity for the entire machine. 0 capacity means
 // resource is not initialized or not present in the host.
@@ -76,8 +326,8 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // * struct misc_cg* - Parent of the @cgroup.
 // * %NULL - If @cgroup is null or the passed cgroup does not have a parent.
 //
-    static struct misc_cg *parent_misc(struct misc_cg *cgroup)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn parent_misc(cgroup: *mut misc_cg) -> *mut c_void {
     return cgroup ? css_misc(cgroup.css.parent) : core::ptr::null_mut();
     }
 //
@@ -90,9 +340,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // * false - If not valid type.
 //
 #[no_mangle]
-pub unsafe extern "C" fn valid_type(type: enum misc_res_type) -> bool {
-    static inline bool valid_type(enum misc_res_type type)
-    {
+pub unsafe extern "C" fn valid_type(type: misc_res_type) -> bool {
     return type >= 0 && type < MISC_CG_RES_TYPES;
     }
 //
@@ -108,11 +356,10 @@ pub unsafe extern "C" fn valid_type(type: enum misc_res_type) -> bool {
 // * %-EINVAL - If @type is invalid.
 //
 #[no_mangle]
-pub unsafe extern "C" fn misc_cg_set_capacity(type: enum misc_res_type, capacity: u64) -> c_int {
-    int misc_cg_set_capacity(enum misc_res_type type, u64 capacity)
-    {
-    if (!valid_type(type))
+pub unsafe extern "C" fn misc_cg_set_capacity(type: misc_res_type, capacity: u64) -> c_int {
+    if (!valid_type(type)) {
     return -EINVAL;
+    }
     WRITE_ONCE(misc_res_capacity[type], capacity);
     return 0;
     }
@@ -125,30 +372,27 @@ pub unsafe extern "C" fn misc_cg_set_capacity(type: enum misc_res_type, capacity
 //
 // Context: Any context.
 //
-    static void misc_cg_cancel_charge(enum misc_res_type type, struct misc_cg *cg,
-    u64 amount)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn misc_cg_cancel_charge(type: misc_res_type, cg: *mut misc_cg, amount: u64) {
     WARN_ONCE(atomic64_add_negative(-amount, &cg.res[type].usage),
     "misc cgroup resource %s became less than 0",
     misc_res_name[type]);
     }
 #[no_mangle]
 unsafe extern "C" fn misc_cg_update_watermark(res: *mut misc_res, new_usage: u64) {
-    static void misc_cg_update_watermark(struct misc_res *res, u64 new_usage)
-    {
-    u64 old;
+    let mut old = 0;
     while (true) {
     old = atomic64_read(&res.watermark);
-    if (new_usage <= old)
+    if (new_usage <= old) {
     break;
-    if (atomic64_cmpxchg(&res.watermark, old, new_usage) == old)
+    }
+    if (atomic64_cmpxchg(&res.watermark, old, new_usage) == old) {
     break;
+    }
     }
     }
 #[no_mangle]
-unsafe extern "C" fn misc_cg_event(type: enum misc_res_type, cg: *mut misc_cg) {
-    static void misc_cg_event(enum misc_res_type type, struct misc_cg *cg)
-    {
+unsafe extern "C" fn misc_cg_event(type: misc_res_type, cg: *mut misc_cg) {
     atomic64_inc(&cg.res[type].events_local);
     cgroup_file_notify(&cg.events_local_file);
     for (; parent_misc(cg); cg = parent_misc(cg)) {
@@ -173,32 +417,34 @@ unsafe extern "C" fn misc_cg_event(type: enum misc_res_type, cg: *mut misc_cg) {
 // capacity.
 //
 #[no_mangle]
-pub unsafe extern "C" fn misc_cg_try_charge(type: enum misc_res_type, cg: *mut misc_cg, amount: u64) -> c_int {
-    int misc_cg_try_charge(enum misc_res_type type, struct misc_cg *cg, u64 amount)
-    {
-    struct misc_cg *i, *j;
-    int ret;
-    struct misc_res *res;
-    u64 new_usage;
-    if (!(valid_type(type) && cg && READ_ONCE(misc_res_capacity[type])))
+pub unsafe extern "C" fn misc_cg_try_charge(type: misc_res_type, cg: *mut misc_cg, amount: u64) -> c_int {
+    let mut i = core::ptr::null_mut();
+    let mut j = core::ptr::null_mut();
+    let mut ret = 0;
+pub static mut res: *mut c_void = core::ptr::null_mut();
+    let mut new_usage = 0;
+    if (!(valid_type(type) && cg && READ_ONCE(misc_res_capacity[type]))) {
     return -EINVAL;
-    if (!amount)
+    }
+    if (!amount) {
     return 0;
+    }
     for (i = cg; i; i = parent_misc(i)) {
     res = &i.res[type];
     new_usage = atomic64_add_return(amount, &res.usage);
     if (new_usage > READ_ONCE(res.max) ||
     new_usage > READ_ONCE(misc_res_capacity[type])) {
     ret = -EBUSY;
-    goto err_charge;
+// goto;
     }
     misc_cg_update_watermark(res, new_usage);
     }
     return 0;
-    err_charge:
+// label;
     misc_cg_event(type, i);
-    for (j = cg; j != i; j = parent_misc(j))
+    for (j = cg; j != i; j = parent_misc(j)) {
     misc_cg_cancel_charge(type, j, amount);
+    }
     misc_cg_cancel_charge(type, i, amount);
     return ret;
     }
@@ -212,14 +458,14 @@ pub unsafe extern "C" fn misc_cg_try_charge(type: enum misc_res_type, cg: *mut m
 // Context: Any context.
 //
 #[no_mangle]
-pub unsafe extern "C" fn misc_cg_uncharge(type: enum misc_res_type, cg: *mut misc_cg, amount: u64) {
-    void misc_cg_uncharge(enum misc_res_type type, struct misc_cg *cg, u64 amount)
-    {
-    struct misc_cg *i;
-    if (!(amount && valid_type(type) && cg))
+pub unsafe extern "C" fn misc_cg_uncharge(type: misc_res_type, cg: *mut misc_cg, amount: u64) {
+pub static mut i: *mut c_void = core::ptr::null_mut();
+    if (!(amount && valid_type(type) && cg)) {
     return;
-    for (i = cg; i; i = parent_misc(i))
+    }
+    for (i = cg; i; i = parent_misc(i)) {
     misc_cg_cancel_charge(type, i, amount);
+    }
     }
     EXPORT_SYMBOL_GPL(misc_cg_uncharge);
 //
@@ -232,19 +478,19 @@ pub unsafe extern "C" fn misc_cg_uncharge(type: enum misc_res_type, cg: *mut mis
 //
 #[no_mangle]
 unsafe extern "C" fn misc_cg_max_show(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int misc_cg_max_show(struct seq_file *sf, void *v)
-    {
-    int i;
-    struct misc_cg *cg = css_misc(seq_css(sf));
-    u64 max;
-    for (i = 0; i < MISC_CG_RES_TYPES; i++) {
+    let mut i = 0;
+    let mut cg = css_misc(seq_css(sf));
+    let mut max = 0;
+    while (i < MISC_CG_RES_TYPES) {
     if (READ_ONCE(misc_res_capacity[i])) {
     max = READ_ONCE(cg.res[i].max);
-    if (max == MAX_NUM)
+    if (max == MAX_NUM) {
     seq_printf(sf, "%s max\n", misc_res_name[i]);
-    else
+    }
+    else {
     seq_printf(sf, "%s %llu\n", misc_res_name[i],
     max);
+    }
     }
     }
     return 0;
@@ -267,38 +513,42 @@ unsafe extern "C" fn misc_cg_max_show(sf: *mut seq_file, v: *mut c_void) -> c_in
 // * -EINVAL - If buf is not valid.
 // * -ERANGE - If number is bigger than the u64 capacity.
 //
-    static ssize_t misc_cg_max_write(struct kernfs_open_file *of, char *buf,
-    size_t nbytes, loff_t off)
-    {
-    struct misc_cg *cg;
-    u64 max;
-    let mut ret: c_int = 0, i;
-    let mut type: enum misc_res_type = MISC_CG_RES_TYPES;
-    char *token;
+#[no_mangle]
+pub unsafe extern "C" fn misc_cg_max_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+pub static mut cg: *mut c_void = core::ptr::null_mut();
+    let mut max = 0;
+pub static mut ret: c_int = 0;
+pub static mut type: misc_res_type = 0;
+pub static mut token: *mut c_void = core::ptr::null_mut();
     buf = strstrip(buf);
     token = strsep(&buf, " ");
-    if (!token || !buf)
+    if (!token || !buf) {
     return -EINVAL;
-    for (i = 0; i < MISC_CG_RES_TYPES; i++) {
+    }
+    while (i < MISC_CG_RES_TYPES) {
     if (!strcmp(misc_res_name[i], token)) {
     type = i;
     break;
     }
     }
-    if (type == MISC_CG_RES_TYPES)
+    if (type == MISC_CG_RES_TYPES) {
     return -EINVAL;
+    }
     if (!strcmp(MAX_STR, buf)) {
     max = MAX_NUM;
     } else {
     ret = kstrtou64(buf, 0, &max);
-    if (ret)
+    if (ret) {
     return ret;
     }
+    }
     cg = css_misc(of_css(of));
-    if (READ_ONCE(misc_res_capacity[type]))
+    if (READ_ONCE(misc_res_capacity[type])) {
     WRITE_ONCE(cg.res[type].max, max);
-    else
+    }
+    else {
     ret = -EINVAL;
+    }
     return ret ? ret : nbytes;
     }
 //
@@ -311,15 +561,14 @@ unsafe extern "C" fn misc_cg_max_show(sf: *mut seq_file, v: *mut c_void) -> c_in
 //
 #[no_mangle]
 unsafe extern "C" fn misc_cg_current_show(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int misc_cg_current_show(struct seq_file *sf, void *v)
-    {
-    int i;
-    u64 usage;
-    struct misc_cg *cg = css_misc(seq_css(sf));
-    for (i = 0; i < MISC_CG_RES_TYPES; i++) {
+    let mut i = 0;
+    let mut usage = 0;
+    let mut cg = css_misc(seq_css(sf));
+    while (i < MISC_CG_RES_TYPES) {
     usage = atomic64_read(&cg.res[i].usage);
-    if (READ_ONCE(misc_res_capacity[i]) || usage)
+    if (READ_ONCE(misc_res_capacity[i]) || usage) {
     seq_printf(sf, "%s %llu\n", misc_res_name[i], usage);
+    }
     }
     return 0;
     }
@@ -333,15 +582,14 @@ unsafe extern "C" fn misc_cg_current_show(sf: *mut seq_file, v: *mut c_void) -> 
 //
 #[no_mangle]
 unsafe extern "C" fn misc_cg_peak_show(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int misc_cg_peak_show(struct seq_file *sf, void *v)
-    {
-    int i;
-    u64 watermark;
-    struct misc_cg *cg = css_misc(seq_css(sf));
-    for (i = 0; i < MISC_CG_RES_TYPES; i++) {
+    let mut i = 0;
+    let mut watermark = 0;
+    let mut cg = css_misc(seq_css(sf));
+    while (i < MISC_CG_RES_TYPES) {
     watermark = atomic64_read(&cg.res[i].watermark);
-    if (READ_ONCE(misc_res_capacity[i]) || watermark)
+    if (READ_ONCE(misc_res_capacity[i]) || watermark) {
     seq_printf(sf, "%s %llu\n", misc_res_name[i], watermark);
+    }
     }
     return 0;
     }
@@ -357,81 +605,44 @@ unsafe extern "C" fn misc_cg_peak_show(sf: *mut seq_file, v: *mut c_void) -> c_i
 //
 #[no_mangle]
 unsafe extern "C" fn misc_cg_capacity_show(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int misc_cg_capacity_show(struct seq_file *sf, void *v)
-    {
-    int i;
-    u64 cap;
-    for (i = 0; i < MISC_CG_RES_TYPES; i++) {
+    let mut i = 0;
+    let mut cap = 0;
+    while (i < MISC_CG_RES_TYPES) {
     cap = READ_ONCE(misc_res_capacity[i]);
-    if (cap)
+    if (cap) {
     seq_printf(sf, "%s %llu\n", misc_res_name[i], cap);
+    }
     }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn __misc_events_show(sf: *mut seq_file, local: bool) -> c_int {
-    static int __misc_events_show(struct seq_file *sf, bool local)
-    {
-    struct misc_cg *cg = css_misc(seq_css(sf));
-    u64 events;
-    int i;
-    for (i = 0; i < MISC_CG_RES_TYPES; i++) {
-    if (local)
+    let mut cg = css_misc(seq_css(sf));
+    let mut events = 0;
+    let mut i = 0;
+    while (i < MISC_CG_RES_TYPES) {
+    if (local) {
     events = atomic64_read(&cg.res[i].events_local);
-    else
+    }
+    else {
     events = atomic64_read(&cg.res[i].events);
-    if (READ_ONCE(misc_res_capacity[i]) || events)
+    }
+    if (READ_ONCE(misc_res_capacity[i]) || events) {
     seq_printf(sf, "%s.max %llu\n", misc_res_name[i], events);
+    }
     }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn misc_events_show(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int misc_events_show(struct seq_file *sf, void *v)
-    {
     return __misc_events_show(sf, false);
     }
 #[no_mangle]
 unsafe extern "C" fn misc_events_local_show(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int misc_events_local_show(struct seq_file *sf, void *v)
-    {
     return __misc_events_show(sf, true);
     }
 // Misc cgroup interface files
-    static struct cftype misc_cg_files[] = {
-    {
-    .name = "max",
-    .write = misc_cg_max_write,
-    .seq_show = misc_cg_max_show,
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    {
-    .name = "current",
-    .seq_show = misc_cg_current_show,
-    },
-    {
-    .name = "peak",
-    .seq_show = misc_cg_peak_show,
-    },
-    {
-    .name = "capacity",
-    .seq_show = misc_cg_capacity_show,
-    .flags = CFTYPE_ONLY_ON_ROOT,
-    },
-    {
-    .name = "events",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .file_offset = offsetof(struct misc_cg, events_file),
-    .seq_show = misc_events_show,
-    },
-    {
-    .name = "events.local",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .file_offset = offsetof(struct misc_cg, events_local_file),
-    .seq_show = misc_events_local_show,
-    },
-    {}
-    };
+pub static mut cftype: usize = 0;
 //
 // misc_cg_alloc() - Allocate misc cgroup.
 // @parent_css: Parent cgroup.
@@ -441,19 +652,19 @@ unsafe extern "C" fn misc_events_local_show(sf: *mut seq_file, v: *mut c_void) -
 // * struct cgroup_subsys_state* - css of the allocated cgroup.
 // * ERR_PTR(-ENOMEM) - No memory available to allocate.
 //
-    static struct cgroup_subsys_state *
-    misc_cg_alloc(struct cgroup_subsys_state *parent_css)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn misc_cg_alloc(parent_css: *mut cgroup_subsys_state) -> *mut c_void {
     enum misc_res_type i;
-    struct misc_cg *cg;
+pub static mut cg: *mut c_void = core::ptr::null_mut();
     if (!parent_css) {
     cg = &root_cg;
     } else {
     cg = kzalloc_obj(*cg);
-    if (!cg)
+    if (!cg) {
     return ERR_PTR(-ENOMEM);
     }
-    for (i = 0; i < MISC_CG_RES_TYPES; i++) {
+    }
+    while (i < MISC_CG_RES_TYPES) {
     WRITE_ONCE(cg.res[i].max, MAX_NUM);
     atomic64_set(&cg.res[i].usage, 0);
     }
@@ -467,14 +678,7 @@ unsafe extern "C" fn misc_events_local_show(sf: *mut seq_file, v: *mut c_void) -
 //
 #[no_mangle]
 unsafe extern "C" fn misc_cg_free(css: *mut cgroup_subsys_state) {
-    static void misc_cg_free(struct cgroup_subsys_state *css)
-    {
     kfree(css_misc(css));
     }
 // Cgroup controller callbacks
-    struct cgroup_subsys misc_cgrp_subsys = {
-    .css_alloc = misc_cg_alloc,
-    .css_free = misc_cg_free,
-    .legacy_cftypes = misc_cg_files,
-    .dfl_cftypes = misc_cg_files,
-    };
+pub static mut cgroup_subsys: usize = 0;

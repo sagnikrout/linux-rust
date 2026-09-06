@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -203,7 +453,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 pub const WORKINGSET_SHIFT: c_int = 1;
 
-    WORKINGSET_SHIFT + NODES_SHIFT + \
+    WORKINGSET_SHIFT + NODES_SHIFT + 
     MEM_CGROUP_ID_SHIFT)
 
 //
@@ -214,22 +464,21 @@ pub const WORKINGSET_SHIFT: c_int = 1;
 // that case, we have to sacrifice granularity for distance, and group
 // evictions into coarser buckets by shaving off lower timestamp bits.
 //
-    static unsigned int bucket_order[ANON_AND_FILE] __read_mostly;
-    static void *pack_shadow(int memcgid, pg_data_t *pgdat, unsigned long eviction,
-    bool workingset, bool file)
-    {
+    static unsigned int bucket_order[ANON_AND_FILE] ;
+#[no_mangle]
+pub unsafe extern "C" fn pack_shadow(memcgid: c_int, pgdat: *mut pg_data_t, eviction: c_ulong, workingset: bool, file: bool) -> *mut c_void {
     eviction &= file ? EVICTION_MASK : EVICTION_MASK_ANON;
     eviction = (eviction << MEM_CGROUP_ID_SHIFT) | memcgid;
     eviction = (eviction << NODES_SHIFT) | pgdat.node_id;
     eviction = (eviction << WORKINGSET_SHIFT) | workingset;
     return xa_mk_value(eviction);
     }
-    static void unpack_shadow(void *shadow, int *memcgidp, pg_data_t **pgdat,
-    unsigned long *evictionp, bool *workingsetp)
-    {
-    let mut entry: c_ulong = xa_to_value(shadow);
-    int memcgid, nid;
-    bool workingset;
+#[no_mangle]
+pub unsafe extern "C" fn unpack_shadow(shadow: *mut c_void, memcgidp: *mut c_int, pgdat: *mut *mut pg_data_t, evictionp: *mut c_ulong, workingsetp: *mut bool) {
+pub static mut entry: c_ulong = 0;
+    let mut memcgid = 0;
+    let mut nid = 0;
+    let mut workingset = 0;
     workingset = entry & ((1UL << WORKINGSET_SHIFT) - 1);
     entry >>= WORKINGSET_SHIFT;
     nid = entry & ((1UL << NODES_SHIFT) - 1);
@@ -242,22 +491,22 @@ pub const WORKINGSET_SHIFT: c_int = 1;
 // workingsetp = workingset;
     }
 
-    static void *lru_gen_eviction(struct folio *folio)
-    {
-    int hist;
-    unsigned long token;
-    unsigned long min_seq;
-    struct lruvec *lruvec;
-    struct lru_gen_folio *lrugen;
-    let mut type: c_int = folio_is_file_lru(folio);
-    let mut delta: c_int = folio_nr_pages(folio);
-    let mut refs: c_int = folio_lru_refs(folio);
-    let mut workingset: bool = folio_test_workingset(folio);
-    let mut tier: c_int = lru_tier_from_refs(refs, workingset);
-    struct mem_cgroup *memcg;
-    struct pglist_data *pgdat = folio_pgdat(folio);
-    unsigned short memcg_id;
-    BUILD_BUG_ON(LRU_GEN_WIDTH + LRU_REFS_WIDTH >
+#[no_mangle]
+pub unsafe extern "C" fn lru_gen_eviction(folio: *mut folio) -> *mut c_void {
+    let mut hist = 0;
+    let mut token = 0;
+    let mut min_seq = 0;
+pub static mut lruvec: *mut c_void = core::ptr::null_mut();
+pub static mut lrugen: *mut c_void = core::ptr::null_mut();
+pub static mut type: c_int = 0;
+pub static mut delta: c_int = 0;
+pub static mut refs: c_int = 0;
+pub static mut workingset: bool = false;
+pub static mut tier: c_int = 0;
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+    let mut pgdat = folio_pgdat(folio);
+    let mut memcg_id = 0;
+    BUILD_BUG_ON!(LRU_GEN_WIDTH + LRU_REFS_WIDTH >
     BITS_PER_LONG - max(EVICTION_SHIFT, EVICTION_SHIFT_ANON));
     rcu_read_lock();
     memcg = folio_memcg(folio);
@@ -275,13 +524,12 @@ pub const WORKINGSET_SHIFT: c_int = 1;
 // Tests if the shadow entry is for a folio that was recently evicted.
 // Fills in @lruvec, @token, @workingset with the values unpacked from shadow.
 //
-    static bool lru_gen_test_recent(void *shadow, struct lruvec **lruvec,
-    unsigned long *token, bool *workingset, bool file)
-    {
-    int memcg_id;
-    unsigned long max_seq;
-    struct mem_cgroup *memcg;
-    struct pglist_data *pgdat;
+#[no_mangle]
+pub unsafe extern "C" fn lru_gen_test_recent(shadow: *mut c_void, lruvec: *mut *mut lruvec, token: *mut c_ulong, workingset: *mut bool, file: bool) -> bool {
+    let mut memcg_id = 0;
+    let mut max_seq = 0;
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+pub static mut pgdat: *mut c_void = core::ptr::null_mut();
     unpack_shadow(shadow, &memcg_id, &pgdat, token, workingset);
     memcg = mem_cgroup_from_private_id(memcg_id);
 // lruvec = mem_cgroup_lruvec(memcg, pgdat);
@@ -291,23 +539,25 @@ pub const WORKINGSET_SHIFT: c_int = 1;
     }
 #[no_mangle]
 unsafe extern "C" fn lru_gen_refault(folio: *mut folio, shadow: *mut c_void) {
-    static void lru_gen_refault(struct folio *folio, void *shadow)
-    {
-    bool recent;
-    int hist, tier, refs;
-    bool workingset;
-    unsigned long token;
-    struct lruvec *lruvec;
-    struct lru_gen_folio *lrugen;
-    let mut type: c_int = folio_is_file_lru(folio);
-    let mut delta: c_int = folio_nr_pages(folio);
+    let mut recent = 0;
+    let mut hist = 0;
+    let mut tier = 0;
+    let mut refs = 0;
+    let mut workingset = 0;
+    let mut token = 0;
+pub static mut lruvec: *mut c_void = core::ptr::null_mut();
+pub static mut lrugen: *mut c_void = core::ptr::null_mut();
+pub static mut type: c_int = 0;
+pub static mut delta: c_int = 0;
     rcu_read_lock();
     recent = lru_gen_test_recent(shadow, &lruvec, &token, &workingset, type);
-    if (lruvec != folio_lruvec(folio))
-    goto unlock;
+    if (lruvec != folio_lruvec(folio)) {
+// goto;
+    }
     mod_lruvec_state(lruvec, WORKINGSET_REFAULT_BASE + type, delta);
-    if (!recent)
-    goto unlock;
+    if (!recent) {
+// goto;
+    }
     lrugen = &lruvec.lrugen;
     hist = lru_hist_from_seq(READ_ONCE(lrugen.min_seq[type]));
     refs = (token & (BIT(LRU_REFS_WIDTH) - 1)) + 1;
@@ -318,29 +568,32 @@ unsafe extern "C" fn lru_gen_refault(folio: *mut folio, shadow: *mut c_void) {
 // see folio_add_lru(), where folio_set_active() is
 // called for workingset folios
 //
-    if (lru_gen_in_fault())
+    if (lru_gen_in_fault()) {
     mod_lruvec_state(lruvec, WORKINGSET_ACTIVATE_BASE + type, delta);
+    }
     folio_set_workingset(folio);
     mod_lruvec_state(lruvec, WORKINGSET_RESTORE_BASE + type, delta);
-    } else
+    } else {
     set_mask_bits(&folio.flags.f, LRU_REFS_MASK, (refs - 1UL) << LRU_REFS_PGOFF);
-    unlock:
+    }
+// label;
     rcu_read_unlock();
     }
 
-    static void *lru_gen_eviction(struct folio *folio)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: lru_gen_eviction
+pub unsafe extern "C" fn lru_gen_eviction_dup(folio: *mut folio) -> *mut c_void {
     return core::ptr::null_mut();
     }
-    static bool lru_gen_test_recent(void *shadow, struct lruvec **lruvec,
-    unsigned long *token, bool *workingset, bool file)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: lru_gen_test_recent
+pub unsafe extern "C" fn lru_gen_test_recent_dup(shadow: *mut c_void, lruvec: *mut *mut lruvec, token: *mut c_ulong, workingset: *mut bool, file: bool) -> bool {
     return false;
     }
 #[no_mangle]
 unsafe extern "C" fn lru_gen_refault(folio: *mut folio, shadow: *mut c_void) {
-    static void lru_gen_refault(struct folio *folio, void *shadow)
-    {
     }
 
 //
@@ -355,8 +608,6 @@ unsafe extern "C" fn lru_gen_refault(folio: *mut folio, shadow: *mut c_void) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn workingset_age_nonresident(lruvec: *mut lruvec, nr_pages: c_ulong) {
-    void workingset_age_nonresident(struct lruvec *lruvec, unsigned long nr_pages)
-    {
 //
 // Reclaiming a cgroup means reclaiming all its children in a
 // round-robin fashion. That means that each cgroup has an LRU
@@ -380,19 +631,20 @@ pub unsafe extern "C" fn workingset_age_nonresident(lruvec: *mut lruvec, nr_page
 // Return: a shadow entry to be stored in @folio->mapping->i_pages in place
 // of the evicted @folio so that a later refault can be detected.
 //
-    void *workingset_eviction(struct folio *folio, struct mem_cgroup *target_memcg)
-    {
-    struct pglist_data *pgdat = folio_pgdat(folio);
-    let mut file: c_int = folio_is_file_lru(folio);
-    unsigned long eviction;
-    struct lruvec *lruvec;
-    int memcgid;
+#[no_mangle]
+pub unsafe extern "C" fn workingset_eviction(folio: *mut folio, target_memcg: *mut mem_cgroup) -> *mut c_void {
+    let mut pgdat = folio_pgdat(folio);
+pub static mut file: c_int = 0;
+    let mut eviction = 0;
+pub static mut lruvec: *mut c_void = core::ptr::null_mut();
+    let mut memcgid = 0;
 // Folio is fully exclusive and pins folio's memory cgroup pointer
     VM_BUG_ON_FOLIO(folio_test_lru(folio), folio);
     VM_BUG_ON_FOLIO(folio_ref_count(folio), folio);
     VM_BUG_ON_FOLIO(!folio_test_locked(folio), folio);
-    if (lru_gen_enabled())
+    if (lru_gen_enabled()) {
     return lru_gen_eviction(folio);
+    }
     lruvec = mem_cgroup_lruvec(target_memcg, pgdat);
 // XXX: target_memcg can be NULL, go through lruvec
     memcgid = mem_cgroup_private_id(lruvec_memcg(lruvec));
@@ -414,19 +666,18 @@ pub unsafe extern "C" fn workingset_age_nonresident(lruvec: *mut lruvec, nr_page
 //
 // Return: true if the shadow is for a recently evicted folio; false otherwise.
 //
-    bool workingset_test_recent(void *shadow, bool file, bool *workingset,
-    bool flush)
-    {
-    struct mem_cgroup *eviction_memcg;
-    struct lruvec *eviction_lruvec;
-    unsigned long refault_distance;
-    unsigned long workingset_size;
-    unsigned long refault;
-    int memcgid;
-    struct pglist_data *pgdat;
-    unsigned long eviction;
+#[no_mangle]
+pub unsafe extern "C" fn workingset_test_recent(shadow: *mut c_void, file: bool, workingset: *mut bool, flush: bool) -> bool {
+pub static mut eviction_memcg: *mut c_void = core::ptr::null_mut();
+pub static mut eviction_lruvec: *mut c_void = core::ptr::null_mut();
+    let mut refault_distance = 0;
+    let mut workingset_size = 0;
+    let mut refault = 0;
+    let mut memcgid = 0;
+pub static mut pgdat: *mut c_void = core::ptr::null_mut();
+    let mut eviction = 0;
     if (lru_gen_enabled()) {
-    bool recent;
+    let mut recent = 0;
     rcu_read_lock();
     recent = lru_gen_test_recent(shadow, &eviction_lruvec, &eviction,
     workingset, file);
@@ -453,11 +704,13 @@ pub unsafe extern "C" fn workingset_age_nonresident(lruvec: *mut lruvec, nr_page
 // configurations instead.
 //
     eviction_memcg = mem_cgroup_from_private_id(memcgid);
-    if (!mem_cgroup_tryget(eviction_memcg))
+    if (!mem_cgroup_tryget(eviction_memcg)) {
     eviction_memcg = core::ptr::null_mut();
+    }
     rcu_read_unlock();
-    if (!mem_cgroup_disabled() && !eviction_memcg)
+    if (!mem_cgroup_disabled() && !eviction_memcg) {
     return false;
+    }
 //
 // Flush stats (and potentially sleep) outside the RCU read section.
 //
@@ -468,8 +721,9 @@ pub unsafe extern "C" fn workingset_age_nonresident(lruvec: *mut lruvec, nr_page
 // XXX: With per-memcg flushing and thresholding, is ratelimiting
 // still needed here?
 //
-    if (flush)
+    if (flush) {
     mem_cgroup_flush_stats_ratelimited(eviction_memcg);
+    }
     eviction_lruvec = mem_cgroup_lruvec(eviction_memcg, pgdat);
     refault = atomic_long_read(&eviction_lruvec.nonresident_age);
 //
@@ -524,13 +778,11 @@ pub unsafe extern "C" fn workingset_age_nonresident(lruvec: *mut lruvec, nr_page
 //
 #[no_mangle]
 pub unsafe extern "C" fn workingset_refault(folio: *mut folio, shadow: *mut c_void) {
-    void workingset_refault(struct folio *folio, void *shadow)
-    {
-    let mut file: bool = folio_is_file_lru(folio);
-    struct mem_cgroup *memcg;
-    struct lruvec *lruvec;
-    bool workingset;
-    long nr;
+pub static mut file: bool = false;
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+pub static mut lruvec: *mut c_void = core::ptr::null_mut();
+    let mut workingset = 0;
+    let mut nr = 0;
     VM_BUG_ON_FOLIO(!folio_test_locked(folio), folio);
     if (lru_gen_enabled()) {
     lru_gen_refault(folio, shadow);
@@ -549,8 +801,9 @@ pub unsafe extern "C" fn workingset_refault(folio: *mut folio, shadow: *mut c_vo
     memcg = get_mem_cgroup_from_folio(folio);
     lruvec = mem_cgroup_lruvec(memcg, folio_pgdat(folio));
     mod_lruvec_state(lruvec, WORKINGSET_REFAULT_BASE + file, nr);
-    if (!workingset_test_recent(shadow, file, &workingset, true))
-    goto out;
+    if (!workingset_test_recent(shadow, file, &workingset, true)) {
+// goto;
+    }
     folio_set_active(folio);
     workingset_age_nonresident(lruvec, nr);
     mod_lruvec_state(lruvec, WORKINGSET_ACTIVATE_BASE + file, nr);
@@ -559,7 +812,7 @@ pub unsafe extern "C" fn workingset_refault(folio: *mut folio, shadow: *mut c_vo
     folio_set_workingset(folio);
     mod_lruvec_state(lruvec, WORKINGSET_RESTORE_BASE + file, nr);
     }
-    out:
+// label;
     mem_cgroup_put(memcg);
     }
 //
@@ -568,8 +821,6 @@ pub unsafe extern "C" fn workingset_refault(folio: *mut folio, shadow: *mut c_vo
 //
 #[no_mangle]
 pub unsafe extern "C" fn workingset_activation(folio: *mut folio) {
-    void workingset_activation(struct folio *folio)
-    {
 //
 // Filter non-memcg pages here, e.g. unmap can call
 // mark_page_accessed() on VDSO pages.
@@ -591,12 +842,10 @@ pub unsafe extern "C" fn workingset_activation(folio: *mut folio) {
 // track shadow nodes and reclaim them when they grow way past the
 // point where they would still be useful.
 //
-    struct list_lru shadow_nodes;
+pub static mut shadow_nodes: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn workingset_update_node(node: *mut xa_node) {
-    void workingset_update_node(struct xa_node *node)
-    {
-    struct page *page = virt_to_page(node);
+    let mut page = virt_to_page(node);
 //
 // Track non-empty nodes that contain only shadow entries;
 // unlink those that contain pages or are being freed.
@@ -618,15 +867,15 @@ pub unsafe extern "C" fn workingset_update_node(node: *mut xa_node) {
     }
     }
     }
-    static unsigned long count_shadow_nodes(struct shrinker *shrinker,
-    struct shrink_control *sc)
-    {
-    unsigned long max_nodes;
-    unsigned long nodes;
-    unsigned long pages;
+#[no_mangle]
+pub unsafe extern "C" fn count_shadow_nodes(shrinker: *mut shrinker, sc: *mut shrink_control) -> c_ulong {
+    let mut max_nodes = 0;
+    let mut nodes = 0;
+    let mut pages = 0;
     nodes = list_lru_shrink_count(&shadow_nodes, sc);
-    if (!nodes)
+    if (!nodes) {
     return SHRINK_EMPTY;
+    }
 //
 // Approximate a reasonable limit for the nodes
 // containing shadow entries. We don't need to keep more
@@ -651,31 +900,33 @@ pub unsafe extern "C" fn workingset_update_node(node: *mut xa_node) {
 //
 
     if (sc.memcg) {
-    struct lruvec *lruvec;
-    int i;
+pub static mut lruvec: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
     mem_cgroup_flush_stats_ratelimited(sc.memcg);
     lruvec = mem_cgroup_lruvec(sc.memcg, NODE_DATA(sc.nid));
-    for (pages = 0, i = 0; i < NR_LRU_LISTS; i++)
+    for (pages = 0, i = 0; i < NR_LRU_LISTS; i++) {
     pages += lruvec_lru_size(lruvec, i, MAX_NR_ZONES - 1);
+    }
     pages += lruvec_page_state_local(
     lruvec, NR_SLAB_RECLAIMABLE_B) >> PAGE_SHIFT;
     pages += lruvec_page_state_local(
     lruvec, NR_SLAB_UNRECLAIMABLE_B) >> PAGE_SHIFT;
-    } else
+    } else {
 
     pages = node_present_pages(sc.nid);
+    }
     max_nodes = pages >> (XA_CHUNK_SHIFT - 3);
-    if (nodes <= max_nodes)
+    if (nodes <= max_nodes) {
     return 0;
+    }
     return nodes - max_nodes;
     }
-    static enum lru_status shadow_lru_isolate(struct list_head *item,
-    struct list_lru_one *lru,
+    static enum lru_status shadow_lru_isolate(list_head *item, list_lru_one *lru,
     void *arg) __must_hold(lru.lock)
     {
-    struct xa_node *node = container_of(item, struct xa_node, private_list);
-    struct address_space *mapping;
-    int ret;
+    let mut node = container_of!(item, xa_node, private_list);
+pub static mut mapping: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
 //
 // Page cache insertions and deletions synchronously maintain
 // the shadow node LRU under the i_pages lock and the
@@ -687,12 +938,12 @@ pub unsafe extern "C" fn workingset_update_node(node: *mut xa_node) {
 // pin only the address_space of the particular node we want
 // to reclaim, take the node off-LRU, and drop the &lru->lock.
 //
-    mapping = container_of(node.array, struct address_space, i_pages);
+    mapping = container_of!(node.array, address_space, i_pages);
 // Coming from the list, invert the lock order
     if (!xa_trylock(&mapping.i_pages)) {
     spin_unlock_irq(&lru.lock);
     ret = LRU_RETRY;
-    goto out;
+// goto;
     }
 // For page cache we need to hold i_lock
     if (mapping.host != core::ptr::null_mut()) {
@@ -700,7 +951,7 @@ pub unsafe extern "C" fn workingset_update_node(node: *mut xa_node) {
     xa_unlock(&mapping.i_pages);
     spin_unlock_irq(&lru.lock);
     ret = LRU_RETRY;
-    goto out;
+// goto;
     }
     }
     list_lru_isolate(lru, item);
@@ -711,27 +962,29 @@ pub unsafe extern "C" fn workingset_update_node(node: *mut xa_node) {
 // no pages, so we expect to be able to remove them all and
 // delete and free the empty node afterwards.
 //
-    if (WARN_ON_ONCE(!node.nr_values))
-    goto out_invalid;
-    if (WARN_ON_ONCE(node.count != node.nr_values))
-    goto out_invalid;
+    if (WARN_ON_ONCE!(!node.nr_values)) {
+// goto;
+    }
+    if (WARN_ON_ONCE!(node.count != node.nr_values)) {
+// goto;
+    }
     xa_delete_node(node, workingset_update_node);
     mod_lruvec_kmem_state(node, WORKINGSET_NODERECLAIM, 1);
-    out_invalid:
+// label;
     xa_unlock_irq(&mapping.i_pages);
     if (mapping.host != core::ptr::null_mut()) {
-    if (mapping_shrinkable(mapping))
+    if (mapping_shrinkable(mapping)) {
     inode_lru_list_add(mapping.host);
+    }
     spin_unlock(&mapping.host.i_lock);
     }
     ret = LRU_REMOVED_RETRY;
-    out:
+// label;
     cond_resched();
     return ret;
     }
-    static unsigned long scan_shadow_nodes(struct shrinker *shrinker,
-    struct shrink_control *sc)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn scan_shadow_nodes(shrinker: *mut shrinker, sc: *mut shrink_control) -> c_ulong {
 // list_lru lock nests inside the IRQ-safe i_pages lock
     return list_lru_shrink_walk_irq(&shadow_nodes, sc, shadow_lru_isolate,
     core::ptr::null_mut());
@@ -740,16 +993,15 @@ pub unsafe extern "C" fn workingset_update_node(node: *mut xa_node) {
 // Our list_lru->lock is IRQ-safe as it nests inside the IRQ-safe
 // i_pages lock.
 //
-    static struct lock_class_key shadow_nodes_key;
+pub static mut shadow_nodes_key: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn workingset_init() -> int __init {
-    static int __init workingset_init(void)
-    {
-    unsigned int timestamp_bits, timestamp_bits_anon;
-    struct shrinker *workingset_shadow_shrinker;
-    unsigned int max_order;
-    let mut ret: c_int = -ENOMEM;
-    BUILD_BUG_ON(BITS_PER_LONG < EVICTION_SHIFT);
+unsafe extern "C" fn workingset_init() -> c_int {
+    let mut timestamp_bits = 0;
+    let mut timestamp_bits_anon = 0;
+pub static mut workingset_shadow_shrinker: *mut c_void = core::ptr::null_mut();
+    let mut max_order = 0;
+pub static mut ret: c_int = 0;
+    BUILD_BUG_ON!(BITS_PER_LONG < EVICTION_SHIFT);
 //
 // Calculate the eviction bucket size to cover the longest
 // actionable refault distance, which is currently half of
@@ -760,31 +1012,35 @@ unsafe extern "C" fn workingset_init() -> int __init {
     timestamp_bits = BITS_PER_LONG - EVICTION_SHIFT;
     timestamp_bits_anon = BITS_PER_LONG - EVICTION_SHIFT_ANON;
     max_order = fls_long(totalram_pages() - 1);
-    if (max_order > (BITS_PER_LONG - EVICTION_SHIFT))
+    if (max_order > (BITS_PER_LONG - EVICTION_SHIFT)) {
     bucket_order[WORKINGSET_FILE] = max_order - timestamp_bits;
-    if (max_order > timestamp_bits_anon)
+    }
+    if (max_order > timestamp_bits_anon) {
     bucket_order[WORKINGSET_ANON] = max_order - timestamp_bits_anon;
-    pr_info("workingset: timestamp_bits=%d (anon: %d) max_order=%d bucket_order=%u (anon: %d)\n",
+    }
+    pr_info!("workingset: timestamp_bits=%d (anon: %d) max_order=%d bucket_order=%u (anon: %d)\n",
     timestamp_bits, timestamp_bits_anon, max_order,
     bucket_order[WORKINGSET_FILE], bucket_order[WORKINGSET_ANON]);
     workingset_shadow_shrinker = shrinker_alloc(SHRINKER_NUMA_AWARE |
     SHRINKER_MEMCG_AWARE,
     "mm-shadow");
-    if (!workingset_shadow_shrinker)
-    goto err;
+    if (!workingset_shadow_shrinker) {
+// goto;
+    }
     ret = list_lru_init_memcg_key(&shadow_nodes, workingset_shadow_shrinker,
     &shadow_nodes_key);
-    if (ret)
-    goto err_list_lru;
+    if (ret) {
+// goto;
+    }
     workingset_shadow_shrinker.count_objects = count_shadow_nodes;
     workingset_shadow_shrinker.scan_objects = scan_shadow_nodes;
 // ->count reports only fully expendable nodes
     workingset_shadow_shrinker.seeks = 0;
     shrinker_register(workingset_shadow_shrinker);
     return 0;
-    err_list_lru:
+// label;
     shrinker_free(workingset_shadow_shrinker);
-    err:
+// label;
     return ret;
     }
-    module_init(workingset_init);
+    module_init!(workingset_init);

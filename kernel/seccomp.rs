@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
 macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
@@ -110,7 +360,7 @@ pub struct seccomp_knotif {
 // another message is sent. When the userspace handler replies, state
 // transitions to REPLIED.
 //
-    pub state: enum notify_state,
+    pub state: notify_state,
 // The return values, only valid when in SECCOMP_NOTIFY_REPLIED
     pub error: c_int,
     pub val: c_long,
@@ -155,8 +405,8 @@ pub struct seccomp_kaddfd {
     pub ret: c_int,
 }
 
-    struct completion completion;
-    struct list_head list;
+pub static mut completion: usize = 0;
+pub static mut list: usize = 0;
     };
 //
 // struct notification - container for seccomp userspace notifications. Since
@@ -203,9 +453,8 @@ pub struct action_cache {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct action_cache {
-    static inline bool seccomp_cache_check_allow(const struct seccomp_filter *sfilter,
-    const struct seccomp_data *sd)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn seccomp_cache_check_allow(sfilter: *mut seccomp_filter, sd: *mut seccomp_data) -> bool {
     pub false: return,
     }
 #[no_mangle]
@@ -275,8 +524,8 @@ unsafe extern "C" fn populate_seccomp_data(sd: *mut seccomp_data) {
 // Instead of using current_pt_reg(), we're already doing the work
 // to safely fetch "current", so just use "task" everywhere below.
 //
-    struct task_struct *task = current;
-    struct pt_regs *regs = task_pt_regs(task);
+    let mut task = current;
+    let mut regs = task_pt_regs(task);
     unsigned long args[6];
     sd.nr = syscall_get_nr(task, regs);
     sd.arch = syscall_get_arch(task);
@@ -303,79 +552,121 @@ unsafe extern "C" fn populate_seccomp_data(sd: *mut seccomp_data) {
 //
 #[no_mangle]
 unsafe extern "C" fn seccomp_check_filter(filter: *mut sock_filter, flen: c_uint) -> c_int {
-    int pc;
-    for (pc = 0; pc < flen; pc++) {
-    struct sock_filter *ftest = &filter[pc];
-    let mut code: u16 = ftest.code;
-    let mut k: u32 = ftest.k;
-    switch (code) {
-    case BPF_LD | BPF_W | BPF_ABS:
+    let mut pc = 0;
+    while (pc < flen) {
+    let mut ftest = &filter[pc];
+pub static mut code: u16 = 0;
+pub static mut k: u32 = 0;
+    match (code) {
+    BPF_LD | BPF_W | BPF_ABS => {
     ftest.code = BPF_LDX | BPF_W | BPF_ABS;
 // 32-bit aligned and not out of bounds.
-    if (k >= sizeof(struct seccomp_data) || k & 3)
+    if (k >= sizeof!(seccomp_data) || k & 3) {
     return -EINVAL;
+    }
     continue;
-    case BPF_LD | BPF_W | BPF_LEN:
+    }
+    BPF_LD | BPF_W | BPF_LEN => {
     ftest.code = BPF_LD | BPF_IMM;
-    ftest.k = sizeof(struct seccomp_data);
+    ftest.k = sizeof!(seccomp_data);
     continue;
-    case BPF_LDX | BPF_W | BPF_LEN:
+    }
+    BPF_LDX | BPF_W | BPF_LEN => {
     ftest.code = BPF_LDX | BPF_IMM;
-    ftest.k = sizeof(struct seccomp_data);
+    ftest.k = sizeof!(seccomp_data);
     continue;
 // Explicitly include allowed calls.
-    case BPF_RET | BPF_K:
-    case BPF_RET | BPF_A:
-    case BPF_ALU | BPF_ADD | BPF_K:
-    case BPF_ALU | BPF_ADD | BPF_X:
-    case BPF_ALU | BPF_SUB | BPF_K:
-    case BPF_ALU | BPF_SUB | BPF_X:
-    case BPF_ALU | BPF_MUL | BPF_K:
-    case BPF_ALU | BPF_MUL | BPF_X:
-    case BPF_ALU | BPF_DIV | BPF_K:
-    case BPF_ALU | BPF_DIV | BPF_X:
-    case BPF_ALU | BPF_AND | BPF_K:
-    case BPF_ALU | BPF_AND | BPF_X:
-    case BPF_ALU | BPF_OR | BPF_K:
-    case BPF_ALU | BPF_OR | BPF_X:
-    case BPF_ALU | BPF_XOR | BPF_K:
-    case BPF_ALU | BPF_XOR | BPF_X:
-    case BPF_ALU | BPF_LSH | BPF_K:
-    case BPF_ALU | BPF_LSH | BPF_X:
-    case BPF_ALU | BPF_RSH | BPF_K:
-    case BPF_ALU | BPF_RSH | BPF_X:
-    case BPF_ALU | BPF_NEG:
-    case BPF_LD | BPF_IMM:
-    case BPF_LDX | BPF_IMM:
-    case BPF_MISC | BPF_TAX:
-    case BPF_MISC | BPF_TXA:
-    case BPF_LD | BPF_MEM:
-    case BPF_LDX | BPF_MEM:
-    case BPF_ST:
-    case BPF_STX:
-    case BPF_JMP | BPF_JA:
-    case BPF_JMP | BPF_JEQ | BPF_K:
-    case BPF_JMP | BPF_JEQ | BPF_X:
-    case BPF_JMP | BPF_JGE | BPF_K:
-    case BPF_JMP | BPF_JGE | BPF_X:
-    case BPF_JMP | BPF_JGT | BPF_K:
-    case BPF_JMP | BPF_JGT | BPF_X:
-    case BPF_JMP | BPF_JSET | BPF_K:
-    case BPF_JMP | BPF_JSET | BPF_X:
+    }
+    BPF_RET | BPF_K => {
+    }
+    BPF_RET | BPF_A => {
+    }
+    BPF_ALU | BPF_ADD | BPF_K => {
+    }
+    BPF_ALU | BPF_ADD | BPF_X => {
+    }
+    BPF_ALU | BPF_SUB | BPF_K => {
+    }
+    BPF_ALU | BPF_SUB | BPF_X => {
+    }
+    BPF_ALU | BPF_MUL | BPF_K => {
+    }
+    BPF_ALU | BPF_MUL | BPF_X => {
+    }
+    BPF_ALU | BPF_DIV | BPF_K => {
+    }
+    BPF_ALU | BPF_DIV | BPF_X => {
+    }
+    BPF_ALU | BPF_AND | BPF_K => {
+    }
+    BPF_ALU | BPF_AND | BPF_X => {
+    }
+    BPF_ALU | BPF_OR | BPF_K => {
+    }
+    BPF_ALU | BPF_OR | BPF_X => {
+    }
+    BPF_ALU | BPF_XOR | BPF_K => {
+    }
+    BPF_ALU | BPF_XOR | BPF_X => {
+    }
+    BPF_ALU | BPF_LSH | BPF_K => {
+    }
+    BPF_ALU | BPF_LSH | BPF_X => {
+    }
+    BPF_ALU | BPF_RSH | BPF_K => {
+    }
+    BPF_ALU | BPF_RSH | BPF_X => {
+    }
+    BPF_ALU | BPF_NEG => {
+    }
+    BPF_LD | BPF_IMM => {
+    }
+    BPF_LDX | BPF_IMM => {
+    }
+    BPF_MISC | BPF_TAX => {
+    }
+    BPF_MISC | BPF_TXA => {
+    }
+    BPF_LD | BPF_MEM => {
+    }
+    BPF_LDX | BPF_MEM => {
+    }
+    BPF_ST => {
+    }
+    BPF_STX => {
+    }
+    BPF_JMP | BPF_JA => {
+    }
+    BPF_JMP | BPF_JEQ | BPF_K => {
+    }
+    BPF_JMP | BPF_JEQ | BPF_X => {
+    }
+    BPF_JMP | BPF_JGE | BPF_K => {
+    }
+    BPF_JMP | BPF_JGE | BPF_X => {
+    }
+    BPF_JMP | BPF_JGT | BPF_K => {
+    }
+    BPF_JMP | BPF_JGT | BPF_X => {
+    }
+    BPF_JMP | BPF_JSET | BPF_K => {
+    }
+    BPF_JMP | BPF_JSET | BPF_X => {
     continue;
-    default:
+    }
+    _ => {
     return -EINVAL;
+    }
     }
     }
     return 0;
     }
 
-    static inline bool seccomp_cache_check_allow_bitmap(const void *bitmap,
-    size_t bitmap_size,
-    int syscall_nr)
-    {
-    if (unlikely(syscall_nr < 0 || syscall_nr >= bitmap_size))
+#[no_mangle]
+pub unsafe extern "C" fn seccomp_cache_check_allow_bitmap(bitmap: *mut c_void, bitmap_size: size_t, syscall_nr: c_int) -> bool {
+    if (unlikely(syscall_nr < 0 || syscall_nr >= bitmap_size)) {
     return false;
+    }
     syscall_nr = array_index_nospec(syscall_nr, bitmap_size);
     return test_bit(syscall_nr, bitmap);
     }
@@ -386,27 +677,30 @@ unsafe extern "C" fn seccomp_check_filter(filter: *mut sock_filter, flen: c_uint
 //
 // Returns true if the seccomp_data is cached and allowed.
 //
-    static inline bool seccomp_cache_check_allow(const struct seccomp_filter *sfilter,
-    const struct seccomp_data *sd)
-    {
-    let mut syscall_nr: c_int = sd.nr;
-    const struct action_cache *cache = &sfilter.cache;
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: seccomp_cache_check_allow
+pub unsafe extern "C" fn seccomp_cache_check_allow_dup(sfilter: *mut seccomp_filter, sd: *mut seccomp_data) -> bool {
+pub static mut syscall_nr: c_int = 0;
+    let mut cache = &sfilter.cache;
 
 // A native-only architecture doesn't need to check sd->arch.
     return seccomp_cache_check_allow_bitmap(cache.allow_native,
     SECCOMP_ARCH_NATIVE_NR,
     syscall_nr);
 
-    if (likely(sd.arch == SECCOMP_ARCH_NATIVE))
+    if (likely(sd.arch == SECCOMP_ARCH_NATIVE)) {
     return seccomp_cache_check_allow_bitmap(cache.allow_native,
     SECCOMP_ARCH_NATIVE_NR,
     syscall_nr);
-    if (likely(sd.arch == SECCOMP_ARCH_COMPAT))
+    }
+    if (likely(sd.arch == SECCOMP_ARCH_COMPAT)) {
     return seccomp_cache_check_allow_bitmap(cache.allow_compat,
     SECCOMP_ARCH_COMPAT_NR,
     syscall_nr);
+    }
 
-    WARN_ON_ONCE(true);
+    WARN_ON_ONCE!(true);
     return false;
     }
 
@@ -419,24 +713,24 @@ unsafe extern "C" fn seccomp_check_filter(filter: *mut sock_filter, flen: c_uint
 //
 // Returns valid seccomp BPF response codes.
 //
-    static u32 seccomp_run_filters(const struct seccomp_data *sd,
-    struct seccomp_filter **match)
-    {
-    let mut ret: u32 = SECCOMP_RET_ALLOW;
+#[no_mangle]
+pub unsafe extern "C" fn seccomp_run_filters(sd: *mut seccomp_data, match: *mut *mut seccomp_filter) -> u32 {
+pub static mut ret: u32 = 0;
 // Make sure cross-thread synced filter points somewhere sane.
-    struct seccomp_filter *f =
-    READ_ONCE(current.seccomp.filter);
+    let mut f = READ_ONCE(current.seccomp.filter);
 // Ensure unexpected behavior doesn't result in failing open.
-    if (WARN_ON(f == core::ptr::null_mut()))
+    if (WARN_ON!(f == core::ptr::null_mut())) {
     return SECCOMP_RET_KILL_PROCESS;
-    if (seccomp_cache_check_allow(f, sd))
+    }
+    if (seccomp_cache_check_allow(f, sd)) {
     return SECCOMP_RET_ALLOW;
+    }
 //
 // All filters in the list are evaluated and the lowest BPF return
 // value always takes priority (ignoring the DATA).
 //
-    for (; f; f = f.prev) {
-    let mut cur_ret: u32 = bpf_prog_run_pin_on_cpu(f.prog, sd);
+    while (f) {
+pub static mut cur_ret: u32 = 0;
     if (ACTION_ONLY(cur_ret) < ACTION_ONLY(ret)) {
     ret = cur_ret;
 // match = f;
@@ -448,15 +742,14 @@ unsafe extern "C" fn seccomp_check_filter(filter: *mut sock_filter, flen: c_uint
 #[no_mangle]
 pub unsafe extern "C" fn seccomp_may_assign_mode(seccomp_mode: c_ulong) -> bool {
     assert_spin_locked(&current.sighand.siglock);
-    if (current.seccomp.mode && current.seccomp.mode != seccomp_mode)
+    if (current.seccomp.mode && current.seccomp.mode != seccomp_mode) {
     return false;
+    }
     return true;
     }
-    void __weak arch_seccomp_spec_mitigate(struct task_struct *task) { }
-    static inline void seccomp_assign_mode(struct task_struct *task,
-    unsigned long seccomp_mode,
-    unsigned long flags)
-    {
+    void __weak arch_seccomp_spec_mitigate(task_struct *task) { }
+#[no_mangle]
+pub unsafe extern "C" fn seccomp_assign_mode(task: *mut task_struct, seccomp_mode: c_ulong, flags: c_ulong) {
     assert_spin_locked(&task.sighand.siglock);
     task.seccomp.mode = seccomp_mode;
 //
@@ -465,21 +758,23 @@ pub unsafe extern "C" fn seccomp_may_assign_mode(seccomp_mode: c_ulong) -> bool 
 //
     smp_mb__before_atomic();
 // Assume default seccomp processes want spec flaw mitigation.
-    if ((flags & SECCOMP_FILTER_FLAG_SPEC_ALLOW) == 0)
+    if ((flags & SECCOMP_FILTER_FLAG_SPEC_ALLOW) == 0) {
     arch_seccomp_spec_mitigate(task);
+    }
     set_task_syscall_work(task, SECCOMP);
     }
 
 // Returns 1 if the parent is an ancestor of the child.
-    static int is_ancestor(struct seccomp_filter *parent,
-    struct seccomp_filter *child)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn is_ancestor(parent: *mut seccomp_filter, child: *mut seccomp_filter) -> c_int {
 // NULL is the root ancestor.
-    if (parent == core::ptr::null_mut())
+    if (parent == core::ptr::null_mut()) {
     return 1;
-    for (; child; child = child.prev)
+    }
+    for (; child; child = child.prev) {
     if (child == parent)
     return 1;
+    }
     return 0;
     }
 //
@@ -493,29 +788,34 @@ pub unsafe extern "C" fn seccomp_may_assign_mode(seccomp_mode: c_ulong) -> bool 
 //
 #[no_mangle]
 pub unsafe extern "C" fn seccomp_can_sync_threads() -> pid_t {
-    struct task_struct *thread, *caller;
-    BUG_ON(!mutex_is_locked(&current.signal.cred_guard_mutex));
+    let mut thread = core::ptr::null_mut();
+    let mut caller = core::ptr::null_mut();
+    BUG_ON!(!mutex_is_locked(&current.signal.cred_guard_mutex));
     assert_spin_locked(&current.sighand.siglock);
 // Validate all threads being eligible for synchronization.
     caller = current;
     for_each_thread(caller, thread) {
-    pid_t failed;
+    let mut failed = 0;
 // Skip current, since it is initiating the sync.
-    if (thread == caller)
+    if (thread == caller) {
     continue;
+    }
 // Skip exited threads.
-    if (thread.flags & PF_EXITING)
+    if (thread.flags & PF_EXITING) {
     continue;
+    }
     if (thread.seccomp.mode == SECCOMP_MODE_DISABLED ||
     (thread.seccomp.mode == SECCOMP_MODE_FILTER &&
     is_ancestor(thread.seccomp.filter,
-    caller.seccomp.filter)))
+    caller.seccomp.filter))) {
     continue;
+    }
 // Return the first thread that cannot be synchronized.
     failed = task_pid_vnr(thread);
 // If the pid cannot be resolved, then return -ESRCH
-    if (WARN_ON(failed == 0))
+    if (WARN_ON!(failed == 0)) {
     failed = -ESRCH;
+    }
     return failed;
     }
     return 0;
@@ -530,8 +830,9 @@ pub unsafe extern "C" fn seccomp_filter_free(filter: *mut seccomp_filter) {
 #[no_mangle]
 unsafe extern "C" fn __seccomp_filter_orphan(orig: *mut seccomp_filter) {
     while (orig && refcount_dec_and_test(&orig.users)) {
-    if (waitqueue_active(&orig.wqh))
+    if (waitqueue_active(&orig.wqh)) {
     wake_up_poll(&orig.wqh, EPOLLHUP);
+    }
     orig = orig.prev;
     }
     }
@@ -539,7 +840,7 @@ unsafe extern "C" fn __seccomp_filter_orphan(orig: *mut seccomp_filter) {
 unsafe extern "C" fn __put_seccomp_filter(orig: *mut seccomp_filter) {
 // Clean up single-reference branches iteratively.
     while (orig && refcount_dec_and_test(&orig.refs)) {
-    struct seccomp_filter *freeme = orig;
+    let mut freeme = orig;
     orig = orig.prev;
     seccomp_filter_free(freeme);
     }
@@ -564,11 +865,13 @@ unsafe extern "C" fn __seccomp_filter_release(orig: *mut seccomp_filter) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn seccomp_filter_release(tsk: *mut task_struct) {
-    struct seccomp_filter *orig;
-    if (WARN_ON((tsk.flags & PF_EXITING) == 0))
+pub static mut orig: *mut c_void = core::ptr::null_mut();
+    if (WARN_ON!((tsk.flags & PF_EXITING) == 0)) {
     return;
-    if (READ_ONCE(tsk.seccomp.filter) == core::ptr::null_mut())
+    }
+    if (READ_ONCE(tsk.seccomp.filter) == core::ptr::null_mut()) {
     return;
+    }
     spin_lock_irq(&tsk.sighand.siglock);
     orig = tsk.seccomp.filter;
 // Detach task from its filter tree.
@@ -587,27 +890,31 @@ pub unsafe extern "C" fn seccomp_filter_release(tsk: *mut task_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn seccomp_sync_threads(flags: c_ulong) {
-    struct task_struct *thread, *caller;
-    BUG_ON(!mutex_is_locked(&current.signal.cred_guard_mutex));
+    let mut thread = core::ptr::null_mut();
+    let mut caller = core::ptr::null_mut();
+    BUG_ON!(!mutex_is_locked(&current.signal.cred_guard_mutex));
     assert_spin_locked(&current.sighand.siglock);
 //
 // Don't touch any of the threads if the process is being killed.
 // This allows for a lockless check in seccomp_filter_release.
 //
-    if (current.signal.flags & SIGNAL_GROUP_EXIT)
+    if (current.signal.flags & SIGNAL_GROUP_EXIT) {
     return;
+    }
 // Synchronize all threads.
     caller = current;
     for_each_thread(caller, thread) {
 // Skip current, since it needs no changes.
-    if (thread == caller)
+    if (thread == caller) {
     continue;
+    }
 //
 // Skip exited threads. seccomp_filter_release could have
 // been already called for this task.
 //
-    if (thread.flags & PF_EXITING)
+    if (thread.flags & PF_EXITING) {
     continue;
+    }
 // Get a task reference for the new leaf node.
     get_seccomp_filter(caller);
 //
@@ -627,17 +934,19 @@ pub unsafe extern "C" fn seccomp_sync_threads(flags: c_ulong) {
 // a thread that sets it up, enters seccomp,
 // then dies.
 //
-    if (task_no_new_privs(caller))
+    if (task_no_new_privs(caller)) {
     task_set_no_new_privs(thread);
+    }
 //
 // Opt the other thread into seccomp if needed.
 // As threads are considered to be trust-realm
 // equivalent (see ptrace_may_access), it is safe to
 // allow one thread to transition the other.
 //
-    if (thread.seccomp.mode == SECCOMP_MODE_DISABLED)
+    if (thread.seccomp.mode == SECCOMP_MODE_DISABLED) {
     seccomp_assign_mode(thread, SECCOMP_MODE_FILTER,
     flags);
+    }
     }
     }
 //
@@ -646,19 +955,18 @@ pub unsafe extern "C" fn seccomp_sync_threads(flags: c_ulong) {
 //
 // Returns filter on success or an ERR_PTR on failure.
 //
-    static struct seccomp_filter *seccomp_prepare_filter(struct sock_fprog *fprog)
-    {
-    struct seccomp_filter *sfilter;
-    int ret;
-    const bool save_orig =
-
-    true;
+#[no_mangle]
+pub unsafe extern "C" fn seccomp_prepare_filter(fprog: *mut sock_fprog) -> *mut c_void {
+pub static mut sfilter: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    let mut save_orig = true;
 
     false;
 
-    if (fprog.len == 0 || fprog.len > BPF_MAXINSNS)
+    if (fprog.len == 0 || fprog.len > BPF_MAXINSNS) {
     return ERR_PTR(-EINVAL);
-    BUG_ON(INT_MAX / fprog.len < sizeof(struct sock_filter));
+    }
+    BUG_ON!(INT_MAX / fprog.len < sizeof!(sock_filter));
 //
 // Installing a seccomp filter requires that the task has
 // CAP_SYS_ADMIN in its namespace or be running with no_new_privs.
@@ -666,12 +974,14 @@ pub unsafe extern "C" fn seccomp_sync_threads(flags: c_ulong) {
 // behavior of privileged children.
 //
     if (!task_no_new_privs(current) &&
-    !ns_capable_noaudit(current_user_ns(), CAP_SYS_ADMIN))
+    !ns_capable_noaudit(current_user_ns(), CAP_SYS_ADMIN)) {
     return ERR_PTR(-EACCES);
+    }
 // Allocate a new seccomp_filter
     sfilter = kzalloc_obj(*sfilter, GFP_KERNEL | __GFP_NOWARN);
-    if (!sfilter)
+    if (!sfilter) {
     return ERR_PTR(-ENOMEM);
+    }
     mutex_init(&sfilter.notify_lock);
     ret = bpf_prog_create_from_user(&sfilter.prog, fprog,
     seccomp_check_filter, save_orig);
@@ -690,39 +1000,43 @@ pub unsafe extern "C" fn seccomp_sync_threads(flags: c_ulong) {
 //
 // Returns 0 on success and non-zero otherwise.
 //
-    static struct seccomp_filter *
-    seccomp_prepare_user_filter(const char __user *user_filter)
-    {
-    struct sock_fprog fprog;
-    struct seccomp_filter *filter = ERR_PTR(-EFAULT);
+#[no_mangle]
+pub unsafe extern "C" fn seccomp_prepare_user_filter(user_filter: *mut c_char) -> *mut c_void {
+pub static mut fprog: usize = 0;
+    let mut filter = ERR_PTR(-EFAULT);
 
     if (in_compat_syscall()) {
-    struct compat_sock_fprog fprog32;
-    if (copy_from_user(&fprog32, user_filter, sizeof(fprog32)))
-    goto out;
+pub static mut fprog32: usize = 0;
+    if (copy_from_user(&fprog32, user_filter, sizeof!(fprog32))) {
+// goto;
+    }
     fprog.len = fprog32.len;
     fprog.filter = compat_ptr(fprog32.filter);
     } else /* falls through to the if below. */
 
-    if (copy_from_user(&fprog, user_filter, sizeof(fprog)))
-    goto out;
+    if (copy_from_user(&fprog, user_filter, sizeof!(fprog))) {
+// goto;
+    }
     filter = seccomp_prepare_filter(&fprog);
-    out:
+// label;
     return filter;
     }
 
 #[no_mangle]
 unsafe extern "C" fn seccomp_uprobe_exception(sd: *mut seccomp_data) -> bool {
 
-    if (sd.arch == SECCOMP_ARCH_NATIVE)
+    if (sd.arch == SECCOMP_ARCH_NATIVE) {
 
     {
+    }
 
-    if (sd.nr == __NR_uretprobe)
+    if (sd.nr == __NR_uretprobe) {
     return true;
+    }
 
-    if (sd.nr == __NR_uprobe)
+    if (sd.nr == __NR_uprobe) {
     return true;
+    }
 
     }
 
@@ -734,38 +1048,42 @@ unsafe extern "C" fn seccomp_uprobe_exception(sd: *mut seccomp_data) -> bool {
 // @sd: The seccomp data to check against, only syscall number and arch
 // number are considered constant.
 //
-    static bool seccomp_is_const_allow(struct sock_fprog_kern *fprog,
-    struct seccomp_data *sd)
-    {
-    let mut reg_value: c_uint = 0;
-    unsigned int pc;
-    bool op_res;
-    if (WARN_ON_ONCE(!fprog))
+#[no_mangle]
+pub unsafe extern "C" fn seccomp_is_const_allow(fprog: *mut sock_fprog_kern, sd: *mut seccomp_data) -> bool {
+pub static mut reg_value: c_uint = 0;
+    let mut pc = 0;
+    let mut op_res = 0;
+    if (WARN_ON_ONCE!(!fprog)) {
     return false;
+    }
 // Our single exception to filtering.
-    if (seccomp_uprobe_exception(sd))
+    if (seccomp_uprobe_exception(sd)) {
     return true;
-    for (pc = 0; pc < fprog.len; pc++) {
-    struct sock_filter *insn = &fprog.filter[pc];
-    let mut code: u16 = insn.code;
-    let mut k: u32 = insn.k;
-    switch (code) {
-    case BPF_LD | BPF_W | BPF_ABS:
-    switch (k) {
-    case offsetof(struct seccomp_data, nr):
+    }
+    while (pc < fprog.len) {
+    let mut insn = &fprog.filter[pc];
+pub static mut code: u16 = 0;
+pub static mut k: u32 = 0;
+    match (code) {
+    BPF_LD | BPF_W | BPF_ABS => {
+    match (k) {
+    offsetof(seccomp_data, nr) => {
     reg_value = sd.nr;
-    break;
-    case offsetof(struct seccomp_data, arch):
+    // break;
+    }
+    offsetof(seccomp_data, arch) => {
     reg_value = sd.arch;
-    break;
-    default:
+    // break;
+    }
+    _ => {
 // can't optimize (non-constant value load)
     return false;
+    }
     }
     break;
     case BPF_RET | BPF_K:
 // reached return with constant values only, check allow
-    let mut k: return = = SECCOMP_RET_ALLOW;
+pub static mut k: return = 0;
     case BPF_JMP | BPF_JA:
     pc += insn.k;
     break;
@@ -786,7 +1104,7 @@ unsafe extern "C" fn seccomp_uprobe_exception(sd: *mut seccomp_data) -> bool {
     case BPF_JSET:
     op_res = !!(reg_value & k);
     break;
-    default:
+// label;
 // can't optimize (unknown jump)
     return false;
     }
@@ -795,22 +1113,20 @@ unsafe extern "C" fn seccomp_uprobe_exception(sd: *mut seccomp_data) -> bool {
     case BPF_ALU | BPF_AND | BPF_K:
     reg_value &= k;
     break;
-    default:
+// label;
 // can't optimize (unknown insn)
     return false;
     }
     }
 // ran off the end of the filter?!
-    WARN_ON(1);
+    WARN_ON!(1);
     return false;
     }
-    static void seccomp_cache_prepare_bitmap(struct seccomp_filter *sfilter,
-    void *bitmap, const void *bitmap_prev,
-    size_t bitmap_size, int arch)
-    {
-    struct sock_fprog_kern *fprog = sfilter.prog.orig_prog;
-    struct seccomp_data sd;
-    int nr;
+#[no_mangle]
+pub unsafe extern "C" fn seccomp_cache_prepare_bitmap(sfilter: *mut seccomp_filter, bitmap: *mut c_void, bitmap_prev: *mut c_void, bitmap_size: size_t, arch: c_int) {
+    let mut fprog = sfilter.prog.orig_prog;
+pub static mut sd: usize = 0;
+    let mut nr = 0;
     if (bitmap_prev) {
 // The new filter must be as restrictive as the last.
     bitmap_copy(bitmap, bitmap_prev, bitmap_size);
@@ -818,15 +1134,17 @@ unsafe extern "C" fn seccomp_uprobe_exception(sd: *mut seccomp_data) -> bool {
 // Before any filters, all syscalls are always allowed.
     bitmap_fill(bitmap, bitmap_size);
     }
-    for (nr = 0; nr < bitmap_size; nr++) {
+    while (nr < bitmap_size) {
 // No bitmap change: not a cacheable action.
-    if (!test_bit(nr, bitmap))
+    if (!test_bit(nr, bitmap)) {
     continue;
+    }
     sd.nr = nr;
     sd.arch = arch;
 // No bitmap change: continue to always allow.
-    if (seccomp_is_const_allow(fprog, &sd))
+    if (seccomp_is_const_allow(fprog, &sd)) {
     continue;
+    }
 //
 // Not a cacheable action: always run filters.
 // atomic clear_bit() not needed, filter not visible yet.
@@ -842,9 +1160,8 @@ unsafe extern "C" fn seccomp_uprobe_exception(sd: *mut seccomp_data) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn seccomp_cache_prepare(sfilter: *mut seccomp_filter) {
-    struct action_cache *cache = &sfilter.cache;
-    const struct action_cache *cache_prev =
-    sfilter.prev ? &sfilter.prev.cache : core::ptr::null_mut();
+    let mut cache = &sfilter.cache;
+    let mut cache_prev = sfilter.prev ? &sfilter.prev.cache : core::ptr::null_mut();
     seccomp_cache_prepare_bitmap(sfilter, cache.allow_native,
     cache_prev ? cache_prev.allow_native : core::ptr::null_mut(),
     SECCOMP_ARCH_NATIVE_NR,
@@ -869,35 +1186,40 @@ unsafe extern "C" fn seccomp_cache_prepare(sfilter: *mut seccomp_filter) {
 // seccomp mode or did not have an ancestral seccomp filter
 // - in NEW_LISTENER mode: the fd of the new listener
 //
-    static long seccomp_attach_filter(unsigned int flags,
-    struct seccomp_filter *filter)
-    {
-    unsigned long total_insns;
-    struct seccomp_filter *walker;
+#[no_mangle]
+pub unsafe extern "C" fn seccomp_attach_filter(flags: c_uint, filter: *mut seccomp_filter) -> c_long {
+    let mut total_insns = 0;
+pub static mut walker: *mut c_void = core::ptr::null_mut();
     assert_spin_locked(&current.sighand.siglock);
 // Validate resulting filter length.
     total_insns = filter.prog.len;
-    for (walker = current.seccomp.filter; walker; walker = walker.prev)
+    for (walker = current.seccomp.filter; walker; walker = walker.prev) {
     total_insns += walker.prog.len + 4;  /* 4 instr penalty */
-    if (total_insns > MAX_INSNS_PER_PATH)
+    }
+    if (total_insns > MAX_INSNS_PER_PATH) {
     return -ENOMEM;
+    }
 // If thread sync has been requested, check that it is possible.
     if (flags & SECCOMP_FILTER_FLAG_TSYNC) {
-    int ret;
+    let mut ret = 0;
     ret = seccomp_can_sync_threads();
     if (ret) {
-    if (flags & SECCOMP_FILTER_FLAG_TSYNC_ESRCH)
+    if (flags & SECCOMP_FILTER_FLAG_TSYNC_ESRCH) {
     return -ESRCH;
-    else
+    }
+    else {
     return ret;
     }
     }
+    }
 // Set log flag, if present.
-    if (flags & SECCOMP_FILTER_FLAG_LOG)
+    if (flags & SECCOMP_FILTER_FLAG_LOG) {
     filter.log = true;
+    }
 // Set wait killable flag, if present.
-    if (flags & SECCOMP_FILTER_FLAG_WAIT_KILLABLE_RECV)
+    if (flags & SECCOMP_FILTER_FLAG_WAIT_KILLABLE_RECV) {
     filter.wait_killable_recv = true;
+    }
 //
 // If there is an existing filter, make it the prev and don't drop its
 // task reference.
@@ -907,8 +1229,9 @@ unsafe extern "C" fn seccomp_cache_prepare(sfilter: *mut seccomp_filter) {
     current.seccomp.filter = filter;
     atomic_inc(&current.seccomp.filter_count);
 // Now that the new filter is in place, synchronize to all threads.
-    if (flags & SECCOMP_FILTER_FLAG_TSYNC)
+    if (flags & SECCOMP_FILTER_FLAG_TSYNC) {
     seccomp_sync_threads(flags);
+    }
     return 0;
     }
 #[no_mangle]
@@ -918,9 +1241,10 @@ unsafe extern "C" fn __get_seccomp_filter(filter: *mut seccomp_filter) {
 // get_seccomp_filter - increments the reference count of the filter on @tsk
 #[no_mangle]
 pub unsafe extern "C" fn get_seccomp_filter(tsk: *mut task_struct) {
-    struct seccomp_filter *orig = tsk.seccomp.filter;
-    if (!orig)
+    let mut orig = tsk.seccomp.filter;
+    if (!orig) {
     return;
+    }
     __get_seccomp_filter(orig);
     refcount_inc(&orig.users);
     }
@@ -934,34 +1258,42 @@ pub unsafe extern "C" fn get_seccomp_filter(tsk: *mut task_struct) {
     SECCOMP_LOG_USER_NOTIF |
     SECCOMP_LOG_TRACE |
     SECCOMP_LOG_LOG;
-    static inline void seccomp_log(unsigned long syscall, long signr, u32 action,
-    bool requested)
-    {
-    let mut log: bool = false;
-    switch (action) {
-    case SECCOMP_RET_ALLOW:
-    break;
-    case SECCOMP_RET_TRAP:
+#[no_mangle]
+pub unsafe extern "C" fn seccomp_log(syscall: c_ulong, signr: c_long, action: u32, requested: bool) {
+pub static mut log: bool = false;
+    match (action) {
+    SECCOMP_RET_ALLOW => {
+    // break;
+    }
+    SECCOMP_RET_TRAP => {
     log = requested && seccomp_actions_logged & SECCOMP_LOG_TRAP;
-    break;
-    case SECCOMP_RET_ERRNO:
+    // break;
+    }
+    SECCOMP_RET_ERRNO => {
     log = requested && seccomp_actions_logged & SECCOMP_LOG_ERRNO;
-    break;
-    case SECCOMP_RET_TRACE:
+    // break;
+    }
+    SECCOMP_RET_TRACE => {
     log = requested && seccomp_actions_logged & SECCOMP_LOG_TRACE;
-    break;
-    case SECCOMP_RET_USER_NOTIF:
+    // break;
+    }
+    SECCOMP_RET_USER_NOTIF => {
     log = requested && seccomp_actions_logged & SECCOMP_LOG_USER_NOTIF;
-    break;
-    case SECCOMP_RET_LOG:
+    // break;
+    }
+    SECCOMP_RET_LOG => {
     log = seccomp_actions_logged & SECCOMP_LOG_LOG;
-    break;
-    case SECCOMP_RET_KILL_THREAD:
+    // break;
+    }
+    SECCOMP_RET_KILL_THREAD => {
     log = seccomp_actions_logged & SECCOMP_LOG_KILL_THREAD;
-    break;
-    case SECCOMP_RET_KILL_PROCESS:
-    default:
+    // break;
+    }
+    SECCOMP_RET_KILL_PROCESS => {
+    }
+    _ => {
     log = seccomp_actions_logged & SECCOMP_LOG_KILL_PROCESS;
+    }
     }
 //
 // Emit an audit message when the action is RET_KILL_*, RET_LOG, or the
@@ -969,8 +1301,9 @@ pub unsafe extern "C" fn get_seccomp_filter(tsk: *mut task_struct) {
 // any action from being logged by removing the action name from the
 // seccomp_actions_logged sysctl.
 //
-    if (!log)
+    if (!log) {
     return;
+    }
     audit_seccomp(syscall, signr, action);
     }
 //
@@ -989,14 +1322,16 @@ pub unsafe extern "C" fn get_seccomp_filter(tsk: *mut task_struct) {
     };
 #[no_mangle]
 unsafe extern "C" fn __secure_computing_strict(this_syscall: c_int) {
-    const int *allowed_syscalls = mode1_syscalls;
+    let mut allowed_syscalls = mode1_syscalls;
 
-    if (in_compat_syscall())
+    if (in_compat_syscall()) {
     allowed_syscalls = get_compat_mode1_syscalls();
+    }
 
     do {
-    if (*allowed_syscalls == this_syscall)
+    if (*allowed_syscalls == this_syscall) {
     return;
+    }
     } while (*++allowed_syscalls != -1);
 
     dump_stack();
@@ -1008,22 +1343,25 @@ unsafe extern "C" fn __secure_computing_strict(this_syscall: c_int) {
 
 #[no_mangle]
 pub unsafe extern "C" fn secure_computing_strict(this_syscall: c_int) {
-    let mut mode: c_int = current.seccomp.mode;
-    if (IS_ENABLED(CONFIG_CHECKPOINT_RESTORE) &&
-    unlikely(current.ptrace & PT_SUSPEND_SECCOMP))
+pub static mut mode: c_int = 0;
+    if (IS_ENABLED!(CONFIG_CHECKPOINT_RESTORE) &&
+    unlikely(current.ptrace & PT_SUSPEND_SECCOMP)) {
     return;
-    if (mode == SECCOMP_MODE_DISABLED)
+    }
+    if (mode == SECCOMP_MODE_DISABLED) {
     return;
-#[no_mangle]
-pub unsafe extern "C" fn if(SECCOMP_MODE_STRICT: mode ==) -> else {
-    else if (mode == SECCOMP_MODE_STRICT)
+    }
+
+    else if (mode == SECCOMP_MODE_STRICT) {
     __secure_computing_strict(this_syscall);
-    else
+    }
+    else {
     BUG();
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn __seccomp_permit_syscall() -> bool {
-    let mut this_syscall: c_int = syscall_get_nr(current, current_pt_regs());
+pub static mut this_syscall: c_int = 0;
     secure_computing_strict(this_syscall);
     return true;
     }
@@ -1035,20 +1373,22 @@ unsafe extern "C" fn seccomp_next_notify_id(filter: *mut seccomp_filter) -> u64 
 // filter.
 //
     lockdep_assert_held(&filter.notify_lock);
-    return filter.notif.next_id++;
+    return filter.notif.next_id += 1;
     }
 #[no_mangle]
 unsafe extern "C" fn seccomp_handle_addfd(addfd: *mut seccomp_kaddfd, n: *mut seccomp_knotif) {
-    int fd;
+    let mut fd = 0;
 //
 // Remove the notification, and reset the list pointers, indicating
 // that it has been handled.
 //
     list_del_init(&addfd.list);
-    if (!addfd.setfd)
+    if (!addfd.setfd) {
     fd = receive_fd(addfd.file, core::ptr::null_mut(), addfd.flags);
-    else
+    }
+    else {
     fd = receive_fd_replace(addfd.fd, addfd.file, addfd.flags);
+    }
     addfd.ret = fd;
     if (addfd.ioctl_flags & SECCOMP_ADDFD_FLAG_SEND) {
 // If we fail reset and return an error to the notifier
@@ -1067,24 +1407,23 @@ unsafe extern "C" fn seccomp_handle_addfd(addfd: *mut seccomp_kaddfd, n: *mut se
 //
     complete(&addfd.completion);
     }
-    static bool should_sleep_killable(struct seccomp_filter *match,
-    struct seccomp_knotif *n)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn should_sleep_killable(match: *mut seccomp_filter, n: *mut seccomp_knotif) -> bool {
     return match.wait_killable_recv && n.state >= SECCOMP_NOTIFY_SENT;
     }
-    static int seccomp_do_user_notification(int this_syscall,
-    struct seccomp_filter *match,
-    const struct seccomp_data *sd)
-    {
-    int err;
-    let mut flags: u32 = 0;
-    let mut ret: c_long = 0;
-    let mut n: seccomp_knotif = {};
-    struct seccomp_kaddfd *addfd, *tmp;
+#[no_mangle]
+pub unsafe extern "C" fn seccomp_do_user_notification(this_syscall: c_int, match: *mut seccomp_filter, sd: *mut seccomp_data) -> c_int {
+    let mut err = 0;
+pub static mut flags: u32 = 0;
+pub static mut ret: c_long = 0;
+pub static mut n: seccomp_knotif = 0;
+    let mut addfd = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
     mutex_lock(&match.notify_lock);
     err = -ENOSYS;
-    if (!match.notif)
-    goto out;
+    if (!match.notif) {
+// goto;
+    }
     n.task = current;
     n.state = SECCOMP_NOTIFY_INIT;
     n.data = sd;
@@ -1093,39 +1432,44 @@ unsafe extern "C" fn seccomp_handle_addfd(addfd: *mut seccomp_kaddfd, n: *mut se
     list_add_tail(&n.list, &match.notif.notifications);
     INIT_LIST_HEAD(&n.addfd);
     atomic_inc(&match.notif.requests);
-    if (match.notif.flags & SECCOMP_USER_NOTIF_FD_SYNC_WAKE_UP)
+    if (match.notif.flags & SECCOMP_USER_NOTIF_FD_SYNC_WAKE_UP) {
     wake_up_poll_on_current_cpu(&match.wqh, EPOLLIN | EPOLLRDNORM);
-    else
+    }
+    else {
     wake_up_poll(&match.wqh, EPOLLIN | EPOLLRDNORM);
+    }
 //
 // This is where we wait for a reply from userspace.
 //
     do {
-    let mut wait_killable: bool = should_sleep_killable(match, &n);
+pub static mut wait_killable: bool = false;
     mutex_unlock(&match.notify_lock);
-    if (wait_killable)
+    if (wait_killable) {
     err = wait_for_completion_killable(&n.ready);
-    else
+    }
+    else {
     err = wait_for_completion_interruptible(&n.ready);
+    }
     mutex_lock(&match.notify_lock);
     if (err != 0) {
 //
 // Check to see whether we should switch to wait
 // killable. Only return the interrupted error if not.
 //
-    if (!(!wait_killable && should_sleep_killable(match, &n)))
-    goto interrupted;
+    if (!(!wait_killable && should_sleep_killable(match, &n))) {
+// goto;
     }
-    addfd = list_first_entry_or_null(&n.addfd,
-    struct seccomp_kaddfd, list);
+    }
+    addfd = list_first_entry_or_null(&n.addfd, seccomp_kaddfd, list);
 // Check if we were woken up by a addfd message
-    if (addfd)
+    if (addfd) {
     seccomp_handle_addfd(addfd, &n);
+    }
     }  while (n.state != SECCOMP_NOTIFY_REPLIED);
     ret = n.val;
     err = n.error;
     flags = n.flags;
-    interrupted:
+// label;
 // If there were any pending addfd calls, clear them out
     list_for_each_entry_safe(addfd, tmp, &n.addfd, list) {
 // The process went away before we got a chance to handle it
@@ -1143,13 +1487,15 @@ unsafe extern "C" fn seccomp_handle_addfd(addfd: *mut seccomp_kaddfd, n: *mut se
 // *reattach* to a notifier right now. If one is added, we'll need to
 // keep track of the notif itself and make sure they match here.
 //
-    if (match.notif)
+    if (match.notif) {
     list_del(&n.list);
-    out:
+    }
+// label;
     mutex_unlock(&match.notify_lock);
 // Userspace requests to continue the syscall.
-    if (flags & SECCOMP_USER_NOTIF_FLAG_CONTINUE)
+    if (flags & SECCOMP_USER_NOTIF_FLAG_CONTINUE) {
     return 0;
+    }
     syscall_set_return_value(current, current_pt_regs(),
     err, ret);
     return -1;
@@ -1157,9 +1503,9 @@ unsafe extern "C" fn seccomp_handle_addfd(addfd: *mut seccomp_kaddfd, n: *mut se
 #[no_mangle]
 unsafe extern "C" fn __seccomp_filter(this_syscall: c_int, recheck_after_trace: bool) -> bool {
     u32 filter_ret, action;
-    struct seccomp_data sd;
-    struct seccomp_filter *match = core::ptr::null_mut();
-    int data;
+pub static mut sd: usize = 0;
+    let mut match = core::ptr::null_mut();
+    let mut data = 0;
 //
 // Make sure that any changes to mode from another thread have
 // been seen after SYSCALL_WORK_SECCOMP was seen.
@@ -1169,30 +1515,34 @@ unsafe extern "C" fn __seccomp_filter(this_syscall: c_int, recheck_after_trace: 
     filter_ret = seccomp_run_filters(&sd, &match);
     data = filter_ret & SECCOMP_RET_DATA;
     action = filter_ret & SECCOMP_RET_ACTION_FULL;
-    switch (action) {
-    case SECCOMP_RET_ERRNO:
+    match (action) {
+    SECCOMP_RET_ERRNO => {
 // Set low-order bits as an errno, capped at MAX_ERRNO.
-    if (data > MAX_ERRNO)
+    if (data > MAX_ERRNO) {
     data = MAX_ERRNO;
+    }
     syscall_set_return_value(current, current_pt_regs(),
     -data, 0);
-    goto skip;
-    case SECCOMP_RET_TRAP:
+// goto;
+    }
+    SECCOMP_RET_TRAP => {
 // Show the handler the original registers.
     syscall_rollback(current, current_pt_regs());
 // Let the filter pass back 16 bits of data.
     force_sig_seccomp(this_syscall, data, false);
-    goto skip;
-    case SECCOMP_RET_TRACE:
+// goto;
+    }
+    SECCOMP_RET_TRACE => {
 // We've been put in this state by the ptracer already.
-    if (recheck_after_trace)
+    if (recheck_after_trace) {
     return true;
+    }
 // ENOSYS these calls if there is no tracer attached.
     if (!ptrace_event_enabled(current, PTRACE_EVENT_SECCOMP)) {
     syscall_set_return_value(current,
     current_pt_regs(),
     -ENOSYS, 0);
-    goto skip;
+// goto;
     }
 // Allow the BPF to provide the event message
     ptrace_event(PTRACE_EVENT_SECCOMP, data);
@@ -1206,12 +1556,14 @@ unsafe extern "C" fn __seccomp_filter(this_syscall: c_int, recheck_after_trace: 
 // kill the process and correctly handle any tracer exit
 // notifications.
 //
-    if (fatal_signal_pending(current))
-    goto skip;
+    if (fatal_signal_pending(current)) {
+// goto;
+    }
 // Check if the tracer forced the syscall to be skipped.
     this_syscall = syscall_get_nr(current, current_pt_regs());
-    if (this_syscall < 0)
-    goto skip;
+    if (this_syscall < 0) {
+// goto;
+    }
 //
 // Recheck the syscall, since it may have changed. This
 // intentionally uses a NULL struct seccomp_data to force
@@ -1219,23 +1571,30 @@ unsafe extern "C" fn __seccomp_filter(this_syscall: c_int, recheck_after_trace: 
 // a skip would have already been reported.
 //
     return __seccomp_filter(this_syscall, true);
-    case SECCOMP_RET_USER_NOTIF:
-    if (seccomp_do_user_notification(this_syscall, match, &sd))
-    goto skip;
+    }
+    SECCOMP_RET_USER_NOTIF => {
+    if (seccomp_do_user_notification(this_syscall, match, &sd)) {
+// goto;
+    }
     return true;
-    case SECCOMP_RET_LOG:
+    }
+    SECCOMP_RET_LOG => {
     seccomp_log(this_syscall, 0, action, true);
     return true;
-    case SECCOMP_RET_ALLOW:
+    }
+    SECCOMP_RET_ALLOW => {
 //
 // Note that the "match" filter will always be NULL for
 // this action since SECCOMP_RET_ALLOW is the starting
 // state in seccomp_run_filters().
 //
     return true;
-    case SECCOMP_RET_KILL_THREAD:
-    case SECCOMP_RET_KILL_PROCESS:
-    default:
+    }
+    SECCOMP_RET_KILL_THREAD => {
+    }
+    SECCOMP_RET_KILL_PROCESS => {
+    }
+    _ => {
     current.seccomp.mode = SECCOMP_MODE_DEAD;
     seccomp_log(this_syscall, SIGSYS, action, true);
 // Dump core only if this is the last remaining thread.
@@ -1250,8 +1609,9 @@ unsafe extern "C" fn __seccomp_filter(this_syscall: c_int, recheck_after_trace: 
     }
     return false; /* skip the syscall go directly to signal handling */
     }
+    }
     unreachable();
-    skip:
+// label;
     seccomp_log(this_syscall, 0, action, match ? match.log : false);
     return false;
     }
@@ -1263,26 +1623,33 @@ unsafe extern "C" fn __seccomp_filter(this_syscall: c_int, recheck_after_trace: 
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn __seccomp_permit_syscall() -> bool {
-    let mut mode: c_int = current.seccomp.mode;
-    int this_syscall;
-    if (IS_ENABLED(CONFIG_CHECKPOINT_RESTORE) &&
-    unlikely(current.ptrace & PT_SUSPEND_SECCOMP))
+#[no_mangle]
+// duplicate fn: __seccomp_permit_syscall
+pub unsafe extern "C" fn __seccomp_permit_syscall_dup() -> bool {
+pub static mut mode: c_int = 0;
+    let mut this_syscall = 0;
+    if (IS_ENABLED!(CONFIG_CHECKPOINT_RESTORE) &&
+    unlikely(current.ptrace & PT_SUSPEND_SECCOMP)) {
     return true;
+    }
     this_syscall = syscall_get_nr(current, current_pt_regs());
-    switch (mode) {
-    case SECCOMP_MODE_STRICT:
+    match (mode) {
+    SECCOMP_MODE_STRICT => {
     __secure_computing_strict(this_syscall);  /* may call do_exit */
     return true;
-    case SECCOMP_MODE_FILTER:
+    }
+    SECCOMP_MODE_FILTER => {
     return __seccomp_filter(this_syscall, false);
 // Surviving SECCOMP_RET_KILL_* must be proactively impossible.
-    case SECCOMP_MODE_DEAD:
-    WARN_ON_ONCE(1);
+    }
+    SECCOMP_MODE_DEAD => {
+    WARN_ON_ONCE!(1);
     do_exit(SIGKILL);
     return false;
-    default:
+    }
+    _ => {
     BUG();
+    }
     }
     }
 
@@ -1299,17 +1666,18 @@ pub unsafe extern "C" fn prctl_get_seccomp() -> c_long {
 //
 #[no_mangle]
 unsafe extern "C" fn seccomp_set_mode_strict() -> c_long {
-    let mut seccomp_mode: c_ulong = SECCOMP_MODE_STRICT;
-    let mut ret: c_long = -EINVAL;
+pub static mut seccomp_mode: c_ulong = 0;
+pub static mut ret: c_long = 0;
     spin_lock_irq(&current.sighand.siglock);
-    if (!seccomp_may_assign_mode(seccomp_mode))
-    goto out;
+    if (!seccomp_may_assign_mode(seccomp_mode)) {
+// goto;
+    }
 
     disable_TSC();
 
     seccomp_assign_mode(current, seccomp_mode, 0);
     ret = 0;
-    out:
+// label;
     spin_unlock_irq(&current.sighand.siglock);
     return ret;
     }
@@ -1321,17 +1689,19 @@ unsafe extern "C" fn seccomp_notify_free(filter: *mut seccomp_filter) {
     }
 #[no_mangle]
 unsafe extern "C" fn seccomp_notify_detach(filter: *mut seccomp_filter) {
-    struct seccomp_knotif *knotif;
-    if (!filter)
+pub static mut knotif: *mut c_void = core::ptr::null_mut();
+    if (!filter) {
     return;
+    }
     mutex_lock(&filter.notify_lock);
 //
 // If this file is being closed because e.g. the task who owned it
 // died, let's wake everyone up who was waiting on us.
 //
     list_for_each_entry(knotif, &filter.notif.notifications, list) {
-    if (knotif.state == SECCOMP_NOTIFY_REPLIED)
+    if (knotif.state == SECCOMP_NOTIFY_REPLIED) {
     continue;
+    }
     knotif.state = SECCOMP_NOTIFY_REPLIED;
     knotif.error = -ENOSYS;
     knotif.val = 0;
@@ -1347,68 +1717,75 @@ unsafe extern "C" fn seccomp_notify_detach(filter: *mut seccomp_filter) {
     }
 #[no_mangle]
 unsafe extern "C" fn seccomp_notify_release(inode: *mut inode, file: *mut file) -> c_int {
-    struct seccomp_filter *filter = file.private_data;
+    let mut filter = file.private_data;
     seccomp_notify_detach(filter);
     __put_seccomp_filter(filter);
     return 0;
     }
 // must be called with notif_lock held
-    static inline struct seccomp_knotif *
-    find_notification(struct seccomp_filter *filter, u64 id)
-    {
-    struct seccomp_knotif *cur;
+#[no_mangle]
+pub unsafe extern "C" fn find_notification(filter: *mut seccomp_filter, id: u64) -> *mut c_void {
+pub static mut cur: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&filter.notify_lock);
     list_for_each_entry(cur, &filter.notif.notifications, list) {
-    if (cur.id == id)
+    if (cur.id == id) {
     return cur;
+    }
     }
     return core::ptr::null_mut();
     }
-    static int recv_wake_function(wait_queue_entry_t *wait, unsigned int mode, int sync,
-    void *key)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn recv_wake_function(wait: *mut wait_queue_entry_t, mode: c_uint, sync: c_int, key: *mut c_void) -> c_int {
 // Avoid a wakeup if event not interesting for us.
-    if (key && !(key_to_poll(key) & (EPOLLIN | EPOLLERR | EPOLLHUP)))
+    if (key && !(key_to_poll(key) & (EPOLLIN | EPOLLERR | EPOLLHUP))) {
     return 0;
+    }
     return autoremove_wake_function(wait, mode, sync, key);
     }
 #[no_mangle]
 unsafe extern "C" fn recv_wait_event(filter: *mut seccomp_filter) -> c_int {
-    DEFINE_WAIT_FUNC(wait, recv_wake_function);
-    int ret;
-    if (refcount_read(&filter.users) == 0)
+pub static mut wait: usize = 0;
+    let mut ret = 0;
+    if (refcount_read(&filter.users) == 0) {
     return 0;
-    if (atomic_dec_if_positive(&filter.notif.requests) >= 0)
+    }
+    if (atomic_dec_if_positive(&filter.notif.requests) >= 0) {
     return 0;
+    }
     for (;;) {
     ret = prepare_to_wait_event(&filter.wqh, &wait, TASK_INTERRUPTIBLE);
-    if (atomic_dec_if_positive(&filter.notif.requests) >= 0)
+    if (atomic_dec_if_positive(&filter.notif.requests) >= 0) {
     break;
-    if (refcount_read(&filter.users) == 0)
+    }
+    if (refcount_read(&filter.users) == 0) {
     break;
-    if (ret)
+    }
+    if (ret) {
     return ret;
+    }
     schedule();
     }
     finish_wait(&filter.wqh, &wait);
     return 0;
     }
-    static long seccomp_notify_recv(struct seccomp_filter *filter,
-    void __user *buf)
-    {
-    struct seccomp_knotif *knotif = core::ptr::null_mut(), *cur;
-    struct seccomp_notif unotif;
-    ssize_t ret;
+#[no_mangle]
+pub unsafe extern "C" fn seccomp_notify_recv(filter: *mut seccomp_filter, buf: *mut c_void) -> c_long {
+    let mut knotif = core::ptr::null_mut(), *cur;
+pub static mut unotif: usize = 0;
+    let mut ret = 0;
 // Verify that we're not given garbage to keep struct extensible.
-    ret = check_zeroed_user(buf, sizeof(unotif));
-    if (ret < 0)
+    ret = check_zeroed_user(buf, sizeof!(unotif));
+    if (ret < 0) {
     return ret;
-    if (!ret)
+    }
+    if (!ret) {
     return -EINVAL;
-    memset(&unotif, 0, sizeof(unotif));
+    }
+    memset(&unotif, 0, sizeof!(unotif));
     ret = recv_wait_event(filter);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     mutex_lock(&filter.notify_lock);
     list_for_each_entry(cur, &filter.notif.notifications, list) {
     if (cur.state == SECCOMP_NOTIFY_INIT) {
@@ -1423,7 +1800,7 @@ unsafe extern "C" fn recv_wait_event(filter: *mut seccomp_filter) -> c_int {
 //
     if (!knotif) {
     ret = -ENOENT;
-    goto out;
+// goto;
     }
     unotif.id = knotif.id;
     unotif.pid = task_pid_vnr(knotif.task);
@@ -1431,9 +1808,9 @@ unsafe extern "C" fn recv_wait_event(filter: *mut seccomp_filter) -> c_int {
     knotif.state = SECCOMP_NOTIFY_SENT;
     wake_up_poll(&filter.wqh, EPOLLOUT | EPOLLWRNORM);
     ret = 0;
-    out:
+// label;
     mutex_unlock(&filter.notify_lock);
-    if (ret == 0 && copy_to_user(buf, &unotif, sizeof(unotif))) {
+    if (ret == 0 && copy_to_user(buf, &unotif, sizeof!(unotif))) {
     ret = -EFAULT;
 //
 // Userspace screwed up. To make sure that we keep this
@@ -1445,8 +1822,9 @@ unsafe extern "C" fn recv_wait_event(filter: *mut seccomp_filter) -> c_int {
     knotif = find_notification(filter, unotif.id);
     if (knotif) {
 // Reset the process to make sure it's not stuck
-    if (should_sleep_killable(filter, knotif))
+    if (should_sleep_killable(filter, knotif)) {
     complete(&knotif.ready);
+    }
     knotif.state = SECCOMP_NOTIFY_INIT;
     atomic_inc(&filter.notif.requests);
     wake_up_poll(&filter.wqh, EPOLLIN | EPOLLRDNORM);
@@ -1455,113 +1833,127 @@ unsafe extern "C" fn recv_wait_event(filter: *mut seccomp_filter) -> c_int {
     }
     return ret;
     }
-    static long seccomp_notify_send(struct seccomp_filter *filter,
-    void __user *buf)
-    {
-    let mut resp: seccomp_notif_resp = {};
-    struct seccomp_knotif *knotif;
-    long ret;
-    if (copy_from_user(&resp, buf, sizeof(resp)))
+#[no_mangle]
+pub unsafe extern "C" fn seccomp_notify_send(filter: *mut seccomp_filter, buf: *mut c_void) -> c_long {
+pub static mut resp: seccomp_notif_resp = 0;
+pub static mut knotif: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (copy_from_user(&resp, buf, sizeof!(resp))) {
     return -EFAULT;
-    if (resp.flags & ~SECCOMP_USER_NOTIF_FLAG_CONTINUE)
+    }
+    if (resp.flags & ~SECCOMP_USER_NOTIF_FLAG_CONTINUE) {
     return -EINVAL;
+    }
     if ((resp.flags & SECCOMP_USER_NOTIF_FLAG_CONTINUE) &&
-    (resp.error || resp.val))
+    (resp.error || resp.val)) {
     return -EINVAL;
+    }
     ret = mutex_lock_interruptible(&filter.notify_lock);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     knotif = find_notification(filter, resp.id);
     if (!knotif) {
     ret = -ENOENT;
-    goto out;
+// goto;
     }
 // Allow exactly one reply.
     if (knotif.state != SECCOMP_NOTIFY_SENT) {
     ret = -EINPROGRESS;
-    goto out;
+// goto;
     }
     ret = 0;
     knotif.state = SECCOMP_NOTIFY_REPLIED;
     knotif.error = resp.error;
     knotif.val = resp.val;
     knotif.flags = resp.flags;
-    if (filter.notif.flags & SECCOMP_USER_NOTIF_FD_SYNC_WAKE_UP)
+    if (filter.notif.flags & SECCOMP_USER_NOTIF_FD_SYNC_WAKE_UP) {
     complete_on_current_cpu(&knotif.ready);
-    else
+    }
+    else {
     complete(&knotif.ready);
-    out:
+    }
+// label;
     mutex_unlock(&filter.notify_lock);
     return ret;
     }
-    static long seccomp_notify_id_valid(struct seccomp_filter *filter,
-    void __user *buf)
-    {
-    struct seccomp_knotif *knotif;
-    u64 id;
-    long ret;
-    if (copy_from_user(&id, buf, sizeof(id)))
+#[no_mangle]
+pub unsafe extern "C" fn seccomp_notify_id_valid(filter: *mut seccomp_filter, buf: *mut c_void) -> c_long {
+pub static mut knotif: *mut c_void = core::ptr::null_mut();
+    let mut id = 0;
+    let mut ret = 0;
+    if (copy_from_user(&id, buf, sizeof!(id))) {
     return -EFAULT;
+    }
     ret = mutex_lock_interruptible(&filter.notify_lock);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     knotif = find_notification(filter, id);
-    if (knotif && knotif.state == SECCOMP_NOTIFY_SENT)
+    if (knotif && knotif.state == SECCOMP_NOTIFY_SENT) {
     ret = 0;
-    else
+    }
+    else {
     ret = -ENOENT;
+    }
     mutex_unlock(&filter.notify_lock);
     return ret;
     }
-    static long seccomp_notify_set_flags(struct seccomp_filter *filter,
-    unsigned long flags)
-    {
-    long ret;
-    if (flags & ~SECCOMP_USER_NOTIF_FD_SYNC_WAKE_UP)
+#[no_mangle]
+pub unsafe extern "C" fn seccomp_notify_set_flags(filter: *mut seccomp_filter, flags: c_ulong) -> c_long {
+    let mut ret = 0;
+    if (flags & ~SECCOMP_USER_NOTIF_FD_SYNC_WAKE_UP) {
     return -EINVAL;
+    }
     ret = mutex_lock_interruptible(&filter.notify_lock);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     filter.notif.flags = flags;
     mutex_unlock(&filter.notify_lock);
     return 0;
     }
-    static long seccomp_notify_addfd(struct seccomp_filter *filter,
-    struct seccomp_notif_addfd __user *uaddfd,
-    unsigned int size)
-    {
-    struct seccomp_notif_addfd addfd;
-    struct seccomp_knotif *knotif;
-    struct seccomp_kaddfd kaddfd;
-    int ret;
-    BUILD_BUG_ON(sizeof(addfd) < SECCOMP_NOTIFY_ADDFD_SIZE_VER0);
-    BUILD_BUG_ON(sizeof(addfd) != SECCOMP_NOTIFY_ADDFD_SIZE_LATEST);
-    if (size < SECCOMP_NOTIFY_ADDFD_SIZE_VER0 || size >= PAGE_SIZE)
+#[no_mangle]
+pub unsafe extern "C" fn seccomp_notify_addfd(filter: *mut seccomp_filter, uaddfd: *mut seccomp_notif_addfd, size: c_uint) -> c_long {
+pub static mut addfd: usize = 0;
+pub static mut knotif: *mut c_void = core::ptr::null_mut();
+pub static mut kaddfd: usize = 0;
+    let mut ret = 0;
+    BUILD_BUG_ON!(sizeof!(addfd) < SECCOMP_NOTIFY_ADDFD_SIZE_VER0);
+    BUILD_BUG_ON!(sizeof!(addfd) != SECCOMP_NOTIFY_ADDFD_SIZE_LATEST);
+    if (size < SECCOMP_NOTIFY_ADDFD_SIZE_VER0 || size >= PAGE_SIZE) {
     return -EINVAL;
-    ret = copy_struct_from_user(&addfd, sizeof(addfd), uaddfd, size);
-    if (ret)
+    }
+    ret = copy_struct_from_user(&addfd, sizeof!(addfd), uaddfd, size);
+    if (ret) {
     return ret;
-    if (addfd.newfd_flags & ~O_CLOEXEC)
+    }
+    if (addfd.newfd_flags & ~O_CLOEXEC) {
     return -EINVAL;
-    if (addfd.flags & ~(SECCOMP_ADDFD_FLAG_SETFD | SECCOMP_ADDFD_FLAG_SEND))
+    }
+    if (addfd.flags & ~(SECCOMP_ADDFD_FLAG_SETFD | SECCOMP_ADDFD_FLAG_SEND)) {
     return -EINVAL;
-    if (addfd.newfd && !(addfd.flags & SECCOMP_ADDFD_FLAG_SETFD))
+    }
+    if (addfd.newfd && !(addfd.flags & SECCOMP_ADDFD_FLAG_SETFD)) {
     return -EINVAL;
+    }
     kaddfd.file = fget(addfd.srcfd);
-    if (!kaddfd.file)
+    if (!kaddfd.file) {
     return -EBADF;
+    }
     kaddfd.ioctl_flags = addfd.flags;
     kaddfd.flags = addfd.newfd_flags;
     kaddfd.setfd = addfd.flags & SECCOMP_ADDFD_FLAG_SETFD;
     kaddfd.fd = addfd.newfd;
     init_completion(&kaddfd.completion);
     ret = mutex_lock_interruptible(&filter.notify_lock);
-    if (ret < 0)
-    goto out;
+    if (ret < 0) {
+// goto;
+    }
     knotif = find_notification(filter, addfd.id);
     if (!knotif) {
     ret = -ENOENT;
-    goto out_unlock;
+// goto;
     }
 //
 // We do not want to allow for FD injection to occur before the
@@ -1570,7 +1962,7 @@ unsafe extern "C" fn recv_wait_event(filter: *mut seccomp_filter) -> c_int {
 //
     if (knotif.state != SECCOMP_NOTIFY_SENT) {
     ret = -EINPROGRESS;
-    goto out_unlock;
+// goto;
     }
     if (addfd.flags & SECCOMP_ADDFD_FLAG_SEND) {
 //
@@ -1582,7 +1974,7 @@ unsafe extern "C" fn recv_wait_event(filter: *mut seccomp_filter) -> c_int {
 //
     if (!list_empty(&knotif.addfd)) {
     ret = -EBUSY;
-    goto out_unlock;
+// goto;
     }
 // Allow exactly only one reply
     knotif.state = SECCOMP_NOTIFY_REPLIED;
@@ -1601,7 +1993,7 @@ unsafe extern "C" fn recv_wait_event(filter: *mut seccomp_filter) -> c_int {
 // locking.
 //
     ret = kaddfd.ret;
-    goto out;
+// goto;
     }
     mutex_lock(&filter.notify_lock);
 //
@@ -1611,89 +2003,97 @@ unsafe extern "C" fn recv_wait_event(filter: *mut seccomp_filter) -> c_int {
 // We need to check again if the addfd request has been handled,
 // and if not, we will remove it from the queue.
 //
-    if (list_empty(&kaddfd.list))
+    if (list_empty(&kaddfd.list)) {
     ret = kaddfd.ret;
-    else
+    }
+    else {
     list_del(&kaddfd.list);
-    out_unlock:
+    }
+// label;
     mutex_unlock(&filter.notify_lock);
-    out:
+// label;
     fput(kaddfd.file);
     return ret;
     }
-    static long seccomp_notify_ioctl(struct file *file, unsigned int cmd,
-    unsigned long arg)
-    {
-    struct seccomp_filter *filter = file.private_data;
-    void __user *buf = (void __user *)arg;
+#[no_mangle]
+pub unsafe extern "C" fn seccomp_notify_ioctl(file: *mut file, cmd: c_uint, arg: c_ulong) -> c_long {
+    let mut filter = file.private_data;
+    let mut buf = arg;
 // Fixed-size ioctls
-    switch (cmd) {
-    case SECCOMP_IOCTL_NOTIF_RECV:
+    match (cmd) {
+    SECCOMP_IOCTL_NOTIF_RECV => {
     return seccomp_notify_recv(filter, buf);
-    case SECCOMP_IOCTL_NOTIF_SEND:
+    }
+    SECCOMP_IOCTL_NOTIF_SEND => {
     return seccomp_notify_send(filter, buf);
-    case SECCOMP_IOCTL_NOTIF_ID_VALID_WRONG_DIR:
-    case SECCOMP_IOCTL_NOTIF_ID_VALID:
+    }
+    SECCOMP_IOCTL_NOTIF_ID_VALID_WRONG_DIR => {
+    }
+    SECCOMP_IOCTL_NOTIF_ID_VALID => {
     return seccomp_notify_id_valid(filter, buf);
-    case SECCOMP_IOCTL_NOTIF_SET_FLAGS:
+    }
+    SECCOMP_IOCTL_NOTIF_SET_FLAGS => {
     return seccomp_notify_set_flags(filter, arg);
+    }
     }
 // Extensible Argument ioctls
 
     switch (EA_IOCTL(cmd)) {
     case EA_IOCTL(SECCOMP_IOCTL_NOTIF_ADDFD):
     return seccomp_notify_addfd(filter, buf, _IOC_SIZE(cmd));
-    default:
+// label;
     return -EINVAL;
     }
     }
-    static __poll_t seccomp_notify_poll(struct file *file,
-    struct poll_table_struct *poll_tab)
+    static __poll_t seccomp_notify_poll(file *file, poll_table_struct *poll_tab)
     {
-    struct seccomp_filter *filter = file.private_data;
-    let mut ret: __poll_t = 0;
-    struct seccomp_knotif *cur;
+    let mut filter = file.private_data;
+pub static mut ret: __poll_t = 0;
+pub static mut cur: *mut c_void = core::ptr::null_mut();
     poll_wait(file, &filter.wqh, poll_tab);
-    if (mutex_lock_interruptible(&filter.notify_lock) < 0)
+    if (mutex_lock_interruptible(&filter.notify_lock) < 0) {
     return EPOLLERR;
+    }
     list_for_each_entry(cur, &filter.notif.notifications, list) {
-    if (cur.state == SECCOMP_NOTIFY_INIT)
+    if (cur.state == SECCOMP_NOTIFY_INIT) {
     ret |= EPOLLIN | EPOLLRDNORM;
-    if (cur.state == SECCOMP_NOTIFY_SENT)
+    }
+    if (cur.state == SECCOMP_NOTIFY_SENT) {
     ret |= EPOLLOUT | EPOLLWRNORM;
-    if ((ret & EPOLLIN) && (ret & EPOLLOUT))
+    }
+    if ((ret & EPOLLIN) && (ret & EPOLLOUT)) {
     break;
     }
+    }
     mutex_unlock(&filter.notify_lock);
-    if (refcount_read(&filter.users) == 0)
+    if (refcount_read(&filter.users) == 0) {
     ret |= EPOLLHUP;
+    }
     return ret;
     }
-    static const struct file_operations seccomp_notify_ops = {
-    .poll = seccomp_notify_poll,
-    .release = seccomp_notify_release,
-    .unlocked_ioctl = seccomp_notify_ioctl,
-    .compat_ioctl = seccomp_notify_ioctl,
-    };
-    static struct file *init_listener(struct seccomp_filter *filter)
-    {
-    struct file *ret;
+pub static mut file_operations: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn init_listener(filter: *mut seccomp_filter) -> *mut c_void {
+pub static mut ret: *mut c_void = core::ptr::null_mut();
     ret = ERR_PTR(-ENOMEM);
     filter.notif = kzalloc_obj(*(filter.notif));
-    if (!filter.notif)
-    goto out;
+    if (!filter.notif) {
+// goto;
+    }
     filter.notif.next_id = get_random_u64();
     INIT_LIST_HEAD(&filter.notif.notifications);
     ret = anon_inode_getfile("seccomp notify", &seccomp_notify_ops,
     filter, O_RDWR);
-    if (IS_ERR(ret))
-    goto out_notif;
+    if (IS_ERR(ret)) {
+// goto;
+    }
 // The file has a reference to it now
     __get_seccomp_filter(filter);
-    out_notif:
-    if (IS_ERR(ret))
+// label;
+    if (IS_ERR(ret)) {
     seccomp_notify_free(filter);
-    out:
+    }
+// label;
     return ret;
     }
 //
@@ -1706,21 +2106,23 @@ unsafe extern "C" fn recv_wait_event(filter: *mut seccomp_filter) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn has_duplicate_listener(new_child: *mut seccomp_filter) -> bool {
-    struct seccomp_filter *cur;
+pub static mut cur: *mut c_void = core::ptr::null_mut();
 // must be protected against concurrent TSYNC
     lockdep_assert_held(&current.sighand.siglock);
-    if (!new_child.notif)
+    if (!new_child.notif) {
     return false;
-    for (cur = current.seccomp.filter; cur; cur = cur.prev) {
-    if (cur.notif)
+    }
+    while (cur) {
+    if (cur.notif) {
     return true;
+    }
     }
     return false;
     }
 //
 // seccomp_set_mode_filter: internal function for setting seccomp filter
 // @flags:  flags to change filter behavior
-// @filter: struct sock_fprog containing filter
+// @filter: sock_fprog containing filter
 //
 // This function may be called repeatedly to install additional filters.
 // Every filter successfully installed will be evaluated (in reverse order)
@@ -1730,17 +2132,17 @@ unsafe extern "C" fn has_duplicate_listener(new_child: *mut seccomp_filter) -> b
 //
 // Returns 0 on success or -EINVAL on failure.
 //
-    static long seccomp_set_mode_filter(unsigned int flags,
-    const char __user *filter)
-    {
-    let mut seccomp_mode: c_ulong = SECCOMP_MODE_FILTER;
-    struct seccomp_filter *prepared = core::ptr::null_mut();
-    let mut ret: c_long = -EINVAL;
-    let mut listener: c_int = -1;
-    struct file *listener_f = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn seccomp_set_mode_filter(flags: c_uint, filter: *mut c_char) -> c_long {
+pub static mut seccomp_mode: c_ulong = 0;
+    let mut prepared = core::ptr::null_mut();
+pub static mut ret: c_long = 0;
+pub static mut listener: c_int = 0;
+    let mut listener_f = core::ptr::null_mut();
 // Validate flags.
-    if (flags & ~SECCOMP_FILTER_FLAG_MASK)
+    if (flags & ~SECCOMP_FILTER_FLAG_MASK) {
     return -EINVAL;
+    }
 //
 // In the successful case, NEW_LISTENER returns the new listener fd.
 // But in the failure case, TSYNC returns the thread that died. If you
@@ -1750,30 +2152,33 @@ unsafe extern "C" fn has_duplicate_listener(new_child: *mut seccomp_filter) -> b
 //
     if ((flags & SECCOMP_FILTER_FLAG_TSYNC) &&
     (flags & SECCOMP_FILTER_FLAG_NEW_LISTENER) &&
-    ((flags & SECCOMP_FILTER_FLAG_TSYNC_ESRCH) == 0))
+    ((flags & SECCOMP_FILTER_FLAG_TSYNC_ESRCH) == 0)) {
     return -EINVAL;
+    }
 //
 // The SECCOMP_FILTER_FLAG_WAIT_KILLABLE_SENT flag doesn't make sense
 // without the SECCOMP_FILTER_FLAG_NEW_LISTENER flag.
 //
     if ((flags & SECCOMP_FILTER_FLAG_WAIT_KILLABLE_RECV) &&
-    ((flags & SECCOMP_FILTER_FLAG_NEW_LISTENER) == 0))
+    ((flags & SECCOMP_FILTER_FLAG_NEW_LISTENER) == 0)) {
     return -EINVAL;
+    }
 // Prepare the new filter before holding any locks.
     prepared = seccomp_prepare_user_filter(filter);
-    if (IS_ERR(prepared))
+    if (IS_ERR(prepared)) {
     return PTR_ERR(prepared);
+    }
     if (flags & SECCOMP_FILTER_FLAG_NEW_LISTENER) {
     listener = get_unused_fd_flags(O_CLOEXEC);
     if (listener < 0) {
     ret = listener;
-    goto out_free;
+// goto;
     }
     listener_f = init_listener(prepared);
     if (IS_ERR(listener_f)) {
     put_unused_fd(listener);
     ret = PTR_ERR(listener_f);
-    goto out_free;
+// goto;
     }
     }
 //
@@ -1781,26 +2186,30 @@ unsafe extern "C" fn has_duplicate_listener(new_child: *mut seccomp_filter) -> b
 // while another thread is in the middle of calling exec.
 //
     if (flags & SECCOMP_FILTER_FLAG_TSYNC &&
-    mutex_lock_killable(&current.signal.cred_guard_mutex))
-    goto out_put_fd;
+    mutex_lock_killable(&current.signal.cred_guard_mutex)) {
+// goto;
+    }
     spin_lock_irq(&current.sighand.siglock);
-    if (!seccomp_may_assign_mode(seccomp_mode))
-    goto out;
+    if (!seccomp_may_assign_mode(seccomp_mode)) {
+// goto;
+    }
     if (has_duplicate_listener(prepared)) {
     ret = -EBUSY;
-    goto out;
+// goto;
     }
     ret = seccomp_attach_filter(flags, prepared);
-    if (ret)
-    goto out;
+    if (ret) {
+// goto;
+    }
 // Do not free the successfully attached filter.
     prepared = core::ptr::null_mut();
     seccomp_assign_mode(current, seccomp_mode, flags);
-    out:
+// label;
     spin_unlock_irq(&current.sighand.siglock);
-    if (flags & SECCOMP_FILTER_FLAG_TSYNC)
+    if (flags & SECCOMP_FILTER_FLAG_TSYNC) {
     mutex_unlock(&current.signal.cred_guard_mutex);
-    out_put_fd:
+    }
+// label;
     if (flags & SECCOMP_FILTER_FLAG_NEW_LISTENER) {
     if (ret) {
     listener_f.private_data = core::ptr::null_mut();
@@ -1812,74 +2221,88 @@ unsafe extern "C" fn has_duplicate_listener(new_child: *mut seccomp_filter) -> b
     ret = listener;
     }
     }
-    out_free:
+// label;
     seccomp_filter_free(prepared);
     return ret;
     }
 
-    static inline long seccomp_set_mode_filter(unsigned int flags,
-    const char __user *filter)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: seccomp_set_mode_filter
+pub unsafe extern "C" fn seccomp_set_mode_filter_dup(flags: c_uint, filter: *mut c_char) -> c_long {
     return -EINVAL;
     }
 
 #[no_mangle]
-unsafe extern "C" fn seccomp_get_action_avail(uaction: *const char __user) -> c_long {
-    u32 action;
-    if (copy_from_user(&action, uaction, sizeof(action)))
+unsafe extern "C" fn seccomp_get_action_avail(uaction: *const char ) -> c_long {
+    let mut action = 0;
+    if (copy_from_user(&action, uaction, sizeof!(action))) {
     return -EFAULT;
-    switch (action) {
-    case SECCOMP_RET_KILL_PROCESS:
-    case SECCOMP_RET_KILL_THREAD:
-    case SECCOMP_RET_TRAP:
-    case SECCOMP_RET_ERRNO:
-    case SECCOMP_RET_USER_NOTIF:
-    case SECCOMP_RET_TRACE:
-    case SECCOMP_RET_LOG:
-    case SECCOMP_RET_ALLOW:
-    break;
-    default:
+    }
+    match (action) {
+    SECCOMP_RET_KILL_PROCESS => {
+    }
+    SECCOMP_RET_KILL_THREAD => {
+    }
+    SECCOMP_RET_TRAP => {
+    }
+    SECCOMP_RET_ERRNO => {
+    }
+    SECCOMP_RET_USER_NOTIF => {
+    }
+    SECCOMP_RET_TRACE => {
+    }
+    SECCOMP_RET_LOG => {
+    }
+    SECCOMP_RET_ALLOW => {
+    // break;
+    }
+    _ => {
     return -EOPNOTSUPP;
+    }
     }
     return 0;
     }
 #[no_mangle]
-unsafe extern "C" fn seccomp_get_notif_sizes(usizes: *mut void __user) -> c_long {
-    struct seccomp_notif_sizes sizes = {
-    .seccomp_notif = sizeof(struct seccomp_notif),
-    .seccomp_notif_resp = sizeof(struct seccomp_notif_resp),
-    .seccomp_data = sizeof(struct seccomp_data),
-    };
-    if (copy_to_user(usizes, &sizes, sizeof(sizes)))
+unsafe extern "C" fn seccomp_get_notif_sizes(usizes: *mut c_void ) -> c_long {
+pub static mut seccomp_notif_sizes: usize = 0;
+    if (copy_to_user(usizes, &sizes, sizeof!(sizes))) {
     return -EFAULT;
+    }
     return 0;
     }
 // Common entry point for both prctl and syscall.
-    static long do_seccomp(unsigned int op, unsigned int flags,
-    void __user *uargs)
-    {
-    switch (op) {
-    case SECCOMP_SET_MODE_STRICT:
-    if (flags != 0 || uargs != core::ptr::null_mut())
+#[no_mangle]
+pub unsafe extern "C" fn do_seccomp(op: c_uint, flags: c_uint, uargs: *mut c_void) -> c_long {
+    match (op) {
+    SECCOMP_SET_MODE_STRICT => {
+    if (flags != 0 || uargs != core::ptr::null_mut()) {
     return -EINVAL;
+    }
     return seccomp_set_mode_strict();
-    case SECCOMP_SET_MODE_FILTER:
+    }
+    SECCOMP_SET_MODE_FILTER => {
     return seccomp_set_mode_filter(flags, uargs);
-    case SECCOMP_GET_ACTION_AVAIL:
-    if (flags != 0)
+    }
+    SECCOMP_GET_ACTION_AVAIL => {
+    if (flags != 0) {
     return -EINVAL;
+    }
     return seccomp_get_action_avail(uargs);
-    case SECCOMP_GET_NOTIF_SIZES:
-    if (flags != 0)
+    }
+    SECCOMP_GET_NOTIF_SIZES => {
+    if (flags != 0) {
     return -EINVAL;
+    }
     return seccomp_get_notif_sizes(uargs);
-    default:
+    }
+    _ => {
     return -EINVAL;
     }
     }
-    SYSCALL_DEFINE3(seccomp, unsigned int, op, unsigned int, flags,
-    void __user *, uargs)
-    {
+    }
+#[no_mangle]
+pub unsafe extern "C" fn sys_seccomp(op: usize, flags: usize, uargs: usize) -> c_long {
     return do_seccomp(op, flags, uargs);
     }
 //
@@ -1890,11 +2313,11 @@ unsafe extern "C" fn seccomp_get_notif_sizes(usizes: *mut void __user) -> c_long
 // Returns 0 on success or -EINVAL on failure.
 //
 #[no_mangle]
-pub unsafe extern "C" fn prctl_set_seccomp(seccomp_mode: c_ulong, filter: *mut void __user) -> c_long {
-    unsigned int op;
-    void __user *uargs;
-    switch (seccomp_mode) {
-    case SECCOMP_MODE_STRICT:
+pub unsafe extern "C" fn prctl_set_seccomp(seccomp_mode: c_ulong, filter: *mut c_void ) -> c_long {
+    let mut op = 0;
+    let mut uargs = core::ptr::null_mut();
+    match (seccomp_mode) {
+    SECCOMP_MODE_STRICT => {
     op = SECCOMP_SET_MODE_STRICT;
 //
 // Setting strict mode through prctl always ignored filter,
@@ -1902,23 +2325,26 @@ pub unsafe extern "C" fn prctl_set_seccomp(seccomp_mode: c_ulong, filter: *mut v
 // check in do_seccomp().
 //
     uargs = core::ptr::null_mut();
-    break;
-    case SECCOMP_MODE_FILTER:
+    // break;
+    }
+    SECCOMP_MODE_FILTER => {
     op = SECCOMP_SET_MODE_FILTER;
     uargs = filter;
-    break;
-    default:
+    // break;
+    }
+    _ => {
     return -EINVAL;
+    }
     }
 // prctl interface doesn't have flags, so they are always zero.
     return do_seccomp(op, 0, uargs);
     }
 
-    static struct seccomp_filter *get_nth_filter(struct task_struct *task,
-    unsigned long filter_off)
-    {
-    struct seccomp_filter *orig, *filter;
-    unsigned long count;
+#[no_mangle]
+pub unsafe extern "C" fn get_nth_filter(task: *mut task_struct, filter_off: c_ulong) -> *mut c_void {
+    let mut orig = core::ptr::null_mut();
+    let mut filter = core::ptr::null_mut();
+    let mut count = 0;
 //
 // Note: this is only correct because the caller should be the (ptrace)
 // tracer of the task, otherwise lock_task_sighand is needed.
@@ -1932,37 +2358,39 @@ pub unsafe extern "C" fn prctl_set_seccomp(seccomp_mode: c_ulong, filter: *mut v
     __get_seccomp_filter(orig);
     spin_unlock_irq(&task.sighand.siglock);
     count = 0;
-    for (filter = orig; filter; filter = filter.prev)
-    count++;
+    for (filter = orig; filter; filter = filter.prev) {
+    count += 1;
+    }
     if (filter_off >= count) {
     filter = ERR_PTR(-ENOENT);
-    goto out;
+// goto;
     }
     count -= filter_off;
-    for (filter = orig; filter && count > 1; filter = filter.prev)
-    count--;
-    if (WARN_ON(count != 1 || !filter)) {
+    for (filter = orig; filter && count > 1; filter = filter.prev) {
+    count -= 1;
+    }
+    if (WARN_ON!(count != 1 || !filter)) {
     filter = ERR_PTR(-ENOENT);
-    goto out;
+// goto;
     }
     __get_seccomp_filter(filter);
-    out:
+// label;
     __put_seccomp_filter(orig);
     return filter;
     }
-    long seccomp_get_filter(struct task_struct *task, unsigned long filter_off,
-    void __user *data)
-    {
-    struct seccomp_filter *filter;
-    struct sock_fprog_kern *fprog;
-    long ret;
+#[no_mangle]
+pub unsafe extern "C" fn seccomp_get_filter(task: *mut task_struct, filter_off: c_ulong, data: *mut c_void) -> c_long {
+pub static mut filter: *mut c_void = core::ptr::null_mut();
+pub static mut fprog: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     if (!capable(CAP_SYS_ADMIN) ||
     current.seccomp.mode != SECCOMP_MODE_DISABLED) {
     return -EACCES;
     }
     filter = get_nth_filter(task, filter_off);
-    if (IS_ERR(filter))
+    if (IS_ERR(filter)) {
     return PTR_ERR(filter);
+    }
     fprog = filter.prog.orig_prog;
     if (!fprog) {
 // This must be a new non-cBPF filter, since we save
@@ -1970,40 +2398,46 @@ pub unsafe extern "C" fn prctl_set_seccomp(seccomp_mode: c_ulong, filter: *mut v
 // CONFIG_CHECKPOINT_RESTORE is enabled.
 //
     ret = -EMEDIUMTYPE;
-    goto out;
+// goto;
     }
     ret = fprog.len;
-    if (!data)
-    goto out;
-    if (copy_to_user(data, fprog.filter, bpf_classic_proglen(fprog)))
+    if (!data) {
+// goto;
+    }
+    if (copy_to_user(data, fprog.filter, bpf_classic_proglen(fprog))) {
     ret = -EFAULT;
-    out:
+    }
+// label;
     __put_seccomp_filter(filter);
     return ret;
     }
-    long seccomp_get_metadata(struct task_struct *task,
-    unsigned long size, void __user *data)
-    {
-    long ret;
-    struct seccomp_filter *filter;
-    let mut kmd: seccomp_metadata = {};
+#[no_mangle]
+pub unsafe extern "C" fn seccomp_get_metadata(task: *mut task_struct, size: c_ulong, data: *mut c_void) -> c_long {
+    let mut ret = 0;
+pub static mut filter: *mut c_void = core::ptr::null_mut();
+pub static mut kmd: seccomp_metadata = 0;
     if (!capable(CAP_SYS_ADMIN) ||
     current.seccomp.mode != SECCOMP_MODE_DISABLED) {
     return -EACCES;
     }
-    size = min_t(unsigned long, size, sizeof(kmd));
-    if (size < sizeof(kmd.filter_off))
+    size = min_t(unsigned long, size, sizeof!(kmd));
+    if (size < sizeof!(kmd.filter_off)) {
     return -EINVAL;
-    if (copy_from_user(&kmd.filter_off, data, sizeof(kmd.filter_off)))
+    }
+    if (copy_from_user(&kmd.filter_off, data, sizeof!(kmd.filter_off))) {
     return -EFAULT;
+    }
     filter = get_nth_filter(task, kmd.filter_off);
-    if (IS_ERR(filter))
+    if (IS_ERR(filter)) {
     return PTR_ERR(filter);
-    if (filter.log)
+    }
+    if (filter.log) {
     kmd.flags |= SECCOMP_FILTER_FLAG_LOG;
+    }
     ret = size;
-    if (copy_to_user(data, &kmd, size))
+    if (copy_to_user(data, &kmd, size)) {
     ret = -EFAULT;
+    }
     __put_seccomp_filter(filter);
     return ret;
     }
@@ -2026,48 +2460,39 @@ pub struct seccomp_log_name {
     pub name: *const c_char,
 }
 
-    static const struct seccomp_log_name seccomp_log_names[] = {
-    { SECCOMP_LOG_KILL_PROCESS, SECCOMP_RET_KILL_PROCESS_NAME },
-    { SECCOMP_LOG_KILL_THREAD, SECCOMP_RET_KILL_THREAD_NAME },
-    { SECCOMP_LOG_TRAP, SECCOMP_RET_TRAP_NAME },
-    { SECCOMP_LOG_ERRNO, SECCOMP_RET_ERRNO_NAME },
-    { SECCOMP_LOG_USER_NOTIF, SECCOMP_RET_USER_NOTIF_NAME },
-    { SECCOMP_LOG_TRACE, SECCOMP_RET_TRACE_NAME },
-    { SECCOMP_LOG_LOG, SECCOMP_RET_LOG_NAME },
-    { SECCOMP_LOG_ALLOW, SECCOMP_RET_ALLOW_NAME },
-    { }
-    };
-    static bool seccomp_names_from_actions_logged(char *names, size_t size,
-    u32 actions_logged,
-    const char *sep)
-    {
-    const struct seccomp_log_name *cur;
-    let mut append_sep: bool = false;
-    for (cur = seccomp_log_names; cur.name && size; cur++) {
-    ssize_t ret;
-    if (!(actions_logged & cur.log))
+pub static mut seccomp_log_name: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn seccomp_names_from_actions_logged(names: *mut c_char, size: size_t, actions_logged: u32, sep: *mut c_char) -> bool {
+pub static mut cur: *mut c_void = core::ptr::null_mut();
+pub static mut append_sep: bool = false;
+    while (cur.name && size) {
+    let mut ret = 0;
+    if (!(actions_logged & cur.log)) {
     continue;
+    }
     if (append_sep) {
     ret = strscpy(names, sep, size);
-    if (ret < 0)
+    if (ret < 0) {
     return false;
+    }
     names += ret;
     size -= ret;
-    } else
+    } else {
     append_sep = true;
+    }
     ret = strscpy(names, cur.name, size);
-    if (ret < 0)
+    if (ret < 0) {
     return false;
+    }
     names += ret;
     size -= ret;
     }
     return true;
     }
-    static bool seccomp_action_logged_from_name(u32 *action_logged,
-    const char *name)
-    {
-    const struct seccomp_log_name *cur;
-    for (cur = seccomp_log_names; cur.name; cur++) {
+#[no_mangle]
+pub unsafe extern "C" fn seccomp_action_logged_from_name(action_logged: *mut u32, name: *mut c_char) -> bool {
+pub static mut cur: *mut c_void = core::ptr::null_mut();
+    while (cur.name) {
     if (!strcmp(cur.name, name)) {
 // action_logged = cur->log;
     return true;
@@ -2077,140 +2502,134 @@ pub struct seccomp_log_name {
     }
 #[no_mangle]
 unsafe extern "C" fn seccomp_actions_logged_from_names(actions_logged: *mut u32, names: *mut c_char) -> bool {
-    char *name;
+pub static mut name: *mut c_void = core::ptr::null_mut();
 // actions_logged = 0;
     while ((name = strsep(&names, " ")) && *name) {
-    let mut action_logged: u32 = 0;
-    if (!seccomp_action_logged_from_name(&action_logged, name))
+pub static mut action_logged: u32 = 0;
+    if (!seccomp_action_logged_from_name(&action_logged, name)) {
     return false;
+    }
 // actions_logged |= action_logged;
     }
     return true;
     }
-    static int read_actions_logged(const struct ctl_table *ro_table, void *buffer,
-    size_t *lenp, loff_t *ppos)
-    {
-    char names[sizeof(seccomp_actions_avail)];
-    struct ctl_table table;
-    memset(names, 0, sizeof(names));
-    if (!seccomp_names_from_actions_logged(names, sizeof(names),
-    seccomp_actions_logged, " "))
+#[no_mangle]
+pub unsafe extern "C" fn read_actions_logged(ro_table: *mut ctl_table, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
+    char names[sizeof!(seccomp_actions_avail)];
+pub static mut table: usize = 0;
+    memset(names, 0, sizeof!(names));
+    if (!seccomp_names_from_actions_logged(names, sizeof!(names),
+    seccomp_actions_logged, " ")) {
     return -EINVAL;
+    }
     table = *ro_table;
     table.data = names;
-    table.maxlen = sizeof(names);
+    table.maxlen = sizeof!(names);
     return proc_dostring(&table, 0, buffer, lenp, ppos);
     }
-    static int write_actions_logged(const struct ctl_table *ro_table, void *buffer,
-    size_t *lenp, loff_t *ppos, u32 *actions_logged)
-    {
-    char names[sizeof(seccomp_actions_avail)];
-    struct ctl_table table;
-    int ret;
-    if (!capable(CAP_SYS_ADMIN))
+#[no_mangle]
+pub unsafe extern "C" fn write_actions_logged(ro_table: *mut ctl_table, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t, actions_logged: *mut u32) -> c_int {
+    char names[sizeof!(seccomp_actions_avail)];
+pub static mut table: usize = 0;
+    let mut ret = 0;
+    if (!capable(CAP_SYS_ADMIN)) {
     return -EPERM;
-    memset(names, 0, sizeof(names));
+    }
+    memset(names, 0, sizeof!(names));
     table = *ro_table;
     table.data = names;
-    table.maxlen = sizeof(names);
+    table.maxlen = sizeof!(names);
     ret = proc_dostring(&table, 1, buffer, lenp, ppos);
-    if (ret)
+    if (ret) {
     return ret;
-    if (!seccomp_actions_logged_from_names(actions_logged, table.data))
+    }
+    if (!seccomp_actions_logged_from_names(actions_logged, table.data)) {
     return -EINVAL;
-    if (*actions_logged & SECCOMP_LOG_ALLOW)
+    }
+    if (*actions_logged & SECCOMP_LOG_ALLOW) {
     return -EINVAL;
+    }
     seccomp_actions_logged = *actions_logged;
     return 0;
     }
-    static void audit_actions_logged(u32 actions_logged, u32 old_actions_logged,
-    int ret)
-    {
-    char names[sizeof(seccomp_actions_avail)];
-    char old_names[sizeof(seccomp_actions_avail)];
-    const char *new = names;
-    const char *old = old_names;
-    if (!audit_enabled)
-    return;
-    memset(names, 0, sizeof(names));
-    memset(old_names, 0, sizeof(old_names));
-    if (ret)
-    new = "?";
 #[no_mangle]
-pub unsafe extern "C" fn if(_arg: !actions_logged) -> else {
-    else if (!actions_logged)
-    new = "(none)";
-    else if (!seccomp_names_from_actions_logged(names, sizeof(names),
-    actions_logged, ","))
+pub unsafe extern "C" fn audit_actions_logged(actions_logged: u32, old_actions_logged: u32, ret: c_int) {
+    char names[sizeof!(seccomp_actions_avail)];
+    char old_names[sizeof!(seccomp_actions_avail)];
+    let mut new = names;
+    let mut old = old_names;
+    if (!audit_enabled) {
+    return;
+    }
+    memset(names, 0, sizeof!(names));
+    memset(old_names, 0, sizeof!(old_names));
+    if (ret) {
     new = "?";
-    if (!old_actions_logged)
+    }
+
+    else if (!actions_logged) {
+    new = "(none)";
+    }
+    else if (!seccomp_names_from_actions_logged(names, sizeof!(names),
+    actions_logged, ",")) {
+    new = "?";
+    }
+    if (!old_actions_logged) {
     old = "(none)";
+    }
     else if (!seccomp_names_from_actions_logged(old_names,
-    sizeof(old_names),
-    old_actions_logged, ","))
+    sizeof!(old_names),
+    old_actions_logged, ",")) {
     old = "?";
+    }
     return audit_seccomp_actions_logged(new, old, !ret);
     }
-    static int seccomp_actions_logged_handler(const struct ctl_table *ro_table, int write,
-    void *buffer, size_t *lenp,
-    loff_t *ppos)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn seccomp_actions_logged_handler(ro_table: *mut ctl_table, write: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
+    let mut ret = 0;
     if (write) {
-    let mut actions_logged: u32 = 0;
-    let mut old_actions_logged: u32 = seccomp_actions_logged;
+pub static mut actions_logged: u32 = 0;
+pub static mut old_actions_logged: u32 = 0;
     ret = write_actions_logged(ro_table, buffer, lenp, ppos,
     &actions_logged);
     audit_actions_logged(actions_logged, old_actions_logged, ret);
-    } else
+    } else {
     ret = read_actions_logged(ro_table, buffer, lenp, ppos);
+    }
     return ret;
     }
-    static const struct ctl_table seccomp_sysctl_table[] = {
-    {
-    .procname	= "actions_avail",
-    .data		= (void *) &seccomp_actions_avail,
-    .maxlen		= sizeof(seccomp_actions_avail),
-    .mode		= 0444,
-    .proc_handler	= proc_dostring,
-    },
-    {
-    .procname	= "actions_logged",
-    .mode		= 0644,
-    .proc_handler	= seccomp_actions_logged_handler,
-    },
-    };
+pub static mut ctl_table: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn seccomp_sysctl_init() -> c_int {
     register_sysctl_init("kernel/seccomp", seccomp_sysctl_table);
     return 0;
     }
-    device_initcall(seccomp_sysctl_init)
+    device_initcall!(seccomp_sysctl_init)
 
 // Currently CONFIG_SECCOMP_CACHE_DEBUG implies SECCOMP_ARCH_NATIVE
-    static void proc_pid_seccomp_cache_arch(struct seq_file *m, const char *name,
-    const void *bitmap, size_t bitmap_size)
-    {
-    int nr;
-    for (nr = 0; nr < bitmap_size; nr++) {
-    let mut cached: bool = test_bit(nr, bitmap);
-    char *status = cached ? "ALLOW" : "FILTER";
+#[no_mangle]
+pub unsafe extern "C" fn proc_pid_seccomp_cache_arch(m: *mut seq_file, name: *mut c_char, bitmap: *mut c_void, bitmap_size: size_t) {
+    let mut nr = 0;
+    while (nr < bitmap_size) {
+pub static mut cached: bool = false;
+    let mut status = cached ? "ALLOW" : "FILTER";
     seq_printf(m, "%s %d %s\n", name, nr, status);
     }
     }
-    int proc_pid_seccomp_cache(struct seq_file *m, struct pid_namespace *ns,
-    struct pid *pid, struct task_struct *task)
-    {
-    struct seccomp_filter *f;
-    unsigned long flags;
+#[no_mangle]
+pub unsafe extern "C" fn proc_pid_seccomp_cache(m: *mut seq_file, ns: *mut pid_namespace, pid: *mut pid, task: *mut task_struct) -> c_int {
+pub static mut f: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
 //
 // We don't want some sandboxed process to know what their seccomp
 // filters consist of.
 //
-    if (!file_ns_capable(m.file, &init_user_ns, CAP_SYS_ADMIN))
+    if (!file_ns_capable(m.file, &init_user_ns, CAP_SYS_ADMIN)) {
     return -EACCES;
-    if (!lock_task_sighand(task, &flags))
+    }
+    if (!lock_task_sighand(task, &flags)) {
     return -ESRCH;
+    }
     f = READ_ONCE(task.seccomp.filter);
     if (!f) {
     unlock_task_sighand(task, &flags);
@@ -2231,6 +2650,5 @@ unsafe extern "C" fn seccomp_sysctl_init() -> c_int {
     return 0;
     }
 
-}
 }
 }

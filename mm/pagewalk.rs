@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -45,50 +295,53 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 #[no_mangle]
 unsafe extern "C" fn real_depth(depth: c_int) -> c_int {
-    static int real_depth(int depth)
-    {
-    if (depth == 3 && PTRS_PER_PMD == 1)
+    if (depth == 3 && PTRS_PER_PMD == 1) {
     depth = 2;
-    if (depth == 2 && PTRS_PER_PUD == 1)
+    }
+    if (depth == 2 && PTRS_PER_PUD == 1) {
     depth = 1;
-    if (depth == 1 && PTRS_PER_P4D == 1)
+    }
+    if (depth == 1 && PTRS_PER_P4D == 1) {
     depth = 0;
+    }
     return depth;
     }
-    static int walk_pte_range_inner(pte_t *pte, unsigned long addr,
-    unsigned long end, struct mm_walk *walk)
-    {
-    const struct mm_walk_ops *ops = walk.ops;
-    let mut err: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn walk_pte_range_inner(pte: *mut pte_t, addr: c_ulong, end: c_ulong, walk: *mut mm_walk) -> c_int {
+    let mut ops = walk.ops;
+pub static mut err: c_int = 0;
     for (;;) {
     if (ops.install_pte && pte_none(ptep_get(pte))) {
-    pte_t new_pte;
+    let mut new_pte;
     err = ops.install_pte(addr, addr + PAGE_SIZE, &new_pte,
     walk);
-    if (err)
-    break;
-    set_pte_at(walk.mm, addr, pte, new_pte);
-// Non-present before, so for arches that need it.
-    if (!WARN_ON_ONCE(walk.no_vma))
-    update_mmu_cache(walk.vma, addr, pte);
-    } else {
-    err = ops.pte_entry(pte, addr, addr + PAGE_SIZE, walk);
-    if (err)
+    if (err) {
     break;
     }
-    if (addr >= end - PAGE_SIZE)
+    set_pte_at(walk.mm, addr, pte, new_pte);
+// Non-present before, so for arches that need it.
+    if (!WARN_ON_ONCE!(walk.no_vma)) {
+    update_mmu_cache(walk.vma, addr, pte);
+    }
+    } else {
+    err = ops.pte_entry(pte, addr, addr + PAGE_SIZE, walk);
+    if (err) {
     break;
+    }
+    }
+    if (addr >= end - PAGE_SIZE) {
+    break;
+    }
     addr += PAGE_SIZE;
-    pte++;
+    pte += 1;
     }
     return err;
     }
-    static int walk_pte_range(pmd_t *pmd, unsigned long addr, unsigned long end,
-    struct mm_walk *walk)
-    {
-    pte_t *pte;
-    let mut err: c_int = 0;
-    spinlock_t *ptl;
+#[no_mangle]
+pub unsafe extern "C" fn walk_pte_range(pmd: *mut pmd_t, addr: c_ulong, end: c_ulong, walk: *mut mm_walk) -> c_int {
+pub static mut pte: *mut c_void = core::ptr::null_mut();
+pub static mut err: c_int = 0;
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
     if (walk.no_vma) {
 //
 // pte_offset_map() might apply user-specific validation.
@@ -96,14 +349,17 @@ unsafe extern "C" fn real_depth(depth: c_int) -> c_int {
 // fit its pmd_bad() check (_PAGE_NX set and _PAGE_RW clear),
 // and CONFIG_EFI_PGT_DUMP efi_mm goes so far as to walk them.
 //
-    if (walk.mm == &init_mm || addr >= TASK_SIZE)
+    if (walk.mm == &init_mm || addr >= TASK_SIZE) {
     pte = pte_offset_kernel(pmd, addr);
-    else
+    }
+    else {
     pte = pte_offset_map(pmd, addr);
+    }
     if (pte) {
     err = walk_pte_range_inner(pte, addr, end, walk);
-    if (walk.mm != &init_mm && addr < TASK_SIZE)
+    if (walk.mm != &init_mm && addr < TASK_SIZE) {
     pte_unmap(pte);
+    }
     }
     } else {
     pte = pte_offset_map_lock(walk.mm, pmd, addr, &ptl);
@@ -112,21 +368,21 @@ unsafe extern "C" fn real_depth(depth: c_int) -> c_int {
     pte_unmap_unlock(pte, ptl);
     }
     }
-    if (!pte)
+    if (!pte) {
     walk.action = ACTION_AGAIN;
+    }
     return err;
     }
-    static int walk_pmd_range(pud_t *pud, unsigned long addr, unsigned long end,
-    struct mm_walk *walk)
-    {
-    let mut pudval: pud_t = pudp_get(pud);
-    pmd_t *pmd;
-    unsigned long next;
-    const struct mm_walk_ops *ops = walk.ops;
-    let mut has_handler: bool = ops.pte_entry;
-    let mut has_install: bool = ops.install_pte;
-    let mut err: c_int = 0;
-    let mut depth: c_int = real_depth(3);
+#[no_mangle]
+pub unsafe extern "C" fn walk_pmd_range(pud: *mut pud_t, addr: c_ulong, end: c_ulong, walk: *mut mm_walk) -> c_int {
+pub static mut pudval: pud_t = 0;
+pub static mut pmd: *mut c_void = core::ptr::null_mut();
+    let mut next = 0;
+    let mut ops = walk.ops;
+pub static mut has_handler: bool = false;
+pub static mut has_install: bool = false;
+pub static mut err: c_int = 0;
+pub static mut depth: c_int = 0;
 //
 // For PTE handling, pte_offset_map_lock() takes care of checking
 // whether there actually is a page table. But it also has to be
@@ -146,231 +402,267 @@ unsafe extern "C" fn real_depth(depth: c_int) -> c_int {
     }
     pmd = pmd_offset(pud, addr);
     do {
-    again:
+// label;
     walk.action = ACTION_SUBTREE;
     next = pmd_addr_end(addr, end);
     if (pmd_none(*pmd)) {
-    if (has_install)
+    if (has_install) {
     err = __pte_alloc(walk.mm, pmd);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: ops->pte_hole) -> else {
-    else if (ops.pte_hole)
+    }
+
+    else if (ops.pte_hole) {
     err = ops.pte_hole(addr, next, depth, walk);
-    if (err)
+    }
+    if (err) {
     break;
-    if (!has_install)
+    }
+    if (!has_install) {
     continue;
+    }
     }
 //
 // This implies that each ->pmd_entry() handler
 // needs to know about pmd_trans_huge() pmds
 //
-    if (ops.pmd_entry)
+    if (ops.pmd_entry) {
     err = ops.pmd_entry(pmd, addr, next, walk);
-    if (err)
+    }
+    if (err) {
     break;
-    if (walk.action == ACTION_AGAIN)
-    goto again;
-    if (walk.action == ACTION_CONTINUE)
+    }
+    if (walk.action == ACTION_AGAIN) {
+// goto;
+    }
+    if (walk.action == ACTION_CONTINUE) {
     continue;
-    if (!has_handler) { /* No handlers for lower page tables. */
+    }
+    if (!has_handler) { /* No handlers for lower page tables. */ {
     if (!has_install)
     continue; /* Nothing to do. */
+    }
 //
 // We are ONLY installing, so avoid unnecessarily
 // splitting a present huge page.
 //
-    if (pmd_present(*pmd) && pmd_trans_huge(*pmd))
+    if (pmd_present(*pmd) && pmd_trans_huge(*pmd)) {
     continue;
     }
-    if (walk.vma)
+    }
+    if (walk.vma) {
     split_huge_pmd(walk.vma, pmd, addr);
-#[no_mangle]
-pub unsafe extern "C" fn if(!pmd_present(*pmd): *mut *mut pmd_leaf(pmd) ||) -> else {
-    else if (pmd_leaf(*pmd) || !pmd_present(*pmd))
+    }
+
+    else if (pmd_leaf(*pmd) || !pmd_present(*pmd)) {
     continue; /* Nothing to do. */
+    }
     err = walk_pte_range(pmd, addr, next, walk);
-    if (err)
+    if (err) {
     break;
-    if (walk.action == ACTION_AGAIN)
-    goto again;
+    }
+    if (walk.action == ACTION_AGAIN) {
+// goto;
+    }
     } while (pmd++, addr = next, addr != end);
     return err;
     }
-    static int walk_pud_range(p4d_t *p4d, unsigned long addr, unsigned long end,
-    struct mm_walk *walk)
-    {
-    pud_t *pud;
-    unsigned long next;
-    const struct mm_walk_ops *ops = walk.ops;
-    let mut has_handler: bool = ops.pmd_entry || ops.pte_entry;
-    let mut has_install: bool = ops.install_pte;
-    let mut err: c_int = 0;
-    let mut depth: c_int = real_depth(2);
+#[no_mangle]
+pub unsafe extern "C" fn walk_pud_range(p4d: *mut p4d_t, addr: c_ulong, end: c_ulong, walk: *mut mm_walk) -> c_int {
+pub static mut pud: *mut c_void = core::ptr::null_mut();
+    let mut next = 0;
+    let mut ops = walk.ops;
+pub static mut has_handler: bool = false;
+pub static mut has_install: bool = false;
+pub static mut err: c_int = 0;
+pub static mut depth: c_int = 0;
     pud = pud_offset(p4d, addr);
     do {
-    again:
+// label;
     walk.action = ACTION_SUBTREE;
     next = pud_addr_end(addr, end);
     if (pud_none(*pud)) {
-    if (has_install)
+    if (has_install) {
     err = __pmd_alloc(walk.mm, pud, addr);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: ops->pte_hole) -> else {
-    else if (ops.pte_hole)
+    }
+
+    else if (ops.pte_hole) {
     err = ops.pte_hole(addr, next, depth, walk);
-    if (err)
+    }
+    if (err) {
     break;
-    if (!has_install)
+    }
+    if (!has_install) {
     continue;
     }
-    if (ops.pud_entry)
+    }
+    if (ops.pud_entry) {
     err = ops.pud_entry(pud, addr, next, walk);
-    if (err)
+    }
+    if (err) {
     break;
-    if (walk.action == ACTION_AGAIN)
-    goto again;
-    if (walk.action == ACTION_CONTINUE)
+    }
+    if (walk.action == ACTION_AGAIN) {
+// goto;
+    }
+    if (walk.action == ACTION_CONTINUE) {
     continue;
-    if (!has_handler) { /* No handlers for lower page tables. */
+    }
+    if (!has_handler) { /* No handlers for lower page tables. */ {
     if (!has_install)
     continue; /* Nothing to do. */
+    }
 //
 // We are ONLY installing, so avoid unnecessarily
 // splitting a present huge page.
 //
-    if (pud_present(*pud) && pud_trans_huge(*pud))
+    if (pud_present(*pud) && pud_trans_huge(*pud)) {
     continue;
     }
-    if (walk.vma)
+    }
+    if (walk.vma) {
     split_huge_pud(walk.vma, pud, addr);
-#[no_mangle]
-pub unsafe extern "C" fn if(!pud_present(*pud): *mut *mut pud_leaf(pud) ||) -> else {
-    else if (pud_leaf(*pud) || !pud_present(*pud))
+    }
+
+    else if (pud_leaf(*pud) || !pud_present(*pud)) {
     continue; /* Nothing to do. */
+    }
     err = walk_pmd_range(pud, addr, next, walk);
-    if (err)
+    if (err) {
     break;
-    if (walk.action == ACTION_AGAIN)
-    goto again;
+    }
+    if (walk.action == ACTION_AGAIN) {
+// goto;
+    }
     } while (pud++, addr = next, addr != end);
     return err;
     }
-    static int walk_p4d_range(pgd_t *pgd, unsigned long addr, unsigned long end,
-    struct mm_walk *walk)
-    {
-    p4d_t *p4d;
-    unsigned long next;
-    const struct mm_walk_ops *ops = walk.ops;
-    let mut has_handler: bool = ops.pud_entry || ops.pmd_entry || ops.pte_entry;
-    let mut has_install: bool = ops.install_pte;
-    let mut err: c_int = 0;
-    let mut depth: c_int = real_depth(1);
+#[no_mangle]
+pub unsafe extern "C" fn walk_p4d_range(pgd: *mut pgd_t, addr: c_ulong, end: c_ulong, walk: *mut mm_walk) -> c_int {
+pub static mut p4d: *mut c_void = core::ptr::null_mut();
+    let mut next = 0;
+    let mut ops = walk.ops;
+pub static mut has_handler: bool = false;
+pub static mut has_install: bool = false;
+pub static mut err: c_int = 0;
+pub static mut depth: c_int = 0;
     p4d = p4d_offset(pgd, addr);
     do {
     next = p4d_addr_end(addr, end);
     if (p4d_none_or_clear_bad(p4d)) {
-    if (has_install)
+    if (has_install) {
     err = __pud_alloc(walk.mm, p4d, addr);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: ops->pte_hole) -> else {
-    else if (ops.pte_hole)
+    }
+
+    else if (ops.pte_hole) {
     err = ops.pte_hole(addr, next, depth, walk);
-    if (err)
+    }
+    if (err) {
     break;
-    if (!has_install)
+    }
+    if (!has_install) {
     continue;
+    }
     }
     if (ops.p4d_entry) {
     err = ops.p4d_entry(p4d, addr, next, walk);
-    if (err)
+    if (err) {
     break;
     }
-    if (has_handler || has_install)
+    }
+    if (has_handler || has_install) {
     err = walk_pud_range(p4d, addr, next, walk);
-    if (err)
+    }
+    if (err) {
     break;
+    }
     } while (p4d++, addr = next, addr != end);
     return err;
     }
-    static int walk_pgd_range(unsigned long addr, unsigned long end,
-    struct mm_walk *walk)
-    {
-    pgd_t *pgd;
-    unsigned long next;
-    const struct mm_walk_ops *ops = walk.ops;
-    bool has_handler = ops.p4d_entry || ops.pud_entry || ops.pmd_entry ||
+#[no_mangle]
+pub unsafe extern "C" fn walk_pgd_range(addr: c_ulong, end: c_ulong, walk: *mut mm_walk) -> c_int {
+pub static mut pgd: *mut c_void = core::ptr::null_mut();
+    let mut next = 0;
+    let mut ops = walk.ops;
+    let mut has_handler = ops.p4d_entry || ops.pud_entry || ops.pmd_entry ||
     ops.pte_entry;
-    let mut has_install: bool = ops.install_pte;
-    let mut err: c_int = 0;
-    if (walk.pgd)
+pub static mut has_install: bool = false;
+pub static mut err: c_int = 0;
+    if (walk.pgd) {
     pgd = walk.pgd + pgd_index(addr);
-    else
+    }
+    else {
     pgd = pgd_offset(walk.mm, addr);
+    }
     do {
     next = pgd_addr_end(addr, end);
     if (pgd_none_or_clear_bad(pgd)) {
-    if (has_install)
+    if (has_install) {
     err = __p4d_alloc(walk.mm, pgd, addr);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: ops->pte_hole) -> else {
-    else if (ops.pte_hole)
+    }
+
+    else if (ops.pte_hole) {
     err = ops.pte_hole(addr, next, 0, walk);
-    if (err)
+    }
+    if (err) {
     break;
-    if (!has_install)
+    }
+    if (!has_install) {
     continue;
+    }
     }
     if (ops.pgd_entry) {
     err = ops.pgd_entry(pgd, addr, next, walk);
-    if (err)
+    if (err) {
     break;
     }
-    if (has_handler || has_install)
+    }
+    if (has_handler || has_install) {
     err = walk_p4d_range(pgd, addr, next, walk);
-    if (err)
+    }
+    if (err) {
     break;
+    }
     } while (pgd++, addr = next, addr != end);
     return err;
     }
 
-    static unsigned long hugetlb_entry_end(struct hstate *h, unsigned long addr,
-    unsigned long end)
-    {
-    let mut boundary: c_ulong = (addr & huge_page_mask(h)) + huge_page_size(h);
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_entry_end(h: *mut hstate, addr: c_ulong, end: c_ulong) -> c_ulong {
+pub static mut boundary: c_ulong = 0;
     return min(boundary, end);
     }
-    static int walk_hugetlb_range(unsigned long addr, unsigned long end,
-    struct mm_walk *walk)
-    {
-    struct vm_area_struct *vma = walk.vma;
-    struct hstate *h = hstate_vma(vma);
-    unsigned long next;
-    let mut hmask: c_ulong = huge_page_mask(h);
-    let mut sz: c_ulong = huge_page_size(h);
-    pte_t *pte;
-    const struct mm_walk_ops *ops = walk.ops;
-    let mut err: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn walk_hugetlb_range(addr: c_ulong, end: c_ulong, walk: *mut mm_walk) -> c_int {
+    let mut vma = walk.vma;
+    let mut h = hstate_vma(vma);
+    let mut next = 0;
+pub static mut hmask: c_ulong = 0;
+pub static mut sz: c_ulong = 0;
+pub static mut pte: *mut c_void = core::ptr::null_mut();
+    let mut ops = walk.ops;
+pub static mut err: c_int = 0;
     hugetlb_vma_lock_read(vma);
     do {
     next = hugetlb_entry_end(h, addr, end);
     pte = hugetlb_walk(vma, addr & hmask, sz);
-    if (pte)
+    if (pte) {
     err = ops.hugetlb_entry(pte, hmask, addr, next, walk);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: ops->pte_hole) -> else {
-    else if (ops.pte_hole)
+    }
+
+    else if (ops.pte_hole) {
     err = ops.pte_hole(addr, next, -1, walk);
-    if (err)
+    }
+    if (err) {
     break;
+    }
     } while (addr = next, addr != end);
     hugetlb_vma_unlock_read(vma);
     return err;
     }
 
-    static int walk_hugetlb_range(unsigned long addr, unsigned long end,
-    struct mm_walk *walk)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: walk_hugetlb_range
+pub unsafe extern "C" fn walk_hugetlb_range_dup(addr: c_ulong, end: c_ulong, walk: *mut mm_walk) -> c_int {
     return 0;
     }
 
@@ -380,13 +672,13 @@ pub unsafe extern "C" fn if(_arg: ops->pte_hole) -> else {
 // current vma, and return 1 if we skip the vma. Negative values means
 // error, where we abort the current walk.
 //
-    static int walk_page_test(unsigned long start, unsigned long end,
-    struct mm_walk *walk)
-    {
-    struct vm_area_struct *vma = walk.vma;
-    const struct mm_walk_ops *ops = walk.ops;
-    if (ops.test_walk)
+#[no_mangle]
+pub unsafe extern "C" fn walk_page_test(start: c_ulong, end: c_ulong, walk: *mut mm_walk) -> c_int {
+    let mut vma = walk.vma;
+    let mut ops = walk.ops;
+    if (ops.test_walk) {
     return ops.test_walk(start, end, walk);
+    }
 //
 // vma(VM_PFNMAP) doesn't have any valid struct pages behind VM_PFNMAP
 // range, so we don't walk over it as we do for normal vmas. However,
@@ -396,64 +688,72 @@ pub unsafe extern "C" fn if(_arg: ops->pte_hole) -> else {
 // vma(VM_PFNMAP).
 //
     if (vma.vm_flags & VM_PFNMAP) {
-    let mut err: c_int = 1;
-    if (ops.pte_hole)
+pub static mut err: c_int = 1;
+    if (ops.pte_hole) {
     err = ops.pte_hole(start, end, -1, walk);
+    }
     return err ? err : 1;
     }
     return 0;
     }
-    static int __walk_page_range(unsigned long start, unsigned long end,
-    struct mm_walk *walk)
-    {
-    let mut err: c_int = 0;
-    struct vm_area_struct *vma = walk.vma;
-    const struct mm_walk_ops *ops = walk.ops;
-    let mut is_hugetlb: bool = is_vm_hugetlb_page(vma);
+#[no_mangle]
+pub unsafe extern "C" fn __walk_page_range(start: c_ulong, end: c_ulong, walk: *mut mm_walk) -> c_int {
+pub static mut err: c_int = 0;
+    let mut vma = walk.vma;
+    let mut ops = walk.ops;
+pub static mut is_hugetlb: bool = false;
 // We do not support hugetlb PTE installation.
-    if (ops.install_pte && is_hugetlb)
+    if (ops.install_pte && is_hugetlb) {
     return -EINVAL;
+    }
     if (ops.pre_vma) {
     err = ops.pre_vma(start, end, walk);
-    if (err)
+    if (err) {
     return err;
+    }
     }
     if (is_hugetlb) {
-    if (ops.hugetlb_entry)
+    if (ops.hugetlb_entry) {
     err = walk_hugetlb_range(start, end, walk);
-    } else
+    }
+    } else {
     err = walk_pgd_range(start, end, walk);
-    if (ops.post_vma)
+    }
+    if (ops.post_vma) {
     ops.post_vma(walk);
+    }
     return err;
     }
-    static inline void process_mm_walk_lock(struct mm_struct *mm,
-    enum page_walk_lock walk_lock)
-    {
-    if (walk_lock == PGWALK_RDLOCK)
-    mmap_assert_locked(mm);
 #[no_mangle]
-pub unsafe extern "C" fn if(PGWALK_VMA_RDLOCK_VERIFY: walk_lock !=) -> else {
-    else if (walk_lock != PGWALK_VMA_RDLOCK_VERIFY)
+pub unsafe extern "C" fn process_mm_walk_lock(mm: *mut mm_struct, walk_lock: page_walk_lock) {
+    if (walk_lock == PGWALK_RDLOCK) {
+    mmap_assert_locked(mm);
+    }
+
+    else if (walk_lock != PGWALK_VMA_RDLOCK_VERIFY) {
     mmap_assert_write_locked(mm);
     }
-    static inline void process_vma_walk_lock(struct vm_area_struct *vma,
-    enum page_walk_lock walk_lock)
-    {
+    }
+#[no_mangle]
+pub unsafe extern "C" fn process_vma_walk_lock(vma: *mut vm_area_struct, walk_lock: page_walk_lock) {
 
-    switch (walk_lock) {
-    case PGWALK_WRLOCK:
+    match (walk_lock) {
+    PGWALK_WRLOCK => {
     vma_start_write(vma);
-    break;
-    case PGWALK_WRLOCK_VERIFY:
+    // break;
+    }
+    PGWALK_WRLOCK_VERIFY => {
     vma_assert_write_locked(vma);
-    break;
-    case PGWALK_VMA_RDLOCK_VERIFY:
+    // break;
+    }
+    PGWALK_VMA_RDLOCK_VERIFY => {
     vma_assert_locked(vma);
-    break;
-    case PGWALK_RDLOCK:
+    // break;
+    }
+    PGWALK_RDLOCK => {
 // PGWALK_RDLOCK is handled by process_mm_walk_lock
-    break;
+    // break;
+    }
     }
 
     }
@@ -464,35 +764,35 @@ pub unsafe extern "C" fn if(PGWALK_VMA_RDLOCK_VERIFY: walk_lock !=) -> else {
 // We usually restrict the ability to install PTEs, but this functionality is
 // available to internal memory management code and provided in mm/internal.h.
 //
-    int walk_page_range_mm_unsafe(struct mm_struct *mm, unsigned long start,
-    unsigned long end, const struct mm_walk_ops *ops,
-    void *private)
-    {
-    let mut err: c_int = 0;
-    unsigned long next;
-    struct vm_area_struct *vma;
-    struct mm_walk walk = {
-    .ops		= ops,
-    .mm		= mm,
-    .private	= private,
-    };
-    if (start >= end)
+#[no_mangle]
+pub unsafe extern "C" fn walk_page_range_mm_unsafe(mm: *mut mm_struct, start: c_ulong, end: c_ulong, ops: *mut mm_walk_ops, private: *mut c_void) -> c_int {
+pub static mut err: c_int = 0;
+    let mut next = 0;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+pub static mut mm_walk: usize = 0;
+    if (start >= end) {
     return -EINVAL;
-    if (!walk.mm)
+    }
+    if (!walk.mm) {
     return -EINVAL;
+    }
     process_mm_walk_lock(walk.mm, ops.walk_lock);
     vma = find_vma(walk.mm, start);
     do {
-    if (!vma) { /* after the last vma */
+    if (!vma) { /* after the last vma */ {
     walk.vma = core::ptr::null_mut();
+    }
     next = end;
-    if (ops.pte_hole)
+    if (ops.pte_hole) {
     err = ops.pte_hole(start, next, -1, &walk);
-    } else if (start < vma.vm_start) { /* outside vma */
+    }
+    } else if (start < vma.vm_start) { /* outside vma */ {
     walk.vma = core::ptr::null_mut();
+    }
     next = min(end, vma.vm_start);
-    if (ops.pte_hole)
+    if (ops.pte_hole) {
     err = ops.pte_hole(start, next, -1, &walk);
+    }
     } else { /* inside vma */
     process_vma_walk_lock(vma, ops.walk_lock);
     walk.vma = vma;
@@ -508,12 +808,14 @@ pub unsafe extern "C" fn if(PGWALK_VMA_RDLOCK_VERIFY: walk_lock !=) -> else {
     err = 0;
     continue;
     }
-    if (err < 0)
+    if (err < 0) {
     break;
+    }
     err = __walk_page_range(start, next, &walk);
     }
-    if (err)
+    if (err) {
     break;
+    }
     } while (start = next, start < end);
     return err;
     }
@@ -529,16 +831,15 @@ pub unsafe extern "C" fn if(PGWALK_VMA_RDLOCK_VERIFY: walk_lock !=) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn check_ops_safe(ops: *const mm_walk_ops) -> bool {
-    static bool check_ops_safe(const struct mm_walk_ops *ops)
-    {
 //
 // The installation of PTEs is solely under the control of memory
 // management logic and subject to many subtle locking, security and
 // cache considerations so we cannot permit other users to do so, and
 // certainly not for exported symbols.
 //
-    if (ops.install_pte)
+    if (ops.install_pte) {
     return false;
+    }
     return true;
     }
 //
@@ -581,12 +882,11 @@ unsafe extern "C" fn check_ops_safe(ops: *const mm_walk_ops) -> bool {
 // Callers of walk_page_range() and walk_page_vma() should hold @mm->mmap_lock,
 // because these function traverse vma list and/or access to vma's data.
 //
-    int walk_page_range(struct mm_struct *mm, unsigned long start,
-    unsigned long end, const struct mm_walk_ops *ops,
-    void *private)
-    {
-    if (!check_ops_safe(ops))
+#[no_mangle]
+pub unsafe extern "C" fn walk_page_range(mm: *mut mm_struct, start: c_ulong, end: c_ulong, ops: *mut mm_walk_ops, private: *mut c_void) -> c_int {
+    if (!check_ops_safe(ops)) {
     return -EINVAL;
+    }
     return walk_page_range_mm_unsafe(mm, start, end, ops, private);
     }
 //
@@ -607,9 +907,8 @@ unsafe extern "C" fn check_ops_safe(ops: *const mm_walk_ops) -> bool {
 // the intermediate kernel page tables belonging to the specified address range
 // from being freed (e.g. memory hot-remove).
 //
-    int walk_kernel_page_table_range(unsigned long start, unsigned long end,
-    const struct mm_walk_ops *ops, pgd_t *pgd, void *private)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn walk_kernel_page_table_range(start: c_ulong, end: c_ulong, ops: *mut mm_walk_ops, pgd: *mut pgd_t, private: *mut c_void) -> c_int {
 //
 // Kernel intermediate page tables are usually not freed, so the mmap
 // read lock is sufficient. But there are some exceptions.
@@ -628,20 +927,15 @@ unsafe extern "C" fn check_ops_safe(ops: *const mm_walk_ops) -> bool {
 // operating on - that there should be no concurrent access, for example,
 // changing permissions for vmalloc objects.
 //
-    int walk_kernel_page_table_range_lockless(unsigned long start, unsigned long end,
-    const struct mm_walk_ops *ops, pgd_t *pgd, void *private)
-    {
-    struct mm_walk walk = {
-    .ops		= ops,
-    .mm		= &init_mm,
-    .pgd		= pgd,
-    .private	= private,
-    .no_vma		= true
-    };
-    if (start >= end)
+#[no_mangle]
+pub unsafe extern "C" fn walk_kernel_page_table_range_lockless(start: c_ulong, end: c_ulong, ops: *mut mm_walk_ops, pgd: *mut pgd_t, private: *mut c_void) -> c_int {
+pub static mut mm_walk: usize = 0;
+    if (start >= end) {
     return -EINVAL;
-    if (!check_ops_safe(ops))
+    }
+    if (!check_ops_safe(ops)) {
     return -EINVAL;
+    }
     return walk_pgd_range(start, end, &walk);
     }
 //
@@ -661,17 +955,9 @@ unsafe extern "C" fn check_ops_safe(ops: *const mm_walk_ops) -> bool {
 //
 // The mmap write lock must be held.
 //
-    int walk_page_range_debug(struct mm_struct *mm, unsigned long start,
-    unsigned long end, const struct mm_walk_ops *ops,
-    pgd_t *pgd, void *private)
-    {
-    struct mm_walk walk = {
-    .ops		= ops,
-    .mm		= mm,
-    .pgd		= pgd,
-    .private	= private,
-    .no_vma		= true
-    };
+#[no_mangle]
+pub unsafe extern "C" fn walk_page_range_debug(mm: *mut mm_struct, start: c_ulong, end: c_ulong, ops: *mut mm_walk_ops, pgd: *mut pgd_t, private: *mut c_void) -> c_int {
+pub static mut mm_walk: usize = 0;
 //
 // When walking userland page tables, an mmap write lock must be held to
 // account for munmap() downgrading to an mmap read lock when tearing
@@ -689,50 +975,43 @@ unsafe extern "C" fn check_ops_safe(ops: *const mm_walk_ops) -> bool {
 // concurrent kernel page table freeing.
 //
     mmap_assert_write_locked(&init_mm);
-    if (start >= end)
+    if (start >= end) {
     return -EINVAL;
-    if (!check_ops_safe(ops))
+    }
+    if (!check_ops_safe(ops)) {
     return -EINVAL;
+    }
     return walk_pgd_range(start, end, &walk);
     }
-    int walk_page_range_vma_unsafe(struct vm_area_struct *vma, unsigned long start,
-    unsigned long end, const struct mm_walk_ops *ops, void *private)
-    {
-    struct mm_walk walk = {
-    .ops		= ops,
-    .mm		= vma.vm_mm,
-    .vma		= vma,
-    .private	= private,
-    };
-    if (start >= end || !walk.mm)
+#[no_mangle]
+pub unsafe extern "C" fn walk_page_range_vma_unsafe(vma: *mut vm_area_struct, start: c_ulong, end: c_ulong, ops: *mut mm_walk_ops, private: *mut c_void) -> c_int {
+pub static mut mm_walk: usize = 0;
+    if (start >= end || !walk.mm) {
     return -EINVAL;
-    if (start < vma.vm_start || end > vma.vm_end)
+    }
+    if (start < vma.vm_start || end > vma.vm_end) {
     return -EINVAL;
+    }
     process_mm_walk_lock(walk.mm, ops.walk_lock);
     process_vma_walk_lock(vma, ops.walk_lock);
     return __walk_page_range(start, end, &walk);
     }
-    int walk_page_range_vma(struct vm_area_struct *vma, unsigned long start,
-    unsigned long end, const struct mm_walk_ops *ops,
-    void *private)
-    {
-    if (!check_ops_safe(ops))
+#[no_mangle]
+pub unsafe extern "C" fn walk_page_range_vma(vma: *mut vm_area_struct, start: c_ulong, end: c_ulong, ops: *mut mm_walk_ops, private: *mut c_void) -> c_int {
+    if (!check_ops_safe(ops)) {
     return -EINVAL;
+    }
     return walk_page_range_vma_unsafe(vma, start, end, ops, private);
     }
-    int walk_page_vma(struct vm_area_struct *vma, const struct mm_walk_ops *ops,
-    void *private)
-    {
-    struct mm_walk walk = {
-    .ops		= ops,
-    .mm		= vma.vm_mm,
-    .vma		= vma,
-    .private	= private,
-    };
-    if (!walk.mm)
+#[no_mangle]
+pub unsafe extern "C" fn walk_page_vma(vma: *mut vm_area_struct, ops: *mut mm_walk_ops, private: *mut c_void) -> c_int {
+pub static mut mm_walk: usize = 0;
+    if (!walk.mm) {
     return -EINVAL;
-    if (!check_ops_safe(ops))
+    }
+    if (!check_ops_safe(ops)) {
     return -EINVAL;
+    }
     process_mm_walk_lock(walk.mm, ops.walk_lock);
     process_vma_walk_lock(vma, ops.walk_lock);
     return __walk_page_range(vma.vm_start, vma.vm_end, &walk);
@@ -767,20 +1046,16 @@ unsafe extern "C" fn check_ops_safe(ops: *const mm_walk_ops) -> bool {
 // Return: 0 on success, negative error code on failure, positive number on
 // caller defined premature termination.
 //
-    int walk_page_mapping(struct address_space *mapping, pgoff_t first_index,
-    pgoff_t nr, const struct mm_walk_ops *ops,
-    void *private)
-    {
-    struct mm_walk walk = {
-    .ops		= ops,
-    .private	= private,
-    };
-    struct vm_area_struct *vma;
+#[no_mangle]
+pub unsafe extern "C" fn walk_page_mapping(mapping: *mut address_space, first_index: pgoff_t, nr: pgoff_t, ops: *mut mm_walk_ops, private: *mut c_void) -> c_int {
+pub static mut mm_walk: usize = 0;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
     pgoff_t vba, vea, cba, cea;
     unsigned long start_addr, end_addr;
-    let mut err: c_int = 0;
-    if (!check_ops_safe(ops))
+pub static mut err: c_int = 0;
+    if (!check_ops_safe(ops)) {
     return -EINVAL;
+    }
     lockdep_assert_held(&mapping.i_mmap_rwsem);
     mapping_rmap_tree_foreach(vma, mapping, first_index,
     first_index + nr - 1) {
@@ -793,19 +1068,22 @@ unsafe extern "C" fn check_ops_safe(ops: *const mm_walk_ops) -> bool {
     cea = min(cea, vea);
     start_addr = ((cba - vba) << PAGE_SHIFT) + vma.vm_start;
     end_addr = ((cea - vba) << PAGE_SHIFT) + vma.vm_start;
-    if (start_addr >= end_addr)
+    if (start_addr >= end_addr) {
     continue;
+    }
     walk.vma = vma;
     walk.mm = vma.vm_mm;
     err = walk_page_test(vma.vm_start, vma.vm_end, &walk);
     if (err > 0) {
     err = 0;
     break;
-    } else if (err < 0)
+    } else if (err < 0) {
     break;
+    }
     err = __walk_page_range(start_addr, end_addr, &walk);
-    if (err)
+    if (err) {
     break;
+    }
     }
     return err;
     }
@@ -860,34 +1138,36 @@ unsafe extern "C" fn check_ops_safe(ops: *const mm_walk_ops) -> bool {
 //
 // Return: folio pointer on success, otherwise NULL.
 //
-    struct folio *folio_walk_start(struct folio_walk *fw,
-    struct vm_area_struct *vma, unsigned long addr,
-    folio_walk_flags_t flags)
-    {
-    unsigned long entry_size;
-    let mut zeropage: bool = false;
-    struct page *page;
+#[no_mangle]
+pub unsafe extern "C" fn folio_walk_start(fw: *mut folio_walk, vma: *mut vm_area_struct, addr: c_ulong, flags: folio_walk_flags_t) -> *mut c_void {
+    let mut entry_size = 0;
+pub static mut zeropage: bool = false;
+pub static mut page: *mut c_void = core::ptr::null_mut();
     pud_t *pudp, pud;
     pmd_t *pmdp, pmd;
     pte_t *ptep, pte;
-    spinlock_t *ptl;
-    pgd_t *pgdp;
-    p4d_t *p4dp;
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
+pub static mut pgdp: *mut c_void = core::ptr::null_mut();
+pub static mut p4dp: *mut c_void = core::ptr::null_mut();
     mmap_assert_locked(vma.vm_mm);
     vma_pgtable_walk_begin(vma);
-    if (WARN_ON_ONCE(addr < vma.vm_start || addr >= vma.vm_end))
-    goto not_found;
+    if (WARN_ON_ONCE!(addr < vma.vm_start || addr >= vma.vm_end)) {
+// goto;
+    }
     pgdp = pgd_offset(vma.vm_mm, addr);
-    if (pgd_none_or_clear_bad(pgdp))
-    goto not_found;
+    if (pgd_none_or_clear_bad(pgdp)) {
+// goto;
+    }
     p4dp = p4d_offset(pgdp, addr);
-    if (p4d_none_or_clear_bad(p4dp))
-    goto not_found;
+    if (p4d_none_or_clear_bad(p4dp)) {
+// goto;
+    }
     pudp = pud_offset(p4dp, addr);
     pud = pudp_get(pudp);
-    if (pud_none(pud))
-    goto not_found;
-    if (IS_ENABLED(CONFIG_PGTABLE_HAS_HUGE_LEAVES) &&
+    if (pud_none(pud)) {
+// goto;
+    }
+    if (IS_ENABLED!(CONFIG_PGTABLE_HAS_HUGE_LEAVES) &&
     (!pud_present(pud) || pud_leaf(pud))) {
     ptl = pud_lock(vma.vm_mm, pudp);
     pud = pudp_get(pudp);
@@ -897,25 +1177,27 @@ unsafe extern "C" fn check_ops_safe(ops: *const mm_walk_ops) -> bool {
     fw.pud = pud;
     if (pud_none(pud)) {
     spin_unlock(ptl);
-    goto not_found;
+// goto;
     } else if (pud_present(pud) && !pud_leaf(pud)) {
     spin_unlock(ptl);
-    goto pmd_table;
+// goto;
     } else if (pud_present(pud)) {
     page = vm_normal_page_pud(vma, addr, pud);
-    if (page)
-    goto found;
+    if (page) {
+// goto;
+    }
     }
     spin_unlock(ptl);
-    goto not_found;
+// goto;
     }
-    pmd_table:
+// label;
     VM_WARN_ON_ONCE(!pud_present(pud) || pud_leaf(pud));
     pmdp = pmd_offset(pudp, addr);
     pmd = pmdp_get_lockless(pmdp);
-    if (pmd_none(pmd))
-    goto not_found;
-    if (IS_ENABLED(CONFIG_PGTABLE_HAS_HUGE_LEAVES) &&
+    if (pmd_none(pmd)) {
+// goto;
+    }
+    if (IS_ENABLED!(CONFIG_PGTABLE_HAS_HUGE_LEAVES) &&
     (!pmd_present(pmd) || pmd_leaf(pmd))) {
     ptl = pmd_lock(vma.vm_mm, pmdp);
     pmd = pmdp_get(pmdp);
@@ -925,29 +1207,30 @@ unsafe extern "C" fn check_ops_safe(ops: *const mm_walk_ops) -> bool {
     fw.pmd = pmd;
     if (pmd_none(pmd)) {
     spin_unlock(ptl);
-    goto not_found;
+// goto;
     } else if (pmd_present(pmd) && !pmd_leaf(pmd)) {
     spin_unlock(ptl);
-    goto pte_table;
+// goto;
     } else if (pmd_present(pmd)) {
     page = vm_normal_page_pmd(vma, addr, pmd);
     if (page) {
-    goto found;
+// goto;
     } else if ((flags & FW_ZEROPAGE) &&
     is_huge_zero_pmd(pmd)) {
     page = pfn_to_page(pmd_pfn(pmd));
     zeropage = true;
-    goto found;
+// goto;
     }
     }
     spin_unlock(ptl);
-    goto not_found;
+// goto;
     }
-    pte_table:
+// label;
     VM_WARN_ON_ONCE(!pmd_present(pmd) || pmd_leaf(pmd));
     ptep = pte_offset_map_lock(vma.vm_mm, pmdp, addr, &ptl);
-    if (!ptep)
-    goto not_found;
+    if (!ptep) {
+// goto;
+    }
     pte = ptep_get(ptep);
     entry_size = PAGE_SIZE;
     fw.level = FW_LEVEL_PTE;
@@ -955,25 +1238,28 @@ unsafe extern "C" fn check_ops_safe(ops: *const mm_walk_ops) -> bool {
     fw.pte = pte;
     if (pte_present(pte)) {
     page = vm_normal_page(vma, addr, pte);
-    if (page)
-    goto found;
+    if (page) {
+// goto;
+    }
     if ((flags & FW_ZEROPAGE) &&
     is_zero_pfn(pte_pfn(pte))) {
     page = pfn_to_page(pte_pfn(pte));
     zeropage = true;
-    goto found;
+// goto;
     }
     }
     pte_unmap_unlock(ptep, ptl);
-    not_found:
+// label;
     vma_pgtable_walk_end(vma);
     return core::ptr::null_mut();
-    found:
-    if (!zeropage)
+// label;
+    if (!zeropage) {
 // Note: Offset from the mapped page, not the folio start.
     fw.page = page + ((addr & (entry_size - 1)) >> PAGE_SHIFT);
-    else
+    }
+    else {
     fw.page = core::ptr::null_mut();
+    }
     fw.ptl = ptl;
     return page_folio(page);
     }

@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -57,14 +307,14 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // by Max Krasnyansky
 //
 
-    DEFINE_STATIC_KEY_FALSE(cpusets_pre_enable_key);
-    DEFINE_STATIC_KEY_FALSE(cpusets_enabled_key);
+pub static mut cpusets_pre_enable_key: usize = 0;
+pub static mut cpusets_enabled_key: usize = 0;
 //
 // There could be abnormal cpuset configurations for cpu or memory
 // node binding, add this key to provide a quick low-cost judgment
 // of the situation.
 //
-    DEFINE_STATIC_KEY_FALSE(cpusets_insane_config_key);
+pub static mut cpusets_insane_config_key: usize = 0;
     static const char * const perr_strings[] = {
     [PERR_INVCPUS]   = "Invalid cpu list in cpuset.cpus.exclusive",
     [PERR_INVPARENT] = "Parent is an invalid partition root",
@@ -129,8 +379,8 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // small pieces of code, such as when reading out possibly multi-word
 // cpumasks and nodemasks.
 //
-    static DEFINE_MUTEX(cpuset_top_mutex);
-    static DEFINE_MUTEX(cpuset_mutex);
+pub static mut cpuset_top_mutex: usize = 0;
+pub static mut cpuset_mutex: usize = 0;
 //
 // File level internal variables below follow one of the following exclusion
 // rules.
@@ -220,40 +470,30 @@ pub const PRS_ISOLATED: c_int = 2;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct tmpmasks {
-    pub /: *mut *mut cpumask_var_t addmask, delmask; / For partition root,
-    pub /: *mut *mut cpumask_var_t new_cpus; / For update_cpumasks_hier(),
+//     pub /: *mut *mut cpumask_var_t addmask, delmask; / For partition root,
+//     pub /: *mut *mut cpumask_var_t new_cpus; / For update_cpumasks_hier(),
 }
 
 #[no_mangle]
 pub unsafe extern "C" fn inc_dl_tasks_cs(p: *mut task_struct) {
-    void inc_dl_tasks_cs(struct task_struct *p)
-    {
-    struct cpuset *cs = task_cs(p);
+    let mut cs = task_cs(p);
     atomic_inc(&cs.nr_deadline_tasks);
     }
 #[no_mangle]
 pub unsafe extern "C" fn dec_dl_tasks_cs(p: *mut task_struct) {
-    void dec_dl_tasks_cs(struct task_struct *p)
-    {
-    struct cpuset *cs = task_cs(p);
+    let mut cs = task_cs(p);
     atomic_dec(&cs.nr_deadline_tasks);
     }
 #[no_mangle]
 pub unsafe extern "C" fn is_partition_valid(cs: *const cpuset) -> bool {
-    static inline bool is_partition_valid(const struct cpuset *cs)
-    {
     return cs.partition_root_state > 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn is_partition_invalid(cs: *const cpuset) -> bool {
-    static inline bool is_partition_invalid(const struct cpuset *cs)
-    {
     return cs.partition_root_state < 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn cs_is_member(cs: *const cpuset) -> bool {
-    static inline bool cs_is_member(const struct cpuset *cs)
-    {
     return cs.partition_root_state == PRS_MEMBER;
     }
 //
@@ -261,24 +501,23 @@ pub unsafe extern "C" fn cs_is_member(cs: *const cpuset) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn make_partition_invalid(cs: *mut cpuset) {
-    static inline void make_partition_invalid(struct cpuset *cs)
-    {
-    if (cs.partition_root_state > 0)
+    if (cs.partition_root_state > 0) {
     cs.partition_root_state = -cs.partition_root_state;
+    }
     }
 //
 // Send notification event of whenever partition_root_state changes.
 //
 #[no_mangle]
 pub unsafe extern "C" fn notify_partition_change(cs: *mut cpuset, old_prs: c_int) {
-    static inline void notify_partition_change(struct cpuset *cs, int old_prs)
-    {
-    if (old_prs == cs.partition_root_state)
+    if (old_prs == cs.partition_root_state) {
     return;
+    }
     cgroup_file_notify(&cs.partition_file);
 // Reset prs_err if not invalid
-    if (is_partition_valid(cs))
+    if (is_partition_valid(cs)) {
     WRITE_ONCE(cs.prs_err, PERR_NONE);
+    }
     }
 //
 // The top_cpuset is always synchronized to cpu_active_mask and we should avoid
@@ -294,12 +533,7 @@ pub unsafe extern "C" fn notify_partition_change(cs: *mut cpuset, old_prs: c_int
 // If cpu_online_mask is used while a hotunplug operation is happening in
 // parallel, we may leave an offline CPU in cpu_allowed or some other masks.
 //
-    struct cpuset top_cpuset = {
-    .flags = BIT(CS_CPU_EXCLUSIVE) |
-    BIT(CS_MEM_EXCLUSIVE) | BIT(CS_SCHED_LOAD_BALANCE),
-    .partition_root_state = PRS_ROOT,
-    .dl_bw_cpu = -1,
-    };
+pub static mut cpuset: usize = 0;
 //
 // cpuset_lock - Acquire the global cpuset mutex
 //
@@ -308,20 +542,14 @@ pub unsafe extern "C" fn notify_partition_change(cs: *mut cpuset, old_prs: c_int
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpuset_lock() {
-    void cpuset_lock(void)
-    {
     mutex_lock(&cpuset_mutex);
     }
 #[no_mangle]
 pub unsafe extern "C" fn cpuset_unlock() {
-    void cpuset_unlock(void)
-    {
     mutex_unlock(&cpuset_mutex);
     }
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_assert_cpuset_lock_held() {
-    void lockdep_assert_cpuset_lock_held(void)
-    {
     lockdep_assert_held(&cpuset_mutex);
     }
 //
@@ -332,16 +560,12 @@ pub unsafe extern "C" fn lockdep_assert_cpuset_lock_held() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpuset_full_lock() {
-    void cpuset_full_lock(void)
-    {
     mutex_lock(&cpuset_top_mutex);
     cpus_read_lock();
     mutex_lock(&cpuset_mutex);
     }
 #[no_mangle]
 pub unsafe extern "C" fn cpuset_full_unlock() {
-    void cpuset_full_unlock(void)
-    {
     mutex_unlock(&cpuset_mutex);
     cpus_read_unlock();
     mutex_unlock(&cpuset_top_mutex);
@@ -349,55 +573,47 @@ pub unsafe extern "C" fn cpuset_full_unlock() {
 
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_is_cpuset_held() -> bool {
-    bool lockdep_is_cpuset_held(void)
-    {
     return lockdep_is_held(&cpuset_mutex) ||
     lockdep_is_held(&cpuset_top_mutex);
     }
 
-    static DEFINE_SPINLOCK(callback_lock);
+pub static mut callback_lock: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn cpuset_callback_lock_irq() {
-    void cpuset_callback_lock_irq(void)
-    {
     spin_lock_irq(&callback_lock);
     }
 #[no_mangle]
 pub unsafe extern "C" fn cpuset_callback_unlock_irq() {
-    void cpuset_callback_unlock_irq(void)
-    {
     spin_unlock_irq(&callback_lock);
     }
-    static struct workqueue_struct *cpuset_migrate_mm_wq;
-    static DECLARE_WAIT_QUEUE_HEAD(cpuset_attach_wq);
+pub static mut cpuset_migrate_mm_wq: *mut c_void = core::ptr::null_mut();
+pub static mut cpuset_attach_wq: usize = 0;
 //
 // Cpuset task attach context
 // Protected by cpuset_mutex
 //
     static struct {
-    int in_progress;
-    bool cpus_updated;
-    bool mems_updated;
-    bool task_work_queued;
-    bool many_dest_cs;	/* Have many destination cpusets */
-    struct cpuset *old_cs;	/* Source cpuset */
-    nodemask_t nodemask_to;
+    let mut in_progress = 0;
+    let mut cpus_updated = 0;
+    let mut mems_updated = 0;
+    let mut task_work_queued = 0;
+    let mut many_dest_cs = 0;	/* Have many destination cpusets */
+pub static mut old_cs: *mut c_void = core::ptr::null_mut();	/* Source cpuset */
+    let mut nodemask_to;
     } attach_ctx;
-    static LLIST_HEAD(src_cs_head);
-    static LLIST_HEAD(dst_cs_head);
+pub static mut src_cs_head: usize = 0;
+pub static mut dst_cs_head: usize = 0;
 //
 // Wait if task attach is in progress until it is done and then acquire
 // cpuset_mutex before returning.
 //
 #[no_mangle]
 unsafe extern "C" fn wait_attach_done_lock() {
-    static void wait_attach_done_lock(void)
-    __acquires(&cpuset_mutex)
-    {
     for (;;) {
     mutex_lock(&cpuset_mutex);
-    if (!attach_ctx.in_progress)
+    if (!attach_ctx.in_progress) {
     return;
+    }
     mutex_unlock(&cpuset_mutex);
 // Wait until attach operation is done to prevent racing
     wait_event(cpuset_attach_wq, attach_ctx.in_progress == 0);
@@ -405,12 +621,10 @@ unsafe extern "C" fn wait_attach_done_lock() {
     }
 #[no_mangle]
 pub unsafe extern "C" fn check_insane_mems_config(nodes: *mut nodemask_t) {
-    static inline void check_insane_mems_config(nodemask_t *nodes)
-    {
     if (!cpusets_insane_config() &&
     movable_only_nodes(nodes)) {
     static_branch_enable_cpuslocked(&cpusets_insane_config_key);
-    pr_info("Unsupported (movable nodes only) cpuset configuration detected (nmask=%*pbl)!\n"
+    pr_info!("Unsupported (movable nodes only) cpuset configuration detected (nmask=%*pbl)!\n"
     "Cpuset allocations might fail even with a lot of memory available.\n",
     nodemask_pr_args(nodes));
     }
@@ -421,26 +635,21 @@ pub unsafe extern "C" fn check_insane_mems_config(nodes: *mut nodemask_t) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn dec_attach_in_progress_locked() {
-    static inline void dec_attach_in_progress_locked(void)
-    {
     lockdep_assert_cpuset_lock_held();
-    attach_ctx.in_progress--;
-    if (!attach_ctx.in_progress)
+    attach_ctx.in_progress -= 1;
+    if (!attach_ctx.in_progress) {
     wake_up(&cpuset_attach_wq);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn dec_attach_in_progress() {
-    static inline void dec_attach_in_progress(void)
-    {
     mutex_lock(&cpuset_mutex);
     dec_attach_in_progress_locked();
     mutex_unlock(&cpuset_mutex);
     }
 #[no_mangle]
 pub unsafe extern "C" fn cpuset_v2() -> bool {
-    static inline bool cpuset_v2(void)
-    {
-    return !IS_ENABLED(CONFIG_CPUSETS_V1) ||
+    return !IS_ENABLED!(CONFIG_CPUSETS_V1) ||
     cgroup_subsys_on_dfl(cpuset_cgrp_subsys);
     }
 //
@@ -453,8 +662,6 @@ pub unsafe extern "C" fn cpuset_v2() -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn is_in_v2_mode() -> bool {
-    static inline bool is_in_v2_mode(void)
-    {
     return cpuset_v2() ||
     (cpuset_cgrp_subsys.root.flags & CGRP_ROOT_CPUSET_V2_MODE);
     }
@@ -472,22 +679,23 @@ pub unsafe extern "C" fn is_in_v2_mode() -> bool {
 // or remote partition. So if a non-partition root child is populated,
 // the whole partition is considered populated.
 //
-    static inline bool partition_is_populated(struct cpuset *cs,
-    struct cpuset *excluded_child)
-    {
-    struct cpuset *cp;
-    struct cgroup_subsys_state *pos_css;
+#[no_mangle]
+pub unsafe extern "C" fn partition_is_populated(cs: *mut cpuset, excluded_child: *mut cpuset) -> bool {
+pub static mut cp: *mut c_void = core::ptr::null_mut();
+pub static mut pos_css: *mut c_void = core::ptr::null_mut();
 //
 // We cannot call cs_is_populated(cs) directly, as
 // nr_populated_domain_children may include populated
 // csets from descendants that are partitions.
 //
-    if (cgroup_has_tasks(cs.css.cgroup))
+    if (cgroup_has_tasks(cs.css.cgroup)) {
     return true;
+    }
     rcu_read_lock();
     cpuset_for_each_descendant_pre(cp, pos_css, cs) {
-    if (cp == cs || cp == excluded_child)
+    if (cp == cs || cp == excluded_child) {
     continue;
+    }
     if (is_partition_valid(cp)) {
     pos_css = css_rightmost_descendant(pos_css);
     continue;
@@ -511,17 +719,18 @@ pub unsafe extern "C" fn is_in_v2_mode() -> bool {
 //
 // Call with callback_lock or cpuset_mutex held.
 //
-    static void guarantee_active_cpus(struct task_struct *tsk,
-    struct cpumask *pmask)
-    {
-    const struct cpumask *possible_mask = task_cpu_possible_mask(tsk);
-    struct cpuset *cs;
-    if (WARN_ON(!cpumask_and(pmask, possible_mask, cpu_active_mask)))
+#[no_mangle]
+pub unsafe extern "C" fn guarantee_active_cpus(tsk: *mut task_struct, pmask: *mut cpumask) {
+    let mut possible_mask = task_cpu_possible_mask(tsk);
+pub static mut cs: *mut c_void = core::ptr::null_mut();
+    if (WARN_ON!(!cpumask_and(pmask, possible_mask, cpu_active_mask))) {
     cpumask_copy(pmask, cpu_active_mask);
+    }
     rcu_read_lock();
     cs = task_cs(tsk);
-    while (!cpumask_intersects(cs.effective_cpus, pmask))
+    while (!cpumask_intersects(cs.effective_cpus, pmask)) {
     cs = parent_cs(cs);
+    }
     cpumask_and(pmask, pmask, cs.effective_cpus);
     rcu_read_unlock();
     }
@@ -541,10 +750,9 @@ pub unsafe extern "C" fn is_in_v2_mode() -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn guarantee_online_mems(cs: *mut cpuset, pmask: *mut nodemask_t) {
-    static void guarantee_online_mems(struct cpuset *cs, nodemask_t *pmask)
-    {
-    while (!nodes_and(*pmask, cs.effective_mems, node_states[N_MEMORY]))
+    while (!nodes_and(*pmask, cs.effective_mems, node_states[N_MEMORY])) {
     cs = parent_cs(cs);
+    }
     }
 //
 // alloc_cpumasks - Allocate an array of cpumask variables
@@ -558,13 +766,12 @@ unsafe extern "C" fn guarantee_online_mems(cs: *mut cpuset, pmask: *mut nodemask
 //
 #[no_mangle]
 pub unsafe extern "C" fn alloc_cpumasks(pmasks[]: *mut cpumask_var_t, size: u32) -> c_int {
-    static inline int alloc_cpumasks(cpumask_var_t *pmasks[], u32 size)
-    {
-    int i;
-    for (i = 0; i < size; i++) {
+    let mut i = 0;
+    while (i < size) {
     if (!zalloc_cpumask_var(pmasks[i], GFP_KERNEL)) {
-    while (--i >= 0)
+    while (--i >= 0) {
     free_cpumask_var(*pmasks[i]);
+    }
     return -ENOMEM;
     }
     }
@@ -577,8 +784,6 @@ pub unsafe extern "C" fn alloc_cpumasks(pmasks[]: *mut cpumask_var_t, size: u32)
 //
 #[no_mangle]
 pub unsafe extern "C" fn alloc_tmpmasks(tmp: *mut tmpmasks) -> c_int {
-    static inline int alloc_tmpmasks(struct tmpmasks *tmp)
-    {
 //
 // Array of pointers to the three cpumask_var_t fields in tmpmasks.
 // Note: Array size must match actual number of masks (3)
@@ -588,7 +793,7 @@ pub unsafe extern "C" fn alloc_tmpmasks(tmp: *mut tmpmasks) -> c_int {
     &tmp.addmask,
     &tmp.delmask
     };
-    return alloc_cpumasks(pmask, ARRAY_SIZE(pmask));
+    return alloc_cpumasks(pmask, ARRAY_SIZE!(pmask));
     }
 //
 // free_tmpmasks - free cpumasks in a tmpmasks structure
@@ -596,10 +801,9 @@ pub unsafe extern "C" fn alloc_tmpmasks(tmp: *mut tmpmasks) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn free_tmpmasks(tmp: *mut tmpmasks) {
-    static inline void free_tmpmasks(struct tmpmasks *tmp)
-    {
-    if (!tmp)
+    if (!tmp) {
     return;
+    }
     free_cpumask_var(tmp.new_cpus);
     free_cpumask_var(tmp.addmask);
     free_cpumask_var(tmp.delmask);
@@ -614,14 +818,15 @@ pub unsafe extern "C" fn free_tmpmasks(tmp: *mut tmpmasks) {
 //
 // Return: Pointer to newly allocated cpuset on success, NULL on failure
 //
-    static struct cpuset *dup_or_alloc_cpuset(struct cpuset *cs)
-    {
-    struct cpuset *trial;
+#[no_mangle]
+pub unsafe extern "C" fn dup_or_alloc_cpuset(cs: *mut cpuset) -> *mut c_void {
+pub static mut trial: *mut c_void = core::ptr::null_mut();
 // Allocate base structure
-    trial = cs ? kmemdup(cs, sizeof(*cs), GFP_KERNEL) :
+    trial = cs ? kmemdup(cs, sizeof!(*cs), GFP_KERNEL) :
     kzalloc_obj(*cs);
-    if (!trial)
+    if (!trial) {
     return core::ptr::null_mut();
+    }
     trial.dl_bw_cpu = -1;
     init_llist_node(&trial.attach_node);
 // Setup cpumask pointer array
@@ -631,7 +836,7 @@ pub unsafe extern "C" fn free_tmpmasks(tmp: *mut tmpmasks) {
     &trial.effective_xcpus,
     &trial.exclusive_cpus
     };
-    if (alloc_cpumasks(pmask, ARRAY_SIZE(pmask))) {
+    if (alloc_cpumasks(pmask, ARRAY_SIZE!(pmask))) {
     kfree(trial);
     return core::ptr::null_mut();
     }
@@ -650,8 +855,6 @@ pub unsafe extern "C" fn free_tmpmasks(tmp: *mut tmpmasks) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn free_cpuset(cs: *mut cpuset) {
-    static inline void free_cpuset(struct cpuset *cs)
-    {
     free_cpumask_var(cs.cpus_allowed);
     free_cpumask_var(cs.effective_cpus);
     free_cpumask_var(cs.effective_xcpus);
@@ -659,15 +862,13 @@ pub unsafe extern "C" fn free_cpuset(cs: *mut cpuset) {
     kfree(cs);
     }
 // Return user specified exclusive CPUs
-    static inline struct cpumask *user_xcpus(struct cpuset *cs)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn user_xcpus(cs: *mut cpuset) -> *mut c_void {
     return cpumask_empty(cs.exclusive_cpus) ? cs.cpus_allowed
     : cs.exclusive_cpus;
     }
 #[no_mangle]
 pub unsafe extern "C" fn xcpus_empty(cs: *mut cpuset) -> bool {
-    static inline bool xcpus_empty(struct cpuset *cs)
-    {
     return cpumask_empty(cs.cpus_allowed) &&
     cpumask_empty(cs.exclusive_cpus);
     }
@@ -678,12 +879,11 @@ pub unsafe extern "C" fn xcpus_empty(cs: *mut cpuset) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpusets_are_exclusive(cs1: *mut cpuset, cs2: *mut cpuset) -> bool {
-    static inline bool cpusets_are_exclusive(struct cpuset *cs1, struct cpuset *cs2)
-    {
-    struct cpumask *xcpus1 = user_xcpus(cs1);
-    struct cpumask *xcpus2 = user_xcpus(cs2);
-    if (cpumask_intersects(xcpus1, xcpus2))
+    let mut xcpus1 = user_xcpus(cs1);
+    let mut xcpus2 = user_xcpus(cs2);
+    if (cpumask_intersects(xcpus1, xcpus2)) {
     return false;
+    }
     return true;
     }
 //
@@ -701,24 +901,24 @@ pub unsafe extern "C" fn cpusets_are_exclusive(cs1: *mut cpuset, cs2: *mut cpuse
 // - The exclusive_cpus values cannot overlap.
 // - New exclusive_cpus cannot be a superset of a sibling's cpus_allowed.
 //
-    static inline bool cpus_excl_conflict(struct cpuset *trial, struct cpuset *sibling,
-    bool xcpus_changed)
-    {
-    if (!cpuset_v2())
+#[no_mangle]
+pub unsafe extern "C" fn cpus_excl_conflict(trial: *mut cpuset, sibling: *mut cpuset, xcpus_changed: bool) -> bool {
+    if (!cpuset_v2()) {
     return cpuset1_cpus_excl_conflict(trial, sibling);
+    }
 // The cpus_allowed of a sibling cpuset cannot be a subset of the new exclusive_cpus
     if (xcpus_changed && !cpumask_empty(sibling.cpus_allowed) &&
-    cpumask_subset(sibling.cpus_allowed, trial.exclusive_cpus))
+    cpumask_subset(sibling.cpus_allowed, trial.exclusive_cpus)) {
     return true;
+    }
 // Exclusive_cpus cannot intersect
     return cpumask_intersects(trial.exclusive_cpus, sibling.exclusive_cpus);
     }
 #[no_mangle]
 pub unsafe extern "C" fn mems_excl_conflict(cs1: *mut cpuset, cs2: *mut cpuset) -> bool {
-    static inline bool mems_excl_conflict(struct cpuset *cs1, struct cpuset *cs2)
-    {
-    if ((is_mem_exclusive(cs1) || is_mem_exclusive(cs2)))
+    if ((is_mem_exclusive(cs1) || is_mem_exclusive(cs2))) {
     return nodes_intersects(cs1.mems_allowed, cs2.mems_allowed);
+    }
     return false;
     }
 //
@@ -742,20 +942,22 @@ pub unsafe extern "C" fn mems_excl_conflict(cs1: *mut cpuset, cs2: *mut cpuset) 
 //
 #[no_mangle]
 unsafe extern "C" fn validate_change(cur: *mut cpuset, trial: *mut cpuset) -> c_int {
-    static int validate_change(struct cpuset *cur, struct cpuset *trial)
-    {
-    struct cgroup_subsys_state *css;
-    struct cpuset *c, *par;
-    bool xcpus_changed;
-    let mut ret: c_int = 0;
+pub static mut css: *mut c_void = core::ptr::null_mut();
+    let mut c = core::ptr::null_mut();
+    let mut par = core::ptr::null_mut();
+    let mut xcpus_changed = 0;
+pub static mut ret: c_int = 0;
     rcu_read_lock();
-    if (!is_in_v2_mode())
+    if (!is_in_v2_mode()) {
     ret = cpuset1_validate_change(cur, trial);
-    if (ret)
-    goto out;
+    }
+    if (ret) {
+// goto;
+    }
 // Remaining checks don't apply to root cpuset
-    if (cur == &top_cpuset)
-    goto out;
+    if (cur == &top_cpuset) {
+// goto;
+    }
     par = parent_cs(cur);
 //
 // We can't shrink if we won't have enough room for SCHED_DEADLINE
@@ -776,8 +978,9 @@ unsafe extern "C" fn validate_change(cur: *mut cpuset, trial: *mut cpuset) -> c_
 //
     ret = -EBUSY;
     if (is_cpu_exclusive(cur) && is_sched_load_balance(cur) &&
-    !cpuset_cpumask_can_shrink(cur.effective_cpus, user_xcpus(trial)))
-    goto out;
+    !cpuset_cpumask_can_shrink(cur.effective_cpus, user_xcpus(trial))) {
+// goto;
+    }
 //
 // If either I or some sibling (!= me) is exclusive, we can't
 // overlap. exclusive_cpus cannot overlap with each other if set.
@@ -785,15 +988,18 @@ unsafe extern "C" fn validate_change(cur: *mut cpuset, trial: *mut cpuset) -> c_
     ret = -EINVAL;
     xcpus_changed = !cpumask_equal(cur.exclusive_cpus, trial.exclusive_cpus);
     cpuset_for_each_child(c, css, par) {
-    if (c == cur)
+    if (c == cur) {
     continue;
-    if (cpus_excl_conflict(trial, c, xcpus_changed))
-    goto out;
-    if (mems_excl_conflict(trial, c))
-    goto out;
+    }
+    if (cpus_excl_conflict(trial, c, xcpus_changed)) {
+// goto;
+    }
+    if (mems_excl_conflict(trial, c)) {
+// goto;
+    }
     }
     ret = 0;
-    out:
+// label;
     rcu_read_unlock();
     return ret;
     }
@@ -837,18 +1043,19 @@ unsafe extern "C" fn validate_change(cur: *mut cpuset, trial: *mut cpuset) -> c_
 // value to determine what partition elements (sched domains)
 // were changed (added or removed.)
 //
-    static int generate_sched_domains(cpumask_var_t **domains,
-    struct sched_domain_attr **attributes)
-    {
-    struct cpuset *cp;	/* top-down scan of cpusets */
-    struct cpuset **csa;	/* array of all cpuset ptrs */
-    int i, j;		/* indices for partition finding loops */
-    cpumask_var_t *doms;	/* resulting partition; i.e. sched domains */
-    struct sched_domain_attr *dattr;  /* attributes for custom domains */
-    int ndoms = 0;		/* number of sched domains in result */
-    struct cgroup_subsys_state *pos_css;
-    if (!cpuset_v2())
+#[no_mangle]
+pub unsafe extern "C" fn generate_sched_domains(domains: *mut *mut cpumask_var_t, attributes: *mut *mut sched_domain_attr) -> c_int {
+pub static mut cp: *mut c_void = core::ptr::null_mut();	/* top-down scan of cpusets */
+pub static mut csa: *mut c_void = core::ptr::null_mut();	/* array of all cpuset ptrs */
+    let mut i = 0;
+    let mut j = 0;		/* indices for partition finding loops */
+pub static mut doms: *mut c_void = core::ptr::null_mut();	/* resulting partition; i.e. sched domains */
+pub static mut dattr: *mut c_void = core::ptr::null_mut();  /* attributes for custom domains */
+    let mut ndoms = 0;		/* number of sched domains in result */
+pub static mut pos_css: *mut c_void = core::ptr::null_mut();
+    if (!cpuset_v2()) {
     return cpuset1_generate_sched_domains(domains, attributes);
+    }
     doms = core::ptr::null_mut();
     dattr = core::ptr::null_mut();
     csa = core::ptr::null_mut();
@@ -856,11 +1063,12 @@ unsafe extern "C" fn validate_change(cur: *mut cpuset, trial: *mut cpuset) -> c_
     if (cpumask_empty(subpartitions_cpus)) {
     ndoms = 1;
 // !csa will be checked and can be correctly handled
-    goto generate_doms;
+// goto;
     }
     csa = kmalloc_objs(cp, nr_cpusets());
-    if (!csa)
-    goto done;
+    if (!csa) {
+// goto;
+    }
 // Find how many partitions and cache them to csa[]
     rcu_read_lock();
     cpuset_for_each_descendant_pre(cp, pos_css, &top_cpuset) {
@@ -869,93 +1077,100 @@ unsafe extern "C" fn validate_change(cur: *mut cpuset, trial: *mut cpuset) -> c_
 // non-empty effective_cpus will be saved into csa[].
 //
     if ((cp.partition_root_state == PRS_ROOT) &&
-    !cpumask_empty(cp.effective_cpus))
+    !cpumask_empty(cp.effective_cpus)) {
     csa[ndoms++] = cp;
+    }
 //
 // Skip @cp's subtree if not a partition root and has no
 // exclusive CPUs to be granted to child cpusets.
 //
-    if (!is_partition_valid(cp) && cpumask_empty(cp.exclusive_cpus))
+    if (!is_partition_valid(cp) && cpumask_empty(cp.exclusive_cpus)) {
     pos_css = css_rightmost_descendant(pos_css);
     }
+    }
     rcu_read_unlock();
-    for (i = 0; i < ndoms; i++) {
-    for (j = i + 1; j < ndoms; j++) {
-    if (cpusets_overlap(csa[i], csa[j]))
+    while (i < ndoms) {
+    while (j < ndoms) {
+    if (cpusets_overlap(csa[i], csa[j])) {
 //
 // Cgroup v2 shouldn't pass down overlapping
 // partition root cpusets.
 //
-    WARN_ON_ONCE(1);
+    WARN_ON_ONCE!(1);
     }
     }
-    generate_doms:
+    }
+// label;
     doms = alloc_sched_domains(ndoms);
-    if (!doms)
-    goto done;
+    if (!doms) {
+// goto;
+    }
 //
 // The rest of the code, including the scheduler, can deal with
 // dattr==NULL case. No need to abort if alloc fails.
 //
-    dattr = kmalloc_objs(struct sched_domain_attr, ndoms);
+    dattr = kmalloc_objs(sched_domain_attr, ndoms);
 //
 // Cgroup v2 doesn't support domain attributes, just set all of them
 // to SD_ATTR_INIT. Also non-isolating partition root CPUs are a
 // subset of HK_TYPE_DOMAIN_BOOT housekeeping CPUs.
 //
-    for (i = 0; i < ndoms; i++) {
+    while (i < ndoms) {
 //
 // The top cpuset may contain some boot time isolated
 // CPUs that need to be excluded from the sched domain.
 //
-    if (!csa || csa[i] == &top_cpuset)
+    if (!csa || csa[i] == &top_cpuset) {
     cpumask_and(doms[i], top_cpuset.effective_cpus,
     housekeeping_cpumask(HK_TYPE_DOMAIN_BOOT));
-    else
+    }
+    else {
     cpumask_copy(doms[i], csa[i].effective_cpus);
-    if (dattr)
+    }
+    if (dattr) {
     dattr[i] = SD_ATTR_INIT;
     }
-    done:
+    }
+// label;
     kfree(csa);
 //
 // Fallback to the default domain if kmalloc() failed.
 // See comments in partition_sched_domains().
 //
-    if (doms == core::ptr::null_mut())
+    if (doms == core::ptr::null_mut()) {
     ndoms = 1;
+    }
 // domains    = doms;
 // attributes = dattr;
     return ndoms;
     }
 #[no_mangle]
 unsafe extern "C" fn dl_update_tasks_root_domain(cs: *mut cpuset) {
-    static void dl_update_tasks_root_domain(struct cpuset *cs)
-    {
-    struct css_task_iter it;
-    struct task_struct *task;
-    if (atomic_read(&cs.nr_deadline_tasks) == 0)
+pub static mut it: usize = 0;
+pub static mut task: *mut c_void = core::ptr::null_mut();
+    if (atomic_read(&cs.nr_deadline_tasks) == 0) {
     return;
+    }
     css_task_iter_start(&cs.css, 0, &it);
-    while ((task = css_task_iter_next(&it)))
+    while ((task = css_task_iter_next(&it))) {
     dl_add_task_root_domain(task);
+    }
     css_task_iter_end(&it);
     }
 #[no_mangle]
 pub unsafe extern "C" fn dl_rebuild_rd_accounting() {
-    void dl_rebuild_rd_accounting(void)
-    {
-    struct cpuset *cs = core::ptr::null_mut();
-    struct cgroup_subsys_state *pos_css;
-    int cpu;
-    let mut cookie: u64 = ++dl_cookie;
+    let mut cs = core::ptr::null_mut();
+pub static mut pos_css: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
+pub static mut cookie: u64 = 0;
     lockdep_assert_cpuset_lock_held();
     lockdep_assert_cpus_held();
     lockdep_assert_held(&sched_domains_mutex);
     rcu_read_lock();
     for_each_possible_cpu(cpu) {
-    if (dl_bw_visited(cpu, cookie))
+    if (dl_bw_visited(cpu, cookie)) {
     continue;
+    }
     dl_clear_root_domain_cpu(cpu);
     }
     cpuset_for_each_descendant_pre(cs, pos_css, &top_cpuset) {
@@ -984,12 +1199,10 @@ pub unsafe extern "C" fn dl_rebuild_rd_accounting() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn rebuild_sched_domains_locked() {
-    void rebuild_sched_domains_locked(void)
-    {
-    struct sched_domain_attr *attr;
-    cpumask_var_t *doms;
-    int ndoms;
-    int i;
+pub static mut attr: *mut c_void = core::ptr::null_mut();
+pub static mut doms: *mut c_void = core::ptr::null_mut();
+    let mut ndoms = 0;
+    let mut i = 0;
     lockdep_assert_cpus_held();
     lockdep_assert_cpuset_lock_held();
     force_sd_rebuild = false;
@@ -1005,8 +1218,8 @@ pub unsafe extern "C" fn rebuild_sched_domains_locked() {
 // offline CPUs, a warning is emitted and we return directly to
 // prevent the panic.
 //
-    for (i = 0; doms && i < ndoms; i++) {
-    if (WARN_ON_ONCE(!cpumask_subset(doms[i], cpu_active_mask))) {
+    while (doms && i < ndoms) {
+    if (WARN_ON_ONCE!(!cpumask_subset(doms[i], cpu_active_mask))) {
     free_sched_domains(doms, ndoms);
     kfree(attr);
     return;
@@ -1017,31 +1230,25 @@ pub unsafe extern "C" fn rebuild_sched_domains_locked() {
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn rebuild_sched_domains_locked() {
-    void rebuild_sched_domains_locked(void)
-    {
+#[no_mangle]
+// duplicate fn: rebuild_sched_domains_locked
+pub unsafe extern "C" fn rebuild_sched_domains_locked_dup() {
     }
 
 #[no_mangle]
 unsafe extern "C" fn rebuild_sched_domains_cpuslocked() {
-    static void rebuild_sched_domains_cpuslocked(void)
-    {
     mutex_lock(&cpuset_mutex);
     rebuild_sched_domains_locked();
     mutex_unlock(&cpuset_mutex);
     }
 #[no_mangle]
 pub unsafe extern "C" fn rebuild_sched_domains() {
-    void rebuild_sched_domains(void)
-    {
     cpus_read_lock();
     rebuild_sched_domains_cpuslocked();
     cpus_read_unlock();
     }
 #[no_mangle]
 pub unsafe extern "C" fn cpuset_reset_sched_domains() {
-    void cpuset_reset_sched_domains(void)
-    {
     mutex_lock(&cpuset_mutex);
     partition_sched_domains(1, core::ptr::null_mut(), core::ptr::null_mut());
     mutex_unlock(&cpuset_mutex);
@@ -1064,21 +1271,20 @@ pub unsafe extern "C" fn cpuset_reset_sched_domains() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpuset_update_tasks_cpumask(cs: *mut cpuset, new_cpus: *mut cpumask) {
-    void cpuset_update_tasks_cpumask(struct cpuset *cs, struct cpumask *new_cpus)
-    {
-    struct css_task_iter it;
-    struct task_struct *task;
-    let mut top_cs: bool = cs == &top_cpuset;
+pub static mut it: usize = 0;
+pub static mut task: *mut c_void = core::ptr::null_mut();
+pub static mut top_cs: bool = false;
     css_task_iter_start(&cs.css, 0, &it);
     while ((task = css_task_iter_next(&it))) {
-    const struct cpumask *possible_mask = task_cpu_possible_mask(task);
+    let mut possible_mask = task_cpu_possible_mask(task);
     if (top_cs) {
 //
 // PF_KTHREAD tasks are handled by housekeeping.
 // PF_NO_SETAFFINITY tasks are ignored.
 //
-    if (task.flags & (PF_KTHREAD | PF_NO_SETAFFINITY))
+    if (task.flags & (PF_KTHREAD | PF_NO_SETAFFINITY)) {
     continue;
+    }
     cpumask_andnot(new_cpus, possible_mask, subpartitions_cpus);
     } else {
     cpumask_and(new_cpus, possible_mask, cs.effective_cpus);
@@ -1096,13 +1302,13 @@ pub unsafe extern "C" fn cpuset_update_tasks_cpumask(cs: *mut cpuset, new_cpus: 
 // For v2, the parent's effective_cpus is inherited if cpumask is empty.
 // The result is valid only if the given cpuset isn't a partition root.
 //
-    static void compute_effective_cpumask(struct cpumask *new_cpus,
-    struct cpuset *cs, struct cpuset *parent)
-    {
-    bool has_cpus;
+#[no_mangle]
+pub unsafe extern "C" fn compute_effective_cpumask(new_cpus: *mut cpumask, cs: *mut cpuset, parent: *mut cpuset) {
+    let mut has_cpus = 0;
     has_cpus = cpumask_and(new_cpus, cs.cpus_allowed, parent.effective_cpus);
-    if (!has_cpus && is_in_v2_mode())
+    if (!has_cpus && is_in_v2_mode()) {
     cpumask_copy(new_cpus, parent.effective_cpus);
+    }
     }
 //
 // compute_effective_nodemask - Compute the effective nodemask of the cpuset
@@ -1112,13 +1318,13 @@ pub unsafe extern "C" fn cpuset_update_tasks_cpumask(cs: *mut cpuset, new_cpus: 
 //
 // For v2, the parent's effective_mems is inherited if nodemask is empty.
 //
-    static void compute_effective_nodemask(nodemask_t *new_mems,
-    struct cpuset *cs, struct cpuset *parent)
-    {
-    bool has_mems;
+#[no_mangle]
+pub unsafe extern "C" fn compute_effective_nodemask(new_mems: *mut nodemask_t, cs: *mut cpuset, parent: *mut cpuset) {
+    let mut has_mems = 0;
     has_mems = nodes_and(*new_mems, cs.mems_allowed, parent.effective_mems);
-    if (!has_mems && is_in_v2_mode())
+    if (!has_mems && is_in_v2_mode()) {
     nodes_copy(*new_mems, parent.effective_mems);
+    }
     }
 //
 // Commands for update_parent_effective_cpumask
@@ -1130,8 +1336,7 @@ pub unsafe extern "C" fn cpuset_update_tasks_cpumask(cs: *mut cpuset, new_cpus: 
     partcmd_update,		/* Update parent's effective_cpus */
     partcmd_invalidate,	/* Make partition invalid	  */
     };
-    static void update_sibling_cpumasks(struct cpuset *parent, struct cpuset *cs,
-    struct tmpmasks *tmp);
+// forward_decl: update_sibling_cpumasks;
 //
 // Update partition exclusive flag
 //
@@ -1139,12 +1344,11 @@ pub unsafe extern "C" fn cpuset_update_tasks_cpumask(cs: *mut cpuset, new_cpus: 
 //
 #[no_mangle]
 unsafe extern "C" fn update_partition_exclusive_flag(cs: *mut cpuset, new_prs: c_int) -> c_int {
-    static int update_partition_exclusive_flag(struct cpuset *cs, int new_prs)
-    {
-    let mut exclusive: bool = (new_prs > PRS_MEMBER);
+pub static mut exclusive: bool = false;
     if (exclusive && !is_cpu_exclusive(cs)) {
-    if (cpuset_update_flag(CS_CPU_EXCLUSIVE, cs, 1))
+    if (cpuset_update_flag(CS_CPU_EXCLUSIVE, cs, 1)) {
     return PERR_NOTEXCL;
+    }
     } else if (!exclusive && is_cpu_exclusive(cs)) {
 // Turning off CS_CPU_EXCLUSIVE will not return error
     cpuset_update_flag(CS_CPU_EXCLUSIVE, cs, 0);
@@ -1160,11 +1364,9 @@ unsafe extern "C" fn update_partition_exclusive_flag(cs: *mut cpuset, new_prs: c
 //
 #[no_mangle]
 unsafe extern "C" fn update_partition_sd_lb(cs: *mut cpuset, old_prs: c_int) {
-    static void update_partition_sd_lb(struct cpuset *cs, int old_prs)
-    {
-    let mut new_prs: c_int = cs.partition_root_state;
-    let mut rebuild_domains: bool = (new_prs > 0) || (old_prs > 0);
-    bool new_lb;
+pub static mut new_prs: c_int = 0;
+pub static mut rebuild_domains: bool = false;
+    let mut new_lb = 0;
 //
 // If cs is not a valid partition root, the load balance state
 // will follow its parent.
@@ -1176,20 +1378,22 @@ unsafe extern "C" fn update_partition_sd_lb(cs: *mut cpuset, old_prs: c_int) {
     }
     if (new_lb != !!is_sched_load_balance(cs)) {
     rebuild_domains = true;
-    if (new_lb)
+    if (new_lb) {
     set_bit(CS_SCHED_LOAD_BALANCE, &cs.flags);
-    else
+    }
+    else {
     clear_bit(CS_SCHED_LOAD_BALANCE, &cs.flags);
     }
-    if (rebuild_domains)
+    }
+    if (rebuild_domains) {
     cpuset_force_rebuild();
+    }
     }
 //
 // tasks_nocpu_error - Return true if tasks will have no effective_cpus
 //
-    static bool tasks_nocpu_error(struct cpuset *parent, struct cpuset *cs,
-    struct cpumask *xcpus)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn tasks_nocpu_error(parent: *mut cpuset, cs: *mut cpuset, xcpus: *mut cpumask) -> bool {
 //
 // A populated partition (cs or parent) can't have empty effective_cpus
 //
@@ -1200,38 +1404,39 @@ unsafe extern "C" fn update_partition_sd_lb(cs: *mut cpuset, old_prs: c_int) {
     }
 #[no_mangle]
 unsafe extern "C" fn reset_partition_data(cs: *mut cpuset) {
-    static void reset_partition_data(struct cpuset *cs)
-    {
-    struct cpuset *parent = parent_cs(cs);
-    if (!cpuset_v2())
+    let mut parent = parent_cs(cs);
+    if (!cpuset_v2()) {
     return;
+    }
     lockdep_assert_held(&callback_lock);
     if (cpumask_empty(cs.exclusive_cpus)) {
     cpumask_clear(cs.effective_xcpus);
-    if (is_cpu_exclusive(cs))
+    if (is_cpu_exclusive(cs)) {
     clear_bit(CS_CPU_EXCLUSIVE, &cs.flags);
     }
-    if (!cpumask_and(cs.effective_cpus, parent.effective_cpus, cs.cpus_allowed))
+    }
+    if (!cpumask_and(cs.effective_cpus, parent.effective_cpus, cs.cpus_allowed)) {
     cpumask_copy(cs.effective_cpus, parent.effective_cpus);
+    }
     }
 // Return true if isolated_cpus changes.
 #[no_mangle]
 unsafe extern "C" fn isolated_cpu_update(new_prs: c_int, cpu: c_int) -> bool {
-    static bool isolated_cpu_update(int new_prs, int cpu)
-    {
     lockdep_assert_held(&callback_lock);
     lockdep_assert_held(&cpuset_mutex);
     if (new_prs == PRS_ISOLATED) {
-    if (cpumask_test_cpu(cpu, isolated_cpus))
+    if (cpumask_test_cpu(cpu, isolated_cpus)) {
     return false;
+    }
     cpumask_set_cpu(cpu, isolated_cpus);
     return true;
     }
 // CPUs isolated at boot must remain isolated.
     if (!cpumask_test_cpu(cpu,
     housekeeping_cpumask(HK_TYPE_DOMAIN_BOOT)) ||
-    !cpumask_test_cpu(cpu, isolated_cpus))
+    !cpumask_test_cpu(cpu, isolated_cpus)) {
     return false;
+    }
     cpumask_clear_cpu(cpu, isolated_cpus);
     return true;
     }
@@ -1243,17 +1448,17 @@ unsafe extern "C" fn isolated_cpu_update(new_prs: c_int, cpu: c_int) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn isolated_cpus_update(old_prs: c_int, new_prs: c_int, xcpus: *mut cpumask) {
-    static void isolated_cpus_update(int old_prs, int new_prs, struct cpumask *xcpus)
-    {
-    let mut updated: bool = false;
-    int cpu;
-    WARN_ON_ONCE(old_prs == new_prs);
+pub static mut updated: bool = false;
+    let mut cpu = 0;
+    WARN_ON_ONCE!(old_prs == new_prs);
     lockdep_assert_held(&callback_lock);
     lockdep_assert_held(&cpuset_mutex);
-    for_each_cpu(cpu, xcpus)
+    for_each_cpu(cpu, xcpus) {
     updated |= isolated_cpu_update(new_prs, cpu);
-    if (updated)
+    }
+    if (updated) {
     update_housekeeping = true;
+    }
     }
 //
 // partition_xcpus_add - Add new exclusive CPUs to partition
@@ -1263,18 +1468,20 @@ unsafe extern "C" fn isolated_cpus_update(old_prs: c_int, new_prs: c_int, xcpus:
 //
 // Remote partition if parent == NULL
 //
-    static void partition_xcpus_add(int new_prs, struct cpuset *parent,
-    struct cpumask *xcpus)
-    {
-    WARN_ON_ONCE(new_prs < 0);
+#[no_mangle]
+pub unsafe extern "C" fn partition_xcpus_add(new_prs: c_int, parent: *mut cpuset, xcpus: *mut cpumask) {
+    WARN_ON_ONCE!(new_prs < 0);
     lockdep_assert_held(&callback_lock);
-    if (!parent)
+    if (!parent) {
     parent = &top_cpuset;
-    if (parent == &top_cpuset)
+    }
+    if (parent == &top_cpuset) {
     cpumask_or(subpartitions_cpus, subpartitions_cpus, xcpus);
-    if (new_prs != parent.partition_root_state)
+    }
+    if (new_prs != parent.partition_root_state) {
     isolated_cpus_update(parent.partition_root_state, new_prs,
     xcpus);
+    }
     cpumask_andnot(parent.effective_cpus, parent.effective_cpus, xcpus);
     }
 //
@@ -1285,18 +1492,20 @@ unsafe extern "C" fn isolated_cpus_update(old_prs: c_int, new_prs: c_int, xcpus:
 //
 // Remote partition if parent == NULL
 //
-    static void partition_xcpus_del(int old_prs, struct cpuset *parent,
-    struct cpumask *xcpus)
-    {
-    WARN_ON_ONCE(old_prs < 0);
+#[no_mangle]
+pub unsafe extern "C" fn partition_xcpus_del(old_prs: c_int, parent: *mut cpuset, xcpus: *mut cpumask) {
+    WARN_ON_ONCE!(old_prs < 0);
     lockdep_assert_held(&callback_lock);
-    if (!parent)
+    if (!parent) {
     parent = &top_cpuset;
-    if (parent == &top_cpuset)
+    }
+    if (parent == &top_cpuset) {
     cpumask_andnot(subpartitions_cpus, subpartitions_cpus, xcpus);
-    if (old_prs != parent.partition_root_state)
+    }
+    if (old_prs != parent.partition_root_state) {
     isolated_cpus_update(old_prs, parent.partition_root_state,
     xcpus);
+    }
     cpumask_or(parent.effective_cpus, parent.effective_cpus, xcpus);
     cpumask_and(parent.effective_cpus, parent.effective_cpus, cpu_active_mask);
     }
@@ -1312,24 +1521,27 @@ unsafe extern "C" fn isolated_cpus_update(old_prs: c_int, new_prs: c_int, xcpus:
 // TBD: Should consider merging this function into
 // prstate_housekeeping_conflict().
 //
-    static bool isolated_cpus_can_update(struct cpumask *add_cpus,
-    struct cpumask *del_cpus)
-    {
-    cpumask_var_t full_hk_cpus;
-    let mut res: c_int = true;
-    if (!housekeeping_enabled(HK_TYPE_KERNEL_NOISE))
+#[no_mangle]
+pub unsafe extern "C" fn isolated_cpus_can_update(add_cpus: *mut cpumask, del_cpus: *mut cpumask) -> bool {
+    let mut full_hk_cpus;
+pub static mut res: c_int = true;
+    if (!housekeeping_enabled(HK_TYPE_KERNEL_NOISE)) {
     return true;
+    }
     if (del_cpus && cpumask_weight_and(del_cpus,
-    housekeeping_cpumask(HK_TYPE_KERNEL_NOISE)))
+    housekeeping_cpumask(HK_TYPE_KERNEL_NOISE))) {
     return true;
-    if (!alloc_cpumask_var(&full_hk_cpus, GFP_KERNEL))
+    }
+    if (!alloc_cpumask_var(&full_hk_cpus, GFP_KERNEL)) {
     return false;
+    }
     cpumask_and(full_hk_cpus, housekeeping_cpumask(HK_TYPE_KERNEL_NOISE),
     housekeeping_cpumask(HK_TYPE_DOMAIN));
     cpumask_andnot(full_hk_cpus, full_hk_cpus, isolated_cpus);
     cpumask_and(full_hk_cpus, full_hk_cpus, cpu_active_mask);
-    if (!cpumask_weight_andnot(full_hk_cpus, add_cpus))
+    if (!cpumask_weight_andnot(full_hk_cpus, add_cpus)) {
     res = false;
+    }
     free_cpumask_var(full_hk_cpus);
     return res;
     }
@@ -1344,13 +1556,13 @@ unsafe extern "C" fn isolated_cpus_update(old_prs: c_int, new_prs: c_int, xcpus:
 //
 #[no_mangle]
 unsafe extern "C" fn prstate_housekeeping_conflict(prstate: c_int, new_cpus: *mut cpumask) -> bool {
-    static bool prstate_housekeeping_conflict(int prstate, struct cpumask *new_cpus)
-    {
-    if (!housekeeping_enabled(HK_TYPE_DOMAIN_BOOT))
+    if (!housekeeping_enabled(HK_TYPE_DOMAIN_BOOT)) {
     return false;
+    }
     if ((prstate != PRS_ISOLATED) &&
-    !cpumask_subset(new_cpus, housekeeping_cpumask(HK_TYPE_DOMAIN_BOOT)))
+    !cpumask_subset(new_cpus, housekeeping_cpumask(HK_TYPE_DOMAIN_BOOT))) {
     return true;
+    }
     return false;
     }
 //
@@ -1362,13 +1574,10 @@ unsafe extern "C" fn prstate_housekeeping_conflict(prstate: c_int, new_cpus: *mu
 //
 #[no_mangle]
 unsafe extern "C" fn cpuset_update_sd_hk_unlock() {
-    static void cpuset_update_sd_hk_unlock(void)
-    __releases(&cpuset_mutex)
-    __releases(&cpuset_top_mutex)
-    {
 // force_sd_rebuild will be cleared in rebuild_sched_domains_locked()
-    if (force_sd_rebuild)
+    if (force_sd_rebuild) {
     rebuild_sched_domains_locked();
+    }
     if (update_housekeeping) {
     update_housekeeping = false;
     cpumask_copy(isolated_hk_cpus, isolated_cpus);
@@ -1379,7 +1588,7 @@ unsafe extern "C" fn cpuset_update_sd_hk_unlock() {
 //
     mutex_unlock(&cpuset_mutex);
     cpus_read_unlock();
-    WARN_ON_ONCE(housekeeping_update(isolated_hk_cpus));
+    WARN_ON_ONCE!(housekeeping_update(isolated_hk_cpus));
     mutex_unlock(&cpuset_top_mutex);
     } else {
     cpuset_full_unlock();
@@ -1390,8 +1599,6 @@ unsafe extern "C" fn cpuset_update_sd_hk_unlock() {
 //
 #[no_mangle]
 unsafe extern "C" fn hk_sd_workfn(work: *mut work_struct) {
-    static void hk_sd_workfn(struct work_struct *work)
-    {
     cpuset_full_lock();
     cpuset_update_sd_hk_unlock();
     }
@@ -1405,22 +1612,23 @@ unsafe extern "C" fn hk_sd_workfn(work: *mut work_struct) {
 // are exclusively allocated to sibling cpusets. It walks through all siblings
 // of @cs under @parent and removes their exclusive CPUs from @excpus.
 //
-    static int rm_siblings_excl_cpus(struct cpuset *parent, struct cpuset *cs,
-    struct cpumask *excpus)
-    {
-    struct cgroup_subsys_state *css;
-    struct cpuset *sibling;
-    let mut retval: c_int = 0;
-    if (cpumask_empty(excpus))
+#[no_mangle]
+pub unsafe extern "C" fn rm_siblings_excl_cpus(parent: *mut cpuset, cs: *mut cpuset, excpus: *mut cpumask) -> c_int {
+pub static mut css: *mut c_void = core::ptr::null_mut();
+pub static mut sibling: *mut c_void = core::ptr::null_mut();
+pub static mut retval: c_int = 0;
+    if (cpumask_empty(excpus)) {
     return 0;
+    }
 //
 // Remove exclusive CPUs from siblings
 //
     rcu_read_lock();
     cpuset_for_each_child(sibling, css, parent) {
-    struct cpumask *sibling_xcpus;
-    if (sibling == cs)
+pub static mut sibling_xcpus: *mut c_void = core::ptr::null_mut();
+    if (sibling == cs) {
     continue;
+    }
 //
 // If exclusive_cpus is defined, effective_xcpus will always
 // be a subset. Otherwise, effective_xcpus will only be set
@@ -1431,7 +1639,7 @@ unsafe extern "C" fn hk_sd_workfn(work: *mut work_struct) {
     : sibling.exclusive_cpus;
     if (cpumask_intersects(excpus, sibling_xcpus)) {
     cpumask_andnot(excpus, excpus, sibling_xcpus);
-    retval++;
+    retval += 1;
     }
     }
     rcu_read_unlock();
@@ -1448,12 +1656,11 @@ unsafe extern "C" fn hk_sd_workfn(work: *mut work_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn compute_excpus(cs: *mut cpuset, excpus: *mut cpumask) -> c_int {
-    static int compute_excpus(struct cpuset *cs, struct cpumask *excpus)
-    {
-    struct cpuset *parent = parent_cs(cs);
+    let mut parent = parent_cs(cs);
     cpumask_and(excpus, user_xcpus(cs), parent.effective_xcpus);
-    if (!cpumask_empty(cs.exclusive_cpus))
+    if (!cpumask_empty(cs.exclusive_cpus)) {
     return 0;
+    }
     return rm_siblings_excl_cpus(parent, cs, excpus);
     }
 //
@@ -1467,28 +1674,24 @@ unsafe extern "C" fn compute_excpus(cs: *mut cpuset, excpus: *mut cpumask) -> c_
 //
 #[no_mangle]
 unsafe extern "C" fn compute_trialcs_excpus(trialcs: *mut cpuset, cs: *mut cpuset) -> c_int {
-    static int compute_trialcs_excpus(struct cpuset *trialcs, struct cpuset *cs)
-    {
-    struct cpuset *parent = parent_cs(trialcs);
-    struct cpumask *excpus = trialcs.effective_xcpus;
+    let mut parent = parent_cs(trialcs);
+    let mut excpus = trialcs.effective_xcpus;
 // trialcs is member, cpuset.cpus has no impact to excpus
-    if (cs_is_member(cs))
+    if (cs_is_member(cs)) {
     cpumask_and(excpus, trialcs.exclusive_cpus,
     parent.effective_xcpus);
-    else
+    }
+    else {
     cpumask_and(excpus, user_xcpus(trialcs), parent.effective_xcpus);
+    }
     return rm_siblings_excl_cpus(parent, cs, excpus);
     }
 #[no_mangle]
 pub unsafe extern "C" fn is_remote_partition(cs: *mut cpuset) -> bool {
-    static inline bool is_remote_partition(struct cpuset *cs)
-    {
     return cs.remote_partition;
     }
 #[no_mangle]
 pub unsafe extern "C" fn is_local_partition(cs: *mut cpuset) -> bool {
-    static inline bool is_local_partition(struct cpuset *cs)
-    {
     return is_partition_valid(cs) && !is_remote_partition(cs);
     }
 //
@@ -1501,14 +1704,14 @@ pub unsafe extern "C" fn is_local_partition(cs: *mut cpuset) -> bool {
 // Enable the current cpuset to become a remote partition root taking CPUs
 // directly from the top cpuset. cpuset_mutex must be held by the caller.
 //
-    static int remote_partition_enable(struct cpuset *cs, int new_prs,
-    struct tmpmasks *tmp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn remote_partition_enable(cs: *mut cpuset, new_prs: c_int, tmp: *mut tmpmasks) -> c_int {
 //
 // The user must have sysadmin privilege.
 //
-    if (!capable(CAP_SYS_ADMIN))
+    if (!capable(CAP_SYS_ADMIN)) {
     return PERR_ACCESS;
+    }
 //
 // The requested exclusive_cpus must not be allocated to other
 // partitions and it can't use up all the root's effective_cpus.
@@ -1520,14 +1723,16 @@ pub unsafe extern "C" fn is_local_partition(cs: *mut cpuset) -> bool {
 // above it or remote partition root underneath it is not allowed.
 //
     compute_excpus(cs, tmp.new_cpus);
-    WARN_ON_ONCE(cpumask_intersects(tmp.new_cpus, subpartitions_cpus));
+    WARN_ON_ONCE!(cpumask_intersects(tmp.new_cpus, subpartitions_cpus));
     if (!cpumask_intersects(tmp.new_cpus, cpu_active_mask) ||
-    cpumask_subset(top_cpuset.effective_cpus, tmp.new_cpus))
+    cpumask_subset(top_cpuset.effective_cpus, tmp.new_cpus)) {
     return PERR_INVCPUS;
+    }
     if (((new_prs == PRS_ISOLATED) &&
     !isolated_cpus_can_update(tmp.new_cpus, core::ptr::null_mut())) ||
-    prstate_housekeeping_conflict(new_prs, tmp.new_cpus))
+    prstate_housekeeping_conflict(new_prs, tmp.new_cpus)) {
     return PERR_HKEEPING;
+    }
     spin_lock_irq(&callback_lock);
     partition_xcpus_add(new_prs, core::ptr::null_mut(), tmp.new_cpus);
     cs.remote_partition = true;
@@ -1553,24 +1758,24 @@ pub unsafe extern "C" fn is_local_partition(cs: *mut cpuset) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn remote_partition_disable(cs: *mut cpuset, tmp: *mut tmpmasks) {
-    static void remote_partition_disable(struct cpuset *cs, struct tmpmasks *tmp)
-    {
-    WARN_ON_ONCE(!is_remote_partition(cs));
+    WARN_ON_ONCE!(!is_remote_partition(cs));
 //
 // When a CPU is offlined, top_cpuset may end up with no available CPUs,
 // which should clear subpartitions_cpus. We should not emit a warning for this
 // scenario: the hierarchy is updated from top to bottom, so subpartitions_cpus
 // may already be cleared when disabling the partition.
 //
-    WARN_ON_ONCE(!cpumask_subset(cs.effective_xcpus, subpartitions_cpus) &&
+    WARN_ON_ONCE!(!cpumask_subset(cs.effective_xcpus, subpartitions_cpus) &&
     !cpumask_empty(subpartitions_cpus));
     spin_lock_irq(&callback_lock);
     cs.remote_partition = false;
     partition_xcpus_del(cs.partition_root_state, core::ptr::null_mut(), cs.effective_xcpus);
-    if (cs.prs_err)
+    if (cs.prs_err) {
     cs.partition_root_state = -cs.partition_root_state;
-    else
+    }
+    else {
     cs.partition_root_state = PRS_MEMBER;
+    }
 // effective_xcpus may need to be changed
     compute_excpus(cs, cs.effective_xcpus);
     reset_partition_data(cs);
@@ -1592,17 +1797,18 @@ unsafe extern "C" fn remote_partition_disable(cs: *mut cpuset, tmp: *mut tmpmask
 // top_cpuset and subpartitions_cpus will be updated or partition can be
 // invalidated.
 //
-    static void remote_cpus_update(struct cpuset *cs, struct cpumask *xcpus,
-    struct cpumask *excpus, struct tmpmasks *tmp)
-    {
-    bool adding, deleting;
-    let mut prs: c_int = cs.partition_root_state;
-    if (WARN_ON_ONCE(!is_remote_partition(cs)))
+#[no_mangle]
+pub unsafe extern "C" fn remote_cpus_update(cs: *mut cpuset, xcpus: *mut cpumask, excpus: *mut cpumask, tmp: *mut tmpmasks) {
+    let mut adding = 0;
+    let mut deleting = 0;
+pub static mut prs: c_int = 0;
+    if (WARN_ON_ONCE!(!is_remote_partition(cs))) {
     return;
-    WARN_ON_ONCE(!cpumask_subset(cs.effective_xcpus, subpartitions_cpus));
+    }
+    WARN_ON_ONCE!(!cpumask_subset(cs.effective_xcpus, subpartitions_cpus));
     if (cpumask_empty(excpus)) {
     WRITE_ONCE(cs.prs_err, PERR_CPUSEMPTY);
-    goto invalidate;
+// goto;
     }
     adding   = cpumask_andnot(tmp.addmask, excpus, cs.effective_xcpus);
     deleting = cpumask_andnot(tmp.delmask, cs.effective_xcpus, excpus);
@@ -1612,40 +1818,48 @@ unsafe extern "C" fn remote_partition_disable(cs: *mut cpuset, tmp: *mut tmpmask
 // left in the top cpuset.
 //
     if (adding) {
-    WARN_ON_ONCE(cpumask_intersects(tmp.addmask, subpartitions_cpus));
-    if (!capable(CAP_SYS_ADMIN))
+    WARN_ON_ONCE!(cpumask_intersects(tmp.addmask, subpartitions_cpus));
+    if (!capable(CAP_SYS_ADMIN)) {
     WRITE_ONCE(cs.prs_err, PERR_ACCESS);
+    }
     else if (cpumask_intersects(tmp.addmask, subpartitions_cpus) ||
-    cpumask_subset(top_cpuset.effective_cpus, tmp.addmask))
+    cpumask_subset(top_cpuset.effective_cpus, tmp.addmask)) {
     WRITE_ONCE(cs.prs_err, PERR_NOCPUS);
+    }
     else if ((prs == PRS_ISOLATED) &&
-    !isolated_cpus_can_update(tmp.addmask, tmp.delmask))
+    !isolated_cpus_can_update(tmp.addmask, tmp.delmask)) {
     WRITE_ONCE(cs.prs_err, PERR_HKEEPING);
-    if (cs.prs_err)
-    goto invalidate;
+    }
+    if (cs.prs_err) {
+// goto;
+    }
     }
     spin_lock_irq(&callback_lock);
-    if (adding)
+    if (adding) {
     partition_xcpus_add(prs, core::ptr::null_mut(), tmp.addmask);
-    if (deleting)
+    }
+    if (deleting) {
     partition_xcpus_del(prs, core::ptr::null_mut(), tmp.delmask);
+    }
 //
 // Need to update effective_xcpus and exclusive_cpus now as
 // update_sibling_cpumasks() below may iterate back to the same cs.
 //
     cpumask_copy(cs.effective_xcpus, excpus);
-    if (xcpus)
+    if (xcpus) {
     cpumask_copy(cs.exclusive_cpus, xcpus);
+    }
     spin_unlock_irq(&callback_lock);
-    if (adding || deleting)
+    if (adding || deleting) {
     cpuset_force_rebuild();
+    }
 //
 // Propagate changes in top_cpuset's effective_cpus down the hierarchy.
 //
     cpuset_update_tasks_cpumask(&top_cpuset, tmp.new_cpus);
     update_sibling_cpumasks(&top_cpuset, core::ptr::null_mut(), tmp);
     return;
-    invalidate:
+// label;
     remote_partition_disable(cs, tmp);
     }
 //
@@ -1685,20 +1899,19 @@ unsafe extern "C" fn remote_partition_disable(cs: *mut cpuset, tmp: *mut tmpmask
 // check for error and so partition_root_state and prs_err will be updated
 // directly.
 //
-    static int update_parent_effective_cpumask(struct cpuset *cs, int cmd,
-    struct cpumask *newmask,
-    struct tmpmasks *tmp)
-    {
-    struct cpuset *parent = parent_cs(cs);
-    int adding;	/* Adding cpus to parent's effective_cpus	*/
-    int deleting;	/* Deleting cpus from parent's effective_cpus	*/
-    int old_prs, new_prs;
-    int part_error = PERR_NONE;	/* Partition error? */
-    struct cpumask *xcpus = user_xcpus(cs);
-    let mut parent_prs: c_int = parent.partition_root_state;
-    bool nocpu;
+#[no_mangle]
+pub unsafe extern "C" fn update_parent_effective_cpumask(cs: *mut cpuset, cmd: c_int, newmask: *mut cpumask, tmp: *mut tmpmasks) -> c_int {
+    let mut parent = parent_cs(cs);
+    let mut adding = 0;	/* Adding cpus to parent's effective_cpus	*/
+    let mut deleting = 0;	/* Deleting cpus from parent's effective_cpus	*/
+    let mut old_prs = 0;
+    let mut new_prs = 0;
+    let mut part_error = PERR_NONE;	/* Partition error? */
+    let mut xcpus = user_xcpus(cs);
+pub static mut parent_prs: c_int = 0;
+    let mut nocpu = 0;
     lockdep_assert_cpuset_lock_held();
-    WARN_ON_ONCE(is_remote_partition(cs));	/* For local partition only */
+    WARN_ON_ONCE!(is_remote_partition(cs));	/* For local partition only */
 //
 // new_prs will only be changed for the partcmd_update and
 // partcmd_invalidate commands.
@@ -1706,18 +1919,21 @@ unsafe extern "C" fn remote_partition_disable(cs: *mut cpuset, tmp: *mut tmpmask
     adding = deleting = false;
     old_prs = new_prs = cs.partition_root_state;
     if (cmd == partcmd_invalidate) {
-    if (is_partition_invalid(cs))
+    if (is_partition_invalid(cs)) {
     return 0;
+    }
 //
 // Make the current partition invalid.
 //
-    if (is_partition_valid(parent))
+    if (is_partition_valid(parent)) {
     adding = cpumask_and(tmp.addmask,
     cs.effective_xcpus,
     parent.effective_xcpus);
-    if (old_prs > 0)
+    }
+    if (old_prs > 0) {
     new_prs = -old_prs;
-    goto write_error;
+    }
+// goto;
     }
 //
 // The parent must be a partition root.
@@ -1726,12 +1942,15 @@ unsafe extern "C" fn remote_partition_disable(cs: *mut cpuset, tmp: *mut tmpmask
 //
     if (!is_partition_valid(parent)) {
 #[no_mangle]
-pub unsafe extern "C" fn is_partition_invalid(_arg: parent) -> return {
+#[no_mangle]
+// duplicate fn: is_partition_invalid
+pub unsafe extern "C" fn is_partition_invalid_dup(_arg: parent) -> return {
     return is_partition_invalid(parent)
     ? PERR_INVPARENT : PERR_NOTPART;
     }
-    if (!newmask && xcpus_empty(cs))
+    if (!newmask && xcpus_empty(cs)) {
     return PERR_CPUSEMPTY;
+    }
     nocpu = tasks_nocpu_error(parent, cs, xcpus);
     if ((cmd == partcmd_enable) || (cmd == partcmd_enablei)) {
 //
@@ -1740,22 +1959,27 @@ pub unsafe extern "C" fn is_partition_invalid(_arg: parent) -> return {
 // if exclusive_cpus isn't set.
 //
     xcpus = tmp.delmask;
-    if (compute_excpus(cs, xcpus))
-    WARN_ON_ONCE(!cpumask_empty(cs.exclusive_cpus));
+    if (compute_excpus(cs, xcpus)) {
+    WARN_ON_ONCE!(!cpumask_empty(cs.exclusive_cpus));
+    }
     new_prs = (cmd == partcmd_enable) ? PRS_ROOT : PRS_ISOLATED;
 //
 // Enabling partition root is not allowed if its
 // effective_xcpus is empty.
 //
-    if (cpumask_empty(xcpus))
+    if (cpumask_empty(xcpus)) {
     return PERR_INVCPUS;
-    if (prstate_housekeeping_conflict(new_prs, xcpus))
+    }
+    if (prstate_housekeeping_conflict(new_prs, xcpus)) {
     return PERR_HKEEPING;
+    }
     if ((new_prs == PRS_ISOLATED) && (new_prs != parent_prs) &&
-    !isolated_cpus_can_update(xcpus, core::ptr::null_mut()))
+    !isolated_cpus_can_update(xcpus, core::ptr::null_mut())) {
     return PERR_HKEEPING;
-    if (tasks_nocpu_error(parent, cs, xcpus))
+    }
+    if (tasks_nocpu_error(parent, cs, xcpus)) {
     return PERR_NOCPUS;
+    }
 //
 // This function will only be called when all the preliminary
 // checks have passed. At this point, the following condition
@@ -1766,7 +1990,7 @@ pub unsafe extern "C" fn is_partition_invalid(_arg: parent) -> return {
 // Warn if it is not the case.
 //
     cpumask_and(tmp.new_cpus, xcpus, cpu_active_mask);
-    WARN_ON_ONCE(!cpumask_subset(tmp.new_cpus, parent.effective_cpus));
+    WARN_ON_ONCE!(!cpumask_subset(tmp.new_cpus, parent.effective_cpus));
     deleting = true;
     } else if (cmd == partcmd_disable) {
 //
@@ -1786,7 +2010,7 @@ pub unsafe extern "C" fn is_partition_invalid(_arg: parent) -> return {
 //
     if (cpumask_empty(newmask)) {
     part_error = PERR_CPUSEMPTY;
-    goto write_error;
+// goto;
     }
 // Check newmask again, whether cpus are available for parent/cs
     nocpu |= tasks_nocpu_error(parent, cs, newmask);
@@ -1825,12 +2049,14 @@ pub unsafe extern "C" fn is_partition_invalid(_arg: parent) -> return {
     if (is_partition_valid(cs) && (old_prs != parent_prs)) {
     if ((parent_prs == PRS_ROOT) &&
 // Adding to parent means removing isolated CPUs
-    !isolated_cpus_can_update(tmp.delmask, tmp.addmask))
+    !isolated_cpus_can_update(tmp.delmask, tmp.addmask)) {
     part_error = PERR_HKEEPING;
+    }
     if ((parent_prs == PRS_ISOLATED) &&
 // Adding to parent means adding isolated CPUs
-    !isolated_cpus_can_update(tmp.addmask, tmp.delmask))
+    !isolated_cpus_can_update(tmp.addmask, tmp.delmask)) {
     part_error = PERR_HKEEPING;
+    }
     }
 //
 // The new CPUs to be removed from parent's effective CPUs
@@ -1838,7 +2064,7 @@ pub unsafe extern "C" fn is_partition_invalid(_arg: parent) -> return {
 //
     if (deleting) {
     cpumask_and(tmp.new_cpus, tmp.delmask, cpu_active_mask);
-    WARN_ON_ONCE(!cpumask_subset(tmp.new_cpus, parent.effective_cpus));
+    WARN_ON_ONCE!(!cpumask_subset(tmp.new_cpus, parent.effective_cpus));
     }
 //
 // Make partition invalid if parent's effective_cpus could
@@ -1869,59 +2095,71 @@ pub unsafe extern "C" fn is_partition_invalid(_arg: parent) -> return {
 //
     if (nocpu) {
     part_error = PERR_NOCPUS;
-    if (is_partition_valid(cs))
+    if (is_partition_valid(cs)) {
     adding = cpumask_and(tmp.addmask,
     cs.effective_xcpus,
     parent.effective_xcpus);
+    }
     } else if (is_partition_invalid(cs) && !cpumask_empty(xcpus) &&
     cpumask_subset(xcpus, parent.effective_xcpus)) {
-    struct cgroup_subsys_state *css;
-    struct cpuset *child;
-    let mut exclusive: bool = true;
+pub static mut css: *mut c_void = core::ptr::null_mut();
+pub static mut child: *mut c_void = core::ptr::null_mut();
+pub static mut exclusive: bool = true;
 //
 // Convert invalid partition to valid has to
 // pass the cpu exclusivity test.
 //
     rcu_read_lock();
     cpuset_for_each_child(child, css, parent) {
-    if (child == cs)
+    if (child == cs) {
     continue;
+    }
     if (!cpusets_are_exclusive(cs, child)) {
     exclusive = false;
     break;
     }
     }
     rcu_read_unlock();
-    if (exclusive)
+    if (exclusive) {
     deleting = cpumask_and(tmp.delmask,
     xcpus, parent.effective_cpus);
-    else
+    }
+    else {
     part_error = PERR_NOTEXCL;
     }
     }
-    write_error:
-    if (part_error)
+    }
+// label;
+    if (part_error) {
     WRITE_ONCE(cs.prs_err, part_error);
+    }
     if (cmd == partcmd_update) {
 //
 // Check for possible transition between valid and invalid
 // partition root.
 //
-    switch (cs.partition_root_state) {
-    case PRS_ROOT:
-    case PRS_ISOLATED:
-    if (part_error)
+    match (cs.partition_root_state) {
+    PRS_ROOT => {
+    }
+    PRS_ISOLATED => {
+    if (part_error) {
     new_prs = -old_prs;
-    break;
-    case PRS_INVALID_ROOT:
-    case PRS_INVALID_ISOLATED:
-    if (!part_error)
+    }
+    // break;
+    }
+    PRS_INVALID_ROOT => {
+    }
+    PRS_INVALID_ISOLATED => {
+    if (!part_error) {
     new_prs = -old_prs;
-    break;
+    }
+    // break;
     }
     }
-    if (!adding && !deleting && (new_prs == old_prs))
+    }
+    if (!adding && !deleting && (new_prs == old_prs)) {
     return 0;
+    }
 //
 // Transitioning between invalid to valid or vice versa may require
 // changing CS_CPU_EXCLUSIVE. In the case of partcmd_update,
@@ -1929,9 +2167,10 @@ pub unsafe extern "C" fn is_partition_invalid(_arg: parent) -> return {
 // CPU lists in cs haven't been updated yet. So defer it to later.
 //
     if ((old_prs != new_prs) && (cmd != partcmd_update))  {
-    let mut err: c_int = update_partition_exclusive_flag(cs, new_prs);
-    if (err)
+pub static mut err: c_int = 0;
+    if (err) {
     return err;
+    }
     }
 //
 // Change the parent's effective_cpus & effective_xcpus (top cpuset
@@ -1941,19 +2180,23 @@ pub unsafe extern "C" fn is_partition_invalid(_arg: parent) -> return {
 // newly deleted ones will be added back to effective_cpus.
 //
     spin_lock_irq(&callback_lock);
-    if (old_prs != new_prs)
+    if (old_prs != new_prs) {
     cs.partition_root_state = new_prs;
+    }
 //
 // Adding to parent's effective_cpus means deletion CPUs from cs
 // and vice versa.
 //
-    if (adding)
+    if (adding) {
     partition_xcpus_del(old_prs, parent, tmp.addmask);
-    if (deleting)
+    }
+    if (deleting) {
     partition_xcpus_add(new_prs, parent, tmp.delmask);
+    }
     spin_unlock_irq(&callback_lock);
-    if ((old_prs != new_prs) && (cmd == partcmd_update))
+    if ((old_prs != new_prs) && (cmd == partcmd_update)) {
     update_partition_exclusive_flag(cs, new_prs);
+    }
     if (adding || deleting) {
     cpuset_update_tasks_cpumask(parent, tmp.addmask);
     update_sibling_cpumasks(parent, cs, tmp);
@@ -1963,8 +2206,9 @@ pub unsafe extern "C" fn is_partition_invalid(_arg: parent) -> return {
 // cpuset_handle_hotplug(). Update the load balance flag and
 // scheduling domain accordingly.
 //
-    if ((cmd == partcmd_update) && !newmask)
+    if ((cmd == partcmd_update) && !newmask) {
     update_partition_sd_lb(cs, old_prs);
+    }
     notify_partition_change(cs, old_prs);
     return 0;
     }
@@ -1977,19 +2221,19 @@ pub unsafe extern "C" fn is_partition_invalid(_arg: parent) -> return {
 // of child partition roots and excluding their effective_xcpus.
 //
 // This has the side effect of invalidating valid child partition roots,
-// if necessary. Since it is called from either cpuset_hotplug_update_tasks()
+if necessary. Since it is called from either cpuset_hotplug_update_tasks() {
 // or update_cpumasks_hier() where parent and children are modified
 // successively, we don't need to call update_parent_effective_cpumask()
 // and the child's effective_cpus will be updated in later iterations.
 //
 // Note that rcu_read_lock() is assumed to be held.
 //
-    static void compute_partition_effective_cpumask(struct cpuset *cs,
-    struct cpumask *new_ecpus)
-    {
-    struct cgroup_subsys_state *css;
-    struct cpuset *child;
-    let mut populated: bool = partition_is_populated(cs, core::ptr::null_mut());
+#[no_mangle]
+pub unsafe extern "C" fn compute_partition_effective_cpumask(cs: *mut cpuset, new_ecpus: *mut cpumask) {
+}
+pub static mut css: *mut c_void = core::ptr::null_mut();
+pub static mut child: *mut c_void = core::ptr::null_mut();
+pub static mut populated: bool = false;
 //
 // Check child partition roots to see if they should be
 // invalidated when
@@ -2002,22 +2246,25 @@ pub unsafe extern "C" fn is_partition_invalid(_arg: parent) -> return {
     cpumask_and(new_ecpus, new_ecpus, cpu_active_mask);
     rcu_read_lock();
     cpuset_for_each_child(child, css, cs) {
-    if (!is_partition_valid(child))
+    if (!is_partition_valid(child)) {
     continue;
+    }
 //
 // There shouldn't be a remote partition underneath another
 // partition root.
 //
-    WARN_ON_ONCE(is_remote_partition(child));
+    WARN_ON_ONCE!(is_remote_partition(child));
     WRITE_ONCE(child.prs_err, 0);
     if (!cpumask_subset(child.effective_xcpus,
-    cs.effective_xcpus))
+    cs.effective_xcpus)) {
     WRITE_ONCE(child.prs_err, PERR_INVCPUS);
+    }
     else if (populated &&
-    cpumask_subset(new_ecpus, child.effective_xcpus))
+    cpumask_subset(new_ecpus, child.effective_xcpus)) {
     WRITE_ONCE(child.prs_err, PERR_NOCPUS);
+    }
     if (child.prs_err) {
-    let mut old_prs: c_int = child.partition_root_state;
+pub static mut old_prs: c_int = 0;
 //
 // Invalidate child partition
 //
@@ -2045,17 +2292,17 @@ pub unsafe extern "C" fn is_partition_invalid(_arg: parent) -> return {
 //
 // Called with cpuset_mutex held
 //
-    static void update_cpumasks_hier(struct cpuset *cs, struct tmpmasks *tmp,
-    bool force)
-    {
-    struct cpuset *cp;
-    struct cgroup_subsys_state *pos_css;
-    int old_prs, new_prs;
+#[no_mangle]
+pub unsafe extern "C" fn update_cpumasks_hier(cs: *mut cpuset, tmp: *mut tmpmasks, force: bool) {
+pub static mut cp: *mut c_void = core::ptr::null_mut();
+pub static mut pos_css: *mut c_void = core::ptr::null_mut();
+    let mut old_prs = 0;
+    let mut new_prs = 0;
     rcu_read_lock();
     cpuset_for_each_descendant_pre(cp, pos_css, cs) {
-    struct cpuset *parent = parent_cs(cp);
-    let mut remote: bool = is_remote_partition(cp);
-    let mut update_parent: bool = false;
+    let mut parent = parent_cs(cp);
+pub static mut remote: bool = false;
+pub static mut update_parent: bool = false;
     old_prs = new_prs = cp.partition_root_state;
 //
 // For child remote partition root (!= cs), we need to call
@@ -2078,12 +2325,15 @@ pub unsafe extern "C" fn is_partition_invalid(_arg: parent) -> return {
     new_prs = cp.partition_root_state;
     remote = (new_prs == old_prs);
     }
-    if (remote || (is_partition_valid(parent) && is_partition_valid(cp)))
+    if (remote || (is_partition_valid(parent) && is_partition_valid(cp))) {
     compute_partition_effective_cpumask(cp, tmp.new_cpus);
-    else
+    }
+    else {
     compute_effective_cpumask(tmp.new_cpus, cp, parent);
-    if (remote)
-    goto get_css;	/* Ready to update cpuset data */
+    }
+    if (remote) {
+// goto;	/* Ready to update cpuset data */
+    }
 //
 // A partition with no effective_cpus is allowed as long as
 // there is no task associated with it. Call
@@ -2091,7 +2341,7 @@ pub unsafe extern "C" fn is_partition_invalid(_arg: parent) -> return {
 //
     if (is_partition_valid(cp) && cpumask_empty(tmp.new_cpus)) {
     update_parent = true;
-    goto update_parent_effective;
+// goto;
     }
 //
 // Skip the whole subtree if
@@ -2107,7 +2357,7 @@ pub unsafe extern "C" fn is_partition_invalid(_arg: parent) -> return {
     pos_css = css_rightmost_descendant(pos_css);
     continue;
     }
-    update_parent_effective:
+// label;
 //
 // update_parent_effective_cpumask() should have been called
 // for cs already in update_cpumask(). We should also call
@@ -2115,28 +2365,33 @@ pub unsafe extern "C" fn is_partition_invalid(_arg: parent) -> return {
 // cpuset if the parent's effective_cpus changes.
 //
     if ((cp != cs) && old_prs) {
-    switch (parent.partition_root_state) {
-    case PRS_ROOT:
-    case PRS_ISOLATED:
+    match (parent.partition_root_state) {
+    PRS_ROOT => {
+    }
+    PRS_ISOLATED => {
     update_parent = true;
-    break;
-    default:
+    // break;
+    }
+    _ => {
 //
 // When parent is not a partition root or is
 // invalid, child partition roots become
 // invalid too.
 //
-    if (is_partition_valid(cp))
+    if (is_partition_valid(cp)) {
     new_prs = -cp.partition_root_state;
+    }
     WRITE_ONCE(cp.prs_err,
     is_partition_invalid(parent)
     ? PERR_INVPARENT : PERR_NOTPART);
-    break;
+    // break;
     }
     }
-    get_css:
-    if (!css_tryget_online(&cp.css))
+    }
+// label;
+    if (!css_tryget_online(&cp.css)) {
     continue;
+    }
     rcu_read_unlock();
     if (update_parent) {
     update_parent_effective_cpumask(cp, partcmd_update, core::ptr::null_mut(), tmp);
@@ -2153,13 +2408,15 @@ pub unsafe extern "C" fn is_partition_invalid(_arg: parent) -> return {
 // Need to compute effective_xcpus if either exclusive_cpus
 // is non-empty or it is a valid partition root.
 //
-    if ((new_prs > 0) || !cpumask_empty(cp.exclusive_cpus))
+    if ((new_prs > 0) || !cpumask_empty(cp.exclusive_cpus)) {
     compute_excpus(cp, cp.effective_xcpus);
-    if (new_prs <= 0)
+    }
+    if (new_prs <= 0) {
     reset_partition_data(cp);
+    }
     spin_unlock_irq(&callback_lock);
     notify_partition_change(cp, old_prs);
-    WARN_ON(!is_in_v2_mode() &&
+    WARN_ON!(!is_in_v2_mode() &&
     !cpumask_equal(cp.cpus_allowed, cp.effective_cpus));
     cpuset_update_tasks_cpumask(cp, tmp.new_cpus);
 //
@@ -2169,10 +2426,12 @@ pub unsafe extern "C" fn is_partition_invalid(_arg: parent) -> return {
 //
     if (cpuset_v2() && !is_partition_valid(cp) &&
     (is_sched_load_balance(parent) != is_sched_load_balance(cp))) {
-    if (is_sched_load_balance(parent))
+    if (is_sched_load_balance(parent)) {
     set_bit(CS_SCHED_LOAD_BALANCE, &cp.flags);
-    else
+    }
+    else {
     clear_bit(CS_SCHED_LOAD_BALANCE, &cp.flags);
+    }
     }
 //
 // On legacy hierarchy, if the effective cpumask of any non-
@@ -2182,8 +2441,9 @@ pub unsafe extern "C" fn is_partition_invalid(_arg: parent) -> return {
 //
     if (!cpumask_empty(cp.cpus_allowed) &&
     is_sched_load_balance(cp) &&
-    (!cpuset_v2() || is_partition_valid(cp)))
+    (!cpuset_v2() || is_partition_valid(cp))) {
     cpuset_force_rebuild();
+    }
     rcu_read_lock();
     css_put(&cp.css);
     }
@@ -2195,11 +2455,10 @@ pub unsafe extern "C" fn is_partition_invalid(_arg: parent) -> return {
 // @cs:      Current cpuset
 // @tmp:     Temp variables
 //
-    static void update_sibling_cpumasks(struct cpuset *parent, struct cpuset *cs,
-    struct tmpmasks *tmp)
-    {
-    struct cpuset *sibling;
-    struct cgroup_subsys_state *pos_css;
+#[no_mangle]
+pub unsafe extern "C" fn update_sibling_cpumasks(parent: *mut cpuset, cs: *mut cpuset, tmp: *mut tmpmasks) {
+pub static mut sibling: *mut c_void = core::ptr::null_mut();
+pub static mut pos_css: *mut c_void = core::ptr::null_mut();
     lockdep_assert_cpuset_lock_held();
 //
 // Check all its siblings and call update_cpumasks_hier()
@@ -2215,14 +2474,17 @@ pub unsafe extern "C" fn is_partition_invalid(_arg: parent) -> return {
 //
     rcu_read_lock();
     cpuset_for_each_child(sibling, pos_css, parent) {
-    if (sibling == cs || is_partition_valid(sibling))
+    if (sibling == cs || is_partition_valid(sibling)) {
     continue;
+    }
     compute_effective_cpumask(tmp.new_cpus, sibling,
     parent);
-    if (cpumask_equal(tmp.new_cpus, sibling.effective_cpus))
+    if (cpumask_equal(tmp.new_cpus, sibling.effective_cpus)) {
     continue;
-    if (!css_tryget_online(&sibling.css))
+    }
+    if (!css_tryget_online(&sibling.css)) {
     continue;
+    }
     rcu_read_unlock();
     update_cpumasks_hier(sibling, tmp, false);
     rcu_read_lock();
@@ -2232,14 +2494,14 @@ pub unsafe extern "C" fn is_partition_invalid(_arg: parent) -> return {
     }
 #[no_mangle]
 unsafe extern "C" fn parse_cpuset_cpulist(buf: *const c_char, out_mask: *mut cpumask) -> c_int {
-    static int parse_cpuset_cpulist(const char *buf, struct cpumask *out_mask)
-    {
-    int retval;
+    let mut retval = 0;
     retval = cpulist_parse(buf, out_mask);
-    if (retval < 0)
+    if (retval < 0) {
     return retval;
-    if (!cpumask_subset(out_mask, top_cpuset.cpus_allowed))
+    }
+    if (!cpumask_subset(out_mask, top_cpuset.cpus_allowed)) {
     return -EINVAL;
+    }
     return 0;
     }
 //
@@ -2254,18 +2516,20 @@ unsafe extern "C" fn parse_cpuset_cpulist(buf: *const c_char, out_mask: *mut cpu
 //
 #[no_mangle]
 unsafe extern "C" fn validate_partition(cs: *mut cpuset, trialcs: *mut cpuset) -> enum prs_errcode {
-    static enum prs_errcode validate_partition(struct cpuset *cs, struct cpuset *trialcs)
-    {
-    struct cpuset *parent = parent_cs(cs);
-    if (cs_is_member(trialcs))
+    let mut parent = parent_cs(cs);
+    if (cs_is_member(trialcs)) {
     return PERR_NONE;
-    if (cpumask_empty(trialcs.effective_xcpus))
+    }
+    if (cpumask_empty(trialcs.effective_xcpus)) {
     return PERR_INVCPUS;
+    }
     if (prstate_housekeeping_conflict(trialcs.partition_root_state,
-    trialcs.effective_xcpus))
+    trialcs.effective_xcpus)) {
     return PERR_HKEEPING;
-    if (tasks_nocpu_error(parent, cs, trialcs.effective_xcpus))
+    }
+    if (tasks_nocpu_error(parent, cs, trialcs.effective_xcpus)) {
     return PERR_NOCPUS;
+    }
     return PERR_NONE;
     }
 //
@@ -2277,30 +2541,34 @@ unsafe extern "C" fn validate_partition(cs: *mut cpuset, trialcs: *mut cpuset) -
 // This function handles partition state transitions triggered by CPU mask changes.
 // CPU modifications may cause a partition to be disabled or require state updates.
 //
-    static void partition_cpus_change(struct cpuset *cs, struct cpuset *trialcs,
-    struct tmpmasks *tmp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn partition_cpus_change(cs: *mut cpuset, trialcs: *mut cpuset, tmp: *mut tmpmasks) {
     enum prs_errcode prs_err;
-    if (cs_is_member(cs))
+    if (cs_is_member(cs)) {
     return;
+    }
     prs_err = validate_partition(cs, trialcs);
     if (prs_err) {
     WRITE_ONCE(cs.prs_err, prs_err);
     trialcs.prs_err = prs_err;
     }
     if (is_remote_partition(cs)) {
-    if (trialcs.prs_err)
+    if (trialcs.prs_err) {
     remote_partition_disable(cs, tmp);
-    else
+    }
+    else {
     remote_cpus_update(cs, trialcs.exclusive_cpus,
     trialcs.effective_xcpus, tmp);
+    }
     } else {
-    if (trialcs.prs_err)
+    if (trialcs.prs_err) {
     update_parent_effective_cpumask(cs, partcmd_invalidate,
     core::ptr::null_mut(), tmp);
-    else
+    }
+    else {
     update_parent_effective_cpumask(cs, partcmd_update,
     trialcs.effective_xcpus, tmp);
+    }
     }
     }
 //
@@ -2309,26 +2577,29 @@ unsafe extern "C" fn validate_partition(cs: *mut cpuset, trialcs: *mut cpuset) -
 // @trialcs: trial cpuset
 // @buf: buffer of cpu numbers written to this cpuset
 //
-    static int update_cpumask(struct cpuset *cs, struct cpuset *trialcs,
-    const char *buf)
-    {
-    int retval;
-    struct tmpmasks tmp;
-    let mut force: bool = false;
-    let mut old_prs: c_int = cs.partition_root_state;
+#[no_mangle]
+pub unsafe extern "C" fn update_cpumask(cs: *mut cpuset, trialcs: *mut cpuset, buf: *mut c_char) -> c_int {
+    let mut retval = 0;
+pub static mut tmp: usize = 0;
+pub static mut force: bool = false;
+pub static mut old_prs: c_int = 0;
     retval = parse_cpuset_cpulist(buf, trialcs.cpus_allowed);
-    if (retval < 0)
+    if (retval < 0) {
     return retval;
+    }
 // Nothing to do if the cpus didn't change
-    if (cpumask_equal(cs.cpus_allowed, trialcs.cpus_allowed))
+    if (cpumask_equal(cs.cpus_allowed, trialcs.cpus_allowed)) {
     return 0;
+    }
     compute_trialcs_excpus(trialcs, cs);
     trialcs.prs_err = PERR_NONE;
     retval = validate_change(cs, trialcs);
-    if (retval < 0)
+    if (retval < 0) {
     return retval;
-    if (alloc_tmpmasks(&tmp))
+    }
+    if (alloc_tmpmasks(&tmp)) {
     return -ENOMEM;
+    }
 //
 // Check all the descendants in update_cpumasks_hier() if
 // effective_xcpus is to be changed.
@@ -2338,14 +2609,16 @@ unsafe extern "C" fn validate_partition(cs: *mut cpuset, trialcs: *mut cpuset) -
     spin_lock_irq(&callback_lock);
     cpumask_copy(cs.cpus_allowed, trialcs.cpus_allowed);
     cpumask_copy(cs.effective_xcpus, trialcs.effective_xcpus);
-    if ((old_prs > 0) && !is_partition_valid(cs))
+    if ((old_prs > 0) && !is_partition_valid(cs)) {
     reset_partition_data(cs);
+    }
     spin_unlock_irq(&callback_lock);
 // effective_cpus/effective_xcpus will be updated here
     update_cpumasks_hier(cs, &tmp, force);
 // Update CS_SCHED_LOAD_BALANCE and/or sched_domains, if necessary
-    if (cs.partition_root_state)
+    if (cs.partition_root_state) {
     update_partition_sd_lb(cs, old_prs);
+    }
     free_tmpmasks(&tmp);
     return retval;
     }
@@ -2357,53 +2630,60 @@ unsafe extern "C" fn validate_partition(cs: *mut cpuset, trialcs: *mut cpuset) -
 //
 // The tasks' cpumask will be updated if cs is a valid partition root.
 //
-    static int update_exclusive_cpumask(struct cpuset *cs, struct cpuset *trialcs,
-    const char *buf)
-    {
-    int retval;
-    struct tmpmasks tmp;
-    let mut force: bool = false;
-    let mut old_prs: c_int = cs.partition_root_state;
+#[no_mangle]
+pub unsafe extern "C" fn update_exclusive_cpumask(cs: *mut cpuset, trialcs: *mut cpuset, buf: *mut c_char) -> c_int {
+    let mut retval = 0;
+pub static mut tmp: usize = 0;
+pub static mut force: bool = false;
+pub static mut old_prs: c_int = 0;
     retval = parse_cpuset_cpulist(buf, trialcs.exclusive_cpus);
-    if (retval < 0)
+    if (retval < 0) {
     return retval;
+    }
 // Nothing to do if the CPUs didn't change
-    if (cpumask_equal(cs.exclusive_cpus, trialcs.exclusive_cpus))
+    if (cpumask_equal(cs.exclusive_cpus, trialcs.exclusive_cpus)) {
     return 0;
+    }
 //
 // Reject the change if there is exclusive CPUs conflict with
 // the siblings.
 //
-    if (compute_trialcs_excpus(trialcs, cs))
+    if (compute_trialcs_excpus(trialcs, cs)) {
     return -EINVAL;
+    }
 //
 // Check all the descendants in update_cpumasks_hier() if
 // effective_xcpus is to be changed.
 //
     force = !cpumask_equal(cs.effective_xcpus, trialcs.effective_xcpus);
     retval = validate_change(cs, trialcs);
-    if (retval)
+    if (retval) {
     return retval;
-    if (alloc_tmpmasks(&tmp))
+    }
+    if (alloc_tmpmasks(&tmp)) {
     return -ENOMEM;
+    }
     trialcs.prs_err = PERR_NONE;
     partition_cpus_change(cs, trialcs, &tmp);
     spin_lock_irq(&callback_lock);
     cpumask_copy(cs.exclusive_cpus, trialcs.exclusive_cpus);
     cpumask_copy(cs.effective_xcpus, trialcs.effective_xcpus);
-    if ((old_prs > 0) && !is_partition_valid(cs))
+    if ((old_prs > 0) && !is_partition_valid(cs)) {
     reset_partition_data(cs);
+    }
     spin_unlock_irq(&callback_lock);
 //
 // Call update_cpumasks_hier() to update effective_cpus/effective_xcpus
 // of the subtree when it is a valid partition root or effective_xcpus
 // is updated.
 //
-    if (is_partition_valid(cs) || force)
+    if (is_partition_valid(cs) || force) {
     update_cpumasks_hier(cs, &tmp, force);
+    }
 // Update CS_SCHED_LOAD_BALANCE and/or sched_domains, if necessary
-    if (cs.partition_root_state)
+    if (cs.partition_root_state) {
     update_partition_sd_lb(cs, old_prs);
+    }
     free_tmpmasks(&tmp);
     return 0;
     }
@@ -2425,19 +2705,15 @@ pub struct cpuset_migrate_mm_work {
 
 #[no_mangle]
 unsafe extern "C" fn cpuset_migrate_mm_workfn(work: *mut work_struct) {
-    static void cpuset_migrate_mm_workfn(struct work_struct *work)
-    {
-    struct cpuset_migrate_mm_work *mwork =
-    container_of(work, struct cpuset_migrate_mm_work, work);
+    let mut mwork = container_of!(work, cpuset_migrate_mm_work, work);
 // on a wq worker, no need to worry about %current's mems_allowed
     do_migrate_pages(mwork.mm, &mwork.from, &mwork.to, MPOL_MF_MOVE_ALL);
     mmput(mwork.mm);
     kfree(mwork);
     }
-    static void cpuset_migrate_mm(struct mm_struct *mm, const nodemask_t *from,
-    const nodemask_t *to)
-    {
-    struct cpuset_migrate_mm_work *mwork;
+#[no_mangle]
+pub unsafe extern "C" fn cpuset_migrate_mm(mm: *mut mm_struct, from: *mut nodemask_t, to: *mut nodemask_t) {
+pub static mut mwork: *mut c_void = core::ptr::null_mut();
     if (nodes_equal(*from, *to)) {
     mmput(mm);
     return;
@@ -2455,22 +2731,20 @@ unsafe extern "C" fn cpuset_migrate_mm_workfn(work: *mut work_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn flush_migrate_mm_task_workfn(head: *mut callback_head) {
-    static void flush_migrate_mm_task_workfn(struct callback_head *head)
-    {
     flush_workqueue(cpuset_migrate_mm_wq);
     kfree(head);
     }
 #[no_mangle]
 unsafe extern "C" fn schedule_flush_migrate_mm() {
-    static void schedule_flush_migrate_mm(void)
-    {
-    struct callback_head *flush_cb;
-    flush_cb = kzalloc_obj(struct callback_head);
-    if (!flush_cb)
+pub static mut flush_cb: *mut c_void = core::ptr::null_mut();
+    flush_cb = kzalloc_obj(callback_head);
+    if (!flush_cb) {
     return;
+    }
     init_task_work(flush_cb, flush_migrate_mm_task_workfn);
-    if (task_work_add(current, flush_cb, TWA_RESUME))
+    if (task_work_add(current, flush_cb, TWA_RESUME)) {
     kfree(flush_cb);
+    }
     }
 //
 // cpuset_change_task_nodemask - change task's mems_allowed and mempolicy
@@ -2482,9 +2756,8 @@ unsafe extern "C" fn schedule_flush_migrate_mm() {
 // parallel, it might temporarily see an empty intersection, which results in
 // a seqlock check and retry before OOM or allocation failure.
 //
-    static void cpuset_change_task_nodemask(struct task_struct *tsk,
-    nodemask_t *newmems)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cpuset_change_task_nodemask(tsk: *mut task_struct, newmems: *mut nodemask_t) {
     task_lock(tsk);
     local_irq_disable();
     write_seqcount_begin(&tsk.mems_allowed_seq);
@@ -2495,7 +2768,7 @@ unsafe extern "C" fn schedule_flush_migrate_mm() {
     local_irq_enable();
     task_unlock(tsk);
     }
-    static void *cpuset_being_rebound;
+pub static mut cpuset_being_rebound: *mut c_void = core::ptr::null_mut();
 //
 // cpuset_update_tasks_nodemask - Update the nodemasks of tasks in the cpuset.
 // @cs: the cpuset in which each task's mems_allowed mask needs to be changed
@@ -2514,11 +2787,9 @@ unsafe extern "C" fn schedule_flush_migrate_mm() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpuset_update_tasks_nodemask(cs: *mut cpuset) {
-    void cpuset_update_tasks_nodemask(struct cpuset *cs)
-    {
     static nodemask_t newmems;	/* protected by cpuset_mutex */
-    struct css_task_iter it;
-    struct task_struct *task;
+pub static mut it: usize = 0;
+pub static mut task: *mut c_void = core::ptr::null_mut();
     cpuset_being_rebound = cs;		/* causes mpol_dup() rebind */
     guarantee_online_mems(cs, &newmems);
 //
@@ -2533,15 +2804,17 @@ pub unsafe extern "C" fn cpuset_update_tasks_nodemask(cs: *mut cpuset) {
 //
     css_task_iter_start(&cs.css, 0, &it);
     while ((task = css_task_iter_next(&it))) {
-    struct mm_struct *mm;
-    bool migrate;
+pub static mut mm: *mut c_void = core::ptr::null_mut();
+    let mut migrate = 0;
     cpuset_change_task_nodemask(task, &newmems);
 // Rebind and migrate mm only for thread group leader
-    if (!thread_group_leader(task))
+    if (!thread_group_leader(task)) {
     continue;
+    }
     mm = get_task_mm(task);
-    if (!mm)
+    if (!mm) {
     continue;
+    }
     migrate = is_memory_migrate(cs);
 //
 // For v1 we can have empty effective_mems, but we cannot
@@ -2549,10 +2822,12 @@ pub unsafe extern "C" fn cpuset_update_tasks_nodemask(cs: *mut cpuset) {
 // effective_mems is guaranteed to not be empty.
 //
     mpol_rebind_mm(mm, &cs.effective_mems);
-    if (migrate)
+    if (migrate) {
     cpuset_migrate_mm(mm, &cs.old_mems_allowed, &newmems);
-    else
+    }
+    else {
     mmput(mm);
+    }
     }
     css_task_iter_end(&it);
 //
@@ -2577,26 +2852,25 @@ pub unsafe extern "C" fn cpuset_update_tasks_nodemask(cs: *mut cpuset) {
 //
 #[no_mangle]
 unsafe extern "C" fn update_nodemasks_hier(cs: *mut cpuset, new_mems: *mut nodemask_t) {
-    static void update_nodemasks_hier(struct cpuset *cs, nodemask_t *new_mems)
-    {
-    struct cpuset *cp;
-    struct cgroup_subsys_state *pos_css;
+pub static mut cp: *mut c_void = core::ptr::null_mut();
+pub static mut pos_css: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     cpuset_for_each_descendant_pre(cp, pos_css, cs) {
-    struct cpuset *parent = parent_cs(cp);
+    let mut parent = parent_cs(cp);
     compute_effective_nodemask(new_mems, cp, parent);
 // Skip the whole subtree if the nodemask remains the same.
     if (nodes_equal(*new_mems, cp.effective_mems)) {
     pos_css = css_rightmost_descendant(pos_css);
     continue;
     }
-    if (!css_tryget_online(&cp.css))
+    if (!css_tryget_online(&cp.css)) {
     continue;
+    }
     rcu_read_unlock();
     spin_lock_irq(&callback_lock);
     cp.effective_mems = *new_mems;
     spin_unlock_irq(&callback_lock);
-    WARN_ON(!is_in_v2_mode() &&
+    WARN_ON!(!is_in_v2_mode() &&
     !nodes_equal(cp.mems_allowed, cp.effective_mems));
     cpuset_update_tasks_nodemask(cp);
     rcu_read_lock();
@@ -2617,26 +2891,29 @@ unsafe extern "C" fn update_nodemasks_hier(cs: *mut cpuset, new_mems: *mut nodem
 // lock each such tasks mm->mmap_lock, scan its vma's and rebind
 // their mempolicies to the cpusets new mems_allowed.
 //
-    static int update_nodemask(struct cpuset *cs, struct cpuset *trialcs,
-    const char *buf)
-    {
-    int retval;
+#[no_mangle]
+pub unsafe extern "C" fn update_nodemask(cs: *mut cpuset, trialcs: *mut cpuset, buf: *mut c_char) -> c_int {
+    let mut retval = 0;
 //
 // An empty mems_allowed is ok iff there are no tasks in the cpuset.
 // The validate_change() call ensures that cpusets with tasks have memory.
 //
     retval = nodelist_parse(buf, trialcs.mems_allowed);
-    if (retval < 0)
+    if (retval < 0) {
     return retval;
+    }
     if (!nodes_subset(trialcs.mems_allowed,
-    top_cpuset.mems_allowed))
+    top_cpuset.mems_allowed)) {
     return -EINVAL;
+    }
 // No change? nothing to do
-    if (nodes_equal(cs.mems_allowed, trialcs.mems_allowed))
+    if (nodes_equal(cs.mems_allowed, trialcs.mems_allowed)) {
     return 0;
+    }
     retval = validate_change(cs, trialcs);
-    if (retval < 0)
+    if (retval < 0) {
     return retval;
+    }
     check_insane_mems_config(&trialcs.mems_allowed);
     spin_lock_irq(&callback_lock);
     cs.mems_allowed = trialcs.mems_allowed;
@@ -2647,9 +2924,7 @@ unsafe extern "C" fn update_nodemasks_hier(cs: *mut cpuset, new_mems: *mut nodem
     }
 #[no_mangle]
 pub unsafe extern "C" fn current_cpuset_is_being_rebound() -> bool {
-    bool current_cpuset_is_being_rebound(void)
-    {
-    bool ret;
+    let mut ret = 0;
     rcu_read_lock();
     ret = task_cs(current) == cpuset_being_rebound;
     rcu_read_unlock();
@@ -2663,23 +2938,26 @@ pub unsafe extern "C" fn current_cpuset_is_being_rebound() -> bool {
 //
 // Call with cpuset_mutex held.
 //
-    int cpuset_update_flag(cpuset_flagbits_t bit, struct cpuset *cs,
-    int turning_on)
-    {
-    struct cpuset *trialcs;
-    int balance_flag_changed;
-    int spread_page_changed;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn cpuset_update_flag(bit: cpuset_flagbits_t, cs: *mut cpuset, turning_on: c_int) -> c_int {
+pub static mut trialcs: *mut c_void = core::ptr::null_mut();
+    let mut balance_flag_changed = 0;
+    let mut spread_page_changed = 0;
+    let mut err = 0;
     trialcs = dup_or_alloc_cpuset(cs);
-    if (!trialcs)
+    if (!trialcs) {
     return -ENOMEM;
-    if (turning_on)
+    }
+    if (turning_on) {
     set_bit(bit, &trialcs.flags);
-    else
+    }
+    else {
     clear_bit(bit, &trialcs.flags);
+    }
     err = validate_change(cs, trialcs);
-    if (err < 0)
-    goto out;
+    if (err < 0) {
+// goto;
+    }
     balance_flag_changed = (is_sched_load_balance(cs) !=
     is_sched_load_balance(trialcs));
     spread_page_changed = is_spread_page(cs) != is_spread_page(trialcs);
@@ -2687,14 +2965,17 @@ pub unsafe extern "C" fn current_cpuset_is_being_rebound() -> bool {
     cs.flags = trialcs.flags;
     spin_unlock_irq(&callback_lock);
     if (!cpumask_empty(trialcs.cpus_allowed) && balance_flag_changed) {
-    if (cpuset_v2())
+    if (cpuset_v2()) {
     cpuset_force_rebuild();
-    else
+    }
+    else {
     rebuild_sched_domains_locked();
     }
-    if (spread_page_changed)
+    }
+    if (spread_page_changed) {
     cpuset1_update_tasks_flags(cs);
-    out:
+    }
+// label;
     free_cpuset(trialcs);
     return err;
     }
@@ -2708,31 +2989,33 @@ pub unsafe extern "C" fn current_cpuset_is_being_rebound() -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn update_prstate(cs: *mut cpuset, new_prs: c_int) -> c_int {
-    static int update_prstate(struct cpuset *cs, int new_prs)
-    {
-    let mut err: c_int = PERR_NONE, old_prs = cs.partition_root_state;
-    struct cpuset *parent = parent_cs(cs);
-    struct tmpmasks tmpmask;
-    let mut isolcpus_updated: bool = false;
-    if (old_prs == new_prs)
+pub static mut err: c_int = 0;
+    let mut parent = parent_cs(cs);
+pub static mut tmpmask: usize = 0;
+pub static mut isolcpus_updated: bool = false;
+    if (old_prs == new_prs) {
     return 0;
+    }
 //
 // Treat a previously invalid partition root as if it is a "member".
 //
-    if (new_prs && is_partition_invalid(cs))
+    if (new_prs && is_partition_invalid(cs)) {
     old_prs = PRS_MEMBER;
-    if (alloc_tmpmasks(&tmpmask))
+    }
+    if (alloc_tmpmasks(&tmpmask)) {
     return -ENOMEM;
+    }
     err = update_partition_exclusive_flag(cs, new_prs);
-    if (err)
-    goto out;
+    if (err) {
+// goto;
+    }
     if (!old_prs) {
 //
 // cpus_allowed and exclusive_cpus cannot be both empty.
 //
     if (xcpus_empty(cs)) {
     err = PERR_CPUSEMPTY;
-    goto out;
+// goto;
     }
 //
 // We don't support the creation of a new local partition with
@@ -2744,7 +3027,7 @@ unsafe extern "C" fn update_prstate(cs: *mut cpuset, new_prs: c_int) -> c_int {
     if ((parent == &top_cpuset) &&
     cpumask_intersects(cs.exclusive_cpus, subpartitions_cpus)) {
     err = PERR_REMOTE;
-    goto out;
+// goto;
     }
 //
 // If parent is valid partition, enable local partiion.
@@ -2764,26 +3047,30 @@ unsafe extern "C" fn update_prstate(cs: *mut cpuset, new_prs: c_int) -> c_int {
 //
     if (((new_prs == PRS_ISOLATED) &&
     !isolated_cpus_can_update(cs.effective_xcpus, core::ptr::null_mut())) ||
-    prstate_housekeeping_conflict(new_prs, cs.effective_xcpus))
+    prstate_housekeeping_conflict(new_prs, cs.effective_xcpus)) {
     err = PERR_HKEEPING;
-    else
+    }
+    else {
     isolcpus_updated = true;
+    }
     } else {
 //
 // Switching back to member is always allowed even if it
 // disables child partitions.
 //
-    if (is_remote_partition(cs))
+    if (is_remote_partition(cs)) {
     remote_partition_disable(cs, &tmpmask);
-    else
+    }
+    else {
     update_parent_effective_cpumask(cs, partcmd_disable,
     core::ptr::null_mut(), &tmpmask);
+    }
 //
 // Invalidation of child partitions will be done in
 // update_cpumasks_hier().
 //
     }
-    out:
+// label;
 //
 // Make partition invalid & disable CS_CPU_EXCLUSIVE if an error
 // happens.
@@ -2795,23 +3082,25 @@ unsafe extern "C" fn update_prstate(cs: *mut cpuset, new_prs: c_int) -> c_int {
     spin_lock_irq(&callback_lock);
     cs.partition_root_state = new_prs;
     WRITE_ONCE(cs.prs_err, err);
-    if (!is_partition_valid(cs))
+    if (!is_partition_valid(cs)) {
     reset_partition_data(cs);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: isolcpus_updated) -> else {
-    else if (isolcpus_updated)
+    }
+
+    else if (isolcpus_updated) {
     isolated_cpus_update(old_prs, new_prs, cs.effective_xcpus);
+    }
     spin_unlock_irq(&callback_lock);
 // Force update if switching back to member & update effective_xcpus
     update_cpumasks_hier(cs, &tmpmask, !new_prs);
 // A newly created partition must have effective_xcpus set
-    WARN_ON_ONCE(!old_prs && (new_prs > 0)
+    WARN_ON_ONCE!(!old_prs && (new_prs > 0)
     && cpumask_empty(cs.effective_xcpus));
 // Update sched domains and load balance flag
     update_partition_sd_lb(cs, old_prs);
     notify_partition_change(cs, old_prs);
-    if (force_sd_rebuild)
+    if (force_sd_rebuild) {
     rebuild_sched_domains_locked();
+    }
     free_tmpmasks(&tmpmask);
     return 0;
     }
@@ -2824,25 +3113,31 @@ pub unsafe extern "C" fn if(_arg: isolcpus_updated) -> else {
 // Also set the boolean flag passed in by @psetsched depending on if
 // security_task_setscheduler() call is needed and @oldcs is not NULL.
 //
-    static int cpuset_can_attach_check(struct cpuset *cs, struct cpuset *oldcs,
-    bool *psetsched)
-    {
-    bool cpus_updated, mems_updated;
+#[no_mangle]
+pub unsafe extern "C" fn cpuset_can_attach_check(cs: *mut cpuset, oldcs: *mut cpuset, psetsched: *mut bool) -> c_int {
+    let mut cpus_updated = 0;
+    let mut mems_updated = 0;
     if (cpumask_empty(cs.effective_cpus) ||
-    (!is_in_v2_mode() && nodes_empty(cs.mems_allowed)))
+    (!is_in_v2_mode() && nodes_empty(cs.mems_allowed))) {
     return -ENOSPC;
-    if (!oldcs)
+    }
+    if (!oldcs) {
     return 0;
-    if (!llist_on_list(&oldcs.attach_node))
+    }
+    if (!llist_on_list(&oldcs.attach_node)) {
     llist_add(&oldcs.attach_node, &src_cs_head);
-    if (!llist_on_list(&cs.attach_node))
+    }
+    if (!llist_on_list(&cs.attach_node)) {
     llist_add(&cs.attach_node, &dst_cs_head);
+    }
     cpus_updated = !cpumask_equal(cs.effective_cpus, oldcs.effective_cpus);
     mems_updated = !nodes_equal(cs.effective_mems, oldcs.effective_mems);
-    if (cpus_updated)
+    if (cpus_updated) {
     attach_ctx.cpus_updated = true;
-    if (mems_updated)
+    }
+    if (mems_updated) {
     attach_ctx.mems_updated = true;
+    }
 //
 // Skip rights over task setsched check in v2 when nothing changes for
 // the current oldcs/cs pair, migration permission derives from
@@ -2856,25 +3151,28 @@ pub unsafe extern "C" fn if(_arg: isolcpus_updated) -> else {
 // we should allow tasks to migrate out without security check to make
 // sure they will be able to run after migration.
 //
-    if (!is_in_v2_mode() && cpumask_empty(oldcs.effective_cpus))
+    if (!is_in_v2_mode() && cpumask_empty(oldcs.effective_cpus)) {
 // psetsched = false;
+    }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn cpuset_reserve_dl_bw() -> c_int {
-    static int cpuset_reserve_dl_bw(void)
-    {
-    struct cpuset *cs;
-    int cpu, ret;
+pub static mut cs: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
+    let mut ret = 0;
     llist_for_each_entry(cs, dst_cs_head.first, attach_node) {
-    if (!cs.sum_migrate_dl_bw)
+    if (!cs.sum_migrate_dl_bw) {
     continue;
+    }
     cpu = cpumask_any_and(cpu_active_mask, cs.effective_cpus);
-    if (unlikely(cpu >= nr_cpu_ids))
+    if (unlikely(cpu >= nr_cpu_ids)) {
     return -EINVAL;
+    }
     ret = dl_bw_alloc(cpu, cs.sum_migrate_dl_bw);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     cs.dl_bw_cpu = cpu;
     }
     return 0;
@@ -2885,17 +3183,18 @@ unsafe extern "C" fn cpuset_reserve_dl_bw() -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn clear_attach_data(head: *mut llist_head, cancel: bool) {
-    static void clear_attach_data(struct llist_head *head, bool cancel)
-    {
-    struct cpuset *cs, *next;
-    struct llist_node *lnode = __llist_del_all(head);
+    let mut cs = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+    let mut lnode = __llist_del_all(head);
     llist_for_each_entry_safe(cs, next, lnode, attach_node) {
     init_llist_node(&cs.attach_node);
     if (cs.nr_migrate_dl_tasks) {
-    if (!cancel)
+    if (!cancel) {
     atomic_add(cs.nr_migrate_dl_tasks, &cs.nr_deadline_tasks);
-    else if (cs.dl_bw_cpu >= 0) /* && cancel */
+    }
+    else if (cs.dl_bw_cpu >= 0) /* && cancel */ {
     dl_bw_free(cs.dl_bw_cpu, cs.sum_migrate_dl_bw);
+    }
     cs.nr_migrate_dl_tasks = 0;
     cs.sum_migrate_dl_bw = 0;
     cs.dl_bw_cpu = -1;
@@ -2905,13 +3204,12 @@ unsafe extern "C" fn clear_attach_data(head: *mut llist_head, cancel: bool) {
 // Called by cgroups to determine if a cpuset is usable; cpuset_mutex held
 #[no_mangle]
 unsafe extern "C" fn cpuset_can_attach(tset: *mut cgroup_taskset) -> c_int {
-    static int cpuset_can_attach(struct cgroup_taskset *tset)
-    {
-    struct cgroup_subsys_state *css;
-    struct cpuset *cs, *oldcs;
-    struct task_struct *task;
-    bool setsched_check;
-    int ret;
+pub static mut css: *mut c_void = core::ptr::null_mut();
+    let mut cs = core::ptr::null_mut();
+    let mut oldcs = core::ptr::null_mut();
+pub static mut task: *mut c_void = core::ptr::null_mut();
+    let mut setsched_check = 0;
+    let mut ret = 0;
     cs = oldcs = core::ptr::null_mut();
     mutex_lock(&cpuset_mutex);
     attach_ctx.old_cs = core::ptr::null_mut();	/* Used later in cpuset_attach_task() */
@@ -2941,33 +3239,41 @@ unsafe extern "C" fn cpuset_can_attach(tset: *mut cgroup_taskset) -> c_int {
 // actual migration wrt cpuset.
 //
     cgroup_taskset_for_each(task, css, tset) {
-    struct cpuset *new_cs = css_cs(css);
-    struct cpuset *new_oldcs = task_cs(task);
+    let mut new_cs = css_cs(css);
+    let mut new_oldcs = task_cs(task);
     if ((new_oldcs != oldcs) || (new_cs != cs)) {
-    if (cs && (new_cs != cs))
+    if (cs && (new_cs != cs)) {
     attach_ctx.many_dest_cs = true;
+    }
     cs = new_cs;
     oldcs = new_oldcs;
-    if (oldcs == cs)
+    if (oldcs == cs) {
     continue;
-    if (!attach_ctx.old_cs)
-    attach_ctx.old_cs = oldcs;
-    ret = cpuset_can_attach_check(cs, oldcs, &setsched_check);
-    if (ret)
-    goto out_unlock;
     }
-    if (oldcs == cs)
+    if (!attach_ctx.old_cs) {
+    attach_ctx.old_cs = oldcs;
+    }
+    ret = cpuset_can_attach_check(cs, oldcs, &setsched_check);
+    if (ret) {
+// goto;
+    }
+    }
+    if (oldcs == cs) {
     continue;
+    }
     ret = task_can_attach(task);
-    if (ret)
-    goto out_unlock;
+    if (ret) {
+// goto;
+    }
 // Update attach_ctx.old_cs to the latest group leader
-    if (task == task.group_leader)
+    if (task == task.group_leader) {
     attach_ctx.old_cs = task_cs(task);
+    }
     if (setsched_check) {
     ret = security_task_setscheduler(task);
-    if (ret)
-    goto out_unlock;
+    if (ret) {
+// goto;
+    }
     }
     if (dl_task(task)) {
 //
@@ -2975,10 +3281,11 @@ unsafe extern "C" fn cpuset_can_attach(tset: *mut cgroup_taskset) -> c_int {
 // Only tasks that need a root-domain bandwidth move
 // contribute to sum_migrate_dl_bw.
 //
-    cs.nr_migrate_dl_tasks++;
-    oldcs.nr_migrate_dl_tasks--;
-    if (dl_task_needs_bw_move(task, cs.effective_cpus))
+    cs.nr_migrate_dl_tasks += 1;
+    oldcs.nr_migrate_dl_tasks -= 1;
+    if (dl_task_needs_bw_move(task, cs.effective_cpus)) {
     cs.sum_migrate_dl_bw += task.dl.dl_bw;
+    }
     }
     }
 //
@@ -2991,26 +3298,24 @@ unsafe extern "C" fn cpuset_can_attach(tset: *mut cgroup_taskset) -> c_int {
 // Print a warning and abort the attach operation as further code
 // change may be needed.
 //
-    if (WARN_ON_ONCE(attach_ctx.many_dest_cs && (!cpuset_v2() ||
+    if (WARN_ON_ONCE!(attach_ctx.many_dest_cs && (!cpuset_v2() ||
     attach_ctx.cpus_updated || attach_ctx.mems_updated))) {
     ret = -EINVAL;
-    goto out_unlock;
+// goto;
     }
     ret = cpuset_reserve_dl_bw();
-    out_unlock:
+// label;
     if (ret) {
     clear_attach_data(&src_cs_head, true);
     clear_attach_data(&dst_cs_head, true);
     } else {
-    attach_ctx.in_progress++;
+    attach_ctx.in_progress += 1;
     }
     mutex_unlock(&cpuset_mutex);
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn cpuset_cancel_attach(tset: *mut cgroup_taskset) {
-    static void cpuset_cancel_attach(struct cgroup_taskset *tset)
-    {
     mutex_lock(&cpuset_mutex);
     dec_attach_in_progress_locked();
     clear_attach_data(&src_cs_head, true);
@@ -3025,33 +3330,35 @@ unsafe extern "C" fn cpuset_cancel_attach(tset: *mut cgroup_taskset) {
     static cpumask_var_t cpus_attach;
 #[no_mangle]
 unsafe extern "C" fn cpuset_attach_task(cs: *mut cpuset, task: *mut task_struct) {
-    static void cpuset_attach_task(struct cpuset *cs, struct task_struct *task)
-    {
-    struct mm_struct *mm;
+pub static mut mm: *mut c_void = core::ptr::null_mut();
     lockdep_assert_cpuset_lock_held();
-    if (cs != &top_cpuset)
+    if (cs != &top_cpuset) {
     guarantee_active_cpus(task, cpus_attach);
-    else
+    }
+    else {
     cpumask_andnot(cpus_attach, task_cpu_possible_mask(task),
     subpartitions_cpus);
+    }
 //
 // can_attach beforehand should guarantee that this doesn't
 // fail.  TODO: have a better way to handle failure here
 //
-    WARN_ON_ONCE(set_cpus_allowed_ptr(task, cpus_attach));
-    if (cpuset_v2() && !attach_ctx.mems_updated)
+    WARN_ON_ONCE!(set_cpus_allowed_ptr(task, cpus_attach));
+    if (cpuset_v2() && !attach_ctx.mems_updated) {
     return;
+    }
     cpuset_change_task_nodemask(task, &attach_ctx.nodemask_to);
     cpuset1_update_task_spread_flags(cs, task);
-    if ((task != task.group_leader) || !attach_ctx.mems_updated)
+    if ((task != task.group_leader) || !attach_ctx.mems_updated) {
     return;
+    }
 //
 // Change mm for threadgroup leader. This is expensive and may
 // sleep and should be moved outside migration path proper.
 //
     mm = get_task_mm(task);
     if (mm) {
-    struct cpuset *oldcs = attach_ctx.old_cs;
+    let mut oldcs = attach_ctx.old_cs;
     mpol_rebind_mm(mm, &cs.effective_mems);
 //
 // old_mems_allowed is the same with mems_allowed
@@ -3072,11 +3379,9 @@ unsafe extern "C" fn cpuset_attach_task(cs: *mut cpuset, task: *mut task_struct)
     }
 #[no_mangle]
 unsafe extern "C" fn cpuset_attach(tset: *mut cgroup_taskset) {
-    static void cpuset_attach(struct cgroup_taskset *tset)
-    {
-    struct task_struct *task;
-    struct cgroup_subsys_state *css;
-    struct cpuset *cs;
+pub static mut task: *mut c_void = core::ptr::null_mut();
+pub static mut css: *mut c_void = core::ptr::null_mut();
+pub static mut cs: *mut c_void = core::ptr::null_mut();
     cgroup_taskset_first(tset, &css);
     cs = css_cs(css);
     lockdep_assert_cpus_held();	/* see cgroup_attach_lock() */
@@ -3088,8 +3393,9 @@ unsafe extern "C" fn cpuset_attach(tset: *mut cgroup_taskset) {
 // This is highly unlikely. If it happens at all, we can skip task
 // iteration and setting old_mems_allowed.
 //
-    if (unlikely(!attach_ctx.old_cs))
-    goto out;
+    if (unlikely(!attach_ctx.old_cs)) {
+// goto;
+    }
 //
 // In the default hierarchy, enabling cpuset in the child cgroups
 // will trigger a cpuset_attach() call with no change in effective cpus
@@ -3098,16 +3404,18 @@ unsafe extern "C" fn cpuset_attach(tset: *mut cgroup_taskset) {
 // old_mems_allowed.
 //
     if (cpuset_v2() && !attach_ctx.cpus_updated && !attach_ctx.mems_updated) {
-    llist_for_each_entry(cs, dst_cs_head.first, attach_node)
+    llist_for_each_entry(cs, dst_cs_head.first, attach_node) {
     cs.old_mems_allowed = attach_ctx.nodemask_to;
-    goto out;
+    }
+// goto;
     }
     cgroup_taskset_for_each(task, css, tset)
     cpuset_attach_task(cs, task);
-    if (attach_ctx.task_work_queued)
+    if (attach_ctx.task_work_queued) {
     schedule_flush_migrate_mm();
+    }
     cs.old_mems_allowed = attach_ctx.nodemask_to;
-    out:
+// label;
     clear_attach_data(&src_cs_head, false);
     clear_attach_data(&dst_cs_head, false);
     dec_attach_in_progress_locked();
@@ -3116,26 +3424,27 @@ unsafe extern "C" fn cpuset_attach(tset: *mut cgroup_taskset) {
 //
 // Common handling for a write to a "cpus" or "mems" file.
 //
-    ssize_t cpuset_write_resmask(struct kernfs_open_file *of,
-    char *buf, size_t nbytes, loff_t off)
-    {
-    struct cpuset *cs = css_cs(of_css(of));
-    struct cpuset *trialcs;
-    let mut retval: c_int = -ENODEV;
+#[no_mangle]
+pub unsafe extern "C" fn cpuset_write_resmask(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+    let mut cs = css_cs(of_css(of));
+pub static mut trialcs: *mut c_void = core::ptr::null_mut();
+pub static mut retval: c_int = 0;
 // root is read-only
-    if (cs == &top_cpuset)
+    if (cs == &top_cpuset) {
     return -EACCES;
+    }
     buf = strstrip(buf);
 // cpuset_mutex acquired in wait_attach_done_lock()
     mutex_lock(&cpuset_top_mutex);
     cpus_read_lock();
     wait_attach_done_lock();
-    if (!is_cpuset_online(cs))
-    goto out_unlock;
+    if (!is_cpuset_online(cs)) {
+// goto;
+    }
     trialcs = dup_or_alloc_cpuset(cs);
     if (!trialcs) {
     retval = -ENOMEM;
-    goto out_unlock;
+// goto;
     }
     switch (of_cft(of).private) {
     case FILE_CPULIST:
@@ -3147,15 +3456,16 @@ unsafe extern "C" fn cpuset_attach(tset: *mut cgroup_taskset) {
     case FILE_MEMLIST:
     retval = update_nodemask(cs, trialcs, buf);
     break;
-    default:
+// label;
     retval = -EINVAL;
     break;
     }
     free_cpuset(trialcs);
-    out_unlock:
+// label;
     cpuset_update_sd_hk_unlock();
-    if (of_cft(of).private == FILE_MEMLIST)
+    if (of_cft(of).private == FILE_MEMLIST) {
     schedule_flush_migrate_mm();
+    }
     return retval ?: nbytes;
     }
 //
@@ -3168,98 +3478,113 @@ unsafe extern "C" fn cpuset_attach(tset: *mut cgroup_taskset) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpuset_common_seq_show(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    int cpuset_common_seq_show(struct seq_file *sf, void *v)
-    {
-    struct cpuset *cs = css_cs(seq_css(sf));
-    let mut type: cpuset_filetype_t = seq_cft(sf).private;
-    let mut ret: c_int = 0;
+    let mut cs = css_cs(seq_css(sf));
+pub static mut type: cpuset_filetype_t = 0;
+pub static mut ret: c_int = 0;
     spin_lock_irq(&callback_lock);
-    switch (type) {
-    case FILE_CPULIST:
+    match (type) {
+    FILE_CPULIST => {
     seq_printf(sf, "%*pbl\n", cpumask_pr_args(cs.cpus_allowed));
-    break;
-    case FILE_MEMLIST:
+    // break;
+    }
+    FILE_MEMLIST => {
     seq_printf(sf, "%*pbl\n", nodemask_pr_args(&cs.mems_allowed));
-    break;
-    case FILE_EFFECTIVE_CPULIST:
+    // break;
+    }
+    FILE_EFFECTIVE_CPULIST => {
     seq_printf(sf, "%*pbl\n", cpumask_pr_args(cs.effective_cpus));
-    break;
-    case FILE_EFFECTIVE_MEMLIST:
+    // break;
+    }
+    FILE_EFFECTIVE_MEMLIST => {
     seq_printf(sf, "%*pbl\n", nodemask_pr_args(&cs.effective_mems));
-    break;
-    case FILE_EXCLUSIVE_CPULIST:
+    // break;
+    }
+    FILE_EXCLUSIVE_CPULIST => {
     seq_printf(sf, "%*pbl\n", cpumask_pr_args(cs.exclusive_cpus));
-    break;
-    case FILE_EFFECTIVE_XCPULIST:
+    // break;
+    }
+    FILE_EFFECTIVE_XCPULIST => {
     seq_printf(sf, "%*pbl\n", cpumask_pr_args(cs.effective_xcpus));
-    break;
-    case FILE_SUBPARTS_CPULIST:
+    // break;
+    }
+    FILE_SUBPARTS_CPULIST => {
     seq_printf(sf, "%*pbl\n", cpumask_pr_args(subpartitions_cpus));
-    break;
-    case FILE_ISOLATED_CPULIST:
+    // break;
+    }
+    FILE_ISOLATED_CPULIST => {
     seq_printf(sf, "%*pbl\n", cpumask_pr_args(isolated_cpus));
-    break;
-    default:
+    // break;
+    }
+    _ => {
     ret = -EINVAL;
+    }
     }
     spin_unlock_irq(&callback_lock);
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn cpuset_partition_show(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int cpuset_partition_show(struct seq_file *seq, void *v)
-    {
-    struct cpuset *cs = css_cs(seq_css(seq));
+    let mut cs = css_cs(seq_css(seq));
     const char *err, *type = core::ptr::null_mut();
-    switch (cs.partition_root_state) {
-    case PRS_ROOT:
+    match (cs.partition_root_state) {
+    PRS_ROOT => {
     seq_puts(seq, "root\n");
-    break;
-    case PRS_ISOLATED:
+    // break;
+    }
+    PRS_ISOLATED => {
     seq_puts(seq, "isolated\n");
-    break;
-    case PRS_MEMBER:
+    // break;
+    }
+    PRS_MEMBER => {
     seq_puts(seq, "member\n");
-    break;
-    case PRS_INVALID_ROOT:
+    // break;
+    }
+    PRS_INVALID_ROOT => {
     type = "root";
     fallthrough;
-    case PRS_INVALID_ISOLATED:
-    if (!type)
+    }
+    PRS_INVALID_ISOLATED => {
+    if (!type) {
     type = "isolated";
+    }
     err = perr_strings[READ_ONCE(cs.prs_err)];
-    if (err)
+    if (err) {
     seq_printf(seq, "%s invalid (%s)\n", type, err);
-    else
+    }
+    else {
     seq_printf(seq, "%s invalid\n", type);
-    break;
+    }
+    // break;
+    }
     }
     return 0;
     }
-    static ssize_t cpuset_partition_write(struct kernfs_open_file *of, char *buf,
-    size_t nbytes, loff_t off)
-    {
-    struct cpuset *cs = css_cs(of_css(of));
-    int val;
-    let mut retval: c_int = -ENODEV;
+#[no_mangle]
+pub unsafe extern "C" fn cpuset_partition_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+    let mut cs = css_cs(of_css(of));
+    let mut val = 0;
+pub static mut retval: c_int = 0;
     buf = strstrip(buf);
-    if (!strcmp(buf, "root"))
+    if (!strcmp(buf, "root")) {
     val = PRS_ROOT;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !strcmp(buf, _arg: "member")) -> else {
-    else if (!strcmp(buf, "member"))
+    }
+
+    else if (!strcmp(buf, "member")) {
     val = PRS_MEMBER;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !strcmp(buf, _arg: "isolated")) -> else {
-    else if (!strcmp(buf, "isolated"))
+    }
+
+    else if (!strcmp(buf, "isolated")) {
     val = PRS_ISOLATED;
-    else
+    }
+    else {
     return -EINVAL;
+    }
     mutex_lock(&cpuset_top_mutex);
     cpus_read_lock();
     wait_attach_done_lock();
-    if (is_cpuset_online(cs))
+    if (is_cpuset_online(cs)) {
     retval = update_prstate(cs, val);
+    }
     cpuset_update_sd_hk_unlock();
     return retval ?: nbytes;
     }
@@ -3267,69 +3592,7 @@ pub unsafe extern "C" fn if(_arg: !strcmp(buf, _arg: "isolated")) -> else {
 // This is currently a minimal set for the default hierarchy. It can be
 // expanded later on by migrating more features and control files from v1.
 //
-    static struct cftype dfl_files[] = {
-    {
-    .name = "cpus",
-    .seq_show = cpuset_common_seq_show,
-    .write = cpuset_write_resmask,
-    .max_write_len = (100U + 6 * NR_CPUS),
-    .private = FILE_CPULIST,
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    {
-    .name = "mems",
-    .seq_show = cpuset_common_seq_show,
-    .write = cpuset_write_resmask,
-    .max_write_len = (100U + 6 * MAX_NUMNODES),
-    .private = FILE_MEMLIST,
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    {
-    .name = "cpus.effective",
-    .seq_show = cpuset_common_seq_show,
-    .private = FILE_EFFECTIVE_CPULIST,
-    },
-    {
-    .name = "mems.effective",
-    .seq_show = cpuset_common_seq_show,
-    .private = FILE_EFFECTIVE_MEMLIST,
-    },
-    {
-    .name = "cpus.partition",
-    .seq_show = cpuset_partition_show,
-    .write = cpuset_partition_write,
-    .private = FILE_PARTITION_ROOT,
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .file_offset = offsetof(struct cpuset, partition_file),
-    },
-    {
-    .name = "cpus.exclusive",
-    .seq_show = cpuset_common_seq_show,
-    .write = cpuset_write_resmask,
-    .max_write_len = (100U + 6 * NR_CPUS),
-    .private = FILE_EXCLUSIVE_CPULIST,
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    {
-    .name = "cpus.exclusive.effective",
-    .seq_show = cpuset_common_seq_show,
-    .private = FILE_EFFECTIVE_XCPULIST,
-    .flags = CFTYPE_NOT_ON_ROOT,
-    },
-    {
-    .name = "cpus.subpartitions",
-    .seq_show = cpuset_common_seq_show,
-    .private = FILE_SUBPARTS_CPULIST,
-    .flags = CFTYPE_ONLY_ON_ROOT | CFTYPE_DEBUG,
-    },
-    {
-    .name = "cpus.isolated",
-    .seq_show = cpuset_common_seq_show,
-    .private = FILE_ISOLATED_CPULIST,
-    .flags = CFTYPE_ONLY_ON_ROOT,
-    },
-    { }	/* terminate */
-    };
+pub static mut cftype: usize = 0;
 //
 // cpuset_css_alloc - Allocate a cpuset css
 // @parent_css: Parent css of the control group that the new cpuset will be
@@ -3339,36 +3602,38 @@ pub unsafe extern "C" fn if(_arg: !strcmp(buf, _arg: "isolated")) -> else {
 // Allocate and initialize a new cpuset css, for non-NULL @parent_css, return
 // top cpuset css otherwise.
 //
-    static struct cgroup_subsys_state *
-    cpuset_css_alloc(struct cgroup_subsys_state *parent_css)
-    {
-    struct cpuset *cs;
-    if (!parent_css)
+#[no_mangle]
+pub unsafe extern "C" fn cpuset_css_alloc(parent_css: *mut cgroup_subsys_state) -> *mut c_void {
+pub static mut cs: *mut c_void = core::ptr::null_mut();
+    if (!parent_css) {
     return &top_cpuset.css;
+    }
     cs = dup_or_alloc_cpuset(core::ptr::null_mut());
-    if (!cs)
+    if (!cs) {
     return ERR_PTR(-ENOMEM);
+    }
     __set_bit(CS_SCHED_LOAD_BALANCE, &cs.flags);
     cpuset1_init(cs);
 // Set CS_MEMORY_MIGRATE for default hierarchy
-    if (cpuset_v2())
+    if (cpuset_v2()) {
     __set_bit(CS_MEMORY_MIGRATE, &cs.flags);
+    }
     return &cs.css;
     }
 #[no_mangle]
 unsafe extern "C" fn cpuset_css_online(css: *mut cgroup_subsys_state) -> c_int {
-    static int cpuset_css_online(struct cgroup_subsys_state *css)
-    {
-    struct cpuset *cs = css_cs(css);
-    struct cpuset *parent = parent_cs(cs);
-    if (!parent)
+    let mut cs = css_cs(css);
+    let mut parent = parent_cs(cs);
+    if (!parent) {
     return 0;
+    }
     cpuset_full_lock();
 //
 // For v2, clear CS_SCHED_LOAD_BALANCE if parent is isolated
 //
-    if (cpuset_v2() && !is_sched_load_balance(parent))
+    if (cpuset_v2() && !is_sched_load_balance(parent)) {
     clear_bit(CS_SCHED_LOAD_BALANCE, &cs.flags);
+    }
     cpuset_inc();
     spin_lock_irq(&callback_lock);
     if (is_in_v2_mode()) {
@@ -3389,12 +3654,11 @@ unsafe extern "C" fn cpuset_css_online(css: *mut cgroup_subsys_state) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn cpuset_css_offline(css: *mut cgroup_subsys_state) {
-    static void cpuset_css_offline(struct cgroup_subsys_state *css)
-    {
-    struct cpuset *cs = css_cs(css);
+    let mut cs = css_cs(css);
     cpuset_full_lock();
-    if (!cpuset_v2() && is_sched_load_balance(cs))
+    if (!cpuset_v2() && is_sched_load_balance(cs)) {
     cpuset_update_flag(CS_SCHED_LOAD_BALANCE, cs, 0);
+    }
     cpuset_dec();
     cpuset_full_unlock();
     }
@@ -3405,26 +3669,21 @@ unsafe extern "C" fn cpuset_css_offline(css: *mut cgroup_subsys_state) {
 //
 #[no_mangle]
 unsafe extern "C" fn cpuset_css_killed(css: *mut cgroup_subsys_state) {
-    static void cpuset_css_killed(struct cgroup_subsys_state *css)
-    {
-    struct cpuset *cs = css_cs(css);
+    let mut cs = css_cs(css);
     cpuset_full_lock();
 // Reset valid partition back to member
-    if (is_partition_valid(cs))
+    if (is_partition_valid(cs)) {
     update_prstate(cs, PRS_MEMBER);
+    }
     cpuset_update_sd_hk_unlock();
     }
 #[no_mangle]
 unsafe extern "C" fn cpuset_css_free(css: *mut cgroup_subsys_state) {
-    static void cpuset_css_free(struct cgroup_subsys_state *css)
-    {
-    struct cpuset *cs = css_cs(css);
+    let mut cs = css_cs(css);
     free_cpuset(cs);
     }
 #[no_mangle]
 unsafe extern "C" fn cpuset_bind(root_css: *mut cgroup_subsys_state) {
-    static void cpuset_bind(struct cgroup_subsys_state *root_css)
-    {
     mutex_lock(&cpuset_mutex);
     spin_lock_irq(&callback_lock);
     if (is_in_v2_mode()) {
@@ -3445,44 +3704,45 @@ unsafe extern "C" fn cpuset_bind(root_css: *mut cgroup_subsys_state) {
 //
 #[no_mangle]
 unsafe extern "C" fn cpuset_can_fork(task: *mut task_struct, cset: *mut css_set) -> c_int {
-    static int cpuset_can_fork(struct task_struct *task, struct css_set *cset)
-    {
-    struct cpuset *cs = css_cs(cset.subsys[cpuset_cgrp_id]);
-    bool same_cs;
-    int ret;
+    let mut cs = css_cs(cset.subsys[cpuset_cgrp_id]);
+    let mut same_cs = 0;
+    let mut ret = 0;
     rcu_read_lock();
     same_cs = (cs == task_cs(current));
     rcu_read_unlock();
-    if (same_cs)
+    if (same_cs) {
     return 0;
+    }
     lockdep_assert_held(&cgroup_mutex);
     mutex_lock(&cpuset_mutex);
 // Check to see if task is allowed in the cpuset
     ret = cpuset_can_attach_check(cs, core::ptr::null_mut(), core::ptr::null_mut());
-    if (ret)
-    goto out_unlock;
+    if (ret) {
+// goto;
+    }
     ret = task_can_attach(task);
-    if (ret)
-    goto out_unlock;
+    if (ret) {
+// goto;
+    }
     ret = security_task_setscheduler(task);
-    if (ret)
-    goto out_unlock;
-    attach_ctx.in_progress++;
-    out_unlock:
+    if (ret) {
+// goto;
+    }
+    attach_ctx.in_progress += 1;
+// label;
     mutex_unlock(&cpuset_mutex);
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn cpuset_cancel_fork(task: *mut task_struct, cset: *mut css_set) {
-    static void cpuset_cancel_fork(struct task_struct *task, struct css_set *cset)
-    {
-    struct cpuset *cs = css_cs(cset.subsys[cpuset_cgrp_id]);
-    bool same_cs;
+    let mut cs = css_cs(cset.subsys[cpuset_cgrp_id]);
+    let mut same_cs = 0;
     rcu_read_lock();
     same_cs = (cs == task_cs(current));
     rcu_read_unlock();
-    if (same_cs)
+    if (same_cs) {
     return;
+    }
     dec_attach_in_progress();
     }
 //
@@ -3492,16 +3752,16 @@ unsafe extern "C" fn cpuset_cancel_fork(task: *mut task_struct, cset: *mut css_s
 //
 #[no_mangle]
 unsafe extern "C" fn cpuset_fork(task: *mut task_struct) {
-    static void cpuset_fork(struct task_struct *task)
-    {
-    struct cpuset *cs, *oldcs;
+    let mut cs = core::ptr::null_mut();
+    let mut oldcs = core::ptr::null_mut();
     rcu_read_lock();
     cs = task_cs(task);
     oldcs = task_cs(current);
     rcu_read_unlock();
     if (cs == oldcs) {
-    if (cs == &top_cpuset)
+    if (cs == &top_cpuset) {
     return;
+    }
     set_cpus_allowed_ptr(task, current.cpus_ptr);
     task.mems_allowed = current.mems_allowed;
     return;
@@ -3519,47 +3779,27 @@ unsafe extern "C" fn cpuset_fork(task: *mut task_struct) {
     attach_ctx.task_work_queued = false;
     attach_ctx.old_cs = oldcs;
     cpuset_attach_task(cs, task);
-    if (attach_ctx.task_work_queued)
+    if (attach_ctx.task_work_queued) {
     schedule_flush_migrate_mm();
+    }
     dec_attach_in_progress_locked();
     mutex_unlock(&cpuset_mutex);
     }
-    struct cgroup_subsys cpuset_cgrp_subsys = {
-    .css_alloc	= cpuset_css_alloc,
-    .css_online	= cpuset_css_online,
-    .css_offline	= cpuset_css_offline,
-    .css_killed	= cpuset_css_killed,
-    .css_free	= cpuset_css_free,
-    .can_attach	= cpuset_can_attach,
-    .cancel_attach	= cpuset_cancel_attach,
-    .attach		= cpuset_attach,
-    .bind		= cpuset_bind,
-    .can_fork	= cpuset_can_fork,
-    .cancel_fork	= cpuset_cancel_fork,
-    .fork		= cpuset_fork,
-
-    .legacy_cftypes	= cpuset1_files,
-
-    .dfl_cftypes	= dfl_files,
-    .early_init	= true,
-    .threaded	= true,
-    };
+pub static mut cgroup_subsys: usize = 0;
 //
 // cpuset_init - initialize cpusets at system boot
 //
 // Description: Initialize top_cpuset
 //
 #[no_mangle]
-pub unsafe extern "C" fn cpuset_init() -> int __init {
-    int __init cpuset_init(void)
-    {
-    BUG_ON(!alloc_cpumask_var(&top_cpuset.cpus_allowed, GFP_KERNEL));
-    BUG_ON(!alloc_cpumask_var(&top_cpuset.effective_cpus, GFP_KERNEL));
-    BUG_ON(!alloc_cpumask_var(&top_cpuset.effective_xcpus, GFP_KERNEL));
-    BUG_ON(!alloc_cpumask_var(&top_cpuset.exclusive_cpus, GFP_KERNEL));
-    BUG_ON(!zalloc_cpumask_var(&subpartitions_cpus, GFP_KERNEL));
-    BUG_ON(!zalloc_cpumask_var(&isolated_cpus, GFP_KERNEL));
-    BUG_ON(!zalloc_cpumask_var(&isolated_hk_cpus, GFP_KERNEL));
+pub unsafe extern "C" fn cpuset_init() -> c_int {
+    BUG_ON!(!alloc_cpumask_var(&top_cpuset.cpus_allowed, GFP_KERNEL));
+    BUG_ON!(!alloc_cpumask_var(&top_cpuset.effective_cpus, GFP_KERNEL));
+    BUG_ON!(!alloc_cpumask_var(&top_cpuset.effective_xcpus, GFP_KERNEL));
+    BUG_ON!(!alloc_cpumask_var(&top_cpuset.exclusive_cpus, GFP_KERNEL));
+    BUG_ON!(!zalloc_cpumask_var(&subpartitions_cpus, GFP_KERNEL));
+    BUG_ON!(!zalloc_cpumask_var(&isolated_cpus, GFP_KERNEL));
+    BUG_ON!(!zalloc_cpumask_var(&isolated_hk_cpus, GFP_KERNEL));
     cpumask_setall(top_cpuset.cpus_allowed);
     nodes_setall(top_cpuset.mems_allowed);
     cpumask_setall(top_cpuset.effective_cpus);
@@ -3568,35 +3808,35 @@ pub unsafe extern "C" fn cpuset_init() -> int __init {
     nodes_setall(top_cpuset.effective_mems);
     init_llist_node(&top_cpuset.attach_node);
     cpuset1_init(&top_cpuset);
-    BUG_ON(!alloc_cpumask_var(&cpus_attach, GFP_KERNEL));
-    if (housekeeping_enabled(HK_TYPE_DOMAIN_BOOT))
+    BUG_ON!(!alloc_cpumask_var(&cpus_attach, GFP_KERNEL));
+    if (housekeeping_enabled(HK_TYPE_DOMAIN_BOOT)) {
     cpumask_andnot(isolated_cpus, cpu_possible_mask,
     housekeeping_cpumask(HK_TYPE_DOMAIN_BOOT));
+    }
     return 0;
     }
-    static void
-    hotplug_update_tasks(struct cpuset *cs,
-    struct cpumask *new_cpus, nodemask_t *new_mems,
-    bool cpus_updated, bool mems_updated)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hotplug_update_tasks(cs: *mut cpuset, new_cpus: *mut cpumask, new_mems: *mut nodemask_t, cpus_updated: bool, mems_updated: bool) {
 // A partition root is allowed to have empty effective cpus
-    if (cpumask_empty(new_cpus) && !is_partition_valid(cs))
+    if (cpumask_empty(new_cpus) && !is_partition_valid(cs)) {
     cpumask_copy(new_cpus, parent_cs(cs).effective_cpus);
-    if (nodes_empty(*new_mems))
+    }
+    if (nodes_empty(*new_mems)) {
 // new_mems = parent_cs(cs)->effective_mems;
+    }
     spin_lock_irq(&callback_lock);
     cpumask_copy(cs.effective_cpus, new_cpus);
     cs.effective_mems = *new_mems;
     spin_unlock_irq(&callback_lock);
-    if (cpus_updated)
+    if (cpus_updated) {
     cpuset_update_tasks_cpumask(cs, new_cpus);
-    if (mems_updated)
+    }
+    if (mems_updated) {
     cpuset_update_tasks_nodemask(cs);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn cpuset_force_rebuild() {
-    void cpuset_force_rebuild(void)
-    {
     force_sd_rebuild = true;
     }
 //
@@ -3610,28 +3850,28 @@ pub unsafe extern "C" fn cpuset_force_rebuild() {
 //
 #[no_mangle]
 unsafe extern "C" fn cpuset_hotplug_update_tasks(cs: *mut cpuset, tmp: *mut tmpmasks) {
-    static void cpuset_hotplug_update_tasks(struct cpuset *cs, struct tmpmasks *tmp)
-    {
     static cpumask_t new_cpus;
     static nodemask_t new_mems;
-    bool cpus_updated;
-    bool mems_updated;
-    bool remote;
-    let mut partcmd: c_int = -1;
-    struct cpuset *parent;
+    let mut cpus_updated = 0;
+    let mut mems_updated = 0;
+    let mut remote = 0;
+pub static mut partcmd: c_int = 0;
+pub static mut parent: *mut c_void = core::ptr::null_mut();
     wait_attach_done_lock();
     parent = parent_cs(cs);
     compute_effective_cpumask(&new_cpus, cs, parent);
     compute_effective_nodemask(&new_mems, cs, parent);
-    if (!tmp || !cs.partition_root_state)
-    goto update_tasks;
+    if (!tmp || !cs.partition_root_state) {
+// goto;
+    }
 //
 // Compute effective_cpus for valid partition root, may invalidate
 // child partition roots if necessary.
 //
     remote = is_remote_partition(cs);
-    if (remote || (is_partition_valid(cs) && is_partition_valid(parent)))
+    if (remote || (is_partition_valid(cs) && is_partition_valid(parent))) {
     compute_partition_effective_cpumask(cs, &new_cpus);
+    }
     if (remote && (cpumask_empty(subpartitions_cpus) ||
     (cpumask_empty(&new_cpus) &&
     partition_is_populated(cs, core::ptr::null_mut())))) {
@@ -3651,15 +3891,17 @@ unsafe extern "C" fn cpuset_hotplug_update_tasks(cs: *mut cpuset, tmp: *mut tmpm
     if (is_local_partition(cs) &&
     (!is_partition_valid(parent) ||
     tasks_nocpu_error(parent, cs, &new_cpus) ||
-    cpumask_empty(subpartitions_cpus)))
+    cpumask_empty(subpartitions_cpus))) {
     partcmd = partcmd_invalidate;
+    }
 //
 // On the other hand, an invalid partition root may be transitioned
 // back to a regular one with a non-empty effective xcpus.
 //
     else if (is_partition_valid(parent) && is_partition_invalid(cs) &&
-    !cpumask_empty(cs.effective_xcpus))
+    !cpumask_empty(cs.effective_xcpus)) {
     partcmd = partcmd_update;
+    }
     if (partcmd >= 0) {
     update_parent_effective_cpumask(cs, partcmd, core::ptr::null_mut(), tmp);
     if ((partcmd == partcmd_invalidate) || is_partition_valid(cs)) {
@@ -3667,20 +3909,24 @@ unsafe extern "C" fn cpuset_hotplug_update_tasks(cs: *mut cpuset, tmp: *mut tmpm
     cpuset_force_rebuild();
     }
     }
-    update_tasks:
+// label;
     cpus_updated = !cpumask_equal(&new_cpus, cs.effective_cpus);
     mems_updated = !nodes_equal(new_mems, cs.effective_mems);
-    if (!cpus_updated && !mems_updated)
-    goto unlock;	/* Hotplug doesn't affect this cpuset */
-    if (mems_updated)
+    if (!cpus_updated && !mems_updated) {
+// goto;	/* Hotplug doesn't affect this cpuset */
+    }
+    if (mems_updated) {
     check_insane_mems_config(&new_mems);
-    if (is_in_v2_mode())
+    }
+    if (is_in_v2_mode()) {
     hotplug_update_tasks(cs, &new_cpus, &new_mems,
     cpus_updated, mems_updated);
-    else
+    }
+    else {
     cpuset1_hotplug_update_tasks(cs, &new_cpus, &new_mems,
     cpus_updated, mems_updated);
-    unlock:
+    }
+// label;
     mutex_unlock(&cpuset_mutex);
     }
 //
@@ -3703,16 +3949,16 @@ unsafe extern "C" fn cpuset_hotplug_update_tasks(cs: *mut cpuset, tmp: *mut tmpm
 //
 #[no_mangle]
 unsafe extern "C" fn cpuset_handle_hotplug() {
-    static void cpuset_handle_hotplug(void)
-    {
-    static DECLARE_WORK(hk_sd_work, hk_sd_workfn);
+pub static mut hk_sd_work: usize = 0;
     static cpumask_t new_cpus;
     static nodemask_t new_mems;
-    bool cpus_updated, mems_updated;
-    let mut on_dfl: bool = is_in_v2_mode();
+    let mut cpus_updated = 0;
+    let mut mems_updated = 0;
+pub static mut on_dfl: bool = false;
     struct tmpmasks tmp, *ptmp = core::ptr::null_mut();
-    if (on_dfl && !alloc_tmpmasks(&tmp))
+    if (on_dfl && !alloc_tmpmasks(&tmp)) {
     ptmp = &tmp;
+    }
     lockdep_assert_cpus_held();
     mutex_lock(&cpuset_mutex);
 // fetch the available cpus/mems and find out which changed how
@@ -3730,8 +3976,9 @@ unsafe extern "C" fn cpuset_handle_hotplug() {
     if (cpus_updated) {
     cpuset_force_rebuild();
     spin_lock_irq(&callback_lock);
-    if (!on_dfl)
+    if (!on_dfl) {
     cpumask_copy(top_cpuset.cpus_allowed, &new_cpus);
+    }
 //
 // Make sure that CPUs allocated to child partitions
 // do not show up in effective_cpus. If no CPU is left,
@@ -3753,8 +4000,9 @@ unsafe extern "C" fn cpuset_handle_hotplug() {
 // synchronize mems_allowed to N_MEMORY
     if (mems_updated) {
     spin_lock_irq(&callback_lock);
-    if (!on_dfl)
+    if (!on_dfl) {
     top_cpuset.mems_allowed = new_mems;
+    }
     top_cpuset.effective_mems = new_mems;
     spin_unlock_irq(&callback_lock);
     cpuset_update_tasks_nodemask(&top_cpuset);
@@ -3762,12 +4010,13 @@ unsafe extern "C" fn cpuset_handle_hotplug() {
     mutex_unlock(&cpuset_mutex);
 // if cpus or mems changed, we need to propagate to descendants
     if (cpus_updated || mems_updated) {
-    struct cpuset *cs;
-    struct cgroup_subsys_state *pos_css;
+pub static mut cs: *mut c_void = core::ptr::null_mut();
+pub static mut pos_css: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     cpuset_for_each_descendant_pre(cs, pos_css, &top_cpuset) {
-    if (cs == &top_cpuset || !css_tryget_online(&cs.css))
+    if (cs == &top_cpuset || !css_tryget_online(&cs.css)) {
     continue;
+    }
     rcu_read_unlock();
     cpuset_hotplug_update_tasks(cs, ptmp);
     rcu_read_lock();
@@ -3790,16 +4039,16 @@ unsafe extern "C" fn cpuset_handle_hotplug() {
 // previously queued work. Since hk_sd_workfn() doesn't use the work
 // item at all, this is not a problem.
 //
-    if (force_sd_rebuild)
+    if (force_sd_rebuild) {
     rebuild_sched_domains_cpuslocked();
-    if (update_housekeeping)
+    }
+    if (update_housekeeping) {
     queue_work(system_dfl_wq, &hk_sd_work);
+    }
     free_tmpmasks(ptmp);
     }
 #[no_mangle]
 pub unsafe extern "C" fn cpuset_update_active_cpus() {
-    void cpuset_update_active_cpus(void)
-    {
 //
 // We're inside cpu hotplug critical region which usually nests
 // inside cgroup synchronization.  Bounce actual hotplug processing
@@ -3812,9 +4061,8 @@ pub unsafe extern "C" fn cpuset_update_active_cpus() {
 // Call this routine anytime after node_states[N_MEMORY] changes.
 // See cpuset_update_active_cpus() for CPU hotplug handling.
 //
-    static int cpuset_track_online_nodes(struct notifier_block *self,
-    unsigned long action, void *arg)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cpuset_track_online_nodes(self: *mut notifier_block, action: c_ulong, arg: *mut c_void) -> c_int {
     cpuset_handle_hotplug();
     return NOTIFY_OK;
     }
@@ -3824,9 +4072,7 @@ pub unsafe extern "C" fn cpuset_update_active_cpus() {
 // Description: Finish top cpuset after cpu, node maps are initialized
 //
 #[no_mangle]
-pub unsafe extern "C" fn cpuset_init_smp() -> void __init {
-    void __init cpuset_init_smp(void)
-    {
+pub unsafe extern "C" fn cpuset_init_smp()  {
 //
 // cpus_allowd/mems_allowed set to v2 values in the initial
 // cpuset_bind() call will be reset to v1 values in another
@@ -3837,33 +4083,33 @@ pub unsafe extern "C" fn cpuset_init_smp() -> void __init {
     top_cpuset.effective_mems = node_states[N_MEMORY];
     hotplug_node_notifier(cpuset_track_online_nodes, CPUSET_CALLBACK_PRI);
     cpuset_migrate_mm_wq = alloc_ordered_workqueue("cpuset_migrate_mm", 0);
-    BUG_ON(!cpuset_migrate_mm_wq);
+    BUG_ON!(!cpuset_migrate_mm_wq);
     }
 //
 // Return cpus_allowed mask from a task's cpuset.
 //
 #[no_mangle]
 unsafe extern "C" fn __cpuset_cpus_allowed_locked(tsk: *mut task_struct, pmask: *mut cpumask) {
-    static void __cpuset_cpus_allowed_locked(struct task_struct *tsk, struct cpumask *pmask)
-    {
-    struct cpuset *cs;
+pub static mut cs: *mut c_void = core::ptr::null_mut();
     cs = task_cs(tsk);
-    if (cs != &top_cpuset)
+    if (cs != &top_cpuset) {
     guarantee_active_cpus(tsk, pmask);
+    }
 //
 // Tasks in the top cpuset won't get update to their cpumasks
 // when a hotplug online/offline event happens. So we include all
 // offline cpus in the allowed cpu list.
 //
     if ((cs == &top_cpuset) || cpumask_empty(pmask)) {
-    const struct cpumask *possible_mask = task_cpu_possible_mask(tsk);
+    let mut possible_mask = task_cpu_possible_mask(tsk);
 //
 // We first exclude cpus allocated to partitions. If there is no
 // allowable online cpu left, we fall back to all possible cpus.
 //
     cpumask_andnot(pmask, possible_mask, subpartitions_cpus);
-    if (!cpumask_intersects(pmask, cpu_active_mask))
+    if (!cpumask_intersects(pmask, cpu_active_mask)) {
     cpumask_copy(pmask, possible_mask);
+    }
     }
     }
 //
@@ -3876,8 +4122,6 @@ unsafe extern "C" fn __cpuset_cpus_allowed_locked(tsk: *mut task_struct, pmask: 
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpuset_cpus_allowed_locked(tsk: *mut task_struct, pmask: *mut cpumask) {
-    void cpuset_cpus_allowed_locked(struct task_struct *tsk, struct cpumask *pmask)
-    {
     lockdep_assert_cpuset_lock_held();
     __cpuset_cpus_allowed_locked(tsk, pmask);
     }
@@ -3893,9 +4137,7 @@ pub unsafe extern "C" fn cpuset_cpus_allowed_locked(tsk: *mut task_struct, pmask
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpuset_cpus_allowed(tsk: *mut task_struct, pmask: *mut cpumask) {
-    void cpuset_cpus_allowed(struct task_struct *tsk, struct cpumask *pmask)
-    {
-    unsigned long flags;
+    let mut flags = 0;
     spin_lock_irqsave(&callback_lock, flags);
     __cpuset_cpus_allowed_locked(tsk, pmask);
     spin_unlock_irqrestore(&callback_lock, flags);
@@ -3915,11 +4157,9 @@ pub unsafe extern "C" fn cpuset_cpus_allowed(tsk: *mut task_struct, pmask: *mut 
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpuset_cpus_allowed_fallback(tsk: *mut task_struct) -> bool {
-    bool cpuset_cpus_allowed_fallback(struct task_struct *tsk)
-    {
-    const struct cpumask *possible_mask = task_cpu_possible_mask(tsk);
-    const struct cpumask *cs_mask;
-    let mut changed: bool = false;
+    let mut possible_mask = task_cpu_possible_mask(tsk);
+pub static mut cs_mask: *mut c_void = core::ptr::null_mut();
+pub static mut changed: bool = false;
     rcu_read_lock();
     cs_mask = task_cs(tsk).cpus_allowed;
     if (is_in_v2_mode() && cpumask_subset(cs_mask, possible_mask)) {
@@ -3955,22 +4195,19 @@ pub unsafe extern "C" fn cpuset_cpus_allowed_fallback(tsk: *mut task_struct) -> 
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpuset_num_cpus(cgrp: *mut cgroup) -> c_int {
-    int cpuset_num_cpus(struct cgroup *cgrp)
-    {
-    let mut nr: c_int = num_online_cpus();
-    struct cpuset *cs;
+pub static mut nr: c_int = 0;
+pub static mut cs: *mut c_void = core::ptr::null_mut();
     if (is_in_v2_mode()) {
     guard(rcu)();
     cs = css_cs(cgroup_e_css(cgrp, &cpuset_cgrp_subsys));
-    if (cs)
+    if (cs) {
     nr = cpumask_weight(cs.effective_cpus);
+    }
     }
     return nr;
     }
 #[no_mangle]
-pub unsafe extern "C" fn cpuset_init_current_mems_allowed() -> void __init {
-    void __init cpuset_init_current_mems_allowed(void)
-    {
+pub unsafe extern "C" fn cpuset_init_current_mems_allowed()  {
     nodes_setall(current.mems_allowed);
     }
 //
@@ -3984,10 +4221,8 @@ pub unsafe extern "C" fn cpuset_init_current_mems_allowed() -> void __init {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpuset_mems_allowed(tsk: *mut task_struct) -> nodemask_t {
-    nodemask_t cpuset_mems_allowed(struct task_struct *tsk)
-    {
-    nodemask_t mask;
-    unsigned long flags;
+    let mut mask;
+    let mut flags = 0;
     spin_lock_irqsave(&callback_lock, flags);
     guarantee_online_mems(task_cs(tsk), &mask);
     spin_unlock_irqrestore(&callback_lock, flags);
@@ -4001,8 +4236,6 @@ pub unsafe extern "C" fn cpuset_mems_allowed(tsk: *mut task_struct) -> nodemask_
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpuset_nodemask_valid_mems_allowed(nodemask: *const nodemask_t) -> c_int {
-    int cpuset_nodemask_valid_mems_allowed(const nodemask_t *nodemask)
-    {
     return nodes_intersects(*nodemask, current.mems_allowed);
     }
 //
@@ -4011,10 +4244,11 @@ pub unsafe extern "C" fn cpuset_nodemask_valid_mems_allowed(nodemask: *const nod
 // callback_lock.  If no ancestor is mem_exclusive or mem_hardwall
 // (an unusual configuration), then returns the root cpuset.
 //
-    static struct cpuset *nearest_hardwall_ancestor(struct cpuset *cs)
-    {
-    while (!(is_mem_exclusive(cs) || is_mem_hardwall(cs)) && parent_cs(cs))
+#[no_mangle]
+pub unsafe extern "C" fn nearest_hardwall_ancestor(cs: *mut cpuset) -> *mut c_void {
+    while (!(is_mem_exclusive(cs) || is_mem_hardwall(cs)) && parent_cs(cs)) {
     cs = parent_cs(cs);
+    }
     return cs;
     }
 //
@@ -4059,27 +4293,31 @@ pub unsafe extern "C" fn cpuset_nodemask_valid_mems_allowed(nodemask: *const nod
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpuset_current_node_allowed(node: c_int, gfp_mask: gfp_t) -> bool {
-    bool cpuset_current_node_allowed(int node, gfp_t gfp_mask)
-    {
-    struct cpuset *cs;		/* current cpuset ancestors */
-    bool allowed;			/* is allocation in zone z allowed? */
-    unsigned long flags;
-    if (in_interrupt())
+pub static mut cs: *mut c_void = core::ptr::null_mut();		/* current cpuset ancestors */
+    let mut allowed = 0;			/* is allocation in zone z allowed? */
+    let mut flags = 0;
+    if (in_interrupt()) {
     return true;
-    if (node_isset(node, current.mems_allowed))
+    }
+    if (node_isset(node, current.mems_allowed)) {
     return true;
+    }
 //
 // Allow tasks that have access to memory reserves because they have
 // been OOM killed to get memory anywhere.
 //
-    if (unlikely(tsk_is_oom_victim(current)))
+    if (unlikely(tsk_is_oom_victim(current))) {
     return true;
-    if (current.flags & PF_EXITING) /* Let dying task have memory */
+    }
+    if (current.flags & PF_EXITING) /* Let dying task have memory */ {
     return true;
-    if (gfp_mask & __GFP_HARDWALL)	/* If hardwall request, stop here */
+    }
+    if (gfp_mask & __GFP_HARDWALL)	/* If hardwall request, stop here */ {
     return false;
-    if (cpuset_v2())
+    }
+    if (cpuset_v2()) {
     return true;
+    }
 // Not hardwall and node outside mems_allowed: scan up cpusets
     spin_lock_irqsave(&callback_lock, flags);
     cs = nearest_hardwall_ancestor(task_cs(current));
@@ -4107,10 +4345,8 @@ pub unsafe extern "C" fn cpuset_current_node_allowed(node: c_int, gfp_mask: gfp_
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpuset_nodes_allowed(cgroup: *mut cgroup, mask: *mut nodemask_t) {
-    void cpuset_nodes_allowed(struct cgroup *cgroup, nodemask_t *mask)
-    {
-    struct cgroup_subsys_state *css;
-    struct cpuset *cs;
+pub static mut css: *mut c_void = core::ptr::null_mut();
+pub static mut cs: *mut c_void = core::ptr::null_mut();
 //
 // In v1, mem_cgroup and cpuset are unlikely in the same hierarchy
 // and mems_allowed is likely to be empty even if we could get to it,
@@ -4135,7 +4371,7 @@ pub unsafe extern "C" fn cpuset_nodes_allowed(cgroup: *mut cgroup, mask: *mut no
 // during this process to save lock contention in exchange for racing
 // against mems_allowed rebinds.
 //
-    cs = container_of(css, struct cpuset, css);
+    cs = container_of!(css, cpuset, css);
     nodes_copy(*mask, cs.effective_mems);
     css_put(css);
     }
@@ -4163,20 +4399,17 @@ pub unsafe extern "C" fn cpuset_nodes_allowed(cgroup: *mut cgroup, mask: *mut no
 //
 #[no_mangle]
 unsafe extern "C" fn cpuset_spread_node(rotor: *mut c_int) -> c_int {
-    static int cpuset_spread_node(int *rotor)
-    {
-    return *rotor = next_node_in(*rotor, current.mems_allowed);
+    let mut rotor = next_node_in(*rotor, current.mems_allowed);
     }
 //
 // cpuset_mem_spread_node() - On which node to begin search for a file page
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpuset_mem_spread_node() -> c_int {
-    int cpuset_mem_spread_node(void)
-    {
-    if (current.cpuset_mem_spread_rotor == NUMA_NO_NODE)
+    if (current.cpuset_mem_spread_rotor == NUMA_NO_NODE) {
     current.cpuset_mem_spread_rotor =
     node_random(&current.mems_allowed);
+    }
     return cpuset_spread_node(&current.cpuset_mem_spread_rotor);
     }
 //
@@ -4189,9 +4422,8 @@ pub unsafe extern "C" fn cpuset_mem_spread_node() -> c_int {
 // one of the task's memory usage might impact the memory available
 // to the other.
 //
-    int cpuset_mems_allowed_intersects(const struct task_struct *tsk1,
-    const struct task_struct *tsk2)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cpuset_mems_allowed_intersects(tsk1: *mut task_struct, tsk2: *mut task_struct) -> c_int {
     return nodes_intersects(tsk1.mems_allowed, tsk2.mems_allowed);
     }
 //
@@ -4202,9 +4434,7 @@ pub unsafe extern "C" fn cpuset_mem_spread_node() -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cpuset_print_current_mems_allowed() {
-    void cpuset_print_current_mems_allowed(void)
-    {
-    struct cgroup *cgrp;
+pub static mut cgrp: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     cgrp = task_cs(current).css.cgroup;
     pr_cont(",cpuset=");
@@ -4216,10 +4446,9 @@ pub unsafe extern "C" fn cpuset_print_current_mems_allowed() {
 // Display task mems_allowed in /proc/<pid>/status file.
 #[no_mangle]
 pub unsafe extern "C" fn cpuset_task_status_allowed(m: *mut seq_file, task: *mut task_struct) {
-    void cpuset_task_status_allowed(struct seq_file *m, struct task_struct *task)
-    {
     seq_printf(m, "Mems_allowed:\t%*pb\n",
     nodemask_pr_args(&task.mems_allowed));
     seq_printf(m, "Mems_allowed_list:\t%*pbl\n",
     nodemask_pr_args(&task.mems_allowed));
     }
+}

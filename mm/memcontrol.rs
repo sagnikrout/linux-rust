@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -65,12 +315,12 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
 // Macro flag: #define CREATE_TRACE_POINTS
 
-    struct cgroup_subsys memory_cgrp_subsys __read_mostly;
+    let mut memory_cgrp_subsys: cgroup_subsys = unsafe { core::mem::zeroed() };
     EXPORT_SYMBOL(memory_cgrp_subsys);
-    struct mem_cgroup *root_mem_cgroup __read_mostly;
+pub static mut root_mem_cgroup: *mut c_void = core::ptr::null_mut();
     EXPORT_SYMBOL(root_mem_cgroup);
 // Active memory cgroup to use from an interrupt context
-    DEFINE_PER_CPU(struct mem_cgroup *, int_active_memcg);
+pub static mut struct mem_cgroup *: usize = 0;
     EXPORT_PER_CPU_SYMBOL_GPL(int_active_memcg);
 // Socket memory accounting disabled?
     static bool cgroup_memory_nosocket __ro_after_init;
@@ -78,58 +328,52 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     static bool cgroup_memory_nokmem __ro_after_init;
 // BPF memory accounting disabled?
     static bool cgroup_memory_nobpf __ro_after_init;
-    static struct workqueue_struct *memcg_wq __ro_after_init;
-    static struct kmem_cache *memcg_cachep;
-    static struct kmem_cache *memcg_pn_cachep;
+pub static mut memcg_wq: *mut c_void = core::ptr::null_mut();
+pub static mut memcg_cachep: *mut c_void = core::ptr::null_mut();
+pub static mut memcg_pn_cachep: *mut c_void = core::ptr::null_mut();
 
-    static DECLARE_WAIT_QUEUE_HEAD(memcg_cgwb_frn_waitq);
+pub static mut memcg_cgwb_frn_waitq: usize = 0;
 
 #[no_mangle]
 pub unsafe extern "C" fn task_is_dying() -> bool {
-    static inline bool task_is_dying(void)
-    {
     return tsk_is_oom_victim(current) || fatal_signal_pending(current) ||
     (current.flags & PF_EXITING);
     }
 // Some nice accessors for the vmpressure.
-    struct vmpressure *memcg_to_vmpressure(struct mem_cgroup *memcg)
-    {
-    if (!memcg)
+#[no_mangle]
+pub unsafe extern "C" fn memcg_to_vmpressure(memcg: *mut mem_cgroup) -> *mut c_void {
+    if (!memcg) {
     memcg = root_mem_cgroup;
+    }
     return &memcg.vmpressure;
     }
-    struct mem_cgroup *vmpressure_to_memcg(struct vmpressure *vmpr)
-    {
-    return container_of(vmpr, struct mem_cgroup, vmpressure);
+#[no_mangle]
+pub unsafe extern "C" fn vmpressure_to_memcg(vmpr: *mut vmpressure) -> *mut c_void {
+    return container_of!(vmpr, mem_cgroup, vmpressure);
     }
 
 pub const CURRENT_OBJCG_UPDATE_BIT: c_int = 0;
 
-    static DEFINE_SPINLOCK(objcg_lock);
+pub static mut objcg_lock: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn mem_cgroup_kmem_disabled() -> bool {
-    bool mem_cgroup_kmem_disabled(void)
-    {
     return cgroup_memory_nokmem;
     }
-    static void memcg_uncharge(struct mem_cgroup *memcg, unsigned int nr_pages);
+// forward_decl: memcg_uncharge;
 #[no_mangle]
 unsafe extern "C" fn memcg_uncharge_kmem(memcg: *mut mem_cgroup, nr_pages: c_uint) {
-    static void memcg_uncharge_kmem(struct mem_cgroup *memcg, unsigned int nr_pages)
-    {
     mod_memcg_state(memcg, MEMCG_KMEM, -nr_pages);
     memcg1_account_kmem(memcg, -nr_pages);
-    if (!mem_cgroup_is_root(memcg))
+    if (!mem_cgroup_is_root(memcg)) {
     memcg_uncharge(memcg, nr_pages);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn obj_cgroup_release(ref: *mut percpu_ref) {
-    static void obj_cgroup_release(struct percpu_ref *ref)
-    {
-    struct obj_cgroup *objcg = container_of(ref, struct obj_cgroup, refcnt);
-    unsigned int nr_bytes;
-    unsigned int nr_pages;
-    unsigned long flags;
+    let mut objcg = container_of!(ref, obj_cgroup, refcnt);
+    let mut nr_bytes = 0;
+    let mut nr_pages = 0;
+    let mut flags = 0;
 //
 // At this point all allocated objects are freed, and
 // objcg->nr_charged_bytes can't have an arbitrary byte value.
@@ -151,10 +395,10 @@ unsafe extern "C" fn obj_cgroup_release(ref: *mut percpu_ref) {
 // This page will be uncharged in obj_cgroup_release().
 //
     nr_bytes = atomic_read(&objcg.nr_charged_bytes);
-    WARN_ON_ONCE(nr_bytes & (PAGE_SIZE - 1));
+    WARN_ON_ONCE!(nr_bytes & (PAGE_SIZE - 1));
     nr_pages = nr_bytes >> PAGE_SHIFT;
     if (nr_pages) {
-    struct mem_cgroup *memcg;
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
     memcg = get_mem_cgroup_from_objcg(objcg);
     memcg_uncharge_kmem(memcg, nr_pages);
     mem_cgroup_put(memcg);
@@ -165,13 +409,14 @@ unsafe extern "C" fn obj_cgroup_release(ref: *mut percpu_ref) {
     percpu_ref_exit(ref);
     kfree_rcu(objcg, rcu);
     }
-    static struct obj_cgroup *obj_cgroup_alloc(void)
-    {
-    struct obj_cgroup *objcg;
-    int ret;
-    objcg = kzalloc_obj(struct obj_cgroup);
-    if (!objcg)
+#[no_mangle]
+pub unsafe extern "C" fn obj_cgroup_alloc() -> *mut c_void {
+pub static mut objcg: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    objcg = kzalloc_obj(obj_cgroup);
+    if (!objcg) {
     return core::ptr::null_mut();
+    }
     ret = percpu_ref_init(&objcg.refcnt, obj_cgroup_release, 0,
     GFP_KERNEL);
     if (ret) {
@@ -181,31 +426,30 @@ unsafe extern "C" fn obj_cgroup_release(ref: *mut percpu_ref) {
     INIT_LIST_HEAD(&objcg.list);
     return objcg;
     }
-    static inline struct obj_cgroup *__memcg_reparent_objcgs(struct mem_cgroup *memcg,
-    struct mem_cgroup *parent,
-    int nid)
-    {
-    struct obj_cgroup *objcg, *iter;
-    struct mem_cgroup_per_node *pn = memcg.nodeinfo[nid];
-    struct mem_cgroup_per_node *parent_pn = parent.nodeinfo[nid];
+#[no_mangle]
+pub unsafe extern "C" fn __memcg_reparent_objcgs(memcg: *mut mem_cgroup, parent: *mut mem_cgroup, nid: c_int) -> *mut c_void {
+    let mut objcg = core::ptr::null_mut();
+    let mut iter = core::ptr::null_mut();
+    let mut pn = memcg.nodeinfo[nid];
+    let mut parent_pn = parent.nodeinfo[nid];
     objcg = rcu_replace_pointer(pn.objcg, core::ptr::null_mut(), true);
 // 1) Ready to reparent active objcg.
     list_add(&objcg.list, &pn.objcg_list);
 // 2) Reparent active objcg and already reparented objcgs to parent.
-    list_for_each_entry(iter, &pn.objcg_list, list)
+    list_for_each_entry(iter, &pn.objcg_list, list) {
     WRITE_ONCE(iter.memcg, parent);
+    }
 // 3) Move already reparented objcgs to the parent's list
     list_splice(&pn.objcg_list, &parent_pn.objcg_list);
     return objcg;
     }
 
-    static void __mem_cgroup_flush_stats(struct mem_cgroup *memcg, bool force);
+// forward_decl: __mem_cgroup_flush_stats;
 #[no_mangle]
 pub unsafe extern "C" fn reparent_state_local(memcg: *mut mem_cgroup, parent: *mut mem_cgroup) {
-    static inline void reparent_state_local(struct mem_cgroup *memcg, struct mem_cgroup *parent)
-    {
-    if (cgroup_subsys_on_dfl(memory_cgrp_subsys))
+    if (cgroup_subsys_on_dfl(memory_cgrp_subsys)) {
     return;
+    }
 //
 // Reparent stats exposed non-hierarchically. Flush @memcg's stats first
 // to read its stats accurately , and conservatively flush @parent's
@@ -220,44 +464,39 @@ pub unsafe extern "C" fn reparent_state_local(memcg: *mut mem_cgroup, parent: *m
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn reparent_state_local(memcg: *mut mem_cgroup, parent: *mut mem_cgroup) {
-    static inline void reparent_state_local(struct mem_cgroup *memcg, struct mem_cgroup *parent)
-    {
+#[no_mangle]
+// duplicate fn: reparent_state_local
+pub unsafe extern "C" fn reparent_state_local_dup(memcg: *mut mem_cgroup, parent: *mut mem_cgroup) {
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn reparent_locks(memcg: *mut mem_cgroup, parent: *mut mem_cgroup, nid: c_int) {
-    static inline void reparent_locks(struct mem_cgroup *memcg, struct mem_cgroup *parent, int nid)
-    {
     spin_lock_irq(&objcg_lock);
     spin_lock_nested(&mem_cgroup_lruvec(memcg, NODE_DATA(nid)).lru_lock, 1);
     spin_lock_nested(&mem_cgroup_lruvec(parent, NODE_DATA(nid)).lru_lock, 2);
     }
 #[no_mangle]
 pub unsafe extern "C" fn reparent_unlocks(memcg: *mut mem_cgroup, parent: *mut mem_cgroup, nid: c_int) {
-    static inline void reparent_unlocks(struct mem_cgroup *memcg, struct mem_cgroup *parent, int nid)
-    {
     spin_unlock(&mem_cgroup_lruvec(parent, NODE_DATA(nid)).lru_lock);
     spin_unlock(&mem_cgroup_lruvec(memcg, NODE_DATA(nid)).lru_lock);
     spin_unlock_irq(&objcg_lock);
     }
 #[no_mangle]
 unsafe extern "C" fn memcg_reparent_objcgs(memcg: *mut mem_cgroup) {
-    static void memcg_reparent_objcgs(struct mem_cgroup *memcg)
-    {
-    struct obj_cgroup *objcg;
-    struct mem_cgroup *parent = parent_mem_cgroup(memcg);
-    int nid;
+pub static mut objcg: *mut c_void = core::ptr::null_mut();
+    let mut parent = parent_mem_cgroup(memcg);
+    let mut nid = 0;
     for_each_node(nid) {
-    retry:
-    if (lru_gen_enabled())
+// label;
+    if (lru_gen_enabled()) {
     max_lru_gen_memcg(parent, nid);
+    }
     reparent_locks(memcg, parent, nid);
     if (lru_gen_enabled()) {
     if (!recheck_lru_gen_max_memcg(parent, nid)) {
     reparent_unlocks(memcg, parent, nid);
     cond_resched();
-    goto retry;
+// goto;
     }
     lru_gen_reparent_memcg(memcg, parent, nid);
     } else {
@@ -275,9 +514,9 @@ unsafe extern "C" fn memcg_reparent_objcgs(memcg: *mut mem_cgroup) {
 // conditional to this static branch, we'll have to allow modules that does
 // kmem_cache_alloc and the such to see this symbol as well
 //
-    DEFINE_STATIC_KEY_FALSE(memcg_kmem_online_key);
+pub static mut memcg_kmem_online_key: usize = 0;
     EXPORT_SYMBOL(memcg_kmem_online_key);
-    DEFINE_STATIC_KEY_FALSE(memcg_bpf_enabled_key);
+pub static mut memcg_bpf_enabled_key: usize = 0;
     EXPORT_SYMBOL(memcg_bpf_enabled_key);
 //
 // get_mem_cgroup_css_from_folio - acquire a css of the memcg associated with a folio
@@ -290,11 +529,12 @@ unsafe extern "C" fn memcg_reparent_objcgs(memcg: *mut mem_cgroup) {
 // If memcg is bound to a traditional hierarchy, the css of root_mem_cgroup
 // is returned.
 //
-    struct cgroup_subsys_state *get_mem_cgroup_css_from_folio(struct folio *folio)
-    {
-    struct mem_cgroup *memcg;
-    if (!cgroup_subsys_on_dfl(memory_cgrp_subsys))
+#[no_mangle]
+pub unsafe extern "C" fn get_mem_cgroup_css_from_folio(folio: *mut folio) -> *mut c_void {
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+    if (!cgroup_subsys_on_dfl(memory_cgrp_subsys)) {
     return &root_mem_cgroup.css;
+    }
     memcg = get_mem_cgroup_from_folio(folio);
     return memcg ? &memcg.css : &root_mem_cgroup.css;
     }
@@ -313,17 +553,17 @@ unsafe extern "C" fn memcg_reparent_objcgs(memcg: *mut mem_cgroup) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn page_cgroup_ino(page: *mut page) -> ino_t {
-    ino_t page_cgroup_ino(struct page *page)
-    {
-    struct mem_cgroup *memcg;
-    let mut ino: c_ulong = 0;
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+pub static mut ino: c_ulong = 0;
     rcu_read_lock();
 // page_folio() is racy here, but the entire function is racy anyway
     memcg = folio_memcg_check(page_folio(page));
-    while (memcg && !css_is_online(&memcg.css))
+    while (memcg && !css_is_online(&memcg.css)) {
     memcg = parent_mem_cgroup(memcg);
-    if (memcg)
+    }
+    if (memcg) {
     ino = cgroup_ino(memcg.css.cgroup);
+    }
     rcu_read_unlock();
     return ino;
     }
@@ -396,25 +636,23 @@ pub unsafe extern "C" fn page_cgroup_ino(page: *mut page) -> ino_t {
     MEMCG_ZSWAP_INCOMP,
     };
 
-    ARRAY_SIZE(memcg_stat_items))
+    ARRAY_SIZE!(memcg_stat_items))
 
-    static u8 mem_cgroup_stats_index[MEMCG_NR_STAT] __read_mostly;
+    static u8 mem_cgroup_stats_index[MEMCG_NR_STAT] ;
 #[no_mangle]
 unsafe extern "C" fn init_memcg_stats() {
-    static void init_memcg_stats(void)
-    {
     u8 i, j = 0;
-    BUILD_BUG_ON(MEMCG_NR_STAT >= U8_MAX);
-    memset(mem_cgroup_stats_index, U8_MAX, sizeof(mem_cgroup_stats_index));
-    for (i = 0; i < NR_MEMCG_NODE_STAT_ITEMS; ++i, ++j)
+    BUILD_BUG_ON!(MEMCG_NR_STAT >= U8_MAX);
+    memset(mem_cgroup_stats_index, U8_MAX, sizeof!(mem_cgroup_stats_index));
+    for (i = 0; i < NR_MEMCG_NODE_STAT_ITEMS; ++i, ++j) {
     mem_cgroup_stats_index[memcg_node_stat_items[i]] = j;
-    for (i = 0; i < ARRAY_SIZE(memcg_stat_items); ++i, ++j)
+    }
+    for (i = 0; i < ARRAY_SIZE!(memcg_stat_items); ++i, ++j) {
     mem_cgroup_stats_index[memcg_stat_items[i]] = j;
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn memcg_stats_index(idx: c_int) -> c_int {
-    static inline int memcg_stats_index(int idx)
-    {
     return mem_cgroup_stats_index[idx];
     }
 #[repr(C)]
@@ -438,22 +676,23 @@ pub struct lruvec_stats {
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn lruvec_page_state(lruvec: *mut lruvec, idx: enum node_stat_item) -> c_ulong {
-    unsigned long lruvec_page_state(struct lruvec *lruvec, enum node_stat_item idx)
-    {
-    struct mem_cgroup_per_node *pn;
-    long x;
-    int i;
-    if (mem_cgroup_disabled())
+pub unsafe extern "C" fn lruvec_page_state(lruvec: *mut lruvec, idx: node_stat_item) -> c_ulong {
+pub static mut pn: *mut c_void = core::ptr::null_mut();
+    let mut x = 0;
+    let mut i = 0;
+    if (mem_cgroup_disabled()) {
     return node_page_state(lruvec_pgdat(lruvec), idx);
+    }
     i = memcg_stats_index(idx);
-    if (WARN_ONCE(BAD_STAT_IDX(i), "%s: missing stat item %d\n", __func__, idx))
+    if (WARN_ONCE(BAD_STAT_IDX(i), "%s: missing stat item %d\n", __func__, idx)) {
     return 0;
-    pn = container_of(lruvec, struct mem_cgroup_per_node, lruvec);
+    }
+    pn = container_of!(lruvec, mem_cgroup_per_node, lruvec);
     x = READ_ONCE(pn.lruvec_stats.state[i]);
 
-    if (x < 0)
+    if (x < 0) {
     x = 0;
+    }
 
     return x;
     }
@@ -476,52 +715,54 @@ pub unsafe extern "C" fn lruvec_page_state(lruvec: *mut lruvec, idx: enum node_s
 // monotonically-incremented event counters are stored in
 // enum node_stat_item.
 //
-    unsigned long lruvec_page_state_monotonic(struct lruvec *lruvec,
-    enum node_stat_item idx)
-    {
-    struct mem_cgroup_per_node *pn;
-    int i;
-    if (mem_cgroup_disabled())
+#[no_mangle]
+pub unsafe extern "C" fn lruvec_page_state_monotonic(lruvec: *mut lruvec, idx: node_stat_item) -> c_ulong {
+pub static mut pn: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    if (mem_cgroup_disabled()) {
     return node_page_state_monotonic(lruvec_pgdat(lruvec), idx);
+    }
     i = memcg_stats_index(idx);
-    if (WARN_ONCE(BAD_STAT_IDX(i), "%s: missing stat item %d\n", __func__, idx))
+    if (WARN_ONCE(BAD_STAT_IDX(i), "%s: missing stat item %d\n", __func__, idx)) {
     return 0;
-    pn = container_of(lruvec, struct mem_cgroup_per_node, lruvec);
+    }
+    pn = container_of!(lruvec, mem_cgroup_per_node, lruvec);
     return (unsigned long)READ_ONCE(pn.lruvec_stats.state[i]);
     }
-    unsigned long lruvec_page_state_local(struct lruvec *lruvec,
-    enum node_stat_item idx)
-    {
-    struct mem_cgroup_per_node *pn;
-    long x;
-    int i;
-    if (mem_cgroup_disabled())
+#[no_mangle]
+pub unsafe extern "C" fn lruvec_page_state_local(lruvec: *mut lruvec, idx: node_stat_item) -> c_ulong {
+pub static mut pn: *mut c_void = core::ptr::null_mut();
+    let mut x = 0;
+    let mut i = 0;
+    if (mem_cgroup_disabled()) {
     return node_page_state(lruvec_pgdat(lruvec), idx);
+    }
     i = memcg_stats_index(idx);
-    if (WARN_ONCE(BAD_STAT_IDX(i), "%s: missing stat item %d\n", __func__, idx))
+    if (WARN_ONCE(BAD_STAT_IDX(i), "%s: missing stat item %d\n", __func__, idx)) {
     return 0;
-    pn = container_of(lruvec, struct mem_cgroup_per_node, lruvec);
+    }
+    pn = container_of!(lruvec, mem_cgroup_per_node, lruvec);
     x = READ_ONCE(pn.lruvec_stats.state_local[i]);
 
-    if (x < 0)
+    if (x < 0) {
     x = 0;
+    }
 
     return x;
     }
 
-    static void __mod_memcg_lruvec_state(struct mem_cgroup_per_node *pn,
-    enum node_stat_item idx, long val);
-    void reparent_memcg_lruvec_state_local(struct mem_cgroup *memcg,
-    struct mem_cgroup *parent, int idx)
-    {
-    int nid;
+// forward_decl: __mod_memcg_lruvec_state;
+#[no_mangle]
+pub unsafe extern "C" fn reparent_memcg_lruvec_state_local(memcg: *mut mem_cgroup, parent: *mut mem_cgroup, idx: c_int) {
+    let mut nid = 0;
     for_each_node(nid) {
-    struct lruvec *child_lruvec = mem_cgroup_lruvec(memcg, NODE_DATA(nid));
-    struct lruvec *parent_lruvec = mem_cgroup_lruvec(parent, NODE_DATA(nid));
-    let mut value: c_ulong = lruvec_page_state_local(child_lruvec, idx);
-    struct mem_cgroup_per_node *child_pn, *parent_pn;
-    child_pn = container_of(child_lruvec, struct mem_cgroup_per_node, lruvec);
-    parent_pn = container_of(parent_lruvec, struct mem_cgroup_per_node, lruvec);
+    let mut child_lruvec = mem_cgroup_lruvec(memcg, NODE_DATA(nid));
+    let mut parent_lruvec = mem_cgroup_lruvec(parent, NODE_DATA(nid));
+pub static mut value: c_ulong = 0;
+    let mut child_pn = core::ptr::null_mut();
+    let mut parent_pn = core::ptr::null_mut();
+    child_pn = container_of!(child_lruvec, mem_cgroup_per_node, lruvec);
+    parent_pn = container_of!(parent_lruvec, mem_cgroup_per_node, lruvec);
     __mod_memcg_lruvec_state(child_pn, idx, -value);
     __mod_memcg_lruvec_state(parent_pn, idx, value);
     }
@@ -560,22 +801,19 @@ pub unsafe extern "C" fn lruvec_page_state(lruvec: *mut lruvec, idx: enum node_s
 
     };
 
-    static u8 mem_cgroup_events_index[NR_VM_EVENT_ITEMS] __read_mostly;
+    static u8 mem_cgroup_events_index[NR_VM_EVENT_ITEMS] ;
 #[no_mangle]
 unsafe extern "C" fn init_memcg_events() {
-    static void init_memcg_events(void)
-    {
-    u8 i;
-    BUILD_BUG_ON(NR_VM_EVENT_ITEMS >= U8_MAX);
+    let mut i = 0;
+    BUILD_BUG_ON!(NR_VM_EVENT_ITEMS >= U8_MAX);
     memset(mem_cgroup_events_index, U8_MAX,
-    sizeof(mem_cgroup_events_index));
-    for (i = 0; i < NR_MEMCG_EVENTS; ++i)
+    sizeof!(mem_cgroup_events_index));
+    for (i = 0; i < NR_MEMCG_EVENTS; ++i) {
     mem_cgroup_events_index[memcg_vm_event_stat[i]] = i;
     }
+    }
 #[no_mangle]
-pub unsafe extern "C" fn memcg_events_index(idx: enum vm_event_item) -> c_int {
-    static inline int memcg_events_index(enum vm_event_item idx)
-    {
+pub unsafe extern "C" fn memcg_events_index(idx: vm_event_item) -> c_int {
     return mem_cgroup_events_index[idx];
     }
 #[repr(C)]
@@ -583,17 +821,17 @@ pub unsafe extern "C" fn memcg_events_index(idx: enum vm_event_item) -> c_int {
 pub struct memcg_vmstats_percpu {
 // Stats updates since the last flush
     pub stats_updates: c_ulong,
-// Cached pointers for fast iteration in memcg_rstat_updated()
-    pub parent_pcpu: *mut memcg_vmstats_percpu __percpu,
+Cached pointers for fast iteration in memcg_rstat_updated()
+    pub parent_pcpu: *mut memcg_vmstats_percpu ,
     pub vmstats: *mut memcg_vmstats,
-// The above should fit a single cacheline for memcg_rstat_updated()
+The above should fit a single cacheline for memcg_rstat_updated()
 // Local (CPU and cgroup) page state & events
     pub state: [c_long; MEMCG_VMSTAT_SIZE],
     pub events: [c_ulong; NR_MEMCG_EVENTS],
 // Delta calculation for lockless upward propagation
     pub state_prev: [c_long; MEMCG_VMSTAT_SIZE],
     pub events_prev: [c_ulong; NR_MEMCG_EVENTS],
-    pub ____cacheline_aligned: },
+}
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct memcg_vmstats {
@@ -625,55 +863,55 @@ pub struct memcg_vmstats {
 // will let stats be out of sync by atmost (MEMCG_CHARGE_BATCH * nr_cpus) but
 // only for 2 seconds due to (1).
 //
-    static void flush_memcg_stats_dwork(struct work_struct *w);
-    static DECLARE_DEFERRABLE_WORK(stats_flush_dwork, flush_memcg_stats_dwork);
+// forward_decl: flush_memcg_stats_dwork;
+pub static mut stats_flush_dwork: usize = 0;
     static u64 flush_last_time;
 
 #[no_mangle]
 unsafe extern "C" fn memcg_vmstats_needs_flush(vmstats: *mut memcg_vmstats) -> bool {
-    static bool memcg_vmstats_needs_flush(struct memcg_vmstats *vmstats)
-    {
     return atomic_long_read(&vmstats.stats_updates) >
     MEMCG_CHARGE_BATCH * num_online_cpus();
     }
-    static inline void memcg_rstat_updated(struct mem_cgroup *memcg, long val,
-    int cpu)
-    {
-    struct memcg_vmstats_percpu __percpu *statc_pcpu;
-    struct memcg_vmstats_percpu *statc;
-    unsigned long stats_updates;
-    if (!val)
+#[no_mangle]
+pub unsafe extern "C" fn memcg_rstat_updated(memcg: *mut mem_cgroup, val: c_long, cpu: c_int) {
+    let mut statc_pcpu = core::ptr::null_mut();
+pub static mut statc: *mut c_void = core::ptr::null_mut();
+    let mut stats_updates = 0;
+    if (!val) {
     return;
+    }
     __css_rstat_updated(&memcg.css, cpu);
     statc_pcpu = memcg.vmstats_percpu;
-    for (; statc_pcpu; statc_pcpu = statc.parent_pcpu) {
+    while (statc_pcpu) {
     statc = this_cpu_ptr(statc_pcpu);
 //
 // If @memcg is already flushable then all its ancestors are
 // flushable as well and also there is no need to increase
 // stats_updates.
 //
-    if (memcg_vmstats_needs_flush(statc.vmstats))
+    if (memcg_vmstats_needs_flush(statc.vmstats)) {
     break;
+    }
     stats_updates = this_cpu_add_return(statc_pcpu.stats_updates,
     abs(val));
-    if (stats_updates < MEMCG_CHARGE_BATCH)
+    if (stats_updates < MEMCG_CHARGE_BATCH) {
     continue;
+    }
     stats_updates = this_cpu_xchg(statc_pcpu.stats_updates, 0);
     atomic_long_add(stats_updates, &statc.vmstats.stats_updates);
     }
     }
 #[no_mangle]
 unsafe extern "C" fn __mem_cgroup_flush_stats(memcg: *mut mem_cgroup, force: bool) {
-    static void __mem_cgroup_flush_stats(struct mem_cgroup *memcg, bool force)
-    {
-    let mut needs_flush: bool = memcg_vmstats_needs_flush(memcg.vmstats);
+pub static mut needs_flush: bool = false;
     trace_memcg_flush_stats(memcg, atomic_long_read(&memcg.vmstats.stats_updates),
     force, needs_flush);
-    if (!force && !needs_flush)
+    if (!force && !needs_flush) {
     return;
-    if (mem_cgroup_is_root(memcg))
+    }
+    if (mem_cgroup_is_root(memcg)) {
     WRITE_ONCE(flush_last_time, jiffies_64);
+    }
     css_rstat_flush(&memcg.css);
     }
 //
@@ -687,26 +925,23 @@ unsafe extern "C" fn __mem_cgroup_flush_stats(memcg: *mut mem_cgroup, force: boo
 //
 #[no_mangle]
 pub unsafe extern "C" fn mem_cgroup_flush_stats(memcg: *mut mem_cgroup) {
-    void mem_cgroup_flush_stats(struct mem_cgroup *memcg)
-    {
-    if (mem_cgroup_disabled())
+    if (mem_cgroup_disabled()) {
     return;
-    if (!memcg)
+    }
+    if (!memcg) {
     memcg = root_mem_cgroup;
+    }
     __mem_cgroup_flush_stats(memcg, false);
     }
 #[no_mangle]
 pub unsafe extern "C" fn mem_cgroup_flush_stats_ratelimited(memcg: *mut mem_cgroup) {
-    void mem_cgroup_flush_stats_ratelimited(struct mem_cgroup *memcg)
-    {
 // Only flush if the periodic flusher is one full cycle late
-    if (time_after64(jiffies_64, READ_ONCE(flush_last_time) + 2*FLUSH_TIME))
+    if (time_after64(jiffies_64, READ_ONCE(flush_last_time) + 2*FLUSH_TIME)) {
     mem_cgroup_flush_stats(memcg);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn flush_memcg_stats_dwork(w: *mut work_struct) {
-    static void flush_memcg_stats_dwork(struct work_struct *w)
-    {
 //
 // Deliberately ignore memcg_vmstats_needs_flush() here so that flushing
 // in latency-sensitive paths is as cheap as possible.
@@ -716,40 +951,38 @@ unsafe extern "C" fn flush_memcg_stats_dwork(w: *mut work_struct) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn memcg_page_state(memcg: *mut mem_cgroup, idx: c_int) -> c_ulong {
-    unsigned long memcg_page_state(struct mem_cgroup *memcg, int idx)
-    {
-    long x;
-    let mut i: c_int = memcg_stats_index(idx);
-    if (WARN_ONCE(BAD_STAT_IDX(i), "%s: missing stat item %d\n", __func__, idx))
+    let mut x = 0;
+pub static mut i: c_int = 0;
+    if (WARN_ONCE(BAD_STAT_IDX(i), "%s: missing stat item %d\n", __func__, idx)) {
     return 0;
+    }
     x = READ_ONCE(memcg.vmstats.state[i]);
 
-    if (x < 0)
+    if (x < 0) {
     x = 0;
+    }
 
     return x;
     }
 #[no_mangle]
 pub unsafe extern "C" fn memcg_stat_item_valid(idx: c_int) -> bool {
-    bool memcg_stat_item_valid(int idx)
-    {
-    if ((u32)idx >= MEMCG_NR_STAT)
+    if ((u32)idx >= MEMCG_NR_STAT) {
     return false;
+    }
     return !BAD_STAT_IDX(memcg_stats_index(idx));
     }
-    static int memcg_page_state_unit(int item);
+// forward_decl: memcg_page_state_unit;
 //
 // Normalize the value passed into memcg_rstat_updated() to be in pages. Round
 // up non-zero sub-page updates to 1 page as zero page updates are ignored.
 //
 #[no_mangle]
 unsafe extern "C" fn memcg_state_val_in_pages(idx: c_int, val: c_long) -> c_long {
-    static long memcg_state_val_in_pages(int idx, long val)
-    {
-    let mut unit: c_int = memcg_page_state_unit(idx);
-    long res;
-    if (!val || unit == PAGE_SIZE)
+pub static mut unit: c_int = 0;
+    let mut res = 0;
+    if (!val || unit == PAGE_SIZE) {
     return val;
+    }
 // Get the absolute value of (val * unit / PAGE_SIZE).
     res = mult_frac(abs(val), unit, PAGE_SIZE);
 // Round up zero values.
@@ -761,9 +994,8 @@ unsafe extern "C" fn memcg_state_val_in_pages(idx: c_int, val: c_long) -> c_long
 // Used in mod_memcg_state() and mod_memcg_lruvec_state() to avoid race with
 // reparenting of non-hierarchical state_locals.
 //
-    static inline struct mem_cgroup *get_non_dying_memcg_start(struct mem_cgroup *memcg,
-    bool *rcu_locked)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn get_non_dying_memcg_start(memcg: *mut mem_cgroup, rcu_locked: *mut bool) -> *mut c_void {
 // Rebinding can cause this value to be changed at runtime
     if (cgroup_subsys_on_dfl(memory_cgrp_subsys)) {
 // rcu_locked = false;
@@ -771,37 +1003,38 @@ unsafe extern "C" fn memcg_state_val_in_pages(idx: c_int, val: c_long) -> c_long
     }
     rcu_read_lock();
 // rcu_locked = true;
-    while (memcg_is_dying(memcg))
+    while (memcg_is_dying(memcg)) {
     memcg = parent_mem_cgroup(memcg);
+    }
     return memcg;
     }
 #[no_mangle]
 pub unsafe extern "C" fn get_non_dying_memcg_end(rcu_locked: bool) {
-    static inline void get_non_dying_memcg_end(bool rcu_locked)
-    {
-    if (!rcu_locked)
+    if (!rcu_locked) {
     return;
+    }
     rcu_read_unlock();
     }
 
-    static inline struct mem_cgroup *get_non_dying_memcg_start(struct mem_cgroup *memcg,
-    bool *rcu_locked)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: get_non_dying_memcg_start
+pub unsafe extern "C" fn get_non_dying_memcg_start_dup(memcg: *mut mem_cgroup, rcu_locked: *mut bool) -> *mut c_void {
     return memcg;
     }
 #[no_mangle]
-pub unsafe extern "C" fn get_non_dying_memcg_end(rcu_locked: bool) {
-    static inline void get_non_dying_memcg_end(bool rcu_locked)
-    {
+#[no_mangle]
+// duplicate fn: get_non_dying_memcg_end
+pub unsafe extern "C" fn get_non_dying_memcg_end_dup(rcu_locked: bool) {
     }
 
-    static void __mod_memcg_state(struct mem_cgroup *memcg,
-    enum memcg_stat_item idx, long val)
-    {
-    let mut i: c_int = memcg_stats_index(idx);
-    int cpu;
-    if (WARN_ONCE(BAD_STAT_IDX(i), "%s: missing stat item %d\n", __func__, idx))
+#[no_mangle]
+pub unsafe extern "C" fn __mod_memcg_state(memcg: *mut mem_cgroup, idx: memcg_stat_item, val: c_long) {
+pub static mut i: c_int = 0;
+    let mut cpu = 0;
+    if (WARN_ONCE(BAD_STAT_IDX(i), "%s: missing stat item %d\n", __func__, idx)) {
     return;
+    }
     cpu = get_cpu();
     this_cpu_add(memcg.vmstats_percpu.state[i], val);
     val = memcg_state_val_in_pages(idx, val);
@@ -815,12 +1048,12 @@ pub unsafe extern "C" fn get_non_dying_memcg_end(rcu_locked: bool) {
 // @idx: the stat item - can be enum memcg_stat_item or enum node_stat_item
 // @val: delta to add to the counter, can be negative
 //
-    void mod_memcg_state(struct mem_cgroup *memcg, enum memcg_stat_item idx,
-    int val)
-    {
-    let mut rcu_locked: bool = false;
-    if (mem_cgroup_disabled())
+#[no_mangle]
+pub unsafe extern "C" fn mod_memcg_state(memcg: *mut mem_cgroup, idx: memcg_stat_item, val: c_int) {
+pub static mut rcu_locked: bool = false;
+    if (mem_cgroup_disabled()) {
     return;
+    }
     memcg = get_non_dying_memcg_start(memcg, &rcu_locked);
     __mod_memcg_state(memcg, idx, val);
     get_non_dying_memcg_end(rcu_locked);
@@ -829,35 +1062,34 @@ pub unsafe extern "C" fn get_non_dying_memcg_end(rcu_locked: bool) {
 // idx can be of type enum memcg_stat_item or node_stat_item.
 #[no_mangle]
 pub unsafe extern "C" fn memcg_page_state_local(memcg: *mut mem_cgroup, idx: c_int) -> c_ulong {
-    unsigned long memcg_page_state_local(struct mem_cgroup *memcg, int idx)
-    {
-    long x;
-    let mut i: c_int = memcg_stats_index(idx);
-    if (WARN_ONCE(BAD_STAT_IDX(i), "%s: missing stat item %d\n", __func__, idx))
+    let mut x = 0;
+pub static mut i: c_int = 0;
+    if (WARN_ONCE(BAD_STAT_IDX(i), "%s: missing stat item %d\n", __func__, idx)) {
     return 0;
+    }
     x = READ_ONCE(memcg.vmstats.state_local[i]);
 
-    if (x < 0)
+    if (x < 0) {
     x = 0;
+    }
 
     return x;
     }
-    void reparent_memcg_state_local(struct mem_cgroup *memcg,
-    struct mem_cgroup *parent, int idx)
-    {
-    let mut value: c_ulong = memcg_page_state_local(memcg, idx);
+#[no_mangle]
+pub unsafe extern "C" fn reparent_memcg_state_local(memcg: *mut mem_cgroup, parent: *mut mem_cgroup, idx: c_int) {
+pub static mut value: c_ulong = 0;
     __mod_memcg_state(memcg, idx, -value);
     __mod_memcg_state(parent, idx, value);
     }
 
-    static void __mod_memcg_lruvec_state(struct mem_cgroup_per_node *pn,
-    enum node_stat_item idx, long val)
-    {
-    struct mem_cgroup *memcg = pn.memcg;
-    let mut i: c_int = memcg_stats_index(idx);
-    int cpu;
-    if (WARN_ONCE(BAD_STAT_IDX(i), "%s: missing stat item %d\n", __func__, idx))
+#[no_mangle]
+pub unsafe extern "C" fn __mod_memcg_lruvec_state(pn: *mut mem_cgroup_per_node, idx: node_stat_item, val: c_long) {
+    let mut memcg = pn.memcg;
+pub static mut i: c_int = 0;
+    let mut cpu = 0;
+    if (WARN_ONCE(BAD_STAT_IDX(i), "%s: missing stat item %d\n", __func__, idx)) {
     return;
+    }
     cpu = get_cpu();
 // Update memcg
     this_cpu_add(memcg.vmstats_percpu.state[i], val);
@@ -868,15 +1100,13 @@ pub unsafe extern "C" fn memcg_page_state_local(memcg: *mut mem_cgroup, idx: c_i
     trace_mod_memcg_lruvec_state(memcg, idx, val);
     put_cpu();
     }
-    static void mod_memcg_lruvec_state(struct lruvec *lruvec,
-    enum node_stat_item idx,
-    int val)
-    {
-    struct pglist_data *pgdat = lruvec_pgdat(lruvec);
-    struct mem_cgroup_per_node *pn;
-    struct mem_cgroup *memcg;
-    let mut rcu_locked: bool = false;
-    pn = container_of(lruvec, struct mem_cgroup_per_node, lruvec);
+#[no_mangle]
+pub unsafe extern "C" fn mod_memcg_lruvec_state(lruvec: *mut lruvec, idx: node_stat_item, val: c_int) {
+    let mut pgdat = lruvec_pgdat(lruvec);
+pub static mut pn: *mut c_void = core::ptr::null_mut();
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+pub static mut rcu_locked: bool = false;
+    pn = container_of!(lruvec, mem_cgroup_per_node, lruvec);
     memcg = get_non_dying_memcg_start(pn.memcg, &rcu_locked);
     pn = memcg.nodeinfo[pgdat.node_id];
     __mod_memcg_lruvec_state(pn, idx, val);
@@ -892,21 +1122,20 @@ pub unsafe extern "C" fn memcg_page_state_local(memcg: *mut mem_cgroup, idx: c_i
 // function updates the all three counters that are affected by a
 // change of state at this level: per-node, per-cgroup, per-lruvec.
 //
-    void mod_lruvec_state(struct lruvec *lruvec, enum node_stat_item idx,
-    int val)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn mod_lruvec_state(lruvec: *mut lruvec, idx: node_stat_item, val: c_int) {
 // Update node
     mod_node_page_state(lruvec_pgdat(lruvec), idx, val);
 // Update memcg and lruvec
-    if (!mem_cgroup_disabled())
+    if (!mem_cgroup_disabled()) {
     mod_memcg_lruvec_state(lruvec, idx, val);
     }
-    void lruvec_stat_mod_folio(struct folio *folio, enum node_stat_item idx,
-    int val)
-    {
-    struct mem_cgroup *memcg;
-    pg_data_t *pgdat = folio_pgdat(folio);
-    struct lruvec *lruvec;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn lruvec_stat_mod_folio(folio: *mut folio, idx: node_stat_item, val: c_int) {
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+    let mut pgdat = folio_pgdat(folio);
+pub static mut lruvec: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     memcg = folio_memcg(folio);
 // Untracked pages have no memcg, no lruvec. Update only the node
@@ -921,12 +1150,10 @@ pub unsafe extern "C" fn memcg_page_state_local(memcg: *mut mem_cgroup, idx: c_i
     }
     EXPORT_SYMBOL(lruvec_stat_mod_folio);
 #[no_mangle]
-pub unsafe extern "C" fn mod_lruvec_kmem_state(p: *mut c_void, idx: enum node_stat_item, val: c_int) {
-    void mod_lruvec_kmem_state(void *p, enum node_stat_item idx, int val)
-    {
-    pg_data_t *pgdat = page_pgdat(virt_to_page(p));
-    struct mem_cgroup *memcg;
-    struct lruvec *lruvec;
+pub unsafe extern "C" fn mod_lruvec_kmem_state(p: *mut c_void, idx: node_stat_item, val: c_int) {
+    let mut pgdat = page_pgdat(virt_to_page(p));
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+pub static mut lruvec: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     memcg = mem_cgroup_from_virt(p);
 //
@@ -949,15 +1176,16 @@ pub unsafe extern "C" fn mod_lruvec_kmem_state(p: *mut c_void, idx: enum node_st
 // @idx: the event item
 // @count: the number of events that occurred
 //
-    void count_memcg_events(struct mem_cgroup *memcg, enum vm_event_item idx,
-    unsigned long count)
-    {
-    let mut i: c_int = memcg_events_index(idx);
-    int cpu;
-    if (mem_cgroup_disabled())
+#[no_mangle]
+pub unsafe extern "C" fn count_memcg_events(memcg: *mut mem_cgroup, idx: vm_event_item, count: c_ulong) {
+pub static mut i: c_int = 0;
+    let mut cpu = 0;
+    if (mem_cgroup_disabled()) {
     return;
-    if (WARN_ONCE(BAD_STAT_IDX(i), "%s: missing stat item %d\n", __func__, idx))
+    }
+    if (WARN_ONCE(BAD_STAT_IDX(i), "%s: missing stat item %d\n", __func__, idx)) {
     return;
+    }
     cpu = get_cpu();
     this_cpu_add(memcg.vmstats_percpu.events[i], count);
     memcg_rstat_updated(memcg, count, cpu);
@@ -966,50 +1194,50 @@ pub unsafe extern "C" fn mod_lruvec_kmem_state(p: *mut c_void, idx: enum node_st
     }
 #[no_mangle]
 pub unsafe extern "C" fn memcg_events(memcg: *mut mem_cgroup, event: c_int) -> c_ulong {
-    unsigned long memcg_events(struct mem_cgroup *memcg, int event)
-    {
-    let mut i: c_int = memcg_events_index(event);
-    if (WARN_ONCE(BAD_STAT_IDX(i), "%s: missing stat item %d\n", __func__, event))
+pub static mut i: c_int = 0;
+    if (WARN_ONCE(BAD_STAT_IDX(i), "%s: missing stat item %d\n", __func__, event)) {
     return 0;
+    }
     return READ_ONCE(memcg.vmstats.events[i]);
     }
 #[no_mangle]
-pub unsafe extern "C" fn memcg_vm_event_item_valid(idx: enum vm_event_item) -> bool {
-    bool memcg_vm_event_item_valid(enum vm_event_item idx)
-    {
-    if (idx >= NR_VM_EVENT_ITEMS)
+pub unsafe extern "C" fn memcg_vm_event_item_valid(idx: vm_event_item) -> bool {
+    if (idx >= NR_VM_EVENT_ITEMS) {
     return false;
+    }
     return !BAD_STAT_IDX(memcg_events_index(idx));
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn memcg_events_local(memcg: *mut mem_cgroup, event: c_int) -> c_ulong {
-    unsigned long memcg_events_local(struct mem_cgroup *memcg, int event)
-    {
-    let mut i: c_int = memcg_events_index(event);
-    if (WARN_ONCE(BAD_STAT_IDX(i), "%s: missing stat item %d\n", __func__, event))
+pub static mut i: c_int = 0;
+    if (WARN_ONCE(BAD_STAT_IDX(i), "%s: missing stat item %d\n", __func__, event)) {
     return 0;
+    }
     return READ_ONCE(memcg.vmstats.events_local[i]);
     }
 
-    struct mem_cgroup *mem_cgroup_from_task(struct task_struct *p)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn mem_cgroup_from_task(p: *mut task_struct) -> *mut c_void {
 //
 // mm_update_next_owner() may clear mm->owner to NULL
 // if it races with swapoff, page migration, etc.
 // So this can be called with p == NULL.
 //
-    if (unlikely(!p))
+    if (unlikely(!p)) {
     return core::ptr::null_mut();
+    }
     return mem_cgroup_from_css(task_css(p, memory_cgrp_id));
     }
     EXPORT_SYMBOL(mem_cgroup_from_task);
     static __always_inline struct mem_cgroup *active_memcg(void)
     {
-    if (!in_task())
+    if (!in_task()) {
     return this_cpu_read(int_active_memcg);
-    else
+    }
+    else {
     return current.active_memcg;
+    }
     }
 //
 // get_mem_cgroup_from_mm: Obtain a reference on given mm_struct's memcg.
@@ -1022,11 +1250,12 @@ pub unsafe extern "C" fn memcg_events_local(memcg: *mut mem_cgroup, event: c_int
 // 3) root memcg
 // If mem_cgroup is disabled, NULL is returned.
 //
-    struct mem_cgroup *get_mem_cgroup_from_mm(struct mm_struct *mm)
-    {
-    struct mem_cgroup *memcg;
-    if (mem_cgroup_disabled())
+#[no_mangle]
+pub unsafe extern "C" fn get_mem_cgroup_from_mm(mm: *mut mm_struct) -> *mut c_void {
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+    if (mem_cgroup_disabled()) {
     return core::ptr::null_mut();
+    }
 //
 // Page cache insertions can happen without an
 // actual mm context, e.g. during disk probing
@@ -1044,14 +1273,16 @@ pub unsafe extern "C" fn memcg_events_local(memcg: *mut mem_cgroup, event: c_int
     return memcg;
     }
     mm = current.mm;
-    if (unlikely(!mm))
+    if (unlikely(!mm)) {
     return root_mem_cgroup;
+    }
     }
     rcu_read_lock();
     do {
     memcg = mem_cgroup_from_task(rcu_dereference(mm.owner));
-    if (unlikely(!memcg))
+    if (unlikely(!memcg)) {
     memcg = root_mem_cgroup;
+    }
     } while (!css_tryget(&memcg.css));
     rcu_read_unlock();
     return memcg;
@@ -1060,17 +1291,18 @@ pub unsafe extern "C" fn memcg_events_local(memcg: *mut mem_cgroup, event: c_int
 //
 // get_mem_cgroup_from_current - Obtain a reference on current task's memcg.
 //
-    struct mem_cgroup *get_mem_cgroup_from_current(void)
-    {
-    struct mem_cgroup *memcg;
-    if (mem_cgroup_disabled())
+#[no_mangle]
+pub unsafe extern "C" fn get_mem_cgroup_from_current() -> *mut c_void {
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+    if (mem_cgroup_disabled()) {
     return core::ptr::null_mut();
-    again:
+    }
+// label;
     rcu_read_lock();
     memcg = mem_cgroup_from_task(current);
     if (!css_tryget(&memcg.css)) {
     rcu_read_unlock();
-    goto again;
+// goto;
     }
     rcu_read_unlock();
     return memcg;
@@ -1081,13 +1313,15 @@ pub unsafe extern "C" fn memcg_events_local(memcg: *mut mem_cgroup, event: c_int
 //
 // See folio_memcg() for folio->objcg/memcg binding rules.
 //
-    struct mem_cgroup *get_mem_cgroup_from_folio(struct folio *folio)
-    {
-    struct mem_cgroup *memcg;
-    if (mem_cgroup_disabled())
+#[no_mangle]
+pub unsafe extern "C" fn get_mem_cgroup_from_folio(folio: *mut folio) -> *mut c_void {
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+    if (mem_cgroup_disabled()) {
     return core::ptr::null_mut();
-    if (!folio_memcg_charged(folio))
+    }
+    if (!folio_memcg_charged(folio)) {
     return root_mem_cgroup;
+    }
     rcu_read_lock();
     do {
     memcg = folio_memcg(folio);
@@ -1112,39 +1346,41 @@ pub unsafe extern "C" fn memcg_events_local(memcg: *mut mem_cgroup, event: c_int
 // in the hierarchy among all concurrent reclaimers operating on the
 // same node.
 //
-    struct mem_cgroup *mem_cgroup_iter(struct mem_cgroup *root,
-    struct mem_cgroup *prev,
-    struct mem_cgroup_reclaim_cookie *reclaim)
-    {
-    struct mem_cgroup_reclaim_iter *iter;
-    struct cgroup_subsys_state *css;
-    struct mem_cgroup *pos;
-    struct mem_cgroup *next;
-    if (mem_cgroup_disabled())
+#[no_mangle]
+pub unsafe extern "C" fn mem_cgroup_iter(root: *mut mem_cgroup, prev: *mut mem_cgroup, reclaim: *mut mem_cgroup_reclaim_cookie) -> *mut c_void {
+pub static mut iter: *mut c_void = core::ptr::null_mut();
+pub static mut css: *mut c_void = core::ptr::null_mut();
+pub static mut pos: *mut c_void = core::ptr::null_mut();
+pub static mut next: *mut c_void = core::ptr::null_mut();
+    if (mem_cgroup_disabled()) {
     return core::ptr::null_mut();
-    if (!root)
+    }
+    if (!root) {
     root = root_mem_cgroup;
+    }
     rcu_read_lock();
-    restart:
+// label;
     next = core::ptr::null_mut();
     if (reclaim) {
-    int gen;
-    let mut nid: c_int = reclaim.pgdat.node_id;
+    let mut gen = 0;
+pub static mut nid: c_int = 0;
     iter = &root.nodeinfo[nid].iter;
     gen = atomic_read(&iter.generation);
 //
 // On start, join the current reclaim iteration cycle.
 // Exit when a concurrent walker completes it.
 //
-    if (!prev)
+    if (!prev) {
     reclaim.generation = gen;
-#[no_mangle]
-pub unsafe extern "C" fn if(gen: reclaim->generation !=) -> else {
-    else if (reclaim.generation != gen)
-    goto out_unlock;
+    }
+
+    else if (reclaim.generation != gen) {
+// goto;
+    }
     pos = READ_ONCE(iter.position);
-    } else
+    } else {
     pos = prev;
+    }
     css = pos ? &pos.css : core::ptr::null_mut();
     while ((css = css_next_descendant_pre(css, &root.css))) {
 //
@@ -1152,8 +1388,9 @@ pub unsafe extern "C" fn if(gen: reclaim->generation !=) -> else {
 // is provided by the caller, so we know it's alive
 // and kicking, and don't take an extra reference.
 //
-    if (css == &root.css || css_tryget(css))
+    if (css == &root.css || css_tryget(css)) {
     break;
+    }
     }
     next = mem_cgroup_from_css(css);
     if (reclaim) {
@@ -1163,9 +1400,10 @@ pub unsafe extern "C" fn if(gen: reclaim->generation !=) -> else {
 // it to avoid reclaiming from the same cgroup twice.
 //
     if (cmpxchg(&iter.position, pos, next) != pos) {
-    if (css && css != &root.css)
+    if (css && css != &root.css) {
     css_put(css);
-    goto restart;
+    }
+// goto;
     }
     if (!next) {
     atomic_inc(&iter.generation);
@@ -1175,14 +1413,16 @@ pub unsafe extern "C" fn if(gen: reclaim->generation !=) -> else {
 // the hierarchy - make sure they see at least
 // one group and restart from the beginning.
 //
-    if (!prev)
-    goto restart;
+    if (!prev) {
+// goto;
     }
     }
-    out_unlock:
+    }
+// label;
     rcu_read_unlock();
-    if (prev && prev != root)
+    if (prev && prev != root) {
     css_put(&prev.css);
+    }
     return next;
     }
 //
@@ -1190,20 +1430,20 @@ pub unsafe extern "C" fn if(gen: reclaim->generation !=) -> else {
 // @root: hierarchy root
 // @prev: last visited hierarchy member as returned by mem_cgroup_iter()
 //
-    void mem_cgroup_iter_break(struct mem_cgroup *root,
-    struct mem_cgroup *prev)
-    {
-    if (!root)
+#[no_mangle]
+pub unsafe extern "C" fn mem_cgroup_iter_break(root: *mut mem_cgroup, prev: *mut mem_cgroup) {
+    if (!root) {
     root = root_mem_cgroup;
-    if (prev && prev != root)
+    }
+    if (prev && prev != root) {
     css_put(&prev.css);
     }
-    static void __invalidate_reclaim_iterators(struct mem_cgroup *from,
-    struct mem_cgroup *dead_memcg)
-    {
-    struct mem_cgroup_reclaim_iter *iter;
-    struct mem_cgroup_per_node *mz;
-    int nid;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn __invalidate_reclaim_iterators(from: *mut mem_cgroup, dead_memcg: *mut mem_cgroup) {
+pub static mut iter: *mut c_void = core::ptr::null_mut();
+pub static mut mz: *mut c_void = core::ptr::null_mut();
+    let mut nid = 0;
     for_each_node(nid) {
     mz = from.nodeinfo[nid];
     iter = &mz.iter;
@@ -1212,10 +1452,8 @@ pub unsafe extern "C" fn if(gen: reclaim->generation !=) -> else {
     }
 #[no_mangle]
 unsafe extern "C" fn invalidate_reclaim_iterators(dead_memcg: *mut mem_cgroup) {
-    static void invalidate_reclaim_iterators(struct mem_cgroup *dead_memcg)
-    {
-    struct mem_cgroup *memcg = dead_memcg;
-    struct mem_cgroup *last;
+    let mut memcg = dead_memcg;
+pub static mut last: *mut c_void = core::ptr::null_mut();
     do {
     __invalidate_reclaim_iterators(memcg, dead_memcg);
     last = memcg;
@@ -1226,9 +1464,10 @@ unsafe extern "C" fn invalidate_reclaim_iterators(dead_memcg: *mut mem_cgroup) {
 // cgroup root (root_mem_cgroup). So we have to handle
 // dead_memcg from cgroup root separately.
 //
-    if (!mem_cgroup_is_root(last))
+    if (!mem_cgroup_is_root(last)) {
     __invalidate_reclaim_iterators(root_mem_cgroup,
     dead_memcg);
+    }
     }
 //
 // mem_cgroup_scan_tasks - iterate over tasks of a memory cgroup hierarchy
@@ -1243,15 +1482,14 @@ unsafe extern "C" fn invalidate_reclaim_iterators(dead_memcg: *mut mem_cgroup) {
 //
 // This function must not be called for the root memory cgroup.
 //
-    void mem_cgroup_scan_tasks(struct mem_cgroup *memcg,
-    int (*fn)(struct task_struct *, void *), void *arg)
-    {
-    struct mem_cgroup *iter;
-    let mut ret: c_int = 0;
-    BUG_ON(mem_cgroup_is_root(memcg));
+#[no_mangle]
+pub unsafe extern "C" fn mem_cgroup_scan_tasks(memcg: *mut mem_cgroup, arg: *mut c_void) {
+pub static mut iter: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
+    BUG_ON!(mem_cgroup_is_root(memcg));
     for_each_mem_cgroup_tree(iter, memcg) {
-    struct css_task_iter it;
-    struct task_struct *task;
+pub static mut it: usize = 0;
+pub static mut task: *mut c_void = core::ptr::null_mut();
     css_task_iter_start(&iter.css, CSS_TASK_ITER_PROCS, &it);
     while (!ret && (task = css_task_iter_next(&it))) {
     ret = fn(task, arg);
@@ -1276,16 +1514,16 @@ unsafe extern "C" fn invalidate_reclaim_iterators(dead_memcg: *mut mem_cgroup) {
 //
 // Return: The lruvec this folio is on with its lock held and rcu read lock held.
 //
-    struct lruvec *folio_lruvec_lock(struct folio *folio)
-    {
-    struct lruvec *lruvec;
+#[no_mangle]
+pub unsafe extern "C" fn folio_lruvec_lock(folio: *mut folio) -> *mut c_void {
+pub static mut lruvec: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
-    retry:
+// label;
     lruvec = folio_lruvec(folio);
     spin_lock(&lruvec.lru_lock);
     if (unlikely(lruvec_memcg(lruvec) != folio_memcg(folio))) {
     spin_unlock(&lruvec.lru_lock);
-    goto retry;
+// goto;
     }
     return lruvec;
     }
@@ -1301,16 +1539,16 @@ unsafe extern "C" fn invalidate_reclaim_iterators(dead_memcg: *mut mem_cgroup) {
 // Return: The lruvec this folio is on with its lock held and interrupts
 // disabled and rcu read lock held.
 //
-    struct lruvec *folio_lruvec_lock_irq(struct folio *folio)
-    {
-    struct lruvec *lruvec;
+#[no_mangle]
+pub unsafe extern "C" fn folio_lruvec_lock_irq(folio: *mut folio) -> *mut c_void {
+pub static mut lruvec: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
-    retry:
+// label;
     lruvec = folio_lruvec(folio);
     spin_lock_irq(&lruvec.lru_lock);
     if (unlikely(lruvec_memcg(lruvec) != folio_memcg(folio))) {
     spin_unlock_irq(&lruvec.lru_lock);
-    goto retry;
+// goto;
     }
     return lruvec;
     }
@@ -1327,17 +1565,16 @@ unsafe extern "C" fn invalidate_reclaim_iterators(dead_memcg: *mut mem_cgroup) {
 // Return: The lruvec this folio is on with its lock held and interrupts
 // disabled and rcu read lock held.
 //
-    struct lruvec *folio_lruvec_lock_irqsave(struct folio *folio,
-    unsigned long *flags)
-    {
-    struct lruvec *lruvec;
+#[no_mangle]
+pub unsafe extern "C" fn folio_lruvec_lock_irqsave(folio: *mut folio, flags: *mut c_ulong) -> *mut c_void {
+pub static mut lruvec: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
-    retry:
+// label;
     lruvec = folio_lruvec(folio);
     spin_lock_irqsave(&lruvec.lru_lock, *flags);
     if (unlikely(lruvec_memcg(lruvec) != folio_memcg(folio))) {
     spin_unlock_irqrestore(&lruvec.lru_lock, *flags);
-    goto retry;
+// goto;
     }
     return lruvec;
     }
@@ -1351,18 +1588,19 @@ unsafe extern "C" fn invalidate_reclaim_iterators(dead_memcg: *mut mem_cgroup) {
 // This function must be called under lru_lock, just before a page is added
 // to or just after a page is removed from an lru list.
 //
-    void mem_cgroup_update_lru_size(struct lruvec *lruvec, enum lru_list lru,
-    int zid, long nr_pages)
-    {
-    struct mem_cgroup_per_node *mz;
-    unsigned long *lru_size;
-    long size;
-    if (mem_cgroup_disabled())
+#[no_mangle]
+pub unsafe extern "C" fn mem_cgroup_update_lru_size(lruvec: *mut lruvec, lru: lru_list, zid: c_int, nr_pages: c_long) {
+pub static mut mz: *mut c_void = core::ptr::null_mut();
+pub static mut lru_size: *mut c_void = core::ptr::null_mut();
+    let mut size = 0;
+    if (mem_cgroup_disabled()) {
     return;
-    mz = container_of(lruvec, struct mem_cgroup_per_node, lruvec);
+    }
+    mz = container_of!(lruvec, mem_cgroup_per_node, lruvec);
     lru_size = &mz.lru_zone_size[zid][lru];
-    if (nr_pages < 0)
+    if (nr_pages < 0) {
 // lru_size += nr_pages;
+    }
     size = *lru_size;
     if (WARN_ONCE(size < 0,
     "%s(%p, %d, %ld): lru_size %ld\n",
@@ -1370,8 +1608,9 @@ unsafe extern "C" fn invalidate_reclaim_iterators(dead_memcg: *mut mem_cgroup) {
     VM_BUG_ON(1);
 // lru_size = 0;
     }
-    if (nr_pages > 0)
+    if (nr_pages > 0) {
 // lru_size += nr_pages;
+    }
     }
 //
 // mem_cgroup_margin - calculate chargeable space of a memory cgroup
@@ -1382,22 +1621,23 @@ unsafe extern "C" fn invalidate_reclaim_iterators(dead_memcg: *mut mem_cgroup) {
 //
 #[no_mangle]
 unsafe extern "C" fn mem_cgroup_margin(memcg: *mut mem_cgroup) -> c_ulong {
-    static unsigned long mem_cgroup_margin(struct mem_cgroup *memcg)
-    {
-    let mut margin: c_ulong = 0;
-    unsigned long count;
-    unsigned long limit;
+pub static mut margin: c_ulong = 0;
+    let mut count = 0;
+    let mut limit = 0;
     count = page_counter_read(&memcg.memory);
     limit = READ_ONCE(memcg.memory.max);
-    if (count < limit)
+    if (count < limit) {
     margin = limit - count;
+    }
     if (do_memsw_account()) {
     count = page_counter_read(&memcg.memsw);
     limit = READ_ONCE(memcg.memsw.max);
-    if (count < limit)
+    if (count < limit) {
     margin = min(margin, limit - count);
-    else
+    }
+    else {
     margin = 0;
+    }
     }
     return margin;
     }
@@ -1408,89 +1648,31 @@ pub struct memory_stat {
     pub idx: c_uint,
 }
 
-    static const struct memory_stat memory_stats[] = {
-    { "anon",			NR_ANON_MAPPED			},
-    { "file",			NR_FILE_PAGES			},
-    { "kernel",			MEMCG_KMEM			},
-    { "kernel_stack",		NR_KERNEL_STACK_KB		},
-    { "pagetables",			NR_PAGETABLE			},
-    { "sec_pagetables",		NR_SECONDARY_PAGETABLE		},
-    { "percpu",			MEMCG_PERCPU_B			},
-    { "sock",			MEMCG_SOCK			},
-    { "vmalloc",			NR_VMALLOC			},
-    { "shmem",			NR_SHMEM			},
-
-    { "zswap",			MEMCG_ZSWAP_B			},
-    { "zswapped",			MEMCG_ZSWAPPED			},
-    { "zswap_incomp",		MEMCG_ZSWAP_INCOMP		},
-
-    { "file_mapped",		NR_FILE_MAPPED			},
-    { "file_dirty",			NR_FILE_DIRTY			},
-    { "file_writeback",		NR_WRITEBACK			},
-
-    { "swapcached",			NR_SWAPCACHE			},
-
-    { "anon_thp",			NR_ANON_THPS			},
-    { "file_thp",			NR_FILE_THPS			},
-    { "shmem_thp",			NR_SHMEM_THPS			},
-
-    { "inactive_anon",		NR_INACTIVE_ANON		},
-    { "active_anon",		NR_ACTIVE_ANON			},
-    { "inactive_file",		NR_INACTIVE_FILE		},
-    { "active_file",		NR_ACTIVE_FILE			},
-    { "unevictable",		NR_UNEVICTABLE			},
-    { "slab_reclaimable",		NR_SLAB_RECLAIMABLE_B		},
-    { "slab_unreclaimable",		NR_SLAB_UNRECLAIMABLE_B		},
-
-    { "hugetlb",			NR_HUGETLB			},
-
-// The memory events
-    { "workingset_refault_anon",	WORKINGSET_REFAULT_ANON		},
-    { "workingset_refault_file",	WORKINGSET_REFAULT_FILE		},
-    { "workingset_activate_anon",	WORKINGSET_ACTIVATE_ANON	},
-    { "workingset_activate_file",	WORKINGSET_ACTIVATE_FILE	},
-    { "workingset_restore_anon",	WORKINGSET_RESTORE_ANON		},
-    { "workingset_restore_file",	WORKINGSET_RESTORE_FILE		},
-    { "workingset_nodereclaim",	WORKINGSET_NODERECLAIM		},
-    { "pgdemote_kswapd",		PGDEMOTE_KSWAPD		},
-    { "pgdemote_direct",		PGDEMOTE_DIRECT		},
-    { "pgdemote_khugepaged",	PGDEMOTE_KHUGEPAGED	},
-    { "pgdemote_proactive",		PGDEMOTE_PROACTIVE	},
-    { "pgsteal_kswapd",		PGSTEAL_KSWAPD		},
-    { "pgsteal_direct",		PGSTEAL_DIRECT		},
-    { "pgsteal_khugepaged",		PGSTEAL_KHUGEPAGED	},
-    { "pgsteal_proactive",		PGSTEAL_PROACTIVE	},
-    { "pgscan_kswapd",		PGSCAN_KSWAPD		},
-    { "pgscan_direct",		PGSCAN_DIRECT		},
-    { "pgscan_khugepaged",		PGSCAN_KHUGEPAGED	},
-    { "pgscan_proactive",		PGSCAN_PROACTIVE	},
-    { "pgrefill",			PGREFILL		},
-
-    { "pgpromote_success",		PGPROMOTE_SUCCESS	},
-
-    };
+pub static mut memory_stat: usize = 0;
 // The actual unit of the state item, not the same as the output unit
 #[no_mangle]
 unsafe extern "C" fn memcg_page_state_unit(item: c_int) -> c_int {
-    static int memcg_page_state_unit(int item)
-    {
-    switch (item) {
-    case MEMCG_PERCPU_B:
-    case MEMCG_ZSWAP_B:
-    case NR_SLAB_RECLAIMABLE_B:
-    case NR_SLAB_UNRECLAIMABLE_B:
+    match (item) {
+    MEMCG_PERCPU_B => {
+    }
+    MEMCG_ZSWAP_B => {
+    }
+    NR_SLAB_RECLAIMABLE_B => {
+    }
+    NR_SLAB_UNRECLAIMABLE_B => {
     return 1;
-    case NR_KERNEL_STACK_KB:
+    }
+    NR_KERNEL_STACK_KB => {
     return SZ_1K;
-    default:
+    }
+    _ => {
     return PAGE_SIZE;
+    }
     }
     }
 // Translate stat items to the correct unit for memory.stat output
 #[no_mangle]
 unsafe extern "C" fn memcg_page_state_output_unit(item: c_int) -> c_int {
-    static int memcg_page_state_output_unit(int item)
-    {
 //
 // Workingset state is actually in pages, but we export it to userspace
 // as a scalar count of events, so special case it here.
@@ -1498,70 +1680,82 @@ unsafe extern "C" fn memcg_page_state_output_unit(item: c_int) -> c_int {
 // Demotion and promotion activities are exported in pages, consistent
 // with their global counterparts.
 //
-    switch (item) {
-    case WORKINGSET_REFAULT_ANON:
-    case WORKINGSET_REFAULT_FILE:
-    case WORKINGSET_ACTIVATE_ANON:
-    case WORKINGSET_ACTIVATE_FILE:
-    case WORKINGSET_RESTORE_ANON:
-    case WORKINGSET_RESTORE_FILE:
-    case WORKINGSET_NODERECLAIM:
-    case PGDEMOTE_KSWAPD:
-    case PGDEMOTE_DIRECT:
-    case PGDEMOTE_KHUGEPAGED:
-    case PGDEMOTE_PROACTIVE:
-    case PGSTEAL_KSWAPD:
-    case PGSTEAL_DIRECT:
-    case PGSTEAL_KHUGEPAGED:
-    case PGSTEAL_PROACTIVE:
-    case PGSCAN_KSWAPD:
-    case PGSCAN_DIRECT:
-    case PGSCAN_KHUGEPAGED:
-    case PGSCAN_PROACTIVE:
-    case PGREFILL:
+    match (item) {
+    WORKINGSET_REFAULT_ANON => {
+    }
+    WORKINGSET_REFAULT_FILE => {
+    }
+    WORKINGSET_ACTIVATE_ANON => {
+    }
+    WORKINGSET_ACTIVATE_FILE => {
+    }
+    WORKINGSET_RESTORE_ANON => {
+    }
+    WORKINGSET_RESTORE_FILE => {
+    }
+    WORKINGSET_NODERECLAIM => {
+    }
+    PGDEMOTE_KSWAPD => {
+    }
+    PGDEMOTE_DIRECT => {
+    }
+    PGDEMOTE_KHUGEPAGED => {
+    }
+    PGDEMOTE_PROACTIVE => {
+    }
+    PGSTEAL_KSWAPD => {
+    }
+    PGSTEAL_DIRECT => {
+    }
+    PGSTEAL_KHUGEPAGED => {
+    }
+    PGSTEAL_PROACTIVE => {
+    }
+    PGSCAN_KSWAPD => {
+    }
+    PGSCAN_DIRECT => {
+    }
+    PGSCAN_KHUGEPAGED => {
+    }
+    PGSCAN_PROACTIVE => {
+    }
+    PGREFILL => {
 
-    case PGPROMOTE_SUCCESS:
+    }
+    PGPROMOTE_SUCCESS => {
 
     return 1;
-    default:
+    }
+    _ => {
     return memcg_page_state_unit(item);
+    }
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn memcg_page_state_output(memcg: *mut mem_cgroup, item: c_int) -> c_ulong {
-    unsigned long memcg_page_state_output(struct mem_cgroup *memcg, int item)
-    {
     return memcg_page_state(memcg, item) *
     memcg_page_state_output_unit(item);
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn memcg_page_state_local_output(memcg: *mut mem_cgroup, item: c_int) -> c_ulong {
-    unsigned long memcg_page_state_local_output(struct mem_cgroup *memcg, int item)
-    {
     return memcg_page_state_local(memcg, item) *
     memcg_page_state_output_unit(item);
     }
 
 #[no_mangle]
 unsafe extern "C" fn memcg_accounts_hugetlb() -> bool {
-    static bool memcg_accounts_hugetlb(void)
-    {
     return cgrp_dfl_root.flags & CGRP_ROOT_MEMORY_HUGETLB_ACCOUNTING;
     }
 
 #[no_mangle]
 unsafe extern "C" fn memcg_accounts_hugetlb() -> bool {
-    static bool memcg_accounts_hugetlb(void)
-    {
     return false;
     }
 
 #[no_mangle]
 unsafe extern "C" fn memcg_stat_format(memcg: *mut mem_cgroup, s: *mut seq_buf) {
-    static void memcg_stat_format(struct mem_cgroup *memcg, struct seq_buf *s)
-    {
-    int i;
+    let mut i = 0;
 //
 // Provide statistics on the state of the memory subsystem as
 // well as cumulative event counters that show past behavior.
@@ -1573,12 +1767,13 @@ unsafe extern "C" fn memcg_stat_format(memcg: *mut mem_cgroup, s: *mut seq_buf) 
 // Current memory state:
 //
     mem_cgroup_flush_stats(memcg);
-    for (i = 0; i < ARRAY_SIZE(memory_stats); i++) {
-    u64 size;
+    while (i < ARRAY_SIZE!(memory_stats)) {
+    let mut size = 0;
 
     if (unlikely(memory_stats[i].idx == NR_HUGETLB) &&
-    !memcg_accounts_hugetlb())
+    !memcg_accounts_hugetlb()) {
     continue;
+    }
 
     size = memcg_page_state_output(memcg, memory_stats[i].idx);
     seq_buf_printf(s, "%s %llu\n", memory_stats[i].name, size);
@@ -1599,11 +1794,12 @@ unsafe extern "C" fn memcg_stat_format(memcg: *mut mem_cgroup, s: *mut seq_buf) 
     memcg_page_state(memcg, PGSTEAL_DIRECT) +
     memcg_page_state(memcg, PGSTEAL_PROACTIVE) +
     memcg_page_state(memcg, PGSTEAL_KHUGEPAGED));
-    for (i = 0; i < ARRAY_SIZE(memcg_vm_event_stat); i++) {
+    while (i < ARRAY_SIZE!(memcg_vm_event_stat)) {
 
     if (memcg_vm_event_stat[i] == PGPGIN ||
-    memcg_vm_event_stat[i] == PGPGOUT)
+    memcg_vm_event_stat[i] == PGPGOUT) {
     continue;
+    }
 
     seq_buf_printf(s, "%s %lu\n",
     vm_event_name(memcg_vm_event_stat[i]),
@@ -1612,14 +1808,15 @@ unsafe extern "C" fn memcg_stat_format(memcg: *mut mem_cgroup, s: *mut seq_buf) 
     }
 #[no_mangle]
 unsafe extern "C" fn memory_stat_format(memcg: *mut mem_cgroup, s: *mut seq_buf) {
-    static void memory_stat_format(struct mem_cgroup *memcg, struct seq_buf *s)
-    {
-    if (cgroup_subsys_on_dfl(memory_cgrp_subsys))
+    if (cgroup_subsys_on_dfl(memory_cgrp_subsys)) {
     memcg_stat_format(memcg, s);
-    else
+    }
+    else {
     memcg1_stat_format(memcg, s);
-    if (seq_buf_has_overflowed(s))
-    pr_warn("%s: Warning, stat buffer overflow, please report\n", __func__);
+    }
+    if (seq_buf_has_overflowed(s)) {
+    pr_warn!("%s: Warning, stat buffer overflow, please report\n", __func__);
+    }
     }
 //
 // mem_cgroup_print_oom_context: Print OOM information relevant to
@@ -1632,14 +1829,13 @@ unsafe extern "C" fn memory_stat_format(memcg: *mut mem_cgroup, s: *mut seq_buf)
 //
 #[no_mangle]
 pub unsafe extern "C" fn mem_cgroup_print_oom_context(memcg: *mut mem_cgroup, p: *mut task_struct) {
-    void mem_cgroup_print_oom_context(struct mem_cgroup *memcg, struct task_struct *p)
-    {
     rcu_read_lock();
     if (memcg) {
     pr_cont(",oom_memcg=");
     pr_cont_cgroup_path(memcg.css.cgroup);
-    } else
+    } else {
     pr_cont(",global_oom");
+    }
     if (p) {
     pr_cont(",task_memcg=");
     pr_cont_cgroup_path(task_cgroup(p, memory_cgrp_id));
@@ -1653,36 +1849,37 @@ pub unsafe extern "C" fn mem_cgroup_print_oom_context(memcg: *mut mem_cgroup, p:
 //
 #[no_mangle]
 pub unsafe extern "C" fn mem_cgroup_print_oom_meminfo(memcg: *mut mem_cgroup) {
-    void mem_cgroup_print_oom_meminfo(struct mem_cgroup *memcg)
-    {
 // Use static buffer, for the caller is holding oom_lock.
     static char buf[SEQ_BUF_SIZE];
-    struct seq_buf s;
-    unsigned long memory_failcnt;
+pub static mut s: usize = 0;
+    let mut memory_failcnt = 0;
     lockdep_assert_held(&oom_lock);
-    if (cgroup_subsys_on_dfl(memory_cgrp_subsys))
+    if (cgroup_subsys_on_dfl(memory_cgrp_subsys)) {
     memory_failcnt = atomic_long_read(&memcg.memory_events[MEMCG_MAX]);
-    else
+    }
+    else {
     memory_failcnt = memcg.memory.failcnt;
-    pr_info("memory: usage %llukB, limit %llukB, failcnt %lu\n",
+    }
+    pr_info!("memory: usage %llukB, limit %llukB, failcnt %lu\n",
     K((u64)page_counter_read(&memcg.memory)),
     K((u64)READ_ONCE(memcg.memory.max)), memory_failcnt);
-    if (cgroup_subsys_on_dfl(memory_cgrp_subsys))
-    pr_info("swap: usage %llukB, limit %llukB, failcnt %lu\n",
+    if (cgroup_subsys_on_dfl(memory_cgrp_subsys)) {
+    pr_info!("swap: usage %llukB, limit %llukB, failcnt %lu\n",
     K((u64)page_counter_read(&memcg.swap)),
     K((u64)READ_ONCE(memcg.swap.max)),
     atomic_long_read(&memcg.memory_events[MEMCG_SWAP_MAX]));
+    }
 
     else {
-    pr_info("memory+swap: usage %llukB, limit %llukB, failcnt %lu\n",
+    pr_info!("memory+swap: usage %llukB, limit %llukB, failcnt %lu\n",
     K((u64)page_counter_read(&memcg.memsw)),
     K((u64)memcg.memsw.max), memcg.memsw.failcnt);
-    pr_info("kmem: usage %llukB, limit %llukB, failcnt %lu\n",
+    pr_info!("kmem: usage %llukB, limit %llukB, failcnt %lu\n",
     K((u64)page_counter_read(&memcg.kmem)),
     K((u64)memcg.kmem.max), memcg.kmem.failcnt);
     }
 
-    pr_info("Memory cgroup stats for ");
+    pr_info!("Memory cgroup stats for ");
     pr_cont_cgroup_path(memcg.css.cgroup);
     pr_cont(":");
     seq_buf_init(&s, buf, SEQ_BUF_SIZE);
@@ -1694,69 +1891,67 @@ pub unsafe extern "C" fn mem_cgroup_print_oom_meminfo(memcg: *mut mem_cgroup) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn mem_cgroup_get_max(memcg: *mut mem_cgroup) -> c_ulong {
-    unsigned long mem_cgroup_get_max(struct mem_cgroup *memcg)
-    {
-    let mut max: c_ulong = READ_ONCE(memcg.memory.max);
+pub static mut max: c_ulong = 0;
     if (do_memsw_account()) {
     if (mem_cgroup_swappiness(memcg)) {
 // Calculate swap excess capacity from memsw limit
-    let mut swap: c_ulong = READ_ONCE(memcg.memsw.max) - max;
+pub static mut swap: c_ulong = 0;
     max += min(swap, (unsigned long)total_swap_pages);
     }
     } else {
-    if (mem_cgroup_swappiness(memcg))
+    if (mem_cgroup_swappiness(memcg)) {
     max += min(READ_ONCE(memcg.swap.max),
     (unsigned long)total_swap_pages);
     }
+    }
     return max;
     }
-    void __memcg_memory_event(struct mem_cgroup *memcg,
-    enum memcg_memory_event event, bool allow_spinning)
-    {
-    bool swap_event = event == MEMCG_SWAP_HIGH || event == MEMCG_SWAP_MAX ||
+#[no_mangle]
+pub unsafe extern "C" fn __memcg_memory_event(memcg: *mut mem_cgroup, event: memcg_memory_event, allow_spinning: bool) {
+    let mut swap_event = event == MEMCG_SWAP_HIGH || event == MEMCG_SWAP_MAX ||
     event == MEMCG_SWAP_FAIL;
 // For now only MEMCG_MAX can happen with !allow_spinning context.
     VM_WARN_ON_ONCE(!allow_spinning && event != MEMCG_MAX);
     atomic_long_inc(&memcg.memory_events_local[event]);
-    if (!swap_event && allow_spinning)
+    if (!swap_event && allow_spinning) {
     cgroup_file_notify(&memcg.events_local_file);
+    }
     do {
     atomic_long_inc(&memcg.memory_events[event]);
     if (allow_spinning) {
-    if (swap_event)
+    if (swap_event) {
     cgroup_file_notify(&memcg.swap_events_file);
-    else
+    }
+    else {
     cgroup_file_notify(&memcg.events_file);
     }
-    if (!cgroup_subsys_on_dfl(memory_cgrp_subsys))
+    }
+    if (!cgroup_subsys_on_dfl(memory_cgrp_subsys)) {
     break;
-    if (cgrp_dfl_root.flags & CGRP_ROOT_MEMORY_LOCAL_EVENTS)
+    }
+    if (cgrp_dfl_root.flags & CGRP_ROOT_MEMORY_LOCAL_EVENTS) {
     break;
+    }
     } while ((memcg = parent_mem_cgroup(memcg)) &&
     !mem_cgroup_is_root(memcg));
     }
     EXPORT_SYMBOL_GPL(__memcg_memory_event);
-    static bool mem_cgroup_out_of_memory(struct mem_cgroup *memcg, gfp_t gfp_mask,
-    int order)
-    {
-    struct oom_control oc = {
-    .zonelist = core::ptr::null_mut(),
-    .nodemask = core::ptr::null_mut(),
-    .memcg = memcg,
-    .gfp_mask = gfp_mask,
-    .order = order,
-    };
-    let mut ret: bool = true;
-    if (mutex_lock_killable(&oom_lock))
+#[no_mangle]
+pub unsafe extern "C" fn mem_cgroup_out_of_memory(memcg: *mut mem_cgroup, gfp_mask: gfp_t, order: c_int) -> bool {
+pub static mut oom_control: usize = 0;
+pub static mut ret: bool = true;
+    if (mutex_lock_killable(&oom_lock)) {
     return true;
-    if (mem_cgroup_margin(memcg) >= (1 << order))
-    goto unlock;
+    }
+    if (mem_cgroup_margin(memcg) >= (1 << order)) {
+// goto;
+    }
 //
 // A few threads which were not waiting at mutex_lock_killable() can
 // fail to bail out. Therefore, check again after holding oom_lock.
 //
     ret = out_of_memory(&oc);
-    unlock:
+// label;
     mutex_unlock(&oom_lock);
     return ret;
     }
@@ -1766,14 +1961,15 @@ pub unsafe extern "C" fn mem_cgroup_get_max(memcg: *mut mem_cgroup) -> c_ulong {
 //
 #[no_mangle]
 unsafe extern "C" fn mem_cgroup_oom(memcg: *mut mem_cgroup, mask: gfp_t, order: c_int) -> bool {
-    static bool mem_cgroup_oom(struct mem_cgroup *memcg, gfp_t mask, int order)
-    {
-    bool locked, ret;
-    if (order > PAGE_ALLOC_COSTLY_ORDER)
+    let mut locked = 0;
+    let mut ret = 0;
+    if (order > PAGE_ALLOC_COSTLY_ORDER) {
     return false;
+    }
     memcg_memory_event(memcg, MEMCG_OOM);
-    if (!memcg1_oom_prepare(memcg, &locked))
+    if (!memcg1_oom_prepare(memcg, &locked)) {
     return false;
+    }
     ret = mem_cgroup_out_of_memory(memcg, mask, order);
     memcg1_oom_finish(memcg, locked);
     return ret;
@@ -1788,48 +1984,52 @@ unsafe extern "C" fn mem_cgroup_oom(memcg: *mut mem_cgroup, mask: gfp_t, order: 
 //
 // Caller has to call mem_cgroup_put() on the returned non-NULL memcg.
 //
-    struct mem_cgroup *mem_cgroup_get_oom_group(struct task_struct *victim,
-    struct mem_cgroup *oom_domain)
-    {
-    struct mem_cgroup *oom_group = core::ptr::null_mut();
-    struct mem_cgroup *memcg;
-    if (!cgroup_subsys_on_dfl(memory_cgrp_subsys))
+#[no_mangle]
+pub unsafe extern "C" fn mem_cgroup_get_oom_group(victim: *mut task_struct, oom_domain: *mut mem_cgroup) -> *mut c_void {
+    let mut oom_group = core::ptr::null_mut();
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+    if (!cgroup_subsys_on_dfl(memory_cgrp_subsys)) {
     return core::ptr::null_mut();
-    if (!oom_domain)
+    }
+    if (!oom_domain) {
     oom_domain = root_mem_cgroup;
+    }
     rcu_read_lock();
     memcg = mem_cgroup_from_task(victim);
-    if (mem_cgroup_is_root(memcg))
-    goto out;
+    if (mem_cgroup_is_root(memcg)) {
+// goto;
+    }
 //
 // If the victim task has been asynchronously moved to a different
 // memory cgroup, we might end up killing tasks outside oom_domain.
 // In this case it's better to ignore memory.group.oom.
 //
-    if (unlikely(!mem_cgroup_is_descendant(memcg, oom_domain)))
-    goto out;
+    if (unlikely(!mem_cgroup_is_descendant(memcg, oom_domain))) {
+// goto;
+    }
 //
 // Traverse the memory cgroup hierarchy from the victim task's
 // cgroup up to the OOMing cgroup (or root) to find the
 // highest-level memory cgroup with oom.group set.
 //
     for (; memcg; memcg = parent_mem_cgroup(memcg)) {
-    if (READ_ONCE(memcg.oom_group))
+    if (READ_ONCE(memcg.oom_group)) {
     oom_group = memcg;
-    if (memcg == oom_domain)
+    }
+    if (memcg == oom_domain) {
     break;
     }
-    if (oom_group)
+    }
+    if (oom_group) {
     css_get(&oom_group.css);
-    out:
+    }
+// label;
     rcu_read_unlock();
     return oom_group;
     }
 #[no_mangle]
 pub unsafe extern "C" fn mem_cgroup_print_oom_group(memcg: *mut mem_cgroup) {
-    void mem_cgroup_print_oom_group(struct mem_cgroup *memcg)
-    {
-    pr_info("Tasks in ");
+    pr_info!("Tasks in ");
     pr_cont_cgroup_path(memcg.css.cgroup);
     pr_cont(" are going to be killed due to memory.oom.group set\n");
     }
@@ -1850,7 +2050,7 @@ pub struct memcg_stock_pcp {
     pub drain_idx: u8,
 }
 
-    static DEFINE_PER_CPU_ALIGNED(struct memcg_stock_pcp, memcg_stock) = {
+    static DEFINE_PER_CPU_ALIGNED(memcg_stock_pcp, memcg_stock) = {
     .lock = INIT_LOCAL_TRYLOCK(lock),
     };
 //
@@ -1884,16 +2084,15 @@ pub struct obj_stock_pcp {
     pub drain_idx: u8,
 }
 
-    static DEFINE_PER_CPU_ALIGNED(struct obj_stock_pcp, obj_stock) = {
+    static DEFINE_PER_CPU_ALIGNED(obj_stock_pcp, obj_stock) = {
     .lock = INIT_LOCAL_TRYLOCK(lock),
     .index = -1,
     .node_id = NUMA_NO_NODE,
     };
-    static DEFINE_MUTEX(percpu_charge_mutex);
-    static void drain_obj_stock_slot(struct obj_stock_pcp *stock, int i);
-    static void drain_obj_stock(struct obj_stock_pcp *stock);
-    static bool obj_stock_flush_required(struct obj_stock_pcp *stock,
-    struct mem_cgroup *root_memcg);
+pub static mut percpu_charge_mutex: usize = 0;
+// forward_decl: drain_obj_stock_slot;
+// forward_decl: drain_obj_stock;
+// forward_decl: obj_stock_flush_required;
 //
 // consume_stock: Try to consume stocked charge on this cpu.
 // @memcg: memcg to consume from.
@@ -1907,19 +2106,19 @@ pub struct obj_stock_pcp {
 //
 #[no_mangle]
 unsafe extern "C" fn consume_stock(memcg: *mut mem_cgroup, nr_pages: c_uint) -> bool {
-    static bool consume_stock(struct mem_cgroup *memcg, unsigned int nr_pages)
-    {
-    struct memcg_stock_pcp *stock;
-    uint8_t stock_pages;
-    let mut ret: bool = false;
-    int i;
+pub static mut stock: *mut c_void = core::ptr::null_mut();
+    let mut stock_pages;
+pub static mut ret: bool = false;
+    let mut i = 0;
     if (nr_pages > MEMCG_CHARGE_BATCH ||
-    !local_trylock(&memcg_stock.lock))
+    !local_trylock(&memcg_stock.lock)) {
     return ret;
+    }
     stock = this_cpu_ptr(&memcg_stock);
-    for (i = 0; i < NR_MEMCG_STOCK; ++i) {
-    if (memcg != READ_ONCE(stock.cached[i]))
+    while (i < NR_MEMCG_STOCK) {
+    if (memcg != READ_ONCE(stock.cached[i])) {
     continue;
+    }
     stock_pages = READ_ONCE(stock.nr_pages[i]);
     if (stock_pages >= nr_pages) {
     stock_pages -= nr_pages;
@@ -1937,23 +2136,21 @@ unsafe extern "C" fn consume_stock(memcg: *mut mem_cgroup, nr_pages: c_uint) -> 
     }
 #[no_mangle]
 unsafe extern "C" fn memcg_uncharge(memcg: *mut mem_cgroup, nr_pages: c_uint) {
-    static void memcg_uncharge(struct mem_cgroup *memcg, unsigned int nr_pages)
-    {
     page_counter_uncharge(&memcg.memory, nr_pages);
-    if (do_memsw_account())
+    if (do_memsw_account()) {
     page_counter_uncharge(&memcg.memsw, nr_pages);
+    }
     }
 //
 // Returns stocks cached in percpu and reset cached information.
 //
 #[no_mangle]
 unsafe extern "C" fn drain_stock(stock: *mut memcg_stock_pcp, i: c_int) {
-    static void drain_stock(struct memcg_stock_pcp *stock, int i)
-    {
-    struct mem_cgroup *old = READ_ONCE(stock.cached[i]);
-    uint8_t stock_pages;
-    if (!old)
+    let mut old = READ_ONCE(stock.cached[i]);
+    let mut stock_pages;
+    if (!old) {
     return;
+    }
     stock_pages = READ_ONCE(stock.nr_pages[i]);
     if (stock_pages) {
     memcg_uncharge(old, stock_pages);
@@ -1964,19 +2161,17 @@ unsafe extern "C" fn drain_stock(stock: *mut memcg_stock_pcp, i: c_int) {
     }
 #[no_mangle]
 unsafe extern "C" fn drain_stock_fully(stock: *mut memcg_stock_pcp) {
-    static void drain_stock_fully(struct memcg_stock_pcp *stock)
-    {
-    int i;
-    for (i = 0; i < NR_MEMCG_STOCK; ++i)
+    let mut i = 0;
+    for (i = 0; i < NR_MEMCG_STOCK; ++i) {
     drain_stock(stock, i);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn drain_local_memcg_stock(dummy: *mut work_struct) {
-    static void drain_local_memcg_stock(struct work_struct *dummy)
-    {
-    struct memcg_stock_pcp *stock;
-    if (WARN_ONCE(!in_task(), "drain in non-task context"))
+pub static mut stock: *mut c_void = core::ptr::null_mut();
+    if (WARN_ONCE(!in_task(), "drain in non-task context")) {
     return;
+    }
     local_lock(&memcg_stock.lock);
     stock = this_cpu_ptr(&memcg_stock);
     drain_stock_fully(stock);
@@ -1985,11 +2180,10 @@ unsafe extern "C" fn drain_local_memcg_stock(dummy: *mut work_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn drain_local_obj_stock(dummy: *mut work_struct) {
-    static void drain_local_obj_stock(struct work_struct *dummy)
-    {
-    struct obj_stock_pcp *stock;
-    if (WARN_ONCE(!in_task(), "drain in non-task context"))
+pub static mut stock: *mut c_void = core::ptr::null_mut();
+    if (WARN_ONCE(!in_task(), "drain in non-task context")) {
     return;
+    }
     local_lock(&obj_stock.lock);
     stock = this_cpu_ptr(&obj_stock);
     drain_obj_stock(stock);
@@ -1998,20 +2192,18 @@ unsafe extern "C" fn drain_local_obj_stock(dummy: *mut work_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn refill_stock(memcg: *mut mem_cgroup, nr_pages: c_uint) {
-    static void refill_stock(struct mem_cgroup *memcg, unsigned int nr_pages)
-    {
-    struct memcg_stock_pcp *stock;
-    struct mem_cgroup *cached;
-    uint8_t stock_pages;
-    let mut success: bool = false;
-    let mut empty_slot: c_int = -1;
-    int i;
+pub static mut stock: *mut c_void = core::ptr::null_mut();
+pub static mut cached: *mut c_void = core::ptr::null_mut();
+    let mut stock_pages;
+pub static mut success: bool = false;
+pub static mut empty_slot: c_int = 0;
+    let mut i = 0;
 //
 // For now limit MEMCG_CHARGE_BATCH to 127 and less. In future if we
 // decide to increase it more than 127 then we will need more careful
 // handling of nr_pages[] in struct memcg_stock_pcp.
 //
-    BUILD_BUG_ON(MEMCG_CHARGE_BATCH > S8_MAX);
+    BUILD_BUG_ON!(MEMCG_CHARGE_BATCH > S8_MAX);
     VM_WARN_ON_ONCE(mem_cgroup_is_root(memcg));
     if (nr_pages > MEMCG_CHARGE_BATCH ||
     !local_trylock(&memcg_stock.lock)) {
@@ -2023,15 +2215,17 @@ unsafe extern "C" fn refill_stock(memcg: *mut mem_cgroup, nr_pages: c_uint) {
     return;
     }
     stock = this_cpu_ptr(&memcg_stock);
-    for (i = 0; i < NR_MEMCG_STOCK; ++i) {
+    while (i < NR_MEMCG_STOCK) {
     cached = READ_ONCE(stock.cached[i]);
-    if (!cached && empty_slot == -1)
+    if (!cached && empty_slot == -1) {
     empty_slot = i;
+    }
     if (memcg == READ_ONCE(stock.cached[i])) {
     stock_pages = READ_ONCE(stock.nr_pages[i]) + nr_pages;
     WRITE_ONCE(stock.nr_pages[i], stock_pages);
-    if (stock_pages > MEMCG_CHARGE_BATCH)
+    if (stock_pages > MEMCG_CHARGE_BATCH) {
     drain_stock(stock, i);
+    }
     success = true;
     break;
     }
@@ -2039,9 +2233,10 @@ unsafe extern "C" fn refill_stock(memcg: *mut mem_cgroup, nr_pages: c_uint) {
     if (!success) {
     i = empty_slot;
     if (i == -1) {
-    i = stock.drain_idx++;
-    if (stock.drain_idx == NR_MEMCG_STOCK)
+    i = stock.drain_idx += 1;
+    if (stock.drain_idx == NR_MEMCG_STOCK) {
     stock.drain_idx = 0;
+    }
     drain_stock(stock, i);
     }
     css_get(&memcg.css);
@@ -2050,17 +2245,17 @@ unsafe extern "C" fn refill_stock(memcg: *mut mem_cgroup, nr_pages: c_uint) {
     }
     local_unlock(&memcg_stock.lock);
     }
-    static bool is_memcg_drain_needed(struct memcg_stock_pcp *stock,
-    struct mem_cgroup *root_memcg)
-    {
-    struct mem_cgroup *memcg;
-    let mut flush: bool = false;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn is_memcg_drain_needed(stock: *mut memcg_stock_pcp, root_memcg: *mut mem_cgroup) -> bool {
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+pub static mut flush: bool = false;
+    let mut i = 0;
     rcu_read_lock();
-    for (i = 0; i < NR_MEMCG_STOCK; ++i) {
+    while (i < NR_MEMCG_STOCK) {
     memcg = READ_ONCE(stock.cached[i]);
-    if (!memcg)
+    if (!memcg) {
     continue;
+    }
     if (READ_ONCE(stock.nr_pages[i]) &&
     mem_cgroup_is_descendant(memcg, root_memcg)) {
     flush = true;
@@ -2072,8 +2267,6 @@ unsafe extern "C" fn refill_stock(memcg: *mut mem_cgroup, nr_pages: c_uint) {
     }
 #[no_mangle]
 unsafe extern "C" fn schedule_drain_work(cpu: c_int, work: *mut work_struct) {
-    static void schedule_drain_work(int cpu, struct work_struct *work)
-    {
 //
 // Protect housekeeping cpumask read and work enqueue together
 // in the same RCU critical section so that later cpuset isolated
@@ -2081,8 +2274,9 @@ unsafe extern "C" fn schedule_drain_work(cpu: c_int, work: *mut work_struct) {
 // pending work on newly isolated CPUs.
 //
     guard(rcu)();
-    if (!cpu_is_isolated(cpu))
+    if (!cpu_is_isolated(cpu)) {
     queue_work_on(cpu, memcg_wq, work);
+    }
     }
 //
 // Drains all per-CPU charge caches for given root_memcg resp. subtree
@@ -2090,12 +2284,12 @@ unsafe extern "C" fn schedule_drain_work(cpu: c_int, work: *mut work_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn drain_all_stock(root_memcg: *mut mem_cgroup) {
-    void drain_all_stock(struct mem_cgroup *root_memcg)
-    {
-    int cpu, curcpu;
+    let mut cpu = 0;
+    let mut curcpu = 0;
 // If someone's already draining, avoid adding running more workers.
-    if (!mutex_trylock(&percpu_charge_mutex))
+    if (!mutex_trylock(&percpu_charge_mutex)) {
     return;
+    }
 //
 // Notify other cpus that system-wide "drain" is running
 // We do not care about races with the cpu hotplug because cpu down
@@ -2105,25 +2299,29 @@ pub unsafe extern "C" fn drain_all_stock(root_memcg: *mut mem_cgroup) {
     migrate_disable();
     curcpu = smp_processor_id();
     for_each_online_cpu(cpu) {
-    struct memcg_stock_pcp *memcg_st = &per_cpu(memcg_stock, cpu);
-    struct obj_stock_pcp *obj_st = &per_cpu(obj_stock, cpu);
+    let mut memcg_st = &per_cpu(memcg_stock, cpu);
+    let mut obj_st = &per_cpu(obj_stock, cpu);
     if (!test_bit(FLUSHING_CACHED_CHARGE, &memcg_st.flags) &&
     is_memcg_drain_needed(memcg_st, root_memcg) &&
     !test_and_set_bit(FLUSHING_CACHED_CHARGE,
     &memcg_st.flags)) {
-    if (cpu == curcpu)
+    if (cpu == curcpu) {
     drain_local_memcg_stock(&memcg_st.work);
-    else
+    }
+    else {
     schedule_drain_work(cpu, &memcg_st.work);
+    }
     }
     if (!test_bit(FLUSHING_CACHED_CHARGE, &obj_st.flags) &&
     obj_stock_flush_required(obj_st, root_memcg) &&
     !test_and_set_bit(FLUSHING_CACHED_CHARGE,
     &obj_st.flags)) {
-    if (cpu == curcpu)
+    if (cpu == curcpu) {
     drain_local_obj_stock(&obj_st.work);
-    else
+    }
+    else {
     schedule_drain_work(cpu, &obj_st.work);
+    }
     }
     }
     migrate_enable();
@@ -2131,23 +2329,20 @@ pub unsafe extern "C" fn drain_all_stock(root_memcg: *mut mem_cgroup) {
     }
 #[no_mangle]
 unsafe extern "C" fn memcg_hotplug_cpu_dead(cpu: c_uint) -> c_int {
-    static int memcg_hotplug_cpu_dead(unsigned int cpu)
-    {
 // no need for the local lock
     drain_obj_stock(&per_cpu(obj_stock, cpu));
     drain_stock_fully(&per_cpu(memcg_stock, cpu));
     return 0;
     }
-    static unsigned long reclaim_high(struct mem_cgroup *memcg,
-    unsigned int nr_pages,
-    gfp_t gfp_mask)
-    {
-    let mut nr_reclaimed: c_ulong = 0;
+#[no_mangle]
+pub unsafe extern "C" fn reclaim_high(memcg: *mut mem_cgroup, nr_pages: c_uint, gfp_mask: gfp_t) -> c_ulong {
+pub static mut nr_reclaimed: c_ulong = 0;
     do {
-    unsigned long pflags;
+    let mut pflags = 0;
     if (page_counter_read(&memcg.memory) <=
-    READ_ONCE(memcg.memory.high))
+    READ_ONCE(memcg.memory.high)) {
     continue;
+    }
     memcg_memory_event(memcg, MEMCG_HIGH);
     psi_memstall_enter(&pflags);
     nr_reclaimed += try_to_free_mem_cgroup_pages(memcg, nr_pages,
@@ -2161,10 +2356,8 @@ unsafe extern "C" fn memcg_hotplug_cpu_dead(cpu: c_uint) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn high_work_func(work: *mut work_struct) {
-    static void high_work_func(struct work_struct *work)
-    {
-    struct mem_cgroup *memcg;
-    memcg = container_of(work, struct mem_cgroup, high_work);
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+    memcg = container_of!(work, mem_cgroup, high_work);
     reclaim_high(memcg, MEMCG_CHARGE_BATCH, GFP_KERNEL);
     }
 //
@@ -2220,11 +2413,10 @@ pub const MEMCG_DELAY_PRECISION_SHIFT: c_int = 20;
 pub const MEMCG_DELAY_SCALING_SHIFT: c_int = 14;
 #[no_mangle]
 unsafe extern "C" fn calculate_overage(usage: c_ulong, high: c_ulong) -> u64 {
-    static u64 calculate_overage(unsigned long usage, unsigned long high)
-    {
-    u64 overage;
-    if (usage <= high)
+    let mut overage = 0;
+    if (usage <= high) {
     return 0;
+    }
 //
 // Prevent division by 0 in overage calculation by acting as if
 // it was a threshold of 1 page
@@ -2236,8 +2428,6 @@ unsafe extern "C" fn calculate_overage(usage: c_ulong, high: c_ulong) -> u64 {
     }
 #[no_mangle]
 unsafe extern "C" fn mem_find_max_overage(memcg: *mut mem_cgroup) -> u64 {
-    static u64 mem_find_max_overage(struct mem_cgroup *memcg)
-    {
     u64 overage, max_overage = 0;
     do {
     overage = calculate_overage(page_counter_read(&memcg.memory),
@@ -2249,14 +2439,13 @@ unsafe extern "C" fn mem_find_max_overage(memcg: *mut mem_cgroup) -> u64 {
     }
 #[no_mangle]
 unsafe extern "C" fn swap_find_max_overage(memcg: *mut mem_cgroup) -> u64 {
-    static u64 swap_find_max_overage(struct mem_cgroup *memcg)
-    {
     u64 overage, max_overage = 0;
     do {
     overage = calculate_overage(page_counter_read(&memcg.swap),
     READ_ONCE(memcg.swap.high));
-    if (overage)
+    if (overage) {
     memcg_memory_event(memcg, MEMCG_SWAP_HIGH);
+    }
     max_overage = max(overage, max_overage);
     } while ((memcg = parent_mem_cgroup(memcg)) &&
     !mem_cgroup_is_root(memcg));
@@ -2266,13 +2455,12 @@ unsafe extern "C" fn swap_find_max_overage(memcg: *mut mem_cgroup) -> u64 {
 // Get the number of jiffies that we should penalise a mischievous cgroup which
 // is exceeding its memory.high by checking both it and its ancestors.
 //
-    static unsigned long calculate_high_delay(struct mem_cgroup *memcg,
-    unsigned int nr_pages,
-    u64 max_overage)
-    {
-    unsigned long penalty_jiffies;
-    if (!max_overage)
+#[no_mangle]
+pub unsafe extern "C" fn calculate_high_delay(memcg: *mut mem_cgroup, nr_pages: c_uint, max_overage: u64) -> c_ulong {
+    let mut penalty_jiffies = 0;
+    if (!max_overage) {
     return 0;
+    }
 //
 // We use overage compared to memory.high to calculate the number of
 // jiffies to sleep (penalty_jiffies). Ideally this value should be
@@ -2301,18 +2489,16 @@ unsafe extern "C" fn swap_find_max_overage(memcg: *mut mem_cgroup) -> u64 {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __mem_cgroup_handle_over_high(gfp_mask: gfp_t) {
-    void __mem_cgroup_handle_over_high(gfp_t gfp_mask)
-    {
-    unsigned long penalty_jiffies;
-    unsigned long pflags;
-    unsigned long nr_reclaimed;
-    let mut nr_pages: c_uint = current.memcg_nr_pages_over_high;
-    let mut nr_retries: c_int = MAX_RECLAIM_RETRIES;
-    struct mem_cgroup *memcg;
-    let mut in_retry: bool = false;
+    let mut penalty_jiffies = 0;
+    let mut pflags = 0;
+    let mut nr_reclaimed = 0;
+pub static mut nr_pages: c_uint = 0;
+pub static mut nr_retries: c_int = 0;
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+pub static mut in_retry: bool = false;
     memcg = get_mem_cgroup_from_mm(current.mm);
     current.memcg_nr_pages_over_high = 0;
-    retry_reclaim:
+// label;
 //
 // Bail if the task is already exiting. Unlike memory.max,
 // memory.high enforcement isn't as strict, and there is no
@@ -2321,8 +2507,9 @@ pub unsafe extern "C" fn __mem_cgroup_handle_over_high(gfp_mask: gfp_t) {
 // memory.max; the dying task could get stuck in fruitless
 // reclaim for a long time, which isn't desirable.
 //
-    if (task_is_dying())
-    goto out;
+    if (task_is_dying()) {
+// goto;
+    }
 //
 // The allocating task should reclaim at least the batch size, but for
 // subsequent retries we only want to do what's necessary to prevent oom
@@ -2355,8 +2542,9 @@ pub unsafe extern "C" fn __mem_cgroup_handle_over_high(gfp_mask: gfp_t) {
 // go only a small amount over their memory.high value and maybe haven't
 // been aggressively reclaimed enough yet.
 //
-    if (penalty_jiffies <= HZ / 100)
-    goto out;
+    if (penalty_jiffies <= HZ / 100) {
+// goto;
+    }
 //
 // If reclaim is making forward progress but we're still over
 // memory.high, we want to encourage that rather than doing allocator
@@ -2364,7 +2552,7 @@ pub unsafe extern "C" fn __mem_cgroup_handle_over_high(gfp_mask: gfp_t) {
 //
     if (nr_reclaimed || nr_retries--) {
     in_retry = true;
-    goto retry_reclaim;
+// goto;
     }
 //
 // Reclaim didn't manage to push usage below the limit, slow
@@ -2377,36 +2565,39 @@ pub unsafe extern "C" fn __mem_cgroup_handle_over_high(gfp_mask: gfp_t) {
     psi_memstall_enter(&pflags);
     schedule_timeout_killable(penalty_jiffies);
     psi_memstall_leave(&pflags);
-    out:
+// label;
     css_put(&memcg.css);
     }
-    static int try_charge_memcg(struct mem_cgroup *memcg, gfp_t gfp_mask,
-    unsigned int nr_pages)
-    {
-    let mut batch: c_uint = max(MEMCG_CHARGE_BATCH, nr_pages);
-    let mut nr_retries: c_int = MAX_RECLAIM_RETRIES;
-    struct mem_cgroup *mem_over_limit;
-    struct page_counter *counter;
-    unsigned long nr_reclaimed;
-    let mut passed_oom: bool = false;
-    unsigned int reclaim_options;
-    let mut drained: bool = false;
-    let mut raised_max_event: bool = false;
-    unsigned long pflags;
-    let mut allow_spinning: bool = gfpflags_allow_spinning(gfp_mask);
-    retry:
-    if (consume_stock(memcg, nr_pages))
+#[no_mangle]
+pub unsafe extern "C" fn try_charge_memcg(memcg: *mut mem_cgroup, gfp_mask: gfp_t, nr_pages: c_uint) -> c_int {
+pub static mut batch: c_uint = 0;
+pub static mut nr_retries: c_int = 0;
+pub static mut mem_over_limit: *mut c_void = core::ptr::null_mut();
+pub static mut counter: *mut c_void = core::ptr::null_mut();
+    let mut nr_reclaimed = 0;
+pub static mut passed_oom: bool = false;
+    let mut reclaim_options = 0;
+pub static mut drained: bool = false;
+pub static mut raised_max_event: bool = false;
+    let mut pflags = 0;
+pub static mut allow_spinning: bool = false;
+// label;
+    if (consume_stock(memcg, nr_pages)) {
     return 0;
-    if (!allow_spinning)
+    }
+    if (!allow_spinning) {
 // Avoid the refill and flush of the older stock
     batch = nr_pages;
+    }
     reclaim_options = MEMCG_RECLAIM_MAY_SWAP;
     if (!do_memsw_account() ||
     page_counter_try_charge(&memcg.memsw, batch, &counter)) {
-    if (page_counter_try_charge(&memcg.memory, batch, &counter))
-    goto done_restock;
-    if (do_memsw_account())
+    if (page_counter_try_charge(&memcg.memory, batch, &counter)) {
+// goto;
+    }
+    if (do_memsw_account()) {
     page_counter_uncharge(&memcg.memsw, batch);
+    }
     mem_over_limit = mem_cgroup_from_counter(counter, memory);
     } else {
     mem_over_limit = mem_cgroup_from_counter(counter, memsw);
@@ -2414,7 +2605,7 @@ pub unsafe extern "C" fn __mem_cgroup_handle_over_high(gfp_mask: gfp_t) {
     }
     if (batch > nr_pages) {
     batch = nr_pages;
-    goto retry;
+// goto;
     }
 //
 // Prevent unbounded recursion when reclaim operations need to
@@ -2422,12 +2613,15 @@ pub unsafe extern "C" fn __mem_cgroup_handle_over_high(gfp_mask: gfp_t) {
 // but we prefer facilitating memory reclaim and getting back
 // under the limit over triggering OOM kills in these cases.
 //
-    if (unlikely(current.flags & PF_MEMALLOC))
-    goto force;
-    if (unlikely(task_in_memcg_oom(current)))
-    goto nomem;
-    if (!gfpflags_allow_blocking(gfp_mask))
-    goto nomem;
+    if (unlikely(current.flags & PF_MEMALLOC)) {
+// goto;
+    }
+    if (unlikely(task_in_memcg_oom(current))) {
+// goto;
+    }
+    if (!gfpflags_allow_blocking(gfp_mask)) {
+// goto;
+    }
 //
 // OOM victim still needs to charge memory to exit. OOM reaper should
 // help but it might fail on mmap_lock contention. If the victim is a
@@ -2438,23 +2632,26 @@ pub unsafe extern "C" fn __mem_cgroup_handle_over_high(gfp_mask: gfp_t) {
 // contribute further charges.
 //
     if (tsk_is_oom_victim(current) &&
-    mm_flags_test(MMF_OOM_SKIP, current.signal.oom_mm))
-    goto nomem;
+    mm_flags_test(MMF_OOM_SKIP, current.signal.oom_mm)) {
+// goto;
+    }
     __memcg_memory_event(mem_over_limit, MEMCG_MAX, allow_spinning);
     raised_max_event = true;
     psi_memstall_enter(&pflags);
     nr_reclaimed = try_to_free_mem_cgroup_pages(mem_over_limit, nr_pages,
     gfp_mask, reclaim_options, core::ptr::null_mut());
     psi_memstall_leave(&pflags);
-    if (mem_cgroup_margin(mem_over_limit) >= nr_pages)
-    goto retry;
+    if (mem_cgroup_margin(mem_over_limit) >= nr_pages) {
+// goto;
+    }
     if (!drained) {
     drain_all_stock(mem_over_limit);
     drained = true;
-    goto retry;
+// goto;
     }
-    if (gfp_mask & __GFP_NORETRY)
-    goto nomem;
+    if (gfp_mask & __GFP_NORETRY) {
+// goto;
+    }
 //
 // Even though the limit is exceeded at this point, reclaim
 // may have been able to free some pages.  Retry the charge
@@ -2464,15 +2661,19 @@ pub unsafe extern "C" fn __mem_cgroup_handle_over_high(gfp_mask: gfp_t) {
 // unlikely to succeed so close to the limit, and we fall back
 // to regular pages anyway in case of failure.
 //
-    if (nr_reclaimed && nr_pages <= (1 << PAGE_ALLOC_COSTLY_ORDER))
-    goto retry;
-    if (nr_retries--)
-    goto retry;
-    if (gfp_mask & __GFP_RETRY_MAYFAIL)
-    goto nomem;
+    if (nr_reclaimed && nr_pages <= (1 << PAGE_ALLOC_COSTLY_ORDER)) {
+// goto;
+    }
+    if (nr_retries--) {
+// goto;
+    }
+    if (gfp_mask & __GFP_RETRY_MAYFAIL) {
+// goto;
+    }
 // Avoid endless loop for tasks bypassed by the oom killer
-    if (passed_oom && task_is_dying())
-    goto nomem;
+    if (passed_oom && task_is_dying()) {
+// goto;
+    }
 //
 // keep retrying as long as the memcg oom killer is able to make
 // a forward progress or bypass the charge if the oom killer
@@ -2482,36 +2683,40 @@ pub unsafe extern "C" fn __mem_cgroup_handle_over_high(gfp_mask: gfp_t) {
     get_order(nr_pages * PAGE_SIZE))) {
     passed_oom = true;
     nr_retries = MAX_RECLAIM_RETRIES;
-    goto retry;
+// goto;
     }
-    nomem:
+// label;
 //
 // Memcg doesn't have a dedicated reserve for atomic
 // allocations. But like the global atomic pool, we need to
 // put the burden of reclaim on regular allocation requests
 // and let these go through as privileged allocations.
 //
-    if (!(gfp_mask & (__GFP_NOFAIL | __GFP_HIGH)))
+    if (!(gfp_mask & (__GFP_NOFAIL | __GFP_HIGH))) {
     return -ENOMEM;
-    force:
+    }
+// label;
 //
 // If the allocation has to be enforced, don't forget to raise
 // a MEMCG_MAX event.
 //
-    if (!raised_max_event)
+    if (!raised_max_event) {
     __memcg_memory_event(mem_over_limit, MEMCG_MAX, allow_spinning);
+    }
 //
 // The allocation either can't fail or will lead to more memory
 // being freed very soon.  Allow memory usage go over the limit
 // temporarily by force charging it.
 //
     page_counter_charge(&memcg.memory, nr_pages);
-    if (do_memsw_account())
+    if (do_memsw_account()) {
     page_counter_charge(&memcg.memsw, nr_pages);
+    }
     return 0;
-    done_restock:
-    if (batch > nr_pages)
+// label;
+    if (batch > nr_pages) {
     refill_stock(memcg, batch - nr_pages);
+    }
 //
 // If the hierarchy is above the normal consumption range, schedule
 // reclaim on returning to userland.  We can perform reclaim here
@@ -2522,7 +2727,8 @@ pub unsafe extern "C" fn __mem_cgroup_handle_over_high(gfp_mask: gfp_t) {
 // reclaim, the cost of mismatch is negligible.
 //
     do {
-    bool mem_high, swap_high;
+    let mut mem_high = 0;
+    let mut swap_high = 0;
     mem_high = page_counter_read(&memcg.memory) >
     READ_ONCE(memcg.memory.high);
     swap_high = page_counter_read(&memcg.swap) >
@@ -2559,21 +2765,20 @@ pub unsafe extern "C" fn __mem_cgroup_handle_over_high(gfp_mask: gfp_t) {
 //
     if (current.memcg_nr_pages_over_high > MEMCG_CHARGE_BATCH &&
     !(current.flags & PF_MEMALLOC) &&
-    gfpflags_allow_blocking(gfp_mask))
+    gfpflags_allow_blocking(gfp_mask)) {
     __mem_cgroup_handle_over_high(gfp_mask);
+    }
     return 0;
     }
-    static inline int try_charge(struct mem_cgroup *memcg, gfp_t gfp_mask,
-    unsigned int nr_pages)
-    {
-    if (mem_cgroup_is_root(memcg))
+#[no_mangle]
+pub unsafe extern "C" fn try_charge(memcg: *mut mem_cgroup, gfp_mask: gfp_t, nr_pages: c_uint) -> c_int {
+    if (mem_cgroup_is_root(memcg)) {
     return 0;
+    }
     return try_charge_memcg(memcg, gfp_mask, nr_pages);
     }
 #[no_mangle]
 unsafe extern "C" fn commit_charge(folio: *mut folio, objcg: *mut obj_cgroup) {
-    static void commit_charge(struct folio *folio, struct obj_cgroup *objcg)
-    {
     VM_BUG_ON_FOLIO(folio_memcg_charged(folio), folio);
 //
 // Any of the following ensures folio's objcg stability:
@@ -2585,60 +2790,60 @@ unsafe extern "C" fn commit_charge(folio: *mut folio, objcg: *mut obj_cgroup) {
     folio.memcg_data = (unsigned long)objcg;
     }
 
-    static inline void account_slab_nmi_safe(struct mem_cgroup *memcg,
-    struct pglist_data *pgdat,
-    enum node_stat_item idx, int nr)
-    {
-    struct lruvec *lruvec;
+#[no_mangle]
+pub unsafe extern "C" fn account_slab_nmi_safe(memcg: *mut mem_cgroup, pgdat: *mut pglist_data, idx: node_stat_item, nr: c_int) {
+pub static mut lruvec: *mut c_void = core::ptr::null_mut();
     if (likely(!in_nmi())) {
     lruvec = mem_cgroup_lruvec(memcg, pgdat);
     mod_memcg_lruvec_state(lruvec, idx, nr);
     } else {
-    struct mem_cgroup_per_node *pn = memcg.nodeinfo[pgdat.node_id];
+    let mut pn = memcg.nodeinfo[pgdat.node_id];
 // preemption is disabled in_nmi().
     __css_rstat_updated(&memcg.css, smp_processor_id());
-    if (idx == NR_SLAB_RECLAIMABLE_B)
+    if (idx == NR_SLAB_RECLAIMABLE_B) {
     atomic_add(nr, &pn.slab_reclaimable);
-    else
+    }
+    else {
     atomic_add(nr, &pn.slab_unreclaimable);
     }
     }
+    }
 
-    static inline void account_slab_nmi_safe(struct mem_cgroup *memcg,
-    struct pglist_data *pgdat,
-    enum node_stat_item idx, int nr)
-    {
-    struct lruvec *lruvec;
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: account_slab_nmi_safe
+pub unsafe extern "C" fn account_slab_nmi_safe_dup(memcg: *mut mem_cgroup, pgdat: *mut pglist_data, idx: node_stat_item, nr: c_int) {
+pub static mut lruvec: *mut c_void = core::ptr::null_mut();
     lruvec = mem_cgroup_lruvec(memcg, pgdat);
     mod_memcg_lruvec_state(lruvec, idx, nr);
     }
 
-    static inline void mod_objcg_mlstate(struct obj_cgroup *objcg,
-    struct pglist_data *pgdat,
-    enum node_stat_item idx, int nr)
-    {
-    struct mem_cgroup *memcg;
+#[no_mangle]
+pub unsafe extern "C" fn mod_objcg_mlstate(objcg: *mut obj_cgroup, pgdat: *mut pglist_data, idx: node_stat_item, nr: c_int) {
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     memcg = obj_cgroup_memcg(objcg);
     account_slab_nmi_safe(memcg, pgdat, idx, nr);
     rcu_read_unlock();
     }
     static __always_inline
-    struct mem_cgroup *mem_cgroup_from_obj_slab(struct slab *slab, void *p)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn mem_cgroup_from_obj_slab(slab: *mut slab, p: *mut c_void) -> *mut c_void {
 //
 // Slab objects are accounted individually, not per-page.
 // Memcg membership data for each individual object is saved in
 // slab->obj_exts.
 //
-    unsigned long obj_exts;
-    struct slabobj_ext *obj_ext;
-    struct obj_cgroup *objcg;
+    let mut obj_exts = 0;
+pub static mut obj_ext: *mut c_void = core::ptr::null_mut();
+pub static mut objcg: *mut c_void = core::ptr::null_mut();
     obj_exts = slab_obj_exts(slab);
-    if (!obj_exts)
+    if (!obj_exts) {
     return core::ptr::null_mut();
-    if (!slab_needs_objcg(slab))
+    }
+    if (!slab_needs_objcg(slab)) {
     return core::ptr::null_mut();
+    }
     get_slab_obj_exts(obj_exts);
     obj_ext = slab_obj_ext(slab.slab_cache, slab, obj_exts, p);
     objcg = slab_obj_ext_objcg(slab, obj_ext);
@@ -2658,51 +2863,53 @@ unsafe extern "C" fn commit_charge(folio: *mut folio, objcg: *mut obj_cgroup) {
 // The caller must ensure the memcg lifetime, e.g. by taking rcu_read_lock(),
 // cgroup_mutex, etc.
 //
-    struct mem_cgroup *mem_cgroup_from_virt(void *p)
-    {
-    struct slab *slab;
-    if (mem_cgroup_disabled())
+#[no_mangle]
+pub unsafe extern "C" fn mem_cgroup_from_virt(p: *mut c_void) -> *mut c_void {
+pub static mut slab: *mut c_void = core::ptr::null_mut();
+    if (mem_cgroup_disabled()) {
     return core::ptr::null_mut();
+    }
     slab = virt_to_slab(p);
-    if (slab)
+    if (slab) {
     return mem_cgroup_from_obj_slab(slab, p);
+    }
     return folio_memcg_check(virt_to_folio(p));
     }
-    static struct obj_cgroup *__get_obj_cgroup_from_memcg(struct mem_cgroup *memcg,
-    int nid)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __get_obj_cgroup_from_memcg(memcg: *mut mem_cgroup, nid: c_int) -> *mut c_void {
     for (; memcg; memcg = parent_mem_cgroup(memcg)) {
-    struct obj_cgroup *objcg = rcu_dereference(memcg.nodeinfo[nid].objcg);
-    if (likely(objcg && obj_cgroup_tryget(objcg)))
+    let mut objcg = rcu_dereference(memcg.nodeinfo[nid].objcg);
+    if (likely(objcg && obj_cgroup_tryget(objcg))) {
     return objcg;
+    }
     }
     return core::ptr::null_mut();
     }
-    static inline struct obj_cgroup *get_obj_cgroup_from_memcg(struct mem_cgroup *memcg,
-    int nid)
-    {
-    struct obj_cgroup *objcg;
+#[no_mangle]
+pub unsafe extern "C" fn get_obj_cgroup_from_memcg(memcg: *mut mem_cgroup, nid: c_int) -> *mut c_void {
+pub static mut objcg: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     objcg = __get_obj_cgroup_from_memcg(memcg, nid);
     rcu_read_unlock();
     return objcg;
     }
-    static struct obj_cgroup *current_objcg_update(void)
-    {
-    struct mem_cgroup *memcg;
+#[no_mangle]
+pub unsafe extern "C" fn current_objcg_update() -> *mut c_void {
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
     struct obj_cgroup *old, *objcg = core::ptr::null_mut();
     do {
 // Atomically drop the update bit.
     old = xchg(&current.objcg, core::ptr::null_mut());
     if (old) {
-    old = (struct obj_cgroup *)
+    old = 
     ((unsigned long)old & ~CURRENT_OBJCG_UPDATE_FLAG);
     obj_cgroup_put(old);
     old = core::ptr::null_mut();
     }
 // If new objcg is NULL, no reason for the second atomic update.
-    if (!current.mm || (current.flags & PF_KTHREAD))
+    if (!current.mm || (current.flags & PF_KTHREAD)) {
     return core::ptr::null_mut();
+    }
 //
 // Release the objcg pointer from the previous iteration,
 // if try_cmpxcg() below fails.
@@ -2731,18 +2938,21 @@ unsafe extern "C" fn commit_charge(folio: *mut folio, objcg: *mut obj_cgroup) {
     }
     __always_inline struct obj_cgroup *current_obj_cgroup(void)
     {
-    struct mem_cgroup *memcg;
-    struct obj_cgroup *objcg;
-    let mut nid: c_int = numa_node_id();
-    if (IS_ENABLED(CONFIG_MEMCG_NMI_UNSAFE) && in_nmi())
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+pub static mut objcg: *mut c_void = core::ptr::null_mut();
+pub static mut nid: c_int = 0;
+    if (IS_ENABLED!(CONFIG_MEMCG_NMI_UNSAFE) && in_nmi()) {
     return core::ptr::null_mut();
+    }
     if (in_task()) {
     memcg = current.active_memcg;
-    if (unlikely(memcg))
-    goto from_memcg;
+    if (unlikely(memcg)) {
+// goto;
+    }
     objcg = READ_ONCE(current.objcg);
-    if (unlikely((unsigned long)objcg & CURRENT_OBJCG_UPDATE_FLAG))
+    if (unlikely((unsigned long)objcg & CURRENT_OBJCG_UPDATE_FLAG)) {
     objcg = current_objcg_update();
+    }
 //
 // Objcg reference is kept by the task, so it's safe
 // to use the objcg by the current task.
@@ -2750,10 +2960,11 @@ unsafe extern "C" fn commit_charge(folio: *mut folio, objcg: *mut obj_cgroup) {
     return objcg ? : rcu_dereference_check(root_mem_cgroup.nodeinfo[nid].objcg, 1);
     }
     memcg = this_cpu_read(int_active_memcg);
-    if (unlikely(memcg))
-    goto from_memcg;
+    if (unlikely(memcg)) {
+// goto;
+    }
     return rcu_dereference_check(root_mem_cgroup.nodeinfo[nid].objcg, 1);
-    from_memcg:
+// label;
     for (; memcg; memcg = parent_mem_cgroup(memcg)) {
 //
 // Memcg pointer is protected by scope (see set_active_memcg())
@@ -2762,24 +2973,24 @@ unsafe extern "C" fn commit_charge(folio: *mut folio, objcg: *mut obj_cgroup) {
 // protection.
 //
     objcg = rcu_dereference_check(memcg.nodeinfo[nid].objcg, 1);
-    if (likely(objcg))
+    if (likely(objcg)) {
     return objcg;
+    }
     }
     return rcu_dereference_check(root_mem_cgroup.nodeinfo[nid].objcg, 1);
     }
-    struct obj_cgroup *get_obj_cgroup_from_folio(struct folio *folio)
-    {
-    struct obj_cgroup *objcg;
+#[no_mangle]
+pub unsafe extern "C" fn get_obj_cgroup_from_folio(folio: *mut folio) -> *mut c_void {
+pub static mut objcg: *mut c_void = core::ptr::null_mut();
     objcg = folio_objcg(folio);
-    if (objcg)
+    if (objcg) {
     obj_cgroup_get(objcg);
+    }
     return objcg;
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn account_kmem_nmi_safe(memcg: *mut mem_cgroup, val: c_int) {
-    static inline void account_kmem_nmi_safe(struct mem_cgroup *memcg, int val)
-    {
     if (likely(!in_nmi())) {
     mod_memcg_state(memcg, MEMCG_KMEM, val);
     } else {
@@ -2790,9 +3001,9 @@ pub unsafe extern "C" fn account_kmem_nmi_safe(memcg: *mut mem_cgroup, val: c_in
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn account_kmem_nmi_safe(memcg: *mut mem_cgroup, val: c_int) {
-    static inline void account_kmem_nmi_safe(struct mem_cgroup *memcg, int val)
-    {
+#[no_mangle]
+// duplicate fn: account_kmem_nmi_safe
+pub unsafe extern "C" fn account_kmem_nmi_safe_dup(memcg: *mut mem_cgroup, val: c_int) {
     mod_memcg_state(memcg, MEMCG_KMEM, val);
     }
 
@@ -2801,15 +3012,15 @@ pub unsafe extern "C" fn account_kmem_nmi_safe(memcg: *mut mem_cgroup, val: c_in
 // @objcg: object cgroup to uncharge
 // @nr_pages: number of pages to uncharge
 //
-    static void obj_cgroup_uncharge_pages(struct obj_cgroup *objcg,
-    unsigned int nr_pages)
-    {
-    struct mem_cgroup *memcg;
+#[no_mangle]
+pub unsafe extern "C" fn obj_cgroup_uncharge_pages(objcg: *mut obj_cgroup, nr_pages: c_uint) {
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
     memcg = get_mem_cgroup_from_objcg(objcg);
     account_kmem_nmi_safe(memcg, -nr_pages);
     memcg1_account_kmem(memcg, -nr_pages);
-    if (!mem_cgroup_is_root(memcg))
+    if (!mem_cgroup_is_root(memcg)) {
     refill_stock(memcg, nr_pages);
+    }
     css_put(&memcg.css);
     }
 //
@@ -2820,34 +3031,33 @@ pub unsafe extern "C" fn account_kmem_nmi_safe(memcg: *mut mem_cgroup, val: c_in
 //
 // Returns 0 on success, an error code on failure.
 //
-    static int obj_cgroup_charge_pages(struct obj_cgroup *objcg, gfp_t gfp,
-    unsigned int nr_pages)
-    {
-    struct mem_cgroup *memcg;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn obj_cgroup_charge_pages(objcg: *mut obj_cgroup, gfp: gfp_t, nr_pages: c_uint) -> c_int {
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     memcg = get_mem_cgroup_from_objcg(objcg);
     ret = try_charge_memcg(memcg, gfp, nr_pages);
-    if (ret)
-    goto out;
+    if (ret) {
+// goto;
+    }
     account_kmem_nmi_safe(memcg, nr_pages);
     memcg1_account_kmem(memcg, nr_pages);
-    out:
+// label;
     css_put(&memcg.css);
     return ret;
     }
-    static struct obj_cgroup *page_objcg(const struct page *page)
-    {
-    let mut memcg_data: c_ulong = page.memcg_data;
-    if (mem_cgroup_disabled() || !memcg_data)
+#[no_mangle]
+pub unsafe extern "C" fn page_objcg(page: *mut page) -> *mut c_void {
+pub static mut memcg_data: c_ulong = 0;
+    if (mem_cgroup_disabled() || !memcg_data) {
     return core::ptr::null_mut();
+    }
     VM_BUG_ON_PAGE((memcg_data & OBJEXTS_FLAGS_MASK) != MEMCG_DATA_KMEM,
     page);
-    return (struct obj_cgroup *)(memcg_data - MEMCG_DATA_KMEM);
+    return (memcg_data - MEMCG_DATA_KMEM);
     }
 #[no_mangle]
 unsafe extern "C" fn page_set_objcg(page: *mut page, objcg: *const obj_cgroup) {
-    static void page_set_objcg(struct page *page, const struct obj_cgroup *objcg)
-    {
     page.memcg_data = (unsigned long)objcg | MEMCG_DATA_KMEM;
     }
 //
@@ -2860,10 +3070,8 @@ unsafe extern "C" fn page_set_objcg(page: *mut page, objcg: *const obj_cgroup) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __memcg_kmem_charge_page(page: *mut page, gfp: gfp_t, order: c_int) -> c_int {
-    int __memcg_kmem_charge_page(struct page *page, gfp_t gfp, int order)
-    {
-    struct obj_cgroup *objcg;
-    let mut ret: c_int = 0;
+pub static mut objcg: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     objcg = current_obj_cgroup();
     if (objcg && !obj_cgroup_is_root(objcg)) {
     ret = obj_cgroup_charge_pages(objcg, gfp, 1 << order);
@@ -2882,50 +3090,50 @@ pub unsafe extern "C" fn __memcg_kmem_charge_page(page: *mut page, gfp: gfp_t, o
 //
 #[no_mangle]
 pub unsafe extern "C" fn __memcg_kmem_uncharge_page(page: *mut page, order: c_int) {
-    void __memcg_kmem_uncharge_page(struct page *page, int order)
-    {
-    struct obj_cgroup *objcg = page_objcg(page);
-    let mut nr_pages: c_uint = 1 << order;
-    if (!objcg)
+    let mut objcg = page_objcg(page);
+pub static mut nr_pages: c_uint = 0;
+    if (!objcg) {
     return;
+    }
     obj_cgroup_uncharge_pages(objcg, nr_pages);
     page.memcg_data = 0;
     obj_cgroup_put(objcg);
     }
-    static struct obj_stock_pcp *trylock_stock(void)
-    {
-    if (local_trylock(&obj_stock.lock))
+#[no_mangle]
+pub unsafe extern "C" fn trylock_stock() -> *mut c_void {
+    if (local_trylock(&obj_stock.lock)) {
     return this_cpu_ptr(&obj_stock);
+    }
     return core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn unlock_stock(stock: *mut obj_stock_pcp) {
-    static void unlock_stock(struct obj_stock_pcp *stock)
-    {
-    if (stock)
+    if (stock) {
     local_unlock(&obj_stock.lock);
     }
+    }
 // Call after __refill_obj_stock() so a slot for objcg exists in the stock
-    static void __account_obj_stock(struct obj_cgroup *objcg,
-    struct obj_stock_pcp *stock, int nr,
-    struct pglist_data *pgdat, enum node_stat_item idx)
-    {
-    int16_t *bytes;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn __account_obj_stock(objcg: *mut obj_cgroup, stock: *mut obj_stock_pcp, nr: c_int, pgdat: *mut pglist_data, idx: node_stat_item) {
+pub static mut bytes: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
 //
 // Though at the moment MAX_NUMNODES <= 1024 in all archs but let's make
 // sure it does not exceed S16_MAX otherwise we need to fix node_id type
 // in struct obj_stock_pcp.
 //
-    BUILD_BUG_ON(MAX_NUMNODES >= S16_MAX);
-    if (!stock)
-    goto direct;
-    for (i = 0; i < NR_OBJ_STOCK; ++i) {
-    if (READ_ONCE(stock.cached[i]) == objcg)
+    BUILD_BUG_ON!(MAX_NUMNODES >= S16_MAX);
+    if (!stock) {
+// goto;
+    }
+    while (i < NR_OBJ_STOCK) {
+    if (READ_ONCE(stock.cached[i]) == objcg) {
     break;
     }
-    if (i == NR_OBJ_STOCK)
-    goto direct;
+    }
+    if (i == NR_OBJ_STOCK) {
+// goto;
+    }
 //
 // Save vmstat data in stock and skip vmstat array update unless
 // accumulating over a page of vmstat data or when the objcg slot or
@@ -2935,8 +3143,8 @@ unsafe extern "C" fn unlock_stock(stock: *mut obj_stock_pcp) {
     stock.index = i;
     stock.node_id = pgdat.node_id;
     } else if (stock.index != i || stock.node_id != pgdat.node_id) {
-    struct obj_cgroup *old = READ_ONCE(stock.cached[stock.index]);
-    struct pglist_data *oldpg = NODE_DATA(stock.node_id);
+    let mut old = READ_ONCE(stock.cached[stock.index]);
+    let mut oldpg = NODE_DATA(stock.node_id);
     if (stock.nr_slab_reclaimable_b) {
     mod_objcg_mlstate(old, oldpg, NR_SLAB_RECLAIMABLE_B,
     stock.nr_slab_reclaimable_b);
@@ -2966,18 +3174,18 @@ unsafe extern "C" fn unlock_stock(stock: *mut obj_stock_pcp) {
     } else {
 // bytes = 0;
     }
-    direct:
-    if (nr)
+// label;
+    if (nr) {
     mod_objcg_mlstate(objcg, pgdat, idx, nr);
     }
-    static bool __consume_obj_stock(struct obj_cgroup *objcg,
-    struct obj_stock_pcp *stock,
-    unsigned int nr_bytes)
-    {
-    int i;
-    for (i = 0; i < NR_OBJ_STOCK; ++i) {
-    if (READ_ONCE(stock.cached[i]) != objcg)
+    }
+#[no_mangle]
+pub unsafe extern "C" fn __consume_obj_stock(objcg: *mut obj_cgroup, stock: *mut obj_stock_pcp, nr_bytes: c_uint) -> bool {
+    let mut i = 0;
+    while (i < NR_OBJ_STOCK) {
+    if (READ_ONCE(stock.cached[i]) != objcg) {
     continue;
+    }
     if (stock.nr_bytes[i] >= nr_bytes) {
     stock.nr_bytes[i] -= nr_bytes;
     return true;
@@ -2988,13 +3196,12 @@ unsafe extern "C" fn unlock_stock(stock: *mut obj_stock_pcp) {
     }
 #[no_mangle]
 unsafe extern "C" fn consume_obj_stock(objcg: *mut obj_cgroup, nr_bytes: c_uint) -> bool {
-    static bool consume_obj_stock(struct obj_cgroup *objcg, unsigned int nr_bytes)
-    {
-    struct obj_stock_pcp *stock;
-    let mut ret: bool = false;
+pub static mut stock: *mut c_void = core::ptr::null_mut();
+pub static mut ret: bool = false;
     stock = trylock_stock();
-    if (!stock)
+    if (!stock) {
     return ret;
+    }
     ret = __consume_obj_stock(objcg, stock, nr_bytes);
     unlock_stock(stock);
     return ret;
@@ -3002,12 +3209,11 @@ unsafe extern "C" fn consume_obj_stock(objcg: *mut obj_cgroup, nr_bytes: c_uint)
 // Flush the cached slab stats (if any) back to their owning objcg/pgdat.
 #[no_mangle]
 unsafe extern "C" fn drain_obj_stock_stats(stock: *mut obj_stock_pcp) {
-    static void drain_obj_stock_stats(struct obj_stock_pcp *stock)
-    {
-    struct obj_cgroup *old;
-    struct pglist_data *oldpg;
-    if (stock.index < 0)
+pub static mut old: *mut c_void = core::ptr::null_mut();
+pub static mut oldpg: *mut c_void = core::ptr::null_mut();
+    if (stock.index < 0) {
     return;
+    }
     old = READ_ONCE(stock.cached[stock.index]);
     oldpg = NODE_DATA(stock.node_id);
     if (stock.nr_slab_reclaimable_b) {
@@ -3025,16 +3231,15 @@ unsafe extern "C" fn drain_obj_stock_stats(stock: *mut obj_stock_pcp) {
     }
 #[no_mangle]
 unsafe extern "C" fn drain_obj_stock_slot(stock: *mut obj_stock_pcp, i: c_int) {
-    static void drain_obj_stock_slot(struct obj_stock_pcp *stock, int i)
-    {
-    struct obj_cgroup *old = READ_ONCE(stock.cached[i]);
-    if (!old)
+    let mut old = READ_ONCE(stock.cached[i]);
+    if (!old) {
     return;
+    }
     if (stock.nr_bytes[i]) {
-    let mut nr_pages: c_uint = stock.nr_bytes[i] >> PAGE_SHIFT;
-    let mut nr_bytes: c_uint = stock.nr_bytes[i] & (PAGE_SIZE - 1);
+pub static mut nr_pages: c_uint = 0;
+pub static mut nr_bytes: c_uint = 0;
     if (nr_pages) {
-    struct mem_cgroup *memcg;
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
     memcg = get_mem_cgroup_from_objcg(old);
     memcg_uncharge_kmem(memcg, nr_pages);
     css_put(&memcg.css);
@@ -3053,31 +3258,31 @@ unsafe extern "C" fn drain_obj_stock_slot(stock: *mut obj_stock_pcp, i: c_int) {
     stock.nr_bytes[i] = 0;
     }
 // Flush vmstat data when its owning slot is being drained.
-    if (stock.index == i)
+    if (stock.index == i) {
     drain_obj_stock_stats(stock);
+    }
     WRITE_ONCE(stock.cached[i], core::ptr::null_mut());
     obj_cgroup_put(old);
     }
 #[no_mangle]
 unsafe extern "C" fn drain_obj_stock(stock: *mut obj_stock_pcp) {
-    static void drain_obj_stock(struct obj_stock_pcp *stock)
-    {
-    int i;
-    for (i = 0; i < NR_OBJ_STOCK; ++i)
+    let mut i = 0;
+    for (i = 0; i < NR_OBJ_STOCK; ++i) {
     drain_obj_stock_slot(stock, i);
     }
-    static bool obj_stock_flush_required(struct obj_stock_pcp *stock,
-    struct mem_cgroup *root_memcg)
-    {
-    struct obj_cgroup *objcg;
-    struct mem_cgroup *memcg;
-    let mut flush: bool = false;
-    int i;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn obj_stock_flush_required(stock: *mut obj_stock_pcp, root_memcg: *mut mem_cgroup) -> bool {
+pub static mut objcg: *mut c_void = core::ptr::null_mut();
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+pub static mut flush: bool = false;
+    let mut i = 0;
     rcu_read_lock();
-    for (i = 0; i < NR_OBJ_STOCK; ++i) {
+    while (i < NR_OBJ_STOCK) {
     objcg = READ_ONCE(stock.cached[i]);
-    if (!objcg)
+    if (!objcg) {
     continue;
+    }
     memcg = obj_cgroup_memcg(objcg);
     if (memcg && mem_cgroup_is_descendant(memcg, root_memcg)) {
     flush = true;
@@ -3087,25 +3292,23 @@ unsafe extern "C" fn drain_obj_stock(stock: *mut obj_stock_pcp) {
     rcu_read_unlock();
     return flush;
     }
-    static void __refill_obj_stock(struct obj_cgroup *objcg,
-    struct obj_stock_pcp *stock,
-    unsigned int nr_bytes,
-    bool allow_uncharge)
-    {
-    let mut nr_pages: c_uint = 0;
-    unsigned int stock_nr_bytes;
+#[no_mangle]
+pub unsafe extern "C" fn __refill_obj_stock(objcg: *mut obj_cgroup, stock: *mut obj_stock_pcp, nr_bytes: c_uint, allow_uncharge: bool) {
+pub static mut nr_pages: c_uint = 0;
+    let mut stock_nr_bytes = 0;
     int i, slot = -1, empty_slot = -1;
     if (!stock) {
     nr_pages = nr_bytes >> PAGE_SHIFT;
     nr_bytes = nr_bytes & (PAGE_SIZE - 1);
     atomic_add(nr_bytes, &objcg.nr_charged_bytes);
-    goto out;
+// goto;
     }
-    for (i = 0; i < NR_OBJ_STOCK; ++i) {
-    struct obj_cgroup *cached = READ_ONCE(stock.cached[i]);
+    while (i < NR_OBJ_STOCK) {
+    let mut cached = READ_ONCE(stock.cached[i]);
     if (!cached) {
-    if (empty_slot == -1)
+    if (empty_slot == -1) {
     empty_slot = i;
+    }
     continue;
     }
     if (cached == objcg) {
@@ -3116,9 +3319,10 @@ unsafe extern "C" fn drain_obj_stock(stock: *mut obj_stock_pcp) {
     if (slot == -1) {
     slot = empty_slot;
     if (slot == -1) {
-    slot = stock.drain_idx++;
-    if (stock.drain_idx == NR_OBJ_STOCK)
+    slot = stock.drain_idx += 1;
+    if (stock.drain_idx == NR_OBJ_STOCK) {
     stock.drain_idx = 0;
+    }
     drain_obj_stock_slot(stock, slot);
     }
     obj_cgroup_get(objcg);
@@ -3142,37 +3346,35 @@ unsafe extern "C" fn drain_obj_stock(stock: *mut obj_stock_pcp) {
     stock_nr_bytes &= (PAGE_SIZE - 1);
     }
     stock.nr_bytes[slot] = stock_nr_bytes;
-    out:
-    if (nr_pages)
+// label;
+    if (nr_pages) {
     obj_cgroup_uncharge_pages(objcg, nr_pages);
     }
-    static void refill_obj_stock(struct obj_cgroup *objcg,
-    unsigned int nr_bytes,
-    bool allow_uncharge)
-    {
-    struct obj_stock_pcp *stock = trylock_stock();
+    }
+#[no_mangle]
+pub unsafe extern "C" fn refill_obj_stock(objcg: *mut obj_cgroup, nr_bytes: c_uint, allow_uncharge: bool) {
+    let mut stock = trylock_stock();
     __refill_obj_stock(objcg, stock, nr_bytes, allow_uncharge);
     unlock_stock(stock);
     }
-    static int __obj_cgroup_charge(struct obj_cgroup *objcg, gfp_t gfp,
-    size_t size, size_t *remainder)
-    {
-    size_t charge_size;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn __obj_cgroup_charge(objcg: *mut obj_cgroup, gfp: gfp_t, size: size_t, remainder: *mut size_t) -> c_int {
+    let mut charge_size = 0;
+    let mut ret = 0;
     charge_size = PAGE_ALIGN(size);
     ret = obj_cgroup_charge_pages(objcg, gfp, charge_size >> PAGE_SHIFT);
-    if (!ret)
+    if (!ret) {
 // remainder = charge_size - size;
+    }
     return ret;
     }
 #[no_mangle]
 pub unsafe extern "C" fn obj_cgroup_charge(objcg: *mut obj_cgroup, gfp: gfp_t, size: usize) -> c_int {
-    int obj_cgroup_charge(struct obj_cgroup *objcg, gfp_t gfp, size_t size)
-    {
-    size_t remainder;
-    int ret;
-    if (likely(consume_obj_stock(objcg, size)))
+    let mut remainder = 0;
+    let mut ret = 0;
+    if (likely(consume_obj_stock(objcg, size))) {
     return 0;
+    }
 //
 // In theory, objcg->nr_charged_bytes can have enough
 // pre-charged bytes to satisfy the allocation. However,
@@ -3193,74 +3395,74 @@ pub unsafe extern "C" fn obj_cgroup_charge(objcg: *mut obj_cgroup, gfp: gfp_t, s
 // allow_uncharge flag to false when calling refill_obj_stock()
 // to temporarily allow the pre-charged bytes to exceed the page
 // size limit. The maximum reachable value of the pre-charged
-// bytes is (sizeof(object) + PAGE_SIZE - 2) if there is no data
+// bytes is (sizeof!(object) + PAGE_SIZE - 2) if there is no data
 // race.
 //
     ret = __obj_cgroup_charge(objcg, gfp, size, &remainder);
-    if (!ret && remainder)
+    if (!ret && remainder) {
     refill_obj_stock(objcg, remainder, false);
+    }
     return ret;
     }
 #[no_mangle]
 pub unsafe extern "C" fn obj_cgroup_uncharge(objcg: *mut obj_cgroup, size: usize) {
-    void obj_cgroup_uncharge(struct obj_cgroup *objcg, size_t size)
-    {
     refill_obj_stock(objcg, size, true);
     }
 #[no_mangle]
 pub unsafe extern "C" fn obj_full_size(s: *mut kmem_cache) -> usize {
-    static inline size_t obj_full_size(struct kmem_cache *s)
-    {
 //
 // For each accounted object there is an extra space which is used
 // to store obj_cgroup membership. Charge it too.
 //
-    return s.size + sizeof(struct obj_cgroup *);
+    return s.size + sizeof!;
     }
-    bool __memcg_slab_post_alloc_hook(struct kmem_cache *s, struct list_lru *lru,
-    gfp_t flags, unsigned int slab_alloc_flags,
-    size_t size, void **p)
-    {
-    let mut obj_size: usize = obj_full_size(s);
-    struct obj_cgroup *objcg;
-    struct slab *slab;
-    size_t i;
+#[no_mangle]
+pub unsafe extern "C" fn __memcg_slab_post_alloc_hook(s: *mut kmem_cache, lru: *mut list_lru, flags: gfp_t, slab_alloc_flags: c_uint, size: size_t, p: *mut *mut c_void) -> bool {
+pub static mut obj_size: usize = 0;
+pub static mut objcg: *mut c_void = core::ptr::null_mut();
+pub static mut slab: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
 //
 // The obtained objcg pointer is safe to use within the current scope,
 // defined by current task or set_active_memcg() pair.
 // obj_cgroup_get() is used to get a permanent reference.
 //
     objcg = current_obj_cgroup();
-    if (!objcg || obj_cgroup_is_root(objcg))
+    if (!objcg || obj_cgroup_is_root(objcg)) {
     return true;
+    }
 //
 // slab_alloc_node() avoids the NULL check, so we might be called with a
 // single NULL object. kmem_cache_alloc_bulk() aborts if it can't fill
 // the whole requested size.
 // return success as there's nothing to free back
 //
-    if (unlikely(*p == core::ptr::null_mut()))
+    if (unlikely(*p == core::ptr::null_mut())) {
     return true;
+    }
     flags &= gfp_allowed_mask;
     if (lru) {
-    int ret;
-    struct mem_cgroup *memcg;
+    let mut ret = 0;
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
     memcg = get_mem_cgroup_from_objcg(objcg);
     ret = memcg_list_lru_alloc(memcg, lru, flags);
     css_put(&memcg.css);
-    if (ret)
+    if (ret) {
     return false;
     }
-    for (i = 0; i < size; i++) {
-    unsigned long obj_exts;
-    struct slabobj_ext *obj_ext;
-    struct obj_stock_pcp *stock;
+    }
+    while (i < size) {
+    let mut obj_exts = 0;
+pub static mut obj_ext: *mut c_void = core::ptr::null_mut();
+pub static mut stock: *mut c_void = core::ptr::null_mut();
     slab = virt_to_slab(p[i]);
     if (!slab_obj_exts(slab)) {
-    if (is_kfence_address(p[i]))
+    if (is_kfence_address(p[i])) {
     continue;
-    if (alloc_slab_obj_exts(slab, s, flags, slab_alloc_flags))
+    }
+    if (alloc_slab_obj_exts(slab, s, flags, slab_alloc_flags)) {
     continue;
+    }
     }
 //
 // if we fail and size is 1, memcg_alloc_abort_single() will
@@ -3275,13 +3477,15 @@ pub unsafe extern "C" fn obj_full_size(s: *mut kmem_cache) -> usize {
 //
     stock = trylock_stock();
     if (!stock || !__consume_obj_stock(objcg, stock, obj_size)) {
-    size_t remainder;
+    let mut remainder = 0;
     unlock_stock(stock);
-    if (__obj_cgroup_charge(objcg, flags, obj_size, &remainder))
+    if (__obj_cgroup_charge(objcg, flags, obj_size, &remainder)) {
     return false;
+    }
     stock = trylock_stock();
-    if (remainder)
+    if (remainder) {
     __refill_obj_stock(objcg, stock, remainder, false);
+    }
     }
     __account_obj_stock(objcg, stock, obj_size,
     slab_pgdat(slab), cache_vmstat_idx(s));
@@ -3295,18 +3499,18 @@ pub unsafe extern "C" fn obj_full_size(s: *mut kmem_cache) -> usize {
     }
     return true;
     }
-    void __memcg_slab_free_hook(struct kmem_cache *s, struct slab *slab,
-    void **p, int objects, unsigned long obj_exts)
-    {
-    let mut obj_size: usize = obj_full_size(s);
-    for (int i = 0; i < objects; i++) {
-    struct obj_cgroup *objcg;
-    struct slabobj_ext *obj_ext;
-    struct obj_stock_pcp *stock;
+#[no_mangle]
+pub unsafe extern "C" fn __memcg_slab_free_hook(s: *mut kmem_cache, slab: *mut slab, p: *mut *mut c_void, objects: c_int, obj_exts: c_ulong) {
+pub static mut obj_size: usize = 0;
+    while (i < objects) {
+pub static mut objcg: *mut c_void = core::ptr::null_mut();
+pub static mut obj_ext: *mut c_void = core::ptr::null_mut();
+pub static mut stock: *mut c_void = core::ptr::null_mut();
     obj_ext = slab_obj_ext(s, slab, obj_exts, p[i]);
     objcg = slab_obj_ext_objcg(slab, obj_ext);
-    if (!objcg)
+    if (!objcg) {
     continue;
+    }
     slab_obj_ext_set_objcg(slab, obj_ext, core::ptr::null_mut());
     stock = trylock_stock();
     __refill_obj_stock(objcg, stock, obj_size, true);
@@ -3322,72 +3526,67 @@ pub unsafe extern "C" fn obj_full_size(s: *mut kmem_cache) -> usize {
 //
 #[no_mangle]
 pub unsafe extern "C" fn split_page_memcg(page: *mut page, order: unsigned) {
-    void split_page_memcg(struct page *page, unsigned order)
-    {
-    struct obj_cgroup *objcg = page_objcg(page);
+    let mut objcg = page_objcg(page);
     unsigned int i, nr = 1 << order;
-    if (!objcg)
+    if (!objcg) {
     return;
-    for (i = 1; i < nr; i++)
+    }
+    for (i = 1; i < nr; i++) {
     page_set_objcg(&page[i], objcg);
+    }
     obj_cgroup_get_many(objcg, nr - 1);
     }
-    void folio_split_memcg_refs(struct folio *folio, unsigned old_order,
-    unsigned new_order)
-    {
-    unsigned new_refs;
-    if (mem_cgroup_disabled() || !folio_memcg_charged(folio))
+#[no_mangle]
+pub unsafe extern "C" fn folio_split_memcg_refs(folio: *mut folio, old_order: c_uint, new_order: c_uint) {
+    let mut new_refs: c_uint = 0;
+    if (mem_cgroup_disabled() || !folio_memcg_charged(folio)) {
     return;
+    }
     new_refs = (1 << (old_order - new_order)) - 1;
     obj_cgroup_get_many(folio_objcg(folio), new_refs);
     }
 #[no_mangle]
 unsafe extern "C" fn memcg_online_kmem(memcg: *mut mem_cgroup) {
-    static void memcg_online_kmem(struct mem_cgroup *memcg)
-    {
-    if (mem_cgroup_kmem_disabled())
+    if (mem_cgroup_kmem_disabled()) {
     return;
-    if (unlikely(mem_cgroup_is_root(memcg)))
+    }
+    if (unlikely(mem_cgroup_is_root(memcg))) {
     return;
+    }
     static_branch_enable(&memcg_kmem_online_key);
     memcg.kmemcg_id = memcg.id.id;
     }
 #[no_mangle]
 unsafe extern "C" fn memcg_offline_kmem(memcg: *mut mem_cgroup) {
-    static void memcg_offline_kmem(struct mem_cgroup *memcg)
-    {
-    struct mem_cgroup *parent;
-    if (mem_cgroup_kmem_disabled())
+pub static mut parent: *mut c_void = core::ptr::null_mut();
+    if (mem_cgroup_kmem_disabled()) {
     return;
-    if (unlikely(mem_cgroup_is_root(memcg)))
+    }
+    if (unlikely(mem_cgroup_is_root(memcg))) {
     return;
+    }
     parent = parent_mem_cgroup(memcg);
     memcg_reparent_list_lrus(memcg, parent);
     }
 
 #[no_mangle]
 unsafe extern "C" fn memcg_wb_domain_init(memcg: *mut mem_cgroup, gfp: gfp_t) -> c_int {
-    static int memcg_wb_domain_init(struct mem_cgroup *memcg, gfp_t gfp)
-    {
     return wb_domain_init(&memcg.cgwb_domain, gfp);
     }
 #[no_mangle]
 unsafe extern "C" fn memcg_wb_domain_exit(memcg: *mut mem_cgroup) {
-    static void memcg_wb_domain_exit(struct mem_cgroup *memcg)
-    {
     wb_domain_exit(&memcg.cgwb_domain);
     }
 #[no_mangle]
 unsafe extern "C" fn memcg_wb_domain_size_changed(memcg: *mut mem_cgroup) {
-    static void memcg_wb_domain_size_changed(struct mem_cgroup *memcg)
-    {
     wb_domain_size_changed(&memcg.cgwb_domain);
     }
-    struct wb_domain *mem_cgroup_wb_domain(struct bdi_writeback *wb)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(wb.memcg_css);
-    if (!memcg.css.parent)
+#[no_mangle]
+pub unsafe extern "C" fn mem_cgroup_wb_domain(wb: *mut bdi_writeback) -> *mut c_void {
+    let mut memcg = mem_cgroup_from_css(wb.memcg_css);
+    if (!memcg.css.parent) {
     return core::ptr::null_mut();
+    }
     return &memcg.cgwb_domain;
     }
 //
@@ -3408,12 +3607,10 @@ unsafe extern "C" fn memcg_wb_domain_size_changed(memcg: *mut mem_cgroup) {
 // available memory in the system.  The caller should further cap
 // *@pheadroom accordingly.
 //
-    void mem_cgroup_wb_stats(struct bdi_writeback *wb, unsigned long *pfilepages,
-    unsigned long *pheadroom, unsigned long *pdirty,
-    unsigned long *pwriteback)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(wb.memcg_css);
-    struct mem_cgroup *parent;
+#[no_mangle]
+pub unsafe extern "C" fn mem_cgroup_wb_stats(wb: *mut bdi_writeback, pfilepages: *mut c_ulong, pheadroom: *mut c_ulong, pdirty: *mut c_ulong, pwriteback: *mut c_ulong) {
+    let mut memcg = mem_cgroup_from_css(wb.memcg_css);
+pub static mut parent: *mut c_void = core::ptr::null_mut();
     mem_cgroup_flush_stats_ratelimited(memcg);
 // pdirty = memcg_page_state(memcg, NR_FILE_DIRTY);
 // pwriteback = memcg_page_state(memcg, NR_WRITEBACK);
@@ -3421,9 +3618,9 @@ unsafe extern "C" fn memcg_wb_domain_size_changed(memcg: *mut mem_cgroup) {
     memcg_page_state(memcg, NR_ACTIVE_FILE);
 // pheadroom = PAGE_COUNTER_MAX;
     while ((parent = parent_mem_cgroup(memcg))) {
-    unsigned long ceiling = min(READ_ONCE(memcg.memory.max),
+    let mut ceiling = min(READ_ONCE(memcg.memory.max),
     READ_ONCE(memcg.memory.high));
-    let mut used: c_ulong = page_counter_read(&memcg.memory);
+pub static mut used: c_ulong = 0;
 // pheadroom = min(*pheadroom, ceiling - min(ceiling, used));
     memcg = parent;
     }
@@ -3472,26 +3669,26 @@ unsafe extern "C" fn memcg_wb_domain_size_changed(memcg: *mut mem_cgroup) {
 // As being wrong occasionally doesn't matter, updates and accesses to the
 // records are lockless and racy.
 //
-    void mem_cgroup_track_foreign_dirty_slowpath(struct folio *folio,
-    struct bdi_writeback *wb)
-    {
-    struct mem_cgroup *memcg = folio_memcg(folio);
-    struct memcg_cgwb_frn *frn;
-    let mut now: u64 = get_jiffies_64();
-    let mut oldest_at: u64 = now;
-    let mut oldest: c_int = -1;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn mem_cgroup_track_foreign_dirty_slowpath(folio: *mut folio, wb: *mut bdi_writeback) {
+    let mut memcg = folio_memcg(folio);
+pub static mut frn: *mut c_void = core::ptr::null_mut();
+pub static mut now: u64 = 0;
+pub static mut oldest_at: u64 = 0;
+pub static mut oldest: c_int = 0;
+    let mut i = 0;
     trace_track_foreign_dirty(folio, wb);
 //
 // Pick the slot to use.  If there is already a slot for @wb, keep
 // using it.  If not replace the oldest one which isn't being
 // written out.
 //
-    for (i = 0; i < MEMCG_CGWB_FRN_CNT; i++) {
+    while (i < MEMCG_CGWB_FRN_CNT) {
     frn = &memcg.cgwb_frn[i];
     if (frn.bdi_id == wb.bdi.id &&
-    frn.memcg_id == wb.memcg_css.id)
+    frn.memcg_id == wb.memcg_css.id) {
     break;
+    }
     if (time_before64(frn.at, oldest_at) &&
     atomic_read(&frn.done.cnt) == 1) {
     oldest = i;
@@ -3506,11 +3703,11 @@ unsafe extern "C" fn memcg_wb_domain_size_changed(memcg: *mut mem_cgroup) {
 // dirty_expire_interval as that's what expires the record.
 // Use the shorter of 1s and dirty_expire_interval / 8.
 //
-    unsigned long update_intv =
-    min_t(unsigned long, HZ,
+    let mut update_intv = min_t(unsigned long, HZ,
     msecs_to_jiffies(dirty_expire_interval * 10) / 8);
-    if (time_before64(frn.at, now - update_intv))
+    if (time_before64(frn.at, now - update_intv)) {
     frn.at = now;
+    }
     } else if (oldest >= 0) {
 // replace the oldest free one
     frn = &memcg.cgwb_frn[oldest];
@@ -3522,14 +3719,12 @@ unsafe extern "C" fn memcg_wb_domain_size_changed(memcg: *mut mem_cgroup) {
 // issue foreign writeback flushes for recorded foreign dirtying events
 #[no_mangle]
 pub unsafe extern "C" fn mem_cgroup_flush_foreign(wb: *mut bdi_writeback) {
-    void mem_cgroup_flush_foreign(struct bdi_writeback *wb)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(wb.memcg_css);
-    let mut intv: c_ulong = msecs_to_jiffies(dirty_expire_interval * 10);
-    let mut now: u64 = jiffies_64;
-    int i;
-    for (i = 0; i < MEMCG_CGWB_FRN_CNT; i++) {
-    struct memcg_cgwb_frn *frn = &memcg.cgwb_frn[i];
+    let mut memcg = mem_cgroup_from_css(wb.memcg_css);
+pub static mut intv: c_ulong = 0;
+pub static mut now: u64 = 0;
+    let mut i = 0;
+    while (i < MEMCG_CGWB_FRN_CNT) {
+    let mut frn = &memcg.cgwb_frn[i];
 //
 // If the record is older than dirty_expire_interval,
 // writeback on it has already started.  No need to kick it
@@ -3549,19 +3744,13 @@ pub unsafe extern "C" fn mem_cgroup_flush_foreign(wb: *mut bdi_writeback) {
 
 #[no_mangle]
 unsafe extern "C" fn memcg_wb_domain_init(memcg: *mut mem_cgroup, gfp: gfp_t) -> c_int {
-    static int memcg_wb_domain_init(struct mem_cgroup *memcg, gfp_t gfp)
-    {
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn memcg_wb_domain_exit(memcg: *mut mem_cgroup) {
-    static void memcg_wb_domain_exit(struct mem_cgroup *memcg)
-    {
     }
 #[no_mangle]
 unsafe extern "C" fn memcg_wb_domain_size_changed(memcg: *mut mem_cgroup) {
-    static void memcg_wb_domain_size_changed(struct mem_cgroup *memcg)
-    {
     }
 
 //
@@ -3588,11 +3777,9 @@ unsafe extern "C" fn memcg_wb_domain_size_changed(memcg: *mut mem_cgroup) {
 // those references are manageable from userspace.
 //
 
-    static DEFINE_XARRAY_ALLOC1(mem_cgroup_private_ids);
+pub static mut mem_cgroup_private_ids: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn mem_cgroup_private_id_remove(memcg: *mut mem_cgroup) {
-    static void mem_cgroup_private_id_remove(struct mem_cgroup *memcg)
-    {
     if (memcg.id.id > 0) {
     xa_erase(&mem_cgroup_private_ids, memcg.id.id);
     memcg.id.id = 0;
@@ -3600,22 +3787,20 @@ unsafe extern "C" fn mem_cgroup_private_id_remove(memcg: *mut mem_cgroup) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn mem_cgroup_private_id_put(memcg: *mut mem_cgroup, n: c_uint) {
-    static inline void mem_cgroup_private_id_put(struct mem_cgroup *memcg, unsigned int n)
-    {
     if (refcount_sub_and_test(n, &memcg.id.ref)) {
     mem_cgroup_private_id_remove(memcg);
 // Memcg ID pins CSS
     css_put(&memcg.css);
     }
     }
-    struct mem_cgroup *mem_cgroup_private_id_get_online(struct mem_cgroup *memcg, unsigned int n)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn mem_cgroup_private_id_get_online(memcg: *mut mem_cgroup, n: c_uint) -> *mut c_void {
     while (!refcount_add_not_zero(n, &memcg.id.ref)) {
 //
 // The root cgroup cannot be destroyed, so it's refcount must
 // always be >= 1.
 //
-    if (WARN_ON_ONCE(mem_cgroup_is_root(memcg))) {
+    if (WARN_ON_ONCE!(mem_cgroup_is_root(memcg))) {
     VM_BUG_ON(1);
     break;
     }
@@ -3629,70 +3814,71 @@ pub unsafe extern "C" fn mem_cgroup_private_id_put(memcg: *mut mem_cgroup, n: c_
 //
 // Caller must hold rcu_read_lock().
 //
-    struct mem_cgroup *mem_cgroup_from_private_id(unsigned short id)
-    {
-    WARN_ON_ONCE(!rcu_read_lock_held());
+#[no_mangle]
+pub unsafe extern "C" fn mem_cgroup_from_private_id(id: c_ushort) -> *mut c_void {
+    WARN_ON_ONCE!(!rcu_read_lock_held());
     return xa_load(&mem_cgroup_private_ids, id);
     }
-    struct mem_cgroup *mem_cgroup_get_from_id(u64 id)
-    {
-    struct cgroup *cgrp;
-    struct cgroup_subsys_state *css;
-    struct mem_cgroup *memcg = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn mem_cgroup_get_from_id(id: u64) -> *mut c_void {
+pub static mut cgrp: *mut c_void = core::ptr::null_mut();
+pub static mut css: *mut c_void = core::ptr::null_mut();
+    let mut memcg = core::ptr::null_mut();
     cgrp = cgroup_get_from_id(id);
-    if (IS_ERR(cgrp))
+    if (IS_ERR(cgrp)) {
     return core::ptr::null_mut();
+    }
     css = cgroup_get_e_css(cgrp, &memory_cgrp_subsys);
-    if (css)
-    memcg = container_of(css, struct mem_cgroup, css);
+    if (css) {
+    memcg = container_of!(css, mem_cgroup, css);
+    }
     cgroup_put(cgrp);
     return memcg;
     }
 #[no_mangle]
 unsafe extern "C" fn free_mem_cgroup_per_node_info(pn: *mut mem_cgroup_per_node) {
-    static void free_mem_cgroup_per_node_info(struct mem_cgroup_per_node *pn)
-    {
-    if (!pn)
+    if (!pn) {
     return;
+    }
     free_percpu(pn.lruvec_stats_percpu);
     kfree(pn.lruvec_stats);
     kfree(pn);
     }
 #[no_mangle]
 unsafe extern "C" fn alloc_mem_cgroup_per_node_info(memcg: *mut mem_cgroup, node: c_int) -> bool {
-    static bool alloc_mem_cgroup_per_node_info(struct mem_cgroup *memcg, int node)
-    {
-    struct mem_cgroup_per_node *pn;
+pub static mut pn: *mut c_void = core::ptr::null_mut();
     pn = kmem_cache_alloc_node(memcg_pn_cachep, GFP_KERNEL | __GFP_ZERO,
     node);
-    if (!pn)
+    if (!pn) {
     return false;
-    pn.lruvec_stats = kzalloc_node(sizeof(struct lruvec_stats),
+    }
+    pn.lruvec_stats = kzalloc_node(sizeof!(lruvec_stats),
     GFP_KERNEL_ACCOUNT, node);
-    if (!pn.lruvec_stats)
-    goto fail;
-    pn.lruvec_stats_percpu = alloc_percpu_gfp(struct lruvec_stats_percpu,
+    if (!pn.lruvec_stats) {
+// goto;
+    }
+    pn.lruvec_stats_percpu = alloc_percpu_gfp(lruvec_stats_percpu,
     GFP_KERNEL_ACCOUNT);
-    if (!pn.lruvec_stats_percpu)
-    goto fail;
+    if (!pn.lruvec_stats_percpu) {
+// goto;
+    }
     INIT_LIST_HEAD(&pn.objcg_list);
     lruvec_init(&pn.lruvec);
     pn.memcg = memcg;
     memcg.nodeinfo[node] = pn;
     return true;
-    fail:
+// label;
     free_mem_cgroup_per_node_info(pn);
     return false;
     }
 #[no_mangle]
 unsafe extern "C" fn __mem_cgroup_free(memcg: *mut mem_cgroup) {
-    static void __mem_cgroup_free(struct mem_cgroup *memcg)
-    {
-    int node;
+    let mut node = 0;
     for_each_node(node) {
-    struct mem_cgroup_per_node *pn = memcg.nodeinfo[node];
-    if (!pn)
+    let mut pn = memcg.nodeinfo[node];
+    if (!pn) {
     continue;
+    }
     obj_cgroup_put(pn.orig_objcg);
     free_mem_cgroup_per_node_info(pn);
     }
@@ -3703,48 +3889,54 @@ unsafe extern "C" fn __mem_cgroup_free(memcg: *mut mem_cgroup) {
     }
 #[no_mangle]
 unsafe extern "C" fn mem_cgroup_free(memcg: *mut mem_cgroup) {
-    static void mem_cgroup_free(struct mem_cgroup *memcg)
-    {
     lru_gen_exit_memcg(memcg);
     memcg_wb_domain_exit(memcg);
     __mem_cgroup_free(memcg);
     }
-    static struct mem_cgroup *mem_cgroup_alloc(struct mem_cgroup *parent)
-    {
-    struct memcg_vmstats_percpu *statc;
-    struct memcg_vmstats_percpu __percpu *pstatc_pcpu;
-    struct mem_cgroup *memcg;
-    int node, cpu;
+#[no_mangle]
+pub unsafe extern "C" fn mem_cgroup_alloc(parent: *mut mem_cgroup) -> *mut c_void {
+pub static mut statc: *mut c_void = core::ptr::null_mut();
+    let mut pstatc_pcpu = core::ptr::null_mut();
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+    let mut node = 0;
+    let mut cpu = 0;
     int __maybe_unused i;
-    long error;
+    let mut error = 0;
     memcg = kmem_cache_zalloc(memcg_cachep, GFP_KERNEL);
-    if (!memcg)
+    if (!memcg) {
     return ERR_PTR(-ENOMEM);
+    }
     error = xa_alloc(&mem_cgroup_private_ids, &memcg.id.id, core::ptr::null_mut(),
     XA_LIMIT(1, MEM_CGROUP_ID_MAX), GFP_KERNEL);
-    if (error)
-    goto fail;
+    if (error) {
+// goto;
+    }
     error = -ENOMEM;
-    memcg.vmstats = kzalloc_obj(struct memcg_vmstats, GFP_KERNEL_ACCOUNT);
-    if (!memcg.vmstats)
-    goto fail;
-    memcg.vmstats_percpu = alloc_percpu_gfp(struct memcg_vmstats_percpu,
+    memcg.vmstats = kzalloc_obj(memcg_vmstats, GFP_KERNEL_ACCOUNT);
+    if (!memcg.vmstats) {
+// goto;
+    }
+    memcg.vmstats_percpu = alloc_percpu_gfp(memcg_vmstats_percpu,
     GFP_KERNEL_ACCOUNT);
-    if (!memcg.vmstats_percpu)
-    goto fail;
-    if (!memcg1_alloc_events(memcg))
-    goto fail;
+    if (!memcg.vmstats_percpu) {
+// goto;
+    }
+    if (!memcg1_alloc_events(memcg)) {
+// goto;
+    }
     pstatc_pcpu = parent ? parent.vmstats_percpu : core::ptr::null_mut();
     for_each_possible_cpu(cpu) {
     statc = per_cpu_ptr(memcg.vmstats_percpu, cpu);
     statc.parent_pcpu = pstatc_pcpu;
     statc.vmstats = memcg.vmstats;
     }
-    for_each_node(node)
+    for_each_node(node) {
     if (!alloc_mem_cgroup_per_node_info(memcg, node))
-    goto fail;
-    if (memcg_wb_domain_init(memcg, GFP_KERNEL))
-    goto fail;
+// goto;
+    }
+    if (memcg_wb_domain_init(memcg, GFP_KERNEL)) {
+// goto;
+    }
     INIT_WORK(&memcg.high_work, high_work_func);
     vmpressure_init(&memcg.vmpressure);
     INIT_LIST_HEAD(&memcg.memory_peaks);
@@ -3758,28 +3950,31 @@ unsafe extern "C" fn mem_cgroup_free(memcg: *mut mem_cgroup) {
     memcg.kmemcg_id = -1;
 
     INIT_LIST_HEAD(&memcg.cgwb_list);
-    for (i = 0; i < MEMCG_CGWB_FRN_CNT; i++)
+    for (i = 0; i < MEMCG_CGWB_FRN_CNT; i++) {
     memcg.cgwb_frn[i].done =
     __WB_COMPLETION_INIT(&memcg_cgwb_frn_waitq);
+    }
 
     lru_gen_init_memcg(memcg);
     return memcg;
-    fail:
+// label;
     mem_cgroup_private_id_remove(memcg);
     __mem_cgroup_free(memcg);
     return ERR_PTR(error);
     }
     static struct cgroup_subsys_state * __ref
-    mem_cgroup_css_alloc(struct cgroup_subsys_state *parent_css)
+    mem_cgroup_css_alloc(cgroup_subsys_state *parent_css)
     {
-    struct mem_cgroup *parent = mem_cgroup_from_css(parent_css);
-    struct mem_cgroup *memcg, *old_memcg;
-    let mut memcg_on_dfl: bool = cgroup_subsys_on_dfl(memory_cgrp_subsys);
+    let mut parent = mem_cgroup_from_css(parent_css);
+    let mut memcg = core::ptr::null_mut();
+    let mut old_memcg = core::ptr::null_mut();
+pub static mut memcg_on_dfl: bool = false;
     old_memcg = set_active_memcg(parent);
     memcg = mem_cgroup_alloc(parent);
     set_active_memcg(old_memcg);
-    if (IS_ERR(memcg))
+    if (IS_ERR(memcg)) {
     return ERR_CAST(memcg);
+    }
     page_counter_set_high(&memcg.memory, PAGE_COUNTER_MAX);
     memcg1_soft_limit_reset(memcg);
 
@@ -3811,41 +4006,45 @@ unsafe extern "C" fn mem_cgroup_free(memcg: *mut mem_cgroup) {
     root_mem_cgroup = memcg;
     return &memcg.css;
     }
-    if (memcg_on_dfl && !cgroup_memory_nosocket)
+    if (memcg_on_dfl && !cgroup_memory_nosocket) {
     static_branch_inc(&memcg_sockets_enabled_key);
-    if (!cgroup_memory_nobpf)
+    }
+    if (!cgroup_memory_nobpf) {
     static_branch_inc(&memcg_bpf_enabled_key);
+    }
     return &memcg.css;
     }
 #[no_mangle]
 unsafe extern "C" fn mem_cgroup_css_online(css: *mut cgroup_subsys_state) -> c_int {
-    static int mem_cgroup_css_online(struct cgroup_subsys_state *css)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(css);
-    struct obj_cgroup *objcg;
-    int nid;
+    let mut memcg = mem_cgroup_from_css(css);
+pub static mut objcg: *mut c_void = core::ptr::null_mut();
+    let mut nid = 0;
     memcg_online_kmem(memcg);
 //
 // A memcg must be visible for expand_shrinker_info()
 // by the time the maps are allocated. So, we allocate maps
 // here, when mem_cgroup_iter() can't skip it.
 //
-    if (alloc_shrinker_info(memcg))
-    goto offline_kmem;
+    if (alloc_shrinker_info(memcg)) {
+// goto;
+    }
     for_each_node(nid) {
     objcg = obj_cgroup_alloc();
-    if (!objcg)
-    goto free_objcg;
-    if (unlikely(mem_cgroup_is_root(memcg)))
+    if (!objcg) {
+// goto;
+    }
+    if (unlikely(mem_cgroup_is_root(memcg))) {
     objcg.is_root = true;
+    }
     objcg.memcg = memcg;
     rcu_assign_pointer(memcg.nodeinfo[nid].objcg, objcg);
     obj_cgroup_get(objcg);
     memcg.nodeinfo[nid].orig_objcg = objcg;
     }
-    if (unlikely(mem_cgroup_is_root(memcg)) && !mem_cgroup_disabled())
+    if (unlikely(mem_cgroup_is_root(memcg)) && !mem_cgroup_disabled()) {
     queue_delayed_work(system_dfl_wq, &stats_flush_dwork,
     FLUSH_TIME);
+    }
     lru_gen_online_memcg(memcg);
 // Online state pins memcg ID, memcg ID pins CSS
     refcount_set(&memcg.id.ref, 1);
@@ -3862,12 +4061,13 @@ unsafe extern "C" fn mem_cgroup_css_online(css: *mut cgroup_subsys_state) -> c_i
 //
     xa_store(&mem_cgroup_private_ids, memcg.id.id, memcg, GFP_KERNEL);
     return 0;
-    free_objcg:
+// label;
     for_each_node(nid) {
-    struct mem_cgroup_per_node *pn = memcg.nodeinfo[nid];
+    let mut pn = memcg.nodeinfo[nid];
     objcg = rcu_replace_pointer(pn.objcg, core::ptr::null_mut(), true);
-    if (objcg)
+    if (objcg) {
     percpu_ref_kill(&objcg.refcnt);
+    }
     if (pn.orig_objcg) {
     obj_cgroup_put(pn.orig_objcg);
 //
@@ -3879,16 +4079,14 @@ unsafe extern "C" fn mem_cgroup_css_online(css: *mut cgroup_subsys_state) -> c_i
     }
     }
     free_shrinker_info(memcg);
-    offline_kmem:
+// label;
     memcg_offline_kmem(memcg);
     mem_cgroup_private_id_remove(memcg);
     return -ENOMEM;
     }
 #[no_mangle]
 unsafe extern "C" fn mem_cgroup_css_offline(css: *mut cgroup_subsys_state) {
-    static void mem_cgroup_css_offline(struct cgroup_subsys_state *css)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(css);
+    let mut memcg = mem_cgroup_from_css(css);
     memcg1_css_offline(memcg);
     page_counter_set_min(&memcg.memory, 0);
     page_counter_set_low(&memcg.memory, 0);
@@ -3908,28 +4106,28 @@ unsafe extern "C" fn mem_cgroup_css_offline(css: *mut cgroup_subsys_state) {
     }
 #[no_mangle]
 unsafe extern "C" fn mem_cgroup_css_released(css: *mut cgroup_subsys_state) {
-    static void mem_cgroup_css_released(struct cgroup_subsys_state *css)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(css);
+    let mut memcg = mem_cgroup_from_css(css);
     invalidate_reclaim_iterators(memcg);
     lru_gen_release_memcg(memcg);
     }
 #[no_mangle]
 unsafe extern "C" fn mem_cgroup_css_free(css: *mut cgroup_subsys_state) {
-    static void mem_cgroup_css_free(struct cgroup_subsys_state *css)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(css);
+    let mut memcg = mem_cgroup_from_css(css);
     int __maybe_unused i;
 
-    for (i = 0; i < MEMCG_CGWB_FRN_CNT; i++)
+    for (i = 0; i < MEMCG_CGWB_FRN_CNT; i++) {
     wb_wait_for_completion(&memcg.cgwb_frn[i].done);
+    }
 
-    if (cgroup_subsys_on_dfl(memory_cgrp_subsys) && !cgroup_memory_nosocket)
+    if (cgroup_subsys_on_dfl(memory_cgrp_subsys) && !cgroup_memory_nosocket) {
     static_branch_dec(&memcg_sockets_enabled_key);
-    if (!cgroup_subsys_on_dfl(memory_cgrp_subsys) && memcg1_tcpmem_active(memcg))
+    }
+    if (!cgroup_subsys_on_dfl(memory_cgrp_subsys) && memcg1_tcpmem_active(memcg)) {
     static_branch_dec(&memcg_sockets_enabled_key);
-    if (!cgroup_memory_nobpf)
+    }
+    if (!cgroup_memory_nobpf) {
     static_branch_dec(&memcg_bpf_enabled_key);
+    }
     vmpressure_cleanup(&memcg.vmpressure);
     cancel_work_sync(&memcg.high_work);
     memcg1_remove_from_trees(memcg);
@@ -3951,9 +4149,7 @@ unsafe extern "C" fn mem_cgroup_css_free(css: *mut cgroup_subsys_state) {
 //
 #[no_mangle]
 unsafe extern "C" fn mem_cgroup_css_reset(css: *mut cgroup_subsys_state) {
-    static void mem_cgroup_css_reset(struct cgroup_subsys_state *css)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(css);
+    let mut memcg = mem_cgroup_from_css(css);
     page_counter_set_max(&memcg.memory, PAGE_COUNTER_MAX);
     page_counter_set_max(&memcg.swap, PAGE_COUNTER_MAX);
     WRITE_ONCE(memcg.oom_group, false);
@@ -3992,19 +4188,20 @@ pub struct aggregate_control {
 
 #[no_mangle]
 unsafe extern "C" fn mem_cgroup_stat_aggregate(ac: *mut aggregate_control) {
-    static void mem_cgroup_stat_aggregate(struct aggregate_control *ac)
-    {
-    int i;
-    long delta, delta_cpu, v;
-    for (i = 0; i < ac.size; i++) {
+    let mut i = 0;
+    let mut delta = 0;
+    let mut delta_cpu = 0;
+    let mut v = 0;
+    while (i < ac.size) {
 //
 // Collect the aggregated propagation counts of groups
 // below us. We're in a per-cpu loop here and this is
 // a global counter, so the first cycle will get them.
 //
     delta = ac.pending[i];
-    if (delta)
+    if (delta) {
     ac.pending[i] = 0;
+    }
 // Add CPU changes on this level since the last flush
     delta_cpu = 0;
     v = READ_ONCE(ac.cstat[i]);
@@ -4014,79 +4211,81 @@ unsafe extern "C" fn mem_cgroup_stat_aggregate(ac: *mut aggregate_control) {
     ac.cstat_prev[i] = v;
     }
 // Aggregate counts on this level and propagate upwards
-    if (delta_cpu)
+    if (delta_cpu) {
     ac.local[i] += delta_cpu;
+    }
     if (delta) {
     ac.aggregate[i] += delta;
-    if (ac.ppending)
+    if (ac.ppending) {
     ac.ppending[i] += delta;
     }
     }
     }
+    }
 
 #[no_mangle]
 unsafe extern "C" fn flush_nmi_stats(memcg: *mut mem_cgroup, parent: *mut mem_cgroup) {
-    static void flush_nmi_stats(struct mem_cgroup *memcg, struct mem_cgroup *parent)
-    {
-    int nid;
+    let mut nid = 0;
     if (atomic_read(&memcg.kmem_stat)) {
-    let mut kmem: c_int = atomic_xchg(&memcg.kmem_stat, 0);
-    let mut index: c_int = memcg_stats_index(MEMCG_KMEM);
+pub static mut kmem: c_int = 0;
+pub static mut index: c_int = 0;
     memcg.vmstats.state[index] += kmem;
     memcg.vmstats.state_local[index] += kmem;
-    if (parent)
+    if (parent) {
     parent.vmstats.state_pending[index] += kmem;
     }
+    }
     for_each_node_state(nid, N_MEMORY) {
-    struct mem_cgroup_per_node *pn = memcg.nodeinfo[nid];
-    struct lruvec_stats *lstats = pn.lruvec_stats;
-    struct lruvec_stats *plstats = core::ptr::null_mut();
-    if (parent)
+    let mut pn = memcg.nodeinfo[nid];
+    let mut lstats = pn.lruvec_stats;
+    let mut plstats = core::ptr::null_mut();
+    if (parent) {
     plstats = parent.nodeinfo[nid].lruvec_stats;
+    }
     if (atomic_read(&pn.slab_reclaimable)) {
-    let mut slab: c_int = atomic_xchg(&pn.slab_reclaimable, 0);
-    let mut index: c_int = memcg_stats_index(NR_SLAB_RECLAIMABLE_B);
+pub static mut slab: c_int = 0;
+pub static mut index: c_int = 0;
     lstats.state[index] += slab;
     lstats.state_local[index] += slab;
-    if (plstats)
+    if (plstats) {
     plstats.state_pending[index] += slab;
+    }
     memcg.vmstats.state[index] += slab;
     memcg.vmstats.state_local[index] += slab;
-    if (parent)
+    if (parent) {
     parent.vmstats.state_pending[index] += slab;
     }
+    }
     if (atomic_read(&pn.slab_unreclaimable)) {
-    let mut slab: c_int = atomic_xchg(&pn.slab_unreclaimable, 0);
-    let mut index: c_int = memcg_stats_index(NR_SLAB_UNRECLAIMABLE_B);
+pub static mut slab: c_int = 0;
+pub static mut index: c_int = 0;
     lstats.state[index] += slab;
     lstats.state_local[index] += slab;
-    if (plstats)
+    if (plstats) {
     plstats.state_pending[index] += slab;
+    }
     memcg.vmstats.state[index] += slab;
     memcg.vmstats.state_local[index] += slab;
-    if (parent)
+    if (parent) {
     parent.vmstats.state_pending[index] += slab;
+    }
     }
     }
     }
 
 #[no_mangle]
-unsafe extern "C" fn flush_nmi_stats(memcg: *mut mem_cgroup, parent: *mut mem_cgroup) {
-    static void flush_nmi_stats(struct mem_cgroup *memcg, struct mem_cgroup *parent)
-    {}
+unsafe extern "C" fn flush_nmi_stats(memcg: *mut mem_cgroup, parent: *mut mem_cgroup) {}
 
 #[no_mangle]
 unsafe extern "C" fn mem_cgroup_css_rstat_flush(css: *mut cgroup_subsys_state, cpu: c_int) {
-    static void mem_cgroup_css_rstat_flush(struct cgroup_subsys_state *css, int cpu)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(css);
-    struct mem_cgroup *parent = parent_mem_cgroup(memcg);
-    struct memcg_vmstats_percpu *statc;
-    struct aggregate_control ac;
-    int nid;
+    let mut memcg = mem_cgroup_from_css(css);
+    let mut parent = parent_mem_cgroup(memcg);
+pub static mut statc: *mut c_void = core::ptr::null_mut();
+pub static mut ac: usize = 0;
+    let mut nid = 0;
     flush_nmi_stats(memcg, parent);
     statc = per_cpu_ptr(memcg.vmstats_percpu, cpu);
-    ac = (struct aggregate_control) {
+    ac = (aggregate_control) {
     .aggregate = memcg.vmstats.state,
     .local = memcg.vmstats.state_local,
     .pending = memcg.vmstats.state_pending,
@@ -4096,7 +4295,7 @@ unsafe extern "C" fn mem_cgroup_css_rstat_flush(css: *mut cgroup_subsys_state, c
     .size = MEMCG_VMSTAT_SIZE,
     };
     mem_cgroup_stat_aggregate(&ac);
-    ac = (struct aggregate_control) {
+    ac = (aggregate_control) {
     .aggregate = memcg.vmstats.events,
     .local = memcg.vmstats.events_local,
     .pending = memcg.vmstats.events_pending,
@@ -4107,14 +4306,15 @@ unsafe extern "C" fn mem_cgroup_css_rstat_flush(css: *mut cgroup_subsys_state, c
     };
     mem_cgroup_stat_aggregate(&ac);
     for_each_node_state(nid, N_MEMORY) {
-    struct mem_cgroup_per_node *pn = memcg.nodeinfo[nid];
-    struct lruvec_stats *lstats = pn.lruvec_stats;
-    struct lruvec_stats *plstats = core::ptr::null_mut();
-    struct lruvec_stats_percpu *lstatc;
-    if (parent)
+    let mut pn = memcg.nodeinfo[nid];
+    let mut lstats = pn.lruvec_stats;
+    let mut plstats = core::ptr::null_mut();
+pub static mut lstatc: *mut c_void = core::ptr::null_mut();
+    if (parent) {
     plstats = parent.nodeinfo[nid].lruvec_stats;
+    }
     lstatc = per_cpu_ptr(pn.lruvec_stats_percpu, cpu);
-    ac = (struct aggregate_control) {
+    ac = (aggregate_control) {
     .aggregate = lstats.state,
     .local = lstats.state_local,
     .pending = lstats.state_pending,
@@ -4127,27 +4327,24 @@ unsafe extern "C" fn mem_cgroup_css_rstat_flush(css: *mut cgroup_subsys_state, c
     }
     WRITE_ONCE(statc.stats_updates, 0);
 // We are in a per-cpu loop here, only do the atomic write once
-    if (atomic_long_read(&memcg.vmstats.stats_updates))
+    if (atomic_long_read(&memcg.vmstats.stats_updates)) {
     atomic_long_set(&memcg.vmstats.stats_updates, 0);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn mem_cgroup_fork(task: *mut task_struct) {
-    static void mem_cgroup_fork(struct task_struct *task)
-    {
 //
 // Set the update flag to cause task->objcg to be initialized lazily
 // on the first allocation. It can be done without any synchronization
 // because it's always performed on the current task, so does
 // current_objcg_update().
 //
-    task.objcg = (struct obj_cgroup *)CURRENT_OBJCG_UPDATE_FLAG;
+    task.objcg = CURRENT_OBJCG_UPDATE_FLAG;
     }
 #[no_mangle]
 unsafe extern "C" fn mem_cgroup_exit(task: *mut task_struct) {
-    static void mem_cgroup_exit(struct task_struct *task)
-    {
-    struct obj_cgroup *objcg = task.objcg;
-    objcg = (struct obj_cgroup *)
+    let mut objcg = task.objcg;
+    objcg = 
     ((unsigned long)objcg & ~CURRENT_OBJCG_UPDATE_FLAG);
     obj_cgroup_put(objcg);
 //
@@ -4161,93 +4358,83 @@ unsafe extern "C" fn mem_cgroup_exit(task: *mut task_struct) {
 
 #[no_mangle]
 unsafe extern "C" fn mem_cgroup_lru_gen_attach(tset: *mut cgroup_taskset) {
-    static void mem_cgroup_lru_gen_attach(struct cgroup_taskset *tset)
-    {
-    struct task_struct *task;
-    struct cgroup_subsys_state *css;
+pub static mut task: *mut c_void = core::ptr::null_mut();
+pub static mut css: *mut c_void = core::ptr::null_mut();
 // find the first leader if there is any
     cgroup_taskset_for_each_leader(task, css, tset)
     break;
-    if (!task)
+    if (!task) {
     return;
+    }
     task_lock(task);
-    if (task.mm && READ_ONCE(task.mm.owner) == task)
+    if (task.mm && READ_ONCE(task.mm.owner) == task) {
     lru_gen_migrate_mm(task.mm);
+    }
     task_unlock(task);
     }
 
-    static void mem_cgroup_lru_gen_attach(struct cgroup_taskset *tset) {}
+#[no_mangle]
+pub unsafe extern "C" fn mem_cgroup_lru_gen_attach(tset: *mut cgroup_taskset) {}
 
 #[no_mangle]
 unsafe extern "C" fn mem_cgroup_kmem_attach(tset: *mut cgroup_taskset) {
-    static void mem_cgroup_kmem_attach(struct cgroup_taskset *tset)
-    {
-    struct task_struct *task;
-    struct cgroup_subsys_state *css;
+pub static mut task: *mut c_void = core::ptr::null_mut();
+pub static mut css: *mut c_void = core::ptr::null_mut();
     cgroup_taskset_for_each(task, css, tset) {
 // atomically set the update bit
-    set_bit(CURRENT_OBJCG_UPDATE_BIT, (unsigned long *)&task.objcg);
+    set_bit(CURRENT_OBJCG_UPDATE_BIT, &task.objcg);
     }
     }
 #[no_mangle]
 unsafe extern "C" fn mem_cgroup_attach(tset: *mut cgroup_taskset) {
-    static void mem_cgroup_attach(struct cgroup_taskset *tset)
-    {
     mem_cgroup_lru_gen_attach(tset);
     mem_cgroup_kmem_attach(tset);
     }
 #[no_mangle]
 unsafe extern "C" fn seq_puts_memcg_tunable(m: *mut seq_file, value: c_ulong) -> c_int {
-    static int seq_puts_memcg_tunable(struct seq_file *m, unsigned long value)
-    {
-    if (value == PAGE_COUNTER_MAX)
+    if (value == PAGE_COUNTER_MAX) {
     seq_puts(m, "max\n");
-    else
+    }
+    else {
     seq_printf(m, "%llu\n", (u64)value * PAGE_SIZE);
+    }
     return 0;
     }
-    static u64 memory_current_read(struct cgroup_subsys_state *css,
-    struct cftype *cft)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(css);
+#[no_mangle]
+pub unsafe extern "C" fn memory_current_read(css: *mut cgroup_subsys_state, cft: *mut cftype) -> u64 {
+    let mut memcg = mem_cgroup_from_css(css);
     return (u64)page_counter_read(&memcg.memory) * PAGE_SIZE;
     }
 
 #[no_mangle]
 unsafe extern "C" fn peak_show(sf: *mut seq_file, v: *mut c_void, pc: *mut page_counter) -> c_int {
-    static int peak_show(struct seq_file *sf, void *v, struct page_counter *pc)
-    {
-    struct cgroup_of_peak *ofp = of_peak(sf.private);
-    let mut fd_peak: u64 = READ_ONCE(ofp.value), peak;
+    let mut ofp = of_peak(sf.private);
+pub static mut fd_peak: u64 = 0;
 // User wants global or local peak?
-    if (fd_peak == OFP_PEAK_UNSET)
+    if (fd_peak == OFP_PEAK_UNSET) {
     peak = pc.watermark;
-    else
+    }
+    else {
     peak = max(fd_peak, READ_ONCE(pc.local_watermark));
+    }
     seq_printf(sf, "%llu\n", peak * PAGE_SIZE);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn memory_peak_show(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int memory_peak_show(struct seq_file *sf, void *v)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(seq_css(sf));
+    let mut memcg = mem_cgroup_from_css(seq_css(sf));
     return peak_show(sf, v, &memcg.memory);
     }
 #[no_mangle]
 unsafe extern "C" fn peak_open(of: *mut kernfs_open_file) -> c_int {
-    static int peak_open(struct kernfs_open_file *of)
-    {
-    struct cgroup_of_peak *ofp = of_peak(of);
+    let mut ofp = of_peak(of);
     ofp.value = OFP_PEAK_UNSET;
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn peak_release(of: *mut kernfs_open_file) {
-    static void peak_release(struct kernfs_open_file *of)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(of_css(of));
-    struct cgroup_of_peak *ofp = of_peak(of);
+    let mut memcg = mem_cgroup_from_css(of_css(of));
+    let mut ofp = of_peak(of);
     if (ofp.value == OFP_PEAK_UNSET) {
 // fast path (no writes on this fd)
     return;
@@ -4256,109 +4443,107 @@ unsafe extern "C" fn peak_release(of: *mut kernfs_open_file) {
     list_del(&ofp.list);
     spin_unlock(&memcg.peaks_lock);
     }
-    static ssize_t peak_write(struct kernfs_open_file *of, char *buf, size_t nbytes,
-    loff_t off, struct page_counter *pc,
-    struct list_head *watchers)
-    {
-    unsigned long usage;
-    struct cgroup_of_peak *peer_ctx;
-    struct mem_cgroup *memcg = mem_cgroup_from_css(of_css(of));
-    struct cgroup_of_peak *ofp = of_peak(of);
+#[no_mangle]
+pub unsafe extern "C" fn peak_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t, pc: *mut page_counter, watchers: *mut list_head) -> ssize_t {
+    let mut usage = 0;
+pub static mut peer_ctx: *mut c_void = core::ptr::null_mut();
+    let mut memcg = mem_cgroup_from_css(of_css(of));
+    let mut ofp = of_peak(of);
     spin_lock(&memcg.peaks_lock);
     usage = page_counter_read(pc);
     WRITE_ONCE(pc.local_watermark, usage);
-    list_for_each_entry(peer_ctx, watchers, list)
+    list_for_each_entry(peer_ctx, watchers, list) {
     if (usage > peer_ctx.value)
     WRITE_ONCE(peer_ctx.value, usage);
+    }
 // initial write, register watcher
-    if (ofp.value == OFP_PEAK_UNSET)
+    if (ofp.value == OFP_PEAK_UNSET) {
     list_add(&ofp.list, watchers);
+    }
     WRITE_ONCE(ofp.value, usage);
     spin_unlock(&memcg.peaks_lock);
     return nbytes;
     }
-    static ssize_t memory_peak_write(struct kernfs_open_file *of, char *buf,
-    size_t nbytes, loff_t off)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(of_css(of));
+#[no_mangle]
+pub unsafe extern "C" fn memory_peak_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+    let mut memcg = mem_cgroup_from_css(of_css(of));
     return peak_write(of, buf, nbytes, off, &memcg.memory,
     &memcg.memory_peaks);
     }
 
 #[no_mangle]
 unsafe extern "C" fn memory_min_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int memory_min_show(struct seq_file *m, void *v)
-    {
     return seq_puts_memcg_tunable(m,
     READ_ONCE(mem_cgroup_from_seq(m).memory.min));
     }
-    static ssize_t memory_min_write(struct kernfs_open_file *of,
-    char *buf, size_t nbytes, loff_t off)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(of_css(of));
-    unsigned long min;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn memory_min_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+    let mut memcg = mem_cgroup_from_css(of_css(of));
+    let mut min = 0;
+    let mut err = 0;
     buf = strstrip(buf);
     err = page_counter_memparse(buf, "max", &min);
-    if (err)
+    if (err) {
     return err;
+    }
     page_counter_set_min(&memcg.memory, min);
     return nbytes;
     }
 #[no_mangle]
 unsafe extern "C" fn memory_low_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int memory_low_show(struct seq_file *m, void *v)
-    {
     return seq_puts_memcg_tunable(m,
     READ_ONCE(mem_cgroup_from_seq(m).memory.low));
     }
-    static ssize_t memory_low_write(struct kernfs_open_file *of,
-    char *buf, size_t nbytes, loff_t off)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(of_css(of));
-    unsigned long low;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn memory_low_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+    let mut memcg = mem_cgroup_from_css(of_css(of));
+    let mut low = 0;
+    let mut err = 0;
     buf = strstrip(buf);
     err = page_counter_memparse(buf, "max", &low);
-    if (err)
+    if (err) {
     return err;
+    }
     page_counter_set_low(&memcg.memory, low);
     return nbytes;
     }
 #[no_mangle]
 unsafe extern "C" fn memory_high_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int memory_high_show(struct seq_file *m, void *v)
-    {
     return seq_puts_memcg_tunable(m,
     READ_ONCE(mem_cgroup_from_seq(m).memory.high));
     }
-    static ssize_t memory_high_write(struct kernfs_open_file *of,
-    char *buf, size_t nbytes, loff_t off)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(of_css(of));
-    let mut nr_retries: c_uint = MAX_RECLAIM_RETRIES;
-    let mut drained: bool = false;
-    unsigned long high;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn memory_high_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+    let mut memcg = mem_cgroup_from_css(of_css(of));
+pub static mut nr_retries: c_uint = 0;
+pub static mut drained: bool = false;
+    let mut high = 0;
+    let mut err = 0;
     buf = strstrip(buf);
     err = page_counter_memparse(buf, "max", &high);
-    if (err)
+    if (err) {
     return err;
+    }
     page_counter_set_high(&memcg.memory, high);
-    if (of.file.f_flags & O_NONBLOCK)
-    goto out;
+    if (of.file.f_flags & O_NONBLOCK) {
+// goto;
+    }
     for (;;) {
-    let mut nr_pages: c_ulong = page_counter_read(&memcg.memory);
-    unsigned long reclaimed;
-    if (high != READ_ONCE(memcg.memory.high))
+pub static mut nr_pages: c_ulong = 0;
+    let mut reclaimed = 0;
+    if (high != READ_ONCE(memcg.memory.high)) {
     break;
-    if (nr_pages <= high)
+    }
+    if (nr_pages <= high) {
     break;
-    if (signal_pending(current))
+    }
+    if (signal_pending(current)) {
     break;
+    }
 // cgroup_rmdir() waits for us with cgroup_mutex held.
-    if (memcg_is_dying(memcg))
+    if (memcg_is_dying(memcg)) {
     break;
+    }
     if (!drained) {
     drain_all_stock(memcg);
     drained = true;
@@ -4366,46 +4551,50 @@ unsafe extern "C" fn memory_high_show(m: *mut seq_file, v: *mut c_void) -> c_int
     }
     reclaimed = try_to_free_mem_cgroup_pages(memcg, nr_pages - high,
     GFP_KERNEL, MEMCG_RECLAIM_MAY_SWAP, core::ptr::null_mut());
-    if (!reclaimed && !nr_retries--)
+    if (!reclaimed && !nr_retries--) {
     break;
     }
-    out:
+    }
+// label;
     memcg_wb_domain_size_changed(memcg);
     return nbytes;
     }
 #[no_mangle]
 unsafe extern "C" fn memory_max_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int memory_max_show(struct seq_file *m, void *v)
-    {
     return seq_puts_memcg_tunable(m,
     READ_ONCE(mem_cgroup_from_seq(m).memory.max));
     }
-    static ssize_t memory_max_write(struct kernfs_open_file *of,
-    char *buf, size_t nbytes, loff_t off)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(of_css(of));
-    let mut nr_reclaims: c_uint = MAX_RECLAIM_RETRIES;
-    let mut drained: bool = false;
-    unsigned long max;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn memory_max_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+    let mut memcg = mem_cgroup_from_css(of_css(of));
+pub static mut nr_reclaims: c_uint = 0;
+pub static mut drained: bool = false;
+    let mut max = 0;
+    let mut err = 0;
     buf = strstrip(buf);
     err = page_counter_memparse(buf, "max", &max);
-    if (err)
+    if (err) {
     return err;
+    }
     xchg(&memcg.memory.max, max);
-    if (of.file.f_flags & O_NONBLOCK)
-    goto out;
+    if (of.file.f_flags & O_NONBLOCK) {
+// goto;
+    }
     for (;;) {
-    let mut nr_pages: c_ulong = page_counter_read(&memcg.memory);
-    if (max != READ_ONCE(memcg.memory.max))
+pub static mut nr_pages: c_ulong = 0;
+    if (max != READ_ONCE(memcg.memory.max)) {
     break;
-    if (nr_pages <= max)
+    }
+    if (nr_pages <= max) {
     break;
-    if (signal_pending(current))
+    }
+    if (signal_pending(current)) {
     break;
+    }
 // cgroup_rmdir() waits for us with cgroup_mutex held.
-    if (memcg_is_dying(memcg))
+    if (memcg_is_dying(memcg)) {
     break;
+    }
     if (!drained) {
     drain_all_stock(memcg);
     drained = true;
@@ -4413,16 +4602,18 @@ unsafe extern "C" fn memory_max_show(m: *mut seq_file, v: *mut c_void) -> c_int 
     }
     if (nr_reclaims) {
     if (!try_to_free_mem_cgroup_pages(memcg, nr_pages - max,
-    GFP_KERNEL, MEMCG_RECLAIM_MAY_SWAP, core::ptr::null_mut()))
-    nr_reclaims--;
+    GFP_KERNEL, MEMCG_RECLAIM_MAY_SWAP, core::ptr::null_mut())) {
+    nr_reclaims -= 1;
+    }
     continue;
     }
     memcg_memory_event(memcg, MEMCG_OOM);
-    if (!mem_cgroup_out_of_memory(memcg, GFP_KERNEL, 0))
+    if (!mem_cgroup_out_of_memory(memcg, GFP_KERNEL, 0)) {
     break;
+    }
     cond_resched();
     }
-    out:
+// label;
     memcg_wb_domain_size_changed(memcg);
     return nbytes;
     }
@@ -4432,8 +4623,6 @@ unsafe extern "C" fn memory_max_show(m: *mut seq_file, v: *mut c_void) -> c_int 
 //
 #[no_mangle]
 unsafe extern "C" fn __memory_events_show(m: *mut seq_file, events: *mut atomic_long_t) {
-    static void __memory_events_show(struct seq_file *m, atomic_long_t *events)
-    {
     seq_printf(m, "low %lu\n", atomic_long_read(&events[MEMCG_LOW]));
     seq_printf(m, "high %lu\n", atomic_long_read(&events[MEMCG_HIGH]));
     seq_printf(m, "max %lu\n", atomic_long_read(&events[MEMCG_MAX]));
@@ -4447,29 +4636,24 @@ unsafe extern "C" fn __memory_events_show(m: *mut seq_file, events: *mut atomic_
     }
 #[no_mangle]
 unsafe extern "C" fn memory_events_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int memory_events_show(struct seq_file *m, void *v)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_seq(m);
+    let mut memcg = mem_cgroup_from_seq(m);
     __memory_events_show(m, memcg.memory_events);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn memory_events_local_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int memory_events_local_show(struct seq_file *m, void *v)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_seq(m);
+    let mut memcg = mem_cgroup_from_seq(m);
     __memory_events_show(m, memcg.memory_events_local);
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn memory_stat_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    int memory_stat_show(struct seq_file *m, void *v)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_seq(m);
-    char *buf = kmalloc(SEQ_BUF_SIZE, GFP_KERNEL);
-    struct seq_buf s;
-    if (!buf)
+    let mut memcg = mem_cgroup_from_seq(m);
+    let mut buf = kmalloc(SEQ_BUF_SIZE, GFP_KERNEL);
+pub static mut s: usize = 0;
+    if (!buf) {
     return -ENOMEM;
+    }
     seq_buf_init(&s, buf, SEQ_BUF_SIZE);
     memory_stat_format(memcg, &s);
     seq_puts(m, buf);
@@ -4477,27 +4661,25 @@ pub unsafe extern "C" fn memory_stat_show(m: *mut seq_file, v: *mut c_void) -> c
     return 0;
     }
 
-    static inline unsigned long lruvec_page_state_output(struct lruvec *lruvec,
-    int item)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn lruvec_page_state_output(lruvec: *mut lruvec, item: c_int) -> c_ulong {
     return lruvec_page_state(lruvec, item) *
     memcg_page_state_output_unit(item);
     }
 #[no_mangle]
 unsafe extern "C" fn memory_numa_stat_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int memory_numa_stat_show(struct seq_file *m, void *v)
-    {
-    int i;
-    struct mem_cgroup *memcg = mem_cgroup_from_seq(m);
+    let mut i = 0;
+    let mut memcg = mem_cgroup_from_seq(m);
     mem_cgroup_flush_stats(memcg);
-    for (i = 0; i < ARRAY_SIZE(memory_stats); i++) {
-    int nid;
-    if (memory_stats[i].idx >= NR_VM_NODE_STAT_ITEMS)
+    while (i < ARRAY_SIZE!(memory_stats)) {
+    let mut nid = 0;
+    if (memory_stats[i].idx >= NR_VM_NODE_STAT_ITEMS) {
     continue;
+    }
     seq_printf(m, "%s", memory_stats[i].name);
     for_each_node_state(nid, N_MEMORY) {
-    u64 size;
-    struct lruvec *lruvec;
+    let mut size = 0;
+pub static mut lruvec: *mut c_void = core::ptr::null_mut();
     lruvec = mem_cgroup_lruvec(memcg, NODE_DATA(nid));
     size = lruvec_page_state_output(lruvec,
     memory_stats[i].idx);
@@ -4510,128 +4692,41 @@ unsafe extern "C" fn memory_numa_stat_show(m: *mut seq_file, v: *mut c_void) -> 
 
 #[no_mangle]
 unsafe extern "C" fn memory_oom_group_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int memory_oom_group_show(struct seq_file *m, void *v)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_seq(m);
+    let mut memcg = mem_cgroup_from_seq(m);
     seq_printf(m, "%d\n", READ_ONCE(memcg.oom_group));
     return 0;
     }
-    static ssize_t memory_oom_group_write(struct kernfs_open_file *of,
-    char *buf, size_t nbytes, loff_t off)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(of_css(of));
-    int ret, oom_group;
+#[no_mangle]
+pub unsafe extern "C" fn memory_oom_group_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+    let mut memcg = mem_cgroup_from_css(of_css(of));
+    let mut ret = 0;
+    let mut oom_group = 0;
     buf = strstrip(buf);
-    if (!buf)
+    if (!buf) {
     return -EINVAL;
+    }
     ret = kstrtoint(buf, 0, &oom_group);
-    if (ret)
+    if (ret) {
     return ret;
-    if (oom_group != 0 && oom_group != 1)
+    }
+    if (oom_group != 0 && oom_group != 1) {
     return -EINVAL;
+    }
     WRITE_ONCE(memcg.oom_group, oom_group);
     return nbytes;
     }
-    static ssize_t memory_reclaim(struct kernfs_open_file *of, char *buf,
-    size_t nbytes, loff_t off)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(of_css(of));
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn memory_reclaim(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+    let mut memcg = mem_cgroup_from_css(of_css(of));
+    let mut ret = 0;
     ret = user_proactive_reclaim(buf, memcg, core::ptr::null_mut());
-    if (ret)
+    if (ret) {
     return ret;
+    }
     return nbytes;
     }
-    static struct cftype memory_files[] = {
-    {
-    .name = "current",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .read_u64 = memory_current_read,
-    },
-    {
-    .name = "peak",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .open = peak_open,
-    .release = peak_release,
-    .seq_show = memory_peak_show,
-    .write = memory_peak_write,
-    },
-    {
-    .name = "min",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .seq_show = memory_min_show,
-    .write = memory_min_write,
-    },
-    {
-    .name = "low",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .seq_show = memory_low_show,
-    .write = memory_low_write,
-    },
-    {
-    .name = "high",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .seq_show = memory_high_show,
-    .write = memory_high_write,
-    },
-    {
-    .name = "max",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .seq_show = memory_max_show,
-    .write = memory_max_write,
-    },
-    {
-    .name = "events",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .file_offset = offsetof(struct mem_cgroup, events_file),
-    .seq_show = memory_events_show,
-    },
-    {
-    .name = "events.local",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .file_offset = offsetof(struct mem_cgroup, events_local_file),
-    .seq_show = memory_events_local_show,
-    },
-    {
-    .name = "stat",
-    .seq_show = memory_stat_show,
-    },
-
-    {
-    .name = "numa_stat",
-    .seq_show = memory_numa_stat_show,
-    },
-
-    {
-    .name = "oom.group",
-    .flags = CFTYPE_NOT_ON_ROOT | CFTYPE_NS_DELEGATABLE,
-    .seq_show = memory_oom_group_show,
-    .write = memory_oom_group_write,
-    },
-    {
-    .name = "reclaim",
-    .flags = CFTYPE_NS_DELEGATABLE,
-    .write = memory_reclaim,
-    },
-    { }	/* terminate */
-    };
-    struct cgroup_subsys memory_cgrp_subsys = {
-    .css_alloc = mem_cgroup_css_alloc,
-    .css_online = mem_cgroup_css_online,
-    .css_offline = mem_cgroup_css_offline,
-    .css_released = mem_cgroup_css_released,
-    .css_free = mem_cgroup_css_free,
-    .css_reset = mem_cgroup_css_reset,
-    .css_rstat_flush = mem_cgroup_css_rstat_flush,
-    .attach = mem_cgroup_attach,
-    .fork = mem_cgroup_fork,
-    .exit = mem_cgroup_exit,
-    .dfl_cftypes = memory_files,
-
-    .legacy_cftypes = mem_cgroup_legacy_files,
-
-    .early_init = 0,
-    };
+pub static mut cftype: usize = 0;
+pub static mut cgroup_subsys: usize = 0;
 //
 // mem_cgroup_calculate_protection - check if memory consumption is in the normal range
 // @root: the top ancestor of the sub-tree being checked
@@ -4640,26 +4735,26 @@ unsafe extern "C" fn memory_oom_group_show(m: *mut seq_file, v: *mut c_void) -> 
 // WARNING: This function is not stateless! It can only be used as part
 // of a top-down tree iteration, not for isolated queries.
 //
-    void mem_cgroup_calculate_protection(struct mem_cgroup *root,
-    struct mem_cgroup *memcg)
-    {
-    bool recursive_protection =
-    cgrp_dfl_root.flags & CGRP_ROOT_MEMORY_RECURSIVE_PROT;
-    if (mem_cgroup_disabled())
+#[no_mangle]
+pub unsafe extern "C" fn mem_cgroup_calculate_protection(root: *mut mem_cgroup, memcg: *mut mem_cgroup) {
+    let mut recursive_protection = cgrp_dfl_root.flags & CGRP_ROOT_MEMORY_RECURSIVE_PROT;
+    if (mem_cgroup_disabled()) {
     return;
-    if (!root)
+    }
+    if (!root) {
     root = root_mem_cgroup;
+    }
     page_counter_calculate_protection(&root.memory, &memcg.memory, recursive_protection);
     }
-    static int charge_memcg(struct folio *folio, struct mem_cgroup *memcg,
-    gfp_t gfp)
-    {
-    let mut ret: c_int = 0;
-    struct obj_cgroup *objcg;
+#[no_mangle]
+pub unsafe extern "C" fn charge_memcg(folio: *mut folio, memcg: *mut mem_cgroup, gfp: gfp_t) -> c_int {
+pub static mut ret: c_int = 0;
+pub static mut objcg: *mut c_void = core::ptr::null_mut();
     objcg = get_obj_cgroup_from_memcg(memcg, folio_nid(folio));
 // Do not account at the root objcg level.
-    if (!obj_cgroup_is_root(objcg))
+    if (!obj_cgroup_is_root(objcg)) {
     ret = try_charge_memcg(memcg, gfp, folio_nr_pages(folio));
+    }
     if (ret) {
     obj_cgroup_put(objcg);
     return ret;
@@ -4670,10 +4765,8 @@ unsafe extern "C" fn memory_oom_group_show(m: *mut seq_file, v: *mut c_void) -> 
     }
 #[no_mangle]
 pub unsafe extern "C" fn __mem_cgroup_charge(folio: *mut folio, mm: *mut mm_struct, gfp: gfp_t) -> c_int {
-    int __mem_cgroup_charge(struct folio *folio, struct mm_struct *mm, gfp_t gfp)
-    {
-    struct mem_cgroup *memcg;
-    int ret;
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     memcg = get_mem_cgroup_from_mm(mm);
     ret = charge_memcg(folio, memcg, gfp);
     css_put(&memcg.css);
@@ -4693,21 +4786,21 @@ pub unsafe extern "C" fn __mem_cgroup_charge(folio: *mut folio, mm: *mut mm_stru
 //
 #[no_mangle]
 pub unsafe extern "C" fn mem_cgroup_charge_hugetlb(folio: *mut folio, gfp: gfp_t) -> c_int {
-    int mem_cgroup_charge_hugetlb(struct folio *folio, gfp_t gfp)
-    {
-    struct mem_cgroup *memcg = get_mem_cgroup_from_current();
-    let mut ret: c_int = 0;
+    let mut memcg = get_mem_cgroup_from_current();
+pub static mut ret: c_int = 0;
 //
 // Even memcg does not account for hugetlb, we still want to update
 // system-level stats via lruvec_stat_mod_folio. Return 0, and skip
 // charging the memcg.
 //
     if (mem_cgroup_disabled() || !memcg_accounts_hugetlb() ||
-    !memcg || !cgroup_subsys_on_dfl(memory_cgrp_subsys))
-    goto out;
-    if (charge_memcg(folio, memcg, gfp))
+    !memcg || !cgroup_subsys_on_dfl(memory_cgrp_subsys)) {
+// goto;
+    }
+    if (charge_memcg(folio, memcg, gfp)) {
     ret = -ENOMEM;
-    out:
+    }
+// label;
     mem_cgroup_put(memcg);
     return ret;
     }
@@ -4723,17 +4816,18 @@ pub unsafe extern "C" fn mem_cgroup_charge_hugetlb(folio: *mut folio, gfp: gfp_t
 //
 // Returns 0 on success. Otherwise, an error code is returned.
 //
-    int mem_cgroup_swapin_charge_folio(struct folio *folio, unsigned short id,
-    struct mm_struct *mm, gfp_t gfp)
-    {
-    struct mem_cgroup *memcg;
-    int ret;
-    if (mem_cgroup_disabled())
+#[no_mangle]
+pub unsafe extern "C" fn mem_cgroup_swapin_charge_folio(folio: *mut folio, id: c_ushort, mm: *mut mm_struct, gfp: gfp_t) -> c_int {
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (mem_cgroup_disabled()) {
     return 0;
+    }
     rcu_read_lock();
     memcg = mem_cgroup_from_private_id(id);
-    if (!memcg || !css_tryget_online(&memcg.css))
+    if (!memcg || !css_tryget_online(&memcg.css)) {
     memcg = get_mem_cgroup_from_mm(mm);
+    }
     rcu_read_unlock();
     ret = charge_memcg(folio, memcg, gfp);
     css_put(&memcg.css);
@@ -4751,15 +4845,11 @@ pub struct uncharge_gather {
 
 #[no_mangle]
 pub unsafe extern "C" fn uncharge_gather_clear(ug: *mut uncharge_gather) {
-    static inline void uncharge_gather_clear(struct uncharge_gather *ug)
-    {
-    memset(ug, 0, sizeof(*ug));
+    memset(ug, 0, sizeof!(*ug));
     }
 #[no_mangle]
 unsafe extern "C" fn uncharge_batch(ug: *const uncharge_gather) {
-    static void uncharge_batch(const struct uncharge_gather *ug)
-    {
-    struct mem_cgroup *memcg;
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     memcg = obj_cgroup_memcg(ug.objcg);
     if (ug.nr_memory) {
@@ -4777,10 +4867,8 @@ unsafe extern "C" fn uncharge_batch(ug: *const uncharge_gather) {
     }
 #[no_mangle]
 unsafe extern "C" fn uncharge_folio(folio: *mut folio, ug: *mut uncharge_gather) {
-    static void uncharge_folio(struct folio *folio, struct uncharge_gather *ug)
-    {
-    long nr_pages;
-    struct obj_cgroup *objcg;
+    let mut nr_pages = 0;
+pub static mut objcg: *mut c_void = core::ptr::null_mut();
     VM_BUG_ON_FOLIO(folio_test_lru(folio), folio);
 //
 // Nobody should be changing or seriously looking at
@@ -4788,8 +4876,9 @@ unsafe extern "C" fn uncharge_folio(folio: *mut folio, ug: *mut uncharge_gather)
 // access to the folio.
 //
     objcg = folio_objcg(folio);
-    if (!objcg)
+    if (!objcg) {
     return;
+    }
     if (ug.objcg != objcg) {
     if (ug.objcg) {
     uncharge_batch(ug);
@@ -4806,37 +4895,37 @@ unsafe extern "C" fn uncharge_folio(folio: *mut folio, ug: *mut uncharge_gather)
     ug.nr_kmem += nr_pages;
     } else {
 // LRU pages aren't accounted at the root level
-    if (!obj_cgroup_is_root(objcg))
+    if (!obj_cgroup_is_root(objcg)) {
     ug.nr_memory += nr_pages;
-    ug.pgpgout++;
-    WARN_ON_ONCE(folio_unqueue_deferred_split(folio));
+    }
+    ug.pgpgout += 1;
+    WARN_ON_ONCE!(folio_unqueue_deferred_split(folio));
     }
     folio.memcg_data = 0;
     obj_cgroup_put(objcg);
     }
 #[no_mangle]
 pub unsafe extern "C" fn __mem_cgroup_uncharge(folio: *mut folio) {
-    void __mem_cgroup_uncharge(struct folio *folio)
-    {
-    struct uncharge_gather ug;
+pub static mut ug: usize = 0;
 // Don't touch folio->lru of any random page, pre-check:
-    if (!folio_memcg_charged(folio))
+    if (!folio_memcg_charged(folio)) {
     return;
+    }
     uncharge_gather_clear(&ug);
     uncharge_folio(folio, &ug);
     uncharge_batch(&ug);
     }
 #[no_mangle]
 pub unsafe extern "C" fn __mem_cgroup_uncharge_folios(folios: *mut folio_batch) {
-    void __mem_cgroup_uncharge_folios(struct folio_batch *folios)
-    {
-    struct uncharge_gather ug;
-    unsigned int i;
+pub static mut ug: usize = 0;
+    let mut i = 0;
     uncharge_gather_clear(&ug);
-    for (i = 0; i < folios.nr; i++)
+    for (i = 0; i < folios.nr; i++) {
     uncharge_folio(folios.folios[i], &ug);
-    if (ug.objcg)
+    }
+    if (ug.objcg) {
     uncharge_batch(&ug);
+    }
     }
 //
 // An LRU folio must hold the objcg belonging to its own node.
@@ -4857,14 +4946,15 @@ pub unsafe extern "C" fn __mem_cgroup_uncharge_folios(folios: *mut folio_batch) 
 //
 // Returns the objcg to commit to @new, with a reference for the caller.
 //
-    static struct obj_cgroup *get_migration_objcg(struct folio *old,
-    struct folio *new)
-    {
-    struct obj_cgroup *old_objcg, *new_objcg;
-    let mut new_nid: c_int = folio_nid(new);
+#[no_mangle]
+pub unsafe extern "C" fn get_migration_objcg(old: *mut folio, new: *mut folio) -> *mut c_void {
+    let mut old_objcg = core::ptr::null_mut();
+    let mut new_objcg = core::ptr::null_mut();
+pub static mut new_nid: c_int = 0;
     old_objcg = get_obj_cgroup_from_folio(old);
-    if (folio_nid(old) == new_nid)
+    if (folio_nid(old) == new_nid) {
     return old_objcg;
+    }
     rcu_read_lock();
     new_objcg = __get_obj_cgroup_from_memcg(obj_cgroup_memcg(old_objcg),
     new_nid);
@@ -4884,23 +4974,24 @@ pub unsafe extern "C" fn __mem_cgroup_uncharge_folios(folios: *mut folio_batch) 
 //
 #[no_mangle]
 pub unsafe extern "C" fn mem_cgroup_replace_folio(old: *mut folio, new: *mut folio) {
-    void mem_cgroup_replace_folio(struct folio *old, struct folio *new)
-    {
-    struct mem_cgroup *memcg;
-    struct obj_cgroup *objcg;
-    let mut nr_pages: c_long = folio_nr_pages(new);
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+pub static mut objcg: *mut c_void = core::ptr::null_mut();
+pub static mut nr_pages: c_long = 0;
     VM_BUG_ON_FOLIO(!folio_test_locked(old), old);
     VM_BUG_ON_FOLIO(!folio_test_locked(new), new);
     VM_BUG_ON_FOLIO(folio_test_anon(old) != folio_test_anon(new), new);
     VM_BUG_ON_FOLIO(folio_nr_pages(old) != nr_pages, new);
-    if (mem_cgroup_disabled())
+    if (mem_cgroup_disabled()) {
     return;
+    }
 // Page cache replacement: new folio already charged?
-    if (folio_memcg_charged(new))
+    if (folio_memcg_charged(new)) {
     return;
+    }
     VM_WARN_ON_ONCE_FOLIO(!folio_objcg(old), old);
-    if (!folio_objcg(old))
+    if (!folio_objcg(old)) {
     return;
+    }
     objcg = get_migration_objcg(old, new);
     rcu_read_lock();
     memcg = obj_cgroup_memcg(objcg);
@@ -4913,8 +5004,9 @@ pub unsafe extern "C" fn mem_cgroup_replace_folio(old: *mut folio, new: *mut fol
 //
     if (!obj_cgroup_is_root(objcg)) {
     page_counter_charge(&memcg.memory, nr_pages);
-    if (do_memsw_account())
+    if (do_memsw_account()) {
     page_counter_charge(&memcg.memsw, nr_pages);
+    }
     }
     commit_charge(new, objcg);
     memcg1_commit_charge(new, memcg);
@@ -4934,16 +5026,16 @@ pub unsafe extern "C" fn mem_cgroup_replace_folio(old: *mut folio, new: *mut fol
 //
 #[no_mangle]
 pub unsafe extern "C" fn mem_cgroup_migrate(old: *mut folio, new: *mut folio) {
-    void mem_cgroup_migrate(struct folio *old, struct folio *new)
-    {
-    struct obj_cgroup *objcg, *new_objcg;
+    let mut objcg = core::ptr::null_mut();
+    let mut new_objcg = core::ptr::null_mut();
     VM_BUG_ON_FOLIO(!folio_test_locked(old), old);
     VM_BUG_ON_FOLIO(!folio_test_locked(new), new);
     VM_BUG_ON_FOLIO(folio_test_anon(old) != folio_test_anon(new), new);
     VM_BUG_ON_FOLIO(folio_nr_pages(old) != folio_nr_pages(new), new);
     VM_BUG_ON_FOLIO(folio_test_lru(old), old);
-    if (mem_cgroup_disabled())
+    if (mem_cgroup_disabled()) {
     return;
+    }
     objcg = folio_objcg(old);
 //
 // Note that it is normal to see !objcg for a hugetlb folio.
@@ -4951,8 +5043,9 @@ pub unsafe extern "C" fn mem_cgroup_migrate(old: *mut folio, new: *mut folio) {
 // was not selected.
 //
     VM_WARN_ON_ONCE_FOLIO(!folio_test_hugetlb(old) && !objcg, old);
-    if (!objcg)
+    if (!objcg) {
     return;
+    }
     new_objcg = get_migration_objcg(old, new);
 //
 // @old was charged through a non-root objcg, so its charge is in the
@@ -4969,53 +5062,55 @@ pub unsafe extern "C" fn mem_cgroup_migrate(old: *mut folio, new: *mut folio) {
     }
     commit_charge(new, new_objcg);
 // Warning should never happen, so don't worry about refcount non-0
-    WARN_ON_ONCE(folio_unqueue_deferred_split(old));
+    WARN_ON_ONCE!(folio_unqueue_deferred_split(old));
     old.memcg_data = 0;
 // @new holds its own reference now, drop @old's
     obj_cgroup_put(objcg);
     }
-    DEFINE_STATIC_KEY_FALSE(memcg_sockets_enabled_key);
+pub static mut memcg_sockets_enabled_key: usize = 0;
     EXPORT_SYMBOL(memcg_sockets_enabled_key);
 #[no_mangle]
 pub unsafe extern "C" fn mem_cgroup_sk_alloc(sk: *mut sock) {
-    void mem_cgroup_sk_alloc(struct sock *sk)
-    {
-    struct mem_cgroup *memcg;
-    if (!mem_cgroup_sockets_enabled)
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+    if (!mem_cgroup_sockets_enabled) {
     return;
+    }
 // Do not associate the sock with unrelated interrupted task's memcg.
-    if (!in_task())
+    if (!in_task()) {
     return;
+    }
     rcu_read_lock();
     memcg = mem_cgroup_from_task(current);
-    if (mem_cgroup_is_root(memcg))
-    goto out;
-    if (!cgroup_subsys_on_dfl(memory_cgrp_subsys) && !memcg1_tcpmem_active(memcg))
-    goto out;
-    if (css_tryget(&memcg.css))
+    if (mem_cgroup_is_root(memcg)) {
+// goto;
+    }
+    if (!cgroup_subsys_on_dfl(memory_cgrp_subsys) && !memcg1_tcpmem_active(memcg)) {
+// goto;
+    }
+    if (css_tryget(&memcg.css)) {
     sk.sk_memcg = memcg;
-    out:
+    }
+// label;
     rcu_read_unlock();
     }
 #[no_mangle]
 pub unsafe extern "C" fn mem_cgroup_sk_free(sk: *mut sock) {
-    void mem_cgroup_sk_free(struct sock *sk)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_sk(sk);
-    if (memcg)
+    let mut memcg = mem_cgroup_from_sk(sk);
+    if (memcg) {
     css_put(&memcg.css);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn mem_cgroup_sk_inherit(sk: *const sock, newsk: *mut sock) {
-    void mem_cgroup_sk_inherit(const struct sock *sk, struct sock *newsk)
-    {
-    struct mem_cgroup *memcg;
-    if (sk.sk_memcg == newsk.sk_memcg)
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+    if (sk.sk_memcg == newsk.sk_memcg) {
     return;
+    }
     mem_cgroup_sk_free(newsk);
     memcg = mem_cgroup_from_sk(sk);
-    if (memcg)
+    if (memcg) {
     css_get(&memcg.css);
+    }
     newsk.sk_memcg = sk.sk_memcg;
     }
 //
@@ -5027,12 +5122,12 @@ pub unsafe extern "C" fn mem_cgroup_sk_inherit(sk: *const sock, newsk: *mut sock
 // Charges @nr_pages to @memcg. Returns %true if the charge fit within
 // @memcg's configured limit, %false if it doesn't.
 //
-    bool mem_cgroup_sk_charge(const struct sock *sk, unsigned int nr_pages,
-    gfp_t gfp_mask)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_sk(sk);
-    if (!cgroup_subsys_on_dfl(memory_cgrp_subsys))
+#[no_mangle]
+pub unsafe extern "C" fn mem_cgroup_sk_charge(sk: *mut sock, nr_pages: c_uint, gfp_mask: gfp_t) -> bool {
+    let mut memcg = mem_cgroup_from_sk(sk);
+    if (!cgroup_subsys_on_dfl(memory_cgrp_subsys)) {
     return memcg1_charge_skmem(memcg, nr_pages, gfp_mask);
+    }
     if (try_charge_memcg(memcg, gfp_mask, nr_pages) == 0) {
     mod_memcg_state(memcg, MEMCG_SOCK, nr_pages);
     return true;
@@ -5046,9 +5141,7 @@ pub unsafe extern "C" fn mem_cgroup_sk_inherit(sk: *const sock, newsk: *mut sock
 //
 #[no_mangle]
 pub unsafe extern "C" fn mem_cgroup_sk_uncharge(sk: *const sock, nr_pages: c_uint) {
-    void mem_cgroup_sk_uncharge(const struct sock *sk, unsigned int nr_pages)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_sk(sk);
+    let mut memcg = mem_cgroup_from_sk(sk);
     if (!cgroup_subsys_on_dfl(memory_cgrp_subsys)) {
     memcg1_uncharge_skmem(memcg, nr_pages);
     return;
@@ -5058,28 +5151,28 @@ pub unsafe extern "C" fn mem_cgroup_sk_uncharge(sk: *const sock, nr_pages: c_uin
     }
 #[no_mangle]
 pub unsafe extern "C" fn mem_cgroup_flush_workqueue() {
-    void mem_cgroup_flush_workqueue(void)
-    {
     flush_workqueue(memcg_wq);
     }
 #[no_mangle]
-unsafe extern "C" fn cgroup_memory(s: *mut c_char) -> int __init {
-    static int __init cgroup_memory(char *s)
-    {
-    char *token;
+unsafe extern "C" fn cgroup_memory(s: *mut c_char) -> c_int {
+pub static mut token: *mut c_void = core::ptr::null_mut();
     while ((token = strsep(&s, ",")) != core::ptr::null_mut()) {
-    if (!*token)
+    if (!*token) {
     continue;
-    if (!strcmp(token, "nosocket"))
+    }
+    if (!strcmp(token, "nosocket")) {
     cgroup_memory_nosocket = true;
-    if (!strcmp(token, "nokmem"))
+    }
+    if (!strcmp(token, "nokmem")) {
     cgroup_memory_nokmem = true;
-    if (!strcmp(token, "nobpf"))
+    }
+    if (!strcmp(token, "nobpf")) {
     cgroup_memory_nobpf = true;
+    }
     }
     return 1;
     }
-    __setup("cgroup.memory=", cgroup_memory);
+    __setup!("cgroup.memory=", cgroup_memory);
 //
 // Memory controller init before cgroup_init() initialize root_mem_cgroup.
 //
@@ -5089,29 +5182,27 @@ unsafe extern "C" fn cgroup_memory(s: *mut c_char) -> int __init {
 // should be initialized from here.
 //
 #[no_mangle]
-pub unsafe extern "C" fn mem_cgroup_init() -> int __init {
-    int __init mem_cgroup_init(void)
-    {
-    unsigned int memcg_size;
-    int cpu;
+pub unsafe extern "C" fn mem_cgroup_init() -> c_int {
+    let mut memcg_size = 0;
+    let mut cpu = 0;
 //
 // Currently s32 type (can refer to struct batched_lruvec_stat) is
 // used for per-memcg-per-cpu caching of per-node statistics. In order
 // to work fine, we should make sure that the overfill threshold can't
 // exceed S32_MAX / PAGE_SIZE.
 //
-    BUILD_BUG_ON(MEMCG_CHARGE_BATCH > S32_MAX / PAGE_SIZE);
+    BUILD_BUG_ON!(MEMCG_CHARGE_BATCH > S32_MAX / PAGE_SIZE);
     cpuhp_setup_state_nocalls(CPUHP_MM_MEMCQ_DEAD, "mm/memctrl:dead", core::ptr::null_mut(),
     memcg_hotplug_cpu_dead);
     memcg_wq = alloc_workqueue("memcg", WQ_PERCPU, 0);
-    WARN_ON(!memcg_wq);
+    WARN_ON!(!memcg_wq);
     for_each_possible_cpu(cpu) {
     INIT_WORK(&per_cpu_ptr(&memcg_stock, cpu).work,
     drain_local_memcg_stock);
     INIT_WORK(&per_cpu_ptr(&obj_stock, cpu).work,
     drain_local_obj_stock);
     }
-    memcg_size = struct_size_t(struct mem_cgroup, nodeinfo, nr_node_ids);
+    memcg_size = struct_size_t(mem_cgroup, nodeinfo, nr_node_ids);
     memcg_cachep = kmem_cache_create("mem_cgroup", memcg_size, 0,
     SLAB_PANIC | SLAB_HWCACHE_ALIGN, core::ptr::null_mut());
     memcg_pn_cachep = KMEM_CACHE(mem_cgroup_per_node,
@@ -5129,19 +5220,19 @@ pub unsafe extern "C" fn mem_cgroup_init() -> int __init {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __mem_cgroup_try_charge_swap(folio: *mut folio) -> c_int {
-    int __mem_cgroup_try_charge_swap(struct folio *folio)
-    {
-    let mut nr_pages: c_uint = folio_nr_pages(folio);
-    struct swap_cluster_info *ci;
-    struct page_counter *counter;
-    struct mem_cgroup *memcg;
-    struct obj_cgroup *objcg;
-    if (do_memsw_account())
+pub static mut nr_pages: c_uint = 0;
+pub static mut ci: *mut c_void = core::ptr::null_mut();
+pub static mut counter: *mut c_void = core::ptr::null_mut();
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+pub static mut objcg: *mut c_void = core::ptr::null_mut();
+    if (do_memsw_account()) {
     return 0;
+    }
     objcg = folio_objcg(folio);
     VM_WARN_ON_ONCE_FOLIO(!objcg, folio);
-    if (!objcg)
+    if (!objcg) {
     return 0;
+    }
     rcu_read_lock();
     memcg = obj_cgroup_memcg(objcg);
     if (!folio_test_swapcache(folio)) {
@@ -5173,17 +5264,17 @@ pub unsafe extern "C" fn __mem_cgroup_try_charge_swap(folio: *mut folio) -> c_in
 //
 #[no_mangle]
 pub unsafe extern "C" fn __mem_cgroup_uncharge_swap(id: c_ushort, nr_pages: c_uint) {
-    void __mem_cgroup_uncharge_swap(unsigned short id, unsigned int nr_pages)
-    {
-    struct mem_cgroup *memcg;
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     memcg = mem_cgroup_from_private_id(id);
     if (memcg) {
     if (!mem_cgroup_is_root(memcg)) {
-    if (do_memsw_account())
+    if (do_memsw_account()) {
     page_counter_uncharge(&memcg.memsw, nr_pages);
-    else
+    }
+    else {
     page_counter_uncharge(&memcg.swap, nr_pages);
+    }
     }
     mod_memcg_state(memcg, MEMCG_SWAP, -nr_pages);
     mem_cgroup_private_id_put(memcg, nr_pages);
@@ -5192,32 +5283,32 @@ pub unsafe extern "C" fn __mem_cgroup_uncharge_swap(id: c_ushort, nr_pages: c_ui
     }
 #[no_mangle]
 pub unsafe extern "C" fn mem_cgroup_get_nr_swap_pages(memcg: *mut mem_cgroup) -> c_long {
-    long mem_cgroup_get_nr_swap_pages(struct mem_cgroup *memcg)
-    {
-    let mut nr_swap_pages: c_long = get_nr_swap_pages();
-    if (mem_cgroup_disabled() || do_memsw_account())
+pub static mut nr_swap_pages: c_long = 0;
+    if (mem_cgroup_disabled() || do_memsw_account()) {
     return nr_swap_pages;
-    for (; !mem_cgroup_is_root(memcg); memcg = parent_mem_cgroup(memcg))
+    }
+    for (; !mem_cgroup_is_root(memcg); memcg = parent_mem_cgroup(memcg)) {
     nr_swap_pages = min_t(long, nr_swap_pages,
     READ_ONCE(memcg.swap.max) -
     page_counter_read(&memcg.swap));
+    }
     return nr_swap_pages;
     }
 #[no_mangle]
 pub unsafe extern "C" fn mem_cgroup_swap_full(folio: *mut folio) -> bool {
-    bool mem_cgroup_swap_full(struct folio *folio)
-    {
-    struct mem_cgroup *memcg;
-    let mut ret: bool = false;
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+pub static mut ret: bool = false;
     VM_BUG_ON_FOLIO(!folio_test_locked(folio), folio);
-    if (vm_swap_full())
+    if (vm_swap_full()) {
     return true;
-    if (do_memsw_account() || !folio_memcg_charged(folio))
+    }
+    if (do_memsw_account() || !folio_memcg_charged(folio)) {
     return ret;
+    }
     rcu_read_lock();
     memcg = folio_memcg(folio);
     for (; !mem_cgroup_is_root(memcg); memcg = parent_mem_cgroup(memcg)) {
-    let mut usage: c_ulong = page_counter_read(&memcg.swap);
+pub static mut usage: c_ulong = 0;
     if (usage * 2 >= READ_ONCE(memcg.swap.high) ||
     usage * 2 >= READ_ONCE(memcg.swap.max)) {
     ret = true;
@@ -5228,83 +5319,72 @@ pub unsafe extern "C" fn mem_cgroup_swap_full(folio: *mut folio) -> bool {
     return ret;
     }
 #[no_mangle]
-unsafe extern "C" fn setup_swap_account(s: *mut c_char) -> int __init {
-    static int __init setup_swap_account(char *s)
-    {
-    bool res;
-    if (!kstrtobool(s, &res) && !res)
+unsafe extern "C" fn setup_swap_account(s: *mut c_char) -> c_int {
+    let mut res = 0;
+    if (!kstrtobool(s, &res) && !res) {
     pr_warn_once("The swapaccount=0 commandline option is deprecated "
     "in favor of configuring swap control via cgroupfs. "
     "Please report your usecase to linux-mm@kvack.org if you "
     "depend on this functionality.\n");
+    }
     return 1;
     }
-    __setup("swapaccount=", setup_swap_account);
-    static u64 swap_current_read(struct cgroup_subsys_state *css,
-    struct cftype *cft)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(css);
+    __setup!("swapaccount=", setup_swap_account);
+#[no_mangle]
+pub unsafe extern "C" fn swap_current_read(css: *mut cgroup_subsys_state, cft: *mut cftype) -> u64 {
+    let mut memcg = mem_cgroup_from_css(css);
     return (u64)page_counter_read(&memcg.swap) * PAGE_SIZE;
     }
 #[no_mangle]
 unsafe extern "C" fn swap_peak_show(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int swap_peak_show(struct seq_file *sf, void *v)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(seq_css(sf));
+    let mut memcg = mem_cgroup_from_css(seq_css(sf));
     return peak_show(sf, v, &memcg.swap);
     }
-    static ssize_t swap_peak_write(struct kernfs_open_file *of, char *buf,
-    size_t nbytes, loff_t off)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(of_css(of));
+#[no_mangle]
+pub unsafe extern "C" fn swap_peak_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+    let mut memcg = mem_cgroup_from_css(of_css(of));
     return peak_write(of, buf, nbytes, off, &memcg.swap,
     &memcg.swap_peaks);
     }
 #[no_mangle]
 unsafe extern "C" fn swap_high_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int swap_high_show(struct seq_file *m, void *v)
-    {
     return seq_puts_memcg_tunable(m,
     READ_ONCE(mem_cgroup_from_seq(m).swap.high));
     }
-    static ssize_t swap_high_write(struct kernfs_open_file *of,
-    char *buf, size_t nbytes, loff_t off)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(of_css(of));
-    unsigned long high;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn swap_high_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+    let mut memcg = mem_cgroup_from_css(of_css(of));
+    let mut high = 0;
+    let mut err = 0;
     buf = strstrip(buf);
     err = page_counter_memparse(buf, "max", &high);
-    if (err)
+    if (err) {
     return err;
+    }
     page_counter_set_high(&memcg.swap, high);
     return nbytes;
     }
 #[no_mangle]
 unsafe extern "C" fn swap_max_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int swap_max_show(struct seq_file *m, void *v)
-    {
     return seq_puts_memcg_tunable(m,
     READ_ONCE(mem_cgroup_from_seq(m).swap.max));
     }
-    static ssize_t swap_max_write(struct kernfs_open_file *of,
-    char *buf, size_t nbytes, loff_t off)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(of_css(of));
-    unsigned long max;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn swap_max_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+    let mut memcg = mem_cgroup_from_css(of_css(of));
+    let mut max = 0;
+    let mut err = 0;
     buf = strstrip(buf);
     err = page_counter_memparse(buf, "max", &max);
-    if (err)
+    if (err) {
     return err;
+    }
     xchg(&memcg.swap.max, max);
     return nbytes;
     }
 #[no_mangle]
 unsafe extern "C" fn swap_events_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int swap_events_show(struct seq_file *m, void *v)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_seq(m);
+    let mut memcg = mem_cgroup_from_seq(m);
     seq_printf(m, "high %lu\n",
     atomic_long_read(&memcg.memory_events[MEMCG_SWAP_HIGH]));
     seq_printf(m, "max %lu\n",
@@ -5313,40 +5393,7 @@ unsafe extern "C" fn swap_events_show(m: *mut seq_file, v: *mut c_void) -> c_int
     atomic_long_read(&memcg.memory_events[MEMCG_SWAP_FAIL]));
     return 0;
     }
-    static struct cftype swap_files[] = {
-    {
-    .name = "swap.current",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .read_u64 = swap_current_read,
-    },
-    {
-    .name = "swap.high",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .seq_show = swap_high_show,
-    .write = swap_high_write,
-    },
-    {
-    .name = "swap.max",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .seq_show = swap_max_show,
-    .write = swap_max_write,
-    },
-    {
-    .name = "swap.peak",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .open = peak_open,
-    .release = peak_release,
-    .seq_show = swap_peak_show,
-    .write = swap_peak_write,
-    },
-    {
-    .name = "swap.events",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .file_offset = offsetof(struct mem_cgroup, swap_events_file),
-    .seq_show = swap_events_show,
-    },
-    { }	/* terminate */
-    };
+pub static mut cftype: usize = 0;
 
 //
 // obj_cgroup_may_zswap - check if this cgroup can zswap
@@ -5362,19 +5409,20 @@ unsafe extern "C" fn swap_events_show(m: *mut seq_file, v: *mut c_void) -> c_int
 //
 #[no_mangle]
 pub unsafe extern "C" fn obj_cgroup_may_zswap(objcg: *mut obj_cgroup) -> bool {
-    bool obj_cgroup_may_zswap(struct obj_cgroup *objcg)
-    {
-    struct mem_cgroup *memcg, *original_memcg;
-    let mut ret: bool = true;
-    if (!cgroup_subsys_on_dfl(memory_cgrp_subsys))
+    let mut memcg = core::ptr::null_mut();
+    let mut original_memcg = core::ptr::null_mut();
+pub static mut ret: bool = true;
+    if (!cgroup_subsys_on_dfl(memory_cgrp_subsys)) {
     return true;
+    }
     original_memcg = get_mem_cgroup_from_objcg(objcg);
     for (memcg = original_memcg; !mem_cgroup_is_root(memcg);
     memcg = parent_mem_cgroup(memcg)) {
-    let mut max: c_ulong = READ_ONCE(memcg.zswap_max);
-    unsigned long pages;
-    if (max == PAGE_COUNTER_MAX)
+pub static mut max: c_ulong = 0;
+    let mut pages = 0;
+    if (max == PAGE_COUNTER_MAX) {
     continue;
+    }
     if (max == 0) {
     ret = false;
     break;
@@ -5382,8 +5430,9 @@ pub unsafe extern "C" fn obj_cgroup_may_zswap(objcg: *mut obj_cgroup) -> bool {
 // Force flush to get accurate stats for charging
     __mem_cgroup_flush_stats(memcg, true);
     pages = memcg_page_state(memcg, MEMCG_ZSWAP_B) / PAGE_SIZE;
-    if (pages < max)
+    if (pages < max) {
     continue;
+    }
     ret = false;
     break;
     }
@@ -5400,23 +5449,25 @@ pub unsafe extern "C" fn obj_cgroup_may_zswap(objcg: *mut obj_cgroup) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn obj_cgroup_charge_zswap(objcg: *mut obj_cgroup, size: usize) {
-    void obj_cgroup_charge_zswap(struct obj_cgroup *objcg, size_t size)
-    {
-    struct mem_cgroup *memcg;
-    if (!cgroup_subsys_on_dfl(memory_cgrp_subsys))
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+    if (!cgroup_subsys_on_dfl(memory_cgrp_subsys)) {
     return;
-    if (obj_cgroup_is_root(objcg))
+    }
+    if (obj_cgroup_is_root(objcg)) {
     return;
+    }
     VM_WARN_ON_ONCE(!(current.flags & PF_MEMALLOC));
 // PF_MEMALLOC context, charging must succeed
-    if (obj_cgroup_charge(objcg, GFP_KERNEL, size))
+    if (obj_cgroup_charge(objcg, GFP_KERNEL, size)) {
     VM_WARN_ON_ONCE(1);
+    }
     rcu_read_lock();
     memcg = obj_cgroup_memcg(objcg);
     mod_memcg_state(memcg, MEMCG_ZSWAP_B, size);
     mod_memcg_state(memcg, MEMCG_ZSWAPPED, 1);
-    if (size == PAGE_SIZE)
+    if (size == PAGE_SIZE) {
     mod_memcg_state(memcg, MEMCG_ZSWAP_INCOMP, 1);
+    }
     rcu_read_unlock();
     }
 //
@@ -5428,125 +5479,102 @@ pub unsafe extern "C" fn obj_cgroup_charge_zswap(objcg: *mut obj_cgroup, size: u
 //
 #[no_mangle]
 pub unsafe extern "C" fn obj_cgroup_uncharge_zswap(objcg: *mut obj_cgroup, size: usize) {
-    void obj_cgroup_uncharge_zswap(struct obj_cgroup *objcg, size_t size)
-    {
-    struct mem_cgroup *memcg;
-    if (!cgroup_subsys_on_dfl(memory_cgrp_subsys))
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
+    if (!cgroup_subsys_on_dfl(memory_cgrp_subsys)) {
     return;
-    if (obj_cgroup_is_root(objcg))
+    }
+    if (obj_cgroup_is_root(objcg)) {
     return;
+    }
     obj_cgroup_uncharge(objcg, size);
     rcu_read_lock();
     memcg = obj_cgroup_memcg(objcg);
     mod_memcg_state(memcg, MEMCG_ZSWAP_B, -size);
     mod_memcg_state(memcg, MEMCG_ZSWAPPED, -1);
-    if (size == PAGE_SIZE)
+    if (size == PAGE_SIZE) {
     mod_memcg_state(memcg, MEMCG_ZSWAP_INCOMP, -1);
+    }
     rcu_read_unlock();
     }
 #[no_mangle]
 pub unsafe extern "C" fn mem_cgroup_zswap_writeback_enabled(memcg: *mut mem_cgroup) -> bool {
-    bool mem_cgroup_zswap_writeback_enabled(struct mem_cgroup *memcg)
-    {
 // if zswap is disabled, do not block pages going to the swapping device
-    if (!zswap_is_enabled())
-    return true;
-    for (; memcg; memcg = parent_mem_cgroup(memcg))
-    if (!READ_ONCE(memcg.zswap_writeback))
-    return false;
+    if (!zswap_is_enabled()) {
     return true;
     }
-    static u64 zswap_current_read(struct cgroup_subsys_state *css,
-    struct cftype *cft)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(css);
+    for (; memcg; memcg = parent_mem_cgroup(memcg)) {
+    if (!READ_ONCE(memcg.zswap_writeback))
+    return false;
+    }
+    return true;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn zswap_current_read(css: *mut cgroup_subsys_state, cft: *mut cftype) -> u64 {
+    let mut memcg = mem_cgroup_from_css(css);
     mem_cgroup_flush_stats(memcg);
     return memcg_page_state(memcg, MEMCG_ZSWAP_B);
     }
 #[no_mangle]
 unsafe extern "C" fn zswap_max_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int zswap_max_show(struct seq_file *m, void *v)
-    {
     return seq_puts_memcg_tunable(m,
     READ_ONCE(mem_cgroup_from_seq(m).zswap_max));
     }
-    static ssize_t zswap_max_write(struct kernfs_open_file *of,
-    char *buf, size_t nbytes, loff_t off)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(of_css(of));
-    unsigned long max;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn zswap_max_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+    let mut memcg = mem_cgroup_from_css(of_css(of));
+    let mut max = 0;
+    let mut err = 0;
     buf = strstrip(buf);
     err = page_counter_memparse(buf, "max", &max);
-    if (err)
+    if (err) {
     return err;
+    }
     xchg(&memcg.zswap_max, max);
     return nbytes;
     }
 #[no_mangle]
 unsafe extern "C" fn zswap_writeback_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int zswap_writeback_show(struct seq_file *m, void *v)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_seq(m);
+    let mut memcg = mem_cgroup_from_seq(m);
     seq_printf(m, "%d\n", READ_ONCE(memcg.zswap_writeback));
     return 0;
     }
-    static ssize_t zswap_writeback_write(struct kernfs_open_file *of,
-    char *buf, size_t nbytes, loff_t off)
-    {
-    struct mem_cgroup *memcg = mem_cgroup_from_css(of_css(of));
-    int zswap_writeback;
-    let mut parse_ret: isize = kstrtoint(strstrip(buf), 0, &zswap_writeback);
-    if (parse_ret)
+#[no_mangle]
+pub unsafe extern "C" fn zswap_writeback_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+    let mut memcg = mem_cgroup_from_css(of_css(of));
+    let mut zswap_writeback = 0;
+pub static mut parse_ret: isize = 0;
+    if (parse_ret) {
     return parse_ret;
-    if (zswap_writeback != 0 && zswap_writeback != 1)
+    }
+    if (zswap_writeback != 0 && zswap_writeback != 1) {
     return -EINVAL;
+    }
     WRITE_ONCE(memcg.zswap_writeback, zswap_writeback);
     return nbytes;
     }
-    static struct cftype zswap_files[] = {
-    {
-    .name = "zswap.current",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .read_u64 = zswap_current_read,
-    },
-    {
-    .name = "zswap.max",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .seq_show = zswap_max_show,
-    .write = zswap_max_write,
-    },
-    {
-    .name = "zswap.writeback",
-    .seq_show = zswap_writeback_show,
-    .write = zswap_writeback_write,
-    },
-    { }	/* terminate */
-    };
+pub static mut cftype: usize = 0;
 
 #[no_mangle]
-unsafe extern "C" fn mem_cgroup_swap_init() -> int __init {
-    static int __init mem_cgroup_swap_init(void)
-    {
-    if (mem_cgroup_disabled())
+unsafe extern "C" fn mem_cgroup_swap_init() -> c_int {
+    if (mem_cgroup_disabled()) {
     return 0;
-    WARN_ON(cgroup_add_dfl_cftypes(&memory_cgrp_subsys, swap_files));
+    }
+    WARN_ON!(cgroup_add_dfl_cftypes(&memory_cgrp_subsys, swap_files));
 
-    WARN_ON(cgroup_add_legacy_cftypes(&memory_cgrp_subsys, memsw_files));
+    WARN_ON!(cgroup_add_legacy_cftypes(&memory_cgrp_subsys, memsw_files));
 
-    WARN_ON(cgroup_add_dfl_cftypes(&memory_cgrp_subsys, zswap_files));
+    WARN_ON!(cgroup_add_dfl_cftypes(&memory_cgrp_subsys, zswap_files));
 
     return 0;
     }
-    subsys_initcall(mem_cgroup_swap_init);
+    subsys_initcall!(mem_cgroup_swap_init);
 
 #[no_mangle]
 pub unsafe extern "C" fn mem_cgroup_node_filter_allowed(memcg: *mut mem_cgroup, mask: *mut nodemask_t) {
-    void mem_cgroup_node_filter_allowed(struct mem_cgroup *memcg, nodemask_t *mask)
-    {
-    nodemask_t allowed;
-    if (!memcg)
+    let mut allowed;
+    if (!memcg) {
     return;
+    }
 //
 // Since this interface is intended for use by migration paths, and
 // reclaim and migration are subject to race conditions such as changes
@@ -5558,13 +5586,13 @@ pub unsafe extern "C" fn mem_cgroup_node_filter_allowed(memcg: *mut mem_cgroup, 
     }
 #[no_mangle]
 pub unsafe extern "C" fn mem_cgroup_show_protected_memory(memcg: *mut mem_cgroup) {
-    void mem_cgroup_show_protected_memory(struct mem_cgroup *memcg)
-    {
-    if (mem_cgroup_disabled() || !cgroup_subsys_on_dfl(memory_cgrp_subsys))
+    if (mem_cgroup_disabled() || !cgroup_subsys_on_dfl(memory_cgrp_subsys)) {
     return;
-    if (!memcg)
+    }
+    if (!memcg) {
     memcg = root_mem_cgroup;
-    pr_warn("Memory cgroup min protection %lukB -- low protection %lukB",
+    }
+    pr_warn!("Memory cgroup min protection %lukB -- low protection %lukB",
     K(atomic_long_read(&memcg.memory.children_min_usage)),
     K(atomic_long_read(&memcg.memory.children_low_usage)));
     }

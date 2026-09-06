@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -67,43 +317,34 @@ pub const KHO_PAGE_MAGIC: c_uint = 0x4b484f50U /* ASCII for 'KHOP' */;
 // Use it to store both the magic and the order.
 //
     union kho_page_info {
-    unsigned long page_private;
+    let mut page_private = 0;
     struct {
-    unsigned int order;
-    unsigned int magic;
+    let mut order = 0;
+    let mut magic = 0;
     };
     };
-    static_assert(sizeof(union kho_page_info) == sizeof(((struct page *)0).private));
-    let mut __ro_after_init: static bool kho_enable = IS_ENABLED(CONFIG_KEXEC_HANDOVER_ENABLE_DEFAULT);
+    static_assert(sizeof!(union kho_page_info) == sizeof!((0).private));
+pub static mut __ro_after_init: bool kho_enable = 0;
 #[no_mangle]
 pub unsafe extern "C" fn kho_is_enabled() -> bool {
-    bool kho_is_enabled(void)
-    {
     return kho_enable;
     }
     EXPORT_SYMBOL_GPL(kho_is_enabled);
 #[no_mangle]
-unsafe extern "C" fn kho_parse_enable(p: *mut c_char) -> int __init {
-    static int __init kho_parse_enable(char *p)
-    {
+unsafe extern "C" fn kho_parse_enable(p: *mut c_char) -> c_int {
     return kstrtobool(p, &kho_enable);
     }
-    early_param("kho", kho_parse_enable);
+    early_param!("kho", kho_parse_enable);
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct kho_out {
     pub fdt: *mut c_void,
-    pub /: *mut *mut mutex lock; / protects KHO FDT,
+//     pub /: *mut *mut mutex lock; / protects KHO FDT,
     pub radix_tree: kho_radix_tree,
     pub dbg: kho_debugfs,
 }
 
-    static struct kho_out kho_out = {
-    .lock = __MUTEX_INITIALIZER(kho_out.lock),
-    .radix_tree = {
-    .lock = __MUTEX_INITIALIZER(kho_out.radix_tree.lock),
-    },
-    };
+pub static mut kho_out: usize = 0;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct kho_in {
@@ -115,8 +356,7 @@ pub struct kho_in {
     pub radix_tree: kho_radix_tree,
 }
 
-    static struct kho_in kho_in = {
-    };
+pub static mut kho_in: usize = 0;
     static const void *kho_get_fdt(void)
     {
     return kho_in.fdt_phys ? phys_to_virt(kho_in.fdt_phys) : core::ptr::null_mut();
@@ -134,14 +374,12 @@ pub struct kho_in {
 //
 #[no_mangle]
 unsafe extern "C" fn kho_encode_radix_key(phys: phys_addr_t, order: c_uint) -> c_ulong {
-    static unsigned long kho_encode_radix_key(phys_addr_t phys, unsigned int order)
-    {
 // The physical address is encoded by shifting the PFN by its order.
-    let mut shift: c_ulong = PAGE_SHIFT + order;
+pub static mut shift: c_ulong = 0;
 // Order bit goes right before the shifted PFN.
-    let mut h: c_ulong = 1UL << (64 - shift);
+pub static mut h: c_ulong = 0;
 // Shifted PFN.
-    let mut l: c_ulong = phys >> shift;
+pub static mut l: c_ulong = 0;
     return h | l;
     }
 //
@@ -157,11 +395,9 @@ unsafe extern "C" fn kho_encode_radix_key(phys: phys_addr_t, order: c_uint) -> c
 //
 #[no_mangle]
 unsafe extern "C" fn kho_decode_radix_key(key: c_ulong, order: *mut c_uint) -> phys_addr_t {
-    static phys_addr_t kho_decode_radix_key(unsigned long key, unsigned int *order)
-    {
 // fls64() indexes starting from 1.
-    let mut order_bit: c_uint = fls64(key) - 1;
-    phys_addr_t phys;
+pub static mut order_bit: c_uint = 0;
+    let mut phys;
 // order bit goes right before the shifted PFN.
 // order = 64 - (PAGE_SHIFT + order_bit);
 // The order bit is discarded by the shift
@@ -170,34 +406,33 @@ unsafe extern "C" fn kho_decode_radix_key(key: c_ulong, order: *mut c_uint) -> p
     }
 #[no_mangle]
 unsafe extern "C" fn kho_radix_get_bitmap_index(key: c_ulong) -> c_ulong {
-    static unsigned long kho_radix_get_bitmap_index(unsigned long key)
-    {
     return key % (1 << KHO_BITMAP_SIZE_LOG2);
     }
-    static unsigned long kho_radix_get_table_index(unsigned long key,
-    unsigned int level)
-    {
-    int s;
+#[no_mangle]
+pub unsafe extern "C" fn kho_radix_get_table_index(key: c_ulong, level: c_uint) -> c_ulong {
+    let mut s = 0;
     s = ((level - 1) * KHO_TABLE_SIZE_LOG2) + KHO_BITMAP_SIZE_LOG2;
     return (key >> s) % (1 << KHO_TABLE_SIZE_LOG2);
     }
     static void __ref *kho_radix_alloc_node(void)
     {
-    struct kho_radix_node *node;
-    if (slab_is_available())
-    node = (struct kho_radix_node *)get_zeroed_page(GFP_KERNEL);
-    else
+pub static mut node: *mut c_void = core::ptr::null_mut();
+    if (slab_is_available()) {
+    node = get_zeroed_page(GFP_KERNEL);
+    }
+    else {
     node = memblock_alloc(PAGE_SIZE, PAGE_SIZE);
+    }
     return node;
     }
 #[no_mangle]
 unsafe extern "C" fn kho_radix_free_node(node: *mut kho_radix_node) -> void __ref {
-    static void __ref kho_radix_free_node(struct kho_radix_node *node)
-    {
-    if (slab_is_available())
+    if (slab_is_available()) {
     free_page((unsigned long)node);
-    else
+    }
+    else {
     memblock_free(node, PAGE_SIZE);
+    }
     }
 //
 // kho_radix_add_key - Add a key to the radix tree.
@@ -218,24 +453,26 @@ unsafe extern "C" fn kho_radix_free_node(node: *mut kho_radix_node) -> void __re
 //
 #[no_mangle]
 pub unsafe extern "C" fn kho_radix_add_key(tree: *mut kho_radix_tree, key: c_ulong) -> c_int {
-    int kho_radix_add_key(struct kho_radix_tree *tree, unsigned long key)
-    {
 // Newly allocated nodes for error cleanup
     struct kho_radix_node *intermediate_nodes[KHO_TREE_MAX_DEPTH] = { 0 };
-    struct kho_radix_node *anchor_node = core::ptr::null_mut();
-    struct kho_radix_node *node = tree.root;
-    struct kho_radix_node *new_node;
-    unsigned int i, idx, anchor_idx;
-    struct kho_radix_leaf *leaf;
-    let mut err: c_int = 0;
-    if (WARN_ON_ONCE(!tree.root))
+    let mut anchor_node = core::ptr::null_mut();
+    let mut node = tree.root;
+pub static mut new_node: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    let mut idx = 0;
+    let mut anchor_idx = 0;
+pub static mut leaf: *mut c_void = core::ptr::null_mut();
+pub static mut err: c_int = 0;
+    if (WARN_ON_ONCE!(!tree.root)) {
     return -EINVAL;
-    if (unlikely(fls64(key) > KHO_RADIX_KEY_WIDTH))
+    }
+    if (unlikely(fls64(key) > KHO_RADIX_KEY_WIDTH)) {
     return -ERANGE;
+    }
     might_sleep();
     guard(mutex)(&tree.lock);
 // Go from high levels to low levels
-    for (i = KHO_TREE_MAX_DEPTH - 1; i > 0; i--) {
+    while (i > 0) {
     idx = kho_radix_get_table_index(key, i);
     if (node.table[idx]) {
     node = phys_to_virt(node.table[idx]);
@@ -245,7 +482,7 @@ pub unsafe extern "C" fn kho_radix_add_key(tree: *mut kho_radix_tree, key: c_ulo
     new_node = kho_radix_alloc_node();
     if (!new_node) {
     err = -ENOMEM;
-    goto err_free_nodes;
+// goto;
     }
     node.table[idx] = virt_to_phys(new_node);
 //
@@ -261,16 +498,18 @@ pub unsafe extern "C" fn kho_radix_add_key(tree: *mut kho_radix_tree, key: c_ulo
     }
 // Handle the leaf level bitmap (level 0)
     idx = kho_radix_get_bitmap_index(key);
-    leaf = (struct kho_radix_leaf *)node;
+    leaf = node;
     __set_bit(idx, leaf.bitmap);
     return 0;
-    err_free_nodes:
-    for (i = KHO_TREE_MAX_DEPTH - 1; i > 0; i--) {
-    if (intermediate_nodes[i])
+// label;
+    while (i > 0) {
+    if (intermediate_nodes[i]) {
     kho_radix_free_node(intermediate_nodes[i]);
     }
-    if (anchor_node)
+    }
+    if (anchor_node) {
     anchor_node.table[anchor_idx] = 0;
+    }
     return err;
     }
     EXPORT_SYMBOL_GPL(kho_radix_add_key);
@@ -285,47 +524,49 @@ pub unsafe extern "C" fn kho_radix_add_key(tree: *mut kho_radix_tree, key: c_ulo
 //
 #[no_mangle]
 pub unsafe extern "C" fn kho_radix_del_key(tree: *mut kho_radix_tree, key: c_ulong) {
-    void kho_radix_del_key(struct kho_radix_tree *tree, unsigned long key)
-    {
-    struct kho_radix_node *node = tree.root;
-    struct kho_radix_leaf *leaf;
-    unsigned int i, idx;
-    if (WARN_ON_ONCE(!tree.root))
+    let mut node = tree.root;
+pub static mut leaf: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    let mut idx = 0;
+    if (WARN_ON_ONCE!(!tree.root)) {
     return;
+    }
 // Keys wider than KHO_RADIX_KEY_WIDTH are not allowed to be added.
-    if (unlikely(fls64(key) > KHO_RADIX_KEY_WIDTH))
+    if (unlikely(fls64(key) > KHO_RADIX_KEY_WIDTH)) {
     return;
+    }
     might_sleep();
     guard(mutex)(&tree.lock);
 // Go from high levels to low levels
-    for (i = KHO_TREE_MAX_DEPTH - 1; i > 0; i--) {
+    while (i > 0) {
     idx = kho_radix_get_table_index(key, i);
 //
 // Attempting to delete a page that has not been preserved,
 // return with a warning.
 //
-    if (WARN_ON(!node.table[idx]))
+    if (WARN_ON!(!node.table[idx])) {
     return;
+    }
     node = phys_to_virt(node.table[idx]);
     }
 // Handle the leaf level bitmap (level 0)
-    leaf = (struct kho_radix_leaf *)node;
+    leaf = node;
     idx = kho_radix_get_bitmap_index(key);
     __clear_bit(idx, leaf.bitmap);
     }
     EXPORT_SYMBOL_GPL(kho_radix_del_key);
-    static void __kho_radix_destroy_tree(struct kho_radix_node *root,
-    unsigned int level)
-    {
-    unsigned long i;
+#[no_mangle]
+pub unsafe extern "C" fn __kho_radix_destroy_tree(root: *mut kho_radix_node, level: c_uint) {
+    let mut i = 0;
     if (level == 0) {
     kho_radix_free_node(root);
     return;
     }
-    for (i = 0; i < PAGE_SIZE / sizeof(phys_addr_t); i++) {
-    if (root.table[i])
+    while (i < PAGE_SIZE / sizeof!(phys_addr_t)) {
+    if (root.table[i]) {
     __kho_radix_destroy_tree(phys_to_virt(root.table[i]),
     level - 1);
+    }
     }
     kho_radix_free_node(root);
     }
@@ -342,12 +583,12 @@ pub unsafe extern "C" fn kho_radix_del_key(tree: *mut kho_radix_tree, key: c_ulo
 //
 #[no_mangle]
 pub unsafe extern "C" fn kho_radix_init_tree(tree: *mut kho_radix_tree, root: *mut kho_radix_node) -> c_int {
-    int kho_radix_init_tree(struct kho_radix_tree *tree, struct kho_radix_node *root)
-    {
-    if (!root)
+    if (!root) {
     root = kho_radix_alloc_node();
-    if (!root)
+    }
+    if (!root) {
     return -ENOMEM;
+    }
     tree.root = root;
     mutex_init(&tree.lock);
     return 0;
@@ -361,51 +602,52 @@ pub unsafe extern "C" fn kho_radix_init_tree(tree: *mut kho_radix_tree, root: *m
 //
 #[no_mangle]
 pub unsafe extern "C" fn kho_radix_destroy_tree(tree: *mut kho_radix_tree) {
-    void kho_radix_destroy_tree(struct kho_radix_tree *tree)
-    {
-    if (!tree.root)
+    if (!tree.root) {
     return;
+    }
     __kho_radix_destroy_tree(tree.root, KHO_TREE_MAX_DEPTH - 1);
     tree.root = core::ptr::null_mut();
     }
     EXPORT_SYMBOL_GPL(kho_radix_destroy_tree);
-    static int kho_radix_walk_leaf(struct kho_radix_leaf *leaf, unsigned long key,
-    const struct kho_radix_walk_cb *cb, void *data)
-    {
-    unsigned long *bitmap = (unsigned long *)leaf;
-    unsigned int i;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn kho_radix_walk_leaf(leaf: *mut kho_radix_leaf, key: c_ulong, cb: *mut kho_radix_walk_cb, data: *mut c_void) -> c_int {
+    let mut bitmap = leaf;
+    let mut i = 0;
+    let mut err = 0;
     if (cb.node) {
     err = cb.node(virt_to_phys(leaf), data);
-    if (err)
+    if (err) {
     return err;
     }
-    if (!cb.leaf)
+    }
+    if (!cb.leaf) {
     return 0;
+    }
     for_each_set_bit(i, bitmap, PAGE_SIZE * BITS_PER_BYTE) {
     err = cb.leaf(key | i, data);
-    if (err)
+    if (err) {
     return err;
+    }
     }
     return 0;
     }
-    static int __kho_radix_walk_tree(struct kho_radix_node *root,
-    unsigned int level, unsigned long start,
-    const struct kho_radix_walk_cb *cb, void *data)
-    {
-    struct kho_radix_node *node;
-    struct kho_radix_leaf *leaf;
+#[no_mangle]
+pub unsafe extern "C" fn __kho_radix_walk_tree(root: *mut kho_radix_node, level: c_uint, start: c_ulong, cb: *mut kho_radix_walk_cb, data: *mut c_void) -> c_int {
+pub static mut node: *mut c_void = core::ptr::null_mut();
+pub static mut leaf: *mut c_void = core::ptr::null_mut();
     unsigned long key, i;
-    unsigned int shift;
-    int err;
+    let mut shift = 0;
+    let mut err = 0;
     if (cb.node) {
     err = cb.node(virt_to_phys(root), data);
-    if (err)
+    if (err) {
     return err;
     }
-    for (i = 0; i < PAGE_SIZE / sizeof(phys_addr_t); i++) {
-    if (!root.table[i])
+    }
+    while (i < PAGE_SIZE / sizeof!(phys_addr_t)) {
+    if (!root.table[i]) {
     continue;
+    }
     shift = ((level - 1) * KHO_TABLE_SIZE_LOG2) +
     KHO_BITMAP_SIZE_LOG2;
     key = start | (i << shift);
@@ -415,14 +657,15 @@ pub unsafe extern "C" fn kho_radix_destroy_tree(tree: *mut kho_radix_tree) {
 // we are at level 1,
 // node is pointing to the level 0 bitmap.
 //
-    leaf = (struct kho_radix_leaf *)node;
+    leaf = node;
     err = kho_radix_walk_leaf(leaf, key, cb, data);
     } else {
     err  = __kho_radix_walk_tree(node, level - 1,
     key, cb, data);
     }
-    if (err)
+    if (err) {
     return err;
+    }
     }
     return 0;
     }
@@ -438,11 +681,11 @@ pub unsafe extern "C" fn kho_radix_destroy_tree(tree: *mut kho_radix_tree) {
 // Return: 0 if the walk completed the specified tree, or the non-zero return
 // value from the callback that stopped the walk.
 //
-    int kho_radix_walk_tree(struct kho_radix_tree *tree,
-    const struct kho_radix_walk_cb *cb, void *data)
-    {
-    if (WARN_ON_ONCE(!tree.root))
+#[no_mangle]
+pub unsafe extern "C" fn kho_radix_walk_tree(tree: *mut kho_radix_tree, cb: *mut kho_radix_walk_cb, data: *mut c_void) -> c_int {
+    if (WARN_ON_ONCE!(!tree.root)) {
     return -EINVAL;
+    }
     guard(mutex)(&tree.lock);
     return __kho_radix_walk_tree(tree.root, KHO_TREE_MAX_DEPTH - 1, 0, cb,
     data);
@@ -451,9 +694,7 @@ pub unsafe extern "C" fn kho_radix_destroy_tree(tree: *mut kho_radix_tree) {
 // For physically contiguous 0-order pages.
 #[no_mangle]
 unsafe extern "C" fn kho_init_pages(page: *mut page, nr_pages: c_ulong) {
-    static void kho_init_pages(struct page *page, unsigned long nr_pages)
-    {
-    for (unsigned long i = 0; i < nr_pages; i++) {
+    while (i < nr_pages) {
     set_page_count(page + i, 1);
 // Clear each page's codetag to avoid accounting mismatch.
     clear_page_tag_ref(page + i);
@@ -461,41 +702,45 @@ unsafe extern "C" fn kho_init_pages(page: *mut page, nr_pages: c_ulong) {
     }
 #[no_mangle]
 unsafe extern "C" fn kho_init_folio(page: *mut page, order: c_uint) {
-    static void kho_init_folio(struct page *page, unsigned int order)
-    {
-    let mut nr_pages: c_ulong = (1 << order);
+pub static mut nr_pages: c_ulong = 0;
 // Head page gets refcount of 1.
     set_page_count(page, 1);
 // Clear head page's codetag to avoid accounting mismatch.
     clear_page_tag_ref(page);
 // For higher order folios, tail pages get a page count of zero.
-    for (unsigned long i = 1; i < nr_pages; i++)
+    for (unsigned long i = 1; i < nr_pages; i++) {
     set_page_count(page + i, 0);
-    if (order > 0)
+    }
+    if (order > 0) {
     prep_compound_page(page, order);
     }
-    static struct page *kho_restore_page(phys_addr_t phys, bool is_folio)
-    {
-    struct page *page = pfn_to_online_page(PHYS_PFN(phys));
-    unsigned long nr_pages;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn kho_restore_page(phys: phys_addr_t, is_folio: bool) -> *mut c_void {
+    let mut page = pfn_to_online_page(PHYS_PFN(phys));
+    let mut nr_pages = 0;
     union kho_page_info info;
-    if (!page)
+    if (!page) {
     return core::ptr::null_mut();
+    }
     info.page_private = page.private;
 //
 // deserialize_bitmap() only sets the magic on the head page. This magic
 // check also implicitly makes sure phys is order-aligned since for
 // non-order-aligned phys addresses, magic will never be set.
 //
-    if (WARN_ON_ONCE(info.magic != KHO_PAGE_MAGIC))
+    if (WARN_ON_ONCE!(info.magic != KHO_PAGE_MAGIC)) {
     return core::ptr::null_mut();
+    }
     nr_pages = (1 << info.order);
 // Clear private to make sure later restores on this page error out.
     page.private = 0;
-    if (is_folio)
+    if (is_folio) {
     kho_init_folio(page, info.order);
-    else
+    }
+    else {
     kho_init_pages(page, nr_pages);
+    }
     adjust_managed_page_count(page, nr_pages);
     return page;
     }
@@ -505,9 +750,9 @@ unsafe extern "C" fn kho_init_folio(page: *mut page, order: c_uint) {
 //
 // Return: pointer to the struct folio on success, NULL on failure.
 //
-    struct folio *kho_restore_folio(phys_addr_t phys)
-    {
-    struct page *page = kho_restore_page(phys, true);
+#[no_mangle]
+pub unsafe extern "C" fn kho_restore_folio(phys: phys_addr_t) -> *mut c_void {
+    let mut page = kho_restore_page(phys, true);
     return page ? page_folio(page) : core::ptr::null_mut();
     }
     EXPORT_SYMBOL_GPL(kho_restore_folio);
@@ -521,24 +766,24 @@ unsafe extern "C" fn kho_init_folio(page: *mut page, order: c_uint) {
 //
 // Return: the first page on success, NULL on failure.
 //
-    struct page *kho_restore_pages(phys_addr_t phys, unsigned long nr_pages)
-    {
-    let mut start_pfn: c_ulong = PHYS_PFN(phys);
-    let mut end_pfn: c_ulong = start_pfn + nr_pages;
-    let mut pfn: c_ulong = start_pfn;
+#[no_mangle]
+pub unsafe extern "C" fn kho_restore_pages(phys: phys_addr_t, nr_pages: c_ulong) -> *mut c_void {
+pub static mut start_pfn: c_ulong = 0;
+pub static mut end_pfn: c_ulong = 0;
+pub static mut pfn: c_ulong = 0;
     while (pfn < end_pfn) {
-    const unsigned int order =
-    min(count_trailing_zeros(pfn), ilog2(end_pfn - pfn));
-    struct page *page = kho_restore_page(PFN_PHYS(pfn), false);
-    if (!page)
+    let mut order = min(count_trailing_zeros(pfn), ilog2(end_pfn - pfn));
+    let mut page = kho_restore_page(PFN_PHYS(pfn), false);
+    if (!page) {
     return core::ptr::null_mut();
+    }
     pfn += 1 << order;
     }
     return pfn_to_page(start_pfn);
     }
     EXPORT_SYMBOL_GPL(kho_restore_pages);
 //
-// With CONFIG_DEFERRED_STRUCT_PAGE_INIT, struct pages in higher memory regions
+// With CONFIG_DEFERRED_STRUCT_PAGE_INIT, pages in higher memory regions
 // may not be initialized yet at the time KHO deserializes preserved memory.
 // KHO uses the struct page to store metadata and a later initialization would
 // overwrite it.
@@ -549,24 +794,24 @@ unsafe extern "C" fn kho_init_folio(page: *mut page, order: c_uint) {
     static struct page *__init kho_get_preserved_page(phys_addr_t phys,
     unsigned int order)
     {
-    let mut pfn: c_ulong = PHYS_PFN(phys);
-    int nid;
-    if (!IS_ENABLED(CONFIG_DEFERRED_STRUCT_PAGE_INIT))
+pub static mut pfn: c_ulong = 0;
+    let mut nid = 0;
+    if (!IS_ENABLED!(CONFIG_DEFERRED_STRUCT_PAGE_INIT)) {
     return pfn_to_page(pfn);
+    }
     nid = early_pfn_to_nid(pfn);
-    for (unsigned long i = 0; i < (1UL << order); i++)
+    for (unsigned long i = 0; i < (1UL << order); i++) {
     init_deferred_page(pfn + i, nid);
+    }
     return pfn_to_page(pfn);
     }
 #[no_mangle]
-unsafe extern "C" fn kho_preserved_memory_reserve(key: c_ulong, data: *mut c_void) -> int __init {
-    static int __init kho_preserved_memory_reserve(unsigned long key, void *data)
-    {
+unsafe extern "C" fn kho_preserved_memory_reserve(key: c_ulong, data: *mut c_void) -> c_int {
     union kho_page_info info;
-    struct page *page;
-    unsigned int order;
-    phys_addr_t phys;
-    u64 sz;
+pub static mut page: *mut c_void = core::ptr::null_mut();
+    let mut order = 0;
+    let mut phys;
+    let mut sz = 0;
     phys = kho_decode_radix_key(key, &order);
     sz = 1UL << (order + PAGE_SHIFT);
     page = kho_get_preserved_page(phys, order);
@@ -581,20 +826,18 @@ unsafe extern "C" fn kho_preserved_memory_reserve(key: c_ulong, data: *mut c_voi
 // Returns physical address of the preserved memory map from FDT
 #[no_mangle]
 unsafe extern "C" fn kho_get_mem_map_phys(fdt: *const c_void) -> phys_addr_t __init {
-    static phys_addr_t __init kho_get_mem_map_phys(const void *fdt)
-    {
-    const void *mem_ptr;
-    int len;
+pub static mut mem_ptr: *mut c_void = core::ptr::null_mut();
+    let mut len = 0;
     mem_ptr = fdt_getprop(fdt, 0, KHO_FDT_MEMORY_MAP_PROP_NAME, &len);
-    if (!mem_ptr || len != sizeof(u64)) {
-    pr_err("failed to get preserved memory map\n");
+    if (!mem_ptr || len != sizeof!(u64)) {
+    pr_err!("failed to get preserved memory map\n");
     return 0;
     }
-    return get_unaligned((const u64 *)mem_ptr);
+    return get_unaligned(mem_ptr);
     }
     static void __init *kho_get_mem_map(const void *fdt)
     {
-    let mut phys: phys_addr_t = kho_get_mem_map_phys(fdt);
+pub static mut phys: phys_addr_t = 0;
     return phys ? phys_to_virt(phys) : core::ptr::null_mut();
     }
 //
@@ -605,8 +848,8 @@ unsafe extern "C" fn kho_get_mem_map_phys(fdt: *const c_void) -> phys_addr_t __i
 // area for early allocations that happen before page allocator is
 // initialized.
 //
-    struct kho_scratch *kho_scratch;
-    unsigned int kho_scratch_cnt;
+pub static mut kho_scratch: *mut c_void = core::ptr::null_mut();
+    let mut kho_scratch_cnt = 0;
 //
 // The scratch areas are scaled by default as percent of memory allocated from
 // memblock. A user can override the scale with command line parameter:
@@ -620,55 +863,61 @@ unsafe extern "C" fn kho_get_mem_map_phys(fdt: *const c_void) -> phys_addr_t __i
 //
 // The explicit size definition takes precedence over scale definition.
 //
-    let mut __initdata: static unsigned int scratch_scale = 200;
+pub static mut __initdata: unsigned int scratch_scale = 200;
     static phys_addr_t scratch_size_global __initdata;
     static phys_addr_t scratch_size_pernode __initdata;
     static phys_addr_t scratch_size_lowmem __initdata;
 #[no_mangle]
-unsafe extern "C" fn kho_parse_scratch_size(p: *mut c_char) -> int __init {
-    static int __init kho_parse_scratch_size(char *p)
-    {
-    size_t len;
+unsafe extern "C" fn kho_parse_scratch_size(p: *mut c_char) -> c_int {
+    let mut len = 0;
     unsigned long sizes[3];
-    let mut total_size: usize = 0;
-    int i;
-    if (!p)
+pub static mut total_size: usize = 0;
+    let mut i = 0;
+    if (!p) {
     return -EINVAL;
+    }
     len = strlen(p);
-    if (!len)
+    if (!len) {
     return -EINVAL;
+    }
 // parse nn%
     if (p[len - 1] == '%') {
 // unsigned int max is 4,294,967,295, 10 chars
     char s_scale[11] = {};
-    let mut ret: c_int = 0;
-    if (len > ARRAY_SIZE(s_scale))
+pub static mut ret: c_int = 0;
+    if (len > ARRAY_SIZE!(s_scale)) {
     return -EINVAL;
+    }
     memcpy(s_scale, p, len - 1);
     ret = kstrtouint(s_scale, 10, &scratch_scale);
-    if (!ret)
+    if (!ret) {
     pr_notice("scratch scale is %d%%\n", scratch_scale);
+    }
     return ret;
     }
 // parse ll[KMG],mm[KMG],nn[KMG]
-    for (i = 0; i < ARRAY_SIZE(sizes); i++) {
-    char *endp = p;
+    while (i < ARRAY_SIZE!(sizes)) {
+    let mut endp = p;
     if (i > 0) {
-    if (*p != ',')
+    if (*p != ',') {
     return -EINVAL;
+    }
     p += 1;
     }
     sizes[i] = memparse(p, &endp);
-    if (endp == p)
+    if (endp == p) {
     return -EINVAL;
+    }
     p = endp;
     total_size += sizes[i];
     }
-    if (!total_size)
+    if (!total_size) {
     return -EINVAL;
+    }
 // The string should be fully consumed by now.
-    if (*p)
+    if (*p) {
     return -EINVAL;
+    }
     scratch_size_lowmem = sizes[0];
     scratch_size_global = sizes[1];
     scratch_size_pernode = sizes[2];
@@ -679,18 +928,16 @@ unsafe extern "C" fn kho_parse_scratch_size(p: *mut c_char) -> int __init {
     (u64)(scratch_size_pernode >> 20));
     return 0;
     }
-    early_param("kho_scratch", kho_parse_scratch_size);
+    early_param!("kho_scratch", kho_parse_scratch_size);
 #[no_mangle]
-unsafe extern "C" fn scratch_size_update() -> void __init {
-    static void __init scratch_size_update(void)
-    {
+unsafe extern "C" fn scratch_size_update()  {
 //
 // If fixed sizes are not provided via command line, calculate them now.
 // Remove HugeTLB allocations from it because they never get allocated
 // from scratch.
 //
     if (scratch_scale) {
-    phys_addr_t size;
+    let mut size;
     size = memblock_reserved_kern_size(ARCH_LOW_ADDRESS_LIMIT,
     NUMA_NO_NODE);
     size -= memblock_reserved_hugetlb_size(ARCH_LOW_ADDRESS_LIMIT,
@@ -713,9 +960,7 @@ unsafe extern "C" fn scratch_size_update() -> void __init {
     }
 #[no_mangle]
 unsafe extern "C" fn scratch_size_node(nid: c_int) -> phys_addr_t __init {
-    static phys_addr_t __init scratch_size_node(int nid)
-    {
-    phys_addr_t size;
+    let mut size;
     if (scratch_scale) {
     size = memblock_reserved_kern_size(MEMBLOCK_ALLOC_ANYWHERE,
     nid);
@@ -730,15 +975,14 @@ unsafe extern "C" fn scratch_size_node(nid: c_int) -> phys_addr_t __init {
     }
 #[no_mangle]
 pub unsafe extern "C" fn kho_scratch_overlap(phys: phys_addr_t, size: usize) -> bool {
-    bool kho_scratch_overlap(phys_addr_t phys, size_t size)
-    {
     phys_addr_t scratch_start, scratch_end;
-    unsigned int i;
-    for (i = 0; i < kho_scratch_cnt; i++) {
+    let mut i = 0;
+    while (i < kho_scratch_cnt) {
     scratch_start = kho_scratch[i].addr;
     scratch_end = kho_scratch[i].addr + kho_scratch[i].size;
-    if (phys < scratch_end && (phys + size) > scratch_start)
+    if (phys < scratch_end && (phys + size) > scratch_start) {
     return true;
+    }
     }
     return false;
     }
@@ -752,21 +996,20 @@ pub unsafe extern "C" fn kho_scratch_overlap(phys: phys_addr_t, size: usize) -> 
 // problem for us during KHO because we can just move them somewhere else.
 //
 #[no_mangle]
-unsafe extern "C" fn kho_reserve_scratch() -> void __init {
-    static void __init kho_reserve_scratch(void)
-    {
+unsafe extern "C" fn kho_reserve_scratch()  {
     phys_addr_t addr, size;
     int nid, i = 0;
-    if (!kho_enable)
+    if (!kho_enable) {
     return;
+    }
     scratch_size_update();
 // FIXME: deal with node hot-plug/remove
     kho_scratch_cnt = nodes_weight(node_states[N_MEMORY]) + 2;
-    size = kho_scratch_cnt * sizeof(*kho_scratch);
+    size = kho_scratch_cnt * sizeof!(*kho_scratch);
     kho_scratch = memblock_alloc(size, PAGE_SIZE);
     if (!kho_scratch) {
-    pr_err("Failed to reserve scratch array\n");
-    goto err_disable_kho;
+    pr_err!("Failed to reserve scratch array\n");
+// goto;
     }
 //
 // reserve scratch area in low memory for lowmem allocations in the
@@ -776,22 +1019,22 @@ unsafe extern "C" fn kho_reserve_scratch() -> void __init {
     addr = memblock_phys_alloc_range(size, SCRATCH_ALIGNMENT_BYTES, 0,
     ARCH_LOW_ADDRESS_LIMIT);
     if (!addr) {
-    pr_err("Failed to reserve lowmem scratch buffer\n");
-    goto err_free_scratch_desc;
+    pr_err!("Failed to reserve lowmem scratch buffer\n");
+// goto;
     }
     kho_scratch[i].addr = addr;
     kho_scratch[i].size = size;
-    i++;
+    i += 1;
 // reserve large contiguous area for allocations without nid
     size = scratch_size_global;
     addr = memblock_phys_alloc(size, SCRATCH_ALIGNMENT_BYTES);
     if (!addr) {
-    pr_err("Failed to reserve global scratch buffer\n");
-    goto err_free_scratch_areas;
+    pr_err!("Failed to reserve global scratch buffer\n");
+// goto;
     }
     kho_scratch[i].addr = addr;
     kho_scratch[i].size = size;
-    i++;
+    i += 1;
 //
 // Loop over nodes that have both memory and are online. Skip
 // memoryless nodes, as we can not allocate scratch areas there.
@@ -802,21 +1045,22 @@ unsafe extern "C" fn kho_reserve_scratch() -> void __init {
     0, MEMBLOCK_ALLOC_ACCESSIBLE,
     nid, true);
     if (!addr) {
-    pr_err("Failed to reserve nid %d scratch buffer\n", nid);
-    goto err_free_scratch_areas;
+    pr_err!("Failed to reserve nid %d scratch buffer\n", nid);
+// goto;
     }
     kho_scratch[i].addr = addr;
     kho_scratch[i].size = size;
-    i++;
+    i += 1;
     }
     return;
-    err_free_scratch_areas:
-    for (i--; i >= 0; i--)
+// label;
+    for (i -= 1; i >= 0; i--) {
     memblock_phys_free(kho_scratch[i].addr, kho_scratch[i].size);
-    err_free_scratch_desc:
-    memblock_free(kho_scratch, kho_scratch_cnt * sizeof(*kho_scratch));
-    err_disable_kho:
-    pr_warn("Failed to reserve scratch area, disabling kexec handover\n");
+    }
+// label;
+    memblock_free(kho_scratch, kho_scratch_cnt * sizeof!(*kho_scratch));
+// label;
+    pr_warn!("Failed to reserve scratch area, disabling kexec handover\n");
     kho_enable = false;
     }
 //
@@ -828,13 +1072,11 @@ unsafe extern "C" fn kho_reserve_scratch() -> void __init {
 
 // Called for the KHO preserved memory radix tree.
 #[no_mangle]
-unsafe extern "C" fn kho_ext_walk_leaf(key: c_ulong, data: *mut c_void) -> int __init {
-    static int __init kho_ext_walk_leaf(unsigned long key, void *data)
-    {
-    struct kho_radix_tree *busy_blocks = data;
+unsafe extern "C" fn kho_ext_walk_leaf(key: c_ulong, data: *mut c_void) -> c_int {
+    let mut busy_blocks = data;
     phys_addr_t start, end;
-    unsigned int order;
-    int err;
+    let mut order = 0;
+    let mut err = 0;
 //
 // The key is from the KHO preserved memory radix tree. It is decoded to
 // a physical address of a preservation and its order.
@@ -843,32 +1085,30 @@ unsafe extern "C" fn kho_ext_walk_leaf(key: c_ulong, data: *mut c_void) -> int _
     end = start + (1UL << (order + PAGE_SHIFT));
     while (start < end) {
     err = kho_radix_add_key(busy_blocks, start >> KHO_SCRATCH_EXT_BLKSHIFT);
-    if (err)
+    if (err) {
     return err;
+    }
     start += (1UL << KHO_SCRATCH_EXT_BLKSHIFT);
     }
     return 0;
     }
 // Called for the KHO preserved memory radix tree.
 #[no_mangle]
-unsafe extern "C" fn kho_ext_walk_node(phys: phys_addr_t, data: *mut c_void) -> int __init {
-    static int __init kho_ext_walk_node(phys_addr_t phys, void *data)
-    {
-    struct kho_radix_tree *busy_blocks = data;
+unsafe extern "C" fn kho_ext_walk_node(phys: phys_addr_t, data: *mut c_void) -> c_int {
+    let mut busy_blocks = data;
     return kho_radix_add_key(busy_blocks, phys >> KHO_SCRATCH_EXT_BLKSHIFT);
     }
 // Called for the busy block radix tree.
 #[no_mangle]
-unsafe extern "C" fn kho_ext_mark_scratch(key: c_ulong, data: *mut c_void) -> int __init {
-    static int __init kho_ext_mark_scratch(unsigned long key, void *data)
-    {
-    phys_addr_t *prev_end = data;
-    let mut start: phys_addr_t = key << KHO_SCRATCH_EXT_BLKSHIFT;
-    int err;
+unsafe extern "C" fn kho_ext_mark_scratch(key: c_ulong, data: *mut c_void) -> c_int {
+    let mut prev_end = data;
+pub static mut start: phys_addr_t = 0;
+    let mut err = 0;
     if (start > *prev_end) {
     err = memblock_mark_kho_scratch(*prev_end, start - *prev_end);
-    if (err)
+    if (err) {
     return err;
+    }
     }
 // prev_end = start + (1UL << KHO_SCRATCH_EXT_BLKSHIFT);
     return 0;
@@ -899,23 +1139,17 @@ unsafe extern "C" fn kho_ext_mark_scratch(key: c_ulong, data: *mut c_void) -> in
 // called after reserve_regions().
 //
 #[no_mangle]
-unsafe extern "C" fn kho_extend_scratch() -> void __init {
-    static void __init kho_extend_scratch(void)
-    {
-    const struct kho_radix_walk_cb kho_cb = {
-    .leaf = kho_ext_walk_leaf,
-    .node = kho_ext_walk_node,
-    };
-    const struct kho_radix_walk_cb ext_cb = {
-    .leaf = kho_ext_mark_scratch,
-    };
-    static struct lock_class_key busy_radix_class;
-    struct kho_radix_tree busy_blocks;
-    let mut prev_end: phys_addr_t = 0;
-    let mut err: c_int = 0;
+unsafe extern "C" fn kho_extend_scratch()  {
+pub static mut kho_radix_walk_cb: usize = 0;
+pub static mut kho_radix_walk_cb: usize = 0;
+pub static mut busy_radix_class: usize = 0;
+pub static mut busy_blocks: usize = 0;
+pub static mut prev_end: phys_addr_t = 0;
+pub static mut err: c_int = 0;
     err = kho_radix_init_tree(&busy_blocks, core::ptr::null_mut());
-    if (err)
-    goto print;
+    if (err) {
+// goto;
+    }
 //
 // The walk of kho_in.radix_tree adds keys to busy_blocks. The walk
 // takes the kho_in radix tree lock and adding the key takes busy_blocks
@@ -926,21 +1160,25 @@ unsafe extern "C" fn kho_extend_scratch() -> void __init {
     lockdep_set_class(&busy_blocks.lock, &busy_radix_class);
 // Walk the KHO radix tree to find busy blocks.
     err = kho_radix_walk_tree(&kho_in.radix_tree, &kho_cb, &busy_blocks);
-    if (err)
-    goto out;
+    if (err) {
+// goto;
+    }
 // Walk the busy blocks and mark everything between keys as scratch.
     err = kho_radix_walk_tree(&busy_blocks, &ext_cb, &prev_end);
-    if (err)
-    goto out;
+    if (err) {
+// goto;
+    }
 // Mark everything from last busy block to end of DRAM.
-    if (prev_end < memblock_end_of_DRAM())
+    if (prev_end < memblock_end_of_DRAM()) {
     err = memblock_mark_kho_scratch(prev_end, memblock_end_of_DRAM() - prev_end);
+    }
 // fallthrough
-    out:
+// label;
     kho_radix_destroy_tree(&busy_blocks);
-    print:
-    if (err)
-    pr_err("Failed to extend scratch: %pe\n", ERR_PTR(err));
+// label;
+    if (err) {
+    pr_err!("Failed to extend scratch: %pe\n", ERR_PTR(err));
+    }
     }
 //
 // kho_add_subtree - record the physical address of a sub blob in KHO root tree.
@@ -960,61 +1198,64 @@ unsafe extern "C" fn kho_extend_scratch() -> void __init {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kho_add_subtree(name: *const c_char, blob: *mut c_void, size: usize) -> c_int {
-    int kho_add_subtree(const char *name, void *blob, size_t size)
-    {
-    let mut phys: phys_addr_t = virt_to_phys(blob);
-    void *root_fdt = kho_out.fdt;
-    let mut size_u64: u64 = size;
-    let mut err: c_int = -ENOMEM;
-    int off, fdt_err;
+pub static mut phys: phys_addr_t = 0;
+    let mut root_fdt = kho_out.fdt;
+pub static mut size_u64: u64 = 0;
+pub static mut err: c_int = 0;
+    let mut off = 0;
+    let mut fdt_err = 0;
     guard(mutex)(&kho_out.lock);
     fdt_err = fdt_open_into(root_fdt, root_fdt, PAGE_SIZE);
-    if (fdt_err < 0)
+    if (fdt_err < 0) {
     return err;
+    }
     off = fdt_add_subnode(root_fdt, 0, name);
     if (off < 0) {
-    if (off == -FDT_ERR_EXISTS)
+    if (off == -FDT_ERR_EXISTS) {
     err = -EEXIST;
-    goto out_pack;
+    }
+// goto;
     }
     fdt_err = fdt_setprop(root_fdt, off, KHO_SUB_TREE_PROP_NAME,
-    &phys, sizeof(phys));
-    if (fdt_err < 0)
-    goto out_del_node;
+    &phys, sizeof!(phys));
+    if (fdt_err < 0) {
+// goto;
+    }
     fdt_err = fdt_setprop(root_fdt, off, KHO_SUB_TREE_SIZE_PROP_NAME,
-    &size_u64, sizeof(size_u64));
-    if (fdt_err < 0)
-    goto out_del_node;
-    WARN_ON_ONCE(kho_debugfs_blob_add(&kho_out.dbg, name, blob,
+    &size_u64, sizeof!(size_u64));
+    if (fdt_err < 0) {
+// goto;
+    }
+    WARN_ON_ONCE!(kho_debugfs_blob_add(&kho_out.dbg, name, blob,
     size, false));
     err = 0;
-    goto out_pack;
-    out_del_node:
+// goto;
+// label;
     fdt_del_node(root_fdt, off);
-    out_pack:
+// label;
     fdt_pack(root_fdt);
     return err;
     }
     EXPORT_SYMBOL_GPL(kho_add_subtree);
 #[no_mangle]
 pub unsafe extern "C" fn kho_remove_subtree(blob: *mut c_void) {
-    void kho_remove_subtree(void *blob)
-    {
-    let mut target_phys: phys_addr_t = virt_to_phys(blob);
-    void *root_fdt = kho_out.fdt;
-    int off;
-    int err;
+pub static mut target_phys: phys_addr_t = 0;
+    let mut root_fdt = kho_out.fdt;
+    let mut off = 0;
+    let mut err = 0;
     guard(mutex)(&kho_out.lock);
     err = fdt_open_into(root_fdt, root_fdt, PAGE_SIZE);
-    if (err < 0)
+    if (err < 0) {
     return;
+    }
     for (off = fdt_first_subnode(root_fdt, 0); off >= 0;
     off = fdt_next_subnode(root_fdt, off)) {
-    const u64 *val;
-    int len;
+pub static mut val: *mut c_void = core::ptr::null_mut();
+    let mut len = 0;
     val = fdt_getprop(root_fdt, off, KHO_SUB_TREE_PROP_NAME, &len);
-    if (!val || len != sizeof(phys_addr_t))
+    if (!val || len != sizeof!(phys_addr_t)) {
     continue;
+    }
     if ((phys_addr_t)*val == target_phys) {
     fdt_del_node(root_fdt, off);
     kho_debugfs_blob_remove(&kho_out.dbg, blob);
@@ -1035,14 +1276,13 @@ pub unsafe extern "C" fn kho_remove_subtree(blob: *mut c_void) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kho_preserve_folio(folio: *mut folio) -> c_int {
-    int kho_preserve_folio(struct folio *folio)
-    {
-    struct kho_radix_tree *tree = &kho_out.radix_tree;
-    let mut pfn: c_ulong = folio_pfn(folio);
-    let mut order: c_uint = folio_order(folio);
-    if (IS_ENABLED(CONFIG_KEXEC_HANDOVER_DEBUG) &&
-    WARN_ON(kho_scratch_overlap(pfn << PAGE_SHIFT, PAGE_SIZE << order)))
+    let mut tree = &kho_out.radix_tree;
+pub static mut pfn: c_ulong = 0;
+pub static mut order: c_uint = 0;
+    if (IS_ENABLED!(CONFIG_KEXEC_HANDOVER_DEBUG) &&
+    WARN_ON!(kho_scratch_overlap(pfn << PAGE_SHIFT, PAGE_SIZE << order))) {
     return -EINVAL;
+    }
     return kho_radix_add_key(tree, kho_encode_radix_key(PFN_PHYS(pfn),
     order));
     }
@@ -1057,32 +1297,29 @@ pub unsafe extern "C" fn kho_preserve_folio(folio: *mut folio) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kho_unpreserve_folio(folio: *mut folio) {
-    void kho_unpreserve_folio(struct folio *folio)
-    {
-    struct kho_radix_tree *tree = &kho_out.radix_tree;
-    let mut pfn: c_ulong = folio_pfn(folio);
-    let mut order: c_uint = folio_order(folio);
+    let mut tree = &kho_out.radix_tree;
+pub static mut pfn: c_ulong = 0;
+pub static mut order: c_uint = 0;
     kho_radix_del_key(tree, kho_encode_radix_key(PFN_PHYS(pfn), order));
     }
     EXPORT_SYMBOL_GPL(kho_unpreserve_folio);
-    static unsigned int __kho_preserve_pages_order(unsigned long start_pfn,
-    unsigned long end_pfn)
-    {
-    unsigned int order = min(count_trailing_zeros(start_pfn),
+#[no_mangle]
+pub unsafe extern "C" fn __kho_preserve_pages_order(start_pfn: c_ulong, end_pfn: c_ulong) -> c_uint {
+    let mut order = min(count_trailing_zeros(start_pfn),
     ilog2(end_pfn - start_pfn));
 //
 // Make sure all the pages in a single preservation are in the same NUMA
 // node. The restore machinery can not cope with a preservation spanning
 // multiple NUMA nodes.
 //
-    while (pfn_to_nid(start_pfn) != pfn_to_nid(start_pfn + (1UL << order) - 1))
-    order--;
+    while (pfn_to_nid(start_pfn) != pfn_to_nid(start_pfn + (1UL << order) - 1)) {
+    order -= 1;
+    }
     return order;
     }
-    static void __kho_unpreserve(struct kho_radix_tree *tree,
-    unsigned long pfn, unsigned long end_pfn)
-    {
-    unsigned int order;
+#[no_mangle]
+pub unsafe extern "C" fn __kho_unpreserve(tree: *mut kho_radix_tree, pfn: c_ulong, end_pfn: c_ulong) {
+    let mut order = 0;
     while (pfn < end_pfn) {
     order = __kho_preserve_pages_order(pfn, end_pfn);
     kho_radix_del_key(tree, kho_encode_radix_key(PFN_PHYS(pfn),
@@ -1102,21 +1339,19 @@ pub unsafe extern "C" fn kho_unpreserve_folio(folio: *mut folio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kho_preserve_pages(page: *mut page, nr_pages: c_ulong) -> c_int {
-    int kho_preserve_pages(struct page *page, unsigned long nr_pages)
-    {
-    struct kho_radix_tree *tree = &kho_out.radix_tree;
-    let mut start_pfn: c_ulong = page_to_pfn(page);
-    let mut end_pfn: c_ulong = start_pfn + nr_pages;
-    let mut pfn: c_ulong = start_pfn;
-    let mut failed_pfn: c_ulong = 0;
-    let mut err: c_int = 0;
-    if (IS_ENABLED(CONFIG_KEXEC_HANDOVER_DEBUG) &&
-    WARN_ON(kho_scratch_overlap(start_pfn << PAGE_SHIFT,
+    let mut tree = &kho_out.radix_tree;
+pub static mut start_pfn: c_ulong = 0;
+pub static mut end_pfn: c_ulong = 0;
+pub static mut pfn: c_ulong = 0;
+pub static mut failed_pfn: c_ulong = 0;
+pub static mut err: c_int = 0;
+    if (IS_ENABLED!(CONFIG_KEXEC_HANDOVER_DEBUG) &&
+    WARN_ON!(kho_scratch_overlap(start_pfn << PAGE_SHIFT,
     nr_pages << PAGE_SHIFT))) {
     return -EINVAL;
     }
     while (pfn < end_pfn) {
-    let mut order: c_uint = __kho_preserve_pages_order(pfn, end_pfn);
+pub static mut order: c_uint = 0;
     err = kho_radix_add_key(tree, kho_encode_radix_key(PFN_PHYS(pfn),
     order));
     if (err) {
@@ -1125,8 +1360,9 @@ pub unsafe extern "C" fn kho_preserve_pages(page: *mut page, nr_pages: c_ulong) 
     }
     pfn += 1 << order;
     }
-    if (err)
+    if (err) {
     __kho_unpreserve(tree, start_pfn, failed_pfn);
+    }
     return err;
     }
     EXPORT_SYMBOL_GPL(kho_preserve_pages);
@@ -1142,11 +1378,9 @@ pub unsafe extern "C" fn kho_preserve_pages(page: *mut page, nr_pages: c_ulong) 
 //
 #[no_mangle]
 pub unsafe extern "C" fn kho_unpreserve_pages(page: *mut page, nr_pages: c_ulong) {
-    void kho_unpreserve_pages(struct page *page, unsigned long nr_pages)
-    {
-    struct kho_radix_tree *tree = &kho_out.radix_tree;
-    let mut start_pfn: c_ulong = page_to_pfn(page);
-    let mut end_pfn: c_ulong = start_pfn + nr_pages;
+    let mut tree = &kho_out.radix_tree;
+pub static mut start_pfn: c_ulong = 0;
+pub static mut end_pfn: c_ulong = 0;
     __kho_unpreserve(tree, start_pfn, end_pfn);
     }
     EXPORT_SYMBOL_GPL(kho_unpreserve_pages);
@@ -1157,50 +1391,52 @@ pub const KHO_VMALLOC_ALLOC: c_uint = 0x0001;
 pub const KHO_VMALLOC_HUGE_VMAP: c_uint = 0x0002;
 #[no_mangle]
 unsafe extern "C" fn vmalloc_flags_to_kho(vm_flags: c_uint) -> c_ushort {
-    static unsigned short vmalloc_flags_to_kho(unsigned int vm_flags)
-    {
-    let mut kho_flags: c_ushort = 0;
-    if (vm_flags & VM_ALLOC)
+pub static mut kho_flags: c_ushort = 0;
+    if (vm_flags & VM_ALLOC) {
     kho_flags |= KHO_VMALLOC_ALLOC;
-    if (vm_flags & VM_ALLOW_HUGE_VMAP)
+    }
+    if (vm_flags & VM_ALLOW_HUGE_VMAP) {
     kho_flags |= KHO_VMALLOC_HUGE_VMAP;
+    }
     return kho_flags;
     }
 #[no_mangle]
 unsafe extern "C" fn kho_flags_to_vmalloc(kho_flags: c_ushort) -> c_uint {
-    static unsigned int kho_flags_to_vmalloc(unsigned short kho_flags)
-    {
-    let mut vm_flags: c_uint = 0;
-    if (kho_flags & KHO_VMALLOC_ALLOC)
+pub static mut vm_flags: c_uint = 0;
+    if (kho_flags & KHO_VMALLOC_ALLOC) {
     vm_flags |= VM_ALLOC;
-    if (kho_flags & KHO_VMALLOC_HUGE_VMAP)
+    }
+    if (kho_flags & KHO_VMALLOC_HUGE_VMAP) {
     vm_flags |= VM_ALLOW_HUGE_VMAP;
+    }
     return vm_flags;
     }
-    static struct kho_vmalloc_chunk *new_vmalloc_chunk(struct kho_vmalloc_chunk *cur)
-    {
-    struct kho_vmalloc_chunk *chunk;
-    int err;
-    chunk = (struct kho_vmalloc_chunk *)get_zeroed_page(GFP_KERNEL);
-    if (!chunk)
+#[no_mangle]
+pub unsafe extern "C" fn new_vmalloc_chunk(cur: *mut kho_vmalloc_chunk) -> *mut c_void {
+pub static mut chunk: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
+    chunk = get_zeroed_page(GFP_KERNEL);
+    if (!chunk) {
     return core::ptr::null_mut();
+    }
     err = kho_preserve_pages(virt_to_page(chunk), 1);
-    if (err)
-    goto err_free;
-    if (cur)
+    if (err) {
+// goto;
+    }
+    if (cur) {
     KHOSER_STORE_PTR(cur.hdr.next, chunk);
+    }
     return chunk;
-    err_free:
+// label;
     free_page((unsigned long)chunk);
     return core::ptr::null_mut();
     }
-    static void kho_vmalloc_unpreserve_chunk(struct kho_vmalloc_chunk *chunk,
-    unsigned short order)
-    {
-    struct kho_radix_tree *tree = &kho_out.radix_tree;
-    let mut pfn: c_ulong = PHYS_PFN(virt_to_phys(chunk));
+#[no_mangle]
+pub unsafe extern "C" fn kho_vmalloc_unpreserve_chunk(chunk: *mut kho_vmalloc_chunk, order: c_ushort) {
+    let mut tree = &kho_out.radix_tree;
+pub static mut pfn: c_ulong = 0;
     __kho_unpreserve(tree, pfn, pfn + 1);
-    for (int i = 0; i < ARRAY_SIZE(chunk.phys) && chunk.phys[i]; i++) {
+    while (i < ARRAY_SIZE!(chunk.phys) && chunk.phys[i]) {
     pfn = PHYS_PFN(chunk.phys[i]);
     __kho_unpreserve(tree, pfn, pfn + (1 << order));
     }
@@ -1222,35 +1458,39 @@ unsafe extern "C" fn kho_flags_to_vmalloc(kho_flags: c_ushort) -> c_uint {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kho_preserve_vmalloc(ptr: *mut c_void, preservation: *mut kho_vmalloc) -> c_int {
-    int kho_preserve_vmalloc(void *ptr, struct kho_vmalloc *preservation)
-    {
-    struct kho_vmalloc_chunk *chunk;
-    struct vm_struct *vm = find_vm_area(ptr);
-    unsigned int order, flags, nr_contig_pages;
-    let mut idx: c_uint = 0;
-    int err;
-    if (!vm)
+pub static mut chunk: *mut c_void = core::ptr::null_mut();
+    let mut vm = find_vm_area(ptr);
+    let mut order = 0;
+    let mut flags = 0;
+    let mut nr_contig_pages = 0;
+pub static mut idx: c_uint = 0;
+    let mut err = 0;
+    if (!vm) {
     return -EINVAL;
-    if (vm.flags & ~KHO_VMALLOC_SUPPORTED_FLAGS)
+    }
+    if (vm.flags & ~KHO_VMALLOC_SUPPORTED_FLAGS) {
     return -EOPNOTSUPP;
+    }
     flags = vmalloc_flags_to_kho(vm.flags);
     order = get_vm_area_page_order(vm);
     chunk = new_vmalloc_chunk(core::ptr::null_mut());
-    if (!chunk)
+    if (!chunk) {
     return -ENOMEM;
+    }
     KHOSER_STORE_PTR(preservation.first, chunk);
     nr_contig_pages = (1 << order);
-    for (int i = 0; i < vm.nr_pages; i += nr_contig_pages) {
-    let mut phys: phys_addr_t = page_to_phys(vm.pages[i]);
+    while (i < vm.nr_pages) {
+pub static mut phys: phys_addr_t = 0;
     err = kho_preserve_pages(vm.pages[i], nr_contig_pages);
-    if (err)
-    goto err_free;
+    if (err) {
+// goto;
+    }
     chunk.phys[idx++] = phys;
-    if (idx == ARRAY_SIZE(chunk.phys)) {
+    if (idx == ARRAY_SIZE!(chunk.phys)) {
     chunk = new_vmalloc_chunk(chunk);
     if (!chunk) {
     err = -ENOMEM;
-    goto err_free;
+// goto;
     }
     idx = 0;
     }
@@ -1259,7 +1499,7 @@ pub unsafe extern "C" fn kho_preserve_vmalloc(ptr: *mut c_void, preservation: *m
     preservation.flags = flags;
     preservation.order = order;
     return 0;
-    err_free:
+// label;
     kho_unpreserve_vmalloc(preservation);
     return err;
     }
@@ -1273,11 +1513,9 @@ pub unsafe extern "C" fn kho_preserve_vmalloc(ptr: *mut c_void, preservation: *m
 //
 #[no_mangle]
 pub unsafe extern "C" fn kho_unpreserve_vmalloc(preservation: *mut kho_vmalloc) {
-    void kho_unpreserve_vmalloc(struct kho_vmalloc *preservation)
-    {
-    struct kho_vmalloc_chunk *chunk = KHOSER_LOAD_PTR(preservation.first);
+    let mut chunk = KHOSER_LOAD_PTR(preservation.first);
     while (chunk) {
-    struct kho_vmalloc_chunk *tmp = chunk;
+    let mut tmp = chunk;
     kho_vmalloc_unpreserve_chunk(chunk, preservation.order);
     chunk = KHOSER_LOAD_PTR(chunk.hdr.next);
     free_page((unsigned long)tmp);
@@ -1294,72 +1532,85 @@ pub unsafe extern "C" fn kho_unpreserve_vmalloc(preservation: *mut kho_vmalloc) 
 //
 // Return: pointer to the area in the vmalloc address space, NULL on failure.
 //
-    void *kho_restore_vmalloc(const struct kho_vmalloc *preservation)
-    {
-    struct kho_vmalloc_chunk *chunk = KHOSER_LOAD_PTR(preservation.first);
-    let mut kasan_flags: kasan_vmalloc_flags_t = KASAN_VMALLOC_PROT_NORMAL;
-    unsigned int align, order, shift, vm_flags;
+#[no_mangle]
+pub unsafe extern "C" fn kho_restore_vmalloc(preservation: *mut kho_vmalloc) -> *mut c_void {
+    let mut chunk = KHOSER_LOAD_PTR(preservation.first);
+pub static mut kasan_flags: kasan_vmalloc_flags_t = 0;
+    let mut align = 0;
+    let mut order = 0;
+    let mut shift = 0;
+    let mut vm_flags = 0;
     unsigned long total_pages, contig_pages;
     unsigned long addr, size;
-    struct vm_struct *area;
-    struct page **pages;
-    let mut idx: c_uint = 0;
-    int err;
+pub static mut area: *mut c_void = core::ptr::null_mut();
+pub static mut pages: *mut c_void = core::ptr::null_mut();
+pub static mut idx: c_uint = 0;
+    let mut err = 0;
     vm_flags = kho_flags_to_vmalloc(preservation.flags);
-    if (vm_flags & ~KHO_VMALLOC_SUPPORTED_FLAGS)
+    if (vm_flags & ~KHO_VMALLOC_SUPPORTED_FLAGS) {
     return core::ptr::null_mut();
+    }
     total_pages = preservation.total_pages;
     pages = kvmalloc_objs(*pages, total_pages);
-    if (!pages)
+    if (!pages) {
     return core::ptr::null_mut();
+    }
     order = preservation.order;
     contig_pages = (1 << order);
     shift = PAGE_SHIFT + order;
     align = 1 << shift;
     while (chunk) {
-    struct page *page;
-    for (int i = 0; i < ARRAY_SIZE(chunk.phys) && chunk.phys[i]; i++) {
-    let mut phys: phys_addr_t = chunk.phys[i];
-    if (idx + contig_pages > total_pages)
-    goto err_free_pages_array;
+pub static mut page: *mut c_void = core::ptr::null_mut();
+    while (i < ARRAY_SIZE!(chunk.phys) && chunk.phys[i]) {
+pub static mut phys: phys_addr_t = 0;
+    if (idx + contig_pages > total_pages) {
+// goto;
+    }
     page = kho_restore_pages(phys, contig_pages);
-    if (!page)
-    goto err_free_pages_array;
-    for (int j = 0; j < contig_pages; j++)
+    if (!page) {
+// goto;
+    }
+    for (int j = 0; j < contig_pages; j++) {
     pages[idx++] = page + j;
+    }
     phys += contig_pages * PAGE_SIZE;
     }
     page = kho_restore_pages(virt_to_phys(chunk), 1);
-    if (!page)
-    goto err_free_pages_array;
+    if (!page) {
+// goto;
+    }
     chunk = KHOSER_LOAD_PTR(chunk.hdr.next);
     __free_page(page);
     }
-    if (idx != total_pages)
-    goto err_free_pages_array;
+    if (idx != total_pages) {
+// goto;
+    }
     area = __get_vm_area_node(total_pages * PAGE_SIZE, align, shift,
     vm_flags | VM_UNINITIALIZED,
     VMALLOC_START, VMALLOC_END,
     NUMA_NO_NODE, GFP_KERNEL,
     __builtin_return_address(0));
-    if (!area)
-    goto err_free_pages_array;
+    if (!area) {
+// goto;
+    }
     addr = (unsigned long)area.addr;
     size = get_vm_area_size(area);
     err = vmap_pages_range(addr, addr + size, PAGE_KERNEL, pages, shift);
-    if (err)
-    goto err_free_vm_area;
+    if (err) {
+// goto;
+    }
     area.nr_pages = total_pages;
     area.pages = pages;
-    if (vm_flags & VM_ALLOC)
+    if (vm_flags & VM_ALLOC) {
     kasan_flags |= KASAN_VMALLOC_VM_ALLOC;
+    }
     area.addr = kasan_unpoison_vmalloc(area.addr, total_pages * PAGE_SIZE,
     kasan_flags);
     clear_vm_uninitialized_flag(area);
     return area.addr;
-    err_free_vm_area:
+// label;
     free_vm_area(area);
-    err_free_pages_array:
+// label;
     kvfree(pages);
     return core::ptr::null_mut();
     }
@@ -1378,18 +1629,22 @@ pub unsafe extern "C" fn kho_unpreserve_vmalloc(preservation: *mut kho_vmalloc) 
 // @return A virtual pointer to the allocated and preserved memory on success,
 // or an ERR_PTR() encoded error on failure.
 //
-    void *kho_alloc_preserve(size_t size)
-    {
-    struct folio *folio;
-    int order, ret;
-    if (!size)
+#[no_mangle]
+pub unsafe extern "C" fn kho_alloc_preserve(size: size_t) -> *mut c_void {
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut order = 0;
+    let mut ret = 0;
+    if (!size) {
     return ERR_PTR(-EINVAL);
+    }
     order = get_order(size);
-    if (order > MAX_PAGE_ORDER)
+    if (order > MAX_PAGE_ORDER) {
     return ERR_PTR(-E2BIG);
+    }
     folio = folio_alloc(GFP_KERNEL | __GFP_ZERO, order);
-    if (!folio)
+    if (!folio) {
     return ERR_PTR(-ENOMEM);
+    }
     ret = kho_preserve_folio(folio);
     if (ret) {
     folio_put(folio);
@@ -1408,11 +1663,10 @@ pub unsafe extern "C" fn kho_unpreserve_vmalloc(preservation: *mut kho_vmalloc) 
 //
 #[no_mangle]
 pub unsafe extern "C" fn kho_unpreserve_free(mem: *mut c_void) {
-    void kho_unpreserve_free(void *mem)
-    {
-    struct folio *folio;
-    if (!mem)
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    if (!mem) {
     return;
+    }
     folio = virt_to_folio(mem);
     kho_unpreserve_folio(folio);
     folio_put(folio);
@@ -1432,14 +1686,14 @@ pub unsafe extern "C" fn kho_unpreserve_free(mem: *mut c_void) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kho_restore_free(mem: *mut c_void) {
-    void kho_restore_free(void *mem)
-    {
-    struct folio *folio;
-    if (!mem)
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    if (!mem) {
     return;
+    }
     folio = kho_restore_folio(__pa(mem));
-    if (!WARN_ON(!folio))
+    if (!WARN_ON!(!folio)) {
     folio_put(folio);
+    }
     }
     EXPORT_SYMBOL_GPL(kho_restore_free);
 //
@@ -1458,8 +1712,6 @@ pub unsafe extern "C" fn kho_restore_free(mem: *mut c_void) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn is_kho_boot() -> bool {
-    bool is_kho_boot(void)
-    {
     return !!kho_get_fdt();
     }
     EXPORT_SYMBOL_GPL(is_kho_boot);
@@ -1476,44 +1728,45 @@ pub unsafe extern "C" fn is_kho_boot() -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kho_retrieve_subtree(name: *const c_char, phys: *mut phys_addr_t, size: *mut usize) -> c_int {
-    int kho_retrieve_subtree(const char *name, phys_addr_t *phys, size_t *size)
-    {
-    const void *fdt = kho_get_fdt();
-    const u64 *val;
-    int offset, len;
-    if (!fdt)
+    let mut fdt = kho_get_fdt();
+pub static mut val: *mut c_void = core::ptr::null_mut();
+    let mut offset = 0;
+    let mut len = 0;
+    if (!fdt) {
     return -ENOENT;
-    if (!phys)
+    }
+    if (!phys) {
     return -EINVAL;
+    }
     offset = fdt_subnode_offset(fdt, 0, name);
-    if (offset < 0)
+    if (offset < 0) {
     return -ENOENT;
+    }
     val = fdt_getprop(fdt, offset, KHO_SUB_TREE_PROP_NAME, &len);
-    if (!val || len != sizeof(*val))
+    if (!val || len != sizeof!(*val)) {
     return -EINVAL;
+    }
 // phys = (phys_addr_t)*val;
     val = fdt_getprop(fdt, offset, KHO_SUB_TREE_SIZE_PROP_NAME, &len);
-    if (!val || len != sizeof(*val)) {
-    pr_warn("broken KHO subnode '%s': missing or invalid blob-size property\n",
+    if (!val || len != sizeof!(*val)) {
+    pr_warn!("broken KHO subnode '%s': missing or invalid blob-size property\n",
     name);
     return -EINVAL;
     }
-    if (size)
+    if (size) {
 // size = (size_t)*val;
+    }
     return 0;
     }
     EXPORT_SYMBOL_GPL(kho_retrieve_subtree);
 #[no_mangle]
-unsafe extern "C" fn kho_mem_retrieve() -> void __init {
-    static void __init kho_mem_retrieve(void)
-    {
-    const struct kho_radix_walk_cb cb = {
-    .leaf = kho_preserved_memory_reserve,
-    };
-    if (kho_radix_walk_tree(&kho_in.radix_tree, &cb, core::ptr::null_mut()))
-    goto err;
+unsafe extern "C" fn kho_mem_retrieve()  {
+pub static mut kho_radix_walk_cb: usize = 0;
+    if (kho_radix_walk_tree(&kho_in.radix_tree, &cb, core::ptr::null_mut())) {
+// goto;
+    }
     return;
-    err:
+// label;
 //
 // Failed to initialize preserved memory. Clear FDT and radix so KHO
 // users don't treat it as a KHO boot.
@@ -1523,12 +1776,10 @@ unsafe extern "C" fn kho_mem_retrieve() -> void __init {
     }
 #[no_mangle]
 unsafe extern "C" fn kho_out_fdt_setup() -> __init int {
-    static __init int kho_out_fdt_setup(void)
-    {
-    struct kho_radix_tree *tree = &kho_out.radix_tree;
-    void *root = kho_out.fdt;
-    u64 preserved_mem_tree_pa;
-    int err;
+    let mut tree = &kho_out.radix_tree;
+    let mut root = kho_out.fdt;
+    let mut preserved_mem_tree_pa = 0;
+    let mut err = 0;
     err = fdt_create(root, PAGE_SIZE);
     err |= fdt_finish_reservemap(root);
     err |= fdt_begin_node(root, "");
@@ -1536,39 +1787,38 @@ unsafe extern "C" fn kho_out_fdt_setup() -> __init int {
     preserved_mem_tree_pa = virt_to_phys(tree.root);
     err |= fdt_property(root, KHO_FDT_MEMORY_MAP_PROP_NAME,
     &preserved_mem_tree_pa,
-    sizeof(preserved_mem_tree_pa));
+    sizeof!(preserved_mem_tree_pa));
     err |= fdt_end_node(root);
     err |= fdt_finish(root);
     return err;
     }
 #[no_mangle]
-unsafe extern "C" fn kho_in_kexec_metadata() -> void __init {
-    static void __init kho_in_kexec_metadata(void)
-    {
-    struct kho_kexec_metadata *metadata;
-    phys_addr_t metadata_phys;
-    size_t blob_size;
-    int err;
+unsafe extern "C" fn kho_in_kexec_metadata()  {
+pub static mut metadata: *mut c_void = core::ptr::null_mut();
+    let mut metadata_phys;
+    let mut blob_size = 0;
+    let mut err = 0;
     err = kho_retrieve_subtree(KHO_METADATA_NODE_NAME, &metadata_phys,
     &blob_size);
-    if (err)
+    if (err) {
 // This is fine, previous kernel didn't export metadata
     return;
+    }
 // Check that, at least, "version" is present
-    if (blob_size < sizeof(u32)) {
-    pr_warn("kexec-metadata blob too small (%zu bytes)\n",
+    if (blob_size < sizeof!(u32)) {
+    pr_warn!("kexec-metadata blob too small (%zu bytes)\n",
     blob_size);
     return;
     }
     metadata = phys_to_virt(metadata_phys);
     if (metadata.version != KHO_KEXEC_METADATA_VERSION) {
-    pr_warn("kexec-metadata version %u not supported (expected %u)\n",
+    pr_warn!("kexec-metadata version %u not supported (expected %u)\n",
     metadata.version, KHO_KEXEC_METADATA_VERSION);
     return;
     }
-    if (blob_size < sizeof(*metadata)) {
-    pr_warn("kexec-metadata blob too small for v%u (%zu < %zu)\n",
-    metadata.version, blob_size, sizeof(*metadata));
+    if (blob_size < sizeof!(*metadata)) {
+    pr_warn!("kexec-metadata blob too small for v%u (%zu < %zu)\n",
+    metadata.version, blob_size, sizeof!(*metadata));
     return;
     }
 //
@@ -1577,8 +1827,8 @@ unsafe extern "C" fn kho_in_kexec_metadata() -> void __init {
 //
     kho_in.kexec_count = metadata.kexec_count;
     strscpy(kho_in.previous_release, metadata.previous_release,
-    sizeof(kho_in.previous_release));
-    pr_info("exec from: %s (count %u)\n",
+    sizeof!(kho_in.previous_release));
+    pr_info!("exec from: %s (count %u)\n",
     kho_in.previous_release, kho_in.kexec_count);
     }
 //
@@ -1588,75 +1838,79 @@ unsafe extern "C" fn kho_in_kexec_metadata() -> void __init {
 //
 #[no_mangle]
 unsafe extern "C" fn kho_out_kexec_metadata() -> __init int {
-    static __init int kho_out_kexec_metadata(void)
-    {
-    struct kho_kexec_metadata *metadata;
-    int err;
-    metadata = kho_alloc_preserve(sizeof(*metadata));
-    if (IS_ERR(metadata))
+pub static mut metadata: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
+    metadata = kho_alloc_preserve(sizeof!(*metadata));
+    if (IS_ERR(metadata)) {
     return PTR_ERR(metadata);
+    }
     metadata.version = KHO_KEXEC_METADATA_VERSION;
     strscpy(metadata.previous_release, init_uts_ns.name.release,
-    sizeof(metadata.previous_release));
+    sizeof!(metadata.previous_release));
 // kho_in.kexec_count is set to 0 on cold boot
     metadata.kexec_count = kho_in.kexec_count + 1;
     err = kho_add_subtree(KHO_METADATA_NODE_NAME, metadata,
-    sizeof(*metadata));
-    if (err)
+    sizeof!(*metadata));
+    if (err) {
     kho_unpreserve_free(metadata);
+    }
     return err;
     }
 #[no_mangle]
-unsafe extern "C" fn kho_kexec_metadata_init(fdt: *const c_void) -> int __init {
-    static int __init kho_kexec_metadata_init(const void *fdt)
-    {
-    int err;
-    if (fdt)
+unsafe extern "C" fn kho_kexec_metadata_init(fdt: *const c_void) -> c_int {
+    let mut err = 0;
+    if (fdt) {
     kho_in_kexec_metadata();
+    }
 // Populate kexec metadata for the possible next kexec
     err = kho_out_kexec_metadata();
-    if (err)
-    pr_warn("failed to initialize kexec-metadata subtree: %d\n",
+    if (err) {
+    pr_warn!("failed to initialize kexec-metadata subtree: %d\n",
     err);
+    }
     return err;
     }
 #[no_mangle]
 unsafe extern "C" fn kho_init() -> __init int {
-    static __init int kho_init(void)
-    {
-    struct kho_radix_tree *tree = &kho_out.radix_tree;
-    const void *fdt = kho_get_fdt();
-    let mut err: c_int = 0;
-    if (!kho_enable)
+    let mut tree = &kho_out.radix_tree;
+    let mut fdt = kho_get_fdt();
+pub static mut err: c_int = 0;
+    if (!kho_enable) {
     return 0;
+    }
     err = kho_radix_init_tree(tree, core::ptr::null_mut());
-    if (err)
-    goto err_free_scratch;
+    if (err) {
+// goto;
+    }
     kho_out.fdt = kho_alloc_preserve(PAGE_SIZE);
     if (IS_ERR(kho_out.fdt)) {
     err = PTR_ERR(kho_out.fdt);
-    goto err_free_kho_radix_tree;
+// goto;
     }
     err = kho_debugfs_init();
-    if (err)
-    goto err_free_fdt;
+    if (err) {
+// goto;
+    }
     err = kho_out_debugfs_init(&kho_out.dbg);
-    if (err)
-    goto err_free_fdt;
+    if (err) {
+// goto;
+    }
     err = kho_out_fdt_setup();
-    if (err)
-    goto err_free_fdt;
+    if (err) {
+// goto;
+    }
     err = kho_kexec_metadata_init(fdt);
-    if (err)
-    goto err_free_fdt;
+    if (err) {
+// goto;
+    }
     if (fdt) {
     kho_in_debugfs_init(&kho_in.dbg, fdt);
     return 0;
     }
-    for (int i = 0; i < kho_scratch_cnt; i++) {
-    let mut base_pfn: c_ulong = PHYS_PFN(kho_scratch[i].addr);
-    let mut count: c_ulong = kho_scratch[i].size >> PAGE_SHIFT;
-    unsigned long pfn;
+    while (i < kho_scratch_cnt) {
+pub static mut base_pfn: c_ulong = 0;
+pub static mut count: c_ulong = 0;
+    let mut pfn = 0;
 //
 // When debug_pagealloc is enabled, __free_pages() clears the
 // corresponding PRESENT bit in the kernel page table.
@@ -1667,55 +1921,57 @@ unsafe extern "C" fn kho_init() -> __init int {
 //
     kmemleak_ignore_phys(kho_scratch[i].addr);
     for (pfn = base_pfn; pfn < base_pfn + count;
-    pfn += pageblock_nr_pages)
+    pfn += pageblock_nr_pages) {
     init_cma_reserved_pageblock(pfn_to_page(pfn));
     }
-    WARN_ON_ONCE(kho_debugfs_blob_add(&kho_out.dbg, "fdt",
+    }
+    WARN_ON_ONCE!(kho_debugfs_blob_add(&kho_out.dbg, "fdt",
     kho_out.fdt,
     fdt_totalsize(kho_out.fdt), true));
     return 0;
-    err_free_fdt:
+// label;
     kho_unpreserve_free(kho_out.fdt);
-    err_free_kho_radix_tree:
+// label;
     kho_radix_destroy_tree(tree);
-    err_free_scratch:
+// label;
     kho_out.fdt = core::ptr::null_mut();
-    for (int i = 0; i < kho_scratch_cnt; i++) {
-    void *start = __va(kho_scratch[i].addr);
-    void *end = start + kho_scratch[i].size;
+    while (i < kho_scratch_cnt) {
+    let mut start = __va(kho_scratch[i].addr);
+    let mut end = start + kho_scratch[i].size;
     free_reserved_area(start, end, -1, "");
     }
     kho_enable = false;
     return err;
     }
-    fs_initcall(kho_init);
+    fs_initcall!(kho_init);
 #[no_mangle]
-pub unsafe extern "C" fn kho_memory_init_early() -> void __init {
-    void __init kho_memory_init_early(void)
-    {
-    const void *fdt = kho_get_fdt();
-    void *mem_map;
-    if (!is_kho_boot())
+pub unsafe extern "C" fn kho_memory_init_early()  {
+    let mut fdt = kho_get_fdt();
+pub static mut mem_map: *mut c_void = core::ptr::null_mut();
+    if (!is_kho_boot()) {
     return;
+    }
 //
 // kho_get_mem_map() should always succeed. If it fails, kho_populate()
 // catches that and never sets kho_in.scratch_phys, which stops memory
 // retrieval.
 //
     mem_map = kho_get_mem_map(fdt);
-    if (WARN_ON(!mem_map))
-    goto err;
+    if (WARN_ON!(!mem_map)) {
+// goto;
+    }
 //
 // kho_scratch_overlap() needs kho_scratch to be initialized. It
 // is used by free_area_init() on KHO boots, so initialize it
 // early.
 //
     kho_scratch = phys_to_virt(kho_in.scratch_phys);
-    if (kho_radix_init_tree(&kho_in.radix_tree, mem_map))
-    goto err;
+    if (kho_radix_init_tree(&kho_in.radix_tree, mem_map)) {
+// goto;
+    }
     kho_extend_scratch();
     return;
-    err:
+// label;
 //
 // Failed to initialize preserved memory radix tree. Clear FDT
 // and scratch so KHO users don't treat it as a KHO boot.
@@ -1724,66 +1980,67 @@ pub unsafe extern "C" fn kho_memory_init_early() -> void __init {
     kho_in.scratch_phys = 0;
     }
 #[no_mangle]
-pub unsafe extern "C" fn kho_memory_init() -> void __init {
-    void __init kho_memory_init(void)
-    {
-    if (kho_in.scratch_phys)
+pub unsafe extern "C" fn kho_memory_init()  {
+    if (kho_in.scratch_phys) {
     kho_mem_retrieve();
-    else
+    }
+    else {
     kho_reserve_scratch();
+    }
     }
     void __init kho_populate(phys_addr_t fdt_phys, u64 fdt_len,
     phys_addr_t scratch_phys, u64 scratch_len)
     {
-    let mut scratch_cnt: c_uint = scratch_len / sizeof(*kho_scratch);
-    struct kho_scratch *scratch = core::ptr::null_mut();
-    phys_addr_t mem_map_phys;
-    void *fdt = core::ptr::null_mut();
-    let mut populated: bool = false;
-    int err;
+pub static mut scratch_cnt: c_uint = 0;
+    let mut scratch = core::ptr::null_mut();
+    let mut mem_map_phys;
+    let mut fdt = core::ptr::null_mut();
+pub static mut populated: bool = false;
+    let mut err = 0;
 // Validate the input FDT
     fdt = early_memremap(fdt_phys, fdt_len);
     if (!fdt) {
-    pr_warn("setup: failed to memremap FDT (0x%llx)\n", fdt_phys);
-    goto report;
+    pr_warn!("setup: failed to memremap FDT (0x%llx)\n", fdt_phys);
+// goto;
     }
     err = fdt_check_header(fdt);
     if (err) {
-    pr_warn("setup: handover FDT (0x%llx) is invalid: %d\n",
+    pr_warn!("setup: handover FDT (0x%llx) is invalid: %d\n",
     fdt_phys, err);
-    goto unmap_fdt;
+// goto;
     }
     err = fdt_node_check_compatible(fdt, 0, KHO_FDT_COMPATIBLE);
     if (err) {
-    pr_warn("setup: handover FDT (0x%llx) is incompatible with '%s': %d\n",
+    pr_warn!("setup: handover FDT (0x%llx) is incompatible with '%s': %d\n",
     fdt_phys, KHO_FDT_COMPATIBLE, err);
-    goto unmap_fdt;
+// goto;
     }
     mem_map_phys = kho_get_mem_map_phys(fdt);
-    if (!mem_map_phys)
-    goto unmap_fdt;
+    if (!mem_map_phys) {
+// goto;
+    }
     scratch = early_memremap(scratch_phys, scratch_len);
     if (!scratch) {
-    pr_warn("setup: failed to memremap scratch (phys=0x%llx, len=%lld)\n",
+    pr_warn!("setup: failed to memremap scratch (phys=0x%llx, len=%lld)\n",
     scratch_phys, scratch_len);
-    goto unmap_fdt;
+// goto;
     }
 //
 // We pass a safe contiguous blocks of memory to use for early boot
 // purporses from the previous kernel so that we can resize the
 // memblock array as needed.
 //
-    for (int i = 0; i < scratch_cnt; i++) {
-    struct kho_scratch *area = &scratch[i];
-    let mut size: u64 = area.size;
+    while (i < scratch_cnt) {
+    let mut area = &scratch[i];
+pub static mut size: u64 = 0;
     memblock_add(area.addr, size);
     err = memblock_mark_kho_scratch(area.addr, size);
     if (err) {
-    pr_warn("failed to mark the scratch region 0x%pa+0x%pa: %pe",
+    pr_warn!("failed to mark the scratch region 0x%pa+0x%pa: %pe",
     &area.addr, &size, ERR_PTR(err));
-    goto unmap_scratch;
+// goto;
     }
-    pr_debug("Marked 0x%pa+0x%pa as scratch", &area.addr, &size);
+    pr_debug!("Marked 0x%pa+0x%pa as scratch", &area.addr, &size);
     }
     memblock_reserve(scratch_phys, scratch_len);
 //
@@ -1798,28 +2055,28 @@ pub unsafe extern "C" fn kho_memory_init() -> void __init {
     kho_in.scratch_phys = scratch_phys;
     kho_scratch_cnt = scratch_cnt;
     populated = true;
-    pr_info("found kexec handover data.\n");
-    unmap_scratch:
+    pr_info!("found kexec handover data.\n");
+// label;
     early_memunmap(scratch, scratch_len);
-    unmap_fdt:
+// label;
     early_memunmap(fdt, fdt_len);
-    report:
-    if (!populated)
-    pr_warn("disabling KHO revival\n");
+// label;
+    if (!populated) {
+    pr_warn!("disabling KHO revival\n");
+    }
     }
 // Helper functions for kexec_file_load
 #[no_mangle]
 pub unsafe extern "C" fn kho_fill_kimage(image: *mut kimage) -> c_int {
-    int kho_fill_kimage(struct kimage *image)
-    {
-    ssize_t scratch_size;
-    let mut err: c_int = 0;
-    struct kexec_buf scratch;
-    if (!kho_enable || image.type == KEXEC_TYPE_CRASH)
+    let mut scratch_size = 0;
+pub static mut err: c_int = 0;
+pub static mut scratch: usize = 0;
+    if (!kho_enable || image.type == KEXEC_TYPE_CRASH) {
     return 0;
+    }
     image.kho.fdt = virt_to_phys(kho_out.fdt);
-    scratch_size = sizeof(*kho_scratch) * kho_scratch_cnt;
-    scratch = (struct kexec_buf){
+    scratch_size = sizeof!(*kho_scratch) * kho_scratch_cnt;
+    scratch = (kexec_buf){
     .image = image,
     .buffer = kho_scratch,
     .bufsz = scratch_size,
@@ -1830,34 +2087,32 @@ pub unsafe extern "C" fn kho_fill_kimage(image: *mut kimage) -> c_int {
     .top_down = true,
     };
     err = kexec_add_buffer(&scratch);
-    if (err)
+    if (err) {
     return err;
+    }
     image.kho.scratch = &image.segment[image.nr_segments - 1];
     return 0;
     }
-    static int kho_walk_scratch(struct kexec_buf *kbuf,
-    int (*func)(struct resource *, void *))
-    {
-    let mut ret: c_int = 0;
-    int i;
-    for (i = 0; i < kho_scratch_cnt; i++) {
-    struct resource res = {
-    .start = kho_scratch[i].addr,
-    .end = kho_scratch[i].addr + kho_scratch[i].size - 1,
-    };
+#[no_mangle]
+pub unsafe extern "C" fn kho_walk_scratch(kbuf: *mut kexec_buf) -> c_int {
+pub static mut ret: c_int = 0;
+    let mut i = 0;
+    while (i < kho_scratch_cnt) {
+pub static mut resource: usize = 0;
 // Try to fit the kimage into our KHO scratch region
     ret = func(&res, kbuf);
-    if (ret)
+    if (ret) {
     break;
+    }
     }
     return ret;
     }
-    int kho_locate_mem_hole(struct kexec_buf *kbuf,
-    int (*func)(struct resource *, void *))
-    {
-    int ret;
-    if (!kho_enable || kbuf.image.type == KEXEC_TYPE_CRASH)
+#[no_mangle]
+pub unsafe extern "C" fn kho_locate_mem_hole(kbuf: *mut kexec_buf) -> c_int {
+    let mut ret = 0;
+    if (!kho_enable || kbuf.image.type == KEXEC_TYPE_CRASH) {
     return 1;
+    }
     ret = kho_walk_scratch(kbuf, func);
-    let mut ret: return = = 1 ? 0 : -EADDRNOTAVAIL;
+pub static mut ret: return = 0;
     }

@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -44,14 +294,14 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct disk_events {
-    pub /: *mut *mut list_head node; / all disk_event's,
-    pub /: *mut *mut *mut gendisk disk; / the associated disk,
+//     pub /: *mut *mut list_head node; / all disk_event's,
+//     pub /: *mut *mut *mut gendisk disk; / the associated disk,
     pub lock: spinlock_t,
-    pub /: *mut *mut mutex block_mutex; / protects blocking,
-    pub /: *mut *mut int block; / event blocking depth,
-    pub /: *mut *mut unsigned int pending; / events already sent out,
-    pub /: *mut *mut unsigned int clearing; / events being cleared,
-    pub /: *mut *mut long poll_msecs; / interval, -1 for default,
+//     pub /: *mut *mut mutex block_mutex; / protects blocking,
+//     pub /: *mut *mut int block; / event blocking depth,
+//     pub /: *mut *mut unsigned int pending; / events already sent out,
+//     pub /: *mut *mut unsigned int clearing; / events being cleared,
+//     pub /: *mut *mut long poll_msecs; / interval, -1 for default,
     pub dwork: delayed_work,
 }
 
@@ -64,26 +314,25 @@ pub struct disk_events {
     [ilog2(DISK_EVENT_EJECT_REQUEST)]	= "DISK_EJECT_REQUEST=1",
     };
 // list of all disk_events
-    static DEFINE_MUTEX(disk_events_mutex);
-    static LIST_HEAD(disk_events);
+pub static mut disk_events_mutex: usize = 0;
+pub static mut disk_events: usize = 0;
 // disable in-kernel polling by default
     static unsigned long disk_events_dfl_poll_msecs;
 #[no_mangle]
 unsafe extern "C" fn disk_events_poll_jiffies(disk: *mut gendisk) -> c_ulong {
-    static unsigned long disk_events_poll_jiffies(struct gendisk *disk)
-    {
-    struct disk_events *ev = disk.ev;
-    let mut intv_msecs: c_long = 0;
+    let mut ev = disk.ev;
+pub static mut intv_msecs: c_long = 0;
 //
 // If device-specific poll interval is set, always use it.  If
 // the default is being used, poll if the POLL flag is set.
 //
-    if (ev.poll_msecs >= 0)
+    if (ev.poll_msecs >= 0) {
     intv_msecs = ev.poll_msecs;
-#[no_mangle]
-pub unsafe extern "C" fn if(DISK_EVENT_FLAG_POLL: disk->event_flags &) -> else {
-    else if (disk.event_flags & DISK_EVENT_FLAG_POLL)
+    }
+
+    else if (disk.event_flags & DISK_EVENT_FLAG_POLL) {
     intv_msecs = disk_events_dfl_poll_msecs;
+    }
     return msecs_to_jiffies(intv_msecs);
     }
 //
@@ -103,47 +352,48 @@ pub unsafe extern "C" fn if(DISK_EVENT_FLAG_POLL: disk->event_flags &) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn disk_block_events(disk: *mut gendisk) {
-    void disk_block_events(struct gendisk *disk)
-    {
-    struct disk_events *ev = disk.ev;
-    unsigned long flags;
-    bool cancel;
-    if (!ev)
+    let mut ev = disk.ev;
+    let mut flags = 0;
+    let mut cancel = 0;
+    if (!ev) {
     return;
+    }
 //
 // Outer mutex ensures that the first blocker completes canceling
 // the event work before further blockers are allowed to finish.
 //
     mutex_lock(&ev.block_mutex);
     spin_lock_irqsave(&ev.lock, flags);
-    cancel = !ev.block++;
+    cancel = !ev.block += 1;
     spin_unlock_irqrestore(&ev.lock, flags);
-    if (cancel)
+    if (cancel) {
     cancel_delayed_work_sync(&disk.ev.dwork);
+    }
     mutex_unlock(&ev.block_mutex);
     }
 #[no_mangle]
 unsafe extern "C" fn __disk_unblock_events(disk: *mut gendisk, check_now: bool) {
-    static void __disk_unblock_events(struct gendisk *disk, bool check_now)
-    {
-    struct disk_events *ev = disk.ev;
-    unsigned long intv;
-    unsigned long flags;
+    let mut ev = disk.ev;
+    let mut intv = 0;
+    let mut flags = 0;
     spin_lock_irqsave(&ev.lock, flags);
-    if (WARN_ON_ONCE(ev.block <= 0))
-    goto out_unlock;
-    if (--ev.block)
-    goto out_unlock;
+    if (WARN_ON_ONCE!(ev.block <= 0)) {
+// goto;
+    }
+    if (--ev.block) {
+// goto;
+    }
     intv = disk_events_poll_jiffies(disk);
-    if (check_now)
+    if (check_now) {
     queue_delayed_work(system_freezable_power_efficient_wq,
     &ev.dwork, 0);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: intv) -> else {
-    else if (intv)
+    }
+
+    else if (intv) {
     queue_delayed_work(system_freezable_power_efficient_wq,
     &ev.dwork, intv);
-    out_unlock:
+    }
+// label;
     spin_unlock_irqrestore(&ev.lock, flags);
     }
 //
@@ -158,10 +408,9 @@ pub unsafe extern "C" fn if(_arg: intv) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn disk_unblock_events(disk: *mut gendisk) {
-    void disk_unblock_events(struct gendisk *disk)
-    {
-    if (disk.ev)
+    if (disk.ev) {
     __disk_unblock_events(disk, false);
+    }
     }
 //
 // disk_flush_events - schedule immediate event checking and flushing
@@ -177,16 +426,16 @@ pub unsafe extern "C" fn disk_unblock_events(disk: *mut gendisk) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn disk_flush_events(disk: *mut gendisk, mask: c_uint) {
-    void disk_flush_events(struct gendisk *disk, unsigned int mask)
-    {
-    struct disk_events *ev = disk.ev;
-    if (!ev)
+    let mut ev = disk.ev;
+    if (!ev) {
     return;
+    }
     spin_lock_irq(&ev.lock);
     ev.clearing |= mask;
-    if (!ev.block)
+    if (!ev.block) {
     mod_delayed_work(system_freezable_power_efficient_wq,
     &ev.dwork, 0);
+    }
     spin_unlock_irq(&ev.lock);
     }
 //
@@ -196,23 +445,22 @@ pub unsafe extern "C" fn disk_flush_events(disk: *mut gendisk, mask: c_uint) {
 //
 #[no_mangle]
 unsafe extern "C" fn disk_event_uevent(disk: *mut gendisk, events: c_uint) {
-    static void disk_event_uevent(struct gendisk *disk, unsigned int events)
-    {
-    char *envp[ARRAY_SIZE(disk_uevents) + 1] = { };
-    let mut nr_events: c_int = 0, i;
-    for (i = 0; i < ARRAY_SIZE(disk_uevents); i++)
+    char *envp[ARRAY_SIZE!(disk_uevents) + 1] = { };
+pub static mut nr_events: c_int = 0;
+    for (i = 0; i < ARRAY_SIZE!(disk_uevents); i++) {
     if (events & disk.events & (1 << i))
     envp[nr_events++] = disk_uevents[i];
-    if (nr_events)
+    }
+    if (nr_events) {
     kobject_uevent_env(&disk_to_dev(disk).kobj, KOBJ_CHANGE, envp);
     }
-    static void disk_check_events(struct disk_events *ev,
-    unsigned int *clearing_ptr)
-    {
-    struct gendisk *disk = ev.disk;
-    let mut clearing: c_uint = *clearing_ptr;
-    unsigned int events;
-    unsigned long intv;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn disk_check_events(ev: *mut disk_events, clearing_ptr: *mut c_uint) {
+    let mut disk = ev.disk;
+pub static mut clearing: c_uint = 0;
+    let mut events = 0;
+    let mut intv = 0;
 // check events
     events = disk.fops.check_events(disk, clearing);
 // accumulate pending events and schedule next poll if necessary
@@ -221,14 +469,17 @@ unsafe extern "C" fn disk_event_uevent(disk: *mut gendisk, events: c_uint) {
     ev.pending |= events;
 // clearing_ptr &= ~clearing;
     intv = disk_events_poll_jiffies(disk);
-    if (!ev.block && intv)
+    if (!ev.block && intv) {
     queue_delayed_work(system_freezable_power_efficient_wq,
     &ev.dwork, intv);
+    }
     spin_unlock_irq(&ev.lock);
-    if (events & DISK_EVENT_MEDIA_CHANGE)
+    if (events & DISK_EVENT_MEDIA_CHANGE) {
     inc_diskseq(disk);
-    if (disk.event_flags & DISK_EVENT_FLAG_UEVENT)
+    }
+    if (disk.event_flags & DISK_EVENT_FLAG_UEVENT) {
     disk_event_uevent(disk, events);
+    }
     }
 //
 // disk_clear_events - synchronously check, clear and return pending events
@@ -243,13 +494,12 @@ unsafe extern "C" fn disk_event_uevent(disk: *mut gendisk, events: c_uint) {
 //
 #[no_mangle]
 unsafe extern "C" fn disk_clear_events(disk: *mut gendisk, mask: c_uint) -> c_uint {
-    static unsigned int disk_clear_events(struct gendisk *disk, unsigned int mask)
-    {
-    struct disk_events *ev = disk.ev;
-    unsigned int pending;
-    let mut clearing: c_uint = mask;
-    if (!ev)
+    let mut ev = disk.ev;
+    let mut pending = 0;
+pub static mut clearing: c_uint = 0;
+    if (!ev) {
     return 0;
+    }
     disk_block_events(disk);
 //
 // store the union of mask and ev->clearing on the stack so that the
@@ -271,7 +521,7 @@ unsafe extern "C" fn disk_clear_events(disk: *mut gendisk, mask: c_uint) -> c_ui
     pending = ev.pending & mask;
     ev.pending &= ~mask;
     spin_unlock_irq(&ev.lock);
-    WARN_ON_ONCE(clearing & mask);
+    WARN_ON_ONCE!(clearing & mask);
     return pending;
     }
 //
@@ -283,9 +533,7 @@ unsafe extern "C" fn disk_clear_events(disk: *mut gendisk, mask: c_uint) -> c_ui
 //
 #[no_mangle]
 pub unsafe extern "C" fn disk_check_media_change(disk: *mut gendisk) -> bool {
-    bool disk_check_media_change(struct gendisk *disk)
-    {
-    unsigned int events;
+    let mut events = 0;
     events = disk_clear_events(disk, DISK_EVENT_MEDIA_CHANGE |
     DISK_EVENT_EJECT_REQUEST);
     if (events & DISK_EVENT_MEDIA_CHANGE) {
@@ -307,8 +555,6 @@ pub unsafe extern "C" fn disk_check_media_change(disk: *mut gendisk) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn disk_force_media_change(disk: *mut gendisk) {
-    void disk_force_media_change(struct gendisk *disk)
-    {
     disk_event_uevent(disk, DISK_EVENT_MEDIA_CHANGE);
     inc_diskseq(disk);
     bdev_mark_dead(disk.part0, true);
@@ -320,10 +566,8 @@ pub unsafe extern "C" fn disk_force_media_change(disk: *mut gendisk) {
 //
 #[no_mangle]
 unsafe extern "C" fn disk_events_workfn(work: *mut work_struct) {
-    static void disk_events_workfn(struct work_struct *work)
-    {
-    struct delayed_work *dwork = to_delayed_work(work);
-    struct disk_events *ev = container_of(dwork, struct disk_events, dwork);
+    let mut dwork = to_delayed_work(work);
+    let mut ev = container_of!(dwork, disk_events, dwork);
     disk_check_events(ev, &ev.clearing);
     }
 //
@@ -337,55 +581,54 @@ unsafe extern "C" fn disk_events_workfn(work: *mut work_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn __disk_events_show(events: c_uint, buf: *mut c_char) -> isize {
-    static ssize_t __disk_events_show(unsigned int events, char *buf)
-    {
-    const char *delim = "";
-    let mut pos: isize = 0;
-    int i;
-    for (i = 0; i < ARRAY_SIZE(disk_events_strs); i++)
+    let mut delim = "";
+pub static mut pos: isize = 0;
+    let mut i = 0;
+    for (i = 0; i < ARRAY_SIZE!(disk_events_strs); i++) {
     if (events & (1 << i)) {
+    }
     pos += sprintf(buf + pos, "%s%s",
     delim, disk_events_strs[i]);
     delim = " ";
     }
-    if (pos)
+    if (pos) {
     pos += sprintf(buf + pos, "\n");
+    }
     return pos;
     }
-    static ssize_t disk_events_show(struct device *dev,
-    struct device_attribute *attr, char *buf)
-    {
-    struct gendisk *disk = dev_to_disk(dev);
-    if (!(disk.event_flags & DISK_EVENT_FLAG_UEVENT))
+#[no_mangle]
+pub unsafe extern "C" fn disk_events_show(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char) -> ssize_t {
+    let mut disk = dev_to_disk(dev);
+    if (!(disk.event_flags & DISK_EVENT_FLAG_UEVENT)) {
     return 0;
+    }
     return __disk_events_show(disk.events, buf);
     }
-    static ssize_t disk_events_async_show(struct device *dev,
-    struct device_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn disk_events_async_show(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char) -> ssize_t {
     return 0;
     }
-    static ssize_t disk_events_poll_msecs_show(struct device *dev,
-    struct device_attribute *attr,
-    char *buf)
-    {
-    struct gendisk *disk = dev_to_disk(dev);
-    if (!disk.ev)
+#[no_mangle]
+pub unsafe extern "C" fn disk_events_poll_msecs_show(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char) -> ssize_t {
+    let mut disk = dev_to_disk(dev);
+    if (!disk.ev) {
     return sprintf(buf, "-1\n");
+    }
     return sprintf(buf, "%ld\n", disk.ev.poll_msecs);
     }
-    static ssize_t disk_events_poll_msecs_store(struct device *dev,
-    struct device_attribute *attr,
-    const char *buf, size_t count)
-    {
-    struct gendisk *disk = dev_to_disk(dev);
-    long intv;
-    if (!count || !sscanf(buf, "%ld", &intv))
+#[no_mangle]
+pub unsafe extern "C" fn disk_events_poll_msecs_store(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut disk = dev_to_disk(dev);
+    let mut intv = 0;
+    if (!count || !sscanf(buf, "%ld", &intv)) {
     return -EINVAL;
-    if (intv < 0 && intv != -1)
+    }
+    if (intv < 0 && intv != -1) {
     return -EINVAL;
-    if (!disk.ev)
+    }
+    if (!disk.ev) {
     return -ENODEV;
+    }
     disk_block_events(disk);
     disk.ev.poll_msecs = intv;
     __disk_unblock_events(disk, true);
@@ -401,40 +644,37 @@ unsafe extern "C" fn __disk_events_show(events: c_uint, buf: *mut c_char) -> isi
 // (disable).  This can also be modified runtime by writing to
 // /sys/module/block/parameters/events_dfl_poll_msecs.
 //
-    static int disk_events_set_dfl_poll_msecs(const char *val,
-    const struct kernel_param *kp)
-    {
-    struct disk_events *ev;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn disk_events_set_dfl_poll_msecs(val: *mut c_char, kp: *mut kernel_param) -> c_int {
+pub static mut ev: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     ret = param_set_ulong(val, kp);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     mutex_lock(&disk_events_mutex);
-    list_for_each_entry(ev, &disk_events, node)
+    list_for_each_entry(ev, &disk_events, node) {
     disk_flush_events(ev.disk, 0);
+    }
     mutex_unlock(&disk_events_mutex);
     return 0;
     }
-    static const struct kernel_param_ops disk_events_dfl_poll_msecs_param_ops = {
-    .set	= disk_events_set_dfl_poll_msecs,
-    .get	= param_get_ulong,
-    };
+pub static mut kernel_param_ops: usize = 0;
 
-    module_param_cb(events_dfl_poll_msecs, &disk_events_dfl_poll_msecs_param_ops,
+    module_param_cb!(events_dfl_poll_msecs, &disk_events_dfl_poll_msecs_param_ops,
     &disk_events_dfl_poll_msecs, 0644);
 //
 // disk_{alloc|add|del|release}_events - initialize and destroy disk_events.
 //
 #[no_mangle]
 pub unsafe extern "C" fn disk_alloc_events(disk: *mut gendisk) -> c_int {
-    int disk_alloc_events(struct gendisk *disk)
-    {
-    struct disk_events *ev;
-    if (!disk.fops.check_events || !disk.events)
+pub static mut ev: *mut c_void = core::ptr::null_mut();
+    if (!disk.fops.check_events || !disk.events) {
     return 0;
+    }
     ev = kzalloc_obj(*ev);
     if (!ev) {
-    pr_warn("%s: failed to initialize events\n", disk.disk_name);
+    pr_warn!("%s: failed to initialize events\n", disk.disk_name);
     return -ENOMEM;
     }
     INIT_LIST_HEAD(&ev.node);
@@ -449,10 +689,9 @@ pub unsafe extern "C" fn disk_alloc_events(disk: *mut gendisk) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn disk_add_events(disk: *mut gendisk) {
-    void disk_add_events(struct gendisk *disk)
-    {
-    if (!disk.ev)
+    if (!disk.ev) {
     return;
+    }
     mutex_lock(&disk_events_mutex);
     list_add_tail(&disk.ev.node, &disk_events);
     mutex_unlock(&disk_events_mutex);
@@ -464,8 +703,6 @@ pub unsafe extern "C" fn disk_add_events(disk: *mut gendisk) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn disk_del_events(disk: *mut gendisk) {
-    void disk_del_events(struct gendisk *disk)
-    {
     if (disk.ev) {
     disk_block_events(disk);
     mutex_lock(&disk_events_mutex);
@@ -475,9 +712,7 @@ pub unsafe extern "C" fn disk_del_events(disk: *mut gendisk) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn disk_release_events(disk: *mut gendisk) {
-    void disk_release_events(struct gendisk *disk)
-    {
 // the block count should be 1 from disk_del_events()
-    WARN_ON_ONCE(disk.ev && disk.ev.block != 1);
+    WARN_ON_ONCE!(disk.ev && disk.ev.block != 1);
     kfree(disk.ev);
     }

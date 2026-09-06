@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -76,8 +326,8 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct bpf_iter__cgroup {
-    pub meta): *mut *mut __bpf_md_ptr(struct bpf_iter_meta ,,
-    pub cgroup): *mut *mut __bpf_md_ptr(struct cgroup ,,
+    pub meta): *mut *mut __bpf_md_ptr(bpf_iter_meta ,,
+    pub cgroup): *mut *mut __bpf_md_ptr(cgroup ,,
 }
 
 #[repr(C)]
@@ -89,14 +339,15 @@ pub struct cgroup_iter_priv {
     pub order: c_int,
 }
 
-    static void *cgroup_iter_seq_start(struct seq_file *seq, loff_t *pos)
-    {
-    struct cgroup_iter_priv *p = seq.private;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_iter_seq_start(seq: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
+    let mut p = seq.private;
     cgroup_lock();
 // cgroup_iter doesn't support read across multiple sessions.
     if (*pos > 0) {
-    if (p.visited_all)
+    if (p.visited_all) {
     return core::ptr::null_mut();
+    }
 // Haven't visited all, but because cgroup_mutex has dropped,
 // return -EOPNOTSUPP to indicate incomplete iteration.
 //
@@ -105,26 +356,24 @@ pub struct cgroup_iter_priv {
     ++*pos;
     p.terminate = false;
     p.visited_all = false;
-    if (p.order == BPF_CGROUP_ITER_DESCENDANTS_PRE)
+    if (p.order == BPF_CGROUP_ITER_DESCENDANTS_PRE) {
     return css_next_descendant_pre(core::ptr::null_mut(), p.start_css);
-#[no_mangle]
-pub unsafe extern "C" fn if(BPF_CGROUP_ITER_DESCENDANTS_POST: p->order ==) -> else {
-    else if (p.order == BPF_CGROUP_ITER_DESCENDANTS_POST)
+    }
+
+    else if (p.order == BPF_CGROUP_ITER_DESCENDANTS_POST) {
     return css_next_descendant_post(core::ptr::null_mut(), p.start_css);
-#[no_mangle]
-pub unsafe extern "C" fn if(BPF_CGROUP_ITER_CHILDREN: p->order ==) -> else {
-    else if (p.order == BPF_CGROUP_ITER_CHILDREN)
+    }
+
+    else if (p.order == BPF_CGROUP_ITER_CHILDREN) {
     return css_next_child(core::ptr::null_mut(), p.start_css);
+    }
     else /* BPF_CGROUP_ITER_SELF_ONLY and BPF_CGROUP_ITER_ANCESTORS_UP */
     return p.start_css;
     }
-    static int __cgroup_iter_seq_show(struct seq_file *seq,
-    struct cgroup_subsys_state *css, int in_stop);
+// forward_decl: __cgroup_iter_seq_show;
 #[no_mangle]
 unsafe extern "C" fn cgroup_iter_seq_stop(seq: *mut seq_file, v: *mut c_void) {
-    static void cgroup_iter_seq_stop(struct seq_file *seq, void *v)
-    {
-    struct cgroup_iter_priv *p = seq.private;
+    let mut p = seq.private;
     cgroup_unlock();
 // pass NULL to the prog for post-processing
     if (!v) {
@@ -132,72 +381,67 @@ unsafe extern "C" fn cgroup_iter_seq_stop(seq: *mut seq_file, v: *mut c_void) {
     p.visited_all = true;
     }
     }
-    static void *cgroup_iter_seq_next(struct seq_file *seq, void *v, loff_t *pos)
-    {
-    struct cgroup_subsys_state *curr = (struct cgroup_subsys_state *)v;
-    struct cgroup_iter_priv *p = seq.private;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_iter_seq_next(seq: *mut seq_file, v: *mut c_void, pos: *mut loff_t) -> *mut c_void {
+    let mut curr = v;
+    let mut p = seq.private;
     ++*pos;
-    if (p.terminate)
+    if (p.terminate) {
     return core::ptr::null_mut();
-    if (p.order == BPF_CGROUP_ITER_DESCENDANTS_PRE)
+    }
+    if (p.order == BPF_CGROUP_ITER_DESCENDANTS_PRE) {
     return css_next_descendant_pre(curr, p.start_css);
-#[no_mangle]
-pub unsafe extern "C" fn if(BPF_CGROUP_ITER_DESCENDANTS_POST: p->order ==) -> else {
-    else if (p.order == BPF_CGROUP_ITER_DESCENDANTS_POST)
+    }
+
+    else if (p.order == BPF_CGROUP_ITER_DESCENDANTS_POST) {
     return css_next_descendant_post(curr, p.start_css);
-#[no_mangle]
-pub unsafe extern "C" fn if(BPF_CGROUP_ITER_ANCESTORS_UP: p->order ==) -> else {
-    else if (p.order == BPF_CGROUP_ITER_ANCESTORS_UP)
+    }
+
+    else if (p.order == BPF_CGROUP_ITER_ANCESTORS_UP) {
     return curr.parent;
-#[no_mangle]
-pub unsafe extern "C" fn if(BPF_CGROUP_ITER_CHILDREN: p->order ==) -> else {
-    else if (p.order == BPF_CGROUP_ITER_CHILDREN)
+    }
+
+    else if (p.order == BPF_CGROUP_ITER_CHILDREN) {
     return css_next_child(curr, p.start_css);
+    }
     else  /* BPF_CGROUP_ITER_SELF_ONLY */
     return core::ptr::null_mut();
     }
-    static int __cgroup_iter_seq_show(struct seq_file *seq,
-    struct cgroup_subsys_state *css, int in_stop)
-    {
-    struct cgroup_iter_priv *p = seq.private;
-    struct bpf_iter__cgroup ctx;
-    struct bpf_iter_meta meta;
-    struct bpf_prog *prog;
-    let mut ret: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn __cgroup_iter_seq_show(seq: *mut seq_file, css: *mut cgroup_subsys_state, in_stop: c_int) -> c_int {
+    let mut p = seq.private;
+pub static mut ctx: usize = 0;
+pub static mut meta: usize = 0;
+pub static mut prog: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
 // cgroup is dead, skip this element
-    if (css && cgroup_is_dead(css.cgroup))
+    if (css && cgroup_is_dead(css.cgroup)) {
     return 0;
+    }
     ctx.meta = &meta;
     ctx.cgroup = css ? css.cgroup : core::ptr::null_mut();
     meta.seq = seq;
     prog = bpf_iter_get_info(&meta, in_stop);
-    if (prog)
+    if (prog) {
     ret = bpf_iter_run_prog(prog, &ctx);
+    }
 // if prog returns > 0, terminate after this element.
-    if (ret != 0)
+    if (ret != 0) {
     p.terminate = true;
+    }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_iter_seq_show(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int cgroup_iter_seq_show(struct seq_file *seq, void *v)
-    {
-    return __cgroup_iter_seq_show(seq, (struct cgroup_subsys_state *)v,
+    return __cgroup_iter_seq_show(seq, v,
     false);
     }
-    static const struct seq_operations cgroup_iter_seq_ops = {
-    .start  = cgroup_iter_seq_start,
-    .next   = cgroup_iter_seq_next,
-    .stop   = cgroup_iter_seq_stop,
-    .show   = cgroup_iter_seq_show,
-    };
+pub static mut seq_operations: usize = 0;
     BTF_ID_LIST_GLOBAL_SINGLE(bpf_cgroup_btf_id, struct, cgroup)
 #[no_mangle]
 unsafe extern "C" fn cgroup_iter_seq_init(priv: *mut c_void, aux: *mut bpf_iter_aux_info) -> c_int {
-    static int cgroup_iter_seq_init(void *priv, struct bpf_iter_aux_info *aux)
-    {
-    struct cgroup_iter_priv *p = (struct cgroup_iter_priv *)priv;
-    struct cgroup *cgrp = aux.cgroup.start;
+    let mut p = priv;
+    let mut cgrp = aux.cgroup.start;
 // bpf_iter_attach_cgroup() has already acquired an extra reference
 // for the start cgroup, but the reference may be released after
 // cgroup_iter_seq_init(), so acquire another reference for the
@@ -212,65 +456,62 @@ unsafe extern "C" fn cgroup_iter_seq_init(priv: *mut c_void, aux: *mut bpf_iter_
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_iter_seq_fini(priv: *mut c_void) {
-    static void cgroup_iter_seq_fini(void *priv)
-    {
-    struct cgroup_iter_priv *p = (struct cgroup_iter_priv *)priv;
+    let mut p = priv;
     css_put(p.start_css);
     }
-    static const struct bpf_iter_seq_info cgroup_iter_seq_info = {
-    .seq_ops		= &cgroup_iter_seq_ops,
-    .init_seq_private	= cgroup_iter_seq_init,
-    .fini_seq_private	= cgroup_iter_seq_fini,
-    .seq_priv_size		= sizeof(struct cgroup_iter_priv),
-    };
-    static int bpf_iter_attach_cgroup(struct bpf_prog *prog,
-    union bpf_iter_link_info *linfo,
-    struct bpf_iter_aux_info *aux)
-    {
-    let mut fd: c_int = linfo.cgroup.cgroup_fd;
-    let mut id: u64 = linfo.cgroup.cgroup_id;
-    let mut order: c_int = linfo.cgroup.order;
-    struct cgroup *cgrp;
-    switch (order) {
-    case BPF_CGROUP_ITER_DESCENDANTS_PRE:
-    case BPF_CGROUP_ITER_DESCENDANTS_POST:
-    case BPF_CGROUP_ITER_ANCESTORS_UP:
-    case BPF_CGROUP_ITER_SELF_ONLY:
-    case BPF_CGROUP_ITER_CHILDREN:
-    break;
-    default:
+pub static mut bpf_iter_seq_info: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn bpf_iter_attach_cgroup(prog: *mut bpf_prog, linfo: *mut union bpf_iter_link_info, aux: *mut bpf_iter_aux_info) -> c_int {
+pub static mut fd: c_int = 0;
+pub static mut id: u64 = 0;
+pub static mut order: c_int = 0;
+pub static mut cgrp: *mut c_void = core::ptr::null_mut();
+    match (order) {
+    BPF_CGROUP_ITER_DESCENDANTS_PRE => {
+    }
+    BPF_CGROUP_ITER_DESCENDANTS_POST => {
+    }
+    BPF_CGROUP_ITER_ANCESTORS_UP => {
+    }
+    BPF_CGROUP_ITER_SELF_ONLY => {
+    }
+    BPF_CGROUP_ITER_CHILDREN => {
+    // break;
+    }
+    _ => {
     return -EINVAL;
     }
-    if (fd && id)
+    }
+    if (fd && id) {
     return -EINVAL;
-    if (fd)
+    }
+    if (fd) {
     cgrp = cgroup_v1v2_get_from_fd(fd);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: id) -> else {
-    else if (id)
+    }
+
+    else if (id) {
     cgrp = cgroup_get_from_id(id);
+    }
     else /* walk the entire hierarchy by default. */
     cgrp = cgroup_get_from_path("/");
-    if (IS_ERR(cgrp))
+    if (IS_ERR(cgrp)) {
     return PTR_ERR(cgrp);
+    }
     aux.cgroup.start = cgrp;
     aux.cgroup.order = order;
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn bpf_iter_detach_cgroup(aux: *mut bpf_iter_aux_info) {
-    static void bpf_iter_detach_cgroup(struct bpf_iter_aux_info *aux)
-    {
     cgroup_put(aux.cgroup.start);
     }
-    static void bpf_iter_cgroup_show_fdinfo(const struct bpf_iter_aux_info *aux,
-    struct seq_file *seq)
-    {
-    char *buf;
+#[no_mangle]
+pub unsafe extern "C" fn bpf_iter_cgroup_show_fdinfo(aux: *mut bpf_iter_aux_info, seq: *mut seq_file) {
+pub static mut buf: *mut c_void = core::ptr::null_mut();
     buf = kzalloc(PATH_MAX, GFP_KERNEL);
     if (!buf) {
     seq_puts(seq, "cgroup_path:\t<unknown>\n");
-    goto show_order;
+// goto;
     }
 // If cgroup_path_ns() fails, buf will be an empty string, cgroup_path
 // will print nothing.
@@ -281,55 +522,39 @@ unsafe extern "C" fn bpf_iter_detach_cgroup(aux: *mut bpf_iter_aux_info) {
     current.nsproxy.cgroup_ns);
     seq_printf(seq, "cgroup_path:\t%s\n", buf);
     kfree(buf);
-    show_order:
-    if (aux.cgroup.order == BPF_CGROUP_ITER_DESCENDANTS_PRE)
+// label;
+    if (aux.cgroup.order == BPF_CGROUP_ITER_DESCENDANTS_PRE) {
     seq_puts(seq, "order: descendants_pre\n");
-#[no_mangle]
-pub unsafe extern "C" fn if(BPF_CGROUP_ITER_DESCENDANTS_POST: aux->cgroup.order ==) -> else {
-    else if (aux.cgroup.order == BPF_CGROUP_ITER_DESCENDANTS_POST)
+    }
+
+    else if (aux.cgroup.order == BPF_CGROUP_ITER_DESCENDANTS_POST) {
     seq_puts(seq, "order: descendants_post\n");
-#[no_mangle]
-pub unsafe extern "C" fn if(BPF_CGROUP_ITER_ANCESTORS_UP: aux->cgroup.order ==) -> else {
-    else if (aux.cgroup.order == BPF_CGROUP_ITER_ANCESTORS_UP)
+    }
+
+    else if (aux.cgroup.order == BPF_CGROUP_ITER_ANCESTORS_UP) {
     seq_puts(seq, "order: ancestors_up\n");
-#[no_mangle]
-pub unsafe extern "C" fn if(BPF_CGROUP_ITER_CHILDREN: aux->cgroup.order ==) -> else {
-    else if (aux.cgroup.order == BPF_CGROUP_ITER_CHILDREN)
+    }
+
+    else if (aux.cgroup.order == BPF_CGROUP_ITER_CHILDREN) {
     seq_puts(seq, "order: children\n");
+    }
     else /* BPF_CGROUP_ITER_SELF_ONLY */
     seq_puts(seq, "order: self_only\n");
     }
-    static int bpf_iter_cgroup_fill_link_info(const struct bpf_iter_aux_info *aux,
-    struct bpf_link_info *info)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn bpf_iter_cgroup_fill_link_info(aux: *mut bpf_iter_aux_info, info: *mut bpf_link_info) -> c_int {
     info.iter.cgroup.order = aux.cgroup.order;
     info.iter.cgroup.cgroup_id = cgroup_id(aux.cgroup.start);
     return 0;
     }
-    DEFINE_BPF_ITER_FUNC(cgroup, struct bpf_iter_meta *meta,
-    struct cgroup *cgroup)
-    static struct bpf_iter_reg bpf_cgroup_reg_info = {
-    .target			= "cgroup",
-    .feature		= BPF_ITER_RESCHED,
-    .attach_target		= bpf_iter_attach_cgroup,
-    .detach_target		= bpf_iter_detach_cgroup,
-    .show_fdinfo		= bpf_iter_cgroup_show_fdinfo,
-    .fill_link_info		= bpf_iter_cgroup_fill_link_info,
-    .ctx_arg_info_size	= 1,
-    .ctx_arg_info		= {
-    { offsetof(struct bpf_iter__cgroup, cgroup),
-    PTR_TO_BTF_ID_OR_NULL | PTR_TRUSTED },
-    },
-    .seq_info		= &cgroup_iter_seq_info,
-    };
+    DEFINE_BPF_ITER_FUNC(cgroup, bpf_iter_meta *meta, cgroup *cgroup)
+pub static mut bpf_iter_reg: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn bpf_cgroup_iter_init() -> int __init {
-    static int __init bpf_cgroup_iter_init(void)
-    {
+unsafe extern "C" fn bpf_cgroup_iter_init() -> c_int {
     bpf_cgroup_reg_info.ctx_arg_info[0].btf_id = bpf_cgroup_btf_id[0];
     return bpf_iter_reg_target(&bpf_cgroup_reg_info);
     }
-    late_initcall(bpf_cgroup_iter_init);
+    late_initcall!(bpf_cgroup_iter_init);
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct bpf_iter_css {
@@ -342,45 +567,52 @@ pub struct bpf_iter_css_kern {
     pub pos: *mut cgroup_subsys_state,
     pub flags: c_uint,
     pub __attribute__((aligned(8))): },
-    __bpf_kfunc int bpf_iter_css_new(struct bpf_iter_css *it,
-    struct cgroup_subsys_state *start, unsigned int flags)
+    __bpf_kfunc int bpf_iter_css_new(bpf_iter_css *it, cgroup_subsys_state *start, unsigned int flags)
     {
     pub )it: *mut *mut bpf_iter_css_kern kit = (void,
-    pub bpf_iter_css)): BUILD_BUG_ON(sizeof(struct bpf_iter_css_kern) > sizeof(struct,
-    pub bpf_iter_css)): BUILD_BUG_ON(__alignof__(struct bpf_iter_css_kern) != __alignof__(struct,
+    pub bpf_iter_css)): BUILD_BUG_ON!(sizeof!(bpf_iter_css_kern) > sizeof!(struct,
+    pub bpf_iter_css)): BUILD_BUG_ON!(__alignof__(bpf_iter_css_kern) != __alignof__(struct,
     pub NULL: kit->start =,
-    switch (flags) {
-    case BPF_CGROUP_ITER_DESCENDANTS_PRE:
-    case BPF_CGROUP_ITER_DESCENDANTS_POST:
-    case BPF_CGROUP_ITER_ANCESTORS_UP:
-    case BPF_CGROUP_ITER_CHILDREN:
-    default:
+    match (flags) {
+    BPF_CGROUP_ITER_DESCENDANTS_PRE => {
+    }
+    BPF_CGROUP_ITER_DESCENDANTS_POST => {
+    }
+    BPF_CGROUP_ITER_ANCESTORS_UP => {
+    }
+    BPF_CGROUP_ITER_CHILDREN => {
+    }
+    _ => {
     pub -EINVAL: return,
+    }
     }
     pub start: kit->start =,
     pub NULL: kit->pos =,
     pub flags: kit->flags =,
     pub 0: return,
     }
-    __bpf_kfunc struct cgroup_subsys_state *bpf_iter_css_next(struct bpf_iter_css *it)
+    __bpf_kfunc struct cgroup_subsys_state *bpf_iter_css_next(bpf_iter_css *it)
     {
     pub )it: *mut *mut bpf_iter_css_kern kit = (void,
-    if (!kit.start)
+    if (!kit.start) {
     pub NULL: return,
-    switch (kit.flags) {
-    case BPF_CGROUP_ITER_DESCENDANTS_PRE:
+    match (kit.flags) {
+    }
+    BPF_CGROUP_ITER_DESCENDANTS_PRE => {
     pub kit->start): kit->pos = css_next_descendant_pre(kit->pos,,
-    case BPF_CGROUP_ITER_DESCENDANTS_POST:
+    }
+    BPF_CGROUP_ITER_DESCENDANTS_POST => {
     pub kit->start): kit->pos = css_next_descendant_post(kit->pos,,
-    case BPF_CGROUP_ITER_CHILDREN:
+    }
+    BPF_CGROUP_ITER_CHILDREN => {
     pub kit->start): kit->pos = css_next_child(kit->pos,,
-    case BPF_CGROUP_ITER_ANCESTORS_UP:
+    }
+    BPF_CGROUP_ITER_ANCESTORS_UP => {
     pub kit->start: kit->pos = kit->pos ? kit->pos->parent :,
+    }
     }
     pub kit->pos: return,
     }
 #[no_mangle]
 pub unsafe extern "C" fn bpf_iter_css_destroy(it: *mut bpf_iter_css) -> __bpf_kfunc void {
-    __bpf_kfunc void bpf_iter_css_destroy(struct bpf_iter_css *it)
-    {
     }

@@ -34,6 +34,216 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
 macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
@@ -148,7 +358,7 @@ pub struct audit_tree {
     pub list: list_head,
     pub same_root: list_head,
     pub head: rcu_head,
-    pub pathname: [c_char; ],
+    pub pathname: [c_char; 0],
 }
 
 #[repr(C)]
@@ -178,7 +388,7 @@ pub struct audit_tree_mark {
 }
 // static LIST_HEAD(tree_list);
 // static LIST_HEAD(prune_list);
-    static struct task_struct *prune_thread;
+pub static mut prune_thread: *mut c_void = core::ptr::null_mut();
 //
 // One struct chunk is attached to each inode of interest through
 // audit_tree_mark (fsnotify mark). We replace struct chunk on tagging
@@ -219,8 +429,8 @@ pub struct audit_tree_mark {
 // revert - several operations have very unpleasant cleanup logics and
 // that makes a difference.  Some.
 //
-    static struct fsnotify_group *audit_tree_group __ro_after_init;
-    static struct kmem_cache *audit_tree_mark_cachep __ro_after_init;
+pub static mut audit_tree_group: *mut c_void = core::ptr::null_mut();
+pub static mut audit_tree_mark_cachep: *mut c_void = core::ptr::null_mut();
 #[no_mangle]
 pub unsafe extern "C" fn alloc_tree() {
     let mut tree = core::ptr::null_mut();
@@ -250,14 +460,14 @@ pub unsafe extern "C" fn put_tree(tree: *mut audit_tree) {
     }
     }
 // to avoid bringing the entire thing in audit.h
-    const char *audit_tree_path(struct audit_tree *tree)
+    const char *audit_tree_path(audit_tree *tree)
     {
     return tree.pathname;
     }
 #[no_mangle]
 unsafe extern "C" fn free_chunk(chunk: *mut audit_chunk) {
     let mut i = 0;
-    for (i = 0; i < chunk.count; i++) {
+    while (i < chunk.count) {
     if (chunk.owners[i].owner) {
     put_tree(chunk.owners[i].owner);
     }
@@ -272,7 +482,7 @@ pub unsafe extern "C" fn audit_put_chunk(chunk: *mut audit_chunk) {
     }
 #[no_mangle]
 unsafe extern "C" fn __put_chunk(rcu: *mut rcu_head) {
-    struct audit_chunk *chunk = container_of(rcu, struct audit_chunk, head);
+    let mut chunk = container_of!(rcu, audit_chunk, head);
     audit_put_chunk(chunk);
     }
 //
@@ -286,7 +496,7 @@ unsafe extern "C" fn audit_mark_put_chunk(chunk: *mut audit_chunk) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn audit_mark() {
-    return container_of(mark, struct audit_tree_mark, mark);
+    return container_of!(mark, audit_tree_mark, mark);
     }
 #[no_mangle]
 pub unsafe extern "C" fn mark_chunk() {
@@ -319,7 +529,7 @@ pub unsafe extern "C" fn alloc_chunk() {
 // INIT_LIST_HEAD;
     chunk.count = count;
     atomic_long_set(&chunk.refs, 1);
-    for (i = 0; i < count; i++) {
+    while (i < count) {
 // INIT_LIST_HEAD;
     chunk.owners[i].index = i;
     }
@@ -336,7 +546,7 @@ unsafe extern "C" fn inode_to_key(inode: *const inode) -> c_ulong {
     }
 #[no_mangle]
 pub unsafe extern "C" fn chunk_hash() {
-pub static mut n: c_ulong = key / L1_CACHE_BYTES;
+pub static mut n: c_ulong = 0;
     return chunk_hash_heads + n % HASH_SIZE;
     }
 // hash_lock & mark->group->mark_mutex is held by caller
@@ -356,8 +566,8 @@ unsafe extern "C" fn insert_hash(chunk: *mut audit_chunk) {
 // called under rcu_read_lock
 #[no_mangle]
 pub unsafe extern "C" fn audit_tree_lookup() {
-pub static mut key: c_ulong = inode_to_key(inode);
-    struct list_head *list = chunk_hash(key);
+pub static mut key: c_ulong = 0;
+    let mut list = chunk_hash(key);
     let mut p = core::ptr::null_mut();
     list_for_each_entry_rcu(p, list, hash) {
 //
@@ -374,8 +584,9 @@ pub static mut key: c_ulong = inode_to_key(inode);
 #[no_mangle]
 pub unsafe extern "C" fn audit_tree_match(chunk: *mut audit_chunk, tree: *mut audit_tree) -> bool {
     let mut n = 0;
-    for (n = 0; n < chunk.count; n++)
+    for (n = 0; n < chunk.count; n++) {
     if (chunk.owners[n].owner == tree) {
+    }
     return true;
     }
     return false;
@@ -383,9 +594,9 @@ pub unsafe extern "C" fn audit_tree_match(chunk: *mut audit_chunk, tree: *mut au
 // tagging and untagging inodes with trees
 #[no_mangle]
 pub unsafe extern "C" fn find_chunk() {
-pub static mut index: c_int = p.index & ~(1U<<31);
+pub static mut index: c_int = 0;
     p -= index;
-    return container_of(p, struct audit_chunk, owners[0]);
+    return container_of!(p, audit_chunk, owners[0]);
     }
 #[no_mangle]
 pub unsafe extern "C" fn replace_mark_chunk() {
@@ -403,21 +614,24 @@ pub unsafe extern "C" fn replace_mark_chunk() {
 #[no_mangle]
 unsafe extern "C" fn replace_chunk(new: *mut audit_chunk, old: *mut audit_chunk) {
     let mut owner = core::ptr::null_mut();
-    int i, j;
+    let mut i = 0;
+    let mut j = 0;
     new.key = old.key;
     list_splice_init(&old.trees, &new.trees);
-    list_for_each_entry(owner, &new.trees, same_root)
+    list_for_each_entry(owner, &new.trees, same_root) {
     owner.root = new;
-    for (i = j = 0; j < old.count; i++, j++) {
+    }
+    while (j < old.count) {
     if (!old.owners[j].owner) {
-    i--;
+    i -= 1;
     continue;
     }
     owner = old.owners[j].owner;
     new.owners[i].owner = owner;
     new.owners[i].index = old.owners[j].index - j + i;
-    if (!owner) /* result of earlier fallback */
+    if (!owner) /* result of earlier fallback */ {
     continue;
+    }
     get_tree(owner);
     list_replace_init(&old.owners[j].list, &new.owners[i].list);
     }
@@ -432,7 +646,7 @@ unsafe extern "C" fn replace_chunk(new: *mut audit_chunk, old: *mut audit_chunk)
     }
 #[no_mangle]
 unsafe extern "C" fn remove_chunk_node(chunk: *mut audit_chunk, p: *mut audit_node) {
-    struct audit_tree *owner = p.owner;
+    let mut owner = p.owner;
     if (owner.root == chunk) {
     list_del_init(&owner.same_root);
     owner.root = core::ptr::null_mut();
@@ -445,9 +659,10 @@ unsafe extern "C" fn remove_chunk_node(chunk: *mut audit_chunk, p: *mut audit_no
 unsafe extern "C" fn chunk_count_trees(chunk: *mut audit_chunk) -> c_int {
     let mut i = 0;
 pub static mut ret: c_int = 0;
-    for (i = 0; i < chunk.count; i++)
+    for (i = 0; i < chunk.count; i++) {
     if (chunk.owners[i].owner) {
-    ret++;
+    }
+    ret += 1;
     }
     return ret;
     }
@@ -461,8 +676,9 @@ unsafe extern "C" fn untag_chunk(chunk: *mut audit_chunk, mark: *mut fsnotify_ma
 // whether it didn't change while we've dropped hash_lock.
 //
     if (!(mark.flags & FSNOTIFY_MARK_FLAG_ATTACHED) ||
-    mark_chunk(mark) != chunk)
-    goto out_mutex;
+    mark_chunk(mark) != chunk) {
+// goto;
+    }
     size = chunk_count_trees(chunk);
     if (!size) {
     spin_lock(&hash_lock);
@@ -478,7 +694,7 @@ unsafe extern "C" fn untag_chunk(chunk: *mut audit_chunk, mark: *mut fsnotify_ma
     }
     new = alloc_chunk(size);
     if (!new) {
-    goto out_mutex;
+// goto;
     }
     spin_lock(&hash_lock);
 //
@@ -490,14 +706,14 @@ unsafe extern "C" fn untag_chunk(chunk: *mut audit_chunk, mark: *mut fsnotify_ma
     fsnotify_group_unlock(audit_tree_group);
     audit_mark_put_chunk(chunk);
     return;
-    out_mutex:
+// label;
     fsnotify_group_unlock(audit_tree_group);
     }
 // Call with group->mark_mutex held, releases it
 #[no_mangle]
 unsafe extern "C" fn create_chunk(inode: *mut inode, tree: *mut audit_tree) -> c_int {
     let mut mark = core::ptr::null_mut();
-    struct audit_chunk *chunk = alloc_chunk(1);
+    let mut chunk = alloc_chunk(1);
     if (!chunk) {
     fsnotify_group_unlock(audit_tree_group);
     return -ENOMEM;
@@ -553,7 +769,8 @@ unsafe extern "C" fn create_chunk(inode: *mut inode, tree: *mut audit_tree) -> c
 #[no_mangle]
 unsafe extern "C" fn tag_chunk(inode: *mut inode, tree: *mut audit_tree) -> c_int {
     let mut mark = core::ptr::null_mut();
-    struct audit_chunk *chunk, *old;
+    let mut chunk = core::ptr::null_mut();
+    let mut old = core::ptr::null_mut();
     let mut p = core::ptr::null_mut();
     let mut n = 0;
     fsnotify_group_lock(audit_tree_group);
@@ -569,7 +786,7 @@ unsafe extern "C" fn tag_chunk(inode: *mut inode, tree: *mut audit_tree) -> c_in
 // are we already there?
     spin_lock(&hash_lock);
     old = mark_chunk(mark);
-    for (n = 0; n < old.count; n++) {
+    while (n < old.count) {
     if (old.owners[n].owner == tree) {
     spin_unlock(&hash_lock);
     fsnotify_group_unlock(audit_tree_group);
@@ -630,10 +847,11 @@ pub unsafe extern "C" fn audit_tree_log_remove_rule() {
     }
 #[no_mangle]
 unsafe extern "C" fn kill_rules(context: *mut audit_context, tree: *mut audit_tree) {
-    struct audit_krule *rule, *next;
+    let mut rule = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
     let mut entry = core::ptr::null_mut();
     list_for_each_entry_safe(rule, next, &tree.rules, rlist) {
-    entry = container_of(rule, struct audit_entry, rule);
+    entry = container_of!(rule, audit_entry, rule);
     list_del_init(&rule.rlist);
     if (rule.tree) {
 // not a half-baked one
@@ -660,7 +878,7 @@ unsafe extern "C" fn prune_tree_chunks(victim: *mut audit_tree, tagged: bool) {
     let mut p = core::ptr::null_mut();
     let mut chunk = core::ptr::null_mut();
     let mut mark = core::ptr::null_mut();
-    p = list_first_entry(&victim.chunks, struct audit_node, list);
+    p = list_first_entry(&victim.chunks, audit_node, list);
 // have we run out of marked?
     if (tagged && !(p.index & (1U<<31))) {
     break;
@@ -691,15 +909,16 @@ unsafe extern "C" fn prune_one(victim: *mut audit_tree) {
 // trim the uncommitted chunks from tree
 #[no_mangle]
 unsafe extern "C" fn trim_marked(tree: *mut audit_tree) {
-    struct list_head *p, *q;
+    let mut p = core::ptr::null_mut();
+    let mut q = core::ptr::null_mut();
     spin_lock(&hash_lock);
     if (tree.goner) {
     spin_unlock(&hash_lock);
     return;
     }
 // reorder
-    for (p = tree.chunks.next; p != &tree.chunks; p = q) {
-    struct audit_node *node = list_entry(p, struct audit_node, list);
+    while (p != &tree.chunks) {
+    let mut node = list_entry(p, audit_node, list);
     q = p.next;
     if (node.index & (1U<<31)) {
     list_del_init(p);
@@ -721,7 +940,7 @@ unsafe extern "C" fn trim_marked(tree: *mut audit_tree) {
     spin_unlock(&hash_lock);
     }
     }
-    static void audit_schedule_prune(void);
+// forward_decl: audit_schedule_prune;
 // called with audit_filter_mutex
 #[no_mangle]
 pub unsafe extern "C" fn audit_remove_tree_rule(rule: *mut audit_krule) -> c_int {
@@ -758,26 +977,26 @@ pub unsafe extern "C" fn audit_trim_trees() {
     let mut paths = core::ptr::null_mut();
     struct path array[16];
     let mut err = 0;
-    tree = container_of(cursor.next, struct audit_tree, list);
+    tree = container_of!(cursor.next, audit_tree, list);
     get_tree(tree);
     list_move(&cursor, &tree.list);
     mutex_unlock(&audit_filter_mutex);
     err = kern_path(tree.pathname, 0, &path);
     if (err) {
-    goto skip_it;
+// goto;
     }
     paths = collect_paths(&path, array, 16);
     path_put(&path);
     if (IS_ERR(paths)) {
-    goto skip_it;
+// goto;
     }
     spin_lock(&hash_lock);
     list_for_each_entry(node, &tree.chunks, list) {
-    struct audit_chunk *chunk = find_chunk(node);
+    let mut chunk = find_chunk(node);
 // this could be NULL if the watch is dying else where...
     node.index |= 1U<<31;
-    for (const struct path *p = paths; p.dentry; p++) {
-    struct inode *inode = p.dentry.d_inode;
+    while (p.dentry) {
+    let mut inode = p.dentry.d_inode;
     if (inode_to_key(inode) == chunk.key) {
     node.index &= ~(1U<<31);
     break;
@@ -787,7 +1006,7 @@ pub unsafe extern "C" fn audit_trim_trees() {
     spin_unlock(&hash_lock);
     trim_marked(tree);
     drop_collected_paths(paths, array);
-    skip_it:
+// label;
     put_tree(tree);
     mutex_lock(&audit_filter_mutex);
     }
@@ -800,8 +1019,9 @@ pub unsafe extern "C" fn audit_make_tree(rule: *mut audit_krule, pathname: *mut 
     (rule.listnr != AUDIT_FILTER_EXIT &&
     rule.listnr != AUDIT_FILTER_URING_EXIT) ||
     op != Audit_equal ||
-    rule.inode_f || rule.watch || rule.tree)
+    rule.inode_f || rule.watch || rule.tree) {
     return -EINVAL;
+    }
     rule.tree = alloc_tree(pathname);
     if (!rule.tree) {
     return -ENOMEM;
@@ -814,8 +1034,8 @@ pub unsafe extern "C" fn audit_put_tree(tree: *mut audit_tree) {
     }
 #[no_mangle]
 unsafe extern "C" fn tag_mounts(paths: *const path, tree: *mut audit_tree) -> c_int {
-    for (const struct path *p = paths; p.dentry; p++) {
-pub static mut err: c_int = tag_chunk(p.dentry.d_inode, tree);
+    while (p.dentry) {
+pub static mut err: c_int = 0;
     if (err) {
     return err;
     }
@@ -837,8 +1057,7 @@ unsafe extern "C" fn prune_tree_thread(unused: *mut c_void) -> c_int {
     mutex_lock(&audit_filter_mutex);
     while (!list_empty(&prune_list)) {
     let mut victim = core::ptr::null_mut();
-    victim = list_entry(prune_list.next,
-    struct audit_tree, list);
+    victim = list_entry(prune_list.next, audit_tree, list);
     list_del_init(&victim.list);
     mutex_unlock(&audit_filter_mutex);
     prune_one(victim);
@@ -857,7 +1076,7 @@ unsafe extern "C" fn audit_launch_prune() -> c_int {
     prune_thread = kthread_run(prune_tree_thread, core::ptr::null_mut(),
     "audit_prune_tree");
     if (IS_ERR(prune_thread)) {
-    pr_err("cannot start thread audit_prune_tree");
+    pr_err!("cannot start thread audit_prune_tree");
     prune_thread = core::ptr::null_mut();
     return -ENOMEM;
     }
@@ -866,7 +1085,7 @@ unsafe extern "C" fn audit_launch_prune() -> c_int {
 // called with audit_filter_mutex
 #[no_mangle]
 pub unsafe extern "C" fn audit_add_tree_rule(rule: *mut audit_krule) -> c_int {
-    struct audit_tree *seed = rule.tree, *tree;
+    let mut seed = rule.tree, *tree;
     let mut path;
     struct path array[16];
     let mut paths = core::ptr::null_mut();
@@ -888,18 +1107,18 @@ pub unsafe extern "C" fn audit_add_tree_rule(rule: *mut audit_krule) -> c_int {
     if (unlikely(!prune_thread)) {
     err = audit_launch_prune();
     if (err) {
-    goto Err;
+// goto;
     }
     }
     err = kern_path(tree.pathname, 0, &path);
     if (err) {
-    goto Err;
+// goto;
     }
     paths = collect_paths(&path, array, 16);
     path_put(&path);
     if (IS_ERR(paths)) {
     err = PTR_ERR(paths);
-    goto Err;
+// goto;
     }
     get_tree(tree);
     err = tag_mounts(paths, tree);
@@ -907,12 +1126,13 @@ pub unsafe extern "C" fn audit_add_tree_rule(rule: *mut audit_krule) -> c_int {
     if (!err) {
     let mut node = core::ptr::null_mut();
     spin_lock(&hash_lock);
-    list_for_each_entry(node, &tree.chunks, list)
+    list_for_each_entry(node, &tree.chunks, list) {
     node.index &= ~(1U<<31);
+    }
     spin_unlock(&hash_lock);
     } else {
     trim_marked(tree);
-    goto Err;
+// goto;
     }
     mutex_lock(&audit_filter_mutex);
     if (list_empty(&rule.rlist)) {
@@ -922,7 +1142,7 @@ pub unsafe extern "C" fn audit_add_tree_rule(rule: *mut audit_krule) -> c_int {
     rule.tree = tree;
     put_tree(tree);
     return 0;
-    Err:
+// label;
     mutex_lock(&audit_filter_mutex);
     list_del_init(&tree.list);
     list_del_init(&tree.rules);
@@ -957,7 +1177,7 @@ pub static mut failed: c_int = 0;
     while (cursor.next != &tree_list) {
     let mut tree = core::ptr::null_mut();
 pub static mut good_one: c_int = 0;
-    tree = container_of(cursor.next, struct audit_tree, list);
+    tree = container_of!(cursor.next, audit_tree, list);
     get_tree(tree);
     list_move(&cursor, &tree.list);
     mutex_unlock(&audit_filter_mutex);
@@ -987,15 +1207,16 @@ pub static mut good_one: c_int = 0;
     }
     while (barrier.prev != &tree_list) {
     let mut tree = core::ptr::null_mut();
-    tree = container_of(barrier.prev, struct audit_tree, list);
+    tree = container_of!(barrier.prev, audit_tree, list);
     get_tree(tree);
     list_move(&tree.list, &barrier);
     mutex_unlock(&audit_filter_mutex);
     if (!failed) {
     let mut node = core::ptr::null_mut();
     spin_lock(&hash_lock);
-    list_for_each_entry(node, &tree.chunks, list)
+    list_for_each_entry(node, &tree.chunks, list) {
     node.index &= ~(1U<<31);
+    }
     spin_unlock(&hash_lock);
     } else {
     trim_marked(tree);
@@ -1020,12 +1241,12 @@ unsafe extern "C" fn audit_schedule_prune() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn audit_kill_trees(context: *mut audit_context) {
-    struct list_head *list = &context.killed_trees;
+    let mut list = &context.killed_trees;
     audit_ctl_lock();
     mutex_lock(&audit_filter_mutex);
     while (!list_empty(list)) {
     let mut victim = core::ptr::null_mut();
-    victim = list_entry(list.next, struct audit_tree, list);
+    victim = list_entry(list.next, audit_tree, list);
     kill_rules(context, victim);
     list_del_init(&victim.list);
     mutex_unlock(&audit_filter_mutex);
@@ -1041,14 +1262,13 @@ pub unsafe extern "C" fn audit_kill_trees(context: *mut audit_context) {
 #[no_mangle]
 unsafe extern "C" fn evict_chunk(chunk: *mut audit_chunk) {
     let mut owner = core::ptr::null_mut();
-    struct list_head *postponed = audit_killed_trees();
+    let mut postponed = audit_killed_trees();
 pub static mut need_prune: c_int = 0;
     let mut n = 0;
     mutex_lock(&audit_filter_mutex);
     spin_lock(&hash_lock);
     while (!list_empty(&chunk.trees)) {
-    owner = list_entry(chunk.trees.next,
-    struct audit_tree, same_root);
+    owner = list_entry(chunk.trees.next, audit_tree, same_root);
     owner.goner = 1;
     owner.root = core::ptr::null_mut();
     list_del_init(&owner.same_root);
@@ -1063,8 +1283,9 @@ pub static mut need_prune: c_int = 0;
     spin_lock(&hash_lock);
     }
     list_del_rcu(&chunk.hash);
-    for (n = 0; n < chunk.count; n++)
+    for (n = 0; n < chunk.count; n++) {
     list_del_init(&chunk.owners[n].list);
+    }
     spin_unlock(&hash_lock);
     mutex_unlock(&audit_filter_mutex);
     if (need_prune) {
@@ -1103,8 +1324,9 @@ unsafe extern "C" fn audit_tree_init() -> c_int {
     if (IS_ERR(audit_tree_group)) {
     audit_panic("cannot initialize fsnotify group for rectree watches");
     }
-    for (i = 0; i < HASH_SIZE; i++)
+    for (i = 0; i < HASH_SIZE; i++) {
 // INIT_LIST_HEAD;
+    }
     return 0;
     }
 // __initcall;

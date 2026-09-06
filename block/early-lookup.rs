@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -57,14 +307,13 @@ pub struct uuidcmp {
 // Returns 1 if the device matches, and 0 otherwise.
 //
 #[no_mangle]
-unsafe extern "C" fn match_dev_by_uuid(dev: *mut device, data: *const c_void) -> int __init {
-    static int __init match_dev_by_uuid(struct device *dev, const void *data)
-    {
-    struct block_device *bdev = dev_to_bdev(dev);
-    const struct uuidcmp *cmp = data;
+unsafe extern "C" fn match_dev_by_uuid(dev: *mut device, data: *const c_void) -> c_int {
+    let mut bdev = dev_to_bdev(dev);
+    let mut cmp = data;
     if (!bdev.bd_meta_info ||
-    strncasecmp(cmp.uuid, bdev.bd_meta_info.uuid, cmp.len))
+    strncasecmp(cmp.uuid, bdev.bd_meta_info.uuid, cmp.len)) {
     return 0;
+    }
     return 1;
     }
 //
@@ -82,30 +331,31 @@ unsafe extern "C" fn match_dev_by_uuid(dev: *mut device, data: *const c_void) ->
 // Returns 0 on success or a negative error code on failure.
 //
 #[no_mangle]
-unsafe extern "C" fn devt_from_partuuid(uuid_str: *const c_char, devt: *mut dev_t) -> int __init {
-    static int __init devt_from_partuuid(const char *uuid_str, dev_t *devt)
-    {
-    struct uuidcmp cmp;
-    struct device *dev = core::ptr::null_mut();
-    let mut offset: c_int = 0;
-    char *slash;
+unsafe extern "C" fn devt_from_partuuid(uuid_str: *const c_char, devt: *mut dev_t) -> c_int {
+pub static mut cmp: usize = 0;
+    let mut dev = core::ptr::null_mut();
+pub static mut offset: c_int = 0;
+pub static mut slash: *mut c_void = core::ptr::null_mut();
     cmp.uuid = uuid_str;
     slash = strchr(uuid_str, '/');
 // Check for optional partition number offset attributes.
     if (slash) {
-    let mut c: c_char = 0;
+pub static mut c: c_char = 0;
 // Explicitly fail on poor PARTUUID syntax.
-    if (sscanf(slash + 1, "PARTNROFF=%d%c", &offset, &c) != 1)
-    goto out_invalid;
+    if (sscanf(slash + 1, "PARTNROFF=%d%c", &offset, &c) != 1) {
+// goto;
+    }
     cmp.len = slash - uuid_str;
     } else {
     cmp.len = strlen(uuid_str);
     }
-    if (!cmp.len)
-    goto out_invalid;
+    if (!cmp.len) {
+// goto;
+    }
     dev = class_find_device(&block_class, core::ptr::null_mut(), &cmp, &match_dev_by_uuid);
-    if (!dev)
+    if (!dev) {
     return -ENODEV;
+    }
     if (offset) {
 //
 // Attempt to find the requested partition by adding an offset
@@ -118,8 +368,8 @@ unsafe extern "C" fn devt_from_partuuid(uuid_str: *const c_char, devt: *mut dev_
     }
     put_device(dev);
     return 0;
-    out_invalid:
-    pr_err("VFS: PARTUUID= is invalid.\n"
+// label;
+    pr_err!("VFS: PARTUUID= is invalid.\n"
     "Expected PARTUUID=<valid-uuid-id>[/PARTNROFF=%%d]\n");
     return -EINVAL;
     }
@@ -131,39 +381,36 @@ unsafe extern "C" fn devt_from_partuuid(uuid_str: *const c_char, devt: *mut dev_
 // Returns 1 if the device matches, and 0 otherwise.
 //
 #[no_mangle]
-unsafe extern "C" fn match_dev_by_label(dev: *mut device, data: *const c_void) -> int __init {
-    static int __init match_dev_by_label(struct device *dev, const void *data)
-    {
-    struct block_device *bdev = dev_to_bdev(dev);
-    const char *label = data;
-    if (!bdev.bd_meta_info || strcmp(label, bdev.bd_meta_info.volname))
+unsafe extern "C" fn match_dev_by_label(dev: *mut device, data: *const c_void) -> c_int {
+    let mut bdev = dev_to_bdev(dev);
+    let mut label = data;
+    if (!bdev.bd_meta_info || strcmp(label, bdev.bd_meta_info.volname)) {
     return 0;
+    }
     return 1;
     }
 #[no_mangle]
-unsafe extern "C" fn devt_from_partlabel(label: *const c_char, devt: *mut dev_t) -> int __init {
-    static int __init devt_from_partlabel(const char *label, dev_t *devt)
-    {
-    struct device *dev;
+unsafe extern "C" fn devt_from_partlabel(label: *const c_char, devt: *mut dev_t) -> c_int {
+pub static mut dev: *mut c_void = core::ptr::null_mut();
     dev = class_find_device(&block_class, core::ptr::null_mut(), label, &match_dev_by_label);
-    if (!dev)
+    if (!dev) {
     return -ENODEV;
+    }
 // devt = dev->devt;
     put_device(dev);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn blk_lookup_devt(name: *const c_char, partno: c_int) -> dev_t __init {
-    static dev_t __init blk_lookup_devt(const char *name, int partno)
-    {
-    let mut devt: dev_t = MKDEV(0, 0);
-    struct class_dev_iter iter;
-    struct device *dev;
+pub static mut devt: dev_t = 0;
+pub static mut iter: usize = 0;
+pub static mut dev: *mut c_void = core::ptr::null_mut();
     class_dev_iter_init(&iter, &block_class, core::ptr::null_mut(), &disk_type);
     while ((dev = class_dev_iter_next(&iter))) {
-    struct gendisk *disk = dev_to_disk(dev);
-    if (strcmp(dev_name(dev), name))
+    let mut disk = dev_to_disk(dev);
+    if (strcmp(dev_name(dev), name)) {
     continue;
+    }
     if (partno < disk.minors) {
 // We need to return the right devno, even
 // if the partition doesn't exist yet.
@@ -172,68 +419,77 @@ unsafe extern "C" fn blk_lookup_devt(name: *const c_char, partno: c_int) -> dev_
     MINOR(dev.devt) + partno);
     } else {
     devt = part_devt(disk, partno);
-    if (devt)
+    if (devt) {
     break;
+    }
     }
     }
     class_dev_iter_exit(&iter);
     return devt;
     }
 #[no_mangle]
-unsafe extern "C" fn devt_from_devname(name: *const c_char, devt: *mut dev_t) -> int __init {
-    static int __init devt_from_devname(const char *name, dev_t *devt)
-    {
-    int part;
+unsafe extern "C" fn devt_from_devname(name: *const c_char, devt: *mut dev_t) -> c_int {
+    let mut part = 0;
     char s[32];
-    char *p;
-    if (strlen(name) > 31)
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    if (strlen(name) > 31) {
     return -EINVAL;
+    }
     strcpy(s, name);
-    for (p = s; *p; p++) {
-    if (*p == '/')
+    while (*p) {
+    if (*p == '/') {
 // p = '!';
     }
+    }
 // devt = blk_lookup_devt(s, 0);
-    if (*devt)
+    if (*devt) {
     return 0;
+    }
 //
 // Try non-existent, but valid partition, which may only exist after
 // opening the device, like partitioned md devices.
 //
-    while (p > s && isdigit(p[-1]))
-    p--;
-    if (p == s || !*p || *p == '0')
+    while (p > s && isdigit(p[-1])) {
+    p -= 1;
+    }
+    if (p == s || !*p || *p == '0') {
     return -ENODEV;
+    }
 // try disk name without <part number>
     part = simple_strtoul(p, core::ptr::null_mut(), 10);
 // p = '\0';
 // devt = blk_lookup_devt(s, part);
-    if (*devt)
+    if (*devt) {
     return 0;
+    }
 // try disk name without p<part number>
-    if (p < s + 2 || !isdigit(p[-2]) || p[-1] != 'p')
+    if (p < s + 2 || !isdigit(p[-2]) || p[-1] != 'p') {
     return -ENODEV;
+    }
     p[-1] = '\0';
 // devt = blk_lookup_devt(s, part);
-    if (*devt)
+    if (*devt) {
     return 0;
+    }
     return -ENODEV;
     }
 #[no_mangle]
-unsafe extern "C" fn devt_from_devnum(name: *const c_char, devt: *mut dev_t) -> int __init {
-    static int __init devt_from_devnum(const char *name, dev_t *devt)
-    {
-    unsigned maj, min, offset;
+unsafe extern "C" fn devt_from_devnum(name: *const c_char, devt: *mut dev_t) -> c_int {
+    let mut maj = 0;
+    let mut min = 0;
+    let mut offset = 0;
     char *p, dummy;
     if (sscanf(name, "%u:%u%c", &maj, &min, &dummy) == 2 ||
     sscanf(name, "%u:%u:%u:%c", &maj, &min, &offset, &dummy) == 3) {
 // devt = MKDEV(maj, min);
-    if (maj != MAJOR(*devt) || min != MINOR(*devt))
+    if (maj != MAJOR(*devt) || min != MINOR(*devt)) {
     return -EINVAL;
+    }
     } else {
 // devt = new_decode_dev(simple_strtoul(name, &p, 16));
-    if (*p)
+    if (*p) {
     return -EINVAL;
+    }
     }
     return 0;
     }
@@ -266,15 +522,16 @@ unsafe extern "C" fn devt_from_devnum(name: *const c_char, devt: *mut dev_t) -> 
 // bangs.
 //
 #[no_mangle]
-pub unsafe extern "C" fn early_lookup_bdev(name: *const c_char, devt: *mut dev_t) -> int __init {
-    int __init early_lookup_bdev(const char *name, dev_t *devt)
-    {
-    if (strncmp(name, "PARTUUID=", 9) == 0)
+pub unsafe extern "C" fn early_lookup_bdev(name: *const c_char, devt: *mut dev_t) -> c_int {
+    if (strncmp(name, "PARTUUID=", 9) == 0) {
     return devt_from_partuuid(name + 9, devt);
-    if (strncmp(name, "PARTLABEL=", 10) == 0)
+    }
+    if (strncmp(name, "PARTLABEL=", 10) == 0) {
     return devt_from_partlabel(name + 10, devt);
-    if (strncmp(name, "/dev/", 5) == 0)
+    }
+    if (strncmp(name, "/dev/", 5) == 0) {
     return devt_from_devname(name + 5, devt);
+    }
     return devt_from_devnum(name, devt);
     }
     static char __init *bdevt_str(dev_t devt, char *buf)
@@ -283,8 +540,9 @@ pub unsafe extern "C" fn early_lookup_bdev(name: *const c_char, devt: *mut dev_t
     char tbuf[BDEVT_SIZE];
     snprintf(tbuf, BDEVT_SIZE, "%02x%02x", MAJOR(devt), MINOR(devt));
     snprintf(buf, BDEVT_SIZE, "%-9s", tbuf);
-    } else
+    } else {
     snprintf(buf, BDEVT_SIZE, "%03x:%05x", MAJOR(devt), MINOR(devt));
+    }
     return buf;
     }
 //
@@ -293,46 +551,48 @@ pub unsafe extern "C" fn early_lookup_bdev(name: *const c_char, devt: *mut dev_t
 // went wrong
 //
 #[no_mangle]
-pub unsafe extern "C" fn printk_all_partitions() -> void __init {
-    void __init printk_all_partitions(void)
-    {
-    struct class_dev_iter iter;
-    struct device *dev;
+pub unsafe extern "C" fn printk_all_partitions()  {
+pub static mut iter: usize = 0;
+pub static mut dev: *mut c_void = core::ptr::null_mut();
     class_dev_iter_init(&iter, &block_class, core::ptr::null_mut(), &disk_type);
     while ((dev = class_dev_iter_next(&iter))) {
-    struct gendisk *disk = dev_to_disk(dev);
-    struct block_device *part;
+    let mut disk = dev_to_disk(dev);
+pub static mut part: *mut c_void = core::ptr::null_mut();
     char devt_buf[BDEVT_SIZE];
-    unsigned long idx;
+    let mut idx = 0;
 //
 // Don't show empty devices or things that have been
 // suppressed
 //
-    if (get_capacity(disk) == 0 || (disk.flags & GENHD_FL_HIDDEN))
+    if (get_capacity(disk) == 0 || (disk.flags & GENHD_FL_HIDDEN)) {
     continue;
+    }
 //
 // Note, unlike /proc/partitions, I am showing the numbers in
 // hex - the same format as the root= option takes.
 //
     rcu_read_lock();
     xa_for_each(&disk.part_tbl, idx, part) {
-    if (!bdev_nr_sectors(part))
+    if (!bdev_nr_sectors(part)) {
     continue;
+    }
     printk("%s%s %10llu %pg %s",
     bdev_is_partition(part) ? "  " : "",
     bdevt_str(part.bd_dev, devt_buf),
     bdev_nr_sectors(part) >> 1, part,
     part.bd_meta_info ?
     part.bd_meta_info.uuid : "");
-    if (bdev_is_partition(part))
+    if (bdev_is_partition(part)) {
     printk("\n");
-#[no_mangle]
-pub unsafe extern "C" fn if(dev->parent->driver: dev->parent &&) -> else {
-    else if (dev.parent && dev.parent.driver)
+    }
+
+    else if (dev.parent && dev.parent.driver) {
     printk(" driver: %s\n",
     dev.parent.driver.name);
-    else
+    }
+    else {
     printk(" (driver?)\n");
+    }
     }
     rcu_read_unlock();
     }

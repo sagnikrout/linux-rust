@@ -34,6 +34,216 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
 macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
@@ -142,7 +352,7 @@ pub type atomic_long_t = core::sync::atomic::AtomicI64;
 // Vivek Goyal <vgoyal@redhat.com>
 //
 
-pub static mut sig_enforce: bool = IS_ENABLED(CONFIG_KEXEC_SIG_FORCE);
+pub static mut sig_enforce: bool = false;
 #[no_mangle]
 pub unsafe extern "C" fn set_kexec_sig_enforced() {
     sig_enforce = true;
@@ -163,7 +373,7 @@ unsafe extern "C" fn check_ima_segment_index(image: *mut kimage, i: c_int) -> bo
     return false;
     }
 
-    static int kexec_calculate_store_digests(struct kimage *image);
+// forward_decl: kexec_calculate_store_digests;
 // Maximum size in bytes for kernel/initrd files.
 
 //
@@ -174,8 +384,8 @@ unsafe extern "C" fn check_ima_segment_index(image: *mut kimage, i: c_int) -> bo
 #[no_mangle]
 pub unsafe extern "C" fn kexec_image_probe_default() {
     const struct kexec_file_ops * const *fops;
-pub static mut ret: c_int = -ENOEXEC;
-    for (fops = &kexec_file_loaders[0]; *fops && (*fops).probe; ++fops) {
+pub static mut ret: c_int = 0;
+    while (*fops && (*fops).probe) {
     ret = (*fops).probe(buf, buf_len);
     if (!ret) {
     image.fops = *fops;
@@ -208,7 +418,7 @@ pub unsafe extern "C" fn kexec_image_post_load_cleanup_default(image: *mut kimag
 //
 #[no_mangle]
 pub unsafe extern "C" fn kimage_file_post_load_cleanup(image: *mut kimage) {
-    struct purgatory_info *pi = &image.purgatory_info;
+    let mut pi = &image.purgatory_info;
     vfree(image.kernel_buf);
     image.kernel_buf = core::ptr::null_mut();
     vfree(image.initrd_buf);
@@ -241,7 +451,7 @@ pub unsafe extern "C" fn kexec_kernel_verify_pe_sig(kernel: *const c_char, kerne
     ret = verify_pefile_signature(kernel, kernel_len,
     VERIFY_USE_SECONDARY_KEYRING,
     VERIFYING_KEXEC_PE_SIGNATURE);
-    if (ret == -ENOKEY && IS_ENABLED(CONFIG_INTEGRITY_PLATFORM_KEYRING)) {
+    if (ret == -ENOKEY && IS_ENABLED!(CONFIG_INTEGRITY_PLATFORM_KEYRING)) {
     ret = verify_pefile_signature(kernel, kernel_len,
     VERIFY_USE_PLATFORM_KEYRING,
     VERIFYING_KEXEC_PE_SIGNATURE);
@@ -252,7 +462,7 @@ pub unsafe extern "C" fn kexec_kernel_verify_pe_sig(kernel: *const c_char, kerne
 #[no_mangle]
 pub unsafe extern "C" fn kexec_image_verify_sig() {
     if (!image.fops || !image.fops.verify_sig) {
-    pr_debug("kernel loader does not support signature verification.\n");
+    pr_debug!("kernel loader does not support signature verification.\n");
     return -EKEYREJECTED;
     }
     return image.fops.verify_sig(buf, buf_len);
@@ -273,9 +483,10 @@ pub unsafe extern "C" fn kimage_validate_signature() {
 // down.
 //
     if (!ima_appraise_signature(READING_KEXEC_IMAGE) &&
-    security_locked_down(LOCKDOWN_KEXEC))
+    security_locked_down(LOCKDOWN_KEXEC)) {
     return -EPERM;
-    pr_debug("kernel signature verification failed (%d).\n", ret);
+    }
+    pr_debug!("kernel signature verification failed (%d).\n", ret);
     }
     return 0;
     }
@@ -310,12 +521,12 @@ pub unsafe extern "C" fn kimage_file_prepare_segments() {
     ret = arch_kexec_kernel_image_probe(image, image.kernel_buf,
     image.kernel_buf_len);
     if (ret) {
-    goto out;
+// goto;
     }
 
     ret = kimage_validate_signature(image);
     if (ret) {
-    goto out;
+// goto;
     }
 
 // It is possible that there no initramfs is being loaded
@@ -324,7 +535,7 @@ pub unsafe extern "C" fn kimage_file_prepare_segments() {
     KEXEC_FILE_SIZE_MAX, core::ptr::null_mut(),
     READING_KEXEC_INITRAMFS);
     if (ret < 0) {
-    goto out;
+// goto;
     }
     image.initrd_buf_len = ret;
     ret = 0;
@@ -336,13 +547,13 @@ pub unsafe extern "C" fn kimage_file_prepare_segments() {
     if (IS_ERR(image.cmdline_buf)) {
     ret = PTR_ERR(image.cmdline_buf);
     image.cmdline_buf = core::ptr::null_mut();
-    goto out;
+// goto;
     }
     image.cmdline_buf_len = cmdline_len;
 // command line should be a string with last byte null
     if (image.cmdline_buf[cmdline_len - 1] != '\0') {
     ret = -EINVAL;
-    goto out;
+// goto;
     }
     ima_kexec_cmdline(kernel_fd, image.cmdline_buf,
     image.cmdline_buf_len - 1);
@@ -352,16 +563,16 @@ pub unsafe extern "C" fn kimage_file_prepare_segments() {
 // If KHO is active, add its images to the list
     ret = kho_fill_kimage(image);
     if (ret) {
-    goto out;
+// goto;
     }
 // Call image load handler
     ldata = kexec_image_load_default(image);
     if (IS_ERR(ldata)) {
     ret = PTR_ERR(ldata);
-    goto out;
+// goto;
     }
     image.image_loader_data = ldata;
-    out:
+// label;
 // In case of error, free up all allocated memory in this function
     if (ret) {
     kimage_file_post_load_cleanup(image);
@@ -372,7 +583,7 @@ pub unsafe extern "C" fn kimage_file_prepare_segments() {
 pub unsafe extern "C" fn kimage_file_alloc_init() {
     let mut ret = 0;
     let mut image = core::ptr::null_mut();
-pub static mut kexec_on_panic: bool = flags & KEXEC_FILE_ON_CRASH;
+pub static mut kexec_on_panic: bool = false;
     image = do_kimage_alloc_init();
     if (!image) {
     return -ENOMEM;
@@ -389,42 +600,43 @@ pub static mut kexec_on_panic: bool = flags & KEXEC_FILE_ON_CRASH;
     ret = kimage_file_prepare_segments(image, kernel_fd, initrd_fd,
     cmdline_ptr, cmdline_len, flags);
     if (ret) {
-    goto out_free_image;
+// goto;
     }
     ret = sanity_check_segment_list(image);
     if (ret) {
-    goto out_free_post_load_bufs;
+// goto;
     }
     ret = -ENOMEM;
     image.control_code_page = kimage_alloc_control_pages(image,
     get_order(KEXEC_CONTROL_PAGE_SIZE));
     if (!image.control_code_page) {
-    pr_err("Could not allocate control_code_buffer\n");
-    goto out_free_post_load_bufs;
+    pr_err!("Could not allocate control_code_buffer\n");
+// goto;
     }
     if (!kexec_on_panic) {
     image.swap_page = kimage_alloc_control_pages(image, 0);
     if (!image.swap_page) {
-    pr_err("Could not allocate swap buffer\n");
-    goto out_free_control_pages;
+    pr_err!("Could not allocate swap buffer\n");
+// goto;
     }
     }
 // rimage = image;
     return 0;
-    out_free_control_pages:
+// label;
     kimage_free_page_list(&image.control_pages);
-    out_free_post_load_bufs:
+// label;
     kimage_file_post_load_cleanup(image);
-    out_free_image:
+// label;
     kfree(image);
     return ret;
     }
 #[no_mangle]
 pub unsafe extern "C" fn sys_kexec_file_load() {
-    int image_type = (flags & KEXEC_FILE_ON_CRASH) ?
+    let mut image_type = (flags & KEXEC_FILE_ON_CRASH) ?
     KEXEC_TYPE_CRASH : KEXEC_TYPE_DEFAULT;
-    struct kimage **dest_image, *image;
-pub static mut ret: c_int = 0, i;
+    let mut dest_image = core::ptr::null_mut();
+    let mut image = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
 // We only trust the superuser with rebooting the system.
     if (!kexec_load_permitted(image_type)) {
     return -EPERM;
@@ -448,7 +660,7 @@ pub static mut ret: c_int = 0, i;
     dest_image = &kexec_image;
     }
     if (flags & KEXEC_FILE_UNLOAD) {
-    goto exchange;
+// goto;
     }
 //
 // In case of crash, new kernel gets loaded in reserved region. It is
@@ -461,7 +673,7 @@ pub static mut ret: c_int = 0, i;
     ret = kimage_file_alloc_init(&image, kernel_fd, initrd_fd, cmdline_ptr,
     cmdline_len, flags);
     if (ret) {
-    goto out;
+// goto;
     }
 
     if ((flags & KEXEC_FILE_ON_CRASH) && arch_crash_hotplug_support(image, flags)) {
@@ -470,7 +682,7 @@ pub static mut ret: c_int = 0, i;
 
     ret = machine_kexec_prepare(image);
     if (ret) {
-    goto out;
+// goto;
     }
 //
 // Some architecture(like S390) may touch the crash memory before
@@ -478,14 +690,14 @@ pub static mut ret: c_int = 0, i;
 //
     ret = kimage_crash_copy_vmcoreinfo(image);
     if (ret) {
-    goto out;
+// goto;
     }
     ret = kexec_calculate_store_digests(image);
     if (ret) {
-    goto out;
+// goto;
     }
     kexec_dprintk("nr_segments = %lu\n", image.nr_segments);
-    for (i = 0; i < image.nr_segments; i++) {
+    while (i < image.nr_segments) {
     let mut ksegment = core::ptr::null_mut();
     ksegment = &image.segment[i];
     kexec_dprintk("segment[%d]: buf=0x%p bufsz=0x%zx mem=0x%lx memsz=0x%zx\n",
@@ -493,13 +705,13 @@ pub static mut ret: c_int = 0, i;
     ksegment.memsz);
     ret = kimage_load_segment(image, i);
     if (ret) {
-    goto out;
+// goto;
     }
     }
     kimage_terminate(image);
     ret = kexec_post_load(image, flags);
     if (ret) {
-    goto out;
+// goto;
     }
     kexec_dprintk("kexec_file_load: type:%u, start:0x%lx head:0x%lx flags:0x%lx\n",
     image.type, image.start, image.head, flags);
@@ -508,10 +720,9 @@ pub static mut ret: c_int = 0, i;
 // after image has been loaded
 //
     kimage_file_post_load_cleanup(image);
-    exchange:
+// label;
     image = xchg(dest_image, image);
-    out:
-
+// label;
     if ((flags & KEXEC_FILE_ON_CRASH) && kexec_crash_image) {
     arch_kexec_protect_crashkres();
     }
@@ -522,7 +733,7 @@ pub static mut ret: c_int = 0, i;
     }
 #[no_mangle]
 pub unsafe extern "C" fn locate_mem_hole_top_down() {
-    struct kimage *image = kbuf.image;
+    let mut image = kbuf.image;
     unsigned long temp_start, temp_end;
     temp_end = min(end, kbuf.buf_max);
     temp_start = temp_end - kbuf.memsz + 1;
@@ -557,7 +768,7 @@ pub unsafe extern "C" fn locate_mem_hole_top_down() {
     }
 #[no_mangle]
 pub unsafe extern "C" fn locate_mem_hole_bottom_up() {
-    struct kimage *image = kbuf.image;
+    let mut image = kbuf.image;
     unsigned long temp_start, temp_end;
     temp_start = max(start, kbuf.buf_min);
     kexec_random_range_start(temp_start, end, kbuf, &temp_start);
@@ -590,9 +801,9 @@ pub unsafe extern "C" fn locate_mem_hole_bottom_up() {
     }
 #[no_mangle]
 unsafe extern "C" fn locate_mem_hole_callback(res: *mut resource, arg: *mut c_void) -> c_int {
-    struct kexec_buf *kbuf = arg;
-pub static mut start: u64 = res.start, end = res.end;
-pub static mut sz: c_ulong = end - start + 1;
+    let mut kbuf = arg;
+pub static mut start: u64 = 0;
+pub static mut sz: c_ulong = 0;
 // Returning 0 will take to next memory range
 // Don't use memory that will be detected and handled by a driver.
     if (res.flags & IORESOURCE_SYSRAM_DRIVER_MANAGED) {
@@ -619,7 +830,7 @@ pub unsafe extern "C" fn kexec_walk_memblock() {
 pub static mut ret: c_int = 0;
     let mut i = 0;
     phys_addr_t mstart, mend;
-pub static mut res: resource = { };
+pub static mut res: resource = 0;
 
     if (kbuf.image.type == KEXEC_TYPE_CRASH) {
     return func(&crashk_res, kbuf);
@@ -665,7 +876,9 @@ pub static mut res: resource = { };
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn kexec_walk_memblock() {
+#[no_mangle]
+// duplicate fn: kexec_walk_memblock
+pub unsafe extern "C" fn kexec_walk_memblock_dup() {
     return 0;
     }
 
@@ -697,7 +910,7 @@ pub unsafe extern "C" fn kexec_walk_resources() {
     }
 #[no_mangle]
 unsafe extern "C" fn kexec_alloc_contig(kbuf: *mut kexec_buf) -> c_int {
-pub static mut nr_pages: usize = kbuf.memsz >> PAGE_SHIFT;
+pub static mut nr_pages: usize = 0;
     let mut mem = 0;
     let mut p = core::ptr::null_mut();
 // User space disabled CMA allocations, bail out.
@@ -712,11 +925,11 @@ pub static mut nr_pages: usize = kbuf.memsz >> PAGE_SHIFT;
     if (!p) {
     return -ENOMEM;
     }
-    pr_debug("allocated %zu DMA pages at 0x%lx", nr_pages, page_to_boot_pfn(p));
+    pr_debug!("allocated %zu DMA pages at 0x%lx", nr_pages, page_to_boot_pfn(p));
     mem = page_to_boot_pfn(p) << PAGE_SHIFT;
     if (kimage_is_destination_range(kbuf.image, mem, mem + kbuf.memsz)) {
 // Our region is already in use by a statically defined one. Bail out.
-    pr_debug("CMA overlaps existing mem: 0x%lx+0x%lx\n", mem, kbuf.memsz);
+    pr_debug!("CMA overlaps existing mem: 0x%lx+0x%lx\n", mem, kbuf.memsz);
     dma_release_from_contiguous(core::ptr::null_mut(), p, nr_pages);
     return -EBUSY;
     }
@@ -755,13 +968,13 @@ pub unsafe extern "C" fn kexec_locate_mem_hole(kbuf: *mut kexec_buf) -> c_int {
     if (!kexec_alloc_contig(kbuf)) {
     return 0;
     }
-    if (!IS_ENABLED(CONFIG_ARCH_KEEP_MEMBLOCK)) {
+    if (!IS_ENABLED!(CONFIG_ARCH_KEEP_MEMBLOCK)) {
     ret = kexec_walk_resources(kbuf, locate_mem_hole_callback);
     }
     else {
     ret = kexec_walk_memblock(kbuf, locate_mem_hole_callback);
     }
-pub static mut ret: return = = 1 ? 0 : -EADDRNOTAVAIL;
+pub static mut ret: return = 0;
     }
 //
 // kexec_add_buffer - place a buffer in a kexec segment
@@ -811,12 +1024,12 @@ pub unsafe extern "C" fn kexec_add_buffer(kbuf: *mut kexec_buf) -> c_int {
     ksegment.mem = kbuf.mem;
     ksegment.memsz = kbuf.memsz;
     kbuf.image.segment_cma[kbuf.image.nr_segments] = kbuf.cma;
-    kbuf.image.nr_segments++;
+    kbuf.image.nr_segments += 1;
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn kexec_only_cma_segments(image: *mut kimage) -> bool {
-    for (int i = 0; i < image.nr_segments; i++) {
+    while (i < image.nr_segments) {
     if (!image.segment_cma[i]) {
     return false;
     }
@@ -827,18 +1040,18 @@ unsafe extern "C" fn kexec_only_cma_segments(image: *mut kimage) -> bool {
 #[no_mangle]
 unsafe extern "C" fn kexec_calculate_store_digests(image: *mut kimage) -> c_int {
     let mut sctx;
-pub static mut ret: c_int = 0, i, j, zero_buf_sz, sha_region_sz;
+pub static mut ret: c_int = 0;
     let mut nullsz = 0;
     u8 digest[SHA256_DIGEST_SIZE];
     let mut zero_buf = core::ptr::null_mut();
     let mut sha_regions = core::ptr::null_mut();
-    struct purgatory_info *pi = &image.purgatory_info;
-    if (!IS_ENABLED(CONFIG_ARCH_SUPPORTS_KEXEC_PURGATORY)) {
+    let mut pi = &image.purgatory_info;
+    if (!IS_ENABLED!(CONFIG_ARCH_SUPPORTS_KEXEC_PURGATORY)) {
     return 0;
     }
     zero_buf = __va(page_to_pfn(ZERO_PAGE(0)) << PAGE_SHIFT);
     zero_buf_sz = PAGE_SIZE;
-    sha_region_sz = KEXEC_SEGMENT_MAX * sizeof(struct kexec_sha_region);
+    sha_region_sz = KEXEC_SEGMENT_MAX * sizeof!(kexec_sha_region);
     sha_regions = vzalloc(sha_region_sz);
     if (!sha_regions) {
     return -ENOMEM;
@@ -855,10 +1068,10 @@ pub static mut ret: c_int = 0, i, j, zero_buf_sz, sha_region_sz;
 //
     if (image.type != KEXEC_TYPE_CRASH &&
     (kho_is_enabled() || kexec_only_cma_segments(image))) {
-    pr_debug("disabling checksum verification in purgatory\n");
-    goto skip_checksum;
+    pr_debug!("disabling checksum verification in purgatory\n");
+// goto;
     }
-    for (j = i = 0; i < image.nr_segments; i++) {
+    while (i < image.nr_segments) {
     let mut ksegment = core::ptr::null_mut();
 
 // Exclude elfcorehdr segment to allow future changes via hotplug
@@ -888,7 +1101,7 @@ pub static mut ret: c_int = 0, i, j, zero_buf_sz, sha_region_sz;
 //
     nullsz = ksegment.memsz - ksegment.bufsz;
     while (nullsz) {
-pub static mut bytes: c_ulong = nullsz;
+pub static mut bytes: c_ulong = 0;
     if (bytes > zero_buf_sz) {
     bytes = zero_buf_sz;
     }
@@ -897,18 +1110,18 @@ pub static mut bytes: c_ulong = nullsz;
     }
     sha_regions[j].start = ksegment.mem;
     sha_regions[j].len = ksegment.memsz;
-    j++;
+    j += 1;
     }
-    skip_checksum:
+// label;
     sha256_final(&sctx, digest);
     ret = kexec_purgatory_get_set_symbol(image, "purgatory_sha_regions",
     sha_regions, sha_region_sz, 0);
     if (ret) {
-    goto out_free_sha_regions;
+// goto;
     }
     ret = kexec_purgatory_get_set_symbol(image, "purgatory_sha256_digest",
     digest, SHA256_DIGEST_SIZE, 0);
-    out_free_sha_regions:
+// label;
     vfree(sha_regions);
     return ret;
     }
@@ -920,20 +1133,21 @@ pub static mut bytes: c_ulong = nullsz;
 //
 // Return: pointer to symbol in read-only symtab on success, NULL on error.
 //
-    static const Elf_Sym *kexec_purgatory_find_symbol(struct purgatory_info *pi,
+    static const Elf_Sym *kexec_purgatory_find_symbol(purgatory_info *pi,
     const char *name)
     {
     let mut sechdrs = core::ptr::null_mut();
     let mut ehdr = core::ptr::null_mut();
     let mut syms = core::ptr::null_mut();
     let mut strtab = core::ptr::null_mut();
-    int i, k;
+    let mut i = 0;
+    let mut k = 0;
     if (!pi.ehdr) {
     return core::ptr::null_mut();
     }
     ehdr = pi.ehdr;
     sechdrs = ehdr + ehdr.e_shoff;
-    for (i = 0; i < ehdr.e_shnum; i++) {
+    while (i < ehdr.e_shnum) {
     if (sechdrs[i].sh_type != SHT_SYMTAB) {
     continue;
     }
@@ -944,7 +1158,7 @@ pub static mut bytes: c_ulong = nullsz;
     strtab = ehdr + sechdrs[sechdrs[i].sh_link].sh_offset;
     syms = ehdr + sechdrs[i].sh_offset;
 // Go through symbols for a match
-    for (k = 0; k < sechdrs[i].sh_size/sizeof(Elf_Sym); k++) {
+    while (k < sechdrs[i].sh_size/sizeof!(Elf_Sym)) {
     if (ELF_ST_BIND(syms[k].st_info) != STB_GLOBAL) {
     continue;
     }
@@ -953,7 +1167,7 @@ pub static mut bytes: c_ulong = nullsz;
     }
     if (syms[k].st_shndx == SHN_UNDEF ||
     syms[k].st_shndx >= ehdr.e_shnum) {
-    pr_debug("Symbol: %s has bad section index %d.\n",
+    pr_debug!("Symbol: %s has bad section index %d.\n",
     name, syms[k].st_shndx);
     return core::ptr::null_mut();
     }
@@ -979,11 +1193,12 @@ pub unsafe extern "C" fn kexec_purgatory_setup_kbuf() {
     let mut bss_align = 0;
     let mut bss_sz = 0;
     let mut align = 0;
-    int i, ret;
+    let mut i = 0;
+    let mut ret = 0;
     sechdrs = pi.ehdr + pi.ehdr.e_shoff;
     kbuf.buf_align = bss_align = 1;
     kbuf.bufsz = bss_sz = 0;
-    for (i = 0; i < pi.ehdr.e_shnum; i++) {
+    while (i < pi.ehdr.e_shnum) {
     if (!(sechdrs[i].sh_flags & SHF_ALLOC)) {
     continue;
     }
@@ -1014,10 +1229,10 @@ pub unsafe extern "C" fn kexec_purgatory_setup_kbuf() {
     pi.purgatory_buf = kbuf.buffer;
     ret = kexec_add_buffer(kbuf);
     if (ret) {
-    goto out;
+// goto;
     }
     return 0;
-    out:
+// label;
     vfree(pi.purgatory_buf);
     pi.purgatory_buf = core::ptr::null_mut();
     return ret;
@@ -1047,7 +1262,7 @@ pub static mut start_fixed: bool = false;
 // The section headers in kexec_purgatory are read-only. In order to
 // have them modifiable make a temporary copy.
 //
-    sechdrs_size = array_size(sizeof(Elf_Shdr), pi.ehdr.e_shnum);
+    sechdrs_size = array_size(sizeof!(Elf_Shdr), pi.ehdr.e_shnum);
     sechdrs = vzalloc(sechdrs_size);
     if (!sechdrs) {
     return -ENOMEM;
@@ -1062,9 +1277,10 @@ pub static mut start_fixed: bool = false;
     entry_shndx = entry_sym.st_shndx;
     entry_off = entry_sym.st_value;
     }
-    for (i = 0; i < pi.ehdr.e_shnum; i++) {
+    while (i < pi.ehdr.e_shnum) {
     let mut align = 0;
-    void *src, *dst;
+    let mut src = core::ptr::null_mut();
+    let mut dst = core::ptr::null_mut();
     if (!(sechdrs[i].sh_flags & SHF_ALLOC)) {
     continue;
     }
@@ -1112,18 +1328,20 @@ pub static mut start_fixed: bool = false;
     }
 #[no_mangle]
 unsafe extern "C" fn kexec_apply_relocations(image: *mut kimage) -> c_int {
-    int i, ret;
-    struct purgatory_info *pi = &image.purgatory_info;
+    let mut i = 0;
+    let mut ret = 0;
+    let mut pi = &image.purgatory_info;
     let mut sechdrs = core::ptr::null_mut();
     sechdrs = pi.ehdr + pi.ehdr.e_shoff;
-    for (i = 0; i < pi.ehdr.e_shnum; i++) {
+    while (i < pi.ehdr.e_shnum) {
     let mut relsec = core::ptr::null_mut();
     let mut symtab = core::ptr::null_mut();
     let mut section = core::ptr::null_mut();
     relsec = sechdrs + i;
     if (relsec.sh_type != SHT_RELA &&
-    relsec.sh_type != SHT_REL)
+    relsec.sh_type != SHT_REL) {
     continue;
+    }
 //
 // For section of type SHT_RELA/SHT_REL,
 // ->sh_link contains section header index of associated
@@ -1131,8 +1349,9 @@ unsafe extern "C" fn kexec_apply_relocations(image: *mut kimage) -> c_int {
 // index of section to which relocations apply.
 //
     if (relsec.sh_info >= pi.ehdr.e_shnum ||
-    relsec.sh_link >= pi.ehdr.e_shnum)
+    relsec.sh_link >= pi.ehdr.e_shnum) {
     return -ENOEXEC;
+    }
     section = pi.sechdrs + relsec.sh_info;
     symtab = sechdrs + relsec.sh_link;
     if (!(section.sh_flags & SHF_ALLOC)) {
@@ -1154,11 +1373,11 @@ unsafe extern "C" fn kexec_apply_relocations(image: *mut kimage) -> c_int {
     ret = arch_kexec_apply_relocations_add(pi, section,
     relsec, symtab);
     }
-#[no_mangle]
-pub unsafe extern "C" fn if(SHT_REL: relsec->sh_type ==) -> else {
-    else if (relsec.sh_type == SHT_REL)
+
+    else if (relsec.sh_type == SHT_REL) {
     ret = arch_kexec_apply_relocations(pi, section,
     relsec, symtab);
+    }
     if (ret) {
     return ret;
     }
@@ -1178,7 +1397,7 @@ pub unsafe extern "C" fn if(SHT_REL: relsec->sh_type ==) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kexec_load_purgatory(image: *mut kimage, kbuf: *mut kexec_buf) -> c_int {
-    struct purgatory_info *pi = &image.purgatory_info;
+    let mut pi = &image.purgatory_info;
     let mut ret = 0;
     if (kexec_purgatory_size <= 0) {
     return -EINVAL;
@@ -1190,24 +1409,24 @@ pub unsafe extern "C" fn kexec_load_purgatory(image: *mut kimage, kbuf: *mut kex
     }
     ret = kexec_purgatory_setup_sechdrs(pi, kbuf);
     if (ret) {
-    goto out_free_kbuf;
+// goto;
     }
     ret = kexec_apply_relocations(image);
     if (ret) {
-    goto out;
+// goto;
     }
     return 0;
-    out:
+// label;
     vfree(pi.sechdrs);
     pi.sechdrs = core::ptr::null_mut();
-    out_free_kbuf:
+// label;
     vfree(pi.purgatory_buf);
     pi.purgatory_buf = core::ptr::null_mut();
     return ret;
     }
 #[no_mangle]
 pub unsafe extern "C" fn kexec_purgatory_get_symbol_addr() {
-    struct purgatory_info *pi = &image.purgatory_info;
+    let mut pi = &image.purgatory_info;
     let mut sym = core::ptr::null_mut();
     let mut sechdr = core::ptr::null_mut();
     sym = kexec_purgatory_find_symbol(pi, name);
@@ -1227,7 +1446,7 @@ pub unsafe extern "C" fn kexec_purgatory_get_symbol_addr() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kexec_purgatory_get_set_symbol() {
-    struct purgatory_info *pi = &image.purgatory_info;
+    let mut pi = &image.purgatory_info;
     let mut sym = core::ptr::null_mut();
     let mut sec = core::ptr::null_mut();
     let mut sym_buf = core::ptr::null_mut();
@@ -1236,13 +1455,13 @@ pub unsafe extern "C" fn kexec_purgatory_get_set_symbol() {
     return -EINVAL;
     }
     if (sym.st_size != size) {
-    pr_err("symbol %s size mismatch: expected %lu actual %u\n",
+    pr_err!("symbol %s size mismatch: expected %lu actual %u\n",
     name, (unsigned long)sym.st_size, size);
     return -EINVAL;
     }
     sec = pi.sechdrs + sym.st_shndx;
     if (sec.sh_type == SHT_NOBITS) {
-    pr_err("symbol %s is in a bss section. Cannot %s\n", name,
+    pr_err!("symbol %s is in a bss section. Cannot %s\n", name,
     get_value ? "get" : "set");
     return -EINVAL;
     }
@@ -1255,5 +1474,3 @@ pub unsafe extern "C" fn kexec_purgatory_get_set_symbol() {
     }
     return 0;
     }
-
-}

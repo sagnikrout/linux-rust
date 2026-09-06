@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -47,40 +297,39 @@ pub struct bio_map_data {
     pub 1: bool is_our_pages :,
     pub 1: bool is_null_mapped :,
     pub iter: iov_iter,
-    pub iov: [iovec; ],
+    pub iov: [iovec; 0],
 }
 
-    static struct bio_map_data *bio_alloc_map_data(struct iov_iter *data,
-    gfp_t gfp_mask)
-    {
-    struct bio_map_data *bmd;
-    if (data.nr_segs > UIO_MAXIOV)
+#[no_mangle]
+pub unsafe extern "C" fn bio_alloc_map_data(data: *mut iov_iter, gfp_mask: gfp_t) -> *mut c_void {
+pub static mut bmd: *mut c_void = core::ptr::null_mut();
+    if (data.nr_segs > UIO_MAXIOV) {
     return core::ptr::null_mut();
+    }
     bmd = kmalloc_flex(*bmd, iov, data.nr_segs, gfp_mask);
-    if (!bmd)
+    if (!bmd) {
     return core::ptr::null_mut();
+    }
     bmd.iter = *data;
     if (iter_is_iovec(data)) {
-    memcpy(bmd.iov, iter_iov(data), sizeof(struct iovec) * data.nr_segs);
+    memcpy(bmd.iov, iter_iov(data), sizeof!(iovec) * data.nr_segs);
     bmd.iter.__iov = bmd.iov;
     }
     return bmd;
     }
 #[no_mangle]
 pub unsafe extern "C" fn blk_mq_map_bio_put(bio: *mut bio) {
-    static inline void blk_mq_map_bio_put(struct bio *bio)
-    {
     bio_put(bio);
     }
-    static struct bio *blk_rq_map_bio_alloc(struct request *rq,
-    unsigned int nr_vecs, gfp_t gfp_mask)
-    {
-    struct block_device *bdev = rq.q.disk ? rq.q.disk.part0 : core::ptr::null_mut();
-    struct bio *bio;
+#[no_mangle]
+pub unsafe extern "C" fn blk_rq_map_bio_alloc(rq: *mut request, nr_vecs: c_uint, gfp_mask: gfp_t) -> *mut c_void {
+    let mut bdev = rq.q.disk ? rq.q.disk.part0 : core::ptr::null_mut();
+pub static mut bio: *mut c_void = core::ptr::null_mut();
     bio = bio_alloc_bioset(bdev, nr_vecs, rq.cmd_flags, gfp_mask,
     &fs_bio_set);
-    if (!bio)
+    if (!bio) {
     return core::ptr::null_mut();
+    }
     return bio;
     }
 //
@@ -93,20 +342,20 @@ pub unsafe extern "C" fn blk_mq_map_bio_put(bio: *mut bio) {
 //
 #[no_mangle]
 unsafe extern "C" fn bio_copy_from_iter(bio: *mut bio, iter: *mut iov_iter) -> c_int {
-    static int bio_copy_from_iter(struct bio *bio, struct iov_iter *iter)
-    {
-    struct bio_vec *bvec;
-    struct bvec_iter_all iter_all;
+pub static mut bvec: *mut c_void = core::ptr::null_mut();
+pub static mut iter_all: usize = 0;
     bio_for_each_segment_all(bvec, bio, iter_all) {
-    ssize_t ret;
+    let mut ret = 0;
     ret = copy_page_from_iter(bvec.bv_page,
     bvec.bv_offset,
     bvec.bv_len,
     iter);
-    if (!iov_iter_count(iter))
+    if (!iov_iter_count(iter)) {
     break;
-    if (ret < bvec.bv_len)
+    }
+    if (ret < bvec.bv_len) {
     return -EFAULT;
+    }
     }
     return 0;
     }
@@ -120,20 +369,20 @@ unsafe extern "C" fn bio_copy_from_iter(bio: *mut bio, iter: *mut iov_iter) -> c
 //
 #[no_mangle]
 unsafe extern "C" fn bio_copy_to_iter(bio: *mut bio, iter: iov_iter) -> c_int {
-    static int bio_copy_to_iter(struct bio *bio, struct iov_iter iter)
-    {
-    struct bio_vec *bvec;
-    struct bvec_iter_all iter_all;
+pub static mut bvec: *mut c_void = core::ptr::null_mut();
+pub static mut iter_all: usize = 0;
     bio_for_each_segment_all(bvec, bio, iter_all) {
-    ssize_t ret;
+    let mut ret = 0;
     ret = copy_page_to_iter(bvec.bv_page,
     bvec.bv_offset,
     bvec.bv_len,
     &iter);
-    if (!iov_iter_count(&iter))
+    if (!iov_iter_count(&iter)) {
     break;
-    if (ret < bvec.bv_len)
+    }
+    if (ret < bvec.bv_len) {
     return -EFAULT;
+    }
     }
     return 0;
     }
@@ -146,41 +395,41 @@ unsafe extern "C" fn bio_copy_to_iter(bio: *mut bio, iter: iov_iter) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn bio_uncopy_user(bio: *mut bio) -> c_int {
-    static int bio_uncopy_user(struct bio *bio)
-    {
-    struct bio_map_data *bmd = bio.bi_private;
-    let mut ret: c_int = 0;
+    let mut bmd = bio.bi_private;
+pub static mut ret: c_int = 0;
     if (!bmd.is_null_mapped) {
 //
 // if we're in a workqueue, the request is orphaned, so
 // don't copy into a random user address space, just free
 // and return -EINTR so user space doesn't expect any data.
 //
-    if (!current.mm)
+    if (!current.mm) {
     ret = -EINTR;
-#[no_mangle]
-pub unsafe extern "C" fn if(READ: bio_data_dir(bio) ==) -> else {
-    else if (bio_data_dir(bio) == READ)
+    }
+
+    else if (bio_data_dir(bio) == READ) {
     ret = bio_copy_to_iter(bio, bmd.iter);
-    if (bmd.is_our_pages)
+    }
+    if (bmd.is_our_pages) {
     bio_free_pages(bio);
+    }
     }
     kfree(bmd);
     return ret;
     }
-    static int bio_copy_user_iov(struct request *rq, struct rq_map_data *map_data,
-    struct iov_iter *iter, gfp_t gfp_mask)
-    {
-    struct bio_map_data *bmd;
-    struct page *page;
-    struct bio *bio;
-    let mut i: c_int = 0, ret;
-    int nr_pages;
-    let mut len: c_uint = iter.count;
-    let mut offset: c_uint = map_data ? offset_in_page(map_data.offset) : 0;
+#[no_mangle]
+pub unsafe extern "C" fn bio_copy_user_iov(rq: *mut request, map_data: *mut rq_map_data, iter: *mut iov_iter, gfp_mask: gfp_t) -> c_int {
+pub static mut bmd: *mut c_void = core::ptr::null_mut();
+pub static mut page: *mut c_void = core::ptr::null_mut();
+pub static mut bio: *mut c_void = core::ptr::null_mut();
+pub static mut i: c_int = 0;
+    let mut nr_pages = 0;
+pub static mut len: c_uint = 0;
+pub static mut offset: c_uint = 0;
     bmd = bio_alloc_map_data(iter, gfp_mask);
-    if (!bmd)
+    if (!bmd) {
     return -ENOMEM;
+    }
 //
 // We need to do a deep copy of the iov_iter including the iovecs.
 // The caller provided iov might point to an on-stack or otherwise
@@ -191,131 +440,140 @@ pub unsafe extern "C" fn if(READ: bio_data_dir(bio) ==) -> else {
     nr_pages = bio_max_segs(DIV_ROUND_UP(offset + len, PAGE_SIZE));
     ret = -ENOMEM;
     bio = blk_rq_map_bio_alloc(rq, nr_pages, gfp_mask);
-    if (!bio)
-    goto out_bmd;
+    if (!bio) {
+// goto;
+    }
     if (map_data) {
     nr_pages = 1U << map_data.page_order;
     i = map_data.offset / PAGE_SIZE;
     }
     while (len) {
-    let mut bytes: c_uint = PAGE_SIZE;
+pub static mut bytes: c_uint = 0;
     bytes -= offset;
-    if (bytes > len)
+    if (bytes > len) {
     bytes = len;
+    }
     if (map_data) {
     if (i == map_data.nr_entries * nr_pages) {
     ret = -ENOMEM;
-    goto cleanup;
+// goto;
     }
     page = map_data.pages[i / nr_pages];
     page += (i % nr_pages);
-    i++;
+    i += 1;
     } else {
     page = alloc_page(GFP_NOIO | gfp_mask);
     if (!page) {
     ret = -ENOMEM;
-    goto cleanup;
+// goto;
     }
     }
     if (bio_add_page(bio, page, bytes, offset) < bytes) {
-    if (!map_data)
+    if (!map_data) {
     __free_page(page);
+    }
     break;
     }
     len -= bytes;
     offset = 0;
     }
-    if (map_data)
+    if (map_data) {
     map_data.offset += bio.bi_iter.bi_size;
+    }
 //
 // success
 //
     if (iov_iter_rw(iter) == WRITE &&
     (!map_data || !map_data.null_mapped)) {
     ret = bio_copy_from_iter(bio, iter);
-    if (ret)
-    goto cleanup;
+    if (ret) {
+// goto;
+    }
     } else if (map_data && map_data.from_user) {
-    let mut iter2: iov_iter = *iter;
+pub static mut iter2: iov_iter = 0;
 // This is the copy-in part of SG_DXFER_TO_FROM_DEV.
     iter2.data_source = ITER_SOURCE;
     ret = bio_copy_from_iter(bio, &iter2);
-    if (ret)
-    goto cleanup;
+    if (ret) {
+// goto;
+    }
     } else {
-    if (bmd.is_our_pages)
+    if (bmd.is_our_pages) {
     zero_fill_bio(bio);
+    }
     iov_iter_advance(iter, bio.bi_iter.bi_size);
     }
     bio.bi_private = bmd;
     ret = blk_rq_append_bio(rq, bio);
-    if (ret)
-    goto cleanup;
+    if (ret) {
+// goto;
+    }
     return 0;
-    cleanup:
-    if (!map_data)
+// label;
+    if (!map_data) {
     bio_free_pages(bio);
+    }
     blk_mq_map_bio_put(bio);
-    out_bmd:
+// label;
     kfree(bmd);
     return ret;
     }
-    static int bio_map_user_iov(struct request *rq, struct iov_iter *iter,
-    gfp_t gfp_mask)
-    {
-    let mut nr_vecs: c_uint = iov_iter_npages(iter, BIO_MAX_VECS);
-    struct bio *bio;
-    int ret;
-    if (!iov_iter_count(iter))
+#[no_mangle]
+pub unsafe extern "C" fn bio_map_user_iov(rq: *mut request, iter: *mut iov_iter, gfp_mask: gfp_t) -> c_int {
+pub static mut nr_vecs: c_uint = 0;
+pub static mut bio: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (!iov_iter_count(iter)) {
     return -EINVAL;
+    }
     bio = blk_rq_map_bio_alloc(rq, nr_vecs, gfp_mask);
-    if (!bio)
+    if (!bio) {
     return -ENOMEM;
+    }
 //
 // No alignment requirements on our part to support arbitrary
 // passthrough commands.
 //
     ret = bio_iov_iter_get_pages(bio, iter, 0, 0);
-    if (ret)
-    goto out_put;
+    if (ret) {
+// goto;
+    }
     ret = blk_rq_append_bio(rq, bio);
-    if (ret)
-    goto out_release;
+    if (ret) {
+// goto;
+    }
     return 0;
-    out_release:
+// label;
     bio_release_pages(bio, false);
-    out_put:
+// label;
     blk_mq_map_bio_put(bio);
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn bio_invalidate_vmalloc_pages(bio: *mut bio) {
-    static void bio_invalidate_vmalloc_pages(struct bio *bio)
-    {
 
     if (bio.bi_private && !op_is_write(bio_op(bio))) {
     unsigned long i, len = 0;
-    for (i = 0; i < bio.bi_vcnt; i++)
+    for (i = 0; i < bio.bi_vcnt; i++) {
     len += bio.bi_io_vec[i].bv_len;
+    }
     invalidate_kernel_vmap_range(bio.bi_private, len);
     }
 
     }
 #[no_mangle]
 unsafe extern "C" fn bio_map_kern_endio(bio: *mut bio) {
-    static void bio_map_kern_endio(struct bio *bio)
-    {
     bio_invalidate_vmalloc_pages(bio);
     blk_mq_map_bio_put(bio);
     }
-    static struct bio *bio_map_kern(struct request *rq, void *data, unsigned int len,
-    gfp_t gfp_mask)
-    {
-    let mut nr_vecs: c_uint = bio_add_max_vecs(data, len);
-    struct bio *bio;
+#[no_mangle]
+pub unsafe extern "C" fn bio_map_kern(rq: *mut request, data: *mut c_void, len: c_uint, gfp_mask: gfp_t) -> *mut c_void {
+pub static mut nr_vecs: c_uint = 0;
+pub static mut bio: *mut c_void = core::ptr::null_mut();
     bio = blk_rq_map_bio_alloc(rq, nr_vecs, gfp_mask);
-    if (!bio)
+    if (!bio) {
     return ERR_PTR(-ENOMEM);
+    }
     if (is_vmalloc_addr(data)) {
     bio.bi_private = data;
     if (!bio_add_vmalloc(bio, data, len)) {
@@ -330,18 +588,14 @@ unsafe extern "C" fn bio_map_kern_endio(bio: *mut bio) {
     }
 #[no_mangle]
 unsafe extern "C" fn bio_copy_kern_endio(bio: *mut bio) {
-    static void bio_copy_kern_endio(struct bio *bio)
-    {
     bio_free_pages(bio);
     blk_mq_map_bio_put(bio);
     }
 #[no_mangle]
 unsafe extern "C" fn bio_copy_kern_endio_read(bio: *mut bio) {
-    static void bio_copy_kern_endio_read(struct bio *bio)
-    {
-    char *p = bio.bi_private;
-    struct bio_vec *bvec;
-    struct bvec_iter_all iter_all;
+    let mut p = bio.bi_private;
+pub static mut bvec: *mut c_void = core::ptr::null_mut();
+pub static mut iter_all: usize = 0;
     bio_for_each_segment_all(bvec, bio, iter_all) {
     memcpy_from_bvec(p, bvec);
     p += bvec.bv_len;
@@ -359,35 +613,39 @@ unsafe extern "C" fn bio_copy_kern_endio_read(bio: *mut bio) {
 // copy the kernel address into a bio suitable for io to a block
 // device. Returns an error pointer in case of error.
 //
-    static struct bio *bio_copy_kern(struct request *rq, void *data, unsigned int len,
-    gfp_t gfp_mask)
-    {
-    let mut op: enum req_op = req_op(rq);
-    let mut kaddr: c_ulong = (unsigned long)data;
-    let mut end: c_ulong = (kaddr + len + PAGE_SIZE - 1) >> PAGE_SHIFT;
-    let mut start: c_ulong = kaddr >> PAGE_SHIFT;
-    struct bio *bio;
-    void *p = data;
-    let mut nr_pages: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn bio_copy_kern(rq: *mut request, data: *mut c_void, len: c_uint, gfp_mask: gfp_t) -> *mut c_void {
+pub static mut op: req_op = 0;
+pub static mut kaddr: c_ulong = 0;
+pub static mut end: c_ulong = 0;
+pub static mut start: c_ulong = 0;
+pub static mut bio: *mut c_void = core::ptr::null_mut();
+    let mut p = data;
+pub static mut nr_pages: c_int = 0;
 //
 // Overflow, abort
 //
-    if (end < start)
+    if (end < start) {
     return ERR_PTR(-EINVAL);
+    }
     nr_pages = end - start;
     bio = blk_rq_map_bio_alloc(rq, nr_pages, gfp_mask);
-    if (!bio)
+    if (!bio) {
     return ERR_PTR(-ENOMEM);
+    }
     while (len) {
-    struct page *page;
-    let mut bytes: c_uint = PAGE_SIZE;
-    if (bytes > len)
+pub static mut page: *mut c_void = core::ptr::null_mut();
+pub static mut bytes: c_uint = 0;
+    if (bytes > len) {
     bytes = len;
+    }
     page = alloc_page(GFP_NOIO | __GFP_ZERO | gfp_mask);
-    if (!page)
-    goto cleanup;
-    if (op_is_write(op))
+    if (!page) {
+// goto;
+    }
+    if (op_is_write(op)) {
     memcpy(page_address(page), p, bytes);
+    }
     __bio_add_page(bio, page, bytes, 0);
     len -= bytes;
     p += bytes;
@@ -399,7 +657,7 @@ unsafe extern "C" fn bio_copy_kern_endio_read(bio: *mut bio) {
     bio.bi_private = data;
     }
     return bio;
-    cleanup:
+// label;
     bio_free_pages(bio);
     blk_mq_map_bio_put(bio);
     return ERR_PTR(-ENOMEM);
@@ -410,23 +668,23 @@ unsafe extern "C" fn bio_copy_kern_endio_read(bio: *mut bio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn blk_rq_append_bio(rq: *mut request, bio: *mut bio) -> c_int {
-    int blk_rq_append_bio(struct request *rq, struct bio *bio)
-    {
-    const struct queue_limits *lim = &rq.q.limits;
-    let mut max_bytes: c_uint = lim.max_hw_sectors << SECTOR_SHIFT;
-    let mut nr_segs: c_uint = 0;
-    int ret;
+    let mut lim = &rq.q.limits;
+pub static mut max_bytes: c_uint = 0;
+pub static mut nr_segs: c_uint = 0;
+    let mut ret = 0;
 // check that the data layout matches the hardware restrictions
     ret = bio_split_io_at(bio, lim, &nr_segs, max_bytes, 0);
     if (ret) {
 // if we would have to split the bio, copy instead
-    if (ret > 0)
+    if (ret > 0) {
     ret = -EREMOTEIO;
+    }
     return ret;
     }
     if (rq.bio) {
-    if (!ll_back_merge_fn(rq, bio, nr_segs))
+    if (!ll_back_merge_fn(rq, bio, nr_segs)) {
     return -EINVAL;
+    }
     rq.phys_gap_bit = bio_seg_gap(rq.q, rq.biotail, bio,
     rq.phys_gap_bit);
     rq.biotail.bi_next = bio;
@@ -445,21 +703,22 @@ pub unsafe extern "C" fn blk_rq_append_bio(rq: *mut request, bio: *mut bio) -> c
 // Prepare bio for passthrough IO given ITER_BVEC iter
 #[no_mangle]
 unsafe extern "C" fn blk_rq_map_user_bvec(rq: *mut request, iter: *const iov_iter) -> c_int {
-    static int blk_rq_map_user_bvec(struct request *rq, const struct iov_iter *iter)
-    {
-    let mut max_bytes: c_uint = rq.q.limits.max_hw_sectors << SECTOR_SHIFT;
-    struct bio *bio;
-    int ret;
-    if (!iov_iter_count(iter) || iov_iter_count(iter) > max_bytes)
+pub static mut max_bytes: c_uint = 0;
+pub static mut bio: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (!iov_iter_count(iter) || iov_iter_count(iter) > max_bytes) {
     return -EINVAL;
+    }
 // reuse the bvecs from the iterator instead of allocating new ones
     bio = blk_rq_map_bio_alloc(rq, 0, GFP_KERNEL);
-    if (!bio)
+    if (!bio) {
     return -ENOMEM;
+    }
     bio_iov_iter_set(bio, iter);
     ret = blk_rq_append_bio(rq, bio);
-    if (ret)
+    if (ret) {
     blk_mq_map_bio_put(bio);
+    }
     return ret;
     }
 //
@@ -477,88 +736,91 @@ unsafe extern "C" fn blk_rq_map_user_bvec(rq: *mut request, iter: *const iov_ite
 // A matching blk_rq_unmap_user() must be issued at the end of I/O, while
 // still in process context.
 //
-    int blk_rq_map_user_iov(struct request_queue *q, struct request *rq,
-    struct rq_map_data *map_data,
-    const struct iov_iter *iter, gfp_t gfp_mask)
-    {
-    let mut copy: bool = false, map_bvec = false;
-    let mut align: c_ulong = blk_lim_dma_alignment_and_pad(&q.limits);
-    struct bio *bio = core::ptr::null_mut();
-    struct iov_iter i;
-    let mut ret: c_int = -EINVAL;
-    if (map_data)
-    copy = true;
 #[no_mangle]
-pub unsafe extern "C" fn if(align: iov_iter_alignment(iter) &) -> else {
-    else if (iov_iter_alignment(iter) & align)
+pub unsafe extern "C" fn blk_rq_map_user_iov(q: *mut request_queue, rq: *mut request, map_data: *mut rq_map_data, iter: *mut iov_iter, gfp_mask: gfp_t) -> c_int {
+pub static mut copy: bool = false;
+pub static mut align: c_ulong = 0;
+    let mut bio = core::ptr::null_mut();
+pub static mut i: usize = 0;
+pub static mut ret: c_int = 0;
+    if (map_data) {
     copy = true;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: iov_iter_is_bvec(iter)) -> else {
-    else if (iov_iter_is_bvec(iter))
+    }
+
+    else if (iov_iter_alignment(iter) & align) {
+    copy = true;
+    }
+
+    else if (iov_iter_is_bvec(iter)) {
     map_bvec = true;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !user_backed_iter(iter)) -> else {
-    else if (!user_backed_iter(iter))
+    }
+
+    else if (!user_backed_iter(iter)) {
     copy = true;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: queue_virt_boundary(q)) -> else {
-    else if (queue_virt_boundary(q))
+    }
+
+    else if (queue_virt_boundary(q)) {
     copy = queue_virt_boundary(q) & iov_iter_gap_alignment(iter);
+    }
     if (map_bvec) {
     ret = blk_rq_map_user_bvec(rq, iter);
-    if (!ret)
+    if (!ret) {
     return 0;
-    if (ret != -EREMOTEIO)
-    goto fail;
+    }
+    if (ret != -EREMOTEIO) {
+// goto;
+    }
 // fall back to copying the data on limits mismatches
     copy = true;
     }
     i = *iter;
     do {
-    if (copy)
+    if (copy) {
     ret = bio_copy_user_iov(rq, map_data, &i, gfp_mask);
-    else
-    ret = bio_map_user_iov(rq, &i, gfp_mask);
-    if (ret) {
-    if (ret == -EREMOTEIO)
-    ret = -EINVAL;
-    goto unmap_rq;
     }
-    if (!bio)
+    else {
+    ret = bio_map_user_iov(rq, &i, gfp_mask);
+    }
+    if (ret) {
+    if (ret == -EREMOTEIO) {
+    ret = -EINVAL;
+    }
+// goto;
+    }
+    if (!bio) {
     bio = rq.bio;
+    }
     } while (iov_iter_count(&i));
     return 0;
-    unmap_rq:
+// label;
     blk_rq_unmap_user(bio);
-    fail:
+// label;
     rq.bio = core::ptr::null_mut();
     return ret;
     }
     EXPORT_SYMBOL(blk_rq_map_user_iov);
-    int blk_rq_map_user(struct request_queue *q, struct request *rq,
-    struct rq_map_data *map_data, void __user *ubuf,
-    unsigned long len, gfp_t gfp_mask)
-    {
-    struct iov_iter i;
-    let mut ret: c_int = import_ubuf(rq_data_dir(rq), ubuf, len, &i);
-    if (unlikely(ret < 0))
+#[no_mangle]
+pub unsafe extern "C" fn blk_rq_map_user(q: *mut request_queue, rq: *mut request, map_data: *mut rq_map_data, ubuf: *mut c_void, len: c_ulong, gfp_mask: gfp_t) -> c_int {
+pub static mut i: usize = 0;
+pub static mut ret: c_int = 0;
+    if (unlikely(ret < 0)) {
     return ret;
+    }
     return blk_rq_map_user_iov(q, rq, map_data, &i, gfp_mask);
     }
     EXPORT_SYMBOL(blk_rq_map_user);
-    int blk_rq_map_user_io(struct request *req, struct rq_map_data *map_data,
-    void __user *ubuf, unsigned long buf_len, gfp_t gfp_mask,
-    bool vec, int iov_count, bool check_iter_count, int rw)
-    {
-    let mut ret: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn blk_rq_map_user_io(req: *mut request, map_data: *mut rq_map_data, ubuf: *mut c_void, buf_len: c_ulong, gfp_mask: gfp_t, vec: bool, iov_count: c_int, check_iter_count: bool, rw: c_int) -> c_int {
+pub static mut ret: c_int = 0;
     if (vec) {
     struct iovec fast_iov[UIO_FASTIOV];
-    struct iovec *iov = fast_iov;
-    struct iov_iter iter;
+    let mut iov = fast_iov;
+pub static mut iter: usize = 0;
     ret = import_iovec(rw, ubuf, iov_count ? iov_count : buf_len,
     UIO_FASTIOV, &iov, &iter);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     if (iov_count) {
 // SG_IO howto says that the shorter of the two wins
     iov_iter_truncate(&iter, buf_len);
@@ -588,20 +850,20 @@ pub unsafe extern "C" fn if(_arg: queue_virt_boundary(q)) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn blk_rq_unmap_user(bio: *mut bio) -> c_int {
-    int blk_rq_unmap_user(struct bio *bio)
-    {
-    struct bio *next_bio;
-    let mut ret: c_int = 0, ret2;
+pub static mut next_bio: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     while (bio) {
     if (bio.bi_private) {
     ret2 = bio_uncopy_user(bio);
-    if (ret2 && !ret)
+    if (ret2 && !ret) {
     ret = ret2;
+    }
     } else {
     bio_release_pages(bio, bio_data_dir(bio) == READ);
     }
-    if (bio_integrity(bio))
+    if (bio_integrity(bio)) {
     bio_integrity_unmap_user(bio);
+    }
     next_bio = bio;
     bio = bio.bi_next;
     blk_mq_map_bio_put(next_bio);
@@ -621,28 +883,33 @@ pub unsafe extern "C" fn blk_rq_unmap_user(bio: *mut bio) -> c_int {
 // buffer is used. Can be called multiple times to append multiple
 // buffers.
 //
-    int blk_rq_map_kern(struct request *rq, void *kbuf, unsigned int len,
-    gfp_t gfp_mask)
-    {
-    let mut addr: c_ulong = (unsigned long) kbuf;
-    bool do_copy;
-    struct bio *bio;
-    int ret;
-    if (len > (queue_max_hw_sectors(rq.q) << SECTOR_SHIFT))
+#[no_mangle]
+pub unsafe extern "C" fn blk_rq_map_kern(rq: *mut request, kbuf: *mut c_void, len: c_uint, gfp_mask: gfp_t) -> c_int {
+pub static mut addr: c_ulong = 0;
+    let mut do_copy = 0;
+pub static mut bio: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (len > (queue_max_hw_sectors(rq.q) << SECTOR_SHIFT)) {
     return -EINVAL;
-    if (!len || !kbuf)
+    }
+    if (!len || !kbuf) {
     return -EINVAL;
+    }
     do_copy = !blk_rq_aligned(rq.q, addr, len) || object_is_on_stack(kbuf);
-    if (do_copy)
+    if (do_copy) {
     bio = bio_copy_kern(rq, kbuf, len, gfp_mask);
-    else
+    }
+    else {
     bio = bio_map_kern(rq, kbuf, len, gfp_mask);
-    if (IS_ERR(bio))
+    }
+    if (IS_ERR(bio)) {
     return PTR_ERR(bio);
+    }
     ret = blk_rq_append_bio(rq, bio);
     if (unlikely(ret)) {
-    if (do_copy)
+    if (do_copy) {
     bio_free_pages(bio);
+    }
     blk_mq_map_bio_put(bio);
     }
     return ret;

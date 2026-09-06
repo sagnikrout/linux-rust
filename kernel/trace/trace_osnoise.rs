@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -80,7 +330,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     "OSNOISE_IRQ_DISABLE",
     "TIMERLAT_ALIGN" };
 pub const OSN_DEFAULT_OPTIONS: c_uint = 0x2;
-    let mut osnoise_options: static unsigned long = OSN_DEFAULT_OPTIONS;
+pub static mut osnoise_options: unsigned long = 0;
 //
 // trace_array of the enabled osnoise/timerlat instances.
 //
@@ -91,14 +341,12 @@ pub struct osnoise_instance {
     pub tr: *mut trace_array,
 }
 
-    static struct list_head osnoise_instances;
+pub static mut osnoise_instances: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn osnoise_print(fmt: *const c_char, ...) {
-    static void osnoise_print(const char *fmt, ...)
-    {
-    struct osnoise_instance *inst;
-    struct trace_array *tr;
-    va_list ap;
+pub static mut inst: *mut c_void = core::ptr::null_mut();
+pub static mut tr: *mut c_void = core::ptr::null_mut();
+    let mut ap;
     rcu_read_lock();
     list_for_each_entry_rcu(inst, &osnoise_instances, list) {
     tr = inst.tr;
@@ -110,10 +358,7 @@ unsafe extern "C" fn osnoise_print(fmt: *const c_char, ...) {
     }
 #[no_mangle]
 unsafe extern "C" fn osnoise_has_registered_instances() -> bool {
-    static bool osnoise_has_registered_instances(void)
-    {
-    return !!list_first_or_null_rcu(&osnoise_instances,
-    struct osnoise_instance,
+    return !!list_first_or_null_rcu(&osnoise_instances, osnoise_instance,
     list);
     }
 //
@@ -121,14 +366,13 @@ unsafe extern "C" fn osnoise_has_registered_instances() -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn osnoise_instance_registered(tr: *mut trace_array) -> c_int {
-    static int osnoise_instance_registered(struct trace_array *tr)
-    {
-    struct osnoise_instance *inst;
-    let mut found: c_int = 0;
+pub static mut inst: *mut c_void = core::ptr::null_mut();
+pub static mut found: c_int = 0;
     rcu_read_lock();
     list_for_each_entry_rcu(inst, &osnoise_instances, list) {
-    if (inst.tr == tr)
+    if (inst.tr == tr) {
     found = 1;
+    }
     }
     rcu_read_unlock();
     return found;
@@ -141,9 +385,7 @@ unsafe extern "C" fn osnoise_instance_registered(tr: *mut trace_array) -> c_int 
 //
 #[no_mangle]
 unsafe extern "C" fn osnoise_register_instance(tr: *mut trace_array) -> c_int {
-    static int osnoise_register_instance(struct trace_array *tr)
-    {
-    struct osnoise_instance *inst;
+pub static mut inst: *mut c_void = core::ptr::null_mut();
 //
 // register/unregister serialization is provided by trace's
 // trace_types_lock.
@@ -151,8 +393,9 @@ unsafe extern "C" fn osnoise_register_instance(tr: *mut trace_array) -> c_int {
     lockdep_assert_held(&trace_types_lock);
     trace_array_init_printk(tr);
     inst = kmalloc_obj(*inst);
-    if (!inst)
+    if (!inst) {
     return -ENOMEM;
+    }
     INIT_LIST_HEAD_RCU(&inst.list);
     inst.tr = tr;
     list_add_tail_rcu(&inst.list, &osnoise_instances);
@@ -166,10 +409,8 @@ unsafe extern "C" fn osnoise_register_instance(tr: *mut trace_array) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn osnoise_unregister_instance(tr: *mut trace_array) {
-    static void osnoise_unregister_instance(struct trace_array *tr)
-    {
-    struct osnoise_instance *inst;
-    let mut found: c_int = 0;
+pub static mut inst: *mut c_void = core::ptr::null_mut();
+pub static mut found: c_int = 0;
 //
 // register/unregister serialization is provided by trace's
 // trace_types_lock.
@@ -182,8 +423,9 @@ unsafe extern "C" fn osnoise_unregister_instance(tr: *mut trace_array) {
     break;
     }
     }
-    if (!found)
+    if (!found) {
     return;
+    }
 // Do a full sync to ensure that tr remains valid, not just inst
     synchronize_rcu();
     kvfree(inst);
@@ -254,18 +496,18 @@ pub struct osnoise_variables {
 //
 // Per-cpu runtime information.
 //
-    static DEFINE_PER_CPU(struct osnoise_variables, per_cpu_osnoise_var);
+pub static mut struct osnoise_variables: usize = 0;
 //
 // this_cpu_osn_var - Return the per-cpu osnoise_variables on its relative CPU
 //
-    static inline struct osnoise_variables *this_cpu_osn_var(void)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn this_cpu_osn_var() -> *mut c_void {
     return this_cpu_ptr(&per_cpu_osnoise_var);
     }
 //
 // Protect the interface.
 //
-    static struct mutex interface_lock;
+pub static mut interface_lock: usize = 0;
 
 //
 // Runtime information for the timer mode.
@@ -282,7 +524,7 @@ pub struct timerlat_variables {
     pub uthread_migrate: bool,
 }
 
-    static DEFINE_PER_CPU(struct timerlat_variables, per_cpu_timerlat_var);
+pub static mut struct timerlat_variables: usize = 0;
 //
 // timerlat wake-up offset for next thread with TIMERLAT_ALIGN set.
 //
@@ -290,8 +532,8 @@ pub struct timerlat_variables {
 //
 // this_cpu_tmr_var - Return the per-cpu timerlat_variables on its relative CPU
 //
-    static inline struct timerlat_variables *this_cpu_tmr_var(void)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn this_cpu_tmr_var() -> *mut c_void {
     return this_cpu_ptr(&per_cpu_timerlat_var);
     }
 //
@@ -299,10 +541,8 @@ pub struct timerlat_variables {
 //
 #[no_mangle]
 pub unsafe extern "C" fn tlat_var_reset() {
-    static inline void tlat_var_reset(void)
-    {
-    struct timerlat_variables *tlat_var;
-    int cpu;
+pub static mut tlat_var: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
 // Synchronize with the timerlat interfaces
     mutex_lock(&interface_lock);
 //
@@ -311,9 +551,10 @@ pub unsafe extern "C" fn tlat_var_reset() {
 //
     for_each_online_cpu(cpu) {
     tlat_var = per_cpu_ptr(&per_cpu_timerlat_var, cpu);
-    if (tlat_var.kthread)
+    if (tlat_var.kthread) {
     hrtimer_cancel(&tlat_var.timer);
-    memset(tlat_var, 0, sizeof(*tlat_var));
+    }
+    memset(tlat_var, 0, sizeof!(*tlat_var));
     }
 //
 // Reset also align_next, to be filled by a new offset by the first timerlat
@@ -328,17 +569,15 @@ pub unsafe extern "C" fn tlat_var_reset() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn osn_var_reset() {
-    static inline void osn_var_reset(void)
-    {
-    struct osnoise_variables *osn_var;
-    int cpu;
+pub static mut osn_var: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
 //
 // So far, all the values are initialized as 0, so
 // zeroing the structure is perfect.
 //
     for_each_online_cpu(cpu) {
     osn_var = per_cpu_ptr(&per_cpu_osnoise_var, cpu);
-    memset(osn_var, 0, sizeof(*osn_var));
+    memset(osn_var, 0, sizeof!(*osn_var));
     }
     }
 //
@@ -346,30 +585,28 @@ pub unsafe extern "C" fn osn_var_reset() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn osn_var_reset_all() {
-    static inline void osn_var_reset_all(void)
-    {
     osn_var_reset();
     tlat_var_reset();
     }
 //
 // Tells NMIs to call back to the osnoise tracer to record timestamps.
 //
-    bool trace_osnoise_callback_enabled;
+    let mut trace_osnoise_callback_enabled = 0;
 //
 // Tracer data.
 //
     static struct osnoise_data {
-    u64	sample_period;		/* total sampling period */
-    u64	sample_runtime;		/* active sampling portion of period */
-    u64	stop_tracing;		/* stop trace in the internal operation (loop/irq) */
-    u64	stop_tracing_total;	/* stop trace in the final operation (report/thread) */
+    let mut sample_period = 0;		/* total sampling period */
+    let mut sample_runtime = 0;		/* active sampling portion of period */
+    let mut stop_tracing = 0;		/* stop trace in the internal operation (loop/irq) */
+    let mut stop_tracing_total = 0;	/* stop trace in the final operation (report/thread) */
 
-    u64	timerlat_period;	/* timerlat period */
-    u64	timerlat_align_us;	/* timerlat alignment */
-    u64	print_stack;		/* print IRQ stack if total > */
-    int	timerlat_tracer;	/* timerlat tracer */
+    let mut timerlat_period = 0;	/* timerlat period */
+    let mut timerlat_align_us = 0;	/* timerlat alignment */
+    let mut print_stack = 0;		/* print IRQ stack if total > */
+    let mut timerlat_tracer = 0;	/* timerlat tracer */
 
-    bool	tainted;		/* info users and developers about a problem */
+    let mut tainted = 0;		/* info users and developers about a problem */
     } osnoise_data = {
     .sample_period			= DEFAULT_SAMPLE_PERIOD,
     .sample_runtime			= DEFAULT_SAMPLE_RUNTIME,
@@ -385,15 +622,11 @@ pub unsafe extern "C" fn osn_var_reset_all() {
 
 #[no_mangle]
 pub unsafe extern "C" fn timerlat_enabled() -> bool {
-    static inline bool timerlat_enabled(void)
-    {
     return osnoise_data.timerlat_tracer;
     }
 #[no_mangle]
 pub unsafe extern "C" fn timerlat_softirq_exit(osn_var: *mut osnoise_variables) -> c_int {
-    static inline int timerlat_softirq_exit(struct osnoise_variables *osn_var)
-    {
-    struct timerlat_variables *tlat_var = this_cpu_tmr_var();
+    let mut tlat_var = this_cpu_tmr_var();
 //
 // If the timerlat is enabled, but the irq handler did
 // not run yet enabling timerlat_tracer, do not trace.
@@ -407,9 +640,7 @@ pub unsafe extern "C" fn timerlat_softirq_exit(osn_var: *mut osnoise_variables) 
     }
 #[no_mangle]
 pub unsafe extern "C" fn timerlat_thread_exit(osn_var: *mut osnoise_variables) -> c_int {
-    static inline int timerlat_thread_exit(struct osnoise_variables *osn_var)
-    {
-    struct timerlat_variables *tlat_var = this_cpu_tmr_var();
+    let mut tlat_var = this_cpu_tmr_var();
 //
 // If the timerlat is enabled, but the irq handler did
 // not run yet enabling timerlat_tracer, do not trace.
@@ -423,21 +654,21 @@ pub unsafe extern "C" fn timerlat_thread_exit(osn_var: *mut osnoise_variables) -
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn timerlat_enabled() -> bool {
-    static inline bool timerlat_enabled(void)
-    {
+#[no_mangle]
+// duplicate fn: timerlat_enabled
+pub unsafe extern "C" fn timerlat_enabled_dup() -> bool {
     return false;
     }
 #[no_mangle]
-pub unsafe extern "C" fn timerlat_softirq_exit(osn_var: *mut osnoise_variables) -> c_int {
-    static inline int timerlat_softirq_exit(struct osnoise_variables *osn_var)
-    {
+#[no_mangle]
+// duplicate fn: timerlat_softirq_exit
+pub unsafe extern "C" fn timerlat_softirq_exit_dup(osn_var: *mut osnoise_variables) -> c_int {
     return 1;
     }
 #[no_mangle]
-pub unsafe extern "C" fn timerlat_thread_exit(osn_var: *mut osnoise_variables) -> c_int {
-    static inline int timerlat_thread_exit(struct osnoise_variables *osn_var)
-    {
+#[no_mangle]
+// duplicate fn: timerlat_thread_exit
+pub unsafe extern "C" fn timerlat_thread_exit_dup(osn_var: *mut osnoise_variables) -> c_int {
     return 1;
     }
 
@@ -446,10 +677,9 @@ pub unsafe extern "C" fn timerlat_thread_exit(osn_var: *mut osnoise_variables) -
 //
 #[no_mangle]
 unsafe extern "C" fn print_osnoise_headers(s: *mut seq_file) {
-    static void print_osnoise_headers(struct seq_file *s)
-    {
-    if (osnoise_data.tainted)
+    if (osnoise_data.tainted) {
     seq_puts(s, "# osnoise is tainted!\n");
+    }
     seq_puts(s, "#                                _-------=> irqs-off\n");
     seq_puts(s, "#                               / _------=> need-resched\n");
     seq_puts(s, "#                              | / _-----=> need-resched-lazy\n");
@@ -471,10 +701,9 @@ unsafe extern "C" fn print_osnoise_headers(s: *mut seq_file) {
 
 #[no_mangle]
 unsafe extern "C" fn print_osnoise_headers(s: *mut seq_file) {
-    static void print_osnoise_headers(struct seq_file *s)
-    {
-    if (osnoise_data.tainted)
+    if (osnoise_data.tainted) {
     seq_puts(s, "# osnoise is tainted!\n");
+    }
     seq_puts(s, "#                                _-----=> irqs-off\n");
     seq_puts(s, "#                               / _----=> need-resched\n");
     seq_puts(s, "#                              | / _---=> hardirq/softirq\n");
@@ -495,21 +724,21 @@ unsafe extern "C" fn print_osnoise_headers(s: *mut seq_file) {
 // osnoise_taint - report an osnoise error.
 //
 
-    osnoise_print(msg);							\
-    osnoise_data.tainted = true;						\
+    osnoise_print(msg);							
+    osnoise_data.tainted = true;						
     })
 //
 // Record an osnoise_sample into the tracer buffer.
 //
-    static void
-    __record_osnoise_sample(struct osnoise_sample *sample, struct trace_buffer *buffer)
-    {
-    struct ring_buffer_event *event;
-    struct osnoise_entry *entry;
-    event = trace_buffer_lock_reserve(buffer, TRACE_OSNOISE, sizeof(*entry),
+#[no_mangle]
+pub unsafe extern "C" fn __record_osnoise_sample(sample: *mut osnoise_sample, buffer: *mut trace_buffer) {
+pub static mut event: *mut c_void = core::ptr::null_mut();
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+    event = trace_buffer_lock_reserve(buffer, TRACE_OSNOISE, sizeof!(*entry),
     tracing_gen_ctx());
-    if (!event)
+    if (!event) {
     return;
+    }
     entry	= ring_buffer_event_data(event);
     entry.runtime		= sample.runtime;
     entry.noise		= sample.noise;
@@ -526,10 +755,8 @@ unsafe extern "C" fn print_osnoise_headers(s: *mut seq_file) {
 //
 #[no_mangle]
 unsafe extern "C" fn record_osnoise_sample(sample: *mut osnoise_sample) {
-    static void record_osnoise_sample(struct osnoise_sample *sample)
-    {
-    struct osnoise_instance *inst;
-    struct trace_buffer *buffer;
+pub static mut inst: *mut c_void = core::ptr::null_mut();
+pub static mut buffer: *mut c_void = core::ptr::null_mut();
     trace_osnoise_sample(sample);
     rcu_read_lock();
     list_for_each_entry_rcu(inst, &osnoise_instances, list) {
@@ -545,8 +772,6 @@ unsafe extern "C" fn record_osnoise_sample(sample: *mut osnoise_sample) {
 
 #[no_mangle]
 unsafe extern "C" fn print_timerlat_headers(s: *mut seq_file) {
-    static void print_timerlat_headers(struct seq_file *s)
-    {
     seq_puts(s, "#                                _-------=> irqs-off\n");
     seq_puts(s, "#                               / _------=> need-resched\n");
     seq_puts(s, "#                              | / _-----=> need-resched-lazy\n");
@@ -564,8 +789,6 @@ unsafe extern "C" fn print_timerlat_headers(s: *mut seq_file) {
 
 #[no_mangle]
 unsafe extern "C" fn print_timerlat_headers(s: *mut seq_file) {
-    static void print_timerlat_headers(struct seq_file *s)
-    {
     seq_puts(s, "#                                _-----=> irqs-off\n");
     seq_puts(s, "#                               / _----=> need-resched\n");
     seq_puts(s, "#                              | / _---=> hardirq/softirq\n");
@@ -579,15 +802,15 @@ unsafe extern "C" fn print_timerlat_headers(s: *mut seq_file) {
     seq_puts(s, "            |                       |\n");
     }
 
-    static void
-    __record_timerlat_sample(struct timerlat_sample *sample, struct trace_buffer *buffer)
-    {
-    struct ring_buffer_event *event;
-    struct timerlat_entry *entry;
-    event = trace_buffer_lock_reserve(buffer, TRACE_TIMERLAT, sizeof(*entry),
+#[no_mangle]
+pub unsafe extern "C" fn __record_timerlat_sample(sample: *mut timerlat_sample, buffer: *mut trace_buffer) {
+pub static mut event: *mut c_void = core::ptr::null_mut();
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+    event = trace_buffer_lock_reserve(buffer, TRACE_TIMERLAT, sizeof!(*entry),
     tracing_gen_ctx());
-    if (!event)
+    if (!event) {
     return;
+    }
     entry	= ring_buffer_event_data(event);
     entry.seqnum			= sample.seqnum;
     entry.context			= sample.context;
@@ -599,10 +822,8 @@ unsafe extern "C" fn print_timerlat_headers(s: *mut seq_file) {
 //
 #[no_mangle]
 unsafe extern "C" fn record_timerlat_sample(sample: *mut timerlat_sample) {
-    static void record_timerlat_sample(struct timerlat_sample *sample)
-    {
-    struct osnoise_instance *inst;
-    struct trace_buffer *buffer;
+pub static mut inst: *mut c_void = core::ptr::null_mut();
+pub static mut buffer: *mut c_void = core::ptr::null_mut();
     trace_timerlat_sample(sample);
     rcu_read_lock();
     list_for_each_entry_rcu(inst, &osnoise_instances, list) {
@@ -625,7 +846,7 @@ pub struct trace_stack {
     pub calls: [c_ulong; MAX_CALLS],
 }
 
-    static DEFINE_PER_CPU(struct trace_stack, trace_stack);
+pub static mut struct trace_stack: usize = 0;
 //
 // timerlat_save_stack - save a stack trace without printing
 //
@@ -634,26 +855,25 @@ pub struct trace_stack {
 //
 #[no_mangle]
 unsafe extern "C" fn timerlat_save_stack(skip: c_int) {
-    static void timerlat_save_stack(int skip)
-    {
-    unsigned int size, nr_entries;
-    struct trace_stack *fstack;
+    let mut size = 0;
+    let mut nr_entries = 0;
+pub static mut fstack: *mut c_void = core::ptr::null_mut();
     fstack = this_cpu_ptr(&trace_stack);
-    size = ARRAY_SIZE(fstack.calls);
+    size = ARRAY_SIZE!(fstack.calls);
     nr_entries = stack_trace_save(fstack.calls, size, skip);
-    fstack.stack_size = nr_entries * sizeof(unsigned long);
+    fstack.stack_size = nr_entries * sizeof!(unsigned long);
     fstack.nr_entries = nr_entries;
     return;
     }
-    static void
-    __timerlat_dump_stack(struct trace_buffer *buffer, struct trace_stack *fstack, unsigned int size)
-    {
-    struct ring_buffer_event *event;
-    struct stack_entry *entry;
-    event = trace_buffer_lock_reserve(buffer, TRACE_STACK, sizeof(*entry) + size,
+#[no_mangle]
+pub unsafe extern "C" fn __timerlat_dump_stack(buffer: *mut trace_buffer, fstack: *mut trace_stack, size: c_uint) {
+pub static mut event: *mut c_void = core::ptr::null_mut();
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+    event = trace_buffer_lock_reserve(buffer, TRACE_STACK, sizeof!(*entry) + size,
     tracing_gen_ctx());
-    if (!event)
+    if (!event) {
     return;
+    }
     entry = ring_buffer_event_data(event);
     entry.size = fstack.nr_entries;
     memcpy(&entry.caller, fstack.calls, size);
@@ -664,17 +884,16 @@ unsafe extern "C" fn timerlat_save_stack(skip: c_int) {
 //
 #[no_mangle]
 unsafe extern "C" fn timerlat_dump_stack(latency: u64) {
-    static void timerlat_dump_stack(u64 latency)
-    {
-    struct osnoise_instance *inst;
-    struct trace_buffer *buffer;
-    struct trace_stack *fstack;
-    unsigned int size;
+pub static mut inst: *mut c_void = core::ptr::null_mut();
+pub static mut buffer: *mut c_void = core::ptr::null_mut();
+pub static mut fstack: *mut c_void = core::ptr::null_mut();
+    let mut size = 0;
 //
 // trace only if latency > print_stack config, if enabled.
 //
-    if (!osnoise_data.print_stack || osnoise_data.print_stack > latency)
+    if (!osnoise_data.print_stack || osnoise_data.print_stack > latency) {
     return;
+    }
     preempt_disable_notrace();
     fstack = this_cpu_ptr(&trace_stack);
     size = fstack.stack_size;
@@ -699,11 +918,11 @@ unsafe extern "C" fn timerlat_dump_stack(latency: u64) {
 //
 // See get_int_safe_duration().
 //
-    static inline void
-    cond_move_irq_delta_start(struct osnoise_variables *osn_var, u64 duration)
-    {
-    if (osn_var.irq.delta_start)
+#[no_mangle]
+pub unsafe extern "C" fn cond_move_irq_delta_start(osn_var: *mut osnoise_variables, duration: u64) {
+    if (osn_var.irq.delta_start) {
     osn_var.irq.delta_start += duration;
+    }
     }
 
 //
@@ -714,11 +933,11 @@ unsafe extern "C" fn timerlat_dump_stack(latency: u64) {
 //
 // See get_int_safe_duration().
 //
-    static inline void
-    cond_move_softirq_delta_start(struct osnoise_variables *osn_var, u64 duration)
-    {
-    if (osn_var.softirq.delta_start)
+#[no_mangle]
+pub unsafe extern "C" fn cond_move_softirq_delta_start(osn_var: *mut osnoise_variables, duration: u64) {
+    if (osn_var.softirq.delta_start) {
     osn_var.softirq.delta_start += duration;
+    }
     }
 
 //
@@ -729,11 +948,11 @@ unsafe extern "C" fn timerlat_dump_stack(latency: u64) {
 //
 // See get_int_safe_duration().
 //
-    static inline void
-    cond_move_thread_delta_start(struct osnoise_variables *osn_var, u64 duration)
-    {
-    if (osn_var.thread.delta_start)
+#[no_mangle]
+pub unsafe extern "C" fn cond_move_thread_delta_start(osn_var: *mut osnoise_variables, duration: u64) {
+    if (osn_var.thread.delta_start) {
     osn_var.thread.delta_start += duration;
+    }
     }
 //
 // get_int_safe_duration - Get the duration of a window
@@ -762,11 +981,10 @@ unsafe extern "C" fn timerlat_dump_stack(latency: u64) {
 // A counter of interrupts is used. If the counter increased, try
 // to capture an interference safe duration.
 //
-    static inline s64
-    get_int_safe_duration(struct osnoise_variables *osn_var, u64 *delta_start)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn get_int_safe_duration(osn_var: *mut osnoise_variables, delta_start: *mut u64) -> s64 {
     u64 int_counter, now;
-    s64 duration;
+    let mut duration = 0;
     do {
     int_counter = local_read(&osn_var.int_counter);
 // synchronize with interrupts
@@ -780,8 +998,9 @@ unsafe extern "C" fn timerlat_dump_stack(latency: u64) {
 // This is an evidence of race conditions that cause
 // a value to be "discounted" too much.
 //
-    if (duration < 0)
+    if (duration < 0) {
     osnoise_taint("Negative duration!\n");
+    }
 // delta_start = 0;
     return duration;
     }
@@ -793,10 +1012,9 @@ unsafe extern "C" fn timerlat_dump_stack(latency: u64) {
 //
 // See get_int_safe_duration() for an explanation.
 //
-    static u64
-    set_int_safe_time(struct osnoise_variables *osn_var, u64 *time)
-    {
-    u64 int_counter;
+#[no_mangle]
+pub unsafe extern "C" fn set_int_safe_time(osn_var: *mut osnoise_variables, time: *mut u64) -> u64 {
+    let mut int_counter = 0;
     do {
     int_counter = local_read(&osn_var.int_counter);
 // synchronize with interrupts
@@ -811,10 +1029,9 @@ unsafe extern "C" fn timerlat_dump_stack(latency: u64) {
 //
 // copy_int_safe_time - Copy *src into *desc aware of interference
 //
-    static u64
-    copy_int_safe_time(struct osnoise_variables *osn_var, u64 *dst, u64 *src)
-    {
-    u64 int_counter;
+#[no_mangle]
+pub unsafe extern "C" fn copy_int_safe_time(osn_var: *mut osnoise_variables, dst: *mut u64, src: *mut u64) -> u64 {
+    let mut int_counter = 0;
     do {
     int_counter = local_read(&osn_var.int_counter);
 // synchronize with interrupts
@@ -836,17 +1053,16 @@ unsafe extern "C" fn timerlat_dump_stack(latency: u64) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn trace_osnoise_callback(enter: bool) {
-    void trace_osnoise_callback(bool enter)
-    {
-    struct osnoise_variables *osn_var = this_cpu_osn_var();
-    u64 duration;
-    if (!osn_var.sampling)
+    let mut osn_var = this_cpu_osn_var();
+    let mut duration = 0;
+    if (!osn_var.sampling) {
     return;
+    }
 //
 // Currently trace_clock_local() calls sched_clock() and the
 // generic version is not NMI safe.
 //
-    if (!IS_ENABLED(CONFIG_GENERIC_SCHED_CLOCK)) {
+    if (!IS_ENABLED!(CONFIG_GENERIC_SCHED_CLOCK)) {
     if (enter) {
     osn_var.nmi.delta_start = time_get();
     local_inc(&osn_var.int_counter);
@@ -858,8 +1074,9 @@ pub unsafe extern "C" fn trace_osnoise_callback(enter: bool) {
     cond_move_thread_delta_start(osn_var, duration);
     }
     }
-    if (enter)
-    osn_var.nmi.count++;
+    if (enter) {
+    osn_var.nmi.count += 1;
+    }
     }
 //
 // osnoise_trace_irq_entry - Note the starting of an IRQ
@@ -872,18 +1089,17 @@ pub unsafe extern "C" fn trace_osnoise_callback(enter: bool) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn osnoise_trace_irq_entry(id: c_int) {
-    void osnoise_trace_irq_entry(int id)
-    {
-    struct osnoise_variables *osn_var = this_cpu_osn_var();
-    if (!osn_var.sampling)
+    let mut osn_var = this_cpu_osn_var();
+    if (!osn_var.sampling) {
     return;
+    }
 //
 // This value will be used in the report, but not to compute
 // the execution time, so it is safe to get it unsafe.
 //
     osn_var.irq.arrival_time = time_get();
     set_int_safe_time(osn_var, &osn_var.irq.delta_start);
-    osn_var.irq.count++;
+    osn_var.irq.count += 1;
     local_inc(&osn_var.int_counter);
     }
 //
@@ -894,12 +1110,11 @@ pub unsafe extern "C" fn osnoise_trace_irq_entry(id: c_int) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn osnoise_trace_irq_exit(id: c_int, desc: *const c_char) {
-    void osnoise_trace_irq_exit(int id, const char *desc)
-    {
-    struct osnoise_variables *osn_var = this_cpu_osn_var();
-    s64 duration;
-    if (!osn_var.sampling)
+    let mut osn_var = this_cpu_osn_var();
+    let mut duration = 0;
+    if (!osn_var.sampling) {
     return;
+    }
     duration = get_int_safe_duration(osn_var, &osn_var.irq.delta_start);
     trace_irq_noise(id, desc, osn_var.irq.arrival_time, duration);
     osn_var.irq.arrival_time = 0;
@@ -911,9 +1126,8 @@ pub unsafe extern "C" fn osnoise_trace_irq_exit(id: c_int, desc: *const c_char) 
 //
 // Used to note the starting of an IRQ occurece.
 //
-    static void trace_irqentry_callback(void *data, int irq,
-    struct irqaction *action)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn trace_irqentry_callback(data: *mut c_void, irq: c_int, action: *mut irqaction) {
     osnoise_trace_irq_entry(irq);
     }
 //
@@ -921,9 +1135,8 @@ pub unsafe extern "C" fn osnoise_trace_irq_exit(id: c_int, desc: *const c_char) 
 //
 // Used to note the end of an IRQ occurece.
 //
-    static void trace_irqexit_callback(void *data, int irq,
-    struct irqaction *action, int ret)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn trace_irqexit_callback(data: *mut c_void, irq: c_int, action: *mut irqaction, ret: c_int) {
     osnoise_trace_irq_exit(irq, action.name);
     }
 //
@@ -931,8 +1144,6 @@ pub unsafe extern "C" fn osnoise_trace_irq_exit(id: c_int, desc: *const c_char) 
 //
 #[no_mangle]
 pub unsafe extern "C" fn osnoise_arch_register() -> int __weak {
-    int __weak osnoise_arch_register(void)
-    {
     return 0;
     }
 //
@@ -940,8 +1151,6 @@ pub unsafe extern "C" fn osnoise_arch_register() -> int __weak {
 //
 #[no_mangle]
 pub unsafe extern "C" fn osnoise_arch_unregister() -> void __weak {
-    void __weak osnoise_arch_unregister(void)
-    {
     return;
     }
 //
@@ -952,24 +1161,25 @@ pub unsafe extern "C" fn osnoise_arch_unregister() -> void __weak {
 //
 #[no_mangle]
 unsafe extern "C" fn hook_irq_events() -> c_int {
-    static int hook_irq_events(void)
-    {
-    int ret;
+    let mut ret = 0;
     ret = register_trace_irq_handler_entry(trace_irqentry_callback, core::ptr::null_mut());
-    if (ret)
-    goto out_err;
+    if (ret) {
+// goto;
+    }
     ret = register_trace_irq_handler_exit(trace_irqexit_callback, core::ptr::null_mut());
-    if (ret)
-    goto out_unregister_entry;
+    if (ret) {
+// goto;
+    }
     ret = osnoise_arch_register();
-    if (ret)
-    goto out_irq_exit;
+    if (ret) {
+// goto;
+    }
     return 0;
-    out_irq_exit:
+// label;
     unregister_trace_irq_handler_exit(trace_irqexit_callback, core::ptr::null_mut());
-    out_unregister_entry:
+// label;
     unregister_trace_irq_handler_entry(trace_irqentry_callback, core::ptr::null_mut());
-    out_err:
+// label;
     return -EINVAL;
     }
 //
@@ -980,8 +1190,6 @@ unsafe extern "C" fn hook_irq_events() -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn unhook_irq_events() {
-    static void unhook_irq_events(void)
-    {
     osnoise_arch_unregister();
     unregister_trace_irq_handler_exit(trace_irqexit_callback, core::ptr::null_mut());
     unregister_trace_irq_handler_entry(trace_irqentry_callback, core::ptr::null_mut());
@@ -998,18 +1206,17 @@ unsafe extern "C" fn unhook_irq_events() {
 //
 #[no_mangle]
 unsafe extern "C" fn trace_softirq_entry_callback(data: *mut c_void, vec_nr: c_uint) {
-    static void trace_softirq_entry_callback(void *data, unsigned int vec_nr)
-    {
-    struct osnoise_variables *osn_var = this_cpu_osn_var();
-    if (!osn_var.sampling)
+    let mut osn_var = this_cpu_osn_var();
+    if (!osn_var.sampling) {
     return;
+    }
 //
 // This value will be used in the report, but not to compute
 // the execution time, so it is safe to get it unsafe.
 //
     osn_var.softirq.arrival_time = time_get();
     set_int_safe_time(osn_var, &osn_var.softirq.delta_start);
-    osn_var.softirq.count++;
+    osn_var.softirq.count += 1;
     local_inc(&osn_var.int_counter);
     }
 //
@@ -1020,15 +1227,15 @@ unsafe extern "C" fn trace_softirq_entry_callback(data: *mut c_void, vec_nr: c_u
 //
 #[no_mangle]
 unsafe extern "C" fn trace_softirq_exit_callback(data: *mut c_void, vec_nr: c_uint) {
-    static void trace_softirq_exit_callback(void *data, unsigned int vec_nr)
-    {
-    struct osnoise_variables *osn_var = this_cpu_osn_var();
-    s64 duration;
-    if (!osn_var.sampling)
+    let mut osn_var = this_cpu_osn_var();
+    let mut duration = 0;
+    if (!osn_var.sampling) {
     return;
-    if (unlikely(timerlat_enabled()))
+    }
+    if (unlikely(timerlat_enabled())) {
     if (!timerlat_softirq_exit(osn_var))
     return;
+    }
     duration = get_int_safe_duration(osn_var, &osn_var.softirq.delta_start);
     trace_softirq_noise(vec_nr, osn_var.softirq.arrival_time, duration);
     cond_move_thread_delta_start(osn_var, duration);
@@ -1042,19 +1249,19 @@ unsafe extern "C" fn trace_softirq_exit_callback(data: *mut c_void, vec_nr: c_ui
 //
 #[no_mangle]
 unsafe extern "C" fn hook_softirq_events() -> c_int {
-    static int hook_softirq_events(void)
-    {
-    int ret;
+    let mut ret = 0;
     ret = register_trace_softirq_entry(trace_softirq_entry_callback, core::ptr::null_mut());
-    if (ret)
-    goto out_err;
+    if (ret) {
+// goto;
+    }
     ret = register_trace_softirq_exit(trace_softirq_exit_callback, core::ptr::null_mut());
-    if (ret)
-    goto out_unreg_entry;
+    if (ret) {
+// goto;
+    }
     return 0;
-    out_unreg_entry:
+// label;
     unregister_trace_softirq_entry(trace_softirq_entry_callback, core::ptr::null_mut());
-    out_err:
+// label;
     return -EINVAL;
     }
 //
@@ -1065,8 +1272,6 @@ unsafe extern "C" fn hook_softirq_events() -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn unhook_softirq_events() {
-    static void unhook_softirq_events(void)
-    {
     unregister_trace_softirq_entry(trace_softirq_entry_callback, core::ptr::null_mut());
     unregister_trace_softirq_exit(trace_softirq_exit_callback, core::ptr::null_mut());
     }
@@ -1076,14 +1281,10 @@ unsafe extern "C" fn unhook_softirq_events() {
 //
 #[no_mangle]
 unsafe extern "C" fn hook_softirq_events() -> c_int {
-    static int hook_softirq_events(void)
-    {
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn unhook_softirq_events() {
-    static void unhook_softirq_events(void)
-    {
     }
 
 //
@@ -1092,18 +1293,18 @@ unsafe extern "C" fn unhook_softirq_events() {
 // It saves the context switch time for a noisy thread, and increments
 // the interference counters.
 //
-    static void
-    thread_entry(struct osnoise_variables *osn_var, struct task_struct *t)
-    {
-    if (!osn_var.sampling)
+#[no_mangle]
+pub unsafe extern "C" fn thread_entry(osn_var: *mut osnoise_variables, t: *mut task_struct) {
+    if (!osn_var.sampling) {
     return;
+    }
 //
 // The arrival time will be used in the report, but not to compute
 // the execution time, so it is safe to get it unsafe.
 //
     osn_var.thread.arrival_time = time_get();
     set_int_safe_time(osn_var, &osn_var.thread.delta_start);
-    osn_var.thread.count++;
+    osn_var.thread.count += 1;
     local_inc(&osn_var.int_counter);
     }
 //
@@ -1111,15 +1312,16 @@ unsafe extern "C" fn unhook_softirq_events() {
 //
 // It computes the total noise from a thread, tracing if needed.
 //
-    static void
-    thread_exit(struct osnoise_variables *osn_var, struct task_struct *t)
-    {
-    s64 duration;
-    if (!osn_var.sampling)
+#[no_mangle]
+pub unsafe extern "C" fn thread_exit(osn_var: *mut osnoise_variables, t: *mut task_struct) {
+    let mut duration = 0;
+    if (!osn_var.sampling) {
     return;
-    if (unlikely(timerlat_enabled()))
+    }
+    if (unlikely(timerlat_enabled())) {
     if (!timerlat_thread_exit(osn_var))
     return;
+    }
     duration = get_int_safe_duration(osn_var, &osn_var.thread.delta_start);
     trace_thread_noise(t, osn_var.thread.arrival_time, duration);
     osn_var.thread.arrival_time = 0;
@@ -1130,10 +1332,8 @@ unsafe extern "C" fn unhook_softirq_events() {
 //
 #[no_mangle]
 unsafe extern "C" fn osnoise_stop_exception(msg: *mut c_char, cpu: c_int) -> __always_inline void {
-    static __always_inline void osnoise_stop_exception(char *msg, int cpu)
-    {
-    struct osnoise_instance *inst;
-    struct trace_array *tr;
+pub static mut inst: *mut c_void = core::ptr::null_mut();
+pub static mut tr: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     list_for_each_entry_rcu(inst, &osnoise_instances, list) {
     tr = inst.tr;
@@ -1141,10 +1341,11 @@ unsafe extern "C" fn osnoise_stop_exception(msg: *mut c_char, cpu: c_int) -> __a
     "stop tracing hit on cpu %d due to exception: %s\n",
     smp_processor_id(),
     msg);
-    if (test_bit(OSN_PANIC_ON_STOP, &osnoise_options))
+    if (test_bit(OSN_PANIC_ON_STOP, &osnoise_options)) {
     panic("tracer hit on cpu %d due to exception: %s\n",
     smp_processor_id(),
     msg);
+    }
     tracer_tracing_off(tr);
     }
     rcu_read_unlock();
@@ -1157,10 +1358,8 @@ unsafe extern "C" fn osnoise_stop_exception(msg: *mut c_char, cpu: c_int) -> __a
 //
 #[no_mangle]
 unsafe extern "C" fn trace_sched_migrate_callback(data: *mut c_void, p: *mut task_struct, dest_cpu: c_int) {
-    static void trace_sched_migrate_callback(void *data, struct task_struct *p, int dest_cpu)
-    {
-    struct osnoise_variables *osn_var;
-    let mut cpu: c_long = task_cpu(p);
+pub static mut osn_var: *mut c_void = core::ptr::null_mut();
+pub static mut cpu: c_long = 0;
     osn_var = per_cpu_ptr(&per_cpu_osnoise_var, cpu);
     if (osn_var.pid == p.pid && dest_cpu != cpu) {
     per_cpu_ptr(&per_cpu_timerlat_var, cpu).uthread_migrate = 1;
@@ -1171,39 +1370,37 @@ unsafe extern "C" fn trace_sched_migrate_callback(data: *mut c_void, p: *mut tas
     static bool monitor_enabled;
 #[no_mangle]
 unsafe extern "C" fn register_migration_monitor() -> c_int {
-    static int register_migration_monitor(void)
-    {
-    let mut ret: c_int = 0;
+pub static mut ret: c_int = 0;
 //
 // Timerlat thread migration check is only required when running timerlat in user-space.
 // Thus, enable callback only if timerlat is set with no workload.
 //
     if (timerlat_enabled() && !test_bit(OSN_WORKLOAD, &osnoise_options)) {
-    if (WARN_ON_ONCE(monitor_enabled))
+    if (WARN_ON_ONCE!(monitor_enabled)) {
     return 0;
+    }
     ret = register_trace_sched_migrate_task(trace_sched_migrate_callback, core::ptr::null_mut());
-    if (!ret)
+    if (!ret) {
     monitor_enabled = true;
+    }
     }
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn unregister_migration_monitor() {
-    static void unregister_migration_monitor(void)
-    {
-    if (!monitor_enabled)
+    if (!monitor_enabled) {
     return;
+    }
     unregister_trace_sched_migrate_task(trace_sched_migrate_callback, core::ptr::null_mut());
     monitor_enabled = false;
     }
 
 #[no_mangle]
 unsafe extern "C" fn register_migration_monitor() -> c_int {
-    static int register_migration_monitor(void)
-    {
     return 0;
     }
-    static void unregister_migration_monitor(void) {}
+#[no_mangle]
+pub unsafe extern "C" fn unregister_migration_monitor() {}
 
 //
 // trace_sched_switch - sched:sched_switch trace event handler
@@ -1211,18 +1408,16 @@ unsafe extern "C" fn register_migration_monitor() -> c_int {
 // This function is hooked to the sched:sched_switch trace event, and it is
 // used to record the beginning and to report the end of a thread noise window.
 //
-    static void
-    trace_sched_switch_callback(void *data, bool preempt,
-    struct task_struct *p,
-    struct task_struct *n,
-    unsigned int prev_state)
-    {
-    struct osnoise_variables *osn_var = this_cpu_osn_var();
-    let mut workload: c_int = test_bit(OSN_WORKLOAD, &osnoise_options);
-    if ((p.pid != osn_var.pid) || !workload)
+#[no_mangle]
+pub unsafe extern "C" fn trace_sched_switch_callback(data: *mut c_void, preempt: bool, p: *mut task_struct, n: *mut task_struct, prev_state: c_uint) {
+    let mut osn_var = this_cpu_osn_var();
+pub static mut workload: c_int = 0;
+    if ((p.pid != osn_var.pid) || !workload) {
     thread_exit(osn_var, p);
-    if ((n.pid != osn_var.pid) || !workload)
+    }
+    if ((n.pid != osn_var.pid) || !workload) {
     thread_entry(osn_var, n);
+    }
     }
 //
 // hook_thread_events - Hook the instrumentation for thread noise
@@ -1232,17 +1427,17 @@ unsafe extern "C" fn register_migration_monitor() -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn hook_thread_events() -> c_int {
-    static int hook_thread_events(void)
-    {
-    int ret;
+    let mut ret = 0;
     ret = register_trace_sched_switch(trace_sched_switch_callback, core::ptr::null_mut());
-    if (ret)
+    if (ret) {
     return -EINVAL;
+    }
     ret = register_migration_monitor();
-    if (ret)
-    goto out_unreg;
+    if (ret) {
+// goto;
+    }
     return 0;
-    out_unreg:
+// label;
     unregister_trace_sched_switch(trace_sched_switch_callback, core::ptr::null_mut());
     return -EINVAL;
     }
@@ -1254,8 +1449,6 @@ unsafe extern "C" fn hook_thread_events() -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn unhook_thread_events() {
-    static void unhook_thread_events(void)
-    {
     unregister_trace_sched_switch(trace_sched_switch_callback, core::ptr::null_mut());
     unregister_migration_monitor();
     }
@@ -1266,9 +1459,8 @@ unsafe extern "C" fn unhook_thread_events() {
 // values will be used later to compute the diff betwneen the statistics
 // before and after the osnoise sampling.
 //
-    static void
-    save_osn_sample_stats(struct osnoise_variables *osn_var, struct osnoise_sample *s)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn save_osn_sample_stats(osn_var: *mut osnoise_variables, s: *mut osnoise_sample) {
     s.nmi_count = osn_var.nmi.count;
     s.irq_count = osn_var.irq.count;
     s.softirq_count = osn_var.softirq.count;
@@ -1281,9 +1473,8 @@ unsafe extern "C" fn unhook_thread_events() {
 // statistics. The struct osnoise_sample *s contains the statistics saved via
 // save_osn_sample_stats() before the osnoise sampling.
 //
-    static void
-    diff_osn_sample_stats(struct osnoise_variables *osn_var, struct osnoise_sample *s)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn diff_osn_sample_stats(osn_var: *mut osnoise_variables, s: *mut osnoise_sample) {
     s.nmi_count = osn_var.nmi.count - s.nmi_count;
     s.irq_count = osn_var.irq.count - s.irq_count;
     s.softirq_count = osn_var.softirq.count - s.softirq_count;
@@ -1294,17 +1485,16 @@ unsafe extern "C" fn unhook_thread_events() {
 //
 #[no_mangle]
 unsafe extern "C" fn osnoise_stop_tracing() -> __always_inline void {
-    static __always_inline void osnoise_stop_tracing(void)
-    {
-    struct osnoise_instance *inst;
-    struct trace_array *tr;
+pub static mut inst: *mut c_void = core::ptr::null_mut();
+pub static mut tr: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     list_for_each_entry_rcu(inst, &osnoise_instances, list) {
     tr = inst.tr;
     trace_array_printk(tr, _THIS_IP_,
     "stop tracing hit on cpu %d\n", smp_processor_id());
-    if (test_bit(OSN_PANIC_ON_STOP, &osnoise_options))
+    if (test_bit(OSN_PANIC_ON_STOP, &osnoise_options)) {
     panic("tracer hit stop condition on CPU %d\n", smp_processor_id());
+    }
     tracer_tracing_off(tr);
     }
     rcu_read_unlock();
@@ -1314,13 +1504,12 @@ unsafe extern "C" fn osnoise_stop_tracing() -> __always_inline void {
 //
 #[no_mangle]
 unsafe extern "C" fn osnoise_has_tracing_on() -> __always_inline int {
-    static __always_inline int osnoise_has_tracing_on(void)
-    {
-    struct osnoise_instance *inst;
-    let mut trace_is_on: c_int = 0;
+pub static mut inst: *mut c_void = core::ptr::null_mut();
+pub static mut trace_is_on: c_int = 0;
     rcu_read_lock();
-    list_for_each_entry_rcu(inst, &osnoise_instances, list)
+    list_for_each_entry_rcu(inst, &osnoise_instances, list) {
     trace_is_on += tracer_tracing_is_on(inst.tr);
+    }
     rcu_read_unlock();
     return trace_is_on;
     }
@@ -1329,10 +1518,8 @@ unsafe extern "C" fn osnoise_has_tracing_on() -> __always_inline int {
 //
 #[no_mangle]
 unsafe extern "C" fn notify_new_max_latency(latency: u64) {
-    static void notify_new_max_latency(u64 latency)
-    {
-    struct osnoise_instance *inst;
-    struct trace_array *tr;
+pub static mut inst: *mut c_void = core::ptr::null_mut();
+pub static mut tr: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     list_for_each_entry_rcu(inst, &osnoise_instances, list) {
     tr = inst.tr;
@@ -1353,21 +1540,19 @@ unsafe extern "C" fn notify_new_max_latency(latency: u64) {
 //
 #[no_mangle]
 unsafe extern "C" fn run_osnoise() -> c_int {
-    static int run_osnoise(void)
-    {
-    let mut disable_irq: bool = test_bit(OSN_IRQ_DISABLE, &osnoise_options);
-    struct osnoise_variables *osn_var = this_cpu_osn_var();
+pub static mut disable_irq: bool = false;
+    let mut osn_var = this_cpu_osn_var();
     u64 start, sample, last_sample;
     u64 last_int_count, int_count;
-    let mut noise: i64 = 0, max_noise = 0;
+pub static mut noise: i64 = 0;
     s64 total, last_total = 0;
-    struct osnoise_sample s;
-    bool disable_preemption;
-    unsigned int threshold;
+pub static mut s: usize = 0;
+    let mut disable_preemption = 0;
+    let mut threshold = 0;
     u64 runtime, stop_in;
-    let mut sum_noise: u64 = 0;
-    let mut hw_count: c_int = 0;
-    let mut ret: c_int = -1;
+pub static mut sum_noise: u64 = 0;
+pub static mut hw_count: c_int = 0;
+pub static mut ret: c_int = 0;
 //
 // Disabling preemption is only required if IRQs are enabled,
 // and the options is set on.
@@ -1388,10 +1573,12 @@ unsafe extern "C" fn run_osnoise() -> c_int {
 //
 // Apply PREEMPT and IRQ disabled options.
 //
-    if (disable_irq)
+    if (disable_irq) {
     local_irq_disable();
-    if (disable_preemption)
+    }
+    if (disable_preemption) {
     preempt_disable();
+    }
 //
 // Make sure NMIs see sampling first
 //
@@ -1422,7 +1609,7 @@ unsafe extern "C" fn run_osnoise() -> c_int {
 //
     if (noise < 0) {
     osnoise_taint("negative noise!");
-    goto out;
+// goto;
     }
 //
 // Sample runtime.
@@ -1437,16 +1624,19 @@ unsafe extern "C" fn run_osnoise() -> c_int {
     }
     last_total = total;
     if (noise >= threshold) {
-    let mut interference: c_int = int_count - last_int_count;
-    if (noise > max_noise)
+pub static mut interference: c_int = 0;
+    if (noise > max_noise) {
     max_noise = noise;
-    if (!interference)
-    hw_count++;
+    }
+    if (!interference) {
+    hw_count += 1;
+    }
     sum_noise += noise;
     trace_sample_threshold(last_sample, noise, interference);
-    if (osnoise_data.stop_tracing)
+    if (osnoise_data.stop_tracing) {
     if (noise > stop_in)
     osnoise_stop_tracing();
+    }
     }
 //
 // In some cases, notably when running on a nohz_full CPU with
@@ -1462,17 +1652,20 @@ unsafe extern "C" fn run_osnoise() -> c_int {
 // For simplicity, however, we call rcu_momentary_eqs() for all
 // configurations here.
 //
-    if (!disable_irq)
+    if (!disable_irq) {
     local_irq_disable();
+    }
     rcu_momentary_eqs();
-    if (!disable_irq)
+    if (!disable_irq) {
     local_irq_enable();
+    }
 //
 // For the non-preemptive kernel config: let threads runs, if
 // they so wish, unless set not do to so.
 //
-    if (!disable_irq && !disable_preemption)
+    if (!disable_irq && !disable_preemption) {
     cond_resched();
+    }
     last_sample = sample;
     last_int_count = int_count;
     } while (total < runtime && !kthread_should_stop());
@@ -1488,10 +1681,12 @@ unsafe extern "C" fn run_osnoise() -> c_int {
 //
 // Return to the preemptive state.
 //
-    if (disable_preemption)
+    if (disable_preemption) {
     preempt_enable();
-    if (disable_irq)
+    }
+    if (disable_irq) {
     local_irq_enable();
+    }
 //
 // Save noise info.
 //
@@ -1503,30 +1698,31 @@ unsafe extern "C" fn run_osnoise() -> c_int {
     diff_osn_sample_stats(osn_var, &s);
     record_osnoise_sample(&s);
     notify_new_max_latency(max_noise);
-    if (osnoise_data.stop_tracing_total)
+    if (osnoise_data.stop_tracing_total) {
     if (s.noise > osnoise_data.stop_tracing_total)
     osnoise_stop_tracing();
+    }
     return 0;
-    out:
+// label;
     return ret;
     }
-    static struct cpumask osnoise_cpumask;
-    static struct cpumask save_cpumask;
-    static struct cpumask kthread_cpumask;
+pub static mut osnoise_cpumask: usize = 0;
+pub static mut save_cpumask: usize = 0;
+pub static mut kthread_cpumask: usize = 0;
 //
 // osnoise_sleep - sleep until the next period
 //
 #[no_mangle]
 unsafe extern "C" fn osnoise_sleep(skip_period: bool) {
-    static void osnoise_sleep(bool skip_period)
-    {
-    u64 interval;
-    ktime_t wake_time;
+    let mut interval = 0;
+    let mut wake_time;
     mutex_lock(&interface_lock);
-    if (skip_period)
+    if (skip_period) {
     interval = osnoise_data.sample_period;
-    else
+    }
+    else {
     interval = osnoise_data.sample_period - osnoise_data.sample_runtime;
+    }
     mutex_unlock(&interface_lock);
 //
 // differently from hwlat_detector, the osnoise tracer can run
@@ -1540,8 +1736,9 @@ unsafe extern "C" fn osnoise_sleep(skip_period: bool) {
     wake_time = ktime_add_us(ktime_get(), interval);
     __set_current_state(TASK_INTERRUPTIBLE);
     while (schedule_hrtimeout(&wake_time, HRTIMER_MODE_ABS)) {
-    if (kthread_should_stop())
+    if (kthread_should_stop()) {
     break;
+    }
     }
     }
 //
@@ -1555,10 +1752,9 @@ unsafe extern "C" fn osnoise_sleep(skip_period: bool) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn osnoise_migration_pending() -> c_int {
-    static inline int osnoise_migration_pending(void)
-    {
-    if (!current.migration_pending)
+    if (!current.migration_pending) {
     return 0;
+    }
 //
 // If migration is pending, there is a task waiting for the
 // tracer to enable migration. The tracer does not allow migration,
@@ -1584,9 +1780,7 @@ pub unsafe extern "C" fn osnoise_migration_pending() -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn osnoise_main(data: *mut c_void) -> c_int {
-    static int osnoise_main(void *data)
-    {
-    unsigned long flags;
+    let mut flags = 0;
 //
 // This thread was created pinned to the CPU using PF_NO_SETAFFINITY.
 // The problem is that cgroup does not allow PF_NO_SETAFFINITY thread.
@@ -1599,8 +1793,9 @@ unsafe extern "C" fn osnoise_main(data: *mut c_void) -> c_int {
     current.flags &= ~(PF_NO_SETAFFINITY);
     raw_spin_unlock_irqrestore(&current.pi_lock, flags);
     while (!kthread_should_stop()) {
-    if (osnoise_migration_pending())
+    if (osnoise_migration_pending()) {
     break;
+    }
 // skip a period if tracing is off on all instances
     if (!osnoise_has_tracing_on()) {
     osnoise_sleep(true);
@@ -1618,19 +1813,17 @@ unsafe extern "C" fn osnoise_main(data: *mut c_void) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn timerlat_irq(timer: *mut hrtimer) -> enum hrtimer_restart {
-    static enum hrtimer_restart timerlat_irq(struct hrtimer *timer)
-    {
-    struct osnoise_variables *osn_var = this_cpu_osn_var();
-    struct timerlat_variables *tlat;
-    struct timerlat_sample s;
-    u64 now;
-    u64 diff;
+    let mut osn_var = this_cpu_osn_var();
+pub static mut tlat: *mut c_void = core::ptr::null_mut();
+pub static mut s: usize = 0;
+    let mut now = 0;
+    let mut diff = 0;
 //
 // I am not sure if the timer was armed for this CPU. So, get
 // the timerlat struct from the timer itself, not from this
 // CPU.
 //
-    tlat = container_of(timer, struct timerlat_variables, timer);
+    tlat = container_of!(timer, timerlat_variables, timer);
     now = ktime_to_ns(hrtimer_cb_get_time(&tlat.timer));
 //
 // Enable the osnoise: events for thread an softirq.
@@ -1658,7 +1851,7 @@ unsafe extern "C" fn timerlat_irq(timer: *mut hrtimer) -> enum hrtimer_restart {
 // The PREEMPT_RT is a special case, though. As softirqs run as threads
 // on RT, moving the thread is enough.
 //
-    if (!IS_ENABLED(CONFIG_PREEMPT_RT) && osn_var.softirq.delta_start) {
+    if (!IS_ENABLED!(CONFIG_PREEMPT_RT) && osn_var.softirq.delta_start) {
     copy_int_safe_time(osn_var, &osn_var.thread.delta_start,
     &osn_var.softirq.delta_start);
     copy_int_safe_time(osn_var, &osn_var.softirq.delta_start,
@@ -1671,7 +1864,7 @@ unsafe extern "C" fn timerlat_irq(timer: *mut hrtimer) -> enum hrtimer_restart {
 // Compute the current time with the expected time.
 //
     diff = now - tlat.abs_period;
-    tlat.count++;
+    tlat.count += 1;
     s.seqnum = tlat.count;
     s.timer_latency = diff;
     s.context = IRQ_CONTEXT;
@@ -1696,8 +1889,9 @@ unsafe extern "C" fn timerlat_irq(timer: *mut hrtimer) -> enum hrtimer_restart {
     }
     }
     wake_up_process(tlat.kthread);
-    if (osnoise_data.print_stack)
+    if (osnoise_data.print_stack) {
     timerlat_save_stack(0);
+    }
     return HRTIMER_NORESTART;
     }
 //
@@ -1705,10 +1899,8 @@ unsafe extern "C" fn timerlat_irq(timer: *mut hrtimer) -> enum hrtimer_restart {
 //
 #[no_mangle]
 unsafe extern "C" fn wait_next_period(tlat: *mut timerlat_variables) -> c_int {
-    static int wait_next_period(struct timerlat_variables *tlat)
-    {
     ktime_t next_abs_period, now;
-    let mut rel_period: u64 = osnoise_data.timerlat_period * 1000;
+pub static mut rel_period: u64 = 0;
     now = hrtimer_cb_get_time(&tlat.timer);
     next_abs_period = ns_to_ktime(tlat.abs_period + rel_period);
 //
@@ -1751,13 +1943,11 @@ unsafe extern "C" fn wait_next_period(tlat: *mut timerlat_variables) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn timerlat_main(data: *mut c_void) -> c_int {
-    static int timerlat_main(void *data)
-    {
-    struct osnoise_variables *osn_var = this_cpu_osn_var();
-    struct timerlat_variables *tlat = this_cpu_tmr_var();
-    struct timerlat_sample s;
-    struct sched_param sp;
-    unsigned long flags;
+    let mut osn_var = this_cpu_osn_var();
+    let mut tlat = this_cpu_tmr_var();
+pub static mut s: usize = 0;
+pub static mut sp: usize = 0;
+    let mut flags = 0;
     u64 now, diff;
 //
 // Make the thread RT, that is how cyclictest is usually used.
@@ -1796,11 +1986,13 @@ unsafe extern "C" fn timerlat_main(data: *mut c_void) -> c_int {
     notify_new_max_latency(diff);
     timerlat_dump_stack(time_to_us(diff));
     tlat.tracing_thread = false;
-    if (osnoise_data.stop_tracing_total)
+    if (osnoise_data.stop_tracing_total) {
     if (time_to_us(diff) >= osnoise_data.stop_tracing_total)
     osnoise_stop_tracing();
-    if (osnoise_migration_pending())
+    }
+    if (osnoise_migration_pending()) {
     break;
+    }
     wait_next_period(tlat);
     }
     hrtimer_cancel(&tlat.timer);
@@ -1810,8 +2002,6 @@ unsafe extern "C" fn timerlat_main(data: *mut c_void) -> c_int {
 
 #[no_mangle]
 unsafe extern "C" fn timerlat_main(data: *mut c_void) -> c_int {
-    static int timerlat_main(void *data)
-    {
     return 0;
     }
 
@@ -1820,15 +2010,13 @@ unsafe extern "C" fn timerlat_main(data: *mut c_void) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn stop_kthread(cpu: c_uint) {
-    static void stop_kthread(unsigned int cpu)
-    {
-    struct task_struct *kthread;
+pub static mut kthread: *mut c_void = core::ptr::null_mut();
     kthread = xchg_relaxed(&(per_cpu(per_cpu_osnoise_var, cpu).kthread), core::ptr::null_mut());
     if (kthread) {
     if (cpumask_test_and_clear_cpu(cpu, &kthread_cpumask) &&
-    !WARN_ON(!test_bit(OSN_WORKLOAD, &osnoise_options))) {
+    !WARN_ON!(!test_bit(OSN_WORKLOAD, &osnoise_options))) {
     kthread_stop(kthread);
-    } else if (!WARN_ON(test_bit(OSN_WORKLOAD, &osnoise_options))) {
+    } else if (!WARN_ON!(test_bit(OSN_WORKLOAD, &osnoise_options))) {
 //
 // This is a user thread waiting on the timerlat_fd. We need
 // to close all users, and the best way to guarantee this is
@@ -1856,12 +2044,11 @@ unsafe extern "C" fn stop_kthread(cpu: c_uint) {
 //
 #[no_mangle]
 unsafe extern "C" fn stop_per_cpu_kthreads() {
-    static void stop_per_cpu_kthreads(void)
-    {
-    int cpu;
+    let mut cpu = 0;
     cpus_read_lock();
-    for_each_online_cpu(cpu)
+    for_each_online_cpu(cpu) {
     stop_kthread(cpu);
+    }
     cpus_read_unlock();
     }
 //
@@ -1869,14 +2056,13 @@ unsafe extern "C" fn stop_per_cpu_kthreads() {
 //
 #[no_mangle]
 unsafe extern "C" fn start_kthread(cpu: c_uint) -> c_int {
-    static int start_kthread(unsigned int cpu)
-    {
-    struct task_struct *kthread;
-    void *main = osnoise_main;
+pub static mut kthread: *mut c_void = core::ptr::null_mut();
+    let mut main = osnoise_main;
     char comm[24];
 // Do not start a new thread if it is already running
-    if (per_cpu(per_cpu_osnoise_var, cpu).kthread)
+    if (per_cpu(per_cpu_osnoise_var, cpu).kthread) {
     return 0;
+    }
     if (timerlat_enabled()) {
     snprintf(comm, 24, "timerlat/%d", cpu);
     main = timerlat_main;
@@ -1891,7 +2077,7 @@ unsafe extern "C" fn start_kthread(cpu: c_uint) -> c_int {
     }
     kthread = kthread_run_on_cpu(main, core::ptr::null_mut(), cpu, comm);
     if (IS_ERR(kthread)) {
-    pr_err(BANNER "could not start sampling thread\n");
+    pr_err!(BANNER "could not start sampling thread\n");
     return -ENOMEM;
     }
     per_cpu(per_cpu_osnoise_var, cpu).kthread = kthread;
@@ -1906,14 +2092,13 @@ unsafe extern "C" fn start_kthread(cpu: c_uint) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn start_per_cpu_kthreads() -> c_int {
-    static int start_per_cpu_kthreads(void)
-    {
-    struct cpumask *current_mask = &save_cpumask;
-    let mut retval: c_int = 0;
-    int cpu;
+    let mut current_mask = &save_cpumask;
+pub static mut retval: c_int = 0;
+    let mut cpu = 0;
     if (!test_bit(OSN_WORKLOAD, &osnoise_options)) {
-    if (timerlat_enabled())
+    if (timerlat_enabled()) {
     return 0;
+    }
     }
     cpus_read_lock();
 //
@@ -1922,10 +2107,11 @@ unsafe extern "C" fn start_per_cpu_kthreads() -> c_int {
     cpumask_and(current_mask, cpu_online_mask, &osnoise_cpumask);
     for_each_possible_cpu(cpu) {
     if (cpumask_test_and_clear_cpu(cpu, &kthread_cpumask)) {
-    struct task_struct *kthread;
+pub static mut kthread: *mut c_void = core::ptr::null_mut();
     kthread = xchg_relaxed(&(per_cpu(per_cpu_osnoise_var, cpu).kthread), core::ptr::null_mut());
-    if (!WARN_ON(!kthread))
+    if (!WARN_ON!(!kthread)) {
     kthread_stop(kthread);
+    }
     }
     }
     for_each_cpu(cpu, current_mask) {
@@ -1942,28 +2128,27 @@ unsafe extern "C" fn start_per_cpu_kthreads() -> c_int {
 
 #[no_mangle]
 unsafe extern "C" fn osnoise_hotplug_workfn(dummy: *mut work_struct) {
-    static void osnoise_hotplug_workfn(struct work_struct *dummy)
-    {
-    let mut cpu: c_uint = smp_processor_id();
+pub static mut cpu: c_uint = 0;
     guard(mutex)(&trace_types_lock);
-    if (!osnoise_has_registered_instances())
+    if (!osnoise_has_registered_instances()) {
     return;
+    }
     guard(cpus_read_lock)();
     guard(mutex)(&interface_lock);
-    if (!cpu_online(cpu))
+    if (!cpu_online(cpu)) {
     return;
-    if (!cpumask_test_cpu(cpu, &osnoise_cpumask))
+    }
+    if (!cpumask_test_cpu(cpu, &osnoise_cpumask)) {
     return;
+    }
     start_kthread(cpu);
     }
-    static DECLARE_WORK(osnoise_hotplug_work, osnoise_hotplug_workfn);
+pub static mut osnoise_hotplug_work: usize = 0;
 //
 // osnoise_cpu_init - CPU hotplug online callback function
 //
 #[no_mangle]
 unsafe extern "C" fn osnoise_cpu_init(cpu: c_uint) -> c_int {
-    static int osnoise_cpu_init(unsigned int cpu)
-    {
     schedule_work_on(cpu, &osnoise_hotplug_work);
     return 0;
     }
@@ -1972,87 +2157,78 @@ unsafe extern "C" fn osnoise_cpu_init(cpu: c_uint) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn osnoise_cpu_die(cpu: c_uint) -> c_int {
-    static int osnoise_cpu_die(unsigned int cpu)
-    {
     stop_kthread(cpu);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn osnoise_init_hotplug_support() {
-    static void osnoise_init_hotplug_support(void)
-    {
-    int ret;
+    let mut ret = 0;
     ret = cpuhp_setup_state(CPUHP_AP_ONLINE_DYN, "trace/osnoise:online",
     osnoise_cpu_init, osnoise_cpu_die);
-    if (ret < 0)
-    pr_warn(BANNER "Error to init cpu hotplug support\n");
+    if (ret < 0) {
+    pr_warn!(BANNER "Error to init cpu hotplug support\n");
+    }
     return;
     }
 
 #[no_mangle]
 unsafe extern "C" fn osnoise_init_hotplug_support() {
-    static void osnoise_init_hotplug_support(void)
-    {
     return;
     }
 
 //
 // seq file functions for the osnoise/options file.
 //
-    static void *s_options_start(struct seq_file *s, loff_t *pos)
-    {
-    let mut option: c_int = *pos;
+#[no_mangle]
+pub unsafe extern "C" fn s_options_start(s: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
+pub static mut option: c_int = 0;
     mutex_lock(&interface_lock);
-    if (option >= OSN_MAX)
+    if (option >= OSN_MAX) {
     return core::ptr::null_mut();
+    }
     return pos;
     }
-    static void *s_options_next(struct seq_file *s, void *v, loff_t *pos)
-    {
-    let mut option: c_int = ++(*pos);
-    if (option >= OSN_MAX)
+#[no_mangle]
+pub unsafe extern "C" fn s_options_next(s: *mut seq_file, v: *mut c_void, pos: *mut loff_t) -> *mut c_void {
+pub static mut option: c_int = 0;
+    if (option >= OSN_MAX) {
     return core::ptr::null_mut();
+    }
     return pos;
     }
 #[no_mangle]
 unsafe extern "C" fn s_options_show(s: *mut seq_file, v: *mut c_void) -> c_int {
-    static int s_options_show(struct seq_file *s, void *v)
-    {
-    loff_t *pos = v;
-    let mut option: c_int = *pos;
+    let mut pos = v;
+pub static mut option: c_int = 0;
     if (option == OSN_DEFAULTS) {
-    if (osnoise_options == OSN_DEFAULT_OPTIONS)
+    if (osnoise_options == OSN_DEFAULT_OPTIONS) {
     seq_printf(s, "%s", osnoise_options_str[option]);
-    else
-    seq_printf(s, "NO_%s", osnoise_options_str[option]);
-    goto out;
     }
-    if (test_bit(option, &osnoise_options))
-    seq_printf(s, "%s", osnoise_options_str[option]);
-    else
+    else {
     seq_printf(s, "NO_%s", osnoise_options_str[option]);
-    out:
-    if (option != OSN_MAX)
+    }
+// goto;
+    }
+    if (test_bit(option, &osnoise_options)) {
+    seq_printf(s, "%s", osnoise_options_str[option]);
+    }
+    else {
+    seq_printf(s, "NO_%s", osnoise_options_str[option]);
+    }
+// label;
+    if (option != OSN_MAX) {
     seq_puts(s, " ");
+    }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn s_options_stop(s: *mut seq_file, v: *mut c_void) {
-    static void s_options_stop(struct seq_file *s, void *v)
-    {
     seq_puts(s, "\n");
     mutex_unlock(&interface_lock);
     }
-    static const struct seq_operations osnoise_options_seq_ops = {
-    .start		= s_options_start,
-    .next		= s_options_next,
-    .show		= s_options_show,
-    .stop		= s_options_stop
-    };
+pub static mut seq_operations: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn osnoise_options_open(inode: *mut inode, file: *mut file) -> c_int {
-    static int osnoise_options_open(struct inode *inode, struct file *file)
-    {
     return seq_open(file, &osnoise_options_seq_ops);
     };
 //
@@ -2067,15 +2243,19 @@ unsafe extern "C" fn osnoise_options_open(inode: *mut inode, file: *mut file) ->
 //
 // Writing "DEFAULTS" resets the option values to the default ones.
 //
-    static ssize_t osnoise_options_write(struct file *filp, const char __user *ubuf,
-    size_t cnt, loff_t *ppos)
-    {
-    int running, option, enable, retval;
+#[no_mangle]
+pub unsafe extern "C" fn osnoise_options_write(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
+    let mut running = 0;
+    let mut option = 0;
+    let mut enable = 0;
+    let mut retval = 0;
     char buf[256], *option_str;
-    if (cnt >= 256)
+    if (cnt >= 256) {
     return -EINVAL;
-    if (copy_from_user(buf, ubuf, cnt))
+    }
+    if (copy_from_user(buf, ubuf, cnt)) {
     return -EFAULT;
+    }
     buf[cnt] = 0;
     if (strncmp(buf, "NO_", 3)) {
     option_str = strstrip(buf);
@@ -2085,15 +2265,17 @@ unsafe extern "C" fn osnoise_options_open(inode: *mut inode, file: *mut file) ->
     enable = false;
     }
     option = match_string(osnoise_options_str, OSN_MAX, option_str);
-    if (option < 0)
+    if (option < 0) {
     return -EINVAL;
+    }
 //
 // trace_types_lock is taken to avoid concurrency on start/stop.
 //
     mutex_lock(&trace_types_lock);
     running = osnoise_has_registered_instances();
-    if (running)
+    if (running) {
     stop_per_cpu_kthreads();
+    }
 //
 // avoid CPU hotplug operations that might read options.
 //
@@ -2101,20 +2283,25 @@ unsafe extern "C" fn osnoise_options_open(inode: *mut inode, file: *mut file) ->
     mutex_lock(&interface_lock);
     retval = cnt;
     if (enable) {
-    if (option == OSN_DEFAULTS)
+    if (option == OSN_DEFAULTS) {
     osnoise_options = OSN_DEFAULT_OPTIONS;
-    else
+    }
+    else {
     set_bit(option, &osnoise_options);
+    }
     } else {
-    if (option == OSN_DEFAULTS)
+    if (option == OSN_DEFAULTS) {
     retval = -EINVAL;
-    else
+    }
+    else {
     clear_bit(option, &osnoise_options);
+    }
     }
     mutex_unlock(&interface_lock);
     cpus_read_unlock();
-    if (running)
+    if (running) {
     start_per_cpu_kthreads();
+    }
     mutex_unlock(&trace_types_lock);
     return retval;
     }
@@ -2127,20 +2314,20 @@ unsafe extern "C" fn osnoise_options_open(inode: *mut inode, file: *mut file) ->
 //
 // Prints the "cpus" output into the user-provided buffer.
 //
-    static ssize_t
-    osnoise_cpus_read(struct file *filp, char __user *ubuf, size_t count,
-    loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn osnoise_cpus_read(filp: *mut file, ubuf: *mut c_char, count: size_t, ppos: *mut loff_t) -> ssize_t {
     char *mask_str __free(kfree) = core::ptr::null_mut();
-    int len;
+    let mut len = 0;
     guard(mutex)(&interface_lock);
     len = snprintf(core::ptr::null_mut(), 0, "%*pbl\n", cpumask_pr_args(&osnoise_cpumask)) + 1;
     mask_str = kmalloc(len, GFP_KERNEL);
-    if (!mask_str)
+    if (!mask_str) {
     return -ENOMEM;
+    }
     len = snprintf(mask_str, len, "%*pbl\n", cpumask_pr_args(&osnoise_cpumask));
-    if (len >= count)
+    if (len >= count) {
     return -EINVAL;
+    }
     count = simple_read_from_buffer(ubuf, count, ppos, mask_str, len);
     return count;
     }
@@ -2160,30 +2347,34 @@ unsafe extern "C" fn osnoise_options_open(inode: *mut inode, file: *mut file) ->
 // other CPUs. For instance, one might run osnoise in one HT CPU
 // while observing what is running on the sibling HT CPU.
 //
-    static ssize_t
-    osnoise_cpus_write(struct file *filp, const char __user *ubuf, size_t count,
-    loff_t *ppos)
-    {
-    cpumask_var_t osnoise_cpumask_new;
-    int running, err;
+#[no_mangle]
+pub unsafe extern "C" fn osnoise_cpus_write(filp: *mut file, ubuf: *mut c_char, count: size_t, ppos: *mut loff_t) -> ssize_t {
+    let mut osnoise_cpumask_new;
+    let mut running = 0;
+    let mut err = 0;
     char *buf __free(kfree) = core::ptr::null_mut();
-    if (count < 1)
+    if (count < 1) {
     return 0;
+    }
     buf = memdup_user_nul(ubuf, count);
-    if (IS_ERR(buf))
+    if (IS_ERR(buf)) {
     return PTR_ERR(buf);
-    if (!zalloc_cpumask_var(&osnoise_cpumask_new, GFP_KERNEL))
+    }
+    if (!zalloc_cpumask_var(&osnoise_cpumask_new, GFP_KERNEL)) {
     return -ENOMEM;
+    }
     err = cpulist_parse(buf, osnoise_cpumask_new);
-    if (err)
-    goto err_free;
+    if (err) {
+// goto;
+    }
 //
 // trace_types_lock is taken to avoid concurrency on start/stop.
 //
     mutex_lock(&trace_types_lock);
     running = osnoise_has_registered_instances();
-    if (running)
+    if (running) {
     stop_per_cpu_kthreads();
+    }
 //
 // osnoise_cpumask is read by CPU hotplug operations.
 //
@@ -2192,23 +2383,22 @@ unsafe extern "C" fn osnoise_options_open(inode: *mut inode, file: *mut file) ->
     cpumask_copy(&osnoise_cpumask, osnoise_cpumask_new);
     mutex_unlock(&interface_lock);
     cpus_read_unlock();
-    if (running)
+    if (running) {
     start_per_cpu_kthreads();
+    }
     mutex_unlock(&trace_types_lock);
     free_cpumask_var(osnoise_cpumask_new);
     return count;
-    err_free:
+// label;
     free_cpumask_var(osnoise_cpumask_new);
     return err;
     }
 
 #[no_mangle]
 unsafe extern "C" fn timerlat_fd_open(inode: *mut inode, file: *mut file) -> c_int {
-    static int timerlat_fd_open(struct inode *inode, struct file *file)
-    {
-    struct osnoise_variables *osn_var;
-    struct timerlat_variables *tlat;
-    let mut cpu: c_long = (long) inode.i_cdev;
+pub static mut osn_var: *mut c_void = core::ptr::null_mut();
+pub static mut tlat: *mut c_void = core::ptr::null_mut();
+pub static mut cpu: c_long = 0;
     mutex_lock(&interface_lock);
 //
 // This file is accessible only if timerlat is enabled, and
@@ -2266,16 +2456,14 @@ unsafe extern "C" fn timerlat_fd_open(inode: *mut inode, file: *mut file) -> c_i
 //
 // Prints 1 on timerlat, the number of interferences on osnoise, -1 on error.
 //
-    static ssize_t
-    timerlat_fd_read(struct file *file, char __user *ubuf, size_t count,
-    loff_t *ppos)
-    {
-    let mut cpu: c_long = (long) file.private_data;
-    struct osnoise_variables *osn_var;
-    struct timerlat_variables *tlat;
-    struct timerlat_sample s;
-    s64 diff;
-    u64 now;
+#[no_mangle]
+pub unsafe extern "C" fn timerlat_fd_read(file: *mut file, ubuf: *mut c_char, count: size_t, ppos: *mut loff_t) -> ssize_t {
+pub static mut cpu: c_long = 0;
+pub static mut osn_var: *mut c_void = core::ptr::null_mut();
+pub static mut tlat: *mut c_void = core::ptr::null_mut();
+pub static mut s: usize = 0;
+    let mut diff = 0;
+    let mut now = 0;
     migrate_disable();
     tlat = this_cpu_tmr_var();
 //
@@ -2310,8 +2498,9 @@ unsafe extern "C" fn timerlat_fd_open(inode: *mut inode, file: *mut file) -> c_i
 //
 // it was not a timer firing, but some other signal?
 //
-    if (diff < 0)
-    goto out;
+    if (diff < 0) {
+// goto;
+    }
     s.seqnum = tlat.count;
     s.timer_latency = diff;
     s.context = THREAD_URET;
@@ -2339,8 +2528,9 @@ unsafe extern "C" fn timerlat_fd_open(inode: *mut inode, file: *mut file) -> c_i
 //
 // it was not a timer firing, but some other signal?
 //
-    if (diff < 0)
-    goto out;
+    if (diff < 0) {
+// goto;
+    }
     s.seqnum = tlat.count;
     s.timer_latency = diff;
     s.context = THREAD_CONTEXT;
@@ -2352,24 +2542,23 @@ unsafe extern "C" fn timerlat_fd_open(inode: *mut inode, file: *mut file) -> c_i
     osnoise_stop_tracing();
     }
     }
-    out:
+// label;
     migrate_enable();
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn timerlat_fd_release(inode: *mut inode, file: *mut file) -> c_int {
-    static int timerlat_fd_release(struct inode *inode, struct file *file)
-    {
-    struct osnoise_variables *osn_var;
-    struct timerlat_variables *tlat_var;
-    let mut cpu: c_long = (long) file.private_data;
+pub static mut osn_var: *mut c_void = core::ptr::null_mut();
+pub static mut tlat_var: *mut c_void = core::ptr::null_mut();
+pub static mut cpu: c_long = 0;
     migrate_disable();
     mutex_lock(&interface_lock);
     osn_var = per_cpu_ptr(&per_cpu_osnoise_var, cpu);
     tlat_var = per_cpu_ptr(&per_cpu_timerlat_var, cpu);
-    if (tlat_var.kthread)
+    if (tlat_var.kthread) {
     hrtimer_cancel(&tlat_var.timer);
-    memset(tlat_var, 0, sizeof(*tlat_var));
+    }
+    memset(tlat_var, 0, sizeof!(*tlat_var));
     osn_var.sampling = 0;
     osn_var.pid = 0;
 //
@@ -2387,120 +2576,64 @@ unsafe extern "C" fn timerlat_fd_release(inode: *mut inode, file: *mut file) -> 
 //
 // osnoise/runtime_us: cannot be greater than the period.
 //
-    static struct trace_min_max_param osnoise_runtime = {
-    .lock	= &interface_lock,
-    .val	= &osnoise_data.sample_runtime,
-    .max	= &osnoise_data.sample_period,
-    .min	= core::ptr::null_mut(),
-    };
+pub static mut trace_min_max_param: usize = 0;
 //
 // osnoise/period_us: cannot be smaller than the runtime.
 //
-    static struct trace_min_max_param osnoise_period = {
-    .lock	= &interface_lock,
-    .val	= &osnoise_data.sample_period,
-    .max	= core::ptr::null_mut(),
-    .min	= &osnoise_data.sample_runtime,
-    };
+pub static mut trace_min_max_param: usize = 0;
 //
 // osnoise/stop_tracing_us: no limit.
 //
-    static struct trace_min_max_param osnoise_stop_tracing_in = {
-    .lock	= &interface_lock,
-    .val	= &osnoise_data.stop_tracing,
-    .max	= core::ptr::null_mut(),
-    .min	= core::ptr::null_mut(),
-    };
+pub static mut trace_min_max_param: usize = 0;
 //
 // osnoise/stop_tracing_total_us: no limit.
 //
-    static struct trace_min_max_param osnoise_stop_tracing_total = {
-    .lock	= &interface_lock,
-    .val	= &osnoise_data.stop_tracing_total,
-    .max	= core::ptr::null_mut(),
-    .min	= core::ptr::null_mut(),
-    };
+pub static mut trace_min_max_param: usize = 0;
 
 //
 // osnoise/print_stack: print the stacktrace of the IRQ handler if the total
 // latency is higher than val.
 //
-    static struct trace_min_max_param osnoise_print_stack = {
-    .lock	= &interface_lock,
-    .val	= &osnoise_data.print_stack,
-    .max	= core::ptr::null_mut(),
-    .min	= core::ptr::null_mut(),
-    };
+pub static mut trace_min_max_param: usize = 0;
 //
 // osnoise/timerlat_period: min 100 us, max 1 s
 //
-    let mut timerlat_min_period: static u64 = 100;
-    let mut timerlat_max_period: static u64 = 1000000;
-    static struct trace_min_max_param timerlat_period = {
-    .lock	= &interface_lock,
-    .val	= &osnoise_data.timerlat_period,
-    .max	= &timerlat_max_period,
-    .min	= &timerlat_min_period,
-    };
+pub static mut timerlat_min_period: u64 = 100;
+pub static mut timerlat_max_period: u64 = 1000000;
+pub static mut trace_min_max_param: usize = 0;
 //
 // osnoise/timerlat_align_us: align the first wakeup of all timerlat
 // threads to a common boundary (in us). 0 means disabled.
 //
-    static struct trace_min_max_param timerlat_align_us = {
-    .lock	= &interface_lock,
-    .val	= &osnoise_data.timerlat_align_us,
-    .max	= core::ptr::null_mut(),
-    .min	= core::ptr::null_mut(),
-    };
-    static const struct file_operations timerlat_fd_fops = {
-    .open		= timerlat_fd_open,
-    .read		= timerlat_fd_read,
-    .release	= timerlat_fd_release,
-    .llseek		= generic_file_llseek,
-    };
+pub static mut trace_min_max_param: usize = 0;
+pub static mut file_operations: usize = 0;
 
-    static const struct file_operations cpus_fops = {
-    .open		= tracing_open_generic,
-    .read		= osnoise_cpus_read,
-    .write		= osnoise_cpus_write,
-    .llseek		= generic_file_llseek,
-    };
-    static const struct file_operations osnoise_options_fops = {
-    .open		= osnoise_options_open,
-    .read		= seq_read,
-    .llseek		= seq_lseek,
-    .release	= seq_release,
-    .write		= osnoise_options_write
-    };
+pub static mut file_operations: usize = 0;
+pub static mut file_operations: usize = 0;
 
 #[no_mangle]
 unsafe extern "C" fn init_timerlat_stack_tracefs(top_dir: *mut dentry) -> c_int {
-    static int init_timerlat_stack_tracefs(struct dentry *top_dir)
-    {
-    struct dentry *tmp;
+pub static mut tmp: *mut c_void = core::ptr::null_mut();
     tmp = tracefs_create_file("print_stack", TRACE_MODE_WRITE, top_dir,
     &osnoise_print_stack, &trace_min_max_fops);
-    if (!tmp)
+    if (!tmp) {
     return -ENOMEM;
+    }
     return 0;
     }
 
 #[no_mangle]
 unsafe extern "C" fn init_timerlat_stack_tracefs(top_dir: *mut dentry) -> c_int {
-    static int init_timerlat_stack_tracefs(struct dentry *top_dir)
-    {
     return 0;
     }
 
 #[no_mangle]
 unsafe extern "C" fn osnoise_create_cpu_timerlat_fd(top_dir: *mut dentry) -> c_int {
-    static int osnoise_create_cpu_timerlat_fd(struct dentry *top_dir)
-    {
-    struct dentry *timerlat_fd;
-    struct dentry *per_cpu;
-    struct dentry *cpu_dir;
+pub static mut timerlat_fd: *mut c_void = core::ptr::null_mut();
+pub static mut per_cpu: *mut c_void = core::ptr::null_mut();
+pub static mut cpu_dir: *mut c_void = core::ptr::null_mut();
     char cpu_str[30]; /* see trace.c: tracing_init_tracefs_percpu() */
-    long cpu;
+    let mut cpu = 0;
 //
 // Why not using tracing instance per_cpu/ dir?
 //
@@ -2508,22 +2641,25 @@ unsafe extern "C" fn osnoise_create_cpu_timerlat_fd(top_dir: *mut dentry) -> c_i
 // multiple files like these are waste of memory.
 //
     per_cpu = tracefs_create_dir("per_cpu", top_dir);
-    if (!per_cpu)
+    if (!per_cpu) {
     return -ENOMEM;
+    }
     for_each_possible_cpu(cpu) {
     snprintf(cpu_str, 30, "cpu%ld", cpu);
     cpu_dir = tracefs_create_dir(cpu_str, per_cpu);
-    if (!cpu_dir)
-    goto out_clean;
+    if (!cpu_dir) {
+// goto;
+    }
     timerlat_fd = trace_create_file("timerlat_fd", TRACE_MODE_READ,
     cpu_dir, core::ptr::null_mut(), &timerlat_fd_fops);
-    if (!timerlat_fd)
-    goto out_clean;
+    if (!timerlat_fd) {
+// goto;
+    }
 // Record the CPU
-    d_inode(timerlat_fd).i_cdev = (void *)(cpu);
+    d_inode(timerlat_fd).i_cdev = (cpu);
     }
     return 0;
-    out_clean:
+// label;
     tracefs_remove(per_cpu);
     return -ENOMEM;
     }
@@ -2532,28 +2668,27 @@ unsafe extern "C" fn osnoise_create_cpu_timerlat_fd(top_dir: *mut dentry) -> c_i
 //
 #[no_mangle]
 unsafe extern "C" fn init_timerlat_tracefs(top_dir: *mut dentry) -> c_int {
-    static int init_timerlat_tracefs(struct dentry *top_dir)
-    {
-    struct dentry *tmp;
-    int retval;
+pub static mut tmp: *mut c_void = core::ptr::null_mut();
+    let mut retval = 0;
     tmp = tracefs_create_file("timerlat_period_us", TRACE_MODE_WRITE, top_dir,
     &timerlat_period, &trace_min_max_fops);
-    if (!tmp)
+    if (!tmp) {
     return -ENOMEM;
+    }
     tmp = tracefs_create_file("timerlat_align_us", TRACE_MODE_WRITE, top_dir,
     &timerlat_align_us, &trace_min_max_fops);
-    if (!tmp)
+    if (!tmp) {
     return -ENOMEM;
+    }
     retval = osnoise_create_cpu_timerlat_fd(top_dir);
-    if (retval)
+    if (retval) {
     return retval;
+    }
     return init_timerlat_stack_tracefs(top_dir);
     }
 
 #[no_mangle]
 unsafe extern "C" fn init_timerlat_tracefs(top_dir: *mut dentry) -> c_int {
-    static int init_timerlat_tracefs(struct dentry *top_dir)
-    {
     return 0;
     }
 
@@ -2566,80 +2701,87 @@ unsafe extern "C" fn init_timerlat_tracefs(top_dir: *mut dentry) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn init_tracefs() -> c_int {
-    static int init_tracefs(void)
-    {
-    struct dentry *top_dir;
-    struct dentry *tmp;
-    int ret;
+pub static mut top_dir: *mut c_void = core::ptr::null_mut();
+pub static mut tmp: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     ret = tracing_init_dentry();
-    if (ret)
+    if (ret) {
     return -ENOMEM;
+    }
     top_dir = tracefs_create_dir("osnoise", core::ptr::null_mut());
-    if (!top_dir)
+    if (!top_dir) {
     return 0;
+    }
     tmp = tracefs_create_file("period_us", TRACE_MODE_WRITE, top_dir,
     &osnoise_period, &trace_min_max_fops);
-    if (!tmp)
-    goto err;
+    if (!tmp) {
+// goto;
+    }
     tmp = tracefs_create_file("runtime_us", TRACE_MODE_WRITE, top_dir,
     &osnoise_runtime, &trace_min_max_fops);
-    if (!tmp)
-    goto err;
+    if (!tmp) {
+// goto;
+    }
     tmp = tracefs_create_file("stop_tracing_us", TRACE_MODE_WRITE, top_dir,
     &osnoise_stop_tracing_in, &trace_min_max_fops);
-    if (!tmp)
-    goto err;
+    if (!tmp) {
+// goto;
+    }
     tmp = tracefs_create_file("stop_tracing_total_us", TRACE_MODE_WRITE, top_dir,
     &osnoise_stop_tracing_total, &trace_min_max_fops);
-    if (!tmp)
-    goto err;
+    if (!tmp) {
+// goto;
+    }
     tmp = trace_create_file("cpus", TRACE_MODE_WRITE, top_dir, core::ptr::null_mut(), &cpus_fops);
-    if (!tmp)
-    goto err;
+    if (!tmp) {
+// goto;
+    }
     tmp = trace_create_file("options", TRACE_MODE_WRITE, top_dir, core::ptr::null_mut(),
     &osnoise_options_fops);
-    if (!tmp)
-    goto err;
+    if (!tmp) {
+// goto;
+    }
     ret = init_timerlat_tracefs(top_dir);
-    if (ret)
-    goto err;
+    if (ret) {
+// goto;
+    }
     return 0;
-    err:
+// label;
     tracefs_remove(top_dir);
     return -ENOMEM;
     }
 #[no_mangle]
 unsafe extern "C" fn osnoise_hook_events() -> c_int {
-    static int osnoise_hook_events(void)
-    {
-    int retval;
+    let mut retval = 0;
 //
 // Trace is already hooked, we are re-enabling from
 // a stop_tracing_*.
 //
-    if (trace_osnoise_callback_enabled)
+    if (trace_osnoise_callback_enabled) {
     return 0;
+    }
     retval = hook_irq_events();
-    if (retval)
+    if (retval) {
     return -EINVAL;
+    }
     retval = hook_softirq_events();
-    if (retval)
-    goto out_unhook_irq;
+    if (retval) {
+// goto;
+    }
     retval = hook_thread_events();
 //
 // All fine!
 //
-    if (!retval)
+    if (!retval) {
     return 0;
+    }
     unhook_softirq_events();
-    out_unhook_irq:
+// label;
     unhook_irq_events();
     return -EINVAL;
     }
 #[no_mangle]
 unsafe extern "C" fn osnoise_unhook_events() {
-    static void osnoise_unhook_events(void)
-    {
     unhook_thread_events();
     unhook_softirq_events();
     unhook_irq_events();
@@ -2649,9 +2791,7 @@ unsafe extern "C" fn osnoise_unhook_events() {
 //
 #[no_mangle]
 unsafe extern "C" fn osnoise_workload_start() -> c_int {
-    static int osnoise_workload_start(void)
-    {
-    int retval;
+    let mut retval = 0;
 //
 // Instances need to be registered after calling workload
 // start. Hence, if there is already an instance, the
@@ -2659,12 +2799,14 @@ unsafe extern "C" fn osnoise_workload_start() -> c_int {
 // code is on the way to register the first instance,
 // and the workload will start.
 //
-    if (osnoise_has_registered_instances())
+    if (osnoise_has_registered_instances()) {
     return 0;
+    }
     osn_var_reset_all();
     retval = osnoise_hook_events();
-    if (retval)
+    if (retval) {
     return retval;
+    }
 //
 // Make sure that ftrace_nmi_enter/exit() see reset values
 // before enabling trace_osnoise_callback_enabled.
@@ -2689,8 +2831,6 @@ unsafe extern "C" fn osnoise_workload_start() -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn osnoise_workload_stop() {
-    static void osnoise_workload_stop(void)
-    {
 //
 // Instances need to be unregistered before calling
 // stop. Hence, if there is a registered instance, more
@@ -2698,8 +2838,9 @@ unsafe extern "C" fn osnoise_workload_stop() {
 // yet stop. Otherwise, this code is on the way to disable
 // the last instance, and the workload can stop.
 //
-    if (osnoise_has_registered_instances())
+    if (osnoise_has_registered_instances()) {
     return;
+    }
 //
 // If callbacks were already disabled in a previous stop
 // call, there is no need to disable then again.
@@ -2708,8 +2849,9 @@ unsafe extern "C" fn osnoise_workload_stop() {
 // echo 0 > tracing_on
 // echo nop > current_tracer.
 //
-    if (!trace_osnoise_callback_enabled)
+    if (!trace_osnoise_callback_enabled) {
     return;
+    }
     trace_osnoise_callback_enabled = false;
 //
 // Make sure that ftrace_nmi_enter/exit() see
@@ -2721,48 +2863,43 @@ unsafe extern "C" fn osnoise_workload_stop() {
     }
 #[no_mangle]
 unsafe extern "C" fn osnoise_tracer_start(tr: *mut trace_array) {
-    static void osnoise_tracer_start(struct trace_array *tr)
-    {
-    int retval;
+    let mut retval = 0;
 //
 // If the instance is already registered, there is no need to
 // register it again.
 //
-    if (osnoise_instance_registered(tr))
+    if (osnoise_instance_registered(tr)) {
     return;
+    }
     retval = osnoise_workload_start();
-    if (retval)
-    pr_err(BANNER "Error starting osnoise tracer\n");
+    if (retval) {
+    pr_err!(BANNER "Error starting osnoise tracer\n");
+    }
     osnoise_register_instance(tr);
     }
 #[no_mangle]
 unsafe extern "C" fn osnoise_tracer_stop(tr: *mut trace_array) {
-    static void osnoise_tracer_stop(struct trace_array *tr)
-    {
     osnoise_unregister_instance(tr);
     osnoise_workload_stop();
     }
 #[no_mangle]
 unsafe extern "C" fn osnoise_tracer_init(tr: *mut trace_array) -> c_int {
-    static int osnoise_tracer_init(struct trace_array *tr)
-    {
 //
 // Only allow osnoise tracer if timerlat tracer is not running
 // already.
 //
-    if (timerlat_enabled())
+    if (timerlat_enabled()) {
     return -EBUSY;
+    }
     tr.max_latency = 0;
     osnoise_tracer_start(tr);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn osnoise_tracer_reset(tr: *mut trace_array) {
-    static void osnoise_tracer_reset(struct trace_array *tr)
-    {
     osnoise_tracer_stop(tr);
     }
-    static struct tracer osnoise_tracer __read_mostly = {
+    static struct tracer osnoise_tracer  = {
     .name		= "osnoise",
     .init		= osnoise_tracer_init,
     .reset		= osnoise_tracer_reset,
@@ -2774,68 +2911,66 @@ unsafe extern "C" fn osnoise_tracer_reset(tr: *mut trace_array) {
 
 #[no_mangle]
 unsafe extern "C" fn timerlat_tracer_start(tr: *mut trace_array) {
-    static void timerlat_tracer_start(struct trace_array *tr)
-    {
-    int retval;
+    let mut retval = 0;
 //
 // If the instance is already registered, there is no need to
 // register it again.
 //
-    if (osnoise_instance_registered(tr))
+    if (osnoise_instance_registered(tr)) {
     return;
+    }
     retval = osnoise_workload_start();
-    if (retval)
-    pr_err(BANNER "Error starting timerlat tracer\n");
+    if (retval) {
+    pr_err!(BANNER "Error starting timerlat tracer\n");
+    }
     osnoise_register_instance(tr);
     return;
     }
 #[no_mangle]
 unsafe extern "C" fn timerlat_tracer_stop(tr: *mut trace_array) {
-    static void timerlat_tracer_stop(struct trace_array *tr)
-    {
-    int cpu;
+    let mut cpu = 0;
     osnoise_unregister_instance(tr);
 //
 // Instruct the threads to stop only if this is the last instance.
 //
     if (!osnoise_has_registered_instances()) {
-    for_each_online_cpu(cpu)
+    for_each_online_cpu(cpu) {
     per_cpu(per_cpu_osnoise_var, cpu).sampling = 0;
+    }
     }
     osnoise_workload_stop();
     }
 #[no_mangle]
 unsafe extern "C" fn timerlat_tracer_init(tr: *mut trace_array) -> c_int {
-    static int timerlat_tracer_init(struct trace_array *tr)
-    {
 //
 // Only allow timerlat tracer if osnoise tracer is not running already.
 //
-    if (osnoise_has_registered_instances() && !osnoise_data.timerlat_tracer)
+    if (osnoise_has_registered_instances() && !osnoise_data.timerlat_tracer) {
     return -EBUSY;
+    }
 //
 // If this is the first instance, set timerlat_tracer to block
 // osnoise tracer start.
 //
-    if (!osnoise_has_registered_instances())
+    if (!osnoise_has_registered_instances()) {
     osnoise_data.timerlat_tracer = 1;
+    }
     tr.max_latency = 0;
     timerlat_tracer_start(tr);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn timerlat_tracer_reset(tr: *mut trace_array) {
-    static void timerlat_tracer_reset(struct trace_array *tr)
-    {
     timerlat_tracer_stop(tr);
 //
 // If this is the last instance, reset timerlat_tracer allowing
 // osnoise to be started.
 //
-    if (!osnoise_has_registered_instances())
+    if (!osnoise_has_registered_instances()) {
     osnoise_data.timerlat_tracer = 0;
     }
-    static struct tracer timerlat_tracer __read_mostly = {
+    }
+    static struct tracer timerlat_tracer  = {
     .name		= "timerlat",
     .init		= timerlat_tracer_init,
     .reset		= timerlat_tracer_reset,
@@ -2846,33 +2981,29 @@ unsafe extern "C" fn timerlat_tracer_reset(tr: *mut trace_array) {
     };
 #[no_mangle]
 pub unsafe extern "C" fn init_timerlat_tracer() -> __init static int {
-    __init static int init_timerlat_tracer(void)
-    {
     return register_tracer(&timerlat_tracer);
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn init_timerlat_tracer() -> __init static int {
-    __init static int init_timerlat_tracer(void)
-    {
+#[no_mangle]
+// duplicate fn: init_timerlat_tracer
+pub unsafe extern "C" fn init_timerlat_tracer_dup() -> __init static int {
     return 0;
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn init_osnoise_tracer() -> __init static int {
-    __init static int init_osnoise_tracer(void)
-    {
-    int ret;
+    let mut ret = 0;
     mutex_init(&interface_lock);
     cpumask_copy(&osnoise_cpumask, cpu_all_mask);
     ret = register_tracer(&osnoise_tracer);
     if (ret) {
-    pr_err(BANNER "Error registering osnoise!\n");
+    pr_err!(BANNER "Error registering osnoise!\n");
     return ret;
     }
     ret = init_timerlat_tracer();
     if (ret) {
-    pr_err(BANNER "Error registering timerlat!\n");
+    pr_err!(BANNER "Error registering timerlat!\n");
     return ret;
     }
     osnoise_init_hotplug_support();
@@ -2880,4 +3011,4 @@ pub unsafe extern "C" fn init_osnoise_tracer() -> __init static int {
     init_tracefs();
     return 0;
     }
-    late_initcall(init_osnoise_tracer);
+    late_initcall!(init_osnoise_tracer);

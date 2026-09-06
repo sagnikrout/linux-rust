@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -88,13 +338,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     Q_REQUEUE_PI_DONE,
     Q_REQUEUE_PI_LOCKED,
     };
-    const struct futex_q futex_q_init = {
-// list gets initialized in futex_queue()
-    .wake		= futex_wake_mark,
-    .key		= FUTEX_KEY_INIT,
-    .bitset		= FUTEX_BITSET_MATCH_ANY,
-    .requeue_state	= ATOMIC_INIT(Q_REQUEUE_PI_NONE),
-    };
+pub static mut futex_q: usize = 0;
 //
 // requeue_futex() - Requeue a futex_q from one hb to another
 // @q:		the futex_q to requeue
@@ -102,10 +346,8 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // @hb2:	the target hash_bucket
 // @key2:	the new key for the requeued futex_q
 //
-    static inline
-    void requeue_futex(struct futex_q *q, struct futex_hash_bucket *hb1,
-    struct futex_hash_bucket *hb2, union futex_key *key2)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn requeue_futex(q: *mut futex_q, hb1: *mut futex_hash_bucket, hb2: *mut futex_hash_bucket, key2: *mut union futex_key) {
 //
 // If key1 and key2 hash to the same bucket, no need to
 // requeue.
@@ -124,10 +366,10 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     }
     q.key = *key2;
     }
-    static inline bool futex_requeue_pi_prepare(struct futex_q *q,
-    struct futex_pi_state *pi_state)
-    {
-    int old, new;
+#[no_mangle]
+pub unsafe extern "C" fn futex_requeue_pi_prepare(q: *mut futex_q, pi_state: *mut futex_pi_state) -> bool {
+    let mut old = 0;
+    let mut new = 0;
 //
 // Set state to Q_REQUEUE_PI_IN_PROGRESS unless an early wakeup has
 // already set Q_REQUEUE_PI_IGNORE to signal that requeue should
@@ -135,8 +377,9 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
     old = atomic_read_acquire(&q.requeue_state);
     do {
-    if (old == Q_REQUEUE_PI_IGNORE)
+    if (old == Q_REQUEUE_PI_IGNORE) {
     return false;
+    }
 //
 // futex_proxy_trylock_atomic() might have set it to
 // IN_PROGRESS and a interleaved early wake to WAIT.
@@ -145,8 +388,9 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // trylock, but that would just add more conditionals
 // all over the place for a dubious value.
 //
-    if (old != Q_REQUEUE_PI_NONE)
+    if (old != Q_REQUEUE_PI_NONE) {
     break;
+    }
     new = Q_REQUEUE_PI_IN_PROGRESS;
     } while (!atomic_try_cmpxchg(&q.requeue_state, &old, new));
     q.pi_state = pi_state;
@@ -154,16 +398,16 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     }
 #[no_mangle]
 pub unsafe extern "C" fn futex_requeue_pi_complete(q: *mut futex_q, locked: c_int) {
-    static inline void futex_requeue_pi_complete(struct futex_q *q, int locked)
-    {
-    int old, new;
+    let mut old = 0;
+    let mut new = 0;
     old = atomic_read_acquire(&q.requeue_state);
     do {
-    if (old == Q_REQUEUE_PI_IGNORE)
+    if (old == Q_REQUEUE_PI_IGNORE) {
     return;
+    }
     if (locked >= 0) {
 // Requeue succeeded. Set DONE or LOCKED
-    WARN_ON_ONCE(old != Q_REQUEUE_PI_IN_PROGRESS &&
+    WARN_ON_ONCE!(old != Q_REQUEUE_PI_IN_PROGRESS &&
     old != Q_REQUEUE_PI_WAIT);
     new = Q_REQUEUE_PI_DONE + locked;
     } else if (old == Q_REQUEUE_PI_IN_PROGRESS) {
@@ -171,33 +415,35 @@ pub unsafe extern "C" fn futex_requeue_pi_complete(q: *mut futex_q, locked: c_in
     new = Q_REQUEUE_PI_NONE;
     } else {
 // Deadlock, early wakeup interleave.
-    WARN_ON_ONCE(old != Q_REQUEUE_PI_WAIT);
+    WARN_ON_ONCE!(old != Q_REQUEUE_PI_WAIT);
     new = Q_REQUEUE_PI_IGNORE;
     }
     } while (!atomic_try_cmpxchg(&q.requeue_state, &old, new));
 
 // If the waiter interleaved with the requeue let it know
-    if (unlikely(old == Q_REQUEUE_PI_WAIT))
+    if (unlikely(old == Q_REQUEUE_PI_WAIT)) {
     rcuwait_wake_up(&q.requeue_wait);
+    }
 
     }
 #[no_mangle]
 pub unsafe extern "C" fn futex_requeue_pi_wakeup_sync(q: *mut futex_q) -> c_int {
-    static inline int futex_requeue_pi_wakeup_sync(struct futex_q *q)
-    {
-    int old, new;
+    let mut old = 0;
+    let mut new = 0;
     old = atomic_read_acquire(&q.requeue_state);
     do {
 // Is requeue done already?
-    if (old >= Q_REQUEUE_PI_DONE)
+    if (old >= Q_REQUEUE_PI_DONE) {
     return old;
+    }
 //
 // If not done, then tell the requeue code to either ignore
 // the waiter or to wake it up once the requeue is done.
 //
     new = Q_REQUEUE_PI_WAIT;
-    if (old == Q_REQUEUE_PI_NONE)
+    if (old == Q_REQUEUE_PI_NONE) {
     new = Q_REQUEUE_PI_IGNORE;
+    }
     } while (!atomic_try_cmpxchg(&q.requeue_state, &old, new));
 // If the requeue was in progress, wait for it to complete
     if (old == Q_REQUEUE_PI_IN_PROGRESS) {
@@ -244,21 +490,20 @@ pub unsafe extern "C" fn futex_requeue_pi_wakeup_sync(q: *mut futex_q) -> c_int 
 //
 // Must be called with both q->lock_ptr and hb->lock held.
 //
-    static inline
-    void requeue_pi_wake_futex(struct futex_q *q, union futex_key *key,
-    struct futex_hash_bucket *hb)
-    {
-    struct task_struct *task;
+#[no_mangle]
+pub unsafe extern "C" fn requeue_pi_wake_futex(q: *mut futex_q, key: *mut union futex_key, hb: *mut futex_hash_bucket) {
+pub static mut task: *mut c_void = core::ptr::null_mut();
     q.key = *key;
     __futex_unqueue(q);
-    WARN_ON(!q.rt_waiter);
+    WARN_ON!(!q.rt_waiter);
     q.rt_waiter = core::ptr::null_mut();
 //
 // Acquire a reference for the waiter to ensure valid
 // futex_q::lock_ptr.
 //
-    if (futex_key_is_private(key))
+    if (futex_key_is_private(key)) {
     q.drop_fph = futex_private_hash(key.private.mm);
+    }
     q.lock_ptr = &hb.lock;
     task = READ_ONCE(q.task);
 // Signal locked state to the waiter
@@ -291,19 +536,17 @@ pub unsafe extern "C" fn futex_requeue_pi_wakeup_sync(q: *mut futex_q) -> c_int 
 // - >0 - acquired the lock, return value is vpid of the top_waiter
 // - <0 - error
 //
-    static int
-    futex_proxy_trylock_atomic(u32 __user *pifutex, struct futex_hash_bucket *hb1,
-    struct futex_hash_bucket *hb2, union futex_key *key1,
-    union futex_key *key2, struct futex_pi_state **ps,
-    struct task_struct **exiting, int set_waiters)
-    {
-    struct futex_q *top_waiter;
-    u32 curval;
-    int ret;
-    if (futex_get_value_locked(&curval, pifutex))
+#[no_mangle]
+pub unsafe extern "C" fn futex_proxy_trylock_atomic(pifutex: *mut u32, hb1: *mut futex_hash_bucket, hb2: *mut futex_hash_bucket, key1: *mut union futex_key, key2: *mut union futex_key, ps: *mut *mut futex_pi_state, exiting: *mut *mut task_struct, set_waiters: c_int) -> c_int {
+pub static mut top_waiter: *mut c_void = core::ptr::null_mut();
+    let mut curval = 0;
+    let mut ret = 0;
+    if (futex_get_value_locked(&curval, pifutex)) {
     return -EFAULT;
-    if (unlikely(should_fail_futex(true)))
+    }
+    if (unlikely(should_fail_futex(true))) {
     return -EFAULT;
+    }
 //
 // Find the top_waiter and determine if there are additional waiters.
 // If the caller intends to requeue more than 1 waiter to pifutex,
@@ -314,17 +557,20 @@ pub unsafe extern "C" fn futex_requeue_pi_wakeup_sync(q: *mut futex_q) -> c_int 
 //
     top_waiter = futex_top_waiter(hb1, key1);
 // There are no waiters, nothing for us to do.
-    if (!top_waiter)
+    if (!top_waiter) {
     return 0;
+    }
 //
 // Ensure that this is a waiter sitting in futex_wait_requeue_pi()
 // and waiting on the 'waitqueue' futex which is always !PI.
 //
-    if (!top_waiter.rt_waiter || top_waiter.pi_state)
+    if (!top_waiter.rt_waiter || top_waiter.pi_state) {
     return -EINVAL;
+    }
 // Ensure we requeue to the expected futex.
-    if (!futex_match(top_waiter.requeue_pi_key, key2))
+    if (!futex_match(top_waiter.requeue_pi_key, key2)) {
     return -EINVAL;
+    }
 // Ensure that this does not race against an early wakeup
     if (!futex_requeue_pi_prepare(top_waiter, core::ptr::null_mut())) {
     plist_del(&top_waiter.list, &hb1.chain);
@@ -384,32 +630,34 @@ pub unsafe extern "C" fn futex_requeue_pi_wakeup_sync(q: *mut futex_q) -> c_int 
 // - >=0 - on success, the number of tasks requeued or woken;
 // -  <0 - on error
 //
-    int futex_requeue(u32 __user *uaddr1, unsigned int flags1,
-    u32 __user *uaddr2, unsigned int flags2,
-    int nr_wake, int nr_requeue, u32 *cmpval, int requeue_pi)
-    {
-    let mut key1: union futex_key = FUTEX_KEY_INIT, key2 = FUTEX_KEY_INIT;
-    let mut task_count: c_int = 0, ret;
-    struct futex_pi_state *pi_state = core::ptr::null_mut();
-    struct futex_q *this, *next;
-    DEFINE_WAKE_Q(wake_q);
-    if (nr_wake < 0 || nr_requeue < 0)
+#[no_mangle]
+pub unsafe extern "C" fn futex_requeue(uaddr1: *mut u32, flags1: c_uint, uaddr2: *mut u32, flags2: c_uint, nr_wake: c_int, nr_requeue: c_int, cmpval: *mut u32, requeue_pi: c_int) -> c_int {
+pub static mut key1: union futex_key = 0;
+pub static mut task_count: c_int = 0;
+    let mut pi_state = core::ptr::null_mut();
+    let mut this = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+pub static mut wake_q: usize = 0;
+    if (nr_wake < 0 || nr_requeue < 0) {
     return -EINVAL;
+    }
 //
 // When PI not supported: return -ENOSYS if requeue_pi is true,
 // consequently the compiler knows requeue_pi is always false past
 // this point which will optimize away all the conditional code
 // further down.
 //
-    if (!IS_ENABLED(CONFIG_FUTEX_PI) && requeue_pi)
+    if (!IS_ENABLED!(CONFIG_FUTEX_PI) && requeue_pi) {
     return -ENOSYS;
+    }
     if (requeue_pi) {
 //
 // Requeue PI only works on two distinct uaddrs. This
 // check is only valid for private futexes. See below.
 //
-    if (uaddr1 == uaddr2)
+    if (uaddr1 == uaddr2) {
     return -EINVAL;
+    }
 //
 // futex_requeue() allows the caller to define the number
 // of waiters to wake up via the @nr_wake argument. With
@@ -431,57 +679,64 @@ pub unsafe extern "C" fn futex_requeue_pi_wakeup_sync(q: *mut futex_q) -> c_int 
 // All REQUEUE_PI users, e.g. pthread_cond_signal() and
 // pthread_cond_broadcast() must use nr_wake=1.
 //
-    if (nr_wake != 1)
+    if (nr_wake != 1) {
     return -EINVAL;
+    }
 //
 // requeue_pi requires a pi_state, try to allocate it now
 // without any locks in case it fails.
 //
-    if (refill_pi_state_cache())
+    if (refill_pi_state_cache()) {
     return -ENOMEM;
     }
-    retry:
+    }
+// label;
     ret = get_futex_key(uaddr1, flags1, &key1, FUTEX_READ);
-    if (unlikely(ret != 0))
+    if (unlikely(ret != 0)) {
     return ret;
+    }
     ret = get_futex_key(uaddr2, flags2, &key2,
     requeue_pi ? FUTEX_WRITE : FUTEX_READ);
-    if (unlikely(ret != 0))
+    if (unlikely(ret != 0)) {
     return ret;
+    }
 //
 // The check above which compares uaddrs is not sufficient for
 // shared futexes. We need to compare the keys:
 //
-    if (requeue_pi && futex_match(&key1, &key2))
+    if (requeue_pi && futex_match(&key1, &key2)) {
     return -EINVAL;
-    retry_private:
+    }
+// label;
     if (1) {
     CLASS(hbr, hbr1)(&key1);
     CLASS(hbr, hbr2)(&key2);
-    let mut hb1: auto = hbr1.hb;
-    let mut hb2: auto = hbr2.hb;
+pub static mut hb1: auto = 0;
+pub static mut hb2: auto = 0;
     futex_hb_waiters_inc(hb2);
     double_lock_hb(hb1, hb2);
     if (likely(cmpval != core::ptr::null_mut())) {
-    u32 curval;
+    let mut curval = 0;
     ret = futex_get_value_locked(&curval, uaddr1);
     if (unlikely(ret)) {
     futex_hb_waiters_dec(hb2);
     double_unlock_hb(hb1, hb2);
     ret = get_user(curval, uaddr1);
-    if (ret)
+    if (ret) {
     return ret;
-    if (!(flags1 & FLAGS_SHARED))
-    goto retry_private;
-    goto retry;
+    }
+    if (!(flags1 & FLAGS_SHARED)) {
+// goto;
+    }
+// goto;
     }
     if (curval != *cmpval) {
     ret = -EAGAIN;
-    goto out_unlock;
+// goto;
     }
     }
     if (requeue_pi) {
-    struct task_struct *exiting = core::ptr::null_mut();
+    let mut exiting = core::ptr::null_mut();
 //
 // Attempt to acquire uaddr2 and wake the top waiter. If we
 // intend to requeue waiters, force setting the FUTEX_WAITERS
@@ -527,31 +782,36 @@ pub unsafe extern "C" fn futex_requeue_pi_wakeup_sync(q: *mut futex_q) -> c_int 
 // the same sanity checks for requeue_pi as the loop
 // below does.
 //
-    switch (ret) {
-    case 0:
+    match (ret) {
+    0 => {
 // We hold a reference on the pi state.
-    break;
-    case 1:
+    // break;
+    }
+    1 => {
 //
 // futex_proxy_trylock_atomic() acquired the user space
 // futex. Adjust task_count.
 //
-    task_count++;
+    task_count += 1;
     ret = 0;
-    break;
+    // break;
 //
 // If the above failed, then pi_state is NULL and
 // waiter::requeue_state is correct.
 //
-    case -EFAULT:
+    }
+    -EFAULT => {
     futex_hb_waiters_dec(hb2);
     double_unlock_hb(hb1, hb2);
     ret = fault_in_user_writeable(uaddr2);
-    if (!ret)
-    goto retry;
+    if (!ret) {
+// goto;
+    }
     return ret;
-    case -EBUSY:
-    case -EAGAIN:
+    }
+    -EBUSY => {
+    }
+    -EAGAIN => {
 //
 // Two reasons for this:
 // - EBUSY: Owner is exiting and we just wait for the
@@ -567,16 +827,20 @@ pub unsafe extern "C" fn futex_requeue_pi_wakeup_sync(q: *mut futex_q) -> c_int 
 //
     wait_for_owner_exiting(ret, exiting);
     cond_resched();
-    goto retry;
-    default:
-    goto out_unlock;
+// goto;
+    }
+    _ => {
+// goto;
+    }
     }
     }
     plist_for_each_entry_safe(this, next, &hb1.chain, list) {
-    if (task_count - nr_wake >= nr_requeue)
+    if (task_count - nr_wake >= nr_requeue) {
     break;
-    if (!futex_match(&this.key, &key1))
+    }
+    if (!futex_match(&this.key, &key1)) {
     continue;
+    }
 //
 // FUTEX_WAIT_REQUEUE_PI and FUTEX_CMP_REQUEUE_PI should always
 // be paired with each other and no other futex ops.
@@ -592,10 +856,12 @@ pub unsafe extern "C" fn futex_requeue_pi_wakeup_sync(q: *mut futex_q) -> c_int 
     }
 // Plain futexes just wake or requeue and are done
     if (!requeue_pi) {
-    if (++task_count <= nr_wake)
+    if (++task_count <= nr_wake) {
     this.wake(&wake_q, this);
-    else
+    }
+    else {
     requeue_futex(this, hb1, hb2, &key2);
+    }
     continue;
     }
 // Ensure we requeue to the expected futex for requeue_pi.
@@ -635,12 +901,12 @@ pub unsafe extern "C" fn futex_requeue_pi_wakeup_sync(q: *mut futex_q) -> c_int 
 // in the wakeup as well.
 //
     requeue_pi_wake_futex(this, &key2, hb2);
-    task_count++;
+    task_count += 1;
     } else if (!ret) {
 // Waiter is queued, move it to hb2
     requeue_futex(this, hb1, hb2, &key2);
     futex_requeue_pi_complete(this, 0);
-    task_count++;
+    task_count += 1;
     } else {
 //
 // rt_mutex_start_proxy_lock() detected a potential
@@ -664,7 +930,7 @@ pub unsafe extern "C" fn futex_requeue_pi_wakeup_sync(q: *mut futex_q) -> c_int 
 // futex_proxy_trylock_atomic(). We need to drop it here again.
 //
     put_pi_state(pi_state);
-    out_unlock:
+// label;
     futex_hb_waiters_dec(hb2);
     double_unlock_hb(hb1, hb2);
     }
@@ -682,12 +948,9 @@ pub unsafe extern "C" fn futex_requeue_pi_wakeup_sync(q: *mut futex_q) -> c_int 
 // Return:
 // -EWOULDBLOCK or -ETIMEDOUT or -ERESTARTNOINTR
 //
-    static inline
-    int handle_early_requeue_pi_wakeup(struct futex_hash_bucket *hb,
-    struct futex_q *q,
-    struct hrtimer_sleeper *timeout)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn handle_early_requeue_pi_wakeup(hb: *mut futex_hash_bucket, q: *mut futex_q, timeout: *mut hrtimer_sleeper) -> c_int {
+    let mut ret = 0;
 //
 // With the hb lock held, we avoid races while we process the wakeup.
 // We only need to hold hb (and not hb2) to ensure atomicity as the
@@ -695,7 +958,7 @@ pub unsafe extern "C" fn futex_requeue_pi_wakeup_sync(q: *mut futex_q) -> c_int 
 // It can't be requeued from uaddr2 to something else since we don't
 // support a PI aware source futex for requeue.
 //
-    WARN_ON_ONCE(&hb.lock != q.lock_ptr);
+    WARN_ON_ONCE!(&hb.lock != q.lock_ptr);
 //
 // We were woken prior to requeue by a timeout or a signal.
 // Conditionally unqueue the futex_q and determine which it was.
@@ -706,12 +969,13 @@ pub unsafe extern "C" fn futex_requeue_pi_wakeup_sync(q: *mut futex_q) -> c_int 
     }
 // Handle spurious wakeups gracefully
     ret = -EWOULDBLOCK;
-    if (timeout && !timeout.task)
+    if (timeout && !timeout.task) {
     ret = -ETIMEDOUT;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: signal_pending(current)) -> else {
-    else if (signal_pending(current))
+    }
+
+    else if (signal_pending(current)) {
     ret = -ERESTARTNOINTR;
+    }
     return ret;
     }
 //
@@ -754,22 +1018,24 @@ pub unsafe extern "C" fn if(_arg: signal_pending(current)) -> else {
 // -  0 - On success;
 // - <0 - On error
 //
-    int futex_wait_requeue_pi(u32 __user *uaddr, unsigned int flags,
-    u32 val, ktime_t *abs_time, u32 bitset,
-    u32 __user *uaddr2)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn futex_wait_requeue_pi(uaddr: *mut u32, flags: c_uint, val: u32, abs_time: *mut ktime_t, bitset: u32, uaddr2: *mut u32) -> c_int {
     struct hrtimer_sleeper timeout, *to;
-    struct rt_mutex_waiter rt_waiter;
-    let mut key2: union futex_key = FUTEX_KEY_INIT;
-    let mut q: futex_q = futex_q_init;
-    struct rt_mutex_base *pi_mutex;
-    int res, ret;
-    if (!IS_ENABLED(CONFIG_FUTEX_PI))
+pub static mut rt_waiter: usize = 0;
+pub static mut key2: union futex_key = 0;
+pub static mut q: futex_q = 0;
+pub static mut pi_mutex: *mut c_void = core::ptr::null_mut();
+    let mut res = 0;
+    let mut ret = 0;
+    if (!IS_ENABLED!(CONFIG_FUTEX_PI)) {
     return -ENOSYS;
-    if (uaddr == uaddr2)
+    }
+    if (uaddr == uaddr2) {
     return -EINVAL;
-    if (!bitset)
+    }
+    if (!bitset) {
     return -EINVAL;
+    }
     to = futex_setup_timer(abs_time, &timeout, flags,
     current.timer_slack_ns);
 //
@@ -778,8 +1044,9 @@ pub unsafe extern "C" fn if(_arg: signal_pending(current)) -> else {
 //
     rt_mutex_init_waiter(&rt_waiter);
     ret = get_futex_key(uaddr2, flags, &key2, FUTEX_WRITE);
-    if (unlikely(ret != 0))
-    goto out;
+    if (unlikely(ret != 0)) {
+// goto;
+    }
     q.bitset = bitset;
     q.rt_waiter = &rt_waiter;
     q.requeue_pi_key = &key2;
@@ -788,15 +1055,16 @@ pub unsafe extern "C" fn if(_arg: signal_pending(current)) -> else {
 // is initialized.
 //
     ret = futex_wait_setup(uaddr, val, flags, &q, &key2, current);
-    if (ret)
-    goto out;
+    if (ret) {
+// goto;
+    }
 // Queue the futex_q, drop the hb lock, wait for wakeup.
     futex_do_wait(&q, to);
     switch (futex_requeue_pi_wakeup_sync(&q)) {
     case Q_REQUEUE_PI_IGNORE:
     {
     CLASS(hbr, hbr)(&q.key);
-    let mut hb: auto = hbr.hb;
+pub static mut hb: auto = 0;
 // The waiter is still on uaddr1
     spin_lock(&hb.lock);
     ret = handle_early_requeue_pi_wakeup(hb, &q, to);
@@ -828,8 +1096,9 @@ pub unsafe extern "C" fn if(_arg: signal_pending(current)) -> else {
 //
 // See futex_unlock_pi()'s cleanup: comment.
 //
-    if (ret && !rt_mutex_cleanup_proxy_lock(pi_mutex, &rt_waiter))
+    if (ret && !rt_mutex_cleanup_proxy_lock(pi_mutex, &rt_waiter)) {
     ret = 0;
+    }
     futex_q_lockptr_lock(&q);
     debug_rt_mutex_free_waiter(&rt_waiter);
 //
@@ -841,8 +1110,9 @@ pub unsafe extern "C" fn if(_arg: signal_pending(current)) -> else {
 // If fixup_pi_owner() returned an error, propagate that.  If it
 // acquired the lock, clear -ETIMEDOUT or -EINTR.
 //
-    if (res)
+    if (res) {
     ret = (res < 0) ? res : 0;
+    }
     futex_unqueue_pi(&q);
     spin_unlock(q.lock_ptr);
     if (ret == -EINTR) {
@@ -857,12 +1127,12 @@ pub unsafe extern "C" fn if(_arg: signal_pending(current)) -> else {
     ret = -EWOULDBLOCK;
     }
     break;
-    default:
+// label;
     BUG();
     }
 // Additional reference from requeue_pi_wake_futex()
     futex_private_hash_put(q.drop_fph);
-    out:
+// label;
     if (to) {
     hrtimer_cancel(&to.timer);
     destroy_hrtimer_on_stack(&to.timer);

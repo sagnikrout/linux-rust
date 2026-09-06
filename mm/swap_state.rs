@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -48,34 +298,27 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
 // Swap readahead cluster size, as a power of 2 pages.
     static int page_cluster;
-    let mut page_cluster_max: static int = 31;
+pub static mut page_cluster_max: int = 31;
 //
 // swapper_space is a fiction, retained to simplify the path through
 // vmscan's shrink_folio_list.
 //
-    static const struct address_space_operations swap_aops = {
-    .dirty_folio	= noop_dirty_folio,
-
-    .migrate_folio	= migrate_folio,
-
-    };
-    struct address_space swap_space __read_mostly = {
+pub static mut address_space_operations: usize = 0;
+    struct address_space swap_space  = {
     .a_ops = &swap_aops,
     };
-    let mut __read_mostly: static bool enable_vma_readahead = true;
+pub static mut : bool enable_vma_readahead = true;
 pub const SWAP_RA_ORDER_CEILING: c_int = 5;
 
-    (((addr) & PAGE_MASK) |					\
-    (((win) << SWAP_RA_WIN_SHIFT) & SWAP_RA_WIN_MASK) |	\
+    (((addr) & PAGE_MASK) |					
+    (((win) << SWAP_RA_WIN_SHIFT) & SWAP_RA_WIN_MASK) |	
     ((hits) & SWAP_RA_HITS_MASK))
 // Initial readahead hits is 4 to start up with a small window
 
     (atomic_long_read(&(vma).swap_readahead_info) ? : 4)
-    let mut swapin_readahead_hits: static atomic_t = ATOMIC_INIT(4);
+pub static mut swapin_readahead_hits: atomic_t = 0;
 #[no_mangle]
 pub unsafe extern "C" fn show_swap_cache_info() {
-    void show_swap_cache_info(void)
-    {
     printk("%lu pages in swap cache\n", total_swapcache_pages());
     printk("Free swap  = %ldkB\n", K(get_nr_swap_pages()));
     printk("Total swap = %lukB\n", K(total_swap_pages));
@@ -92,18 +335,20 @@ pub unsafe extern "C" fn show_swap_cache_info() {
 // must lock and check if the folio still matches the swap entry before
 // use (e.g., folio_matches_swap_entry).
 //
-    struct folio *swap_cache_get_folio(swp_entry_t entry)
-    {
-    unsigned long swp_tb;
-    struct folio *folio;
+#[no_mangle]
+pub unsafe extern "C" fn swap_cache_get_folio(entry: swp_entry_t) -> *mut c_void {
+    let mut swp_tb = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     for (;;) {
     swp_tb = swap_table_get(__swap_entry_to_cluster(entry),
     swp_cluster_offset(entry));
-    if (!swp_tb_is_folio(swp_tb))
+    if (!swp_tb_is_folio(swp_tb)) {
     return core::ptr::null_mut();
+    }
     folio = swp_tb_to_folio(swp_tb);
-    if (likely(folio_try_get(folio)))
+    if (likely(folio_try_get(folio))) {
     return folio;
+    }
     }
     return core::ptr::null_mut();
     }
@@ -116,9 +361,7 @@ pub unsafe extern "C" fn show_swap_cache_info() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn swap_cache_has_folio(entry: swp_entry_t) -> bool {
-    bool swap_cache_has_folio(swp_entry_t entry)
-    {
-    unsigned long swp_tb;
+    let mut swp_tb = 0;
     swp_tb = swap_table_get(__swap_entry_to_cluster(entry),
     swp_cluster_offset(entry));
     return swp_tb_is_folio(swp_tb);
@@ -131,13 +374,14 @@ pub unsafe extern "C" fn swap_cache_has_folio(entry: swp_entry_t) -> bool {
 // with reference count or locks.
 // Return: Returns either NULL or an XA_VALUE (shadow).
 //
-    void *swap_cache_get_shadow(swp_entry_t entry)
-    {
-    unsigned long swp_tb;
+#[no_mangle]
+pub unsafe extern "C" fn swap_cache_get_shadow(entry: swp_entry_t) -> *mut c_void {
+    let mut swp_tb = 0;
     swp_tb = swap_table_get(__swap_entry_to_cluster(entry),
     swp_cluster_offset(entry));
-    if (swp_tb_is_shadow(swp_tb))
+    if (swp_tb_is_shadow(swp_tb)) {
     return swp_tb_to_shadow(swp_tb);
+    }
     return core::ptr::null_mut();
     }
 //
@@ -156,34 +400,38 @@ pub unsafe extern "C" fn swap_cache_has_folio(entry: swp_entry_t) -> bool {
 // Context: Caller must lock the cluster.
 // Return: 0 if success, error code if failed.
 //
-    static int __swap_cache_add_check(struct swap_cluster_info *ci,
-    swp_entry_t targ_entry,
-    unsigned long nr, void **shadowp,
-    unsigned short *memcg_id)
-    {
-    unsigned int ci_off, ci_end;
-    unsigned long old_tb;
-    bool is_zero;
+#[no_mangle]
+pub unsafe extern "C" fn __swap_cache_add_check(ci: *mut swap_cluster_info, targ_entry: swp_entry_t, nr: c_ulong, shadowp: *mut *mut c_void, memcg_id: *mut c_ushort) -> c_int {
+    let mut ci_off = 0;
+    let mut ci_end = 0;
+    let mut old_tb = 0;
+    let mut is_zero = 0;
     lockdep_assert_held(&ci.lock);
 //
 // If the target slot is not swapped out or already cached, return
 // -ENOENT or -EEXIST. If the batch is not suitable, could be a
 // race with concurrent free or cache add, return -EBUSY.
 //
-    if (unlikely(!ci.table))
+    if (unlikely(!ci.table)) {
     return -ENOENT;
+    }
     ci_off = swp_cluster_offset(targ_entry);
     old_tb = __swap_table_get(ci, ci_off);
-    if (swp_tb_is_folio(old_tb))
+    if (swp_tb_is_folio(old_tb)) {
     return -EEXIST;
-    if (!__swp_tb_get_count(old_tb))
+    }
+    if (!__swp_tb_get_count(old_tb)) {
     return -ENOENT;
-    if (shadowp && swp_tb_is_shadow(old_tb))
+    }
+    if (shadowp && swp_tb_is_shadow(old_tb)) {
 // shadowp = swp_tb_to_shadow(old_tb);
-    if (memcg_id)
+    }
+    if (memcg_id) {
 // memcg_id = __swap_cgroup_get(ci, ci_off);
-    if (nr == 1)
+    }
+    if (nr == 1) {
     return 0;
+    }
     is_zero = __swap_table_test_zero(ci, ci_off);
     ci_off = round_down(ci_off, nr);
     ci_end = ci_off + nr;
@@ -192,18 +440,18 @@ pub unsafe extern "C" fn swap_cache_has_folio(entry: swp_entry_t) -> bool {
     if (unlikely(swp_tb_is_folio(old_tb) ||
     !__swp_tb_get_count(old_tb) ||
     is_zero != __swap_table_test_zero(ci, ci_off) ||
-    (memcg_id && *memcg_id != __swap_cgroup_get(ci, ci_off))))
+    (memcg_id && *memcg_id != __swap_cgroup_get(ci, ci_off)))) {
     return -EBUSY;
+    }
     } while (++ci_off < ci_end);
     return 0;
     }
-    static void __swap_cache_do_add_folio(struct swap_cluster_info *ci,
-    struct folio *folio, swp_entry_t entry)
-    {
-    let mut ci_off: c_uint = swp_cluster_offset(entry), ci_end;
-    let mut nr_pages: c_ulong = folio_nr_pages(folio);
-    let mut pfn: c_ulong = folio_pfn(folio);
-    unsigned long old_tb;
+#[no_mangle]
+pub unsafe extern "C" fn __swap_cache_do_add_folio(ci: *mut swap_cluster_info, folio: *mut folio, entry: swp_entry_t) {
+pub static mut ci_off: c_uint = 0;
+pub static mut nr_pages: c_ulong = 0;
+pub static mut pfn: c_ulong = 0;
+    let mut old_tb = 0;
     VM_WARN_ON_ONCE_FOLIO(!folio_test_locked(folio), folio);
     VM_WARN_ON_ONCE_FOLIO(folio_test_swapcache(folio), folio);
     VM_WARN_ON_ONCE_FOLIO(!folio_test_swapbacked(folio), folio);
@@ -231,23 +479,22 @@ pub unsafe extern "C" fn swap_cache_has_folio(entry: swp_entry_t) -> bool {
 // Context: Caller must ensure the folio is locked and lock the cluster
 // that holds the entries.
 //
-    void __swap_cache_add_folio(struct swap_cluster_info *ci,
-    struct folio *folio, swp_entry_t entry)
-    {
-    let mut nr_pages: c_ulong = folio_nr_pages(folio);
+#[no_mangle]
+pub unsafe extern "C" fn __swap_cache_add_folio(ci: *mut swap_cluster_info, folio: *mut folio, entry: swp_entry_t) {
+pub static mut nr_pages: c_ulong = 0;
     __swap_cache_do_add_folio(ci, folio, entry);
     node_stat_mod_folio(folio, NR_FILE_PAGES, nr_pages);
     lruvec_stat_mod_folio(folio, NR_SWAPCACHE, nr_pages);
     }
-    static void __swap_cache_do_del_folio(struct swap_cluster_info *ci,
-    struct folio *folio,
-    swp_entry_t entry, void *shadow)
-    {
-    unsigned long old_tb;
-    struct swap_info_struct *si;
-    unsigned int ci_start, ci_off, ci_end;
-    let mut folio_swapped: bool = false, need_free = false;
-    let mut nr_pages: c_ulong = folio_nr_pages(folio);
+#[no_mangle]
+pub unsafe extern "C" fn __swap_cache_do_del_folio(ci: *mut swap_cluster_info, folio: *mut folio, entry: swp_entry_t, shadow: *mut c_void) {
+    let mut old_tb = 0;
+pub static mut si: *mut c_void = core::ptr::null_mut();
+    let mut ci_start = 0;
+    let mut ci_off = 0;
+    let mut ci_end = 0;
+pub static mut folio_swapped: bool = false;
+pub static mut nr_pages: c_ulong = 0;
     VM_WARN_ON_ONCE(__swap_entry_to_cluster(entry) != ci);
     VM_WARN_ON_ONCE_FOLIO(!folio_test_locked(folio), folio);
     VM_WARN_ON_ONCE_FOLIO(!folio_test_swapcache(folio), folio);
@@ -258,12 +505,14 @@ pub unsafe extern "C" fn swap_cache_has_folio(entry: swp_entry_t) -> bool {
     ci_off = ci_start;
     do {
     old_tb = __swap_table_get(ci, ci_off);
-    WARN_ON_ONCE(!swp_tb_is_folio(old_tb) ||
+    WARN_ON_ONCE!(!swp_tb_is_folio(old_tb) ||
     swp_tb_to_folio(old_tb) != folio);
-    if (__swp_tb_get_count(old_tb))
+    if (__swp_tb_get_count(old_tb)) {
     folio_swapped = true;
-    else
+    }
+    else {
     need_free = true;
+    }
 // If shadow is NULL, we set an empty shadow.
     __swap_table_set(ci, ci_off, shadow_to_swp_tb(shadow,
     __swp_tb_get_flags(old_tb)));
@@ -275,8 +524,9 @@ pub unsafe extern "C" fn swap_cache_has_folio(entry: swp_entry_t) -> bool {
     } else if (need_free) {
     ci_off = ci_start;
     do {
-    if (!__swp_tb_get_count(__swap_table_get(ci, ci_off)))
+    if (!__swp_tb_get_count(__swap_table_get(ci, ci_off))) {
     __swap_cluster_free_entries(si, ci, ci_off, 1);
+    }
     } while (++ci_off < ci_end);
     }
     }
@@ -293,10 +543,9 @@ pub unsafe extern "C" fn swap_cache_has_folio(entry: swp_entry_t) -> bool {
 // Context: Caller must ensure the folio is locked and in the swap cache
 // using the index of @entry, and lock the cluster that holds the entries.
 //
-    void __swap_cache_del_folio(struct swap_cluster_info *ci, struct folio *folio,
-    swp_entry_t entry, void *shadow)
-    {
-    let mut nr_pages: c_ulong = folio_nr_pages(folio);
+#[no_mangle]
+pub unsafe extern "C" fn __swap_cache_del_folio(ci: *mut swap_cluster_info, folio: *mut folio, entry: swp_entry_t, shadow: *mut c_void) {
+pub static mut nr_pages: c_ulong = 0;
     __swap_cache_do_del_folio(ci, folio, entry, shadow);
     node_stat_mod_folio(folio, NR_FILE_PAGES, -nr_pages);
     lruvec_stat_mod_folio(folio, NR_SWAPCACHE, -nr_pages);
@@ -313,10 +562,8 @@ pub unsafe extern "C" fn swap_cache_has_folio(entry: swp_entry_t) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn swap_cache_del_folio(folio: *mut folio) {
-    void swap_cache_del_folio(struct folio *folio)
-    {
-    struct swap_cluster_info *ci;
-    let mut entry: swp_entry_t = folio.swap;
+pub static mut ci: *mut c_void = core::ptr::null_mut();
+pub static mut entry: swp_entry_t = 0;
     ci = swap_cluster_lock(__swap_entry_to_info(entry), swp_offset(entry));
     __swap_cache_del_folio(ci, folio, entry, core::ptr::null_mut());
     swap_cluster_unlock(ci);
@@ -336,22 +583,21 @@ pub unsafe extern "C" fn swap_cache_del_folio(folio: *mut folio) {
 // Context: Caller must ensure both folios are locked, and lock the
 // cluster that holds the old folio to be replaced.
 //
-    void __swap_cache_replace_folio(struct swap_cluster_info *ci,
-    struct folio *old, struct folio *new)
-    {
-    let mut entry: swp_entry_t = new.swap;
-    let mut nr_pages: c_ulong = folio_nr_pages(new);
-    let mut ci_off: c_uint = swp_cluster_offset(entry);
-    let mut ci_end: c_uint = ci_off + nr_pages;
-    let mut pfn: c_ulong = folio_pfn(new);
-    unsigned long old_tb;
+#[no_mangle]
+pub unsafe extern "C" fn __swap_cache_replace_folio(ci: *mut swap_cluster_info, old: *mut folio, new: *mut folio) {
+pub static mut entry: swp_entry_t = 0;
+pub static mut nr_pages: c_ulong = 0;
+pub static mut ci_off: c_uint = 0;
+pub static mut ci_end: c_uint = 0;
+pub static mut pfn: c_ulong = 0;
+    let mut old_tb = 0;
     VM_WARN_ON_ONCE(!folio_test_swapcache(old) || !folio_test_swapcache(new));
     VM_WARN_ON_ONCE(!folio_test_locked(old) || !folio_test_locked(new));
     VM_WARN_ON_ONCE(!entry.val);
 // Swap cache still stores N entries instead of a high-order entry
     do {
     old_tb = __swap_table_get(ci, ci_off);
-    WARN_ON_ONCE(!swp_tb_is_folio(old_tb) || swp_tb_to_folio(old_tb) != old);
+    WARN_ON_ONCE!(!swp_tb_is_folio(old_tb) || swp_tb_to_folio(old_tb) != old);
     __swap_table_set(ci, ci_off, pfn_to_swp_tb(pfn, __swp_tb_get_flags(old_tb)));
     } while (++ci_off < ci_end);
 //
@@ -359,12 +605,13 @@ pub unsafe extern "C" fn swap_cache_del_folio(folio: *mut folio) {
 // folio, the old folio is shrunk, and new split sub folios replace
 // the shrunk part), ensure the new folio doesn't overlap it.
 //
-    if (IS_ENABLED(CONFIG_DEBUG_VM) &&
+    if (IS_ENABLED!(CONFIG_DEBUG_VM) &&
     folio_order(old) != folio_order(new)) {
     ci_off = swp_cluster_offset(old.swap);
     ci_end = ci_off + folio_nr_pages(old);
-    while (ci_off++ < ci_end)
-    WARN_ON_ONCE(swp_tb_to_folio(__swap_table_get(ci, ci_off)) != old);
+    while (ci_off++ < ci_end) {
+    WARN_ON_ONCE!(swp_tb_to_folio(__swap_table_get(ci, ci_off)) != old);
+    }
     }
     }
 //
@@ -379,40 +626,40 @@ pub unsafe extern "C" fn swap_cache_del_folio(folio: *mut folio) {
 // -ENOENT / -EEXIST: Target swap entry is unavailable or cached, the caller
 // should abort or try to use the cached folio instead
 //
-    static struct folio *__swap_cache_alloc(struct swap_cluster_info *ci,
-    swp_entry_t targ_entry, gfp_t gfp,
-    unsigned int order, struct vm_fault *vmf,
-    struct mempolicy *mpol, pgoff_t ilx)
-    {
-    int err;
-    swp_entry_t entry;
-    struct folio *folio;
-    void *shadow = core::ptr::null_mut();
-    unsigned short memcg_id;
+#[no_mangle]
+pub unsafe extern "C" fn __swap_cache_alloc(ci: *mut swap_cluster_info, targ_entry: swp_entry_t, gfp: gfp_t, order: c_uint, vmf: *mut vm_fault, mpol: *mut mempolicy, ilx: pgoff_t) -> *mut c_void {
+    let mut err = 0;
+    let mut entry;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut shadow = core::ptr::null_mut();
+    let mut memcg_id = 0;
     unsigned long address, nr_pages = 1UL << order;
-    struct vm_area_struct *vma = vmf ? vmf.vma : core::ptr::null_mut();
+    let mut vma = vmf ? vmf.vma : core::ptr::null_mut();
     VM_WARN_ON_ONCE(nr_pages > SWAPFILE_CLUSTER);
     entry.val = round_down(targ_entry.val, nr_pages);
 // Check if the slot and range are available, skip allocation if not
     spin_lock(&ci.lock);
     err = __swap_cache_add_check(ci, targ_entry, nr_pages, core::ptr::null_mut(), core::ptr::null_mut());
     spin_unlock(&ci.lock);
-    if (unlikely(err))
+    if (unlikely(err)) {
     return ERR_PTR(err);
+    }
 //
 // Limit THP gfp. The limitation is a no-op for typical
 // GFP_HIGHUSER_MOVABLE but matters for shmem.
 //
-    if (order)
+    if (order) {
     gfp = thp_shmem_limit_gfp_mask(vma_thp_gfp_mask(vma), gfp);
+    }
     if (mpol || !vmf) {
     folio = folio_alloc_mpol(gfp, order, mpol, ilx, numa_node_id());
     } else {
     address = round_down(vmf.address, PAGE_SIZE << order);
     folio = vma_alloc_folio(gfp, order, vmf.vma, address);
     }
-    if (unlikely(!folio))
+    if (unlikely(!folio)) {
     return ERR_PTR(-ENOMEM);
+    }
 // Double check the range is still not in conflict
     spin_lock(&ci.lock);
     err = __swap_cache_add_check(ci, targ_entry, nr_pages, &shadow, &memcg_id);
@@ -447,8 +694,9 @@ pub unsafe extern "C" fn swap_cache_del_folio(folio: *mut folio) {
     }
 // memsw uncharges swap when folio is added to swap cache
     memcg1_swapin(folio);
-    if (shadow)
+    if (shadow) {
     workingset_refault(folio, shadow);
+    }
     node_stat_mod_folio(folio, NR_FILE_PAGES, nr_pages);
     lruvec_stat_mod_folio(folio, NR_SWAPCACHE, nr_pages);
 // Caller will initiate read into locked new_folio
@@ -472,26 +720,28 @@ pub unsafe extern "C" fn swap_cache_del_folio(folio: *mut folio) {
 // Return: Returns the folio if allocation succeeded and folio is in the swap
 // cache. Returns error code if failed due to race, OOM or invalid arguments.
 //
-    struct folio *swap_cache_alloc_folio(swp_entry_t targ_entry, gfp_t gfp,
-    unsigned long orders, struct vm_fault *vmf,
-    struct mempolicy *mpol, pgoff_t ilx)
-    {
-    int order, err;
-    struct folio *ret;
-    struct swap_cluster_info *ci;
+#[no_mangle]
+pub unsafe extern "C" fn swap_cache_alloc_folio(targ_entry: swp_entry_t, gfp: gfp_t, orders: c_ulong, vmf: *mut vm_fault, mpol: *mut mempolicy, ilx: pgoff_t) -> *mut c_void {
+    let mut order = 0;
+    let mut err = 0;
+pub static mut ret: *mut c_void = core::ptr::null_mut();
+pub static mut ci: *mut c_void = core::ptr::null_mut();
     ci = __swap_entry_to_cluster(targ_entry);
     order = highest_order(orders);
 // orders must be non-zero, and must not exceed cluster size.
-    if (WARN_ON_ONCE(!orders || (1UL << order) > SWAPFILE_CLUSTER))
+    if (WARN_ON_ONCE!(!orders || (1UL << order) > SWAPFILE_CLUSTER)) {
     return ERR_PTR(-EINVAL);
+    }
     do {
     ret = __swap_cache_alloc(ci, targ_entry, gfp, order,
     vmf, mpol, ilx);
-    if (!IS_ERR(ret))
+    if (!IS_ERR(ret)) {
     break;
+    }
     err = PTR_ERR(ret);
-    if (!order || (err && err != -EBUSY && err != -ENOMEM))
+    if (!order || (err && err != -EBUSY && err != -ENOMEM)) {
     break;
+    }
     count_mthp_stat(order, MTHP_STAT_SWPIN_FALLBACK);
     order = next_order(&orders, order);
     } while (orders);
@@ -507,8 +757,6 @@ pub unsafe extern "C" fn swap_cache_del_folio(folio: *mut folio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn free_swap_cache(folio: *mut folio) {
-    void free_swap_cache(struct folio *folio)
-    {
     if (folio_test_swapcache(folio) && !folio_mapped(folio) &&
     folio_trylock(folio)) {
     folio_free_swap(folio);
@@ -521,11 +769,10 @@ pub unsafe extern "C" fn free_swap_cache(folio: *mut folio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn free_folio_and_swap_cache(folio: *mut folio) {
-    void free_folio_and_swap_cache(struct folio *folio)
-    {
     free_swap_cache(folio);
-    if (!is_huge_zero_folio(folio))
+    if (!is_huge_zero_folio(folio)) {
     folio_put(folio);
+    }
     }
 //
 // Passed an array of pages, drop them all from swapcache and then release
@@ -533,28 +780,27 @@ pub unsafe extern "C" fn free_folio_and_swap_cache(folio: *mut folio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn free_pages_and_swap_cache(pages: *mut encoded_page, nr: c_int) {
-    void free_pages_and_swap_cache(struct encoded_page **pages, int nr)
-    {
-    struct folio_batch folios;
+pub static mut folios: usize = 0;
     unsigned int refs[FOLIO_BATCH_SIZE];
     folio_batch_init(&folios);
-    for (int i = 0; i < nr; i++) {
-    struct folio *folio = page_folio(encoded_page_ptr(pages[i]));
+    while (i < nr) {
+    let mut folio = page_folio(encoded_page_ptr(pages[i]));
     free_swap_cache(folio);
     refs[folios.nr] = 1;
     if (unlikely(encoded_page_flags(pages[i]) &
-    ENCODED_PAGE_BIT_NR_PAGES_NEXT))
+    ENCODED_PAGE_BIT_NR_PAGES_NEXT)) {
     refs[folios.nr] = encoded_nr_pages(pages[++i]);
-    if (folio_batch_add(&folios, folio) == 0)
+    }
+    if (folio_batch_add(&folios, folio) == 0) {
     folios_put_refs(&folios, refs);
     }
-    if (folios.nr)
+    }
+    if (folios.nr) {
     folios_put_refs(&folios, refs);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn swap_use_vma_readahead() -> bool {
-    static inline bool swap_use_vma_readahead(void)
-    {
     return READ_ONCE(enable_vma_readahead) && !atomic_read(&nr_rotate_swap);
     }
 //
@@ -563,47 +809,50 @@ pub unsafe extern "C" fn swap_use_vma_readahead() -> bool {
 // @vma: the VMA that should be updated, could be NULL for global update.
 // @addr: the addr that triggered the swapin, ignored if @vma is NULL.
 //
-    void swap_update_readahead(struct folio *folio, struct vm_area_struct *vma,
-    unsigned long addr)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn swap_update_readahead(folio: *mut folio, vma: *mut vm_area_struct, addr: c_ulong) {
     bool readahead, vma_ra = swap_use_vma_readahead();
 //
 // At the moment, we don't support PG_readahead for anon THP
 // so let's bail out rather than confusing the readahead stat.
 //
-    if (unlikely(folio_test_large(folio)))
+    if (unlikely(folio_test_large(folio))) {
     return;
+    }
     readahead = folio_test_clear_readahead(folio);
     if (vma && vma_ra) {
-    unsigned long ra_val;
-    int win, hits;
+    let mut ra_val = 0;
+    let mut win = 0;
+    let mut hits = 0;
     ra_val = GET_SWAP_RA_VAL(vma);
     win = SWAP_RA_WIN(ra_val);
     hits = SWAP_RA_HITS(ra_val);
-    if (readahead)
+    if (readahead) {
     hits = min_t(int, hits + 1, SWAP_RA_HITS_MAX);
+    }
     atomic_long_set(&vma.swap_readahead_info,
     SWAP_RA_VAL(addr, win, hits));
     }
     if (readahead) {
     count_vm_event(SWAP_RA_HIT);
-    if (!vma || !vma_ra)
+    if (!vma || !vma_ra) {
     atomic_inc(&swapin_readahead_hits);
     }
     }
-    static struct folio *swap_cache_read_folio(struct swap_io_ctx *ctx,
-    swp_entry_t entry, gfp_t gfp, struct mempolicy *mpol,
-    pgoff_t ilx, bool readahead)
-    {
-    struct folio *folio;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn swap_cache_read_folio(ctx: *mut swap_io_ctx, entry: swp_entry_t, gfp: gfp_t, mpol: *mut mempolicy, ilx: pgoff_t, readahead: bool) -> *mut c_void {
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     do {
     folio = swap_cache_get_folio(entry);
-    if (folio)
+    if (folio) {
     return folio;
+    }
     folio = swap_cache_alloc_folio(entry, gfp, BIT(0), core::ptr::null_mut(), mpol, ilx);
     } while (PTR_ERR(folio) == -EEXIST);
-    if (IS_ERR_OR_NULL(folio))
+    if (IS_ERR_OR_NULL(folio)) {
     return core::ptr::null_mut();
+    }
     swap_read_folio(ctx, folio);
     if (readahead) {
     folio_set_readahead(folio);
@@ -627,19 +876,20 @@ pub unsafe extern "C" fn swap_use_vma_readahead() -> bool {
 // Context: Caller must ensure @entry is valid and pin the swap device with refcount.
 // Return: Returns the folio on success, error code if failed.
 //
-    struct folio *swapin_sync(swp_entry_t entry, gfp_t gfp, unsigned long orders,
-    struct vm_fault *vmf, struct mempolicy *mpol, pgoff_t ilx)
-    {
-    let mut ctx: swap_io_ctx = {};
-    struct folio *folio;
+#[no_mangle]
+pub unsafe extern "C" fn swapin_sync(entry: swp_entry_t, gfp: gfp_t, orders: c_ulong, vmf: *mut vm_fault, mpol: *mut mempolicy, ilx: pgoff_t) -> *mut c_void {
+pub static mut ctx: swap_io_ctx = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     do {
     folio = swap_cache_get_folio(entry);
-    if (folio)
+    if (folio) {
     return folio;
+    }
     folio = swap_cache_alloc_folio(entry, gfp, orders, vmf, mpol, ilx);
     } while (PTR_ERR(folio) == -EEXIST);
-    if (IS_ERR(folio))
+    if (IS_ERR(folio)) {
     return folio;
+    }
     swap_read_folio(&ctx, folio);
     swap_read_submit(&ctx);
     return folio;
@@ -650,38 +900,34 @@ pub unsafe extern "C" fn swap_use_vma_readahead() -> bool {
 // A failure return means that either the page allocation failed or that
 // the swap entry is no longer in use.
 //
-    struct folio *read_swap_cache_async(struct swap_io_ctx *ctx, swp_entry_t entry,
-    gfp_t gfp_mask, struct vm_area_struct *vma, unsigned long addr)
-    {
-    struct swap_info_struct *si;
-    struct mempolicy *mpol;
-    pgoff_t ilx;
-    struct folio *folio;
+#[no_mangle]
+pub unsafe extern "C" fn read_swap_cache_async(ctx: *mut swap_io_ctx, entry: swp_entry_t, gfp_mask: gfp_t, vma: *mut vm_area_struct, addr: c_ulong) -> *mut c_void {
+pub static mut si: *mut c_void = core::ptr::null_mut();
+pub static mut mpol: *mut c_void = core::ptr::null_mut();
+    let mut ilx;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     si = get_swap_device(entry);
-    if (!si)
+    if (!si) {
     return core::ptr::null_mut();
+    }
     mpol = get_vma_policy(vma, addr, 0, &ilx);
     folio = swap_cache_read_folio(ctx, entry, gfp_mask, mpol, ilx, false);
     mpol_cond_put(mpol);
     put_swap_device(si);
     return folio;
     }
-    static struct folio *swap_cache_read_folio_sync(swp_entry_t entry, gfp_t gfp,
-    struct mempolicy *mpol, pgoff_t ilx)
-    {
-    let mut ctx: swap_io_ctx = {};
-    struct folio *folio;
+#[no_mangle]
+pub unsafe extern "C" fn swap_cache_read_folio_sync(entry: swp_entry_t, gfp: gfp_t, mpol: *mut mempolicy, ilx: pgoff_t) -> *mut c_void {
+pub static mut ctx: swap_io_ctx = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     folio = swap_cache_read_folio(&ctx, entry, gfp, mpol, ilx, false);
     swap_read_submit(&ctx);
     return folio;
     }
-    static unsigned int __swapin_nr_pages(unsigned long prev_offset,
-    unsigned long offset,
-    int hits,
-    int max_pages,
-    int prev_win)
-    {
-    unsigned int pages, last_ra;
+#[no_mangle]
+pub unsafe extern "C" fn __swapin_nr_pages(prev_offset: c_ulong, offset: c_ulong, hits: c_int, max_pages: c_int, prev_win: c_int) -> c_uint {
+    let mut pages = 0;
+    let mut last_ra = 0;
 //
 // This heuristic has been found to work well on both sequential and
 // random loads, swapping to hard disk or to SSD: please don't ask
@@ -694,38 +940,44 @@ pub unsafe extern "C" fn swap_use_vma_readahead() -> bool {
 // stuck here forever, so check for an adjacent offset instead
 // (and don't even bother to check whether swap type is same).
 //
-    if (offset != prev_offset + 1 && offset != prev_offset - 1)
+    if (offset != prev_offset + 1 && offset != prev_offset - 1) {
     pages = 1;
+    }
     } else {
-    let mut roundup: c_uint = 4;
-    while (roundup < pages)
+pub static mut roundup: c_uint = 4;
+    while (roundup < pages) {
     roundup <<= 1;
+    }
     pages = roundup;
     }
-    if (pages > max_pages)
+    if (pages > max_pages) {
     pages = max_pages;
+    }
 // Don't shrink readahead too fast
     last_ra = prev_win / 2;
-    if (pages < last_ra)
+    if (pages < last_ra) {
     pages = last_ra;
+    }
     return pages;
     }
 #[no_mangle]
 unsafe extern "C" fn swapin_nr_pages(offset: c_ulong) -> c_ulong {
-    static unsigned long swapin_nr_pages(unsigned long offset)
-    {
     static unsigned long prev_offset;
-    unsigned int hits, pages, max_pages;
+    let mut hits = 0;
+    let mut pages = 0;
+    let mut max_pages = 0;
     static atomic_t last_readahead_pages;
     max_pages = 1 << READ_ONCE(page_cluster);
-    if (max_pages <= 1)
+    if (max_pages <= 1) {
     return 1;
+    }
     hits = atomic_xchg(&swapin_readahead_hits, 0);
     pages = __swapin_nr_pages(READ_ONCE(prev_offset), offset, hits,
     max_pages,
     atomic_read(&last_readahead_pages));
-    if (!hits)
+    if (!hits) {
     WRITE_ONCE(prev_offset, offset);
+    }
     atomic_set(&last_readahead_pages, pages);
     return pages;
     }
@@ -747,53 +999,59 @@ unsafe extern "C" fn swapin_nr_pages(offset: c_ulong) -> c_ulong {
 // are used for every page of the readahead: neighbouring pages on swap
 // are fairly likely to have been swapped out from the same node.
 //
-    struct folio *swap_cluster_readahead(swp_entry_t entry, gfp_t gfp_mask,
-    struct mempolicy *mpol, pgoff_t ilx)
-    {
-    struct folio *folio;
-    let mut entry_offset: c_ulong = swp_offset(entry);
-    let mut offset: c_ulong = entry_offset;
+#[no_mangle]
+pub unsafe extern "C" fn swap_cluster_readahead(entry: swp_entry_t, gfp_mask: gfp_t, mpol: *mut mempolicy, ilx: pgoff_t) -> *mut c_void {
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut entry_offset: c_ulong = 0;
+pub static mut offset: c_ulong = 0;
     unsigned long start_offset, end_offset;
-    unsigned long mask;
-    struct swap_info_struct *si = __swap_entry_to_info(entry);
-    let mut ctx: swap_io_ctx = {};
-    struct blk_plug plug;
-    swp_entry_t ra_entry;
+    let mut mask = 0;
+    let mut si = __swap_entry_to_info(entry);
+pub static mut ctx: swap_io_ctx = 0;
+pub static mut plug: usize = 0;
+    let mut ra_entry;
     mask = swapin_nr_pages(offset) - 1;
-    if (!mask)
-    goto skip;
+    if (!mask) {
+// goto;
+    }
 // Read a page_cluster sized and aligned cluster around offset.
     start_offset = offset & ~mask;
     end_offset = offset | mask;
-    if (!start_offset)	/* First page is swap header. */
-    start_offset++;
-    if (end_offset >= si.max)
+    if (!start_offset)	/* First page is swap header. */ {
+    start_offset += 1;
+    }
+    if (end_offset >= si.max) {
     end_offset = si.max - 1;
+    }
     blk_start_plug(&plug);
-    for (offset = start_offset; offset <= end_offset ; offset++) {
+    while (offset <= end_offset ) {
 // Ok, do the async read-ahead now
     ra_entry = swp_entry(swp_type(entry), offset);
     folio = swap_cache_read_folio(&ctx, ra_entry, gfp_mask, mpol,
     ilx, offset != entry_offset);
-    if (!folio)
+    if (!folio) {
     continue;
+    }
     folio_put(folio);
     }
     blk_finish_plug(&plug);
     swap_read_submit(&ctx);
-    skip:
+// label;
     return swap_cache_read_folio_sync(entry, gfp_mask, mpol, ilx);
     }
-    static int swap_vma_ra_win(struct vm_fault *vmf, unsigned long *start,
-    unsigned long *end)
-    {
-    struct vm_area_struct *vma = vmf.vma;
-    unsigned long ra_val;
+#[no_mangle]
+pub unsafe extern "C" fn swap_vma_ra_win(vmf: *mut vm_fault, start: *mut c_ulong, end: *mut c_ulong) -> c_int {
+    let mut vma = vmf.vma;
+    let mut ra_val = 0;
     unsigned long faddr, prev_faddr, left, right;
-    unsigned int max_win, hits, prev_win, win;
+    let mut max_win = 0;
+    let mut hits = 0;
+    let mut prev_win = 0;
+    let mut win = 0;
     max_win = 1 << min(READ_ONCE(page_cluster), SWAP_RA_ORDER_CEILING);
-    if (max_win == 1)
+    if (max_win == 1) {
     return 1;
+    }
     faddr = vmf.address;
     ra_val = GET_SWAP_RA_VAL(vma);
     prev_faddr = SWAP_RA_ADDR(ra_val);
@@ -802,19 +1060,23 @@ unsafe extern "C" fn swapin_nr_pages(offset: c_ulong) -> c_ulong {
     win = __swapin_nr_pages(PFN_DOWN(prev_faddr), PFN_DOWN(faddr), hits,
     max_win, prev_win);
     atomic_long_set(&vma.swap_readahead_info, SWAP_RA_VAL(faddr, win, 0));
-    if (win == 1)
+    if (win == 1) {
     return 1;
-    if (faddr == prev_faddr + PAGE_SIZE)
+    }
+    if (faddr == prev_faddr + PAGE_SIZE) {
     left = faddr;
-#[no_mangle]
-pub unsafe extern "C" fn if(PAGE_SIZE: prev_faddr == faddr +) -> else {
-    else if (prev_faddr == faddr + PAGE_SIZE)
+    }
+
+    else if (prev_faddr == faddr + PAGE_SIZE) {
     left = faddr - (win << PAGE_SHIFT) + PAGE_SIZE;
-    else
+    }
+    else {
     left = faddr - (((win - 1) / 2) << PAGE_SHIFT);
+    }
     right = left + (win << PAGE_SHIFT);
-    if ((long)left < 0)
+    if ((long)left < 0) {
     left = 0;
+    }
 // start = max3(left, vma->vm_start, faddr & PMD_MASK);
 // end = min3(right, vma->vm_end, (faddr & PMD_MASK) + PMD_SIZE);
     return win;
@@ -834,33 +1096,35 @@ pub unsafe extern "C" fn if(PAGE_SIZE: prev_faddr == faddr +) -> else {
 //
 // Caller must hold read mmap_lock if vmf->vma is not NULL.
 //
-    static struct folio *swap_vma_readahead(swp_entry_t targ_entry, gfp_t gfp_mask,
-    struct mempolicy *mpol, pgoff_t targ_ilx, struct vm_fault *vmf)
-    {
-    let mut ctx: swap_io_ctx = {};
-    struct blk_plug plug;
-    struct folio *folio;
-    pte_t *pte = core::ptr::null_mut(), pentry;
-    int win;
+#[no_mangle]
+pub unsafe extern "C" fn swap_vma_readahead(targ_entry: swp_entry_t, gfp_mask: gfp_t, mpol: *mut mempolicy, targ_ilx: pgoff_t, vmf: *mut vm_fault) -> *mut c_void {
+pub static mut ctx: swap_io_ctx = 0;
+pub static mut plug: usize = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut pte = core::ptr::null_mut(), pentry;
+    let mut win = 0;
     unsigned long start, end, addr;
-    let mut ilx: pgoff_t = targ_ilx;
+pub static mut ilx: pgoff_t = 0;
     win = swap_vma_ra_win(vmf, &start, &end);
-    if (win == 1)
-    goto skip;
+    if (win == 1) {
+// goto;
+    }
     ilx = targ_ilx - PFN_DOWN(vmf.address - start);
     blk_start_plug(&plug);
-    for (addr = start; addr < end; ilx++, addr += PAGE_SIZE) {
-    struct swap_info_struct *si = core::ptr::null_mut();
-    softleaf_t entry;
+    while (addr < end) {
+    let mut si = core::ptr::null_mut();
+    let mut entry;
     if (!pte++) {
     pte = pte_offset_map(vmf.pmd, addr);
-    if (!pte)
+    if (!pte) {
     break;
+    }
     }
     pentry = ptep_get_lockless(pte);
     entry = softleaf_from_pte(pentry);
-    if (!softleaf_is_swap(entry))
+    if (!softleaf_is_swap(entry)) {
     continue;
+    }
     pte_unmap(pte);
     pte = core::ptr::null_mut();
 //
@@ -869,22 +1133,26 @@ pub unsafe extern "C" fn if(PAGE_SIZE: prev_faddr == faddr +) -> else {
 //
     if (swp_type(entry) != swp_type(targ_entry)) {
     si = get_swap_device(entry);
-    if (!si)
+    if (!si) {
     continue;
+    }
     }
     folio = swap_cache_read_folio(&ctx, entry, gfp_mask, mpol, ilx,
     addr != vmf.address);
-    if (si)
+    if (si) {
     put_swap_device(si);
-    if (!folio)
+    }
+    if (!folio) {
     continue;
+    }
     folio_put(folio);
     }
-    if (pte)
+    if (pte) {
     pte_unmap(pte);
+    }
     blk_finish_plug(&plug);
     swap_read_submit(&ctx);
-    skip:
+// label;
 // The folio was likely read above, so no need for plugging here
     return swap_cache_read_folio_sync(targ_entry, gfp_mask, mpol, targ_ilx);
     }
@@ -897,15 +1165,14 @@ pub unsafe extern "C" fn if(PAGE_SIZE: prev_faddr == faddr +) -> else {
 // Returns the struct folio for entry and addr, after queueing swapin.
 //
 // It's a main entry function for swap readahead. By the configuration,
-// it will read ahead blocks by cluster-based(ie, physical disk based)
+it will read ahead blocks by cluster-based(ie, physical disk based)
 // or vma-based(ie, virtual address based on faulty address) readahead.
 //
-    struct folio *swapin_readahead(swp_entry_t entry, gfp_t gfp_mask,
-    struct vm_fault *vmf)
-    {
-    struct mempolicy *mpol;
-    pgoff_t ilx;
-    struct folio *folio;
+#[no_mangle]
+pub unsafe extern "C" fn swapin_readahead(entry: swp_entry_t, gfp_mask: gfp_t, vmf: *mut vm_fault) -> *mut c_void {
+pub static mut mpol: *mut c_void = core::ptr::null_mut();
+    let mut ilx;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     mpol = get_vma_policy(vmf.vma, vmf.address, 0, &ilx);
     folio = swap_use_vma_readahead() ?
     swap_vma_readahead(entry, gfp_mask, mpol, ilx, vmf) :
@@ -913,27 +1180,17 @@ pub unsafe extern "C" fn if(PAGE_SIZE: prev_faddr == faddr +) -> else {
     mpol_cond_put(mpol);
     return folio;
     }
-    static const struct ctl_table swap_readahead_sysctl_table[] = {
-    {
-    .procname	= "page-cluster",
-    .data		= &page_cluster,
-    .maxlen		= sizeof(int),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec_minmax,
-    .extra1		= SYSCTL_ZERO,
-    .extra2		= (void *)&page_cluster_max,
-    }
-    };
+pub static mut ctl_table: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn swap_readahead_setup() -> void __init {
-    static void __init swap_readahead_setup(void)
-    {
-    let mut megs: c_ulong = PAGES_TO_MB(totalram_pages());
+unsafe extern "C" fn swap_readahead_setup()  {
+pub static mut megs: c_ulong = 0;
 // Use a smaller cluster for small-memory machines
-    if (megs < 16)
+    if (megs < 16) {
     page_cluster = 2;
-    else
+    }
+    else {
     page_cluster = 3;
+    }
 //
 // Right now other parts of the system means that we
 // _really_ don't want to cluster much more
@@ -941,65 +1198,55 @@ unsafe extern "C" fn swap_readahead_setup() -> void __init {
     register_sysctl_init("vm", swap_readahead_sysctl_table);
     }
 
-    static ssize_t vma_ra_enabled_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn vma_ra_enabled_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%s\n", str_true_false(enable_vma_readahead));
     }
-    static ssize_t vma_ra_enabled_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
-    ssize_t ret;
+#[no_mangle]
+pub unsafe extern "C" fn vma_ra_enabled_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut ret = 0;
     ret = kstrtobool(buf, &enable_vma_readahead);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     return count;
     }
-    let mut vma_ra_enabled_attr: static struct kobj_attribute = __ATTR_RW(vma_ra_enabled);
+pub static mut vma_ra_enabled_attr: kobj_attribute = 0;
     static struct attribute *swap_attrs[] = {
     &vma_ra_enabled_attr.attr,
     core::ptr::null_mut(),
     };
-    static const struct attribute_group swap_attr_group = {
-    .attrs = swap_attrs,
-    };
+pub static mut attribute_group: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn swap_sysfs_init() -> int __init {
-    static int __init swap_sysfs_init(void)
-    {
-    int err;
-    struct kobject *swap_kobj;
+unsafe extern "C" fn swap_sysfs_init() -> c_int {
+    let mut err = 0;
+pub static mut swap_kobj: *mut c_void = core::ptr::null_mut();
     swap_kobj = kobject_create_and_add("swap", mm_kobj);
     if (!swap_kobj) {
-    pr_err("failed to create swap kobject\n");
+    pr_err!("failed to create swap kobject\n");
     return -ENOMEM;
     }
     err = sysfs_create_group(swap_kobj, &swap_attr_group);
     if (err) {
-    pr_err("failed to register swap group\n");
-    goto delete_obj;
+    pr_err!("failed to register swap group\n");
+// goto;
     }
 // Swap cache writeback is LRU based, no tags for it
     mapping_set_no_writeback_tags(&swap_space);
     return 0;
-    delete_obj:
+// label;
     kobject_put(swap_kobj);
     return err;
     }
 
 #[no_mangle]
-unsafe extern "C" fn swap_sysfs_init() -> int __init {
-    static int __init swap_sysfs_init(void)
-    {
+unsafe extern "C" fn swap_sysfs_init() -> c_int {
     return 0;
     }
 
 #[no_mangle]
-unsafe extern "C" fn swap_init() -> int __init {
-    static int __init swap_init(void)
-    {
+unsafe extern "C" fn swap_init() -> c_int {
     swap_readahead_setup();
     return swap_sysfs_init();
     }
-    subsys_initcall(swap_init);
+    subsys_initcall!(swap_init);

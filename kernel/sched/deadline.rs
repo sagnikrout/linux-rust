@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -62,114 +312,92 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     static unsigned int sysctl_sched_dl_period_max = 1 << 22; /* ~4 seconds */
     static unsigned int sysctl_sched_dl_period_min = 100;     /* 100 us */
 
-    static const struct ctl_table sched_dl_sysctls[] = {
-    {
-    .procname       = "sched_deadline_period_max_us",
-    .data           = &sysctl_sched_dl_period_max,
-    .maxlen         = sizeof(unsigned int),
-    .mode           = 0644,
-    .proc_handler   = proc_douintvec_minmax,
-    .extra1         = (void *)&sysctl_sched_dl_period_min,
-    },
-    {
-    .procname       = "sched_deadline_period_min_us",
-    .data           = &sysctl_sched_dl_period_min,
-    .maxlen         = sizeof(unsigned int),
-    .mode           = 0644,
-    .proc_handler   = proc_douintvec_minmax,
-    .extra2         = (void *)&sysctl_sched_dl_period_max,
-    },
-    };
+pub static mut ctl_table: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn sched_dl_sysctl_init() -> int __init {
-    static int __init sched_dl_sysctl_init(void)
-    {
+unsafe extern "C" fn sched_dl_sysctl_init() -> c_int {
     register_sysctl_init("kernel", sched_dl_sysctls);
     return 0;
     }
-    late_initcall(sched_dl_sysctl_init);
+    late_initcall!(sched_dl_sysctl_init);
 
-    static inline struct rq *rq_of_dl_rq(struct dl_rq *dl_rq)
-    {
-    return container_of(dl_rq, struct rq, dl);
+#[no_mangle]
+pub unsafe extern "C" fn rq_of_dl_rq(dl_rq: *mut dl_rq) -> *mut c_void {
+    return container_of!(dl_rq, rq, dl);
     }
-    static inline struct rq *rq_of_dl_se(struct sched_dl_entity *dl_se)
-    {
-    struct rq *rq = dl_se.rq;
-    if (!dl_server(dl_se))
+#[no_mangle]
+pub unsafe extern "C" fn rq_of_dl_se(dl_se: *mut sched_dl_entity) -> *mut c_void {
+    let mut rq = dl_se.rq;
+    if (!dl_server(dl_se)) {
     rq = task_rq(dl_task_of(dl_se));
+    }
     return rq;
     }
-    static inline struct dl_rq *dl_rq_of_se(struct sched_dl_entity *dl_se)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn dl_rq_of_se(dl_se: *mut sched_dl_entity) -> *mut c_void {
     return &rq_of_dl_se(dl_se).dl;
     }
 #[no_mangle]
 pub unsafe extern "C" fn on_dl_rq(dl_se: *mut sched_dl_entity) -> c_int {
-    static inline int on_dl_rq(struct sched_dl_entity *dl_se)
-    {
     return !RB_EMPTY_NODE(&dl_se.rb_node);
     }
 
-    static inline struct sched_dl_entity *pi_of(struct sched_dl_entity *dl_se)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pi_of(dl_se: *mut sched_dl_entity) -> *mut c_void {
     return dl_se.pi_se;
     }
 #[no_mangle]
 pub unsafe extern "C" fn is_dl_boosted(dl_se: *mut sched_dl_entity) -> bool {
-    static inline bool is_dl_boosted(struct sched_dl_entity *dl_se)
-    {
     return pi_of(dl_se) != dl_se;
     }
 
-    static inline struct sched_dl_entity *pi_of(struct sched_dl_entity *dl_se)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: pi_of
+pub unsafe extern "C" fn pi_of_dup(dl_se: *mut sched_dl_entity) -> *mut c_void {
     return dl_se;
     }
 #[no_mangle]
-pub unsafe extern "C" fn is_dl_boosted(dl_se: *mut sched_dl_entity) -> bool {
-    static inline bool is_dl_boosted(struct sched_dl_entity *dl_se)
-    {
+#[no_mangle]
+// duplicate fn: is_dl_boosted
+pub unsafe extern "C" fn is_dl_boosted_dup(dl_se: *mut sched_dl_entity) -> bool {
     return false;
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn dl_get_type(dl_se: *mut sched_dl_entity, rq: *mut rq) -> u8 {
-    static inline u8 dl_get_type(struct sched_dl_entity *dl_se, struct rq *rq)
-    {
-    if (!dl_server(dl_se))
+    if (!dl_server(dl_se)) {
     return DL_TASK;
-    if (dl_se == &rq.fair_server)
+    }
+    if (dl_se == &rq.fair_server) {
     return DL_SERVER_FAIR;
+    }
 
-    if (dl_se == &rq.ext_server)
+    if (dl_se == &rq.ext_server) {
     return DL_SERVER_EXT;
+    }
 
     return DL_OTHER;
     }
-    static inline struct dl_bw *dl_bw_of(int i)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn dl_bw_of(i: c_int) -> *mut c_void {
     RCU_LOCKDEP_WARN(!rcu_read_lock_sched_held(),
     "sched RCU must be held");
     return &cpu_rq(i).rd.dl_bw;
     }
 #[no_mangle]
 pub unsafe extern "C" fn dl_bw_cpus(i: c_int) -> c_int {
-    static inline int dl_bw_cpus(int i)
-    {
-    struct root_domain *rd = cpu_rq(i).rd;
+    let mut rd = cpu_rq(i).rd;
     RCU_LOCKDEP_WARN(!rcu_read_lock_sched_held(),
     "sched RCU must be held");
     return cpumask_weight_and(rd.span, cpu_active_mask);
     }
 #[no_mangle]
 pub unsafe extern "C" fn __dl_bw_capacity(mask: *const cpumask) -> c_ulong {
-    static inline unsigned long __dl_bw_capacity(const struct cpumask *mask)
-    {
-    let mut cap: c_ulong = 0;
-    int i;
-    for_each_cpu_and(i, mask, cpu_active_mask)
+pub static mut cap: c_ulong = 0;
+    let mut i = 0;
+    for_each_cpu_and(i, mask, cpu_active_mask) {
     cap += arch_scale_cpu_capacity(i);
+    }
     return cap;
     }
 //
@@ -178,8 +406,6 @@ pub unsafe extern "C" fn __dl_bw_capacity(mask: *const cpumask) -> c_ulong {
 //
 #[no_mangle]
 pub unsafe extern "C" fn dl_bw_capacity(i: c_int) -> c_ulong {
-    static inline unsigned long dl_bw_capacity(int i)
-    {
     if (!sched_asym_cpucap_active() &&
     arch_scale_cpu_capacity(i) == SCHED_CAPACITY_SCALE) {
     return dl_bw_cpus(i) << SCHED_CAPACITY_SHIFT;
@@ -191,136 +417,116 @@ pub unsafe extern "C" fn dl_bw_capacity(i: c_int) -> c_ulong {
     }
 #[no_mangle]
 pub unsafe extern "C" fn dl_bw_visited(cpu: c_int, cookie: u64) -> bool {
-    bool dl_bw_visited(int cpu, u64 cookie)
-    {
-    struct root_domain *rd = cpu_rq(cpu).rd;
-    if (rd.visit_cookie == cookie)
+    let mut rd = cpu_rq(cpu).rd;
+    if (rd.visit_cookie == cookie) {
     return true;
+    }
     rd.visit_cookie = cookie;
     return false;
     }
     static inline
 #[no_mangle]
 pub unsafe extern "C" fn __dl_update(dl_b: *mut dl_bw, bw: i64) {
-    void __dl_update(struct dl_bw *dl_b, s64 bw)
-    {
-    struct root_domain *rd = container_of(dl_b, struct root_domain, dl_bw);
-    int i;
+    let mut rd = container_of!(dl_b, root_domain, dl_bw);
+    let mut i = 0;
     RCU_LOCKDEP_WARN(!rcu_read_lock_sched_held(),
     "sched RCU must be held");
     for_each_cpu_and(i, rd.span, cpu_active_mask) {
-    struct rq *rq = cpu_rq(i);
+    let mut rq = cpu_rq(i);
     rq.dl.extra_bw += bw;
     }
     }
     static inline
 #[no_mangle]
 pub unsafe extern "C" fn __dl_sub(dl_b: *mut dl_bw, tsk_bw: u64, cpus: c_int) {
-    void __dl_sub(struct dl_bw *dl_b, u64 tsk_bw, int cpus)
-    {
     dl_b.total_bw -= tsk_bw;
     __dl_update(dl_b, (s32)tsk_bw / cpus);
     }
     static inline
 #[no_mangle]
 pub unsafe extern "C" fn __dl_add(dl_b: *mut dl_bw, tsk_bw: u64, cpus: c_int) {
-    void __dl_add(struct dl_bw *dl_b, u64 tsk_bw, int cpus)
-    {
     dl_b.total_bw += tsk_bw;
     __dl_update(dl_b, -((s32)tsk_bw / cpus));
     }
-    static inline bool
-    __dl_overflow(struct dl_bw *dl_b, unsigned long cap, u64 old_bw, u64 new_bw)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __dl_overflow(dl_b: *mut dl_bw, cap: c_ulong, old_bw: u64, new_bw: u64) -> bool {
     return dl_b.bw != -1 &&
     cap_scale(dl_b.bw, cap) < dl_b.total_bw - old_bw + new_bw;
     }
     static inline
 #[no_mangle]
 pub unsafe extern "C" fn __add_running_bw(dl_bw: u64, dl_rq: *mut dl_rq) {
-    void __add_running_bw(u64 dl_bw, struct dl_rq *dl_rq)
-    {
-    let mut old: u64 = dl_rq.running_bw;
+pub static mut old: u64 = 0;
     lockdep_assert_rq_held(rq_of_dl_rq(dl_rq));
     dl_rq.running_bw += dl_bw;
-    WARN_ON_ONCE(dl_rq.running_bw < old); /* overflow */
-    WARN_ON_ONCE(dl_rq.running_bw > dl_rq.this_bw);
+    WARN_ON_ONCE!(dl_rq.running_bw < old); /* overflow */
+    WARN_ON_ONCE!(dl_rq.running_bw > dl_rq.this_bw);
 // kick cpufreq (see the comment in kernel/sched/sched.h).
     cpufreq_update_util(rq_of_dl_rq(dl_rq), 0);
     }
     static inline
 #[no_mangle]
 pub unsafe extern "C" fn __sub_running_bw(dl_bw: u64, dl_rq: *mut dl_rq) {
-    void __sub_running_bw(u64 dl_bw, struct dl_rq *dl_rq)
-    {
-    let mut old: u64 = dl_rq.running_bw;
+pub static mut old: u64 = 0;
     lockdep_assert_rq_held(rq_of_dl_rq(dl_rq));
     dl_rq.running_bw -= dl_bw;
-    WARN_ON_ONCE(dl_rq.running_bw > old); /* underflow */
-    if (dl_rq.running_bw > old)
+    WARN_ON_ONCE!(dl_rq.running_bw > old); /* underflow */
+    if (dl_rq.running_bw > old) {
     dl_rq.running_bw = 0;
+    }
 // kick cpufreq (see the comment in kernel/sched/sched.h).
     cpufreq_update_util(rq_of_dl_rq(dl_rq), 0);
     }
     static inline
 #[no_mangle]
 pub unsafe extern "C" fn __add_rq_bw(dl_bw: u64, dl_rq: *mut dl_rq) {
-    void __add_rq_bw(u64 dl_bw, struct dl_rq *dl_rq)
-    {
-    let mut old: u64 = dl_rq.this_bw;
+pub static mut old: u64 = 0;
     lockdep_assert_rq_held(rq_of_dl_rq(dl_rq));
     dl_rq.this_bw += dl_bw;
-    WARN_ON_ONCE(dl_rq.this_bw < old); /* overflow */
+    WARN_ON_ONCE!(dl_rq.this_bw < old); /* overflow */
     }
     static inline
 #[no_mangle]
 pub unsafe extern "C" fn __sub_rq_bw(dl_bw: u64, dl_rq: *mut dl_rq) {
-    void __sub_rq_bw(u64 dl_bw, struct dl_rq *dl_rq)
-    {
-    let mut old: u64 = dl_rq.this_bw;
+pub static mut old: u64 = 0;
     lockdep_assert_rq_held(rq_of_dl_rq(dl_rq));
     dl_rq.this_bw -= dl_bw;
-    WARN_ON_ONCE(dl_rq.this_bw > old); /* underflow */
-    if (dl_rq.this_bw > old)
+    WARN_ON_ONCE!(dl_rq.this_bw > old); /* underflow */
+    if (dl_rq.this_bw > old) {
     dl_rq.this_bw = 0;
-    WARN_ON_ONCE(dl_rq.running_bw > dl_rq.this_bw);
+    }
+    WARN_ON_ONCE!(dl_rq.running_bw > dl_rq.this_bw);
     }
     static inline
 #[no_mangle]
 pub unsafe extern "C" fn add_rq_bw(dl_se: *mut sched_dl_entity, dl_rq: *mut dl_rq) {
-    void add_rq_bw(struct sched_dl_entity *dl_se, struct dl_rq *dl_rq)
-    {
-    if (!dl_entity_is_special(dl_se))
+    if (!dl_entity_is_special(dl_se)) {
     __add_rq_bw(dl_se.dl_bw, dl_rq);
+    }
     }
     static inline
 #[no_mangle]
 pub unsafe extern "C" fn sub_rq_bw(dl_se: *mut sched_dl_entity, dl_rq: *mut dl_rq) {
-    void sub_rq_bw(struct sched_dl_entity *dl_se, struct dl_rq *dl_rq)
-    {
-    if (!dl_entity_is_special(dl_se))
+    if (!dl_entity_is_special(dl_se)) {
     __sub_rq_bw(dl_se.dl_bw, dl_rq);
+    }
     }
     static inline
 #[no_mangle]
 pub unsafe extern "C" fn add_running_bw(dl_se: *mut sched_dl_entity, dl_rq: *mut dl_rq) {
-    void add_running_bw(struct sched_dl_entity *dl_se, struct dl_rq *dl_rq)
-    {
-    if (!dl_entity_is_special(dl_se))
+    if (!dl_entity_is_special(dl_se)) {
     __add_running_bw(dl_se.dl_bw, dl_rq);
+    }
     }
     static inline
 #[no_mangle]
 pub unsafe extern "C" fn sub_running_bw(dl_se: *mut sched_dl_entity, dl_rq: *mut dl_rq) {
-    void sub_running_bw(struct sched_dl_entity *dl_se, struct dl_rq *dl_rq)
-    {
-    if (!dl_entity_is_special(dl_se))
+    if (!dl_entity_is_special(dl_se)) {
     __sub_running_bw(dl_se.dl_bw, dl_rq);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn dl_rq_change_utilization(rq: *mut rq, dl_se: *mut sched_dl_entity, new_bw: u64) {
-    static void dl_rq_change_utilization(struct rq *rq, struct sched_dl_entity *dl_se, u64 new_bw)
-    {
     if (dl_se.dl_non_contending) {
     sub_running_bw(dl_se, &rq.dl);
     dl_se.dl_non_contending = 0;
@@ -332,8 +538,9 @@ unsafe extern "C" fn dl_rq_change_utilization(rq: *mut rq, dl_se: *mut sched_dl_
 // so we are still safe.
 //
     if (hrtimer_try_to_cancel(&dl_se.inactive_timer) == 1) {
-    if (!dl_server(dl_se))
+    if (!dl_server(dl_se)) {
     put_task_struct(dl_task_of(dl_se));
+    }
     }
     }
     __sub_rq_bw(dl_se.dl_bw, &rq.dl);
@@ -342,39 +549,33 @@ unsafe extern "C" fn dl_rq_change_utilization(rq: *mut rq, dl_se: *mut sched_dl_
     static __always_inline
 #[no_mangle]
 pub unsafe extern "C" fn cancel_dl_timer(dl_se: *mut sched_dl_entity, timer: *mut hrtimer) {
-    void cancel_dl_timer(struct sched_dl_entity *dl_se, struct hrtimer *timer)
-    {
 //
 // If the timer callback was running (hrtimer_try_to_cancel == -1),
 // it will eventually call put_task_struct().
 //
-    if (hrtimer_try_to_cancel(timer) == 1 && !dl_server(dl_se))
+    if (hrtimer_try_to_cancel(timer) == 1 && !dl_server(dl_se)) {
     put_task_struct(dl_task_of(dl_se));
+    }
     }
     static __always_inline
 #[no_mangle]
 pub unsafe extern "C" fn cancel_replenish_timer(dl_se: *mut sched_dl_entity) {
-    void cancel_replenish_timer(struct sched_dl_entity *dl_se)
-    {
     cancel_dl_timer(dl_se, &dl_se.dl_timer);
     }
     static __always_inline
 #[no_mangle]
 pub unsafe extern "C" fn cancel_inactive_timer(dl_se: *mut sched_dl_entity) {
-    void cancel_inactive_timer(struct sched_dl_entity *dl_se)
-    {
     cancel_dl_timer(dl_se, &dl_se.inactive_timer);
     }
 #[no_mangle]
 unsafe extern "C" fn dl_change_utilization(p: *mut task_struct, new_bw: u64) {
-    static void dl_change_utilization(struct task_struct *p, u64 new_bw)
-    {
-    WARN_ON_ONCE(p.dl.flags & SCHED_FLAG_SUGOV);
-    if (task_on_rq_queued(p))
+    WARN_ON_ONCE!(p.dl.flags & SCHED_FLAG_SUGOV);
+    if (task_on_rq_queued(p)) {
     return;
+    }
     dl_rq_change_utilization(task_rq(p), &p.dl, new_bw);
     }
-    static void __dl_clear_params(struct sched_dl_entity *dl_se);
+// forward_decl: __dl_clear_params;
 //
 // The utilization of a task cannot be immediately removed from
 // the rq active utilization (running_bw) when the task blocks.
@@ -431,21 +632,21 @@ unsafe extern "C" fn dl_change_utilization(p: *mut task_struct, new_bw: u64) {
 //
 #[no_mangle]
 unsafe extern "C" fn task_non_contending(dl_se: *mut sched_dl_entity, dl_task: bool) {
-    static void task_non_contending(struct sched_dl_entity *dl_se, bool dl_task)
-    {
-    struct hrtimer *timer = &dl_se.inactive_timer;
-    struct rq *rq = rq_of_dl_se(dl_se);
-    struct dl_rq *dl_rq = &rq.dl;
-    s64 zerolag_time;
+    let mut timer = &dl_se.inactive_timer;
+    let mut rq = rq_of_dl_se(dl_se);
+    let mut dl_rq = &rq.dl;
+    let mut zerolag_time = 0;
 //
 // If this is a non-deadline task that has been boosted,
 // do nothing
 //
-    if (dl_se.dl_runtime == 0)
+    if (dl_se.dl_runtime == 0) {
     return;
-    if (dl_entity_is_special(dl_se))
+    }
+    if (dl_entity_is_special(dl_se)) {
     return;
-    WARN_ON(dl_se.dl_non_contending);
+    }
+    WARN_ON!(dl_se.dl_non_contending);
     zerolag_time = dl_se.deadline -
     div64_long((dl_se.runtime * dl_se.dl_period),
     dl_se.dl_runtime);
@@ -462,13 +663,15 @@ unsafe extern "C" fn task_non_contending(dl_se: *mut sched_dl_entity, dl_task: b
     if (dl_server(dl_se)) {
     sub_running_bw(dl_se, dl_rq);
     } else {
-    struct task_struct *p = dl_task_of(dl_se);
-    if (dl_task)
+    let mut p = dl_task_of(dl_se);
+    if (dl_task) {
     sub_running_bw(dl_se, dl_rq);
+    }
     if (!dl_task || READ_ONCE(p.__state) == TASK_DEAD) {
-    struct dl_bw *dl_b = dl_bw_of(task_cpu(p));
-    if (READ_ONCE(p.__state) == TASK_DEAD)
+    let mut dl_b = dl_bw_of(task_cpu(p));
+    if (READ_ONCE(p.__state) == TASK_DEAD) {
     sub_rq_bw(dl_se, &rq.dl);
+    }
     raw_spin_lock(&dl_b.lock);
     __dl_sub(dl_b, dl_se.dl_bw, dl_bw_cpus(task_cpu(p)));
     raw_spin_unlock(&dl_b.lock);
@@ -478,23 +681,24 @@ unsafe extern "C" fn task_non_contending(dl_se: *mut sched_dl_entity, dl_task: b
     return;
     }
     dl_se.dl_non_contending = 1;
-    if (!dl_server(dl_se))
+    if (!dl_server(dl_se)) {
     get_task_struct(dl_task_of(dl_se));
+    }
     hrtimer_start(timer, ns_to_ktime(zerolag_time), HRTIMER_MODE_REL_HARD);
     }
 #[no_mangle]
 unsafe extern "C" fn task_contending(dl_se: *mut sched_dl_entity, flags: c_int) {
-    static void task_contending(struct sched_dl_entity *dl_se, int flags)
-    {
-    struct dl_rq *dl_rq = dl_rq_of_se(dl_se);
+    let mut dl_rq = dl_rq_of_se(dl_se);
 //
 // If this is a non-deadline task that has been boosted,
 // do nothing
 //
-    if (dl_se.dl_runtime == 0)
+    if (dl_se.dl_runtime == 0) {
     return;
-    if (flags & ENQUEUE_MIGRATED)
+    }
+    if (flags & ENQUEUE_MIGRATED) {
     add_rq_bw(dl_se, dl_rq);
+    }
     if (dl_se.dl_non_contending) {
     dl_se.dl_non_contending = 0;
 //
@@ -518,26 +722,22 @@ unsafe extern "C" fn task_contending(dl_se: *mut sched_dl_entity, flags: c_int) 
     }
 #[no_mangle]
 pub unsafe extern "C" fn is_leftmost(dl_se: *mut sched_dl_entity, dl_rq: *mut dl_rq) -> c_int {
-    static inline int is_leftmost(struct sched_dl_entity *dl_se, struct dl_rq *dl_rq)
-    {
     return rb_first_cached(&dl_rq.root) == &dl_se.rb_node;
     }
-    static void init_dl_rq_bw_ratio(struct dl_rq *dl_rq);
+// forward_decl: init_dl_rq_bw_ratio;
 #[no_mangle]
 pub unsafe extern "C" fn init_dl_bw(dl_b: *mut dl_bw) {
-    void init_dl_bw(struct dl_bw *dl_b)
-    {
     raw_spin_lock_init(&dl_b.lock);
-    if (global_rt_runtime() == RUNTIME_INF)
+    if (global_rt_runtime() == RUNTIME_INF) {
     dl_b.bw = -1;
-    else
+    }
+    else {
     dl_b.bw = to_ratio(global_rt_period(), global_rt_runtime());
+    }
     dl_b.total_bw = 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn init_dl_rq(dl_rq: *mut dl_rq) {
-    void init_dl_rq(struct dl_rq *dl_rq)
-    {
     dl_rq.root = RB_ROOT_CACHED;
 // zero means no -deadline tasks
     dl_rq.earliest_dl.curr = dl_rq.earliest_dl.next = 0;
@@ -549,16 +749,13 @@ pub unsafe extern "C" fn init_dl_rq(dl_rq: *mut dl_rq) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn dl_overloaded(rq: *mut rq) -> c_int {
-    static inline int dl_overloaded(struct rq *rq)
-    {
     return atomic_read(&rq.rd.dlo_count);
     }
 #[no_mangle]
 pub unsafe extern "C" fn dl_set_overload(rq: *mut rq) {
-    static inline void dl_set_overload(struct rq *rq)
-    {
-    if (!rq.online)
+    if (!rq.online) {
     return;
+    }
     cpumask_set_cpu(rq.cpu, rq.rd.dlo_mask);
 //
 // Must be visible before the overload count is
@@ -571,25 +768,20 @@ pub unsafe extern "C" fn dl_set_overload(rq: *mut rq) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn dl_clear_overload(rq: *mut rq) {
-    static inline void dl_clear_overload(struct rq *rq)
-    {
-    if (!rq.online)
+    if (!rq.online) {
     return;
+    }
     atomic_dec(&rq.rd.dlo_count);
     cpumask_clear_cpu(rq.cpu, rq.rd.dlo_mask);
     }
 
-    rb_entry((node), struct task_struct, pushable_dl_tasks)
+    rb_entry((node), task_struct, pushable_dl_tasks)
 #[no_mangle]
 pub unsafe extern "C" fn __pushable_less(a: *mut rb_node, b: *const rb_node) -> bool {
-    static inline bool __pushable_less(struct rb_node *a, const struct rb_node *b)
-    {
     return dl_entity_preempt(&__node_2_pdl(a).dl, &__node_2_pdl(b).dl);
     }
 #[no_mangle]
 pub unsafe extern "C" fn has_pushable_dl_tasks(rq: *mut rq) -> c_int {
-    static inline int has_pushable_dl_tasks(struct rq *rq)
-    {
     return !RB_EMPTY_ROOT(&rq.dl.pushable_dl_tasks_root.rb_root);
     }
 //
@@ -598,15 +790,14 @@ pub unsafe extern "C" fn has_pushable_dl_tasks(rq: *mut rq) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn enqueue_pushable_dl_task(rq: *mut rq, p: *mut task_struct) {
-    static void enqueue_pushable_dl_task(struct rq *rq, struct task_struct *p)
-    {
-    struct rb_node *leftmost;
-    WARN_ON_ONCE(!RB_EMPTY_NODE(&p.pushable_dl_tasks));
+pub static mut leftmost: *mut c_void = core::ptr::null_mut();
+    WARN_ON_ONCE!(!RB_EMPTY_NODE(&p.pushable_dl_tasks));
     leftmost = rb_add_cached(&p.pushable_dl_tasks,
     &rq.dl.pushable_dl_tasks_root,
     __pushable_less);
-    if (leftmost)
+    if (leftmost) {
     rq.dl.earliest_dl.next = p.dl.deadline;
+    }
     if (!rq.dl.overloaded) {
     dl_set_overload(rq);
     rq.dl.overloaded = 1;
@@ -614,55 +805,50 @@ unsafe extern "C" fn enqueue_pushable_dl_task(rq: *mut rq, p: *mut task_struct) 
     }
 #[no_mangle]
 unsafe extern "C" fn dequeue_pushable_dl_task(rq: *mut rq, p: *mut task_struct) {
-    static void dequeue_pushable_dl_task(struct rq *rq, struct task_struct *p)
-    {
-    struct dl_rq *dl_rq = &rq.dl;
-    struct rb_root_cached *root = &dl_rq.pushable_dl_tasks_root;
-    struct rb_node *leftmost;
-    if (RB_EMPTY_NODE(&p.pushable_dl_tasks))
+    let mut dl_rq = &rq.dl;
+    let mut root = &dl_rq.pushable_dl_tasks_root;
+pub static mut leftmost: *mut c_void = core::ptr::null_mut();
+    if (RB_EMPTY_NODE(&p.pushable_dl_tasks)) {
     return;
+    }
     leftmost = rb_erase_cached(&p.pushable_dl_tasks, root);
-    if (leftmost)
+    if (leftmost) {
     dl_rq.earliest_dl.next = __node_2_pdl(leftmost).dl.deadline;
+    }
     RB_CLEAR_NODE(&p.pushable_dl_tasks);
     if (!has_pushable_dl_tasks(rq) && rq.dl.overloaded) {
     dl_clear_overload(rq);
     rq.dl.overloaded = 0;
     }
     }
-    static int push_dl_task(struct rq *rq);
+// forward_decl: push_dl_task;
 #[no_mangle]
 pub unsafe extern "C" fn need_pull_dl_task(rq: *mut rq, prev: *mut task_struct) -> bool {
-    static inline bool need_pull_dl_task(struct rq *rq, struct task_struct *prev)
-    {
     return rq.online && dl_task(prev);
     }
-    static DEFINE_PER_CPU(struct balance_callback, dl_push_head);
-    static DEFINE_PER_CPU(struct balance_callback, dl_pull_head);
-    static void push_dl_tasks(struct rq *);
-    static void pull_dl_task(struct rq *);
+pub static mut struct balance_callback: usize = 0;
+pub static mut struct balance_callback: usize = 0;
+// forward_decl: push_dl_tasks;
+// forward_decl: pull_dl_task;
 #[no_mangle]
 pub unsafe extern "C" fn deadline_queue_push_tasks(rq: *mut rq) {
-    static inline void deadline_queue_push_tasks(struct rq *rq)
-    {
-    if (!has_pushable_dl_tasks(rq))
+    if (!has_pushable_dl_tasks(rq)) {
     return;
+    }
     queue_balance_callback(rq, &per_cpu(dl_push_head, rq.cpu), push_dl_tasks);
     }
 #[no_mangle]
 pub unsafe extern "C" fn deadline_queue_pull_task(rq: *mut rq) {
-    static inline void deadline_queue_pull_task(struct rq *rq)
-    {
     queue_balance_callback(rq, &per_cpu(dl_pull_head, rq.cpu), pull_dl_task);
     }
-    static struct rq *find_lock_later_rq(struct task_struct *task, struct rq *rq);
-    static struct rq *dl_task_offline_migration(struct rq *rq, struct task_struct *p)
-    {
-    struct rq *later_rq = core::ptr::null_mut();
-    struct dl_bw *dl_b;
+// forward_decl: find_lock_later_rq;
+#[no_mangle]
+pub unsafe extern "C" fn dl_task_offline_migration(rq: *mut rq, p: *mut task_struct) -> *mut c_void {
+    let mut later_rq = core::ptr::null_mut();
+pub static mut dl_b: *mut c_void = core::ptr::null_mut();
     later_rq = find_lock_later_rq(p, rq);
     if (!later_rq) {
-    int cpu;
+    let mut cpu = 0;
 //
 // If we cannot preempt any rq, fall back to pick any
 // online CPU:
@@ -673,7 +859,7 @@ pub unsafe extern "C" fn deadline_queue_pull_task(rq: *mut rq) {
 // Failed to find any suitable CPU.
 // The task will never come back!
 //
-    WARN_ON_ONCE(dl_bandwidth_enabled());
+    WARN_ON_ONCE!(dl_bandwidth_enabled());
 //
 // If admission control is disabled we
 // try a little harder to let the task
@@ -716,14 +902,12 @@ pub unsafe extern "C" fn deadline_queue_pull_task(rq: *mut rq) {
     double_unlock_balance(later_rq, rq);
     return later_rq;
     }
-    static void
-    enqueue_dl_entity(struct sched_dl_entity *dl_se, int flags);
-    static void enqueue_task_dl(struct rq *rq, struct task_struct *p, int flags);
-    static void dequeue_dl_entity(struct sched_dl_entity *dl_se, int flags);
-    static void wakeup_preempt_dl(struct rq *rq, struct task_struct *p, int flags);
-    static inline void replenish_dl_new_period(struct sched_dl_entity *dl_se,
-    struct rq *rq)
-    {
+// forward_decl: enqueue_dl_entity;
+// forward_decl: enqueue_task_dl;
+// forward_decl: dequeue_dl_entity;
+// forward_decl: wakeup_preempt_dl;
+#[no_mangle]
+pub unsafe extern "C" fn replenish_dl_new_period(dl_se: *mut sched_dl_entity, rq: *mut rq) {
 // for non-boosted task, pi_of(dl_se) == dl_se
     dl_se.deadline = rq_clock(rq) + pi_of(dl_se).dl_deadline;
     dl_se.runtime = pi_of(dl_se).dl_runtime;
@@ -751,19 +935,18 @@ pub unsafe extern "C" fn deadline_queue_pull_task(rq: *mut rq) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn setup_new_dl_entity(dl_se: *mut sched_dl_entity) {
-    static inline void setup_new_dl_entity(struct sched_dl_entity *dl_se)
-    {
-    struct dl_rq *dl_rq = dl_rq_of_se(dl_se);
-    struct rq *rq = rq_of_dl_rq(dl_rq);
-    WARN_ON(is_dl_boosted(dl_se));
-    WARN_ON(dl_time_before(rq_clock(rq), dl_se.deadline));
+    let mut dl_rq = dl_rq_of_se(dl_se);
+    let mut rq = rq_of_dl_rq(dl_rq);
+    WARN_ON!(is_dl_boosted(dl_se));
+    WARN_ON!(dl_time_before(rq_clock(rq), dl_se.deadline));
 //
 // We are racing with the deadline timer. So, do nothing because
 // the deadline timer handler will take care of properly recharging
 // the runtime and postponing the deadline
 //
-    if (dl_se.dl_throttled)
+    if (dl_se.dl_throttled) {
     return;
+    }
 //
 // We use the regular wall clock time to set deadlines in the
 // future; in fact, we must consider execution overheads (time
@@ -771,8 +954,8 @@ pub unsafe extern "C" fn setup_new_dl_entity(dl_se: *mut sched_dl_entity) {
 //
     replenish_dl_new_period(dl_se, rq);
     }
-    static int start_dl_timer(struct sched_dl_entity *dl_se);
-    static bool dl_entity_overflow(struct sched_dl_entity *dl_se, u64 t);
+// forward_decl: start_dl_timer;
+// forward_decl: dl_entity_overflow;
 //
 // Pure Earliest Deadline First (EDF) scheduling does not deal with the
 // possibility of a entity lasting more than what it declared, and thus
@@ -793,11 +976,9 @@ pub unsafe extern "C" fn setup_new_dl_entity(dl_se: *mut sched_dl_entity) {
 //
 #[no_mangle]
 unsafe extern "C" fn replenish_dl_entity(dl_se: *mut sched_dl_entity) {
-    static void replenish_dl_entity(struct sched_dl_entity *dl_se)
-    {
-    struct dl_rq *dl_rq = dl_rq_of_se(dl_se);
-    struct rq *rq = rq_of_dl_rq(dl_rq);
-    WARN_ON_ONCE(pi_of(dl_se).dl_runtime <= 0);
+    let mut dl_rq = dl_rq_of_se(dl_se);
+    let mut rq = rq_of_dl_rq(dl_rq);
+    WARN_ON_ONCE!(pi_of(dl_se).dl_runtime <= 0);
 //
 // This could be the case for a !-dl task that is boosted.
 // Just go with full inherited parameters.
@@ -813,8 +994,9 @@ unsafe extern "C" fn replenish_dl_entity(dl_se: *mut sched_dl_entity) {
     dl_se.deadline = rq_clock(rq) + pi_of(dl_se).dl_deadline;
     dl_se.runtime = pi_of(dl_se).dl_runtime;
     }
-    if (dl_se.dl_yielded && dl_se.runtime > 0)
+    if (dl_se.dl_yielded && dl_se.runtime > 0) {
     dl_se.runtime = 0;
+    }
 //
 // We keep moving the deadline away until we get some
 // available runtime for the entity. This ensures correct
@@ -838,10 +1020,12 @@ unsafe extern "C" fn replenish_dl_entity(dl_se: *mut sched_dl_entity) {
     printk_deferred_once("sched: DL replenish lagged too much\n");
     replenish_dl_new_period(dl_se, rq);
     }
-    if (dl_se.dl_yielded)
+    if (dl_se.dl_yielded) {
     dl_se.dl_yielded = 0;
-    if (dl_se.dl_throttled)
+    }
+    if (dl_se.dl_throttled) {
     dl_se.dl_throttled = 0;
+    }
     trace_sched_dl_replenish_tp(dl_se, cpu_of(rq), dl_get_type(dl_se, rq));
 //
 // If this is the replenishment of a deferred reservation,
@@ -905,8 +1089,6 @@ unsafe extern "C" fn replenish_dl_entity(dl_se: *mut sched_dl_entity) {
 //
 #[no_mangle]
 unsafe extern "C" fn dl_entity_overflow(dl_se: *mut sched_dl_entity, t: u64) -> bool {
-    static bool dl_entity_overflow(struct sched_dl_entity *dl_se, u64 t)
-    {
     u64 left, right;
 //
 // left and right are the two sides of the equation above,
@@ -949,17 +1131,16 @@ unsafe extern "C" fn dl_entity_overflow(dl_se: *mut sched_dl_entity, t: u64) -> 
 // [1] Luca Abeni, Giuseppe Lipari, and Juri Lelli. 2015. Constant
 // bandwidth server revisited. SIGBED Rev. 11, 4 (January 2015), 19-24.
 //
-    static void
-    update_dl_revised_wakeup(struct sched_dl_entity *dl_se, struct rq *rq)
-    {
-    let mut laxity: u64 = dl_se.deadline - rq_clock(rq);
+#[no_mangle]
+pub unsafe extern "C" fn update_dl_revised_wakeup(dl_se: *mut sched_dl_entity, rq: *mut rq) {
+pub static mut laxity: u64 = 0;
 //
 // If the task has deadline < period, and the deadline is in the past,
 // it should already be throttled before this check.
 //
 // See update_dl_entity() comments for further details.
 //
-    WARN_ON(dl_time_before(dl_se.deadline, rq_clock(rq)));
+    WARN_ON!(dl_time_before(dl_se.deadline, rq_clock(rq)));
     dl_se.runtime = (dl_se.dl_density * laxity) >> BW_SHIFT;
     }
 //
@@ -994,9 +1175,7 @@ unsafe extern "C" fn dl_entity_overflow(dl_se: *mut sched_dl_entity, t: u64) -> 
 //
 #[no_mangle]
 unsafe extern "C" fn update_dl_entity(dl_se: *mut sched_dl_entity) {
-    static void update_dl_entity(struct sched_dl_entity *dl_se)
-    {
-    struct rq *rq = rq_of_dl_se(dl_se);
+    let mut rq = rq_of_dl_se(dl_se);
     if (dl_time_before(dl_se.deadline, rq_clock(rq)) ||
     dl_entity_overflow(dl_se, rq_clock(rq))) {
     if (unlikely((!dl_is_implicit(dl_se) ||
@@ -1026,8 +1205,6 @@ unsafe extern "C" fn update_dl_entity(dl_se: *mut sched_dl_entity) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn dl_next_period(dl_se: *mut sched_dl_entity) -> u64 {
-    static inline u64 dl_next_period(struct sched_dl_entity *dl_se)
-    {
     return dl_se.deadline - dl_se.dl_deadline + dl_se.dl_period;
     }
 //
@@ -1042,13 +1219,11 @@ pub unsafe extern "C" fn dl_next_period(dl_se: *mut sched_dl_entity) -> u64 {
 //
 #[no_mangle]
 unsafe extern "C" fn start_dl_timer(dl_se: *mut sched_dl_entity) -> c_int {
-    static int start_dl_timer(struct sched_dl_entity *dl_se)
-    {
-    struct hrtimer *timer = &dl_se.dl_timer;
-    struct dl_rq *dl_rq = dl_rq_of_se(dl_se);
-    struct rq *rq = rq_of_dl_rq(dl_rq);
+    let mut timer = &dl_se.dl_timer;
+    let mut dl_rq = dl_rq_of_se(dl_se);
+    let mut rq = rq_of_dl_rq(dl_rq);
     ktime_t now, act;
-    s64 delta;
+    let mut delta = 0;
     lockdep_assert_rq_held(rq);
 //
 // We want the timer to fire at the deadline, but considering
@@ -1062,7 +1237,7 @@ unsafe extern "C" fn start_dl_timer(dl_se: *mut sched_dl_entity) -> c_int {
 // (current u > U).
 //
     if (dl_se.dl_defer_armed) {
-    WARN_ON_ONCE(!dl_se.dl_throttled);
+    WARN_ON_ONCE!(!dl_se.dl_throttled);
     act = ns_to_ktime(dl_se.deadline - dl_se.runtime);
     } else {
 // act = deadline - rel-deadline + period
@@ -1076,8 +1251,9 @@ unsafe extern "C" fn start_dl_timer(dl_se: *mut sched_dl_entity) -> c_int {
 // chosen as the deadline is too small, don't even try to
 // start the timer in the past!
 //
-    if (ktime_us_delta(act, now) < 0)
+    if (ktime_us_delta(act, now) < 0) {
     return 0;
+    }
 //
 // !enqueued will guarantee another callback; even if one is already in
 // progress. This ensures a balanced {get,put}_task_struct().
@@ -1088,16 +1264,15 @@ unsafe extern "C" fn start_dl_timer(dl_se: *mut sched_dl_entity) -> c_int {
 // and observe our state.
 //
     if (!hrtimer_is_queued(timer)) {
-    if (!dl_server(dl_se))
+    if (!dl_server(dl_se)) {
     get_task_struct(dl_task_of(dl_se));
+    }
     hrtimer_start(timer, act, HRTIMER_MODE_ABS_HARD);
     }
     return 1;
     }
 #[no_mangle]
 unsafe extern "C" fn __push_dl_task(rq: *mut rq, rf: *mut rq_flags) {
-    static void __push_dl_task(struct rq *rq, struct rq_flags *rf)
-    {
 //
 // Queueing this task back might have overloaded rq, check if we need
 // to kick someone away.
@@ -1113,17 +1288,16 @@ unsafe extern "C" fn __push_dl_task(rq: *mut rq, rf: *mut rq_flags) {
     }
     }
 // a defer timer will not be reset if the runtime consumed was < dl_server_min_res
-    let mut dl_server_min_res: static u64 = 1 * NSEC_PER_MSEC;
+pub static mut dl_server_min_res: u64 = 0;
 #[no_mangle]
 unsafe extern "C" fn dl_server_timer(timer: *mut hrtimer, dl_se: *mut sched_dl_entity) -> enum hrtimer_restart {
-    static enum hrtimer_restart dl_server_timer(struct hrtimer *timer, struct sched_dl_entity *dl_se)
-    {
-    struct rq *rq = rq_of_dl_se(dl_se);
-    u64 fw;
+    let mut rq = rq_of_dl_se(dl_se);
+    let mut fw = 0;
     scoped_guard (rq_lock, rq) {
-    struct rq_flags *rf = &scope.rf;
-    if (!dl_se.dl_throttled || !dl_se.dl_runtime)
+    let mut rf = &scope.rf;
+    if (!dl_se.dl_throttled || !dl_se.dl_runtime) {
     return HRTIMER_NORESTART;
+    }
     sched_clock_tick();
     update_rq_clock(rq);
 //
@@ -1153,8 +1327,9 @@ unsafe extern "C" fn dl_server_timer(timer: *mut hrtimer, dl_se: *mut sched_dl_e
     dl_se.dl_defer_running = 1;
     }
     enqueue_dl_entity(dl_se, ENQUEUE_REPLENISH);
-    if (!dl_task(dl_se.rq.curr) || dl_entity_preempt(dl_se, &dl_se.rq.curr.dl))
+    if (!dl_task(dl_se.rq.curr) || dl_entity_preempt(dl_se, &dl_se.rq.curr.dl)) {
     resched_curr(rq);
+    }
     __push_dl_task(rq, rf);
     }
     return HRTIMER_NORESTART;
@@ -1174,36 +1349,37 @@ unsafe extern "C" fn dl_server_timer(timer: *mut hrtimer, dl_se: *mut sched_dl_e
 //
 #[no_mangle]
 unsafe extern "C" fn dl_task_timer(timer: *mut hrtimer) -> enum hrtimer_restart {
-    static enum hrtimer_restart dl_task_timer(struct hrtimer *timer)
-    {
-    struct sched_dl_entity *dl_se = container_of(timer,
-    struct sched_dl_entity,
+    let mut dl_se = container_of!(timer, sched_dl_entity,
     dl_timer);
-    struct task_struct *p;
-    struct rq_flags rf;
-    struct rq *rq;
-    if (dl_server(dl_se))
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut rf: usize = 0;
+pub static mut rq: *mut c_void = core::ptr::null_mut();
+    if (dl_server(dl_se)) {
     return dl_server_timer(timer, dl_se);
+    }
     p = dl_task_of(dl_se);
     rq = task_rq_lock(p, &rf);
 //
 // The task might have changed its scheduling policy to something
 // different than SCHED_DEADLINE (through switched_from_dl()).
 //
-    if (!dl_task(p))
-    goto unlock;
+    if (!dl_task(p)) {
+// goto;
+    }
 //
 // The task might have been boosted by someone else and might be in the
 // boosting/deboosting path, its not throttled.
 //
-    if (is_dl_boosted(dl_se))
-    goto unlock;
+    if (is_dl_boosted(dl_se)) {
+// goto;
+    }
 //
 // Spurious timer due to start_dl_timer() race; or we already received
 // a replenishment from rt_mutex_setprio().
 //
-    if (!dl_se.dl_throttled)
-    goto unlock;
+    if (!dl_se.dl_throttled) {
+// goto;
+    }
     sched_clock_tick();
     update_rq_clock(rq);
 //
@@ -1222,7 +1398,7 @@ unsafe extern "C" fn dl_task_timer(timer: *mut hrtimer) -> enum hrtimer_restart 
 //
     if (!task_on_rq_queued(p)) {
     replenish_dl_entity(dl_se);
-    goto unlock;
+// goto;
     }
     if (unlikely(!rq.online)) {
 //
@@ -1240,12 +1416,14 @@ unsafe extern "C" fn dl_task_timer(timer: *mut hrtimer) -> enum hrtimer_restart 
 //
     }
     enqueue_task_dl(rq, p, ENQUEUE_REPLENISH);
-    if (dl_task(rq.donor))
+    if (dl_task(rq.donor)) {
     wakeup_preempt_dl(rq, p, 0);
-    else
+    }
+    else {
     resched_curr(rq);
+    }
     __push_dl_task(rq, &rf);
-    unlock:
+// label;
     task_rq_unlock(rq, p, &rf);
 //
 // This can free the task_struct, including this hrtimer, do not touch
@@ -1256,9 +1434,7 @@ unsafe extern "C" fn dl_task_timer(timer: *mut hrtimer) -> enum hrtimer_restart 
     }
 #[no_mangle]
 unsafe extern "C" fn init_dl_task_timer(dl_se: *mut sched_dl_entity) {
-    static void init_dl_task_timer(struct sched_dl_entity *dl_se)
-    {
-    struct hrtimer *timer = &dl_se.dl_timer;
+    let mut timer = &dl_se.dl_timer;
     hrtimer_setup(timer, dl_task_timer, CLOCK_MONOTONIC, HRTIMER_MODE_REL_HARD);
     }
 //
@@ -1281,24 +1457,22 @@ unsafe extern "C" fn init_dl_task_timer(dl_se: *mut sched_dl_entity) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn dl_check_constrained_dl(dl_se: *mut sched_dl_entity) {
-    static inline void dl_check_constrained_dl(struct sched_dl_entity *dl_se)
-    {
-    struct rq *rq = rq_of_dl_se(dl_se);
+    let mut rq = rq_of_dl_se(dl_se);
     if (dl_time_before(dl_se.deadline, rq_clock(rq)) &&
     dl_time_before(rq_clock(rq), dl_next_period(dl_se))) {
-    if (unlikely(is_dl_boosted(dl_se) || !start_dl_timer(dl_se)))
+    if (unlikely(is_dl_boosted(dl_se) || !start_dl_timer(dl_se))) {
     return;
+    }
     trace_sched_dl_throttle_tp(dl_se, cpu_of(rq), dl_get_type(dl_se, rq));
     dl_se.dl_throttled = 1;
-    if (dl_se.runtime > 0)
+    if (dl_se.runtime > 0) {
     dl_se.runtime = 0;
+    }
     }
     }
     static
 #[no_mangle]
 pub unsafe extern "C" fn dl_runtime_exceeded(dl_se: *mut sched_dl_entity) -> c_int {
-    int dl_runtime_exceeded(struct sched_dl_entity *dl_se)
-    {
     return (dl_se.runtime <= 0);
     }
 //
@@ -1320,9 +1494,7 @@ pub unsafe extern "C" fn dl_runtime_exceeded(dl_se: *mut sched_dl_entity) -> c_i
 //
 #[no_mangle]
 unsafe extern "C" fn grub_reclaim(delta: u64, rq: *mut rq, dl_se: *mut sched_dl_entity) -> u64 {
-    static u64 grub_reclaim(u64 delta, struct rq *rq, struct sched_dl_entity *dl_se)
-    {
-    u64 u_act;
+    let mut u_act = 0;
     u64 u_inact = rq.dl.this_bw - rq.dl.running_bw; /* Utot - Uact */
 //
 // Instead of computing max{u, (u_max - u_inact - u_extra)}, we
@@ -1330,18 +1502,18 @@ unsafe extern "C" fn grub_reclaim(delta: u64, rq: *mut rq, dl_se: *mut sched_dl_
 // can be larger than u_max. So, u_max - u_inact - u_extra would be
 // negative leading to wrong results.
 //
-    if (u_inact + rq.dl.extra_bw > rq.dl.max_bw - dl_se.dl_bw)
+    if (u_inact + rq.dl.extra_bw > rq.dl.max_bw - dl_se.dl_bw) {
     u_act = dl_se.dl_bw;
-    else
+    }
+    else {
     u_act = rq.dl.max_bw - u_inact - rq.dl.extra_bw;
+    }
     u_act = (u_act * rq.dl.bw_ratio) >> RATIO_SHIFT;
     return (delta * u_act) >> BW_SHIFT;
     }
 #[no_mangle]
 pub unsafe extern "C" fn dl_scaled_delta_exec(rq: *mut rq, dl_se: *mut sched_dl_entity, delta_exec: i64) -> i64 {
-    s64 dl_scaled_delta_exec(struct rq *rq, struct sched_dl_entity *dl_se, s64 delta_exec)
-    {
-    s64 scaled_delta_exec;
+    let mut scaled_delta_exec = 0;
 //
 // For tasks that participate in GRUB, we implement GRUB-PA: the
 // spare reclaimed bandwidth is used to clock down frequency.
@@ -1352,37 +1524,39 @@ pub unsafe extern "C" fn dl_scaled_delta_exec(rq: *mut rq, dl_se: *mut sched_dl_
     if (unlikely(dl_se.flags & SCHED_FLAG_RECLAIM)) {
     scaled_delta_exec = grub_reclaim(delta_exec, rq, dl_se);
     } else {
-    let mut cpu: c_int = cpu_of(rq);
-    let mut scale_freq: c_ulong = arch_scale_freq_capacity(cpu);
-    let mut scale_cpu: c_ulong = arch_scale_cpu_capacity(cpu);
+pub static mut cpu: c_int = 0;
+pub static mut scale_freq: c_ulong = 0;
+pub static mut scale_cpu: c_ulong = 0;
     scaled_delta_exec = cap_scale(delta_exec, scale_freq);
     scaled_delta_exec = cap_scale(scaled_delta_exec, scale_cpu);
     }
     return scaled_delta_exec;
     }
-    static inline void
-    update_stats_dequeue_dl(struct dl_rq *dl_rq, struct sched_dl_entity *dl_se, int flags);
+// forward_decl: update_stats_dequeue_dl;
 #[no_mangle]
 unsafe extern "C" fn update_curr_dl_se(rq: *mut rq, dl_se: *mut sched_dl_entity, delta_exec: i64) {
-    static void update_curr_dl_se(struct rq *rq, struct sched_dl_entity *dl_se, s64 delta_exec)
-    {
-    let mut idle: bool = idle_rq(rq);
-    s64 scaled_delta_exec;
+pub static mut idle: bool = false;
+    let mut scaled_delta_exec = 0;
     if (unlikely(delta_exec <= 0)) {
-    if (unlikely(dl_se.dl_yielded))
-    goto throttle;
+    if (unlikely(dl_se.dl_yielded)) {
+// goto;
+    }
     return;
     }
-    if (dl_server(dl_se) && dl_se.dl_throttled && !dl_se.dl_defer)
+    if (dl_server(dl_se) && dl_se.dl_throttled && !dl_se.dl_defer) {
     return;
-    if (dl_entity_is_special(dl_se))
+    }
+    if (dl_entity_is_special(dl_se)) {
     return;
+    }
     scaled_delta_exec = delta_exec;
-    if (!dl_server(dl_se))
+    if (!dl_server(dl_se)) {
     scaled_delta_exec = dl_scaled_delta_exec(rq, dl_se, delta_exec);
+    }
     dl_se.runtime -= scaled_delta_exec;
-    if (dl_se.dl_defer_idle && !idle)
+    if (dl_se.dl_defer_idle && !idle) {
     dl_se.dl_defer_idle = 0;
+    }
 //
 // The DL server can consume its runtime while throttled (not
 // queued / running as regular CFS).
@@ -1395,7 +1569,7 @@ unsafe extern "C" fn update_curr_dl_se(rq: *mut rq, dl_se: *mut sched_dl_entity,
 //
 // Non-servers would never get time accounted while throttled.
 //
-    WARN_ON_ONCE(!dl_server(dl_se));
+    WARN_ON_ONCE!(!dl_server(dl_se));
 //
 // While the server is marked idle, do not push out the
 // activation further, instead wait for the period timer
@@ -1422,25 +1596,27 @@ unsafe extern "C" fn update_curr_dl_se(rq: *mut rq, dl_se: *mut sched_dl_entity,
     dl_se.dl_defer_running = 0;
     hrtimer_try_to_cancel(&dl_se.dl_timer);
     replenish_dl_new_period(dl_se, dl_se.rq);
-    if (idle)
+    if (idle) {
     dl_se.dl_defer_idle = 1;
+    }
 //
 // Not being able to start the timer seems problematic. If it could not
 // be started for whatever reason, we need to "unthrottle" the DL server
 // and queue right away. Otherwise nothing might queue it. That's similar
 // to what enqueue_dl_entity() does on start_dl_timer==0. For now, just warn.
 //
-    WARN_ON_ONCE(!start_dl_timer(dl_se));
+    WARN_ON_ONCE!(!start_dl_timer(dl_se));
     return;
     }
-    throttle:
+// label;
     if (dl_runtime_exceeded(dl_se) || dl_se.dl_yielded) {
     trace_sched_dl_throttle_tp(dl_se, cpu_of(rq), dl_get_type(dl_se, rq));
     dl_se.dl_throttled = 1;
 // If requested, inform the user about runtime overruns.
     if (dl_runtime_exceeded(dl_se) &&
-    (dl_se.flags & SCHED_FLAG_DL_OVERRUN))
+    (dl_se.flags & SCHED_FLAG_DL_OVERRUN)) {
     dl_se.dl_overrun = 1;
+    }
     dequeue_dl_entity(dl_se, 0);
     if (!dl_server(dl_se)) {
     update_stats_dequeue_dl(&rq.dl, dl_se, 0);
@@ -1458,8 +1634,9 @@ unsafe extern "C" fn update_curr_dl_se(rq: *mut rq, dl_se: *mut sched_dl_entity,
     enqueue_task_dl(rq, dl_task_of(dl_se), ENQUEUE_REPLENISH);
     }
     }
-    if (!is_leftmost(dl_se, &rq.dl))
+    if (!is_leftmost(dl_se, &rq.dl)) {
     resched_curr(rq);
+    }
     } else {
     trace_sched_dl_update_tp(dl_se, cpu_of(rq), dl_get_type(dl_se, rq));
     }
@@ -1467,8 +1644,9 @@ unsafe extern "C" fn update_curr_dl_se(rq: *mut rq, dl_se: *mut sched_dl_entity,
 // The dl_server does not account for real-time workload because it
 // is running fair work.
 //
-    if (dl_se.dl_server)
+    if (dl_se.dl_server) {
     return;
+    }
 
 //
 // Because -- for now -- we share the rt bandwidth, we need to
@@ -1482,15 +1660,16 @@ unsafe extern "C" fn update_curr_dl_se(rq: *mut rq, dl_se: *mut sched_dl_entity,
 // out before that can happen.
 //
     if (rt_bandwidth_enabled()) {
-    struct rt_rq *rt_rq = &rq.rt;
+    let mut rt_rq = &rq.rt;
     raw_spin_lock(&rt_rq.rt_runtime_lock);
 //
 // We'll let actual RT tasks worry about the overflow here, we
 // have our own CBS to keep us inline; only account when RT
 // bandwidth is relevant.
 //
-    if (sched_rt_bandwidth_account(rt_rq))
+    if (sched_rt_bandwidth_account(rt_rq)) {
     rt_rq.rt_time += delta_exec;
+    }
     raw_spin_unlock(&rt_rq.rt_runtime_lock);
     }
 
@@ -1505,18 +1684,16 @@ unsafe extern "C" fn update_curr_dl_se(rq: *mut rq, dl_se: *mut sched_dl_entity,
 //
 #[no_mangle]
 pub unsafe extern "C" fn dl_server_update_idle(dl_se: *mut sched_dl_entity, delta_exec: i64) {
-    void dl_server_update_idle(struct sched_dl_entity *dl_se, s64 delta_exec)
-    {
-    if (dl_se.dl_server_active && dl_se.dl_runtime && dl_se.dl_defer)
+    if (dl_se.dl_server_active && dl_se.dl_runtime && dl_se.dl_defer) {
     update_curr_dl_se(dl_se.rq, dl_se, delta_exec);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn dl_server_update(dl_se: *mut sched_dl_entity, delta_exec: i64) {
-    void dl_server_update(struct sched_dl_entity *dl_se, s64 delta_exec)
-    {
 // 0 runtime = fair server disabled
-    if (dl_se.dl_server_active && dl_se.dl_runtime)
+    if (dl_se.dl_server_active && dl_se.dl_runtime) {
     update_curr_dl_se(dl_se.rq, dl_se, delta_exec);
+    }
     }
 //
 // dl_server && dl_defer:
@@ -1720,31 +1897,31 @@ pub unsafe extern "C" fn dl_server_update(dl_se: *mut sched_dl_entity, delta_exe
 //
 #[no_mangle]
 pub unsafe extern "C" fn dl_server_start(dl_se: *mut sched_dl_entity) {
-    void dl_server_start(struct sched_dl_entity *dl_se)
-    {
-    struct rq *rq = dl_se.rq;
+    let mut rq = dl_se.rq;
     dl_se.dl_defer_idle = 0;
     if (!dl_server(dl_se) || dl_se.dl_server_active || !dl_se.dl_runtime ||
-    !dl_se.dl_bw_attached)
+    !dl_se.dl_bw_attached) {
     return;
+    }
 //
 // Update the current task to 'now'.
 //
     rq.donor.sched_class.update_curr(rq);
-    if (WARN_ON_ONCE(!cpu_online(cpu_of(rq))))
+    if (WARN_ON_ONCE!(!cpu_online(cpu_of(rq)))) {
     return;
+    }
     trace_sched_dl_server_start_tp(dl_se, cpu_of(rq), dl_get_type(dl_se, rq));
     dl_se.dl_server_active = 1;
     enqueue_dl_entity(dl_se, ENQUEUE_WAKEUP);
-    if (!dl_task(dl_se.rq.curr) || dl_entity_preempt(dl_se, &rq.curr.dl))
+    if (!dl_task(dl_se.rq.curr) || dl_entity_preempt(dl_se, &rq.curr.dl)) {
     resched_curr(dl_se.rq);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn dl_server_stop(dl_se: *mut sched_dl_entity) {
-    void dl_server_stop(struct sched_dl_entity *dl_se)
-    {
-    if (!dl_server(dl_se) || !dl_server_active(dl_se))
+    if (!dl_server(dl_se) || !dl_server_active(dl_se)) {
     return;
+    }
     trace_sched_dl_server_stop_tp(dl_se, cpu_of(dl_se.rq),
     dl_get_type(dl_se, dl_se.rq));
     dequeue_dl_entity(dl_se, DEQUEUE_SLEEP);
@@ -1754,34 +1931,31 @@ pub unsafe extern "C" fn dl_server_stop(dl_se: *mut sched_dl_entity) {
     dl_se.dl_defer_idle = 0;
     dl_se.dl_server_active = 0;
     }
-    void dl_server_init(struct sched_dl_entity *dl_se, struct rq *rq,
-    dl_server_pick_f pick_task)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn dl_server_init(dl_se: *mut sched_dl_entity, rq: *mut rq, pick_task: dl_server_pick_f) {
     dl_se.rq = rq;
     dl_se.server_pick_task = pick_task;
     }
 #[no_mangle]
 pub unsafe extern "C" fn sched_init_dl_servers() {
-    void sched_init_dl_servers(void)
-    {
-    int cpu;
-    struct rq *rq;
-    struct sched_dl_entity *dl_se;
+    let mut cpu = 0;
+pub static mut rq: *mut c_void = core::ptr::null_mut();
+pub static mut dl_se: *mut c_void = core::ptr::null_mut();
     for_each_online_cpu(cpu) {
-    let mut runtime: u64 = 50 * NSEC_PER_MSEC;
-    let mut period: u64 = 1000 * NSEC_PER_MSEC;
+pub static mut runtime: u64 = 0;
+pub static mut period: u64 = 0;
     rq = cpu_rq(cpu);
     guard(rq_lock_irq)(rq);
     update_rq_clock(rq);
     dl_se = &rq.fair_server;
-    WARN_ON(dl_server(dl_se));
+    WARN_ON!(dl_server(dl_se));
     dl_server_apply_params(dl_se, runtime, period, 1);
     dl_se.dl_server = 1;
     dl_se.dl_defer = 1;
     setup_new_dl_entity(dl_se);
 
     dl_se = &rq.ext_server;
-    WARN_ON(dl_server(dl_se));
+    WARN_ON!(dl_server(dl_se));
     dl_server_apply_params(dl_se, runtime, period, 1);
     dl_se.dl_server = 1;
     dl_se.dl_defer = 1;
@@ -1797,37 +1971,36 @@ pub unsafe extern "C" fn sched_init_dl_servers() {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __dl_server_attach_root(dl_se: *mut sched_dl_entity, rq: *mut rq) {
-    void __dl_server_attach_root(struct sched_dl_entity *dl_se, struct rq *rq)
-    {
-    let mut new_bw: u64 = dl_se.dl_bw;
-    let mut cpu: c_int = cpu_of(rq);
-    struct dl_bw *dl_b;
-    if (!dl_se.dl_bw_attached)
+pub static mut new_bw: u64 = 0;
+pub static mut cpu: c_int = 0;
+pub static mut dl_b: *mut c_void = core::ptr::null_mut();
+    if (!dl_se.dl_bw_attached) {
     return;
+    }
     dl_b = dl_bw_of(cpu_of(rq));
     guard(raw_spinlock)(&dl_b.lock);
-    if (!dl_bw_cpus(cpu))
+    if (!dl_bw_cpus(cpu)) {
     return;
+    }
     __dl_add(dl_b, new_bw, dl_bw_cpus(cpu));
     }
 #[no_mangle]
 pub unsafe extern "C" fn dl_server_apply_params(dl_se: *mut sched_dl_entity, runtime: u64, period: u64, init: bool) -> c_int {
-    int dl_server_apply_params(struct sched_dl_entity *dl_se, u64 runtime, u64 period, bool init)
-    {
     u64 old_bw = (init || !dl_se.dl_bw_attached) ? 0 :
     to_ratio(dl_se.dl_period, dl_se.dl_runtime);
-    let mut new_bw: u64 = to_ratio(period, runtime);
-    struct rq *rq = dl_se.rq;
-    let mut cpu: c_int = cpu_of(rq);
-    struct dl_bw *dl_b;
-    unsigned long cap;
-    int cpus;
+pub static mut new_bw: u64 = 0;
+    let mut rq = dl_se.rq;
+pub static mut cpu: c_int = 0;
+pub static mut dl_b: *mut c_void = core::ptr::null_mut();
+    let mut cap = 0;
+    let mut cpus = 0;
     dl_b = dl_bw_of(cpu);
     guard(raw_spinlock)(&dl_b.lock);
     cpus = dl_bw_cpus(cpu);
     cap = dl_bw_capacity(cpu);
-    if (__dl_overflow(dl_b, cap, old_bw, new_bw))
+    if (__dl_overflow(dl_b, cap, old_bw, new_bw)) {
     return -EBUSY;
+    }
     if (init) {
     __add_rq_bw(new_bw, &rq.dl);
     __dl_add(dl_b, new_bw, cpus);
@@ -1851,11 +2024,10 @@ pub unsafe extern "C" fn dl_server_apply_params(dl_se: *mut sched_dl_entity, run
 //
 // Return -EBUSY if attaching would overflow root domain capacity.
 //
-    static int __dl_server_attach_bw_locked(struct sched_dl_entity *dl_se,
-    struct dl_bw *dl_b, int cpus)
-    {
-    struct rq *rq = dl_se.rq;
-    unsigned long cap;
+#[no_mangle]
+pub unsafe extern "C" fn __dl_server_attach_bw_locked(dl_se: *mut sched_dl_entity, dl_b: *mut dl_bw, cpus: c_int) -> c_int {
+    let mut rq = dl_se.rq;
+    let mut cap = 0;
 //
 // Always update @rq->dl.this_bw, but only update @dl_b->total_bw
 // (and run the overflow check it gates) while this CPU is active.
@@ -1865,8 +2037,9 @@ pub unsafe extern "C" fn dl_server_apply_params(dl_se: *mut sched_dl_entity, run
 //
     if (cpu_active(cpu_of(rq))) {
     cap = dl_bw_capacity(cpu_of(rq));
-    if (__dl_overflow(dl_b, cap, 0, dl_se.dl_bw))
+    if (__dl_overflow(dl_b, cap, 0, dl_se.dl_bw)) {
     return -EBUSY;
+    }
     __dl_add(dl_b, dl_se.dl_bw, cpus);
     }
     __add_rq_bw(dl_se.dl_bw, &rq.dl);
@@ -1876,18 +2049,18 @@ pub unsafe extern "C" fn dl_server_apply_params(dl_se: *mut sched_dl_entity, run
 //
 // Drain @dl_se and remove its bw from the root-domain accounting.
 //
-    static void __dl_server_detach_bw_locked(struct sched_dl_entity *dl_se,
-    struct dl_bw *dl_b, int cpus)
-    {
-    struct rq *rq = dl_se.rq;
+#[no_mangle]
+pub unsafe extern "C" fn __dl_server_detach_bw_locked(dl_se: *mut sched_dl_entity, dl_b: *mut dl_bw, cpus: c_int) {
+    let mut rq = dl_se.rq;
 //
 // If the server is still active (on_rq), dequeue it via
 // dl_server_stop(); task_non_contending() will either subtract
 // @dl_bw from running_bw immediately (0-lag passed) or set
 // dl_non_contending and arm the inactive_timer.
 //
-    if (dl_se.dl_server_active)
+    if (dl_se.dl_server_active) {
     dl_server_stop(dl_se);
+    }
 //
 // Drop @dl_se's contribution from this rq's bandwidth accounting,
 // mirroring the __add_rq_bw() done at attach time.
@@ -1905,8 +2078,9 @@ pub unsafe extern "C" fn dl_server_apply_params(dl_se: *mut sched_dl_entity, run
 // @dl_se->dl_bw_attached; if the CPU becomes active again, the next
 // rebuild will re-publish its bandwidth.
 //
-    if (cpu_active(cpu_of(rq)))
+    if (cpu_active(cpu_of(rq))) {
     __dl_sub(dl_b, dl_se.dl_bw, cpus);
+    }
     dl_se.dl_bw_attached = 0;
     }
 //
@@ -1920,21 +2094,22 @@ pub unsafe extern "C" fn dl_server_apply_params(dl_se: *mut sched_dl_entity, run
 //
 #[no_mangle]
 pub unsafe extern "C" fn dl_server_attach_bw(dl_se: *mut sched_dl_entity) -> c_int {
-    int dl_server_attach_bw(struct sched_dl_entity *dl_se)
-    {
-    struct rq *rq = dl_se.rq;
-    let mut cpu: c_int = cpu_of(rq);
-    struct dl_bw *dl_b;
-    int cpus, ret;
-    if (dl_se.dl_bw_attached)
+    let mut rq = dl_se.rq;
+pub static mut cpu: c_int = 0;
+pub static mut dl_b: *mut c_void = core::ptr::null_mut();
+    let mut cpus = 0;
+    let mut ret = 0;
+    if (dl_se.dl_bw_attached) {
     return 0;
+    }
     scoped_guard (raw_spinlock, &dl_bw_of(cpu).lock) {
     dl_b = dl_bw_of(cpu);
     cpus = dl_bw_cpus(cpu);
     ret = __dl_server_attach_bw_locked(dl_se, dl_b, cpus);
     }
-    if (ret)
+    if (ret) {
     return ret;
+    }
 //
 // The natural 0->nr_running transition that triggers dl_server_start()
 // may have happened while @dl_se was still detached (e.g., between
@@ -1945,8 +2120,9 @@ pub unsafe extern "C" fn dl_server_attach_bw(dl_se: *mut sched_dl_entity) -> c_i
 // it's already active. Skip if @cpu is offline; the server will be
 // started naturally on the first enqueue once @cpu comes back.
 //
-    if (cpu_online(cpu))
+    if (cpu_online(cpu)) {
     dl_server_start(dl_se);
+    }
     return 0;
     }
 //
@@ -1958,13 +2134,12 @@ pub unsafe extern "C" fn dl_server_attach_bw(dl_se: *mut sched_dl_entity) -> c_i
 //
 #[no_mangle]
 pub unsafe extern "C" fn dl_server_detach_bw(dl_se: *mut sched_dl_entity) {
-    void dl_server_detach_bw(struct sched_dl_entity *dl_se)
-    {
-    let mut cpu: c_int = cpu_of(dl_se.rq);
-    struct dl_bw *dl_b;
-    int cpus;
-    if (!dl_se.dl_bw_attached)
+pub static mut cpu: c_int = 0;
+pub static mut dl_b: *mut c_void = core::ptr::null_mut();
+    let mut cpus = 0;
+    if (!dl_se.dl_bw_attached) {
     return;
+    }
     dl_b = dl_bw_of(cpu);
     guard(raw_spinlock)(&dl_b.lock);
     cpus = dl_bw_cpus(cpu);
@@ -1979,28 +2154,33 @@ pub unsafe extern "C" fn dl_server_detach_bw(dl_se: *mut sched_dl_entity) {
 // result of the attach: -EBUSY if attaching @attach_se would overflow root
 // domain capacity (in which case both servers end up detached).
 //
-    int dl_server_swap_bw(struct sched_dl_entity *detach_se,
-    struct sched_dl_entity *attach_se)
-    {
-    struct rq *rq = detach_se.rq;
-    let mut cpu: c_int = cpu_of(rq);
-    struct dl_bw *dl_b;
-    int cpus, ret;
-    WARN_ON_ONCE(attach_se.rq != rq);
+#[no_mangle]
+pub unsafe extern "C" fn dl_server_swap_bw(detach_se: *mut sched_dl_entity, attach_se: *mut sched_dl_entity) -> c_int {
+    let mut rq = detach_se.rq;
+pub static mut cpu: c_int = 0;
+pub static mut dl_b: *mut c_void = core::ptr::null_mut();
+    let mut cpus = 0;
+    let mut ret = 0;
+    WARN_ON_ONCE!(attach_se.rq != rq);
     scoped_guard (raw_spinlock, &dl_bw_of(cpu).lock) {
     dl_b = dl_bw_of(cpu);
     cpus = dl_bw_cpus(cpu);
-    if (detach_se.dl_bw_attached)
+    if (detach_se.dl_bw_attached) {
     __dl_server_detach_bw_locked(detach_se, dl_b, cpus);
-    if (attach_se.dl_bw_attached)
+    }
+    if (attach_se.dl_bw_attached) {
     ret = 0;
-    else
+    }
+    else {
     ret = __dl_server_attach_bw_locked(attach_se, dl_b, cpus);
     }
-    if (ret)
+    }
+    if (ret) {
     return ret;
-    if (cpu_online(cpu))
+    }
+    if (cpu_online(cpu)) {
     dl_server_start(attach_se);
+    }
     return 0;
     }
 //
@@ -2009,13 +2189,12 @@ pub unsafe extern "C" fn dl_server_detach_bw(dl_se: *mut sched_dl_entity) {
 //
 #[no_mangle]
 unsafe extern "C" fn update_curr_dl(rq: *mut rq) {
-    static void update_curr_dl(struct rq *rq)
-    {
-    struct task_struct *donor = rq.donor;
-    struct sched_dl_entity *dl_se = &donor.dl;
-    s64 delta_exec;
-    if (!dl_task(donor) || !on_dl_rq(dl_se))
+    let mut donor = rq.donor;
+    let mut dl_se = &donor.dl;
+    let mut delta_exec = 0;
+    if (!dl_task(donor) || !on_dl_rq(dl_se)) {
     return;
+    }
 //
 // Consumed budget is computed considering the time as
 // observed by schedulable tasks (excluding time spent
@@ -2029,14 +2208,11 @@ unsafe extern "C" fn update_curr_dl(rq: *mut rq) {
     }
 #[no_mangle]
 unsafe extern "C" fn inactive_task_timer(timer: *mut hrtimer) -> enum hrtimer_restart {
-    static enum hrtimer_restart inactive_task_timer(struct hrtimer *timer)
-    {
-    struct sched_dl_entity *dl_se = container_of(timer,
-    struct sched_dl_entity,
+    let mut dl_se = container_of!(timer, sched_dl_entity,
     inactive_timer);
-    struct task_struct *p = core::ptr::null_mut();
-    struct rq_flags rf;
-    struct rq *rq;
+    let mut p = core::ptr::null_mut();
+pub static mut rf: usize = 0;
+pub static mut rq: *mut c_void = core::ptr::null_mut();
     if (!dl_server(dl_se)) {
     p = dl_task_of(dl_se);
     rq = task_rq_lock(p, &rf);
@@ -2046,10 +2222,11 @@ unsafe extern "C" fn inactive_task_timer(timer: *mut hrtimer) -> enum hrtimer_re
     }
     sched_clock_tick();
     update_rq_clock(rq);
-    if (dl_server(dl_se))
-    goto no_task;
+    if (dl_server(dl_se)) {
+// goto;
+    }
     if (!dl_task(p) || READ_ONCE(p.__state) == TASK_DEAD) {
-    struct dl_bw *dl_b = dl_bw_of(task_cpu(p));
+    let mut dl_b = dl_bw_of(task_cpu(p));
     if (READ_ONCE(p.__state) == TASK_DEAD && dl_se.dl_non_contending) {
     sub_running_bw(&p.dl, dl_rq_of_se(&p.dl));
     sub_rq_bw(&p.dl, dl_rq_of_se(&p.dl));
@@ -2059,14 +2236,15 @@ unsafe extern "C" fn inactive_task_timer(timer: *mut hrtimer) -> enum hrtimer_re
     __dl_sub(dl_b, p.dl.dl_bw, dl_bw_cpus(task_cpu(p)));
     raw_spin_unlock(&dl_b.lock);
     __dl_clear_params(dl_se);
-    goto unlock;
+// goto;
     }
-    no_task:
-    if (dl_se.dl_non_contending == 0)
-    goto unlock;
+// label;
+    if (dl_se.dl_non_contending == 0) {
+// goto;
+    }
     sub_running_bw(dl_se, &rq.dl);
     dl_se.dl_non_contending = 0;
-    unlock:
+// label;
     if (!dl_server(dl_se)) {
     task_rq_unlock(rq, p, &rf);
     put_task_struct(p);
@@ -2077,31 +2255,26 @@ unsafe extern "C" fn inactive_task_timer(timer: *mut hrtimer) -> enum hrtimer_re
     }
 #[no_mangle]
 unsafe extern "C" fn init_dl_inactive_task_timer(dl_se: *mut sched_dl_entity) {
-    static void init_dl_inactive_task_timer(struct sched_dl_entity *dl_se)
-    {
-    struct hrtimer *timer = &dl_se.inactive_timer;
+    let mut timer = &dl_se.inactive_timer;
     hrtimer_setup(timer, inactive_task_timer, CLOCK_MONOTONIC, HRTIMER_MODE_REL_HARD);
     }
 
-    rb_entry((node), struct sched_dl_entity, rb_node)
+    rb_entry((node), sched_dl_entity, rb_node)
 #[no_mangle]
 unsafe extern "C" fn inc_dl_deadline(dl_rq: *mut dl_rq, deadline: u64) {
-    static void inc_dl_deadline(struct dl_rq *dl_rq, u64 deadline)
-    {
-    struct rq *rq = rq_of_dl_rq(dl_rq);
+    let mut rq = rq_of_dl_rq(dl_rq);
     if (dl_rq.earliest_dl.curr == 0 ||
     dl_time_before(deadline, dl_rq.earliest_dl.curr)) {
-    if (dl_rq.earliest_dl.curr == 0)
+    if (dl_rq.earliest_dl.curr == 0) {
     cpupri_set(&rq.rd.cpupri, rq.cpu, CPUPRI_HIGHER);
+    }
     dl_rq.earliest_dl.curr = deadline;
     cpudl_set(&rq.rd.cpudl, rq.cpu, deadline);
     }
     }
 #[no_mangle]
 unsafe extern "C" fn dec_dl_deadline(dl_rq: *mut dl_rq, deadline: u64) {
-    static void dec_dl_deadline(struct dl_rq *dl_rq, u64 deadline)
-    {
-    struct rq *rq = rq_of_dl_rq(dl_rq);
+    let mut rq = rq_of_dl_rq(dl_rq);
 //
 // Since we may have removed our earliest (and/or next earliest)
 // task we must recompute them.
@@ -2112,8 +2285,8 @@ unsafe extern "C" fn dec_dl_deadline(dl_rq: *mut dl_rq, deadline: u64) {
     cpudl_clear(&rq.rd.cpudl, rq.cpu, rq.online);
     cpupri_set(&rq.rd.cpupri, rq.cpu, rq.rt.highest_prio.curr);
     } else {
-    struct rb_node *leftmost = rb_first_cached(&dl_rq.root);
-    struct sched_dl_entity *entry = __node_2_dle(leftmost);
+    let mut leftmost = rb_first_cached(&dl_rq.root);
+    let mut entry = __node_2_dle(leftmost);
     dl_rq.earliest_dl.curr = entry.deadline;
     cpudl_set(&rq.rd.cpudl, rq.cpu, entry.deadline);
     }
@@ -2121,115 +2294,111 @@ unsafe extern "C" fn dec_dl_deadline(dl_rq: *mut dl_rq, deadline: u64) {
     static inline
 #[no_mangle]
 pub unsafe extern "C" fn inc_dl_tasks(dl_se: *mut sched_dl_entity, dl_rq: *mut dl_rq) {
-    void inc_dl_tasks(struct sched_dl_entity *dl_se, struct dl_rq *dl_rq)
-    {
-    let mut deadline: u64 = dl_se.deadline;
-    dl_rq.dl_nr_running++;
-    if (!dl_server(dl_se))
+pub static mut deadline: u64 = 0;
+    dl_rq.dl_nr_running += 1;
+    if (!dl_server(dl_se)) {
     add_nr_running(rq_of_dl_rq(dl_rq), 1);
+    }
     inc_dl_deadline(dl_rq, deadline);
     }
     static inline
 #[no_mangle]
 pub unsafe extern "C" fn dec_dl_tasks(dl_se: *mut sched_dl_entity, dl_rq: *mut dl_rq) {
-    void dec_dl_tasks(struct sched_dl_entity *dl_se, struct dl_rq *dl_rq)
-    {
-    WARN_ON(!dl_rq.dl_nr_running);
-    dl_rq.dl_nr_running--;
-    if (!dl_server(dl_se))
+    WARN_ON!(!dl_rq.dl_nr_running);
+    dl_rq.dl_nr_running -= 1;
+    if (!dl_server(dl_se)) {
     sub_nr_running(rq_of_dl_rq(dl_rq), 1);
+    }
     dec_dl_deadline(dl_rq, dl_se.deadline);
     }
 #[no_mangle]
 pub unsafe extern "C" fn __dl_less(a: *mut rb_node, b: *const rb_node) -> bool {
-    static inline bool __dl_less(struct rb_node *a, const struct rb_node *b)
-    {
     return dl_time_before(__node_2_dle(a).deadline, __node_2_dle(b).deadline);
     }
     static __always_inline struct sched_statistics *
-    __schedstats_from_dl_se(struct sched_dl_entity *dl_se)
+    __schedstats_from_dl_se(sched_dl_entity *dl_se)
     {
-    if (!schedstat_enabled())
+    if (!schedstat_enabled()) {
     return core::ptr::null_mut();
-    if (dl_server(dl_se))
+    }
+    if (dl_server(dl_se)) {
     return core::ptr::null_mut();
+    }
     return &dl_task_of(dl_se).stats;
     }
-    static inline void
-    update_stats_wait_start_dl(struct dl_rq *dl_rq, struct sched_dl_entity *dl_se)
-    {
-    struct sched_statistics *stats = __schedstats_from_dl_se(dl_se);
-    if (stats)
+#[no_mangle]
+pub unsafe extern "C" fn update_stats_wait_start_dl(dl_rq: *mut dl_rq, dl_se: *mut sched_dl_entity) {
+    let mut stats = __schedstats_from_dl_se(dl_se);
+    if (stats) {
     __update_stats_wait_start(rq_of_dl_rq(dl_rq), dl_task_of(dl_se), stats);
     }
-    static inline void
-    update_stats_wait_end_dl(struct dl_rq *dl_rq, struct sched_dl_entity *dl_se)
-    {
-    struct sched_statistics *stats = __schedstats_from_dl_se(dl_se);
-    if (stats)
+    }
+#[no_mangle]
+pub unsafe extern "C" fn update_stats_wait_end_dl(dl_rq: *mut dl_rq, dl_se: *mut sched_dl_entity) {
+    let mut stats = __schedstats_from_dl_se(dl_se);
+    if (stats) {
     __update_stats_wait_end(rq_of_dl_rq(dl_rq), dl_task_of(dl_se), stats);
     }
-    static inline void
-    update_stats_enqueue_sleeper_dl(struct dl_rq *dl_rq, struct sched_dl_entity *dl_se)
-    {
-    struct sched_statistics *stats = __schedstats_from_dl_se(dl_se);
-    if (stats)
+    }
+#[no_mangle]
+pub unsafe extern "C" fn update_stats_enqueue_sleeper_dl(dl_rq: *mut dl_rq, dl_se: *mut sched_dl_entity) {
+    let mut stats = __schedstats_from_dl_se(dl_se);
+    if (stats) {
     __update_stats_enqueue_sleeper(rq_of_dl_rq(dl_rq), dl_task_of(dl_se), stats);
     }
-    static inline void
-    update_stats_enqueue_dl(struct dl_rq *dl_rq, struct sched_dl_entity *dl_se,
-    int flags)
-    {
-    if (!schedstat_enabled())
+    }
+#[no_mangle]
+pub unsafe extern "C" fn update_stats_enqueue_dl(dl_rq: *mut dl_rq, dl_se: *mut sched_dl_entity, flags: c_int) {
+    if (!schedstat_enabled()) {
     return;
-    if (flags & ENQUEUE_WAKEUP)
+    }
+    if (flags & ENQUEUE_WAKEUP) {
     update_stats_enqueue_sleeper_dl(dl_rq, dl_se);
     }
-    static inline void
-    update_stats_dequeue_dl(struct dl_rq *dl_rq, struct sched_dl_entity *dl_se,
-    int flags)
-    {
-    struct task_struct *p = dl_task_of(dl_se);
-    struct rq *rq = rq_of_dl_rq(dl_rq);
-    if (!schedstat_enabled())
+    }
+#[no_mangle]
+pub unsafe extern "C" fn update_stats_dequeue_dl(dl_rq: *mut dl_rq, dl_se: *mut sched_dl_entity, flags: c_int) {
+    let mut p = dl_task_of(dl_se);
+    let mut rq = rq_of_dl_rq(dl_rq);
+    if (!schedstat_enabled()) {
     return;
-    if (p != rq.curr)
+    }
+    if (p != rq.curr) {
     update_stats_wait_end_dl(dl_rq, dl_se);
+    }
     if ((flags & DEQUEUE_SLEEP)) {
-    unsigned int state;
+    let mut state = 0;
     state = READ_ONCE(p.__state);
-    if (state & TASK_INTERRUPTIBLE)
+    if (state & TASK_INTERRUPTIBLE) {
     __schedstat_set(p.stats.sleep_start,
     rq_clock(rq_of_dl_rq(dl_rq)));
-    if (state & TASK_UNINTERRUPTIBLE)
+    }
+    if (state & TASK_UNINTERRUPTIBLE) {
     __schedstat_set(p.stats.block_start,
     rq_clock(rq_of_dl_rq(dl_rq)));
     }
     }
+    }
 #[no_mangle]
 unsafe extern "C" fn __enqueue_dl_entity(dl_se: *mut sched_dl_entity) {
-    static void __enqueue_dl_entity(struct sched_dl_entity *dl_se)
-    {
-    struct dl_rq *dl_rq = dl_rq_of_se(dl_se);
-    WARN_ON_ONCE(!RB_EMPTY_NODE(&dl_se.rb_node));
+    let mut dl_rq = dl_rq_of_se(dl_se);
+    WARN_ON_ONCE!(!RB_EMPTY_NODE(&dl_se.rb_node));
     rb_add_cached(&dl_se.rb_node, &dl_rq.root, __dl_less);
     inc_dl_tasks(dl_se, dl_rq);
     }
 #[no_mangle]
 unsafe extern "C" fn __dequeue_dl_entity(dl_se: *mut sched_dl_entity) {
-    static void __dequeue_dl_entity(struct sched_dl_entity *dl_se)
-    {
-    struct dl_rq *dl_rq = dl_rq_of_se(dl_se);
-    if (RB_EMPTY_NODE(&dl_se.rb_node))
+    let mut dl_rq = dl_rq_of_se(dl_se);
+    if (RB_EMPTY_NODE(&dl_se.rb_node)) {
     return;
+    }
     rb_erase_cached(&dl_se.rb_node, &dl_rq.root);
     RB_CLEAR_NODE(&dl_se.rb_node);
     dec_dl_tasks(dl_se, dl_rq);
     }
-    static void
-    enqueue_dl_entity(struct sched_dl_entity *dl_se, int flags)
-    {
-    WARN_ON_ONCE(on_dl_rq(dl_se));
+#[no_mangle]
+pub unsafe extern "C" fn enqueue_dl_entity(dl_se: *mut sched_dl_entity, flags: c_int) {
+    WARN_ON_ONCE!(on_dl_rq(dl_se));
     update_stats_enqueue_dl(dl_rq_of_se(dl_se), dl_se, flags);
 //
 // Check if a constrained deadline task was activated
@@ -2237,10 +2406,11 @@ unsafe extern "C" fn __dequeue_dl_entity(dl_se: *mut sched_dl_entity) {
 // If that is the case, the task will be throttled and
 // the replenishment timer will be set to the next period.
 //
-    if (!dl_se.dl_throttled && !dl_is_implicit(dl_se))
+    if (!dl_se.dl_throttled && !dl_is_implicit(dl_se)) {
     dl_check_constrained_dl(dl_se);
+    }
     if (flags & (ENQUEUE_RESTORE|ENQUEUE_MIGRATING)) {
-    struct dl_rq *dl_rq = dl_rq_of_se(dl_se);
+    let mut dl_rq = dl_rq_of_se(dl_se);
     add_rq_bw(dl_se, dl_rq);
     add_running_bw(dl_se, dl_rq);
     }
@@ -2257,8 +2427,9 @@ unsafe extern "C" fn __dequeue_dl_entity(dl_se: *mut sched_dl_entity) {
 // add_running_bw().
 //
     if (!dl_se.dl_defer && dl_se.dl_throttled && !(flags & ENQUEUE_REPLENISH)) {
-    if (flags & ENQUEUE_WAKEUP)
+    if (flags & ENQUEUE_WAKEUP) {
     task_contending(dl_se, flags);
+    }
     return;
     }
 //
@@ -2280,8 +2451,9 @@ unsafe extern "C" fn __dequeue_dl_entity(dl_se: *mut sched_dl_entity) {
 // If the reservation is still throttled, e.g., it got replenished but is a
 // deferred task and still got to wait, don't enqueue.
 //
-    if (dl_se.dl_throttled && start_dl_timer(dl_se))
+    if (dl_se.dl_throttled && start_dl_timer(dl_se)) {
     return;
+    }
 //
 // We're about to enqueue, make sure we're not ->dl_throttled!
 // In case the timer was not started, say because the defer time
@@ -2297,11 +2469,9 @@ unsafe extern "C" fn __dequeue_dl_entity(dl_se: *mut sched_dl_entity) {
     }
 #[no_mangle]
 unsafe extern "C" fn dequeue_dl_entity(dl_se: *mut sched_dl_entity, flags: c_int) {
-    static void dequeue_dl_entity(struct sched_dl_entity *dl_se, int flags)
-    {
     __dequeue_dl_entity(dl_se);
     if (flags & (DEQUEUE_SAVE|DEQUEUE_MIGRATING)) {
-    struct dl_rq *dl_rq = dl_rq_of_se(dl_se);
+    let mut dl_rq = dl_rq_of_se(dl_se);
     sub_running_bw(dl_se, dl_rq);
     sub_rq_bw(dl_se, dl_rq);
     }
@@ -2314,15 +2484,14 @@ unsafe extern "C" fn dequeue_dl_entity(dl_se: *mut sched_dl_entity, flags: c_int
 // (the task moves from "active contending" to "active non contending"
 // or "inactive")
 //
-    if (flags & DEQUEUE_SLEEP)
+    if (flags & DEQUEUE_SLEEP) {
     task_non_contending(dl_se, true);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn enqueue_task_dl(rq: *mut rq, p: *mut task_struct, flags: c_int) {
-    static void enqueue_task_dl(struct rq *rq, struct task_struct *p, int flags)
-    {
-    struct sched_dl_entity *dl_se = &p.dl;
-    struct dl_rq *dl_rq = &rq.dl;
+    let mut dl_se = &p.dl;
+    let mut dl_rq = &rq.dl;
     if (is_dl_boosted(dl_se)) {
 //
 // Because of delays in the detection of the overrun of a
@@ -2356,35 +2525,41 @@ unsafe extern "C" fn enqueue_task_dl(rq: *mut rq, p: *mut task_struct, flags: c_
 // the throttle.
 //
     dl_se.dl_throttled = 0;
-    if (!(flags & ENQUEUE_REPLENISH))
+    if (!(flags & ENQUEUE_REPLENISH)) {
     printk_deferred_once("sched: DL de-boosted task PID %d: REPLENISH flag missing\n",
     task_pid_nr(p));
+    }
     return;
     }
     check_schedstat_required();
     update_stats_wait_start_dl(dl_rq, dl_se);
-    if (task_on_rq_migrating(p))
+    if (task_on_rq_migrating(p)) {
     flags |= ENQUEUE_MIGRATING;
+    }
     enqueue_dl_entity(dl_se, flags);
-    if (dl_server(dl_se))
+    if (dl_server(dl_se)) {
     return;
-    if (task_is_blocked(p))
+    }
+    if (task_is_blocked(p)) {
     return;
-    if (dl_rq.curr == dl_se)
+    }
+    if (dl_rq.curr == dl_se) {
     return;
-    if (!task_current(rq, p) && !dl_se.dl_throttled && p.nr_cpus_allowed > 1)
+    }
+    if (!task_current(rq, p) && !dl_se.dl_throttled && p.nr_cpus_allowed > 1) {
     enqueue_pushable_dl_task(rq, p);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn dequeue_task_dl(rq: *mut rq, p: *mut task_struct, flags: c_int) -> bool {
-    static bool dequeue_task_dl(struct rq *rq, struct task_struct *p, int flags)
-    {
     update_curr_dl(rq);
-    if (task_on_rq_migrating(p))
+    if (task_on_rq_migrating(p)) {
     flags |= DEQUEUE_MIGRATING;
+    }
     dequeue_dl_entity(&p.dl, flags);
-    if (!p.dl.dl_throttled && !dl_server(&p.dl))
+    if (!p.dl.dl_throttled && !dl_server(&p.dl)) {
     dequeue_pushable_dl_task(rq, p);
+    }
     return true;
     }
 //
@@ -2399,8 +2574,6 @@ unsafe extern "C" fn dequeue_task_dl(rq: *mut rq, p: *mut task_struct, flags: c_
 //
 #[no_mangle]
 unsafe extern "C" fn yield_task_dl(rq: *mut rq) {
-    static void yield_task_dl(struct rq *rq)
-    {
 //
 // We make the task go to sleep until its current deadline by
 // forcing its runtime to zero. This way, update_curr_dl() stops
@@ -2412,27 +2585,27 @@ unsafe extern "C" fn yield_task_dl(rq: *mut rq) {
     update_curr_dl(rq);
 //
 // Tell update_rq_clock() that we've just updated,
-// so we don't do microscopic update in schedule()
+so we don't do microscopic update in schedule()
 // and double the fastpath cost.
 //
     rq_clock_skip_update(rq);
     }
-    static inline bool dl_task_is_earliest_deadline(struct task_struct *p,
-    struct rq *rq)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn dl_task_is_earliest_deadline(p: *mut task_struct, rq: *mut rq) -> bool {
     return (!rq.dl.dl_nr_running ||
     dl_time_before(p.dl.deadline,
     rq.dl.earliest_dl.curr));
     }
-    static int find_later_rq(struct task_struct *task);
-    static int
-    select_task_rq_dl(struct task_struct *p, int cpu, int flags)
-    {
-    struct task_struct *curr, *donor;
-    bool select_rq;
-    struct rq *rq;
-    if (!(flags & WF_TTWU))
+// forward_decl: find_later_rq;
+#[no_mangle]
+pub unsafe extern "C" fn select_task_rq_dl(p: *mut task_struct, cpu: c_int, flags: c_int) -> c_int {
+    let mut curr = core::ptr::null_mut();
+    let mut donor = core::ptr::null_mut();
+    let mut select_rq = 0;
+pub static mut rq: *mut c_void = core::ptr::null_mut();
+    if (!(flags & WF_TTWU)) {
     return cpu;
+    }
     rq = cpu_rq(cpu);
     rcu_read_lock();
     curr = READ_ONCE(rq.curr); /* unlocked access */
@@ -2454,25 +2627,26 @@ unsafe extern "C" fn yield_task_dl(rq: *mut rq) {
 // Take the capacity of the CPU into account to
 // ensure it fits the requirement of the task.
 //
-    if (sched_asym_cpucap_active())
+    if (sched_asym_cpucap_active()) {
     select_rq |= !dl_task_fits_capacity(p, cpu);
+    }
     if (select_rq) {
-    let mut target: c_int = find_later_rq(p);
+pub static mut target: c_int = 0;
     if (target != -1 &&
-    dl_task_is_earliest_deadline(p, cpu_rq(target)))
+    dl_task_is_earliest_deadline(p, cpu_rq(target))) {
     cpu = target;
+    }
     }
     rcu_read_unlock();
     return cpu;
     }
 #[no_mangle]
 unsafe extern "C" fn migrate_task_rq_dl(p: *mut task_struct, __maybe_unused: int new_cpu) {
-    static void migrate_task_rq_dl(struct task_struct *p, int new_cpu __maybe_unused)
-    {
-    struct rq_flags rf;
-    struct rq *rq;
-    if (READ_ONCE(p.__state) != TASK_WAKING)
+pub static mut rf: usize = 0;
+pub static mut rq: *mut c_void = core::ptr::null_mut();
+    if (READ_ONCE(p.__state) != TASK_WAKING) {
     return;
+    }
     rq = task_rq(p);
 //
 // Since p->state == TASK_WAKING, set_task_cpu() has been called
@@ -2498,33 +2672,31 @@ unsafe extern "C" fn migrate_task_rq_dl(p: *mut task_struct, __maybe_unused: int
     }
 #[no_mangle]
 unsafe extern "C" fn check_preempt_equal_dl(rq: *mut rq, p: *mut task_struct) {
-    static void check_preempt_equal_dl(struct rq *rq, struct task_struct *p)
-    {
 //
 // Current can't be migrated, useless to reschedule,
 // let's hope p can move out.
 //
     if (rq.curr.nr_cpus_allowed == 1 ||
-    !cpudl_find(&rq.rd.cpudl, rq.donor, core::ptr::null_mut()))
+    !cpudl_find(&rq.rd.cpudl, rq.donor, core::ptr::null_mut())) {
     return;
+    }
 //
 // p is migratable, so let's not schedule it and
 // see if it is pushed or pulled somewhere else.
 //
     if (p.nr_cpus_allowed != 1 &&
-    cpudl_find(&rq.rd.cpudl, p, core::ptr::null_mut()))
+    cpudl_find(&rq.rd.cpudl, p, core::ptr::null_mut())) {
     return;
+    }
     resched_curr(rq);
     }
 #[no_mangle]
 unsafe extern "C" fn balance_dl(rq: *mut rq, rf: *mut rq_flags) -> c_int {
-    static int balance_dl(struct rq *rq, struct rq_flags *rf)
-    {
 //
 // Note, rq->donor may change during rq lock drops,
 // so don't re-use prev across lock drops
 //
-    struct task_struct *p = rq.donor;
+    let mut p = rq.donor;
     if (!on_dl_rq(&p.dl) && need_pull_dl_task(rq, p)) {
 //
 // This is OK, because current is on_cpu, which avoids it being
@@ -2544,17 +2716,16 @@ unsafe extern "C" fn balance_dl(rq: *mut rq, rf: *mut rq_flags) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn wakeup_preempt_dl(rq: *mut rq, p: *mut task_struct, flags: c_int) {
-    static void wakeup_preempt_dl(struct rq *rq, struct task_struct *p, int flags)
-    {
-    struct task_struct *donor = rq.donor;
+    let mut donor = rq.donor;
 //
 // Can only get preempted by stop-class, and those should be
 // few and short lived, doesn't really make sense to push
 // anything away for that.
 //
     if (p.sched_class != &dl_sched_class ||
-    donor.sched_class != &dl_sched_class)
+    donor.sched_class != &dl_sched_class) {
     return;
+    }
     if (dl_entity_preempt(&p.dl, &donor.dl)) {
     resched_curr(rq);
     return;
@@ -2564,21 +2735,18 @@ unsafe extern "C" fn wakeup_preempt_dl(rq: *mut rq, p: *mut task_struct, flags: 
 // let us try to decide what's the best thing to do...
 //
     if ((p.dl.deadline == rq.donor.dl.deadline) &&
-    !test_tsk_need_resched(rq.curr))
+    !test_tsk_need_resched(rq.curr)) {
     check_preempt_equal_dl(rq, p);
+    }
     }
 
 #[no_mangle]
 unsafe extern "C" fn start_hrtick_dl(rq: *mut rq, dl_se: *mut sched_dl_entity) {
-    static void start_hrtick_dl(struct rq *rq, struct sched_dl_entity *dl_se)
-    {
     hrtick_start(rq, dl_se.runtime);
     }
 
 #[no_mangle]
 unsafe extern "C" fn start_hrtick_dl(rq: *mut rq, dl_se: *mut sched_dl_entity) {
-    static void start_hrtick_dl(struct rq *rq, struct sched_dl_entity *dl_se)
-    {
     }
 
 //
@@ -2587,51 +2755,55 @@ unsafe extern "C" fn start_hrtick_dl(rq: *mut rq, dl_se: *mut sched_dl_entity) {
 //
 #[no_mangle]
 unsafe extern "C" fn set_next_task_dl(rq: *mut rq, p: *mut task_struct, first: bool) {
-    static void set_next_task_dl(struct rq *rq, struct task_struct *p, bool first)
-    {
-    struct sched_dl_entity *dl_se = &p.dl;
-    struct dl_rq *dl_rq = &rq.dl;
+    let mut dl_se = &p.dl;
+    let mut dl_rq = &rq.dl;
     p.se.exec_start = rq_clock_task(rq);
-    if (on_dl_rq(&p.dl))
+    if (on_dl_rq(&p.dl)) {
     update_stats_wait_end_dl(dl_rq, dl_se);
+    }
 // You can't push away the running task
     dequeue_pushable_dl_task(rq, p);
-    WARN_ON_ONCE(dl_rq.curr);
+    WARN_ON_ONCE!(dl_rq.curr);
     dl_rq.curr = dl_se;
-    if (!first)
+    if (!first) {
     return;
-    if (rq.donor.sched_class != &dl_sched_class)
+    }
+    if (rq.donor.sched_class != &dl_sched_class) {
     update_dl_rq_load_avg(rq_clock_pelt(rq), rq, 0);
+    }
     deadline_queue_push_tasks(rq);
-    if (hrtick_enabled_dl(rq))
+    if (hrtick_enabled_dl(rq)) {
     start_hrtick_dl(rq, &p.dl);
     }
-    static struct sched_dl_entity *pick_next_dl_entity(struct dl_rq *dl_rq)
-    {
-    struct rb_node *left = rb_first_cached(&dl_rq.root);
-    if (!left)
+    }
+#[no_mangle]
+pub unsafe extern "C" fn pick_next_dl_entity(dl_rq: *mut dl_rq) -> *mut c_void {
+    let mut left = rb_first_cached(&dl_rq.root);
+    if (!left) {
     return core::ptr::null_mut();
+    }
     return __node_2_dle(left);
     }
 //
 // __pick_next_task_dl - Helper to pick the next -deadline task to run.
 // @rq: The runqueue to pick the next task from.
 //
-    static struct task_struct *__pick_task_dl(struct rq *rq, struct rq_flags *rf)
-    {
-    struct sched_dl_entity *dl_se;
-    struct dl_rq *dl_rq = &rq.dl;
-    struct task_struct *p;
-    again:
-    if (!sched_dl_runnable(rq))
+#[no_mangle]
+pub unsafe extern "C" fn __pick_task_dl(rq: *mut rq, rf: *mut rq_flags) -> *mut c_void {
+pub static mut dl_se: *mut c_void = core::ptr::null_mut();
+    let mut dl_rq = &rq.dl;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+// label;
+    if (!sched_dl_runnable(rq)) {
     return core::ptr::null_mut();
+    }
     dl_se = pick_next_dl_entity(dl_rq);
-    WARN_ON_ONCE(!dl_se);
+    WARN_ON_ONCE!(!dl_se);
     if (dl_server(dl_se)) {
     p = dl_se.server_pick_task(dl_se, rf);
     if (!p) {
     dl_server_stop(dl_se);
-    goto again;
+// goto;
     }
     rq.dl_server = dl_se;
     } else {
@@ -2639,26 +2811,27 @@ unsafe extern "C" fn set_next_task_dl(rq: *mut rq, p: *mut task_struct, first: b
     }
     return p;
     }
-    static struct task_struct *pick_task_dl(struct rq *rq, struct rq_flags *rf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pick_task_dl(rq: *mut rq, rf: *mut rq_flags) -> *mut c_void {
     return __pick_task_dl(rq, rf);
     }
 #[no_mangle]
 unsafe extern "C" fn put_prev_task_dl(rq: *mut rq, p: *mut task_struct, next: *mut task_struct) {
-    static void put_prev_task_dl(struct rq *rq, struct task_struct *p, struct task_struct *next)
-    {
-    struct sched_dl_entity *dl_se = &p.dl;
-    struct dl_rq *dl_rq = &rq.dl;
-    if (on_dl_rq(dl_se))
+    let mut dl_se = &p.dl;
+    let mut dl_rq = &rq.dl;
+    if (on_dl_rq(dl_se)) {
     update_stats_wait_start_dl(dl_rq, dl_se);
+    }
     update_curr_dl(rq);
     update_dl_rq_load_avg(rq_clock_pelt(rq), rq, 1);
-    WARN_ON_ONCE(dl_rq.curr != dl_se);
+    WARN_ON_ONCE!(dl_rq.curr != dl_se);
     dl_rq.curr = core::ptr::null_mut();
-    if (task_is_blocked(p))
+    if (task_is_blocked(p)) {
     return;
-    if (on_dl_rq(dl_se) && p.nr_cpus_allowed > 1)
+    }
+    if (on_dl_rq(dl_se) && p.nr_cpus_allowed > 1) {
     enqueue_pushable_dl_task(rq, p);
+    }
     }
 //
 // scheduler tick hitting a task of our scheduling class.
@@ -2670,8 +2843,6 @@ unsafe extern "C" fn put_prev_task_dl(rq: *mut rq, p: *mut task_struct, next: *m
 //
 #[no_mangle]
 unsafe extern "C" fn task_tick_dl(rq: *mut rq, p: *mut task_struct, queued: c_int) {
-    static void task_tick_dl(struct rq *rq, struct task_struct *p, int queued)
-    {
     update_curr_dl(rq);
     update_dl_rq_load_avg(rq_clock_pelt(rq), rq, 1);
 //
@@ -2680,13 +2851,12 @@ unsafe extern "C" fn task_tick_dl(rq: *mut rq, p: *mut task_struct, queued: c_in
 // be set and schedule() will start a new hrtick for the next task.
 //
     if (hrtick_enabled_dl(rq) && queued && p.dl.runtime > 0 &&
-    is_leftmost(&p.dl, &rq.dl))
+    is_leftmost(&p.dl, &rq.dl)) {
     start_hrtick_dl(rq, &p.dl);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn task_fork_dl(p: *mut task_struct) {
-    static void task_fork_dl(struct task_struct *p)
-    {
 //
 // SCHED_DEADLINE tasks cannot fork and this is achieved through
 // sched_fork()
@@ -2698,42 +2868,45 @@ pub const DL_MAX_TRIES: c_int = 3;
 // Return the earliest pushable rq's task, which is suitable to be executed
 // on the CPU, NULL otherwise:
 //
-    static struct task_struct *pick_earliest_pushable_dl_task(struct rq *rq, int cpu)
-    {
-    struct task_struct *p = core::ptr::null_mut();
-    struct rb_node *next_node;
-    if (!has_pushable_dl_tasks(rq))
+#[no_mangle]
+pub unsafe extern "C" fn pick_earliest_pushable_dl_task(rq: *mut rq, cpu: c_int) -> *mut c_void {
+    let mut p = core::ptr::null_mut();
+pub static mut next_node: *mut c_void = core::ptr::null_mut();
+    if (!has_pushable_dl_tasks(rq)) {
     return core::ptr::null_mut();
+    }
     next_node = rb_first_cached(&rq.dl.pushable_dl_tasks_root);
     while (next_node) {
     p = __node_2_pdl(next_node);
-    if (task_is_pushable(rq, p, cpu))
+    if (task_is_pushable(rq, p, cpu)) {
     return p;
+    }
     next_node = rb_next(next_node);
     }
     return core::ptr::null_mut();
     }
 // Access rule: must be called on local CPU with preemption disabled
-    static DEFINE_PER_CPU(cpumask_var_t, local_cpu_mask_dl);
+pub static mut cpumask_var_t: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn find_later_rq(task: *mut task_struct) -> c_int {
-    static int find_later_rq(struct task_struct *task)
-    {
-    struct sched_domain *sd;
-    struct cpumask *later_mask = this_cpu_cpumask_var_ptr(local_cpu_mask_dl);
-    let mut this_cpu: c_int = smp_processor_id();
-    let mut cpu: c_int = task_cpu(task);
+pub static mut sd: *mut c_void = core::ptr::null_mut();
+    let mut later_mask = this_cpu_cpumask_var_ptr(local_cpu_mask_dl);
+pub static mut this_cpu: c_int = 0;
+pub static mut cpu: c_int = 0;
 // Make sure the mask is initialized first
-    if (unlikely(!later_mask))
+    if (unlikely(!later_mask)) {
     return -1;
-    if (task.nr_cpus_allowed == 1)
+    }
+    if (task.nr_cpus_allowed == 1) {
     return -1;
+    }
 //
 // We have to consider system topology and task affinity
 // first, then we can look for a suitable CPU.
 //
-    if (!cpudl_find(&task_rq(task).rd.cpudl, task, later_mask))
+    if (!cpudl_find(&task_rq(task).rd.cpudl, task, later_mask)) {
     return -1;
+    }
 //
 // If we are here, some targets have been found, including
 // the most suitable which is, among the runqueues where the
@@ -2746,18 +2919,20 @@ unsafe extern "C" fn find_later_rq(task: *mut task_struct) -> c_int {
 // The last CPU where the task run is our first
 // guess, since it is most likely cache-hot there.
 //
-    if (cpumask_test_cpu(cpu, later_mask))
+    if (cpumask_test_cpu(cpu, later_mask)) {
     return cpu;
+    }
 //
 // Check if this_cpu is to be skipped (i.e., it is
 // not in the mask) or not.
 //
-    if (!cpumask_test_cpu(this_cpu, later_mask))
+    if (!cpumask_test_cpu(this_cpu, later_mask)) {
     this_cpu = -1;
+    }
     rcu_read_lock();
     for_each_domain(cpu, sd) {
     if (sd.flags & SD_WAKE_AFFINE) {
-    int best_cpu;
+    let mut best_cpu = 0;
 //
 // If possible, preempting this_cpu is
 // cheaper than migrating.
@@ -2786,19 +2961,22 @@ unsafe extern "C" fn find_later_rq(task: *mut task_struct) -> c_int {
 // At this point, all our guesses failed, we just return
 // 'something', and let the caller sort the things out.
 //
-    if (this_cpu != -1)
+    if (this_cpu != -1) {
     return this_cpu;
+    }
     cpu = cpumask_any_distribute(later_mask);
-    if (cpu < nr_cpu_ids)
+    if (cpu < nr_cpu_ids) {
     return cpu;
+    }
     return -1;
     }
-    static struct task_struct *pick_next_pushable_dl_task(struct rq *rq)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pick_next_pushable_dl_task(rq: *mut rq) -> *mut c_void {
     struct task_struct *i, *p = core::ptr::null_mut();
-    struct rb_node *next_node;
-    if (!has_pushable_dl_tasks(rq))
+pub static mut next_node: *mut c_void = core::ptr::null_mut();
+    if (!has_pushable_dl_tasks(rq)) {
     return core::ptr::null_mut();
+    }
     next_node = rb_first_cached(&rq.dl.pushable_dl_tasks_root);
     while (next_node) {
     i = __node_2_pdl(next_node);
@@ -2809,25 +2987,27 @@ unsafe extern "C" fn find_later_rq(task: *mut task_struct) -> c_int {
     }
     next_node = rb_next(next_node);
     }
-    if (!p)
+    if (!p) {
     return core::ptr::null_mut();
-    WARN_ON_ONCE(rq.cpu != task_cpu(p));
-    WARN_ON_ONCE(task_current(rq, p));
-    WARN_ON_ONCE(p.nr_cpus_allowed <= 1);
-    WARN_ON_ONCE(!task_on_rq_queued(p));
-    WARN_ON_ONCE(!dl_task(p));
+    }
+    WARN_ON_ONCE!(rq.cpu != task_cpu(p));
+    WARN_ON_ONCE!(task_current(rq, p));
+    WARN_ON_ONCE!(p.nr_cpus_allowed <= 1);
+    WARN_ON_ONCE!(!task_on_rq_queued(p));
+    WARN_ON_ONCE!(!dl_task(p));
     return p;
     }
 // Locks the rq it finds
-    static struct rq *find_lock_later_rq(struct task_struct *task, struct rq *rq)
-    {
-    struct rq *later_rq = core::ptr::null_mut();
-    int tries;
-    int cpu;
-    for (tries = 0; tries < DL_MAX_TRIES; tries++) {
+#[no_mangle]
+pub unsafe extern "C" fn find_lock_later_rq(task: *mut task_struct, rq: *mut rq) -> *mut c_void {
+    let mut later_rq = core::ptr::null_mut();
+    let mut tries = 0;
+    let mut cpu = 0;
+    while (tries < DL_MAX_TRIES) {
     cpu = find_later_rq(task);
-    if ((cpu == -1) || (cpu == rq.cpu))
+    if ((cpu == -1) || (cpu == rq.cpu)) {
     break;
+    }
     later_rq = cpu_rq(cpu);
     if (!dl_task_is_earliest_deadline(task, later_rq)) {
 //
@@ -2880,8 +3060,9 @@ unsafe extern "C" fn find_later_rq(task: *mut task_struct) -> c_int {
 // its earliest one has a later deadline than our
 // task, the rq is a good one.
 //
-    if (dl_task_is_earliest_deadline(task, later_rq))
+    if (dl_task_is_earliest_deadline(task, later_rq)) {
     break;
+    }
 // Otherwise we try again.
     double_unlock_balance(rq, later_rq);
     later_rq = core::ptr::null_mut();
@@ -2895,15 +3076,14 @@ unsafe extern "C" fn find_later_rq(task: *mut task_struct) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn push_dl_task(rq: *mut rq) -> c_int {
-    static int push_dl_task(struct rq *rq)
-    {
-    struct task_struct *next_task;
-    struct rq *later_rq;
-    let mut ret: c_int = 0;
+pub static mut next_task: *mut c_void = core::ptr::null_mut();
+pub static mut later_rq: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     next_task = pick_next_pushable_dl_task(rq);
-    if (!next_task)
+    if (!next_task) {
     return 0;
-    retry:
+    }
+// label;
 //
 // If next_task preempts rq->curr, and rq->curr
 // can move away, it makes sense to just reschedule
@@ -2915,16 +3095,18 @@ unsafe extern "C" fn push_dl_task(rq: *mut rq) -> c_int {
     resched_curr(rq);
     return 0;
     }
-    if (is_migration_disabled(next_task))
+    if (is_migration_disabled(next_task)) {
     return 0;
-    if (WARN_ON(next_task == rq.curr))
+    }
+    if (WARN_ON!(next_task == rq.curr)) {
     return 0;
+    }
 // We might release rq lock
     get_task_struct(next_task);
 // Will lock the rq it'll find
     later_rq = find_lock_later_rq(next_task, rq);
     if (!later_rq) {
-    struct task_struct *task;
+pub static mut task: *mut c_void = core::ptr::null_mut();
 //
 // We must check all this again, since
 // find_lock_later_rq releases rq->lock and it is
@@ -2936,50 +3118,51 @@ unsafe extern "C" fn push_dl_task(rq: *mut rq) -> c_int {
 // The task is still there. We don't try
 // again, some other CPU will pull it when ready.
 //
-    goto out;
+// goto;
     }
-    if (!task)
+    if (!task) {
 // No more tasks
-    goto out;
+// goto;
+    }
     put_task_struct(next_task);
     next_task = task;
-    goto retry;
+// goto;
     }
     move_queued_task_locked(rq, later_rq, next_task);
     ret = 1;
     resched_curr(later_rq);
     double_unlock_balance(rq, later_rq);
-    out:
+// label;
     put_task_struct(next_task);
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn push_dl_tasks(rq: *mut rq) {
-    static void push_dl_tasks(struct rq *rq)
-    {
 // push_dl_task() will return true if it moved a -deadline task
-    while (push_dl_task(rq))
+    while (push_dl_task(rq)) {
     ;
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn pull_dl_task(this_rq: *mut rq) {
-    static void pull_dl_task(struct rq *this_rq)
-    {
-    let mut this_cpu: c_int = this_rq.cpu, cpu;
-    struct task_struct *p, *push_task;
-    let mut resched: bool = false;
-    struct rq *src_rq;
-    let mut dmin: u64 = LONG_MAX;
-    if (likely(!dl_overloaded(this_rq)))
+pub static mut this_cpu: c_int = 0;
+    let mut p = core::ptr::null_mut();
+    let mut push_task = core::ptr::null_mut();
+pub static mut resched: bool = false;
+pub static mut src_rq: *mut c_void = core::ptr::null_mut();
+pub static mut dmin: u64 = 0;
+    if (likely(!dl_overloaded(this_rq))) {
     return;
+    }
 //
 // Match the barrier from dl_set_overloaded; this guarantees that if we
 // see overloaded we must also see the dlo_mask bit.
 //
     smp_rmb();
     for_each_cpu(cpu, this_rq.rd.dlo_mask) {
-    if (this_cpu == cpu)
+    if (this_cpu == cpu) {
     continue;
+    }
     src_rq = cpu_rq(cpu);
 //
 // It looks racy, and it is! However, as in sched_rt.c,
@@ -2987,8 +3170,9 @@ unsafe extern "C" fn pull_dl_task(this_rq: *mut rq) {
 //
     if (this_rq.dl.dl_nr_running &&
     dl_time_before(this_rq.dl.earliest_dl.curr,
-    src_rq.dl.earliest_dl.next))
+    src_rq.dl.earliest_dl.next)) {
     continue;
+    }
 // Might drop this_rq->lock
     push_task = core::ptr::null_mut();
     double_lock_balance(this_rq, src_rq);
@@ -2996,8 +3180,9 @@ unsafe extern "C" fn pull_dl_task(this_rq: *mut rq) {
 // If there are no more pullable tasks on the
 // rq, we're done with it.
 //
-    if (src_rq.dl.dl_nr_running <= 1)
-    goto skip;
+    if (src_rq.dl.dl_nr_running <= 1) {
+// goto;
+    }
     p = pick_earliest_pushable_dl_task(src_rq, this_cpu);
 //
 // We found a task to be pulled if:
@@ -3006,15 +3191,16 @@ unsafe extern "C" fn pull_dl_task(this_rq: *mut rq) {
 //
     if (p && dl_time_before(p.dl.deadline, dmin) &&
     dl_task_is_earliest_deadline(p, this_rq)) {
-    WARN_ON(p == src_rq.curr);
-    WARN_ON(!task_on_rq_queued(p));
+    WARN_ON!(p == src_rq.curr);
+    WARN_ON!(!task_on_rq_queued(p));
 //
 // Then we pull iff p has actually an earlier
 // deadline than the current task of its runqueue.
 //
     if (dl_time_before(p.dl.deadline,
-    src_rq.donor.dl.deadline))
-    goto skip;
+    src_rq.donor.dl.deadline)) {
+// goto;
+    }
     if (is_migration_disabled(p)) {
     push_task = get_push_task(src_rq);
     } else {
@@ -3024,7 +3210,7 @@ unsafe extern "C" fn pull_dl_task(this_rq: *mut rq) {
     }
 // Is there any other task even earlier?
     }
-    skip:
+// label;
     double_unlock_balance(this_rq, src_rq);
     if (push_task) {
     preempt_disable();
@@ -3035,8 +3221,9 @@ unsafe extern "C" fn pull_dl_task(this_rq: *mut rq) {
     raw_spin_rq_lock(this_rq);
     }
     }
-    if (resched)
+    if (resched) {
     resched_curr(this_rq);
+    }
     }
 //
 // Since the task is not running and a reschedule is not going to happen
@@ -3044,8 +3231,6 @@ unsafe extern "C" fn pull_dl_task(this_rq: *mut rq) {
 //
 #[no_mangle]
 unsafe extern "C" fn task_woken_dl(rq: *mut rq, p: *mut task_struct) {
-    static void task_woken_dl(struct rq *rq, struct task_struct *p)
-    {
     if (!task_on_cpu(rq, p) &&
     !test_tsk_need_resched(rq.curr) &&
     p.nr_cpus_allowed > 1 &&
@@ -3055,11 +3240,10 @@ unsafe extern "C" fn task_woken_dl(rq: *mut rq, p: *mut task_struct) {
     push_dl_tasks(rq);
     }
     }
-    static void set_cpus_allowed_dl(struct task_struct *p,
-    struct affinity_context *ctx)
-    {
-    struct rq *rq;
-    WARN_ON_ONCE(!dl_task(p));
+#[no_mangle]
+pub unsafe extern "C" fn set_cpus_allowed_dl(p: *mut task_struct, ctx: *mut affinity_context) {
+pub static mut rq: *mut c_void = core::ptr::null_mut();
+    WARN_ON_ONCE!(!dl_task(p));
     rq = task_rq(p);
 //
 // Migrating a SCHED_DEADLINE task between exclusive
@@ -3068,7 +3252,7 @@ unsafe extern "C" fn task_woken_dl(rq: *mut rq, p: *mut task_struct) {
 // domain (see cpuset_can_attach()).
 //
     if (dl_task_needs_bw_move(p, ctx.new_mask)) {
-    struct dl_bw *src_dl_b;
+pub static mut src_dl_b: *mut c_void = core::ptr::null_mut();
     src_dl_b = dl_bw_of(cpu_of(rq));
 //
 // We now free resources of the root_domain we are migrating
@@ -3081,42 +3265,41 @@ unsafe extern "C" fn task_woken_dl(rq: *mut rq, p: *mut task_struct) {
     }
     set_cpus_allowed_common(p, ctx);
     }
-    bool dl_task_needs_bw_move(struct task_struct *p,
-    const struct cpumask *new_mask)
-    {
-    if (!dl_task(p))
+#[no_mangle]
+pub unsafe extern "C" fn dl_task_needs_bw_move(p: *mut task_struct, new_mask: *mut cpumask) -> bool {
+    if (!dl_task(p)) {
     return false;
+    }
     return !cpumask_intersects(task_rq(p).rd.span, new_mask);
     }
 // Assumes rq->lock is held
 #[no_mangle]
 unsafe extern "C" fn rq_online_dl(rq: *mut rq) {
-    static void rq_online_dl(struct rq *rq)
-    {
-    if (rq.dl.overloaded)
+    if (rq.dl.overloaded) {
     dl_set_overload(rq);
-    if (rq.dl.dl_nr_running > 0)
+    }
+    if (rq.dl.dl_nr_running > 0) {
     cpudl_set(&rq.rd.cpudl, rq.cpu, rq.dl.earliest_dl.curr);
-    else
+    }
+    else {
     cpudl_clear(&rq.rd.cpudl, rq.cpu, true);
+    }
     }
 // Assumes rq->lock is held
 #[no_mangle]
 unsafe extern "C" fn rq_offline_dl(rq: *mut rq) {
-    static void rq_offline_dl(struct rq *rq)
-    {
-    if (rq.dl.overloaded)
+    if (rq.dl.overloaded) {
     dl_clear_overload(rq);
+    }
     cpudl_clear(&rq.rd.cpudl, rq.cpu, false);
     }
 #[no_mangle]
-pub unsafe extern "C" fn init_sched_dl_class() -> void __init {
-    void __init init_sched_dl_class(void)
-    {
-    unsigned int i;
-    for_each_possible_cpu(i)
+pub unsafe extern "C" fn init_sched_dl_class()  {
+    let mut i = 0;
+    for_each_possible_cpu(i) {
     zalloc_cpumask_var_node(&per_cpu(local_cpu_mask_dl, i),
     GFP_KERNEL, cpu_to_node(i));
+    }
     }
 //
 // This function always returns a non-empty bitmap in @cpus. This is because
@@ -3125,9 +3308,7 @@ pub unsafe extern "C" fn init_sched_dl_class() -> void __init {
 //
 #[no_mangle]
 unsafe extern "C" fn dl_get_task_effective_cpus(p: *mut task_struct, cpus: *mut cpumask) {
-    static void dl_get_task_effective_cpus(struct task_struct *p, struct cpumask *cpus)
-    {
-    const struct cpumask *hk_msk;
+pub static mut hk_msk: *mut c_void = core::ptr::null_mut();
     hk_msk = housekeeping_cpumask(HK_TYPE_DOMAIN);
     if (housekeeping_enabled(HK_TYPE_DOMAIN)) {
     if (!cpumask_intersects(p.cpus_ptr, hk_msk)) {
@@ -3149,13 +3330,11 @@ unsafe extern "C" fn dl_get_task_effective_cpus(p: *mut task_struct, cpus: *mut 
 // The caller should hold cpuset_mutex
 #[no_mangle]
 pub unsafe extern "C" fn dl_add_task_root_domain(p: *mut task_struct) {
-    void dl_add_task_root_domain(struct task_struct *p)
-    {
-    struct rq_flags rf;
-    struct rq *rq;
-    struct dl_bw *dl_b;
-    unsigned int cpu;
-    struct cpumask *msk;
+pub static mut rf: usize = 0;
+pub static mut rq: *mut c_void = core::ptr::null_mut();
+pub static mut dl_b: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
+pub static mut msk: *mut c_void = core::ptr::null_mut();
     raw_spin_lock_irqsave(&p.pi_lock, rf.flags);
     if (!dl_task(p) || dl_entity_is_special(&p.dl)) {
     raw_spin_unlock_irqrestore(&p.pi_lock, rf.flags);
@@ -3164,7 +3343,7 @@ pub unsafe extern "C" fn dl_add_task_root_domain(p: *mut task_struct) {
     msk = this_cpu_cpumask_var_ptr(local_cpu_mask_dl);
     dl_get_task_effective_cpus(p, msk);
     cpu = cpumask_first_and(cpu_active_mask, msk);
-    BUG_ON(cpu >= nr_cpu_ids);
+    BUG_ON!(cpu >= nr_cpu_ids);
     rq = cpu_rq(cpu);
     dl_b = &rq.rd.dl_bw;
     raw_spin_lock(&dl_b.lock);
@@ -3174,63 +3353,59 @@ pub unsafe extern "C" fn dl_add_task_root_domain(p: *mut task_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn dl_server_add_bw(rd: *mut root_domain, cpu: c_int) {
-    static void dl_server_add_bw(struct root_domain *rd, int cpu)
-    {
-    struct sched_dl_entity *dl_se;
+pub static mut dl_se: *mut c_void = core::ptr::null_mut();
     dl_se = &cpu_rq(cpu).fair_server;
-    if (dl_server(dl_se) && dl_se.dl_bw_attached && cpu_active(cpu))
+    if (dl_server(dl_se) && dl_se.dl_bw_attached && cpu_active(cpu)) {
     __dl_add(&rd.dl_bw, dl_se.dl_bw, dl_bw_cpus(cpu));
+    }
 
     dl_se = &cpu_rq(cpu).ext_server;
-    if (dl_server(dl_se) && dl_se.dl_bw_attached && cpu_active(cpu))
+    if (dl_server(dl_se) && dl_se.dl_bw_attached && cpu_active(cpu)) {
     __dl_add(&rd.dl_bw, dl_se.dl_bw, dl_bw_cpus(cpu));
+    }
 
     }
 #[no_mangle]
 unsafe extern "C" fn dl_server_read_bw(cpu: c_int) -> u64 {
-    static u64 dl_server_read_bw(int cpu)
-    {
-    let mut dl_bw: u64 = 0;
+pub static mut dl_bw: u64 = 0;
     if (cpu_rq(cpu).fair_server.dl_server &&
-    cpu_rq(cpu).fair_server.dl_bw_attached)
+    cpu_rq(cpu).fair_server.dl_bw_attached) {
     dl_bw += cpu_rq(cpu).fair_server.dl_bw;
+    }
 
     if (cpu_rq(cpu).ext_server.dl_server &&
-    cpu_rq(cpu).ext_server.dl_bw_attached)
+    cpu_rq(cpu).ext_server.dl_bw_attached) {
     dl_bw += cpu_rq(cpu).ext_server.dl_bw;
+    }
 
     return dl_bw;
     }
 #[no_mangle]
 pub unsafe extern "C" fn dl_clear_root_domain(rd: *mut root_domain) {
-    void dl_clear_root_domain(struct root_domain *rd)
-    {
-    int i;
+    let mut i = 0;
     guard(raw_spinlock_irqsave)(&rd.dl_bw.lock);
 //
 // Reset total_bw to zero and extra_bw to max_bw so that next
 // loop will add dl-servers contributions back properly,
 //
     rd.dl_bw.total_bw = 0;
-    for_each_cpu(i, rd.span)
+    for_each_cpu(i, rd.span) {
     cpu_rq(i).dl.extra_bw = cpu_rq(i).dl.max_bw;
+    }
 //
 // dl_servers are not tasks. Since dl_add_task_root_domain ignores
 // them, we need to account for them here explicitly.
 //
-    for_each_cpu(i, rd.span)
+    for_each_cpu(i, rd.span) {
     dl_server_add_bw(rd, i);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn dl_clear_root_domain_cpu(cpu: c_int) {
-    void dl_clear_root_domain_cpu(int cpu)
-    {
     dl_clear_root_domain(cpu_rq(cpu).rd);
     }
 #[no_mangle]
 unsafe extern "C" fn switched_from_dl(rq: *mut rq, p: *mut task_struct) {
-    static void switched_from_dl(struct rq *rq, struct task_struct *p)
-    {
 //
 // task_non_contending() can start the "inactive timer" (if the 0-lag
 // time is in the future). If the task switches back to dl before
@@ -3239,8 +3414,9 @@ unsafe extern "C" fn switched_from_dl(rq: *mut rq, p: *mut task_struct) {
 // SCHED_DEADLINE until the 0-lag time passes, inactive_task_timer()
 // will reset the task parameters.
 //
-    if (task_on_rq_queued(p) && p.dl.dl_runtime)
+    if (task_on_rq_queued(p) && p.dl.dl_runtime) {
     task_non_contending(&p.dl, false);
+    }
 //
 // In case a task is setscheduled out from SCHED_DEADLINE we need to
 // keep track of that on its cpuset (for correct bandwidth tracking).
@@ -3253,8 +3429,9 @@ unsafe extern "C" fn switched_from_dl(rq: *mut rq, p: *mut task_struct) {
 // some other class. We need to remove its contribution from
 // this rq running_bw now, or sub_rq_bw (below) will complain.
 //
-    if (p.dl.dl_non_contending)
+    if (p.dl.dl_non_contending) {
     sub_running_bw(&p.dl, &rq.dl);
+    }
     sub_rq_bw(&p.dl, &rq.dl);
     }
 //
@@ -3262,15 +3439,17 @@ unsafe extern "C" fn switched_from_dl(rq: *mut rq, p: *mut task_struct) {
 // at the 0-lag time, because the task could have been migrated
 // while SCHED_OTHER in the meanwhile.
 //
-    if (p.dl.dl_non_contending)
+    if (p.dl.dl_non_contending) {
     p.dl.dl_non_contending = 0;
+    }
 //
 // Since this might be the only -deadline task on the rq,
 // this is the right place to try to pull some other one
 // from an overloaded CPU, if any.
 //
-    if (!task_on_rq_queued(p) || rq.dl.dl_nr_running)
+    if (!task_on_rq_queued(p) || rq.dl.dl_nr_running) {
     return;
+    }
     deadline_queue_pull_task(rq);
     }
 //
@@ -3279,8 +3458,6 @@ unsafe extern "C" fn switched_from_dl(rq: *mut rq, p: *mut task_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn switched_to_dl(rq: *mut rq, p: *mut task_struct) {
-    static void switched_to_dl(struct rq *rq, struct task_struct *p)
-    {
     cancel_inactive_timer(&p.dl);
 //
 // In case a task is setscheduled to SCHED_DEADLINE we need to keep
@@ -3293,25 +3470,27 @@ unsafe extern "C" fn switched_to_dl(rq: *mut rq, p: *mut task_struct) {
     return;
     }
     if (rq.donor != p) {
-    if (p.nr_cpus_allowed > 1 && rq.dl.overloaded)
+    if (p.nr_cpus_allowed > 1 && rq.dl.overloaded) {
     deadline_queue_push_tasks(rq);
-    if (dl_task(rq.donor))
+    }
+    if (dl_task(rq.donor)) {
     wakeup_preempt_dl(rq, p, 0);
-    else
+    }
+    else {
     resched_curr(rq);
+    }
     } else {
     update_dl_rq_load_avg(rq_clock_pelt(rq), rq, 0);
     }
     }
 #[no_mangle]
 unsafe extern "C" fn get_prio_dl(rq: *mut rq, p: *mut task_struct) -> u64 {
-    static u64 get_prio_dl(struct rq *rq, struct task_struct *p)
-    {
 //
 // Make sure to update current so we don't return a stale value.
 //
-    if (task_current_donor(rq, p))
+    if (task_current_donor(rq, p)) {
     update_curr_dl(rq);
+    }
     return p.dl.deadline;
     }
 //
@@ -3320,22 +3499,24 @@ unsafe extern "C" fn get_prio_dl(rq: *mut rq, p: *mut task_struct) -> u64 {
 //
 #[no_mangle]
 unsafe extern "C" fn prio_changed_dl(rq: *mut rq, p: *mut task_struct, old_deadline: u64) {
-    static void prio_changed_dl(struct rq *rq, struct task_struct *p, u64 old_deadline)
-    {
-    if (!task_on_rq_queued(p))
+    if (!task_on_rq_queued(p)) {
     return;
-    if (p.dl.deadline == old_deadline)
+    }
+    if (p.dl.deadline == old_deadline) {
     return;
-    if (dl_time_before(old_deadline, p.dl.deadline))
+    }
+    if (dl_time_before(old_deadline, p.dl.deadline)) {
     deadline_queue_pull_task(rq);
+    }
     if (task_current_donor(rq, p)) {
 //
 // If we now have a earlier deadline task than p,
 // then reschedule, provided p is still on this
 // runqueue.
 //
-    if (dl_time_before(rq.dl.earliest_dl.curr, p.dl.deadline))
+    if (dl_time_before(rq.dl.earliest_dl.curr, p.dl.deadline)) {
     resched_curr(rq);
+    }
     } else {
 //
 // Current may not be deadline in case p was throttled but we
@@ -3344,15 +3525,14 @@ unsafe extern "C" fn prio_changed_dl(rq: *mut rq, p: *mut task_struct, old_deadl
 // Otherwise, if p was given an earlier deadline, reschedule.
 //
     if (!dl_task(rq.curr) ||
-    dl_time_before(p.dl.deadline, rq.curr.dl.deadline))
+    dl_time_before(p.dl.deadline, rq.curr.dl.deadline)) {
     resched_curr(rq);
+    }
     }
     }
 
 #[no_mangle]
 unsafe extern "C" fn task_is_throttled_dl(p: *mut task_struct, cpu: c_int) -> c_int {
-    static int task_is_throttled_dl(struct task_struct *p, int cpu)
-    {
     return p.dl.dl_throttled;
     }
 
@@ -3387,18 +3567,16 @@ unsafe extern "C" fn task_is_throttled_dl(p: *mut task_struct, cpu: c_int) -> c_
 // Used for dl_bw check and update, used under sched_rt_handler()::mutex and
 // sched_domains_mutex.
 //
-    u64 dl_cookie;
+    let mut dl_cookie = 0;
 #[no_mangle]
 pub unsafe extern "C" fn sched_dl_global_validate() -> c_int {
-    int sched_dl_global_validate(void)
-    {
-    let mut runtime: u64 = global_rt_runtime();
-    let mut period: u64 = global_rt_period();
-    let mut new_bw: u64 = to_ratio(period, runtime);
-    let mut cookie: u64 = ++dl_cookie;
-    struct dl_bw *dl_b;
+pub static mut runtime: u64 = 0;
+pub static mut period: u64 = 0;
+pub static mut new_bw: u64 = 0;
+pub static mut cookie: u64 = 0;
+pub static mut dl_b: *mut c_void = core::ptr::null_mut();
     int cpu, cpus, ret = 0;
-    unsigned long flags;
+    let mut flags = 0;
 //
 // Here we want to check the bandwidth not being set to some
 // value smaller than the currently allocated bandwidth in
@@ -3406,25 +3584,26 @@ pub unsafe extern "C" fn sched_dl_global_validate() -> c_int {
 //
     for_each_online_cpu(cpu) {
     rcu_read_lock_sched();
-    if (dl_bw_visited(cpu, cookie))
-    goto next;
+    if (dl_bw_visited(cpu, cookie)) {
+// goto;
+    }
     dl_b = dl_bw_of(cpu);
     cpus = dl_bw_cpus(cpu);
     raw_spin_lock_irqsave(&dl_b.lock, flags);
-    if (new_bw * cpus < dl_b.total_bw)
+    if (new_bw * cpus < dl_b.total_bw) {
     ret = -EBUSY;
+    }
     raw_spin_unlock_irqrestore(&dl_b.lock, flags);
-    next:
+// label;
     rcu_read_unlock_sched();
-    if (ret)
+    if (ret) {
     break;
+    }
     }
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn init_dl_rq_bw_ratio(dl_rq: *mut dl_rq) {
-    static void init_dl_rq_bw_ratio(struct dl_rq *dl_rq)
-    {
     if (global_rt_runtime() == RUNTIME_INF) {
     dl_rq.bw_ratio = 1 << RATIO_SHIFT;
     dl_rq.max_bw = dl_rq.extra_bw = 1 << BW_SHIFT;
@@ -3437,17 +3616,17 @@ unsafe extern "C" fn init_dl_rq_bw_ratio(dl_rq: *mut dl_rq) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn sched_dl_do_global() {
-    void sched_dl_do_global(void)
-    {
-    let mut new_bw: u64 = -1;
-    let mut cookie: u64 = ++dl_cookie;
-    struct dl_bw *dl_b;
-    int cpu;
-    unsigned long flags;
-    if (global_rt_runtime() != RUNTIME_INF)
+pub static mut new_bw: u64 = 0;
+pub static mut cookie: u64 = 0;
+pub static mut dl_b: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
+    let mut flags = 0;
+    if (global_rt_runtime() != RUNTIME_INF) {
     new_bw = to_ratio(global_rt_period(), global_rt_runtime());
-    for_each_possible_cpu(cpu)
+    }
+    for_each_possible_cpu(cpu) {
     init_dl_rq_bw_ratio(&cpu_rq(cpu).dl);
+    }
     for_each_possible_cpu(cpu) {
     rcu_read_lock_sched();
     if (dl_bw_visited(cpu, cookie)) {
@@ -3469,20 +3648,21 @@ pub unsafe extern "C" fn sched_dl_do_global() {
 //
 // This function is called while holding p's rq->lock.
 //
-    int sched_dl_overflow(struct task_struct *p, int policy,
-    const struct sched_attr *attr)
-    {
-    let mut period: u64 = attr.sched_period ?: attr.sched_deadline;
-    let mut runtime: u64 = attr.sched_runtime;
-    let mut new_bw: u64 = dl_policy(policy) ? to_ratio(period, runtime) : 0;
+#[no_mangle]
+pub unsafe extern "C" fn sched_dl_overflow(p: *mut task_struct, policy: c_int, attr: *mut sched_attr) -> c_int {
+pub static mut period: u64 = 0;
+pub static mut runtime: u64 = 0;
+pub static mut new_bw: u64 = 0;
     int cpus, err = -1, cpu = task_cpu(p);
-    struct dl_bw *dl_b = dl_bw_of(cpu);
-    unsigned long cap;
-    if (attr.sched_flags & SCHED_FLAG_SUGOV)
+    let mut dl_b = dl_bw_of(cpu);
+    let mut cap = 0;
+    if (attr.sched_flags & SCHED_FLAG_SUGOV) {
     return 0;
+    }
 // !deadline task may carry old deadline bandwidth
-    if (new_bw == p.dl.dl_bw && task_has_dl_policy(p))
+    if (new_bw == p.dl.dl_bw && task_has_dl_policy(p)) {
     return 0;
+    }
 //
 // Either if a task, enters, leave, or stays -deadline but changes
 // its parameters, we may need to update accordingly the total
@@ -3493,8 +3673,9 @@ pub unsafe extern "C" fn sched_dl_do_global() {
     cap = dl_bw_capacity(cpu);
     if (dl_policy(policy) && !task_has_dl_policy(p) &&
     !__dl_overflow(dl_b, cap, 0, new_bw)) {
-    if (hrtimer_active(&p.dl.inactive_timer))
+    if (hrtimer_active(&p.dl.inactive_timer)) {
     __dl_sub(dl_b, p.dl.dl_bw, cpus);
+    }
     __dl_add(dl_b, new_bw, cpus);
     err = 0;
     } else if (dl_policy(policy) && task_has_dl_policy(p) &&
@@ -3531,9 +3712,7 @@ pub unsafe extern "C" fn sched_dl_do_global() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __setparam_dl(p: *mut task_struct, attr: *const sched_attr) {
-    void __setparam_dl(struct task_struct *p, const struct sched_attr *attr)
-    {
-    struct sched_dl_entity *dl_se = &p.dl;
+    let mut dl_se = &p.dl;
     dl_se.dl_runtime = attr.sched_runtime;
     dl_se.dl_deadline = attr.sched_deadline;
     dl_se.dl_period = attr.sched_period ?: dl_se.dl_deadline;
@@ -3543,17 +3722,16 @@ pub unsafe extern "C" fn __setparam_dl(p: *mut task_struct, attr: *const sched_a
     }
 #[no_mangle]
 pub unsafe extern "C" fn __getparam_dl(p: *mut task_struct, attr: *mut sched_attr, flags: c_uint) {
-    void __getparam_dl(struct task_struct *p, struct sched_attr *attr, unsigned int flags)
-    {
-    struct sched_dl_entity *dl_se = &p.dl;
-    struct rq *rq = task_rq(p);
-    u64 adj_deadline;
+    let mut dl_se = &p.dl;
+    let mut rq = task_rq(p);
+    let mut adj_deadline = 0;
     attr.sched_priority = p.rt_priority;
     if (flags & SCHED_GETATTR_FLAG_DL_DYNAMIC) {
     guard(raw_spinlock_irq)(&rq.__lock);
     update_rq_clock(rq);
-    if (task_current(rq, p))
+    if (task_current(rq, p)) {
     update_curr_dl(rq);
+    }
     attr.sched_runtime = dl_se.runtime;
     adj_deadline = dl_se.deadline - rq_clock(rq) + ktime_get_ns();
     attr.sched_deadline = adj_deadline;
@@ -3577,39 +3755,44 @@ pub unsafe extern "C" fn __getparam_dl(p: *mut task_struct, attr: *mut sched_att
 //
 #[no_mangle]
 pub unsafe extern "C" fn __checkparam_dl(attr: *const sched_attr) -> bool {
-    bool __checkparam_dl(const struct sched_attr *attr)
-    {
     u64 period, max, min;
 // special dl tasks don't actually use any parameter
-    if (attr.sched_flags & SCHED_FLAG_SUGOV)
+    if (attr.sched_flags & SCHED_FLAG_SUGOV) {
     return true;
+    }
 // deadline != 0
-    if (attr.sched_deadline == 0)
+    if (attr.sched_deadline == 0) {
     return false;
+    }
 //
 // Since we truncate DL_SCALE bits, make sure we're at least
 // that big.
 //
-    if (attr.sched_runtime < (1ULL << DL_SCALE))
+    if (attr.sched_runtime < (1ULL << DL_SCALE)) {
     return false;
+    }
 //
 // Since we use the MSB for wrap-around and sign issues, make
 // sure it's not set (mind that period can be equal to zero).
 //
     if (attr.sched_deadline & (1ULL << 63) ||
-    attr.sched_period & (1ULL << 63))
+    attr.sched_period & (1ULL << 63)) {
     return false;
+    }
     period = attr.sched_period;
-    if (!period)
+    if (!period) {
     period = attr.sched_deadline;
+    }
 // runtime <= deadline <= period (if period != 0)
     if (period < attr.sched_deadline ||
-    attr.sched_deadline < attr.sched_runtime)
+    attr.sched_deadline < attr.sched_runtime) {
     return false;
+    }
     max = (u64)READ_ONCE(sysctl_sched_dl_period_max) * NSEC_PER_USEC;
     min = (u64)READ_ONCE(sysctl_sched_dl_period_min) * NSEC_PER_USEC;
-    if (period < min || period > max)
+    if (period < min || period > max) {
     return false;
+    }
     return true;
     }
 //
@@ -3617,8 +3800,6 @@ pub unsafe extern "C" fn __checkparam_dl(attr: *const sched_attr) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn __dl_clear_params(dl_se: *mut sched_dl_entity) {
-    static void __dl_clear_params(struct sched_dl_entity *dl_se)
-    {
     dl_se.dl_runtime		= 0;
     dl_se.dl_deadline		= 0;
     dl_se.dl_period		= 0;
@@ -3639,8 +3820,6 @@ unsafe extern "C" fn __dl_clear_params(dl_se: *mut sched_dl_entity) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn init_dl_entity(dl_se: *mut sched_dl_entity) {
-    void init_dl_entity(struct sched_dl_entity *dl_se)
-    {
     RB_CLEAR_NODE(&dl_se.rb_node);
     init_dl_task_timer(dl_se);
     init_dl_inactive_task_timer(dl_se);
@@ -3648,28 +3827,27 @@ pub unsafe extern "C" fn init_dl_entity(dl_se: *mut sched_dl_entity) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn dl_param_changed(p: *mut task_struct, attr: *const sched_attr) -> bool {
-    bool dl_param_changed(struct task_struct *p, const struct sched_attr *attr)
-    {
-    struct sched_dl_entity *dl_se = &p.dl;
+    let mut dl_se = &p.dl;
     if (dl_se.dl_runtime != attr.sched_runtime ||
     dl_se.dl_deadline != attr.sched_deadline ||
     dl_se.dl_period != attr.sched_period ||
-    dl_se.flags != (attr.sched_flags & SCHED_DL_FLAGS))
+    dl_se.flags != (attr.sched_flags & SCHED_DL_FLAGS)) {
     return true;
+    }
     return false;
     }
-    int dl_cpuset_cpumask_can_shrink(const struct cpumask *cur,
-    const struct cpumask *trial)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn dl_cpuset_cpumask_can_shrink(cur: *mut cpumask, trial: *mut cpumask) -> c_int {
     unsigned long flags, cap;
-    struct dl_bw *cur_dl_b;
-    let mut ret: c_int = 1;
+pub static mut cur_dl_b: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 1;
     rcu_read_lock_sched();
     cur_dl_b = dl_bw_of(cpumask_any(cur));
     cap = __dl_bw_capacity(trial);
     raw_spin_lock_irqsave(&cur_dl_b.lock, flags);
-    if (__dl_overflow(cur_dl_b, cap, 0, 0))
+    if (__dl_overflow(cur_dl_b, cap, 0, 0)) {
     ret = 0;
+    }
     raw_spin_unlock_irqrestore(&cur_dl_b.lock, flags);
     rcu_read_unlock_sched();
     return ret;
@@ -3680,22 +3858,21 @@ pub unsafe extern "C" fn dl_param_changed(p: *mut task_struct, attr: *const sche
     dl_bw_req_free
     };
 #[no_mangle]
-unsafe extern "C" fn dl_bw_manage(req: enum dl_bw_request, cpu: c_int, dl_bw: u64) -> c_int {
-    static int dl_bw_manage(enum dl_bw_request req, int cpu, u64 dl_bw)
-    {
+unsafe extern "C" fn dl_bw_manage(req: dl_bw_request, cpu: c_int, dl_bw: u64) -> c_int {
     unsigned long flags, cap;
-    struct dl_bw *dl_b;
-    let mut overflow: bool = 0;
-    let mut dl_server_bw: u64 = 0;
+pub static mut dl_b: *mut c_void = core::ptr::null_mut();
+pub static mut overflow: bool = 0;
+pub static mut dl_server_bw: u64 = 0;
     rcu_read_lock_sched();
     dl_b = dl_bw_of(cpu);
     raw_spin_lock_irqsave(&dl_b.lock, flags);
     cap = dl_bw_capacity(cpu);
-    switch (req) {
-    case dl_bw_req_free:
+    match (req) {
+    dl_bw_req_free => {
     __dl_sub(dl_b, dl_bw, dl_bw_cpus(cpu));
-    break;
-    case dl_bw_req_alloc:
+    // break;
+    }
+    dl_bw_req_alloc => {
     overflow = __dl_overflow(dl_b, cap, 0, dl_bw);
     if (!overflow) {
 //
@@ -3706,8 +3883,9 @@ unsafe extern "C" fn dl_bw_manage(req: enum dl_bw_request, cpu: c_int, dl_bw: u6
 //
     __dl_add(dl_b, dl_bw, dl_bw_cpus(cpu));
     }
-    break;
-    case dl_bw_req_deactivate:
+    // break;
+    }
+    dl_bw_req_deactivate => {
 //
 // cpu is not off yet, but we need to do the math by
 // considering it off already (i.e., what would happen if we
@@ -3732,12 +3910,15 @@ unsafe extern "C" fn dl_bw_manage(req: enum dl_bw_request, cpu: c_int, dl_bw: u6
 // wise thing to do. As said above, cpu is not offline
 // yet, so account for that.
 //
-    if (dl_bw_cpus(cpu) - 1)
+    if (dl_bw_cpus(cpu) - 1) {
     overflow = __dl_overflow(dl_b, cap, dl_server_bw, 0);
-    else
+    }
+    else {
     overflow = 1;
     }
-    break;
+    }
+    // break;
+    }
     }
     raw_spin_unlock_irqrestore(&dl_b.lock, flags);
     rcu_read_unlock_sched();
@@ -3745,25 +3926,17 @@ unsafe extern "C" fn dl_bw_manage(req: enum dl_bw_request, cpu: c_int, dl_bw: u6
     }
 #[no_mangle]
 pub unsafe extern "C" fn dl_bw_deactivate(cpu: c_int) -> c_int {
-    int dl_bw_deactivate(int cpu)
-    {
     return dl_bw_manage(dl_bw_req_deactivate, cpu, 0);
     }
 #[no_mangle]
 pub unsafe extern "C" fn dl_bw_alloc(cpu: c_int, dl_bw: u64) -> c_int {
-    int dl_bw_alloc(int cpu, u64 dl_bw)
-    {
     return dl_bw_manage(dl_bw_req_alloc, cpu, dl_bw);
     }
 #[no_mangle]
 pub unsafe extern "C" fn dl_bw_free(cpu: c_int, dl_bw: u64) {
-    void dl_bw_free(int cpu, u64 dl_bw)
-    {
     dl_bw_manage(dl_bw_req_free, cpu, dl_bw);
     }
 #[no_mangle]
 pub unsafe extern "C" fn print_dl_stats(m: *mut seq_file, cpu: c_int) {
-    void print_dl_stats(struct seq_file *m, int cpu)
-    {
     print_dl_rq(m, cpu, &cpu_rq(cpu).dl);
     }

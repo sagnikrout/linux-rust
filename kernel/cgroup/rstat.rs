@@ -34,13 +34,263 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
 
-    static DEFINE_SPINLOCK(rstat_base_lock);
-    static DEFINE_PER_CPU(struct llist_head, rstat_backlog_list);
-    static void cgroup_base_stat_flush(struct cgroup *cgrp, int cpu);
+pub static mut rstat_base_lock: usize = 0;
+pub static mut struct llist_head: usize = 0;
+// forward_decl: cgroup_base_stat_flush;
 //
 // Determines whether a given css can participate in rstat.
 // css's that are cgroup::self use rstat for base stats.
@@ -49,30 +299,28 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 #[no_mangle]
 pub unsafe extern "C" fn css_uses_rstat(css: *mut cgroup_subsys_state) -> bool {
-    static inline bool css_uses_rstat(struct cgroup_subsys_state *css)
-    {
     return css_is_self(css) || css.ss.css_rstat_flush != core::ptr::null_mut();
     }
-    static struct css_rstat_cpu *css_rstat_cpu(
-    struct cgroup_subsys_state *css, int cpu)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn css_rstat_cpu(css: *mut cgroup_subsys_state, cpu: c_int) -> *mut c_void {
     return per_cpu_ptr(css.rstat_cpu, cpu);
     }
-    static struct cgroup_rstat_base_cpu *cgroup_rstat_base_cpu(
-    struct cgroup *cgrp, int cpu)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_rstat_base_cpu(cgrp: *mut cgroup, cpu: c_int) -> *mut c_void {
     return per_cpu_ptr(cgrp.rstat_base_cpu, cpu);
     }
-    static spinlock_t *ss_rstat_lock(struct cgroup_subsys *ss)
+    static spinlock_t *ss_rstat_lock(cgroup_subsys *ss)
     {
-    if (ss)
+    if (ss) {
     return &ss.rstat_ss_lock;
+    }
     return &rstat_base_lock;
     }
-    static inline struct llist_head *ss_lhead_cpu(struct cgroup_subsys *ss, int cpu)
-    {
-    if (ss)
+#[no_mangle]
+pub unsafe extern "C" fn ss_lhead_cpu(ss: *mut cgroup_subsys, cpu: c_int) -> *mut c_void {
+    if (ss) {
     return per_cpu_ptr(ss.lhead, cpu);
+    }
     return per_cpu_ptr(&rstat_backlog_list, cpu);
     }
 //
@@ -92,21 +340,21 @@ pub unsafe extern "C" fn css_uses_rstat(css: *mut cgroup_subsys_state) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __css_rstat_updated(css: *mut cgroup_subsys_state, cpu: c_int) {
-    void __css_rstat_updated(struct cgroup_subsys_state *css, int cpu)
-    {
-    struct llist_head *lhead;
-    struct css_rstat_cpu *rstatc;
-    struct llist_node *self;
+pub static mut lhead: *mut c_void = core::ptr::null_mut();
+pub static mut rstatc: *mut c_void = core::ptr::null_mut();
+pub static mut self: *mut c_void = core::ptr::null_mut();
 // Prevent access to uninitialized rstat pointers.
-    if (!css_uses_rstat(css))
+    if (!css_uses_rstat(css)) {
     return;
+    }
     lockdep_assert_preemption_disabled();
 //
 // The lockless insertion below relies on NMI-safe cmpxchg;
 // bail out in NMI on archs that don't provide it.
 //
-    if (!IS_ENABLED(CONFIG_ARCH_HAVE_NMI_SAFE_CMPXCHG) && in_nmi())
+    if (!IS_ENABLED!(CONFIG_ARCH_HAVE_NMI_SAFE_CMPXCHG) && in_nmi()) {
     return;
+    }
     rstatc = css_rstat_cpu(css, cpu);
 //
 // If already on list return. This check is racy and smp_mb() is needed
@@ -114,8 +362,9 @@ pub unsafe extern "C" fn __css_rstat_updated(css: *mut cgroup_subsys_state, cpu:
 // guarantee that the updated stats are visible to concurrent flusher is
 // needed.
 //
-    if (llist_on_list(&rstatc.lnode))
+    if (llist_on_list(&rstatc.lnode)) {
     return;
+    }
 //
 // This function can be renentered by irqs and nmis for the same cgroup
 // and may try to insert the same per-cpu lnode into the llist. Note
@@ -134,8 +383,9 @@ pub unsafe extern "C" fn __css_rstat_updated(css: *mut cgroup_subsys_state, cpu:
 // archs it is not safe against modifications from multiple CPUs.
 //
     self = &rstatc.lnode;
-    if (!try_cmpxchg(&rstatc.lnode.next, &self, core::ptr::null_mut()))
+    if (!try_cmpxchg(&rstatc.lnode.next, &self, core::ptr::null_mut())) {
     return;
+    }
     lhead = ss_lhead_cpu(css.ss, cpu);
     llist_add(&rstatc.lnode, lhead);
     }
@@ -145,27 +395,25 @@ pub unsafe extern "C" fn __css_rstat_updated(css: *mut cgroup_subsys_state, cpu:
 //
 #[no_mangle]
 pub unsafe extern "C" fn css_rstat_updated(css: *mut cgroup_subsys_state, cpu: c_int) -> __bpf_kfunc void {
-    __bpf_kfunc void css_rstat_updated(struct cgroup_subsys_state *css, int cpu)
-    {
-    if (unlikely(cpu < 0 || cpu >= nr_cpu_ids || !cpu_possible(cpu)))
+    if (unlikely(cpu < 0 || cpu >= nr_cpu_ids || !cpu_possible(cpu))) {
     return;
+    }
     __css_rstat_updated(css, cpu);
     }
 #[no_mangle]
 unsafe extern "C" fn __css_process_update_tree(css: *mut cgroup_subsys_state, cpu: c_int) {
-    static void __css_process_update_tree(struct cgroup_subsys_state *css, int cpu)
-    {
 // put @css and all ancestors on the corresponding updated lists
     while (true) {
-    struct css_rstat_cpu *rstatc = css_rstat_cpu(css, cpu);
-    struct cgroup_subsys_state *parent = css.parent;
-    struct css_rstat_cpu *prstatc;
+    let mut rstatc = css_rstat_cpu(css, cpu);
+    let mut parent = css.parent;
+pub static mut prstatc: *mut c_void = core::ptr::null_mut();
 //
 // Both additions and removals are bottom-up.  If a cgroup
 // is already in the tree, all ancestors are.
 //
-    if (rstatc.updated_next)
+    if (rstatc.updated_next) {
     break;
+    }
 // Root has no parent to link it to, but mark it busy
     if (!parent) {
     rstatc.updated_next = css;
@@ -179,12 +427,10 @@ unsafe extern "C" fn __css_process_update_tree(css: *mut cgroup_subsys_state, cp
     }
 #[no_mangle]
 unsafe extern "C" fn css_process_update_tree(ss: *mut cgroup_subsys, cpu: c_int) {
-    static void css_process_update_tree(struct cgroup_subsys *ss, int cpu)
-    {
-    struct llist_head *lhead = ss_lhead_cpu(ss, cpu);
-    struct llist_node *lnode;
+    let mut lhead = ss_lhead_cpu(ss, cpu);
+pub static mut lnode: *mut c_void = core::ptr::null_mut();
     while ((lnode = llist_del_first_init(lhead))) {
-    struct css_rstat_cpu *rstatc;
+pub static mut rstatc: *mut c_void = core::ptr::null_mut();
 //
 // smp_mb() is needed here (more specifically in between
 // init_llist_node() and per-cpu stats flushing) if the
@@ -199,7 +445,7 @@ unsafe extern "C" fn css_process_update_tree(ss: *mut cgroup_subsys, cpu: c_int)
 // barrier here but if such a use-case arise, please add
 // smp_mb() here.
 //
-    rstatc = container_of(lnode, struct css_rstat_cpu, lnode);
+    rstatc = container_of!(lnode, css_rstat_cpu, lnode);
     __css_process_update_tree(rstatc.owner, cpu);
     }
     }
@@ -216,14 +462,13 @@ unsafe extern "C" fn css_process_update_tree(ss: *mut cgroup_subsys, cpu: c_int)
 // tail backward like "pushing" css's into a stack. The root is pushed by
 // the caller.
 //
-    static struct cgroup_subsys_state *css_rstat_push_children(
-    struct cgroup_subsys_state *head,
-    struct cgroup_subsys_state *child, int cpu)
-    {
-    struct cgroup_subsys_state *cnext = child;	/* Next head of child css level */
-    struct cgroup_subsys_state *ghead = core::ptr::null_mut();	/* Head of grandchild css level */
-    struct cgroup_subsys_state *parent, *grandchild;
-    struct css_rstat_cpu *crstatc;
+#[no_mangle]
+pub unsafe extern "C" fn css_rstat_push_children(head: *mut cgroup_subsys_state, child: *mut cgroup_subsys_state, cpu: c_int) -> *mut c_void {
+    let mut cnext = child;	/* Next head of child css level */
+    let mut ghead = core::ptr::null_mut();	/* Head of grandchild css level */
+    let mut parent = core::ptr::null_mut();
+    let mut grandchild = core::ptr::null_mut();
+pub static mut crstatc: *mut c_void = core::ptr::null_mut();
     child.rstat_flush_next = core::ptr::null_mut();
 //
 // The subsystem rstat lock must be held for the whole duration from
@@ -247,7 +492,7 @@ unsafe extern "C" fn css_process_update_tree(ss: *mut cgroup_subsys, cpu: c_int)
 // After 2nd iteration:
 // head => G12 => G11 => G22 => G21 => C2 => C1 => NULL
 //
-    next_level:
+// label;
     while (cnext) {
     child = cnext;
     cnext = child.rstat_flush_next;
@@ -271,7 +516,7 @@ unsafe extern "C" fn css_process_update_tree(ss: *mut cgroup_subsys, cpu: c_int)
     if (ghead) {
     cnext = ghead;
     ghead = core::ptr::null_mut();
-    goto next_level;
+// goto;
     }
     return head;
     }
@@ -293,29 +538,29 @@ unsafe extern "C" fn css_process_update_tree(ss: *mut cgroup_subsys, cpu: c_int)
 // within the children list and terminated by the parent css. An exception
 // here is the css root whose updated_next can be self terminated.
 //
-    static struct cgroup_subsys_state *css_rstat_updated_list(
-    struct cgroup_subsys_state *root, int cpu)
-    {
-    struct css_rstat_cpu *rstatc = css_rstat_cpu(root, cpu);
-    struct cgroup_subsys_state *head = core::ptr::null_mut(), *parent, *child;
+#[no_mangle]
+pub unsafe extern "C" fn css_rstat_updated_list(root: *mut cgroup_subsys_state, cpu: c_int) -> *mut c_void {
+    let mut rstatc = css_rstat_cpu(root, cpu);
+    let mut head = core::ptr::null_mut(), *parent, *child;
     css_process_update_tree(root.ss, cpu);
 // Return NULL if this subtree is not on-list
-    if (!rstatc.updated_next)
+    if (!rstatc.updated_next) {
     return core::ptr::null_mut();
+    }
 //
 // Unlink @root from its parent. As the updated_children list is
 // singly linked, we have to walk it to find the removal point.
 //
     parent = root.parent;
     if (parent) {
-    struct css_rstat_cpu *prstatc;
-    struct cgroup_subsys_state **nextp;
+pub static mut prstatc: *mut c_void = core::ptr::null_mut();
+pub static mut nextp: *mut c_void = core::ptr::null_mut();
     prstatc = css_rstat_cpu(parent, cpu);
     nextp = &prstatc.updated_children;
     while (*nextp != root) {
-    struct css_rstat_cpu *nrstatc;
+pub static mut nrstatc: *mut c_void = core::ptr::null_mut();
     nrstatc = css_rstat_cpu(*nextp, cpu);
-    WARN_ON_ONCE(*nextp == parent);
+    WARN_ON_ONCE!(*nextp == parent);
     nextp = &nrstatc.updated_next;
     }
 // nextp = rstatc->updated_next;
@@ -326,8 +571,9 @@ unsafe extern "C" fn css_process_update_tree(ss: *mut cgroup_subsys, cpu: c_int)
     root.rstat_flush_next = core::ptr::null_mut();
     child = rstatc.updated_children;
     rstatc.updated_children = root;
-    if (child != root)
+    if (child != root) {
     head = css_rstat_push_children(head, child, cpu);
+    }
     return head;
     }
 //
@@ -343,8 +589,7 @@ unsafe extern "C" fn css_process_update_tree(ss: *mut cgroup_subsys, cpu: c_int)
 // function might eventually be.
 //
     __bpf_hook_start();
-    __weak noinline void bpf_rstat_flush(struct cgroup *cgrp,
-    struct cgroup *parent, int cpu)
+    __weak noinline void bpf_rstat_flush(cgroup *cgrp, cgroup *parent, int cpu)
     {
     }
     __bpf_hook_end();
@@ -357,13 +602,11 @@ unsafe extern "C" fn css_process_update_tree(ss: *mut cgroup_subsys, cpu: c_int)
 // value -1 is used when obtaining the main lock else this is the CPU
 // number processed last.
 //
-    static inline void __css_rstat_lock(struct cgroup_subsys_state *css,
-    int cpu_in_loop)
-    __acquires(ss_rstat_lock(css.ss))
-    {
-    struct cgroup *cgrp = css.cgroup;
-    spinlock_t *lock;
-    bool contended;
+#[no_mangle]
+pub unsafe extern "C" fn __css_rstat_lock(css: *mut cgroup_subsys_state) {
+    let mut cgrp = css.cgroup;
+pub static mut lock: *mut c_void = core::ptr::null_mut();
+    let mut contended = 0;
     lock = ss_rstat_lock(css.ss);
     contended = !spin_trylock_irq(lock);
     if (contended) {
@@ -372,12 +615,10 @@ unsafe extern "C" fn css_process_update_tree(ss: *mut cgroup_subsys, cpu: c_int)
     }
     trace_cgroup_rstat_locked(cgrp, cpu_in_loop, contended);
     }
-    static inline void __css_rstat_unlock(struct cgroup_subsys_state *css,
-    int cpu_in_loop)
-    __releases(ss_rstat_lock(css.ss))
-    {
-    struct cgroup *cgrp = css.cgroup;
-    spinlock_t *lock;
+#[no_mangle]
+pub unsafe extern "C" fn __css_rstat_unlock(css: *mut cgroup_subsys_state) {
+    let mut cgrp = css.cgroup;
+pub static mut lock: *mut c_void = core::ptr::null_mut();
     lock = ss_rstat_lock(css.ss);
     trace_cgroup_rstat_unlock(cgrp, cpu_in_loop, false);
     spin_unlock_irq(lock);
@@ -397,92 +638,95 @@ unsafe extern "C" fn css_process_update_tree(ss: *mut cgroup_subsys, cpu: c_int)
 //
 #[no_mangle]
 pub unsafe extern "C" fn css_rstat_flush(css: *mut cgroup_subsys_state) -> __bpf_kfunc void {
-    __bpf_kfunc void css_rstat_flush(struct cgroup_subsys_state *css)
-    {
-    int cpu;
-    let mut is_self: bool = css_is_self(css);
+    let mut cpu = 0;
+pub static mut is_self: bool = false;
 //
 // Since bpf programs can call this function, prevent access to
 // uninitialized rstat pointers.
 //
-    if (!css_uses_rstat(css))
+    if (!css_uses_rstat(css)) {
     return;
+    }
     might_sleep();
     for_each_possible_cpu(cpu) {
-    struct cgroup_subsys_state *pos;
+pub static mut pos: *mut c_void = core::ptr::null_mut();
 // Reacquire for each CPU to avoid disabling IRQs too long
     __css_rstat_lock(css, cpu);
     pos = css_rstat_updated_list(css, cpu);
-    for (; pos; pos = pos.rstat_flush_next) {
+    while (pos) {
     if (is_self) {
     cgroup_base_stat_flush(pos.cgroup, cpu);
     bpf_rstat_flush(pos.cgroup,
     cgroup_parent(pos.cgroup), cpu);
-    } else
+    } else {
     pos.ss.css_rstat_flush(pos, cpu);
     }
+    }
     __css_rstat_unlock(css, cpu);
-    if (!cond_resched())
+    if (!cond_resched()) {
     cpu_relax();
+    }
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn css_rstat_init(css: *mut cgroup_subsys_state) -> c_int {
-    int css_rstat_init(struct cgroup_subsys_state *css)
-    {
-    struct cgroup *cgrp = css.cgroup;
-    int cpu;
-    let mut is_self: bool = css_is_self(css);
+    let mut cgrp = css.cgroup;
+    let mut cpu = 0;
+pub static mut is_self: bool = false;
     if (is_self) {
 // the root cgrp has rstat_base_cpu preallocated
     if (!cgrp.rstat_base_cpu) {
-    cgrp.rstat_base_cpu = alloc_percpu(struct cgroup_rstat_base_cpu);
-    if (!cgrp.rstat_base_cpu)
+    cgrp.rstat_base_cpu = alloc_percpu(cgroup_rstat_base_cpu);
+    if (!cgrp.rstat_base_cpu) {
     return -ENOMEM;
     }
-    } else if (css.ss.css_rstat_flush == core::ptr::null_mut())
+    }
+    } else if (css.ss.css_rstat_flush == core::ptr::null_mut()) {
     return 0;
+    }
 // the root cgrp's self css has rstat_cpu preallocated
     if (!css.rstat_cpu) {
-    css.rstat_cpu = alloc_percpu(struct css_rstat_cpu);
+    css.rstat_cpu = alloc_percpu(css_rstat_cpu);
     if (!css.rstat_cpu) {
-    if (is_self)
+    if (is_self) {
     free_percpu(cgrp.rstat_base_cpu);
+    }
     return -ENOMEM;
     }
     }
 // ->updated_children list is self terminated
     for_each_possible_cpu(cpu) {
-    struct css_rstat_cpu *rstatc = css_rstat_cpu(css, cpu);
+    let mut rstatc = css_rstat_cpu(css, cpu);
     rstatc.owner = rstatc.updated_children = css;
     init_llist_node(&rstatc.lnode);
     if (is_self) {
-    struct cgroup_rstat_base_cpu *rstatbc;
+pub static mut rstatbc: *mut c_void = core::ptr::null_mut();
     rstatbc = cgroup_rstat_base_cpu(cgrp, cpu);
-    u64_stats_init(&rstatbc.bsync);
+// forward_decl: _stats_init;
     }
     }
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn css_rstat_exit(css: *mut cgroup_subsys_state) {
-    void css_rstat_exit(struct cgroup_subsys_state *css)
-    {
-    int cpu;
-    if (!css_uses_rstat(css))
+    let mut cpu = 0;
+    if (!css_uses_rstat(css)) {
     return;
-    if (!css.rstat_cpu)
+    }
+    if (!css.rstat_cpu) {
     return;
+    }
     css_rstat_flush(css);
 // sanity check
     for_each_possible_cpu(cpu) {
-    struct css_rstat_cpu *rstatc = css_rstat_cpu(css, cpu);
-    if (WARN_ON_ONCE(rstatc.updated_children != css) ||
-    WARN_ON_ONCE(rstatc.updated_next))
+    let mut rstatc = css_rstat_cpu(css, cpu);
+    if (WARN_ON_ONCE!(rstatc.updated_children != css) ||
+    WARN_ON_ONCE!(rstatc.updated_next)) {
     return;
     }
+    }
     if (css_is_self(css)) {
-    struct cgroup *cgrp = css.cgroup;
+    let mut cgrp = css.cgroup;
     free_percpu(cgrp.rstat_base_cpu);
     cgrp.rstat_base_cpu = core::ptr::null_mut();
     }
@@ -498,27 +742,26 @@ pub unsafe extern "C" fn css_rstat_exit(css: *mut cgroup_subsys_state) {
 // are initialized.
 //
 #[no_mangle]
-pub unsafe extern "C" fn ss_rstat_init(ss: *mut cgroup_subsys) -> int __init {
-    int __init ss_rstat_init(struct cgroup_subsys *ss)
-    {
-    int cpu;
+pub unsafe extern "C" fn ss_rstat_init(ss: *mut cgroup_subsys) -> c_int {
+    let mut cpu = 0;
     if (ss) {
-    ss.lhead = alloc_percpu(struct llist_head);
-    if (!ss.lhead)
+    ss.lhead = alloc_percpu(llist_head);
+    if (!ss.lhead) {
     return -ENOMEM;
     }
+    }
     spin_lock_init(ss_rstat_lock(ss));
-    for_each_possible_cpu(cpu)
+    for_each_possible_cpu(cpu) {
     init_llist_head(ss_lhead_cpu(ss, cpu));
+    }
     return 0;
     }
 //
 // Functions for cgroup basic resource statistics implemented on top of
 // rstat.
 //
-    static void cgroup_base_stat_add(struct cgroup_base_stat *dst_bstat,
-    struct cgroup_base_stat *src_bstat)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_base_stat_add(dst_bstat: *mut cgroup_base_stat, src_bstat: *mut cgroup_base_stat) {
     dst_bstat.cputime.utime += src_bstat.cputime.utime;
     dst_bstat.cputime.stime += src_bstat.cputime.stime;
     dst_bstat.cputime.sum_exec_runtime += src_bstat.cputime.sum_exec_runtime;
@@ -527,9 +770,8 @@ pub unsafe extern "C" fn ss_rstat_init(ss: *mut cgroup_subsys) -> int __init {
 
     dst_bstat.ntime += src_bstat.ntime;
     }
-    static void cgroup_base_stat_sub(struct cgroup_base_stat *dst_bstat,
-    struct cgroup_base_stat *src_bstat)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_base_stat_sub(dst_bstat: *mut cgroup_base_stat, src_bstat: *mut cgroup_base_stat) {
     dst_bstat.cputime.utime -= src_bstat.cputime.utime;
     dst_bstat.cputime.stime -= src_bstat.cputime.stime;
     dst_bstat.cputime.sum_exec_runtime -= src_bstat.cputime.sum_exec_runtime;
@@ -540,16 +782,15 @@ pub unsafe extern "C" fn ss_rstat_init(ss: *mut cgroup_subsys) -> int __init {
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_base_stat_flush(cgrp: *mut cgroup, cpu: c_int) {
-    static void cgroup_base_stat_flush(struct cgroup *cgrp, int cpu)
-    {
-    struct cgroup_rstat_base_cpu *rstatbc = cgroup_rstat_base_cpu(cgrp, cpu);
-    struct cgroup *parent = cgroup_parent(cgrp);
-    struct cgroup_rstat_base_cpu *prstatbc;
-    struct cgroup_base_stat delta;
-    unsigned seq;
+    let mut rstatbc = cgroup_rstat_base_cpu(cgrp, cpu);
+    let mut parent = cgroup_parent(cgrp);
+pub static mut prstatbc: *mut c_void = core::ptr::null_mut();
+pub static mut delta: usize = 0;
+    let mut seq: c_uint = 0;
 // Root-level stats are sourced from system-wide CPU stats
-    if (!parent)
+    if (!parent) {
     return;
+    }
 // fetch the current per-cpu values
     do {
     seq = __u64_stats_fetch_begin(&rstatbc.bsync);
@@ -573,57 +814,58 @@ unsafe extern "C" fn cgroup_base_stat_flush(cgrp: *mut cgroup, cpu: c_int) {
     cgroup_base_stat_add(&rstatbc.last_subtree_bstat, &delta);
     }
     }
-    static struct cgroup_rstat_base_cpu *
-    cgroup_base_stat_cputime_account_begin(struct cgroup *cgrp, unsigned long *flags)
-    {
-    struct cgroup_rstat_base_cpu *rstatbc;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_base_stat_cputime_account_begin(cgrp: *mut cgroup, flags: *mut c_ulong) -> *mut c_void {
+pub static mut rstatbc: *mut c_void = core::ptr::null_mut();
     rstatbc = get_cpu_ptr(cgrp.rstat_base_cpu);
 // flags = u64_stats_update_begin_irqsave(&rstatbc->bsync);
     return rstatbc;
     }
-    static void cgroup_base_stat_cputime_account_end(struct cgroup *cgrp,
-    struct cgroup_rstat_base_cpu *rstatbc,
-    unsigned long flags)
-    {
-    u64_stats_update_end_irqrestore(&rstatbc.bsync, flags);
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_base_stat_cputime_account_end(cgrp: *mut cgroup, rstatbc: *mut cgroup_rstat_base_cpu, flags: c_ulong) {
+// forward_decl: _stats_update_end_irqrestore;
     __css_rstat_updated(&cgrp.self, smp_processor_id());
     put_cpu_ptr(rstatbc);
     }
 #[no_mangle]
 pub unsafe extern "C" fn __cgroup_account_cputime(cgrp: *mut cgroup, delta_exec: u64) {
-    void __cgroup_account_cputime(struct cgroup *cgrp, u64 delta_exec)
-    {
-    struct cgroup_rstat_base_cpu *rstatbc;
-    unsigned long flags;
+pub static mut rstatbc: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
     rstatbc = cgroup_base_stat_cputime_account_begin(cgrp, &flags);
     rstatbc.bstat.cputime.sum_exec_runtime += delta_exec;
     cgroup_base_stat_cputime_account_end(cgrp, rstatbc, flags);
     }
-    void __cgroup_account_cputime_field(struct cgroup *cgrp,
-    enum cpu_usage_stat index, u64 delta_exec)
-    {
-    struct cgroup_rstat_base_cpu *rstatbc;
-    unsigned long flags;
+#[no_mangle]
+pub unsafe extern "C" fn __cgroup_account_cputime_field(cgrp: *mut cgroup, index: cpu_usage_stat, delta_exec: u64) {
+pub static mut rstatbc: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
     rstatbc = cgroup_base_stat_cputime_account_begin(cgrp, &flags);
-    switch (index) {
-    case CPUTIME_NICE:
+    match (index) {
+    CPUTIME_NICE => {
     rstatbc.bstat.ntime += delta_exec;
     fallthrough;
-    case CPUTIME_USER:
+    }
+    CPUTIME_USER => {
     rstatbc.bstat.cputime.utime += delta_exec;
-    break;
-    case CPUTIME_SYSTEM:
-    case CPUTIME_IRQ:
-    case CPUTIME_SOFTIRQ:
+    // break;
+    }
+    CPUTIME_SYSTEM => {
+    }
+    CPUTIME_IRQ => {
+    }
+    CPUTIME_SOFTIRQ => {
     rstatbc.bstat.cputime.stime += delta_exec;
-    break;
+    // break;
 
-    case CPUTIME_FORCEIDLE:
+    }
+    CPUTIME_FORCEIDLE => {
     rstatbc.bstat.forceidle_sum += delta_exec;
-    break;
+    // break;
 
-    default:
-    break;
+    }
+    _ => {
+    // break;
+    }
     }
     cgroup_base_stat_cputime_account_end(cgrp, rstatbc, flags);
     }
@@ -635,16 +877,14 @@ pub unsafe extern "C" fn __cgroup_account_cputime(cgrp: *mut cgroup, delta_exec:
 //
 #[no_mangle]
 unsafe extern "C" fn root_cgroup_cputime(bstat: *mut cgroup_base_stat) {
-    static void root_cgroup_cputime(struct cgroup_base_stat *bstat)
-    {
-    struct task_cputime *cputime = &bstat.cputime;
-    int i;
-    memset(bstat, 0, sizeof(*bstat));
+    let mut cputime = &bstat.cputime;
+    let mut i = 0;
+    memset(bstat, 0, sizeof!(*bstat));
     for_each_possible_cpu(i) {
-    struct kernel_cpustat kcpustat;
-    u64 *cpustat = kcpustat.cpustat;
-    let mut user: u64 = 0;
-    let mut sys: u64 = 0;
+pub static mut kcpustat: usize = 0;
+    let mut cpustat = kcpustat.cpustat;
+pub static mut user: u64 = 0;
+pub static mut sys: u64 = 0;
     kcpustat_cpu_fetch(&kcpustat, i);
     user += cpustat[CPUTIME_USER];
     user += cpustat[CPUTIME_NICE];
@@ -663,20 +903,16 @@ unsafe extern "C" fn root_cgroup_cputime(bstat: *mut cgroup_base_stat) {
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_force_idle_show(seq: *mut seq_file, bstat: *mut cgroup_base_stat) {
-    static void cgroup_force_idle_show(struct seq_file *seq, struct cgroup_base_stat *bstat)
-    {
 
-    let mut forceidle_time: u64 = bstat.forceidle_sum;
+pub static mut forceidle_time: u64 = 0;
     do_div(forceidle_time, NSEC_PER_USEC);
     seq_printf(seq, "core_sched.force_idle_usec %llu\n", forceidle_time);
 
     }
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_base_stat_cputime_show(seq: *mut seq_file) {
-    void cgroup_base_stat_cputime_show(struct seq_file *seq)
-    {
-    struct cgroup *cgrp = seq_css(seq).cgroup;
-    struct cgroup_base_stat bstat;
+    let mut cgrp = seq_css(seq).cgroup;
+pub static mut bstat: usize = 0;
     if (cgroup_parent(cgrp)) {
     css_rstat_flush(&cgrp.self);
     __css_rstat_lock(&cgrp.self, -1);
@@ -706,15 +942,10 @@ pub unsafe extern "C" fn cgroup_base_stat_cputime_show(seq: *mut seq_file) {
     BTF_ID_FLAGS(func, css_rstat_updated)
     BTF_ID_FLAGS(func, css_rstat_flush, KF_SLEEPABLE)
     BTF_KFUNCS_END(bpf_rstat_kfunc_ids)
-    static const struct btf_kfunc_id_set bpf_rstat_kfunc_set = {
-    .owner          = THIS_MODULE,
-    .set            = &bpf_rstat_kfunc_ids,
-    };
+pub static mut btf_kfunc_id_set: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn bpf_rstat_kfunc_init() -> int __init {
-    static int __init bpf_rstat_kfunc_init(void)
-    {
+unsafe extern "C" fn bpf_rstat_kfunc_init() -> c_int {
     return register_btf_kfunc_id_set(BPF_PROG_TYPE_TRACING,
     &bpf_rstat_kfunc_set);
     }
-    late_initcall(bpf_rstat_kfunc_init);
+    late_initcall!(bpf_rstat_kfunc_init);

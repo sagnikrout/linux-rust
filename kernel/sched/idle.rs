@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -53,52 +303,43 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 #[no_mangle]
 pub unsafe extern "C" fn sched_idle_set_state(idle_state: *mut cpuidle_state) {
-    void sched_idle_set_state(struct cpuidle_state *idle_state)
-    {
     idle_set_state(this_rq(), idle_state);
     }
-    static int __read_mostly cpu_idle_force_poll;
+    static int  cpu_idle_force_poll;
 #[no_mangle]
 pub unsafe extern "C" fn cpu_idle_poll_ctrl(enable: bool) {
-    void cpu_idle_poll_ctrl(bool enable)
-    {
     if (enable) {
-    cpu_idle_force_poll++;
+    cpu_idle_force_poll += 1;
     } else {
-    cpu_idle_force_poll--;
-    WARN_ON_ONCE(cpu_idle_force_poll < 0);
+    cpu_idle_force_poll -= 1;
+    WARN_ON_ONCE!(cpu_idle_force_poll < 0);
     }
     }
 
 #[no_mangle]
-unsafe extern "C" fn cpu_idle_poll_setup(__unused: *mut c_char) -> int __init {
-    static int __init cpu_idle_poll_setup(char *__unused)
-    {
+unsafe extern "C" fn cpu_idle_poll_setup(__unused: *mut c_char) -> c_int {
     cpu_idle_force_poll = 1;
     return 1;
     }
-    __setup("nohlt", cpu_idle_poll_setup);
+    __setup!("nohlt", cpu_idle_poll_setup);
 #[no_mangle]
-unsafe extern "C" fn cpu_idle_nopoll_setup(__unused: *mut c_char) -> int __init {
-    static int __init cpu_idle_nopoll_setup(char *__unused)
-    {
+unsafe extern "C" fn cpu_idle_nopoll_setup(__unused: *mut c_char) -> c_int {
     cpu_idle_force_poll = 0;
     return 1;
     }
-    __setup("hlt", cpu_idle_nopoll_setup);
+    __setup!("hlt", cpu_idle_nopoll_setup);
 
 #[no_mangle]
 unsafe extern "C" fn cpu_idle_poll() -> noinline int __cpuidle {
-    static noinline int __cpuidle cpu_idle_poll(void)
-    {
     instrumentation_begin();
     trace_cpu_idle(0, smp_processor_id());
     stop_critical_timings();
     ct_cpuidle_enter();
     raw_local_irq_enable();
     while (!tif_need_resched() &&
-    (cpu_idle_force_poll || tick_check_broadcast_expired()))
+    (cpu_idle_force_poll || tick_check_broadcast_expired())) {
     cpu_relax();
+    }
     raw_local_irq_disable();
     ct_cpuidle_exit();
     start_critical_timings();
@@ -114,29 +355,31 @@ unsafe extern "C" fn cpu_idle_poll() -> noinline int __cpuidle {
     void __weak __noreturn arch_cpu_idle_dead(void) { while (1); }
 #[no_mangle]
 pub unsafe extern "C" fn arch_cpu_idle() -> void __weak {
-    void __weak arch_cpu_idle(void)
-    {
     cpu_idle_force_poll = 1;
     }
 
-    DEFINE_STATIC_KEY_FALSE(arch_needs_tick_broadcast);
+pub static mut arch_needs_tick_broadcast: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn cond_tick_broadcast_enter() {
-    static inline void cond_tick_broadcast_enter(void)
-    {
-    if (static_branch_unlikely(&arch_needs_tick_broadcast))
+    if (static_branch_unlikely(&arch_needs_tick_broadcast)) {
     tick_broadcast_enter();
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn cond_tick_broadcast_exit() {
-    static inline void cond_tick_broadcast_exit(void)
-    {
-    if (static_branch_unlikely(&arch_needs_tick_broadcast))
+    if (static_branch_unlikely(&arch_needs_tick_broadcast)) {
     tick_broadcast_exit();
     }
+    }
 
-    static inline void cond_tick_broadcast_enter(void) { }
-    static inline void cond_tick_broadcast_exit(void) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: cond_tick_broadcast_enter
+pub unsafe extern "C" fn cond_tick_broadcast_enter_dup() { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: cond_tick_broadcast_exit
+pub unsafe extern "C" fn cond_tick_broadcast_exit_dup() { }
 
 //
 // default_idle_call - Default CPU idle routine.
@@ -145,8 +388,6 @@ pub unsafe extern "C" fn cond_tick_broadcast_exit() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn default_idle_call() -> void __cpuidle {
-    void __cpuidle default_idle_call(void)
-    {
     instrumentation_begin();
     if (!current_clr_polling_and_test()) {
     cond_tick_broadcast_enter();
@@ -162,17 +403,15 @@ pub unsafe extern "C" fn default_idle_call() -> void __cpuidle {
     local_irq_enable();
     instrumentation_end();
     }
-    static int call_cpuidle_s2idle(struct cpuidle_driver *drv,
-    struct cpuidle_device *dev,
-    u64 max_latency_ns)
-    {
-    if (current_clr_polling_and_test())
+#[no_mangle]
+pub unsafe extern "C" fn call_cpuidle_s2idle(drv: *mut cpuidle_driver, dev: *mut cpuidle_device, max_latency_ns: u64) -> c_int {
+    if (current_clr_polling_and_test()) {
     return -EBUSY;
+    }
     return cpuidle_enter_s2idle(drv, dev, max_latency_ns);
     }
-    static int call_cpuidle(struct cpuidle_driver *drv, struct cpuidle_device *dev,
-    int next_state)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn call_cpuidle(drv: *mut cpuidle_driver, dev: *mut cpuidle_device, next_state: c_int) -> c_int {
 //
 // The idle task must be scheduled, it is pointless to go to idle, just
 // update no idle residency and return.
@@ -191,12 +430,12 @@ pub unsafe extern "C" fn default_idle_call() -> void __cpuidle {
     }
 #[no_mangle]
 unsafe extern "C" fn idle_call_stop_or_retain_tick(stop_tick: bool) {
-    static void idle_call_stop_or_retain_tick(bool stop_tick)
-    {
-    if (stop_tick || tick_nohz_tick_stopped())
+    if (stop_tick || tick_nohz_tick_stopped()) {
     tick_nohz_idle_stop_tick();
-    else
+    }
+    else {
     tick_nohz_idle_retain_tick();
+    }
     }
 //
 // cpuidle_idle_call - the main idle function
@@ -209,11 +448,10 @@ unsafe extern "C" fn idle_call_stop_or_retain_tick(stop_tick: bool) {
 //
 #[no_mangle]
 unsafe extern "C" fn cpuidle_idle_call(stop_tick: bool) {
-    static void cpuidle_idle_call(bool stop_tick)
-    {
-    struct cpuidle_device *dev = cpuidle_get_device();
-    struct cpuidle_driver *drv = cpuidle_get_cpu_driver(dev);
-    int next_state, entered_state;
+    let mut dev = cpuidle_get_device();
+    let mut drv = cpuidle_get_cpu_driver(dev);
+    let mut next_state = 0;
+    let mut entered_state = 0;
 //
 // Check if the idle task must be rescheduled. If it is the
 // case, exit the function after re-enabling the local IRQ.
@@ -225,7 +463,7 @@ unsafe extern "C" fn cpuidle_idle_call(stop_tick: bool) {
     if (cpuidle_not_available(drv, dev)) {
     idle_call_stop_or_retain_tick(stop_tick);
     default_idle_call();
-    goto exit_idle;
+// goto;
     }
 //
 // Suspend-to-idle ("s2idle") is a system state in which all user space
@@ -237,14 +475,15 @@ unsafe extern "C" fn cpuidle_idle_call(stop_tick: bool) {
 // until a proper wakeup interrupt happens.
 //
     if (idle_should_enter_s2idle() || dev.forced_idle_latency_limit_ns) {
-    u64 max_latency_ns;
+    let mut max_latency_ns = 0;
     if (idle_should_enter_s2idle()) {
     max_latency_ns = cpu_wakeup_latency_qos_limit() *
     NSEC_PER_USEC;
     entered_state = call_cpuidle_s2idle(drv, dev,
     max_latency_ns);
-    if (entered_state > 0)
-    goto exit_idle;
+    if (entered_state > 0) {
+// goto;
+    }
     } else {
     max_latency_ns = dev.forced_idle_latency_limit_ns;
     }
@@ -277,13 +516,14 @@ unsafe extern "C" fn cpuidle_idle_call(stop_tick: bool) {
 //
     call_cpuidle(drv, dev, 0);
     }
-    exit_idle:
+// label;
     __current_set_polling();
 //
 // It is up to the idle functions to re-enable local interrupts
 //
-    if (WARN_ON_ONCE(irqs_disabled()))
+    if (WARN_ON_ONCE!(irqs_disabled())) {
     local_irq_enable();
+    }
     }
 //
 // Generic idle loop implementation
@@ -292,14 +532,12 @@ unsafe extern "C" fn cpuidle_idle_call(stop_tick: bool) {
 //
 #[no_mangle]
 unsafe extern "C" fn do_idle() {
-    static void do_idle(void)
-    {
-    let mut cpu: c_int = smp_processor_id();
-    let mut got_tick: bool = false;
+pub static mut cpu: c_int = 0;
+pub static mut got_tick: bool = false;
     if (cpu_is_offline(cpu)) {
     local_irq_disable();
 // All per-CPU kernel threads should be done by now.
-    WARN_ON_ONCE(need_resched());
+    WARN_ON_ONCE!(need_resched());
     cpuhp_report_idle_dead();
     arch_cpu_idle_dead();
     }
@@ -388,13 +626,12 @@ unsafe extern "C" fn do_idle() {
 //
     flush_smp_call_function_queue();
     schedule_idle();
-    if (unlikely(klp_patch_pending(current)))
+    if (unlikely(klp_patch_pending(current))) {
     klp_update_patch_state(current);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn cpu_in_idle(pc: c_ulong) -> bool {
-    bool cpu_in_idle(unsigned long pc)
-    {
     return pc >= (unsigned long)__cpuidle_text_start &&
     pc < (unsigned long)__cpuidle_text_end;
     }
@@ -407,28 +644,24 @@ pub struct idle_timer {
 
 #[no_mangle]
 unsafe extern "C" fn idle_inject_timer_fn(timer: *mut hrtimer) -> enum hrtimer_restart {
-    static enum hrtimer_restart idle_inject_timer_fn(struct hrtimer *timer)
-    {
-    struct idle_timer *it = container_of(timer, struct idle_timer, timer);
+    let mut it = container_of!(timer, idle_timer, timer);
     WRITE_ONCE(it.done, 1);
     set_tsk_need_resched(current);
     return HRTIMER_NORESTART;
     }
 #[no_mangle]
 pub unsafe extern "C" fn play_idle_precise(duration_ns: u64, latency_ns: u64) {
-    void play_idle_precise(u64 duration_ns, u64 latency_ns)
-    {
-    struct idle_timer it;
+pub static mut it: usize = 0;
 //
 // Only FIFO tasks can disable the tick since they don't need the forced
 // preemption.
 //
-    WARN_ON_ONCE(current.policy != SCHED_FIFO);
-    WARN_ON_ONCE(current.nr_cpus_allowed != 1);
-    WARN_ON_ONCE(!(current.flags & PF_KTHREAD));
-    WARN_ON_ONCE(!(current.flags & PF_NO_SETAFFINITY));
-    WARN_ON_ONCE(!duration_ns);
-    WARN_ON_ONCE(current.mm);
+    WARN_ON_ONCE!(current.policy != SCHED_FIFO);
+    WARN_ON_ONCE!(current.nr_cpus_allowed != 1);
+    WARN_ON_ONCE!(!(current.flags & PF_KTHREAD));
+    WARN_ON_ONCE!(!(current.flags & PF_NO_SETAFFINITY));
+    WARN_ON_ONCE!(!duration_ns);
+    WARN_ON_ONCE!(current.mm);
     rcu_sleep_check();
     preempt_disable();
     current.flags |= PF_IDLE;
@@ -438,8 +671,9 @@ pub unsafe extern "C" fn play_idle_precise(duration_ns: u64, latency_ns: u64) {
     HRTIMER_MODE_REL_HARD);
     hrtimer_start(&it.timer, ns_to_ktime(duration_ns),
     HRTIMER_MODE_REL_PINNED_HARD);
-    while (!READ_ONCE(it.done))
+    while (!READ_ONCE(it.done)) {
     do_idle();
+    }
     cpuidle_use_deepest_state(0);
     current.flags &= ~PF_IDLE;
     preempt_fold_need_resched();
@@ -447,50 +681,41 @@ pub unsafe extern "C" fn play_idle_precise(duration_ns: u64, latency_ns: u64) {
     }
     EXPORT_SYMBOL_GPL(play_idle_precise);
 #[no_mangle]
-pub unsafe extern "C" fn cpu_startup_entry(state: enum cpuhp_state) {
-    void cpu_startup_entry(enum cpuhp_state state)
-    {
+pub unsafe extern "C" fn cpu_startup_entry(state: cpuhp_state) {
     current.flags |= PF_IDLE;
     arch_cpu_idle_prepare();
     cpuhp_online_idle(state);
-    while (1)
+    while (1) {
     do_idle();
+    }
     }
 //
 // idle-task scheduling class.
 //
-    static int
-    select_task_rq_idle(struct task_struct *p, int cpu, int flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn select_task_rq_idle(p: *mut task_struct, cpu: c_int, flags: c_int) -> c_int {
     return task_cpu(p); /* IDLE tasks as never migrated */
     }
-    static int
-    balance_idle(struct rq *rq, struct rq_flags *rf)
-    {
-    return WARN_ON_ONCE(1);
+#[no_mangle]
+pub unsafe extern "C" fn balance_idle(rq: *mut rq, rf: *mut rq_flags) -> c_int {
+    return WARN_ON_ONCE!(1);
     }
 //
 // Idle tasks are unconditionally rescheduled:
 //
 #[no_mangle]
 unsafe extern "C" fn wakeup_preempt_idle(rq: *mut rq, p: *mut task_struct, flags: c_int) {
-    static void wakeup_preempt_idle(struct rq *rq, struct task_struct *p, int flags)
-    {
     resched_curr(rq);
     }
-    static void update_curr_idle(struct rq *rq);
+// forward_decl: update_curr_idle;
 #[no_mangle]
 unsafe extern "C" fn put_prev_task_idle(rq: *mut rq, prev: *mut task_struct, next: *mut task_struct) {
-    static void put_prev_task_idle(struct rq *rq, struct task_struct *prev, struct task_struct *next)
-    {
     update_curr_idle(rq);
     scx_update_idle(rq, false, true);
     update_rq_avg_idle(rq);
     }
 #[no_mangle]
 unsafe extern "C" fn set_next_task_idle(rq: *mut rq, next: *mut task_struct, first: bool) {
-    static void set_next_task_idle(struct rq *rq, struct task_struct *next, bool first)
-    {
     update_idle_core(rq);
     scx_update_idle(rq, true, true);
     schedstat_inc(rq.sched_goidle);
@@ -501,26 +726,26 @@ unsafe extern "C" fn set_next_task_idle(rq: *mut rq, next: *mut task_struct, fir
 //
     update_idle_rq_clock_pelt(rq);
     }
-    struct task_struct *pick_task_idle(struct rq *rq, struct rq_flags *rf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pick_task_idle(rq: *mut rq, rf: *mut rq_flags) -> *mut c_void {
 //
 // Notify scx only on an idle-to-idle re-pick (the cpu was already idle).
 // A real task->idle transition is delivered by set_next_task_idle(), so
 // calling here too would duplicate it.
 //
-    if (scx_enabled() && is_idle_task(rq.curr))
+    if (scx_enabled() && is_idle_task(rq.curr)) {
     scx_update_idle(rq, true, false);
+    }
     return rq.idle;
     }
 //
 // It is not legal to sleep in the idle task - print a warning
 // message if some code attempts to do it:
 //
-    static bool
-    dequeue_task_idle(struct rq *rq, struct task_struct *p, int flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn dequeue_task_idle(rq: *mut rq, p: *mut task_struct, flags: c_int) -> bool {
     raw_spin_rq_unlock_irq(rq);
-    printk(KERN_ERR "bad: scheduling from the idle thread!\n");
+    printk("bad: scheduling from the idle thread!\n");
     dump_stack();
     raw_spin_rq_lock_irq(rq);
     return true;
@@ -535,33 +760,28 @@ unsafe extern "C" fn set_next_task_idle(rq: *mut rq, next: *mut task_struct, fir
 //
 #[no_mangle]
 unsafe extern "C" fn task_tick_idle(rq: *mut rq, curr: *mut task_struct, queued: c_int) {
-    static void task_tick_idle(struct rq *rq, struct task_struct *curr, int queued)
-    {
     update_curr_idle(rq);
     }
 #[no_mangle]
 unsafe extern "C" fn switching_to_idle(rq: *mut rq, p: *mut task_struct) {
-    static void switching_to_idle(struct rq *rq, struct task_struct *p)
-    {
     BUG();
     }
-    static void
-    prio_changed_idle(struct rq *rq, struct task_struct *p, u64 oldprio)
-    {
-    if (p.prio == oldprio)
+#[no_mangle]
+pub unsafe extern "C" fn prio_changed_idle(rq: *mut rq, p: *mut task_struct, oldprio: u64) {
+    if (p.prio == oldprio) {
     return;
+    }
     BUG();
     }
 #[no_mangle]
 unsafe extern "C" fn update_curr_idle(rq: *mut rq) {
-    static void update_curr_idle(struct rq *rq)
-    {
-    struct sched_entity *se = &rq.idle.se;
-    let mut now: u64 = rq_clock_task(rq);
-    s64 delta_exec;
+    let mut se = &rq.idle.se;
+pub static mut now: u64 = 0;
+    let mut delta_exec = 0;
     delta_exec = now - se.exec_start;
-    if (unlikely(delta_exec <= 0))
+    if (unlikely(delta_exec <= 0)) {
     return;
+    }
     se.exec_start = now;
     dl_server_update_idle(&rq.fair_server, delta_exec);
 

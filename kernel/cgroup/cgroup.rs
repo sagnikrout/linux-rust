@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -76,8 +326,8 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // These locks are exported if CONFIG_PROVE_RCU so that accessors in
 // cgroup.h can use them for lockdep annotations.
 //
-    DEFINE_MUTEX(cgroup_mutex);
-    DEFINE_SPINLOCK(css_set_lock);
+pub static mut cgroup_mutex: usize = 0;
+pub static mut css_set_lock: usize = 0;
 
     EXPORT_SYMBOL_GPL(cgroup_mutex);
     EXPORT_SYMBOL_GPL(css_set_lock);
@@ -86,18 +336,18 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     BLOCKING_NOTIFIER_INIT(cgroup_lifetime_notifier);
     struct blocking_notifier_head cgroup_task_notifier =
     BLOCKING_NOTIFIER_INIT(cgroup_task_notifier);
-    DEFINE_SPINLOCK(trace_cgroup_path_lock);
+pub static mut trace_cgroup_path_lock: usize = 0;
     char trace_cgroup_path[TRACE_CGROUP_PATH_LEN];
-    static bool cgroup_debug __read_mostly;
+    static bool cgroup_debug ;
 //
 // Protects cgroup_idr and css_idr so that IDs can be released without
 // grabbing cgroup_mutex.
 //
-    static DEFINE_SPINLOCK(cgroup_idr_lock);
-    DEFINE_PERCPU_RWSEM(cgroup_threadgroup_rwsem);
+pub static mut cgroup_idr_lock: usize = 0;
+pub static mut cgroup_threadgroup_rwsem: usize = 0;
 
-    RCU_LOCKDEP_WARN(!rcu_read_lock_held() &&			\
-    !lockdep_is_held(&cgroup_mutex),		\
+    RCU_LOCKDEP_WARN(!rcu_read_lock_held() &&			
+    !lockdep_is_held(&cgroup_mutex),		
     "cgroup_mutex or RCU read lock required")
 //
 // cgroup destruction makes heavy use of work items and there can be a lot
@@ -126,9 +376,9 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // which can never complete as it's behind in the same queue and
 // workqueue's max_active is 1.
 //
-    static struct workqueue_struct *cgroup_offline_wq;
-    static struct workqueue_struct *cgroup_release_wq;
-    static struct workqueue_struct *cgroup_free_wq;
+pub static mut cgroup_offline_wq: *mut c_void = core::ptr::null_mut();
+pub static mut cgroup_release_wq: *mut c_void = core::ptr::null_mut();
+pub static mut cgroup_free_wq: *mut c_void = core::ptr::null_mut();
 // generate an array of cgroup subsystem pointers
 
     struct cgroup_subsys *cgroup_subsys[] = {
@@ -143,9 +393,9 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
 // array of static_keys for cgroup_subsys_enabled() and cgroup_subsys_on_dfl()
 
-    DEFINE_STATIC_KEY_TRUE(_x ## _cgrp_subsys_enabled_key);			\
-    DEFINE_STATIC_KEY_TRUE(_x ## _cgrp_subsys_on_dfl_key);			\
-    EXPORT_SYMBOL_GPL(_x ## _cgrp_subsys_enabled_key);			\
+pub static mut _x ## _cgrp_subsys_enabled_key: usize = 0;			
+pub static mut _x ## _cgrp_subsys_on_dfl_key: usize = 0;			
+    EXPORT_SYMBOL_GPL(_x ## _cgrp_subsys_enabled_key);			
     EXPORT_SYMBOL_GPL(_x ## _cgrp_subsys_on_dfl_key);
 
     static struct static_key_true *cgroup_subsys_enabled_key[] = {
@@ -156,19 +406,16 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
     };
 
-    static DEFINE_PER_CPU(struct css_rstat_cpu, root_rstat_cpu);
-    static DEFINE_PER_CPU(struct cgroup_rstat_base_cpu, root_rstat_base_cpu);
+pub static mut struct css_rstat_cpu: usize = 0;
+pub static mut struct cgroup_rstat_base_cpu: usize = 0;
 // the default hierarchy
-    struct cgroup_root cgrp_dfl_root = {
-    .cgrp.self.rstat_cpu = &root_rstat_cpu,
-    .cgrp.rstat_base_cpu = &root_rstat_base_cpu,
-    };
+pub static mut cgroup_root: usize = 0;
     EXPORT_SYMBOL_GPL(cgrp_dfl_root);
 //
 // The default hierarchy always exists but is hidden until mounted for the
 // first time.  This is for backward compatibility.
 //
-    bool cgrp_dfl_visible;
+    let mut cgrp_dfl_visible = 0;
 // some controllers are not supported in the default hierarchy
     static u32 cgrp_dfl_inhibit_ss_mask;
 // some controllers are implicitly enabled on the default hierarchy
@@ -183,10 +430,10 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
     static u32 cgroup_rebind_ss_mask;
 // The list of hierarchy roots
-    LIST_HEAD(cgroup_roots);
+pub static mut cgroup_roots: usize = 0;
     static int cgroup_root_count;
 // hierarchy ID allocation and mapping, protected by cgroup_mutex
-    static DEFINE_IDR(cgroup_hierarchy_idr);
+pub static mut cgroup_hierarchy_idr: usize = 0;
 //
 // Assign a monotonically increasing serial number to csses.  It guarantees
 // cgroups with bigger numbers are newer than those with smaller numbers.
@@ -194,30 +441,26 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // guarantees that sibling csses are always sorted in the ascending serial
 // number order on the list.  Protected by cgroup_mutex.
 //
-    let mut css_serial_nr_next: static u64 = 1;
+pub static mut css_serial_nr_next: u64 = 1;
 //
 // These bitmasks identify subsystems with specific features to avoid
 // having to do iterative checks repeatedly.
 //
-    static u32 have_fork_callback __read_mostly;
-    static u32 have_exit_callback __read_mostly;
-    static u32 have_release_callback __read_mostly;
-    static u32 have_canfork_callback __read_mostly;
-    let mut __ro_after_init: static bool have_favordynmods = IS_ENABLED(CONFIG_CGROUP_FAVOR_DYNMODS);
+    static u32 have_fork_callback ;
+    static u32 have_exit_callback ;
+    static u32 have_release_callback ;
+    static u32 have_canfork_callback ;
+pub static mut __ro_after_init: bool have_favordynmods = 0;
 //
 // Write protected by cgroup_mutex and write-lock of cgroup_threadgroup_rwsem,
 // read protected by either.
 //
 // Can only be turned on, but not turned off.
 //
-    bool cgroup_enable_per_threadgroup_rwsem __read_mostly;
+    let mut cgroup_enable_per_threadgroup_rwsem = 0;
 // cgroup namespace for init task
-    struct cgroup_namespace init_cgroup_ns = {
-    .ns		= NS_COMMON_INIT(init_cgroup_ns),
-    .user_ns	= &init_user_ns,
-    .root_cset	= &init_css_set,
-    };
-    static struct file_system_type cgroup2_fs_type;
+pub static mut cgroup_namespace: usize = 0;
+pub static mut cgroup2_fs_type: usize = 0;
     static struct cftype cgroup_base_files[];
     static struct cftype cgroup_psi_files[];
 // cgroup optional features
@@ -232,21 +475,17 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     "pressure",
 
     };
-    static u16 cgroup_feature_disable_mask __read_mostly;
-    static int cgroup_apply_control(struct cgroup *cgrp);
-    static void cgroup_finalize_control(struct cgroup *cgrp, int ret);
-    static void css_task_iter_skip(struct css_task_iter *it,
-    struct task_struct *task);
-    static int cgroup_destroy_locked(struct cgroup *cgrp);
-    static void kill_css_sync(struct cgroup_subsys_state *css);
-    static void kill_css_finish(struct cgroup_subsys_state *css);
-    static struct cgroup_subsys_state *css_create(struct cgroup *cgrp,
-    struct cgroup_subsys *ss);
-    static void css_release(struct percpu_ref *ref);
-    static int cgroup_addrm_files(struct cgroup_subsys_state *css,
-    struct cgroup *cgrp, struct cftype cfts[],
-    bool is_add);
-    static void cgroup_rt_init(void);
+    static u16 cgroup_feature_disable_mask ;
+// forward_decl: cgroup_apply_control;
+// forward_decl: cgroup_finalize_control;
+// forward_decl: css_task_iter_skip;
+// forward_decl: cgroup_destroy_locked;
+// forward_decl: kill_css_sync;
+// forward_decl: kill_css_finish;
+// forward_decl: css_create;
+// forward_decl: css_release;
+// forward_decl: cgroup_addrm_files;
+// forward_decl: cgroup_rt_init;
 
 //
 // cgroup_ssid_enabled - cgroup subsys enabled test by subsys ID
@@ -258,10 +497,9 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_ssid_enabled(ssid: c_int) -> bool {
-    bool cgroup_ssid_enabled(int ssid)
-    {
-    if (!CGROUP_HAS_SUBSYS_CONFIG)
+    if (!CGROUP_HAS_SUBSYS_CONFIG) {
     return false;
+    }
     return static_key_enabled(cgroup_subsys_enabled_key[ssid]);
     }
 //
@@ -309,15 +547,12 @@ pub unsafe extern "C" fn cgroup_ssid_enabled(ssid: c_int) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_on_dfl(cgrp: *const cgroup) -> bool {
-    bool cgroup_on_dfl(const struct cgroup *cgrp)
-    {
     return cgrp.root == &cgrp_dfl_root;
     }
 // IDR wrappers which synchronize using cgroup_idr_lock
-    static int cgroup_idr_alloc(struct idr *idr, void *ptr, int start, int end,
-    gfp_t gfp_mask)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_idr_alloc(idr: *mut idr, ptr: *mut c_void, start: c_int, end: c_int, gfp_mask: gfp_t) -> c_int {
+    let mut ret = 0;
     idr_preload(gfp_mask);
     spin_lock_bh(&cgroup_idr_lock);
     ret = idr_alloc(idr, ptr, start, end, gfp_mask & ~__GFP_DIRECT_RECLAIM);
@@ -325,9 +560,9 @@ pub unsafe extern "C" fn cgroup_on_dfl(cgrp: *const cgroup) -> bool {
     idr_preload_end();
     return ret;
     }
-    static void *cgroup_idr_replace(struct idr *idr, void *ptr, int id)
-    {
-    void *ret;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_idr_replace(idr: *mut idr, ptr: *mut c_void, id: c_int) -> *mut c_void {
+pub static mut ret: *mut c_void = core::ptr::null_mut();
     spin_lock_bh(&cgroup_idr_lock);
     ret = idr_replace(idr, ptr, id);
     spin_unlock_bh(&cgroup_idr_lock);
@@ -335,23 +570,17 @@ pub unsafe extern "C" fn cgroup_on_dfl(cgrp: *const cgroup) -> bool {
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_idr_remove(idr: *mut idr, id: c_int) {
-    static void cgroup_idr_remove(struct idr *idr, int id)
-    {
     spin_lock_bh(&cgroup_idr_lock);
     idr_remove(idr, id);
     spin_unlock_bh(&cgroup_idr_lock);
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_is_threaded(cgrp: *mut cgroup) -> bool {
-    static bool cgroup_is_threaded(struct cgroup *cgrp)
-    {
     return cgrp.dom_cgrp != cgrp;
     }
 // can @cgrp host both domain and threaded children?
 #[no_mangle]
 unsafe extern "C" fn cgroup_is_mixable(cgrp: *mut cgroup) -> bool {
-    static bool cgroup_is_mixable(struct cgroup *cgrp)
-    {
 //
 // Root isn't under domain level resource control exempting it from
 // the no-internal-process constraint, so it can serve as a thread
@@ -362,89 +591,92 @@ unsafe extern "C" fn cgroup_is_mixable(cgrp: *mut cgroup) -> bool {
 // can @cgrp become a thread root? Should always be true for a thread root
 #[no_mangle]
 unsafe extern "C" fn cgroup_can_be_thread_root(cgrp: *mut cgroup) -> bool {
-    static bool cgroup_can_be_thread_root(struct cgroup *cgrp)
-    {
 // mixables don't care
-    if (cgroup_is_mixable(cgrp))
+    if (cgroup_is_mixable(cgrp)) {
     return true;
+    }
 // domain roots can't be nested under threaded
-    if (cgroup_is_threaded(cgrp))
+    if (cgroup_is_threaded(cgrp)) {
     return false;
+    }
 // can only have either domain or threaded children
-    if (READ_ONCE(cgrp.nr_populated_domain_children))
+    if (READ_ONCE(cgrp.nr_populated_domain_children)) {
     return false;
+    }
 // and no domain controllers can be enabled
-    if (cgrp.subtree_control & ~cgrp_dfl_threaded_ss_mask)
+    if (cgrp.subtree_control & ~cgrp_dfl_threaded_ss_mask) {
     return false;
+    }
     return true;
     }
 // is @cgrp root of a threaded subtree?
 #[no_mangle]
 unsafe extern "C" fn cgroup_is_thread_root(cgrp: *mut cgroup) -> bool {
-    static bool cgroup_is_thread_root(struct cgroup *cgrp)
-    {
 // thread root should be a domain
-    if (cgroup_is_threaded(cgrp))
+    if (cgroup_is_threaded(cgrp)) {
     return false;
+    }
 // a domain w/ threaded children is a thread root
-    if (cgrp.nr_threaded_children)
+    if (cgrp.nr_threaded_children) {
     return true;
+    }
 //
 // A domain which has tasks and explicit threaded controllers
 // enabled is a thread root.
 //
     if (cgroup_has_tasks(cgrp) &&
-    (cgrp.subtree_control & cgrp_dfl_threaded_ss_mask))
+    (cgrp.subtree_control & cgrp_dfl_threaded_ss_mask)) {
     return true;
+    }
     return false;
     }
 // a domain which isn't connected to the root w/o brekage can't be used
 #[no_mangle]
 unsafe extern "C" fn cgroup_is_valid_domain(cgrp: *mut cgroup) -> bool {
-    static bool cgroup_is_valid_domain(struct cgroup *cgrp)
-    {
 // the cgroup itself can be a thread root
-    if (cgroup_is_threaded(cgrp))
+    if (cgroup_is_threaded(cgrp)) {
     return false;
+    }
 // but the ancestors can't be unless mixable
     while ((cgrp = cgroup_parent(cgrp))) {
-    if (!cgroup_is_mixable(cgrp) && cgroup_is_thread_root(cgrp))
+    if (!cgroup_is_mixable(cgrp) && cgroup_is_thread_root(cgrp)) {
     return false;
-    if (cgroup_is_threaded(cgrp))
+    }
+    if (cgroup_is_threaded(cgrp)) {
     return false;
+    }
     }
     return true;
     }
 // subsystems visibly enabled on a cgroup
 #[no_mangle]
 unsafe extern "C" fn cgroup_control(cgrp: *mut cgroup) -> u32 {
-    static u32 cgroup_control(struct cgroup *cgrp)
-    {
-    struct cgroup *parent = cgroup_parent(cgrp);
-    let mut root_ss_mask: u32 = cgrp.root.subsys_mask;
+    let mut parent = cgroup_parent(cgrp);
+pub static mut root_ss_mask: u32 = 0;
     if (parent) {
-    let mut ss_mask: u32 = parent.subtree_control;
+pub static mut ss_mask: u32 = 0;
 // threaded cgroups can only have threaded controllers
-    if (cgroup_is_threaded(cgrp))
+    if (cgroup_is_threaded(cgrp)) {
     ss_mask &= cgrp_dfl_threaded_ss_mask;
+    }
     return ss_mask;
     }
-    if (cgroup_on_dfl(cgrp))
+    if (cgroup_on_dfl(cgrp)) {
     root_ss_mask &= ~(cgrp_dfl_inhibit_ss_mask |
     cgrp_dfl_implicit_ss_mask);
+    }
     return root_ss_mask;
     }
 // subsystems enabled on a cgroup
 #[no_mangle]
 unsafe extern "C" fn cgroup_ss_mask(cgrp: *mut cgroup) -> u32 {
-    static u32 cgroup_ss_mask(struct cgroup *cgrp)
-    {
-    struct cgroup *parent = cgroup_parent(cgrp);
+    let mut parent = cgroup_parent(cgrp);
     if (parent) {
-    let mut ss_mask: u32 = parent.subtree_ss_mask;
+pub static mut ss_mask: u32 = 0;
 // threaded cgroups can only have threaded controllers
-    if (cgroup_is_threaded(cgrp))
+    if (cgroup_is_threaded(cgrp)) {
     ss_mask &= cgrp_dfl_threaded_ss_mask;
+    }
     return ss_mask;
     }
     return cgrp.root.subsys_mask;
@@ -459,20 +691,21 @@ unsafe extern "C" fn cgroup_ss_mask(cgrp: *mut cgroup) -> u32 {
 // enabled.  If @ss is associated with the hierarchy @cgrp is on, this
 // function is guaranteed to return non-NULL css.
 //
-    static struct cgroup_subsys_state *cgroup_e_css_by_mask(struct cgroup *cgrp,
-    struct cgroup_subsys *ss)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_e_css_by_mask(cgrp: *mut cgroup, ss: *mut cgroup_subsys) -> *mut c_void {
     lockdep_assert_held(&cgroup_mutex);
-    if (!ss)
+    if (!ss) {
     return &cgrp.self;
+    }
 //
 // This function is used while updating css associations and thus
 // can't test the csses directly.  Test ss_mask.
 //
     while (!(cgroup_ss_mask(cgrp) & (1 << ss.id))) {
     cgrp = cgroup_parent(cgrp);
-    if (!cgrp)
+    if (!cgrp) {
     return core::ptr::null_mut();
+    }
     }
     return cgroup_css(cgrp, ss);
     }
@@ -489,16 +722,17 @@ unsafe extern "C" fn cgroup_ss_mask(cgrp: *mut cgroup) -> u32 {
 // The returned css is not guaranteed to be online, and therefore it is the
 // callers responsibility to try get a reference for it.
 //
-    struct cgroup_subsys_state *cgroup_e_css(struct cgroup *cgrp,
-    struct cgroup_subsys *ss)
-    {
-    struct cgroup_subsys_state *css;
-    if (!CGROUP_HAS_SUBSYS_CONFIG)
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_e_css(cgrp: *mut cgroup, ss: *mut cgroup_subsys) -> *mut c_void {
+pub static mut css: *mut c_void = core::ptr::null_mut();
+    if (!CGROUP_HAS_SUBSYS_CONFIG) {
     return core::ptr::null_mut();
+    }
     do {
     css = cgroup_css(cgrp, ss);
-    if (css)
+    if (css) {
     return css;
+    }
     cgrp = cgroup_parent(cgrp);
     } while (cgrp);
     return init_css_set.subsys[ss.id];
@@ -514,31 +748,30 @@ unsafe extern "C" fn cgroup_ss_mask(cgrp: *mut cgroup) -> u32 {
 // the root css is returned, so this function always returns a valid css.
 // The returned css must be put using css_put().
 //
-    struct cgroup_subsys_state *cgroup_get_e_css(struct cgroup *cgrp,
-    struct cgroup_subsys *ss)
-    {
-    struct cgroup_subsys_state *css;
-    if (!CGROUP_HAS_SUBSYS_CONFIG)
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_get_e_css(cgrp: *mut cgroup, ss: *mut cgroup_subsys) -> *mut c_void {
+pub static mut css: *mut c_void = core::ptr::null_mut();
+    if (!CGROUP_HAS_SUBSYS_CONFIG) {
     return core::ptr::null_mut();
+    }
     rcu_read_lock();
     do {
     css = cgroup_css(cgrp, ss);
-    if (css && css_tryget_online(css))
-    goto out_unlock;
+    if (css && css_tryget_online(css)) {
+// goto;
+    }
     cgrp = cgroup_parent(cgrp);
     } while (cgrp);
     css = init_css_set.subsys[ss.id];
     css_get(css);
-    out_unlock:
+// label;
     rcu_read_unlock();
     return css;
     }
     EXPORT_SYMBOL_GPL(cgroup_get_e_css);
 #[no_mangle]
 unsafe extern "C" fn cgroup_get_live(cgrp: *mut cgroup) {
-    static void cgroup_get_live(struct cgroup *cgrp)
-    {
-    WARN_ON_ONCE(cgroup_is_dead(cgrp));
+    WARN_ON_ONCE!(cgroup_is_dead(cgrp));
     cgroup_get(cgrp);
     }
 //
@@ -548,13 +781,12 @@ unsafe extern "C" fn cgroup_get_live(cgrp: *mut cgroup) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __cgroup_task_count(cgrp: *const cgroup) -> c_int {
-    int __cgroup_task_count(const struct cgroup *cgrp)
-    {
-    let mut count: c_int = 0;
-    struct cgrp_cset_link *link;
+pub static mut count: c_int = 0;
+pub static mut link: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&css_set_lock);
-    list_for_each_entry(link, &cgrp.cset_links, cset_link)
+    list_for_each_entry(link, &cgrp.cset_links, cset_link) {
     count += link.cset.nr_tasks;
+    }
     return count;
     }
 //
@@ -563,17 +795,15 @@ pub unsafe extern "C" fn __cgroup_task_count(cgrp: *const cgroup) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_task_count(cgrp: *const cgroup) -> c_int {
-    int cgroup_task_count(const struct cgroup *cgrp)
-    {
-    int count;
+    let mut count = 0;
     spin_lock_irq(&css_set_lock);
     count = __cgroup_task_count(cgrp);
     spin_unlock_irq(&css_set_lock);
     return count;
     }
-    static struct cgroup *kn_priv(struct kernfs_node *kn)
-    {
-    struct kernfs_node *parent;
+#[no_mangle]
+pub unsafe extern "C" fn kn_priv(kn: *mut kernfs_node) -> *mut c_void {
+pub static mut parent: *mut c_void = core::ptr::null_mut();
 //
 // The parent can not be replaced due to KERNFS_ROOT_INVARIANT_PARENT.
 // Therefore it is always safe to dereference this pointer outside of a
@@ -583,10 +813,10 @@ pub unsafe extern "C" fn cgroup_task_count(cgrp: *const cgroup) -> c_int {
     kernfs_root_flags(kn) & KERNFS_ROOT_INVARIANT_PARENT);
     return parent.priv;
     }
-    struct cgroup_subsys_state *of_css(struct kernfs_open_file *of)
-    {
-    struct cgroup *cgrp = kn_priv(of.kn);
-    struct cftype *cft = of_cft(of);
+#[no_mangle]
+pub unsafe extern "C" fn of_css(of: *mut kernfs_open_file) -> *mut c_void {
+    let mut cgrp = kn_priv(of.kn);
+    let mut cft = of_cft(of);
 //
 // This is open and unprotected implementation of cgroup_css().
 // seq_css() is only called from a kernfs file operation which has
@@ -595,10 +825,12 @@ pub unsafe extern "C" fn cgroup_task_count(cgrp: *const cgroup) -> c_int {
 // the matching css from the cgroup's subsys table is guaranteed to
 // be and stay valid until the enclosing operation is complete.
 //
-    if (CGROUP_HAS_SUBSYS_CONFIG && cft.ss)
+    if (CGROUP_HAS_SUBSYS_CONFIG && cft.ss) {
     return rcu_dereference_raw(cgrp.subsys[cft.ss.id]);
-    else
+    }
+    else {
     return &cgrp.self;
+    }
     }
     EXPORT_SYMBOL_GPL(of_css);
 //
@@ -610,11 +842,12 @@ pub unsafe extern "C" fn cgroup_task_count(cgrp: *const cgroup) -> c_int {
 // Should be called under cgroup_mutex.
 //
 
-    for ((ssid) = 0; (ssid) < CGROUP_SUBSYS_COUNT; (ssid)++)	\
-    if (!((css) = rcu_dereference_check(			\
-    (cgrp).subsys[(ssid)],			\
-    lockdep_is_held(&cgroup_mutex)))) { }	\
-    else
+    for ((ssid) = 0; (ssid) < CGROUP_SUBSYS_COUNT; (ssid)++)	 {
+    if (!((css) = rcu_dereference_check(			
+    (cgrp).subsys[(ssid)],			
+    lockdep_is_held(&cgroup_mutex)))) { }	
+    }
+    else {
 //
 // do_each_subsys_mask - filter for_each_subsys with a bitmask
 // @ss: the iteration cursor
@@ -625,17 +858,18 @@ pub unsafe extern "C" fn cgroup_task_count(cgrp: *const cgroup) -> c_int {
 // @ss_mask is set.
 //
 
-    unsigned long __ss_mask = (ss_mask);				\
-    if (!CGROUP_HAS_SUBSYS_CONFIG) {				\
-    (ssid) = 0;						\
-    break;							\
-    }								\
-    for_each_set_bit(ssid, &__ss_mask, CGROUP_SUBSYS_COUNT) {	\
-    (ss) = cgroup_subsys[ssid];				\
+    let mut __ss_mask = (ss_mask);				
+    }
+    if (!CGROUP_HAS_SUBSYS_CONFIG) {				
+    (ssid) = 0;						
+    break;							
+    }								
+    for_each_set_bit(ssid, &__ss_mask, CGROUP_SUBSYS_COUNT) {	
+    (ss) = cgroup_subsys[ssid];				
     {
 
-    }							\
-    }								\
+    }							
+    }								
     } while (false)
 //
 // The default css_set - used by init and its children prior to any
@@ -644,31 +878,10 @@ pub unsafe extern "C" fn cgroup_task_count(cgrp: *const cgroup) -> c_int {
 // reference-counted, to improve performance when child cgroups
 // haven't been created.
 //
-    struct css_set init_css_set = {
-    .refcount		= REFCOUNT_INIT(1),
-    .dom_cset		= &init_css_set,
-    .tasks			= LIST_HEAD_INIT(init_css_set.tasks),
-    .mg_tasks		= LIST_HEAD_INIT(init_css_set.mg_tasks),
-    .dying_tasks		= LIST_HEAD_INIT(init_css_set.dying_tasks),
-    .task_iters		= LIST_HEAD_INIT(init_css_set.task_iters),
-    .threaded_csets		= LIST_HEAD_INIT(init_css_set.threaded_csets),
-    .cgrp_links		= LIST_HEAD_INIT(init_css_set.cgrp_links),
-    .mg_src_preload_node	= LIST_HEAD_INIT(init_css_set.mg_src_preload_node),
-    .mg_dst_preload_node	= LIST_HEAD_INIT(init_css_set.mg_dst_preload_node),
-    .mg_node		= LIST_HEAD_INIT(init_css_set.mg_node),
-//
-// The following field is re-initialized when this cset gets linked
-// in cgroup_init().  However, let's initialize the field
-// statically too so that the default cgroup can be accessed safely
-// early during boot.
-//
-    .dfl_cgrp		= &cgrp_dfl_root.cgrp,
-    };
+pub static mut css_set: usize = 0;
     static int css_set_count	= 1;	/* 1 for init_css_set */
 #[no_mangle]
 unsafe extern "C" fn css_set_threaded(cset: *mut css_set) -> bool {
-    static bool css_set_threaded(struct css_set *cset)
-    {
     return cset.dom_cset != cset;
     }
 //
@@ -682,8 +895,6 @@ unsafe extern "C" fn css_set_threaded(cset: *mut css_set) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn css_set_populated(cset: *mut css_set) -> bool {
-    static bool css_set_populated(struct css_set *cset)
-    {
     lockdep_assert_held(&css_set_lock);
     return !list_empty(&cset.tasks) || !list_empty(&cset.mg_tasks);
     }
@@ -703,15 +914,13 @@ unsafe extern "C" fn css_set_populated(cset: *mut css_set) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn css_update_populated(css: *mut cgroup_subsys_state, populated: bool) {
-    static void css_update_populated(struct cgroup_subsys_state *css, bool populated)
-    {
-    struct cgroup_subsys_state *child = core::ptr::null_mut();
-    let mut adj: c_int = populated ? 1 : -1;
+    let mut child = core::ptr::null_mut();
+pub static mut adj: c_int = 0;
     lockdep_assert_held(&css_set_lock);
     do {
 // non-NULL only on the cgroup->self walk
-    struct cgroup *cgrp = css_is_self(css) ? css.cgroup : core::ptr::null_mut();
-    let mut was_populated: bool = css_is_populated(css);
+    let mut cgrp = css_is_self(css) ? css.cgroup : core::ptr::null_mut();
+pub static mut was_populated: bool = false;
     if (!child) {
     WRITE_ONCE(css.nr_populated_csets,
     css.nr_populated_csets + adj);
@@ -719,16 +928,19 @@ unsafe extern "C" fn css_update_populated(css: *mut cgroup_subsys_state, populat
     WRITE_ONCE(css.nr_populated_children,
     css.nr_populated_children + adj);
     if (cgrp) {
-    if (cgroup_is_threaded(child.cgroup))
+    if (cgroup_is_threaded(child.cgroup)) {
     WRITE_ONCE(cgrp.nr_populated_threaded_children,
     cgrp.nr_populated_threaded_children + adj);
-    else
+    }
+    else {
     WRITE_ONCE(cgrp.nr_populated_domain_children,
     cgrp.nr_populated_domain_children + adj);
     }
     }
-    if (was_populated == css_is_populated(css))
+    }
+    if (was_populated == css_is_populated(css)) {
     break;
+    }
 //
 // Pair with smp_mb() in kill_css_sync(). Either we observe
 // CSS_DYING and queue, or the caller observes our decrement
@@ -741,7 +953,7 @@ unsafe extern "C" fn css_update_populated(css: *mut cgroup_subsys_state, populat
 //
     if (was_populated && css_is_dying(css)) {
     css_get(css);
-    WARN_ON_ONCE(!queue_work(cgroup_offline_wq, &css.kill_finish_work));
+    WARN_ON_ONCE!(!queue_work(cgroup_offline_wq, &css.kill_finish_work));
     }
     if (cgrp) {
     cgroup1_check_for_release(cgrp);
@@ -764,18 +976,18 @@ unsafe extern "C" fn css_update_populated(css: *mut cgroup_subsys_state, populat
 //
 #[no_mangle]
 unsafe extern "C" fn css_set_update_populated(cset: *mut css_set, populated: bool) {
-    static void css_set_update_populated(struct css_set *cset, bool populated)
-    {
-    struct cgrp_cset_link *link;
-    struct cgroup_subsys *ss;
-    int ssid;
+pub static mut link: *mut c_void = core::ptr::null_mut();
+pub static mut ss: *mut c_void = core::ptr::null_mut();
+    let mut ssid = 0;
     lockdep_assert_held(&css_set_lock);
-    list_for_each_entry(link, &cset.cgrp_links, cgrp_link)
+    list_for_each_entry(link, &cset.cgrp_links, cgrp_link) {
     css_update_populated(&link.cgrp.self, populated);
+    }
     for_each_subsys(ss, ssid) {
-    struct cgroup_subsys_state *css = cset.subsys[ssid];
-    if (css)
+    let mut css = cset.subsys[ssid];
+    if (css) {
     css_update_populated(css, populated);
+    }
     }
     }
 //
@@ -784,12 +996,13 @@ unsafe extern "C" fn css_set_update_populated(cset: *mut css_set, populated: boo
 // remove it from the list, use safe walk.  See css_task_iter_skip() for
 // details.
 //
-    static void css_set_skip_task_iters(struct css_set *cset,
-    struct task_struct *task)
-    {
-    struct css_task_iter *it, *pos;
-    list_for_each_entry_safe(it, pos, &cset.task_iters, iters_node)
+#[no_mangle]
+pub unsafe extern "C" fn css_set_skip_task_iters(cset: *mut css_set, task: *mut task_struct) {
+    let mut it = core::ptr::null_mut();
+    let mut pos = core::ptr::null_mut();
+    list_for_each_entry_safe(it, pos, &cset.task_iters, iters_node) {
     css_task_iter_skip(it, task);
+    }
     }
 //
 // css_set_move_task - move a task from one css_set to another
@@ -806,21 +1019,21 @@ unsafe extern "C" fn css_set_update_populated(cset: *mut css_set, populated: boo
 // css_task_iter adjustments but the caller is responsible for managing
 // @from_cset and @to_cset's reference counts.
 //
-    static void css_set_move_task(struct task_struct *task,
-    struct css_set *from_cset, struct css_set *to_cset,
-    bool use_mg_tasks)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn css_set_move_task(task: *mut task_struct, from_cset: *mut css_set, to_cset: *mut css_set, use_mg_tasks: bool) {
     lockdep_assert_held(&css_set_lock);
-    if (to_cset && !css_set_populated(to_cset))
+    if (to_cset && !css_set_populated(to_cset)) {
     css_set_update_populated(to_cset, true);
+    }
     if (from_cset) {
-    WARN_ON_ONCE(list_empty(&task.cg_list));
+    WARN_ON_ONCE!(list_empty(&task.cg_list));
     css_set_skip_task_iters(from_cset, task);
     list_del_init(&task.cg_list);
-    if (!css_set_populated(from_cset))
+    if (!css_set_populated(from_cset)) {
     css_set_update_populated(from_cset, false);
+    }
     } else {
-    WARN_ON_ONCE(!list_empty(&task.cg_list));
+    WARN_ON_ONCE!(!list_empty(&task.cg_list));
     }
     if (to_cset) {
 //
@@ -829,7 +1042,7 @@ unsafe extern "C" fn css_set_update_populated(cset: *mut css_set, populated: boo
 // against cgroup_task_dead()/cgroup_task_free() dropping
 // the css_set.
 //
-    WARN_ON_ONCE(task.flags & PF_EXITING);
+    WARN_ON_ONCE!(task.flags & PF_EXITING);
     cgroup_move_task(task, to_cset);
     list_add_tail(&task.cg_list, use_mg_tasks ? &to_cset.mg_tasks :
     &to_cset.tasks);
@@ -841,42 +1054,42 @@ unsafe extern "C" fn css_set_update_populated(cset: *mut css_set, populated: boo
 // account cgroups in empty hierarchies.
 //
 pub const CSS_SET_HASH_BITS: c_int = 7;
-    static DEFINE_HASHTABLE(css_set_table, CSS_SET_HASH_BITS);
+pub static mut css_set_table: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn css_set_hash(css: *mut cgroup_subsys_state) -> c_ulong {
-    static unsigned long css_set_hash(struct cgroup_subsys_state **css)
-    {
-    let mut key: c_ulong = 0UL;
-    struct cgroup_subsys *ss;
-    int i;
-    for_each_subsys(ss, i)
+pub static mut key: c_ulong = 0;
+pub static mut ss: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    for_each_subsys(ss, i) {
     key += (unsigned long)css[i];
+    }
     key = (key >> 16) ^ key;
     return key;
     }
 #[no_mangle]
 pub unsafe extern "C" fn put_css_set_locked(cset: *mut css_set) {
-    void put_css_set_locked(struct css_set *cset)
-    {
-    struct cgrp_cset_link *link, *tmp_link;
-    struct cgroup_subsys *ss;
-    int ssid;
+    let mut link = core::ptr::null_mut();
+    let mut tmp_link = core::ptr::null_mut();
+pub static mut ss: *mut c_void = core::ptr::null_mut();
+    let mut ssid = 0;
     lockdep_assert_held(&css_set_lock);
-    if (!refcount_dec_and_test(&cset.refcount))
+    if (!refcount_dec_and_test(&cset.refcount)) {
     return;
-    WARN_ON_ONCE(!list_empty(&cset.threaded_csets));
+    }
+    WARN_ON_ONCE!(!list_empty(&cset.threaded_csets));
 // This css_set is dead. Unlink it and release cgroup and css refs
     for_each_subsys(ss, ssid) {
     list_del(&cset.e_cset_node[ssid]);
     css_put(cset.subsys[ssid]);
     }
     hash_del(&cset.hlist);
-    css_set_count--;
+    css_set_count -= 1;
     list_for_each_entry_safe(link, tmp_link, &cset.cgrp_links, cgrp_link) {
     list_del(&link.cset_link);
     list_del(&link.cgrp_link);
-    if (cgroup_parent(link.cgrp))
+    if (cgroup_parent(link.cgrp)) {
     cgroup_put(link.cgrp);
+    }
     kfree(link);
     }
     if (css_set_threaded(cset)) {
@@ -895,27 +1108,29 @@ pub unsafe extern "C" fn put_css_set_locked(cset: *mut css_set) {
 // Returns true if "cset" matches "old_cset" except for the hierarchy
 // which "new_cgrp" belongs to, for which it should match "new_cgrp".
 //
-    static bool compare_css_sets(struct css_set *cset,
-    struct css_set *old_cset,
-    struct cgroup *new_cgrp,
-    struct cgroup_subsys_state *template[])
-    {
-    struct cgroup *new_dfl_cgrp;
-    struct list_head *l1, *l2;
+#[no_mangle]
+pub unsafe extern "C" fn compare_css_sets(cset: *mut css_set, old_cset: *mut css_set, new_cgrp: *mut cgroup) -> bool {
+pub static mut new_dfl_cgrp: *mut c_void = core::ptr::null_mut();
+    let mut l1 = core::ptr::null_mut();
+    let mut l2 = core::ptr::null_mut();
 //
 // On the default hierarchy, there can be csets which are
 // associated with the same set of cgroups but different csses.
 // Let's first ensure that csses match.
 //
-    if (memcmp(template, cset.subsys, sizeof(cset.subsys)))
+    if (memcmp(template, cset.subsys, sizeof!(cset.subsys))) {
     return false;
+    }
 // @cset's domain should match the default cgroup's
-    if (cgroup_on_dfl(new_cgrp))
+    if (cgroup_on_dfl(new_cgrp)) {
     new_dfl_cgrp = new_cgrp;
-    else
+    }
+    else {
     new_dfl_cgrp = old_cset.dfl_cgrp;
-    if (new_dfl_cgrp.dom_cgrp != cset.dom_cset.dfl_cgrp)
+    }
+    if (new_dfl_cgrp.dom_cgrp != cset.dom_cset.dfl_cgrp) {
     return false;
+    }
 //
 // Compare cgroup pointers in order to distinguish between
 // different cgroups in hierarchies.  As different cgroups may
@@ -925,24 +1140,26 @@ pub unsafe extern "C" fn put_css_set_locked(cset: *mut css_set) {
     l1 = &cset.cgrp_links;
     l2 = &old_cset.cgrp_links;
     while (1) {
-    struct cgrp_cset_link *link1, *link2;
-    struct cgroup *cgrp1, *cgrp2;
+    let mut link1 = core::ptr::null_mut();
+    let mut link2 = core::ptr::null_mut();
+    let mut cgrp1 = core::ptr::null_mut();
+    let mut cgrp2 = core::ptr::null_mut();
     l1 = l1.next;
     l2 = l2.next;
 // See if we reached the end - both lists are equal length.
     if (l1 == &cset.cgrp_links) {
-    BUG_ON(l2 != &old_cset.cgrp_links);
+    BUG_ON!(l2 != &old_cset.cgrp_links);
     break;
     } else {
-    BUG_ON(l2 == &old_cset.cgrp_links);
+    BUG_ON!(l2 == &old_cset.cgrp_links);
     }
 // Locate the cgroups associated with these links.
-    link1 = list_entry(l1, struct cgrp_cset_link, cgrp_link);
-    link2 = list_entry(l2, struct cgrp_cset_link, cgrp_link);
+    link1 = list_entry(l1, cgrp_cset_link, cgrp_link);
+    link2 = list_entry(l2, cgrp_cset_link, cgrp_link);
     cgrp1 = link1.cgrp;
     cgrp2 = link2.cgrp;
 // Hierarchies should be linked in the same order.
-    BUG_ON(cgrp1.root != cgrp2.root);
+    BUG_ON!(cgrp1.root != cgrp2.root);
 //
 // If this hierarchy is the hierarchy of the cgroup
 // that's changing, then we need to check that this
@@ -951,11 +1168,13 @@ pub unsafe extern "C" fn put_css_set_locked(cset: *mut css_set) {
 // same cgroup as the old css_set.
 //
     if (cgrp1.root == new_cgrp.root) {
-    if (cgrp1 != new_cgrp)
+    if (cgrp1 != new_cgrp) {
     return false;
+    }
     } else {
-    if (cgrp1 != cgrp2)
+    if (cgrp1 != cgrp2) {
     return false;
+    }
     }
     }
     return true;
@@ -966,15 +1185,13 @@ pub unsafe extern "C" fn put_css_set_locked(cset: *mut css_set) {
 // @cgrp: the cgroup that we're moving into
 // @template: out param for the new set of csses, should be clear on entry
 //
-    static struct css_set *find_existing_css_set(struct css_set *old_cset,
-    struct cgroup *cgrp,
-    struct cgroup_subsys_state **template)
-    {
-    struct cgroup_root *root = cgrp.root;
-    struct cgroup_subsys *ss;
-    struct css_set *cset;
-    unsigned long key;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn find_existing_css_set(old_cset: *mut css_set, cgrp: *mut cgroup, template: *mut *mut cgroup_subsys_state) -> *mut c_void {
+    let mut root = cgrp.root;
+pub static mut ss: *mut c_void = core::ptr::null_mut();
+pub static mut cset: *mut c_void = core::ptr::null_mut();
+    let mut key = 0;
+    let mut i = 0;
 //
 // Build the set of subsystem state objects that we want to see in the
 // new css_set. While subsystems can change globally, the entries here
@@ -988,7 +1205,7 @@ pub unsafe extern "C" fn put_css_set_locked(cset: *mut css_set) {
 // surviving root css so the tasks are migrated there.
 //
     template[i] = cgroup_css(&root.cgrp, ss);
-    WARN_ON_ONCE(!template[i]);
+    WARN_ON_ONCE!(!template[i]);
     } else if (root.subsys_mask & (1UL << i)) {
 //
 // @ss is in this hierarchy, so we want the
@@ -1005,8 +1222,9 @@ pub unsafe extern "C" fn put_css_set_locked(cset: *mut css_set) {
     }
     key = css_set_hash(template);
     hash_for_each_possible(css_set_table, cset, hlist, key) {
-    if (!compare_css_sets(cset, old_cset, cgrp, template))
+    if (!compare_css_sets(cset, old_cset, cgrp, template)) {
     continue;
+    }
 // This css_set matches what we need
     return cset;
     }
@@ -1015,9 +1233,8 @@ pub unsafe extern "C" fn put_css_set_locked(cset: *mut css_set) {
     }
 #[no_mangle]
 unsafe extern "C" fn free_cgrp_cset_links(links_to_free: *mut list_head) {
-    static void free_cgrp_cset_links(struct list_head *links_to_free)
-    {
-    struct cgrp_cset_link *link, *tmp_link;
+    let mut link = core::ptr::null_mut();
+    let mut tmp_link = core::ptr::null_mut();
     list_for_each_entry_safe(link, tmp_link, links_to_free, cset_link) {
     list_del(&link.cset_link);
     kfree(link);
@@ -1033,12 +1250,10 @@ unsafe extern "C" fn free_cgrp_cset_links(links_to_free: *mut list_head) {
 //
 #[no_mangle]
 unsafe extern "C" fn allocate_cgrp_cset_links(count: c_int, tmp_links: *mut list_head) -> c_int {
-    static int allocate_cgrp_cset_links(int count, struct list_head *tmp_links)
-    {
-    struct cgrp_cset_link *link;
-    int i;
+pub static mut link: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
     INIT_LIST_HEAD(tmp_links);
-    for (i = 0; i < count; i++) {
+    while (i < count) {
     link = kzalloc_obj(*link);
     if (!link) {
     free_cgrp_cset_links(tmp_links);
@@ -1054,14 +1269,14 @@ unsafe extern "C" fn allocate_cgrp_cset_links(count: c_int, tmp_links: *mut list
 // @cset: the css_set to be linked
 // @cgrp: the destination cgroup
 //
-    static void link_css_set(struct list_head *tmp_links, struct css_set *cset,
-    struct cgroup *cgrp)
-    {
-    struct cgrp_cset_link *link;
-    BUG_ON(list_empty(tmp_links));
-    if (cgroup_on_dfl(cgrp))
+#[no_mangle]
+pub unsafe extern "C" fn link_css_set(tmp_links: *mut list_head, cset: *mut css_set, cgrp: *mut cgroup) {
+pub static mut link: *mut c_void = core::ptr::null_mut();
+    BUG_ON!(list_empty(tmp_links));
+    if (cgroup_on_dfl(cgrp)) {
     cset.dfl_cgrp = cgrp;
-    link = list_first_entry(tmp_links, struct cgrp_cset_link, cset_link);
+    }
+    link = list_first_entry(tmp_links, cgrp_cset_link, cset_link);
     link.cset = cset;
     link.cgrp = cgrp;
 //
@@ -1070,8 +1285,9 @@ unsafe extern "C" fn allocate_cgrp_cset_links(count: c_int, tmp_links: *mut list
 //
     list_move_tail(&link.cset_link, &cgrp.cset_links);
     list_add_tail(&link.cgrp_link, &cset.cgrp_links);
-    if (cgroup_parent(cgrp))
+    if (cgroup_parent(cgrp)) {
     cgroup_get_live(cgrp);
+    }
     }
 //
 // find_css_set - return a new css_set with one cgroup updated
@@ -1081,29 +1297,31 @@ unsafe extern "C" fn allocate_cgrp_cset_links(count: c_int, tmp_links: *mut list
 // Return a new css_set that's equivalent to @old_cset, but with @cgrp
 // substituted into the appropriate hierarchy.
 //
-    static struct css_set *find_css_set(struct css_set *old_cset,
-    struct cgroup *cgrp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn find_css_set(old_cset: *mut css_set, cgrp: *mut cgroup) -> *mut c_void {
     struct cgroup_subsys_state *template[CGROUP_SUBSYS_COUNT] = { };
-    struct css_set *cset;
-    struct list_head tmp_links;
-    struct cgrp_cset_link *link;
-    struct cgroup_subsys *ss;
-    unsigned long key;
-    int ssid;
+pub static mut cset: *mut c_void = core::ptr::null_mut();
+pub static mut tmp_links: usize = 0;
+pub static mut link: *mut c_void = core::ptr::null_mut();
+pub static mut ss: *mut c_void = core::ptr::null_mut();
+    let mut key = 0;
+    let mut ssid = 0;
     lockdep_assert_held(&cgroup_mutex);
 // First see if we already have a cgroup group that matches
 // the desired set
     spin_lock_irq(&css_set_lock);
     cset = find_existing_css_set(old_cset, cgrp, template);
-    if (cset)
+    if (cset) {
     get_css_set(cset);
+    }
     spin_unlock_irq(&css_set_lock);
-    if (cset)
+    if (cset) {
     return cset;
+    }
     cset = kzalloc_obj(*cset);
-    if (!cset)
+    if (!cset) {
     return core::ptr::null_mut();
+    }
 // Allocate all the cgrp_cset_link objects that we'll need
     if (allocate_cgrp_cset_links(cgroup_root_count, &tmp_links) < 0) {
     kfree(cset);
@@ -1123,22 +1341,23 @@ unsafe extern "C" fn allocate_cgrp_cset_links(count: c_int, tmp_links: *mut list
     INIT_LIST_HEAD(&cset.mg_node);
 // Copy the set of subsystem state objects generated in
 // find_existing_css_set()
-    memcpy(cset.subsys, template, sizeof(cset.subsys));
+    memcpy(cset.subsys, template, sizeof!(cset.subsys));
     spin_lock_irq(&css_set_lock);
 // Add reference counts and links from the new css_set.
     list_for_each_entry(link, &old_cset.cgrp_links, cgrp_link) {
-    struct cgroup *c = link.cgrp;
-    if (c.root == cgrp.root)
+    let mut c = link.cgrp;
+    if (c.root == cgrp.root) {
     c = cgrp;
+    }
     link_css_set(&tmp_links, cset, c);
     }
-    BUG_ON(!list_empty(&tmp_links));
-    css_set_count++;
+    BUG_ON!(!list_empty(&tmp_links));
+    css_set_count += 1;
 // Add @cset to the hash table
     key = css_set_hash(cset.subsys);
     hash_add(css_set_table, &cset.hlist, key);
     for_each_subsys(ss, ssid) {
-    struct cgroup_subsys_state *css = cset.subsys[ssid];
+    let mut css = cset.subsys[ssid];
     list_add_tail(&cset.e_cset_node[ssid],
     &css.cgroup.e_csets[ssid]);
     css_get(css);
@@ -1151,7 +1370,7 @@ unsafe extern "C" fn allocate_cgrp_cset_links(count: c_int, tmp_links: *mut list
 // to stay empty until we return.
 //
     if (cgroup_is_threaded(cset.dfl_cgrp)) {
-    struct css_set *dcset;
+pub static mut dcset: *mut c_void = core::ptr::null_mut();
     dcset = find_css_set(cset, cset.dfl_cgrp.dom_cgrp);
     if (!dcset) {
     put_css_set(cset);
@@ -1165,16 +1384,14 @@ unsafe extern "C" fn allocate_cgrp_cset_links(count: c_int, tmp_links: *mut list
     }
     return cset;
     }
-    struct cgroup_root *cgroup_root_from_kf(struct kernfs_root *kf_root)
-    {
-    struct cgroup *root_cgrp = kernfs_root_to_node(kf_root).priv;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_root_from_kf(kf_root: *mut kernfs_root) -> *mut c_void {
+    let mut root_cgrp = kernfs_root_to_node(kf_root).priv;
     return root_cgrp.root;
     }
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_favor_dynmods(root: *mut cgroup_root, favor: bool) {
-    void cgroup_favor_dynmods(struct cgroup_root *root, bool favor)
-    {
-    let mut favoring: bool = root.flags & CGRP_ROOT_FAVOR_DYNMODS;
+pub static mut favoring: bool = false;
 //
 // see the comment above CGRP_ROOT_FAVOR_DYNMODS definition.
 // favordynmods can flip while task is between
@@ -1193,8 +1410,9 @@ pub unsafe extern "C" fn cgroup_favor_dynmods(root: *mut cgroup_root, favor: boo
     rcu_sync_enter(&cgroup_threadgroup_rwsem.rss);
     root.flags |= CGRP_ROOT_FAVOR_DYNMODS;
     } else if (!favor && favoring) {
-    if (cgroup_enable_per_threadgroup_rwsem)
+    if (cgroup_enable_per_threadgroup_rwsem) {
     pr_warn_once("cgroup favordynmods: per threadgroup rwsem mechanism can't be disabled\n");
+    }
     rcu_sync_exit(&cgroup_threadgroup_rwsem.rss);
     root.flags &= ~CGRP_ROOT_FAVOR_DYNMODS;
     }
@@ -1202,45 +1420,39 @@ pub unsafe extern "C" fn cgroup_favor_dynmods(root: *mut cgroup_root, favor: boo
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_init_root_id(root: *mut cgroup_root) -> c_int {
-    static int cgroup_init_root_id(struct cgroup_root *root)
-    {
-    int id;
+    let mut id = 0;
     lockdep_assert_held(&cgroup_mutex);
     id = idr_alloc_cyclic(&cgroup_hierarchy_idr, root, 0, 0, GFP_KERNEL);
-    if (id < 0)
+    if (id < 0) {
     return id;
+    }
     root.hierarchy_id = id;
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_exit_root_id(root: *mut cgroup_root) {
-    static void cgroup_exit_root_id(struct cgroup_root *root)
-    {
     lockdep_assert_held(&cgroup_mutex);
     idr_remove(&cgroup_hierarchy_idr, root.hierarchy_id);
     }
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_free_root(root: *mut cgroup_root) {
-    void cgroup_free_root(struct cgroup_root *root)
-    {
     kfree_rcu(root, rcu);
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_destroy_root(root: *mut cgroup_root) {
-    static void cgroup_destroy_root(struct cgroup_root *root)
-    {
-    struct cgroup *cgrp = &root.cgrp;
-    struct cgrp_cset_link *link, *tmp_link;
-    int ret;
+    let mut cgrp = &root.cgrp;
+    let mut link = core::ptr::null_mut();
+    let mut tmp_link = core::ptr::null_mut();
+    let mut ret = 0;
     trace_cgroup_destroy_root(root);
     cgroup_lock_and_drain_offline(&cgrp_dfl_root.cgrp);
-    BUG_ON(atomic_read(&root.nr_cgrps));
-    BUG_ON(!list_empty(&cgrp.self.children));
+    BUG_ON!(atomic_read(&root.nr_cgrps));
+    BUG_ON!(!list_empty(&cgrp.self.children));
     ret = blocking_notifier_call_chain(&cgroup_lifetime_notifier,
     CGROUP_LIFETIME_OFFLINE, cgrp);
-    WARN_ON_ONCE(notifier_to_errno(ret));
+    WARN_ON_ONCE!(notifier_to_errno(ret));
 // Rebind all subsystems back to the default hierarchy
-    WARN_ON(rebind_subsystems(&cgrp_dfl_root, root.subsys_mask));
+    WARN_ON!(rebind_subsystems(&cgrp_dfl_root, root.subsys_mask));
 //
 // Release all the links from cset_links to this hierarchy's
 // root cgroup
@@ -1252,11 +1464,12 @@ unsafe extern "C" fn cgroup_destroy_root(root: *mut cgroup_root) {
     kfree(link);
     }
     spin_unlock_irq(&css_set_lock);
-    WARN_ON_ONCE(list_empty(&root.root_list));
+    WARN_ON_ONCE!(list_empty(&root.root_list));
     list_del_rcu(&root.root_list);
-    cgroup_root_count--;
-    if (!have_favordynmods)
+    cgroup_root_count -= 1;
+    if (!have_favordynmods) {
     cgroup_favor_dynmods(root, false);
+    }
     cgroup_exit_root_id(root);
     cgroup_unlock();
     kernfs_destroy_root(root.kf_root);
@@ -1265,19 +1478,18 @@ unsafe extern "C" fn cgroup_destroy_root(root: *mut cgroup_root) {
 //
 // Returned cgroup is without refcount but it's valid as long as cset pins it.
 //
-    static inline struct cgroup *__cset_cgroup_from_root(struct css_set *cset,
-    struct cgroup_root *root)
-    {
-    struct cgroup *res_cgroup = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn __cset_cgroup_from_root(cset: *mut css_set, root: *mut cgroup_root) -> *mut c_void {
+    let mut res_cgroup = core::ptr::null_mut();
     if (cset == &init_css_set) {
     res_cgroup = &root.cgrp;
     } else if (root == &cgrp_dfl_root) {
     res_cgroup = cset.dfl_cgrp;
     } else {
-    struct cgrp_cset_link *link;
+pub static mut link: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&css_set_lock);
     list_for_each_entry(link, &cset.cgrp_links, cgrp_link) {
-    struct cgroup *c = link.cgrp;
+    let mut c = link.cgrp;
     if (c.root == root) {
     res_cgroup = c;
     break;
@@ -1299,11 +1511,10 @@ unsafe extern "C" fn cgroup_destroy_root(root: *mut cgroup_root) {
 // look up cgroup associated with current task's cgroup namespace on the
 // specified hierarchy
 //
-    static struct cgroup *
-    current_cgns_cgroup_from_root(struct cgroup_root *root)
-    {
-    struct cgroup *res = core::ptr::null_mut();
-    struct css_set *cset;
+#[no_mangle]
+pub unsafe extern "C" fn current_cgns_cgroup_from_root(root: *mut cgroup_root) -> *mut c_void {
+    let mut res = core::ptr::null_mut();
+pub static mut cset: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&css_set_lock);
     rcu_read_lock();
     cset = current.nsproxy.cgroup_ns.root_cset;
@@ -1313,7 +1524,7 @@ unsafe extern "C" fn cgroup_destroy_root(root: *mut cgroup_root) {
 // The namespace_sem is held by current, so the root cgroup can't
 // be umounted. Therefore, we can ensure that the res is non-NULL.
 //
-    WARN_ON_ONCE(!res);
+    WARN_ON_ONCE!(!res);
     return res;
     }
 //
@@ -1327,9 +1538,9 @@ unsafe extern "C" fn cgroup_destroy_root(root: *mut cgroup_root) {
 // - As a bonus returned cgrp is pinned with the current because it cannot
 // switch cgroup_ns asynchronously.
 //
-    static struct cgroup *current_cgns_cgroup_dfl(void)
-    {
-    struct css_set *cset;
+#[no_mangle]
+pub unsafe extern "C" fn current_cgns_cgroup_dfl() -> *mut c_void {
+pub static mut cset: *mut c_void = core::ptr::null_mut();
     if (current.nsproxy) {
     cset = current.nsproxy.cgroup_ns.root_cset;
     return __cset_cgroup_from_root(cset, &cgrp_dfl_root);
@@ -1344,9 +1555,8 @@ unsafe extern "C" fn cgroup_destroy_root(root: *mut cgroup_root) {
     }
     }
 // look up cgroup associated with given css_set on the specified hierarchy
-    static struct cgroup *cset_cgroup_from_root(struct css_set *cset,
-    struct cgroup_root *root)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cset_cgroup_from_root(cset: *mut css_set, root: *mut cgroup_root) -> *mut c_void {
     lockdep_assert_held(&css_set_lock);
     return __cset_cgroup_from_root(cset, root);
     }
@@ -1356,9 +1566,8 @@ unsafe extern "C" fn cgroup_destroy_root(root: *mut cgroup_root) {
 // Must be called with either cgroup_mutex or rcu read lock to prevent the
 // cgroup root from being destroyed.
 //
-    struct cgroup *task_cgroup_from_root(struct task_struct *task,
-    struct cgroup_root *root)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn task_cgroup_from_root(task: *mut task_struct, root: *mut cgroup_root) -> *mut c_void {
 //
 // No need to lock the task - since we hold css_set_lock the
 // task can't change groups.
@@ -1390,14 +1599,13 @@ unsafe extern "C" fn cgroup_destroy_root(root: *mut cgroup_root) {
 // P.S.  One more locking exception.  RCU is used to guard the
 // update of a tasks cgroup pointer by cgroup_attach_task()
 //
-    static struct kernfs_syscall_ops cgroup_kf_syscall_ops;
-    static char *cgroup_file_name(struct cgroup *cgrp, const struct cftype *cft,
-    char *buf)
-    {
-    struct cgroup_subsys *ss = cft.ss;
+pub static mut cgroup_kf_syscall_ops: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_file_name(cgrp: *mut cgroup, cft: *mut cftype, buf: *mut c_char) -> *mut c_void {
+    let mut ss = cft.ss;
     if (cft.ss && !(cft.flags & CFTYPE_NO_PREFIX) &&
     !(cgrp.root.flags & CGRP_ROOT_NOPREFIX)) {
-    const char *dbg = (cft.flags & CFTYPE_DEBUG) ? ".__DEBUG__." : "";
+    let mut dbg = (cft.flags & CFTYPE_DEBUG) ? ".__DEBUG__." : "";
     snprintf(buf, CGROUP_FILE_NAME_MAX, "%s%s.%s",
     dbg, cgroup_on_dfl(cgrp) ? ss.name : ss.legacy_name,
     cft.name);
@@ -1414,16 +1622,17 @@ unsafe extern "C" fn cgroup_destroy_root(root: *mut cgroup_root) {
 //
 #[no_mangle]
 unsafe extern "C" fn cgroup_file_mode(cft: *const cftype) -> umode_t {
-    static umode_t cgroup_file_mode(const struct cftype *cft)
-    {
-    let mut mode: umode_t = 0;
-    if (cft.read_u64 || cft.read_s64 || cft.seq_show)
+pub static mut mode: umode_t = 0;
+    if (cft.read_u64 || cft.read_s64 || cft.seq_show) {
     mode |= S_IRUGO;
+    }
     if (cft.write_u64 || cft.write_s64 || cft.write) {
-    if (cft.flags & CFTYPE_WORLD_WRITABLE)
+    if (cft.flags & CFTYPE_WORLD_WRITABLE) {
     mode |= S_IWUGO;
-    else
+    }
+    else {
     mode |= S_IWUSR;
+    }
     }
     return mode;
     }
@@ -1441,15 +1650,13 @@ unsafe extern "C" fn cgroup_file_mode(cft: *const cftype) -> umode_t {
 //
 #[no_mangle]
 unsafe extern "C" fn cgroup_calc_subtree_ss_mask(subtree_control: u32, this_ss_mask: u32) -> u32 {
-    static u32 cgroup_calc_subtree_ss_mask(u32 subtree_control, u32 this_ss_mask)
-    {
-    let mut cur_ss_mask: u32 = subtree_control;
-    struct cgroup_subsys *ss;
-    int ssid;
+pub static mut cur_ss_mask: u32 = 0;
+pub static mut ss: *mut c_void = core::ptr::null_mut();
+    let mut ssid = 0;
     lockdep_assert_held(&cgroup_mutex);
     cur_ss_mask |= cgrp_dfl_implicit_ss_mask;
     while (true) {
-    let mut new_ss_mask: u32 = cur_ss_mask;
+pub static mut new_ss_mask: u32 = 0;
     do_each_subsys_mask(ss, ssid, cur_ss_mask) {
     new_ss_mask |= ss.depends_on;
     } while_each_subsys_mask();
@@ -1459,8 +1666,9 @@ unsafe extern "C" fn cgroup_calc_subtree_ss_mask(subtree_control: u32, this_ss_m
 // to non-default hierarchies.
 //
     new_ss_mask &= this_ss_mask;
-    if (new_ss_mask == cur_ss_mask)
+    if (new_ss_mask == cur_ss_mask) {
     break;
+    }
     cur_ss_mask = new_ss_mask;
     }
     return cur_ss_mask;
@@ -1477,13 +1685,13 @@ unsafe extern "C" fn cgroup_calc_subtree_ss_mask(subtree_control: u32, this_ss_m
 //
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_kn_unlock(kn: *mut kernfs_node) {
-    void cgroup_kn_unlock(struct kernfs_node *kn)
-    {
-    struct cgroup *cgrp;
-    if (kernfs_type(kn) == KERNFS_DIR)
+pub static mut cgrp: *mut c_void = core::ptr::null_mut();
+    if (kernfs_type(kn) == KERNFS_DIR) {
     cgrp = kn.priv;
-    else
+    }
+    else {
     cgrp = kn_priv(kn);
+    }
     cgroup_unlock();
     kernfs_unbreak_active_protection(kn);
     cgroup_put(cgrp);
@@ -1505,40 +1713,44 @@ pub unsafe extern "C" fn cgroup_kn_unlock(kn: *mut kernfs_node) {
 // locking under kernfs active protection and allows all kernfs operations
 // including self-removal.
 //
-    struct cgroup *cgroup_kn_lock_live(struct kernfs_node *kn, bool drain_offline)
-    {
-    struct cgroup *cgrp;
-    if (kernfs_type(kn) == KERNFS_DIR)
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_kn_lock_live(kn: *mut kernfs_node, drain_offline: bool) -> *mut c_void {
+pub static mut cgrp: *mut c_void = core::ptr::null_mut();
+    if (kernfs_type(kn) == KERNFS_DIR) {
     cgrp = kn.priv;
-    else
+    }
+    else {
     cgrp = kn_priv(kn);
+    }
 //
 // We're gonna grab cgroup_mutex which nests outside kernfs
 // active_ref.  cgroup liveliness check alone provides enough
 // protection against removal.  Ensure @cgrp stays accessible and
 // break the active_ref protection.
 //
-    if (!cgroup_tryget(cgrp))
+    if (!cgroup_tryget(cgrp)) {
     return core::ptr::null_mut();
+    }
     kernfs_break_active_protection(kn);
-    if (drain_offline)
+    if (drain_offline) {
     cgroup_lock_and_drain_offline(cgrp);
-    else
+    }
+    else {
     cgroup_lock();
-    if (!cgroup_is_dead(cgrp))
+    }
+    if (!cgroup_is_dead(cgrp)) {
     return cgrp;
+    }
     cgroup_kn_unlock(kn);
     return core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_rm_file(cgrp: *mut cgroup, cft: *const cftype) {
-    static void cgroup_rm_file(struct cgroup *cgrp, const struct cftype *cft)
-    {
     char name[CGROUP_FILE_NAME_MAX];
     lockdep_assert_held(&cgroup_mutex);
     if (cft.file_offset) {
-    struct cgroup_subsys_state *css = cgroup_css(cgrp, cft.ss);
-    struct cgroup_file *cfile = (void *)css + cft.file_offset;
+    let mut css = cgroup_css(cgrp, cft.ss);
+    let mut cfile = css + cft.file_offset;
     spin_lock_irq(&cfile.lock);
     WRITE_ONCE(cfile.kn, core::ptr::null_mut());
     spin_unlock_irq(&cfile.lock);
@@ -1552,27 +1764,28 @@ unsafe extern "C" fn cgroup_rm_file(cgrp: *mut cgroup, cft: *const cftype) {
 //
 #[no_mangle]
 unsafe extern "C" fn css_clear_dir(css: *mut cgroup_subsys_state) {
-    static void css_clear_dir(struct cgroup_subsys_state *css)
-    {
-    struct cgroup *cgrp = css.cgroup;
-    struct cftype *cfts;
-    if (!(css.flags & CSS_VISIBLE))
+    let mut cgrp = css.cgroup;
+pub static mut cfts: *mut c_void = core::ptr::null_mut();
+    if (!(css.flags & CSS_VISIBLE)) {
     return;
+    }
     css.flags &= ~CSS_VISIBLE;
     if (css_is_self(css)) {
     if (cgroup_on_dfl(cgrp)) {
     cgroup_addrm_files(css, cgrp,
     cgroup_base_files, false);
-    if (cgroup_psi_enabled())
+    if (cgroup_psi_enabled()) {
     cgroup_addrm_files(css, cgrp,
     cgroup_psi_files, false);
+    }
     } else {
     cgroup_addrm_files(css, cgrp,
     cgroup1_base_files, false);
     }
     } else {
-    list_for_each_entry(cfts, &css.ss.cfts, node)
+    list_for_each_entry(cfts, &css.ss.cfts, node) {
     cgroup_addrm_files(css, cgrp, cfts, false);
+    }
     }
     }
 //
@@ -1583,19 +1796,20 @@ unsafe extern "C" fn css_clear_dir(css: *mut cgroup_subsys_state) {
 //
 #[no_mangle]
 unsafe extern "C" fn css_populate_dir(css: *mut cgroup_subsys_state) -> c_int {
-    static int css_populate_dir(struct cgroup_subsys_state *css)
-    {
-    struct cgroup *cgrp = css.cgroup;
-    struct cftype *cfts, *failed_cfts;
-    int ret;
-    if (css.flags & CSS_VISIBLE)
+    let mut cgrp = css.cgroup;
+    let mut cfts = core::ptr::null_mut();
+    let mut failed_cfts = core::ptr::null_mut();
+    let mut ret = 0;
+    if (css.flags & CSS_VISIBLE) {
     return 0;
+    }
     if (css_is_self(css)) {
     if (cgroup_on_dfl(cgrp)) {
     ret = cgroup_addrm_files(css, cgrp,
     cgroup_base_files, true);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     if (cgroup_psi_enabled()) {
     ret = cgroup_addrm_files(css, cgrp,
     cgroup_psi_files, true);
@@ -1608,36 +1822,37 @@ unsafe extern "C" fn css_populate_dir(css: *mut cgroup_subsys_state) -> c_int {
     } else {
     ret = cgroup_addrm_files(css, cgrp,
     cgroup1_base_files, true);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     }
     } else {
     list_for_each_entry(cfts, &css.ss.cfts, node) {
     ret = cgroup_addrm_files(css, cgrp, cfts, true);
     if (ret < 0) {
     failed_cfts = cfts;
-    goto err;
+// goto;
     }
     }
     }
     css.flags |= CSS_VISIBLE;
     return 0;
-    err:
+// label;
     list_for_each_entry(cfts, &css.ss.cfts, node) {
-    if (cfts == failed_cfts)
+    if (cfts == failed_cfts) {
     break;
+    }
     cgroup_addrm_files(css, cgrp, cfts, false);
     }
     return ret;
     }
 #[no_mangle]
 pub unsafe extern "C" fn rebind_subsystems(dst_root: *mut cgroup_root, ss_mask: u32) -> c_int {
-    int rebind_subsystems(struct cgroup_root *dst_root, u32 ss_mask)
-    {
-    struct cgroup *dcgrp = &dst_root.cgrp;
-    struct cgroup_subsys *ss;
-    int ssid, ret;
-    let mut dfl_disable_ss_mask: u32 = 0;
+    let mut dcgrp = &dst_root.cgrp;
+pub static mut ss: *mut c_void = core::ptr::null_mut();
+    let mut ssid = 0;
+    let mut ret = 0;
+pub static mut dfl_disable_ss_mask: u32 = 0;
     lockdep_assert_held(&cgroup_mutex);
     do_each_subsys_mask(ss, ssid, ss_mask) {
 //
@@ -1646,20 +1861,23 @@ pub unsafe extern "C" fn rebind_subsystems(dst_root: *mut cgroup_root, ss_mask: 
 // rule and can be stolen.
 //
     if (css_next_child(core::ptr::null_mut(), cgroup_css(&ss.root.cgrp, ss)) &&
-    !ss.implicit_on_dfl)
+    !ss.implicit_on_dfl) {
     return -EBUSY;
+    }
 // can't move between two non-dummy roots either
-    if (ss.root != &cgrp_dfl_root && dst_root != &cgrp_dfl_root)
+    if (ss.root != &cgrp_dfl_root && dst_root != &cgrp_dfl_root) {
     return -EBUSY;
+    }
 //
 // Collect ssid's that need to be disabled from default
 // hierarchy.
 //
-    if (ss.root == &cgrp_dfl_root)
+    if (ss.root == &cgrp_dfl_root) {
     dfl_disable_ss_mask |= 1 << ssid;
+    }
     } while_each_subsys_mask();
     if (dfl_disable_ss_mask) {
-    struct cgroup *scgrp = &cgrp_dfl_root.cgrp;
+    let mut scgrp = &cgrp_dfl_root.cgrp;
 //
 // Controllers leaving the default hierarchy are disabled
 // together. cgroup_rebind_ss_mask makes cgroup_apply_control()
@@ -1670,17 +1888,18 @@ pub unsafe extern "C" fn rebind_subsystems(dst_root: *mut cgroup_root, ss_mask: 
 //
     cgrp_dfl_root.subsys_mask &= ~dfl_disable_ss_mask;
     cgroup_rebind_ss_mask = dfl_disable_ss_mask;
-    WARN_ON(cgroup_apply_control(scgrp));
+    WARN_ON!(cgroup_apply_control(scgrp));
     cgroup_rebind_ss_mask = 0;
     cgroup_finalize_control(scgrp, 0);
     }
     do_each_subsys_mask(ss, ssid, ss_mask) {
-    struct cgroup_root *src_root = ss.root;
-    struct cgroup *scgrp = &src_root.cgrp;
-    struct cgroup_subsys_state *css = cgroup_css(scgrp, ss);
-    struct css_set *cset, *cset_pos;
-    struct css_task_iter *it;
-    WARN_ON(!css || cgroup_css(dcgrp, ss));
+    let mut src_root = ss.root;
+    let mut scgrp = &src_root.cgrp;
+    let mut css = cgroup_css(scgrp, ss);
+    let mut cset = core::ptr::null_mut();
+    let mut cset_pos = core::ptr::null_mut();
+pub static mut it: *mut c_void = core::ptr::null_mut();
+    WARN_ON!(!css || cgroup_css(dcgrp, ss));
     if (src_root != &cgrp_dfl_root) {
 //
 // Disable from the source, migrating its tasks to the
@@ -1688,7 +1907,7 @@ pub unsafe extern "C" fn rebind_subsystems(dst_root: *mut cgroup_root, ss_mask: 
 //
     src_root.subsys_mask &= ~(1 << ssid);
     cgroup_rebind_ss_mask = 1 << ssid;
-    WARN_ON(cgroup_apply_control(scgrp));
+    WARN_ON!(cgroup_apply_control(scgrp));
     cgroup_rebind_ss_mask = 0;
     cgroup_finalize_control(scgrp, 0);
     }
@@ -1698,7 +1917,7 @@ pub unsafe extern "C" fn rebind_subsystems(dst_root: *mut cgroup_root, ss_mask: 
     ss.root = dst_root;
     spin_lock_irq(&css_set_lock);
     css.cgroup = dcgrp;
-    WARN_ON(!list_empty(&dcgrp.e_csets[ss.id]));
+    WARN_ON!(!list_empty(&dcgrp.e_csets[ss.id]));
     list_for_each_entry_safe(cset, cset_pos, &scgrp.e_csets[ss.id],
     e_cset_node[ss.id]) {
     list_move_tail(&cset.e_cset_node[ss.id],
@@ -1710,9 +1929,10 @@ pub unsafe extern "C" fn rebind_subsystems(dst_root: *mut cgroup_root, ss_mask: 
 // finished when it->cset_pos meets it->cset_head, so only
 // update it->cset_head is enough here.
 //
-    list_for_each_entry(it, &cset.task_iters, iters_node)
+    list_for_each_entry(it, &cset.task_iters, iters_node) {
     if (it.cset_head == &scgrp.e_csets[ss.id])
     it.cset_head = &dcgrp.e_csets[ss.id];
+    }
     }
     spin_unlock_irq(&css_set_lock);
 // default hierarchy doesn't enable controllers by default
@@ -1724,33 +1944,35 @@ pub unsafe extern "C" fn rebind_subsystems(dst_root: *mut cgroup_root, ss_mask: 
     static_branch_disable(cgroup_subsys_on_dfl_key[ssid]);
     }
     ret = cgroup_apply_control(dcgrp);
-    if (ret)
-    pr_warn("partial failure to rebind %s controller (err=%d)\n",
+    if (ret) {
+    pr_warn!("partial failure to rebind %s controller (err=%d)\n",
     ss.name, ret);
-    if (ss.bind)
+    }
+    if (ss.bind) {
     ss.bind(css);
+    }
     } while_each_subsys_mask();
     kernfs_activate(dcgrp.kn);
     return 0;
     }
-    int cgroup_show_path(struct seq_file *sf, struct kernfs_node *kf_node,
-    struct kernfs_root *kf_root)
-    {
-    let mut len: c_int = 0;
-    char *buf = core::ptr::null_mut();
-    struct cgroup_root *kf_cgroot = cgroup_root_from_kf(kf_root);
-    struct cgroup *ns_cgroup;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_show_path(sf: *mut seq_file, kf_node: *mut kernfs_node, kf_root: *mut kernfs_root) -> c_int {
+pub static mut len: c_int = 0;
+    let mut buf = core::ptr::null_mut();
+    let mut kf_cgroot = cgroup_root_from_kf(kf_root);
+pub static mut ns_cgroup: *mut c_void = core::ptr::null_mut();
     buf = kmalloc(PATH_MAX, GFP_KERNEL);
-    if (!buf)
+    if (!buf) {
     return -ENOMEM;
+    }
     spin_lock_irq(&css_set_lock);
     ns_cgroup = current_cgns_cgroup_from_root(kf_cgroot);
     len = kernfs_path_from_node(kf_node, ns_cgroup.kn, buf, PATH_MAX);
     spin_unlock_irq(&css_set_lock);
-    if (len == -E2BIG)
+    if (len == -E2BIG) {
     len = -ERANGE;
-#[no_mangle]
-pub unsafe extern "C" fn if(0: len >) -> else {
+    }
+if true {
     seq_escape(sf, buf, " \t\n\\");
     len = 0;
     }
@@ -1766,113 +1988,118 @@ pub unsafe extern "C" fn if(0: len >) -> else {
     Opt_pids_localevents,
     nr__cgroup2_params
     };
-    static const struct fs_parameter_spec cgroup2_fs_parameters[] = {
-    fsparam_flag("nsdelegate",		Opt_nsdelegate),
-    fsparam_flag("favordynmods",		Opt_favordynmods),
-    fsparam_flag("memory_localevents",	Opt_memory_localevents),
-    fsparam_flag("memory_recursiveprot",	Opt_memory_recursiveprot),
-    fsparam_flag("memory_hugetlb_accounting", Opt_memory_hugetlb_accounting),
-    fsparam_flag("pids_localevents",	Opt_pids_localevents),
-    {}
-    };
+pub static mut fs_parameter_spec: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn cgroup2_parse_param(fc: *mut fs_context, param: *mut fs_parameter) -> c_int {
-    static int cgroup2_parse_param(struct fs_context *fc, struct fs_parameter *param)
-    {
-    struct cgroup_fs_context *ctx = cgroup_fc2context(fc);
-    struct fs_parse_result result;
-    int opt;
+    let mut ctx = cgroup_fc2context(fc);
+pub static mut result: usize = 0;
+    let mut opt = 0;
     opt = fs_parse(fc, cgroup2_fs_parameters, param, &result);
-    if (opt < 0)
+    if (opt < 0) {
     return opt;
-    switch (opt) {
-    case Opt_nsdelegate:
+    }
+    match (opt) {
+    Opt_nsdelegate => {
     ctx.flags |= CGRP_ROOT_NS_DELEGATE;
     return 0;
-    case Opt_favordynmods:
+    }
+    Opt_favordynmods => {
     ctx.flags |= CGRP_ROOT_FAVOR_DYNMODS;
     return 0;
-    case Opt_memory_localevents:
+    }
+    Opt_memory_localevents => {
     ctx.flags |= CGRP_ROOT_MEMORY_LOCAL_EVENTS;
     return 0;
-    case Opt_memory_recursiveprot:
+    }
+    Opt_memory_recursiveprot => {
     ctx.flags |= CGRP_ROOT_MEMORY_RECURSIVE_PROT;
     return 0;
-    case Opt_memory_hugetlb_accounting:
+    }
+    Opt_memory_hugetlb_accounting => {
     ctx.flags |= CGRP_ROOT_MEMORY_HUGETLB_ACCOUNTING;
     return 0;
-    case Opt_pids_localevents:
+    }
+    Opt_pids_localevents => {
     ctx.flags |= CGRP_ROOT_PIDS_LOCAL_EVENTS;
     return 0;
     }
+    }
     return -EINVAL;
     }
-    struct cgroup_of_peak *of_peak(struct kernfs_open_file *of)
-    {
-    struct cgroup_file_ctx *ctx = of.priv;
+#[no_mangle]
+pub unsafe extern "C" fn of_peak(of: *mut kernfs_open_file) -> *mut c_void {
+    let mut ctx = of.priv;
     return &ctx.peak;
     }
 #[no_mangle]
 unsafe extern "C" fn apply_cgroup_root_flags(root_flags: c_uint) {
-    static void apply_cgroup_root_flags(unsigned int root_flags)
-    {
     if (current.nsproxy.cgroup_ns == &init_cgroup_ns) {
-    if (root_flags & CGRP_ROOT_NS_DELEGATE)
+    if (root_flags & CGRP_ROOT_NS_DELEGATE) {
     cgrp_dfl_root.flags |= CGRP_ROOT_NS_DELEGATE;
-    else
+    }
+    else {
     cgrp_dfl_root.flags &= ~CGRP_ROOT_NS_DELEGATE;
+    }
     cgroup_favor_dynmods(&cgrp_dfl_root,
     root_flags & CGRP_ROOT_FAVOR_DYNMODS);
-    if (root_flags & CGRP_ROOT_MEMORY_LOCAL_EVENTS)
+    if (root_flags & CGRP_ROOT_MEMORY_LOCAL_EVENTS) {
     cgrp_dfl_root.flags |= CGRP_ROOT_MEMORY_LOCAL_EVENTS;
-    else
+    }
+    else {
     cgrp_dfl_root.flags &= ~CGRP_ROOT_MEMORY_LOCAL_EVENTS;
-    if (root_flags & CGRP_ROOT_MEMORY_RECURSIVE_PROT)
+    }
+    if (root_flags & CGRP_ROOT_MEMORY_RECURSIVE_PROT) {
     cgrp_dfl_root.flags |= CGRP_ROOT_MEMORY_RECURSIVE_PROT;
-    else
+    }
+    else {
     cgrp_dfl_root.flags &= ~CGRP_ROOT_MEMORY_RECURSIVE_PROT;
-    if (root_flags & CGRP_ROOT_MEMORY_HUGETLB_ACCOUNTING)
+    }
+    if (root_flags & CGRP_ROOT_MEMORY_HUGETLB_ACCOUNTING) {
     cgrp_dfl_root.flags |= CGRP_ROOT_MEMORY_HUGETLB_ACCOUNTING;
-    else
+    }
+    else {
     cgrp_dfl_root.flags &= ~CGRP_ROOT_MEMORY_HUGETLB_ACCOUNTING;
-    if (root_flags & CGRP_ROOT_PIDS_LOCAL_EVENTS)
+    }
+    if (root_flags & CGRP_ROOT_PIDS_LOCAL_EVENTS) {
     cgrp_dfl_root.flags |= CGRP_ROOT_PIDS_LOCAL_EVENTS;
-    else
+    }
+    else {
     cgrp_dfl_root.flags &= ~CGRP_ROOT_PIDS_LOCAL_EVENTS;
+    }
     }
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_show_options(seq: *mut seq_file, kf_root: *mut kernfs_root) -> c_int {
-    static int cgroup_show_options(struct seq_file *seq, struct kernfs_root *kf_root)
-    {
-    if (cgrp_dfl_root.flags & CGRP_ROOT_NS_DELEGATE)
+    if (cgrp_dfl_root.flags & CGRP_ROOT_NS_DELEGATE) {
     seq_puts(seq, ",nsdelegate");
-    if (cgrp_dfl_root.flags & CGRP_ROOT_FAVOR_DYNMODS)
+    }
+    if (cgrp_dfl_root.flags & CGRP_ROOT_FAVOR_DYNMODS) {
     seq_puts(seq, ",favordynmods");
-    if (cgrp_dfl_root.flags & CGRP_ROOT_MEMORY_LOCAL_EVENTS)
+    }
+    if (cgrp_dfl_root.flags & CGRP_ROOT_MEMORY_LOCAL_EVENTS) {
     seq_puts(seq, ",memory_localevents");
-    if (cgrp_dfl_root.flags & CGRP_ROOT_MEMORY_RECURSIVE_PROT)
+    }
+    if (cgrp_dfl_root.flags & CGRP_ROOT_MEMORY_RECURSIVE_PROT) {
     seq_puts(seq, ",memory_recursiveprot");
-    if (cgrp_dfl_root.flags & CGRP_ROOT_MEMORY_HUGETLB_ACCOUNTING)
+    }
+    if (cgrp_dfl_root.flags & CGRP_ROOT_MEMORY_HUGETLB_ACCOUNTING) {
     seq_puts(seq, ",memory_hugetlb_accounting");
-    if (cgrp_dfl_root.flags & CGRP_ROOT_PIDS_LOCAL_EVENTS)
+    }
+    if (cgrp_dfl_root.flags & CGRP_ROOT_PIDS_LOCAL_EVENTS) {
     seq_puts(seq, ",pids_localevents");
+    }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_reconfigure(fc: *mut fs_context) -> c_int {
-    static int cgroup_reconfigure(struct fs_context *fc)
-    {
-    struct cgroup_fs_context *ctx = cgroup_fc2context(fc);
+    let mut ctx = cgroup_fc2context(fc);
     apply_cgroup_root_flags(ctx.flags);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn init_cgroup_housekeeping(cgrp: *mut cgroup) {
-    static void init_cgroup_housekeeping(struct cgroup *cgrp)
-    {
-    struct cgroup_subsys *ss;
-    int ssid;
+pub static mut ss: *mut c_void = core::ptr::null_mut();
+    let mut ssid = 0;
     INIT_LIST_HEAD(&cgrp.self.sibling);
     INIT_LIST_HEAD(&cgrp.self.children);
     INIT_LIST_HEAD(&cgrp.cset_links);
@@ -1884,48 +2111,51 @@ unsafe extern "C" fn init_cgroup_housekeeping(cgrp: *mut cgroup) {
     cgrp.max_descendants = INT_MAX;
     cgrp.max_depth = INT_MAX;
     prev_cputime_init(&cgrp.prev_cputime);
-    for_each_subsys(ss, ssid)
+    for_each_subsys(ss, ssid) {
     INIT_LIST_HEAD(&cgrp.e_csets[ssid]);
+    }
 
-    for (int i = 0; i < ARRAY_SIZE(cgrp.bpf.revisions); i++)
+    for (int i = 0; i < ARRAY_SIZE!(cgrp.bpf.revisions); i++) {
     cgrp.bpf.revisions[i] = 1;
+    }
 
     init_waitqueue_head(&cgrp.offline_waitq);
     INIT_WORK(&cgrp.release_agent_work, cgroup1_release_agent);
     }
 #[no_mangle]
 pub unsafe extern "C" fn init_cgroup_root(ctx: *mut cgroup_fs_context) {
-    void init_cgroup_root(struct cgroup_fs_context *ctx)
-    {
-    struct cgroup_root *root = ctx.root;
-    struct cgroup *cgrp = &root.cgrp;
+    let mut root = ctx.root;
+    let mut cgrp = &root.cgrp;
     INIT_LIST_HEAD_RCU(&root.root_list);
     atomic_set(&root.nr_cgrps, 1);
     cgrp.root = root;
     init_cgroup_housekeeping(cgrp);
 // DYNMODS must be modified through cgroup_favor_dynmods()
     root.flags = ctx.flags & ~CGRP_ROOT_FAVOR_DYNMODS;
-    if (ctx.release_agent)
+    if (ctx.release_agent) {
     strscpy(root.release_agent_path, ctx.release_agent, PATH_MAX);
-    if (ctx.name)
+    }
+    if (ctx.name) {
     strscpy(root.name, ctx.name, MAX_CGROUP_ROOT_NAMELEN);
-    if (ctx.cpuset_clone_children)
+    }
+    if (ctx.cpuset_clone_children) {
     set_bit(CGRP_CPUSET_CLONE_CHILDREN, &root.cgrp.flags);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_setup_root(root: *mut cgroup_root, ss_mask: u32) -> c_int {
-    int cgroup_setup_root(struct cgroup_root *root, u32 ss_mask)
-    {
-    LIST_HEAD(tmp_links);
-    struct cgroup *root_cgrp = &root.cgrp;
-    struct kernfs_syscall_ops *kf_sops;
-    struct css_set *cset;
-    int i, ret;
+pub static mut tmp_links: usize = 0;
+    let mut root_cgrp = &root.cgrp;
+pub static mut kf_sops: *mut c_void = core::ptr::null_mut();
+pub static mut cset: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    let mut ret = 0;
     lockdep_assert_held(&cgroup_mutex);
     ret = percpu_ref_init(&root_cgrp.self.refcnt, css_release,
     0, GFP_KERNEL);
-    if (ret)
-    goto out;
+    if (ret) {
+// goto;
+    }
 //
 // We're accessing css_set_count without locking css_set_lock here,
 // but that's OK - it can only be increased by someone holding
@@ -1934,11 +2164,13 @@ pub unsafe extern "C" fn cgroup_setup_root(root: *mut cgroup_root, ss_mask: u32)
 // which can't be more than the existing ones.  Allocate 2x.
 //
     ret = allocate_cgrp_cset_links(2 * css_set_count, &tmp_links);
-    if (ret)
-    goto cancel_ref;
+    if (ret) {
+// goto;
+    }
     ret = cgroup_init_root_id(root);
-    if (ret)
-    goto cancel_ref;
+    if (ret) {
+// goto;
+    }
     kf_sops = root == &cgrp_dfl_root ?
     &cgroup_kf_syscall_ops : &cgroup1_kf_syscall_ops;
     root.kf_root = kernfs_create_root(kf_sops,
@@ -1949,23 +2181,26 @@ pub unsafe extern "C" fn cgroup_setup_root(root: *mut cgroup_root, ss_mask: u32)
     root_cgrp);
     if (IS_ERR(root.kf_root)) {
     ret = PTR_ERR(root.kf_root);
-    goto exit_root_id;
+// goto;
     }
     root_cgrp.kn = kernfs_root_to_node(root.kf_root);
-    WARN_ON_ONCE(cgroup_ino(root_cgrp) != 1);
+    WARN_ON_ONCE!(cgroup_ino(root_cgrp) != 1);
     root_cgrp.ancestors[0] = root_cgrp;
     ret = css_populate_dir(&root_cgrp.self);
-    if (ret)
-    goto destroy_root;
+    if (ret) {
+// goto;
+    }
     ret = css_rstat_init(&root_cgrp.self);
-    if (ret)
-    goto destroy_root;
+    if (ret) {
+// goto;
+    }
     ret = rebind_subsystems(root, ss_mask);
-    if (ret)
-    goto exit_stats;
+    if (ret) {
+// goto;
+    }
     ret = blocking_notifier_call_chain(&cgroup_lifetime_notifier,
     CGROUP_LIFETIME_ONLINE, root_cgrp);
-    WARN_ON_ONCE(notifier_to_errno(ret));
+    WARN_ON_ONCE!(notifier_to_errno(ret));
     trace_cgroup_setup_root(root);
 //
 // There must be no failure case after here, since rebinding takes
@@ -1973,7 +2208,7 @@ pub unsafe extern "C" fn cgroup_setup_root(root: *mut cgroup_root, ss_mask: u32)
 // the failure exit path.
 //
     list_add_rcu(&root.root_list, &cgroup_roots);
-    cgroup_root_count++;
+    cgroup_root_count += 1;
 //
 // Link the root cgroup in this hierarchy into all the css_set
 // objects.
@@ -1981,47 +2216,48 @@ pub unsafe extern "C" fn cgroup_setup_root(root: *mut cgroup_root, ss_mask: u32)
     spin_lock_irq(&css_set_lock);
     hash_for_each(css_set_table, i, cset, hlist) {
     link_css_set(&tmp_links, cset, root_cgrp);
-    if (css_set_populated(cset))
+    if (css_set_populated(cset)) {
     css_update_populated(&root_cgrp.self, true);
     }
+    }
     spin_unlock_irq(&css_set_lock);
-    BUG_ON(!list_empty(&root_cgrp.self.children));
-    BUG_ON(atomic_read(&root.nr_cgrps) != 1);
+    BUG_ON!(!list_empty(&root_cgrp.self.children));
+    BUG_ON!(atomic_read(&root.nr_cgrps) != 1);
     ret = 0;
-    goto out;
-    exit_stats:
+// goto;
+// label;
     css_rstat_exit(&root_cgrp.self);
-    destroy_root:
+// label;
     kernfs_destroy_root(root.kf_root);
     root.kf_root = core::ptr::null_mut();
-    exit_root_id:
+// label;
     cgroup_exit_root_id(root);
-    cancel_ref:
+// label;
     percpu_ref_exit(&root_cgrp.self.refcnt);
-    out:
+// label;
     free_cgrp_cset_links(&tmp_links);
     return ret;
     }
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_do_get_tree(fc: *mut fs_context) -> c_int {
-    int cgroup_do_get_tree(struct fs_context *fc)
-    {
-    struct cgroup_fs_context *ctx = cgroup_fc2context(fc);
-    int ret;
+    let mut ctx = cgroup_fc2context(fc);
+    let mut ret = 0;
     ctx.kfc.root = ctx.root.kf_root;
-    if (fc.fs_type == &cgroup2_fs_type)
+    if (fc.fs_type == &cgroup2_fs_type) {
     ctx.kfc.magic = CGROUP2_SUPER_MAGIC;
-    else
+    }
+    else {
     ctx.kfc.magic = CGROUP_SUPER_MAGIC;
+    }
     ret = kernfs_get_tree(fc);
 //
 // In non-init cgroup namespace, instead of root cgroup's dentry,
 // we return the dentry corresponding to the cgroupns->root_cgrp.
 //
     if (!ret && ctx.ns != &init_cgroup_ns) {
-    struct dentry *nsdentry;
-    struct super_block *sb = fc.root.d_sb;
-    struct cgroup *cgrp;
+pub static mut nsdentry: *mut c_void = core::ptr::null_mut();
+    let mut sb = fc.root.d_sb;
+pub static mut cgrp: *mut c_void = core::ptr::null_mut();
     cgroup_lock();
     spin_lock_irq(&css_set_lock);
     cgrp = cset_cgroup_from_root(ctx.ns.root_cset, ctx.root);
@@ -2036,8 +2272,9 @@ pub unsafe extern "C" fn cgroup_do_get_tree(fc: *mut fs_context) -> c_int {
     }
     fc.root = nsdentry;
     }
-    if (!ctx.kfc.new_sb_created)
+    if (!ctx.kfc.new_sb_created) {
     cgroup_put(&ctx.root.cgrp);
+    }
     return ret;
     }
 //
@@ -2045,9 +2282,7 @@ pub unsafe extern "C" fn cgroup_do_get_tree(fc: *mut fs_context) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn cgroup_fs_context_free(fc: *mut fs_context) {
-    static void cgroup_fs_context_free(struct fs_context *fc)
-    {
-    struct cgroup_fs_context *ctx = cgroup_fc2context(fc);
+    let mut ctx = cgroup_fc2context(fc);
     kfree(ctx.name);
     kfree(ctx.release_agent);
     put_cgroup_ns(ctx.ns);
@@ -2056,62 +2291,51 @@ unsafe extern "C" fn cgroup_fs_context_free(fc: *mut fs_context) {
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_get_tree(fc: *mut fs_context) -> c_int {
-    static int cgroup_get_tree(struct fs_context *fc)
-    {
-    struct cgroup_fs_context *ctx = cgroup_fc2context(fc);
-    int ret;
+    let mut ctx = cgroup_fc2context(fc);
+    let mut ret = 0;
     WRITE_ONCE(cgrp_dfl_visible, true);
     cgroup_get_live(&cgrp_dfl_root.cgrp);
     ctx.root = &cgrp_dfl_root;
     ret = cgroup_do_get_tree(fc);
-    if (!ret)
+    if (!ret) {
     apply_cgroup_root_flags(ctx.flags);
+    }
     return ret;
     }
-    static const struct fs_context_operations cgroup_fs_context_ops = {
-    .free		= cgroup_fs_context_free,
-    .parse_param	= cgroup2_parse_param,
-    .get_tree	= cgroup_get_tree,
-    .reconfigure	= cgroup_reconfigure,
-    };
-    static const struct fs_context_operations cgroup1_fs_context_ops = {
-    .free		= cgroup_fs_context_free,
-    .parse_param	= cgroup1_parse_param,
-    .get_tree	= cgroup1_get_tree,
-    .reconfigure	= cgroup1_reconfigure,
-    };
+pub static mut fs_context_operations: usize = 0;
+pub static mut fs_context_operations: usize = 0;
 //
 // Initialise the cgroup filesystem creation/reconfiguration context.  Notably,
 // we select the namespace we're going to use.
 //
 #[no_mangle]
 unsafe extern "C" fn cgroup_init_fs_context(fc: *mut fs_context) -> c_int {
-    static int cgroup_init_fs_context(struct fs_context *fc)
-    {
-    struct cgroup_fs_context *ctx;
-    ctx = kzalloc_obj(struct cgroup_fs_context);
-    if (!ctx)
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+    ctx = kzalloc_obj(cgroup_fs_context);
+    if (!ctx) {
     return -ENOMEM;
+    }
     ctx.ns = current.nsproxy.cgroup_ns;
     get_cgroup_ns(ctx.ns);
     fc.fs_private = &ctx.kfc;
-    if (fc.fs_type == &cgroup2_fs_type)
+    if (fc.fs_type == &cgroup2_fs_type) {
     fc.ops = &cgroup_fs_context_ops;
-    else
+    }
+    else {
     fc.ops = &cgroup1_fs_context_ops;
+    }
     put_user_ns(fc.user_ns);
     fc.user_ns = get_user_ns(ctx.ns.user_ns);
     fc.global = true;
-    if (have_favordynmods)
+    if (have_favordynmods) {
     ctx.flags |= CGRP_ROOT_FAVOR_DYNMODS;
+    }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_kill_sb(sb: *mut super_block) {
-    static void cgroup_kill_sb(struct super_block *sb)
-    {
-    struct kernfs_root *kf_root = kernfs_root_from_sb(sb);
-    struct cgroup_root *root = cgroup_root_from_kf(kf_root);
+    let mut kf_root = kernfs_root_from_sb(sb);
+    let mut root = cgroup_root_from_kf(kf_root);
 //
 // If @root doesn't have any children, start killing it.
 // This prevents new mounts by disabling percpu_ref_tryget_live().
@@ -2119,55 +2343,37 @@ unsafe extern "C" fn cgroup_kill_sb(sb: *mut super_block) {
 // And don't kill the default root.
 //
     if (list_empty(&root.cgrp.self.children) && root != &cgrp_dfl_root &&
-    !percpu_ref_is_dying(&root.cgrp.self.refcnt))
+    !percpu_ref_is_dying(&root.cgrp.self.refcnt)) {
     percpu_ref_kill(&root.cgrp.self.refcnt);
+    }
     cgroup_put(&root.cgrp);
     kernfs_kill_sb(sb);
     }
-    struct file_system_type cgroup_fs_type = {
-    .name			= "cgroup",
-    .init_fs_context	= cgroup_init_fs_context,
-    .parameters		= cgroup1_fs_parameters,
-    .kill_sb		= cgroup_kill_sb,
-    .fs_flags		= FS_USERNS_MOUNT,
-    };
-    static struct file_system_type cgroup2_fs_type = {
-    .name			= "cgroup2",
-    .init_fs_context	= cgroup_init_fs_context,
-    .parameters		= cgroup2_fs_parameters,
-    .kill_sb		= cgroup_kill_sb,
-    .fs_flags		= FS_USERNS_MOUNT,
-    };
+pub static mut file_system_type: usize = 0;
+pub static mut file_system_type: usize = 0;
 
     enum cpuset_param {
     Opt_cpuset_v2_mode,
     };
-    static const struct fs_parameter_spec cpuset_fs_parameters[] = {
-    fsparam_flag  ("cpuset_v2_mode", Opt_cpuset_v2_mode),
-    {}
-    };
+pub static mut fs_parameter_spec: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn cpuset_parse_param(fc: *mut fs_context, param: *mut fs_parameter) -> c_int {
-    static int cpuset_parse_param(struct fs_context *fc, struct fs_parameter *param)
-    {
-    struct cgroup_fs_context *ctx = cgroup_fc2context(fc);
-    struct fs_parse_result result;
-    int opt;
+    let mut ctx = cgroup_fc2context(fc);
+pub static mut result: usize = 0;
+    let mut opt = 0;
     opt = fs_parse(fc, cpuset_fs_parameters, param, &result);
-    if (opt < 0)
+    if (opt < 0) {
     return opt;
-    switch (opt) {
-    case Opt_cpuset_v2_mode:
+    }
+    match (opt) {
+    Opt_cpuset_v2_mode => {
     ctx.flags |= CGRP_ROOT_CPUSET_V2_MODE;
     return 0;
     }
+    }
     return -EINVAL;
     }
-    static const struct fs_context_operations cpuset_fs_context_ops = {
-    .get_tree	= cgroup1_get_tree,
-    .free		= cgroup_fs_context_free,
-    .parse_param	= cpuset_parse_param,
-    };
+pub static mut fs_context_operations: usize = 0;
 //
 // This is ugly, but preserves the userspace API for existing cpuset
 // users. If someone tries to mount the "cpuset" filesystem, we
@@ -2175,11 +2381,9 @@ unsafe extern "C" fn cpuset_parse_param(fc: *mut fs_context, param: *mut fs_para
 //
 #[no_mangle]
 unsafe extern "C" fn cpuset_init_fs_context(fc: *mut fs_context) -> c_int {
-    static int cpuset_init_fs_context(struct fs_context *fc)
-    {
-    char *agent = kstrdup("/sbin/cpuset_release_agent", GFP_USER);
-    struct cgroup_fs_context *ctx;
-    int err;
+    let mut agent = kstrdup("/sbin/cpuset_release_agent", GFP_USER);
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
     err = cgroup_init_fs_context(fc);
     if (err) {
     kfree(agent);
@@ -2195,23 +2399,16 @@ unsafe extern "C" fn cpuset_init_fs_context(fc: *mut fs_context) -> c_int {
     fc.fs_type = &cgroup_fs_type;
     return 0;
     }
-    static struct file_system_type cpuset_fs_type = {
-    .name			= "cpuset",
-    .init_fs_context	= cpuset_init_fs_context,
-    .parameters		= cpuset_fs_parameters,
-    .fs_flags		= FS_USERNS_MOUNT,
-    };
+pub static mut file_system_type: usize = 0;
 
-    int cgroup_path_ns_locked(struct cgroup *cgrp, char *buf, size_t buflen,
-    struct cgroup_namespace *ns)
-    {
-    struct cgroup *root = cset_cgroup_from_root(ns.root_cset, cgrp.root);
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_path_ns_locked(cgrp: *mut cgroup, buf: *mut c_char, buflen: size_t, ns: *mut cgroup_namespace) -> c_int {
+    let mut root = cset_cgroup_from_root(ns.root_cset, cgrp.root);
     return kernfs_path_from_node(cgrp.kn, root.kn, buf, buflen);
     }
-    int cgroup_path_ns(struct cgroup *cgrp, char *buf, size_t buflen,
-    struct cgroup_namespace *ns)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_path_ns(cgrp: *mut cgroup, buf: *mut c_char, buflen: size_t, ns: *mut cgroup_namespace) -> c_int {
+    let mut ret = 0;
     cgroup_lock();
     spin_lock_irq(&css_set_lock);
     ret = cgroup_path_ns_locked(cgrp, buf, buflen, ns);
@@ -2250,22 +2447,25 @@ unsafe extern "C" fn cpuset_init_fs_context(fc: *mut fs_context) -> c_int {
 //
 // tsk is not NULL only when writing to cgroup.procs.
 //
-    void cgroup_attach_lock(enum cgroup_attach_lock_mode lock_mode,
-    struct task_struct *tsk)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_attach_lock(lock_mode: cgroup_attach_lock_mode, tsk: *mut task_struct) {
     cpus_read_lock();
-    switch (lock_mode) {
-    case CGRP_ATTACH_LOCK_NONE:
-    break;
-    case CGRP_ATTACH_LOCK_GLOBAL:
+    match (lock_mode) {
+    CGRP_ATTACH_LOCK_NONE => {
+    // break;
+    }
+    CGRP_ATTACH_LOCK_GLOBAL => {
     percpu_down_write(&cgroup_threadgroup_rwsem);
-    break;
-    case CGRP_ATTACH_LOCK_PER_THREADGROUP:
+    // break;
+    }
+    CGRP_ATTACH_LOCK_PER_THREADGROUP => {
     down_write(&tsk.signal.cgroup_threadgroup_rwsem);
-    break;
-    default:
-    pr_warn("cgroup: Unexpected attach lock mode.");
-    break;
+    // break;
+    }
+    _ => {
+    pr_warn!("cgroup: Unexpected attach lock mode.");
+    // break;
+    }
     }
     }
 //
@@ -2273,21 +2473,24 @@ unsafe extern "C" fn cpuset_init_fs_context(fc: *mut fs_context) -> c_int {
 // @lock_mode: whether release and release which rwsem
 // @tsk: thread group to lock
 //
-    void cgroup_attach_unlock(enum cgroup_attach_lock_mode lock_mode,
-    struct task_struct *tsk)
-    {
-    switch (lock_mode) {
-    case CGRP_ATTACH_LOCK_NONE:
-    break;
-    case CGRP_ATTACH_LOCK_GLOBAL:
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_attach_unlock(lock_mode: cgroup_attach_lock_mode, tsk: *mut task_struct) {
+    match (lock_mode) {
+    CGRP_ATTACH_LOCK_NONE => {
+    // break;
+    }
+    CGRP_ATTACH_LOCK_GLOBAL => {
     percpu_up_write(&cgroup_threadgroup_rwsem);
-    break;
-    case CGRP_ATTACH_LOCK_PER_THREADGROUP:
+    // break;
+    }
+    CGRP_ATTACH_LOCK_PER_THREADGROUP => {
     up_write(&tsk.signal.cgroup_threadgroup_rwsem);
-    break;
-    default:
-    pr_warn("cgroup: Unexpected attach lock mode.");
-    break;
+    // break;
+    }
+    _ => {
+    pr_warn!("cgroup: Unexpected attach lock mode.");
+    // break;
+    }
     }
     cpus_read_unlock();
     }
@@ -2301,28 +2504,31 @@ unsafe extern "C" fn cpuset_init_fs_context(fc: *mut fs_context) -> c_int {
 // should have been added as a migration source and @task->cg_list will be
 // moved from the css_set's tasks list to mg_tasks one.
 //
-    static void cgroup_migrate_add_task(struct task_struct *task,
-    struct cgroup_mgctx *mgctx)
-    {
-    struct css_set *cset;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_migrate_add_task(task: *mut task_struct, mgctx: *mut cgroup_mgctx) {
+pub static mut cset: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&css_set_lock);
 // @task either already exited or can't exit until the end
-    if (task.flags & PF_EXITING)
+    if (task.flags & PF_EXITING) {
     return;
+    }
 // cgroup_threadgroup_rwsem protects racing against forks
-    WARN_ON_ONCE(list_empty(&task.cg_list));
+    WARN_ON_ONCE!(list_empty(&task.cg_list));
     cset = task_css_set(task);
-    if (!cset.mg_src_cgrp)
+    if (!cset.mg_src_cgrp) {
     return;
-    mgctx.tset.nr_tasks++;
+    }
+    mgctx.tset.nr_tasks += 1;
     css_set_skip_task_iters(cset, task);
     list_move_tail(&task.cg_list, &cset.mg_tasks);
-    if (list_empty(&cset.mg_node))
+    if (list_empty(&cset.mg_node)) {
     list_add_tail(&cset.mg_node,
     &mgctx.tset.src_csets);
-    if (list_empty(&cset.mg_dst_cset.mg_node))
+    }
+    if (list_empty(&cset.mg_dst_cset.mg_node)) {
     list_add_tail(&cset.mg_dst_cset.mg_node,
     &mgctx.tset.dst_csets);
+    }
     }
 //
 // cgroup_taskset_first - reset taskset and return the first task
@@ -2331,10 +2537,9 @@ unsafe extern "C" fn cpuset_init_fs_context(fc: *mut fs_context) -> c_int {
 //
 // @tset iteration is initialized and the first task is returned.
 //
-    struct task_struct *cgroup_taskset_first(struct cgroup_taskset *tset,
-    struct cgroup_subsys_state **dst_cssp)
-    {
-    tset.cur_cset = list_first_entry(tset.csets, struct css_set, mg_node);
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_taskset_first(tset: *mut cgroup_taskset, dst_cssp: *mut *mut cgroup_subsys_state) -> *mut c_void {
+    tset.cur_cset = list_first_entry(tset.csets, css_set, mg_node);
     tset.cur_task = core::ptr::null_mut();
     return cgroup_taskset_next(tset, dst_cssp);
     }
@@ -2346,17 +2551,17 @@ unsafe extern "C" fn cpuset_init_fs_context(fc: *mut fs_context) -> c_int {
 // Return the next task in @tset.  Iteration must have been initialized
 // with cgroup_taskset_first().
 //
-    struct task_struct *cgroup_taskset_next(struct cgroup_taskset *tset,
-    struct cgroup_subsys_state **dst_cssp)
-    {
-    struct css_set *cset = tset.cur_cset;
-    struct task_struct *task = tset.cur_task;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_taskset_next(tset: *mut cgroup_taskset, dst_cssp: *mut *mut cgroup_subsys_state) -> *mut c_void {
+    let mut cset = tset.cur_cset;
+    let mut task = tset.cur_task;
     while (CGROUP_HAS_SUBSYS_CONFIG && &cset.mg_node != tset.csets) {
-    if (!task)
-    task = list_first_entry(&cset.mg_tasks,
-    struct task_struct, cg_list);
-    else
+    if (!task) {
+    task = list_first_entry(&cset.mg_tasks, task_struct, cg_list);
+    }
+    else {
     task = list_next_entry(task, cg_list);
+    }
     if (&task.cg_list != &cset.mg_tasks) {
     tset.cur_cset = cset;
     tset.cur_task = task;
@@ -2366,10 +2571,12 @@ unsafe extern "C" fn cpuset_init_fs_context(fc: *mut fs_context) -> c_int {
 // can be distinguished by looking at whether @cset
 // has its ->mg_dst_cset set.
 //
-    if (cset.mg_dst_cset)
+    if (cset.mg_dst_cset) {
 // dst_cssp = cset->mg_dst_cset->subsys[tset->ssid];
-    else
+    }
+    else {
 // dst_cssp = cset->subsys[tset->ssid];
+    }
     return task;
     }
     cset = list_next_entry(cset, mg_node);
@@ -2377,14 +2584,9 @@ unsafe extern "C" fn cpuset_init_fs_context(fc: *mut fs_context) -> c_int {
     }
     return core::ptr::null_mut();
     }
-    static void cgroup_migrate_notify_canceled(struct css_set *src_cset,
-    struct task_struct *task)
-    {
-    struct cgroup_task_migrate_ctx ctx = {
-    .task = task,
-    .src_dcgrp = src_cset.dfl_cgrp,
-    .dst_dcgrp = src_cset.mg_dst_cset.dfl_cgrp,
-    };
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_migrate_notify_canceled(src_cset: *mut css_set, task: *mut task_struct) {
+pub static mut cgroup_task_migrate_ctx: usize = 0;
     blocking_notifier_call_chain(&cgroup_task_notifier,
     CGROUP_TASK_MIGRATE_CANCELED, &ctx);
     }
@@ -2399,14 +2601,16 @@ unsafe extern "C" fn cpuset_init_fs_context(fc: *mut fs_context) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn cgroup_migrate_execute(mgctx: *mut cgroup_mgctx) -> c_int {
-    static int cgroup_migrate_execute(struct cgroup_mgctx *mgctx)
-    {
-    struct cgroup_taskset *tset = &mgctx.tset;
-    struct cgroup_subsys *ss;
-    struct task_struct *task, *tmp_task;
-    struct css_set *cset, *tmp_cset;
-    let mut dfl_migration: bool = false;
-    int ssid, failed_ssid, ret;
+    let mut tset = &mgctx.tset;
+pub static mut ss: *mut c_void = core::ptr::null_mut();
+    let mut task = core::ptr::null_mut();
+    let mut tmp_task = core::ptr::null_mut();
+    let mut cset = core::ptr::null_mut();
+    let mut tmp_cset = core::ptr::null_mut();
+pub static mut dfl_migration: bool = false;
+    let mut ssid = 0;
+    let mut failed_ssid = 0;
+    let mut ret = 0;
 // check that we can legitimately attach to the cgroup
     if (tset.nr_tasks) {
     do_each_subsys_mask(ss, ssid, mgctx.ss_mask) {
@@ -2415,7 +2619,7 @@ unsafe extern "C" fn cgroup_migrate_execute(mgctx: *mut cgroup_mgctx) -> c_int {
     ret = ss.can_attach(tset);
     if (ret) {
     failed_ssid = ssid;
-    goto out_cancel_attach;
+// goto;
     }
     }
     } while_each_subsys_mask();
@@ -2427,22 +2631,20 @@ unsafe extern "C" fn cgroup_migrate_execute(mgctx: *mut cgroup_mgctx) -> c_int {
 // cgroup1 or for subtree_control writes, none.
 //
     list_for_each_entry(cset, &tset.src_csets, mg_node) {
-    if (cset.dfl_cgrp == cset.mg_dst_cset.dfl_cgrp)
+    if (cset.dfl_cgrp == cset.mg_dst_cset.dfl_cgrp) {
     continue;
+    }
     dfl_migration = true;
     list_for_each_entry(task, &cset.mg_tasks, cg_list) {
-    struct cgroup_task_migrate_ctx ctx = {
-    .task = task,
-    .src_dcgrp = cset.dfl_cgrp,
-    .dst_dcgrp = cset.mg_dst_cset.dfl_cgrp,
-    };
+pub static mut cgroup_task_migrate_ctx: usize = 0;
     ret = blocking_notifier_call_chain_robust(&cgroup_task_notifier,
     CGROUP_TASK_MIGRATING,
     CGROUP_TASK_MIGRATE_CANCELED,
     &ctx);
     ret = notifier_to_errno(ret);
-    if (ret)
-    goto out_cancel_migrating;
+    if (ret) {
+// goto;
+    }
     }
     }
 //
@@ -2453,12 +2655,12 @@ unsafe extern "C" fn cgroup_migrate_execute(mgctx: *mut cgroup_mgctx) -> c_int {
     spin_lock_irq(&css_set_lock);
     list_for_each_entry(cset, &tset.src_csets, mg_node) {
     list_for_each_entry_safe(task, tmp_task, &cset.mg_tasks, cg_list) {
-    struct css_set *from_cset = task_css_set(task);
-    struct css_set *to_cset = cset.mg_dst_cset;
+    let mut from_cset = task_css_set(task);
+    let mut to_cset = cset.mg_dst_cset;
     get_css_set(to_cset);
-    to_cset.nr_tasks++;
+    to_cset.nr_tasks += 1;
     css_set_move_task(task, from_cset, to_cset, true);
-    from_cset.nr_tasks--;
+    from_cset.nr_tasks -= 1;
 //
 // If the source or destination cgroup is frozen,
 // the task might require to change its state.
@@ -2493,10 +2695,7 @@ unsafe extern "C" fn cgroup_migrate_execute(mgctx: *mut cgroup_mgctx) -> c_int {
     if (dfl_migration) {
     list_for_each_entry(cset, &tset.dst_csets, mg_node) {
     list_for_each_entry(task, &cset.mg_tasks, cg_list) {
-    struct cgroup_task_migrate_ctx ctx = {
-    .task = task,
-    .dst_dcgrp = cset.dfl_cgrp,
-    };
+pub static mut cgroup_task_migrate_ctx: usize = 0;
     blocking_notifier_call_chain(
     &cgroup_task_notifier,
     CGROUP_TASK_MIGRATED, &ctx);
@@ -2504,29 +2703,33 @@ unsafe extern "C" fn cgroup_migrate_execute(mgctx: *mut cgroup_mgctx) -> c_int {
     }
     }
     ret = 0;
-    goto out_release_tset;
-    out_cancel_migrating:
-    list_for_each_entry_continue_reverse(task, &cset.mg_tasks, cg_list)
-    cgroup_migrate_notify_canceled(cset, task);
-    list_for_each_entry_continue_reverse(cset, &tset.src_csets, mg_node) {
-    if (cset.dfl_cgrp == cset.mg_dst_cset.dfl_cgrp)
-    continue;
-    list_for_each_entry_reverse(task, &cset.mg_tasks, cg_list)
+// goto;
+// label;
+    list_for_each_entry_continue_reverse(task, &cset.mg_tasks, cg_list) {
     cgroup_migrate_notify_canceled(cset, task);
     }
+    list_for_each_entry_continue_reverse(cset, &tset.src_csets, mg_node) {
+    if (cset.dfl_cgrp == cset.mg_dst_cset.dfl_cgrp) {
+    continue;
+    }
+    list_for_each_entry_reverse(task, &cset.mg_tasks, cg_list) {
+    cgroup_migrate_notify_canceled(cset, task);
+    }
+    }
     failed_ssid = CGROUP_SUBSYS_COUNT;
-    out_cancel_attach:
+// label;
     if (tset.nr_tasks) {
     do_each_subsys_mask(ss, ssid, mgctx.ss_mask) {
-    if (ssid == failed_ssid)
+    if (ssid == failed_ssid) {
     break;
+    }
     if (ss.cancel_attach) {
     tset.ssid = ssid;
     ss.cancel_attach(tset);
     }
     } while_each_subsys_mask();
     }
-    out_release_tset:
+// label;
     spin_lock_irq(&css_set_lock);
     list_splice_init(&tset.dst_csets, &tset.src_csets);
     list_for_each_entry_safe(cset, tmp_cset, &tset.src_csets, mg_node) {
@@ -2554,23 +2757,25 @@ unsafe extern "C" fn cgroup_migrate_execute(mgctx: *mut cgroup_mgctx) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_migrate_vet_dst(dst_cgrp: *mut cgroup) -> c_int {
-    int cgroup_migrate_vet_dst(struct cgroup *dst_cgrp)
-    {
 // v1 doesn't have any restriction
-    if (!cgroup_on_dfl(dst_cgrp))
+    if (!cgroup_on_dfl(dst_cgrp)) {
     return 0;
+    }
 // verify @dst_cgrp can host resources
-    if (!cgroup_is_valid_domain(dst_cgrp.dom_cgrp))
+    if (!cgroup_is_valid_domain(dst_cgrp.dom_cgrp)) {
     return -EOPNOTSUPP;
+    }
 //
 // If @dst_cgrp is already or can become a thread root or is
 // threaded, it doesn't matter.
 //
-    if (cgroup_can_be_thread_root(dst_cgrp) || cgroup_is_threaded(dst_cgrp))
+    if (cgroup_can_be_thread_root(dst_cgrp) || cgroup_is_threaded(dst_cgrp)) {
     return 0;
+    }
 // apply no-internal-process constraint
-    if (dst_cgrp.subtree_control)
+    if (dst_cgrp.subtree_control) {
     return -EBUSY;
+    }
     return 0;
     }
 //
@@ -2582,9 +2787,8 @@ pub unsafe extern "C" fn cgroup_migrate_vet_dst(dst_cgrp: *mut cgroup) -> c_int 
 //
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_migrate_finish(mgctx: *mut cgroup_mgctx) {
-    void cgroup_migrate_finish(struct cgroup_mgctx *mgctx)
-    {
-    struct css_set *cset, *tmp_cset;
+    let mut cset = core::ptr::null_mut();
+    let mut tmp_cset = core::ptr::null_mut();
     lockdep_assert_held(&cgroup_mutex);
     spin_lock_irq(&css_set_lock);
     list_for_each_entry_safe(cset, tmp_cset, &mgctx.preloaded_src_csets,
@@ -2621,11 +2825,9 @@ pub unsafe extern "C" fn cgroup_migrate_finish(mgctx: *mut cgroup_mgctx) {
 // into play and the preloaded css_sets are guaranteed to cover all
 // migrations.
 //
-    void cgroup_migrate_add_src(struct css_set *src_cset,
-    struct cgroup *dst_cgrp,
-    struct cgroup_mgctx *mgctx)
-    {
-    struct cgroup *src_cgrp;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_migrate_add_src(src_cset: *mut css_set, dst_cgrp: *mut cgroup, mgctx: *mut cgroup_mgctx) {
+pub static mut src_cgrp: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&cgroup_mutex);
     lockdep_assert_held(&css_set_lock);
 //
@@ -2633,15 +2835,17 @@ pub unsafe extern "C" fn cgroup_migrate_finish(mgctx: *mut cgroup_mgctx) {
 // and doesn't contain any migratable tasks.  Ignore it early so
 // that the rest of migration path doesn't get confused by it.
 //
-    if (src_cset.dead)
+    if (src_cset.dead) {
     return;
-    if (!list_empty(&src_cset.mg_src_preload_node))
+    }
+    if (!list_empty(&src_cset.mg_src_preload_node)) {
     return;
+    }
     src_cgrp = cset_cgroup_from_root(src_cset, dst_cgrp.root);
-    WARN_ON(src_cset.mg_src_cgrp);
-    WARN_ON(src_cset.mg_dst_cgrp);
-    WARN_ON(!list_empty(&src_cset.mg_tasks));
-    WARN_ON(!list_empty(&src_cset.mg_node));
+    WARN_ON!(src_cset.mg_src_cgrp);
+    WARN_ON!(src_cset.mg_dst_cgrp);
+    WARN_ON!(!list_empty(&src_cset.mg_tasks));
+    WARN_ON!(!list_empty(&src_cset.mg_node));
     src_cset.mg_src_cgrp = src_cgrp;
     src_cset.mg_dst_cgrp = dst_cgrp;
     get_css_set(src_cset);
@@ -2663,20 +2867,20 @@ pub unsafe extern "C" fn cgroup_migrate_finish(mgctx: *mut cgroup_mgctx) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_migrate_prepare_dst(mgctx: *mut cgroup_mgctx) -> c_int {
-    int cgroup_migrate_prepare_dst(struct cgroup_mgctx *mgctx)
-    {
-    struct css_set *src_cset, *tmp_cset;
+    let mut src_cset = core::ptr::null_mut();
+    let mut tmp_cset = core::ptr::null_mut();
     lockdep_assert_held(&cgroup_mutex);
 // look up the dst cset for each src cset and link it to src
     list_for_each_entry_safe(src_cset, tmp_cset, &mgctx.preloaded_src_csets,
     mg_src_preload_node) {
-    struct css_set *dst_cset;
-    struct cgroup_subsys *ss;
-    int ssid;
+pub static mut dst_cset: *mut c_void = core::ptr::null_mut();
+pub static mut ss: *mut c_void = core::ptr::null_mut();
+    let mut ssid = 0;
     dst_cset = find_css_set(src_cset, src_cset.mg_dst_cgrp);
-    if (!dst_cset)
+    if (!dst_cset) {
     return -ENOMEM;
-    WARN_ON_ONCE(src_cset.mg_dst_cset || dst_cset.mg_dst_cset);
+    }
+    WARN_ON_ONCE!(src_cset.mg_dst_cset || dst_cset.mg_dst_cset);
 //
 // If src cset equals dst, it's noop.  Drop the src.
 // cgroup_migrate() will skip the cset too.  Note that we
@@ -2691,14 +2895,17 @@ pub unsafe extern "C" fn cgroup_migrate_prepare_dst(mgctx: *mut cgroup_mgctx) ->
     continue;
     }
     src_cset.mg_dst_cset = dst_cset;
-    if (list_empty(&dst_cset.mg_dst_preload_node))
+    if (list_empty(&dst_cset.mg_dst_preload_node)) {
     list_add_tail(&dst_cset.mg_dst_preload_node,
     &mgctx.preloaded_dst_csets);
-    else
+    }
+    else {
     put_css_set(dst_cset);
-    for_each_subsys(ss, ssid)
+    }
+    for_each_subsys(ss, ssid) {
     if (src_cset.subsys[ssid] != dst_cset.subsys[ssid])
     mgctx.ss_mask |= 1 << ssid;
+    }
     }
     return 0;
     }
@@ -2720,10 +2927,9 @@ pub unsafe extern "C" fn cgroup_migrate_prepare_dst(mgctx: *mut cgroup_mgctx) ->
 // the success or failure can be decided for all targets by invoking
 // group_migrate_prepare_dst() before actually starting migrating.
 //
-    int cgroup_migrate(struct task_struct *leader, bool threadgroup,
-    struct cgroup_mgctx *mgctx)
-    {
-    struct task_struct *task;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_migrate(leader: *mut task_struct, threadgroup: bool, mgctx: *mut cgroup_mgctx) -> c_int {
+pub static mut task: *mut c_void = core::ptr::null_mut();
 //
 // The following thread iteration should be inside an RCU critical
 // section to prevent tasks from being freed while taking the snapshot.
@@ -2733,8 +2939,9 @@ pub unsafe extern "C" fn cgroup_migrate_prepare_dst(mgctx: *mut cgroup_mgctx) ->
     task = leader;
     do {
     cgroup_migrate_add_task(task, mgctx);
-    if (!threadgroup)
+    if (!threadgroup) {
     break;
+    }
     } while_each_thread(leader, task);
     spin_unlock_irq(&css_set_lock);
     return cgroup_migrate_execute(mgctx);
@@ -2747,50 +2954,53 @@ pub unsafe extern "C" fn cgroup_migrate_prepare_dst(mgctx: *mut cgroup_mgctx) ->
 //
 // Call holding cgroup_mutex and cgroup_threadgroup_rwsem.
 //
-    int cgroup_attach_task(struct cgroup *dst_cgrp, struct task_struct *leader,
-    bool threadgroup)
-    {
-    DEFINE_CGROUP_MGCTX(mgctx);
-    struct task_struct *task;
-    let mut ret: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_attach_task(dst_cgrp: *mut cgroup, leader: *mut task_struct, threadgroup: bool) -> c_int {
+pub static mut mgctx: usize = 0;
+pub static mut task: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
 // look up all src csets
     spin_lock_irq(&css_set_lock);
     task = leader;
     do {
     cgroup_migrate_add_src(task_css_set(task), dst_cgrp, &mgctx);
-    if (!threadgroup)
+    if (!threadgroup) {
     break;
+    }
     } while_each_thread(leader, task);
     spin_unlock_irq(&css_set_lock);
 // prepare dst csets and commit
     ret = cgroup_migrate_prepare_dst(&mgctx);
-    if (!ret)
+    if (!ret) {
     ret = cgroup_migrate(leader, threadgroup, &mgctx);
+    }
     cgroup_migrate_finish(&mgctx);
-    if (!ret)
+    if (!ret) {
     TRACE_CGROUP_PATH(attach_task, dst_cgrp, leader, threadgroup);
+    }
     return ret;
     }
-    struct task_struct *cgroup_procs_write_start(char *buf, bool threadgroup,
-    enum cgroup_attach_lock_mode *lock_mode)
-    {
-    struct task_struct *tsk;
-    pid_t pid;
-    if (kstrtoint(strstrip(buf), 0, &pid) || pid < 0)
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_procs_write_start(buf: *mut c_char, threadgroup: bool, lock_mode: *mut cgroup_attach_lock_mode) -> *mut c_void {
+pub static mut tsk: *mut c_void = core::ptr::null_mut();
+    let mut pid = 0;
+    if (kstrtoint(strstrip(buf), 0, &pid) || pid < 0) {
     return ERR_PTR(-EINVAL);
-    retry_find_task:
+    }
+// label;
     rcu_read_lock();
     if (pid) {
     tsk = find_task_by_vpid(pid);
     if (!tsk) {
     tsk = ERR_PTR(-ESRCH);
-    goto out_unlock_rcu;
+// goto;
     }
     } else {
     tsk = current;
     }
-    if (threadgroup)
+    if (threadgroup) {
     tsk = tsk.group_leader;
+    }
 //
 // kthreads may acquire PF_NO_SETAFFINITY during initialization.
 // If userland migrates such a kthread to a non-root cgroup, it can
@@ -2799,7 +3009,7 @@ pub unsafe extern "C" fn cgroup_migrate_prepare_dst(mgctx: *mut cgroup_mgctx) ->
 //
     if (tsk.no_cgroup_migration || (tsk.flags & PF_NO_SETAFFINITY)) {
     tsk = ERR_PTR(-EINVAL);
-    goto out_unlock_rcu;
+// goto;
     }
     get_task_struct(tsk);
     rcu_read_unlock();
@@ -2812,10 +3022,12 @@ pub unsafe extern "C" fn cgroup_migrate_prepare_dst(mgctx: *mut cgroup_mgctx) ->
 //
     lockdep_assert_held(&cgroup_mutex);
     if (pid || threadgroup) {
-    if (cgroup_enable_per_threadgroup_rwsem)
+    if (cgroup_enable_per_threadgroup_rwsem) {
 // lock_mode = CGRP_ATTACH_LOCK_PER_THREADGROUP;
-    else
+    }
+    else {
 // lock_mode = CGRP_ATTACH_LOCK_GLOBAL;
+    }
     } else {
 // lock_mode = CGRP_ATTACH_LOCK_NONE;
     }
@@ -2829,52 +3041,47 @@ pub unsafe extern "C" fn cgroup_migrate_prepare_dst(mgctx: *mut cgroup_mgctx) ->
 //
     cgroup_attach_unlock(*lock_mode, tsk);
     put_task_struct(tsk);
-    goto retry_find_task;
+// goto;
     }
     }
     return tsk;
-    out_unlock_rcu:
+// label;
     rcu_read_unlock();
     return tsk;
     }
-    void cgroup_procs_write_finish(struct task_struct *task,
-    enum cgroup_attach_lock_mode lock_mode)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_procs_write_finish(task: *mut task_struct, lock_mode: cgroup_attach_lock_mode) {
     cgroup_attach_unlock(lock_mode, task);
 // release reference from cgroup_procs_write_start()
     put_task_struct(task);
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_print_ss_mask(seq: *mut seq_file, ss_mask: u32) {
-    static void cgroup_print_ss_mask(struct seq_file *seq, u32 ss_mask)
-    {
-    struct cgroup_subsys *ss;
-    let mut printed: bool = false;
-    int ssid;
+pub static mut ss: *mut c_void = core::ptr::null_mut();
+pub static mut printed: bool = false;
+    let mut ssid = 0;
     do_each_subsys_mask(ss, ssid, ss_mask) {
-    if (printed)
+    if (printed) {
     seq_putc(seq, ' ');
+    }
     seq_puts(seq, ss.name);
     printed = true;
     } while_each_subsys_mask();
-    if (printed)
+    if (printed) {
     seq_putc(seq, '\n');
+    }
     }
 // show controllers which are enabled from the parent
 #[no_mangle]
 unsafe extern "C" fn cgroup_controllers_show(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int cgroup_controllers_show(struct seq_file *seq, void *v)
-    {
-    struct cgroup *cgrp = seq_css(seq).cgroup;
+    let mut cgrp = seq_css(seq).cgroup;
     cgroup_print_ss_mask(seq, cgroup_control(cgrp));
     return 0;
     }
 // show controllers which are enabled for a given cgroup's children
 #[no_mangle]
 unsafe extern "C" fn cgroup_subtree_control_show(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int cgroup_subtree_control_show(struct seq_file *seq, void *v)
-    {
-    struct cgroup *cgrp = seq_css(seq).cgroup;
+    let mut cgrp = seq_css(seq).cgroup;
     cgroup_print_ss_mask(seq, cgrp.subtree_control);
     return 0;
     }
@@ -2889,30 +3096,30 @@ unsafe extern "C" fn cgroup_subtree_control_show(seq: *mut seq_file, v: *mut c_v
 //
 #[no_mangle]
 unsafe extern "C" fn cgroup_update_dfl_csses(cgrp: *mut cgroup) -> c_int {
-    static int cgroup_update_dfl_csses(struct cgroup *cgrp)
-    {
-    DEFINE_CGROUP_MGCTX(mgctx);
-    struct cgroup_subsys_state *d_css;
-    struct cgroup *dsct;
-    struct css_set *src_cset;
+pub static mut mgctx: usize = 0;
+pub static mut d_css: *mut c_void = core::ptr::null_mut();
+pub static mut dsct: *mut c_void = core::ptr::null_mut();
+pub static mut src_cset: *mut c_void = core::ptr::null_mut();
     enum cgroup_attach_lock_mode lock_mode;
-    bool has_tasks;
-    int ret;
+    let mut has_tasks = 0;
+    let mut ret = 0;
     lockdep_assert_held(&cgroup_mutex);
 // look up all csses currently attached to @cgrp's subtree
     spin_lock_irq(&css_set_lock);
     cgroup_for_each_live_descendant_pre(dsct, d_css, cgrp) {
-    struct cgrp_cset_link *link;
+pub static mut link: *mut c_void = core::ptr::null_mut();
 //
 // As cgroup_update_dfl_csses() is only called by
 // cgroup_apply_control(). The csses associated with the
 // given cgrp will not be affected by changes made to
 // its subtree_control file. We can skip them.
 //
-    if (dsct == cgrp)
+    if (dsct == cgrp) {
     continue;
-    list_for_each_entry(link, &dsct.cset_links, cset_link)
+    }
+    list_for_each_entry(link, &dsct.cset_links, cset_link) {
     cgroup_migrate_add_src(link.cset, dsct, &mgctx);
+    }
     }
     spin_unlock_irq(&css_set_lock);
 //
@@ -2922,26 +3129,31 @@ unsafe extern "C" fn cgroup_update_dfl_csses(cgrp: *mut cgroup) -> c_int {
 // write-locking can be skipped safely.
 //
     has_tasks = !list_empty(&mgctx.preloaded_src_csets);
-    if (has_tasks)
+    if (has_tasks) {
     lock_mode = CGRP_ATTACH_LOCK_GLOBAL;
-    else
+    }
+    else {
     lock_mode = CGRP_ATTACH_LOCK_NONE;
+    }
     cgroup_attach_lock(lock_mode, core::ptr::null_mut());
 // NULL dst indicates self on default hierarchy
     ret = cgroup_migrate_prepare_dst(&mgctx);
-    if (ret)
-    goto out_finish;
+    if (ret) {
+// goto;
+    }
     spin_lock_irq(&css_set_lock);
     list_for_each_entry(src_cset, &mgctx.preloaded_src_csets,
     mg_src_preload_node) {
-    struct task_struct *task, *ntask;
+    let mut task = core::ptr::null_mut();
+    let mut ntask = core::ptr::null_mut();
 // all tasks in src_csets need to be migrated
-    list_for_each_entry_safe(task, ntask, &src_cset.tasks, cg_list)
+    list_for_each_entry_safe(task, ntask, &src_cset.tasks, cg_list) {
     cgroup_migrate_add_task(task, &mgctx);
+    }
     }
     spin_unlock_irq(&css_set_lock);
     ret = cgroup_migrate_execute(&mgctx);
-    out_finish:
+// label;
     cgroup_migrate_finish(&mgctx);
     cgroup_attach_unlock(lock_mode, core::ptr::null_mut());
     return ret;
@@ -2956,21 +3168,19 @@ unsafe extern "C" fn cgroup_update_dfl_csses(cgrp: *mut cgroup) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_lock_and_drain_offline(cgrp: *mut cgroup) {
-    void cgroup_lock_and_drain_offline(struct cgroup *cgrp)
-    __acquires(&cgroup_mutex)
-    {
-    struct cgroup *dsct;
-    struct cgroup_subsys_state *d_css;
-    struct cgroup_subsys *ss;
-    int ssid;
-    restart:
+pub static mut dsct: *mut c_void = core::ptr::null_mut();
+pub static mut d_css: *mut c_void = core::ptr::null_mut();
+pub static mut ss: *mut c_void = core::ptr::null_mut();
+    let mut ssid = 0;
+// label;
     cgroup_lock();
     cgroup_for_each_live_descendant_post(dsct, d_css, cgrp) {
     for_each_subsys(ss, ssid) {
-    struct cgroup_subsys_state *css = cgroup_css(dsct, ss);
-    DEFINE_WAIT(wait);
-    if (!css || !css_is_dying(css))
+    let mut css = cgroup_css(dsct, ss);
+pub static mut wait: usize = 0;
+    if (!css || !css_is_dying(css)) {
     continue;
+    }
     cgroup_get_live(dsct);
     prepare_to_wait(&dsct.offline_waitq, &wait,
     TASK_UNINTERRUPTIBLE);
@@ -2978,7 +3188,7 @@ pub unsafe extern "C" fn cgroup_lock_and_drain_offline(cgrp: *mut cgroup) {
     schedule();
     finish_wait(&dsct.offline_waitq, &wait);
     cgroup_put(dsct);
-    goto restart;
+// goto;
     }
     }
     }
@@ -2992,10 +3202,8 @@ pub unsafe extern "C" fn cgroup_lock_and_drain_offline(cgrp: *mut cgroup) {
 //
 #[no_mangle]
 unsafe extern "C" fn cgroup_save_control(cgrp: *mut cgroup) {
-    static void cgroup_save_control(struct cgroup *cgrp)
-    {
-    struct cgroup *dsct;
-    struct cgroup_subsys_state *d_css;
+pub static mut dsct: *mut c_void = core::ptr::null_mut();
+pub static mut d_css: *mut c_void = core::ptr::null_mut();
     cgroup_for_each_live_descendant_pre(dsct, d_css, cgrp) {
     dsct.old_subtree_control = dsct.subtree_control;
     dsct.old_subtree_ss_mask = dsct.subtree_ss_mask;
@@ -3012,10 +3220,8 @@ unsafe extern "C" fn cgroup_save_control(cgrp: *mut cgroup) {
 //
 #[no_mangle]
 unsafe extern "C" fn cgroup_propagate_control(cgrp: *mut cgroup) {
-    static void cgroup_propagate_control(struct cgroup *cgrp)
-    {
-    struct cgroup *dsct;
-    struct cgroup_subsys_state *d_css;
+pub static mut dsct: *mut c_void = core::ptr::null_mut();
+pub static mut d_css: *mut c_void = core::ptr::null_mut();
     cgroup_for_each_live_descendant_pre(dsct, d_css, cgrp) {
     dsct.subtree_control &= cgroup_control(dsct);
     dsct.subtree_ss_mask =
@@ -3033,10 +3239,8 @@ unsafe extern "C" fn cgroup_propagate_control(cgrp: *mut cgroup) {
 //
 #[no_mangle]
 unsafe extern "C" fn cgroup_restore_control(cgrp: *mut cgroup) {
-    static void cgroup_restore_control(struct cgroup *cgrp)
-    {
-    struct cgroup *dsct;
-    struct cgroup_subsys_state *d_css;
+pub static mut dsct: *mut c_void = core::ptr::null_mut();
+pub static mut d_css: *mut c_void = core::ptr::null_mut();
     cgroup_for_each_live_descendant_post(dsct, d_css, cgrp) {
     dsct.subtree_control = dsct.old_subtree_control;
     dsct.subtree_ss_mask = dsct.old_subtree_ss_mask;
@@ -3045,14 +3249,14 @@ unsafe extern "C" fn cgroup_restore_control(cgrp: *mut cgroup) {
     }
 #[no_mangle]
 unsafe extern "C" fn css_visible(css: *mut cgroup_subsys_state) -> bool {
-    static bool css_visible(struct cgroup_subsys_state *css)
-    {
-    struct cgroup_subsys *ss = css.ss;
-    struct cgroup *cgrp = css.cgroup;
-    if (cgroup_control(cgrp) & (1 << ss.id))
+    let mut ss = css.ss;
+    let mut cgrp = css.cgroup;
+    if (cgroup_control(cgrp) & (1 << ss.id)) {
     return true;
-    if (!(cgroup_ss_mask(cgrp) & (1 << ss.id)))
+    }
+    if (!(cgroup_ss_mask(cgrp) & (1 << ss.id))) {
     return false;
+    }
     return cgroup_on_dfl(cgrp) && ss.implicit_on_dfl;
     }
 //
@@ -3070,27 +3274,29 @@ unsafe extern "C" fn css_visible(css: *mut cgroup_subsys_state) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn cgroup_apply_control_enable(cgrp: *mut cgroup) -> c_int {
-    static int cgroup_apply_control_enable(struct cgroup *cgrp)
-    {
-    struct cgroup *dsct;
-    struct cgroup_subsys_state *d_css;
-    struct cgroup_subsys *ss;
-    int ssid, ret;
+pub static mut dsct: *mut c_void = core::ptr::null_mut();
+pub static mut d_css: *mut c_void = core::ptr::null_mut();
+pub static mut ss: *mut c_void = core::ptr::null_mut();
+    let mut ssid = 0;
+    let mut ret = 0;
     cgroup_for_each_live_descendant_pre(dsct, d_css, cgrp) {
     for_each_subsys(ss, ssid) {
-    struct cgroup_subsys_state *css = cgroup_css(dsct, ss);
-    if (!(cgroup_ss_mask(dsct) & (1 << ss.id)))
+    let mut css = cgroup_css(dsct, ss);
+    if (!(cgroup_ss_mask(dsct) & (1 << ss.id))) {
     continue;
+    }
     if (!css) {
     css = css_create(dsct, ss);
-    if (IS_ERR(css))
+    if (IS_ERR(css)) {
     return PTR_ERR(css);
     }
-    WARN_ON_ONCE(percpu_ref_is_dying(&css.refcnt));
+    }
+    WARN_ON_ONCE!(percpu_ref_is_dying(&css.refcnt));
     if (css_visible(css)) {
     ret = css_populate_dir(css);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     }
     }
     }
@@ -3111,27 +3317,28 @@ unsafe extern "C" fn cgroup_apply_control_enable(cgrp: *mut cgroup) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn cgroup_apply_control_disable(cgrp: *mut cgroup) {
-    static void cgroup_apply_control_disable(struct cgroup *cgrp)
-    {
-    struct cgroup *dsct;
-    struct cgroup_subsys_state *d_css;
-    struct cgroup_subsys *ss;
-    int ssid;
+pub static mut dsct: *mut c_void = core::ptr::null_mut();
+pub static mut d_css: *mut c_void = core::ptr::null_mut();
+pub static mut ss: *mut c_void = core::ptr::null_mut();
+    let mut ssid = 0;
     cgroup_for_each_live_descendant_post(dsct, d_css, cgrp) {
     for_each_subsys(ss, ssid) {
-    struct cgroup_subsys_state *css = cgroup_css(dsct, ss);
-    if (!css)
+    let mut css = cgroup_css(dsct, ss);
+    if (!css) {
     continue;
-    WARN_ON_ONCE(percpu_ref_is_dying(&css.refcnt));
+    }
+    WARN_ON_ONCE!(percpu_ref_is_dying(&css.refcnt));
     if (css.parent &&
     !(cgroup_ss_mask(dsct) & (1 << ss.id))) {
     kill_css_sync(css);
-    if (!css_is_populated(css))
+    if (!css_is_populated(css)) {
     kill_css_finish(css);
+    }
     } else if (!css_visible(css)) {
     css_clear_dir(css);
-    if (ss.css_reset)
+    if (ss.css_reset) {
     ss.css_reset(css);
+    }
     }
     }
     }
@@ -3155,13 +3362,12 @@ unsafe extern "C" fn cgroup_apply_control_disable(cgrp: *mut cgroup) {
 //
 #[no_mangle]
 unsafe extern "C" fn cgroup_apply_control(cgrp: *mut cgroup) -> c_int {
-    static int cgroup_apply_control(struct cgroup *cgrp)
-    {
-    int ret;
+    let mut ret = 0;
     cgroup_propagate_control(cgrp);
     ret = cgroup_apply_control_enable(cgrp);
-    if (ret)
+    if (ret) {
     return ret;
+    }
 //
 // At this point, cgroup_e_css_by_mask() results reflect the new csses
 // making the following cgroup_update_dfl_csses() properly update
@@ -3178,8 +3384,6 @@ unsafe extern "C" fn cgroup_apply_control(cgrp: *mut cgroup) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn cgroup_finalize_control(cgrp: *mut cgroup, ret: c_int) {
-    static void cgroup_finalize_control(struct cgroup *cgrp, int ret)
-    {
     if (ret) {
     cgroup_restore_control(cgrp);
     cgroup_propagate_control(cgrp);
@@ -3188,61 +3392,67 @@ unsafe extern "C" fn cgroup_finalize_control(cgrp: *mut cgroup, ret: c_int) {
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_vet_subtree_control_enable(cgrp: *mut cgroup, enable: u32) -> c_int {
-    static int cgroup_vet_subtree_control_enable(struct cgroup *cgrp, u32 enable)
-    {
-    let mut domain_enable: u32 = enable & ~cgrp_dfl_threaded_ss_mask;
+pub static mut domain_enable: u32 = 0;
 // if nothing is getting enabled, nothing to worry about
-    if (!enable)
+    if (!enable) {
     return 0;
+    }
 // can @cgrp host any resources?
-    if (!cgroup_is_valid_domain(cgrp.dom_cgrp))
+    if (!cgroup_is_valid_domain(cgrp.dom_cgrp)) {
     return -EOPNOTSUPP;
+    }
 // mixables don't care
-    if (cgroup_is_mixable(cgrp))
+    if (cgroup_is_mixable(cgrp)) {
     return 0;
+    }
     if (domain_enable) {
 // can't enable domain controllers inside a thread subtree
-    if (cgroup_is_thread_root(cgrp) || cgroup_is_threaded(cgrp))
+    if (cgroup_is_thread_root(cgrp) || cgroup_is_threaded(cgrp)) {
     return -EOPNOTSUPP;
+    }
     } else {
 //
 // Threaded controllers can handle internal competitions
 // and are always allowed inside a (prospective) thread
 // subtree.
 //
-    if (cgroup_can_be_thread_root(cgrp) || cgroup_is_threaded(cgrp))
+    if (cgroup_can_be_thread_root(cgrp) || cgroup_is_threaded(cgrp)) {
     return 0;
+    }
     }
 //
 // Controllers can't be enabled for a cgroup with tasks to avoid
 // child cgroups competing against tasks.
 //
-    if (cgroup_has_tasks(cgrp))
+    if (cgroup_has_tasks(cgrp)) {
     return -EBUSY;
+    }
     return 0;
     }
 // change the enabled child controllers for a cgroup in the default hierarchy
-    static ssize_t cgroup_subtree_control_write(struct kernfs_open_file *of,
-    char *buf, size_t nbytes,
-    loff_t off)
-    {
-    let mut enable: u32 = 0, disable = 0;
-    struct cgroup *cgrp, *child;
-    struct cgroup_subsys *ss;
-    char *tok;
-    int ssid, ret;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_subtree_control_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+pub static mut enable: u32 = 0;
+    let mut cgrp = core::ptr::null_mut();
+    let mut child = core::ptr::null_mut();
+pub static mut ss: *mut c_void = core::ptr::null_mut();
+pub static mut tok: *mut c_void = core::ptr::null_mut();
+    let mut ssid = 0;
+    let mut ret = 0;
 //
 // Parse input - space separated list of subsystem names prefixed
 // with either + or -.
 //
     buf = strstrip(buf);
     while ((tok = strsep(&buf, " "))) {
-    if (tok[0] == '\0')
+    if (tok[0] == '\0') {
     continue;
+    }
     do_each_subsys_mask(ss, ssid, ~cgrp_dfl_inhibit_ss_mask) {
     if (!cgroup_ssid_enabled(ssid) ||
-    strcmp(tok + 1, ss.name))
+    strcmp(tok + 1, ss.name)) {
     continue;
+    }
     if (*tok == '+') {
     enable |= 1 << ssid;
     disable &= ~(1 << ssid);
@@ -3254,12 +3464,14 @@ unsafe extern "C" fn cgroup_vet_subtree_control_enable(cgrp: *mut cgroup, enable
     }
     break;
     } while_each_subsys_mask();
-    if (ssid == CGROUP_SUBSYS_COUNT)
+    if (ssid == CGROUP_SUBSYS_COUNT) {
     return -EINVAL;
     }
+    }
     cgrp = cgroup_kn_lock_live(of.kn, true);
-    if (!cgrp)
+    if (!cgrp) {
     return -ENODEV;
+    }
     for_each_subsys(ss, ssid) {
     if (enable & (1 << ssid)) {
     if (cgrp.subtree_control & (1 << ssid)) {
@@ -3268,7 +3480,7 @@ unsafe extern "C" fn cgroup_vet_subtree_control_enable(cgrp: *mut cgroup, enable
     }
     if (!(cgroup_control(cgrp) & (1 << ssid))) {
     ret = -ENOENT;
-    goto out_unlock;
+// goto;
     }
     } else if (disable & (1 << ssid)) {
     if (!(cgrp.subtree_control & (1 << ssid))) {
@@ -3279,28 +3491,30 @@ unsafe extern "C" fn cgroup_vet_subtree_control_enable(cgrp: *mut cgroup, enable
     cgroup_for_each_live_child(child, cgrp) {
     if (child.subtree_control & (1 << ssid)) {
     ret = -EBUSY;
-    goto out_unlock;
+// goto;
     }
     }
     }
     }
     if (!enable && !disable) {
     ret = 0;
-    goto out_unlock;
+// goto;
     }
     ret = cgroup_vet_subtree_control_enable(cgrp, enable);
-    if (ret)
-    goto out_unlock;
+    if (ret) {
+// goto;
+    }
 // save and update control masks and prepare csses
     cgroup_save_control(cgrp);
     cgrp.subtree_control |= enable;
     cgrp.subtree_control &= ~disable;
     ret = cgroup_apply_control(cgrp);
     cgroup_finalize_control(cgrp, ret);
-    if (ret)
-    goto out_unlock;
+    if (ret) {
+// goto;
+    }
     kernfs_activate(cgrp.kn);
-    out_unlock:
+// label;
     cgroup_kn_unlock(of.kn);
     return ret ?: nbytes;
     }
@@ -3315,17 +3529,16 @@ unsafe extern "C" fn cgroup_vet_subtree_control_enable(cgrp: *mut cgroup, enable
 //
 #[no_mangle]
 unsafe extern "C" fn cgroup_enable_threaded(cgrp: *mut cgroup) -> c_int {
-    static int cgroup_enable_threaded(struct cgroup *cgrp)
-    {
-    struct cgroup *parent = cgroup_parent(cgrp);
-    struct cgroup *dom_cgrp = parent.dom_cgrp;
-    struct cgroup *dsct;
-    struct cgroup_subsys_state *d_css;
-    int ret;
+    let mut parent = cgroup_parent(cgrp);
+    let mut dom_cgrp = parent.dom_cgrp;
+pub static mut dsct: *mut c_void = core::ptr::null_mut();
+pub static mut d_css: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     lockdep_assert_held(&cgroup_mutex);
 // noop if already threaded
-    if (cgroup_is_threaded(cgrp))
+    if (cgroup_is_threaded(cgrp)) {
     return 0;
+    }
 //
 // If @cgroup is populated or has domain controllers enabled, it
 // can't be switched.  While the below cgroup_can_be_thread_root()
@@ -3333,57 +3546,62 @@ unsafe extern "C" fn cgroup_enable_threaded(cgrp: *mut cgroup) -> c_int {
 // not mixable, so let's check it explicitly.
 //
     if (cgroup_is_populated(cgrp) ||
-    cgrp.subtree_control & ~cgrp_dfl_threaded_ss_mask)
+    cgrp.subtree_control & ~cgrp_dfl_threaded_ss_mask) {
     return -EOPNOTSUPP;
+    }
 // we're joining the parent's domain, ensure its validity
     if (!cgroup_is_valid_domain(dom_cgrp) ||
-    !cgroup_can_be_thread_root(dom_cgrp))
+    !cgroup_can_be_thread_root(dom_cgrp)) {
     return -EOPNOTSUPP;
+    }
 //
 // The following shouldn't cause actual migrations and should
 // always succeed.
 //
     cgroup_save_control(cgrp);
     cgroup_for_each_live_descendant_pre(dsct, d_css, cgrp)
-    if (dsct == cgrp || cgroup_is_threaded(dsct))
+    if (dsct == cgrp || cgroup_is_threaded(dsct)) {
     dsct.dom_cgrp = dom_cgrp;
+    }
     ret = cgroup_apply_control(cgrp);
-    if (!ret)
-    parent.nr_threaded_children++;
+    if (!ret) {
+    parent.nr_threaded_children += 1;
+    }
     cgroup_finalize_control(cgrp, ret);
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_type_show(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int cgroup_type_show(struct seq_file *seq, void *v)
-    {
-    struct cgroup *cgrp = seq_css(seq).cgroup;
-    if (cgroup_is_threaded(cgrp))
+    let mut cgrp = seq_css(seq).cgroup;
+    if (cgroup_is_threaded(cgrp)) {
     seq_puts(seq, "threaded\n");
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !cgroup_is_valid_domain(cgrp)) -> else {
-    else if (!cgroup_is_valid_domain(cgrp))
+    }
+
+    else if (!cgroup_is_valid_domain(cgrp)) {
     seq_puts(seq, "domain invalid\n");
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: cgroup_is_thread_root(cgrp)) -> else {
-    else if (cgroup_is_thread_root(cgrp))
+    }
+
+    else if (cgroup_is_thread_root(cgrp)) {
     seq_puts(seq, "domain threaded\n");
-    else
+    }
+    else {
     seq_puts(seq, "domain\n");
+    }
     return 0;
     }
-    static ssize_t cgroup_type_write(struct kernfs_open_file *of, char *buf,
-    size_t nbytes, loff_t off)
-    {
-    struct cgroup *cgrp;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_type_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+pub static mut cgrp: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
 // only switching to threaded mode is supported
-    if (strcmp(strstrip(buf), "threaded"))
+    if (strcmp(strstrip(buf), "threaded")) {
     return -EINVAL;
+    }
 // drain dying csses before we re-apply (threaded) subtree control
     cgrp = cgroup_kn_lock_live(of.kn, true);
-    if (!cgrp)
+    if (!cgrp) {
     return -ENOENT;
+    }
 // threaded can only be enabled
     ret = cgroup_enable_threaded(cgrp);
     cgroup_kn_unlock(of.kn);
@@ -3391,91 +3609,91 @@ pub unsafe extern "C" fn if(_arg: cgroup_is_thread_root(cgrp)) -> else {
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_max_descendants_show(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int cgroup_max_descendants_show(struct seq_file *seq, void *v)
-    {
-    struct cgroup *cgrp = seq_css(seq).cgroup;
-    let mut descendants: c_int = READ_ONCE(cgrp.max_descendants);
-    if (descendants == INT_MAX)
+    let mut cgrp = seq_css(seq).cgroup;
+pub static mut descendants: c_int = 0;
+    if (descendants == INT_MAX) {
     seq_puts(seq, "max\n");
-    else
+    }
+    else {
     seq_printf(seq, "%d\n", descendants);
+    }
     return 0;
     }
-    static ssize_t cgroup_max_descendants_write(struct kernfs_open_file *of,
-    char *buf, size_t nbytes, loff_t off)
-    {
-    struct cgroup *cgrp;
-    int descendants;
-    ssize_t ret;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_max_descendants_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+pub static mut cgrp: *mut c_void = core::ptr::null_mut();
+    let mut descendants = 0;
+    let mut ret = 0;
     buf = strstrip(buf);
     if (!strcmp(buf, "max")) {
     descendants = INT_MAX;
     } else {
     ret = kstrtoint(buf, 0, &descendants);
-    if (ret)
+    if (ret) {
     return ret;
     }
-    if (descendants < 0)
+    }
+    if (descendants < 0) {
     return -ERANGE;
+    }
     cgrp = cgroup_kn_lock_live(of.kn, false);
-    if (!cgrp)
+    if (!cgrp) {
     return -ENOENT;
+    }
     WRITE_ONCE(cgrp.max_descendants, descendants);
     cgroup_kn_unlock(of.kn);
     return nbytes;
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_max_depth_show(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int cgroup_max_depth_show(struct seq_file *seq, void *v)
-    {
-    struct cgroup *cgrp = seq_css(seq).cgroup;
-    let mut depth: c_int = READ_ONCE(cgrp.max_depth);
-    if (depth == INT_MAX)
+    let mut cgrp = seq_css(seq).cgroup;
+pub static mut depth: c_int = 0;
+    if (depth == INT_MAX) {
     seq_puts(seq, "max\n");
-    else
+    }
+    else {
     seq_printf(seq, "%d\n", depth);
+    }
     return 0;
     }
-    static ssize_t cgroup_max_depth_write(struct kernfs_open_file *of,
-    char *buf, size_t nbytes, loff_t off)
-    {
-    struct cgroup *cgrp;
-    ssize_t ret;
-    int depth;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_max_depth_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+pub static mut cgrp: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    let mut depth = 0;
     buf = strstrip(buf);
     if (!strcmp(buf, "max")) {
     depth = INT_MAX;
     } else {
     ret = kstrtoint(buf, 0, &depth);
-    if (ret)
+    if (ret) {
     return ret;
     }
-    if (depth < 0)
+    }
+    if (depth < 0) {
     return -ERANGE;
+    }
     cgrp = cgroup_kn_lock_live(of.kn, false);
-    if (!cgrp)
+    if (!cgrp) {
     return -ENOENT;
+    }
     WRITE_ONCE(cgrp.max_depth, depth);
     cgroup_kn_unlock(of.kn);
     return nbytes;
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_events_show(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int cgroup_events_show(struct seq_file *seq, void *v)
-    {
-    struct cgroup *cgrp = seq_css(seq).cgroup;
+    let mut cgrp = seq_css(seq).cgroup;
     seq_printf(seq, "populated %d\n", cgroup_is_populated(cgrp));
     seq_printf(seq, "frozen %d\n", test_bit(CGRP_FROZEN, &cgrp.flags));
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_stat_show(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int cgroup_stat_show(struct seq_file *seq, void *v)
-    {
-    struct cgroup *cgroup = seq_css(seq).cgroup;
-    struct cgroup_subsys_state *css;
+    let mut cgroup = seq_css(seq).cgroup;
+pub static mut css: *mut c_void = core::ptr::null_mut();
     int dying_cnt[CGROUP_SUBSYS_COUNT];
-    int ssid;
+    let mut ssid = 0;
     seq_printf(seq, "nr_descendants %d\n",
     cgroup.nr_descendants);
 //
@@ -3486,11 +3704,12 @@ unsafe extern "C" fn cgroup_stat_show(seq: *mut seq_file, v: *mut c_void) -> c_i
 // numbers may not be consistent when that happens.
 //
     rcu_read_lock();
-    for (ssid = 0; ssid < CGROUP_SUBSYS_COUNT; ssid++) {
+    while (ssid < CGROUP_SUBSYS_COUNT) {
     dying_cnt[ssid] = -1;
     if ((BIT(ssid) & cgrp_dfl_inhibit_ss_mask) ||
-    (cgroup_subsys[ssid].root !=  &cgrp_dfl_root))
+    (cgroup_subsys[ssid].root !=  &cgrp_dfl_root)) {
     continue;
+    }
     css = rcu_dereference_raw(cgroup.subsys[ssid]);
     dying_cnt[ssid] = cgroup.nr_dying_subsys[ssid];
     seq_printf(seq, "nr_subsys_%s %d\n", cgroup_subsys[ssid].name,
@@ -3498,28 +3717,28 @@ unsafe extern "C" fn cgroup_stat_show(seq: *mut seq_file, v: *mut c_void) -> c_i
     }
     seq_printf(seq, "nr_dying_descendants %d\n",
     cgroup.nr_dying_descendants);
-    for (ssid = 0; ssid < CGROUP_SUBSYS_COUNT; ssid++) {
-    if (dying_cnt[ssid] >= 0)
+    while (ssid < CGROUP_SUBSYS_COUNT) {
+    if (dying_cnt[ssid] >= 0) {
     seq_printf(seq, "nr_dying_subsys_%s %d\n",
     cgroup_subsys[ssid].name, dying_cnt[ssid]);
+    }
     }
     rcu_read_unlock();
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_core_local_stat_show(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int cgroup_core_local_stat_show(struct seq_file *seq, void *v)
-    {
-    struct cgroup *cgrp = seq_css(seq).cgroup;
-    unsigned int sequence;
-    u64 freeze_time;
+    let mut cgrp = seq_css(seq).cgroup;
+    let mut sequence = 0;
+    let mut freeze_time = 0;
     do {
     sequence = read_seqcount_begin(&cgrp.freezer.freeze_seq);
     freeze_time = cgrp.freezer.frozen_nsec;
 // Add in current freezer interval if the cgroup is freezing.
-    if (test_bit(CGRP_FREEZE, &cgrp.flags))
+    if (test_bit(CGRP_FREEZE, &cgrp.flags)) {
     freeze_time += (ktime_get_ns() -
     cgrp.freezer.freeze_start_nsec);
+    }
     } while (read_seqcount_retry(&cgrp.freezer.freeze_seq, sequence));
     do_div(freeze_time, NSEC_PER_USEC);
     seq_printf(seq, "frozen_usec %llu\n", freeze_time);
@@ -3534,45 +3753,46 @@ unsafe extern "C" fn cgroup_core_local_stat_show(seq: *mut seq_file, v: *mut c_v
 // Find and get @cgrp's css associated with @ss.  If the css doesn't exist
 // or is offline, %NULL is returned.
 //
-    static struct cgroup_subsys_state *cgroup_tryget_css(struct cgroup *cgrp,
-    struct cgroup_subsys *ss)
-    {
-    struct cgroup_subsys_state *css;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_tryget_css(cgrp: *mut cgroup, ss: *mut cgroup_subsys) -> *mut c_void {
+pub static mut css: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     css = cgroup_css(cgrp, ss);
-    if (css && !css_tryget_online(css))
+    if (css && !css_tryget_online(css)) {
     css = core::ptr::null_mut();
+    }
     rcu_read_unlock();
     return css;
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_extra_stat_show(seq: *mut seq_file, ssid: c_int) -> c_int {
-    static int cgroup_extra_stat_show(struct seq_file *seq, int ssid)
-    {
-    struct cgroup *cgrp = seq_css(seq).cgroup;
-    struct cgroup_subsys *ss = cgroup_subsys[ssid];
-    struct cgroup_subsys_state *css;
-    int ret;
-    if (!ss.css_extra_stat_show)
+    let mut cgrp = seq_css(seq).cgroup;
+    let mut ss = cgroup_subsys[ssid];
+pub static mut css: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (!ss.css_extra_stat_show) {
     return 0;
+    }
     css = cgroup_tryget_css(cgrp, ss);
-    if (!css)
+    if (!css) {
     return 0;
+    }
     ret = ss.css_extra_stat_show(seq, css);
     css_put(css);
     return ret;
     }
-    static int cgroup_local_stat_show(struct seq_file *seq,
-    struct cgroup *cgrp, int ssid)
-    {
-    struct cgroup_subsys *ss = cgroup_subsys[ssid];
-    struct cgroup_subsys_state *css;
-    int ret;
-    if (!ss.css_local_stat_show)
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_local_stat_show(seq: *mut seq_file, cgrp: *mut cgroup, ssid: c_int) -> c_int {
+    let mut ss = cgroup_subsys[ssid];
+pub static mut css: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (!ss.css_local_stat_show) {
     return 0;
+    }
     css = cgroup_tryget_css(cgrp, ss);
-    if (!css)
+    if (!css) {
     return 0;
+    }
     ret = ss.css_local_stat_show(seq, css);
     css_put(css);
     return ret;
@@ -3580,9 +3800,7 @@ unsafe extern "C" fn cgroup_extra_stat_show(seq: *mut seq_file, ssid: c_int) -> 
 
 #[no_mangle]
 unsafe extern "C" fn cpu_stat_show(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int cpu_stat_show(struct seq_file *seq, void *v)
-    {
-    let mut ret: c_int = 0;
+pub static mut ret: c_int = 0;
     cgroup_base_stat_cputime_show(seq);
 
     ret = cgroup_extra_stat_show(seq, cpu_cgrp_id);
@@ -3591,10 +3809,8 @@ unsafe extern "C" fn cpu_stat_show(seq: *mut seq_file, v: *mut c_void) -> c_int 
     }
 #[no_mangle]
 unsafe extern "C" fn cpu_local_stat_show(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int cpu_local_stat_show(struct seq_file *seq, void *v)
-    {
     struct cgroup __maybe_unused *cgrp = seq_css(seq).cgroup;
-    let mut ret: c_int = 0;
+pub static mut ret: c_int = 0;
 
     ret = cgroup_local_stat_show(seq, cgrp, cpu_cgrp_id);
 
@@ -3603,56 +3819,50 @@ unsafe extern "C" fn cpu_local_stat_show(seq: *mut seq_file, v: *mut c_void) -> 
 
 #[no_mangle]
 unsafe extern "C" fn cgroup_io_pressure_show(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int cgroup_io_pressure_show(struct seq_file *seq, void *v)
-    {
-    struct cgroup *cgrp = seq_css(seq).cgroup;
-    struct psi_group *psi = cgroup_psi(cgrp);
+    let mut cgrp = seq_css(seq).cgroup;
+    let mut psi = cgroup_psi(cgrp);
     return psi_show(seq, psi, PSI_IO);
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_memory_pressure_show(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int cgroup_memory_pressure_show(struct seq_file *seq, void *v)
-    {
-    struct cgroup *cgrp = seq_css(seq).cgroup;
-    struct psi_group *psi = cgroup_psi(cgrp);
+    let mut cgrp = seq_css(seq).cgroup;
+    let mut psi = cgroup_psi(cgrp);
     return psi_show(seq, psi, PSI_MEM);
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_cpu_pressure_show(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int cgroup_cpu_pressure_show(struct seq_file *seq, void *v)
-    {
-    struct cgroup *cgrp = seq_css(seq).cgroup;
-    struct psi_group *psi = cgroup_psi(cgrp);
+    let mut cgrp = seq_css(seq).cgroup;
+    let mut psi = cgroup_psi(cgrp);
     return psi_show(seq, psi, PSI_CPU);
     }
-    static ssize_t pressure_write(struct kernfs_open_file *of, char *buf,
-    size_t nbytes, enum psi_res res)
-    {
-    struct cgroup_file_ctx *ctx;
-    struct psi_trigger *new;
-    struct cgroup *cgrp;
-    struct psi_group *psi;
-    bool need_rtpoll_worker;
-    let mut ret: isize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn pressure_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, res: psi_res) -> ssize_t {
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+pub static mut new: *mut c_void = core::ptr::null_mut();
+pub static mut cgrp: *mut c_void = core::ptr::null_mut();
+pub static mut psi: *mut c_void = core::ptr::null_mut();
+    let mut need_rtpoll_worker = 0;
+pub static mut ret: isize = 0;
     cgrp = cgroup_kn_lock_live(of.kn, false);
-    if (!cgrp)
+    if (!cgrp) {
     return -ENODEV;
+    }
     ctx = of.priv;
     if (!ctx) {
     ret = -ENODEV;
-    goto out_unlock;
+// goto;
     }
 // Allow only one trigger per file descriptor
     if (ctx.psi.trigger) {
     ret = -EBUSY;
-    goto out_unlock;
+// goto;
     }
     psi = cgroup_psi(cgrp);
     new = psi_trigger_create(psi, buf, res, of.file, of,
     &need_rtpoll_worker);
     if (IS_ERR(new)) {
     ret = PTR_ERR(new);
-    goto out_unlock;
+// goto;
     }
 //
 // The worker fork must run with neither cgroup_mutex nor the file's
@@ -3664,220 +3874,212 @@ unsafe extern "C" fn cgroup_cpu_pressure_show(seq: *mut seq_file, v: *mut c_void
     cgroup_unlock();
     ret = psi_trigger_create_rtpoll_worker(psi);
     cgroup_lock();
-    if (!ret && !of.priv)
+    if (!ret && !of.priv) {
     ret = -ENODEV;
+    }
     if (ret) {
     psi_trigger_destroy(new);
-    goto out_unlock;
+// goto;
     }
     }
     smp_store_release(&ctx.psi.trigger, new);
-    out_unlock:
+// label;
     cgroup_kn_unlock(of.kn);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     return nbytes;
     }
-    static ssize_t cgroup_io_pressure_write(struct kernfs_open_file *of,
-    char *buf, size_t nbytes,
-    loff_t off)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_io_pressure_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
     return pressure_write(of, buf, nbytes, PSI_IO);
     }
-    static ssize_t cgroup_memory_pressure_write(struct kernfs_open_file *of,
-    char *buf, size_t nbytes,
-    loff_t off)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_memory_pressure_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
     return pressure_write(of, buf, nbytes, PSI_MEM);
     }
-    static ssize_t cgroup_cpu_pressure_write(struct kernfs_open_file *of,
-    char *buf, size_t nbytes,
-    loff_t off)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_cpu_pressure_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
     return pressure_write(of, buf, nbytes, PSI_CPU);
     }
 
 #[no_mangle]
 unsafe extern "C" fn cgroup_irq_pressure_show(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int cgroup_irq_pressure_show(struct seq_file *seq, void *v)
-    {
-    struct cgroup *cgrp = seq_css(seq).cgroup;
-    struct psi_group *psi = cgroup_psi(cgrp);
+    let mut cgrp = seq_css(seq).cgroup;
+    let mut psi = cgroup_psi(cgrp);
     return psi_show(seq, psi, PSI_IRQ);
     }
-    static ssize_t cgroup_irq_pressure_write(struct kernfs_open_file *of,
-    char *buf, size_t nbytes,
-    loff_t off)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_irq_pressure_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
     return pressure_write(of, buf, nbytes, PSI_IRQ);
     }
 
 #[no_mangle]
 unsafe extern "C" fn cgroup_pressure_show(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int cgroup_pressure_show(struct seq_file *seq, void *v)
-    {
-    struct cgroup *cgrp = seq_css(seq).cgroup;
-    struct psi_group *psi = cgroup_psi(cgrp);
+    let mut cgrp = seq_css(seq).cgroup;
+    let mut psi = cgroup_psi(cgrp);
     seq_printf(seq, "%d\n", psi.enabled);
     return 0;
     }
-    static ssize_t cgroup_pressure_write(struct kernfs_open_file *of,
-    char *buf, size_t nbytes,
-    loff_t off)
-    {
-    ssize_t ret;
-    int enable;
-    struct cgroup *cgrp;
-    struct psi_group *psi;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_pressure_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+    let mut ret = 0;
+    let mut enable = 0;
+pub static mut cgrp: *mut c_void = core::ptr::null_mut();
+pub static mut psi: *mut c_void = core::ptr::null_mut();
     ret = kstrtoint(strstrip(buf), 0, &enable);
-    if (ret)
+    if (ret) {
     return ret;
-    if (enable < 0 || enable > 1)
+    }
+    if (enable < 0 || enable > 1) {
     return -ERANGE;
+    }
     cgrp = cgroup_kn_lock_live(of.kn, false);
-    if (!cgrp)
+    if (!cgrp) {
     return -ENOENT;
+    }
     psi = cgroup_psi(cgrp);
     if (psi.enabled != enable) {
-    int i;
+    let mut i = 0;
 // show or hide {cpu,memory,io,irq}.pressure files
-    for (i = 0; i < NR_PSI_RESOURCES; i++)
+    for (i = 0; i < NR_PSI_RESOURCES; i++) {
     cgroup_file_show(&cgrp.psi_files[i], enable);
+    }
     psi.enabled = enable;
-    if (enable)
+    if (enable) {
     psi_cgroup_restart(psi);
+    }
     }
     cgroup_kn_unlock(of.kn);
     return nbytes;
     }
-    static __poll_t cgroup_pressure_poll(struct kernfs_open_file *of,
+    static __poll_t cgroup_pressure_poll(kernfs_open_file *of,
     poll_table *pt)
     {
-    struct cgroup_file_ctx *ctx = of.priv;
+    let mut ctx = of.priv;
     return psi_trigger_poll(&ctx.psi.trigger, of.file, pt);
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_pressure_release(of: *mut kernfs_open_file) {
-    static void cgroup_pressure_release(struct kernfs_open_file *of)
-    {
-    struct cgroup_file_ctx *ctx = of.priv;
+    let mut ctx = of.priv;
     psi_trigger_destroy(ctx.psi.trigger);
     }
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_psi_enabled() -> bool {
-    bool cgroup_psi_enabled(void)
-    {
-    if (static_branch_likely(&psi_disabled))
+    if (static_branch_likely(&psi_disabled)) {
     return false;
+    }
     return (cgroup_feature_disable_mask & (1 << OPT_FEATURE_PRESSURE)) == 0;
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn cgroup_psi_enabled() -> bool {
-    bool cgroup_psi_enabled(void)
-    {
+#[no_mangle]
+// duplicate fn: cgroup_psi_enabled
+pub unsafe extern "C" fn cgroup_psi_enabled_dup() -> bool {
     return false;
     }
 
 #[no_mangle]
 unsafe extern "C" fn cgroup_freeze_show(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int cgroup_freeze_show(struct seq_file *seq, void *v)
-    {
-    struct cgroup *cgrp = seq_css(seq).cgroup;
+    let mut cgrp = seq_css(seq).cgroup;
     seq_printf(seq, "%d\n", cgrp.freezer.freeze);
     return 0;
     }
-    static ssize_t cgroup_freeze_write(struct kernfs_open_file *of,
-    char *buf, size_t nbytes, loff_t off)
-    {
-    struct cgroup *cgrp;
-    ssize_t ret;
-    int freeze;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_freeze_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+pub static mut cgrp: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    let mut freeze = 0;
     ret = kstrtoint(strstrip(buf), 0, &freeze);
-    if (ret)
+    if (ret) {
     return ret;
-    if (freeze < 0 || freeze > 1)
+    }
+    if (freeze < 0 || freeze > 1) {
     return -ERANGE;
+    }
     cgrp = cgroup_kn_lock_live(of.kn, false);
-    if (!cgrp)
+    if (!cgrp) {
     return -ENOENT;
+    }
     cgroup_freeze(cgrp, freeze);
     cgroup_kn_unlock(of.kn);
     return nbytes;
     }
 #[no_mangle]
 unsafe extern "C" fn __cgroup_kill(cgrp: *mut cgroup) {
-    static void __cgroup_kill(struct cgroup *cgrp)
-    {
-    struct css_task_iter it;
-    struct task_struct *task;
+pub static mut it: usize = 0;
+pub static mut task: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&cgroup_mutex);
     spin_lock_irq(&css_set_lock);
-    cgrp.kill_seq++;
+    cgrp.kill_seq += 1;
     spin_unlock_irq(&css_set_lock);
     css_task_iter_start(&cgrp.self, CSS_TASK_ITER_PROCS | CSS_TASK_ITER_THREADED, &it);
     while ((task = css_task_iter_next(&it))) {
 // Ignore kernel threads here.
-    if (task.flags & PF_KTHREAD)
+    if (task.flags & PF_KTHREAD) {
     continue;
+    }
 // Skip tasks that are already dying.
-    if (__fatal_signal_pending(task))
+    if (__fatal_signal_pending(task)) {
     continue;
+    }
     send_sig(SIGKILL, task, 0);
     }
     css_task_iter_end(&it);
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_kill(cgrp: *mut cgroup) {
-    static void cgroup_kill(struct cgroup *cgrp)
-    {
-    struct cgroup_subsys_state *css;
-    struct cgroup *dsct;
+pub static mut css: *mut c_void = core::ptr::null_mut();
+pub static mut dsct: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&cgroup_mutex);
     cgroup_for_each_live_descendant_pre(dsct, css, cgrp)
     __cgroup_kill(dsct);
     }
-    static ssize_t cgroup_kill_write(struct kernfs_open_file *of, char *buf,
-    size_t nbytes, loff_t off)
-    {
-    let mut ret: isize = 0;
-    int kill;
-    struct cgroup *cgrp;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_kill_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+pub static mut ret: isize = 0;
+    let mut kill = 0;
+pub static mut cgrp: *mut c_void = core::ptr::null_mut();
     ret = kstrtoint(strstrip(buf), 0, &kill);
-    if (ret)
+    if (ret) {
     return ret;
-    if (kill != 1)
+    }
+    if (kill != 1) {
     return -ERANGE;
+    }
     cgrp = cgroup_kn_lock_live(of.kn, false);
-    if (!cgrp)
+    if (!cgrp) {
     return -ENOENT;
+    }
 //
 // Killing is a process directed operation, i.e. the whole thread-group
 // is taken down so act like we do for cgroup.procs and only make this
 // writable in non-threaded cgroups.
 //
-    if (cgroup_is_threaded(cgrp))
+    if (cgroup_is_threaded(cgrp)) {
     ret = -EOPNOTSUPP;
-    else
+    }
+    else {
     cgroup_kill(cgrp);
+    }
     cgroup_kn_unlock(of.kn);
     return ret ?: nbytes;
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_file_open(of: *mut kernfs_open_file) -> c_int {
-    static int cgroup_file_open(struct kernfs_open_file *of)
-    {
-    struct cftype *cft = of_cft(of);
-    struct cgroup_file_ctx *ctx;
-    int ret;
+    let mut cft = of_cft(of);
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     ctx = kzalloc_obj(*ctx);
-    if (!ctx)
+    if (!ctx) {
     return -ENOMEM;
+    }
     ctx.ns = current.nsproxy.cgroup_ns;
     get_cgroup_ns(ctx.ns);
     of.priv = ctx;
-    if (!cft.open)
+    if (!cft.open) {
     return 0;
+    }
     ret = cft.open(of);
     if (ret) {
     put_cgroup_ns(ctx.ns);
@@ -3887,26 +4089,25 @@ unsafe extern "C" fn cgroup_file_open(of: *mut kernfs_open_file) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_file_release(of: *mut kernfs_open_file) {
-    static void cgroup_file_release(struct kernfs_open_file *of)
-    {
-    struct cftype *cft = of_cft(of);
-    struct cgroup_file_ctx *ctx = of.priv;
-    if (cft.release)
+    let mut cft = of_cft(of);
+    let mut ctx = of.priv;
+    if (cft.release) {
     cft.release(of);
+    }
     put_cgroup_ns(ctx.ns);
     kfree(ctx);
     of.priv = core::ptr::null_mut();
     }
-    static ssize_t cgroup_file_write(struct kernfs_open_file *of, char *buf,
-    size_t nbytes, loff_t off)
-    {
-    struct cgroup_file_ctx *ctx = of.priv;
-    struct cgroup *cgrp = kn_priv(of.kn);
-    struct cftype *cft = of_cft(of);
-    struct cgroup_subsys_state *css;
-    int ret;
-    if (!nbytes)
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_file_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+    let mut ctx = of.priv;
+    let mut cgrp = kn_priv(of.kn);
+    let mut cft = of_cft(of);
+pub static mut css: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (!nbytes) {
     return 0;
+    }
 //
 // If namespaces are delegation boundaries, disallow writes to
 // files in an non-init namespace root from inside the namespace
@@ -3915,10 +4116,12 @@ unsafe extern "C" fn cgroup_file_release(of: *mut kernfs_open_file) {
 //
     if ((cgrp.root.flags & CGRP_ROOT_NS_DELEGATE) &&
     !(cft.flags & CFTYPE_NS_DELEGATABLE) &&
-    ctx.ns != &init_cgroup_ns && ctx.ns.root_cset.dfl_cgrp == cgrp)
+    ctx.ns != &init_cgroup_ns && ctx.ns.root_cset.dfl_cgrp == cgrp) {
     return -EPERM;
-    if (cft.write)
+    }
+    if (cft.write) {
     return cft.write(of, buf, nbytes, off);
+    }
 //
 // kernfs guarantees that a file isn't deleted with operations in
 // flight, which means that the matching css is and stays alive and
@@ -3931,13 +4134,15 @@ unsafe extern "C" fn cgroup_file_release(of: *mut kernfs_open_file) {
     if (cft.write_u64) {
     unsigned long long v;
     ret = kstrtoull(buf, 0, &v);
-    if (!ret)
+    if (!ret) {
     ret = cft.write_u64(css, cft, v);
+    }
     } else if (cft.write_s64) {
     long long v;
     ret = kstrtoll(buf, 0, &v);
-    if (!ret)
+    if (!ret) {
     ret = cft.write_s64(css, cft, v);
+    }
     } else {
     ret = -EINVAL;
     }
@@ -3945,78 +4150,57 @@ unsafe extern "C" fn cgroup_file_release(of: *mut kernfs_open_file) {
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_file_poll(of: *mut kernfs_open_file, pt: *mut poll_table) -> __poll_t {
-    static __poll_t cgroup_file_poll(struct kernfs_open_file *of, poll_table *pt)
-    {
-    struct cftype *cft = of_cft(of);
-    if (cft.poll)
+    let mut cft = of_cft(of);
+    if (cft.poll) {
     return cft.poll(of, pt);
+    }
     return kernfs_generic_poll(of, pt);
     }
-    static void *cgroup_seqfile_start(struct seq_file *seq, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_seqfile_start(seq: *mut seq_file, ppos: *mut loff_t) -> *mut c_void {
     return seq_cft(seq).seq_start(seq, ppos);
     }
-    static void *cgroup_seqfile_next(struct seq_file *seq, void *v, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_seqfile_next(seq: *mut seq_file, v: *mut c_void, ppos: *mut loff_t) -> *mut c_void {
     return seq_cft(seq).seq_next(seq, v, ppos);
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_seqfile_stop(seq: *mut seq_file, v: *mut c_void) {
-    static void cgroup_seqfile_stop(struct seq_file *seq, void *v)
-    {
-    if (seq_cft(seq).seq_stop)
+    if (seq_cft(seq).seq_stop) {
     seq_cft(seq).seq_stop(seq, v);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_seqfile_show(m: *mut seq_file, arg: *mut c_void) -> c_int {
-    static int cgroup_seqfile_show(struct seq_file *m, void *arg)
-    {
-    struct cftype *cft = seq_cft(m);
-    struct cgroup_subsys_state *css = seq_css(m);
-    if (cft.seq_show)
+    let mut cft = seq_cft(m);
+    let mut css = seq_css(m);
+    if (cft.seq_show) {
     return cft.seq_show(m, arg);
-    if (cft.read_u64)
+    }
+    if (cft.read_u64) {
     seq_printf(m, "%llu\n", cft.read_u64(css, cft));
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: cft->read_s64) -> else {
-    else if (cft.read_s64)
+    }
+
+    else if (cft.read_s64) {
     seq_printf(m, "%lld\n", cft.read_s64(css, cft));
-    else
+    }
+    else {
     return -EINVAL;
+    }
     return 0;
     }
-    static struct kernfs_ops cgroup_kf_single_ops = {
-    .atomic_write_len	= PAGE_SIZE,
-    .open			= cgroup_file_open,
-    .release		= cgroup_file_release,
-    .write			= cgroup_file_write,
-    .poll			= cgroup_file_poll,
-    .seq_show		= cgroup_seqfile_show,
-    };
-    static struct kernfs_ops cgroup_kf_ops = {
-    .atomic_write_len	= PAGE_SIZE,
-    .open			= cgroup_file_open,
-    .release		= cgroup_file_release,
-    .write			= cgroup_file_write,
-    .poll			= cgroup_file_poll,
-    .seq_start		= cgroup_seqfile_start,
-    .seq_next		= cgroup_seqfile_next,
-    .seq_stop		= cgroup_seqfile_stop,
-    .seq_show		= cgroup_seqfile_show,
-    };
+pub static mut kernfs_ops: usize = 0;
+pub static mut kernfs_ops: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn cgroup_file_notify_timer(timer: *mut timer_list) {
-    static void cgroup_file_notify_timer(struct timer_list *timer)
-    {
-    cgroup_file_notify(container_of(timer, struct cgroup_file,
+    cgroup_file_notify(container_of!(timer, cgroup_file,
     notify_timer));
     }
-    static int cgroup_add_file(struct cgroup_subsys_state *css, struct cgroup *cgrp,
-    struct cftype *cft)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_add_file(css: *mut cgroup_subsys_state, cgrp: *mut cgroup, cft: *mut cftype) -> c_int {
     char name[CGROUP_FILE_NAME_MAX];
-    struct kernfs_node *kn;
-    struct lock_class_key *key = core::ptr::null_mut();
+pub static mut kn: *mut c_void = core::ptr::null_mut();
+    let mut key = core::ptr::null_mut();
 
     key = &cft.lockdep_key;
 
@@ -4025,10 +4209,11 @@ unsafe extern "C" fn cgroup_file_notify_timer(timer: *mut timer_list) {
     current_fsuid(), current_fsgid(),
     0, cft.kf_ops, cft,
     core::ptr::null_mut(), key);
-    if (IS_ERR(kn))
+    if (IS_ERR(kn)) {
     return PTR_ERR(kn);
+    }
     if (cft.file_offset) {
-    struct cgroup_file *cfile = (void *)css + cft.file_offset;
+    let mut cfile = css + cft.file_offset;
     timer_setup(&cfile.notify_timer, cgroup_file_notify_timer, 0);
     spin_lock_init(&cfile.lock);
     cfile.kn = kn;
@@ -4045,34 +4230,37 @@ unsafe extern "C" fn cgroup_file_notify_timer(timer: *mut timer_list) {
 // Depending on @is_add, add or remove files defined by @cfts on @cgrp.
 // For removals, this function never fails.
 //
-    static int cgroup_addrm_files(struct cgroup_subsys_state *css,
-    struct cgroup *cgrp, struct cftype cfts[],
-    bool is_add)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_addrm_files(css: *mut cgroup_subsys_state, cgrp: *mut cgroup, is_add: bool) -> c_int {
     struct cftype *cft, *cft_end = core::ptr::null_mut();
-    let mut ret: c_int = 0;
+pub static mut ret: c_int = 0;
     lockdep_assert_held(&cgroup_mutex);
-    restart:
-    for (cft = cfts; cft != cft_end && cft.name[0] != '\0'; cft++) {
+// label;
+    while (cft != cft_end && cft.name[0] != '\0') {
 // does cft->flags tell us to skip this file on @cgrp?
-    if ((cft.flags & __CFTYPE_ONLY_ON_DFL) && !cgroup_on_dfl(cgrp))
+    if ((cft.flags & __CFTYPE_ONLY_ON_DFL) && !cgroup_on_dfl(cgrp)) {
     continue;
-    if ((cft.flags & __CFTYPE_NOT_ON_DFL) && cgroup_on_dfl(cgrp))
+    }
+    if ((cft.flags & __CFTYPE_NOT_ON_DFL) && cgroup_on_dfl(cgrp)) {
     continue;
-    if ((cft.flags & CFTYPE_NOT_ON_ROOT) && !cgroup_parent(cgrp))
+    }
+    if ((cft.flags & CFTYPE_NOT_ON_ROOT) && !cgroup_parent(cgrp)) {
     continue;
-    if ((cft.flags & CFTYPE_ONLY_ON_ROOT) && cgroup_parent(cgrp))
+    }
+    if ((cft.flags & CFTYPE_ONLY_ON_ROOT) && cgroup_parent(cgrp)) {
     continue;
-    if ((cft.flags & CFTYPE_DEBUG) && !cgroup_debug)
+    }
+    if ((cft.flags & CFTYPE_DEBUG) && !cgroup_debug) {
     continue;
+    }
     if (is_add) {
     ret = cgroup_add_file(css, cgrp, cft);
     if (ret) {
-    pr_warn("%s: failed to add %s, err=%d\n",
+    pr_warn!("%s: failed to add %s, err=%d\n",
     __func__, cft.name, ret);
     cft_end = cft;
     is_add = false;
-    goto restart;
+// goto;
     }
     } else {
     cgroup_rm_file(cgrp, cft);
@@ -4082,35 +4270,35 @@ unsafe extern "C" fn cgroup_file_notify_timer(timer: *mut timer_list) {
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_apply_cftypes(cfts: *mut cftype, is_add: bool) -> c_int {
-    static int cgroup_apply_cftypes(struct cftype *cfts, bool is_add)
-    {
-    struct cgroup_subsys *ss = cfts[0].ss;
-    struct cgroup *root = &ss.root.cgrp;
-    struct cgroup_subsys_state *css;
-    let mut ret: c_int = 0;
+    let mut ss = cfts[0].ss;
+    let mut root = &ss.root.cgrp;
+pub static mut css: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     lockdep_assert_held(&cgroup_mutex);
 // add/rm files for all cgroups created before
     css_for_each_descendant_pre(css, cgroup_css(root, ss)) {
-    struct cgroup *cgrp = css.cgroup;
-    if (!(css.flags & CSS_VISIBLE))
+    let mut cgrp = css.cgroup;
+    if (!(css.flags & CSS_VISIBLE)) {
     continue;
+    }
     ret = cgroup_addrm_files(css, cgrp, cfts, is_add);
-    if (ret)
+    if (ret) {
     break;
     }
-    if (is_add && !ret)
+    }
+    if (is_add && !ret) {
     kernfs_activate(root.kn);
+    }
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_exit_cftypes(cfts: *mut cftype) {
-    static void cgroup_exit_cftypes(struct cftype *cfts)
-    {
-    struct cftype *cft;
-    for (cft = cfts; cft.name[0] != '\0'; cft++) {
+pub static mut cft: *mut c_void = core::ptr::null_mut();
+    while (cft.name[0] != '\0') {
 // free copy for custom atomic_write_len, see init_cftypes()
-    if (cft.max_write_len && cft.max_write_len != PAGE_SIZE)
+    if (cft.max_write_len && cft.max_write_len != PAGE_SIZE) {
     kfree(cft.kf_ops);
+    }
     cft.kf_ops = core::ptr::null_mut();
     cft.ss = core::ptr::null_mut();
 // revert flags set by cgroup core while adding @cfts
@@ -4120,27 +4308,27 @@ unsafe extern "C" fn cgroup_exit_cftypes(cfts: *mut cftype) {
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_init_cftypes(ss: *mut cgroup_subsys, cfts: *mut cftype) -> c_int {
-    static int cgroup_init_cftypes(struct cgroup_subsys *ss, struct cftype *cfts)
-    {
-    struct cftype *cft;
-    let mut ret: c_int = 0;
-    for (cft = cfts; cft.name[0] != '\0'; cft++) {
-    struct kernfs_ops *kf_ops;
-    WARN_ON(cft.ss || cft.kf_ops);
+pub static mut cft: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
+    while (cft.name[0] != '\0') {
+pub static mut kf_ops: *mut c_void = core::ptr::null_mut();
+    WARN_ON!(cft.ss || cft.kf_ops);
     if (cft.flags & __CFTYPE_ADDED) {
     ret = -EBUSY;
     break;
     }
-    if (cft.seq_start)
+    if (cft.seq_start) {
     kf_ops = &cgroup_kf_ops;
-    else
+    }
+    else {
     kf_ops = &cgroup_kf_single_ops;
+    }
 //
 // Ugh... if @cft wants a custom max_write_len, we need to
 // make a copy of kf_ops to set its atomic_write_len.
 //
     if (cft.max_write_len && cft.max_write_len != PAGE_SIZE) {
-    kf_ops = kmemdup(kf_ops, sizeof(*kf_ops), GFP_KERNEL);
+    kf_ops = kmemdup(kf_ops, sizeof!(*kf_ops), GFP_KERNEL);
     if (!kf_ops) {
     ret = -ENOMEM;
     break;
@@ -4151,14 +4339,13 @@ unsafe extern "C" fn cgroup_init_cftypes(ss: *mut cgroup_subsys, cfts: *mut cfty
     cft.ss = ss;
     cft.flags |= __CFTYPE_ADDED;
     }
-    if (ret)
+    if (ret) {
     cgroup_exit_cftypes(cfts);
+    }
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_rm_cftypes_locked(cfts: *mut cftype) {
-    static void cgroup_rm_cftypes_locked(struct cftype *cfts)
-    {
     lockdep_assert_held(&cgroup_mutex);
     list_del(&cfts.node);
     cgroup_apply_cftypes(cfts, false);
@@ -4177,12 +4364,12 @@ unsafe extern "C" fn cgroup_rm_cftypes_locked(cfts: *mut cftype) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_rm_cftypes(cfts: *mut cftype) -> c_int {
-    int cgroup_rm_cftypes(struct cftype *cfts)
-    {
-    if (!cfts || cfts[0].name[0] == '\0')
+    if (!cfts || cfts[0].name[0] == '\0') {
     return 0;
-    if (!(cfts[0].flags & __CFTYPE_ADDED))
+    }
+    if (!(cfts[0].flags & __CFTYPE_ADDED)) {
     return -ENOENT;
+    }
     cgroup_lock();
     cgroup_rm_cftypes_locked(cfts);
     cgroup_unlock();
@@ -4204,21 +4391,23 @@ pub unsafe extern "C" fn cgroup_rm_cftypes(cfts: *mut cftype) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_add_cftypes(ss: *mut cgroup_subsys, cfts: *mut cftype) -> c_int {
-    int cgroup_add_cftypes(struct cgroup_subsys *ss, struct cftype *cfts)
-    {
-    int ret;
-    if (!cgroup_ssid_enabled(ss.id))
+    let mut ret = 0;
+    if (!cgroup_ssid_enabled(ss.id)) {
     return 0;
-    if (!cfts || cfts[0].name[0] == '\0')
+    }
+    if (!cfts || cfts[0].name[0] == '\0') {
     return 0;
+    }
     ret = cgroup_init_cftypes(ss, cfts);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     cgroup_lock();
     list_add_tail(&cfts.node, &ss.cfts);
     ret = cgroup_apply_cftypes(cfts, true);
-    if (ret)
+    if (ret) {
     cgroup_rm_cftypes_locked(cfts);
+    }
     cgroup_unlock();
     return ret;
     }
@@ -4232,11 +4421,10 @@ pub unsafe extern "C" fn cgroup_add_cftypes(ss: *mut cgroup_subsys, cfts: *mut c
 //
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_add_dfl_cftypes(ss: *mut cgroup_subsys, cfts: *mut cftype) -> c_int {
-    int cgroup_add_dfl_cftypes(struct cgroup_subsys *ss, struct cftype *cfts)
-    {
-    struct cftype *cft;
-    for (cft = cfts; cft && cft.name[0] != '\0'; cft++)
+pub static mut cft: *mut c_void = core::ptr::null_mut();
+    for (cft = cfts; cft && cft.name[0] != '\0'; cft++) {
     cft.flags |= __CFTYPE_ONLY_ON_DFL;
+    }
     return cgroup_add_cftypes(ss, cfts);
     }
 //
@@ -4249,11 +4437,10 @@ pub unsafe extern "C" fn cgroup_add_dfl_cftypes(ss: *mut cgroup_subsys, cfts: *m
 //
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_add_legacy_cftypes(ss: *mut cgroup_subsys, cfts: *mut cftype) -> c_int {
-    int cgroup_add_legacy_cftypes(struct cgroup_subsys *ss, struct cftype *cfts)
-    {
-    struct cftype *cft;
-    for (cft = cfts; cft && cft.name[0] != '\0'; cft++)
+pub static mut cft: *mut c_void = core::ptr::null_mut();
+    for (cft = cfts; cft && cft.name[0] != '\0'; cft++) {
     cft.flags |= __CFTYPE_NOT_ON_DFL;
+    }
     return cgroup_add_cftypes(ss, cfts);
     }
 //
@@ -4264,18 +4451,18 @@ pub unsafe extern "C" fn cgroup_add_legacy_cftypes(ss: *mut cgroup_subsys, cfts:
 //
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_file_notify(cfile: *mut cgroup_file) {
-    void cgroup_file_notify(struct cgroup_file *cfile)
-    {
     unsigned long flags, last, next;
-    struct kernfs_node *kn = core::ptr::null_mut();
-    if (!READ_ONCE(cfile.kn))
+    let mut kn = core::ptr::null_mut();
+    if (!READ_ONCE(cfile.kn)) {
     return;
+    }
     last = READ_ONCE(cfile.notified_at);
     next = last + CGROUP_FILE_NOTIFY_MIN_INTV;
     if (time_in_range(jiffies, last, next)) {
     timer_reduce(&cfile.notify_timer, next);
-    if (timer_pending(&cfile.notify_timer))
+    if (timer_pending(&cfile.notify_timer)) {
     return;
+    }
     }
     spin_lock_irqsave(&cfile.lock, flags);
     if (cfile.kn) {
@@ -4297,15 +4484,14 @@ pub unsafe extern "C" fn cgroup_file_notify(cfile: *mut cgroup_file) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_file_show(cfile: *mut cgroup_file, show: bool) {
-    void cgroup_file_show(struct cgroup_file *cfile, bool show)
-    {
-    struct kernfs_node *kn;
+pub static mut kn: *mut c_void = core::ptr::null_mut();
     spin_lock_irq(&cfile.lock);
     kn = cfile.kn;
     kernfs_get(kn);
     spin_unlock_irq(&cfile.lock);
-    if (kn)
+    if (kn) {
     kernfs_show(kn, show);
+    }
     kernfs_put(kn);
     }
 //
@@ -4325,10 +4511,9 @@ pub unsafe extern "C" fn cgroup_file_show(cfile: *mut cgroup_file, show: bool) {
 // ->css_offline() may show up during traversal.  It's each subsystem's
 // responsibility to synchronize against on/offlining.
 //
-    struct cgroup_subsys_state *css_next_child(struct cgroup_subsys_state *pos,
-    struct cgroup_subsys_state *parent)
-    {
-    struct cgroup_subsys_state *next;
+#[no_mangle]
+pub unsafe extern "C" fn css_next_child(pos: *mut cgroup_subsys_state, parent: *mut cgroup_subsys_state) -> *mut c_void {
+pub static mut next: *mut c_void = core::ptr::null_mut();
     cgroup_assert_mutex_or_rcu_locked();
 //
 // @pos could already have been unlinked from the sibling list.
@@ -4351,21 +4536,23 @@ pub unsafe extern "C" fn cgroup_file_show(cfile: *mut cgroup_file, show: bool) {
 // races against release and the race window is very small.
 //
     if (!pos) {
-    next = list_entry_rcu(parent.children.next, struct cgroup_subsys_state, sibling);
+    next = list_entry_rcu(parent.children.next, cgroup_subsys_state, sibling);
     } else if (likely(!(pos.flags & CSS_RELEASED))) {
-    next = list_entry_rcu(pos.sibling.next, struct cgroup_subsys_state, sibling);
+    next = list_entry_rcu(pos.sibling.next, cgroup_subsys_state, sibling);
     } else {
     list_for_each_entry_rcu(next, &parent.children, sibling,
-    lockdep_is_held(&cgroup_mutex))
+    lockdep_is_held(&cgroup_mutex)) {
     if (next.serial_nr > pos.serial_nr)
     break;
+    }
     }
 //
 // @next, if not pointing to the head, can be dereferenced and is
 // the next sibling.
 //
-    if (&next.sibling != &parent.children)
+    if (&next.sibling != &parent.children) {
     return next;
+    }
     return core::ptr::null_mut();
     }
 //
@@ -4390,24 +4577,25 @@ pub unsafe extern "C" fn cgroup_file_show(cfile: *mut cgroup_file, show: bool) {
 // ->css_offline() may show up during traversal.  It's each subsystem's
 // responsibility to synchronize against on/offlining.
 //
-    struct cgroup_subsys_state *
-    css_next_descendant_pre(struct cgroup_subsys_state *pos,
-    struct cgroup_subsys_state *root)
-    {
-    struct cgroup_subsys_state *next;
+#[no_mangle]
+pub unsafe extern "C" fn css_next_descendant_pre(pos: *mut cgroup_subsys_state, root: *mut cgroup_subsys_state) -> *mut c_void {
+pub static mut next: *mut c_void = core::ptr::null_mut();
     cgroup_assert_mutex_or_rcu_locked();
 // if first iteration, visit @root
-    if (!pos)
+    if (!pos) {
     return root;
+    }
 // visit the first child if exists
     next = css_next_child(core::ptr::null_mut(), pos);
-    if (next)
+    if (next) {
     return next;
+    }
 // no child, visit my or the closest ancestor's next sibling
     while (pos != root) {
     next = css_next_child(pos, pos.parent);
-    if (next)
+    if (next) {
     return next;
+    }
     pos = pos.parent;
     }
     return core::ptr::null_mut();
@@ -4427,10 +4615,10 @@ pub unsafe extern "C" fn cgroup_file_show(cfile: *mut cgroup_file, show: bool) {
 // This function will return the correct rightmost descendant as long as @pos
 // is accessible.
 //
-    struct cgroup_subsys_state *
-    css_rightmost_descendant(struct cgroup_subsys_state *pos)
-    {
-    struct cgroup_subsys_state *last, *tmp;
+#[no_mangle]
+pub unsafe extern "C" fn css_rightmost_descendant(pos: *mut cgroup_subsys_state) -> *mut c_void {
+    let mut last = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
     cgroup_assert_mutex_or_rcu_locked();
     do {
     last = pos;
@@ -4441,10 +4629,9 @@ pub unsafe extern "C" fn cgroup_file_show(cfile: *mut cgroup_file, show: bool) {
     } while (pos);
     return last;
     }
-    static struct cgroup_subsys_state *
-    css_leftmost_descendant(struct cgroup_subsys_state *pos)
-    {
-    struct cgroup_subsys_state *last;
+#[no_mangle]
+pub unsafe extern "C" fn css_leftmost_descendant(pos: *mut cgroup_subsys_state) -> *mut c_void {
+pub static mut last: *mut c_void = core::ptr::null_mut();
     do {
     last = pos;
     pos = css_next_child(core::ptr::null_mut(), pos);
@@ -4473,22 +4660,23 @@ pub unsafe extern "C" fn cgroup_file_show(cfile: *mut cgroup_file, show: bool) {
 // ->css_offline() may show up during traversal.  It's each subsystem's
 // responsibility to synchronize against on/offlining.
 //
-    struct cgroup_subsys_state *
-    css_next_descendant_post(struct cgroup_subsys_state *pos,
-    struct cgroup_subsys_state *root)
-    {
-    struct cgroup_subsys_state *next;
+#[no_mangle]
+pub unsafe extern "C" fn css_next_descendant_post(pos: *mut cgroup_subsys_state, root: *mut cgroup_subsys_state) -> *mut c_void {
+pub static mut next: *mut c_void = core::ptr::null_mut();
     cgroup_assert_mutex_or_rcu_locked();
 // if first iteration, visit leftmost descendant which may be @root
-    if (!pos)
+    if (!pos) {
     return css_leftmost_descendant(root);
+    }
 // if we visited @root, we're done
-    if (pos == root)
+    if (pos == root) {
     return core::ptr::null_mut();
+    }
 // if there's an unvisited sibling, visit its leftmost descendant
     next = css_next_child(pos, pos.parent);
-    if (next)
+    if (next) {
     return css_leftmost_descendant(next);
+    }
 // no sibling left, visit parent
     return pos.parent;
     }
@@ -4502,10 +4690,8 @@ pub unsafe extern "C" fn cgroup_file_show(cfile: *mut cgroup_file, show: bool) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn css_has_online_children(css: *mut cgroup_subsys_state) -> bool {
-    bool css_has_online_children(struct cgroup_subsys_state *css)
-    {
-    struct cgroup_subsys_state *child;
-    let mut ret: bool = false;
+pub static mut child: *mut c_void = core::ptr::null_mut();
+pub static mut ret: bool = false;
     rcu_read_lock();
     css_for_each_child(child, css) {
     if (css_is_online(child)) {
@@ -4516,18 +4702,18 @@ pub unsafe extern "C" fn css_has_online_children(css: *mut cgroup_subsys_state) 
     rcu_read_unlock();
     return ret;
     }
-    static struct css_set *css_task_iter_next_css_set(struct css_task_iter *it)
-    {
-    struct list_head *l;
-    struct cgrp_cset_link *link;
-    struct css_set *cset;
+#[no_mangle]
+pub unsafe extern "C" fn css_task_iter_next_css_set(it: *mut css_task_iter) -> *mut c_void {
+pub static mut l: *mut c_void = core::ptr::null_mut();
+pub static mut link: *mut c_void = core::ptr::null_mut();
+pub static mut cset: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&css_set_lock);
 // find the next threaded cset
     if (it.tcset_pos) {
     l = it.tcset_pos.next;
     if (l != it.tcset_head) {
     it.tcset_pos = l;
-    return container_of(l, struct css_set,
+    return container_of!(l, css_set,
     threaded_csets_node);
     }
     it.tcset_pos = core::ptr::null_mut();
@@ -4540,16 +4726,17 @@ pub unsafe extern "C" fn css_has_online_children(css: *mut cgroup_subsys_state) 
     return core::ptr::null_mut();
     }
     if (it.ss) {
-    cset = container_of(l, struct css_set, e_cset_node[it.ss.id]);
+    cset = container_of!(l, css_set, e_cset_node[it.ss.id]);
     } else {
-    link = list_entry(l, struct cgrp_cset_link, cset_link);
+    link = list_entry(l, cgrp_cset_link, cset_link);
     cset = link.cset;
     }
     it.cset_pos = l;
 // initialize threaded css_set walking
     if (it.flags & CSS_TASK_ITER_THREADED) {
-    if (it.cur_dcset)
+    if (it.cur_dcset) {
     put_css_set_locked(it.cur_dcset);
+    }
     it.cur_dcset = cset;
     get_css_set(cset);
     it.tcset_head = &cset.threaded_csets;
@@ -4565,9 +4752,7 @@ pub unsafe extern "C" fn css_has_online_children(css: *mut cgroup_subsys_state) 
 //
 #[no_mangle]
 unsafe extern "C" fn css_task_iter_advance_css_set(it: *mut css_task_iter) {
-    static void css_task_iter_advance_css_set(struct css_task_iter *it)
-    {
-    struct css_set *cset;
+pub static mut cset: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&css_set_lock);
 // Advance to the next non-empty css_set and find first non-empty tasks list
     while ((cset = css_task_iter_next_css_set(it))) {
@@ -4610,9 +4795,8 @@ unsafe extern "C" fn css_task_iter_advance_css_set(it: *mut css_task_iter) {
     it.cur_cset = cset;
     list_add(&it.iters_node, &cset.task_iters);
     }
-    static void css_task_iter_skip(struct css_task_iter *it,
-    struct task_struct *task)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn css_task_iter_skip(it: *mut css_task_iter, task: *mut task_struct) {
     lockdep_assert_held(&css_set_lock);
     if (it.task_pos == &task.cg_list) {
     it.task_pos = it.task_pos.next;
@@ -4621,21 +4805,21 @@ unsafe extern "C" fn css_task_iter_advance_css_set(it: *mut css_task_iter) {
     }
 #[no_mangle]
 unsafe extern "C" fn css_task_iter_advance(it: *mut css_task_iter) {
-    static void css_task_iter_advance(struct css_task_iter *it)
-    {
-    struct task_struct *task;
+pub static mut task: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&css_set_lock);
-    repeat:
+// label;
     if (it.task_pos) {
 //
 // Advance iterator to find next entry. We go through cset
 // tasks, mg_tasks and dying_tasks, when consumed we move onto
 // the next cset.
 //
-    if (it.flags & CSS_TASK_ITER_SKIPPED)
+    if (it.flags & CSS_TASK_ITER_SKIPPED) {
     it.flags &= ~CSS_TASK_ITER_SKIPPED;
-    else
+    }
+    else {
     it.task_pos = it.task_pos.next;
+    }
     if (it.task_pos == &it.cur_cset.tasks) {
     it.cur_tasks_head = &it.cur_cset.mg_tasks;
     it.task_pos = it.cur_tasks_head.next;
@@ -4644,35 +4828,41 @@ unsafe extern "C" fn css_task_iter_advance(it: *mut css_task_iter) {
     it.cur_tasks_head = &it.cur_cset.dying_tasks;
     it.task_pos = it.cur_tasks_head.next;
     }
-    if (it.task_pos == &it.cur_cset.dying_tasks)
+    if (it.task_pos == &it.cur_cset.dying_tasks) {
     css_task_iter_advance_css_set(it);
+    }
     } else {
 // called from start, proceed to the first cset
     css_task_iter_advance_css_set(it);
     }
-    if (!it.task_pos)
+    if (!it.task_pos) {
     return;
-    task = list_entry(it.task_pos, struct task_struct, cg_list);
+    }
+    task = list_entry(it.task_pos, task_struct, cg_list);
 //
 // Hide tasks that are exiting but not yet removed by default. Keep
 // zombie leaders with live threads visible. Usages that need to walk
 // every existing task can opt out via CSS_TASK_ITER_WITH_DEAD.
 //
     if (!(it.flags & CSS_TASK_ITER_WITH_DEAD) &&
-    (task.flags & PF_EXITING) && !atomic_read(&task.signal.live))
-    goto repeat;
+    (task.flags & PF_EXITING) && !atomic_read(&task.signal.live)) {
+// goto;
+    }
     if (it.flags & CSS_TASK_ITER_PROCS) {
 // if PROCS, skip over tasks which aren't group leaders
-    if (!thread_group_leader(task))
-    goto repeat;
+    if (!thread_group_leader(task)) {
+// goto;
+    }
 // and dying leaders w/o live member threads
     if (it.cur_tasks_head == &it.cur_cset.dying_tasks &&
-    !atomic_read(&task.signal.live))
-    goto repeat;
+    !atomic_read(&task.signal.live)) {
+// goto;
+    }
     } else {
 // skip all dying ones
-    if (it.cur_tasks_head == &it.cur_cset.dying_tasks)
-    goto repeat;
+    if (it.cur_tasks_head == &it.cur_cset.dying_tasks) {
+// goto;
+    }
     }
     }
 //
@@ -4686,18 +4876,19 @@ unsafe extern "C" fn css_task_iter_advance(it: *mut css_task_iter) {
 // returns NULL.  On completion of iteration, css_task_iter_end() must be
 // called.
 //
-    void css_task_iter_start(struct cgroup_subsys_state *css, unsigned int flags,
-    struct css_task_iter *it)
-    {
-    unsigned long irqflags;
-    memset(it, 0, sizeof(*it));
+#[no_mangle]
+pub unsafe extern "C" fn css_task_iter_start(css: *mut cgroup_subsys_state, flags: c_uint, it: *mut css_task_iter) {
+    let mut irqflags = 0;
+    memset(it, 0, sizeof!(*it));
     spin_lock_irqsave(&css_set_lock, irqflags);
     it.ss = css.ss;
     it.flags = flags;
-    if (CGROUP_HAS_SUBSYS_CONFIG && it.ss)
+    if (CGROUP_HAS_SUBSYS_CONFIG && it.ss) {
     it.cset_pos = &css.cgroup.e_csets[css.ss.id];
-    else
+    }
+    else {
     it.cset_pos = &css.cgroup.cset_links;
+    }
     it.cset_head = it.cset_pos;
     css_task_iter_advance(it);
     spin_unlock_irqrestore(&css_set_lock, irqflags);
@@ -4710,19 +4901,20 @@ unsafe extern "C" fn css_task_iter_advance(it: *mut css_task_iter) {
 // initialized via css_task_iter_start().  Returns NULL when the iteration
 // reaches the end.
 //
-    struct task_struct *css_task_iter_next(struct css_task_iter *it)
-    {
-    unsigned long irqflags;
+#[no_mangle]
+pub unsafe extern "C" fn css_task_iter_next(it: *mut css_task_iter) -> *mut c_void {
+    let mut irqflags = 0;
     if (it.cur_task) {
     put_task_struct(it.cur_task);
     it.cur_task = core::ptr::null_mut();
     }
     spin_lock_irqsave(&css_set_lock, irqflags);
 // @it may be half-advanced by skips, finish advancing
-    if (it.flags & CSS_TASK_ITER_SKIPPED)
+    if (it.flags & CSS_TASK_ITER_SKIPPED) {
     css_task_iter_advance(it);
+    }
     if (it.task_pos) {
-    it.cur_task = list_entry(it.task_pos, struct task_struct,
+    it.cur_task = list_entry(it.task_pos, task_struct,
     cg_list);
     get_task_struct(it.cur_task);
     css_task_iter_advance(it);
@@ -4738,150 +4930,151 @@ unsafe extern "C" fn css_task_iter_advance(it: *mut css_task_iter) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn css_task_iter_end(it: *mut css_task_iter) {
-    void css_task_iter_end(struct css_task_iter *it)
-    {
-    unsigned long irqflags;
+    let mut irqflags = 0;
     if (it.cur_cset) {
     spin_lock_irqsave(&css_set_lock, irqflags);
     list_del(&it.iters_node);
     put_css_set_locked(it.cur_cset);
     spin_unlock_irqrestore(&css_set_lock, irqflags);
     }
-    if (it.cur_dcset)
+    if (it.cur_dcset) {
     put_css_set(it.cur_dcset);
-    if (it.cur_task)
+    }
+    if (it.cur_task) {
     put_task_struct(it.cur_task);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_procs_release(of: *mut kernfs_open_file) {
-    static void cgroup_procs_release(struct kernfs_open_file *of)
-    {
-    struct cgroup_file_ctx *ctx = of.priv;
-    if (ctx.procs.started)
+    let mut ctx = of.priv;
+    if (ctx.procs.started) {
     css_task_iter_end(&ctx.procs.iter);
     }
-    static void *cgroup_procs_next(struct seq_file *s, void *v, loff_t *pos)
-    {
-    struct kernfs_open_file *of = s.private;
-    struct cgroup_file_ctx *ctx = of.priv;
-    if (pos)
+    }
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_procs_next(s: *mut seq_file, v: *mut c_void, pos: *mut loff_t) -> *mut c_void {
+    let mut of = s.private;
+    let mut ctx = of.priv;
+    if (pos) {
     (*pos)++;
+    }
     return css_task_iter_next(&ctx.procs.iter);
     }
-    static void *__cgroup_procs_start(struct seq_file *s, loff_t *pos,
-    unsigned int iter_flags)
-    {
-    struct kernfs_open_file *of = s.private;
-    struct cgroup *cgrp = seq_css(s).cgroup;
-    struct cgroup_file_ctx *ctx = of.priv;
-    struct css_task_iter *it = &ctx.procs.iter;
+#[no_mangle]
+pub unsafe extern "C" fn __cgroup_procs_start(s: *mut seq_file, pos: *mut loff_t, iter_flags: c_uint) -> *mut c_void {
+    let mut of = s.private;
+    let mut cgrp = seq_css(s).cgroup;
+    let mut ctx = of.priv;
+    let mut it = &ctx.procs.iter;
 //
 // When a seq_file is seeked, it's always traversed sequentially
 // from position 0, so we can simply keep iterating on !0 *pos.
 //
     if (!ctx.procs.started) {
-    if (WARN_ON_ONCE((*pos)))
+    if (WARN_ON_ONCE!((*pos))) {
     return ERR_PTR(-EINVAL);
+    }
     css_task_iter_start(&cgrp.self, iter_flags, it);
     ctx.procs.started = true;
     } else if (!(*pos)) {
     css_task_iter_end(it);
     css_task_iter_start(&cgrp.self, iter_flags, it);
-    } else
+    } else {
     return it.cur_task;
+    }
     return cgroup_procs_next(s, core::ptr::null_mut(), core::ptr::null_mut());
     }
-    static void *cgroup_procs_start(struct seq_file *s, loff_t *pos)
-    {
-    struct cgroup *cgrp = seq_css(s).cgroup;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_procs_start(s: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
+    let mut cgrp = seq_css(s).cgroup;
 //
 // All processes of a threaded subtree belong to the domain cgroup
 // of the subtree.  Only threads can be distributed across the
 // subtree.  Reject reads on cgroup.procs in the subtree proper.
 // They're always empty anyway.
 //
-    if (cgroup_is_threaded(cgrp))
+    if (cgroup_is_threaded(cgrp)) {
     return ERR_PTR(-EOPNOTSUPP);
+    }
     return __cgroup_procs_start(s, pos, CSS_TASK_ITER_PROCS |
     CSS_TASK_ITER_THREADED);
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_procs_show(s: *mut seq_file, v: *mut c_void) -> c_int {
-    static int cgroup_procs_show(struct seq_file *s, void *v)
-    {
     seq_printf(s, "%d\n", task_pid_vnr(v));
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_may_write(cgrp: *const cgroup, sb: *mut super_block) -> c_int {
-    static int cgroup_may_write(const struct cgroup *cgrp, struct super_block *sb)
-    {
-    int ret;
-    struct inode *inode;
+    let mut ret = 0;
+pub static mut inode: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&cgroup_mutex);
     inode = kernfs_get_inode(sb, cgrp.procs_file.kn);
-    if (!inode)
+    if (!inode) {
     return -ENOMEM;
+    }
     ret = inode_permission(&nop_mnt_idmap, inode, MAY_WRITE);
     iput(inode);
     return ret;
     }
-    static int cgroup_procs_write_permission(struct cgroup *src_cgrp,
-    struct cgroup *dst_cgrp,
-    struct super_block *sb,
-    struct cgroup_namespace *ns)
-    {
-    struct cgroup *com_cgrp = src_cgrp;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_procs_write_permission(src_cgrp: *mut cgroup, dst_cgrp: *mut cgroup, sb: *mut super_block, ns: *mut cgroup_namespace) -> c_int {
+    let mut com_cgrp = src_cgrp;
+    let mut ret = 0;
     lockdep_assert_held(&cgroup_mutex);
 // find the common ancestor
-    while (!cgroup_is_descendant(dst_cgrp, com_cgrp))
+    while (!cgroup_is_descendant(dst_cgrp, com_cgrp)) {
     com_cgrp = cgroup_parent(com_cgrp);
+    }
 // %current should be authorized to migrate to the common ancestor
     ret = cgroup_may_write(com_cgrp, sb);
-    if (ret)
+    if (ret) {
     return ret;
+    }
 //
 // If namespaces are delegation boundaries, %current must be able
 // to see both source and destination cgroups from its namespace.
 //
     if ((cgrp_dfl_root.flags & CGRP_ROOT_NS_DELEGATE) &&
     (!cgroup_is_descendant(src_cgrp, ns.root_cset.dfl_cgrp) ||
-    !cgroup_is_descendant(dst_cgrp, ns.root_cset.dfl_cgrp)))
+    !cgroup_is_descendant(dst_cgrp, ns.root_cset.dfl_cgrp))) {
     return -ENOENT;
+    }
     return 0;
     }
-    static int cgroup_attach_permissions(struct cgroup *src_cgrp,
-    struct cgroup *dst_cgrp,
-    struct super_block *sb, bool threadgroup,
-    struct cgroup_namespace *ns)
-    {
-    let mut ret: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_attach_permissions(src_cgrp: *mut cgroup, dst_cgrp: *mut cgroup, sb: *mut super_block, threadgroup: bool, ns: *mut cgroup_namespace) -> c_int {
+pub static mut ret: c_int = 0;
     ret = cgroup_procs_write_permission(src_cgrp, dst_cgrp, sb, ns);
-    if (ret)
-    return ret;
-    ret = cgroup_migrate_vet_dst(dst_cgrp);
-    if (ret)
-    return ret;
-    if (!threadgroup && (src_cgrp.dom_cgrp != dst_cgrp.dom_cgrp))
-    ret = -EOPNOTSUPP;
+    if (ret) {
     return ret;
     }
-    static ssize_t __cgroup_procs_write(struct kernfs_open_file *of, char *buf,
-    bool threadgroup)
-    {
-    struct cgroup_file_ctx *ctx = of.priv;
-    struct cgroup *src_cgrp, *dst_cgrp;
-    struct task_struct *task;
-    ssize_t ret;
+    ret = cgroup_migrate_vet_dst(dst_cgrp);
+    if (ret) {
+    return ret;
+    }
+    if (!threadgroup && (src_cgrp.dom_cgrp != dst_cgrp.dom_cgrp)) {
+    ret = -EOPNOTSUPP;
+    }
+    return ret;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn __cgroup_procs_write(of: *mut kernfs_open_file, buf: *mut c_char, threadgroup: bool) -> ssize_t {
+    let mut ctx = of.priv;
+    let mut src_cgrp = core::ptr::null_mut();
+    let mut dst_cgrp = core::ptr::null_mut();
+pub static mut task: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     enum cgroup_attach_lock_mode lock_mode;
     dst_cgrp = cgroup_kn_lock_live(of.kn, false);
-    if (!dst_cgrp)
+    if (!dst_cgrp) {
     return -ENODEV;
+    }
     task = cgroup_procs_write_start(buf, threadgroup, &lock_mode);
     ret = PTR_ERR_OR_ZERO(task);
-    if (ret)
-    goto out_unlock;
+    if (ret) {
+// goto;
+    }
 // find the source cgroup
     spin_lock_irq(&css_set_lock);
     src_cgrp = task_cgroup_from_root(task, &cgrp_dfl_root);
@@ -4895,156 +5088,31 @@ unsafe extern "C" fn cgroup_may_write(cgrp: *const cgroup, sb: *mut super_block)
     ret = cgroup_attach_permissions(src_cgrp, dst_cgrp,
     of.file.f_path.dentry.d_sb,
     threadgroup, ctx.ns);
-    if (ret)
-    goto out_finish;
+    if (ret) {
+// goto;
+    }
     ret = cgroup_attach_task(dst_cgrp, task, threadgroup);
-    out_finish:
+// label;
     cgroup_procs_write_finish(task, lock_mode);
-    out_unlock:
+// label;
     cgroup_kn_unlock(of.kn);
     return ret;
     }
-    static ssize_t cgroup_procs_write(struct kernfs_open_file *of,
-    char *buf, size_t nbytes, loff_t off)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_procs_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
     return __cgroup_procs_write(of, buf, true) ?: nbytes;
     }
-    static void *cgroup_threads_start(struct seq_file *s, loff_t *pos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_threads_start(s: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
     return __cgroup_procs_start(s, pos, 0);
     }
-    static ssize_t cgroup_threads_write(struct kernfs_open_file *of,
-    char *buf, size_t nbytes, loff_t off)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_threads_write(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
     return __cgroup_procs_write(of, buf, false) ?: nbytes;
     }
 // cgroup core interface files for the default hierarchy
-    static struct cftype cgroup_base_files[] = {
-    {
-    .name = "cgroup.type",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .seq_show = cgroup_type_show,
-    .write = cgroup_type_write,
-    },
-    {
-    .name = "cgroup.procs",
-    .flags = CFTYPE_NS_DELEGATABLE,
-    .file_offset = offsetof(struct cgroup, procs_file),
-    .release = cgroup_procs_release,
-    .seq_start = cgroup_procs_start,
-    .seq_next = cgroup_procs_next,
-    .seq_show = cgroup_procs_show,
-    .write = cgroup_procs_write,
-    },
-    {
-    .name = "cgroup.threads",
-    .flags = CFTYPE_NS_DELEGATABLE,
-    .release = cgroup_procs_release,
-    .seq_start = cgroup_threads_start,
-    .seq_next = cgroup_procs_next,
-    .seq_show = cgroup_procs_show,
-    .write = cgroup_threads_write,
-    },
-    {
-    .name = "cgroup.controllers",
-    .seq_show = cgroup_controllers_show,
-    },
-    {
-    .name = "cgroup.subtree_control",
-    .flags = CFTYPE_NS_DELEGATABLE,
-    .seq_show = cgroup_subtree_control_show,
-    .write = cgroup_subtree_control_write,
-    },
-    {
-    .name = "cgroup.events",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .file_offset = offsetof(struct cgroup, events_file),
-    .seq_show = cgroup_events_show,
-    },
-    {
-    .name = "cgroup.max.descendants",
-    .seq_show = cgroup_max_descendants_show,
-    .write = cgroup_max_descendants_write,
-    },
-    {
-    .name = "cgroup.max.depth",
-    .seq_show = cgroup_max_depth_show,
-    .write = cgroup_max_depth_write,
-    },
-    {
-    .name = "cgroup.stat",
-    .seq_show = cgroup_stat_show,
-    },
-    {
-    .name = "cgroup.stat.local",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .seq_show = cgroup_core_local_stat_show,
-    },
-    {
-    .name = "cgroup.freeze",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .seq_show = cgroup_freeze_show,
-    .write = cgroup_freeze_write,
-    },
-    {
-    .name = "cgroup.kill",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .write = cgroup_kill_write,
-    },
-    {
-    .name = "cpu.stat",
-    .seq_show = cpu_stat_show,
-    },
-    {
-    .name = "cpu.stat.local",
-    .seq_show = cpu_local_stat_show,
-    },
-    { }	/* terminate */
-    };
-    static struct cftype cgroup_psi_files[] = {
-
-    {
-    .name = "io.pressure",
-    .file_offset = offsetof(struct cgroup, psi_files[PSI_IO]),
-    .seq_show = cgroup_io_pressure_show,
-    .write = cgroup_io_pressure_write,
-    .poll = cgroup_pressure_poll,
-    .release = cgroup_pressure_release,
-    },
-    {
-    .name = "memory.pressure",
-    .file_offset = offsetof(struct cgroup, psi_files[PSI_MEM]),
-    .seq_show = cgroup_memory_pressure_show,
-    .write = cgroup_memory_pressure_write,
-    .poll = cgroup_pressure_poll,
-    .release = cgroup_pressure_release,
-    },
-    {
-    .name = "cpu.pressure",
-    .file_offset = offsetof(struct cgroup, psi_files[PSI_CPU]),
-    .seq_show = cgroup_cpu_pressure_show,
-    .write = cgroup_cpu_pressure_write,
-    .poll = cgroup_pressure_poll,
-    .release = cgroup_pressure_release,
-    },
-
-    {
-    .name = "irq.pressure",
-    .file_offset = offsetof(struct cgroup, psi_files[PSI_IRQ]),
-    .seq_show = cgroup_irq_pressure_show,
-    .write = cgroup_irq_pressure_write,
-    .poll = cgroup_pressure_poll,
-    .release = cgroup_pressure_release,
-    },
-
-    {
-    .name = "cgroup.pressure",
-    .seq_show = cgroup_pressure_show,
-    .write = cgroup_pressure_write,
-    },
-
-    { }	/* terminate */
-    };
+pub static mut cftype: usize = 0;
+pub static mut cftype: usize = 0;
 //
 // css destruction is four-stage process.
 //
@@ -5069,28 +5137,27 @@ unsafe extern "C" fn cgroup_may_write(cgrp: *const cgroup, sb: *mut super_block)
 //
 #[no_mangle]
 unsafe extern "C" fn css_free_rwork_fn(work: *mut work_struct) {
-    static void css_free_rwork_fn(struct work_struct *work)
-    {
-    struct cgroup_subsys_state *css = container_of(to_rcu_work(work),
-    struct cgroup_subsys_state, destroy_rwork);
-    struct cgroup_subsys *ss = css.ss;
-    struct cgroup *cgrp = css.cgroup;
+    let mut css = container_of!(to_rcu_work(work), cgroup_subsys_state, destroy_rwork);
+    let mut ss = css.ss;
+    let mut cgrp = css.cgroup;
     percpu_ref_exit(&css.refcnt);
     css_rstat_exit(css);
     if (!css_is_self(css)) {
 // css free path
-    struct cgroup_subsys_state *parent = css.parent;
-    let mut id: c_int = css.id;
+    let mut parent = css.parent;
+pub static mut id: c_int = 0;
     ss.css_free(css);
     cgroup_idr_remove(&ss.css_idr, id);
     cgroup_put(cgrp);
-    if (parent)
+    if (parent) {
     css_put(parent);
+    }
     } else {
 // cgroup free path
     atomic_dec(&cgrp.root.nr_cgrps);
-    if (!cgroup_on_dfl(cgrp))
+    if (!cgroup_on_dfl(cgrp)) {
     cgroup1_pidlist_destroy_all(cgrp);
+    }
     cancel_work_sync(&cgrp.release_agent_work);
     bpf_cgrp_storage_free(cgrp);
     if (cgroup_parent(cgrp)) {
@@ -5116,21 +5183,19 @@ unsafe extern "C" fn css_free_rwork_fn(work: *mut work_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn css_release_work_fn(work: *mut work_struct) {
-    static void css_release_work_fn(struct work_struct *work)
-    {
-    struct cgroup_subsys_state *css =
-    container_of(work, struct cgroup_subsys_state, destroy_work);
-    struct cgroup_subsys *ss = css.ss;
-    struct cgroup *cgrp = css.cgroup;
+    let mut css = container_of!(work, cgroup_subsys_state, destroy_work);
+    let mut ss = css.ss;
+    let mut cgrp = css.cgroup;
     cgroup_lock();
     css.flags |= CSS_RELEASED;
     list_del_rcu(&css.sibling);
     if (!css_is_self(css)) {
-    struct cgroup *parent_cgrp;
+pub static mut parent_cgrp: *mut c_void = core::ptr::null_mut();
     css_rstat_flush(css);
     cgroup_idr_replace(&ss.css_idr, core::ptr::null_mut(), css.id);
-    if (ss.css_released)
+    if (ss.css_released) {
     ss.css_released(css);
+    }
     cgrp.nr_dying_subsys[ss.id]--;
 //
 // When a css is released and ready to be freed, its
@@ -5139,21 +5204,22 @@ unsafe extern "C" fn css_release_work_fn(work: *mut work_struct) {
 // is activated and deactivated multiple times with one or
 // more of its previous activation leaving behind dying csses.
 //
-    WARN_ON_ONCE(css.nr_descendants);
+    WARN_ON_ONCE!(css.nr_descendants);
     parent_cgrp = cgroup_parent(cgrp);
     while (parent_cgrp) {
     parent_cgrp.nr_dying_subsys[ss.id]--;
     parent_cgrp = cgroup_parent(parent_cgrp);
     }
     } else {
-    struct cgroup *tcgrp;
+pub static mut tcgrp: *mut c_void = core::ptr::null_mut();
 // cgroup release path
     TRACE_CGROUP_PATH(release, cgrp);
     css_rstat_flush(&cgrp.self);
     spin_lock_irq(&css_set_lock);
     for (tcgrp = cgroup_parent(cgrp); tcgrp;
-    tcgrp = cgroup_parent(tcgrp))
-    tcgrp.nr_dying_descendants--;
+    tcgrp = cgroup_parent(tcgrp)) {
+    tcgrp.nr_dying_descendants -= 1;
+    }
     spin_unlock_irq(&css_set_lock);
 //
 // There are two control paths which try to determine
@@ -5162,9 +5228,10 @@ unsafe extern "C" fn css_release_work_fn(work: *mut work_struct) {
 // Those are supported by RCU protecting clearing of
 // cgrp->kn->priv backpointer.
 //
-    if (cgrp.kn)
-    RCU_INIT_POINTER(*(void __rcu  **)&cgrp.kn.priv,
+    if (cgrp.kn) {
+    RCU_INIT_POINTER(*&cgrp.kn.priv,
     core::ptr::null_mut());
+    }
     }
     cgroup_unlock();
     INIT_RCU_WORK(&css.destroy_rwork, css_free_rwork_fn);
@@ -5172,10 +5239,7 @@ unsafe extern "C" fn css_release_work_fn(work: *mut work_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn css_release(ref: *mut percpu_ref) {
-    static void css_release(struct percpu_ref *ref)
-    {
-    struct cgroup_subsys_state *css =
-    container_of(ref, struct cgroup_subsys_state, refcnt);
+    let mut css = container_of!(ref, cgroup_subsys_state, refcnt);
     INIT_WORK(&css.destroy_work, css_release_work_fn);
     queue_work(cgroup_release_wq, &css.destroy_work);
     }
@@ -5186,53 +5250,49 @@ unsafe extern "C" fn css_release(ref: *mut percpu_ref) {
 //
 #[no_mangle]
 unsafe extern "C" fn kill_css_finish_work_fn(work: *mut work_struct) {
-    static void kill_css_finish_work_fn(struct work_struct *work)
-    {
-    struct cgroup_subsys_state *css =
-    container_of(work, struct cgroup_subsys_state, kill_finish_work);
+    let mut css = container_of!(work, cgroup_subsys_state, kill_finish_work);
     cgroup_lock();
     kill_css_finish(css);
     cgroup_unlock();
     css_put(css);
     }
-    static void init_and_link_css(struct cgroup_subsys_state *css,
-    struct cgroup_subsys *ss, struct cgroup *cgrp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn init_and_link_css(css: *mut cgroup_subsys_state, ss: *mut cgroup_subsys, cgrp: *mut cgroup) {
     lockdep_assert_held(&cgroup_mutex);
     cgroup_get_live(cgrp);
-    memset(css, 0, sizeof(*css));
+    memset(css, 0, sizeof!(*css));
     css.cgroup = cgrp;
     css.ss = ss;
     css.id = -1;
     INIT_LIST_HEAD(&css.sibling);
     INIT_LIST_HEAD(&css.children);
     INIT_WORK(&css.kill_finish_work, kill_css_finish_work_fn);
-    css.serial_nr = css_serial_nr_next++;
+    css.serial_nr = css_serial_nr_next += 1;
     atomic_set(&css.online_cnt, 0);
     if (cgroup_parent(cgrp)) {
     css.parent = cgroup_css(cgroup_parent(cgrp), ss);
     css_get(css.parent);
     }
-    BUG_ON(cgroup_css(cgrp, ss));
+    BUG_ON!(cgroup_css(cgrp, ss));
     }
 // invoke ->css_online() on a new CSS and mark it online if successful
 #[no_mangle]
 unsafe extern "C" fn online_css(css: *mut cgroup_subsys_state) -> c_int {
-    static int online_css(struct cgroup_subsys_state *css)
-    {
-    struct cgroup_subsys *ss = css.ss;
-    let mut ret: c_int = 0;
+    let mut ss = css.ss;
+pub static mut ret: c_int = 0;
     lockdep_assert_held(&cgroup_mutex);
-    if (ss.css_online)
+    if (ss.css_online) {
     ret = ss.css_online(css);
+    }
     if (!ret) {
     css.flags |= CSS_ONLINE;
     rcu_assign_pointer(css.cgroup.subsys[ss.id], css);
     atomic_inc(&css.online_cnt);
     if (css.parent) {
     atomic_inc(&css.parent.online_cnt);
-    while ((css = css.parent))
-    css.nr_descendants++;
+    while ((css = css.parent)) {
+    css.nr_descendants += 1;
+    }
     }
     }
     return ret;
@@ -5240,14 +5300,14 @@ unsafe extern "C" fn online_css(css: *mut cgroup_subsys_state) -> c_int {
 // if the CSS is online, invoke ->css_offline() on it and mark it offline
 #[no_mangle]
 unsafe extern "C" fn offline_css(css: *mut cgroup_subsys_state) {
-    static void offline_css(struct cgroup_subsys_state *css)
-    {
-    struct cgroup_subsys *ss = css.ss;
+    let mut ss = css.ss;
     lockdep_assert_held(&cgroup_mutex);
-    if (!css_is_online(css))
+    if (!css_is_online(css)) {
     return;
-    if (ss.css_offline)
+    }
+    if (ss.css_offline) {
     ss.css_offline(css);
+    }
     css.flags &= ~CSS_ONLINE;
     RCU_INIT_POINTER(css.cgroup.subsys[ss.id], core::ptr::null_mut());
     wake_up_all(&css.cgroup.offline_waitq);
@@ -5261,40 +5321,45 @@ unsafe extern "C" fn offline_css(css: *mut cgroup_subsys_state) {
 // css is online and installed in @cgrp.  This function doesn't create the
 // interface files.  Returns 0 on success, -errno on failure.
 //
-    static struct cgroup_subsys_state *css_create(struct cgroup *cgrp,
-    struct cgroup_subsys *ss)
-    {
-    struct cgroup *parent = cgroup_parent(cgrp);
-    struct cgroup_subsys_state *parent_css = cgroup_css(parent, ss);
-    struct cgroup_subsys_state *css;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn css_create(cgrp: *mut cgroup, ss: *mut cgroup_subsys) -> *mut c_void {
+    let mut parent = cgroup_parent(cgrp);
+    let mut parent_css = cgroup_css(parent, ss);
+pub static mut css: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
     lockdep_assert_held(&cgroup_mutex);
     css = ss.css_alloc(parent_css);
-    if (!css)
+    if (!css) {
     css = ERR_PTR(-ENOMEM);
-    if (IS_ERR(css))
+    }
+    if (IS_ERR(css)) {
     return css;
+    }
     init_and_link_css(css, ss, cgrp);
     err = percpu_ref_init(&css.refcnt, css_release, 0, GFP_KERNEL);
-    if (err)
-    goto err_free_css;
+    if (err) {
+// goto;
+    }
     err = cgroup_idr_alloc(&ss.css_idr, core::ptr::null_mut(), 2, 0, GFP_KERNEL);
-    if (err < 0)
-    goto err_free_css;
+    if (err < 0) {
+// goto;
+    }
     css.id = err;
     err = css_rstat_init(css);
-    if (err)
-    goto err_free_css;
+    if (err) {
+// goto;
+    }
 // @css is ready to be brought online now, make it visible
     list_add_tail_rcu(&css.sibling, &parent_css.children);
     cgroup_idr_replace(&ss.css_idr, css, css.id);
     err = online_css(css);
-    if (err)
-    goto err_list_del;
+    if (err) {
+// goto;
+    }
     return css;
-    err_list_del:
+// label;
     list_del_rcu(&css.sibling);
-    err_free_css:
+// label;
     INIT_RCU_WORK(&css.destroy_rwork, css_free_rwork_fn);
     queue_rcu_work(cgroup_free_wq, &css.destroy_rwork);
     return ERR_PTR(err);
@@ -5303,28 +5368,30 @@ unsafe extern "C" fn offline_css(css: *mut cgroup_subsys_state) {
 // The returned cgroup is fully initialized including its control mask, but
 // it doesn't have the control mask applied.
 //
-    static struct cgroup *cgroup_create(struct cgroup *parent, const char *name,
-    umode_t mode)
-    {
-    struct cgroup_root *root = parent.root;
-    struct cgroup *cgrp, *tcgrp;
-    struct kernfs_node *kn;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_create(parent: *mut cgroup, name: *mut c_char, mode: umode_t) -> *mut c_void {
+    let mut root = parent.root;
+    let mut cgrp = core::ptr::null_mut();
+    let mut tcgrp = core::ptr::null_mut();
+pub static mut kn: *mut c_void = core::ptr::null_mut();
     int i, level = parent.level + 1;
-    int ret;
+    let mut ret = 0;
 // allocate the cgroup and its ID, 0 is reserved for the root
     cgrp = kzalloc_flex(*cgrp, _low_ancestors, level);
-    if (!cgrp)
+    if (!cgrp) {
     return ERR_PTR(-ENOMEM);
+    }
     ret = percpu_ref_init(&cgrp.self.refcnt, css_release, 0, GFP_KERNEL);
-    if (ret)
-    goto out_free_cgrp;
+    if (ret) {
+// goto;
+    }
 // create the directory
     kn = kernfs_create_dir_ns(parent.kn, name, mode,
     current_fsuid(), current_fsgid(),
     cgrp, core::ptr::null_mut());
     if (IS_ERR(kn)) {
     ret = PTR_ERR(kn);
-    goto out_cancel_ref;
+// goto;
     }
     cgrp.kn = kn;
     init_cgroup_housekeeping(cgrp);
@@ -5336,13 +5403,16 @@ unsafe extern "C" fn offline_css(css: *mut cgroup_subsys_state) {
 // is setup, it is safe to perform rstat initialization on it.
 //
     ret = css_rstat_init(&cgrp.self);
-    if (ret)
-    goto out_kernfs_remove;
+    if (ret) {
+// goto;
+    }
     ret = psi_cgroup_alloc(cgrp);
-    if (ret)
-    goto out_stat_exit;
-    for (tcgrp = cgrp; tcgrp; tcgrp = cgroup_parent(tcgrp))
+    if (ret) {
+// goto;
+    }
+    for (tcgrp = cgrp; tcgrp; tcgrp = cgroup_parent(tcgrp)) {
     cgrp.ancestors[tcgrp.level] = tcgrp;
+    }
 //
 // New cgroup inherits effective freeze counter, and
 // if the parent has to be frozen, the child has too.
@@ -5360,29 +5430,33 @@ unsafe extern "C" fn offline_css(css: *mut cgroup_subsys_state) {
     cgrp.freezer.freeze_start_nsec = ktime_get_ns();
     set_bit(CGRP_FROZEN, &cgrp.flags);
     }
-    if (notify_on_release(parent))
+    if (notify_on_release(parent)) {
     set_bit(CGRP_NOTIFY_ON_RELEASE, &cgrp.flags);
-    if (test_bit(CGRP_CPUSET_CLONE_CHILDREN, &parent.flags))
+    }
+    if (test_bit(CGRP_CPUSET_CLONE_CHILDREN, &parent.flags)) {
     set_bit(CGRP_CPUSET_CLONE_CHILDREN, &cgrp.flags);
-    cgrp.self.serial_nr = css_serial_nr_next++;
+    }
+    cgrp.self.serial_nr = css_serial_nr_next += 1;
     ret = blocking_notifier_call_chain_robust(&cgroup_lifetime_notifier,
     CGROUP_LIFETIME_ONLINE,
     CGROUP_LIFETIME_OFFLINE, cgrp);
     ret = notifier_to_errno(ret);
-    if (ret)
-    goto out_psi_free;
+    if (ret) {
+// goto;
+    }
 // allocation complete, commit to creation
     spin_lock_irq(&css_set_lock);
-    for (i = 0; i < level; i++) {
+    while (i < level) {
     tcgrp = cgrp.ancestors[i];
-    tcgrp.nr_descendants++;
+    tcgrp.nr_descendants += 1;
 //
 // If the new cgroup is frozen, all ancestor cgroups get a new
 // frozen descendant, but their state can't change because of
 // this.
 //
-    if (cgrp.freezer.e_freeze)
-    tcgrp.freezer.nr_frozen_descendants++;
+    if (cgrp.freezer.e_freeze) {
+    tcgrp.freezer.nr_frozen_descendants += 1;
+    }
     }
     spin_unlock_irq(&css_set_lock);
     list_add_tail_rcu(&cgrp.self.sibling, &cgroup_parent(cgrp).self.children);
@@ -5392,61 +5466,63 @@ unsafe extern "C" fn offline_css(css: *mut cgroup_subsys_state) {
 // On the default hierarchy, a child doesn't automatically inherit
 // subtree_control from the parent.  Each is configured manually.
 //
-    if (!cgroup_on_dfl(cgrp))
+    if (!cgroup_on_dfl(cgrp)) {
     cgrp.subtree_control = cgroup_control(cgrp);
+    }
     cgroup_propagate_control(cgrp);
     return cgrp;
-    out_psi_free:
+// label;
     psi_cgroup_free(cgrp);
-    out_stat_exit:
+// label;
     css_rstat_exit(&cgrp.self);
-    out_kernfs_remove:
+// label;
     kernfs_remove(cgrp.kn);
-    out_cancel_ref:
+// label;
     percpu_ref_exit(&cgrp.self.refcnt);
-    out_free_cgrp:
+// label;
     kfree(cgrp);
     return ERR_PTR(ret);
     }
 #[no_mangle]
 unsafe extern "C" fn cgroup_check_hierarchy_limits(parent: *mut cgroup) -> bool {
-    static bool cgroup_check_hierarchy_limits(struct cgroup *parent)
-    {
-    struct cgroup *cgroup;
-    let mut ret: c_int = false;
-    let mut level: c_int = 0;
+pub static mut cgroup: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = false;
+pub static mut level: c_int = 0;
     lockdep_assert_held(&cgroup_mutex);
     for (cgroup = parent; cgroup; cgroup = cgroup_parent(cgroup)) {
-    if (cgroup.nr_descendants >= cgroup.max_descendants)
-    goto fail;
-    if (level >= cgroup.max_depth)
-    goto fail;
-    level++;
+    if (cgroup.nr_descendants >= cgroup.max_descendants) {
+// goto;
+    }
+    if (level >= cgroup.max_depth) {
+// goto;
+    }
+    level += 1;
     }
     ret = true;
-    fail:
+// label;
     return ret;
     }
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_mkdir(parent_kn: *mut kernfs_node, name: *const c_char, mode: umode_t) -> c_int {
-    int cgroup_mkdir(struct kernfs_node *parent_kn, const char *name, umode_t mode)
-    {
-    struct cgroup *parent, *cgrp;
-    int ret;
+    let mut parent = core::ptr::null_mut();
+    let mut cgrp = core::ptr::null_mut();
+    let mut ret = 0;
 // do not accept '\n' to prevent making /proc/<pid>/cgroup unparsable
-    if (strchr(name, '\n'))
+    if (strchr(name, '\n')) {
     return -EINVAL;
+    }
     parent = cgroup_kn_lock_live(parent_kn, false);
-    if (!parent)
+    if (!parent) {
     return -ENODEV;
+    }
     if (!cgroup_check_hierarchy_limits(parent)) {
     ret = -EAGAIN;
-    goto out_unlock;
+// goto;
     }
     cgrp = cgroup_create(parent, name, mode);
     if (IS_ERR(cgrp)) {
     ret = PTR_ERR(cgrp);
-    goto out_unlock;
+// goto;
     }
 //
 // This extra ref will be put in css_free_rwork_fn() and guarantees
@@ -5454,19 +5530,21 @@ pub unsafe extern "C" fn cgroup_mkdir(parent_kn: *mut kernfs_node, name: *const 
 //
     kernfs_get(cgrp.kn);
     ret = css_populate_dir(&cgrp.self);
-    if (ret)
-    goto out_destroy;
+    if (ret) {
+// goto;
+    }
     ret = cgroup_apply_control_enable(cgrp);
-    if (ret)
-    goto out_destroy;
+    if (ret) {
+// goto;
+    }
     TRACE_CGROUP_PATH(mkdir, cgrp);
 // let's create and online css's
     kernfs_activate(cgrp.kn);
     ret = 0;
-    goto out_unlock;
-    out_destroy:
+// goto;
+// label;
     cgroup_destroy_locked(cgrp);
-    out_unlock:
+// label;
     cgroup_kn_unlock(parent_kn);
     return ret;
     }
@@ -5477,10 +5555,8 @@ pub unsafe extern "C" fn cgroup_mkdir(parent_kn: *mut kernfs_node, name: *const 
 //
 #[no_mangle]
 unsafe extern "C" fn css_killed_work_fn(work: *mut work_struct) {
-    static void css_killed_work_fn(struct work_struct *work)
-    {
-    struct cgroup_subsys_state *css;
-    css = container_of(to_rcu_work(work), struct cgroup_subsys_state, destroy_rwork);
+pub static mut css: *mut c_void = core::ptr::null_mut();
+    css = container_of!(to_rcu_work(work), cgroup_subsys_state, destroy_rwork);
     cgroup_lock();
     do {
     offline_css(css);
@@ -5493,10 +5569,7 @@ unsafe extern "C" fn css_killed_work_fn(work: *mut work_struct) {
 // css kill confirmation processing requires process context, bounce
 #[no_mangle]
 unsafe extern "C" fn css_killed_ref_fn(ref: *mut percpu_ref) {
-    static void css_killed_ref_fn(struct percpu_ref *ref)
-    {
-    struct cgroup_subsys_state *css =
-    container_of(ref, struct cgroup_subsys_state, refcnt);
+    let mut css = container_of!(ref, cgroup_subsys_state, refcnt);
     if (atomic_dec_and_test(&css.online_cnt)) {
     INIT_RCU_WORK(&css.destroy_rwork, css_killed_work_fn);
     queue_rcu_work(cgroup_offline_wq, &css.destroy_rwork);
@@ -5510,17 +5583,17 @@ unsafe extern "C" fn css_killed_ref_fn(ref: *mut percpu_ref) {
 //
 #[no_mangle]
 unsafe extern "C" fn kill_css_sync(css: *mut cgroup_subsys_state) {
-    static void kill_css_sync(struct cgroup_subsys_state *css)
-    {
-    struct cgroup_subsys *ss = css.ss;
+    let mut ss = css.ss;
     lockdep_assert_held(&cgroup_mutex);
-    if (css.flags & CSS_DYING)
+    if (css.flags & CSS_DYING) {
     return;
+    }
 //
 // Call css_killed(), if defined, before setting the CSS_DYING flag
 //
-    if (css.ss.css_killed)
+    if (css.ss.css_killed) {
     css.ss.css_killed(css);
+    }
     css.flags |= CSS_DYING;
 //
 // Pair with smp_mb() in css_update_populated(). Either our
@@ -5539,7 +5612,7 @@ unsafe extern "C" fn kill_css_sync(css: *mut cgroup_subsys_state) {
 // of child css, see css_free_rwork_fn().
 //
     while ((css = css.parent)) {
-    css.nr_descendants--;
+    css.nr_descendants -= 1;
     css.cgroup.nr_dying_subsys[ss.id]++;
     }
     }
@@ -5551,16 +5624,15 @@ unsafe extern "C" fn kill_css_sync(css: *mut cgroup_subsys_state) {
 //
 #[no_mangle]
 unsafe extern "C" fn kill_css_finish(css: *mut cgroup_subsys_state) {
-    static void kill_css_finish(struct cgroup_subsys_state *css)
-    {
     lockdep_assert_held(&cgroup_mutex);
 //
 // Skip on re-entry: cgroup_apply_control_disable() may have killed @css
 // earlier. cgroup_destroy_locked() can still walk it because
 // offline_css() (which NULLs cgrp->subsys[ssid]) runs async.
 //
-    if (percpu_ref_is_dying(&css.refcnt))
+    if (percpu_ref_is_dying(&css.refcnt)) {
     return;
+    }
 //
 // Killing would put the base ref, but we need to keep it alive until
 // after ->css_offline().
@@ -5611,27 +5683,28 @@ unsafe extern "C" fn kill_css_finish(css: *mut cgroup_subsys_state) {
 //
 #[no_mangle]
 unsafe extern "C" fn cgroup_destroy_locked(cgrp: *mut cgroup) -> c_int {
-    static int cgroup_destroy_locked(struct cgroup *cgrp)
-    {
     struct cgroup *tcgrp, *parent = cgroup_parent(cgrp);
-    struct cgroup_subsys_state *css;
-    struct cgrp_cset_link *link;
-    struct css_task_iter it;
-    struct task_struct *task;
-    int ssid, ret;
+pub static mut css: *mut c_void = core::ptr::null_mut();
+pub static mut link: *mut c_void = core::ptr::null_mut();
+pub static mut it: usize = 0;
+pub static mut task: *mut c_void = core::ptr::null_mut();
+    let mut ssid = 0;
+    let mut ret = 0;
     lockdep_assert_held(&cgroup_mutex);
     css_task_iter_start(&cgrp.self, 0, &it);
     task = css_task_iter_next(&it);
     css_task_iter_end(&it);
-    if (task)
+    if (task) {
     return -EBUSY;
+    }
 //
 // Make sure there's no live children.  We can't test emptiness of
 // ->self.children as dead children linger on it while being
 // drained; otherwise, "rmdir parent/child parent" may fail.
 //
-    if (css_has_online_children(&cgrp.self))
+    if (css_has_online_children(&cgrp.self)) {
     return -EBUSY;
+    }
 //
 // Mark @cgrp and the associated csets dead.  The former prevents
 // further task migration and child creation by disabling
@@ -5640,67 +5713,65 @@ unsafe extern "C" fn cgroup_destroy_locked(cgrp: *mut cgroup) -> c_int {
 //
     cgrp.self.flags &= ~CSS_ONLINE;
     spin_lock_irq(&css_set_lock);
-    list_for_each_entry(link, &cgrp.cset_links, cset_link)
+    list_for_each_entry(link, &cgrp.cset_links, cset_link) {
     link.cset.dead = true;
+    }
     spin_unlock_irq(&css_set_lock);
-    for_each_css(css, ssid, cgrp)
+    for_each_css(css, ssid, cgrp) {
     kill_css_sync(css);
+    }
 // clear and remove @cgrp dir, @cgrp has an extra ref on its kn
     css_clear_dir(&cgrp.self);
     kernfs_remove(cgrp.kn);
-    if (cgroup_is_threaded(cgrp))
-    parent.nr_threaded_children--;
+    if (cgroup_is_threaded(cgrp)) {
+    parent.nr_threaded_children -= 1;
+    }
     spin_lock_irq(&css_set_lock);
     for (tcgrp = parent; tcgrp; tcgrp = cgroup_parent(tcgrp)) {
-    tcgrp.nr_descendants--;
-    tcgrp.nr_dying_descendants++;
+    tcgrp.nr_descendants -= 1;
+    tcgrp.nr_dying_descendants += 1;
 //
 // If the dying cgroup is frozen, decrease frozen descendants
 // counters of ancestor cgroups.
 //
-    if (test_bit(CGRP_FROZEN, &cgrp.flags))
-    tcgrp.freezer.nr_frozen_descendants--;
+    if (test_bit(CGRP_FROZEN, &cgrp.flags)) {
+    tcgrp.freezer.nr_frozen_descendants -= 1;
+    }
     }
     spin_unlock_irq(&css_set_lock);
     cgroup1_check_for_release(parent);
     ret = blocking_notifier_call_chain(&cgroup_lifetime_notifier,
     CGROUP_LIFETIME_OFFLINE, cgrp);
-    WARN_ON_ONCE(notifier_to_errno(ret));
+    WARN_ON_ONCE!(notifier_to_errno(ret));
 // put the base reference
     percpu_ref_kill(&cgrp.self.refcnt);
     for_each_css(css, ssid, cgrp) {
-    if (!css_is_populated(css))
+    if (!css_is_populated(css)) {
     kill_css_finish(css);
+    }
     }
     return 0;
     };
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_rmdir(kn: *mut kernfs_node) -> c_int {
-    int cgroup_rmdir(struct kernfs_node *kn)
-    {
-    struct cgroup *cgrp;
-    let mut ret: c_int = 0;
+pub static mut cgrp: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     cgrp = cgroup_kn_lock_live(kn, false);
-    if (!cgrp)
+    if (!cgrp) {
     return 0;
+    }
     ret = cgroup_destroy_locked(cgrp);
-    if (!ret)
+    if (!ret) {
     TRACE_CGROUP_PATH(rmdir, cgrp);
+    }
     cgroup_kn_unlock(kn);
     return ret;
     }
-    static struct kernfs_syscall_ops cgroup_kf_syscall_ops = {
-    .show_options		= cgroup_show_options,
-    .mkdir			= cgroup_mkdir,
-    .rmdir			= cgroup_rmdir,
-    .show_path		= cgroup_show_path,
-    };
+pub static mut kernfs_syscall_ops: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn cgroup_init_subsys(ss: *mut cgroup_subsys, early: bool) -> void __init {
-    static void __init cgroup_init_subsys(struct cgroup_subsys *ss, bool early)
-    {
-    struct cgroup_subsys_state *css;
-    pr_debug("Initializing cgroup subsys %s\n", ss.name);
+unsafe extern "C" fn cgroup_init_subsys(ss: *mut cgroup_subsys, early: bool)  {
+pub static mut css: *mut c_void = core::ptr::null_mut();
+    pr_debug!("Initializing cgroup subsys %s\n", ss.name);
     cgroup_lock();
     idr_init(&ss.css_idr);
     INIT_LIST_HEAD(&ss.cfts);
@@ -5708,7 +5779,7 @@ unsafe extern "C" fn cgroup_init_subsys(ss: *mut cgroup_subsys, early: bool) -> 
     ss.root = &cgrp_dfl_root;
     css = ss.css_alloc(core::ptr::null_mut());
 // We don't handle early failures gracefully
-    BUG_ON(IS_ERR(css));
+    BUG_ON!(IS_ERR(css));
     init_and_link_css(css, ss, &cgrp_dfl_root.cgrp);
 //
 // Root csses are never destroyed and we can't initialize
@@ -5720,9 +5791,9 @@ unsafe extern "C" fn cgroup_init_subsys(ss: *mut cgroup_subsys, early: bool) -> 
     css.id = 1;
     } else {
     css.id = cgroup_idr_alloc(&ss.css_idr, css, 1, 2, GFP_KERNEL);
-    BUG_ON(css.id < 0);
-    BUG_ON(ss_rstat_init(ss));
-    BUG_ON(css_rstat_init(css));
+    BUG_ON!(css.id < 0);
+    BUG_ON!(ss_rstat_init(ss));
+    BUG_ON!(css_rstat_init(css));
     }
 // Update the init_css_set to contain a subsys
 // pointer to this state - since the subsystem is
@@ -5736,8 +5807,8 @@ unsafe extern "C" fn cgroup_init_subsys(ss: *mut cgroup_subsys, early: bool) -> 
 // At system boot, before all subsystems have been
 // registered, no tasks have been forked, so we don't
 // need to invoke fork callbacks here.
-    BUG_ON(!list_empty(&init_task.tasks));
-    BUG_ON(online_css(css));
+    BUG_ON!(!list_empty(&init_task.tasks));
+    BUG_ON!(online_css(css));
     cgroup_unlock();
     }
 //
@@ -5747,12 +5818,10 @@ unsafe extern "C" fn cgroup_init_subsys(ss: *mut cgroup_subsys, early: bool) -> 
 // subsystems that request early init.
 //
 #[no_mangle]
-pub unsafe extern "C" fn cgroup_init_early() -> int __init {
-    int __init cgroup_init_early(void)
-    {
+pub unsafe extern "C" fn cgroup_init_early() -> c_int {
     static struct cgroup_fs_context __initdata ctx;
-    struct cgroup_subsys *ss;
-    int i;
+pub static mut ss: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
     ctx.root = &cgrp_dfl_root;
     init_cgroup_root(&ctx);
     cgrp_dfl_root.cgrp.self.flags |= CSS_NO_REF;
@@ -5768,10 +5837,12 @@ pub unsafe extern "C" fn cgroup_init_early() -> int __init {
     "cgroup rstat cannot be used with early init subsystem\n");
     ss.id = i;
     ss.name = cgroup_subsys_name[i];
-    if (!ss.legacy_name)
+    if (!ss.legacy_name) {
     ss.legacy_name = cgroup_subsys_name[i];
-    if (ss.early_init)
+    }
+    if (ss.early_init) {
     cgroup_init_subsys(ss, true);
+    }
     }
     return 0;
     }
@@ -5782,16 +5853,14 @@ pub unsafe extern "C" fn cgroup_init_early() -> int __init {
 // any subsystems that didn't request early init.
 //
 #[no_mangle]
-pub unsafe extern "C" fn cgroup_init() -> int __init {
-    int __init cgroup_init(void)
-    {
-    struct cgroup_subsys *ss;
-    int ssid;
-    BUILD_BUG_ON(CGROUP_SUBSYS_COUNT > 32);
-    BUG_ON(cgroup_init_cftypes(core::ptr::null_mut(), cgroup_base_files));
-    BUG_ON(cgroup_init_cftypes(core::ptr::null_mut(), cgroup_psi_files));
-    BUG_ON(cgroup_init_cftypes(core::ptr::null_mut(), cgroup1_base_files));
-    BUG_ON(ss_rstat_init(core::ptr::null_mut()));
+pub unsafe extern "C" fn cgroup_init() -> c_int {
+pub static mut ss: *mut c_void = core::ptr::null_mut();
+    let mut ssid = 0;
+    BUILD_BUG_ON!(CGROUP_SUBSYS_COUNT > 32);
+    BUG_ON!(cgroup_init_cftypes(core::ptr::null_mut(), cgroup_base_files));
+    BUG_ON!(cgroup_init_cftypes(core::ptr::null_mut(), cgroup_psi_files));
+    BUG_ON!(cgroup_init_cftypes(core::ptr::null_mut(), cgroup1_base_files));
+    BUG_ON!(ss_rstat_init(core::ptr::null_mut()));
     get_user_ns(init_cgroup_ns.user_ns);
     cgroup_rt_init();
     cgroup_lock();
@@ -5802,15 +5871,14 @@ pub unsafe extern "C" fn cgroup_init() -> int __init {
     hash_add(css_set_table, &init_css_set.hlist,
     css_set_hash(init_css_set.subsys));
     cgroup_bpf_lifetime_notifier_init();
-    BUG_ON(cgroup_setup_root(&cgrp_dfl_root, 0));
+    BUG_ON!(cgroup_setup_root(&cgrp_dfl_root, 0));
     cgroup_unlock();
     for_each_subsys(ss, ssid) {
     if (ss.early_init) {
-    struct cgroup_subsys_state *css =
-    init_css_set.subsys[ss.id];
+    let mut css = init_css_set.subsys[ss.id];
     css.id = cgroup_idr_alloc(&ss.css_idr, css, 1, 2,
     GFP_KERNEL);
-    BUG_ON(css.id < 0);
+    BUG_ON!(css.id < 0);
     } else {
     cgroup_init_subsys(ss, false);
     }
@@ -5821,30 +5889,35 @@ pub unsafe extern "C" fn cgroup_init() -> int __init {
 // disabled flag and cftype registration needs kmalloc,
 // both of which aren't available during early_init.
 //
-    if (!cgroup_ssid_enabled(ssid))
+    if (!cgroup_ssid_enabled(ssid)) {
     continue;
-    if (cgroup1_ssid_disabled(ssid))
-    pr_info("Disabling %s control group subsystem in v1 mounts\n",
+    }
+    if (cgroup1_ssid_disabled(ssid)) {
+    pr_info!("Disabling %s control group subsystem in v1 mounts\n",
     ss.legacy_name);
+    }
     cgrp_dfl_root.subsys_mask |= 1 << ss.id;
 // implicit controllers must be threaded too
-    WARN_ON(ss.implicit_on_dfl && !ss.threaded);
-    if (ss.implicit_on_dfl)
+    WARN_ON!(ss.implicit_on_dfl && !ss.threaded);
+    if (ss.implicit_on_dfl) {
     cgrp_dfl_implicit_ss_mask |= 1 << ss.id;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !ss->dfl_cftypes) -> else {
-    else if (!ss.dfl_cftypes)
-    cgrp_dfl_inhibit_ss_mask |= 1 << ss.id;
-    if (ss.threaded)
-    cgrp_dfl_threaded_ss_mask |= 1 << ss.id;
-    if (ss.dfl_cftypes == ss.legacy_cftypes) {
-    WARN_ON(cgroup_add_cftypes(ss, ss.dfl_cftypes));
-    } else {
-    WARN_ON(cgroup_add_dfl_cftypes(ss, ss.dfl_cftypes));
-    WARN_ON(cgroup_add_legacy_cftypes(ss, ss.legacy_cftypes));
     }
-    if (ss.bind)
+
+    else if (!ss.dfl_cftypes) {
+    cgrp_dfl_inhibit_ss_mask |= 1 << ss.id;
+    }
+    if (ss.threaded) {
+    cgrp_dfl_threaded_ss_mask |= 1 << ss.id;
+    }
+    if (ss.dfl_cftypes == ss.legacy_cftypes) {
+    WARN_ON!(cgroup_add_cftypes(ss, ss.dfl_cftypes));
+    } else {
+    WARN_ON!(cgroup_add_dfl_cftypes(ss, ss.dfl_cftypes));
+    WARN_ON!(cgroup_add_legacy_cftypes(ss, ss.legacy_cftypes));
+    }
+    if (ss.bind) {
     ss.bind(init_css_set.subsys[ssid]);
+    }
     cgroup_lock();
     css_populate_dir(init_css_set.subsys[ssid]);
     cgroup_unlock();
@@ -5853,20 +5926,18 @@ pub unsafe extern "C" fn if(_arg: !ss->dfl_cftypes) -> else {
     hash_del(&init_css_set.hlist);
     hash_add(css_set_table, &init_css_set.hlist,
     css_set_hash(init_css_set.subsys));
-    WARN_ON(sysfs_create_mount_point(fs_kobj, "cgroup"));
-    WARN_ON(register_filesystem(&cgroup_fs_type));
-    WARN_ON(register_filesystem(&cgroup2_fs_type));
-    WARN_ON(!proc_create_single("cgroups", 0, core::ptr::null_mut(), proc_cgroupstats_show));
+    WARN_ON!(sysfs_create_mount_point(fs_kobj, "cgroup"));
+    WARN_ON!(register_filesystem(&cgroup_fs_type));
+    WARN_ON!(register_filesystem(&cgroup2_fs_type));
+    WARN_ON!(!proc_create_single("cgroups", 0, core::ptr::null_mut(), proc_cgroupstats_show));
 
-    WARN_ON(register_filesystem(&cpuset_fs_type));
+    WARN_ON!(register_filesystem(&cpuset_fs_type));
 
     ns_tree_add(&init_cgroup_ns);
     return 0;
     }
 #[no_mangle]
-unsafe extern "C" fn cgroup_wq_init() -> int __init {
-    static int __init cgroup_wq_init(void)
-    {
+unsafe extern "C" fn cgroup_wq_init() -> c_int {
 //
 // There isn't much point in executing destruction path in
 // parallel.  Good chunk is serialized with cgroup_mutex anyway.
@@ -5876,22 +5947,21 @@ unsafe extern "C" fn cgroup_wq_init() -> int __init {
 // is called before init_workqueues(): so leave this until after.
 //
     cgroup_offline_wq = alloc_workqueue("cgroup_offline", WQ_PERCPU, 1);
-    BUG_ON(!cgroup_offline_wq);
+    BUG_ON!(!cgroup_offline_wq);
     cgroup_release_wq = alloc_workqueue("cgroup_release", WQ_PERCPU, 1);
-    BUG_ON(!cgroup_release_wq);
+    BUG_ON!(!cgroup_release_wq);
     cgroup_free_wq = alloc_workqueue("cgroup_free", WQ_PERCPU, 1);
-    BUG_ON(!cgroup_free_wq);
+    BUG_ON!(!cgroup_free_wq);
     return 0;
     }
-    core_initcall(cgroup_wq_init);
+    core_initcall!(cgroup_wq_init);
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_path_from_kernfs_id(id: u64, buf: *mut c_char, buflen: usize) {
-    void cgroup_path_from_kernfs_id(u64 id, char *buf, size_t buflen)
-    {
-    struct kernfs_node *kn;
+pub static mut kn: *mut c_void = core::ptr::null_mut();
     kn = kernfs_find_and_get_node_by_id(cgrp_dfl_root.kf_root, id);
-    if (!kn)
+    if (!kn) {
     return;
+    }
     kernfs_path(kn, buf, buflen);
     kernfs_put(kn);
     }
@@ -5901,25 +5971,28 @@ pub unsafe extern "C" fn cgroup_path_from_kernfs_id(id: u64, buf: *mut c_char, b
 // On success return the cgrp or ERR_PTR on failure
 // There are no cgroup NS restrictions.
 //
-    struct cgroup *__cgroup_get_from_id(u64 id)
-    {
-    struct kernfs_node *kn;
-    struct cgroup *cgrp;
+#[no_mangle]
+pub unsafe extern "C" fn __cgroup_get_from_id(id: u64) -> *mut c_void {
+pub static mut kn: *mut c_void = core::ptr::null_mut();
+pub static mut cgrp: *mut c_void = core::ptr::null_mut();
     kn = kernfs_find_and_get_node_by_id(cgrp_dfl_root.kf_root, id);
-    if (!kn)
+    if (!kn) {
     return ERR_PTR(-ENOENT);
+    }
     if (kernfs_type(kn) != KERNFS_DIR) {
     kernfs_put(kn);
     return ERR_PTR(-ENOENT);
     }
     rcu_read_lock();
-    cgrp = rcu_dereference(*(void __rcu  **)&kn.priv);
-    if (cgrp && !cgroup_tryget(cgrp))
+    cgrp = rcu_dereference(*&kn.priv);
+    if (cgrp && !cgroup_tryget(cgrp)) {
     cgrp = core::ptr::null_mut();
+    }
     rcu_read_unlock();
     kernfs_put(kn);
-    if (!cgrp)
+    if (!cgrp) {
     return ERR_PTR(-ENOENT);
+    }
     return cgrp;
     }
 //
@@ -5928,12 +6001,14 @@ pub unsafe extern "C" fn cgroup_path_from_kernfs_id(id: u64, buf: *mut c_char, b
 // On success return the cgrp or ERR_PTR on failure
 // Only cgroups within current task's cgroup NS are valid.
 //
-    struct cgroup *cgroup_get_from_id(u64 id)
-    {
-    struct cgroup *cgrp, *root_cgrp;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_get_from_id(id: u64) -> *mut c_void {
+    let mut cgrp = core::ptr::null_mut();
+    let mut root_cgrp = core::ptr::null_mut();
     cgrp = __cgroup_get_from_id(id);
-    if (IS_ERR(cgrp))
+    if (IS_ERR(cgrp)) {
     return cgrp;
+    }
     root_cgrp = current_cgns_cgroup_dfl();
     if (!cgroup_is_descendant(cgrp, root_cgrp)) {
     cgroup_put(cgrp);
@@ -5947,37 +6022,41 @@ pub unsafe extern "C" fn cgroup_path_from_kernfs_id(id: u64, buf: *mut c_char, b
 // - Print task's cgroup paths into seq_file, one line for each hierarchy
 // - Used for /proc/<pid>/cgroup.
 //
-    int proc_cgroup_show(struct seq_file *m, struct pid_namespace *ns,
-    struct pid *pid, struct task_struct *tsk)
-    {
-    char *buf;
-    int retval;
-    struct cgroup_root *root;
+#[no_mangle]
+pub unsafe extern "C" fn proc_cgroup_show(m: *mut seq_file, ns: *mut pid_namespace, pid: *mut pid, tsk: *mut task_struct) -> c_int {
+pub static mut buf: *mut c_void = core::ptr::null_mut();
+    let mut retval = 0;
+pub static mut root: *mut c_void = core::ptr::null_mut();
     retval = -ENOMEM;
     buf = kmalloc(PATH_MAX, GFP_KERNEL);
-    if (!buf)
-    goto out;
+    if (!buf) {
+// goto;
+    }
     rcu_read_lock();
     spin_lock_irq(&css_set_lock);
     for_each_root(root) {
-    struct cgroup_subsys *ss;
-    struct cgroup *cgrp;
+pub static mut ss: *mut c_void = core::ptr::null_mut();
+pub static mut cgrp: *mut c_void = core::ptr::null_mut();
     int ssid, count = 0;
-    if (root == &cgrp_dfl_root && !READ_ONCE(cgrp_dfl_visible))
+    if (root == &cgrp_dfl_root && !READ_ONCE(cgrp_dfl_visible)) {
     continue;
+    }
     cgrp = task_cgroup_from_root(tsk, root);
 // The root has already been unmounted.
-    if (!cgrp)
+    if (!cgrp) {
     continue;
+    }
     seq_printf(m, "%d:", root.hierarchy_id);
-    if (root != &cgrp_dfl_root)
+    if (root != &cgrp_dfl_root) {
     for_each_subsys(ss, ssid)
     if (root.subsys_mask & (1 << ssid))
     seq_printf(m, "%s%s", count++ ? "," : "",
     ss.legacy_name);
-    if (strlen(root.name))
+    }
+    if (strlen(root.name)) {
     seq_printf(m, "%sname=%s", count ? "," : "",
     root.name);
+    }
     seq_putc(m, ':');
 //
 // On traditional hierarchies, all zombie tasks show up as
@@ -5991,25 +6070,29 @@ pub unsafe extern "C" fn cgroup_path_from_kernfs_id(id: u64, buf: *mut c_char, b
     if (cgroup_on_dfl(cgrp) || !(tsk.flags & PF_EXITING)) {
     retval = cgroup_path_ns_locked(cgrp, buf, PATH_MAX,
     current.nsproxy.cgroup_ns);
-    if (retval == -E2BIG)
+    if (retval == -E2BIG) {
     retval = -ENAMETOOLONG;
-    if (retval < 0)
-    goto out_unlock;
+    }
+    if (retval < 0) {
+// goto;
+    }
     seq_puts(m, buf);
     } else {
     seq_puts(m, "/");
     }
-    if (cgroup_on_dfl(cgrp) && cgroup_is_dead(cgrp))
+    if (cgroup_on_dfl(cgrp) && cgroup_is_dead(cgrp)) {
     seq_puts(m, " (deleted)\n");
-    else
+    }
+    else {
     seq_putc(m, '\n');
     }
+    }
     retval = 0;
-    out_unlock:
+// label;
     spin_unlock_irq(&css_set_lock);
     rcu_read_unlock();
     kfree(buf);
-    out:
+// label;
     return retval;
     }
 //
@@ -6021,8 +6104,6 @@ pub unsafe extern "C" fn cgroup_path_from_kernfs_id(id: u64, buf: *mut c_char, b
 //
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_fork(child: *mut task_struct) {
-    void cgroup_fork(struct task_struct *child)
-    {
     RCU_INIT_POINTER(child.cgroups, &init_css_set);
     INIT_LIST_HEAD(&child.cg_list);
     }
@@ -6034,12 +6115,13 @@ pub unsafe extern "C" fn cgroup_fork(child: *mut task_struct) {
 // Returns a pointer to the cgroup on success. ERR_PTR is returned if the
 // cgroup cannot be found.
 //
-    static struct cgroup *cgroup_v1v2_get_from_file(struct file *f)
-    {
-    struct cgroup_subsys_state *css;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_v1v2_get_from_file(f: *mut file) -> *mut c_void {
+pub static mut css: *mut c_void = core::ptr::null_mut();
     css = css_tryget_online_from_dir(f.f_path.dentry, core::ptr::null_mut());
-    if (IS_ERR(css))
+    if (IS_ERR(css)) {
     return ERR_CAST(css);
+    }
     return css.cgroup;
     }
 //
@@ -6047,11 +6129,12 @@ pub unsafe extern "C" fn cgroup_fork(child: *mut task_struct) {
 // cgroup2.
 // @f: file corresponding to cgroup2_dir
 //
-    static struct cgroup *cgroup_get_from_file(struct file *f)
-    {
-    struct cgroup *cgrp = cgroup_v1v2_get_from_file(f);
-    if (IS_ERR(cgrp))
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_get_from_file(f: *mut file) -> *mut c_void {
+    let mut cgrp = cgroup_v1v2_get_from_file(f);
+    if (IS_ERR(cgrp)) {
     return ERR_CAST(cgrp);
+    }
     if (!cgroup_on_dfl(cgrp)) {
     cgroup_put(cgrp);
     return ERR_PTR(-EBADF);
@@ -6076,15 +6159,13 @@ pub unsafe extern "C" fn cgroup_fork(child: *mut task_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn cgroup_css_set_fork(kargs: *mut kernel_clone_args) -> c_int {
-    static int cgroup_css_set_fork(struct kernel_clone_args *kargs)
-    __acquires(&cgroup_mutex) __acquires(&cgroup_threadgroup_rwsem)
-    {
-    int ret;
-    struct cgroup *dst_cgrp = core::ptr::null_mut();
-    struct css_set *cset;
-    struct super_block *sb;
-    if (kargs.flags & CLONE_INTO_CGROUP)
+    let mut ret = 0;
+    let mut dst_cgrp = core::ptr::null_mut();
+pub static mut cset: *mut c_void = core::ptr::null_mut();
+pub static mut sb: *mut c_void = core::ptr::null_mut();
+    if (kargs.flags & CLONE_INTO_CGROUP) {
     cgroup_lock();
+    }
     cgroup_threadgroup_change_begin(current);
     spin_lock_irq(&css_set_lock);
     cset = task_css_set(current);
@@ -6098,18 +6179,18 @@ unsafe extern "C" fn cgroup_css_set_fork(kargs: *mut kernel_clone_args) -> c_int
     CLASS(fd_raw, f)(kargs.cgroup);
     if (fd_empty(f)) {
     ret = -EBADF;
-    goto err;
+// goto;
     }
     sb = fd_file(f).f_path.dentry.d_sb;
     dst_cgrp = cgroup_get_from_file(fd_file(f));
     if (IS_ERR(dst_cgrp)) {
     ret = PTR_ERR(dst_cgrp);
     dst_cgrp = core::ptr::null_mut();
-    goto err;
+// goto;
     }
     if (cgroup_is_dead(dst_cgrp)) {
     ret = -ENODEV;
-    goto err;
+// goto;
     }
 //
 // Verify that we the target cgroup is writable for us. This is
@@ -6117,8 +6198,9 @@ unsafe extern "C" fn cgroup_css_set_fork(kargs: *mut kernel_clone_args) -> c_int
 // the vfs layer here we need to do it "manually".
 //
     ret = cgroup_may_write(dst_cgrp, sb);
-    if (ret)
-    goto err;
+    if (ret) {
+// goto;
+    }
 //
 // Spawning a task directly into a cgroup works by passing a file
 // descriptor to the target cgroup directory. This can even be an O_PATH
@@ -6136,25 +6218,28 @@ unsafe extern "C" fn cgroup_css_set_fork(kargs: *mut kernel_clone_args) -> c_int
     ret = cgroup_attach_permissions(cset.dfl_cgrp, dst_cgrp, sb,
     !(kargs.flags & CLONE_THREAD),
     current.nsproxy.cgroup_ns);
-    if (ret)
-    goto err;
+    if (ret) {
+// goto;
+    }
     kargs.cset = find_css_set(cset, dst_cgrp);
     if (!kargs.cset) {
     ret = -ENOMEM;
-    goto err;
+// goto;
     }
     put_css_set(cset);
     kargs.cgrp = dst_cgrp;
     kargs.kill_seq = dst_cgrp.kill_seq;
     return ret;
-    err:
+// label;
     cgroup_threadgroup_change_end(current);
     cgroup_unlock();
-    if (dst_cgrp)
+    if (dst_cgrp) {
     cgroup_put(dst_cgrp);
+    }
     put_css_set(cset);
-    if (kargs.cset)
+    if (kargs.cset) {
     put_css_set(kargs.cset);
+    }
     return ret;
     }
 //
@@ -6166,11 +6251,8 @@ unsafe extern "C" fn cgroup_css_set_fork(kargs: *mut kernel_clone_args) -> c_int
 //
 #[no_mangle]
 unsafe extern "C" fn cgroup_css_set_put_fork(kargs: *mut kernel_clone_args) {
-    static void cgroup_css_set_put_fork(struct kernel_clone_args *kargs)
-    __releases(&cgroup_threadgroup_rwsem) __releases(&cgroup_mutex)
-    {
-    struct cgroup *cgrp = kargs.cgrp;
-    struct css_set *cset = kargs.cset;
+    let mut cgrp = kargs.cgrp;
+    let mut cset = kargs.cset;
     cgroup_threadgroup_change_end(current);
     if (cset) {
     put_css_set(cset);
@@ -6197,25 +6279,29 @@ unsafe extern "C" fn cgroup_css_set_put_fork(kargs: *mut kernel_clone_args) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_can_fork(child: *mut task_struct, kargs: *mut kernel_clone_args) -> c_int {
-    int cgroup_can_fork(struct task_struct *child, struct kernel_clone_args *kargs)
-    {
-    struct cgroup_subsys *ss;
-    int i, j, ret;
+pub static mut ss: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    let mut j = 0;
+    let mut ret = 0;
     ret = cgroup_css_set_fork(kargs);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     do_each_subsys_mask(ss, i, have_canfork_callback) {
     ret = ss.can_fork(child, kargs.cset);
-    if (ret)
-    goto out_revert;
+    if (ret) {
+// goto;
+    }
     } while_each_subsys_mask();
     return 0;
-    out_revert:
+// label;
     for_each_subsys(ss, j) {
-    if (j >= i)
+    if (j >= i) {
     break;
-    if (ss.cancel_fork)
+    }
+    if (ss.cancel_fork) {
     ss.cancel_fork(child, kargs.cset);
+    }
     }
     cgroup_css_set_put_fork(kargs);
     return ret;
@@ -6229,14 +6315,14 @@ pub unsafe extern "C" fn cgroup_can_fork(child: *mut task_struct, kargs: *mut ke
 // cgroup_can_fork() succeeded and cleans up references we took to
 // prepare a new css_set for the child process in cgroup_can_fork().
 //
-    void cgroup_cancel_fork(struct task_struct *child,
-    struct kernel_clone_args *kargs)
-    {
-    struct cgroup_subsys *ss;
-    int i;
-    for_each_subsys(ss, i)
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_cancel_fork(child: *mut task_struct, kargs: *mut kernel_clone_args) {
+pub static mut ss: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    for_each_subsys(ss, i) {
     if (ss.cancel_fork)
     ss.cancel_fork(child, kargs.cset);
+    }
     cgroup_css_set_put_fork(kargs);
     }
 //
@@ -6247,16 +6333,15 @@ pub unsafe extern "C" fn cgroup_can_fork(child: *mut task_struct, kargs: *mut ke
 // Attach the child process to its css_set calling the subsystem fork()
 // callbacks.
 //
-    void cgroup_post_fork(struct task_struct *child,
-    struct kernel_clone_args *kargs)
-    __releases(&cgroup_threadgroup_rwsem) __releases(&cgroup_mutex)
-    {
-    let mut cgrp_kill_seq: c_uint = 0;
-    let mut cgrp_flags: c_ulong = 0;
-    let mut kill: bool = false;
-    struct cgroup_subsys *ss;
-    struct css_set *cset;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_post_fork(child: *mut task_struct, cgroup_mutex: *mut kernel_clone_argskargs)
+    __releases(&cgroup_threadgroup_rwsem) __releases(&) {
+pub static mut cgrp_kill_seq: c_uint = 0;
+pub static mut cgrp_flags: c_ulong = 0;
+pub static mut kill: bool = false;
+pub static mut ss: *mut c_void = core::ptr::null_mut();
+pub static mut cset: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
     cset = kargs.cset;
     kargs.cset = core::ptr::null_mut();
     spin_lock_irq(&css_set_lock);
@@ -6269,8 +6354,8 @@ pub unsafe extern "C" fn cgroup_can_fork(child: *mut task_struct, kargs: *mut ke
     cgrp_flags = cset.dfl_cgrp.flags;
     cgrp_kill_seq = cset.dfl_cgrp.kill_seq;
     }
-    WARN_ON_ONCE(!list_empty(&child.cg_list));
-    cset.nr_tasks++;
+    WARN_ON_ONCE!(!list_empty(&child.cg_list));
+    cset.nr_tasks += 1;
     css_set_move_task(child, core::ptr::null_mut(), cset, false);
     } else {
     put_css_set(cset);
@@ -6284,7 +6369,7 @@ pub unsafe extern "C" fn cgroup_can_fork(child: *mut task_struct, kargs: *mut ke
 // get the task into the frozen state.
 //
     spin_lock(&child.sighand.siglock);
-    WARN_ON_ONCE(child.frozen);
+    WARN_ON_ONCE!(child.frozen);
     child.jobctl |= JOBCTL_TRAP_FREEZE;
     spin_unlock(&child.sighand.siglock);
 //
@@ -6312,14 +6397,15 @@ pub unsafe extern "C" fn cgroup_can_fork(child: *mut task_struct, kargs: *mut ke
     } while_each_subsys_mask();
 // Make the new cset the root_cset of the new cgroup namespace.
     if (kargs.flags & CLONE_NEWCGROUP) {
-    struct css_set *rcset = child.nsproxy.cgroup_ns.root_cset;
+    let mut rcset = child.nsproxy.cgroup_ns.root_cset;
     get_css_set(cset);
     child.nsproxy.cgroup_ns.root_cset = cset;
     put_css_set(rcset);
     }
 // Cgroup has to be killed so take down child immediately.
-    if (unlikely(kill))
+    if (unlikely(kill)) {
     do_send_sig_info(SIGKILL, SEND_SIG_NOINFO, child, PIDTYPE_TGID);
+    }
     cgroup_css_set_put_fork(kargs);
     }
 //
@@ -6330,10 +6416,8 @@ pub unsafe extern "C" fn cgroup_can_fork(child: *mut task_struct, kargs: *mut ke
 //
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_task_exit(tsk: *mut task_struct) {
-    void cgroup_task_exit(struct task_struct *tsk)
-    {
-    struct cgroup_subsys *ss;
-    int i;
+pub static mut ss: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
 // see cgroup_post_fork() for details
     do_each_subsys_mask(ss, i, have_exit_callback) {
     ss.exit(tsk);
@@ -6341,24 +6425,25 @@ pub unsafe extern "C" fn cgroup_task_exit(tsk: *mut task_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn do_cgroup_task_dead(tsk: *mut task_struct) {
-    static void do_cgroup_task_dead(struct task_struct *tsk)
-    {
-    struct css_set *cset;
-    unsigned long flags;
+pub static mut cset: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
     spin_lock_irqsave(&css_set_lock, flags);
-    WARN_ON_ONCE(list_empty(&tsk.cg_list));
+    WARN_ON_ONCE!(list_empty(&tsk.cg_list));
     cset = task_css_set(tsk);
     css_set_move_task(tsk, cset, core::ptr::null_mut(), false);
-    cset.nr_tasks--;
+    cset.nr_tasks -= 1;
 // matches the signal->live check in css_task_iter_advance()
-    if (thread_group_leader(tsk) && atomic_read(&tsk.signal.live))
+    if (thread_group_leader(tsk) && atomic_read(&tsk.signal.live)) {
     list_add_tail(&tsk.cg_list, &cset.dying_tasks);
-    if (dl_task(tsk))
+    }
+    if (dl_task(tsk)) {
     dec_dl_tasks_cs(tsk);
-    WARN_ON_ONCE(cgroup_task_frozen(tsk));
+    }
+    WARN_ON_ONCE!(cgroup_task_frozen(tsk));
     if (unlikely(!(tsk.flags & PF_KTHREAD) &&
-    test_bit(CGRP_FREEZE, &task_dfl_cgroup(tsk).flags)))
+    test_bit(CGRP_FREEZE, &task_dfl_cgroup(tsk).flags))) {
     cgroup_update_frozen(task_dfl_cgroup(tsk));
+    }
     spin_unlock_irqrestore(&css_set_lock, flags);
     }
 
@@ -6371,14 +6456,13 @@ unsafe extern "C" fn do_cgroup_task_dead(tsk: *mut task_struct) {
 // the cgroup and task_struct can be pinned indefinitely. Bounce through lazy
 // irq_work to allow batching while ensuring timely completion.
 //
-    static DEFINE_PER_CPU(struct llist_head, cgrp_dead_tasks);
-    static DEFINE_PER_CPU(struct irq_work, cgrp_dead_tasks_iwork);
+pub static mut struct llist_head: usize = 0;
+pub static mut struct irq_work: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn cgrp_dead_tasks_iwork_fn(iwork: *mut irq_work) {
-    static void cgrp_dead_tasks_iwork_fn(struct irq_work *iwork)
-    {
-    struct llist_node *lnode;
-    struct task_struct *task, *next;
+pub static mut lnode: *mut c_void = core::ptr::null_mut();
+    let mut task = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
     lnode = llist_del_all(this_cpu_ptr(&cgrp_dead_tasks));
     llist_for_each_entry_safe(task, next, lnode, cg_dead_lnode) {
     do_cgroup_task_dead(task);
@@ -6386,10 +6470,8 @@ unsafe extern "C" fn cgrp_dead_tasks_iwork_fn(iwork: *mut irq_work) {
     }
     }
 #[no_mangle]
-unsafe extern "C" fn cgroup_rt_init() -> void __init {
-    static void __init cgroup_rt_init(void)
-    {
-    int cpu;
+unsafe extern "C" fn cgroup_rt_init()  {
+    let mut cpu = 0;
     for_each_possible_cpu(cpu) {
     init_llist_head(per_cpu_ptr(&cgrp_dead_tasks, cpu));
     per_cpu(cgrp_dead_tasks_iwork, cpu) =
@@ -6398,8 +6480,6 @@ unsafe extern "C" fn cgroup_rt_init() -> void __init {
     }
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_task_dead(task: *mut task_struct) {
-    void cgroup_task_dead(struct task_struct *task)
-    {
     get_task_struct(task);
     llist_add(&task.cg_dead_lnode, this_cpu_ptr(&cgrp_dead_tasks));
     irq_work_queue(this_cpu_ptr(&cgrp_dead_tasks_iwork));
@@ -6407,27 +6487,23 @@ pub unsafe extern "C" fn cgroup_task_dead(task: *mut task_struct) {
 
     static void __init cgroup_rt_init(void) {}
 #[no_mangle]
-pub unsafe extern "C" fn cgroup_task_dead(task: *mut task_struct) {
-    void cgroup_task_dead(struct task_struct *task)
-    {
+#[no_mangle]
+// duplicate fn: cgroup_task_dead
+pub unsafe extern "C" fn cgroup_task_dead_dup(task: *mut task_struct) {
     do_cgroup_task_dead(task);
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_task_release(task: *mut task_struct) {
-    void cgroup_task_release(struct task_struct *task)
-    {
-    struct cgroup_subsys *ss;
-    int ssid;
+pub static mut ss: *mut c_void = core::ptr::null_mut();
+    let mut ssid = 0;
     do_each_subsys_mask(ss, ssid, have_release_callback) {
     ss.release(task);
     } while_each_subsys_mask();
     }
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_task_free(task: *mut task_struct) {
-    void cgroup_task_free(struct task_struct *task)
-    {
-    struct css_set *cset = task_css_set(task);
+    let mut cset = task_css_set(task);
     if (!list_empty(&task.cg_list)) {
     spin_lock_irq(&css_set_lock);
     css_set_skip_task_iters(task_css_set(task), task);
@@ -6437,52 +6513,49 @@ pub unsafe extern "C" fn cgroup_task_free(task: *mut task_struct) {
     put_css_set(cset);
     }
 #[no_mangle]
-unsafe extern "C" fn cgroup_disable(str: *mut c_char) -> int __init {
-    static int __init cgroup_disable(char *str)
-    {
-    struct cgroup_subsys *ss;
-    char *token;
-    int i;
+unsafe extern "C" fn cgroup_disable(str: *mut c_char) -> c_int {
+pub static mut ss: *mut c_void = core::ptr::null_mut();
+pub static mut token: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
     while ((token = strsep(&str, ",")) != core::ptr::null_mut()) {
-    if (!*token)
+    if (!*token) {
     continue;
+    }
     for_each_subsys(ss, i) {
     if (strcmp(token, ss.name) &&
-    strcmp(token, ss.legacy_name))
+    strcmp(token, ss.legacy_name)) {
     continue;
+    }
     static_branch_disable(cgroup_subsys_enabled_key[i]);
-    pr_info("Disabling %s control group subsystem\n",
+    pr_info!("Disabling %s control group subsystem\n",
     ss.name);
     }
-    for (i = 0; i < OPT_FEATURE_COUNT; i++) {
-    if (strcmp(token, cgroup_opt_feature_names[i]))
+    while (i < OPT_FEATURE_COUNT) {
+    if (strcmp(token, cgroup_opt_feature_names[i])) {
     continue;
+    }
     cgroup_feature_disable_mask |= 1 << i;
-    pr_info("Disabling %s control group feature\n",
+    pr_info!("Disabling %s control group feature\n",
     cgroup_opt_feature_names[i]);
     break;
     }
     }
     return 1;
     }
-    __setup("cgroup_disable=", cgroup_disable);
+    __setup!("cgroup_disable=", cgroup_disable);
     void __init __weak enable_debug_cgroup(void) { }
 #[no_mangle]
-unsafe extern "C" fn enable_cgroup_debug(str: *mut c_char) -> int __init {
-    static int __init enable_cgroup_debug(char *str)
-    {
+unsafe extern "C" fn enable_cgroup_debug(str: *mut c_char) -> c_int {
     cgroup_debug = true;
     enable_debug_cgroup();
     return 1;
     }
-    __setup("cgroup_debug", enable_cgroup_debug);
+    __setup!("cgroup_debug", enable_cgroup_debug);
 #[no_mangle]
-unsafe extern "C" fn cgroup_favordynmods_setup(str: *mut c_char) -> int __init {
-    static int __init cgroup_favordynmods_setup(char *str)
-    {
+unsafe extern "C" fn cgroup_favordynmods_setup(str: *mut c_char) -> c_int {
     return (kstrtobool(str, &have_favordynmods) == 0);
     }
-    __setup("cgroup_favordynmods=", cgroup_favordynmods_setup);
+    __setup!("cgroup_favordynmods=", cgroup_favordynmods_setup);
 //
 // css_tryget_online_from_dir - get corresponding css from a cgroup dentry
 // @dentry: directory dentry of interest
@@ -6492,28 +6565,30 @@ unsafe extern "C" fn cgroup_favordynmods_setup(str: *mut c_char) -> int __init {
 // to get the corresponding css and return it.  If such css doesn't exist
 // or can't be pinned, an ERR_PTR value is returned.
 //
-    struct cgroup_subsys_state *css_tryget_online_from_dir(struct dentry *dentry,
-    struct cgroup_subsys *ss)
-    {
-    struct kernfs_node *kn = kernfs_node_from_dentry(dentry);
-    struct file_system_type *s_type = dentry.d_sb.s_type;
-    struct cgroup_subsys_state *css = core::ptr::null_mut();
-    struct cgroup *cgrp;
+#[no_mangle]
+pub unsafe extern "C" fn css_tryget_online_from_dir(dentry: *mut dentry, ss: *mut cgroup_subsys) -> *mut c_void {
+    let mut kn = kernfs_node_from_dentry(dentry);
+    let mut s_type = dentry.d_sb.s_type;
+    let mut css = core::ptr::null_mut();
+pub static mut cgrp: *mut c_void = core::ptr::null_mut();
 // is @dentry a cgroup dir?
     if ((s_type != &cgroup_fs_type && s_type != &cgroup2_fs_type) ||
-    !kn || kernfs_type(kn) != KERNFS_DIR)
+    !kn || kernfs_type(kn) != KERNFS_DIR) {
     return ERR_PTR(-EBADF);
+    }
     rcu_read_lock();
 //
 // This path doesn't originate from kernfs and @kn could already
 // have been or be removed at any point.  @kn->priv is RCU
 // protected for this access.  See css_release_work_fn() for details.
 //
-    cgrp = rcu_dereference(*(void __rcu  **)&kn.priv);
-    if (cgrp)
+    cgrp = rcu_dereference(*&kn.priv);
+    if (cgrp) {
     css = cgroup_css(cgrp, ss);
-    if (!css || !css_tryget_online(css))
+    }
+    if (!css || !css_tryget_online(css)) {
     css = ERR_PTR(-ENOENT);
+    }
     rcu_read_unlock();
     return css;
     }
@@ -6525,9 +6600,9 @@ unsafe extern "C" fn cgroup_favordynmods_setup(str: *mut c_char) -> int __init {
 // Returns the css if there's valid one with @id, otherwise returns NULL.
 // Should be called under rcu_read_lock().
 //
-    struct cgroup_subsys_state *css_from_id(int id, struct cgroup_subsys *ss)
-    {
-    WARN_ON_ONCE(!rcu_read_lock_held());
+#[no_mangle]
+pub unsafe extern "C" fn css_from_id(id: c_int, ss: *mut cgroup_subsys) -> *mut c_void {
+    WARN_ON_ONCE!(!rcu_read_lock_held());
     return idr_find(&ss.css_idr, id);
     }
 //
@@ -6539,27 +6614,29 @@ unsafe extern "C" fn cgroup_favordynmods_setup(str: *mut c_char) -> int __init {
 // success, ERR_PTR(-ENOENT) if @path doesn't exist or if the cgroup has already
 // been released and ERR_PTR(-ENOTDIR) if @path points to a non-directory.
 //
-    struct cgroup *cgroup_get_from_path(const char *path)
-    {
-    struct kernfs_node *kn;
-    struct cgroup *cgrp = ERR_PTR(-ENOENT);
-    struct cgroup *root_cgrp;
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_get_from_path(path: *mut c_char) -> *mut c_void {
+pub static mut kn: *mut c_void = core::ptr::null_mut();
+    let mut cgrp = ERR_PTR(-ENOENT);
+pub static mut root_cgrp: *mut c_void = core::ptr::null_mut();
     root_cgrp = current_cgns_cgroup_dfl();
     kn = kernfs_walk_and_get(root_cgrp.kn, path);
-    if (!kn)
-    goto out;
+    if (!kn) {
+// goto;
+    }
     if (kernfs_type(kn) != KERNFS_DIR) {
     cgrp = ERR_PTR(-ENOTDIR);
-    goto out_kernfs;
+// goto;
     }
     rcu_read_lock();
-    cgrp = rcu_dereference(*(void __rcu  **)&kn.priv);
-    if (!cgrp || !cgroup_tryget(cgrp))
+    cgrp = rcu_dereference(*&kn.priv);
+    if (!cgrp || !cgroup_tryget(cgrp)) {
     cgrp = ERR_PTR(-ENOENT);
+    }
     rcu_read_unlock();
-    out_kernfs:
+// label;
     kernfs_put(kn);
-    out:
+// label;
     return cgrp;
     }
     EXPORT_SYMBOL_GPL(cgroup_get_from_path);
@@ -6572,11 +6649,12 @@ unsafe extern "C" fn cgroup_favordynmods_setup(str: *mut c_char) -> int __init {
 // cgroup on success. ERR_PTR is returned if the cgroup
 // cannot be found.
 //
-    struct cgroup *cgroup_v1v2_get_from_fd(int fd)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_v1v2_get_from_fd(fd: c_int) -> *mut c_void {
     CLASS(fd_raw, f)(fd);
-    if (fd_empty(f))
+    if (fd_empty(f)) {
     return ERR_PTR(-EBADF);
+    }
     return cgroup_v1v2_get_from_file(fd_file(f));
     }
 //
@@ -6584,11 +6662,12 @@ unsafe extern "C" fn cgroup_favordynmods_setup(str: *mut c_char) -> int __init {
 // cgroup2.
 // @fd: fd obtained by open(cgroup2_dir)
 //
-    struct cgroup *cgroup_get_from_fd(int fd)
-    {
-    struct cgroup *cgrp = cgroup_v1v2_get_from_fd(fd);
-    if (IS_ERR(cgrp))
+#[no_mangle]
+pub unsafe extern "C" fn cgroup_get_from_fd(fd: c_int) -> *mut c_void {
+    let mut cgrp = cgroup_v1v2_get_from_fd(fd);
+    if (IS_ERR(cgrp)) {
     return ERR_CAST(cgrp);
+    }
     if (!cgroup_on_dfl(cgrp)) {
     cgroup_put(cgrp);
     return ERR_PTR(-EBADF);
@@ -6598,11 +6677,10 @@ unsafe extern "C" fn cgroup_favordynmods_setup(str: *mut c_char) -> int __init {
     EXPORT_SYMBOL_GPL(cgroup_get_from_fd);
 #[no_mangle]
 unsafe extern "C" fn power_of_ten(power: c_int) -> u64 {
-    static u64 power_of_ten(int power)
-    {
-    let mut v: u64 = 1;
-    while (power--)
+pub static mut v: u64 = 1;
+    while (power--) {
     v *= 10;
+    }
     return v;
     }
 //
@@ -6621,19 +6699,21 @@ unsafe extern "C" fn power_of_ten(power: c_int) -> u64 {
 //
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_parse_float(input: *const c_char, dec_shift: unsigned, v: *mut i64) -> c_int {
-    int cgroup_parse_float(const char *input, unsigned dec_shift, s64 *v)
-    {
     s64 whole, frac = 0;
-    let mut fstart: c_int = 0, fend = 0, flen;
-    if (!sscanf(input, "%lld.%n%lld%n", &whole, &fstart, &frac, &fend))
+pub static mut fstart: c_int = 0;
+    if (!sscanf(input, "%lld.%n%lld%n", &whole, &fstart, &frac, &fend)) {
     return -EINVAL;
-    if (frac < 0)
+    }
+    if (frac < 0) {
     return -EINVAL;
+    }
     flen = fend > fstart ? fend - fstart : 0;
-    if (flen < dec_shift)
+    if (flen < dec_shift) {
     frac *= power_of_ten(dec_shift - flen);
-    else
+    }
+    else {
     frac = DIV_ROUND_CLOSEST_ULL(frac, power_of_ten(flen - dec_shift));
+    }
 // v = whole * power_of_ten(dec_shift) + frac;
     return 0;
     }
@@ -6644,18 +6724,16 @@ pub unsafe extern "C" fn cgroup_parse_float(input: *const c_char, dec_shift: uns
 
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_sk_alloc(skcd: *mut sock_cgroup_data) {
-    void cgroup_sk_alloc(struct sock_cgroup_data *skcd)
-    {
-    struct cgroup *cgroup;
+pub static mut cgroup: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
 // Don't associate the sock with unrelated interrupted task's cgroup.
     if (in_interrupt()) {
     cgroup = &cgrp_dfl_root.cgrp;
     cgroup_get(cgroup);
-    goto out;
+// goto;
     }
     while (true) {
-    struct css_set *cset;
+pub static mut cset: *mut c_void = core::ptr::null_mut();
     cset = task_css_set(current);
     if (likely(cgroup_tryget(cset.dfl_cgrp))) {
     cgroup = cset.dfl_cgrp;
@@ -6663,16 +6741,14 @@ pub unsafe extern "C" fn cgroup_sk_alloc(skcd: *mut sock_cgroup_data) {
     }
     cpu_relax();
     }
-    out:
+// label;
     skcd.cgroup = cgroup;
     cgroup_bpf_get(cgroup);
     rcu_read_unlock();
     }
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_sk_clone(skcd: *mut sock_cgroup_data) {
-    void cgroup_sk_clone(struct sock_cgroup_data *skcd)
-    {
-    struct cgroup *cgrp = sock_cgroup_ptr(skcd);
+    let mut cgrp = sock_cgroup_ptr(skcd);
 //
 // We might be cloning a socket which is left in an empty
 // cgroup and the cgroup might have already been rmdir'd.
@@ -6683,50 +6759,50 @@ pub unsafe extern "C" fn cgroup_sk_clone(skcd: *mut sock_cgroup_data) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn cgroup_sk_free(skcd: *mut sock_cgroup_data) {
-    void cgroup_sk_free(struct sock_cgroup_data *skcd)
-    {
-    struct cgroup *cgrp = sock_cgroup_ptr(skcd);
+    let mut cgrp = sock_cgroup_ptr(skcd);
     cgroup_bpf_put(cgrp);
     cgroup_put(cgrp);
     }
 
-    static ssize_t show_delegatable_files(struct cftype *files, char *buf,
-    ssize_t size, const char *prefix)
-    {
-    struct cftype *cft;
-    let mut ret: isize = 0;
-    for (cft = files; cft && cft.name[0] != '\0'; cft++) {
-    if (!(cft.flags & CFTYPE_NS_DELEGATABLE))
+#[no_mangle]
+pub unsafe extern "C" fn show_delegatable_files(files: *mut cftype, buf: *mut c_char, size: ssize_t, prefix: *mut c_char) -> ssize_t {
+pub static mut cft: *mut c_void = core::ptr::null_mut();
+pub static mut ret: isize = 0;
+    while (cft && cft.name[0] != '\0') {
+    if (!(cft.flags & CFTYPE_NS_DELEGATABLE)) {
     continue;
-    if (prefix)
+    }
+    if (prefix) {
     ret += snprintf(buf + ret, size - ret, "%s.", prefix);
+    }
     ret += snprintf(buf + ret, size - ret, "%s\n", cft.name);
-    if (WARN_ON(ret >= size))
+    if (WARN_ON!(ret >= size)) {
     break;
+    }
     }
     return ret;
     }
-    static ssize_t delegate_show(struct kobject *kobj, struct kobj_attribute *attr,
-    char *buf)
-    {
-    struct cgroup_subsys *ss;
-    int ssid;
-    let mut ret: isize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn delegate_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
+pub static mut ss: *mut c_void = core::ptr::null_mut();
+    let mut ssid = 0;
+pub static mut ret: isize = 0;
     ret = show_delegatable_files(cgroup_base_files, buf + ret,
     PAGE_SIZE - ret, core::ptr::null_mut());
-    if (cgroup_psi_enabled())
+    if (cgroup_psi_enabled()) {
     ret += show_delegatable_files(cgroup_psi_files, buf + ret,
     PAGE_SIZE - ret, core::ptr::null_mut());
-    for_each_subsys(ss, ssid)
+    }
+    for_each_subsys(ss, ssid) {
     ret += show_delegatable_files(ss.dfl_cftypes, buf + ret,
     PAGE_SIZE - ret,
     cgroup_subsys_name[ssid]);
+    }
     return ret;
     }
-    let mut cgroup_delegate_attr: static struct kobj_attribute = __ATTR_RO(delegate);
-    static ssize_t features_show(struct kobject *kobj, struct kobj_attribute *attr,
-    char *buf)
-    {
+pub static mut cgroup_delegate_attr: kobj_attribute = 0;
+#[no_mangle]
+pub unsafe extern "C" fn features_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return snprintf(buf, PAGE_SIZE,
     "nsdelegate\n"
     "favordynmods\n"
@@ -6735,20 +6811,15 @@ pub unsafe extern "C" fn cgroup_sk_free(skcd: *mut sock_cgroup_data) {
     "memory_hugetlb_accounting\n"
     "pids_localevents\n");
     }
-    let mut cgroup_features_attr: static struct kobj_attribute = __ATTR_RO(features);
+pub static mut cgroup_features_attr: kobj_attribute = 0;
     static struct attribute *cgroup_sysfs_attrs[] = {
     &cgroup_delegate_attr.attr,
     &cgroup_features_attr.attr,
     core::ptr::null_mut(),
     };
-    static const struct attribute_group cgroup_sysfs_attr_group = {
-    .attrs = cgroup_sysfs_attrs,
-    .name = "cgroup",
-    };
+pub static mut attribute_group: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn cgroup_sysfs_init() -> int __init {
-    static int __init cgroup_sysfs_init(void)
-    {
+unsafe extern "C" fn cgroup_sysfs_init() -> c_int {
     return sysfs_create_group(kernel_kobj, &cgroup_sysfs_attr_group);
     }
-    subsys_initcall(cgroup_sysfs_init);
+    subsys_initcall!(cgroup_sysfs_init);

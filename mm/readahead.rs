@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -155,9 +405,8 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Initialise a struct file's readahead state.  Assumes that the caller has
 // memset *ra to zero.
 //
-    void
-    file_ra_state_init(struct file_ra_state *ra, struct address_space *mapping)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn file_ra_state_init(ra: *mut file_ra_state, mapping: *mut address_space) {
     ra.ra_pages = inode_to_bdi(mapping.host).ra_pages;
     ra.prev_pos = -1;
     }
@@ -175,15 +424,15 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 #[no_mangle]
 unsafe extern "C" fn read_pages(rac: *mut readahead_control) {
-    static void read_pages(struct readahead_control *rac)
-    {
-    const struct address_space_operations *aops = rac.mapping.a_ops;
-    struct folio *folio;
-    struct blk_plug plug;
-    if (!readahead_count(rac))
+    let mut aops = rac.mapping.a_ops;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut plug: usize = 0;
+    if (!readahead_count(rac)) {
     return;
-    if (unlikely(rac._workingset))
+    }
+    if (unlikely(rac._workingset)) {
     psi_memstall_enter(&rac._pflags);
+    }
     blk_start_plug(&plug);
     if (aops.readahead) {
     aops.readahead(rac);
@@ -195,22 +444,24 @@ unsafe extern "C" fn read_pages(rac: *mut readahead_control) {
     folio_put(folio);
     }
     } else {
-    while ((folio = readahead_folio(rac)) != core::ptr::null_mut())
+    while ((folio = readahead_folio(rac)) != core::ptr::null_mut()) {
     aops.read_folio(rac.file, folio);
     }
-    blk_finish_plug(&plug);
-    if (unlikely(rac._workingset))
-    psi_memstall_leave(&rac._pflags);
-    rac._workingset = false;
-    BUG_ON(readahead_count(rac));
     }
-    static struct folio *ractl_alloc_folio(struct readahead_control *ractl,
-    gfp_t gfp_mask, unsigned int order)
-    {
-    struct folio *folio;
+    blk_finish_plug(&plug);
+    if (unlikely(rac._workingset)) {
+    psi_memstall_leave(&rac._pflags);
+    }
+    rac._workingset = false;
+    BUG_ON!(readahead_count(rac));
+    }
+#[no_mangle]
+pub unsafe extern "C" fn ractl_alloc_folio(ractl: *mut readahead_control, gfp_mask: gfp_t, order: c_uint) -> *mut c_void {
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     folio = filemap_alloc_folio(gfp_mask, order, core::ptr::null_mut());
-    if (folio && ractl.dropbehind)
+    if (folio && ractl.dropbehind) {
     __folio_set_dropbehind(folio);
+    }
     return folio;
     }
 //
@@ -228,14 +479,13 @@ unsafe extern "C" fn read_pages(rac: *mut readahead_control) {
 // must be held by the caller at least in shared mode.  Mutexes may be held by
 // caller.  May sleep, but will not reenter filesystem to reclaim memory.
 //
-    void page_cache_ra_unbounded(struct readahead_control *ractl,
-    unsigned long nr_to_read, unsigned long lookahead_size)
-    {
-    struct address_space *mapping = ractl.mapping;
-    let mut index: c_ulong = readahead_index(ractl);
-    let mut gfp_mask: gfp_t = readahead_gfp_mask(mapping);
-    let mut mark: c_ulong = ULONG_MAX, i = 0;
-    let mut min_nrpages: c_uint = mapping_min_folio_nrpages(mapping);
+#[no_mangle]
+pub unsafe extern "C" fn page_cache_ra_unbounded(ractl: *mut readahead_control, nr_to_read: c_ulong, lookahead_size: c_ulong) {
+    let mut mapping = ractl.mapping;
+pub static mut index: c_ulong = 0;
+pub static mut gfp_mask: gfp_t = 0;
+pub static mut mark: c_ulong = 0;
+pub static mut min_nrpages: c_uint = 0;
 //
 // Partway through the readahead operation, we will have added
 // locked pages to the page cache, but will not yet have submitted
@@ -246,7 +496,7 @@ unsafe extern "C" fn read_pages(rac: *mut readahead_control) {
 // filesystems already specify __GFP_NOFS in their mapping's
 // gfp_mask, but let's be explicit here.
 //
-    let mut nofs: c_uint = memalloc_nofs_save();
+pub static mut nofs: c_uint = 0;
     lockdep_assert_held(&mapping.invalidate_lock);
     trace_page_cache_ra_unbounded(mapping.host, index, nr_to_read,
     lookahead_size);
@@ -258,7 +508,7 @@ unsafe extern "C" fn read_pages(rac: *mut readahead_control) {
 // readahead flag.
 //
     if (lookahead_size <= nr_to_read) {
-    unsigned long ra_folio_index;
+    let mut ra_folio_index = 0;
     ra_folio_index = round_up(readahead_index(ractl) +
     nr_to_read - lookahead_size,
     min_nrpages);
@@ -270,8 +520,8 @@ unsafe extern "C" fn read_pages(rac: *mut readahead_control) {
 // Preallocate as many pages as we will need.
 //
     while (i < nr_to_read) {
-    struct folio *folio = xa_load(&mapping.i_pages, index + i);
-    int ret;
+    let mut folio = xa_load(&mapping.i_pages, index + i);
+    let mut ret = 0;
     if (folio && !xa_is_value(folio)) {
 //
 // Page already present?  Kick off the current batch
@@ -288,20 +538,23 @@ unsafe extern "C" fn read_pages(rac: *mut readahead_control) {
     }
     folio = ractl_alloc_folio(ractl, gfp_mask,
     mapping_min_folio_order(mapping));
-    if (!folio)
+    if (!folio) {
     break;
+    }
     ret = filemap_add_folio(mapping, folio, index + i, gfp_mask);
     if (ret < 0) {
     folio_put(folio);
-    if (ret == -ENOMEM)
+    if (ret == -ENOMEM) {
     break;
+    }
     read_pages(ractl);
     ractl._index += min_nrpages;
     i = ractl._index - index;
     continue;
     }
-    if (i == mark)
+    if (i == mark) {
     folio_set_readahead(folio);
+    }
     ractl._workingset |= folio_test_workingset(folio);
     ractl._nr_pages += min_nrpages;
     i += min_nrpages;
@@ -321,18 +574,19 @@ unsafe extern "C" fn read_pages(rac: *mut readahead_control) {
 // behaviour which would occur if page allocations are causing VM writeback.
 // We really don't want to intermingle reads and writes like that.
 //
-    static void do_page_cache_ra(struct readahead_control *ractl,
-    unsigned long nr_to_read, unsigned long lookahead_size)
-    {
-    struct address_space *mapping = ractl.mapping;
-    let mut index: c_ulong = readahead_index(ractl);
-    let mut isize: loff_t = i_size_read(mapping.host);
-    pgoff_t end_index;	/* The last page we want to read */
-    if (isize == 0)
+#[no_mangle]
+pub unsafe extern "C" fn do_page_cache_ra(ractl: *mut readahead_control, nr_to_read: c_ulong, lookahead_size: c_ulong) {
+    let mut mapping = ractl.mapping;
+pub static mut index: c_ulong = 0;
+pub static mut isize: loff_t = 0;
+    let mut end_index;	/* The last page we want to read */
+    if (isize == 0) {
     return;
+    }
     end_index = (isize - 1) >> PAGE_SHIFT;
-    if (index > end_index)
+    if (index > end_index) {
     return;
+    }
 // Don't read past the page containing the last byte of the file
     if (nr_to_read > end_index - index) {
     nr_to_read = end_index - index + 1;
@@ -347,15 +601,15 @@ unsafe extern "C" fn read_pages(rac: *mut readahead_control) {
 // Chunk the readahead into 2 megabyte units, so that we don't pin too much
 // memory at once.
 //
-    void force_page_cache_ra(struct readahead_control *ractl,
-    unsigned long nr_to_read)
-    {
-    struct address_space *mapping = ractl.mapping;
-    struct file_ra_state *ra = ractl.ra;
-    struct backing_dev_info *bdi = inode_to_bdi(mapping.host);
-    unsigned long max_pages;
-    if (unlikely(!mapping.a_ops.read_folio && !mapping.a_ops.readahead))
+#[no_mangle]
+pub unsafe extern "C" fn force_page_cache_ra(ractl: *mut readahead_control, nr_to_read: c_ulong) {
+    let mut mapping = ractl.mapping;
+    let mut ra = ractl.ra;
+    let mut bdi = inode_to_bdi(mapping.host);
+    let mut max_pages = 0;
+    if (unlikely(!mapping.a_ops.read_folio && !mapping.a_ops.readahead)) {
     return;
+    }
 //
 // If the request exceeds the readahead window, allow the read to
 // be up to the optimal hardware IO size
@@ -363,9 +617,10 @@ unsafe extern "C" fn read_pages(rac: *mut readahead_control) {
     max_pages = max_t(unsigned long, bdi.io_pages, ra.ra_pages);
     nr_to_read = min_t(unsigned long, nr_to_read, max_pages);
     while (nr_to_read) {
-    let mut this_chunk: c_ulong = (2 * 1024 * 1024) / PAGE_SIZE;
-    if (this_chunk > nr_to_read)
+pub static mut this_chunk: c_ulong = 0;
+    if (this_chunk > nr_to_read) {
     this_chunk = nr_to_read;
+    }
     do_page_cache_ra(ractl, this_chunk, 0);
     nr_to_read -= this_chunk;
     }
@@ -378,31 +633,32 @@ unsafe extern "C" fn read_pages(rac: *mut readahead_control) {
 //
 #[no_mangle]
 unsafe extern "C" fn get_init_ra_size(size: c_ulong, max: c_ulong) -> c_ulong {
-    static unsigned long get_init_ra_size(unsigned long size, unsigned long max)
-    {
-    let mut newsize: c_ulong = roundup_pow_of_two(size);
-    if (newsize <= max / 32)
+pub static mut newsize: c_ulong = 0;
+    if (newsize <= max / 32) {
     newsize = newsize * 4;
-#[no_mangle]
-pub unsafe extern "C" fn if(4: newsize <= max /) -> else {
-    else if (newsize <= max / 4)
+    }
+
+    else if (newsize <= max / 4) {
     newsize = newsize * 2;
-    else
+    }
+    else {
     newsize = max;
+    }
     return newsize;
     }
 //
 // Get the previous window size, ramp it up, and
 // return it as the new window size.
 //
-    static unsigned long get_next_ra_size(struct file_ra_state *ra,
-    unsigned long max)
-    {
-    let mut cur: c_ulong = ra.size;
-    if (cur < max / 16)
+#[no_mangle]
+pub unsafe extern "C" fn get_next_ra_size(ra: *mut file_ra_state, max: c_ulong) -> c_ulong {
+pub static mut cur: c_ulong = 0;
+    if (cur < max / 16) {
     return 4 * cur;
-    if (cur <= max / 2)
+    }
+    if (cur <= max / 2) {
     return 2 * cur;
+    }
     return max;
     }
 //
@@ -443,16 +699,17 @@ pub unsafe extern "C" fn if(4: newsize <= max /) -> else {
 // The code ramps up the readahead size aggressively at first, but slow down as
 // it approaches max_readahead.
 //
-    static inline int ra_alloc_folio(struct readahead_control *ractl, pgoff_t index,
-    pgoff_t mark, unsigned int order, gfp_t gfp)
-    {
-    int err;
-    struct folio *folio = ractl_alloc_folio(ractl, gfp, order);
-    if (!folio)
+#[no_mangle]
+pub unsafe extern "C" fn ra_alloc_folio(ractl: *mut readahead_control, index: pgoff_t, mark: pgoff_t, order: c_uint, gfp: gfp_t) -> c_int {
+    let mut err = 0;
+    let mut folio = ractl_alloc_folio(ractl, gfp, order);
+    if (!folio) {
     return -ENOMEM;
+    }
     mark = round_down(mark, 1UL << order);
-    if (index == mark)
+    if (index == mark) {
     folio_set_readahead(folio);
+    }
     err = filemap_add_folio(ractl.mapping, folio, index, gfp);
     if (err) {
     folio_put(folio);
@@ -462,23 +719,22 @@ pub unsafe extern "C" fn if(4: newsize <= max /) -> else {
     ractl._workingset |= folio_test_workingset(folio);
     return 0;
     }
-    void page_cache_ra_order(struct readahead_control *ractl,
-    struct file_ra_state *ra)
-    {
-    struct address_space *mapping = ractl.mapping;
-    let mut start: pgoff_t = readahead_index(ractl);
-    let mut index: pgoff_t = start;
-    let mut min_order: c_uint = mapping_min_folio_order(mapping);
-    let mut limit: pgoff_t = (i_size_read(mapping.host) - 1) >> PAGE_SHIFT;
-    pgoff_t mark;
-    unsigned int nofs;
-    let mut err: c_int = 0;
-    let mut gfp: gfp_t = readahead_gfp_mask(mapping);
-    let mut new_order: c_uint = ra.order;
+#[no_mangle]
+pub unsafe extern "C" fn page_cache_ra_order(ractl: *mut readahead_control, ra: *mut file_ra_state) {
+    let mut mapping = ractl.mapping;
+pub static mut start: pgoff_t = 0;
+pub static mut index: pgoff_t = 0;
+pub static mut min_order: c_uint = 0;
+pub static mut limit: pgoff_t = 0;
+    let mut mark;
+    let mut nofs = 0;
+pub static mut err: c_int = 0;
+pub static mut gfp: gfp_t = 0;
+pub static mut new_order: c_uint = 0;
     trace_page_cache_ra_order(mapping.host, start, ra);
     if (!mapping_large_folio_support(mapping)) {
     ra.order = 0;
-    goto fallback;
+// goto;
     }
     if (limit > index + ra.size - 1) {
     limit = index + ra.size - 1;
@@ -502,16 +758,19 @@ pub unsafe extern "C" fn if(4: newsize <= max /) -> else {
     ractl._index = mapping_align_index(mapping, index);
     index = readahead_index(ractl);
     while (index <= limit) {
-    let mut order: c_uint = new_order;
+pub static mut order: c_uint = 0;
 // Align with smaller pages if needed
-    if (index & ((1UL << order) - 1))
+    if (index & ((1UL << order) - 1)) {
     order = __ffs(index);
+    }
 // Don't allocate pages past EOF
-    while (order > min_order && index + (1UL << order) - 1 > limit)
-    order--;
+    while (order > min_order && index + (1UL << order) - 1 > limit) {
+    order -= 1;
+    }
     err = ra_alloc_folio(ractl, index, mark, order, gfp);
-    if (err)
+    if (err) {
     break;
+    }
     index += 1UL << order;
     }
     read_pages(ractl);
@@ -522,36 +781,37 @@ pub unsafe extern "C" fn if(4: newsize <= max /) -> else {
 // left some gaps.  Let the regular readahead code take care of this
 // situation below.
 //
-    if (!err)
+    if (!err) {
     return;
-    fallback:
+    }
+// label;
 //
 // ->readahead() may have updated readahead window size so we have to
 // check there's still something to read.
 //
-    if (ra.size > index - start)
+    if (ra.size > index - start) {
     do_page_cache_ra(ractl, ra.size - (index - start),
     ra.async_size);
     }
-    static unsigned long ractl_max_pages(struct readahead_control *ractl,
-    unsigned long req_size)
-    {
-    struct backing_dev_info *bdi = inode_to_bdi(ractl.mapping.host);
-    let mut max_pages: c_ulong = ractl.ra.ra_pages;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn ractl_max_pages(ractl: *mut readahead_control, req_size: c_ulong) -> c_ulong {
+    let mut bdi = inode_to_bdi(ractl.mapping.host);
+pub static mut max_pages: c_ulong = 0;
 //
 // If the request exceeds the readahead window, allow the read to
 // be up to the optimal hardware IO size
 //
-    if (req_size > max_pages && bdi.io_pages > max_pages)
+    if (req_size > max_pages && bdi.io_pages > max_pages) {
     max_pages = min(req_size, bdi.io_pages);
+    }
     return max_pages;
     }
-    void page_cache_sync_ra(struct readahead_control *ractl,
-    unsigned long req_count)
-    {
-    let mut index: pgoff_t = readahead_index(ractl);
-    let mut do_forced_ra: bool = ractl.file && (ractl.file.f_mode & FMODE_RANDOM);
-    struct file_ra_state *ra = ractl.ra;
+#[no_mangle]
+pub unsafe extern "C" fn page_cache_sync_ra(ractl: *mut readahead_control, req_count: c_ulong) {
+pub static mut index: pgoff_t = 0;
+pub static mut do_forced_ra: bool = false;
+    let mut ra = ractl.ra;
     unsigned long max_pages, contig_count;
     pgoff_t prev_index, miss;
     trace_page_cache_sync_ra(ractl.mapping.host, index, ra, req_count);
@@ -562,8 +822,9 @@ pub unsafe extern "C" fn if(4: newsize <= max /) -> else {
 // requested range, which we'll set to 1 page for this case.
 //
     if (!ra.ra_pages || blk_cgroup_congested()) {
-    if (!ractl.file)
+    if (!ractl.file) {
     return;
+    }
     req_count = 1;
     do_forced_ra = true;
     }
@@ -584,7 +845,7 @@ pub unsafe extern "C" fn if(4: newsize <= max /) -> else {
     ra.size = get_init_ra_size(req_count, max_pages);
     ra.async_size = ra.size > req_count ? ra.size - req_count :
     ra.size >> 1;
-    goto readit;
+// goto;
     }
 //
 // Query the page cache and look for the traces(cached history pages)
@@ -606,36 +867,39 @@ pub unsafe extern "C" fn if(4: newsize <= max /) -> else {
 // File cached from the beginning:
 // it is a strong indication of long-run stream (or whole-file-read)
 //
-    if (miss == ULONG_MAX)
+    if (miss == ULONG_MAX) {
     contig_count *= 2;
+    }
     ra.start = index;
     ra.size = min(contig_count + req_count, max_pages);
     ra.async_size = 1;
-    readit:
+// label;
     ra.order = 0;
     ractl._index = ra.start;
     page_cache_ra_order(ractl, ra);
     }
     EXPORT_SYMBOL_GPL(page_cache_sync_ra);
-    void page_cache_async_ra(struct readahead_control *ractl,
-    struct folio *folio, unsigned long req_count)
-    {
-    unsigned long max_pages;
-    struct file_ra_state *ra = ractl.ra;
-    let mut index: pgoff_t = readahead_index(ractl);
+#[no_mangle]
+pub unsafe extern "C" fn page_cache_async_ra(ractl: *mut readahead_control, folio: *mut folio, req_count: c_ulong) {
+    let mut max_pages = 0;
+    let mut ra = ractl.ra;
+pub static mut index: pgoff_t = 0;
     pgoff_t expected, start, end, aligned_end, align;
 // no readahead
-    if (!ra.ra_pages)
+    if (!ra.ra_pages) {
     return;
+    }
 //
 // Same bit is used for PG_readahead and PG_reclaim.
 //
-    if (folio_test_writeback(folio))
+    if (folio_test_writeback(folio)) {
     return;
+    }
     trace_page_cache_async_ra(ractl.mapping.host, index, ra, req_count);
     folio_clear_readahead(folio);
-    if (blk_cgroup_congested())
+    if (blk_cgroup_congested()) {
     return;
+    }
     max_pages = ractl_max_pages(ractl, req_count);
 //
 // It's the expected callback index, assume sequential access.
@@ -650,7 +914,7 @@ pub unsafe extern "C" fn if(4: newsize <= max /) -> else {
 // the readahead window.
 //
     ra.size = max(ra.size, get_next_ra_size(ra, max_pages));
-    goto readit;
+// goto;
     }
 //
 // Hit a marked folio without valid readahead state.
@@ -661,19 +925,21 @@ pub unsafe extern "C" fn if(4: newsize <= max /) -> else {
     rcu_read_lock();
     start = page_cache_next_miss(ractl.mapping, index + 1, max_pages);
     rcu_read_unlock();
-    if (!start || start - index > max_pages)
+    if (!start || start - index > max_pages) {
     return;
+    }
     ra.start = start;
     ra.size = start - index;	/* old async_size */
     ra.size += req_count;
     ra.size = get_next_ra_size(ra, max_pages);
-    readit:
+// label;
     ra.order += 2;
     align = 1UL << min(ra.order, ffs(max_pages) - 1);
     end = ra.start + ra.size;
     aligned_end = round_down(end, align);
-    if (aligned_end > ra.start)
+    if (aligned_end > ra.start) {
     ra.size -= end - aligned_end;
+    }
     ra.async_size = ra.size;
     ractl._index = ra.start;
     page_cache_ra_order(ractl, ra);
@@ -681,34 +947,38 @@ pub unsafe extern "C" fn if(4: newsize <= max /) -> else {
     EXPORT_SYMBOL_GPL(page_cache_async_ra);
 #[no_mangle]
 pub unsafe extern "C" fn ksys_readahead(fd: c_int, offset: loff_t, count: usize) -> isize {
-    ssize_t ksys_readahead(int fd, loff_t offset, size_t count)
-    {
-    struct file *file;
-    const struct inode *inode;
+pub static mut file: *mut c_void = core::ptr::null_mut();
+pub static mut inode: *mut c_void = core::ptr::null_mut();
     CLASS(fd, f)(fd);
-    if (fd_empty(f))
+    if (fd_empty(f)) {
     return -EBADF;
+    }
     file = fd_file(f);
-    if (!(file.f_mode & FMODE_READ))
+    if (!(file.f_mode & FMODE_READ)) {
     return -EBADF;
+    }
 //
 // The readahead() syscall is intended to run only on files
 // that can execute readahead. If readahead is not possible
 // on this file, then we must return -EINVAL.
 //
-    if (!file.f_mapping)
+    if (!file.f_mapping) {
     return -EINVAL;
-    if (!file.f_mapping.a_ops)
+    }
+    if (!file.f_mapping.a_ops) {
     return -EINVAL;
+    }
     inode = file_inode(file);
-    if (!S_ISREG(inode.i_mode) && !S_ISBLK(inode.i_mode))
+    if (!S_ISREG(inode.i_mode) && !S_ISBLK(inode.i_mode)) {
     return -EINVAL;
-    if (IS_ANON_FILE(inode))
+    }
+    if (IS_ANON_FILE(inode)) {
     return -EINVAL;
+    }
     return vfs_fadvise(fd_file(f), offset, count, POSIX_FADV_WILLNEED);
     }
-    SYSCALL_DEFINE3(readahead, int, fd, loff_t, offset, size_t, count)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_readahead(fd: usize, offset: usize, count: usize) -> c_long {
     return ksys_readahead(fd, offset, count);
     }
 
@@ -735,15 +1005,14 @@ pub unsafe extern "C" fn ksys_readahead(fd: c_int, offset: loff_t, count: usize)
 // The caller must check for this by examining the revised @ractl object for a
 // different expansion than was requested.
 //
-    void readahead_expand(struct readahead_control *ractl,
-    loff_t new_start, size_t new_len)
-    {
-    struct address_space *mapping = ractl.mapping;
-    struct file_ra_state *ra = ractl.ra;
+#[no_mangle]
+pub unsafe extern "C" fn readahead_expand(ractl: *mut readahead_control, new_start: loff_t, new_len: size_t) {
+    let mut mapping = ractl.mapping;
+    let mut ra = ractl.ra;
     pgoff_t new_index, new_nr_pages;
-    let mut gfp_mask: gfp_t = readahead_gfp_mask(mapping);
-    let mut min_nrpages: c_ulong = mapping_min_folio_nrpages(mapping);
-    let mut min_order: c_uint = mapping_min_folio_order(mapping);
+pub static mut gfp_mask: gfp_t = 0;
+pub static mut min_nrpages: c_ulong = 0;
+pub static mut min_order: c_uint = 0;
     new_index = new_start / PAGE_SIZE;
 //
 // Readahead code should have aligned the ractl->_index to
@@ -752,13 +1021,15 @@ pub unsafe extern "C" fn ksys_readahead(fd: c_int, offset: loff_t, count: usize)
     VM_BUG_ON(!IS_ALIGNED(ractl._index, min_nrpages));
 // Expand the leading edge downwards
     while (ractl._index > new_index) {
-    let mut index: c_ulong = ractl._index - 1;
-    struct folio *folio = xa_load(&mapping.i_pages, index);
-    if (folio && !xa_is_value(folio))
+pub static mut index: c_ulong = 0;
+    let mut folio = xa_load(&mapping.i_pages, index);
+    if (folio && !xa_is_value(folio)) {
     return; /* Folio apparently present */
+    }
     folio = ractl_alloc_folio(ractl, gfp_mask, min_order);
-    if (!folio)
+    if (!folio) {
     return;
+    }
     index = mapping_align_index(mapping, index);
     if (filemap_add_folio(mapping, folio, index, gfp_mask) < 0) {
     folio_put(folio);
@@ -776,13 +1047,15 @@ pub unsafe extern "C" fn ksys_readahead(fd: c_int, offset: loff_t, count: usize)
     new_nr_pages = DIV_ROUND_UP(new_len, PAGE_SIZE);
 // Expand the trailing edge upwards
     while (ractl._nr_pages < new_nr_pages) {
-    let mut index: c_ulong = ractl._index + ractl._nr_pages;
-    struct folio *folio = xa_load(&mapping.i_pages, index);
-    if (folio && !xa_is_value(folio))
+pub static mut index: c_ulong = 0;
+    let mut folio = xa_load(&mapping.i_pages, index);
+    if (folio && !xa_is_value(folio)) {
     return; /* Folio apparently present */
+    }
     folio = ractl_alloc_folio(ractl, gfp_mask, min_order);
-    if (!folio)
+    if (!folio) {
     return;
+    }
     index = mapping_align_index(mapping, index);
     if (filemap_add_folio(mapping, folio, index, gfp_mask) < 0) {
     folio_put(folio);

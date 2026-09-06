@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -44,40 +294,38 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // This file contains driver APIs to the irq subsystem.
 //
 
-    DEFINE_STATIC_KEY_FALSE(force_irqthreads_key);
+pub static mut force_irqthreads_key: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn setup_forced_irqthreads(arg: *mut c_char) -> int __init {
-    static int __init setup_forced_irqthreads(char *arg)
-    {
+unsafe extern "C" fn setup_forced_irqthreads(arg: *mut c_char) -> c_int {
     static_branch_enable(&force_irqthreads_key);
     return 0;
     }
-    early_param("threadirqs", setup_forced_irqthreads);
+    early_param!("threadirqs", setup_forced_irqthreads);
 
 #[no_mangle]
 pub unsafe extern "C" fn synchronize_irqwork(desc: *mut irq_desc) {
-    static inline void synchronize_irqwork(struct irq_desc *desc)
-    {
 // Synchronize pending or on the fly redirect work
     irq_work_sync(&desc.redirect.work);
     }
 
-    static inline void synchronize_irqwork(struct irq_desc *desc) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: synchronize_irqwork
+pub unsafe extern "C" fn synchronize_irqwork_dup(desc: *mut irq_desc) { }
 
-    static int __irq_get_irqchip_state(struct irq_data *d, enum irqchip_irq_state which, bool *state);
+// forward_decl: __irq_get_irqchip_state;
 #[no_mangle]
 unsafe extern "C" fn __synchronize_hardirq(desc: *mut irq_desc, sync_chip: bool) {
-    static void __synchronize_hardirq(struct irq_desc *desc, bool sync_chip)
-    {
-    struct irq_data *irqd = irq_desc_get_irq_data(desc);
-    bool inprogress;
+    let mut irqd = irq_desc_get_irq_data(desc);
+    let mut inprogress = 0;
     do {
 //
 // Wait until we're out of the critical section.  This might
 // give the wrong answer due to the lack of memory barriers.
 //
-    while (irqd_irq_inprogress(&desc.irq_data))
+    while (irqd_irq_inprogress(&desc.irq_data)) {
     cpu_relax();
+    }
 // Ok, that indicated we're done: double-check carefully.
     guard(raw_spinlock_irqsave)(&desc.lock);
     inprogress = irqd_irq_inprogress(&desc.irq_data);
@@ -120,9 +368,7 @@ unsafe extern "C" fn __synchronize_hardirq(desc: *mut irq_desc, sync_chip: bool)
 //
 #[no_mangle]
 pub unsafe extern "C" fn synchronize_hardirq(irq: c_uint) -> bool {
-    bool synchronize_hardirq(unsigned int irq)
-    {
-    struct irq_desc *desc = irq_to_desc(irq);
+    let mut desc = irq_to_desc(irq);
     if (desc) {
     __synchronize_hardirq(desc, false);
     return !atomic_read(&desc.threads_active);
@@ -132,8 +378,6 @@ pub unsafe extern "C" fn synchronize_hardirq(irq: c_uint) -> bool {
     EXPORT_SYMBOL(synchronize_hardirq);
 #[no_mangle]
 unsafe extern "C" fn __synchronize_irq(desc: *mut irq_desc) {
-    static void __synchronize_irq(struct irq_desc *desc)
-    {
     synchronize_irqwork(desc);
     __synchronize_hardirq(desc, true);
 //
@@ -159,22 +403,20 @@ unsafe extern "C" fn __synchronize_irq(desc: *mut irq_desc) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn synchronize_irq(irq: c_uint) {
-    void synchronize_irq(unsigned int irq)
-    {
-    struct irq_desc *desc = irq_to_desc(irq);
-    if (desc)
+    let mut desc = irq_to_desc(irq);
+    if (desc) {
     __synchronize_irq(desc);
+    }
     }
     EXPORT_SYMBOL(synchronize_irq);
 
-    cpumask_var_t irq_default_affinity;
+    let mut irq_default_affinity;
 #[no_mangle]
 unsafe extern "C" fn __irq_can_set_affinity(desc: *mut irq_desc) -> bool {
-    static bool __irq_can_set_affinity(struct irq_desc *desc)
-    {
     if (!desc || !irqd_can_balance(&desc.irq_data) ||
-    !desc.irq_data.chip || !desc.irq_data.chip.irq_set_affinity)
+    !desc.irq_data.chip || !desc.irq_data.chip.irq_set_affinity) {
     return false;
+    }
     return true;
     }
 //
@@ -183,8 +425,6 @@ unsafe extern "C" fn __irq_can_set_affinity(desc: *mut irq_desc) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn irq_can_set_affinity(irq: c_uint) -> c_int {
-    int irq_can_set_affinity(unsigned int irq)
-    {
     return __irq_can_set_affinity(irq_to_desc(irq));
     }
     EXPORT_SYMBOL_GPL(irq_can_set_affinity);
@@ -197,9 +437,7 @@ pub unsafe extern "C" fn irq_can_set_affinity(irq: c_uint) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn irq_can_set_affinity_usr(irq: c_uint) -> bool {
-    bool irq_can_set_affinity_usr(unsigned int irq)
-    {
-    struct irq_desc *desc = irq_to_desc(irq);
+    let mut desc = irq_to_desc(irq);
     return __irq_can_set_affinity(desc) &&
     !irqd_affinity_is_managed(&desc.irq_data);
     }
@@ -214,9 +452,7 @@ pub unsafe extern "C" fn irq_can_set_affinity_usr(irq: c_uint) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn irq_set_thread_affinity(desc: *mut irq_desc) {
-    static void irq_set_thread_affinity(struct irq_desc *desc)
-    {
-    struct irqaction *action;
+pub static mut action: *mut c_void = core::ptr::null_mut();
     for_each_action_of_desc(desc, action) {
     if (action.thread) {
     set_bit(IRQTF_AFFINITY, &action.thread_flags);
@@ -231,30 +467,29 @@ unsafe extern "C" fn irq_set_thread_affinity(desc: *mut irq_desc) {
 
 #[no_mangle]
 unsafe extern "C" fn irq_validate_effective_affinity(data: *mut irq_data) {
-    static void irq_validate_effective_affinity(struct irq_data *data)
-    {
-    const struct cpumask *m = irq_data_get_effective_affinity_mask(data);
-    struct irq_chip *chip = irq_data_get_irq_chip(data);
-    if (!cpumask_empty(m))
+    let mut m = irq_data_get_effective_affinity_mask(data);
+    let mut chip = irq_data_get_irq_chip(data);
+    if (!cpumask_empty(m)) {
     return;
+    }
     pr_warn_once("irq_chip %s did not update eff. affinity mask of irq %u\n",
     chip.name, data.irq);
     }
 
-    static inline void irq_validate_effective_affinity(struct irq_data *data) { }
+#[no_mangle]
+pub unsafe extern "C" fn irq_validate_effective_affinity(data: *mut irq_data) { }
 
-    static DEFINE_PER_CPU(struct cpumask, __tmp_mask);
+pub static mut struct cpumask: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn irq_do_set_affinity(data: *mut irq_data, mask: *const cpumask, force: bool) -> c_int {
-    int irq_do_set_affinity(struct irq_data *data, const struct cpumask *mask, bool force)
-    {
-    struct cpumask *tmp_mask = this_cpu_ptr(&__tmp_mask);
-    struct irq_desc *desc = irq_data_to_desc(data);
-    struct irq_chip *chip = irq_data_get_irq_chip(data);
-    const struct cpumask  *prog_mask;
-    int ret;
-    if (!chip || !chip.irq_set_affinity)
+    let mut tmp_mask = this_cpu_ptr(&__tmp_mask);
+    let mut desc = irq_data_to_desc(data);
+    let mut chip = irq_data_get_irq_chip(data);
+pub static mut prog_mask: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (!chip || !chip.irq_set_affinity) {
     return -EINVAL;
+    }
 //
 // If this is a managed interrupt and housekeeping is enabled on
 // it check whether the requested affinity mask intersects with
@@ -276,13 +511,15 @@ pub unsafe extern "C" fn irq_do_set_affinity(data: *mut irq_data, mask: *const c
 //
     if (irqd_affinity_is_managed(data) &&
     housekeeping_enabled(HK_TYPE_MANAGED_IRQ)) {
-    const struct cpumask *hk_mask;
+pub static mut hk_mask: *mut c_void = core::ptr::null_mut();
     hk_mask = housekeeping_cpumask(HK_TYPE_MANAGED_IRQ);
     cpumask_and(tmp_mask, mask, hk_mask);
-    if (!cpumask_intersects(tmp_mask, cpu_online_mask))
+    if (!cpumask_intersects(tmp_mask, cpu_online_mask)) {
     prog_mask = mask;
-    else
+    }
+    else {
     prog_mask = tmp_mask;
+    }
     } else {
     prog_mask = mask;
     }
@@ -292,59 +529,63 @@ pub unsafe extern "C" fn irq_do_set_affinity(data: *mut irq_data, mask: *const c
 // case we do as we are told).
 //
     cpumask_and(tmp_mask, prog_mask, cpu_online_mask);
-    if (!force && !cpumask_empty(tmp_mask))
+    if (!force && !cpumask_empty(tmp_mask)) {
     ret = chip.irq_set_affinity(data, tmp_mask, force);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: force) -> else {
-    else if (force)
+    }
+
+    else if (force) {
     ret = chip.irq_set_affinity(data, mask, force);
-    else
+    }
+    else {
     ret = -EINVAL;
-    switch (ret) {
-    case IRQ_SET_MASK_OK:
-    case IRQ_SET_MASK_OK_DONE:
+    }
+    match (ret) {
+    IRQ_SET_MASK_OK => {
+    }
+    IRQ_SET_MASK_OK_DONE => {
     cpumask_copy(desc.irq_common_data.affinity, mask);
     fallthrough;
-    case IRQ_SET_MASK_OK_NOCOPY:
+    }
+    IRQ_SET_MASK_OK_NOCOPY => {
     irq_validate_effective_affinity(data);
     irq_set_thread_affinity(desc);
     ret = 0;
     }
+    }
     return ret;
     }
 
-    static inline int irq_set_affinity_pending(struct irq_data *data,
-    const struct cpumask *dest)
-    {
-    struct irq_desc *desc = irq_data_to_desc(data);
+#[no_mangle]
+pub unsafe extern "C" fn irq_set_affinity_pending(data: *mut irq_data, dest: *mut cpumask) -> c_int {
+    let mut desc = irq_data_to_desc(data);
     irqd_set_move_pending(data);
     irq_copy_pending(desc, dest);
     return 0;
     }
 
-    static inline int irq_set_affinity_pending(struct irq_data *data,
-    const struct cpumask *dest)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: irq_set_affinity_pending
+pub unsafe extern "C" fn irq_set_affinity_pending_dup(data: *mut irq_data, dest: *mut cpumask) -> c_int {
     return -EBUSY;
     }
 
-    static int irq_try_set_affinity(struct irq_data *data,
-    const struct cpumask *dest, bool force)
-    {
-    let mut ret: c_int = irq_do_set_affinity(data, dest, force);
+#[no_mangle]
+pub unsafe extern "C" fn irq_try_set_affinity(data: *mut irq_data, dest: *mut cpumask, force: bool) -> c_int {
+pub static mut ret: c_int = 0;
 //
 // In case that the underlying vector management is busy and the
 // architecture supports the generic pending mechanism then utilize
 // this to avoid returning an error to user space.
 //
-    if (ret == -EBUSY && !force)
+    if (ret == -EBUSY && !force) {
     ret = irq_set_affinity_pending(data, dest);
+    }
     return ret;
     }
-    static bool irq_set_affinity_deactivated(struct irq_data *data,
-    const struct cpumask *mask)
-    {
-    struct irq_desc *desc = irq_data_to_desc(data);
+#[no_mangle]
+pub unsafe extern "C" fn irq_set_affinity_deactivated(data: *mut irq_data, mask: *mut cpumask) -> bool {
+    let mut desc = irq_data_to_desc(data);
 //
 // Handle irq chips which can handle affinity only in activated
 // state correctly
@@ -354,9 +595,10 @@ pub unsafe extern "C" fn if(_arg: force) -> else {
 // driver has to make sure anyway that the interrupt is in a
 // usable state so startup works.
 //
-    if (!IS_ENABLED(CONFIG_IRQ_DOMAIN_HIERARCHY) ||
-    irqd_is_activated(data) || !irqd_affinity_on_activate(data))
+    if (!IS_ENABLED!(CONFIG_IRQ_DOMAIN_HIERARCHY) ||
+    irqd_is_activated(data) || !irqd_affinity_on_activate(data)) {
     return false;
+    }
     cpumask_copy(desc.irq_common_data.affinity, mask);
     irq_data_update_effective_affinity(data, mask);
     irqd_set(data, IRQD_AFFINITY_SET);
@@ -368,8 +610,6 @@ pub unsafe extern "C" fn if(_arg: force) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn irq_affinity_schedule_notify_work(desc: *mut irq_desc) {
-    void irq_affinity_schedule_notify_work(struct irq_desc *desc)
-    {
     lockdep_assert_held(&desc.lock);
     kref_get(&desc.affinity_notify.kref);
     if (!schedule_work(&desc.affinity_notify.work)) {
@@ -377,24 +617,26 @@ pub unsafe extern "C" fn irq_affinity_schedule_notify_work(desc: *mut irq_desc) 
     kref_put(&desc.affinity_notify.kref, desc.affinity_notify.release);
     }
     }
-    int irq_set_affinity_locked(struct irq_data *data, const struct cpumask *mask,
-    bool force)
-    {
-    struct irq_chip *chip = irq_data_get_irq_chip(data);
-    struct irq_desc *desc = irq_data_to_desc(data);
-    let mut ret: c_int = 0;
-    if (!chip || !chip.irq_set_affinity)
+#[no_mangle]
+pub unsafe extern "C" fn irq_set_affinity_locked(data: *mut irq_data, mask: *mut cpumask, force: bool) -> c_int {
+    let mut chip = irq_data_get_irq_chip(data);
+    let mut desc = irq_data_to_desc(data);
+pub static mut ret: c_int = 0;
+    if (!chip || !chip.irq_set_affinity) {
     return -EINVAL;
-    if (irq_set_affinity_deactivated(data, mask))
+    }
+    if (irq_set_affinity_deactivated(data, mask)) {
     return 0;
+    }
     if (irq_can_move_pcntxt(data) && !irqd_is_setaffinity_pending(data)) {
     ret = irq_try_set_affinity(data, mask, force);
     } else {
     irqd_set_move_pending(data);
     irq_copy_pending(desc, mask);
     }
-    if (desc.affinity_notify)
+    if (desc.affinity_notify) {
     irq_affinity_schedule_notify_work(desc);
+    }
     irqd_set(data, IRQD_AFFINITY_SET);
     return ret;
     }
@@ -415,48 +657,51 @@ pub unsafe extern "C" fn irq_affinity_schedule_notify_work(desc: *mut irq_desc) 
 //
 #[no_mangle]
 pub unsafe extern "C" fn irq_update_affinity_desc(irq: c_uint, affinity: *mut irq_affinity_desc) -> c_int {
-    int irq_update_affinity_desc(unsigned int irq, struct irq_affinity_desc *affinity)
-    {
 //
 // Supporting this with the reservation scheme used by x86 needs
 // some more thought. Fail it for now.
 //
-    if (IS_ENABLED(CONFIG_GENERIC_IRQ_RESERVATION_MODE))
+    if (IS_ENABLED!(CONFIG_GENERIC_IRQ_RESERVATION_MODE)) {
     return -EOPNOTSUPP;
+    }
     scoped_irqdesc_get_and_buslock(irq, 0) {
-    struct irq_desc *desc = scoped_irqdesc;
-    bool activated;
+    let mut desc = scoped_irqdesc;
+    let mut activated = 0;
 // Requires the interrupt to be shut down
-    if (irqd_is_started(&desc.irq_data))
+    if (irqd_is_started(&desc.irq_data)) {
     return -EBUSY;
+    }
 // Interrupts which are already managed cannot be modified
-    if (irqd_affinity_is_managed(&desc.irq_data))
+    if (irqd_affinity_is_managed(&desc.irq_data)) {
     return -EBUSY;
+    }
 //
 // Deactivate the interrupt. That's required to undo
 // anything an earlier activation has established.
 //
     activated = irqd_is_activated(&desc.irq_data);
-    if (activated)
+    if (activated) {
     irq_domain_deactivate_irq(&desc.irq_data);
+    }
     if (affinity.is_managed) {
     irqd_set(&desc.irq_data, IRQD_AFFINITY_MANAGED);
     irqd_set(&desc.irq_data, IRQD_MANAGED_SHUTDOWN);
     }
     cpumask_copy(desc.irq_common_data.affinity, &affinity.mask);
 // Restore the activation state
-    if (activated)
+    if (activated) {
     irq_domain_activate_irq(&desc.irq_data, false);
+    }
     return 0;
     }
     return -EINVAL;
     }
-    static int __irq_set_affinity(unsigned int irq, const struct cpumask *mask,
-    bool force)
-    {
-    struct irq_desc *desc = irq_to_desc(irq);
-    if (!desc)
+#[no_mangle]
+pub unsafe extern "C" fn __irq_set_affinity(irq: c_uint, mask: *mut cpumask, force: bool) -> c_int {
+    let mut desc = irq_to_desc(irq);
+    if (!desc) {
     return -EINVAL;
+    }
     guard(raw_spinlock_irqsave)(&desc.lock);
     return irq_set_affinity_locked(irq_desc_get_irq_data(desc), mask, force);
     }
@@ -469,8 +714,6 @@ pub unsafe extern "C" fn irq_update_affinity_desc(irq: c_uint, affinity: *mut ir
 //
 #[no_mangle]
 pub unsafe extern "C" fn irq_set_affinity(irq: c_uint, cpumask: *const cpumask) -> c_int {
-    int irq_set_affinity(unsigned int irq, const struct cpumask *cpumask)
-    {
     return __irq_set_affinity(irq, cpumask, false);
     }
     EXPORT_SYMBOL_GPL(irq_set_affinity);
@@ -487,43 +730,41 @@ pub unsafe extern "C" fn irq_set_affinity(irq: c_uint, cpumask: *const cpumask) 
 //
 #[no_mangle]
 pub unsafe extern "C" fn irq_force_affinity(irq: c_uint, cpumask: *const cpumask) -> c_int {
-    int irq_force_affinity(unsigned int irq, const struct cpumask *cpumask)
-    {
     return __irq_set_affinity(irq, cpumask, true);
     }
     EXPORT_SYMBOL_GPL(irq_force_affinity);
 #[no_mangle]
 pub unsafe extern "C" fn __irq_apply_affinity_hint(irq: c_uint, m: *const cpumask, setaffinity: bool) -> c_int {
-    int __irq_apply_affinity_hint(unsigned int irq, const struct cpumask *m, bool setaffinity)
-    {
-    let mut ret: c_int = -EINVAL;
+pub static mut ret: c_int = 0;
     scoped_irqdesc_get_and_lock(irq, IRQ_GET_DESC_CHECK_GLOBAL) {
     scoped_irqdesc.affinity_hint = m;
     ret = 0;
     }
-    if (!ret && m && setaffinity)
+    if (!ret && m && setaffinity) {
     __irq_set_affinity(irq, m, false);
+    }
     return ret;
     }
     EXPORT_SYMBOL_GPL(__irq_apply_affinity_hint);
 #[no_mangle]
 unsafe extern "C" fn irq_affinity_notify(work: *mut work_struct) {
-    static void irq_affinity_notify(struct work_struct *work)
-    {
-    struct irq_affinity_notify *notify = container_of(work, struct irq_affinity_notify, work);
-    struct irq_desc *desc = irq_to_desc(notify.irq);
-    cpumask_var_t cpumask;
-    if (!desc || !alloc_cpumask_var(&cpumask, GFP_KERNEL))
-    goto out;
+    let mut notify = container_of!(work, irq_affinity_notify, work);
+    let mut desc = irq_to_desc(notify.irq);
+    let mut cpumask;
+    if (!desc || !alloc_cpumask_var(&cpumask, GFP_KERNEL)) {
+// goto;
+    }
     scoped_guard(raw_spinlock_irqsave, &desc.lock) {
-    if (irq_move_pending(&desc.irq_data))
+    if (irq_move_pending(&desc.irq_data)) {
     irq_get_pending(cpumask, desc);
-    else
+    }
+    else {
     cpumask_copy(cpumask, desc.irq_common_data.affinity);
+    }
     }
     notify.notify(notify, cpumask);
     free_cpumask_var(cpumask);
-    out:
+// label;
     kref_put(&notify.kref, notify.release);
     }
 //
@@ -539,14 +780,13 @@ unsafe extern "C" fn irq_affinity_notify(work: *mut work_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn irq_set_affinity_notifier(irq: c_uint, notify: *mut irq_affinity_notify) -> c_int {
-    int irq_set_affinity_notifier(unsigned int irq, struct irq_affinity_notify *notify)
-    {
-    struct irq_desc *desc = irq_to_desc(irq);
-    struct irq_affinity_notify *old_notify;
+    let mut desc = irq_to_desc(irq);
+pub static mut old_notify: *mut c_void = core::ptr::null_mut();
 // The release function is promised process context
     might_sleep();
-    if (!desc || irq_is_nmi(desc))
+    if (!desc || irq_is_nmi(desc)) {
     return -EINVAL;
+    }
 // Complete initialisation of *notify
     if (notify) {
     notify.irq = irq;
@@ -573,15 +813,14 @@ pub unsafe extern "C" fn irq_set_affinity_notifier(irq: c_uint, notify: *mut irq
 //
 #[no_mangle]
 pub unsafe extern "C" fn irq_setup_affinity(desc: *mut irq_desc) -> c_int {
-    int irq_setup_affinity(struct irq_desc *desc)
-    {
-    struct cpumask *set = irq_default_affinity;
-    let mut node: c_int = irq_desc_get_node(desc);
-    static DEFINE_RAW_SPINLOCK(mask_lock);
-    static struct cpumask mask;
+    let mut set = irq_default_affinity;
+pub static mut node: c_int = 0;
+pub static mut mask_lock: usize = 0;
+pub static mut mask: usize = 0;
 // Excludes PER_CPU and NO_BALANCE interrupts
-    if (!__irq_can_set_affinity(desc))
+    if (!__irq_can_set_affinity(desc)) {
     return 0;
+    }
     guard(raw_spinlock)(&mask_lock);
 //
 // Preserve the managed affinity setting and a userspace affinity
@@ -590,28 +829,32 @@ pub unsafe extern "C" fn irq_setup_affinity(desc: *mut irq_desc) -> c_int {
     if (irqd_affinity_is_managed(&desc.irq_data) ||
     irqd_has_set(&desc.irq_data, IRQD_AFFINITY_SET)) {
     if (cpumask_intersects(desc.irq_common_data.affinity,
-    cpu_online_mask))
+    cpu_online_mask)) {
     set = desc.irq_common_data.affinity;
-    else
+    }
+    else {
     irqd_clear(&desc.irq_data, IRQD_AFFINITY_SET);
     }
+    }
     cpumask_and(&mask, cpu_online_mask, set);
-    if (cpumask_empty(&mask))
+    if (cpumask_empty(&mask)) {
     cpumask_copy(&mask, cpu_online_mask);
+    }
     if (node != NUMA_NO_NODE) {
-    const struct cpumask *nodemask = cpumask_of_node(node);
+    let mut nodemask = cpumask_of_node(node);
 // make sure at least one of the cpus in nodemask is online
-    if (cpumask_intersects(&mask, nodemask))
+    if (cpumask_intersects(&mask, nodemask)) {
     cpumask_and(&mask, &mask, nodemask);
+    }
     }
     return irq_do_set_affinity(&desc.irq_data, &mask, false);
     }
 
 // Wrapper for ALPHA specific affinity selector magic
 #[no_mangle]
-pub unsafe extern "C" fn irq_setup_affinity(desc: *mut irq_desc) -> c_int {
-    int irq_setup_affinity(struct irq_desc *desc)
-    {
+#[no_mangle]
+// duplicate fn: irq_setup_affinity
+pub unsafe extern "C" fn irq_setup_affinity_dup(desc: *mut irq_desc) -> c_int {
     return irq_select_affinity(irq_desc_get_irq(desc));
     }
 
@@ -627,21 +870,21 @@ pub unsafe extern "C" fn irq_setup_affinity(desc: *mut irq_desc) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn irq_set_vcpu_affinity(irq: c_uint, vcpu_info: *mut c_void) -> c_int {
-    int irq_set_vcpu_affinity(unsigned int irq, void *vcpu_info)
-    {
     scoped_irqdesc_get_and_lock(irq, 0) {
-    struct irq_desc *desc = scoped_irqdesc;
-    struct irq_data *data;
-    struct irq_chip *chip;
+    let mut desc = scoped_irqdesc;
+pub static mut data: *mut c_void = core::ptr::null_mut();
+pub static mut chip: *mut c_void = core::ptr::null_mut();
     data = irq_desc_get_irq_data(desc);
     do {
     chip = irq_data_get_irq_chip(data);
-    if (chip && chip.irq_set_vcpu_affinity)
+    if (chip && chip.irq_set_vcpu_affinity) {
     break;
+    }
     data = irqd_get_parent_data(data);
     } while (data);
-    if (!data)
+    if (!data) {
     return -ENOSYS;
+    }
     return chip.irq_set_vcpu_affinity(data, vcpu_info);
     }
     return -EINVAL;
@@ -649,15 +892,12 @@ pub unsafe extern "C" fn irq_set_vcpu_affinity(irq: c_uint, vcpu_info: *mut c_vo
     EXPORT_SYMBOL_GPL(irq_set_vcpu_affinity);
 #[no_mangle]
 pub unsafe extern "C" fn __disable_irq(desc: *mut irq_desc) {
-    void __disable_irq(struct irq_desc *desc)
-    {
-    if (!desc.depth++)
+    if (!desc.depth++) {
     irq_disable(desc);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn __disable_irq_nosync(irq: c_uint) -> c_int {
-    static int __disable_irq_nosync(unsigned int irq)
-    {
     scoped_irqdesc_get_and_buslock(irq, IRQ_GET_DESC_CHECK_GLOBAL) {
     __disable_irq(scoped_irqdesc);
     return 0;
@@ -677,8 +917,6 @@ unsafe extern "C" fn __disable_irq_nosync(irq: c_uint) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn disable_irq_nosync(irq: c_uint) {
-    void disable_irq_nosync(unsigned int irq)
-    {
     __disable_irq_nosync(irq);
     }
     EXPORT_SYMBOL(disable_irq_nosync);
@@ -697,11 +935,10 @@ pub unsafe extern "C" fn disable_irq_nosync(irq: c_uint) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn disable_irq(irq: c_uint) {
-    void disable_irq(unsigned int irq)
-    {
     might_sleep();
-    if (!__disable_irq_nosync(irq))
+    if (!__disable_irq_nosync(irq)) {
     synchronize_irq(irq);
+    }
     }
     EXPORT_SYMBOL(disable_irq);
 //
@@ -723,10 +960,9 @@ pub unsafe extern "C" fn disable_irq(irq: c_uint) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn disable_hardirq(irq: c_uint) -> bool {
-    bool disable_hardirq(unsigned int irq)
-    {
-    if (!__disable_irq_nosync(irq))
+    if (!__disable_irq_nosync(irq)) {
     return synchronize_hardirq(irq);
+    }
     return false;
     }
     EXPORT_SYMBOL_GPL(disable_hardirq);
@@ -742,23 +978,21 @@ pub unsafe extern "C" fn disable_hardirq(irq: c_uint) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn disable_nmi_nosync(irq: c_uint) {
-    void disable_nmi_nosync(unsigned int irq)
-    {
     disable_irq_nosync(irq);
     }
 #[no_mangle]
 pub unsafe extern "C" fn __enable_irq(desc: *mut irq_desc) {
-    void __enable_irq(struct irq_desc *desc)
-    {
-    switch (desc.depth) {
-    case 0:
-    err_out:
-    WARN(1, KERN_WARNING "Unbalanced enable for IRQ %d\n",
+    match (desc.depth) {
+    0 => {
+// label;
+    WARN(1, "Unbalanced enable for IRQ %d\n",
     irq_desc_get_irq(desc));
-    break;
-    case 1: {
-    if (desc.istate & IRQS_SUSPENDED)
-    goto err_out;
+    // break;
+    }
+    1 => {
+    if (desc.istate & IRQS_SUSPENDED) {
+// goto;
+    }
 // Prevent probing on this irq:
     irq_settings_set_noprobe(desc);
 //
@@ -773,10 +1007,11 @@ pub unsafe extern "C" fn __enable_irq(desc: *mut irq_desc) {
 // invoke irq_enable() under the hood.
 //
     irq_startup(desc, IRQ_RESEND, IRQ_START_FORCE);
-    break;
+    // break;
     }
-    default:
-    desc.depth--;
+    }
+// label;
+    desc.depth -= 1;
     }
     }
 //
@@ -791,12 +1026,11 @@ pub unsafe extern "C" fn __enable_irq(desc: *mut irq_desc) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn enable_irq(irq: c_uint) {
-    void enable_irq(unsigned int irq)
-    {
     scoped_irqdesc_get_and_buslock(irq, IRQ_GET_DESC_CHECK_GLOBAL) {
-    struct irq_desc *desc = scoped_irqdesc;
-    if (WARN(!desc.irq_data.chip, "enable_irq before setup/request_irq: irq %u\n", irq))
+    let mut desc = scoped_irqdesc;
+    if (WARN(!desc.irq_data.chip, "enable_irq before setup/request_irq: irq %u\n", irq)) {
     return;
+    }
     __enable_irq(desc);
     }
     }
@@ -811,20 +1045,18 @@ pub unsafe extern "C" fn enable_irq(irq: c_uint) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn enable_nmi(irq: c_uint) {
-    void enable_nmi(unsigned int irq)
-    {
     enable_irq(irq);
     }
 #[no_mangle]
 unsafe extern "C" fn set_irq_wake_real(irq: c_uint, on: c_uint) -> c_int {
-    static int set_irq_wake_real(unsigned int irq, unsigned int on)
-    {
-    struct irq_desc *desc = irq_to_desc(irq);
-    let mut ret: c_int = -ENXIO;
-    if (irq_desc_get_chip(desc).flags &  IRQCHIP_SKIP_SET_WAKE)
+    let mut desc = irq_to_desc(irq);
+pub static mut ret: c_int = 0;
+    if (irq_desc_get_chip(desc).flags &  IRQCHIP_SKIP_SET_WAKE) {
     return 0;
-    if (desc.irq_data.chip.irq_set_wake)
+    }
+    if (desc.irq_data.chip.irq_set_wake) {
     ret = desc.irq_data.chip.irq_set_wake(&desc.irq_data, on);
+    }
     return ret;
     }
 //
@@ -847,14 +1079,13 @@ unsafe extern "C" fn set_irq_wake_real(irq: c_uint, on: c_uint) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn irq_set_irq_wake(irq: c_uint, on: c_uint) -> c_int {
-    int irq_set_irq_wake(unsigned int irq, unsigned int on)
-    {
     scoped_irqdesc_get_and_buslock(irq, IRQ_GET_DESC_CHECK_GLOBAL) {
-    struct irq_desc *desc = scoped_irqdesc;
-    let mut ret: c_int = 0;
+    let mut desc = scoped_irqdesc;
+pub static mut ret: c_int = 0;
 // Don't use NMIs as wake up interrupts please
-    if (irq_is_nmi(desc))
+    if (irq_is_nmi(desc)) {
     return -EINVAL;
+    }
 //
 // wakeup-capable irqs can be shared between drivers that
 // don't need to have the same sleep mode behaviors.
@@ -862,20 +1093,24 @@ pub unsafe extern "C" fn irq_set_irq_wake(irq: c_uint, on: c_uint) -> c_int {
     if (on) {
     if (desc.wake_depth++ == 0) {
     ret = set_irq_wake_real(irq, on);
-    if (ret)
+    if (ret) {
     desc.wake_depth = 0;
-    else
+    }
+    else {
     irqd_set(&desc.irq_data, IRQD_WAKEUP_STATE);
+    }
     }
     } else {
     if (desc.wake_depth == 0) {
     WARN(1, "Unbalanced IRQ %d wake disable\n", irq);
     } else if (--desc.wake_depth == 0) {
     ret = set_irq_wake_real(irq, on);
-    if (ret)
+    if (ret) {
     desc.wake_depth = 1;
-    else
+    }
+    else {
     irqd_clear(&desc.irq_data, IRQD_WAKEUP_STATE);
+    }
     }
     }
     return ret;
@@ -890,49 +1125,50 @@ pub unsafe extern "C" fn irq_set_irq_wake(irq: c_uint, on: c_uint) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn can_request_irq(irq: c_uint, irqflags: c_ulong) -> bool {
-    bool can_request_irq(unsigned int irq, unsigned long irqflags)
-    {
     scoped_irqdesc_get_and_lock(irq, IRQ_GET_DESC_CHECK_GLOBAL) {
-    struct irq_desc *desc = scoped_irqdesc;
+    let mut desc = scoped_irqdesc;
     if (irq_settings_can_request(desc)) {
-    if (!desc.action || irqflags & desc.action.flags & IRQF_SHARED)
+    if (!desc.action || irqflags & desc.action.flags & IRQF_SHARED) {
     return true;
+    }
     }
     }
     return false;
     }
 #[no_mangle]
 pub unsafe extern "C" fn __irq_set_trigger(desc: *mut irq_desc, flags: c_ulong) -> c_int {
-    int __irq_set_trigger(struct irq_desc *desc, unsigned long flags)
-    {
-    struct irq_chip *chip = desc.irq_data.chip;
+    let mut chip = desc.irq_data.chip;
     int ret, unmask = 0;
     if (!chip || !chip.irq_set_type) {
 //
 // IRQF_TRIGGER_* but the PIC does not support multiple
 // flow-types?
 //
-    pr_debug("No set_type function for IRQ %d (%s)\n",
+    pr_debug!("No set_type function for IRQ %d (%s)\n",
     irq_desc_get_irq(desc),
     chip ? (chip.name ? : "unknown") : "unknown");
     return 0;
     }
     if (chip.flags & IRQCHIP_SET_TYPE_MASKED) {
-    if (!irqd_irq_masked(&desc.irq_data))
+    if (!irqd_irq_masked(&desc.irq_data)) {
     mask_irq(desc);
-    if (!irqd_irq_disabled(&desc.irq_data))
+    }
+    if (!irqd_irq_disabled(&desc.irq_data)) {
     unmask = 1;
+    }
     }
 // Mask all flags except trigger mode
     flags &= IRQ_TYPE_SENSE_MASK;
     ret = chip.irq_set_type(&desc.irq_data, flags);
-    switch (ret) {
-    case IRQ_SET_MASK_OK:
-    case IRQ_SET_MASK_OK_DONE:
+    match (ret) {
+    IRQ_SET_MASK_OK => {
+    }
+    IRQ_SET_MASK_OK_DONE => {
     irqd_clear(&desc.irq_data, IRQD_TRIGGER_MASK);
     irqd_set(&desc.irq_data, flags);
     fallthrough;
-    case IRQ_SET_MASK_OK_NOCOPY:
+    }
+    IRQ_SET_MASK_OK_NOCOPY => {
     flags = irqd_get_trigger_type(&desc.irq_data);
     irq_settings_set_trigger_mask(desc, flags);
     irqd_clear(&desc.irq_data, IRQD_LEVEL);
@@ -942,20 +1178,21 @@ pub unsafe extern "C" fn __irq_set_trigger(desc: *mut irq_desc, flags: c_ulong) 
     irqd_set(&desc.irq_data, IRQD_LEVEL);
     }
     ret = 0;
-    break;
-    default:
-    pr_err("Setting trigger mode %lu for irq %u failed (%pS)\n",
+    // break;
+    }
+    _ => {
+    pr_err!("Setting trigger mode %lu for irq %u failed (%pS)\n",
     flags, irq_desc_get_irq(desc), chip.irq_set_type);
     }
-    if (unmask)
+    }
+    if (unmask) {
     unmask_irq(desc);
+    }
     return ret;
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn irq_set_parent(irq: c_int, parent_irq: c_int) -> c_int {
-    int irq_set_parent(int irq, int parent_irq)
-    {
     scoped_irqdesc_get_and_lock(irq, 0) {
     scoped_irqdesc.parent_irq = parent_irq;
     return 0;
@@ -971,8 +1208,6 @@ pub unsafe extern "C" fn irq_set_parent(irq: c_int, parent_irq: c_int) -> c_int 
 //
 #[no_mangle]
 unsafe extern "C" fn irq_default_primary_handler(irq: c_int, dev_id: *mut c_void) -> irqreturn_t {
-    static irqreturn_t irq_default_primary_handler(int irq, void *dev_id)
-    {
     return IRQ_WAKE_THREAD;
     }
 //
@@ -981,15 +1216,11 @@ unsafe extern "C" fn irq_default_primary_handler(irq: c_int, dev_id: *mut c_void
 //
 #[no_mangle]
 unsafe extern "C" fn irq_nested_primary_handler(irq: c_int, dev_id: *mut c_void) -> irqreturn_t {
-    static irqreturn_t irq_nested_primary_handler(int irq, void *dev_id)
-    {
     WARN(1, "Primary handler called for nested irq %d\n", irq);
     return IRQ_NONE;
     }
 #[no_mangle]
 unsafe extern "C" fn irq_forced_secondary_handler(irq: c_int, dev_id: *mut c_void) -> irqreturn_t {
-    static irqreturn_t irq_forced_secondary_handler(int irq, void *dev_id)
-    {
     WARN(1, "Secondary action handler called for irq %d\n", irq);
     return IRQ_NONE;
     }
@@ -999,11 +1230,10 @@ unsafe extern "C" fn irq_forced_secondary_handler(irq: c_int, dev_id: *mut c_voi
 //
 #[no_mangle]
 unsafe extern "C" fn irq_thread_check_affinity(desc: *mut irq_desc, action: *mut irqaction) {
-    static void irq_thread_check_affinity(struct irq_desc *desc, struct irqaction *action)
-    {
-    cpumask_var_t mask;
-    if (!test_and_clear_bit(IRQTF_AFFINITY, &action.thread_flags))
+    let mut mask;
+    if (!test_and_clear_bit(IRQTF_AFFINITY, &action.thread_flags)) {
     return;
+    }
     __set_current_state(TASK_RUNNING);
 //
 // In case we are out of memory we set IRQTF_AFFINITY again and
@@ -1014,7 +1244,7 @@ unsafe extern "C" fn irq_thread_check_affinity(desc: *mut irq_desc, action: *mut
     return;
     }
     scoped_guard(raw_spinlock_irq, &desc.lock) {
-    const struct cpumask *m;
+pub static mut m: *mut c_void = core::ptr::null_mut();
     m = irq_data_get_effective_affinity_mask(&desc.irq_data);
     cpumask_copy(mask, m);
     }
@@ -1022,11 +1252,11 @@ unsafe extern "C" fn irq_thread_check_affinity(desc: *mut irq_desc, action: *mut
     free_cpumask_var(mask);
     }
 
-    static inline void irq_thread_check_affinity(struct irq_desc *desc, struct irqaction *action) { }
+#[no_mangle]
+pub unsafe extern "C" fn irq_thread_check_affinity(desc: *mut irq_desc, action: *mut irqaction) { }
 
-    static int irq_wait_for_interrupt(struct irq_desc *desc,
-    struct irqaction *action)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn irq_wait_for_interrupt(desc: *mut irq_desc, action: *mut irqaction) -> c_int {
     for (;;) {
     set_current_state(TASK_INTERRUPTIBLE);
     irq_thread_check_affinity(desc, action);
@@ -1053,13 +1283,13 @@ unsafe extern "C" fn irq_thread_check_affinity(desc: *mut irq_desc, action: *mut
 // handler finished. unmask if the interrupt has not been disabled and
 // is marked MASKED.
 //
-    static void irq_finalize_oneshot(struct irq_desc *desc,
-    struct irqaction *action)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn irq_finalize_oneshot(desc: *mut irq_desc, action: *mut irqaction) {
     if (!(desc.istate & IRQS_ONESHOT) ||
-    action.handler == irq_forced_secondary_handler)
+    action.handler == irq_forced_secondary_handler) {
     return;
-    again:
+    }
+// label;
     chip_bus_lock(desc);
     raw_spin_lock_irq(&desc.lock);
 //
@@ -1080,20 +1310,22 @@ unsafe extern "C" fn irq_thread_check_affinity(desc: *mut irq_desc, action: *mut
     raw_spin_unlock_irq(&desc.lock);
     chip_bus_sync_unlock(desc);
     cpu_relax();
-    goto again;
+// goto;
     }
 //
 // Now check again, whether the thread should run. Otherwise
 // we would clear the threads_oneshot bit of this thread which
 // was just set.
 //
-    if (test_bit(IRQTF_RUNTHREAD, &action.thread_flags))
-    goto out_unlock;
+    if (test_bit(IRQTF_RUNTHREAD, &action.thread_flags)) {
+// goto;
+    }
     desc.threads_oneshot &= ~action.thread_mask;
     if (!desc.threads_oneshot && !irqd_irq_disabled(&desc.irq_data) &&
-    irqd_irq_masked(&desc.irq_data))
+    irqd_irq_masked(&desc.irq_data)) {
     unmask_threaded_irq(desc);
-    out_unlock:
+    }
+// label;
     raw_spin_unlock_irq(&desc.lock);
     chip_bus_sync_unlock(desc);
     }
@@ -1104,11 +1336,10 @@ unsafe extern "C" fn irq_thread_check_affinity(desc: *mut irq_desc, action: *mut
 //
 #[no_mangle]
 unsafe extern "C" fn irq_thread_fn(desc: *mut irq_desc, action: *mut irqaction) -> irqreturn_t {
-    static irqreturn_t irq_thread_fn(struct irq_desc *desc,	struct irqaction *action)
-    {
-    let mut ret: irqreturn_t = action.thread_fn(action.irq, action.dev_id);
-    if (ret == IRQ_HANDLED)
+pub static mut ret: irqreturn_t = 0;
+    if (ret == IRQ_HANDLED) {
     atomic_inc(&desc.threads_handled);
+    }
     irq_finalize_oneshot(desc, action);
     return ret;
     }
@@ -1120,63 +1351,60 @@ unsafe extern "C" fn irq_thread_fn(desc: *mut irq_desc, action: *mut irqaction) 
 //
 #[no_mangle]
 unsafe extern "C" fn irq_forced_thread_fn(desc: *mut irq_desc, action: *mut irqaction) -> irqreturn_t {
-    static irqreturn_t irq_forced_thread_fn(struct irq_desc *desc, struct irqaction *action)
-    {
-    irqreturn_t ret;
+    let mut ret;
     local_bh_disable();
-    if (!IS_ENABLED(CONFIG_PREEMPT_RT))
+    if (!IS_ENABLED!(CONFIG_PREEMPT_RT)) {
     local_irq_disable();
+    }
     ret = irq_thread_fn(desc, action);
-    if (!IS_ENABLED(CONFIG_PREEMPT_RT))
+    if (!IS_ENABLED!(CONFIG_PREEMPT_RT)) {
     local_irq_enable();
+    }
     local_bh_enable();
     return ret;
     }
 #[no_mangle]
 pub unsafe extern "C" fn wake_threads_waitq(desc: *mut irq_desc) {
-    void wake_threads_waitq(struct irq_desc *desc)
-    {
-    if (atomic_dec_and_test(&desc.threads_active))
+    if (atomic_dec_and_test(&desc.threads_active)) {
     wake_up(&desc.wait_for_threads);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn irq_thread_dtor(unused: *mut callback_head) {
-    static void irq_thread_dtor(struct callback_head *unused)
-    {
-    struct task_struct *tsk = current;
-    struct irq_desc *desc;
-    struct irqaction *action;
-    if (WARN_ON_ONCE(!(current.flags & PF_EXITING)))
+    let mut tsk = current;
+pub static mut desc: *mut c_void = core::ptr::null_mut();
+pub static mut action: *mut c_void = core::ptr::null_mut();
+    if (WARN_ON_ONCE!(!(current.flags & PF_EXITING))) {
     return;
+    }
     action = kthread_data(tsk);
-    pr_err("exiting task \"%s\" (%d) is an active IRQ thread (irq %d)\n",
+    pr_err!("exiting task \"%s\" (%d) is an active IRQ thread (irq %d)\n",
     tsk.comm, tsk.pid, action.irq);
     desc = irq_to_desc(action.irq);
 //
 // If IRQTF_RUNTHREAD is set, we need to decrement
 // desc->threads_active and wake possible waiters.
 //
-    if (test_and_clear_bit(IRQTF_RUNTHREAD, &action.thread_flags))
+    if (test_and_clear_bit(IRQTF_RUNTHREAD, &action.thread_flags)) {
     wake_threads_waitq(desc);
+    }
 // Prevent a stale desc->threads_oneshot
     irq_finalize_oneshot(desc, action);
     }
 #[no_mangle]
 unsafe extern "C" fn irq_wake_secondary(desc: *mut irq_desc, action: *mut irqaction) {
-    static void irq_wake_secondary(struct irq_desc *desc, struct irqaction *action)
-    {
-    struct irqaction *secondary = action.secondary;
-    if (WARN_ON_ONCE(!secondary))
+    let mut secondary = action.secondary;
+    if (WARN_ON_ONCE!(!secondary)) {
     return;
+    }
     guard(raw_spinlock_irq)(&desc.lock);
     __irq_wake_thread(desc, secondary);
     }
 //
 // Internal function to notify that a interrupt thread is ready.
 //
-    static void irq_thread_set_ready(struct irq_desc *desc,
-    struct irqaction *action)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn irq_thread_set_ready(desc: *mut irq_desc, action: *mut irqaction) {
     set_bit(IRQTF_READY, &action.thread_flags);
     wake_up(&desc.wait_for_threads);
     }
@@ -1184,11 +1412,11 @@ unsafe extern "C" fn irq_wake_secondary(desc: *mut irq_desc, action: *mut irqact
 // Internal function to wake up a interrupt thread and wait until it is
 // ready.
 //
-    static void wake_up_and_wait_for_irq_thread_ready(struct irq_desc *desc,
-    struct irqaction *action)
-    {
-    if (!action || !action.thread)
+#[no_mangle]
+pub unsafe extern "C" fn wake_up_and_wait_for_irq_thread_ready(desc: *mut irq_desc, action: *mut irqaction) {
+    if (!action || !action.thread) {
     return;
+    }
     wake_up_process(action.thread);
     wait_event(desc.wait_for_threads,
     test_bit(IRQTF_READY, &action.thread_flags));
@@ -1198,30 +1426,32 @@ unsafe extern "C" fn irq_wake_secondary(desc: *mut irq_desc, action: *mut irqact
 //
 #[no_mangle]
 unsafe extern "C" fn irq_thread(data: *mut c_void) -> c_int {
-    static int irq_thread(void *data)
-    {
-    struct callback_head on_exit_work;
-    struct irqaction *action = data;
-    struct irq_desc *desc = irq_to_desc(action.irq);
-    irqreturn_t (*handler_fn)(struct irq_desc *desc,
-    struct irqaction *action);
+pub static mut on_exit_work: usize = 0;
+    let mut action = data;
+    let mut desc = irq_to_desc(action.irq);
+    irqreturn_t (*handler_fn)(irq_desc *desc, irqaction *action);
     irq_thread_set_ready(desc, action);
-    if (action.handler == irq_forced_secondary_handler)
+    if (action.handler == irq_forced_secondary_handler) {
     sched_set_fifo_secondary(current);
-    else
+    }
+    else {
     sched_set_fifo(current);
+    }
     if (force_irqthreads() && test_bit(IRQTF_FORCED_THREAD,
-    &action.thread_flags))
+    &action.thread_flags)) {
     handler_fn = irq_forced_thread_fn;
-    else
+    }
+    else {
     handler_fn = irq_thread_fn;
+    }
     init_task_work(&on_exit_work, irq_thread_dtor);
     task_work_add(current, &on_exit_work, TWA_NONE);
     while (!irq_wait_for_interrupt(desc, action)) {
-    irqreturn_t action_ret;
+    let mut action_ret;
     action_ret = handler_fn(desc, action);
-    if (action_ret == IRQ_WAKE_THREAD)
+    if (action_ret == IRQ_WAKE_THREAD) {
     irq_wake_secondary(desc, action);
+    }
     wake_threads_waitq(desc);
     }
 //
@@ -1240,17 +1470,17 @@ unsafe extern "C" fn irq_thread(data: *mut c_void) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn irq_wake_thread(irq: c_uint, dev_id: *mut c_void) {
-    void irq_wake_thread(unsigned int irq, void *dev_id)
-    {
-    struct irq_desc *desc = irq_to_desc(irq);
-    struct irqaction *action;
-    if (!desc || WARN_ON(irq_settings_is_per_cpu_devid(desc)))
+    let mut desc = irq_to_desc(irq);
+pub static mut action: *mut c_void = core::ptr::null_mut();
+    if (!desc || WARN_ON!(irq_settings_is_per_cpu_devid(desc))) {
     return;
+    }
     guard(raw_spinlock_irqsave)(&desc.lock);
     for_each_action_of_desc(desc, action) {
     if (action.dev_id == dev_id) {
-    if (action.thread)
+    if (action.thread) {
     __irq_wake_thread(desc, action);
+    }
     break;
     }
     }
@@ -1258,18 +1488,19 @@ pub unsafe extern "C" fn irq_wake_thread(irq: c_uint, dev_id: *mut c_void) {
     EXPORT_SYMBOL_GPL(irq_wake_thread);
 #[no_mangle]
 unsafe extern "C" fn irq_setup_forced_threading(new: *mut irqaction) -> c_int {
-    static int irq_setup_forced_threading(struct irqaction *new)
-    {
-    if (!force_irqthreads())
+    if (!force_irqthreads()) {
     return 0;
-    if (new.flags & (IRQF_NO_THREAD | IRQF_PERCPU | IRQF_ONESHOT))
+    }
+    if (new.flags & (IRQF_NO_THREAD | IRQF_PERCPU | IRQF_ONESHOT)) {
     return 0;
+    }
 //
 // No further action required for interrupts which are requested as
 // threaded interrupts already
 //
-    if (new.handler == irq_default_primary_handler)
+    if (new.handler == irq_default_primary_handler) {
     return 0;
+    }
     new.flags |= IRQF_ONESHOT;
 //
 // Handle the case where we have a real primary handler and a
@@ -1278,9 +1509,10 @@ unsafe extern "C" fn irq_setup_forced_threading(new: *mut irqaction) -> c_int {
 //
     if (new.handler && new.thread_fn) {
 // Allocate the secondary action
-    new.secondary = kzalloc_obj(struct irqaction);
-    if (!new.secondary)
+    new.secondary = kzalloc_obj(irqaction);
+    if (!new.secondary) {
     return -ENOMEM;
+    }
     new.secondary.handler = irq_forced_secondary_handler;
     new.secondary.thread_fn = new.thread_fn;
     new.secondary.dev_id = new.dev_id;
@@ -1295,57 +1527,50 @@ unsafe extern "C" fn irq_setup_forced_threading(new: *mut irqaction) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn irq_request_resources(desc: *mut irq_desc) -> c_int {
-    static int irq_request_resources(struct irq_desc *desc)
-    {
-    struct irq_data *d = &desc.irq_data;
-    struct irq_chip *c = d.chip;
+    let mut d = &desc.irq_data;
+    let mut c = d.chip;
     return c.irq_request_resources ? c.irq_request_resources(d) : 0;
     }
 #[no_mangle]
 unsafe extern "C" fn irq_release_resources(desc: *mut irq_desc) {
-    static void irq_release_resources(struct irq_desc *desc)
-    {
-    struct irq_data *d = &desc.irq_data;
-    struct irq_chip *c = d.chip;
-    if (c.irq_release_resources)
+    let mut d = &desc.irq_data;
+    let mut c = d.chip;
+    if (c.irq_release_resources) {
     c.irq_release_resources(d);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn irq_supports_nmi(desc: *mut irq_desc) -> bool {
-    static bool irq_supports_nmi(struct irq_desc *desc)
-    {
-    struct irq_data *d = irq_desc_get_irq_data(desc);
+    let mut d = irq_desc_get_irq_data(desc);
 
 // Only IRQs directly managed by the root irqchip can be set as NMI
-    if (d.parent_data)
+    if (d.parent_data) {
     return false;
+    }
 
 // Don't support NMIs for chips behind a slow bus
-    if (d.chip.irq_bus_lock || d.chip.irq_bus_sync_unlock)
+    if (d.chip.irq_bus_lock || d.chip.irq_bus_sync_unlock) {
     return false;
+    }
     return d.chip.flags & IRQCHIP_SUPPORTS_NMI;
     }
 #[no_mangle]
 unsafe extern "C" fn irq_nmi_setup(desc: *mut irq_desc) -> c_int {
-    static int irq_nmi_setup(struct irq_desc *desc)
-    {
-    struct irq_data *d = irq_desc_get_irq_data(desc);
-    struct irq_chip *c = d.chip;
+    let mut d = irq_desc_get_irq_data(desc);
+    let mut c = d.chip;
     return c.irq_nmi_setup ? c.irq_nmi_setup(d) : -EINVAL;
     }
 #[no_mangle]
 unsafe extern "C" fn irq_nmi_teardown(desc: *mut irq_desc) {
-    static void irq_nmi_teardown(struct irq_desc *desc)
-    {
-    struct irq_data *d = irq_desc_get_irq_data(desc);
-    struct irq_chip *c = d.chip;
-    if (c.irq_nmi_teardown)
+    let mut d = irq_desc_get_irq_data(desc);
+    let mut c = d.chip;
+    if (c.irq_nmi_teardown) {
     c.irq_nmi_teardown(d);
     }
-    static int
-    setup_irq_thread(struct irqaction *new, unsigned int irq, bool secondary)
-    {
-    struct task_struct *t;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn setup_irq_thread(new: *mut irqaction, irq: c_uint, secondary: bool) -> c_int {
+pub static mut t: *mut c_void = core::ptr::null_mut();
     if (!secondary) {
     t = kthread_create(irq_thread, new, "irq/%d-%s", irq,
     new.name);
@@ -1353,8 +1578,9 @@ unsafe extern "C" fn irq_nmi_teardown(desc: *mut irq_desc) {
     t = kthread_create(irq_thread, new, "irq/%d-s-%s", irq,
     new.name);
     }
-    if (IS_ERR(t))
+    if (IS_ERR(t)) {
     return PTR_ERR(t);
+    }
 //
 // We keep the reference to the task struct even if
 // the thread dies to avoid that the interrupt code
@@ -1379,12 +1605,11 @@ unsafe extern "C" fn irq_nmi_teardown(desc: *mut irq_desc) {
     }
 #[no_mangle]
 unsafe extern "C" fn valid_percpu_irqaction(old: *mut irqaction, new: *mut irqaction) -> bool {
-    static bool valid_percpu_irqaction(struct irqaction *old, struct irqaction *new)
-    {
     do {
     if (cpumask_intersects(old.affinity, new.affinity) ||
-    old.percpu_dev_id == new.percpu_dev_id)
+    old.percpu_dev_id == new.percpu_dev_id) {
     return false;
+    }
     old = old.next;
     } while (old);
     return true;
@@ -1403,33 +1628,37 @@ unsafe extern "C" fn valid_percpu_irqaction(old: *mut irqaction, new: *mut irqac
 // interrupt related functions. desc->request_mutex solely serializes
 // request/free_irq().
 //
-    static int
-    __setup_irq(unsigned int irq, struct irq_desc *desc, struct irqaction *new)
-    {
-    struct irqaction *old, **old_ptr;
+#[no_mangle]
+pub unsafe extern "C" fn __setup_irq(irq: c_uint, desc: *mut irq_desc, new: *mut irqaction) -> c_int {
+    let mut old = core::ptr::null_mut();
+    let mut old_ptr = core::ptr::null_mut();
     unsigned long flags, thread_mask = 0;
     int ret, nested, shared = 0;
-    bool per_cpu_devid;
-    if (!desc)
+    let mut per_cpu_devid = 0;
+    if (!desc) {
     return -EINVAL;
-    if (desc.irq_data.chip == &no_irq_chip)
+    }
+    if (desc.irq_data.chip == &no_irq_chip) {
     return -ENOSYS;
-    if (!try_module_get(desc.owner))
+    }
+    if (!try_module_get(desc.owner)) {
     return -ENODEV;
+    }
     per_cpu_devid = irq_settings_is_per_cpu_devid(desc);
     new.irq = irq;
 //
 // If the trigger type is not specified by the caller,
 // then use the default for this interrupt.
 //
-    if (!(new.flags & IRQF_TRIGGER_MASK))
+    if (!(new.flags & IRQF_TRIGGER_MASK)) {
     new.flags |= irqd_get_trigger_type(&desc.irq_data);
+    }
 //
 // IRQF_ONESHOT means the interrupt source in the IRQ chip will be
 // masked until the threaded handled is done. If there is no thread
 // handler then it makes no sense to have IRQF_ONESHOT.
 //
-    WARN_ON_ONCE(new.flags & IRQF_ONESHOT && !new.thread_fn);
+    WARN_ON_ONCE!(new.flags & IRQF_ONESHOT && !new.thread_fn);
 //
 // Check whether the interrupt nests into another interrupt
 // thread.
@@ -1438,7 +1667,7 @@ unsafe extern "C" fn valid_percpu_irqaction(old: *mut irqaction, new: *mut irqac
     if (nested) {
     if (!new.thread_fn) {
     ret = -EINVAL;
-    goto out_mput;
+// goto;
     }
 //
 // Replace the primary handler which was provided from
@@ -1449,8 +1678,9 @@ unsafe extern "C" fn valid_percpu_irqaction(old: *mut irqaction, new: *mut irqac
     } else {
     if (irq_settings_can_thread(desc)) {
     ret = irq_setup_forced_threading(new);
-    if (ret)
-    goto out_mput;
+    if (ret) {
+// goto;
+    }
     }
     }
 //
@@ -1460,12 +1690,14 @@ unsafe extern "C" fn valid_percpu_irqaction(old: *mut irqaction, new: *mut irqac
 //
     if (new.thread_fn && !nested) {
     ret = setup_irq_thread(new, irq, false);
-    if (ret)
-    goto out_mput;
+    if (ret) {
+// goto;
+    }
     if (new.secondary) {
     ret = setup_irq_thread(new.secondary, irq, true);
-    if (ret)
-    goto out_thread;
+    if (ret) {
+// goto;
+    }
     }
     }
 //
@@ -1477,8 +1709,9 @@ unsafe extern "C" fn valid_percpu_irqaction(old: *mut irqaction, new: *mut irqac
 // chip flags, so we can avoid the unmask dance at the end of
 // the threaded handler for those.
 //
-    if (desc.irq_data.chip.flags & IRQCHIP_ONESHOT_SAFE)
+    if (desc.irq_data.chip.flags & IRQCHIP_ONESHOT_SAFE) {
     new.flags &= ~IRQF_ONESHOT;
+    }
 //
 // Protects against a concurrent __free_irq() call which might wait
 // for synchronize_hardirq() to complete without holding the optional
@@ -1497,9 +1730,9 @@ unsafe extern "C" fn valid_percpu_irqaction(old: *mut irqaction, new: *mut irqac
     if (!desc.action) {
     ret = irq_request_resources(desc);
     if (ret) {
-    pr_err("Failed to request resources for %s (irq %d) on irqchip %s\n",
+    pr_err!("Failed to request resources for %s (irq %d) on irqchip %s\n",
     new.name, irq, desc.irq_data.chip.name);
-    goto out_bus_unlock;
+// goto;
     }
     }
 //
@@ -1520,18 +1753,18 @@ unsafe extern "C" fn valid_percpu_irqaction(old: *mut irqaction, new: *mut irqac
 // agree on ONESHOT.
 // Interrupt lines used for NMIs cannot be shared.
 //
-    unsigned int oldtype;
+    let mut oldtype = 0;
     if (irq_is_nmi(desc) && !per_cpu_devid) {
-    pr_err("Invalid attempt to share NMI for %s (irq %d) on irqchip %s.\n",
+    pr_err!("Invalid attempt to share NMI for %s (irq %d) on irqchip %s.\n",
     new.name, irq, desc.irq_data.chip.name);
     ret = -EINVAL;
-    goto out_unlock;
+// goto;
     }
     if (per_cpu_devid && !valid_percpu_irqaction(old, new)) {
-    pr_err("Overlapping affinities for %s (irq %d) on irqchip %s.\n",
+    pr_err!("Overlapping affinities for %s (irq %d) on irqchip %s.\n",
     new.name, irq, desc.irq_data.chip.name);
     ret = -EINVAL;
-    goto out_unlock;
+// goto;
     }
 //
 // If nobody did set the configuration before, inherit
@@ -1544,19 +1777,22 @@ unsafe extern "C" fn valid_percpu_irqaction(old: *mut irqaction, new: *mut irqac
     irqd_set_trigger_type(&desc.irq_data, oldtype);
     }
     if (!((old.flags & new.flags) & IRQF_SHARED) ||
-    (oldtype != (new.flags & IRQF_TRIGGER_MASK)))
-    goto mismatch;
+    (oldtype != (new.flags & IRQF_TRIGGER_MASK))) {
+// goto;
+    }
     if ((old.flags & IRQF_ONESHOT) &&
-    (new.flags & IRQF_COND_ONESHOT))
+    (new.flags & IRQF_COND_ONESHOT)) {
     new.flags |= IRQF_ONESHOT;
-#[no_mangle]
-pub unsafe extern "C" fn if(IRQF_ONESHOT: (old->flags ^ new->flags) &) -> else {
-    else if ((old.flags ^ new.flags) & IRQF_ONESHOT)
-    goto mismatch;
+    }
+
+    else if ((old.flags ^ new.flags) & IRQF_ONESHOT) {
+// goto;
+    }
 // All handlers must agree on per-cpuness
     if ((old.flags & IRQF_PERCPU) !=
-    (new.flags & IRQF_PERCPU))
-    goto mismatch;
+    (new.flags & IRQF_PERCPU)) {
+// goto;
+    }
 // add new interrupt at end of irq queue
     do {
 //
@@ -1582,7 +1818,7 @@ pub unsafe extern "C" fn if(IRQF_ONESHOT: (old->flags ^ new->flags) &) -> else {
 //
     if (thread_mask == ~0UL) {
     ret = -EBUSY;
-    goto out_unlock;
+// goto;
     }
 //
 // The thread_mask for the action is or'ed to
@@ -1622,18 +1858,19 @@ pub unsafe extern "C" fn if(IRQF_ONESHOT: (old->flags ^ new->flags) &) -> else {
 // has. The type flags are unreliable as the
 // underlying chip implementation can override them.
 //
-    pr_err("Threaded irq requested with handler=core::ptr::null_mut() and !ONESHOT for %s (irq %d)\n",
+    pr_err!("Threaded irq requested with handler=core::ptr::null_mut() and !ONESHOT for %s (irq %d)\n",
     new.name, irq);
     ret = -EINVAL;
-    goto out_unlock;
+// goto;
     }
     if (!shared) {
 // Setup the type (level, edge polarity) if configured:
     if (new.flags & IRQF_TRIGGER_MASK) {
     ret = __irq_set_trigger(desc,
     new.flags & IRQF_TRIGGER_MASK);
-    if (ret)
-    goto out_unlock;
+    if (ret) {
+// goto;
+    }
     }
 //
 // Activate the interrupt. That activation must happen
@@ -1647,21 +1884,25 @@ pub unsafe extern "C" fn if(IRQF_ONESHOT: (old->flags ^ new->flags) &) -> else {
 // will simply ignore that activation request.
 //
     ret = irq_activate(desc);
-    if (ret)
-    goto out_unlock;
-    desc.istate &= ~(IRQS_AUTODETECT | IRQS_SPURIOUS_DISABLED | \
+    if (ret) {
+// goto;
+    }
+    desc.istate &= ~(IRQS_AUTODETECT | IRQS_SPURIOUS_DISABLED | 
     IRQS_ONESHOT | IRQS_WAITING);
     irqd_clear(&desc.irq_data, IRQD_IRQ_INPROGRESS);
     if (new.flags & IRQF_PERCPU) {
     irqd_set(&desc.irq_data, IRQD_PER_CPU);
     irq_settings_set_per_cpu(desc);
-    if (new.flags & IRQF_NO_DEBUG)
+    if (new.flags & IRQF_NO_DEBUG) {
     irq_settings_set_no_debug(desc);
     }
-    if (noirqdebug)
+    }
+    if (noirqdebug) {
     irq_settings_set_no_debug(desc);
-    if (new.flags & IRQF_ONESHOT)
+    }
+    if (new.flags & IRQF_ONESHOT) {
     desc.istate |= IRQS_ONESHOT;
+    }
 // Exclude IRQ from balancing if requested
     if (new.flags & IRQF_NOBALANCING) {
     irq_settings_set_no_balancing(desc);
@@ -1677,16 +1918,17 @@ pub unsafe extern "C" fn if(IRQF_ONESHOT: (old->flags ^ new->flags) &) -> else {
 // it while it's still disabled and then wait for
 // interrupts forever.
 //
-    WARN_ON_ONCE(new.flags & IRQF_SHARED);
+    WARN_ON_ONCE!(new.flags & IRQF_SHARED);
 // Undo nested disables:
     desc.depth = 1;
     }
     } else if (new.flags & IRQF_TRIGGER_MASK) {
-    let mut nmsk: c_uint = new.flags & IRQF_TRIGGER_MASK;
-    let mut omsk: c_uint = irqd_get_trigger_type(&desc.irq_data);
-    if (nmsk != omsk)
+pub static mut nmsk: c_uint = 0;
+pub static mut omsk: c_uint = 0;
+    if (nmsk != omsk) {
 // hope the handler works with current  trigger mode
-    pr_warn("irq %d uses trigger mode %u; requested %u\n",
+    pr_warn!("irq %d uses trigger mode %u; requested %u\n",
+    }
     irq, omsk, nmsk);
     }
 // old_ptr = new;
@@ -1712,46 +1954,48 @@ pub unsafe extern "C" fn if(IRQF_ONESHOT: (old->flags ^ new->flags) &) -> else {
     new.dir = core::ptr::null_mut();
     register_handler_proc(irq, new);
     return 0;
-    mismatch:
+// label;
     if (!(new.flags & IRQF_PROBE_SHARED)) {
-    pr_err("Flags mismatch irq %d. %08x (%s) vs. %08x (%s)\n",
+    pr_err!("Flags mismatch irq %d. %08x (%s) vs. %08x (%s)\n",
     irq, new.flags, new.name, old.flags, old.name);
 
     dump_stack();
 
     }
     ret = -EBUSY;
-    out_unlock:
+// label;
     raw_spin_unlock_irqrestore(&desc.lock, flags);
-    if (!desc.action)
+    if (!desc.action) {
     irq_release_resources(desc);
-    out_bus_unlock:
+    }
+// label;
     chip_bus_sync_unlock(desc);
     mutex_unlock(&desc.request_mutex);
-    out_thread:
+// label;
     if (new.thread) {
-    struct task_struct *t = new.thread;
+    let mut t = new.thread;
     new.thread = core::ptr::null_mut();
     kthread_stop_put(t);
     }
     if (new.secondary && new.secondary.thread) {
-    struct task_struct *t = new.secondary.thread;
+    let mut t = new.secondary.thread;
     new.secondary.thread = core::ptr::null_mut();
     kthread_stop_put(t);
     }
-    out_mput:
-    module_put(desc.owner);
+// label;
+    module_put!(desc.owner);
     return ret;
     }
 //
 // Internal function to unregister an irqaction - used to free
 // regular and special interrupts that are part of the architecture.
 //
-    static struct irqaction *__free_irq(struct irq_desc *desc, void *dev_id)
-    {
-    let mut irq: unsigned = desc.irq_data.irq;
-    struct irqaction *action, **action_ptr;
-    unsigned long flags;
+#[no_mangle]
+pub unsafe extern "C" fn __free_irq(desc: *mut irq_desc, dev_id: *mut c_void) -> *mut c_void {
+pub static mut irq: unsigned = 0;
+    let mut action = core::ptr::null_mut();
+    let mut action_ptr = core::ptr::null_mut();
+    let mut flags = 0;
     WARN(in_interrupt(), "Trying to free IRQ %d from IRQ context!\n", irq);
     mutex_lock(&desc.request_mutex);
     chip_bus_lock(desc);
@@ -1770,8 +2014,9 @@ pub unsafe extern "C" fn if(IRQF_ONESHOT: (old->flags ^ new->flags) &) -> else {
     mutex_unlock(&desc.request_mutex);
     return core::ptr::null_mut();
     }
-    if (action.dev_id == dev_id)
+    if (action.dev_id == dev_id) {
     break;
+    }
     action_ptr = &action.next;
     }
 // Found it - now remove it from the list of entries:
@@ -1785,8 +2030,9 @@ pub unsafe extern "C" fn if(IRQF_ONESHOT: (old->flags ^ new->flags) &) -> else {
     }
 
 // make sure affinity_hint is cleaned up
-    if (WARN_ON_ONCE(desc.affinity_hint))
+    if (WARN_ON_ONCE!(desc.affinity_hint)) {
     desc.affinity_hint = core::ptr::null_mut();
+    }
 
     irq_proc_update_valid(desc);
     raw_spin_unlock_irqrestore(&desc.lock, flags);
@@ -1835,8 +2081,9 @@ pub unsafe extern "C" fn if(IRQF_ONESHOT: (old->flags ^ new->flags) &) -> else {
 //
     if (action.thread) {
     kthread_stop_put(action.thread);
-    if (action.secondary && action.secondary.thread)
+    if (action.secondary && action.secondary.thread) {
     kthread_stop_put(action.secondary.thread);
+    }
     }
 // Last action releases resources
     if (!desc.action) {
@@ -1856,7 +2103,7 @@ pub unsafe extern "C" fn if(IRQF_ONESHOT: (old->flags ^ new->flags) &) -> else {
     }
     mutex_unlock(&desc.request_mutex);
     irq_chip_pm_put(&desc.irq_data);
-    module_put(desc.owner);
+    module_put!(desc.owner);
     kfree(action.secondary);
     return action;
     }
@@ -1877,31 +2124,34 @@ pub unsafe extern "C" fn if(IRQF_ONESHOT: (old->flags ^ new->flags) &) -> else {
 //
     const void *free_irq(unsigned int irq, void *dev_id)
     {
-    struct irq_desc *desc = irq_to_desc(irq);
-    struct irqaction *action;
-    const char *devname;
-    if (!desc || WARN_ON(irq_settings_is_per_cpu_devid(desc)))
+    let mut desc = irq_to_desc(irq);
+pub static mut action: *mut c_void = core::ptr::null_mut();
+pub static mut devname: *mut c_void = core::ptr::null_mut();
+    if (!desc || WARN_ON!(irq_settings_is_per_cpu_devid(desc))) {
     return core::ptr::null_mut();
+    }
 
-    if (WARN_ON(desc.affinity_notify))
+    if (WARN_ON!(desc.affinity_notify)) {
     desc.affinity_notify = core::ptr::null_mut();
+    }
 
     action = __free_irq(desc, dev_id);
-    if (!action)
+    if (!action) {
     return core::ptr::null_mut();
+    }
     devname = action.name;
     kfree(action);
     return devname;
     }
     EXPORT_SYMBOL(free_irq);
-    static const void *__cleanup_nmi(unsigned int irq, struct irq_desc *desc)
+    static const void *__cleanup_nmi(unsigned int irq, irq_desc *desc)
     {
-    struct irqaction *action = core::ptr::null_mut();
-    const char *devname = core::ptr::null_mut();
+    let mut action = core::ptr::null_mut();
+    let mut devname = core::ptr::null_mut();
     scoped_guard(raw_spinlock_irqsave, &desc.lock) {
     irq_nmi_teardown(desc);
     desc.istate &= ~IRQS_NMI;
-    if (!WARN_ON(desc.action == core::ptr::null_mut())) {
+    if (!WARN_ON!(desc.action == core::ptr::null_mut())) {
     action = desc.action;
     irq_pm_remove_action(desc, action);
     devname = action.name;
@@ -1911,24 +2161,28 @@ pub unsafe extern "C" fn if(IRQF_ONESHOT: (old->flags ^ new->flags) &) -> else {
     irq_shutdown_and_deactivate(desc);
     }
     irq_proc_update_valid(desc);
-    if (action)
+    if (action) {
     unregister_handler_proc(irq, action);
+    }
     kfree(action);
     irq_release_resources(desc);
     irq_chip_pm_put(&desc.irq_data);
-    module_put(desc.owner);
+    module_put!(desc.owner);
     return devname;
     }
     const void *free_nmi(unsigned int irq, void *dev_id)
     {
-    struct irq_desc *desc = irq_to_desc(irq);
-    if (!desc || WARN_ON(!irq_is_nmi(desc)))
+    let mut desc = irq_to_desc(irq);
+    if (!desc || WARN_ON!(!irq_is_nmi(desc))) {
     return core::ptr::null_mut();
-    if (WARN_ON(irq_settings_is_per_cpu_devid(desc)))
+    }
+    if (WARN_ON!(irq_settings_is_per_cpu_devid(desc))) {
     return core::ptr::null_mut();
+    }
 // NMI still enabled
-    if (WARN_ON(desc.depth == 0))
+    if (WARN_ON!(desc.depth == 0)) {
     disable_nmi_nosync(irq);
+    }
     return __cleanup_nmi(irq, desc);
     }
 //
@@ -1971,15 +2225,14 @@ pub unsafe extern "C" fn if(IRQF_ONESHOT: (old->flags ^ new->flags) &) -> else {
 // IRQF_TRIGGER_*		Specify active edge(s) or level
 // IRQF_ONESHOT		Run thread_fn with interrupt line masked
 //
-    int request_threaded_irq(unsigned int irq, irq_handler_t handler,
-    irq_handler_t thread_fn, unsigned long irqflags,
-    const char *devname, void *dev_id)
-    {
-    struct irqaction *action;
-    struct irq_desc *desc;
-    int retval;
-    if (irq == IRQ_NOTCONNECTED)
+#[no_mangle]
+pub unsafe extern "C" fn request_threaded_irq(irq: c_uint, handler: irq_handler_t, thread_fn: irq_handler_t, irqflags: c_ulong, devname: *mut c_char, dev_id: *mut c_void) -> c_int {
+pub static mut action: *mut c_void = core::ptr::null_mut();
+pub static mut desc: *mut c_void = core::ptr::null_mut();
+    let mut retval = 0;
+    if (irq == IRQ_NOTCONNECTED) {
     return -ENOTCONN;
+    }
 //
 // Sanity-check: shared interrupts must pass in a real dev-ID,
 // otherwise we'll have trouble later trying to figure out
@@ -1996,22 +2249,27 @@ pub unsafe extern "C" fn if(IRQF_ONESHOT: (old->flags ^ new->flags) &) -> else {
     if (((irqflags & IRQF_SHARED) && !dev_id) ||
     ((irqflags & IRQF_SHARED) && (irqflags & IRQF_NO_AUTOEN)) ||
     (!(irqflags & IRQF_SHARED) && (irqflags & IRQF_COND_SUSPEND)) ||
-    ((irqflags & IRQF_NO_SUSPEND) && (irqflags & IRQF_COND_SUSPEND)))
+    ((irqflags & IRQF_NO_SUSPEND) && (irqflags & IRQF_COND_SUSPEND))) {
     return -EINVAL;
+    }
     desc = irq_to_desc(irq);
-    if (!desc)
+    if (!desc) {
     return -EINVAL;
+    }
     if (!irq_settings_can_request(desc) ||
-    WARN_ON(irq_settings_is_per_cpu_devid(desc)))
+    WARN_ON!(irq_settings_is_per_cpu_devid(desc))) {
     return -EINVAL;
+    }
     if (!handler) {
-    if (!thread_fn)
+    if (!thread_fn) {
     return -EINVAL;
+    }
     handler = irq_default_primary_handler;
     }
-    action = kzalloc_obj(struct irqaction);
-    if (!action)
+    action = kzalloc_obj(irqaction);
+    if (!action) {
     return -ENOMEM;
+    }
     action.handler = handler;
     action.thread_fn = thread_fn;
     action.flags = irqflags;
@@ -2036,7 +2294,7 @@ pub unsafe extern "C" fn if(IRQF_ONESHOT: (old->flags ^ new->flags) &) -> else {
 // We disable the irq to make sure that a 'real' IRQ doesn't
 // run in parallel with our fake.
 //
-    unsigned long flags;
+    let mut flags = 0;
     disable_irq(irq);
     local_irq_save(flags);
     handler(irq, dev_id);
@@ -2063,16 +2321,17 @@ pub unsafe extern "C" fn if(IRQF_ONESHOT: (old->flags ^ new->flags) &) -> else {
 // Returns: On failure, it returns a negative value. On success, it returns either
 // IRQC_IS_HARDIRQ or IRQC_IS_NESTED.
 //
-    int request_any_context_irq(unsigned int irq, irq_handler_t handler,
-    unsigned long flags, const char *name, void *dev_id)
-    {
-    struct irq_desc *desc;
-    int ret;
-    if (irq == IRQ_NOTCONNECTED)
+#[no_mangle]
+pub unsafe extern "C" fn request_any_context_irq(irq: c_uint, handler: irq_handler_t, flags: c_ulong, name: *mut c_char, dev_id: *mut c_void) -> c_int {
+pub static mut desc: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (irq == IRQ_NOTCONNECTED) {
     return -ENOTCONN;
+    }
     desc = irq_to_desc(irq);
-    if (!desc)
+    if (!desc) {
     return -EINVAL;
+    }
     if (irq_settings_is_nested_thread(desc)) {
     ret = request_threaded_irq(irq, core::ptr::null_mut(), handler,
     flags, name, dev_id);
@@ -2107,41 +2366,48 @@ pub unsafe extern "C" fn if(IRQF_ONESHOT: (old->flags ^ new->flags) &) -> else {
 // If the interrupt line cannot be used to deliver NMIs, function will fail
 // and return a negative value.
 //
-    int request_nmi(unsigned int irq, irq_handler_t handler,
-    unsigned long irqflags, const char *name, void *dev_id)
-    {
-    struct irqaction *action;
-    struct irq_desc *desc;
-    int retval;
-    if (irq == IRQ_NOTCONNECTED)
+#[no_mangle]
+pub unsafe extern "C" fn request_nmi(irq: c_uint, handler: irq_handler_t, irqflags: c_ulong, name: *mut c_char, dev_id: *mut c_void) -> c_int {
+pub static mut action: *mut c_void = core::ptr::null_mut();
+pub static mut desc: *mut c_void = core::ptr::null_mut();
+    let mut retval = 0;
+    if (irq == IRQ_NOTCONNECTED) {
     return -ENOTCONN;
+    }
 // NMI cannot be shared, used for Polling
-    if (irqflags & (IRQF_SHARED | IRQF_COND_SUSPEND | IRQF_IRQPOLL))
+    if (irqflags & (IRQF_SHARED | IRQF_COND_SUSPEND | IRQF_IRQPOLL)) {
     return -EINVAL;
-    if (!(irqflags & IRQF_PERCPU))
+    }
+    if (!(irqflags & IRQF_PERCPU)) {
     return -EINVAL;
-    if (!handler)
+    }
+    if (!handler) {
     return -EINVAL;
+    }
     desc = irq_to_desc(irq);
     if (!desc || (irq_settings_can_autoenable(desc) &&
     !(irqflags & IRQF_NO_AUTOEN)) ||
     !irq_settings_can_request(desc) ||
-    WARN_ON(irq_settings_is_per_cpu_devid(desc)) ||
-    !irq_supports_nmi(desc))
+    WARN_ON!(irq_settings_is_per_cpu_devid(desc)) ||
+    !irq_supports_nmi(desc)) {
     return -EINVAL;
-    action = kzalloc_obj(struct irqaction);
-    if (!action)
+    }
+    action = kzalloc_obj(irqaction);
+    if (!action) {
     return -ENOMEM;
+    }
     action.handler = handler;
     action.flags = irqflags | IRQF_NO_THREAD | IRQF_NOBALANCING;
     action.name = name;
     action.dev_id = dev_id;
     retval = irq_chip_pm_get(&desc.irq_data);
-    if (retval < 0)
-    goto err_out;
+    if (retval < 0) {
+// goto;
+    }
     retval = __setup_irq(irq, desc, action);
-    if (retval)
-    goto err_irq_setup;
+    if (retval) {
+// goto;
+    }
     scoped_guard(raw_spinlock_irqsave, &desc.lock) {
 // Setup NMI state
     desc.istate |= IRQS_NMI;
@@ -2152,25 +2418,24 @@ pub unsafe extern "C" fn if(IRQF_ONESHOT: (old->flags ^ new->flags) &) -> else {
     return -EINVAL;
     }
     return 0;
-    err_irq_setup:
+// label;
     irq_chip_pm_put(&desc.irq_data);
-    err_out:
+// label;
     kfree(action);
     return retval;
     }
 #[no_mangle]
 pub unsafe extern "C" fn enable_percpu_irq(irq: c_uint, type: c_uint) {
-    void enable_percpu_irq(unsigned int irq, unsigned int type)
-    {
     scoped_irqdesc_get_and_lock(irq, IRQ_GET_DESC_CHECK_PERCPU) {
-    struct irq_desc *desc = scoped_irqdesc;
+    let mut desc = scoped_irqdesc;
 //
 // If the trigger type is not specified by the caller, then
 // use the default for this interrupt.
 //
     type &= IRQ_TYPE_SENSE_MASK;
-    if (type == IRQ_TYPE_NONE)
+    if (type == IRQ_TYPE_NONE) {
     type = irqd_get_trigger_type(&desc.irq_data);
+    }
     if (type != IRQ_TYPE_NONE) {
     if (__irq_set_trigger(desc, type)) {
     WARN(1, "failed to set type for IRQ%d\n", irq);
@@ -2183,8 +2448,6 @@ pub unsafe extern "C" fn enable_percpu_irq(irq: c_uint, type: c_uint) {
     EXPORT_SYMBOL_GPL(enable_percpu_irq);
 #[no_mangle]
 pub unsafe extern "C" fn enable_percpu_nmi(irq: c_uint, type: c_uint) {
-    void enable_percpu_nmi(unsigned int irq, unsigned int type)
-    {
     enable_percpu_irq(irq, type);
     }
 //
@@ -2196,8 +2459,6 @@ pub unsafe extern "C" fn enable_percpu_nmi(irq: c_uint, type: c_uint) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn irq_percpu_is_enabled(irq: c_uint) -> bool {
-    bool irq_percpu_is_enabled(unsigned int irq)
-    {
     scoped_irqdesc_get_and_lock(irq, IRQ_GET_DESC_CHECK_PERCPU)
     return cpumask_test_cpu(smp_processor_id(), scoped_irqdesc.percpu_enabled);
     return false;
@@ -2205,28 +2466,26 @@ pub unsafe extern "C" fn irq_percpu_is_enabled(irq: c_uint) -> bool {
     EXPORT_SYMBOL_GPL(irq_percpu_is_enabled);
 #[no_mangle]
 pub unsafe extern "C" fn disable_percpu_irq(irq: c_uint) {
-    void disable_percpu_irq(unsigned int irq)
-    {
     scoped_irqdesc_get_and_lock(irq, IRQ_GET_DESC_CHECK_PERCPU)
     irq_percpu_disable(scoped_irqdesc, smp_processor_id());
     }
     EXPORT_SYMBOL_GPL(disable_percpu_irq);
 #[no_mangle]
 pub unsafe extern "C" fn disable_percpu_nmi(irq: c_uint) {
-    void disable_percpu_nmi(unsigned int irq)
-    {
     disable_percpu_irq(irq);
     }
 //
 // Internal function to unregister a percpu irqaction.
 //
-    static struct irqaction *__free_percpu_irq(unsigned int irq, void __percpu *dev_id)
-    {
-    struct irq_desc *desc = irq_to_desc(irq);
-    struct irqaction *action, **action_ptr;
+#[no_mangle]
+pub unsafe extern "C" fn __free_percpu_irq(irq: c_uint, dev_id: *mut c_void) -> *mut c_void {
+    let mut desc = irq_to_desc(irq);
+    let mut action = core::ptr::null_mut();
+    let mut action_ptr = core::ptr::null_mut();
     WARN(in_interrupt(), "Trying to free IRQ %d from IRQ context!\n", irq);
-    if (!desc)
+    if (!desc) {
     return core::ptr::null_mut();
+    }
     scoped_guard(raw_spinlock_irqsave, &desc.lock) {
     action_ptr = &desc.action;
     for (;;) {
@@ -2235,8 +2494,9 @@ pub unsafe extern "C" fn disable_percpu_nmi(irq: c_uint) {
     WARN(1, "Trying to free already-free IRQ %d\n", irq);
     return core::ptr::null_mut();
     }
-    if (action.percpu_dev_id == dev_id)
+    if (action.percpu_dev_id == dev_id) {
     break;
+    }
     action_ptr = &action.next;
     }
     if (cpumask_intersects(desc.percpu_enabled, action.affinity)) {
@@ -2254,7 +2514,7 @@ pub unsafe extern "C" fn disable_percpu_nmi(irq: c_uint) {
     }
     unregister_handler_proc(irq, action);
     irq_chip_pm_put(&desc.irq_data);
-    module_put(desc.owner);
+    module_put!(desc.owner);
     return action;
     }
 //
@@ -2270,39 +2530,37 @@ pub unsafe extern "C" fn disable_percpu_nmi(irq: c_uint) {
 // This function must not be called from interrupt context.
 //
 #[no_mangle]
-pub unsafe extern "C" fn free_percpu_irq(irq: c_uint, dev_id: *mut void __percpu) {
-    void free_percpu_irq(unsigned int irq, void __percpu *dev_id)
-    {
-    struct irq_desc *desc = irq_to_desc(irq);
-    if (!desc || !irq_settings_is_per_cpu_devid(desc))
+pub unsafe extern "C" fn free_percpu_irq(irq: c_uint, dev_id: *mut c_void ) {
+    let mut desc = irq_to_desc(irq);
+    if (!desc || !irq_settings_is_per_cpu_devid(desc)) {
     return;
+    }
     chip_bus_lock(desc);
     kfree(__free_percpu_irq(irq, dev_id));
     chip_bus_sync_unlock(desc);
     }
     EXPORT_SYMBOL_GPL(free_percpu_irq);
 #[no_mangle]
-pub unsafe extern "C" fn free_percpu_nmi(irq: c_uint, dev_id: *mut void __percpu) {
-    void free_percpu_nmi(unsigned int irq, void __percpu *dev_id)
-    {
-    struct irq_desc *desc = irq_to_desc(irq);
-    if (!desc || !irq_settings_is_per_cpu_devid(desc))
+pub unsafe extern "C" fn free_percpu_nmi(irq: c_uint, dev_id: *mut c_void ) {
+    let mut desc = irq_to_desc(irq);
+    if (!desc || !irq_settings_is_per_cpu_devid(desc)) {
     return;
-    if (WARN_ON(!irq_is_nmi(desc)))
+    }
+    if (WARN_ON!(!irq_is_nmi(desc))) {
     return;
+    }
     kfree(__free_percpu_irq(irq, dev_id));
     }
-    static
-    struct irqaction *create_percpu_irqaction(irq_handler_t handler, unsigned long flags,
-    const char *devname, const cpumask_t *affinity,
-    void __percpu *dev_id)
-    {
-    struct irqaction *action;
-    if (!affinity)
+#[no_mangle]
+pub unsafe extern "C" fn create_percpu_irqaction(handler: irq_handler_t, flags: c_ulong, devname: *mut c_char, affinity: *mut cpumask_t, dev_id: *mut c_void) -> *mut c_void {
+pub static mut action: *mut c_void = core::ptr::null_mut();
+    if (!affinity) {
     affinity = cpu_possible_mask;
-    action = kzalloc_obj(struct irqaction);
-    if (!action)
+    }
+    action = kzalloc_obj(irqaction);
+    if (!action) {
     return core::ptr::null_mut();
+    }
     action.handler = handler;
     action.flags = flags | IRQF_PERCPU | IRQF_NO_SUSPEND;
     action.name = devname;
@@ -2313,8 +2571,9 @@ pub unsafe extern "C" fn free_percpu_nmi(irq: c_uint, dev_id: *mut void __percpu
 // masks. Obviously, covering all CPUs prevents any sharing in
 // the first place.
 //
-    if (!cpumask_equal(affinity, cpu_possible_mask))
+    if (!cpumask_equal(affinity, cpu_possible_mask)) {
     action.flags |= IRQF_SHARED;
+    }
     return action;
     }
 //
@@ -2333,21 +2592,23 @@ pub unsafe extern "C" fn free_percpu_nmi(irq: c_uint, dev_id: *mut void __percpu
 // the handler gets called with the interrupted CPU's instance of
 // that variable.
 //
-    int request_percpu_irq_affinity(unsigned int irq, irq_handler_t handler, const char *devname,
-    const cpumask_t *affinity, void __percpu *dev_id)
-    {
-    struct irqaction *action;
-    struct irq_desc *desc;
-    int retval;
-    if (!dev_id)
+#[no_mangle]
+pub unsafe extern "C" fn request_percpu_irq_affinity(irq: c_uint, handler: irq_handler_t, devname: *mut c_char, affinity: *mut cpumask_t, dev_id: *mut c_void) -> c_int {
+pub static mut action: *mut c_void = core::ptr::null_mut();
+pub static mut desc: *mut c_void = core::ptr::null_mut();
+    let mut retval = 0;
+    if (!dev_id) {
     return -EINVAL;
+    }
     desc = irq_to_desc(irq);
     if (!desc || !irq_settings_can_request(desc) ||
-    !irq_settings_is_per_cpu_devid(desc))
+    !irq_settings_is_per_cpu_devid(desc)) {
     return -EINVAL;
+    }
     action = create_percpu_irqaction(handler, 0, devname, affinity, dev_id);
-    if (!action)
+    if (!action) {
     return -ENOMEM;
+    }
     retval = irq_chip_pm_get(&desc.irq_data);
     if (retval < 0) {
     kfree(action);
@@ -2383,40 +2644,45 @@ pub unsafe extern "C" fn free_percpu_nmi(irq: c_uint, dev_id: *mut void __percpu
 // If the interrupt line cannot be used to deliver NMIs, function
 // will fail returning a negative value.
 //
-    int request_percpu_nmi(unsigned int irq, irq_handler_t handler, const char *name,
-    const struct cpumask *affinity, void __percpu *dev_id)
-    {
-    struct irqaction *action;
-    struct irq_desc *desc;
-    int retval;
-    if (!handler)
+#[no_mangle]
+pub unsafe extern "C" fn request_percpu_nmi(irq: c_uint, handler: irq_handler_t, name: *mut c_char, affinity: *mut cpumask, dev_id: *mut c_void) -> c_int {
+pub static mut action: *mut c_void = core::ptr::null_mut();
+pub static mut desc: *mut c_void = core::ptr::null_mut();
+    let mut retval = 0;
+    if (!handler) {
     return -EINVAL;
+    }
     desc = irq_to_desc(irq);
     if (!desc || !irq_settings_can_request(desc) ||
     !irq_settings_is_per_cpu_devid(desc) ||
     irq_settings_can_autoenable(desc) ||
-    !irq_supports_nmi(desc))
+    !irq_supports_nmi(desc)) {
     return -EINVAL;
+    }
 // The line cannot be NMI already if the new request covers all CPUs
     if (irq_is_nmi(desc) &&
-    (!affinity || cpumask_equal(affinity, cpu_possible_mask)))
+    (!affinity || cpumask_equal(affinity, cpu_possible_mask))) {
     return -EINVAL;
+    }
     action = create_percpu_irqaction(handler, IRQF_NO_THREAD | IRQF_NOBALANCING,
     name, affinity, dev_id);
-    if (!action)
+    if (!action) {
     return -ENOMEM;
+    }
     retval = irq_chip_pm_get(&desc.irq_data);
-    if (retval < 0)
-    goto err_out;
+    if (retval < 0) {
+// goto;
+    }
     retval = __setup_irq(irq, desc, action);
-    if (retval)
-    goto err_irq_setup;
+    if (retval) {
+// goto;
+    }
     scoped_guard(raw_spinlock_irqsave, &desc.lock)
     desc.istate |= IRQS_NMI;
     return 0;
-    err_irq_setup:
+// label;
     irq_chip_pm_put(&desc.irq_data);
-    err_out:
+// label;
     kfree(action);
     return retval;
     }
@@ -2435,17 +2701,17 @@ pub unsafe extern "C" fn free_percpu_nmi(irq: c_uint, dev_id: *mut void __percpu
 //
 #[no_mangle]
 pub unsafe extern "C" fn prepare_percpu_nmi(irq: c_uint) -> c_int {
-    int prepare_percpu_nmi(unsigned int irq)
-    {
-    let mut ret: c_int = -EINVAL;
-    WARN_ON(preemptible());
+pub static mut ret: c_int = 0;
+    WARN_ON!(preemptible());
     scoped_irqdesc_get_and_lock(irq, IRQ_GET_DESC_CHECK_PERCPU) {
     if (WARN(!irq_is_nmi(scoped_irqdesc),
-    "prepare_percpu_nmi called for a non-NMI interrupt: irq %u\n", irq))
+    "prepare_percpu_nmi called for a non-NMI interrupt: irq %u\n", irq)) {
     return -EINVAL;
+    }
     ret = irq_nmi_setup(scoped_irqdesc);
-    if (ret)
-    pr_err("Failed to setup NMI delivery: irq %u\n", irq);
+    if (ret) {
+    pr_err!("Failed to setup NMI delivery: irq %u\n", irq);
+    }
     }
     return ret;
     }
@@ -2461,31 +2727,31 @@ pub unsafe extern "C" fn prepare_percpu_nmi(irq: c_uint) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn teardown_percpu_nmi(irq: c_uint) {
-    void teardown_percpu_nmi(unsigned int irq)
-    {
-    WARN_ON(preemptible());
+    WARN_ON!(preemptible());
     scoped_irqdesc_get_and_lock(irq, IRQ_GET_DESC_CHECK_PERCPU) {
-    if (WARN_ON(!irq_is_nmi(scoped_irqdesc)))
+    if (WARN_ON!(!irq_is_nmi(scoped_irqdesc))) {
     return;
+    }
     irq_nmi_teardown(scoped_irqdesc);
     }
     }
 #[no_mangle]
-unsafe extern "C" fn __irq_get_irqchip_state(data: *mut irq_data, which: enum irqchip_irq_state, state: *mut bool) -> c_int {
-    static int __irq_get_irqchip_state(struct irq_data *data, enum irqchip_irq_state which, bool *state)
-    {
-    struct irq_chip *chip;
-    let mut err: c_int = -EINVAL;
+unsafe extern "C" fn __irq_get_irqchip_state(data: *mut irq_data, which: irqchip_irq_state, state: *mut bool) -> c_int {
+pub static mut chip: *mut c_void = core::ptr::null_mut();
+pub static mut err: c_int = 0;
     do {
     chip = irq_data_get_irq_chip(data);
-    if (WARN_ON_ONCE(!chip))
+    if (WARN_ON_ONCE!(!chip)) {
     return -ENODEV;
-    if (chip.irq_get_irqchip_state)
+    }
+    if (chip.irq_get_irqchip_state) {
     break;
+    }
     data = irqd_get_parent_data(data);
     } while (data);
-    if (data)
+    if (data) {
     err = chip.irq_get_irqchip_state(data, which, state);
+    }
     return err;
     }
 //
@@ -2501,11 +2767,9 @@ unsafe extern "C" fn __irq_get_irqchip_state(data: *mut irq_data, which: enum ir
 // controller has per-cpu registers.
 //
 #[no_mangle]
-pub unsafe extern "C" fn irq_get_irqchip_state(irq: c_uint, which: enum irqchip_irq_state, state: *mut bool) -> c_int {
-    int irq_get_irqchip_state(unsigned int irq, enum irqchip_irq_state which, bool *state)
-    {
+pub unsafe extern "C" fn irq_get_irqchip_state(irq: c_uint, which: irqchip_irq_state, state: *mut bool) -> c_int {
     scoped_irqdesc_get_and_buslock(irq, 0) {
-    struct irq_data *data = irq_desc_get_irq_data(scoped_irqdesc);
+    let mut data = irq_desc_get_irq_data(scoped_irqdesc);
     return __irq_get_irqchip_state(data, which, state);
     }
     return -EINVAL;
@@ -2524,22 +2788,23 @@ pub unsafe extern "C" fn irq_get_irqchip_state(irq: c_uint, which: enum irqchip_
 // controller has per-cpu registers.
 //
 #[no_mangle]
-pub unsafe extern "C" fn irq_set_irqchip_state(irq: c_uint, which: enum irqchip_irq_state, val: bool) -> c_int {
-    int irq_set_irqchip_state(unsigned int irq, enum irqchip_irq_state which, bool val)
-    {
+pub unsafe extern "C" fn irq_set_irqchip_state(irq: c_uint, which: irqchip_irq_state, val: bool) -> c_int {
     scoped_irqdesc_get_and_buslock(irq, 0) {
-    struct irq_data *data = irq_desc_get_irq_data(scoped_irqdesc);
-    struct irq_chip *chip;
+    let mut data = irq_desc_get_irq_data(scoped_irqdesc);
+pub static mut chip: *mut c_void = core::ptr::null_mut();
     do {
     chip = irq_data_get_irq_chip(data);
-    if (WARN_ON_ONCE(!chip))
+    if (WARN_ON_ONCE!(!chip)) {
     return -ENODEV;
-    if (chip.irq_set_irqchip_state)
+    }
+    if (chip.irq_set_irqchip_state) {
     break;
+    }
     data = irqd_get_parent_data(data);
     } while (data);
-    if (data)
+    if (data) {
     return chip.irq_set_irqchip_state(data, which, val);
+    }
     }
     return -EINVAL;
     }
@@ -2552,9 +2817,7 @@ pub unsafe extern "C" fn irq_set_irqchip_state(irq: c_uint, which: enum irqchip_
 //
 #[no_mangle]
 pub unsafe extern "C" fn irq_has_action(irq: c_uint) -> bool {
-    bool irq_has_action(unsigned int irq)
-    {
-    bool res;
+    let mut res = 0;
     rcu_read_lock();
     res = irq_desc_has_action(irq_to_desc(irq));
     rcu_read_unlock();
@@ -2570,14 +2833,13 @@ pub unsafe extern "C" fn irq_has_action(irq: c_uint) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn irq_check_status_bit(irq: c_uint, bitmask: c_uint) -> bool {
-    bool irq_check_status_bit(unsigned int irq, unsigned int bitmask)
-    {
-    struct irq_desc *desc;
-    let mut res: bool = false;
+pub static mut desc: *mut c_void = core::ptr::null_mut();
+pub static mut res: bool = false;
     rcu_read_lock();
     desc = irq_to_desc(irq);
-    if (desc)
+    if (desc) {
     res = !!(desc.status_use_accessors & bitmask);
+    }
     rcu_read_unlock();
     return res;
     }

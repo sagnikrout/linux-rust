@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -49,15 +299,15 @@ pub const IO_BUFFER_LENGTH: c_int = 2048;
 pub const MAX_TOKS: c_int = 64;
 // Number of bytes needed by cmd_finalize.
 pub const CMD_FINALIZE_BYTES_NEEDED: c_int = 7;
-    static struct key *sed_opal_keyring;
+pub static mut sed_opal_keyring: *mut c_void = core::ptr::null_mut();
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct opal_step {
-    pub data): *mut *mut *mut int (fn)(struct opal_dev dev, void,
+    pub data): *mut *mut *mut int (fn)(opal_dev dev, void,
     pub data: *mut c_void,
 }
 
-    typedef int (cont_fn)(struct opal_dev *dev);
+    typedef int (cont_fn)(opal_dev *dev);
     enum opal_atom_width {
     OPAL_WIDTH_TINY,
     OPAL_WIDTH_SHORT,
@@ -76,8 +326,8 @@ pub struct opal_step {
 pub struct opal_resp_tok {
     pub pos: *const u8,
     pub len: usize,
-    pub type: enum opal_response_token,
-    pub width: enum opal_atom_width,
+    pub type: opal_response_token,
+    pub width: opal_atom_width,
     union {
     pub u: u64,
     pub s: i64,
@@ -109,10 +359,10 @@ pub struct opal_dev {
     pub comid: u16,
     pub hsn: u32,
     pub tsn: u32,
-    pub /: *mut *mut u64 align; / alignment granularity,
+//     pub /: *mut *mut u64 align; / alignment granularity,
     pub lowest_lba: u64,
     pub logical_block_size: u32,
-    pub /: *mut *mut u8 align_required; / ALIGN: 0 or 1,
+//     pub /: *mut *mut u8 align_required; / ALIGN: 0 or 1,
     pub pos: usize,
     pub cmd: *mut u8,
     pub resp: *mut u8,
@@ -184,7 +434,7 @@ pub struct opal_dev {
     { 0x00, 0x00, 0x00, 0x0B, 0x00, 0x00, 0x00, 0x01},
     [OPAL_C_PIN_ADMIN1] =
     { 0x00, 0x00, 0x00, 0x0B, 0x00, 0x01, 0x00, 0x01},
-// half UID's (only first 4 bytes used)
+half UID's (only first 4 bytes used)
     [OPAL_HALF_UID_AUTHORITY_OBJ_REF] =
     { 0x00, 0x00, 0x0C, 0x05, 0xff, 0xff, 0xff, 0xff },
     [OPAL_HALF_UID_BOOLEAN_ACE] =
@@ -234,8 +484,8 @@ pub struct opal_dev {
     [OPAL_REACTIVATE] =
     { 0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x08, 0x01 },
     };
-    static int end_opal_session_error(struct opal_dev *dev);
-    static int opal_discovery0_step(struct opal_dev *dev);
+// forward_decl: end_opal_session_error;
+// forward_decl: opal_discovery0_step;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct opal_suspend_data {
@@ -272,19 +522,19 @@ pub struct opal_suspend_data {
     };
     static const char *opal_error_to_human(int error)
     {
-    if (error == 0x3f)
+    if (error == 0x3f) {
     return "Failed";
-    if (error >= ARRAY_SIZE(opal_errors) || error < 0)
+    }
+    if (error >= ARRAY_SIZE!(opal_errors) || error < 0) {
     return "Unknown Error";
+    }
     return opal_errors[error];
     }
 #[no_mangle]
 unsafe extern "C" fn print_buffer(ptr: *const u8, length: u32) {
-    static void print_buffer(const u8 *ptr, u32 length)
-    {
 
     print_hex_dump_bytes("OPAL: ", DUMP_PREFIX_OFFSET, ptr, length);
-    pr_debug("\n");
+    pr_debug!("\n");
 
     }
 //
@@ -292,18 +542,17 @@ unsafe extern "C" fn print_buffer(ptr: *const u8, length: u32) {
 //
 #[no_mangle]
 unsafe extern "C" fn update_sed_opal_key(desc: *const c_char, key_data: *mut u_char, keylen: c_int) -> c_int {
-    static int update_sed_opal_key(const char *desc, u_char *key_data, int keylen)
-    {
-    key_ref_t kr;
-    if (!sed_opal_keyring)
+    let mut kr;
+    if (!sed_opal_keyring) {
     return -ENOKEY;
+    }
     kr = key_create_or_update(make_key_ref(sed_opal_keyring, true), "user",
-    desc, (const void *)key_data, keylen,
+    desc, key_data, keylen,
     KEY_USR_VIEW | KEY_USR_SEARCH | KEY_USR_WRITE,
     KEY_ALLOC_NOT_IN_QUOTA | KEY_ALLOC_BUILT_IN |
     KEY_ALLOC_BYPASS_RESTRICTION);
     if (IS_ERR(kr)) {
-    pr_err("Error adding SED key (%ld)\n", PTR_ERR(kr));
+    pr_err!("Error adding SED key (%ld)\n", PTR_ERR(kr));
     return PTR_ERR(kr);
     }
     return 0;
@@ -313,24 +562,25 @@ unsafe extern "C" fn update_sed_opal_key(desc: *const c_char, key_data: *mut u_c
 //
 #[no_mangle]
 unsafe extern "C" fn read_sed_opal_key(key_name: *const c_char, buffer: *mut u_char, buflen: c_int) -> c_int {
-    static int read_sed_opal_key(const char *key_name, u_char *buffer, int buflen)
-    {
-    int ret;
-    key_ref_t kref;
-    struct key *key;
-    if (!sed_opal_keyring)
+    let mut ret = 0;
+    let mut kref;
+pub static mut key: *mut c_void = core::ptr::null_mut();
+    if (!sed_opal_keyring) {
     return -ENOKEY;
+    }
     kref = keyring_search(make_key_ref(sed_opal_keyring, true),
     &key_type_user, key_name, true);
-    if (IS_ERR(kref))
+    if (IS_ERR(kref)) {
     return PTR_ERR(kref);
+    }
     key = key_ref_to_ptr(kref);
     down_read(&key.sem);
     ret = key_validate(key);
     if (ret == 0) {
-    if (buflen > key.datalen)
+    if (buflen > key.datalen) {
     buflen = key.datalen;
-    ret = key.type.read(key, (char *)buffer, buflen);
+    }
+    ret = key.type.read(key, buffer, buflen);
     }
     up_read(&key.sem);
     key_ref_put(kref);
@@ -338,49 +588,49 @@ unsafe extern "C" fn read_sed_opal_key(key_name: *const c_char, buffer: *mut u_c
     }
 #[no_mangle]
 unsafe extern "C" fn opal_get_key(dev: *mut opal_dev, key: *mut opal_key) -> c_int {
-    static int opal_get_key(struct opal_dev *dev, struct opal_key *key)
-    {
-    let mut ret: c_int = 0;
-    switch (key.key_type) {
-    case OPAL_INCLUDED:
+pub static mut ret: c_int = 0;
+    match (key.key_type) {
+    OPAL_INCLUDED => {
 // the key is ready to use
-    break;
-    case OPAL_KEYRING:
+    // break;
+    }
+    OPAL_KEYRING => {
 // the key is in the keyring
     ret = read_sed_opal_key(OPAL_AUTH_KEY, key.key, OPAL_KEY_MAX);
     if (ret > 0) {
     if (ret > U8_MAX) {
     ret = -ENOSPC;
-    goto error;
+// goto;
     }
     key.key_len = ret;
     key.key_type = OPAL_INCLUDED;
     }
-    break;
-    default:
-    ret = -EINVAL;
-    break;
+    // break;
     }
-    if (ret < 0)
-    goto error;
+    _ => {
+    ret = -EINVAL;
+    // break;
+    }
+    }
+    if (ret < 0) {
+// goto;
+    }
 // must have a PEK by now or it's an error
     if (key.key_type != OPAL_INCLUDED || key.key_len == 0) {
     ret = -EINVAL;
-    goto error;
+// goto;
     }
     return 0;
-    error:
-    pr_debug("Error getting password: %d\n", ret);
+// label;
+    pr_debug!("Error getting password: %d\n", ret);
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn check_tper(data: *const c_void) -> bool {
-    static bool check_tper(const void *data)
-    {
-    const struct d0_tper_features *tper = data;
-    let mut flags: u8 = tper.supported_features;
+    let mut tper = data;
+pub static mut flags: u8 = 0;
     if (!(flags & TPER_SYNC_SUPPORTED)) {
-    pr_debug("TPer sync not supported. flags = %d\n",
+    pr_debug!("TPer sync not supported. flags = %d\n",
     tper.supported_features);
     return false;
     }
@@ -388,102 +638,81 @@ unsafe extern "C" fn check_tper(data: *const c_void) -> bool {
     }
 #[no_mangle]
 unsafe extern "C" fn check_lcksuppt(data: *const c_void) -> bool {
-    static bool check_lcksuppt(const void *data)
-    {
-    const struct d0_locking_features *lfeat = data;
-    let mut sup_feat: u8 = lfeat.supported_features;
+    let mut lfeat = data;
+pub static mut sup_feat: u8 = 0;
     return !!(sup_feat & LOCKING_SUPPORTED_MASK);
     }
 #[no_mangle]
 unsafe extern "C" fn check_lckenabled(data: *const c_void) -> bool {
-    static bool check_lckenabled(const void *data)
-    {
-    const struct d0_locking_features *lfeat = data;
-    let mut sup_feat: u8 = lfeat.supported_features;
+    let mut lfeat = data;
+pub static mut sup_feat: u8 = 0;
     return !!(sup_feat & LOCKING_ENABLED_MASK);
     }
 #[no_mangle]
 unsafe extern "C" fn check_locked(data: *const c_void) -> bool {
-    static bool check_locked(const void *data)
-    {
-    const struct d0_locking_features *lfeat = data;
-    let mut sup_feat: u8 = lfeat.supported_features;
+    let mut lfeat = data;
+pub static mut sup_feat: u8 = 0;
     return !!(sup_feat & LOCKED_MASK);
     }
 #[no_mangle]
 unsafe extern "C" fn check_mbrenabled(data: *const c_void) -> bool {
-    static bool check_mbrenabled(const void *data)
-    {
-    const struct d0_locking_features *lfeat = data;
-    let mut sup_feat: u8 = lfeat.supported_features;
+    let mut lfeat = data;
+pub static mut sup_feat: u8 = 0;
     return !!(sup_feat & MBR_ENABLED_MASK);
     }
 #[no_mangle]
 unsafe extern "C" fn check_mbrdone(data: *const c_void) -> bool {
-    static bool check_mbrdone(const void *data)
-    {
-    const struct d0_locking_features *lfeat = data;
-    let mut sup_feat: u8 = lfeat.supported_features;
+    let mut lfeat = data;
+pub static mut sup_feat: u8 = 0;
     return !!(sup_feat & MBR_DONE_MASK);
     }
 #[no_mangle]
 unsafe extern "C" fn check_sum(data: *const c_void) -> bool {
-    static bool check_sum(const void *data)
-    {
-    const struct d0_single_user_mode *sum = data;
-    let mut nlo: u32 = be32_to_cpu(sum.num_locking_objects);
+    let mut sum = data;
+pub static mut nlo: u32 = 0;
     if (nlo == 0) {
-    pr_debug("Need at least one locking object.\n");
+    pr_debug!("Need at least one locking object.\n");
     return false;
     }
-    pr_debug("Number of locking objects: %d\n", nlo);
+    pr_debug!("Number of locking objects: %d\n", nlo);
     return true;
     }
 #[no_mangle]
 unsafe extern "C" fn get_comid_v100(data: *const c_void) -> u16 {
-    static u16 get_comid_v100(const void *data)
-    {
-    const struct d0_opal_v100 *v100 = data;
+    let mut v100 = data;
     return be16_to_cpu(v100.baseComID);
     }
 #[no_mangle]
 unsafe extern "C" fn get_comid_v200(data: *const c_void) -> u16 {
-    static u16 get_comid_v200(const void *data)
-    {
-    const struct d0_opal_v200 *v200 = data;
+    let mut v200 = data;
     return be16_to_cpu(v200.baseComID);
     }
 #[no_mangle]
 unsafe extern "C" fn opal_send_cmd(dev: *mut opal_dev) -> c_int {
-    static int opal_send_cmd(struct opal_dev *dev)
-    {
     return dev.send_recv(dev.data, dev.comid, TCG_SECP_01,
     dev.cmd, IO_BUFFER_LENGTH,
     true);
     }
 #[no_mangle]
 unsafe extern "C" fn opal_recv_cmd(dev: *mut opal_dev) -> c_int {
-    static int opal_recv_cmd(struct opal_dev *dev)
-    {
     return dev.send_recv(dev.data, dev.comid, TCG_SECP_01,
     dev.resp, IO_BUFFER_LENGTH,
     false);
     }
 #[no_mangle]
 unsafe extern "C" fn opal_recv_check(dev: *mut opal_dev) -> c_int {
-    static int opal_recv_check(struct opal_dev *dev)
-    {
-    let mut buflen: usize = IO_BUFFER_LENGTH;
-    void *buffer = dev.resp;
-    struct opal_header *hdr = buffer;
-    int ret;
+pub static mut buflen: usize = 0;
+    let mut buffer = dev.resp;
+    let mut hdr = buffer;
+    let mut ret = 0;
     do {
-    pr_debug("Sent OPAL command: outstanding=%d, minTransfer=%d\n",
+    pr_debug!("Sent OPAL command: outstanding=%d, minTransfer=%d\n",
     hdr.cp.outstandingData,
     hdr.cp.minTransfer);
     if (hdr.cp.outstandingData == 0 ||
-    hdr.cp.minTransfer != 0)
+    hdr.cp.minTransfer != 0) {
     return 0;
+    }
     memset(buffer, 0, buflen);
     ret = opal_recv_cmd(dev);
     } while (!ret);
@@ -491,57 +720,56 @@ unsafe extern "C" fn opal_recv_check(dev: *mut opal_dev) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn opal_send_recv(dev: *mut opal_dev, cont: *mut cont_fn) -> c_int {
-    static int opal_send_recv(struct opal_dev *dev, cont_fn *cont)
-    {
-    int ret;
+    let mut ret = 0;
     ret = opal_send_cmd(dev);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     ret = opal_recv_cmd(dev);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     ret = opal_recv_check(dev);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     return cont(dev);
     }
 #[no_mangle]
 unsafe extern "C" fn check_geometry(dev: *mut opal_dev, data: *const c_void) {
-    static void check_geometry(struct opal_dev *dev, const void *data)
-    {
-    const struct d0_geometry_features *geo = data;
+    let mut geo = data;
     dev.align = be64_to_cpu(geo.alignment_granularity);
     dev.lowest_lba = be64_to_cpu(geo.lowest_aligned_lba);
     dev.logical_block_size = be32_to_cpu(geo.logical_block_size);
     dev.align_required = geo.reserved01 & 1;
     }
-    static int execute_step(struct opal_dev *dev,
-    const struct opal_step *step, size_t stepIndex)
-    {
-    let mut error: c_int = step.fn(dev, step.data);
+#[no_mangle]
+pub unsafe extern "C" fn execute_step(dev: *mut opal_dev, step: *mut opal_step, stepIndex: size_t) -> c_int {
+pub static mut error: c_int = 0;
     if (error) {
-    pr_debug("Step %zu (%pS) failed with error %d: %s\n",
+    pr_debug!("Step %zu (%pS) failed with error %d: %s\n",
     stepIndex, step.fn, error,
     opal_error_to_human(error));
     }
     return error;
     }
-    static int execute_steps(struct opal_dev *dev,
-    const struct opal_step *steps, size_t n_steps)
-    {
-    let mut state: usize = 0;
-    int error;
+#[no_mangle]
+pub unsafe extern "C" fn execute_steps(dev: *mut opal_dev, steps: *mut opal_step, n_steps: size_t) -> c_int {
+pub static mut state: usize = 0;
+    let mut error = 0;
 // first do a discovery0
     error = opal_discovery0_step(dev);
-    if (error)
+    if (error) {
     return error;
-    for (state = 0; state < n_steps; state++) {
+    }
+    while (state < n_steps) {
     error = execute_step(dev, &steps[state], state);
-    if (error)
-    goto out_error;
+    if (error) {
+// goto;
+    }
     }
     return 0;
-    out_error:
+// label;
 //
 // For each OPAL command the first step in steps starts some sort of
 // session. If an error occurred in the initial discovery0 or if an
@@ -550,69 +778,74 @@ unsafe extern "C" fn check_geometry(dev: *mut opal_dev, data: *const c_void) {
 // start a session. Therefore we shouldn't attempt to terminate a
 // session, as one has not yet been created.
 //
-    if (state > 0)
+    if (state > 0) {
     end_opal_session_error(dev);
+    }
     return error;
     }
 #[no_mangle]
 unsafe extern "C" fn opal_discovery0_end(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int opal_discovery0_end(struct opal_dev *dev, void *data)
-    {
-    struct opal_discovery *discv_out = data; /* may be core::ptr::null_mut() */
-    u8 __user *buf_out;
-    u64 len_out;
-    let mut found_com_id: bool = false, supported = true, single_user = false;
-    const struct d0_header *hdr = (struct d0_header *)dev.resp;
-    const u8 *epos = dev.resp, *cpos = dev.resp;
-    let mut comid: u16 = 0;
-    let mut hlen: u32 = be32_to_cpu(hdr.length);
+    let mut discv_out = data; /* may be core::ptr::null_mut() */
+    let mut buf_out = core::ptr::null_mut();
+    let mut len_out = 0;
+pub static mut found_com_id: bool = false;
+    let mut hdr = dev.resp;
+    let mut epos = dev.resp, *cpos = dev.resp;
+pub static mut comid: u16 = 0;
+pub static mut hlen: u32 = 0;
     print_buffer(dev.resp, hlen);
     dev.flags &= OPAL_FL_SUPPORTED;
-    if (hlen > IO_BUFFER_LENGTH - sizeof(*hdr)) {
-    pr_debug("Discovery length overflows buffer (%zu+%u)/%u\n",
-    sizeof(*hdr), hlen, IO_BUFFER_LENGTH);
+    if (hlen > IO_BUFFER_LENGTH - sizeof!(*hdr)) {
+    pr_debug!("Discovery length overflows buffer (%zu+%u)/%u\n",
+    sizeof!(*hdr), hlen, IO_BUFFER_LENGTH);
     return -EFAULT;
     }
     if (discv_out) {
-    buf_out = (u8 __user *)(uintptr_t)discv_out.data;
+    buf_out = (uintptr_t)discv_out.data;
     len_out = min_t(u64, discv_out.size, hlen);
-    if (buf_out && copy_to_user(buf_out, dev.resp, len_out))
+    if (buf_out && copy_to_user(buf_out, dev.resp, len_out)) {
     return -EFAULT;
+    }
     discv_out.size = hlen; /* actual size of data */
     }
     epos += hlen; /* end of buffer */
-    cpos += sizeof(*hdr); /* current position on buffer */
+    cpos += sizeof!(*hdr); /* current position on buffer */
     while (cpos < epos && supported) {
-    const struct d0_features *body =
-    (const struct d0_features *)cpos;
+    let mut body = cpos;
     switch (be16_to_cpu(body.code)) {
     case FC_TPER:
     supported = check_tper(body.features);
     break;
     case FC_SINGLEUSER:
     single_user = check_sum(body.features);
-    if (single_user)
+    if (single_user) {
     dev.flags |= OPAL_FL_SUM_SUPPORTED;
+    }
     break;
     case FC_GEOMETRY:
     check_geometry(dev, body);
     break;
     case FC_LOCKING:
-    if (check_lcksuppt(body.features))
+    if (check_lcksuppt(body.features)) {
     dev.flags |= OPAL_FL_LOCKING_SUPPORTED;
-    if (check_lckenabled(body.features))
+    }
+    if (check_lckenabled(body.features)) {
     dev.flags |= OPAL_FL_LOCKING_ENABLED;
-    if (check_locked(body.features))
+    }
+    if (check_locked(body.features)) {
     dev.flags |= OPAL_FL_LOCKED;
-    if (check_mbrenabled(body.features))
+    }
+    if (check_mbrenabled(body.features)) {
     dev.flags |= OPAL_FL_MBR_ENABLED;
-    if (check_mbrdone(body.features))
+    }
+    if (check_mbrdone(body.features)) {
     dev.flags |= OPAL_FL_MBR_DONE;
+    }
     break;
     case FC_ENTERPRISE:
     case FC_DATASTORE:
 // some ignored properties
-    pr_debug("Found OPAL feature description: %d\n",
+    pr_debug!("Found OPAL feature description: %d\n",
     be16_to_cpu(body.code));
     break;
     case FC_OPALV100:
@@ -626,20 +859,21 @@ unsafe extern "C" fn opal_discovery0_end(dev: *mut opal_dev, data: *mut c_void) 
     case 0xbfff ... 0xffff:
 // vendor specific, just ignore
     break;
-    default:
-    pr_debug("OPAL Unknown feature: %d\n",
+// label;
+    pr_debug!("OPAL Unknown feature: %d\n",
     be16_to_cpu(body.code));
     }
     cpos += body.length + 4;
     }
     if (!supported) {
-    pr_debug("This device is not Opal enabled. Not Supported!\n");
+    pr_debug!("This device is not Opal enabled. Not Supported!\n");
     return -EOPNOTSUPP;
     }
-    if (!single_user)
-    pr_debug("Device doesn't support single user mode\n");
+    if (!single_user) {
+    pr_debug!("Device doesn't support single user mode\n");
+    }
     if (!found_com_id) {
-    pr_debug("Could not find OPAL comid for device. Returning early\n");
+    pr_debug!("Could not find OPAL comid for device. Returning early\n");
     return -EOPNOTSUPP;
     }
     dev.comid = comid;
@@ -647,39 +881,31 @@ unsafe extern "C" fn opal_discovery0_end(dev: *mut opal_dev, data: *mut c_void) 
     }
 #[no_mangle]
 unsafe extern "C" fn opal_discovery0(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int opal_discovery0(struct opal_dev *dev, void *data)
-    {
-    int ret;
+    let mut ret = 0;
     memset(dev.resp, 0, IO_BUFFER_LENGTH);
     dev.comid = OPAL_DISCOVERY_COMID;
     ret = opal_recv_cmd(dev);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     return opal_discovery0_end(dev, data);
     }
 #[no_mangle]
 unsafe extern "C" fn opal_discovery0_step(dev: *mut opal_dev) -> c_int {
-    static int opal_discovery0_step(struct opal_dev *dev)
-    {
-    const struct opal_step discovery0_step = {
-    opal_discovery0, core::ptr::null_mut()
-    };
+pub static mut opal_step: usize = 0;
     return execute_step(dev, &discovery0_step, 0);
     }
 #[no_mangle]
 unsafe extern "C" fn remaining_size(cmd: *mut opal_dev) -> usize {
-    static size_t remaining_size(struct opal_dev *cmd)
-    {
     return IO_BUFFER_LENGTH - cmd.pos;
     }
 #[no_mangle]
 unsafe extern "C" fn can_add(err: *mut c_int, cmd: *mut opal_dev, len: usize) -> bool {
-    static bool can_add(int *err, struct opal_dev *cmd, size_t len)
-    {
-    if (*err)
+    if (*err) {
     return false;
+    }
     if (remaining_size(cmd) < len) {
-    pr_debug("Error adding %zu bytes: end of buffer.\n", len);
+    pr_debug!("Error adding %zu bytes: end of buffer.\n", len);
 // err = -ERANGE;
     return false;
     }
@@ -687,27 +913,24 @@ unsafe extern "C" fn can_add(err: *mut c_int, cmd: *mut opal_dev, len: usize) ->
     }
 #[no_mangle]
 unsafe extern "C" fn add_token_u8(err: *mut c_int, cmd: *mut opal_dev, tok: u8) {
-    static void add_token_u8(int *err, struct opal_dev *cmd, u8 tok)
-    {
-    if (!can_add(err, cmd, 1))
+    if (!can_add(err, cmd, 1)) {
     return;
+    }
     cmd.cmd[cmd.pos++] = tok;
     }
-    static void add_short_atom_header(struct opal_dev *cmd, bool bytestring,
-    bool has_sign, int len)
-    {
-    u8 atom;
-    let mut err: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn add_short_atom_header(cmd: *mut opal_dev, bytestring: bool, has_sign: bool, len: c_int) {
+    let mut atom = 0;
+pub static mut err: c_int = 0;
     atom = SHORT_ATOM_ID;
     atom |= bytestring ? SHORT_ATOM_BYTESTRING : 0;
     atom |= has_sign ? SHORT_ATOM_SIGNED : 0;
     atom |= len & SHORT_ATOM_LEN_MASK;
     add_token_u8(&err, cmd, atom);
     }
-    static void add_medium_atom_header(struct opal_dev *cmd, bool bytestring,
-    bool has_sign, int len)
-    {
-    u8 header0;
+#[no_mangle]
+pub unsafe extern "C" fn add_medium_atom_header(cmd: *mut opal_dev, bytestring: bool, has_sign: bool, len: c_int) {
+    let mut header0 = 0;
     header0 = MEDIUM_ATOM_ID;
     header0 |= bytestring ? MEDIUM_ATOM_BYTESTRING : 0;
     header0 |= has_sign ? MEDIUM_ATOM_SIGNED : 0;
@@ -717,10 +940,8 @@ unsafe extern "C" fn add_token_u8(err: *mut c_int, cmd: *mut opal_dev, tok: u8) 
     }
 #[no_mangle]
 unsafe extern "C" fn add_token_u64(err: *mut c_int, cmd: *mut opal_dev, number: u64) {
-    static void add_token_u64(int *err, struct opal_dev *cmd, u64 number)
-    {
-    size_t len;
-    int msb;
+    let mut len = 0;
+    let mut msb = 0;
     if (!(number & ~TINY_ATOM_DATA_MASK)) {
     add_token_u8(err, cmd, number);
     return;
@@ -728,62 +949,62 @@ unsafe extern "C" fn add_token_u64(err: *mut c_int, cmd: *mut opal_dev, number: 
     msb = fls64(number);
     len = DIV_ROUND_UP(msb, 8);
     if (!can_add(err, cmd, len + 1)) {
-    pr_debug("Error adding u64: end of buffer.\n");
+    pr_debug!("Error adding u64: end of buffer.\n");
     return;
     }
     add_short_atom_header(cmd, false, false, len);
-    while (len--)
+    while (len--) {
     add_token_u8(err, cmd, number >> (len * 8));
     }
-    static u8 *add_bytestring_header(int *err, struct opal_dev *cmd, size_t len)
-    {
-    let mut header_len: usize = 1;
-    let mut is_short_atom: bool = true;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn add_bytestring_header(err: *mut c_int, cmd: *mut opal_dev, len: size_t) -> *mut c_void {
+pub static mut header_len: usize = 1;
+pub static mut is_short_atom: bool = true;
     if (len & ~SHORT_ATOM_LEN_MASK) {
     header_len = 2;
     is_short_atom = false;
     }
     if (!can_add(err, cmd, header_len + len)) {
-    pr_debug("Error adding bytestring: end of buffer.\n");
+    pr_debug!("Error adding bytestring: end of buffer.\n");
     return core::ptr::null_mut();
     }
-    if (is_short_atom)
+    if (is_short_atom) {
     add_short_atom_header(cmd, true, false, len);
-    else
+    }
+    else {
     add_medium_atom_header(cmd, true, false, len);
+    }
     return &cmd.cmd[cmd.pos];
     }
-    static void add_token_bytestring(int *err, struct opal_dev *cmd,
-    const u8 *bytestring, size_t len)
-    {
-    u8 *start;
+#[no_mangle]
+pub unsafe extern "C" fn add_token_bytestring(err: *mut c_int, cmd: *mut opal_dev, bytestring: *mut u8, len: size_t) {
+pub static mut start: *mut c_void = core::ptr::null_mut();
     start = add_bytestring_header(err, cmd, len);
-    if (!start)
+    if (!start) {
     return;
+    }
     memcpy(start, bytestring, len);
     cmd.pos += len;
     }
 #[no_mangle]
 unsafe extern "C" fn build_locking_range(buffer: *mut u8, length: usize, lr: u8) -> c_int {
-    static int build_locking_range(u8 *buffer, size_t length, u8 lr)
-    {
     if (length > OPAL_UID_LENGTH) {
-    pr_debug("Can't build locking range. Length OOB\n");
+    pr_debug!("Can't build locking range. Length OOB\n");
     return -ERANGE;
     }
     memcpy(buffer, opaluid[OPAL_LOCKINGRANGE_GLOBAL], OPAL_UID_LENGTH);
-    if (lr == 0)
+    if (lr == 0) {
     return 0;
+    }
     buffer[5] = LOCKING_RANGE_NON_GLOBAL;
     buffer[7] = lr;
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn build_locking_user(buffer: *mut u8, length: usize, lr: u8) -> c_int {
-    static int build_locking_user(u8 *buffer, size_t length, u8 lr)
-    {
     if (length > OPAL_UID_LENGTH) {
-    pr_debug("Can't build locking range user. Length OOB\n");
+    pr_debug!("Can't build locking range user. Length OOB\n");
     return -ERANGE;
     }
     memcpy(buffer, opaluid[OPAL_USER1_UID], OPAL_UID_LENGTH);
@@ -792,9 +1013,7 @@ unsafe extern "C" fn build_locking_user(buffer: *mut u8, length: usize, lr: u8) 
     }
 #[no_mangle]
 unsafe extern "C" fn set_comid(cmd: *mut opal_dev, comid: u16) {
-    static void set_comid(struct opal_dev *cmd, u16 comid)
-    {
-    struct opal_header *hdr = (struct opal_header *)cmd.cmd;
+    let mut hdr = cmd.cmd;
     hdr.cp.extendedComID[0] = comid >> 8;
     hdr.cp.extendedComID[1] = comid;
     hdr.cp.extendedComID[2] = 0;
@@ -802,10 +1021,8 @@ unsafe extern "C" fn set_comid(cmd: *mut opal_dev, comid: u16) {
     }
 #[no_mangle]
 unsafe extern "C" fn cmd_finalize(cmd: *mut opal_dev, hsn: u32, tsn: u32) -> c_int {
-    static int cmd_finalize(struct opal_dev *cmd, u32 hsn, u32 tsn)
-    {
-    struct opal_header *hdr;
-    let mut err: c_int = 0;
+pub static mut hdr: *mut c_void = core::ptr::null_mut();
+pub static mut err: c_int = 0;
 //
 // Close the parameter list opened from cmd_start.
 // The number of bytes added must be equal to
@@ -819,49 +1036,48 @@ unsafe extern "C" fn cmd_finalize(cmd: *mut opal_dev, hsn: u32, tsn: u32) -> c_i
     add_token_u8(&err, cmd, 0);
     add_token_u8(&err, cmd, OPAL_ENDLIST);
     if (err) {
-    pr_debug("Error finalizing command.\n");
+    pr_debug!("Error finalizing command.\n");
     return -EFAULT;
     }
-    hdr = (struct opal_header *) cmd.cmd;
+    hdr =  cmd.cmd;
     hdr.pkt.tsn = cpu_to_be32(tsn);
     hdr.pkt.hsn = cpu_to_be32(hsn);
-    hdr.subpkt.length = cpu_to_be32(cmd.pos - sizeof(*hdr));
+    hdr.subpkt.length = cpu_to_be32(cmd.pos - sizeof!(*hdr));
     while (cmd.pos % 4) {
     if (cmd.pos >= IO_BUFFER_LENGTH) {
-    pr_debug("Error: Buffer overrun\n");
+    pr_debug!("Error: Buffer overrun\n");
     return -ERANGE;
     }
     cmd.cmd[cmd.pos++] = 0;
     }
-    hdr.pkt.length = cpu_to_be32(cmd.pos - sizeof(hdr.cp) -
-    sizeof(hdr.pkt));
-    hdr.cp.length = cpu_to_be32(cmd.pos - sizeof(hdr.cp));
+    hdr.pkt.length = cpu_to_be32(cmd.pos - sizeof!(hdr.cp) -
+    sizeof!(hdr.pkt));
+    hdr.cp.length = cpu_to_be32(cmd.pos - sizeof!(hdr.cp));
     return 0;
     }
     static const struct opal_resp_tok *response_get_token(
     const struct parsed_resp *resp,
     int n)
     {
-    const struct opal_resp_tok *tok;
+pub static mut tok: *mut c_void = core::ptr::null_mut();
     if (!resp) {
-    pr_debug("Response is core::ptr::null_mut()\n");
+    pr_debug!("Response is core::ptr::null_mut()\n");
     return ERR_PTR(-EINVAL);
     }
     if (n >= resp.num) {
-    pr_debug("Token number doesn't exist: %d, resp: %d\n",
+    pr_debug!("Token number doesn't exist: %d, resp: %d\n",
     n, resp.num);
     return ERR_PTR(-EINVAL);
     }
     tok = &resp.toks[n];
     if (tok.len == 0) {
-    pr_debug("Token length must be non-zero\n");
+    pr_debug!("Token length must be non-zero\n");
     return ERR_PTR(-EINVAL);
     }
     return tok;
     }
-    static ssize_t response_parse_tiny(struct opal_resp_tok *tok,
-    const u8 *pos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn response_parse_tiny(tok: *mut opal_resp_tok, pos: *mut u8) -> ssize_t {
     tok.pos = pos;
     tok.len = 1;
     tok.width = OPAL_WIDTH_TINY;
@@ -873,9 +1089,8 @@ unsafe extern "C" fn cmd_finalize(cmd: *mut opal_dev, hsn: u32, tsn: u32) -> c_i
     }
     return tok.len;
     }
-    static ssize_t response_parse_short(struct opal_resp_tok *tok,
-    const u8 *pos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn response_parse_short(tok: *mut opal_resp_tok, pos: *mut u8) -> ssize_t {
     tok.pos = pos;
     tok.len = (pos[0] & SHORT_ATOM_LEN_MASK) + 1;
     tok.width = OPAL_WIDTH_SHORT;
@@ -884,223 +1099,232 @@ unsafe extern "C" fn cmd_finalize(cmd: *mut opal_dev, hsn: u32, tsn: u32) -> c_i
     } else if (pos[0] & SHORT_ATOM_SIGNED) {
     tok.type = OPAL_DTA_TOKENID_SINT;
     } else {
-    let mut u_integer: u64 = 0;
+pub static mut u_integer: u64 = 0;
     ssize_t i, b = 0;
     tok.type = OPAL_DTA_TOKENID_UINT;
     if (tok.len > 9) {
-    pr_debug("uint64 with more than 8 bytes\n");
+    pr_debug!("uint64 with more than 8 bytes\n");
     return -EINVAL;
     }
-    for (i = tok.len - 1; i > 0; i--) {
+    while (i > 0) {
     u_integer |= ((u64)pos[i] << (8 * b));
-    b++;
+    b += 1;
     }
     tok.stored.u = u_integer;
     }
     return tok.len;
     }
-    static ssize_t response_parse_medium(struct opal_resp_tok *tok,
-    const u8 *pos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn response_parse_medium(tok: *mut opal_resp_tok, pos: *mut u8) -> ssize_t {
     tok.pos = pos;
     tok.len = (((pos[0] & MEDIUM_ATOM_LEN_MASK) << 8) | pos[1]) + 2;
     tok.width = OPAL_WIDTH_MEDIUM;
-    if (pos[0] & MEDIUM_ATOM_BYTESTRING)
+    if (pos[0] & MEDIUM_ATOM_BYTESTRING) {
     tok.type = OPAL_DTA_TOKENID_BYTESTRING;
-#[no_mangle]
-pub unsafe extern "C" fn if(MEDIUM_ATOM_SIGNED: pos[0] &) -> else {
-    else if (pos[0] & MEDIUM_ATOM_SIGNED)
+    }
+
+    else if (pos[0] & MEDIUM_ATOM_SIGNED) {
     tok.type = OPAL_DTA_TOKENID_SINT;
-    else
+    }
+    else {
     tok.type = OPAL_DTA_TOKENID_UINT;
+    }
     return tok.len;
     }
-    static ssize_t response_parse_long(struct opal_resp_tok *tok,
-    const u8 *pos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn response_parse_long(tok: *mut opal_resp_tok, pos: *mut u8) -> ssize_t {
     tok.pos = pos;
     tok.len = ((pos[1] << 16) | (pos[2] << 8) | pos[3]) + 4;
     tok.width = OPAL_WIDTH_LONG;
-    if (pos[0] & LONG_ATOM_BYTESTRING)
+    if (pos[0] & LONG_ATOM_BYTESTRING) {
     tok.type = OPAL_DTA_TOKENID_BYTESTRING;
-#[no_mangle]
-pub unsafe extern "C" fn if(LONG_ATOM_SIGNED: pos[0] &) -> else {
-    else if (pos[0] & LONG_ATOM_SIGNED)
+    }
+
+    else if (pos[0] & LONG_ATOM_SIGNED) {
     tok.type = OPAL_DTA_TOKENID_SINT;
-    else
+    }
+    else {
     tok.type = OPAL_DTA_TOKENID_UINT;
+    }
     return tok.len;
     }
-    static ssize_t response_parse_token(struct opal_resp_tok *tok,
-    const u8 *pos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn response_parse_token(tok: *mut opal_resp_tok, pos: *mut u8) -> ssize_t {
     tok.pos = pos;
     tok.len = 1;
     tok.type = OPAL_DTA_TOKENID_TOKEN;
     tok.width = OPAL_WIDTH_TOKEN;
     return tok.len;
     }
-    static int response_parse(const u8 *buf, size_t length,
-    struct parsed_resp *resp)
-    {
-    const struct opal_header *hdr;
-    struct opal_resp_tok *iter;
-    let mut num_entries: c_int = 0;
-    int total;
-    ssize_t token_length;
-    const u8 *pos;
+#[no_mangle]
+pub unsafe extern "C" fn response_parse(buf: *mut u8, length: size_t, resp: *mut parsed_resp) -> c_int {
+pub static mut hdr: *mut c_void = core::ptr::null_mut();
+pub static mut iter: *mut c_void = core::ptr::null_mut();
+pub static mut num_entries: c_int = 0;
+    let mut total = 0;
+    let mut token_length = 0;
+pub static mut pos: *mut c_void = core::ptr::null_mut();
     u32 clen, plen, slen;
-    if (!buf)
+    if (!buf) {
     return -EFAULT;
-    if (!resp)
+    }
+    if (!resp) {
     return -EFAULT;
-    hdr = (struct opal_header *)buf;
+    }
+    hdr = buf;
     pos = buf;
-    pos += sizeof(*hdr);
+    pos += sizeof!(*hdr);
     clen = be32_to_cpu(hdr.cp.length);
     plen = be32_to_cpu(hdr.pkt.length);
     slen = be32_to_cpu(hdr.subpkt.length);
-    pr_debug("Response size: cp: %u, pkt: %u, subpkt: %u\n",
+    pr_debug!("Response size: cp: %u, pkt: %u, subpkt: %u\n",
     clen, plen, slen);
     if (clen == 0 || plen == 0 || slen == 0 ||
-    slen > IO_BUFFER_LENGTH - sizeof(*hdr)) {
-    pr_debug("Bad header length. cp: %u, pkt: %u, subpkt: %u\n",
+    slen > IO_BUFFER_LENGTH - sizeof!(*hdr)) {
+    pr_debug!("Bad header length. cp: %u, pkt: %u, subpkt: %u\n",
     clen, plen, slen);
-    print_buffer(pos, sizeof(*hdr));
+    print_buffer(pos, sizeof!(*hdr));
     return -EINVAL;
     }
-    if (pos > buf + length)
+    if (pos > buf + length) {
     return -EFAULT;
+    }
     iter = resp.toks;
     total = slen;
     print_buffer(pos, total);
     while (total > 0) {
-    if (pos[0] <= TINY_ATOM_BYTE) /* tiny atom */
+    if (pos[0] <= TINY_ATOM_BYTE) /* tiny atom */ {
     token_length = response_parse_tiny(iter, pos);
-    else if (pos[0] <= SHORT_ATOM_BYTE) /* short atom */
+    }
+    else if (pos[0] <= SHORT_ATOM_BYTE) /* short atom */ {
     token_length = response_parse_short(iter, pos);
-    else if (pos[0] <= MEDIUM_ATOM_BYTE) /* medium atom */
+    }
+    else if (pos[0] <= MEDIUM_ATOM_BYTE) /* medium atom */ {
     token_length = response_parse_medium(iter, pos);
-    else if (pos[0] <= LONG_ATOM_BYTE) /* long atom */
+    }
+    else if (pos[0] <= LONG_ATOM_BYTE) /* long atom */ {
     token_length = response_parse_long(iter, pos);
-    else if (pos[0] == EMPTY_ATOM_BYTE) /* empty atom */
+    }
+    else if (pos[0] == EMPTY_ATOM_BYTE) /* empty atom */ {
     token_length = 1;
+    }
     else /* TOKEN */
     token_length = response_parse_token(iter, pos);
-    if (token_length < 0)
+    if (token_length < 0) {
     return token_length;
-    if (pos[0] != EMPTY_ATOM_BYTE)
-    num_entries++;
+    }
+    if (pos[0] != EMPTY_ATOM_BYTE) {
+    num_entries += 1;
+    }
     pos += token_length;
     total -= token_length;
-    iter++;
+    iter += 1;
     }
     resp.num = num_entries;
     return 0;
     }
-    static size_t response_get_string(const struct parsed_resp *resp, int n,
-    const char **store)
-    {
-    u8 skip;
-    const struct opal_resp_tok *tok;
+#[no_mangle]
+pub unsafe extern "C" fn response_get_string(resp: *mut parsed_resp, n: c_int, store: *mut *mut c_char) -> size_t {
+    let mut skip = 0;
+pub static mut tok: *mut c_void = core::ptr::null_mut();
 // store = NULL;
     tok = response_get_token(resp, n);
-    if (IS_ERR(tok))
-    return 0;
-    if (tok.type != OPAL_DTA_TOKENID_BYTESTRING) {
-    pr_debug("Token is not a byte string!\n");
+    if (IS_ERR(tok)) {
     return 0;
     }
-    switch (tok.width) {
-    case OPAL_WIDTH_TINY:
-    case OPAL_WIDTH_SHORT:
-    skip = 1;
-    break;
-    case OPAL_WIDTH_MEDIUM:
-    skip = 2;
-    break;
-    case OPAL_WIDTH_LONG:
-    skip = 4;
-    break;
-    default:
-    pr_debug("Token has invalid width!\n");
+    if (tok.type != OPAL_DTA_TOKENID_BYTESTRING) {
+    pr_debug!("Token is not a byte string!\n");
     return 0;
+    }
+    match (tok.width) {
+    OPAL_WIDTH_TINY => {
+    }
+    OPAL_WIDTH_SHORT => {
+    skip = 1;
+    // break;
+    }
+    OPAL_WIDTH_MEDIUM => {
+    skip = 2;
+    // break;
+    }
+    OPAL_WIDTH_LONG => {
+    skip = 4;
+    // break;
+    }
+    _ => {
+    pr_debug!("Token has invalid width!\n");
+    return 0;
+    }
     }
 // store = tok->pos + skip;
     return tok.len - skip;
     }
 #[no_mangle]
 unsafe extern "C" fn response_get_u64(resp: *const parsed_resp, n: c_int) -> u64 {
-    static u64 response_get_u64(const struct parsed_resp *resp, int n)
-    {
-    const struct opal_resp_tok *tok;
+pub static mut tok: *mut c_void = core::ptr::null_mut();
     tok = response_get_token(resp, n);
-    if (IS_ERR(tok))
+    if (IS_ERR(tok)) {
     return 0;
+    }
     if (tok.type != OPAL_DTA_TOKENID_UINT) {
-    pr_debug("Token is not unsigned int: %d\n", tok.type);
+    pr_debug!("Token is not unsigned int: %d\n", tok.type);
     return 0;
     }
     if (tok.width != OPAL_WIDTH_TINY && tok.width != OPAL_WIDTH_SHORT) {
-    pr_debug("Atom is not short or tiny: %d\n", tok.width);
+    pr_debug!("Atom is not short or tiny: %d\n", tok.width);
     return 0;
     }
     return tok.stored.u;
     }
 #[no_mangle]
 unsafe extern "C" fn response_token_matches(token: *const opal_resp_tok, match: u8) -> bool {
-    static bool response_token_matches(const struct opal_resp_tok *token, u8 match)
-    {
     if (IS_ERR(token) ||
     token.type != OPAL_DTA_TOKENID_TOKEN ||
-    token.pos[0] != match)
+    token.pos[0] != match) {
     return false;
+    }
     return true;
     }
 #[no_mangle]
 unsafe extern "C" fn response_status(resp: *const parsed_resp) -> u8 {
-    static u8 response_status(const struct parsed_resp *resp)
-    {
-    const struct opal_resp_tok *tok;
+pub static mut tok: *mut c_void = core::ptr::null_mut();
     tok = response_get_token(resp, 0);
-    if (response_token_matches(tok, OPAL_ENDOFSESSION))
+    if (response_token_matches(tok, OPAL_ENDOFSESSION)) {
     return 0;
-    if (resp.num < 5)
+    }
+    if (resp.num < 5) {
     return DTAERROR_NO_METHOD_STATUS;
+    }
     tok = response_get_token(resp, resp.num - 5);
-    if (!response_token_matches(tok, OPAL_STARTLIST))
+    if (!response_token_matches(tok, OPAL_STARTLIST)) {
     return DTAERROR_NO_METHOD_STATUS;
+    }
     tok = response_get_token(resp, resp.num - 1);
-    if (!response_token_matches(tok, OPAL_ENDLIST))
+    if (!response_token_matches(tok, OPAL_ENDLIST)) {
     return DTAERROR_NO_METHOD_STATUS;
+    }
     return response_get_u64(resp, resp.num - 4);
     }
 // Parses and checks for errors
 #[no_mangle]
 unsafe extern "C" fn parse_and_check_status(dev: *mut opal_dev) -> c_int {
-    static int parse_and_check_status(struct opal_dev *dev)
-    {
-    int error;
+    let mut error = 0;
     print_buffer(dev.cmd, dev.pos);
     error = response_parse(dev.resp, IO_BUFFER_LENGTH, &dev.parsed);
     if (error) {
-    pr_debug("Couldn't parse response.\n");
+    pr_debug!("Couldn't parse response.\n");
     return error;
     }
     return response_status(&dev.parsed);
     }
 #[no_mangle]
 unsafe extern "C" fn clear_opal_cmd(dev: *mut opal_dev) {
-    static void clear_opal_cmd(struct opal_dev *dev)
-    {
-    dev.pos = sizeof(struct opal_header);
+    dev.pos = sizeof!(opal_header);
     memset(dev.cmd, 0, IO_BUFFER_LENGTH);
     }
 #[no_mangle]
 unsafe extern "C" fn cmd_start(dev: *mut opal_dev, uid: *const u8, method: *const u8) -> c_int {
-    static int cmd_start(struct opal_dev *dev, const u8 *uid, const u8 *method)
-    {
-    let mut err: c_int = 0;
+pub static mut err: c_int = 0;
     clear_opal_cmd(dev);
     set_comid(dev, dev.comid);
     add_token_u8(&err, dev, OPAL_CALL);
@@ -1116,27 +1340,25 @@ unsafe extern "C" fn cmd_start(dev: *mut opal_dev, uid: *const u8, method: *cons
     }
 #[no_mangle]
 unsafe extern "C" fn start_opal_session_cont(dev: *mut opal_dev) -> c_int {
-    static int start_opal_session_cont(struct opal_dev *dev)
-    {
     u32 hsn, tsn;
-    int error;
+    let mut error = 0;
     error = parse_and_check_status(dev);
-    if (error)
+    if (error) {
     return error;
+    }
     hsn = response_get_u64(&dev.parsed, 4);
     tsn = response_get_u64(&dev.parsed, 5);
     if (hsn != GENERIC_HOST_SESSION_NUM || tsn < FIRST_TPER_SESSION_NUM) {
-    pr_debug("Couldn't authenticate session\n");
+    pr_debug!("Couldn't authenticate session\n");
     return -EPERM;
     }
     dev.hsn = hsn;
     dev.tsn = tsn;
     return 0;
     }
-    static void add_suspend_info(struct opal_dev *dev,
-    struct opal_suspend_data *sus)
-    {
-    struct opal_suspend_data *iter;
+#[no_mangle]
+pub unsafe extern "C" fn add_suspend_info(dev: *mut opal_dev, sus: *mut opal_suspend_data) {
+pub static mut iter: *mut c_void = core::ptr::null_mut();
     list_for_each_entry(iter, &dev.unlk_lst, node) {
     if (iter.lr == sus.lr) {
     list_del(&iter.node);
@@ -1148,29 +1370,24 @@ unsafe extern "C" fn start_opal_session_cont(dev: *mut opal_dev) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn end_session_cont(dev: *mut opal_dev) -> c_int {
-    static int end_session_cont(struct opal_dev *dev)
-    {
     dev.hsn = 0;
     dev.tsn = 0;
     return parse_and_check_status(dev);
     }
 #[no_mangle]
 unsafe extern "C" fn finalize_and_send(dev: *mut opal_dev, cont: cont_fn) -> c_int {
-    static int finalize_and_send(struct opal_dev *dev, cont_fn cont)
-    {
-    int ret;
+    let mut ret = 0;
     ret = cmd_finalize(dev, dev.hsn, dev.tsn);
     if (ret) {
-    pr_debug("Error finalizing command buffer: %d\n", ret);
+    pr_debug!("Error finalizing command buffer: %d\n", ret);
     return ret;
     }
     print_buffer(dev.cmd, dev.pos);
     return opal_send_recv(dev, cont);
     }
-    static int generic_get_columns(struct opal_dev *dev, const u8 *table,
-    u64 start_column, u64 end_column)
-    {
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn generic_get_columns(dev: *mut opal_dev, table: *mut u8, start_column: u64, end_column: u64) -> c_int {
+    let mut err = 0;
     err = cmd_start(dev, table, opalmethod[OPAL_GET]);
     add_token_u8(&err, dev, OPAL_STARTLIST);
     add_token_u8(&err, dev, OPAL_STARTNAME);
@@ -1182,17 +1399,17 @@ unsafe extern "C" fn finalize_and_send(dev: *mut opal_dev, cont: cont_fn) -> c_i
     add_token_u64(&err, dev, end_column);
     add_token_u8(&err, dev, OPAL_ENDNAME);
     add_token_u8(&err, dev, OPAL_ENDLIST);
-    if (err)
+    if (err) {
     return err;
+    }
     return finalize_and_send(dev, parse_and_check_status);
     }
 //
 // request @column from table @table on device @dev. On success, the column
 // data will be available in dev->resp->tok[4]
 //
-    static int generic_get_column(struct opal_dev *dev, const u8 *table,
-    u64 column)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn generic_get_column(dev: *mut opal_dev, table: *mut u8, column: u64) -> c_int {
     return generic_get_columns(dev, table, column, column);
     }
 //
@@ -1200,11 +1417,10 @@ unsafe extern "C" fn finalize_and_send(dev: *mut opal_dev, cont: cont_fn) -> c_i
 //
 // the result is provided in dev->resp->tok[4]
 //
-    static int generic_get_table_info(struct opal_dev *dev, const u8 *table_uid,
-    u64 column)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn generic_get_table_info(dev: *mut opal_dev, table_uid: *mut u8, column: u64) -> c_int {
     u8 uid[OPAL_UID_LENGTH];
-    let mut half: c_uint = OPAL_UID_LENGTH_HALF;
+pub static mut half: c_uint = 0;
 // sed-opal UIDs can be split in two halves:
 // first:  actual table index
 // second: relative index in the table
@@ -1217,74 +1433,71 @@ unsafe extern "C" fn finalize_and_send(dev: *mut opal_dev, cont: cont_fn) -> c_i
     }
 #[no_mangle]
 unsafe extern "C" fn gen_key(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int gen_key(struct opal_dev *dev, void *data)
-    {
     u8 uid[OPAL_UID_LENGTH];
-    int err;
-    memcpy(uid, dev.prev_data, min(sizeof(uid), dev.prev_d_len));
+    let mut err = 0;
+    memcpy(uid, dev.prev_data, min(sizeof!(uid), dev.prev_d_len));
     kfree(dev.prev_data);
     dev.prev_data = core::ptr::null_mut();
     err = cmd_start(dev, uid, opalmethod[OPAL_GENKEY]);
     if (err) {
-    pr_debug("Error building gen key command\n");
+    pr_debug!("Error building gen key command\n");
     return err;
     }
     return finalize_and_send(dev, parse_and_check_status);
     }
 #[no_mangle]
 unsafe extern "C" fn get_active_key_cont(dev: *mut opal_dev) -> c_int {
-    static int get_active_key_cont(struct opal_dev *dev)
-    {
-    const char *activekey;
-    size_t keylen;
-    int error;
+pub static mut activekey: *mut c_void = core::ptr::null_mut();
+    let mut keylen = 0;
+    let mut error = 0;
     error = parse_and_check_status(dev);
-    if (error)
+    if (error) {
     return error;
+    }
     keylen = response_get_string(&dev.parsed, 4, &activekey);
     if (!activekey) {
-    pr_debug("%s: Couldn't extract the Activekey from the response\n",
+    pr_debug!("%s: Couldn't extract the Activekey from the response\n",
     __func__);
     return OPAL_INVAL_PARAM;
     }
     dev.prev_data = kmemdup(activekey, keylen, GFP_KERNEL);
-    if (!dev.prev_data)
+    if (!dev.prev_data) {
     return -ENOMEM;
+    }
     dev.prev_d_len = keylen;
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn get_active_key(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int get_active_key(struct opal_dev *dev, void *data)
-    {
     u8 uid[OPAL_UID_LENGTH];
-    int err;
-    u8 *lr = data;
-    err = build_locking_range(uid, sizeof(uid), *lr);
-    if (err)
+    let mut err = 0;
+    let mut lr = data;
+    err = build_locking_range(uid, sizeof!(uid), *lr);
+    if (err) {
     return err;
+    }
     err = generic_get_column(dev, uid, OPAL_ACTIVEKEY);
-    if (err)
+    if (err) {
     return err;
+    }
     return get_active_key_cont(dev);
     }
-    static int generic_table_write_data(struct opal_dev *dev, const u64 data,
-    u64 offset, u64 size, const u8 *uid)
-    {
-    const u8 __user *src = (u8 __user *)(uintptr_t)data;
-    u8 *dst;
-    u64 len;
-    let mut off: usize = 0;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn generic_table_write_data(dev: *mut opal_dev, data: u64, offset: u64, size: u64, uid: *mut u8) -> c_int {
+    let mut src = (uintptr_t)data;
+pub static mut dst: *mut c_void = core::ptr::null_mut();
+    let mut len = 0;
+pub static mut off: usize = 0;
+    let mut err = 0;
 // do we fit in the available space?
     err = generic_get_table_info(dev, uid, OPAL_TABLE_ROWS);
     if (err) {
-    pr_debug("Couldn't get the table size\n");
+    pr_debug!("Couldn't get the table size\n");
     return err;
     }
     len = response_get_u64(&dev.parsed, 4);
     if (size > len || offset > len - size) {
-    pr_debug("Does not fit in the table (%llu vs. %llu)\n",
+    pr_debug!("Does not fit in the table (%llu vs. %llu)\n",
     offset + size, len);
     return -ENOSPC;
     }
@@ -1305,30 +1518,31 @@ unsafe extern "C" fn get_active_key(dev: *mut opal_dev, data: *mut c_void) -> c_
 //
     len = min(remaining_size(dev) - (2+1+CMD_FINALIZE_BYTES_NEEDED),
     (size_t)(size - off));
-    pr_debug("Write bytes %zu+%llu/%llu\n", off, len, size);
+    pr_debug!("Write bytes %zu+%llu/%llu\n", off, len, size);
     dst = add_bytestring_header(&err, dev, len);
-    if (!dst)
+    if (!dst) {
     break;
+    }
     if (copy_from_user(dst, src + off, len)) {
     err = -EFAULT;
     break;
     }
     dev.pos += len;
     add_token_u8(&err, dev, OPAL_ENDNAME);
-    if (err)
+    if (err) {
     break;
+    }
     err = finalize_and_send(dev, parse_and_check_status);
-    if (err)
+    if (err) {
     break;
+    }
     off += len;
     }
     return err;
     }
-    static int generic_lr_enable_disable(struct opal_dev *dev,
-    u8 *uid, bool rle, bool wle,
-    bool rl, bool wl)
-    {
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn generic_lr_enable_disable(dev: *mut opal_dev, uid: *mut u8, rle: bool, wle: bool, rl: bool, wl: bool) -> c_int {
+    let mut err = 0;
     err = cmd_start(dev, uid, opalmethod[OPAL_SET]);
     add_token_u8(&err, dev, OPAL_STARTNAME);
     add_token_u8(&err, dev, OPAL_VALUES);
@@ -1353,48 +1567,48 @@ unsafe extern "C" fn get_active_key(dev: *mut opal_dev, data: *mut c_void) -> c_
     add_token_u8(&err, dev, OPAL_ENDNAME);
     return err;
     }
-    static inline int enable_global_lr(struct opal_dev *dev, u8 *uid,
-    struct opal_user_lr_setup *setup)
-    {
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn enable_global_lr(dev: *mut opal_dev, uid: *mut u8, setup: *mut opal_user_lr_setup) -> c_int {
+    let mut err = 0;
     err = generic_lr_enable_disable(dev, uid, !!setup.RLE, !!setup.WLE,
     0, 0);
-    if (err)
-    pr_debug("Failed to create enable global lr command\n");
+    if (err) {
+    pr_debug!("Failed to create enable global lr command\n");
+    }
     return err;
     }
 #[no_mangle]
 unsafe extern "C" fn setup_enable_range(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int setup_enable_range(struct opal_dev *dev, void *data)
-    {
     u8 uid[OPAL_UID_LENGTH];
-    struct opal_user_lr_setup *setup = data;
-    u8 lr;
-    int err;
+    let mut setup = data;
+    let mut lr = 0;
+    let mut err = 0;
     lr = setup.session.opal_key.lr;
-    err = build_locking_range(uid, sizeof(uid), lr);
-    if (err)
-    return err;
-    if (lr == 0)
-    err = enable_global_lr(dev, uid, setup);
-    else
-    err = generic_lr_enable_disable(dev, uid, !!setup.RLE, !!setup.WLE, 0, 0);
+    err = build_locking_range(uid, sizeof!(uid), lr);
     if (err) {
-    pr_debug("Failed to create enable lr command.\n");
+    return err;
+    }
+    if (lr == 0) {
+    err = enable_global_lr(dev, uid, setup);
+    }
+    else {
+    err = generic_lr_enable_disable(dev, uid, !!setup.RLE, !!setup.WLE, 0, 0);
+    }
+    if (err) {
+    pr_debug!("Failed to create enable lr command.\n");
     return err;
     }
     return finalize_and_send(dev, parse_and_check_status);
     }
 #[no_mangle]
 unsafe extern "C" fn setup_locking_range_start_length(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int setup_locking_range_start_length(struct opal_dev *dev, void *data)
-    {
-    int err;
+    let mut err = 0;
     u8 uid[OPAL_UID_LENGTH];
-    struct opal_user_lr_setup *setup = data;
-    err = build_locking_range(uid, sizeof(uid), setup.session.opal_key.lr);
-    if (err)
+    let mut setup = data;
+    err = build_locking_range(uid, sizeof!(uid), setup.session.opal_key.lr);
+    if (err) {
     return err;
+    }
     err = cmd_start(dev, uid, opalmethod[OPAL_SET]);
     add_token_u8(&err, dev, OPAL_STARTNAME);
     add_token_u8(&err, dev, OPAL_VALUES);
@@ -1410,64 +1624,63 @@ unsafe extern "C" fn setup_locking_range_start_length(dev: *mut opal_dev, data: 
     add_token_u8(&err, dev, OPAL_ENDLIST);
     add_token_u8(&err, dev, OPAL_ENDNAME);
     if (err) {
-    pr_debug("Error building Setup Locking RangeStartLength command.\n");
+    pr_debug!("Error building Setup Locking RangeStartLength command.\n");
     return err;
     }
     return finalize_and_send(dev, parse_and_check_status);
     }
-    static int response_get_column(const struct parsed_resp *resp,
-    int *iter,
-    u64 column,
-    u64 *value)
-    {
-    const struct opal_resp_tok *tok;
-    let mut n: c_int = *iter;
-    u64 val;
+#[no_mangle]
+pub unsafe extern "C" fn response_get_column(resp: *mut parsed_resp, iter: *mut c_int, column: u64, value: *mut u64) -> c_int {
+pub static mut tok: *mut c_void = core::ptr::null_mut();
+pub static mut n: c_int = 0;
+    let mut val = 0;
     tok = response_get_token(resp, n);
-    if (IS_ERR(tok))
+    if (IS_ERR(tok)) {
     return PTR_ERR(tok);
+    }
     if (!response_token_matches(tok, OPAL_STARTNAME)) {
-    pr_debug("Unexpected response token type %d.\n", n);
+    pr_debug!("Unexpected response token type %d.\n", n);
     return OPAL_INVAL_PARAM;
     }
-    n++;
+    n += 1;
     if (response_get_u64(resp, n) != column) {
-    pr_debug("Token %d does not match expected column %llu.\n",
+    pr_debug!("Token %d does not match expected column %llu.\n",
     n, column);
     return OPAL_INVAL_PARAM;
     }
-    n++;
+    n += 1;
     val = response_get_u64(resp, n);
-    n++;
+    n += 1;
     tok = response_get_token(resp, n);
-    if (IS_ERR(tok))
+    if (IS_ERR(tok)) {
     return PTR_ERR(tok);
+    }
     if (!response_token_matches(tok, OPAL_ENDNAME)) {
-    pr_debug("Unexpected response token type %d.\n", n);
+    pr_debug!("Unexpected response token type %d.\n", n);
     return OPAL_INVAL_PARAM;
     }
-    n++;
+    n += 1;
 // value = val;
 // iter = n;
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn locking_range_status(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int locking_range_status(struct opal_dev *dev, void *data)
-    {
     u8 lr_buffer[OPAL_UID_LENGTH];
-    u64 resp;
-    bool rlocked, wlocked;
+    let mut resp = 0;
+    let mut rlocked = 0;
+    let mut wlocked = 0;
     int err, tok_n = 2;
-    struct opal_lr_status *lrst = data;
-    err = build_locking_range(lr_buffer, sizeof(lr_buffer),
+    let mut lrst = data;
+    err = build_locking_range(lr_buffer, sizeof!(lr_buffer),
     lrst.session.opal_key.lr);
-    if (err)
+    if (err) {
     return err;
+    }
     err = generic_get_columns(dev, lr_buffer, OPAL_RANGESTART,
     OPAL_WRITELOCKED);
     if (err) {
-    pr_debug("Couldn't get lr %u table columns %d to %d.\n",
+    pr_debug!("Couldn't get lr %u table columns %d to %d.\n",
     lrst.session.opal_key.lr, OPAL_RANGESTART,
     OPAL_WRITELOCKED);
     return err;
@@ -1475,72 +1688,78 @@ unsafe extern "C" fn locking_range_status(dev: *mut opal_dev, data: *mut c_void)
 // range start
     err = response_get_column(&dev.parsed, &tok_n, OPAL_RANGESTART,
     &lrst.range_start);
-    if (err)
+    if (err) {
     return err;
+    }
 // range length
     err = response_get_column(&dev.parsed, &tok_n, OPAL_RANGELENGTH,
     &lrst.range_length);
-    if (err)
+    if (err) {
     return err;
+    }
 // RLE
     err = response_get_column(&dev.parsed, &tok_n, OPAL_READLOCKENABLED,
     &resp);
-    if (err)
+    if (err) {
     return err;
+    }
     lrst.RLE = !!resp;
 // WLE
     err = response_get_column(&dev.parsed, &tok_n, OPAL_WRITELOCKENABLED,
     &resp);
-    if (err)
+    if (err) {
     return err;
+    }
     lrst.WLE = !!resp;
 // read locked
     err = response_get_column(&dev.parsed, &tok_n, OPAL_READLOCKED, &resp);
-    if (err)
+    if (err) {
     return err;
+    }
     rlocked = !!resp;
 // write locked
     err = response_get_column(&dev.parsed, &tok_n, OPAL_WRITELOCKED, &resp);
-    if (err)
+    if (err) {
     return err;
+    }
     wlocked = !!resp;
 // opal_lock_state can not map 'read locked' only state.
     lrst.l_state = OPAL_RW;
-    if (rlocked && wlocked)
+    if (rlocked && wlocked) {
     lrst.l_state = OPAL_LK;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: wlocked) -> else {
-    else if (wlocked)
+    }
+
+    else if (wlocked) {
     lrst.l_state = OPAL_RO;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: rlocked) -> else {
-    pr_debug("Can not report read locked only state.\n");
+    }
+if true {
+    pr_debug!("Can not report read locked only state.\n");
     return -EINVAL;
     }
     return 0;
     }
-    static int start_generic_opal_session(struct opal_dev *dev,
-    enum opal_uid auth,
-    enum opal_uid sp_type,
-    const char *key,
-    u8 key_len)
-    {
-    u32 hsn;
-    int err;
-    if (key == core::ptr::null_mut() && auth != OPAL_ANYBODY_UID)
+#[no_mangle]
+pub unsafe extern "C" fn start_generic_opal_session(dev: *mut opal_dev, auth: opal_uid, sp_type: opal_uid, key: *mut c_char, key_len: u8) -> c_int {
+    let mut hsn = 0;
+    let mut err = 0;
+    if (key == core::ptr::null_mut() && auth != OPAL_ANYBODY_UID) {
     return OPAL_INVAL_PARAM;
+    }
     hsn = GENERIC_HOST_SESSION_NUM;
     err = cmd_start(dev, opaluid[OPAL_SMUID_UID],
     opalmethod[OPAL_STARTSESSION]);
     add_token_u64(&err, dev, hsn);
     add_token_bytestring(&err, dev, opaluid[sp_type], OPAL_UID_LENGTH);
     add_token_u8(&err, dev, 1);
-    switch (auth) {
-    case OPAL_ANYBODY_UID:
-    break;
-    case OPAL_ADMIN1_UID:
-    case OPAL_SID_UID:
-    case OPAL_PSID_UID:
+    match (auth) {
+    OPAL_ANYBODY_UID => {
+    // break;
+    }
+    OPAL_ADMIN1_UID => {
+    }
+    OPAL_SID_UID => {
+    }
+    OPAL_PSID_UID => {
     add_token_u8(&err, dev, OPAL_STARTNAME);
     add_token_u8(&err, dev, 0); /* HostChallenge */
     add_token_bytestring(&err, dev, key, key_len);
@@ -1550,39 +1769,35 @@ pub unsafe extern "C" fn if(_arg: rlocked) -> else {
     add_token_bytestring(&err, dev, opaluid[auth],
     OPAL_UID_LENGTH);
     add_token_u8(&err, dev, OPAL_ENDNAME);
-    break;
-    default:
-    pr_debug("Cannot start Admin SP session with auth %d\n", auth);
+    // break;
+    }
+    _ => {
+    pr_debug!("Cannot start Admin SP session with auth %d\n", auth);
     return OPAL_INVAL_PARAM;
     }
+    }
     if (err) {
-    pr_debug("Error building start adminsp session command.\n");
+    pr_debug!("Error building start adminsp session command.\n");
     return err;
     }
     return finalize_and_send(dev, start_opal_session_cont);
     }
 #[no_mangle]
 unsafe extern "C" fn start_anybodyASP_opal_session(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int start_anybodyASP_opal_session(struct opal_dev *dev, void *data)
-    {
     return start_generic_opal_session(dev, OPAL_ANYBODY_UID,
     OPAL_ADMINSP_UID, core::ptr::null_mut(), 0);
     }
 #[no_mangle]
 unsafe extern "C" fn start_anybodyLSP_opal_session(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int start_anybodyLSP_opal_session(struct opal_dev *dev, void *data)
-    {
     return start_generic_opal_session(dev, OPAL_ANYBODY_UID,
     OPAL_LOCKINGSP_UID, core::ptr::null_mut(), 0);
     }
 #[no_mangle]
 unsafe extern "C" fn start_SIDASP_opal_session(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int start_SIDASP_opal_session(struct opal_dev *dev, void *data)
-    {
-    int ret;
-    const u8 *key = dev.prev_data;
+    let mut ret = 0;
+    let mut key = dev.prev_data;
     if (!key) {
-    const struct opal_key *okey = data;
+    let mut okey = data;
     ret = start_generic_opal_session(dev, OPAL_SID_UID,
     OPAL_ADMINSP_UID,
     okey.key,
@@ -1598,18 +1813,14 @@ unsafe extern "C" fn start_SIDASP_opal_session(dev: *mut opal_dev, data: *mut c_
     }
 #[no_mangle]
 unsafe extern "C" fn start_admin1LSP_opal_session(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int start_admin1LSP_opal_session(struct opal_dev *dev, void *data)
-    {
-    struct opal_key *key = data;
+    let mut key = data;
     return start_generic_opal_session(dev, OPAL_ADMIN1_UID,
     OPAL_LOCKINGSP_UID,
     key.key, key.key_len);
     }
 #[no_mangle]
 unsafe extern "C" fn start_PSID_opal_session(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int start_PSID_opal_session(struct opal_dev *dev, void *data)
-    {
-    const struct opal_key *okey = data;
+    let mut okey = data;
     return start_generic_opal_session(dev, OPAL_PSID_UID,
     OPAL_ADMINSP_UID,
     okey.key,
@@ -1617,26 +1828,27 @@ unsafe extern "C" fn start_PSID_opal_session(dev: *mut opal_dev, data: *mut c_vo
     }
 #[no_mangle]
 unsafe extern "C" fn start_auth_opal_session(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int start_auth_opal_session(struct opal_dev *dev, void *data)
-    {
-    struct opal_session_info *session = data;
+    let mut session = data;
     u8 lk_ul_user[OPAL_UID_LENGTH];
-    let mut keylen: usize = session.opal_key.key_len;
-    let mut err: c_int = 0;
-    u8 *key = session.opal_key.key;
-    let mut hsn: u32 = GENERIC_HOST_SESSION_NUM;
-    if (session.sum)
-    err = build_locking_user(lk_ul_user, sizeof(lk_ul_user),
+pub static mut keylen: usize = 0;
+pub static mut err: c_int = 0;
+    let mut key = session.opal_key.key;
+pub static mut hsn: u32 = 0;
+    if (session.sum) {
+    err = build_locking_user(lk_ul_user, sizeof!(lk_ul_user),
     session.opal_key.lr);
-#[no_mangle]
-pub unsafe extern "C" fn if(!session->sum: session->who != OPAL_ADMIN1 &&) -> else {
-    else if (session.who != OPAL_ADMIN1 && !session.sum)
-    err = build_locking_user(lk_ul_user, sizeof(lk_ul_user),
+    }
+
+    else if (session.who != OPAL_ADMIN1 && !session.sum) {
+    err = build_locking_user(lk_ul_user, sizeof!(lk_ul_user),
     session.who - 1);
-    else
+    }
+    else {
     memcpy(lk_ul_user, opaluid[OPAL_ADMIN1_UID], OPAL_UID_LENGTH);
-    if (err)
+    }
+    if (err) {
     return err;
+    }
     err = cmd_start(dev, opaluid[OPAL_SMUID_UID],
     opalmethod[OPAL_STARTSESSION]);
     add_token_u64(&err, dev, hsn);
@@ -1652,31 +1864,27 @@ pub unsafe extern "C" fn if(!session->sum: session->who != OPAL_ADMIN1 &&) -> el
     add_token_bytestring(&err, dev, lk_ul_user, OPAL_UID_LENGTH);
     add_token_u8(&err, dev, OPAL_ENDNAME);
     if (err) {
-    pr_debug("Error building STARTSESSION command.\n");
+    pr_debug!("Error building STARTSESSION command.\n");
     return err;
     }
     return finalize_and_send(dev, start_opal_session_cont);
     }
 #[no_mangle]
 unsafe extern "C" fn revert_tper(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int revert_tper(struct opal_dev *dev, void *data)
-    {
-    int err;
+    let mut err = 0;
     err = cmd_start(dev, opaluid[OPAL_ADMINSP_UID],
     opalmethod[OPAL_REVERT]);
     if (err) {
-    pr_debug("Error building REVERT TPER command.\n");
+    pr_debug!("Error building REVERT TPER command.\n");
     return err;
     }
     return finalize_and_send(dev, parse_and_check_status);
     }
 #[no_mangle]
 unsafe extern "C" fn internal_activate_user(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int internal_activate_user(struct opal_dev *dev, void *data)
-    {
-    struct opal_session_info *session = data;
+    let mut session = data;
     u8 uid[OPAL_UID_LENGTH];
-    int err;
+    let mut err = 0;
     memcpy(uid, opaluid[OPAL_USER1_UID], OPAL_UID_LENGTH);
     uid[7] = session.who;
     err = cmd_start(dev, uid, opalmethod[OPAL_SET]);
@@ -1690,17 +1898,15 @@ unsafe extern "C" fn internal_activate_user(dev: *mut opal_dev, data: *mut c_voi
     add_token_u8(&err, dev, OPAL_ENDLIST);
     add_token_u8(&err, dev, OPAL_ENDNAME);
     if (err) {
-    pr_debug("Error building Activate UserN command.\n");
+    pr_debug!("Error building Activate UserN command.\n");
     return err;
     }
     return finalize_and_send(dev, parse_and_check_status);
     }
 #[no_mangle]
 unsafe extern "C" fn revert_lsp(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int revert_lsp(struct opal_dev *dev, void *data)
-    {
-    struct opal_revert_lsp *rev = data;
-    int err;
+    let mut rev = data;
+    let mut err = 0;
     err = cmd_start(dev, opaluid[OPAL_THISSP_UID],
     opalmethod[OPAL_REVERTSP]);
     add_token_u8(&err, dev, OPAL_STARTNAME);
@@ -1709,33 +1915,30 @@ unsafe extern "C" fn revert_lsp(dev: *mut opal_dev, data: *mut c_void) -> c_int 
     OPAL_TRUE : OPAL_FALSE);
     add_token_u8(&err, dev, OPAL_ENDNAME);
     if (err) {
-    pr_debug("Error building REVERT SP command.\n");
+    pr_debug!("Error building REVERT SP command.\n");
     return err;
     }
     return finalize_and_send(dev, parse_and_check_status);
     }
 #[no_mangle]
 unsafe extern "C" fn erase_locking_range(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int erase_locking_range(struct opal_dev *dev, void *data)
-    {
-    struct opal_session_info *session = data;
+    let mut session = data;
     u8 uid[OPAL_UID_LENGTH];
-    int err;
-    if (build_locking_range(uid, sizeof(uid), session.opal_key.lr) < 0)
+    let mut err = 0;
+    if (build_locking_range(uid, sizeof!(uid), session.opal_key.lr) < 0) {
     return -ERANGE;
+    }
     err = cmd_start(dev, uid, opalmethod[OPAL_ERASE]);
     if (err) {
-    pr_debug("Error building Erase Locking Range Command.\n");
+    pr_debug!("Error building Erase Locking Range Command.\n");
     return err;
     }
     return finalize_and_send(dev, parse_and_check_status);
     }
 #[no_mangle]
 unsafe extern "C" fn set_mbr_done(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int set_mbr_done(struct opal_dev *dev, void *data)
-    {
-    u8 *mbr_done_tf = data;
-    int err;
+    let mut mbr_done_tf = data;
+    let mut err = 0;
     err = cmd_start(dev, opaluid[OPAL_MBRCONTROL],
     opalmethod[OPAL_SET]);
     add_token_u8(&err, dev, OPAL_STARTNAME);
@@ -1748,17 +1951,15 @@ unsafe extern "C" fn set_mbr_done(dev: *mut opal_dev, data: *mut c_void) -> c_in
     add_token_u8(&err, dev, OPAL_ENDLIST);
     add_token_u8(&err, dev, OPAL_ENDNAME);
     if (err) {
-    pr_debug("Error Building set MBR Done command\n");
+    pr_debug!("Error Building set MBR Done command\n");
     return err;
     }
     return finalize_and_send(dev, parse_and_check_status);
     }
 #[no_mangle]
 unsafe extern "C" fn set_mbr_enable_disable(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int set_mbr_enable_disable(struct opal_dev *dev, void *data)
-    {
-    u8 *mbr_en_dis = data;
-    int err;
+    let mut mbr_en_dis = data;
+    let mut err = 0;
     err = cmd_start(dev, opaluid[OPAL_MBRCONTROL],
     opalmethod[OPAL_SET]);
     add_token_u8(&err, dev, OPAL_STARTNAME);
@@ -1771,23 +1972,20 @@ unsafe extern "C" fn set_mbr_enable_disable(dev: *mut opal_dev, data: *mut c_voi
     add_token_u8(&err, dev, OPAL_ENDLIST);
     add_token_u8(&err, dev, OPAL_ENDNAME);
     if (err) {
-    pr_debug("Error Building set MBR done command\n");
+    pr_debug!("Error Building set MBR done command\n");
     return err;
     }
     return finalize_and_send(dev, parse_and_check_status);
     }
 #[no_mangle]
 unsafe extern "C" fn write_shadow_mbr(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int write_shadow_mbr(struct opal_dev *dev, void *data)
-    {
-    struct opal_shadow_mbr *shadow = data;
+    let mut shadow = data;
     return generic_table_write_data(dev, shadow.data, shadow.offset,
     shadow.size, opaluid[OPAL_MBR]);
     }
-    static int generic_pw_cmd(u8 *key, size_t key_len, u8 *cpin_uid,
-    struct opal_dev *dev)
-    {
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn generic_pw_cmd(key: *mut u8, key_len: size_t, cpin_uid: *mut u8, dev: *mut opal_dev) -> c_int {
+    let mut err = 0;
     err = cmd_start(dev, cpin_uid, opalmethod[OPAL_SET]);
     add_token_u8(&err, dev, OPAL_STARTNAME);
     add_token_u8(&err, dev, OPAL_VALUES);
@@ -1802,43 +2000,38 @@ unsafe extern "C" fn write_shadow_mbr(dev: *mut opal_dev, data: *mut c_void) -> 
     }
 #[no_mangle]
 unsafe extern "C" fn set_new_pw(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int set_new_pw(struct opal_dev *dev, void *data)
-    {
     u8 cpin_uid[OPAL_UID_LENGTH];
-    struct opal_session_info *usr = data;
+    let mut usr = data;
     memcpy(cpin_uid, opaluid[OPAL_C_PIN_ADMIN1], OPAL_UID_LENGTH);
     if (usr.who != OPAL_ADMIN1) {
     cpin_uid[5] = 0x03;
-    if (usr.sum)
+    if (usr.sum) {
     cpin_uid[7] = usr.opal_key.lr + 1;
-    else
+    }
+    else {
     cpin_uid[7] = usr.who;
+    }
     }
     if (generic_pw_cmd(usr.opal_key.key, usr.opal_key.key_len,
     cpin_uid, dev)) {
-    pr_debug("Error building set password command.\n");
+    pr_debug!("Error building set password command.\n");
     return -ERANGE;
     }
     return finalize_and_send(dev, parse_and_check_status);
     }
 #[no_mangle]
 unsafe extern "C" fn set_sid_cpin_pin(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int set_sid_cpin_pin(struct opal_dev *dev, void *data)
-    {
     u8 cpin_uid[OPAL_UID_LENGTH];
-    struct opal_key *key = data;
+    let mut key = data;
     memcpy(cpin_uid, opaluid[OPAL_C_PIN_SID], OPAL_UID_LENGTH);
     if (generic_pw_cmd(key.key, key.key_len, cpin_uid, dev)) {
-    pr_debug("Error building Set SID cpin\n");
+    pr_debug!("Error building Set SID cpin\n");
     return -ERANGE;
     }
     return finalize_and_send(dev, parse_and_check_status);
     }
-    static void add_authority_object_ref(int *err,
-    struct opal_dev *dev,
-    const u8 *uid,
-    size_t uid_len)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn add_authority_object_ref(err: *mut c_int, dev: *mut opal_dev, uid: *mut u8, uid_len: size_t) {
     add_token_u8(err, dev, OPAL_STARTNAME);
     add_token_bytestring(err, dev,
     opaluid[OPAL_HALF_UID_AUTHORITY_OBJ_REF],
@@ -1846,26 +2039,20 @@ unsafe extern "C" fn set_sid_cpin_pin(dev: *mut opal_dev, data: *mut c_void) -> 
     add_token_bytestring(err, dev, uid, uid_len);
     add_token_u8(err, dev, OPAL_ENDNAME);
     }
-    static void add_boolean_object_ref(int *err,
-    struct opal_dev *dev,
-    u8 boolean_op)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn add_boolean_object_ref(err: *mut c_int, dev: *mut opal_dev, boolean_op: u8) {
     add_token_u8(err, dev, OPAL_STARTNAME);
     add_token_bytestring(err, dev, opaluid[OPAL_HALF_UID_BOOLEAN_ACE],
     OPAL_UID_LENGTH/2);
     add_token_u8(err, dev, boolean_op);
     add_token_u8(err, dev, OPAL_ENDNAME);
     }
-    static int set_lr_boolean_ace(struct opal_dev *dev,
-    unsigned int opal_uid,
-    u8 lr,
-    const u8 *users,
-    size_t users_len)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn set_lr_boolean_ace(dev: *mut opal_dev, opal_uid: c_uint, lr: u8, users: *mut u8, users_len: size_t) -> c_int {
     u8 lr_buffer[OPAL_UID_LENGTH];
     u8 user_uid[OPAL_UID_LENGTH];
-    u8 u;
-    int err;
+    let mut u = 0;
+    let mut err = 0;
     memcpy(lr_buffer, opaluid[opal_uid], OPAL_UID_LENGTH);
     lr_buffer[7] = lr;
     err = cmd_start(dev, lr_buffer, opalmethod[OPAL_SET]);
@@ -1875,23 +2062,25 @@ unsafe extern "C" fn set_sid_cpin_pin(dev: *mut opal_dev, data: *mut c_void) -> 
     add_token_u8(&err, dev, OPAL_STARTNAME);
     add_token_u8(&err, dev, 3);
     add_token_u8(&err, dev, OPAL_STARTLIST);
-    for (u = 0; u < users_len; u++) {
-    if (users[u] == OPAL_ADMIN1)
+    while (u < users_len) {
+    if (users[u] == OPAL_ADMIN1) {
     memcpy(user_uid, opaluid[OPAL_ADMIN1_UID],
     OPAL_UID_LENGTH);
+    }
     else {
     memcpy(user_uid, opaluid[OPAL_USER1_UID],
     OPAL_UID_LENGTH);
     user_uid[7] = users[u];
     }
-    add_authority_object_ref(&err, dev, user_uid, sizeof(user_uid));
+    add_authority_object_ref(&err, dev, user_uid, sizeof!(user_uid));
 //
 // Add boolean operator in postfix only with
 // two or more authorities being added in ACE
 // expresion.
 //
-    if (u > 0)
+    if (u > 0) {
     add_boolean_object_ref(&err, dev, OPAL_BOOLEAN_OR);
+    }
     }
     add_token_u8(&err, dev, OPAL_ENDLIST);
     add_token_u8(&err, dev, OPAL_ENDNAME);
@@ -1901,10 +2090,8 @@ unsafe extern "C" fn set_sid_cpin_pin(dev: *mut opal_dev, data: *mut c_void) -> 
     }
 #[no_mangle]
 unsafe extern "C" fn add_user_to_lr(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int add_user_to_lr(struct opal_dev *dev, void *data)
-    {
-    int err;
-    struct opal_lock_unlock *lkul = data;
+    let mut err = 0;
+    let mut lkul = data;
     const u8 users[] = {
     lkul.session.who
     };
@@ -1913,58 +2100,59 @@ unsafe extern "C" fn add_user_to_lr(dev: *mut opal_dev, data: *mut c_void) -> c_
     OPAL_LOCKINGRANGE_ACE_WRLOCKED :
     OPAL_LOCKINGRANGE_ACE_RDLOCKED,
     lkul.session.opal_key.lr, users,
-    ARRAY_SIZE(users));
+    ARRAY_SIZE!(users));
     if (err) {
-    pr_debug("Error building add user to locking range command.\n");
+    pr_debug!("Error building add user to locking range command.\n");
     return err;
     }
     return finalize_and_send(dev, parse_and_check_status);
     }
 #[no_mangle]
 unsafe extern "C" fn add_user_to_lr_ace(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int add_user_to_lr_ace(struct opal_dev *dev, void *data)
-    {
-    int err;
-    struct opal_lock_unlock *lkul = data;
+    let mut err = 0;
+    let mut lkul = data;
     const u8 users[] = {
     OPAL_ADMIN1,
     lkul.session.who
     };
     err = set_lr_boolean_ace(dev, OPAL_LOCKINGRANGE_ACE_START_TO_KEY,
     lkul.session.opal_key.lr, users,
-    ARRAY_SIZE(users));
+    ARRAY_SIZE!(users));
     if (err) {
-    pr_debug("Error building add user to locking ranges ACEs.\n");
+    pr_debug!("Error building add user to locking ranges ACEs.\n");
     return err;
     }
     return finalize_and_send(dev, parse_and_check_status);
     }
 #[no_mangle]
 unsafe extern "C" fn lock_unlock_locking_range(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int lock_unlock_locking_range(struct opal_dev *dev, void *data)
-    {
     u8 lr_buffer[OPAL_UID_LENGTH];
-    struct opal_lock_unlock *lkul = data;
-    let mut read_locked: u8 = 1, write_locked = 1;
-    int err;
-    if (build_locking_range(lr_buffer, sizeof(lr_buffer),
-    lkul.session.opal_key.lr) < 0)
+    let mut lkul = data;
+pub static mut read_locked: u8 = 0;
+    let mut err = 0;
+    if (build_locking_range(lr_buffer, sizeof!(lr_buffer),
+    lkul.session.opal_key.lr) < 0) {
     return -ERANGE;
-    switch (lkul.l_state) {
-    case OPAL_RO:
+    }
+    match (lkul.l_state) {
+    OPAL_RO => {
     read_locked = 0;
     write_locked = 1;
-    break;
-    case OPAL_RW:
+    // break;
+    }
+    OPAL_RW => {
     read_locked = 0;
     write_locked = 0;
-    break;
-    case OPAL_LK:
+    // break;
+    }
+    OPAL_LK => {
 // vars are initialized to locked
-    break;
-    default:
-    pr_debug("Tried to set an invalid locking state... returning to uland\n");
+    // break;
+    }
+    _ => {
+    pr_debug!("Tried to set an invalid locking state... returning to uland\n");
     return OPAL_INVAL_PARAM;
+    }
     }
     err = cmd_start(dev, lr_buffer, opalmethod[OPAL_SET]);
     add_token_u8(&err, dev, OPAL_STARTNAME);
@@ -1981,67 +2169,70 @@ unsafe extern "C" fn lock_unlock_locking_range(dev: *mut opal_dev, data: *mut c_
     add_token_u8(&err, dev, OPAL_ENDLIST);
     add_token_u8(&err, dev, OPAL_ENDNAME);
     if (err) {
-    pr_debug("Error building SET command.\n");
+    pr_debug!("Error building SET command.\n");
     return err;
     }
     return finalize_and_send(dev, parse_and_check_status);
     }
 #[no_mangle]
 unsafe extern "C" fn lock_unlock_locking_range_sum(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int lock_unlock_locking_range_sum(struct opal_dev *dev, void *data)
-    {
     u8 lr_buffer[OPAL_UID_LENGTH];
-    let mut read_locked: u8 = 1, write_locked = 1;
-    struct opal_lock_unlock *lkul = data;
-    int ret;
+pub static mut read_locked: u8 = 0;
+    let mut lkul = data;
+    let mut ret = 0;
     clear_opal_cmd(dev);
     set_comid(dev, dev.comid);
-    if (build_locking_range(lr_buffer, sizeof(lr_buffer),
-    lkul.session.opal_key.lr) < 0)
+    if (build_locking_range(lr_buffer, sizeof!(lr_buffer),
+    lkul.session.opal_key.lr) < 0) {
     return -ERANGE;
-    switch (lkul.l_state) {
-    case OPAL_RO:
+    }
+    match (lkul.l_state) {
+    OPAL_RO => {
     read_locked = 0;
     write_locked = 1;
-    break;
-    case OPAL_RW:
+    // break;
+    }
+    OPAL_RW => {
     read_locked = 0;
     write_locked = 0;
-    break;
-    case OPAL_LK:
+    // break;
+    }
+    OPAL_LK => {
 // vars are initialized to locked
-    break;
-    default:
-    pr_debug("Tried to set an invalid locking state.\n");
+    // break;
+    }
+    _ => {
+    pr_debug!("Tried to set an invalid locking state.\n");
     return OPAL_INVAL_PARAM;
+    }
     }
     ret = generic_lr_enable_disable(dev, lr_buffer, 1, 1,
     read_locked, write_locked);
     if (ret < 0) {
-    pr_debug("Error building SET command.\n");
+    pr_debug!("Error building SET command.\n");
     return ret;
     }
     return finalize_and_send(dev, parse_and_check_status);
     }
 #[no_mangle]
 unsafe extern "C" fn activate_lsp(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int activate_lsp(struct opal_dev *dev, void *data)
-    {
-    struct opal_lr_act *opal_act = data;
+    let mut opal_act = data;
     u8 user_lr[OPAL_UID_LENGTH];
-    int err, i;
+    let mut err = 0;
+    let mut i = 0;
     err = cmd_start(dev, opaluid[OPAL_LOCKINGSP_UID],
     opalmethod[OPAL_ACTIVATE]);
     if (opal_act.sum) {
-    err = build_locking_range(user_lr, sizeof(user_lr),
+    err = build_locking_range(user_lr, sizeof!(user_lr),
     opal_act.lr[0]);
-    if (err)
+    if (err) {
     return err;
+    }
     add_token_u8(&err, dev, OPAL_STARTNAME);
     add_token_u64(&err, dev, OPAL_SUM_SET_LIST);
     add_token_u8(&err, dev, OPAL_STARTLIST);
     add_token_bytestring(&err, dev, user_lr, OPAL_UID_LENGTH);
-    for (i = 1; i < opal_act.num_lrs; i++) {
+    while (i < opal_act.num_lrs) {
     user_lr[7] = opal_act.lr[i];
     add_token_bytestring(&err, dev, user_lr, OPAL_UID_LENGTH);
     }
@@ -2049,22 +2240,21 @@ unsafe extern "C" fn activate_lsp(dev: *mut opal_dev, data: *mut c_void) -> c_in
     add_token_u8(&err, dev, OPAL_ENDNAME);
     }
     if (err) {
-    pr_debug("Error building Activate LockingSP command.\n");
+    pr_debug!("Error building Activate LockingSP command.\n");
     return err;
     }
     return finalize_and_send(dev, parse_and_check_status);
     }
 #[no_mangle]
 unsafe extern "C" fn reactivate_lsp(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int reactivate_lsp(struct opal_dev *dev, void *data)
-    {
-    struct opal_lr_react *opal_react = data;
+    let mut opal_react = data;
     u8 user_lr[OPAL_UID_LENGTH];
-    int err, i;
+    let mut err = 0;
+    let mut i = 0;
     err = cmd_start(dev, opaluid[OPAL_THISSP_UID],
     opalmethod[OPAL_REACTIVATE]);
     if (err) {
-    pr_debug("Error building Reactivate LockingSP command.\n");
+    pr_debug!("Error building Reactivate LockingSP command.\n");
     return err;
     }
 //
@@ -2080,15 +2270,16 @@ unsafe extern "C" fn reactivate_lsp(dev: *mut opal_dev, data: *mut c_void) -> c_
     add_token_u8(&err, dev, OPAL_ENDNAME);
     } else if (opal_react.num_lrs) {
 // Subset of Locking table (selected locking range(s)) to be put in SUM
-    err = build_locking_range(user_lr, sizeof(user_lr),
+    err = build_locking_range(user_lr, sizeof!(user_lr),
     opal_react.lr[0]);
-    if (err)
+    if (err) {
     return err;
+    }
     add_token_u8(&err, dev, OPAL_STARTNAME);
     add_token_u64(&err, dev, OPAL_SUM_SET_LIST);
     add_token_u8(&err, dev, OPAL_STARTLIST);
     add_token_bytestring(&err, dev, user_lr, OPAL_UID_LENGTH);
-    for (i = 1; i < opal_react.num_lrs; i++) {
+    while (i < opal_react.num_lrs) {
     user_lr[7] = opal_react.lr[i];
     add_token_bytestring(&err, dev, user_lr, OPAL_UID_LENGTH);
     }
@@ -2118,72 +2309,68 @@ unsafe extern "C" fn reactivate_lsp(dev: *mut opal_dev, data: *mut c_void) -> c_
 // Determine if we're in the Manufactured Inactive or Active state
 #[no_mangle]
 unsafe extern "C" fn get_lsp_lifecycle(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int get_lsp_lifecycle(struct opal_dev *dev, void *data)
-    {
-    u8 lc_status;
-    int err;
+    let mut lc_status = 0;
+    let mut err = 0;
     err = generic_get_column(dev, opaluid[OPAL_LOCKINGSP_UID],
     OPAL_LIFECYCLE);
-    if (err)
+    if (err) {
     return err;
+    }
     lc_status = response_get_u64(&dev.parsed, 4);
 // 0x08 is Manufactured Inactive
 // 0x09 is Manufactured
     if (lc_status != OPAL_MANUFACTURED_INACTIVE) {
-    pr_debug("Couldn't determine the status of the Lifecycle state\n");
+    pr_debug!("Couldn't determine the status of the Lifecycle state\n");
     return -ENODEV;
     }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn get_msid_cpin_pin(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int get_msid_cpin_pin(struct opal_dev *dev, void *data)
-    {
-    const char *msid_pin;
-    size_t strlen;
-    int err;
+pub static mut msid_pin: *mut c_void = core::ptr::null_mut();
+    let mut strlen = 0;
+    let mut err = 0;
     err = generic_get_column(dev, opaluid[OPAL_C_PIN_MSID], OPAL_PIN);
-    if (err)
+    if (err) {
     return err;
+    }
     strlen = response_get_string(&dev.parsed, 4, &msid_pin);
     if (!msid_pin) {
-    pr_debug("Couldn't extract MSID_CPIN from response\n");
+    pr_debug!("Couldn't extract MSID_CPIN from response\n");
     return OPAL_INVAL_PARAM;
     }
     dev.prev_data = kmemdup(msid_pin, strlen, GFP_KERNEL);
-    if (!dev.prev_data)
+    if (!dev.prev_data) {
     return -ENOMEM;
+    }
     dev.prev_d_len = strlen;
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn write_table_data(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int write_table_data(struct opal_dev *dev, void *data)
-    {
-    struct opal_read_write_table *write_tbl = data;
+    let mut write_tbl = data;
     return generic_table_write_data(dev, write_tbl.data, write_tbl.offset,
     write_tbl.size, write_tbl.table_uid);
     }
 #[no_mangle]
 unsafe extern "C" fn read_table_data_cont(dev: *mut opal_dev) -> c_int {
-    static int read_table_data_cont(struct opal_dev *dev)
-    {
-    int err;
-    const char *data_read;
+    let mut err = 0;
+pub static mut data_read: *mut c_void = core::ptr::null_mut();
     err = parse_and_check_status(dev);
-    if (err)
+    if (err) {
     return err;
+    }
     dev.prev_d_len = response_get_string(&dev.parsed, 1, &data_read);
-    dev.prev_data = (void *)data_read;
+    dev.prev_data = data_read;
     if (!dev.prev_data) {
-    pr_debug("%s: Couldn't read data from the table.\n", __func__);
+    pr_debug!("%s: Couldn't read data from the table.\n", __func__);
     return OPAL_INVAL_PARAM;
     }
     return 0;
     }
 //
 // IO_BUFFER_LENGTH = 2048
-// sizeof(header) = 56
+// sizeof!(header) = 56
 // No. of Token Bytes in the Response = 11
 // MAX size of data that can be carried in response buffer
 // at a time is : 2048 - (56 + 11) = 1981 = 0x7BD.
@@ -2191,23 +2378,21 @@ unsafe extern "C" fn read_table_data_cont(dev: *mut opal_dev) -> c_int {
 
 #[no_mangle]
 unsafe extern "C" fn read_table_data(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int read_table_data(struct opal_dev *dev, void *data)
-    {
-    struct opal_read_write_table *read_tbl = data;
-    int err;
-    let mut off: usize = 0, max_read_size = OPAL_MAX_READ_TABLE;
+    let mut read_tbl = data;
+    let mut err = 0;
+pub static mut off: usize = 0;
     u64 table_len, len;
-    let mut offset: u64 = read_tbl.offset, read_size = read_tbl.size - 1;
-    u8 __user *dst;
+pub static mut offset: u64 = 0;
+    let mut dst = core::ptr::null_mut();
     err = generic_get_table_info(dev, read_tbl.table_uid, OPAL_TABLE_ROWS);
     if (err) {
-    pr_debug("Couldn't get the table size\n");
+    pr_debug!("Couldn't get the table size\n");
     return err;
     }
     table_len = response_get_u64(&dev.parsed, 4);
 // Check if the user is trying to read from the table limits
     if (read_size > table_len || offset > table_len - read_size) {
-    pr_debug("Read size exceeds the Table size limits (%llu vs. %llu)\n",
+    pr_debug!("Read size exceeds the Table size limits (%llu vs. %llu)\n",
     offset + read_size, table_len);
     return -EINVAL;
     }
@@ -2221,25 +2406,26 @@ unsafe extern "C" fn read_table_data(dev: *mut opal_dev, data: *mut c_void) -> c
     add_token_u8(&err, dev, OPAL_STARTNAME);
     add_token_u8(&err, dev, OPAL_ENDROW);
     len = min(max_read_size, (size_t)(read_size - off));
-    add_token_u64(&err, dev, offset + off + len); /* end row value
+    add_token_u64(&err, dev, offset + off + len); // end row value
 //
     add_token_u8(&err, dev, OPAL_ENDNAME);
     add_token_u8(&err, dev, OPAL_ENDLIST);
     if (err) {
-    pr_debug("Error building read table data command.\n");
+    pr_debug!("Error building read table data command.\n");
     break;
     }
     err = finalize_and_send(dev, read_table_data_cont);
-    if (err)
+    if (err) {
     break;
+    }
 // len+1: This includes the NULL terminator at the end
     if (dev.prev_d_len > len + 1) {
     err = -EOVERFLOW;
     break;
     }
-    dst = (u8 __user *)(uintptr_t)read_tbl.data;
+    dst = (uintptr_t)read_tbl.data;
     if (copy_to_user(dst + off, dev.prev_data, dev.prev_d_len)) {
-    pr_debug("Error copying data to userspace\n");
+    pr_debug!("Error copying data to userspace\n");
     err = -EFAULT;
     break;
     }
@@ -2250,51 +2436,42 @@ unsafe extern "C" fn read_table_data(dev: *mut opal_dev, data: *mut c_void) -> c
     }
 #[no_mangle]
 unsafe extern "C" fn end_opal_session(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int end_opal_session(struct opal_dev *dev, void *data)
-    {
-    let mut err: c_int = 0;
+pub static mut err: c_int = 0;
     clear_opal_cmd(dev);
     set_comid(dev, dev.comid);
     add_token_u8(&err, dev, OPAL_ENDOFSESSION);
-    if (err < 0)
+    if (err < 0) {
     return err;
+    }
     return finalize_and_send(dev, end_session_cont);
     }
 #[no_mangle]
 unsafe extern "C" fn end_opal_session_error(dev: *mut opal_dev) -> c_int {
-    static int end_opal_session_error(struct opal_dev *dev)
-    {
-    const struct opal_step error_end_session = {
-    end_opal_session,
-    };
+pub static mut opal_step: usize = 0;
     return execute_step(dev, &error_end_session, 0);
     }
 #[no_mangle]
 pub unsafe extern "C" fn setup_opal_dev(dev: *mut opal_dev) {
-    static inline void setup_opal_dev(struct opal_dev *dev)
-    {
     dev.tsn = 0;
     dev.hsn = 0;
     dev.prev_data = core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn check_opal_support(dev: *mut opal_dev) -> c_int {
-    static int check_opal_support(struct opal_dev *dev)
-    {
-    int ret;
+    let mut ret = 0;
     mutex_lock(&dev.dev_lock);
     setup_opal_dev(dev);
     ret = opal_discovery0_step(dev);
-    if (!ret)
+    if (!ret) {
     dev.flags |= OPAL_FL_SUPPORTED;
+    }
     mutex_unlock(&dev.dev_lock);
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn clean_opal_dev(dev: *mut opal_dev) {
-    static void clean_opal_dev(struct opal_dev *dev)
-    {
-    struct opal_suspend_data *suspend, *next;
+    let mut suspend = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
     mutex_lock(&dev.dev_lock);
     list_for_each_entry_safe(suspend, next, &dev.unlk_lst, node) {
     list_del(&suspend.node);
@@ -2304,200 +2481,173 @@ unsafe extern "C" fn clean_opal_dev(dev: *mut opal_dev) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn free_opal_dev(dev: *mut opal_dev) {
-    void free_opal_dev(struct opal_dev *dev)
-    {
-    if (!dev)
+    if (!dev) {
     return;
+    }
     clean_opal_dev(dev);
     kfree(dev.resp);
     kfree(dev.cmd);
     kfree(dev);
     }
     EXPORT_SYMBOL(free_opal_dev);
-    struct opal_dev *init_opal_dev(void *data, sec_send_recv *send_recv)
-    {
-    struct opal_dev *dev;
+#[no_mangle]
+pub unsafe extern "C" fn init_opal_dev(data: *mut c_void, send_recv: *mut sec_send_recv) -> *mut c_void {
+pub static mut dev: *mut c_void = core::ptr::null_mut();
     dev = kmalloc_obj(*dev);
-    if (!dev)
+    if (!dev) {
     return core::ptr::null_mut();
+    }
 //
 // Presumably DMA-able buffers must be cache-aligned. Kmalloc makes
 // sure the allocated buffer is DMA-safe in that regard.
 //
     dev.cmd = kmalloc(IO_BUFFER_LENGTH, GFP_KERNEL);
-    if (!dev.cmd)
-    goto err_free_dev;
+    if (!dev.cmd) {
+// goto;
+    }
     dev.resp = kmalloc(IO_BUFFER_LENGTH, GFP_KERNEL);
-    if (!dev.resp)
-    goto err_free_cmd;
+    if (!dev.resp) {
+// goto;
+    }
     INIT_LIST_HEAD(&dev.unlk_lst);
     mutex_init(&dev.dev_lock);
     dev.flags = 0;
     dev.data = data;
     dev.send_recv = send_recv;
     if (check_opal_support(dev) != 0) {
-    pr_debug("Opal is not supported on this device\n");
-    goto err_free_resp;
+    pr_debug!("Opal is not supported on this device\n");
+// goto;
     }
     return dev;
-    err_free_resp:
+// label;
     kfree(dev.resp);
-    err_free_cmd:
+// label;
     kfree(dev.cmd);
-    err_free_dev:
+// label;
     kfree(dev);
     return core::ptr::null_mut();
     }
     EXPORT_SYMBOL(init_opal_dev);
-    static int opal_secure_erase_locking_range(struct opal_dev *dev,
-    struct opal_session_info *opal_session)
-    {
-    const struct opal_step erase_steps[] = {
-    { start_auth_opal_session, opal_session },
-    { get_active_key, &opal_session.opal_key.lr },
-    { gen_key, },
-    { end_opal_session, }
-    };
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn opal_secure_erase_locking_range(dev: *mut opal_dev, opal_session: *mut opal_session_info) -> c_int {
+pub static mut opal_step: usize = 0;
+    let mut ret = 0;
     ret = opal_get_key(dev, &opal_session.opal_key);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     mutex_lock(&dev.dev_lock);
     setup_opal_dev(dev);
-    ret = execute_steps(dev, erase_steps, ARRAY_SIZE(erase_steps));
+    ret = execute_steps(dev, erase_steps, ARRAY_SIZE!(erase_steps));
     mutex_unlock(&dev.dev_lock);
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn opal_get_discv(dev: *mut opal_dev, discv: *mut opal_discovery) -> c_int {
-    static int opal_get_discv(struct opal_dev *dev, struct opal_discovery *discv)
-    {
-    const struct opal_step discovery0_step = {
-    opal_discovery0, discv
-    };
-    int ret;
+pub static mut opal_step: usize = 0;
+    let mut ret = 0;
     mutex_lock(&dev.dev_lock);
     setup_opal_dev(dev);
     ret = execute_step(dev, &discovery0_step, 0);
     mutex_unlock(&dev.dev_lock);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     return discv.size; /* modified to actual length of data */
     }
 #[no_mangle]
 unsafe extern "C" fn opal_revertlsp(dev: *mut opal_dev, rev: *mut opal_revert_lsp) -> c_int {
-    static int opal_revertlsp(struct opal_dev *dev, struct opal_revert_lsp *rev)
-    {
 // controller will terminate session
-    const struct opal_step steps[] = {
-    { start_admin1LSP_opal_session, &rev.key },
-    { revert_lsp, rev }
-    };
-    int ret;
+pub static mut opal_step: usize = 0;
+    let mut ret = 0;
     ret = opal_get_key(dev, &rev.key);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     mutex_lock(&dev.dev_lock);
     setup_opal_dev(dev);
-    ret = execute_steps(dev, steps, ARRAY_SIZE(steps));
+    ret = execute_steps(dev, steps, ARRAY_SIZE!(steps));
     mutex_unlock(&dev.dev_lock);
     return ret;
     }
-    static int opal_erase_locking_range(struct opal_dev *dev,
-    struct opal_session_info *opal_session)
-    {
-    const struct opal_step erase_steps[] = {
-    { start_auth_opal_session, opal_session },
-    { erase_locking_range, opal_session },
-    { end_opal_session, }
-    };
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn opal_erase_locking_range(dev: *mut opal_dev, opal_session: *mut opal_session_info) -> c_int {
+pub static mut opal_step: usize = 0;
+    let mut ret = 0;
     ret = opal_get_key(dev, &opal_session.opal_key);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     mutex_lock(&dev.dev_lock);
     setup_opal_dev(dev);
-    ret = execute_steps(dev, erase_steps, ARRAY_SIZE(erase_steps));
+    ret = execute_steps(dev, erase_steps, ARRAY_SIZE!(erase_steps));
     mutex_unlock(&dev.dev_lock);
     return ret;
     }
-    static int opal_enable_disable_shadow_mbr(struct opal_dev *dev,
-    struct opal_mbr_data *opal_mbr)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn opal_enable_disable_shadow_mbr(dev: *mut opal_dev, opal_mbr: *mut opal_mbr_data) -> c_int {
     u8 enable_disable = opal_mbr.enable_disable == OPAL_MBR_ENABLE ?
     OPAL_TRUE : OPAL_FALSE;
-    const struct opal_step mbr_steps[] = {
-    { start_admin1LSP_opal_session, &opal_mbr.key },
-    { set_mbr_done, &enable_disable },
-    { end_opal_session, },
-    { start_admin1LSP_opal_session, &opal_mbr.key },
-    { set_mbr_enable_disable, &enable_disable },
-    { end_opal_session, }
-    };
-    int ret;
+pub static mut opal_step: usize = 0;
+    let mut ret = 0;
     if (opal_mbr.enable_disable != OPAL_MBR_ENABLE &&
-    opal_mbr.enable_disable != OPAL_MBR_DISABLE)
+    opal_mbr.enable_disable != OPAL_MBR_DISABLE) {
     return -EINVAL;
+    }
     ret = opal_get_key(dev, &opal_mbr.key);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     mutex_lock(&dev.dev_lock);
     setup_opal_dev(dev);
-    ret = execute_steps(dev, mbr_steps, ARRAY_SIZE(mbr_steps));
+    ret = execute_steps(dev, mbr_steps, ARRAY_SIZE!(mbr_steps));
     mutex_unlock(&dev.dev_lock);
     return ret;
     }
-    static int opal_set_mbr_done(struct opal_dev *dev,
-    struct opal_mbr_done *mbr_done)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn opal_set_mbr_done(dev: *mut opal_dev, mbr_done: *mut opal_mbr_done) -> c_int {
     u8 mbr_done_tf = mbr_done.done_flag == OPAL_MBR_DONE ?
     OPAL_TRUE : OPAL_FALSE;
-    const struct opal_step mbr_steps[] = {
-    { start_admin1LSP_opal_session, &mbr_done.key },
-    { set_mbr_done, &mbr_done_tf },
-    { end_opal_session, }
-    };
-    int ret;
+pub static mut opal_step: usize = 0;
+    let mut ret = 0;
     if (mbr_done.done_flag != OPAL_MBR_DONE &&
-    mbr_done.done_flag != OPAL_MBR_NOT_DONE)
+    mbr_done.done_flag != OPAL_MBR_NOT_DONE) {
     return -EINVAL;
+    }
     ret = opal_get_key(dev, &mbr_done.key);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     mutex_lock(&dev.dev_lock);
     setup_opal_dev(dev);
-    ret = execute_steps(dev, mbr_steps, ARRAY_SIZE(mbr_steps));
+    ret = execute_steps(dev, mbr_steps, ARRAY_SIZE!(mbr_steps));
     mutex_unlock(&dev.dev_lock);
     return ret;
     }
-    static int opal_write_shadow_mbr(struct opal_dev *dev,
-    struct opal_shadow_mbr *info)
-    {
-    const struct opal_step mbr_steps[] = {
-    { start_admin1LSP_opal_session, &info.key },
-    { write_shadow_mbr, info },
-    { end_opal_session, }
-    };
-    int ret;
-    if (info.size == 0)
+#[no_mangle]
+pub unsafe extern "C" fn opal_write_shadow_mbr(dev: *mut opal_dev, info: *mut opal_shadow_mbr) -> c_int {
+pub static mut opal_step: usize = 0;
+    let mut ret = 0;
+    if (info.size == 0) {
     return 0;
+    }
     ret = opal_get_key(dev, &info.key);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     mutex_lock(&dev.dev_lock);
     setup_opal_dev(dev);
-    ret = execute_steps(dev, mbr_steps, ARRAY_SIZE(mbr_steps));
+    ret = execute_steps(dev, mbr_steps, ARRAY_SIZE!(mbr_steps));
     mutex_unlock(&dev.dev_lock);
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn opal_save(dev: *mut opal_dev, lk_unlk: *mut opal_lock_unlock) -> c_int {
-    static int opal_save(struct opal_dev *dev, struct opal_lock_unlock *lk_unlk)
-    {
-    struct opal_suspend_data *suspend;
+pub static mut suspend: *mut c_void = core::ptr::null_mut();
     suspend = kzalloc_obj(*suspend);
-    if (!suspend)
+    if (!suspend) {
     return -ENOMEM;
+    }
     suspend.unlk = *lk_unlk;
     suspend.lr = lk_unlk.session.opal_key.lr;
     mutex_lock(&dev.dev_lock);
@@ -2506,114 +2656,92 @@ unsafe extern "C" fn opal_save(dev: *mut opal_dev, lk_unlk: *mut opal_lock_unloc
     mutex_unlock(&dev.dev_lock);
     return 0;
     }
-    static int opal_add_user_to_lr(struct opal_dev *dev,
-    struct opal_lock_unlock *lk_unlk)
-    {
-    const struct opal_step steps[] = {
-    { start_admin1LSP_opal_session, &lk_unlk.session.opal_key },
-    { add_user_to_lr, lk_unlk },
-    { add_user_to_lr_ace, lk_unlk },
-    { end_opal_session, }
-    };
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn opal_add_user_to_lr(dev: *mut opal_dev, lk_unlk: *mut opal_lock_unlock) -> c_int {
+pub static mut opal_step: usize = 0;
+    let mut ret = 0;
     if (lk_unlk.l_state != OPAL_RO &&
     lk_unlk.l_state != OPAL_RW) {
-    pr_debug("Locking state was not RO or RW\n");
+    pr_debug!("Locking state was not RO or RW\n");
     return -EINVAL;
     }
     if (lk_unlk.session.who < OPAL_USER1 ||
     lk_unlk.session.who > OPAL_USER9) {
-    pr_debug("Authority was not within the range of users: %d\n",
+    pr_debug!("Authority was not within the range of users: %d\n",
     lk_unlk.session.who);
     return -EINVAL;
     }
     if (lk_unlk.session.sum) {
-    pr_debug("%s not supported in sum. Use setup locking range\n",
+    pr_debug!("%s not supported in sum. Use setup locking range\n",
     __func__);
     return -EINVAL;
     }
     ret = opal_get_key(dev, &lk_unlk.session.opal_key);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     mutex_lock(&dev.dev_lock);
     setup_opal_dev(dev);
-    ret = execute_steps(dev, steps, ARRAY_SIZE(steps));
+    ret = execute_steps(dev, steps, ARRAY_SIZE!(steps));
     mutex_unlock(&dev.dev_lock);
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn opal_reverttper(dev: *mut opal_dev, opal: *mut opal_key, psid: bool) -> c_int {
-    static int opal_reverttper(struct opal_dev *dev, struct opal_key *opal, bool psid)
-    {
 // controller will terminate session
-    const struct opal_step revert_steps[] = {
-    { start_SIDASP_opal_session, opal },
-    { revert_tper, }
-    };
-    const struct opal_step psid_revert_steps[] = {
-    { start_PSID_opal_session, opal },
-    { revert_tper, }
-    };
-    int ret;
+pub static mut opal_step: usize = 0;
+pub static mut opal_step: usize = 0;
+    let mut ret = 0;
     ret = opal_get_key(dev, opal);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     mutex_lock(&dev.dev_lock);
     setup_opal_dev(dev);
-    if (psid)
+    if (psid) {
     ret = execute_steps(dev, psid_revert_steps,
-    ARRAY_SIZE(psid_revert_steps));
-    else
+    ARRAY_SIZE!(psid_revert_steps));
+    }
+    else {
     ret = execute_steps(dev, revert_steps,
-    ARRAY_SIZE(revert_steps));
+    ARRAY_SIZE!(revert_steps));
+    }
     mutex_unlock(&dev.dev_lock);
 //
 // If we successfully reverted lets clean
 // any saved locking ranges.
 //
-    if (!ret)
+    if (!ret) {
     clean_opal_dev(dev);
+    }
     return ret;
     }
-    static int __opal_lock_unlock(struct opal_dev *dev,
-    struct opal_lock_unlock *lk_unlk)
-    {
-    const struct opal_step unlock_steps[] = {
-    { start_auth_opal_session, &lk_unlk.session },
-    { lock_unlock_locking_range, lk_unlk },
-    { end_opal_session, }
-    };
-    const struct opal_step unlock_sum_steps[] = {
-    { start_auth_opal_session, &lk_unlk.session },
-    { lock_unlock_locking_range_sum, lk_unlk },
-    { end_opal_session, }
-    };
-    if (lk_unlk.session.sum)
+#[no_mangle]
+pub unsafe extern "C" fn __opal_lock_unlock(dev: *mut opal_dev, lk_unlk: *mut opal_lock_unlock) -> c_int {
+pub static mut opal_step: usize = 0;
+pub static mut opal_step: usize = 0;
+    if (lk_unlk.session.sum) {
     return execute_steps(dev, unlock_sum_steps,
-    ARRAY_SIZE(unlock_sum_steps));
-    else
+    ARRAY_SIZE!(unlock_sum_steps));
+    }
+    else {
     return execute_steps(dev, unlock_steps,
-    ARRAY_SIZE(unlock_steps));
+    ARRAY_SIZE!(unlock_steps));
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn __opal_set_mbr_done(dev: *mut opal_dev, key: *mut opal_key) -> c_int {
-    static int __opal_set_mbr_done(struct opal_dev *dev, struct opal_key *key)
-    {
-    let mut mbr_done_tf: u8 = OPAL_TRUE;
-    const struct opal_step mbrdone_step[] = {
-    { start_admin1LSP_opal_session, key },
-    { set_mbr_done, &mbr_done_tf },
-    { end_opal_session, }
-    };
-    return execute_steps(dev, mbrdone_step, ARRAY_SIZE(mbrdone_step));
+pub static mut mbr_done_tf: u8 = 0;
+pub static mut opal_step: usize = 0;
+    return execute_steps(dev, mbrdone_step, ARRAY_SIZE!(mbrdone_step));
     }
-    static void opal_lock_check_for_saved_key(struct opal_dev *dev,
-    struct opal_lock_unlock *lk_unlk)
-    {
-    struct opal_suspend_data *iter;
+#[no_mangle]
+pub unsafe extern "C" fn opal_lock_check_for_saved_key(dev: *mut opal_dev, lk_unlk: *mut opal_lock_unlock) {
+pub static mut iter: *mut c_void = core::ptr::null_mut();
     if (lk_unlk.l_state != OPAL_LK ||
-    lk_unlk.session.opal_key.key_len > 0)
+    lk_unlk.session.opal_key.key_len > 0) {
     return;
+    }
 //
 // Usually when closing a crypto device (eg: dm-crypt with LUKS) the
 // volume key is not required, as it requires root privileges anyway,
@@ -2642,201 +2770,165 @@ unsafe extern "C" fn __opal_set_mbr_done(dev: *mut opal_dev, key: *mut opal_key)
     }
     }
     }
-    static int opal_lock_unlock(struct opal_dev *dev,
-    struct opal_lock_unlock *lk_unlk)
-    {
-    int ret;
-    if (lk_unlk.session.who > OPAL_USER9)
+#[no_mangle]
+pub unsafe extern "C" fn opal_lock_unlock(dev: *mut opal_dev, lk_unlk: *mut opal_lock_unlock) -> c_int {
+    let mut ret = 0;
+    if (lk_unlk.session.who > OPAL_USER9) {
     return -EINVAL;
+    }
     mutex_lock(&dev.dev_lock);
     opal_lock_check_for_saved_key(dev, lk_unlk);
     ret = opal_get_key(dev, &lk_unlk.session.opal_key);
-    if (!ret)
+    if (!ret) {
     ret = __opal_lock_unlock(dev, lk_unlk);
+    }
     mutex_unlock(&dev.dev_lock);
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn opal_take_ownership(dev: *mut opal_dev, opal: *mut opal_key) -> c_int {
-    static int opal_take_ownership(struct opal_dev *dev, struct opal_key *opal)
-    {
-    const struct opal_step owner_steps[] = {
-    { start_anybodyASP_opal_session, },
-    { get_msid_cpin_pin, },
-    { end_opal_session, },
-    { start_SIDASP_opal_session, opal },
-    { set_sid_cpin_pin, opal },
-    { end_opal_session, }
-    };
-    int ret;
-    if (!dev)
+pub static mut opal_step: usize = 0;
+    let mut ret = 0;
+    if (!dev) {
     return -ENODEV;
+    }
     ret = opal_get_key(dev, opal);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     mutex_lock(&dev.dev_lock);
     setup_opal_dev(dev);
-    ret = execute_steps(dev, owner_steps, ARRAY_SIZE(owner_steps));
+    ret = execute_steps(dev, owner_steps, ARRAY_SIZE!(owner_steps));
     mutex_unlock(&dev.dev_lock);
     return ret;
     }
-    static int opal_activate_lsp(struct opal_dev *dev,
-    struct opal_lr_act *opal_lr_act)
-    {
-    const struct opal_step active_steps[] = {
-    { start_SIDASP_opal_session, &opal_lr_act.key },
-    { get_lsp_lifecycle, },
-    { activate_lsp, opal_lr_act },
-    { end_opal_session, }
-    };
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn opal_activate_lsp(dev: *mut opal_dev, opal_lr_act: *mut opal_lr_act) -> c_int {
+pub static mut opal_step: usize = 0;
+    let mut ret = 0;
     if (opal_lr_act.sum &&
-    (!opal_lr_act.num_lrs || opal_lr_act.num_lrs > OPAL_MAX_LRS))
+    (!opal_lr_act.num_lrs || opal_lr_act.num_lrs > OPAL_MAX_LRS)) {
     return -EINVAL;
+    }
     ret = opal_get_key(dev, &opal_lr_act.key);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     mutex_lock(&dev.dev_lock);
     setup_opal_dev(dev);
-    ret = execute_steps(dev, active_steps, ARRAY_SIZE(active_steps));
+    ret = execute_steps(dev, active_steps, ARRAY_SIZE!(active_steps));
     mutex_unlock(&dev.dev_lock);
     return ret;
     }
-    static int opal_reactivate_lsp(struct opal_dev *dev,
-    struct opal_lr_react *opal_lr_react)
-    {
-    const struct opal_step active_steps[] = {
-    { start_admin1LSP_opal_session, &opal_lr_react.key },
-    { reactivate_lsp, opal_lr_react },
-// No end_opal_session. The controller terminates the session
-    };
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn opal_reactivate_lsp(dev: *mut opal_dev, opal_lr_react: *mut opal_lr_react) -> c_int {
+pub static mut opal_step: usize = 0;
+    let mut ret = 0;
 // use either 'entire_table' parameter or set of locking ranges
     if (opal_lr_react.num_lrs > OPAL_MAX_LRS ||
-    (opal_lr_react.num_lrs && opal_lr_react.entire_table))
+    (opal_lr_react.num_lrs && opal_lr_react.entire_table)) {
     return -EINVAL;
+    }
     ret = opal_get_key(dev, &opal_lr_react.key);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     mutex_lock(&dev.dev_lock);
     setup_opal_dev(dev);
-    ret = execute_steps(dev, active_steps, ARRAY_SIZE(active_steps));
+    ret = execute_steps(dev, active_steps, ARRAY_SIZE!(active_steps));
     mutex_unlock(&dev.dev_lock);
     return ret;
     }
-    static int opal_setup_locking_range(struct opal_dev *dev,
-    struct opal_user_lr_setup *opal_lrs)
-    {
-    const struct opal_step lr_steps[] = {
-    { start_auth_opal_session, &opal_lrs.session },
-    { setup_locking_range_start_length, opal_lrs },
-    { setup_enable_range, opal_lrs },
-    { end_opal_session, }
-    }, lr_global_steps[] = {
-    { start_auth_opal_session, &opal_lrs.session },
-    { setup_enable_range, opal_lrs },
-    { end_opal_session, }
-    };
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn opal_setup_locking_range(dev: *mut opal_dev, opal_lrs: *mut opal_user_lr_setup) -> c_int {
+pub static mut opal_step: usize = 0;
+    let mut ret = 0;
     ret = opal_get_key(dev, &opal_lrs.session.opal_key);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     mutex_lock(&dev.dev_lock);
     setup_opal_dev(dev);
-    if (opal_lrs.session.opal_key.lr == 0)
-    ret = execute_steps(dev, lr_global_steps, ARRAY_SIZE(lr_global_steps));
-    else
-    ret = execute_steps(dev, lr_steps, ARRAY_SIZE(lr_steps));
+    if (opal_lrs.session.opal_key.lr == 0) {
+    ret = execute_steps(dev, lr_global_steps, ARRAY_SIZE!(lr_global_steps));
+    }
+    else {
+    ret = execute_steps(dev, lr_steps, ARRAY_SIZE!(lr_steps));
+    }
     mutex_unlock(&dev.dev_lock);
     return ret;
     }
-    static int opal_setup_locking_range_start_length(struct opal_dev *dev,
-    struct opal_user_lr_setup *opal_lrs)
-    {
-    const struct opal_step lr_steps[] = {
-    { start_auth_opal_session, &opal_lrs.session },
-    { setup_locking_range_start_length, opal_lrs },
-    { end_opal_session, }
-    };
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn opal_setup_locking_range_start_length(dev: *mut opal_dev, opal_lrs: *mut opal_user_lr_setup) -> c_int {
+pub static mut opal_step: usize = 0;
+    let mut ret = 0;
 // we can not set global locking range offset or length
-    if (opal_lrs.session.opal_key.lr == 0)
+    if (opal_lrs.session.opal_key.lr == 0) {
     return -EINVAL;
+    }
     ret = opal_get_key(dev, &opal_lrs.session.opal_key);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     mutex_lock(&dev.dev_lock);
     setup_opal_dev(dev);
-    ret = execute_steps(dev, lr_steps, ARRAY_SIZE(lr_steps));
+    ret = execute_steps(dev, lr_steps, ARRAY_SIZE!(lr_steps));
     mutex_unlock(&dev.dev_lock);
     return ret;
     }
-    static int opal_enable_disable_range(struct opal_dev *dev,
-    struct opal_user_lr_setup *opal_lrs)
-    {
-    const struct opal_step lr_steps[] = {
-    { start_auth_opal_session, &opal_lrs.session },
-    { setup_enable_range, opal_lrs },
-    { end_opal_session, }
-    };
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn opal_enable_disable_range(dev: *mut opal_dev, opal_lrs: *mut opal_user_lr_setup) -> c_int {
+pub static mut opal_step: usize = 0;
+    let mut ret = 0;
     ret = opal_get_key(dev, &opal_lrs.session.opal_key);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     mutex_lock(&dev.dev_lock);
     setup_opal_dev(dev);
-    ret = execute_steps(dev, lr_steps, ARRAY_SIZE(lr_steps));
+    ret = execute_steps(dev, lr_steps, ARRAY_SIZE!(lr_steps));
     mutex_unlock(&dev.dev_lock);
     return ret;
     }
-    static int opal_locking_range_status(struct opal_dev *dev,
-    struct opal_lr_status *opal_lrst,
-    void __user *data)
-    {
-    const struct opal_step lr_steps[] = {
-    { start_auth_opal_session, &opal_lrst.session },
-    { locking_range_status, opal_lrst },
-    { end_opal_session, }
-    };
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn opal_locking_range_status(dev: *mut opal_dev, opal_lrst: *mut opal_lr_status, data: *mut c_void) -> c_int {
+pub static mut opal_step: usize = 0;
+    let mut ret = 0;
     mutex_lock(&dev.dev_lock);
     setup_opal_dev(dev);
-    ret = execute_steps(dev, lr_steps, ARRAY_SIZE(lr_steps));
+    ret = execute_steps(dev, lr_steps, ARRAY_SIZE!(lr_steps));
     mutex_unlock(&dev.dev_lock);
 // skip session info when copying back to uspace
-    if (!ret && copy_to_user(data + offsetof(struct opal_lr_status, range_start),
-    (void *)opal_lrst + offsetof(struct opal_lr_status, range_start),
-    sizeof(*opal_lrst) - offsetof(struct opal_lr_status, range_start))) {
-    pr_debug("Error copying status to userspace\n");
+    if (!ret && copy_to_user(data + offsetof(opal_lr_status, range_start),
+    opal_lrst + offsetof(opal_lr_status, range_start),
+    sizeof!(*opal_lrst) - offsetof(opal_lr_status, range_start))) {
+    pr_debug!("Error copying status to userspace\n");
     return -EFAULT;
     }
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn opal_set_new_pw(dev: *mut opal_dev, opal_pw: *mut opal_new_pw) -> c_int {
-    static int opal_set_new_pw(struct opal_dev *dev, struct opal_new_pw *opal_pw)
-    {
-    const struct opal_step pw_steps[] = {
-    { start_auth_opal_session, &opal_pw.session },
-    { set_new_pw, &opal_pw.new_user_pw },
-    { end_opal_session, }
-    };
-    int ret;
+pub static mut opal_step: usize = 0;
+    let mut ret = 0;
     if (opal_pw.session.who > OPAL_USER9  ||
-    opal_pw.new_user_pw.who > OPAL_USER9)
+    opal_pw.new_user_pw.who > OPAL_USER9) {
     return -EINVAL;
+    }
     mutex_lock(&dev.dev_lock);
     setup_opal_dev(dev);
-    ret = execute_steps(dev, pw_steps, ARRAY_SIZE(pw_steps));
+    ret = execute_steps(dev, pw_steps, ARRAY_SIZE!(pw_steps));
     mutex_unlock(&dev.dev_lock);
-    if (ret)
+    if (ret) {
     return ret;
+    }
 // update keyring and key store with new password
     ret = sed_write_key(OPAL_AUTH_KEY,
     opal_pw.new_user_pw.opal_key.key,
     opal_pw.new_user_pw.opal_key.key_len);
-    if (ret != -EOPNOTSUPP)
-    pr_warn("error updating SED key: %d\n", ret);
+    if (ret != -EOPNOTSUPP) {
+    pr_warn!("error updating SED key: %d\n", ret);
+    }
     ret = update_sed_opal_key(OPAL_AUTH_KEY,
     opal_pw.new_user_pw.opal_key.key,
     opal_pw.new_user_pw.opal_key.key_len);
@@ -2844,59 +2936,50 @@ unsafe extern "C" fn opal_set_new_pw(dev: *mut opal_dev, opal_pw: *mut opal_new_
     }
 #[no_mangle]
 unsafe extern "C" fn opal_set_new_sid_pw(dev: *mut opal_dev, opal_pw: *mut opal_new_pw) -> c_int {
-    static int opal_set_new_sid_pw(struct opal_dev *dev, struct opal_new_pw *opal_pw)
-    {
-    int ret;
-    struct opal_key *newkey = &opal_pw.new_user_pw.opal_key;
-    struct opal_key *oldkey = &opal_pw.session.opal_key;
-    const struct opal_step pw_steps[] = {
-    { start_SIDASP_opal_session, oldkey },
-    { set_sid_cpin_pin, newkey },
-    { end_opal_session, }
-    };
-    if (!dev)
+    let mut ret = 0;
+    let mut newkey = &opal_pw.new_user_pw.opal_key;
+    let mut oldkey = &opal_pw.session.opal_key;
+pub static mut opal_step: usize = 0;
+    if (!dev) {
     return -ENODEV;
+    }
     mutex_lock(&dev.dev_lock);
     setup_opal_dev(dev);
-    ret = execute_steps(dev, pw_steps, ARRAY_SIZE(pw_steps));
+    ret = execute_steps(dev, pw_steps, ARRAY_SIZE!(pw_steps));
     mutex_unlock(&dev.dev_lock);
     return ret;
     }
-    static int opal_activate_user(struct opal_dev *dev,
-    struct opal_session_info *opal_session)
-    {
-    const struct opal_step act_steps[] = {
-    { start_admin1LSP_opal_session, &opal_session.opal_key },
-    { internal_activate_user, opal_session },
-    { end_opal_session, }
-    };
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn opal_activate_user(dev: *mut opal_dev, opal_session: *mut opal_session_info) -> c_int {
+pub static mut opal_step: usize = 0;
+    let mut ret = 0;
 // We can't activate Admin1 it's active as manufactured
     if (opal_session.who < OPAL_USER1 ||
     opal_session.who > OPAL_USER9) {
-    pr_debug("Who was not a valid user: %d\n", opal_session.who);
+    pr_debug!("Who was not a valid user: %d\n", opal_session.who);
     return -EINVAL;
     }
     ret = opal_get_key(dev, &opal_session.opal_key);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     mutex_lock(&dev.dev_lock);
     setup_opal_dev(dev);
-    ret = execute_steps(dev, act_steps, ARRAY_SIZE(act_steps));
+    ret = execute_steps(dev, act_steps, ARRAY_SIZE!(act_steps));
     mutex_unlock(&dev.dev_lock);
     return ret;
     }
 #[no_mangle]
 pub unsafe extern "C" fn opal_unlock_from_suspend(dev: *mut opal_dev) -> bool {
-    bool opal_unlock_from_suspend(struct opal_dev *dev)
-    {
-    struct opal_suspend_data *suspend;
-    let mut was_failure: bool = false;
-    int ret;
-    if (!dev)
+pub static mut suspend: *mut c_void = core::ptr::null_mut();
+pub static mut was_failure: bool = false;
+    let mut ret = 0;
+    if (!dev) {
     return false;
-    if (!(dev.flags & OPAL_FL_SUPPORTED))
+    }
+    if (!(dev.flags & OPAL_FL_SUPPORTED)) {
     return false;
+    }
     mutex_lock(&dev.dev_lock);
     setup_opal_dev(dev);
     list_for_each_entry(suspend, &dev.unlk_lst, node) {
@@ -2904,142 +2987,137 @@ pub unsafe extern "C" fn opal_unlock_from_suspend(dev: *mut opal_dev) -> bool {
     dev.hsn = 0;
     ret = __opal_lock_unlock(dev, &suspend.unlk);
     if (ret) {
-    pr_debug("Failed to unlock LR %hhu with sum %d\n",
+    pr_debug!("Failed to unlock LR %hhu with sum %d\n",
     suspend.unlk.session.opal_key.lr,
     suspend.unlk.session.sum);
     was_failure = true;
     }
     if (dev.flags & OPAL_FL_MBR_ENABLED) {
     ret = __opal_set_mbr_done(dev, &suspend.unlk.session.opal_key);
-    if (ret)
-    pr_debug("Failed to set MBR Done in S3 resume\n");
+    if (ret) {
+    pr_debug!("Failed to set MBR Done in S3 resume\n");
+    }
     }
     }
     mutex_unlock(&dev.dev_lock);
     return was_failure;
     }
     EXPORT_SYMBOL(opal_unlock_from_suspend);
-    static int opal_read_table(struct opal_dev *dev,
-    struct opal_read_write_table *rw_tbl)
-    {
-    const struct opal_step read_table_steps[] = {
-    { start_admin1LSP_opal_session, &rw_tbl.key },
-    { read_table_data, rw_tbl },
-    { end_opal_session, }
-    };
-    if (!rw_tbl.size)
+#[no_mangle]
+pub unsafe extern "C" fn opal_read_table(dev: *mut opal_dev, rw_tbl: *mut opal_read_write_table) -> c_int {
+pub static mut opal_step: usize = 0;
+    if (!rw_tbl.size) {
     return 0;
+    }
     return execute_steps(dev, read_table_steps,
-    ARRAY_SIZE(read_table_steps));
+    ARRAY_SIZE!(read_table_steps));
     }
-    static int opal_write_table(struct opal_dev *dev,
-    struct opal_read_write_table *rw_tbl)
-    {
-    const struct opal_step write_table_steps[] = {
-    { start_admin1LSP_opal_session, &rw_tbl.key },
-    { write_table_data, rw_tbl },
-    { end_opal_session, }
-    };
-    if (!rw_tbl.size)
+#[no_mangle]
+pub unsafe extern "C" fn opal_write_table(dev: *mut opal_dev, rw_tbl: *mut opal_read_write_table) -> c_int {
+pub static mut opal_step: usize = 0;
+    if (!rw_tbl.size) {
     return 0;
-    return execute_steps(dev, write_table_steps,
-    ARRAY_SIZE(write_table_steps));
     }
-    static int opal_generic_read_write_table(struct opal_dev *dev,
-    struct opal_read_write_table *rw_tbl)
-    {
-    int ret, bit_set;
+    return execute_steps(dev, write_table_steps,
+    ARRAY_SIZE!(write_table_steps));
+    }
+#[no_mangle]
+pub unsafe extern "C" fn opal_generic_read_write_table(dev: *mut opal_dev, rw_tbl: *mut opal_read_write_table) -> c_int {
+    let mut ret = 0;
+    let mut bit_set = 0;
     ret = opal_get_key(dev, &rw_tbl.key);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     mutex_lock(&dev.dev_lock);
     setup_opal_dev(dev);
     bit_set = fls64(rw_tbl.flags) - 1;
-    switch (bit_set) {
-    case OPAL_READ_TABLE:
+    match (bit_set) {
+    OPAL_READ_TABLE => {
     ret = opal_read_table(dev, rw_tbl);
-    break;
-    case OPAL_WRITE_TABLE:
+    // break;
+    }
+    OPAL_WRITE_TABLE => {
     ret = opal_write_table(dev, rw_tbl);
-    break;
-    default:
-    pr_debug("Invalid bit set in the flag (%016llx).\n",
+    // break;
+    }
+    _ => {
+    pr_debug!("Invalid bit set in the flag (%016llx).\n",
     rw_tbl.flags);
     ret = -EINVAL;
-    break;
+    // break;
+    }
     }
     mutex_unlock(&dev.dev_lock);
     return ret;
     }
 #[no_mangle]
-unsafe extern "C" fn opal_get_status(dev: *mut opal_dev, data: *mut void __user) -> c_int {
-    static int opal_get_status(struct opal_dev *dev, void __user *data)
-    {
-    let mut sts: opal_status = {0};
+unsafe extern "C" fn opal_get_status(dev: *mut opal_dev, data: *mut c_void ) -> c_int {
+pub static mut sts: opal_status = 0;
 //
 // check_opal_support() error is not fatal,
 // !dev->supported is a valid condition
 //
-    if (!check_opal_support(dev))
+    if (!check_opal_support(dev)) {
     sts.flags = dev.flags;
-    if (copy_to_user(data, &sts, sizeof(sts))) {
-    pr_debug("Error copying status to userspace\n");
+    }
+    if (copy_to_user(data, &sts, sizeof!(sts))) {
+    pr_debug!("Error copying status to userspace\n");
     return -EFAULT;
     }
     return 0;
     }
 #[no_mangle]
-unsafe extern "C" fn opal_get_geometry(dev: *mut opal_dev, data: *mut void __user) -> c_int {
-    static int opal_get_geometry(struct opal_dev *dev, void __user *data)
-    {
-    let mut geo: opal_geometry = {0};
-    if (check_opal_support(dev))
+unsafe extern "C" fn opal_get_geometry(dev: *mut opal_dev, data: *mut c_void ) -> c_int {
+pub static mut geo: opal_geometry = 0;
+    if (check_opal_support(dev)) {
     return -EINVAL;
+    }
     geo.align = dev.align_required;
     geo.logical_block_size = dev.logical_block_size;
     geo.alignment_granularity =  dev.align;
     geo.lowest_aligned_lba = dev.lowest_lba;
-    if (copy_to_user(data, &geo, sizeof(geo))) {
-    pr_debug("Error copying geometry data to userspace\n");
+    if (copy_to_user(data, &geo, sizeof!(geo))) {
+    pr_debug!("Error copying geometry data to userspace\n");
     return -EFAULT;
     }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn get_sum_ranges(dev: *mut opal_dev, data: *mut c_void) -> c_int {
-    static int get_sum_ranges(struct opal_dev *dev, void *data)
-    {
-    const char *lr_uid;
-    size_t lr_uid_len;
-    u64 val;
-    const struct opal_resp_tok *tok;
+pub static mut lr_uid: *mut c_void = core::ptr::null_mut();
+    let mut lr_uid_len = 0;
+    let mut val = 0;
+pub static mut tok: *mut c_void = core::ptr::null_mut();
     int err, tok_n = 2;
-    struct opal_sum_ranges *sranges = data;
+    let mut sranges = data;
     const __u8 lr_all[OPAL_MAX_LRS] = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
     err = generic_get_columns(dev, opaluid[OPAL_LOCKING_INFO_TABLE], OPAL_SUM_SET_LIST,
     OPAL_SUM_RANGE_POLICY);
     if (err) {
-    pr_debug("Couldn't get locking info table columns %d to %d.\n",
+    pr_debug!("Couldn't get locking info table columns %d to %d.\n",
     OPAL_SUM_SET_LIST, OPAL_SUM_RANGE_POLICY);
     return err;
     }
     tok = response_get_token(&dev.parsed, tok_n);
-    if (IS_ERR(tok))
+    if (IS_ERR(tok)) {
     return PTR_ERR(tok);
+    }
     if (!response_token_matches(tok, OPAL_STARTNAME)) {
-    pr_debug("Unexpected response token type %d.\n", tok_n);
+    pr_debug!("Unexpected response token type %d.\n", tok_n);
     return OPAL_INVAL_PARAM;
     }
-    tok_n++;
+    tok_n += 1;
     if (response_get_u64(&dev.parsed, tok_n) != OPAL_SUM_SET_LIST) {
-    pr_debug("Token %d does not match expected column %u.\n",
+    pr_debug!("Token %d does not match expected column %u.\n",
     tok_n, OPAL_SUM_SET_LIST);
     return OPAL_INVAL_PARAM;
     }
-    tok_n++;
+    tok_n += 1;
     tok = response_get_token(&dev.parsed, tok_n);
-    if (IS_ERR(tok))
+    if (IS_ERR(tok)) {
     return PTR_ERR(tok);
+    }
 //
 // The OPAL_SUM_SET_LIST response contains two distinct values:
 //
@@ -3050,258 +3128,284 @@ unsafe extern "C" fn get_sum_ranges(dev: *mut opal_dev, data: *mut c_void) -> c_
 //
     if (response_token_matches(tok, OPAL_STARTLIST)) {
     sranges.num_lrs = 0;
-    tok_n++;
+    tok_n += 1;
     tok = response_get_token(&dev.parsed, tok_n);
-    if (IS_ERR(tok))
+    if (IS_ERR(tok)) {
     return PTR_ERR(tok);
+    }
     while (!response_token_matches(tok, OPAL_ENDLIST)) {
     lr_uid_len = response_get_string(&dev.parsed, tok_n, &lr_uid);
     if (lr_uid_len != OPAL_UID_LENGTH) {
-    pr_debug("Unexpected response token type %d.\n", tok_n);
+    pr_debug!("Unexpected response token type %d.\n", tok_n);
     return OPAL_INVAL_PARAM;
     }
     if (memcmp(lr_uid, opaluid[OPAL_LOCKINGRANGE_GLOBAL], OPAL_UID_LENGTH)) {
     if (lr_uid[5] != LOCKING_RANGE_NON_GLOBAL) {
-    pr_debug("Unexpected byte %d at LR UUID position 5.\n",
+    pr_debug!("Unexpected byte %d at LR UUID position 5.\n",
     lr_uid[5]);
     return OPAL_INVAL_PARAM;
     }
     sranges.lr[sranges.num_lrs++] = lr_uid[7];
-    } else
+    } else {
     sranges.lr[sranges.num_lrs++] = 0;
-    tok_n++;
+    }
+    tok_n += 1;
     tok = response_get_token(&dev.parsed, tok_n);
-    if (IS_ERR(tok))
+    if (IS_ERR(tok)) {
     return PTR_ERR(tok);
+    }
     }
     } else {
 // Only OPAL_LOCKING_TABLE UID is an alternative to OPAL_STARTLIST here.
     lr_uid_len = response_get_string(&dev.parsed, tok_n, &lr_uid);
     if (lr_uid_len != OPAL_UID_LENGTH) {
-    pr_debug("Unexpected response token type %d.\n", tok_n);
+    pr_debug!("Unexpected response token type %d.\n", tok_n);
     return OPAL_INVAL_PARAM;
     }
     if (memcmp(lr_uid, opaluid[OPAL_LOCKING_TABLE], OPAL_UID_LENGTH)) {
-    pr_debug("Unexpected response UID.\n");
+    pr_debug!("Unexpected response UID.\n");
     return OPAL_INVAL_PARAM;
     }
 // sed-opal kernel API already provides following limit in Activate command
     sranges.num_lrs = OPAL_MAX_LRS;
     memcpy(sranges.lr, lr_all, OPAL_MAX_LRS);
     }
-    tok_n++;
+    tok_n += 1;
     tok = response_get_token(&dev.parsed, tok_n);
-    if (IS_ERR(tok))
+    if (IS_ERR(tok)) {
     return PTR_ERR(tok);
+    }
     if (!response_token_matches(tok, OPAL_ENDNAME)) {
-    pr_debug("Unexpected response token type %d.\n", tok_n);
+    pr_debug!("Unexpected response token type %d.\n", tok_n);
     return OPAL_INVAL_PARAM;
     }
-    tok_n++;
+    tok_n += 1;
     err = response_get_column(&dev.parsed, &tok_n, OPAL_SUM_RANGE_POLICY, &val);
-    if (err)
+    if (err) {
     return err;
+    }
     sranges.range_policy = val ? 1 : 0;
     return 0;
     }
-    static int opal_get_sum_ranges(struct opal_dev *dev, struct opal_sum_ranges *opal_sum_rngs,
-    void __user *data)
-    {
-    const struct opal_step admin_steps[] = {
-    { start_admin1LSP_opal_session, &opal_sum_rngs.key },
-    { get_sum_ranges, opal_sum_rngs },
-    { end_opal_session, }
-    }, anybody_steps[] = {
-    { start_anybodyLSP_opal_session, core::ptr::null_mut() },
-    { get_sum_ranges, opal_sum_rngs },
-    { end_opal_session, }
-    };
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn opal_get_sum_ranges(dev: *mut opal_dev, opal_sum_rngs: *mut opal_sum_ranges, data: *mut c_void) -> c_int {
+pub static mut opal_step: usize = 0;
+    let mut ret = 0;
     mutex_lock(&dev.dev_lock);
     setup_opal_dev(dev);
-    if (opal_sum_rngs.key.key_len)
+    if (opal_sum_rngs.key.key_len) {
 // Use Admin1 session (authenticated by PIN) to retrieve LockingInfo columns
-    ret = execute_steps(dev, admin_steps, ARRAY_SIZE(admin_steps));
-    else
+    ret = execute_steps(dev, admin_steps, ARRAY_SIZE!(admin_steps));
+    }
+    else {
 // Use Anybody session (no key) to retrieve LockingInfo columns
-    ret = execute_steps(dev, anybody_steps, ARRAY_SIZE(anybody_steps));
+    ret = execute_steps(dev, anybody_steps, ARRAY_SIZE!(anybody_steps));
+    }
     mutex_unlock(&dev.dev_lock);
 // skip session info when copying back to uspace
-    if (!ret && copy_to_user(data + offsetof(struct opal_sum_ranges, num_lrs),
-    (void *)opal_sum_rngs + offsetof(struct opal_sum_ranges, num_lrs),
-    sizeof(*opal_sum_rngs) - offsetof(struct opal_sum_ranges, num_lrs))) {
-    pr_debug("Error copying SUM ranges info to userspace\n");
+    if (!ret && copy_to_user(data + offsetof(opal_sum_ranges, num_lrs),
+    opal_sum_rngs + offsetof(opal_sum_ranges, num_lrs),
+    sizeof!(*opal_sum_rngs) - offsetof(opal_sum_ranges, num_lrs))) {
+    pr_debug!("Error copying SUM ranges info to userspace\n");
     return -EFAULT;
     }
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn opal_stack_reset(dev: *mut opal_dev) -> c_int {
-    static int opal_stack_reset(struct opal_dev *dev)
-    {
-    struct opal_stack_reset *req;
-    struct opal_stack_reset_response *resp;
-    int ret;
+pub static mut req: *mut c_void = core::ptr::null_mut();
+pub static mut resp: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     mutex_lock(&dev.dev_lock);
     memset(dev.cmd, 0, IO_BUFFER_LENGTH);
-    req = (struct opal_stack_reset *)dev.cmd;
+    req = dev.cmd;
     req.extendedComID[0] = dev.comid >> 8;
     req.extendedComID[1] = dev.comid & 0xFF;
     req.request_code = cpu_to_be32(OPAL_STACK_RESET);
     ret = dev.send_recv(dev.data, dev.comid, TCG_SECP_02,
     dev.cmd, IO_BUFFER_LENGTH, true);
     if (ret) {
-    pr_debug("Error sending stack reset: %d\n", ret);
-    goto out;
+    pr_debug!("Error sending stack reset: %d\n", ret);
+// goto;
     }
     memset(dev.resp, 0, IO_BUFFER_LENGTH);
     ret = dev.send_recv(dev.data, dev.comid, TCG_SECP_02,
     dev.resp, IO_BUFFER_LENGTH, false);
     if (ret) {
-    pr_debug("Error receiving stack reset response: %d\n", ret);
-    goto out;
+    pr_debug!("Error receiving stack reset response: %d\n", ret);
+// goto;
     }
-    resp = (struct opal_stack_reset_response *)dev.resp;
+    resp = dev.resp;
     if (be16_to_cpu(resp.data_length) != 4) {
-    pr_debug("Stack reset pending\n");
+    pr_debug!("Stack reset pending\n");
     ret = -EBUSY;
-    goto out;
+// goto;
     }
     if (be32_to_cpu(resp.response) != 0) {
-    pr_debug("Stack reset failed: %u\n", be32_to_cpu(resp.response));
+    pr_debug!("Stack reset failed: %u\n", be32_to_cpu(resp.response));
     ret = -EIO;
     }
-    out:
+// label;
     mutex_unlock(&dev.dev_lock);
     return ret;
     }
 #[no_mangle]
-pub unsafe extern "C" fn sed_ioctl(dev: *mut opal_dev, cmd: c_uint, arg: *mut void __user) -> c_int {
-    int sed_ioctl(struct opal_dev *dev, unsigned int cmd, void __user *arg)
-    {
-    void *p;
-    let mut ret: c_int = -ENOTTY;
-    if (!capable(CAP_SYS_ADMIN))
+pub unsafe extern "C" fn sed_ioctl(dev: *mut opal_dev, cmd: c_uint, arg: *mut c_void ) -> c_int {
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
+    if (!capable(CAP_SYS_ADMIN)) {
     return -EACCES;
-    if (!dev)
+    }
+    if (!dev) {
     return -EOPNOTSUPP;
-    if (!(dev.flags & OPAL_FL_SUPPORTED))
+    }
+    if (!(dev.flags & OPAL_FL_SUPPORTED)) {
     return -EOPNOTSUPP;
+    }
     if (cmd & IOC_IN) {
     p = memdup_user(arg, _IOC_SIZE(cmd));
-    if (IS_ERR(p))
+    if (IS_ERR(p)) {
     return PTR_ERR(p);
     }
-    switch (cmd) {
-    case IOC_OPAL_SAVE:
-    ret = opal_save(dev, p);
-    break;
-    case IOC_OPAL_LOCK_UNLOCK:
-    ret = opal_lock_unlock(dev, p);
-    break;
-    case IOC_OPAL_TAKE_OWNERSHIP:
-    ret = opal_take_ownership(dev, p);
-    break;
-    case IOC_OPAL_ACTIVATE_LSP:
-    ret = opal_activate_lsp(dev, p);
-    break;
-    case IOC_OPAL_SET_PW:
-    ret = opal_set_new_pw(dev, p);
-    break;
-    case IOC_OPAL_ACTIVATE_USR:
-    ret = opal_activate_user(dev, p);
-    break;
-    case IOC_OPAL_REVERT_TPR:
-    ret = opal_reverttper(dev, p, false);
-    break;
-    case IOC_OPAL_LR_SETUP:
-    ret = opal_setup_locking_range(dev, p);
-    break;
-    case IOC_OPAL_ADD_USR_TO_LR:
-    ret = opal_add_user_to_lr(dev, p);
-    break;
-    case IOC_OPAL_ENABLE_DISABLE_MBR:
-    ret = opal_enable_disable_shadow_mbr(dev, p);
-    break;
-    case IOC_OPAL_MBR_DONE:
-    ret = opal_set_mbr_done(dev, p);
-    break;
-    case IOC_OPAL_WRITE_SHADOW_MBR:
-    ret = opal_write_shadow_mbr(dev, p);
-    break;
-    case IOC_OPAL_ERASE_LR:
-    ret = opal_erase_locking_range(dev, p);
-    break;
-    case IOC_OPAL_SECURE_ERASE_LR:
-    ret = opal_secure_erase_locking_range(dev, p);
-    break;
-    case IOC_OPAL_PSID_REVERT_TPR:
-    ret = opal_reverttper(dev, p, true);
-    break;
-    case IOC_OPAL_GENERIC_TABLE_RW:
-    ret = opal_generic_read_write_table(dev, p);
-    break;
-    case IOC_OPAL_GET_STATUS:
-    ret = opal_get_status(dev, arg);
-    break;
-    case IOC_OPAL_GET_LR_STATUS:
-    ret = opal_locking_range_status(dev, p, arg);
-    break;
-    case IOC_OPAL_GET_GEOMETRY:
-    ret = opal_get_geometry(dev, arg);
-    break;
-    case IOC_OPAL_REVERT_LSP:
-    ret = opal_revertlsp(dev, p);
-    break;
-    case IOC_OPAL_DISCOVERY:
-    ret = opal_get_discv(dev, p);
-    break;
-    case IOC_OPAL_SET_SID_PW:
-    ret = opal_set_new_sid_pw(dev, p);
-    break;
-    case IOC_OPAL_REACTIVATE_LSP:
-    ret = opal_reactivate_lsp(dev, p);
-    break;
-    case IOC_OPAL_LR_SET_START_LEN:
-    ret = opal_setup_locking_range_start_length(dev, p);
-    break;
-    case IOC_OPAL_ENABLE_DISABLE_LR:
-    ret = opal_enable_disable_range(dev, p);
-    break;
-    case IOC_OPAL_GET_SUM_STATUS:
-    ret = opal_get_sum_ranges(dev, p, arg);
-    break;
-    case IOC_OPAL_STACK_RESET:
-    ret = opal_stack_reset(dev);
-    break;
-    default:
-    break;
     }
-    if (cmd & IOC_IN)
+    match (cmd) {
+    IOC_OPAL_SAVE => {
+    ret = opal_save(dev, p);
+    // break;
+    }
+    IOC_OPAL_LOCK_UNLOCK => {
+    ret = opal_lock_unlock(dev, p);
+    // break;
+    }
+    IOC_OPAL_TAKE_OWNERSHIP => {
+    ret = opal_take_ownership(dev, p);
+    // break;
+    }
+    IOC_OPAL_ACTIVATE_LSP => {
+    ret = opal_activate_lsp(dev, p);
+    // break;
+    }
+    IOC_OPAL_SET_PW => {
+    ret = opal_set_new_pw(dev, p);
+    // break;
+    }
+    IOC_OPAL_ACTIVATE_USR => {
+    ret = opal_activate_user(dev, p);
+    // break;
+    }
+    IOC_OPAL_REVERT_TPR => {
+    ret = opal_reverttper(dev, p, false);
+    // break;
+    }
+    IOC_OPAL_LR_SETUP => {
+    ret = opal_setup_locking_range(dev, p);
+    // break;
+    }
+    IOC_OPAL_ADD_USR_TO_LR => {
+    ret = opal_add_user_to_lr(dev, p);
+    // break;
+    }
+    IOC_OPAL_ENABLE_DISABLE_MBR => {
+    ret = opal_enable_disable_shadow_mbr(dev, p);
+    // break;
+    }
+    IOC_OPAL_MBR_DONE => {
+    ret = opal_set_mbr_done(dev, p);
+    // break;
+    }
+    IOC_OPAL_WRITE_SHADOW_MBR => {
+    ret = opal_write_shadow_mbr(dev, p);
+    // break;
+    }
+    IOC_OPAL_ERASE_LR => {
+    ret = opal_erase_locking_range(dev, p);
+    // break;
+    }
+    IOC_OPAL_SECURE_ERASE_LR => {
+    ret = opal_secure_erase_locking_range(dev, p);
+    // break;
+    }
+    IOC_OPAL_PSID_REVERT_TPR => {
+    ret = opal_reverttper(dev, p, true);
+    // break;
+    }
+    IOC_OPAL_GENERIC_TABLE_RW => {
+    ret = opal_generic_read_write_table(dev, p);
+    // break;
+    }
+    IOC_OPAL_GET_STATUS => {
+    ret = opal_get_status(dev, arg);
+    // break;
+    }
+    IOC_OPAL_GET_LR_STATUS => {
+    ret = opal_locking_range_status(dev, p, arg);
+    // break;
+    }
+    IOC_OPAL_GET_GEOMETRY => {
+    ret = opal_get_geometry(dev, arg);
+    // break;
+    }
+    IOC_OPAL_REVERT_LSP => {
+    ret = opal_revertlsp(dev, p);
+    // break;
+    }
+    IOC_OPAL_DISCOVERY => {
+    ret = opal_get_discv(dev, p);
+    // break;
+    }
+    IOC_OPAL_SET_SID_PW => {
+    ret = opal_set_new_sid_pw(dev, p);
+    // break;
+    }
+    IOC_OPAL_REACTIVATE_LSP => {
+    ret = opal_reactivate_lsp(dev, p);
+    // break;
+    }
+    IOC_OPAL_LR_SET_START_LEN => {
+    ret = opal_setup_locking_range_start_length(dev, p);
+    // break;
+    }
+    IOC_OPAL_ENABLE_DISABLE_LR => {
+    ret = opal_enable_disable_range(dev, p);
+    // break;
+    }
+    IOC_OPAL_GET_SUM_STATUS => {
+    ret = opal_get_sum_ranges(dev, p, arg);
+    // break;
+    }
+    IOC_OPAL_STACK_RESET => {
+    ret = opal_stack_reset(dev);
+    // break;
+    }
+    _ => {
+    // break;
+    }
+    }
+    if (cmd & IOC_IN) {
     kfree(p);
+    }
     return ret;
     }
     EXPORT_SYMBOL_GPL(sed_ioctl);
 #[no_mangle]
-unsafe extern "C" fn sed_opal_init() -> int __init {
-    static int __init sed_opal_init(void)
-    {
-    struct key *kr;
+unsafe extern "C" fn sed_opal_init() -> c_int {
+pub static mut kr: *mut c_void = core::ptr::null_mut();
     char init_sed_key[OPAL_KEY_MAX];
-    let mut keylen: c_int = OPAL_KEY_MAX - 1;
+pub static mut keylen: c_int = 0;
     kr = keyring_alloc(".sed_opal",
     GLOBAL_ROOT_UID, GLOBAL_ROOT_GID, current_cred(),
     (KEY_POS_ALL & ~KEY_POS_SETATTR) | KEY_USR_VIEW |
     KEY_USR_READ | KEY_USR_SEARCH | KEY_USR_WRITE,
     KEY_ALLOC_NOT_IN_QUOTA,
     core::ptr::null_mut(), core::ptr::null_mut());
-    if (IS_ERR(kr))
+    if (IS_ERR(kr)) {
     return PTR_ERR(kr);
+    }
     sed_opal_keyring = kr;
     if (sed_read_key(OPAL_AUTH_KEY, init_sed_key, &keylen) < 0) {
-    memset(init_sed_key, '\0', sizeof(init_sed_key));
+    memset(init_sed_key, '\0', sizeof!(init_sed_key));
     keylen = OPAL_KEY_MAX - 1;
     }
     return update_sed_opal_key(OPAL_AUTH_KEY, init_sed_key, keylen);
     }
-    late_initcall(sed_opal_init);
+    late_initcall!(sed_opal_init);

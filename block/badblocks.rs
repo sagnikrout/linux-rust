@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -480,18 +730,16 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 #[no_mangle]
 unsafe extern "C" fn prev_by_hint(bb: *mut badblocks, s: sector_t, hint: c_int) -> c_int {
-    static int prev_by_hint(struct badblocks *bb, sector_t s, int hint)
-    {
-    let mut hint_end: c_int = hint + 2;
-    u64 *p = bb.page;
-    let mut ret: c_int = -1;
+pub static mut hint_end: c_int = 0;
+    let mut p = bb.page;
+pub static mut ret: c_int = 0;
     while ((hint < hint_end) && ((hint + 1) <= bb.count) &&
     (BB_OFFSET(p[hint]) <= s)) {
     if ((hint + 1) == bb.count || BB_OFFSET(p[hint + 1]) > s) {
     ret = hint;
     break;
     }
-    hint++;
+    hint += 1;
     }
     return ret;
     }
@@ -501,59 +749,66 @@ unsafe extern "C" fn prev_by_hint(bb: *mut badblocks, s: sector_t, hint: c_int) 
 // very probably the wanted bad range can be found from the hint index,
 // then the unnecessary while-loop iteration can be avoided.
 //
-    static int prev_badblocks(struct badblocks *bb, struct badblocks_context *bad,
-    int hint)
-    {
-    let mut s: sector_t = bad.start;
-    let mut ret: c_int = -1;
-    int lo, hi;
-    u64 *p;
-    if (!bb.count)
-    goto out;
+#[no_mangle]
+pub unsafe extern "C" fn prev_badblocks(bb: *mut badblocks, bad: *mut badblocks_context, hint: c_int) -> c_int {
+pub static mut s: sector_t = 0;
+pub static mut ret: c_int = 0;
+    let mut lo = 0;
+    let mut hi = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    if (!bb.count) {
+// goto;
+    }
     if (hint >= 0) {
     ret = prev_by_hint(bb, s, hint);
-    if (ret >= 0)
-    goto out;
+    if (ret >= 0) {
+// goto;
+    }
     }
     lo = 0;
     hi = bb.count;
     p = bb.page;
 // The following bisect search might be unnecessary
-    if (BB_OFFSET(p[lo]) > s)
+    if (BB_OFFSET(p[lo]) > s) {
     return -1;
-    if (BB_OFFSET(p[hi - 1]) <= s)
+    }
+    if (BB_OFFSET(p[hi - 1]) <= s) {
     return hi - 1;
+    }
 // Do bisect search in bad table
     while (hi - lo > 1) {
-    let mut mid: c_int = (lo + hi)/2;
-    let mut a: sector_t = BB_OFFSET(p[mid]);
+pub static mut mid: c_int = 0;
+pub static mut a: sector_t = 0;
     if (a == s) {
     ret = mid;
-    goto out;
+// goto;
     }
-    if (a < s)
+    if (a < s) {
     lo = mid;
-    else
+    }
+    else {
     hi = mid;
     }
-    if (BB_OFFSET(p[lo]) <= s)
+    }
+    if (BB_OFFSET(p[lo]) <= s) {
     ret = lo;
-    out:
+    }
+// label;
     return ret;
     }
 //
 // Return 'true' if the range indicated by 'bad' can be forward
 // merged with the bad range (from the bad table) indexed by 'prev'.
 //
-    static bool can_merge_front(struct badblocks *bb, int prev,
-    struct badblocks_context *bad)
-    {
-    let mut s: sector_t = bad.start;
-    u64 *p = bb.page;
+#[no_mangle]
+pub unsafe extern "C" fn can_merge_front(bb: *mut badblocks, prev: c_int, bad: *mut badblocks_context) -> bool {
+pub static mut s: sector_t = 0;
+    let mut p = bb.page;
     if (BB_ACK(p[prev]) == bad.ack &&
     (s < BB_END(p[prev]) ||
-    (s == BB_END(p[prev]) && (BB_LEN(p[prev]) < BB_MAX_LEN))))
+    (s == BB_END(p[prev]) && (BB_LEN(p[prev]) < BB_MAX_LEN)))) {
     return true;
+    }
     return false;
     }
 //
@@ -563,13 +818,11 @@ unsafe extern "C" fn prev_by_hint(bb: *mut badblocks, s: sector_t, hint: c_int) 
 //
 #[no_mangle]
 unsafe extern "C" fn front_merge(bb: *mut badblocks, prev: c_int, bad: *mut badblocks_context) -> c_int {
-    static int front_merge(struct badblocks *bb, int prev, struct badblocks_context *bad)
-    {
-    let mut sectors: sector_t = bad.len;
-    let mut s: sector_t = bad.start;
-    u64 *p = bb.page;
-    let mut merged: c_int = 0;
-    WARN_ON(s > BB_END(p[prev]));
+pub static mut sectors: sector_t = 0;
+pub static mut s: sector_t = 0;
+    let mut p = bb.page;
+pub static mut merged: c_int = 0;
+    WARN_ON!(s > BB_END(p[prev]));
     if (s < BB_END(p[prev])) {
     merged = min_t(sector_t, sectors, BB_END(p[prev]) - s);
     } else {
@@ -594,16 +847,16 @@ unsafe extern "C" fn front_merge(bb: *mut badblocks, prev: c_int, bad: *mut badb
 // Return 'true' if bad ranges indexed by 'prev' and 'prev - 1' from bad
 // table can be combined.
 //
-    static bool can_combine_front(struct badblocks *bb, int prev,
-    struct badblocks_context *bad)
-    {
-    u64 *p = bb.page;
+#[no_mangle]
+pub unsafe extern "C" fn can_combine_front(bb: *mut badblocks, prev: c_int, bad: *mut badblocks_context) -> bool {
+    let mut p = bb.page;
     if ((prev > 0) &&
     (BB_OFFSET(p[prev]) == bad.start) &&
     (BB_END(p[prev - 1]) == BB_OFFSET(p[prev])) &&
     (BB_LEN(p[prev - 1]) + BB_LEN(p[prev]) <= BB_MAX_LEN) &&
-    (BB_ACK(p[prev - 1]) == BB_ACK(p[prev])))
+    (BB_ACK(p[prev - 1]) == BB_ACK(p[prev]))) {
     return true;
+    }
     return false;
     }
 //
@@ -615,14 +868,13 @@ unsafe extern "C" fn front_merge(bb: *mut badblocks, prev: c_int, bad: *mut badb
 //
 #[no_mangle]
 unsafe extern "C" fn front_combine(bb: *mut badblocks, prev: c_int) {
-    static void front_combine(struct badblocks *bb, int prev)
-    {
-    u64 *p = bb.page;
+    let mut p = bb.page;
     p[prev - 1] = BB_MAKE(BB_OFFSET(p[prev - 1]),
     BB_LEN(p[prev - 1]) + BB_LEN(p[prev]),
     BB_ACK(p[prev]));
-    if ((prev + 1) < bb.count)
+    if ((prev + 1) < bb.count) {
     memmove(p + prev, p + prev + 1, (bb.count - prev - 1) * 8);
+    }
     }
 //
 // Return 'true' if the range indicated by 'bad' is exactly forward
@@ -630,26 +882,26 @@ unsafe extern "C" fn front_combine(bb: *mut badblocks, prev: c_int) {
 // Exactly forward overlap means the bad range (from bad table) indexed
 // by 'prev' does not cover the whole range indicated by 'bad'.
 //
-    static bool overlap_front(struct badblocks *bb, int front,
-    struct badblocks_context *bad)
-    {
-    u64 *p = bb.page;
+#[no_mangle]
+pub unsafe extern "C" fn overlap_front(bb: *mut badblocks, front: c_int, bad: *mut badblocks_context) -> bool {
+    let mut p = bb.page;
     if (bad.start >= BB_OFFSET(p[front]) &&
-    bad.start < BB_END(p[front]))
+    bad.start < BB_END(p[front])) {
     return true;
+    }
     return false;
     }
 //
 // Return 'true' if the range indicated by 'bad' is exactly backward
 // overlapped with the bad range (from bad table) indexed by 'behind'.
 //
-    static bool overlap_behind(struct badblocks *bb, struct badblocks_context *bad,
-    int behind)
-    {
-    u64 *p = bb.page;
+#[no_mangle]
+pub unsafe extern "C" fn overlap_behind(bb: *mut badblocks, bad: *mut badblocks_context, behind: c_int) -> bool {
+    let mut p = bb.page;
     if (bad.start < BB_OFFSET(p[behind]) &&
-    (bad.start + bad.len) > BB_OFFSET(p[behind]))
+    (bad.start + bad.len) > BB_OFFSET(p[behind])) {
     return true;
+    }
     return false;
     }
 //
@@ -673,33 +925,38 @@ unsafe extern "C" fn front_combine(bb: *mut badblocks, prev: c_int) {
 // The number of extra split ranges of the overwriting is stored in
 // 'extra' and returned for the caller.
 //
-    static bool can_front_overwrite(struct badblocks *bb, int prev,
-    struct badblocks_context *bad, int *extra)
-    {
-    u64 *p = bb.page;
-    int len;
-    WARN_ON(!overlap_front(bb, prev, bad));
-    if (BB_ACK(p[prev]) >= bad.ack)
+#[no_mangle]
+pub unsafe extern "C" fn can_front_overwrite(bb: *mut badblocks, prev: c_int, bad: *mut badblocks_context, extra: *mut c_int) -> bool {
+    let mut p = bb.page;
+    let mut len = 0;
+    WARN_ON!(!overlap_front(bb, prev, bad));
+    if (BB_ACK(p[prev]) >= bad.ack) {
     return false;
+    }
     if (BB_END(p[prev]) <= (bad.start + bad.len)) {
     len = BB_END(p[prev]) - bad.start;
-    if (BB_OFFSET(p[prev]) == bad.start)
+    if (BB_OFFSET(p[prev]) == bad.start) {
 // extra = 0;
-    else
+    }
+    else {
 // extra = 1;
+    }
     bad.len = len;
     } else {
-    if (BB_OFFSET(p[prev]) == bad.start)
+    if (BB_OFFSET(p[prev]) == bad.start) {
 // extra = 1;
-    else
+    }
+    else {
 //
 // prev range will be split into two, beside the overwritten
 // one, an extra slot needed from bad table.
 //
 // extra = 2;
     }
-    if ((bb.count + (*extra)) > MAX_BADBLOCKS)
+    }
+    if ((bb.count + (*extra)) > MAX_BADBLOCKS) {
     return false;
+    }
     return true;
     }
 //
@@ -709,18 +966,18 @@ unsafe extern "C" fn front_combine(bb: *mut badblocks, prev: c_int) {
 // extra bad range(s) might be split and added into the bad table. All
 // the splitting cases in the bad table will be handled here.
 //
-    static int front_overwrite(struct badblocks *bb, int prev,
-    struct badblocks_context *bad, int extra)
-    {
-    u64 *p = bb.page;
-    let mut orig_end: sector_t = BB_END(p[prev]);
-    let mut orig_ack: c_int = BB_ACK(p[prev]);
-    switch (extra) {
-    case 0:
+#[no_mangle]
+pub unsafe extern "C" fn front_overwrite(bb: *mut badblocks, prev: c_int, bad: *mut badblocks_context, extra: c_int) -> c_int {
+    let mut p = bb.page;
+pub static mut orig_end: sector_t = 0;
+pub static mut orig_ack: c_int = 0;
+    match (extra) {
+    0 => {
     p[prev] = BB_MAKE(BB_OFFSET(p[prev]), BB_LEN(p[prev]),
     bad.ack);
-    break;
-    case 1:
+    // break;
+    }
+    1 => {
     if (BB_OFFSET(p[prev]) == bad.start) {
     p[prev] = BB_MAKE(BB_OFFSET(p[prev]),
     bad.len, bad.ack);
@@ -742,8 +999,9 @@ unsafe extern "C" fn front_combine(bb: *mut badblocks, prev: c_int) {
     (bb.count - prev - 1) * 8);
     p[prev + 1] = BB_MAKE(bad.start, bad.len, bad.ack);
     }
-    break;
-    case 2:
+    // break;
+    }
+    2 => {
     p[prev] = BB_MAKE(BB_OFFSET(p[prev]),
     bad.start - BB_OFFSET(p[prev]),
     orig_ack);
@@ -758,9 +1016,11 @@ unsafe extern "C" fn front_combine(bb: *mut badblocks, prev: c_int) {
     p[prev + 2] = BB_MAKE(BB_END(p[prev + 1]),
     orig_end - BB_END(p[prev + 1]),
     orig_ack);
-    break;
-    default:
-    break;
+    // break;
+    }
+    _ => {
+    // break;
+    }
     }
     return bad.len;
     }
@@ -770,34 +1030,33 @@ unsafe extern "C" fn front_combine(bb: *mut badblocks, prev: c_int) {
 //
 #[no_mangle]
 unsafe extern "C" fn insert_at(bb: *mut badblocks, at: c_int, bad: *mut badblocks_context) -> c_int {
-    static int insert_at(struct badblocks *bb, int at, struct badblocks_context *bad)
-    {
-    u64 *p = bb.page;
-    int len;
-    WARN_ON(badblocks_full(bb));
+    let mut p = bb.page;
+    let mut len = 0;
+    WARN_ON!(badblocks_full(bb));
     len = min_t(sector_t, bad.len, BB_MAX_LEN);
-    if (at < bb.count)
+    if (at < bb.count) {
     memmove(p + at + 1, p + at, (bb.count - at) * 8);
+    }
     p[at] = BB_MAKE(bad.start, len, bad.ack);
     return len;
     }
 #[no_mangle]
 unsafe extern "C" fn badblocks_update_acked(bb: *mut badblocks) {
-    static void badblocks_update_acked(struct badblocks *bb)
-    {
-    let mut unacked: bool = false;
-    u64 *p = bb.page;
-    int i;
-    if (!bb.unacked_exist)
+pub static mut unacked: bool = false;
+    let mut p = bb.page;
+    let mut i = 0;
+    if (!bb.unacked_exist) {
     return;
-    for (i = 0; i < bb.count ; i++) {
+    }
+    while (i < bb.count ) {
     if (!BB_ACK(p[i])) {
     unacked = true;
     break;
     }
     }
-    if (!unacked)
+    if (!unacked) {
     bb.unacked_exist = 0;
+    }
     }
 //
 // Return 'true' if the range indicated by 'bad' is exactly backward
@@ -805,9 +1064,7 @@ unsafe extern "C" fn badblocks_update_acked(bb: *mut badblocks) {
 //
 #[no_mangle]
 unsafe extern "C" fn try_adjacent_combine(bb: *mut badblocks, prev: c_int) -> bool {
-    static bool try_adjacent_combine(struct badblocks *bb, int prev)
-    {
-    u64 *p = bb.page;
+    let mut p = bb.page;
     if (prev >= 0 && (prev + 1) < bb.count &&
     BB_END(p[prev]) == BB_OFFSET(p[prev + 1]) &&
     (BB_LEN(p[prev]) + BB_LEN(p[prev + 1])) <= BB_MAX_LEN &&
@@ -815,32 +1072,34 @@ unsafe extern "C" fn try_adjacent_combine(bb: *mut badblocks, prev: c_int) -> bo
     p[prev] = BB_MAKE(BB_OFFSET(p[prev]),
     BB_LEN(p[prev]) + BB_LEN(p[prev + 1]),
     BB_ACK(p[prev]));
-    if ((prev + 2) < bb.count)
+    if ((prev + 2) < bb.count) {
     memmove(p + prev + 1, p + prev + 2,
     (bb.count -  (prev + 2)) * 8);
-    bb.count--;
+    }
+    bb.count -= 1;
     return true;
     }
     return false;
     }
 // Do exact work to set bad block range into the bad block table
-    static bool _badblocks_set(struct badblocks *bb, sector_t s, sector_t sectors,
-    int acknowledged)
-    {
-    let mut len: c_int = 0, added = 0;
-    struct badblocks_context bad;
-    let mut prev: c_int = -1, hint = -1;
-    unsigned long flags;
-    u64 *p;
-    if (bb.shift < 0)
+#[no_mangle]
+pub unsafe extern "C" fn _badblocks_set(bb: *mut badblocks, s: sector_t, sectors: sector_t, acknowledged: c_int) -> bool {
+pub static mut len: c_int = 0;
+pub static mut bad: usize = 0;
+pub static mut prev: c_int = 0;
+    let mut flags = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    if (bb.shift < 0) {
 // badblocks are disabled
     return false;
-    if (sectors == 0)
+    }
+    if (sectors == 0) {
 // Invalid sectors number
     return false;
+    }
     if (bb.shift) {
 // round the start down, and the end up
-    let mut next: sector_t = s + sectors;
+pub static mut next: sector_t = 0;
     rounddown(s, 1 << bb.shift);
     roundup(next, 1 << bb.shift);
     sectors = next - s;
@@ -848,94 +1107,101 @@ unsafe extern "C" fn try_adjacent_combine(bb: *mut badblocks, prev: c_int) -> bo
     write_seqlock_irqsave(&bb.lock, flags);
     bad.ack = acknowledged;
     p = bb.page;
-    re_insert:
+// label;
     bad.start = s;
     bad.len = sectors;
     len = 0;
-    if (badblocks_full(bb))
-    goto out;
+    if (badblocks_full(bb)) {
+// goto;
+    }
     if (badblocks_empty(bb)) {
     len = insert_at(bb, 0, &bad);
-    bb.count++;
-    added++;
-    goto update_sectors;
+    bb.count += 1;
+    added += 1;
+// goto;
     }
     prev = prev_badblocks(bb, &bad, hint);
 // start before all badblocks
     if (prev < 0) {
 // insert on the first
-    if (bad.len > (BB_OFFSET(p[0]) - bad.start))
+    if (bad.len > (BB_OFFSET(p[0]) - bad.start)) {
     bad.len = BB_OFFSET(p[0]) - bad.start;
+    }
     len = insert_at(bb, 0, &bad);
-    bb.count++;
-    added++;
-    hint = ++prev;
-    goto update_sectors;
+    bb.count += 1;
+    added += 1;
+    hint = prev += 1;
+// goto;
     }
 // in case p[prev-1] can be merged with p[prev]
     if (can_combine_front(bb, prev, &bad)) {
     front_combine(bb, prev);
-    bb.count--;
-    added++;
+    bb.count -= 1;
+    added += 1;
     hint = prev;
-    goto update_sectors;
+// goto;
     }
     if (can_merge_front(bb, prev, &bad)) {
     len = front_merge(bb, prev, &bad);
-    added++;
+    added += 1;
     hint = prev;
-    goto update_sectors;
+// goto;
     }
     if (overlap_front(bb, prev, &bad)) {
-    let mut extra: c_int = 0;
+pub static mut extra: c_int = 0;
     if (!can_front_overwrite(bb, prev, &bad, &extra)) {
-    if (extra > 0)
-    goto out;
+    if (extra > 0) {
+// goto;
+    }
     len = min_t(sector_t,
     BB_END(p[prev]) - s, sectors);
     hint = prev;
-    goto update_sectors;
+// goto;
     }
     len = front_overwrite(bb, prev, &bad, extra);
-    added++;
+    added += 1;
     bb.count += extra;
     if (can_combine_front(bb, prev, &bad)) {
     front_combine(bb, prev);
-    bb.count--;
+    bb.count -= 1;
     }
     hint = prev;
-    goto update_sectors;
+// goto;
     }
 // cannot merge and there is space in bad table
     if ((prev + 1) < bb.count &&
-    overlap_behind(bb, &bad, prev + 1))
+    overlap_behind(bb, &bad, prev + 1)) {
     bad.len = min_t(sector_t,
     bad.len, BB_OFFSET(p[prev + 1]) - bad.start);
+    }
     len = insert_at(bb, prev + 1, &bad);
-    bb.count++;
-    added++;
-    hint = ++prev;
-    update_sectors:
+    bb.count += 1;
+    added += 1;
+    hint = prev += 1;
+// label;
     s += len;
     sectors -= len;
-    if (sectors > 0)
-    goto re_insert;
+    if (sectors > 0) {
+// goto;
+    }
 //
 // Check whether the following already set range can be
 // merged. (prev < 0) condition is not handled here,
 // because it's already complicated enough.
 //
     try_adjacent_combine(bb, prev);
-    out:
+// label;
     if (added) {
     set_changed(bb);
-    if (!acknowledged)
+    if (!acknowledged) {
     bb.unacked_exist = 1;
-    else
+    }
+    else {
     badblocks_update_acked(bb);
     }
+    }
     write_sequnlock_irqrestore(&bb.lock, flags);
-    let mut sectors: return = = 0;
+pub static mut sectors: return = 0;
     }
 //
 // Clear the bad block range from bad block table which is front overlapped
@@ -944,13 +1210,12 @@ unsafe extern "C" fn try_adjacent_combine(bb: *mut badblocks, prev: c_int) -> bo
 // covered by the clearing range and fully cleared, 'delete' is set as 1 for
 // the caller to reduce bb->count.
 //
-    static int front_clear(struct badblocks *bb, int prev,
-    struct badblocks_context *bad, int *deleted)
-    {
-    let mut sectors: sector_t = bad.len;
-    let mut s: sector_t = bad.start;
-    u64 *p = bb.page;
-    let mut cleared: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn front_clear(bb: *mut badblocks, prev: c_int, bad: *mut badblocks_context, deleted: *mut c_int) -> c_int {
+pub static mut sectors: sector_t = 0;
+pub static mut s: sector_t = 0;
+    let mut p = bb.page;
+pub static mut cleared: c_int = 0;
 // deleted = 0;
     if (s == BB_OFFSET(p[prev])) {
     if (BB_LEN(p[prev]) > sectors) {
@@ -961,9 +1226,10 @@ unsafe extern "C" fn try_adjacent_combine(bb: *mut badblocks, prev: c_int) -> bo
     } else {
 // BB_LEN(p[prev]) <= sectors
     cleared = BB_LEN(p[prev]);
-    if ((prev + 1) < bb.count)
+    if ((prev + 1) < bb.count) {
     memmove(p + prev, p + prev + 1,
     (bb.count - prev - 1) * 8);
+    }
 // deleted = 1;
     }
     } else if (s > BB_OFFSET(p[prev])) {
@@ -984,14 +1250,13 @@ unsafe extern "C" fn try_adjacent_combine(bb: *mut badblocks, prev: c_int) -> bo
 // bad block range from bad block table. In this condition the existing bad
 // block range is split into two after the middle part is cleared.
 //
-    static int front_splitting_clear(struct badblocks *bb, int prev,
-    struct badblocks_context *bad)
-    {
-    u64 *p = bb.page;
-    let mut end: u64 = BB_END(p[prev]);
-    let mut ack: c_int = BB_ACK(p[prev]);
-    let mut sectors: sector_t = bad.len;
-    let mut s: sector_t = bad.start;
+#[no_mangle]
+pub unsafe extern "C" fn front_splitting_clear(bb: *mut badblocks, prev: c_int, bad: *mut badblocks_context) -> c_int {
+    let mut p = bb.page;
+pub static mut end: u64 = 0;
+pub static mut ack: c_int = 0;
+pub static mut sectors: sector_t = 0;
+pub static mut s: sector_t = 0;
     p[prev] = BB_MAKE(BB_OFFSET(p[prev]),
     s - BB_OFFSET(p[prev]),
     ack);
@@ -1002,20 +1267,20 @@ unsafe extern "C" fn try_adjacent_combine(bb: *mut badblocks, prev: c_int) -> bo
 // Do the exact work to clear bad block range from the bad block table
 #[no_mangle]
 unsafe extern "C" fn _badblocks_clear(bb: *mut badblocks, s: sector_t, sectors: sector_t) -> bool {
-    static bool _badblocks_clear(struct badblocks *bb, sector_t s, sector_t sectors)
-    {
-    struct badblocks_context bad;
-    let mut prev: c_int = -1, hint = -1;
-    let mut len: c_int = 0, cleared = 0;
-    u64 *p;
-    if (bb.shift < 0)
+pub static mut bad: usize = 0;
+pub static mut prev: c_int = 0;
+pub static mut len: c_int = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    if (bb.shift < 0) {
 // badblocks are disabled
     return false;
-    if (sectors == 0)
+    }
+    if (sectors == 0) {
 // Invalid sectors number
     return false;
+    }
     if (bb.shift) {
-    sector_t target;
+    let mut target;
 // When clearing we round the start up and the end down.
 // This should not matter as the shift should align with
 // the block size and no rounding should ever be needed.
@@ -1030,13 +1295,13 @@ unsafe extern "C" fn _badblocks_clear(bb: *mut badblocks, s: sector_t, sectors: 
     write_seqlock_irq(&bb.lock);
     bad.ack = true;
     p = bb.page;
-    re_clear:
+// label;
     bad.start = s;
     bad.len = sectors;
     if (badblocks_empty(bb)) {
     len = sectors;
-    cleared++;
-    goto update_sectors;
+    cleared += 1;
+// goto;
     }
     prev = prev_badblocks(bb, &bad, hint);
 // Start before all badblocks
@@ -1051,20 +1316,20 @@ unsafe extern "C" fn _badblocks_clear(bb: *mut badblocks, s: sector_t, sectors: 
 // Both situations are to clear non-bad range,
 // should be treated as successful
 //
-    cleared++;
-    goto update_sectors;
+    cleared += 1;
+// goto;
     }
 // Start after all badblocks
     if ((prev + 1) >= bb.count && !overlap_front(bb, prev, &bad)) {
     len = sectors;
-    cleared++;
-    goto update_sectors;
+    cleared += 1;
+// goto;
     }
 // Clear will split a bad record but the table is full
     if (badblocks_full(bb) && (BB_OFFSET(p[prev]) < bad.start) &&
     (BB_END(p[prev]) > (bad.start + sectors))) {
     len = sectors;
-    goto update_sectors;
+// goto;
     }
     if (overlap_front(bb, prev, &bad)) {
     if ((BB_OFFSET(p[prev]) < bad.start) &&
@@ -1073,110 +1338,119 @@ unsafe extern "C" fn _badblocks_clear(bb: *mut badblocks, s: sector_t, sectors: 
     if ((bb.count + 1) <= MAX_BADBLOCKS) {
     len = front_splitting_clear(bb, prev, &bad);
     bb.count += 1;
-    cleared++;
+    cleared += 1;
     } else {
 // No space to split, give up
     len = sectors;
     }
     } else {
-    let mut deleted: c_int = 0;
+pub static mut deleted: c_int = 0;
     len = front_clear(bb, prev, &bad, &deleted);
     bb.count -= deleted;
-    cleared++;
+    cleared += 1;
     hint = prev;
     }
-    goto update_sectors;
+// goto;
     }
 // Not front overlap, but behind overlap
     if ((prev + 1) < bb.count && overlap_behind(bb, &bad, prev + 1)) {
     len = BB_OFFSET(p[prev + 1]) - bad.start;
     hint = prev + 1;
 // Clear non-bad range should be treated as successful
-    cleared++;
-    goto update_sectors;
+    cleared += 1;
+// goto;
     }
 // Not cover any badblocks range in the table
     len = sectors;
 // Clear non-bad range should be treated as successful
-    cleared++;
-    update_sectors:
+    cleared += 1;
+// label;
     s += len;
     sectors -= len;
-    if (sectors > 0)
-    goto re_clear;
+    if (sectors > 0) {
+// goto;
+    }
     if (cleared) {
     badblocks_update_acked(bb);
     set_changed(bb);
     }
     write_sequnlock_irq(&bb.lock);
-    if (!cleared)
+    if (!cleared) {
     return false;
+    }
     return true;
     }
 // Do the exact work to check bad blocks range from the bad block table
-    static int _badblocks_check(struct badblocks *bb, sector_t s, sector_t sectors,
-    sector_t *first_bad, sector_t *bad_sectors)
-    {
-    let mut prev: c_int = -1, hint = -1, set = 0;
-    struct badblocks_context bad;
-    let mut unacked_badblocks: c_int = 0;
-    let mut acked_badblocks: c_int = 0;
-    u64 *p = bb.page;
-    int len, rv;
-    re_check:
+#[no_mangle]
+pub unsafe extern "C" fn _badblocks_check(bb: *mut badblocks, s: sector_t, sectors: sector_t, first_bad: *mut sector_t, bad_sectors: *mut sector_t) -> c_int {
+pub static mut prev: c_int = 0;
+pub static mut bad: usize = 0;
+pub static mut unacked_badblocks: c_int = 0;
+pub static mut acked_badblocks: c_int = 0;
+    let mut p = bb.page;
+    let mut len = 0;
+    let mut rv = 0;
+// label;
     bad.start = s;
     bad.len = sectors;
     if (badblocks_empty(bb)) {
     len = sectors;
-    goto update_sectors;
+// goto;
     }
     prev = prev_badblocks(bb, &bad, hint);
 // start after all badblocks
     if ((prev >= 0) &&
     ((prev + 1) >= bb.count) && !overlap_front(bb, prev, &bad)) {
     len = sectors;
-    goto update_sectors;
+// goto;
     }
 // Overlapped with front badblocks record
     if ((prev >= 0) && overlap_front(bb, prev, &bad)) {
-    if (BB_ACK(p[prev]))
-    acked_badblocks++;
-    else
-    unacked_badblocks++;
-    if (BB_END(p[prev]) >= (s + sectors))
+    if (BB_ACK(p[prev])) {
+    acked_badblocks += 1;
+    }
+    else {
+    unacked_badblocks += 1;
+    }
+    if (BB_END(p[prev]) >= (s + sectors)) {
     len = sectors;
-    else
+    }
+    else {
     len = BB_END(p[prev]) - s;
+    }
     if (set == 0) {
 // first_bad = BB_OFFSET(p[prev]);
 // bad_sectors = BB_LEN(p[prev]);
     set = 1;
     }
-    goto update_sectors;
+// goto;
     }
 // Not front overlap, but behind overlap
     if ((prev + 1) < bb.count && overlap_behind(bb, &bad, prev + 1)) {
     len = BB_OFFSET(p[prev + 1]) - bad.start;
     hint = prev + 1;
-    goto update_sectors;
+// goto;
     }
 // not cover any badblocks range in the table
     len = sectors;
-    update_sectors:
+// label;
 // This situation should never happen
-    WARN_ON(sectors < len);
+    WARN_ON!(sectors < len);
     s += len;
     sectors -= len;
-    if (sectors > 0)
-    goto re_check;
-    if (unacked_badblocks > 0)
+    if (sectors > 0) {
+// goto;
+    }
+    if (unacked_badblocks > 0) {
     rv = -1;
-#[no_mangle]
-pub unsafe extern "C" fn if(0: acked_badblocks >) -> else {
-    else if (acked_badblocks > 0)
+    }
+
+    else if (acked_badblocks > 0) {
     rv = 1;
-    else
+    }
+    else {
     rv = 0;
+    }
     return rv;
     }
 //
@@ -1204,7 +1478,7 @@ pub unsafe extern "C" fn if(0: acked_badblocks >) -> else {
 // When looking for a bad block we specify a range and want to
 // know if any block in the range is bad.  So we binary-search
 // to the last range that starts at-or-before the given endpoint,
-// (or "before the sector after the target range")
+(or "before the sector after the target range")
 // then see if it ends after the given start.
 //
 // Return:
@@ -1213,24 +1487,24 @@ pub unsafe extern "C" fn if(0: acked_badblocks >) -> else {
 // -1: there are bad blocks which have not yet been acknowledged in metadata.
 // plus the start/length of the first bad section we overlap.
 //
-    int badblocks_check(struct badblocks *bb, sector_t s, sector_t sectors,
-    sector_t *first_bad, sector_t *bad_sectors)
-    {
-    unsigned int seq;
-    int rv;
-    WARN_ON(bb.shift < 0 || sectors == 0);
+#[no_mangle]
+pub unsafe extern "C" fn badblocks_check(bb: *mut badblocks, s: sector_t, sectors: sector_t, first_bad: *mut sector_t, bad_sectors: *mut sector_t) -> c_int {
+    let mut seq = 0;
+    let mut rv = 0;
+    WARN_ON!(bb.shift < 0 || sectors == 0);
     if (bb.shift > 0) {
 // round the start down, and the end up
-    let mut target: sector_t = s + sectors;
+pub static mut target: sector_t = 0;
     rounddown(s, 1 << bb.shift);
     roundup(target, 1 << bb.shift);
     sectors = target - s;
     }
-    retry:
+// label;
     seq = read_seqbegin(&bb.lock);
     rv = _badblocks_check(bb, s, sectors, first_bad, bad_sectors);
-    if (read_seqretry(&bb.lock, seq))
-    goto retry;
+    if (read_seqretry(&bb.lock, seq)) {
+// goto;
+    }
     return rv;
     }
     EXPORT_SYMBOL_GPL(badblocks_check);
@@ -1250,9 +1524,8 @@ pub unsafe extern "C" fn if(0: acked_badblocks >) -> else {
 // false: failed to set badblocks (out of space). Parital setting will be
 // treated as failure.
 //
-    bool badblocks_set(struct badblocks *bb, sector_t s, sector_t sectors,
-    int acknowledged)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn badblocks_set(bb: *mut badblocks, s: sector_t, sectors: sector_t, acknowledged: c_int) -> bool {
     return _badblocks_set(bb, s, sectors, acknowledged);
     }
     EXPORT_SYMBOL_GPL(badblocks_set);
@@ -1272,8 +1545,6 @@ pub unsafe extern "C" fn if(0: acked_badblocks >) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn badblocks_clear(bb: *mut badblocks, s: sector_t, sectors: sector_t) -> bool {
-    bool badblocks_clear(struct badblocks *bb, sector_t s, sector_t sectors)
-    {
     return _badblocks_clear(bb, s, sectors);
     }
     EXPORT_SYMBOL_GPL(badblocks_clear);
@@ -1286,25 +1557,25 @@ pub unsafe extern "C" fn badblocks_clear(bb: *mut badblocks, s: sector_t, sector
 //
 #[no_mangle]
 pub unsafe extern "C" fn ack_all_badblocks(bb: *mut badblocks) {
-    void ack_all_badblocks(struct badblocks *bb)
-    {
-    if (bb.page == core::ptr::null_mut() || bb.changed)
+    if (bb.page == core::ptr::null_mut() || bb.changed) {
 // no point even trying
     return;
+    }
     write_seqlock_irq(&bb.lock);
     if (bb.changed == 0 && bb.unacked_exist) {
-    u64 *p = bb.page;
-    int i;
-    for (i = 0; i < bb.count ; i++) {
+    let mut p = bb.page;
+    let mut i = 0;
+    while (i < bb.count ) {
     if (!BB_ACK(p[i])) {
-    let mut start: sector_t = BB_OFFSET(p[i]);
-    let mut len: c_int = BB_LEN(p[i]);
+pub static mut start: sector_t = 0;
+pub static mut len: c_int = 0;
     p[i] = BB_MAKE(start, len, 1);
     }
     }
-    for (i = 0; i < bb.count ; i++)
+    for (i = 0; i < bb.count ; i++) {
     while (try_adjacent_combine(bb, i))
     ;
+    }
     bb.unacked_exist = 0;
     }
     write_sequnlock_irq(&bb.lock);
@@ -1321,33 +1592,35 @@ pub unsafe extern "C" fn ack_all_badblocks(bb: *mut badblocks) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn badblocks_show(bb: *mut badblocks, page: *mut c_char, unack: c_int) -> isize {
-    ssize_t badblocks_show(struct badblocks *bb, char *page, int unack)
-    {
-    size_t len;
-    int i;
-    u64 *p = bb.page;
-    unsigned seq;
-    if (bb.shift < 0)
+    let mut len = 0;
+    let mut i = 0;
+    let mut p = bb.page;
+    let mut seq: c_uint = 0;
+    if (bb.shift < 0) {
     return 0;
-    retry:
+    }
+// label;
     seq = read_seqbegin(&bb.lock);
     len = 0;
     i = 0;
     while (len < PAGE_SIZE && i < bb.count) {
-    let mut s: sector_t = BB_OFFSET(p[i]);
-    let mut length: c_uint = BB_LEN(p[i]);
-    let mut ack: c_int = BB_ACK(p[i]);
-    i++;
-    if (unack && ack)
+pub static mut s: sector_t = 0;
+pub static mut length: c_uint = 0;
+pub static mut ack: c_int = 0;
+    i += 1;
+    if (unack && ack) {
     continue;
+    }
     len += snprintf(page+len, PAGE_SIZE-len, "%llu %u\n",
     (unsigned long long)s << bb.shift,
     length << bb.shift);
     }
-    if (unack && len == 0)
+    if (unack && len == 0) {
     bb.unacked_exist = 0;
-    if (read_seqretry(&bb.lock, seq))
-    goto retry;
+    }
+    if (read_seqretry(&bb.lock, seq)) {
+// goto;
+    }
     return len;
     }
     EXPORT_SYMBOL_GPL(badblocks_show);
@@ -1361,42 +1634,47 @@ pub unsafe extern "C" fn badblocks_show(bb: *mut badblocks, page: *mut c_char, u
 // Return:
 // Length of the buffer processed or -ve error.
 //
-    ssize_t badblocks_store(struct badblocks *bb, const char *page, size_t len,
-    int unack)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn badblocks_store(bb: *mut badblocks, page: *mut c_char, len: size_t, unack: c_int) -> ssize_t {
     unsigned long long sector;
-    int length;
-    char newline;
+    let mut length = 0;
+    let mut newline = 0;
     switch (sscanf(page, "%llu %d%c", &sector, &length, &newline)) {
     case 3:
-    if (newline != '\n')
-    return -EINVAL;
-    fallthrough;
-    case 2:
-    if (length <= 0)
-    return -EINVAL;
-    break;
-    default:
+    if (newline != '\n') {
     return -EINVAL;
     }
-    if (!badblocks_set(bb, sector, length, !unack))
+    fallthrough;
+    case 2:
+    if (length <= 0) {
+    return -EINVAL;
+    }
+    break;
+// label;
+    return -EINVAL;
+    }
+    if (!badblocks_set(bb, sector, length, !unack)) {
     return -ENOSPC;
+    }
     return len;
     }
     EXPORT_SYMBOL_GPL(badblocks_store);
-    static int __badblocks_init(struct device *dev, struct badblocks *bb,
-    int enable)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __badblocks_init(dev: *mut device, bb: *mut badblocks, enable: c_int) -> c_int {
     bb.dev = dev;
     bb.count = 0;
-    if (enable)
+    if (enable) {
     bb.shift = 0;
-    else
+    }
+    else {
     bb.shift = -1;
-    if (dev)
+    }
+    if (dev) {
     bb.page = devm_kzalloc(dev, PAGE_SIZE, GFP_KERNEL);
-    else
+    }
+    else {
     bb.page = kzalloc(PAGE_SIZE, GFP_KERNEL);
+    }
     if (!bb.page) {
     bb.shift = -1;
     return -ENOMEM;
@@ -1415,17 +1693,14 @@ pub unsafe extern "C" fn badblocks_show(bb: *mut badblocks, page: *mut c_char, u
 //
 #[no_mangle]
 pub unsafe extern "C" fn badblocks_init(bb: *mut badblocks, enable: c_int) -> c_int {
-    int badblocks_init(struct badblocks *bb, int enable)
-    {
     return __badblocks_init(core::ptr::null_mut(), bb, enable);
     }
     EXPORT_SYMBOL_GPL(badblocks_init);
 #[no_mangle]
 pub unsafe extern "C" fn devm_init_badblocks(dev: *mut device, bb: *mut badblocks) -> c_int {
-    int devm_init_badblocks(struct device *dev, struct badblocks *bb)
-    {
-    if (!bb)
+    if (!bb) {
     return -EINVAL;
+    }
     return __badblocks_init(dev, bb, 1);
     }
     EXPORT_SYMBOL_GPL(devm_init_badblocks);
@@ -1435,14 +1710,15 @@ pub unsafe extern "C" fn devm_init_badblocks(dev: *mut device, bb: *mut badblock
 //
 #[no_mangle]
 pub unsafe extern "C" fn badblocks_exit(bb: *mut badblocks) {
-    void badblocks_exit(struct badblocks *bb)
-    {
-    if (!bb)
+    if (!bb) {
     return;
-    if (bb.dev)
+    }
+    if (bb.dev) {
     devm_kfree(bb.dev, bb.page);
-    else
+    }
+    else {
     kfree(bb.page);
+    }
     bb.page = core::ptr::null_mut();
     }
     EXPORT_SYMBOL_GPL(badblocks_exit);

@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -44,16 +294,15 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     static char boot_snapshot_info[COMMAND_LINE_SIZE] __initdata;
     static int boot_snapshot_index;
 #[no_mangle]
-unsafe extern "C" fn boot_alloc_snapshot(str: *mut c_char) -> int __init {
-    static int __init boot_alloc_snapshot(char *str)
-    {
-    char *slot = boot_snapshot_info + boot_snapshot_index;
-    let mut left: c_int = sizeof(boot_snapshot_info) - boot_snapshot_index;
-    int ret;
+unsafe extern "C" fn boot_alloc_snapshot(str: *mut c_char) -> c_int {
+    let mut slot = boot_snapshot_info + boot_snapshot_index;
+pub static mut left: c_int = 0;
+    let mut ret = 0;
     if (str[0] == '=') {
-    str++;
-    if (strlen(str) >= left)
+    str += 1;
+    if (strlen(str) >= left) {
     return -1;
+    }
     ret = snprintf(slot, left, "%s\t", str);
     boot_snapshot_index += ret;
     } else {
@@ -63,20 +312,17 @@ unsafe extern "C" fn boot_alloc_snapshot(str: *mut c_char) -> int __init {
     }
     return 1;
     }
-    __setup("alloc_snapshot", boot_alloc_snapshot);
+    __setup!("alloc_snapshot", boot_alloc_snapshot);
 #[no_mangle]
-unsafe extern "C" fn boot_snapshot(str: *mut c_char) -> int __init {
-    static int __init boot_snapshot(char *str)
-    {
+unsafe extern "C" fn boot_snapshot(str: *mut c_char) -> c_int {
     snapshot_at_boot = true;
     boot_alloc_snapshot(str);
     return 1;
     }
-    __setup("ftrace_boot_snapshot", boot_snapshot);
-    static void tracing_snapshot_instance_cond(struct trace_array *tr,
-    void *cond_data)
-    {
-    unsigned long flags;
+    __setup!("ftrace_boot_snapshot", boot_snapshot);
+#[no_mangle]
+pub unsafe extern "C" fn tracing_snapshot_instance_cond(tr: *mut trace_array, cond_data: *mut c_void) {
+    let mut flags = 0;
     if (in_nmi()) {
     trace_array_puts(tr, "*** SNAPSHOT CALLED FROM NMI CONTEXT ***\n");
     trace_array_puts(tr, "*** snapshot is being ignored        ***\n");
@@ -105,8 +351,6 @@ unsafe extern "C" fn boot_snapshot(str: *mut c_char) -> int __init {
     }
 #[no_mangle]
 pub unsafe extern "C" fn tracing_snapshot_instance(tr: *mut trace_array) {
-    void tracing_snapshot_instance(struct trace_array *tr)
-    {
     tracing_snapshot_instance_cond(tr, core::ptr::null_mut());
     }
 //
@@ -124,8 +368,6 @@ pub unsafe extern "C" fn tracing_snapshot_instance(tr: *mut trace_array) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn tracing_snapshot_cond(tr: *mut trace_array, cond_data: *mut c_void) {
-    void tracing_snapshot_cond(struct trace_array *tr, void *cond_data)
-    {
     tracing_snapshot_instance_cond(tr, cond_data);
     }
     EXPORT_SYMBOL_GPL(tracing_snapshot_cond);
@@ -143,66 +385,66 @@ pub unsafe extern "C" fn tracing_snapshot_cond(tr: *mut trace_array, cond_data: 
 //
 // Returns the cond_data associated with the trace array's snapshot.
 //
-    void *tracing_cond_snapshot_data(struct trace_array *tr)
-    {
-    void *cond_data = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn tracing_cond_snapshot_data(tr: *mut trace_array) -> *mut c_void {
+    let mut cond_data = core::ptr::null_mut();
     local_irq_disable();
     arch_spin_lock(&tr.max_lock);
-    if (tr.cond_snapshot)
+    if (tr.cond_snapshot) {
     cond_data = tr.cond_snapshot.cond_data;
+    }
     arch_spin_unlock(&tr.max_lock);
     local_irq_enable();
     return cond_data;
     }
     EXPORT_SYMBOL_GPL(tracing_cond_snapshot_data);
 // resize @tr's buffer to the size of @size_tr's entries
-    int resize_buffer_duplicate_size(struct array_buffer *trace_buf,
-    struct array_buffer *size_buf, int cpu_id)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn resize_buffer_duplicate_size(trace_buf: *mut array_buffer, size_buf: *mut array_buffer, cpu_id: c_int) -> c_int {
     int cpu, ret = 0;
     if (cpu_id == RING_BUFFER_ALL_CPUS) {
     for_each_tracing_cpu(cpu) {
     ret = ring_buffer_resize(trace_buf.buffer,
     per_cpu_ptr(size_buf.data, cpu).entries, cpu);
-    if (ret < 0)
+    if (ret < 0) {
     break;
+    }
     per_cpu_ptr(trace_buf.data, cpu).entries =
     per_cpu_ptr(size_buf.data, cpu).entries;
     }
     } else {
     ret = ring_buffer_resize(trace_buf.buffer,
     per_cpu_ptr(size_buf.data, cpu_id).entries, cpu_id);
-    if (ret == 0)
+    if (ret == 0) {
     per_cpu_ptr(trace_buf.data, cpu_id).entries =
     per_cpu_ptr(size_buf.data, cpu_id).entries;
+    }
     }
     return ret;
     }
 #[no_mangle]
 pub unsafe extern "C" fn tracing_alloc_snapshot_instance(tr: *mut trace_array) -> c_int {
-    int tracing_alloc_snapshot_instance(struct trace_array *tr)
-    {
-    int order;
-    int ret;
+    let mut order = 0;
+    let mut ret = 0;
     if (!tr.allocated_snapshot) {
 // Make the snapshot buffer have the same order as main buffer
     order = ring_buffer_subbuf_order_get(tr.array_buffer.buffer);
     ret = ring_buffer_subbuf_order_set(tr.snapshot_buffer.buffer, order);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
 // allocate spare buffer
     ret = resize_buffer_duplicate_size(&tr.snapshot_buffer,
     &tr.array_buffer, RING_BUFFER_ALL_CPUS);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     tr.allocated_snapshot = true;
     }
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn free_snapshot(tr: *mut trace_array) {
-    void free_snapshot(struct trace_array *tr)
-    {
 //
 // We don't free the ring buffer. instead, resize it because
 // The max_tr ring buffer has some state (e.g. ring->clock) and
@@ -216,39 +458,34 @@ pub unsafe extern "C" fn free_snapshot(tr: *mut trace_array) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn tracing_arm_snapshot_locked(tr: *mut trace_array) -> c_int {
-    int tracing_arm_snapshot_locked(struct trace_array *tr)
-    {
-    int ret;
+    let mut ret = 0;
     lockdep_assert_held(&trace_types_lock);
     spin_lock(&tr.snapshot_trigger_lock);
     if (tr.snapshot == UINT_MAX || tr.mapped) {
     spin_unlock(&tr.snapshot_trigger_lock);
     return -EBUSY;
     }
-    tr.snapshot++;
+    tr.snapshot += 1;
     spin_unlock(&tr.snapshot_trigger_lock);
     ret = tracing_alloc_snapshot_instance(tr);
     if (ret) {
     spin_lock(&tr.snapshot_trigger_lock);
-    tr.snapshot--;
+    tr.snapshot -= 1;
     spin_unlock(&tr.snapshot_trigger_lock);
     }
     return ret;
     }
 #[no_mangle]
 pub unsafe extern "C" fn tracing_arm_snapshot(tr: *mut trace_array) -> c_int {
-    int tracing_arm_snapshot(struct trace_array *tr)
-    {
     guard(mutex)(&trace_types_lock);
     return tracing_arm_snapshot_locked(tr);
     }
 #[no_mangle]
 pub unsafe extern "C" fn tracing_disarm_snapshot(tr: *mut trace_array) {
-    void tracing_disarm_snapshot(struct trace_array *tr)
-    {
     spin_lock(&tr.snapshot_trigger_lock);
-    if (!WARN_ON(!tr.snapshot))
-    tr.snapshot--;
+    if (!WARN_ON!(!tr.snapshot)) {
+    tr.snapshot -= 1;
+    }
     spin_unlock(&tr.snapshot_trigger_lock);
     }
 //
@@ -264,12 +501,11 @@ pub unsafe extern "C" fn tracing_disarm_snapshot(tr: *mut trace_array) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn tracing_snapshot_alloc() {
-    void tracing_snapshot_alloc(void)
-    {
-    int ret;
+    let mut ret = 0;
     ret = tracing_alloc_snapshot();
-    if (ret < 0)
+    if (ret < 0) {
     return;
+    }
     tracing_snapshot();
     }
     EXPORT_SYMBOL_GPL(tracing_snapshot_alloc);
@@ -286,19 +522,20 @@ pub unsafe extern "C" fn tracing_snapshot_alloc() {
 //
 // Returns 0 if successful, error otherwise.
 //
-    int tracing_snapshot_cond_enable(struct trace_array *tr, void *cond_data,
-    cond_update_fn_t update)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn tracing_snapshot_cond_enable(tr: *mut trace_array, cond_data: *mut c_void, update: cond_update_fn_t) -> c_int {
     struct cond_snapshot *cond_snapshot __free(kfree) =
     kzalloc_obj(*cond_snapshot);
-    int ret;
-    if (!cond_snapshot)
+    let mut ret = 0;
+    if (!cond_snapshot) {
     return -ENOMEM;
+    }
     cond_snapshot.cond_data = cond_data;
     cond_snapshot.update = update;
     guard(mutex)(&trace_types_lock);
-    if (tracer_uses_snapshot(tr.current_trace))
+    if (tracer_uses_snapshot(tr.current_trace)) {
     return -EBUSY;
+    }
 //
 // The cond_snapshot can only change to NULL without the
 // trace_types_lock. We don't care if we race with it going
@@ -307,11 +544,13 @@ pub unsafe extern "C" fn tracing_snapshot_alloc() {
 // do safely with only holding the trace_types_lock and not
 // having to take the max_lock.
 //
-    if (tr.cond_snapshot)
+    if (tr.cond_snapshot) {
     return -EBUSY;
+    }
     ret = tracing_arm_snapshot_locked(tr);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     local_irq_disable();
     arch_spin_lock(&tr.max_lock);
     tr.cond_snapshot = no_free_ptr(cond_snapshot);
@@ -332,13 +571,12 @@ pub unsafe extern "C" fn tracing_snapshot_alloc() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn tracing_snapshot_cond_disable(tr: *mut trace_array) -> c_int {
-    int tracing_snapshot_cond_disable(struct trace_array *tr)
-    {
-    let mut ret: c_int = 0;
+pub static mut ret: c_int = 0;
     local_irq_disable();
     arch_spin_lock(&tr.max_lock);
-    if (!tr.cond_snapshot)
+    if (!tr.cond_snapshot) {
     ret = -EINVAL;
+    }
     else {
     kfree(tr.cond_snapshot);
     tr.cond_snapshot = core::ptr::null_mut();
@@ -350,42 +588,35 @@ pub unsafe extern "C" fn tracing_snapshot_cond_disable(tr: *mut trace_array) -> 
     }
     EXPORT_SYMBOL_GPL(tracing_snapshot_cond_disable);
 
-    static struct workqueue_struct *fsnotify_wq;
+pub static mut fsnotify_wq: *mut c_void = core::ptr::null_mut();
 #[no_mangle]
 unsafe extern "C" fn latency_fsnotify_workfn(work: *mut work_struct) {
-    static void latency_fsnotify_workfn(struct work_struct *work)
-    {
-    struct trace_array *tr = container_of(work, struct trace_array,
+    let mut tr = container_of!(work, trace_array,
     fsnotify_work);
     fsnotify_inode(tr.d_max_latency.d_inode, FS_MODIFY);
     }
 #[no_mangle]
 unsafe extern "C" fn latency_fsnotify_workfn_irq(iwork: *mut irq_work) {
-    static void latency_fsnotify_workfn_irq(struct irq_work *iwork)
-    {
-    struct trace_array *tr = container_of(iwork, struct trace_array,
+    let mut tr = container_of!(iwork, trace_array,
     fsnotify_irqwork);
     queue_work(fsnotify_wq, &tr.fsnotify_work);
     }
 #[no_mangle]
 pub unsafe extern "C" fn latency_fsnotify_init() -> __init static int {
-    __init static int latency_fsnotify_init(void)
-    {
     fsnotify_wq = alloc_workqueue("tr_max_lat_wq",
     WQ_UNBOUND | WQ_HIGHPRI, 0);
     if (!fsnotify_wq) {
-    pr_err("Unable to allocate tr_max_lat_wq\n");
+    pr_err!("Unable to allocate tr_max_lat_wq\n");
     return -ENOMEM;
     }
     return 0;
     }
-    late_initcall_sync(latency_fsnotify_init);
+    late_initcall_sync!(latency_fsnotify_init);
 #[no_mangle]
 pub unsafe extern "C" fn latency_fsnotify(tr: *mut trace_array) {
-    void latency_fsnotify(struct trace_array *tr)
-    {
-    if (!fsnotify_wq)
+    if (!fsnotify_wq) {
     return;
+    }
 //
 // We cannot call queue_work(&tr->fsnotify_work) from here because it's
 // possible that we are called from __schedule() or do_idle(), which
@@ -394,10 +625,9 @@ pub unsafe extern "C" fn latency_fsnotify(tr: *mut trace_array) {
     irq_work_queue(&tr.fsnotify_irqwork);
     }
 
-    static const struct file_operations tracing_max_lat_fops;
-    void trace_create_maxlat_file(struct trace_array *tr,
-    struct dentry *d_tracer)
-    {
+pub static mut tracing_max_lat_fops: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn trace_create_maxlat_file(tr: *mut trace_array, d_tracer: *mut dentry) {
 
     INIT_WORK(&tr.fsnotify_work, latency_fsnotify_workfn);
     init_irq_work(&tr.fsnotify_irqwork, latency_fsnotify_workfn_irq);
@@ -410,15 +640,14 @@ pub unsafe extern "C" fn latency_fsnotify(tr: *mut trace_array) {
 //
 // Copy the new maximum trace into the separate maximum-trace
 // structure. (this way the maximum trace is permanently saved,
-// for later retrieval via /sys/kernel/tracing/tracing_max_latency)
+for later retrieval via /sys/kernel/tracing/tracing_max_latency)
 //
-    static void
-    __update_max_tr(struct trace_array *tr, struct task_struct *tsk, int cpu)
-    {
-    struct array_buffer *trace_buf = &tr.array_buffer;
-    struct trace_array_cpu *data = per_cpu_ptr(trace_buf.data, cpu);
-    struct array_buffer *max_buf = &tr.snapshot_buffer;
-    struct trace_array_cpu *max_data = per_cpu_ptr(max_buf.data, cpu);
+#[no_mangle]
+pub unsafe extern "C" fn __update_max_tr(tr: *mut trace_array, tsk: *mut task_struct, cpu: c_int) {
+    let mut trace_buf = &tr.array_buffer;
+    let mut data = per_cpu_ptr(trace_buf.data, cpu);
+    let mut max_buf = &tr.snapshot_buffer;
+    let mut max_data = per_cpu_ptr(max_buf.data, cpu);
     max_buf.cpu = cpu;
     max_buf.time_start = data.preempt_timestamp;
     max_data.saved_latency = tr.max_latency;
@@ -442,8 +671,10 @@ pub unsafe extern "C" fn latency_fsnotify(tr: *mut trace_array) {
     latency_fsnotify(tr);
     }
 
-    static inline void __update_max_tr(struct trace_array *tr,
-    struct task_struct *tsk, int cpu) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: __update_max_tr
+pub unsafe extern "C" fn __update_max_tr_dup(tr: *mut trace_array, tsk: *mut task_struct, cpu: c_int) { }
 
 //
 // update_max_tr - snapshot all trace buffers from global_trace to max_tr
@@ -455,16 +686,14 @@ pub unsafe extern "C" fn latency_fsnotify(tr: *mut trace_array) {
 // Flip the buffers between the @tr and the max_tr and record information
 // about which task was the cause of this latency.
 //
-    void
-    update_max_tr(struct trace_array *tr, struct task_struct *tsk, int cpu,
-    void *cond_data)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn update_max_tr(tr: *mut trace_array, tsk: *mut task_struct, cpu: c_int, cond_data: *mut c_void) {
     if (tr.stop_count)
     return;
-    WARN_ON_ONCE(!irqs_disabled());
+    WARN_ON_ONCE!(!irqs_disabled());
     if (!tr.allocated_snapshot) {
 // Only the nop tracer should hit this when disabling
-    WARN_ON_ONCE(tr.current_trace != &nop_trace);
+    WARN_ON_ONCE!(tr.current_trace != &nop_trace);
     return;
     }
     arch_spin_lock(&tr.max_lock);
@@ -491,16 +720,15 @@ pub unsafe extern "C" fn latency_fsnotify(tr: *mut trace_array) {
 //
 // Flip the trace of a single CPU buffer between the @tr and the max_tr.
 //
-    void
-    update_max_tr_single(struct trace_array *tr, struct task_struct *tsk, int cpu)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn update_max_tr_single(tr: *mut trace_array, tsk: *mut task_struct, cpu: c_int) {
+    let mut ret = 0;
     if (tr.stop_count)
     return;
-    WARN_ON_ONCE(!irqs_disabled());
+    WARN_ON_ONCE!(!irqs_disabled());
     if (!tr.allocated_snapshot) {
 // Only the nop tracer should hit this when disabling
-    WARN_ON_ONCE(tr.current_trace != &nop_trace);
+    WARN_ON_ONCE!(tr.current_trace != &nop_trace);
     return;
     }
     arch_spin_lock(&tr.max_lock);
@@ -513,17 +741,16 @@ pub unsafe extern "C" fn latency_fsnotify(tr: *mut trace_array) {
 // and flag that it failed.
 // Another reason is resize is in progress.
 //
-    trace_array_printk_buf(tr.snapshot_buffer.buffer, _THIS_IP_,
+    trace_array_printk_buf(tr.snapshot_buffer.buffer, _THIS_IP_, {
     "Failed to swap buffers due to commit or resize in progress\n");
+}
     }
-    WARN_ON_ONCE(ret && ret != -EAGAIN && ret != -EBUSY);
+    WARN_ON_ONCE!(ret && ret != -EAGAIN && ret != -EBUSY);
     __update_max_tr(tr, tsk, cpu);
     arch_spin_unlock(&tr.max_lock);
     }
 #[no_mangle]
 unsafe extern "C" fn show_snapshot_main_help(m: *mut seq_file) {
-    static void show_snapshot_main_help(struct seq_file *m)
-    {
     seq_puts(m, "# echo 0 > snapshot : Clears and frees snapshot buffer\n"
     "# echo 1 > snapshot : Allocates snapshot buffer, if not already allocated.\n"
     "#                      Takes a snapshot of the main buffer.\n"
@@ -533,8 +760,6 @@ unsafe extern "C" fn show_snapshot_main_help(m: *mut seq_file) {
     }
 #[no_mangle]
 unsafe extern "C" fn show_snapshot_percpu_help(m: *mut seq_file) {
-    static void show_snapshot_percpu_help(struct seq_file *m)
-    {
     seq_puts(m, "# echo 0 > snapshot : Invalid for per_cpu snapshot file.\n");
 
     seq_puts(m, "# echo 1 > snapshot : Allocates snapshot buffer, if not already allocated.\n"
@@ -549,43 +774,46 @@ unsafe extern "C" fn show_snapshot_percpu_help(m: *mut seq_file) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn print_snapshot_help(m: *mut seq_file, iter: *mut trace_iterator) {
-    void print_snapshot_help(struct seq_file *m, struct trace_iterator *iter)
-    {
-    if (iter.tr.allocated_snapshot)
+    if (iter.tr.allocated_snapshot) {
     seq_puts(m, "#\n# * Snapshot is allocated *\n#\n");
-    else
+    }
+    else {
     seq_puts(m, "#\n# * Snapshot is freed *\n#\n");
+    }
     seq_puts(m, "# Snapshot commands:\n");
-    if (iter.cpu_file == RING_BUFFER_ALL_CPUS)
+    if (iter.cpu_file == RING_BUFFER_ALL_CPUS) {
     show_snapshot_main_help(m);
-    else
+    }
+    else {
     show_snapshot_percpu_help(m);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn tracing_snapshot_open(inode: *mut inode, file: *mut file) -> c_int {
-    static int tracing_snapshot_open(struct inode *inode, struct file *file)
-    {
-    struct trace_array *tr = inode.i_private;
-    struct trace_iterator *iter;
-    struct seq_file *m;
-    int ret;
+    let mut tr = inode.i_private;
+pub static mut iter: *mut c_void = core::ptr::null_mut();
+pub static mut m: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     ret = tracing_check_open_get_tr(tr);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     if (file.f_mode & FMODE_READ) {
     iter = __tracing_open(inode, file, true);
-    if (IS_ERR(iter))
+    if (IS_ERR(iter)) {
     ret = PTR_ERR(iter);
+    }
     } else {
 // Writes still need the seq_file to hold the private data
     ret = -ENOMEM;
     m = kzalloc_obj(*m);
-    if (!m)
-    goto out;
+    if (!m) {
+// goto;
+    }
     iter = kzalloc_obj(*iter);
     if (!iter) {
     kfree(m);
-    goto out;
+// goto;
     }
     ret = 0;
     iter.tr = tr;
@@ -594,62 +822,70 @@ unsafe extern "C" fn tracing_snapshot_open(inode: *mut inode, file: *mut file) -
     m.private = iter;
     file.private_data = m;
     }
-    out:
-    if (ret < 0)
+// label;
+    if (ret < 0) {
     trace_array_put(tr);
+    }
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn tracing_swap_cpu_buffer(tr: *mut c_void) {
-    static void tracing_swap_cpu_buffer(void *tr)
-    {
-    update_max_tr_single((struct trace_array *)tr, current, smp_processor_id());
+    update_max_tr_single(tr, current, smp_processor_id());
     }
-    static ssize_t
-    tracing_snapshot_write(struct file *filp, const char __user *ubuf, size_t cnt,
-    loff_t *ppos)
-    {
-    struct seq_file *m = filp.private_data;
-    struct trace_iterator *iter = m.private;
-    struct trace_array *tr = iter.tr;
-    unsigned long val;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn tracing_snapshot_write(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
+    let mut m = filp.private_data;
+    let mut iter = m.private;
+    let mut tr = iter.tr;
+    let mut val = 0;
+    let mut ret = 0;
     ret = tracing_update_buffers(tr);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     ret = kstrtoul_from_user(ubuf, cnt, 10, &val);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     guard(mutex)(&trace_types_lock);
-    if (tracer_uses_snapshot(tr.current_trace))
+    if (tracer_uses_snapshot(tr.current_trace)) {
     return -EBUSY;
+    }
     local_irq_disable();
     arch_spin_lock(&tr.max_lock);
-    if (tr.cond_snapshot)
+    if (tr.cond_snapshot) {
     ret = -EBUSY;
+    }
     arch_spin_unlock(&tr.max_lock);
     local_irq_enable();
-    if (ret)
+    if (ret) {
     return ret;
-    switch (val) {
-    case 0:
-    if (iter.cpu_file != RING_BUFFER_ALL_CPUS)
+    }
+    match (val) {
+    0 => {
+    if (iter.cpu_file != RING_BUFFER_ALL_CPUS) {
     return -EINVAL;
-    if (tr.allocated_snapshot)
+    }
+    if (tr.allocated_snapshot) {
     free_snapshot(tr);
-    break;
-    case 1:
+    }
+    // break;
+    }
+    1 => {
 // Only allow per-cpu swap if the ring buffer supports it
 
-    if (iter.cpu_file != RING_BUFFER_ALL_CPUS)
+    if (iter.cpu_file != RING_BUFFER_ALL_CPUS) {
     return -EINVAL;
+    }
 
-    if (tr.allocated_snapshot)
+    if (tr.allocated_snapshot) {
     ret = resize_buffer_duplicate_size(&tr.snapshot_buffer,
     &tr.array_buffer, iter.cpu_file);
+    }
     ret = tracing_arm_snapshot_locked(tr);
-    if (ret)
+    if (ret) {
     return ret;
+    }
 // Now, we're going to swap
     if (iter.cpu_file == RING_BUFFER_ALL_CPUS) {
     local_irq_disable();
@@ -657,18 +893,22 @@ unsafe extern "C" fn tracing_swap_cpu_buffer(tr: *mut c_void) {
     local_irq_enable();
     } else {
     smp_call_function_single(iter.cpu_file, tracing_swap_cpu_buffer,
-    (void *)tr, 1);
+    tr, 1);
     }
     tracing_disarm_snapshot(tr);
-    break;
-    default:
+    // break;
+    }
+    _ => {
     if (tr.allocated_snapshot) {
-    if (iter.cpu_file == RING_BUFFER_ALL_CPUS)
+    if (iter.cpu_file == RING_BUFFER_ALL_CPUS) {
     tracing_reset_online_cpus(&tr.snapshot_buffer);
-    else
+    }
+    else {
     tracing_reset_cpu(&tr.snapshot_buffer, iter.cpu_file);
     }
-    break;
+    }
+    // break;
+    }
     }
     if (ret >= 0) {
 // ppos += cnt;
@@ -678,29 +918,28 @@ unsafe extern "C" fn tracing_swap_cpu_buffer(tr: *mut c_void) {
     }
 #[no_mangle]
 unsafe extern "C" fn tracing_snapshot_release(inode: *mut inode, file: *mut file) -> c_int {
-    static int tracing_snapshot_release(struct inode *inode, struct file *file)
-    {
-    struct seq_file *m = file.private_data;
-    int ret;
+    let mut m = file.private_data;
+    let mut ret = 0;
     ret = tracing_release(inode, file);
-    if (file.f_mode & FMODE_READ)
+    if (file.f_mode & FMODE_READ) {
     return ret;
+    }
 // If write only, the seq_file is just a stub
-    if (m)
+    if (m) {
     kfree(m.private);
+    }
     kfree(m);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn snapshot_raw_open(inode: *mut inode, filp: *mut file) -> c_int {
-    static int snapshot_raw_open(struct inode *inode, struct file *filp)
-    {
-    struct ftrace_buffer_info *info;
-    int ret;
+pub static mut info: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
 // The following checks for tracefs lockdown
     ret = tracing_buffers_open(inode, filp);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     info = filp.private_data;
     if (tracer_uses_snapshot(info.iter.trace)) {
     tracing_buffers_release(inode, filp);
@@ -710,232 +949,200 @@ unsafe extern "C" fn snapshot_raw_open(inode: *mut inode, filp: *mut file) -> c_
     info.iter.array_buffer = &info.iter.tr.snapshot_buffer;
     return ret;
     }
-    const struct file_operations snapshot_fops = {
-    .open		= tracing_snapshot_open,
-    .read		= seq_read,
-    .write		= tracing_snapshot_write,
-    .llseek		= tracing_lseek,
-    .release	= tracing_snapshot_release,
-    };
-    const struct file_operations snapshot_raw_fops = {
-    .open		= snapshot_raw_open,
-    .read		= tracing_buffers_read,
-    .release	= tracing_buffers_release,
-    .splice_read	= tracing_buffers_splice_read,
-    };
+pub static mut file_operations: usize = 0;
+pub static mut file_operations: usize = 0;
 
-    static ssize_t
-    tracing_max_lat_read(struct file *filp, char __user *ubuf,
-    size_t cnt, loff_t *ppos)
-    {
-    struct trace_array *tr = filp.private_data;
+#[no_mangle]
+pub unsafe extern "C" fn tracing_max_lat_read(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
+    let mut tr = filp.private_data;
     return tracing_nsecs_read(&tr.max_latency, ubuf, cnt, ppos);
     }
-    static ssize_t
-    tracing_max_lat_write(struct file *filp, const char __user *ubuf,
-    size_t cnt, loff_t *ppos)
-    {
-    struct trace_array *tr = filp.private_data;
+#[no_mangle]
+pub unsafe extern "C" fn tracing_max_lat_write(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
+    let mut tr = filp.private_data;
     return tracing_nsecs_write(&tr.max_latency, ubuf, cnt, ppos);
     }
-    static const struct file_operations tracing_max_lat_fops = {
-    .open		= tracing_open_generic_tr,
-    .read		= tracing_max_lat_read,
-    .write		= tracing_max_lat_write,
-    .llseek		= generic_file_llseek,
-    .release	= tracing_release_generic_tr,
-    };
+pub static mut file_operations: usize = 0;
 
 #[no_mangle]
 pub unsafe extern "C" fn get_snapshot_map(tr: *mut trace_array) -> c_int {
-    int get_snapshot_map(struct trace_array *tr)
-    {
-    let mut err: c_int = 0;
+pub static mut err: c_int = 0;
 //
 // Called with mmap_lock held. lockdep would be unhappy if we would now
 // take trace_types_lock. Instead use the specific
 // snapshot_trigger_lock.
 //
     spin_lock(&tr.snapshot_trigger_lock);
-    if (tr.snapshot || tr.mapped == UINT_MAX)
+    if (tr.snapshot || tr.mapped == UINT_MAX) {
     err = -EBUSY;
-    else
-    tr.mapped++;
+    }
+    else {
+    tr.mapped += 1;
+    }
     spin_unlock(&tr.snapshot_trigger_lock);
 // Wait for update_max_tr() to observe iter->tr->mapped
-    if (tr.mapped == 1)
+    if (tr.mapped == 1) {
     synchronize_rcu();
+    }
     return err;
     }
 #[no_mangle]
 pub unsafe extern "C" fn put_snapshot_map(tr: *mut trace_array) {
-    void put_snapshot_map(struct trace_array *tr)
-    {
     spin_lock(&tr.snapshot_trigger_lock);
-    if (!WARN_ON(!tr.mapped))
-    tr.mapped--;
+    if (!WARN_ON!(!tr.mapped)) {
+    tr.mapped -= 1;
+    }
     spin_unlock(&tr.snapshot_trigger_lock);
     }
 
-    static void
-    ftrace_snapshot(unsigned long ip, unsigned long parent_ip,
-    struct trace_array *tr, struct ftrace_probe_ops *ops,
-    void *data)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_snapshot(ip: c_ulong, parent_ip: c_ulong, tr: *mut trace_array, ops: *mut ftrace_probe_ops, data: *mut c_void) {
     tracing_snapshot_instance(tr);
     }
-    static void
-    ftrace_count_snapshot(unsigned long ip, unsigned long parent_ip,
-    struct trace_array *tr, struct ftrace_probe_ops *ops,
-    void *data)
-    {
-    struct ftrace_func_mapper *mapper = data;
-    long *count = core::ptr::null_mut();
-    if (mapper)
-    count = (long *)ftrace_func_mapper_find_ip(mapper, ip);
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_count_snapshot(ip: c_ulong, parent_ip: c_ulong, tr: *mut trace_array, ops: *mut ftrace_probe_ops, data: *mut c_void) {
+    let mut mapper = data;
+    let mut count = core::ptr::null_mut();
+    if (mapper) {
+    count = ftrace_func_mapper_find_ip(mapper, ip);
+    }
     if (count) {
-    if (*count <= 0)
+    if (*count <= 0) {
     return;
+    }
     (*count)--;
     }
     tracing_snapshot_instance(tr);
     }
-    static int
-    ftrace_snapshot_print(struct seq_file *m, unsigned long ip,
-    struct ftrace_probe_ops *ops, void *data)
-    {
-    struct ftrace_func_mapper *mapper = data;
-    long *count = core::ptr::null_mut();
-    seq_printf(m, "%ps:", (void *)ip);
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_snapshot_print(m: *mut seq_file, ip: c_ulong, ops: *mut ftrace_probe_ops, data: *mut c_void) -> c_int {
+    let mut mapper = data;
+    let mut count = core::ptr::null_mut();
+    seq_printf(m, "%ps:", ip);
     seq_puts(m, "snapshot");
-    if (mapper)
-    count = (long *)ftrace_func_mapper_find_ip(mapper, ip);
-    if (count)
+    if (mapper) {
+    count = ftrace_func_mapper_find_ip(mapper, ip);
+    }
+    if (count) {
     seq_printf(m, ":count=%ld\n", *count);
-    else
+    }
+    else {
     seq_puts(m, ":unlimited\n");
+    }
     return 0;
     }
-    static int
-    ftrace_snapshot_init(struct ftrace_probe_ops *ops, struct trace_array *tr,
-    unsigned long ip, void *init_data, void **data)
-    {
-    struct ftrace_func_mapper *mapper = *data;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_snapshot_init(ops: *mut ftrace_probe_ops, tr: *mut trace_array, ip: c_ulong, init_data: *mut c_void, data: *mut *mut c_void) -> c_int {
+    let mut mapper = *data;
     if (!mapper) {
     mapper = allocate_ftrace_func_mapper();
-    if (!mapper)
+    if (!mapper) {
     return -ENOMEM;
+    }
 // data = mapper;
     }
     return ftrace_func_mapper_add_ip(mapper, ip, init_data);
     }
-    static void
-    ftrace_snapshot_free(struct ftrace_probe_ops *ops, struct trace_array *tr,
-    unsigned long ip, void *data)
-    {
-    struct ftrace_func_mapper *mapper = data;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_snapshot_free(ops: *mut ftrace_probe_ops, tr: *mut trace_array, ip: c_ulong, data: *mut c_void) {
+    let mut mapper = data;
     if (!ip) {
-    if (!mapper)
+    if (!mapper) {
     return;
+    }
     free_ftrace_func_mapper(mapper, core::ptr::null_mut());
     return;
     }
     ftrace_func_mapper_remove_ip(mapper, ip);
     }
-    static struct ftrace_probe_ops snapshot_probe_ops = {
-    .func			= ftrace_snapshot,
-    .print			= ftrace_snapshot_print,
-    };
-    static struct ftrace_probe_ops snapshot_count_probe_ops = {
-    .func			= ftrace_count_snapshot,
-    .print			= ftrace_snapshot_print,
-    .init			= ftrace_snapshot_init,
-    .free			= ftrace_snapshot_free,
-    };
-    static int
-    ftrace_trace_snapshot_callback(struct trace_array *tr, struct ftrace_hash *hash,
-    char *glob, char *cmd, char *param, int enable)
-    {
-    struct ftrace_probe_ops *ops;
-    void *count = (void *)-1;
-    char *number;
-    int ret;
-    if (!tr)
+pub static mut ftrace_probe_ops: usize = 0;
+pub static mut ftrace_probe_ops: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_trace_snapshot_callback(tr: *mut trace_array, hash: *mut ftrace_hash, glob: *mut c_char, cmd: *mut c_char, param: *mut c_char, enable: c_int) -> c_int {
+pub static mut ops: *mut c_void = core::ptr::null_mut();
+    let mut count = -1;
+pub static mut number: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (!tr) {
     return -ENODEV;
+    }
 // hash funcs only work with set_ftrace_filter
-    if (!enable)
+    if (!enable) {
     return -EINVAL;
+    }
     ops = param ? &snapshot_count_probe_ops :  &snapshot_probe_ops;
     if (glob[0] == '!') {
     ret = unregister_ftrace_function_probe_func(glob+1, tr, ops);
-    if (!ret)
+    if (!ret) {
     tracing_disarm_snapshot(tr);
+    }
     return ret;
     }
-    if (!param)
-    goto out_reg;
+    if (!param) {
+// goto;
+    }
     number = strsep(&param, ":");
-    if (!strlen(number))
-    goto out_reg;
+    if (!strlen(number)) {
+// goto;
+    }
 //
 // We use the callback data field (which is a pointer)
 // as our counter.
 //
-    ret = kstrtoul(number, 0, (unsigned long *)&count);
-    if (ret)
+    ret = kstrtoul(number, 0, &count);
+    if (ret) {
     return ret;
-    out_reg:
+    }
+// label;
     ret = tracing_arm_snapshot(tr);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     ret = register_ftrace_function_probe(glob, tr, ops, count);
-    if (ret < 0)
+    if (ret < 0) {
     tracing_disarm_snapshot(tr);
+    }
     return ret < 0 ? ret : 0;
     }
-    static struct ftrace_func_command ftrace_snapshot_cmd = {
-    .name			= "snapshot",
-    .func			= ftrace_trace_snapshot_callback,
-    };
+pub static mut ftrace_func_command: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn register_snapshot_cmd() -> __init int {
-    __init int register_snapshot_cmd(void)
-    {
     return register_ftrace_command(&ftrace_snapshot_cmd);
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn trace_allocate_snapshot(tr: *mut trace_array, size: c_int) -> c_int {
-    int trace_allocate_snapshot(struct trace_array *tr, int size)
-    {
-    int ret;
+    let mut ret = 0;
 // Fix mapped buffer trace arrays do not have snapshot buffers
-    if (tr.range_addr_start)
+    if (tr.range_addr_start) {
     return 0;
+    }
 // allocate_snapshot can only be true during system boot
     ret = allocate_trace_buffer(tr, &tr.snapshot_buffer,
     allocate_snapshot ? size : 1);
-    if (ret < 0)
+    if (ret < 0) {
     return -ENOMEM;
+    }
     tr.allocated_snapshot = allocate_snapshot;
     allocate_snapshot = false;
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn tr_needs_alloc_snapshot(name: *const c_char) -> __init static bool {
-    __init static bool tr_needs_alloc_snapshot(const char *name)
-    {
-    char *test;
-    let mut len: c_int = strlen(name);
-    bool ret;
-    if (!boot_snapshot_index)
+pub static mut test: *mut c_void = core::ptr::null_mut();
+pub static mut len: c_int = 0;
+    let mut ret = 0;
+    if (!boot_snapshot_index) {
     return false;
+    }
     if (strncmp(name, boot_snapshot_info, len) == 0 &&
-    boot_snapshot_info[len] == '\t')
+    boot_snapshot_info[len] == '\t') {
     return true;
+    }
     test = kmalloc(strlen(name) + 3, GFP_KERNEL);
-    if (!test)
+    if (!test) {
     return false;
+    }
     sprintf(test, "\t%s\t", name);
     ret = strstr(boot_snapshot_info, test) == core::ptr::null_mut();
     kfree(test);
@@ -943,10 +1150,9 @@ pub unsafe extern "C" fn tr_needs_alloc_snapshot(name: *const c_char) -> __init 
     }
 #[no_mangle]
 pub unsafe extern "C" fn do_allocate_snapshot(name: *const c_char) -> __init void {
-    __init void do_allocate_snapshot(const char *name)
-    {
-    if (!tr_needs_alloc_snapshot(name))
+    if (!tr_needs_alloc_snapshot(name)) {
     return;
+    }
 //
 // When allocate_snapshot is set, the next call to
 // allocate_trace_buffers() (called by trace_array_get_by_name())
@@ -956,15 +1162,15 @@ pub unsafe extern "C" fn do_allocate_snapshot(name: *const c_char) -> __init voi
     allocate_snapshot = true;
     }
 #[no_mangle]
-pub unsafe extern "C" fn ftrace_boot_snapshot() -> void __init {
-    void __init ftrace_boot_snapshot(void)
-    {
-    struct trace_array *tr;
-    if (!snapshot_at_boot)
+pub unsafe extern "C" fn ftrace_boot_snapshot()  {
+pub static mut tr: *mut c_void = core::ptr::null_mut();
+    if (!snapshot_at_boot) {
     return;
+    }
     list_for_each_entry(tr, &ftrace_trace_arrays, list) {
-    if (!tr.allocated_snapshot)
+    if (!tr.allocated_snapshot) {
     continue;
+    }
     tracing_snapshot_instance(tr);
     trace_array_puts(tr, "** Boot snapshot taken **\n");
     }

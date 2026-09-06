@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -74,41 +324,36 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
 // Macro flag: #define CREATE_TRACE_POINTS
 
-    static int sysctl_memory_failure_early_kill __read_mostly;
-    let mut __read_mostly: static int sysctl_memory_failure_recovery = 1;
-    let mut __read_mostly: static int sysctl_enable_soft_offline = 1;
-    static int sysctl_panic_on_unrecoverable_mf __read_mostly;
-    let mut __read_mostly: atomic_long_t num_poisoned_pages = ATOMIC_LONG_INIT(0);
-    static bool hw_memory_failure __read_mostly;
-    static DEFINE_MUTEX(mf_mutex);
+    static int sysctl_memory_failure_early_kill ;
+pub static mut : int sysctl_memory_failure_recovery = 1;
+pub static mut : int sysctl_enable_soft_offline = 1;
+    static int sysctl_panic_on_unrecoverable_mf ;
+pub static mut : atomic_long_t num_poisoned_pages = 0;
+    static bool hw_memory_failure ;
+pub static mut mf_mutex: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn num_poisoned_pages_inc(pfn: c_ulong) {
-    void num_poisoned_pages_inc(unsigned long pfn)
-    {
     atomic_long_inc(&num_poisoned_pages);
     memblk_nr_poison_inc(pfn);
     }
 #[no_mangle]
 pub unsafe extern "C" fn num_poisoned_pages_sub(pfn: c_ulong, i: c_long) {
-    void num_poisoned_pages_sub(unsigned long pfn, long i)
-    {
     atomic_long_sub(i, &num_poisoned_pages);
-    if (pfn != -1UL)
+    if (pfn != -1UL) {
     memblk_nr_poison_sub(pfn, i);
+    }
     }
 //
 // MF_ATTR_RO - Create sysfs entry for each memory failure statistics.
 // @_name: name of the file in the per NUMA sysfs directory.
 //
 
-    static ssize_t _name##_show(struct device *dev,			\
-    struct device_attribute *attr,	\
-    char *buf)				\
-    {								\
-    struct memory_failure_stats *mf_stats =			\
-    &NODE_DATA(dev.id).mf_stats;			\
-    return sysfs_emit(buf, "%lu\n", mf_stats._name);	\
-    }								\
+    static ssize_t _name##_show(device *dev, device_attribute *attr,	
+    char *buf)				
+    {								
+    let mut mf_stats = &NODE_DATA(dev.id).mf_stats;			
+    return sysfs_emit(buf, "%lu\n", mf_stats._name);	
+    }								
 #[no_mangle]
 pub unsafe extern "C" fn DEVICE_ATTR_RO(_arg: _name) -> static {
     static DEVICE_ATTR_RO(_name)
@@ -125,50 +370,10 @@ pub unsafe extern "C" fn DEVICE_ATTR_RO(_arg: _name) -> static {
     &dev_attr_recovered.attr,
     core::ptr::null_mut(),
     };
-    const struct attribute_group memory_failure_attr_group = {
-    .name = "memory_failure",
-    .attrs = memory_failure_attr,
-    };
-    static const struct ctl_table memory_failure_table[] = {
-    {
-    .procname	= "memory_failure_early_kill",
-    .data		= &sysctl_memory_failure_early_kill,
-    .maxlen		= sizeof(sysctl_memory_failure_early_kill),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec_minmax,
-    .extra1		= SYSCTL_ZERO,
-    .extra2		= SYSCTL_ONE,
-    },
-    {
-    .procname	= "memory_failure_recovery",
-    .data		= &sysctl_memory_failure_recovery,
-    .maxlen		= sizeof(sysctl_memory_failure_recovery),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec_minmax,
-    .extra1		= SYSCTL_ZERO,
-    .extra2		= SYSCTL_ONE,
-    },
-    {
-    .procname	= "enable_soft_offline",
-    .data		= &sysctl_enable_soft_offline,
-    .maxlen		= sizeof(sysctl_enable_soft_offline),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec_minmax,
-    .extra1		= SYSCTL_ZERO,
-    .extra2		= SYSCTL_ONE,
-    },
-    {
-    .procname	= "panic_on_unrecoverable_memory_failure",
-    .data		= &sysctl_panic_on_unrecoverable_mf,
-    .maxlen		= sizeof(sysctl_panic_on_unrecoverable_mf),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec_minmax,
-    .extra1		= SYSCTL_ZERO,
-    .extra2		= SYSCTL_ONE,
-    }
-    };
-    let mut pfn_space_itree: static struct rb_root_cached = RB_ROOT_CACHED;
-    static DEFINE_MUTEX(pfn_space_lock);
+pub static mut attribute_group: usize = 0;
+pub static mut ctl_table: usize = 0;
+pub static mut pfn_space_itree: rb_root_cached = 0;
+pub static mut pfn_space_lock: usize = 0;
 //
 // Return values:
 // 1:   the page is dissolved (if needed) and taken off from buddy,
@@ -177,26 +382,23 @@ pub unsafe extern "C" fn DEVICE_ATTR_RO(_arg: _name) -> static {
 //
 #[no_mangle]
 unsafe extern "C" fn __page_handle_poison(page: *mut page) -> c_int {
-    static int __page_handle_poison(struct page *page)
-    {
-    int ret;
+    let mut ret = 0;
     zone_pcp_disable(page_zone(page));
     ret = dissolve_free_hugetlb_folio(page_folio(page));
-    if (!ret)
+    if (!ret) {
     ret = take_page_off_buddy(page);
+    }
     zone_pcp_enable(page_zone(page));
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn page_handle_poison(page: *mut page, hugepage_or_freepage: bool, release: bool) -> bool {
-    static bool page_handle_poison(struct page *page, bool hugepage_or_freepage, bool release)
-    {
     if (hugepage_or_freepage) {
 //
 // Doing this check for free pages is also fine since
 // dissolve_free_hugetlb_folio() returns 0 for non-hugetlb folios as well.
 //
-    if (__page_handle_poison(page) <= 0)
+    if (__page_handle_poison(page) <= 0) {
 //
 // We could fail to take off the target page from buddy
 // for example due to racy page allocation, but that's
@@ -206,39 +408,36 @@ unsafe extern "C" fn page_handle_poison(page: *mut page, hugepage_or_freepage: b
 //
     return false;
     }
+    }
     SetPageHWPoison(page);
-    if (release)
+    if (release) {
     put_page(page);
+    }
     page_ref_inc(page);
     num_poisoned_pages_inc(page_to_pfn(page));
     return true;
     }
-    static hwpoison_filter_func_t __rcu *hwpoison_filter_func __read_mostly;
+    static hwpoison_filter_func_t  *hwpoison_filter_func ;
 #[no_mangle]
 pub unsafe extern "C" fn hwpoison_filter_register(filter: *mut hwpoison_filter_func_t) {
-    void hwpoison_filter_register(hwpoison_filter_func_t *filter)
-    {
     rcu_assign_pointer(hwpoison_filter_func, filter);
     }
     EXPORT_SYMBOL_GPL(hwpoison_filter_register);
 #[no_mangle]
 pub unsafe extern "C" fn hwpoison_filter_unregister() {
-    void hwpoison_filter_unregister(void)
-    {
     RCU_INIT_POINTER(hwpoison_filter_func, core::ptr::null_mut());
     synchronize_rcu();
     }
     EXPORT_SYMBOL_GPL(hwpoison_filter_unregister);
 #[no_mangle]
 unsafe extern "C" fn hwpoison_filter(p: *mut page) -> c_int {
-    static int hwpoison_filter(struct page *p)
-    {
-    let mut ret: c_int = 0;
-    hwpoison_filter_func_t *filter;
+pub static mut ret: c_int = 0;
+pub static mut filter: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     filter = rcu_dereference(hwpoison_filter_func);
-    if (filter)
+    if (filter) {
     ret = filter(p);
+    }
     rcu_read_unlock();
     return ret;
     }
@@ -279,28 +478,29 @@ pub struct to_kill {
 //
 #[no_mangle]
 unsafe extern "C" fn kill_proc(tk: *mut to_kill, pfn: c_ulong, flags: c_int) -> c_int {
-    static int kill_proc(struct to_kill *tk, unsigned long pfn, int flags)
-    {
-    struct task_struct *t = tk.tsk;
-    let mut addr_lsb: c_short = tk.size_shift;
-    let mut ret: c_int = 0;
-    pr_err("%#lx: Sending SIGBUS to %s:%d due to hardware memory corruption\n",
+    let mut t = tk.tsk;
+pub static mut addr_lsb: c_short = 0;
+pub static mut ret: c_int = 0;
+    pr_err!("%#lx: Sending SIGBUS to %s:%d due to hardware memory corruption\n",
     pfn, t.comm, task_pid_nr(t));
-    if ((flags & MF_ACTION_REQUIRED) && (t == current))
+    if ((flags & MF_ACTION_REQUIRED) && (t == current)) {
     ret = force_sig_mceerr(BUS_MCEERR_AR,
-    (void __user *)tk.addr, addr_lsb);
-    else
+    tk.addr, addr_lsb);
+    }
+    else {
 //
 // Signal other processes sharing the page if they have
 // PF_MCE_EARLY set.
 // Don't use force here, it's convenient if the signal
 // can be temporarily blocked.
 //
-    ret = send_sig_mceerr(BUS_MCEERR_AO, (void __user *)tk.addr,
+    ret = send_sig_mceerr(BUS_MCEERR_AO, tk.addr,
     addr_lsb, t);
-    if (ret < 0)
-    pr_info("Error sending signal to %s:%d: %d\n",
+    }
+    if (ret < 0) {
+    pr_info!("Error sending signal to %s:%d: %d\n",
     t.comm, task_pid_nr(t), ret);
+    }
     return ret;
     }
 //
@@ -309,58 +509,63 @@ unsafe extern "C" fn kill_proc(tk: *mut to_kill, pfn: c_ulong, flags: c_int) -> 
 //
 #[no_mangle]
 pub unsafe extern "C" fn shake_folio(folio: *mut folio) {
-    void shake_folio(struct folio *folio)
-    {
-    if (folio_test_hugetlb(folio))
+    if (folio_test_hugetlb(folio)) {
     return;
+    }
 //
 // TODO: Could shrink slab caches here if a lightweight range-based
 // shrinker will be available.
 //
-    if (folio_test_slab(folio))
+    if (folio_test_slab(folio)) {
     return;
+    }
     lru_add_drain_all();
     }
     EXPORT_SYMBOL_GPL(shake_folio);
 #[no_mangle]
 unsafe extern "C" fn shake_page(page: *mut page) {
-    static void shake_page(struct page *page)
-    {
     shake_folio(page_folio(page));
     }
-    static unsigned long dev_pagemap_mapping_shift(struct vm_area_struct *vma,
-    unsigned long address)
-    {
-    let mut ret: c_ulong = 0;
-    pgd_t *pgd;
-    p4d_t *p4d;
-    pud_t *pud;
-    pmd_t *pmd;
-    pte_t *pte;
-    pte_t ptent;
+#[no_mangle]
+pub unsafe extern "C" fn dev_pagemap_mapping_shift(vma: *mut vm_area_struct, address: c_ulong) -> c_ulong {
+pub static mut ret: c_ulong = 0;
+pub static mut pgd: *mut c_void = core::ptr::null_mut();
+pub static mut p4d: *mut c_void = core::ptr::null_mut();
+pub static mut pud: *mut c_void = core::ptr::null_mut();
+pub static mut pmd: *mut c_void = core::ptr::null_mut();
+pub static mut pte: *mut c_void = core::ptr::null_mut();
+    let mut ptent;
     VM_BUG_ON_VMA(address == -EFAULT, vma);
     pgd = pgd_offset(vma.vm_mm, address);
-    if (!pgd_present(*pgd))
+    if (!pgd_present(*pgd)) {
     return 0;
+    }
     p4d = p4d_offset(pgd, address);
-    if (!p4d_present(*p4d))
+    if (!p4d_present(*p4d)) {
     return 0;
+    }
     pud = pud_offset(p4d, address);
-    if (!pud_present(*pud))
+    if (!pud_present(*pud)) {
     return 0;
-    if (pud_trans_huge(*pud))
+    }
+    if (pud_trans_huge(*pud)) {
     return PUD_SHIFT;
+    }
     pmd = pmd_offset(pud, address);
-    if (!pmd_present(*pmd))
+    if (!pmd_present(*pmd)) {
     return 0;
-    if (pmd_trans_huge(*pmd))
+    }
+    if (pmd_trans_huge(*pmd)) {
     return PMD_SHIFT;
+    }
     pte = pte_offset_map(pmd, address);
-    if (!pte)
+    if (!pte) {
     return 0;
+    }
     ptent = ptep_get(pte);
-    if (pte_present(ptent))
+    if (pte_present(ptent)) {
     ret = PAGE_SHIFT;
+    }
     pte_unmap(pte);
     return ret;
     }
@@ -371,21 +576,21 @@ unsafe extern "C" fn shake_page(page: *mut page) {
 // Schedule a process for later kill.
 // Uses GFP_ATOMIC allocations to avoid potential recursions in the VM.
 //
-    static void __add_to_kill(struct task_struct *tsk, const struct page *p,
-    struct vm_area_struct *vma, struct list_head *to_kill,
-    unsigned long addr)
-    {
-    struct to_kill *tk;
-    tk = kmalloc_obj(struct to_kill, GFP_ATOMIC);
+#[no_mangle]
+pub unsafe extern "C" fn __add_to_kill(tsk: *mut task_struct, p: *mut page, vma: *mut vm_area_struct, to_kill: *mut list_head, addr: c_ulong) {
+pub static mut tk: *mut c_void = core::ptr::null_mut();
+    tk = kmalloc_obj(to_kill, GFP_ATOMIC);
     if (!tk) {
-    pr_err("Out of memory while machine check handling\n");
+    pr_err!("Out of memory while machine check handling\n");
     return;
     }
     tk.addr = addr;
-    if (is_zone_device_page(p))
+    if (is_zone_device_page(p)) {
     tk.size_shift = dev_pagemap_mapping_shift(vma, tk.addr);
-    else
+    }
+    else {
     tk.size_shift = folio_shift(page_folio(p));
+    }
 //
 // Send SIGKILL if "tk->addr == -EFAULT". Also, as
 // "tk->size_shift" is always non-zero for !is_zone_device_page(),
@@ -397,7 +602,7 @@ unsafe extern "C" fn shake_page(page: *mut page) {
 // has a mapping for the page.
 //
     if (tk.addr == -EFAULT) {
-    pr_info("Unable to find user space address %lx in %s\n",
+    pr_info!("Unable to find user space address %lx in %s\n",
     page_to_pfn(p), tsk.comm);
     } else if (tk.size_shift == 0) {
     kfree(tk);
@@ -407,31 +612,30 @@ unsafe extern "C" fn shake_page(page: *mut page) {
     tk.tsk = tsk;
     list_add_tail(&tk.nd, to_kill);
     }
-    static void add_to_kill_anon_file(struct task_struct *tsk, const struct page *p,
-    struct vm_area_struct *vma, struct list_head *to_kill,
-    unsigned long addr)
-    {
-    if (addr == -EFAULT)
+#[no_mangle]
+pub unsafe extern "C" fn add_to_kill_anon_file(tsk: *mut task_struct, p: *mut page, vma: *mut vm_area_struct, to_kill: *mut list_head, addr: c_ulong) {
+    if (addr == -EFAULT) {
     return;
+    }
     __add_to_kill(tsk, p, vma, to_kill, addr);
     }
 
-    static bool task_in_to_kill_list(struct list_head *to_kill,
-    struct task_struct *tsk)
-    {
-    struct to_kill *tk, *next;
+#[no_mangle]
+pub unsafe extern "C" fn task_in_to_kill_list(to_kill: *mut list_head, tsk: *mut task_struct) -> bool {
+    let mut tk = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
     list_for_each_entry_safe(tk, next, to_kill, nd) {
-    if (tk.tsk == tsk)
+    if (tk.tsk == tsk) {
     return true;
+    }
     }
     return false;
     }
-    void add_to_kill_ksm(struct task_struct *tsk, const struct page *p,
-    struct vm_area_struct *vma, struct list_head *to_kill,
-    unsigned long addr)
-    {
-    if (!task_in_to_kill_list(to_kill, tsk))
+#[no_mangle]
+pub unsafe extern "C" fn add_to_kill_ksm(tsk: *mut task_struct, p: *mut page, vma: *mut vm_area_struct, to_kill: *mut list_head, addr: c_ulong) {
+    if (!task_in_to_kill_list(to_kill, tsk)) {
     __add_to_kill(tsk, p, vma, to_kill, addr);
+    }
     }
 
 //
@@ -440,14 +644,14 @@ unsafe extern "C" fn shake_page(page: *mut page) {
 // Only do anything when FORCEKILL is set, otherwise just free the
 // list (this is used for clean pages which do not need killing)
 //
-    static void kill_procs(struct list_head *to_kill, bool forcekill,
-    unsigned long pfn, int flags)
-    {
-    struct to_kill *tk, *next;
+#[no_mangle]
+pub unsafe extern "C" fn kill_procs(to_kill: *mut list_head, forcekill: bool, pfn: c_ulong, flags: c_int) {
+    let mut tk = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
     list_for_each_entry_safe(tk, next, to_kill, nd) {
     if (forcekill) {
     if (tk.addr == -EFAULT) {
-    pr_err("%#lx: forcibly killing %s:%d because of failure to unmap corrupted page\n",
+    pr_err!("%#lx: forcibly killing %s:%d because of failure to unmap corrupted page\n",
     pfn, tk.tsk.comm, task_pid_nr(tk.tsk));
     do_send_sig_info(SIGKILL, SEND_SIG_PRIV,
     tk.tsk, PIDTYPE_PID);
@@ -458,11 +662,11 @@ unsafe extern "C" fn shake_page(page: *mut page) {
 // check for that, but we need to tell the
 // process anyways.
 //
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: kill_proc(tk, _arg: pfn, 0: flags) <) -> else {
-    else if (kill_proc(tk, pfn, flags) < 0)
-    pr_err("%#lx: Cannot send advisory machine check signal to %s:%d\n",
+
+    else if (kill_proc(tk, pfn, flags) < 0) {
+    pr_err!("%#lx: Cannot send advisory machine check signal to %s:%d\n",
     pfn, tk.tsk.comm, task_pid_nr(tk.tsk));
+    }
     }
     list_del(&tk.nd);
     put_task_struct(tk.tsk);
@@ -477,16 +681,18 @@ pub unsafe extern "C" fn if(_arg: kill_proc(tk, _arg: pfn, 0: flags) <) -> else 
 // We already hold rcu lock in the caller, so we don't have to call
 // rcu_read_lock/unlock() in this function.
 //
-    static struct task_struct *find_early_kill_thread(struct task_struct *tsk)
-    {
-    struct task_struct *t;
+#[no_mangle]
+pub unsafe extern "C" fn find_early_kill_thread(tsk: *mut task_struct) -> *mut c_void {
+pub static mut t: *mut c_void = core::ptr::null_mut();
     for_each_thread(tsk, t) {
     if (t.flags & PF_MCE_PROCESS) {
-    if (t.flags & PF_MCE_EARLY)
+    if (t.flags & PF_MCE_EARLY) {
     return t;
+    }
     } else {
-    if (sysctl_memory_failure_early_kill)
+    if (sysctl_memory_failure_early_kill) {
     return t;
+    }
     }
     }
     return core::ptr::null_mut();
@@ -503,44 +709,47 @@ pub unsafe extern "C" fn if(_arg: kill_proc(tk, _arg: pfn, 0: flags) <) -> else 
 // processes sharing the same error page,if the process is "early kill", the
 // task_struct of the dedicated thread will also be returned.
 //
-    struct task_struct *task_early_kill(struct task_struct *tsk, int force_early)
-    {
-    if (!tsk.mm)
+#[no_mangle]
+pub unsafe extern "C" fn task_early_kill(tsk: *mut task_struct, force_early: c_int) -> *mut c_void {
+    if (!tsk.mm) {
     return core::ptr::null_mut();
+    }
 //
 // Comparing ->mm here because current task might represent
 // a subthread, while tsk always points to the main thread.
 //
-    if (force_early && tsk.mm == current.mm)
+    if (force_early && tsk.mm == current.mm) {
     return current;
+    }
     return find_early_kill_thread(tsk);
     }
 //
 // Collect processes when the error hit an anonymous page.
 //
-    static void collect_procs_anon(const struct folio *folio,
-    const struct page *page, struct list_head *to_kill,
-    int force_early)
-    {
-    struct task_struct *tsk;
-    struct anon_vma *av;
-    pgoff_t pgoff;
+#[no_mangle]
+pub unsafe extern "C" fn collect_procs_anon(folio: *mut folio, page: *mut page, to_kill: *mut list_head, force_early: c_int) {
+pub static mut tsk: *mut c_void = core::ptr::null_mut();
+pub static mut av: *mut c_void = core::ptr::null_mut();
+    let mut pgoff;
     av = folio_lock_anon_vma_read(folio, core::ptr::null_mut());
-    if (av == core::ptr::null_mut())	/* Not actually mapped anymore */
+    if (av == core::ptr::null_mut())	/* Not actually mapped anymore */ {
     return;
+    }
     pgoff = page_pgoff(folio, page);
     rcu_read_lock();
     for_each_process(tsk) {
-    struct vm_area_struct *vma;
-    struct anon_vma_chain *vmac;
-    struct task_struct *t = task_early_kill(tsk, force_early);
-    unsigned long addr;
-    if (!t)
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+pub static mut vmac: *mut c_void = core::ptr::null_mut();
+    let mut t = task_early_kill(tsk, force_early);
+    let mut addr = 0;
+    if (!t) {
     continue;
+    }
     anon_rmap_tree_foreach(vmac, av, pgoff, pgoff) {
     vma = vmac.vma;
-    if (vma.vm_mm != t.mm)
+    if (vma.vm_mm != t.mm) {
     continue;
+    }
     addr = page_mapped_in_vma(page, vma);
     add_to_kill_anon_file(t, page, vma, to_kill, addr);
     }
@@ -551,22 +760,21 @@ pub unsafe extern "C" fn if(_arg: kill_proc(tk, _arg: pfn, 0: flags) <) -> else 
 //
 // Collect processes when the error hit a file mapped page.
 //
-    static void collect_procs_file(const struct folio *folio,
-    const struct page *page, struct list_head *to_kill,
-    int force_early)
-    {
-    struct vm_area_struct *vma;
-    struct task_struct *tsk;
-    struct address_space *mapping = folio.mapping;
-    pgoff_t pgoff;
+#[no_mangle]
+pub unsafe extern "C" fn collect_procs_file(folio: *mut folio, page: *mut page, to_kill: *mut list_head, force_early: c_int) {
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+pub static mut tsk: *mut c_void = core::ptr::null_mut();
+    let mut mapping = folio.mapping;
+    let mut pgoff;
     i_mmap_lock_read(mapping);
     rcu_read_lock();
     pgoff = page_pgoff(folio, page);
     for_each_process(tsk) {
-    struct task_struct *t = task_early_kill(tsk, force_early);
-    unsigned long addr;
-    if (!t)
+    let mut t = task_early_kill(tsk, force_early);
+    let mut addr = 0;
+    if (!t) {
     continue;
+    }
     mapping_rmap_tree_foreach(vma, mapping, pgoff, pgoff) {
 //
 // Send early kill signal to tasks where a vma covers
@@ -575,8 +783,9 @@ pub unsafe extern "C" fn if(_arg: kill_proc(tk, _arg: pfn, 0: flags) <) -> else 
 // Assume applications who requested early kill want
 // to be informed of all such data corruptions.
 //
-    if (vma.vm_mm != t.mm)
+    if (vma.vm_mm != t.mm) {
     continue;
+    }
     addr = page_address_in_vma(folio, page, vma);
     add_to_kill_anon_file(t, page, vma, to_kill, addr);
     }
@@ -585,38 +794,37 @@ pub unsafe extern "C" fn if(_arg: kill_proc(tk, _arg: pfn, 0: flags) <) -> else 
     i_mmap_unlock_read(mapping);
     }
 
-    static void add_to_kill_fsdax(struct task_struct *tsk, const struct page *p,
-    struct vm_area_struct *vma,
-    struct list_head *to_kill, pgoff_t pgoff)
-    {
-    let mut addr: c_ulong = vma_filebacked_address(vma, pgoff, 1);
+#[no_mangle]
+pub unsafe extern "C" fn add_to_kill_fsdax(tsk: *mut task_struct, p: *mut page, vma: *mut vm_area_struct, to_kill: *mut list_head, pgoff: pgoff_t) {
+pub static mut addr: c_ulong = 0;
     __add_to_kill(tsk, p, vma, to_kill, addr);
     }
 //
 // Collect processes when the error hit a fsdax page.
 //
-    static void collect_procs_fsdax(const struct page *page,
-    struct address_space *mapping, pgoff_t pgoff,
-    struct list_head *to_kill, bool pre_remove)
-    {
-    struct vm_area_struct *vma;
-    struct task_struct *tsk;
+#[no_mangle]
+pub unsafe extern "C" fn collect_procs_fsdax(page: *mut page, mapping: *mut address_space, pgoff: pgoff_t, to_kill: *mut list_head, pre_remove: bool) {
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+pub static mut tsk: *mut c_void = core::ptr::null_mut();
     i_mmap_lock_read(mapping);
     rcu_read_lock();
     for_each_process(tsk) {
-    struct task_struct *t = tsk;
+    let mut t = tsk;
 //
 // Search for all tasks while MF_MEM_PRE_REMOVE is set, because
 // the current may not be the one accessing the fsdax page.
 // Otherwise, search for the current task.
 //
-    if (!pre_remove)
+    if (!pre_remove) {
     t = task_early_kill(tsk, true);
-    if (!t)
+    }
+    if (!t) {
     continue;
+    }
     mapping_rmap_tree_foreach(vma, mapping, pgoff, pgoff) {
-    if (vma.vm_mm == t.mm)
+    if (vma.vm_mm == t.mm) {
     add_to_kill_fsdax(t, page, vma, to_kill, pgoff);
+    }
     }
     }
     rcu_read_unlock();
@@ -626,19 +834,21 @@ pub unsafe extern "C" fn if(_arg: kill_proc(tk, _arg: pfn, 0: flags) <) -> else 
 //
 // Collect the processes who have the corrupted page mapped to kill.
 //
-    static void collect_procs(const struct folio *folio, const struct page *page,
-    struct list_head *tokill, int force_early)
-    {
-    if (!folio.mapping)
-    return;
-    if (unlikely(folio_test_ksm(folio)))
-    collect_procs_ksm(folio, page, tokill, force_early);
 #[no_mangle]
-pub unsafe extern "C" fn if(_arg: folio_test_anon(folio)) -> else {
-    else if (folio_test_anon(folio))
+pub unsafe extern "C" fn collect_procs(folio: *mut folio, page: *mut page, tokill: *mut list_head, force_early: c_int) {
+    if (!folio.mapping) {
+    return;
+    }
+    if (unlikely(folio_test_ksm(folio))) {
+    collect_procs_ksm(folio, page, tokill, force_early);
+    }
+
+    else if (folio_test_anon(folio)) {
     collect_procs_anon(folio, page, tokill, force_early);
-    else
+    }
+    else {
     collect_procs_file(folio, page, tokill, force_early);
+    }
     }
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -650,40 +860,39 @@ pub struct hwpoison_walk {
 
 #[no_mangle]
 unsafe extern "C" fn set_to_kill(tk: *mut to_kill, addr: c_ulong, shift: c_short) {
-    static void set_to_kill(struct to_kill *tk, unsigned long addr, short shift)
-    {
     tk.addr = addr;
     tk.size_shift = shift;
     }
-    static int check_hwpoisoned_entry(pte_t pte, unsigned long addr, short shift,
-    unsigned long poisoned_pfn, struct to_kill *tk)
-    {
-    let mut pfn: c_ulong = 0;
-    unsigned long hwpoison_vaddr;
-    unsigned long mask;
+#[no_mangle]
+pub unsafe extern "C" fn check_hwpoisoned_entry(pte: pte_t, addr: c_ulong, shift: c_short, poisoned_pfn: c_ulong, tk: *mut to_kill) -> c_int {
+pub static mut pfn: c_ulong = 0;
+    let mut hwpoison_vaddr = 0;
+    let mut mask = 0;
     if (pte_present(pte)) {
     pfn = pte_pfn(pte);
     } else {
-    let mut entry: softleaf_t = softleaf_from_pte(pte);
-    if (softleaf_is_hwpoison(entry))
+pub static mut entry: softleaf_t = 0;
+    if (softleaf_is_hwpoison(entry)) {
     pfn = softleaf_to_pfn(entry);
     }
+    }
     mask = ~((1UL << (shift - PAGE_SHIFT)) - 1);
-    if (!pfn || pfn != (poisoned_pfn & mask))
+    if (!pfn || pfn != (poisoned_pfn & mask)) {
     return 0;
+    }
     hwpoison_vaddr = addr + ((poisoned_pfn - pfn) << PAGE_SHIFT);
     set_to_kill(tk, hwpoison_vaddr, shift);
     return 1;
     }
 
-    static int check_hwpoisoned_pmd_entry(pmd_t *pmdp, unsigned long addr,
-    struct hwpoison_walk *hwp)
-    {
-    let mut pmd: pmd_t = *pmdp;
-    unsigned long pfn;
-    unsigned long hwpoison_vaddr;
-    if (!pmd_present(pmd))
+#[no_mangle]
+pub unsafe extern "C" fn check_hwpoisoned_pmd_entry(pmdp: *mut pmd_t, addr: c_ulong, hwp: *mut hwpoison_walk) -> c_int {
+pub static mut pmd: pmd_t = 0;
+    let mut pfn = 0;
+    let mut hwpoison_vaddr = 0;
+    if (!pmd_present(pmd)) {
     return 0;
+    }
     pfn = pmd_pfn(pmd);
     if (pfn <= hwp.pfn && hwp.pfn < pfn + HPAGE_PMD_NR) {
     hwpoison_vaddr = addr + ((hwp.pfn - pfn) << PAGE_SHIFT);
@@ -693,50 +902,51 @@ unsafe extern "C" fn set_to_kill(tk: *mut to_kill, addr: c_ulong, shift: c_short
     return 0;
     }
 
-    static int check_hwpoisoned_pmd_entry(pmd_t *pmdp, unsigned long addr,
-    struct hwpoison_walk *hwp)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: check_hwpoisoned_pmd_entry
+pub unsafe extern "C" fn check_hwpoisoned_pmd_entry_dup(pmdp: *mut pmd_t, addr: c_ulong, hwp: *mut hwpoison_walk) -> c_int {
     return 0;
     }
 
-    static int hwpoison_pte_range(pmd_t *pmdp, unsigned long addr,
-    unsigned long end, struct mm_walk *walk)
-    {
-    struct hwpoison_walk *hwp = walk.private;
-    let mut ret: c_int = 0;
-    pte_t *ptep, *mapped_pte;
-    spinlock_t *ptl;
+#[no_mangle]
+pub unsafe extern "C" fn hwpoison_pte_range(pmdp: *mut pmd_t, addr: c_ulong, end: c_ulong, walk: *mut mm_walk) -> c_int {
+    let mut hwp = walk.private;
+pub static mut ret: c_int = 0;
+    let mut ptep = core::ptr::null_mut();
+    let mut mapped_pte = core::ptr::null_mut();
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
     ptl = pmd_trans_huge_lock(pmdp, walk.vma);
     if (ptl) {
     ret = check_hwpoisoned_pmd_entry(pmdp, addr, hwp);
     spin_unlock(ptl);
-    goto out;
+// goto;
     }
     mapped_pte = ptep = pte_offset_map_lock(walk.vma.vm_mm, pmdp,
     addr, &ptl);
-    if (!ptep)
-    goto out;
-    for (; addr != end; ptep++, addr += PAGE_SIZE) {
+    if (!ptep) {
+// goto;
+    }
+    while (addr != end) {
     ret = check_hwpoisoned_entry(ptep_get(ptep), addr, PAGE_SHIFT,
     hwp.pfn, &hwp.tk);
-    if (ret == 1)
+    if (ret == 1) {
     break;
     }
+    }
     pte_unmap_unlock(mapped_pte, ptl);
-    out:
+// label;
     cond_resched();
     return ret;
     }
 
-    static int hwpoison_hugetlb_range(pte_t *ptep, unsigned long hmask,
-    unsigned long addr, unsigned long end,
-    struct mm_walk *walk)
-    {
-    struct hwpoison_walk *hwp = walk.private;
-    struct hstate *h = hstate_vma(walk.vma);
-    spinlock_t *ptl;
-    pte_t pte;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn hwpoison_hugetlb_range(ptep: *mut pte_t, hmask: c_ulong, addr: c_ulong, end: c_ulong, walk: *mut mm_walk) -> c_int {
+    let mut hwp = walk.private;
+    let mut h = hstate_vma(walk.vma);
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
+    let mut pte;
+    let mut ret = 0;
     ptl = huge_pte_lock(h, walk.mm, ptep);
     pte = huge_ptep_get(walk.mm, addr, ptep);
     ret = check_hwpoisoned_entry(pte, addr, huge_page_shift(h),
@@ -745,18 +955,12 @@ unsafe extern "C" fn set_to_kill(tk: *mut to_kill, addr: c_ulong, shift: c_short
     return ret;
     }
 
-    static int hwpoison_test_walk(unsigned long start, unsigned long end,
-    struct mm_walk *walk)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hwpoison_test_walk(start: c_ulong, end: c_ulong, walk: *mut mm_walk) -> c_int {
 // We also want to consider pages mapped into VM_PFNMAP.
     return 0;
     }
-    static const struct mm_walk_ops hwpoison_walk_ops = {
-    .pmd_entry = hwpoison_pte_range,
-    .hugetlb_entry = hwpoison_hugetlb_range,
-    .test_walk = hwpoison_test_walk,
-    .walk_lock = PGWALK_RDLOCK,
-    };
+pub static mut mm_walk_ops: usize = 0;
 //
 // Sends SIGBUS to the current process with error info.
 //
@@ -770,27 +974,26 @@ unsafe extern "C" fn set_to_kill(tk: *mut to_kill, addr: c_ulong, shift: c_short
 // is proper in most cases, but it could be wrong when the application
 // process has multiple entries mapping the error page.
 //
-    static int kill_accessing_process(struct task_struct *p, unsigned long pfn,
-    int flags)
-    {
-    int ret;
-    struct hwpoison_walk priv = {
-    .pfn = pfn,
-    };
+#[no_mangle]
+pub unsafe extern "C" fn kill_accessing_process(p: *mut task_struct, pfn: c_ulong, flags: c_int) -> c_int {
+    let mut ret = 0;
+pub static mut hwpoison_walk: usize = 0;
     priv.tk.tsk = p;
-    if (!p.mm)
+    if (!p.mm) {
     return -EFAULT;
+    }
     mmap_read_lock(p.mm);
     ret = walk_page_range(p.mm, 0, TASK_SIZE, &hwpoison_walk_ops,
-    (void *)&priv);
+    &priv);
 //
 // ret = 1 when CMCI wins, regardless of whether try_to_unmap()
 // succeeds or fails, then kill the process with SIGBUS.
 // ret = 0 when poison page is a clean page and it's dropped, no
 // SIGBUS is needed.
 //
-    if (ret == 1 && priv.tk.addr)
+    if (ret == 1 && priv.tk.addr) {
     kill_proc(&priv.tk, pfn, flags);
+    }
     mmap_read_unlock(p.mm);
     return ret > 0 ? -EHWPOISON : 0;
     }
@@ -853,8 +1056,6 @@ unsafe extern "C" fn set_to_kill(tk: *mut to_kill, addr: c_ulong, shift: c_short
 //
 #[no_mangle]
 unsafe extern "C" fn delete_from_lru_cache(folio: *mut folio) -> c_int {
-    static int delete_from_lru_cache(struct folio *folio)
-    {
     if (folio_isolate_lru(folio)) {
 //
 // Clear sensible page flags, so that the buddy system won't
@@ -875,29 +1076,32 @@ unsafe extern "C" fn delete_from_lru_cache(folio: *mut folio) -> c_int {
     }
     return -EIO;
     }
-    static int truncate_error_folio(struct folio *folio, unsigned long pfn,
-    struct address_space *mapping)
-    {
-    let mut ret: c_int = MF_FAILED;
-    if (mapping.a_ops.error_remove_folio) {
-    let mut err: c_int = mapping.a_ops.error_remove_folio(mapping, folio);
-    if (err != 0)
-    pr_info("%#lx: Failed to punch page: %d\n", pfn, err);
 #[no_mangle]
-pub unsafe extern "C" fn if(_arg: !filemap_release_folio(folio, _arg: GFP_NOIO)) -> else {
-    else if (!filemap_release_folio(folio, GFP_NOIO))
-    pr_info("%#lx: failed to release buffers\n", pfn);
-    else
+pub unsafe extern "C" fn truncate_error_folio(folio: *mut folio, pfn: c_ulong, mapping: *mut address_space) -> c_int {
+pub static mut ret: c_int = 0;
+    if (mapping.a_ops.error_remove_folio) {
+pub static mut err: c_int = 0;
+    if (err != 0) {
+    pr_info!("%#lx: Failed to punch page: %d\n", pfn, err);
+    }
+
+    else if (!filemap_release_folio(folio, GFP_NOIO)) {
+    pr_info!("%#lx: failed to release buffers\n", pfn);
+    }
+    else {
     ret = MF_RECOVERED;
+    }
     } else {
 //
 // If the file system doesn't support it just invalidate
 // This fails on dirty or anything with private pages
 //
-    if (mapping_evict_folio(mapping, folio))
+    if (mapping_evict_folio(mapping, folio)) {
     ret = MF_RECOVERED;
-    else
-    pr_info("%#lx: Failed to invalidate\n",	pfn);
+    }
+    else {
+    pr_info!("%#lx: Failed to invalidate\n",	pfn);
+    }
     }
     return ret;
     }
@@ -906,9 +1110,9 @@ pub unsafe extern "C" fn if(_arg: !filemap_release_folio(folio, _arg: GFP_NOIO))
 pub struct page_state {
     pub mask: c_ulong,
     pub res: c_ulong,
-    pub type: enum mf_action_page_type,
+    pub type: mf_action_page_type,
 // Callback ->action() has to unlock the relevant page inside it.
-    pub p): *mut *mut *mut int (action)(struct page_state ps, struct page,
+    pub p): *mut *mut *mut int (action)(page_state ps, page,
 }
 
 //
@@ -917,14 +1121,14 @@ pub struct page_state {
 //
 // The extra_pins is true when one extra refcount is expected.
 //
-    static bool has_extra_refcount(struct page_state *ps, struct page *p,
-    bool extra_pins)
-    {
-    let mut count: c_int = page_count(p) - 1;
-    if (extra_pins)
+#[no_mangle]
+pub unsafe extern "C" fn has_extra_refcount(ps: *mut page_state, p: *mut page, extra_pins: bool) -> bool {
+pub static mut count: c_int = 0;
+    if (extra_pins) {
     count -= folio_nr_pages(page_folio(p));
+    }
     if (count > 0) {
-    pr_err("%#lx: %s still referenced by %d users\n",
+    pr_err!("%#lx: %s still referenced by %d users\n",
     page_to_pfn(p), action_page_types[ps.type], count);
     return true;
     }
@@ -936,9 +1140,7 @@ pub struct page_state {
 //
 #[no_mangle]
 unsafe extern "C" fn me_unknown(ps: *mut page_state, p: *mut page) -> c_int {
-    static int me_unknown(struct page_state *ps, struct page *p)
-    {
-    pr_err("%#lx: Unknown page state\n", page_to_pfn(p));
+    pr_err!("%#lx: Unknown page state\n", page_to_pfn(p));
     unlock_page(p);
     return MF_IGNORED;
     }
@@ -947,12 +1149,10 @@ unsafe extern "C" fn me_unknown(ps: *mut page_state, p: *mut page) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn me_pagecache_clean(ps: *mut page_state, p: *mut page) -> c_int {
-    static int me_pagecache_clean(struct page_state *ps, struct page *p)
-    {
-    struct folio *folio = page_folio(p);
-    int ret;
-    struct address_space *mapping;
-    bool extra_pins;
+    let mut folio = page_folio(p);
+    let mut ret = 0;
+pub static mut mapping: *mut c_void = core::ptr::null_mut();
+    let mut extra_pins = 0;
     delete_from_lru_cache(folio);
 //
 // For anonymous folios the only reference left
@@ -960,7 +1160,7 @@ unsafe extern "C" fn me_pagecache_clean(ps: *mut page_state, p: *mut page) -> c_
 //
     if (folio_test_anon(folio)) {
     ret = MF_RECOVERED;
-    goto out;
+// goto;
     }
 //
 // Now truncate the page in the page cache. This is really
@@ -973,7 +1173,7 @@ unsafe extern "C" fn me_pagecache_clean(ps: *mut page_state, p: *mut page) -> c_
     if (!mapping) {
 // Folio has been torn down in the meantime
     ret = MF_FAILED;
-    goto out;
+// goto;
     }
 //
 // The shmem page is kept in page cache instead of truncating
@@ -986,9 +1186,10 @@ unsafe extern "C" fn me_pagecache_clean(ps: *mut page_state, p: *mut page) -> c_
 // Open: to take i_rwsem or not for this? Right now we don't.
 //
     ret = truncate_error_folio(folio, page_to_pfn(p), mapping);
-    if (has_extra_refcount(ps, p, extra_pins))
+    if (has_extra_refcount(ps, p, extra_pins)) {
     ret = MF_FAILED;
-    out:
+    }
+// label;
     folio_unlock(folio);
     return ret;
     }
@@ -999,10 +1200,8 @@ unsafe extern "C" fn me_pagecache_clean(ps: *mut page_state, p: *mut page) -> c_
 //
 #[no_mangle]
 unsafe extern "C" fn me_pagecache_dirty(ps: *mut page_state, p: *mut page) -> c_int {
-    static int me_pagecache_dirty(struct page_state *ps, struct page *p)
-    {
-    struct folio *folio = page_folio(p);
-    struct address_space *mapping = folio_mapping(folio);
+    let mut folio = page_folio(p);
+    let mut mapping = folio_mapping(folio);
 // TBD: print more information about the file.
     if (mapping) {
 //
@@ -1036,33 +1235,32 @@ unsafe extern "C" fn me_pagecache_dirty(ps: *mut page_state, p: *mut page) -> c_
 //
 #[no_mangle]
 unsafe extern "C" fn me_swapcache_dirty(ps: *mut page_state, p: *mut page) -> c_int {
-    static int me_swapcache_dirty(struct page_state *ps, struct page *p)
-    {
-    struct folio *folio = page_folio(p);
-    int ret;
-    let mut extra_pins: bool = false;
+    let mut folio = page_folio(p);
+    let mut ret = 0;
+pub static mut extra_pins: bool = false;
     folio_clear_dirty(folio);
 // Trigger EIO in shmem:
     folio_clear_uptodate(folio);
     ret = delete_from_lru_cache(folio) ? MF_FAILED : MF_DELAYED;
     folio_unlock(folio);
-    if (ret == MF_DELAYED)
+    if (ret == MF_DELAYED) {
     extra_pins = true;
-    if (has_extra_refcount(ps, p, extra_pins))
+    }
+    if (has_extra_refcount(ps, p, extra_pins)) {
     ret = MF_FAILED;
+    }
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn me_swapcache_clean(ps: *mut page_state, p: *mut page) -> c_int {
-    static int me_swapcache_clean(struct page_state *ps, struct page *p)
-    {
-    struct folio *folio = page_folio(p);
-    int ret;
+    let mut folio = page_folio(p);
+    let mut ret = 0;
     swap_cache_del_folio(folio);
     ret = delete_from_lru_cache(folio) ? MF_FAILED : MF_RECOVERED;
     folio_unlock(folio);
-    if (has_extra_refcount(ps, p, false))
+    if (has_extra_refcount(ps, p, false)) {
     ret = MF_FAILED;
+    }
     return ret;
     }
 //
@@ -1073,12 +1271,10 @@ unsafe extern "C" fn me_swapcache_clean(ps: *mut page_state, p: *mut page) -> c_
 //
 #[no_mangle]
 unsafe extern "C" fn me_huge_page(ps: *mut page_state, p: *mut page) -> c_int {
-    static int me_huge_page(struct page_state *ps, struct page *p)
-    {
-    struct folio *folio = page_folio(p);
-    int res;
-    struct address_space *mapping;
-    let mut extra_pins: bool = false;
+    let mut folio = page_folio(p);
+    let mut res = 0;
+pub static mut mapping: *mut c_void = core::ptr::null_mut();
+pub static mut extra_pins: bool = false;
     mapping = folio_mapping(folio);
     if (mapping) {
     res = truncate_error_folio(folio, page_to_pfn(p), mapping);
@@ -1100,8 +1296,9 @@ unsafe extern "C" fn me_huge_page(ps: *mut page_state, p: *mut page) -> c_int {
     res = MF_FAILED;
     }
     }
-    if (has_extra_refcount(ps, p, extra_pins))
+    if (has_extra_refcount(ps, p, extra_pins)) {
     res = MF_FAILED;
+    }
     return res;
     }
 //
@@ -1117,85 +1314,70 @@ unsafe extern "C" fn me_huge_page(ps: *mut page_state, p: *mut page) -> c_int {
 // For any missing state don't attempt recovery.
 //
 
-    static struct page_state error_states[] = {
-//
-// free pages are specially detected outside this table:
-// PG_buddy pages only make a small fraction of all free pages.
-//
-    { head,		head,		MF_MSG_HUGE,		me_huge_page },
-    { sc|dirty,	sc|dirty,	MF_MSG_DIRTY_SWAPCACHE,	me_swapcache_dirty },
-    { sc|dirty,	sc,		MF_MSG_CLEAN_SWAPCACHE,	me_swapcache_clean },
-    { mlock|dirty,	mlock|dirty,	MF_MSG_DIRTY_MLOCKED_LRU,	me_pagecache_dirty },
-    { mlock|dirty,	mlock,		MF_MSG_CLEAN_MLOCKED_LRU,	me_pagecache_clean },
-    { unevict|dirty, unevict|dirty,	MF_MSG_DIRTY_UNEVICTABLE_LRU,	me_pagecache_dirty },
-    { unevict|dirty, unevict,	MF_MSG_CLEAN_UNEVICTABLE_LRU,	me_pagecache_clean },
-    { lru|dirty,	lru|dirty,	MF_MSG_DIRTY_LRU,	me_pagecache_dirty },
-    { lru|dirty,	lru,		MF_MSG_CLEAN_LRU,	me_pagecache_clean },
-//
-// Catchall entry: must be at end.
-//
-    { 0,		0,		MF_MSG_UNKNOWN,	me_unknown },
-    };
+pub static mut page_state: usize = 0;
 
-    static void update_per_node_mf_stats(unsigned long pfn,
-    enum mf_result result)
-    {
-    let mut nid: c_int = MAX_NUMNODES;
-    struct memory_failure_stats *mf_stats = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn update_per_node_mf_stats(pfn: c_ulong, result: mf_result) {
+pub static mut nid: c_int = 0;
+    let mut mf_stats = core::ptr::null_mut();
     nid = pfn_to_nid(pfn);
     if (unlikely(nid < 0 || nid >= MAX_NUMNODES)) {
     WARN_ONCE(1, "Memory failure: pfn=%#lx, invalid nid=%d", pfn, nid);
     return;
     }
     mf_stats = &NODE_DATA(nid).mf_stats;
-    switch (result) {
-    case MF_IGNORED:
+    match (result) {
+    MF_IGNORED => {
     ++mf_stats.ignored;
-    break;
-    case MF_FAILED:
+    // break;
+    }
+    MF_FAILED => {
     ++mf_stats.failed;
-    break;
-    case MF_DELAYED:
+    // break;
+    }
+    MF_DELAYED => {
     ++mf_stats.delayed;
-    break;
-    case MF_RECOVERED:
+    // break;
+    }
+    MF_RECOVERED => {
     ++mf_stats.recovered;
-    break;
-    default:
+    // break;
+    }
+    _ => {
     WARN_ONCE(1, "Memory failure: mf_result=%d is not properly handled", result);
-    break;
+    // break;
+    }
     }
     ++mf_stats.total;
     }
-    static bool panic_on_unrecoverable_mf(enum mf_action_page_type type,
-    enum mf_result result)
-    {
-    if (!sysctl_panic_on_unrecoverable_mf)
+#[no_mangle]
+pub unsafe extern "C" fn panic_on_unrecoverable_mf(type: mf_action_page_type, result: mf_result) -> bool {
+    if (!sysctl_panic_on_unrecoverable_mf) {
     return false;
-    let mut type: return = = MF_MSG_KERNEL && result == MF_IGNORED;
+    }
+pub static mut type: return = 0;
     }
 //
 // "Dirty/Clean" indication is not 100% accurate due to the possibility of
 // setting PG_dirty outside page lock. See also comment above set_page_dirty().
 //
-    static int action_result(unsigned long pfn, enum mf_action_page_type type,
-    enum mf_result result)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn action_result(pfn: c_ulong, type: mf_action_page_type, result: mf_result) -> c_int {
     trace_memory_failure_event(pfn, type, result);
     if (type != MF_MSG_ALREADY_POISONED && type != MF_MSG_PFN_MAP) {
     num_poisoned_pages_inc(pfn);
     update_per_node_mf_stats(pfn, result);
     }
-    pr_err("%#lx: recovery action for %s: %s\n",
+    pr_err!("%#lx: recovery action for %s: %s\n",
     pfn, action_page_types[type], action_name[result]);
-    if (panic_on_unrecoverable_mf(type, result))
+    if (panic_on_unrecoverable_mf(type, result)) {
     panic("Memory failure: %#lx: unrecoverable page", pfn);
+    }
     return (result == MF_RECOVERED || result == MF_DELAYED) ? 0 : -EBUSY;
     }
-    static int page_action(struct page_state *ps, struct page *p,
-    unsigned long pfn)
-    {
-    int result;
+#[no_mangle]
+pub unsafe extern "C" fn page_action(ps: *mut page_state, p: *mut page, pfn: c_ulong) -> c_int {
+    let mut result = 0;
 // page p should be unlocked after returning from ps->action().
     result = ps.action(ps, p);
 // Could do more checks here if page looks ok
@@ -1206,22 +1388,17 @@ unsafe extern "C" fn me_huge_page(ps: *mut page_state, p: *mut page) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn PageHWPoisonTakenOff(page: *mut page) -> bool {
-    static inline bool PageHWPoisonTakenOff(struct page *page)
-    {
     return PageHWPoison(page) && page_private(page) == MAGIC_HWPOISON;
     }
 #[no_mangle]
 pub unsafe extern "C" fn SetPageHWPoisonTakenOff(page: *mut page) {
-    void SetPageHWPoisonTakenOff(struct page *page)
-    {
     set_page_private(page, MAGIC_HWPOISON);
     }
 #[no_mangle]
 pub unsafe extern "C" fn ClearPageHWPoisonTakenOff(page: *mut page) {
-    void ClearPageHWPoisonTakenOff(struct page *page)
-    {
-    if (PageHWPoison(page))
+    if (PageHWPoison(page)) {
     set_page_private(page, 0);
+    }
     }
 //
 // Return true if a page type of a given page is supported by hwpoison
@@ -1231,13 +1408,13 @@ pub unsafe extern "C" fn ClearPageHWPoisonTakenOff(page: *mut page) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn HWPoisonHandlable(page: *mut page, flags: c_ulong) -> bool {
-    static inline bool HWPoisonHandlable(struct page *page, unsigned long flags)
-    {
-    if (PageSlab(page))
+    if (PageSlab(page)) {
     return false;
+    }
 // Soft offline could migrate movable_ops pages
-    if ((flags & MF_SOFT_OFFLINE) && page_has_movable_ops(page))
+    if ((flags & MF_SOFT_OFFLINE) && page_has_movable_ops(page)) {
     return true;
+    }
     return PageLRU(page) || is_free_buddy_page(page);
     }
 //
@@ -1247,13 +1424,12 @@ pub unsafe extern "C" fn HWPoisonHandlable(page: *mut page, flags: c_ulong) -> b
 //
 #[no_mangle]
 pub unsafe extern "C" fn is_kernel_owned_page(page: *mut page) -> bool {
-    static inline bool is_kernel_owned_page(struct page *page)
-    {
-    struct page *head;
-    bool kernel_owned;
+pub static mut head: *mut c_void = core::ptr::null_mut();
+    let mut kernel_owned = 0;
 // PG_reserved is a per-page flag, never set on a compound page.
-    if (PageReserved(page))
+    if (PageReserved(page)) {
     return true;
+    }
 //
 // Page-type bits live only on the head page, so resolve any tail
 // first.  The check takes no refcount; recheck the head afterwards
@@ -1263,26 +1439,26 @@ pub unsafe extern "C" fn is_kernel_owned_page(page: *mut page) -> bool {
 // harmless: where a wrong verdict could panic, memory_failure() has
 // already set PageHWPoison, which bars the page from the allocator.
 //
-    retry:
+// label;
     head = compound_head(page);
     kernel_owned = PageSlab(head) || PageTable(head) ||
     PageLargeKmalloc(head);
-    if (head != compound_head(page))
-    goto retry;
+    if (head != compound_head(page)) {
+// goto;
+    }
     return kernel_owned;
     }
 #[no_mangle]
 unsafe extern "C" fn __get_hwpoison_page(page: *mut page, flags: c_ulong) -> c_int {
-    static int __get_hwpoison_page(struct page *page, unsigned long flags)
-    {
-    struct folio *folio = page_folio(page);
-    let mut ret: c_int = 0;
-    let mut hugetlb: bool = false;
+    let mut folio = page_folio(page);
+pub static mut ret: c_int = 0;
+pub static mut hugetlb: bool = false;
     ret = get_hwpoison_hugetlb_folio(folio, &hugetlb, false);
     if (hugetlb) {
 // Make sure hugetlb demotion did not happen from under us.
-    if (folio == page_folio(page))
+    if (folio == page_folio(page)) {
     return ret;
+    }
     if (ret > 0) {
     folio_put(folio);
     folio = page_folio(page);
@@ -1293,12 +1469,14 @@ unsafe extern "C" fn __get_hwpoison_page(page: *mut page, flags: c_ulong) -> c_i
 // unsupported type of folio in order to reduce the risk of unexpected
 // races caused by taking a folio refcount.
 //
-    if (!HWPoisonHandlable(&folio.page, flags))
+    if (!HWPoisonHandlable(&folio.page, flags)) {
     return -EBUSY;
+    }
     if (folio_try_get(folio)) {
-    if (folio == page_folio(page))
+    if (folio == page_folio(page)) {
     return 1;
-    pr_info("%#lx cannot catch tail\n", page_to_pfn(page));
+    }
+    pr_info!("%#lx cannot catch tail\n", page_to_pfn(page));
     folio_put(folio);
     }
     return 0;
@@ -1306,12 +1484,11 @@ unsafe extern "C" fn __get_hwpoison_page(page: *mut page, flags: c_ulong) -> c_i
 pub const GET_PAGE_MAX_RETRY_NUM: c_int = 3;
 #[no_mangle]
 unsafe extern "C" fn get_any_page(p: *mut page, flags: c_ulong) -> c_int {
-    static int get_any_page(struct page *p, unsigned long flags)
-    {
-    let mut ret: c_int = 0, pass = 0;
-    let mut count_increased: bool = false;
-    if (flags & MF_COUNT_INCREASED)
+pub static mut ret: c_int = 0;
+pub static mut count_increased: bool = false;
+    if (flags & MF_COUNT_INCREASED) {
     count_increased = true;
+    }
 //
 // Page types we know are kernel-owned and cannot be recovered.
 // Short-circuit before the shake_page() / retry loop, which
@@ -1319,27 +1496,30 @@ unsafe extern "C" fn get_any_page(p: *mut page, flags: c_ulong) -> c_int {
 // Drop the caller's reference if MF_COUNT_INCREASED took one.
 //
     if (is_kernel_owned_page(p)) {
-    if (count_increased)
+    if (count_increased) {
     put_page(p);
-    ret = -ENOTRECOVERABLE;
-    goto out;
     }
-    try_again:
+    ret = -ENOTRECOVERABLE;
+// goto;
+    }
+// label;
     if (!count_increased) {
     ret = __get_hwpoison_page(p, flags);
     if (!ret) {
     if (page_count(p)) {
 // We raced with an allocation, retry.
-    if (pass++ < GET_PAGE_MAX_RETRY_NUM)
-    goto try_again;
+    if (pass++ < GET_PAGE_MAX_RETRY_NUM) {
+// goto;
+    }
     ret = -EBUSY;
     } else if (!PageHuge(p) && !is_free_buddy_page(p)) {
 // We raced with put_page, retry.
-    if (pass++ < GET_PAGE_MAX_RETRY_NUM)
-    goto try_again;
+    if (pass++ < GET_PAGE_MAX_RETRY_NUM) {
+// goto;
+    }
     ret = -EIO;
     }
-    goto out;
+// goto;
     } else if (ret == -EBUSY) {
 //
 // We raced with (possibly temporary) unhandlable
@@ -1347,10 +1527,10 @@ unsafe extern "C" fn get_any_page(p: *mut page, flags: c_ulong) -> c_int {
 //
     if (pass++ < GET_PAGE_MAX_RETRY_NUM) {
     shake_page(p);
-    goto try_again;
+// goto;
     }
     ret = -EIO;
-    goto out;
+// goto;
     }
     }
     if (PageHuge(p) || HWPoisonHandlable(p, flags)) {
@@ -1364,38 +1544,40 @@ unsafe extern "C" fn get_any_page(p: *mut page, flags: c_ulong) -> c_int {
     put_page(p);
     shake_page(p);
     count_increased = false;
-    goto try_again;
+// goto;
     }
     put_page(p);
     ret = -EIO;
     }
-    out:
-    if (ret == -EIO || ret == -ENOTRECOVERABLE)
-    pr_err("%#lx: unhandlable page.\n", page_to_pfn(p));
+// label;
+    if (ret == -EIO || ret == -ENOTRECOVERABLE) {
+    pr_err!("%#lx: unhandlable page.\n", page_to_pfn(p));
+    }
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn __get_unpoison_page(page: *mut page) -> c_int {
-    static int __get_unpoison_page(struct page *page)
-    {
-    struct folio *folio = page_folio(page);
-    let mut ret: c_int = 0;
-    let mut hugetlb: bool = false;
+    let mut folio = page_folio(page);
+pub static mut ret: c_int = 0;
+pub static mut hugetlb: bool = false;
     ret = get_hwpoison_hugetlb_folio(folio, &hugetlb, true);
     if (hugetlb) {
 // Make sure hugetlb demotion did not happen from under us.
-    if (folio == page_folio(page))
+    if (folio == page_folio(page)) {
     return ret;
-    if (ret > 0)
+    }
+    if (ret > 0) {
     folio_put(folio);
+    }
     }
 //
 // PageHWPoisonTakenOff pages are not only marked as PG_hwpoison,
 // but also isolated from buddy freelist, so need to identify the
 // state and have to cancel both operations to unpoison.
 //
-    if (PageHWPoisonTakenOff(page))
+    if (PageHWPoisonTakenOff(page)) {
     return -EHWPOISON;
+    }
     return get_page_unless_zero(page) ? 1 : 0;
     }
 //
@@ -1430,14 +1612,14 @@ unsafe extern "C" fn __get_unpoison_page(page: *mut page) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn get_hwpoison_page(p: *mut page, flags: c_ulong) -> c_int {
-    static int get_hwpoison_page(struct page *p, unsigned long flags)
-    {
-    int ret;
+    let mut ret = 0;
     zone_pcp_disable(page_zone(p));
-    if (flags & MF_UNPOISON)
+    if (flags & MF_UNPOISON) {
     ret = __get_unpoison_page(p);
-    else
+    }
+    else {
     ret = get_any_page(p, flags);
+    }
     zone_pcp_enable(page_zone(p));
     return ret;
     }
@@ -1447,12 +1629,10 @@ unsafe extern "C" fn get_hwpoison_page(p: *mut page, flags: c_ulong) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn unmap_poisoned_folio(folio: *mut folio, pfn: c_ulong, must_kill: bool) -> c_int {
-    int unmap_poisoned_folio(struct folio *folio, unsigned long pfn, bool must_kill)
-    {
-    let mut ttu: enum ttu_flags = TTU_IGNORE_MLOCK | TTU_SYNC | TTU_HWPOISON;
-    struct address_space *mapping;
+pub static mut ttu: ttu_flags = 0;
+pub static mut mapping: *mut c_void = core::ptr::null_mut();
     if (folio_test_swapcache(folio)) {
-    pr_err("%#lx: keeping poisoned page in swap cache\n", pfn);
+    pr_err!("%#lx: keeping poisoned page in swap cache\n", pfn);
     ttu &= ~TTU_HWPOISON;
     }
 //
@@ -1468,7 +1648,7 @@ pub unsafe extern "C" fn unmap_poisoned_folio(folio: *mut folio, pfn: c_ulong, m
     folio_set_dirty(folio);
     } else {
     ttu &= ~TTU_HWPOISON;
-    pr_info("%#lx: corrupted page was clean: dropped without side effects\n",
+    pr_info!("%#lx: corrupted page was clean: dropped without side effects\n",
     pfn);
     }
     }
@@ -1482,7 +1662,7 @@ pub unsafe extern "C" fn unmap_poisoned_folio(folio: *mut folio, pfn: c_ulong, m
 //
     mapping = hugetlb_folio_mapping_lock_write(folio);
     if (!mapping) {
-    pr_info("%#lx: could not lock mapping for mapped hugetlb folio\n",
+    pr_info!("%#lx: could not lock mapping for mapped hugetlb folio\n",
     folio_pfn(folio));
     return -EBUSY;
     }
@@ -1497,28 +1677,30 @@ pub unsafe extern "C" fn unmap_poisoned_folio(folio: *mut folio, pfn: c_ulong, m
 // Do all that is necessary to remove user space mappings. Unmap
 // the pages and send SIGBUS to the processes if the data was dirty.
 //
-    static bool hwpoison_user_mappings(struct folio *folio, struct page *p,
-    unsigned long pfn, int flags)
-    {
-    LIST_HEAD(tokill);
-    bool unmap_success;
-    bool forcekill;
-    let mut mlocked: bool = folio_test_mlocked(folio);
+#[no_mangle]
+pub unsafe extern "C" fn hwpoison_user_mappings(folio: *mut folio, p: *mut page, pfn: c_ulong, flags: c_int) -> bool {
+pub static mut tokill: usize = 0;
+    let mut unmap_success = 0;
+    let mut forcekill = 0;
+pub static mut mlocked: bool = false;
 //
 // Here we are interested only in user-mapped pages, so skip any
 // other types of pages.
 //
     if (folio_test_reserved(folio) || folio_test_slab(folio) ||
-    folio_test_pgtable(folio) || folio_test_offline(folio))
+    folio_test_pgtable(folio) || folio_test_offline(folio)) {
     return true;
-    if (!(folio_test_lru(folio) || folio_test_hugetlb(folio)))
+    }
+    if (!(folio_test_lru(folio) || folio_test_hugetlb(folio))) {
     return true;
+    }
 //
 // This check implies we don't kill processes if their pages
 // are in the swap cache early. Those are always late kills.
 //
-    if (!folio_mapped(folio))
+    if (!folio_mapped(folio)) {
     return true;
+    }
 //
 // First collect all the processes that have the page
 // mapped in dirty form.  This has to be done before try_to_unmap,
@@ -1526,15 +1708,17 @@ pub unsafe extern "C" fn unmap_poisoned_folio(folio: *mut folio, pfn: c_ulong, m
 //
     collect_procs(folio, p, &tokill, flags & MF_ACTION_REQUIRED);
     unmap_success = !unmap_poisoned_folio(folio, pfn, flags & MF_MUST_KILL);
-    if (!unmap_success)
-    pr_err("%#lx: failed to unmap page (folio mapcount=%d)\n",
+    if (!unmap_success) {
+    pr_err!("%#lx: failed to unmap page (folio mapcount=%d)\n",
     pfn, folio_mapcount(folio));
+    }
 //
 // try_to_unmap() might put mlocked page in lru cache, so call
 // shake_page() again to ensure that it's flushed.
 //
-    if (mlocked)
+    if (mlocked) {
     shake_folio(folio);
+    }
 //
 // Now that the dirty bit has been propagated to the
 // struct page and all unmaps done we can decide if
@@ -1550,23 +1734,25 @@ pub unsafe extern "C" fn unmap_poisoned_folio(folio: *mut folio, pfn: c_ulong, m
     kill_procs(&tokill, forcekill, pfn, flags);
     return unmap_success;
     }
-    static int identify_page_state(unsigned long pfn, struct page *p,
-    unsigned long page_flags)
-    {
-    struct page_state *ps;
+#[no_mangle]
+pub unsafe extern "C" fn identify_page_state(pfn: c_ulong, p: *mut page, page_flags: c_ulong) -> c_int {
+pub static mut ps: *mut c_void = core::ptr::null_mut();
 //
 // The first check uses the current page flags which may not have any
 // relevant information. The second check with the saved page flags is
 // carried out only if the first check can't determine the page status.
 //
-    for (ps = error_states;; ps++)
+    for (ps = error_states;; ps++) {
     if ((p.flags.f & ps.mask) == ps.res)
     break;
+    }
     page_flags |= (p.flags.f & (1UL << PG_dirty));
-    if (!ps.mask)
+    if (!ps.mask) {
     for (ps = error_states;; ps++)
-    if ((page_flags & ps.mask) == ps.res)
+    }
+    if ((page_flags & ps.mask) == ps.res) {
     break;
+    }
     return page_action(ps, p, pfn);
     }
 //
@@ -1574,25 +1760,25 @@ pub unsafe extern "C" fn unmap_poisoned_folio(folio: *mut folio, pfn: c_ulong, m
 // there is still more to do, hence the page refcount we took earlier
 // is still needed.
 //
-    static int try_to_split_thp_page(struct page *page, unsigned int new_order,
-    bool release)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn try_to_split_thp_page(page: *mut page, new_order: c_uint, release: bool) -> c_int {
+    let mut ret = 0;
     lock_page(page);
     ret = split_huge_page_to_order(page, new_order);
     unlock_page(page);
-    if (ret && release)
+    if (ret && release) {
     put_page(page);
+    }
     return ret;
     }
-    static void unmap_and_kill(struct list_head *to_kill, unsigned long pfn,
-    struct address_space *mapping, pgoff_t index, int flags)
-    {
-    struct to_kill *tk;
-    let mut size: c_ulong = 0;
-    list_for_each_entry(tk, to_kill, nd)
+#[no_mangle]
+pub unsafe extern "C" fn unmap_and_kill(to_kill: *mut list_head, pfn: c_ulong, mapping: *mut address_space, index: pgoff_t, flags: c_int) {
+pub static mut tk: *mut c_void = core::ptr::null_mut();
+pub static mut size: c_ulong = 0;
+    list_for_each_entry(tk, to_kill, nd) {
     if (tk.size_shift)
     size = max(size, 1UL << tk.size_shift);
+    }
     if (size) {
 //
 // Unmap the largest mapping to avoid breaking up device-dax
@@ -1600,7 +1786,7 @@ pub unsafe extern "C" fn unmap_poisoned_folio(folio: *mut folio, pfn: c_ulong, m
 // mapping being torn down is communicated in siginfo, see
 // kill_proc()
 //
-    let mut start: loff_t = ((loff_t)index << PAGE_SHIFT) & ~(size - 1);
+pub static mut start: loff_t = 0;
     unmap_mapping_range(mapping, start, size, 0);
     }
     kill_procs(to_kill, !!(flags & MF_MUST_KILL), pfn, flags);
@@ -1614,13 +1800,12 @@ pub unsafe extern "C" fn unmap_poisoned_folio(folio: *mut folio, pfn: c_ulong, m
 // hwpoison, such that, if a subpage of a compound page is poisoned,
 // simply mark the compound head page is by far sufficient.
 //
-    static int mf_generic_kill_procs(unsigned long long pfn, int flags,
-    struct dev_pagemap *pgmap)
-    {
-    struct folio *folio = pfn_folio(pfn);
-    LIST_HEAD(to_kill);
-    dax_entry_t cookie;
-    let mut rc: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn mf_generic_kill_procs(pfn: unsigned long long, flags: c_int, pgmap: *mut dev_pagemap) -> c_int {
+    let mut folio = pfn_folio(pfn);
+pub static mut to_kill: usize = 0;
+    let mut cookie;
+pub static mut rc: c_int = 0;
 //
 // Prevent the inode from being freed while we are interrogating
 // the address_space, typically this would be handled by
@@ -1629,23 +1814,27 @@ pub unsafe extern "C" fn unmap_poisoned_folio(folio: *mut folio, pfn: c_ulong, m
 // poison signaling is complete.
 //
     cookie = dax_lock_folio(folio);
-    if (!cookie)
+    if (!cookie) {
     return -EBUSY;
+    }
     if (hwpoison_filter(&folio.page)) {
     rc = -EOPNOTSUPP;
-    goto unlock;
+// goto;
     }
-    switch (pgmap.type) {
-    case MEMORY_DEVICE_PRIVATE:
-    case MEMORY_DEVICE_COHERENT:
+    match (pgmap.type) {
+    MEMORY_DEVICE_PRIVATE => {
+    }
+    MEMORY_DEVICE_COHERENT => {
 //
 // TODO: Handle device pages which may need coordination
 // with device-side memory.
 //
     rc = -ENXIO;
-    goto unlock;
-    default:
-    break;
+// goto;
+    }
+    _ => {
+    // break;
+    }
     }
 //
 // Use this flag as an indication that the dax page has been
@@ -1661,7 +1850,7 @@ pub unsafe extern "C" fn unmap_poisoned_folio(folio: *mut folio, pfn: c_ulong, m
     flags |= MF_ACTION_REQUIRED | MF_MUST_KILL;
     collect_procs(folio, &folio.page, &to_kill, true);
     unmap_and_kill(&to_kill, pfn, folio.mapping, folio.index, flags);
-    unlock:
+// label;
     dax_unlock_folio(folio, cookie);
     return rc;
     }
@@ -1673,24 +1862,26 @@ pub unsafe extern "C" fn unmap_poisoned_folio(folio: *mut folio, pfn: c_ulong, m
 // @count:	length of the range, in unit of PAGE_SIZE
 // @mf_flags:	memory failure flags
 //
-    int mf_dax_kill_procs(struct address_space *mapping, pgoff_t index,
-    unsigned long count, int mf_flags)
-    {
-    LIST_HEAD(to_kill);
-    dax_entry_t cookie;
-    struct page *page;
-    let mut end: usize = index + count;
-    let mut pre_remove: bool = mf_flags & MF_MEM_PRE_REMOVE;
+#[no_mangle]
+pub unsafe extern "C" fn mf_dax_kill_procs(mapping: *mut address_space, index: pgoff_t, count: c_ulong, mf_flags: c_int) -> c_int {
+pub static mut to_kill: usize = 0;
+    let mut cookie;
+pub static mut page: *mut c_void = core::ptr::null_mut();
+pub static mut end: usize = 0;
+pub static mut pre_remove: bool = false;
     mf_flags |= MF_ACTION_REQUIRED | MF_MUST_KILL;
-    for (; index < end; index++) {
+    while (index < end) {
     page = core::ptr::null_mut();
     cookie = dax_lock_mapping_entry(mapping, index, &page);
-    if (!cookie)
+    if (!cookie) {
     return -EBUSY;
-    if (!page)
-    goto unlock;
-    if (!pre_remove)
+    }
+    if (!page) {
+// goto;
+    }
+    if (!pre_remove) {
     SetPageHWPoison(page);
+    }
 //
 // The pre_remove case is revoking access, the memory is still
 // good and could theoretically be put back into service.
@@ -1698,7 +1889,7 @@ pub unsafe extern "C" fn unmap_poisoned_folio(folio: *mut folio, pfn: c_ulong, m
     collect_procs_fsdax(page, mapping, index, &to_kill, pre_remove);
     unmap_and_kill(&to_kill, page_to_pfn(page), mapping,
     index, mf_flags);
-    unlock:
+// label;
     dax_unlock_mapping_entry(mapping, index, cookie);
     }
     return 0;
@@ -1716,28 +1907,29 @@ pub struct raw_hwp_page {
     pub page: *mut page,
 }
 
-    static inline struct llist_head *raw_hwp_list_head(struct folio *folio)
-    {
-    return (struct llist_head *)&folio._hugetlb_hwpoison;
+#[no_mangle]
+pub unsafe extern "C" fn raw_hwp_list_head(folio: *mut folio) -> *mut c_void {
+    return &folio._hugetlb_hwpoison;
     }
 #[no_mangle]
 pub unsafe extern "C" fn is_raw_hwpoison_page_in_hugepage(page: *mut page) -> bool {
-    bool is_raw_hwpoison_page_in_hugepage(struct page *page)
-    {
-    struct llist_head *raw_hwp_head;
-    struct raw_hwp_page *p;
-    struct folio *folio = page_folio(page);
-    let mut ret: bool = false;
-    if (!folio_test_hwpoison(folio))
+pub static mut raw_hwp_head: *mut c_void = core::ptr::null_mut();
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    let mut folio = page_folio(page);
+pub static mut ret: bool = false;
+    if (!folio_test_hwpoison(folio)) {
     return false;
-    if (!folio_test_hugetlb(folio))
+    }
+    if (!folio_test_hugetlb(folio)) {
     return PageHWPoison(page);
+    }
 //
 // When RawHwpUnreliable is set, kernel lost track of which subpages
 // are HWPOISON. So return as if ALL subpages are HWPOISONed.
 //
-    if (folio_test_hugetlb_raw_hwp_unreliable(folio))
+    if (folio_test_hugetlb_raw_hwp_unreliable(folio)) {
     return true;
+    }
     mutex_lock(&mf_mutex);
     raw_hwp_head = raw_hwp_list_head(folio);
     llist_for_each_entry(p, raw_hwp_head.first, node) {
@@ -1751,19 +1943,20 @@ pub unsafe extern "C" fn is_raw_hwpoison_page_in_hugepage(page: *mut page) -> bo
     }
 #[no_mangle]
 unsafe extern "C" fn __folio_free_raw_hwp(folio: *mut folio, move_flag: bool) -> c_ulong {
-    static unsigned long __folio_free_raw_hwp(struct folio *folio, bool move_flag)
-    {
-    struct llist_node *head;
-    struct raw_hwp_page *p, *next;
-    let mut count: c_ulong = 0;
+pub static mut head: *mut c_void = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+pub static mut count: c_ulong = 0;
     head = llist_del_all(raw_hwp_list_head(folio));
     llist_for_each_entry_safe(p, next, head, node) {
-    if (move_flag)
+    if (move_flag) {
     SetPageHWPoison(p.page);
-    else
+    }
+    else {
     num_poisoned_pages_sub(page_to_pfn(p.page), 1);
+    }
     kfree(p);
-    count++;
+    count += 1;
     }
     return count;
     }
@@ -1774,25 +1967,25 @@ unsafe extern "C" fn __folio_free_raw_hwp(folio: *mut folio, move_flag: bool) ->
 //
 #[no_mangle]
 unsafe extern "C" fn hugetlb_update_hwpoison(folio: *mut folio, page: *mut page) -> c_int {
-    static int hugetlb_update_hwpoison(struct folio *folio, struct page *page)
-    {
-    struct llist_head *head;
-    struct raw_hwp_page *raw_hwp;
-    struct raw_hwp_page *p;
-    let mut ret: c_int = folio_test_set_hwpoison(folio) ? MF_HUGETLB_FOLIO_PRE_POISONED : 0;
+pub static mut head: *mut c_void = core::ptr::null_mut();
+pub static mut raw_hwp: *mut c_void = core::ptr::null_mut();
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
 //
 // Once the hwpoison hugepage has lost reliable raw error info,
 // there is little meaning to keep additional error info precisely,
 // so skip to add additional raw error info.
 //
-    if (folio_test_hugetlb_raw_hwp_unreliable(folio))
+    if (folio_test_hugetlb_raw_hwp_unreliable(folio)) {
     return MF_HUGETLB_FOLIO_PRE_POISONED;
+    }
     head = raw_hwp_list_head(folio);
     llist_for_each_entry(p, head.first, node) {
-    if (p.page == page)
+    if (p.page == page) {
     return MF_HUGETLB_PAGE_PRE_POISONED;
     }
-    raw_hwp = kmalloc_obj(struct raw_hwp_page, GFP_ATOMIC);
+    }
+    raw_hwp = kmalloc_obj(raw_hwp_page, GFP_ATOMIC);
     if (raw_hwp) {
     raw_hwp.page = page;
     llist_add(&raw_hwp.node, head);
@@ -1813,45 +2006,45 @@ unsafe extern "C" fn hugetlb_update_hwpoison(folio: *mut folio, page: *mut page)
     }
 #[no_mangle]
 unsafe extern "C" fn folio_free_raw_hwp(folio: *mut folio, move_flag: bool) -> c_ulong {
-    static unsigned long folio_free_raw_hwp(struct folio *folio, bool move_flag)
-    {
 //
 // hugetlb_vmemmap_optimized hugepages can't be freed because struct
 // pages for tail pages are required but they don't exist.
 //
-    if (move_flag && folio_test_hugetlb_vmemmap_optimized(folio))
+    if (move_flag && folio_test_hugetlb_vmemmap_optimized(folio)) {
     return 0;
+    }
 //
 // hugetlb_raw_hwp_unreliable hugepages shouldn't be unpoisoned by
 // definition.
 //
-    if (folio_test_hugetlb_raw_hwp_unreliable(folio))
+    if (folio_test_hugetlb_raw_hwp_unreliable(folio)) {
     return 0;
+    }
     return __folio_free_raw_hwp(folio, move_flag);
     }
 #[no_mangle]
 pub unsafe extern "C" fn folio_clear_hugetlb_hwpoison(folio: *mut folio) {
-    void folio_clear_hugetlb_hwpoison(struct folio *folio)
-    {
-    if (folio_test_hugetlb_raw_hwp_unreliable(folio))
+    if (folio_test_hugetlb_raw_hwp_unreliable(folio)) {
     return;
-    if (folio_test_hugetlb_vmemmap_optimized(folio))
+    }
+    if (folio_test_hugetlb_vmemmap_optimized(folio)) {
     return;
+    }
     folio_clear_hwpoison(folio);
     folio_free_raw_hwp(folio, true);
     }
-    static int get_huge_page_for_hwpoison(unsigned long pfn, int flags,
-    bool *migratable_cleared)
-    {
-    struct page *page = pfn_to_page(pfn);
-    struct folio *folio;
-    let mut count_increased: bool = false;
-    int ret, rc;
+#[no_mangle]
+pub unsafe extern "C" fn get_huge_page_for_hwpoison(pfn: c_ulong, flags: c_int, migratable_cleared: *mut bool) -> c_int {
+    let mut page = pfn_to_page(pfn);
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut count_increased: bool = false;
+    let mut ret = 0;
+    let mut rc = 0;
     spin_lock_irq(&hugetlb_lock);
     folio = page_folio(page);
     if (!folio_test_hugetlb(folio)) {
     ret = MF_HUGETLB_NON_HUGEPAGE;
-    goto out_unlock;
+// goto;
     } else if (flags & MF_COUNT_INCREASED) {
     ret = MF_HUGETLB_IN_USED;
     count_increased = true;
@@ -1866,13 +2059,14 @@ pub unsafe extern "C" fn folio_clear_hugetlb_hwpoison(folio: *mut folio) {
     }
     } else {
     ret = MF_HUGETLB_RETRY;
-    if (!(flags & MF_NO_RETRY))
-    goto out_unlock;
+    if (!(flags & MF_NO_RETRY)) {
+// goto;
+    }
     }
     rc = hugetlb_update_hwpoison(folio, page);
     if (rc >= MF_HUGETLB_FOLIO_PRE_POISONED) {
     ret = rc;
-    goto out_unlock;
+// goto;
     }
 //
 // Clearing hugetlb_migratable for hwpoisoned hugepages to prevent them
@@ -1884,10 +2078,11 @@ pub unsafe extern "C" fn folio_clear_hugetlb_hwpoison(folio: *mut folio) {
     }
     spin_unlock_irq(&hugetlb_lock);
     return ret;
-    out_unlock:
+// label;
     spin_unlock_irq(&hugetlb_lock);
-    if (count_increased)
+    if (count_increased) {
     folio_put(folio);
+    }
     return ret;
     }
 //
@@ -1905,47 +2100,56 @@ pub unsafe extern "C" fn folio_clear_hugetlb_hwpoison(folio: *mut folio) {
 //
 #[no_mangle]
 unsafe extern "C" fn try_memory_failure_hugetlb(pfn: c_ulong, flags: c_int) -> c_int {
-    static int try_memory_failure_hugetlb(unsigned long pfn, int flags)
-    {
-    int res, rv;
-    struct page *p = pfn_to_page(pfn);
-    struct folio *folio;
-    unsigned long page_flags;
-    let mut migratable_cleared: bool = false;
-    retry:
+    let mut res = 0;
+    let mut rv = 0;
+    let mut p = pfn_to_page(pfn);
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut page_flags = 0;
+pub static mut migratable_cleared: bool = false;
+// label;
     res = get_huge_page_for_hwpoison(pfn, flags, &migratable_cleared);
-    switch (res) {
-    case MF_HUGETLB_NON_HUGEPAGE:	/* fallback to normal page handling */
+    match (res) {
+    MF_HUGETLB_NON_HUGEPAGE => {
     return -ENOENT;
-    case MF_HUGETLB_RETRY:
+    }
+    MF_HUGETLB_RETRY => {
     if (!(flags & MF_NO_RETRY)) {
     flags |= MF_NO_RETRY;
-    goto retry;
+// goto;
     }
     return action_result(pfn, MF_MSG_GET_HWPOISON, MF_IGNORED);
-    case MF_HUGETLB_FOLIO_PRE_POISONED:
-    case MF_HUGETLB_PAGE_PRE_POISONED:
+    }
+    MF_HUGETLB_FOLIO_PRE_POISONED => {
+    }
+    MF_HUGETLB_PAGE_PRE_POISONED => {
     rv = -EHWPOISON;
-    if (flags & MF_ACTION_REQUIRED)
+    if (flags & MF_ACTION_REQUIRED) {
     rv = kill_accessing_process(current, pfn, flags);
-    if (res == MF_HUGETLB_PAGE_PRE_POISONED)
+    }
+    if (res == MF_HUGETLB_PAGE_PRE_POISONED) {
     action_result(pfn, MF_MSG_ALREADY_POISONED, MF_FAILED);
-    else
+    }
+    else {
     action_result(pfn, MF_MSG_HUGE, MF_FAILED);
+    }
     return rv;
-    default:
-    WARN_ON((res != MF_HUGETLB_FREED) && (res != MF_HUGETLB_IN_USED));
-    break;
+    }
+    _ => {
+    WARN_ON!((res != MF_HUGETLB_FREED) && (res != MF_HUGETLB_IN_USED));
+    // break;
+    }
     }
     folio = page_folio(p);
     folio_lock(folio);
     if (hwpoison_filter(p)) {
     folio_clear_hugetlb_hwpoison(folio);
-    if (migratable_cleared)
+    if (migratable_cleared) {
     folio_set_hugetlb_migratable(folio);
+    }
     folio_unlock(folio);
-    if (res == MF_HUGETLB_IN_USED)
+    if (res == MF_HUGETLB_IN_USED) {
     folio_put(folio);
+    }
     return -EOPNOTSUPP;
     }
 //
@@ -1972,33 +2176,28 @@ unsafe extern "C" fn try_memory_failure_hugetlb(pfn: c_ulong, flags: c_int) -> c
 
 #[no_mangle]
 pub unsafe extern "C" fn try_memory_failure_hugetlb(pfn: c_ulong, flags: c_int) -> c_int {
-    static inline int try_memory_failure_hugetlb(unsigned long pfn, int flags)
-    {
     return -ENOENT;
     }
 #[no_mangle]
 pub unsafe extern "C" fn folio_free_raw_hwp(folio: *mut folio, flag: bool) -> c_ulong {
-    static inline unsigned long folio_free_raw_hwp(struct folio *folio, bool flag)
-    {
     return 0;
     }
 
 // Drop the extra refcount in case we come from madvise()
 #[no_mangle]
 unsafe extern "C" fn put_ref_page(pfn: c_ulong, flags: c_int) {
-    static void put_ref_page(unsigned long pfn, int flags)
-    {
-    if (!(flags & MF_COUNT_INCREASED))
+    if (!(flags & MF_COUNT_INCREASED)) {
     return;
+    }
     put_page(pfn_to_page(pfn));
     }
-    static int memory_failure_dev_pagemap(unsigned long pfn, int flags,
-    struct dev_pagemap *pgmap)
-    {
-    let mut rc: c_int = -ENXIO;
+#[no_mangle]
+pub unsafe extern "C" fn memory_failure_dev_pagemap(pfn: c_ulong, flags: c_int, pgmap: *mut dev_pagemap) -> c_int {
+pub static mut rc: c_int = 0;
 // device metadata space is not recoverable
-    if (!pgmap_pfn_valid(pgmap, pfn))
-    goto out;
+    if (!pgmap_pfn_valid(pgmap, pfn)) {
+// goto;
+    }
 //
 // Call driver's implementation to handle the memory failure, otherwise
 // fall back to generic handler.
@@ -2009,15 +2208,17 @@ unsafe extern "C" fn put_ref_page(pfn: c_ulong, flags: c_int) {
 // Fall back to generic handler too if operation is not
 // supported inside the driver/device/filesystem.
 //
-    if (rc != -EOPNOTSUPP)
-    goto out;
+    if (rc != -EOPNOTSUPP) {
+// goto;
+    }
     }
     rc = mf_generic_kill_procs(pfn, flags, pgmap);
-    out:
+// label;
 // drop pgmap ref acquired in caller
     put_dev_pagemap(pgmap);
-    if (rc != -EOPNOTSUPP)
+    if (rc != -EOPNOTSUPP) {
     action_result(pfn, MF_MSG_DAX, rc ? MF_FAILED : MF_RECOVERED);
+    }
     return rc;
     }
 //
@@ -2027,10 +2228,9 @@ unsafe extern "C" fn put_ref_page(pfn: c_ulong, flags: c_int) {
 // application has a chance to recover. Also, application processes'
 // election for MCE early killed will be honored.
 //
-    static void kill_procs_now(struct page *p, unsigned long pfn, int flags,
-    struct folio *folio)
-    {
-    LIST_HEAD(tokill);
+#[no_mangle]
+pub unsafe extern "C" fn kill_procs_now(p: *mut page, pfn: c_ulong, flags: c_int, folio: *mut folio) {
+pub static mut tokill: usize = 0;
     folio_lock(folio);
     collect_procs(folio, p, &tokill, flags & MF_ACTION_REQUIRED);
     folio_unlock(folio);
@@ -2038,47 +2238,44 @@ unsafe extern "C" fn put_ref_page(pfn: c_ulong, flags: c_int) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn register_pfn_address_space(pfn_space: *mut pfn_address_space) -> c_int {
-    int register_pfn_address_space(struct pfn_address_space *pfn_space)
-    {
     guard(mutex)(&pfn_space_lock);
-    if (!pfn_space.pfn_to_vma_pgoff)
+    if (!pfn_space.pfn_to_vma_pgoff) {
     return -EINVAL;
+    }
     if (interval_tree_iter_first(&pfn_space_itree,
     pfn_space.node.start,
-    pfn_space.node.last))
+    pfn_space.node.last)) {
     return -EBUSY;
-    interval_tree_insert(&pfn_space.node, &pfn_space_itree);
+    }
+// forward_decl: erval_tree_insert;
     return 0;
     }
     EXPORT_SYMBOL_GPL(register_pfn_address_space);
 #[no_mangle]
 pub unsafe extern "C" fn unregister_pfn_address_space(pfn_space: *mut pfn_address_space) {
-    void unregister_pfn_address_space(struct pfn_address_space *pfn_space)
-    {
     guard(mutex)(&pfn_space_lock);
     if (interval_tree_iter_first(&pfn_space_itree,
     pfn_space.node.start,
-    pfn_space.node.last))
-    interval_tree_remove(&pfn_space.node, &pfn_space_itree);
+    pfn_space.node.last)) {
+// forward_decl: erval_tree_remove;
+    }
     }
     EXPORT_SYMBOL_GPL(unregister_pfn_address_space);
-    static void add_to_kill_pgoff(struct task_struct *tsk,
-    struct vm_area_struct *vma,
-    struct list_head *to_kill,
-    pgoff_t pgoff)
-    {
-    struct to_kill *tk;
+#[no_mangle]
+pub unsafe extern "C" fn add_to_kill_pgoff(tsk: *mut task_struct, vma: *mut vm_area_struct, to_kill: *mut list_head, pgoff: pgoff_t) {
+pub static mut tk: *mut c_void = core::ptr::null_mut();
     tk = kmalloc_obj(*tk, GFP_ATOMIC);
     if (!tk) {
-    pr_info("Unable to kill proc %d\n", tsk.pid);
+    pr_info!("Unable to kill proc %d\n", tsk.pid);
     return;
     }
 // Check for pgoff not backed by struct page
     tk.addr = vma_filebacked_address(vma, pgoff, 1);
     tk.size_shift = PAGE_SHIFT;
-    if (tk.addr == -EFAULT)
-    pr_info("Unable to find address %lx in %s\n",
+    if (tk.addr == -EFAULT) {
+    pr_info!("Unable to find address %lx in %s\n",
     pgoff, tsk.comm);
+    }
     get_task_struct(tsk);
     tk.tsk = tsk;
     list_add_tail(&tk.nd, to_kill);
@@ -2086,24 +2283,25 @@ pub unsafe extern "C" fn unregister_pfn_address_space(pfn_space: *mut pfn_addres
 //
 // Collect processes when the error hit a PFN not backed by struct page.
 //
-    static void collect_procs_pfn(struct pfn_address_space *pfn_space,
-    unsigned long pfn, struct list_head *to_kill)
-    {
-    struct vm_area_struct *vma;
-    struct task_struct *tsk;
-    struct address_space *mapping = pfn_space.mapping;
+#[no_mangle]
+pub unsafe extern "C" fn collect_procs_pfn(pfn_space: *mut pfn_address_space, pfn: c_ulong, to_kill: *mut list_head) {
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+pub static mut tsk: *mut c_void = core::ptr::null_mut();
+    let mut mapping = pfn_space.mapping;
     i_mmap_lock_read(mapping);
     rcu_read_lock();
     for_each_process(tsk) {
-    struct task_struct *t = tsk;
+    let mut t = tsk;
     t = task_early_kill(tsk, true);
-    if (!t)
+    if (!t) {
     continue;
+    }
     mapping_rmap_tree_foreach(vma, mapping, 0, ULONG_MAX) {
-    pgoff_t pgoff;
+    let mut pgoff;
     if (vma.vm_mm == t.mm &&
-    !pfn_space.pfn_to_vma_pgoff(vma, pfn, &pgoff))
+    !pfn_space.pfn_to_vma_pgoff(vma, pfn, &pgoff)) {
     add_to_kill_pgoff(t, vma, to_kill, pgoff);
+    }
     }
     }
     rcu_read_unlock();
@@ -2121,12 +2319,10 @@ pub unsafe extern "C" fn unregister_pfn_address_space(pfn_space: *mut pfn_addres
 //
 #[no_mangle]
 unsafe extern "C" fn memory_failure_pfn(pfn: c_ulong, flags: c_int) -> c_int {
-    static int memory_failure_pfn(unsigned long pfn, int flags)
-    {
-    struct interval_tree_node *node;
-    LIST_HEAD(tokill);
+pub static mut node: *mut c_void = core::ptr::null_mut();
+pub static mut tokill: usize = 0;
     scoped_guard(mutex, &pfn_space_lock) {
-    let mut mf_handled: bool = false;
+pub static mut mf_handled: bool = false;
 //
 // Modules registers with MM the address space mapping to
 // the device memory they manage. Iterate to identify
@@ -2135,13 +2331,13 @@ unsafe extern "C" fn memory_failure_pfn(pfn: c_ulong, flags: c_int) -> c_int {
 //
     for (node = interval_tree_iter_first(&pfn_space_itree, pfn, pfn); node;
     node = interval_tree_iter_next(node, pfn, pfn)) {
-    struct pfn_address_space *pfn_space =
-    container_of(node, struct pfn_address_space, node);
+    let mut pfn_space = container_of!(node, pfn_address_space, node);
     collect_procs_pfn(pfn_space, pfn, &tokill);
     mf_handled = true;
     }
-    if (!mf_handled)
+    if (!mf_handled) {
     return action_result(pfn, MF_MSG_PFN_MAP, MF_IGNORED);
+    }
     }
 //
 // Unlike System-RAM there is no possibility to swap in a different
@@ -2180,30 +2376,31 @@ unsafe extern "C" fn memory_failure_pfn(pfn: c_ulong, flags: c_int) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn memory_failure(pfn: c_ulong, flags: c_int) -> c_int {
-    int memory_failure(unsigned long pfn, int flags)
-    {
-    struct page *p;
-    struct folio *folio;
-    struct dev_pagemap *pgmap;
-    let mut res: c_int = 0;
-    unsigned long page_flags;
-    let mut retry: bool = true;
-    if (!sysctl_memory_failure_recovery)
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut pgmap: *mut c_void = core::ptr::null_mut();
+pub static mut res: c_int = 0;
+    let mut page_flags = 0;
+pub static mut retry: bool = true;
+    if (!sysctl_memory_failure_recovery) {
     panic("Memory failure on page %lx", pfn);
+    }
     mutex_lock(&mf_mutex);
-    if (!(flags & MF_SW_SIMULATED))
+    if (!(flags & MF_SW_SIMULATED)) {
     hw_memory_failure = true;
+    }
     p = pfn_to_online_page(pfn);
     if (!p) {
     res = arch_memory_failure(pfn, flags);
-    if (res == 0)
-    goto unlock_mutex;
+    if (res == 0) {
+// goto;
+    }
     if (!pfn_valid(pfn) && !arch_is_platform_page(PFN_PHYS(pfn))) {
 //
 // The PFN is not backed by struct page.
 //
     res = memory_failure_pfn(pfn, flags);
-    goto unlock_mutex;
+// goto;
     }
     if (pfn_valid(pfn)) {
     pgmap = get_dev_pagemap(pfn);
@@ -2211,28 +2408,31 @@ pub unsafe extern "C" fn memory_failure(pfn: c_ulong, flags: c_int) -> c_int {
     if (pgmap) {
     res = memory_failure_dev_pagemap(pfn, flags,
     pgmap);
-    goto unlock_mutex;
+// goto;
     }
     }
-    pr_err("%#lx: memory outside kernel control\n", pfn);
+    pr_err!("%#lx: memory outside kernel control\n", pfn);
     res = -ENXIO;
-    goto unlock_mutex;
+// goto;
     }
-    try_again:
+// label;
     res = try_memory_failure_hugetlb(pfn, flags);
 //
 // -ENOENT means the page we found is not hugetlb, so proceed with normal page handling
 //
-    if (res != -ENOENT)
-    goto unlock_mutex;
+    if (res != -ENOENT) {
+// goto;
+    }
     if (TestSetPageHWPoison(p)) {
     res = -EHWPOISON;
-    if (flags & MF_ACTION_REQUIRED)
+    if (flags & MF_ACTION_REQUIRED) {
     res = kill_accessing_process(current, pfn, flags);
-    if (flags & MF_COUNT_INCREASED)
+    }
+    if (flags & MF_COUNT_INCREASED) {
     put_page(p);
+    }
     action_result(pfn, MF_MSG_ALREADY_POISONED, MF_FAILED);
-    goto unlock_mutex;
+// goto;
     }
 //
 // We need/can do nothing about count=0 pages.
@@ -2246,8 +2446,8 @@ pub unsafe extern "C" fn memory_failure(pfn: c_ulong, flags: c_int) -> c_int {
 // that may make page_ref_freeze()/page_ref_unfreeze() mismatch.
 //
     res = get_hwpoison_page(p, flags);
-    switch (res) {
-    case 0:
+    match (res) {
+    0 => {
     if (is_free_buddy_page(p)) {
     if (take_page_off_buddy(p)) {
     page_ref_inc(p);
@@ -2257,7 +2457,7 @@ pub unsafe extern "C" fn memory_failure(pfn: c_ulong, flags: c_int) -> c_int {
     if (retry) {
     ClearPageHWPoison(p);
     retry = false;
-    goto try_again;
+// goto;
     }
     res = MF_FAILED;
     }
@@ -2265,22 +2465,26 @@ pub unsafe extern "C" fn memory_failure(pfn: c_ulong, flags: c_int) -> c_int {
     } else {
     res = action_result(pfn, MF_MSG_KERNEL_HIGH_ORDER, MF_IGNORED);
     }
-    goto unlock_mutex;
-    case 1:
+// goto;
+    }
+    1 => {
 // Got a refcount on a handlable page.
-    break;
-    case -ENOTRECOVERABLE:
+    // break;
+    }
+    -ENOTRECOVERABLE => {
 //
 // Stable unhandlable kernel-owned page (PG_reserved,
 // slab, page tables, large-kmalloc).
 // No recovery possible.
 //
     res = action_result(pfn, MF_MSG_KERNEL, MF_IGNORED);
-    goto unlock_mutex;
-    default:
+// goto;
+    }
+    _ => {
 // Transient lifecycle race with the page allocator.
     res = action_result(pfn, MF_MSG_GET_HWPOISON, MF_IGNORED);
-    goto unlock_mutex;
+// goto;
+    }
     }
     folio = page_folio(p);
 // filter pages that are protected from hwpoison test by users
@@ -2290,12 +2494,12 @@ pub unsafe extern "C" fn memory_failure(pfn: c_ulong, flags: c_int) -> c_int {
     folio_unlock(folio);
     folio_put(folio);
     res = -EOPNOTSUPP;
-    goto unlock_mutex;
+// goto;
     }
     folio_unlock(folio);
     if (folio_test_large(folio)) {
-    let mut new_order: c_int = min_order_for_split(folio);
-    int err;
+pub static mut new_order: c_int = 0;
+    let mut err = 0;
 //
 // The flag must be set after the refcount is bumped
 // otherwise it may race with THP split.
@@ -2324,7 +2528,7 @@ pub unsafe extern "C" fn memory_failure(pfn: c_ulong, flags: c_int) -> c_int {
     kill_procs_now(p, pfn, flags, folio);
     put_page(p);
     action_result(pfn, MF_MSG_UNSPLIT_THP, MF_FAILED);
-    goto unlock_mutex;
+// goto;
     }
     VM_BUG_ON_PAGE(!page_count(p), p);
     folio = page_folio(p);
@@ -2344,7 +2548,7 @@ pub unsafe extern "C" fn memory_failure(pfn: c_ulong, flags: c_int) -> c_int {
 // The page cannot become compound pages again as folio has been
 // splited and extra refcnt is held.
 //
-    WARN_ON(folio_test_large(folio));
+    WARN_ON!(folio_test_large(folio));
 //
 // We use page flags to determine what action should be taken, but
 // the flags can be modified by the error containment action.  One
@@ -2358,8 +2562,9 @@ pub unsafe extern "C" fn memory_failure(pfn: c_ulong, flags: c_int) -> c_int {
 // the folio lock. We need to wait for writeback completion for this
 // folio or it may trigger a vfs BUG while evicting inode.
 //
-    if (!folio_test_lru(folio) && !folio_test_writeback(folio))
-    goto identify_page_state;
+    if (!folio_test_lru(folio) && !folio_test_writeback(folio)) {
+// goto;
+    }
 //
 // It's very difficult to mess with pages currently under IO
 // and in many cases impossible, so we just avoid it here.
@@ -2371,7 +2576,7 @@ pub unsafe extern "C" fn memory_failure(pfn: c_ulong, flags: c_int) -> c_int {
 //
     if (!hwpoison_user_mappings(folio, p, pfn, flags)) {
     res = action_result(pfn, MF_MSG_UNMAP_FAILED, MF_FAILED);
-    goto unlock_page;
+// goto;
     }
 //
 // Torn down by someone else?
@@ -2379,15 +2584,15 @@ pub unsafe extern "C" fn memory_failure(pfn: c_ulong, flags: c_int) -> c_int {
     if (folio_test_lru(folio) && !folio_test_swapcache(folio) &&
     folio.mapping == core::ptr::null_mut()) {
     res = action_result(pfn, MF_MSG_TRUNCATED_LRU, MF_IGNORED);
-    goto unlock_page;
+// goto;
     }
-    identify_page_state:
+// label;
     res = identify_page_state(pfn, p, page_flags);
     mutex_unlock(&mf_mutex);
     return res;
-    unlock_page:
+// label;
     folio_unlock(folio);
-    unlock_mutex:
+// label;
     mutex_unlock(&mf_mutex);
     return res;
     }
@@ -2404,12 +2609,7 @@ pub struct memory_failure_entry {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct memory_failure_cpu {
-    DECLARE_KFIFO(fifo, struct memory_failure_entry,
-    pub lock: raw_spinlock_t,
-    pub work: work_struct,
-}
-
-    static DEFINE_PER_CPU(struct memory_failure_cpu, memory_failure_cpu);
+pub static mut fifo: usize = 0;
 //
 // memory_failure_queue - Schedule handling memory failure of a page.
 // @pfn: Page Number of the corrupted page
@@ -2428,54 +2628,50 @@ pub struct memory_failure_cpu {
 //
 #[no_mangle]
 pub unsafe extern "C" fn memory_failure_queue(pfn: c_ulong, flags: c_int) {
-    void memory_failure_queue(unsigned long pfn, int flags)
-    {
-    struct memory_failure_cpu *mf_cpu;
-    unsigned long proc_flags;
-    bool buffer_overflow;
-    struct memory_failure_entry entry = {
-    .pfn =		pfn,
-    .flags =	flags,
-    };
+pub static mut mf_cpu: *mut c_void = core::ptr::null_mut();
+    let mut proc_flags = 0;
+    let mut buffer_overflow = 0;
+pub static mut memory_failure_entry: usize = 0;
     mf_cpu = &get_cpu_var(memory_failure_cpu);
     raw_spin_lock_irqsave(&mf_cpu.lock, proc_flags);
     buffer_overflow = !kfifo_put(&mf_cpu.fifo, entry);
-    if (!buffer_overflow)
+    if (!buffer_overflow) {
     schedule_work_on(smp_processor_id(), &mf_cpu.work);
+    }
     raw_spin_unlock_irqrestore(&mf_cpu.lock, proc_flags);
     put_cpu_var(memory_failure_cpu);
-    if (buffer_overflow)
-    pr_err("buffer overflow when queuing memory failure at %#lx\n",
+    if (buffer_overflow) {
+    pr_err!("buffer overflow when queuing memory failure at %#lx\n",
     pfn);
+    }
     }
     EXPORT_SYMBOL_GPL(memory_failure_queue);
 #[no_mangle]
 unsafe extern "C" fn memory_failure_work_func(work: *mut work_struct) {
-    static void memory_failure_work_func(struct work_struct *work)
-    {
-    struct memory_failure_cpu *mf_cpu;
-    let mut entry: memory_failure_entry = { 0, };
-    unsigned long proc_flags;
-    int gotten;
-    mf_cpu = container_of(work, struct memory_failure_cpu, work);
+pub static mut mf_cpu: *mut c_void = core::ptr::null_mut();
+pub static mut entry: memory_failure_entry = 0;
+    let mut proc_flags = 0;
+    let mut gotten = 0;
+    mf_cpu = container_of!(work, memory_failure_cpu, work);
     for (;;) {
     raw_spin_lock_irqsave(&mf_cpu.lock, proc_flags);
     gotten = kfifo_get(&mf_cpu.fifo, &entry);
     raw_spin_unlock_irqrestore(&mf_cpu.lock, proc_flags);
-    if (!gotten)
+    if (!gotten) {
     break;
-    if (entry.flags & MF_SOFT_OFFLINE)
+    }
+    if (entry.flags & MF_SOFT_OFFLINE) {
     soft_offline_page(entry.pfn, entry.flags);
-    else
+    }
+    else {
     memory_failure(entry.pfn, entry.flags);
     }
     }
+    }
 #[no_mangle]
-unsafe extern "C" fn memory_failure_init() -> int __init {
-    static int __init memory_failure_init(void)
-    {
-    struct memory_failure_cpu *mf_cpu;
-    int cpu;
+unsafe extern "C" fn memory_failure_init() -> c_int {
+pub static mut mf_cpu: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
     for_each_possible_cpu(cpu) {
     mf_cpu = &per_cpu(memory_failure_cpu, cpu);
     raw_spin_lock_init(&mf_cpu.lock);
@@ -2485,11 +2681,12 @@ unsafe extern "C" fn memory_failure_init() -> int __init {
     register_sysctl_init("vm", memory_failure_table);
     return 0;
     }
-    core_initcall(memory_failure_init);
+    core_initcall!(memory_failure_init);
 
-    ({							\
-    if (__ratelimit(rs))				\
-    pr_info(fmt, pfn);			\
+    ({							
+    if (__ratelimit(rs))				 {
+    pr_info!(fmt, pfn);			
+    }
     })
 //
 // unpoison_memory - Unpoison a previously poisoned page
@@ -2505,62 +2702,62 @@ unsafe extern "C" fn memory_failure_init() -> int __init {
 //
 #[no_mangle]
 pub unsafe extern "C" fn unpoison_memory(pfn: c_ulong) -> c_int {
-    int unpoison_memory(unsigned long pfn)
-    {
-    struct folio *folio;
-    struct page *p;
-    let mut ret: c_int = -EBUSY, ghp;
-    unsigned long count;
-    let mut huge: bool = false;
-    static DEFINE_RATELIMIT_STATE(unpoison_rs, DEFAULT_RATELIMIT_INTERVAL,
-    DEFAULT_RATELIMIT_BURST);
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
+    let mut count = 0;
+pub static mut huge: bool = false;
+pub static mut unpoison_rs: usize = 0;
     p = pfn_to_online_page(pfn);
-    if (!p)
+    if (!p) {
     return -EIO;
+    }
     folio = page_folio(p);
     mutex_lock(&mf_mutex);
     if (hw_memory_failure) {
     unpoison_pr_info("%#lx: disabled after HW memory failure\n",
     pfn, &unpoison_rs);
     ret = -EOPNOTSUPP;
-    goto unlock_mutex;
+// goto;
     }
     if (is_huge_zero_folio(folio)) {
     unpoison_pr_info("%#lx: huge zero page is not supported\n",
     pfn, &unpoison_rs);
     ret = -EOPNOTSUPP;
-    goto unlock_mutex;
+// goto;
     }
     if (!PageHWPoison(p)) {
     unpoison_pr_info("%#lx: page was already unpoisoned\n",
     pfn, &unpoison_rs);
-    goto unlock_mutex;
+// goto;
     }
     if (folio_ref_count(folio) > 1) {
     unpoison_pr_info("%#lx: someone grabs the hwpoison page\n",
     pfn, &unpoison_rs);
-    goto unlock_mutex;
+// goto;
     }
     if (folio_test_slab(folio) || folio_test_pgtable(folio) ||
-    folio_test_reserved(folio) || folio_test_offline(folio))
-    goto unlock_mutex;
+    folio_test_reserved(folio) || folio_test_offline(folio)) {
+// goto;
+    }
     if (folio_mapped(folio)) {
     unpoison_pr_info("%#lx: someone maps the hwpoison page\n",
     pfn, &unpoison_rs);
-    goto unlock_mutex;
+// goto;
     }
     if (folio_mapping(folio)) {
     unpoison_pr_info("%#lx: the hwpoison page has non-core::ptr::null_mut() mapping\n",
     pfn, &unpoison_rs);
-    goto unlock_mutex;
+// goto;
     }
     ghp = get_hwpoison_page(p, MF_UNPOISON);
     if (!ghp) {
     if (folio_test_hugetlb(folio)) {
     huge = true;
     count = folio_free_raw_hwp(folio, false);
-    if (count == 0)
-    goto unlock_mutex;
+    if (count == 0) {
+// goto;
+    }
     }
     ret = folio_test_clear_hwpoison(folio) ? 0 : -EBUSY;
     } else if (ghp < 0) {
@@ -2577,7 +2774,7 @@ pub unsafe extern "C" fn unpoison_memory(pfn: c_ulong) -> c_int {
     count = folio_free_raw_hwp(folio, false);
     if (count == 0) {
     folio_put(folio);
-    goto unlock_mutex;
+// goto;
     }
     }
     folio_put(folio);
@@ -2586,11 +2783,12 @@ pub unsafe extern "C" fn unpoison_memory(pfn: c_ulong) -> c_int {
     ret = 0;
     }
     }
-    unlock_mutex:
+// label;
     mutex_unlock(&mf_mutex);
     if (!ret) {
-    if (!huge)
+    if (!huge) {
     num_poisoned_pages_sub(pfn, 1);
+    }
     unpoison_pr_info("%#lx: software-unpoisoned page\n",
     page_to_pfn(p), &unpoison_rs);
     }
@@ -2605,22 +2803,16 @@ pub unsafe extern "C" fn unpoison_memory(pfn: c_ulong) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn soft_offline_in_use_page(page: *mut page) -> c_int {
-    static int soft_offline_in_use_page(struct page *page)
-    {
-    let mut ret: c_long = 0;
-    let mut pfn: c_ulong = page_to_pfn(page);
-    struct folio *folio = page_folio(page);
+pub static mut ret: c_long = 0;
+pub static mut pfn: c_ulong = 0;
+    let mut folio = page_folio(page);
     char const *msg_page[] = {"page", "hugepage"};
-    let mut huge: bool = folio_test_hugetlb(folio);
-    bool isolated;
-    LIST_HEAD(pagelist);
-    struct migration_target_control mtc = {
-    .nid = NUMA_NO_NODE,
-    .gfp_mask = GFP_USER | __GFP_MOVABLE | __GFP_RETRY_MAYFAIL,
-    .reason = MR_MEMORY_FAILURE,
-    };
+pub static mut huge: bool = false;
+    let mut isolated = 0;
+pub static mut pagelist: usize = 0;
+pub static mut migration_target_control: usize = 0;
     if (!huge && folio_test_large(folio)) {
-    let mut new_order: c_int = min_order_for_split(folio);
+pub static mut new_order: c_int = 0;
 //
 // If new_order (target split order) is not 0, do not split the
 // folio at all to retain the still accessible large folio.
@@ -2629,30 +2821,32 @@ unsafe extern "C" fn soft_offline_in_use_page(page: *mut page) -> c_int {
 // memory_failure().
 //
     if (new_order || try_to_split_thp_page(page, /* new_order= */ 0,
-// release= */ true)) {
-    pr_info("%#lx: thp split failed\n", pfn);
+release= */ true)) {
+    pr_info!("%#lx: thp split failed\n", pfn);
     return -EBUSY;
     }
     folio = page_folio(page);
     }
     folio_lock(folio);
-    if (!huge)
+    if (!huge) {
     folio_wait_writeback(folio);
+    }
     if (PageHWPoison(page)) {
     folio_unlock(folio);
     folio_put(folio);
-    pr_info("%#lx: page already poisoned\n", pfn);
+    pr_info!("%#lx: page already poisoned\n", pfn);
     return 0;
     }
-    if (!huge && folio_test_lru(folio) && !folio_test_swapcache(folio))
+    if (!huge && folio_test_lru(folio) && !folio_test_swapcache(folio)) {
 //
 // Try to invalidate first. This should work for
 // non dirty unmapped page cache pages.
 //
     ret = mapping_evict_folio(folio_mapping(folio), folio);
+    }
     folio_unlock(folio);
     if (ret) {
-    pr_info("%#lx: invalidated\n", pfn);
+    pr_info!("%#lx: invalidated\n", pfn);
     page_handle_poison(page, false, true);
     return 0;
     }
@@ -2669,19 +2863,22 @@ unsafe extern "C" fn soft_offline_in_use_page(page: *mut page) -> c_int {
     ret = migrate_pages(&pagelist, alloc_migration_target, core::ptr::null_mut(),
     (unsigned long)&mtc, MIGRATE_SYNC, MR_MEMORY_FAILURE, core::ptr::null_mut());
     if (!ret) {
-    let mut release: bool = !huge;
-    if (!page_handle_poison(page, huge, release))
-    ret = -EBUSY;
-    } else {
-    if (!list_empty(&pagelist))
-    putback_movable_pages(&pagelist);
-    pr_info("%#lx: %s migration failed %ld, type %pGp\n",
-    pfn, msg_page[huge], ret, &page.flags.f);
-    if (ret > 0)
+pub static mut release: bool = false;
+    if (!page_handle_poison(page, huge, release)) {
     ret = -EBUSY;
     }
     } else {
-    pr_info("%#lx: %s isolation failed, page count %d, type %pGp\n",
+    if (!list_empty(&pagelist)) {
+    putback_movable_pages(&pagelist);
+    }
+    pr_info!("%#lx: %s migration failed %ld, type %pGp\n",
+    pfn, msg_page[huge], ret, &page.flags.f);
+    if (ret > 0) {
+    ret = -EBUSY;
+    }
+    }
+    } else {
+    pr_info!("%#lx: %s isolation failed, page count %d, type %pGp\n",
     pfn, msg_page[huge], page_count(page), &page.flags.f);
     ret = -EBUSY;
     }
@@ -2714,13 +2911,11 @@ unsafe extern "C" fn soft_offline_in_use_page(page: *mut page) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn soft_offline_page(pfn: c_ulong, flags: c_int) -> c_int {
-    int soft_offline_page(unsigned long pfn, int flags)
-    {
-    int ret;
-    let mut try_again: bool = true;
-    struct page *page;
+    let mut ret = 0;
+pub static mut try_again: bool = true;
+pub static mut page: *mut c_void = core::ptr::null_mut();
     if (!pfn_valid(pfn)) {
-    WARN_ON_ONCE(flags & MF_COUNT_INCREASED);
+    WARN_ON_ONCE!(flags & MF_COUNT_INCREASED);
     return -ENXIO;
     }
 // Only online pages can be soft-offlined (esp., not ZONE_DEVICE).
@@ -2730,24 +2925,25 @@ pub unsafe extern "C" fn soft_offline_page(pfn: c_ulong, flags: c_int) -> c_int 
     return -EIO;
     }
     if (!sysctl_enable_soft_offline) {
-    pr_info_once("disabled by /proc/sys/vm/enable_soft_offline\n");
+    pr_info_once!("disabled by /proc/sys/vm/enable_soft_offline\n");
     put_ref_page(pfn, flags);
     return -EOPNOTSUPP;
     }
     mutex_lock(&mf_mutex);
     if (PageHWPoison(page)) {
-    pr_info("%#lx: page already poisoned\n", pfn);
+    pr_info!("%#lx: page already poisoned\n", pfn);
     put_ref_page(pfn, flags);
     mutex_unlock(&mf_mutex);
     return 0;
     }
-    retry:
+// label;
     get_online_mems();
     ret = get_hwpoison_page(page, flags | MF_SOFT_OFFLINE);
     put_online_mems();
     if (hwpoison_filter(page)) {
-    if (ret > 0)
+    if (ret > 0) {
     put_page(page);
+    }
     mutex_unlock(&mf_mutex);
     return -EOPNOTSUPP;
     }
@@ -2758,7 +2954,7 @@ pub unsafe extern "C" fn soft_offline_page(pfn: c_ulong, flags: c_int) -> c_int 
     if (try_again) {
     try_again = false;
     flags &= ~MF_COUNT_INCREASED;
-    goto retry;
+// goto;
     }
     ret = -EBUSY;
     }
@@ -2766,3 +2962,5 @@ pub unsafe extern "C" fn soft_offline_page(pfn: c_ulong, flags: c_int) -> c_int 
     mutex_unlock(&mf_mutex);
     return ret;
     }
+}
+}

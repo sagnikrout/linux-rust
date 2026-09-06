@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -54,9 +304,7 @@ pub struct process_timer {
 
 #[no_mangle]
 unsafe extern "C" fn process_timeout(t: *mut timer_list) {
-    static void process_timeout(struct timer_list *t)
-    {
-    struct process_timer *timeout = timer_container_of(timeout, t, timer);
+    let mut timeout = timer_container_of(timeout, t, timer);
     wake_up_process(timeout.task);
     }
 //
@@ -92,12 +340,10 @@ unsafe extern "C" fn process_timeout(t: *mut timer_list) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn schedule_timeout(timeout: signed long) -> signed long __sched {
-    signed long __sched schedule_timeout(signed long timeout)
-    {
-    struct process_timer timer;
-    unsigned long expire;
-    switch (timeout) {
-    case MAX_SCHEDULE_TIMEOUT:
+pub static mut timer: usize = 0;
+    let mut expire = 0;
+    match (timeout) {
+    MAX_SCHEDULE_TIMEOUT => {
 //
 // These two special cases are useful to be comfortable
 // in the caller. Nothing more. We could take
@@ -106,8 +352,9 @@ pub unsafe extern "C" fn schedule_timeout(timeout: signed long) -> signed long _
 // the caller to do everything it want with the retval.
 //
     schedule();
-    goto out;
-    default:
+// goto;
+    }
+    _ => {
 //
 // Another bit of PARANOID. Note that the retval will be
 // 0 since no piece of kernel is supposed to do a check
@@ -116,10 +363,11 @@ pub unsafe extern "C" fn schedule_timeout(timeout: signed long) -> signed long _
 // that will tell you if something is gone wrong and where.
 //
     if (timeout < 0) {
-    pr_err("%s: wrong timeout value %lx\n", __func__, timeout);
+    pr_err!("%s: wrong timeout value %lx\n", __func__, timeout);
     dump_stack();
     __set_current_state(TASK_RUNNING);
-    goto out;
+// goto;
+    }
     }
     }
     expire = timeout + jiffies;
@@ -132,7 +380,7 @@ pub unsafe extern "C" fn schedule_timeout(timeout: signed long) -> signed long _
 // Remove the timer from the object tracker
     timer_destroy_on_stack(&timer.timer);
     timeout = expire - jiffies;
-    out:
+// label;
     return timeout < 0 ? 0 : timeout;
     }
     EXPORT_SYMBOL(schedule_timeout);
@@ -149,8 +397,6 @@ pub unsafe extern "C" fn schedule_timeout(timeout: signed long) -> signed long _
 //
 #[no_mangle]
 pub unsafe extern "C" fn schedule_timeout_interruptible(timeout: signed long) -> signed long __sched {
-    signed long __sched schedule_timeout_interruptible(signed long timeout)
-    {
     __set_current_state(TASK_INTERRUPTIBLE);
     return schedule_timeout(timeout);
     }
@@ -165,8 +411,6 @@ pub unsafe extern "C" fn schedule_timeout_interruptible(timeout: signed long) ->
 //
 #[no_mangle]
 pub unsafe extern "C" fn schedule_timeout_killable(timeout: signed long) -> signed long __sched {
-    signed long __sched schedule_timeout_killable(signed long timeout)
-    {
     __set_current_state(TASK_KILLABLE);
     return schedule_timeout(timeout);
     }
@@ -181,8 +425,6 @@ pub unsafe extern "C" fn schedule_timeout_killable(timeout: signed long) -> sign
 //
 #[no_mangle]
 pub unsafe extern "C" fn schedule_timeout_uninterruptible(timeout: signed long) -> signed long __sched {
-    signed long __sched schedule_timeout_uninterruptible(signed long timeout)
-    {
     __set_current_state(TASK_UNINTERRUPTIBLE);
     return schedule_timeout(timeout);
     }
@@ -199,8 +441,6 @@ pub unsafe extern "C" fn schedule_timeout_uninterruptible(timeout: signed long) 
 //
 #[no_mangle]
 pub unsafe extern "C" fn schedule_timeout_idle(timeout: signed long) -> signed long __sched {
-    signed long __sched schedule_timeout_idle(signed long timeout)
-    {
     __set_current_state(TASK_IDLE);
     return schedule_timeout(timeout);
     }
@@ -218,7 +458,7 @@ pub unsafe extern "C" fn schedule_timeout_idle(timeout: signed long) -> signed l
     int __sched schedule_hrtimeout_range_clock(ktime_t *expires, u64 delta,
     const enum hrtimer_mode mode, clockid_t clock_id)
     {
-    struct hrtimer_sleeper t;
+pub static mut t: usize = 0;
 //
 // Optimize when a zero timeout value is given. It does not
 // matter whether this is an absolute or a relative time.
@@ -237,8 +477,9 @@ pub unsafe extern "C" fn schedule_timeout_idle(timeout: signed long) -> signed l
     hrtimer_setup_sleeper_on_stack(&t, clock_id, mode);
     hrtimer_set_expires_range_ns(&t.timer, *expires, delta);
     hrtimer_sleeper_start_expires(&t, mode);
-    if (likely(t.task))
+    if (likely(t.task)) {
     schedule();
+    }
     hrtimer_cancel(&t.timer);
     destroy_hrtimer_on_stack(&t.timer);
     __set_current_state(TASK_RUNNING);
@@ -294,9 +535,7 @@ pub unsafe extern "C" fn schedule_timeout_idle(timeout: signed long) -> signed l
 // schedule_hrtimeout_range() is set to 0 and has therefore no impact.
 //
 #[no_mangle]
-pub unsafe extern "C" fn schedule_hrtimeout(expires: *mut ktime_t, mode: enum hrtimer_mode) -> int __sched {
-    int __sched schedule_hrtimeout(ktime_t *expires, const enum hrtimer_mode mode)
-    {
+pub unsafe extern "C" fn schedule_hrtimeout(expires: *mut ktime_t, mode: hrtimer_mode) -> int __sched {
     return schedule_hrtimeout_range(expires, 0, mode);
     }
     EXPORT_SYMBOL_GPL(schedule_hrtimeout);
@@ -333,11 +572,10 @@ pub unsafe extern "C" fn schedule_hrtimeout(expires: *mut ktime_t, mode: enum hr
 //
 #[no_mangle]
 pub unsafe extern "C" fn msleep(msecs: c_uint) {
-    void msleep(unsigned int msecs)
-    {
-    let mut timeout: c_ulong = msecs_to_jiffies(msecs);
-    while (timeout)
+pub static mut timeout: c_ulong = 0;
+    while (timeout) {
     timeout = schedule_timeout_uninterruptible(timeout);
+    }
     }
     EXPORT_SYMBOL(msleep);
 //
@@ -354,11 +592,10 @@ pub unsafe extern "C" fn msleep(msecs: c_uint) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn msleep_interruptible(msecs: c_uint) -> c_ulong {
-    unsigned long msleep_interruptible(unsigned int msecs)
-    {
-    let mut timeout: c_ulong = msecs_to_jiffies(msecs);
-    while (timeout && !signal_pending(current))
+pub static mut timeout: c_ulong = 0;
+    while (timeout && !signal_pending(current)) {
     timeout = schedule_timeout_interruptible(timeout);
+    }
     return jiffies_to_msecs(timeout);
     }
     EXPORT_SYMBOL(msleep_interruptible);
@@ -382,17 +619,17 @@ pub unsafe extern "C" fn msleep_interruptible(msecs: c_uint) -> c_ulong {
 //
 #[no_mangle]
 pub unsafe extern "C" fn usleep_range_state(min: c_ulong, max: c_ulong, state: c_uint) -> void __sched {
-    void __sched usleep_range_state(unsigned long min, unsigned long max, unsigned int state)
-    {
-    let mut exp: ktime_t = ktime_add_us(ktime_get(), min);
-    let mut delta: u64 = (u64)(max - min) * NSEC_PER_USEC;
-    if (WARN_ON_ONCE(max < min))
+pub static mut exp: ktime_t = 0;
+pub static mut delta: u64 = 0;
+    if (WARN_ON_ONCE!(max < min)) {
     delta = 0;
+    }
     for (;;) {
     __set_current_state(state);
 // Do not return before the requested sleep time has elapsed
-    if (!schedule_hrtimeout_range(&exp, delta, HRTIMER_MODE_ABS))
+    if (!schedule_hrtimeout_range(&exp, delta, HRTIMER_MODE_ABS)) {
     break;
+    }
     }
     }
     EXPORT_SYMBOL(usleep_range_state);

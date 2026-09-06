@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -74,21 +324,21 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     };
 // Macro flag: #define CREATE_TRACE_POINTS
 
-    static struct task_struct *khugepaged_thread __read_mostly;
-    static DEFINE_MUTEX(khugepaged_mutex);
+pub static mut khugepaged_thread: *mut c_void = core::ptr::null_mut();
+pub static mut khugepaged_mutex: usize = 0;
 //
 // default scan 8*HPAGE_PMD_NR ptes, pte_mapped_hugepage, pmd_mapped,
 // no_pte_table or vmas every 10 second.
 //
-    static unsigned int khugepaged_pages_to_scan __read_mostly;
+    static unsigned int khugepaged_pages_to_scan ;
     static unsigned int khugepaged_pages_collapsed;
     static unsigned int khugepaged_full_scans;
-    let mut __read_mostly: static unsigned int khugepaged_scan_sleep_millisecs = 10000;
+pub static mut : unsigned int khugepaged_scan_sleep_millisecs = 10000;
 // during fragmentation poll the hugepage allocator once every minute
-    let mut __read_mostly: static unsigned int khugepaged_alloc_sleep_millisecs = 60000;
+pub static mut : unsigned int khugepaged_alloc_sleep_millisecs = 60000;
     static unsigned long khugepaged_sleep_expire;
-    static DEFINE_SPINLOCK(khugepaged_mm_lock);
-    static DECLARE_WAIT_QUEUE_HEAD(khugepaged_wait);
+pub static mut khugepaged_mm_lock: usize = 0;
+pub static mut khugepaged_wait: usize = 0;
 //
 // default collapse hugepages if there is at least one pte mapped like
 // it would have happened if the vma was large enough during page
@@ -97,12 +347,12 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Note that these are only respected if collapse was initiated by khugepaged.
 //
 
-    unsigned int khugepaged_max_ptes_none __read_mostly;
-    static unsigned int khugepaged_max_ptes_swap __read_mostly;
-    static unsigned int khugepaged_max_ptes_shared __read_mostly;
+    let mut khugepaged_max_ptes_none = 0;
+    static unsigned int khugepaged_max_ptes_swap ;
+    static unsigned int khugepaged_max_ptes_shared ;
 pub const MM_SLOTS_HASH_BITS: c_int = 10;
-    static DEFINE_READ_MOSTLY_HASHTABLE(mm_slots_hash, MM_SLOTS_HASH_BITS);
-    static struct kmem_cache *mm_slot_cache __ro_after_init;
+pub static mut mm_slots_hash: usize = 0;
+pub static mut mm_slot_cache: *mut c_void = core::ptr::null_mut();
 pub const KHUGEPAGED_MIN_MTHP_ORDER: c_int = 2;
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -110,7 +360,7 @@ pub struct collapse_control {
     pub is_khugepaged: bool,
 // Num pages scanned per node
     pub node_load: [u32; MAX_NUMNODES],
-// Num pages scanned (see khugepaged_pages_to_scan)
+Num pages scanned (see khugepaged_pages_to_scan)
     pub progress: c_uint,
 // nodemask for allocation fallback
     pub alloc_nmask: nodemask_t,
@@ -134,97 +384,77 @@ pub struct khugepaged_scan {
     pub address: c_ulong,
 }
 
-    static struct khugepaged_scan khugepaged_scan = {
-    .mm_head = LIST_HEAD_INIT(khugepaged_scan.mm_head),
-    };
+pub static mut khugepaged_scan: usize = 0;
 
-    static ssize_t scan_sleep_millisecs_show(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn scan_sleep_millisecs_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%u\n", khugepaged_scan_sleep_millisecs);
     }
-    static ssize_t __sleep_millisecs_store(const char *buf, size_t count,
-    unsigned int *millisecs)
-    {
-    unsigned int msecs;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn __sleep_millisecs_store(buf: *mut c_char, count: size_t, millisecs: *mut c_uint) -> ssize_t {
+    let mut msecs = 0;
+    let mut err = 0;
     err = kstrtouint(buf, 10, &msecs);
-    if (err)
+    if (err) {
     return -EINVAL;
+    }
 // millisecs = msecs;
     khugepaged_sleep_expire = 0;
     wake_up_interruptible(&khugepaged_wait);
     return count;
     }
-    static ssize_t scan_sleep_millisecs_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn scan_sleep_millisecs_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
     return __sleep_millisecs_store(buf, count, &khugepaged_scan_sleep_millisecs);
     }
     static struct kobj_attribute scan_sleep_millisecs_attr =
     __ATTR_RW(scan_sleep_millisecs);
-    static ssize_t alloc_sleep_millisecs_show(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn alloc_sleep_millisecs_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%u\n", khugepaged_alloc_sleep_millisecs);
     }
-    static ssize_t alloc_sleep_millisecs_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn alloc_sleep_millisecs_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
     return __sleep_millisecs_store(buf, count, &khugepaged_alloc_sleep_millisecs);
     }
     static struct kobj_attribute alloc_sleep_millisecs_attr =
     __ATTR_RW(alloc_sleep_millisecs);
-    static ssize_t pages_to_scan_show(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pages_to_scan_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%u\n", khugepaged_pages_to_scan);
     }
-    static ssize_t pages_to_scan_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
-    unsigned int pages;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn pages_to_scan_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut pages = 0;
+    let mut err = 0;
     err = kstrtouint(buf, 10, &pages);
-    if (err || !pages)
+    if (err || !pages) {
     return -EINVAL;
+    }
     khugepaged_pages_to_scan = pages;
     return count;
     }
     static struct kobj_attribute pages_to_scan_attr =
     __ATTR_RW(pages_to_scan);
-    static ssize_t pages_collapsed_show(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pages_collapsed_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%u\n", khugepaged_pages_collapsed);
     }
     static struct kobj_attribute pages_collapsed_attr =
     __ATTR_RO(pages_collapsed);
-    static ssize_t full_scans_show(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn full_scans_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%u\n", khugepaged_full_scans);
     }
     static struct kobj_attribute full_scans_attr =
     __ATTR_RO(full_scans);
-    static ssize_t defrag_show(struct kobject *kobj,
-    struct kobj_attribute *attr, char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn defrag_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return single_hugepage_flag_show(kobj, attr, buf,
     TRANSPARENT_HUGEPAGE_DEFRAG_KHUGEPAGED_FLAG);
     }
-    static ssize_t defrag_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn defrag_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
     return single_hugepage_flag_store(kobj, attr, buf, count,
     TRANSPARENT_HUGEPAGE_DEFRAG_KHUGEPAGED_FLAG);
     }
@@ -238,61 +468,52 @@ pub struct khugepaged_scan {
 // runs. Increasing max_ptes_none will instead potentially reduce the
 // free memory in the system during the khugepaged scan.
 //
-    static ssize_t max_ptes_none_show(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn max_ptes_none_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%u\n", khugepaged_max_ptes_none);
     }
-    static ssize_t max_ptes_none_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
-    int err;
-    unsigned long max_ptes_none;
+#[no_mangle]
+pub unsafe extern "C" fn max_ptes_none_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut err = 0;
+    let mut max_ptes_none = 0;
     err = kstrtoul(buf, 10, &max_ptes_none);
-    if (err || max_ptes_none > KHUGEPAGED_MAX_PTES_LIMIT)
+    if (err || max_ptes_none > KHUGEPAGED_MAX_PTES_LIMIT) {
     return -EINVAL;
+    }
     khugepaged_max_ptes_none = max_ptes_none;
     return count;
     }
     static struct kobj_attribute khugepaged_max_ptes_none_attr =
     __ATTR_RW(max_ptes_none);
-    static ssize_t max_ptes_swap_show(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn max_ptes_swap_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%u\n", khugepaged_max_ptes_swap);
     }
-    static ssize_t max_ptes_swap_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
-    int err;
-    unsigned long max_ptes_swap;
+#[no_mangle]
+pub unsafe extern "C" fn max_ptes_swap_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut err = 0;
+    let mut max_ptes_swap = 0;
     err  = kstrtoul(buf, 10, &max_ptes_swap);
-    if (err || max_ptes_swap > KHUGEPAGED_MAX_PTES_LIMIT)
+    if (err || max_ptes_swap > KHUGEPAGED_MAX_PTES_LIMIT) {
     return -EINVAL;
+    }
     khugepaged_max_ptes_swap = max_ptes_swap;
     return count;
     }
     static struct kobj_attribute khugepaged_max_ptes_swap_attr =
     __ATTR_RW(max_ptes_swap);
-    static ssize_t max_ptes_shared_show(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    char *buf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn max_ptes_shared_show(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char) -> ssize_t {
     return sysfs_emit(buf, "%u\n", khugepaged_max_ptes_shared);
     }
-    static ssize_t max_ptes_shared_store(struct kobject *kobj,
-    struct kobj_attribute *attr,
-    const char *buf, size_t count)
-    {
-    int err;
-    unsigned long max_ptes_shared;
+#[no_mangle]
+pub unsafe extern "C" fn max_ptes_shared_store(kobj: *mut kobject, attr: *mut kobj_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut err = 0;
+    let mut max_ptes_shared = 0;
     err  = kstrtoul(buf, 10, &max_ptes_shared);
-    if (err || max_ptes_shared > KHUGEPAGED_MAX_PTES_LIMIT)
+    if (err || max_ptes_shared > KHUGEPAGED_MAX_PTES_LIMIT) {
     return -EINVAL;
+    }
     khugepaged_max_ptes_shared = max_ptes_shared;
     return count;
     }
@@ -310,17 +531,13 @@ pub struct khugepaged_scan {
     &alloc_sleep_millisecs_attr.attr,
     core::ptr::null_mut(),
     };
-    struct attribute_group khugepaged_attr_group = {
-    .attrs = khugepaged_attr,
-    .name = "khugepaged",
-    };
+pub static mut attribute_group: usize = 0;
 
 #[no_mangle]
 unsafe extern "C" fn pte_none_or_zero(pte: pte_t) -> bool {
-    static bool pte_none_or_zero(pte_t pte)
-    {
-    if (pte_none(pte))
+    if (pte_none(pte)) {
     return true;
+    }
     return pte_present(pte) && is_zero_pfn(pte_pfn(pte));
     }
 //
@@ -332,32 +549,36 @@ unsafe extern "C" fn pte_none_or_zero(pte: pte_t) -> bool {
 //
 // Return: Maximum number of empty/shared zeropage PTEs for the collapse operation
 //
-    static unsigned int collapse_max_ptes_none(struct collapse_control *cc,
-    struct vm_area_struct *vma, unsigned int order)
-    {
-    let mut max_ptes_none: c_uint = khugepaged_max_ptes_none;
-    if (vma && userfaultfd_armed(vma))
+#[no_mangle]
+pub unsafe extern "C" fn collapse_max_ptes_none(cc: *mut collapse_control, vma: *mut vm_area_struct, order: c_uint) -> c_uint {
+pub static mut max_ptes_none: c_uint = 0;
+    if (vma && userfaultfd_armed(vma)) {
     return 0;
+    }
 // for MADV_COLLAPSE, allow any empty/shared zeropage PTEs
-    if (!cc.is_khugepaged)
+    if (!cc.is_khugepaged) {
     return HPAGE_PMD_NR;
+    }
 // for PMD collapse, respect the user defined maximum
-    if (is_pmd_order(order))
+    if (is_pmd_order(order)) {
     return max_ptes_none;
+    }
 //
 // for mTHP collapse with the sysctl value set to KHUGEPAGED_MAX_PTES_LIMIT,
 // scale the maximum number of PTEs to the order of the collapse.
 //
-    if (max_ptes_none == KHUGEPAGED_MAX_PTES_LIMIT)
+    if (max_ptes_none == KHUGEPAGED_MAX_PTES_LIMIT) {
     return (1 << order) - 1;
+    }
 //
 // For mTHP collapse of values other than 0 or KHUGEPAGED_MAX_PTES_LIMIT,
 // emit a warning and return 0.
 //
-    if (max_ptes_none)
+    if (max_ptes_none) {
     pr_warn_once("mTHP collapse does not support max_ptes_none"
     " values other than 0 or %u, defaulting to 0.\n",
     KHUGEPAGED_MAX_PTES_LIMIT);
+    }
     return 0;
     }
 //
@@ -369,21 +590,22 @@ unsafe extern "C" fn pte_none_or_zero(pte: pte_t) -> bool {
 // Return: Maximum number of PTEs that map shared anonymous pages for the
 // collapse operation
 //
-    static unsigned int collapse_max_ptes_shared(struct collapse_control *cc,
-    unsigned int order)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn collapse_max_ptes_shared(cc: *mut collapse_control, order: c_uint) -> c_uint {
 //
 // For MADV_COLLAPSE, do not restrict the number of PTEs that map shared
 // anonymous pages.
 //
-    if (!cc.is_khugepaged)
+    if (!cc.is_khugepaged) {
     return HPAGE_PMD_NR;
+    }
 //
 // for mTHP collapse do not allow collapsing anonymous memory pages that
 // are shared between processes.
 //
-    if (!is_pmd_order(order))
+    if (!is_pmd_order(order)) {
     return 0;
+    }
 // for PMD collapse, respect the user defined maximum
     return khugepaged_max_ptes_shared;
     }
@@ -396,30 +618,31 @@ unsafe extern "C" fn pte_none_or_zero(pte: pte_t) -> bool {
 // Return: Maximum number of non-present PTEs or the maximum allowed non-present
 // pagecache entries for the collapse operation.
 //
-    static unsigned int collapse_max_ptes_swap(struct collapse_control *cc,
-    unsigned int order)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn collapse_max_ptes_swap(cc: *mut collapse_control, order: c_uint) -> c_uint {
 //
 // For MADV_COLLAPSE, do not restrict the number PTEs entries or
 // pagecache entries that are non-present.
 //
-    if (!cc.is_khugepaged)
+    if (!cc.is_khugepaged) {
     return HPAGE_PMD_NR;
+    }
 // for mTHP collapse do not allow any non-present PTEs or pagecache entries
-    if (!is_pmd_order(order))
+    if (!is_pmd_order(order)) {
     return 0;
+    }
 // for PMD collapse, respect the user defined maximum
     return khugepaged_max_ptes_swap;
     }
-    int hugepage_madvise(struct vm_area_struct *vma,
-    vm_flags_t *vm_flags, int advice)
-    {
-    switch (advice) {
-    case MADV_HUGEPAGE:
+#[no_mangle]
+pub unsafe extern "C" fn hugepage_madvise(vma: *mut vm_area_struct, vm_flags: *mut vm_flags_t, advice: c_int) -> c_int {
+    match (advice) {
+    MADV_HUGEPAGE => {
 // vm_flags &= ~VM_NOHUGEPAGE;
 // vm_flags |= VM_HUGEPAGE;
-    break;
-    case MADV_NOHUGEPAGE:
+    // break;
+    }
+    MADV_NOHUGEPAGE => {
 // vm_flags &= ~VM_HUGEPAGE;
 // vm_flags |= VM_NOHUGEPAGE;
 //
@@ -427,17 +650,17 @@ unsafe extern "C" fn pte_none_or_zero(pte: pte_t) -> bool {
 // this vma even if we leave the mm registered in khugepaged if
 // it got registered before VM_NOHUGEPAGE was set.
 //
-    break;
+    // break;
+    }
     }
     return 0;
     }
 #[no_mangle]
-pub unsafe extern "C" fn khugepaged_init() -> int __init {
-    int __init khugepaged_init(void)
-    {
+pub unsafe extern "C" fn khugepaged_init() -> c_int {
     mm_slot_cache = KMEM_CACHE(mm_slot, 0);
-    if (!mm_slot_cache)
+    if (!mm_slot_cache) {
     return -ENOMEM;
+    }
     khugepaged_pages_to_scan = HPAGE_PMD_NR * 8;
     khugepaged_max_ptes_none = KHUGEPAGED_MAX_PTES_LIMIT;
     khugepaged_max_ptes_swap = HPAGE_PMD_NR / 8;
@@ -445,41 +668,34 @@ pub unsafe extern "C" fn khugepaged_init() -> int __init {
     return 0;
     }
 #[no_mangle]
-pub unsafe extern "C" fn khugepaged_destroy() -> void __init {
-    void __init khugepaged_destroy(void)
-    {
+pub unsafe extern "C" fn khugepaged_destroy()  {
     kmem_cache_destroy(mm_slot_cache);
     }
 #[no_mangle]
 pub unsafe extern "C" fn collapse_test_exit(mm: *mut mm_struct) -> c_int {
-    static inline int collapse_test_exit(struct mm_struct *mm)
-    {
     return atomic_read(&mm.mm_users) == 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn collapse_test_exit_or_disable(mm: *mut mm_struct) -> c_int {
-    static inline int collapse_test_exit_or_disable(struct mm_struct *mm)
-    {
     return collapse_test_exit(mm) ||
     mm_flags_test(MMF_DISABLE_THP_COMPLETELY, mm);
     }
 #[no_mangle]
 pub unsafe extern "C" fn anon_hpage_enabled() -> bool {
-    static inline bool anon_hpage_enabled(void)
-    {
-    if (READ_ONCE(huge_anon_orders_always))
+    if (READ_ONCE(huge_anon_orders_always)) {
     return true;
-    if (READ_ONCE(huge_anon_orders_madvise))
+    }
+    if (READ_ONCE(huge_anon_orders_madvise)) {
     return true;
+    }
     if (READ_ONCE(huge_anon_orders_inherit) &&
-    hugepage_global_enabled())
+    hugepage_global_enabled()) {
     return true;
+    }
     return false;
     }
 #[no_mangle]
 unsafe extern "C" fn hugepage_enabled() -> bool {
-    static bool hugepage_enabled(void)
-    {
 //
 // We cover the anon, shmem and the file-backed case here; file-backed
 // hugepages are determined by the global control.
@@ -487,25 +703,27 @@ unsafe extern "C" fn hugepage_enabled() -> bool {
 // Shmem pmd-sized hugepages are also determined by its pmd-size control,
 // except when the global shmem_huge is set to SHMEM_HUGE_DENY.
 //
-    if (hugepage_global_enabled())
+    if (hugepage_global_enabled()) {
     return true;
-    if (anon_hpage_enabled())
+    }
+    if (anon_hpage_enabled()) {
     return true;
-    if (shmem_hpage_pmd_enabled())
+    }
+    if (shmem_hpage_pmd_enabled()) {
     return true;
+    }
     return false;
     }
 #[no_mangle]
 pub unsafe extern "C" fn __khugepaged_enter(mm: *mut mm_struct) {
-    void __khugepaged_enter(struct mm_struct *mm)
-    {
-    struct mm_slot *slot;
-    int wakeup;
+pub static mut slot: *mut c_void = core::ptr::null_mut();
+    let mut wakeup = 0;
 // __khugepaged_exit() must not run from under us
     VM_BUG_ON_MM(collapse_test_exit(mm), mm);
     slot = mm_slot_alloc(mm_slot_cache);
-    if (!slot)
+    if (!slot) {
     return;
+    }
     if (unlikely(mm_flags_test_and_set(MMF_VM_HUGEPAGE, mm))) {
     mm_slot_free(mm_slot_cache, slot);
     return;
@@ -520,42 +738,41 @@ pub unsafe extern "C" fn __khugepaged_enter(mm: *mut mm_struct) {
     list_add_tail(&slot.mm_node, &khugepaged_scan.mm_head);
     spin_unlock(&khugepaged_mm_lock);
     mmgrab(mm);
-    if (wakeup)
+    if (wakeup) {
     wake_up_interruptible(&khugepaged_wait);
+    }
     }
 //
 // Check what orders are possible based on the vma and collapse type.
 // This is used to determine if mTHP collapse is a viable option.
 //
-    static unsigned long collapse_possible_orders(struct vm_area_struct *vma,
-    vm_flags_t vm_flags, enum tva_type tva_flags)
-    {
-    unsigned long orders;
+#[no_mangle]
+pub unsafe extern "C" fn collapse_possible_orders(vma: *mut vm_area_struct, vm_flags: vm_flags_t, tva_flags: tva_type) -> c_ulong {
+    let mut orders = 0;
 // If khugepaged is scanning an anonymous vma, allow mTHP collapse
-    if ((tva_flags == TVA_KHUGEPAGED) && vma_is_anonymous(vma))
+    if ((tva_flags == TVA_KHUGEPAGED) && vma_is_anonymous(vma)) {
     orders = THP_ORDERS_ALL_ANON;
-    else
+    }
+    else {
     orders = BIT(HPAGE_PMD_ORDER);
+    }
     return thp_vma_allowable_orders(vma, vm_flags, tva_flags, orders);
     }
-    static bool collapse_possible(struct vm_area_struct *vma,
-    vm_flags_t vm_flags, enum tva_type tva_flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn collapse_possible(vma: *mut vm_area_struct, vm_flags: vm_flags_t, tva_flags: tva_type) -> bool {
     return collapse_possible_orders(vma, vm_flags, tva_flags);
     }
-    void khugepaged_enter_vma(struct vm_area_struct *vma,
-    vm_flags_t vm_flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn khugepaged_enter_vma(vma: *mut vm_area_struct, vm_flags: vm_flags_t) {
     if (!mm_flags_test(MMF_VM_HUGEPAGE, vma.vm_mm) && hugepage_enabled()
-    && collapse_possible(vma, vm_flags, TVA_KHUGEPAGED))
+    && collapse_possible(vma, vm_flags, TVA_KHUGEPAGED)) {
     __khugepaged_enter(vma.vm_mm);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn __khugepaged_exit(mm: *mut mm_struct) {
-    void __khugepaged_exit(struct mm_struct *mm)
-    {
-    struct mm_slot *slot;
-    let mut free: c_int = 0;
+pub static mut slot: *mut c_void = core::ptr::null_mut();
+pub static mut free: c_int = 0;
     spin_lock(&khugepaged_mm_lock);
     slot = mm_slot_lookup(mm_slots_hash, mm);
     if (slot && khugepaged_scan.mm_slot != slot) {
@@ -581,38 +798,37 @@ pub unsafe extern "C" fn __khugepaged_exit(mm: *mut mm_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn collapse_control_init_scan(cc: *mut collapse_control) {
-    static void collapse_control_init_scan(struct collapse_control *cc)
-    {
-    memset(cc.node_load, 0, sizeof(cc.node_load));
+    memset(cc.node_load, 0, sizeof!(cc.node_load));
     nodes_clear(cc.alloc_nmask);
     bitmap_zero(cc.mthp_present_ptes, MAX_PTRS_PER_PTE);
     }
 #[no_mangle]
 unsafe extern "C" fn release_pte_folio(folio: *mut folio) {
-    static void release_pte_folio(struct folio *folio)
-    {
     node_stat_mod_folio(folio,
     NR_ISOLATED_ANON + folio_is_file_lru(folio),
     -folio_nr_pages(folio));
     folio_unlock(folio);
     folio_putback_lru(folio);
     }
-    static void release_pte_pages(pte_t *pte, pte_t *_pte,
-    struct list_head *compound_pagelist)
-    {
-    struct folio *folio, *tmp;
+#[no_mangle]
+pub unsafe extern "C" fn release_pte_pages(pte: *mut pte_t, _pte: *mut pte_t, compound_pagelist: *mut list_head) {
+    let mut folio = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
     while (--_pte >= pte) {
-    let mut pteval: pte_t = ptep_get(_pte);
-    unsigned long pfn;
-    if (pte_none(pteval))
+pub static mut pteval: pte_t = 0;
+    let mut pfn = 0;
+    if (pte_none(pteval)) {
     continue;
+    }
     VM_WARN_ON_ONCE(!pte_present(pteval));
     pfn = pte_pfn(pteval);
-    if (is_zero_pfn(pfn))
+    if (is_zero_pfn(pfn)) {
     continue;
+    }
     folio = pfn_folio(pfn);
-    if (folio_test_large(folio))
+    if (folio_test_large(folio)) {
     continue;
+    }
     release_pte_folio(folio);
     }
     list_for_each_entry_safe(folio, tmp, compound_pagelist, lru) {
@@ -620,59 +836,58 @@ unsafe extern "C" fn release_pte_folio(folio: *mut folio) {
     release_pte_folio(folio);
     }
     }
-    static bool folio_pte_referenced(struct folio *folio,
-    struct vm_area_struct *vma, unsigned long addr, pte_t pteval)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn folio_pte_referenced(folio: *mut folio, vma: *mut vm_area_struct, addr: c_ulong, pteval: pte_t) -> bool {
 // The folio was referenced previously ...
-    if (folio_test_young(folio) || folio_test_referenced(folio))
+    if (folio_test_young(folio) || folio_test_referenced(folio)) {
     return true;
+    }
 // ... or the PTE mapping was recently used
     return pte_young(pteval) || mmu_notifier_test_young(vma.vm_mm, addr);
     }
-    static void count_collapse_event(unsigned int order, enum vm_event_item vm_event,
-    enum mthp_stat_item mthp_event)
-    {
-    if (is_pmd_order(order))
+#[no_mangle]
+pub unsafe extern "C" fn count_collapse_event(order: c_uint, vm_event: vm_event_item, mthp_event: mthp_stat_item) {
+    if (is_pmd_order(order)) {
     count_vm_event(vm_event);
+    }
     count_mthp_stat(order, mthp_event);
     }
-    static enum scan_result __collapse_huge_page_isolate(struct vm_area_struct *vma,
-    unsigned long start_addr, pte_t *pte, struct collapse_control *cc,
-    unsigned int order, struct list_head *compound_pagelist)
+    static enum scan_result __collapse_huge_page_isolate(vm_area_struct *vma,
+    unsigned long start_addr, pte_t *pte, collapse_control *cc,
+    unsigned int order, list_head *compound_pagelist)
     {
-    let mut max_ptes_none: c_uint = collapse_max_ptes_none(cc, vma, order);
-    let mut max_ptes_shared: c_uint = collapse_max_ptes_shared(cc, order);
-    let mut nr_pages: c_ulong = 1UL << order;
-    struct page *page = core::ptr::null_mut();
-    struct folio *folio = core::ptr::null_mut();
-    let mut addr: c_ulong = start_addr;
-    pte_t *_pte;
-    let mut none_or_zero: c_int = 0, shared = 0, referenced = 0;
-    let mut result: enum scan_result = SCAN_FAIL;
-    for (_pte = pte; _pte < pte + nr_pages;
-    _pte++, addr += PAGE_SIZE) {
-    let mut pteval: pte_t = ptep_get(_pte);
+pub static mut max_ptes_none: c_uint = 0;
+pub static mut max_ptes_shared: c_uint = 0;
+pub static mut nr_pages: c_ulong = 0;
+    let mut page = core::ptr::null_mut();
+    let mut folio = core::ptr::null_mut();
+pub static mut addr: c_ulong = 0;
+pub static mut _pte: *mut c_void = core::ptr::null_mut();
+pub static mut none_or_zero: c_int = 0;
+pub static mut result: scan_result = 0;
+    while (_pte < pte + nr_pages) {
+pub static mut pteval: pte_t = 0;
     if (pte_none_or_zero(pteval)) {
     if (++none_or_zero > max_ptes_none) {
     result = SCAN_EXCEED_NONE_PTE;
     count_collapse_event(order, THP_SCAN_EXCEED_NONE_PTE,
     MTHP_STAT_COLLAPSE_EXCEED_NONE);
-    goto out;
+// goto;
     }
     continue;
     }
     if (!pte_present(pteval)) {
     result = SCAN_PTE_NON_PRESENT;
-    goto out;
+// goto;
     }
     if (pte_uffd(pteval)) {
     result = SCAN_PTE_UFFD;
-    goto out;
+// goto;
     }
     page = vm_normal_page(vma, addr, pteval);
     if (unlikely(!page) || unlikely(is_zone_device_page(page))) {
     result = SCAN_PAGE_NULL;
-    goto out;
+// goto;
     }
     folio = page_folio(page);
     VM_BUG_ON_FOLIO(!folio_test_anon(folio), folio);
@@ -683,7 +898,7 @@ unsafe extern "C" fn release_pte_folio(folio: *mut folio) {
     if (cc.is_khugepaged && !(vma.vm_flags & VM_DROPPABLE) &&
     folio_test_lazyfree(folio) && !pte_dirty(pteval)) {
     result = SCAN_PAGE_LAZYFREE;
-    goto out;
+// goto;
     }
 // See collapse_scan_pmd().
     if (folio_maybe_mapped_shared(folio)) {
@@ -697,7 +912,7 @@ unsafe extern "C" fn release_pte_folio(folio: *mut folio) {
     result = SCAN_EXCEED_SHARED_PTE;
     count_collapse_event(order, THP_SCAN_EXCEED_SHARED_PTE,
     MTHP_STAT_COLLAPSE_EXCEED_SHARED);
-    goto out;
+// goto;
     }
     }
 //
@@ -706,17 +921,18 @@ unsafe extern "C" fn release_pte_folio(folio: *mut folio) {
 //
     if (!is_pmd_order(order) && folio_order(folio) >= order) {
     result = SCAN_PTE_MAPPED_HUGEPAGE;
-    goto out;
+// goto;
     }
     if (folio_test_large(folio)) {
-    struct folio *f;
+pub static mut f: *mut c_void = core::ptr::null_mut();
 //
 // Check if we have dealt with the compound page
 // already
 //
     list_for_each_entry(f, compound_pagelist, lru) {
-    if (folio == f)
-    goto next;
+    if (folio == f) {
+// goto;
+    }
     }
     }
 //
@@ -727,7 +943,7 @@ unsafe extern "C" fn release_pte_folio(folio: *mut folio) {
 //
     if (!folio_trylock(folio)) {
     result = SCAN_PAGE_LOCK;
-    goto out;
+// goto;
     }
 //
 // Check if the page has any GUP (or other external) pins.
@@ -743,7 +959,7 @@ unsafe extern "C" fn release_pte_folio(folio: *mut folio) {
     if (folio_expected_ref_count(folio) != folio_ref_count(folio)) {
     folio_unlock(folio);
     result = SCAN_PAGE_COUNT;
-    goto out;
+// goto;
     }
 //
 // Isolate the folio to avoid collapsing a hugepage
@@ -752,19 +968,21 @@ unsafe extern "C" fn release_pte_folio(folio: *mut folio) {
     if (!folio_isolate_lru(folio)) {
     folio_unlock(folio);
     result = SCAN_DEL_PAGE_LRU;
-    goto out;
+// goto;
     }
     node_stat_mod_folio(folio,
     NR_ISOLATED_ANON + folio_is_file_lru(folio),
     folio_nr_pages(folio));
     VM_BUG_ON_FOLIO(!folio_test_locked(folio), folio);
     VM_BUG_ON_FOLIO(folio_test_lru(folio), folio);
-    if (folio_test_large(folio))
+    if (folio_test_large(folio)) {
     list_add_tail(&folio.lru, compound_pagelist);
-    next:
+    }
+// label;
     if (cc.is_khugepaged &&
-    folio_pte_referenced(folio, vma, addr, pteval))
-    referenced++;
+    folio_pte_referenced(folio, vma, addr, pteval)) {
+    referenced += 1;
+    }
     }
     if (unlikely(cc.is_khugepaged && !referenced)) {
     result = SCAN_LACK_REFERENCED_PAGE;
@@ -774,31 +992,29 @@ unsafe extern "C" fn release_pte_folio(folio: *mut folio) {
     referenced, result, order);
     return result;
     }
-    out:
+// label;
     release_pte_pages(pte, _pte, compound_pagelist);
     trace_mm_collapse_huge_page_isolate(folio, none_or_zero,
     referenced, result, order);
     return result;
     }
-    static void __collapse_huge_page_copy_succeeded(pte_t *pte,
-    struct vm_area_struct *vma, unsigned long address,
-    spinlock_t *ptl, unsigned int order,
-    struct list_head *compound_pagelist)
-    {
-    let mut nr_pages: c_ulong = 1UL << order;
-    let mut end: c_ulong = address + (PAGE_SIZE * nr_pages);
-    struct folio *src, *tmp;
-    pte_t pteval;
-    pte_t *_pte;
-    unsigned int nr_ptes;
-    for (_pte = pte; _pte < pte + nr_pages; _pte += nr_ptes,
-    address += nr_ptes * PAGE_SIZE) {
+#[no_mangle]
+pub unsafe extern "C" fn __collapse_huge_page_copy_succeeded(pte: *mut pte_t, vma: *mut vm_area_struct, address: c_ulong, ptl: *mut spinlock_t, order: c_uint, compound_pagelist: *mut list_head) {
+pub static mut nr_pages: c_ulong = 0;
+pub static mut end: c_ulong = 0;
+    let mut src = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
+    let mut pteval;
+pub static mut _pte: *mut c_void = core::ptr::null_mut();
+    let mut nr_ptes = 0;
+    while (_pte < pte + nr_pages) {
     nr_ptes = 1;
     pteval = ptep_get(_pte);
     if (pte_none_or_zero(pteval)) {
     add_mm_counter(vma.vm_mm, MM_ANONPAGES, 1);
-    if (pte_none(pteval))
+    if (pte_none(pteval)) {
     continue;
+    }
 //
 // ptl mostly unnecessary.
 //
@@ -807,10 +1023,10 @@ unsafe extern "C" fn release_pte_folio(folio: *mut folio) {
     spin_unlock(ptl);
     ksm_might_unmap_zero_page(vma.vm_mm, pteval);
     } else {
-    struct page *src_page = pte_page(pteval);
+    let mut src_page = pte_page(pteval);
     src = page_folio(src_page);
     if (folio_test_large(src)) {
-    let mut max_nr_ptes: c_uint = (end - address) >> PAGE_SHIFT;
+pub static mut max_nr_ptes: c_uint = 0;
     nr_ptes = folio_pte_batch(src, _pte, pteval, max_nr_ptes);
     } else {
     release_pte_folio(src);
@@ -837,12 +1053,10 @@ unsafe extern "C" fn release_pte_folio(folio: *mut folio) {
     folio_putback_lru(src);
     }
     }
-    static void __collapse_huge_page_copy_failed(pte_t *pte,
-    pmd_t *pmd, pmd_t orig_pmd, struct vm_area_struct *vma,
-    unsigned int order, struct list_head *compound_pagelist)
-    {
-    let mut nr_pages: c_ulong = 1UL << order;
-    spinlock_t *pmd_ptl;
+#[no_mangle]
+pub unsafe extern "C" fn __collapse_huge_page_copy_failed(pte: *mut pte_t, pmd: *mut pmd_t, orig_pmd: pmd_t, vma: *mut vm_area_struct, order: c_uint, compound_pagelist: *mut list_head) {
+pub static mut nr_pages: c_ulong = 0;
+pub static mut pmd_ptl: *mut c_void = core::ptr::null_mut();
 //
 // Re-establish the PMD to point to the original page table
 // entry. Restoring PMD needs to be done prior to releasing
@@ -873,22 +1087,21 @@ unsafe extern "C" fn release_pte_folio(folio: *mut folio) {
 // @ptl: lock on raw pages' PTEs
 // @compound_pagelist: list that stores compound pages
 //
-    static enum scan_result __collapse_huge_page_copy(pte_t *pte, struct folio *folio,
-    pmd_t *pmd, pmd_t orig_pmd, struct vm_area_struct *vma,
-    unsigned long address, spinlock_t *ptl, unsigned int order,
-    struct list_head *compound_pagelist)
+    static enum scan_result __collapse_huge_page_copy(pte_t *pte, folio *folio,
+    pmd_t *pmd, pmd_t orig_pmd, vm_area_struct *vma,
+    unsigned long address, spinlock_t *ptl, unsigned int order, list_head *compound_pagelist)
     {
-    let mut nr_pages: c_ulong = 1UL << order;
-    unsigned int i;
-    let mut result: enum scan_result = SCAN_SUCCEED;
+pub static mut nr_pages: c_ulong = 0;
+    let mut i = 0;
+pub static mut result: scan_result = 0;
 //
 // Copying pages' contents is subject to memory poison at any iteration.
 //
-    for (i = 0; i < nr_pages; i++) {
-    let mut pteval: pte_t = ptep_get(pte + i);
-    struct page *page = folio_page(folio, i);
-    let mut src_addr: c_ulong = address + i * PAGE_SIZE;
-    struct page *src_page;
+    while (i < nr_pages) {
+pub static mut pteval: pte_t = 0;
+    let mut page = folio_page(folio, i);
+pub static mut src_addr: c_ulong = 0;
+pub static mut src_page: *mut c_void = core::ptr::null_mut();
     if (pte_none_or_zero(pteval)) {
     clear_user_highpage(page, src_addr);
     continue;
@@ -899,82 +1112,78 @@ unsafe extern "C" fn release_pte_folio(folio: *mut folio) {
     break;
     }
     }
-    if (likely(result == SCAN_SUCCEED))
+    if (likely(result == SCAN_SUCCEED)) {
     __collapse_huge_page_copy_succeeded(pte, vma, address, ptl,
     order, compound_pagelist);
-    else
+    }
+    else {
     __collapse_huge_page_copy_failed(pte, pmd, orig_pmd, vma,
     order, compound_pagelist);
+    }
     return result;
     }
 #[no_mangle]
 unsafe extern "C" fn khugepaged_alloc_sleep() {
-    static void khugepaged_alloc_sleep(void)
-    {
-    DEFINE_WAIT(wait);
+pub static mut wait: usize = 0;
     add_wait_queue(&khugepaged_wait, &wait);
     __set_current_state(TASK_INTERRUPTIBLE|TASK_FREEZABLE);
     schedule_timeout(msecs_to_jiffies(khugepaged_alloc_sleep_millisecs));
     remove_wait_queue(&khugepaged_wait, &wait);
     }
-    static struct collapse_control khugepaged_collapse_control = {
-    .is_khugepaged = true,
-    };
+pub static mut collapse_control: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn collapse_scan_abort(nid: c_int, cc: *mut collapse_control) -> bool {
-    static bool collapse_scan_abort(int nid, struct collapse_control *cc)
-    {
-    int i;
+    let mut i = 0;
 //
 // If node_reclaim_mode is disabled, then no extra effort is made to
 // allocate memory locally.
 //
-    if (!node_reclaim_enabled())
+    if (!node_reclaim_enabled()) {
     return false;
+    }
 // If there is a count for this node already, it must be acceptable
-    if (cc.node_load[nid])
+    if (cc.node_load[nid]) {
     return false;
-    for (i = 0; i < MAX_NUMNODES; i++) {
-    if (!cc.node_load[i])
+    }
+    while (i < MAX_NUMNODES) {
+    if (!cc.node_load[i]) {
     continue;
-    if (node_distance(nid, i) > node_reclaim_distance)
+    }
+    if (node_distance(nid, i) > node_reclaim_distance) {
     return true;
+    }
     }
     return false;
     }
 
-    (transparent_hugepage_flags &				\
+    (transparent_hugepage_flags &				
     (1<<TRANSPARENT_HUGEPAGE_DEFRAG_KHUGEPAGED_FLAG))
 // Defrag for khugepaged will enter direct reclaim/compaction if necessary
 #[no_mangle]
 pub unsafe extern "C" fn alloc_hugepage_khugepaged_gfpmask() -> gfp_t {
-    static inline gfp_t alloc_hugepage_khugepaged_gfpmask(void)
-    {
     return khugepaged_defrag() ? GFP_TRANSHUGE : GFP_TRANSHUGE_LIGHT;
     }
 
 #[no_mangle]
 unsafe extern "C" fn collapse_find_target_node(cc: *mut collapse_control) -> c_int {
-    static int collapse_find_target_node(struct collapse_control *cc)
-    {
     int nid, target_node = 0, max_value = 0;
 // find first node with max normal pages hit
-    for (nid = 0; nid < MAX_NUMNODES; nid++)
+    for (nid = 0; nid < MAX_NUMNODES; nid++) {
     if (cc.node_load[nid] > max_value) {
+    }
     max_value = cc.node_load[nid];
     target_node = nid;
     }
     for_each_online_node(nid) {
-    if (max_value == cc.node_load[nid])
+    if (max_value == cc.node_load[nid]) {
     node_set(nid, cc.alloc_nmask);
+    }
     }
     return target_node;
     }
 
 #[no_mangle]
 unsafe extern "C" fn collapse_find_target_node(cc: *mut collapse_control) -> c_int {
-    static int collapse_find_target_node(struct collapse_control *cc)
-    {
     return 0;
     }
 
@@ -983,18 +1192,19 @@ unsafe extern "C" fn collapse_find_target_node(cc: *mut collapse_control) -> c_i
 // after taking the mmap_lock again.
 // Returns enum scan_result value.
 //
-    static enum scan_result hugepage_vma_revalidate(struct mm_struct *mm, unsigned long address,
-    bool expect_anon, struct vm_area_struct **vmap,
-    struct collapse_control *cc, unsigned int order)
+    static enum scan_result hugepage_vma_revalidate(mm_struct *mm, unsigned long address,
+    bool expect_anon, vm_area_struct **vmap, collapse_control *cc, unsigned int order)
     {
-    struct vm_area_struct *vma;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
     enum tva_type type = cc.is_khugepaged ? TVA_KHUGEPAGED :
     TVA_FORCED_COLLAPSE;
-    if (unlikely(collapse_test_exit_or_disable(mm)))
+    if (unlikely(collapse_test_exit_or_disable(mm))) {
     return SCAN_ANY_PROCESS;
+    }
 // vmap = vma = find_vma(mm, address);
-    if (!vma)
+    if (!vma) {
     return SCAN_VMA_NULL;
+    }
 //
 // We cannot collapse VMA regions that do not span the full PMD. This is
 // due to the potential of the PMD being shared by another VMA leaving
@@ -1002,10 +1212,12 @@ unsafe extern "C" fn collapse_find_target_node(cc: *mut collapse_control) -> c_i
 // ensure its not shared by another VMA. We'd need to lock all VMAs in
 // the PMD range to support this.
 //
-    if (!thp_vma_suitable_order(vma, address, PMD_ORDER))
+    if (!thp_vma_suitable_order(vma, address, PMD_ORDER)) {
     return SCAN_ADDRESS_RANGE;
-    if (!thp_vma_allowable_orders(vma, vma.vm_flags, type, BIT(order)))
+    }
+    if (!thp_vma_allowable_orders(vma, vma.vm_flags, type, BIT(order))) {
     return SCAN_VMA_CHECK;
+    }
 //
 // Anon VMA expected, the address may be unmapped then
 // remapped to file after khugepaged reacquired the mmap_lock.
@@ -1013,49 +1225,56 @@ unsafe extern "C" fn collapse_find_target_node(cc: *mut collapse_control) -> c_i
 // thp_vma_allowable_orders() may return true for qualified file
 // vmas.
 //
-    if (expect_anon && (!(*vmap).anon_vma || !vma_is_anonymous(*vmap)))
+    if (expect_anon && (!(*vmap).anon_vma || !vma_is_anonymous(*vmap))) {
     return SCAN_PAGE_ANON;
+    }
     return SCAN_SUCCEED;
     }
 #[no_mangle]
 pub unsafe extern "C" fn check_pmd_state(pmd: *mut pmd_t) -> enum scan_result {
-    static inline enum scan_result check_pmd_state(pmd_t *pmd)
-    {
-    let mut pmde: pmd_t = pmdp_get_lockless(pmd);
-    if (pmd_none(pmde))
+pub static mut pmde: pmd_t = 0;
+    if (pmd_none(pmde)) {
     return SCAN_NO_PTE_TABLE;
+    }
 //
 // The folio may be under migration when khugepaged is trying to
 // collapse it. Migration success or failure will eventually end
 // up with a present PMD mapping a folio again.
 //
-    if (pmd_is_migration_entry(pmde))
+    if (pmd_is_migration_entry(pmde)) {
     return SCAN_PMD_MAPPED;
-    if (!pmd_present(pmde))
+    }
+    if (!pmd_present(pmde)) {
     return SCAN_NO_PTE_TABLE;
-    if (pmd_trans_huge(pmde))
+    }
+    if (pmd_trans_huge(pmde)) {
     return SCAN_PMD_MAPPED;
-    if (pmd_bad(pmde))
+    }
+    if (pmd_bad(pmde)) {
     return SCAN_NO_PTE_TABLE;
+    }
     return SCAN_SUCCEED;
     }
-    static enum scan_result find_pmd_or_thp_or_none(struct mm_struct *mm,
+    static enum scan_result find_pmd_or_thp_or_none(mm_struct *mm,
     unsigned long address, pmd_t **pmd)
     {
 // pmd = mm_find_pmd(mm, address);
-    if (!*pmd)
+    if (!*pmd) {
     return SCAN_NO_PTE_TABLE;
+    }
     return check_pmd_state(*pmd);
     }
-    static enum scan_result check_pmd_still_valid(struct mm_struct *mm,
+    static enum scan_result check_pmd_still_valid(mm_struct *mm,
     unsigned long address, pmd_t *pmd)
     {
-    pmd_t *new_pmd;
-    let mut result: enum scan_result = find_pmd_or_thp_or_none(mm, address, &new_pmd);
-    if (result != SCAN_SUCCEED)
+pub static mut new_pmd: *mut c_void = core::ptr::null_mut();
+pub static mut result: scan_result = 0;
+    if (result != SCAN_SUCCEED) {
     return result;
-    if (new_pmd != pmd)
+    }
+    if (new_pmd != pmd) {
     return SCAN_FAIL;
+    }
     return SCAN_SUCCEED;
     }
 //
@@ -1069,24 +1288,17 @@ pub unsafe extern "C" fn check_pmd_state(pmd: *mut pmd_t) -> enum scan_result {
 // Called and returns without pte mapped or spinlocks held.
 // Returns result: if not SCAN_SUCCEED, mmap_lock has been released.
 //
-    static enum scan_result __collapse_huge_page_swapin(struct mm_struct *mm,
-    struct vm_area_struct *vma, unsigned long start_addr,
+    static enum scan_result __collapse_huge_page_swapin(mm_struct *mm, vm_area_struct *vma, unsigned long start_addr,
     pmd_t *pmd, int referenced, unsigned int order)
     {
-    let mut swapped_in: c_int = 0;
-    let mut ret: vm_fault_t = 0;
+pub static mut swapped_in: c_int = 0;
+pub static mut ret: vm_fault_t = 0;
     unsigned long addr, end = start_addr + (PAGE_SIZE << order);
     enum scan_result result;
-    pte_t *pte = core::ptr::null_mut();
-    spinlock_t *ptl;
-    for (addr = start_addr; addr < end; addr += PAGE_SIZE) {
-    struct vm_fault vmf = {
-    .vma = vma,
-    .address = addr,
-    .pgoff = linear_page_index(vma, addr),
-    .flags = FAULT_FLAG_ALLOW_RETRY,
-    .pmd = pmd,
-    };
+    let mut pte = core::ptr::null_mut();
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
+    while (addr < end) {
+pub static mut vm_fault: usize = 0;
     if (!pte++) {
 //
 // Here the ptl is only used to check pte_same() in
@@ -1096,13 +1308,14 @@ pub unsafe extern "C" fn check_pmd_state(pmd: *mut pmd_t) -> enum scan_result {
     if (!pte) {
     mmap_read_unlock(mm);
     result = SCAN_NO_PTE_TABLE;
-    goto out;
+// goto;
     }
     }
     vmf.orig_pte = ptep_get_lockless(pte);
     if (pte_none(vmf.orig_pte) ||
-    pte_present(vmf.orig_pte))
+    pte_present(vmf.orig_pte)) {
     continue;
+    }
 //
 // TODO: Support swapin without leading to further mTHP
 // collapses. Currently bringing in new pages via swapin may
@@ -1114,7 +1327,7 @@ pub unsafe extern "C" fn check_pmd_state(pmd: *mut pmd_t) -> enum scan_result {
     pte_unmap(pte);
     mmap_read_unlock(mm);
     result = SCAN_EXCEED_SWAP_PTE;
-    goto out;
+// goto;
     }
     vmf.pte = pte;
     vmf.ptl = ptl;
@@ -1130,33 +1343,34 @@ pub unsafe extern "C" fn check_pmd_state(pmd: *mut pmd_t) -> enum scan_result {
     if (ret & VM_FAULT_RETRY) {
 // Likely, but not guaranteed, that page lock failed
     result = SCAN_PAGE_LOCK;
-    goto out;
+// goto;
     }
     if (ret & VM_FAULT_ERROR) {
     mmap_read_unlock(mm);
     result = SCAN_FAIL;
-    goto out;
+// goto;
     }
-    swapped_in++;
+    swapped_in += 1;
     }
-    if (pte)
+    if (pte) {
     pte_unmap(pte);
+    }
 // Drain LRU cache to remove extra pin on the swapped in pages
-    if (swapped_in)
+    if (swapped_in) {
     lru_add_drain();
+    }
     result = SCAN_SUCCEED;
-    out:
+// label;
     trace_mm_collapse_huge_page_swapin(mm, swapped_in, referenced, result,
     order);
     return result;
     }
-    static enum scan_result alloc_charge_folio(struct folio **foliop, struct mm_struct *mm,
-    struct collapse_control *cc, unsigned int order)
+    static enum scan_result alloc_charge_folio(folio **foliop, mm_struct *mm, collapse_control *cc, unsigned int order)
     {
     gfp_t gfp = (cc.is_khugepaged ? alloc_hugepage_khugepaged_gfpmask() :
     GFP_TRANSHUGE);
-    let mut node: c_int = collapse_find_target_node(cc);
-    struct folio *folio;
+pub static mut node: c_int = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     folio = __folio_alloc(gfp, order, node, &cc.alloc_nmask);
     if (!folio) {
 // foliop = NULL;
@@ -1170,8 +1384,9 @@ pub unsafe extern "C" fn check_pmd_state(pmd: *mut pmd_t) -> enum scan_result {
 // foliop = NULL;
     return SCAN_CGROUP_CHARGE_FAIL;
     }
-    if (is_pmd_order(order))
+    if (is_pmd_order(order)) {
     count_memcg_folio_events(folio, THP_COLLAPSE_ALLOC, 1);
+    }
 // foliop = folio;
     return SCAN_SUCCEED;
     }
@@ -1181,40 +1396,42 @@ pub unsafe extern "C" fn check_pmd_state(pmd: *mut pmd_t) -> enum scan_result {
 // while allocating a THP, as that could trigger direct reclaim/compaction.
 // Note that the VMA must be rechecked after grabbing the mmap_lock again.
 //
-    static enum scan_result collapse_huge_page(struct mm_struct *mm, unsigned long start_addr,
-    int referenced, int unmapped, struct collapse_control *cc,
+    static enum scan_result collapse_huge_page(mm_struct *mm, unsigned long start_addr,
+    int referenced, int unmapped, collapse_control *cc,
     unsigned int order)
     {
-    let mut pmd_addr: c_ulong = start_addr & HPAGE_PMD_MASK;
-    let mut end_addr: c_ulong = start_addr + (PAGE_SIZE << order);
-    LIST_HEAD(compound_pagelist);
+pub static mut pmd_addr: c_ulong = 0;
+pub static mut end_addr: c_ulong = 0;
+pub static mut compound_pagelist: usize = 0;
     pmd_t *pmd, _pmd;
-    pte_t *pte = core::ptr::null_mut();
-    pgtable_t pgtable;
-    struct folio *folio;
-    spinlock_t *pmd_ptl, *pte_ptl;
-    let mut result: enum scan_result = SCAN_FAIL;
-    struct vm_area_struct *vma;
-    struct mmu_notifier_range range;
-    let mut anon_vma_locked: bool = false;
+    let mut pte = core::ptr::null_mut();
+    let mut pgtable;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut pmd_ptl = core::ptr::null_mut();
+    let mut pte_ptl = core::ptr::null_mut();
+pub static mut result: scan_result = 0;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+pub static mut range: usize = 0;
+pub static mut anon_vma_locked: bool = false;
     result = alloc_charge_folio(&folio, mm, cc, order);
-    if (result != SCAN_SUCCEED)
-    goto out_nolock;
+    if (result != SCAN_SUCCEED) {
+// goto;
+    }
     if (folio_memcg_alloc_deferred(folio)) {
     result = SCAN_ALLOC_HUGE_PAGE_FAIL;
-    goto out_nolock;
+// goto;
     }
     mmap_read_lock(mm);
     result = hugepage_vma_revalidate(mm, pmd_addr, /*expect_anon=*/ true,
     &vma, cc, order);
     if (result != SCAN_SUCCEED) {
     mmap_read_unlock(mm);
-    goto out_nolock;
+// goto;
     }
     result = find_pmd_or_thp_or_none(mm, pmd_addr, &pmd);
     if (result != SCAN_SUCCEED) {
     mmap_read_unlock(mm);
-    goto out_nolock;
+// goto;
     }
     if (unmapped) {
 //
@@ -1224,8 +1441,9 @@ pub unsafe extern "C" fn check_pmd_state(pmd: *mut pmd_t) -> enum scan_result {
 //
     result = __collapse_huge_page_swapin(mm, vma, start_addr, pmd,
     referenced, order);
-    if (result != SCAN_SUCCEED)
-    goto out_nolock;
+    if (result != SCAN_SUCCEED) {
+// goto;
+    }
     }
     mmap_read_unlock(mm);
 //
@@ -1239,13 +1457,15 @@ pub unsafe extern "C" fn check_pmd_state(pmd: *mut pmd_t) -> enum scan_result {
     mmap_write_lock(mm);
     result = hugepage_vma_revalidate(mm, pmd_addr, /*expect_anon=*/ true,
     &vma, cc, order);
-    if (result != SCAN_SUCCEED)
-    goto out_up_write;
+    if (result != SCAN_SUCCEED) {
+// goto;
+    }
 // check if the pmd is still valid
     vma_start_write(vma);
     result = check_pmd_still_valid(mm, pmd_addr, pmd);
-    if (result != SCAN_SUCCEED)
-    goto out_up_write;
+    if (result != SCAN_SUCCEED) {
+// goto;
+    }
     anon_vma_lock_write(vma.anon_vma);
     anon_vma_locked = true;
 //
@@ -1289,7 +1509,7 @@ pub unsafe extern "C" fn check_pmd_state(pmd: *mut pmd_t) -> enum scan_result {
 //
     pmd_populate(mm, pmd, pmd_pgtable(_pmd));
     spin_unlock(pmd_ptl);
-    goto out_up_write;
+// goto;
     }
 //
 // For PMD collapse all pages are isolated and locked so anon_vma
@@ -1305,8 +1525,9 @@ pub unsafe extern "C" fn check_pmd_state(pmd: *mut pmd_t) -> enum scan_result {
     result = __collapse_huge_page_copy(pte, folio, pmd, _pmd,
     vma, start_addr, pte_ptl,
     order, &compound_pagelist);
-    if (unlikely(result != SCAN_SUCCEED))
-    goto out_up_write;
+    if (unlikely(result != SCAN_SUCCEED)) {
+// goto;
+    }
 //
 // The smp_wmb() inside __folio_mark_uptodate() ensures the
 // copy_huge_page writes become visible before the set_pmd_at()
@@ -1326,36 +1547,40 @@ pub unsafe extern "C" fn check_pmd_state(pmd: *mut pmd_t) -> enum scan_result {
 // with a valid page table hierarchy and the PTE lock held.
 // Acquire it nested inside pmd_ptl when they are distinct locks.
 //
-    if (pte_ptl != pmd_ptl)
+    if (pte_ptl != pmd_ptl) {
     spin_lock_nested(pte_ptl, SINGLE_DEPTH_NESTING);
+    }
     pmd_populate(mm, pmd, pmd_pgtable(_pmd));
     map_anon_folio_pte_nopf(folio, pte, vma, start_addr,
 // uffd_wp=*/ false);
-    if (pte_ptl != pmd_ptl)
+    if (pte_ptl != pmd_ptl) {
     spin_unlock(pte_ptl);
+    }
     }
     spin_unlock(pmd_ptl);
     folio = core::ptr::null_mut();
     result = SCAN_SUCCEED;
-    out_up_write:
-    if (pte)
+// label;
+    if (pte) {
     pte_unmap(pte);
-    if (anon_vma_locked)
+    }
+    if (anon_vma_locked) {
     anon_vma_unlock_write(vma.anon_vma);
+    }
     mmap_write_unlock(mm);
-    out_nolock:
-    if (folio)
+// label;
+    if (folio) {
     folio_put(folio);
+    }
     trace_mm_collapse_huge_page(mm, result == SCAN_SUCCEED, result, order);
     return result;
     }
 // Return the highest naturally aligned order that fits at @offset within a PMD.
 #[no_mangle]
 unsafe extern "C" fn max_order_from_offset(offset: c_uint) -> c_uint {
-    static unsigned int max_order_from_offset(unsigned int offset)
-    {
-    if (offset == 0)
+    if (offset == 0) {
     return HPAGE_PMD_ORDER;
+    }
     return min_t(unsigned int, __ffs(offset), HPAGE_PMD_ORDER);
     }
 //
@@ -1375,21 +1600,23 @@ unsafe extern "C" fn max_order_from_offset(offset: c_uint) -> c_uint {
 // If a collapse is permitted, we attempt to collapse the PTE range into a
 // mTHP.
 //
-    static enum scan_result mthp_collapse(struct mm_struct *mm,
-    unsigned long address, int referenced, int unmapped,
-    struct collapse_control *cc, unsigned long enabled_orders)
+    static enum scan_result mthp_collapse(mm_struct *mm,
+    unsigned long address, int referenced, int unmapped, collapse_control *cc, unsigned long enabled_orders)
     {
-    unsigned int nr_occupied_ptes, nr_ptes, max_ptes_none;
-    let mut last_result: enum scan_result = SCAN_FAIL;
-    let mut collapsed: c_int = 0;
-    let mut alloc_failed: bool = false;
-    unsigned long collapse_address;
-    let mut offset: c_uint = 0;
-    let mut order: c_uint = HPAGE_PMD_ORDER;
+    let mut nr_occupied_ptes = 0;
+    let mut nr_ptes = 0;
+    let mut max_ptes_none = 0;
+pub static mut last_result: scan_result = 0;
+pub static mut collapsed: c_int = 0;
+pub static mut alloc_failed: bool = false;
+    let mut collapse_address = 0;
+pub static mut offset: c_uint = 0;
+pub static mut order: c_uint = 0;
     while (offset < HPAGE_PMD_NR) {
     nr_ptes = 1UL << order;
-    if (!test_bit(order, &enabled_orders))
-    goto next_order;
+    if (!test_bit(order, &enabled_orders)) {
+// goto;
+    }
     max_ptes_none = collapse_max_ptes_none(cc, core::ptr::null_mut(), order);
     nr_occupied_ptes = bitmap_weight_from(cc.mthp_present_ptes, offset,
     offset + nr_ptes);
@@ -1398,46 +1625,63 @@ unsafe extern "C" fn max_order_from_offset(offset: c_uint) -> c_uint {
 // not in the present-PTE bitmap. Account them for the PMD-order
 // candidate.
 //
-    if (is_pmd_order(order))
+    if (is_pmd_order(order)) {
     nr_occupied_ptes += unmapped;
+    }
     if (nr_occupied_ptes >= nr_ptes - max_ptes_none) {
     enum scan_result ret;
     collapse_address = address + offset * PAGE_SIZE;
     ret = collapse_huge_page(mm, collapse_address, referenced,
     unmapped, cc, order);
-    switch (ret) {
+    match (ret) {
 // Cases where we continue to next collapse candidate
-    case SCAN_SUCCEED:
+    SCAN_SUCCEED => {
     collapsed += nr_ptes;
     fallthrough;
-    case SCAN_PTE_MAPPED_HUGEPAGE:
-    goto next_offset;
+    }
+    SCAN_PTE_MAPPED_HUGEPAGE => {
+// goto;
 // Cases where lower orders might still succeed
-    case SCAN_ALLOC_HUGE_PAGE_FAIL:
+    }
+    SCAN_ALLOC_HUGE_PAGE_FAIL => {
     alloc_failed = true;
     fallthrough;
-    case SCAN_LACK_REFERENCED_PAGE:
-    case SCAN_EXCEED_NONE_PTE:
-    case SCAN_EXCEED_SWAP_PTE:
-    case SCAN_EXCEED_SHARED_PTE:
-    case SCAN_PAGE_LOCK:
-    case SCAN_PAGE_COUNT:
-    case SCAN_PAGE_NULL:
-    case SCAN_DEL_PAGE_LRU:
-    case SCAN_PTE_NON_PRESENT:
-    case SCAN_PTE_UFFD:
-    case SCAN_PAGE_LAZYFREE:
+    }
+    SCAN_LACK_REFERENCED_PAGE => {
+    }
+    SCAN_EXCEED_NONE_PTE => {
+    }
+    SCAN_EXCEED_SWAP_PTE => {
+    }
+    SCAN_EXCEED_SHARED_PTE => {
+    }
+    SCAN_PAGE_LOCK => {
+    }
+    SCAN_PAGE_COUNT => {
+    }
+    SCAN_PAGE_NULL => {
+    }
+    SCAN_DEL_PAGE_LRU => {
+    }
+    SCAN_PTE_NON_PRESENT => {
+    }
+    SCAN_PTE_UFFD => {
+    }
+    SCAN_PAGE_LAZYFREE => {
     last_result = ret;
-    goto next_order;
+// goto;
 // Cases where no further collapse is possible
-    case SCAN_PMD_MAPPED:
+    }
+    SCAN_PMD_MAPPED => {
     fallthrough;
-    default:
+    }
+    _ => {
     last_result = ret;
-    goto done;
+// goto;
     }
     }
-    next_order:
+    }
+// label;
 //
 // Continue with the next smaller order if there is still
 // any smaller order enabled. When at the smallest order
@@ -1445,10 +1689,10 @@ unsafe extern "C" fn max_order_from_offset(offset: c_uint) -> c_uint {
 //
     if (order > KHUGEPAGED_MIN_MTHP_ORDER &&
     (enabled_orders & GENMASK(order - 1, 0))) {
-    order--;
+    order -= 1;
     continue;
     }
-    next_offset:
+// label;
 //
 // Advance past the region we just processed and determine the
 // highest order we can attempt next. Since huge pages must be
@@ -1461,37 +1705,38 @@ unsafe extern "C" fn max_order_from_offset(offset: c_uint) -> c_uint {
     offset += nr_ptes;
     order = max_order_from_offset(offset);
     }
-    done:
-    if (collapsed)
+// label;
+    if (collapsed) {
     return SCAN_SUCCEED;
-    if (alloc_failed)
+    }
+    if (alloc_failed) {
     return SCAN_ALLOC_HUGE_PAGE_FAIL;
+    }
     return last_result;
     }
-    static enum scan_result collapse_scan_pmd(struct mm_struct *mm,
-    struct vm_area_struct *vma, unsigned long start_addr,
-    bool *lock_dropped, struct collapse_control *cc)
+    static enum scan_result collapse_scan_pmd(mm_struct *mm, vm_area_struct *vma, unsigned long start_addr,
+    bool *lock_dropped, collapse_control *cc)
     {
-    let mut max_ptes_shared: c_uint = collapse_max_ptes_shared(cc, HPAGE_PMD_ORDER);
-    let mut max_ptes_swap: c_uint = collapse_max_ptes_swap(cc, HPAGE_PMD_ORDER);
-    let mut max_ptes_none: c_uint = collapse_max_ptes_none(cc, vma, HPAGE_PMD_ORDER);
-    let mut tva_flags: enum tva_type = cc.is_khugepaged ? TVA_KHUGEPAGED : TVA_FORCED_COLLAPSE;
-    pmd_t *pmd;
+pub static mut max_ptes_shared: c_uint = 0;
+pub static mut max_ptes_swap: c_uint = 0;
+pub static mut max_ptes_none: c_uint = 0;
+pub static mut tva_flags: tva_type = 0;
+pub static mut pmd: *mut c_void = core::ptr::null_mut();
     pte_t *pte, *_pte, pteval;
-    int i;
-    let mut none_or_zero: c_int = 0, shared = 0, referenced = 0;
-    let mut result: enum scan_result = SCAN_FAIL;
-    struct page *page = core::ptr::null_mut();
-    struct folio *folio = core::ptr::null_mut();
-    unsigned long addr;
-    unsigned long enabled_orders;
-    spinlock_t *ptl;
-    let mut node: c_int = NUMA_NO_NODE, unmapped = 0;
+    let mut i = 0;
+pub static mut none_or_zero: c_int = 0;
+pub static mut result: scan_result = 0;
+    let mut page = core::ptr::null_mut();
+    let mut folio = core::ptr::null_mut();
+    let mut addr = 0;
+    let mut enabled_orders = 0;
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
+pub static mut node: c_int = 0;
     VM_BUG_ON(start_addr & ~HPAGE_PMD_MASK);
     result = find_pmd_or_thp_or_none(mm, start_addr, &pmd);
     if (result != SCAN_SUCCEED) {
-    cc.progress++;
-    goto out;
+    cc.progress += 1;
+// goto;
     }
     collapse_control_init_scan(cc);
     enabled_orders = collapse_possible_orders(vma, vma.vm_flags, tva_flags);
@@ -1500,25 +1745,26 @@ unsafe extern "C" fn max_order_from_offset(offset: c_uint) -> c_uint {
 // scan all pages to populate the bitmap for mTHP collapse. The bitmap
 // is then checked again in mthp_collapse() for each attempted order.
 //
-    if (enabled_orders != BIT(HPAGE_PMD_ORDER))
+    if (enabled_orders != BIT(HPAGE_PMD_ORDER)) {
     max_ptes_none = KHUGEPAGED_MAX_PTES_LIMIT;
+    }
     pte = pte_offset_map_lock(mm, pmd, start_addr, &ptl);
     if (!pte) {
-    cc.progress++;
+    cc.progress += 1;
     result = SCAN_NO_PTE_TABLE;
-    goto out;
+// goto;
     }
-    for (i = 0; i < HPAGE_PMD_NR; i++) {
+    while (i < HPAGE_PMD_NR) {
     _pte = pte + i;
     addr = start_addr + i * PAGE_SIZE;
     pteval = ptep_get(_pte);
-    cc.progress++;
+    cc.progress += 1;
     if (pte_none_or_zero(pteval)) {
     if (++none_or_zero > max_ptes_none) {
     result = SCAN_EXCEED_NONE_PTE;
     count_collapse_event(HPAGE_PMD_ORDER, THP_SCAN_EXCEED_NONE_PTE,
     MTHP_STAT_COLLAPSE_EXCEED_NONE);
-    goto out_unmap;
+// goto;
     }
     continue;
     }
@@ -1527,7 +1773,7 @@ unsafe extern "C" fn max_order_from_offset(offset: c_uint) -> c_uint {
     result = SCAN_EXCEED_SWAP_PTE;
     count_collapse_event(HPAGE_PMD_ORDER, THP_SCAN_EXCEED_SWAP_PTE,
     MTHP_STAT_COLLAPSE_EXCEED_SWAP);
-    goto out_unmap;
+// goto;
     }
 //
 // Always be strict with uffd-wp
@@ -1536,7 +1782,7 @@ unsafe extern "C" fn max_order_from_offset(offset: c_uint) -> c_uint {
 //
     if (pte_swp_uffd_any(pteval)) {
     result = SCAN_PTE_UFFD;
-    goto out_unmap;
+// goto;
     }
     continue;
     }
@@ -1551,12 +1797,12 @@ unsafe extern "C" fn max_order_from_offset(offset: c_uint) -> c_uint {
 // the registered range.  So, just be simple.
 //
     result = SCAN_PTE_UFFD;
-    goto out_unmap;
+// goto;
     }
     page = vm_normal_page(vma, addr, pteval);
     if (unlikely(!page) || unlikely(is_zone_device_page(page))) {
     result = SCAN_PAGE_NULL;
-    goto out_unmap;
+// goto;
     }
     folio = page_folio(page);
 //
@@ -1566,11 +1812,11 @@ unsafe extern "C" fn max_order_from_offset(offset: c_uint) -> c_uint {
     if (cc.is_khugepaged && !(vma.vm_flags & VM_DROPPABLE) &&
     folio_test_lazyfree(folio) && !pte_dirty(pteval)) {
     result = SCAN_PAGE_LAZYFREE;
-    goto out_unmap;
+// goto;
     }
     if (!folio_test_anon(folio)) {
     result = SCAN_PAGE_ANON;
-    goto out_unmap;
+// goto;
     }
 //
 // We treat a single page as shared if any part of the THP
@@ -1581,7 +1827,7 @@ unsafe extern "C" fn max_order_from_offset(offset: c_uint) -> c_uint {
     result = SCAN_EXCEED_SHARED_PTE;
     count_collapse_event(HPAGE_PMD_ORDER, THP_SCAN_EXCEED_SHARED_PTE,
     MTHP_STAT_COLLAPSE_EXCEED_SHARED);
-    goto out_unmap;
+// goto;
     }
     }
 // Set bit for occupied pages
@@ -1595,16 +1841,16 @@ unsafe extern "C" fn max_order_from_offset(offset: c_uint) -> c_uint {
     node = folio_nid(folio);
     if (collapse_scan_abort(node, cc)) {
     result = SCAN_SCAN_ABORT;
-    goto out_unmap;
+// goto;
     }
     cc.node_load[node]++;
     if (!folio_test_lru(folio)) {
     result = SCAN_PAGE_LRU;
-    goto out_unmap;
+// goto;
     }
     if (folio_test_locked(folio)) {
     result = SCAN_PAGE_LOCK;
-    goto out_unmap;
+// goto;
     }
 //
 // Check if the page has any GUP (or other external) pins.
@@ -1615,11 +1861,12 @@ unsafe extern "C" fn max_order_from_offset(offset: c_uint) -> c_uint {
 //
     if (folio_expected_ref_count(folio) != folio_ref_count(folio)) {
     result = SCAN_PAGE_COUNT;
-    goto out_unmap;
+// goto;
     }
     if (cc.is_khugepaged &&
-    folio_pte_referenced(folio, vma, addr, pteval))
-    referenced++;
+    folio_pte_referenced(folio, vma, addr, pteval)) {
+    referenced += 1;
+    }
     }
     if (cc.is_khugepaged &&
     (!referenced ||
@@ -1628,7 +1875,7 @@ unsafe extern "C" fn max_order_from_offset(offset: c_uint) -> c_uint {
     } else {
     result = SCAN_SUCCEED;
     }
-    out_unmap:
+// label;
     pte_unmap_unlock(pte, ptl);
     if (result == SCAN_SUCCEED) {
 // collapse_huge_page() expects the lock to be dropped before calling
@@ -1638,16 +1885,14 @@ unsafe extern "C" fn max_order_from_offset(offset: c_uint) -> c_uint {
 // mmap_lock was released above, set lock_dropped
 // lock_dropped = true;
     }
-    out:
+// label;
     trace_mm_khugepaged_scan_pmd(mm, folio, referenced,
     none_or_zero, result, unmapped);
     return result;
     }
 #[no_mangle]
 unsafe extern "C" fn collect_mm_slot(slot: *mut mm_slot) {
-    static void collect_mm_slot(struct mm_slot *slot)
-    {
-    struct mm_struct *mm = slot.mm;
+    let mut mm = slot.mm;
     lockdep_assert_held(&khugepaged_mm_lock);
     if (collapse_test_exit(mm)) {
 // free mm_slot
@@ -1663,62 +1908,65 @@ unsafe extern "C" fn collect_mm_slot(slot: *mut mm_slot) {
     }
     }
 // folio must be locked, and mmap_lock must be held
-    static enum scan_result set_huge_pmd(struct vm_area_struct *vma, unsigned long addr,
-    pmd_t *pmdp, struct folio *folio, struct page *page)
+    static enum scan_result set_huge_pmd(vm_area_struct *vma, unsigned long addr,
+    pmd_t *pmdp, folio *folio, page *page)
     {
-    struct mm_struct *mm = vma.vm_mm;
-    struct vm_fault vmf = {
-    .vma = vma,
-    .address = addr,
-    .flags = 0,
-    };
-    pgd_t *pgdp;
-    p4d_t *p4dp;
-    pud_t *pudp;
+    let mut mm = vma.vm_mm;
+pub static mut vm_fault: usize = 0;
+pub static mut pgdp: *mut c_void = core::ptr::null_mut();
+pub static mut p4dp: *mut c_void = core::ptr::null_mut();
+pub static mut pudp: *mut c_void = core::ptr::null_mut();
     mmap_assert_locked(vma.vm_mm);
     if (!pmdp) {
     pgdp = pgd_offset(mm, addr);
     p4dp = p4d_alloc(mm, pgdp, addr);
-    if (!p4dp)
-    return SCAN_FAIL;
-    pudp = pud_alloc(mm, p4dp, addr);
-    if (!pudp)
-    return SCAN_FAIL;
-    pmdp = pmd_alloc(mm, pudp, addr);
-    if (!pmdp)
+    if (!p4dp) {
     return SCAN_FAIL;
     }
-    vmf.pmd = pmdp;
-    if (do_set_pmd(&vmf, folio, page))
+    pudp = pud_alloc(mm, p4dp, addr);
+    if (!pudp) {
     return SCAN_FAIL;
+    }
+    pmdp = pmd_alloc(mm, pudp, addr);
+    if (!pmdp) {
+    return SCAN_FAIL;
+    }
+    }
+    vmf.pmd = pmdp;
+    if (do_set_pmd(&vmf, folio, page)) {
+    return SCAN_FAIL;
+    }
     folio_get(folio);
     return SCAN_SUCCEED;
     }
-    static enum scan_result try_collapse_pte_mapped_thp(struct mm_struct *mm, unsigned long addr,
+    static enum scan_result try_collapse_pte_mapped_thp(mm_struct *mm, unsigned long addr,
     bool install_pmd)
     {
-    let mut result: enum scan_result = SCAN_FAIL;
-    let mut nr_mapped_ptes: c_int = 0;
-    unsigned int nr_batch_ptes;
-    struct mmu_notifier_range range;
-    let mut notified: bool = false;
-    let mut haddr: c_ulong = addr & HPAGE_PMD_MASK;
-    let mut end: c_ulong = haddr + HPAGE_PMD_SIZE;
-    struct vm_area_struct *vma = vma_lookup(mm, haddr);
-    struct folio *folio;
-    pte_t *start_pte, *pte;
+pub static mut result: scan_result = 0;
+pub static mut nr_mapped_ptes: c_int = 0;
+    let mut nr_batch_ptes = 0;
+pub static mut range: usize = 0;
+pub static mut notified: bool = false;
+pub static mut haddr: c_ulong = 0;
+pub static mut end: c_ulong = 0;
+    let mut vma = vma_lookup(mm, haddr);
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut start_pte = core::ptr::null_mut();
+    let mut pte = core::ptr::null_mut();
     pmd_t *pmd, pgt_pmd;
-    spinlock_t *pml = core::ptr::null_mut(), *ptl;
-    int i;
+    let mut pml = core::ptr::null_mut(), *ptl;
+    let mut i = 0;
     mmap_assert_locked(mm);
 // First check VMA found, in case page tables are being torn down
     if (!vma || !vma.vm_file ||
-    !range_in_vma(vma, haddr, haddr + HPAGE_PMD_SIZE))
+    !range_in_vma(vma, haddr, haddr + HPAGE_PMD_SIZE)) {
     return SCAN_VMA_CHECK;
+    }
 // Fast check before locking page if already PMD-mapped
     result = find_pmd_or_thp_or_none(mm, haddr, &pmd);
-    if (result == SCAN_PMD_MAPPED)
+    if (result == SCAN_PMD_MAPPED) {
     return result;
+    }
 //
 // If we are here, we've succeeded in replacing all the native pages
 // in the page cache with a single hugepage. If a mm were to fault-in
@@ -1726,61 +1974,70 @@ unsafe extern "C" fn collect_mm_slot(slot: *mut mm_slot) {
 // and map it by a PMD, regardless of sysfs THP settings. As such, let's
 // analogously elide sysfs THP settings here and force collapse.
 //
-    if (!thp_vma_allowable_order(vma, vma.vm_flags, TVA_FORCED_COLLAPSE, PMD_ORDER))
+    if (!thp_vma_allowable_order(vma, vma.vm_flags, TVA_FORCED_COLLAPSE, PMD_ORDER)) {
     return SCAN_VMA_CHECK;
+    }
 //
 // Keep pmd pgtable while the uffd bit is in use; see comment in
 // retract_page_tables().
 //
-    if (userfaultfd_protected(vma))
+    if (userfaultfd_protected(vma)) {
     return SCAN_PTE_UFFD;
+    }
     folio = filemap_lock_folio(vma.vm_file.f_mapping,
     linear_page_index(vma, haddr));
-    if (IS_ERR(folio))
+    if (IS_ERR(folio)) {
     return SCAN_PAGE_NULL;
+    }
     if (!is_pmd_order(folio_order(folio))) {
     result = SCAN_PAGE_COMPOUND;
-    goto drop_folio;
+// goto;
     }
     result = find_pmd_or_thp_or_none(mm, haddr, &pmd);
-    switch (result) {
-    case SCAN_SUCCEED:
-    break;
-    case SCAN_NO_PTE_TABLE:
+    match (result) {
+    SCAN_SUCCEED => {
+    // break;
+    }
+    SCAN_NO_PTE_TABLE => {
 //
 // All pte entries have been removed and pmd cleared.
 // Skip all the pte checks and just update the pmd mapping.
 //
-    goto maybe_install_pmd;
-    default:
-    goto drop_folio;
+// goto;
+    }
+    _ => {
+// goto;
+    }
     }
     result = SCAN_FAIL;
     start_pte = pte_offset_map_lock(mm, pmd, haddr, &ptl);
-    if (!start_pte)		/* mmap_lock + page lock should prevent this */
-    goto drop_folio;
+    if (!start_pte)		/* mmap_lock + page lock should prevent this */ {
+// goto;
+    }
 // step 1: check all mapped PTEs are to the right huge page
-    for (i = 0, addr = haddr, pte = start_pte;
-    i < HPAGE_PMD_NR; i++, addr += PAGE_SIZE, pte++) {
-    struct page *page;
-    let mut ptent: pte_t = ptep_get(pte);
+    while (i < HPAGE_PMD_NR) {
+pub static mut page: *mut c_void = core::ptr::null_mut();
+pub static mut ptent: pte_t = 0;
 // empty pte, skip
-    if (pte_none(ptent))
+    if (pte_none(ptent)) {
     continue;
+    }
 // page swapped out, abort
     if (!pte_present(ptent)) {
     result = SCAN_PTE_NON_PRESENT;
-    goto abort;
+// goto;
     }
     page = vm_normal_page(vma, addr, ptent);
-    if (WARN_ON_ONCE(page && is_zone_device_page(page)))
+    if (WARN_ON_ONCE!(page && is_zone_device_page(page))) {
     page = core::ptr::null_mut();
+    }
 //
 // Note that uprobe, debugger, or MAP_PRIVATE may change the
 // page table, but the new page will not be a subpage of hpage.
 //
-    if (folio_page(folio, i) != page)
-    goto abort;
+    if (folio_page(folio, i) != page) {
+// goto;
+    }
     }
     pte_unmap_unlock(start_pte, ptl);
     mmu_notifier_range_init(&range, MMU_NOTIFY_CLEAR, 0, mm,
@@ -1795,29 +2052,32 @@ unsafe extern "C" fn collect_mm_slot(slot: *mut mm_slot) {
 // So page lock of folio does not protect from it, so we must not drop
 // ptl before pgt_pmd is removed, so uffd private needs pml taken now.
 //
-    if (userfaultfd_armed(vma) && !(vma.vm_flags & VM_SHARED))
+    if (userfaultfd_armed(vma) && !(vma.vm_flags & VM_SHARED)) {
     pml = pmd_lock(mm, pmd);
+    }
     start_pte = pte_offset_map_rw_nolock(mm, pmd, haddr, &pgt_pmd, &ptl);
-    if (!start_pte)		/* mmap_lock + page lock should prevent this */
-    goto abort;
-    if (!pml)
+    if (!start_pte)		/* mmap_lock + page lock should prevent this */ {
+// goto;
+    }
+    if (!pml) {
     spin_lock(ptl);
-#[no_mangle]
-pub unsafe extern "C" fn if(pml: ptl !=) -> else {
-    else if (ptl != pml)
+    }
+
+    else if (ptl != pml) {
     spin_lock_nested(ptl, SINGLE_DEPTH_NESTING);
-    if (unlikely(!pmd_same(pgt_pmd, pmdp_get_lockless(pmd))))
-    goto abort;
+    }
+    if (unlikely(!pmd_same(pgt_pmd, pmdp_get_lockless(pmd)))) {
+// goto;
+    }
 // step 2: clear page table and adjust rmap
-    for (i = 0, addr = haddr, pte = start_pte; i < HPAGE_PMD_NR;
-    i += nr_batch_ptes, addr += nr_batch_ptes * PAGE_SIZE,
-    pte += nr_batch_ptes) {
-    let mut max_nr_batch_ptes: c_uint = (end - addr) >> PAGE_SHIFT;
-    struct page *page;
-    let mut ptent: pte_t = ptep_get(pte);
+    while (i < HPAGE_PMD_NR) {
+pub static mut max_nr_batch_ptes: c_uint = 0;
+pub static mut page: *mut c_void = core::ptr::null_mut();
+pub static mut ptent: pte_t = 0;
     nr_batch_ptes = 1;
-    if (pte_none(ptent))
+    if (pte_none(ptent)) {
     continue;
+    }
 //
 // We dropped ptl after the first scan, to do the mmu_notifier:
 // page lock stops more PTEs of the folio being faulted in, but
@@ -1826,11 +2086,12 @@ pub unsafe extern "C" fn if(pml: ptl !=) -> else {
 //
     if (!pte_present(ptent)) {
     result = SCAN_PTE_NON_PRESENT;
-    goto abort;
+// goto;
     }
     page = vm_normal_page(vma, addr, ptent);
-    if (folio_page(folio, i) != page)
-    goto abort;
+    if (folio_page(folio, i) != page) {
+// goto;
+    }
     nr_batch_ptes = folio_pte_batch(folio, pte, ptent, max_nr_batch_ptes);
 //
 // Must clear entry, or a racing truncate may re-remove it.
@@ -1841,8 +2102,9 @@ pub unsafe extern "C" fn if(pml: ptl !=) -> else {
     folio_remove_rmap_ptes(folio, page, nr_batch_ptes, vma);
     nr_mapped_ptes += nr_batch_ptes;
     }
-    if (!pml)
+    if (!pml) {
     spin_unlock(ptl);
+    }
 // step 3: set proper refcount and mm_counters.
     if (nr_mapped_ptes) {
     folio_ref_sub(folio, nr_mapped_ptes);
@@ -1855,39 +2117,43 @@ pub unsafe extern "C" fn if(pml: ptl !=) -> else {
     spin_lock_nested(ptl, SINGLE_DEPTH_NESTING);
     if (unlikely(!pmd_same(pgt_pmd, pmdp_get_lockless(pmd)))) {
     flush_tlb_mm(mm);
-    goto unlock;
+// goto;
     }
     }
     }
     pgt_pmd = pmdp_collapse_flush(vma, haddr, pmd);
     pmdp_get_lockless_sync();
     pte_unmap_unlock(start_pte, ptl);
-    if (ptl != pml)
+    if (ptl != pml) {
     spin_unlock(pml);
+    }
     mmu_notifier_invalidate_range_end(&range);
     mm_dec_nr_ptes(mm);
     page_table_check_pte_clear_range(mm, haddr, pgt_pmd);
     pte_free_defer(mm, pmd_pgtable(pgt_pmd));
-    maybe_install_pmd:
+// label;
 // step 5: install pmd entry
     result = install_pmd
     ? set_huge_pmd(vma, haddr, pmd, folio, &folio.page)
     : SCAN_SUCCEED;
-    goto drop_folio;
-    abort:
+// goto;
+// label;
     if (nr_mapped_ptes) {
     flush_tlb_mm(mm);
     folio_ref_sub(folio, nr_mapped_ptes);
     add_mm_counter(mm, mm_counter_file(folio), -nr_mapped_ptes);
     }
-    unlock:
-    if (start_pte)
+// label;
+    if (start_pte) {
     pte_unmap_unlock(start_pte, ptl);
-    if (pml && pml != ptl)
+    }
+    if (pml && pml != ptl) {
     spin_unlock(pml);
-    if (notified)
+    }
+    if (notified) {
     mmu_notifier_invalidate_range_end(&range);
-    drop_folio:
+    }
+// label;
     folio_unlock(folio);
     folio_put(folio);
     return result;
@@ -1904,23 +2170,21 @@ pub unsafe extern "C" fn if(pml: ptl !=) -> else {
 // right THP. If so, retract the page table so the THP can refault in with
 // as pmd-mapped. Possibly install a huge PMD mapping the THP.
 //
-    void collapse_pte_mapped_thp(struct mm_struct *mm, unsigned long addr,
-    bool install_pmd)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn collapse_pte_mapped_thp(mm: *mut mm_struct, addr: c_ulong, install_pmd: bool) {
     try_collapse_pte_mapped_thp(mm, addr, install_pmd);
     }
 // Can we retract page tables for this file-backed VMA?
 #[no_mangle]
 unsafe extern "C" fn file_backed_vma_is_retractable(vma: *mut vm_area_struct) -> bool {
-    static bool file_backed_vma_is_retractable(struct vm_area_struct *vma)
-    {
 //
 // Check vma->anon_vma to exclude MAP_PRIVATE mappings that
 // got written to. These VMAs are likely not worth removing
 // page tables from, as PMD-mapping is likely to be split later.
 //
-    if (READ_ONCE(vma.anon_vma))
+    if (READ_ONCE(vma.anon_vma)) {
     return false;
+    }
 //
 // When a vma is registered with uffd-wp or RWP, we cannot recycle
 // the page table because there may be pte markers installed.
@@ -1929,8 +2193,9 @@ unsafe extern "C" fn file_backed_vma_is_retractable(vma: *mut vm_area_struct) ->
 // have the same file mapped hugely, but skip this one: it will
 // always be mapped in small page size for these registrations.
 //
-    if (userfaultfd_protected(vma))
+    if (userfaultfd_protected(vma)) {
     return false;
+    }
 //
 // If the VMA contains guard regions then we can't collapse it.
 //
@@ -1941,36 +2206,39 @@ unsafe extern "C" fn file_backed_vma_is_retractable(vma: *mut vm_area_struct) ->
 // obtained on guard region installation after the flag is set, so this
 // check being performed under this lock excludes races.
 //
-    if (vma_test_atomic_flag(vma, VMA_MAYBE_GUARD_BIT))
+    if (vma_test_atomic_flag(vma, VMA_MAYBE_GUARD_BIT)) {
     return false;
+    }
     return true;
     }
 #[no_mangle]
 unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgoff_t) {
-    static void retract_page_tables(struct address_space *mapping, pgoff_t pgoff)
-    {
-    struct vm_area_struct *vma;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
     i_mmap_lock_read(mapping);
     mapping_rmap_tree_foreach(vma, mapping, pgoff, pgoff) {
-    struct mmu_notifier_range range;
-    struct mm_struct *mm;
-    unsigned long addr;
+pub static mut range: usize = 0;
+pub static mut mm: *mut c_void = core::ptr::null_mut();
+    let mut addr = 0;
     pmd_t *pmd, pgt_pmd;
-    spinlock_t *pml;
-    spinlock_t *ptl;
-    let mut success: bool = false;
+pub static mut pml: *mut c_void = core::ptr::null_mut();
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
+pub static mut success: bool = false;
     addr = vma.vm_start +
     ((pgoff - vma_start_pgoff(vma)) << PAGE_SHIFT);
     if (addr & ~HPAGE_PMD_MASK ||
-    vma.vm_end < addr + HPAGE_PMD_SIZE)
+    vma.vm_end < addr + HPAGE_PMD_SIZE) {
     continue;
+    }
     mm = vma.vm_mm;
-    if (find_pmd_or_thp_or_none(mm, addr, &pmd) != SCAN_SUCCEED)
+    if (find_pmd_or_thp_or_none(mm, addr, &pmd) != SCAN_SUCCEED) {
     continue;
-    if (collapse_test_exit(mm))
+    }
+    if (collapse_test_exit(mm)) {
     continue;
-    if (!file_backed_vma_is_retractable(vma))
+    }
+    if (!file_backed_vma_is_retractable(vma)) {
     continue;
+    }
 // PTEs were notified when unmapped; but now for the PMD?
     mmu_notifier_range_init(&range, MMU_NOTIFY_CLEAR, 0, mm,
     addr, addr + HPAGE_PMD_SIZE);
@@ -1987,11 +2255,13 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
 // still meets our requirements, rather than checking pmd_same()
 // like elsewhere.
 //
-    if (check_pmd_state(pmd) != SCAN_SUCCEED)
-    goto drop_pml;
+    if (check_pmd_state(pmd) != SCAN_SUCCEED) {
+// goto;
+    }
     ptl = pte_lockptr(mm, pmd);
-    if (ptl != pml)
+    if (ptl != pml) {
     spin_lock_nested(ptl, SINGLE_DEPTH_NESTING);
+    }
 //
 // Huge page lock is still held, so normally the page table must
 // remain empty; and we have already skipped anon_vma and
@@ -2006,9 +2276,10 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
     pmdp_get_lockless_sync();
     success = true;
     }
-    if (ptl != pml)
+    if (ptl != pml) {
     spin_unlock(ptl);
-    drop_pml:
+    }
+// label;
     spin_unlock(pml);
     mmu_notifier_invalidate_range_end(&range);
     if (success) {
@@ -2044,18 +2315,19 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
 // + unlock old pages
 // + unlock and free huge page;
 //
-    static enum scan_result collapse_file(struct mm_struct *mm, unsigned long addr,
-    struct file *file, pgoff_t start, struct collapse_control *cc)
+    static enum scan_result collapse_file(mm_struct *mm, unsigned long addr, file *file, pgoff_t start, collapse_control *cc)
     {
-    struct address_space *mapping = file.f_mapping;
-    struct page *dst;
-    struct folio *folio, *tmp, *new_folio;
-    let mut index: pgoff_t = 0, end = start + HPAGE_PMD_NR;
-    LIST_HEAD(pagelist);
+    let mut mapping = file.f_mapping;
+pub static mut dst: *mut c_void = core::ptr::null_mut();
+    let mut folio = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
+    let mut new_folio = core::ptr::null_mut();
+pub static mut index: pgoff_t = 0;
+pub static mut pagelist: usize = 0;
     XA_STATE_ORDER(xas, &mapping.i_pages, start, HPAGE_PMD_ORDER);
-    let mut result: enum scan_result = SCAN_SUCCEED;
-    let mut nr_none: c_int = 0;
-    let mut is_shmem: bool = shmem_file(file);
+pub static mut result: scan_result = 0;
+pub static mut nr_none: c_int = 0;
+pub static mut is_shmem: bool = false;
 //
 // MADV_COLLAPSE ignores shmem huge config, so do not check shmem
 //
@@ -2065,12 +2337,14 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
     VM_WARN_ON_ONCE(!is_shmem && !mapping_pmd_folio_support(mapping));
     VM_WARN_ON_ONCE(start & (HPAGE_PMD_NR - 1));
     result = alloc_charge_folio(&new_folio, mm, cc, HPAGE_PMD_ORDER);
-    if (result != SCAN_SUCCEED)
-    goto out;
+    if (result != SCAN_SUCCEED) {
+// goto;
+    }
     mapping_set_update(&xas, mapping);
     __folio_set_locked(new_folio);
-    if (is_shmem)
+    if (is_shmem) {
     __folio_set_swapbacked(new_folio);
+    }
     new_folio.index = start;
     new_folio.mapping = mapping;
 //
@@ -2080,15 +2354,16 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
     do {
     xas_lock_irq(&xas);
     xas_create_range(&xas);
-    if (!xas_error(&xas))
+    if (!xas_error(&xas)) {
     break;
+    }
     xas_unlock_irq(&xas);
     if (!xas_nomem(&xas, GFP_KERNEL)) {
     result = SCAN_FAIL;
-    goto rollback;
+// goto;
     }
     } while (1);
-    for (index = start; index < end;) {
+    while (index < end) {
     xas_set(&xas, index);
     folio = xas_load(&xas);
     VM_BUG_ON(index != xas.xa_index);
@@ -2102,11 +2377,11 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
     if (index == start) {
     if (!xas_next_entry(&xas, end - 1)) {
     result = SCAN_TRUNCATED;
-    goto xa_locked;
+// goto;
     }
     }
-    nr_none++;
-    index++;
+    nr_none += 1;
+    index += 1;
     continue;
     }
     if (xa_is_value(folio) || !folio_test_uptodate(folio)) {
@@ -2115,7 +2390,7 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
     if (shmem_get_folio(mapping.host, index, 0,
     &folio, SGP_NOALLOC)) {
     result = SCAN_FAIL;
-    goto xa_unlocked;
+// goto;
     }
 // drain lru cache to help folio_isolate_lru()
     lru_add_drain();
@@ -2124,7 +2399,7 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
     xas_unlock_irq(&xas);
     } else {
     result = SCAN_PAGE_LOCK;
-    goto xa_locked;
+// goto;
     }
     } else {	/* !is_shmem */
     if (!folio || xa_is_value(folio)) {
@@ -2137,7 +2412,7 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
     folio = filemap_lock_folio(mapping, index);
     if (IS_ERR(folio)) {
     result = SCAN_FAIL;
-    goto xa_unlocked;
+// goto;
     }
     } else if (folio_test_dirty(folio)) {
 //
@@ -2155,20 +2430,21 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
 // forcing writeback in loop.
 //
     xas_unlock_irq(&xas);
-    if (!inode_is_open_for_write(mapping.host))
+    if (!inode_is_open_for_write(mapping.host)) {
     filemap_flush(mapping);
+    }
     result = SCAN_PAGE_DIRTY_OR_WRITEBACK;
-    goto xa_unlocked;
+// goto;
     } else if (folio_test_writeback(folio)) {
     xas_unlock_irq(&xas);
     result = SCAN_PAGE_DIRTY_OR_WRITEBACK;
-    goto xa_unlocked;
+// goto;
     } else if (folio_trylock(folio)) {
     folio_get(folio);
     xas_unlock_irq(&xas);
     } else {
     result = SCAN_PAGE_LOCK;
-    goto xa_locked;
+// goto;
     }
     }
 //
@@ -2179,7 +2455,7 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
 // make sure the folio is up to date
     if (unlikely(!folio_test_uptodate(folio))) {
     result = SCAN_FAIL;
-    goto out_unlock;
+// goto;
     }
 //
 // If file was truncated then extended, or hole-punched, before
@@ -2188,11 +2464,11 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
 //
     if (is_pmd_order(folio_order(folio))) {
     result = SCAN_PTE_MAPPED_HUGEPAGE;
-    goto out_unlock;
+// goto;
     }
     if (folio_mapping(folio) != mapping) {
     result = SCAN_TRUNCATED;
-    goto out_unlock;
+// goto;
     }
     if (!is_shmem && (folio_test_dirty(folio) ||
     folio_test_writeback(folio))) {
@@ -2202,20 +2478,21 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
 // since first write.
 //
     result = SCAN_PAGE_DIRTY_OR_WRITEBACK;
-    goto out_unlock;
+// goto;
     }
     if (!folio_isolate_lru(folio)) {
     result = SCAN_DEL_PAGE_LRU;
-    goto out_unlock;
+// goto;
     }
     if (!filemap_release_folio(folio, GFP_KERNEL)) {
     result = SCAN_PAGE_HAS_PRIVATE;
     folio_putback_lru(folio);
-    goto out_unlock;
+// goto;
     }
-    if (folio_mapped(folio))
+    if (folio_mapped(folio)) {
     try_to_unmap(folio,
     TTU_IGNORE_MLOCK | TTU_BATCH_FLUSH);
+    }
     xas_lock_irq(&xas);
     VM_BUG_ON_FOLIO(folio != xa_load(xas.xa, index), folio);
 //
@@ -2233,7 +2510,7 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
     result = SCAN_PAGE_COUNT;
     xas_unlock_irq(&xas);
     folio_putback_lru(folio);
-    goto out_unlock;
+// goto;
     }
 //
 // At this point, the folio is locked and unmapped. If the PTE
@@ -2253,7 +2530,7 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
     result = SCAN_PAGE_DIRTY_OR_WRITEBACK;
     xas_unlock_irq(&xas);
     folio_putback_lru(folio);
-    goto out_unlock;
+// goto;
     }
 //
 // Accumulate the folios that are being collapsed.
@@ -2261,14 +2538,14 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
     list_add_tail(&folio.lru, &pagelist);
     index += folio_nr_pages(folio);
     continue;
-    out_unlock:
+// label;
     folio_unlock(folio);
     folio_put(folio);
-    goto xa_unlocked;
+// goto;
     }
-    xa_locked:
+// label;
     xas_unlock_irq(&xas);
-    xa_unlocked:
+// label;
 //
 // If collapse is successful, flush must be done now before copying.
 // If collapse is unsuccessful, does flush actually need to be done?
@@ -2276,11 +2553,12 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
 //
     try_to_unmap_flush();
     if (result == SCAN_SUCCEED && nr_none &&
-    !shmem_charge(mapping.host, nr_none))
+    !shmem_charge(mapping.host, nr_none)) {
     result = SCAN_FAIL;
+    }
     if (result != SCAN_SUCCEED) {
     nr_none = 0;
-    goto rollback;
+// goto;
     }
 //
 // The old folios are locked, so they won't change anymore.
@@ -2291,42 +2569,42 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
     int i, nr_pages = folio_nr_pages(folio);
     while (index < folio.index) {
     clear_highpage(dst);
-    index++;
-    dst++;
+    index += 1;
+    dst += 1;
     }
-    for (i = 0; i < nr_pages; i++) {
+    while (i < nr_pages) {
     if (copy_mc_highpage(dst, folio_page(folio, i)) > 0) {
     result = SCAN_COPY_MC;
-    goto rollback;
+// goto;
     }
-    index++;
-    dst++;
+    index += 1;
+    dst += 1;
     }
     }
     while (index < end) {
     clear_highpage(dst);
-    index++;
-    dst++;
+    index += 1;
+    dst += 1;
     }
     if (nr_none) {
-    struct vm_area_struct *vma;
-    let mut nr_none_check: c_int = 0;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+pub static mut nr_none_check: c_int = 0;
     i_mmap_lock_read(mapping);
     xas_lock_irq(&xas);
     xas_set(&xas, start);
-    for (index = start; index < end; index++) {
+    while (index < end) {
     if (!xas_next(&xas)) {
     xas_store(&xas, XA_RETRY_ENTRY);
     if (xas_error(&xas)) {
     result = SCAN_STORE_FAILED;
-    goto immap_locked;
+// goto;
     }
-    nr_none_check++;
+    nr_none_check += 1;
     }
     }
     if (nr_none != nr_none_check) {
     result = SCAN_PAGE_FILLED;
-    goto immap_locked;
+// goto;
     }
 //
 // If userspace observed a missing page in a VMA with
@@ -2344,19 +2622,20 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
     mapping_rmap_tree_foreach(vma, mapping, start, end) {
     if (userfaultfd_missing(vma)) {
     result = SCAN_EXCEED_NONE_PTE;
-    goto immap_locked;
+// goto;
     }
     }
-    immap_locked:
+// label;
     i_mmap_unlock_read(mapping);
     if (result != SCAN_SUCCEED) {
     xas_set(&xas, start);
-    for (index = start; index < end; index++) {
-    if (xas_next(&xas) == XA_RETRY_ENTRY)
+    while (index < end) {
+    if (xas_next(&xas) == XA_RETRY_ENTRY) {
     xas_store(&xas, core::ptr::null_mut());
     }
+    }
     xas_unlock_irq(&xas);
-    goto rollback;
+// goto;
     }
     } else {
     xas_lock_irq(&xas);
@@ -2375,21 +2654,23 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
 //
     folio_mark_uptodate(new_folio);
     folio_ref_add(new_folio, HPAGE_PMD_NR - 1);
-    if (is_shmem)
+    if (is_shmem) {
     folio_mark_dirty(new_folio);
+    }
     folio_add_lru(new_folio);
 // Join all the small entries into a single multi-index entry.
     xas_set_order(&xas, start, HPAGE_PMD_ORDER);
     xas_store(&xas, new_folio);
-    WARN_ON_ONCE(xas_error(&xas));
+    WARN_ON_ONCE!(xas_error(&xas));
     xas_unlock_irq(&xas);
 //
 // Remove pte page tables, so we can re-fault the page as huge.
 // If MADV_COLLAPSE, adjust result to call try_collapse_pte_mapped_thp().
 //
     retract_page_tables(mapping, start);
-    if (cc && !cc.is_khugepaged)
+    if (cc && !cc.is_khugepaged) {
     result = SCAN_PTE_MAPPED_HUGEPAGE;
+    }
     folio_unlock(new_folio);
 //
 // The collapse has succeeded, so free the old folios.
@@ -2398,17 +2679,18 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
     list_del(&folio.lru);
     lruvec_stat_mod_folio(folio, NR_FILE_PAGES,
     -folio_nr_pages(folio));
-    if (is_shmem)
+    if (is_shmem) {
     lruvec_stat_mod_folio(folio, NR_SHMEM,
     -folio_nr_pages(folio));
+    }
     folio.mapping = core::ptr::null_mut();
     folio_clear_active(folio);
     folio_clear_unevictable(folio);
     folio_unlock(folio);
     folio_put_refs(folio, 2 + folio_nr_pages(folio));
     }
-    goto out;
-    rollback:
+// goto;
+// label;
 // Something went wrong: roll back page cache changes
     if (nr_none) {
     xas_lock_irq(&xas);
@@ -2425,30 +2707,31 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
     new_folio.mapping = core::ptr::null_mut();
     folio_unlock(new_folio);
     folio_put(new_folio);
-    out:
+// label;
     VM_BUG_ON(!list_empty(&pagelist));
     trace_mm_khugepaged_collapse_file(mm, new_folio, index, addr, is_shmem, file, HPAGE_PMD_NR, result);
     return result;
     }
-    static enum scan_result collapse_scan_file(struct mm_struct *mm,
-    unsigned long addr, struct file *file, pgoff_t start,
-    struct collapse_control *cc)
+    static enum scan_result collapse_scan_file(mm_struct *mm,
+    unsigned long addr, file *file, pgoff_t start, collapse_control *cc)
     {
-    let mut max_ptes_none: c_uint = collapse_max_ptes_none(cc, core::ptr::null_mut(), HPAGE_PMD_ORDER);
-    let mut max_ptes_swap: c_uint = collapse_max_ptes_swap(cc, HPAGE_PMD_ORDER);
-    struct folio *folio = core::ptr::null_mut();
-    struct address_space *mapping = file.f_mapping;
+pub static mut max_ptes_none: c_uint = 0;
+pub static mut max_ptes_swap: c_uint = 0;
+    let mut folio = core::ptr::null_mut();
+    let mut mapping = file.f_mapping;
     XA_STATE(xas, &mapping.i_pages, start);
-    int present, swap;
-    let mut node: c_int = NUMA_NO_NODE;
-    let mut result: enum scan_result = SCAN_SUCCEED;
+    let mut present = 0;
+    let mut swap = 0;
+pub static mut node: c_int = 0;
+pub static mut result: scan_result = 0;
     present = 0;
     swap = 0;
     collapse_control_init_scan(cc);
     rcu_read_lock();
     xas_for_each(&xas, folio, start + HPAGE_PMD_NR - 1) {
-    if (xas_retry(&xas, folio))
+    if (xas_retry(&xas, folio)) {
     continue;
+    }
     if (xa_is_value(folio)) {
     swap += 1 << xas_get_order(&xas);
     if (swap > max_ptes_swap) {
@@ -2507,10 +2790,12 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
     }
     }
     rcu_read_unlock();
-    if (result == SCAN_PTE_MAPPED_HUGEPAGE)
-    cc.progress++;
-    else
+    if (result == SCAN_PTE_MAPPED_HUGEPAGE) {
+    cc.progress += 1;
+    }
+    else {
     cc.progress += HPAGE_PMD_NR;
+    }
     if (result == SCAN_SUCCEED) {
     if (present < HPAGE_PMD_NR - max_ptes_none) {
     result = SCAN_EXCEED_NONE_PTE;
@@ -2526,25 +2811,23 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
 // Try to collapse a single PMD starting at a PMD aligned addr, and return
 // the results.
 //
-    static enum scan_result collapse_single_pmd(unsigned long addr,
-    struct vm_area_struct *vma, bool *lock_dropped,
-    struct collapse_control *cc)
+    static enum scan_result collapse_single_pmd(unsigned long addr, vm_area_struct *vma, bool *lock_dropped, collapse_control *cc)
     {
-    struct mm_struct *mm = vma.vm_mm;
-    let mut triggered_wb: bool = false;
+    let mut mm = vma.vm_mm;
+pub static mut triggered_wb: bool = false;
     enum scan_result result;
-    struct file *file;
-    pgoff_t pgoff;
+pub static mut file: *mut c_void = core::ptr::null_mut();
+    let mut pgoff;
     mmap_assert_locked(mm);
     if (vma_is_anonymous(vma)) {
     result = collapse_scan_pmd(mm, vma, addr, lock_dropped, cc);
-    goto end;
+// goto;
     }
     file = get_file(vma.vm_file);
     pgoff = linear_page_index(vma, addr);
     mmap_read_unlock(mm);
 // lock_dropped = true;
-    retry:
+// label;
     result = collapse_scan_file(mm, addr, file, pgoff, cc);
 //
 // For MADV_COLLAPSE, when encountering dirty pages, try to writeback,
@@ -2552,46 +2835,48 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
 //
     if (!cc.is_khugepaged && result == SCAN_PAGE_DIRTY_OR_WRITEBACK &&
     !triggered_wb && mapping_can_writeback(file.f_mapping)) {
-    let mut lstart: loff_t = (loff_t)pgoff << PAGE_SHIFT;
-    let mut lend: loff_t = lstart + HPAGE_PMD_SIZE - 1;
+pub static mut lstart: loff_t = 0;
+pub static mut lend: loff_t = 0;
     filemap_write_and_wait_range(file.f_mapping, lstart, lend);
     triggered_wb = true;
-    goto retry;
+// goto;
     }
     fput(file);
     if (result == SCAN_PTE_MAPPED_HUGEPAGE) {
     mmap_read_lock(mm);
-    if (collapse_test_exit_or_disable(mm))
+    if (collapse_test_exit_or_disable(mm)) {
     result = SCAN_ANY_PROCESS;
-    else
+    }
+    else {
     result = try_collapse_pte_mapped_thp(mm, addr,
     !cc.is_khugepaged);
-    if (result == SCAN_PMD_MAPPED)
+    }
+    if (result == SCAN_PMD_MAPPED) {
     result = SCAN_SUCCEED;
+    }
     mmap_read_unlock(mm);
     }
-    end:
-    if (cc.is_khugepaged && result == SCAN_SUCCEED)
-    ++khugepaged_pages_collapsed;
+// label;
+    if (cc.is_khugepaged && result == SCAN_SUCCEED) {
+    khugepaged_pages_collapsed += 1;
+    }
     return result;
     }
-    static void collapse_scan_mm_slot(unsigned int progress_max,
-    enum scan_result *result, struct collapse_control *cc)
+#[no_mangle]
+pub unsafe extern "C" fn collapse_scan_mm_slot(progress_max: c_uint, result: *mut scan_result, khugepaged_mm_lock: *mut collapse_controlcc)
     __releases(&khugepaged_mm_lock)
-    __acquires(&khugepaged_mm_lock)
-    {
-    struct vma_iterator vmi;
-    struct mm_slot *slot;
-    struct mm_struct *mm;
-    struct vm_area_struct *vma;
-    let mut progress_prev: c_uint = cc.progress;
+    __acquires(&) {
+pub static mut vmi: usize = 0;
+pub static mut slot: *mut c_void = core::ptr::null_mut();
+pub static mut mm: *mut c_void = core::ptr::null_mut();
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+pub static mut progress_prev: c_uint = 0;
     lockdep_assert_held(&khugepaged_mm_lock);
 // result = SCAN_FAIL;
     if (khugepaged_scan.mm_slot) {
     slot = khugepaged_scan.mm_slot;
     } else {
-    slot = list_first_entry(&khugepaged_scan.mm_head,
-    struct mm_slot, mm_node);
+    slot = list_first_entry(&khugepaged_scan.mm_head, mm_slot, mm_node);
     khugepaged_scan.address = 0;
     khugepaged_scan.mm_slot = slot;
     }
@@ -2602,37 +2887,41 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
 // the next mm on the list.
 //
     vma = core::ptr::null_mut();
-    if (unlikely(!mmap_read_trylock(mm)))
-    goto breakouterloop_mmap_lock;
-    cc.progress++;
-    if (unlikely(collapse_test_exit_or_disable(mm)))
-    goto breakouterloop;
+    if (unlikely(!mmap_read_trylock(mm))) {
+// goto;
+    }
+    cc.progress += 1;
+    if (unlikely(collapse_test_exit_or_disable(mm))) {
+// goto;
+    }
     vma_iter_init(&vmi, mm, khugepaged_scan.address);
     for_each_vma(vmi, vma) {
     unsigned long hstart, hend;
     cond_resched();
     if (unlikely(collapse_test_exit_or_disable(mm))) {
-    cc.progress++;
+    cc.progress += 1;
     break;
     }
     if (!collapse_possible(vma, vma.vm_flags, TVA_KHUGEPAGED)) {
-    cc.progress++;
+    cc.progress += 1;
     continue;
     }
     hstart = ALIGN(vma.vm_start, HPAGE_PMD_SIZE);
     hend = ALIGN_DOWN(vma.vm_end, HPAGE_PMD_SIZE);
     if (khugepaged_scan.address > hend) {
-    cc.progress++;
+    cc.progress += 1;
     continue;
     }
-    if (khugepaged_scan.address < hstart)
+    if (khugepaged_scan.address < hstart) {
     khugepaged_scan.address = hstart;
+    }
     VM_BUG_ON(khugepaged_scan.address & ~HPAGE_PMD_MASK);
     while (khugepaged_scan.address < hend) {
-    let mut lock_dropped: bool = false;
+pub static mut lock_dropped: bool = false;
     cond_resched();
-    if (unlikely(collapse_test_exit_or_disable(mm)))
-    goto breakouterloop;
+    if (unlikely(collapse_test_exit_or_disable(mm))) {
+// goto;
+    }
     VM_WARN_ON_ONCE(khugepaged_scan.address < hstart ||
     khugepaged_scan.address + HPAGE_PMD_SIZE >
     hend);
@@ -2640,7 +2929,7 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
     vma, &lock_dropped, cc);
 // move to next address
     khugepaged_scan.address += HPAGE_PMD_SIZE;
-    if (lock_dropped)
+    if (lock_dropped) {
 //
 // We released mmap_lock so break loop.  Note
 // that we drop mmap_lock before all hugepage
@@ -2648,14 +2937,16 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
 // guaranteed to break here and report the
 // correct result back to caller.
 //
-    goto breakouterloop_mmap_lock;
-    if (cc.progress >= progress_max)
-    goto breakouterloop;
+// goto;
+    }
+    if (cc.progress >= progress_max) {
+// goto;
     }
     }
-    breakouterloop:
+    }
+// label;
     mmap_read_unlock(mm); /* exit_mmap will destroy ptes after this */
-    breakouterloop_mmap_lock:
+// label;
     spin_lock(&khugepaged_mm_lock);
     VM_BUG_ON(khugepaged_scan.mm_slot != slot);
 //
@@ -2673,7 +2964,7 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
     khugepaged_scan.address = 0;
     } else {
     khugepaged_scan.mm_slot = core::ptr::null_mut();
-    khugepaged_full_scans++;
+    khugepaged_full_scans += 1;
     }
     collect_mm_slot(slot);
     }
@@ -2682,49 +2973,49 @@ unsafe extern "C" fn retract_page_tables(mapping: *mut address_space, pgoff: pgo
     }
 #[no_mangle]
 unsafe extern "C" fn khugepaged_has_work() -> c_int {
-    static int khugepaged_has_work(void)
-    {
     return !list_empty(&khugepaged_scan.mm_head) && hugepage_enabled();
     }
 #[no_mangle]
 unsafe extern "C" fn khugepaged_wait_event() -> c_int {
-    static int khugepaged_wait_event(void)
-    {
     return !list_empty(&khugepaged_scan.mm_head) ||
     kthread_should_stop();
     }
 #[no_mangle]
 unsafe extern "C" fn khugepaged_do_scan(cc: *mut collapse_control) {
-    static void khugepaged_do_scan(struct collapse_control *cc)
-    {
-    let mut progress_max: c_uint = READ_ONCE(khugepaged_pages_to_scan);
-    let mut pass_through_head: c_uint = 0;
-    let mut wait: bool = true;
-    let mut result: enum scan_result = SCAN_SUCCEED;
+pub static mut progress_max: c_uint = 0;
+pub static mut pass_through_head: c_uint = 0;
+pub static mut wait: bool = true;
+pub static mut result: scan_result = 0;
     lru_add_drain_all();
     cc.progress = 0;
     while (true) {
     cond_resched();
-    if (unlikely(kthread_should_stop()))
+    if (unlikely(kthread_should_stop())) {
     break;
+    }
     spin_lock(&khugepaged_mm_lock);
-    if (!khugepaged_scan.mm_slot)
-    pass_through_head++;
+    if (!khugepaged_scan.mm_slot) {
+    pass_through_head += 1;
+    }
     if (khugepaged_has_work() &&
-    pass_through_head < 2)
+    pass_through_head < 2) {
     collapse_scan_mm_slot(progress_max, &result, cc);
-    else
+    }
+    else {
     cc.progress = progress_max;
+    }
     spin_unlock(&khugepaged_mm_lock);
-    if (cc.progress >= progress_max)
+    if (cc.progress >= progress_max) {
     break;
+    }
     if (result == SCAN_ALLOC_HUGE_PAGE_FAIL) {
 //
 // If fail to allocate the first time, try to sleep for
 // a while.  When hit again, cancel the scan.
 //
-    if (!wait)
+    if (!wait) {
     break;
+    }
     wait = false;
     khugepaged_alloc_sleep();
     }
@@ -2732,34 +3023,29 @@ unsafe extern "C" fn khugepaged_do_scan(cc: *mut collapse_control) {
     }
 #[no_mangle]
 unsafe extern "C" fn khugepaged_should_wakeup() -> bool {
-    static bool khugepaged_should_wakeup(void)
-    {
     return kthread_should_stop() ||
     time_after_eq(jiffies, khugepaged_sleep_expire);
     }
 #[no_mangle]
 unsafe extern "C" fn khugepaged_wait_work() {
-    static void khugepaged_wait_work(void)
-    {
     if (khugepaged_has_work()) {
-    const unsigned long scan_sleep_jiffies =
-    msecs_to_jiffies(khugepaged_scan_sleep_millisecs);
-    if (!scan_sleep_jiffies)
+    let mut scan_sleep_jiffies = msecs_to_jiffies(khugepaged_scan_sleep_millisecs);
+    if (!scan_sleep_jiffies) {
     return;
+    }
     khugepaged_sleep_expire = jiffies + scan_sleep_jiffies;
     wait_event_freezable_timeout(khugepaged_wait,
     khugepaged_should_wakeup(),
     scan_sleep_jiffies);
     return;
     }
-    if (hugepage_enabled())
+    if (hugepage_enabled()) {
     wait_event_freezable(khugepaged_wait, khugepaged_wait_event());
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn khugepaged(none: *mut c_void) -> c_int {
-    static int khugepaged(void *none)
-    {
-    struct mm_slot *slot;
+pub static mut slot: *mut c_void = core::ptr::null_mut();
     set_freezable();
     set_user_nice(current, MAX_NICE);
     while (!kthread_should_stop()) {
@@ -2769,30 +3055,30 @@ unsafe extern "C" fn khugepaged(none: *mut c_void) -> c_int {
     spin_lock(&khugepaged_mm_lock);
     slot = khugepaged_scan.mm_slot;
     khugepaged_scan.mm_slot = core::ptr::null_mut();
-    if (slot)
+    if (slot) {
     collect_mm_slot(slot);
+    }
     spin_unlock(&khugepaged_mm_lock);
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn set_recommended_min_free_kbytes() {
-    void set_recommended_min_free_kbytes(void)
-    {
-    struct zone *zone;
-    let mut nr_zones: c_int = 0;
-    unsigned long recommended_min;
+pub static mut zone: *mut c_void = core::ptr::null_mut();
+pub static mut nr_zones: c_int = 0;
+    let mut recommended_min = 0;
     if (!hugepage_enabled()) {
     calculate_min_free_kbytes();
-    goto update_wmarks;
+// goto;
     }
     for_each_populated_zone(zone) {
 //
 // We don't need to worry about fragmentation of
 // ZONE_MOVABLE since it only has movable pages.
 //
-    if (zone_idx(zone) > gfp_zone(GFP_USER))
+    if (zone_idx(zone) > gfp_zone(GFP_USER)) {
     continue;
-    nr_zones++;
+    }
+    nr_zones += 1;
     }
 // Ensure 2 pageblocks are free to assist fragmentation avoidance
     recommended_min = pageblock_nr_pages * nr_zones * 2;
@@ -2809,32 +3095,32 @@ pub unsafe extern "C" fn set_recommended_min_free_kbytes() {
     (unsigned long) nr_free_buffer_pages() / 20);
     recommended_min <<= (PAGE_SHIFT-10);
     if (recommended_min > min_free_kbytes) {
-    if (user_min_free_kbytes >= 0)
+    if (user_min_free_kbytes >= 0) {
     pr_info_ratelimited("raising min_free_kbytes from %d to %lu to help transparent hugepage allocations\n",
     min_free_kbytes, recommended_min);
+    }
     min_free_kbytes = recommended_min;
     }
-    update_wmarks:
+// label;
     setup_per_zone_wmarks();
     }
 #[no_mangle]
 pub unsafe extern "C" fn start_stop_khugepaged() -> c_int {
-    int start_stop_khugepaged(void)
-    {
     guard(mutex)(&khugepaged_mutex);
     if (hugepage_enabled()) {
     if (!khugepaged_thread) {
-    struct task_struct *new_thread = kthread_run(khugepaged,
+    let mut new_thread = kthread_run(khugepaged,
     core::ptr::null_mut(),
     "khugepaged");
     if (IS_ERR(new_thread)) {
-    pr_err("khugepaged: kthread_run(khugepaged) failed\n");
+    pr_err!("khugepaged: kthread_run(khugepaged) failed\n");
     return PTR_ERR(new_thread);
     }
     khugepaged_thread = new_thread;
     }
-    if (!list_empty(&khugepaged_scan.mm_head))
+    if (!list_empty(&khugepaged_scan.mm_head)) {
     wake_up_interruptible(&khugepaged_wait);
+    }
     } else if (khugepaged_thread) {
     kthread_stop(khugepaged_thread);
     khugepaged_thread = core::ptr::null_mut();
@@ -2844,77 +3130,85 @@ pub unsafe extern "C" fn start_stop_khugepaged() -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn khugepaged_min_free_kbytes_update() {
-    void khugepaged_min_free_kbytes_update(void)
-    {
     guard(mutex)(&khugepaged_mutex);
-    if (hugepage_enabled() && khugepaged_thread)
+    if (hugepage_enabled() && khugepaged_thread) {
     set_recommended_min_free_kbytes();
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn current_is_khugepaged() -> bool {
-    bool current_is_khugepaged(void)
-    {
     return kthread_func(current) == khugepaged;
     }
 #[no_mangle]
-unsafe extern "C" fn madvise_collapse_errno(r: enum scan_result) -> c_int {
-    static int madvise_collapse_errno(enum scan_result r)
-    {
+unsafe extern "C" fn madvise_collapse_errno(r: scan_result) -> c_int {
 //
 // MADV_COLLAPSE breaks from existing madvise(2) conventions to provide
 // actionable feedback to caller, so they may take an appropriate
 // fallback measure depending on the nature of the failure.
 //
-    switch (r) {
-    case SCAN_ALLOC_HUGE_PAGE_FAIL:
+    match (r) {
+    SCAN_ALLOC_HUGE_PAGE_FAIL => {
     return -ENOMEM;
-    case SCAN_CGROUP_CHARGE_FAIL:
-    case SCAN_EXCEED_NONE_PTE:
+    }
+    SCAN_CGROUP_CHARGE_FAIL => {
+    }
+    SCAN_EXCEED_NONE_PTE => {
     return -EBUSY;
 // Resource temporary unavailable - trying again might succeed
-    case SCAN_PAGE_COUNT:
-    case SCAN_PAGE_LOCK:
-    case SCAN_PAGE_LRU:
-    case SCAN_DEL_PAGE_LRU:
-    case SCAN_PAGE_FILLED:
-    case SCAN_PAGE_HAS_PRIVATE:
-    case SCAN_PAGE_DIRTY_OR_WRITEBACK:
+    }
+    SCAN_PAGE_COUNT => {
+    }
+    SCAN_PAGE_LOCK => {
+    }
+    SCAN_PAGE_LRU => {
+    }
+    SCAN_DEL_PAGE_LRU => {
+    }
+    SCAN_PAGE_FILLED => {
+    }
+    SCAN_PAGE_HAS_PRIVATE => {
+    }
+    SCAN_PAGE_DIRTY_OR_WRITEBACK => {
     return -EAGAIN;
 //
 // Other: Trying again likely not to succeed / error intrinsic to
 // specified memory range. khugepaged likely won't be able to collapse
 // either.
 //
-    default:
+    }
+    _ => {
     return -EINVAL;
     }
     }
-    int madvise_collapse(struct vm_area_struct *vma, unsigned long start,
-    unsigned long end, bool *lock_dropped)
-    {
-    struct collapse_control *cc;
-    struct mm_struct *mm = vma.vm_mm;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn madvise_collapse(vma: *mut vm_area_struct, start: c_ulong, end: c_ulong, lock_dropped: *mut bool) -> c_int {
+pub static mut cc: *mut c_void = core::ptr::null_mut();
+    let mut mm = vma.vm_mm;
     unsigned long hstart, hend, addr;
-    let mut last_fail: enum scan_result = SCAN_FAIL;
-    let mut thps: c_int = 0;
-    let mut mmap_unlocked: bool = false;
-    BUG_ON(vma.vm_start > start);
-    BUG_ON(vma.vm_end < end);
-    if (!collapse_possible(vma, vma.vm_flags, TVA_FORCED_COLLAPSE))
+pub static mut last_fail: scan_result = 0;
+pub static mut thps: c_int = 0;
+pub static mut mmap_unlocked: bool = false;
+    BUG_ON!(vma.vm_start > start);
+    BUG_ON!(vma.vm_end < end);
+    if (!collapse_possible(vma, vma.vm_flags, TVA_FORCED_COLLAPSE)) {
     return -EINVAL;
+    }
     hstart = ALIGN(start, HPAGE_PMD_SIZE);
     hend = ALIGN_DOWN(end, HPAGE_PMD_SIZE);
-    if (hstart >= hend)
+    if (hstart >= hend) {
     return 0;
+    }
     cc = kmalloc_obj(*cc);
-    if (!cc)
+    if (!cc) {
     return -ENOMEM;
+    }
     cc.is_khugepaged = false;
     cc.progress = 0;
     mmgrab(mm);
     lru_add_drain_all();
-    for (addr = hstart; addr < hend; addr += HPAGE_PMD_SIZE) {
-    let mut result: enum scan_result = SCAN_FAIL;
+    while (addr < hend) {
+pub static mut result: scan_result = 0;
     if (mmap_unlocked) {
     cond_resched();
     mmap_read_lock(mm);
@@ -2924,42 +3218,55 @@ unsafe extern "C" fn madvise_collapse_errno(r: enum scan_result) -> c_int {
     cc, HPAGE_PMD_ORDER);
     if (result != SCAN_SUCCEED) {
     last_fail = result;
-    goto out_nolock;
+// goto;
     }
     hend = min(hend, vma.vm_end & HPAGE_PMD_MASK);
     }
     result = collapse_single_pmd(addr, vma, &mmap_unlocked, cc);
-    switch (result) {
-    case SCAN_SUCCEED:
-    case SCAN_PMD_MAPPED:
-    ++thps;
-    break;
+    match (result) {
+    SCAN_SUCCEED => {
+    }
+    SCAN_PMD_MAPPED => {
+    thps += 1;
+    // break;
 // Whitelisted set of results where continuing OK
-    case SCAN_NO_PTE_TABLE:
-    case SCAN_PTE_NON_PRESENT:
-    case SCAN_PTE_UFFD:
-    case SCAN_LACK_REFERENCED_PAGE:
-    case SCAN_PAGE_NULL:
-    case SCAN_PAGE_COUNT:
-    case SCAN_PAGE_LOCK:
-    case SCAN_PAGE_COMPOUND:
-    case SCAN_PAGE_LRU:
-    case SCAN_DEL_PAGE_LRU:
+    }
+    SCAN_NO_PTE_TABLE => {
+    }
+    SCAN_PTE_NON_PRESENT => {
+    }
+    SCAN_PTE_UFFD => {
+    }
+    SCAN_LACK_REFERENCED_PAGE => {
+    }
+    SCAN_PAGE_NULL => {
+    }
+    SCAN_PAGE_COUNT => {
+    }
+    SCAN_PAGE_LOCK => {
+    }
+    SCAN_PAGE_COMPOUND => {
+    }
+    SCAN_PAGE_LRU => {
+    }
+    SCAN_DEL_PAGE_LRU => {
     last_fail = result;
-    break;
-    default:
+    // break;
+    }
+    _ => {
     last_fail = result;
 // Other error, exit
-    goto out_maybelock;
+// goto;
     }
     }
-    out_maybelock:
+    }
+// label;
 // Caller expects us to hold mmap_lock on return
     if (mmap_unlocked) {
 // lock_dropped = true;
     mmap_read_lock(mm);
     }
-    out_nolock:
+// label;
     mmap_assert_locked(mm);
     mmdrop(mm);
     kfree(cc);

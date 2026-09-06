@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -51,22 +301,22 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
 // Macro flag: #define CREATE_TRACE_POINTS
 
-    struct dentry *blk_debugfs_root;
+pub static mut blk_debugfs_root: *mut c_void = core::ptr::null_mut();
     EXPORT_TRACEPOINT_SYMBOL_GPL(block_bio_remap);
     EXPORT_TRACEPOINT_SYMBOL_GPL(block_rq_remap);
     EXPORT_TRACEPOINT_SYMBOL_GPL(block_bio_complete);
     EXPORT_TRACEPOINT_SYMBOL_GPL(block_split);
     EXPORT_TRACEPOINT_SYMBOL_GPL(block_unplug);
     EXPORT_TRACEPOINT_SYMBOL_GPL(block_rq_insert);
-    static DEFINE_IDA(blk_queue_ida);
+pub static mut blk_queue_ida: usize = 0;
 //
 // For queue allocation
 //
-    static struct kmem_cache *blk_requestq_cachep;
+pub static mut blk_requestq_cachep: *mut c_void = core::ptr::null_mut();
 //
 // Controlling structure to kblockd
 //
-    static struct workqueue_struct *kblockd_workqueue;
+pub static mut kblockd_workqueue: *mut c_void = core::ptr::null_mut();
 //
 // blk_queue_flag_set - atomically set a queue flag
 // @flag: flag to be set
@@ -74,8 +324,6 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 #[no_mangle]
 pub unsafe extern "C" fn blk_queue_flag_set(flag: c_uint, q: *mut request_queue) {
-    void blk_queue_flag_set(unsigned int flag, struct request_queue *q)
-    {
     set_bit(flag, &q.queue_flags);
     }
     EXPORT_SYMBOL(blk_queue_flag_set);
@@ -86,8 +334,6 @@ pub unsafe extern "C" fn blk_queue_flag_set(flag: c_uint, q: *mut request_queue)
 //
 #[no_mangle]
 pub unsafe extern "C" fn blk_queue_flag_clear(flag: c_uint, q: *mut request_queue) {
-    void blk_queue_flag_clear(unsigned int flag, struct request_queue *q)
-    {
     clear_bit(flag, &q.queue_flags);
     }
     EXPORT_SYMBOL(blk_queue_flag_clear);
@@ -119,103 +365,74 @@ pub unsafe extern "C" fn blk_queue_flag_clear(flag: c_uint, q: *mut request_queu
 //
     inline const char *blk_op_str(enum req_op op)
     {
-    const char *op_str = "UNKNOWN";
-    if (op < ARRAY_SIZE(blk_op_name) && blk_op_name[op])
+    let mut op_str = "UNKNOWN";
+    if (op < ARRAY_SIZE!(blk_op_name) && blk_op_name[op]) {
     op_str = blk_op_name[op];
+    }
     return op_str;
     }
     EXPORT_SYMBOL_GPL(blk_op_str);
 #[no_mangle]
 pub unsafe extern "C" fn str_to_blk_op(op: *const c_char) -> enum req_op {
-    enum req_op str_to_blk_op(const char *op)
-    {
-    int i;
-    for (i = 0; i < ARRAY_SIZE(blk_op_name); i++)
+    let mut i = 0;
+    for (i = 0; i < ARRAY_SIZE!(blk_op_name); i++) {
     if (blk_op_name[i] && !strcmp(blk_op_name[i], op))
     return (enum req_op)i;
+    }
     return REQ_OP_LAST;
     }
 
-    [BLK_STS_##_tag] = {				\
-    .errno		= _errno,		\
-    .tag		= __stringify(_tag),	\
-    .name		= _desc,		\
+    [BLK_STS_##_tag] = {				
+    .errno		= _errno,		
+    .tag		= __stringify(_tag),	
+    .name		= _desc,		
     }
-    static const struct {
-    int		errno;
-    const char	*tag;
-    const char	*name;
-    } blk_errors[] = {
-    ENT(OK,			0,		""),
-    ENT(NOTSUPP,		-EOPNOTSUPP,	"operation not supported"),
-    ENT(TIMEOUT,		-ETIMEDOUT,	"timeout"),
-    ENT(NOSPC,		-ENOSPC,	"critical space allocation"),
-    ENT(TRANSPORT,		-ENOLINK,	"recoverable transport"),
-    ENT(TARGET,		-EREMOTEIO,	"critical target"),
-    ENT(RESV_CONFLICT,	-EBADE,		"reservation conflict"),
-    ENT(MEDIUM,		-ENODATA,	"critical medium"),
-    ENT(PROTECTION,		-EILSEQ,	"protection"),
-    ENT(RESOURCE,		-ENOMEM,	"kernel resource"),
-    ENT(DEV_RESOURCE,	-EBUSY,		"device resource"),
-    ENT(AGAIN,		-EAGAIN,	"nonblocking retry"),
-    ENT(OFFLINE,		-ENODEV,	"device offline"),
-// device mapper special case, should not leak out:
-    ENT(DM_REQUEUE,		-EREMCHG,	"dm internal retry"),
-// zone device specific errors
-    ENT(ZONE_OPEN_RESOURCE, -ETOOMANYREFS,	"open zones exceeded"),
-    ENT(ZONE_ACTIVE_RESOURCE, -EOVERFLOW,	"active zones exceeded"),
-// Command duration limit device-side timeout
-    ENT(DURATION_LIMIT,	-ETIME,		"duration limit exceeded"),
-    ENT(INVAL,		-EINVAL,	"invalid"),
-// everything else not covered above:
-    ENT(IOERR,		-EIO,		"I/O"),
-    };
+pub static mut blk_errors: usize = 0;
 
 #[no_mangle]
 pub unsafe extern "C" fn errno_to_blk_status(errno: c_int) -> blk_status_t {
-    blk_status_t errno_to_blk_status(int errno)
-    {
-    int i;
-    for (i = 0; i < ARRAY_SIZE(blk_errors); i++) {
-    if (blk_errors[i].errno == errno)
+    let mut i = 0;
+    while (i < ARRAY_SIZE!(blk_errors)) {
+    if (blk_errors[i].errno == errno) {
     return ( blk_status_t)i;
+    }
     }
     return BLK_STS_IOERR;
     }
     EXPORT_SYMBOL_GPL(errno_to_blk_status);
 #[no_mangle]
 pub unsafe extern "C" fn blk_status_to_errno(status: blk_status_t) -> c_int {
-    int blk_status_to_errno(blk_status_t status)
-    {
-    let mut idx: c_int = ( int)status;
-    if (WARN_ON_ONCE(idx >= ARRAY_SIZE(blk_errors)))
+pub static mut idx: c_int = 0;
+    if (WARN_ON_ONCE!(idx >= ARRAY_SIZE!(blk_errors))) {
     return -EIO;
+    }
     return blk_errors[idx].errno;
     }
     EXPORT_SYMBOL_GPL(blk_status_to_errno);
     const char *blk_status_to_str(blk_status_t status)
     {
-    let mut idx: c_int = ( int)status;
-    if (WARN_ON_ONCE(idx >= ARRAY_SIZE(blk_errors)))
+pub static mut idx: c_int = 0;
+    if (WARN_ON_ONCE!(idx >= ARRAY_SIZE!(blk_errors))) {
     return "<null>";
+    }
     return blk_errors[idx].name;
     }
     const char *blk_status_to_tag(blk_status_t status)
     {
-    let mut idx: c_int = ( int)status;
-    if (WARN_ON_ONCE(idx >= ARRAY_SIZE(blk_errors) || !blk_errors[idx].tag))
+pub static mut idx: c_int = 0;
+    if (WARN_ON_ONCE!(idx >= ARRAY_SIZE!(blk_errors) || !blk_errors[idx].tag)) {
     return "<null>";
+    }
     return blk_errors[idx].tag;
     }
 #[no_mangle]
 pub unsafe extern "C" fn tag_to_blk_status(tag: *const c_char) -> blk_status_t {
-    blk_status_t tag_to_blk_status(const char *tag)
-    {
-    int i;
-    for (i = 0; i < ARRAY_SIZE(blk_errors); i++) {
+    let mut i = 0;
+    while (i < ARRAY_SIZE!(blk_errors)) {
     if (blk_errors[i].tag &&
-    !strcmp(blk_errors[i].tag, tag))
+    !strcmp(blk_errors[i].tag, tag)) {
     return ( blk_status_t)i;
+    }
     }
 //
 // Return BLK_STS_OK for mismatches as this function is intended to
@@ -242,8 +459,6 @@ pub unsafe extern "C" fn tag_to_blk_status(tag: *const c_char) -> blk_status_t {
 //
 #[no_mangle]
 pub unsafe extern "C" fn blk_sync_queue(q: *mut request_queue) {
-    void blk_sync_queue(struct request_queue *q)
-    {
     timer_delete_sync(&q.timeout);
     cancel_work_sync(&q.timeout_work);
     }
@@ -254,38 +469,31 @@ pub unsafe extern "C" fn blk_sync_queue(q: *mut request_queue) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn blk_set_pm_only(q: *mut request_queue) {
-    void blk_set_pm_only(struct request_queue *q)
-    {
     atomic_inc(&q.pm_only);
     }
     EXPORT_SYMBOL_GPL(blk_set_pm_only);
 #[no_mangle]
 pub unsafe extern "C" fn blk_clear_pm_only(q: *mut request_queue) {
-    void blk_clear_pm_only(struct request_queue *q)
-    {
-    int pm_only;
+    let mut pm_only = 0;
     pm_only = atomic_dec_return(&q.pm_only);
-    WARN_ON_ONCE(pm_only < 0);
-    if (pm_only == 0)
+    WARN_ON_ONCE!(pm_only < 0);
+    if (pm_only == 0) {
     wake_up_all(&q.mq_freeze_wq);
+    }
     }
     EXPORT_SYMBOL_GPL(blk_clear_pm_only);
 #[no_mangle]
 unsafe extern "C" fn blk_free_queue_rcu(rcu_head: *mut rcu_head) {
-    static void blk_free_queue_rcu(struct rcu_head *rcu_head)
-    {
-    struct request_queue *q = container_of(rcu_head,
-    struct request_queue, rcu_head);
+    let mut q = container_of!(rcu_head, request_queue, rcu_head);
     percpu_ref_exit(&q.q_usage_counter);
     kmem_cache_free(blk_requestq_cachep, q);
     }
 #[no_mangle]
 unsafe extern "C" fn blk_free_queue(q: *mut request_queue) {
-    static void blk_free_queue(struct request_queue *q)
-    {
     blk_free_queue_stats(q.stats);
-    if (queue_is_mq(q))
+    if (queue_is_mq(q)) {
     blk_mq_release(q);
+    }
     ida_free(&blk_queue_ida, q.id);
     lockdep_unregister_key(&q.io_lock_cls_key);
     lockdep_unregister_key(&q.q_lock_cls_key);
@@ -300,24 +508,22 @@ unsafe extern "C" fn blk_free_queue(q: *mut request_queue) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn blk_put_queue(q: *mut request_queue) {
-    void blk_put_queue(struct request_queue *q)
-    {
-    if (refcount_dec_and_test(&q.refs))
+    if (refcount_dec_and_test(&q.refs)) {
     blk_free_queue(q);
+    }
     }
     EXPORT_SYMBOL(blk_put_queue);
 #[no_mangle]
 pub unsafe extern "C" fn blk_queue_start_drain(q: *mut request_queue) -> bool {
-    bool blk_queue_start_drain(struct request_queue *q)
-    {
 //
 // When queue DYING flag is set, we need to block new req
 // entering queue, so we call blk_freeze_queue_start() to
 // prevent I/O from crossing blk_queue_enter().
 //
-    let mut freeze: bool = __blk_freeze_queue_start(q, current);
-    if (queue_is_mq(q))
+pub static mut freeze: bool = false;
+    if (queue_is_mq(q)) {
     blk_mq_wake_waiters(q);
+    }
 // Make blk_queue_enter() reexamine the DYING flag.
     wake_up_all(&q.mq_freeze_wq);
     return freeze;
@@ -329,12 +535,11 @@ pub unsafe extern "C" fn blk_queue_start_drain(q: *mut request_queue) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn blk_queue_enter(q: *mut request_queue, flags: blk_mq_req_flags_t) -> c_int {
-    int blk_queue_enter(struct request_queue *q, blk_mq_req_flags_t flags)
-    {
-    let mut pm: bool = flags & BLK_MQ_REQ_PM;
+pub static mut pm: bool = false;
     while (!blk_try_enter_queue(q, pm)) {
-    if (flags & BLK_MQ_REQ_NOWAIT)
+    if (flags & BLK_MQ_REQ_NOWAIT) {
     return -EAGAIN;
+    }
 //
 // read pair of barrier in blk_freeze_queue_start(), we need to
 // order reading __PERCPU_REF_DEAD flag of .q_usage_counter and
@@ -347,8 +552,9 @@ pub unsafe extern "C" fn blk_queue_enter(q: *mut request_queue, flags: blk_mq_re
     (!q.mq_freeze_depth &&
     blk_pm_resume_queue(pm, q)) ||
     blk_queue_dying(q));
-    if (blk_queue_dying(q))
+    if (blk_queue_dying(q)) {
     return -ENODEV;
+    }
     }
     rwsem_acquire_read(&q.q_lockdep_map, 0, 0, _RET_IP_);
     rwsem_release(&q.q_lockdep_map, _RET_IP_);
@@ -356,13 +562,12 @@ pub unsafe extern "C" fn blk_queue_enter(q: *mut request_queue, flags: blk_mq_re
     }
 #[no_mangle]
 pub unsafe extern "C" fn __bio_queue_enter(q: *mut request_queue, bio: *mut bio) -> c_int {
-    int __bio_queue_enter(struct request_queue *q, struct bio *bio)
-    {
     while (!blk_try_enter_queue(q, false)) {
-    struct gendisk *disk = bio.bi_bdev.bd_disk;
+    let mut disk = bio.bi_bdev.bd_disk;
     if (bio.bi_opf & REQ_NOWAIT) {
-    if (test_bit(GD_DEAD, &disk.state))
-    goto dead;
+    if (test_bit(GD_DEAD, &disk.state)) {
+// goto;
+    }
     bio_wouldblock_error(bio);
     return -EAGAIN;
     }
@@ -378,64 +583,58 @@ pub unsafe extern "C" fn __bio_queue_enter(q: *mut request_queue, bio: *mut bio)
     (!q.mq_freeze_depth &&
     blk_pm_resume_queue(false, q)) ||
     test_bit(GD_DEAD, &disk.state));
-    if (test_bit(GD_DEAD, &disk.state))
-    goto dead;
+    if (test_bit(GD_DEAD, &disk.state)) {
+// goto;
+    }
     }
     rwsem_acquire_read(&q.io_lockdep_map, 0, 0, _RET_IP_);
     rwsem_release(&q.io_lockdep_map, _RET_IP_);
     return 0;
-    dead:
+// label;
     bio_io_error(bio);
     return -ENODEV;
     }
 #[no_mangle]
 pub unsafe extern "C" fn blk_queue_exit(q: *mut request_queue) {
-    void blk_queue_exit(struct request_queue *q)
-    {
     percpu_ref_put(&q.q_usage_counter);
     }
 #[no_mangle]
 unsafe extern "C" fn blk_queue_usage_counter_release(ref: *mut percpu_ref) {
-    static void blk_queue_usage_counter_release(struct percpu_ref *ref)
-    {
-    struct request_queue *q =
-    container_of(ref, struct request_queue, q_usage_counter);
+    let mut q = container_of!(ref, request_queue, q_usage_counter);
     wake_up_all(&q.mq_freeze_wq);
     }
 #[no_mangle]
 unsafe extern "C" fn blk_rq_timed_out_timer(t: *mut timer_list) {
-    static void blk_rq_timed_out_timer(struct timer_list *t)
-    {
-    struct request_queue *q = timer_container_of(q, t, timeout);
+    let mut q = timer_container_of(q, t, timeout);
     kblockd_schedule_work(&q.timeout_work);
     }
 #[no_mangle]
 unsafe extern "C" fn blk_timeout_work(work: *mut work_struct) {
-    static void blk_timeout_work(struct work_struct *work)
-    {
     }
-    struct request_queue *blk_alloc_queue(struct queue_limits *lim, int node_id)
-    {
-    struct request_queue *q;
-    int error;
+#[no_mangle]
+pub unsafe extern "C" fn blk_alloc_queue(lim: *mut queue_limits, node_id: c_int) -> *mut c_void {
+pub static mut q: *mut c_void = core::ptr::null_mut();
+    let mut error = 0;
     q = kmem_cache_alloc_node(blk_requestq_cachep, GFP_KERNEL | __GFP_ZERO,
     node_id);
-    if (!q)
+    if (!q) {
     return ERR_PTR(-ENOMEM);
+    }
     q.last_merge = core::ptr::null_mut();
     q.id = ida_alloc(&blk_queue_ida, GFP_KERNEL);
     if (q.id < 0) {
     error = q.id;
-    goto fail_q;
+// goto;
     }
     q.stats = blk_alloc_queue_stats();
     if (!q.stats) {
     error = -ENOMEM;
-    goto fail_id;
+// goto;
     }
     error = blk_set_default_limits(lim);
-    if (error)
-    goto fail_stats;
+    if (error) {
+// goto;
+    }
     q.limits = *lim;
     q.node = node_id;
     atomic_set(&q.nr_active_requests_shared_tags, 0);
@@ -459,8 +658,9 @@ unsafe extern "C" fn blk_timeout_work(work: *mut work_struct) {
     error = percpu_ref_init(&q.q_usage_counter,
     blk_queue_usage_counter_release,
     PERCPU_REF_INIT_ATOMIC, GFP_KERNEL);
-    if (error)
-    goto fail_stats;
+    if (error) {
+// goto;
+    }
     lockdep_register_key(&q.io_lock_cls_key);
     lockdep_register_key(&q.q_lock_cls_key);
     lockdep_init_map(&q.io_lockdep_map, "&q.q_usage_counter(io)",
@@ -475,11 +675,11 @@ unsafe extern "C" fn blk_timeout_work(work: *mut work_struct) {
     q.nr_requests = BLKDEV_DEFAULT_RQ;
     q.async_depth = BLKDEV_DEFAULT_RQ;
     return q;
-    fail_stats:
+// label;
     blk_free_queue_stats(q.stats);
-    fail_id:
+// label;
     ida_free(&blk_queue_ida, q.id);
-    fail_q:
+// label;
     kmem_cache_free(blk_requestq_cachep, q);
     return ERR_PTR(error);
     }
@@ -493,64 +693,56 @@ unsafe extern "C" fn blk_timeout_work(work: *mut work_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn blk_get_queue(q: *mut request_queue) -> bool {
-    bool blk_get_queue(struct request_queue *q)
-    {
-    if (unlikely(blk_queue_dying(q)))
+    if (unlikely(blk_queue_dying(q))) {
     return false;
+    }
     refcount_inc(&q.refs);
     return true;
     }
     EXPORT_SYMBOL(blk_get_queue);
 
-    static DECLARE_FAULT_ATTR(fail_make_request);
+pub static mut fail_make_request: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn setup_fail_make_request(str: *mut c_char) -> int __init {
-    static int __init setup_fail_make_request(char *str)
-    {
+unsafe extern "C" fn setup_fail_make_request(str: *mut c_char) -> c_int {
     return setup_fault_attr(&fail_make_request, str);
     }
-    __setup("fail_make_request=", setup_fail_make_request);
+    __setup!("fail_make_request=", setup_fail_make_request);
 #[no_mangle]
 pub unsafe extern "C" fn should_fail_request(part: *mut block_device, bytes: c_uint) -> bool {
-    bool should_fail_request(struct block_device *part, unsigned int bytes)
-    {
     return bdev_test_flag(part, BD_MAKE_IT_FAIL) &&
     should_fail(&fail_make_request, bytes);
     }
 #[no_mangle]
-unsafe extern "C" fn fail_make_request_debugfs() -> int __init {
-    static int __init fail_make_request_debugfs(void)
-    {
-    struct dentry *dir = fault_create_debugfs_attr("fail_make_request",
+unsafe extern "C" fn fail_make_request_debugfs() -> c_int {
+    let mut dir = fault_create_debugfs_attr("fail_make_request",
     core::ptr::null_mut(), &fail_make_request);
     return PTR_ERR_OR_ZERO(dir);
     }
-    late_initcall(fail_make_request_debugfs);
+    late_initcall!(fail_make_request_debugfs);
 
 #[no_mangle]
 pub unsafe extern "C" fn bio_check_ro(bio: *mut bio) {
-    static inline void bio_check_ro(struct bio *bio)
-    {
     if (op_is_write(bio_op(bio)) && bdev_read_only(bio.bi_bdev)) {
-    if (op_is_flush(bio.bi_opf) && !bio_sectors(bio))
+    if (op_is_flush(bio.bi_opf) && !bio_sectors(bio)) {
     return;
-    if (bdev_test_flag(bio.bi_bdev, BD_RO_WARNED))
+    }
+    if (bdev_test_flag(bio.bi_bdev, BD_RO_WARNED)) {
     return;
+    }
     bdev_set_flag(bio.bi_bdev, BD_RO_WARNED);
 //
 // Use ioctl to set underlying disk of raid/dm to read-only
 // will trigger this.
 //
-    pr_warn("Trying to write to read-only block-device %pg\n",
+    pr_warn!("Trying to write to read-only block-device %pg\n",
     bio.bi_bdev);
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn should_fail_bio(bio: *mut bio) -> c_int {
-    int should_fail_bio(struct bio *bio)
-    {
-    if (should_fail_request(bdev_whole(bio.bi_bdev), bio.bi_iter.bi_size))
+    if (should_fail_request(bdev_whole(bio.bi_bdev), bio.bi_iter.bi_size)) {
     return -EIO;
+    }
     return 0;
     }
     ALLOW_ERROR_INJECTION(should_fail_bio, ERRNO);
@@ -561,15 +753,14 @@ pub unsafe extern "C" fn should_fail_bio(bio: *mut bio) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn bio_check_eod(bio: *mut bio) -> c_int {
-    static inline int bio_check_eod(struct bio *bio)
-    {
-    let mut maxsector: sector_t = bdev_nr_sectors(bio.bi_bdev);
-    let mut nr_sectors: c_uint = bio_sectors(bio);
+pub static mut maxsector: sector_t = 0;
+pub static mut nr_sectors: c_uint = 0;
     if (nr_sectors &&
     (nr_sectors > maxsector ||
     bio.bi_iter.bi_sector > maxsector - nr_sectors)) {
-    if (!maxsector)
+    if (!maxsector) {
     return -EIO;
+    }
     pr_info_ratelimited("%s: attempt to access beyond end of device\n"
     "%pg: rw=%d, sector=%llu, nr_sectors = %u limit=%llu\n",
     current.comm, bio.bi_bdev, bio.bi_opf,
@@ -583,11 +774,10 @@ pub unsafe extern "C" fn bio_check_eod(bio: *mut bio) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn blk_partition_remap(bio: *mut bio) -> c_int {
-    static int blk_partition_remap(struct bio *bio)
-    {
-    struct block_device *p = bio.bi_bdev;
-    if (unlikely(should_fail_request(p, bio.bi_iter.bi_size)))
+    let mut p = bio.bi_bdev;
+    if (unlikely(should_fail_request(p, bio.bi_iter.bi_size))) {
     return -EIO;
+    }
     if (bio_sectors(bio)) {
     bio.bi_iter.bi_sector += p.bd_start_sect;
     trace_block_bio_remap(bio, p.bd_dev,
@@ -600,42 +790,45 @@ unsafe extern "C" fn blk_partition_remap(bio: *mut bio) -> c_int {
 //
 // Check write append to a zoned block device.
 //
-    static inline blk_status_t blk_check_zone_append(struct request_queue *q,
-    struct bio *bio)
+    static inline blk_status_t blk_check_zone_append(request_queue *q, bio *bio)
     {
-    let mut nr_sectors: c_int = bio_sectors(bio);
+pub static mut nr_sectors: c_int = 0;
 // Only applicable to zoned block devices
-    if (!bdev_is_zoned(bio.bi_bdev))
+    if (!bdev_is_zoned(bio.bi_bdev)) {
     return BLK_STS_NOTSUPP;
+    }
 // The bio sector must point to the start of a sequential zone
-    if (!bdev_is_zone_start(bio.bi_bdev, bio.bi_iter.bi_sector))
+    if (!bdev_is_zone_start(bio.bi_bdev, bio.bi_iter.bi_sector)) {
     return BLK_STS_IOERR;
+    }
 //
 // Not allowed to cross zone boundaries. Otherwise, the BIO will be
 // split and could result in non-contiguous sectors being written in
 // different zones.
 //
-    if (nr_sectors > q.limits.chunk_sectors)
+    if (nr_sectors > q.limits.chunk_sectors) {
     return BLK_STS_IOERR;
+    }
 // Make sure the BIO is small enough and will not get split
-    if (nr_sectors > q.limits.max_zone_append_sectors)
+    if (nr_sectors > q.limits.max_zone_append_sectors) {
     return BLK_STS_IOERR;
+    }
     bio.bi_opf |= REQ_NOMERGE;
     return BLK_STS_OK;
     }
 #[no_mangle]
 unsafe extern "C" fn __submit_bio(bio: *mut bio) {
-    static void __submit_bio(struct bio *bio)
-    {
     if (!bdev_test_flag(bio.bi_bdev, BD_HAS_SUBMIT_BIO)) {
     blk_mq_submit_bio(bio);
     } else if (likely(bio_queue_enter(bio) == 0)) {
-    struct gendisk *disk = bio.bi_bdev.bd_disk;
+    let mut disk = bio.bi_bdev.bd_disk;
     if ((bio.bi_opf & REQ_POLLED) &&
-    !(disk.queue.limits.features & BLK_FEAT_POLL))
+    !(disk.queue.limits.features & BLK_FEAT_POLL)) {
     bio_endio_status(bio, BLK_STS_NOTSUPP);
-    else
+    }
+    else {
     disk.fops.submit_bio(bio);
+    }
     blk_queue_exit(disk.queue);
     }
     }
@@ -660,14 +853,12 @@ unsafe extern "C" fn __submit_bio(bio: *mut bio) {
 //
 #[no_mangle]
 unsafe extern "C" fn __submit_bio_noacct(bio: *mut bio) {
-    static void __submit_bio_noacct(struct bio *bio)
-    {
     struct bio_list bio_list_on_stack[2];
-    BUG_ON(bio.bi_next);
+    BUG_ON!(bio.bi_next);
     bio_list_init(&bio_list_on_stack[0]);
     current.bio_list = bio_list_on_stack;
     do {
-    struct request_queue *q = bdev_get_queue(bio.bi_bdev);
+    let mut q = bdev_get_queue(bio.bi_bdev);
     struct bio_list lower, same;
 //
 // Create a fresh bio_list for all subordinate requests.
@@ -681,11 +872,13 @@ unsafe extern "C" fn __submit_bio_noacct(bio: *mut bio) {
 //
     bio_list_init(&lower);
     bio_list_init(&same);
-    while ((bio = bio_list_pop(&bio_list_on_stack[0])) != core::ptr::null_mut())
+    while ((bio = bio_list_pop(&bio_list_on_stack[0])) != core::ptr::null_mut()) {
     if (q == bdev_get_queue(bio.bi_bdev))
     bio_list_add(&same, bio);
-    else
+    }
+    else {
     bio_list_add(&lower, bio);
+    }
 //
 // Now assemble so we handle the lowest level first.
 //
@@ -697,9 +890,7 @@ unsafe extern "C" fn __submit_bio_noacct(bio: *mut bio) {
     }
 #[no_mangle]
 unsafe extern "C" fn __submit_bio_noacct_mq(bio: *mut bio) {
-    static void __submit_bio_noacct_mq(struct bio *bio)
-    {
-    struct bio_list bio_list[2] = { };
+pub static mut bio_list: usize = 0;
     current.bio_list = bio_list;
     do {
     __submit_bio(bio);
@@ -708,10 +899,9 @@ unsafe extern "C" fn __submit_bio_noacct_mq(bio: *mut bio) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn submit_bio_noacct_nocheck(bio: *mut bio, split: bool) {
-    void submit_bio_noacct_nocheck(struct bio *bio, bool split)
-    {
-    if (unlikely(blk_error_inject(bio)))
+    if (unlikely(blk_error_inject(bio))) {
     return;
+    }
     blk_cgroup_bio_start(bio);
     if (!bio_flagged(bio, BIO_TRACE_COMPLETION)) {
     trace_block_bio_queue(bio);
@@ -728,23 +918,26 @@ pub unsafe extern "C" fn submit_bio_noacct_nocheck(bio: *mut bio, split: bool) {
 // while it is active, and then process them after it returned.
 //
     if (current.bio_list) {
-    if (split)
+    if (split) {
     bio_list_add_head(&current.bio_list[0], bio);
-    else
+    }
+    else {
     bio_list_add(&current.bio_list[0], bio);
+    }
     } else if (!bdev_test_flag(bio.bi_bdev, BD_HAS_SUBMIT_BIO)) {
     __submit_bio_noacct_mq(bio);
     } else {
     __submit_bio_noacct(bio);
     }
     }
-    static blk_status_t blk_validate_atomic_write_op_size(struct request_queue *q,
-    struct bio *bio)
+    static blk_status_t blk_validate_atomic_write_op_size(request_queue *q, bio *bio)
     {
-    if (bio.bi_iter.bi_size > queue_atomic_write_unit_max_bytes(q))
+    if (bio.bi_iter.bi_size > queue_atomic_write_unit_max_bytes(q)) {
     return BLK_STS_INVAL;
-    if (bio.bi_iter.bi_size % queue_atomic_write_unit_min_bytes(q))
+    }
+    if (bio.bi_iter.bi_size % queue_atomic_write_unit_min_bytes(q)) {
     return BLK_STS_INVAL;
+    }
     return BLK_STS_OK;
     }
 //
@@ -758,47 +951,52 @@ pub unsafe extern "C" fn submit_bio_noacct_nocheck(bio: *mut bio, split: bool) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn submit_bio_noacct(bio: *mut bio) {
-    void submit_bio_noacct(struct bio *bio)
-    {
-    struct block_device *bdev = bio.bi_bdev;
-    struct request_queue *q = bdev_get_queue(bdev);
-    let mut status: blk_status_t = BLK_STS_IOERR;
+    let mut bdev = bio.bi_bdev;
+    let mut q = bdev_get_queue(bdev);
+pub static mut status: blk_status_t = 0;
     might_sleep();
 //
 // For a REQ_NOWAIT based request, return -EOPNOTSUPP
 // if queue does not support NOWAIT.
 //
-    if ((bio.bi_opf & REQ_NOWAIT) && !bdev_nowait(bdev))
-    goto not_supported;
-    if (bio_has_crypt_ctx(bio)) {
-    if (WARN_ON_ONCE(!bio_has_data(bio)))
-    goto end_io;
-    if (!blk_crypto_supported(bio))
-    goto not_supported;
+    if ((bio.bi_opf & REQ_NOWAIT) && !bdev_nowait(bdev)) {
+// goto;
     }
-    if (should_fail_bio(bio))
-    goto end_io;
+    if (bio_has_crypt_ctx(bio)) {
+    if (WARN_ON_ONCE!(!bio_has_data(bio))) {
+// goto;
+    }
+    if (!blk_crypto_supported(bio)) {
+// goto;
+    }
+    }
+    if (should_fail_bio(bio)) {
+// goto;
+    }
     bio_check_ro(bio);
     if (!bio_flagged(bio, BIO_REMAPPED)) {
-    if (unlikely(bio_check_eod(bio)))
-    goto end_io;
+    if (unlikely(bio_check_eod(bio))) {
+// goto;
+    }
     if (bdev_is_partition(bdev) &&
-    unlikely(blk_partition_remap(bio)))
-    goto end_io;
+    unlikely(blk_partition_remap(bio))) {
+// goto;
+    }
     }
 //
 // Filter flush bio's early so that bio based drivers without flush
 // support don't have to worry about them.
 //
     if (op_is_flush(bio.bi_opf)) {
-    if (WARN_ON_ONCE(bio_op(bio) != REQ_OP_WRITE &&
-    bio_op(bio) != REQ_OP_ZONE_APPEND))
-    goto end_io;
+    if (WARN_ON_ONCE!(bio_op(bio) != REQ_OP_WRITE &&
+    bio_op(bio) != REQ_OP_ZONE_APPEND)) {
+// goto;
+    }
     if (!bdev_write_cache(bdev)) {
     bio.bi_opf &= ~(REQ_PREFLUSH | REQ_FUA);
     if (!bio_sectors(bio)) {
     status = BLK_STS_OK;
-    goto end_io;
+// goto;
     }
     }
     }
@@ -808,8 +1006,9 @@ pub unsafe extern "C" fn submit_bio_noacct(bio: *mut bio) {
     case REQ_OP_WRITE:
     if (bio.bi_opf & REQ_ATOMIC) {
     status = blk_validate_atomic_write_op_size(q, bio);
-    if (status != BLK_STS_OK)
-    goto end_io;
+    if (status != BLK_STS_OK) {
+// goto;
+    }
     }
     break;
     case REQ_OP_FLUSH:
@@ -817,35 +1016,41 @@ pub unsafe extern "C" fn submit_bio_noacct(bio: *mut bio) {
 // REQ_OP_FLUSH can't be submitted through bios, it is only
 // synthetized in struct request by the flush state machine.
 //
-    goto not_supported;
+// goto;
     case REQ_OP_DISCARD:
-    if (!bdev_max_discard_sectors(bdev))
-    goto not_supported;
+    if (!bdev_max_discard_sectors(bdev)) {
+// goto;
+    }
     break;
     case REQ_OP_SECURE_ERASE:
-    if (!bdev_max_secure_erase_sectors(bdev))
-    goto not_supported;
+    if (!bdev_max_secure_erase_sectors(bdev)) {
+// goto;
+    }
     break;
     case REQ_OP_ZONE_APPEND:
     status = blk_check_zone_append(q, bio);
-    if (status != BLK_STS_OK)
-    goto end_io;
+    if (status != BLK_STS_OK) {
+// goto;
+    }
     break;
     case REQ_OP_WRITE_ZEROES:
-    if (!q.limits.max_write_zeroes_sectors)
-    goto not_supported;
+    if (!q.limits.max_write_zeroes_sectors) {
+// goto;
+    }
     break;
     case REQ_OP_ZONE_OPEN:
     case REQ_OP_ZONE_CLOSE:
     case REQ_OP_ZONE_RESET:
     case REQ_OP_ZONE_FINISH:
 // Zone management operations require sequential zones.
-    if (!bdev_zone_is_seq(bio.bi_bdev, bio.bi_iter.bi_sector))
-    goto end_io;
+    if (!bdev_zone_is_seq(bio.bi_bdev, bio.bi_iter.bi_sector)) {
+// goto;
+    }
     break;
     case REQ_OP_ZONE_RESET_ALL:
-    if (!bdev_is_zoned(bio.bi_bdev))
-    goto not_supported;
+    if (!bdev_is_zoned(bio.bi_bdev)) {
+// goto;
+    }
     break;
     case REQ_OP_DRV_IN:
     case REQ_OP_DRV_OUT:
@@ -854,26 +1059,26 @@ pub unsafe extern "C" fn submit_bio_noacct(bio: *mut bio) {
 // requests.
 //
     fallthrough;
-    default:
-    goto not_supported;
+// label;
+// goto;
     }
-    if (blk_throtl_bio(bio))
+    if (blk_throtl_bio(bio)) {
     return;
+    }
     submit_bio_noacct_nocheck(bio, false);
     return;
-    not_supported:
+// label;
     status = BLK_STS_NOTSUPP;
-    end_io:
+// label;
     bio_endio_status(bio, status);
     }
     EXPORT_SYMBOL(submit_bio_noacct);
 #[no_mangle]
 unsafe extern "C" fn bio_set_ioprio(bio: *mut bio) {
-    static void bio_set_ioprio(struct bio *bio)
-    {
 // Nobody set ioprio so far? Initialize it based on task's nice value
-    if (IOPRIO_PRIO_CLASS(bio.bi_ioprio) == IOPRIO_CLASS_NONE)
+    if (IOPRIO_PRIO_CLASS(bio.bi_ioprio) == IOPRIO_CLASS_NONE) {
     bio.bi_ioprio = get_current_ioprio();
+    }
     blkcg_set_ioprio(bio);
     }
 //
@@ -891,8 +1096,6 @@ unsafe extern "C" fn bio_set_ioprio(bio: *mut bio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn submit_bio(bio: *mut bio) {
-    void submit_bio(struct bio *bio)
-    {
     if (bio_op(bio) == REQ_OP_READ) {
     task_io_account_read(bio.bi_iter.bi_size);
     count_vm_events(PGPGIN, bio_sectors(bio));
@@ -917,18 +1120,18 @@ pub unsafe extern "C" fn submit_bio(bio: *mut bio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn bio_poll(bio: *mut bio, iob: *mut io_comp_batch, flags: c_uint) -> c_int {
-    int bio_poll(struct bio *bio, struct io_comp_batch *iob, unsigned int flags)
-    {
-    let mut cookie: blk_qc_t = READ_ONCE(bio.bi_cookie);
-    struct block_device *bdev;
-    struct request_queue *q;
-    let mut ret: c_int = 0;
+pub static mut cookie: blk_qc_t = 0;
+pub static mut bdev: *mut c_void = core::ptr::null_mut();
+pub static mut q: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     bdev = READ_ONCE(bio.bi_bdev);
-    if (!bdev)
+    if (!bdev) {
     return 0;
+    }
     q = bdev_get_queue(bdev);
-    if (cookie == BLK_QC_T_NONE)
+    if (cookie == BLK_QC_T_NONE) {
     return 0;
+    }
     blk_flush_plug(current.plug, false);
 //
 // We need to be able to enter a frozen queue, similar to how
@@ -939,15 +1142,17 @@ pub unsafe extern "C" fn bio_poll(bio: *mut bio, iob: *mut io_comp_batch, flags:
 // completing them. As long as we prevent new IO from being queued,
 // that should be all that matters.
 //
-    if (!percpu_ref_tryget(&q.q_usage_counter))
+    if (!percpu_ref_tryget(&q.q_usage_counter)) {
     return 0;
+    }
     if (queue_is_mq(q)) {
     ret = blk_mq_poll(q, cookie, iob, flags);
     } else {
-    struct gendisk *disk = q.disk;
+    let mut disk = q.disk;
     if ((q.limits.features & BLK_FEAT_POLL) && disk &&
-    disk.fops.poll_bio)
+    disk.fops.poll_bio) {
     ret = disk.fops.poll_bio(bio, iob, flags);
+    }
     }
     blk_queue_exit(q);
     return ret;
@@ -957,11 +1162,10 @@ pub unsafe extern "C" fn bio_poll(bio: *mut bio, iob: *mut io_comp_batch, flags:
 // Helper to implement file_operations.iopoll.  Requires the bio to be stored
 // in iocb->private, and cleared before freeing the bio.
 //
-    int iocb_bio_iopoll(struct kiocb *kiocb, struct io_comp_batch *iob,
-    unsigned int flags)
-    {
-    struct bio *bio;
-    let mut ret: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn iocb_bio_iopoll(kiocb: *mut kiocb, iob: *mut io_comp_batch, flags: c_uint) -> c_int {
+pub static mut bio: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
 //
 // Note: the bio cache only uses SLAB_TYPESAFE_BY_RCU, so bio can
 // point to a freshly allocated bio at this point.  If that happens
@@ -984,31 +1188,30 @@ pub unsafe extern "C" fn bio_poll(bio: *mut bio, iob: *mut io_comp_batch, flags:
 //
     rcu_read_lock();
     bio = READ_ONCE(kiocb.private);
-    if (bio)
+    if (bio) {
     ret = bio_poll(bio, iob, flags);
+    }
     rcu_read_unlock();
     return ret;
     }
     EXPORT_SYMBOL_GPL(iocb_bio_iopoll);
 #[no_mangle]
 pub unsafe extern "C" fn update_io_ticks(part: *mut block_device, now: c_ulong, end: bool) {
-    void update_io_ticks(struct block_device *part, unsigned long now, bool end)
-    {
-    unsigned long stamp;
-    again:
+    let mut stamp = 0;
+// label;
     stamp = READ_ONCE(part.bd_stamp);
     if (unlikely(time_after(now, stamp)) &&
     likely(try_cmpxchg(&part.bd_stamp, &stamp, now)) &&
-    (end || bdev_count_inflight(part)))
+    (end || bdev_count_inflight(part))) {
     __part_stat_add(part, io_ticks, now - stamp);
+    }
     if (bdev_is_partition(part)) {
     part = bdev_whole(part);
-    goto again;
+// goto;
     }
     }
-    unsigned long bdev_start_io_acct(struct block_device *bdev, enum req_op op,
-    unsigned long start_time)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn bdev_start_io_acct(bdev: *mut block_device, op: req_op, start_time: c_ulong) -> c_ulong {
     part_stat_lock();
     update_io_ticks(bdev, start_time, false);
     bdev_inc_in_flight(bdev, op);
@@ -1024,17 +1227,14 @@ pub unsafe extern "C" fn update_io_ticks(part: *mut block_device, now: c_ulong, 
 //
 #[no_mangle]
 pub unsafe extern "C" fn bio_start_io_acct(bio: *mut bio) -> c_ulong {
-    unsigned long bio_start_io_acct(struct bio *bio)
-    {
     return bdev_start_io_acct(bio.bi_bdev, bio_op(bio), jiffies);
     }
     EXPORT_SYMBOL_GPL(bio_start_io_acct);
-    void bdev_end_io_acct(struct block_device *bdev, enum req_op op,
-    unsigned int sectors, unsigned long start_time)
-    {
-    let mut sgrp: c_int = op_stat_group(op);
-    let mut now: c_ulong = READ_ONCE(jiffies);
-    let mut duration: c_ulong = now - start_time;
+#[no_mangle]
+pub unsafe extern "C" fn bdev_end_io_acct(bdev: *mut block_device, op: req_op, sectors: c_uint, start_time: c_ulong) {
+pub static mut sgrp: c_int = 0;
+pub static mut now: c_ulong = 0;
+pub static mut duration: c_ulong = 0;
     part_stat_lock();
     update_io_ticks(bdev, now, true);
     part_stat_inc(bdev, ios[sgrp]);
@@ -1044,9 +1244,8 @@ pub unsafe extern "C" fn bio_start_io_acct(bio: *mut bio) -> c_ulong {
     part_stat_unlock();
     }
     EXPORT_SYMBOL(bdev_end_io_acct);
-    void bio_end_io_acct_remapped(struct bio *bio, unsigned long start_time,
-    struct block_device *orig_bdev)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn bio_end_io_acct_remapped(bio: *mut bio, start_time: c_ulong, orig_bdev: *mut block_device) {
     bdev_end_io_acct(orig_bdev, bio_op(bio), bio_sectors(bio), start_time);
     }
     EXPORT_SYMBOL_GPL(bio_end_io_acct_remapped);
@@ -1071,36 +1270,31 @@ pub unsafe extern "C" fn bio_start_io_acct(bio: *mut bio) -> c_ulong {
 //
 #[no_mangle]
 pub unsafe extern "C" fn blk_lld_busy(q: *mut request_queue) -> c_int {
-    int blk_lld_busy(struct request_queue *q)
-    {
-    if (queue_is_mq(q) && q.mq_ops.busy)
+    if (queue_is_mq(q) && q.mq_ops.busy) {
     return q.mq_ops.busy(q);
+    }
     return 0;
     }
     EXPORT_SYMBOL_GPL(blk_lld_busy);
 #[no_mangle]
 pub unsafe extern "C" fn kblockd_schedule_work(work: *mut work_struct) -> c_int {
-    int kblockd_schedule_work(struct work_struct *work)
-    {
     return queue_work(kblockd_workqueue, work);
     }
     EXPORT_SYMBOL(kblockd_schedule_work);
-    int kblockd_mod_delayed_work_on(int cpu, struct delayed_work *dwork,
-    unsigned long delay)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn kblockd_mod_delayed_work_on(cpu: c_int, dwork: *mut delayed_work, delay: c_ulong) -> c_int {
     return mod_delayed_work_on(cpu, kblockd_workqueue, dwork, delay);
     }
     EXPORT_SYMBOL(kblockd_mod_delayed_work_on);
 #[no_mangle]
 pub unsafe extern "C" fn blk_start_plug_nr_ios(plug: *mut blk_plug, nr_ios: c_ushort) {
-    void blk_start_plug_nr_ios(struct blk_plug *plug, unsigned short nr_ios)
-    {
-    struct task_struct *tsk = current;
+    let mut tsk = current;
 //
 // If this is a nested plug, don't actually assign it.
 //
-    if (tsk.plug)
+    if (tsk.plug) {
     return;
+    }
     plug.cur_ktime = 0;
     rq_list_init(&plug.mq_list);
     rq_list_init(&plug.cached_rqs);
@@ -1140,39 +1334,35 @@ pub unsafe extern "C" fn blk_start_plug_nr_ios(plug: *mut blk_plug, nr_ios: c_us
 //
 #[no_mangle]
 pub unsafe extern "C" fn blk_start_plug(plug: *mut blk_plug) {
-    void blk_start_plug(struct blk_plug *plug)
-    {
     blk_start_plug_nr_ios(plug, 1);
     }
     EXPORT_SYMBOL(blk_start_plug);
 #[no_mangle]
 unsafe extern "C" fn flush_plug_callbacks(plug: *mut blk_plug, from_schedule: bool) {
-    static void flush_plug_callbacks(struct blk_plug *plug, bool from_schedule)
-    {
-    LIST_HEAD(callbacks);
+pub static mut callbacks: usize = 0;
     while (!list_empty(&plug.cb_list)) {
     list_splice_init(&plug.cb_list, &callbacks);
     while (!list_empty(&callbacks)) {
-    struct blk_plug_cb *cb = list_first_entry(&callbacks,
-    struct blk_plug_cb,
+    let mut cb = list_first_entry(&callbacks, blk_plug_cb,
     list);
     list_del(&cb.list);
     cb.callback(cb, from_schedule);
     }
     }
     }
-    struct blk_plug_cb *blk_check_plugged(blk_plug_cb_fn unplug, void *data,
-    int size)
-    {
-    struct blk_plug *plug = current.plug;
-    struct blk_plug_cb *cb;
-    if (!plug)
+#[no_mangle]
+pub unsafe extern "C" fn blk_check_plugged(unplug: blk_plug_cb_fn, data: *mut c_void, size: c_int) -> *mut c_void {
+    let mut plug = current.plug;
+pub static mut cb: *mut c_void = core::ptr::null_mut();
+    if (!plug) {
     return core::ptr::null_mut();
-    list_for_each_entry(cb, &plug.cb_list, list)
+    }
+    list_for_each_entry(cb, &plug.cb_list, list) {
     if (cb.callback == unplug && cb.data == data)
     return cb;
+    }
 // Not currently on the callback list
-    BUG_ON(size < sizeof(*cb));
+    BUG_ON!(size < sizeof!(*cb));
     cb = kzalloc(size, GFP_ATOMIC);
     if (cb) {
     cb.data = data;
@@ -1184,10 +1374,9 @@ unsafe extern "C" fn flush_plug_callbacks(plug: *mut blk_plug, from_schedule: bo
     EXPORT_SYMBOL(blk_check_plugged);
 #[no_mangle]
 pub unsafe extern "C" fn __blk_flush_plug(plug: *mut blk_plug, from_schedule: bool) {
-    void __blk_flush_plug(struct blk_plug *plug, bool from_schedule)
-    {
-    if (!list_empty(&plug.cb_list))
+    if (!list_empty(&plug.cb_list)) {
     flush_plug_callbacks(plug, from_schedule);
+    }
     blk_mq_flush_plug_list(plug, from_schedule);
 //
 // Unconditionally flush out cached requests, even if the unplug
@@ -1195,8 +1384,9 @@ pub unsafe extern "C" fn __blk_flush_plug(plug: *mut blk_plug, from_schedule: bo
 // queue for cached requests, we don't want a blocked task holding
 // up a queue freeze/quiesce event.
 //
-    if (unlikely(!rq_list_empty(&plug.cached_rqs)))
+    if (unlikely(!rq_list_empty(&plug.cached_rqs))) {
     blk_mq_free_plug_rqs(plug);
+    }
     plug.cur_ktime = 0;
     current.flags &= ~PF_BLOCK_TS;
     }
@@ -1212,8 +1402,6 @@ pub unsafe extern "C" fn __blk_flush_plug(plug: *mut blk_plug, from_schedule: bo
 //
 #[no_mangle]
 pub unsafe extern "C" fn blk_finish_plug(plug: *mut blk_plug) {
-    void blk_finish_plug(struct blk_plug *plug)
-    {
     if (plug == current.plug) {
     __blk_flush_plug(plug, false);
     current.plug = core::ptr::null_mut();
@@ -1222,29 +1410,28 @@ pub unsafe extern "C" fn blk_finish_plug(plug: *mut blk_plug) {
     EXPORT_SYMBOL(blk_finish_plug);
 #[no_mangle]
 pub unsafe extern "C" fn blk_io_schedule() {
-    void blk_io_schedule(void)
-    {
 // Prevent hang_check timer from firing at us during very long I/O
-    let mut timeout: c_ulong = sysctl_hung_task_timeout_secs * HZ / 2;
-    if (timeout)
+pub static mut timeout: c_ulong = 0;
+    if (timeout) {
     io_schedule_timeout(timeout);
-    else
+    }
+    else {
     io_schedule();
     }
+    }
 #[no_mangle]
-pub unsafe extern "C" fn blk_dev_init() -> int __init {
-    int __init blk_dev_init(void)
-    {
-    BUILD_BUG_ON(( u32)REQ_OP_LAST >= (1 << REQ_OP_BITS));
-    BUILD_BUG_ON(REQ_OP_BITS + REQ_FLAG_BITS > 8 *
-    sizeof_field(struct request, cmd_flags));
-    BUILD_BUG_ON(REQ_OP_BITS + REQ_FLAG_BITS > 8 *
-    sizeof_field(struct bio, bi_opf));
+pub unsafe extern "C" fn blk_dev_init() -> c_int {
+    BUILD_BUG_ON!(( u32)REQ_OP_LAST >= (1 << REQ_OP_BITS));
+    BUILD_BUG_ON!(REQ_OP_BITS + REQ_FLAG_BITS > 8 *
+    sizeof_field(request, cmd_flags));
+    BUILD_BUG_ON!(REQ_OP_BITS + REQ_FLAG_BITS > 8 *
+    sizeof_field(bio, bi_opf));
 // used for unplugging and affects IO latency/throughput - HIGHPRI
     kblockd_workqueue = alloc_workqueue("kblockd",
     WQ_MEM_RECLAIM | WQ_HIGHPRI | WQ_PERCPU, 0);
-    if (!kblockd_workqueue)
+    if (!kblockd_workqueue) {
     panic("Failed to create kblockd\n");
+    }
     blk_requestq_cachep = KMEM_CACHE(request_queue, SLAB_PANIC);
     blk_debugfs_root = debugfs_create_dir("block", core::ptr::null_mut());
     return 0;

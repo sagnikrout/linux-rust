@@ -34,6 +34,216 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
 macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
@@ -166,7 +376,7 @@ pub const KPROBE_HASH_BITS: c_int = 6;
     static bool kprobes_all_disarmed;
 // This protects 'kprobe_table' and 'optimizing_list'
 // static DEFINE_MUTEX(kprobe_mutex);
-// static DEFINE_PER_CPU(struct kprobe *, kprobe_instance);
+// static DEFINE_PER_CPU(kprobe *, kprobe_instance);
     kprobe_opcode_t * __weak kprobe_lookup_name(const char *name,
     unsigned int __unused)
     {
@@ -192,12 +402,12 @@ pub struct kprobe_insn_page {
     pub cache: *mut kprobe_insn_cache,
     pub nused: c_int,
     pub ngarbage: c_int,
-    pub slot_used: [c_char; ],
+    pub slot_used: [c_char; 0],
 }
 
 #[no_mangle]
 unsafe extern "C" fn slots_per_page(c: *mut kprobe_insn_cache) -> c_int {
-    return PAGE_SIZE/(c.insn_size * sizeof(kprobe_opcode_t));
+    return PAGE_SIZE/(c.insn_size * sizeof!(kprobe_opcode_t));
     }
     enum kprobe_slot_state {
     SLOT_CLEAN = 0,
@@ -218,16 +428,8 @@ unsafe extern "C" fn slots_per_page(c: *mut kprobe_insn_cache) -> c_int {
 unsafe extern "C" fn free_insn_page(page: *mut c_void) {
     execmem_free(page);
     }
-    struct kprobe_insn_cache kprobe_insn_slots = {
-    .mutex = __MUTEX_INITIALIZER(kprobe_insn_slots.mutex),
-    .alloc = alloc_insn_page,
-    .free = free_insn_page,
-    .sym = KPROBE_INSN_PAGE_SYM,
-    .pages = LIST_HEAD_INIT(kprobe_insn_slots.pages),
-    .insn_size = MAX_INSN_SIZE,
-    .nr_garbage = 0,
-    };
-    static int collect_garbage_slots(struct kprobe_insn_cache *c);
+pub static mut kprobe_insn_cache: usize = 0;
+// forward_decl: collect_garbage_slots;
 //
 // __get_insn_slot - Find a slot on an executable page for an instruction.
 // @c: Pointer to kprobe instruction cache
@@ -236,7 +438,7 @@ unsafe extern "C" fn free_insn_page(page: *mut c_void) {
 // allocates an executable page if there's no room on existing ones.
 // Return: Pointer to instruction slot on success, NULL on failure.
 //
-    kprobe_opcode_t *__get_insn_slot(struct kprobe_insn_cache *c)
+    kprobe_opcode_t *__get_insn_slot(kprobe_insn_cache *c)
     {
     let mut kip = core::ptr::null_mut();
 // Since the slot array is not protected by rcu, we need a mutex
@@ -246,10 +448,10 @@ unsafe extern "C" fn free_insn_page(page: *mut c_void) {
     list_for_each_entry_rcu(kip, &c.pages, list) {
     if (kip.nused < slots_per_page(c)) {
     let mut i = 0;
-    for (i = 0; i < slots_per_page(c); i++) {
+    while (i < slots_per_page(c)) {
     if (kip.slot_used[i] == SLOT_CLEAN) {
     kip.slot_used[i] = SLOT_USED;
-    kip.nused++;
+    kip.nused += 1;
     return kip.insns + (i * c.insn_size);
     }
     }
@@ -286,7 +488,7 @@ unsafe extern "C" fn free_insn_page(page: *mut c_void) {
 #[no_mangle]
 unsafe extern "C" fn collect_one_slot(kip: *mut kprobe_insn_page, idx: c_int) -> bool {
     kip.slot_used[idx] = SLOT_CLEAN;
-    kip.nused--;
+    kip.nused -= 1;
     if (kip.nused != 0) {
     return false;
     }
@@ -313,7 +515,8 @@ unsafe extern "C" fn collect_one_slot(kip: *mut kprobe_insn_page, idx: c_int) ->
     }
 #[no_mangle]
 unsafe extern "C" fn collect_garbage_slots(c: *mut kprobe_insn_cache) -> c_int {
-    struct kprobe_insn_page *kip, *next;
+    let mut kip = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
 // Ensure no-one is interrupted on the garbages
     synchronize_rcu();
     list_for_each_entry_safe(kip, next, &c.pages, list) {
@@ -322,7 +525,7 @@ unsafe extern "C" fn collect_garbage_slots(c: *mut kprobe_insn_cache) -> c_int {
     continue;
     }
     kip.ngarbage = 0;	/* we will collect all garbages */
-    for (i = 0; i < slots_per_page(c); i++) {
+    while (i < slots_per_page(c)) {
     if (kip.slot_used[i] == SLOT_DIRTY && collect_one_slot(kip, i)) {
     break;
     }
@@ -333,12 +536,12 @@ unsafe extern "C" fn collect_garbage_slots(c: *mut kprobe_insn_cache) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __find_insn_page() {
-    struct kprobe_insn_page *kip = core::ptr::null_mut();
+    let mut kip = core::ptr::null_mut();
     let mut idx = 0;
     guard(rcu)();
     list_for_each_entry_rcu(kip, &c.pages, list) {
     idx = ((long)slot - (long)kip.insns) /
-    (c.insn_size * sizeof(kprobe_opcode_t));
+    (c.insn_size * sizeof!(kprobe_opcode_t));
     if (idx >= 0 && idx < slots_per_page(c)) {
 // pkip = kip;
     return idx;
@@ -351,7 +554,7 @@ pub unsafe extern "C" fn __find_insn_page() {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __free_insn_slot() {
-    struct kprobe_insn_page *kip = core::ptr::null_mut();
+    let mut kip = core::ptr::null_mut();
     let mut idx = 0;
     guard(mutex)(&c.mutex);
     idx = __find_insn_page(c, slot, &kip);
@@ -361,7 +564,7 @@ pub unsafe extern "C" fn __free_insn_slot() {
 // WARN_ON;
     if (dirty) {
     kip.slot_used[idx] = SLOT_DIRTY;
-    kip.ngarbage++;
+    kip.ngarbage += 1;
     if (++c.nr_garbage > slots_per_page(c)) {
     collect_garbage_slots(c);
     }
@@ -393,7 +596,7 @@ pub static mut ret: bool = false;
 #[no_mangle]
 pub unsafe extern "C" fn kprobe_cache_get_kallsym() {
     let mut kip = core::ptr::null_mut();
-pub static mut ret: c_int = -ERANGE;
+pub static mut ret: c_int = 0;
     rcu_read_lock();
     list_for_each_entry_rcu(kip, &c.pages, list) {
     if ((*symnum)--) {
@@ -418,15 +621,7 @@ pub unsafe extern "C" fn free_optinsn_page(page: *mut c_void) -> void __weak {
     free_insn_page(page);
     }
 // For optimized_kprobe buffer
-    struct kprobe_insn_cache kprobe_optinsn_slots = {
-    .mutex = __MUTEX_INITIALIZER(kprobe_optinsn_slots.mutex),
-    .alloc = alloc_optinsn_page,
-    .free = free_optinsn_page,
-    .sym = KPROBE_OPTINSN_PAGE_SYM,
-    .pages = LIST_HEAD_INIT(kprobe_optinsn_slots.pages),
-// .insn_size is initialized later
-    .nr_garbage = 0,
-    };
+pub static mut kprobe_insn_cache: usize = 0;
 
 // We have preemption disabled.. so it is safe to use __ versions
 #[no_mangle]
@@ -457,7 +652,7 @@ pub unsafe extern "C" fn get_kprobe() {
     return core::ptr::null_mut();
     }
 // NOKPROBE_SYMBOL;
-    static int aggr_pre_handler(struct kprobe *p, struct pt_regs *regs);
+// forward_decl: aggr_pre_handler;
 // Return true if 'p' is an aggregator
 #[no_mangle]
 pub unsafe extern "C" fn kprobe_aggrprobe(p: *mut kprobe) -> bool {
@@ -472,8 +667,8 @@ pub unsafe extern "C" fn kprobe_unused(p: *mut kprobe) -> bool {
 // Keep all fields in the kprobe consistent.
 #[no_mangle]
 pub unsafe extern "C" fn copy_kprobe(ap: *mut kprobe, p: *mut kprobe) {
-    memcpy(&p.opcode, &ap.opcode, sizeof(kprobe_opcode_t));
-    memcpy(&p.ainsn, &ap.ainsn, sizeof(struct arch_specific_insn));
+    memcpy(&p.opcode, &ap.opcode, sizeof!(kprobe_opcode_t));
+    memcpy(&p.ainsn, &ap.ainsn, sizeof!(arch_specific_insn));
     }
 
 // NOTE: This is protected by 'kprobe_mutex'.
@@ -498,7 +693,7 @@ pub unsafe extern "C" fn opt_pre_handler(p: *mut kprobe, regs: *mut pt_regs) {
 #[no_mangle]
 unsafe extern "C" fn free_aggr_kprobe(p: *mut kprobe) {
     let mut op = core::ptr::null_mut();
-    op = container_of(p, struct optimized_kprobe, kp);
+    op = container_of!(p, optimized_kprobe, kp);
     arch_remove_optimized_kprobe(op);
     arch_remove_kprobe(p);
     kfree(op);
@@ -508,7 +703,7 @@ unsafe extern "C" fn free_aggr_kprobe(p: *mut kprobe) {
 pub unsafe extern "C" fn kprobe_optready(p: *mut kprobe) -> c_int {
     let mut op = core::ptr::null_mut();
     if (kprobe_aggrprobe(p)) {
-    op = container_of(p, struct optimized_kprobe, kp);
+    op = container_of!(p, optimized_kprobe, kp);
     return arch_prepared_optinsn(&op.optinsn);
     }
     return 0;
@@ -521,7 +716,7 @@ pub unsafe extern "C" fn kprobe_disarmed(p: *mut kprobe) -> bool {
     if (!kprobe_aggrprobe(p)) {
     return kprobe_disabled(p);
     }
-    op = container_of(p, struct optimized_kprobe, kp);
+    op = container_of!(p, optimized_kprobe, kp);
     return kprobe_disabled(p) && list_empty(&op.list);
     }
 // Return true if the probe is queued on (un)optimizing lists
@@ -529,7 +724,7 @@ pub unsafe extern "C" fn kprobe_disarmed(p: *mut kprobe) -> bool {
 unsafe extern "C" fn kprobe_queued(p: *mut kprobe) -> bool {
     let mut op = core::ptr::null_mut();
     if (kprobe_aggrprobe(p)) {
-    op = container_of(p, struct optimized_kprobe, kp);
+    op = container_of!(p, optimized_kprobe, kp);
     if (!list_empty(&op.list)) {
     return true;
     }
@@ -543,13 +738,14 @@ unsafe extern "C" fn kprobe_queued(p: *mut kprobe) -> bool {
 #[no_mangle]
 pub unsafe extern "C" fn get_optimized_kprobe() {
     let mut i = 0;
-    struct kprobe *p = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
     let mut op = core::ptr::null_mut();
 // Don't check i == 0, since that is a breakpoint case.
-    for (i = 1; !p && i < MAX_OPTIMIZED_LENGTH / sizeof(kprobe_opcode_t); i++)
+    for (i = 1; !p && i < MAX_OPTIMIZED_LENGTH / sizeof!(kprobe_opcode_t); i++) {
     p = get_kprobe(addr - i);
+    }
     if (p && kprobe_optready(p)) {
-    op = container_of(p, struct optimized_kprobe, kp);
+    op = container_of!(p, optimized_kprobe, kp);
     if (arch_within_optimized_kprobe(op, addr)) {
     return p;
     }
@@ -560,8 +756,8 @@ pub unsafe extern "C" fn get_optimized_kprobe() {
 // static LIST_HEAD(optimizing_list);
 // static LIST_HEAD(unoptimizing_list);
 // static LIST_HEAD(freeing_list);
-    static void optimize_kprobe(struct kprobe *p);
-    static struct task_struct *kprobe_optimizer_task;
+// forward_decl: optimize_kprobe;
+pub static mut kprobe_optimizer_task: *mut c_void = core::ptr::null_mut();
     static wait_queue_head_t kprobe_optimizer_wait;
     static atomic_t optimizer_state;
     enum {
@@ -591,8 +787,9 @@ unsafe extern "C" fn do_optimize_kprobes() {
     lockdep_assert_cpus_held();
 // Optimization never be done when disarmed
     if (kprobes_all_disarmed || !kprobes_allow_optimization ||
-    list_empty(&optimizing_list))
+    list_empty(&optimizing_list)) {
     return;
+    }
     arch_optimize_kprobes(&optimizing_list);
     }
 //
@@ -601,7 +798,8 @@ unsafe extern "C" fn do_optimize_kprobes() {
 //
 #[no_mangle]
 unsafe extern "C" fn do_unoptimize_kprobes() {
-    struct optimized_kprobe *op, *tmp;
+    let mut op = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
     lockdep_assert_held(&text_mutex);
 // See comment in do_optimize_kprobes()
     lockdep_assert_cpus_held();
@@ -631,10 +829,11 @@ unsafe extern "C" fn do_unoptimize_kprobes() {
 // Reclaim all kprobes on the 'freeing_list'
 #[no_mangle]
 unsafe extern "C" fn do_free_cleaned_kprobes() {
-    struct optimized_kprobe *op, *tmp;
+    let mut op = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
     list_for_each_entry_safe(op, tmp, &freeing_list, list) {
     list_del_init(&op.list);
-    if (WARN_ON_ONCE(!kprobe_unused(&op.kp))) {
+    if (WARN_ON_ONCE!(!kprobe_unused(&op.kp))) {
 //
 // This must not happen, but if there is a kprobe
 // still in use, keep it on kprobes hash list.
@@ -646,14 +845,14 @@ unsafe extern "C" fn do_free_cleaned_kprobes() {
 // unoptimizing/freeing lists.  Now that the aggregator has been fully
 // reverted we can safely retry the optimization of that sibling.
 //
-    struct kprobe *_p = get_optimized_kprobe(op.kp.addr);
+    let mut _p = get_optimized_kprobe(op.kp.addr);
     if (unlikely(_p)) {
     optimize_kprobe(_p);
     }
     free_aggr_kprobe(&op.kp);
     }
     }
-    static void kick_kprobe_optimizer(void);
+// forward_decl: kick_kprobe_optimizer;
 // Kprobe jump optimizer
 #[no_mangle]
 unsafe extern "C" fn kprobe_optimizer() {
@@ -722,8 +921,9 @@ unsafe extern "C" fn kprobe_optimizer_thread(data: *mut c_void) -> c_int {
 unsafe extern "C" fn kick_kprobe_optimizer() {
     lockdep_assert_held(&kprobe_mutex);
     if (atomic_cmpxchg(&optimizer_state,
-    OPTIMIZER_ST_IDLE, OPTIMIZER_ST_KICKED) == OPTIMIZER_ST_IDLE)
+    OPTIMIZER_ST_IDLE, OPTIMIZER_ST_KICKED) == OPTIMIZER_ST_IDLE) {
     wake_up(&kprobe_optimizer_wait);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn wait_for_kprobe_optimizer_locked() {
@@ -735,8 +935,9 @@ unsafe extern "C" fn wait_for_kprobe_optimizer_locked() {
 // idle. If it's already kicked, it will see the state change.
 //
     if (atomic_xchg_acquire(&optimizer_state,
-    OPTIMIZER_ST_FLUSHING) != OPTIMIZER_ST_FLUSHING)
+    OPTIMIZER_ST_FLUSHING) != OPTIMIZER_ST_FLUSHING) {
     wake_up(&kprobe_optimizer_wait);
+    }
     mutex_unlock(&kprobe_mutex);
     wait_for_completion(&optimizer_completion);
     mutex_lock(&kprobe_mutex);
@@ -764,13 +965,14 @@ unsafe extern "C" fn optimize_kprobe(p: *mut kprobe) {
     let mut op = core::ptr::null_mut();
 // Check if the kprobe is disabled or not ready for optimization.
     if (!kprobe_optready(p) || !kprobes_allow_optimization ||
-    (kprobe_disabled(p) || kprobes_all_disarmed))
+    (kprobe_disabled(p) || kprobes_all_disarmed)) {
     return;
+    }
 // kprobes with 'post_handler' can not be optimized
     if (p.post_handler) {
     return;
     }
-    op = container_of(p, struct optimized_kprobe, kp);
+    op = container_of!(p, optimized_kprobe, kp);
 // Check there is no other kprobes at the optimized instructions
     if (arch_check_optimized_kprobe(op) < 0) {
     return;
@@ -788,7 +990,7 @@ unsafe extern "C" fn optimize_kprobe(p: *mut kprobe) {
 // On the 'unoptimizing_list' and 'optimizing_list',
 // 'op' must have OPTIMIZED flag
 //
-    if (WARN_ON_ONCE(!list_empty(&op.list))) {
+    if (WARN_ON_ONCE!(!list_empty(&op.list))) {
     return;
     }
     list_add(&op.list, &optimizing_list);
@@ -808,7 +1010,7 @@ unsafe extern "C" fn unoptimize_kprobe(p: *mut kprobe, force: bool) {
     if (!kprobe_aggrprobe(p) || kprobe_disarmed(p)) {
     return; /* This is not an optprobe nor optimized */
     }
-    op = container_of(p, struct optimized_kprobe, kp);
+    op = container_of!(p, optimized_kprobe, kp);
     if (!kprobe_optimized(p)) {
     return;
     }
@@ -847,7 +1049,7 @@ unsafe extern "C" fn reuse_unused_kprobe(ap: *mut kprobe) -> c_int {
 // Unused kprobe MUST be on the way of delayed unoptimizing (means
 // there is still a relative jump) and disabled.
 //
-    op = container_of(ap, struct optimized_kprobe, kp);
+    op = container_of!(ap, optimized_kprobe, kp);
 // WARN_ON_ONCE;
 // Enable the probe again
     ap.flags &= ~KPROBE_FLAG_DISABLED;
@@ -862,7 +1064,7 @@ unsafe extern "C" fn reuse_unused_kprobe(ap: *mut kprobe) -> c_int {
 #[no_mangle]
 unsafe extern "C" fn kill_optimized_kprobe(p: *mut kprobe) {
     let mut op = core::ptr::null_mut();
-    op = container_of(p, struct optimized_kprobe, kp);
+    op = container_of!(p, optimized_kprobe, kp);
     if (!list_empty(&op.list)) {
 // Dequeue from the (un)optimization queue
     list_del_init(&op.list);
@@ -892,14 +1094,14 @@ pub unsafe extern "C" fn __prepare_optimized_kprobe(op: *mut optimized_kprobe, p
 #[no_mangle]
 unsafe extern "C" fn prepare_optimized_kprobe(p: *mut kprobe) {
     let mut op = core::ptr::null_mut();
-    op = container_of(p, struct optimized_kprobe, kp);
+    op = container_of!(p, optimized_kprobe, kp);
     __prepare_optimized_kprobe(op, p);
     }
 // Allocate new optimized_kprobe and try to prepare optimized instructions.
 #[no_mangle]
 pub unsafe extern "C" fn alloc_aggr_kprobe() {
     let mut op = core::ptr::null_mut();
-    op = kzalloc_obj(struct optimized_kprobe);
+    op = kzalloc_obj(optimized_kprobe);
     if (!op) {
     return core::ptr::null_mut();
     }
@@ -908,7 +1110,7 @@ pub unsafe extern "C" fn alloc_aggr_kprobe() {
     __prepare_optimized_kprobe(op, p);
     return &op.kp;
     }
-    static void init_aggr_kprobe(struct kprobe *ap, struct kprobe *p);
+// forward_decl: init_aggr_kprobe;
 //
 // Prepare an optimized_kprobe and optimize it.
 // NOTE: 'p' must be a normal registered kprobe.
@@ -929,7 +1131,7 @@ unsafe extern "C" fn try_to_optimize_kprobe(p: *mut kprobe) {
     if (!ap) {
     return;
     }
-    op = container_of(ap, struct optimized_kprobe, kp);
+    op = container_of!(ap, optimized_kprobe, kp);
     if (!arch_prepared_optinsn(&op.optinsn)) {
 // If failed to setup optimizing, fallback to kprobe.
     arch_remove_optimized_kprobe(op);
@@ -951,7 +1153,7 @@ unsafe extern "C" fn optimize_all_kprobes() {
     }
     cpus_read_lock();
     kprobes_allow_optimization = true;
-    for (i = 0; i < KPROBE_TABLE_SIZE; i++) {
+    while (i < KPROBE_TABLE_SIZE) {
     head = &kprobe_table[i];
     hlist_for_each_entry(p, head, hlist)
     if (!kprobe_disabled(p)) {
@@ -959,7 +1161,7 @@ unsafe extern "C" fn optimize_all_kprobes() {
     }
     }
     cpus_read_unlock();
-    pr_info("kprobe jump-optimization is enabled. All kprobes are optimized if possible.\n");
+    pr_info!("kprobe jump-optimization is enabled. All kprobes are optimized if possible.\n");
     }
 
 #[no_mangle]
@@ -974,7 +1176,7 @@ unsafe extern "C" fn unoptimize_all_kprobes() {
     }
     cpus_read_lock();
     kprobes_allow_optimization = false;
-    for (i = 0; i < KPROBE_TABLE_SIZE; i++) {
+    while (i < KPROBE_TABLE_SIZE) {
     head = &kprobe_table[i];
     hlist_for_each_entry(p, head, hlist) {
     if (!kprobe_disabled(p)) {
@@ -985,7 +1187,7 @@ unsafe extern "C" fn unoptimize_all_kprobes() {
     cpus_read_unlock();
 // Wait for unoptimizing completion.
     wait_for_kprobe_optimizer_locked();
-    pr_info("kprobe jump-optimization is disabled. All kprobes are based on software breakpoint.\n");
+    pr_info!("kprobe jump-optimization is disabled. All kprobes are based on software breakpoint.\n");
     }
 // static DEFINE_MUTEX(kprobe_sysctl_mutex);
     static int sysctl_kprobes_optimization;
@@ -1069,15 +1271,17 @@ unsafe extern "C" fn free_aggr_kprobe(p: *mut kprobe) {
     kfree(p);
     }
 #[no_mangle]
-pub unsafe extern "C" fn alloc_aggr_kprobe() {
-    return kzalloc_obj(struct kprobe);
+#[no_mangle]
+// duplicate fn: alloc_aggr_kprobe
+pub unsafe extern "C" fn alloc_aggr_kprobe_dup() {
+    return kzalloc_obj(kprobe);
     }
 
-    static struct ftrace_ops kprobe_ftrace_ops __read_mostly = {
+    static struct ftrace_ops kprobe_ftrace_ops  = {
     .func = kprobe_ftrace_handler,
     .flags = FTRACE_OPS_FL_SAVE_REGS,
     };
-    static struct ftrace_ops kprobe_ipmodify_ops __read_mostly = {
+    static struct ftrace_ops kprobe_ipmodify_ops  = {
     .func = kprobe_ftrace_handler,
     .flags = FTRACE_OPS_FL_SAVE_REGS | FTRACE_OPS_FL_IPMODIFY,
     };
@@ -1108,7 +1312,7 @@ pub unsafe extern "C" fn __arm_kprobe_ftrace() {
     }
 #[no_mangle]
 unsafe extern "C" fn arm_kprobe_ftrace(p: *mut kprobe) -> c_int {
-pub static mut ipmodify: bool = (p.post_handler != core::ptr::null_mut());
+pub static mut ipmodify: bool = false;
     return __arm_kprobe_ftrace(p,
     ipmodify ? &kprobe_ipmodify_ops : &kprobe_ftrace_ops,
     ipmodify ? &kprobe_ipmodify_enabled : &kprobe_ftrace_enabled);
@@ -1135,7 +1339,7 @@ pub unsafe extern "C" fn __disarm_kprobe_ftrace() {
     }
 #[no_mangle]
 unsafe extern "C" fn disarm_kprobe_ftrace(p: *mut kprobe) -> c_int {
-pub static mut ipmodify: bool = (p.post_handler != core::ptr::null_mut());
+pub static mut ipmodify: bool = false;
     return __disarm_kprobe_ftrace(p,
     ipmodify ? &kprobe_ipmodify_ops : &kprobe_ftrace_ops,
     ipmodify ? &kprobe_ipmodify_enabled : &kprobe_ftrace_enabled);
@@ -1218,10 +1422,11 @@ pub unsafe extern "C" fn aggr_post_handler() {
 pub unsafe extern "C" fn kprobes_inc_nmissed_count(p: *mut kprobe) {
     let mut kp = core::ptr::null_mut();
     if (!kprobe_aggrprobe(p)) {
-    p.nmissed++;
+    p.nmissed += 1;
     } else {
-    list_for_each_entry_rcu(kp, &p.list, list)
-    kp.nmissed++;
+    list_for_each_entry_rcu(kp, &p.list, list) {
+    kp.nmissed += 1;
+    }
     }
     }
 // NOKPROBE_SYMBOL;
@@ -1278,7 +1483,7 @@ unsafe extern "C" fn init_aggr_kprobe(ap: *mut kprobe, p: *mut kprobe) {
 #[no_mangle]
 unsafe extern "C" fn register_aggr_kprobe(orig_p: *mut kprobe, p: *mut kprobe) -> c_int {
 pub static mut ret: c_int = 0;
-    struct kprobe *ap = orig_p;
+    let mut ap = orig_p;
     scoped_guard(cpus_read_lock) {
 // For preparing optimization, jump_label_text_reserved() is called
     guard(jump_label_lock)();
@@ -1465,7 +1670,8 @@ pub unsafe extern "C" fn kprobe_addr() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __get_valid_kprobe() {
-    struct kprobe *ap, *list_p;
+    let mut ap = core::ptr::null_mut();
+    let mut list_p = core::ptr::null_mut();
     lockdep_assert_held(&kprobe_mutex);
     ap = get_kprobe(p.addr);
     if (unlikely(!ap)) {
@@ -1474,8 +1680,9 @@ pub unsafe extern "C" fn __get_valid_kprobe() {
     if (p == ap) {
     return ap;
     }
-    list_for_each_entry(list_p, &ap.list, list)
+    list_for_each_entry(list_p, &ap.list, list) {
     if (list_p == p) {
+    }
 // kprobe p is a valid probe
     return ap;
     }
@@ -1488,14 +1695,14 @@ pub unsafe extern "C" fn __get_valid_kprobe() {
 #[no_mangle]
 pub unsafe extern "C" fn warn_kprobe_rereg(p: *mut kprobe) -> c_int {
     guard(mutex)(&kprobe_mutex);
-    if (WARN_ON_ONCE(__get_valid_kprobe(p))) {
+    if (WARN_ON_ONCE!(__get_valid_kprobe(p))) {
     return -EINVAL;
     }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn check_ftrace_location(p: *mut kprobe) -> c_int {
-pub static mut addr: c_ulong = (unsigned long)p.addr;
+pub static mut addr: c_ulong = 0;
     if (ftrace_location(addr) == addr) {
 
     p.flags |= KPROBE_FLAG_FTRACE;
@@ -1549,13 +1756,13 @@ pub unsafe extern "C" fn check_kprobe_address_safe() {
     return -EINVAL;
     }
 // Get module refcount and reject __init functions for loaded modules.
-    if (IS_ENABLED(CONFIG_MODULES) && *probed_mod) {
+    if (IS_ENABLED!(CONFIG_MODULES) && *probed_mod) {
 //
 // If the module freed '.init.text', we couldn't insert
 // kprobes in there.
 //
     if (within_module_init((unsigned long)p.addr, *probed_mod) &&
-    !module_is_coming(*probed_mod)) {
+    !module_is_coming!(*probed_mod)) {
 // module_put;
     return -ENOENT;
     }
@@ -1633,8 +1840,9 @@ pub unsafe extern "C" fn register_kprobe(p: *mut kprobe) -> c_int {
 unsafe extern "C" fn aggr_kprobe_disabled(ap: *mut kprobe) -> bool {
     let mut kp = core::ptr::null_mut();
     lockdep_assert_held(&kprobe_mutex);
-    list_for_each_entry(kp, &ap.list, list)
+    list_for_each_entry(kp, &ap.list, list) {
     if (!kprobe_disabled(kp)) {
+    }
 //
 // Since there is an active probe on the list,
 // we can't disable this 'ap'.
@@ -1684,7 +1892,8 @@ pub unsafe extern "C" fn __disable_kprobe() {
 //
 #[no_mangle]
 unsafe extern "C" fn __unregister_kprobe_top(p: *mut kprobe) -> c_int {
-    struct kprobe *ap, *list_p;
+    let mut ap = core::ptr::null_mut();
+    let mut list_p = core::ptr::null_mut();
 // Disable kprobe. This will disarm it if needed.
     ap = __disable_kprobe(p);
     if (IS_ERR(ap)) {
@@ -1745,10 +1954,9 @@ unsafe extern "C" fn __unregister_kprobe_bottom(p: *mut kprobe) {
 // This is an independent kprobe
     arch_remove_kprobe(p);
     }
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: list_is_singular(&p->list)) -> else {
+if true {
 // This is the last child of an aggrprobe
-    ap = list_entry(p.list.next, struct kprobe, list);
+    ap = list_entry(p.list.next, kprobe, list);
     list_del(&p.list);
     free_aggr_kprobe(ap);
     }
@@ -1760,7 +1968,7 @@ pub unsafe extern "C" fn register_kprobes(kps: *mut kprobe, num: c_int) -> c_int
     if (num <= 0) {
     return -EINVAL;
     }
-    for (i = 0; i < num; i++) {
+    while (i < num) {
     ret = register_kprobe(kps[i]);
     if (ret < 0) {
     if (i > 0) {
@@ -1784,19 +1992,21 @@ pub unsafe extern "C" fn unregister_kprobes(kps: *mut kprobe, num: c_int) {
     return;
     }
     scoped_guard(mutex, &kprobe_mutex) {
-    for (i = 0; i < num; i++)
+    for (i = 0; i < num; i++) {
     if (__unregister_kprobe_top(kps[i]) < 0) {
+    }
     kps[i].addr = core::ptr::null_mut();
     }
     }
     synchronize_rcu();
-    for (i = 0; i < num; i++)
+    for (i = 0; i < num; i++) {
     if (kps[i].addr) {
+    }
     __unregister_kprobe_bottom(kps[i]);
     }
     }
 // EXPORT_SYMBOL_GPL;
-    int __weak kprobe_exceptions_notify(struct notifier_block *self,
+    int __weak kprobe_exceptions_notify(notifier_block *self,
     unsigned long val, void *data)
     {
     return NOTIFY_DONE;
@@ -1807,7 +2017,7 @@ pub static mut notifier_block: usize = 0;
 // callbacks for objpool of kretprobe instances
 #[no_mangle]
 unsafe extern "C" fn kretprobe_init_inst(nod: *mut c_void, context: *mut c_void) -> c_int {
-    struct kretprobe_instance *ri = nod;
+    let mut ri = nod;
     ri.rph = context;
     return 0;
     }
@@ -1818,14 +2028,14 @@ unsafe extern "C" fn kretprobe_fini_pool(head: *mut objpool_head, context: *mut 
     }
 #[no_mangle]
 unsafe extern "C" fn free_rp_inst_rcu(head: *mut rcu_head) {
-    struct kretprobe_instance *ri = container_of(head, struct kretprobe_instance, rcu);
-    struct kretprobe_holder *rph = ri.rph;
+    let mut ri = container_of!(head, kretprobe_instance, rcu);
+    let mut rph = ri.rph;
     objpool_drop(ri, &rph.pool);
     }
 // NOKPROBE_SYMBOL;
 #[no_mangle]
 unsafe extern "C" fn recycle_rp_inst(ri: *mut kretprobe_instance) {
-    struct kretprobe *rp = get_kretprobe(ri);
+    let mut rp = get_kretprobe(ri);
     if (likely(rp)) {
     objpool_push(ri, &rp.rph.pool);
     }
@@ -1851,7 +2061,7 @@ pub unsafe extern "C" fn kprobe_flush_task(tk: *mut task_struct) {
     kprobe_busy_begin();
     node = __llist_del_all(&tk.kretprobe_instances);
     while (node) {
-    ri = container_of(node, struct kretprobe_instance, llist);
+    ri = container_of!(node, kretprobe_instance, llist);
     node = node.next;
     recycle_rp_inst(ri);
     }
@@ -1860,7 +2070,7 @@ pub unsafe extern "C" fn kprobe_flush_task(tk: *mut task_struct) {
 // NOKPROBE_SYMBOL;
 #[no_mangle]
 pub unsafe extern "C" fn free_rp_inst(rp: *mut kretprobe) {
-    struct kretprobe_holder *rph = rp.rph;
+    let mut rph = rp.rph;
     if (!rph) {
     return;
     }
@@ -1870,8 +2080,8 @@ pub unsafe extern "C" fn free_rp_inst(rp: *mut kretprobe) {
 // This assumes the 'tsk' is the current task or the is not running.
 #[no_mangle]
 pub unsafe extern "C" fn __kretprobe_find_ret_addr() {
-    struct kretprobe_instance *ri = core::ptr::null_mut();
-    struct llist_node *node = *cur;
+    let mut ri = core::ptr::null_mut();
+    let mut node = *cur;
     if (!node) {
     node = tsk.kretprobe_instances.first;
     }
@@ -1879,7 +2089,7 @@ pub unsafe extern "C" fn __kretprobe_find_ret_addr() {
     node = node.next;
     }
     while (node) {
-    ri = container_of(node, struct kretprobe_instance, llist);
+    ri = container_of!(node, kretprobe_instance, llist);
     if (ri.ret_addr != kretprobe_trampoline_addr()) {
 // cur = node;
     return ri.ret_addr;
@@ -1908,7 +2118,7 @@ pub unsafe extern "C" fn __kretprobe_find_ret_addr() {
 pub unsafe extern "C" fn kretprobe_find_ret_addr() {
     let mut ri = core::ptr::null_mut();
     let mut ret = core::ptr::null_mut();
-    if (WARN_ON_ONCE(!cur)) {
+    if (WARN_ON_ONCE!(!cur)) {
     return 0;
     }
     do {
@@ -1916,12 +2126,12 @@ pub unsafe extern "C" fn kretprobe_find_ret_addr() {
     if (!ret) {
     break;
     }
-    ri = container_of(*cur, struct kretprobe_instance, llist);
+    ri = container_of!(*cur, kretprobe_instance, llist);
     } while (ri.fp != fp);
     return (unsigned long)ret;
     }
 // NOKPROBE_SYMBOL;
-    void __weak arch_kretprobe_fixup_return(struct pt_regs *regs,
+    void __weak arch_kretprobe_fixup_return(pt_regs *regs,
     kprobe_opcode_t *correct_ret_addr)
     {
 //
@@ -1931,14 +2141,14 @@ pub unsafe extern "C" fn kretprobe_find_ret_addr() {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __kretprobe_trampoline_handler() {
-    struct kretprobe_instance *ri = core::ptr::null_mut();
+    let mut ri = core::ptr::null_mut();
     struct llist_node *first, *node = core::ptr::null_mut();
     let mut correct_ret_addr = core::ptr::null_mut();
     let mut rp = core::ptr::null_mut();
 // Find correct address and all nodes for this frame.
     correct_ret_addr = __kretprobe_find_ret_addr(current, &node);
     if (!correct_ret_addr) {
-    pr_err("kretprobe: Return address not found, not execute handler. Maybe there is a bug in the kernel.\n");
+    pr_err!("kretprobe: Return address not found, not execute handler. Maybe there is a bug in the kernel.\n");
 // BUG_ON;
     }
 //
@@ -1950,13 +2160,13 @@ pub unsafe extern "C" fn __kretprobe_trampoline_handler() {
 // Run the user handler of the nodes.
     first = current.kretprobe_instances.first;
     while (first) {
-    ri = container_of(first, struct kretprobe_instance, llist);
-    if (WARN_ON_ONCE(ri.fp != frame_pointer)) {
+    ri = container_of!(first, kretprobe_instance, llist);
+    if (WARN_ON_ONCE!(ri.fp != frame_pointer)) {
     break;
     }
     rp = get_kretprobe(ri);
     if (rp && rp.handler) {
-    struct kprobe *prev = kprobe_running();
+    let mut prev = kprobe_running();
     __this_cpu_write(current_kprobe, &rp.kp);
     ri.ret_addr = correct_ret_addr;
     rp.handler(ri, regs);
@@ -1974,7 +2184,7 @@ pub unsafe extern "C" fn __kretprobe_trampoline_handler() {
     node.next = core::ptr::null_mut();
 // Recycle free instances.
     while (first) {
-    ri = container_of(first, struct kretprobe_instance, llist);
+    ri = container_of!(first, kretprobe_instance, llist);
     first = first.next;
     recycle_rp_inst(ri);
     }
@@ -1987,12 +2197,12 @@ pub unsafe extern "C" fn __kretprobe_trampoline_handler() {
 //
 #[no_mangle]
 unsafe extern "C" fn pre_handler_kretprobe(p: *mut kprobe, regs: *mut pt_regs) -> c_int {
-    struct kretprobe *rp = container_of(p, struct kretprobe, kp);
-    struct kretprobe_holder *rph = rp.rph;
+    let mut rp = container_of!(p, kretprobe, kp);
+    let mut rph = rp.rph;
     let mut ri = core::ptr::null_mut();
     ri = objpool_pop(&rph.pool);
     if (!ri) {
-    rp.nmissed++;
+    rp.nmissed += 1;
     return 0;
     }
     if (rp.entry_handler && rp.entry_handler(ri, regs)) {
@@ -2011,15 +2221,15 @@ unsafe extern "C" fn pre_handler_kretprobe(p: *mut kprobe, regs: *mut pt_regs) -
 //
 #[no_mangle]
 unsafe extern "C" fn pre_handler_kretprobe(p: *mut kprobe, regs: *mut pt_regs) -> c_int {
-    struct kretprobe *rp = container_of(p, struct kretprobe, kp);
+    let mut rp = container_of!(p, kretprobe, kp);
     let mut ri = core::ptr::null_mut();
     let mut rhn = core::ptr::null_mut();
     rhn = rethook_try_get(rp.rh);
     if (!rhn) {
-    rp.nmissed++;
+    rp.nmissed += 1;
     return 0;
     }
-    ri = container_of(rhn, struct kretprobe_instance, node);
+    ri = container_of!(rhn, kretprobe_instance, node);
     if (rp.entry_handler && rp.entry_handler(ri, regs)) {
     rethook_recycle(rhn);
     }
@@ -2031,17 +2241,17 @@ unsafe extern "C" fn pre_handler_kretprobe(p: *mut kprobe, regs: *mut pt_regs) -
 // NOKPROBE_SYMBOL;
 #[no_mangle]
 pub unsafe extern "C" fn kretprobe_rethook_handler() {
-    struct kretprobe *rp = data;
+    let mut rp = data;
     let mut ri = core::ptr::null_mut();
     let mut kcb = core::ptr::null_mut();
 // The data must NOT be null. This means rethook data structure is broken.
-    if (WARN_ON_ONCE(!data) || !rp.handler) {
+    if (WARN_ON_ONCE!(!data) || !rp.handler) {
     return;
     }
     __this_cpu_write(current_kprobe, &rp.kp);
     kcb = get_kprobe_ctlblk();
     kcb.kprobe_status = KPROBE_HIT_ACTIVE;
-    ri = container_of(rh, struct kretprobe_instance, node);
+    ri = container_of!(rh, kretprobe_instance, node);
     rp.handler(ri, regs);
     __this_cpu_write(current_kprobe, core::ptr::null_mut());
     }
@@ -2063,7 +2273,7 @@ pub unsafe extern "C" fn kretprobe_rethook_handler() {
 #[no_mangle]
 pub unsafe extern "C" fn kprobe_on_func_entry(addr: *mut kprobe_opcode_t, sym: *const c_char, offset: c_ulong) -> c_int {
     let mut on_func_entry = 0;
-    kprobe_opcode_t *kp_addr = _kprobe_addr(addr, sym, offset, &on_func_entry);
+    let mut kp_addr = _kprobe_addr(addr, sym, offset, &on_func_entry);
     if (IS_ERR(kp_addr)) {
     return PTR_ERR(kp_addr);
     }
@@ -2090,7 +2300,7 @@ pub unsafe extern "C" fn register_kretprobe(rp: *mut kretprobe) -> c_int {
     if (IS_ERR(addr)) {
     return PTR_ERR(addr);
     }
-    for (i = 0; kretprobe_blacklist[i].name != core::ptr::null_mut(); i++) {
+    while (kretprobe_blacklist[i].name != core::ptr::null_mut()) {
     if (kretprobe_blacklist[i].addr == addr) {
     return -EINVAL;
     }
@@ -2107,7 +2317,7 @@ pub unsafe extern "C" fn register_kretprobe(rp: *mut kretprobe) -> c_int {
     }
 
     rp.rh = rethook_alloc(rp, kretprobe_rethook_handler,
-    sizeof(struct kretprobe_instance) +
+    sizeof!(kretprobe_instance) +
     rp.data_size, rp.maxactive);
     if (IS_ERR(rp.rh)) {
     return PTR_ERR(rp.rh);
@@ -2120,12 +2330,12 @@ pub unsafe extern "C" fn register_kretprobe(rp: *mut kretprobe) -> c_int {
     rp.rh = core::ptr::null_mut();
     }
 
-    rp.rph = kzalloc_obj(struct kretprobe_holder);
+    rp.rph = kzalloc_obj(kretprobe_holder);
     if (!rp.rph) {
     return -ENOMEM;
     }
     if (objpool_init(&rp.rph.pool, rp.maxactive, rp.data_size +
-    sizeof(struct kretprobe_instance), GFP_KERNEL,
+    sizeof!(kretprobe_instance), GFP_KERNEL,
     rp.rph, kretprobe_init_inst, kretprobe_fini_pool)) {
     kfree(rp.rph);
     rp.rph = core::ptr::null_mut();
@@ -2144,11 +2354,11 @@ pub unsafe extern "C" fn register_kretprobe(rp: *mut kretprobe) -> c_int {
 // EXPORT_SYMBOL_GPL;
 #[no_mangle]
 pub unsafe extern "C" fn register_kretprobes(rps: *mut kretprobe, num: c_int) -> c_int {
-pub static mut ret: c_int = 0, i;
+pub static mut ret: c_int = 0;
     if (num <= 0) {
     return -EINVAL;
     }
-    for (i = 0; i < num; i++) {
+    while (i < num) {
     ret = register_kretprobe(rps[i]);
     if (ret < 0) {
     if (i > 0) {
@@ -2171,7 +2381,7 @@ pub unsafe extern "C" fn unregister_kretprobes(rps: *mut kretprobe, num: c_int) 
     if (num <= 0) {
     return;
     }
-    for (i = 0; i < num; i++) {
+    while (i < num) {
     guard(mutex)(&kprobe_mutex);
     if (__unregister_kprobe_top(&rps[i].kp) < 0) {
     rps[i].kp.addr = core::ptr::null_mut();
@@ -2183,7 +2393,7 @@ pub unsafe extern "C" fn unregister_kretprobes(rps: *mut kretprobe, num: c_int) 
 
     }
     synchronize_rcu();
-    for (i = 0; i < num; i++) {
+    while (i < num) {
     if (rps[i].kp.addr) {
     __unregister_kprobe_bottom(&rps[i].kp);
 
@@ -2195,21 +2405,29 @@ pub unsafe extern "C" fn unregister_kretprobes(rps: *mut kretprobe, num: c_int) 
 // EXPORT_SYMBOL_GPL;
 
 #[no_mangle]
-pub unsafe extern "C" fn register_kretprobe(rp: *mut kretprobe) -> c_int {
+#[no_mangle]
+// duplicate fn: register_kretprobe
+pub unsafe extern "C" fn register_kretprobe_dup(rp: *mut kretprobe) -> c_int {
     return -EOPNOTSUPP;
     }
 // EXPORT_SYMBOL_GPL;
 #[no_mangle]
-pub unsafe extern "C" fn register_kretprobes(rps: *mut kretprobe, num: c_int) -> c_int {
+#[no_mangle]
+// duplicate fn: register_kretprobes
+pub unsafe extern "C" fn register_kretprobes_dup(rps: *mut kretprobe, num: c_int) -> c_int {
     return -EOPNOTSUPP;
     }
 // EXPORT_SYMBOL_GPL;
 #[no_mangle]
-pub unsafe extern "C" fn unregister_kretprobe(rp: *mut kretprobe) {
+#[no_mangle]
+// duplicate fn: unregister_kretprobe
+pub unsafe extern "C" fn unregister_kretprobe_dup(rp: *mut kretprobe) {
     }
 // EXPORT_SYMBOL_GPL;
 #[no_mangle]
-pub unsafe extern "C" fn unregister_kretprobes(rps: *mut kretprobe, num: c_int) {
+#[no_mangle]
+// duplicate fn: unregister_kretprobes
+pub unsafe extern "C" fn unregister_kretprobes_dup(rps: *mut kretprobe, num: c_int) {
     }
 // EXPORT_SYMBOL_GPL;
 #[no_mangle]
@@ -2237,8 +2455,9 @@ unsafe extern "C" fn kill_kprobe(p: *mut kprobe) {
 // If this is an aggr_kprobe, we have to list all the
 // chained probes and mark them GONE.
 //
-    list_for_each_entry(kp, &p.list, list)
+    list_for_each_entry(kp, &p.list, list) {
     kp.flags |= KPROBE_FLAG_GONE;
+    }
     p.post_handler = core::ptr::null_mut();
     kill_optimized_kprobe(p);
     }
@@ -2292,17 +2511,18 @@ pub static mut ret: c_int = 0;
 // Caller must NOT call this in usual path. This is only for critical case
 #[no_mangle]
 pub unsafe extern "C" fn dump_kprobe(kp: *mut kprobe) {
-    pr_err("Dump kprobe:\n.symbol_name = %s, .offset = %x, .addr = %pS\n",
+    pr_err!("Dump kprobe:\n.symbol_name = %s, .offset = %x, .addr = %pS\n",
     kp.symbol_name, kp.offset, kp.addr);
     }
 // NOKPROBE_SYMBOL;
 #[no_mangle]
 pub unsafe extern "C" fn kprobe_add_ksym_blacklist(entry: c_ulong) -> c_int {
     let mut ent = core::ptr::null_mut();
-pub static mut offset: c_ulong = 0, size = 0;
+pub static mut offset: c_ulong = 0;
     if (!kernel_text_address(entry) ||
-    !kallsyms_lookup_size_offset(entry, &size, &offset))
+    !kallsyms_lookup_size_offset(entry, &size, &offset)) {
     return -EINVAL;
+    }
     ent = kmalloc_obj(*ent);
     if (!ent) {
     return -ENOMEM;
@@ -2318,13 +2538,14 @@ pub static mut offset: c_ulong = 0, size = 0;
 pub unsafe extern "C" fn kprobe_add_area_blacklist(start: c_ulong, end: c_ulong) -> c_int {
     let mut entry = 0;
 pub static mut ret: c_int = 0;
-    for (entry = start; entry < end; entry += ret) {
+    while (entry < end) {
     ret = kprobe_add_ksym_blacklist(entry);
     if (ret < 0) {
     return ret;
     }
-    if (ret == 0)	/* In case of alias symbol */
+    if (ret == 0)	/* In case of alias symbol */ {
     ret = 1;
+    }
     }
     return 0;
     }
@@ -2365,9 +2586,9 @@ pub unsafe extern "C" fn arch_populate_kprobe_blacklist() -> c_int __weak {
     unsigned long *end)
     {
     let mut entry = 0;
-    unsigned long *iter;
+pub static mut iter: *mut c_void = core::ptr::null_mut();
     let mut ret = 0;
-    for (iter = start; iter < end; iter++) {
+    while (iter < end) {
     entry = (unsigned long)dereference_symbol_descriptor(*iter);
     ret = kprobe_add_ksym_blacklist(entry);
     if (ret == -EINVAL) {
@@ -2392,7 +2613,8 @@ pub unsafe extern "C" fn arch_populate_kprobe_blacklist() -> c_int __weak {
 // Remove all symbols in given area from kprobe blacklist
 #[no_mangle]
 unsafe extern "C" fn kprobe_remove_area_blacklist(start: c_ulong, end: c_ulong) {
-    struct kprobe_blacklist_entry *ent, *n;
+    let mut ent = core::ptr::null_mut();
+    let mut n = core::ptr::null_mut();
     list_for_each_entry_safe(ent, n, &kprobe_blacklist, list) {
     if (ent.start_addr < start || ent.start_addr >= end) {
     continue;
@@ -2410,8 +2632,9 @@ unsafe extern "C" fn add_module_kprobe_blacklist(mod: *mut module) {
     unsigned long start, end;
     let mut i = 0;
     if (mod.kprobe_blacklist) {
-    for (i = 0; i < mod.num_kprobe_blacklist; i++)
+    for (i = 0; i < mod.num_kprobe_blacklist; i++) {
     kprobe_add_ksym_blacklist(mod.kprobe_blacklist[i]);
+    }
     }
     start = (unsigned long)mod.kprobes_text_start;
     if (start) {
@@ -2429,8 +2652,9 @@ unsafe extern "C" fn remove_module_kprobe_blacklist(mod: *mut module) {
     unsigned long start, end;
     let mut i = 0;
     if (mod.kprobe_blacklist) {
-    for (i = 0; i < mod.num_kprobe_blacklist; i++)
+    for (i = 0; i < mod.num_kprobe_blacklist; i++) {
     kprobe_remove_ksym_blacklist(mod.kprobe_blacklist[i]);
+    }
     }
     start = (unsigned long)mod.kprobes_text_start;
     if (start) {
@@ -2446,11 +2670,11 @@ unsafe extern "C" fn remove_module_kprobe_blacklist(mod: *mut module) {
 // Module notifier call back, checking kprobes on the module
 #[no_mangle]
 pub unsafe extern "C" fn kprobes_module_callback() {
-    struct module *mod = data;
+    let mut mod = data;
     let mut head = core::ptr::null_mut();
     let mut p = core::ptr::null_mut();
     let mut i = 0;
-pub static mut checkcore: c_int = (val == MODULE_STATE_GOING);
+pub static mut checkcore: c_int = 0;
     guard(mutex)(&kprobe_mutex);
     if (val == MODULE_STATE_COMING) {
     add_module_kprobe_blacklist(mod);
@@ -2464,7 +2688,7 @@ pub static mut checkcore: c_int = (val == MODULE_STATE_GOING);
 // notified, only '.init.text' section would be freed. We need to
 // disable kprobes which have been inserted in the sections.
 //
-    for (i = 0; i < KPROBE_TABLE_SIZE; i++) {
+    while (i < KPROBE_TABLE_SIZE) {
     head = &kprobe_table[i];
     hlist_for_each_entry(p, head, hlist)
     if (within_module_init((unsigned long)p.addr, mod) ||
@@ -2502,14 +2726,14 @@ unsafe extern "C" fn kprobe_register_module_notifier() -> c_int {
 
 #[no_mangle]
 pub unsafe extern "C" fn kprobe_free_init_mem() {
-    void *start = (&__init_begin);
-    void *end = (&__init_end);
+    let mut start = (&__init_begin);
+    let mut end = (&__init_end);
     let mut head = core::ptr::null_mut();
     let mut p = core::ptr::null_mut();
     let mut i = 0;
     guard(mutex)(&kprobe_mutex);
 // Kill all kprobes on initmem because the target code has been freed.
-    for (i = 0; i < KPROBE_TABLE_SIZE; i++) {
+    while (i < KPROBE_TABLE_SIZE) {
     head = &kprobe_table[i];
     hlist_for_each_entry(p, head, hlist) {
     if (start <= p.addr && p.addr < end) {
@@ -2520,23 +2744,25 @@ pub unsafe extern "C" fn kprobe_free_init_mem() {
     }
 #[no_mangle]
 unsafe extern "C" fn init_kprobes() -> c_int {
-    int i, err;
+    let mut i = 0;
+    let mut err = 0;
 // FIXME allocate the probe table, currently defined statically
 // initialize all list heads
-    for (i = 0; i < KPROBE_TABLE_SIZE; i++)
+    for (i = 0; i < KPROBE_TABLE_SIZE; i++) {
 // INIT_HLIST_HEAD;
+    }
     err = populate_kprobe_blacklist(__start_kprobe_blacklist,
     __stop_kprobe_blacklist);
     if (err) {
-    pr_err("Failed to populate blacklist (error %d), kprobes not restricted, be careful using them!\n", err);
+    pr_err!("Failed to populate blacklist (error %d), kprobes not restricted, be careful using them!\n", err);
     }
     if (kretprobe_blacklist_size) {
 // lookup the function address from its name
-    for (i = 0; kretprobe_blacklist[i].name != core::ptr::null_mut(); i++) {
+    while (kretprobe_blacklist[i].name != core::ptr::null_mut()) {
     kretprobe_blacklist[i].addr =
     kprobe_lookup_name(kretprobe_blacklist[i].name, 0);
     if (!kretprobe_blacklist[i].addr) {
-    pr_err("Failed to lookup symbol '%s' for kretprobe blacklist. Maybe the target function is removed or renamed.\n",
+    pr_err!("Failed to lookup symbol '%s' for kretprobe blacklist. Maybe the target function is removed or renamed.\n",
     kretprobe_blacklist[i].name);
     }
     }
@@ -2573,7 +2799,7 @@ unsafe extern "C" fn init_optprobes() -> c_int {
 #[no_mangle]
 pub unsafe extern "C" fn report_probe() {
     let mut kprobe_type = core::ptr::null_mut();
-    void *addr = p.addr;
+    let mut addr = p.addr;
     if (p.pre_handler == pre_handler_kretprobe) {
     kprobe_type = "r";
     }
@@ -2619,9 +2845,10 @@ unsafe extern "C" fn kprobe_seq_stop(f: *mut seq_file, v: *mut c_void) {
 #[no_mangle]
 unsafe extern "C" fn show_kprobe_addr(pi: *mut seq_file, v: *mut c_void) -> c_int {
     let mut head = core::ptr::null_mut();
-    struct kprobe *p, *kp;
+    let mut p = core::ptr::null_mut();
+    let mut kp = core::ptr::null_mut();
     let mut sym = core::ptr::null_mut();
-pub static mut i: c_uint = * v;
+pub static mut i: c_uint = 0;
 pub static mut offset: c_ulong = 0;
     char *modname, namebuf[KSYM_NAME_LEN];
     head = &kprobe_table[i];
@@ -2630,8 +2857,9 @@ pub static mut offset: c_ulong = 0;
     sym = kallsyms_lookup((unsigned long)p.addr, core::ptr::null_mut(),
     &offset, &modname, namebuf);
     if (kprobe_aggrprobe(p)) {
-    list_for_each_entry_rcu(kp, &p.list, list)
+    list_for_each_entry_rcu(kp, &p.list, list) {
     report_probe(pi, kp, sym, offset, modname, p);
+    }
     } else {
     report_probe(pi, p, sym, offset, modname, core::ptr::null_mut());
     }
@@ -2653,8 +2881,7 @@ pub unsafe extern "C" fn kprobe_blacklist_seq_next() {
     }
 #[no_mangle]
 unsafe extern "C" fn kprobe_blacklist_seq_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    struct kprobe_blacklist_entry *ent =
-    list_entry(v, struct kprobe_blacklist_entry, list);
+    let mut ent = list_entry(v, kprobe_blacklist_entry, list);
 //
 // If '/proc/kallsyms' is not showing kernel address, we won't
 // show them here either.
@@ -2693,26 +2920,26 @@ unsafe extern "C" fn arm_all_kprobes() -> c_int {
 //
     kprobes_all_disarmed = false;
 // Arming kprobes doesn't optimize kprobe itself
-    for (i = 0; i < KPROBE_TABLE_SIZE; i++) {
+    while (i < KPROBE_TABLE_SIZE) {
     head = &kprobe_table[i];
 // Arm all kprobes on a best-effort basis
     hlist_for_each_entry(p, head, hlist) {
     if (!kprobe_disabled(p)) {
     err = arm_kprobe(p);
     if (err)  {
-    errors++;
+    errors += 1;
     ret = err;
     }
-    total++;
+    total += 1;
     }
     }
     }
     if (errors) {
-    pr_warn("Kprobes globally enabled, but failed to enable %d out of %d probes. Please check which kprobes are kept disabled via debugfs.\n",
+    pr_warn!("Kprobes globally enabled, but failed to enable %d out of %d probes. Please check which kprobes are kept disabled via debugfs.\n",
     errors, total);
     }
     else {
-    pr_info("Kprobes globally enabled\n");
+    pr_info!("Kprobes globally enabled\n");
     }
     return ret;
     }
@@ -2728,26 +2955,26 @@ unsafe extern "C" fn disarm_all_kprobes() -> c_int {
     return 0;
     }
     kprobes_all_disarmed = true;
-    for (i = 0; i < KPROBE_TABLE_SIZE; i++) {
+    while (i < KPROBE_TABLE_SIZE) {
     head = &kprobe_table[i];
 // Disarm all kprobes on a best-effort basis
     hlist_for_each_entry(p, head, hlist) {
     if (!arch_trampoline_kprobe(p) && !kprobe_disabled(p)) {
     err = disarm_kprobe(p, false);
     if (err) {
-    errors++;
+    errors += 1;
     ret = err;
     }
-    total++;
+    total += 1;
     }
     }
     }
     if (errors) {
-    pr_warn("Kprobes globally disabled, but failed to disable %d out of %d probes. Please check which kprobes are kept enabled via debugfs.\n",
+    pr_warn!("Kprobes globally disabled, but failed to disable %d out of %d probes. Please check which kprobes are kept enabled via debugfs.\n",
     errors, total);
     }
     else {
-    pr_info("Kprobes globally disabled\n");
+    pr_info!("Kprobes globally disabled\n");
     }
 // Wait for disarming all kprobes by optimizer
     wait_for_kprobe_optimizer_locked();

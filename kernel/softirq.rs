@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
 macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
@@ -80,7 +330,7 @@ macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
     execution. Hence, we get something sort of weak cpu binding.
     Though it is still not clear, will it result in better locality
     or will not.
-    Examples:
+// label;
     - NET RX softirq. It is multithreaded and does not require
     any global serialization.
     - NET TX softirq. It kicks software netdevice queues, hence
@@ -89,11 +339,11 @@ macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
     - Tasklets: serialized wrt itself.
 //
 
-    DEFINE_PER_CPU_ALIGNED(irq_cpustat_t, irq_stat);
+pub static mut irq_cpustat_t: usize = 0;
     EXPORT_PER_CPU_SYMBOL(irq_stat);
 
     static struct softirq_action softirq_vec[NR_SOFTIRQS] __cacheline_aligned_in_smp;
-    DEFINE_PER_CPU(struct task_struct *, ksoftirqd);
+pub static mut struct task_struct *: usize = 0;
     const char * const softirq_to_name[NR_SOFTIRQS] = {
     "HI", "TIMER", "NET_TX", "NET_RX", "BLOCK", "IRQ_POLL",
     "TASKLET", "SCHED", "HRTIMER", "RCU"
@@ -107,17 +357,18 @@ macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
 #[no_mangle]
 unsafe extern "C" fn wakeup_softirqd() {
 // Interrupts are disabled: no need to stop preemption
-    struct task_struct *tsk = __this_cpu_read(ksoftirqd);
-    if (tsk)
+    let mut tsk = __this_cpu_read(ksoftirqd);
+    if (tsk) {
     wake_up_process(tsk);
     }
+    }
 
-    DEFINE_PER_CPU(int, hardirqs_enabled);
-    DEFINE_PER_CPU(int, hardirq_context);
+pub static mut int: usize = 0;
+pub static mut int: usize = 0;
     EXPORT_PER_CPU_SYMBOL_GPL(hardirqs_enabled);
     EXPORT_PER_CPU_SYMBOL_GPL(hardirq_context);
 
-    DEFINE_PER_CPU(unsigned long, local_interrupt_disable_state);
+pub static mut unsigned long: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn _local_interrupt_disable() {
     __local_interrupt_disable();
@@ -133,7 +384,7 @@ pub unsafe extern "C" fn _local_interrupt_enable() {
 // Any 32bit architecture that still cares about performance should
 // probably ensure this is near preempt_count.
 //
-    DEFINE_PER_CPU(unsigned int, nmi_nesting);
+pub static mut unsigned int: usize = 0;
 
 //
 // SOFTIRQ_OFFSET usage:
@@ -170,18 +421,12 @@ pub struct softirq_ctrl {
     pub cnt: c_int,
 }
 
-    static DEFINE_PER_CPU(struct softirq_ctrl, softirq_ctrl) = {
+    static DEFINE_PER_CPU(softirq_ctrl, softirq_ctrl) = {
     .lock	= INIT_LOCAL_LOCK(softirq_ctrl.lock),
     };
 
-    static struct lock_class_key bh_lock_key;
-    struct lockdep_map bh_lock_map = {
-    .name			= "local_bh",
-    .key			= &bh_lock_key,
-    .wait_type_outer	= LD_WAIT_FREE,
-    .wait_type_inner	= LD_WAIT_CONFIG, /* PREEMPT_RT makes BH preemptible. */
-    .lock_type		= LD_LOCK_PERCPU,
-    };
+pub static mut bh_lock_key: usize = 0;
+pub static mut lockdep_map: usize = 0;
     EXPORT_SYMBOL_GPL(bh_lock_map);
 
 //
@@ -200,17 +445,19 @@ pub unsafe extern "C" fn local_bh_blocked() -> bool {
     }
 #[no_mangle]
 pub unsafe extern "C" fn __local_bh_disable_ip(ip: c_ulong, cnt: c_uint) {
-    unsigned long flags;
-    int newcnt;
-    WARN_ON_ONCE(in_hardirq());
+    let mut flags = 0;
+    let mut newcnt = 0;
+    WARN_ON_ONCE!(in_hardirq());
     lock_map_acquire_read(&bh_lock_map);
 // First entry of a task into a BH disabled section?
     if (!current.softirq_disable_cnt) {
     if (preemptible()) {
-    if (IS_ENABLED(CONFIG_PREEMPT_RT_NEEDS_BH_LOCK))
+    if (IS_ENABLED!(CONFIG_PREEMPT_RT_NEEDS_BH_LOCK)) {
     local_lock(&softirq_ctrl.lock);
-    else
+    }
+    else {
     migrate_disable();
+    }
 // Required to meet the RCU bottomhalf requirements.
     rcu_read_lock();
     } else {
@@ -221,26 +468,27 @@ pub unsafe extern "C" fn __local_bh_disable_ip(ip: c_ulong, cnt: c_uint) {
 // Track the per CPU softirq disabled state. On RT this is per CPU
 // state to allow preemption of bottom half disabled sections.
 //
-    if (IS_ENABLED(CONFIG_PREEMPT_RT_NEEDS_BH_LOCK)) {
+    if (IS_ENABLED!(CONFIG_PREEMPT_RT_NEEDS_BH_LOCK)) {
     newcnt = this_cpu_add_return(softirq_ctrl.cnt, cnt);
 //
 // Reflect the result in the task state to prevent recursion on the
 // local lock and to make softirq_count() & al work.
 //
     current.softirq_disable_cnt = newcnt;
-    if (IS_ENABLED(CONFIG_TRACE_IRQFLAGS) && newcnt == cnt) {
+    if (IS_ENABLED!(CONFIG_TRACE_IRQFLAGS) && newcnt == cnt) {
     raw_local_irq_save(flags);
     lockdep_softirqs_off(ip);
     raw_local_irq_restore(flags);
     }
     } else {
-    let mut sirq_dis: bool = false;
-    if (!current.softirq_disable_cnt)
+pub static mut sirq_dis: bool = false;
+    if (!current.softirq_disable_cnt) {
     sirq_dis = true;
+    }
     this_cpu_add(softirq_ctrl.cnt, cnt);
     current.softirq_disable_cnt += cnt;
-    WARN_ON_ONCE(current.softirq_disable_cnt < 0);
-    if (IS_ENABLED(CONFIG_TRACE_IRQFLAGS) && sirq_dis) {
+    WARN_ON_ONCE!(current.softirq_disable_cnt < 0);
+    if (IS_ENABLED!(CONFIG_TRACE_IRQFLAGS) && sirq_dis) {
     raw_local_irq_save(flags);
     lockdep_softirqs_off(ip);
     raw_local_irq_restore(flags);
@@ -250,24 +498,26 @@ pub unsafe extern "C" fn __local_bh_disable_ip(ip: c_ulong, cnt: c_uint) {
     EXPORT_SYMBOL(__local_bh_disable_ip);
 #[no_mangle]
 unsafe extern "C" fn __local_bh_enable(cnt: c_uint, unlock: bool) {
-    unsigned long flags;
-    let mut sirq_en: bool = false;
-    int newcnt;
-    if (IS_ENABLED(CONFIG_PREEMPT_RT_NEEDS_BH_LOCK)) {
+    let mut flags = 0;
+pub static mut sirq_en: bool = false;
+    let mut newcnt = 0;
+    if (IS_ENABLED!(CONFIG_PREEMPT_RT_NEEDS_BH_LOCK)) {
     DEBUG_LOCKS_WARN_ON(current.softirq_disable_cnt !=
     this_cpu_read(softirq_ctrl.cnt));
-    if (softirq_count() == cnt)
-    sirq_en = true;
-    } else {
-    if (current.softirq_disable_cnt == cnt)
+    if (softirq_count() == cnt) {
     sirq_en = true;
     }
-    if (IS_ENABLED(CONFIG_TRACE_IRQFLAGS) && sirq_en) {
+    } else {
+    if (current.softirq_disable_cnt == cnt) {
+    sirq_en = true;
+    }
+    }
+    if (IS_ENABLED!(CONFIG_TRACE_IRQFLAGS) && sirq_en) {
     raw_local_irq_save(flags);
     lockdep_softirqs_on(_RET_IP_);
     raw_local_irq_restore(flags);
     }
-    if (IS_ENABLED(CONFIG_PREEMPT_RT_NEEDS_BH_LOCK)) {
+    if (IS_ENABLED!(CONFIG_PREEMPT_RT_NEEDS_BH_LOCK)) {
     newcnt = this_cpu_sub_return(softirq_ctrl.cnt, cnt);
     current.softirq_disable_cnt = newcnt;
     if (!newcnt && unlock) {
@@ -281,40 +531,44 @@ unsafe extern "C" fn __local_bh_enable(cnt: c_uint, unlock: bool) {
     migrate_enable();
     rcu_read_unlock();
     } else {
-    WARN_ON_ONCE(current.softirq_disable_cnt < 0);
+    WARN_ON_ONCE!(current.softirq_disable_cnt < 0);
     }
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn __local_bh_enable_ip(ip: c_ulong, cnt: c_uint) {
-    let mut preempt_on: bool = preemptible();
-    unsigned long flags;
-    u32 pending;
-    int curcnt;
-    WARN_ON_ONCE(in_hardirq());
+pub static mut preempt_on: bool = false;
+    let mut flags = 0;
+    let mut pending = 0;
+    let mut curcnt = 0;
+    WARN_ON_ONCE!(in_hardirq());
     lockdep_assert_irqs_enabled();
     lock_map_release(&bh_lock_map);
     local_irq_save(flags);
-    if (IS_ENABLED(CONFIG_PREEMPT_RT_NEEDS_BH_LOCK))
+    if (IS_ENABLED!(CONFIG_PREEMPT_RT_NEEDS_BH_LOCK)) {
     curcnt = this_cpu_read(softirq_ctrl.cnt);
-    else
+    }
+    else {
     curcnt = current.softirq_disable_cnt;
+    }
 //
 // If this is not reenabling soft interrupts, no point in trying to
 // run pending ones.
 //
-    if (curcnt != cnt)
-    goto out;
+    if (curcnt != cnt) {
+// goto;
+    }
     pending = local_softirq_pending();
-    if (!pending)
-    goto out;
+    if (!pending) {
+// goto;
+    }
 //
 // If this was called from non preemptible context, wake up the
 // softirq daemon.
 //
     if (!preempt_on) {
     wakeup_softirqd();
-    goto out;
+// goto;
     }
 //
 // Adjust softirq count to SOFTIRQ_OFFSET which makes
@@ -323,7 +577,7 @@ pub unsafe extern "C" fn __local_bh_enable_ip(ip: c_ulong, cnt: c_uint) {
     cnt = SOFTIRQ_OFFSET;
     __local_bh_enable(cnt, false);
     __do_softirq();
-    out:
+// label;
     __local_bh_enable(cnt, preempt_on);
     local_irq_restore(flags);
     }
@@ -343,19 +597,22 @@ pub unsafe extern "C" fn ksoftirqd_run_end() {
 // pairs with the lock_map_acquire_read() in ksoftirqd_run_begin()
     lock_map_release(&bh_lock_map);
     __local_bh_enable(SOFTIRQ_OFFSET, true);
-    WARN_ON_ONCE(in_interrupt());
+    WARN_ON_ONCE!(in_interrupt());
     local_irq_enable();
     }
-    static inline void softirq_handle_begin(void) { }
-    static inline void softirq_handle_end(void) { }
+#[no_mangle]
+pub unsafe extern "C" fn softirq_handle_begin() { }
+#[no_mangle]
+pub unsafe extern "C" fn softirq_handle_end() { }
 #[no_mangle]
 pub unsafe extern "C" fn should_wake_ksoftirqd() -> bool {
     return !this_cpu_read(softirq_ctrl.cnt);
     }
 #[no_mangle]
 pub unsafe extern "C" fn invoke_softirq() {
-    if (should_wake_ksoftirqd())
+    if (should_wake_ksoftirqd()) {
     wakeup_softirqd();
+    }
     }
 
 //
@@ -368,9 +625,9 @@ pub unsafe extern "C" fn invoke_softirq() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn do_softirq_post_smp_call_flush(was_pending: c_uint) {
-    let mut is_pending: c_uint = local_softirq_pending();
+pub static mut is_pending: c_uint = 0;
     if (unlikely(was_pending != is_pending)) {
-    WARN_ON_ONCE(was_pending != (is_pending & ~SCHED_SOFTIRQ_MASK));
+    WARN_ON_ONCE!(was_pending != (is_pending & ~SCHED_SOFTIRQ_MASK));
     invoke_softirq();
     }
     }
@@ -381,9 +638,11 @@ pub unsafe extern "C" fn do_softirq_post_smp_call_flush(was_pending: c_uint) {
 //
 
 #[no_mangle]
-pub unsafe extern "C" fn __local_bh_disable_ip(ip: c_ulong, cnt: c_uint) {
-    unsigned long flags;
-    WARN_ON_ONCE(in_hardirq());
+#[no_mangle]
+// duplicate fn: __local_bh_disable_ip
+pub unsafe extern "C" fn __local_bh_disable_ip_dup(ip: c_ulong, cnt: c_uint) {
+    let mut flags = 0;
+    WARN_ON_ONCE!(in_hardirq());
     raw_local_irq_save(flags);
 //
 // The preempt tracer hooks into preempt_count_add and will break
@@ -396,8 +655,9 @@ pub unsafe extern "C" fn __local_bh_disable_ip(ip: c_ulong, cnt: c_uint) {
 //
 // Were softirqs turned off above:
 //
-    if (softirq_count() == (cnt & SOFTIRQ_MASK))
+    if (softirq_count() == (cnt & SOFTIRQ_MASK)) {
     lockdep_softirqs_off(ip);
+    }
     raw_local_irq_restore(flags);
     if (preempt_count() == cnt) {
 
@@ -411,10 +671,12 @@ pub unsafe extern "C" fn __local_bh_disable_ip(ip: c_ulong, cnt: c_uint) {
 #[no_mangle]
 unsafe extern "C" fn __local_bh_enable(cnt: c_uint) {
     lockdep_assert_irqs_disabled();
-    if (preempt_count() == cnt)
+    if (preempt_count() == cnt) {
     trace_preempt_on(CALLER_ADDR0, get_lock_parent_ip());
-    if (softirq_count() == (cnt & SOFTIRQ_MASK))
+    }
+    if (softirq_count() == (cnt & SOFTIRQ_MASK)) {
     lockdep_softirqs_on(_RET_IP_);
+    }
     __preempt_count_sub(cnt);
     }
 //
@@ -423,13 +685,15 @@ unsafe extern "C" fn __local_bh_enable(cnt: c_uint) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn _local_bh_enable() {
-    WARN_ON_ONCE(in_hardirq());
+    WARN_ON_ONCE!(in_hardirq());
     __local_bh_enable(SOFTIRQ_DISABLE_OFFSET);
     }
     EXPORT_SYMBOL(_local_bh_enable);
 #[no_mangle]
-pub unsafe extern "C" fn __local_bh_enable_ip(ip: c_ulong, cnt: c_uint) {
-    WARN_ON_ONCE(in_hardirq());
+#[no_mangle]
+// duplicate fn: __local_bh_enable_ip
+pub unsafe extern "C" fn __local_bh_enable_ip_dup(ip: c_ulong, cnt: c_uint) {
+    WARN_ON_ONCE!(in_hardirq());
     lockdep_assert_irqs_enabled();
 
     local_irq_disable();
@@ -437,8 +701,9 @@ pub unsafe extern "C" fn __local_bh_enable_ip(ip: c_ulong, cnt: c_uint) {
 //
 // Are softirqs going to be turned on now:
 //
-    if (softirq_count() == SOFTIRQ_DISABLE_OFFSET)
+    if (softirq_count() == SOFTIRQ_DISABLE_OFFSET) {
     lockdep_softirqs_on(ip);
+    }
 //
 // Keep preemption disabled until we are done with
 // softirq processing:
@@ -459,28 +724,40 @@ pub unsafe extern "C" fn __local_bh_enable_ip(ip: c_ulong, cnt: c_uint) {
     }
     EXPORT_SYMBOL(__local_bh_enable_ip);
 #[no_mangle]
-pub unsafe extern "C" fn softirq_handle_begin() {
+#[no_mangle]
+// duplicate fn: softirq_handle_begin
+pub unsafe extern "C" fn softirq_handle_begin_dup() {
     __local_bh_disable_ip(_RET_IP_, SOFTIRQ_OFFSET);
     }
 #[no_mangle]
-pub unsafe extern "C" fn softirq_handle_end() {
+#[no_mangle]
+// duplicate fn: softirq_handle_end
+pub unsafe extern "C" fn softirq_handle_end_dup() {
     __local_bh_enable(SOFTIRQ_OFFSET);
-    WARN_ON_ONCE(in_interrupt());
+    WARN_ON_ONCE!(in_interrupt());
     }
 #[no_mangle]
-pub unsafe extern "C" fn ksoftirqd_run_begin() {
+#[no_mangle]
+// duplicate fn: ksoftirqd_run_begin
+pub unsafe extern "C" fn ksoftirqd_run_begin_dup() {
     local_irq_disable();
     }
 #[no_mangle]
-pub unsafe extern "C" fn ksoftirqd_run_end() {
+#[no_mangle]
+// duplicate fn: ksoftirqd_run_end
+pub unsafe extern "C" fn ksoftirqd_run_end_dup() {
     local_irq_enable();
     }
 #[no_mangle]
-pub unsafe extern "C" fn should_wake_ksoftirqd() -> bool {
+#[no_mangle]
+// duplicate fn: should_wake_ksoftirqd
+pub unsafe extern "C" fn should_wake_ksoftirqd_dup() -> bool {
     return true;
     }
 #[no_mangle]
-pub unsafe extern "C" fn invoke_softirq() {
+#[no_mangle]
+// duplicate fn: invoke_softirq
+pub unsafe extern "C" fn invoke_softirq_dup() {
     if (!force_irqthreads() || !__this_cpu_read(ksoftirqd)) {
 
 //
@@ -503,14 +780,16 @@ pub unsafe extern "C" fn invoke_softirq() {
     }
 #[no_mangle]
 pub unsafe extern "C" fn do_softirq() -> asmlinkage __visible void {
-    __u32 pending;
-    unsigned long flags;
-    if (in_interrupt())
+    let mut pending = 0;
+    let mut flags = 0;
+    if (in_interrupt()) {
     return;
+    }
     local_irq_save(flags);
     pending = local_softirq_pending();
-    if (pending)
+    if (pending) {
     do_softirq_own_stack();
+    }
     local_irq_restore(flags);
     }
 
@@ -537,7 +816,7 @@ pub const MAX_SOFTIRQ_RESTART: c_int = 10;
 //
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_softirq_start() -> bool {
-    let mut in_hardirq: bool = false;
+pub static mut in_hardirq: bool = false;
     if (lockdep_hardirq_context()) {
     in_hardirq = true;
     lockdep_hardirq_exit();
@@ -548,22 +827,29 @@ pub unsafe extern "C" fn lockdep_softirq_start() -> bool {
 #[no_mangle]
 pub unsafe extern "C" fn lockdep_softirq_end(in_hardirq: bool) {
     lockdep_softirq_exit();
-    if (in_hardirq)
+    if (in_hardirq) {
     lockdep_hardirq_enter();
     }
+    }
 
-    static inline bool lockdep_softirq_start(void) { return false; }
-    static inline void lockdep_softirq_end(bool in_hardirq) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: lockdep_softirq_start
+pub unsafe extern "C" fn lockdep_softirq_start_dup() -> bool { return false; }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: lockdep_softirq_end
+pub unsafe extern "C" fn lockdep_softirq_end_dup(in_hardirq: bool) { }
 
 #[no_mangle]
 unsafe extern "C" fn handle_softirqs(ksirqd: bool) {
-    let mut end: c_ulong = jiffies + MAX_SOFTIRQ_TIME;
-    let mut old_flags: c_ulong = current.flags;
-    let mut max_restart: c_int = MAX_SOFTIRQ_RESTART;
-    struct softirq_action *h;
-    bool in_hardirq;
-    __u32 pending;
-    int softirq_bit;
+pub static mut end: c_ulong = 0;
+pub static mut old_flags: c_ulong = 0;
+pub static mut max_restart: c_int = 0;
+pub static mut h: *mut c_void = core::ptr::null_mut();
+    let mut in_hardirq = 0;
+    let mut pending = 0;
+    let mut softirq_bit = 0;
 //
 // Mask out PF_MEMALLOC as the current task context is borrowed for the
 // softirq. A softirq handled, such as network RX, might set PF_MEMALLOC
@@ -574,14 +860,14 @@ unsafe extern "C" fn handle_softirqs(ksirqd: bool) {
     softirq_handle_begin();
     in_hardirq = lockdep_softirq_start();
     account_softirq_enter(current);
-    restart:
+// label;
 // Reset the pending bitmask before enabling irqs
     set_softirq_pending(0);
     local_irq_enable();
     h = softirq_vec;
     while ((softirq_bit = ffs(pending))) {
-    unsigned int vec_nr;
-    int prev_count;
+    let mut vec_nr = 0;
+    let mut prev_count = 0;
     h += softirq_bit - 1;
     vec_nr = h - softirq_vec;
     prev_count = preempt_count();
@@ -590,22 +876,24 @@ unsafe extern "C" fn handle_softirqs(ksirqd: bool) {
     h.action();
     trace_softirq_exit(vec_nr);
     if (unlikely(prev_count != preempt_count())) {
-    pr_err("huh, entered softirq %u %s %p with preempt_count %08x, exited with %08x?\n",
+    pr_err!("huh, entered softirq %u %s %p with preempt_count %08x, exited with %08x?\n",
     vec_nr, softirq_to_name[vec_nr], h.action,
     prev_count, preempt_count());
     preempt_count_set(prev_count);
     }
-    h++;
+    h += 1;
     pending >>= softirq_bit;
     }
-    if (!IS_ENABLED(CONFIG_PREEMPT_RT) && ksirqd)
+    if (!IS_ENABLED!(CONFIG_PREEMPT_RT) && ksirqd) {
     rcu_softirq_qs();
+    }
     local_irq_disable();
     pending = local_softirq_pending();
     if (pending) {
     if (time_before(jiffies, end) && !need_resched() &&
-    --max_restart)
-    goto restart;
+    --max_restart) {
+// goto;
+    }
     wakeup_softirqd();
     }
     account_softirq_exit(current);
@@ -630,8 +918,9 @@ pub unsafe extern "C" fn irq_enter_rcu() {
 //
     hrtimer_rearm_deferred();
     if (tick_nohz_full_cpu(smp_processor_id()) ||
-    (is_idle_task(current) && (irq_count() == HARDIRQ_OFFSET)))
+    (is_idle_task(current) && (irq_count() == HARDIRQ_OFFSET))) {
     tick_irq_enter();
+    }
     account_hardirq_enter(current);
     }
 //
@@ -645,25 +934,28 @@ pub unsafe extern "C" fn irq_enter() {
 #[no_mangle]
 pub unsafe extern "C" fn tick_irq_exit() {
 
-    let mut cpu: c_int = smp_processor_id();
+pub static mut cpu: c_int = 0;
 // Make sure that timer wheel updates are propagated
     if ((sched_core_idle_cpu(cpu) && !need_resched()) || tick_nohz_full_cpu(cpu)) {
-    if (!in_hardirq())
+    if (!in_hardirq()) {
     tick_nohz_irq_exit();
     }
+    }
 
     }
 
-    DEFINE_PER_CPU(struct task_struct *, ktimerd);
-    DEFINE_PER_CPU(unsigned long, pending_timer_softirq);
+pub static mut struct task_struct *: usize = 0;
+pub static mut unsigned long: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn wake_timersd() {
-    struct task_struct *tsk = __this_cpu_read(ktimerd);
-    if (tsk)
+    let mut tsk = __this_cpu_read(ktimerd);
+    if (tsk) {
     wake_up_process(tsk);
     }
+    }
 
-    static inline void wake_timersd(void) { }
+#[no_mangle]
+pub unsafe extern "C" fn wake_timersd() { }
 
 #[no_mangle]
 pub unsafe extern "C" fn __irq_exit_rcu() {
@@ -691,9 +983,10 @@ pub unsafe extern "C" fn __irq_exit_rcu() {
     hrtimer_rearm_deferred();
     invoke_softirq();
     }
-    if (IS_ENABLED(CONFIG_IRQ_FORCED_THREADING) && force_irqthreads() &&
-    local_timers_pending_force_th() && !(in_nmi() | in_hardirq()))
+    if (IS_ENABLED!(CONFIG_IRQ_FORCED_THREADING) && force_irqthreads() &&
+    local_timers_pending_force_th() && !(in_nmi() | in_hardirq())) {
     wake_timersd();
+    }
     tick_irq_exit();
     }
 //
@@ -734,12 +1027,13 @@ pub unsafe extern "C" fn raise_softirq_irqoff(nr: c_uint) {
 // Otherwise we wake up ksoftirqd to make sure we
 // schedule the softirq soon.
 //
-    if (!in_interrupt() && should_wake_ksoftirqd())
+    if (!in_interrupt() && should_wake_ksoftirqd()) {
     wakeup_softirqd();
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn raise_softirq(nr: c_uint) {
-    unsigned long flags;
+    let mut flags = 0;
     local_irq_save(flags);
     raise_softirq_irqoff(nr);
     local_irq_restore(flags);
@@ -752,8 +1046,10 @@ pub unsafe extern "C" fn __raise_softirq_irqoff(nr: c_uint) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn open_softirq(nr: c_int, (*action)(void): *mut c_void) {
-    void open_softirq(int nr, void (*action)(void))
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: open_softirq
+pub unsafe extern "C" fn open_softirq_dup(nr: c_int) {
     softirq_vec[nr].action = action;
     }
 //
@@ -765,14 +1061,12 @@ pub struct tasklet_head {
     pub head: *mut tasklet_struct,
     pub tail: *mut tasklet_struct,
 }
-// static DEFINE_PER_CPU(struct tasklet_head, tasklet_vec);
-// static DEFINE_PER_CPU(struct tasklet_head, tasklet_hi_vec);
-    static void __tasklet_schedule_common(struct tasklet_struct *t,
-    struct tasklet_head __percpu *headp,
-    unsigned int softirq_nr)
-    {
-    struct tasklet_head *head;
-    unsigned long flags;
+// static DEFINE_PER_CPU(tasklet_head, tasklet_vec);
+// static DEFINE_PER_CPU(tasklet_head, tasklet_hi_vec);
+#[no_mangle]
+pub unsafe extern "C" fn __tasklet_schedule_common(t: *mut tasklet_struct, headp: *mut tasklet_head, softirq_nr: c_uint) {
+pub static mut head: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
     local_irq_save(flags);
     head = this_cpu_ptr(headp);
     t.next = core::ptr::null_mut();
@@ -795,11 +1089,12 @@ pub unsafe extern "C" fn __tasklet_hi_schedule(t: *mut tasklet_struct) {
     EXPORT_SYMBOL(__tasklet_hi_schedule);
 #[no_mangle]
 unsafe extern "C" fn tasklet_clear_sched(t: *mut tasklet_struct) -> bool {
-    if (test_and_clear_wake_up_bit(TASKLET_STATE_SCHED, &t.state))
+    if (test_and_clear_wake_up_bit(TASKLET_STATE_SCHED, &t.state)) {
     return true;
+    }
     WARN_ONCE(1, "tasklet SCHED state not set: %s %pS\n",
     t.use_callback ? "callback" : "func",
-    t.use_callback ? (void *)t.callback : (void *)t.func);
+    t.use_callback ? t.callback : t.func);
     return false;
     }
 
@@ -810,7 +1105,7 @@ pub struct tasklet_sync_callback {
     pub cb_waiters: core::sync::atomic::AtomicI32,
 }
 
-    static DEFINE_PER_CPU(struct tasklet_sync_callback, tasklet_sync_callback) = {
+    static DEFINE_PER_CPU(tasklet_sync_callback, tasklet_sync_callback) = {
     .cb_lock	= __SPIN_LOCK_UNLOCKED(tasklet_sync_callback.cb_lock),
     .cb_waiters	= ATOMIC_INIT(0),
     };
@@ -824,7 +1119,7 @@ unsafe extern "C" fn tasklet_unlock_callback() {
     }
 #[no_mangle]
 unsafe extern "C" fn tasklet_callback_cancel_wait_running() {
-    struct tasklet_sync_callback *sync_cb = this_cpu_ptr(&tasklet_sync_callback);
+    let mut sync_cb = this_cpu_ptr(&tasklet_sync_callback);
     atomic_inc(&sync_cb.cb_waiters);
     spin_lock(&sync_cb.cb_lock);
     atomic_dec(&sync_cb.cb_waiters);
@@ -832,23 +1127,26 @@ unsafe extern "C" fn tasklet_callback_cancel_wait_running() {
     }
 #[no_mangle]
 unsafe extern "C" fn tasklet_callback_sync_wait_running() {
-    struct tasklet_sync_callback *sync_cb = this_cpu_ptr(&tasklet_sync_callback);
+    let mut sync_cb = this_cpu_ptr(&tasklet_sync_callback);
     if (atomic_read(&sync_cb.cb_waiters)) {
     spin_unlock(&sync_cb.cb_lock);
     spin_lock(&sync_cb.cb_lock);
     }
     }
 
-    static void tasklet_lock_callback(void) { }
-    static void tasklet_unlock_callback(void) { }
-    static void tasklet_callback_sync_wait_running(void) { }
+#[no_mangle]
+pub unsafe extern "C" fn tasklet_lock_callback() { }
+#[no_mangle]
+pub unsafe extern "C" fn tasklet_unlock_callback() { }
+#[no_mangle]
+pub unsafe extern "C" fn tasklet_callback_sync_wait_running() { }
 
-    static void tasklet_callback_cancel_wait_running(void) { }
+#[no_mangle]
+pub unsafe extern "C" fn tasklet_callback_cancel_wait_running() { }
 
-    static void tasklet_action_common(struct tasklet_head *tl_head,
-    unsigned int softirq_nr)
-    {
-    struct tasklet_struct *list;
+#[no_mangle]
+pub unsafe extern "C" fn tasklet_action_common(tl_head: *mut tasklet_head, softirq_nr: c_uint) {
+pub static mut list: *mut c_void = core::ptr::null_mut();
     local_irq_disable();
     list = tl_head.head;
     tl_head.head = core::ptr::null_mut();
@@ -856,7 +1154,7 @@ unsafe extern "C" fn tasklet_callback_sync_wait_running() {
     local_irq_enable();
     tasklet_lock_callback();
     while (list) {
-    struct tasklet_struct *t = list;
+    let mut t = list;
     list = list.next;
     if (tasklet_trylock(t)) {
     if (!atomic_read(&t.count)) {
@@ -896,9 +1194,8 @@ unsafe extern "C" fn tasklet_hi_action() -> __latent_entropy void {
     workqueue_softirq_action(true);
     tasklet_action_common(this_cpu_ptr(&tasklet_hi_vec), HI_SOFTIRQ);
     }
-    void tasklet_setup(struct tasklet_struct *t,
-    void (*callback)(struct tasklet_struct *))
-    {
+#[no_mangle]
+pub unsafe extern "C" fn tasklet_setup(t: *mut tasklet_struct) {
     t.next = core::ptr::null_mut();
     t.state = 0;
     atomic_set(&t.count, 0);
@@ -907,9 +1204,8 @@ unsafe extern "C" fn tasklet_hi_action() -> __latent_entropy void {
     t.data = 0;
     }
     EXPORT_SYMBOL(tasklet_setup);
-    void tasklet_init(struct tasklet_struct *t,
-    void (*func)(unsigned long), unsigned long data)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn tasklet_init(t: *mut tasklet_struct, data: c_ulong) {
     t.next = core::ptr::null_mut();
     t.state = 0;
     atomic_set(&t.count, 0);
@@ -926,7 +1222,7 @@ unsafe extern "C" fn tasklet_hi_action() -> __latent_entropy void {
 #[no_mangle]
 pub unsafe extern "C" fn tasklet_unlock_spin_wait(t: *mut tasklet_struct) {
     while (test_bit(TASKLET_STATE_RUN, &(t).state)) {
-    if (IS_ENABLED(CONFIG_PREEMPT_RT)) {
+    if (IS_ENABLED!(CONFIG_PREEMPT_RT)) {
 //
 // Prevent a live lock when current preempted soft
 // interrupt processing or prevents ksoftirqd from
@@ -942,8 +1238,9 @@ pub unsafe extern "C" fn tasklet_unlock_spin_wait(t: *mut tasklet_struct) {
 
 #[no_mangle]
 pub unsafe extern "C" fn tasklet_kill(t: *mut tasklet_struct) {
-    if (in_interrupt())
+    if (in_interrupt()) {
     pr_notice("Attempt to kill tasklet from interrupt\n");
+    }
     wait_on_bit_lock(&t.state, TASKLET_STATE_SCHED, TASK_UNINTERRUPTIBLE);
     tasklet_unlock_wait(t);
     tasklet_clear_sched(t);
@@ -963,7 +1260,7 @@ pub unsafe extern "C" fn tasklet_unlock_wait(t: *mut tasklet_struct) {
 
 #[no_mangle]
 pub unsafe extern "C" fn softirq_init() -> c_int {
-    int cpu;
+    let mut cpu = 0;
     for_each_possible_cpu(cpu) {
     per_cpu(tasklet_vec, cpu).tail =
     &per_cpu(tasklet_vec, cpu).head;
@@ -1017,12 +1314,7 @@ unsafe extern "C" fn takeover_tasklets(cpu: c_uint) -> c_int {
     return 0;
     }
 
-    static struct smp_hotplug_thread softirq_threads = {
-    .store			= &ksoftirqd,
-    .thread_should_run	= ksoftirqd_should_run,
-    .thread_fn		= run_ksoftirqd,
-    .thread_comm		= "ksoftirqd/%u",
-    };
+pub static mut smp_hotplug_thread: usize = 0;
 
 #[no_mangle]
 unsafe extern "C" fn ktimerd_setup(cpu: c_uint) {
@@ -1040,7 +1332,7 @@ pub unsafe extern "C" fn raise_ktimers_thread(nr: c_uint) {
     }
 #[no_mangle]
 unsafe extern "C" fn run_ktimerd(cpu: c_uint) {
-    unsigned int timer_si;
+    let mut timer_si = 0;
     ksoftirqd_run_begin();
     timer_si = local_timers_pending_force_th();
     __this_cpu_write(pending_timer_softirq, 0);
@@ -1048,26 +1340,21 @@ unsafe extern "C" fn run_ktimerd(cpu: c_uint) {
     __do_softirq();
     ksoftirqd_run_end();
     }
-    static struct smp_hotplug_thread timer_thread = {
-    .store			= &ktimerd,
-    .setup			= ktimerd_setup,
-    .thread_should_run	= ktimerd_should_run,
-    .thread_fn		= run_ktimerd,
-    .thread_comm		= "ktimers/%u",
-    };
+pub static mut smp_hotplug_thread: usize = 0;
 
 #[no_mangle]
 unsafe extern "C" fn spawn_ksoftirqd() -> __init int {
     cpuhp_setup_state_nocalls(CPUHP_SOFTIRQ_DEAD, "softirq:dead", core::ptr::null_mut(),
     takeover_tasklets);
-    BUG_ON(smpboot_register_percpu_thread(&softirq_threads));
+    BUG_ON!(smpboot_register_percpu_thread(&softirq_threads));
 
-    if (force_irqthreads())
-    BUG_ON(smpboot_register_percpu_thread(&timer_thread));
+    if (force_irqthreads()) {
+    BUG_ON!(smpboot_register_percpu_thread(&timer_thread));
+    }
 
     return 0;
     }
-    early_initcall(spawn_ksoftirqd);
+    early_initcall!(spawn_ksoftirqd);
 //
 // [ These __weak aliases are kept in a separate compilation unit, so that
 // GCC does not inline them incorrectly. ]

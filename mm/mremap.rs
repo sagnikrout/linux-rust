@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -64,11 +314,11 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 #[derive(Copy, Clone)]
 pub struct vma_remap_struct {
 // User-provided state.
-    pub /: *mut *mut unsigned long addr; / User-specified address from which we remap.,
-    pub /: *mut *mut unsigned long old_len; / Length of range being remapped.,
-    pub /: *mut *mut unsigned long new_len; / Desired new length of mapping.,
-    pub /: *const *const *const unsigned long flags; / user-specified MREMAP_ flags.,
-    pub /: *mut *mut unsigned long new_addr; / Optionally, desired new address.,
+//     pub /: *mut *mut unsigned long addr; / User-specified address from which we remap.,
+//     pub /: *mut *mut unsigned long old_len; / Length of range being remapped.,
+//     pub /: *mut *mut unsigned long new_len; / Desired new length of mapping.,
+//     pub /: *const *const *const unsigned long flags; / user-specified MREMAP_ flags.,
+//     pub /: *mut *mut unsigned long new_addr; / Optionally, desired new address.,
 // uffd state.
     pub uf: *mut vm_userfaultfd_ctx,
     pub uf_unmap_early: *mut list_head,
@@ -76,133 +326,145 @@ pub struct vma_remap_struct {
 // VMA state, determined in do_mremap().
     pub vma: *mut vm_area_struct,
 // Internal state, determined in do_mremap().
-    pub /: *mut *mut unsigned long delta; / Absolute delta of old_len,new_len.,
-    pub /: *mut *mut bool populate_expand; / mlock()'d expanded, must populate.,
-    pub /: *mut *mut enum mremap_type remap_type; / expand, shrink, etc.,
-    pub /: *mut *mut bool mmap_locked; / Is mm currently write-locked?,
-    pub /: *mut *mut unsigned long charged; / If VMA_ACCOUNT_BIT, # pgs to account,
-    pub /: *mut *mut bool vmi_needs_invalidate; / Is the VMA iterator invalidated?,
+//     pub /: *mut *mut unsigned long delta; / Absolute delta of old_len,new_len.,
+//     pub /: *mut *mut bool populate_expand; / mlock()'d expanded, must populate.,
+//     pub /: *mut *mut enum mremap_type remap_type; / expand, shrink, etc.,
+//     pub /: *mut *mut bool mmap_locked; / Is mm currently write-locked?,
+//     pub /: *mut *mut unsigned long charged; / If VMA_ACCOUNT_BIT, # pgs to account,
+//     pub /: *mut *mut bool vmi_needs_invalidate; / Is the VMA iterator invalidated?,
 }
 
-    static pud_t *get_old_pud(struct mm_struct *mm, unsigned long addr)
+    static pud_t *get_old_pud(mm_struct *mm, unsigned long addr)
     {
-    pgd_t *pgd;
-    p4d_t *p4d;
-    pud_t *pud;
+pub static mut pgd: *mut c_void = core::ptr::null_mut();
+pub static mut p4d: *mut c_void = core::ptr::null_mut();
+pub static mut pud: *mut c_void = core::ptr::null_mut();
     pgd = pgd_offset(mm, addr);
-    if (pgd_none_or_clear_bad(pgd))
+    if (pgd_none_or_clear_bad(pgd)) {
     return core::ptr::null_mut();
+    }
     p4d = p4d_offset(pgd, addr);
-    if (p4d_none_or_clear_bad(p4d))
+    if (p4d_none_or_clear_bad(p4d)) {
     return core::ptr::null_mut();
+    }
     pud = pud_offset(p4d, addr);
-    if (pud_none_or_clear_bad(pud))
+    if (pud_none_or_clear_bad(pud)) {
     return core::ptr::null_mut();
+    }
     return pud;
     }
-    static pmd_t *get_old_pmd(struct mm_struct *mm, unsigned long addr)
+    static pmd_t *get_old_pmd(mm_struct *mm, unsigned long addr)
     {
-    pud_t *pud;
-    pmd_t *pmd;
+pub static mut pud: *mut c_void = core::ptr::null_mut();
+pub static mut pmd: *mut c_void = core::ptr::null_mut();
     pud = get_old_pud(mm, addr);
-    if (!pud)
+    if (!pud) {
     return core::ptr::null_mut();
+    }
     pmd = pmd_offset(pud, addr);
-    if (pmd_none(*pmd))
+    if (pmd_none(*pmd)) {
     return core::ptr::null_mut();
+    }
     return pmd;
     }
-    static pud_t *alloc_new_pud(struct mm_struct *mm, unsigned long addr)
+    static pud_t *alloc_new_pud(mm_struct *mm, unsigned long addr)
     {
-    pgd_t *pgd;
-    p4d_t *p4d;
+pub static mut pgd: *mut c_void = core::ptr::null_mut();
+pub static mut p4d: *mut c_void = core::ptr::null_mut();
     pgd = pgd_offset(mm, addr);
     p4d = p4d_alloc(mm, pgd, addr);
-    if (!p4d)
+    if (!p4d) {
     return core::ptr::null_mut();
+    }
     return pud_alloc(mm, p4d, addr);
     }
-    static pmd_t *alloc_new_pmd(struct mm_struct *mm, unsigned long addr)
+    static pmd_t *alloc_new_pmd(mm_struct *mm, unsigned long addr)
     {
-    pud_t *pud;
-    pmd_t *pmd;
+pub static mut pud: *mut c_void = core::ptr::null_mut();
+pub static mut pmd: *mut c_void = core::ptr::null_mut();
     pud = alloc_new_pud(mm, addr);
-    if (!pud)
+    if (!pud) {
     return core::ptr::null_mut();
+    }
     pmd = pmd_alloc(mm, pud, addr);
-    if (!pmd)
+    if (!pmd) {
     return core::ptr::null_mut();
+    }
     VM_BUG_ON(pmd_trans_huge(*pmd));
     return pmd;
     }
 #[no_mangle]
 unsafe extern "C" fn take_rmap_locks(vma: *mut vm_area_struct) {
-    static void take_rmap_locks(struct vm_area_struct *vma)
-    {
-    if (vma.vm_file)
+    if (vma.vm_file) {
     i_mmap_lock_write(vma.vm_file.f_mapping);
-    if (vma.anon_vma)
+    }
+    if (vma.anon_vma) {
     anon_vma_lock_write(vma.anon_vma);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn drop_rmap_locks(vma: *mut vm_area_struct) {
-    static void drop_rmap_locks(struct vm_area_struct *vma)
-    {
-    if (vma.anon_vma)
+    if (vma.anon_vma) {
     anon_vma_unlock_write(vma.anon_vma);
-    if (vma.vm_file)
+    }
+    if (vma.vm_file) {
     i_mmap_unlock_write(vma.vm_file.f_mapping);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn move_soft_dirty_pte(pte: pte_t) -> pte_t {
-    static pte_t move_soft_dirty_pte(pte_t pte)
-    {
-    if (pte_none(pte))
+    if (pte_none(pte)) {
     return pte;
+    }
 //
 // Set soft dirty bit so we can notice
 // in userspace the ptes were moved.
 //
     if (pgtable_supports_soft_dirty()) {
-    if (pte_present(pte))
+    if (pte_present(pte)) {
     pte = pte_mksoft_dirty(pte);
-    else
+    }
+    else {
     pte = pte_swp_mksoft_dirty(pte);
+    }
     }
     return pte;
     }
-    static int mremap_folio_pte_batch(struct vm_area_struct *vma, unsigned long addr,
-    pte_t *ptep, pte_t pte, int max_nr)
-    {
-    struct folio *folio;
-    if (max_nr == 1)
+#[no_mangle]
+pub unsafe extern "C" fn mremap_folio_pte_batch(vma: *mut vm_area_struct, addr: c_ulong, ptep: *mut pte_t, pte: pte_t, max_nr: c_int) -> c_int {
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    if (max_nr == 1) {
     return 1;
+    }
 // Avoid expensive folio lookup if we stand no chance of benefit.
-    if (pte_batch_hint(ptep, pte) == 1)
+    if (pte_batch_hint(ptep, pte) == 1) {
     return 1;
+    }
     folio = vm_normal_folio(vma, addr, pte);
-    if (!folio || !folio_test_large(folio))
+    if (!folio || !folio_test_large(folio)) {
     return 1;
+    }
     return folio_pte_batch_flags(folio, core::ptr::null_mut(), ptep, &pte, max_nr, FPB_RESPECT_WRITE);
     }
-    static int move_ptes(struct pagetable_move_control *pmc,
-    unsigned long extent, pmd_t *old_pmd, pmd_t *new_pmd)
-    {
-    struct vm_area_struct *vma = pmc.old;
-    let mut need_clear_uffd_wp: bool = vma_has_uffd_without_event_remap(vma);
-    struct mm_struct *mm = vma.vm_mm;
-    pte_t *old_ptep, *new_ptep;
+#[no_mangle]
+pub unsafe extern "C" fn move_ptes(pmc: *mut pagetable_move_control, extent: c_ulong, old_pmd: *mut pmd_t, new_pmd: *mut pmd_t) -> c_int {
+    let mut vma = pmc.old;
+pub static mut need_clear_uffd_wp: bool = false;
+    let mut mm = vma.vm_mm;
+    let mut old_ptep = core::ptr::null_mut();
+    let mut new_ptep = core::ptr::null_mut();
     pte_t old_pte, pte;
-    pmd_t dummy_pmdval;
-    spinlock_t *old_ptl, *new_ptl;
-    let mut force_flush: bool = false;
-    let mut old_addr: c_ulong = pmc.old_addr;
-    let mut new_addr: c_ulong = pmc.new_addr;
-    let mut old_end: c_ulong = old_addr + extent;
-    let mut len: c_ulong = old_end - old_addr;
-    int max_nr_ptes;
-    int nr_ptes;
-    let mut err: c_int = 0;
+    let mut dummy_pmdval;
+    let mut old_ptl = core::ptr::null_mut();
+    let mut new_ptl = core::ptr::null_mut();
+pub static mut force_flush: bool = false;
+pub static mut old_addr: c_ulong = 0;
+pub static mut new_addr: c_ulong = 0;
+pub static mut old_end: c_ulong = 0;
+pub static mut len: c_ulong = 0;
+    let mut max_nr_ptes = 0;
+    let mut nr_ptes = 0;
+pub static mut err: c_int = 0;
 //
 // When need_rmap_locks is true, we take the i_mmap_rwsem and anon_vma
 // locks to ensure that rmap will always observe either the old or the
@@ -221,8 +483,9 @@ unsafe extern "C" fn move_soft_dirty_pte(pte: pte_t) -> pte_t {
 // serialize access to individual ptes, but only rmap traversal
 // order guarantees that we won't miss both the old and new ptes).
 //
-    if (pmc.need_rmap_locks)
+    if (pmc.need_rmap_locks) {
     take_rmap_locks(vma);
+    }
 //
 // We don't have to worry about the ordering of src and dst
 // pte locks because exclusive mmap_lock prevents deadlock.
@@ -230,7 +493,7 @@ unsafe extern "C" fn move_soft_dirty_pte(pte: pte_t) -> pte_t {
     old_ptep = pte_offset_map_lock(mm, old_pmd, old_addr, &old_ptl);
     if (!old_ptep) {
     err = -EAGAIN;
-    goto out;
+// goto;
     }
 //
 // Now new_pte is none, so collapse_scan_file() path can not find
@@ -244,20 +507,21 @@ unsafe extern "C" fn move_soft_dirty_pte(pte: pte_t) -> pte_t {
     if (!new_ptep) {
     pte_unmap_unlock(old_ptep, old_ptl);
     err = -EAGAIN;
-    goto out;
+// goto;
     }
-    if (new_ptl != old_ptl)
+    if (new_ptl != old_ptl) {
     spin_lock_nested(new_ptl, SINGLE_DEPTH_NESTING);
+    }
     flush_tlb_batched_pending(vma.vm_mm);
     lazy_mmu_mode_enable();
-    for (; old_addr < old_end; old_ptep += nr_ptes, old_addr += nr_ptes * PAGE_SIZE,
-    new_ptep += nr_ptes, new_addr += nr_ptes * PAGE_SIZE) {
+    while (old_addr < old_end) {
     VM_WARN_ON_ONCE(!pte_none(ptep_get(new_ptep)));
     nr_ptes = 1;
     max_nr_ptes = (old_end - old_addr) >> PAGE_SHIFT;
     old_pte = ptep_get(old_ptep);
-    if (pte_none(old_pte))
+    if (pte_none(old_pte)) {
     continue;
+    }
 //
 // If we are remapping a valid PTE, make sure
 // to flush TLB before we drop the PTL for the
@@ -277,8 +541,9 @@ unsafe extern "C" fn move_soft_dirty_pte(pte: pte_t) -> pte_t {
     pte = get_and_clear_ptes(mm, old_addr, old_ptep, nr_ptes);
     pte = move_pte(pte, old_addr, new_addr);
     pte = move_soft_dirty_pte(pte);
-    if (need_clear_uffd_wp && pte_is_uffd_wp_marker(pte))
+    if (need_clear_uffd_wp && pte_is_uffd_wp_marker(pte)) {
     pte_clear(mm, new_addr, new_ptep);
+    }
     else {
     if (need_clear_uffd_wp) {
     if (pte_present(pte)) {
@@ -288,8 +553,9 @@ unsafe extern "C" fn move_soft_dirty_pte(pte: pte_t) -> pte_t {
 // accessible instead of taking a
 // numa-hinting fault on first access.
 //
-    if (userfaultfd_rwp(vma) && pte_uffd(pte))
+    if (userfaultfd_rwp(vma) && pte_uffd(pte)) {
     pte = pte_modify(pte, vma.vm_page_prot);
+    }
     pte = pte_clear_uffd(pte);
     } else {
     pte = pte_swp_clear_uffd(pte);
@@ -299,30 +565,29 @@ unsafe extern "C" fn move_soft_dirty_pte(pte: pte_t) -> pte_t {
     }
     }
     lazy_mmu_mode_disable();
-    if (force_flush)
+    if (force_flush) {
     flush_tlb_range(vma, old_end - len, old_end);
-    if (new_ptl != old_ptl)
+    }
+    if (new_ptl != old_ptl) {
     spin_unlock(new_ptl);
+    }
     pte_unmap(new_ptep - 1);
     pte_unmap_unlock(old_ptep - 1, old_ptl);
-    out:
-    if (pmc.need_rmap_locks)
+// label;
+    if (pmc.need_rmap_locks) {
     drop_rmap_locks(vma);
+    }
     return err;
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn arch_supports_page_table_move() -> bool {
-    static inline bool arch_supports_page_table_move(void)
-    {
-    return IS_ENABLED(CONFIG_HAVE_MOVE_PMD) ||
-    IS_ENABLED(CONFIG_HAVE_MOVE_PUD);
+    return IS_ENABLED!(CONFIG_HAVE_MOVE_PMD) ||
+    IS_ENABLED!(CONFIG_HAVE_MOVE_PUD);
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn uffd_supports_page_table_move(pmc: *mut pagetable_move_control) -> bool {
-    static inline bool uffd_supports_page_table_move(struct pagetable_move_control *pmc)
-    {
 //
 // If we are moving a VMA that has uffd-wp registered but with
 // remap events disabled (new VMA will not be registered with uffd), we
@@ -340,18 +605,20 @@ pub unsafe extern "C" fn uffd_supports_page_table_move(pmc: *mut pagetable_move_
     !vma_has_uffd_without_event_remap(pmc.new);
     }
 
-    static bool move_normal_pmd(struct pagetable_move_control *pmc,
-    pmd_t *old_pmd, pmd_t *new_pmd)
-    {
-    spinlock_t *old_ptl, *new_ptl;
-    struct vm_area_struct *vma = pmc.old;
-    struct mm_struct *mm = vma.vm_mm;
-    let mut res: bool = false;
-    pmd_t pmd;
-    if (!arch_supports_page_table_move())
+#[no_mangle]
+pub unsafe extern "C" fn move_normal_pmd(pmc: *mut pagetable_move_control, old_pmd: *mut pmd_t, new_pmd: *mut pmd_t) -> bool {
+    let mut old_ptl = core::ptr::null_mut();
+    let mut new_ptl = core::ptr::null_mut();
+    let mut vma = pmc.old;
+    let mut mm = vma.vm_mm;
+pub static mut res: bool = false;
+    let mut pmd;
+    if (!arch_supports_page_table_move()) {
     return false;
-    if (!uffd_supports_page_table_move(pmc))
+    }
+    if (!uffd_supports_page_table_move(pmc)) {
     return false;
+    }
 //
 // The destination pmd shouldn't be established, free_pgtables()
 // should have released it.
@@ -375,103 +642,116 @@ pub unsafe extern "C" fn uffd_supports_page_table_move(pmc: *mut pagetable_move_
 // One alternative might be to just unmap the target pmd at
 // this point, and verify that it really is empty. We'll see.
 //
-    if (WARN_ON_ONCE(!pmd_none(*new_pmd)))
+    if (WARN_ON_ONCE!(!pmd_none(*new_pmd))) {
     return false;
+    }
 //
 // We don't have to worry about the ordering of src and dst
 // ptlocks because exclusive mmap_lock prevents deadlock.
 //
     old_ptl = pmd_lock(mm, old_pmd);
     new_ptl = pmd_lockptr(mm, new_pmd);
-    if (new_ptl != old_ptl)
+    if (new_ptl != old_ptl) {
     spin_lock_nested(new_ptl, SINGLE_DEPTH_NESTING);
+    }
     pmd = *old_pmd;
 // Racing with collapse?
-    if (unlikely(!pmd_present(pmd) || pmd_leaf(pmd)))
-    goto out_unlock;
+    if (unlikely(!pmd_present(pmd) || pmd_leaf(pmd))) {
+// goto;
+    }
 // Clear the pmd
     pmd_clear(old_pmd);
     res = true;
     VM_BUG_ON(!pmd_none(*new_pmd));
     pmd_populate(mm, new_pmd, pmd_pgtable(pmd));
     flush_tlb_range(vma, pmc.old_addr, pmc.old_addr + PMD_SIZE);
-    out_unlock:
-    if (new_ptl != old_ptl)
+// label;
+    if (new_ptl != old_ptl) {
     spin_unlock(new_ptl);
+    }
     spin_unlock(old_ptl);
     return res;
     }
 
-    static inline bool move_normal_pmd(struct pagetable_move_control *pmc,
-    pmd_t *old_pmd, pmd_t *new_pmd)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: move_normal_pmd
+pub unsafe extern "C" fn move_normal_pmd_dup(pmc: *mut pagetable_move_control, old_pmd: *mut pmd_t, new_pmd: *mut pmd_t) -> bool {
     return false;
     }
 
-    static bool move_normal_pud(struct pagetable_move_control *pmc,
-    pud_t *old_pud, pud_t *new_pud)
-    {
-    spinlock_t *old_ptl, *new_ptl;
-    struct vm_area_struct *vma = pmc.old;
-    struct mm_struct *mm = vma.vm_mm;
-    pud_t pud;
-    if (!arch_supports_page_table_move())
+#[no_mangle]
+pub unsafe extern "C" fn move_normal_pud(pmc: *mut pagetable_move_control, old_pud: *mut pud_t, new_pud: *mut pud_t) -> bool {
+    let mut old_ptl = core::ptr::null_mut();
+    let mut new_ptl = core::ptr::null_mut();
+    let mut vma = pmc.old;
+    let mut mm = vma.vm_mm;
+    let mut pud;
+    if (!arch_supports_page_table_move()) {
     return false;
-    if (!uffd_supports_page_table_move(pmc))
+    }
+    if (!uffd_supports_page_table_move(pmc)) {
     return false;
+    }
 //
 // The destination pud shouldn't be established, free_pgtables()
 // should have released it.
 //
-    if (WARN_ON_ONCE(!pud_none(*new_pud)))
+    if (WARN_ON_ONCE!(!pud_none(*new_pud))) {
     return false;
+    }
 //
 // We don't have to worry about the ordering of src and dst
 // ptlocks because exclusive mmap_lock prevents deadlock.
 //
     old_ptl = pud_lock(mm, old_pud);
     new_ptl = pud_lockptr(mm, new_pud);
-    if (new_ptl != old_ptl)
+    if (new_ptl != old_ptl) {
     spin_lock_nested(new_ptl, SINGLE_DEPTH_NESTING);
+    }
 // Clear the pud
     pud = *old_pud;
     pud_clear(old_pud);
     VM_BUG_ON(!pud_none(*new_pud));
     pud_populate(mm, new_pud, pud_pgtable(pud));
     flush_tlb_range(vma, pmc.old_addr, pmc.old_addr + PUD_SIZE);
-    if (new_ptl != old_ptl)
+    if (new_ptl != old_ptl) {
     spin_unlock(new_ptl);
+    }
     spin_unlock(old_ptl);
     return true;
     }
 
-    static inline bool move_normal_pud(struct pagetable_move_control *pmc,
-    pud_t *old_pud, pud_t *new_pud)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: move_normal_pud
+pub unsafe extern "C" fn move_normal_pud_dup(pmc: *mut pagetable_move_control, old_pud: *mut pud_t, new_pud: *mut pud_t) -> bool {
     return false;
     }
 
-    static bool move_huge_pud(struct pagetable_move_control *pmc,
-    pud_t *old_pud, pud_t *new_pud)
-    {
-    spinlock_t *old_ptl, *new_ptl;
-    struct vm_area_struct *vma = pmc.old;
-    struct mm_struct *mm = vma.vm_mm;
-    pud_t pud;
+#[no_mangle]
+pub unsafe extern "C" fn move_huge_pud(pmc: *mut pagetable_move_control, old_pud: *mut pud_t, new_pud: *mut pud_t) -> bool {
+    let mut old_ptl = core::ptr::null_mut();
+    let mut new_ptl = core::ptr::null_mut();
+    let mut vma = pmc.old;
+    let mut mm = vma.vm_mm;
+    let mut pud;
 //
 // The destination pud shouldn't be established, free_pgtables()
 // should have released it.
 //
-    if (WARN_ON_ONCE(!pud_none(*new_pud)))
+    if (WARN_ON_ONCE!(!pud_none(*new_pud))) {
     return false;
+    }
 //
 // We don't have to worry about the ordering of src and dst
 // ptlocks because exclusive mmap_lock prevents deadlock.
 //
     old_ptl = pud_lock(mm, old_pud);
     new_ptl = pud_lockptr(mm, new_pud);
-    if (new_ptl != old_ptl)
+    if (new_ptl != old_ptl) {
     spin_lock_nested(new_ptl, SINGLE_DEPTH_NESTING);
+    }
 // Clear the pud
     pud = *old_pud;
     pud_clear(old_pud);
@@ -480,16 +760,18 @@ pub unsafe extern "C" fn uffd_supports_page_table_move(pmc: *mut pagetable_move_
 // mark soft_ditry when we add pud level soft dirty support
     set_pud_at(mm, pmc.new_addr, new_pud, pud);
     flush_pud_tlb_range(vma, pmc.old_addr, pmc.old_addr + HPAGE_PUD_SIZE);
-    if (new_ptl != old_ptl)
+    if (new_ptl != old_ptl) {
     spin_unlock(new_ptl);
+    }
     spin_unlock(old_ptl);
     return true;
     }
 
-    static bool move_huge_pud(struct pagetable_move_control *pmc,
-    pud_t *old_pud, pud_t *new_pud)
-    {
-    WARN_ON_ONCE(1);
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: move_huge_pud
+pub unsafe extern "C" fn move_huge_pud_dup(pmc: *mut pagetable_move_control, old_pud: *mut pud_t, new_pud: *mut pud_t) -> bool {
+    WARN_ON_ONCE!(1);
     return false;
     }
 
@@ -504,87 +786,101 @@ pub unsafe extern "C" fn uffd_supports_page_table_move(pmc: *mut pagetable_move_
 // valid. Else returns a smaller extent bounded by the end of the source and
 // destination pgt_entry.
 //
-    static __always_inline unsigned long get_extent(enum pgt_entry entry,
-    struct pagetable_move_control *pmc)
+    static __always_inline unsigned long get_extent(enum pgt_entry entry, pagetable_move_control *pmc)
     {
     unsigned long next, extent, mask, size;
-    let mut old_addr: c_ulong = pmc.old_addr;
-    let mut old_end: c_ulong = pmc.old_end;
-    let mut new_addr: c_ulong = pmc.new_addr;
-    switch (entry) {
-    case HPAGE_PMD:
-    case NORMAL_PMD:
+pub static mut old_addr: c_ulong = 0;
+pub static mut old_end: c_ulong = 0;
+pub static mut new_addr: c_ulong = 0;
+    match (entry) {
+    HPAGE_PMD => {
+    }
+    NORMAL_PMD => {
     mask = PMD_MASK;
     size = PMD_SIZE;
-    break;
-    case HPAGE_PUD:
-    case NORMAL_PUD:
+    // break;
+    }
+    HPAGE_PUD => {
+    }
+    NORMAL_PUD => {
     mask = PUD_MASK;
     size = PUD_SIZE;
-    break;
-    default:
+    // break;
+    }
+    _ => {
     BUILD_BUG();
-    break;
+    // break;
+    }
     }
     next = (old_addr + size) & mask;
 // even if next overflowed, extent below will be ok
     extent = next - old_addr;
-    if (extent > old_end - old_addr)
+    if (extent > old_end - old_addr) {
     extent = old_end - old_addr;
+    }
     next = (new_addr + size) & mask;
-    if (extent > next - new_addr)
+    if (extent > next - new_addr) {
     extent = next - new_addr;
+    }
     return extent;
     }
 //
 // Should move_pgt_entry() acquire the rmap locks? This is either expressed in
 // the PMC, or overridden in the case of normal, larger page tables.
 //
-    static bool should_take_rmap_locks(struct pagetable_move_control *pmc,
-    enum pgt_entry entry)
-    {
-    switch (entry) {
-    case NORMAL_PMD:
-    case NORMAL_PUD:
+#[no_mangle]
+pub unsafe extern "C" fn should_take_rmap_locks(pmc: *mut pagetable_move_control, entry: pgt_entry) -> bool {
+    match (entry) {
+    NORMAL_PMD => {
+    }
+    NORMAL_PUD => {
     return true;
-    default:
+    }
+    _ => {
     return pmc.need_rmap_locks;
+    }
     }
     }
 //
 // Attempts to speedup the move by moving entry at the level corresponding to
 // pgt_entry. Returns true if the move was successful, else false.
 //
-    static bool move_pgt_entry(struct pagetable_move_control *pmc,
-    enum pgt_entry entry, void *old_entry, void *new_entry)
-    {
-    let mut moved: bool = false;
-    let mut need_rmap_locks: bool = should_take_rmap_locks(pmc, entry);
+#[no_mangle]
+pub unsafe extern "C" fn move_pgt_entry(pmc: *mut pagetable_move_control, entry: pgt_entry, old_entry: *mut c_void, new_entry: *mut c_void) -> bool {
+pub static mut moved: bool = false;
+pub static mut need_rmap_locks: bool = false;
 // See comment in move_ptes()
-    if (need_rmap_locks)
+    if (need_rmap_locks) {
     take_rmap_locks(pmc.old);
-    switch (entry) {
-    case NORMAL_PMD:
+    }
+    match (entry) {
+    NORMAL_PMD => {
     moved = move_normal_pmd(pmc, old_entry, new_entry);
-    break;
-    case NORMAL_PUD:
+    // break;
+    }
+    NORMAL_PUD => {
     moved = move_normal_pud(pmc, old_entry, new_entry);
-    break;
-    case HPAGE_PMD:
-    moved = IS_ENABLED(CONFIG_TRANSPARENT_HUGEPAGE) &&
+    // break;
+    }
+    HPAGE_PMD => {
+    moved = IS_ENABLED!(CONFIG_TRANSPARENT_HUGEPAGE) &&
     move_huge_pmd(pmc.old, pmc.old_addr, pmc.new_addr, old_entry,
     new_entry);
-    break;
-    case HPAGE_PUD:
-    moved = IS_ENABLED(CONFIG_TRANSPARENT_HUGEPAGE) &&
-    move_huge_pud(pmc, old_entry, new_entry);
-    break;
-    default:
-    WARN_ON_ONCE(1);
-    break;
+    // break;
     }
-    if (need_rmap_locks)
+    HPAGE_PUD => {
+    moved = IS_ENABLED!(CONFIG_TRANSPARENT_HUGEPAGE) &&
+    move_huge_pud(pmc, old_entry, new_entry);
+    // break;
+    }
+    _ => {
+    WARN_ON_ONCE!(1);
+    // break;
+    }
+    }
+    if (need_rmap_locks) {
     drop_rmap_locks(pmc.old);
+    }
     return moved;
     }
 //
@@ -593,21 +889,21 @@ pub unsafe extern "C" fn uffd_supports_page_table_move(pmc: *mut pagetable_move_
 // the VMA that is created to span the source and destination of the move,
 // so we make an exception for it.
 //
-    static bool can_align_down(struct pagetable_move_control *pmc,
-    struct vm_area_struct *vma, unsigned long addr_to_align,
-    unsigned long mask)
-    {
-    let mut addr_masked: c_ulong = addr_to_align & mask;
+#[no_mangle]
+pub unsafe extern "C" fn can_align_down(pmc: *mut pagetable_move_control, vma: *mut vm_area_struct, addr_to_align: c_ulong, mask: c_ulong) -> bool {
+pub static mut addr_masked: c_ulong = 0;
 //
 // If @addr_to_align of either source or destination is not the beginning
 // of the corresponding VMA, we can't align down or we will destroy part
 // of the current mapping.
 //
-    if (!pmc.for_stack && vma.vm_start != addr_to_align)
+    if (!pmc.for_stack && vma.vm_start != addr_to_align) {
     return false;
+    }
 // In the stack case we explicitly permit in-VMA alignment.
-    if (pmc.for_stack && addr_masked >= vma.vm_start)
+    if (pmc.for_stack && addr_masked >= vma.vm_start) {
     return true;
+    }
 //
 // Make sure the realignment doesn't cause the address to fall on an
 // existing mapping.
@@ -618,14 +914,13 @@ pub unsafe extern "C" fn uffd_supports_page_table_move(pmc: *mut pagetable_move_
 // Determine if are in fact able to realign for efficiency to a higher page
 // table boundary.
 //
-    static bool can_realign_addr(struct pagetable_move_control *pmc,
-    unsigned long pagetable_mask)
-    {
-    let mut align_mask: c_ulong = ~pagetable_mask;
-    let mut old_align: c_ulong = pmc.old_addr & align_mask;
-    let mut new_align: c_ulong = pmc.new_addr & align_mask;
-    let mut pagetable_size: c_ulong = align_mask + 1;
-    let mut old_align_next: c_ulong = pagetable_size - old_align;
+#[no_mangle]
+pub unsafe extern "C" fn can_realign_addr(pmc: *mut pagetable_move_control, pagetable_mask: c_ulong) -> bool {
+pub static mut align_mask: c_ulong = 0;
+pub static mut old_align: c_ulong = 0;
+pub static mut new_align: c_ulong = 0;
+pub static mut pagetable_size: c_ulong = 0;
+pub static mut old_align_next: c_ulong = 0;
 //
 // We don't want to have to go hunting for VMAs from the end of the old
 // VMA to the next page table boundary, also we want to make sure the
@@ -646,18 +941,22 @@ pub unsafe extern "C" fn uffd_supports_page_table_move(pmc: *mut pagetable_move_
 // .              <---------------->
 // .                old_align_next .
 //
-    if (pmc.len_in < old_align_next)
+    if (pmc.len_in < old_align_next) {
     return false;
+    }
 // Skip if the addresses are already aligned.
-    if (old_align == 0)
+    if (old_align == 0) {
     return false;
+    }
 // Only realign if the new and old addresses are mutually aligned.
-    if (old_align != new_align)
+    if (old_align != new_align) {
     return false;
+    }
 // Ensure realignment doesn't cause overlap with existing mappings.
     if (!can_align_down(pmc, pmc.old, pmc.old_addr, pagetable_mask) ||
-    !can_align_down(pmc, pmc.new, pmc.new_addr, pagetable_mask))
+    !can_align_down(pmc, pmc.new, pmc.new_addr, pagetable_mask)) {
     return false;
+    }
     return true;
     }
 //
@@ -691,11 +990,11 @@ pub unsafe extern "C" fn uffd_supports_page_table_move(pmc: *mut pagetable_move_
 // <------------------------------------------->
 // .           move these page tables
 //
-    static void try_realign_addr(struct pagetable_move_control *pmc,
-    unsigned long pagetable_mask)
-    {
-    if (!can_realign_addr(pmc, pagetable_mask))
+#[no_mangle]
+pub unsafe extern "C" fn try_realign_addr(pmc: *mut pagetable_move_control, pagetable_mask: c_ulong) {
+    if (!can_realign_addr(pmc, pagetable_mask)) {
     return;
+    }
 //
 // Simply align to page table boundaries. Note that we do NOT update the
 // pmc->old_end value, and since the move_page_tables() operation spans
@@ -708,15 +1007,11 @@ pub unsafe extern "C" fn uffd_supports_page_table_move(pmc: *mut pagetable_move_
 // Is the page table move operation done?
 #[no_mangle]
 unsafe extern "C" fn pmc_done(pmc: *mut pagetable_move_control) -> bool {
-    static bool pmc_done(struct pagetable_move_control *pmc)
-    {
     return pmc.old_addr >= pmc.old_end;
     }
 // Advance to the next page table, offset by extent bytes.
 #[no_mangle]
 unsafe extern "C" fn pmc_next(pmc: *mut pagetable_move_control, extent: c_ulong) {
-    static void pmc_next(struct pagetable_move_control *pmc, unsigned long extent)
-    {
     pmc.old_addr += extent;
     pmc.new_addr += extent;
     }
@@ -726,10 +1021,8 @@ unsafe extern "C" fn pmc_next(pmc: *mut pagetable_move_control, extent: c_ulong)
 //
 #[no_mangle]
 unsafe extern "C" fn pmc_progress(pmc: *mut pagetable_move_control) -> c_ulong {
-    static unsigned long pmc_progress(struct pagetable_move_control *pmc)
-    {
-    let mut orig_old_addr: c_ulong = pmc.old_end - pmc.len_in;
-    let mut old_addr: c_ulong = pmc.old_addr;
+pub static mut orig_old_addr: c_ulong = 0;
+pub static mut old_addr: c_ulong = 0;
 //
 // Prevent negative return values when {old,new}_addr was realigned but
 // we broke out of the loop in move_page_tables() for the first PMD
@@ -739,18 +1032,20 @@ unsafe extern "C" fn pmc_progress(pmc: *mut pagetable_move_control) -> c_ulong {
     }
 #[no_mangle]
 pub unsafe extern "C" fn move_page_tables(pmc: *mut pagetable_move_control) -> c_ulong {
-    unsigned long move_page_tables(struct pagetable_move_control *pmc)
-    {
-    unsigned long extent;
-    struct mmu_notifier_range range;
-    pmd_t *old_pmd, *new_pmd;
-    pud_t *old_pud, *new_pud;
-    struct mm_struct *mm = pmc.old.vm_mm;
-    if (!pmc.len_in)
+    let mut extent = 0;
+pub static mut range: usize = 0;
+    let mut old_pmd = core::ptr::null_mut();
+    let mut new_pmd = core::ptr::null_mut();
+    let mut old_pud = core::ptr::null_mut();
+    let mut new_pud = core::ptr::null_mut();
+    let mut mm = pmc.old.vm_mm;
+    if (!pmc.len_in) {
     return 0;
-    if (is_vm_hugetlb_page(pmc.old))
+    }
+    if (is_vm_hugetlb_page(pmc.old)) {
     return move_hugetlb_page_tables(pmc.old, pmc.new, pmc.old_addr,
     pmc.new_addr, pmc.len_in);
+    }
 //
 // If possible, realign addresses to PMD boundary for faster copy.
 // Only realign if the mremap copying hits a PMD boundary.
@@ -768,49 +1063,59 @@ pub unsafe extern "C" fn move_page_tables(pmc: *mut pagetable_move_control) -> c
 //
     extent = get_extent(NORMAL_PUD, pmc);
     old_pud = get_old_pud(mm, pmc.old_addr);
-    if (!old_pud)
+    if (!old_pud) {
     continue;
+    }
     new_pud = alloc_new_pud(mm, pmc.new_addr);
-    if (!new_pud)
+    if (!new_pud) {
     break;
+    }
     if (pud_trans_huge(*old_pud)) {
     if (extent == HPAGE_PUD_SIZE) {
     move_pgt_entry(pmc, HPAGE_PUD, old_pud, new_pud);
 // We ignore and continue on error?
     continue;
     }
-    } else if (IS_ENABLED(CONFIG_HAVE_MOVE_PUD) && extent == PUD_SIZE) {
-    if (move_pgt_entry(pmc, NORMAL_PUD, old_pud, new_pud))
+    } else if (IS_ENABLED!(CONFIG_HAVE_MOVE_PUD) && extent == PUD_SIZE) {
+    if (move_pgt_entry(pmc, NORMAL_PUD, old_pud, new_pud)) {
     continue;
+    }
     }
     extent = get_extent(NORMAL_PMD, pmc);
     old_pmd = get_old_pmd(mm, pmc.old_addr);
-    if (!old_pmd)
+    if (!old_pmd) {
     continue;
+    }
     new_pmd = alloc_new_pmd(mm, pmc.new_addr);
-    if (!new_pmd)
+    if (!new_pmd) {
     break;
-    again:
+    }
+// label;
     if (pmd_is_huge(*old_pmd)) {
     if (extent == HPAGE_PMD_SIZE &&
-    move_pgt_entry(pmc, HPAGE_PMD, old_pmd, new_pmd))
+    move_pgt_entry(pmc, HPAGE_PMD, old_pmd, new_pmd)) {
     continue;
+    }
     split_huge_pmd(pmc.old, old_pmd, pmc.old_addr);
-    } else if (IS_ENABLED(CONFIG_HAVE_MOVE_PMD) &&
+    } else if (IS_ENABLED!(CONFIG_HAVE_MOVE_PMD) &&
     extent == PMD_SIZE) {
 //
 // If the extent is PMD-sized, try to speed the move by
 // moving at the PMD level if possible.
 //
-    if (move_pgt_entry(pmc, NORMAL_PMD, old_pmd, new_pmd))
+    if (move_pgt_entry(pmc, NORMAL_PMD, old_pmd, new_pmd)) {
     continue;
     }
-    if (pmd_none(*old_pmd))
+    }
+    if (pmd_none(*old_pmd)) {
     continue;
-    if (pte_alloc(pmc.new.vm_mm, new_pmd))
+    }
+    if (pte_alloc(pmc.new.vm_mm, new_pmd)) {
     break;
-    if (move_ptes(pmc, extent, old_pmd, new_pmd) < 0)
-    goto again;
+    }
+    if (move_ptes(pmc, extent, old_pmd, new_pmd) < 0) {
+// goto;
+    }
     }
     mmu_notifier_invalidate_range_end(&range);
     return pmc_progress(pmc);
@@ -818,19 +1123,17 @@ pub unsafe extern "C" fn move_page_tables(pmc: *mut pagetable_move_control) -> c
 // Set vrm->delta to the difference in VMA size specified by user.
 #[no_mangle]
 unsafe extern "C" fn vrm_set_delta(vrm: *mut vma_remap_struct) {
-    static void vrm_set_delta(struct vma_remap_struct *vrm)
-    {
     vrm.delta = abs_diff(vrm.old_len, vrm.new_len);
     }
 // Determine what kind of remap this is - shrink, expand or no resize at all.
 #[no_mangle]
 unsafe extern "C" fn vrm_remap_type(vrm: *mut vma_remap_struct) -> enum mremap_type {
-    static enum mremap_type vrm_remap_type(struct vma_remap_struct *vrm)
-    {
-    if (vrm.delta == 0)
+    if (vrm.delta == 0) {
     return MREMAP_NO_RESIZE;
-    if (vrm.old_len > vrm.new_len)
+    }
+    if (vrm.old_len > vrm.new_len) {
     return MREMAP_SHRINK;
+    }
     return MREMAP_EXPAND;
     }
 //
@@ -839,12 +1142,10 @@ unsafe extern "C" fn vrm_remap_type(vrm: *mut vma_remap_struct) -> enum mremap_t
 //
 #[no_mangle]
 unsafe extern "C" fn vrm_overlaps(vrm: *mut vma_remap_struct) -> bool {
-    static bool vrm_overlaps(struct vma_remap_struct *vrm)
-    {
-    let mut start_old: c_ulong = vrm.addr;
-    let mut start_new: c_ulong = vrm.new_addr;
-    let mut end_old: c_ulong = vrm.addr + vrm.old_len;
-    let mut end_new: c_ulong = vrm.new_addr + vrm.new_len;
+pub static mut start_old: c_ulong = 0;
+pub static mut start_new: c_ulong = 0;
+pub static mut end_old: c_ulong = 0;
+pub static mut end_new: c_ulong = 0;
 //
 // start_old    end_old
 // |-----------|
@@ -855,8 +1156,9 @@ unsafe extern "C" fn vrm_overlaps(vrm: *mut vma_remap_struct) -> bool {
 // |-------------|
 // start_new      end_new
 //
-    if (end_old > start_new && end_new > start_old)
+    if (end_old > start_new && end_new > start_old) {
     return true;
+    }
     return false;
     }
 //
@@ -866,8 +1168,6 @@ unsafe extern "C" fn vrm_overlaps(vrm: *mut vma_remap_struct) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn vrm_implies_new_addr(vrm: *mut vma_remap_struct) -> bool {
-    static bool vrm_implies_new_addr(struct vma_remap_struct *vrm)
-    {
     return vrm.flags & (MREMAP_FIXED | MREMAP_DONTUNMAP);
     }
 //
@@ -882,22 +1182,23 @@ unsafe extern "C" fn vrm_implies_new_addr(vrm: *mut vma_remap_struct) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn vrm_set_new_addr(vrm: *mut vma_remap_struct) -> c_ulong {
-    static unsigned long vrm_set_new_addr(struct vma_remap_struct *vrm)
-    {
-    struct vm_area_struct *vma = vrm.vma;
-    let mut map_flags: c_ulong = 0;
+    let mut vma = vrm.vma;
+pub static mut map_flags: c_ulong = 0;
 // Page Offset _into_ the VMA.
-    let mut pgoff: pgoff_t = linear_page_index(vma, vrm.addr);
-    let mut new_addr: c_ulong = vrm_implies_new_addr(vrm) ? vrm.new_addr : 0;
-    unsigned long res;
-    if (vrm.flags & MREMAP_FIXED)
+pub static mut pgoff: pgoff_t = 0;
+pub static mut new_addr: c_ulong = 0;
+    let mut res = 0;
+    if (vrm.flags & MREMAP_FIXED) {
     map_flags |= MAP_FIXED;
-    if (vma_test(vma, VMA_MAYSHARE_BIT))
+    }
+    if (vma_test(vma, VMA_MAYSHARE_BIT)) {
     map_flags |= MAP_SHARED;
+    }
     res = get_unmapped_area(vma.vm_file, new_addr, vrm.new_len, pgoff,
     map_flags);
-    if (IS_ERR_VALUE(res))
+    if (IS_ERR_VALUE(res)) {
     return res;
+    }
     vrm.new_addr = res;
     return 0;
     }
@@ -909,22 +1210,24 @@ unsafe extern "C" fn vrm_set_new_addr(vrm: *mut vma_remap_struct) -> c_ulong {
 //
 #[no_mangle]
 unsafe extern "C" fn vrm_calc_charge(vrm: *mut vma_remap_struct) -> bool {
-    static bool vrm_calc_charge(struct vma_remap_struct *vrm)
-    {
-    unsigned long charged;
-    if (!vma_test(vrm.vma, VMA_ACCOUNT_BIT))
+    let mut charged = 0;
+    if (!vma_test(vrm.vma, VMA_ACCOUNT_BIT)) {
     return true;
+    }
 //
 // If we don't unmap the old mapping, then we account the entirety of
 // the length of the new one. Otherwise it's just the delta in size.
 //
-    if (vrm.flags & MREMAP_DONTUNMAP)
+    if (vrm.flags & MREMAP_DONTUNMAP) {
     charged = vrm.new_len >> PAGE_SHIFT;
-    else
+    }
+    else {
     charged = vrm.delta >> PAGE_SHIFT;
+    }
 // This accounts 'charged' pages of memory.
-    if (security_vm_enough_memory_mm(current.mm, charged))
+    if (security_vm_enough_memory_mm(current.mm, charged)) {
     return false;
+    }
     vrm.charged = charged;
     return true;
     }
@@ -934,10 +1237,9 @@ unsafe extern "C" fn vrm_calc_charge(vrm: *mut vma_remap_struct) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn vrm_uncharge(vrm: *mut vma_remap_struct) {
-    static void vrm_uncharge(struct vma_remap_struct *vrm)
-    {
-    if (!vma_test(vrm.vma, VMA_ACCOUNT_BIT))
+    if (!vma_test(vrm.vma, VMA_ACCOUNT_BIT)) {
     return;
+    }
     vm_unacct_memory(vrm.charged);
     vrm.charged = 0;
     }
@@ -946,21 +1248,20 @@ unsafe extern "C" fn vrm_uncharge(vrm: *mut vma_remap_struct) {
 // account for 'bytes' memory used, and if locked, indicate this in the VRM so
 // we can handle this correctly later.
 //
-    static void vrm_stat_account(struct vma_remap_struct *vrm,
-    unsigned long bytes)
-    {
-    let mut pages: c_ulong = bytes >> PAGE_SHIFT;
-    struct mm_struct *mm = current.mm;
-    struct vm_area_struct *vma = vrm.vma;
+#[no_mangle]
+pub unsafe extern "C" fn vrm_stat_account(vrm: *mut vma_remap_struct, bytes: c_ulong) {
+pub static mut pages: c_ulong = 0;
+    let mut mm = current.mm;
+    let mut vma = vrm.vma;
     vm_stat_account(mm, vma.vm_flags, pages);
-    if (vma_test(vma, VMA_LOCKED_BIT))
+    if (vma_test(vma, VMA_LOCKED_BIT)) {
     mm.locked_vm += pages;
     }
-    static bool __check_map_count_against_split(struct mm_struct *mm,
-    bool before_unmaps)
-    {
-    let mut sys_map_count: c_int = get_sysctl_max_map_count();
-    let mut map_count: c_int = mm.map_count;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn __check_map_count_against_split(mm: *mut mm_struct, before_unmaps: bool) -> bool {
+pub static mut sys_map_count: c_int = 0;
+pub static mut map_count: c_int = 0;
     mmap_assert_write_locked(mm);
 //
 // At the point of shrinking the VMA, if new_len < old_len, we unmap
@@ -983,8 +1284,9 @@ unsafe extern "C" fn vrm_uncharge(vrm: *mut vma_remap_struct) {
 // Therefore, before we consider the move anything, we have to account
 // for 2 additional VMAs possibly being created upon these unmappings.
 //
-    if (before_unmaps)
+    if (before_unmaps) {
     map_count += 2;
+    }
 //
 // At the point of MOVING the VMA:
 //
@@ -1010,16 +1312,12 @@ unsafe extern "C" fn vrm_uncharge(vrm: *mut vma_remap_struct) {
 // Do we violate the map count limit if we split VMAs when moving the VMA?
 #[no_mangle]
 unsafe extern "C" fn check_map_count_against_split() -> bool {
-    static bool check_map_count_against_split(void)
-    {
     return __check_map_count_against_split(current.mm,
 // before_unmaps=*/false);
     }
 // Do we violate the map count limit if we split VMAs prior to early unmaps?
 #[no_mangle]
 unsafe extern "C" fn check_map_count_against_split_early() -> bool {
-    static bool check_map_count_against_split_early(void)
-    {
     return __check_map_count_against_split(current.mm,
 // before_unmaps=*/true);
     }
@@ -1029,27 +1327,29 @@ unsafe extern "C" fn check_map_count_against_split_early() -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn prep_move_vma(vrm: *mut vma_remap_struct) -> c_ulong {
-    static unsigned long prep_move_vma(struct vma_remap_struct *vrm)
-    {
-    let mut err: c_ulong = 0;
-    struct vm_area_struct *vma = vrm.vma;
-    let mut old_addr: c_ulong = vrm.addr;
-    let mut old_len: c_ulong = vrm.old_len;
-    let mut dummy: vm_flags_t = vma.vm_flags;
+pub static mut err: c_ulong = 0;
+    let mut vma = vrm.vma;
+pub static mut old_addr: c_ulong = 0;
+pub static mut old_len: c_ulong = 0;
+pub static mut dummy: vm_flags_t = 0;
 //
 // We'd prefer to avoid failure later on in do_munmap: we copy a VMA,
 // which may not merge, then (if MREMAP_DONTUNMAP is not set) unmap the
 // source, which may split, causing a net increase of 2 mappings.
 //
-    if (!check_map_count_against_split())
+    if (!check_map_count_against_split()) {
     return -ENOMEM;
+    }
     if (vma.vm_ops && vma.vm_ops.may_split) {
-    if (vma.vm_start != old_addr)
+    if (vma.vm_start != old_addr) {
     err = vma.vm_ops.may_split(vma, old_addr);
-    if (!err && vma.vm_end != old_addr + old_len)
+    }
+    if (!err && vma.vm_end != old_addr + old_len) {
     err = vma.vm_ops.may_split(vma, old_addr + old_len);
-    if (err)
+    }
+    if (err) {
     return err;
+    }
     }
 //
 // Advise KSM to break any KSM pages in the area to be moved:
@@ -1060,8 +1360,9 @@ unsafe extern "C" fn prep_move_vma(vrm: *mut vma_remap_struct) -> c_ulong {
 //
     err = ksm_madvise(vma, old_addr, old_addr + old_len,
     MADV_UNMERGEABLE, &dummy);
-    if (err)
+    if (err) {
     return err;
+    }
     return 0;
     }
 //
@@ -1074,16 +1375,14 @@ unsafe extern "C" fn prep_move_vma(vrm: *mut vma_remap_struct) -> c_ulong {
 //
 #[no_mangle]
 unsafe extern "C" fn unmap_source_vma(vrm: *mut vma_remap_struct) {
-    static void unmap_source_vma(struct vma_remap_struct *vrm)
-    {
-    struct mm_struct *mm = current.mm;
-    let mut addr: c_ulong = vrm.addr;
-    let mut len: c_ulong = vrm.old_len;
-    struct vm_area_struct *vma = vrm.vma;
+    let mut mm = current.mm;
+pub static mut addr: c_ulong = 0;
+pub static mut len: c_ulong = 0;
+    let mut vma = vrm.vma;
     VMA_ITERATOR(vmi, mm, addr);
-    int err;
-    unsigned long vm_start;
-    unsigned long vm_end;
+    let mut err = 0;
+    let mut vm_start = 0;
+    let mut vm_end = 0;
 //
 // It might seem odd that we check for MREMAP_DONTUNMAP here, given this
 // function implies that we unmap the original VMA, which seems
@@ -1093,7 +1392,7 @@ unsafe extern "C" fn unmap_source_vma(vrm: *mut vma_remap_struct) {
 // arose, in which case we _do_ wish to unmap the _new_ VMA, which means
 // we actually _do_ want it be unaccounted.
 //
-    bool accountable_move = vma_test(vma, VMA_ACCOUNT_BIT) &&
+    let mut accountable_move = vma_test(vma, VMA_ACCOUNT_BIT) &&
     !(vrm.flags & MREMAP_DONTUNMAP);
 //
 // So we perform a trick here to prevent incorrect accounting. Any merge
@@ -1150,14 +1449,14 @@ unsafe extern "C" fn unmap_source_vma(vrm: *mut vma_remap_struct) {
 // do_vmi_munmap() will have restored the VMI back to addr.
 //
     if (accountable_move) {
-    let mut end: c_ulong = addr + len;
+pub static mut end: c_ulong = 0;
     if (vm_start < addr) {
-    struct vm_area_struct *prev = vma_prev(&vmi);
+    let mut prev = vma_prev(&vmi);
     vma_start_write(prev);
     vma_set_flags(prev, VMA_ACCOUNT_BIT);
     }
     if (vm_end > end) {
-    struct vm_area_struct *next = vma_next(&vmi);
+    let mut next = vma_next(&vmi);
     vma_start_write(next);
     vma_set_flags(next, VMA_ACCOUNT_BIT);
     }
@@ -1171,16 +1470,15 @@ unsafe extern "C" fn unmap_source_vma(vrm: *mut vma_remap_struct) {
 // Outputs the newly installed VMA to new_vma_ptr. Returns 0 on success or an
 // error code.
 //
-    static int copy_vma_and_data(struct vma_remap_struct *vrm,
-    struct vm_area_struct **new_vma_ptr)
-    {
-    let mut new_pgoff: pgoff_t = linear_page_index(vrm.vma, vrm.addr);
+#[no_mangle]
+pub unsafe extern "C" fn copy_vma_and_data(vrm: *mut vma_remap_struct, new_vma_ptr: *mut *mut vm_area_struct) -> c_int {
+pub static mut new_pgoff: pgoff_t = 0;
     const pgoff_t new_anon_pgoff =
     __linear_anon_page_index(vrm.vma, vrm.addr);
-    struct vm_area_struct *vma = vrm.vma;
-    struct vm_area_struct *new_vma;
-    unsigned long moved_len;
-    let mut err: c_int = 0;
+    let mut vma = vrm.vma;
+pub static mut new_vma: *mut c_void = core::ptr::null_mut();
+    let mut moved_len = 0;
+pub static mut err: c_int = 0;
     PAGETABLE_MOVE(pmc, core::ptr::null_mut(), core::ptr::null_mut(), vrm.addr, vrm.new_addr, vrm.old_len);
     new_vma = copy_vma(&vma, vrm.new_addr, vrm.new_len, new_pgoff,
     new_anon_pgoff, &pmc.need_rmap_locks);
@@ -1190,18 +1488,20 @@ unsafe extern "C" fn unmap_source_vma(vrm: *mut vma_remap_struct) {
     return -ENOMEM;
     }
 // By merging, we may have invalidated any iterator in use.
-    if (vma != vrm.vma)
+    if (vma != vrm.vma) {
     vrm.vmi_needs_invalidate = true;
+    }
     vrm.vma = vma;
     pmc.old = vma;
     pmc.new = new_vma;
     moved_len = move_page_tables(&pmc);
-    if (moved_len < vrm.old_len)
+    if (moved_len < vrm.old_len) {
     err = -ENOMEM;
-#[no_mangle]
-pub unsafe extern "C" fn if(vma->vm_ops->mremap: vma->vm_ops &&) -> else {
-    else if (vma.vm_ops && vma.vm_ops.mremap)
+    }
+
+    else if (vma.vm_ops && vma.vm_ops.mremap) {
     err = vma.vm_ops.mremap(new_vma);
+    }
     if (unlikely(err)) {
     PAGETABLE_MOVE(pmc_revert, new_vma, vma, vrm.new_addr,
     vrm.addr, moved_len);
@@ -1228,14 +1528,13 @@ pub unsafe extern "C" fn if(vma->vm_ops->mremap: vma->vm_ops &&) -> else {
 // range are no longer mapped), and removing anon_vma_chain links from it if the
 // entire VMA was copied over.
 //
-    static void dontunmap_complete(struct vma_remap_struct *vrm,
-    struct vm_area_struct *new_vma)
-    {
-    let mut start: c_ulong = vrm.addr;
-    let mut end: c_ulong = vrm.addr + vrm.old_len;
-    struct vm_area_struct *vma = vrm.vma;
-    let mut old_start: c_ulong = vma.vm_start;
-    let mut old_end: c_ulong = vma.vm_end;
+#[no_mangle]
+pub unsafe extern "C" fn dontunmap_complete(vrm: *mut vma_remap_struct, new_vma: *mut vm_area_struct) {
+pub static mut start: c_ulong = 0;
+pub static mut end: c_ulong = 0;
+    let mut vma = vrm.vma;
+pub static mut old_start: c_ulong = 0;
+pub static mut old_end: c_ulong = 0;
 // We always clear VMA_LOCKED[ONFAULT]_BIT on the old VMA.
     vma_clear_flags_mask(vma, VMA_LOCKED_MASK);
 //
@@ -1243,7 +1542,7 @@ pub unsafe extern "C" fn if(vma->vm_ops->mremap: vma->vm_ops &&) -> else {
 // table has been moved.
 //
     if (new_vma != vma && start == old_start && end == old_end) {
-    let mut pgoff_unfaulted: pgoff_t = vma.vm_start >> PAGE_SHIFT;
+pub static mut pgoff_unfaulted: pgoff_t = 0;
     unlink_anon_vmas(vma);
 //
 // The VMA is now unfaulted and it is an invariant that
@@ -1251,28 +1550,29 @@ pub unsafe extern "C" fn if(vma->vm_ops->mremap: vma->vm_ops &&) -> else {
 // vma->vm_start >> PAGE_SHIFT.
 //
     vma_set_anon_pgoff(vma, pgoff_unfaulted);
-    if (vma_is_anonymous(vma) && !vma.vm_file)
+    if (vma_is_anonymous(vma) && !vma.vm_file) {
     vma_set_pgoff(vma, pgoff_unfaulted);
+    }
     }
 // Because we won't unmap we don't need to touch locked_vm.
     }
 #[no_mangle]
 unsafe extern "C" fn move_vma(vrm: *mut vma_remap_struct) -> c_ulong {
-    static unsigned long move_vma(struct vma_remap_struct *vrm)
-    {
-    struct mm_struct *mm = current.mm;
-    struct vm_area_struct *new_vma;
-    unsigned long hiwater_vm;
-    int err;
+    let mut mm = current.mm;
+pub static mut new_vma: *mut c_void = core::ptr::null_mut();
+    let mut hiwater_vm = 0;
+    let mut err = 0;
     err = prep_move_vma(vrm);
-    if (err)
+    if (err) {
     return err;
+    }
 //
 // If accounted, determine the number of bytes the operation will
 // charge.
 //
-    if (!vrm_calc_charge(vrm))
+    if (!vrm_calc_charge(vrm)) {
     return -ENOMEM;
+    }
 // We don't want racing faults.
     vma_start_write(vrm.vma);
 // Perform copy step.
@@ -1282,8 +1582,9 @@ unsafe extern "C" fn move_vma(vrm: *mut vma_remap_struct) -> c_ulong {
 // error by setting the destination VMA to the source VMA and unmapping
 // it below.
 //
-    if (err && !new_vma)
+    if (err && !new_vma) {
     return err;
+    }
 //
 // If we failed to move page tables we still do total_vm increment
 // since do_munmap() will decrement it by old_len == new_len.
@@ -1295,10 +1596,12 @@ unsafe extern "C" fn move_vma(vrm: *mut vma_remap_struct) -> c_ulong {
 //
     hiwater_vm = mm.hiwater_vm;
     vrm_stat_account(vrm, vrm.new_len);
-    if (unlikely(!err && (vrm.flags & MREMAP_DONTUNMAP)))
+    if (unlikely(!err && (vrm.flags & MREMAP_DONTUNMAP))) {
     dontunmap_complete(vrm, new_vma);
-    else
+    }
+    else {
     unmap_source_vma(vrm);
+    }
     mm.hiwater_vm = hiwater_vm;
     return err ? (unsigned long)err : vrm.new_addr;
     }
@@ -1309,20 +1612,20 @@ unsafe extern "C" fn move_vma(vrm: *mut vma_remap_struct) -> c_ulong {
 // In both cases this invalidates the VMA, however if we don't drop the lock,
 // then load the correct VMA into vrm->vma afterwards.
 //
-    static unsigned long shrink_vma(struct vma_remap_struct *vrm,
-    bool drop_lock)
-    {
-    struct mm_struct *mm = current.mm;
-    let mut unmap_start: c_ulong = vrm.addr + vrm.new_len;
-    let mut unmap_bytes: c_ulong = vrm.delta;
-    unsigned long res;
+#[no_mangle]
+pub unsafe extern "C" fn shrink_vma(vrm: *mut vma_remap_struct, drop_lock: bool) -> c_ulong {
+    let mut mm = current.mm;
+pub static mut unmap_start: c_ulong = 0;
+pub static mut unmap_bytes: c_ulong = 0;
+    let mut res = 0;
     VMA_ITERATOR(vmi, mm, unmap_start);
     VM_BUG_ON(vrm.remap_type != MREMAP_SHRINK);
     res = do_vmi_munmap(&vmi, mm, unmap_start, unmap_bytes,
     vrm.uf_unmap, drop_lock);
     vrm.vma = core::ptr::null_mut(); /* Invalidated. */
-    if (res)
+    if (res) {
     return res;
+    }
 //
 // If we've not dropped the lock, then we should reload the VMA to
 // replace the invalidated VMA with the one that may have now been
@@ -1332,8 +1635,9 @@ unsafe extern "C" fn move_vma(vrm: *mut vma_remap_struct) -> c_ulong {
     vrm.mmap_locked = false;
     } else {
     vrm.vma = vma_lookup(mm, vrm.addr);
-    if (!vrm.vma)
+    if (!vrm.vma) {
     return -EFAULT;
+    }
     }
     return 0;
     }
@@ -1343,10 +1647,8 @@ unsafe extern "C" fn move_vma(vrm: *mut vma_remap_struct) -> c_ulong {
 //
 #[no_mangle]
 unsafe extern "C" fn mremap_to(vrm: *mut vma_remap_struct) -> c_ulong {
-    static unsigned long mremap_to(struct vma_remap_struct *vrm)
-    {
-    struct mm_struct *mm = current.mm;
-    unsigned long err;
+    let mut mm = current.mm;
+    let mut err = 0;
     if (vrm.flags & MREMAP_FIXED) {
 //
 // In mremap_to().
@@ -1357,62 +1659,68 @@ unsafe extern "C" fn mremap_to(vrm: *mut vma_remap_struct) -> c_ulong {
     vrm.uf_unmap_early);
     vrm.vma = core::ptr::null_mut(); /* Invalidated. */
     vrm.vmi_needs_invalidate = true;
-    if (err)
+    if (err) {
     return err;
+    }
 //
 // If we remap a portion of a VMA elsewhere in the same VMA,
 // this can invalidate the old VMA. Reset.
 //
     vrm.vma = vma_lookup(mm, vrm.addr);
-    if (!vrm.vma)
+    if (!vrm.vma) {
     return -EFAULT;
+    }
     }
     if (vrm.remap_type == MREMAP_SHRINK) {
     err = shrink_vma(vrm, /* drop_lock= */false);
-    if (err)
+    if (err) {
     return err;
+    }
 // Set up for the move now shrink has been executed.
     vrm.old_len = vrm.new_len;
     }
 // MREMAP_DONTUNMAP expands by old_len since old_len == new_len
     if (vrm.flags & MREMAP_DONTUNMAP) {
-    let mut vma_flags: vma_flags_t = vrm.vma.flags;
-    let mut pages: c_ulong = vrm.old_len >> PAGE_SHIFT;
-    if (!may_expand_vm(mm, &vma_flags, pages))
+pub static mut vma_flags: vma_flags_t = 0;
+pub static mut pages: c_ulong = 0;
+    if (!may_expand_vm(mm, &vma_flags, pages)) {
     return -ENOMEM;
     }
+    }
     err = vrm_set_new_addr(vrm);
-    if (err)
+    if (err) {
     return err;
+    }
     return move_vma(vrm);
     }
 #[no_mangle]
 unsafe extern "C" fn vma_expandable(vma: *mut vm_area_struct, delta: c_ulong) -> c_int {
-    static int vma_expandable(struct vm_area_struct *vma, unsigned long delta)
-    {
-    let mut end: c_ulong = vma.vm_end + delta;
-    if (end < vma.vm_end) /* overflow */
+pub static mut end: c_ulong = 0;
+    if (end < vma.vm_end) /* overflow */ {
     return 0;
-    if (find_vma_intersection(vma.vm_mm, vma.vm_end, end))
+    }
+    if (find_vma_intersection(vma.vm_mm, vma.vm_end, end)) {
     return 0;
+    }
     if (get_unmapped_area(core::ptr::null_mut(), vma.vm_start, end - vma.vm_start,
-    0, MAP_FIXED) & ~PAGE_MASK)
+    0, MAP_FIXED) & ~PAGE_MASK) {
     return 0;
+    }
     return 1;
     }
 // Determine whether we are actually able to execute an in-place expansion.
 #[no_mangle]
 unsafe extern "C" fn vrm_can_expand_in_place(vrm: *mut vma_remap_struct) -> bool {
-    static bool vrm_can_expand_in_place(struct vma_remap_struct *vrm)
-    {
 // Number of bytes from vrm->addr to end of VMA.
-    let mut suffix_bytes: c_ulong = vrm.vma.vm_end - vrm.addr;
+pub static mut suffix_bytes: c_ulong = 0;
 // If end of range aligns to end of VMA, we can just expand in-place.
-    if (suffix_bytes != vrm.old_len)
+    if (suffix_bytes != vrm.old_len) {
     return false;
+    }
 // Check whether this is feasible.
-    if (!vma_expandable(vrm.vma, vrm.delta))
+    if (!vma_expandable(vrm.vma, vrm.delta)) {
     return false;
+    }
     return true;
     }
 //
@@ -1423,13 +1731,12 @@ unsafe extern "C" fn vrm_can_expand_in_place(vrm: *mut vma_remap_struct) -> bool
 //
 #[no_mangle]
 unsafe extern "C" fn expand_vma_in_place(vrm: *mut vma_remap_struct) -> c_ulong {
-    static unsigned long expand_vma_in_place(struct vma_remap_struct *vrm)
-    {
-    struct mm_struct *mm = current.mm;
-    struct vm_area_struct *vma = vrm.vma;
+    let mut mm = current.mm;
+    let mut vma = vrm.vma;
     VMA_ITERATOR(vmi, mm, vma.vm_end);
-    if (!vrm_calc_charge(vrm))
+    if (!vrm_calc_charge(vrm)) {
     return -ENOMEM;
+    }
 //
 // Function vma_merge_extend() is called on the
 // extension we are adding to the already existing vma,
@@ -1450,22 +1757,23 @@ unsafe extern "C" fn expand_vma_in_place(vrm: *mut vma_remap_struct) -> c_ulong 
     }
 #[no_mangle]
 unsafe extern "C" fn align_hugetlb(vrm: *mut vma_remap_struct) -> bool {
-    static bool align_hugetlb(struct vma_remap_struct *vrm)
-    {
-    let mut __maybe_unused: *mut hstate h = hstate_vma(vrm.vma);
+pub static mut __maybe_unused: *mut hstate h = core::ptr::null_mut();
     vrm.old_len = ALIGN(vrm.old_len, huge_page_size(h));
     vrm.new_len = ALIGN(vrm.new_len, huge_page_size(h));
 // addrs must be huge page aligned
-    if (vrm.addr & ~huge_page_mask(h))
+    if (vrm.addr & ~huge_page_mask(h)) {
     return false;
-    if (vrm.new_addr & ~huge_page_mask(h))
+    }
+    if (vrm.new_addr & ~huge_page_mask(h)) {
     return false;
+    }
 //
 // Don't allow remap expansion, because the underlying hugetlb
 // reservation is not yet capable to handle split reservation.
 //
-    if (vrm.new_len > vrm.old_len)
+    if (vrm.new_len > vrm.old_len) {
     return false;
+    }
     return true;
     }
 //
@@ -1477,17 +1785,16 @@ unsafe extern "C" fn align_hugetlb(vrm: *mut vma_remap_struct) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn expand_vma(vrm: *mut vma_remap_struct) -> c_ulong {
-    static unsigned long expand_vma(struct vma_remap_struct *vrm)
-    {
-    unsigned long err;
+    let mut err = 0;
 //
 // [addr, old_len) spans precisely to the end of the VMA, so try to
 // expand it in-place.
 //
     if (vrm_can_expand_in_place(vrm)) {
     err = expand_vma_in_place(vrm);
-    if (err)
+    if (err) {
     return err;
+    }
 // OK we're done!
     return vrm.addr;
     }
@@ -1496,12 +1803,14 @@ unsafe extern "C" fn expand_vma(vrm: *mut vma_remap_struct) -> c_ulong {
 // we need to create a new one and move it.
 //
 // We're not allowed to move the VMA, so error out.
-    if (!(vrm.flags & MREMAP_MAYMOVE))
+    if (!(vrm.flags & MREMAP_MAYMOVE)) {
     return -ENOMEM;
+    }
 // Find a new location to move the VMA to.
     err = vrm_set_new_addr(vrm);
-    if (err)
+    if (err) {
     return err;
+    }
     return move_vma(vrm);
     }
 //
@@ -1510,16 +1819,16 @@ unsafe extern "C" fn expand_vma(vrm: *mut vma_remap_struct) -> c_ulong {
 //
 #[no_mangle]
 unsafe extern "C" fn mremap_at(vrm: *mut vma_remap_struct) -> c_ulong {
-    static unsigned long mremap_at(struct vma_remap_struct *vrm)
-    {
-    unsigned long res;
-    switch (vrm.remap_type) {
-    case MREMAP_INVALID:
-    break;
-    case MREMAP_NO_RESIZE:
+    let mut res = 0;
+    match (vrm.remap_type) {
+    MREMAP_INVALID => {
+    // break;
+    }
+    MREMAP_NO_RESIZE => {
 // NO-OP CASE - resizing to the same size.
     return vrm.addr;
-    case MREMAP_SHRINK:
+    }
+    MREMAP_SHRINK => {
 //
 // SHRINK CASE. Can always be done in-place.
 //
@@ -1528,14 +1837,17 @@ unsafe extern "C" fn mremap_at(vrm: *mut vma_remap_struct) -> c_ulong {
 // lock should be dropped.
 //
     res = shrink_vma(vrm, /* drop_lock= */true);
-    if (res)
+    if (res) {
     return res;
+    }
     return vrm.addr;
-    case MREMAP_EXPAND:
+    }
+    MREMAP_EXPAND => {
     return expand_vma(vrm);
     }
+    }
 // Should not be possible.
-    WARN_ON_ONCE(1);
+    WARN_ON_ONCE!(1);
     return -EINVAL;
     }
 //
@@ -1544,89 +1856,95 @@ unsafe extern "C" fn mremap_at(vrm: *mut vma_remap_struct) -> c_ulong {
 //
 #[no_mangle]
 unsafe extern "C" fn vrm_will_map_new(vrm: *mut vma_remap_struct) -> bool {
-    static bool vrm_will_map_new(struct vma_remap_struct *vrm)
-    {
-    if (vrm.remap_type == MREMAP_EXPAND)
+    if (vrm.remap_type == MREMAP_EXPAND) {
     return true;
-    if (vrm_implies_new_addr(vrm))
+    }
+    if (vrm_implies_new_addr(vrm)) {
     return true;
+    }
     return false;
     }
 // Does this remap ONLY move mappings?
 #[no_mangle]
 unsafe extern "C" fn vrm_move_only(vrm: *mut vma_remap_struct) -> bool {
-    static bool vrm_move_only(struct vma_remap_struct *vrm)
-    {
-    if (!(vrm.flags & MREMAP_FIXED))
+    if (!(vrm.flags & MREMAP_FIXED)) {
     return false;
-    if (vrm.old_len != vrm.new_len)
+    }
+    if (vrm.old_len != vrm.new_len) {
     return false;
+    }
     return true;
     }
 #[no_mangle]
 unsafe extern "C" fn notify_uffd(vrm: *mut vma_remap_struct, failed: bool) {
-    static void notify_uffd(struct vma_remap_struct *vrm, bool failed)
-    {
-    struct mm_struct *mm = current.mm;
+    let mut mm = current.mm;
 // Regardless of success/failure, we always notify of any unmaps.
     userfaultfd_unmap_complete(mm, vrm.uf_unmap_early);
-    if (failed)
+    if (failed) {
     mremap_userfaultfd_fail(vrm.uf);
-    else
+    }
+    else {
     mremap_userfaultfd_complete(vrm.uf, vrm.addr,
     vrm.new_addr, vrm.old_len);
+    }
     userfaultfd_unmap_complete(mm, vrm.uf_unmap);
     }
 #[no_mangle]
 unsafe extern "C" fn vma_multi_allowed(vma: *mut vm_area_struct) -> bool {
-    static bool vma_multi_allowed(struct vm_area_struct *vma)
-    {
-    struct file *file = vma.vm_file;
+    let mut file = vma.vm_file;
 //
 // We can't support moving multiple uffd VMAs as notify requires
 // mmap lock to be dropped.
 //
-    if (userfaultfd_armed(vma))
+    if (userfaultfd_armed(vma)) {
     return false;
+    }
 //
 // Custom get unmapped area might result in MREMAP_FIXED not
 // being obeyed.
 //
-    if (!file || !file.f_op.get_unmapped_area)
+    if (!file || !file.f_op.get_unmapped_area) {
     return true;
+    }
 // Known good.
-    if (vma_is_shmem(vma))
+    if (vma_is_shmem(vma)) {
     return true;
-    if (is_vm_hugetlb_page(vma))
+    }
+    if (is_vm_hugetlb_page(vma)) {
     return true;
-    if (file.f_op.get_unmapped_area == thp_get_unmapped_area)
+    }
+    if (file.f_op.get_unmapped_area == thp_get_unmapped_area) {
     return true;
+    }
     return false;
     }
 #[no_mangle]
 unsafe extern "C" fn check_prep_vma(vrm: *mut vma_remap_struct) -> c_int {
-    static int check_prep_vma(struct vma_remap_struct *vrm)
-    {
-    struct vm_area_struct *vma = vrm.vma;
-    struct mm_struct *mm = current.mm;
-    let mut addr: c_ulong = vrm.addr;
+    let mut vma = vrm.vma;
+    let mut mm = current.mm;
+pub static mut addr: c_ulong = 0;
     unsigned long old_len, new_len, pgoff;
-    if (!vma)
+    if (!vma) {
     return -EFAULT;
+    }
 // If mseal()'d, mremap() is prohibited.
-    if (vma_is_sealed(vma))
+    if (vma_is_sealed(vma)) {
     return -EPERM;
+    }
 // Align to hugetlb page size, if required.
-    if (is_vm_hugetlb_page(vma) && !align_hugetlb(vrm))
+    if (is_vm_hugetlb_page(vma) && !align_hugetlb(vrm)) {
     return -EINVAL;
+    }
     vrm_set_delta(vrm);
     vrm.remap_type = vrm_remap_type(vrm);
 // For convenience, we set new_addr even if VMA won't move.
-    if (!vrm_implies_new_addr(vrm))
+    if (!vrm_implies_new_addr(vrm)) {
     vrm.new_addr = addr;
+    }
 // Below only meaningful if we expand or move a VMA.
-    if (!vrm_will_map_new(vrm))
+    if (!vrm_will_map_new(vrm)) {
     return 0;
+    }
     old_len = vrm.old_len;
     new_len = vrm.new_len;
 //
@@ -1643,14 +1961,16 @@ unsafe extern "C" fn check_prep_vma(vrm: *mut vma_remap_struct) -> c_int {
     return -EINVAL;
     }
     if ((vrm.flags & MREMAP_DONTUNMAP) &&
-    vma_test_any(vma, VMA_DONTEXPAND_BIT, VMA_PFNMAP_BIT))
+    vma_test_any(vma, VMA_DONTEXPAND_BIT, VMA_PFNMAP_BIT)) {
     return -EINVAL;
+    }
 //
 // We permit crossing of boundaries for the range being unmapped due to
 // a shrink.
 //
-    if (vrm.remap_type == MREMAP_SHRINK)
+    if (vrm.remap_type == MREMAP_SHRINK) {
     old_len = new_len;
+    }
 //
 // We can't remap across the end of VMAs, as another VMA may be
 // adjacent:
@@ -1664,23 +1984,30 @@ unsafe extern "C" fn check_prep_vma(vrm: *mut vma_remap_struct) -> c_int {
 //
 // We also require that vma->vm_start <= addr < vma->vm_end.
 //
-    if (old_len > vma.vm_end - addr)
+    if (old_len > vma.vm_end - addr) {
     return -EFAULT;
-    if (new_len == old_len)
+    }
+    if (new_len == old_len) {
     return 0;
+    }
 // We are expanding and the VMA is mlock()'d so we need to populate.
-    if (vma_test(vma, VMA_LOCKED_BIT))
+    if (vma_test(vma, VMA_LOCKED_BIT)) {
     vrm.populate_expand = true;
+    }
 // Need to be careful about a growing mapping
     pgoff = linear_page_index(vma, addr);
-    if (pgoff + (new_len >> PAGE_SHIFT) < pgoff)
+    if (pgoff + (new_len >> PAGE_SHIFT) < pgoff) {
     return -EINVAL;
-    if (vma_test_any(vma, VMA_DONTEXPAND_BIT, VMA_PFNMAP_BIT))
+    }
+    if (vma_test_any(vma, VMA_DONTEXPAND_BIT, VMA_PFNMAP_BIT)) {
     return -EFAULT;
-    if (!mlock_future_ok(mm, vma_test(vma, VMA_LOCKED_BIT), vrm.delta))
+    }
+    if (!mlock_future_ok(mm, vma_test(vma, VMA_LOCKED_BIT), vrm.delta)) {
     return -EAGAIN;
-    if (!may_expand_vm(mm, &vma.flags, vrm.delta >> PAGE_SHIFT))
+    }
+    if (!may_expand_vm(mm, &vma.flags, vrm.delta >> PAGE_SHIFT)) {
     return -ENOMEM;
+    }
     return 0;
     }
 //
@@ -1689,58 +2016,64 @@ unsafe extern "C" fn check_prep_vma(vrm: *mut vma_remap_struct) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn check_mremap_params(vrm: *mut vma_remap_struct) -> c_ulong {
-    static unsigned long check_mremap_params(struct vma_remap_struct *vrm)
-    {
-    let mut addr: c_ulong = vrm.addr;
-    let mut flags: c_ulong = vrm.flags;
+pub static mut addr: c_ulong = 0;
+pub static mut flags: c_ulong = 0;
 // Ensure no unexpected flag values.
-    if (flags & ~(MREMAP_FIXED | MREMAP_MAYMOVE | MREMAP_DONTUNMAP))
+    if (flags & ~(MREMAP_FIXED | MREMAP_MAYMOVE | MREMAP_DONTUNMAP)) {
     return -EINVAL;
+    }
 // Start address must be page-aligned.
-    if (offset_in_page(addr))
+    if (offset_in_page(addr)) {
     return -EINVAL;
+    }
 //
 // We allow a zero old-len as a special case
 // for DOS-emu "duplicate shm area" thing. But
 // a zero new-len is nonsensical.
 //
-    if (!vrm.new_len)
+    if (!vrm.new_len) {
     return -EINVAL;
+    }
 // Is the new length silly?
-    if (vrm.new_len > TASK_SIZE)
+    if (vrm.new_len > TASK_SIZE) {
     return -EINVAL;
+    }
 // Remainder of checks are for cases with specific new_addr.
-    if (!vrm_implies_new_addr(vrm))
+    if (!vrm_implies_new_addr(vrm)) {
     return 0;
+    }
 // Is the new address silly?
-    if (vrm.new_addr > TASK_SIZE - vrm.new_len)
+    if (vrm.new_addr > TASK_SIZE - vrm.new_len) {
     return -EINVAL;
+    }
 // The new address must be page-aligned.
-    if (offset_in_page(vrm.new_addr))
+    if (offset_in_page(vrm.new_addr)) {
     return -EINVAL;
+    }
 // A fixed address implies a move.
-    if (!(flags & MREMAP_MAYMOVE))
+    if (!(flags & MREMAP_MAYMOVE)) {
     return -EINVAL;
+    }
 // MREMAP_DONTUNMAP does not allow resizing in the process.
-    if (flags & MREMAP_DONTUNMAP && vrm.old_len != vrm.new_len)
+    if (flags & MREMAP_DONTUNMAP && vrm.old_len != vrm.new_len) {
     return -EINVAL;
+    }
 // Target VMA must not overlap source VMA.
-    if (vrm_overlaps(vrm))
+    if (vrm_overlaps(vrm)) {
     return -EINVAL;
+    }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn remap_move(vrm: *mut vma_remap_struct) -> c_ulong {
-    static unsigned long remap_move(struct vma_remap_struct *vrm)
-    {
-    struct vm_area_struct *vma;
-    let mut start: c_ulong = vrm.addr;
-    let mut end: c_ulong = vrm.addr + vrm.old_len;
-    let mut new_addr: c_ulong = vrm.new_addr;
-    let mut target_addr: c_ulong = new_addr;
-    let mut res: c_ulong = -EFAULT;
-    unsigned long last_end;
-    let mut seen_vma: bool = false;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+pub static mut start: c_ulong = 0;
+pub static mut end: c_ulong = 0;
+pub static mut new_addr: c_ulong = 0;
+pub static mut target_addr: c_ulong = 0;
+pub static mut res: c_ulong = 0;
+    let mut last_end = 0;
+pub static mut seen_vma: bool = false;
     VMA_ITERATOR(vmi, current.mm, start);
 //
 // When moving VMAs we allow for batched moves across multiple VMAs,
@@ -1749,13 +2082,14 @@ unsafe extern "C" fn remap_move(vrm: *mut vma_remap_struct) -> c_ulong {
 //
     for_each_vma_range(vmi, vma, end) {
 // Account for start, end not aligned with VMA start, end.
-    let mut addr: c_ulong = max(vma.vm_start, start);
-    let mut len: c_ulong = min(end, vma.vm_end) - addr;
+pub static mut addr: c_ulong = 0;
+pub static mut len: c_ulong = 0;
     unsigned long offset, res_vma;
-    bool multi_allowed;
+    let mut multi_allowed = 0;
 // No gap permitted at the start of the range.
-    if (!seen_vma && start < vma.vm_start)
+    if (!seen_vma && start < vma.vm_start) {
     return -EFAULT;
+    }
 //
 // To sensibly move multiple VMAs, accounting for the fact that
 // get_unmapped_area() may align even MAP_FIXED moves, we simply
@@ -1780,17 +2114,21 @@ unsafe extern "C" fn remap_move(vrm: *mut vma_remap_struct) -> c_ulong {
     multi_allowed = vma_multi_allowed(vma);
     if (!multi_allowed) {
 // This is not the first VMA, abort immediately.
-    if (seen_vma)
-    return -EFAULT;
-// This is the first, but there are more, abort.
-    if (vma.vm_end < end)
+    if (seen_vma) {
     return -EFAULT;
     }
+// This is the first, but there are more, abort.
+    if (vma.vm_end < end) {
+    return -EFAULT;
+    }
+    }
     res_vma = check_prep_vma(vrm);
-    if (!res_vma)
+    if (!res_vma) {
     res_vma = mremap_to(vrm);
-    if (IS_ERR_VALUE(res_vma))
+    }
+    if (IS_ERR_VALUE(res_vma)) {
     return res_vma;
+    }
     if (!seen_vma) {
     VM_WARN_ON_ONCE(multi_allowed && res_vma != new_addr);
     res = res_vma;
@@ -1810,18 +2148,18 @@ unsafe extern "C" fn remap_move(vrm: *mut vma_remap_struct) -> c_ulong {
     }
 #[no_mangle]
 unsafe extern "C" fn do_mremap(vrm: *mut vma_remap_struct) -> c_ulong {
-    static unsigned long do_mremap(struct vma_remap_struct *vrm)
-    {
-    struct mm_struct *mm = current.mm;
-    unsigned long res;
-    bool failed;
+    let mut mm = current.mm;
+    let mut res = 0;
+    let mut failed = 0;
     vrm.old_len = PAGE_ALIGN(vrm.old_len);
     vrm.new_len = PAGE_ALIGN(vrm.new_len);
     res = check_mremap_params(vrm);
-    if (res)
+    if (res) {
     return res;
-    if (mmap_write_lock_killable(mm))
+    }
+    if (mmap_write_lock_killable(mm)) {
     return -EINTR;
+    }
     vrm.mmap_locked = true;
     if (!check_map_count_against_split_early()) {
     mmap_write_unlock(mm);
@@ -1832,18 +2170,21 @@ unsafe extern "C" fn do_mremap(vrm: *mut vma_remap_struct) -> c_ulong {
     } else {
     vrm.vma = vma_lookup(current.mm, vrm.addr);
     res = check_prep_vma(vrm);
-    if (res)
-    goto out;
+    if (res) {
+// goto;
+    }
 // Actually execute mremap.
     res = vrm_implies_new_addr(vrm) ? mremap_to(vrm) : mremap_at(vrm);
     }
-    out:
+// label;
     failed = IS_ERR_VALUE(res);
-    if (vrm.mmap_locked)
+    if (vrm.mmap_locked) {
     mmap_write_unlock(mm);
+    }
 // VMA mlock'd + was expanded, so populated expanded region.
-    if (!failed && vrm.populate_expand)
+    if (!failed && vrm.populate_expand) {
     mm_populate(vrm.new_addr + vrm.old_len, vrm.delta);
+    }
     notify_uffd(vrm, failed);
     return res;
     }
@@ -1854,13 +2195,11 @@ unsafe extern "C" fn do_mremap(vrm: *mut vma_remap_struct) -> c_ulong {
 // MREMAP_FIXED option added 5-Dec-1999 by Benjamin LaHaise
 // This option implies MREMAP_MAYMOVE.
 //
-    SYSCALL_DEFINE5(mremap, unsigned long, addr, unsigned long, old_len,
-    unsigned long, new_len, unsigned long, flags,
-    unsigned long, new_addr)
-    {
-    let mut uf: vm_userfaultfd_ctx = NULL_VM_UFFD_CTX;
-    LIST_HEAD(uf_unmap_early);
-    LIST_HEAD(uf_unmap);
+#[no_mangle]
+pub unsafe extern "C" fn sys_mremap(addr: usize, old_len: usize, new_len: usize, flags: usize, new_addr: usize) -> c_long {
+pub static mut uf: vm_userfaultfd_ctx = 0;
+pub static mut uf_unmap_early: usize = 0;
+pub static mut uf_unmap: usize = 0;
 //
 // There is a deliberate asymmetry here: we strip the pointer tag
 // from the old address but leave the new address alone. This is
@@ -1872,16 +2211,6 @@ unsafe extern "C" fn do_mremap(vrm: *mut vma_remap_struct) -> c_ulong {
 // See Documentation/arch/arm64/tagged-address-abi.rst for more
 // information.
 //
-    struct vma_remap_struct vrm = {
-    .addr = untagged_addr(addr),
-    .old_len = old_len,
-    .new_len = new_len,
-    .flags = flags,
-    .new_addr = new_addr,
-    .uf = &uf,
-    .uf_unmap_early = &uf_unmap_early,
-    .uf_unmap = &uf_unmap,
-    .remap_type = MREMAP_INVALID, /* We set later. */
-    };
+pub static mut vma_remap_struct: usize = 0;
     return do_mremap(&vrm);
     }

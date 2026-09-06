@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -43,76 +293,76 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Copyright (C) 2013 Tom Zanussi <tom.zanussi@linux.intel.com>
 //
 
-    static LIST_HEAD(trigger_commands);
-    static DEFINE_MUTEX(trigger_cmd_mutex);
-    static struct task_struct *trigger_kthread;
-    static struct llist_head trigger_data_free_list;
-    static DEFINE_MUTEX(trigger_data_kthread_mutex);
-    static int trigger_kthread_fn(void *ignore);
+pub static mut trigger_commands: usize = 0;
+pub static mut trigger_cmd_mutex: usize = 0;
+pub static mut trigger_kthread: *mut c_void = core::ptr::null_mut();
+pub static mut trigger_data_free_list: usize = 0;
+pub static mut trigger_data_kthread_mutex: usize = 0;
+// forward_decl: trigger_kthread_fn;
 #[no_mangle]
 unsafe extern "C" fn trigger_create_kthread_locked() {
-    static void trigger_create_kthread_locked(void)
-    {
     lockdep_assert_held(&trigger_data_kthread_mutex);
     if (!trigger_kthread) {
-    struct task_struct *kthread;
+pub static mut kthread: *mut c_void = core::ptr::null_mut();
     kthread = kthread_create(trigger_kthread_fn, core::ptr::null_mut(),
     "trigger_data_free");
-    if (!IS_ERR(kthread))
+    if (!IS_ERR(kthread)) {
     WRITE_ONCE(trigger_kthread, kthread);
+    }
     }
     }
 #[no_mangle]
 unsafe extern "C" fn trigger_data_free_one(data: *mut event_trigger_data) {
-    static void trigger_data_free_one(struct event_trigger_data *data)
-    {
-    if (data.private_data_free)
+    if (data.private_data_free) {
     data.private_data_free(data);
+    }
     kfree(data);
     }
 #[no_mangle]
 unsafe extern "C" fn trigger_data_free_queued_locked() {
-    static void trigger_data_free_queued_locked(void)
-    {
-    struct event_trigger_data *data, *tmp;
-    struct llist_node *llnodes;
+    let mut data = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
+pub static mut llnodes: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&trigger_data_kthread_mutex);
     llnodes = llist_del_all(&trigger_data_free_list);
-    if (!llnodes)
+    if (!llnodes) {
     return;
+    }
     tracepoint_synchronize_unregister();
-    llist_for_each_entry_safe(data, tmp, llnodes, llist)
+    llist_for_each_entry_safe(data, tmp, llnodes, llist) {
     trigger_data_free_one(data);
+    }
     }
 // Bulk garbage collection of event_trigger_data elements
 #[no_mangle]
 unsafe extern "C" fn trigger_kthread_fn(ignore: *mut c_void) -> c_int {
-    static int trigger_kthread_fn(void *ignore)
-    {
-    struct event_trigger_data *data, *tmp;
-    struct llist_node *llnodes;
+    let mut data = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
+pub static mut llnodes: *mut c_void = core::ptr::null_mut();
 // Once this task starts, it lives forever
     for (;;) {
     set_current_state(TASK_INTERRUPTIBLE);
-    if (llist_empty(&trigger_data_free_list))
+    if (llist_empty(&trigger_data_free_list)) {
     schedule();
+    }
     __set_current_state(TASK_RUNNING);
     llnodes = llist_del_all(&trigger_data_free_list);
 // make sure current triggers exit before free
     tracepoint_synchronize_unregister();
-    llist_for_each_entry_safe(data, tmp, llnodes, llist)
+    llist_for_each_entry_safe(data, tmp, llnodes, llist) {
     trigger_data_free_one(data);
+    }
     }
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn trigger_data_free(data: *mut event_trigger_data) {
-    void trigger_data_free(struct event_trigger_data *data)
-    {
-    if (!data)
+    if (!data) {
     return;
-    if (data.cmd_ops.set_filter)
+    }
+    if (data.cmd_ops.set_filter) {
     data.cmd_ops.set_filter(core::ptr::null_mut(), data, core::ptr::null_mut());
+    }
 //
 // Boot-time trigger registration can fail before kthread creation
 // works. Keep the deferred-free semantics during boot and let late
@@ -137,28 +387,28 @@ pub unsafe extern "C" fn trigger_data_free(data: *mut event_trigger_data) {
     wake_up_process(trigger_kthread);
     }
 #[no_mangle]
-unsafe extern "C" fn trigger_data_free_init() -> int __init {
-    static int __init trigger_data_free_init(void)
-    {
+unsafe extern "C" fn trigger_data_free_init() -> c_int {
     guard(mutex)(&trigger_data_kthread_mutex);
-    if (llist_empty(&trigger_data_free_list))
-    return 0;
-    trigger_create_kthread_locked();
-    if (trigger_kthread)
-    wake_up_process(trigger_kthread);
-    else
-    trigger_data_free_queued_locked();
+    if (llist_empty(&trigger_data_free_list)) {
     return 0;
     }
-    late_initcall(trigger_data_free_init);
-    static inline void data_ops_trigger(struct event_trigger_data *data,
-    struct trace_buffer *buffer,  void *rec,
-    struct ring_buffer_event *event)
-    {
-    const struct event_command *cmd_ops = data.cmd_ops;
+    trigger_create_kthread_locked();
+    if (trigger_kthread) {
+    wake_up_process(trigger_kthread);
+    }
+    else {
+    trigger_data_free_queued_locked();
+    }
+    return 0;
+    }
+    late_initcall!(trigger_data_free_init);
+#[no_mangle]
+pub unsafe extern "C" fn data_ops_trigger(data: *mut event_trigger_data, buffer: *mut trace_buffer, rec: *mut c_void, event: *mut ring_buffer_event) {
+    let mut cmd_ops = data.cmd_ops;
     if (data.flags & EVENT_TRIGGER_FL_COUNT) {
-    if (!cmd_ops.count_func(data, buffer, rec, event))
+    if (!cmd_ops.count_func(data, buffer, rec, event)) {
     return;
+    }
     }
     cmd_ops.trigger(data, buffer, rec, event);
     }
@@ -189,25 +439,26 @@ unsafe extern "C" fn trigger_data_free_init() -> int __init {
 // any trigger that should be deferred, ETT_NONE if nothing to defer.
 //
     enum event_trigger_type
-    event_triggers_call(struct trace_event_file *file,
-    struct trace_buffer *buffer, void *rec,
-    struct ring_buffer_event *event)
+    event_triggers_call(trace_event_file *file, trace_buffer *buffer, void *rec, ring_buffer_event *event)
     {
-    struct event_trigger_data *data;
-    let mut tt: enum event_trigger_type = ETT_NONE;
-    struct event_filter *filter;
-    if (list_empty(&file.triggers))
+pub static mut data: *mut c_void = core::ptr::null_mut();
+pub static mut tt: event_trigger_type = 0;
+pub static mut filter: *mut c_void = core::ptr::null_mut();
+    if (list_empty(&file.triggers)) {
     return tt;
+    }
     list_for_each_entry_rcu(data, &file.triggers, list) {
-    if (data.paused)
+    if (data.paused) {
     continue;
+    }
     if (!rec) {
     data_ops_trigger(data, buffer, rec, event);
     continue;
     }
     filter = rcu_dereference_sched(data.filter);
-    if (filter && !filter_match_preds(filter, rec))
+    if (filter && !filter_match_preds(filter, rec)) {
     continue;
+    }
     if (event_command_post_trigger(data.cmd_ops)) {
     tt |= data.cmd_ops.trigger_type;
     continue;
@@ -219,22 +470,23 @@ unsafe extern "C" fn trigger_data_free_init() -> int __init {
     EXPORT_SYMBOL_GPL(event_triggers_call);
 #[no_mangle]
 pub unsafe extern "C" fn __trace_trigger_soft_disabled(file: *mut trace_event_file) -> bool {
-    bool __trace_trigger_soft_disabled(struct trace_event_file *file)
-    {
-    let mut eflags: c_ulong = file.flags;
-    if (eflags & EVENT_FILE_FL_TRIGGER_MODE)
+pub static mut eflags: c_ulong = 0;
+    if (eflags & EVENT_FILE_FL_TRIGGER_MODE) {
     event_triggers_call(file, core::ptr::null_mut(), core::ptr::null_mut(), core::ptr::null_mut());
-    if (eflags & EVENT_FILE_FL_SOFT_DISABLED)
+    }
+    if (eflags & EVENT_FILE_FL_SOFT_DISABLED) {
     return true;
-    if (eflags & EVENT_FILE_FL_PID_FILTER)
+    }
+    if (eflags & EVENT_FILE_FL_PID_FILTER) {
     return trace_event_ignore_this_pid(file);
+    }
     return false;
     }
     EXPORT_SYMBOL_GPL(__trace_trigger_soft_disabled);
 //
 // event_triggers_post_call - Call 'post_triggers' for a trace event
 // @file: The trace_event_file associated with the event
-// @tt: enum event_trigger_type containing a set bit for each trigger to invoke
+// @tt: event_trigger_type containing a set bit for each trigger to invoke
 //
 // For each trigger associated with an event, invoke the trigger
 // function registered with the associated trigger command, if the
@@ -243,23 +495,23 @@ pub unsafe extern "C" fn __trace_trigger_soft_disabled(file: *mut trace_event_fi
 //
 // Called from tracepoint handlers (with rcu_read_lock_sched() held).
 //
-    void
-    event_triggers_post_call(struct trace_event_file *file,
-    enum event_trigger_type tt)
-    {
-    struct event_trigger_data *data;
+#[no_mangle]
+pub unsafe extern "C" fn event_triggers_post_call(file: *mut trace_event_file, tt: event_trigger_type) {
+pub static mut data: *mut c_void = core::ptr::null_mut();
     list_for_each_entry_rcu(data, &file.triggers, list) {
-    if (data.paused)
+    if (data.paused) {
     continue;
-    if (data.cmd_ops.trigger_type & tt)
+    }
+    if (data.cmd_ops.trigger_type & tt) {
     data_ops_trigger(data, core::ptr::null_mut(), core::ptr::null_mut(), core::ptr::null_mut());
+    }
     }
     }
     EXPORT_SYMBOL_GPL(event_triggers_post_call);
 
-    static void *trigger_next(struct seq_file *m, void *t, loff_t *pos)
-    {
-    struct trace_event_file *event_file = event_file_data(m.private);
+#[no_mangle]
+pub unsafe extern "C" fn trigger_next(m: *mut seq_file, t: *mut c_void, pos: *mut loff_t) -> *mut c_void {
+    let mut event_file = event_file_data(m.private);
     if (t == SHOW_AVAILABLE_TRIGGERS) {
     (*pos)++;
     return core::ptr::null_mut();
@@ -268,86 +520,80 @@ pub unsafe extern "C" fn __trace_trigger_soft_disabled(file: *mut trace_event_fi
     }
 #[no_mangle]
 unsafe extern "C" fn check_user_trigger(file: *mut trace_event_file) -> bool {
-    static bool check_user_trigger(struct trace_event_file *file)
-    {
-    struct event_trigger_data *data;
+pub static mut data: *mut c_void = core::ptr::null_mut();
     list_for_each_entry_rcu(data, &file.triggers, list,
     lockdep_is_held(&event_mutex)) {
-    if (data.flags & EVENT_TRIGGER_FL_PROBE)
+    if (data.flags & EVENT_TRIGGER_FL_PROBE) {
     continue;
+    }
     return true;
     }
     return false;
     }
-    static void *trigger_start(struct seq_file *m, loff_t *pos)
-    {
-    struct trace_event_file *event_file;
+#[no_mangle]
+pub unsafe extern "C" fn trigger_start(m: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
+pub static mut event_file: *mut c_void = core::ptr::null_mut();
 // ->stop() is called even if ->start() fails
     mutex_lock(&event_mutex);
     event_file = event_file_file(m.private);
-    if (unlikely(!event_file))
+    if (unlikely(!event_file)) {
     return ERR_PTR(-ENODEV);
-    if (list_empty(&event_file.triggers) || !check_user_trigger(event_file))
-    return *pos == 0 ? SHOW_AVAILABLE_TRIGGERS : core::ptr::null_mut();
+    }
+    if (list_empty(&event_file.triggers) || !check_user_trigger(event_file)) {
+    let mut pos = = 0 ? SHOW_AVAILABLE_TRIGGERS : core::ptr::null_mut();
+    }
     return seq_list_start(&event_file.triggers, *pos);
     }
 #[no_mangle]
 unsafe extern "C" fn trigger_stop(m: *mut seq_file, t: *mut c_void) {
-    static void trigger_stop(struct seq_file *m, void *t)
-    {
     mutex_unlock(&event_mutex);
     }
 #[no_mangle]
 unsafe extern "C" fn trigger_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int trigger_show(struct seq_file *m, void *v)
-    {
-    struct event_trigger_data *data;
-    struct event_command *p;
+pub static mut data: *mut c_void = core::ptr::null_mut();
+pub static mut p: *mut c_void = core::ptr::null_mut();
     if (v == SHOW_AVAILABLE_TRIGGERS) {
     seq_puts(m, "# Available triggers:\n");
     seq_putc(m, '#');
     mutex_lock(&trigger_cmd_mutex);
-    list_for_each_entry_reverse(p, &trigger_commands, list)
+    list_for_each_entry_reverse(p, &trigger_commands, list) {
     seq_printf(m, " %s", p.name);
+    }
     seq_putc(m, '\n');
     mutex_unlock(&trigger_cmd_mutex);
     return 0;
     }
-    data = list_entry(v, struct event_trigger_data, list);
+    data = list_entry(v, event_trigger_data, list);
     data.cmd_ops.print(m, data);
     return 0;
     }
-    static const struct seq_operations event_triggers_seq_ops = {
-    .start = trigger_start,
-    .next = trigger_next,
-    .stop = trigger_stop,
-    .show = trigger_show,
-    };
+pub static mut seq_operations: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn event_trigger_regex_open(inode: *mut inode, file: *mut file) -> c_int {
-    static int event_trigger_regex_open(struct inode *inode, struct file *file)
-    {
-    int ret;
+    let mut ret = 0;
     ret = security_locked_down(LOCKDOWN_TRACEFS);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     guard(mutex)(&event_mutex);
-    if (unlikely(!event_file_file(file)))
+    if (unlikely(!event_file_file(file))) {
     return -ENODEV;
+    }
     if ((file.f_mode & FMODE_WRITE) &&
     (file.f_flags & O_TRUNC)) {
-    struct trace_event_file *event_file;
-    struct event_command *p;
+pub static mut event_file: *mut c_void = core::ptr::null_mut();
+pub static mut p: *mut c_void = core::ptr::null_mut();
     event_file = event_file_data(file);
     list_for_each_entry(p, &trigger_commands, list) {
-    if (p.unreg_all)
+    if (p.unreg_all) {
     p.unreg_all(event_file);
+    }
     }
     }
     if (file.f_mode & FMODE_READ) {
     ret = seq_open(file, &event_triggers_seq_ops);
     if (!ret) {
-    struct seq_file *m = file.private_data;
+    let mut m = file.private_data;
     m.private = file;
     }
     }
@@ -355,94 +601,86 @@ unsafe extern "C" fn event_trigger_regex_open(inode: *mut inode, file: *mut file
     }
 #[no_mangle]
 pub unsafe extern "C" fn trigger_process_regex(file: *mut trace_event_file, buff: *mut c_char) -> c_int {
-    int trigger_process_regex(struct trace_event_file *file, char *buff)
-    {
-    char *command, *next;
-    struct event_command *p;
+    let mut command = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+pub static mut p: *mut c_void = core::ptr::null_mut();
     next = buff = strim(buff);
     command = strsep(&next, ": \t");
     if (next) {
     next = skip_spaces(next);
-    if (!*next)
+    if (!*next) {
     next = core::ptr::null_mut();
+    }
     }
     command = (command[0] != '!') ? command : command + 1;
     guard(mutex)(&trigger_cmd_mutex);
     list_for_each_entry(p, &trigger_commands, list) {
-    if (strcmp(p.name, command) == 0)
+    if (strcmp(p.name, command) == 0) {
     return p.parse(p, file, buff, command, next);
     }
+    }
     return -EINVAL;
     }
-    static ssize_t event_trigger_regex_write(struct file *file,
-    const char __user *ubuf,
-    size_t cnt, loff_t *ppos)
-    {
-    struct trace_event_file *event_file;
-    ssize_t ret;
+#[no_mangle]
+pub unsafe extern "C" fn event_trigger_regex_write(file: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
+pub static mut event_file: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     char *buf __free(kfree) = core::ptr::null_mut();
-    if (!cnt)
+    if (!cnt) {
     return 0;
-    if (cnt >= PAGE_SIZE)
+    }
+    if (cnt >= PAGE_SIZE) {
     return -EINVAL;
+    }
     buf = memdup_user_nul(ubuf, cnt);
-    if (IS_ERR(buf))
+    if (IS_ERR(buf)) {
     return PTR_ERR(buf);
+    }
     guard(mutex)(&event_mutex);
     event_file = event_file_file(file);
-    if (unlikely(!event_file))
+    if (unlikely(!event_file)) {
     return -ENODEV;
+    }
     ret = trigger_process_regex(event_file, buf);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
 // ppos += cnt;
     return cnt;
     }
 #[no_mangle]
 unsafe extern "C" fn event_trigger_regex_release(inode: *mut inode, file: *mut file) -> c_int {
-    static int event_trigger_regex_release(struct inode *inode, struct file *file)
-    {
-    if (file.f_mode & FMODE_READ)
+    if (file.f_mode & FMODE_READ) {
     seq_release(inode, file);
+    }
     return 0;
     }
-    static ssize_t
-    event_trigger_write(struct file *filp, const char __user *ubuf,
-    size_t cnt, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn event_trigger_write(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
     return event_trigger_regex_write(filp, ubuf, cnt, ppos);
     }
-    static int
-    event_trigger_open(struct inode *inode, struct file *filp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn event_trigger_open(inode: *mut inode, filp: *mut file) -> c_int {
 // Checks for tracefs lockdown
     return event_trigger_regex_open(inode, filp);
     }
-    static int
-    event_trigger_release(struct inode *inode, struct file *file)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn event_trigger_release(inode: *mut inode, file: *mut file) -> c_int {
     return event_trigger_regex_release(inode, file);
     }
-    const struct file_operations event_trigger_fops = {
-    .open = event_trigger_open,
-    .read = seq_read,
-    .write = event_trigger_write,
-    .llseek = tracing_lseek,
-    .release = event_trigger_release,
-    };
+pub static mut file_operations: usize = 0;
 //
 // Currently we only register event commands from __init, so mark this
 // __init too.
 //
 #[no_mangle]
 pub unsafe extern "C" fn register_event_command(cmd: *mut event_command) -> __init int {
-    __init int register_event_command(struct event_command *cmd)
-    {
-    struct event_command *p;
+pub static mut p: *mut c_void = core::ptr::null_mut();
     guard(mutex)(&trigger_cmd_mutex);
     list_for_each_entry(p, &trigger_commands, list) {
-    if (strcmp(cmd.name, p.name) == 0)
+    if (strcmp(cmd.name, p.name) == 0) {
     return -EBUSY;
+    }
     }
     list_add(&cmd.list, &trigger_commands);
     return 0;
@@ -453,9 +691,8 @@ pub unsafe extern "C" fn register_event_command(cmd: *mut event_command) -> __in
 //
 #[no_mangle]
 pub unsafe extern "C" fn unregister_event_command(cmd: *mut event_command) -> __init int {
-    __init int unregister_event_command(struct event_command *cmd)
-    {
-    struct event_command *p, *n;
+    let mut p = core::ptr::null_mut();
+    let mut n = core::ptr::null_mut();
     guard(mutex)(&trigger_cmd_mutex);
     list_for_each_entry_safe(p, n, &trigger_commands, list) {
     if (strcmp(cmd.name, p.name) == 0) {
@@ -482,14 +719,14 @@ pub unsafe extern "C" fn unregister_event_command(cmd: *mut event_command) -> __
 //
 // Returns false if @data->count is zero, otherwise true.
 //
-    bool event_trigger_count(struct event_trigger_data *data,
-    struct trace_buffer *buffer,  void *rec,
-    struct ring_buffer_event *event)
-    {
-    if (!data.count)
+#[no_mangle]
+pub unsafe extern "C" fn event_trigger_count(data: *mut event_trigger_data, buffer: *mut trace_buffer, rec: *mut c_void, event: *mut ring_buffer_event) -> bool {
+    if (!data.count) {
     return false;
-    if (data.count != -1)
+    }
+    if (data.count != -1) {
     (data.count)--;
+    }
     return true;
     }
 //
@@ -506,20 +743,22 @@ pub unsafe extern "C" fn unregister_event_command(cmd: *mut event_command) -> __
 //
 // Return: 0 on success, errno otherwise
 //
-    static int
-    event_trigger_print(const char *name, struct seq_file *m,
-    void *data, char *filter_str)
-    {
-    let mut count: c_long = (long)data;
+#[no_mangle]
+pub unsafe extern "C" fn event_trigger_print(name: *mut c_char, m: *mut seq_file, data: *mut c_void, filter_str: *mut c_char) -> c_int {
+pub static mut count: c_long = 0;
     seq_puts(m, name);
-    if (count == -1)
+    if (count == -1) {
     seq_puts(m, ":unlimited");
-    else
+    }
+    else {
     seq_printf(m, ":count=%ld", count);
-    if (filter_str)
+    }
+    if (filter_str) {
     seq_printf(m, " if %s\n", filter_str);
-    else
+    }
+    else {
     seq_putc(m, '\n');
+    }
     return 0;
     }
 //
@@ -535,9 +774,7 @@ pub unsafe extern "C" fn unregister_event_command(cmd: *mut event_command) -> __
 //
 #[no_mangle]
 pub unsafe extern "C" fn event_trigger_init(data: *mut event_trigger_data) -> c_int {
-    int event_trigger_init(struct event_trigger_data *data)
-    {
-    data.ref++;
+    data.ref += 1;
     return 0;
     }
 //
@@ -549,27 +786,29 @@ pub unsafe extern "C" fn event_trigger_init(data: *mut event_trigger_data) -> c_
 // Usually used directly as the @free method in event trigger
 // implementations.
 //
-    static void
-    event_trigger_free(struct event_trigger_data *data)
-    {
-    if (WARN_ON_ONCE(data.ref <= 0))
+#[no_mangle]
+pub unsafe extern "C" fn event_trigger_free(data: *mut event_trigger_data) {
+    if (WARN_ON_ONCE!(data.ref <= 0)) {
     return;
-    data.ref--;
-    if (!data.ref)
+    }
+    data.ref -= 1;
+    if (!data.ref) {
     trigger_data_free(data);
     }
-    int trace_event_trigger_enable_disable(struct trace_event_file *file,
-    int trigger_enable)
-    {
-    let mut ret: c_int = 0;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn trace_event_trigger_enable_disable(file: *mut trace_event_file, trigger_enable: c_int) -> c_int {
+pub static mut ret: c_int = 0;
     if (trigger_enable) {
-    if (atomic_inc_return(&file.tm_ref) > 1)
+    if (atomic_inc_return(&file.tm_ref) > 1) {
     return ret;
+    }
     set_bit(EVENT_FILE_FL_TRIGGER_MODE_BIT, &file.flags);
     ret = trace_event_enable_disable(file, 1, 1);
     } else {
-    if (atomic_dec_return(&file.tm_ref) > 0)
+    if (atomic_dec_return(&file.tm_ref) > 0) {
     return ret;
+    }
     clear_bit(EVENT_FILE_FL_TRIGGER_MODE_BIT, &file.flags);
     ret = trace_event_enable_disable(file, 0, 1);
     }
@@ -588,17 +827,18 @@ pub unsafe extern "C" fn event_trigger_init(data: *mut event_trigger_data) -> c_
 //
 // Must be called with event_mutex held.
 //
-    void
-    clear_event_triggers(struct trace_array *tr)
-    {
-    struct trace_event_file *file;
+#[no_mangle]
+pub unsafe extern "C" fn clear_event_triggers(tr: *mut trace_array) {
+pub static mut file: *mut c_void = core::ptr::null_mut();
     list_for_each_entry(file, &tr.events, list) {
-    struct event_trigger_data *data, *n;
+    let mut data = core::ptr::null_mut();
+    let mut n = core::ptr::null_mut();
     list_for_each_entry_safe(data, n, &file.triggers, list) {
     trace_event_trigger_enable_disable(file, 0);
     list_del_rcu(&data.list);
-    if (data.cmd_ops.free)
+    if (data.cmd_ops.free) {
     data.cmd_ops.free(data);
+    }
     }
     }
     }
@@ -614,10 +854,8 @@ pub unsafe extern "C" fn event_trigger_init(data: *mut event_trigger_data) -> c_
 //
 #[no_mangle]
 pub unsafe extern "C" fn update_cond_flag(file: *mut trace_event_file) {
-    void update_cond_flag(struct trace_event_file *file)
-    {
-    struct event_trigger_data *data;
-    let mut set_cond: bool = false;
+pub static mut data: *mut c_void = core::ptr::null_mut();
+pub static mut set_cond: bool = false;
     lockdep_assert_held(&event_mutex);
     list_for_each_entry(data, &file.triggers, list) {
     if (data.filter || event_command_post_trigger(data.cmd_ops) ||
@@ -626,10 +864,12 @@ pub unsafe extern "C" fn update_cond_flag(file: *mut trace_event_file) {
     break;
     }
     }
-    if (set_cond)
+    if (set_cond) {
     set_bit(EVENT_FILE_FL_TRIGGER_COND_BIT, &file.flags);
-    else
+    }
+    else {
     clear_bit(EVENT_FILE_FL_TRIGGER_COND_BIT, &file.flags);
+    }
     }
 //
 // register_trigger - Generic event_command @reg implementation
@@ -644,21 +884,21 @@ pub unsafe extern "C" fn update_cond_flag(file: *mut trace_event_file) {
 //
 // Return: 0 on success, errno otherwise
 //
-    static int register_trigger(char *glob,
-    struct event_trigger_data *data,
-    struct trace_event_file *file)
-    {
-    struct event_trigger_data *test;
-    let mut ret: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn register_trigger(glob: *mut c_char, data: *mut event_trigger_data, file: *mut trace_event_file) -> c_int {
+pub static mut test: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     lockdep_assert_held(&event_mutex);
     list_for_each_entry(test, &file.triggers, list) {
-    if (test.cmd_ops.trigger_type == data.cmd_ops.trigger_type)
+    if (test.cmd_ops.trigger_type == data.cmd_ops.trigger_type) {
     return -EEXIST;
+    }
     }
     if (data.cmd_ops.init) {
     ret = data.cmd_ops.init(data);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     }
     list_add_rcu(&data.list, &file.triggers);
     update_cond_flag(file);
@@ -672,11 +912,9 @@ pub unsafe extern "C" fn update_cond_flag(file: *mut trace_event_file) {
 //
 // True if the trigger was found and unregistered, else false.
 //
-    static bool try_unregister_trigger(char *glob,
-    struct event_trigger_data *test,
-    struct trace_event_file *file)
-    {
-    struct event_trigger_data *data = core::ptr::null_mut(), *iter;
+#[no_mangle]
+pub unsafe extern "C" fn try_unregister_trigger(glob: *mut c_char, test: *mut event_trigger_data, file: *mut trace_event_file) -> bool {
+    let mut data = core::ptr::null_mut(), *iter;
     lockdep_assert_held(&event_mutex);
     list_for_each_entry(iter, &file.triggers, list) {
     if (iter.cmd_ops.trigger_type == test.cmd_ops.trigger_type) {
@@ -688,8 +926,9 @@ pub unsafe extern "C" fn update_cond_flag(file: *mut trace_event_file) {
     }
     }
     if (data) {
-    if (data.cmd_ops.free)
+    if (data.cmd_ops.free) {
     data.cmd_ops.free(data);
+    }
     return true;
     }
     return false;
@@ -705,10 +944,8 @@ pub unsafe extern "C" fn update_cond_flag(file: *mut trace_event_file) {
 // Usually used directly as the @unreg method in event command
 // implementations.
 //
-    static void unregister_trigger(char *glob,
-    struct event_trigger_data *test,
-    struct trace_event_file *file)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn unregister_trigger(glob: *mut c_char, test: *mut event_trigger_data, file: *mut trace_event_file) {
     try_unregister_trigger(glob, test, file);
     }
 //
@@ -798,8 +1035,6 @@ pub unsafe extern "C" fn update_cond_flag(file: *mut trace_event_file) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn event_trigger_check_remove(glob: *const c_char) -> bool {
-    bool event_trigger_check_remove(const char *glob)
-    {
     return (glob && glob[0] == '!') ? true : false;
     }
 //
@@ -816,8 +1051,6 @@ pub unsafe extern "C" fn event_trigger_check_remove(glob: *const c_char) -> bool
 //
 #[no_mangle]
 pub unsafe extern "C" fn event_trigger_empty_param(param: *const c_char) -> bool {
-    bool event_trigger_empty_param(const char *param)
-    {
     return !param;
     }
 //
@@ -846,14 +1079,14 @@ pub unsafe extern "C" fn event_trigger_empty_param(param: *const c_char) -> bool
 //
 // Return: 0 on success, errno otherwise
 //
-    int event_trigger_separate_filter(char *param_and_filter, char **param,
-    char **filter, bool param_required)
-    {
-    let mut ret: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn event_trigger_separate_filter(param_and_filter: *mut c_char, param: *mut *mut c_char, filter: *mut *mut c_char, param_required: bool) -> c_int {
+pub static mut ret: c_int = 0;
 // param = *filter = NULL;
     if (!param_and_filter) {
-    if (param_required)
+    if (param_required) {
     ret = -EINVAL;
+    }
     return ret;
     }
 //
@@ -877,8 +1110,9 @@ pub unsafe extern "C" fn event_trigger_empty_param(param: *const c_char) -> bool
 //
     if (param_and_filter) {
 // filter = skip_spaces(param_and_filter);
-    if (!**filter)
+    if (!**filter) {
 // filter = NULL;
+    }
     }
     return ret;
     }
@@ -902,20 +1136,19 @@ pub unsafe extern "C" fn event_trigger_empty_param(param: *const c_char) -> bool
 //
 // Return: The trigger_data object success, NULL otherwise
 //
-    struct event_trigger_data *trigger_data_alloc(struct event_command *cmd_ops,
-    char *cmd,
-    char *param,
-    void *private_data)
-    {
-    struct event_trigger_data *trigger_data;
+#[no_mangle]
+pub unsafe extern "C" fn trigger_data_alloc(cmd_ops: *mut event_command, cmd: *mut c_char, param: *mut c_char, private_data: *mut c_void) -> *mut c_void {
+pub static mut trigger_data: *mut c_void = core::ptr::null_mut();
     trigger_data = kzalloc_obj(*trigger_data);
-    if (!trigger_data)
+    if (!trigger_data) {
     return core::ptr::null_mut();
+    }
     trigger_data.count = -1;
     trigger_data.cmd_ops = cmd_ops;
     trigger_data.private_data = private_data;
-    if (param && cmd_ops.count_func)
+    if (param && cmd_ops.count_func) {
     trigger_data.flags |= EVENT_TRIGGER_FL_COUNT;
+    }
     INIT_LIST_HEAD(&trigger_data.list);
     INIT_LIST_HEAD(&trigger_data.named_list);
     RCU_INIT_POINTER(trigger_data.filter, core::ptr::null_mut());
@@ -931,15 +1164,15 @@ pub unsafe extern "C" fn event_trigger_empty_param(param: *const c_char) -> bool
 //
 // Return: 0 on success, errno otherwise
 //
-    int event_trigger_parse_num(char *param,
-    struct event_trigger_data *trigger_data)
-    {
-    char *number;
-    let mut ret: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn event_trigger_parse_num(param: *mut c_char, trigger_data: *mut event_trigger_data) -> c_int {
+pub static mut number: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     if (param) {
     number = strsep(&param, ":");
-    if (!strlen(number))
+    if (!strlen(number)) {
     return -EINVAL;
+    }
 //
 // We use the callback data field (which is a pointer)
 // as our counter.
@@ -960,13 +1193,11 @@ pub unsafe extern "C" fn event_trigger_empty_param(param: *const c_char) -> bool
 //
 // Return: 0 on success, errno otherwise
 //
-    int event_trigger_set_filter(struct event_command *cmd_ops,
-    struct trace_event_file *file,
-    char *param,
-    struct event_trigger_data *trigger_data)
-    {
-    if (param && cmd_ops.set_filter)
+#[no_mangle]
+pub unsafe extern "C" fn event_trigger_set_filter(cmd_ops: *mut event_command, file: *mut trace_event_file, param: *mut c_char, trigger_data: *mut event_trigger_data) -> c_int {
+    if (param && cmd_ops.set_filter) {
     return cmd_ops.set_filter(param, trigger_data, file);
+    }
     return 0;
     }
 //
@@ -976,11 +1207,11 @@ pub unsafe extern "C" fn event_trigger_empty_param(param: *const c_char) -> bool
 //
 // Reset the filter for the trigger to no filter.
 //
-    void event_trigger_reset_filter(struct event_command *cmd_ops,
-    struct event_trigger_data *trigger_data)
-    {
-    if (cmd_ops.set_filter)
+#[no_mangle]
+pub unsafe extern "C" fn event_trigger_reset_filter(cmd_ops: *mut event_command, trigger_data: *mut event_trigger_data) {
+    if (cmd_ops.set_filter) {
     cmd_ops.set_filter(core::ptr::null_mut(), trigger_data, core::ptr::null_mut());
+    }
     }
 //
 // event_trigger_register - register an event trigger
@@ -994,11 +1225,8 @@ pub unsafe extern "C" fn event_trigger_empty_param(param: *const c_char) -> bool
 //
 // Return: 0 on success, errno otherwise
 //
-    int event_trigger_register(struct event_command *cmd_ops,
-    struct trace_event_file *file,
-    char *glob,
-    struct event_trigger_data *trigger_data)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn event_trigger_register(cmd_ops: *mut event_command, file: *mut trace_event_file, glob: *mut c_char, trigger_data: *mut event_trigger_data) -> c_int {
     return cmd_ops.reg(glob, trigger_data, file);
     }
 //
@@ -1011,11 +1239,8 @@ pub unsafe extern "C" fn event_trigger_empty_param(param: *const c_char) -> bool
 // Unregister an event trigger.  The @cmd_ops are used to call the
 // cmd_ops->unreg() function which actually does the unregistration.
 //
-    void event_trigger_unregister(struct event_command *cmd_ops,
-    struct trace_event_file *file,
-    char *glob,
-    struct event_trigger_data *trigger_data)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn event_trigger_unregister(cmd_ops: *mut event_command, file: *mut trace_event_file, glob: *mut c_char, trigger_data: *mut event_trigger_data) {
     cmd_ops.unreg(glob, trigger_data, file);
     }
 //
@@ -1036,43 +1261,46 @@ pub unsafe extern "C" fn event_trigger_empty_param(param: *const c_char) -> bool
 //
 // Return: 0 on success, errno otherwise
 //
-    static int
-    event_trigger_parse(struct event_command *cmd_ops,
-    struct trace_event_file *file,
-    char *glob, char *cmd, char *param_and_filter)
-    {
-    struct event_trigger_data *trigger_data;
-    char *param, *filter;
-    bool remove;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn event_trigger_parse(cmd_ops: *mut event_command, file: *mut trace_event_file, glob: *mut c_char, cmd: *mut c_char, param_and_filter: *mut c_char) -> c_int {
+pub static mut trigger_data: *mut c_void = core::ptr::null_mut();
+    let mut param = core::ptr::null_mut();
+    let mut filter = core::ptr::null_mut();
+    let mut remove = 0;
+    let mut ret = 0;
     remove = event_trigger_check_remove(glob);
     ret = event_trigger_separate_filter(param_and_filter, &param, &filter, false);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     ret = -ENOMEM;
     trigger_data = trigger_data_alloc(cmd_ops, cmd, param, file);
-    if (!trigger_data)
+    if (!trigger_data) {
     return ret;
+    }
     if (remove) {
     event_trigger_unregister(cmd_ops, file, glob+1, trigger_data);
     trigger_data_free(trigger_data);
     return 0;
     }
     ret = event_trigger_parse_num(param, trigger_data);
-    if (ret)
-    goto out_free;
+    if (ret) {
+// goto;
+    }
     ret = event_trigger_set_filter(cmd_ops, file, filter, trigger_data);
-    if (ret < 0)
-    goto out_free;
+    if (ret < 0) {
+// goto;
+    }
 // Up the trigger_data count to make sure reg doesn't free it on failure
     event_trigger_init(trigger_data);
     ret = event_trigger_register(cmd_ops, file, glob, trigger_data);
-    if (ret)
-    goto out_free;
+    if (ret) {
+// goto;
+    }
 // Down the counter of trigger_data or free it if not used anymore
     event_trigger_free(trigger_data);
     return ret;
-    out_free:
+// label;
     event_trigger_reset_filter(cmd_ops, trigger_data);
     trigger_data_free(trigger_data);
     return ret;
@@ -1093,21 +1321,22 @@ pub unsafe extern "C" fn event_trigger_empty_param(param: *const c_char) -> bool
 //
 // Return: 0 on success, errno otherwise
 //
-    int set_trigger_filter(char *filter_str,
-    struct event_trigger_data *trigger_data,
-    struct trace_event_file *file)
-    {
-    struct event_trigger_data *data = trigger_data;
-    struct event_filter *filter = core::ptr::null_mut(), *tmp;
-    let mut ret: c_int = -EINVAL;
-    char *s;
-    if (!filter_str) /* clear the current filter */
-    goto assign;
+#[no_mangle]
+pub unsafe extern "C" fn set_trigger_filter(filter_str: *mut c_char, trigger_data: *mut event_trigger_data, file: *mut trace_event_file) -> c_int {
+    let mut data = trigger_data;
+    let mut filter = core::ptr::null_mut(), *tmp;
+pub static mut ret: c_int = 0;
+pub static mut s: *mut c_void = core::ptr::null_mut();
+    if (!filter_str) /* clear the current filter */ {
+// goto;
+    }
     s = strsep(&filter_str, " \t");
-    if (!strlen(s) || strcmp(s, "if") != 0)
+    if (!strlen(s) || strcmp(s, "if") != 0) {
     return ret;
-    if (!filter_str)
+    }
+    if (!filter_str) {
     return ret;
+    }
 // The filter is for the 'trigger' event, not the triggered event
     ret = create_event_filter(file.tr, file.event_call,
     filter_str, true, &filter);
@@ -1120,7 +1349,7 @@ pub unsafe extern "C" fn event_trigger_empty_param(param: *const c_char) -> bool
 // If create_event_filter() fails, filter still needs to be freed.
 // Which the calling code will do with data->filter.
 //
-    assign:
+// label;
     tmp = rcu_access_pointer(data.filter);
     rcu_assign_pointer(data.filter, filter);
     if (tmp) {
@@ -1130,8 +1359,9 @@ pub unsafe extern "C" fn event_trigger_empty_param(param: *const c_char) -> bool
 // and then this path will be called. Avoid the synchronization
 // in that case.
 //
-    if (system_state != SYSTEM_BOOTING)
+    if (system_state != SYSTEM_BOOTING) {
     tracepoint_synchronize_unregister();
+    }
     free_event_filter(tmp);
     }
     kfree(data.filter_str);
@@ -1146,7 +1376,7 @@ pub unsafe extern "C" fn event_trigger_empty_param(param: *const c_char) -> bool
     }
     return ret;
     }
-    static LIST_HEAD(named_triggers);
+pub static mut named_triggers: usize = 0;
 //
 // find_named_trigger - Find the common named trigger associated with @name
 // @name: The name of the set of named triggers to find the common data for
@@ -1161,16 +1391,19 @@ pub unsafe extern "C" fn event_trigger_empty_param(param: *const c_char) -> bool
 // Return: the common trigger data for the given named trigger on
 // success, NULL otherwise.
 //
-    struct event_trigger_data *find_named_trigger(const char *name)
-    {
-    struct event_trigger_data *data;
-    if (!name)
+#[no_mangle]
+pub unsafe extern "C" fn find_named_trigger(name: *mut c_char) -> *mut c_void {
+pub static mut data: *mut c_void = core::ptr::null_mut();
+    if (!name) {
     return core::ptr::null_mut();
+    }
     list_for_each_entry(data, &named_triggers, named_list) {
-    if (data.named_data)
+    if (data.named_data) {
     continue;
-    if (strcmp(data.name, name) == 0)
+    }
+    if (strcmp(data.name, name) == 0) {
     return data;
+    }
     }
     return core::ptr::null_mut();
     }
@@ -1182,12 +1415,11 @@ pub unsafe extern "C" fn event_trigger_empty_param(param: *const c_char) -> bool
 //
 #[no_mangle]
 pub unsafe extern "C" fn is_named_trigger(test: *mut event_trigger_data) -> bool {
-    bool is_named_trigger(struct event_trigger_data *test)
-    {
-    struct event_trigger_data *data;
+pub static mut data: *mut c_void = core::ptr::null_mut();
     list_for_each_entry(data, &named_triggers, named_list) {
-    if (test == data)
+    if (test == data) {
     return true;
+    }
     }
     return false;
     }
@@ -1200,11 +1432,10 @@ pub unsafe extern "C" fn is_named_trigger(test: *mut event_trigger_data) -> bool
 //
 #[no_mangle]
 pub unsafe extern "C" fn save_named_trigger(name: *const c_char, data: *mut event_trigger_data) -> c_int {
-    int save_named_trigger(const char *name, struct event_trigger_data *data)
-    {
     data.name = kstrdup(name, GFP_KERNEL);
-    if (!data.name)
+    if (!data.name) {
     return -ENOMEM;
+    }
     list_add(&data.named_list, &named_triggers);
     return 0;
     }
@@ -1214,17 +1445,13 @@ pub unsafe extern "C" fn save_named_trigger(name: *const c_char, data: *mut even
 //
 #[no_mangle]
 pub unsafe extern "C" fn del_named_trigger(data: *mut event_trigger_data) {
-    void del_named_trigger(struct event_trigger_data *data)
-    {
     kfree(data.name);
     data.name = core::ptr::null_mut();
     list_del(&data.named_list);
     }
 #[no_mangle]
 unsafe extern "C" fn __pause_named_trigger(data: *mut event_trigger_data, pause: bool) {
-    static void __pause_named_trigger(struct event_trigger_data *data, bool pause)
-    {
-    struct event_trigger_data *test;
+pub static mut test: *mut c_void = core::ptr::null_mut();
     list_for_each_entry(test, &named_triggers, named_list) {
     if (strcmp(test.name, data.name) == 0) {
     if (pause) {
@@ -1247,8 +1474,6 @@ unsafe extern "C" fn __pause_named_trigger(data: *mut event_trigger_data, pause:
 //
 #[no_mangle]
 pub unsafe extern "C" fn pause_named_trigger(data: *mut event_trigger_data) {
-    void pause_named_trigger(struct event_trigger_data *data)
-    {
     __pause_named_trigger(data, true);
     }
 //
@@ -1262,8 +1487,6 @@ pub unsafe extern "C" fn pause_named_trigger(data: *mut event_trigger_data) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn unpause_named_trigger(data: *mut event_trigger_data) {
-    void unpause_named_trigger(struct event_trigger_data *data)
-    {
     __pause_named_trigger(data, false);
     }
 //
@@ -1278,172 +1501,125 @@ pub unsafe extern "C" fn unpause_named_trigger(data: *mut event_trigger_data) {
 // associates the common trigger data from the first trigger with the
 // given trigger.
 //
-    void set_named_trigger_data(struct event_trigger_data *data,
-    struct event_trigger_data *named_data)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn set_named_trigger_data(data: *mut event_trigger_data, named_data: *mut event_trigger_data) {
     data.named_data = named_data;
     }
-    struct event_trigger_data *
-    get_named_trigger_data(struct event_trigger_data *data)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn get_named_trigger_data(data: *mut event_trigger_data) -> *mut c_void {
     return data.named_data;
     }
-    static void
-    traceon_trigger(struct event_trigger_data *data,
-    struct trace_buffer *buffer, void *rec,
-    struct ring_buffer_event *event)
-    {
-    struct trace_event_file *file = data.private_data;
-    if (WARN_ON_ONCE(!file))
+#[no_mangle]
+pub unsafe extern "C" fn traceon_trigger(data: *mut event_trigger_data, buffer: *mut trace_buffer, rec: *mut c_void, event: *mut ring_buffer_event) {
+    let mut file = data.private_data;
+    if (WARN_ON_ONCE!(!file)) {
     return;
-    if (tracer_tracing_is_on(file.tr))
+    }
+    if (tracer_tracing_is_on(file.tr)) {
     return;
+    }
     tracer_tracing_on(file.tr);
     }
-    static bool
-    traceon_count_func(struct event_trigger_data *data,
-    struct trace_buffer *buffer, void *rec,
-    struct ring_buffer_event *event)
-    {
-    struct trace_event_file *file = data.private_data;
-    if (WARN_ON_ONCE(!file))
+#[no_mangle]
+pub unsafe extern "C" fn traceon_count_func(data: *mut event_trigger_data, buffer: *mut trace_buffer, rec: *mut c_void, event: *mut ring_buffer_event) -> bool {
+    let mut file = data.private_data;
+    if (WARN_ON_ONCE!(!file)) {
     return false;
-    if (tracer_tracing_is_on(file.tr))
+    }
+    if (tracer_tracing_is_on(file.tr)) {
     return false;
-    if (!data.count)
+    }
+    if (!data.count) {
     return false;
-    if (data.count != -1)
+    }
+    if (data.count != -1) {
     (data.count)--;
+    }
     return true;
     }
-    static void
-    traceoff_trigger(struct event_trigger_data *data,
-    struct trace_buffer *buffer, void *rec,
-    struct ring_buffer_event *event)
-    {
-    struct trace_event_file *file = data.private_data;
-    if (WARN_ON_ONCE(!file))
+#[no_mangle]
+pub unsafe extern "C" fn traceoff_trigger(data: *mut event_trigger_data, buffer: *mut trace_buffer, rec: *mut c_void, event: *mut ring_buffer_event) {
+    let mut file = data.private_data;
+    if (WARN_ON_ONCE!(!file)) {
     return;
-    if (!tracer_tracing_is_on(file.tr))
+    }
+    if (!tracer_tracing_is_on(file.tr)) {
     return;
+    }
     tracer_tracing_off(file.tr);
     }
-    static bool
-    traceoff_count_func(struct event_trigger_data *data,
-    struct trace_buffer *buffer, void *rec,
-    struct ring_buffer_event *event)
-    {
-    struct trace_event_file *file = data.private_data;
-    if (WARN_ON_ONCE(!file))
+#[no_mangle]
+pub unsafe extern "C" fn traceoff_count_func(data: *mut event_trigger_data, buffer: *mut trace_buffer, rec: *mut c_void, event: *mut ring_buffer_event) -> bool {
+    let mut file = data.private_data;
+    if (WARN_ON_ONCE!(!file)) {
     return false;
-    if (!tracer_tracing_is_on(file.tr))
+    }
+    if (!tracer_tracing_is_on(file.tr)) {
     return false;
-    if (!data.count)
+    }
+    if (!data.count) {
     return false;
-    if (data.count != -1)
+    }
+    if (data.count != -1) {
     (data.count)--;
+    }
     return true;
     }
-    static int
-    traceon_trigger_print(struct seq_file *m, struct event_trigger_data *data)
-    {
-    return event_trigger_print("traceon", m, (void *)data.count,
+#[no_mangle]
+pub unsafe extern "C" fn traceon_trigger_print(m: *mut seq_file, data: *mut event_trigger_data) -> c_int {
+    return event_trigger_print("traceon", m, data.count,
     data.filter_str);
     }
-    static int
-    traceoff_trigger_print(struct seq_file *m, struct event_trigger_data *data)
-    {
-    return event_trigger_print("traceoff", m, (void *)data.count,
+#[no_mangle]
+pub unsafe extern "C" fn traceoff_trigger_print(m: *mut seq_file, data: *mut event_trigger_data) -> c_int {
+    return event_trigger_print("traceoff", m, data.count,
     data.filter_str);
     }
-    static struct event_command trigger_traceon_cmd = {
-    .name			= "traceon",
-    .trigger_type		= ETT_TRACE_ONOFF,
-    .parse			= event_trigger_parse,
-    .reg			= register_trigger,
-    .unreg			= unregister_trigger,
-    .set_filter		= set_trigger_filter,
-    .trigger		= traceon_trigger,
-    .count_func		= traceon_count_func,
-    .print			= traceon_trigger_print,
-    .init			= event_trigger_init,
-    .free			= event_trigger_free,
-    };
-    static struct event_command trigger_traceoff_cmd = {
-    .name			= "traceoff",
-    .trigger_type		= ETT_TRACE_ONOFF,
-    .flags			= EVENT_CMD_FL_POST_TRIGGER,
-    .parse			= event_trigger_parse,
-    .reg			= register_trigger,
-    .unreg			= unregister_trigger,
-    .set_filter		= set_trigger_filter,
-    .trigger		= traceoff_trigger,
-    .count_func		= traceoff_count_func,
-    .print			= traceoff_trigger_print,
-    .init			= event_trigger_init,
-    .free			= event_trigger_free,
-    };
+pub static mut event_command: usize = 0;
+pub static mut event_command: usize = 0;
 
-    static void
-    snapshot_trigger(struct event_trigger_data *data,
-    struct trace_buffer *buffer, void *rec,
-    struct ring_buffer_event *event)
-    {
-    struct trace_event_file *file = data.private_data;
-    if (WARN_ON_ONCE(!file))
+#[no_mangle]
+pub unsafe extern "C" fn snapshot_trigger(data: *mut event_trigger_data, buffer: *mut trace_buffer, rec: *mut c_void, event: *mut ring_buffer_event) {
+    let mut file = data.private_data;
+    if (WARN_ON_ONCE!(!file)) {
     return;
+    }
     tracing_snapshot_instance(file.tr);
     }
-    static int
-    register_snapshot_trigger(char *glob,
-    struct event_trigger_data *data,
-    struct trace_event_file *file)
-    {
-    let mut ret: c_int = tracing_arm_snapshot(file.tr);
-    if (ret < 0)
+#[no_mangle]
+pub unsafe extern "C" fn register_snapshot_trigger(glob: *mut c_char, data: *mut event_trigger_data, file: *mut trace_event_file) -> c_int {
+pub static mut ret: c_int = 0;
+    if (ret < 0) {
     return ret;
+    }
     ret = register_trigger(glob, data, file);
-    if (ret < 0)
+    if (ret < 0) {
     tracing_disarm_snapshot(file.tr);
+    }
     return ret;
     }
-    static void unregister_snapshot_trigger(char *glob,
-    struct event_trigger_data *data,
-    struct trace_event_file *file)
-    {
-    if (try_unregister_trigger(glob, data, file))
+#[no_mangle]
+pub unsafe extern "C" fn unregister_snapshot_trigger(glob: *mut c_char, data: *mut event_trigger_data, file: *mut trace_event_file) {
+    if (try_unregister_trigger(glob, data, file)) {
     tracing_disarm_snapshot(file.tr);
     }
-    static int
-    snapshot_trigger_print(struct seq_file *m, struct event_trigger_data *data)
-    {
-    return event_trigger_print("snapshot", m, (void *)data.count,
+    }
+#[no_mangle]
+pub unsafe extern "C" fn snapshot_trigger_print(m: *mut seq_file, data: *mut event_trigger_data) -> c_int {
+    return event_trigger_print("snapshot", m, data.count,
     data.filter_str);
     }
-    static struct event_command trigger_snapshot_cmd = {
-    .name			= "snapshot",
-    .trigger_type		= ETT_SNAPSHOT,
-    .parse			= event_trigger_parse,
-    .reg			= register_snapshot_trigger,
-    .unreg			= unregister_snapshot_trigger,
-    .set_filter		= set_trigger_filter,
-    .trigger		= snapshot_trigger,
-    .count_func		= event_trigger_count,
-    .print			= snapshot_trigger_print,
-    .init			= event_trigger_init,
-    .free			= event_trigger_free,
-    };
+pub static mut event_command: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn register_trigger_snapshot_cmd() -> __init int {
-    static __init int register_trigger_snapshot_cmd(void)
-    {
-    int ret;
+    let mut ret = 0;
     ret = register_event_command(&trigger_snapshot_cmd);
-    WARN_ON(ret < 0);
+    WARN_ON!(ret < 0);
     return ret;
     }
 
-    static __init int register_trigger_snapshot_cmd(void) { return 0; }
+#[no_mangle]
+pub unsafe extern "C" fn register_trigger_snapshot_cmd() -> c_int { return 0; }
 
 // Skip 2:
 // event_triggers_post_call()
@@ -1459,117 +1635,97 @@ unsafe extern "C" fn register_trigger_snapshot_cmd() -> __init int {
 //
 pub const STACK_SKIP: c_int = 4;
 
-    static void
-    stacktrace_trigger(struct event_trigger_data *data,
-    struct trace_buffer *buffer,  void *rec,
-    struct ring_buffer_event *event)
-    {
-    struct trace_event_file *file = data.private_data;
-    if (WARN_ON_ONCE(!file))
+#[no_mangle]
+pub unsafe extern "C" fn stacktrace_trigger(data: *mut event_trigger_data, buffer: *mut trace_buffer, rec: *mut c_void, event: *mut ring_buffer_event) {
+    let mut file = data.private_data;
+    if (WARN_ON_ONCE!(!file)) {
     return;
+    }
     __trace_stack(file.tr, tracing_gen_ctx_dec(), STACK_SKIP);
     }
-    static int
-    stacktrace_trigger_print(struct seq_file *m, struct event_trigger_data *data)
-    {
-    return event_trigger_print("stacktrace", m, (void *)data.count,
+#[no_mangle]
+pub unsafe extern "C" fn stacktrace_trigger_print(m: *mut seq_file, data: *mut event_trigger_data) -> c_int {
+    return event_trigger_print("stacktrace", m, data.count,
     data.filter_str);
     }
-    static struct event_command trigger_stacktrace_cmd = {
-    .name			= "stacktrace",
-    .trigger_type		= ETT_STACKTRACE,
-    .flags			= EVENT_CMD_FL_POST_TRIGGER,
-    .parse			= event_trigger_parse,
-    .reg			= register_trigger,
-    .unreg			= unregister_trigger,
-    .set_filter		= set_trigger_filter,
-    .trigger		= stacktrace_trigger,
-    .count_func		= event_trigger_count,
-    .print			= stacktrace_trigger_print,
-    .init			= event_trigger_init,
-    .free			= event_trigger_free,
-    };
+pub static mut event_command: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn register_trigger_stacktrace_cmd() -> __init int {
-    static __init int register_trigger_stacktrace_cmd(void)
-    {
-    int ret;
+    let mut ret = 0;
     ret = register_event_command(&trigger_stacktrace_cmd);
-    WARN_ON(ret < 0);
+    WARN_ON!(ret < 0);
     return ret;
     }
 
-    static __init int register_trigger_stacktrace_cmd(void) { return 0; }
+#[no_mangle]
+pub unsafe extern "C" fn register_trigger_stacktrace_cmd() -> c_int { return 0; }
 
 #[no_mangle]
 unsafe extern "C" fn unregister_trigger_traceon_traceoff_cmds() -> __init void {
-    static __init void unregister_trigger_traceon_traceoff_cmds(void)
-    {
     unregister_event_command(&trigger_traceon_cmd);
     unregister_event_command(&trigger_traceoff_cmd);
     }
-    static void
-    event_enable_trigger(struct event_trigger_data *data,
-    struct trace_buffer *buffer,  void *rec,
-    struct ring_buffer_event *event)
-    {
-    struct enable_trigger_data *enable_data = data.private_data;
-    if (enable_data.enable)
+#[no_mangle]
+pub unsafe extern "C" fn event_enable_trigger(data: *mut event_trigger_data, buffer: *mut trace_buffer, rec: *mut c_void, event: *mut ring_buffer_event) {
+    let mut enable_data = data.private_data;
+    if (enable_data.enable) {
     clear_bit(EVENT_FILE_FL_SOFT_DISABLED_BIT, &enable_data.file.flags);
-    else
+    }
+    else {
     set_bit(EVENT_FILE_FL_SOFT_DISABLED_BIT, &enable_data.file.flags);
     }
-    static bool
-    event_enable_count_func(struct event_trigger_data *data,
-    struct trace_buffer *buffer,  void *rec,
-    struct ring_buffer_event *event)
-    {
-    struct enable_trigger_data *enable_data = data.private_data;
-    if (!data.count)
+    }
+#[no_mangle]
+pub unsafe extern "C" fn event_enable_count_func(data: *mut event_trigger_data, buffer: *mut trace_buffer, rec: *mut c_void, event: *mut ring_buffer_event) -> bool {
+    let mut enable_data = data.private_data;
+    if (!data.count) {
     return false;
+    }
 // Skip if the event is in a state we want to switch to
-    if (enable_data.enable == !(enable_data.file.flags & EVENT_FILE_FL_SOFT_DISABLED))
+    if (enable_data.enable == !(enable_data.file.flags & EVENT_FILE_FL_SOFT_DISABLED)) {
     return false;
-    if (data.count != -1)
+    }
+    if (data.count != -1) {
     (data.count)--;
+    }
     return true;
     }
-    int event_enable_trigger_print(struct seq_file *m,
-    struct event_trigger_data *data)
-    {
-    struct enable_trigger_data *enable_data = data.private_data;
+#[no_mangle]
+pub unsafe extern "C" fn event_enable_trigger_print(m: *mut seq_file, data: *mut event_trigger_data) -> c_int {
+    let mut enable_data = data.private_data;
     seq_printf(m, "%s:%s:%s",
     enable_data.hist ?
     (enable_data.enable ? ENABLE_HIST_STR : DISABLE_HIST_STR) :
     (enable_data.enable ? ENABLE_EVENT_STR : DISABLE_EVENT_STR),
     enable_data.file.event_call.class.system,
     trace_event_name(enable_data.file.event_call));
-    if (data.count == -1)
+    if (data.count == -1) {
     seq_puts(m, ":unlimited");
-    else
+    }
+    else {
     seq_printf(m, ":count=%ld", data.count);
-    if (data.filter_str)
+    }
+    if (data.filter_str) {
     seq_printf(m, " if %s\n", data.filter_str);
-    else
+    }
+    else {
     seq_putc(m, '\n');
+    }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn enable_trigger_private_data_free(data: *mut event_trigger_data) {
-    static void enable_trigger_private_data_free(struct event_trigger_data *data)
-    {
-    struct enable_trigger_data *enable_data = data.private_data;
+    let mut enable_data = data.private_data;
     trace_event_put_ref(enable_data.file.event_call);
     kfree(enable_data);
     }
 #[no_mangle]
 pub unsafe extern "C" fn event_enable_trigger_free(data: *mut event_trigger_data) {
-    void event_enable_trigger_free(struct event_trigger_data *data)
-    {
-    struct enable_trigger_data *enable_data = data.private_data;
-    if (WARN_ON_ONCE(data.ref <= 0))
+    let mut enable_data = data.private_data;
+    if (WARN_ON_ONCE!(data.ref <= 0)) {
     return;
-    data.ref--;
+    }
+    data.ref -= 1;
     if (!data.ref) {
 // Remove the SOFT_MODE flag
     trace_event_enable_disable(enable_data.file, 0, 1);
@@ -1577,34 +1733,38 @@ pub unsafe extern "C" fn event_enable_trigger_free(data: *mut event_trigger_data
     trigger_data_free(data);
     }
     }
-    int event_enable_trigger_parse(struct event_command *cmd_ops,
-    struct trace_event_file *file,
-    char *glob, char *cmd, char *param_and_filter)
-    {
-    struct trace_event_file *event_enable_file;
+#[no_mangle]
+pub unsafe extern "C" fn event_enable_trigger_parse(cmd_ops: *mut event_command, file: *mut trace_event_file, glob: *mut c_char, cmd: *mut c_char, param_and_filter: *mut c_char) -> c_int {
+pub static mut event_enable_file: *mut c_void = core::ptr::null_mut();
     struct enable_trigger_data *enable_data __free(kfree) = core::ptr::null_mut();
-    struct event_trigger_data *trigger_data;
-    struct trace_array *tr = file.tr;
-    char *param, *filter;
-    bool enable, remove;
-    const char *system;
-    const char *event;
-    let mut hist: bool = false;
-    int ret;
+pub static mut trigger_data: *mut c_void = core::ptr::null_mut();
+    let mut tr = file.tr;
+    let mut param = core::ptr::null_mut();
+    let mut filter = core::ptr::null_mut();
+    let mut enable = 0;
+    let mut remove = 0;
+pub static mut system: *mut c_void = core::ptr::null_mut();
+pub static mut event: *mut c_void = core::ptr::null_mut();
+pub static mut hist: bool = false;
+    let mut ret = 0;
     remove = event_trigger_check_remove(glob);
-    if (event_trigger_empty_param(param_and_filter))
+    if (event_trigger_empty_param(param_and_filter)) {
     return -EINVAL;
+    }
     ret = event_trigger_separate_filter(param_and_filter, &param, &filter, true);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     system = strsep(&param, ":");
-    if (!param)
+    if (!param) {
     return -EINVAL;
+    }
     event = strsep(&param, ":");
     ret = -EINVAL;
     event_enable_file = find_event_file(tr, system, event);
-    if (!event_enable_file)
+    if (!event_enable_file) {
     return ret;
+    }
 
     hist = ((strcmp(cmd, ENABLE_HIST_STR) == 0) ||
     (strcmp(cmd, DISABLE_HIST_STR) == 0));
@@ -1615,14 +1775,16 @@ pub unsafe extern "C" fn event_enable_trigger_free(data: *mut event_trigger_data
 
     ret = -ENOMEM;
     enable_data = kzalloc_obj(*enable_data);
-    if (!enable_data)
+    if (!enable_data) {
     return ret;
+    }
     enable_data.hist = hist;
     enable_data.enable = enable;
     enable_data.file = event_enable_file;
     trigger_data = trigger_data_alloc(cmd_ops, cmd, param, enable_data);
-    if (!trigger_data)
+    if (!trigger_data) {
     return ret;
+    }
     if (remove) {
     event_trigger_unregister(cmd_ops, file, glob+1, trigger_data);
     kfree(trigger_data);
@@ -1631,45 +1793,47 @@ pub unsafe extern "C" fn event_enable_trigger_free(data: *mut event_trigger_data
 // Up the trigger_data count to make sure nothing frees it on failure
     event_trigger_init(trigger_data);
     ret = event_trigger_parse_num(param, trigger_data);
-    if (ret)
-    goto out_free;
+    if (ret) {
+// goto;
+    }
     ret = event_trigger_set_filter(cmd_ops, file, filter, trigger_data);
-    if (ret < 0)
-    goto out_free;
+    if (ret < 0) {
+// goto;
+    }
 // Don't let event modules unload while probe registered
     ret = trace_event_try_get_ref(event_enable_file.event_call);
     if (!ret) {
     ret = -EBUSY;
-    goto out_free;
+// goto;
     }
     ret = trace_event_enable_disable(event_enable_file, 1, 1);
-    if (ret < 0)
-    goto out_put;
+    if (ret < 0) {
+// goto;
+    }
     ret = event_trigger_register(cmd_ops, file, glob, trigger_data);
-    if (ret)
-    goto out_disable;
+    if (ret) {
+// goto;
+    }
 // It's now safe to free the reference taken earlier
     event_trigger_free(trigger_data);
 // The enabled_data is assigned to trigger_data->private_data
     retain_and_null_ptr(enable_data);
     return ret;
-    out_disable:
+// label;
     trace_event_enable_disable(event_enable_file, 0, 1);
-    out_put:
+// label;
     trace_event_put_ref(event_enable_file.event_call);
-    out_free:
+// label;
     event_trigger_reset_filter(cmd_ops, trigger_data);
     event_trigger_free(trigger_data);
     return ret;
     }
-    int event_enable_register_trigger(char *glob,
-    struct event_trigger_data *data,
-    struct trace_event_file *file)
-    {
-    struct enable_trigger_data *enable_data = data.private_data;
-    struct enable_trigger_data *test_enable_data;
-    struct event_trigger_data *test;
-    let mut ret: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn event_enable_register_trigger(glob: *mut c_char, data: *mut event_trigger_data, file: *mut trace_event_file) -> c_int {
+    let mut enable_data = data.private_data;
+pub static mut test_enable_data: *mut c_void = core::ptr::null_mut();
+pub static mut test: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     lockdep_assert_held(&event_mutex);
     list_for_each_entry(test, &file.triggers, list) {
     test_enable_data = test.private_data;
@@ -1682,8 +1846,9 @@ pub unsafe extern "C" fn event_enable_trigger_free(data: *mut event_trigger_data
     }
     if (data.cmd_ops.init) {
     ret = data.cmd_ops.init(data);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     }
     list_add_rcu(&data.list, &file.triggers);
     update_cond_flag(file);
@@ -1694,13 +1859,11 @@ pub unsafe extern "C" fn event_enable_trigger_free(data: *mut event_trigger_data
     }
     return ret;
     }
-    void event_enable_unregister_trigger(char *glob,
-    struct event_trigger_data *test,
-    struct trace_event_file *file)
-    {
-    struct enable_trigger_data *test_enable_data = test.private_data;
-    struct event_trigger_data *data = core::ptr::null_mut(), *iter;
-    struct enable_trigger_data *enable_data;
+#[no_mangle]
+pub unsafe extern "C" fn event_enable_unregister_trigger(glob: *mut c_char, test: *mut event_trigger_data, file: *mut trace_event_file) {
+    let mut test_enable_data = test.private_data;
+    let mut data = core::ptr::null_mut(), *iter;
+pub static mut enable_data: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&event_mutex);
     list_for_each_entry(iter, &file.triggers, list) {
     enable_data = iter.private_data;
@@ -1715,72 +1878,45 @@ pub unsafe extern "C" fn event_enable_trigger_free(data: *mut event_trigger_data
     break;
     }
     }
-    if (data && data.cmd_ops.free)
+    if (data && data.cmd_ops.free) {
     data.cmd_ops.free(data);
     }
-    static struct event_command trigger_enable_cmd = {
-    .name			= ENABLE_EVENT_STR,
-    .trigger_type		= ETT_EVENT_ENABLE,
-    .parse			= event_enable_trigger_parse,
-    .reg			= event_enable_register_trigger,
-    .unreg			= event_enable_unregister_trigger,
-    .set_filter		= set_trigger_filter,
-    .trigger		= event_enable_trigger,
-    .count_func		= event_enable_count_func,
-    .print			= event_enable_trigger_print,
-    .init			= event_trigger_init,
-    .free			= event_enable_trigger_free,
-    };
-    static struct event_command trigger_disable_cmd = {
-    .name			= DISABLE_EVENT_STR,
-    .trigger_type		= ETT_EVENT_ENABLE,
-    .parse			= event_enable_trigger_parse,
-    .reg			= event_enable_register_trigger,
-    .unreg			= event_enable_unregister_trigger,
-    .set_filter		= set_trigger_filter,
-    .trigger		= event_enable_trigger,
-    .count_func		= event_enable_count_func,
-    .print			= event_enable_trigger_print,
-    .init			= event_trigger_init,
-    .free			= event_enable_trigger_free,
-    };
+    }
+pub static mut event_command: usize = 0;
+pub static mut event_command: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn unregister_trigger_enable_disable_cmds() -> __init void {
-    static __init void unregister_trigger_enable_disable_cmds(void)
-    {
     unregister_event_command(&trigger_enable_cmd);
     unregister_event_command(&trigger_disable_cmd);
     }
 #[no_mangle]
 unsafe extern "C" fn register_trigger_enable_disable_cmds() -> __init int {
-    static __init int register_trigger_enable_disable_cmds(void)
-    {
-    int ret;
+    let mut ret = 0;
     ret = register_event_command(&trigger_enable_cmd);
-    if (WARN_ON(ret < 0))
+    if (WARN_ON!(ret < 0)) {
     return ret;
+    }
     ret = register_event_command(&trigger_disable_cmd);
-    if (WARN_ON(ret < 0))
+    if (WARN_ON!(ret < 0)) {
     unregister_trigger_enable_disable_cmds();
+    }
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn register_trigger_traceon_traceoff_cmds() -> __init int {
-    static __init int register_trigger_traceon_traceoff_cmds(void)
-    {
-    int ret;
+    let mut ret = 0;
     ret = register_event_command(&trigger_traceon_cmd);
-    if (WARN_ON(ret < 0))
+    if (WARN_ON!(ret < 0)) {
     return ret;
+    }
     ret = register_event_command(&trigger_traceoff_cmd);
-    if (WARN_ON(ret < 0))
+    if (WARN_ON!(ret < 0)) {
     unregister_trigger_traceon_traceoff_cmds();
+    }
     return ret;
     }
 #[no_mangle]
 pub unsafe extern "C" fn register_trigger_cmds() -> __init int {
-    __init int register_trigger_cmds(void)
-    {
     register_trigger_traceon_traceoff_cmds();
     register_trigger_snapshot_cmd();
     register_trigger_stacktrace_cmd();

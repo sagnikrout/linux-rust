@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
 macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
@@ -77,157 +327,88 @@ pub const PANIC_MSG_BUFSZ: c_int = 1024;
 // Should we dump all CPUs backtraces in an oops event?
 // Defaults to 0, can be changed via sysctl.
 //
-    static unsigned int __read_mostly sysctl_oops_all_cpu_backtrace;
+    static unsigned int  sysctl_oops_all_cpu_backtrace;
 
 pub const sysctl_oops_all_cpu_backtrace: c_int = 0;
 
-    let mut panic_on_oops: c_int = IS_ENABLED(CONFIG_PANIC_ON_OOPS);
+pub static mut panic_on_oops: c_int = 0;
     static unsigned long tainted_mask =
-    IS_ENABLED(CONFIG_RANDSTRUCT) ? (1 << TAINT_RANDSTRUCT) : 0;
+    IS_ENABLED!(CONFIG_RANDSTRUCT) ? (1 << TAINT_RANDSTRUCT) : 0;
     static int pause_on_oops;
     static int pause_on_oops_flag;
 // static DEFINE_SPINLOCK(pause_on_oops_lock);
-    bool crash_kexec_post_notifiers;
-    int panic_on_warn __read_mostly;
-    unsigned long panic_on_taint;
-    let mut panic_on_taint_nousertaint: bool = false;
-    static unsigned int warn_limit __read_mostly;
+    let mut crash_kexec_post_notifiers = 0;
+    let mut panic_on_warn = 0;
+    let mut panic_on_taint = 0;
+pub static mut panic_on_taint_nousertaint: bool = false;
+    static unsigned int warn_limit ;
     static bool panic_console_replay;
-    bool panic_triggering_all_cpu_backtrace;
+    let mut panic_triggering_all_cpu_backtrace = 0;
     static bool panic_this_cpu_backtrace_printed;
-    let mut panic_timeout: c_int = CONFIG_PANIC_TIMEOUT;
+pub static mut panic_timeout: c_int = 0;
     EXPORT_SYMBOL_GPL(panic_timeout);
-    unsigned long panic_print;
-    let mut panic_force_cpu: static int = -1;
+    let mut panic_print = 0;
+pub static mut panic_force_cpu: int = 0;
     ATOMIC_NOTIFIER_HEAD(panic_notifier_list);
     EXPORT_SYMBOL(panic_notifier_list);
 #[no_mangle]
 unsafe extern "C" fn panic_print_deprecated() {
-    pr_info_once("Kernel: The 'panic_print' parameter is now deprecated. Please use 'panic_sys_info' and 'panic_console_replay' instead.\n");
+    pr_info_once!("Kernel: The 'panic_print' parameter is now deprecated. Please use 'panic_sys_info' and 'panic_console_replay' instead.\n");
     }
 
 //
 // Taint values can only be increased
 // This means we can safely use a temporary.
 //
-    static int proc_taint(const struct ctl_table *table, int write,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
-    struct ctl_table t;
-    let mut tmptaint: c_ulong = get_taint();
-    int err;
-    if (write && !capable(CAP_SYS_ADMIN))
+#[no_mangle]
+pub unsafe extern "C" fn proc_taint(table: *mut ctl_table, write: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
+pub static mut t: usize = 0;
+pub static mut tmptaint: c_ulong = 0;
+    let mut err = 0;
+    if (write && !capable(CAP_SYS_ADMIN)) {
     return -EPERM;
+    }
     t = *table;
     t.data = &tmptaint;
     err = proc_doulongvec_minmax(&t, write, buffer, lenp, ppos);
-    if (err < 0)
+    if (err < 0) {
     return err;
+    }
     if (write) {
-    int i;
+    let mut i = 0;
 //
 // If we are relying on panic_on_taint not producing
 // false positives due to userspace input, bail out
 // before setting the requested taint flags.
 //
-    if (panic_on_taint_nousertaint && (tmptaint & panic_on_taint))
+    if (panic_on_taint_nousertaint && (tmptaint & panic_on_taint)) {
     return -EINVAL;
+    }
 //
 // Poor man's atomic or. Not worth adding a primitive
 // to everyone's atomic.h for this
 //
-    for (i = 0; i < TAINT_FLAGS_COUNT; i++)
+    for (i = 0; i < TAINT_FLAGS_COUNT; i++) {
     if ((1UL << i) & tmptaint)
     add_taint(i, LOCKDEP_STILL_OK);
     }
+    }
     return err;
     }
-    static int sysctl_panic_print_handler(const struct ctl_table *table, int write,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
-    if (write)
+#[no_mangle]
+pub unsafe extern "C" fn sysctl_panic_print_handler(table: *mut ctl_table, write: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
+    if (write) {
     panic_print_deprecated();
+    }
     return proc_doulongvec_minmax(table, write, buffer, lenp, ppos);
     }
-    static const struct ctl_table kern_panic_table[] = {
-
-    {
-    .procname       = "oops_all_cpu_backtrace",
-    .data           = &sysctl_oops_all_cpu_backtrace,
-    .maxlen         = sizeof(int),
-    .mode           = 0644,
-    .proc_handler   = proc_dointvec_minmax,
-    .extra1         = SYSCTL_ZERO,
-    .extra2         = SYSCTL_ONE,
-    },
-
-    {
-    .procname	= "tainted",
-    .maxlen		= sizeof(long),
-    .mode		= 0644,
-    .proc_handler	= proc_taint,
-    },
-    {
-    .procname	= "panic",
-    .data		= &panic_timeout,
-    .maxlen		= sizeof(int),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec,
-    },
-    {
-    .procname	= "panic_on_oops",
-    .data		= &panic_on_oops,
-    .maxlen		= sizeof(int),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec,
-    },
-    {
-    .procname	= "panic_print",
-    .data		= &panic_print,
-    .maxlen		= sizeof(unsigned long),
-    .mode		= 0644,
-    .proc_handler	= sysctl_panic_print_handler,
-    },
-    {
-    .procname	= "panic_on_warn",
-    .data		= &panic_on_warn,
-    .maxlen		= sizeof(int),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec_minmax,
-    .extra1		= SYSCTL_ZERO,
-    .extra2		= SYSCTL_ONE,
-    },
-    {
-    .procname       = "warn_limit",
-    .data           = &warn_limit,
-    .maxlen         = sizeof(warn_limit),
-    .mode           = 0644,
-    .proc_handler   = proc_douintvec,
-    },
-
-    defined(CONFIG_DEBUG_STACKOVERFLOW)
-    {
-    .procname	= "panic_on_stackoverflow",
-    .data		= &sysctl_panic_on_stackoverflow,
-    .maxlen		= sizeof(int),
-    .mode		= 0644,
-    .proc_handler	= proc_dointvec,
-    },
-
-    {
-    .procname	= "panic_sys_info",
-    .data		= &panic_print,
-    .maxlen         = sizeof(panic_print),
-    .mode		= 0644,
-    .proc_handler	= sysctl_sys_info_handler,
-    },
-    };
+pub static mut ctl_table: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn kernel_panic_sysctls_init() -> __init int {
     register_sysctl_init("kernel", kern_panic_table);
     return 0;
     }
-    late_initcall(kernel_panic_sysctls_init);
+    late_initcall!(kernel_panic_sysctls_init);
 
 // The format is "panic_sys_info=tasks,mem,locks,ftrace,..."
 #[no_mangle]
@@ -236,21 +417,20 @@ unsafe extern "C" fn setup_panic_sys_info(buf: *mut c_char) -> c_int {
     panic_print = sys_info_parse_param(buf);
     return 1;
     }
-    __setup("panic_sys_info=", setup_panic_sys_info);
-    let mut warn_count: static atomic_t = ATOMIC_INIT(0);
+    __setup!("panic_sys_info=", setup_panic_sys_info);
+pub static mut warn_count: atomic_t = 0;
 
-    static ssize_t warn_count_show(struct kobject *kobj, struct kobj_attribute *attr,
-    char *page)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn warn_count_show(kobj: *mut kobject, attr: *mut kobj_attribute, page: *mut c_char) -> ssize_t {
     return sysfs_emit(page, "%d\n", atomic_read(&warn_count));
     }
-    let mut warn_count_attr: static struct kobj_attribute = __ATTR_RO(warn_count);
+pub static mut warn_count_attr: kobj_attribute = 0;
 #[no_mangle]
 unsafe extern "C" fn kernel_panic_sysfs_init() -> __init int {
     sysfs_add_file_to_group(kernel_kobj, &warn_count_attr.attr, core::ptr::null_mut());
     return 0;
     }
-    late_initcall(kernel_panic_sysfs_init);
+    late_initcall!(kernel_panic_sysfs_init);
 
 #[no_mangle]
 unsafe extern "C" fn no_blink(state: c_int) -> c_long {
@@ -264,8 +444,9 @@ unsafe extern "C" fn no_blink(state: c_int) -> c_long {
 //
 #[no_mangle]
 pub unsafe extern "C" fn panic_smp_self_stop() -> void __weak __noreturn {
-    while (1)
+    while (1) {
     cpu_relax();
+    }
     }
 //
 // Stop ourselves in NMI context if another CPU has already panicked. Arch code
@@ -288,8 +469,9 @@ pub unsafe extern "C" fn crash_smp_send_stop() -> void __weak {
 // This function can be called twice in panic path, but obviously
 // we execute this only once.
 //
-    if (cpus_stopped)
+    if (cpus_stopped) {
     return;
+    }
 //
 // Note smp_send_stop is the usual smp shutdown function, which
 // unfortunately means it may not be hardened to work in a panic
@@ -298,34 +480,36 @@ pub unsafe extern "C" fn crash_smp_send_stop() -> void __weak {
     smp_send_stop();
     cpus_stopped = 1;
     }
-    let mut panic_cpu: core::sync::atomic::AtomicI32 = ATOMIC_INIT(PANIC_CPU_INVALID);
-    let mut panic_redirect_cpu: core::sync::atomic::AtomicI32 = ATOMIC_INIT(PANIC_CPU_INVALID);
+pub static mut panic_cpu: core::sync::atomic::AtomicI32 = 0;
+pub static mut panic_redirect_cpu: core::sync::atomic::AtomicI32 = 0;
 
-    static char *panic_force_buf;
+pub static mut panic_force_buf: *mut c_void = core::ptr::null_mut();
 #[no_mangle]
 unsafe extern "C" fn panic_force_cpu_setup(str: *mut c_char) -> c_int {
-    int cpu;
-    if (!str)
+    let mut cpu = 0;
+    if (!str) {
     return -EINVAL;
+    }
     if (kstrtoint(str, 0, &cpu) || cpu < 0 || cpu >= nr_cpu_ids) {
-    pr_warn("panic_force_cpu: invalid value '%s'\n", str);
+    pr_warn!("panic_force_cpu: invalid value '%s'\n", str);
     return -EINVAL;
     }
     panic_force_cpu = cpu;
     return 0;
     }
-    early_param("panic_force_cpu", panic_force_cpu_setup);
+    early_param!("panic_force_cpu", panic_force_cpu_setup);
 #[no_mangle]
 unsafe extern "C" fn panic_force_cpu_late_init() -> c_int {
-    if (panic_force_cpu < 0)
+    if (panic_force_cpu < 0) {
     return 0;
+    }
     panic_force_buf = kmalloc(PANIC_MSG_BUFSZ, GFP_KERNEL);
     return 0;
     }
-    late_initcall(panic_force_cpu_late_init);
+    late_initcall!(panic_force_cpu_late_init);
 #[no_mangle]
 unsafe extern "C" fn do_panic_on_target_cpu(info: *mut c_void) {
-    panic("%s", (char *)info);
+    panic("%s", info);
     }
 //
 // panic_smp_redirect_cpu - Redirect panic to target CPU
@@ -359,30 +543,34 @@ pub unsafe extern "C" fn panic_smp_redirect_cpu(target_cpu: c_int, msg: *mut c_v
     __printf(1, 0)
 #[no_mangle]
 unsafe extern "C" fn panic_try_force_cpu(fmt: *const c_char, args: va_list) -> bool {
-    let mut this_cpu: c_int = raw_smp_processor_id();
-    let mut old_cpu: c_int = PANIC_CPU_INVALID;
-    const char *msg;
+pub static mut this_cpu: c_int = 0;
+pub static mut old_cpu: c_int = 0;
+pub static mut msg: *mut c_void = core::ptr::null_mut();
 // Feature not enabled via boot parameter
-    if (panic_force_cpu < 0)
+    if (panic_force_cpu < 0) {
     return false;
+    }
 // Already on target CPU - proceed normally
-    if (this_cpu == panic_force_cpu)
+    if (this_cpu == panic_force_cpu) {
     return false;
+    }
 // Target CPU is offline, can't redirect
     if (!cpu_online(panic_force_cpu)) {
-    pr_warn("panic: target CPU %d is offline, continuing on CPU %d\n",
+    pr_warn!("panic: target CPU %d is offline, continuing on CPU %d\n",
     panic_force_cpu, this_cpu);
     return false;
     }
 // Another panic already in progress
-    if (panic_in_progress())
+    if (panic_in_progress()) {
     return false;
+    }
 //
 // Only one CPU can do the redirect. Use atomic cmpxchg to ensure
 // we don't race with another CPU also trying to redirect.
 //
-    if (!atomic_try_cmpxchg(&panic_redirect_cpu, &old_cpu, this_cpu))
+    if (!atomic_try_cmpxchg(&panic_redirect_cpu, &old_cpu, this_cpu)) {
     return false;
+    }
 //
 // Use dynamically allocated buffer if available, otherwise
 // fall back to static message for early boot panics or allocation failure.
@@ -400,12 +588,12 @@ unsafe extern "C" fn panic_try_force_cpu(fmt: *const c_char, args: va_list) -> b
 // Dump original CPU before redirecting
     if (!test_taint(TAINT_DIE) &&
     oops_in_progress <= 1 &&
-    IS_ENABLED(CONFIG_DEBUG_BUGVERBOSE)) {
+    IS_ENABLED!(CONFIG_DEBUG_BUGVERBOSE)) {
     dump_stack();
     }
-    if (panic_smp_redirect_cpu(panic_force_cpu, (void *)msg) != 0) {
+    if (panic_smp_redirect_cpu(panic_force_cpu, msg) != 0) {
     atomic_set(&panic_redirect_cpu, PANIC_CPU_INVALID);
-    pr_warn("panic: failed to redirect to CPU %d, continuing on CPU %d\n",
+    pr_warn!("panic: failed to redirect to CPU %d, continuing on CPU %d\n",
     panic_force_cpu, this_cpu);
     return false;
     }
@@ -421,7 +609,8 @@ pub unsafe extern "C" fn panic_try_force_cpu(fmt: *const c_char, args: va_list) 
 
 #[no_mangle]
 pub unsafe extern "C" fn panic_try_start() -> bool {
-    int old_cpu, this_cpu;
+    let mut old_cpu = 0;
+    let mut this_cpu = 0;
 //
 // Only one CPU is allowed to execute the crash_kexec() code as with
 // panic().  Otherwise parallel calls of panic() and crash_kexec()
@@ -473,32 +662,37 @@ pub unsafe extern "C" fn panic_on_other_cpu() -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn nmi_panic(regs: *mut pt_regs, msg: *const c_char) {
-    if (panic_try_start())
+    if (panic_try_start()) {
     panic("%s", msg);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: panic_on_other_cpu()) -> else {
-    else if (panic_on_other_cpu())
+    }
+
+    else if (panic_on_other_cpu()) {
     nmi_panic_self_stop(regs);
+    }
     }
     EXPORT_SYMBOL(nmi_panic);
 #[no_mangle]
 pub unsafe extern "C" fn check_panic_on_warn(origin: *const c_char) {
-    unsigned int limit;
-    if (panic_on_warn)
+    let mut limit = 0;
+    if (panic_on_warn) {
     panic("%s: panic_on_warn set ...\n", origin);
+    }
     limit = READ_ONCE(warn_limit);
-    if (atomic_inc_return(&warn_count) >= limit && limit)
+    if (atomic_inc_return(&warn_count) >= limit && limit) {
     panic("%s: system warned too often (kernel.warn_limit is %d)",
     origin, limit);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn panic_trigger_all_cpu_backtrace() {
 // Temporary allow non-panic CPUs to write their backtraces.
     panic_triggering_all_cpu_backtrace = true;
-    if (panic_this_cpu_backtrace_printed)
+    if (panic_this_cpu_backtrace_printed) {
     trigger_allbutcpu_cpu_backtrace(raw_smp_processor_id());
-    else
+    }
+    else {
     trigger_all_cpu_backtrace();
+    }
     panic_triggering_all_cpu_backtrace = false;
     }
 //
@@ -508,8 +702,9 @@ unsafe extern "C" fn panic_trigger_all_cpu_backtrace() {
 //
 #[no_mangle]
 unsafe extern "C" fn panic_other_cpus_shutdown(crash_kexec: bool) {
-    if (panic_print & SYS_INFO_ALL_BT)
+    if (panic_print & SYS_INFO_ALL_BT) {
     panic_trigger_all_cpu_backtrace();
+    }
 //
 // Note that smp_send_stop() is the usual SMP shutdown function,
 // which unfortunately may not be hardened to work in a panic
@@ -518,10 +713,12 @@ unsafe extern "C" fn panic_other_cpus_shutdown(crash_kexec: bool) {
 // bits in addition to stopping other CPUs, hence we rely on
 // crash_smp_send_stop() for that.
 //
-    if (!crash_kexec)
+    if (!crash_kexec) {
     smp_send_stop();
-    else
+    }
+    else {
     crash_smp_send_stop();
+    }
     }
 //
 // vpanic - halt the system
@@ -534,8 +731,8 @@ unsafe extern "C" fn panic_other_cpus_shutdown(crash_kexec: bool) {
 pub unsafe extern "C" fn vpanic(fmt: *const c_char, args: va_list) {
     static char buf[PANIC_MSG_BUFSZ];
     long i, i_next = 0, len;
-    let mut state: c_int = 0;
-    let mut _crash_kexec_post_notifiers: bool = crash_kexec_post_notifiers;
+pub static mut state: c_int = 0;
+pub static mut _crash_kexec_post_notifiers: bool = false;
     if (panic_on_warn) {
 //
 // This thread may hit another WARN() in the panic path.
@@ -580,13 +777,15 @@ pub unsafe extern "C" fn vpanic(fmt: *const c_char, args: va_list) {
 // atomic_try_cmpxchg updates old_cpu on failure
     if (panic_try_start()) {
 // go ahead
-    } else if (panic_on_other_cpu())
+    } else if (panic_on_other_cpu()) {
     panic_smp_self_stop();
+    }
     console_verbose();
     bust_spinlocks(1);
-    len = vscnprintf(buf, sizeof(buf), fmt, args);
-    if (len && buf[len - 1] == '\n')
+    len = vscnprintf(buf, sizeof!(buf), fmt, args);
+    if (len && buf[len - 1] == '\n') {
     buf[len - 1] = '\0';
+    }
     pr_emerg("Kernel panic - not syncing: %s\n", buf);
 //
 // Avoid nested stack-dumping if a panic occurs during oops processing
@@ -597,7 +796,7 @@ pub unsafe extern "C" fn vpanic(fmt: *const c_char, args: va_list) {
     atomic_read(&panic_redirect_cpu));
     } else if (test_taint(TAINT_DIE) || oops_in_progress > 1) {
     panic_this_cpu_backtrace_printed = true;
-    } else if (IS_ENABLED(CONFIG_DEBUG_BUGVERBOSE)) {
+    } else if (IS_ENABLED!(CONFIG_DEBUG_BUGVERBOSE)) {
     dump_stack();
     panic_this_cpu_backtrace_printed = true;
     }
@@ -615,8 +814,9 @@ pub unsafe extern "C" fn vpanic(fmt: *const c_char, args: va_list) {
 //
 // Bypass the panic_cpu check and call __crash_kexec directly.
 //
-    if (!_crash_kexec_post_notifiers)
+    if (!_crash_kexec_post_notifiers) {
     __crash_kexec(core::ptr::null_mut());
+    }
     panic_other_cpus_shutdown(_crash_kexec_post_notifiers);
     printk_legacy_allow_panic_sync();
 //
@@ -635,8 +835,9 @@ pub unsafe extern "C" fn vpanic(fmt: *const c_char, args: va_list) {
 //
 // Bypass the panic_cpu check and call __crash_kexec directly.
 //
-    if (_crash_kexec_post_notifiers)
+    if (_crash_kexec_post_notifiers) {
     __crash_kexec(core::ptr::null_mut());
+    }
     console_unblank();
 //
 // We may have ended up stopping the CPU holding the lock (in
@@ -649,17 +850,19 @@ pub unsafe extern "C" fn vpanic(fmt: *const c_char, args: va_list) {
     debug_locks_off();
     console_flush_on_panic(CONSOLE_FLUSH_PENDING);
     if ((panic_print & SYS_INFO_PANIC_CONSOLE_REPLAY) ||
-    panic_console_replay)
+    panic_console_replay) {
     console_flush_on_panic(CONSOLE_REPLAY_ALL);
-    if (!panic_blink)
+    }
+    if (!panic_blink) {
     panic_blink = no_blink;
+    }
     if (panic_timeout > 0) {
 //
 // Delay timeout seconds before rebooting the machine.
 // We can't use the "normal" timers since we just panicked.
 //
     pr_emerg("Rebooting in %d seconds..\n", panic_timeout);
-    for (i = 0; i < panic_timeout * 1000; i += PANIC_TIMER_STEP) {
+    while (i < panic_timeout * 1000) {
     touch_nmi_watchdog();
     if (i >= i_next) {
     i += panic_blink(state ^= 1);
@@ -674,13 +877,14 @@ pub unsafe extern "C" fn vpanic(fmt: *const c_char, args: va_list) {
 // shutting down.  But if there is a chance of
 // rebooting the system it will be rebooted.
 //
-    if (panic_reboot_mode != REBOOT_UNDEFINED)
+    if (panic_reboot_mode != REBOOT_UNDEFINED) {
     reboot_mode = panic_reboot_mode;
+    }
     emergency_restart();
     }
 
     {
-    extern int stop_a_enabled;
+extern "C" { pub static mut stop_a_enabled: usize; }
 // Make sure the user can actually press Stop-A (L1-A)
     stop_a_enabled = 1;
     pr_emerg("Press Stop-A (L1-A) from sun keyboard or send break\n"
@@ -700,7 +904,7 @@ pub unsafe extern "C" fn vpanic(fmt: *const c_char, args: va_list) {
     console_flush_on_panic(CONSOLE_FLUSH_PENDING);
     nbcon_atomic_flush_unsafe();
     local_irq_enable();
-    for (i = 0; ; i += PANIC_TIMER_STEP) {
+    while ( ) {
     touch_softlockup_watchdog();
     if (i >= i_next) {
     i += panic_blink(state ^= 1);
@@ -713,16 +917,16 @@ pub unsafe extern "C" fn vpanic(fmt: *const c_char, args: va_list) {
 // Identical to vpanic(), except it takes variadic arguments instead of va_list
 #[no_mangle]
 pub unsafe extern "C" fn panic(fmt: *const c_char, ...) {
-    va_list args;
+    let mut args;
     va_start(args, fmt);
     vpanic(fmt, args);
     va_end(args);
     }
     EXPORT_SYMBOL(panic);
 
-    [ TAINT_##taint ] = {						\
-    .c_true = _c_true, .c_false = _c_false,			\
-    .desc = #taint,						\
+    [ TAINT_##taint ] = {						
+    .c_true = _c_true, .c_false = _c_false,			
+    .desc = #taint,						
     }
 //
 // NOTE: if you modify the taint_flags or TAINT_FLAGS_COUNT,
@@ -733,42 +937,21 @@ pub unsafe extern "C" fn panic(fmt: *const c_char, ...) {
 //
 // Also, update INIT_TAINT_BUF_MAX below.
 //
-    const struct taint_flag taint_flags[TAINT_FLAGS_COUNT] = {
-    TAINT_FLAG(PROPRIETARY_MODULE,		'P', 'G'),
-    TAINT_FLAG(FORCED_MODULE,		'F', ' '),
-    TAINT_FLAG(CPU_OUT_OF_SPEC,		'S', ' '),
-    TAINT_FLAG(FORCED_RMMOD,		'R', ' '),
-    TAINT_FLAG(MACHINE_CHECK,		'M', ' '),
-    TAINT_FLAG(BAD_PAGE,			'B', ' '),
-    TAINT_FLAG(USER,			'U', ' '),
-    TAINT_FLAG(DIE,				'D', ' '),
-    TAINT_FLAG(OVERRIDDEN_ACPI_TABLE,	'A', ' '),
-    TAINT_FLAG(WARN,			'W', ' '),
-    TAINT_FLAG(CRAP,			'C', ' '),
-    TAINT_FLAG(FIRMWARE_WORKAROUND,		'I', ' '),
-    TAINT_FLAG(OOT_MODULE,			'O', ' '),
-    TAINT_FLAG(UNSIGNED_MODULE,		'E', ' '),
-    TAINT_FLAG(SOFTLOCKUP,			'L', ' '),
-    TAINT_FLAG(LIVEPATCH,			'K', ' '),
-    TAINT_FLAG(AUX,				'X', ' '),
-    TAINT_FLAG(RANDSTRUCT,			'T', ' '),
-    TAINT_FLAG(TEST,			'N', ' '),
-    TAINT_FLAG(FWCTL,			'J', ' '),
-    };
+pub static mut taint_flag: usize = 0;
 
 #[no_mangle]
 unsafe extern "C" fn print_tainted_seq(s: *mut seq_buf, verbose: bool) {
-    const char *sep = "";
-    int i;
+    let mut sep = "";
+    let mut i = 0;
     if (!tainted_mask) {
     seq_buf_puts(s, "Not tainted");
     return;
     }
     seq_buf_printf(s, "Tainted: ");
-    for (i = 0; i < TAINT_FLAGS_COUNT; i++) {
-    const struct taint_flag *t = &taint_flags[i];
-    let mut is_set: bool = test_bit(i, &tainted_mask);
-    let mut c: c_char = is_set ? t.c_true : t.c_false;
+    while (i < TAINT_FLAGS_COUNT) {
+    let mut t = &taint_flags[i];
+pub static mut is_set: bool = false;
+pub static mut c: c_char = 0;
     if (verbose) {
     if (is_set) {
     seq_buf_printf(s, "%s[%c]=%s", sep, c, t.desc);
@@ -788,15 +971,15 @@ unsafe extern "C" fn print_tainted_seq(s: *mut seq_buf, verbose: bool) {
 //
 pub const INIT_TAINT_BUF_MAX: c_int = 350;
     static char init_taint_buf[INIT_TAINT_BUF_MAX] __initdata;
-    let mut __refdata: *mut static char taint_buf = init_taint_buf;
-    let mut taint_buf_size: static size_t = INIT_TAINT_BUF_MAX;
+pub static mut __refdata: *mut static char taint_buf = core::ptr::null_mut();
+pub static mut taint_buf_size: size_t = 0;
 #[no_mangle]
 unsafe extern "C" fn alloc_taint_buf() -> __init int {
-    int i;
-    char *buf;
-    let mut size: usize = 0;
-    size += sizeof("Tainted: ") - 1;
-    for (i = 0; i < TAINT_FLAGS_COUNT; i++) {
+    let mut i = 0;
+pub static mut buf: *mut c_void = core::ptr::null_mut();
+pub static mut size: usize = 0;
+    size += sizeof!("Tainted: ") - 1;
+    while (i < TAINT_FLAGS_COUNT) {
     size += 2; /* For ", " */
     size += 4; /* For "[%c]=" */
     size += strlen(taint_flags[i].desc);
@@ -810,11 +993,11 @@ unsafe extern "C" fn alloc_taint_buf() -> __init int {
     taint_buf_size = size;
     return 0;
     }
-    postcore_initcall(alloc_taint_buf);
+    postcore_initcall!(alloc_taint_buf);
     static const char *_print_tainted(bool verbose)
     {
-    struct seq_buf s;
-    BUILD_BUG_ON(ARRAY_SIZE(taint_flags) != TAINT_FLAGS_COUNT);
+pub static mut s: usize = 0;
+    BUILD_BUG_ON!(ARRAY_SIZE!(taint_flags) != TAINT_FLAGS_COUNT);
     seq_buf_init(&s, taint_buf, taint_buf_size);
     print_tainted_seq(&s, verbose);
     return seq_buf_str(&s);
@@ -856,9 +1039,10 @@ pub unsafe extern "C" fn get_taint() -> c_ulong {
 // some notewortht-but-not-corrupting cases, it can be set to true.
 //
 #[no_mangle]
-pub unsafe extern "C" fn add_taint(flag: unsigned, lockdep_ok: enum lockdep_ok) {
-    if (lockdep_ok == LOCKDEP_NOW_UNRELIABLE && __debug_locks_off())
-    pr_warn("Disabling lock debugging due to kernel taint\n");
+pub unsafe extern "C" fn add_taint(flag: unsigned, lockdep_ok: lockdep_ok) {
+    if (lockdep_ok == LOCKDEP_NOW_UNRELIABLE && __debug_locks_off()) {
+    pr_warn!("Disabling lock debugging due to kernel taint\n");
+    }
     set_bit(flag, &tainted_mask);
     if (tainted_mask & panic_on_taint) {
     panic_on_taint = 0;
@@ -868,8 +1052,8 @@ pub unsafe extern "C" fn add_taint(flag: unsigned, lockdep_ok: enum lockdep_ok) 
     EXPORT_SYMBOL(add_taint);
 #[no_mangle]
 unsafe extern "C" fn spin_msec(msecs: c_int) {
-    int i;
-    for (i = 0; i < msecs; i++) {
+    let mut i = 0;
+    while (i < msecs) {
     touch_nmi_watchdog();
     mdelay(1);
     }
@@ -880,10 +1064,11 @@ unsafe extern "C" fn spin_msec(msecs: c_int) {
 //
 #[no_mangle]
 unsafe extern "C" fn do_oops_enter_exit() {
-    unsigned long flags;
+    let mut flags = 0;
     static int spin_counter;
-    if (!pause_on_oops)
+    if (!pause_on_oops) {
     return;
+    }
     spin_lock_irqsave(&pause_on_oops_lock, flags);
     if (pause_on_oops_flag == 0) {
 // This CPU may now print the oops message
@@ -916,7 +1101,7 @@ unsafe extern "C" fn do_oops_enter_exit() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn oops_may_print() -> bool {
-    let mut pause_on_oops_flag: return = = 0;
+pub static mut pause_on_oops_flag: return = 0;
     }
 //
 // Called when the architecture enters its oops handler, before it prints
@@ -939,12 +1124,13 @@ pub unsafe extern "C" fn oops_enter() {
 // can't trust the integrity of the kernel anymore:
     debug_locks_off();
     do_oops_enter_exit();
-    if (sysctl_oops_all_cpu_backtrace)
+    if (sysctl_oops_all_cpu_backtrace) {
     trigger_all_cpu_backtrace();
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn print_oops_end_marker() {
-    pr_warn("---[ end trace %016llx ]---\n", 0ULL);
+    pr_warn!("---[ end trace %016llx ]---\n", 0ULL);
     }
 //
 // Called when the architecture exits its oops handler, after printing
@@ -964,30 +1150,32 @@ pub struct warn_args {
     pub args: va_list,
 }
 
-    void __warn(const char *file, int line, void *caller, unsigned taint,
-    struct pt_regs *regs, struct warn_args *args)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __warn(file: *mut c_char, line: c_int, caller: *mut c_void, taint: c_uint, regs: *mut pt_regs, args: *mut warn_args) {
     nbcon_cpu_emergency_enter();
     disable_trace_on_warning();
     if (file) {
-    pr_warn("WARNING: %s:%d at %pS, CPU#%d: %s/%d\n",
+    pr_warn!("WARNING: %s:%d at %pS, CPU#%d: %s/%d\n",
     file, line, caller,
     raw_smp_processor_id(), current.comm, current.pid);
     } else {
-    pr_warn("WARNING: at %pS, CPU#%d: %s/%d\n",
+    pr_warn!("WARNING: at %pS, CPU#%d: %s/%d\n",
     caller,
     raw_smp_processor_id(), current.comm, current.pid);
     }
 
-    if (args)
+    if (args) {
     vprintk(args.fmt, args.args);
+    }
 
     print_modules();
-    if (regs)
+    if (regs) {
     show_regs(regs);
+    }
     check_panic_on_warn("kernel");
-    if (!regs)
+    if (!regs) {
     dump_stack();
+    }
     print_irqtrace_events(current);
     print_oops_end_marker();
     trace_error_report_end(ERROR_DETECTOR_WARN, (unsigned long)caller);
@@ -996,16 +1184,15 @@ pub struct warn_args {
     nbcon_cpu_emergency_exit();
     }
 
-    void warn_slowpath_fmt(const char *file, int line, unsigned taint,
-    const char *fmt, ...)
-    {
-    let mut rcu: bool = warn_rcu_enter();
-    struct warn_args args;
+#[no_mangle]
+pub unsafe extern "C" fn warn_slowpath_fmt(file: *mut c_char, line: c_int, taint: c_uint, fmt: *mut c_char) {
+pub static mut rcu: bool = false;
+pub static mut args: usize = 0;
     if (kunit_is_suppressed_warning(true)) {
     warn_rcu_exit(rcu);
     return;
     }
-    pr_warn(CUT_HERE);
+    pr_warn!(CUT_HERE);
     if (!fmt) {
     __warn(file, line, __builtin_return_address(0), taint,
     core::ptr::null_mut(), core::ptr::null_mut());
@@ -1022,13 +1209,13 @@ pub struct warn_args {
 
 #[no_mangle]
 pub unsafe extern "C" fn __warn_printk(fmt: *const c_char, ...) {
-    let mut rcu: bool = warn_rcu_enter();
-    va_list args;
+pub static mut rcu: bool = false;
+    let mut args;
     if (kunit_is_suppressed_warning(false)) {
     warn_rcu_exit(rcu);
     return;
     }
-    pr_warn(CUT_HERE);
+    pr_warn!(CUT_HERE);
     va_start(args, fmt);
     vprintk(fmt, args);
     va_end(args);
@@ -1052,7 +1239,7 @@ unsafe extern "C" fn register_warn_debugfs() -> __init int {
     &clear_warn_once_fops);
     return 0;
     }
-    device_initcall(register_warn_debugfs);
+    device_initcall!(register_warn_debugfs);
 
 //
 // Called when gcc's -fstack-protector feature is used, and
@@ -1060,7 +1247,7 @@ unsafe extern "C" fn register_warn_debugfs() -> __init int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __stack_chk_fail() -> __visible noinstr void {
-    unsigned long flags;
+    let mut flags = 0;
     instrumentation_begin();
     flags = user_access_save();
     panic("stack-protector: Kernel stack is corrupted in: %pB",
@@ -1070,11 +1257,11 @@ pub unsafe extern "C" fn __stack_chk_fail() -> __visible noinstr void {
     }
     EXPORT_SYMBOL(__stack_chk_fail);
 
-    core_param(panic, panic_timeout, int, 0644);
-    core_param(pause_on_oops, pause_on_oops, int, 0644);
-    core_param(panic_on_warn, panic_on_warn, int, 0644);
-    core_param(crash_kexec_post_notifiers, crash_kexec_post_notifiers, bool, 0644);
-    core_param(panic_console_replay, panic_console_replay, bool, 0644);
+    core_param!(panic, panic_timeout, int, 0644);
+    core_param!(pause_on_oops, pause_on_oops, int, 0644);
+    core_param!(panic_on_warn, panic_on_warn, int, 0644);
+    core_param!(crash_kexec_post_notifiers, crash_kexec_post_notifiers, bool, 0644);
+    core_param!(panic_console_replay, panic_console_replay, bool, 0644);
 #[no_mangle]
 unsafe extern "C" fn panic_print_set(val: *const c_char, kp: *const kernel_param) -> c_int {
     panic_print_deprecated();
@@ -1084,38 +1271,39 @@ unsafe extern "C" fn panic_print_set(val: *const c_char, kp: *const kernel_param
 unsafe extern "C" fn panic_print_get(val: *mut c_char, kp: *const kernel_param) -> c_int {
     return  param_get_ulong(val, kp);
     }
-    static const struct kernel_param_ops panic_print_ops = {
-    .set	= panic_print_set,
-    .get	= panic_print_get,
-    };
+pub static mut kernel_param_ops: usize = 0;
     __core_param_cb(panic_print, &panic_print_ops, &panic_print, 0644);
 #[no_mangle]
 unsafe extern "C" fn oops_setup(s: *mut c_char) -> c_int {
-    if (!s)
+    if (!s) {
     return -EINVAL;
-    if (!strcmp(s, "panic"))
+    }
+    if (!strcmp(s, "panic")) {
     panic_on_oops = 1;
+    }
     return 0;
     }
-    early_param("oops", oops_setup);
+    early_param!("oops", oops_setup);
 #[no_mangle]
 unsafe extern "C" fn panic_on_taint_setup(s: *mut c_char) -> c_int {
-    char *taint_str;
-    if (!s)
+pub static mut taint_str: *mut c_void = core::ptr::null_mut();
+    if (!s) {
     return -EINVAL;
+    }
     taint_str = strsep(&s, ",");
-    if (kstrtoul(taint_str, 16, &panic_on_taint))
+    if (kstrtoul(taint_str, 16, &panic_on_taint)) {
     return -EINVAL;
+    }
 // make sure panic_on_taint doesn't hold out-of-range TAINT flags
     panic_on_taint &= TAINT_FLAGS_MAX;
-    if (!panic_on_taint)
+    if (!panic_on_taint) {
     return -EINVAL;
-    if (s && !strcmp(s, "nousertaint"))
+    }
+    if (s && !strcmp(s, "nousertaint")) {
     panic_on_taint_nousertaint = true;
-    pr_info("panic_on_taint: bitmask=0x%lx nousertaint_mode=%s\n",
+    }
+    pr_info!("panic_on_taint: bitmask=0x%lx nousertaint_mode=%s\n",
     panic_on_taint, str_enabled_disabled(panic_on_taint_nousertaint));
     return 0;
     }
-    early_param("panic_on_taint", panic_on_taint_setup);
-
-}
+    early_param!("panic_on_taint", panic_on_taint_setup);

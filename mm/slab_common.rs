@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -46,82 +296,71 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Macro flag: #define CREATE_TRACE_POINTS
 
     enum slab_state slab_state;
-    LIST_HEAD(slab_caches);
-    DEFINE_MUTEX(slab_mutex);
-    struct kmem_cache *kmem_cache;
+pub static mut slab_caches: usize = 0;
+pub static mut slab_mutex: usize = 0;
+pub static mut kmem_cache: *mut c_void = core::ptr::null_mut();
 //
 // Set of flags that will prevent slab merging.
 // Any flag that adds per-object metadata should be included,
 // since slab merging can update s->inuse that affects the metadata layout.
 //
 
-    SLAB_NOLEAKTRACE | SLAB_FAILSLAB | SLAB_NO_MERGE | \
+    SLAB_NOLEAKTRACE | SLAB_FAILSLAB | SLAB_NO_MERGE | 
     SLAB_OBJ_EXT_IN_OBJ)
 
     SLAB_CACHE_DMA32 | SLAB_ACCOUNT | SLAB_MAY_ACCOUNT)
 //
 // Merge control. If this is set then no merging of slab caches will occur.
 //
-    let mut slab_nomerge: static bool = !IS_ENABLED(CONFIG_SLAB_MERGE_DEFAULT);
+pub static mut slab_nomerge: bool = false;
 #[no_mangle]
-unsafe extern "C" fn setup_slab_nomerge(str: *mut c_char) -> int __init {
-    static int __init setup_slab_nomerge(char *str)
-    {
+unsafe extern "C" fn setup_slab_nomerge(str: *mut c_char) -> c_int {
     slab_nomerge = true;
     return 1;
     }
 #[no_mangle]
-unsafe extern "C" fn setup_slab_merge(str: *mut c_char) -> int __init {
-    static int __init setup_slab_merge(char *str)
-    {
+unsafe extern "C" fn setup_slab_merge(str: *mut c_char) -> c_int {
     slab_nomerge = false;
     return 1;
     }
     __setup_param("slub_nomerge", slub_nomerge, setup_slab_nomerge, 0);
     __setup_param("slub_merge", slub_merge, setup_slab_merge, 0);
-    __setup("slab_nomerge", setup_slab_nomerge);
-    __setup("slab_merge", setup_slab_merge);
+    __setup!("slab_nomerge", setup_slab_nomerge);
+    __setup!("slab_merge", setup_slab_merge);
 //
 // Determine the size of a slab object
 //
 #[no_mangle]
 pub unsafe extern "C" fn kmem_cache_size(s: *mut kmem_cache) -> c_uint {
-    unsigned int kmem_cache_size(struct kmem_cache *s)
-    {
     return s.object_size;
     }
     EXPORT_SYMBOL(kmem_cache_size);
 
 #[no_mangle]
 unsafe extern "C" fn kmem_cache_is_duplicate_name(name: *const c_char) -> bool {
-    static bool kmem_cache_is_duplicate_name(const char *name)
-    {
-    struct kmem_cache *s;
+pub static mut s: *mut c_void = core::ptr::null_mut();
     list_for_each_entry(s, &slab_caches, list) {
-    if (!strcmp(s.name, name))
+    if (!strcmp(s.name, name)) {
     return true;
+    }
     }
     return false;
     }
 #[no_mangle]
 unsafe extern "C" fn kmem_cache_sanity_check(name: *const c_char, size: c_uint) -> c_int {
-    static int kmem_cache_sanity_check(const char *name, unsigned int size)
-    {
     if (!name || in_interrupt() || size > KMALLOC_MAX_SIZE) {
-    pr_err("kmem_cache_create(%s) integrity check failed\n", name);
+    pr_err!("kmem_cache_create(%s) integrity check failed\n", name);
     return -EINVAL;
     }
 // Duplicate names will confuse slabtop, et al
     WARN(kmem_cache_is_duplicate_name(name),
     "kmem_cache of name '%s' already exists\n", name);
-    WARN_ON(strchr(name, ' '));	/* It confuses parsers */
+    WARN_ON!(strchr(name, ' '));	/* It confuses parsers */
     return 0;
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn kmem_cache_sanity_check(name: *const c_char, size: c_uint) -> c_int {
-    static inline int kmem_cache_sanity_check(const char *name, unsigned int size)
-    {
     return 0;
     }
 
@@ -129,9 +368,8 @@ pub unsafe extern "C" fn kmem_cache_sanity_check(name: *const c_char, size: c_ui
 // Figure out what the alignment of the objects will be given a set of
 // flags, a user specified alignment and the size of the objects.
 //
-    static unsigned int calculate_alignment(slab_flags_t flags,
-    unsigned int align, unsigned int size)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn calculate_alignment(flags: slab_flags_t, align: c_uint, size: c_uint) -> c_uint {
 //
 // If the user wants hardware cache aligned objects then follow that
 // suggestion if the object is sufficiently large.
@@ -140,127 +378,136 @@ pub unsafe extern "C" fn kmem_cache_sanity_check(name: *const c_char, size: c_ui
 // alignment though. If that is greater then use it.
 //
     if (flags & SLAB_HWCACHE_ALIGN) {
-    unsigned int ralign;
+    let mut ralign = 0;
     ralign = cache_line_size();
-    while (size <= ralign / 2)
+    while (size <= ralign / 2) {
     ralign /= 2;
+    }
     align = max(align, ralign);
     }
     align = max(align, arch_slab_minalign());
-    return ALIGN(align, sizeof(void *));
+    return ALIGN(align, sizeof!);
     }
 //
 // Find a mergeable slab cache
 //
 #[no_mangle]
 pub unsafe extern "C" fn slab_unmergeable(s: *mut kmem_cache) -> c_int {
-    int slab_unmergeable(struct kmem_cache *s)
-    {
-    if (slab_nomerge || (s.flags & SLAB_NEVER_MERGE))
+    if (slab_nomerge || (s.flags & SLAB_NEVER_MERGE)) {
     return 1;
-    if (s.ctor)
+    }
+    if (s.ctor) {
     return 1;
+    }
 
-    if (s.usersize)
+    if (s.usersize) {
     return 1;
+    }
 
 //
 // We may have set a slab to be unmergeable during bootstrap.
 //
-    if (s.refcount < 0)
+    if (s.refcount < 0) {
     return 1;
+    }
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn slab_args_unmergeable(args: *mut kmem_cache_args, flags: slab_flags_t) -> bool {
-    bool slab_args_unmergeable(struct kmem_cache_args *args, slab_flags_t flags)
-    {
-    if (slab_nomerge)
+    if (slab_nomerge) {
     return true;
-    if (args.ctor)
+    }
+    if (args.ctor) {
     return true;
-    if (IS_ENABLED(CONFIG_HARDENED_USERCOPY) && args.usersize)
+    }
+    if (IS_ENABLED!(CONFIG_HARDENED_USERCOPY) && args.usersize) {
     return true;
-    if (flags & SLAB_NEVER_MERGE)
+    }
+    if (flags & SLAB_NEVER_MERGE) {
     return true;
+    }
     return false;
     }
-    static struct kmem_cache *find_mergeable(unsigned int size, slab_flags_t flags,
-    const char *name, struct kmem_cache_args *args)
-    {
-    struct kmem_cache *s;
-    unsigned int align;
+#[no_mangle]
+pub unsafe extern "C" fn find_mergeable(size: c_uint, flags: slab_flags_t, name: *mut c_char, args: *mut kmem_cache_args) -> *mut c_void {
+pub static mut s: *mut c_void = core::ptr::null_mut();
+    let mut align = 0;
     flags = kmem_cache_flags(flags, name);
-    if (slab_args_unmergeable(args, flags))
+    if (slab_args_unmergeable(args, flags)) {
     return core::ptr::null_mut();
-    size = ALIGN(size, sizeof(void *));
+    }
+    size = ALIGN(size, sizeof!);
     align = calculate_alignment(flags, args.align, size);
     size = ALIGN(size, align);
     list_for_each_entry_reverse(s, &slab_caches, list) {
-    if (slab_unmergeable(s))
+    if (slab_unmergeable(s)) {
     continue;
-    if (size > s.size)
+    }
+    if (size > s.size) {
     continue;
-    if ((flags & SLAB_MERGE_SAME) != (s.flags & SLAB_MERGE_SAME))
+    }
+    if ((flags & SLAB_MERGE_SAME) != (s.flags & SLAB_MERGE_SAME)) {
     continue;
+    }
 //
 // Check if alignment is compatible.
 // Courtesy of Adrian Drzewiecki
 //
-    if ((s.size & ~(align - 1)) != s.size)
+    if ((s.size & ~(align - 1)) != s.size) {
     continue;
-    if (s.size - size >= sizeof(void *))
+    }
+    if (s.size - size >= sizeof!) {
     continue;
+    }
     return s;
     }
     return core::ptr::null_mut();
     }
-    static struct kmem_cache *create_cache(const char *name,
-    unsigned int object_size,
-    struct kmem_cache_args *args,
-    slab_flags_t flags)
-    {
-    struct kmem_cache *s;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn create_cache(name: *mut c_char, object_size: c_uint, args: *mut kmem_cache_args, flags: slab_flags_t) -> *mut c_void {
+pub static mut s: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
 // If a custom freelist pointer is requested make sure it's sane.
     err = -EINVAL;
     if (args.use_freeptr_offset &&
     (args.freeptr_offset >= object_size ||
     (!(flags & SLAB_TYPESAFE_BY_RCU) && !args.ctor) ||
-    !IS_ALIGNED(args.freeptr_offset, __alignof__(freeptr_t))))
-    goto out;
+    !IS_ALIGNED(args.freeptr_offset, __alignof__(freeptr_t)))) {
+// goto;
+    }
     err = -ENOMEM;
     s = kmem_cache_zalloc(kmem_cache, GFP_KERNEL);
-    if (!s)
-    goto out;
+    if (!s) {
+// goto;
+    }
     err = do_kmem_cache_create(s, name, object_size, args, flags);
-    if (err)
-    goto out_free_cache;
+    if (err) {
+// goto;
+    }
     s.refcount = 1;
     list_add(&s.list, &slab_caches);
     return s;
-    out_free_cache:
+// label;
     kmem_cache_free(kmem_cache, s);
-    out:
+// label;
     return ERR_PTR(err);
     }
-    static struct kmem_cache *
-    __kmem_cache_alias(const char *name, unsigned int size, slab_flags_t flags,
-    struct kmem_cache_args *args)
-    {
-    struct kmem_cache *s;
+#[no_mangle]
+pub unsafe extern "C" fn __kmem_cache_alias(name: *mut c_char, size: c_uint, flags: slab_flags_t, args: *mut kmem_cache_args) -> *mut c_void {
+pub static mut s: *mut c_void = core::ptr::null_mut();
     s = find_mergeable(size, flags, name, args);
     if (s) {
-    if (sysfs_slab_alias(s, name))
-    pr_err("SLUB: Unable to add cache alias %s to sysfs\n",
+    if (sysfs_slab_alias(s, name)) {
+    pr_err!("SLUB: Unable to add cache alias %s to sysfs\n",
     name);
-    s.refcount++;
+    }
+    s.refcount += 1;
 //
 // Adjust the object sizes so that we clear
 // the complete object on kzalloc.
 //
     s.object_size = max(s.object_size, size);
-    s.inuse = max(s.inuse, ALIGN(size, sizeof(void *)));
+    s.inuse = max(s.inuse, ALIGN(size, sizeof!));
     }
     return s;
     }
@@ -291,14 +538,11 @@ pub unsafe extern "C" fn slab_args_unmergeable(args: *mut kmem_cache_args, flags
 //
 // Return: a pointer to the cache on success, NULL on failure.
 //
-    struct kmem_cache *__kmem_cache_create_args(const char *name,
-    unsigned int object_size,
-    struct kmem_cache_args *args,
-    slab_flags_t flags)
-    {
-    struct kmem_cache *s = core::ptr::null_mut();
-    const char *cache_name;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn __kmem_cache_create_args(name: *mut c_char, object_size: c_uint, args: *mut kmem_cache_args, flags: slab_flags_t) -> *mut c_void {
+    let mut s = core::ptr::null_mut();
+pub static mut cache_name: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
 
 //
 // If no slab_debug was enabled globally, the static key is not yet
@@ -307,10 +551,12 @@ pub unsafe extern "C" fn slab_args_unmergeable(args: *mut kmem_cache_args, flags
 // It's also possible that this is the first cache created with
 // SLAB_STORE_USER and we should init stack_depot for it.
 //
-    if (flags & SLAB_DEBUG_FLAGS)
+    if (flags & SLAB_DEBUG_FLAGS) {
     static_branch_enable(&slub_debug_enabled);
-    if (flags & SLAB_STORE_USER)
+    }
+    if (flags & SLAB_STORE_USER) {
     stack_depot_init();
+    }
 
     flags &= ~SLAB_DEBUG_FLAGS;
 
@@ -318,36 +564,40 @@ pub unsafe extern "C" fn slab_args_unmergeable(args: *mut kmem_cache_args, flags
 // Caches with specific capacity are special enough. It's simpler to
 // make them unmergeable.
 //
-    if (args.sheaf_capacity)
+    if (args.sheaf_capacity) {
     flags |= SLAB_NO_MERGE;
+    }
     mutex_lock(&slab_mutex);
     err = kmem_cache_sanity_check(name, object_size);
     if (err) {
-    goto out_unlock;
+// goto;
     }
     if (flags & ~SLAB_FLAGS_PERMITTED) {
     err = -EINVAL;
-    goto out_unlock;
+// goto;
     }
 //
 // For now we assume any cache can be used with __GFP_ACCOUNT and thus
 // may need to store objcg pointers for objects
 //
-    if (!mem_cgroup_kmem_disabled())
+    if (!mem_cgroup_kmem_disabled()) {
     flags |= SLAB_MAY_ACCOUNT;
+    }
 // Fail closed on bad usersize of useroffset values.
-    if (!IS_ENABLED(CONFIG_HARDENED_USERCOPY) ||
-    WARN_ON(!args.usersize && args.useroffset) ||
-    WARN_ON(object_size < args.usersize ||
-    object_size - args.usersize < args.useroffset))
+    if (!IS_ENABLED!(CONFIG_HARDENED_USERCOPY) ||
+    WARN_ON!(!args.usersize && args.useroffset) ||
+    WARN_ON!(object_size < args.usersize ||
+    object_size - args.usersize < args.useroffset)) {
     args.usersize = args.useroffset = 0;
+    }
     s = __kmem_cache_alias(name, object_size, flags, args);
-    if (s)
-    goto out_unlock;
+    if (s) {
+// goto;
+    }
     cache_name = kstrdup_const(name, GFP_KERNEL);
     if (!cache_name) {
     err = -ENOMEM;
-    goto out_unlock;
+// goto;
     }
     args.align = calculate_alignment(flags, args.align, object_size);
     s = create_cache(cache_name, object_size, args, flags);
@@ -355,14 +605,15 @@ pub unsafe extern "C" fn slab_args_unmergeable(args: *mut kmem_cache_args, flags
     err = PTR_ERR(s);
     kfree_const(cache_name);
     }
-    out_unlock:
+// label;
     mutex_unlock(&slab_mutex);
     if (err) {
-    if (flags & SLAB_PANIC)
+    if (flags & SLAB_PANIC) {
     panic("%s: Failed to create slab '%s'. Error %d\n",
     __func__, name, err);
+    }
     else {
-    pr_warn("%s(%s) failed with error %d\n",
+    pr_warn!("%s(%s) failed with error %d\n",
     __func__, name, err);
     dump_stack();
     }
@@ -371,7 +622,7 @@ pub unsafe extern "C" fn slab_args_unmergeable(args: *mut kmem_cache_args, flags
     return s;
     }
     EXPORT_SYMBOL(__kmem_cache_create_args);
-    static struct kmem_cache *kmem_buckets_cache __ro_after_init;
+pub static mut kmem_buckets_cache: *mut c_void = core::ptr::null_mut();
 //
 // kmem_buckets_create - Create a set of caches that handle dynamic sized
 // allocations via kmem_buckets_alloc()
@@ -394,37 +645,46 @@ pub unsafe extern "C" fn slab_args_unmergeable(args: *mut kmem_cache_args, flags
     kmem_buckets *kmem_buckets_create(const char *name, slab_flags_t flags,
     unsigned int useroffset,
     unsigned int usersize,
-    void (*ctor)(void *))
+    void (*ctor))
     {
-    let mut mask: c_ulong = 0;
-    unsigned int idx;
-    kmem_buckets *b;
-    BUILD_BUG_ON(ARRAY_SIZE(kmalloc_caches[KMALLOC_NORMAL]) > BITS_PER_LONG);
+pub static mut mask: c_ulong = 0;
+    let mut idx = 0;
+pub static mut b: *mut c_void = core::ptr::null_mut();
+    BUILD_BUG_ON!(ARRAY_SIZE!(kmalloc_caches[KMALLOC_NORMAL]) > BITS_PER_LONG);
 //
 // When the separate buckets API is not built in, just return
 // a non-NULL value for the kmem_buckets pointer, which will be
 // unused when performing allocations.
 //
-    if (!IS_ENABLED(CONFIG_SLAB_BUCKETS))
+    if (!IS_ENABLED!(CONFIG_SLAB_BUCKETS)) {
     return ZERO_SIZE_PTR;
-    if (WARN_ON(!kmem_buckets_cache))
+    }
+    if (WARN_ON!(!kmem_buckets_cache)) {
     return core::ptr::null_mut();
+    }
     b = kmem_cache_alloc(kmem_buckets_cache, GFP_KERNEL|__GFP_ZERO);
-    if (WARN_ON(!b))
+    if (WARN_ON!(!b)) {
     return core::ptr::null_mut();
+    }
     flags |= SLAB_NO_MERGE;
-    for (idx = 0; idx < ARRAY_SIZE(kmalloc_caches[KMALLOC_NORMAL]); idx++) {
-    char *short_size, *cache_name;
-    unsigned int cache_useroffset, cache_usersize;
-    unsigned int size, aligned_idx;
-    if (!kmalloc_caches[KMALLOC_NORMAL][idx])
+    while (idx < ARRAY_SIZE!(kmalloc_caches[KMALLOC_NORMAL])) {
+    let mut short_size = core::ptr::null_mut();
+    let mut cache_name = core::ptr::null_mut();
+    let mut cache_useroffset = 0;
+    let mut cache_usersize = 0;
+    let mut size = 0;
+    let mut aligned_idx = 0;
+    if (!kmalloc_caches[KMALLOC_NORMAL][idx]) {
     continue;
+    }
     size = kmalloc_caches[KMALLOC_NORMAL][idx].object_size;
-    if (!size)
+    if (!size) {
     continue;
+    }
     short_size = strchr(kmalloc_caches[KMALLOC_NORMAL][idx].name, '-');
-    if (WARN_ON(!short_size))
-    goto fail;
+    if (WARN_ON!(!short_size)) {
+// goto;
+    }
     if (useroffset >= size) {
     cache_useroffset = 0;
     cache_usersize = 0;
@@ -435,23 +695,27 @@ pub unsafe extern "C" fn slab_args_unmergeable(args: *mut kmem_cache_args, flags
     aligned_idx = __kmalloc_index(size, false);
     if (!(*b)[aligned_idx]) {
     cache_name = kasprintf(GFP_KERNEL, "%s-%s", name, short_size + 1);
-    if (WARN_ON(!cache_name))
-    goto fail;
+    if (WARN_ON!(!cache_name)) {
+// goto;
+    }
     (*b)[aligned_idx] = kmem_cache_create_usercopy(cache_name, size,
     0, flags, cache_useroffset,
     cache_usersize, ctor);
     kfree(cache_name);
-    if (WARN_ON(!(*b)[aligned_idx]))
-    goto fail;
+    if (WARN_ON!(!(*b)[aligned_idx])) {
+// goto;
+    }
     set_bit(aligned_idx, &mask);
     }
-    if (idx != aligned_idx)
+    if (idx != aligned_idx) {
     (*b)[idx] = (*b)[aligned_idx];
     }
+    }
     return b;
-    fail:
-    for_each_set_bit(idx, &mask, ARRAY_SIZE(kmalloc_caches[KMALLOC_NORMAL]))
+// label;
+    for_each_set_bit(idx, &mask, ARRAY_SIZE!(kmalloc_caches[KMALLOC_NORMAL])) {
     kmem_cache_destroy((*b)[idx]);
+    }
     kmem_cache_free(kmem_buckets_cache, b);
     return core::ptr::null_mut();
     }
@@ -464,32 +728,29 @@ pub unsafe extern "C" fn slab_args_unmergeable(args: *mut kmem_cache_args, flags
 //
 #[no_mangle]
 unsafe extern "C" fn kmem_cache_release(s: *mut kmem_cache) {
-    static void kmem_cache_release(struct kmem_cache *s)
-    {
     kfence_shutdown_cache(s);
-    if (__is_defined(SLAB_SUPPORTS_SYSFS) && slab_state >= FULL)
+    if (__is_defined(SLAB_SUPPORTS_SYSFS) && slab_state >= FULL) {
     sysfs_slab_release(s);
-    else
+    }
+    else {
     slab_kmem_cache_release(s);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn slab_kmem_cache_release(s: *mut kmem_cache) {
-    void slab_kmem_cache_release(struct kmem_cache *s)
-    {
     __kmem_cache_release(s);
     kfree_const(s.name);
     kmem_cache_free(kmem_cache, s);
     }
 #[no_mangle]
 pub unsafe extern "C" fn kmem_cache_destroy(s: *mut kmem_cache) {
-    void kmem_cache_destroy(struct kmem_cache *s)
-    {
-    int err;
-    if (unlikely(!s) || !kasan_check_byte(s))
+    let mut err = 0;
+    if (unlikely(!s) || !kasan_check_byte(s)) {
     return;
+    }
 // in-flight kfree_rcu()'s may include objects from our cache
     kvfree_rcu_barrier_on_cache(s);
-    if (IS_ENABLED(CONFIG_SLUB_RCU_DEBUG) &&
+    if (IS_ENABLED!(CONFIG_SLUB_RCU_DEBUG) &&
     (s.flags & SLAB_TYPESAFE_BY_RCU)) {
 //
 // Under CONFIG_SLUB_RCU_DEBUG, when objects in a
@@ -508,7 +769,7 @@ pub unsafe extern "C" fn kmem_cache_destroy(s: *mut kmem_cache) {
     deferred_work_barrier();
     cpus_read_lock();
     mutex_lock(&slab_mutex);
-    s.refcount--;
+    s.refcount -= 1;
     if (s.refcount) {
     mutex_unlock(&slab_mutex);
     cpus_read_unlock();
@@ -517,19 +778,23 @@ pub unsafe extern "C" fn kmem_cache_destroy(s: *mut kmem_cache) {
 // free asan quarantined objects
     kasan_cache_shutdown(s);
     err = __kmem_cache_shutdown(s);
-    if (!slab_in_kunit_test())
+    if (!slab_in_kunit_test()) {
     WARN(err, "%s %s: Slab cache still has objects when called from %pS",
-    __func__, s.name, (void *)_RET_IP_);
+    __func__, s.name, _RET_IP_);
+    }
     list_del(&s.list);
     mutex_unlock(&slab_mutex);
     cpus_read_unlock();
-    if (slab_state >= FULL)
+    if (slab_state >= FULL) {
     sysfs_slab_unlink(s);
+    }
     debugfs_slab_release(s);
-    if (err)
+    if (err) {
     return;
-    if (s.flags & SLAB_TYPESAFE_BY_RCU)
+    }
+    if (s.flags & SLAB_TYPESAFE_BY_RCU) {
     rcu_barrier();
+    }
     kmem_cache_release(s);
     }
     EXPORT_SYMBOL(kmem_cache_destroy);
@@ -544,25 +809,20 @@ pub unsafe extern "C" fn kmem_cache_destroy(s: *mut kmem_cache) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kmem_cache_shrink(cachep: *mut kmem_cache) -> c_int {
-    int kmem_cache_shrink(struct kmem_cache *cachep)
-    {
     kasan_cache_shrink(cachep);
     return __kmem_cache_shrink(cachep);
     }
     EXPORT_SYMBOL(kmem_cache_shrink);
 #[no_mangle]
 pub unsafe extern "C" fn slab_is_available() -> bool {
-    bool slab_is_available(void)
-    {
     return slab_state >= UP;
     }
 
 #[no_mangle]
 unsafe extern "C" fn kmem_obj_info(kpp: *mut kmem_obj_info, object: *mut c_void, slab: *mut slab) {
-    static void kmem_obj_info(struct kmem_obj_info *kpp, void *object, struct slab *slab)
-    {
-    if (__kfence_obj_info(kpp, object, slab))
+    if (__kfence_obj_info(kpp, object, slab)) {
     return;
+    }
     __kmem_obj_info(kpp, object, slab);
     }
 //
@@ -582,89 +842,103 @@ unsafe extern "C" fn kmem_obj_info(kpp: *mut kmem_obj_info, object: *mut c_void,
 //
 #[no_mangle]
 pub unsafe extern "C" fn kmem_dump_obj(object: *mut c_void) -> bool {
-    bool kmem_dump_obj(void *object)
-    {
-    char *cp = IS_ENABLED(CONFIG_MMU) ? "" : "/vmalloc";
-    int i;
-    struct slab *slab;
-    unsigned long ptroffset;
-    let mut kp: kmem_obj_info = { };
+    let mut cp = IS_ENABLED!(CONFIG_MMU) ? "" : "/vmalloc";
+    let mut i = 0;
+pub static mut slab: *mut c_void = core::ptr::null_mut();
+    let mut ptroffset = 0;
+pub static mut kp: kmem_obj_info = 0;
 // Some arches consider ZERO_SIZE_PTR to be a valid address.
-    if (object < (void *)PAGE_SIZE || !virt_addr_valid(object))
+    if (object < PAGE_SIZE || !virt_addr_valid(object)) {
     return false;
+    }
     slab = virt_to_slab(object);
-    if (!slab)
+    if (!slab) {
     return false;
+    }
     kmem_obj_info(&kp, object, slab);
-    if (kp.kp_slab_cache)
+    if (kp.kp_slab_cache) {
     pr_cont(" slab%s %s", cp, kp.kp_slab_cache.name);
-    else
+    }
+    else {
     pr_cont(" slab%s", cp);
-    if (is_kfence_address(object))
+    }
+    if (is_kfence_address(object)) {
     pr_cont(" (kfence)");
-    if (kp.kp_objp)
-    pr_cont(" start %px", kp.kp_objp);
-    if (kp.kp_data_offset)
-    pr_cont(" data offset %lu", kp.kp_data_offset);
+    }
     if (kp.kp_objp) {
-    ptroffset = ((char *)object - (char *)kp.kp_objp) - kp.kp_data_offset;
+    pr_cont(" start %px", kp.kp_objp);
+    }
+    if (kp.kp_data_offset) {
+    pr_cont(" data offset %lu", kp.kp_data_offset);
+    }
+    if (kp.kp_objp) {
+    ptroffset = (object - kp.kp_objp) - kp.kp_data_offset;
     pr_cont(" pointer offset %lu", ptroffset);
     }
-    if (kp.kp_slab_cache && kp.kp_slab_cache.object_size)
+    if (kp.kp_slab_cache && kp.kp_slab_cache.object_size) {
     pr_cont(" size %u", kp.kp_slab_cache.object_size);
-    if (kp.kp_ret)
-    pr_cont(" allocated at %pS\n", kp.kp_ret);
-    else
-    pr_cont("\n");
-    for (i = 0; i < ARRAY_SIZE(kp.kp_stack); i++) {
-    if (!kp.kp_stack[i])
-    break;
-    pr_info("    %pS\n", kp.kp_stack[i]);
     }
-    if (kp.kp_free_stack[0])
-    pr_cont(" Free path:\n");
-    for (i = 0; i < ARRAY_SIZE(kp.kp_free_stack); i++) {
-    if (!kp.kp_free_stack[i])
+    if (kp.kp_ret) {
+    pr_cont(" allocated at %pS\n", kp.kp_ret);
+    }
+    else {
+    pr_cont("\n");
+    }
+    while (i < ARRAY_SIZE!(kp.kp_stack)) {
+    if (!kp.kp_stack[i]) {
     break;
-    pr_info("    %pS\n", kp.kp_free_stack[i]);
+    }
+    pr_info!("    %pS\n", kp.kp_stack[i]);
+    }
+    if (kp.kp_free_stack[0]) {
+    pr_cont(" Free path:\n");
+    }
+    while (i < ARRAY_SIZE!(kp.kp_free_stack)) {
+    if (!kp.kp_free_stack[i]) {
+    break;
+    }
+    pr_info!("    %pS\n", kp.kp_free_stack[i]);
     }
     return true;
     }
     EXPORT_SYMBOL_GPL(kmem_dump_obj);
 
 // Create a cache during boot when no slab services are available yet
-    void __init create_boot_cache(struct kmem_cache *s, const char *name,
+    void __init create_boot_cache(kmem_cache *s, const char *name,
     unsigned int size, slab_flags_t flags,
     unsigned int useroffset, unsigned int usersize)
     {
-    int err;
-    let mut align: c_uint = ARCH_KMALLOC_MINALIGN;
-    let mut kmem_args: kmem_cache_args = {};
+    let mut err = 0;
+pub static mut align: c_uint = 0;
+pub static mut kmem_args: kmem_cache_args = 0;
 //
 // kmalloc caches guarantee alignment of at least the largest
 // power-of-two divisor of the size. For power-of-two sizes,
 // it is the size itself.
 //
-    if (flags & SLAB_KMALLOC)
+    if (flags & SLAB_KMALLOC) {
     align = max(align, 1U << (ffs(size) - 1));
+    }
     kmem_args.align = calculate_alignment(flags, align, size);
 
     kmem_args.useroffset = useroffset;
     kmem_args.usersize = usersize;
 
     err = do_kmem_cache_create(s, name, size, &kmem_args, flags);
-    if (err)
+    if (err) {
     panic("Creation of kmalloc slab %s size=%u failed. Reason %d\n",
     name, size, err);
+    }
     s.refcount = -1;	/* Exempt from merging for now */
     }
     static struct kmem_cache *__init create_kmalloc_cache(const char *name,
     unsigned int size,
     slab_flags_t flags)
     {
-    struct kmem_cache *s = kmem_cache_zalloc(kmem_cache, GFP_NOWAIT);
-    if (!s)
+    let mut s = kmem_cache_zalloc(kmem_cache, GFP_NOWAIT);
+    if (!s) {
     panic("Out of memory when creating slab %s\n", name);
+    }
     create_boot_cache(s, name, size, flags | SLAB_KMALLOC, 0, size);
     list_add(&s.list, &slab_caches);
     s.refcount = 1;
@@ -711,10 +985,8 @@ pub unsafe extern "C" fn kmem_dump_obj(object: *mut c_void) -> bool {
     };
 #[no_mangle]
 pub unsafe extern "C" fn kmalloc_size_roundup(size: usize) -> usize {
-    size_t kmalloc_size_roundup(size_t size)
-    {
     if (size && size <= KMALLOC_MAX_CACHE_SIZE) {
-    struct kmem_cache *s;
+pub static mut s: *mut c_void = core::ptr::null_mut();
 //
 // The flags don't matter since size_index is common to all.
 // Neither does the caller for just getting ->object_size.
@@ -724,8 +996,9 @@ pub unsafe extern "C" fn kmalloc_size_roundup(size: usize) -> usize {
     return s.object_size;
     }
 // Above the smaller buckets, size is a multiple of page size.
-    if (size && size <= KMALLOC_MAX_SIZE)
+    if (size && size <= KMALLOC_MAX_SIZE) {
     return PAGE_SIZE << get_order(size);
+    }
 //
 // Return 'size' for 0 - kmalloc() returns ZERO_SIZE_PTR
 // and very large size - kmalloc() may fail.
@@ -742,14 +1015,14 @@ pub unsafe extern "C" fn kmalloc_size_roundup(size: usize) -> usize {
 
 // Macro flag: #define KMALLOC_NO_OBJ_EXT_NAME(sz)
 
-    {								\
-    .name[KMALLOC_NORMAL]  = "kmalloc-" #__short_size,	\
-    KMALLOC_RCL_NAME(__short_size)				\
-    KMALLOC_CGROUP_NAME(__short_size)			\
-    KMALLOC_DMA_NAME(__short_size)				\
-    KMALLOC_PARTITION_NAME(KMALLOC_PARTITION_CACHES_NR, __short_size)	\
-    KMALLOC_NO_OBJ_EXT_NAME(__short_size)			\
-    .size = __size,						\
+    {								
+    .name[KMALLOC_NORMAL]  = "kmalloc-" #__short_size,	
+    KMALLOC_RCL_NAME(__short_size)				
+    KMALLOC_CGROUP_NAME(__short_size)			
+    KMALLOC_DMA_NAME(__short_size)				
+    KMALLOC_PARTITION_NAME(KMALLOC_PARTITION_CACHES_NR, __short_size)	
+    KMALLOC_NO_OBJ_EXT_NAME(__short_size)			
+    .size = __size,						
     }
 //
 // kmalloc_info[] is to make slab_debug=,kmalloc-xx option work at boot time.
@@ -792,16 +1065,15 @@ pub unsafe extern "C" fn kmalloc_size_roundup(size: usize) -> usize {
 // around with ARCH_KMALLOC_MINALIGN
 //
 #[no_mangle]
-pub unsafe extern "C" fn setup_kmalloc_cache_index_table() -> void __init {
-    void __init setup_kmalloc_cache_index_table(void)
-    {
-    unsigned int i;
-    BUILD_BUG_ON(KMALLOC_MIN_SIZE > 256 ||
+pub unsafe extern "C" fn setup_kmalloc_cache_index_table()  {
+    let mut i = 0;
+    BUILD_BUG_ON!(KMALLOC_MIN_SIZE > 256 ||
     !is_power_of_2(KMALLOC_MIN_SIZE));
-    for (i = 8; i < KMALLOC_MIN_SIZE; i += 8) {
-    let mut elem: c_uint = size_index_elem(i);
-    if (elem >= ARRAY_SIZE(kmalloc_size_index))
+    while (i < KMALLOC_MIN_SIZE) {
+pub static mut elem: c_uint = 0;
+    if (elem >= ARRAY_SIZE!(kmalloc_size_index)) {
     break;
+    }
     kmalloc_size_index[elem] = KMALLOC_SHIFT_LOW;
     }
     if (KMALLOC_MIN_SIZE >= 64) {
@@ -809,8 +1081,9 @@ pub unsafe extern "C" fn setup_kmalloc_cache_index_table() -> void __init {
 // The 96 byte sized cache is not used if the alignment
 // is 64 byte.
 //
-    for (i = 64 + 8; i <= 96; i += 8)
+    for (i = 64 + 8; i <= 96; i += 8) {
     kmalloc_size_index[size_index_elem(i)] = 7;
+    }
     }
     if (KMALLOC_MIN_SIZE >= 128) {
 //
@@ -818,47 +1091,48 @@ pub unsafe extern "C" fn setup_kmalloc_cache_index_table() -> void __init {
 // is 128 byte. Redirect kmalloc to use the 256 byte cache
 // instead.
 //
-    for (i = 128 + 8; i <= 192; i += 8)
+    for (i = 128 + 8; i <= 192; i += 8) {
     kmalloc_size_index[size_index_elem(i)] = 8;
+    }
     }
     }
 #[no_mangle]
 unsafe extern "C" fn __kmalloc_minalign() -> c_uint {
-    static unsigned int __kmalloc_minalign(void)
-    {
-    let mut minalign: c_uint = dma_get_cache_alignment();
-    if (IS_ENABLED(CONFIG_DMA_BOUNCE_UNALIGNED_KMALLOC) &&
-    is_swiotlb_allocated())
+pub static mut minalign: c_uint = 0;
+    if (IS_ENABLED!(CONFIG_DMA_BOUNCE_UNALIGNED_KMALLOC) &&
+    is_swiotlb_allocated()) {
     minalign = ARCH_KMALLOC_MINALIGN;
+    }
     return max(minalign, arch_slab_minalign());
     }
     static void __init
     new_kmalloc_cache(int idx, enum kmalloc_cache_type type)
     {
-    let mut flags: slab_flags_t = 0;
-    let mut minalign: c_uint = __kmalloc_minalign();
-    let mut aligned_size: c_uint = kmalloc_info[idx].size;
-    let mut aligned_idx: c_int = idx;
+pub static mut flags: slab_flags_t = 0;
+pub static mut minalign: c_uint = 0;
+pub static mut aligned_size: c_uint = 0;
+pub static mut aligned_idx: c_int = 0;
     if ((KMALLOC_RECLAIM != KMALLOC_NORMAL) && (type == KMALLOC_RECLAIM)) {
     flags |= SLAB_RECLAIM_ACCOUNT;
-    } else if (IS_ENABLED(CONFIG_MEMCG) && (type == KMALLOC_CGROUP)) {
+    } else if (IS_ENABLED!(CONFIG_MEMCG) && (type == KMALLOC_CGROUP)) {
     if (mem_cgroup_kmem_disabled()) {
     kmalloc_caches[type][idx] = kmalloc_caches[KMALLOC_NORMAL][idx];
     return;
     }
     flags |= SLAB_ACCOUNT;
-    } else if (IS_ENABLED(CONFIG_SLAB_OBJ_EXT) && type == KMALLOC_NO_OBJ_EXT) {
+    } else if (IS_ENABLED!(CONFIG_SLAB_OBJ_EXT) && type == KMALLOC_NO_OBJ_EXT) {
     if (!need_kmalloc_no_objext()) {
     kmalloc_caches[type][idx] = kmalloc_caches[KMALLOC_NORMAL][idx];
     return;
     }
     flags |= SLAB_NO_OBJ_EXT | SLAB_NO_MERGE;
-    } else if (IS_ENABLED(CONFIG_ZONE_DMA) && (type == KMALLOC_DMA)) {
+    } else if (IS_ENABLED!(CONFIG_ZONE_DMA) && (type == KMALLOC_DMA)) {
     flags |= SLAB_CACHE_DMA;
     }
 
-    if (type >= KMALLOC_PARTITION_START && type <= KMALLOC_PARTITION_END)
+    if (type >= KMALLOC_PARTITION_START && type <= KMALLOC_PARTITION_END) {
     flags |= SLAB_NO_MERGE;
+    }
 
 //
 // If memcg_kmem is enabled and this is a KMALLOC_NORMAL cache and not
@@ -870,23 +1144,26 @@ unsafe extern "C" fn __kmalloc_minalign() -> c_uint {
 // KMALLOC_NO_OBJ_EXT cache.
 //
     if (!mem_cgroup_kmem_disabled()) {
-    if (type == KMALLOC_NORMAL && KMALLOC_RECLAIM != KMALLOC_NORMAL)
+    if (type == KMALLOC_NORMAL && KMALLOC_RECLAIM != KMALLOC_NORMAL) {
     flags |= SLAB_NO_MERGE;
-#[no_mangle]
-pub unsafe extern "C" fn if(SLAB_NO_OBJ_EXT): !(flags &) -> else {
-    else if (!(flags & SLAB_NO_OBJ_EXT))
+    }
+
+    else if (!(flags & SLAB_NO_OBJ_EXT)) {
     flags |= SLAB_MAY_ACCOUNT;
+    }
     }
     if (minalign > ARCH_KMALLOC_MINALIGN) {
     aligned_size = ALIGN(aligned_size, minalign);
     aligned_idx = __kmalloc_index(aligned_size, false);
     }
-    if (!kmalloc_caches[type][aligned_idx])
+    if (!kmalloc_caches[type][aligned_idx]) {
     kmalloc_caches[type][aligned_idx] = create_kmalloc_cache(
     kmalloc_info[aligned_idx].name[type],
     aligned_size, flags);
-    if (idx != aligned_idx)
+    }
+    if (idx != aligned_idx) {
     kmalloc_caches[type][idx] = kmalloc_caches[type][aligned_idx];
+    }
     }
 //
 // Create the kmalloc array. Some of the regular kmalloc arrays
@@ -894,85 +1171,82 @@ pub unsafe extern "C" fn if(SLAB_NO_OBJ_EXT): !(flags &) -> else {
 // enable allocations for slab creation.
 //
 #[no_mangle]
-pub unsafe extern "C" fn create_kmalloc_caches() -> void __init {
-    void __init create_kmalloc_caches(void)
-    {
-    int i;
+pub unsafe extern "C" fn create_kmalloc_caches()  {
+    let mut i = 0;
     enum kmalloc_cache_type type;
 //
 // Including KMALLOC_CGROUP if CONFIG_MEMCG defined
 //
-    for (type = KMALLOC_NORMAL; type < NR_KMALLOC_TYPES; type++) {
+    while (type < NR_KMALLOC_TYPES) {
 // Caches that are NOT of the two-to-the-power-of size.
-    if (KMALLOC_MIN_SIZE <= 32)
+    if (KMALLOC_MIN_SIZE <= 32) {
     new_kmalloc_cache(1, type);
-    if (KMALLOC_MIN_SIZE <= 64)
+    }
+    if (KMALLOC_MIN_SIZE <= 64) {
     new_kmalloc_cache(2, type);
+    }
 // Caches that are of the two-to-the-power-of size.
-    for (i = KMALLOC_SHIFT_LOW; i <= KMALLOC_SHIFT_HIGH; i++)
+    for (i = KMALLOC_SHIFT_LOW; i <= KMALLOC_SHIFT_HIGH; i++) {
     new_kmalloc_cache(i, type);
+    }
     }
 
     random_kmalloc_seed = get_random_u64();
 
 // Kmalloc array is now usable
     slab_state = UP;
-    if (IS_ENABLED(CONFIG_SLAB_BUCKETS))
+    if (IS_ENABLED!(CONFIG_SLAB_BUCKETS)) {
     kmem_buckets_cache = kmem_cache_create("kmalloc_buckets",
-    sizeof(kmem_buckets),
+    sizeof!(kmem_buckets),
     0, SLAB_NO_MERGE, core::ptr::null_mut());
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn kmalloc_fix_flags(flags: gfp_t) -> gfp_t {
-    gfp_t kmalloc_fix_flags(gfp_t flags)
-    {
-    let mut invalid_mask: gfp_t = flags & GFP_SLAB_BUG_MASK;
+pub static mut invalid_mask: gfp_t = 0;
     flags &= ~GFP_SLAB_BUG_MASK;
-    pr_warn("Unexpected gfp: %#x (%pGg). Fixing up to gfp: %#x (%pGg). Fix your code!\n",
+    pr_warn!("Unexpected gfp: %#x (%pGg). Fixing up to gfp: %#x (%pGg). Fix your code!\n",
     invalid_mask, &invalid_mask, flags, &flags);
     dump_stack();
     return flags;
     }
 
 // Randomize a generic freelist
-    static void freelist_randomize(unsigned int *list,
-    unsigned int count)
-    {
-    unsigned int rand;
-    unsigned int i;
-    for (i = 0; i < count; i++)
+#[no_mangle]
+pub unsafe extern "C" fn freelist_randomize(list: *mut c_uint, count: c_uint) {
+    let mut rand = 0;
+    let mut i = 0;
+    for (i = 0; i < count; i++) {
     list[i] = i;
+    }
 // Fisher-Yates shuffle
-    for (i = count - 1; i > 0; i--) {
+    while (i > 0) {
     rand = get_random_u32_below(i + 1);
     swap(list[i], list[rand]);
     }
     }
 // Create a random sequence per cache
-    int cache_random_seq_create(struct kmem_cache *cachep, unsigned int count,
-    gfp_t gfp)
-    {
-    if (count < 2 || cachep.random_seq)
+#[no_mangle]
+pub unsafe extern "C" fn cache_random_seq_create(cachep: *mut kmem_cache, count: c_uint, gfp: gfp_t) -> c_int {
+    if (count < 2 || cachep.random_seq) {
     return 0;
-    cachep.random_seq = kcalloc(count, sizeof(unsigned int), gfp);
-    if (!cachep.random_seq)
+    }
+    cachep.random_seq = kcalloc(count, sizeof!(unsigned int), gfp);
+    if (!cachep.random_seq) {
     return -ENOMEM;
+    }
     freelist_randomize(cachep.random_seq, count);
     return 0;
     }
 // Destroy the per-cache random freelist sequence
 #[no_mangle]
 pub unsafe extern "C" fn cache_random_seq_destroy(cachep: *mut kmem_cache) {
-    void cache_random_seq_destroy(struct kmem_cache *cachep)
-    {
     kfree(cachep.random_seq);
     cachep.random_seq = core::ptr::null_mut();
     }
 
 #[no_mangle]
 unsafe extern "C" fn print_slabinfo_header(m: *mut seq_file) {
-    static void print_slabinfo_header(struct seq_file *m)
-    {
 //
 // Output format version, so at least we can change it
 // without _too_ many complaints.
@@ -983,27 +1257,23 @@ unsafe extern "C" fn print_slabinfo_header(m: *mut seq_file) {
     seq_puts(m, " : slabdata <active_slabs> <num_slabs> <sharedavail>");
     seq_putc(m, '\n');
     }
-    static void *slab_start(struct seq_file *m, loff_t *pos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn slab_start(m: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
     mutex_lock(&slab_mutex);
     return seq_list_start(&slab_caches, *pos);
     }
-    static void *slab_next(struct seq_file *m, void *p, loff_t *pos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn slab_next(m: *mut seq_file, p: *mut c_void, pos: *mut loff_t) -> *mut c_void {
     return seq_list_next(p, &slab_caches, pos);
     }
 #[no_mangle]
 unsafe extern "C" fn slab_stop(m: *mut seq_file, p: *mut c_void) {
-    static void slab_stop(struct seq_file *m, void *p)
-    {
     mutex_unlock(&slab_mutex);
     }
 #[no_mangle]
 unsafe extern "C" fn cache_show(s: *mut kmem_cache, m: *mut seq_file) {
-    static void cache_show(struct kmem_cache *s, struct seq_file *m)
-    {
-    struct slabinfo sinfo;
-    memset(&sinfo, 0, sizeof(sinfo));
+pub static mut sinfo: usize = 0;
+    memset(&sinfo, 0, sizeof!(sinfo));
     get_slabinfo(s, &sinfo);
     seq_printf(m, "%-17s %6lu %6lu %6u %4u %4d",
     s.name, sinfo.active_objs, sinfo.num_objs, s.size,
@@ -1016,20 +1286,17 @@ unsafe extern "C" fn cache_show(s: *mut kmem_cache, m: *mut seq_file) {
     }
 #[no_mangle]
 unsafe extern "C" fn slab_show(m: *mut seq_file, p: *mut c_void) -> c_int {
-    static int slab_show(struct seq_file *m, void *p)
-    {
-    struct kmem_cache *s = list_entry(p, struct kmem_cache, list);
-    if (p == slab_caches.next)
+    let mut s = list_entry(p, kmem_cache, list);
+    if (p == slab_caches.next) {
     print_slabinfo_header(m);
+    }
     cache_show(s, m);
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn dump_unreclaimable_slab() {
-    void dump_unreclaimable_slab(void)
-    {
-    struct kmem_cache *s;
-    struct slabinfo sinfo;
+pub static mut s: *mut c_void = core::ptr::null_mut();
+pub static mut sinfo: usize = 0;
 //
 // Here acquiring slab_mutex is risky since we don't prefer to get
 // sleep in oom path. But, without mutex hold, it may introduce a
@@ -1038,19 +1305,21 @@ pub unsafe extern "C" fn dump_unreclaimable_slab() {
 // without acquiring the mutex.
 //
     if (!mutex_trylock(&slab_mutex)) {
-    pr_warn("excessive unreclaimable slab but cannot dump stats\n");
+    pr_warn!("excessive unreclaimable slab but cannot dump stats\n");
     return;
     }
-    pr_info("Unreclaimable slab info:\n");
-    pr_info("Name                      Used          Total\n");
+    pr_info!("Unreclaimable slab info:\n");
+    pr_info!("Name                      Used          Total\n");
     list_for_each_entry(s, &slab_caches, list) {
-    if (s.flags & SLAB_RECLAIM_ACCOUNT)
+    if (s.flags & SLAB_RECLAIM_ACCOUNT) {
     continue;
+    }
     get_slabinfo(s, &sinfo);
-    if (sinfo.num_objs > 0)
-    pr_info("%-17s %10luKB %10luKB\n", s.name,
+    if (sinfo.num_objs > 0) {
+    pr_info!("%-17s %10luKB %10luKB\n", s.name,
     (sinfo.active_objs * s.size) / 1024,
     (sinfo.num_objs * s.size) / 1024);
+    }
     }
     mutex_unlock(&slab_mutex);
     }
@@ -1067,33 +1336,18 @@ pub unsafe extern "C" fn dump_unreclaimable_slab() {
 // num-pages-per-slab
 // + further values on SMP and with statistics enabled
 //
-    static const struct seq_operations slabinfo_op = {
-    .start = slab_start,
-    .next = slab_next,
-    .stop = slab_stop,
-    .show = slab_show,
-    };
+pub static mut seq_operations: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn slabinfo_open(inode: *mut inode, file: *mut file) -> c_int {
-    static int slabinfo_open(struct inode *inode, struct file *file)
-    {
     return seq_open(file, &slabinfo_op);
     }
-    static const struct proc_ops slabinfo_proc_ops = {
-    .proc_flags	= PROC_ENTRY_PERMANENT,
-    .proc_open	= slabinfo_open,
-    .proc_read	= seq_read,
-    .proc_lseek	= seq_lseek,
-    .proc_release	= seq_release,
-    };
+pub static mut proc_ops: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn slab_proc_init() -> int __init {
-    static int __init slab_proc_init(void)
-    {
+unsafe extern "C" fn slab_proc_init() -> c_int {
     proc_create("slabinfo", SLABINFO_RIGHTS, core::ptr::null_mut(), &slabinfo_proc_ops);
     return 0;
     }
-    module_init(slab_proc_init);
+    module_init!(slab_proc_init);
 
 //
 // kfree_sensitive - Clear sensitive information in memory before freeing
@@ -1108,10 +1362,8 @@ unsafe extern "C" fn slab_proc_init() -> int __init {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kfree_sensitive(p: *const c_void) {
-    void kfree_sensitive(const void *p)
-    {
-    size_t ks;
-    void *mem = (void *)p;
+    let mut ks = 0;
+    let mut mem = p;
     ks = ksize(mem);
     if (ks) {
     kasan_unpoison_range(mem, ks);
@@ -1124,10 +1376,11 @@ pub unsafe extern "C" fn kfree_sensitive(p: *const c_void) {
     __bpf_kfunc_start_defs();
     __bpf_kfunc struct kmem_cache *bpf_get_kmem_cache(u64 addr)
     {
-    struct slab *slab;
-    if (!virt_addr_valid((void *)(long)addr))
+pub static mut slab: *mut c_void = core::ptr::null_mut();
+    if (!virt_addr_valid((long)addr)) {
     return core::ptr::null_mut();
-    slab = virt_to_slab((void *)(long)addr);
+    }
+    slab = virt_to_slab((long)addr);
     return slab ? slab.slab_cache : core::ptr::null_mut();
     }
     __bpf_kfunc_end_defs();
@@ -1139,30 +1392,31 @@ pub unsafe extern "C" fn kfree_sensitive(p: *const c_void) {
     EXPORT_TRACEPOINT_SYMBOL(kmem_cache_free);
 #[no_mangle]
 pub unsafe extern "C" fn kfree_call_rcu_nolock(head: *mut kvfree_rcu_head, ptr: *mut c_void) {
-    void kfree_call_rcu_nolock(struct kvfree_rcu_head *head, void *ptr)
-    {
-    struct slab *slab;
-    if (!IS_ENABLED(CONFIG_KVFREE_RCU_BATCHED))
-    goto fallback;
-    if (unlikely(is_vmalloc_addr(ptr)))
-    goto fallback;
+pub static mut slab: *mut c_void = core::ptr::null_mut();
+    if (!IS_ENABLED!(CONFIG_KVFREE_RCU_BATCHED)) {
+// goto;
+    }
+    if (unlikely(is_vmalloc_addr(ptr))) {
+// goto;
+    }
     slab = virt_to_slab(ptr);
-    if (unlikely(!slab))
-    goto fallback;
-    if (unlikely(IS_ENABLED(CONFIG_NUMA) && slab_nid(slab) != numa_mem_id()))
-    goto fallback;
-    if (unlikely(!__kfree_rcu_sheaf(slab.slab_cache, ptr, SLAB_FREE_NOLOCK)))
-    goto fallback;
+    if (unlikely(!slab)) {
+// goto;
+    }
+    if (unlikely(IS_ENABLED!(CONFIG_NUMA) && slab_nid(slab) != numa_mem_id())) {
+// goto;
+    }
+    if (unlikely(!__kfree_rcu_sheaf(slab.slab_cache, ptr, SLAB_FREE_NOLOCK))) {
+// goto;
+    }
     return;
-    fallback:
+// label;
     defer_kfree_rcu(head);
     }
     EXPORT_SYMBOL_GPL(kfree_call_rcu_nolock);
 
 #[no_mangle]
 pub unsafe extern "C" fn kvfree_call_rcu(head: *mut kvfree_rcu_head, ptr: *mut c_void) {
-    void kvfree_call_rcu(struct kvfree_rcu_head *head, void *ptr)
-    {
     if (head) {
     kasan_record_aux_stack(ptr);
     call_rcu(&head.head, kvfree_rcu_cb);
@@ -1176,22 +1430,16 @@ pub unsafe extern "C" fn kvfree_call_rcu(head: *mut kvfree_rcu_head, ptr: *mut c
     EXPORT_SYMBOL_GPL(kvfree_call_rcu);
 #[no_mangle]
 pub unsafe extern "C" fn kvfree_rcu_barrier() {
-    void kvfree_rcu_barrier(void)
-    {
     deferred_work_barrier();
     rcu_barrier();
     }
 #[no_mangle]
 pub unsafe extern "C" fn kvfree_rcu_barrier_on_cache(s: *mut kmem_cache) {
-    void kvfree_rcu_barrier_on_cache(struct kmem_cache *s)
-    {
     deferred_work_barrier();
     rcu_barrier();
     }
 #[no_mangle]
-pub unsafe extern "C" fn kvfree_rcu_init() -> void __init {
-    void __init kvfree_rcu_init(void)
-    {
+pub unsafe extern "C" fn kvfree_rcu_init()  {
     }
 
 //
@@ -1200,8 +1448,8 @@ pub unsafe extern "C" fn kvfree_rcu_init() -> void __init {
 // per-CPU. Object size is equal to one page. This value
 // can be changed at boot time.
 //
-    let mut rcu_min_cached_objs: static int = 5;
-    module_param(rcu_min_cached_objs, int, 0444);
+pub static mut rcu_min_cached_objs: int = 5;
+    module_param!(rcu_min_cached_objs, int, 0444);
 // A page shrinker can ask for pages to be freed to make them
 // available for other parts of the system. This usually happens
 // under low memory conditions, and in that case we should also
@@ -1210,9 +1458,9 @@ pub unsafe extern "C" fn kvfree_rcu_init() -> void __init {
 // The default value is 5 seconds, which is long enough to reduce
 // interference with the shrinker while it asks other systems to
 // drain their caches.
-    let mut rcu_delay_page_cache_fill_msec: static int = 5000;
-    module_param(rcu_delay_page_cache_fill_msec, int, 0444);
-    static struct workqueue_struct *rcu_reclaim_wq;
+pub static mut rcu_delay_page_cache_fill_msec: int = 5000;
+    module_param!(rcu_delay_page_cache_fill_msec, int, 0444);
+pub static mut rcu_reclaim_wq: *mut c_void = core::ptr::null_mut();
 // Maximum number of jiffies to wait before draining a batch.
 
 pub const KFREE_N_BATCHES: c_int = 2;
@@ -1230,7 +1478,7 @@ pub struct kvfree_rcu_bulk_data {
     pub list: list_head,
     pub gp_snap: rcu_gp_seq,
     pub nr_records: c_ulong,
-    pub __counted_by(nr_records): *mut *mut void records[],
+    pub __counted_by(nr_records): *mut *mut c_void records[],
 }
 
 //
@@ -1239,7 +1487,7 @@ pub struct kvfree_rcu_bulk_data {
 // kvfree_rcu_bulk_data structure becomes exactly one page.
 //
 
-    ((PAGE_SIZE - sizeof(struct kvfree_rcu_bulk_data)) / sizeof(void *))
+    ((PAGE_SIZE - sizeof!(kvfree_rcu_bulk_data)) / sizeof!)
 //
 // struct kfree_rcu_cpu_work - single batch of kfree_rcu() requests
 // @rcu_work: Let queue_rcu_work() invoke workqueue handler after grace period
@@ -1308,86 +1556,85 @@ pub struct kfree_rcu_cpu {
     pub nr_bkv_objs: c_int,
 }
 
-    static DEFINE_PER_CPU(struct kfree_rcu_cpu, krc) = {
+    static DEFINE_PER_CPU(kfree_rcu_cpu, krc) = {
     .lock = __RAW_SPIN_LOCK_UNLOCKED(krc.lock),
     };
     static __always_inline void
-    debug_rcu_bhead_unqueue(struct kvfree_rcu_bulk_data *bhead)
+    debug_rcu_bhead_unqueue(kvfree_rcu_bulk_data *bhead)
     {
 
-    int i;
-    for (i = 0; i < bhead.nr_records; i++)
-    debug_rcu_head_unqueue((struct rcu_head *)(bhead.records[i]));
+    let mut i = 0;
+    for (i = 0; i < bhead.nr_records; i++) {
+    debug_rcu_head_unqueue((bhead.records[i]));
+    }
 
     }
-    static inline struct kfree_rcu_cpu *
-    krc_this_cpu_lock(unsigned long *flags)
-    {
-    struct kfree_rcu_cpu *krcp;
+#[no_mangle]
+pub unsafe extern "C" fn krc_this_cpu_lock(flags: *mut c_ulong) -> *mut c_void {
+pub static mut krcp: *mut c_void = core::ptr::null_mut();
     local_irq_save(*flags);	// For safely calling this_cpu_ptr().
     krcp = this_cpu_ptr(&krc);
     raw_spin_lock(&krcp.lock);
     return krcp;
     }
-    static inline void
-    krc_this_cpu_unlock(struct kfree_rcu_cpu *krcp, unsigned long flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn krc_this_cpu_unlock(krcp: *mut kfree_rcu_cpu, flags: c_ulong) {
     raw_spin_unlock_irqrestore(&krcp.lock, flags);
     }
-    static inline struct kvfree_rcu_bulk_data *
-    get_cached_bnode(struct kfree_rcu_cpu *krcp)
-    {
-    if (!krcp.nr_bkv_objs)
+#[no_mangle]
+pub unsafe extern "C" fn get_cached_bnode(krcp: *mut kfree_rcu_cpu) -> *mut c_void {
+    if (!krcp.nr_bkv_objs) {
     return core::ptr::null_mut();
+    }
     WRITE_ONCE(krcp.nr_bkv_objs, krcp.nr_bkv_objs - 1);
-    return (struct kvfree_rcu_bulk_data *)
+    return 
     llist_del_first(&krcp.bkvcache);
     }
-    static inline bool
-    put_cached_bnode(struct kfree_rcu_cpu *krcp,
-    struct kvfree_rcu_bulk_data *bnode)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn put_cached_bnode(krcp: *mut kfree_rcu_cpu, bnode: *mut kvfree_rcu_bulk_data) -> bool {
 // Check the limit.
-    if (krcp.nr_bkv_objs >= rcu_min_cached_objs)
+    if (krcp.nr_bkv_objs >= rcu_min_cached_objs) {
     return false;
-    llist_add((struct llist_node *) bnode, &krcp.bkvcache);
+    }
+    llist_add( bnode, &krcp.bkvcache);
     WRITE_ONCE(krcp.nr_bkv_objs, krcp.nr_bkv_objs + 1);
     return true;
     }
-    static int
-    drain_page_cache(struct kfree_rcu_cpu *krcp)
-    {
-    unsigned long flags;
-    struct llist_node *page_list, *pos, *n;
-    let mut freed: c_int = 0;
-    if (!rcu_min_cached_objs)
+#[no_mangle]
+pub unsafe extern "C" fn drain_page_cache(krcp: *mut kfree_rcu_cpu) -> c_int {
+    let mut flags = 0;
+    let mut page_list = core::ptr::null_mut();
+    let mut pos = core::ptr::null_mut();
+    let mut n = core::ptr::null_mut();
+pub static mut freed: c_int = 0;
+    if (!rcu_min_cached_objs) {
     return 0;
+    }
     raw_spin_lock_irqsave(&krcp.lock, flags);
     page_list = llist_del_all(&krcp.bkvcache);
     WRITE_ONCE(krcp.nr_bkv_objs, 0);
     raw_spin_unlock_irqrestore(&krcp.lock, flags);
     llist_for_each_safe(pos, n, page_list) {
     free_page((unsigned long)pos);
-    freed++;
+    freed += 1;
     }
     return freed;
     }
-    static void
-    kvfree_rcu_bulk(struct kfree_rcu_cpu *krcp,
-    struct kvfree_rcu_bulk_data *bnode, int idx)
-    {
-    unsigned long flags;
-    int i;
-    if (!WARN_ON_ONCE(!poll_state_synchronize_rcu_full(&bnode.gp_snap))) {
+#[no_mangle]
+pub unsafe extern "C" fn kvfree_rcu_bulk(krcp: *mut kfree_rcu_cpu, bnode: *mut kvfree_rcu_bulk_data, idx: c_int) {
+    let mut flags = 0;
+    let mut i = 0;
+    if (!WARN_ON_ONCE!(!poll_state_synchronize_rcu_full(&bnode.gp_snap))) {
     debug_rcu_bhead_unqueue(bnode);
     rcu_lock_acquire(&rcu_callback_map);
-    if (idx == 0) { // kmalloc() / kfree().
+    if (idx == 0) { // kmalloc() / kfree(). {
     trace_rcu_invoke_kfree_bulk_callback(
     "slab", bnode.nr_records,
     bnode.records);
+    }
     kfree_bulk(bnode.nr_records, bnode.records);
     } else { // vmalloc() / vfree().
-    for (i = 0; i < bnode.nr_records; i++) {
+    while (i < bnode.nr_records) {
     trace_rcu_invoke_kvfree_callback(
     "slab", bnode.records[i], 0);
     vfree(bnode.records[i]);
@@ -1396,22 +1643,23 @@ pub struct kfree_rcu_cpu {
     rcu_lock_release(&rcu_callback_map);
     }
     raw_spin_lock_irqsave(&krcp.lock, flags);
-    if (put_cached_bnode(krcp, bnode))
+    if (put_cached_bnode(krcp, bnode)) {
     bnode = core::ptr::null_mut();
+    }
     raw_spin_unlock_irqrestore(&krcp.lock, flags);
-    if (bnode)
+    if (bnode) {
     free_page((unsigned long) bnode);
+    }
     cond_resched_tasks_rcu_qs();
     }
-    static void
-    kvfree_rcu_list(struct kvfree_rcu_head *head)
-    {
-    struct kvfree_rcu_head *next;
-    for (; head; head = next) {
-    void *ptr = kvmalloc_obj_start_addr(head);
-    let mut offset: c_ulong = (void *) head - ptr;
+#[no_mangle]
+pub unsafe extern "C" fn kvfree_rcu_list(head: *mut kvfree_rcu_head) {
+pub static mut next: *mut c_void = core::ptr::null_mut();
+    while (head) {
+    let mut ptr = kvmalloc_obj_start_addr(head);
+pub static mut offset: c_ulong = 0;
     next = head.next;
-    debug_rcu_head_unqueue((struct rcu_head *)ptr);
+    debug_rcu_head_unqueue(ptr);
     rcu_lock_acquire(&rcu_callback_map);
     trace_rcu_invoke_kvfree_callback("slab", head, offset);
     kvfree(ptr);
@@ -1425,33 +1673,33 @@ pub struct kfree_rcu_cpu {
 //
 #[no_mangle]
 unsafe extern "C" fn kfree_rcu_work(work: *mut work_struct) {
-    static void kfree_rcu_work(struct work_struct *work)
-    {
-    unsigned long flags;
-    struct kvfree_rcu_bulk_data *bnode, *n;
+    let mut flags = 0;
+    let mut bnode = core::ptr::null_mut();
+    let mut n = core::ptr::null_mut();
     struct list_head bulk_head[FREE_N_CHANNELS];
-    struct kvfree_rcu_head *head;
-    struct kfree_rcu_cpu *krcp;
-    struct kfree_rcu_cpu_work *krwp;
-    struct rcu_gp_seq head_gp_snap;
-    int i;
-    krwp = container_of(to_rcu_work(work),
-    struct kfree_rcu_cpu_work, rcu_work);
+pub static mut head: *mut c_void = core::ptr::null_mut();
+pub static mut krcp: *mut c_void = core::ptr::null_mut();
+pub static mut krwp: *mut c_void = core::ptr::null_mut();
+pub static mut head_gp_snap: usize = 0;
+    let mut i = 0;
+    krwp = container_of!(to_rcu_work(work), kfree_rcu_cpu_work, rcu_work);
     krcp = krwp.krcp;
     raw_spin_lock_irqsave(&krcp.lock, flags);
 // Channels 1 and 2.
-    for (i = 0; i < FREE_N_CHANNELS; i++)
+    for (i = 0; i < FREE_N_CHANNELS; i++) {
     list_replace_init(&krwp.bulk_head_free[i], &bulk_head[i]);
+    }
 // Channel 3.
     head = krwp.head_free;
     krwp.head_free = core::ptr::null_mut();
     head_gp_snap = krwp.head_free_gp_snap;
     raw_spin_unlock_irqrestore(&krcp.lock, flags);
 // Handle the first two channels.
-    for (i = 0; i < FREE_N_CHANNELS; i++) {
+    while (i < FREE_N_CHANNELS) {
 // Start from the tail page, so a GP is likely passed for it.
-    list_for_each_entry_safe(bnode, n, &bulk_head[i], list)
+    list_for_each_entry_safe(bnode, n, &bulk_head[i], list) {
     kvfree_rcu_bulk(krcp, bnode, i);
+    }
     }
 //
 // This is used when the "bulk" path can not be used for the
@@ -1460,95 +1708,98 @@ unsafe extern "C" fn kfree_rcu_work(work: *mut work_struct) {
 // queued on a linked list through their rcu_head structures.
 // This list is named "Channel 3".
 //
-    if (head && !WARN_ON_ONCE(!poll_state_synchronize_rcu_full(&head_gp_snap)))
+    if (head && !WARN_ON_ONCE!(!poll_state_synchronize_rcu_full(&head_gp_snap))) {
     kvfree_rcu_list(head);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn kfree_rcu_sheaf(obj: *mut c_void) -> bool {
-    static bool kfree_rcu_sheaf(void *obj)
-    {
-    struct kmem_cache *s;
-    struct slab *slab;
-    let mut free_flags: c_uint = SLAB_FREE_DEFAULT;
+pub static mut s: *mut c_void = core::ptr::null_mut();
+pub static mut slab: *mut c_void = core::ptr::null_mut();
+pub static mut free_flags: c_uint = 0;
 //
 // It is not safe to spin on PREEMPT_RT because the kernel might be
 // holding a raw spinlock and slab acquires sleeping locks.
 //
-    if (IS_ENABLED(CONFIG_PREEMPT_RT))
+    if (IS_ENABLED!(CONFIG_PREEMPT_RT)) {
     free_flags = SLAB_FREE_NOLOCK;
-    if (is_vmalloc_addr(obj))
-    return false;
-    slab = virt_to_slab(obj);
-    if (unlikely(!slab))
-    return false;
-    s = slab.slab_cache;
-    if (likely(!IS_ENABLED(CONFIG_NUMA) || slab_nid(slab) == numa_mem_id()))
-    return __kfree_rcu_sheaf(s, obj, free_flags);
+    }
+    if (is_vmalloc_addr(obj)) {
     return false;
     }
-    static bool
-    need_offload_krc(struct kfree_rcu_cpu *krcp)
-    {
-    int i;
-    for (i = 0; i < FREE_N_CHANNELS; i++)
+    slab = virt_to_slab(obj);
+    if (unlikely(!slab)) {
+    return false;
+    }
+    s = slab.slab_cache;
+    if (likely(!IS_ENABLED!(CONFIG_NUMA) || slab_nid(slab) == numa_mem_id())) {
+    return __kfree_rcu_sheaf(s, obj, free_flags);
+    }
+    return false;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn need_offload_krc(krcp: *mut kfree_rcu_cpu) -> bool {
+    let mut i = 0;
+    for (i = 0; i < FREE_N_CHANNELS; i++) {
     if (!list_empty(&krcp.bulk_head[i]))
     return true;
+    }
     return !!READ_ONCE(krcp.head);
     }
-    static bool
-    need_wait_for_krwp_work(struct kfree_rcu_cpu_work *krwp)
-    {
-    int i;
-    for (i = 0; i < FREE_N_CHANNELS; i++)
+#[no_mangle]
+pub unsafe extern "C" fn need_wait_for_krwp_work(krwp: *mut kfree_rcu_cpu_work) -> bool {
+    let mut i = 0;
+    for (i = 0; i < FREE_N_CHANNELS; i++) {
     if (!list_empty(&krwp.bulk_head_free[i]))
     return true;
+    }
     return !!krwp.head_free;
     }
 #[no_mangle]
 unsafe extern "C" fn krc_count(krcp: *mut kfree_rcu_cpu) -> c_int {
-    static int krc_count(struct kfree_rcu_cpu *krcp)
-    {
-    let mut sum: c_int = atomic_read(&krcp.head_count);
-    int i;
-    for (i = 0; i < FREE_N_CHANNELS; i++)
+pub static mut sum: c_int = 0;
+    let mut i = 0;
+    for (i = 0; i < FREE_N_CHANNELS; i++) {
     sum += atomic_read(&krcp.bulk_count[i]);
+    }
     return sum;
     }
-    static void
-    __schedule_delayed_monitor_work(struct kfree_rcu_cpu *krcp)
-    {
-    long delay, delay_left;
+#[no_mangle]
+pub unsafe extern "C" fn __schedule_delayed_monitor_work(krcp: *mut kfree_rcu_cpu) {
+    let mut delay = 0;
+    let mut delay_left = 0;
     delay = krc_count(krcp) >= KVFREE_BULK_MAX_ENTR ? 1:KFREE_DRAIN_JIFFIES;
     if (delayed_work_pending(&krcp.monitor_work)) {
     delay_left = krcp.monitor_work.timer.expires - jiffies;
-    if (delay < delay_left)
+    if (delay < delay_left) {
     mod_delayed_work(rcu_reclaim_wq, &krcp.monitor_work, delay);
+    }
     return;
     }
     queue_delayed_work(rcu_reclaim_wq, &krcp.monitor_work, delay);
     }
-    static void
-    schedule_delayed_monitor_work(struct kfree_rcu_cpu *krcp)
-    {
-    unsigned long flags;
+#[no_mangle]
+pub unsafe extern "C" fn schedule_delayed_monitor_work(krcp: *mut kfree_rcu_cpu) {
+    let mut flags = 0;
     raw_spin_lock_irqsave(&krcp.lock, flags);
     __schedule_delayed_monitor_work(krcp);
     raw_spin_unlock_irqrestore(&krcp.lock, flags);
     }
-    static void
-    kvfree_rcu_drain_ready(struct kfree_rcu_cpu *krcp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn kvfree_rcu_drain_ready(krcp: *mut kfree_rcu_cpu) {
     struct list_head bulk_ready[FREE_N_CHANNELS];
-    struct kvfree_rcu_bulk_data *bnode, *n;
-    struct kvfree_rcu_head *head_ready = core::ptr::null_mut();
-    unsigned long flags;
-    int i;
+    let mut bnode = core::ptr::null_mut();
+    let mut n = core::ptr::null_mut();
+    let mut head_ready = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut i = 0;
     raw_spin_lock_irqsave(&krcp.lock, flags);
-    for (i = 0; i < FREE_N_CHANNELS; i++) {
+    while (i < FREE_N_CHANNELS) {
     INIT_LIST_HEAD(&bulk_ready[i]);
     list_for_each_entry_safe_reverse(bnode, n, &krcp.bulk_head[i], list) {
-    if (!poll_state_synchronize_rcu_full(&bnode.gp_snap))
+    if (!poll_state_synchronize_rcu_full(&bnode.gp_snap)) {
     break;
+    }
     atomic_sub(bnode.nr_records, &krcp.bulk_count[i]);
     list_move(&bnode.list, &bulk_ready[i]);
     }
@@ -1559,36 +1810,39 @@ unsafe extern "C" fn krc_count(krcp: *mut kfree_rcu_cpu) -> c_int {
     WRITE_ONCE(krcp.head, core::ptr::null_mut());
     }
     raw_spin_unlock_irqrestore(&krcp.lock, flags);
-    for (i = 0; i < FREE_N_CHANNELS; i++) {
-    list_for_each_entry_safe(bnode, n, &bulk_ready[i], list)
+    while (i < FREE_N_CHANNELS) {
+    list_for_each_entry_safe(bnode, n, &bulk_ready[i], list) {
     kvfree_rcu_bulk(krcp, bnode, i);
     }
-    if (head_ready)
+    }
+    if (head_ready) {
     kvfree_rcu_list(head_ready);
+    }
     }
 //
 // Return: %true if a work is queued, %false otherwise.
 //
-    static bool
-    kvfree_rcu_queue_batch(struct kfree_rcu_cpu *krcp)
-    {
-    unsigned long flags;
-    let mut queued: bool = false;
-    int i, j;
+#[no_mangle]
+pub unsafe extern "C" fn kvfree_rcu_queue_batch(krcp: *mut kfree_rcu_cpu) -> bool {
+    let mut flags = 0;
+pub static mut queued: bool = false;
+    let mut i = 0;
+    let mut j = 0;
     raw_spin_lock_irqsave(&krcp.lock, flags);
 // Attempt to start a new batch.
-    for (i = 0; i < KFREE_N_BATCHES; i++) {
-    struct kfree_rcu_cpu_work *krwp = &(krcp.krw_arr[i]);
+    while (i < KFREE_N_BATCHES) {
+    let mut krwp = &(krcp.krw_arr[i]);
 // Try to detach bulk_head or head and attach it, only when
 // all channels are free.  Any channel is not free means at krwp
 // there is on-going rcu work to handle krwp's free business.
-    if (need_wait_for_krwp_work(krwp))
+    if (need_wait_for_krwp_work(krwp)) {
     continue;
+    }
 // kvfree_rcu_drain_ready() might handle this krcp, if so give up.
     if (need_offload_krc(krcp)) {
 // Channel 1 corresponds to the SLAB-pointer bulk path.
 // Channel 2 corresponds to vmalloc-pointer bulk path.
-    for (j = 0; j < FREE_N_CHANNELS; j++) {
+    while (j < FREE_N_CHANNELS) {
     if (list_empty(&krwp.bulk_head_free[j])) {
     atomic_set(&krcp.bulk_count[j], 0);
     list_replace_init(&krcp.bulk_head[j],
@@ -1608,7 +1862,7 @@ unsafe extern "C" fn krc_count(krcp: *mut kfree_rcu_cpu) -> c_int {
 // the loop since it is done with this CPU thus
 // queuing an RCU work is _always_ success here.
     queued = queue_rcu_work(rcu_reclaim_wq, &krwp.rcu_work);
-    WARN_ON_ONCE(!queued);
+    WARN_ON_ONCE!(!queued);
     break;
     }
     }
@@ -1620,10 +1874,7 @@ unsafe extern "C" fn krc_count(krcp: *mut kfree_rcu_cpu) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn kfree_rcu_monitor(work: *mut work_struct) {
-    static void kfree_rcu_monitor(struct work_struct *work)
-    {
-    struct kfree_rcu_cpu *krcp = container_of(work,
-    struct kfree_rcu_cpu, monitor_work.work);
+    let mut krcp = container_of!(work, kfree_rcu_cpu, monitor_work.work);
 // Drain ready for reclaim.
     kvfree_rcu_drain_ready(krcp);
 // Queue a batch for a rest.
@@ -1633,28 +1884,27 @@ unsafe extern "C" fn kfree_rcu_monitor(work: *mut work_struct) {
 // of the channels that is still busy we should rearm the
 // work to repeat an attempt. Because previous batches are
 // still in progress.
-    if (need_offload_krc(krcp))
+    if (need_offload_krc(krcp)) {
     schedule_delayed_monitor_work(krcp);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn fill_page_cache_func(work: *mut work_struct) {
-    static void fill_page_cache_func(struct work_struct *work)
-    {
-    struct kvfree_rcu_bulk_data *bnode;
-    struct kfree_rcu_cpu *krcp =
-    container_of(work, struct kfree_rcu_cpu,
+pub static mut bnode: *mut c_void = core::ptr::null_mut();
+    let mut krcp = container_of!(work, kfree_rcu_cpu,
     page_cache_work.work);
-    unsigned long flags;
-    int nr_pages;
-    bool pushed;
-    int i;
+    let mut flags = 0;
+    let mut nr_pages = 0;
+    let mut pushed = 0;
+    let mut i = 0;
     nr_pages = atomic_read(&krcp.backoff_page_cache_fill) ?
     1 : rcu_min_cached_objs;
-    for (i = READ_ONCE(krcp.nr_bkv_objs); i < nr_pages; i++) {
-    bnode = (struct kvfree_rcu_bulk_data *)
+    while (i < nr_pages) {
+    bnode = 
     __get_free_page(GFP_KERNEL | __GFP_NORETRY | __GFP_NOMEMALLOC | __GFP_NOWARN);
-    if (!bnode)
+    if (!bnode) {
     break;
+    }
     raw_spin_lock_irqsave(&krcp.lock, flags);
     pushed = put_cached_bnode(krcp, bnode);
     raw_spin_unlock_irqrestore(&krcp.lock, flags);
@@ -1672,18 +1922,16 @@ unsafe extern "C" fn fill_page_cache_func(work: *mut work_struct) {
 // acquired by the memory allocator or anything that it might invoke.
 // Returns true if ptr was successfully recorded, else the caller must
 // use a fallback.
-    static inline bool
-    add_ptr_to_bulk_krc_lock(struct kfree_rcu_cpu **krcp,
-    unsigned long *flags, void *ptr, bool can_alloc)
-    {
-    struct kvfree_rcu_bulk_data *bnode;
-    int idx;
+#[no_mangle]
+pub unsafe extern "C" fn add_ptr_to_bulk_krc_lock(krcp: *mut *mut kfree_rcu_cpu, flags: *mut c_ulong, ptr: *mut c_void, can_alloc: bool) -> bool {
+pub static mut bnode: *mut c_void = core::ptr::null_mut();
+    let mut idx = 0;
 // krcp = krc_this_cpu_lock(flags);
-    if (unlikely(!(*krcp).initialized))
+    if (unlikely(!(*krcp).initialized)) {
     return false;
+    }
     idx = !!is_vmalloc_addr(ptr);
-    bnode = list_first_entry_or_null(&(*krcp).bulk_head[idx],
-    struct kvfree_rcu_bulk_data, list);
+    bnode = list_first_entry_or_null(&(*krcp).bulk_head[idx], kvfree_rcu_bulk_data, list);
 // Check if a new block is required.
     if (!bnode || bnode.nr_records == KVFREE_BULK_MAX_ENTR) {
     bnode = get_cached_bnode(*krcp);
@@ -1700,37 +1948,37 @@ unsafe extern "C" fn fill_page_cache_func(work: *mut work_struct) {
 // __GFP_NOWARN - it is supposed that an allocation can
 // be failed under low memory or high memory pressure
 // scenarios.
-    bnode = (struct kvfree_rcu_bulk_data *)
+    bnode = 
     __get_free_page(GFP_KERNEL | __GFP_NORETRY | __GFP_NOMEMALLOC | __GFP_NOWARN);
     raw_spin_lock_irqsave(&(*krcp).lock, *flags);
     }
-    if (!bnode)
+    if (!bnode) {
     return false;
+    }
 // Initialize the new block and attach it.
     bnode.nr_records = 0;
     list_add(&bnode.list, &(*krcp).bulk_head[idx]);
     }
 // Finally insert and update the GP for this page.
-    bnode.nr_records++;
+    bnode.nr_records += 1;
     bnode.records[bnode.nr_records - 1] = ptr;
     get_state_synchronize_rcu_full(&bnode.gp_snap);
     atomic_inc(&(*krcp).bulk_count[idx]);
     return true;
     }
     static enum hrtimer_restart
-    schedule_page_work_fn(struct hrtimer *t)
+    schedule_page_work_fn(hrtimer *t)
     {
-    struct kfree_rcu_cpu *krcp =
-    container_of(t, struct kfree_rcu_cpu, hrtimer);
+    let mut krcp = container_of!(t, kfree_rcu_cpu, hrtimer);
     queue_delayed_work(system_highpri_wq, &krcp.page_cache_work, 0);
     return HRTIMER_NORESTART;
     }
-    static void
-    run_page_cache_worker(struct kfree_rcu_cpu *krcp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn run_page_cache_worker(krcp: *mut kfree_rcu_cpu) {
 // If cache disabled, bail out.
-    if (!rcu_min_cached_objs)
+    if (!rcu_min_cached_objs) {
     return;
+    }
     if (rcu_scheduler_active == RCU_SCHEDULER_RUNNING &&
     !atomic_xchg(&krcp.work_in_progress, 1)) {
     if (atomic_read(&krcp.backoff_page_cache_fill)) {
@@ -1745,14 +1993,13 @@ unsafe extern "C" fn fill_page_cache_func(work: *mut work_struct) {
     }
     }
 #[no_mangle]
-pub unsafe extern "C" fn kfree_rcu_scheduler_running() -> void __init {
-    void __init kfree_rcu_scheduler_running(void)
-    {
-    int cpu;
+pub unsafe extern "C" fn kfree_rcu_scheduler_running()  {
+    let mut cpu = 0;
     for_each_possible_cpu(cpu) {
-    struct kfree_rcu_cpu *krcp = per_cpu_ptr(&krc, cpu);
-    if (need_offload_krc(krcp))
+    let mut krcp = per_cpu_ptr(&krc, cpu);
+    if (need_offload_krc(krcp)) {
     schedule_delayed_monitor_work(krcp);
+    }
     }
     }
 //
@@ -1768,12 +2015,12 @@ pub unsafe extern "C" fn kfree_rcu_scheduler_running() -> void __init {
 // reduce the number of grace periods during heavy kfree_rcu()/kvfree_rcu() load.
 //
 #[no_mangle]
-pub unsafe extern "C" fn kvfree_call_rcu(head: *mut kvfree_rcu_head, ptr: *mut c_void) {
-    void kvfree_call_rcu(struct kvfree_rcu_head *head, void *ptr)
-    {
-    unsigned long flags;
-    struct kfree_rcu_cpu *krcp;
-    bool success;
+#[no_mangle]
+// duplicate fn: kvfree_call_rcu
+pub unsafe extern "C" fn kvfree_call_rcu_dup(head: *mut kvfree_rcu_head, ptr: *mut c_void) {
+    let mut flags = 0;
+pub static mut krcp: *mut c_void = core::ptr::null_mut();
+    let mut success = 0;
 //
 // Please note there is a limitation for the head-less
 // variant, that is why there is a clear rule for such
@@ -1781,10 +2028,12 @@ pub unsafe extern "C" fn kvfree_call_rcu(head: *mut kvfree_rcu_head, ptr: *mut c
 // only. For other places please embed an rcu_head to
 // your data.
 //
-    if (!head)
+    if (!head) {
     might_sleep();
-    if (kfree_rcu_sheaf(ptr))
+    }
+    if (kfree_rcu_sheaf(ptr)) {
     return;
+    }
 // Queue the object but don't yet schedule the batch.
     if (debug_rcu_head_queue(ptr)) {
 // Probable double kfree_rcu(), just leak.
@@ -1797,9 +2046,10 @@ pub unsafe extern "C" fn kvfree_call_rcu(head: *mut kvfree_rcu_head, ptr: *mut c
     success = add_ptr_to_bulk_krc_lock(&krcp, &flags, ptr, !head);
     if (!success) {
     run_page_cache_worker(krcp);
-    if (head == core::ptr::null_mut())
+    if (head == core::ptr::null_mut()) {
 // Inline if kvfree_rcu(one_arg) call.
-    goto unlock_return;
+// goto;
+    }
     head.next = krcp.head;
     WRITE_ONCE(krcp.head, head);
     atomic_inc(&krcp.head_count);
@@ -1815,9 +2065,10 @@ pub unsafe extern "C" fn kvfree_call_rcu(head: *mut kvfree_rcu_head, ptr: *mut c
 //
     kmemleak_ignore(ptr);
 // Set timer to drain after KFREE_DRAIN_JIFFIES.
-    if (rcu_scheduler_active == RCU_SCHEDULER_RUNNING)
+    if (rcu_scheduler_active == RCU_SCHEDULER_RUNNING) {
     __schedule_delayed_monitor_work(krcp);
-    unlock_return:
+    }
+// label;
     krc_this_cpu_unlock(krcp, flags);
 //
 // Inline kvfree() after synchronize_rcu(). We can do
@@ -1825,7 +2076,7 @@ pub unsafe extern "C" fn kvfree_call_rcu(head: *mut kvfree_rcu_head, ptr: *mut c
 // CPU can pass the QS state.
 //
     if (!success) {
-    debug_rcu_head_unqueue((struct rcu_head *) ptr);
+    debug_rcu_head_unqueue( ptr);
     synchronize_rcu();
     kvfree(ptr);
     }
@@ -1833,12 +2084,11 @@ pub unsafe extern "C" fn kvfree_call_rcu(head: *mut kvfree_rcu_head, ptr: *mut c
     EXPORT_SYMBOL_GPL(kvfree_call_rcu);
 #[no_mangle]
 pub unsafe extern "C" fn __kvfree_rcu_barrier() {
-    static inline void __kvfree_rcu_barrier(void)
-    {
-    struct kfree_rcu_cpu_work *krwp;
-    struct kfree_rcu_cpu *krcp;
-    bool queued;
-    int i, cpu;
+pub static mut krwp: *mut c_void = core::ptr::null_mut();
+pub static mut krcp: *mut c_void = core::ptr::null_mut();
+    let mut queued = 0;
+    let mut i = 0;
+    let mut cpu = 0;
 //
 // Firstly we detach objects and queue them over an RCU-batch
 // for all CPUs. Finally queued works are flushed for each CPU.
@@ -1854,8 +2104,9 @@ pub unsafe extern "C" fn __kvfree_rcu_barrier() {
 // with it. If any batch is pending/running for this "krcp", below
 // per-cpu flush_rcu_work() waits its completion(see last step).
 //
-    if (!need_offload_krc(krcp))
+    if (!need_offload_krc(krcp)) {
     continue;
+    }
     while (1) {
 //
 // If we are not able to queue a new RCU work it means:
@@ -1868,10 +2119,11 @@ pub unsafe extern "C" fn __kvfree_rcu_barrier() {
 // Bail out, if there is no need to offload this "krcp"
 // anymore. As noted earlier it can run concurrently.
 //
-    if (queued || !need_offload_krc(krcp))
+    if (queued || !need_offload_krc(krcp)) {
     break;
+    }
 // There are ongoing batches.
-    for (i = 0; i < KFREE_N_BATCHES; i++) {
+    while (i < KFREE_N_BATCHES) {
     krwp = &(krcp.krw_arr[i]);
     flush_rcu_work(&krwp.rcu_work);
     }
@@ -1887,7 +2139,7 @@ pub unsafe extern "C" fn __kvfree_rcu_barrier() {
 // directly. Wait its completion if running or pending.
 //
     cancel_delayed_work_sync(&krcp.monitor_work);
-    for (i = 0; i < KFREE_N_BATCHES; i++) {
+    while (i < KFREE_N_BATCHES) {
     krwp = &(krcp.krw_arr[i]);
     flush_rcu_work(&krwp.rcu_work);
     }
@@ -1904,9 +2156,9 @@ pub unsafe extern "C" fn __kvfree_rcu_barrier() {
 // such calls have returned before the call to kmem_cache_destroy().
 //
 #[no_mangle]
-pub unsafe extern "C" fn kvfree_rcu_barrier() {
-    void kvfree_rcu_barrier(void)
-    {
+#[no_mangle]
+// duplicate fn: kvfree_rcu_barrier
+pub unsafe extern "C" fn kvfree_rcu_barrier_dup() {
     flush_all_rcu_sheaves();
     __kvfree_rcu_barrier();
     }
@@ -1918,9 +2170,9 @@ pub unsafe extern "C" fn kvfree_rcu_barrier() {
 // See the description of kvfree_rcu_barrier() for details.
 //
 #[no_mangle]
-pub unsafe extern "C" fn kvfree_rcu_barrier_on_cache(s: *mut kmem_cache) {
-    void kvfree_rcu_barrier_on_cache(struct kmem_cache *s)
-    {
+#[no_mangle]
+// duplicate fn: kvfree_rcu_barrier_on_cache
+pub unsafe extern "C" fn kvfree_rcu_barrier_on_cache_dup(s: *mut kmem_cache) {
 // kfree_rcu_nolock() might have deferred frees even without sheaves
     deferred_work_barrier();
     if (cache_has_sheaves(s)) {
@@ -1931,73 +2183,75 @@ pub unsafe extern "C" fn kvfree_rcu_barrier_on_cache(s: *mut kmem_cache) {
     rcu_barrier();
     __kvfree_rcu_barrier();
     }
-    static unsigned long
-    kfree_rcu_shrink_count(struct shrinker *shrink, struct shrink_control *sc)
-    {
-    int cpu;
-    let mut count: c_ulong = 0;
+#[no_mangle]
+pub unsafe extern "C" fn kfree_rcu_shrink_count(shrink: *mut shrinker, sc: *mut shrink_control) -> c_ulong {
+    let mut cpu = 0;
+pub static mut count: c_ulong = 0;
 // Snapshot count of all CPUs
     for_each_possible_cpu(cpu) {
-    struct kfree_rcu_cpu *krcp = per_cpu_ptr(&krc, cpu);
+    let mut krcp = per_cpu_ptr(&krc, cpu);
     count += krc_count(krcp);
     count += READ_ONCE(krcp.nr_bkv_objs);
     atomic_set(&krcp.backoff_page_cache_fill, 1);
     }
-    let mut count: return = = 0 ? SHRINK_EMPTY : count;
+pub static mut count: return = 0;
     }
-    static unsigned long
-    kfree_rcu_shrink_scan(struct shrinker *shrink, struct shrink_control *sc)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn kfree_rcu_shrink_scan(shrink: *mut shrinker, sc: *mut shrink_control) -> c_ulong {
     int cpu, freed = 0;
     for_each_possible_cpu(cpu) {
-    int count;
-    struct kfree_rcu_cpu *krcp = per_cpu_ptr(&krc, cpu);
+    let mut count = 0;
+    let mut krcp = per_cpu_ptr(&krc, cpu);
     count = krc_count(krcp);
     count += drain_page_cache(krcp);
     kfree_rcu_monitor(&krcp.monitor_work.work);
     sc.nr_to_scan -= count;
     freed += count;
-    if (sc.nr_to_scan <= 0)
+    if (sc.nr_to_scan <= 0) {
     break;
     }
-    let mut freed: return = = 0 ? SHRINK_STOP : freed;
+    }
+pub static mut freed: return = 0;
     }
 #[no_mangle]
-pub unsafe extern "C" fn kvfree_rcu_init() -> void __init {
-    void __init kvfree_rcu_init(void)
-    {
-    int cpu;
-    int i, j;
-    struct shrinker *kfree_rcu_shrinker;
+#[no_mangle]
+// duplicate fn: kvfree_rcu_init
+pub unsafe extern "C" fn kvfree_rcu_init_dup()  {
+    let mut cpu = 0;
+    let mut i = 0;
+    let mut j = 0;
+pub static mut kfree_rcu_shrinker: *mut c_void = core::ptr::null_mut();
     rcu_reclaim_wq = alloc_workqueue("kvfree_rcu_reclaim",
     WQ_UNBOUND | WQ_MEM_RECLAIM, 0);
-    WARN_ON(!rcu_reclaim_wq);
+    WARN_ON!(!rcu_reclaim_wq);
 // Clamp it to [0:100] seconds interval.
     if (rcu_delay_page_cache_fill_msec < 0 ||
     rcu_delay_page_cache_fill_msec > 100 * MSEC_PER_SEC) {
     rcu_delay_page_cache_fill_msec =
     clamp(rcu_delay_page_cache_fill_msec, 0,
     (int) (100 * MSEC_PER_SEC));
-    pr_info("Adjusting rcutree.rcu_delay_page_cache_fill_msec to %d ms.\n",
+    pr_info!("Adjusting rcutree.rcu_delay_page_cache_fill_msec to %d ms.\n",
     rcu_delay_page_cache_fill_msec);
     }
     for_each_possible_cpu(cpu) {
-    struct kfree_rcu_cpu *krcp = per_cpu_ptr(&krc, cpu);
-    for (i = 0; i < KFREE_N_BATCHES; i++) {
+    let mut krcp = per_cpu_ptr(&krc, cpu);
+    while (i < KFREE_N_BATCHES) {
     INIT_RCU_WORK(&krcp.krw_arr[i].rcu_work, kfree_rcu_work);
     krcp.krw_arr[i].krcp = krcp;
-    for (j = 0; j < FREE_N_CHANNELS; j++)
+    for (j = 0; j < FREE_N_CHANNELS; j++) {
     INIT_LIST_HEAD(&krcp.krw_arr[i].bulk_head_free[j]);
     }
-    for (i = 0; i < FREE_N_CHANNELS; i++)
+    }
+    for (i = 0; i < FREE_N_CHANNELS; i++) {
     INIT_LIST_HEAD(&krcp.bulk_head[i]);
+    }
     INIT_DELAYED_WORK(&krcp.monitor_work, kfree_rcu_monitor);
     INIT_DELAYED_WORK(&krcp.page_cache_work, fill_page_cache_func);
     krcp.initialized = true;
     }
     kfree_rcu_shrinker = shrinker_alloc(0, "slab-kvfree-rcu");
     if (!kfree_rcu_shrinker) {
-    pr_err("Failed to allocate kfree_rcu() shrinker!\n");
+    pr_err!("Failed to allocate kfree_rcu() shrinker!\n");
     return;
     }
     kfree_rcu_shrinker.count_objects = kfree_rcu_shrink_count;

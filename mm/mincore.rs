@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -45,14 +295,13 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // The mincore() system call.
 //
 
-    static int mincore_hugetlb(pte_t *pte, unsigned long hmask, unsigned long addr,
-    unsigned long end, struct mm_walk *walk)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn mincore_hugetlb(pte: *mut pte_t, hmask: c_ulong, addr: c_ulong, end: c_ulong, walk: *mut mm_walk) -> c_int {
 
-    let mut nr: c_ulong = (end - addr) >> PAGE_SHIFT;
-    unsigned char resident;
-    spinlock_t *ptl;
-    pte_t ptep;
+pub static mut nr: c_ulong = 0;
+    let mut resident = 0;
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
+    let mut ptep;
     ptl = huge_pte_lock(hstate_vma(walk.vma), walk.mm, pte);
     ptep = huge_ptep_get(walk.mm, addr, pte);
     resident = !huge_pte_none(ptep) && !pte_is_marker(ptep);
@@ -66,20 +315,19 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     }
 #[no_mangle]
 unsafe extern "C" fn mincore_swap(entry: swp_entry_t, shmem: bool) -> c_uchar {
-    static unsigned char mincore_swap(swp_entry_t entry, bool shmem)
-    {
-    struct swap_info_struct *si;
-    struct folio *folio = core::ptr::null_mut();
-    let mut present: c_uchar = 0;
+pub static mut si: *mut c_void = core::ptr::null_mut();
+    let mut folio = core::ptr::null_mut();
+pub static mut present: c_uchar = 0;
 //
 // Shmem mapping may contain swapin error entries, which are
 // absent. Page table may contain migration or hwpoison
 // entries which are always uptodate.
 //
-    if (!softleaf_is_swap(entry))
+    if (!softleaf_is_swap(entry)) {
     return !shmem;
-    if (!IS_ENABLED(CONFIG_SWAP)) {
-    WARN_ON(1);
+    }
+    if (!IS_ENABLED!(CONFIG_SWAP)) {
+    WARN_ON!(1);
     return 0;
     }
 //
@@ -89,12 +337,14 @@ unsafe extern "C" fn mincore_swap(entry: swp_entry_t, shmem: bool) -> c_uchar {
 //
     if (shmem) {
     si = get_swap_device(entry);
-    if (!si)
+    if (!si) {
     return 0;
     }
+    }
     folio = swap_cache_get_folio(entry);
-    if (shmem)
+    if (shmem) {
     put_swap_device(si);
+    }
     if (folio) {
     present = folio_test_uptodate(folio);
     folio_put(folio);
@@ -109,10 +359,8 @@ unsafe extern "C" fn mincore_swap(entry: swp_entry_t, shmem: bool) -> c_uchar {
 //
 #[no_mangle]
 unsafe extern "C" fn mincore_page(mapping: *mut address_space, index: pgoff_t) -> c_uchar {
-    static unsigned char mincore_page(struct address_space *mapping, pgoff_t index)
-    {
-    unsigned char present;
-    struct folio *folio;
+    let mut present = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
 //
 // When tmpfs swaps out a page from a file, any process mapping that
 // file will not get a swp_entry_t in its pte, but rather it is like
@@ -120,108 +368,109 @@ unsafe extern "C" fn mincore_page(mapping: *mut address_space, index: pgoff_t) -
 // tmpfs's .fault). So swapped out tmpfs mappings are tested here.
 //
     folio = filemap_get_entry(mapping, index);
-    if (!folio)
+    if (!folio) {
     return 0;
+    }
     if (xa_is_value(folio)) {
-    if (!shmem_mapping(mapping))
+    if (!shmem_mapping(mapping)) {
     return 0;
+    }
     return mincore_swap(radix_to_swp_entry(folio), true);
     }
     present = folio_test_uptodate(folio);
     folio_put(folio);
     return present;
     }
-    static int __mincore_unmapped_range(unsigned long addr, unsigned long end,
-    struct vm_area_struct *vma, unsigned char *vec)
-    {
-    let mut nr: c_ulong = (end - addr) >> PAGE_SHIFT;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn __mincore_unmapped_range(addr: c_ulong, end: c_ulong, vma: *mut vm_area_struct, vec: *mut c_uchar) -> c_int {
+pub static mut nr: c_ulong = 0;
+    let mut i = 0;
     if (vma.vm_file) {
-    pgoff_t pgoff;
+    let mut pgoff;
     pgoff = linear_page_index(vma, addr);
-    for (i = 0; i < nr; i++, pgoff++)
+    for (i = 0; i < nr; i++, pgoff++) {
     vec[i] = mincore_page(vma.vm_file.f_mapping, pgoff);
+    }
     } else {
-    for (i = 0; i < nr; i++)
+    for (i = 0; i < nr; i++) {
     vec[i] = 0;
+    }
     }
     return nr;
     }
-    static int mincore_unmapped_range(unsigned long addr, unsigned long end,
-    __always_unused int depth,
-    struct mm_walk *walk)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn mincore_unmapped_range(addr: c_ulong, end: c_ulong, depth: __always_unused int, walk: *mut mm_walk) -> c_int {
     walk.private += __mincore_unmapped_range(addr, end,
     walk.vma, walk.private);
     return 0;
     }
-    static int mincore_pud_entry(pud_t *pudp, unsigned long addr, unsigned long end,
-    struct mm_walk *walk)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn mincore_pud_entry(pudp: *mut pud_t, addr: c_ulong, end: c_ulong, walk: *mut mm_walk) -> c_int {
     if (pud_is_huge(pudp_get(pudp))) {
-    let mut nr: c_ulong = (end - addr) >> PAGE_SHIFT;
+pub static mut nr: c_ulong = 0;
     memset(walk.private, 1, nr);
     walk.private += nr;
     walk.action = ACTION_CONTINUE;
     }
     return 0;
     }
-    static int mincore_pte_range(pmd_t *pmd, unsigned long addr, unsigned long end,
-    struct mm_walk *walk)
-    {
-    spinlock_t *ptl;
-    struct vm_area_struct *vma = walk.vma;
-    pte_t *ptep;
-    unsigned char *vec = walk.private;
-    let mut nr: c_int = (end - addr) >> PAGE_SHIFT;
-    int step, i;
+#[no_mangle]
+pub unsafe extern "C" fn mincore_pte_range(pmd: *mut pmd_t, addr: c_ulong, end: c_ulong, walk: *mut mm_walk) -> c_int {
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
+    let mut vma = walk.vma;
+pub static mut ptep: *mut c_void = core::ptr::null_mut();
+    let mut vec = walk.private;
+pub static mut nr: c_int = 0;
+    let mut step = 0;
+    let mut i = 0;
     ptl = pmd_trans_huge_lock(pmd, vma);
     if (ptl) {
     memset(vec, 1, nr);
     spin_unlock(ptl);
-    goto out;
+// goto;
     }
     ptep = pte_offset_map_lock(walk.mm, pmd, addr, &ptl);
     if (!ptep) {
     walk.action = ACTION_AGAIN;
     return 0;
     }
-    for (; addr != end; ptep += step, addr += step * PAGE_SIZE) {
-    let mut pte: pte_t = ptep_get(ptep);
+    while (addr != end) {
+pub static mut pte: pte_t = 0;
     step = 1;
 // We need to do cache lookup too for markers
-    if (pte_none(pte) || pte_is_marker(pte))
+    if (pte_none(pte) || pte_is_marker(pte)) {
     __mincore_unmapped_range(addr, addr + PAGE_SIZE,
     vma, vec);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: pte_present(pte)) -> else {
-    let mut batch: c_uint = pte_batch_hint(ptep, pte);
+    }
+if true {
+pub static mut batch: c_uint = 0;
     if (batch > 1) {
-    let mut max_nr: c_uint = (end - addr) >> PAGE_SHIFT;
+pub static mut max_nr: c_uint = 0;
     step = min_t(unsigned int, batch, max_nr);
     }
-    for (i = 0; i < step; i++)
+    for (i = 0; i < step; i++) {
     vec[i] = 1;
+    }
     } else { /* pte is a swap entry */
-    let mut entry: softleaf_t = softleaf_from_pte(pte);
+pub static mut entry: softleaf_t = 0;
 // vec = mincore_swap(entry, false);
     }
     vec += step;
     }
     pte_unmap_unlock(ptep - 1, ptl);
-    out:
+// label;
     walk.private += nr;
     cond_resched();
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn can_do_mincore(vma: *mut vm_area_struct) -> bool {
-    static inline bool can_do_mincore(struct vm_area_struct *vma)
-    {
-    if (vma_is_anonymous(vma))
+    if (vma_is_anonymous(vma)) {
     return true;
-    if (!vma.vm_file)
+    }
+    if (!vma.vm_file) {
     return false;
+    }
 //
 // Reveal pagecache information only for non-anonymous mappings that
 // correspond to the files the calling process could (if tried) open
@@ -231,13 +480,7 @@ pub unsafe extern "C" fn can_do_mincore(vma: *mut vm_area_struct) -> bool {
     return file_owner_or_capable(vma.vm_file) ||
     file_permission(vma.vm_file, MAY_WRITE) == 0;
     }
-    static const struct mm_walk_ops mincore_walk_ops = {
-    .pud_entry		= mincore_pud_entry,
-    .pmd_entry		= mincore_pte_range,
-    .pte_hole		= mincore_unmapped_range,
-    .hugetlb_entry		= mincore_hugetlb,
-    .walk_lock		= PGWALK_RDLOCK,
-    };
+pub static mut mm_walk_ops: usize = 0;
 //
 // Do a chunk of "sys_mincore()". We've already checked
 // all the arguments, we hold the mmap semaphore: we should
@@ -245,23 +488,23 @@ pub unsafe extern "C" fn can_do_mincore(vma: *mut vm_area_struct) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn do_mincore(addr: c_ulong, pages: c_ulong, vec: *mut c_uchar) -> c_long {
-    static long do_mincore(unsigned long addr, unsigned long pages, unsigned char *vec)
-    {
-    struct vm_area_struct *vma;
-    unsigned long end;
-    int err;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+    let mut end = 0;
+    let mut err = 0;
     vma = vma_lookup(current.mm, addr);
-    if (!vma)
+    if (!vma) {
     return -ENOMEM;
+    }
     end = min(vma.vm_end, addr + (pages << PAGE_SHIFT));
     if (!can_do_mincore(vma)) {
-    let mut pages: c_ulong = DIV_ROUND_UP(end - addr, PAGE_SIZE);
+pub static mut pages: c_ulong = 0;
     memset(vec, 1, pages);
     return pages;
     }
     err = walk_page_range_vma(vma, addr, end, &mincore_walk_ops, vec);
-    if (err < 0)
+    if (err < 0) {
     return err;
+    }
     return (end - addr) >> PAGE_SHIFT;
     }
 //
@@ -288,27 +531,30 @@ unsafe extern "C" fn do_mincore(addr: c_ulong, pages: c_ulong, vec: *mut c_uchar
 // mapped
 // -EAGAIN - A kernel resource was temporarily unavailable.
 //
-    SYSCALL_DEFINE3(mincore, unsigned long, start, size_t, len,
-    unsigned char __user *, vec)
-    {
-    long retval;
-    unsigned long pages;
-    unsigned char *tmp;
+#[no_mangle]
+pub unsafe extern "C" fn sys_mincore(start: usize, len: usize, vec: usize) -> c_long {
+    let mut retval = 0;
+    let mut pages = 0;
+pub static mut tmp: *mut c_void = core::ptr::null_mut();
     start = untagged_addr(start);
 // Check the start address: needs to be page-aligned..
-    if (unlikely(start & ~PAGE_MASK))
+    if (unlikely(start & ~PAGE_MASK)) {
     return -EINVAL;
+    }
 // ..and we need to be passed a valid user-space range
-    if (!access_ok((void __user *) start, len))
+    if (!access_ok( start, len)) {
     return -ENOMEM;
+    }
 // This also avoids any overflows on PAGE_ALIGN
     pages = len >> PAGE_SHIFT;
     pages += (offset_in_page(len)) != 0;
-    if (!access_ok(vec, pages))
+    if (!access_ok(vec, pages)) {
     return -EFAULT;
+    }
     tmp = kmalloc(PAGE_SIZE, GFP_KERNEL);
-    if (!tmp)
+    if (!tmp) {
     return -EAGAIN;
+    }
     retval = 0;
     while (pages) {
 //
@@ -318,8 +564,9 @@ unsafe extern "C" fn do_mincore(addr: c_ulong, pages: c_ulong, vec: *mut c_uchar
     mmap_read_lock(current.mm);
     retval = do_mincore(start, min(pages, PAGE_SIZE), tmp);
     mmap_read_unlock(current.mm);
-    if (retval <= 0)
+    if (retval <= 0) {
     break;
+    }
     if (copy_to_user(vec, tmp, retval)) {
     retval = -EFAULT;
     break;

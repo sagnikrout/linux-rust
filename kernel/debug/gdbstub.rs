@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -71,60 +321,60 @@ pub const KGDB_MAX_THREAD_QUERY: c_int = 17;
     static int			gdbstub_prev_in_buf_pos;
 // Storage for the registers, in GDB format.
     static unsigned long		gdb_regs[(NUMREGBYTES +
-    sizeof(unsigned long) - 1) /
-    sizeof(unsigned long)];
+    sizeof!(unsigned long) - 1) /
+    sizeof!(unsigned long)];
 //
 // GDB remote protocol parser:
 //
 
 #[no_mangle]
 unsafe extern "C" fn gdbstub_read_wait() -> c_int {
-    static int gdbstub_read_wait(void)
-    {
-    let mut ret: c_int = -1;
-    int i;
+pub static mut ret: c_int = 0;
+    let mut i = 0;
     if (unlikely(gdbstub_use_prev_in_buf)) {
-    if (gdbstub_prev_in_buf_pos < gdbstub_use_prev_in_buf)
+    if (gdbstub_prev_in_buf_pos < gdbstub_use_prev_in_buf) {
     return remcom_in_buffer[gdbstub_prev_in_buf_pos++];
-    else
+    }
+    else {
     gdbstub_use_prev_in_buf = 0;
     }
+    }
 // poll any additional I/O interfaces that are defined
-    while (ret < 0)
-    for (i = 0; kdb_poll_funcs[i] != core::ptr::null_mut(); i++) {
+    while (ret < 0) {
+    while (kdb_poll_funcs[i] != core::ptr::null_mut()) {
+    }
     ret = kdb_poll_funcs[i]();
-    if (ret > 0)
+    if (ret > 0) {
     break;
+    }
     }
     return ret;
     }
 
 #[no_mangle]
 unsafe extern "C" fn gdbstub_read_wait() -> c_int {
-    static int gdbstub_read_wait(void)
-    {
-    let mut ret: c_int = dbg_io_ops.read_char();
-    while (ret == NO_POLL_CHAR)
+pub static mut ret: c_int = 0;
+    while (ret == NO_POLL_CHAR) {
     ret = dbg_io_ops.read_char();
+    }
     return ret;
     }
 
 // scan for the sequence $<data>#<checksum>
 #[no_mangle]
 unsafe extern "C" fn get_packet(buffer: *mut c_char) {
-    static void get_packet(char *buffer)
-    {
-    unsigned char checksum;
-    unsigned char xmitcsum;
-    int count;
-    char ch;
+    let mut checksum = 0;
+    let mut xmitcsum = 0;
+    let mut count = 0;
+    let mut ch = 0;
     do {
 //
 // Spin and wait around for the start character, ignore all
 // other characters:
 //
-    while ((ch = (gdbstub_read_wait())) != '$')
+    while ((ch = (gdbstub_read_wait())) != '$') {
 // nothing */;
+    }
     kgdb_connected = 1;
     checksum = 0;
     xmitcsum = -1;
@@ -134,8 +384,9 @@ unsafe extern "C" fn get_packet(buffer: *mut c_char) {
 //
     while (count < (BUFMAX - 1)) {
     ch = gdbstub_read_wait();
-    if (ch == '#')
+    if (ch == '#') {
     break;
+    }
     checksum = checksum + ch;
     buffer[count] = ch;
     count = count + 1;
@@ -143,14 +394,17 @@ unsafe extern "C" fn get_packet(buffer: *mut c_char) {
     if (ch == '#') {
     xmitcsum = hex_to_bin(gdbstub_read_wait()) << 4;
     xmitcsum += hex_to_bin(gdbstub_read_wait());
-    if (checksum != xmitcsum)
+    if (checksum != xmitcsum) {
 // failed checksum
     dbg_io_ops.write_char('-');
-    else
+    }
+    else {
 // successful transfer
     dbg_io_ops.write_char('+');
-    if (dbg_io_ops.flush)
+    }
+    if (dbg_io_ops.flush) {
     dbg_io_ops.flush();
+    }
     }
     buffer[count] = 0;
     } while (checksum != xmitcsum);
@@ -161,11 +415,9 @@ unsafe extern "C" fn get_packet(buffer: *mut c_char) {
 //
 #[no_mangle]
 unsafe extern "C" fn put_packet(buffer: *mut c_char) {
-    static void put_packet(char *buffer)
-    {
-    unsigned char checksum;
-    int count;
-    char ch;
+    let mut checksum = 0;
+    let mut count = 0;
+    let mut ch = 0;
 //
 // $<packet info>#<checksum>.
 //
@@ -176,20 +428,23 @@ unsafe extern "C" fn put_packet(buffer: *mut c_char) {
     while ((ch = buffer[count])) {
     dbg_io_ops.write_char(ch);
     checksum += ch;
-    count++;
+    count += 1;
     }
     dbg_io_ops.write_char('#');
     dbg_io_ops.write_char(hex_asc_hi(checksum));
     dbg_io_ops.write_char(hex_asc_lo(checksum));
-    if (dbg_io_ops.flush)
+    if (dbg_io_ops.flush) {
     dbg_io_ops.flush();
+    }
 // Now see what we get in reply.
     ch = gdbstub_read_wait();
-    if (ch == 3)
+    if (ch == 3) {
     ch = gdbstub_read_wait();
+    }
 // If we get an ACK, we are done.
-    if (ch == '+')
+    if (ch == '+') {
     return;
+    }
 //
 // If we get the start of another packet, this means
 // that GDB is attempting to reconnect.  We will NAK
@@ -198,8 +453,9 @@ unsafe extern "C" fn put_packet(buffer: *mut c_char) {
 //
     if (ch == '$') {
     dbg_io_ops.write_char('-');
-    if (dbg_io_ops.flush)
+    if (dbg_io_ops.flush) {
     dbg_io_ops.flush();
+    }
     return;
     }
     }
@@ -207,26 +463,28 @@ unsafe extern "C" fn put_packet(buffer: *mut c_char) {
     static char gdbmsgbuf[BUFMAX + 1];
 #[no_mangle]
 pub unsafe extern "C" fn gdbstub_msg_write(s: *const c_char, len: c_int) {
-    void gdbstub_msg_write(const char *s, int len)
-    {
-    char *bufptr;
-    int wcount;
-    int i;
-    if (len == 0)
+pub static mut bufptr: *mut c_void = core::ptr::null_mut();
+    let mut wcount = 0;
+    let mut i = 0;
+    if (len == 0) {
     len = strlen(s);
+    }
 // 'O'utput
     gdbmsgbuf[0] = 'O';
 // Fill and send buffers...
     while (len > 0) {
     bufptr = gdbmsgbuf + 1;
 // Calculate how many this time
-    if ((len << 1) > (BUFMAX - 2))
+    if ((len << 1) > (BUFMAX - 2)) {
     wcount = (BUFMAX - 2) >> 1;
-    else
+    }
+    else {
     wcount = len;
+    }
 // Pack in hex chars
-    for (i = 0; i < wcount; i++)
+    for (i = 0; i < wcount; i++) {
     bufptr = hex_byte_pack(bufptr, s[i]);
+    }
 // bufptr = '\0';
 // Move up
     s += wcount;
@@ -240,22 +498,23 @@ pub unsafe extern "C" fn gdbstub_msg_write(s: *const c_char, len: c_int) {
 // buf.  Return a pointer to the last char put in buf (null). May
 // return an error.
 //
-    char *kgdb_mem2hex(char *mem, char *buf, int count)
-    {
-    char *tmp;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn kgdb_mem2hex(mem: *mut c_char, buf: *mut c_char, count: c_int) -> *mut c_void {
+pub static mut tmp: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
 //
 // We use the upper half of buf as an intermediate buffer for the
 // raw memory copy.  Hex conversion will work against this one.
 //
     tmp = buf + count;
     err = copy_from_kernel_nofault(tmp, mem, count);
-    if (err)
+    if (err) {
     return core::ptr::null_mut();
+    }
     while (count > 0) {
     buf = hex_byte_pack(buf, *tmp);
-    tmp++;
-    count--;
+    tmp += 1;
+    count -= 1;
     }
 // buf = 0;
     return buf;
@@ -267,10 +526,8 @@ pub unsafe extern "C" fn gdbstub_msg_write(s: *const c_char, len: c_int) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn kgdb_hex2mem(buf: *mut c_char, mem: *mut c_char, count: c_int) -> c_int {
-    int kgdb_hex2mem(char *buf, char *mem, int count)
-    {
-    char *tmp_raw;
-    char *tmp_hex;
+pub static mut tmp_raw: *mut c_void = core::ptr::null_mut();
+pub static mut tmp_hex: *mut c_void = core::ptr::null_mut();
 //
 // We use the upper half of buf as an intermediate buffer for the
 // raw memory that is converted from hex.
@@ -278,7 +535,7 @@ pub unsafe extern "C" fn kgdb_hex2mem(buf: *mut c_char, mem: *mut c_char, count:
     tmp_raw = buf + count * 2;
     tmp_hex = tmp_raw - 1;
     while (tmp_hex >= buf) {
-    tmp_raw--;
+    tmp_raw -= 1;
 // tmp_raw = hex_to_bin(*tmp_hex--);
 // tmp_raw |= hex_to_bin(*tmp_hex--) << 4;
     }
@@ -290,11 +547,9 @@ pub unsafe extern "C" fn kgdb_hex2mem(buf: *mut c_char, mem: *mut c_char, count:
 //
 #[no_mangle]
 pub unsafe extern "C" fn kgdb_hex2long(ptr: *mut c_char, long_val: *mut c_ulong) -> c_int {
-    int kgdb_hex2long(char **ptr, unsigned long *long_val)
-    {
-    int hex_val;
-    let mut num: c_int = 0;
-    let mut negate: c_int = 0;
+    let mut hex_val = 0;
+pub static mut num: c_int = 0;
+pub static mut negate: c_int = 0;
 // long_val = 0;
     if (**ptr == '-') {
     negate = 1;
@@ -302,14 +557,16 @@ pub unsafe extern "C" fn kgdb_hex2long(ptr: *mut c_char, long_val: *mut c_ulong)
     }
     while (**ptr) {
     hex_val = hex_to_bin(**ptr);
-    if (hex_val < 0)
+    if (hex_val < 0) {
     break;
+    }
 // long_val = (*long_val << 4) | hex_val;
-    num++;
+    num += 1;
     (*ptr)++;
     }
-    if (negate)
+    if (negate) {
 // long_val = -*long_val;
+    }
     return num;
     }
 //
@@ -319,39 +576,34 @@ pub unsafe extern "C" fn kgdb_hex2long(ptr: *mut c_char, long_val: *mut c_ulong)
 //
 #[no_mangle]
 unsafe extern "C" fn kgdb_ebin2mem(buf: *mut c_char, mem: *mut c_char, count: c_int) -> c_int {
-    static int kgdb_ebin2mem(char *buf, char *mem, int count)
-    {
-    let mut size: c_int = 0;
-    char *c = buf;
+pub static mut size: c_int = 0;
+    let mut c = buf;
     while (count-- > 0) {
-    c[size] = *buf++;
-    if (c[size] == 0x7d)
+    c[size] = *buf += 1;
+    if (c[size] == 0x7d) {
     c[size] = *buf++ ^ 0x20;
-    size++;
+    }
+    size += 1;
     }
     return copy_to_kernel_nofault(mem, c, size);
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn pt_regs_to_gdb_regs(gdb_regs: *mut c_ulong, regs: *mut pt_regs) {
-    void pt_regs_to_gdb_regs(unsigned long *gdb_regs, struct pt_regs *regs)
-    {
-    int i;
-    let mut idx: c_int = 0;
-    char *ptr = (char *)gdb_regs;
-    for (i = 0; i < DBG_MAX_REG_NUM; i++) {
+    let mut i = 0;
+pub static mut idx: c_int = 0;
+    let mut ptr = gdb_regs;
+    while (i < DBG_MAX_REG_NUM) {
     dbg_get_reg(i, ptr + idx, regs);
     idx += dbg_reg_def[i].size;
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn gdb_regs_to_pt_regs(gdb_regs: *mut c_ulong, regs: *mut pt_regs) {
-    void gdb_regs_to_pt_regs(unsigned long *gdb_regs, struct pt_regs *regs)
-    {
-    int i;
-    let mut idx: c_int = 0;
-    char *ptr = (char *)gdb_regs;
-    for (i = 0; i < DBG_MAX_REG_NUM; i++) {
+    let mut i = 0;
+pub static mut idx: c_int = 0;
+    let mut ptr = gdb_regs;
+    while (i < DBG_MAX_REG_NUM) {
     dbg_set_reg(i, ptr + idx, regs);
     idx += dbg_reg_def[i].size;
     }
@@ -360,30 +612,30 @@ pub unsafe extern "C" fn gdb_regs_to_pt_regs(gdb_regs: *mut c_ulong, regs: *mut 
 // Write memory due to an 'M' or 'X' packet.
 #[no_mangle]
 unsafe extern "C" fn write_mem_msg(binary: c_int) -> c_int {
-    static int write_mem_msg(int binary)
-    {
-    char *ptr = &remcom_in_buffer[1];
-    unsigned long addr;
-    unsigned long length;
-    int err;
+    let mut ptr = &remcom_in_buffer[1];
+    let mut addr = 0;
+    let mut length = 0;
+    let mut err = 0;
     if (kgdb_hex2long(&ptr, &addr) > 0 && *(ptr++) == ',' &&
     kgdb_hex2long(&ptr, &length) > 0 && *(ptr++) == ':') {
-    if (binary)
-    err = kgdb_ebin2mem(ptr, (char *)addr, length);
-    else
-    err = kgdb_hex2mem(ptr, (char *)addr, length);
-    if (err)
+    if (binary) {
+    err = kgdb_ebin2mem(ptr, addr, length);
+    }
+    else {
+    err = kgdb_hex2mem(ptr, addr, length);
+    }
+    if (err) {
     return err;
-    if (CACHE_FLUSH_IS_SAFE)
+    }
+    if (CACHE_FLUSH_IS_SAFE) {
     flush_icache_range(addr, addr + length);
+    }
     return 0;
     }
     return -EINVAL;
     }
 #[no_mangle]
 unsafe extern "C" fn error_packet(pkt: *mut c_char, error: c_int) {
-    static void error_packet(char *pkt, int error)
-    {
     error = -error;
     pkt[0] = 'E';
     pkt[1] = hex_asc[(error / 10)];
@@ -396,43 +648,45 @@ unsafe extern "C" fn error_packet(pkt: *mut c_char, error: c_int) {
 // remapped to negative TIDs.
 //
 pub const BUF_THREAD_ID_SIZE: c_int = 8;
-    static char *pack_threadid(char *pkt, unsigned char *id)
-    {
-    unsigned char *limit;
-    let mut lzero: c_int = 1;
+#[no_mangle]
+pub unsafe extern "C" fn pack_threadid(pkt: *mut c_char, id: *mut c_uchar) -> *mut c_void {
+pub static mut limit: *mut c_void = core::ptr::null_mut();
+pub static mut lzero: c_int = 1;
     limit = id + (BUF_THREAD_ID_SIZE / 2);
     while (id < limit) {
     if (!lzero || *id != 0) {
     pkt = hex_byte_pack(pkt, *id);
     lzero = 0;
     }
-    id++;
+    id += 1;
     }
-    if (lzero)
+    if (lzero) {
     pkt = hex_byte_pack(pkt, 0);
+    }
     return pkt;
     }
 #[no_mangle]
 unsafe extern "C" fn int_to_threadref(id: *mut c_uchar, value: c_int) {
-    static void int_to_threadref(unsigned char *id, int value)
-    {
     put_unaligned_be32(value, id);
     }
-    static struct task_struct *getthread(struct pt_regs *regs, int tid)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn getthread(regs: *mut pt_regs, tid: c_int) -> *mut c_void {
 //
 // Non-positive TIDs are remapped to the cpu shadow information
 //
-    if (tid == 0 || tid == -1)
+    if (tid == 0 || tid == -1) {
     tid = -atomic_read(&kgdb_active) - 2;
+    }
     if (tid < -1 && tid > -NR_CPUS - 2) {
-    if (kgdb_info[-tid - 2].task)
+    if (kgdb_info[-tid - 2].task) {
     return kgdb_info[-tid - 2].task;
-    else
+    }
+    else {
     return idle_task(-tid - 2);
     }
+    }
     if (tid <= 0) {
-    printk(KERN_ERR "KGDB: Internal thread select error\n");
+    printk("KGDB: Internal thread select error\n");
     dump_stack();
     return core::ptr::null_mut();
     }
@@ -449,10 +703,9 @@ unsafe extern "C" fn int_to_threadref(id: *mut c_uchar, value: c_int) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn shadow_pid(realpid: c_int) -> c_int {
-    static inline int shadow_pid(int realpid)
-    {
-    if (realpid)
+    if (realpid) {
     return realpid;
+    }
     return -raw_smp_processor_id() - 2;
     }
 //
@@ -463,8 +716,6 @@ pub unsafe extern "C" fn shadow_pid(realpid: c_int) -> c_int {
 // Handle the '?' status packets
 #[no_mangle]
 unsafe extern "C" fn gdb_cmd_status(ks: *mut kgdb_state) {
-    static void gdb_cmd_status(struct kgdb_state *ks)
-    {
 //
 // We know that this packet is only sent
 // during initial connect.  So to be safe,
@@ -477,11 +728,9 @@ unsafe extern "C" fn gdb_cmd_status(ks: *mut kgdb_state) {
     }
 #[no_mangle]
 unsafe extern "C" fn gdb_get_regs_helper(ks: *mut kgdb_state) {
-    static void gdb_get_regs_helper(struct kgdb_state *ks)
-    {
-    struct task_struct *thread;
-    void *local_debuggerinfo;
-    int i;
+pub static mut thread: *mut c_void = core::ptr::null_mut();
+pub static mut local_debuggerinfo: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
     thread = kgdb_usethread;
     if (!thread) {
     thread = kgdb_info[ks.cpu].task;
@@ -495,8 +744,9 @@ unsafe extern "C" fn gdb_get_regs_helper(ks: *mut kgdb_state) {
 // find the matching task then we try
 // to approximate the results.
 //
-    if (thread == kgdb_info[i].task)
+    if (thread == kgdb_info[i].task) {
     local_debuggerinfo = kgdb_info[i].debuggerinfo;
+    }
     }
     }
 //
@@ -520,17 +770,13 @@ unsafe extern "C" fn gdb_get_regs_helper(ks: *mut kgdb_state) {
 // Handle the 'g' get registers request
 #[no_mangle]
 unsafe extern "C" fn gdb_cmd_getregs(ks: *mut kgdb_state) {
-    static void gdb_cmd_getregs(struct kgdb_state *ks)
-    {
     gdb_get_regs_helper(ks);
-    kgdb_mem2hex((char *)gdb_regs, remcom_out_buffer, NUMREGBYTES);
+    kgdb_mem2hex(gdb_regs, remcom_out_buffer, NUMREGBYTES);
     }
 // Handle the 'G' set registers request
 #[no_mangle]
 unsafe extern "C" fn gdb_cmd_setregs(ks: *mut kgdb_state) {
-    static void gdb_cmd_setregs(struct kgdb_state *ks)
-    {
-    kgdb_hex2mem(&remcom_in_buffer[1], (char *)gdb_regs, NUMREGBYTES);
+    kgdb_hex2mem(&remcom_in_buffer[1], gdb_regs, NUMREGBYTES);
     if (kgdb_usethread && kgdb_usethread != current) {
     error_packet(remcom_out_buffer, -EINVAL);
     } else {
@@ -541,17 +787,16 @@ unsafe extern "C" fn gdb_cmd_setregs(ks: *mut kgdb_state) {
 // Handle the 'm' memory read bytes
 #[no_mangle]
 unsafe extern "C" fn gdb_cmd_memread(ks: *mut kgdb_state) {
-    static void gdb_cmd_memread(struct kgdb_state *ks)
-    {
-    char *ptr = &remcom_in_buffer[1];
-    unsigned long length;
-    unsigned long addr;
-    char *err;
+    let mut ptr = &remcom_in_buffer[1];
+    let mut length = 0;
+    let mut addr = 0;
+pub static mut err: *mut c_void = core::ptr::null_mut();
     if (kgdb_hex2long(&ptr, &addr) > 0 && *ptr++ == ',' &&
     kgdb_hex2long(&ptr, &length) > 0) {
-    err = kgdb_mem2hex((char *)addr, remcom_out_buffer, length);
-    if (!err)
+    err = kgdb_mem2hex(addr, remcom_out_buffer, length);
+    if (!err) {
     error_packet(remcom_out_buffer, -EINVAL);
+    }
     } else {
     error_packet(remcom_out_buffer, -EINVAL);
     }
@@ -559,31 +804,30 @@ unsafe extern "C" fn gdb_cmd_memread(ks: *mut kgdb_state) {
 // Handle the 'M' memory write bytes
 #[no_mangle]
 unsafe extern "C" fn gdb_cmd_memwrite(ks: *mut kgdb_state) {
-    static void gdb_cmd_memwrite(struct kgdb_state *ks)
-    {
-    let mut err: c_int = write_mem_msg(0);
-    if (err)
+pub static mut err: c_int = 0;
+    if (err) {
     error_packet(remcom_out_buffer, err);
-    else
+    }
+    else {
     strscpy(remcom_out_buffer, "OK");
     }
+    }
 
-    static char *gdb_hex_reg_helper(int regnum, char *out)
-    {
-    int i;
-    let mut offset: c_int = 0;
-    for (i = 0; i < regnum; i++)
+#[no_mangle]
+pub unsafe extern "C" fn gdb_hex_reg_helper(regnum: c_int, out: *mut c_char) -> *mut c_void {
+    let mut i = 0;
+pub static mut offset: c_int = 0;
+    for (i = 0; i < regnum; i++) {
     offset += dbg_reg_def[i].size;
-    return kgdb_mem2hex((char *)gdb_regs + offset, out,
+    }
+    return kgdb_mem2hex(gdb_regs + offset, out,
     dbg_reg_def[i].size);
     }
 // Handle the 'p' individual register get
 #[no_mangle]
 unsafe extern "C" fn gdb_cmd_reg_get(ks: *mut kgdb_state) {
-    static void gdb_cmd_reg_get(struct kgdb_state *ks)
-    {
-    unsigned long regnum;
-    char *ptr = &remcom_in_buffer[1];
+    let mut regnum = 0;
+    let mut ptr = &remcom_in_buffer[1];
     kgdb_hex2long(&ptr, &regnum);
     if (regnum >= DBG_MAX_REG_NUM) {
     error_packet(remcom_out_buffer, -EINVAL);
@@ -595,11 +839,9 @@ unsafe extern "C" fn gdb_cmd_reg_get(ks: *mut kgdb_state) {
 // Handle the 'P' individual register set
 #[no_mangle]
 unsafe extern "C" fn gdb_cmd_reg_set(ks: *mut kgdb_state) {
-    static void gdb_cmd_reg_set(struct kgdb_state *ks)
-    {
-    unsigned long regnum;
-    char *ptr = &remcom_in_buffer[1];
-    let mut i: c_int = 0;
+    let mut regnum = 0;
+    let mut ptr = &remcom_in_buffer[1];
+pub static mut i: c_int = 0;
     kgdb_hex2long(&ptr, &regnum);
     if (*ptr++ != '=' ||
     !(!kgdb_usethread || kgdb_usethread == current) ||
@@ -607,14 +849,16 @@ unsafe extern "C" fn gdb_cmd_reg_set(ks: *mut kgdb_state) {
     error_packet(remcom_out_buffer, -EINVAL);
     return;
     }
-    memset(gdb_regs, 0, sizeof(gdb_regs));
-    while (i < sizeof(gdb_regs) * 2)
+    memset(gdb_regs, 0, sizeof!(gdb_regs));
+    while (i < sizeof!(gdb_regs) * 2) {
     if (hex_to_bin(ptr[i]) >= 0)
-    i++;
-    else
+    i += 1;
+    }
+    else {
     break;
+    }
     i = i / 2;
-    kgdb_hex2mem(ptr, (char *)gdb_regs, i);
+    kgdb_hex2mem(ptr, gdb_regs, i);
     dbg_set_reg(regnum, gdb_regs, ks.linux_regs);
     strscpy(remcom_out_buffer, "OK");
     }
@@ -622,20 +866,18 @@ unsafe extern "C" fn gdb_cmd_reg_set(ks: *mut kgdb_state) {
 // Handle the 'X' memory binary write bytes
 #[no_mangle]
 unsafe extern "C" fn gdb_cmd_binwrite(ks: *mut kgdb_state) {
-    static void gdb_cmd_binwrite(struct kgdb_state *ks)
-    {
-    let mut err: c_int = write_mem_msg(1);
-    if (err)
+pub static mut err: c_int = 0;
+    if (err) {
     error_packet(remcom_out_buffer, err);
-    else
+    }
+    else {
     strscpy(remcom_out_buffer, "OK");
+    }
     }
 // Handle the 'D' or 'k', detach or kill packets
 #[no_mangle]
 unsafe extern "C" fn gdb_cmd_detachkill(ks: *mut kgdb_state) {
-    static void gdb_cmd_detachkill(struct kgdb_state *ks)
-    {
-    int error;
+    let mut error = 0;
 // The detach case
     if (remcom_in_buffer[0] == 'D') {
     error = dbg_remove_all_break();
@@ -658,11 +900,9 @@ unsafe extern "C" fn gdb_cmd_detachkill(ks: *mut kgdb_state) {
 // Handle the 'R' reboot packets
 #[no_mangle]
 unsafe extern "C" fn gdb_cmd_reboot(ks: *mut kgdb_state) -> c_int {
-    static int gdb_cmd_reboot(struct kgdb_state *ks)
-    {
 // For now, only honor R0
     if (strcmp(remcom_in_buffer, "R0") == 0) {
-    printk(KERN_CRIT "Executing emergency reboot\n");
+    printk("Executing emergency reboot\n");
     strscpy(remcom_out_buffer, "OK");
     put_packet(remcom_out_buffer);
 //
@@ -678,20 +918,20 @@ unsafe extern "C" fn gdb_cmd_reboot(ks: *mut kgdb_state) -> c_int {
 // Handle the 'q' query packets
 #[no_mangle]
 unsafe extern "C" fn gdb_cmd_query(ks: *mut kgdb_state) {
-    static void gdb_cmd_query(struct kgdb_state *ks)
-    {
-    struct task_struct *g;
-    struct task_struct *p;
+pub static mut g: *mut c_void = core::ptr::null_mut();
+pub static mut p: *mut c_void = core::ptr::null_mut();
     unsigned char thref[BUF_THREAD_ID_SIZE];
-    char *ptr;
-    int i;
-    int cpu;
-    let mut finished: c_int = 0;
-    switch (remcom_in_buffer[1]) {
-    case 's':
-    case 'f':
-    if (memcmp(remcom_in_buffer + 2, "ThreadInfo", 10))
-    break;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    let mut cpu = 0;
+pub static mut finished: c_int = 0;
+    match (remcom_in_buffer[1]) {
+    's' => {
+    }
+    'f' => {
+    if (memcmp(remcom_in_buffer + 2, "ThreadInfo", 10)) {
+    // break;
+    }
     i = 0;
     remcom_out_buffer[0] = 'm';
     ptr = remcom_out_buffer + 1;
@@ -699,41 +939,45 @@ unsafe extern "C" fn gdb_cmd_query(ks: *mut kgdb_state) {
 // Each cpu is a shadow thread
     for_each_online_cpu(cpu) {
     ks.thr_query = 0;
-    int_to_threadref(thref, -cpu - 2);
+// forward_decl: _to_threadref;
     ptr = pack_threadid(ptr, thref);
 // (ptr++) = ',';
-    i++;
+    i += 1;
     }
     }
     for_each_process_thread(g, p) {
     if (i >= ks.thr_query && !finished) {
-    int_to_threadref(thref, p.pid);
+// forward_decl: _to_threadref;
     ptr = pack_threadid(ptr, thref);
 // (ptr++) = ',';
-    ks.thr_query++;
-    if (ks.thr_query % KGDB_MAX_THREAD_QUERY == 0)
+    ks.thr_query += 1;
+    if (ks.thr_query % KGDB_MAX_THREAD_QUERY == 0) {
     finished = 1;
     }
-    i++;
+    }
+    i += 1;
     }
 // (--ptr) = '\0';
-    break;
-    case 'C':
+    // break;
+    }
+    'C' => {
 // Current thread id
     strscpy(remcom_out_buffer, "QC");
     ks.threadid = shadow_pid(current.pid);
-    int_to_threadref(thref, ks.threadid);
+// forward_decl: _to_threadref;
     pack_threadid(remcom_out_buffer + 2, thref);
-    break;
-    case 'T':
-    if (memcmp(remcom_in_buffer + 1, "ThreadExtraInfo,", 16))
-    break;
+    // break;
+    }
+    'T' => {
+    if (memcmp(remcom_in_buffer + 1, "ThreadExtraInfo,", 16)) {
+    // break;
+    }
     ks.threadid = 0;
     ptr = remcom_in_buffer + 17;
     kgdb_hex2long(&ptr, &ks.threadid);
     if (!getthread(ks.linux_regs, ks.threadid)) {
     error_packet(remcom_out_buffer, -EINVAL);
-    break;
+    // break;
     }
     if ((int)ks.threadid > 0) {
     kgdb_mem2hex(getthread(ks.linux_regs,
@@ -745,14 +989,15 @@ unsafe extern "C" fn gdb_cmd_query(ks: *mut kgdb_state) {
     (int)(-ks.threadid - 2));
     kgdb_mem2hex(tmpstr, remcom_out_buffer, strlen(tmpstr));
     }
-    break;
+    // break;
 
-    case 'R':
+    }
+    'R' => {
     if (strncmp(remcom_in_buffer, "qRcmd,", 6) == 0) {
-    let mut len: c_int = strlen(remcom_in_buffer + 6);
+pub static mut len: c_int = 0;
     if ((len % 2) != 0) {
     strscpy(remcom_out_buffer, "E01");
-    break;
+    // break;
     }
     kgdb_hex2mem(remcom_in_buffer + 6,
     remcom_out_buffer, len);
@@ -763,43 +1008,48 @@ unsafe extern "C" fn gdb_cmd_query(ks: *mut kgdb_state) {
     kdb_common_deinit_state();
     strscpy(remcom_out_buffer, "OK");
     }
-    break;
+    // break;
 
-    case 'S':
-    if (!strncmp(remcom_in_buffer, "qSupported:", 11))
+    }
+    'S' => {
+    if (!strncmp(remcom_in_buffer, "qSupported:", 11)) {
     strscpy(remcom_out_buffer, kgdb_arch_gdb_stub_feature);
-    break;
-    case 'X':
-    if (!strncmp(remcom_in_buffer, "qXfer:", 6))
+    }
+    // break;
+    }
+    'X' => {
+    if (!strncmp(remcom_in_buffer, "qXfer:", 6)) {
     kgdb_arch_handle_qxfer_pkt(remcom_in_buffer,
     remcom_out_buffer);
-    break;
+    }
+    // break;
 
-    default:
-    break;
+    }
+    _ => {
+    // break;
+    }
     }
     }
 // Handle the 'H' task query packets
 #[no_mangle]
 unsafe extern "C" fn gdb_cmd_task(ks: *mut kgdb_state) {
-    static void gdb_cmd_task(struct kgdb_state *ks)
-    {
-    struct task_struct *thread;
-    char *ptr;
-    switch (remcom_in_buffer[1]) {
-    case 'g':
+pub static mut thread: *mut c_void = core::ptr::null_mut();
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
+    match (remcom_in_buffer[1]) {
+    'g' => {
     ptr = &remcom_in_buffer[2];
     kgdb_hex2long(&ptr, &ks.threadid);
     thread = getthread(ks.linux_regs, ks.threadid);
     if (!thread && ks.threadid > 0) {
     error_packet(remcom_out_buffer, -EINVAL);
-    break;
+    // break;
     }
     kgdb_usethread = thread;
     ks.kgdb_usethreadid = ks.threadid;
     strscpy(remcom_out_buffer, "OK");
-    break;
-    case 'c':
+    // break;
+    }
+    'c' => {
     ptr = &remcom_in_buffer[2];
     kgdb_hex2long(&ptr, &ks.threadid);
     if (!ks.threadid) {
@@ -808,58 +1058,60 @@ unsafe extern "C" fn gdb_cmd_task(ks: *mut kgdb_state) {
     thread = getthread(ks.linux_regs, ks.threadid);
     if (!thread && ks.threadid > 0) {
     error_packet(remcom_out_buffer, -EINVAL);
-    break;
+    // break;
     }
     kgdb_contthread = thread;
     }
     strscpy(remcom_out_buffer, "OK");
-    break;
+    // break;
+    }
     }
     }
 // Handle the 'T' thread query packets
 #[no_mangle]
 unsafe extern "C" fn gdb_cmd_thread(ks: *mut kgdb_state) {
-    static void gdb_cmd_thread(struct kgdb_state *ks)
-    {
-    char *ptr = &remcom_in_buffer[1];
-    struct task_struct *thread;
+    let mut ptr = &remcom_in_buffer[1];
+pub static mut thread: *mut c_void = core::ptr::null_mut();
     kgdb_hex2long(&ptr, &ks.threadid);
     thread = getthread(ks.linux_regs, ks.threadid);
-    if (thread)
+    if (thread) {
     strscpy(remcom_out_buffer, "OK");
-    else
+    }
+    else {
     error_packet(remcom_out_buffer, -EINVAL);
+    }
     }
 // Handle the 'z' or 'Z' breakpoint remove or set packets
 #[no_mangle]
 unsafe extern "C" fn gdb_cmd_break(ks: *mut kgdb_state) {
-    static void gdb_cmd_break(struct kgdb_state *ks)
-    {
 //
 // Since GDB-5.3, it's been drafted that '0' is a software
 // breakpoint, '1' is a hardware breakpoint, so let's do that.
 //
-    char *bpt_type = &remcom_in_buffer[1];
-    char *ptr = &remcom_in_buffer[2];
-    unsigned long addr;
-    unsigned long length;
-    let mut error: c_int = 0;
+    let mut bpt_type = &remcom_in_buffer[1];
+    let mut ptr = &remcom_in_buffer[2];
+    let mut addr = 0;
+    let mut length = 0;
+pub static mut error: c_int = 0;
     if (arch_kgdb_ops.set_hw_breakpoint && *bpt_type >= '1') {
 // Unsupported
-    if (*bpt_type > '4')
+    if (*bpt_type > '4') {
     return;
+    }
     } else {
-    if (*bpt_type != '0' && *bpt_type != '1')
+    if (*bpt_type != '0' && *bpt_type != '1') {
 // Unsupported.
     return;
+    }
     }
 //
 // Test if this is a hardware breakpoint, and
 // if we support it:
 //
-    if (*bpt_type == '1' && !(arch_kgdb_ops.flags & KGDB_HW_BREAKPOINT))
+    if (*bpt_type == '1' && !(arch_kgdb_ops.flags & KGDB_HW_BREAKPOINT)) {
 // Unsupported.
     return;
+    }
     if (*(ptr++) != ',') {
     error_packet(remcom_out_buffer, -EINVAL);
     return;
@@ -873,32 +1125,33 @@ unsafe extern "C" fn gdb_cmd_break(ks: *mut kgdb_state) {
     error_packet(remcom_out_buffer, -EINVAL);
     return;
     }
-    if (remcom_in_buffer[0] == 'Z' && *bpt_type == '0')
+    if (remcom_in_buffer[0] == 'Z' && *bpt_type == '0') {
     error = dbg_set_sw_break(addr);
-#[no_mangle]
-pub unsafe extern "C" fn if('0': *mut *mut remcom_in_buffer[0] == 'z' && bpt_type ==) -> else {
-    else if (remcom_in_buffer[0] == 'z' && *bpt_type == '0')
+    }
+
+    else if (remcom_in_buffer[0] == 'z' && *bpt_type == '0') {
     error = dbg_remove_sw_break(addr);
-#[no_mangle]
-pub unsafe extern "C" fn if('Z': remcom_in_buffer[0] ==) -> else {
-    else if (remcom_in_buffer[0] == 'Z')
+    }
+
+    else if (remcom_in_buffer[0] == 'Z') {
     error = arch_kgdb_ops.set_hw_breakpoint(addr,
     (int)length, *bpt_type - '0');
-#[no_mangle]
-pub unsafe extern "C" fn if('z': remcom_in_buffer[0] ==) -> else {
-    else if (remcom_in_buffer[0] == 'z')
+    }
+
+    else if (remcom_in_buffer[0] == 'z') {
     error = arch_kgdb_ops.remove_hw_breakpoint(addr,
     (int) length, *bpt_type - '0');
-    if (error == 0)
+    }
+    if (error == 0) {
     strscpy(remcom_out_buffer, "OK");
-    else
+    }
+    else {
     error_packet(remcom_out_buffer, error);
+    }
     }
 // Handle the 'C' signal / exception passing packets
 #[no_mangle]
 unsafe extern "C" fn gdb_cmd_exception_pass(ks: *mut kgdb_state) -> c_int {
-    static int gdb_cmd_exception_pass(struct kgdb_state *ks)
-    {
 // C09 == pass exception
 // C15 == detach kgdb, pass exception
 //
@@ -925,24 +1178,22 @@ unsafe extern "C" fn gdb_cmd_exception_pass(ks: *mut kgdb_state) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn gdb_serial_stub(ks: *mut kgdb_state) -> c_int {
-    int gdb_serial_stub(struct kgdb_state *ks)
-    {
-    let mut error: c_int = 0;
-    int tmp;
+pub static mut error: c_int = 0;
+    let mut tmp = 0;
 // Initialize comm buffer and globals.
-    memset(remcom_out_buffer, 0, sizeof(remcom_out_buffer));
+    memset(remcom_out_buffer, 0, sizeof!(remcom_out_buffer));
     kgdb_usethread = kgdb_info[ks.cpu].task;
     ks.kgdb_usethreadid = shadow_pid(kgdb_info[ks.cpu].task.pid);
     ks.pass_exception = 0;
     if (kgdb_connected) {
     unsigned char thref[BUF_THREAD_ID_SIZE];
-    char *ptr;
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
 // Reply to host that an exception has occurred
     ptr = remcom_out_buffer;
 // ptr++ = 'T';
     ptr = hex_byte_pack(ptr, ks.signo);
     ptr += strlen(strcpy(ptr, "thread:"));
-    int_to_threadref(thref, shadow_pid(current.pid));
+// forward_decl: _to_threadref;
     ptr = pack_threadid(ptr, thref);
 // ptr++ = ';';
     put_packet(remcom_out_buffer);
@@ -950,84 +1201,107 @@ pub unsafe extern "C" fn gdb_serial_stub(ks: *mut kgdb_state) -> c_int {
     while (1) {
     error = 0;
 // Clear the out buffer.
-    memset(remcom_out_buffer, 0, sizeof(remcom_out_buffer));
+    memset(remcom_out_buffer, 0, sizeof!(remcom_out_buffer));
     get_packet(remcom_in_buffer);
-    switch (remcom_in_buffer[0]) {
-    case '?': /* gdbserial status */
+    match (remcom_in_buffer[0]) {
+    '?' => {
     gdb_cmd_status(ks);
-    break;
-    case 'g': /* return the value of the CPU registers */
+    // break;
+    }
+    'g' => {
     gdb_cmd_getregs(ks);
-    break;
-    case 'G': /* set the value of the CPU registers - return OK */
+    // break;
+    }
+    'G' => {
     gdb_cmd_setregs(ks);
-    break;
-    case 'm': /* mAA..AA,LLLL  Read LLLL bytes at address AA..AA */
+    // break;
+    }
+    'm' => {
     gdb_cmd_memread(ks);
-    break;
-    case 'M': /* MAA..AA,LLLL: Write LLLL bytes at address AA..AA */
+    // break;
+    }
+    'M' => {
     gdb_cmd_memwrite(ks);
-    break;
+    // break;
 
-    case 'p': /* pXX Return gdb register XX (in hex) */
+    }
+    'p' => {
     gdb_cmd_reg_get(ks);
-    break;
-    case 'P': /* PXX=aaaa Set gdb register XX to aaaa (in hex) */
+    // break;
+    }
+    'P' => {
     gdb_cmd_reg_set(ks);
-    break;
+    // break;
 
-    case 'X': /* XAA..AA,LLLL: Write LLLL bytes at address AA..AA */
+    }
+    'X' => {
     gdb_cmd_binwrite(ks);
-    break;
+    // break;
 // kill or detach. KGDB should treat this like a
 // continue.
 //
-    case 'D': /* Debugger detach */
-    case 'k': /* Debugger detach via kill */
+    }
+    'D' => {
+    }
+    'k' => {
     gdb_cmd_detachkill(ks);
-    goto default_handle;
-    case 'R': /* Reboot */
-    if (gdb_cmd_reboot(ks))
-    goto default_handle;
-    break;
-    case 'q': /* query command */
+// goto;
+    }
+    'R' => {
+    if (gdb_cmd_reboot(ks)) {
+// goto;
+    }
+    // break;
+    }
+    'q' => {
     gdb_cmd_query(ks);
-    break;
-    case 'H': /* task related */
+    // break;
+    }
+    'H' => {
     gdb_cmd_task(ks);
-    break;
-    case 'T': /* Query thread status */
+    // break;
+    }
+    'T' => {
     gdb_cmd_thread(ks);
-    break;
-    case 'z': /* Break point remove */
-    case 'Z': /* Break point set */
+    // break;
+    }
+    'z' => {
+    }
+    'Z' => {
     gdb_cmd_break(ks);
-    break;
+    // break;
 
-    case '3': /* Escape into back into kdb */
+    }
+    '3' => {
     if (remcom_in_buffer[1] == '\0') {
     gdb_cmd_detachkill(ks);
     return DBG_PASS_EVENT;
     }
     fallthrough;
 
-    case 'C': /* Exception passing */
+    }
+    'C' => {
     tmp = gdb_cmd_exception_pass(ks);
-    if (tmp > 0)
-    goto default_handle;
-    if (tmp == 0)
-    break;
+    if (tmp > 0) {
+// goto;
+    }
+    if (tmp == 0) {
+    // break;
+    }
     fallthrough;	/* on tmp < 0 */
-    case 'c': /* Continue packet */
-    case 's': /* Single step packet */
+    }
+    'c' => {
+    }
+    's' => {
     if (kgdb_contthread && kgdb_contthread != current) {
 // Can't switch threads in kgdb
     error_packet(remcom_out_buffer, -EINVAL);
-    break;
+    // break;
     }
     fallthrough;	/* to default processing */
-    default:
-    default_handle:
+    }
+    _ => {
+// label;
     error = kgdb_arch_handle_exception(ks.ex_vector,
     ks.signo,
     ks.err_code,
@@ -1041,24 +1315,24 @@ pub unsafe extern "C" fn gdb_serial_stub(ks: *mut kgdb_state) -> c_int {
     if (error >= 0 || remcom_in_buffer[0] == 'D' ||
     remcom_in_buffer[0] == 'k') {
     error = 0;
-    goto kgdb_exit;
+// goto;
+    }
     }
     }
 // reply to the request
     put_packet(remcom_out_buffer);
     }
-    kgdb_exit:
-    if (ks.pass_exception)
+// label;
+    if (ks.pass_exception) {
     error = 1;
+    }
     return error;
     }
 #[no_mangle]
 pub unsafe extern "C" fn gdbstub_state(ks: *mut kgdb_state, cmd: *mut c_char) -> c_int {
-    int gdbstub_state(struct kgdb_state *ks, char *cmd)
-    {
-    int error;
-    switch (cmd[0]) {
-    case 'e':
+    let mut error = 0;
+    match (cmd[0]) {
+    'e' => {
     error = kgdb_arch_handle_exception(ks.ex_vector,
     ks.signo,
     ks.err_code,
@@ -1066,15 +1340,19 @@ pub unsafe extern "C" fn gdbstub_state(ks: *mut kgdb_state, cmd: *mut c_char) ->
     remcom_out_buffer,
     ks.linux_regs);
     return error;
-    case 's':
-    case 'c':
-    strscpy(remcom_in_buffer, cmd, sizeof(remcom_in_buffer));
+    }
+    's' => {
+    }
+    'c' => {
+    strscpy(remcom_in_buffer, cmd, sizeof!(remcom_in_buffer));
     return 0;
-    case '$':
-    strscpy(remcom_in_buffer, cmd, sizeof(remcom_in_buffer));
+    }
+    '$' => {
+    strscpy(remcom_in_buffer, cmd, sizeof!(remcom_in_buffer));
     gdbstub_use_prev_in_buf = strlen(remcom_in_buffer);
     gdbstub_prev_in_buf_pos = 0;
     return 0;
+    }
     }
     dbg_io_ops.write_char('+');
     put_packet(remcom_out_buffer);
@@ -1086,21 +1364,21 @@ pub unsafe extern "C" fn gdbstub_state(ks: *mut kgdb_state, cmd: *mut c_char) ->
 //
 #[no_mangle]
 pub unsafe extern "C" fn gdbstub_exit(status: c_int) {
-    void gdbstub_exit(int status)
-    {
     unsigned char checksum, ch, buffer[3];
-    int loop;
-    if (!kgdb_connected)
+    let mut loop = 0;
+    if (!kgdb_connected) {
     return;
+    }
     kgdb_connected = 0;
-    if (!dbg_io_ops || dbg_kdb_mode)
+    if (!dbg_io_ops || dbg_kdb_mode) {
     return;
+    }
     buffer[0] = 'W';
     buffer[1] = hex_asc_hi(status);
     buffer[2] = hex_asc_lo(status);
     dbg_io_ops.write_char('$');
     checksum = 0;
-    for (loop = 0; loop < 3; loop++) {
+    while (loop < 3) {
     ch = buffer[loop];
     checksum += ch;
     dbg_io_ops.write_char(ch);
@@ -1109,6 +1387,7 @@ pub unsafe extern "C" fn gdbstub_exit(status: c_int) {
     dbg_io_ops.write_char(hex_asc_hi(checksum));
     dbg_io_ops.write_char(hex_asc_lo(checksum));
 // make sure the output is flushed, lest the bootloader clobber it
-    if (dbg_io_ops.flush)
+    if (dbg_io_ops.flush) {
     dbg_io_ops.flush();
+    }
     }

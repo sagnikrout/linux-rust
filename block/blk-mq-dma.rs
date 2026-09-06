@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -43,12 +293,12 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
 #[no_mangle]
 unsafe extern "C" fn __blk_map_iter_next(iter: *mut blk_map_iter) -> bool {
-    static bool __blk_map_iter_next(struct blk_map_iter *iter)
-    {
-    if (iter.iter.bi_size)
+    if (iter.iter.bi_size) {
     return true;
-    if (!iter.bio || !iter.bio.bi_next)
+    }
+    if (!iter.bio || !iter.bio.bi_next) {
     return false;
+    }
     iter.bio = iter.bio.bi_next;
     if (iter.is_integrity) {
     iter.iter = bio_integrity(iter.bio).bip_iter;
@@ -59,13 +309,13 @@ unsafe extern "C" fn __blk_map_iter_next(iter: *mut blk_map_iter) -> bool {
     }
     return true;
     }
-    static bool blk_map_iter_next(struct request *req, struct blk_map_iter *iter,
-    struct phys_vec *vec)
-    {
-    unsigned int max_size;
-    struct bio_vec bv;
-    if (!iter.iter.bi_size)
+#[no_mangle]
+pub unsafe extern "C" fn blk_map_iter_next(req: *mut request, iter: *mut blk_map_iter, vec: *mut phys_vec) -> bool {
+    let mut max_size = 0;
+pub static mut bv: usize = 0;
+    if (!iter.iter.bi_size) {
     return false;
+    }
     bv = mp_bvec_iter_bvec(iter.bvecs, iter.iter);
     vec.paddr = bvec_phys(&bv);
     max_size = get_max_segment_size(&req.q.limits, vec.paddr, UINT_MAX);
@@ -77,13 +327,15 @@ unsafe extern "C" fn __blk_map_iter_next(iter: *mut blk_map_iter) -> bool {
 // the next bio, but some callers also don't pack bvecs tight.
 //
     while (!iter.iter.bi_size || !iter.iter.bi_offset) {
-    struct bio_vec next;
-    if (!__blk_map_iter_next(iter))
+pub static mut next: usize = 0;
+    if (!__blk_map_iter_next(iter)) {
     break;
+    }
     next = mp_bvec_iter_bvec(iter.bvecs, iter.iter);
     if (bv.bv_len + next.bv_len > max_size ||
-    !biovec_phys_mergeable(req.q, &bv, &next))
+    !biovec_phys_mergeable(req.q, &bv, &next)) {
     break;
+    }
     bv.bv_len += next.bv_len;
     bvec_iter_advance_single(iter.bvecs, &iter.iter, next.bv_len);
     }
@@ -98,25 +350,22 @@ unsafe extern "C" fn __blk_map_iter_next(iter: *mut blk_map_iter) -> bool {
 // Note that there is no point in using the slightly more complicated IOVA based
 // path for single segment mappings.
 //
-    static inline bool blk_can_dma_map_iova(struct request *req,
-    struct device *dma_dev)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn blk_can_dma_map_iova(req: *mut request, dma_dev: *mut device) -> bool {
     return !(req_phys_gap_mask(req) & dma_get_merge_boundary(dma_dev));
     }
 #[no_mangle]
 unsafe extern "C" fn blk_dma_map_bus(iter: *mut blk_dma_iter, vec: *mut phys_vec) -> bool {
-    static bool blk_dma_map_bus(struct blk_dma_iter *iter, struct phys_vec *vec)
-    {
     iter.addr = pci_p2pdma_bus_addr_map(iter.p2pdma.mem, vec.paddr);
     iter.len = vec.len;
     return true;
     }
-    static bool blk_dma_map_direct(struct request *req, struct device *dma_dev,
-    struct blk_dma_iter *iter, struct phys_vec *vec)
-    {
-    let mut attrs: c_uint = 0;
-    if (iter.p2pdma.map == PCI_P2PDMA_MAP_THRU_HOST_BRIDGE)
+#[no_mangle]
+pub unsafe extern "C" fn blk_dma_map_direct(req: *mut request, dma_dev: *mut device, iter: *mut blk_dma_iter, vec: *mut phys_vec) -> bool {
+pub static mut attrs: c_uint = 0;
+    if (iter.p2pdma.map == PCI_P2PDMA_MAP_THRU_HOST_BRIDGE) {
     attrs |= DMA_ATTR_MMIO;
+    }
     iter.addr = dma_map_phys(dma_dev, vec.paddr, vec.len,
     rq_dma_dir(req), attrs);
     if (dma_mapping_error(dma_dev, iter.addr)) {
@@ -126,70 +375,69 @@ unsafe extern "C" fn blk_dma_map_bus(iter: *mut blk_dma_iter, vec: *mut phys_vec
     iter.len = vec.len;
     return true;
     }
-    static bool blk_rq_dma_map_iova(struct request *req, struct device *dma_dev,
-    struct dma_iova_state *state, struct blk_dma_iter *iter,
-    struct phys_vec *vec)
-    {
-    let mut dir: enum dma_data_direction = rq_dma_dir(req);
-    let mut attrs: c_uint = 0;
-    let mut mapped: usize = 0;
-    int error;
+#[no_mangle]
+pub unsafe extern "C" fn blk_rq_dma_map_iova(req: *mut request, dma_dev: *mut device, state: *mut dma_iova_state, iter: *mut blk_dma_iter, vec: *mut phys_vec) -> bool {
+pub static mut dir: dma_data_direction = 0;
+pub static mut attrs: c_uint = 0;
+pub static mut mapped: usize = 0;
+    let mut error = 0;
     iter.addr = state.addr;
     iter.len = dma_iova_size(state);
-    if (iter.p2pdma.map == PCI_P2PDMA_MAP_THRU_HOST_BRIDGE)
+    if (iter.p2pdma.map == PCI_P2PDMA_MAP_THRU_HOST_BRIDGE) {
     attrs |= DMA_ATTR_MMIO;
+    }
     do {
     error = dma_iova_link(dma_dev, state, vec.paddr, mapped,
     vec.len, dir, attrs);
-    if (error)
-    goto out_unlink;
+    if (error) {
+// goto;
+    }
     mapped += vec.len;
     } while (blk_map_iter_next(req, &iter.iter, vec));
     error = dma_iova_sync(dma_dev, state, 0, mapped);
-    if (error)
-    goto out_unlink;
+    if (error) {
+// goto;
+    }
     return true;
-    out_unlink:
+// label;
     dma_iova_destroy(dma_dev, state, mapped, dir, attrs);
     iter.status = errno_to_blk_status(error);
     return false;
     }
-    static inline void blk_rq_map_iter_init(struct request *rq,
-    struct blk_map_iter *iter)
-    {
-    struct bio *bio = rq.bio;
+#[no_mangle]
+pub unsafe extern "C" fn blk_rq_map_iter_init(rq: *mut request, iter: *mut blk_map_iter) {
+    let mut bio = rq.bio;
     if (rq.rq_flags & RQF_SPECIAL_PAYLOAD) {
-// iter = (struct blk_map_iter) {
+// iter = (blk_map_iter) {
     .bvecs = &rq.special_vec,
     .iter = {
     .bi_size = rq.special_vec.bv_len,
     }
     };
     } else if (bio) {
-// iter = (struct blk_map_iter) {
+// iter = (blk_map_iter) {
     .bio = bio,
     .bvecs = bio.bi_io_vec,
     .iter = bio.bi_iter,
     };
     } else {
 // the internal flush request may not have bio attached
-// iter = (struct blk_map_iter) {};
+// iter = (blk_map_iter) {};
     }
     }
-    static bool blk_dma_map_iter_start(struct request *req, struct device *dma_dev,
-    struct dma_iova_state *state, struct blk_dma_iter *iter,
-    unsigned int total_len)
-    {
-    struct phys_vec vec;
-    memset(&iter.p2pdma, 0, sizeof(iter.p2pdma));
+#[no_mangle]
+pub unsafe extern "C" fn blk_dma_map_iter_start(req: *mut request, dma_dev: *mut device, state: *mut dma_iova_state, iter: *mut blk_dma_iter, total_len: c_uint) -> bool {
+pub static mut vec: usize = 0;
+    memset(&iter.p2pdma, 0, sizeof!(iter.p2pdma));
     iter.status = BLK_STS_OK;
     iter.p2pdma.map = PCI_P2PDMA_MAP_NONE;
 //
 // Grab the first segment ASAP because we'll need it to check for P2P
 // transfers.
 //
-    if (!blk_map_iter_next(req, &iter.iter, &vec))
+    if (!blk_map_iter_next(req, &iter.iter, &vec)) {
     return false;
+    }
     switch (pci_p2pdma_state(&iter.p2pdma, dma_dev,
     phys_to_page(vec.paddr))) {
     case PCI_P2PDMA_MAP_BUS_ADDR:
@@ -201,14 +449,15 @@ unsafe extern "C" fn blk_dma_map_bus(iter: *mut blk_dma_iter, vec: *mut phys_vec
 //
     case PCI_P2PDMA_MAP_NONE:
     break;
-    default:
+// label;
     iter.status = BLK_STS_INVAL;
     return false;
     }
     if (blk_can_dma_map_iova(req, dma_dev) &&
-    dma_iova_try_alloc(dma_dev, state, vec.paddr, total_len))
+    dma_iova_try_alloc(dma_dev, state, vec.paddr, total_len)) {
     return blk_rq_dma_map_iova(req, dma_dev, state, iter, &vec);
-    memset(state, 0, sizeof(*state));
+    }
+    memset(state, 0, sizeof!(*state));
     return blk_dma_map_direct(req, dma_dev, iter, &vec);
     }
 //
@@ -233,9 +482,8 @@ unsafe extern "C" fn blk_dma_map_bus(iter: *mut blk_dma_iter, vec: *mut phys_vec
 // need to be mapped after this, or go straight to blk_rq_dma_map_iter_next()
 // to try to map the following segments.
 //
-    bool blk_rq_dma_map_iter_start(struct request *req, struct device *dma_dev,
-    struct dma_iova_state *state, struct blk_dma_iter *iter)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn blk_rq_dma_map_iter_start(req: *mut request, dma_dev: *mut device, state: *mut dma_iova_state, iter: *mut blk_dma_iter) -> bool {
     blk_rq_map_iter_init(req, &iter.iter);
     return blk_dma_map_iter_start(req, dma_dev, state, iter,
     blk_rq_payload_bytes(req));
@@ -258,22 +506,23 @@ unsafe extern "C" fn blk_dma_map_bus(iter: *mut blk_dma_iter, vec: *mut phys_vec
 // the length in @iter.len.  If no segment was mapped the status code is
 // returned in @iter.status.
 //
-    bool blk_rq_dma_map_iter_next(struct request *req, struct device *dma_dev,
-    struct blk_dma_iter *iter)
-    {
-    struct phys_vec vec;
-    if (!blk_map_iter_next(req, &iter.iter, &vec))
+#[no_mangle]
+pub unsafe extern "C" fn blk_rq_dma_map_iter_next(req: *mut request, dma_dev: *mut device, iter: *mut blk_dma_iter) -> bool {
+pub static mut vec: usize = 0;
+    if (!blk_map_iter_next(req, &iter.iter, &vec)) {
     return false;
-    if (iter.p2pdma.map == PCI_P2PDMA_MAP_BUS_ADDR)
+    }
+    if (iter.p2pdma.map == PCI_P2PDMA_MAP_BUS_ADDR) {
     return blk_dma_map_bus(iter, &vec);
+    }
     return blk_dma_map_direct(req, dma_dev, iter, &vec);
     }
     EXPORT_SYMBOL_GPL(blk_rq_dma_map_iter_next);
-    static inline struct scatterlist *
-    blk_next_sg(struct scatterlist **sg, struct scatterlist *sglist)
-    {
-    if (!*sg)
+#[no_mangle]
+pub unsafe extern "C" fn blk_next_sg(sg: *mut *mut scatterlist, sglist: *mut scatterlist) -> *mut c_void {
+    if (!*sg) {
     return sglist;
+    }
 //
 // If the driver previously mapped a shorter list, we could see a
 // termination bit prematurely unless it fully inits the sg table
@@ -288,27 +537,27 @@ unsafe extern "C" fn blk_dma_map_bus(iter: *mut blk_dma_iter, vec: *mut phys_vec
 // Map a request to scatterlist, return number of sg entries setup. Caller
 // must make sure sg can hold rq->nr_phys_segments entries.
 //
-    int __blk_rq_map_sg(struct request *rq, struct scatterlist *sglist,
-    struct scatterlist **last_sg)
-    {
-    struct blk_map_iter iter;
-    struct phys_vec vec;
-    let mut nsegs: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn __blk_rq_map_sg(rq: *mut request, sglist: *mut scatterlist, last_sg: *mut *mut scatterlist) -> c_int {
+pub static mut iter: usize = 0;
+pub static mut vec: usize = 0;
+pub static mut nsegs: c_int = 0;
     blk_rq_map_iter_init(rq, &iter);
     while (blk_map_iter_next(rq, &iter, &vec)) {
 // last_sg = blk_next_sg(last_sg, sglist);
-    WARN_ON_ONCE(overflows_type(vec.len, unsigned int));
+    WARN_ON_ONCE!(overflows_type(vec.len, unsigned int));
     sg_set_page(*last_sg, phys_to_page(vec.paddr), vec.len,
     offset_in_page(vec.paddr));
-    nsegs++;
+    nsegs += 1;
     }
-    if (*last_sg)
+    if (*last_sg) {
     sg_mark_end(*last_sg);
+    }
 //
 // Something must have been wrong if the figured number of
 // segment is bigger than number of req's physical segments
 //
-    WARN_ON(nsegs > blk_rq_nr_phys_segments(rq));
+    WARN_ON!(nsegs > blk_rq_nr_phys_segments(rq));
     return nsegs;
     }
     EXPORT_SYMBOL(__blk_rq_map_sg);
@@ -336,14 +585,12 @@ unsafe extern "C" fn blk_dma_map_bus(iter: *mut blk_dma_iter, vec: *mut phys_vec
 // need to be mapped after this, or go straight to blk_rq_dma_map_iter_next()
 // to try to map the following segments.
 //
-    bool blk_rq_integrity_dma_map_iter_start(struct request *req,
-    struct device *dma_dev,  struct dma_iova_state *state,
-    struct blk_dma_iter *iter)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn blk_rq_integrity_dma_map_iter_start(req: *mut request, dma_dev: *mut device, state: *mut dma_iova_state, iter: *mut blk_dma_iter) -> bool {
     unsigned len = bio_integrity_bytes(&req.q.limits.integrity,
     blk_rq_sectors(req));
-    struct bio *bio = req.bio;
-    iter.iter = (struct blk_map_iter) {
+    let mut bio = req.bio;
+    iter.iter = (blk_map_iter) {
     .bio = bio,
     .iter = bio_integrity(bio).bip_iter,
     .bvecs = bio_integrity(bio).bip_vec,
@@ -371,14 +618,15 @@ unsafe extern "C" fn blk_dma_map_bus(iter: *mut blk_dma_iter, vec: *mut phys_vec
 // the length in @iter.len.  If no segment was mapped the status code is
 // returned in @iter.status.
 //
-    bool blk_rq_integrity_dma_map_iter_next(struct request *req,
-    struct device *dma_dev, struct blk_dma_iter *iter)
-    {
-    struct phys_vec vec;
-    if (!blk_map_iter_next(req, &iter.iter, &vec))
+#[no_mangle]
+pub unsafe extern "C" fn blk_rq_integrity_dma_map_iter_next(req: *mut request, dma_dev: *mut device, iter: *mut blk_dma_iter) -> bool {
+pub static mut vec: usize = 0;
+    if (!blk_map_iter_next(req, &iter.iter, &vec)) {
     return false;
-    if (iter.p2pdma.map == PCI_P2PDMA_MAP_BUS_ADDR)
+    }
+    if (iter.p2pdma.map == PCI_P2PDMA_MAP_BUS_ADDR) {
     return blk_dma_map_bus(iter, &vec);
+    }
     return blk_dma_map_direct(req, dma_dev, iter, &vec);
     }
     EXPORT_SYMBOL_GPL(blk_rq_integrity_dma_map_iter_next);
@@ -394,34 +642,28 @@ unsafe extern "C" fn blk_dma_map_bus(iter: *mut blk_dma_iter, vec: *mut phys_vec
 //
 #[no_mangle]
 pub unsafe extern "C" fn blk_rq_map_integrity_sg(rq: *mut request, sglist: *mut scatterlist) -> c_int {
-    int blk_rq_map_integrity_sg(struct request *rq, struct scatterlist *sglist)
-    {
-    struct request_queue *q = rq.q;
-    struct scatterlist *sg = core::ptr::null_mut();
-    struct bio *bio = rq.bio;
-    let mut segments: c_uint = 0;
-    struct phys_vec vec;
-    struct blk_map_iter iter = {
-    .bio = bio,
-    .iter = bio_integrity(bio).bip_iter,
-    .bvecs = bio_integrity(bio).bip_vec,
-    .is_integrity = true,
-    };
+    let mut q = rq.q;
+    let mut sg = core::ptr::null_mut();
+    let mut bio = rq.bio;
+pub static mut segments: c_uint = 0;
+pub static mut vec: usize = 0;
+pub static mut blk_map_iter: usize = 0;
     while (blk_map_iter_next(rq, &iter, &vec)) {
     sg = blk_next_sg(&sg, sglist);
-    WARN_ON_ONCE(overflows_type(vec.len, unsigned int));
+    WARN_ON_ONCE!(overflows_type(vec.len, unsigned int));
     sg_set_page(sg, phys_to_page(vec.paddr), vec.len,
     offset_in_page(vec.paddr));
-    segments++;
+    segments += 1;
     }
-    if (sg)
+    if (sg) {
     sg_mark_end(sg);
+    }
 //
 // Something must have been wrong if the figured number of segment
 // is bigger than number of req's physical integrity segments
 //
-    BUG_ON(segments > rq.nr_integrity_segments);
-    BUG_ON(segments > queue_max_integrity_segments(q));
+    BUG_ON!(segments > rq.nr_integrity_segments);
+    BUG_ON!(segments > queue_max_integrity_segments(q));
     return segments;
     }
     EXPORT_SYMBOL(blk_rq_map_integrity_sg);

@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -57,7 +307,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // 15                   label w as discovered
 // 16                   S.push(w)
 // 17                   continue at 5
-// 18               else if vertex w is discovered
+// 18               else if vertex w is discovered {
 // 19                   label e as back-edge
 // 20               else
 // 21                   // vertex w is explored
@@ -72,6 +322,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // 0x20 - explored
 //
     enum {
+}
     DISCOVERED = 0x10,
     EXPLORED = 0x20,
     FALLTHROUGH = 1,
@@ -79,25 +330,19 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     };
 #[no_mangle]
 unsafe extern "C" fn mark_subprog_changes_pkt_data(env: *mut bpf_verifier_env, off: c_int) {
-    static void mark_subprog_changes_pkt_data(struct bpf_verifier_env *env, int off)
-    {
-    struct bpf_subprog_info *subprog;
+pub static mut subprog: *mut c_void = core::ptr::null_mut();
     subprog = bpf_find_containing_subprog(env, off);
     subprog.changes_pkt_data = true;
     }
 #[no_mangle]
 unsafe extern "C" fn mark_subprog_might_sleep(env: *mut bpf_verifier_env, off: c_int) {
-    static void mark_subprog_might_sleep(struct bpf_verifier_env *env, int off)
-    {
-    struct bpf_subprog_info *subprog;
+pub static mut subprog: *mut c_void = core::ptr::null_mut();
     subprog = bpf_find_containing_subprog(env, off);
     subprog.might_sleep = true;
     }
 #[no_mangle]
 unsafe extern "C" fn mark_subprog_might_throw(env: *mut bpf_verifier_env, off: c_int) {
-    static void mark_subprog_might_throw(struct bpf_verifier_env *env, int off)
-    {
-    struct bpf_subprog_info *subprog;
+pub static mut subprog: *mut c_void = core::ptr::null_mut();
     subprog = bpf_find_containing_subprog(env, off);
     subprog.might_throw = true;
     }
@@ -109,9 +354,8 @@ unsafe extern "C" fn mark_subprog_might_throw(env: *mut bpf_verifier_env, off: c
 //
 #[no_mangle]
 unsafe extern "C" fn merge_callee_effects(env: *mut bpf_verifier_env, t: c_int, w: c_int) {
-    static void merge_callee_effects(struct bpf_verifier_env *env, int t, int w)
-    {
-    struct bpf_subprog_info *caller, *callee;
+    let mut caller = core::ptr::null_mut();
+    let mut callee = core::ptr::null_mut();
     caller = bpf_find_containing_subprog(env, t);
     callee = bpf_find_containing_subprog(env, w);
     caller.changes_pkt_data |= callee.changes_pkt_data;
@@ -129,14 +373,14 @@ unsafe extern "C" fn merge_callee_effects(env: *mut bpf_verifier_env, t: c_int, 
 //
 #[no_mangle]
 unsafe extern "C" fn push_insn(t: c_int, w: c_int, e: c_int, env: *mut bpf_verifier_env) -> c_int {
-    static int push_insn(int t, int w, int e, struct bpf_verifier_env *env)
-    {
-    int *insn_stack = env.cfg.insn_stack;
-    int *insn_state = env.cfg.insn_state;
-    if (e == FALLTHROUGH && insn_state[t] >= (DISCOVERED | FALLTHROUGH))
+    let mut insn_stack = env.cfg.insn_stack;
+    let mut insn_state = env.cfg.insn_state;
+    if (e == FALLTHROUGH && insn_state[t] >= (DISCOVERED | FALLTHROUGH)) {
     return DONE_EXPLORING;
-    if (e == BRANCH && insn_state[t] >= (DISCOVERED | BRANCH))
+    }
+    if (e == BRANCH && insn_state[t] >= (DISCOVERED | BRANCH)) {
     return DONE_EXPLORING;
+    }
     if (w < 0 || w >= env.prog.len) {
     verbose_linfo(env, t, "%d: ", t);
     verbose(env, "jump out of range from insn %d to %d\n", t, w);
@@ -155,13 +399,15 @@ unsafe extern "C" fn push_insn(t: c_int, w: c_int, e: c_int, env: *mut bpf_verif
 // tree-edge
     insn_state[t] = DISCOVERED | e;
     insn_state[w] = DISCOVERED;
-    if (env.cfg.cur_stack >= env.prog.len)
+    if (env.cfg.cur_stack >= env.prog.len) {
     return -E2BIG;
+    }
     insn_stack[env.cfg.cur_stack++] = w;
     return KEEP_EXPLORING;
     } else if ((insn_state[w] & 0xF0) == DISCOVERED) {
-    if (env.bpf_capable)
+    if (env.bpf_capable) {
     return DONE_EXPLORING;
+    }
     verbose_linfo(env, t, "%d: ", t);
     verbose_linfo(env, w, "%d: ", w);
     verbose(env, "back-edge from insn %d to %d\n", t, w);
@@ -180,16 +426,16 @@ unsafe extern "C" fn push_insn(t: c_int, w: c_int, e: c_int, env: *mut bpf_verif
     }
     return DONE_EXPLORING;
     }
-    static int visit_func_call_insn(int t, struct bpf_insn *insns,
-    struct bpf_verifier_env *env,
-    bool visit_callee)
-    {
-    int ret, insn_sz;
-    int w;
+#[no_mangle]
+pub unsafe extern "C" fn visit_func_call_insn(t: c_int, insns: *mut bpf_insn, env: *mut bpf_verifier_env, visit_callee: bool) -> c_int {
+    let mut ret = 0;
+    let mut insn_sz = 0;
+    let mut w = 0;
     insn_sz = bpf_is_ldimm64(&insns[t]) ? 2 : 1;
     ret = push_insn(t, t + insn_sz, FALLTHROUGH, env);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     mark_prune_point(env, t + insn_sz);
 // when we exit from subprog, we need to record non-linear history
     mark_jmp_point(env, t + insn_sz);
@@ -201,10 +447,10 @@ unsafe extern "C" fn push_insn(t: c_int, w: c_int, e: c_int, env: *mut bpf_verif
     }
     return ret;
     }
-    struct bpf_iarray *bpf_iarray_realloc(struct bpf_iarray *old, size_t n_elem)
-    {
-    let mut new_size: usize = sizeof(struct bpf_iarray) + n_elem * sizeof(old.items[0]);
-    struct bpf_iarray *new;
+#[no_mangle]
+pub unsafe extern "C" fn bpf_iarray_realloc(old: *mut bpf_iarray, n_elem: size_t) -> *mut c_void {
+pub static mut new_size: usize = 0;
+pub static mut new: *mut c_void = core::ptr::null_mut();
     new = kvrealloc(old, new_size, GFP_KERNEL_ACCOUNT);
     if (!new) {
 // this is what callers always want, so simplify the call site
@@ -216,42 +462,38 @@ unsafe extern "C" fn push_insn(t: c_int, w: c_int, e: c_int, env: *mut bpf_verif
     }
 #[no_mangle]
 unsafe extern "C" fn copy_insn_array(map: *mut bpf_map, start: u32, end: u32, items: *mut u32) -> c_int {
-    static int copy_insn_array(struct bpf_map *map, u32 start, u32 end, u32 *items)
-    {
-    struct bpf_insn_array_value *value;
-    u32 i;
-    for (i = start; i <= end; i++) {
+pub static mut value: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    while (i <= end) {
     value = map.ops.map_lookup_elem(map, &i);
 //
 // map_lookup_elem of an array map will never return an error,
 // but not checking it makes some static analysers to worry
 //
-    if (IS_ERR(value))
+    if (IS_ERR(value)) {
     return PTR_ERR(value);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !value) -> else {
-    else if (!value)
+    }
+
+    else if (!value) {
     return -EINVAL;
+    }
     items[i - start] = value.xlated_off;
     }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn cmp_ptr_to_u32(a: *const c_void, b: *const c_void) -> c_int {
-    static int cmp_ptr_to_u32(const void *a, const void *b)
-    {
-    return *(u32 *)a - *(u32 *)b;
+    return *a - *b;
     }
 #[no_mangle]
 unsafe extern "C" fn sort_insn_array_uniq(items: *mut u32, cnt: c_int) -> c_int {
-    static int sort_insn_array_uniq(u32 *items, int cnt)
-    {
-    let mut unique: c_int = 1;
-    int i;
-    sort(items, cnt, sizeof(items[0]), cmp_ptr_to_u32, core::ptr::null_mut());
-    for (i = 1; i < cnt; i++)
+pub static mut unique: c_int = 1;
+    let mut i = 0;
+    sort(items, cnt, sizeof!(items[0]), cmp_ptr_to_u32, core::ptr::null_mut());
+    for (i = 1; i < cnt; i++) {
     if (items[i] != items[unique - 1])
     items[unique++] = items[i];
+    }
     return unique;
     }
 //
@@ -259,38 +501,38 @@ unsafe extern "C" fn sort_insn_array_uniq(items: *mut u32, cnt: c_int) -> c_int 
 //
 #[no_mangle]
 pub unsafe extern "C" fn bpf_copy_insn_array_uniq(map: *mut bpf_map, start: u32, end: u32, off: *mut u32) -> c_int {
-    int bpf_copy_insn_array_uniq(struct bpf_map *map, u32 start, u32 end, u32 *off)
-    {
-    let mut n: u32 = end - start + 1;
-    int err;
+pub static mut n: u32 = 0;
+    let mut err = 0;
     err = copy_insn_array(map, start, end, off);
-    if (err)
+    if (err) {
     return err;
+    }
     return sort_insn_array_uniq(off, n);
     }
 //
 // Copy all unique offsets from the map
 //
-    static struct bpf_iarray *jt_from_map(struct bpf_map *map)
-    {
-    struct bpf_iarray *jt;
-    int err;
-    int n;
+#[no_mangle]
+pub unsafe extern "C" fn jt_from_map(map: *mut bpf_map) -> *mut c_void {
+pub static mut jt: *mut c_void = core::ptr::null_mut();
+    let mut err = 0;
+    let mut n = 0;
     jt = bpf_iarray_realloc(core::ptr::null_mut(), map.max_entries);
-    if (!jt)
+    if (!jt) {
     return ERR_PTR(-ENOMEM);
+    }
     n = bpf_copy_insn_array_uniq(map, 0, map.max_entries - 1, jt.items);
     if (n < 0) {
     err = n;
-    goto err_free;
+// goto;
     }
     if (n == 0) {
     err = -EINVAL;
-    goto err_free;
+// goto;
     }
     jt.cnt = n;
     return jt;
-    err_free:
+// label;
     kvfree(jt);
     return ERR_PTR(err);
     }
@@ -298,14 +540,13 @@ pub unsafe extern "C" fn bpf_copy_insn_array_uniq(map: *mut bpf_map, start: u32,
 // Find and collect all maps which fit in the subprog. Return the result as one
 // combined jump table in jt->items (allocated with kvcalloc)
 //
-    static struct bpf_iarray *jt_from_subprog(struct bpf_verifier_env *env,
-    int subprog_start, int subprog_end)
-    {
-    struct bpf_iarray *jt = core::ptr::null_mut();
-    struct bpf_map *map;
-    struct bpf_iarray *jt_cur;
-    int i;
-    for (i = 0; i < env.insn_array_map_cnt; i++) {
+#[no_mangle]
+pub unsafe extern "C" fn jt_from_subprog(env: *mut bpf_verifier_env, subprog_start: c_int, subprog_end: c_int) -> *mut c_void {
+    let mut jt = core::ptr::null_mut();
+pub static mut map: *mut c_void = core::ptr::null_mut();
+pub static mut jt_cur: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    while (i < env.insn_array_map_cnt) {
 //
 // TODO (when needed): collect only jump tables, not static keys
 // or maps for indirect calls
@@ -321,7 +562,7 @@ pub unsafe extern "C" fn bpf_copy_insn_array_uniq(map: *mut bpf_map, start: u32,
 // checked to fit inside the subprog later in create_jt()
 //
     if (jt_cur.items[0] >= subprog_start && jt_cur.items[0] < subprog_end) {
-    let mut old_cnt: u32 = jt ? jt.cnt : 0;
+pub static mut old_cnt: u32 = 0;
     jt = bpf_iarray_realloc(jt, old_cnt + jt_cur.cnt);
     if (!jt) {
     kvfree(jt_cur);
@@ -343,21 +584,22 @@ pub unsafe extern "C" fn bpf_copy_insn_array_uniq(map: *mut bpf_map, start: u32,
     jt.cnt = sort_insn_array_uniq(jt.items, jt.cnt);
     return jt;
     }
-    static struct bpf_iarray *
-    create_jt(int t, struct bpf_verifier_env *env)
-    {
-    struct bpf_subprog_info *subprog;
-    int subprog_start, subprog_end;
-    struct bpf_iarray *jt;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn create_jt(t: c_int, env: *mut bpf_verifier_env) -> *mut c_void {
+pub static mut subprog: *mut c_void = core::ptr::null_mut();
+    let mut subprog_start = 0;
+    let mut subprog_end = 0;
+pub static mut jt: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
     subprog = bpf_find_containing_subprog(env, t);
     subprog_start = subprog.start;
     subprog_end = (subprog + 1).start;
     jt = jt_from_subprog(env, subprog_start, subprog_end);
-    if (IS_ERR(jt))
+    if (IS_ERR(jt)) {
     return jt;
+    }
 // Check that the every element of the jump table fits within the given subprogram
-    for (i = 0; i < jt.cnt; i++) {
+    while (i < jt.cnt) {
     if (jt.items[i] < subprog_start || jt.items[i] >= subprog_end) {
     verbose(env, "jump table for insn %d points outside of the subprog [%u,%u]\n",
     t, subprog_start, subprog_end);
@@ -375,22 +617,22 @@ pub unsafe extern "C" fn bpf_copy_insn_array_uniq(map: *mut bpf_map, start: u32,
 // "conditional jump with N edges"
 #[no_mangle]
 unsafe extern "C" fn visit_gotox_insn(t: c_int, env: *mut bpf_verifier_env) -> c_int {
-    static int visit_gotox_insn(int t, struct bpf_verifier_env *env)
-    {
-    int *insn_stack = env.cfg.insn_stack;
-    int *insn_state = env.cfg.insn_state;
-    let mut keep_exploring: bool = false;
-    struct bpf_iarray *jt;
-    int i, w;
+    let mut insn_stack = env.cfg.insn_stack;
+    let mut insn_state = env.cfg.insn_state;
+pub static mut keep_exploring: bool = false;
+pub static mut jt: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    let mut w = 0;
     jt = env.insn_aux_data[t].jt;
     if (!jt) {
     jt = create_jt(t, env);
-    if (IS_ERR(jt))
+    if (IS_ERR(jt)) {
     return PTR_ERR(jt);
+    }
     env.insn_aux_data[t].jt = jt;
     }
     mark_prune_point(env, t);
-    for (i = 0; i < jt.cnt; i++) {
+    while (i < jt.cnt) {
     w = jt.items[i];
     if (w < 0 || w >= env.prog.len) {
     verbose(env, "indirect jump out of range from insn %d to %d\n", t, w);
@@ -403,10 +645,12 @@ unsafe extern "C" fn visit_gotox_insn(t: c_int, env: *mut bpf_verifier_env) -> c
     }
     mark_jmp_point(env, w);
 // EXPLORED || DISCOVERED
-    if (insn_state[w])
+    if (insn_state[w]) {
     continue;
-    if (env.cfg.cur_stack >= env.prog.len)
+    }
+    if (env.cfg.cur_stack >= env.prog.len) {
     return -E2BIG;
+    }
     insn_stack[env.cfg.cur_stack++] = w;
     insn_state[w] |= DISCOVERED;
     keep_exploring = true;
@@ -420,15 +664,15 @@ unsafe extern "C" fn visit_gotox_insn(t: c_int, env: *mut bpf_verifier_env) -> c
 //
 #[no_mangle]
 unsafe extern "C" fn visit_abnormal_return_insn(env: *mut bpf_verifier_env, t: c_int) -> c_int {
-    static int visit_abnormal_return_insn(struct bpf_verifier_env *env, int t)
-    {
-    struct bpf_subprog_info *subprog;
-    struct bpf_iarray *jt;
-    if (env.insn_aux_data[t].jt)
+pub static mut subprog: *mut c_void = core::ptr::null_mut();
+pub static mut jt: *mut c_void = core::ptr::null_mut();
+    if (env.insn_aux_data[t].jt) {
     return 0;
+    }
     jt = bpf_iarray_realloc(core::ptr::null_mut(), 2);
-    if (!jt)
+    if (!jt) {
     return -ENOMEM;
+    }
     subprog = bpf_find_containing_subprog(env, t);
     jt.items[0] = t + 1;
     jt.items[1] = subprog.exit_idx;
@@ -442,12 +686,13 @@ unsafe extern "C" fn visit_abnormal_return_insn(env: *mut bpf_verifier_env, t: c
 //
 #[no_mangle]
 unsafe extern "C" fn visit_insn(t: c_int, env: *mut bpf_verifier_env) -> c_int {
-    static int visit_insn(int t, struct bpf_verifier_env *env)
-    {
-    struct bpf_insn *insns = env.prog.insnsi, *insn = &insns[t];
-    int ret, off, insn_sz;
-    if (bpf_pseudo_func(insn))
+    let mut insns = env.prog.insnsi, *insn = &insns[t];
+    let mut ret = 0;
+    let mut off = 0;
+    let mut insn_sz = 0;
+    if (bpf_pseudo_func(insn)) {
     return visit_func_call_insn(t, insns, env, true);
+    }
 // All non-branch instructions have a single fall-through edge.
     if (BPF_CLASS(insn.code) != BPF_JMP &&
     BPF_CLASS(insn.code) != BPF_JMP32) {
@@ -455,8 +700,9 @@ unsafe extern "C" fn visit_insn(t: c_int, env: *mut bpf_verifier_env) -> c_int {
     (BPF_MODE(insn.code) == BPF_ABS ||
     BPF_MODE(insn.code) == BPF_IND)) {
     ret = visit_abnormal_return_insn(env, t);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     }
     insn_sz = bpf_is_ldimm64(insn) ? 2 : 1;
     return push_insn(t, t + insn_sz, FALLTHROUGH, env);
@@ -465,13 +711,14 @@ unsafe extern "C" fn visit_insn(t: c_int, env: *mut bpf_verifier_env) -> c_int {
     case BPF_EXIT:
     return DONE_EXPLORING;
     case BPF_CALL:
-    if (bpf_is_async_callback_calling_insn(insn))
+    if (bpf_is_async_callback_calling_insn(insn)) {
 // Mark this call insn as a prune point to trigger
 // is_state_visited() check before call itself is
 // processed by __check_func_call(). Otherwise new
 // async state will be pushed for further exploration.
 //
     mark_prune_point(env, t);
+    }
 // For functions that invoke callbacks it is not known how many times
 // callback would be called. Verifier models callback calling functions
 // by repeatedly visiting callback bodies and returning to origin call
@@ -488,24 +735,27 @@ unsafe extern "C" fn visit_insn(t: c_int, env: *mut bpf_verifier_env) -> c_int {
     mark_jmp_point(env, t);
     }
     if (bpf_helper_call(insn)) {
-    const struct bpf_func_proto *fp;
+pub static mut fp: *mut c_void = core::ptr::null_mut();
     ret = bpf_get_helper_proto(env, insn.imm, &fp);
 // If called in a non-sleepable context program will be
 // rejected anyway, so we should end up with precise
 // sleepable marks on subprogs, except for dead code
 // elimination.
 //
-    if (ret == 0 && fp.might_sleep)
+    if (ret == 0 && fp.might_sleep) {
     mark_subprog_might_sleep(env, t);
-    if (bpf_helper_changes_pkt_data(insn.imm))
+    }
+    if (bpf_helper_changes_pkt_data(insn.imm)) {
     mark_subprog_changes_pkt_data(env, t);
+    }
     if (insn.imm == BPF_FUNC_tail_call) {
     ret = visit_abnormal_return_insn(env, t);
-    if (ret)
+    if (ret) {
     return ret;
     }
+    }
     } else if (insn.src_reg == BPF_PSEUDO_KFUNC_CALL) {
-    struct bpf_call_arg_meta meta;
+pub static mut meta: usize = 0;
     ret = bpf_fetch_kfunc_arg_meta(env, insn.imm, insn.off, &meta);
     if (ret == 0 && bpf_is_iter_next_kfunc(&meta)) {
     mark_prune_point(env, t);
@@ -527,36 +777,45 @@ unsafe extern "C" fn visit_insn(t: c_int, env: *mut bpf_verifier_env) -> c_int {
 // with precise sleepable marks on subprogs, except for
 // dead code elimination.
 //
-    if (ret == 0 && bpf_is_kfunc_sleepable(&meta))
+    if (ret == 0 && bpf_is_kfunc_sleepable(&meta)) {
     mark_subprog_might_sleep(env, t);
-    if (ret == 0 && bpf_is_kfunc_pkt_changing(&meta))
+    }
+    if (ret == 0 && bpf_is_kfunc_pkt_changing(&meta)) {
     mark_subprog_changes_pkt_data(env, t);
-    if (ret == 0 && bpf_is_throw_kfunc(insn))
+    }
+    if (ret == 0 && bpf_is_throw_kfunc(insn)) {
     mark_subprog_might_throw(env, t);
+    }
     }
     return visit_func_call_insn(t, insns, env, insn.src_reg == BPF_PSEUDO_CALL);
     case BPF_JA:
-    if (BPF_SRC(insn.code) == BPF_X)
+    if (BPF_SRC(insn.code) == BPF_X) {
     return visit_gotox_insn(t, env);
-    if (BPF_CLASS(insn.code) == BPF_JMP)
+    }
+    if (BPF_CLASS(insn.code) == BPF_JMP) {
     off = insn.off;
-    else
+    }
+    else {
     off = insn.imm;
+    }
 // unconditional jump with single edge
     ret = push_insn(t, t + off + 1, FALLTHROUGH, env);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     mark_prune_point(env, t + off + 1);
     mark_jmp_point(env, t + off + 1);
     return ret;
-    default:
+// label;
 // conditional jump with two edges
     mark_prune_point(env, t);
-    if (bpf_is_may_goto_insn(insn))
+    if (bpf_is_may_goto_insn(insn)) {
     mark_force_checkpoint(env, t);
+    }
     ret = push_insn(t, t + 1, FALLTHROUGH, env);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     return push_insn(t, t + insn.off + 1, BRANCH, env);
     }
     }
@@ -565,15 +824,15 @@ unsafe extern "C" fn visit_insn(t: c_int, env: *mut bpf_verifier_env) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn bpf_check_cfg(env: *mut bpf_verifier_env) -> c_int {
-    int bpf_check_cfg(struct bpf_verifier_env *env)
-    {
-    let mut insn_cnt: c_int = env.prog.len;
-    int *insn_stack, *insn_state;
+pub static mut insn_cnt: c_int = 0;
+    let mut insn_stack = core::ptr::null_mut();
+    let mut insn_state = core::ptr::null_mut();
     int ex_insn_beg, i, ret = 0;
     insn_state = env.cfg.insn_state = kvzalloc_objs(int, insn_cnt,
     GFP_KERNEL_ACCOUNT);
-    if (!insn_state)
+    if (!insn_state) {
     return -ENOMEM;
+    }
     insn_stack = env.cfg.insn_stack = kvzalloc_objs(int, insn_cnt,
     GFP_KERNEL_ACCOUNT);
     if (!insn_stack) {
@@ -586,38 +845,41 @@ pub unsafe extern "C" fn bpf_check_cfg(env: *mut bpf_verifier_env) -> c_int {
     insn_state[0] = DISCOVERED; /* mark 1st insn as discovered */
     insn_stack[0] = 0; /* 0 is the first instruction */
     env.cfg.cur_stack = 1;
-    walk_cfg:
+// label;
     while (env.cfg.cur_stack > 0) {
-    let mut t: c_int = insn_stack[env.cfg.cur_stack - 1];
+pub static mut t: c_int = 0;
     ret = visit_insn(t, env);
-    switch (ret) {
-    case DONE_EXPLORING:
+    match (ret) {
+    DONE_EXPLORING => {
     insn_state[t] = EXPLORED;
-    env.cfg.cur_stack--;
-    break;
-    case KEEP_EXPLORING:
-    break;
-    default:
+    env.cfg.cur_stack -= 1;
+    // break;
+    }
+    KEEP_EXPLORING => {
+    // break;
+    }
+    _ => {
     if (ret > 0) {
     verifier_bug(env, "visit_insn internal bug");
     ret = -EFAULT;
     }
-    goto err_free;
+// goto;
+    }
     }
     }
     if (env.cfg.cur_stack < 0) {
     verifier_bug(env, "pop stack internal bug");
     ret = -EFAULT;
-    goto err_free;
+// goto;
     }
     if (ex_insn_beg && insn_state[ex_insn_beg] != EXPLORED) {
     insn_state[ex_insn_beg] = DISCOVERED;
     insn_stack[0] = ex_insn_beg;
     env.cfg.cur_stack = 1;
-    goto walk_cfg;
+// goto;
     }
-    for (i = 0; i < insn_cnt; i++) {
-    struct bpf_insn *insn = &env.prog.insnsi[i];
+    while (i < insn_cnt) {
+    let mut insn = &env.prog.insnsi[i];
     if (insn_state[i] != EXPLORED) {
     verbose(env, "unreachable insn %d\n", i);
     bpf_diag_program_structure(
@@ -625,7 +887,7 @@ pub unsafe extern "C" fn bpf_check_cfg(env: *mut bpf_verifier_env) -> c_int {
     "Remove the unreachable instruction or add valid control flow that reaches it.",
     "Instruction %d is not reachable from the program entry point.", i);
     ret = -EINVAL;
-    goto err_free;
+// goto;
     }
     if (bpf_is_ldimm64(insn)) {
     if (insn_state[i + 1] != 0) {
@@ -636,15 +898,15 @@ pub unsafe extern "C" fn bpf_check_cfg(env: *mut bpf_verifier_env) -> c_int {
     "Control flow reaches the second half of the ldimm64 instruction pair that starts at instruction %d.",
     i);
     ret = -EINVAL;
-    goto err_free;
+// goto;
     }
-    i++; /* skip second half of ldimm64 */
+    i += 1; /* skip second half of ldimm64 */
     }
     }
     ret = 0; /* cfg looks good */
     env.prog.aux.changes_pkt_data = env.subprog_info[0].changes_pkt_data;
     env.prog.aux.might_sleep = env.subprog_info[0].might_sleep;
-    err_free:
+// label;
     kvfree(insn_state);
     kvfree(insn_stack);
     env.cfg.insn_state = env.cfg.insn_stack = core::ptr::null_mut();
@@ -657,11 +919,9 @@ pub unsafe extern "C" fn bpf_check_cfg(env: *mut bpf_verifier_env) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn bpf_compute_postorder(env: *mut bpf_verifier_env) -> c_int {
-    int bpf_compute_postorder(struct bpf_verifier_env *env)
-    {
     u32 cur_postorder, i, top, stack_sz, s;
-    int *stack = core::ptr::null_mut(), *postorder = core::ptr::null_mut(), *state = core::ptr::null_mut();
-    struct bpf_iarray *succ;
+    let mut stack = core::ptr::null_mut(), *postorder = core::ptr::null_mut(), *state = core::ptr::null_mut();
+pub static mut succ: *mut c_void = core::ptr::null_mut();
     postorder = kvzalloc_objs(int, env.prog.len, GFP_KERNEL_ACCOUNT);
     state = kvzalloc_objs(int, env.prog.len, GFP_KERNEL_ACCOUNT);
     stack = kvzalloc_objs(int, env.prog.len, GFP_KERNEL_ACCOUNT);
@@ -672,7 +932,7 @@ pub unsafe extern "C" fn bpf_compute_postorder(env: *mut bpf_verifier_env) -> c_
     return -ENOMEM;
     }
     cur_postorder = 0;
-    for (i = 0; i < env.subprog_cnt; i++) {
+    while (i < env.subprog_cnt) {
     env.subprog_info[i].postorder_start = cur_postorder;
     stack[0] = env.subprog_info[i].start;
     stack_sz = 1;
@@ -681,11 +941,11 @@ pub unsafe extern "C" fn bpf_compute_postorder(env: *mut bpf_verifier_env) -> c_
     state[top] |= DISCOVERED;
     if (state[top] & EXPLORED) {
     postorder[cur_postorder++] = top;
-    stack_sz--;
+    stack_sz -= 1;
     continue;
     }
     succ = bpf_insn_successors(env, top);
-    for (s = 0; s < succ.cnt; ++s) {
+    while (s < succ.cnt) {
     if (!state[succ.items[s]]) {
     stack[stack_sz++] = succ.items[s];
     state[succ.items[s]] |= DISCOVERED;
@@ -710,18 +970,19 @@ pub unsafe extern "C" fn bpf_compute_postorder(env: *mut bpf_verifier_env) -> c_
 //
 #[no_mangle]
 pub unsafe extern "C" fn bpf_compute_scc(env: *mut bpf_verifier_env) -> c_int {
-    int bpf_compute_scc(struct bpf_verifier_env *env)
-    {
-    let mut NOT_ON_STACK: u32 = U32_MAX;
-    struct bpf_insn_aux_data *aux = env.insn_aux_data;
-    let mut insn_cnt: u32 = env.prog.len;
+pub static mut NOT_ON_STACK: u32 = 0;
+    let mut aux = env.insn_aux_data;
+pub static mut insn_cnt: u32 = 0;
     int stack_sz, dfs_sz, err = 0;
-    u32 *stack, *pre, *low, *dfs;
+    let mut stack = core::ptr::null_mut();
+    let mut pre = core::ptr::null_mut();
+    let mut low = core::ptr::null_mut();
+    let mut dfs = core::ptr::null_mut();
     u32 i, j, t, w;
-    u32 next_preorder_num;
-    u32 next_scc_id;
-    bool assign_scc;
-    struct bpf_iarray *succ;
+    let mut next_preorder_num = 0;
+    let mut next_scc_id = 0;
+    let mut assign_scc = 0;
+pub static mut succ: *mut c_void = core::ptr::null_mut();
     next_preorder_num = 1;
     next_scc_id = 1;
 //
@@ -730,13 +991,13 @@ pub unsafe extern "C" fn bpf_compute_scc(env: *mut bpf_verifier_env) -> c_int {
 // - 'low[t] == n' => smallest preorder number of the vertex reachable from 't' is 'n';
 // - 'dfs' DFS traversal stack, used to emulate explicit recursion.
 //
-    stack = kvcalloc(insn_cnt, sizeof(int), GFP_KERNEL_ACCOUNT);
-    pre = kvcalloc(insn_cnt, sizeof(int), GFP_KERNEL_ACCOUNT);
-    low = kvcalloc(insn_cnt, sizeof(int), GFP_KERNEL_ACCOUNT);
-    dfs = kvcalloc(insn_cnt, sizeof(*dfs), GFP_KERNEL_ACCOUNT);
+    stack = kvcalloc(insn_cnt, sizeof!(int), GFP_KERNEL_ACCOUNT);
+    pre = kvcalloc(insn_cnt, sizeof!(int), GFP_KERNEL_ACCOUNT);
+    low = kvcalloc(insn_cnt, sizeof!(int), GFP_KERNEL_ACCOUNT);
+    dfs = kvcalloc(insn_cnt, sizeof!(*dfs), GFP_KERNEL_ACCOUNT);
     if (!stack || !pre || !low || !dfs) {
     err = -ENOMEM;
-    goto exit;
+// goto;
     }
 //
 // References:
@@ -811,29 +1072,30 @@ pub unsafe extern "C" fn bpf_compute_scc(env: *mut bpf_verifier_env) -> c_int {
 //
 // Below implementation replaces explicit recursion with array 'dfs'.
 //
-    for (i = 0; i < insn_cnt; i++) {
-    if (pre[i])
+    while (i < insn_cnt) {
+    if (pre[i]) {
     continue;
+    }
     stack_sz = 0;
     dfs_sz = 1;
     dfs[0] = i;
-    dfs_continue:
+// label;
     while (dfs_sz) {
     w = dfs[dfs_sz - 1];
     if (pre[w] == 0) {
     low[w] = next_preorder_num;
     pre[w] = next_preorder_num;
-    next_preorder_num++;
+    next_preorder_num += 1;
     stack[stack_sz++] = w;
     }
 // Visit 'w' successors
     succ = bpf_insn_successors(env, w);
-    for (j = 0; j < succ.cnt; ++j) {
+    while (j < succ.cnt) {
     if (pre[succ.items[j]]) {
     low[w] = min(low[w], low[succ.items[j]]);
     } else {
     dfs[dfs_sz++] = succ.items[j];
-    goto dfs_continue;
+// goto;
     }
     }
 //
@@ -841,8 +1103,8 @@ pub unsafe extern "C" fn bpf_compute_scc(env: *mut bpf_verifier_env) -> c_int {
 // is reachable from 'w', keep 'w' on the stack.
 //
     if (low[w] < pre[w]) {
-    dfs_sz--;
-    goto dfs_continue;
+    dfs_sz -= 1;
+// goto;
     }
 //
 // Assign SCC number only if component has two or more elements,
@@ -850,34 +1112,38 @@ pub unsafe extern "C" fn bpf_compute_scc(env: *mut bpf_verifier_env) -> c_int {
 // callback calling function (implicit loop).
 //
     assign_scc = stack[stack_sz - 1] != w;	/* two or more elements? */
-    for (j = 0; j < succ.cnt; ++j) {	/* self reference? */
+    while (j < succ.cnt) {	/* self reference? */ {
     if (succ.items[j] == w) {
+    }
     assign_scc = true;
     break;
     }
     }
-    if (bpf_calls_callback(env, w)) /* implicit loop? */
+    if (bpf_calls_callback(env, w)) /* implicit loop? */ {
     assign_scc = true;
+    }
 // Pop component elements from stack
     do {
     t = stack[--stack_sz];
     low[t] = NOT_ON_STACK;
-    if (assign_scc)
+    if (assign_scc) {
     aux[t].scc = next_scc_id;
+    }
     } while (t != w);
-    if (assign_scc)
-    next_scc_id++;
-    dfs_sz--;
+    if (assign_scc) {
+    next_scc_id += 1;
+    }
+    dfs_sz -= 1;
     }
     }
     env.scc_info = kvzalloc_objs(*env.scc_info, next_scc_id,
     GFP_KERNEL_ACCOUNT);
     if (!env.scc_info) {
     err = -ENOMEM;
-    goto exit;
+// goto;
     }
     env.scc_cnt = next_scc_id;
-    exit:
+// label;
     kvfree(stack);
     kvfree(pre);
     kvfree(low);

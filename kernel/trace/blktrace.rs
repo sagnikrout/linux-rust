@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -41,38 +291,24 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Copyright (C) 2006 Jens Axboe <axboe@kernel.dk>
 //
 
-    let mut __read_mostly: static unsigned int blktrace_seq = 1;
-    static struct trace_array *blk_tr;
-    static bool blk_tracer_enabled __read_mostly;
-    static LIST_HEAD(running_trace_list);
+pub static mut : unsigned int blktrace_seq = 1;
+pub static mut blk_tr: *mut c_void = core::ptr::null_mut();
+    static bool blk_tracer_enabled ;
+pub static mut running_trace_list: usize = 0;
     static __cacheline_aligned_in_smp DEFINE_RAW_SPINLOCK(running_trace_lock);
 // Select an alternative, minimalistic output than the original one
 pub const TRACE_BLK_OPT_CLASSIC: c_uint = 0x1;
 pub const TRACE_BLK_OPT_CGROUP: c_uint = 0x2;
 pub const TRACE_BLK_OPT_CGNAME: c_uint = 0x4;
-    static struct tracer_opt blk_tracer_opts[] = {
-// Default disable the minimalistic output
-    { TRACER_OPT(blk_classic, TRACE_BLK_OPT_CLASSIC) },
-
-    { TRACER_OPT(blk_cgroup, TRACE_BLK_OPT_CGROUP) },
-    { TRACER_OPT(blk_cgname, TRACE_BLK_OPT_CGNAME) },
-
-    { }
-    };
-    static struct tracer_flags blk_tracer_flags = {
-    .val  = 0,
-    .opts = blk_tracer_opts,
-    };
+pub static mut tracer_opt: usize = 0;
+pub static mut tracer_flags: usize = 0;
 // Global reference count of probes
-    static DEFINE_MUTEX(blk_probe_mutex);
+pub static mut blk_probe_mutex: usize = 0;
     static int blk_probes_ref;
-    static void blk_register_tracepoints(void);
-    static void blk_unregister_tracepoints(void);
-    static void record_blktrace_event(struct blk_io_trace *t, pid_t pid, int cpu,
-    sector_t sector, int bytes, u64 what,
-    dev_t dev, int error, u64 cgid,
-    ssize_t cgid_len, void *pdu_data, int pdu_len)
-    {
+// forward_decl: blk_register_tracepoints;
+// forward_decl: blk_unregister_tracepoints;
+#[no_mangle]
+pub unsafe extern "C" fn record_blktrace_event(t: *mut blk_io_trace, pid: pid_t, cpu: c_int, sector: sector_t, bytes: c_int, what: u64, dev: dev_t, error: c_int, cgid: u64, cgid_len: ssize_t, pdu_data: *mut c_void, pdu_len: c_int) {
 //
 // These two are not needed in ftrace as they are in the
 // generic trace_entry, filled by tracing_generic_entry_update,
@@ -87,17 +323,15 @@ pub const TRACE_BLK_OPT_CGNAME: c_uint = 0x4;
     t.device = dev;
     t.error = error;
     t.pdu_len = pdu_len + cgid_len;
-    if (cgid_len)
-    memcpy((void *)t + sizeof(*t), &cgid, cgid_len);
-    if (pdu_len)
-    memcpy((void *)t + sizeof(*t) + cgid_len, pdu_data, pdu_len);
+    if (cgid_len) {
+    memcpy(t + sizeof!(*t), &cgid, cgid_len);
     }
-    static void record_blktrace_event2(struct blk_io_trace2 *t2, pid_t pid, int cpu,
-    sector_t sector, int bytes, u64 what,
-    dev_t dev, int error, u64 cgid,
-    ssize_t cgid_len, void *pdu_data,
-    int pdu_len)
-    {
+    if (pdu_len) {
+    memcpy(t + sizeof!(*t) + cgid_len, pdu_data, pdu_len);
+    }
+    }
+#[no_mangle]
+pub unsafe extern "C" fn record_blktrace_event2(t2: *mut blk_io_trace2, pid: pid_t, cpu: c_int, sector: sector_t, bytes: c_int, what: u64, dev: dev_t, error: c_int, cgid: u64, cgid_len: ssize_t, pdu_data: *mut c_void, pdu_len: c_int) {
     t2.pid = pid;
     t2.cpu = cpu;
     t2.sector = sector;
@@ -106,52 +340,48 @@ pub const TRACE_BLK_OPT_CGNAME: c_uint = 0x4;
     t2.device = dev;
     t2.error = error;
     t2.pdu_len = pdu_len + cgid_len;
-    if (cgid_len)
-    memcpy((void *)t2 + sizeof(*t2), &cgid, cgid_len);
-    if (pdu_len)
-    memcpy((void *)t2 + sizeof(*t2) + cgid_len, pdu_data, pdu_len);
+    if (cgid_len) {
+    memcpy(t2 + sizeof!(*t2), &cgid, cgid_len);
     }
-    static void relay_blktrace_event1(struct blk_trace *bt, unsigned long sequence,
-    pid_t pid, int cpu, sector_t sector, int bytes,
-    u64 what, int error, u64 cgid,
-    ssize_t cgid_len, void *pdu_data, int pdu_len)
-    {
-    struct blk_io_trace *t;
-    let mut trace_len: usize = sizeof(*t) + pdu_len + cgid_len;
+    if (pdu_len) {
+    memcpy(t2 + sizeof!(*t2) + cgid_len, pdu_data, pdu_len);
+    }
+    }
+#[no_mangle]
+pub unsafe extern "C" fn relay_blktrace_event1(bt: *mut blk_trace, sequence: c_ulong, pid: pid_t, cpu: c_int, sector: sector_t, bytes: c_int, what: u64, error: c_int, cgid: u64, cgid_len: ssize_t, pdu_data: *mut c_void, pdu_len: c_int) {
+pub static mut t: *mut c_void = core::ptr::null_mut();
+pub static mut trace_len: usize = 0;
     t = relay_reserve(bt.rchan, trace_len);
-    if (!t)
+    if (!t) {
     return;
+    }
     t.magic = BLK_IO_TRACE_MAGIC | BLK_IO_TRACE_VERSION;
     t.sequence = sequence;
     t.time = ktime_to_ns(ktime_get());
     record_blktrace_event(t, pid, cpu, sector, bytes, what, bt.dev, error,
     cgid, cgid_len, pdu_data, pdu_len);
     }
-    static void relay_blktrace_event2(struct blk_trace *bt, unsigned long sequence,
-    pid_t pid, int cpu, sector_t sector,
-    int bytes, u64 what, int error, u64 cgid,
-    ssize_t cgid_len, void *pdu_data, int pdu_len)
-    {
-    struct blk_io_trace2 *t;
-    let mut trace_len: usize = sizeof(struct blk_io_trace2) + pdu_len + cgid_len;
+#[no_mangle]
+pub unsafe extern "C" fn relay_blktrace_event2(bt: *mut blk_trace, sequence: c_ulong, pid: pid_t, cpu: c_int, sector: sector_t, bytes: c_int, what: u64, error: c_int, cgid: u64, cgid_len: ssize_t, pdu_data: *mut c_void, pdu_len: c_int) {
+pub static mut t: *mut c_void = core::ptr::null_mut();
+pub static mut trace_len: usize = 0;
     t = relay_reserve(bt.rchan, trace_len);
-    if (!t)
+    if (!t) {
     return;
+    }
     t.magic = BLK_IO_TRACE_MAGIC | BLK_IO_TRACE2_VERSION;
     t.sequence = sequence;
     t.time = ktime_to_ns(ktime_get());
     record_blktrace_event2(t, pid, cpu, sector, bytes, what, bt.dev, error,
     cgid, cgid_len, pdu_data, pdu_len);
     }
-    static void relay_blktrace_event(struct blk_trace *bt, unsigned long sequence,
-    pid_t pid, int cpu, sector_t sector, int bytes,
-    u64 what, int error, u64 cgid,
-    ssize_t cgid_len, void *pdu_data, int pdu_len)
-    {
-    if (bt.version == 2)
+#[no_mangle]
+pub unsafe extern "C" fn relay_blktrace_event(bt: *mut blk_trace, sequence: c_ulong, pid: pid_t, cpu: c_int, sector: sector_t, bytes: c_int, what: u64, error: c_int, cgid: u64, cgid_len: ssize_t, pdu_data: *mut c_void, pdu_len: c_int) {
+    if (bt.version == 2) {
     return relay_blktrace_event2(bt, sequence, pid, cpu, sector,
     bytes, what, error, cgid, cgid_len,
     pdu_data, pdu_len);
+    }
     return relay_blktrace_event1(bt, sequence, pid, cpu, sector, bytes,
     what, error, cgid, cgid_len, pdu_data,
     pdu_len);
@@ -159,36 +389,37 @@ pub const TRACE_BLK_OPT_CGNAME: c_uint = 0x4;
 //
 // Send out a notify message.
 //
-    static void trace_note(struct blk_trace *bt, pid_t pid, u64 action,
-    const void *data, size_t len, u64 cgid)
-    {
-    struct ring_buffer_event *event = core::ptr::null_mut();
-    struct trace_buffer *buffer = core::ptr::null_mut();
-    let mut trace_ctx: c_uint = 0;
-    let mut cpu: c_int = smp_processor_id();
-    let mut blk_tracer: bool = blk_tracer_enabled;
-    let mut cgid_len: isize = cgid ? sizeof(cgid) : 0;
+#[no_mangle]
+pub unsafe extern "C" fn trace_note(bt: *mut blk_trace, pid: pid_t, action: u64, data: *mut c_void, len: size_t, cgid: u64) {
+    let mut event = core::ptr::null_mut();
+    let mut buffer = core::ptr::null_mut();
+pub static mut trace_ctx: c_uint = 0;
+pub static mut cpu: c_int = 0;
+pub static mut blk_tracer: bool = false;
+pub static mut cgid_len: isize = 0;
     action = lower_32_bits(action | (cgid ? __BLK_TN_CGROUP : 0));
     if (blk_tracer) {
-    struct blk_io_trace2 *t;
-    let mut trace_len: usize = sizeof(*t) + cgid_len + len;
+pub static mut t: *mut c_void = core::ptr::null_mut();
+pub static mut trace_len: usize = 0;
     buffer = blk_tr.array_buffer.buffer;
     trace_ctx = tracing_gen_ctx_flags(0);
     event = trace_buffer_lock_reserve(buffer, TRACE_BLK,
     trace_len, trace_ctx);
-    if (!event)
+    if (!event) {
     return;
+    }
     t = ring_buffer_event_data(event);
     record_blktrace_event2(t, pid, cpu, 0, 0,
     action, bt.dev, 0, cgid, cgid_len,
-    (void *)data, len);
+    data, len);
     trace_buffer_unlock_commit(blk_tr, buffer, event, trace_ctx);
     return;
     }
-    if (!bt.rchan)
+    if (!bt.rchan) {
     return;
+    }
     relay_blktrace_event(bt, 0, pid, cpu, 0, 0, action, 0, cgid,
-    cgid_len, (void *)data, len);
+    cgid_len, data, len);
     }
 //
 // Send out a notify for this process, if we haven't done so since a trace
@@ -196,74 +427,75 @@ pub const TRACE_BLK_OPT_CGNAME: c_uint = 0x4;
 //
 #[no_mangle]
 unsafe extern "C" fn trace_note_tsk(tsk: *mut task_struct) {
-    static void trace_note_tsk(struct task_struct *tsk)
-    {
-    unsigned long flags;
-    struct blk_trace *bt;
+    let mut flags = 0;
+pub static mut bt: *mut c_void = core::ptr::null_mut();
     tsk.btrace_seq = blktrace_seq;
     raw_spin_lock_irqsave(&running_trace_lock, flags);
     list_for_each_entry(bt, &running_trace_list, running_list) {
     trace_note(bt, tsk.pid, BLK_TN_PROCESS, tsk.comm,
-    sizeof(tsk.comm), 0);
+    sizeof!(tsk.comm), 0);
     }
     raw_spin_unlock_irqrestore(&running_trace_lock, flags);
     }
 #[no_mangle]
 unsafe extern "C" fn trace_note_time(bt: *mut blk_trace) {
-    static void trace_note_time(struct blk_trace *bt)
-    {
-    struct timespec64 now;
-    unsigned long flags;
+pub static mut now: usize = 0;
+    let mut flags = 0;
     u32 words[2];
 // need to check user space to see if this breaks in y2038 or y2106
     ktime_get_real_ts64(&now);
     words[0] = (u32)now.tv_sec;
     words[1] = now.tv_nsec;
     local_irq_save(flags);
-    trace_note(bt, 0, BLK_TN_TIMESTAMP, words, sizeof(words), 0);
+    trace_note(bt, 0, BLK_TN_TIMESTAMP, words, sizeof!(words), 0);
     local_irq_restore(flags);
     }
-    void __blk_trace_note_message(struct blk_trace *bt,
-    struct cgroup_subsys_state *css, const char *fmt, ...)
-    {
-    int n;
-    va_list args;
-    unsigned long flags;
-    char *buf;
-    let mut cgid: u64 = 0;
+#[no_mangle]
+pub unsafe extern "C" fn __blk_trace_note_message(bt: *mut blk_trace, css: *mut cgroup_subsys_state, fmt: *mut c_char) {
+    let mut n = 0;
+    let mut args;
+    let mut flags = 0;
+pub static mut buf: *mut c_void = core::ptr::null_mut();
+pub static mut cgid: u64 = 0;
     if (unlikely(bt.trace_state != Blktrace_running &&
-    !blk_tracer_enabled))
+    !blk_tracer_enabled)) {
     return;
+    }
 //
 // If the BLK_TC_NOTIFY action mask isn't set, don't send any note
 // message to the trace.
 //
-    if (!(bt.act_mask & BLK_TC_NOTIFY))
+    if (!(bt.act_mask & BLK_TC_NOTIFY)) {
     return;
+    }
     local_irq_save(flags);
     buf = this_cpu_ptr(bt.msg_data);
     va_start(args, fmt);
     n = vscnprintf(buf, BLK_TN_MAX_MSG, fmt, args);
     va_end(args);
 
-    if (css && (blk_tracer_flags.val & TRACE_BLK_OPT_CGROUP))
+    if (css && (blk_tracer_flags.val & TRACE_BLK_OPT_CGROUP)) {
     cgid = cgroup_id(css.cgroup);
-    else
+    }
+    else {
     cgid = 1;
+    }
 
     trace_note(bt, current.pid, BLK_TN_MESSAGE, buf, n, cgid);
     local_irq_restore(flags);
     }
     EXPORT_SYMBOL_GPL(__blk_trace_note_message);
-    static int act_log_check(struct blk_trace *bt, u64 what, sector_t sector,
-    pid_t pid)
-    {
-    if (((bt.act_mask << BLK_TC_SHIFT) & what) == 0)
+#[no_mangle]
+pub unsafe extern "C" fn act_log_check(bt: *mut blk_trace, what: u64, sector: sector_t, pid: pid_t) -> c_int {
+    if (((bt.act_mask << BLK_TC_SHIFT) & what) == 0) {
     return 1;
-    if (sector && (sector < bt.start_lba || sector > bt.end_lba))
+    }
+    if (sector && (sector < bt.start_lba || sector > bt.end_lba)) {
     return 1;
-    if (bt.pid && pid != bt.pid)
+    }
+    if (bt.pid && pid != bt.pid) {
     return 1;
+    }
     return 0;
     }
 //
@@ -279,61 +511,71 @@ unsafe extern "C" fn trace_note_time(bt: *mut blk_trace) {
 // The worker for the various blk_add_trace*() types. Fills out a
 // blk_io_trace structure and places it in a per-cpu subbuffer.
 //
-    static void __blk_add_trace(struct blk_trace *bt, sector_t sector, int bytes,
-    const blk_opf_t opf, u64 what, int error,
-    int pdu_len, void *pdu_data, u64 cgid)
-    {
-    struct task_struct *tsk = current;
-    struct ring_buffer_event *event = core::ptr::null_mut();
-    struct trace_buffer *buffer = core::ptr::null_mut();
-    let mut flags: c_ulong = 0;
-    unsigned long *sequence;
-    let mut trace_ctx: c_uint = 0;
-    pid_t pid;
-    int cpu;
-    let mut blk_tracer: bool = blk_tracer_enabled;
-    let mut cgid_len: isize = cgid ? sizeof(cgid) : 0;
-    let mut op: enum req_op = opf & REQ_OP_MASK;
-    size_t trace_len;
-    if (unlikely(bt.trace_state != Blktrace_running && !blk_tracer))
+#[no_mangle]
+pub unsafe extern "C" fn __blk_add_trace(bt: *mut blk_trace, sector: sector_t, bytes: c_int, opf: blk_opf_t, what: u64, error: c_int, pdu_len: c_int, pdu_data: *mut c_void, cgid: u64) {
+    let mut tsk = current;
+    let mut event = core::ptr::null_mut();
+    let mut buffer = core::ptr::null_mut();
+pub static mut flags: c_ulong = 0;
+pub static mut sequence: *mut c_void = core::ptr::null_mut();
+pub static mut trace_ctx: c_uint = 0;
+    let mut pid = 0;
+    let mut cpu = 0;
+pub static mut blk_tracer: bool = false;
+pub static mut cgid_len: isize = 0;
+pub static mut op: req_op = 0;
+    let mut trace_len = 0;
+    if (unlikely(bt.trace_state != Blktrace_running && !blk_tracer)) {
     return;
+    }
     what |= ddir_act[op_is_write(op) ? WRITE : READ];
     what |= MASK_TC_BIT(opf, SYNC);
     what |= MASK_TC_BIT(opf, RAHEAD);
     what |= MASK_TC_BIT(opf, META);
     what |= MASK_TC_BIT(opf, PREFLUSH);
     what |= MASK_TC_BIT(opf, FUA);
-    switch (op) {
-    case REQ_OP_DISCARD:
-    case REQ_OP_SECURE_ERASE:
+    match (op) {
+    REQ_OP_DISCARD => {
+    }
+    REQ_OP_SECURE_ERASE => {
     what |= BLK_TC_ACT(BLK_TC_DISCARD);
-    break;
-    case REQ_OP_FLUSH:
+    // break;
+    }
+    REQ_OP_FLUSH => {
     what |= BLK_TC_ACT(BLK_TC_FLUSH);
-    break;
-    case REQ_OP_ZONE_APPEND:
+    // break;
+    }
+    REQ_OP_ZONE_APPEND => {
     what |= BLK_TC_ACT(BLK_TC_ZONE_APPEND);
-    break;
-    case REQ_OP_ZONE_RESET:
+    // break;
+    }
+    REQ_OP_ZONE_RESET => {
     what |= BLK_TC_ACT(BLK_TC_ZONE_RESET);
-    break;
-    case REQ_OP_ZONE_RESET_ALL:
+    // break;
+    }
+    REQ_OP_ZONE_RESET_ALL => {
     what |= BLK_TC_ACT(BLK_TC_ZONE_RESET_ALL);
-    break;
-    case REQ_OP_ZONE_FINISH:
+    // break;
+    }
+    REQ_OP_ZONE_FINISH => {
     what |= BLK_TC_ACT(BLK_TC_ZONE_FINISH);
-    break;
-    case REQ_OP_ZONE_OPEN:
+    // break;
+    }
+    REQ_OP_ZONE_OPEN => {
     what |= BLK_TC_ACT(BLK_TC_ZONE_OPEN);
-    break;
-    case REQ_OP_ZONE_CLOSE:
+    // break;
+    }
+    REQ_OP_ZONE_CLOSE => {
     what |= BLK_TC_ACT(BLK_TC_ZONE_CLOSE);
-    break;
-    case REQ_OP_WRITE_ZEROES:
+    // break;
+    }
+    REQ_OP_WRITE_ZEROES => {
     what |= BLK_TC_ACT(BLK_TC_WRITE_ZEROES);
-    break;
-    default:
-    break;
+    // break;
+    }
+    _ => {
+    // break;
+    }
     }
 // Drop trace events for zone operations with blktrace v1
     if (bt.version == 1 && (what >> BLK_TC_SHIFT) > BLK_TC_END_V1) {
@@ -341,21 +583,25 @@ unsafe extern "C" fn trace_note_time(bt: *mut blk_trace) {
     (unsigned long long)what);
     return;
     }
-    if (cgid)
+    if (cgid) {
     what |= __BLK_TA_CGROUP;
+    }
     pid = tsk.pid;
-    if (act_log_check(bt, what, sector, pid))
+    if (act_log_check(bt, what, sector, pid)) {
     return;
+    }
     cpu = raw_smp_processor_id();
     if (blk_tracer) {
     buffer = blk_tr.array_buffer.buffer;
     trace_ctx = tracing_gen_ctx_flags(0);
-    switch (bt.version) {
-    case 1:
-    trace_len = sizeof(struct blk_io_trace);
-    break;
-    case 2:
-    default:
+    match (bt.version) {
+    1 => {
+    trace_len = sizeof!(blk_io_trace);
+    // break;
+    }
+    2 => {
+    }
+    _ => {
 //
 // ftrace always uses v2 (blk_io_trace2) format.
 //
@@ -371,26 +617,31 @@ unsafe extern "C" fn trace_note_time(bt: *mut blk_trace) {
 // Always use v2 format for ftrace and normalize
 // bt->version to 2 when uninitialized.
 //
-    trace_len = sizeof(struct blk_io_trace2);
-    if (bt.version == 0)
+    trace_len = sizeof!(blk_io_trace2);
+    if (bt.version == 0) {
     bt.version = 2;
-    break;
+    }
+    // break;
+    }
     }
     trace_len += pdu_len + cgid_len;
     event = trace_buffer_lock_reserve(buffer, TRACE_BLK,
     trace_len, trace_ctx);
-    if (!event)
+    if (!event) {
     return;
+    }
     tracing_record_cmdline(current);
-    switch (bt.version) {
-    case 1:
+    match (bt.version) {
+    1 => {
     record_blktrace_event(ring_buffer_event_data(event),
     pid, cpu, sector, bytes,
     what, bt.dev, error, cgid, cgid_len,
     pdu_data, pdu_len);
-    break;
-    case 2:
-    default:
+    // break;
+    }
+    2 => {
+    }
+    _ => {
 //
 // Use v2 recording function (record_blktrace_event2)
 // which writes blk_io_trace2 structure with correct
@@ -407,13 +658,15 @@ unsafe extern "C" fn trace_note_time(bt: *mut blk_trace) {
     pid, cpu, sector, bytes,
     what, bt.dev, error, cgid, cgid_len,
     pdu_data, pdu_len);
-    break;
+    // break;
+    }
     }
     trace_buffer_unlock_commit(blk_tr, buffer, event, trace_ctx);
     return;
     }
-    if (unlikely(tsk.btrace_seq != blktrace_seq))
+    if (unlikely(tsk.btrace_seq != blktrace_seq)) {
     trace_note_tsk(tsk);
+    }
 //
 // A word about the locking here - we disable interrupts to reserve
 // some space in the relay per-cpu buffer, to prevent an irq
@@ -428,8 +681,6 @@ unsafe extern "C" fn trace_note_time(bt: *mut blk_trace) {
     }
 #[no_mangle]
 unsafe extern "C" fn blk_trace_free(q: *mut request_queue, bt: *mut blk_trace) {
-    static void blk_trace_free(struct request_queue *q, struct blk_trace *bt)
-    {
     relay_close(bt.rchan);
 //
 // If 'bt->dir' is not set, then both 'dropped' and 'msg' are created
@@ -447,30 +698,27 @@ unsafe extern "C" fn blk_trace_free(q: *mut request_queue, bt: *mut blk_trace) {
     }
 #[no_mangle]
 unsafe extern "C" fn get_probe_ref() {
-    static void get_probe_ref(void)
-    {
     mutex_lock(&blk_probe_mutex);
-    if (++blk_probes_ref == 1)
+    if (++blk_probes_ref == 1) {
     blk_register_tracepoints();
+    }
     mutex_unlock(&blk_probe_mutex);
     }
 #[no_mangle]
 unsafe extern "C" fn put_probe_ref() {
-    static void put_probe_ref(void)
-    {
     mutex_lock(&blk_probe_mutex);
-    if (!--blk_probes_ref)
+    if (!--blk_probes_ref) {
     blk_unregister_tracepoints();
+    }
     mutex_unlock(&blk_probe_mutex);
     }
 #[no_mangle]
 unsafe extern "C" fn blk_trace_start(bt: *mut blk_trace) -> c_int {
-    static int blk_trace_start(struct blk_trace *bt)
-    {
     if (bt.trace_state != Blktrace_setup &&
-    bt.trace_state != Blktrace_stopped)
+    bt.trace_state != Blktrace_stopped) {
     return -EINVAL;
-    blktrace_seq++;
+    }
+    blktrace_seq += 1;
     smp_mb();
     bt.trace_state = Blktrace_running;
     raw_spin_lock_irq(&running_trace_lock);
@@ -481,10 +729,9 @@ unsafe extern "C" fn blk_trace_start(bt: *mut blk_trace) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn blk_trace_stop(bt: *mut blk_trace) -> c_int {
-    static int blk_trace_stop(struct blk_trace *bt)
-    {
-    if (bt.trace_state != Blktrace_running)
+    if (bt.trace_state != Blktrace_running) {
     return -EINVAL;
+    }
     bt.trace_state = Blktrace_stopped;
     raw_spin_lock_irq(&running_trace_lock);
     list_del_init(&bt.running_list);
@@ -494,8 +741,6 @@ unsafe extern "C" fn blk_trace_stop(bt: *mut blk_trace) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn blk_trace_cleanup(q: *mut request_queue, bt: *mut blk_trace) {
-    static void blk_trace_cleanup(struct request_queue *q, struct blk_trace *bt)
-    {
     blk_trace_stop(bt);
     synchronize_rcu();
     blk_trace_free(q, bt);
@@ -503,86 +748,63 @@ unsafe extern "C" fn blk_trace_cleanup(q: *mut request_queue, bt: *mut blk_trace
     }
 #[no_mangle]
 unsafe extern "C" fn __blk_trace_remove(q: *mut request_queue) -> c_int {
-    static int __blk_trace_remove(struct request_queue *q)
-    {
-    struct blk_trace *bt;
+pub static mut bt: *mut c_void = core::ptr::null_mut();
     bt = rcu_replace_pointer(q.blk_trace, core::ptr::null_mut(),
     lockdep_is_held(&q.debugfs_mutex));
-    if (!bt)
+    if (!bt) {
     return -EINVAL;
+    }
     blk_trace_cleanup(q, bt);
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn blk_trace_remove(q: *mut request_queue) -> c_int {
-    int blk_trace_remove(struct request_queue *q)
-    {
-    int ret;
+    let mut ret = 0;
     blk_debugfs_lock_nomemsave(q);
     ret = __blk_trace_remove(q);
     blk_debugfs_unlock_nomemrestore(q);
     return ret;
     }
     EXPORT_SYMBOL_GPL(blk_trace_remove);
-    static ssize_t blk_dropped_read(struct file *filp, char __user *buffer,
-    size_t count, loff_t *ppos)
-    {
-    struct blk_trace *bt = filp.private_data;
-    let mut dropped: usize = relay_stats(bt.rchan, RELAY_STATS_BUF_FULL);
+#[no_mangle]
+pub unsafe extern "C" fn blk_dropped_read(filp: *mut file, buffer: *mut c_char, count: size_t, ppos: *mut loff_t) -> ssize_t {
+    let mut bt = filp.private_data;
+pub static mut dropped: usize = 0;
     char buf[16];
-    snprintf(buf, sizeof(buf), "%zu\n", dropped);
+    snprintf(buf, sizeof!(buf), "%zu\n", dropped);
     return simple_read_from_buffer(buffer, count, ppos, buf, strlen(buf));
     }
-    static const struct file_operations blk_dropped_fops = {
-    .owner =	THIS_MODULE,
-    .open =		simple_open,
-    .read =		blk_dropped_read,
-    .llseek =	default_llseek,
-    };
-    static ssize_t blk_msg_write(struct file *filp, const char __user *buffer,
-    size_t count, loff_t *ppos)
-    {
-    char *msg;
-    struct blk_trace *bt;
-    if (count >= BLK_TN_MAX_MSG)
+pub static mut file_operations: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn blk_msg_write(filp: *mut file, buffer: *mut c_char, count: size_t, ppos: *mut loff_t) -> ssize_t {
+pub static mut msg: *mut c_void = core::ptr::null_mut();
+pub static mut bt: *mut c_void = core::ptr::null_mut();
+    if (count >= BLK_TN_MAX_MSG) {
     return -EINVAL;
+    }
     msg = memdup_user_nul(buffer, count);
-    if (IS_ERR(msg))
+    if (IS_ERR(msg)) {
     return PTR_ERR(msg);
+    }
     bt = filp.private_data;
     __blk_trace_note_message(bt, core::ptr::null_mut(), "%s", msg);
     kfree(msg);
     return count;
     }
-    static const struct file_operations blk_msg_fops = {
-    .owner =	THIS_MODULE,
-    .open =		simple_open,
-    .write =	blk_msg_write,
-    .llseek =	noop_llseek,
-    };
+pub static mut file_operations: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn blk_remove_buf_file_callback(dentry: *mut dentry) -> c_int {
-    static int blk_remove_buf_file_callback(struct dentry *dentry)
-    {
     debugfs_remove(dentry);
     return 0;
     }
-    static struct dentry *blk_create_buf_file_callback(const char *filename,
-    struct dentry *parent,
-    umode_t mode,
-    struct rchan_buf *buf,
-    int *is_global)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn blk_create_buf_file_callback(filename: *mut c_char, parent: *mut dentry, mode: umode_t, buf: *mut rchan_buf, is_global: *mut c_int) -> *mut c_void {
     return debugfs_create_file(filename, mode, parent, buf,
     &relay_file_operations);
     }
-    static const struct rchan_callbacks blk_relay_callbacks = {
-    .create_buf_file	= blk_create_buf_file_callback,
-    .remove_buf_file	= blk_remove_buf_file_callback,
-    };
-    static void blk_trace_setup_lba(struct blk_trace *bt,
-    struct block_device *bdev)
-    {
+pub static mut rchan_callbacks: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn blk_trace_setup_lba(bt: *mut blk_trace, bdev: *mut block_device) {
     if (bdev) {
     bt.start_lba = bdev.bd_start_sect;
     bt.end_lba = bdev.bd_start_sect + bdev_nr_sectors(bdev);
@@ -594,14 +816,11 @@ unsafe extern "C" fn blk_remove_buf_file_callback(dentry: *mut dentry) -> c_int 
 //
 // Setup everything required to start tracing
 //
-    static struct blk_trace *blk_trace_setup_prepare(struct request_queue *q,
-    char *name, dev_t dev,
-    u32 buf_size, u32 buf_nr,
-    struct block_device *bdev)
-    {
-    struct blk_trace *bt = core::ptr::null_mut();
-    struct dentry *dir = core::ptr::null_mut();
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn blk_trace_setup_prepare(q: *mut request_queue, name: *mut c_char, dev: dev_t, buf_size: u32, buf_nr: u32, bdev: *mut block_device) -> *mut c_void {
+    let mut bt = core::ptr::null_mut();
+    let mut dir = core::ptr::null_mut();
+    let mut ret = 0;
     lockdep_assert_held(&q.debugfs_mutex);
 //
 // bdev can be NULL, as with scsi-generic, this is a helpful as
@@ -609,38 +828,43 @@ unsafe extern "C" fn blk_remove_buf_file_callback(dentry: *mut dentry) -> c_int 
 //
     if (rcu_dereference_protected(q.blk_trace,
     lockdep_is_held(&q.debugfs_mutex))) {
-    pr_warn("Concurrent blktraces are not allowed on %s\n", name);
+    pr_warn!("Concurrent blktraces are not allowed on %s\n", name);
     return ERR_PTR(-EBUSY);
     }
     bt = kzalloc_obj(*bt);
-    if (!bt)
+    if (!bt) {
     return ERR_PTR(-ENOMEM);
+    }
     ret = -ENOMEM;
     bt.sequence = alloc_percpu(unsigned long);
-    if (!bt.sequence)
-    goto err;
+    if (!bt.sequence) {
+// goto;
+    }
     bt.msg_data = __alloc_percpu(BLK_TN_MAX_MSG, __alignof__(char));
-    if (!bt.msg_data)
-    goto err;
+    if (!bt.msg_data) {
+// goto;
+    }
 //
 // When tracing the whole disk reuse the existing debugfs directory
 // created by the block layer on init. For partitions block devices,
 // and scsi-generic block devices we create a temporary new debugfs
 // directory that will be removed once the trace ends.
 //
-    if (bdev && !bdev_is_partition(bdev))
+    if (bdev && !bdev_is_partition(bdev)) {
     dir = q.debugfs_dir;
-    else
+    }
+    else {
     bt.dir = dir = debugfs_create_dir(name, blk_debugfs_root);
+    }
 //
 // As blktrace relies on debugfs for its interface the debugfs directory
 // is required, contrary to the usual mantra of not checking for debugfs
 // files or directories.
 //
     if (IS_ERR_OR_NULL(dir)) {
-    pr_warn("debugfs_dir not present for %s so skipping\n", name);
+    pr_warn!("debugfs_dir not present for %s so skipping\n", name);
     ret = -ENOENT;
-    goto err;
+// goto;
     }
     bt.dev = dev;
     INIT_LIST_HEAD(&bt.running_list);
@@ -649,19 +873,17 @@ unsafe extern "C" fn blk_remove_buf_file_callback(dentry: *mut dentry) -> c_int 
     debugfs_create_file("msg", 0222, dir, bt, &blk_msg_fops);
     bt.rchan = relay_open("trace", dir, buf_size, buf_nr,
     &blk_relay_callbacks, bt);
-    if (!bt.rchan)
-    goto err;
+    if (!bt.rchan) {
+// goto;
+    }
     blk_trace_setup_lba(bt, bdev);
     return bt;
-    err:
+// label;
     blk_trace_free(q, bt);
     return ERR_PTR(ret);
     }
-    static void blk_trace_setup_finalize(struct request_queue *q,
-    char *name, int version,
-    struct blk_trace *bt,
-    struct blk_user_trace_setup2 *buts)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn blk_trace_setup_finalize(q: *mut request_queue, name: *mut c_char, version: c_int, bt: *mut blk_trace, buts: *mut blk_user_trace_setup2) {
     strscpy_pad(buts.name, name, BLKTRACE_BDEV_SIZE2);
 //
 // some device names have larger paths - convert the slashes
@@ -670,33 +892,36 @@ unsafe extern "C" fn blk_remove_buf_file_callback(dentry: *mut dentry) -> c_int 
     strreplace(buts.name, '/', '_');
     bt.version = version;
     bt.act_mask = buts.act_mask;
-    if (!bt.act_mask)
+    if (!bt.act_mask) {
     bt.act_mask = (u16) -1;
+    }
 // overwrite with user settings
-    if (buts.start_lba)
+    if (buts.start_lba) {
     bt.start_lba = buts.start_lba;
-    if (buts.end_lba)
+    }
+    if (buts.end_lba) {
     bt.end_lba = buts.end_lba;
+    }
     bt.pid = buts.pid;
     bt.trace_state = Blktrace_setup;
     rcu_assign_pointer(q.blk_trace, bt);
     get_probe_ref();
     }
-    int blk_trace_setup(struct request_queue *q, char *name, dev_t dev,
-    struct block_device *bdev,
-    char __user *arg)
-    {
-    struct blk_user_trace_setup2 buts2;
-    struct blk_user_trace_setup buts;
-    struct blk_trace *bt;
-    unsigned int memflags;
-    int ret;
-    ret = copy_from_user(&buts, arg, sizeof(buts));
-    if (ret)
+#[no_mangle]
+pub unsafe extern "C" fn blk_trace_setup(q: *mut request_queue, name: *mut c_char, dev: dev_t, bdev: *mut block_device, arg: *mut c_char) -> c_int {
+pub static mut buts2: usize = 0;
+pub static mut buts: usize = 0;
+pub static mut bt: *mut c_void = core::ptr::null_mut();
+    let mut memflags = 0;
+    let mut ret = 0;
+    ret = copy_from_user(&buts, arg, sizeof!(buts));
+    if (ret) {
     return -EFAULT;
-    if (!buts.buf_size || !buts.buf_nr)
+    }
+    if (!buts.buf_size || !buts.buf_nr) {
     return -EINVAL;
-    buts2 = (struct blk_user_trace_setup2) {
+    }
+    buts2 = (blk_user_trace_setup2) {
     .act_mask = buts.act_mask,
     .buf_size = buts.buf_size,
     .buf_nr = buts.buf_nr,
@@ -714,25 +939,27 @@ unsafe extern "C" fn blk_remove_buf_file_callback(dentry: *mut dentry) -> c_int 
     blk_trace_setup_finalize(q, name, 1, bt, &buts2);
     strscpy(buts.name, buts2.name, BLKTRACE_BDEV_SIZE);
     blk_debugfs_unlock(q, memflags);
-    if (copy_to_user(arg, &buts, sizeof(buts))) {
+    if (copy_to_user(arg, &buts, sizeof!(buts))) {
     blk_trace_remove(q);
     return -EFAULT;
     }
     return 0;
     }
     EXPORT_SYMBOL_GPL(blk_trace_setup);
-    static int blk_trace_setup2(struct request_queue *q, char *name, dev_t dev,
-    struct block_device *bdev, char __user *arg)
-    {
-    struct blk_user_trace_setup2 buts2;
-    struct blk_trace *bt;
-    unsigned int memflags;
-    if (copy_from_user(&buts2, arg, sizeof(buts2)))
+#[no_mangle]
+pub unsafe extern "C" fn blk_trace_setup2(q: *mut request_queue, name: *mut c_char, dev: dev_t, bdev: *mut block_device, arg: *mut c_char) -> c_int {
+pub static mut buts2: usize = 0;
+pub static mut bt: *mut c_void = core::ptr::null_mut();
+    let mut memflags = 0;
+    if (copy_from_user(&buts2, arg, sizeof!(buts2))) {
     return -EFAULT;
-    if (!buts2.buf_size || !buts2.buf_nr)
+    }
+    if (!buts2.buf_size || !buts2.buf_nr) {
     return -EINVAL;
-    if (buts2.flags != 0)
+    }
+    if (buts2.flags != 0) {
     return -EINVAL;
+    }
     memflags = blk_debugfs_lock(q);
     bt = blk_trace_setup_prepare(q, name, dev, buts2.buf_size, buts2.buf_nr,
     bdev);
@@ -742,26 +969,26 @@ unsafe extern "C" fn blk_remove_buf_file_callback(dentry: *mut dentry) -> c_int 
     }
     blk_trace_setup_finalize(q, name, 2, bt, &buts2);
     blk_debugfs_unlock(q, memflags);
-    if (copy_to_user(arg, &buts2, sizeof(buts2))) {
+    if (copy_to_user(arg, &buts2, sizeof!(buts2))) {
     blk_trace_remove(q);
     return -EFAULT;
     }
     return 0;
     }
 
-    static int compat_blk_trace_setup(struct request_queue *q, char *name,
-    dev_t dev, struct block_device *bdev,
-    char __user *arg)
-    {
-    struct blk_user_trace_setup2 buts2;
-    struct compat_blk_user_trace_setup cbuts;
-    struct blk_trace *bt;
-    unsigned int memflags;
-    if (copy_from_user(&cbuts, arg, sizeof(cbuts)))
+#[no_mangle]
+pub unsafe extern "C" fn compat_blk_trace_setup(q: *mut request_queue, name: *mut c_char, dev: dev_t, bdev: *mut block_device, arg: *mut c_char) -> c_int {
+pub static mut buts2: usize = 0;
+pub static mut cbuts: usize = 0;
+pub static mut bt: *mut c_void = core::ptr::null_mut();
+    let mut memflags = 0;
+    if (copy_from_user(&cbuts, arg, sizeof!(cbuts))) {
     return -EFAULT;
-    if (!cbuts.buf_size || !cbuts.buf_nr)
+    }
+    if (!cbuts.buf_size || !cbuts.buf_nr) {
     return -EINVAL;
-    buts2 = (struct blk_user_trace_setup2) {
+    }
+    buts2 = (blk_user_trace_setup2) {
     .act_mask = cbuts.act_mask,
     .buf_size = cbuts.buf_size,
     .buf_nr = cbuts.buf_nr,
@@ -778,7 +1005,7 @@ unsafe extern "C" fn blk_remove_buf_file_callback(dentry: *mut dentry) -> c_int 
     }
     blk_trace_setup_finalize(q, name, 1, bt, &buts2);
     blk_debugfs_unlock(q, memflags);
-    if (copy_to_user(arg, &buts2.name, ARRAY_SIZE(buts2.name))) {
+    if (copy_to_user(arg, &buts2.name, ARRAY_SIZE!(buts2.name))) {
     blk_trace_remove(q);
     return -EFAULT;
     }
@@ -787,23 +1014,22 @@ unsafe extern "C" fn blk_remove_buf_file_callback(dentry: *mut dentry) -> c_int 
 
 #[no_mangle]
 unsafe extern "C" fn __blk_trace_startstop(q: *mut request_queue, start: c_int) -> c_int {
-    static int __blk_trace_startstop(struct request_queue *q, int start)
-    {
-    struct blk_trace *bt;
+pub static mut bt: *mut c_void = core::ptr::null_mut();
     bt = rcu_dereference_protected(q.blk_trace,
     lockdep_is_held(&q.debugfs_mutex));
-    if (bt == core::ptr::null_mut())
+    if (bt == core::ptr::null_mut()) {
     return -EINVAL;
-    if (start)
+    }
+    if (start) {
     return blk_trace_start(bt);
-    else
+    }
+    else {
     return blk_trace_stop(bt);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn blk_trace_startstop(q: *mut request_queue, start: c_int) -> c_int {
-    int blk_trace_startstop(struct request_queue *q, int start)
-    {
-    int ret;
+    let mut ret = 0;
     blk_debugfs_lock_nomemsave(q);
     ret = __blk_trace_startstop(q, start);
     blk_debugfs_unlock_nomemrestore(q);
@@ -821,39 +1047,44 @@ pub unsafe extern "C" fn blk_trace_startstop(q: *mut request_queue, start: c_int
 // @arg:	the argument data, if any
 //
 #[no_mangle]
-pub unsafe extern "C" fn blk_trace_ioctl(bdev: *mut block_device, cmd: unsigned, arg: *mut char __user) -> c_int {
-    int blk_trace_ioctl(struct block_device *bdev, unsigned cmd, char __user *arg)
-    {
-    struct request_queue *q = bdev_get_queue(bdev);
+pub unsafe extern "C" fn blk_trace_ioctl(bdev: *mut block_device, cmd: unsigned, arg: *mut char ) -> c_int {
+    let mut q = bdev_get_queue(bdev);
     int ret, start = 0;
     char b[BDEVNAME_SIZE];
-    switch (cmd) {
-    case BLKTRACESETUP2:
-    snprintf(b, sizeof(b), "%pg", bdev);
+    match (cmd) {
+    BLKTRACESETUP2 => {
+    snprintf(b, sizeof!(b), "%pg", bdev);
     ret = blk_trace_setup2(q, b, bdev.bd_dev, bdev, arg);
-    break;
-    case BLKTRACESETUP:
-    snprintf(b, sizeof(b), "%pg", bdev);
+    // break;
+    }
+    BLKTRACESETUP => {
+    snprintf(b, sizeof!(b), "%pg", bdev);
     ret = blk_trace_setup(q, b, bdev.bd_dev, bdev, arg);
-    break;
+    // break;
 
-    case BLKTRACESETUP32:
-    snprintf(b, sizeof(b), "%pg", bdev);
+    }
+    BLKTRACESETUP32 => {
+    snprintf(b, sizeof!(b), "%pg", bdev);
     ret = compat_blk_trace_setup(q, b, bdev.bd_dev, bdev, arg);
-    break;
+    // break;
 
-    case BLKTRACESTART:
+    }
+    BLKTRACESTART => {
     start = 1;
     fallthrough;
-    case BLKTRACESTOP:
+    }
+    BLKTRACESTOP => {
     ret = blk_trace_startstop(q, start);
-    break;
-    case BLKTRACETEARDOWN:
+    // break;
+    }
+    BLKTRACETEARDOWN => {
     ret = blk_trace_remove(q);
-    break;
-    default:
+    // break;
+    }
+    _ => {
     ret = -ENOTTY;
-    break;
+    // break;
+    }
     }
     return ret;
     }
@@ -863,41 +1094,38 @@ pub unsafe extern "C" fn blk_trace_ioctl(bdev: *mut block_device, cmd: unsigned,
 //
 #[no_mangle]
 pub unsafe extern "C" fn blk_trace_shutdown(q: *mut request_queue) {
-    void blk_trace_shutdown(struct request_queue *q)
-    {
     if (rcu_dereference_protected(q.blk_trace,
-    lockdep_is_held(&q.debugfs_mutex)))
+    lockdep_is_held(&q.debugfs_mutex))) {
     __blk_trace_remove(q);
+    }
     }
 
 #[no_mangle]
 unsafe extern "C" fn blk_trace_bio_get_cgid(q: *mut request_queue, bio: *mut bio) -> u64 {
-    static u64 blk_trace_bio_get_cgid(struct request_queue *q, struct bio *bio)
-    {
-    struct cgroup_subsys_state *blkcg_css;
-    struct blk_trace *bt;
+pub static mut blkcg_css: *mut c_void = core::ptr::null_mut();
+pub static mut bt: *mut c_void = core::ptr::null_mut();
 // We don't use the 'bt' value here except as an optimization...
     bt = rcu_dereference_protected(q.blk_trace, 1);
-    if (!bt || !(blk_tracer_flags.val & TRACE_BLK_OPT_CGROUP))
+    if (!bt || !(blk_tracer_flags.val & TRACE_BLK_OPT_CGROUP)) {
     return 0;
+    }
     blkcg_css = bio_blkcg_css(bio);
-    if (!blkcg_css)
+    if (!blkcg_css) {
     return 0;
+    }
     return cgroup_id(blkcg_css.cgroup);
     }
 
 #[no_mangle]
 unsafe extern "C" fn blk_trace_bio_get_cgid(q: *mut request_queue, bio: *mut bio) -> u64 {
-    static u64 blk_trace_bio_get_cgid(struct request_queue *q, struct bio *bio)
-    {
     return 0;
     }
 
-    static u64
-    blk_trace_request_get_cgid(struct request *rq)
-    {
-    if (!rq.bio)
+#[no_mangle]
+pub unsafe extern "C" fn blk_trace_request_get_cgid(rq: *mut request) -> u64 {
+    if (!rq.bio) {
     return 0;
+    }
 // Use the first bio
     return blk_trace_bio_get_cgid(rq.q, rq.bio);
     }
@@ -914,63 +1142,53 @@ unsafe extern "C" fn blk_trace_bio_get_cgid(q: *mut request_queue, bio: *mut bio
 // Description:
 // Records an action against a request. Will log the bio offset + size.
 //
-    static void blk_add_trace_rq(struct request *rq, blk_status_t error,
-    unsigned int nr_bytes, u64 what, u64 cgid)
-    {
-    struct blk_trace *bt;
+#[no_mangle]
+pub unsafe extern "C" fn blk_add_trace_rq(rq: *mut request, error: blk_status_t, nr_bytes: c_uint, what: u64, cgid: u64) {
+pub static mut bt: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     bt = rcu_dereference(rq.q.blk_trace);
     if (likely(!bt)) {
     rcu_read_unlock();
     return;
     }
-    if (blk_rq_is_passthrough(rq))
+    if (blk_rq_is_passthrough(rq)) {
     what |= BLK_TC_ACT(BLK_TC_PC);
-    else
+    }
+    else {
     what |= BLK_TC_ACT(BLK_TC_FS);
+    }
     __blk_add_trace(bt, blk_rq_trace_sector(rq), nr_bytes, rq.cmd_flags,
     what, blk_status_to_errno(error), 0, core::ptr::null_mut(), cgid);
     rcu_read_unlock();
     }
 #[no_mangle]
 unsafe extern "C" fn blk_add_trace_rq_insert(ignore: *mut c_void, rq: *mut request) {
-    static void blk_add_trace_rq_insert(void *ignore, struct request *rq)
-    {
     blk_add_trace_rq(rq, 0, blk_rq_bytes(rq), BLK_TA_INSERT,
     blk_trace_request_get_cgid(rq));
     }
 #[no_mangle]
 unsafe extern "C" fn blk_add_trace_rq_issue(ignore: *mut c_void, rq: *mut request) {
-    static void blk_add_trace_rq_issue(void *ignore, struct request *rq)
-    {
     blk_add_trace_rq(rq, 0, blk_rq_bytes(rq), BLK_TA_ISSUE,
     blk_trace_request_get_cgid(rq));
     }
 #[no_mangle]
 unsafe extern "C" fn blk_add_trace_rq_merge(ignore: *mut c_void, rq: *mut request) {
-    static void blk_add_trace_rq_merge(void *ignore, struct request *rq)
-    {
     blk_add_trace_rq(rq, 0, blk_rq_bytes(rq), BLK_TA_BACKMERGE,
     blk_trace_request_get_cgid(rq));
     }
 #[no_mangle]
 unsafe extern "C" fn blk_add_trace_rq_requeue(ignore: *mut c_void, rq: *mut request) {
-    static void blk_add_trace_rq_requeue(void *ignore, struct request *rq)
-    {
     blk_add_trace_rq(rq, 0, blk_rq_bytes(rq), BLK_TA_REQUEUE,
     blk_trace_request_get_cgid(rq));
     }
-    static void blk_add_trace_rq_complete(void *ignore, struct request *rq,
-    blk_status_t error, unsigned int nr_bytes)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn blk_add_trace_rq_complete(ignore: *mut c_void, rq: *mut request, error: blk_status_t, nr_bytes: c_uint) {
     blk_add_trace_rq(rq, error, nr_bytes, BLK_TA_COMPLETE,
     blk_trace_request_get_cgid(rq));
     }
 #[no_mangle]
 unsafe extern "C" fn blk_add_trace_zone_update_request(ignore: *mut c_void, rq: *mut request) {
-    static void blk_add_trace_zone_update_request(void *ignore, struct request *rq)
-    {
-    struct blk_trace *bt;
+pub static mut bt: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     bt = rcu_dereference(rq.q.blk_trace);
     if (likely(!bt) || bt.version < 2) {
@@ -991,10 +1209,9 @@ unsafe extern "C" fn blk_add_trace_zone_update_request(ignore: *mut c_void, rq: 
 // Description:
 // Records an action against a bio. Will log the bio offset + size.
 //
-    static void blk_add_trace_bio(struct request_queue *q, struct bio *bio,
-    u64 what, int error)
-    {
-    struct blk_trace *bt;
+#[no_mangle]
+pub unsafe extern "C" fn blk_add_trace_bio(q: *mut request_queue, bio: *mut bio, what: u64, error: c_int) {
+pub static mut bt: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     bt = rcu_dereference(q.blk_trace);
     if (likely(!bt)) {
@@ -1006,106 +1223,93 @@ unsafe extern "C" fn blk_add_trace_zone_update_request(ignore: *mut c_void, rq: 
     blk_trace_bio_get_cgid(q, bio));
     rcu_read_unlock();
     }
-    static void blk_add_trace_bio_complete(void *ignore,
-    struct request_queue *q, struct bio *bio)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn blk_add_trace_bio_complete(ignore: *mut c_void, q: *mut request_queue, bio: *mut bio) {
     blk_add_trace_bio(q, bio, BLK_TA_COMPLETE,
     blk_status_to_errno(bio.bi_status));
     }
 #[no_mangle]
 unsafe extern "C" fn blk_add_trace_bio_backmerge(ignore: *mut c_void, bio: *mut bio) {
-    static void blk_add_trace_bio_backmerge(void *ignore, struct bio *bio)
-    {
     blk_add_trace_bio(bio.bi_bdev.bd_disk.queue, bio, BLK_TA_BACKMERGE,
     0);
     }
 #[no_mangle]
 unsafe extern "C" fn blk_add_trace_bio_frontmerge(ignore: *mut c_void, bio: *mut bio) {
-    static void blk_add_trace_bio_frontmerge(void *ignore, struct bio *bio)
-    {
     blk_add_trace_bio(bio.bi_bdev.bd_disk.queue, bio, BLK_TA_FRONTMERGE,
     0);
     }
 #[no_mangle]
 unsafe extern "C" fn blk_add_trace_bio_queue(ignore: *mut c_void, bio: *mut bio) {
-    static void blk_add_trace_bio_queue(void *ignore, struct bio *bio)
-    {
     blk_add_trace_bio(bio.bi_bdev.bd_disk.queue, bio, BLK_TA_QUEUE, 0);
     }
 #[no_mangle]
 unsafe extern "C" fn blk_add_trace_getrq(ignore: *mut c_void, bio: *mut bio) {
-    static void blk_add_trace_getrq(void *ignore, struct bio *bio)
-    {
     blk_add_trace_bio(bio.bi_bdev.bd_disk.queue, bio, BLK_TA_GETRQ, 0);
     }
 #[no_mangle]
 unsafe extern "C" fn blk_add_trace_plug(ignore: *mut c_void, q: *mut request_queue) {
-    static void blk_add_trace_plug(void *ignore, struct request_queue *q)
-    {
-    struct blk_trace *bt;
-    rcu_read_lock();
-    bt = rcu_dereference(q.blk_trace);
-    if (bt)
-    __blk_add_trace(bt, 0, 0, 0, BLK_TA_PLUG, 0, 0, core::ptr::null_mut(), 0);
-    rcu_read_unlock();
-    }
-    static void blk_add_trace_unplug(void *ignore, struct request_queue *q,
-    unsigned int depth, bool explicit)
-    {
-    struct blk_trace *bt;
+pub static mut bt: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     bt = rcu_dereference(q.blk_trace);
     if (bt) {
-    let mut rpdu: __be64 = cpu_to_be64(depth);
-    u64 what;
-    if (explicit)
-    what = BLK_TA_UNPLUG_IO;
-    else
-    what = BLK_TA_UNPLUG_TIMER;
-    __blk_add_trace(bt, 0, 0, 0, what, 0, sizeof(rpdu), &rpdu, 0);
+    __blk_add_trace(bt, 0, 0, 0, BLK_TA_PLUG, 0, 0, core::ptr::null_mut(), 0);
     }
     rcu_read_unlock();
     }
-    static void blk_add_trace_zone_plug(void *ignore, struct request_queue *q,
-    unsigned int zno, sector_t sector,
-    unsigned int sectors)
-    {
-    struct blk_trace *bt;
+#[no_mangle]
+pub unsafe extern "C" fn blk_add_trace_unplug(ignore: *mut c_void, q: *mut request_queue, depth: c_uint, explicit: bool) {
+pub static mut bt: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     bt = rcu_dereference(q.blk_trace);
-    if (bt && bt.version >= 2)
+    if (bt) {
+pub static mut rpdu: __be64 = 0;
+    let mut what = 0;
+    if (explicit) {
+    what = BLK_TA_UNPLUG_IO;
+    }
+    else {
+    what = BLK_TA_UNPLUG_TIMER;
+    }
+    __blk_add_trace(bt, 0, 0, 0, what, 0, sizeof!(rpdu), &rpdu, 0);
+    }
+    rcu_read_unlock();
+    }
+#[no_mangle]
+pub unsafe extern "C" fn blk_add_trace_zone_plug(ignore: *mut c_void, q: *mut request_queue, zno: c_uint, sector: sector_t, sectors: c_uint) {
+pub static mut bt: *mut c_void = core::ptr::null_mut();
+    rcu_read_lock();
+    bt = rcu_dereference(q.blk_trace);
+    if (bt && bt.version >= 2) {
     __blk_add_trace(bt, sector, sectors << SECTOR_SHIFT, 0,
     BLK_TA_ZONE_PLUG, 0, 0, core::ptr::null_mut(), 0);
+    }
     rcu_read_unlock();
     return;
     }
-    static void blk_add_trace_zone_unplug(void *ignore, struct request_queue *q,
-    unsigned int zno, sector_t sector,
-    unsigned int sectors)
-    {
-    struct blk_trace *bt;
+#[no_mangle]
+pub unsafe extern "C" fn blk_add_trace_zone_unplug(ignore: *mut c_void, q: *mut request_queue, zno: c_uint, sector: sector_t, sectors: c_uint) {
+pub static mut bt: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     bt = rcu_dereference(q.blk_trace);
-    if (bt && bt.version >= 2)
+    if (bt && bt.version >= 2) {
     __blk_add_trace(bt, sector, sectors << SECTOR_SHIFT, 0,
     BLK_TA_ZONE_UNPLUG, 0, 0, core::ptr::null_mut(), 0);
+    }
     rcu_read_unlock();
     return;
     }
 #[no_mangle]
 unsafe extern "C" fn blk_add_trace_split(ignore: *mut c_void, bio: *mut bio, pdu: c_uint) {
-    static void blk_add_trace_split(void *ignore, struct bio *bio, unsigned int pdu)
-    {
-    struct request_queue *q = bio.bi_bdev.bd_disk.queue;
-    struct blk_trace *bt;
+    let mut q = bio.bi_bdev.bd_disk.queue;
+pub static mut bt: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     bt = rcu_dereference(q.blk_trace);
     if (bt) {
-    let mut rpdu: __be64 = cpu_to_be64(pdu);
+pub static mut rpdu: __be64 = 0;
     __blk_add_trace(bt, bio.bi_iter.bi_sector,
     bio.bi_iter.bi_size, bio.bi_opf, BLK_TA_SPLIT,
     blk_status_to_errno(bio.bi_status),
-    sizeof(rpdu), &rpdu,
+    sizeof!(rpdu), &rpdu,
     blk_trace_bio_get_cgid(q, bio));
     }
     rcu_read_unlock();
@@ -1119,12 +1323,11 @@ unsafe extern "C" fn blk_add_trace_split(ignore: *mut c_void, bio: *mut bio, pdu
 //
 // Called after a bio is remapped to a different device and/or sector.
 //
-    static void blk_add_trace_bio_remap(void *ignore, struct bio *bio, dev_t dev,
-    sector_t from)
-    {
-    struct request_queue *q = bio.bi_bdev.bd_disk.queue;
-    struct blk_trace *bt;
-    struct blk_io_trace_remap r;
+#[no_mangle]
+pub unsafe extern "C" fn blk_add_trace_bio_remap(ignore: *mut c_void, bio: *mut bio, dev: dev_t, from: sector_t) {
+    let mut q = bio.bi_bdev.bd_disk.queue;
+pub static mut bt: *mut c_void = core::ptr::null_mut();
+pub static mut r: usize = 0;
     rcu_read_lock();
     bt = rcu_dereference(q.blk_trace);
     if (likely(!bt)) {
@@ -1137,7 +1340,7 @@ unsafe extern "C" fn blk_add_trace_split(ignore: *mut c_void, bio: *mut bio, pdu
     __blk_add_trace(bt, bio.bi_iter.bi_sector, bio.bi_iter.bi_size,
     bio.bi_opf, BLK_TA_REMAP,
     blk_status_to_errno(bio.bi_status),
-    sizeof(r), &r, blk_trace_bio_get_cgid(q, bio));
+    sizeof!(r), &r, blk_trace_bio_get_cgid(q, bio));
     rcu_read_unlock();
     }
 //
@@ -1151,11 +1354,10 @@ unsafe extern "C" fn blk_add_trace_split(ignore: *mut c_void, bio: *mut bio, pdu
 // Device mapper remaps request to other devices.
 // Add a trace for that action.
 //
-    static void blk_add_trace_rq_remap(void *ignore, struct request *rq, dev_t dev,
-    sector_t from)
-    {
-    struct blk_trace *bt;
-    struct blk_io_trace_remap r;
+#[no_mangle]
+pub unsafe extern "C" fn blk_add_trace_rq_remap(ignore: *mut c_void, rq: *mut request, dev: dev_t, from: sector_t) {
+pub static mut bt: *mut c_void = core::ptr::null_mut();
+pub static mut r: usize = 0;
     rcu_read_lock();
     bt = rcu_dereference(rq.q.blk_trace);
     if (likely(!bt)) {
@@ -1167,7 +1369,7 @@ unsafe extern "C" fn blk_add_trace_split(ignore: *mut c_void, bio: *mut bio, pdu
     r.sector_from = cpu_to_be64(from);
     __blk_add_trace(bt, blk_rq_pos(rq), blk_rq_bytes(rq),
     rq.cmd_flags, BLK_TA_REMAP, 0,
-    sizeof(r), &r, blk_trace_request_get_cgid(rq));
+    sizeof!(r), &r, blk_trace_request_get_cgid(rq));
     rcu_read_unlock();
     }
 //
@@ -1181,9 +1383,7 @@ unsafe extern "C" fn blk_add_trace_split(ignore: *mut c_void, bio: *mut bio, pdu
 //
 #[no_mangle]
 pub unsafe extern "C" fn blk_add_driver_data(rq: *mut request, data: *mut c_void, len: usize) {
-    void blk_add_driver_data(struct request *rq, void *data, size_t len)
-    {
-    struct blk_trace *bt;
+pub static mut bt: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     bt = rcu_dereference(rq.q.blk_trace);
     if (likely(!bt)) {
@@ -1198,53 +1398,49 @@ pub unsafe extern "C" fn blk_add_driver_data(rq: *mut request, data: *mut c_void
     EXPORT_SYMBOL_GPL(blk_add_driver_data);
 #[no_mangle]
 unsafe extern "C" fn blk_register_tracepoints() {
-    static void blk_register_tracepoints(void)
-    {
-    int ret;
+    let mut ret = 0;
     ret = register_trace_block_rq_insert(blk_add_trace_rq_insert, core::ptr::null_mut());
-    WARN_ON(ret);
+    WARN_ON!(ret);
     ret = register_trace_block_rq_issue(blk_add_trace_rq_issue, core::ptr::null_mut());
-    WARN_ON(ret);
+    WARN_ON!(ret);
     ret = register_trace_block_rq_merge(blk_add_trace_rq_merge, core::ptr::null_mut());
-    WARN_ON(ret);
+    WARN_ON!(ret);
     ret = register_trace_block_rq_requeue(blk_add_trace_rq_requeue, core::ptr::null_mut());
-    WARN_ON(ret);
+    WARN_ON!(ret);
     ret = register_trace_block_rq_complete(blk_add_trace_rq_complete, core::ptr::null_mut());
-    WARN_ON(ret);
+    WARN_ON!(ret);
     ret = register_trace_block_bio_complete(blk_add_trace_bio_complete, core::ptr::null_mut());
-    WARN_ON(ret);
+    WARN_ON!(ret);
     ret = register_trace_block_bio_backmerge(blk_add_trace_bio_backmerge, core::ptr::null_mut());
-    WARN_ON(ret);
+    WARN_ON!(ret);
     ret = register_trace_block_bio_frontmerge(blk_add_trace_bio_frontmerge, core::ptr::null_mut());
-    WARN_ON(ret);
+    WARN_ON!(ret);
     ret = register_trace_block_bio_queue(blk_add_trace_bio_queue, core::ptr::null_mut());
-    WARN_ON(ret);
+    WARN_ON!(ret);
     ret = register_trace_block_getrq(blk_add_trace_getrq, core::ptr::null_mut());
-    WARN_ON(ret);
+    WARN_ON!(ret);
     ret = register_trace_blk_zone_append_update_request_bio(
     blk_add_trace_zone_update_request, core::ptr::null_mut());
-    WARN_ON(ret);
+    WARN_ON!(ret);
     ret = register_trace_disk_zone_wplug_add_bio(blk_add_trace_zone_plug,
     core::ptr::null_mut());
-    WARN_ON(ret);
+    WARN_ON!(ret);
     ret = register_trace_blk_zone_wplug_bio(blk_add_trace_zone_unplug,
     core::ptr::null_mut());
-    WARN_ON(ret);
+    WARN_ON!(ret);
     ret = register_trace_block_plug(blk_add_trace_plug, core::ptr::null_mut());
-    WARN_ON(ret);
+    WARN_ON!(ret);
     ret = register_trace_block_unplug(blk_add_trace_unplug, core::ptr::null_mut());
-    WARN_ON(ret);
+    WARN_ON!(ret);
     ret = register_trace_block_split(blk_add_trace_split, core::ptr::null_mut());
-    WARN_ON(ret);
+    WARN_ON!(ret);
     ret = register_trace_block_bio_remap(blk_add_trace_bio_remap, core::ptr::null_mut());
-    WARN_ON(ret);
+    WARN_ON!(ret);
     ret = register_trace_block_rq_remap(blk_add_trace_rq_remap, core::ptr::null_mut());
-    WARN_ON(ret);
+    WARN_ON!(ret);
     }
 #[no_mangle]
 unsafe extern "C" fn blk_unregister_tracepoints() {
-    static void blk_unregister_tracepoints(void)
-    {
     unregister_trace_block_rq_remap(blk_add_trace_rq_remap, core::ptr::null_mut());
     unregister_trace_block_bio_remap(blk_add_trace_bio_remap, core::ptr::null_mut());
     unregister_trace_block_split(blk_add_trace_split, core::ptr::null_mut());
@@ -1271,127 +1467,114 @@ unsafe extern "C" fn blk_unregister_tracepoints() {
 //
 #[no_mangle]
 unsafe extern "C" fn fill_rwbs(rwbs: *mut c_char, t: *const blk_io_trace2) {
-    static void fill_rwbs(char *rwbs, const struct blk_io_trace2 *t)
-    {
-    let mut i: c_int = 0;
-    let mut tc: c_int = t.action >> BLK_TC_SHIFT;
+pub static mut i: c_int = 0;
+pub static mut tc: c_int = 0;
     if ((t.action & ~__BLK_TN_CGROUP) == BLK_TN_MESSAGE) {
     rwbs[i++] = 'N';
-    goto out;
+// goto;
     }
-    if (tc & BLK_TC_FLUSH)
+    if (tc & BLK_TC_FLUSH) {
     rwbs[i++] = 'F';
-    if (tc & BLK_TC_DISCARD)
+    }
+    if (tc & BLK_TC_DISCARD) {
     rwbs[i++] = 'D';
-#[no_mangle]
-pub unsafe extern "C" fn if(BLK_TC_WRITE_ZEROES: tc &) -> else {
+    }
+if true {
     rwbs[i++] = 'W';
     rwbs[i++] = 'Z';
-    } else if (tc & BLK_TC_WRITE)
+    } else if (tc & BLK_TC_WRITE) {
     rwbs[i++] = 'W';
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: t->bytes) -> else {
-    else if (t.bytes)
+    }
+
+    else if (t.bytes) {
     rwbs[i++] = 'R';
-    else
+    }
+    else {
     rwbs[i++] = 'N';
-    if (tc & BLK_TC_FUA)
+    }
+    if (tc & BLK_TC_FUA) {
     rwbs[i++] = 'F';
-    if (tc & BLK_TC_AHEAD)
+    }
+    if (tc & BLK_TC_AHEAD) {
     rwbs[i++] = 'A';
-    if (tc & BLK_TC_SYNC)
+    }
+    if (tc & BLK_TC_SYNC) {
     rwbs[i++] = 'S';
-    if (tc & BLK_TC_META)
+    }
+    if (tc & BLK_TC_META) {
     rwbs[i++] = 'M';
-    out:
+    }
+// label;
     rwbs[i] = '\0';
     }
     static inline
     const struct blk_io_trace2 *te_blk_io_trace(const struct trace_entry *ent)
     {
-    return (const struct blk_io_trace2 *)ent;
+    return ent;
     }
     static inline const void *pdu_start(const struct trace_entry *ent, bool has_cg)
     {
-    return (void *)(te_blk_io_trace(ent) + 1) + (has_cg ? sizeof(u64) : 0);
+    return (te_blk_io_trace(ent) + 1) + (has_cg ? sizeof!(u64) : 0);
     }
 #[no_mangle]
 pub unsafe extern "C" fn t_cgid(ent: *const trace_entry) -> u64 {
-    static inline u64 t_cgid(const struct trace_entry *ent)
-    {
-    return *(u64 *)(te_blk_io_trace(ent) + 1);
+    return *(te_blk_io_trace(ent) + 1);
     }
 #[no_mangle]
 pub unsafe extern "C" fn pdu_real_len(ent: *const trace_entry, has_cg: bool) -> c_int {
-    static inline int pdu_real_len(const struct trace_entry *ent, bool has_cg)
-    {
-    return te_blk_io_trace(ent).pdu_len - (has_cg ? sizeof(u64) : 0);
+    return te_blk_io_trace(ent).pdu_len - (has_cg ? sizeof!(u64) : 0);
     }
 #[no_mangle]
 pub unsafe extern "C" fn t_action(ent: *const trace_entry) -> u32 {
-    static inline u32 t_action(const struct trace_entry *ent)
-    {
     return te_blk_io_trace(ent).action;
     }
 #[no_mangle]
 pub unsafe extern "C" fn t_bytes(ent: *const trace_entry) -> u32 {
-    static inline u32 t_bytes(const struct trace_entry *ent)
-    {
     return te_blk_io_trace(ent).bytes;
     }
 #[no_mangle]
 pub unsafe extern "C" fn t_sec(ent: *const trace_entry) -> u32 {
-    static inline u32 t_sec(const struct trace_entry *ent)
-    {
     return te_blk_io_trace(ent).bytes >> 9;
     }
 #[no_mangle]
 pub unsafe extern "C" fn t_sector(ent: *const trace_entry) -> c_ulonglong {
-    static inline unsigned long long t_sector(const struct trace_entry *ent)
-    {
     return te_blk_io_trace(ent).sector;
     }
 #[no_mangle]
 pub unsafe extern "C" fn t_error(ent: *const trace_entry) -> __u16 {
-    static inline __u16 t_error(const struct trace_entry *ent)
-    {
     return te_blk_io_trace(ent).error;
     }
 #[no_mangle]
 unsafe extern "C" fn get_pdu_int(ent: *const trace_entry, has_cg: bool) -> __u64 {
-    static __u64 get_pdu_int(const struct trace_entry *ent, bool has_cg)
-    {
-    const __be64 *val = pdu_start(ent, has_cg);
+    let mut val = pdu_start(ent, has_cg);
     return be64_to_cpu(*val);
     }
-    typedef void (blk_log_action_t) (struct trace_iterator *iter, const char *act,
+    typedef void (blk_log_action_t) (trace_iterator *iter, const char *act,
     bool has_cg);
-    static void blk_log_action_classic(struct trace_iterator *iter, const char *act,
-    bool has_cg)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn blk_log_action_classic(iter: *mut trace_iterator, act: *mut c_char, has_cg: bool) {
     char rwbs[RWBS_LEN];
-    let mut ts: c_ulonglong = iter.ts;
-    let mut nsec_rem: c_ulong = do_div(ts, NSEC_PER_SEC);
-    let mut secs: unsigned = (unsigned long)ts;
-    const struct blk_io_trace2 *t = te_blk_io_trace(iter.ent);
+pub static mut ts: c_ulonglong = 0;
+pub static mut nsec_rem: c_ulong = 0;
+pub static mut secs: unsigned = 0;
+    let mut t = te_blk_io_trace(iter.ent);
     fill_rwbs(rwbs, t);
     trace_seq_printf(&iter.seq,
     "%3d,%-3d %2d %5d.%09lu %5u %2s %3s ",
     MAJOR(t.device), MINOR(t.device), iter.cpu,
     secs, nsec_rem, iter.ent.pid, act, rwbs);
     }
-    static void blk_log_action(struct trace_iterator *iter, const char *act,
-    bool has_cg)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn blk_log_action(iter: *mut trace_iterator, act: *mut c_char, has_cg: bool) {
     char rwbs[RWBS_LEN];
-    const struct blk_io_trace2 *t = te_blk_io_trace(iter.ent);
+    let mut t = te_blk_io_trace(iter.ent);
     fill_rwbs(rwbs, t);
     if (has_cg) {
-    let mut id: u64 = t_cgid(iter.ent);
+pub static mut id: u64 = 0;
     if (blk_tracer_flags.val & TRACE_BLK_OPT_CGNAME) {
     char blkcg_name_buf[NAME_MAX + 1] = "<...>";
     cgroup_path_from_kernfs_id(id, blkcg_name_buf,
-    sizeof(blkcg_name_buf));
+    sizeof!(blkcg_name_buf));
     trace_seq_printf(&iter.seq, "%3d,%-3d %s %2s %3s ",
     MAJOR(t.device), MINOR(t.device),
     blkcg_name_buf, act, rwbs);
@@ -1414,27 +1597,30 @@ unsafe extern "C" fn get_pdu_int(ent: *const trace_entry, has_cg: bool) -> __u64
     MAJOR(t.device), MINOR(t.device),
     id & U32_MAX, id >> 32, act, rwbs);
     }
-    } else
+    } else {
     trace_seq_printf(&iter.seq, "%3d,%-3d %2s %3s ",
     MAJOR(t.device), MINOR(t.device), act, rwbs);
     }
-    static void blk_log_dump_pdu(struct trace_seq *s,
-    const struct trace_entry *ent, bool has_cg)
-    {
-    const unsigned char *pdu_buf;
-    int pdu_len;
-    int i, end;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn blk_log_dump_pdu(s: *mut trace_seq, ent: *mut trace_entry, has_cg: bool) {
+pub static mut pdu_buf: *mut c_void = core::ptr::null_mut();
+    let mut pdu_len = 0;
+    let mut i = 0;
+    let mut end = 0;
     pdu_buf = pdu_start(ent, has_cg);
     pdu_len = pdu_real_len(ent, has_cg);
-    if (!pdu_len)
+    if (!pdu_len) {
     return;
+    }
 // find the last zero that needs to be printed
-    for (end = pdu_len - 1; end >= 0; end--)
+    for (end = pdu_len - 1; end >= 0; end--) {
     if (pdu_buf[end])
     break;
-    end++;
+    }
+    end += 1;
     trace_seq_putc(s, '(');
-    for (i = 0; i < pdu_len; i++) {
+    while (i < pdu_len) {
     trace_seq_printf(s, "%s%02x",
     i == 0 ? "" : " ", pdu_buf[i]);
 //
@@ -1450,8 +1636,6 @@ unsafe extern "C" fn get_pdu_int(ent: *const trace_entry, has_cg: bool) -> __u64
     }
 #[no_mangle]
 unsafe extern "C" fn blk_log_generic(s: *mut trace_seq, ent: *const trace_entry, has_cg: bool) {
-    static void blk_log_generic(struct trace_seq *s, const struct trace_entry *ent, bool has_cg)
-    {
     char cmd[TASK_COMM_LEN];
     trace_find_cmdline(ent.pid, cmd);
     if (t_action(ent) & BLK_TC_ACT(BLK_TC_PC)) {
@@ -1459,34 +1643,35 @@ unsafe extern "C" fn blk_log_generic(s: *mut trace_seq, ent: *const trace_entry,
     blk_log_dump_pdu(s, ent, has_cg);
     trace_seq_printf(s, "[%s]\n", cmd);
     } else {
-    if (t_sec(ent))
+    if (t_sec(ent)) {
     trace_seq_printf(s, "%llu + %u [%s]\n",
     t_sector(ent), t_sec(ent), cmd);
-    else
+    }
+    else {
     trace_seq_printf(s, "[%s]\n", cmd);
     }
     }
-    static void blk_log_with_error(struct trace_seq *s,
-    const struct trace_entry *ent, bool has_cg)
-    {
+    }
+#[no_mangle]
+pub unsafe extern "C" fn blk_log_with_error(s: *mut trace_seq, ent: *mut trace_entry, has_cg: bool) {
     if (t_action(ent) & BLK_TC_ACT(BLK_TC_PC)) {
     blk_log_dump_pdu(s, ent, has_cg);
     trace_seq_printf(s, "[%d]\n", t_error(ent));
     } else {
-    if (t_sec(ent))
+    if (t_sec(ent)) {
     trace_seq_printf(s, "%llu + %u [%d]\n",
     t_sector(ent),
     t_sec(ent), t_error(ent));
-    else
+    }
+    else {
     trace_seq_printf(s, "%llu [%d]\n",
     t_sector(ent), t_error(ent));
     }
     }
+    }
 #[no_mangle]
 unsafe extern "C" fn blk_log_remap(s: *mut trace_seq, ent: *const trace_entry, has_cg: bool) {
-    static void blk_log_remap(struct trace_seq *s, const struct trace_entry *ent, bool has_cg)
-    {
-    const struct blk_io_trace_remap *__r = pdu_start(ent, has_cg);
+    let mut __r = pdu_start(ent, has_cg);
     trace_seq_printf(s, "%llu + %u <- (%d,%d) %llu\n",
     t_sector(ent), t_sec(ent),
     MAJOR(be32_to_cpu(__r.device_from)),
@@ -1495,32 +1680,25 @@ unsafe extern "C" fn blk_log_remap(s: *mut trace_seq, ent: *const trace_entry, h
     }
 #[no_mangle]
 unsafe extern "C" fn blk_log_plug(s: *mut trace_seq, ent: *const trace_entry, has_cg: bool) {
-    static void blk_log_plug(struct trace_seq *s, const struct trace_entry *ent, bool has_cg)
-    {
     char cmd[TASK_COMM_LEN];
     trace_find_cmdline(ent.pid, cmd);
     trace_seq_printf(s, "[%s]\n", cmd);
     }
 #[no_mangle]
 unsafe extern "C" fn blk_log_unplug(s: *mut trace_seq, ent: *const trace_entry, has_cg: bool) {
-    static void blk_log_unplug(struct trace_seq *s, const struct trace_entry *ent, bool has_cg)
-    {
     char cmd[TASK_COMM_LEN];
     trace_find_cmdline(ent.pid, cmd);
     trace_seq_printf(s, "[%s] %llu\n", cmd, get_pdu_int(ent, has_cg));
     }
 #[no_mangle]
 unsafe extern "C" fn blk_log_split(s: *mut trace_seq, ent: *const trace_entry, has_cg: bool) {
-    static void blk_log_split(struct trace_seq *s, const struct trace_entry *ent, bool has_cg)
-    {
     char cmd[TASK_COMM_LEN];
     trace_find_cmdline(ent.pid, cmd);
     trace_seq_printf(s, "%llu / %llu [%s]\n", t_sector(ent),
     get_pdu_int(ent, has_cg), cmd);
     }
-    static void blk_log_msg(struct trace_seq *s, const struct trace_entry *ent,
-    bool has_cg)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn blk_log_msg(s: *mut trace_seq, ent: *mut trace_entry, has_cg: bool) {
     trace_seq_putmem(s, pdu_start(ent, has_cg),
     pdu_real_len(ent, has_cg));
     trace_seq_putc(s, '\n');
@@ -1530,69 +1708,41 @@ unsafe extern "C" fn blk_log_split(s: *mut trace_seq, ent: *const trace_entry, h
 //
 #[no_mangle]
 unsafe extern "C" fn blk_tracer_print_header(m: *mut seq_file) {
-    static void blk_tracer_print_header(struct seq_file *m)
-    {
-    if (!(blk_tracer_flags.val & TRACE_BLK_OPT_CLASSIC))
+    if (!(blk_tracer_flags.val & TRACE_BLK_OPT_CLASSIC)) {
     return;
+    }
     seq_puts(m, "# DEV   CPU TIMESTAMP     PID ACT FLG\n"
     "#  |     |     |           |   |   |\n");
     }
 #[no_mangle]
 unsafe extern "C" fn blk_tracer_start(tr: *mut trace_array) {
-    static void blk_tracer_start(struct trace_array *tr)
-    {
     blk_tracer_enabled = true;
     }
 #[no_mangle]
 unsafe extern "C" fn blk_tracer_init(tr: *mut trace_array) -> c_int {
-    static int blk_tracer_init(struct trace_array *tr)
-    {
     blk_tr = tr;
     blk_tracer_start(tr);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn blk_tracer_stop(tr: *mut trace_array) {
-    static void blk_tracer_stop(struct trace_array *tr)
-    {
     blk_tracer_enabled = false;
     }
 #[no_mangle]
 unsafe extern "C" fn blk_tracer_reset(tr: *mut trace_array) {
-    static void blk_tracer_reset(struct trace_array *tr)
-    {
     blk_tracer_stop(tr);
     }
-    static const struct {
-    const char *act[2];
-    void	   (*print)(struct trace_seq *s, const struct trace_entry *ent,
-    bool has_cg);
-    } what2act[] = {
-    [__BLK_TA_QUEUE]	= {{  "Q", "queue" },	   blk_log_generic },
-    [__BLK_TA_BACKMERGE]	= {{  "M", "backmerge" },  blk_log_generic },
-    [__BLK_TA_FRONTMERGE]	= {{  "F", "frontmerge" }, blk_log_generic },
-    [__BLK_TA_GETRQ]	= {{  "G", "getrq" },	   blk_log_generic },
-    [__BLK_TA_SLEEPRQ]	= {{  "S", "sleeprq" },	   blk_log_generic },
-    [__BLK_TA_REQUEUE]	= {{  "R", "requeue" },	   blk_log_with_error },
-    [__BLK_TA_ISSUE]	= {{  "D", "issue" },	   blk_log_generic },
-    [__BLK_TA_COMPLETE]	= {{  "C", "complete" },   blk_log_with_error },
-    [__BLK_TA_PLUG]		= {{  "P", "plug" },	   blk_log_plug },
-    [__BLK_TA_UNPLUG_IO]	= {{  "U", "unplug_io" },  blk_log_unplug },
-    [__BLK_TA_UNPLUG_TIMER]	= {{ "UT", "unplug_timer" }, blk_log_unplug },
-    [__BLK_TA_INSERT]	= {{  "I", "insert" },	   blk_log_generic },
-    [__BLK_TA_SPLIT]	= {{  "X", "split" },	   blk_log_split },
-    [__BLK_TA_REMAP]	= {{  "A", "remap" },	   blk_log_remap },
-    };
-    static enum print_line_t print_one_line(struct trace_iterator *iter,
+pub static mut what2act: usize = 0;
+    static enum print_line_t print_one_line(trace_iterator *iter,
     bool classic)
     {
-    struct trace_array *tr = iter.tr;
-    struct trace_seq *s = &iter.seq;
-    const struct blk_io_trace2 *t;
-    u16 what;
-    bool long_act;
-    blk_log_action_t *log_action;
-    bool has_cg;
+    let mut tr = iter.tr;
+    let mut s = &iter.seq;
+pub static mut t: *mut c_void = core::ptr::null_mut();
+    let mut what = 0;
+    let mut long_act = 0;
+pub static mut log_action: *mut c_void = core::ptr::null_mut();
+    let mut has_cg = 0;
     t	   = te_blk_io_trace(iter.ent);
     what	   = (t.action & ((1 << BLK_TC_SHIFT) - 1)) & ~__BLK_TA_CGROUP;
     long_act   = !!(tr.trace_flags & TRACE_ITER(VERBOSE));
@@ -1603,63 +1753,58 @@ unsafe extern "C" fn blk_tracer_reset(tr: *mut trace_array) {
     blk_log_msg(s, iter.ent, has_cg);
     return trace_handle_return(s);
     }
-    if (unlikely(what == 0 || what >= ARRAY_SIZE(what2act)))
+    if (unlikely(what == 0 || what >= ARRAY_SIZE!(what2act))) {
     trace_seq_printf(s, "Unknown action %x\n", what);
+    }
     else {
     log_action(iter, what2act[what].act[long_act], has_cg);
     what2act[what].print(s, iter.ent, has_cg);
     }
     return trace_handle_return(s);
     }
-    static enum print_line_t blk_trace_event_print(struct trace_iterator *iter,
-    int flags, struct trace_event *event)
+    static enum print_line_t blk_trace_event_print(trace_iterator *iter,
+    int flags, trace_event *event)
     {
     return print_one_line(iter, false);
     }
 #[no_mangle]
 unsafe extern "C" fn blk_trace_synthesize_old_trace(iter: *mut trace_iterator) {
-    static void blk_trace_synthesize_old_trace(struct trace_iterator *iter)
-    {
-    struct trace_seq *s = &iter.seq;
-    struct blk_io_trace2 *t = (struct blk_io_trace2 *)iter.ent;
-    let mut offset: c_int = offsetof(struct blk_io_trace2, sector);
-    struct blk_io_trace old = {
-    .magic	  = BLK_IO_TRACE_MAGIC | BLK_IO_TRACE_VERSION,
-    .time     = iter.ts,
-    };
+    let mut s = &iter.seq;
+    let mut t = iter.ent;
+pub static mut offset: c_int = 0;
+pub static mut blk_io_trace: usize = 0;
     trace_seq_putmem(s, &old, offset);
     trace_seq_putmem(s, &t.sector,
-    sizeof(old) - offset + t.pdu_len);
+    sizeof!(old) - offset + t.pdu_len);
     }
     static enum print_line_t
-    blk_trace_event_print_binary(struct trace_iterator *iter, int flags,
-    struct trace_event *event)
+    blk_trace_event_print_binary(trace_iterator *iter, int flags, trace_event *event)
     {
     blk_trace_synthesize_old_trace(iter);
     return trace_handle_return(&iter.seq);
     }
 #[no_mangle]
 unsafe extern "C" fn blk_tracer_print_line(iter: *mut trace_iterator) -> enum print_line_t {
-    static enum print_line_t blk_tracer_print_line(struct trace_iterator *iter)
-    {
     if ((iter.ent.type != TRACE_BLK) ||
-    !(blk_tracer_flags.val & TRACE_BLK_OPT_CLASSIC))
+    !(blk_tracer_flags.val & TRACE_BLK_OPT_CLASSIC)) {
     return TRACE_TYPE_UNHANDLED;
+    }
     return print_one_line(iter, true);
     }
-    static int
-    blk_tracer_set_flag(struct trace_array *tr, u32 old_flags, u32 bit, int set)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn blk_tracer_set_flag(tr: *mut trace_array, old_flags: u32, bit: u32, set: c_int) -> c_int {
 // don't output context-info for blk_classic output
     if (bit == TRACE_BLK_OPT_CLASSIC) {
-    if (set)
+    if (set) {
     tr.trace_flags &= ~TRACE_ITER(CONTEXT_INFO);
-    else
+    }
+    else {
     tr.trace_flags |= TRACE_ITER(CONTEXT_INFO);
+    }
     }
     return 0;
     }
-    static struct tracer blk_tracer __read_mostly = {
+    static struct tracer blk_tracer  = {
     .name		= "blk",
     .init		= blk_tracer_init,
     .reset		= blk_tracer_reset,
@@ -1670,44 +1815,32 @@ unsafe extern "C" fn blk_tracer_print_line(iter: *mut trace_iterator) -> enum pr
     .flags		= &blk_tracer_flags,
     .set_flag	= blk_tracer_set_flag,
     };
-    static struct trace_event_functions trace_blk_event_funcs = {
-    .trace		= blk_trace_event_print,
-    .binary		= blk_trace_event_print_binary,
-    };
-    static struct trace_event trace_blk_event = {
-    .type		= TRACE_BLK,
-    .funcs		= &trace_blk_event_funcs,
-    };
+pub static mut trace_event_functions: usize = 0;
+pub static mut trace_event: usize = 0;
     static struct work_struct blktrace_works __initdata;
 #[no_mangle]
-unsafe extern "C" fn __init_blk_tracer() -> int __init {
-    static int __init __init_blk_tracer(void)
-    {
+unsafe extern "C" fn __init_blk_tracer() -> c_int {
     if (!register_trace_event(&trace_blk_event)) {
-    pr_warn("Warning: could not register block events\n");
+    pr_warn!("Warning: could not register block events\n");
     return 1;
     }
     if (register_tracer(&blk_tracer) != 0) {
-    pr_warn("Warning: could not register the block tracer\n");
+    pr_warn!("Warning: could not register the block tracer\n");
     unregister_trace_event(&trace_blk_event);
     return 1;
     }
-    BUILD_BUG_ON(__alignof__(struct blk_user_trace_setup2) %
+    BUILD_BUG_ON!(__alignof__(blk_user_trace_setup2) %
     __alignof__(long));
-    BUILD_BUG_ON(__alignof__(struct blk_io_trace2) % __alignof__(long));
+    BUILD_BUG_ON!(__alignof__(blk_io_trace2) % __alignof__(long));
     return 0;
     }
 #[no_mangle]
-unsafe extern "C" fn blktrace_works_func(work: *mut work_struct) -> void __init {
-    static void __init blktrace_works_func(struct work_struct *work)
-    {
+unsafe extern "C" fn blktrace_works_func(work: *mut work_struct)  {
     __init_blk_tracer();
     }
 #[no_mangle]
-unsafe extern "C" fn init_blk_tracer() -> int __init {
-    static int __init init_blk_tracer(void)
-    {
-    let mut ret: c_int = 0;
+unsafe extern "C" fn init_blk_tracer() -> c_int {
+pub static mut ret: c_int = 0;
     if (trace_init_wq) {
     INIT_WORK(&blktrace_works, blktrace_works_func);
     queue_work(trace_init_wq, &blktrace_works);
@@ -1716,16 +1849,15 @@ unsafe extern "C" fn init_blk_tracer() -> int __init {
     }
     return ret;
     }
-    device_initcall(init_blk_tracer);
+    device_initcall!(init_blk_tracer);
 #[no_mangle]
 unsafe extern "C" fn blk_trace_remove_queue(q: *mut request_queue) -> c_int {
-    static int blk_trace_remove_queue(struct request_queue *q)
-    {
-    struct blk_trace *bt;
+pub static mut bt: *mut c_void = core::ptr::null_mut();
     bt = rcu_replace_pointer(q.blk_trace, core::ptr::null_mut(),
     lockdep_is_held(&q.debugfs_mutex));
-    if (bt == core::ptr::null_mut())
+    if (bt == core::ptr::null_mut()) {
     return -EINVAL;
+    }
     blk_trace_stop(bt);
     put_probe_ref();
     synchronize_rcu();
@@ -1735,39 +1867,36 @@ unsafe extern "C" fn blk_trace_remove_queue(q: *mut request_queue) -> c_int {
 //
 // Setup everything required to start tracing
 //
-    static int blk_trace_setup_queue(struct request_queue *q,
-    struct block_device *bdev)
-    {
-    struct blk_trace *bt = core::ptr::null_mut();
-    let mut ret: c_int = -ENOMEM;
+#[no_mangle]
+pub unsafe extern "C" fn blk_trace_setup_queue(q: *mut request_queue, bdev: *mut block_device) -> c_int {
+    let mut bt = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     bt = kzalloc_obj(*bt);
-    if (!bt)
+    if (!bt) {
     return -ENOMEM;
+    }
     bt.msg_data = __alloc_percpu(BLK_TN_MAX_MSG, __alignof__(char));
-    if (!bt.msg_data)
-    goto free_bt;
+    if (!bt.msg_data) {
+// goto;
+    }
     bt.dev = bdev.bd_dev;
     bt.act_mask = (u16)-1;
     blk_trace_setup_lba(bt, bdev);
     rcu_assign_pointer(q.blk_trace, bt);
     get_probe_ref();
     return 0;
-    free_bt:
+// label;
     blk_trace_free(q, bt);
     return ret;
     }
 //
 // sysfs interface to enable and configure tracing
 //
-    static ssize_t sysfs_blk_trace_attr_show(struct device *dev,
-    struct device_attribute *attr,
-    char *buf);
-    static ssize_t sysfs_blk_trace_attr_store(struct device *dev,
-    struct device_attribute *attr,
-    const char *buf, size_t count);
+// forward_decl: sysfs_blk_trace_attr_show;
+// forward_decl: sysfs_blk_trace_attr_store;
 
-    DEVICE_ATTR(_name, S_IRUGO | S_IWUSR, \
-    sysfs_blk_trace_attr_show, \
+    DEVICE_ATTR(_name, S_IRUGO | S_IWUSR, 
+    sysfs_blk_trace_attr_show, 
     sysfs_blk_trace_attr_store)
     static BLK_TRACE_DEVICE_ATTR(enable);
     static BLK_TRACE_DEVICE_ATTR(act_mask);
@@ -1782,56 +1911,35 @@ unsafe extern "C" fn blk_trace_remove_queue(q: *mut request_queue) -> c_int {
     &dev_attr_end_lba.attr,
     core::ptr::null_mut()
     };
-    struct attribute_group blk_trace_attr_group = {
-    .name  = "trace",
-    .attrs = blk_trace_attrs,
-    };
-    static const struct {
-    int mask;
-    const char *str;
-    } mask_maps[] = {
-    { BLK_TC_READ,		"read"		},
-    { BLK_TC_WRITE,		"write"		},
-    { BLK_TC_FLUSH,		"flush"		},
-    { BLK_TC_SYNC,		"sync"		},
-    { BLK_TC_QUEUE,		"queue"		},
-    { BLK_TC_REQUEUE,	"requeue"	},
-    { BLK_TC_ISSUE,		"issue"		},
-    { BLK_TC_COMPLETE,	"complete"	},
-    { BLK_TC_FS,		"fs"		},
-    { BLK_TC_PC,		"pc"		},
-    { BLK_TC_NOTIFY,	"notify"	},
-    { BLK_TC_AHEAD,		"ahead"		},
-    { BLK_TC_META,		"meta"		},
-    { BLK_TC_DISCARD,	"discard"	},
-    { BLK_TC_DRV_DATA,	"drv_data"	},
-    { BLK_TC_FUA,		"fua"		},
-    { BLK_TC_WRITE_ZEROES,	"write-zeroes"	},
-    };
+pub static mut attribute_group: usize = 0;
+pub static mut mask_maps: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn blk_trace_str2mask(str: *const c_char) -> c_int {
-    static int blk_trace_str2mask(const char *str)
-    {
-    int i;
-    let mut mask: c_int = 0;
-    char *buf, *s, *token;
+    let mut i = 0;
+pub static mut mask: c_int = 0;
+    let mut buf = core::ptr::null_mut();
+    let mut s = core::ptr::null_mut();
+    let mut token = core::ptr::null_mut();
     buf = kstrdup(str, GFP_KERNEL);
-    if (buf == core::ptr::null_mut())
+    if (buf == core::ptr::null_mut()) {
     return -ENOMEM;
+    }
     s = strstrip(buf);
     while (1) {
     token = strsep(&s, ",");
-    if (token == core::ptr::null_mut())
+    if (token == core::ptr::null_mut()) {
     break;
-    if (*token == '\0')
+    }
+    if (*token == '\0') {
     continue;
-    for (i = 0; i < ARRAY_SIZE(mask_maps); i++) {
+    }
+    while (i < ARRAY_SIZE!(mask_maps)) {
     if (strcasecmp(token, mask_maps[i].str) == 0) {
     mask |= mask_maps[i].mask;
     break;
     }
     }
-    if (i == ARRAY_SIZE(mask_maps)) {
+    if (i == ARRAY_SIZE!(mask_maps)) {
     mask = -EINVAL;
     break;
     }
@@ -1841,11 +1949,9 @@ unsafe extern "C" fn blk_trace_str2mask(str: *const c_char) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn blk_trace_mask2str(buf: *mut c_char, mask: c_int) -> isize {
-    static ssize_t blk_trace_mask2str(char *buf, int mask)
-    {
-    int i;
-    char *p = buf;
-    for (i = 0; i < ARRAY_SIZE(mask_maps); i++) {
+    let mut i = 0;
+    let mut p = buf;
+    while (i < ARRAY_SIZE!(mask_maps)) {
     if (mask & mask_maps[i].mask) {
     p += sprintf(p, "%s%s",
     (p == buf) ? "" : ",", mask_maps[i].str);
@@ -1854,66 +1960,66 @@ unsafe extern "C" fn blk_trace_mask2str(buf: *mut c_char, mask: c_int) -> isize 
 // p++ = '\n';
     return p - buf;
     }
-    static ssize_t sysfs_blk_trace_attr_show(struct device *dev,
-    struct device_attribute *attr,
-    char *buf)
-    {
-    struct block_device *bdev = dev_to_bdev(dev);
-    struct request_queue *q = bdev_get_queue(bdev);
-    struct blk_trace *bt;
-    let mut ret: isize = -ENXIO;
+#[no_mangle]
+pub unsafe extern "C" fn sysfs_blk_trace_attr_show(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char) -> ssize_t {
+    let mut bdev = dev_to_bdev(dev);
+    let mut q = bdev_get_queue(bdev);
+pub static mut bt: *mut c_void = core::ptr::null_mut();
+pub static mut ret: isize = 0;
     blk_debugfs_lock_nomemsave(q);
     bt = rcu_dereference_protected(q.blk_trace,
     lockdep_is_held(&q.debugfs_mutex));
     if (attr == &dev_attr_enable) {
     ret = sprintf(buf, "%u\n", !!bt);
-    goto out_unlock_bdev;
+// goto;
     }
-    if (bt == core::ptr::null_mut())
+    if (bt == core::ptr::null_mut()) {
     ret = sprintf(buf, "disabled\n");
-#[no_mangle]
-pub unsafe extern "C" fn if(&dev_attr_act_mask: attr ==) -> else {
-    else if (attr == &dev_attr_act_mask)
+    }
+
+    else if (attr == &dev_attr_act_mask) {
     ret = blk_trace_mask2str(buf, bt.act_mask);
-#[no_mangle]
-pub unsafe extern "C" fn if(&dev_attr_pid: attr ==) -> else {
-    else if (attr == &dev_attr_pid)
+    }
+
+    else if (attr == &dev_attr_pid) {
     ret = sprintf(buf, "%u\n", bt.pid);
-#[no_mangle]
-pub unsafe extern "C" fn if(&dev_attr_start_lba: attr ==) -> else {
-    else if (attr == &dev_attr_start_lba)
+    }
+
+    else if (attr == &dev_attr_start_lba) {
     ret = sprintf(buf, "%llu\n", bt.start_lba);
-#[no_mangle]
-pub unsafe extern "C" fn if(&dev_attr_end_lba: attr ==) -> else {
-    else if (attr == &dev_attr_end_lba)
+    }
+
+    else if (attr == &dev_attr_end_lba) {
     ret = sprintf(buf, "%llu\n", bt.end_lba);
-    out_unlock_bdev:
+    }
+// label;
     blk_debugfs_unlock_nomemrestore(q);
     return ret;
     }
-    static ssize_t sysfs_blk_trace_attr_store(struct device *dev,
-    struct device_attribute *attr,
-    const char *buf, size_t count)
-    {
-    struct block_device *bdev = dev_to_bdev(dev);
-    struct request_queue *q = bdev_get_queue(bdev);
-    struct blk_trace *bt;
-    unsigned int memflags;
-    u64 value;
-    let mut ret: isize = -EINVAL;
-    if (count == 0)
-    goto out;
+#[no_mangle]
+pub unsafe extern "C" fn sysfs_blk_trace_attr_store(dev: *mut device, attr: *mut device_attribute, buf: *mut c_char, count: size_t) -> ssize_t {
+    let mut bdev = dev_to_bdev(dev);
+    let mut q = bdev_get_queue(bdev);
+pub static mut bt: *mut c_void = core::ptr::null_mut();
+    let mut memflags = 0;
+    let mut value = 0;
+pub static mut ret: isize = 0;
+    if (count == 0) {
+// goto;
+    }
     if (attr == &dev_attr_act_mask) {
     if (kstrtoull(buf, 0, &value)) {
 // Assume it is a list of trace category names
     ret = blk_trace_str2mask(buf);
-    if (ret < 0)
-    goto out;
+    if (ret < 0) {
+// goto;
+    }
     value = ret;
     }
     } else {
-    if (kstrtoull(buf, 0, &value))
-    goto out;
+    if (kstrtoull(buf, 0, &value)) {
+// goto;
+    }
     }
     memflags = blk_debugfs_lock(q);
     bt = rcu_dereference_protected(q.blk_trace,
@@ -1921,13 +2027,15 @@ pub unsafe extern "C" fn if(&dev_attr_end_lba: attr ==) -> else {
     if (attr == &dev_attr_enable) {
     if (!!value == !!bt) {
     ret = 0;
-    goto out_unlock_bdev;
+// goto;
     }
-    if (value)
+    if (value) {
     ret = blk_trace_setup_queue(q, bdev);
-    else
+    }
+    else {
     ret = blk_trace_remove_queue(q);
-    goto out_unlock_bdev;
+    }
+// goto;
     }
     ret = 0;
     if (bt == core::ptr::null_mut()) {
@@ -1936,24 +2044,25 @@ pub unsafe extern "C" fn if(&dev_attr_end_lba: attr ==) -> else {
     lockdep_is_held(&q.debugfs_mutex));
     }
     if (ret == 0) {
-    if (attr == &dev_attr_act_mask)
+    if (attr == &dev_attr_act_mask) {
     bt.act_mask = value;
-#[no_mangle]
-pub unsafe extern "C" fn if(&dev_attr_pid: attr ==) -> else {
-    else if (attr == &dev_attr_pid)
+    }
+
+    else if (attr == &dev_attr_pid) {
     bt.pid = value;
-#[no_mangle]
-pub unsafe extern "C" fn if(&dev_attr_start_lba: attr ==) -> else {
-    else if (attr == &dev_attr_start_lba)
+    }
+
+    else if (attr == &dev_attr_start_lba) {
     bt.start_lba = value;
-#[no_mangle]
-pub unsafe extern "C" fn if(&dev_attr_end_lba: attr ==) -> else {
-    else if (attr == &dev_attr_end_lba)
+    }
+
+    else if (attr == &dev_attr_end_lba) {
     bt.end_lba = value;
     }
-    out_unlock_bdev:
+    }
+// label;
     blk_debugfs_unlock(q, memflags);
-    out:
+// label;
     return ret ? ret : count;
     }
 
@@ -1968,69 +2077,87 @@ pub unsafe extern "C" fn if(&dev_attr_end_lba: attr ==) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn blk_fill_rwbs(rwbs: *mut c_char, opf: blk_opf_t) {
-    void blk_fill_rwbs(char *rwbs, blk_opf_t opf)
-    {
-    let mut i: c_int = 0;
-    if (opf & REQ_PREFLUSH)
+pub static mut i: c_int = 0;
+    if (opf & REQ_PREFLUSH) {
     rwbs[i++] = 'F';
-    switch (opf & REQ_OP_MASK) {
-    case REQ_OP_WRITE:
+    }
+    match (opf & REQ_OP_MASK) {
+    REQ_OP_WRITE => {
     rwbs[i++] = 'W';
-    break;
-    case REQ_OP_DISCARD:
+    // break;
+    }
+    REQ_OP_DISCARD => {
     rwbs[i++] = 'D';
-    break;
-    case REQ_OP_SECURE_ERASE:
+    // break;
+    }
+    REQ_OP_SECURE_ERASE => {
     rwbs[i++] = 'D';
     rwbs[i++] = 'E';
-    break;
-    case REQ_OP_FLUSH:
+    // break;
+    }
+    REQ_OP_FLUSH => {
     rwbs[i++] = 'F';
-    break;
-    case REQ_OP_READ:
+    // break;
+    }
+    REQ_OP_READ => {
     rwbs[i++] = 'R';
-    break;
-    case REQ_OP_ZONE_APPEND:
+    // break;
+    }
+    REQ_OP_ZONE_APPEND => {
     rwbs[i++] = 'Z';
     rwbs[i++] = 'A';
-    break;
-    case REQ_OP_ZONE_RESET:
-    case REQ_OP_ZONE_RESET_ALL:
+    // break;
+    }
+    REQ_OP_ZONE_RESET => {
+    }
+    REQ_OP_ZONE_RESET_ALL => {
     rwbs[i++] = 'Z';
     rwbs[i++] = 'R';
-    if ((opf & REQ_OP_MASK) == REQ_OP_ZONE_RESET_ALL)
+    if ((opf & REQ_OP_MASK) == REQ_OP_ZONE_RESET_ALL) {
     rwbs[i++] = 'A';
-    break;
-    case REQ_OP_ZONE_FINISH:
+    }
+    // break;
+    }
+    REQ_OP_ZONE_FINISH => {
     rwbs[i++] = 'Z';
     rwbs[i++] = 'F';
-    break;
-    case REQ_OP_ZONE_OPEN:
+    // break;
+    }
+    REQ_OP_ZONE_OPEN => {
     rwbs[i++] = 'Z';
     rwbs[i++] = 'O';
-    break;
-    case REQ_OP_ZONE_CLOSE:
+    // break;
+    }
+    REQ_OP_ZONE_CLOSE => {
     rwbs[i++] = 'Z';
     rwbs[i++] = 'C';
-    break;
-    case REQ_OP_WRITE_ZEROES:
+    // break;
+    }
+    REQ_OP_WRITE_ZEROES => {
     rwbs[i++] = 'W';
     rwbs[i++] = 'Z';
-    break;
-    default:
+    // break;
+    }
+    _ => {
     rwbs[i++] = 'N';
     }
-    if (opf & REQ_FUA)
+    }
+    if (opf & REQ_FUA) {
     rwbs[i++] = 'F';
-    if (opf & REQ_RAHEAD)
+    }
+    if (opf & REQ_RAHEAD) {
     rwbs[i++] = 'A';
-    if (opf & REQ_SYNC)
+    }
+    if (opf & REQ_SYNC) {
     rwbs[i++] = 'S';
-    if (opf & REQ_META)
+    }
+    if (opf & REQ_META) {
     rwbs[i++] = 'M';
-    if (opf & REQ_ATOMIC)
+    }
+    if (opf & REQ_ATOMIC) {
     rwbs[i++] = 'U';
-    WARN_ON_ONCE(i >= RWBS_LEN);
+    }
+    WARN_ON_ONCE!(i >= RWBS_LEN);
     rwbs[i] = '\0';
     }
     EXPORT_SYMBOL_GPL(blk_fill_rwbs);

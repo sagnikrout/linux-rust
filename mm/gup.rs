@@ -34,15 +34,265 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
 
-    static inline void sanity_check_pinned_pages(struct page **pages,
-    unsigned long npages)
-    {
-    if (!IS_ENABLED(CONFIG_DEBUG_VM))
+#[no_mangle]
+pub unsafe extern "C" fn sanity_check_pinned_pages(pages: *mut *mut page, npages: c_ulong) {
+    if (!IS_ENABLED!(CONFIG_DEBUG_VM)) {
     return;
+    }
 //
 // We only pin anonymous pages if they are exclusive. Once pinned, we
 // can no longer turn them possibly shared and PageAnonExclusive() will
@@ -55,36 +305,42 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // the head page (PMD-mapped THP) should be PageAnonExclusive(). If
 // neither is the case, there is certainly something wrong.
 //
-    for (; npages; npages--, pages++) {
-    struct page *page = *pages;
-    struct folio *folio;
-    if (!page)
+    while (npages) {
+    let mut page = *pages;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    if (!page) {
     continue;
+    }
     folio = page_folio(page);
     if (is_zero_page(page) ||
-    !folio_test_anon(folio))
+    !folio_test_anon(folio)) {
     continue;
-    if (!folio_test_large(folio) || folio_test_hugetlb(folio))
+    }
+    if (!folio_test_large(folio) || folio_test_hugetlb(folio)) {
     VM_WARN_ON_ONCE_FOLIO(!PageAnonExclusive(&folio.page), folio);
-    else
+    }
+    else {
 // Either a PTE-mapped or a PMD-mapped THP.
     VM_WARN_ON_ONCE_PAGE(!PageAnonExclusive(&folio.page) &&
     !PageAnonExclusive(page), page);
+    }
     }
     }
 //
 // Return the folio with ref appropriately incremented,
 // or NULL if that failed.
 //
-    static inline struct folio *try_get_folio(struct page *page, int refs)
-    {
-    struct folio *folio;
-    retry:
+#[no_mangle]
+pub unsafe extern "C" fn try_get_folio(page: *mut page, refs: c_int) -> *mut c_void {
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+// label;
     folio = page_folio(page);
-    if (WARN_ON_ONCE(folio_ref_count(folio) < 0))
+    if (WARN_ON_ONCE!(folio_ref_count(folio) < 0)) {
     return core::ptr::null_mut();
-    if (unlikely(!folio_ref_try_add(folio, refs)))
+    }
+    if (unlikely(!folio_ref_try_add(folio, refs))) {
     return core::ptr::null_mut();
+    }
 //
 // At this point we have a stable reference to the folio; but it
 // could be that between calling page_folio() and the refcount
@@ -96,22 +352,23 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
     if (unlikely(page_folio(page) != folio)) {
     folio_put_refs(folio, refs);
-    goto retry;
+// goto;
     }
     return folio;
     }
 #[no_mangle]
 unsafe extern "C" fn gup_put_folio(folio: *mut folio, refs: c_int, flags: c_uint) {
-    static void gup_put_folio(struct folio *folio, int refs, unsigned int flags)
-    {
     if (flags & FOLL_PIN) {
-    if (is_zero_folio(folio))
+    if (is_zero_folio(folio)) {
     return;
+    }
     node_stat_mod_folio(folio, NR_FOLL_PIN_RELEASED, refs);
-    if (folio_has_pincount(folio))
+    if (folio_has_pincount(folio)) {
     atomic_sub(refs, &folio._pincount);
-    else
+    }
+    else {
     refs *= GUP_PIN_COUNTING_BIAS;
+    }
     }
     folio_put_refs(folio, refs);
     }
@@ -138,23 +395,26 @@ unsafe extern "C" fn gup_put_folio(folio: *mut folio, refs: c_int, flags: c_uint
 // It is called when we have a stable reference for the folio, typically in
 // GUP slow path.
 //
-    int __must_check try_grab_folio(struct folio *folio, int refs,
+    int __must_check try_grab_folio(folio *folio, int refs,
     unsigned int flags)
     {
-    if (WARN_ON_ONCE(folio_ref_count(folio) <= 0))
+    if (WARN_ON_ONCE!(folio_ref_count(folio) <= 0)) {
     return -ENOMEM;
-    if (unlikely(!(flags & FOLL_PCI_P2PDMA) && folio_is_pci_p2pdma(folio)))
+    }
+    if (unlikely(!(flags & FOLL_PCI_P2PDMA) && folio_is_pci_p2pdma(folio))) {
     return -EREMOTEIO;
-    if (flags & FOLL_GET)
+    }
+    if (flags & FOLL_GET) {
     folio_ref_add(folio, refs);
-#[no_mangle]
-pub unsafe extern "C" fn if(FOLL_PIN: flags &) -> else {
+    }
+if true {
 //
 // Don't take a pin on the zero page - it's not going anywhere
 // and it is used in a *lot* of places.
 //
-    if (is_zero_folio(folio))
+    if (is_zero_folio(folio)) {
     return 0;
+    }
 //
 // Increment the normal page refcount field at least once,
 // so that the page really is pinned.
@@ -180,8 +440,6 @@ pub unsafe extern "C" fn if(FOLL_PIN: flags &) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn unpin_user_page(page: *mut page) {
-    void unpin_user_page(struct page *page)
-    {
     sanity_check_pinned_pages(&page, 1);
     gup_put_folio(page_folio(page), 1, FOLL_PIN);
     }
@@ -195,8 +453,6 @@ pub unsafe extern "C" fn unpin_user_page(page: *mut page) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn unpin_folio(folio: *mut folio) {
-    void unpin_folio(struct folio *folio)
-    {
     gup_put_folio(folio, 1, FOLL_PIN);
     }
     EXPORT_SYMBOL_GPL(unpin_folio);
@@ -209,44 +465,43 @@ pub unsafe extern "C" fn unpin_folio(folio: *mut folio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_add_pin(folio: *mut folio) {
-    void folio_add_pin(struct folio *folio)
-    {
-    if (is_zero_folio(folio))
+    if (is_zero_folio(folio)) {
     return;
+    }
 //
 // Similar to try_grab_folio(): be sure to *also* increment the normal
 // page refcount field at least once, so that the page really is
 // pinned.
 //
     if (folio_has_pincount(folio)) {
-    WARN_ON_ONCE(atomic_read(&folio._pincount) < 1);
+    WARN_ON_ONCE!(atomic_read(&folio._pincount) < 1);
     folio_ref_inc(folio);
     atomic_inc(&folio._pincount);
     } else {
-    WARN_ON_ONCE(folio_ref_count(folio) < GUP_PIN_COUNTING_BIAS);
+    WARN_ON_ONCE!(folio_ref_count(folio) < GUP_PIN_COUNTING_BIAS);
     folio_ref_add(folio, GUP_PIN_COUNTING_BIAS);
     }
     }
-    static inline struct folio *gup_folio_range_next(struct page *start,
-    unsigned long npages, unsigned long i, unsigned int *ntails)
-    {
-    struct page *next = start + i;
-    struct folio *folio = page_folio(next);
-    let mut nr: c_uint = 1;
-    if (folio_test_large(folio))
+#[no_mangle]
+pub unsafe extern "C" fn gup_folio_range_next(start: *mut page, npages: c_ulong, i: c_ulong, ntails: *mut c_uint) -> *mut c_void {
+    let mut next = start + i;
+    let mut folio = page_folio(next);
+pub static mut nr: c_uint = 1;
+    if (folio_test_large(folio)) {
     nr = min_t(unsigned int, npages - i,
     folio_nr_pages(folio) - folio_page_idx(folio, next));
+    }
 // ntails = nr;
     return folio;
     }
-    static inline struct folio *gup_folio_next(struct page **list,
-    unsigned long npages, unsigned long i, unsigned int *ntails)
-    {
-    struct folio *folio = page_folio(list[i]);
-    unsigned int nr;
-    for (nr = i + 1; nr < npages; nr++) {
-    if (page_folio(list[nr]) != folio)
+#[no_mangle]
+pub unsafe extern "C" fn gup_folio_next(list: *mut *mut page, npages: c_ulong, i: c_ulong, ntails: *mut c_uint) -> *mut c_void {
+    let mut folio = page_folio(list[i]);
+    let mut nr = 0;
+    while (nr < npages) {
+    if (page_folio(list[nr]) != folio) {
     break;
+    }
     }
 // ntails = nr - i;
     return folio;
@@ -272,18 +527,17 @@ pub unsafe extern "C" fn folio_add_pin(folio: *mut folio) {
 // because _lock() is usually required, and b) hand code it:
 // set_page_dirty_lock(), unpin_user_page().
 //
-    void unpin_user_pages_dirty_lock(struct page **pages, unsigned long npages,
-    bool make_dirty)
-    {
-    unsigned long i;
-    struct folio *folio;
-    unsigned int nr;
+#[no_mangle]
+pub unsafe extern "C" fn unpin_user_pages_dirty_lock(pages: *mut *mut page, npages: c_ulong, make_dirty: bool) {
+    let mut i = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut nr = 0;
     if (!make_dirty) {
     unpin_user_pages(pages, npages);
     return;
     }
     sanity_check_pinned_pages(pages, npages);
-    for (i = 0; i < npages; i += nr) {
+    while (i < npages) {
     folio = gup_folio_next(pages, npages, i, &nr);
 //
 // Checking PageDirty at this point may race with
@@ -338,14 +592,13 @@ pub unsafe extern "C" fn folio_add_pin(folio: *mut folio) {
 // because _lock() is usually required, and b) hand code it:
 // set_page_dirty_lock(), unpin_user_page().
 //
-    void unpin_user_page_range_dirty_lock(struct page *page, unsigned long npages,
-    bool make_dirty)
-    {
-    unsigned long i;
-    struct folio *folio;
-    unsigned int nr;
+#[no_mangle]
+pub unsafe extern "C" fn unpin_user_page_range_dirty_lock(page: *mut page, npages: c_ulong, make_dirty: bool) {
+    let mut i = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut nr = 0;
     VM_WARN_ON_ONCE(!page_range_contiguous(page, npages));
-    for (i = 0; i < npages; i += nr) {
+    while (i < npages) {
     folio = gup_folio_range_next(page, npages, i, &nr);
     if (make_dirty && !folio_test_dirty(folio)) {
     folio_lock(folio);
@@ -358,17 +611,15 @@ pub unsafe extern "C" fn folio_add_pin(folio: *mut folio) {
     EXPORT_SYMBOL(unpin_user_page_range_dirty_lock);
 #[no_mangle]
 unsafe extern "C" fn gup_fast_unpin_user_pages(pages: *mut page, npages: c_ulong) {
-    static void gup_fast_unpin_user_pages(struct page **pages, unsigned long npages)
-    {
-    unsigned long i;
-    struct folio *folio;
-    unsigned int nr;
+    let mut i = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut nr = 0;
 //
 // Don't perform any sanity checks because we might have raced with
 // fork() and some anonymous pages might now actually be shared --
 // which is why we're unpinning after all.
 //
-    for (i = 0; i < npages; i += nr) {
+    while (i < npages) {
     folio = gup_folio_next(pages, npages, i, &nr);
     gup_put_folio(folio, nr, FOLL_PIN);
     }
@@ -384,20 +635,19 @@ unsafe extern "C" fn gup_fast_unpin_user_pages(pages: *mut page, npages: c_ulong
 //
 #[no_mangle]
 pub unsafe extern "C" fn unpin_user_pages(pages: *mut page, npages: c_ulong) {
-    void unpin_user_pages(struct page **pages, unsigned long npages)
-    {
-    unsigned long i;
-    struct folio *folio;
-    unsigned int nr;
+    let mut i = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut nr = 0;
 //
-// If this WARN_ON() fires, then the system *might* be leaking pages (by
+// If this WARN_ON!() fires, then the system *might* be leaking pages (by
 // leaving them pinned), but probably not. More likely, gup/pup returned
 // a hard -ERRNO error to the caller, who erroneously passed it here.
 //
-    if (WARN_ON(IS_ERR_VALUE(npages)))
+    if (WARN_ON!(IS_ERR_VALUE(npages))) {
     return;
+    }
     sanity_check_pinned_pages(pages, npages);
-    for (i = 0; i < npages; i += nr) {
+    while (i < npages) {
     if (!pages[i]) {
     nr = 1;
     continue;
@@ -416,8 +666,6 @@ pub unsafe extern "C" fn unpin_user_pages(pages: *mut page, npages: c_ulong) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn unpin_user_folio(folio: *mut folio, npages: c_ulong) {
-    void unpin_user_folio(struct folio *folio, unsigned long npages)
-    {
     gup_put_folio(folio, npages, FOLL_PIN);
     }
     EXPORT_SYMBOL(unpin_user_folio);
@@ -432,23 +680,24 @@ pub unsafe extern "C" fn unpin_user_folio(folio: *mut folio, npages: c_ulong) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn unpin_folios(folios: *mut folio, nfolios: c_ulong) {
-    void unpin_folios(struct folio **folios, unsigned long nfolios)
-    {
-    let mut i: c_ulong = 0, j;
+pub static mut i: c_ulong = 0;
 //
-// If this WARN_ON() fires, then the system *might* be leaking folios
+// If this WARN_ON!() fires, then the system *might* be leaking folios
 // (by leaving them pinned), but probably not. More likely, gup/pup
 // returned a hard -ERRNO error to the caller, who erroneously passed
 // it here.
 //
-    if (WARN_ON(IS_ERR_VALUE(nfolios)))
+    if (WARN_ON!(IS_ERR_VALUE(nfolios))) {
     return;
+    }
     while (i < nfolios) {
-    for (j = i + 1; j < nfolios; j++)
+    for (j = i + 1; j < nfolios; j++) {
     if (folios[i] != folios[j])
     break;
-    if (folios[i])
+    }
+    if (folios[i]) {
     gup_put_folio(folios[i], j - i, FOLL_PIN);
+    }
     i = j;
     }
     }
@@ -460,10 +709,9 @@ pub unsafe extern "C" fn unpin_folios(folios: *mut folio, nfolios: c_ulong) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn mm_set_has_pinned_flag(mm: *mut mm_struct) {
-    static inline void mm_set_has_pinned_flag(struct mm_struct *mm)
-    {
-    if (!mm_flags_test(MMF_HAS_PINNED, mm))
+    if (!mm_flags_test(MMF_HAS_PINNED, mm)) {
     mm_flags_set(MMF_HAS_PINNED, mm);
+    }
     }
 
 //
@@ -495,28 +743,32 @@ pub unsafe extern "C" fn mm_set_has_pinned_flag(mm: *mut mm_struct) {
 // It uses add ref unless zero to elevate the folio refcount and must be called
 // in fast path only.
 //
-    static struct folio *try_grab_folio_fast(struct page *page, int refs,
-    unsigned int flags)
-    {
-    struct folio *folio;
+#[no_mangle]
+pub unsafe extern "C" fn try_grab_folio_fast(page: *mut page, refs: c_int, flags: c_uint) -> *mut c_void {
+pub static mut folio: *mut c_void = core::ptr::null_mut();
 // Raise warn if it is not called in fast GUP
     VM_WARN_ON_ONCE(!irqs_disabled());
-    if (WARN_ON_ONCE((flags & (FOLL_GET | FOLL_PIN)) == 0))
+    if (WARN_ON_ONCE!((flags & (FOLL_GET | FOLL_PIN)) == 0)) {
     return core::ptr::null_mut();
-    if (unlikely(!(flags & FOLL_PCI_P2PDMA) && is_pci_p2pdma_page(page)))
+    }
+    if (unlikely(!(flags & FOLL_PCI_P2PDMA) && is_pci_p2pdma_page(page))) {
     return core::ptr::null_mut();
-    if (flags & FOLL_GET)
+    }
+    if (flags & FOLL_GET) {
     return try_get_folio(page, refs);
+    }
 // FOLL_PIN is set
 //
 // Don't take a pin on the zero page - it's not going anywhere
 // and it is used in a *lot* of places.
 //
-    if (is_zero_page(page))
+    if (is_zero_page(page)) {
     return page_folio(page);
+    }
     folio = try_get_folio(page, refs);
-    if (!folio)
+    if (!folio) {
     return core::ptr::null_mut();
+    }
 //
 // Can't do FOLL_LONGTERM + FOLL_PIN gup fast path if not in a
 // right zone, so fail and let the caller fall back to the slow
@@ -535,11 +787,13 @@ pub unsafe extern "C" fn mm_set_has_pinned_flag(mm: *mut mm_struct) {
 // is pinned.  That's why the refcount from the earlier
 // try_get_folio() is left intact.
 //
-    if (folio_has_pincount(folio))
+    if (folio_has_pincount(folio)) {
     atomic_add(refs, &folio._pincount);
-    else
+    }
+    else {
     folio_ref_add(folio,
     refs * (GUP_PIN_COUNTING_BIAS - 1));
+    }
 //
 // Adjust the pincount before re-checking the PTE for changes.
 // This is essentially a smp_mb() and is paired with a memory
@@ -551,32 +805,35 @@ pub unsafe extern "C" fn mm_set_has_pinned_flag(mm: *mut mm_struct) {
     }
 
 // Common code for can_follow_write_*
-    static inline bool can_follow_write_common(struct page *page,
-    struct vm_area_struct *vma, unsigned int flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn can_follow_write_common(page: *mut page, vma: *mut vm_area_struct, flags: c_uint) -> bool {
 // Maybe FOLL_FORCE is set to override it?
-    if (!(flags & FOLL_FORCE))
+    if (!(flags & FOLL_FORCE)) {
     return false;
+    }
 // But FOLL_FORCE has no effect on shared mappings
-    if (vma.vm_flags & (VM_MAYSHARE | VM_SHARED))
+    if (vma.vm_flags & (VM_MAYSHARE | VM_SHARED)) {
     return false;
+    }
 // ... or read-only private ones
-    if (!(vma.vm_flags & VM_MAYWRITE))
+    if (!(vma.vm_flags & VM_MAYWRITE)) {
     return false;
+    }
 // ... or already writable ones that just need to take a write fault
-    if (vma.vm_flags & VM_WRITE)
+    if (vma.vm_flags & VM_WRITE) {
     return false;
+    }
 //
 // See can_change_pte_writable(): we broke COW and could map the page
 // writable if we have an exclusive anonymous page ...
 //
     return page && PageAnon(page) && PageAnonExclusive(page);
     }
-    static struct page *no_page_table(struct vm_area_struct *vma,
-    unsigned int flags, unsigned long address)
-    {
-    if (!(flags & FOLL_DUMP))
+#[no_mangle]
+pub unsafe extern "C" fn no_page_table(vma: *mut vm_area_struct, flags: c_uint, address: c_ulong) -> *mut c_void {
+    if (!(flags & FOLL_DUMP)) {
     return core::ptr::null_mut();
+    }
 //
 // When core dumping, we don't want to allocate unnecessary pages or
 // page tables.  Return error instead of NULL to skip handle_mm_fault,
@@ -585,9 +842,10 @@ pub unsafe extern "C" fn mm_set_has_pinned_flag(mm: *mut mm_struct) {
 // be zero-filled if handle_mm_fault() actually did handle it.
 //
     if (is_vm_hugetlb_page(vma)) {
-    struct hstate *h = hstate_vma(vma);
-    if (!hugetlbfs_pagecache_present(h, vma, address))
+    let mut h = hstate_vma(vma);
+    if (!hugetlbfs_pagecache_present(h, vma, address)) {
     return ERR_PTR(-EFAULT);
+    }
     } else if ((vma_is_anonymous(vma) || !vma.vm_ops.fault)) {
     return ERR_PTR(-EFAULT);
     }
@@ -595,113 +853,118 @@ pub unsafe extern "C" fn mm_set_has_pinned_flag(mm: *mut mm_struct) {
     }
 
 // FOLL_FORCE can write to even unwritable PUDs in COW mappings.
-    static inline bool can_follow_write_pud(pud_t pud, struct page *page,
-    struct vm_area_struct *vma,
-    unsigned int flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn can_follow_write_pud(pud: pud_t, page: *mut page, vma: *mut vm_area_struct, flags: c_uint) -> bool {
 // If the pud is writable, we can write to the page.
-    if (pud_write(pud))
+    if (pud_write(pud)) {
     return true;
+    }
     return can_follow_write_common(page, vma, flags);
     }
-    static struct page *follow_huge_pud(struct vm_area_struct *vma,
-    unsigned long addr, pud_t *pudp,
-    int flags, unsigned long *page_mask)
-    {
-    struct mm_struct *mm = vma.vm_mm;
-    struct page *page;
-    let mut pud: pud_t = *pudp;
-    let mut pfn: c_ulong = pud_pfn(pud);
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn follow_huge_pud(vma: *mut vm_area_struct, addr: c_ulong, pudp: *mut pud_t, flags: c_int, page_mask: *mut c_ulong) -> *mut c_void {
+    let mut mm = vma.vm_mm;
+pub static mut page: *mut c_void = core::ptr::null_mut();
+pub static mut pud: pud_t = 0;
+pub static mut pfn: c_ulong = 0;
+    let mut ret = 0;
     assert_spin_locked(pud_lockptr(mm, pudp));
-    if (!pud_present(pud))
+    if (!pud_present(pud)) {
     return core::ptr::null_mut();
+    }
     if ((flags & FOLL_WRITE) &&
-    !can_follow_write_pud(pud, pfn_to_page(pfn), vma, flags))
+    !can_follow_write_pud(pud, pfn_to_page(pfn), vma, flags)) {
     return core::ptr::null_mut();
+    }
     pfn += (addr & ~PUD_MASK) >> PAGE_SHIFT;
     page = pfn_to_page(pfn);
-    if (!pud_write(pud) && gup_must_unshare(vma, flags, page))
+    if (!pud_write(pud) && gup_must_unshare(vma, flags, page)) {
     return ERR_PTR(-EMLINK);
+    }
     ret = try_grab_folio(page_folio(page), 1, flags);
-    if (ret)
+    if (ret) {
     page = ERR_PTR(ret);
-    else
+    }
+    else {
 // page_mask = HPAGE_PUD_NR - 1;
+    }
     return page;
     }
 // FOLL_FORCE can write to even unwritable PMDs in COW mappings.
-    static inline bool can_follow_write_pmd(pmd_t pmd, struct page *page,
-    struct vm_area_struct *vma,
-    unsigned int flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn can_follow_write_pmd(pmd: pmd_t, page: *mut page, vma: *mut vm_area_struct, flags: c_uint) -> bool {
 // If the pmd is writable, we can write to the page.
-    if (pmd_write(pmd))
+    if (pmd_write(pmd)) {
     return true;
-    if (!can_follow_write_common(page, vma, flags))
+    }
+    if (!can_follow_write_common(page, vma, flags)) {
     return false;
+    }
 // ... and a write-fault isn't required for other reasons.
-    if (pmd_needs_soft_dirty_wp(vma, pmd))
+    if (pmd_needs_soft_dirty_wp(vma, pmd)) {
     return false;
+    }
     return !userfaultfd_huge_pmd_wp(vma, pmd);
     }
-    static struct page *follow_huge_pmd(struct vm_area_struct *vma,
-    unsigned long addr, pmd_t *pmd,
-    unsigned int flags,
-    unsigned long *page_mask)
-    {
-    struct mm_struct *mm = vma.vm_mm;
-    let mut pmdval: pmd_t = *pmd;
-    struct page *page;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn follow_huge_pmd(vma: *mut vm_area_struct, addr: c_ulong, pmd: *mut pmd_t, flags: c_uint, page_mask: *mut c_ulong) -> *mut c_void {
+    let mut mm = vma.vm_mm;
+pub static mut pmdval: pmd_t = 0;
+pub static mut page: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     assert_spin_locked(pmd_lockptr(mm, pmd));
     page = pmd_page(pmdval);
     if ((flags & FOLL_WRITE) &&
-    !can_follow_write_pmd(pmdval, page, vma, flags))
+    !can_follow_write_pmd(pmdval, page, vma, flags)) {
     return core::ptr::null_mut();
+    }
 // Avoid dumping huge zero page
-    if ((flags & FOLL_DUMP) && is_huge_zero_pmd(pmdval))
+    if ((flags & FOLL_DUMP) && is_huge_zero_pmd(pmdval)) {
     return ERR_PTR(-EFAULT);
-    if (pmd_protnone(*pmd) && !gup_can_follow_protnone(vma, flags))
+    }
+    if (pmd_protnone(*pmd) && !gup_can_follow_protnone(vma, flags)) {
     return core::ptr::null_mut();
-    if (!pmd_write(pmdval) && gup_must_unshare(vma, flags, page))
+    }
+    if (!pmd_write(pmdval) && gup_must_unshare(vma, flags, page)) {
     return ERR_PTR(-EMLINK);
+    }
     VM_WARN_ON_ONCE_PAGE((flags & FOLL_PIN) && PageAnon(page) &&
     !PageAnonExclusive(page), page);
     ret = try_grab_folio(page_folio(page), 1, flags);
-    if (ret)
+    if (ret) {
     return ERR_PTR(ret);
+    }
 
-    if (pmd_trans_huge(pmdval) && (flags & FOLL_TOUCH))
+    if (pmd_trans_huge(pmdval) && (flags & FOLL_TOUCH)) {
     touch_pmd(vma, addr, pmd, flags & FOLL_WRITE);
+    }
 
     page += (addr & ~HPAGE_PMD_MASK) >> PAGE_SHIFT;
 // page_mask = HPAGE_PMD_NR - 1;
     return page;
     }
 
-    static struct page *follow_huge_pud(struct vm_area_struct *vma,
-    unsigned long addr, pud_t *pudp,
-    int flags, unsigned long *page_mask)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: follow_huge_pud
+pub unsafe extern "C" fn follow_huge_pud_dup(vma: *mut vm_area_struct, addr: c_ulong, pudp: *mut pud_t, flags: c_int, page_mask: *mut c_ulong) -> *mut c_void {
     return core::ptr::null_mut();
     }
-    static struct page *follow_huge_pmd(struct vm_area_struct *vma,
-    unsigned long addr, pmd_t *pmd,
-    unsigned int flags,
-    unsigned long *page_mask)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: follow_huge_pmd
+pub unsafe extern "C" fn follow_huge_pmd_dup(vma: *mut vm_area_struct, addr: c_ulong, pmd: *mut pmd_t, flags: c_uint, page_mask: *mut c_ulong) -> *mut c_void {
     return core::ptr::null_mut();
     }
 
-    static int follow_pfn_pte(struct vm_area_struct *vma, unsigned long address,
-    pte_t *pte, unsigned int flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn follow_pfn_pte(vma: *mut vm_area_struct, address: c_ulong, pte: *mut pte_t, flags: c_uint) -> c_int {
     if (flags & FOLL_TOUCH) {
-    let mut orig_entry: pte_t = ptep_get(pte);
-    let mut entry: pte_t = orig_entry;
-    if (flags & FOLL_WRITE)
+pub static mut orig_entry: pte_t = 0;
+pub static mut entry: pte_t = 0;
+    if (flags & FOLL_WRITE) {
     entry = pte_mkdirty(entry);
+    }
     entry = pte_mkyoung(entry);
     if (!pte_same(orig_entry, entry)) {
     set_pte_at(vma.vm_mm, address, pte, entry);
@@ -712,37 +975,40 @@ pub unsafe extern "C" fn mm_set_has_pinned_flag(mm: *mut mm_struct) {
     return -EEXIST;
     }
 // FOLL_FORCE can write to even unwritable PTEs in COW mappings.
-    static inline bool can_follow_write_pte(pte_t pte, struct page *page,
-    struct vm_area_struct *vma,
-    unsigned int flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn can_follow_write_pte(pte: pte_t, page: *mut page, vma: *mut vm_area_struct, flags: c_uint) -> bool {
 // If the pte is writable, we can write to the page.
-    if (pte_write(pte))
+    if (pte_write(pte)) {
     return true;
-    if (!can_follow_write_common(page, vma, flags))
+    }
+    if (!can_follow_write_common(page, vma, flags)) {
     return false;
+    }
 // ... and a write-fault isn't required for other reasons.
-    if (pte_needs_soft_dirty_wp(vma, pte))
+    if (pte_needs_soft_dirty_wp(vma, pte)) {
     return false;
+    }
     return !userfaultfd_pte_wp(vma, pte);
     }
-    static struct page *follow_page_pte(struct vm_area_struct *vma,
-    unsigned long address, pmd_t *pmd, unsigned int flags)
-    {
-    struct mm_struct *mm = vma.vm_mm;
-    struct folio *folio;
-    struct page *page;
-    spinlock_t *ptl;
+#[no_mangle]
+pub unsafe extern "C" fn follow_page_pte(vma: *mut vm_area_struct, address: c_ulong, pmd: *mut pmd_t, flags: c_uint) -> *mut c_void {
+    let mut mm = vma.vm_mm;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut page: *mut c_void = core::ptr::null_mut();
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
     pte_t *ptep, pte;
-    int ret;
+    let mut ret = 0;
     ptep = pte_offset_map_lock(mm, pmd, address, &ptl);
-    if (!ptep)
+    if (!ptep) {
     return no_page_table(vma, flags, address);
+    }
     pte = ptep_get(ptep);
-    if (!pte_present(pte))
-    goto no_page;
-    if (pte_protnone(pte) && !gup_can_follow_protnone(vma, flags))
-    goto no_page;
+    if (!pte_present(pte)) {
+// goto;
+    }
+    if (pte_protnone(pte) && !gup_can_follow_protnone(vma, flags)) {
+// goto;
+    }
     page = vm_normal_page(vma, address, pte);
 //
 // We only care about anon pages in can_follow_write_pte().
@@ -750,26 +1016,26 @@ pub unsafe extern "C" fn mm_set_has_pinned_flag(mm: *mut mm_struct) {
     if ((flags & FOLL_WRITE) &&
     !can_follow_write_pte(pte, page, vma, flags)) {
     page = core::ptr::null_mut();
-    goto out;
+// goto;
     }
     if (unlikely(!page)) {
     if (flags & FOLL_DUMP) {
 // Avoid special (like zero) pages in core dumps
     page = ERR_PTR(-EFAULT);
-    goto out;
+// goto;
     }
     if (is_zero_pfn(pte_pfn(pte))) {
     page = pte_page(pte);
     } else {
     ret = follow_pfn_pte(vma, address, ptep, flags);
     page = ERR_PTR(ret);
-    goto out;
+// goto;
     }
     }
     folio = page_folio(page);
     if (!pte_write(pte) && gup_must_unshare(vma, flags, page)) {
     page = ERR_PTR(-EMLINK);
-    goto out;
+// goto;
     }
     VM_WARN_ON_ONCE_PAGE((flags & FOLL_PIN) && PageAnon(page) &&
     !PageAnonExclusive(page), page);
@@ -777,7 +1043,7 @@ pub unsafe extern "C" fn mm_set_has_pinned_flag(mm: *mut mm_struct) {
     ret = try_grab_folio(folio, 1, flags);
     if (unlikely(ret)) {
     page = ERR_PTR(ret);
-    goto out;
+// goto;
     }
 //
 // We need to make the page accessible if and only if we are going
@@ -789,13 +1055,14 @@ pub unsafe extern "C" fn mm_set_has_pinned_flag(mm: *mut mm_struct) {
     if (ret) {
     unpin_user_page(page);
     page = ERR_PTR(ret);
-    goto out;
+// goto;
     }
     }
     if (flags & FOLL_TOUCH) {
     if ((flags & FOLL_WRITE) &&
-    !pte_dirty(pte) && !folio_test_dirty(folio))
+    !pte_dirty(pte) && !folio_test_dirty(folio)) {
     folio_mark_dirty(folio);
+    }
 //
 // pte_mkyoung() would be more correct here, but atomic care
 // is needed to avoid losing the dirty bit: it is easier to use
@@ -803,34 +1070,36 @@ pub unsafe extern "C" fn mm_set_has_pinned_flag(mm: *mut mm_struct) {
 //
     folio_mark_accessed(folio);
     }
-    out:
+// label;
     pte_unmap_unlock(ptep, ptl);
     return page;
-    no_page:
+// label;
     pte_unmap_unlock(ptep, ptl);
-    if (!pte_none(pte))
+    if (!pte_none(pte)) {
     return core::ptr::null_mut();
+    }
     return no_page_table(vma, flags, address);
     }
-    static struct page *follow_pmd_mask(struct vm_area_struct *vma,
-    unsigned long address, pud_t *pudp,
-    unsigned int flags,
-    unsigned long *page_mask)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn follow_pmd_mask(vma: *mut vm_area_struct, address: c_ulong, pudp: *mut pud_t, flags: c_uint, page_mask: *mut c_ulong) -> *mut c_void {
     pmd_t *pmd, pmdval;
-    spinlock_t *ptl;
-    struct page *page;
-    struct mm_struct *mm = vma.vm_mm;
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
+pub static mut page: *mut c_void = core::ptr::null_mut();
+    let mut mm = vma.vm_mm;
     pmd = pmd_offset(pudp, address);
     pmdval = pmdp_get_lockless(pmd);
-    if (pmd_none(pmdval))
+    if (pmd_none(pmdval)) {
     return no_page_table(vma, flags, address);
-    if (!pmd_present(pmdval))
+    }
+    if (!pmd_present(pmdval)) {
     return no_page_table(vma, flags, address);
-    if (likely(!pmd_leaf(pmdval)))
+    }
+    if (likely(!pmd_leaf(pmdval))) {
     return follow_page_pte(vma, address, pmd, flags);
-    if (pmd_protnone(pmdval) && !gup_can_follow_protnone(vma, flags))
+    }
+    if (pmd_protnone(pmdval) && !gup_can_follow_protnone(vma, flags)) {
     return no_page_table(vma, flags, address);
+    }
     ptl = pmd_lock(mm, pmd);
     pmdval = *pmd;
     if (unlikely(!pmd_present(pmdval))) {
@@ -852,42 +1121,40 @@ pub unsafe extern "C" fn mm_set_has_pinned_flag(mm: *mut mm_struct) {
     spin_unlock(ptl);
     return page;
     }
-    static struct page *follow_pud_mask(struct vm_area_struct *vma,
-    unsigned long address, p4d_t *p4dp,
-    unsigned int flags,
-    unsigned long *page_mask)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn follow_pud_mask(vma: *mut vm_area_struct, address: c_ulong, p4dp: *mut p4d_t, flags: c_uint, page_mask: *mut c_ulong) -> *mut c_void {
     pud_t *pudp, pud;
-    spinlock_t *ptl;
-    struct page *page;
-    struct mm_struct *mm = vma.vm_mm;
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
+pub static mut page: *mut c_void = core::ptr::null_mut();
+    let mut mm = vma.vm_mm;
     pudp = pud_offset(p4dp, address);
     pud = pudp_get(pudp);
-    if (!pud_present(pud))
+    if (!pud_present(pud)) {
     return no_page_table(vma, flags, address);
+    }
     if (pud_leaf(pud)) {
     ptl = pud_lock(mm, pudp);
     page = follow_huge_pud(vma, address, pudp, flags, page_mask);
     spin_unlock(ptl);
-    if (page)
+    if (page) {
     return page;
+    }
     return no_page_table(vma, flags, address);
     }
-    if (unlikely(pud_bad(pud)))
+    if (unlikely(pud_bad(pud))) {
     return no_page_table(vma, flags, address);
+    }
     return follow_pmd_mask(vma, address, pudp, flags, page_mask);
     }
-    static struct page *follow_p4d_mask(struct vm_area_struct *vma,
-    unsigned long address, pgd_t *pgdp,
-    unsigned int flags,
-    unsigned long *page_mask)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn follow_p4d_mask(vma: *mut vm_area_struct, address: c_ulong, pgdp: *mut pgd_t, flags: c_uint, page_mask: *mut c_ulong) -> *mut c_void {
     p4d_t *p4dp, p4d;
     p4dp = p4d_offset(pgdp, address);
     p4d = p4dp_get(p4dp);
-    BUILD_BUG_ON(p4d_leaf(p4d));
-    if (!p4d_present(p4d) || p4d_bad(p4d))
+    BUILD_BUG_ON!(p4d_leaf(p4d));
+    if (!p4d_present(p4d) || p4d_bad(p4d)) {
     return no_page_table(vma, flags, address);
+    }
     return follow_pud_mask(vma, address, p4dp, flags, page_mask);
     }
 //
@@ -906,74 +1173,82 @@ pub unsafe extern "C" fn mm_set_has_pinned_flag(mm: *mut mm_struct) {
 //
 // On output, @page_mask is set according to the size of the page.
 //
-// Return: the mapped (struct page *), %NULL if no mapping exists, or
+// Return: the mapped , %NULL if no mapping exists, or
 // an error pointer if there is a mapping to something not represented
 // by a page descriptor (see also vm_normal_page()).
 //
-    static struct page *follow_page_mask(struct vm_area_struct *vma,
-    unsigned long address, unsigned int flags,
-    unsigned long *page_mask)
-    {
-    pgd_t *pgd;
-    struct mm_struct *mm = vma.vm_mm;
-    struct page *page;
+#[no_mangle]
+pub unsafe extern "C" fn follow_page_mask(vma: *mut vm_area_struct, address: c_ulong, flags: c_uint, page_mask: *mut c_ulong) -> *mut c_void {
+pub static mut pgd: *mut c_void = core::ptr::null_mut();
+    let mut mm = vma.vm_mm;
+pub static mut page: *mut c_void = core::ptr::null_mut();
     vma_pgtable_walk_begin(vma);
 // page_mask = 0;
     pgd = pgd_offset(mm, address);
-    if (pgd_none(*pgd) || unlikely(pgd_bad(*pgd)))
+    if (pgd_none(*pgd) || unlikely(pgd_bad(*pgd))) {
     page = no_page_table(vma, flags, address);
-    else
+    }
+    else {
     page = follow_p4d_mask(vma, address, pgd, flags, page_mask);
+    }
     vma_pgtable_walk_end(vma);
     return page;
     }
-    static int get_gate_page(struct mm_struct *mm, unsigned long address,
-    unsigned int gup_flags, struct vm_area_struct **vma,
-    struct page **page)
-    {
-    pgd_t *pgd;
-    p4d_t *p4d;
-    pud_t *pud;
-    pmd_t *pmd;
-    pte_t *pte;
-    pte_t entry;
-    let mut ret: c_int = -EFAULT;
+#[no_mangle]
+pub unsafe extern "C" fn get_gate_page(mm: *mut mm_struct, address: c_ulong, gup_flags: c_uint, vma: *mut *mut vm_area_struct, page: *mut *mut page) -> c_int {
+pub static mut pgd: *mut c_void = core::ptr::null_mut();
+pub static mut p4d: *mut c_void = core::ptr::null_mut();
+pub static mut pud: *mut c_void = core::ptr::null_mut();
+pub static mut pmd: *mut c_void = core::ptr::null_mut();
+pub static mut pte: *mut c_void = core::ptr::null_mut();
+    let mut entry;
+pub static mut ret: c_int = 0;
 // user gate pages are read-only
-    if (gup_flags & FOLL_WRITE)
+    if (gup_flags & FOLL_WRITE) {
     return -EFAULT;
+    }
     pgd = pgd_offset(mm, address);
-    if (pgd_none(*pgd))
+    if (pgd_none(*pgd)) {
     return -EFAULT;
+    }
     p4d = p4d_offset(pgd, address);
-    if (p4d_none(*p4d))
+    if (p4d_none(*p4d)) {
     return -EFAULT;
+    }
     pud = pud_offset(p4d, address);
-    if (pud_none(*pud))
+    if (pud_none(*pud)) {
     return -EFAULT;
+    }
     pmd = pmd_offset(pud, address);
-    if (!pmd_present(*pmd))
+    if (!pmd_present(*pmd)) {
     return -EFAULT;
+    }
     pte = pte_offset_map(pmd, address);
-    if (!pte)
+    if (!pte) {
     return -EFAULT;
+    }
     entry = ptep_get(pte);
-    if (pte_none(entry))
-    goto unmap;
+    if (pte_none(entry)) {
+// goto;
+    }
 // vma = get_gate_vma(mm);
-    if (!page)
-    goto out;
+    if (!page) {
+// goto;
+    }
 // page = vm_normal_page(*vma, address, entry);
     if (!*page) {
-    if ((gup_flags & FOLL_DUMP) || !is_zero_pfn(pte_pfn(entry)))
-    goto unmap;
+    if ((gup_flags & FOLL_DUMP) || !is_zero_pfn(pte_pfn(entry))) {
+// goto;
+    }
 // page = pte_page(entry);
     }
     ret = try_grab_folio(page_folio(*page), 1, gup_flags);
-    if (unlikely(ret))
-    goto unmap;
-    out:
+    if (unlikely(ret)) {
+// goto;
+    }
+// label;
     ret = 0;
-    unmap:
+// label;
     pte_unmap(pte);
     return ret;
     }
@@ -982,18 +1257,19 @@ pub unsafe extern "C" fn mm_set_has_pinned_flag(mm: *mut mm_struct) {
 // FOLL_NOWAIT, the mmap_lock may be released.  If it is, *@locked will be set
 // to 0 and -EBUSY returned.
 //
-    static int faultin_page(struct vm_area_struct *vma,
-    unsigned long address, unsigned int flags, bool unshare,
-    int *locked)
-    {
-    let mut fault_flags: c_uint = 0;
-    vm_fault_t ret;
-    if (flags & FOLL_NOFAULT)
+#[no_mangle]
+pub unsafe extern "C" fn faultin_page(vma: *mut vm_area_struct, address: c_ulong, flags: c_uint, unshare: bool, locked: *mut c_int) -> c_int {
+pub static mut fault_flags: c_uint = 0;
+    let mut ret;
+    if (flags & FOLL_NOFAULT) {
     return -EFAULT;
-    if (flags & FOLL_WRITE)
+    }
+    if (flags & FOLL_WRITE) {
     fault_flags |= FAULT_FLAG_WRITE;
-    if (flags & FOLL_REMOTE)
+    }
+    if (flags & FOLL_REMOTE) {
     fault_flags |= FAULT_FLAG_REMOTE;
+    }
     if (flags & FOLL_UNLOCKABLE) {
     fault_flags |= FAULT_FLAG_ALLOW_RETRY | FAULT_FLAG_KILLABLE;
 //
@@ -1002,11 +1278,13 @@ pub unsafe extern "C" fn mm_set_has_pinned_flag(mm: *mut mm_struct) {
 // That's because some callers may not be prepared to
 // handle early exits caused by non-fatal signals.
 //
-    if (flags & FOLL_INTERRUPTIBLE)
+    if (flags & FOLL_INTERRUPTIBLE) {
     fault_flags |= FAULT_FLAG_INTERRUPTIBLE;
     }
-    if (flags & FOLL_NOWAIT)
+    }
+    if (flags & FOLL_NOWAIT) {
     fault_flags |= FAULT_FLAG_ALLOW_RETRY | FAULT_FLAG_RETRY_NOWAIT;
+    }
     if (flags & FOLL_TRIED) {
 //
 // Note: FAULT_FLAG_ALLOW_RETRY and FAULT_FLAG_TRIED
@@ -1025,7 +1303,7 @@ pub unsafe extern "C" fn mm_set_has_pinned_flag(mm: *mut mm_struct) {
 // With FAULT_FLAG_RETRY_NOWAIT we'll never release the
 // mmap lock in the page fault handler. Sanity check this.
 //
-    WARN_ON_ONCE(fault_flags & FAULT_FLAG_RETRY_NOWAIT);
+    WARN_ON_ONCE!(fault_flags & FAULT_FLAG_RETRY_NOWAIT);
 // locked = 0;
 //
 // We should do the same as VM_FAULT_RETRY, but let's not
@@ -1037,14 +1315,16 @@ pub unsafe extern "C" fn mm_set_has_pinned_flag(mm: *mut mm_struct) {
     return -EAGAIN;
     }
     if (ret & VM_FAULT_ERROR) {
-    let mut err: c_int = vm_fault_to_errno(ret, flags);
-    if (err)
+pub static mut err: c_int = 0;
+    if (err) {
     return err;
+    }
     BUG();
     }
     if (ret & VM_FAULT_RETRY) {
-    if (!(fault_flags & FAULT_FLAG_RETRY_NOWAIT))
+    if (!(fault_flags & FAULT_FLAG_RETRY_NOWAIT)) {
 // locked = 0;
+    }
     return -EBUSY;
     }
     return 0;
@@ -1068,16 +1348,16 @@ pub unsafe extern "C" fn mm_set_has_pinned_flag(mm: *mut mm_struct) {
 // This results in both data being written to a folio without writenotify, and
 // the folio being dirtied unexpectedly (if the caller decides to do so).
 //
-    static bool writable_file_mapping_allowed(struct vm_area_struct *vma,
-    unsigned long gup_flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn writable_file_mapping_allowed(vma: *mut vm_area_struct, gup_flags: c_ulong) -> bool {
 //
 // If we aren't pinning then no problematic write can occur. A long term
 // pin is the most egregious case so this is the case we disallow.
 //
     if ((gup_flags & (FOLL_PIN | FOLL_LONGTERM)) !=
-    (FOLL_PIN | FOLL_LONGTERM))
+    (FOLL_PIN | FOLL_LONGTERM)) {
     return true;
+    }
 //
 // If the VMA does not require dirty tracking then no problematic write
 // can occur either.
@@ -1086,29 +1366,34 @@ pub unsafe extern "C" fn mm_set_has_pinned_flag(mm: *mut mm_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn check_vma_flags(vma: *mut vm_area_struct, gup_flags: c_ulong) -> c_int {
-    static int check_vma_flags(struct vm_area_struct *vma, unsigned long gup_flags)
-    {
-    let mut vm_flags: vm_flags_t = vma.vm_flags;
-    let mut write: c_int = (gup_flags & FOLL_WRITE);
-    let mut foreign: c_int = (gup_flags & FOLL_REMOTE);
-    let mut vma_anon: bool = vma_is_anonymous(vma);
-    if (vm_flags & (VM_IO | VM_PFNMAP))
+pub static mut vm_flags: vm_flags_t = 0;
+pub static mut write: c_int = 0;
+pub static mut foreign: c_int = 0;
+pub static mut vma_anon: bool = false;
+    if (vm_flags & (VM_IO | VM_PFNMAP)) {
     return -EFAULT;
-    if ((gup_flags & FOLL_ANON) && !vma_anon)
+    }
+    if ((gup_flags & FOLL_ANON) && !vma_anon) {
     return -EFAULT;
-    if ((gup_flags & FOLL_LONGTERM) && vma_is_fsdax(vma))
+    }
+    if ((gup_flags & FOLL_LONGTERM) && vma_is_fsdax(vma)) {
     return -EOPNOTSUPP;
-    if ((gup_flags & FOLL_SPLIT_PMD) && is_vm_hugetlb_page(vma))
+    }
+    if ((gup_flags & FOLL_SPLIT_PMD) && is_vm_hugetlb_page(vma)) {
     return -EOPNOTSUPP;
-    if (vma_is_secretmem(vma))
+    }
+    if (vma_is_secretmem(vma)) {
     return -EFAULT;
+    }
     if (write) {
     if (!vma_anon &&
-    !writable_file_mapping_allowed(vma, gup_flags))
+    !writable_file_mapping_allowed(vma, gup_flags)) {
     return -EFAULT;
+    }
     if (!(vm_flags & VM_WRITE) || (vm_flags & VM_SHADOW_STACK)) {
-    if (!(gup_flags & FOLL_FORCE))
+    if (!(gup_flags & FOLL_FORCE)) {
     return -EFAULT;
+    }
 //
 // We used to let the write,force case do COW in a
 // VM_MAYWRITE VM_SHARED !VM_WRITE vma, so ptrace could
@@ -1118,55 +1403,62 @@ unsafe extern "C" fn check_vma_flags(vma: *mut vm_area_struct, gup_flags: c_ulon
 // Anon pages in shared mappings are surprising: now
 // just reject it.
 //
-    if (!vma_is_cow_mapping(vma))
+    if (!vma_is_cow_mapping(vma)) {
     return -EFAULT;
     }
+    }
     } else if (!(vm_flags & VM_READ)) {
-    if (!(gup_flags & FOLL_FORCE))
+    if (!(gup_flags & FOLL_FORCE)) {
     return -EFAULT;
+    }
 //
 // Is there actually any vma we can reach here which does not
 // have VM_MAYREAD set?
 //
-    if (!(vm_flags & VM_MAYREAD))
+    if (!(vm_flags & VM_MAYREAD)) {
     return -EFAULT;
+    }
     }
 //
 // gups are always data accesses, not instruction
 // fetches, so execute=false here
 //
-    if (!arch_vma_access_permitted(vma, write, false, foreign))
+    if (!arch_vma_access_permitted(vma, write, false, foreign)) {
     return -EFAULT;
+    }
     return 0;
     }
 //
 // This is "vma_lookup()", but with a warning if we would have
 // historically expanded the stack in the GUP code.
 //
-    static struct vm_area_struct *gup_vma_lookup(struct mm_struct *mm,
-    unsigned long addr)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn gup_vma_lookup(mm: *mut mm_struct, addr: c_ulong) -> *mut c_void {
 
     return vma_lookup(mm, addr);
 
     static volatile unsigned long next_warn;
-    struct vm_area_struct *vma;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
     unsigned long now, next;
     vma = find_vma(mm, addr);
-    if (!vma || (addr >= vma.vm_start))
+    if (!vma || (addr >= vma.vm_start)) {
     return vma;
+    }
 // Only warn for half-way relevant accesses
-    if (!(vma.vm_flags & VM_GROWSDOWN))
+    if (!(vma.vm_flags & VM_GROWSDOWN)) {
     return core::ptr::null_mut();
-    if (vma.vm_start - addr > 65536)
+    }
+    if (vma.vm_start - addr > 65536) {
     return core::ptr::null_mut();
+    }
 // Let's not warn more than once an hour..
     now = jiffies; next = next_warn;
-    if (next && time_before(now, next))
+    if (next && time_before(now, next)) {
     return core::ptr::null_mut();
+    }
     next_warn = now + 60*60*HZ;
 // Let people know things may have changed.
-    pr_warn("GUP no longer grows the stack in %s (%d): %lx-%lx (%lx)\n",
+    pr_warn!("GUP no longer grows the stack in %s (%d): %lx-%lx (%lx)\n",
     current.comm, task_pid_nr(current),
     vma.vm_start, vma.vm_end, addr);
     dump_stack();
@@ -1227,24 +1519,22 @@ unsafe extern "C" fn check_vma_flags(vma: *mut vm_area_struct, gup_flags: c_ulon
 // instead of __get_user_pages. __get_user_pages should be used only if
 // you need some special @gup_flags.
 //
-    static long __get_user_pages(struct mm_struct *mm,
-    unsigned long start, unsigned long nr_pages,
-    unsigned int gup_flags, struct page **pages,
-    int *locked)
-    {
-    let mut ret: c_long = 0, i = 0;
-    struct vm_area_struct *vma = core::ptr::null_mut();
-    let mut page_mask: c_ulong = 0;
-    if (!nr_pages)
+#[no_mangle]
+pub unsafe extern "C" fn __get_user_pages(mm: *mut mm_struct, start: c_ulong, nr_pages: c_ulong, gup_flags: c_uint, pages: *mut *mut page, locked: *mut c_int) -> c_long {
+pub static mut ret: c_long = 0;
+    let mut vma = core::ptr::null_mut();
+pub static mut page_mask: c_ulong = 0;
+    if (!nr_pages) {
     return 0;
+    }
     start = untagged_addr_remote(mm, start);
     VM_WARN_ON_ONCE(!!pages != !!(gup_flags & (FOLL_GET | FOLL_PIN)));
 // FOLL_GET and FOLL_PIN are mutually exclusive.
     VM_WARN_ON_ONCE((gup_flags & (FOLL_PIN | FOLL_GET)) ==
     (FOLL_PIN | FOLL_GET));
     do {
-    struct page *page;
-    unsigned int page_increm;
+pub static mut page: *mut c_void = core::ptr::null_mut();
+    let mut page_increm = 0;
 // first iteration or cross vma bound
     if (!vma || start >= vma.vm_end) {
 //
@@ -1255,57 +1545,65 @@ unsafe extern "C" fn check_vma_flags(vma: *mut vm_area_struct, gup_flags: c_ulon
     vma = vma_lookup(mm, start);
     if (!vma) {
     ret = -ENOMEM;
-    goto out;
+// goto;
     }
     if (check_vma_flags(vma, gup_flags)) {
     ret = -EINVAL;
-    goto out;
+// goto;
     }
-    goto retry;
+// goto;
     }
     vma = gup_vma_lookup(mm, start);
     if (!vma && in_gate_area(mm, start)) {
     ret = get_gate_page(mm, start & PAGE_MASK,
     gup_flags, &vma,
     pages ? &page : core::ptr::null_mut());
-    if (ret)
-    goto out;
+    if (ret) {
+// goto;
+    }
     page_mask = 0;
-    goto next_page;
+// goto;
     }
     if (!vma) {
     ret = -EFAULT;
-    goto out;
+// goto;
     }
     ret = check_vma_flags(vma, gup_flags);
-    if (ret)
-    goto out;
+    if (ret) {
+// goto;
     }
-    retry:
+    }
+// label;
 //
 // If we have a pending SIGKILL, don't keep faulting pages and
 // potentially allocating memory.
 //
     if (fatal_signal_pending(current)) {
     ret = -EINTR;
-    goto out;
+// goto;
     }
     cond_resched();
     page = follow_page_mask(vma, start, gup_flags, &page_mask);
     if (!page || PTR_ERR(page) == -EMLINK) {
     ret = faultin_page(vma, start, gup_flags,
     PTR_ERR(page) == -EMLINK, locked);
-    switch (ret) {
-    case 0:
-    goto retry;
-    case -EBUSY:
-    case -EAGAIN:
+    match (ret) {
+    0 => {
+// goto;
+    }
+    -EBUSY => {
+    }
+    -EAGAIN => {
     ret = 0;
     fallthrough;
-    case -EFAULT:
-    case -ENOMEM:
-    case -EHWPOISON:
-    goto out;
+    }
+    -EFAULT => {
+    }
+    -ENOMEM => {
+    }
+    -EHWPOISON => {
+// goto;
+    }
     }
     BUG();
     } else if (PTR_ERR(page) == -EEXIST) {
@@ -1317,19 +1615,20 @@ unsafe extern "C" fn check_vma_flags(vma: *mut vm_area_struct, gup_flags: c_ulon
 //
     if (pages) {
     ret = PTR_ERR(page);
-    goto out;
+// goto;
     }
     } else if (IS_ERR(page)) {
     ret = PTR_ERR(page);
-    goto out;
+// goto;
     }
-    next_page:
+// label;
     page_increm = 1 + (~(start >> PAGE_SHIFT) & page_mask);
-    if (page_increm > nr_pages)
+    if (page_increm > nr_pages) {
     page_increm = nr_pages;
+    }
     if (pages) {
-    struct page *subpage;
-    unsigned int j;
+pub static mut subpage: *mut c_void = core::ptr::null_mut();
+    let mut j = 0;
 //
 // This must be a large folio (and doesn't need to
 // be the whole folio; it can be part of it), do
@@ -1341,7 +1640,7 @@ unsafe extern "C" fn check_vma_flags(vma: *mut vm_area_struct, gup_flags: c_ulon
 // pages.
 //
     if (page_increm > 1) {
-    struct folio *folio = page_folio(page);
+    let mut folio = page_folio(page);
 //
 // Since we already hold refcount on the
 // large folio, this should never fail.
@@ -1354,10 +1653,10 @@ unsafe extern "C" fn check_vma_flags(vma: *mut vm_area_struct, gup_flags: c_ulon
 //
     gup_put_folio(folio, 1, gup_flags);
     ret = -EFAULT;
-    goto out;
+// goto;
     }
     }
-    for (j = 0; j < page_increm; j++) {
+    while (j < page_increm) {
     subpage = page + j;
     pages[i + j] = subpage;
     flush_anon_page(vma, subpage, start + j * PAGE_SIZE);
@@ -1368,17 +1667,17 @@ unsafe extern "C" fn check_vma_flags(vma: *mut vm_area_struct, gup_flags: c_ulon
     start += page_increm * PAGE_SIZE;
     nr_pages -= page_increm;
     } while (nr_pages);
-    out:
+// label;
     return i ? i : ret;
     }
-    static bool vma_permits_fault(struct vm_area_struct *vma,
-    unsigned int fault_flags)
-    {
-    let mut write: bool = !!(fault_flags & FAULT_FLAG_WRITE);
-    let mut foreign: bool = !!(fault_flags & FAULT_FLAG_REMOTE);
-    let mut vm_flags: vm_flags_t = write ? VM_WRITE : VM_READ;
-    if (!(vm_flags & vma.vm_flags))
+#[no_mangle]
+pub unsafe extern "C" fn vma_permits_fault(vma: *mut vm_area_struct, fault_flags: c_uint) -> bool {
+pub static mut write: bool = false;
+pub static mut foreign: bool = false;
+pub static mut vm_flags: vm_flags_t = 0;
+    if (!(vm_flags & vma.vm_flags)) {
     return false;
+    }
 //
 // The architecture might have a hardware protection
 // mechanism other than read/write that can deny access.
@@ -1386,8 +1685,9 @@ unsafe extern "C" fn check_vma_flags(vma: *mut vm_area_struct, gup_flags: c_ulon
 // gup always represents data access, not instruction
 // fetches, so execute=false here:
 //
-    if (!arch_vma_access_permitted(vma, write, false, foreign))
+    if (!arch_vma_access_permitted(vma, write, false, foreign)) {
     return false;
+    }
     return true;
     }
 //
@@ -1419,24 +1719,26 @@ unsafe extern "C" fn check_vma_flags(vma: *mut vm_area_struct, gup_flags: c_ulon
 // This function will not return with an unlocked mmap_lock. So it has not the
 // same semantics wrt the @mm->mmap_lock as does filemap_fault().
 //
-    int fixup_user_fault(struct mm_struct *mm,
-    unsigned long address, unsigned int fault_flags,
-    bool *unlocked)
-    {
-    struct vm_area_struct *vma;
-    vm_fault_t ret;
+#[no_mangle]
+pub unsafe extern "C" fn fixup_user_fault(mm: *mut mm_struct, address: c_ulong, fault_flags: c_uint, unlocked: *mut bool) -> c_int {
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+    let mut ret;
     address = untagged_addr_remote(mm, address);
-    if (unlocked)
+    if (unlocked) {
     fault_flags |= FAULT_FLAG_ALLOW_RETRY | FAULT_FLAG_KILLABLE;
-    retry:
+    }
+// label;
     vma = gup_vma_lookup(mm, address);
-    if (!vma)
+    if (!vma) {
     return -EFAULT;
-    if (!vma_permits_fault(vma, fault_flags))
+    }
+    if (!vma_permits_fault(vma, fault_flags)) {
     return -EFAULT;
+    }
     if ((fault_flags & FAULT_FLAG_KILLABLE) &&
-    fatal_signal_pending(current))
+    fatal_signal_pending(current)) {
     return -EINTR;
+    }
     ret = handle_mm_fault(vma, address, fault_flags, core::ptr::null_mut());
     if (ret & VM_FAULT_COMPLETED) {
 //
@@ -1449,16 +1751,17 @@ unsafe extern "C" fn check_vma_flags(vma: *mut vm_area_struct, gup_flags: c_ulon
     return 0;
     }
     if (ret & VM_FAULT_ERROR) {
-    let mut err: c_int = vm_fault_to_errno(ret, 0);
-    if (err)
+pub static mut err: c_int = 0;
+    if (err) {
     return err;
+    }
     BUG();
     }
     if (ret & VM_FAULT_RETRY) {
     mmap_read_lock(mm);
 // unlocked = true;
     fault_flags |= FAULT_FLAG_TRIED;
-    goto retry;
+// goto;
     }
     return 0;
     }
@@ -1470,12 +1773,12 @@ unsafe extern "C" fn check_vma_flags(vma: *mut vm_area_struct, gup_flags: c_ulon
 //
 #[no_mangle]
 unsafe extern "C" fn gup_signal_pending(flags: c_uint) -> bool {
-    static bool gup_signal_pending(unsigned int flags)
-    {
-    if (fatal_signal_pending(current))
+    if (fatal_signal_pending(current)) {
     return true;
-    if (!(flags & FOLL_INTERRUPTIBLE))
+    }
+    if (!(flags & FOLL_INTERRUPTIBLE)) {
     return false;
+    }
     return signal_pending(current);
     }
 //
@@ -1491,31 +1794,35 @@ unsafe extern "C" fn gup_signal_pending(flags: c_uint) -> bool {
 // Please note that this function, unlike __get_user_pages(), will not return 0
 // for nr_pages > 0, unless FOLL_NOWAIT is used.
 //
-    static __always_inline long __get_user_pages_locked(struct mm_struct *mm,
+    static __always_inline long __get_user_pages_locked(mm_struct *mm,
     unsigned long start,
-    unsigned long nr_pages,
-    struct page **pages,
+    unsigned long nr_pages, page **pages,
     int *locked,
     unsigned int flags)
     {
-    long ret, pages_done;
-    let mut must_unlock: bool = false;
-    if (!nr_pages)
+    let mut ret = 0;
+    let mut pages_done = 0;
+pub static mut must_unlock: bool = false;
+    if (!nr_pages) {
     return 0;
+    }
 //
 // The internal caller expects GUP to manage the lock internally and the
 // lock must be released when this returns.
 //
     if (!*locked) {
-    if (mmap_read_lock_killable(mm))
+    if (mmap_read_lock_killable(mm)) {
     return -EAGAIN;
+    }
     must_unlock = true;
 // locked = 1;
     }
-    else
+    else {
     mmap_assert_locked(mm);
-    if (flags & FOLL_PIN)
+    }
+    if (flags & FOLL_PIN) {
     mm_set_has_pinned_flag(mm);
+    }
 //
 // FOLL_PIN and FOLL_GET are mutually exclusive. Traditional behavior
 // is to set FOLL_GET if the caller wants pages[] filled in (but has
@@ -1525,8 +1832,9 @@ unsafe extern "C" fn gup_signal_pending(flags: c_uint) -> bool {
 // FOLL_PIN always expects pages to be non-null, but no need to assert
 // that here, as any failures will be obvious enough.
 //
-    if (pages && !(flags & FOLL_PIN))
+    if (pages && !(flags & FOLL_PIN)) {
     flags |= FOLL_GET;
+    }
     pages_done = 0;
     for (;;) {
     ret = __get_user_pages(mm, start, nr_pages, flags, pages,
@@ -1541,28 +1849,31 @@ unsafe extern "C" fn gup_signal_pending(flags: c_uint) -> bool {
     if (ret > 0) {
     nr_pages -= ret;
     pages_done += ret;
-    if (!nr_pages)
+    if (!nr_pages) {
     break;
+    }
     }
     if (*locked) {
 //
 // VM_FAULT_RETRY didn't trigger or it was a
 // FOLL_NOWAIT.
 //
-    if (!pages_done)
+    if (!pages_done) {
     pages_done = ret;
+    }
     break;
     }
 //
 // VM_FAULT_RETRY triggered, so seek to the faulting offset.
 // For the prefault case (!pages) we only update counts.
 //
-    if (likely(pages))
+    if (likely(pages)) {
     pages += ret;
+    }
     start += ret << PAGE_SHIFT;
 // The lock was temporarily dropped, so we must unlock later
     must_unlock = true;
-    retry:
+// label;
 //
 // Repeat on the address that fired VM_FAULT_RETRY
 // with both FAULT_FLAG_ALLOW_RETRY and
@@ -1572,14 +1883,16 @@ unsafe extern "C" fn gup_signal_pending(flags: c_uint) -> bool {
 // start trying again otherwise it can loop forever.
 //
     if (gup_signal_pending(flags)) {
-    if (!pages_done)
+    if (!pages_done) {
     pages_done = -EINTR;
+    }
     break;
     }
     ret = mmap_read_lock_killable(mm);
     if (ret) {
-    if (!pages_done)
+    if (!pages_done) {
     pages_done = ret;
+    }
     break;
     }
 // locked = 1;
@@ -1588,20 +1901,23 @@ unsafe extern "C" fn gup_signal_pending(flags: c_uint) -> bool {
     if (!*locked) {
 // Continue to retry until we succeeded
     VM_WARN_ON_ONCE(ret != 0);
-    goto retry;
+// goto;
     }
     if (ret != 1) {
     VM_WARN_ON_ONCE(ret > 1);
-    if (!pages_done)
+    if (!pages_done) {
     pages_done = ret;
+    }
     break;
     }
-    nr_pages--;
-    pages_done++;
-    if (!nr_pages)
+    nr_pages -= 1;
+    pages_done += 1;
+    if (!nr_pages) {
     break;
-    if (likely(pages))
-    pages++;
+    }
+    if (likely(pages)) {
+    pages += 1;
+    }
     start += PAGE_SIZE;
     }
     if (must_unlock && *locked) {
@@ -1617,8 +1933,9 @@ unsafe extern "C" fn gup_signal_pending(flags: c_uint) -> bool {
 // Failing to pin anything implies something has gone wrong (except when
 // FOLL_NOWAIT is specified).
 //
-    if (WARN_ON_ONCE(pages_done == 0 && !(flags & FOLL_NOWAIT)))
+    if (WARN_ON_ONCE!(pages_done == 0 && !(flags & FOLL_NOWAIT))) {
     return -EFAULT;
+    }
     return pages_done;
     }
 //
@@ -1641,14 +1958,13 @@ unsafe extern "C" fn gup_signal_pending(flags: c_uint) -> bool {
 // If @locked is non-NULL, it must held for read only and may be
 // released.  If it's released, *@locked will be set to 0.
 //
-    long populate_vma_page_range(struct vm_area_struct *vma,
-    unsigned long start, unsigned long end, int *locked)
-    {
-    struct mm_struct *mm = vma.vm_mm;
-    let mut nr_pages: c_ulong = (end - start) / PAGE_SIZE;
-    let mut local_locked: c_int = 1;
-    int gup_flags;
-    long ret;
+#[no_mangle]
+pub unsafe extern "C" fn populate_vma_page_range(vma: *mut vm_area_struct, start: c_ulong, end: c_ulong, locked: *mut c_int) -> c_long {
+    let mut mm = vma.vm_mm;
+pub static mut nr_pages: c_ulong = 0;
+pub static mut local_locked: c_int = 1;
+    let mut gup_flags = 0;
+    let mut ret = 0;
     VM_WARN_ON_ONCE(!PAGE_ALIGNED(start));
     VM_WARN_ON_ONCE(!PAGE_ALIGNED(end));
     VM_WARN_ON_ONCE_VMA(start < vma.vm_start, vma);
@@ -1658,11 +1974,13 @@ unsafe extern "C" fn gup_signal_pending(flags: c_uint) -> bool {
 // Rightly or wrongly, the VM_LOCKONFAULT case has never used
 // faultin_page() to break COW, so it has no work to do here.
 //
-    if (vma.vm_flags & VM_LOCKONFAULT)
+    if (vma.vm_flags & VM_LOCKONFAULT) {
     return nr_pages;
+    }
 // ... similarly, we've never faulted in PROT_NONE pages
-    if (!vma_is_accessible(vma))
+    if (!vma_is_accessible(vma)) {
     return -EFAULT;
+    }
     gup_flags = FOLL_TOUCH;
 //
 // We want to touch writable mappings with a write fault in order
@@ -1672,12 +1990,15 @@ unsafe extern "C" fn gup_signal_pending(flags: c_uint) -> bool {
 // Otherwise, do a read fault, and use FOLL_FORCE in case it's not
 // readable (ie write-only or executable).
 //
-    if ((vma.vm_flags & (VM_WRITE | VM_SHARED)) == VM_WRITE)
+    if ((vma.vm_flags & (VM_WRITE | VM_SHARED)) == VM_WRITE) {
     gup_flags |= FOLL_WRITE;
-    else
+    }
+    else {
     gup_flags |= FOLL_FORCE;
-    if (locked)
+    }
+    if (locked) {
     gup_flags |= FOLL_UNLOCKABLE;
+    }
 //
 // We made sure addr is within a VMA, so the following will
 // not result in a stack expansion that recurses back here.
@@ -1708,12 +2029,11 @@ unsafe extern "C" fn gup_signal_pending(flags: c_uint) -> bool {
 //
 // mm->mmap_lock must be held. If it's released, *@locked will be set to 0.
 //
-    long faultin_page_range(struct mm_struct *mm, unsigned long start,
-    unsigned long end, bool write, int *locked)
-    {
-    let mut nr_pages: c_ulong = (end - start) / PAGE_SIZE;
-    int gup_flags;
-    long ret;
+#[no_mangle]
+pub unsafe extern "C" fn faultin_page_range(mm: *mut mm_struct, start: c_ulong, end: c_ulong, write: bool, locked: *mut c_int) -> c_long {
+pub static mut nr_pages: c_ulong = 0;
+    let mut gup_flags = 0;
+    let mut ret = 0;
     VM_WARN_ON_ONCE(!PAGE_ALIGNED(start));
     VM_WARN_ON_ONCE(!PAGE_ALIGNED(end));
     mmap_assert_locked(mm);
@@ -1728,8 +2048,9 @@ unsafe extern "C" fn gup_signal_pending(flags: c_uint) -> bool {
 //
     gup_flags = FOLL_TOUCH | FOLL_HWPOISON | FOLL_UNLOCKABLE |
     FOLL_MADV_POPULATE;
-    if (write)
+    if (write) {
     gup_flags |= FOLL_WRITE;
+    }
     ret = __get_user_pages_locked(mm, start, nr_pages, core::ptr::null_mut(), locked,
     gup_flags);
     lru_add_drain();
@@ -1744,15 +2065,13 @@ unsafe extern "C" fn gup_signal_pending(flags: c_uint) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __mm_populate(start: c_ulong, len: c_ulong, ignore_errors: c_int) -> c_int {
-    int __mm_populate(unsigned long start, unsigned long len, int ignore_errors)
-    {
-    struct mm_struct *mm = current.mm;
+    let mut mm = current.mm;
     unsigned long end, nstart, nend;
-    struct vm_area_struct *vma = core::ptr::null_mut();
-    let mut locked: c_int = 0;
-    let mut ret: c_long = 0;
+    let mut vma = core::ptr::null_mut();
+pub static mut locked: c_int = 0;
+pub static mut ret: c_long = 0;
     end = start + len;
-    for (nstart = start; nstart < end; nstart = nend) {
+    while (nstart < end) {
 //
 // We want to fault in pages for [nstart; end) address range.
 // Find first corresponding VMA.
@@ -1761,19 +2080,23 @@ pub unsafe extern "C" fn __mm_populate(start: c_ulong, len: c_ulong, ignore_erro
     locked = 1;
     mmap_read_lock(mm);
     vma = find_vma_intersection(mm, nstart, end);
-    } else if (nstart >= vma.vm_end)
+    } else if (nstart >= vma.vm_end) {
     vma = find_vma_intersection(mm, vma.vm_end, end);
-    if (!vma)
+    }
+    if (!vma) {
     break;
+    }
 //
 // Set [nstart; nend) to intersection of desired address
 // range with the first VMA. Also, skip undesirable VMA types.
 //
     nend = min(end, vma.vm_end);
-    if (vma.vm_flags & (VM_IO | VM_PFNMAP))
+    if (vma.vm_flags & (VM_IO | VM_PFNMAP)) {
     continue;
-    if (nstart < vma.vm_start)
+    }
+    if (nstart < vma.vm_start) {
     nstart = vma.vm_start;
+    }
 //
 // Now fault in a range of pages. populate_vma_page_range()
 // double checks the vma flags, so that it won't mlock pages
@@ -1790,28 +2113,29 @@ pub unsafe extern "C" fn __mm_populate(start: c_ulong, len: c_ulong, ignore_erro
     nend = nstart + ret * PAGE_SIZE;
     ret = 0;
     }
-    if (locked)
+    if (locked) {
     mmap_read_unlock(mm);
+    }
     return ret;	/* 0 or negative error code */
     }
 
-    static long __get_user_pages_locked(struct mm_struct *mm, unsigned long start,
-    unsigned long nr_pages, struct page **pages,
-    int *locked, unsigned int foll_flags)
-    {
-    struct vm_area_struct *vma;
-    let mut must_unlock: bool = false;
-    vm_flags_t vm_flags;
-    long i;
-    if (!nr_pages)
+#[no_mangle]
+pub unsafe extern "C" fn __get_user_pages_locked(mm: *mut mm_struct, start: c_ulong, nr_pages: c_ulong, pages: *mut *mut page, locked: *mut c_int, foll_flags: c_uint) -> c_long {
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+pub static mut must_unlock: bool = false;
+    let mut vm_flags;
+    let mut i = 0;
+    if (!nr_pages) {
     return 0;
+    }
 //
 // The internal caller expects GUP to manage the lock internally and the
 // lock must be released when this returns.
 //
     if (!*locked) {
-    if (mmap_read_lock_killable(mm))
+    if (mmap_read_lock_killable(mm)) {
     return -EAGAIN;
+    }
     must_unlock = true;
 // locked = 1;
     }
@@ -1822,18 +2146,21 @@ pub unsafe extern "C" fn __mm_populate(start: c_ulong, len: c_ulong, ignore_erro
     (VM_WRITE | VM_MAYWRITE) : (VM_READ | VM_MAYREAD);
     vm_flags &= (foll_flags & FOLL_FORCE) ?
     (VM_MAYREAD | VM_MAYWRITE) : (VM_READ | VM_WRITE);
-    for (i = 0; i < nr_pages; i++) {
+    while (i < nr_pages) {
     vma = find_vma(mm, start);
-    if (!vma)
+    if (!vma) {
     break;
+    }
 // protect what we can, including chardevs
     if ((vma.vm_flags & (VM_IO | VM_PFNMAP)) ||
-    !(vm_flags & vma.vm_flags))
+    !(vm_flags & vma.vm_flags)) {
     break;
+    }
     if (pages) {
-    pages[i] = virt_to_page((void *)start);
-    if (pages[i])
+    pages[i] = virt_to_page(start);
+    if (pages[i]) {
     get_page(pages[i]);
+    }
     }
     start = (start + PAGE_SIZE) & PAGE_MASK;
     }
@@ -1853,23 +2180,25 @@ pub unsafe extern "C" fn __mm_populate(start: c_ulong, len: c_ulong, ignore_erro
 // copy_from_user()).
 //
 #[no_mangle]
-pub unsafe extern "C" fn fault_in_writeable(uaddr: *mut char __user, size: usize) -> usize {
-    size_t fault_in_writeable(char __user *uaddr, size_t size)
-    {
-    let mut start: c_ulong = (unsigned long)uaddr;
-    let mut end: c_ulong = start + size;
-    unsigned long cur;
-    if (unlikely(size == 0))
+pub unsafe extern "C" fn fault_in_writeable(uaddr: *mut char , size: usize) -> usize {
+pub static mut start: c_ulong = 0;
+pub static mut end: c_ulong = 0;
+    let mut cur = 0;
+    if (unlikely(size == 0)) {
     return 0;
-    if (!user_write_access_begin(uaddr, size))
+    }
+    if (!user_write_access_begin(uaddr, size)) {
     return size;
+    }
 // Stop once we overflow to 0.
-    for (cur = start; cur && cur < end; cur = PAGE_ALIGN_DOWN(cur + PAGE_SIZE))
-    unsafe_put_user(0, (char __user *)cur, out);
-    out:
+    for (cur = start; cur && cur < end; cur = PAGE_ALIGN_DOWN(cur + PAGE_SIZE)) {
+    unsafe_put_user(0, cur, out);
+    }
+// label;
     user_write_access_end();
-    if (size > cur - start)
+    if (size > cur - start) {
     return size - (cur - start);
+    }
     return 0;
     }
     EXPORT_SYMBOL(fault_in_writeable);
@@ -1886,18 +2215,17 @@ pub unsafe extern "C" fn fault_in_writeable(uaddr: *mut char __user, size: usize
 // copy_from_user()).
 //
 #[no_mangle]
-pub unsafe extern "C" fn fault_in_subpage_writeable(uaddr: *mut char __user, size: usize) -> usize {
-    size_t fault_in_subpage_writeable(char __user *uaddr, size_t size)
-    {
-    size_t faulted_in;
+pub unsafe extern "C" fn fault_in_subpage_writeable(uaddr: *mut char , size: usize) -> usize {
+    let mut faulted_in = 0;
 //
 // Attempt faulting in at page granularity first for page table
 // permission checking. The arch-specific probe_subpage_writeable()
 // functions may not check for this.
 //
     faulted_in = size - fault_in_writeable(uaddr, size);
-    if (faulted_in)
+    if (faulted_in) {
     faulted_in -= probe_subpage_writeable(uaddr, faulted_in);
+    }
     return size - faulted_in;
     }
     EXPORT_SYMBOL(fault_in_subpage_writeable);
@@ -1920,24 +2248,25 @@ pub unsafe extern "C" fn fault_in_subpage_writeable(uaddr: *mut char __user, siz
 // copy_from_user().
 //
 #[no_mangle]
-pub unsafe extern "C" fn fault_in_safe_writeable(uaddr: *const char __user, size: usize) -> usize {
-    size_t fault_in_safe_writeable(const char __user *uaddr, size_t size)
-    {
-    let mut start: c_ulong = (unsigned long)uaddr;
-    let mut end: c_ulong = start + size;
-    unsigned long cur;
-    struct mm_struct *mm = current.mm;
-    let mut unlocked: bool = false;
-    if (unlikely(size == 0))
+pub unsafe extern "C" fn fault_in_safe_writeable(uaddr: *const char , size: usize) -> usize {
+pub static mut start: c_ulong = 0;
+pub static mut end: c_ulong = 0;
+    let mut cur = 0;
+    let mut mm = current.mm;
+pub static mut unlocked: bool = false;
+    if (unlikely(size == 0)) {
     return 0;
+    }
     mmap_read_lock(mm);
 // Stop once we overflow to 0.
-    for (cur = start; cur && cur < end; cur = PAGE_ALIGN_DOWN(cur + PAGE_SIZE))
+    for (cur = start; cur && cur < end; cur = PAGE_ALIGN_DOWN(cur + PAGE_SIZE)) {
     if (fixup_user_fault(mm, cur, FAULT_FLAG_WRITE, &unlocked))
     break;
+    }
     mmap_read_unlock(mm);
-    if (size > cur - start)
+    if (size > cur - start) {
     return size - (cur - start);
+    }
     return 0;
     }
     EXPORT_SYMBOL(fault_in_safe_writeable);
@@ -1950,25 +2279,27 @@ pub unsafe extern "C" fn fault_in_safe_writeable(uaddr: *const char __user, size
 // copy_from_user()).
 //
 #[no_mangle]
-pub unsafe extern "C" fn fault_in_readable(uaddr: *const char __user, size: usize) -> usize {
-    size_t fault_in_readable(const char __user *uaddr, size_t size)
-    {
-    let mut start: c_ulong = (unsigned long)uaddr;
-    let mut end: c_ulong = start + size;
-    unsigned long cur;
+pub unsafe extern "C" fn fault_in_readable(uaddr: *const char , size: usize) -> usize {
+pub static mut start: c_ulong = 0;
+pub static mut end: c_ulong = 0;
+    let mut cur = 0;
     volatile char c;
-    if (unlikely(size == 0))
+    if (unlikely(size == 0)) {
     return 0;
-    if (!user_read_access_begin(uaddr, size))
+    }
+    if (!user_read_access_begin(uaddr, size)) {
     return size;
+    }
 // Stop once we overflow to 0.
-    for (cur = start; cur && cur < end; cur = PAGE_ALIGN_DOWN(cur + PAGE_SIZE))
-    unsafe_get_user(c, (const char __user *)cur, out);
-    out:
+    for (cur = start; cur && cur < end; cur = PAGE_ALIGN_DOWN(cur + PAGE_SIZE)) {
+    unsafe_get_user(c, cur, out);
+    }
+// label;
     user_read_access_end();
     (void)c;
-    if (size > cur - start)
+    if (size > cur - start) {
     return size - (cur - start);
+    }
     return 0;
     }
     EXPORT_SYMBOL(fault_in_readable);
@@ -1988,10 +2319,10 @@ pub unsafe extern "C" fn fault_in_readable(uaddr: *const char __user, size: usiz
 // Called without mmap_lock (takes and releases the mmap_lock by itself).
 //
 
-    struct page *get_dump_page(unsigned long addr, int *locked)
-    {
-    struct page *page;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn get_dump_page(addr: c_ulong, locked: *mut c_int) -> *mut c_void {
+pub static mut page: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     ret = __get_user_pages_locked(current.mm, addr, 1, &page, locked,
     FOLL_FORCE | FOLL_DUMP | FOLL_GET);
     return (ret == 1) ? page : core::ptr::null_mut();
@@ -2013,68 +2344,68 @@ pub struct pages_or_folios {
     pub entries: *mut c_void,
 }
 
-    bool has_folios;
-    long nr_entries;
+    let mut has_folios = 0;
+    let mut nr_entries = 0;
     };
-    static struct folio *pofs_get_folio(struct pages_or_folios *pofs, long i)
-    {
-    if (pofs.has_folios)
+#[no_mangle]
+pub unsafe extern "C" fn pofs_get_folio(pofs: *mut pages_or_folios, i: c_long) -> *mut c_void {
+    if (pofs.has_folios) {
     return pofs.folios[i];
+    }
     return page_folio(pofs.pages[i]);
     }
 #[no_mangle]
 unsafe extern "C" fn pofs_clear_entry(pofs: *mut pages_or_folios, i: c_long) {
-    static void pofs_clear_entry(struct pages_or_folios *pofs, long i)
-    {
     pofs.entries[i] = core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn pofs_unpin(pofs: *mut pages_or_folios) {
-    static void pofs_unpin(struct pages_or_folios *pofs)
-    {
-    if (pofs.has_folios)
+    if (pofs.has_folios) {
     unpin_folios(pofs.folios, pofs.nr_entries);
-    else
+    }
+    else {
     unpin_user_pages(pofs.pages, pofs.nr_entries);
     }
-    static struct folio *pofs_next_folio(struct folio *folio,
-    struct pages_or_folios *pofs, long *index_ptr)
-    {
-    let mut i: c_long = *index_ptr + 1;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn pofs_next_folio(folio: *mut folio, pofs: *mut pages_or_folios, index_ptr: *mut c_long) -> *mut c_void {
+pub static mut i: c_long = 0;
     if (!pofs.has_folios && folio_test_large(folio)) {
-    let mut start_pfn: c_ulong = folio_pfn(folio);
-    let mut end_pfn: c_ulong = start_pfn + folio_nr_pages(folio);
-    for (; i < pofs.nr_entries; i++) {
-    let mut pfn: c_ulong = page_to_pfn(pofs.pages[i]);
+pub static mut start_pfn: c_ulong = 0;
+pub static mut end_pfn: c_ulong = 0;
+    while (i < pofs.nr_entries) {
+pub static mut pfn: c_ulong = 0;
 // Is this page part of this folio?
-    if (pfn < start_pfn || pfn >= end_pfn)
+    if (pfn < start_pfn || pfn >= end_pfn) {
     break;
     }
     }
-    if (unlikely(i == pofs.nr_entries))
+    }
+    if (unlikely(i == pofs.nr_entries)) {
     return core::ptr::null_mut();
+    }
 // index_ptr = i;
     return pofs_get_folio(pofs, i);
     }
 //
 // Returns the number of collected folios. Return value is always >= 0.
 //
-    static unsigned long collect_longterm_unpinnable_folios(
-    struct list_head *movable_folio_list,
-    struct pages_or_folios *pofs)
-    {
-    let mut drained: enum lru_cache_drained = LRU_CACHE_NOT_DRAINED;
-    let mut collected: c_ulong = 0;
-    struct folio *folio;
-    let mut i: c_long = 0;
+#[no_mangle]
+pub unsafe extern "C" fn collect_longterm_unpinnable_folios(movable_folio_list: *mut list_head, pofs: *mut pages_or_folios) -> c_ulong {
+pub static mut drained: lru_cache_drained = 0;
+pub static mut collected: c_ulong = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut i: c_long = 0;
     for (folio = pofs_get_folio(pofs, i); folio;
     folio = pofs_next_folio(folio, pofs, &i)) {
-    let mut pin_refs: c_int = folio_has_pincount(folio) ? 1 : GUP_PIN_COUNTING_BIAS;
-    if (folio_is_longterm_pinnable(folio))
+pub static mut pin_refs: c_int = 0;
+    if (folio_is_longterm_pinnable(folio)) {
     continue;
-    collected++;
-    if (folio_is_device_coherent(folio))
+    }
+    collected += 1;
+    if (folio_is_device_coherent(folio)) {
     continue;
+    }
     if (folio_test_hugetlb(folio)) {
     folio_isolate_hugetlb(folio, movable_folio_list);
     continue;
@@ -2085,8 +2416,9 @@ unsafe extern "C" fn pofs_unpin(pofs: *mut pages_or_folios) {
 // caches.
 //
     lru_cache_drain_for_folio(folio, pin_refs, &drained);
-    if (!folio_isolate_lru(folio))
+    if (!folio_isolate_lru(folio)) {
     continue;
+    }
     list_add_tail(&folio.lru, movable_folio_list);
     node_stat_mod_folio(folio,
     NR_ISOLATED_ANON + folio_is_file_lru(folio),
@@ -2099,14 +2431,12 @@ unsafe extern "C" fn pofs_unpin(pofs: *mut pages_or_folios) {
 // Returns -EAGAIN if all folios were successfully migrated or -errno for
 // failure (or partial success).
 //
-    static int
-    migrate_longterm_unpinnable_folios(struct list_head *movable_folio_list,
-    struct pages_or_folios *pofs)
-    {
-    int ret;
-    unsigned long i;
-    for (i = 0; i < pofs.nr_entries; i++) {
-    struct folio *folio = pofs_get_folio(pofs, i);
+#[no_mangle]
+pub unsafe extern "C" fn migrate_longterm_unpinnable_folios(movable_folio_list: *mut list_head, pofs: *mut pages_or_folios) -> c_int {
+    let mut ret = 0;
+    let mut i = 0;
+    while (i < pofs.nr_entries) {
+    let mut folio = pofs_get_folio(pofs, i);
     if (folio_is_device_coherent(folio)) {
 //
 // Migration will fail if the folio is pinned, so
@@ -2118,7 +2448,7 @@ unsafe extern "C" fn pofs_unpin(pofs: *mut pages_or_folios) {
     gup_put_folio(folio, 1, FOLL_PIN);
     if (migrate_device_coherent_folio(folio)) {
     ret = -EBUSY;
-    goto err;
+// goto;
     }
     continue;
     }
@@ -2133,34 +2463,30 @@ unsafe extern "C" fn pofs_unpin(pofs: *mut pages_or_folios) {
     pofs_clear_entry(pofs, i);
     }
     if (!list_empty(movable_folio_list)) {
-    struct migration_target_control mtc = {
-    .nid = NUMA_NO_NODE,
-    .gfp_mask = GFP_USER | __GFP_NOWARN,
-    .reason = MR_LONGTERM_PIN,
-    };
+pub static mut migration_target_control: usize = 0;
     if (migrate_pages(movable_folio_list, alloc_migration_target,
     core::ptr::null_mut(), (unsigned long)&mtc, MIGRATE_SYNC,
     MR_LONGTERM_PIN, core::ptr::null_mut())) {
     ret = -ENOMEM;
-    goto err;
+// goto;
     }
     }
     putback_movable_pages(movable_folio_list);
     return -EAGAIN;
-    err:
+// label;
     pofs_unpin(pofs);
     putback_movable_pages(movable_folio_list);
     return ret;
     }
-    static long
-    check_and_migrate_movable_pages_or_folios(struct pages_or_folios *pofs)
-    {
-    LIST_HEAD(movable_folio_list);
-    unsigned long collected;
+#[no_mangle]
+pub unsafe extern "C" fn check_and_migrate_movable_pages_or_folios(pofs: *mut pages_or_folios) -> c_long {
+pub static mut movable_folio_list: usize = 0;
+    let mut collected = 0;
     collected = collect_longterm_unpinnable_folios(&movable_folio_list,
     pofs);
-    if (!collected)
+    if (!collected) {
     return 0;
+    }
     return migrate_longterm_unpinnable_folios(&movable_folio_list, pofs);
     }
 //
@@ -2184,39 +2510,31 @@ unsafe extern "C" fn pofs_unpin(pofs: *mut pages_or_folios) {
 // error back up the call stack. The caller does not need to unpin any folios in
 // that case, because this routine will do the unpinning.
 //
-    static long check_and_migrate_movable_folios(unsigned long nr_folios,
-    struct folio **folios)
-    {
-    struct pages_or_folios pofs = {
-    .folios = folios,
-    .has_folios = true,
-    .nr_entries = nr_folios,
-    };
+#[no_mangle]
+pub unsafe extern "C" fn check_and_migrate_movable_folios(nr_folios: c_ulong, folios: *mut *mut folio) -> c_long {
+pub static mut pages_or_folios: usize = 0;
     return check_and_migrate_movable_pages_or_folios(&pofs);
     }
 //
 // Return values and behavior are the same as those for
 // check_and_migrate_movable_folios().
 //
-    static long check_and_migrate_movable_pages(unsigned long nr_pages,
-    struct page **pages)
-    {
-    struct pages_or_folios pofs = {
-    .pages = pages,
-    .has_folios = false,
-    .nr_entries = nr_pages,
-    };
+#[no_mangle]
+pub unsafe extern "C" fn check_and_migrate_movable_pages(nr_pages: c_ulong, pages: *mut *mut page) -> c_long {
+pub static mut pages_or_folios: usize = 0;
     return check_and_migrate_movable_pages_or_folios(&pofs);
     }
 
-    static long check_and_migrate_movable_pages(unsigned long nr_pages,
-    struct page **pages)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: check_and_migrate_movable_pages
+pub unsafe extern "C" fn check_and_migrate_movable_pages_dup(nr_pages: c_ulong, pages: *mut *mut page) -> c_long {
     return 0;
     }
-    static long check_and_migrate_movable_folios(unsigned long nr_folios,
-    struct folio **folios)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: check_and_migrate_movable_folios
+pub unsafe extern "C" fn check_and_migrate_movable_folios_dup(nr_folios: c_ulong, folios: *mut *mut folio) -> c_long {
     return 0;
     }
 
@@ -2224,18 +2542,15 @@ unsafe extern "C" fn pofs_unpin(pofs: *mut pages_or_folios) {
 // __gup_longterm_locked() is a wrapper for __get_user_pages_locked which
 // allows us to process the FOLL_LONGTERM flag.
 //
-    static long __gup_longterm_locked(struct mm_struct *mm,
-    unsigned long start,
-    unsigned long nr_pages,
-    struct page **pages,
-    int *locked,
-    unsigned int gup_flags)
-    {
-    unsigned int flags;
-    long rc, nr_pinned_pages;
-    if (!(gup_flags & FOLL_LONGTERM))
+#[no_mangle]
+pub unsafe extern "C" fn __gup_longterm_locked(mm: *mut mm_struct, start: c_ulong, nr_pages: c_ulong, pages: *mut *mut page, locked: *mut c_int, gup_flags: c_uint) -> c_long {
+    let mut flags = 0;
+    let mut rc = 0;
+    let mut nr_pinned_pages = 0;
+    if (!(gup_flags & FOLL_LONGTERM)) {
     return __get_user_pages_locked(mm, start, nr_pages, pages,
     locked, gup_flags);
+    }
     flags = memalloc_pin_save();
     do {
     nr_pinned_pages = __get_user_pages_locked(mm, start, nr_pages,
@@ -2255,10 +2570,9 @@ unsafe extern "C" fn pofs_unpin(pofs: *mut pages_or_folios) {
 // Check that the given flags are valid for the exported gup/pup interface, and
 // update them with the required flags that the caller must have set.
 //
-    static bool is_valid_gup_args(struct page **pages, int *locked,
-    unsigned int *gup_flags_p, unsigned int to_set)
-    {
-    let mut gup_flags: c_uint = *gup_flags_p;
+#[no_mangle]
+pub unsafe extern "C" fn is_valid_gup_args(pages: *mut *mut page, locked: *mut c_int, gup_flags_p: *mut c_uint, to_set: c_uint) -> bool {
+pub static mut gup_flags: c_uint = 0;
 //
 // These flags not allowed to be specified externally to the gup
 // interfaces:
@@ -2266,29 +2580,35 @@ unsafe extern "C" fn pofs_unpin(pofs: *mut pages_or_folios) {
 // - FOLL_REMOTE is internal only, set in (get|pin)_user_pages_remote()
 // - FOLL_UNLOCKABLE is internal only and used if locked is !NULL
 //
-    if (WARN_ON_ONCE(gup_flags & INTERNAL_GUP_FLAGS))
+    if (WARN_ON_ONCE!(gup_flags & INTERNAL_GUP_FLAGS)) {
     return false;
+    }
     gup_flags |= to_set;
     if (locked) {
 // At the external interface locked must be set
-    if (WARN_ON_ONCE(*locked != 1))
+    if (WARN_ON_ONCE!(*locked != 1)) {
     return false;
+    }
     gup_flags |= FOLL_UNLOCKABLE;
     }
 // FOLL_GET and FOLL_PIN are mutually exclusive.
-    if (WARN_ON_ONCE((gup_flags & (FOLL_PIN | FOLL_GET)) ==
-    (FOLL_PIN | FOLL_GET)))
+    if (WARN_ON_ONCE!((gup_flags & (FOLL_PIN | FOLL_GET)) ==
+    (FOLL_PIN | FOLL_GET))) {
     return false;
+    }
 // LONGTERM can only be specified when pinning
-    if (WARN_ON_ONCE(!(gup_flags & FOLL_PIN) && (gup_flags & FOLL_LONGTERM)))
+    if (WARN_ON_ONCE!(!(gup_flags & FOLL_PIN) && (gup_flags & FOLL_LONGTERM))) {
     return false;
+    }
 // Pages input must be given if using GET/PIN
-    if (WARN_ON_ONCE((gup_flags & (FOLL_GET | FOLL_PIN)) && !pages))
+    if (WARN_ON_ONCE!((gup_flags & (FOLL_GET | FOLL_PIN)) && !pages)) {
     return false;
+    }
 // We want to allow the pgmap to be hot-unplugged at all times
-    if (WARN_ON_ONCE((gup_flags & FOLL_LONGTERM) &&
-    (gup_flags & FOLL_PCI_P2PDMA)))
+    if (WARN_ON_ONCE!((gup_flags & FOLL_LONGTERM) &&
+    (gup_flags & FOLL_PCI_P2PDMA))) {
     return false;
+    }
 // gup_flags_p = gup_flags;
     return true;
     }
@@ -2349,26 +2669,23 @@ unsafe extern "C" fn pofs_unpin(pofs: *mut pages_or_folios) {
 // should use get_user_pages_remote because it cannot pass
 // FAULT_FLAG_ALLOW_RETRY to handle_mm_fault.
 //
-    long get_user_pages_remote(struct mm_struct *mm,
-    unsigned long start, unsigned long nr_pages,
-    unsigned int gup_flags, struct page **pages,
-    int *locked)
-    {
-    let mut local_locked: c_int = 1;
+#[no_mangle]
+pub unsafe extern "C" fn get_user_pages_remote(mm: *mut mm_struct, start: c_ulong, nr_pages: c_ulong, gup_flags: c_uint, pages: *mut *mut page, locked: *mut c_int) -> c_long {
+pub static mut local_locked: c_int = 1;
     if (!is_valid_gup_args(pages, locked, &gup_flags,
-    FOLL_TOUCH | FOLL_REMOTE))
+    FOLL_TOUCH | FOLL_REMOTE)) {
     return -EINVAL;
+    }
     return __get_user_pages_locked(mm, start, nr_pages, pages,
     locked ? locked : &local_locked,
     gup_flags);
     }
     EXPORT_SYMBOL(get_user_pages_remote);
 
-    long get_user_pages_remote(struct mm_struct *mm,
-    unsigned long start, unsigned long nr_pages,
-    unsigned int gup_flags, struct page **pages,
-    int *locked)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: get_user_pages_remote
+pub unsafe extern "C" fn get_user_pages_remote_dup(mm: *mut mm_struct, start: c_ulong, nr_pages: c_ulong, gup_flags: c_uint, pages: *mut *mut page, locked: *mut c_int) -> c_long {
     return 0;
     }
 
@@ -2386,12 +2703,12 @@ unsafe extern "C" fn pofs_unpin(pofs: *mut pages_or_folios) {
 // the current task, and doesn't allow passing of a locked parameter.  We also
 // obviously don't pass FOLL_REMOTE in here.
 //
-    long get_user_pages(unsigned long start, unsigned long nr_pages,
-    unsigned int gup_flags, struct page **pages)
-    {
-    let mut locked: c_int = 1;
-    if (!is_valid_gup_args(pages, core::ptr::null_mut(), &gup_flags, FOLL_TOUCH))
+#[no_mangle]
+pub unsafe extern "C" fn get_user_pages(start: c_ulong, nr_pages: c_ulong, gup_flags: c_uint, pages: *mut *mut page) -> c_long {
+pub static mut locked: c_int = 1;
+    if (!is_valid_gup_args(pages, core::ptr::null_mut(), &gup_flags, FOLL_TOUCH)) {
     return -EINVAL;
+    }
     return __get_user_pages_locked(current.mm, start, nr_pages, pages,
     &locked, gup_flags);
     }
@@ -2411,13 +2728,13 @@ unsafe extern "C" fn pofs_unpin(pofs: *mut pages_or_folios) {
 // get_user_pages_fast should be used instead if specific gup_flags
 // (e.g. FOLL_FORCE) are not required.
 //
-    long get_user_pages_unlocked(unsigned long start, unsigned long nr_pages,
-    struct page **pages, unsigned int gup_flags)
-    {
-    let mut locked: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn get_user_pages_unlocked(start: c_ulong, nr_pages: c_ulong, pages: *mut *mut page, gup_flags: c_uint) -> c_long {
+pub static mut locked: c_int = 0;
     if (!is_valid_gup_args(pages, core::ptr::null_mut(), &gup_flags,
-    FOLL_TOUCH | FOLL_UNLOCKABLE))
+    FOLL_TOUCH | FOLL_UNLOCKABLE)) {
     return -EINVAL;
+    }
     return __get_user_pages_locked(current.mm, start, nr_pages, pages,
     &locked, gup_flags);
     }
@@ -2476,30 +2793,33 @@ unsafe extern "C" fn pofs_unpin(pofs: *mut pages_or_folios) {
 //
 #[no_mangle]
 unsafe extern "C" fn gup_fast_folio_allowed(folio: *mut folio, flags: c_uint) -> bool {
-    static bool gup_fast_folio_allowed(struct folio *folio, unsigned int flags)
-    {
-    let mut reject_file_backed: bool = false;
-    struct address_space *mapping;
-    let mut check_secretmem: bool = false;
-    unsigned long mapping_flags;
+pub static mut reject_file_backed: bool = false;
+pub static mut mapping: *mut c_void = core::ptr::null_mut();
+pub static mut check_secretmem: bool = false;
+    let mut mapping_flags = 0;
 //
 // If we aren't pinning then no problematic write can occur. A long term
 // pin is the most egregious case so this is the one we disallow.
 //
     if ((flags & (FOLL_PIN | FOLL_LONGTERM | FOLL_WRITE)) ==
-    (FOLL_PIN | FOLL_LONGTERM | FOLL_WRITE))
+    (FOLL_PIN | FOLL_LONGTERM | FOLL_WRITE)) {
     reject_file_backed = true;
+    }
 // We hold a folio reference, so we can safely access folio fields.
 // secretmem folios are always order-0 folios.
-    if (IS_ENABLED(CONFIG_SECRETMEM) && !folio_test_large(folio))
+    if (IS_ENABLED!(CONFIG_SECRETMEM) && !folio_test_large(folio)) {
     check_secretmem = true;
-    if (!reject_file_backed && !check_secretmem)
+    }
+    if (!reject_file_backed && !check_secretmem) {
     return true;
-    if (WARN_ON_ONCE(folio_test_slab(folio)))
+    }
+    if (WARN_ON_ONCE!(folio_test_slab(folio))) {
     return false;
+    }
 // hugetlb neither requires dirty-tracking nor can be secretmem.
-    if (folio_test_hugetlb(folio))
+    if (folio_test_hugetlb(folio)) {
     return true;
+    }
 //
 // GUP-fast disables IRQs. When IRQS are disabled, RCU grace periods
 // cannot proceed, which means no actions performed under RCU can
@@ -2525,18 +2845,21 @@ unsafe extern "C" fn gup_fast_folio_allowed(folio: *mut folio, flags: c_uint) ->
 // inode's address_space), so in that case, we can continue with the
 // fast path.
 //
-    if (!mapping)
+    if (!mapping) {
     return !reject_file_backed;
+    }
 // Anonymous folios pose no problem.
     mapping_flags = (unsigned long)mapping & FOLIO_MAPPING_FLAGS;
-    if (mapping_flags)
+    if (mapping_flags) {
     return mapping_flags & FOLIO_MAPPING_ANON;
+    }
 //
 // At this point, we know the mapping is non-null and points to an
 // address_space object.
 //
-    if (check_secretmem && secretmem_mapping(mapping))
+    if (check_secretmem && secretmem_mapping(mapping)) {
     return false;
+    }
 // The only remaining allowed file system is shmem.
     return !reject_file_backed || shmem_mapping(mapping);
     }
@@ -2560,19 +2883,19 @@ unsafe extern "C" fn gup_fast_folio_allowed(folio: *mut folio, flags: c_uint) ->
 // also check pmd here to make sure pmd doesn't change (corresponds to
 // pmdp_collapse_flush() in the THP collapse code path).
 //
-    static int gup_fast_pte_range(pmd_t pmd, pmd_t *pmdp, unsigned long addr,
-    unsigned long end, unsigned int flags, struct page **pages,
-    int *nr)
-    {
-    let mut ret: c_int = 0;
-    pte_t *ptep, *ptem;
+#[no_mangle]
+pub unsafe extern "C" fn gup_fast_pte_range(pmd: pmd_t, pmdp: *mut pmd_t, addr: c_ulong, end: c_ulong, flags: c_uint, pages: *mut *mut page, nr: *mut c_int) -> c_int {
+pub static mut ret: c_int = 0;
+    let mut ptep = core::ptr::null_mut();
+    let mut ptem = core::ptr::null_mut();
     ptem = ptep = pte_offset_map(&pmd, addr);
-    if (!ptep)
+    if (!ptep) {
     return 0;
+    }
     do {
-    let mut pte: pte_t = ptep_get_lockless(ptep);
-    struct page *page;
-    struct folio *folio;
+pub static mut pte: pte_t = 0;
+pub static mut page: *mut c_void = core::ptr::null_mut();
+pub static mut folio: *mut c_void = core::ptr::null_mut();
 //
 // Always fallback to ordinary GUP on PROT_NONE-mapped pages:
 // pte_access_permitted() better should reject these pages
@@ -2580,30 +2903,34 @@ unsafe extern "C" fn gup_fast_folio_allowed(folio: *mut folio, flags: c_uint) ->
 // cases where ordinary GUP would fail due to VMA access
 // permissions.
 //
-    if (pte_protnone(pte))
-    goto pte_unmap;
-    if (!pte_access_permitted(pte, flags & FOLL_WRITE))
-    goto pte_unmap;
-    if (pte_special(pte))
-    goto pte_unmap;
+    if (pte_protnone(pte)) {
+// goto;
+    }
+    if (!pte_access_permitted(pte, flags & FOLL_WRITE)) {
+// goto;
+    }
+    if (pte_special(pte)) {
+// goto;
+    }
 // If it's not marked as special it must have a valid memmap.
     VM_WARN_ON_ONCE(!pfn_valid(pte_pfn(pte)));
     page = pte_page(pte);
     folio = try_grab_folio_fast(page, 1, flags);
-    if (!folio)
-    goto pte_unmap;
+    if (!folio) {
+// goto;
+    }
     if (unlikely(pmd_val(pmd) != pmd_val(pmdp_get_lockless(pmdp))) ||
     unlikely(pte_val(pte) != pte_val(ptep_get_lockless(ptep)))) {
     gup_put_folio(folio, 1, flags);
-    goto pte_unmap;
+// goto;
     }
     if (!gup_fast_folio_allowed(folio, flags)) {
     gup_put_folio(folio, 1, flags);
-    goto pte_unmap;
+// goto;
     }
     if (!pte_write(pte) && gup_must_unshare(core::ptr::null_mut(), flags, page)) {
     gup_put_folio(folio, 1, flags);
-    goto pte_unmap;
+// goto;
     }
 //
 // We need to make the page accessible if and only if we are
@@ -2613,14 +2940,14 @@ unsafe extern "C" fn gup_fast_folio_allowed(folio: *mut folio, flags: c_uint) ->
 //
     if ((flags & FOLL_PIN) && arch_make_folio_accessible(folio)) {
     gup_put_folio(folio, 1, flags);
-    goto pte_unmap;
+// goto;
     }
     folio_set_referenced(folio);
     pages[*nr] = page;
     (*nr)++;
     } while (ptep++, addr += PAGE_SIZE, addr != end);
     ret = 1;
-    pte_unmap:
+// label;
     pte_unmap(ptem);
     return ret;
     }
@@ -2634,29 +2961,30 @@ unsafe extern "C" fn gup_fast_folio_allowed(folio: *mut folio, flags: c_uint) ->
 // get_user_pages_fast_only implementation that can pin pages. Thus it's still
 // useful to have gup_fast_pmd_leaf even if we can't operate on ptes.
 //
-    static int gup_fast_pte_range(pmd_t pmd, pmd_t *pmdp, unsigned long addr,
-    unsigned long end, unsigned int flags, struct page **pages,
-    int *nr)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: gup_fast_pte_range
+pub unsafe extern "C" fn gup_fast_pte_range_dup(pmd: pmd_t, pmdp: *mut pmd_t, addr: c_ulong, end: c_ulong, flags: c_uint, pages: *mut *mut page, nr: *mut c_int) -> c_int {
     return 0;
     }
 
-    static int gup_fast_pmd_leaf(pmd_t orig, pmd_t *pmdp, unsigned long addr,
-    unsigned long end, unsigned int flags, struct page **pages,
-    int *nr)
-    {
-    struct page *page;
-    struct folio *folio;
-    int refs;
-    if (!pmd_access_permitted(orig, flags & FOLL_WRITE))
+#[no_mangle]
+pub unsafe extern "C" fn gup_fast_pmd_leaf(orig: pmd_t, pmdp: *mut pmd_t, addr: c_ulong, end: c_ulong, flags: c_uint, pages: *mut *mut page, nr: *mut c_int) -> c_int {
+pub static mut page: *mut c_void = core::ptr::null_mut();
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut refs = 0;
+    if (!pmd_access_permitted(orig, flags & FOLL_WRITE)) {
     return 0;
-    if (pmd_special(orig))
+    }
+    if (pmd_special(orig)) {
     return 0;
+    }
     refs = (end - addr) >> PAGE_SHIFT;
     page = pmd_page(orig) + ((addr & ~PMD_MASK) >> PAGE_SHIFT);
     folio = try_grab_folio_fast(page, refs, flags);
-    if (!folio)
+    if (!folio) {
     return 0;
+    }
     if (unlikely(pmd_val(orig) != pmd_val(pmdp_get_lockless(pmdp)))) {
     gup_put_folio(folio, refs, flags);
     return 0;
@@ -2671,27 +2999,29 @@ unsafe extern "C" fn gup_fast_folio_allowed(folio: *mut folio, flags: c_uint) ->
     }
     pages += *nr;
 // nr += refs;
-    for (; refs; refs--)
-// (pages++) = page++;
+    for (; refs; refs--) {
+// (pages++) = page += 1;
+    }
     folio_set_referenced(folio);
     return 1;
     }
-    static int gup_fast_pud_leaf(pud_t orig, pud_t *pudp, unsigned long addr,
-    unsigned long end, unsigned int flags, struct page **pages,
-    int *nr)
-    {
-    struct page *page;
-    struct folio *folio;
-    int refs;
-    if (!pud_access_permitted(orig, flags & FOLL_WRITE))
+#[no_mangle]
+pub unsafe extern "C" fn gup_fast_pud_leaf(orig: pud_t, pudp: *mut pud_t, addr: c_ulong, end: c_ulong, flags: c_uint, pages: *mut *mut page, nr: *mut c_int) -> c_int {
+pub static mut page: *mut c_void = core::ptr::null_mut();
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut refs = 0;
+    if (!pud_access_permitted(orig, flags & FOLL_WRITE)) {
     return 0;
-    if (pud_special(orig))
+    }
+    if (pud_special(orig)) {
     return 0;
+    }
     refs = (end - addr) >> PAGE_SHIFT;
     page = pud_page(orig) + ((addr & ~PUD_MASK) >> PAGE_SHIFT);
     folio = try_grab_folio_fast(page, refs, flags);
-    if (!folio)
+    if (!folio) {
     return 0;
+    }
     if (unlikely(pud_val(orig) != pud_val(pudp_get(pudp)))) {
     gup_put_folio(folio, refs, flags);
     return 0;
@@ -2706,98 +3036,104 @@ unsafe extern "C" fn gup_fast_folio_allowed(folio: *mut folio, flags: c_uint) ->
     }
     pages += *nr;
 // nr += refs;
-    for (; refs; refs--)
-// (pages++) = page++;
+    for (; refs; refs--) {
+// (pages++) = page += 1;
+    }
     folio_set_referenced(folio);
     return 1;
     }
-    static int gup_fast_pmd_range(pud_t *pudp, pud_t pud, unsigned long addr,
-    unsigned long end, unsigned int flags, struct page **pages,
-    int *nr)
-    {
-    unsigned long next;
-    pmd_t *pmdp;
+#[no_mangle]
+pub unsafe extern "C" fn gup_fast_pmd_range(pudp: *mut pud_t, pud: pud_t, addr: c_ulong, end: c_ulong, flags: c_uint, pages: *mut *mut page, nr: *mut c_int) -> c_int {
+    let mut next = 0;
+pub static mut pmdp: *mut c_void = core::ptr::null_mut();
     pmdp = pmd_offset_lockless(pudp, pud, addr);
     do {
-    let mut pmd: pmd_t = pmdp_get_lockless(pmdp);
+pub static mut pmd: pmd_t = 0;
     next = pmd_addr_end(addr, end);
-    if (!pmd_present(pmd))
+    if (!pmd_present(pmd)) {
     return 0;
+    }
     if (unlikely(pmd_leaf(pmd))) {
 // See gup_fast_pte_range()
-    if (pmd_protnone(pmd))
+    if (pmd_protnone(pmd)) {
     return 0;
+    }
     if (!gup_fast_pmd_leaf(pmd, pmdp, addr, next, flags,
-    pages, nr))
+    pages, nr)) {
     return 0;
+    }
     } else if (!gup_fast_pte_range(pmd, pmdp, addr, next, flags,
-    pages, nr))
+    pages, nr)) {
     return 0;
+    }
     } while (pmdp++, addr = next, addr != end);
     return 1;
     }
-    static int gup_fast_pud_range(p4d_t *p4dp, p4d_t p4d, unsigned long addr,
-    unsigned long end, unsigned int flags, struct page **pages,
-    int *nr)
-    {
-    unsigned long next;
-    pud_t *pudp;
+#[no_mangle]
+pub unsafe extern "C" fn gup_fast_pud_range(p4dp: *mut p4d_t, p4d: p4d_t, addr: c_ulong, end: c_ulong, flags: c_uint, pages: *mut *mut page, nr: *mut c_int) -> c_int {
+    let mut next = 0;
+pub static mut pudp: *mut c_void = core::ptr::null_mut();
     pudp = pud_offset_lockless(p4dp, p4d, addr);
     do {
-    let mut pud: pud_t = pudp_get(pudp);
+pub static mut pud: pud_t = 0;
     next = pud_addr_end(addr, end);
-    if (unlikely(!pud_present(pud)))
+    if (unlikely(!pud_present(pud))) {
     return 0;
+    }
     if (unlikely(pud_leaf(pud))) {
     if (!gup_fast_pud_leaf(pud, pudp, addr, next, flags,
-    pages, nr))
+    pages, nr)) {
     return 0;
+    }
     } else if (!gup_fast_pmd_range(pudp, pud, addr, next, flags,
-    pages, nr))
+    pages, nr)) {
     return 0;
+    }
     } while (pudp++, addr = next, addr != end);
     return 1;
     }
-    static int gup_fast_p4d_range(pgd_t *pgdp, pgd_t pgd, unsigned long addr,
-    unsigned long end, unsigned int flags, struct page **pages,
-    int *nr)
-    {
-    unsigned long next;
-    p4d_t *p4dp;
+#[no_mangle]
+pub unsafe extern "C" fn gup_fast_p4d_range(pgdp: *mut pgd_t, pgd: pgd_t, addr: c_ulong, end: c_ulong, flags: c_uint, pages: *mut *mut page, nr: *mut c_int) -> c_int {
+    let mut next = 0;
+pub static mut p4dp: *mut c_void = core::ptr::null_mut();
     p4dp = p4d_offset_lockless(pgdp, pgd, addr);
     do {
-    let mut p4d: p4d_t = p4dp_get(p4dp);
+pub static mut p4d: p4d_t = 0;
     next = p4d_addr_end(addr, end);
-    if (!p4d_present(p4d))
+    if (!p4d_present(p4d)) {
     return 0;
-    BUILD_BUG_ON(p4d_leaf(p4d));
+    }
+    BUILD_BUG_ON!(p4d_leaf(p4d));
     if (!gup_fast_pud_range(p4dp, p4d, addr, next, flags,
-    pages, nr))
+    pages, nr)) {
     return 0;
+    }
     } while (p4dp++, addr = next, addr != end);
     return 1;
     }
-    static void gup_fast_pgd_range(unsigned long addr, unsigned long end,
-    unsigned int flags, struct page **pages, int *nr)
-    {
-    unsigned long next;
-    pgd_t *pgdp;
+#[no_mangle]
+pub unsafe extern "C" fn gup_fast_pgd_range(addr: c_ulong, end: c_ulong, flags: c_uint, pages: *mut *mut page, nr: *mut c_int) {
+    let mut next = 0;
+pub static mut pgdp: *mut c_void = core::ptr::null_mut();
     pgdp = pgd_offset(current.mm, addr);
     do {
-    let mut pgd: pgd_t = pgdp_get(pgdp);
+pub static mut pgd: pgd_t = 0;
     next = pgd_addr_end(addr, end);
-    if (pgd_none(pgd))
+    if (pgd_none(pgd)) {
     return;
-    BUILD_BUG_ON(pgd_leaf(pgd));
+    }
+    BUILD_BUG_ON!(pgd_leaf(pgd));
     if (!gup_fast_p4d_range(pgdp, pgd, addr, next, flags,
-    pages, nr))
+    pages, nr)) {
     return;
+    }
     } while (pgdp++, addr = next, addr != end);
     }
 
-    static inline void gup_fast_pgd_range(unsigned long addr, unsigned long end,
-    unsigned int flags, struct page **pages, int *nr)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: gup_fast_pgd_range
+pub unsafe extern "C" fn gup_fast_pgd_range_dup(addr: c_ulong, end: c_ulong, flags: c_uint, pages: *mut *mut page, nr: *mut c_int) {
     }
 
 //
@@ -2806,23 +3142,22 @@ unsafe extern "C" fn gup_fast_folio_allowed(folio: *mut folio, flags: c_uint) ->
 //
 #[no_mangle]
 unsafe extern "C" fn gup_fast_permitted(start: c_ulong, end: c_ulong) -> bool {
-    static bool gup_fast_permitted(unsigned long start, unsigned long end)
-    {
     return true;
     }
 
-    static unsigned long gup_fast(unsigned long start, unsigned long end,
-    unsigned int gup_flags, struct page **pages)
-    {
-    unsigned long flags;
-    let mut nr_pinned: c_int = 0;
-    unsigned seq;
-    if (!IS_ENABLED(CONFIG_HAVE_GUP_FAST) ||
-    !gup_fast_permitted(start, end))
+#[no_mangle]
+pub unsafe extern "C" fn gup_fast(start: c_ulong, end: c_ulong, gup_flags: c_uint, pages: *mut *mut page) -> c_ulong {
+    let mut flags = 0;
+pub static mut nr_pinned: c_int = 0;
+    let mut seq: c_uint = 0;
+    if (!IS_ENABLED!(CONFIG_HAVE_GUP_FAST) ||
+    !gup_fast_permitted(start, end)) {
     return 0;
+    }
     if (gup_flags & FOLL_PIN) {
-    if (!raw_seqcount_try_begin(&current.mm.write_protect_seq, seq))
+    if (!raw_seqcount_try_begin(&current.mm.write_protect_seq, seq)) {
     return 0;
+    }
     }
 //
 // Disable interrupts. The nested form is used, in order to allow full,
@@ -2852,31 +3187,36 @@ unsafe extern "C" fn gup_fast_permitted(start: c_ulong, end: c_ulong) -> bool {
     }
     return nr_pinned;
     }
-    static int gup_fast_fallback(unsigned long start, unsigned long nr_pages,
-    unsigned int gup_flags, struct page **pages)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn gup_fast_fallback(start: c_ulong, nr_pages: c_ulong, gup_flags: c_uint, pages: *mut *mut page) -> c_int {
     unsigned long len, end;
-    unsigned long nr_pinned;
-    let mut locked: c_int = 0;
-    int ret;
-    if (WARN_ON_ONCE(gup_flags & ~(FOLL_WRITE | FOLL_LONGTERM |
+    let mut nr_pinned = 0;
+pub static mut locked: c_int = 0;
+    let mut ret = 0;
+    if (WARN_ON_ONCE!(gup_flags & ~(FOLL_WRITE | FOLL_LONGTERM |
     FOLL_FORCE | FOLL_PIN | FOLL_GET |
     FOLL_FAST_ONLY | FOLL_NOFAULT |
-    FOLL_PCI_P2PDMA | FOLL_HONOR_NUMA_FAULT)))
+    FOLL_PCI_P2PDMA | FOLL_HONOR_NUMA_FAULT))) {
     return -EINVAL;
-    if (gup_flags & FOLL_PIN)
+    }
+    if (gup_flags & FOLL_PIN) {
     mm_set_has_pinned_flag(current.mm);
-    if (!(gup_flags & FOLL_FAST_ONLY))
+    }
+    if (!(gup_flags & FOLL_FAST_ONLY)) {
     might_lock_read(&current.mm.mmap_lock);
+    }
     start = untagged_addr(start) & PAGE_MASK;
     len = nr_pages << PAGE_SHIFT;
-    if (check_add_overflow(start, len, &end))
+    if (check_add_overflow(start, len, &end)) {
     return -EOVERFLOW;
-    if (end > TASK_SIZE_MAX)
+    }
+    if (end > TASK_SIZE_MAX) {
     return -EFAULT;
+    }
     nr_pinned = gup_fast(start, end, gup_flags, pages);
-    if (nr_pinned == nr_pages || gup_flags & FOLL_FAST_ONLY)
+    if (nr_pinned == nr_pages || gup_flags & FOLL_FAST_ONLY) {
     return nr_pinned;
+    }
 // Slow path: try to get the remaining pages with get_user_pages
     start += nr_pinned << PAGE_SHIFT;
     pages += nr_pinned;
@@ -2888,8 +3228,9 @@ unsafe extern "C" fn gup_fast_permitted(start: c_ulong, end: c_ulong) -> bool {
 // The caller has to unpin the pages we already pinned so
 // returning -errno is not an option
 //
-    if (nr_pinned)
+    if (nr_pinned) {
     return nr_pinned;
+    }
     return ret;
     }
     return ret + nr_pinned;
@@ -2912,9 +3253,8 @@ unsafe extern "C" fn gup_fast_permitted(start: c_ulong, end: c_ulong) -> bool {
 // access can get ambiguous page results. If you call this function without
 // 'write' set, you'd better be sure that you're ok with that ambiguity.
 //
-    int get_user_pages_fast_only(unsigned long start, int nr_pages,
-    unsigned int gup_flags, struct page **pages)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn get_user_pages_fast_only(start: c_ulong, nr_pages: c_int, gup_flags: c_uint, pages: *mut *mut page) -> c_int {
 //
 // Internally (within mm/gup.c), gup fast variants must set FOLL_GET,
 // because gup fast is always a "pin with a +1 page refcount" request.
@@ -2923,8 +3263,9 @@ unsafe extern "C" fn gup_fast_permitted(start: c_ulong, end: c_ulong) -> bool {
 // this routine: no fall back to regular ("slow") GUP.
 //
     if (!is_valid_gup_args(pages, core::ptr::null_mut(), &gup_flags,
-    FOLL_GET | FOLL_FAST_ONLY))
+    FOLL_GET | FOLL_FAST_ONLY)) {
     return -EINVAL;
+    }
     return gup_fast_fallback(start, nr_pages, gup_flags, pages);
     }
     EXPORT_SYMBOL_GPL(get_user_pages_fast_only);
@@ -2944,17 +3285,17 @@ unsafe extern "C" fn gup_fast_permitted(start: c_ulong, end: c_ulong) -> bool {
 // If nr_pages is 0 or negative, returns 0. If no pages were pinned, returns
 // -errno.
 //
-    int get_user_pages_fast(unsigned long start, int nr_pages,
-    unsigned int gup_flags, struct page **pages)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn get_user_pages_fast(start: c_ulong, nr_pages: c_int, gup_flags: c_uint, pages: *mut *mut page) -> c_int {
 //
 // The caller may or may not have explicitly set FOLL_GET; either way is
 // OK. However, internally (within mm/gup.c), gup fast variants must set
 // FOLL_GET, because gup fast is always a "pin with a +1 page refcount"
 // request.
 //
-    if (!is_valid_gup_args(pages, core::ptr::null_mut(), &gup_flags, FOLL_GET))
+    if (!is_valid_gup_args(pages, core::ptr::null_mut(), &gup_flags, FOLL_GET)) {
     return -EINVAL;
+    }
     return gup_fast_fallback(start, nr_pages, gup_flags, pages);
     }
     EXPORT_SYMBOL_GPL(get_user_pages_fast);
@@ -2977,11 +3318,11 @@ unsafe extern "C" fn gup_fast_permitted(start: c_ulong, end: c_ulong) -> bool {
 // Note that if a zero_page is amongst the returned pages, it will not have
 // pins in it and unpin_user_page() will not remove pins from it.
 //
-    int pin_user_pages_fast(unsigned long start, int nr_pages,
-    unsigned int gup_flags, struct page **pages)
-    {
-    if (!is_valid_gup_args(pages, core::ptr::null_mut(), &gup_flags, FOLL_PIN))
+#[no_mangle]
+pub unsafe extern "C" fn pin_user_pages_fast(start: c_ulong, nr_pages: c_int, gup_flags: c_uint, pages: *mut *mut page) -> c_int {
+    if (!is_valid_gup_args(pages, core::ptr::null_mut(), &gup_flags, FOLL_PIN)) {
     return -EINVAL;
+    }
     return gup_fast_fallback(start, nr_pages, gup_flags, pages);
     }
     EXPORT_SYMBOL_GPL(pin_user_pages_fast);
@@ -3008,15 +3349,13 @@ unsafe extern "C" fn gup_fast_permitted(start: c_ulong, end: c_ulong) -> bool {
 // Note that if a zero_page is amongst the returned pages, it will not have
 // pins in it and unpin_user_page*() will not remove pins from it.
 //
-    long pin_user_pages_remote(struct mm_struct *mm,
-    unsigned long start, unsigned long nr_pages,
-    unsigned int gup_flags, struct page **pages,
-    int *locked)
-    {
-    let mut local_locked: c_int = 1;
+#[no_mangle]
+pub unsafe extern "C" fn pin_user_pages_remote(mm: *mut mm_struct, start: c_ulong, nr_pages: c_ulong, gup_flags: c_uint, pages: *mut *mut page, locked: *mut c_int) -> c_long {
+pub static mut local_locked: c_int = 1;
     if (!is_valid_gup_args(pages, locked, &gup_flags,
-    FOLL_PIN | FOLL_TOUCH | FOLL_REMOTE))
+    FOLL_PIN | FOLL_TOUCH | FOLL_REMOTE)) {
     return 0;
+    }
     return __gup_longterm_locked(mm, start, nr_pages, pages,
     locked ? locked : &local_locked,
     gup_flags);
@@ -3040,12 +3379,12 @@ unsafe extern "C" fn gup_fast_permitted(start: c_ulong, end: c_ulong) -> bool {
 // Note that if a zero_page is amongst the returned pages, it will not have
 // pins in it and unpin_user_page*() will not remove pins from it.
 //
-    long pin_user_pages(unsigned long start, unsigned long nr_pages,
-    unsigned int gup_flags, struct page **pages)
-    {
-    let mut locked: c_int = 1;
-    if (!is_valid_gup_args(pages, core::ptr::null_mut(), &gup_flags, FOLL_PIN))
+#[no_mangle]
+pub unsafe extern "C" fn pin_user_pages(start: c_ulong, nr_pages: c_ulong, gup_flags: c_uint, pages: *mut *mut page) -> c_long {
+pub static mut locked: c_int = 1;
+    if (!is_valid_gup_args(pages, core::ptr::null_mut(), &gup_flags, FOLL_PIN)) {
     return 0;
+    }
     return __gup_longterm_locked(current.mm, start, nr_pages,
     pages, &locked, gup_flags);
     }
@@ -3058,13 +3397,13 @@ unsafe extern "C" fn gup_fast_permitted(start: c_ulong, end: c_ulong) -> bool {
 // Note that if a zero_page is amongst the returned pages, it will not have
 // pins in it and unpin_user_page*() will not remove pins from it.
 //
-    long pin_user_pages_unlocked(unsigned long start, unsigned long nr_pages,
-    struct page **pages, unsigned int gup_flags)
-    {
-    let mut locked: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn pin_user_pages_unlocked(start: c_ulong, nr_pages: c_ulong, pages: *mut *mut page, gup_flags: c_uint) -> c_long {
+pub static mut locked: c_int = 0;
     if (!is_valid_gup_args(pages, core::ptr::null_mut(), &gup_flags,
-    FOLL_PIN | FOLL_TOUCH | FOLL_UNLOCKABLE))
+    FOLL_PIN | FOLL_TOUCH | FOLL_UNLOCKABLE)) {
     return 0;
+    }
     return __gup_longterm_locked(current.mm, start, nr_pages, pages,
     &locked, gup_flags);
     }
@@ -3095,25 +3434,29 @@ unsafe extern "C" fn gup_fast_permitted(start: c_ulong, end: c_ulong) -> bool {
 // as it depends on the folio sizes that cover the range [start, end].
 // If no folios were pinned, it returns -errno.
 //
-    long memfd_pin_folios(struct file *memfd, loff_t start, loff_t end,
-    struct folio **folios, unsigned int max_folios,
-    pgoff_t *offset)
-    {
-    unsigned int flags, nr_folios, nr_found;
+#[no_mangle]
+pub unsafe extern "C" fn memfd_pin_folios(memfd: *mut file, start: loff_t, end: loff_t, folios: *mut *mut folio, max_folios: c_uint, offset: *mut pgoff_t) -> c_long {
+    let mut flags = 0;
+    let mut nr_folios = 0;
+    let mut nr_found = 0;
     unsigned int i, pgshift = PAGE_SHIFT;
     pgoff_t start_idx, end_idx;
-    struct folio *folio = core::ptr::null_mut();
-    struct folio_batch fbatch;
-    struct hstate *h;
-    let mut ret: c_long = -EINVAL;
-    if (start < 0 || start > end || !max_folios)
+    let mut folio = core::ptr::null_mut();
+pub static mut fbatch: usize = 0;
+pub static mut h: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_long = 0;
+    if (start < 0 || start > end || !max_folios) {
     return -EINVAL;
-    if (!memfd)
+    }
+    if (!memfd) {
     return -EINVAL;
-    if (!shmem_file(memfd) && !is_file_hugepages(memfd))
+    }
+    if (!shmem_file(memfd) && !is_file_hugepages(memfd)) {
     return -EINVAL;
-    if (end >= i_size_read(file_inode(memfd)))
+    }
+    if (end >= i_size_read(file_inode(memfd))) {
     return -EINVAL;
+    }
     if (is_file_hugepages(memfd)) {
     h = hstate_file(memfd);
     pgshift = huge_page_shift(h);
@@ -3143,18 +3486,20 @@ unsafe extern "C" fn gup_fast_permitted(start: c_ulong, end: c_ulong) -> bool {
     folio_put(folio);
     folio = core::ptr::null_mut();
     }
-    for (i = 0; i < nr_found; i++) {
+    while (i < nr_found) {
     folio = fbatch.folios[i];
     if (try_grab_folio(folio, 1, FOLL_PIN)) {
     folio_batch_release(&fbatch);
     ret = -EINVAL;
-    goto err;
+// goto;
     }
-    if (nr_folios == 0)
+    if (nr_folios == 0) {
 // offset = offset_in_folio(folio, start);
+    }
     folios[nr_folios] = folio;
-    if (++nr_folios == max_folios)
+    if (++nr_folios == max_folios) {
     break;
+    }
     }
     folio = core::ptr::null_mut();
     folio_batch_release(&fbatch);
@@ -3162,8 +3507,9 @@ unsafe extern "C" fn gup_fast_permitted(start: c_ulong, end: c_ulong) -> bool {
     folio = memfd_alloc_folio(memfd, start_idx);
     if (IS_ERR(folio)) {
     ret = PTR_ERR(folio);
-    if (ret != -EEXIST)
-    goto err;
+    if (ret != -EEXIST) {
+// goto;
+    }
     folio = core::ptr::null_mut();
     }
     }
@@ -3172,7 +3518,7 @@ unsafe extern "C" fn gup_fast_permitted(start: c_ulong, end: c_ulong) -> bool {
     } while (ret == -EAGAIN);
     memalloc_pin_restore(flags);
     return ret ? ret : nr_folios;
-    err:
+// label;
     memalloc_pin_restore(flags);
     unpin_folios(folios, nr_folios);
     return ret;
@@ -3196,8 +3542,6 @@ unsafe extern "C" fn gup_fast_permitted(start: c_ulong, end: c_ulong) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_add_pins(folio: *mut folio, pins: c_uint) -> c_int {
-    int folio_add_pins(struct folio *folio, unsigned int pins)
-    {
     VM_WARN_ON_ONCE(!folio_maybe_dma_pinned(folio));
     return try_grab_folio(folio, pins, FOLL_PIN);
     }

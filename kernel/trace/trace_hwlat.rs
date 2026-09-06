@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -75,11 +325,11 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Includes useful feedback from Clark Williams <williams@redhat.com>
 //
 
-    static struct trace_array	*hwlat_trace;
+pub static mut hwlat_trace: *mut c_void = core::ptr::null_mut();
 
-    static struct dentry *hwlat_sample_width;	/* sample width us */
-    static struct dentry *hwlat_sample_window;	/* sample window us */
-    static struct dentry *hwlat_thread_mode;	/* hwlat thread mode */
+pub static mut hwlat_sample_width: *mut c_void = core::ptr::null_mut();	/* sample width us */
+pub static mut hwlat_sample_window: *mut c_void = core::ptr::null_mut();	/* sample window us */
+pub static mut hwlat_thread_mode: *mut c_void = core::ptr::null_mut();	/* hwlat thread mode */
     enum {
     MODE_NONE = 0,
     MODE_ROUND_ROBIN,
@@ -101,57 +351,58 @@ pub struct hwlat_kthread_data {
     pub nmi_cpu: c_int,
 }
 
-    static struct hwlat_kthread_data hwlat_single_cpu_data;
-    static DEFINE_PER_CPU(struct hwlat_kthread_data, hwlat_per_cpu_data);
+pub static mut hwlat_single_cpu_data: usize = 0;
+pub static mut struct hwlat_kthread_data: usize = 0;
 // Tells NMIs to call back to the hwlat tracer to record timestamps
-    bool trace_hwlat_callback_enabled;
+    let mut trace_hwlat_callback_enabled = 0;
 // If the user changed threshold, remember it
-    let mut last_tracing_thresh: static u64 = DEFAULT_LAT_THRESHOLD * NSEC_PER_USEC;
+pub static mut last_tracing_thresh: u64 = 0;
 // Individual latency samples are stored here when detected.
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct hwlat_sample {
-    pub /: *mut *mut u64 seqnum; / unique sequence,
-    pub /: *mut *mut u64 duration; / delta,
-    pub /: *mut *mut u64 outer_duration; / delta (outer loop),
-    pub /: *mut *mut u64 nmi_total_ts; / Total time spent in NMIs,
-    pub /: *mut *mut timespec64 timestamp; / wall time,
-    pub /: *mut *mut int nmi_count; / # NMIs during this sample,
-    pub /: *mut *mut int count; / # of iterations over thresh,
+//     pub /: *mut *mut u64 seqnum; / unique sequence,
+//     pub /: *mut *mut u64 duration; / delta,
+//     pub /: *mut *mut u64 outer_duration; / delta (outer loop),
+//     pub /: *mut *mut u64 nmi_total_ts; / Total time spent in NMIs,
+//     pub /: *mut *mut timespec64 timestamp; / wall time,
+//     pub /: *mut *mut int nmi_count; / # NMIs during this sample,
+//     pub /: *mut *mut int count; / # of iterations over thresh,
 }
 
 // keep the global state somewhere.
     static struct hwlat_data {
-    struct mutex	lock;		/* protect changes */
-    atomic64_t	count;		/* total since reset */
-    u64	sample_window;		/* total sampling window (on+off) */
-    u64	sample_width;		/* active sampling portion of window */
-    int	thread_mode;		/* thread mode */
+pub static mut lock: usize = 0;		/* protect changes */
+    let mut count;		/* total since reset */
+    let mut sample_window = 0;		/* total sampling window (on+off) */
+    let mut sample_width = 0;		/* active sampling portion of window */
+    let mut thread_mode = 0;		/* thread mode */
     } hwlat_data = {
     .sample_window		= DEFAULT_SAMPLE_WINDOW,
     .sample_width		= DEFAULT_SAMPLE_WIDTH,
     .thread_mode		= MODE_ROUND_ROBIN
     };
-    static struct hwlat_kthread_data *get_cpu_data(void)
-    {
-    if (hwlat_data.thread_mode == MODE_PER_CPU)
+#[no_mangle]
+pub unsafe extern "C" fn get_cpu_data() -> *mut c_void {
+    if (hwlat_data.thread_mode == MODE_PER_CPU) {
     return this_cpu_ptr(&hwlat_per_cpu_data);
-    else
+    }
+    else {
     return &hwlat_single_cpu_data;
+    }
     }
     static bool hwlat_busy;
 #[no_mangle]
 unsafe extern "C" fn trace_hwlat_sample(sample: *mut hwlat_sample) {
-    static void trace_hwlat_sample(struct hwlat_sample *sample)
-    {
-    struct trace_array *tr = hwlat_trace;
-    struct trace_buffer *buffer = tr.array_buffer.buffer;
-    struct ring_buffer_event *event;
-    struct hwlat_entry *entry;
-    event = trace_buffer_lock_reserve(buffer, TRACE_HWLAT, sizeof(*entry),
+    let mut tr = hwlat_trace;
+    let mut buffer = tr.array_buffer.buffer;
+pub static mut event: *mut c_void = core::ptr::null_mut();
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+    event = trace_buffer_lock_reserve(buffer, TRACE_HWLAT, sizeof!(*entry),
     tracing_gen_ctx());
-    if (!event)
+    if (!event) {
     return;
+    }
     entry	= ring_buffer_event_data(event);
     entry.seqnum			= sample.seqnum;
     entry.duration			= sample.duration;
@@ -166,31 +417,33 @@ unsafe extern "C" fn trace_hwlat_sample(sample: *mut hwlat_sample) {
 
 #[no_mangle]
 pub unsafe extern "C" fn trace_hwlat_callback(enter: bool) {
-    void trace_hwlat_callback(bool enter)
-    {
-    struct hwlat_kthread_data *kdata = get_cpu_data();
-    if (!kdata.kthread)
+    let mut kdata = get_cpu_data();
+    if (!kdata.kthread) {
     return;
+    }
 //
 // Currently trace_clock_local() calls sched_clock() and the
 // generic version is not NMI safe.
 //
-    if (!IS_ENABLED(CONFIG_GENERIC_SCHED_CLOCK)) {
-    if (enter)
+    if (!IS_ENABLED!(CONFIG_GENERIC_SCHED_CLOCK)) {
+    if (enter) {
     kdata.nmi_ts_start = time_get();
-    else
+    }
+    else {
     kdata.nmi_total_ts += time_get() - kdata.nmi_ts_start;
     }
-    if (enter)
-    kdata.nmi_count++;
+    }
+    if (enter) {
+    kdata.nmi_count += 1;
+    }
     }
 //
 // hwlat_err - report a hwlat error.
 //
 
-    struct trace_array *tr = hwlat_trace;					\
-    \
-    trace_array_printk_buf(tr.array_buffer.buffer, _THIS_IP_, msg);	\
+    let mut tr = hwlat_trace;					
+    
+    trace_array_printk_buf(tr.array_buffer.buffer, _THIS_IP_, msg);	
     })
 //
 // get_sample - sample the CPU TSC and look for likely hardware latencies
@@ -200,19 +453,17 @@ pub unsafe extern "C" fn trace_hwlat_callback(enter: bool) {
 //
 #[no_mangle]
 unsafe extern "C" fn get_sample() -> c_int {
-    static int get_sample(void)
-    {
-    struct hwlat_kthread_data *kdata = get_cpu_data();
-    struct trace_array *tr = hwlat_trace;
-    struct hwlat_sample s;
+    let mut kdata = get_cpu_data();
+    let mut tr = hwlat_trace;
+pub static mut s: usize = 0;
     time_type start, t1, t2, last_t2;
     s64 diff, outer_diff, total, last_total = 0;
-    let mut sample: u64 = 0;
-    let mut sample_width: u64 = READ_ONCE(hwlat_data.sample_width);
-    let mut thresh: u64 = tracing_thresh;
-    let mut outer_sample: u64 = 0;
-    let mut ret: c_int = -1;
-    let mut count: c_uint = 0;
+pub static mut sample: u64 = 0;
+pub static mut sample_width: u64 = 0;
+pub static mut thresh: u64 = 0;
+pub static mut outer_sample: u64 = 0;
+pub static mut ret: c_int = 0;
+pub static mut count: c_uint = 0;
     do_div(thresh, NSEC_PER_USEC); /* modifies interval value */
     kdata.nmi_total_ts = 0;
     kdata.nmi_count = 0;
@@ -231,10 +482,11 @@ unsafe extern "C" fn get_sample() -> c_int {
 // This shouldn't happen
     if (outer_diff < 0) {
     hwlat_err(BANNER "time running backwards\n");
-    goto out;
+// goto;
     }
-    if (outer_diff > outer_sample)
+    if (outer_diff > outer_sample) {
     outer_sample = outer_diff;
+    }
     }
     last_t2 = t2;
     total = time_to_us(time_sub(t2, start)); /* sample width */
@@ -247,17 +499,19 @@ unsafe extern "C" fn get_sample() -> c_int {
 // This checks the inner loop (t1 to t2)
     diff = time_to_us(time_sub(t2, t1));     /* current diff */
     if (diff > thresh || outer_diff > thresh) {
-    if (!count)
+    if (!count) {
     ktime_get_real_ts64(&s.timestamp);
-    count++;
+    }
+    count += 1;
     }
 // This shouldn't happen
     if (diff < 0) {
     hwlat_err(BANNER "time running backwards\n");
-    goto out;
+// goto;
     }
-    if (diff > sample)
+    if (diff > sample) {
     sample = diff; /* only want highest value */
+    }
     } while (total <= sample_width);
     barrier(); /* finish the above in the view for NMIs */
     trace_hwlat_callback_enabled = false;
@@ -265,11 +519,12 @@ unsafe extern "C" fn get_sample() -> c_int {
     ret = 0;
 // If we exceed the threshold value, we have found a hardware latency
     if (sample > thresh || outer_sample > thresh) {
-    u64 latency;
+    let mut latency = 0;
     ret = 1;
 // We read in microseconds
-    if (kdata.nmi_total_ts)
+    if (kdata.nmi_total_ts) {
     do_div(kdata.nmi_total_ts, NSEC_PER_USEC);
+    }
     s.seqnum = atomic64_inc_return(&hwlat_data.count);
     s.duration = sample;
     s.outer_duration = outer_sample;
@@ -284,37 +539,37 @@ unsafe extern "C" fn get_sample() -> c_int {
     latency_fsnotify(tr);
     }
     }
-    out:
+// label;
     return ret;
     }
-    static struct cpumask save_cpumask;
+pub static mut save_cpumask: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn move_to_next_cpu() {
-    static void move_to_next_cpu(void)
-    {
-    struct cpumask *current_mask = &save_cpumask;
-    struct trace_array *tr = hwlat_trace;
-    int next_cpu;
+    let mut current_mask = &save_cpumask;
+    let mut tr = hwlat_trace;
+    let mut next_cpu = 0;
 //
 // If for some reason the user modifies the CPU affinity
 // of this thread, then stop migrating for the duration
 // of the current test.
 //
-    if (!cpumask_equal(current_mask, current.cpus_ptr))
-    goto change_mode;
+    if (!cpumask_equal(current_mask, current.cpus_ptr)) {
+// goto;
+    }
     cpus_read_lock();
     cpumask_and(current_mask, cpu_online_mask, tr.tracing_cpumask);
     next_cpu = cpumask_next_wrap(raw_smp_processor_id(), current_mask);
     cpus_read_unlock();
-    if (next_cpu >= nr_cpu_ids) /* Shouldn't happen! */
-    goto change_mode;
+    if (next_cpu >= nr_cpu_ids) /* Shouldn't happen! */ {
+// goto;
+    }
     cpumask_clear(current_mask);
     cpumask_set_cpu(next_cpu, current_mask);
     set_cpus_allowed_ptr(current, current_mask);
     return;
-    change_mode:
+// label;
     hwlat_data.thread_mode = MODE_NONE;
-    pr_info(BANNER "cpumask changed while in round-robin mode, switching to mode none\n");
+    pr_info!(BANNER "cpumask changed while in round-robin mode, switching to mode none\n");
     }
 //
 // kthread_fn - The CPU time sampling/hardware latency detection kernel thread
@@ -328,12 +583,11 @@ unsafe extern "C" fn move_to_next_cpu() {
 //
 #[no_mangle]
 unsafe extern "C" fn kthread_fn(data: *mut c_void) -> c_int {
-    static int kthread_fn(void *data)
-    {
-    u64 interval;
+    let mut interval = 0;
     while (!kthread_should_stop()) {
-    if (hwlat_data.thread_mode == MODE_ROUND_ROBIN)
+    if (hwlat_data.thread_mode == MODE_ROUND_ROBIN) {
     move_to_next_cpu();
+    }
     local_irq_disable();
     get_sample();
     local_irq_enable();
@@ -342,10 +596,12 @@ unsafe extern "C" fn kthread_fn(data: *mut c_void) -> c_int {
     mutex_unlock(&hwlat_data.lock);
     do_div(interval, USEC_PER_MSEC); /* modifies interval value */
 // Always sleep for at least 1ms
-    if (interval < 1)
+    if (interval < 1) {
     interval = 1;
-    if (msleep_interruptible(interval))
+    }
+    if (msleep_interruptible(interval)) {
     break;
+    }
     }
     return 0;
     }
@@ -357,17 +613,16 @@ unsafe extern "C" fn kthread_fn(data: *mut c_void) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn stop_single_kthread() {
-    static void stop_single_kthread(void)
-    {
-    struct hwlat_kthread_data *kdata = get_cpu_data();
-    struct task_struct *kthread;
+    let mut kdata = get_cpu_data();
+pub static mut kthread: *mut c_void = core::ptr::null_mut();
     cpus_read_lock();
     kthread = kdata.kthread;
-    if (!kthread)
-    goto out_put_cpus;
+    if (!kthread) {
+// goto;
+    }
     kthread_stop(kthread);
     kdata.kthread = core::ptr::null_mut();
-    out_put_cpus:
+// label;
     cpus_read_unlock();
     }
 //
@@ -378,18 +633,17 @@ unsafe extern "C" fn stop_single_kthread() {
 //
 #[no_mangle]
 unsafe extern "C" fn start_single_kthread(tr: *mut trace_array) -> c_int {
-    static int start_single_kthread(struct trace_array *tr)
-    {
-    struct hwlat_kthread_data *kdata = get_cpu_data();
-    struct cpumask *current_mask = &save_cpumask;
-    struct task_struct *kthread;
-    int next_cpu;
+    let mut kdata = get_cpu_data();
+    let mut current_mask = &save_cpumask;
+pub static mut kthread: *mut c_void = core::ptr::null_mut();
+    let mut next_cpu = 0;
     cpus_read_lock();
-    if (kdata.kthread)
-    goto out_put_cpus;
+    if (kdata.kthread) {
+// goto;
+    }
     kthread = kthread_create(kthread_fn, core::ptr::null_mut(), "hwlatd");
     if (IS_ERR(kthread)) {
-    pr_err(BANNER "could not start sampling thread\n");
+    pr_err!(BANNER "could not start sampling thread\n");
     cpus_read_unlock();
     return -ENOMEM;
     }
@@ -403,7 +657,7 @@ unsafe extern "C" fn start_single_kthread(tr: *mut trace_array) -> c_int {
     set_cpus_allowed_ptr(kthread, current_mask);
     kdata.kthread = kthread;
     wake_up_process(kthread);
-    out_put_cpus:
+// label;
     cpus_read_unlock();
     return 0;
     }
@@ -412,12 +666,11 @@ unsafe extern "C" fn start_single_kthread(tr: *mut trace_array) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn stop_cpu_kthread(cpu: c_uint) {
-    static void stop_cpu_kthread(unsigned int cpu)
-    {
-    struct task_struct *kthread;
+pub static mut kthread: *mut c_void = core::ptr::null_mut();
     kthread = per_cpu(hwlat_per_cpu_data, cpu).kthread;
-    if (kthread)
+    if (kthread) {
     kthread_stop(kthread);
+    }
     per_cpu(hwlat_per_cpu_data, cpu).kthread = core::ptr::null_mut();
     }
 //
@@ -428,12 +681,11 @@ unsafe extern "C" fn stop_cpu_kthread(cpu: c_uint) {
 //
 #[no_mangle]
 unsafe extern "C" fn stop_per_cpu_kthreads() {
-    static void stop_per_cpu_kthreads(void)
-    {
-    unsigned int cpu;
+    let mut cpu = 0;
     cpus_read_lock();
-    for_each_online_cpu(cpu)
+    for_each_online_cpu(cpu) {
     stop_cpu_kthread(cpu);
+    }
     cpus_read_unlock();
     }
 //
@@ -441,15 +693,14 @@ unsafe extern "C" fn stop_per_cpu_kthreads() {
 //
 #[no_mangle]
 unsafe extern "C" fn start_cpu_kthread(cpu: c_uint) -> c_int {
-    static int start_cpu_kthread(unsigned int cpu)
-    {
-    struct task_struct *kthread;
+pub static mut kthread: *mut c_void = core::ptr::null_mut();
 // Do not start a new hwlatd thread if it is already running
-    if (per_cpu(hwlat_per_cpu_data, cpu).kthread)
+    if (per_cpu(hwlat_per_cpu_data, cpu).kthread) {
     return 0;
+    }
     kthread = kthread_run_on_cpu(kthread_fn, core::ptr::null_mut(), cpu, "hwlatd/%u");
     if (IS_ERR(kthread)) {
-    pr_err(BANNER "could not start sampling thread\n");
+    pr_err!(BANNER "could not start sampling thread\n");
     return -ENOMEM;
     }
     per_cpu(hwlat_per_cpu_data, cpu).kthread = kthread;
@@ -458,33 +709,32 @@ unsafe extern "C" fn start_cpu_kthread(cpu: c_uint) -> c_int {
 
 #[no_mangle]
 unsafe extern "C" fn hwlat_hotplug_workfn(dummy: *mut work_struct) {
-    static void hwlat_hotplug_workfn(struct work_struct *dummy)
-    {
-    struct trace_array *tr = hwlat_trace;
-    let mut cpu: c_uint = smp_processor_id();
+    let mut tr = hwlat_trace;
+pub static mut cpu: c_uint = 0;
     mutex_lock(&trace_types_lock);
     mutex_lock(&hwlat_data.lock);
     cpus_read_lock();
-    if (!hwlat_busy || hwlat_data.thread_mode != MODE_PER_CPU)
-    goto out_unlock;
-    if (!cpu_online(cpu))
-    goto out_unlock;
-    if (!cpumask_test_cpu(cpu, tr.tracing_cpumask))
-    goto out_unlock;
+    if (!hwlat_busy || hwlat_data.thread_mode != MODE_PER_CPU) {
+// goto;
+    }
+    if (!cpu_online(cpu)) {
+// goto;
+    }
+    if (!cpumask_test_cpu(cpu, tr.tracing_cpumask)) {
+// goto;
+    }
     start_cpu_kthread(cpu);
-    out_unlock:
+// label;
     cpus_read_unlock();
     mutex_unlock(&hwlat_data.lock);
     mutex_unlock(&trace_types_lock);
     }
-    static DECLARE_WORK(hwlat_hotplug_work, hwlat_hotplug_workfn);
+pub static mut hwlat_hotplug_work: usize = 0;
 //
 // hwlat_cpu_init - CPU hotplug online callback function
 //
 #[no_mangle]
 unsafe extern "C" fn hwlat_cpu_init(cpu: c_uint) -> c_int {
-    static int hwlat_cpu_init(unsigned int cpu)
-    {
     schedule_work_on(cpu, &hwlat_hotplug_work);
     return 0;
     }
@@ -493,27 +743,22 @@ unsafe extern "C" fn hwlat_cpu_init(cpu: c_uint) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn hwlat_cpu_die(cpu: c_uint) -> c_int {
-    static int hwlat_cpu_die(unsigned int cpu)
-    {
     stop_cpu_kthread(cpu);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn hwlat_init_hotplug_support() {
-    static void hwlat_init_hotplug_support(void)
-    {
-    int ret;
+    let mut ret = 0;
     ret = cpuhp_setup_state(CPUHP_AP_ONLINE_DYN, "trace/hwlat:online",
     hwlat_cpu_init, hwlat_cpu_die);
-    if (ret < 0)
-    pr_warn(BANNER "Error to init cpu hotplug support\n");
+    if (ret < 0) {
+    pr_warn!(BANNER "Error to init cpu hotplug support\n");
+    }
     return;
     }
 
 #[no_mangle]
 unsafe extern "C" fn hwlat_init_hotplug_support() {
-    static void hwlat_init_hotplug_support(void)
-    {
     return;
     }
 
@@ -526,11 +771,9 @@ unsafe extern "C" fn hwlat_init_hotplug_support() {
 //
 #[no_mangle]
 unsafe extern "C" fn start_per_cpu_kthreads(tr: *mut trace_array) -> c_int {
-    static int start_per_cpu_kthreads(struct trace_array *tr)
-    {
-    struct cpumask *current_mask = &save_cpumask;
-    unsigned int cpu;
-    int retval;
+    let mut current_mask = &save_cpumask;
+    let mut cpu = 0;
+    let mut retval = 0;
     cpus_read_lock();
 //
 // Run only on CPUs in which hwlat is allowed to run.
@@ -538,66 +781,61 @@ unsafe extern "C" fn start_per_cpu_kthreads(tr: *mut trace_array) -> c_int {
     cpumask_and(current_mask, cpu_online_mask, tr.tracing_cpumask);
     for_each_cpu(cpu, current_mask) {
     retval = start_cpu_kthread(cpu);
-    if (retval)
-    goto out_error;
+    if (retval) {
+// goto;
+    }
     }
     cpus_read_unlock();
     return 0;
-    out_error:
+// label;
     cpus_read_unlock();
     stop_per_cpu_kthreads();
     return retval;
     }
-    static void *s_mode_start(struct seq_file *s, loff_t *pos)
-    {
-    let mut mode: c_int = *pos;
+#[no_mangle]
+pub unsafe extern "C" fn s_mode_start(s: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
+pub static mut mode: c_int = 0;
     mutex_lock(&hwlat_data.lock);
-    if (mode >= MODE_MAX)
+    if (mode >= MODE_MAX) {
     return core::ptr::null_mut();
+    }
     return pos;
     }
-    static void *s_mode_next(struct seq_file *s, void *v, loff_t *pos)
-    {
-    let mut mode: c_int = ++(*pos);
-    if (mode >= MODE_MAX)
+#[no_mangle]
+pub unsafe extern "C" fn s_mode_next(s: *mut seq_file, v: *mut c_void, pos: *mut loff_t) -> *mut c_void {
+pub static mut mode: c_int = 0;
+    if (mode >= MODE_MAX) {
     return core::ptr::null_mut();
+    }
     return pos;
     }
 #[no_mangle]
 unsafe extern "C" fn s_mode_show(s: *mut seq_file, v: *mut c_void) -> c_int {
-    static int s_mode_show(struct seq_file *s, void *v)
-    {
-    loff_t *pos = v;
-    let mut mode: c_int = *pos;
-    if (mode == hwlat_data.thread_mode)
+    let mut pos = v;
+pub static mut mode: c_int = 0;
+    if (mode == hwlat_data.thread_mode) {
     seq_printf(s, "[%s]", thread_mode_str[mode]);
-    else
+    }
+    else {
     seq_printf(s, "%s", thread_mode_str[mode]);
-    if (mode < MODE_MAX - 1) /* if mode is any but last */
+    }
+    if (mode < MODE_MAX - 1) /* if mode is any but last */ {
     seq_puts(s, " ");
+    }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn s_mode_stop(s: *mut seq_file, v: *mut c_void) {
-    static void s_mode_stop(struct seq_file *s, void *v)
-    {
     seq_puts(s, "\n");
     mutex_unlock(&hwlat_data.lock);
     }
-    static const struct seq_operations thread_mode_seq_ops = {
-    .start		= s_mode_start,
-    .next		= s_mode_next,
-    .show		= s_mode_show,
-    .stop		= s_mode_stop
-    };
+pub static mut seq_operations: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn hwlat_mode_open(inode: *mut inode, file: *mut file) -> c_int {
-    static int hwlat_mode_open(struct inode *inode, struct file *file)
-    {
     return seq_open(file, &thread_mode_seq_ops);
     };
-    static void hwlat_tracer_start(struct trace_array *tr);
-    static void hwlat_tracer_stop(struct trace_array *tr);
+// forward_decl: hwlat_tracer_start;
+// forward_decl: hwlat_tracer_stop;
 //
 // hwlat_mode_write - Write function for "mode" entry
 // @filp: The active open file structure
@@ -613,17 +851,19 @@ unsafe extern "C" fn hwlat_mode_open(inode: *mut inode, file: *mut file) -> c_in
 // among the allowed CPUs in a round-robin fashion. The "per-cpu" mode
 // creates one hwlatd thread per allowed CPU.
 //
-    static ssize_t hwlat_mode_write(struct file *filp, const char __user *ubuf,
-    size_t cnt, loff_t *ppos)
-    {
-    struct trace_array *tr = hwlat_trace;
-    const char *mode;
+#[no_mangle]
+pub unsafe extern "C" fn hwlat_mode_write(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
+    let mut tr = hwlat_trace;
+pub static mut mode: *mut c_void = core::ptr::null_mut();
     char buf[64];
-    int ret, i;
-    if (cnt >= sizeof(buf))
+    let mut ret = 0;
+    let mut i = 0;
+    if (cnt >= sizeof!(buf)) {
     return -EINVAL;
-    if (copy_from_user(buf, ubuf, cnt))
+    }
+    if (copy_from_user(buf, ubuf, cnt)) {
     return -EFAULT;
+    }
     buf[cnt] = 0;
     mode = strstrip(buf);
     ret = -EINVAL;
@@ -632,18 +872,20 @@ unsafe extern "C" fn hwlat_mode_open(inode: *mut inode, file: *mut file) -> c_in
 // and hwlat_busy.
 //
     mutex_lock(&trace_types_lock);
-    if (hwlat_busy)
+    if (hwlat_busy) {
     hwlat_tracer_stop(tr);
+    }
     mutex_lock(&hwlat_data.lock);
-    for (i = 0; i < MODE_MAX; i++) {
+    while (i < MODE_MAX) {
     if (strcmp(mode, thread_mode_str[i]) == 0) {
     hwlat_data.thread_mode = i;
     ret = cnt;
     }
     }
     mutex_unlock(&hwlat_data.lock);
-    if (hwlat_busy)
+    if (hwlat_busy) {
     hwlat_tracer_start(tr);
+    }
     mutex_unlock(&trace_types_lock);
 // ppos += cnt;
     return ret;
@@ -653,30 +895,14 @@ unsafe extern "C" fn hwlat_mode_open(inode: *mut inode, file: *mut file) -> c_in
 // method. The *val is protected by the hwlat_data lock and is upper
 // bounded by the window parameter.
 //
-    static struct trace_min_max_param hwlat_width = {
-    .lock		= &hwlat_data.lock,
-    .val		= &hwlat_data.sample_width,
-    .max		= &hwlat_data.sample_window,
-    .min		= core::ptr::null_mut(),
-    };
+pub static mut trace_min_max_param: usize = 0;
 //
 // The window parameter is read/write using the generic trace_min_max_param
 // method. The *val is protected by the hwlat_data lock and is lower
 // bounded by the width parameter.
 //
-    static struct trace_min_max_param hwlat_window = {
-    .lock		= &hwlat_data.lock,
-    .val		= &hwlat_data.sample_window,
-    .max		= core::ptr::null_mut(),
-    .min		= &hwlat_data.sample_width,
-    };
-    static const struct file_operations thread_mode_fops = {
-    .open		= hwlat_mode_open,
-    .read		= seq_read,
-    .llseek		= seq_lseek,
-    .release	= seq_release,
-    .write		= hwlat_mode_write
-    };
+pub static mut trace_min_max_param: usize = 0;
+pub static mut file_operations: usize = 0;
 //
 // init_tracefs - A function to initialize the tracefs interface files
 //
@@ -687,90 +913,93 @@ unsafe extern "C" fn hwlat_mode_open(inode: *mut inode, file: *mut file) -> c_in
 //
 #[no_mangle]
 unsafe extern "C" fn init_tracefs() -> c_int {
-    static int init_tracefs(void)
-    {
-    int ret;
-    struct dentry *top_dir;
+    let mut ret = 0;
+pub static mut top_dir: *mut c_void = core::ptr::null_mut();
     ret = tracing_init_dentry();
-    if (ret)
+    if (ret) {
     return -ENOMEM;
+    }
     top_dir = tracefs_create_dir("hwlat_detector", core::ptr::null_mut());
-    if (!top_dir)
+    if (!top_dir) {
     return -ENOMEM;
+    }
     hwlat_sample_window = tracefs_create_file("window", TRACE_MODE_WRITE,
     top_dir,
     &hwlat_window,
     &trace_min_max_fops);
-    if (!hwlat_sample_window)
-    goto err;
+    if (!hwlat_sample_window) {
+// goto;
+    }
     hwlat_sample_width = tracefs_create_file("width", TRACE_MODE_WRITE,
     top_dir,
     &hwlat_width,
     &trace_min_max_fops);
-    if (!hwlat_sample_width)
-    goto err;
+    if (!hwlat_sample_width) {
+// goto;
+    }
     hwlat_thread_mode = trace_create_file("mode", TRACE_MODE_WRITE,
     top_dir,
     core::ptr::null_mut(),
     &thread_mode_fops);
-    if (!hwlat_thread_mode)
-    goto err;
+    if (!hwlat_thread_mode) {
+// goto;
+    }
     return 0;
-    err:
+// label;
     tracefs_remove(top_dir);
     return -ENOMEM;
     }
 #[no_mangle]
 unsafe extern "C" fn hwlat_tracer_start(tr: *mut trace_array) {
-    static void hwlat_tracer_start(struct trace_array *tr)
-    {
-    int err;
-    if (hwlat_data.thread_mode == MODE_PER_CPU)
+    let mut err = 0;
+    if (hwlat_data.thread_mode == MODE_PER_CPU) {
     err = start_per_cpu_kthreads(tr);
-    else
+    }
+    else {
     err = start_single_kthread(tr);
-    if (err)
-    pr_err(BANNER "Cannot start hwlat kthread\n");
+    }
+    if (err) {
+    pr_err!(BANNER "Cannot start hwlat kthread\n");
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn hwlat_tracer_stop(tr: *mut trace_array) {
-    static void hwlat_tracer_stop(struct trace_array *tr)
-    {
-    if (hwlat_data.thread_mode == MODE_PER_CPU)
+    if (hwlat_data.thread_mode == MODE_PER_CPU) {
     stop_per_cpu_kthreads();
-    else
+    }
+    else {
     stop_single_kthread();
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn hwlat_tracer_init(tr: *mut trace_array) -> c_int {
-    static int hwlat_tracer_init(struct trace_array *tr)
-    {
 // Only allow one instance to enable this
-    if (hwlat_busy)
+    if (hwlat_busy) {
     return -EBUSY;
+    }
     hwlat_trace = tr;
     atomic64_set(&hwlat_data.count, 0);
     tr.max_latency = 0;
     save_tracing_thresh = tracing_thresh;
 // tracing_thresh is in nsecs, we speak in usecs
-    if (!tracing_thresh)
+    if (!tracing_thresh) {
     tracing_thresh = last_tracing_thresh;
-    if (tracer_tracing_is_on(tr))
+    }
+    if (tracer_tracing_is_on(tr)) {
     hwlat_tracer_start(tr);
+    }
     hwlat_busy = true;
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn hwlat_tracer_reset(tr: *mut trace_array) {
-    static void hwlat_tracer_reset(struct trace_array *tr)
-    {
     hwlat_tracer_stop(tr);
 // the tracing threshold is static between runs
     last_tracing_thresh = tracing_thresh;
     tracing_thresh = save_tracing_thresh;
     hwlat_busy = false;
     }
-    static struct tracer hwlat_tracer __read_mostly =
+    static struct tracer hwlat_tracer  =
     {
     .name		= "hwlat",
     .init		= hwlat_tracer_init,
@@ -781,15 +1010,14 @@ unsafe extern "C" fn hwlat_tracer_reset(tr: *mut trace_array) {
     };
 #[no_mangle]
 pub unsafe extern "C" fn init_hwlat_tracer() -> __init static int {
-    __init static int init_hwlat_tracer(void)
-    {
-    int ret;
+    let mut ret = 0;
     mutex_init(&hwlat_data.lock);
     ret = register_tracer(&hwlat_tracer);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     hwlat_init_hotplug_support();
     init_tracefs();
     return 0;
     }
-    late_initcall(init_hwlat_tracer);
+    late_initcall!(init_hwlat_tracer);

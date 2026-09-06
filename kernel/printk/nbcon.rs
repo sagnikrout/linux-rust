@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -136,7 +386,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // from scratch.
 //
 // Counter of active nbcon emergency contexts.
-    let mut nbcon_cpu_emergency_cnt: static atomic_t = ATOMIC_INIT(0);
+pub static mut nbcon_cpu_emergency_cnt: atomic_t = 0;
 //
 // nbcon_state_set - Helper function to set the console state
 // @con:	Console to update
@@ -147,8 +397,6 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 #[no_mangle]
 pub unsafe extern "C" fn nbcon_state_set(con: *mut console, new: *mut nbcon_state) {
-    static inline void nbcon_state_set(struct console *con, struct nbcon_state *new)
-    {
     atomic_set(&ACCESS_PRIVATE(con, nbcon_state), new.atom);
     }
 //
@@ -158,8 +406,6 @@ pub unsafe extern "C" fn nbcon_state_set(con: *mut console, new: *mut nbcon_stat
 //
 #[no_mangle]
 pub unsafe extern "C" fn nbcon_state_read(con: *mut console, state: *mut nbcon_state) {
-    static inline void nbcon_state_read(struct console *con, struct nbcon_state *state)
-    {
     state.atom = atomic_read(&ACCESS_PRIVATE(con, nbcon_state));
     }
 //
@@ -170,9 +416,8 @@ pub unsafe extern "C" fn nbcon_state_read(con: *mut console, state: *mut nbcon_s
 //
 // Return: True on success. False on fail and @cur is updated.
 //
-    static inline bool nbcon_state_try_cmpxchg(struct console *con, struct nbcon_state *cur,
-    struct nbcon_state *new)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn nbcon_state_try_cmpxchg(con: *mut console, cur: *mut nbcon_state, new: *mut nbcon_state) -> bool {
     return atomic_try_cmpxchg(&ACCESS_PRIVATE(con, nbcon_state), &cur.atom, new.atom);
     }
 //
@@ -183,9 +428,7 @@ pub unsafe extern "C" fn nbcon_state_read(con: *mut console, state: *mut nbcon_s
 //
 #[no_mangle]
 pub unsafe extern "C" fn nbcon_seq_read(con: *mut console) -> u64 {
-    u64 nbcon_seq_read(struct console *con)
-    {
-    let mut nbcon_seq: c_ulong = atomic_long_read(&ACCESS_PRIVATE(con, nbcon_seq));
+pub static mut nbcon_seq: c_ulong = 0;
     return __ulseq_to_u64seq(prb, nbcon_seq);
     }
 //
@@ -198,15 +441,13 @@ pub unsafe extern "C" fn nbcon_seq_read(con: *mut console) -> u64 {
 //
 #[no_mangle]
 pub unsafe extern "C" fn nbcon_seq_force(con: *mut console, seq: u64) {
-    void nbcon_seq_force(struct console *con, u64 seq)
-    {
 //
 // If the specified record no longer exists, the oldest available record
 // is chosen. This is especially important on 32bit systems because only
 // the lower 32 bits of the sequence number are stored. The upper 32 bits
 // are derived from the sequence numbers available in the ringbuffer.
 //
-    let mut valid_seq: u64 = max_t(u64, seq, prb_first_valid_seq(prb));
+pub static mut valid_seq: u64 = 0;
     atomic_long_set(&ACCESS_PRIVATE(con, nbcon_seq), __u64seq_to_ulseq(valid_seq));
     }
 //
@@ -222,10 +463,8 @@ pub unsafe extern "C" fn nbcon_seq_force(con: *mut console, seq: u64) {
 //
 #[no_mangle]
 unsafe extern "C" fn nbcon_seq_try_update(ctxt: *mut nbcon_context, new_seq: u64) {
-    static void nbcon_seq_try_update(struct nbcon_context *ctxt, u64 new_seq)
-    {
-    let mut nbcon_seq: c_ulong = __u64seq_to_ulseq(ctxt.seq);
-    struct console *con = ctxt.console;
+pub static mut nbcon_seq: c_ulong = 0;
+    let mut con = ctxt.console;
     if (atomic_long_try_cmpxchg(&ACCESS_PRIVATE(con, nbcon_seq), &nbcon_seq,
     __u64seq_to_ulseq(new_seq))) {
     ctxt.seq = new_seq;
@@ -256,12 +495,11 @@ unsafe extern "C" fn nbcon_seq_try_update(ctxt: *mut nbcon_context, new_seq: u64
 // in an unsafe state. The caller should try using
 // the handover acquire method.
 //
-    static int nbcon_context_try_acquire_direct(struct nbcon_context *ctxt,
-    struct nbcon_state *cur, bool is_reacquire)
-    {
-    let mut cpu: c_uint = smp_processor_id();
-    struct console *con = ctxt.console;
-    struct nbcon_state new;
+#[no_mangle]
+pub unsafe extern "C" fn nbcon_context_try_acquire_direct(ctxt: *mut nbcon_context, cur: *mut nbcon_state, is_reacquire: bool) -> c_int {
+pub static mut cpu: c_uint = 0;
+    let mut con = ctxt.console;
+pub static mut new: usize = 0;
     do {
 //
 // Panic does not imply that the console is owned. However,
@@ -281,15 +519,17 @@ unsafe extern "C" fn nbcon_seq_try_update(ctxt: *mut nbcon_context, new_seq: u64
     (!is_reacquire || cur.unsafe_takeover)) {
     return -EPERM;
     }
-    if (ctxt.prio <= cur.prio || ctxt.prio <= cur.req_prio)
+    if (ctxt.prio <= cur.prio || ctxt.prio <= cur.req_prio) {
     return -EPERM;
-    if (cur.unsafe)
+    }
+    if (cur.unsafe) {
     return -EBUSY;
+    }
 //
 // The console should never be safe for a direct acquire
 // if an unsafe hostile takeover has ever happened.
 //
-    WARN_ON_ONCE(cur.unsafe_takeover);
+    WARN_ON_ONCE!(cur.unsafe_takeover);
     new.atom = cur.atom;
     new.prio	= ctxt.prio;
     new.req_prio	= NBCON_PRIO_NONE;
@@ -300,8 +540,6 @@ unsafe extern "C" fn nbcon_seq_try_update(ctxt: *mut nbcon_context, new_seq: u64
     }
 #[no_mangle]
 unsafe extern "C" fn nbcon_waiter_matches(cur: *mut nbcon_state, expected_prio: c_int) -> bool {
-    static bool nbcon_waiter_matches(struct nbcon_state *cur, int expected_prio)
-    {
 //
 // The request context is well defined by the @req_prio because:
 //
@@ -356,29 +594,31 @@ unsafe extern "C" fn nbcon_waiter_matches(cur: *mut nbcon_state, expected_prio: 
 // Note: The caller must still remove the request when an error has occurred
 // except when this context is no longer the waiter.
 //
-    static int nbcon_context_try_acquire_requested(struct nbcon_context *ctxt,
-    struct nbcon_state *cur)
-    {
-    let mut cpu: c_uint = smp_processor_id();
-    struct console *con = ctxt.console;
-    struct nbcon_state new;
+#[no_mangle]
+pub unsafe extern "C" fn nbcon_context_try_acquire_requested(ctxt: *mut nbcon_context, cur: *mut nbcon_state) -> c_int {
+pub static mut cpu: c_uint = 0;
+    let mut con = ctxt.console;
+pub static mut new: usize = 0;
 // Note that the caller must still remove the request!
-    if (panic_on_other_cpu())
+    if (panic_on_other_cpu()) {
     return -EPERM;
+    }
 //
 // Note that the waiter will also change if there was an unsafe
 // hostile takeover.
 //
-    if (!nbcon_waiter_matches(cur, ctxt.prio))
+    if (!nbcon_waiter_matches(cur, ctxt.prio)) {
     return -EPERM;
+    }
 // If still locked, caller should continue waiting.
-    if (cur.prio != NBCON_PRIO_NONE)
+    if (cur.prio != NBCON_PRIO_NONE) {
     return -EBUSY;
+    }
 //
 // The previous owner should have never released ownership
 // in an unsafe region.
 //
-    WARN_ON_ONCE(cur.unsafe);
+    WARN_ON_ONCE!(cur.unsafe);
     new.atom = cur.atom;
     new.prio	= ctxt.prio;
     new.req_prio	= NBCON_PRIO_NONE;
@@ -389,7 +629,7 @@ unsafe extern "C" fn nbcon_waiter_matches(cur: *mut nbcon_state, expected_prio: 
 // The acquire could fail only when it has been taken
 // over by a higher priority context.
 //
-    WARN_ON_ONCE(nbcon_waiter_matches(cur, ctxt.prio));
+    WARN_ON_ONCE!(nbcon_waiter_matches(cur, ctxt.prio));
     return -EPERM;
     }
 // Handover success. This context now owns the console.
@@ -431,20 +671,19 @@ unsafe extern "C" fn nbcon_waiter_matches(cur: *mut nbcon_state, expected_prio: 
 // -EAGAIN:	@cur has changed when creating the handover request.
 // The caller should retry with direct acquire.
 //
-    static int nbcon_context_try_acquire_handover(struct nbcon_context *ctxt,
-    struct nbcon_state *cur)
-    {
-    let mut cpu: c_uint = smp_processor_id();
-    struct console *con = ctxt.console;
-    struct nbcon_state new;
-    int timeout;
-    let mut request_err: c_int = -EBUSY;
+#[no_mangle]
+pub unsafe extern "C" fn nbcon_context_try_acquire_handover(ctxt: *mut nbcon_context, cur: *mut nbcon_state) -> c_int {
+pub static mut cpu: c_uint = 0;
+    let mut con = ctxt.console;
+pub static mut new: usize = 0;
+    let mut timeout = 0;
+pub static mut request_err: c_int = 0;
 //
 // Check that the handover is called when the direct acquire failed
 // with -EBUSY.
 //
-    WARN_ON_ONCE(ctxt.prio <= cur.prio || ctxt.prio <= cur.req_prio);
-    WARN_ON_ONCE(!cur.unsafe);
+    WARN_ON_ONCE!(ctxt.prio <= cur.prio || ctxt.prio <= cur.req_prio);
+    WARN_ON_ONCE!(!cur.unsafe);
 //
 // Panic does not imply that the console is owned. However, it
 // is critical that non-panic CPUs during panic are unable to
@@ -452,41 +691,48 @@ unsafe extern "C" fn nbcon_waiter_matches(cur: *mut nbcon_state, expected_prio: 
 // nbcon_waiter_matches(). In particular, the assumption that
 // lower priorities are ignored during panic.
 //
-    if (panic_on_other_cpu())
+    if (panic_on_other_cpu()) {
     return -EPERM;
+    }
 // Handover is not possible on the same CPU.
-    if (cur.cpu == cpu)
+    if (cur.cpu == cpu) {
     return -EBUSY;
+    }
 //
 // Console stays unsafe after an unsafe takeover until re-initialized.
 // Waiting is not going to help in this case.
 //
-    if (cur.unsafe_takeover)
+    if (cur.unsafe_takeover) {
     return -EBUSY;
+    }
 // Is the caller willing to wait?
-    if (ctxt.spinwait_max_us == 0)
+    if (ctxt.spinwait_max_us == 0) {
     return -EBUSY;
+    }
 //
 // Setup a request for the handover. The caller should try to acquire
 // the console directly when the current state has been modified.
 //
     new.atom = cur.atom;
     new.req_prio = ctxt.prio;
-    if (!nbcon_state_try_cmpxchg(con, cur, &new))
+    if (!nbcon_state_try_cmpxchg(con, cur, &new)) {
     return -EAGAIN;
+    }
     cur.atom = new.atom;
 // Wait until there is no owner and then acquire the console.
-    for (timeout = ctxt.spinwait_max_us; timeout >= 0; timeout--) {
+    while (timeout >= 0) {
 // On successful acquire, this request is cleared.
     request_err = nbcon_context_try_acquire_requested(ctxt, cur);
-    if (!request_err)
+    if (!request_err) {
     return 0;
+    }
 //
 // If the acquire should be aborted, it must be ensured
 // that the request is removed before returning to caller.
 //
-    if (request_err == -EPERM)
+    if (request_err == -EPERM) {
     break;
+    }
     udelay(1);
 // Re-read the state because some time has passed.
     nbcon_state_read(con, cur);
@@ -498,8 +744,9 @@ unsafe extern "C" fn nbcon_waiter_matches(cur: *mut nbcon_state, expected_prio: 
 // can only happen if a higher priority context has taken over
 // the console or the handover request.
 //
-    if (!nbcon_waiter_matches(cur, ctxt.prio))
+    if (!nbcon_waiter_matches(cur, ctxt.prio)) {
     return -EPERM;
+    }
 // Unset request for handover.
     new.atom = cur.atom;
     new.req_prio = NBCON_PRIO_NONE;
@@ -531,23 +778,24 @@ unsafe extern "C" fn nbcon_waiter_matches(cur: *mut nbcon_state, expected_prio: 
 //
 // Return:	0 on success. -EPERM when not allowed by the context.
 //
-    static int nbcon_context_try_acquire_hostile(struct nbcon_context *ctxt,
-    struct nbcon_state *cur)
-    {
-    let mut cpu: c_uint = smp_processor_id();
-    struct console *con = ctxt.console;
-    struct nbcon_state new;
-    if (!ctxt.allow_unsafe_takeover)
+#[no_mangle]
+pub unsafe extern "C" fn nbcon_context_try_acquire_hostile(ctxt: *mut nbcon_context, cur: *mut nbcon_state) -> c_int {
+pub static mut cpu: c_uint = 0;
+    let mut con = ctxt.console;
+pub static mut new: usize = 0;
+    if (!ctxt.allow_unsafe_takeover) {
     return -EPERM;
+    }
 // Ensure caller is allowed to perform unsafe hostile takeovers.
-    if (WARN_ON_ONCE(ctxt.prio != NBCON_PRIO_PANIC))
+    if (WARN_ON_ONCE!(ctxt.prio != NBCON_PRIO_PANIC)) {
     return -EPERM;
+    }
 //
 // Check that try_acquire_direct() and try_acquire_handover() returned
 // -EBUSY in the right situation.
 //
-    WARN_ON_ONCE(ctxt.prio <= cur.prio || ctxt.prio <= cur.req_prio);
-    WARN_ON_ONCE(cur.unsafe != true);
+    WARN_ON_ONCE!(ctxt.prio <= cur.prio || ctxt.prio <= cur.req_prio);
+    WARN_ON_ONCE!(cur.unsafe != true);
     do {
     new.atom = cur.atom;
     new.cpu			= cpu;
@@ -557,7 +805,7 @@ unsafe extern "C" fn nbcon_waiter_matches(cur: *mut nbcon_state, expected_prio: 
     } while (!nbcon_state_try_cmpxchg(con, cur, &new));
     return 0;
     }
-    static struct printk_buffers panic_nbcon_pbufs;
+pub static mut panic_nbcon_pbufs: usize = 0;
 //
 // nbcon_context_try_acquire - Try to acquire nbcon console
 // @ctxt:		The context of the caller
@@ -573,38 +821,41 @@ unsafe extern "C" fn nbcon_waiter_matches(cur: *mut nbcon_state, expected_prio: 
 //
 #[no_mangle]
 unsafe extern "C" fn nbcon_context_try_acquire(ctxt: *mut nbcon_context, is_reacquire: bool) -> bool {
-    static bool nbcon_context_try_acquire(struct nbcon_context *ctxt, bool is_reacquire)
-    {
-    struct console *con = ctxt.console;
-    struct nbcon_state cur;
-    int err;
+    let mut con = ctxt.console;
+pub static mut cur: usize = 0;
+    let mut err = 0;
     nbcon_state_read(con, &cur);
-    try_again:
+// label;
     err = nbcon_context_try_acquire_direct(ctxt, &cur, is_reacquire);
-    if (err != -EBUSY)
-    goto out;
+    if (err != -EBUSY) {
+// goto;
+    }
     err = nbcon_context_try_acquire_handover(ctxt, &cur);
-    if (err == -EAGAIN)
-    goto try_again;
-    if (err != -EBUSY)
-    goto out;
+    if (err == -EAGAIN) {
+// goto;
+    }
+    if (err != -EBUSY) {
+// goto;
+    }
     err = nbcon_context_try_acquire_hostile(ctxt, &cur);
-    out:
-    if (err)
+// label;
+    if (err) {
     return false;
+    }
 // Acquire succeeded.
 // Assign the appropriate buffer for this context.
-    if (panic_on_this_cpu())
+    if (panic_on_this_cpu()) {
     ctxt.pbufs = &panic_nbcon_pbufs;
-    else
+    }
+    else {
     ctxt.pbufs = con.pbufs;
+    }
 // Set the record sequence for this context to print.
     ctxt.seq = nbcon_seq_read(ctxt.console);
     return true;
     }
-    static bool nbcon_owner_matches(struct nbcon_state *cur, int expected_cpu,
-    int expected_prio)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn nbcon_owner_matches(cur: *mut nbcon_state, expected_cpu: c_int, expected_prio: c_int) -> bool {
 //
 // A similar function, nbcon_waiter_matches(), only deals with
 // EMERGENCY and PANIC priorities. However, this function must also
@@ -616,7 +867,7 @@ unsafe extern "C" fn nbcon_context_try_acquire(ctxt: *mut nbcon_context, is_reac
 //
 // For the case where preemption or interrupts are enabled, an
 // external synchronization method *must* be used. In particular,
-// the driver-specific locking mechanism used in device_lock()
+the driver-specific locking mechanism used in device_lock()
 // (including disabling migration) should be used. It prevents
 // scenarios such as:
 //
@@ -630,10 +881,12 @@ unsafe extern "C" fn nbcon_context_try_acquire(ctxt: *mut nbcon_context, is_reac
 // still owned by a task on [CPU X] with NBON_PRIO_NORMAL. Thus
 // [Task A] thinks it is the owner when it is not.
 //
-    if (cur.prio != expected_prio)
+    if (cur.prio != expected_prio) {
     return false;
-    if (cur.cpu != expected_cpu)
+    }
+    if (cur.cpu != expected_cpu) {
     return false;
+    }
     return true;
     }
 //
@@ -642,16 +895,15 @@ unsafe extern "C" fn nbcon_context_try_acquire(ctxt: *mut nbcon_context, is_reac
 //
 #[no_mangle]
 unsafe extern "C" fn nbcon_context_release(ctxt: *mut nbcon_context) {
-    static void nbcon_context_release(struct nbcon_context *ctxt)
-    {
-    let mut cpu: c_uint = smp_processor_id();
-    struct console *con = ctxt.console;
-    struct nbcon_state cur;
-    struct nbcon_state new;
+pub static mut cpu: c_uint = 0;
+    let mut con = ctxt.console;
+pub static mut cur: usize = 0;
+pub static mut new: usize = 0;
     nbcon_state_read(con, &cur);
     do {
-    if (!nbcon_owner_matches(&cur, cpu, ctxt.prio))
+    if (!nbcon_owner_matches(&cur, cpu, ctxt.prio)) {
     break;
+    }
     new.atom = cur.atom;
     new.prio = NBCON_PRIO_NONE;
 //
@@ -690,25 +942,26 @@ unsafe extern "C" fn nbcon_context_release(ctxt: *mut nbcon_context) {
 //
 #[no_mangle]
 unsafe extern "C" fn nbcon_context_can_proceed(ctxt: *mut nbcon_context, cur: *mut nbcon_state) -> bool {
-    static bool nbcon_context_can_proceed(struct nbcon_context *ctxt, struct nbcon_state *cur)
-    {
-    let mut cpu: c_uint = smp_processor_id();
+pub static mut cpu: c_uint = 0;
 // Make sure this context still owns the console.
-    if (!nbcon_owner_matches(cur, cpu, ctxt.prio))
+    if (!nbcon_owner_matches(cur, cpu, ctxt.prio)) {
     return false;
+    }
 // The console owner can proceed if there is no waiter.
-    if (cur.req_prio == NBCON_PRIO_NONE)
+    if (cur.req_prio == NBCON_PRIO_NONE) {
     return true;
+    }
 //
 // A console owner within an unsafe region is always allowed to
 // proceed, even if there are waiters. It can perform a handover
 // when exiting the unsafe region. Otherwise the waiter will
 // need to perform an unsafe hostile takeover.
 //
-    if (cur.unsafe)
+    if (cur.unsafe) {
     return true;
+    }
 // Waiters always have higher priorities than owners.
-    WARN_ON_ONCE(cur.req_prio <= cur.prio);
+    WARN_ON_ONCE!(cur.req_prio <= cur.prio);
 //
 // Having a safe point for take over and eventually a few
 // duplicated characters or a full line is way better than a
@@ -753,11 +1006,9 @@ unsafe extern "C" fn nbcon_context_can_proceed(ctxt: *mut nbcon_context, cur: *m
 //
 #[no_mangle]
 pub unsafe extern "C" fn nbcon_can_proceed(wctxt: *mut nbcon_write_context) -> bool {
-    bool nbcon_can_proceed(struct nbcon_write_context *wctxt)
-    {
-    struct nbcon_context *ctxt = &ACCESS_PRIVATE(wctxt, ctxt);
-    struct console *con = ctxt.console;
-    struct nbcon_state cur;
+    let mut ctxt = &ACCESS_PRIVATE(wctxt, ctxt);
+    let mut con = ctxt.console;
+pub static mut cur: usize = 0;
     nbcon_state_read(con, &cur);
     return nbcon_context_can_proceed(ctxt, &cur);
     }
@@ -784,34 +1035,33 @@ pub unsafe extern "C" fn nbcon_can_proceed(wctxt: *mut nbcon_write_context) -> b
 //
 #[no_mangle]
 unsafe extern "C" fn __nbcon_context_update_unsafe(ctxt: *mut nbcon_context, unsafe: bool) -> bool {
-    static bool __nbcon_context_update_unsafe(struct nbcon_context *ctxt, bool unsafe)
-    {
-    struct console *con = ctxt.console;
-    struct nbcon_state cur;
-    struct nbcon_state new;
+    let mut con = ctxt.console;
+pub static mut cur: usize = 0;
+pub static mut new: usize = 0;
     nbcon_state_read(con, &cur);
     do {
 //
 // The unsafe bit must not be cleared if an
 // unsafe hostile takeover has occurred.
 //
-    if (!unsafe && cur.unsafe_takeover)
-    goto out;
-    if (!nbcon_context_can_proceed(ctxt, &cur))
+    if (!unsafe && cur.unsafe_takeover) {
+// goto;
+    }
+    if (!nbcon_context_can_proceed(ctxt, &cur)) {
     return false;
+    }
     new.atom = cur.atom;
     new.unsafe = unsafe;
     } while (!nbcon_state_try_cmpxchg(con, &cur, &new));
     cur.atom = new.atom;
-    out:
+// label;
     return nbcon_context_can_proceed(ctxt, &cur);
     }
-    void nbcon_write_context_set_buf(struct nbcon_write_context *wctxt,
-    char *buf, unsigned int len)
-    {
-    struct nbcon_context *ctxt = &ACCESS_PRIVATE(wctxt, ctxt);
-    struct console *con = ctxt.console;
-    struct nbcon_state cur;
+#[no_mangle]
+pub unsafe extern "C" fn nbcon_write_context_set_buf(wctxt: *mut nbcon_write_context, buf: *mut c_char, len: c_uint) {
+    let mut ctxt = &ACCESS_PRIVATE(wctxt, ctxt);
+    let mut con = ctxt.console;
+pub static mut cur: usize = 0;
     wctxt.outbuf = buf;
     wctxt.len = len;
     nbcon_state_read(con, &cur);
@@ -831,13 +1081,12 @@ unsafe extern "C" fn __nbcon_context_update_unsafe(ctxt: *mut nbcon_context, uns
 //
 #[no_mangle]
 pub unsafe extern "C" fn nbcon_enter_unsafe(wctxt: *mut nbcon_write_context) -> bool {
-    bool nbcon_enter_unsafe(struct nbcon_write_context *wctxt)
-    {
-    struct nbcon_context *ctxt = &ACCESS_PRIVATE(wctxt, ctxt);
-    bool is_owner;
+    let mut ctxt = &ACCESS_PRIVATE(wctxt, ctxt);
+    let mut is_owner = 0;
     is_owner = nbcon_context_enter_unsafe(ctxt);
-    if (!is_owner)
+    if (!is_owner) {
     nbcon_write_context_set_buf(wctxt, core::ptr::null_mut(), 0);
+    }
     return is_owner;
     }
     EXPORT_SYMBOL_GPL(nbcon_enter_unsafe);
@@ -855,13 +1104,12 @@ pub unsafe extern "C" fn nbcon_enter_unsafe(wctxt: *mut nbcon_write_context) -> 
 //
 #[no_mangle]
 pub unsafe extern "C" fn nbcon_exit_unsafe(wctxt: *mut nbcon_write_context) -> bool {
-    bool nbcon_exit_unsafe(struct nbcon_write_context *wctxt)
-    {
-    struct nbcon_context *ctxt = &ACCESS_PRIVATE(wctxt, ctxt);
-    bool ret;
+    let mut ctxt = &ACCESS_PRIVATE(wctxt, ctxt);
+    let mut ret = 0;
     ret = nbcon_context_exit_unsafe(ctxt);
-    if (!ret)
+    if (!ret) {
     nbcon_write_context_set_buf(wctxt, core::ptr::null_mut(), 0);
+    }
     return ret;
     }
     EXPORT_SYMBOL_GPL(nbcon_exit_unsafe);
@@ -884,26 +1132,26 @@ pub unsafe extern "C" fn nbcon_exit_unsafe(wctxt: *mut nbcon_write_context) -> b
 //
 #[no_mangle]
 pub unsafe extern "C" fn nbcon_reacquire_nobuf(wctxt: *mut nbcon_write_context) {
-    void nbcon_reacquire_nobuf(struct nbcon_write_context *wctxt)
-    {
-    struct nbcon_context *ctxt = &ACCESS_PRIVATE(wctxt, ctxt);
-    while (!nbcon_context_try_acquire(ctxt, true))
+    let mut ctxt = &ACCESS_PRIVATE(wctxt, ctxt);
+    while (!nbcon_context_try_acquire(ctxt, true)) {
     cpu_relax();
+    }
     nbcon_write_context_set_buf(wctxt, core::ptr::null_mut(), 0);
     }
     EXPORT_SYMBOL_GPL(nbcon_reacquire_nobuf);
 
-    static void wctxt_load_execution_ctx(struct nbcon_write_context *wctxt,
-    struct printk_message *pmsg)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn wctxt_load_execution_ctx(wctxt: *mut nbcon_write_context, pmsg: *mut printk_message) {
     wctxt.cpu = pmsg.cpu;
     wctxt.pid = pmsg.pid;
-    memcpy(wctxt.comm, pmsg.comm, sizeof(wctxt.comm));
-    static_assert(sizeof(wctxt.comm) == sizeof(pmsg.comm));
+    memcpy(wctxt.comm, pmsg.comm, sizeof!(wctxt.comm));
+    static_assert(sizeof!(wctxt.comm) == sizeof!(pmsg.comm));
     }
 
-    static void wctxt_load_execution_ctx(struct nbcon_write_context *wctxt,
-    struct printk_message *pmsg) {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: wctxt_load_execution_ctx
+pub unsafe extern "C" fn wctxt_load_execution_ctx_dup(wctxt: *mut nbcon_write_context, pmsg: *mut printk_message) {}
 
 //
 // nbcon_emit_next_record - Emit a record in the acquired context
@@ -924,18 +1172,14 @@ pub unsafe extern "C" fn nbcon_reacquire_nobuf(wctxt: *mut nbcon_write_context) 
 //
 #[no_mangle]
 unsafe extern "C" fn nbcon_emit_next_record(wctxt: *mut nbcon_write_context, use_atomic: bool) -> bool {
-    static bool nbcon_emit_next_record(struct nbcon_write_context *wctxt, bool use_atomic)
-    {
-    struct nbcon_context *ctxt = &ACCESS_PRIVATE(wctxt, ctxt);
-    struct console *con = ctxt.console;
-    let mut is_extended: bool = console_srcu_read_flags(con) & CON_EXTENDED;
-    struct printk_message pmsg = {
-    .pbufs = ctxt.pbufs,
-    };
-    unsigned long con_dropped;
-    struct nbcon_state cur;
-    unsigned long dropped;
-    unsigned long ulseq;
+    let mut ctxt = &ACCESS_PRIVATE(wctxt, ctxt);
+    let mut con = ctxt.console;
+pub static mut is_extended: bool = false;
+pub static mut printk_message: usize = 0;
+    let mut con_dropped = 0;
+pub static mut cur: usize = 0;
+    let mut dropped = 0;
+    let mut ulseq = 0;
 //
 // This function should never be called for consoles that have not
 // implemented the necessary callback for writing: i.e. legacy
@@ -945,7 +1189,7 @@ unsafe extern "C" fn nbcon_emit_next_record(wctxt: *mut nbcon_write_context, use
 // Note that for nbcon consoles the write_thread() callback is
 // mandatory and was already checked in nbcon_alloc().
 //
-    if (WARN_ON_ONCE((use_atomic && !con.write_atomic) ||
+    if (WARN_ON_ONCE!((use_atomic && !con.write_atomic) ||
     !(console_srcu_read_flags(con) & CON_NBCON))) {
     nbcon_context_release(ctxt);
     return false;
@@ -955,11 +1199,13 @@ unsafe extern "C" fn nbcon_emit_next_record(wctxt: *mut nbcon_write_context, use
 // prevents NBCON_PRIO_NORMAL and NBCON_PRIO_EMERGENCY from
 // clobbering each other.
 //
-    if (!nbcon_context_enter_unsafe(ctxt))
+    if (!nbcon_context_enter_unsafe(ctxt)) {
     return false;
+    }
     ctxt.backlog = printk_get_next_message(&pmsg, ctxt.seq, is_extended, true);
-    if (!ctxt.backlog)
+    if (!ctxt.backlog) {
     return nbcon_context_exit_unsafe(ctxt);
+    }
 //
 // @con->dropped is not protected in case of an unsafe hostile
 // takeover. In that situation the update can be racy so
@@ -967,8 +1213,9 @@ unsafe extern "C" fn nbcon_emit_next_record(wctxt: *mut nbcon_write_context, use
 //
     con_dropped = data_race(READ_ONCE(con.dropped));
     dropped = con_dropped + pmsg.dropped;
-    if (dropped && !is_extended)
+    if (dropped && !is_extended) {
     console_prepend_dropped(&pmsg, dropped);
+    }
 //
 // If the previous owner was assigned the same record, this context
 // has taken over ownership and is replaying the record. Prepend a
@@ -985,23 +1232,28 @@ unsafe extern "C" fn nbcon_emit_next_record(wctxt: *mut nbcon_write_context, use
 // value from the context that took over ownership.
 //
     nbcon_state_read(con, &cur);
-    if (!nbcon_context_can_proceed(ctxt, &cur))
+    if (!nbcon_context_can_proceed(ctxt, &cur)) {
     return false;
+    }
     atomic_long_try_cmpxchg(&ACCESS_PRIVATE(con, nbcon_prev_seq), &ulseq,
     __u64seq_to_ulseq(pmsg.seq));
     }
-    if (!nbcon_context_exit_unsafe(ctxt))
+    if (!nbcon_context_exit_unsafe(ctxt)) {
     return false;
+    }
 // For skipped records just update seq/dropped in @con.
-    if (pmsg.outbuf_len == 0)
-    goto update_con;
+    if (pmsg.outbuf_len == 0) {
+// goto;
+    }
 // Initialize the write context for driver callbacks.
     nbcon_write_context_set_buf(wctxt, &pmsg.pbufs.outbuf[0], pmsg.outbuf_len);
     wctxt_load_execution_ctx(wctxt, &pmsg);
-    if (use_atomic)
+    if (use_atomic) {
     con.write_atomic(con, wctxt);
-    else
+    }
+    else {
     con.write_thread(con, wctxt);
+    }
     if (!wctxt.outbuf) {
 //
 // Ownership was lost and reacquired by the driver. Handle it
@@ -1019,14 +1271,15 @@ unsafe extern "C" fn nbcon_emit_next_record(wctxt: *mut nbcon_write_context, use
 // dropped count for the console.
 //
     dropped = 0;
-    update_con:
+// label;
 //
 // The dropped count and the sequence number are updated within an
 // unsafe section. This limits update races to the panic context and
 // allows the panic context to win.
 //
-    if (!nbcon_context_enter_unsafe(ctxt))
+    if (!nbcon_context_enter_unsafe(ctxt)) {
     return false;
+    }
     if (dropped != con_dropped) {
 // Counterpart to the READ_ONCE() above.
     WRITE_ONCE(con.dropped, dropped);
@@ -1053,12 +1306,10 @@ unsafe extern "C" fn nbcon_emit_next_record(wctxt: *mut nbcon_write_context, use
 //
 #[no_mangle]
 unsafe extern "C" fn nbcon_emit_one(wctxt: *mut nbcon_write_context, use_atomic: bool) -> bool {
-    static bool nbcon_emit_one(struct nbcon_write_context *wctxt, bool use_atomic)
-    {
-    struct nbcon_context *ctxt = &ACCESS_PRIVATE(wctxt, ctxt);
-    struct console *con = ctxt.console;
-    unsigned long flags;
-    let mut ret: bool = false;
+    let mut ctxt = &ACCESS_PRIVATE(wctxt, ctxt);
+    let mut con = ctxt.console;
+    let mut flags = 0;
+pub static mut ret: bool = false;
     if (!use_atomic) {
     con.device_lock(con, &flags);
 //
@@ -1067,8 +1318,9 @@ unsafe extern "C" fn nbcon_emit_one(wctxt: *mut nbcon_write_context, use_atomic:
 //
     cant_migrate();
     }
-    if (!nbcon_context_try_acquire(ctxt, false))
-    goto out;
+    if (!nbcon_context_try_acquire(ctxt, false)) {
+// goto;
+    }
 //
 // nbcon_emit_next_record() returns false when the console was
 // handed over or taken over. In both cases the context is no
@@ -1077,13 +1329,15 @@ unsafe extern "C" fn nbcon_emit_one(wctxt: *mut nbcon_write_context, use_atomic:
 // The higher priority printing context takes over responsibility
 // to print the pending records.
 //
-    if (!nbcon_emit_next_record(wctxt, use_atomic))
-    goto out;
+    if (!nbcon_emit_next_record(wctxt, use_atomic)) {
+// goto;
+    }
     nbcon_context_release(ctxt);
     ret = ctxt.backlog;
-    out:
-    if (!use_atomic)
+// label;
+    if (!use_atomic) {
     con.device_unlock(con, flags);
+    }
     return ret;
     }
 //
@@ -1099,13 +1353,12 @@ unsafe extern "C" fn nbcon_emit_one(wctxt: *mut nbcon_write_context, use_atomic:
 //
 #[no_mangle]
 unsafe extern "C" fn nbcon_kthread_should_wakeup(con: *mut console, ctxt: *mut nbcon_context) -> bool {
-    static bool nbcon_kthread_should_wakeup(struct console *con, struct nbcon_context *ctxt)
-    {
-    let mut ret: bool = false;
-    short flags;
-    int cookie;
-    if (kthread_should_stop())
+pub static mut ret: bool = false;
+    let mut flags = 0;
+    let mut cookie = 0;
+    if (kthread_should_stop()) {
     return true;
+    }
 //
 // Block the kthread when the system is in an emergency or panic mode.
 // It increases the chance that these contexts would be able to show
@@ -1114,8 +1367,9 @@ unsafe extern "C" fn nbcon_kthread_should_wakeup(con: *mut console, ctxt: *mut n
 // ownership in the middle of a message.
 //
     if (unlikely(atomic_read(&nbcon_cpu_emergency_cnt)) ||
-    unlikely(panic_in_progress()))
+    unlikely(panic_in_progress())) {
     return false;
+    }
     cookie = console_srcu_read_lock();
     flags = console_srcu_read_flags(con);
     if (console_is_usable(con, flags, false)) {
@@ -1134,18 +1388,13 @@ unsafe extern "C" fn nbcon_kthread_should_wakeup(con: *mut console, ctxt: *mut n
 //
 #[no_mangle]
 unsafe extern "C" fn nbcon_kthread_func(__console: *mut c_void) -> c_int {
-    static int nbcon_kthread_func(void *__console)
-    {
-    struct console *con = __console;
-    struct nbcon_write_context wctxt = {
-    .ctxt.console	= con,
-    .ctxt.prio	= NBCON_PRIO_NORMAL,
-    };
-    struct nbcon_context *ctxt = &ACCESS_PRIVATE(&wctxt, ctxt);
-    short con_flags;
-    bool backlog;
-    int cookie;
-    wait_for_event:
+    let mut con = __console;
+pub static mut nbcon_write_context: usize = 0;
+    let mut ctxt = &ACCESS_PRIVATE(&wctxt, ctxt);
+    let mut con_flags = 0;
+    let mut backlog = 0;
+    let mut cookie = 0;
+// label;
 //
 // Guarantee this task is visible on the rcuwait before
 // checking the wake condition.
@@ -1160,15 +1409,17 @@ unsafe extern "C" fn nbcon_kthread_func(__console: *mut c_void) -> c_int {
     nbcon_kthread_should_wakeup(con, ctxt),
     TASK_INTERRUPTIBLE); /* LMM(nbcon_kthread_func:A) */
     do {
-    if (kthread_should_stop())
+    if (kthread_should_stop()) {
     return 0;
+    }
 //
 // Block the kthread when the system is in an emergency or panic
 // mode. See nbcon_kthread_should_wakeup() for more details.
 //
     if (unlikely(atomic_read(&nbcon_cpu_emergency_cnt)) ||
-    unlikely(panic_in_progress()))
-    goto wait_for_event;
+    unlikely(panic_in_progress())) {
+// goto;
+    }
     backlog = false;
 //
 // Keep the srcu read lock around the entire operation so that
@@ -1177,12 +1428,13 @@ unsafe extern "C" fn nbcon_kthread_func(__console: *mut c_void) -> c_int {
 //
     cookie = console_srcu_read_lock();
     con_flags = console_srcu_read_flags(con);
-    if (console_is_usable(con, con_flags, false))
+    if (console_is_usable(con, con_flags, false)) {
     backlog = nbcon_emit_one(&wctxt, false);
+    }
     console_srcu_read_unlock(cookie);
     cond_resched();
     } while (backlog);
-    goto wait_for_event;
+// goto;
     }
 //
 // nbcon_irq_work - irq work to wake console printer thread
@@ -1190,15 +1442,11 @@ unsafe extern "C" fn nbcon_kthread_func(__console: *mut c_void) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn nbcon_irq_work(irq_work: *mut irq_work) {
-    static void nbcon_irq_work(struct irq_work *irq_work)
-    {
-    struct console *con = container_of(irq_work, struct console, irq_work);
+    let mut con = container_of!(irq_work, console, irq_work);
     nbcon_kthread_wake(con);
     }
 #[no_mangle]
 pub unsafe extern "C" fn rcuwait_has_sleeper(w: *mut rcuwait) -> bool {
-    static inline bool rcuwait_has_sleeper(struct rcuwait *w)
-    {
 //
 // Guarantee any new records can be seen by tasks preparing to wait
 // before this context checks if the rcuwait is empty.
@@ -1218,29 +1466,31 @@ pub unsafe extern "C" fn rcuwait_has_sleeper(w: *mut rcuwait) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn nbcon_kthreads_wake() {
-    void nbcon_kthreads_wake(void)
-    {
-    struct console *con;
-    int cookie;
-    if (!printk_kthreads_running)
+pub static mut con: *mut c_void = core::ptr::null_mut();
+    let mut cookie = 0;
+    if (!printk_kthreads_running) {
     return;
+    }
 //
 // It is not allowed to call this function when console irq_work
 // is blocked.
 //
-    if (WARN_ON_ONCE(console_irqwork_blocked))
+    if (WARN_ON_ONCE!(console_irqwork_blocked)) {
     return;
+    }
     cookie = console_srcu_read_lock();
     for_each_console_srcu(con) {
-    if (!(console_srcu_read_flags(con) & CON_NBCON))
+    if (!(console_srcu_read_flags(con) & CON_NBCON)) {
     continue;
+    }
 //
 // Only schedule irq_work if the printing thread is
 // actively waiting. If not waiting, the thread will
 // notice by itself that it has work to do.
 //
-    if (rcuwait_has_sleeper(&con.rcuwait))
+    if (rcuwait_has_sleeper(&con.rcuwait)) {
     irq_work_queue(&con.irq_work);
+    }
     }
     console_srcu_read_unlock(cookie);
     }
@@ -1250,11 +1500,10 @@ pub unsafe extern "C" fn nbcon_kthreads_wake() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn nbcon_kthread_stop(con: *mut console) {
-    void nbcon_kthread_stop(struct console *con)
-    {
     lockdep_assert_console_list_lock_held();
-    if (!con.kthread)
+    if (!con.kthread) {
     return;
+    }
     kthread_stop(con.kthread);
     con.kthread = core::ptr::null_mut();
     }
@@ -1276,14 +1525,13 @@ pub unsafe extern "C" fn nbcon_kthread_stop(con: *mut console) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn nbcon_kthread_create(con: *mut console) -> bool {
-    bool nbcon_kthread_create(struct console *con)
-    {
-    struct task_struct *kt;
+pub static mut kt: *mut c_void = core::ptr::null_mut();
     lockdep_assert_console_list_lock_held();
-    if (con.kthread)
+    if (con.kthread) {
     return true;
+    }
     kt = kthread_run(nbcon_kthread_func, con, "pr/%s%d", con.name, con.index);
-    if (WARN_ON(IS_ERR(kt))) {
+    if (WARN_ON!(IS_ERR(kt))) {
     con_printk(KERN_ERR, con, "failed to start printing thread\n");
     return false;
     }
@@ -1296,7 +1544,7 @@ pub unsafe extern "C" fn nbcon_kthread_create(con: *mut console) -> bool {
     return true;
     }
 // Track the nbcon emergency nesting per CPU.
-    static DEFINE_PER_CPU(unsigned int, nbcon_pcpu_emergency_nesting);
+pub static mut unsigned int: usize = 0;
     static unsigned int early_nbcon_pcpu_emergency_nesting __initdata;
 //
 // nbcon_get_cpu_emergency_nesting - Get the per CPU emergency nesting pointer
@@ -1317,8 +1565,9 @@ pub unsafe extern "C" fn nbcon_kthread_create(con: *mut console) -> bool {
 // context and before SMP initialization. As a result it could
 // never change while inside an nbcon emergency section.
 //
-    if (!printk_percpu_data_ready())
+    if (!printk_percpu_data_ready()) {
     return &early_nbcon_pcpu_emergency_nesting;
+    }
     return raw_cpu_ptr(&nbcon_pcpu_emergency_nesting);
     }
 //
@@ -1335,14 +1584,14 @@ pub unsafe extern "C" fn nbcon_kthread_create(con: *mut console) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn nbcon_get_default_prio() -> enum nbcon_prio {
-    enum nbcon_prio nbcon_get_default_prio(void)
-    {
-    unsigned int *cpu_emergency_nesting;
-    if (panic_on_this_cpu())
+pub static mut cpu_emergency_nesting: *mut c_void = core::ptr::null_mut();
+    if (panic_on_this_cpu()) {
     return NBCON_PRIO_PANIC;
+    }
     cpu_emergency_nesting = nbcon_get_cpu_emergency_nesting();
-    if (*cpu_emergency_nesting)
+    if (*cpu_emergency_nesting) {
     return NBCON_PRIO_EMERGENCY;
+    }
     return NBCON_PRIO_NORMAL;
     }
 //
@@ -1361,8 +1610,6 @@ pub unsafe extern "C" fn nbcon_get_default_prio() -> enum nbcon_prio {
 //
 #[no_mangle]
 pub unsafe extern "C" fn nbcon_allow_unsafe_takeover() -> bool {
-    bool nbcon_allow_unsafe_takeover(void)
-    {
     return panic_on_this_cpu() && panic_nbcon_allow_unsafe_takeover;
     }
 //
@@ -1395,13 +1642,12 @@ pub unsafe extern "C" fn nbcon_allow_unsafe_takeover() -> bool {
 // on nbcon consoles from legacy context (printing via console unlocking).
 // Essentially it is the nbcon version of console_emit_next_record().
 //
-    bool nbcon_legacy_emit_next_record(struct console *con, bool *handover,
-    int cookie, bool use_atomic)
-    {
-    let mut wctxt: nbcon_write_context = { };
-    struct nbcon_context *ctxt = &ACCESS_PRIVATE(&wctxt, ctxt);
-    unsigned long flags;
-    bool progress;
+#[no_mangle]
+pub unsafe extern "C" fn nbcon_legacy_emit_next_record(con: *mut console, handover: *mut bool, cookie: c_int, use_atomic: bool) -> bool {
+pub static mut wctxt: nbcon_write_context = 0;
+    let mut ctxt = &ACCESS_PRIVATE(&wctxt, ctxt);
+    let mut flags = 0;
+    let mut progress = 0;
     ctxt.console	= con;
     ctxt.prio	= nbcon_get_default_prio();
     if (use_atomic) {
@@ -1449,11 +1695,9 @@ pub unsafe extern "C" fn nbcon_allow_unsafe_takeover() -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn __nbcon_atomic_flush_pending_con(con: *mut console, stop_seq: u64) -> c_int {
-    static int __nbcon_atomic_flush_pending_con(struct console *con, u64 stop_seq)
-    {
-    let mut wctxt: nbcon_write_context = { };
-    struct nbcon_context *ctxt = &ACCESS_PRIVATE(&wctxt, ctxt);
-    let mut err: c_int = 0;
+pub static mut wctxt: nbcon_write_context = 0;
+    let mut ctxt = &ACCESS_PRIVATE(&wctxt, ctxt);
+pub static mut err: c_int = 0;
     ctxt.console			= con;
     ctxt.spinwait_max_us		= 2000;
     ctxt.prio			= nbcon_get_default_prio();
@@ -1467,21 +1711,24 @@ unsafe extern "C" fn __nbcon_atomic_flush_pending_con(con: *mut console, stop_se
 // to acquire console ownership.
 //
     scoped_guard(irqsave) {
-    if (!nbcon_context_try_acquire(ctxt, false))
+    if (!nbcon_context_try_acquire(ctxt, false)) {
     return -EPERM;
+    }
 //
 // nbcon_emit_next_record() returns false when
 // the console was handed over or taken over.
 // In both cases the context is no longer valid.
 //
-    if (!nbcon_emit_next_record(&wctxt, true))
+    if (!nbcon_emit_next_record(&wctxt, true)) {
     return -EAGAIN;
+    }
     nbcon_context_release(ctxt);
     }
     if (!ctxt.backlog) {
 // Are there reserved but not yet finalized records?
-    if (nbcon_seq_read(con) < stop_seq)
+    if (nbcon_seq_read(con) < stop_seq) {
     err = -ENOENT;
+    }
     break;
     }
     }
@@ -1500,11 +1747,9 @@ unsafe extern "C" fn __nbcon_atomic_flush_pending_con(con: *mut console, stop_se
 //
 #[no_mangle]
 unsafe extern "C" fn nbcon_atomic_flush_pending_con(con: *mut console, stop_seq: u64) {
-    static void nbcon_atomic_flush_pending_con(struct console *con, u64 stop_seq)
-    {
-    struct console_flush_type ft;
-    int err;
-    again:
+pub static mut ft: usize = 0;
+    let mut err = 0;
+// label;
     err = __nbcon_atomic_flush_pending_con(con, stop_seq);
 //
 // If there was a new owner (-EPERM, -EAGAIN), that context is
@@ -1514,8 +1759,9 @@ unsafe extern "C" fn nbcon_atomic_flush_pending_con(con: *mut console, stop_seq:
 // possible deadlock. They will either get flushed by the writer or
 // eventually skipped on panic CPU.
 //
-    if (err)
+    if (err) {
     return;
+    }
 //
 // If flushing was successful but more records are available, this
 // context must flush those remaining records if the printer thread
@@ -1525,7 +1771,7 @@ unsafe extern "C" fn nbcon_atomic_flush_pending_con(con: *mut console, stop_seq:
     if (!ft.nbcon_offload &&
     prb_read_valid(prb, nbcon_seq_read(con), core::ptr::null_mut())) {
     stop_seq = prb_next_reserve_seq(prb);
-    goto again;
+// goto;
     }
     }
 //
@@ -1535,19 +1781,20 @@ unsafe extern "C" fn nbcon_atomic_flush_pending_con(con: *mut console, stop_seq:
 //
 #[no_mangle]
 unsafe extern "C" fn __nbcon_atomic_flush_pending(stop_seq: u64) {
-    static void __nbcon_atomic_flush_pending(u64 stop_seq)
-    {
-    struct console *con;
-    int cookie;
+pub static mut con: *mut c_void = core::ptr::null_mut();
+    let mut cookie = 0;
     cookie = console_srcu_read_lock();
     for_each_console_srcu(con) {
-    let mut flags: c_short = console_srcu_read_flags(con);
-    if (!(flags & CON_NBCON))
+pub static mut flags: c_short = 0;
+    if (!(flags & CON_NBCON)) {
     continue;
-    if (!console_is_usable(con, flags, true))
+    }
+    if (!console_is_usable(con, flags, true)) {
     continue;
-    if (nbcon_seq_read(con) >= stop_seq)
+    }
+    if (nbcon_seq_read(con) >= stop_seq) {
     continue;
+    }
     nbcon_atomic_flush_pending_con(con, stop_seq);
     }
     console_srcu_read_unlock(cookie);
@@ -1563,8 +1810,6 @@ unsafe extern "C" fn __nbcon_atomic_flush_pending(stop_seq: u64) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn nbcon_atomic_flush_pending() {
-    void nbcon_atomic_flush_pending(void)
-    {
     __nbcon_atomic_flush_pending(prb_next_reserve_seq(prb));
     }
 //
@@ -1576,8 +1821,6 @@ pub unsafe extern "C" fn nbcon_atomic_flush_pending() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn nbcon_atomic_flush_unsafe() {
-    void nbcon_atomic_flush_unsafe(void)
-    {
     panic_nbcon_allow_unsafe_takeover = true;
     __nbcon_atomic_flush_pending(prb_next_reserve_seq(prb));
     panic_nbcon_allow_unsafe_takeover = false;
@@ -1593,9 +1836,7 @@ pub unsafe extern "C" fn nbcon_atomic_flush_unsafe() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn nbcon_cpu_emergency_enter() {
-    void nbcon_cpu_emergency_enter(void)
-    {
-    unsigned int *cpu_emergency_nesting;
+pub static mut cpu_emergency_nesting: *mut c_void = core::ptr::null_mut();
     preempt_disable();
     atomic_inc(&nbcon_cpu_emergency_cnt);
     cpu_emergency_nesting = nbcon_get_cpu_emergency_nesting();
@@ -1608,23 +1849,23 @@ pub unsafe extern "C" fn nbcon_cpu_emergency_enter() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn nbcon_cpu_emergency_exit() {
-    void nbcon_cpu_emergency_exit(void)
-    {
-    unsigned int *cpu_emergency_nesting;
+pub static mut cpu_emergency_nesting: *mut c_void = core::ptr::null_mut();
     cpu_emergency_nesting = nbcon_get_cpu_emergency_nesting();
-    if (!WARN_ON_ONCE(*cpu_emergency_nesting == 0))
+    if (!WARN_ON_ONCE!(*cpu_emergency_nesting == 0)) {
     (*cpu_emergency_nesting)--;
+    }
 //
 // Wake up kthreads because there might be some pending messages
 // added by other CPUs with normal priority since the last flush
 // in the emergency context.
 //
-    if (!WARN_ON_ONCE(atomic_read(&nbcon_cpu_emergency_cnt) == 0)) {
+    if (!WARN_ON_ONCE!(atomic_read(&nbcon_cpu_emergency_cnt) == 0)) {
     if (atomic_dec_return(&nbcon_cpu_emergency_cnt) == 0) {
-    struct console_flush_type ft;
+pub static mut ft: usize = 0;
     printk_get_console_flush_type(&ft);
-    if (ft.nbcon_offload)
+    if (ft.nbcon_offload) {
     nbcon_kthreads_wake();
+    }
     }
     }
     preempt_enable();
@@ -1641,13 +1882,11 @@ pub unsafe extern "C" fn nbcon_cpu_emergency_exit() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn nbcon_alloc(con: *mut console) -> bool {
-    bool nbcon_alloc(struct console *con)
-    {
-    let mut state: nbcon_state = { };
+pub static mut state: nbcon_state = 0;
 // Synchronize the kthread start.
     lockdep_assert_console_list_lock_held();
 // Check for mandatory nbcon callbacks.
-    if (WARN_ON(!con.write_thread ||
+    if (WARN_ON!(!con.write_thread ||
     !con.device_lock ||
     !con.device_unlock)) {
     return false;
@@ -1697,9 +1936,7 @@ pub unsafe extern "C" fn nbcon_alloc(con: *mut console) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn nbcon_free(con: *mut console) {
-    void nbcon_free(struct console *con)
-    {
-    let mut state: nbcon_state = { };
+pub static mut state: nbcon_state = 0;
 // Synchronize the kthread stop.
     lockdep_assert_console_list_lock_held();
     if (printk_kthreads_running) {
@@ -1709,13 +1946,15 @@ pub unsafe extern "C" fn nbcon_free(con: *mut console) {
 // Do not rely on printk_kthreads_check_locked(). It is not
 // called in some code paths, see nbcon_free() callers.
 //
-    if (!have_nbcon_console)
+    if (!have_nbcon_console) {
     printk_kthreads_running = false;
+    }
     }
     nbcon_state_set(con, &state);
 // Boot consoles share global printk buffers.
-    if (!(con.flags & CON_BOOT))
+    if (!(con.flags & CON_BOOT)) {
     kfree(con.pbufs);
+    }
     con.pbufs = core::ptr::null_mut();
     }
 //
@@ -1739,17 +1978,17 @@ pub unsafe extern "C" fn nbcon_free(con: *mut console) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn nbcon_device_try_acquire(con: *mut console) -> bool {
-    bool nbcon_device_try_acquire(struct console *con)
-    {
-    struct nbcon_context *ctxt = &ACCESS_PRIVATE(con, nbcon_device_ctxt);
+    let mut ctxt = &ACCESS_PRIVATE(con, nbcon_device_ctxt);
     cant_migrate();
-    memset(ctxt, 0, sizeof(*ctxt));
+    memset(ctxt, 0, sizeof!(*ctxt));
     ctxt.console	= con;
     ctxt.prio	= NBCON_PRIO_NORMAL;
-    if (!nbcon_context_try_acquire(ctxt, false))
+    if (!nbcon_context_try_acquire(ctxt, false)) {
     return false;
-    if (!nbcon_context_enter_unsafe(ctxt))
+    }
+    if (!nbcon_context_enter_unsafe(ctxt)) {
     return false;
+    }
     return true;
     }
     EXPORT_SYMBOL_GPL(nbcon_device_try_acquire);
@@ -1759,13 +1998,12 @@ pub unsafe extern "C" fn nbcon_device_try_acquire(con: *mut console) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn nbcon_device_release(con: *mut console) {
-    void nbcon_device_release(struct console *con)
-    {
-    struct nbcon_context *ctxt = &ACCESS_PRIVATE(con, nbcon_device_ctxt);
-    struct console_flush_type ft;
-    int cookie;
-    if (!nbcon_context_exit_unsafe(ctxt))
+    let mut ctxt = &ACCESS_PRIVATE(con, nbcon_device_ctxt);
+pub static mut ft: usize = 0;
+    let mut cookie = 0;
+    if (!nbcon_context_exit_unsafe(ctxt)) {
     return;
+    }
     nbcon_context_release(ctxt);
 //
 // This context must flush any new records added while the console
@@ -1785,8 +2023,9 @@ pub unsafe extern "C" fn nbcon_device_release(con: *mut console) {
     if (ft.nbcon_atomic) {
     __nbcon_atomic_flush_pending_con(con, prb_next_reserve_seq(prb));
     } else if (ft.legacy_direct) {
-    if (console_trylock())
+    if (console_trylock()) {
     console_unlock();
+    }
     } else if (ft.legacy_offload) {
     defer_console_output();
     }
@@ -1813,17 +2052,18 @@ pub unsafe extern "C" fn nbcon_device_release(con: *mut console) {
 // This function acquires the nbcon console using priority NBCON_PRIO_EMERGENCY
 // and marks it unsafe for handover/takeover.
 //
-    bool nbcon_kdb_try_acquire(struct console *con,
-    struct nbcon_write_context *wctxt)
-    {
-    struct nbcon_context *ctxt = &ACCESS_PRIVATE(wctxt, ctxt);
-    memset(ctxt, 0, sizeof(*ctxt));
+#[no_mangle]
+pub unsafe extern "C" fn nbcon_kdb_try_acquire(con: *mut console, wctxt: *mut nbcon_write_context) -> bool {
+    let mut ctxt = &ACCESS_PRIVATE(wctxt, ctxt);
+    memset(ctxt, 0, sizeof!(*ctxt));
     ctxt.console = con;
     ctxt.prio    = NBCON_PRIO_EMERGENCY;
-    if (!nbcon_context_try_acquire(ctxt, false))
+    if (!nbcon_context_try_acquire(ctxt, false)) {
     return false;
-    if (!nbcon_context_enter_unsafe(ctxt))
+    }
+    if (!nbcon_context_enter_unsafe(ctxt)) {
     return false;
+    }
     return true;
     }
 //
@@ -1834,11 +2074,10 @@ pub unsafe extern "C" fn nbcon_device_release(con: *mut console) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn nbcon_kdb_release(wctxt: *mut nbcon_write_context) {
-    void nbcon_kdb_release(struct nbcon_write_context *wctxt)
-    {
-    struct nbcon_context *ctxt = &ACCESS_PRIVATE(wctxt, ctxt);
-    if (!nbcon_context_exit_unsafe(ctxt))
+    let mut ctxt = &ACCESS_PRIVATE(wctxt, ctxt);
+    if (!nbcon_context_exit_unsafe(ctxt)) {
     return;
+    }
     nbcon_context_release(ctxt);
 //
 // Flush any new printk() messages added when the console was blocked.

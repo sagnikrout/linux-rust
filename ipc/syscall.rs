@@ -34,6 +34,303 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! printk { ($($tt:tt)*) => { 0 }; }
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! rootfs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! pure_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! min_t { ($($tt:tt)*) => { 0 }; }
+macro_rules! max_t { ($($tt:tt)*) => { 0 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! MKDEV { ($($tt:tt)*) => { 0u32 }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_ids { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type compat_uptr_t = u32;
+pub type compat_long_t = i32;
+pub type compat_ulong_t = u32;
+pub type compat_size_t = u32;
+pub type __compat_uid_t = u32;
+pub type __compat_gid_t = u32;
+pub type compat_mode_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const ENOSYS: c_int = 38;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+pub const SHMLBA: usize = 4096;
+pub const COMPAT_SHMLBA: usize = 4096;
+
+// Standard File Mode Constants
+pub const S_IFCHR: u32 = 0x2000;
+pub const S_IFDIR: u32 = 0x4000;
+pub const S_IFREG: u32 = 0x8000;
+pub const S_IFBLK: u32 = 0x6000;
+pub const S_IFIFO: u32 = 0x1000;
+pub const S_IFLNK: u32 = 0xa000;
+pub const S_IFSOCK: u32 = 0xc000;
+pub const S_IRWXU: u32 = 0x01c0;
+pub const S_IRUSR: u32 = 0x0100;
+pub const S_IWUSR: u32 = 0x0080;
+pub const S_IXUSR: u32 = 0x0040;
+pub const S_IRUGO: u32 = 0x0124;
+pub const S_IWUGO: u32 = 0x0092;
+pub const S_IXUGO: u32 = 0x0049;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+    pub fn memcpy(dest: *mut c_void, src: *const c_void, n: usize) -> *mut c_void;
+    pub fn usermodehelper_enable();
+    pub fn new_encode_dev(dev: u32) -> u32;
+}
+
+pub unsafe fn init_mkdir<T>(_path: T, _mode: u32) -> c_int { 0 }
+pub unsafe fn init_mknod<T>(_path: T, _mode: u32, _dev: u32) -> c_int { 0 }
+// === KERNEL_MACRO_PRELUDE_END ===
+
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -44,94 +341,120 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // the individual syscalls instead.
 //
 
-    int ksys_ipc(unsigned int call, int first, unsigned long second,
-    unsigned long third, void __user * ptr, long fifth)
-    {
-    int version, ret;
+#[no_mangle]
+pub unsafe extern "C" fn ksys_ipc(call: c_uint, first: c_int, second: c_ulong, third: c_ulong, ptr: *mut c_void, fifth: c_long) -> c_int {
+    let mut version = 0;
+    let mut ret = 0;
     version = call >> 16; /* hack for backward compatibility */
     call &= 0xffff;
-    switch (call) {
-    case SEMOP:
-    return ksys_semtimedop(first, (struct sembuf __user *)ptr,
+    match (call) {
+    SEMOP => {
+    return ksys_semtimedop(first, ptr,
     second, core::ptr::null_mut());
-    case SEMTIMEDOP:
-    if (IS_ENABLED(CONFIG_64BIT))
+    }
+    SEMTIMEDOP => {
+    if (IS_ENABLED!(CONFIG_64BIT)) {
     return ksys_semtimedop(first, ptr, second,
-    (const struct __kernel_timespec __user *)fifth);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: IS_ENABLED(CONFIG_COMPAT_32BIT_TIME)) -> else {
-    else if (IS_ENABLED(CONFIG_COMPAT_32BIT_TIME))
+    fifth);
+    }
+
+    else if (IS_ENABLED!(CONFIG_COMPAT_32BIT_TIME)) {
     return compat_ksys_semtimedop(first, ptr, second,
-    (const struct old_timespec32 __user *)fifth);
-    else
+    fifth);
+    }
+    else {
     return -ENOSYS;
-    case SEMGET:
+    }
+    }
+    SEMGET => {
     return ksys_semget(first, second, third);
-    case SEMCTL: {
-    unsigned long arg;
-    if (!ptr)
+     }
+     SEMCTL => {
+     {
+    let mut arg = 0;
+    if (!ptr) {
     return -EINVAL;
-    if (get_user(arg, (unsigned long __user *) ptr))
+    }
+    if (get_user(arg,  ptr)) {
     return -EFAULT;
+    }
     return ksys_old_semctl(first, second, third, arg);
     }
-    case MSGSND:
-    return ksys_msgsnd(first, (struct msgbuf __user *) ptr,
+    }
+    MSGSND => {
+    return ksys_msgsnd(first,  ptr,
     second, third);
-    case MSGRCV:
-    switch (version) {
-    case 0: {
-    struct ipc_kludge tmp;
-    if (!ptr)
+    }
+    MSGRCV => {
+    match (version) {
+     0 => {
+     {
+pub static mut tmp: usize = 0;
+    if (!ptr) {
     return -EINVAL;
+    }
     if (copy_from_user(&tmp,
-    (struct ipc_kludge __user *) ptr,
-    sizeof(tmp)))
+     ptr,
+    sizeof!(tmp))) {
     return -EFAULT;
+    }
     return ksys_msgrcv(first, tmp.msgp, second,
     tmp.msgtyp, third);
     }
-    default:
+    }
+    _ => {
     return ksys_msgrcv(first,
-    (struct msgbuf __user *) ptr,
+     ptr,
     second, fifth, third);
     }
-    case MSGGET:
-    return ksys_msgget((key_t) first, second);
-    case MSGCTL:
-    return ksys_old_msgctl(first, second,
-    (struct msqid_ds __user *)ptr);
-    case SHMAT:
-    switch (version) {
-    default: {
-    unsigned long raddr;
-    ret = do_shmat(first, (char __user *)ptr,
-    second, &raddr, SHMLBA);
-    if (ret)
-    return ret;
-    return put_user(raddr, (unsigned long __user *) third);
     }
-    case 1:
+    }
+    MSGGET => {
+    return ksys_msgget( first, second);
+    }
+    MSGCTL => {
+    return ksys_old_msgctl(first, second,
+    ptr);
+    }
+    SHMAT => {
+    match (version) {
+    _ => {
+     {
+    let mut raddr = 0;
+    ret = do_shmat(first, ptr,
+    second, &raddr, SHMLBA);
+    if (ret) {
+    return ret;
+    }
+    return put_user(raddr,  third);
+    }
+}
+1 => {
 //
 // This was the entry point for kernel-originating calls
 // from iBCS2 in 2.2 days.
 //
     return -EINVAL;
     }
-    case SHMDT:
-    return ksys_shmdt((char __user *)ptr);
-    case SHMGET:
+    }
+    }
+    SHMDT => {
+    return ksys_shmdt(ptr);
+    }
+    SHMGET => {
     return ksys_shmget(first, second, third);
-    case SHMCTL:
+    }
+    SHMCTL => {
     return ksys_old_shmctl(first, second,
-    (struct shmid_ds __user *) ptr);
-    default:
+     ptr);
+    }
+    _ => {
     return -ENOSYS;
     }
     }
-    SYSCALL_DEFINE6(ipc, unsigned int, call, int, first, unsigned long, second,
-    unsigned long, third, void __user *, ptr, long, fifth)
-    {
+    }
+#[no_mangle]
+pub unsafe extern "C" fn sys_ipc(call: usize, first: usize, second: usize, third: usize, ptr: usize, fifth: usize) -> c_long {
     return ksys_ipc(call, first, second, third, ptr, fifth);
     }
 
@@ -142,74 +465,95 @@ pub struct compat_ipc_kludge {
     pub msgtyp: compat_long_t,
 }
 
-    int compat_ksys_ipc(u32 call, int first, int second,
-    u32 third, compat_uptr_t ptr, u32 fifth)
-    {
-    int version;
-    u32 pad;
+#[no_mangle]
+pub unsafe extern "C" fn compat_ksys_ipc(call: u32, first: c_int, second: c_int, third: u32, ptr: compat_uptr_t, fifth: u32) -> c_int {
+    let mut version = 0;
+    let mut pad = 0;
     version = call >> 16; /* hack for backward compatibility */
     call &= 0xffff;
-    switch (call) {
-    case SEMOP:
+    match (call) {
+SEMOP => {
 // struct sembuf is the same on 32 and 64bit :))
     return ksys_semtimedop(first, compat_ptr(ptr), second, core::ptr::null_mut());
-    case SEMTIMEDOP:
-    if (!IS_ENABLED(CONFIG_COMPAT_32BIT_TIME))
+    }
+    SEMTIMEDOP => {
+    if (!IS_ENABLED!(CONFIG_COMPAT_32BIT_TIME)) {
     return -ENOSYS;
+    }
     return compat_ksys_semtimedop(first, compat_ptr(ptr), second,
     compat_ptr(fifth));
-    case SEMGET:
+    }
+    SEMGET => {
     return ksys_semget(first, second, third);
-    case SEMCTL:
-    if (!ptr)
+    }
+    SEMCTL => {
+    if (!ptr) {
     return -EINVAL;
-    if (get_user(pad, (u32 __user *) compat_ptr(ptr)))
+    }
+    if (get_user(pad,  compat_ptr(ptr))) {
     return -EFAULT;
+    }
     return compat_ksys_old_semctl(first, second, third, pad);
-    case MSGSND:
+    }
+    MSGSND => {
     return compat_ksys_msgsnd(first, ptr, second, third);
-    case MSGRCV: {
-    void __user *uptr = compat_ptr(ptr);
-    if (first < 0 || second < 0)
+     }
+     MSGRCV => {
+     {
+    let mut uptr = core::ptr::null_mut();
+    if (first < 0 || second < 0) {
     return -EINVAL;
+    }
     if (!version) {
-    struct compat_ipc_kludge ipck;
-    if (!uptr)
+pub static mut ipck: usize = 0;
+    if (!uptr) {
     return -EINVAL;
-    if (copy_from_user(&ipck, uptr, sizeof(ipck)))
+    }
+    if (copy_from_user(&ipck, uptr, sizeof!(ipck))) {
     return -EFAULT;
+    }
     return compat_ksys_msgrcv(first, ipck.msgp, second,
     ipck.msgtyp, third);
     }
     return compat_ksys_msgrcv(first, ptr, second, fifth, third);
     }
-    case MSGGET:
+    }
+    MSGGET => {
     return ksys_msgget(first, second);
-    case MSGCTL:
+    }
+    MSGCTL => {
     return compat_ksys_old_msgctl(first, second, compat_ptr(ptr));
-    case SHMAT: {
-    int err;
-    unsigned long raddr;
-    if (version == 1)
+     }
+     SHMAT => {
+     {
+    let mut err = 0;
+    let mut raddr = 0;
+    if (version == 1) {
     return -EINVAL;
+    }
     err = do_shmat(first, compat_ptr(ptr), second, &raddr,
     COMPAT_SHMLBA);
-    if (err < 0)
+    if (err < 0) {
     return err;
-    return put_user(raddr, (compat_ulong_t __user *)compat_ptr(third));
     }
-    case SHMDT:
+    return put_user(raddr, compat_ptr(third));
+    }
+    }
+    SHMDT => {
     return ksys_shmdt(compat_ptr(ptr));
-    case SHMGET:
-    return ksys_shmget(first, (unsigned int)second, third);
-    case SHMCTL:
+    }
+    SHMGET => {
+    return ksys_shmget(first, second, third);
+    }
+    SHMCTL => {
     return compat_ksys_old_shmctl(first, second, compat_ptr(ptr));
+    }
     }
     return -ENOSYS;
     }
-    COMPAT_SYSCALL_DEFINE6(ipc, u32, call, int, first, int, second,
-    u32, third, compat_uptr_t, ptr, u32, fifth)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sys_ipc
+pub unsafe extern "C" fn sys_ipc_dup(call: usize, first: usize, second: usize, third: usize, ptr: usize, fifth: usize) -> c_long {
     return compat_ksys_ipc(call, first, second, third, ptr, fifth);
     }
-

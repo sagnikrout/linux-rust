@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -43,14 +293,14 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 #[no_mangle]
 pub unsafe extern "C" fn refill_pi_state_cache() -> c_int {
-    int refill_pi_state_cache(void)
-    {
-    struct futex_pi_state *pi_state;
-    if (likely(current.futex.pi_state_cache))
+pub static mut pi_state: *mut c_void = core::ptr::null_mut();
+    if (likely(current.futex.pi_state_cache)) {
     return 0;
+    }
     pi_state = kzalloc_obj(*pi_state);
-    if (!pi_state)
+    if (!pi_state) {
     return -ENOMEM;
+    }
     INIT_LIST_HEAD(&pi_state.list);
 // pi_mutex gets initialized later
     pi_state.owner = core::ptr::null_mut();
@@ -59,27 +309,26 @@ pub unsafe extern "C" fn refill_pi_state_cache() -> c_int {
     current.futex.pi_state_cache = pi_state;
     return 0;
     }
-    static struct futex_pi_state *alloc_pi_state(void)
-    {
-    struct futex_pi_state *pi_state = current.futex.pi_state_cache;
-    WARN_ON(!pi_state);
+#[no_mangle]
+pub unsafe extern "C" fn alloc_pi_state() -> *mut c_void {
+    let mut pi_state = current.futex.pi_state_cache;
+    WARN_ON!(!pi_state);
     current.futex.pi_state_cache = core::ptr::null_mut();
     return pi_state;
     }
-    static void pi_state_update_owner(struct futex_pi_state *pi_state,
-    struct task_struct *new_owner)
-    {
-    struct task_struct *old_owner = pi_state.owner;
+#[no_mangle]
+pub unsafe extern "C" fn pi_state_update_owner(pi_state: *mut futex_pi_state, new_owner: *mut task_struct) {
+    let mut old_owner = pi_state.owner;
     lockdep_assert_held(&pi_state.pi_mutex.wait_lock);
     if (old_owner) {
     raw_spin_lock(&old_owner.pi_lock);
-    WARN_ON(list_empty(&pi_state.list));
+    WARN_ON!(list_empty(&pi_state.list));
     list_del_init(&pi_state.list);
     raw_spin_unlock(&old_owner.pi_lock);
     }
     if (new_owner) {
     raw_spin_lock(&new_owner.pi_lock);
-    WARN_ON(!list_empty(&pi_state.list));
+    WARN_ON!(!list_empty(&pi_state.list));
     list_add(&pi_state.list, &new_owner.futex.pi_state_list);
     pi_state.owner = new_owner;
     raw_spin_unlock(&new_owner.pi_lock);
@@ -87,9 +336,7 @@ pub unsafe extern "C" fn refill_pi_state_cache() -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn get_pi_state(pi_state: *mut futex_pi_state) {
-    void get_pi_state(struct futex_pi_state *pi_state)
-    {
-    WARN_ON_ONCE(!refcount_inc_not_zero(&pi_state.refcount));
+    WARN_ON_ONCE!(!refcount_inc_not_zero(&pi_state.refcount));
     }
 //
 // Drops a reference to the pi_state object and frees or caches it
@@ -97,18 +344,18 @@ pub unsafe extern "C" fn get_pi_state(pi_state: *mut futex_pi_state) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn put_pi_state(pi_state: *mut futex_pi_state) {
-    void put_pi_state(struct futex_pi_state *pi_state)
-    {
-    if (!pi_state)
+    if (!pi_state) {
     return;
-    if (!refcount_dec_and_test(&pi_state.refcount))
+    }
+    if (!refcount_dec_and_test(&pi_state.refcount)) {
     return;
+    }
 //
 // If pi_state->owner is NULL, the owner is most probably dying
 // and has cleaned up the pi_state already
 //
     if (pi_state.owner) {
-    unsigned long flags;
+    let mut flags = 0;
     raw_spin_lock_irqsave(&pi_state.pi_mutex.wait_lock, flags);
     pi_state_update_owner(pi_state, core::ptr::null_mut());
     rt_mutex_proxy_unlock(&pi_state.pi_mutex);
@@ -265,18 +512,17 @@ pub unsafe extern "C" fn put_pi_state(pi_state: *mut futex_pi_state) {
 // the pi_state against the user space value. If correct, attach to
 // it.
 //
-    static int attach_to_pi_state(u32 __user *uaddr, u32 uval,
-    struct futex_pi_state *pi_state,
-    struct futex_pi_state **ps)
-    {
-    let mut pid: pid_t = uval & FUTEX_TID_MASK;
-    u32 uval2;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn attach_to_pi_state(uaddr: *mut u32, uval: u32, pi_state: *mut futex_pi_state, ps: *mut *mut futex_pi_state) -> c_int {
+pub static mut pid: pid_t = 0;
+    let mut uval2 = 0;
+    let mut ret = 0;
 //
 // Userspace might have messed up non-PI and PI futexes [3]
 //
-    if (unlikely(!pi_state))
+    if (unlikely(!pi_state)) {
     return -EINVAL;
+    }
 //
 // We get here with hb->lock held, and having found a
 // futex_top_waiter(). This means that futex_lock_pi() of said futex_q
@@ -289,7 +535,7 @@ pub unsafe extern "C" fn put_pi_state(pi_state: *mut futex_pi_state) {
 // and futex_wait_requeue_pi() as it cannot go to 0 and consequently
 // free pi_state before we can take a reference ourselves.
 //
-    WARN_ON(!refcount_read(&pi_state.refcount));
+    WARN_ON!(!refcount_read(&pi_state.refcount));
 //
 // Now that we have a pi_state, we can acquire wait_lock
 // and do the state validation.
@@ -301,10 +547,12 @@ pub unsafe extern "C" fn put_pi_state(pi_state: *mut futex_pi_state) {
 // still is what we expect it to be, otherwise retry the entire
 // operation.
 //
-    if (futex_get_value_locked(&uval2, uaddr))
-    goto out_efault;
-    if (uval != uval2)
-    goto out_eagain;
+    if (futex_get_value_locked(&uval2, uaddr)) {
+// goto;
+    }
+    if (uval != uval2) {
+// goto;
+    }
 //
 // Handle the owner died case:
 //
@@ -319,12 +567,13 @@ pub unsafe extern "C" fn put_pi_state(pi_state: *mut futex_pi_state) {
 // No pi state owner, but the user space TID
 // is not 0. Inconsistent state. [5]
 //
-    if (pid)
-    goto out_einval;
+    if (pid) {
+// goto;
+    }
 //
 // Take a ref on the state and return success. [4]
 //
-    goto out_attach;
+// goto;
     }
 //
 // If TID is 0, then either the dying owner has not
@@ -334,46 +583,47 @@ pub unsafe extern "C" fn put_pi_state(pi_state: *mut futex_pi_state) {
 //
 // Take a ref on the state and return success. [6]
 //
-    if (!pid)
-    goto out_attach;
+    if (!pid) {
+// goto;
+    }
     } else {
 //
 // If the owner died bit is not set, then the pi_state
 // must have an owner. [7]
 //
-    if (!pi_state.owner)
-    goto out_einval;
+    if (!pi_state.owner) {
+// goto;
+    }
     }
 //
 // Bail out if user space manipulated the futex value. If pi
 // state exists then the owner TID must be the same as the
 // user space TID. [9/10]
 //
-    if (pid != task_pid_vnr(pi_state.owner))
-    goto out_einval;
-    out_attach:
+    if (pid != task_pid_vnr(pi_state.owner)) {
+// goto;
+    }
+// label;
     get_pi_state(pi_state);
     raw_spin_unlock_irq(&pi_state.pi_mutex.wait_lock);
 // ps = pi_state;
     return 0;
-    out_einval:
+// label;
     ret = -EINVAL;
-    goto out_error;
-    out_eagain:
+// goto;
+// label;
     ret = -EAGAIN;
-    goto out_error;
-    out_efault:
+// goto;
+// label;
     ret = -EFAULT;
-    goto out_error;
-    out_error:
+// goto;
+// label;
     raw_spin_unlock_irq(&pi_state.pi_mutex.wait_lock);
     return ret;
     }
 #[no_mangle]
-unsafe extern "C" fn handle_exit_race(uaddr: *mut u32 __user, uval: u32) -> c_int {
-    static int handle_exit_race(u32 __user *uaddr, u32 uval)
-    {
-    u32 uval2;
+unsafe extern "C" fn handle_exit_race(uaddr: *mut u32 , uval: u32) -> c_int {
+    let mut uval2 = 0;
 //
 // Reread the user space value to handle the following situation:
 //
@@ -403,11 +653,13 @@ unsafe extern "C" fn handle_exit_race(uaddr: *mut u32 __user, uval: u32) -> c_in
 // The same logic applies to the case where the exiting task is
 // already gone.
 //
-    if (futex_get_value_locked(&uval2, uaddr))
+    if (futex_get_value_locked(&uval2, uaddr)) {
     return -EFAULT;
+    }
 // If the user space value has changed, try again.
-    if (uval2 != uval)
+    if (uval2 != uval) {
     return -EAGAIN;
+    }
 //
 // The exiting task did not have a robust list, the robust list was
 // corrupted or the user space value in *uaddr is simply bogus.
@@ -415,16 +667,15 @@ unsafe extern "C" fn handle_exit_race(uaddr: *mut u32 __user, uval: u32) -> c_in
 //
     return -ESRCH;
     }
-    static void __attach_to_pi_owner(struct task_struct *p, union futex_key *key,
-    struct futex_pi_state **ps)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __attach_to_pi_owner(p: *mut task_struct, key: *mut union futex_key, ps: *mut *mut futex_pi_state) {
 //
 // No existing pi state. First waiter. [2]
 //
 // This creates pi_state, we have hb->lock held, this means nothing can
 // observe this state, wait_lock is irrelevant.
 //
-    struct futex_pi_state *pi_state = alloc_pi_state();
+    let mut pi_state = alloc_pi_state();
 //
 // Initialize the pi_mutex in locked state and make @p
 // the owner of it:
@@ -433,7 +684,7 @@ unsafe extern "C" fn handle_exit_race(uaddr: *mut u32 __user, uval: u32) -> c_in
     rt_mutex_init_proxy_locked(&pi_state.pi_mutex, p);
 // Store the key for possible exit cleanups:
     pi_state.key = *key;
-    WARN_ON(!list_empty(&pi_state.list));
+    WARN_ON!(!list_empty(&pi_state.list));
     list_add(&pi_state.list, &p.futex.pi_state_list);
 //
 // Assignment without holding pi_state->pi_mutex.wait_lock is safe
@@ -446,12 +697,10 @@ unsafe extern "C" fn handle_exit_race(uaddr: *mut u32 __user, uval: u32) -> c_in
 // Lookup the task for the TID provided from user space and attach to
 // it after doing proper sanity checks.
 //
-    static int attach_to_pi_owner(u32 __user *uaddr, u32 uval, union futex_key *key,
-    struct futex_pi_state **ps,
-    struct task_struct **exiting)
-    {
-    let mut pid: pid_t = uval & FUTEX_TID_MASK;
-    struct task_struct *p;
+#[no_mangle]
+pub unsafe extern "C" fn attach_to_pi_owner(uaddr: *mut u32, uval: u32, key: *mut union futex_key, ps: *mut *mut futex_pi_state, exiting: *mut *mut task_struct) -> c_int {
+pub static mut pid: pid_t = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
 //
 // We are the first waiter - try to look up the real owner and attach
 // the new pi_state to it, but bail out when TID = 0 [1]
@@ -459,11 +708,13 @@ unsafe extern "C" fn handle_exit_race(uaddr: *mut u32 __user, uval: u32) -> c_in
 // The !pid check is paranoid. None of the call sites should end up
 // with pid == 0, but better safe than sorry. Let the caller retry
 //
-    if (!pid)
+    if (!pid) {
     return -EAGAIN;
+    }
     p = find_get_task_by_vpid(pid);
-    if (!p)
+    if (!p) {
     return handle_exit_race(uaddr, uval);
+    }
     if (unlikely(p.flags & PF_KTHREAD)) {
     put_task_struct(p);
     return -EPERM;
@@ -496,12 +747,12 @@ unsafe extern "C" fn handle_exit_race(uaddr: *mut u32 __user, uval: u32) -> c_in
 // exiting = p;
     return -EBUSY;
     }
-    let mut ret: c_int = handle_exit_race(uaddr, uval);
+pub static mut ret: c_int = 0;
     raw_spin_unlock_irq(&p.pi_lock);
     put_task_struct(p);
     return ret;
     }
-    if (IS_ENABLED(CONFIG_MMU) && futex_key_is_private(key)) {
+    if (IS_ENABLED!(CONFIG_MMU) && futex_key_is_private(key)) {
 //
 // A private futex key holds a pointer to the waiter's mm
 // without holding a reference on it. So it must not be attached
@@ -521,16 +772,16 @@ unsafe extern "C" fn handle_exit_race(uaddr: *mut u32 __user, uval: u32) -> c_in
     return 0;
     }
 #[no_mangle]
-unsafe extern "C" fn lock_pi_update_atomic(uaddr: *mut u32 __user, uval: u32, newval: u32) -> c_int {
-    static int lock_pi_update_atomic(u32 __user *uaddr, u32 uval, u32 newval)
-    {
-    int err;
-    u32 curval;
-    if (unlikely(should_fail_futex(true)))
+unsafe extern "C" fn lock_pi_update_atomic(uaddr: *mut u32 , uval: u32, newval: u32) -> c_int {
+    let mut err = 0;
+    let mut curval = 0;
+    if (unlikely(should_fail_futex(true))) {
     return -EFAULT;
+    }
     err = futex_cmpxchg_value_locked(&curval, uaddr, uval, newval);
-    if (unlikely(err))
+    if (unlikely(err)) {
     return err;
+    }
 // If user space value changed, let the caller retry
     return curval != uval ? -EAGAIN : 0;
     }
@@ -558,38 +809,38 @@ unsafe extern "C" fn lock_pi_update_atomic(uaddr: *mut u32 __user, uval: u32, ne
 // a refcount on the exiting task on return and the caller needs to drop it
 // after waiting for the exit to complete.
 //
-    int futex_lock_pi_atomic(u32 __user *uaddr, struct futex_hash_bucket *hb,
-    union futex_key *key,
-    struct futex_pi_state **ps,
-    struct task_struct *task,
-    struct task_struct **exiting,
-    int set_waiters)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn futex_lock_pi_atomic(uaddr: *mut u32, hb: *mut futex_hash_bucket, key: *mut union futex_key, ps: *mut *mut futex_pi_state, task: *mut task_struct, exiting: *mut *mut task_struct, set_waiters: c_int) -> c_int {
     u32 uval, newval, vpid = task_pid_vnr(task);
-    struct futex_q *top_waiter;
-    int ret;
+pub static mut top_waiter: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
 //
 // Read the user space value first so we can validate a few
 // things before proceeding further.
 //
-    if (futex_get_value_locked(&uval, uaddr))
+    if (futex_get_value_locked(&uval, uaddr)) {
     return -EFAULT;
-    if (unlikely(should_fail_futex(true)))
+    }
+    if (unlikely(should_fail_futex(true))) {
     return -EFAULT;
+    }
 //
 // Detect deadlocks.
 //
-    if ((unlikely((uval & FUTEX_TID_MASK) == vpid)))
+    if ((unlikely((uval & FUTEX_TID_MASK) == vpid))) {
     return -EDEADLK;
-    if ((unlikely(should_fail_futex(true))))
+    }
+    if ((unlikely(should_fail_futex(true)))) {
     return -EDEADLK;
+    }
 //
 // Lookup existing state first. If it exists, try to attach to
 // its pi_state.
 //
     top_waiter = futex_top_waiter(hb, key);
-    if (top_waiter)
+    if (top_waiter) {
     return attach_to_pi_state(uaddr, uval, top_waiter.pi_state, ps);
+    }
 //
 // No waiter and user TID is 0. We are here because the
 // waiters or the owner died bit is set or called from
@@ -604,11 +855,13 @@ unsafe extern "C" fn lock_pi_update_atomic(uaddr: *mut u32 __user, uval: u32, ne
     newval = uval & FUTEX_OWNER_DIED;
     newval |= vpid;
 // The futex requeue_pi code can enforce the waiters bit
-    if (set_waiters)
+    if (set_waiters) {
     newval |= FUTEX_WAITERS;
+    }
     ret = lock_pi_update_atomic(uaddr, uval, newval);
-    if (ret)
+    if (ret) {
     return ret;
+    }
 //
 // If the waiter bit was requested the caller also needs PI
 // state attached to the new owner of the user space futex.
@@ -634,8 +887,9 @@ unsafe extern "C" fn lock_pi_update_atomic(uaddr: *mut u32 __user, uval: u32, ne
 //
     newval = uval | FUTEX_WAITERS;
     ret = lock_pi_update_atomic(uaddr, uval, newval);
-    if (ret)
+    if (ret) {
     return ret;
+    }
 //
 // If the update of the user space value succeeded, we try to
 // attach to the owner. If that fails, no harm done, we only
@@ -646,17 +900,15 @@ unsafe extern "C" fn lock_pi_update_atomic(uaddr: *mut u32 __user, uval: u32, ne
 //
 // Caller must hold a reference on @pi_state.
 //
-    static int wake_futex_pi(u32 __user *uaddr, u32 uval,
-    struct futex_pi_state *pi_state,
-    struct rt_mutex_waiter *top_waiter)
+#[no_mangle]
+pub unsafe extern "C" fn wake_futex_pi(uaddr: *mut u32, uval: u32, pi_state: *mut futex_pi_state, wait_lock: *mut rt_mutex_waitertop_waiter)
     __must_hold(&pi_state.pi_mutex.wait_lock)
-    __releases(&pi_state.pi_mutex.wait_lock)
-    {
-    struct task_struct *new_owner;
-    let mut postunlock: bool = false;
-    DEFINE_RT_WAKE_Q(wqh);
+    __releases(&pi_state.pi_mutex.) -> c_int {
+pub static mut new_owner: *mut c_void = core::ptr::null_mut();
+pub static mut postunlock: bool = false;
+pub static mut wqh: usize = 0;
     u32 curval, newval;
-    let mut ret: c_int = 0;
+pub static mut ret: c_int = 0;
     new_owner = top_waiter.task;
 //
 // We pass it to the next owner. The WAITERS bit is always kept
@@ -666,7 +918,7 @@ unsafe extern "C" fn lock_pi_update_atomic(uaddr: *mut u32 __user, uval: u32, ne
     newval = FUTEX_WAITERS | task_pid_vnr(new_owner);
     if (unlikely(should_fail_futex(true))) {
     ret = -EFAULT;
-    goto out_unlock;
+// goto;
     }
     ret = futex_cmpxchg_value_locked(&curval, uaddr, uval, newval);
     if (!ret && (curval != uval)) {
@@ -676,10 +928,12 @@ unsafe extern "C" fn lock_pi_update_atomic(uaddr: *mut u32 __user, uval: u32, ne
 // FUTEX_WAITERS flag between get_user() and locking the hash
 // bucket lock, retry the operation.
 //
-    if ((FUTEX_TID_MASK & curval) == uval)
+    if ((FUTEX_TID_MASK & curval) == uval) {
     ret = -EAGAIN;
-    else
+    }
+    else {
     ret = -EINVAL;
+    }
     }
     if (!ret) {
 //
@@ -690,21 +944,22 @@ unsafe extern "C" fn lock_pi_update_atomic(uaddr: *mut u32 __user, uval: u32, ne
     pi_state_update_owner(pi_state, new_owner);
     postunlock = __rt_mutex_futex_unlock(&pi_state.pi_mutex, &wqh);
     }
-    out_unlock:
+// label;
     raw_spin_unlock_irq(&pi_state.pi_mutex.wait_lock);
-    if (postunlock)
+    if (postunlock) {
     rt_mutex_postunlock(&wqh);
+    }
     return ret;
     }
-    static int __fixup_pi_state_owner(u32 __user *uaddr, struct futex_q *q,
-    struct task_struct *argowner)
+#[no_mangle]
+pub unsafe extern "C" fn __fixup_pi_state_owner(uaddr: *mut u32, q: *mut futex_q, lock_ptr: *mut task_structargowner)
     __must_hold(&q.pi_state.pi_mutex.wait_lock)
-    __must_hold(q.lock_ptr)
-    {
-    struct futex_pi_state *pi_state = q.pi_state;
-    struct task_struct *oldowner, *newowner;
+    __must_hold(q.) -> c_int {
+    let mut pi_state = q.pi_state;
+    let mut oldowner = core::ptr::null_mut();
+    let mut newowner = core::ptr::null_mut();
     u32 uval, curval, newval, newtid;
-    let mut err: c_int = 0;
+pub static mut err: c_int = 0;
     oldowner = pi_state.owner;
 //
 // We are here because either:
@@ -729,7 +984,7 @@ unsafe extern "C" fn lock_pi_update_atomic(uaddr: *mut u32 __user, uval: u32, ne
 // need to drop the locks to handle the fault. This might be observed
 // in the PID checks when attaching to PI state .
 //
-    retry:
+// label;
     if (!argowner) {
     if (oldowner != current) {
 //
@@ -757,10 +1012,10 @@ unsafe extern "C" fn lock_pi_update_atomic(uaddr: *mut u32 __user, uval: u32, ne
 //
     if (unlikely(!newowner)) {
     err = -EAGAIN;
-    goto handle_err;
+// goto;
     }
     } else {
-    WARN_ON_ONCE(argowner != current);
+    WARN_ON_ONCE!(argowner != current);
     if (oldowner == current) {
 //
 // We raced against a concurrent self; things are
@@ -772,18 +1027,22 @@ unsafe extern "C" fn lock_pi_update_atomic(uaddr: *mut u32 __user, uval: u32, ne
     }
     newtid = task_pid_vnr(newowner) | FUTEX_WAITERS;
 // Owner died?
-    if (!pi_state.owner)
+    if (!pi_state.owner) {
     newtid |= FUTEX_OWNER_DIED;
+    }
     err = futex_get_value_locked(&uval, uaddr);
-    if (err)
-    goto handle_err;
+    if (err) {
+// goto;
+    }
     for (;;) {
     newval = (uval & FUTEX_OWNER_DIED) | newtid;
     err = futex_cmpxchg_value_locked(&curval, uaddr, uval, newval);
-    if (err)
-    goto handle_err;
-    if (curval == uval)
+    if (err) {
+// goto;
+    }
+    if (curval == uval) {
     break;
+    }
     uval = curval;
     }
 //
@@ -791,7 +1050,7 @@ unsafe extern "C" fn lock_pi_update_atomic(uaddr: *mut u32 __user, uval: u32, ne
 // itself.
 //
     pi_state_update_owner(pi_state, newowner);
-    let mut argowner: return = = current;
+pub static mut argowner: return = 0;
 //
 // In order to reschedule or handle a page fault, we need to drop the
 // locks here. In the case of a fault, this gives the other task
@@ -805,31 +1064,36 @@ unsafe extern "C" fn lock_pi_update_atomic(uaddr: *mut u32 __user, uval: u32, ne
 // drop hb->lock since the caller owns the hb -> futex_q relation.
 // Dropping the pi_mutex->wait_lock requires the state revalidate.
 //
-    handle_err:
+// label;
     raw_spin_unlock_irq(&pi_state.pi_mutex.wait_lock);
     spin_unlock(q.lock_ptr);
-    switch (err) {
-    case -EFAULT:
+    match (err) {
+    -EFAULT => {
     err = fault_in_user_writeable(uaddr);
-    break;
-    case -EAGAIN:
+    // break;
+    }
+    -EAGAIN => {
     cond_resched();
     err = 0;
-    break;
-    default:
-    WARN_ON_ONCE(1);
-    break;
+    // break;
+    }
+    _ => {
+    WARN_ON_ONCE!(1);
+    // break;
+    }
     }
     futex_q_lockptr_lock(q);
     raw_spin_lock_irq(&pi_state.pi_mutex.wait_lock);
 //
 // Check if someone else fixed it for us:
 //
-    if (pi_state.owner != oldowner)
-    let mut argowner: return = = current;
+    if (pi_state.owner != oldowner) {
+pub static mut argowner: return = 0;
+    }
 // Retry if err was -EAGAIN or the fault in succeeded
-    if (!err)
-    goto retry;
+    if (!err) {
+// goto;
+    }
 //
 // fault_in_user_writeable() failed so user state is immutable. At
 // best we can make the kernel state consistent but user state will
@@ -849,11 +1113,10 @@ unsafe extern "C" fn lock_pi_update_atomic(uaddr: *mut u32 __user, uval: u32, ne
     pi_state_update_owner(pi_state, rt_mutex_owner(&pi_state.pi_mutex));
     return err;
     }
-    static int fixup_pi_state_owner(u32 __user *uaddr, struct futex_q *q,
-    struct task_struct *argowner)
-    {
-    struct futex_pi_state *pi_state = q.pi_state;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn fixup_pi_state_owner(uaddr: *mut u32, q: *mut futex_q, argowner: *mut task_struct) -> c_int {
+    let mut pi_state = q.pi_state;
+    let mut ret = 0;
     lockdep_assert_held(q.lock_ptr);
     raw_spin_lock_irq(&pi_state.pi_mutex.wait_lock);
     ret = __fixup_pi_state_owner(uaddr, q, argowner);
@@ -876,9 +1139,7 @@ unsafe extern "C" fn lock_pi_update_atomic(uaddr: *mut u32 __user, uval: u32, ne
 // - <0 - on error (-EFAULT)
 //
 #[no_mangle]
-pub unsafe extern "C" fn fixup_pi_owner(uaddr: *mut u32 __user, q: *mut futex_q, locked: c_int) -> c_int {
-    int fixup_pi_owner(u32 __user *uaddr, struct futex_q *q, int locked)
-    {
+pub unsafe extern "C" fn fixup_pi_owner(uaddr: *mut u32 , q: *mut futex_q, locked: c_int) -> c_int {
     if (locked) {
 //
 // Got the lock. We might not be the anticipated owner if we
@@ -888,8 +1149,9 @@ pub unsafe extern "C" fn fixup_pi_owner(uaddr: *mut u32 __user, q: *mut futex_q,
 // since we own the lock pi_state->owner == current is the
 // stable state, anything else needs more attention.
 //
-    if (q.pi_state.owner != current)
+    if (q.pi_state.owner != current) {
     return fixup_pi_state_owner(uaddr, q, current);
+    }
     return 1;
     }
 //
@@ -900,14 +1162,16 @@ pub unsafe extern "C" fn fixup_pi_owner(uaddr: *mut u32 __user, q: *mut futex_q,
 // Another speculative read; pi_state->owner == current is unstable
 // but needs our attention.
 //
-    if (q.pi_state.owner == current)
+    if (q.pi_state.owner == current) {
     return fixup_pi_state_owner(uaddr, q, core::ptr::null_mut());
+    }
 //
 // Paranoia check. If we did not take the lock, then we should not be
 // the owner of the rt_mutex. Warn and establish consistent state.
 //
-    if (WARN_ON_ONCE(rt_mutex_owner(&q.pi_state.pi_mutex) == current))
+    if (WARN_ON_ONCE!(rt_mutex_owner(&q.pi_state.pi_mutex) == current)) {
     return fixup_pi_state_owner(uaddr, q, current);
+    }
     return 0;
     }
 //
@@ -920,29 +1184,31 @@ pub unsafe extern "C" fn fixup_pi_owner(uaddr: *mut u32 __user, q: *mut futex_q,
 // Also serves as futex trylock_pi()'ing, and due semantics.
 //
 #[no_mangle]
-pub unsafe extern "C" fn futex_lock_pi(uaddr: *mut u32 __user, flags: c_uint, time: *mut ktime_t, trylock: c_int) -> c_int {
-    int futex_lock_pi(u32 __user *uaddr, unsigned int flags, ktime_t *time, int trylock)
-    {
+pub unsafe extern "C" fn futex_lock_pi(uaddr: *mut u32 , flags: c_uint, time: *mut ktime_t, trylock: c_int) -> c_int {
     struct hrtimer_sleeper timeout, *to;
-    struct task_struct *exiting;
-    struct rt_mutex_waiter rt_waiter;
-    let mut q: futex_q = futex_q_init;
-    DEFINE_WAKE_Q(wake_q);
-    int res, ret;
-    if (!IS_ENABLED(CONFIG_FUTEX_PI))
+pub static mut exiting: *mut c_void = core::ptr::null_mut();
+pub static mut rt_waiter: usize = 0;
+pub static mut q: futex_q = 0;
+pub static mut wake_q: usize = 0;
+    let mut res = 0;
+    let mut ret = 0;
+    if (!IS_ENABLED!(CONFIG_FUTEX_PI)) {
     return -ENOSYS;
-    if (refill_pi_state_cache())
+    }
+    if (refill_pi_state_cache()) {
     return -ENOMEM;
+    }
     to = futex_setup_timer(time, &timeout, flags, 0);
-    retry:
+// label;
     exiting = core::ptr::null_mut();
     ret = get_futex_key(uaddr, flags, &q.key, FUTEX_WRITE);
-    if (unlikely(ret != 0))
-    goto out;
-    retry_private:
+    if (unlikely(ret != 0)) {
+// goto;
+    }
+// label;
     if (1) {
     CLASS(hbr, hbr)(&q.key);
-    let mut hb: auto = hbr.hb;
+pub static mut hb: auto = 0;
     futex_q_lock(&q, hb);
     ret = futex_lock_pi_atomic(uaddr, hb, &q.key, &q.pi_state, current,
     &exiting, 0);
@@ -951,15 +1217,18 @@ pub unsafe extern "C" fn futex_lock_pi(uaddr: *mut u32 __user, flags: c_uint, ti
 // Atomic work succeeded and we got the lock,
 // or failed. Either way, we do _not_ block.
 //
-    switch (ret) {
-    case 1:
+    match (ret) {
+    1 => {
 // We got the lock.
     ret = 0;
-    goto out_unlock_put_key;
-    case -EFAULT:
-    goto uaddr_faulted;
-    case -EBUSY:
-    case -EAGAIN:
+// goto;
+    }
+    -EFAULT => {
+// goto;
+    }
+    -EBUSY => {
+    }
+    -EAGAIN => {
 //
 // Two reasons for this:
 // - EBUSY: Task is exiting and we just wait for the
@@ -975,12 +1244,14 @@ pub unsafe extern "C" fn futex_lock_pi(uaddr: *mut u32 __user, flags: c_uint, ti
 //
     wait_for_owner_exiting(ret, exiting);
     cond_resched();
-    goto retry;
-    default:
-    goto out_unlock_put_key;
+// goto;
+    }
+    _ => {
+// goto;
     }
     }
-    WARN_ON(!q.pi_state);
+    }
+    WARN_ON!(!q.pi_state);
 //
 // Only actually queue now that the atomic ops are done:
 //
@@ -989,7 +1260,7 @@ pub unsafe extern "C" fn futex_lock_pi(uaddr: *mut u32 __user, flags: c_uint, ti
     ret = rt_mutex_futex_trylock(&q.pi_state.pi_mutex);
 // Fixup the trylock return value:
     ret = ret ? 0 : -EWOULDBLOCK;
-    goto no_block;
+// goto;
     }
 //
 // Caution; releasing @hb in-scope. The hb->lock is still locked
@@ -1030,14 +1301,16 @@ pub unsafe extern "C" fn futex_lock_pi(uaddr: *mut u32 __user, flags: c_uint, ti
     ret = __rt_mutex_start_proxy_lock(&q.pi_state.pi_mutex, &rt_waiter, current, &wake_q);
     raw_spin_unlock_irq_wake(&q.pi_state.pi_mutex.wait_lock, &wake_q);
     if (ret) {
-    if (ret == 1)
+    if (ret == 1) {
     ret = 0;
-    goto cleanup;
     }
-    if (unlikely(to))
+// goto;
+    }
+    if (unlikely(to)) {
     hrtimer_sleeper_start_expires(to, HRTIMER_MODE_ABS);
+    }
     ret = rt_mutex_wait_proxy_lock(&q.pi_state.pi_mutex, to, &rt_waiter);
-    cleanup:
+// label;
 //
 // If we failed to acquire the lock (deadlock/signal/timeout), we must
 // unwind the above, however we canont lock hb->lock because
@@ -1056,8 +1329,9 @@ pub unsafe extern "C" fn futex_lock_pi(uaddr: *mut u32 __user, flags: c_uint, ti
 //
 // What could possibly go wrong...
 //
-    if (ret && !rt_mutex_cleanup_proxy_lock(&q.pi_state.pi_mutex, &rt_waiter))
+    if (ret && !rt_mutex_cleanup_proxy_lock(&q.pi_state.pi_mutex, &rt_waiter)) {
     ret = 0;
+    }
 //
 // Now that the rt_waiter has been dequeued, it is safe to use
 // spinlock/rtlock (which might enqueue its own rt_waiter) and fix up
@@ -1068,7 +1342,7 @@ pub unsafe extern "C" fn futex_lock_pi(uaddr: *mut u32 __user, flags: c_uint, ti
 // Waiter is unqueued.
 //
     rt_mutex_post_schedule();
-    no_block:
+// label;
 //
 // Fixup the pi_state owner and possibly acquire the lock if we
 // haven't already.
@@ -1078,29 +1352,32 @@ pub unsafe extern "C" fn futex_lock_pi(uaddr: *mut u32 __user, flags: c_uint, ti
 // If fixup_pi_owner() returned an error, propagate that.  If it acquired
 // the lock, clear our -ETIMEDOUT or -EINTR.
 //
-    if (res)
+    if (res) {
     ret = (res < 0) ? res : 0;
+    }
     __release(&hb.lock);
     futex_unqueue_pi(&q);
     spin_unlock(q.lock_ptr);
 // Additional reference from futex_unlock_pi()
     futex_private_hash_put(q.drop_fph);
-    goto out;
-    out_unlock_put_key:
+// goto;
+// label;
     futex_q_unlock(hb);
     __release(q.lock_ptr);
-    goto out;
-    uaddr_faulted:
+// goto;
+// label;
     futex_q_unlock(hb);
     __release(q.lock_ptr);
     ret = fault_in_user_writeable(uaddr);
-    if (ret)
-    goto out;
-    if (!(flags & FLAGS_SHARED))
-    goto retry_private;
-    goto retry;
+    if (ret) {
+// goto;
     }
-    out:
+    if (!(flags & FLAGS_SHARED)) {
+// goto;
+    }
+// goto;
+    }
+// label;
     if (to) {
     hrtimer_cancel(&to.timer);
     destroy_hrtimer_on_stack(&to.timer);
@@ -1113,30 +1390,32 @@ pub unsafe extern "C" fn futex_lock_pi(uaddr: *mut u32 __user, flags: c_uint, ti
 // and do the rt-mutex unlock.
 //
 #[no_mangle]
-unsafe extern "C" fn __futex_unlock_pi(uaddr: *mut u32 __user, flags: c_uint) -> c_int {
-    static int __futex_unlock_pi(u32 __user *uaddr, unsigned int flags)
-    {
+unsafe extern "C" fn __futex_unlock_pi(uaddr: *mut u32 , flags: c_uint) -> c_int {
     u32 curval, uval, vpid = task_pid_vnr(current);
-    let mut key: union futex_key = FUTEX_KEY_INIT;
-    struct futex_q *top_waiter;
-    int ret;
-    if (!IS_ENABLED(CONFIG_FUTEX_PI))
+pub static mut key: union futex_key = 0;
+pub static mut top_waiter: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (!IS_ENABLED!(CONFIG_FUTEX_PI)) {
     return -ENOSYS;
-    retry:
-    if (get_user(uval, uaddr))
+    }
+// label;
+    if (get_user(uval, uaddr)) {
     return -EFAULT;
+    }
 //
 // We release only a lock we actually own:
 //
-    if ((uval & FUTEX_TID_MASK) != vpid)
+    if ((uval & FUTEX_TID_MASK) != vpid) {
     return -EPERM;
+    }
     ret = get_futex_key(uaddr, flags, &key, FUTEX_WRITE);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     CLASS(hbr, hbr)(&key);
-    let mut hb: auto = hbr.hb;
+pub static mut hb: auto = 0;
     spin_lock(&hb.lock);
-    retry_hb:
+// label;
 //
 // Check waiters first. We do not trust user space values at
 // all and we at least want to know if user space fiddled
@@ -1144,17 +1423,19 @@ unsafe extern "C" fn __futex_unlock_pi(uaddr: *mut u32 __user, flags: c_uint) ->
 //
     top_waiter = futex_top_waiter(hb, &key);
     if (top_waiter) {
-    struct futex_pi_state *pi_state = top_waiter.pi_state;
-    struct rt_mutex_waiter *rt_waiter;
+    let mut pi_state = top_waiter.pi_state;
+pub static mut rt_waiter: *mut c_void = core::ptr::null_mut();
     ret = -EINVAL;
-    if (!pi_state)
-    goto out_unlock;
+    if (!pi_state) {
+// goto;
+    }
 //
 // If current does not own the pi_state then the futex is
 // inconsistent and user space fiddled with the futex value.
 //
-    if (pi_state.owner != current)
-    goto out_unlock;
+    if (pi_state.owner != current) {
+// goto;
+    }
 //
 // By taking wait_lock while still holding hb->lock, we ensure
 // there is no point where we hold neither; and thereby
@@ -1186,11 +1467,12 @@ unsafe extern "C" fn __futex_unlock_pi(uaddr: *mut u32 __user, flags: c_uint) ->
 // Acquire a reference for the leaving waiter to ensure
 // valid futex_q::lock_ptr.
 //
-    if (futex_key_is_private(&key))
+    if (futex_key_is_private(&key)) {
     top_waiter.drop_fph = futex_private_hash(key.private.mm);
+    }
     __futex_unqueue(top_waiter);
     raw_spin_unlock_irq(&pi_state.pi_mutex.wait_lock);
-    goto retry_hb;
+// goto;
     }
     get_pi_state(pi_state);
     spin_unlock(&hb.lock);
@@ -1200,20 +1482,23 @@ unsafe extern "C" fn __futex_unlock_pi(uaddr: *mut u32 __user, flags: c_uint) ->
 //
 // Success, we're done! No tricky corner cases.
 //
-    if (!ret)
+    if (!ret) {
     return ret;
+    }
 //
 // The atomic access to the futex value generated a
 // pagefault, so retry the user-access and the wakeup:
 //
-    if (ret == -EFAULT)
-    goto pi_faulted;
+    if (ret == -EFAULT) {
+// goto;
+    }
 //
 // A unconditional UNLOCK_PI op raced against a waiter
 // setting the FUTEX_WAITERS bit. Try again.
 //
-    if (ret == -EAGAIN)
-    goto pi_retry;
+    if (ret == -EAGAIN) {
+// goto;
+    }
 //
 // wake_futex_pi has detected invalid state. Tell user
 // space.
@@ -1229,40 +1514,45 @@ unsafe extern "C" fn __futex_unlock_pi(uaddr: *mut u32 __user, flags: c_uint) ->
 //
     if ((ret = futex_cmpxchg_value_locked(&curval, uaddr, uval, 0))) {
     spin_unlock(&hb.lock);
-    switch (ret) {
-    case -EFAULT:
-    goto pi_faulted;
-    case -EAGAIN:
-    goto pi_retry;
-    default:
-    WARN_ON_ONCE(1);
+    match (ret) {
+    -EFAULT => {
+// goto;
+    }
+    -EAGAIN => {
+// goto;
+    }
+    _ => {
+    WARN_ON_ONCE!(1);
     return ret;
+    }
     }
     }
 //
 // If uval has changed, let user space handle it.
 //
     ret = (curval == uval) ? 0 : -EAGAIN;
-    out_unlock:
+// label;
     spin_unlock(&hb.lock);
     return ret;
-    pi_retry:
+// label;
     cond_resched();
-    goto retry;
-    pi_faulted:
+// goto;
+// label;
     ret = fault_in_user_writeable(uaddr);
-    if (!ret)
-    goto retry;
+    if (!ret) {
+// goto;
+    }
     return ret;
     }
 #[no_mangle]
-pub unsafe extern "C" fn futex_unlock_pi(uaddr: *mut u32 __user, flags: c_uint, pop: *mut void __user) -> c_int {
-    int futex_unlock_pi(u32 __user *uaddr, unsigned int flags, void __user *pop)
-    {
-    let mut ret: c_int = __futex_unlock_pi(uaddr, flags);
-    if (ret || !(flags & FLAGS_ROBUST_UNLOCK))
+pub unsafe extern "C" fn futex_unlock_pi(uaddr: *mut u32 , flags: c_uint, pop: *mut c_void ) -> c_int {
+pub static mut ret: c_int = 0;
+    if (ret || !(flags & FLAGS_ROBUST_UNLOCK)) {
     return ret;
-    if (!futex_robust_list_clear_pending(pop, flags))
+    }
+    if (!futex_robust_list_clear_pending(pop, flags)) {
     return -EFAULT;
+    }
     return 0;
     }
+}

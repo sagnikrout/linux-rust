@@ -34,6 +34,303 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! printk { ($($tt:tt)*) => { 0 }; }
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! rootfs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! pure_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! min_t { ($($tt:tt)*) => { 0 }; }
+macro_rules! max_t { ($($tt:tt)*) => { 0 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! MKDEV { ($($tt:tt)*) => { 0u32 }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_ids { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type compat_uptr_t = u32;
+pub type compat_long_t = i32;
+pub type compat_ulong_t = u32;
+pub type compat_size_t = u32;
+pub type __compat_uid_t = u32;
+pub type __compat_gid_t = u32;
+pub type compat_mode_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const ENOSYS: c_int = 38;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+pub const SHMLBA: usize = 4096;
+pub const COMPAT_SHMLBA: usize = 4096;
+
+// Standard File Mode Constants
+pub const S_IFCHR: u32 = 0x2000;
+pub const S_IFDIR: u32 = 0x4000;
+pub const S_IFREG: u32 = 0x8000;
+pub const S_IFBLK: u32 = 0x6000;
+pub const S_IFIFO: u32 = 0x1000;
+pub const S_IFLNK: u32 = 0xa000;
+pub const S_IFSOCK: u32 = 0xc000;
+pub const S_IRWXU: u32 = 0x01c0;
+pub const S_IRUSR: u32 = 0x0100;
+pub const S_IWUSR: u32 = 0x0080;
+pub const S_IXUSR: u32 = 0x0040;
+pub const S_IRUGO: u32 = 0x0124;
+pub const S_IWUGO: u32 = 0x0092;
+pub const S_IXUGO: u32 = 0x0049;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+    pub fn memcpy(dest: *mut c_void, src: *const c_void, n: usize) -> *mut c_void;
+    pub fn usermodehelper_enable();
+    pub fn new_encode_dev(dev: u32) -> u32;
+}
+
+pub unsafe fn init_mkdir<T>(_path: T, _mode: u32) -> c_int { 0 }
+pub unsafe fn init_mknod<T>(_path: T, _mode: u32, _dev: u32) -> c_int { 0 }
+// === KERNEL_MACRO_PRELUDE_END ===
+
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -54,7 +351,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 #[derive(Copy, Clone)]
 pub struct mqueue_fs_context {
     pub ipc_ns: *mut ipc_namespace,
-    pub /: *mut *mut bool newns; / Set if newly created ipc namespace,
+//     pub /: *mut *mut bool newns; / Set if newly created ipc namespace,
 }
 
 pub const MQUEUE_MAGIC: c_uint = 0x19800202;
@@ -136,8 +433,8 @@ pub struct posix_msg_tree_node {
 pub struct ext_wait_queue {
     pub task: *mut task_struct,
     pub list: list_head,
-    pub /: *mut *mut *mut msg_msg msg; / ptr of loaded message,
-    pub /: *mut *mut *mut int state; / one of STATE_ values,
+//     pub /: *mut *mut *mut msg_msg msg; / ptr of loaded message,
+//     pub /: *mut *mut *mut int state; / one of STATE_ values,
 }
 
 #[repr(C)]
@@ -154,35 +451,35 @@ pub struct mqueue_inode_info {
     pub notify_owner: *mut pid,
     pub notify_self_exec_id: u32,
     pub notify_user_ns: *mut user_namespace,
-    pub /: *mut *mut *mut ucounts ucounts; / user who created, for accounting,
+//     pub /: *mut *mut *mut ucounts ucounts; / user who created, for accounting,
     pub notify_sock: *mut sock,
     pub notify_cookie: *mut sk_buff,
 // for tasks waiting for free space and messages, respectively
     pub e_wait_q: [ext_wait_queue; 2],
-    pub /: *mut *mut unsigned long qsize; / size of queue in memory (sum of all msgs),
+//     pub /: *mut *mut unsigned long qsize; / size of queue in memory (sum of all msgs),
 }
 
-    static struct file_system_type mqueue_fs_type;
-    static const struct inode_operations mqueue_dir_inode_operations;
-    static const struct file_operations mqueue_file_operations;
-    static const struct super_operations mqueue_super_ops;
-    static const struct fs_context_operations mqueue_fs_context_ops;
-    static void remove_notification(struct mqueue_inode_info *info);
-    static struct kmem_cache *mqueue_inode_cachep;
-    static inline struct mqueue_inode_info *MQUEUE_I(struct inode *inode)
-    {
-    return container_of(inode, struct mqueue_inode_info, vfs_inode);
+pub static mut mqueue_fs_type: usize = 0;
+pub static mut mqueue_dir_inode_operations: usize = 0;
+pub static mut mqueue_file_operations: usize = 0;
+pub static mut mqueue_super_ops: usize = 0;
+pub static mut mqueue_fs_context_ops: usize = 0;
+// forward_decl: remove_notification;
+pub static mut mqueue_inode_cachep: *mut c_void = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn MQUEUE_I(inode: *mut inode) -> *mut c_void {
+    return container_of!(inode, mqueue_inode_info, vfs_inode);
     }
 //
 // This routine should be called with the mq_lock held.
 //
-    static inline struct ipc_namespace *__get_ns_from_inode(struct inode *inode)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __get_ns_from_inode(inode: *mut inode) -> *mut c_void {
     return get_ipc_ns(inode.i_sb.s_fs_info);
     }
-    static struct ipc_namespace *get_ns_from_inode(struct inode *inode)
-    {
-    struct ipc_namespace *ns;
+#[no_mangle]
+pub unsafe extern "C" fn get_ns_from_inode(inode: *mut inode) -> *mut c_void {
+pub static mut ns: *mut c_void = core::ptr::null_mut();
     spin_lock(&mq_lock);
     ns = __get_ns_from_inode(inode);
     spin_unlock(&mq_lock);
@@ -191,63 +488,67 @@ pub struct mqueue_inode_info {
 // Auxiliary functions to manipulate messages' list
 #[no_mangle]
 unsafe extern "C" fn msg_insert(msg: *mut msg_msg, info: *mut mqueue_inode_info) -> c_int {
-    static int msg_insert(struct msg_msg *msg, struct mqueue_inode_info *info)
-    {
-    struct rb_node **p, *parent = core::ptr::null_mut();
-    struct posix_msg_tree_node *leaf;
-    let mut rightmost: bool = true;
+    let mut p = core::ptr::null_mut();
+    let mut parent = core::ptr::null_mut();
+pub static mut leaf: *mut c_void = core::ptr::null_mut();
+pub static mut rightmost: bool = true;
     p = &info.msg_tree.rb_node;
     while (*p) {
     parent = *p;
-    leaf = rb_entry(parent, struct posix_msg_tree_node, rb_node);
-    if (likely(leaf.priority == msg.m_type))
-    goto insert_msg;
-#[no_mangle]
-pub unsafe extern "C" fn if(leaf->priority: msg->m_type <) -> else {
+    leaf = rb_entry(parent, posix_msg_tree_node, rb_node);
+    if (likely(leaf.priority == msg.m_type)) {
+// goto;
+    }
+if true {
     p = &(*p).rb_left;
     rightmost = false;
-    } else
+    } else {
     p = &(*p).rb_right;
+    }
     }
     if (info.node_cache) {
     leaf = info.node_cache;
     info.node_cache = core::ptr::null_mut();
     } else {
     leaf = kmalloc_obj(*leaf, GFP_ATOMIC);
-    if (!leaf)
+    if (!leaf) {
     return -ENOMEM;
+    }
     INIT_LIST_HEAD(&leaf.msg_list);
     }
     leaf.priority = msg.m_type;
-    if (rightmost)
+    if (rightmost) {
     info.msg_tree_rightmost = &leaf.rb_node;
+    }
     rb_link_node(&leaf.rb_node, parent, p);
     rb_insert_color(&leaf.rb_node, &info.msg_tree);
-    insert_msg:
-    info.attr.mq_curmsgs++;
+    // label: insert_msg
+    info.attr.mq_curmsgs += 1;
     info.qsize += msg.m_ts;
     list_add_tail(&msg.m_list, &leaf.msg_list);
     return 0;
     }
-    static inline void msg_tree_erase(struct posix_msg_tree_node *leaf,
-    struct mqueue_inode_info *info)
-    {
-    struct rb_node *node = &leaf.rb_node;
-    if (info.msg_tree_rightmost == node)
+#[no_mangle]
+pub unsafe extern "C" fn msg_tree_erase(leaf: *mut posix_msg_tree_node, info: *mut mqueue_inode_info) {
+    let mut node = core::ptr::null_mut();
+    if (info.msg_tree_rightmost == node) {
     info.msg_tree_rightmost = rb_prev(node);
+    }
     rb_erase(node, &info.msg_tree);
-    if (info.node_cache)
+    if (info.node_cache) {
     kfree(leaf);
-    else
+    }
+    else {
     info.node_cache = leaf;
     }
-    static inline struct msg_msg *msg_get(struct mqueue_inode_info *info)
-    {
-    struct rb_node *parent = core::ptr::null_mut();
-    struct posix_msg_tree_node *leaf;
-    struct msg_msg *msg;
-    try_again:
-//
+    }
+#[no_mangle]
+pub unsafe extern "C" fn msg_get(info: *mut mqueue_inode_info) -> *mut c_void {
+    let mut parent = core::ptr::null_mut();
+pub static mut leaf: *mut c_void = core::ptr::null_mut();
+pub static mut msg: *mut c_void = core::ptr::null_mut();
+    // label: try_again
+    //
 // During insert, low priorities go to the left and high to the
 // right.  On receive, we want the highest priorities first, so
 // walk all the way to the right.
@@ -255,49 +556,44 @@ pub unsafe extern "C" fn if(leaf->priority: msg->m_type <) -> else {
     parent = info.msg_tree_rightmost;
     if (!parent) {
     if (info.attr.mq_curmsgs) {
-    pr_warn_once("Inconsistency in POSIX message queue, "
-    "no tree element, but supposedly messages "
-    "should exist!\n");
+    pr_warn_once!("Inconsistency in POSIX message queue, no tree element, but supposedly messages should exist!\n");
     info.attr.mq_curmsgs = 0;
     }
     return core::ptr::null_mut();
     }
-    leaf = rb_entry(parent, struct posix_msg_tree_node, rb_node);
+    leaf = rb_entry(parent, posix_msg_tree_node, rb_node);
     if (unlikely(list_empty(&leaf.msg_list))) {
-    pr_warn_once("Inconsistency in POSIX message queue, "
-    "empty leaf node but we haven't implemented "
-    "lazy leaf delete!\n");
+    pr_warn_once!("Inconsistency in POSIX message queue, empty leaf node but we haven't implemented lazy leaf delete!\n");
     msg_tree_erase(leaf, info);
-    goto try_again;
+// goto;
     } else {
-    msg = list_first_entry(&leaf.msg_list,
-    struct msg_msg, m_list);
+    msg = list_first_entry(&leaf.msg_list, msg_msg, m_list);
     list_del(&msg.m_list);
     if (list_empty(&leaf.msg_list)) {
     msg_tree_erase(leaf, info);
     }
     }
-    info.attr.mq_curmsgs--;
+    info.attr.mq_curmsgs -= 1;
     info.qsize -= msg.m_ts;
     return msg;
     }
-    static struct inode *mqueue_get_inode(struct super_block *sb,
-    struct ipc_namespace *ipc_ns, umode_t mode,
-    struct mq_attr *attr)
-    {
-    struct inode *inode;
-    let mut ret: c_int = -ENOMEM;
+#[no_mangle]
+pub unsafe extern "C" fn mqueue_get_inode(sb: *mut super_block, ipc_ns: *mut ipc_namespace, mode: umode_t, attr: *mut mq_attr) -> *mut c_void {
+pub static mut inode: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     inode = new_inode(sb);
-    if (!inode)
-    goto err;
+    if (!inode) {
+// goto;
+    }
     inode.i_ino = get_next_ino();
     inode.i_mode = mode;
     inode.i_uid = current_fsuid();
     inode.i_gid = current_fsgid();
     simple_inode_init_ts(inode);
     if (S_ISREG(mode)) {
-    struct mqueue_inode_info *info;
-    unsigned long mq_bytes, mq_treesize;
+pub static mut info: *mut c_void = core::ptr::null_mut();
+    let mut mq_bytes = 0;
+    let mut mq_treesize = 0;
     inode.i_fop = &mqueue_file_operations;
     inode.i_size = FILENT_SIZE;
 // mqueue specific info
@@ -313,7 +609,7 @@ pub unsafe extern "C" fn if(leaf->priority: msg->m_type <) -> else {
     info.msg_tree = RB_ROOT;
     info.msg_tree_rightmost = core::ptr::null_mut();
     info.node_cache = core::ptr::null_mut();
-    memset(&info.attr, 0, sizeof(info.attr));
+    memset(&info.attr, 0, sizeof!(info.attr));
     info.attr.mq_maxmsg = min(ipc_ns.mq_msg_max,
     ipc_ns.mq_msg_default);
     info.attr.mq_msgsize = min(ipc_ns.mq_msgsize_max,
@@ -336,31 +632,36 @@ pub unsafe extern "C" fn if(leaf->priority: msg->m_type <) -> else {
 // posix_msg_tree_node.
 //
     ret = -EINVAL;
-    if (info.attr.mq_maxmsg <= 0 || info.attr.mq_msgsize <= 0)
-    goto out_inode;
+    if (info.attr.mq_maxmsg <= 0 || info.attr.mq_msgsize <= 0) {
+// goto;
+    }
     if (capable(CAP_SYS_RESOURCE)) {
     if (info.attr.mq_maxmsg > HARD_MSGMAX ||
-    info.attr.mq_msgsize > HARD_MSGSIZEMAX)
-    goto out_inode;
+    info.attr.mq_msgsize > HARD_MSGSIZEMAX) {
+// goto;
+    }
     } else {
     if (info.attr.mq_maxmsg > ipc_ns.mq_msg_max ||
-    info.attr.mq_msgsize > ipc_ns.mq_msgsize_max)
-    goto out_inode;
+    info.attr.mq_msgsize > ipc_ns.mq_msgsize_max) {
+// goto;
+    }
     }
     ret = -EOVERFLOW;
 // check for overflow
-    if (info.attr.mq_msgsize > ULONG_MAX/info.attr.mq_maxmsg)
-    goto out_inode;
-    mq_treesize = info.attr.mq_maxmsg * sizeof(struct msg_msg) +
-    min_t(unsigned int, info.attr.mq_maxmsg, MQ_PRIO_MAX) *
-    sizeof(struct posix_msg_tree_node);
+    if (info.attr.mq_msgsize > ULONG_MAX/info.attr.mq_maxmsg) {
+// goto;
+    }
+    mq_treesize = info.attr.mq_maxmsg * sizeof!(msg_msg) +
+    min_t!(unsigned int, info.attr.mq_maxmsg, MQ_PRIO_MAX) *
+    sizeof!(posix_msg_tree_node);
     mq_bytes = info.attr.mq_maxmsg * info.attr.mq_msgsize;
-    if (mq_bytes + mq_treesize < mq_bytes)
-    goto out_inode;
+    if (mq_bytes + mq_treesize < mq_bytes) {
+// goto;
+    }
     mq_bytes += mq_treesize;
     info.ucounts = get_ucounts(current_ucounts());
     if (info.ucounts) {
-    long msgqueue;
+    let mut msgqueue = 0;
     spin_lock(&mq_lock);
     msgqueue = inc_rlimit_ucounts(info.ucounts, UCOUNT_RLIMIT_MSGQUEUE, mq_bytes);
     if (msgqueue == LONG_MAX || msgqueue > rlimit(RLIMIT_MSGQUEUE)) {
@@ -370,7 +671,7 @@ pub unsafe extern "C" fn if(leaf->priority: msg->m_type <) -> else {
     info.ucounts = core::ptr::null_mut();
 // mqueue_evict_inode() releases info->messages
     ret = -EMFILE;
-    goto out_inode;
+// goto;
     }
     spin_unlock(&mq_lock);
     }
@@ -382,17 +683,15 @@ pub unsafe extern "C" fn if(leaf->priority: msg->m_type <) -> else {
     inode.i_fop = &simple_dir_operations;
     }
     return inode;
-    out_inode:
+    // label: out_inode
     iput(inode);
-    err:
+    // label: err
     return ERR_PTR(ret);
     }
 #[no_mangle]
 unsafe extern "C" fn mqueue_fill_super(sb: *mut super_block, fc: *mut fs_context) -> c_int {
-    static int mqueue_fill_super(struct super_block *sb, struct fs_context *fc)
-    {
-    struct inode *inode;
-    struct ipc_namespace *ns = sb.s_fs_info;
+pub static mut inode: *mut c_void = core::ptr::null_mut();
+    let mut ns = core::ptr::null_mut();
     sb.s_iflags |= SB_I_NOEXEC | SB_I_NODEV;
     sb.s_blocksize = PAGE_SIZE;
     sb.s_blocksize_bits = PAGE_SHIFT;
@@ -400,18 +699,18 @@ unsafe extern "C" fn mqueue_fill_super(sb: *mut super_block, fc: *mut fs_context
     sb.s_op = &mqueue_super_ops;
     sb.s_d_flags = DCACHE_DONTCACHE;
     inode = mqueue_get_inode(sb, ns, S_IFDIR | S_ISVTX | S_IRWXUGO, core::ptr::null_mut());
-    if (IS_ERR(inode))
+    if (IS_ERR(inode)) {
     return PTR_ERR(inode);
+    }
     sb.s_root = d_make_root(inode);
-    if (!sb.s_root)
+    if (!sb.s_root) {
     return -ENOMEM;
+    }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn mqueue_get_tree(fc: *mut fs_context) -> c_int {
-    static int mqueue_get_tree(struct fs_context *fc)
-    {
-    struct mqueue_fs_context *ctx = fc.fs_private;
+    let mut ctx = core::ptr::null_mut();
 //
 // With a newly created ipc namespace, we don't need to do a search
 // for an ipc namespace match, but we still need to set s_fs_info.
@@ -424,20 +723,17 @@ unsafe extern "C" fn mqueue_get_tree(fc: *mut fs_context) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn mqueue_fs_context_free(fc: *mut fs_context) {
-    static void mqueue_fs_context_free(struct fs_context *fc)
-    {
-    struct mqueue_fs_context *ctx = fc.fs_private;
+    let mut ctx = core::ptr::null_mut();
     put_ipc_ns(ctx.ipc_ns);
     kfree(ctx);
     }
 #[no_mangle]
 unsafe extern "C" fn mqueue_init_fs_context(fc: *mut fs_context) -> c_int {
-    static int mqueue_init_fs_context(struct fs_context *fc)
-    {
-    struct mqueue_fs_context *ctx;
-    ctx = kzalloc_obj(struct mqueue_fs_context);
-    if (!ctx)
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+    ctx = kzalloc_obj(mqueue_fs_context);
+    if (!ctx) {
     return -ENOMEM;
+    }
     ctx.ipc_ns = get_ipc_ns(current.nsproxy.ipc_ns);
     put_user_ns(fc.user_ns);
     fc.user_ns = get_user_ns(ctx.ipc_ns.user_ns);
@@ -449,14 +745,15 @@ unsafe extern "C" fn mqueue_init_fs_context(fc: *mut fs_context) -> c_int {
 // mq_init_ns() is currently the only caller of mq_create_mount().
 // So the ns parameter is always a newly created ipc namespace.
 //
-    static struct vfsmount *mq_create_mount(struct ipc_namespace *ns)
-    {
-    struct mqueue_fs_context *ctx;
-    struct fs_context *fc;
-    struct vfsmount *mnt;
+#[no_mangle]
+pub unsafe extern "C" fn mq_create_mount(ns: *mut ipc_namespace) -> *mut c_void {
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+pub static mut fc: *mut c_void = core::ptr::null_mut();
+pub static mut mnt: *mut c_void = core::ptr::null_mut();
     fc = fs_context_for_mount(&mqueue_fs_type, SB_KERNMOUNT);
-    if (IS_ERR(fc))
+    if (IS_ERR(fc)) {
     return ERR_CAST(fc);
+    }
     ctx = fc.fs_private;
     ctx.newns = true;
     put_ipc_ns(ctx.ipc_ns);
@@ -469,53 +766,52 @@ unsafe extern "C" fn mqueue_init_fs_context(fc: *mut fs_context) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn init_once(foo: *mut c_void) {
-    static void init_once(void *foo)
-    {
-    struct mqueue_inode_info *p = foo;
+    let mut p = core::ptr::null_mut();
     inode_init_once(&p.vfs_inode);
     }
-    static struct inode *mqueue_alloc_inode(struct super_block *sb)
-    {
-    struct mqueue_inode_info *ei;
+#[no_mangle]
+pub unsafe extern "C" fn mqueue_alloc_inode(sb: *mut super_block) -> *mut c_void {
+pub static mut ei: *mut c_void = core::ptr::null_mut();
     ei = alloc_inode_sb(sb, mqueue_inode_cachep, GFP_KERNEL);
-    if (!ei)
+    if (!ei) {
     return core::ptr::null_mut();
+    }
     return &ei.vfs_inode;
     }
 #[no_mangle]
 unsafe extern "C" fn mqueue_free_inode(inode: *mut inode) {
-    static void mqueue_free_inode(struct inode *inode)
-    {
     kmem_cache_free(mqueue_inode_cachep, MQUEUE_I(inode));
     }
 #[no_mangle]
 unsafe extern "C" fn mqueue_evict_inode(inode: *mut inode) {
-    static void mqueue_evict_inode(struct inode *inode)
-    {
-    struct mqueue_inode_info *info;
-    struct ipc_namespace *ipc_ns;
-    struct msg_msg *msg, *nmsg;
-    LIST_HEAD(tmp_msg);
+pub static mut info: *mut c_void = core::ptr::null_mut();
+pub static mut ipc_ns: *mut c_void = core::ptr::null_mut();
+    let mut msg = core::ptr::null_mut();
+    let mut nmsg = core::ptr::null_mut();
+pub static mut tmp_msg: usize = 0;
     clear_inode(inode);
-    if (S_ISDIR(inode.i_mode))
+    if (S_ISDIR(inode.i_mode)) {
     return;
+    }
     ipc_ns = get_ns_from_inode(inode);
     info = MQUEUE_I(inode);
     spin_lock(&info.lock);
-    while ((msg = msg_get(info)) != core::ptr::null_mut())
+    while ((msg = msg_get(info)) != core::ptr::null_mut()) {
     list_add_tail(&msg.m_list, &tmp_msg);
+    }
     kfree(info.node_cache);
     spin_unlock(&info.lock);
-    list_for_each_entry_safe(msg, nmsg, &tmp_msg, m_list) {
+    if false {
     list_del(&msg.m_list);
     free_msg(msg);
     }
     if (info.ucounts) {
-    unsigned long mq_bytes, mq_treesize;
+    let mut mq_bytes = 0;
+    let mut mq_treesize = 0;
 // Total amount of bytes accounted for the mqueue
-    mq_treesize = info.attr.mq_maxmsg * sizeof(struct msg_msg) +
-    min_t(unsigned int, info.attr.mq_maxmsg, MQ_PRIO_MAX) *
-    sizeof(struct posix_msg_tree_node);
+    mq_treesize = info.attr.mq_maxmsg * sizeof!(msg_msg) +
+    min_t!(unsigned int, info.attr.mq_maxmsg, MQ_PRIO_MAX) *
+    sizeof!(posix_msg_tree_node);
     mq_bytes = mq_treesize + (info.attr.mq_maxmsg *
     info.attr.mq_msgsize);
     spin_lock(&mq_lock);
@@ -526,64 +822,62 @@ unsafe extern "C" fn mqueue_evict_inode(inode: *mut inode) {
 // to which we now hold a reference, or it is NULL.
 // We can't put it here under mq_lock, though.
 //
-    if (ipc_ns)
-    ipc_ns.mq_queues_count--;
+    if (ipc_ns) {
+    ipc_ns.mq_queues_count -= 1;
+    }
     spin_unlock(&mq_lock);
     put_ucounts(info.ucounts);
     info.ucounts = core::ptr::null_mut();
     }
-    if (ipc_ns)
+    if (ipc_ns) {
     put_ipc_ns(ipc_ns);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn mqueue_create_attr(dentry: *mut dentry, mode: umode_t, arg: *mut c_void) -> c_int {
-    static int mqueue_create_attr(struct dentry *dentry, umode_t mode, void *arg)
-    {
-    struct inode *dir = dentry.d_parent.d_inode;
-    struct inode *inode;
-    struct mq_attr *attr = arg;
-    int error;
-    struct ipc_namespace *ipc_ns;
+    let mut dir = core::ptr::null_mut();
+pub static mut inode: *mut c_void = core::ptr::null_mut();
+    let mut attr = core::ptr::null_mut();
+    let mut error = 0;
+pub static mut ipc_ns: *mut c_void = core::ptr::null_mut();
     spin_lock(&mq_lock);
     ipc_ns = __get_ns_from_inode(dir);
     if (!ipc_ns) {
     error = -EACCES;
-    goto out_unlock;
+// goto;
     }
     if (ipc_ns.mq_queues_count >= ipc_ns.mq_queues_max &&
     !capable(CAP_SYS_RESOURCE)) {
     error = -ENOSPC;
-    goto out_unlock;
+// goto;
     }
-    ipc_ns.mq_queues_count++;
+    ipc_ns.mq_queues_count += 1;
     spin_unlock(&mq_lock);
     inode = mqueue_get_inode(dir.i_sb, ipc_ns, mode, attr);
     if (IS_ERR(inode)) {
     error = PTR_ERR(inode);
     spin_lock(&mq_lock);
-    ipc_ns.mq_queues_count--;
-    goto out_unlock;
+    ipc_ns.mq_queues_count -= 1;
+// goto;
     }
     put_ipc_ns(ipc_ns);
     dir.i_size += DIRENT_SIZE;
     simple_inode_init_ts(dir);
     d_make_persistent(dentry, inode);
     return 0;
-    out_unlock:
+    // label: out_unlock
     spin_unlock(&mq_lock);
-    if (ipc_ns)
+    if (ipc_ns) {
     put_ipc_ns(ipc_ns);
+    }
     return error;
     }
-    static int mqueue_create(struct mnt_idmap *idmap, struct inode *dir,
-    struct dentry *dentry, umode_t mode)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn mqueue_create(idmap: *mut mnt_idmap, dir: *mut inode, dentry: *mut dentry, mode: umode_t) -> c_int {
     return mqueue_create_attr(dentry, mode, core::ptr::null_mut());
     }
 #[no_mangle]
 unsafe extern "C" fn mqueue_unlink(dir: *mut inode, dentry: *mut dentry) -> c_int {
-    static int mqueue_unlink(struct inode *dir, struct dentry *dentry)
-    {
     dir.i_size -= DIRENT_SIZE;
     return simple_unlink(dir, dentry);
     }
@@ -594,63 +888,60 @@ unsafe extern "C" fn mqueue_unlink(dir: *mut inode, dentry: *mut dentry) -> c_in
 // that are interesting from user point of view and aren't accessible
 // through std routines)
 //
-    static ssize_t mqueue_read_file(struct file *filp, char __user *u_data,
-    size_t count, loff_t *off)
-    {
-    struct inode *inode = file_inode(filp);
-    struct mqueue_inode_info *info = MQUEUE_I(inode);
-    char buffer[FILENT_SIZE];
-    ssize_t ret;
+#[no_mangle]
+pub unsafe extern "C" fn mqueue_read_file(filp: *mut file, u_data: *mut c_char, count: size_t, off: *mut loff_t) -> ssize_t {
+    let mut inode = core::ptr::null_mut();
+    let mut info = core::ptr::null_mut();
+    let mut buffer = [0u8; 64];
+    let mut ret = 0;
     spin_lock(&info.lock);
-    snprintf(buffer, sizeof(buffer),
+    snprintf(buffer, sizeof!(buffer),
     "QSIZE:%-10lu NOTIFY:%-5d SIGNO:%-5d NOTIFY_PID:%-6d\n",
     info.qsize,
-    info.notify_owner ? info.notify.sigev_notify : 0,
-    (info.notify_owner &&
-    info.notify.sigev_notify == SIGEV_SIGNAL) ?
-    info.notify.sigev_signo : 0,
+    (if info.notify_owner { info.notify.sigev_notify } else { 0 }),
+    (if (info.notify_owner &&
+    info.notify.sigev_notify == SIGEV_SIGNAL) { info.notify.sigev_signo } else { 0 }),
     pid_vnr(info.notify_owner));
     spin_unlock(&info.lock);
-    buffer[sizeof(buffer)-1] = '\0';
+    buffer[sizeof!(buffer)-1] = '\0';
     ret = simple_read_from_buffer(u_data, count, off, buffer,
     strlen(buffer));
-    if (ret <= 0)
+    if (ret <= 0) {
     return ret;
+    }
     inode_set_atime_to_ts(inode, inode_set_ctime_current(inode));
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn mqueue_flush_file(filp: *mut file, id: fl_owner_t) -> c_int {
-    static int mqueue_flush_file(struct file *filp, fl_owner_t id)
-    {
-    struct mqueue_inode_info *info = MQUEUE_I(file_inode(filp));
+    let mut info = core::ptr::null_mut();
     spin_lock(&info.lock);
-    if (task_tgid(current) == info.notify_owner)
+    if (task_tgid(current) == info.notify_owner) {
     remove_notification(info);
+    }
     spin_unlock(&info.lock);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn mqueue_poll_file(filp: *mut file, poll_tab: *mut poll_table_struct) -> __poll_t {
-    static __poll_t mqueue_poll_file(struct file *filp, struct poll_table_struct *poll_tab)
-    {
-    struct mqueue_inode_info *info = MQUEUE_I(file_inode(filp));
-    let mut retval: __poll_t = 0;
+    let mut info = core::ptr::null_mut();
+pub static mut retval: __poll_t = 0;
     poll_wait(filp, &info.wait_q, poll_tab);
     spin_lock(&info.lock);
-    if (info.attr.mq_curmsgs)
+    if (info.attr.mq_curmsgs) {
     retval = EPOLLIN | EPOLLRDNORM;
-    if (info.attr.mq_curmsgs < info.attr.mq_maxmsg)
+    }
+    if (info.attr.mq_curmsgs < info.attr.mq_maxmsg) {
     retval |= EPOLLOUT | EPOLLWRNORM;
+    }
     spin_unlock(&info.lock);
     return retval;
     }
 // Adds current to info->e_wait_q[sr] before element with smaller prio
-    static void wq_add(struct mqueue_inode_info *info, int sr,
-    struct ext_wait_queue *ewp)
-    {
-    struct ext_wait_queue *walk;
-    list_for_each_entry(walk, &info.e_wait_q[sr].list, list) {
+#[no_mangle]
+pub unsafe extern "C" fn wq_add(info: *mut mqueue_inode_info, sr: c_int, ewp: *mut ext_wait_queue) {
+pub static mut walk: *mut c_void = core::ptr::null_mut();
+    if false {
     if (walk.task.prio <= current.prio) {
     list_add_tail(&ewp.list, &walk.list);
     return;
@@ -663,14 +954,12 @@ unsafe extern "C" fn mqueue_poll_file(filp: *mut file, poll_tab: *mut poll_table
 // lock isn't held.
 // sr: SEND or RECV
 //
-    static int wq_sleep(struct mqueue_inode_info *info, int sr,
-    ktime_t *timeout, struct ext_wait_queue *ewp)
-    __releases(&info.lock)
-    {
-    int retval;
-    signed long time;
+#[no_mangle]
+pub unsafe extern "C" fn wq_sleep(info: *mut mqueue_inode_info, sr: c_int, timeout: *mut ktime_t, lock: *mut ext_wait_queueewp) -> c_int {
+    let mut retval = 0;
+pub static mut time: c_long = 0;
     wq_add(info, sr, ewp);
-    for (;;) {
+    loop {
 // memory barrier not required, we hold info->lock
     __set_current_state(TASK_INTERRUPTIBLE);
     spin_unlock(&info.lock);
@@ -680,13 +969,13 @@ unsafe extern "C" fn mqueue_poll_file(filp: *mut file, poll_tab: *mut poll_table
 // see MQ_BARRIER for purpose/pairing
     smp_acquire__after_ctrl_dep();
     retval = 0;
-    goto out;
+// goto;
     }
     spin_lock(&info.lock);
 // we hold info->lock, so no memory barrier required
     if (READ_ONCE(ewp.state) == STATE_READY) {
     retval = 0;
-    goto out_unlock;
+// goto;
     }
     if (signal_pending(current)) {
     retval = -ERESTARTSYS;
@@ -698,36 +987,32 @@ unsafe extern "C" fn mqueue_poll_file(filp: *mut file, poll_tab: *mut poll_table
     }
     }
     list_del(&ewp.list);
-    out_unlock:
+    // label: out_unlock
     spin_unlock(&info.lock);
-    out:
+    // label: out
     return retval;
     }
 //
 // Returns waiting task that should be serviced first or NULL if none exists
 //
-    static struct ext_wait_queue *wq_get_first_waiter(
-    struct mqueue_inode_info *info, int sr)
-    {
-    struct list_head *ptr;
+#[no_mangle]
+pub unsafe extern "C" fn wq_get_first_waiter(info: *mut mqueue_inode_info, sr: c_int) -> *mut c_void {
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
     ptr = info.e_wait_q[sr].list.prev;
-    if (ptr == &info.e_wait_q[sr].list)
+    if (ptr == &info.e_wait_q[sr].list) {
     return core::ptr::null_mut();
-    return list_entry(ptr, struct ext_wait_queue, list);
+    }
+    return list_entry(ptr, ext_wait_queue, list);
     }
 #[no_mangle]
 pub unsafe extern "C" fn set_cookie(skb: *mut sk_buff, code: c_char) {
-    static inline void set_cookie(struct sk_buff *skb, char code)
-    {
-    ((char *)skb.data)[NOTIFY_COOKIE_LEN-1] = code;
+    (skb.data)[NOTIFY_COOKIE_LEN-1] = code;
     }
 //
 // The next function is only to split too long sys_mq_timedsend
 //
 #[no_mangle]
 unsafe extern "C" fn __do_notify(info: *mut mqueue_inode_info) {
-    static void __do_notify(struct mqueue_inode_info *info)
-    {
 // notification
 // invoked when there is registered process and there isn't process
 // waiting synchronously for message AND state of queue changed from
@@ -735,14 +1020,17 @@ unsafe extern "C" fn __do_notify(info: *mut mqueue_inode_info) {
 // synchronously.
     if (info.notify_owner &&
     info.attr.mq_curmsgs == 1) {
-    switch (info.notify.sigev_notify) {
-    case SIGEV_NONE:
-    break;
-    case SIGEV_SIGNAL: {
-    struct kernel_siginfo sig_i;
-    struct task_struct *task;
-    if (!info.notify.sigev_signo)
-    break;
+    match (info.notify.sigev_notify) {
+    SIGEV_NONE => {
+    // break;
+     }
+     SIGEV_SIGNAL => {
+     {
+pub static mut sig_i: usize = 0;
+pub static mut task: *mut c_void = core::ptr::null_mut();
+    if (!info.notify.sigev_signo) {
+    // break;
+    }
     clear_siginfo(&sig_i);
     sig_i.si_signo = info.notify.sigev_signo;
     sig_i.si_errno = 0;
@@ -768,12 +1056,14 @@ unsafe extern "C" fn __do_notify(info: *mut mqueue_inode_info) {
     &sig_i, task, PIDTYPE_TGID);
     }
     rcu_read_unlock();
-    break;
+    // break;
     }
-    case SIGEV_THREAD:
+    }
+    SIGEV_THREAD => {
     set_cookie(info.notify_cookie, NOTIFY_WOKENUP);
     netlink_sendskb(info.notify_sock, info.notify_cookie);
-    break;
+    // break;
+    }
     }
 // after notification unregisters process
     put_pid(info.notify_owner);
@@ -783,19 +1073,18 @@ unsafe extern "C" fn __do_notify(info: *mut mqueue_inode_info) {
     }
     wake_up(&info.wait_q);
     }
-    static int prepare_timeout(const struct __kernel_timespec __user *u_abs_timeout,
-    struct timespec64 *ts)
-    {
-    if (get_timespec64(ts, u_abs_timeout))
+#[no_mangle]
+pub unsafe extern "C" fn prepare_timeout(u_abs_timeout: *mut __kernel_timespec, ts: *mut timespec64) -> c_int {
+    if (get_timespec64(ts, u_abs_timeout)) {
     return -EFAULT;
-    if (!timespec64_valid(ts))
+    }
+    if (!timespec64_valid(ts)) {
     return -EINVAL;
+    }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn remove_notification(info: *mut mqueue_inode_info) {
-    static void remove_notification(struct mqueue_inode_info *info)
-    {
     if (info.notify_owner != core::ptr::null_mut() &&
     info.notify.sigev_notify == SIGEV_THREAD) {
     set_cookie(info.notify_cookie, NOTIFY_REMOVED);
@@ -806,91 +1095,95 @@ unsafe extern "C" fn remove_notification(info: *mut mqueue_inode_info) {
     info.notify_owner = core::ptr::null_mut();
     info.notify_user_ns = core::ptr::null_mut();
     }
-    static int prepare_open(struct dentry *dentry, int oflag, int ro,
-    umode_t mode, struct filename *name,
-    struct mq_attr *attr)
-    {
-    static const int oflag2acc[O_ACCMODE] = { MAY_READ, MAY_WRITE,
-    MAY_READ | MAY_WRITE };
-    int acc;
+#[no_mangle]
+pub unsafe extern "C" fn prepare_open(dentry: *mut dentry, oflag: c_int, ro: c_int, mode: umode_t, name: *mut filename, attr: *mut mq_attr) -> c_int {
+pub static mut oflag2acc: usize = 0;
+    let mut acc = 0;
     if (d_really_is_negative(dentry)) {
-    if (!(oflag & O_CREAT))
+    if (!(oflag & O_CREAT)) {
     return -ENOENT;
-    if (ro)
+    }
+    if (ro) {
     return ro;
+    }
     audit_inode_parent_hidden(name, dentry.d_parent);
-    return vfs_mkobj(dentry, mode & ~current_umask(),
+    return vfs_mkobj(dentry, mode & !current_umask(),
     mqueue_create_attr, attr);
     }
 // it already existed
     audit_inode(name, dentry, 0);
-    if ((oflag & (O_CREAT|O_EXCL)) == (O_CREAT|O_EXCL))
+    if ((oflag & (O_CREAT|O_EXCL)) == (O_CREAT|O_EXCL)) {
     return -EEXIST;
-    if ((oflag & O_ACCMODE) == (O_RDWR | O_WRONLY))
+    }
+    if ((oflag & O_ACCMODE) == (O_RDWR | O_WRONLY)) {
     return -EINVAL;
+    }
     acc = oflag2acc[oflag & O_ACCMODE];
     return inode_permission(&nop_mnt_idmap, d_inode(dentry), acc);
     }
-    static struct file *mqueue_file_open(struct filename *name,
-    struct vfsmount *mnt, int oflag, int ro,
-    umode_t mode, struct mq_attr *attr)
-    {
-    struct dentry *dentry;
-    struct file *file;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn mqueue_file_open(name: *mut filename, mnt: *mut vfsmount, oflag: c_int, ro: c_int, mode: umode_t, attr: *mut mq_attr) -> *mut c_void {
+pub static mut dentry: *mut c_void = core::ptr::null_mut();
+pub static mut file: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     dentry = start_creating_noperm(mnt.mnt_root, &QSTR(name.name));
-    if (IS_ERR(dentry))
+    if (IS_ERR(dentry)) {
     return ERR_CAST(dentry);
+    }
     ret = prepare_open(dentry, oflag, ro, mode, name, attr);
     file = ERR_PTR(ret);
     if (!ret) {
-    let mut path: path = { .mnt = mnt, .dentry = dentry };
+pub static mut path: path = 0;
     file = dentry_open(&path, oflag, current_cred());
     }
     end_creating(dentry);
     return file;
     }
-    static int do_mq_open(const char __user *u_name, int oflag, umode_t mode,
-    struct mq_attr *attr)
-    {
-    struct vfsmount *mnt = current.nsproxy.ipc_ns.mq_mnt;
-    int fd, ro;
+#[no_mangle]
+pub unsafe extern "C" fn do_mq_open(u_name: *mut c_char, oflag: c_int, mode: umode_t, attr: *mut mq_attr) -> c_int {
+    let mut mnt = core::ptr::null_mut();
+    let mut fd = 0;
+    let mut ro = 0;
     audit_mq_open(oflag, mode, attr);
     CLASS(filename, name)(u_name);
-    if (IS_ERR(name))
+    if (IS_ERR(name)) {
     return PTR_ERR(name);
+    }
     ro = mnt_want_write(mnt);	/* we'll drop it in any case */
     fd = FD_ADD(O_CLOEXEC, mqueue_file_open(name, mnt, oflag, ro, mode, attr));
-    if (!ro)
+    if (!ro) {
     mnt_drop_write(mnt);
+    }
     return fd;
     }
-    SYSCALL_DEFINE4(mq_open, const char __user *, u_name, int, oflag, umode_t, mode,
-    struct mq_attr __user *, u_attr)
-    {
-    struct mq_attr attr;
-    if (u_attr && copy_from_user(&attr, u_attr, sizeof(struct mq_attr)))
+#[no_mangle]
+pub unsafe extern "C" fn sys_mq_open(u_name: usize, oflag: usize, mode: usize, u_attr: usize) -> c_long {
+pub static mut attr: usize = 0;
+    if (u_attr && copy_from_user(&attr, u_attr, sizeof!(mq_attr))) {
     return -EFAULT;
-    return do_mq_open(u_name, oflag, mode, u_attr ? &attr : core::ptr::null_mut());
     }
-    SYSCALL_DEFINE1(mq_unlink, const char __user *, u_name)
-    {
-    int err;
-    struct dentry *dentry;
-    struct inode *inode;
-    struct ipc_namespace *ipc_ns = current.nsproxy.ipc_ns;
-    struct vfsmount *mnt = ipc_ns.mq_mnt;
+    return do_mq_open(u_name, oflag, mode, (if u_attr != core::ptr::null_mut() { &attr } else { core::ptr::null_mut() }));
+    }
+#[no_mangle]
+pub unsafe extern "C" fn sys_mq_unlink(u_name: usize) -> c_long {
+    let mut err = 0;
+pub static mut dentry: *mut c_void = core::ptr::null_mut();
+pub static mut inode: *mut c_void = core::ptr::null_mut();
+    let mut ipc_ns = core::ptr::null_mut();
+    let mut mnt = core::ptr::null_mut();
     CLASS(filename, name)(u_name);
-    if (IS_ERR(name))
+    if (IS_ERR(name)) {
     return PTR_ERR(name);
+    }
     audit_inode_parent_hidden(name, mnt.mnt_root);
     err = mnt_want_write(mnt);
-    if (err)
+    if (err) {
     return err;
+    }
     dentry = start_removing_noperm(mnt.mnt_root, &QSTR(name.name));
     if (IS_ERR(dentry)) {
     err = PTR_ERR(dentry);
-    goto out_drop_write;
+// goto;
     }
     inode = d_inode(dentry);
     ihold(inode);
@@ -898,7 +1191,7 @@ unsafe extern "C" fn remove_notification(info: *mut mqueue_inode_info) {
     dentry, core::ptr::null_mut());
     end_removing(dentry);
     iput(inode);
-    out_drop_write:
+    // label: out_drop_write
     mnt_drop_write(mnt);
     return err;
     }
@@ -920,11 +1213,9 @@ unsafe extern "C" fn remove_notification(info: *mut mqueue_inode_info) {
 //
 // The same algorithm is used for senders.
 //
-    static inline void __pipelined_op(struct wake_q_head *wake_q,
-    struct mqueue_inode_info *info,
-    struct ext_wait_queue *this)
-    {
-    struct task_struct *task;
+#[no_mangle]
+pub unsafe extern "C" fn __pipelined_op(wake_q: *mut wake_q_head, info: *mut mqueue_inode_info, this: *mut ext_wait_queue) {
+pub static mut task: *mut c_void = core::ptr::null_mut();
     list_del(&this.list);
     task = get_task_struct(this.task);
 // see MQ_BARRIER for purpose/pairing
@@ -934,66 +1225,68 @@ unsafe extern "C" fn remove_notification(info: *mut mqueue_inode_info) {
 // pipelined_send() - send a message directly to the task waiting in
 // sys_mq_timedreceive() (without inserting message into a queue).
 //
-    static inline void pipelined_send(struct wake_q_head *wake_q,
-    struct mqueue_inode_info *info,
-    struct msg_msg *message,
-    struct ext_wait_queue *receiver)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pipelined_send(wake_q: *mut wake_q_head, info: *mut mqueue_inode_info, message: *mut msg_msg, receiver: *mut ext_wait_queue) {
     receiver.msg = message;
     __pipelined_op(wake_q, info, receiver);
     }
 // pipelined_receive() - if there is task waiting in sys_mq_timedsend()
 // gets its message and put to the queue (we have one free place for sure).
-    static inline void pipelined_receive(struct wake_q_head *wake_q,
-    struct mqueue_inode_info *info)
-    {
-    struct ext_wait_queue *sender = wq_get_first_waiter(info, SEND);
+#[no_mangle]
+pub unsafe extern "C" fn pipelined_receive(wake_q: *mut wake_q_head, info: *mut mqueue_inode_info) {
+    let mut sender = wq_get_first_waiter(info, SEND);
     if (!sender) {
 // for poll
     wake_up_interruptible(&info.wait_q);
     return;
     }
-    if (msg_insert(sender.msg, info))
+    if (msg_insert(sender.msg, info)) {
     return;
+    }
     __pipelined_op(wake_q, info, sender);
     }
-    static int do_mq_timedsend(mqd_t mqdes, const char __user *u_msg_ptr,
-    size_t msg_len, unsigned int msg_prio,
-    struct timespec64 *ts)
-    {
-    struct inode *inode;
-    struct ext_wait_queue wait;
-    struct ext_wait_queue *receiver;
-    struct msg_msg *msg_ptr;
-    struct mqueue_inode_info *info;
-    ktime_t expires, *timeout = core::ptr::null_mut();
-    struct posix_msg_tree_node *new_leaf = core::ptr::null_mut();
-    let mut ret: c_int = 0;
-    DEFINE_WAKE_Q(wake_q);
-    if (unlikely(msg_prio >= (unsigned long) MQ_PRIO_MAX))
+#[no_mangle]
+pub unsafe extern "C" fn do_mq_timedsend(mqdes: mqd_t, u_msg_ptr: *mut c_char, msg_len: size_t, msg_prio: c_uint, ts: *mut timespec64) -> c_int {
+pub static mut inode: *mut c_void = core::ptr::null_mut();
+pub static mut wait: usize = 0;
+pub static mut receiver: *mut c_void = core::ptr::null_mut();
+pub static mut msg_ptr: *mut c_void = core::ptr::null_mut();
+pub static mut info: *mut c_void = core::ptr::null_mut();
+pub static mut expires: usize = 0;
+    let mut timeout = core::ptr::null_mut();
+    let mut new_leaf = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
+pub static mut wake_q: usize = 0;
+    if (unlikely(msg_prio >=  MQ_PRIO_MAX)) {
     return -EINVAL;
+    }
     if (ts) {
     expires = timespec64_to_ktime(*ts);
     timeout = &expires;
     }
     audit_mq_sendrecv(mqdes, msg_len, msg_prio, ts);
     CLASS(fd, f)(mqdes);
-    if (fd_empty(f))
+    if (fd_empty(f)) {
     return -EBADF;
+    }
     inode = file_inode(fd_file(f));
-    if (unlikely(fd_file(f).f_op != &mqueue_file_operations))
+    if (unlikely(fd_file(f).f_op != &mqueue_file_operations)) {
     return -EBADF;
+    }
     info = MQUEUE_I(inode);
     audit_file(fd_file(f));
-    if (unlikely(!(fd_file(f).f_mode & FMODE_WRITE)))
+    if (unlikely(!(fd_file(f).f_mode & FMODE_WRITE))) {
     return -EBADF;
-    if (unlikely(msg_len > info.attr.mq_msgsize))
+    }
+    if (unlikely(msg_len > info.attr.mq_msgsize)) {
     return -EMSGSIZE;
+    }
 // First try to allocate memory, before doing anything with
 // existing queues.
     msg_ptr = load_msg(u_msg_ptr, msg_len);
-    if (IS_ERR(msg_ptr))
+    if (IS_ERR(msg_ptr)) {
     return PTR_ERR(msg_ptr);
+    }
     msg_ptr.m_ts = msg_len;
     msg_ptr.m_type = msg_prio;
 //
@@ -1001,8 +1294,9 @@ unsafe extern "C" fn remove_notification(info: *mut mqueue_inode_info) {
 // it doesn't have to kmalloc a GFP_ATOMIC allocation, but it will
 // fall back to that if necessary.
 //
-    if (!info.node_cache)
+    if (!info.node_cache) {
     new_leaf = kmalloc_obj(*new_leaf);
+    }
     spin_lock(&info.lock);
     if (!info.node_cache && new_leaf) {
 // Save our speculative allocation into the cache
@@ -1017,7 +1311,7 @@ unsafe extern "C" fn remove_notification(info: *mut mqueue_inode_info) {
     ret = -EAGAIN;
     } else {
     wait.task = current;
-    wait.msg = (void *) msg_ptr;
+    wait.msg =  msg_ptr;
 // memory barrier not required, we hold info->lock
     WRITE_ONCE(wait.state, STATE_NONE);
     ret = wq_sleep(info, SEND, timeout, &wait);
@@ -1025,7 +1319,7 @@ unsafe extern "C" fn remove_notification(info: *mut mqueue_inode_info) {
 // wq_sleep must be called with info->lock held, and
 // returns with the lock released
 //
-    goto out_free;
+// goto;
     }
     } else {
     receiver = wq_get_first_waiter(info, RECV);
@@ -1034,56 +1328,62 @@ unsafe extern "C" fn remove_notification(info: *mut mqueue_inode_info) {
     } else {
 // adds message to the queue
     ret = msg_insert(msg_ptr, info);
-    if (ret)
-    goto out_unlock;
+    if (ret) {
+// goto;
+    }
     __do_notify(info);
     }
     simple_inode_init_ts(inode);
     }
-    out_unlock:
+    // label: out_unlock
     spin_unlock(&info.lock);
     wake_up_q(&wake_q);
-    out_free:
-    if (ret)
+    // label: out_free
+    if (ret) {
     free_msg(msg_ptr);
+    }
     return ret;
     }
-    static int do_mq_timedreceive(mqd_t mqdes, char __user *u_msg_ptr,
-    size_t msg_len, unsigned int __user *u_msg_prio,
-    struct timespec64 *ts)
-    {
-    ssize_t ret;
-    struct msg_msg *msg_ptr;
-    struct inode *inode;
-    struct mqueue_inode_info *info;
-    struct ext_wait_queue wait;
-    ktime_t expires, *timeout = core::ptr::null_mut();
-    struct posix_msg_tree_node *new_leaf = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn do_mq_timedreceive(mqdes: mqd_t, u_msg_ptr: *mut c_char, msg_len: size_t, u_msg_prio: *mut c_uint, ts: *mut timespec64) -> c_int {
+    let mut ret = 0;
+pub static mut msg_ptr: *mut c_void = core::ptr::null_mut();
+pub static mut inode: *mut c_void = core::ptr::null_mut();
+pub static mut info: *mut c_void = core::ptr::null_mut();
+pub static mut wait: usize = 0;
+pub static mut expires: usize = 0;
+    let mut timeout = core::ptr::null_mut();
+    let mut new_leaf = core::ptr::null_mut();
     if (ts) {
     expires = timespec64_to_ktime(*ts);
     timeout = &expires;
     }
     audit_mq_sendrecv(mqdes, msg_len, 0, ts);
     CLASS(fd, f)(mqdes);
-    if (fd_empty(f))
+    if (fd_empty(f)) {
     return -EBADF;
+    }
     inode = file_inode(fd_file(f));
-    if (unlikely(fd_file(f).f_op != &mqueue_file_operations))
+    if (unlikely(fd_file(f).f_op != &mqueue_file_operations)) {
     return -EBADF;
+    }
     info = MQUEUE_I(inode);
     audit_file(fd_file(f));
-    if (unlikely(!(fd_file(f).f_mode & FMODE_READ)))
+    if (unlikely(!(fd_file(f).f_mode & FMODE_READ))) {
     return -EBADF;
+    }
 // checks if buffer is big enough
-    if (unlikely(msg_len < info.attr.mq_msgsize))
+    if (unlikely(msg_len < info.attr.mq_msgsize)) {
     return -EMSGSIZE;
+    }
 //
 // msg_insert really wants us to have a valid, spare node struct so
 // it doesn't have to kmalloc a GFP_ATOMIC allocation, but it will
 // fall back to that if necessary.
 //
-    if (!info.node_cache)
+    if (!info.node_cache) {
     new_leaf = kmalloc_obj(*new_leaf);
+    }
     spin_lock(&info.lock);
     if (!info.node_cache && new_leaf) {
 // Save our speculative allocation into the cache
@@ -1104,7 +1404,7 @@ unsafe extern "C" fn remove_notification(info: *mut mqueue_inode_info) {
     msg_ptr = wait.msg;
     }
     } else {
-    DEFINE_WAKE_Q(wake_q);
+pub static mut wake_q: usize = 0;
     msg_ptr = msg_get(info);
     simple_inode_init_ts(inode);
 // There is now free space in queue.
@@ -1123,28 +1423,28 @@ unsafe extern "C" fn remove_notification(info: *mut mqueue_inode_info) {
     }
     return ret;
     }
-    SYSCALL_DEFINE5(mq_timedsend, mqd_t, mqdes, const char __user *, u_msg_ptr,
-    size_t, msg_len, unsigned int, msg_prio,
-    const struct __kernel_timespec __user *, u_abs_timeout)
-    {
-    struct timespec64 ts, *p = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn sys_mq_timedsend(mqdes: usize, u_msg_ptr: usize, msg_len: usize, msg_prio: usize, u_abs_timeout: usize) -> c_long {
+pub static mut ts: timespec64 = 0;
+    let mut p = core::ptr::null_mut();
     if (u_abs_timeout) {
-    let mut res: c_int = prepare_timeout(u_abs_timeout, &ts);
-    if (res)
+pub static mut res: c_int = 0;
+    if (res) {
     return res;
+    }
     p = &ts;
     }
     return do_mq_timedsend(mqdes, u_msg_ptr, msg_len, msg_prio, p);
     }
-    SYSCALL_DEFINE5(mq_timedreceive, mqd_t, mqdes, char __user *, u_msg_ptr,
-    size_t, msg_len, unsigned int __user *, u_msg_prio,
-    const struct __kernel_timespec __user *, u_abs_timeout)
-    {
-    struct timespec64 ts, *p = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn sys_mq_timedreceive(mqdes: usize, u_msg_ptr: usize, msg_len: usize, u_msg_prio: usize, u_abs_timeout: usize) -> c_long {
+pub static mut ts: timespec64 = 0;
+    let mut p = core::ptr::null_mut();
     if (u_abs_timeout) {
-    let mut res: c_int = prepare_timeout(u_abs_timeout, &ts);
-    if (res)
+pub static mut res: c_int = 0;
+    if (res) {
     return res;
+    }
     p = &ts;
     }
     return do_mq_timedreceive(mqdes, u_msg_ptr, msg_len, u_msg_prio, p);
@@ -1156,31 +1456,32 @@ unsafe extern "C" fn remove_notification(info: *mut mqueue_inode_info) {
 //
 #[no_mangle]
 unsafe extern "C" fn do_mq_notify(mqdes: mqd_t, notification: *const sigevent) -> c_int {
-    static int do_mq_notify(mqd_t mqdes, const struct sigevent *notification)
-    {
-    int ret;
-    struct sock *sock;
-    struct inode *inode;
-    struct mqueue_inode_info *info;
-    struct sk_buff *nc;
+    let mut ret = 0;
+pub static mut sock: *mut c_void = core::ptr::null_mut();
+pub static mut inode: *mut c_void = core::ptr::null_mut();
+pub static mut info: *mut c_void = core::ptr::null_mut();
+pub static mut nc: *mut c_void = core::ptr::null_mut();
     audit_mq_notify(mqdes, notification);
     nc = core::ptr::null_mut();
     sock = core::ptr::null_mut();
     if (notification != core::ptr::null_mut()) {
     if (unlikely(notification.sigev_notify != SIGEV_NONE &&
     notification.sigev_notify != SIGEV_SIGNAL &&
-    notification.sigev_notify != SIGEV_THREAD))
+    notification.sigev_notify != SIGEV_THREAD)) {
     return -EINVAL;
+    }
     if (notification.sigev_notify == SIGEV_SIGNAL &&
     (!notification.sigev_signo ||
-    !valid_signal(notification.sigev_signo)))
+    !valid_signal(notification.sigev_signo))) {
     return -EINVAL;
+    }
     if (notification.sigev_notify == SIGEV_THREAD) {
-    long timeo;
+    let mut timeo = 0;
 // create the notify skb
     nc = alloc_skb(NOTIFY_COOKIE_LEN, GFP_KERNEL);
-    if (!nc)
+    if (!nc) {
     return -ENOMEM;
+    }
     if (copy_from_user(nc.data,
     notification.sigev_value.sival_ptr,
     NOTIFY_COOKIE_LEN)) {
@@ -1190,7 +1491,7 @@ unsafe extern "C" fn do_mq_notify(mqdes: mqd_t, notification: *const sigevent) -
 // TODO: add a header?
     skb_put(nc, NOTIFY_COOKIE_LEN);
 // and attach it to the socket
-    retry:
+    // label: retry
     sock = netlink_getsockbyfd(notification.sigev_signo);
     if (IS_ERR(sock)) {
     kfree_skb(nc);
@@ -1198,21 +1499,23 @@ unsafe extern "C" fn do_mq_notify(mqdes: mqd_t, notification: *const sigevent) -
     }
     timeo = MAX_SCHEDULE_TIMEOUT;
     ret = netlink_attachskb(sock, nc, &timeo, core::ptr::null_mut());
-    if (ret == 1)
-    goto retry;
-    if (ret)
+    if (ret == 1) {
+// goto;
+    }
+    if (ret) {
     return ret;
+    }
     }
     }
     CLASS(fd, f)(mqdes);
     if (fd_empty(f)) {
     ret = -EBADF;
-    goto out;
+// goto;
     }
     inode = file_inode(fd_file(f));
     if (unlikely(fd_file(f).f_op != &mqueue_file_operations)) {
     ret = -EBADF;
-    goto out;
+// goto;
     }
     info = MQUEUE_I(inode);
     ret = 0;
@@ -1226,58 +1529,64 @@ unsafe extern "C" fn do_mq_notify(mqdes: mqd_t, notification: *const sigevent) -
     } else if (info.notify_owner != core::ptr::null_mut()) {
     ret = -EBUSY;
     } else {
-    switch (notification.sigev_notify) {
-    case SIGEV_NONE:
+    match (notification.sigev_notify) {
+    SIGEV_NONE => {
     info.notify.sigev_notify = SIGEV_NONE;
-    break;
-    case SIGEV_THREAD:
+    // break;
+    }
+    SIGEV_THREAD => {
     info.notify_sock = sock;
     info.notify_cookie = nc;
     sock = core::ptr::null_mut();
     nc = core::ptr::null_mut();
     info.notify.sigev_notify = SIGEV_THREAD;
-    break;
-    case SIGEV_SIGNAL:
+    // break;
+    }
+    SIGEV_SIGNAL => {
     info.notify.sigev_signo = notification.sigev_signo;
     info.notify.sigev_value = notification.sigev_value;
     info.notify.sigev_notify = SIGEV_SIGNAL;
     info.notify_self_exec_id = current.self_exec_id;
-    break;
+    // break;
+    }
     }
     info.notify_owner = get_pid(task_tgid(current));
     info.notify_user_ns = get_user_ns(current_user_ns());
     inode_set_atime_to_ts(inode, inode_set_ctime_current(inode));
     }
     spin_unlock(&info.lock);
-    out:
-    if (sock)
+    // label: out
+    if (sock) {
     netlink_detachskb(sock, nc);
+    }
     return ret;
     }
-    SYSCALL_DEFINE2(mq_notify, mqd_t, mqdes,
-    const struct sigevent __user *, u_notification)
-    {
-    struct sigevent n, *p = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn sys_mq_notify(mqdes: usize, u_notification: usize) -> c_long {
+pub static mut n: sigevent = 0;
+    let mut p = core::ptr::null_mut();
     if (u_notification) {
-    if (copy_from_user(&n, u_notification, sizeof(struct sigevent)))
+    if (copy_from_user(&n, u_notification, sizeof!(sigevent))) {
     return -EFAULT;
+    }
     p = &n;
     }
     return do_mq_notify(mqdes, p);
     }
 #[no_mangle]
 unsafe extern "C" fn do_mq_getsetattr(mqdes: c_int, new: *mut mq_attr, old: *mut mq_attr) -> c_int {
-    static int do_mq_getsetattr(int mqdes, struct mq_attr *new, struct mq_attr *old)
-    {
-    struct inode *inode;
-    struct mqueue_inode_info *info;
-    if (new && (new.mq_flags & (~O_NONBLOCK)))
+pub static mut inode: *mut c_void = core::ptr::null_mut();
+pub static mut info: *mut c_void = core::ptr::null_mut();
+    if (new && (new.mq_flags & (!O_NONBLOCK))) {
     return -EINVAL;
+    }
     CLASS(fd, f)(mqdes);
-    if (fd_empty(f))
+    if (fd_empty(f)) {
     return -EBADF;
-    if (unlikely(fd_file(f).f_op != &mqueue_file_operations))
+    }
+    if (unlikely(fd_file(f).f_op != &mqueue_file_operations)) {
     return -EBADF;
+    }
     inode = file_inode(fd_file(f));
     info = MQUEUE_I(inode);
     spin_lock(&info.lock);
@@ -1288,191 +1597,184 @@ unsafe extern "C" fn do_mq_getsetattr(mqdes: c_int, new: *mut mq_attr, old: *mut
     if (new) {
     audit_mq_getsetattr(mqdes, new);
     spin_lock(&fd_file(f).f_lock);
-    if (new.mq_flags & O_NONBLOCK)
+    if (new.mq_flags & O_NONBLOCK) {
     fd_file(f).f_flags |= O_NONBLOCK;
-    else
-    fd_file(f).f_flags &= ~O_NONBLOCK;
+    }
+    else {
+    fd_file(f).f_flags &= !O_NONBLOCK;
+    }
     spin_unlock(&fd_file(f).f_lock);
     inode_set_atime_to_ts(inode, inode_set_ctime_current(inode));
     }
     spin_unlock(&info.lock);
     return 0;
     }
-    SYSCALL_DEFINE3(mq_getsetattr, mqd_t, mqdes,
-    const struct mq_attr __user *, u_mqstat,
-    struct mq_attr __user *, u_omqstat)
-    {
-    int ret;
-    struct mq_attr mqstat, omqstat;
-    struct mq_attr *new = core::ptr::null_mut(), *old = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn sys_mq_getsetattr(mqdes: usize, u_mqstat: usize, u_omqstat: usize) -> c_long {
+    let mut ret = 0;
+pub static mut mqstat: mq_attr = 0;
+pub static mut omqstat: mq_attr = 0;
+    let mut new = core::ptr::null_mut();
+    let mut old = core::ptr::null_mut();
     if (u_mqstat) {
     new = &mqstat;
-    if (copy_from_user(new, u_mqstat, sizeof(struct mq_attr)))
+    if (copy_from_user(new, u_mqstat, sizeof!(mq_attr))) {
     return -EFAULT;
     }
-    if (u_omqstat)
+    }
+    if (u_omqstat) {
     old = &omqstat;
+    }
     ret = do_mq_getsetattr(mqdes, new, old);
-    if (ret || !old)
+    if (ret || !old) {
     return ret;
-    if (copy_to_user(u_omqstat, old, sizeof(struct mq_attr)))
+    }
+    if (copy_to_user(u_omqstat, old, sizeof!(mq_attr))) {
     return -EFAULT;
+    }
     return 0;
     }
 
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct compat_mq_attr {
-    pub /: *mut *mut compat_long_t mq_flags; / message queue flags,
-    pub /: *mut *mut compat_long_t mq_maxmsg; / maximum number of messages,
-    pub /: *mut *mut compat_long_t mq_msgsize; / maximum message size,
-    pub /: *mut *mut compat_long_t mq_curmsgs; / number of messages currently queued,
-    pub /: *mut *mut compat_long_t __reserved[4]; / ignored for input, zeroed for output,
+//     pub /: *mut *mut compat_long_t mq_flags; / message queue flags,
+//     pub /: *mut *mut compat_long_t mq_maxmsg; / maximum number of messages,
+//     pub /: *mut *mut compat_long_t mq_msgsize; / maximum message size,
+//     pub /: *mut *mut compat_long_t mq_curmsgs; / number of messages currently queued,
+//     pub /: *mut *mut compat_long_t __reserved[4]; / ignored for input, zeroed for output,
 }
 
-    static inline int get_compat_mq_attr(struct mq_attr *attr,
-    const struct compat_mq_attr __user *uattr)
-    {
-    struct compat_mq_attr v;
-    if (copy_from_user(&v, uattr, sizeof(*uattr)))
+#[no_mangle]
+pub unsafe extern "C" fn get_compat_mq_attr(attr: *mut mq_attr, uattr: *mut compat_mq_attr) -> c_int {
+pub static mut v: usize = 0;
+    if (copy_from_user(&v, uattr, sizeof!(*uattr))) {
     return -EFAULT;
-    memset(attr, 0, sizeof(*attr));
+    }
+    memset(attr, 0, sizeof!(*attr));
     attr.mq_flags = v.mq_flags;
     attr.mq_maxmsg = v.mq_maxmsg;
     attr.mq_msgsize = v.mq_msgsize;
     attr.mq_curmsgs = v.mq_curmsgs;
     return 0;
     }
-    static inline int put_compat_mq_attr(const struct mq_attr *attr,
-    struct compat_mq_attr __user *uattr)
-    {
-    struct compat_mq_attr v;
-    memset(&v, 0, sizeof(v));
+#[no_mangle]
+pub unsafe extern "C" fn put_compat_mq_attr(attr: *mut mq_attr, uattr: *mut compat_mq_attr) -> c_int {
+pub static mut v: usize = 0;
+    memset(&v, 0, sizeof!(v));
     v.mq_flags = attr.mq_flags;
     v.mq_maxmsg = attr.mq_maxmsg;
     v.mq_msgsize = attr.mq_msgsize;
     v.mq_curmsgs = attr.mq_curmsgs;
-    if (copy_to_user(uattr, &v, sizeof(*uattr)))
+    if (copy_to_user(uattr, &v, sizeof!(*uattr))) {
     return -EFAULT;
+    }
     return 0;
     }
-    COMPAT_SYSCALL_DEFINE4(mq_open, const char __user *, u_name,
-    int, oflag, compat_mode_t, mode,
-    struct compat_mq_attr __user *, u_attr)
-    {
-    struct mq_attr attr, *p = core::ptr::null_mut();
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sys_mq_open
+pub unsafe extern "C" fn sys_mq_open_dup(u_name: usize, oflag: usize, mode: usize, u_attr: usize) -> c_long {
+pub static mut attr: mq_attr = 0;
+    let mut p = core::ptr::null_mut();
     if (u_attr && oflag & O_CREAT) {
     p = &attr;
-    if (get_compat_mq_attr(&attr, u_attr))
+    if (get_compat_mq_attr(&attr, u_attr)) {
     return -EFAULT;
+    }
     }
     return do_mq_open(u_name, oflag, mode, p);
     }
-    COMPAT_SYSCALL_DEFINE2(mq_notify, mqd_t, mqdes,
-    const struct compat_sigevent __user *, u_notification)
-    {
-    struct sigevent n, *p = core::ptr::null_mut();
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sys_mq_notify
+pub unsafe extern "C" fn sys_mq_notify_dup(mqdes: usize, u_notification: usize) -> c_long {
+pub static mut n: sigevent = 0;
+    let mut p = core::ptr::null_mut();
     if (u_notification) {
-    if (get_compat_sigevent(&n, u_notification))
+    if (get_compat_sigevent(&n, u_notification)) {
     return -EFAULT;
-    if (n.sigev_notify == SIGEV_THREAD)
+    }
+    if (n.sigev_notify == SIGEV_THREAD) {
     n.sigev_value.sival_ptr = compat_ptr(n.sigev_value.sival_int);
+    }
     p = &n;
     }
     return do_mq_notify(mqdes, p);
     }
-    COMPAT_SYSCALL_DEFINE3(mq_getsetattr, mqd_t, mqdes,
-    const struct compat_mq_attr __user *, u_mqstat,
-    struct compat_mq_attr __user *, u_omqstat)
-    {
-    int ret;
-    struct mq_attr mqstat, omqstat;
-    struct mq_attr *new = core::ptr::null_mut(), *old = core::ptr::null_mut();
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: sys_mq_getsetattr
+pub unsafe extern "C" fn sys_mq_getsetattr_dup(mqdes: usize, u_mqstat: usize, u_omqstat: usize) -> c_long {
+    let mut ret = 0;
+pub static mut mqstat: mq_attr = 0;
+pub static mut omqstat: mq_attr = 0;
+    let mut new = core::ptr::null_mut();
+    let mut old = core::ptr::null_mut();
     if (u_mqstat) {
     new = &mqstat;
-    if (get_compat_mq_attr(new, u_mqstat))
+    if (get_compat_mq_attr(new, u_mqstat)) {
     return -EFAULT;
     }
-    if (u_omqstat)
+    }
+    if (u_omqstat) {
     old = &omqstat;
+    }
     ret = do_mq_getsetattr(mqdes, new, old);
-    if (ret || !old)
+    if (ret || !old) {
     return ret;
-    if (put_compat_mq_attr(old, u_omqstat))
+    }
+    if (put_compat_mq_attr(old, u_omqstat)) {
     return -EFAULT;
+    }
     return 0;
     }
 
-    static int compat_prepare_timeout(const struct old_timespec32 __user *p,
-    struct timespec64 *ts)
-    {
-    if (get_old_timespec32(ts, p))
+#[no_mangle]
+pub unsafe extern "C" fn compat_prepare_timeout(p: *mut old_timespec32, ts: *mut timespec64) -> c_int {
+    if (get_old_timespec32(ts, p)) {
     return -EFAULT;
-    if (!timespec64_valid(ts))
+    }
+    if (!timespec64_valid(ts)) {
     return -EINVAL;
+    }
     return 0;
     }
-    SYSCALL_DEFINE5(mq_timedsend_time32, mqd_t, mqdes,
-    const char __user *, u_msg_ptr,
-    unsigned int, msg_len, unsigned int, msg_prio,
-    const struct old_timespec32 __user *, u_abs_timeout)
-    {
-    struct timespec64 ts, *p = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn sys_mq_timedsend_time32(mqdes: usize, u_msg_ptr: usize, msg_len: usize, msg_prio: usize, u_abs_timeout: usize) -> c_long {
+pub static mut ts: timespec64 = 0;
+    let mut p = core::ptr::null_mut();
     if (u_abs_timeout) {
-    let mut res: c_int = compat_prepare_timeout(u_abs_timeout, &ts);
-    if (res)
+pub static mut res: c_int = 0;
+    if (res) {
     return res;
+    }
     p = &ts;
     }
     return do_mq_timedsend(mqdes, u_msg_ptr, msg_len, msg_prio, p);
     }
-    SYSCALL_DEFINE5(mq_timedreceive_time32, mqd_t, mqdes,
-    char __user *, u_msg_ptr,
-    unsigned int, msg_len, unsigned int __user *, u_msg_prio,
-    const struct old_timespec32 __user *, u_abs_timeout)
-    {
-    struct timespec64 ts, *p = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn sys_mq_timedreceive_time32(mqdes: usize, u_msg_ptr: usize, msg_len: usize, u_msg_prio: usize, u_abs_timeout: usize) -> c_long {
+pub static mut ts: timespec64 = 0;
+    let mut p = core::ptr::null_mut();
     if (u_abs_timeout) {
-    let mut res: c_int = compat_prepare_timeout(u_abs_timeout, &ts);
-    if (res)
+pub static mut res: c_int = 0;
+    if (res) {
     return res;
+    }
     p = &ts;
     }
     return do_mq_timedreceive(mqdes, u_msg_ptr, msg_len, u_msg_prio, p);
     }
 
-    static const struct inode_operations mqueue_dir_inode_operations = {
-    .lookup = simple_lookup,
-    .create = mqueue_create,
-    .unlink = mqueue_unlink,
-    };
-    static const struct file_operations mqueue_file_operations = {
-    .flush = mqueue_flush_file,
-    .poll = mqueue_poll_file,
-    .read = mqueue_read_file,
-    .llseek = default_llseek,
-    };
-    static const struct super_operations mqueue_super_ops = {
-    .alloc_inode = mqueue_alloc_inode,
-    .free_inode = mqueue_free_inode,
-    .evict_inode = mqueue_evict_inode,
-    .statfs = simple_statfs,
-    };
-    static const struct fs_context_operations mqueue_fs_context_ops = {
-    .free		= mqueue_fs_context_free,
-    .get_tree	= mqueue_get_tree,
-    };
-    static struct file_system_type mqueue_fs_type = {
-    .name			= "mqueue",
-    .init_fs_context	= mqueue_init_fs_context,
-    .kill_sb		= kill_anon_super,
-    .fs_flags		= FS_USERNS_MOUNT,
-    };
+pub static mut inode_operations: usize = 0;
+pub static mut file_operations: usize = 0;
+pub static mut super_operations: usize = 0;
+pub static mut fs_context_operations: usize = 0;
+pub static mut file_system_type: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn mq_init_ns(ns: *mut ipc_namespace) -> c_int {
-    int mq_init_ns(struct ipc_namespace *ns)
-    {
-    struct vfsmount *m;
+pub static mut m: *mut c_void = core::ptr::null_mut();
     ns.mq_queues_count  = 0;
     ns.mq_queues_max    = DFLT_QUEUESMAX;
     ns.mq_msg_max       = DFLT_MSGMAX;
@@ -1480,46 +1782,46 @@ pub unsafe extern "C" fn mq_init_ns(ns: *mut ipc_namespace) -> c_int {
     ns.mq_msg_default   = DFLT_MSG;
     ns.mq_msgsize_default  = DFLT_MSGSIZE;
     m = mq_create_mount(ns);
-    if (IS_ERR(m))
+    if (IS_ERR(m)) {
     return PTR_ERR(m);
+    }
     ns.mq_mnt = m;
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn mq_clear_sbinfo(ns: *mut ipc_namespace) {
-    void mq_clear_sbinfo(struct ipc_namespace *ns)
-    {
     ns.mq_mnt.mnt_sb.s_fs_info = core::ptr::null_mut();
     }
 #[no_mangle]
-unsafe extern "C" fn init_mqueue_fs() -> int __init {
-    static int __init init_mqueue_fs(void)
-    {
-    int error;
+unsafe extern "C" fn init_mqueue_fs() -> c_int {
+    let mut error = 0;
     mqueue_inode_cachep = kmem_cache_create("mqueue_inode_cache",
-    sizeof(struct mqueue_inode_info), 0,
+    sizeof!(mqueue_inode_info), 0,
     SLAB_HWCACHE_ALIGN|SLAB_ACCOUNT, init_once);
-    if (mqueue_inode_cachep == core::ptr::null_mut())
+    if (mqueue_inode_cachep == core::ptr::null_mut()) {
     return -ENOMEM;
+    }
     if (!setup_mq_sysctls(&init_ipc_ns)) {
-    pr_warn("sysctl registration failed\n");
+    pr_warn!("sysctl registration failed\n");
     error = -ENOMEM;
-    goto out_kmem;
+// goto;
     }
     error = register_filesystem(&mqueue_fs_type);
-    if (error)
-    goto out_sysctl;
+    if (error) {
+// goto;
+    }
     spin_lock_init(&mq_lock);
     error = mq_init_ns(&init_ipc_ns);
-    if (error)
-    goto out_filesystem;
+    if (error) {
+// goto;
+    }
     return 0;
-    out_filesystem:
+    // label: out_filesystem
     unregister_filesystem(&mqueue_fs_type);
-    out_sysctl:
+    // label: out_sysctl
     retire_mq_sysctls(&init_ipc_ns);
-    out_kmem:
+    // label: out_kmem
     kmem_cache_destroy(mqueue_inode_cachep);
     return error;
     }
-    device_initcall(init_mqueue_fs);
+    device_initcall!(init_mqueue_fs);

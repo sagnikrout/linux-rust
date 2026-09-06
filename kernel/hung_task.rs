@@ -34,6 +34,216 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
 macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
@@ -143,11 +353,11 @@ pub type atomic_long_t = core::sync::atomic::AtomicI64;
 //
 // The number of tasks checked:
 //
-pub static mut sysctl_hung_task_check_count: int __read_mostly = PID_MAX_LIMIT;
+pub static mut sysctl_hung_task_check_count: int  = 0;
 //
 // Total number of tasks detected as hung since boot:
 //
-pub static mut sysctl_hung_task_detect_count: atomic_long_t = ATOMIC_LONG_INIT(0);
+pub static mut sysctl_hung_task_detect_count: atomic_long_t = 0;
 //
 // Limit number of tasks checked in a batch.
 //
@@ -159,15 +369,15 @@ pub static mut sysctl_hung_task_detect_count: atomic_long_t = ATOMIC_LONG_INIT(0
 //
 // Zero means infinite timeout - no checking done:
 //
-pub static mut sysctl_hung_task_timeout_secs: unsigned long __read_mostly = CONFIG_DEFAULT_HUNG_TASK_TIMEOUT;
+pub static mut sysctl_hung_task_timeout_secs: unsigned long  = 0;
 //
 // Zero (default value) means use sysctl_hung_task_timeout_secs:
 //
-    static unsigned long __read_mostly sysctl_hung_task_check_interval_secs;
-pub static mut sysctl_hung_task_warnings: int __read_mostly = 10;
-    static int __read_mostly did_panic;
+    static unsigned long  sysctl_hung_task_check_interval_secs;
+pub static mut sysctl_hung_task_warnings: int  = 10;
+    static int  did_panic;
     static bool hung_task_call_panic;
-    static struct task_struct *watchdog_task;
+pub static mut watchdog_task: *mut c_void = core::ptr::null_mut();
 //
 // A bitmask to control what kinds of system info to be printed when
 // a hung task is detected, it could be task, memory, lock etc. Refer
@@ -179,7 +389,7 @@ pub static mut sysctl_hung_task_warnings: int __read_mostly = 10;
 // Should we dump all CPUs backtraces in a hung task event?
 // Defaults to 0, can be changed via sysctl.
 //
-    static unsigned int __read_mostly sysctl_hung_task_all_cpu_backtrace;
+    static unsigned int  sysctl_hung_task_all_cpu_backtrace;
 
 pub const sysctl_hung_task_all_cpu_backtrace: c_int = 0;
 
@@ -187,7 +397,7 @@ pub const sysctl_hung_task_all_cpu_backtrace: c_int = 0;
 // Should we panic (and reboot, if panic_timeout= is set) when a
 // hung task is detected:
 //
-    static unsigned int __read_mostly sysctl_hung_task_panic =
+    static unsigned int  sysctl_hung_task_panic =
     CONFIG_BOOTPARAM_HUNG_TASK_PANIC;
 #[no_mangle]
 pub unsafe extern "C" fn hung_task_panic() {
@@ -197,16 +407,17 @@ pub unsafe extern "C" fn hung_task_panic() {
 pub static mut notifier_block: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn task_is_hung(t: *mut task_struct, timeout: c_ulong) -> bool {
-pub static mut switch_count: c_ulong = t.nvcsw + t.nivcsw;
-pub static mut state: c_uint = READ_ONCE(t.__state);
+pub static mut switch_count: c_ulong = 0;
+pub static mut state: c_uint = 0;
 //
 // skip the TASK_KILLABLE tasks -- these can be killed
 // skip the TASK_IDLE tasks -- those are genuinely idle
 // skip the TASK_FROZEN task -- it reasonably stops scheduling by freezer
 //
     if (!(state & TASK_UNINTERRUPTIBLE) ||
-    (state & (TASK_WAKEKILL | TASK_NOLOAD | TASK_FROZEN)))
+    (state & (TASK_WAKEKILL | TASK_NOLOAD | TASK_FROZEN))) {
     return false;
+    }
 //
 // When a freshly created task is scheduled once, changes its state to
 // TASK_UNINTERRUPTIBLE without having ever been switched out once, it
@@ -228,9 +439,11 @@ pub static mut state: c_uint = READ_ONCE(t.__state);
 
 #[no_mangle]
 unsafe extern "C" fn debug_show_blocker(task: *mut task_struct, timeout: c_ulong) {
-    struct task_struct *g, *t;
+    let mut g = core::ptr::null_mut();
+    let mut t = core::ptr::null_mut();
     unsigned long owner, blocker, blocker_type;
-    const char *rwsem_blocked_by, *rwsem_blocked_as;
+    let mut rwsem_blocked_by = core::ptr::null_mut();
+    let mut rwsem_blocked_as = core::ptr::null_mut();
 // RCU_LOCKDEP_WARN;
     blocker = READ_ONCE(task.blocker);
     if (!blocker) {
@@ -240,11 +453,14 @@ unsafe extern "C" fn debug_show_blocker(task: *mut task_struct, timeout: c_ulong
     match (blocker_type) {
     BLOCKER_TYPE_MUTEX => {
     owner = mutex_get_owner(hung_task_blocker_to_lock(blocker));
-    break;
+    // break;
+    }
     BLOCKER_TYPE_SEM => {
     owner = sem_last_holder(hung_task_blocker_to_lock(blocker));
-    break;
+    // break;
+    }
     BLOCKER_TYPE_RWSEM_READER => {
+    }
     BLOCKER_TYPE_RWSEM_WRITER => {
     owner = (unsigned long)rwsem_owner(
     hung_task_blocker_to_lock(blocker));
@@ -253,26 +469,32 @@ unsafe extern "C" fn debug_show_blocker(task: *mut task_struct, timeout: c_ulong
     rwsem_blocked_by = is_rwsem_reader_owned(
     hung_task_blocker_to_lock(blocker)) ?
     "reader" : "writer";
-    break;
+    // break;
+    }
     _ => {
 // WARN_ON_ONCE;
     return;
     }
+    }
     if (unlikely(!owner)) {
     match (blocker_type) {
     BLOCKER_TYPE_MUTEX => {
-    pr_err("INFO: task %s:%d is blocked on a mutex, but the owner is not found.\n",
+    pr_err!("INFO: task %s:%d is blocked on a mutex, but the owner is not found.\n",
     task.comm, task.pid);
-    break;
+    // break;
+    }
     BLOCKER_TYPE_SEM => {
-    pr_err("INFO: task %s:%d is blocked on a semaphore, but the last holder is not found.\n",
+    pr_err!("INFO: task %s:%d is blocked on a semaphore, but the last holder is not found.\n",
     task.comm, task.pid);
-    break;
+    // break;
+    }
     BLOCKER_TYPE_RWSEM_READER => {
+    }
     BLOCKER_TYPE_RWSEM_WRITER => {
-    pr_err("INFO: task %s:%d is blocked on an rw-semaphore, but the owner is not found.\n",
+    pr_err!("INFO: task %s:%d is blocked on an rw-semaphore, but the owner is not found.\n",
     task.comm, task.pid);
-    break;
+    // break;
+    }
     }
     return;
     }
@@ -283,19 +505,23 @@ unsafe extern "C" fn debug_show_blocker(task: *mut task_struct, timeout: c_ulong
     }
     match (blocker_type) {
     BLOCKER_TYPE_MUTEX => {
-    pr_err("INFO: task %s:%d is blocked on a mutex likely owned by task %s:%d.\n",
+    pr_err!("INFO: task %s:%d is blocked on a mutex likely owned by task %s:%d.\n",
     task.comm, task.pid, t.comm, t.pid);
-    break;
+    // break;
+    }
     BLOCKER_TYPE_SEM => {
-    pr_err("INFO: task %s:%d blocked on a semaphore likely last held by task %s:%d\n",
+    pr_err!("INFO: task %s:%d blocked on a semaphore likely last held by task %s:%d\n",
     task.comm, task.pid, t.comm, t.pid);
-    break;
+    // break;
+    }
     BLOCKER_TYPE_RWSEM_READER => {
+    }
     BLOCKER_TYPE_RWSEM_WRITER => {
-    pr_err("INFO: task %s:%d <%s> blocked on an rw-semaphore likely owned by task %s:%d <%s>\n",
+    pr_err!("INFO: task %s:%d <%s> blocked on an rw-semaphore likely owned by task %s:%d <%s>\n",
     task.comm, task.pid, rwsem_blocked_as, t.comm,
     t.pid, rwsem_blocked_by);
-    break;
+    // break;
+    }
     }
 // Avoid duplicated task dump, skip if the task is also hung.
     if (!task_is_hung(t, timeout)) {
@@ -332,24 +558,24 @@ pub unsafe extern "C" fn hung_task_info() {
 //
     if (sysctl_hung_task_warnings || hung_task_call_panic) {
     if (sysctl_hung_task_warnings > 0) {
-    sysctl_hung_task_warnings--;
+    sysctl_hung_task_warnings -= 1;
     }
-    pr_err("INFO: task %s:%d blocked%s for more than %ld seconds.\n",
+    pr_err!("INFO: task %s:%d blocked%s for more than %ld seconds.\n",
     t.comm, t.pid, t.in_iowait ? " in I/O wait" : "",
     (jiffies - t.last_switch_time) / HZ);
-    pr_err("      %s %s %.*s\n",
+    pr_err!("      %s %s %.*s\n",
     print_tainted(), init_utsname().release,
     (int)strcspn(init_utsname().version, " "),
     init_utsname().version);
     if (t.flags & PF_POSTCOREDUMP) {
-    pr_err("      Blocked by coredump.\n");
+    pr_err!("      Blocked by coredump.\n");
     }
-    pr_err("\"echo 0 > /proc/sys/kernel/hung_task_timeout_secs\""
+    pr_err!("\"echo 0 > /proc/sys/kernel/hung_task_timeout_secs\""
     " disables this message.\n");
     sched_show_task(t);
     debug_show_blocker(t, timeout);
     if (!sysctl_hung_task_warnings) {
-    pr_info("Future hung task reports are suppressed, see sysctl kernel.hung_task_warnings\n");
+    pr_info!("Future hung task reports are suppressed, see sysctl kernel.hung_task_warnings\n");
     }
     }
     touch_nmi_watchdog();
@@ -380,12 +606,13 @@ unsafe extern "C" fn rcu_lock_break(g: *mut task_struct, t: *mut task_struct) ->
 //
 #[no_mangle]
 unsafe extern "C" fn check_hung_uninterruptible_tasks(timeout: c_ulong) {
-pub static mut max_count: c_int = sysctl_hung_task_check_count;
-pub static mut last_break: c_ulong = jiffies;
-    struct task_struct *g, *t;
+pub static mut max_count: c_int = 0;
+pub static mut last_break: c_ulong = 0;
+    let mut g = core::ptr::null_mut();
+    let mut t = core::ptr::null_mut();
     let mut this_round_count = 0;
-pub static mut need_warning: c_int = sysctl_hung_task_warnings;
-pub static mut si_mask: c_ulong = hung_task_si_mask;
+pub static mut need_warning: c_int = 0;
+pub static mut si_mask: c_ulong = 0;
 //
 // If the system crashed already then all bets are off,
 // do not report extra hung tasks:
@@ -397,11 +624,11 @@ pub static mut si_mask: c_ulong = hung_task_si_mask;
     rcu_read_lock();
     for_each_process_thread(g, t) {
     if (!max_count--) {
-    goto unlock;
+// goto;
     }
     if (time_after(jiffies, last_break + HUNG_TASK_LOCK_BREAK)) {
     if (!rcu_lock_break(g, t)) {
-    goto unlock;
+// goto;
     }
     last_break = jiffies;
     }
@@ -413,11 +640,11 @@ pub static mut si_mask: c_ulong = hung_task_si_mask;
 // the global counter at any time.
 //
     atomic_long_inc(&sysctl_hung_task_detect_count);
-    this_round_count++;
+    this_round_count += 1;
     hung_task_info(t, timeout, this_round_count);
     }
     }
-    unlock:
+// label;
     rcu_read_unlock();
     if (!this_round_count) {
     return;
@@ -483,24 +710,24 @@ pub unsafe extern "C" fn proc_dohung_task_timeout_secs() {
     let mut ret = 0;
     ret = proc_doulongvec_minmax(table, write, buffer, lenp, ppos);
     if (ret || !write) {
-    goto out;
+// goto;
     }
     wake_up_process(watchdog_task);
-    out:
+// label;
     return ret;
     }
 //
 // This is needed for proc_doulongvec_minmax of sysctl_hung_task_timeout_secs
 // and hung_task_check_interval_secs
 //
-pub static mut hung_task_timeout_max: unsigned long = (LONG_MAX / HZ);
+pub static mut hung_task_timeout_max: unsigned long = 0;
 pub static mut ctl_table: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn hung_task_sysctl_init() -> c_int {
     register_sysctl_init("kernel", hung_task_sysctls);
     }
 
-pub static mut reset_hung_task: atomic_t = ATOMIC_INIT(0);
+pub static mut reset_hung_task: atomic_t = 0;
 #[no_mangle]
 pub unsafe extern "C" fn reset_hung_task_detector() {
     atomic_set(&reset_hung_task, 1);
@@ -511,17 +738,24 @@ pub unsafe extern "C" fn reset_hung_task_detector() {
 pub unsafe extern "C" fn hungtask_pm_notify() {
     match (action) {
     PM_SUSPEND_PREPARE => {
+    }
     PM_HIBERNATION_PREPARE => {
+    }
     PM_RESTORE_PREPARE => {
     hung_detector_suspended = true;
-    break;
+    // break;
+    }
     PM_POST_SUSPEND => {
+    }
     PM_POST_HIBERNATION => {
+    }
     PM_POST_RESTORE => {
     hung_detector_suspended = false;
-    break;
+    // break;
+    }
     _ => {
-    break;
+    // break;
+    }
     }
     return NOTIFY_OK;
     }
@@ -530,11 +764,11 @@ pub unsafe extern "C" fn hungtask_pm_notify() {
 //
 #[no_mangle]
 unsafe extern "C" fn watchdog(dummy: *mut c_void) -> c_int {
-pub static mut hung_last_checked: c_ulong = jiffies;
+pub static mut hung_last_checked: c_ulong = 0;
     set_user_nice(current, 0);
-    for ( ; ; ) {
-pub static mut timeout: c_ulong = sysctl_hung_task_timeout_secs;
-pub static mut interval: c_ulong = sysctl_hung_task_check_interval_secs;
+    while ( ) {
+pub static mut timeout: c_ulong = 0;
+pub static mut interval: c_ulong = 0;
     let mut t = 0;
     if (interval == 0) {
     interval = timeout;
@@ -543,8 +777,9 @@ pub static mut interval: c_ulong = sysctl_hung_task_check_interval_secs;
     t = hung_timeout_jiffies(hung_last_checked, interval);
     if (t <= 0) {
     if (!atomic_xchg(&reset_hung_task, 0) &&
-    !hung_detector_suspended)
+    !hung_detector_suspended) {
     check_hung_uninterruptible_tasks(timeout);
+    }
     hung_last_checked = jiffies;
     continue;
     }
@@ -562,23 +797,3 @@ unsafe extern "C" fn hung_task_init() -> c_int {
     return 0;
     }
 // subsys_initcall;
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}
-}

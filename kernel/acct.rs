@@ -34,6 +34,216 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
 macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
@@ -185,7 +395,7 @@ pub type atomic_long_t = core::sync::atomic::AtomicI64;
 // each check.
 // Turned into sysctl-controllable parameters. AV, 12/11/98
 //
-    static int acct_parm[3] = {4, 2, 30};
+pub static mut acct_parm: [usize; 3] = [0; 3];
 
 pub static mut ctl_table: usize = 0;
 #[no_mangle]
@@ -215,8 +425,8 @@ pub struct bsd_acct_struct {
     pub ac: acct_t,
 }
 
-    static void fill_ac(struct bsd_acct_struct *acct);
-    static void acct_write_process(struct bsd_acct_struct *acct);
+// forward_decl: fill_ac;
+// forward_decl: acct_write_process;
 //
 // Check the amount of free space and suspend/resume accordingly.
 //
@@ -231,18 +441,18 @@ unsafe extern "C" fn check_free_space(acct: *mut bsd_acct_struct) -> bool {
     return acct.active;
     }
     if (acct.active) {
-pub static mut suspend: u64 = sbuf.f_blocks * SUSPEND;
+pub static mut suspend: u64 = 0;
     do_div(suspend, 100);
     if (sbuf.f_bavail <= suspend) {
     acct.active = false;
-    pr_info("Process accounting paused\n");
+    pr_info!("Process accounting paused\n");
     }
     } else {
-pub static mut resume: u64 = sbuf.f_blocks * RESUME;
+pub static mut resume: u64 = 0;
     do_div(resume, 100);
     if (sbuf.f_bavail >= resume) {
     acct.active = true;
-    pr_info("Process accounting resumed\n");
+    pr_info!("Process accounting resumed\n");
     }
     }
     acct.needcheck = jiffies + ACCT_TIMEOUT*HZ;
@@ -256,12 +466,12 @@ unsafe extern "C" fn acct_put(p: *mut bsd_acct_struct) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn to_acct() {
-    return p ? container_of(p, struct bsd_acct_struct, pin) : core::ptr::null_mut();
+    return p ? container_of!(p, bsd_acct_struct, pin) : core::ptr::null_mut();
     }
 #[no_mangle]
 pub unsafe extern "C" fn acct_get() {
     let mut res = core::ptr::null_mut();
-    again:
+// label;
     smp_rmb();
     rcu_read_lock();
     res = to_acct(READ_ONCE(ns.bacct));
@@ -272,20 +482,20 @@ pub unsafe extern "C" fn acct_get() {
     if (!atomic_long_inc_not_zero(&res.count)) {
     rcu_read_unlock();
     cpu_relax();
-    goto again;
+// goto;
     }
     rcu_read_unlock();
     mutex_lock(&res.lock);
     if (res != to_acct(READ_ONCE(ns.bacct))) {
     mutex_unlock(&res.lock);
     acct_put(res);
-    goto again;
+// goto;
     }
     return res;
     }
 #[no_mangle]
 unsafe extern "C" fn acct_pin_kill(pin: *mut fs_pin) {
-    struct bsd_acct_struct *acct = to_acct(pin);
+    let mut acct = to_acct(pin);
     mutex_lock(&acct.lock);
 //
 // Fill the accounting struct with the exiting task's info
@@ -301,8 +511,8 @@ unsafe extern "C" fn acct_pin_kill(pin: *mut fs_pin) {
     }
 #[no_mangle]
 unsafe extern "C" fn close_work(work: *mut work_struct) {
-    struct bsd_acct_struct *acct = container_of(work, struct bsd_acct_struct, work);
-    struct file *file = acct.file;
+    let mut acct = container_of!(work, bsd_acct_struct, work);
+    let mut file = acct.file;
 // We were fired by acct_pin_kill() which holds acct->lock.
     acct_write_process(acct);
     if (file.f_op.flush) {
@@ -311,12 +521,12 @@ unsafe extern "C" fn close_work(work: *mut work_struct) {
     __fput_sync(file);
     complete(&acct.done);
     }
-    DEFINE_FREE(fput_sync, struct file *, if (!IS_ERR_OR_NULL(_T)) __fput_sync(_T))
+    DEFINE_FREE(fput_sync, file *, if (!IS_ERR_OR_NULL(_T)) __fput_sync(_T))
 #[no_mangle]
-unsafe extern "C" fn acct_on(name: *const char __user) -> c_int {
+unsafe extern "C" fn acct_on(name: *const char ) -> c_int {
 // Difference from BSD - they don't do O_APPEND
-pub static mut open_flags: c_int = O_WRONLY|O_APPEND|O_LARGEFILE;
-    struct pid_namespace *ns = task_active_pid_ns(current);
+pub static mut open_flags: c_int = 0;
+    let mut ns = task_active_pid_ns(current);
     struct file *original_file __free(fput) = core::ptr::null_mut();	// in that order
     struct path internal __free(path_put) = {};	// in that order
     struct file *file __free(fput_sync) = core::ptr::null_mut();	// in that order
@@ -352,7 +562,7 @@ pub static mut open_flags: c_int = O_WRONLY|O_APPEND|O_LARGEFILE;
     if (!(file.f_mode & FMODE_CAN_WRITE)) {
     return -EIO;
     }
-    acct = kzalloc_obj(struct bsd_acct_struct);
+    acct = kzalloc_obj(bsd_acct_struct);
     if (!acct) {
     return -ENOMEM;
     }
@@ -415,19 +625,20 @@ pub unsafe extern "C" fn acct_exit_ns(ns: *mut pid_namespace) {
 
 #[no_mangle]
 unsafe extern "C" fn encode_comp_t(value: u64) -> comp_t {
-    int exp, rnd;
+    let mut exp = 0;
+    let mut rnd = 0;
     exp = rnd = 0;
     while (value > MAXFRACT) {
     rnd = value & (1 << (EXPSIZE - 1));	/* Round up? */
     value >>= EXPSIZE;	/* Base 8 exponent == 3 bit shift. */
-    exp++;
+    exp += 1;
     }
 //
 // If we need to round up, do it (and handle overflow correctly).
 //
     if (rnd && (++value > MAXFRACT)) {
     value >>= EXPSIZE;
-    exp++;
+    exp += 1;
     }
     if (exp > (((comp_t) ~0U) >> MANTSIZE)) {
     return (comp_t) ~0U;
@@ -451,20 +662,21 @@ unsafe extern "C" fn encode_comp_t(value: u64) -> comp_t {
 
 #[no_mangle]
 unsafe extern "C" fn encode_comp2_t(value: u64) -> comp2_t {
-    int exp, rnd;
+    let mut exp = 0;
+    let mut rnd = 0;
     exp = (value > (MAXFRACT2>>1));
     rnd = 0;
     while (value > MAXFRACT2) {
     rnd = value & 1;
     value >>= 1;
-    exp++;
+    exp += 1;
     }
 //
 // If we need to round up, do it (and handle overflow correctly).
 //
     if (rnd && (++value > MAXFRACT2)) {
     value >>= 1;
-    exp++;
+    exp += 1;
     }
     if (exp > MAXEXP2) {
 // Overflow. Return largest representable number instead.
@@ -486,7 +698,7 @@ pub static mut u: c_uint = 0;
     }
     while ((s64)value > 0) {
     value <<= 1;
-    exp--;
+    exp -= 1;
     }
     u = (u32)(value >> 40) & 0x7fffffu;
     return u | (exp << 23);
@@ -502,9 +714,9 @@ pub static mut u: c_uint = 0;
 //
 #[no_mangle]
 unsafe extern "C" fn fill_ac(acct: *mut bsd_acct_struct) {
-    struct pacct_struct *pacct = &current.signal.pacct;
-    struct file *file = acct.file;
-    acct_t *ac = &acct.ac;
+    let mut pacct = &current.signal.pacct;
+    let mut file = acct.file;
+    let mut ac = &acct.ac;
     u64 elapsed, run_time;
     let mut btime;
     let mut tty = core::ptr::null_mut();
@@ -522,9 +734,9 @@ unsafe extern "C" fn fill_ac(acct: *mut bsd_acct_struct) {
 // Fill the accounting struct with the needed info as recorded
 // by the different kernel functions.
 //
-    memset(ac, 0, sizeof(acct_t));
+    memset(ac, 0, sizeof!(acct_t));
     ac.ac_version = ACCT_VERSION | ACCT_BYTEORDER;
-    strscpy(ac.ac_comm, current.comm, sizeof(ac.ac_comm));
+    strscpy(ac.ac_comm, current.comm, sizeof!(ac.ac_comm));
 // calculate run_time in nsec
     run_time = ktime_get_ns();
     run_time -= current.group_leader.start_time;
@@ -538,7 +750,7 @@ unsafe extern "C" fn fill_ac(acct: *mut bsd_acct_struct) {
 
     {
 // new enlarged etime field
-pub static mut etime: comp2_t = encode_comp2_t(elapsed);
+pub static mut etime: comp2_t = 0;
     ac.ac_etime_hi = etime >> 16;
     ac.ac_etime_lo = (u16) etime;
     }
@@ -569,7 +781,7 @@ pub static mut etime: comp2_t = encode_comp2_t(elapsed);
     ac.ac_gid16 = ac.ac_gid;
 
     {
-    struct pid_namespace *ns = acct.ns;
+    let mut ns = acct.ns;
     ac.ac_pid = task_tgid_nr_ns(current, ns);
     rcu_read_lock();
     ac.ac_ppid = task_tgid_nr_ns(rcu_dereference(current.real_parent), ns);
@@ -579,8 +791,8 @@ pub static mut etime: comp2_t = encode_comp2_t(elapsed);
     }
 #[no_mangle]
 unsafe extern "C" fn acct_write_process(acct: *mut bsd_acct_struct) {
-    struct file *file = acct.file;
-    acct_t *ac = &acct.ac;
+    let mut file = acct.file;
+    let mut ac = &acct.ac;
 // Perform file operations on behalf of whoever enabled accounting
     scoped_with_creds(file.f_cred) {
 //
@@ -592,7 +804,7 @@ unsafe extern "C" fn acct_write_process(acct: *mut bsd_acct_struct) {
     if (check_free_space(acct) && file_start_write_trylock(file)) {
 // it's been opened O_APPEND, so position is irrelevant
 pub static mut pos: loff_t = 0;
-    __kernel_write(file, ac, sizeof(acct_t), &pos);
+    __kernel_write(file, ac, sizeof!(acct_t), &pos);
     file_end_write(file);
     }
     }
@@ -614,16 +826,17 @@ unsafe extern "C" fn do_acct_process(acct: *mut bsd_acct_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn acct_collect(exitcode: c_long, group_dead: c_int) {
-    struct pacct_struct *pacct = &current.signal.pacct;
+    let mut pacct = &current.signal.pacct;
     u64 utime, stime;
 pub static mut vsize: c_ulong = 0;
     if (group_dead && current.mm) {
-    struct mm_struct *mm = current.mm;
+    let mut mm = current.mm;
 // VMA_ITERATOR;
     let mut vma = core::ptr::null_mut();
     mmap_read_lock(mm);
-    for_each_vma(vmi, vma)
+    for_each_vma(vmi, vma) {
     vsize += vma.vm_end - vma.vm_start;
+    }
     mmap_read_unlock(mm);
     }
     spin_lock_irq(&current.sighand.siglock);
@@ -654,8 +867,8 @@ pub static mut vsize: c_ulong = 0;
     }
 #[no_mangle]
 unsafe extern "C" fn slow_acct_process(ns: *mut pid_namespace) {
-    for ( ; ns; ns = ns.parent) {
-    struct bsd_acct_struct *acct = acct_get(ns);
+    while (ns) {
+    let mut acct = acct_get(ns);
     if (acct) {
     do_acct_process(acct);
     mutex_unlock(&acct.lock);
@@ -674,7 +887,7 @@ pub unsafe extern "C" fn acct_process() {
 // alive and holds its namespace, which in turn holds
 // its parent.
 //
-    for (ns = task_active_pid_ns(current); ns != core::ptr::null_mut(); ns = ns.parent) {
+    while (ns != core::ptr::null_mut()) {
     if (ns.bacct) {
     break;
     }

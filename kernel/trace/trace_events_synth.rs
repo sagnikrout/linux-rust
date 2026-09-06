@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -45,36 +295,34 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
 // for gfp flag names
 
-    C(BAD_NAME,		"Illegal name"),		\
-    C(INVALID_CMD,		"Command must be of the form: <name> field[;field] ..."),\
-    C(INVALID_DYN_CMD,	"Command must be of the form: s or -:[synthetic/]<name> field[;field] ..."),\
-    C(EVENT_EXISTS,		"Event already exists"),	\
-    C(TOO_MANY_FIELDS,	"Too many fields"),		\
-    C(INCOMPLETE_TYPE,	"Incomplete type"),		\
-    C(INVALID_TYPE,		"Invalid type"),		\
-    C(INVALID_FIELD,        "Invalid field"),		\
+    C(BAD_NAME,		"Illegal name"),		
+    C(INVALID_CMD,		"Command must be of the form: <name> field[;field] ..."),
+    C(INVALID_DYN_CMD,	"Command must be of the form: s or -:[synthetic/]<name> field[;field] ..."),
+    C(EVENT_EXISTS,		"Event already exists"),	
+    C(TOO_MANY_FIELDS,	"Too many fields"),		
+    C(INCOMPLETE_TYPE,	"Incomplete type"),		
+    C(INVALID_TYPE,		"Invalid type"),		
+    C(INVALID_FIELD,        "Invalid field"),		
     C(INVALID_ARRAY_SPEC,	"Invalid array specification"),
 
     enum { ERRORS };
 
     static const char *err_text[] = { ERRORS };
-    static DEFINE_MUTEX(lastcmd_mutex);
-    static char *last_cmd;
+pub static mut lastcmd_mutex: usize = 0;
+pub static mut last_cmd: *mut c_void = core::ptr::null_mut();
 #[no_mangle]
 unsafe extern "C" fn errpos(str: *const c_char) -> c_int {
-    static int errpos(const char *str)
-    {
     guard(mutex)(&lastcmd_mutex);
-    if (!str || !last_cmd)
+    if (!str || !last_cmd) {
     return 0;
+    }
     return err_pos(last_cmd, str);
     }
 #[no_mangle]
 unsafe extern "C" fn last_cmd_set(str: *const c_char) {
-    static void last_cmd_set(const char *str)
-    {
-    if (!str)
+    if (!str) {
     return;
+    }
     mutex_lock(&lastcmd_mutex);
     kfree(last_cmd);
     last_cmd = kstrdup(str, GFP_KERNEL);
@@ -82,48 +330,35 @@ unsafe extern "C" fn last_cmd_set(str: *const c_char) {
     }
 #[no_mangle]
 unsafe extern "C" fn synth_err(err_type: u8, err_pos: u16) {
-    static void synth_err(u8 err_type, u16 err_pos)
-    {
     guard(mutex)(&lastcmd_mutex);
-    if (!last_cmd)
+    if (!last_cmd) {
     return;
+    }
     tracing_log_err(core::ptr::null_mut(), "synthetic_events", last_cmd, err_text,
     err_type, err_pos);
     }
-    static int create_synth_event(const char *raw_command);
-    static int synth_event_show(struct seq_file *m, struct dyn_event *ev);
-    static int synth_event_release(struct dyn_event *ev);
-    static bool synth_event_is_busy(struct dyn_event *ev);
-    static bool synth_event_match(const char *system, const char *event,
-    int argc, const char **argv, struct dyn_event *ev);
-    static struct dyn_event_operations synth_event_ops = {
-    .create = create_synth_event,
-    .show = synth_event_show,
-    .is_busy = synth_event_is_busy,
-    .free = synth_event_release,
-    .match = synth_event_match,
-    };
+// forward_decl: create_synth_event;
+// forward_decl: synth_event_show;
+// forward_decl: synth_event_release;
+// forward_decl: synth_event_is_busy;
+// forward_decl: synth_event_match;
+pub static mut dyn_event_operations: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn is_synth_event(ev: *mut dyn_event) -> bool {
-    static bool is_synth_event(struct dyn_event *ev)
-    {
     return ev.ops == &synth_event_ops;
     }
-    static struct synth_event *to_synth_event(struct dyn_event *ev)
-    {
-    return container_of(ev, struct synth_event, devent);
+#[no_mangle]
+pub unsafe extern "C" fn to_synth_event(ev: *mut dyn_event) -> *mut c_void {
+    return container_of!(ev, synth_event, devent);
     }
 #[no_mangle]
 unsafe extern "C" fn synth_event_is_busy(ev: *mut dyn_event) -> bool {
-    static bool synth_event_is_busy(struct dyn_event *ev)
-    {
-    struct synth_event *event = to_synth_event(ev);
+    let mut event = to_synth_event(ev);
     return event.ref != 0;
     }
-    static bool synth_event_match(const char *system, const char *event,
-    int argc, const char **argv, struct dyn_event *ev)
-    {
-    struct synth_event *sev = to_synth_event(ev);
+#[no_mangle]
+pub unsafe extern "C" fn synth_event_match(system: *mut c_char, event: *mut c_char, argc: c_int, argv: *mut *mut c_char, ev: *mut dyn_event) -> bool {
+    let mut sev = to_synth_event(ev);
     return strcmp(sev.name, event) == 0 &&
     (!system || strcmp(system, SYNTH_SYSTEM) == 0);
     }
@@ -136,18 +371,19 @@ pub struct synth_trace_event {
 
 #[no_mangle]
 unsafe extern "C" fn synth_event_define_fields(call: *mut trace_event_call) -> c_int {
-    static int synth_event_define_fields(struct trace_event_call *call)
-    {
-    struct synth_trace_event trace;
-    let mut offset: c_int = offsetof(typeof(trace), fields);
-    struct synth_event *event = call.data;
-    unsigned int i, size, n_u64;
-    char *name, *type;
-    int filter_type;
-    bool is_signed;
-    bool is_stack;
-    let mut ret: c_int = 0;
-    for (i = 0, n_u64 = 0; i < event.n_fields; i++) {
+pub static mut trace: usize = 0;
+pub static mut offset: c_int = 0;
+    let mut event = call.data;
+    let mut i = 0;
+    let mut size = 0;
+    let mut n_u64 = 0;
+    let mut name = core::ptr::null_mut();
+    let mut type = core::ptr::null_mut();
+    let mut filter_type = 0;
+    let mut is_signed = 0;
+    let mut is_stack = 0;
+pub static mut ret: c_int = 0;
+    while (i < event.n_fields) {
     size = event.fields[i].size;
     is_signed = event.fields[i].is_signed;
     type = event.fields[i].type;
@@ -156,15 +392,16 @@ unsafe extern "C" fn synth_event_define_fields(call: *mut trace_event_call) -> c
     filter_type = is_stack ? FILTER_STACKTRACE : FILTER_OTHER;
     ret = trace_define_field(call, type, name, offset, size,
     is_signed, filter_type);
-    if (ret)
+    if (ret) {
     break;
+    }
     event.fields[i].offset = n_u64;
     if (event.fields[i].is_string && !event.fields[i].is_dynamic) {
     offset += STR_VAR_LEN_MAX;
-    n_u64 += STR_VAR_LEN_MAX / sizeof(u64);
+    n_u64 += STR_VAR_LEN_MAX / sizeof!(u64);
     } else {
-    offset += sizeof(u64);
-    n_u64++;
+    offset += sizeof!(u64);
+    n_u64 += 1;
     }
     }
     event.n_u64 = n_u64;
@@ -172,284 +409,292 @@ unsafe extern "C" fn synth_event_define_fields(call: *mut trace_event_call) -> c
     }
 #[no_mangle]
 unsafe extern "C" fn synth_field_signed(type: *mut c_char) -> bool {
-    static bool synth_field_signed(char *type)
-    {
-    if (str_has_prefix(type, "u"))
+    if (str_has_prefix(type, "u")) {
     return false;
-    if (strcmp(type, "gfp_t") == 0)
+    }
+    if (strcmp(type, "gfp_t") == 0) {
     return false;
+    }
     return true;
     }
 #[no_mangle]
 unsafe extern "C" fn synth_field_is_string(type: *mut c_char) -> c_int {
-    static int synth_field_is_string(char *type)
-    {
-    if (strstr(type, "char[") != core::ptr::null_mut())
+    if (strstr(type, "char[") != core::ptr::null_mut()) {
     return true;
+    }
     return false;
     }
 #[no_mangle]
 unsafe extern "C" fn synth_field_is_stack(type: *mut c_char) -> c_int {
-    static int synth_field_is_stack(char *type)
-    {
-    if (strstr(type, "long[") != core::ptr::null_mut())
+    if (strstr(type, "long[") != core::ptr::null_mut()) {
     return true;
+    }
     return false;
     }
 #[no_mangle]
 unsafe extern "C" fn synth_field_string_size(type: *mut c_char) -> c_int {
-    static int synth_field_string_size(char *type)
-    {
     char buf[4], *end, *start;
-    unsigned int len;
-    int size, err;
+    let mut len = 0;
+    let mut size = 0;
+    let mut err = 0;
     start = strstr(type, "char[");
-    if (start == core::ptr::null_mut())
+    if (start == core::ptr::null_mut()) {
     return -EINVAL;
-    start += sizeof("char[") - 1;
+    }
+    start += sizeof!("char[") - 1;
     end = strchr(type, ']');
-    if (!end || end < start || type + strlen(type) > end + 1)
+    if (!end || end < start || type + strlen(type) > end + 1) {
     return -EINVAL;
+    }
     len = end - start;
-    if (len > 3)
+    if (len > 3) {
     return -EINVAL;
-    if (len == 0)
+    }
+    if (len == 0) {
     return 0; /* variable-length string */
+    }
     memcpy(buf, start, len);
     buf[len] = '\0';
     err = kstrtouint(buf, 0, &size);
-    if (err)
+    if (err) {
     return err;
-    if (size > STR_VAR_LEN_MAX)
+    }
+    if (size > STR_VAR_LEN_MAX) {
     return -EINVAL;
+    }
     return size;
     }
 #[no_mangle]
 unsafe extern "C" fn synth_field_size(type: *mut c_char) -> c_int {
-    static int synth_field_size(char *type)
-    {
-    let mut size: c_int = 0;
-    if (strcmp(type, "s64") == 0)
-    size = sizeof(s64);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "u64") ==) -> else {
-    else if (strcmp(type, "u64") == 0)
-    size = sizeof(u64);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "s32") ==) -> else {
-    else if (strcmp(type, "s32") == 0)
-    size = sizeof(s32);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "u32") ==) -> else {
-    else if (strcmp(type, "u32") == 0)
-    size = sizeof(u32);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "s16") ==) -> else {
-    else if (strcmp(type, "s16") == 0)
-    size = sizeof(s16);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "u16") ==) -> else {
-    else if (strcmp(type, "u16") == 0)
-    size = sizeof(u16);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "s8") ==) -> else {
-    else if (strcmp(type, "s8") == 0)
-    size = sizeof(s8);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "u8") ==) -> else {
-    else if (strcmp(type, "u8") == 0)
-    size = sizeof(u8);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "char") ==) -> else {
-    else if (strcmp(type, "char") == 0)
-    size = sizeof(char);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "unsigned char") ==) -> else {
-    else if (strcmp(type, "unsigned char") == 0)
-    size = sizeof(unsigned char);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "int") ==) -> else {
-    else if (strcmp(type, "int") == 0)
-    size = sizeof(int);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "unsigned int") ==) -> else {
-    else if (strcmp(type, "unsigned int") == 0)
-    size = sizeof(unsigned int);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "long") ==) -> else {
-    else if (strcmp(type, "long") == 0)
-    size = sizeof(long);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "unsigned long") ==) -> else {
-    else if (strcmp(type, "unsigned long") == 0)
-    size = sizeof(unsigned long);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "bool") ==) -> else {
-    else if (strcmp(type, "bool") == 0)
-    size = sizeof(bool);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "pid_t") ==) -> else {
-    else if (strcmp(type, "pid_t") == 0)
-    size = sizeof(pid_t);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "gfp_t") ==) -> else {
-    else if (strcmp(type, "gfp_t") == 0)
-    size = sizeof(gfp_t);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: synth_field_is_string(type)) -> else {
-    else if (synth_field_is_string(type))
+pub static mut size: c_int = 0;
+    if (strcmp(type, "s64") == 0) {
+    size = sizeof!(s64);
+    }
+
+    else if (strcmp(type, "u64") == 0) {
+    size = sizeof!(u64);
+    }
+
+    else if (strcmp(type, "s32") == 0) {
+    size = sizeof!(s32);
+    }
+
+    else if (strcmp(type, "u32") == 0) {
+    size = sizeof!(u32);
+    }
+
+    else if (strcmp(type, "s16") == 0) {
+    size = sizeof!(s16);
+    }
+
+    else if (strcmp(type, "u16") == 0) {
+    size = sizeof!(u16);
+    }
+
+    else if (strcmp(type, "s8") == 0) {
+    size = sizeof!(s8);
+    }
+
+    else if (strcmp(type, "u8") == 0) {
+    size = sizeof!(u8);
+    }
+
+    else if (strcmp(type, "char") == 0) {
+    size = sizeof!(char);
+    }
+
+    else if (strcmp(type, "unsigned char") == 0) {
+    size = sizeof!(unsigned char);
+    }
+
+    else if (strcmp(type, "int") == 0) {
+    size = sizeof!(int);
+    }
+
+    else if (strcmp(type, "unsigned int") == 0) {
+    size = sizeof!(unsigned int);
+    }
+
+    else if (strcmp(type, "long") == 0) {
+    size = sizeof!(long);
+    }
+
+    else if (strcmp(type, "unsigned long") == 0) {
+    size = sizeof!(unsigned long);
+    }
+
+    else if (strcmp(type, "bool") == 0) {
+    size = sizeof!(bool);
+    }
+
+    else if (strcmp(type, "pid_t") == 0) {
+    size = sizeof!(pid_t);
+    }
+
+    else if (strcmp(type, "gfp_t") == 0) {
+    size = sizeof!(gfp_t);
+    }
+
+    else if (synth_field_is_string(type)) {
     size = synth_field_string_size(type);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: synth_field_is_stack(type)) -> else {
-    else if (synth_field_is_stack(type))
+    }
+
+    else if (synth_field_is_stack(type)) {
     size = 0;
+    }
     return size;
     }
     static const char *synth_field_fmt(char *type)
     {
-    const char *fmt = "%llu";
-    if (strcmp(type, "s64") == 0)
+    let mut fmt = "%llu";
+    if (strcmp(type, "s64") == 0) {
     fmt = "%lld";
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "u64") ==) -> else {
-    else if (strcmp(type, "u64") == 0)
+    }
+
+    else if (strcmp(type, "u64") == 0) {
     fmt = "%llu";
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "s32") ==) -> else {
-    else if (strcmp(type, "s32") == 0)
+    }
+
+    else if (strcmp(type, "s32") == 0) {
     fmt = "%d";
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "u32") ==) -> else {
-    else if (strcmp(type, "u32") == 0)
+    }
+
+    else if (strcmp(type, "u32") == 0) {
     fmt = "%u";
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "s16") ==) -> else {
-    else if (strcmp(type, "s16") == 0)
+    }
+
+    else if (strcmp(type, "s16") == 0) {
     fmt = "%d";
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "u16") ==) -> else {
-    else if (strcmp(type, "u16") == 0)
+    }
+
+    else if (strcmp(type, "u16") == 0) {
     fmt = "%u";
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "s8") ==) -> else {
-    else if (strcmp(type, "s8") == 0)
+    }
+
+    else if (strcmp(type, "s8") == 0) {
     fmt = "%d";
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "u8") ==) -> else {
-    else if (strcmp(type, "u8") == 0)
+    }
+
+    else if (strcmp(type, "u8") == 0) {
     fmt = "%u";
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "char") ==) -> else {
-    else if (strcmp(type, "char") == 0)
+    }
+
+    else if (strcmp(type, "char") == 0) {
     fmt = "%d";
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "unsigned char") ==) -> else {
-    else if (strcmp(type, "unsigned char") == 0)
+    }
+
+    else if (strcmp(type, "unsigned char") == 0) {
     fmt = "%u";
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "int") ==) -> else {
-    else if (strcmp(type, "int") == 0)
+    }
+
+    else if (strcmp(type, "int") == 0) {
     fmt = "%d";
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "unsigned int") ==) -> else {
-    else if (strcmp(type, "unsigned int") == 0)
+    }
+
+    else if (strcmp(type, "unsigned int") == 0) {
     fmt = "%u";
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "long") ==) -> else {
-    else if (strcmp(type, "long") == 0)
+    }
+
+    else if (strcmp(type, "long") == 0) {
     fmt = "%ld";
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "unsigned long") ==) -> else {
-    else if (strcmp(type, "unsigned long") == 0)
+    }
+
+    else if (strcmp(type, "unsigned long") == 0) {
     fmt = "%lu";
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "bool") ==) -> else {
-    else if (strcmp(type, "bool") == 0)
+    }
+
+    else if (strcmp(type, "bool") == 0) {
     fmt = "%d";
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "pid_t") ==) -> else {
-    else if (strcmp(type, "pid_t") == 0)
+    }
+
+    else if (strcmp(type, "pid_t") == 0) {
     fmt = "%d";
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: strcmp(type, 0: "gfp_t") ==) -> else {
-    else if (strcmp(type, "gfp_t") == 0)
+    }
+
+    else if (strcmp(type, "gfp_t") == 0) {
     fmt = "%x";
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: synth_field_is_string(type)) -> else {
-    else if (synth_field_is_string(type))
+    }
+
+    else if (synth_field_is_string(type)) {
     fmt = "%s";
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: synth_field_is_stack(type)) -> else {
-    else if (synth_field_is_stack(type))
+    }
+
+    else if (synth_field_is_stack(type)) {
     fmt = "%s";
+    }
     return fmt;
     }
-    static void print_synth_event_num_val(struct trace_seq *s,
-    char *print_fmt, char *name,
-    int size, union trace_synth_field *val, char *space)
-    {
-    switch (size) {
-    case 1:
+#[no_mangle]
+pub unsafe extern "C" fn print_synth_event_num_val(s: *mut trace_seq, print_fmt: *mut c_char, name: *mut c_char, size: c_int, val: *mut union trace_synth_field, space: *mut c_char) {
+    match (size) {
+    1 => {
     trace_seq_printf(s, print_fmt, name, val.as_u8, space);
-    break;
-    case 2:
+    // break;
+    }
+    2 => {
     trace_seq_printf(s, print_fmt, name, val.as_u16, space);
-    break;
-    case 4:
+    // break;
+    }
+    4 => {
     trace_seq_printf(s, print_fmt, name, val.as_u32, space);
-    break;
-    default:
+    // break;
+    }
+    _ => {
     trace_seq_printf(s, print_fmt, name, val.as_u64, space);
-    break;
+    // break;
     }
     }
-    static enum print_line_t print_synth_event(struct trace_iterator *iter,
-    int flags,
-    struct trace_event *event)
+    }
+    static enum print_line_t print_synth_event(trace_iterator *iter,
+    int flags, trace_event *event)
     {
-    struct trace_array *tr = iter.tr;
-    struct trace_seq *s = &iter.seq;
-    struct synth_trace_event *entry;
-    struct synth_event *se;
-    unsigned int i, j, n_u64;
+    let mut tr = iter.tr;
+    let mut s = &iter.seq;
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut se: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    let mut j = 0;
+    let mut n_u64 = 0;
     char print_fmt[32];
-    const char *fmt;
-    entry = (struct synth_trace_event *)iter.ent;
-    se = container_of(event, struct synth_event, call.event);
+pub static mut fmt: *mut c_void = core::ptr::null_mut();
+    entry = iter.ent;
+    se = container_of!(event, synth_event, call.event);
     trace_seq_printf(s, "%s: ", se.name);
-    for (i = 0, n_u64 = 0; i < se.n_fields; i++) {
-    if (trace_seq_has_overflowed(s))
-    goto end;
+    while (i < se.n_fields) {
+    if (trace_seq_has_overflowed(s)) {
+// goto;
+    }
     fmt = synth_field_fmt(se.fields[i].type);
 // parameter types
-    if (tr && tr.trace_flags & TRACE_ITER(VERBOSE))
+    if (tr && tr.trace_flags & TRACE_ITER(VERBOSE)) {
     trace_seq_printf(s, "%s ", fmt);
-    snprintf(print_fmt, sizeof(print_fmt), "%%s=%s%%s", fmt);
+    }
+    snprintf(print_fmt, sizeof!(print_fmt), "%%s=%s%%s", fmt);
 // parameter values
     if (se.fields[i].is_string) {
     if (se.fields[i].is_dynamic) {
     union trace_synth_field *data = &entry.fields[n_u64];
     trace_seq_printf(s, print_fmt, se.fields[i].name,
-    (char *)entry + data.as_dynamic.offset,
+    entry + data.as_dynamic.offset,
     i == se.n_fields - 1 ? "" : " ");
-    n_u64++;
+    n_u64 += 1;
     } else {
     trace_seq_printf(s, print_fmt, se.fields[i].name,
-    (char *)&entry.fields[n_u64].as_u64,
+    &entry.fields[n_u64].as_u64,
     i == se.n_fields - 1 ? "" : " ");
-    n_u64 += STR_VAR_LEN_MAX / sizeof(u64);
+    n_u64 += STR_VAR_LEN_MAX / sizeof!(u64);
     }
     } else if (se.fields[i].is_stack) {
     union trace_synth_field *data = &entry.fields[n_u64];
-    unsigned long *p = (void *)entry + data.as_dynamic.offset;
+    let mut p = entry + data.as_dynamic.offset;
     trace_seq_printf(s, "%s=STACK:\n", se.fields[i].name);
-    for (j = 1; j < data.as_dynamic.len / sizeof(long); j++)
-    trace_seq_printf(s, "=> %pS\n", (void *)p[j]);
-    n_u64++;
+    for (j = 1; j < data.as_dynamic.len / sizeof!(long); j++) {
+    trace_seq_printf(s, "=> %pS\n", p[j]);
+    }
+    n_u64 += 1;
     } else {
-    struct trace_print_flags __flags[] = {
-    __def_gfpflag_names };
-    char *space = (i == se.n_fields - 1 ? "" : " ");
+pub static mut trace_print_flags: usize = 0;
+    let mut space = (i == se.n_fields - 1 ? "" : " ");
     print_synth_event_num_val(s, print_fmt,
     se.fields[i].name,
     se.fields[i].size,
@@ -459,29 +704,22 @@ pub unsafe extern "C" fn if(_arg: synth_field_is_stack(type)) -> else {
     trace_seq_puts(s, " (");
     trace_print_flags_seq(s, "|",
     entry.fields[n_u64].as_u64,
-    __flags, ARRAY_SIZE(__flags));
+    __flags, ARRAY_SIZE!(__flags));
     trace_seq_putc(s, ')');
     }
-    n_u64++;
+    n_u64 += 1;
     }
     }
-    end:
+// label;
     trace_seq_putc(s, '\n');
     return trace_handle_return(s);
     }
-    static struct trace_event_functions synth_event_funcs = {
-    .trace		= print_synth_event
-    };
-    static unsigned int trace_string(struct synth_trace_event *entry,
-    struct synth_event *event,
-    char *str_val,
-    bool is_dynamic,
-    unsigned int data_size,
-    unsigned int *n_u64)
-    {
-    let mut len: c_uint = 0;
-    char *str_field;
-    int ret;
+pub static mut trace_event_functions: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn trace_string(entry: *mut synth_trace_event, event: *mut synth_event, str_val: *mut c_char, is_dynamic: bool, data_size: c_uint, n_u64: *mut c_uint) -> c_uint {
+pub static mut len: c_uint = 0;
+pub static mut str_field: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     if (is_dynamic) {
     union trace_synth_field *data = &entry.fields[*n_u64];
     len = fetch_store_strlen((unsigned long)str_val);
@@ -490,38 +728,38 @@ pub unsafe extern "C" fn if(_arg: synth_field_is_stack(type)) -> else {
     ret = fetch_store_string((unsigned long)str_val, &entry.fields[*n_u64], entry);
     (*n_u64)++;
     } else {
-    str_field = (char *)&entry.fields[*n_u64].as_u64;
+    str_field = &entry.fields[*n_u64].as_u64;
 
-    if ((unsigned long)str_val < TASK_SIZE)
-    ret = strncpy_from_user_nofault(str_field, (const void __user *)str_val, STR_VAR_LEN_MAX);
-    else
+    if ((unsigned long)str_val < TASK_SIZE) {
+    ret = strncpy_from_user_nofault(str_field, str_val, STR_VAR_LEN_MAX);
+    }
+    else {
 
     ret = strncpy_from_kernel_nofault(str_field, str_val, STR_VAR_LEN_MAX);
-    if (ret < 0)
+    }
+    if (ret < 0) {
     strcpy(str_field, FAULT_STRING);
-    (*n_u64) += STR_VAR_LEN_MAX / sizeof(u64);
+    }
+    (*n_u64) += STR_VAR_LEN_MAX / sizeof!(u64);
     }
     return len;
     }
-    static unsigned int trace_stack(struct synth_trace_event *entry,
-    struct synth_event *event,
-    long *stack,
-    unsigned int data_size,
-    unsigned int *n_u64)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn trace_stack(entry: *mut synth_trace_event, event: *mut synth_event, stack: *mut c_long, data_size: c_uint, n_u64: *mut c_uint) -> c_uint {
     union trace_synth_field *data = &entry.fields[*n_u64];
-    unsigned int len;
-    u32 data_offset;
-    void *data_loc;
+    let mut len = 0;
+    let mut data_offset = 0;
+pub static mut data_loc: *mut c_void = core::ptr::null_mut();
     data_offset = struct_size(entry, fields, event.n_u64);
     data_offset += data_size;
-    for (len = 0; len < HIST_STACKTRACE_DEPTH; len++) {
-    if (!stack[len])
+    while (len < HIST_STACKTRACE_DEPTH) {
+    if (!stack[len]) {
     break;
     }
-    len *= sizeof(long);
+    }
+    len *= sizeof!(long);
 // Find the dynamic section to copy the stack into.
-    data_loc = (void *)entry + data_offset;
+    data_loc = entry + data_offset;
     memcpy(data_loc, stack, len);
 // Fill in the field that holds the offset/len combo
     data.as_dynamic.offset = data_offset;
@@ -529,23 +767,23 @@ pub unsafe extern "C" fn if(_arg: synth_field_is_stack(type)) -> else {
     (*n_u64)++;
     return len;
     }
-    static __always_inline int get_field_size(struct synth_event *event,
+    static __always_inline int get_field_size(synth_event *event,
     u64 *var_ref_vals,
     unsigned int *var_ref_idx)
     {
-    int fields_size;
-    fields_size = event.n_u64 * sizeof(u64);
-    for (int i = 0; i < event.n_dynamic_fields; i++) {
-    let mut field_pos: c_uint = event.dynamic_fields[i].field_pos;
-    char *str_val;
-    int val_idx;
-    int len;
+    let mut fields_size = 0;
+    fields_size = event.n_u64 * sizeof!(u64);
+    while (i < event.n_dynamic_fields) {
+pub static mut field_pos: c_uint = 0;
+pub static mut str_val: *mut c_void = core::ptr::null_mut();
+    let mut val_idx = 0;
+    let mut len = 0;
     val_idx = var_ref_idx[field_pos];
-    str_val = (char *)(long)var_ref_vals[val_idx];
+    str_val = (long)var_ref_vals[val_idx];
     if (event.dynamic_fields[i].is_stack) {
 // reserve one extra element for size
-    len = *((unsigned long *)str_val) + 1;
-    len *= sizeof(unsigned long);
+    len = *(str_val) + 1;
+    len *= sizeof!(unsigned long);
     } else {
     len = fetch_store_strlen((unsigned long)str_val);
     }
@@ -553,62 +791,65 @@ pub unsafe extern "C" fn if(_arg: synth_field_is_stack(type)) -> else {
     }
     return fields_size;
     }
-    static __always_inline void write_synth_entry(struct synth_event *event,
-    struct synth_trace_event *entry,
+    static __always_inline void write_synth_entry(synth_event *event, synth_trace_event *entry,
     u64 *var_ref_vals,
     unsigned int *var_ref_idx)
     {
-    let mut data_size: c_int = 0;
-    int i, n_u64;
-    int val_idx;
-    int len;
-    for (i = 0, n_u64 = 0; i < event.n_fields; i++) {
+pub static mut data_size: c_int = 0;
+    let mut i = 0;
+    let mut n_u64 = 0;
+    let mut val_idx = 0;
+    let mut len = 0;
+    while (i < event.n_fields) {
     val_idx = var_ref_idx[i];
     if (event.fields[i].is_string) {
-    char *str_val = (char *)(long)var_ref_vals[val_idx];
+    let mut str_val = (long)var_ref_vals[val_idx];
     len = trace_string(entry, event, str_val,
     event.fields[i].is_dynamic,
     data_size, &n_u64);
     data_size += len; /* only dynamic string increments */
     } else if (event.fields[i].is_stack) {
-    long *stack = (long *)(long)var_ref_vals[val_idx];
+    let mut stack = (long)var_ref_vals[val_idx];
     len = trace_stack(entry, event, stack,
     data_size, &n_u64);
     data_size += len;
     } else {
-    struct synth_field *field = event.fields[i];
-    let mut val: u64 = var_ref_vals[val_idx];
-    switch (field.size) {
-    case 1:
+    let mut field = event.fields[i];
+pub static mut val: u64 = 0;
+    match (field.size) {
+    1 => {
     entry.fields[n_u64].as_u8 = (u8)val;
-    break;
-    case 2:
+    // break;
+    }
+    2 => {
     entry.fields[n_u64].as_u16 = (u16)val;
-    break;
-    case 4:
+    // break;
+    }
+    4 => {
     entry.fields[n_u64].as_u32 = (u32)val;
-    break;
-    default:
+    // break;
+    }
+    _ => {
     entry.fields[n_u64].as_u64 = val;
-    break;
-    }
-    n_u64++;
+    // break;
     }
     }
+    n_u64 += 1;
     }
-    static void trace_event_raw_event_synth(void *__data,
-    u64 *var_ref_vals,
-    unsigned int *var_ref_idx)
-    {
-    struct trace_event_file *trace_file = __data;
-    struct synth_trace_event *entry;
-    struct trace_event_buffer fbuffer;
-    struct trace_buffer *buffer;
-    struct synth_event *event;
-    int fields_size;
+    }
+    }
+#[no_mangle]
+pub unsafe extern "C" fn trace_event_raw_event_synth(__data: *mut c_void, var_ref_vals: *mut u64, var_ref_idx: *mut c_uint) {
+    let mut trace_file = __data;
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut fbuffer: usize = 0;
+pub static mut buffer: *mut c_void = core::ptr::null_mut();
+pub static mut event: *mut c_void = core::ptr::null_mut();
+    let mut fields_size = 0;
     event = trace_file.event_call.data;
-    if (trace_trigger_soft_disabled(trace_file))
+    if (trace_trigger_soft_disabled(trace_file)) {
     return;
+    }
     fields_size = get_field_size(event, var_ref_vals, var_ref_idx);
 //
 // Avoid ring buffer recursion detection, as this event
@@ -617,34 +858,35 @@ pub unsafe extern "C" fn if(_arg: synth_field_is_stack(type)) -> else {
     buffer = trace_file.tr.array_buffer.buffer;
     guard(ring_buffer_nest)(buffer);
     entry = trace_event_buffer_reserve(&fbuffer, trace_file,
-    sizeof(*entry) + fields_size);
-    if (!entry)
+    sizeof!(*entry) + fields_size);
+    if (!entry) {
     return;
+    }
     write_synth_entry(event, entry, var_ref_vals, var_ref_idx);
     trace_event_buffer_commit(&fbuffer);
     }
 
-    static void perf_event_raw_event_synth(void *__data,
-    u64 *var_ref_vals,
-    unsigned int *var_ref_idx)
-    {
-    struct trace_event_call *call = __data;
-    struct synth_trace_event *entry;
-    struct hlist_head *perf_head;
-    struct synth_event *event;
-    struct pt_regs *regs;
-    int fields_size;
-    size_t size;
-    int context;
+#[no_mangle]
+pub unsafe extern "C" fn perf_event_raw_event_synth(__data: *mut c_void, var_ref_vals: *mut u64, var_ref_idx: *mut c_uint) {
+    let mut call = __data;
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut perf_head: *mut c_void = core::ptr::null_mut();
+pub static mut event: *mut c_void = core::ptr::null_mut();
+pub static mut regs: *mut c_void = core::ptr::null_mut();
+    let mut fields_size = 0;
+    let mut size = 0;
+    let mut context = 0;
     event = call.data;
     perf_head = this_cpu_ptr(call.perf_events);
-    if (!perf_head || hlist_empty(perf_head))
+    if (!perf_head || hlist_empty(perf_head)) {
     return;
+    }
     fields_size = get_field_size(event, var_ref_vals, var_ref_idx);
-    size = ALIGN(sizeof(*entry) + fields_size, 8);
+    size = ALIGN(sizeof!(*entry) + fields_size, 8);
     entry = perf_trace_buf_alloc(size, &regs, &context);
-    if (unlikely(!entry))
+    if (unlikely(!entry)) {
     return;
+    }
     write_synth_entry(event, entry, var_ref_vals, var_ref_idx);
     perf_fetch_caller_regs(regs);
     perf_trace_buf_submit(entry, size, context,
@@ -654,42 +896,41 @@ pub unsafe extern "C" fn if(_arg: synth_field_is_stack(type)) -> else {
 
 #[no_mangle]
 unsafe extern "C" fn free_synth_event_print_fmt(call: *mut trace_event_call) {
-    static void free_synth_event_print_fmt(struct trace_event_call *call)
-    {
     if (call) {
     kfree(call.print_fmt);
     call.print_fmt = core::ptr::null_mut();
     }
     }
-    static int __set_synth_event_print_fmt(struct synth_event *event,
-    char *buf, int len)
-    {
-    const char *fmt;
-    let mut pos: c_int = 0;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn __set_synth_event_print_fmt(event: *mut synth_event, buf: *mut c_char, len: c_int) -> c_int {
+pub static mut fmt: *mut c_void = core::ptr::null_mut();
+pub static mut pos: c_int = 0;
+    let mut i = 0;
 // When len=0, we just calculate the needed length
 
     pos += snprintf(buf + pos, LEN_OR_ZERO, "\"");
-    for (i = 0; i < event.n_fields; i++) {
+    while (i < event.n_fields) {
     fmt = synth_field_fmt(event.fields[i].type);
     pos += snprintf(buf + pos, LEN_OR_ZERO, "%s=%s%s",
     event.fields[i].name, fmt,
     i == event.n_fields - 1 ? "" : " ");
     }
     pos += snprintf(buf + pos, LEN_OR_ZERO, "\"");
-    for (i = 0; i < event.n_fields; i++) {
+    while (i < event.n_fields) {
     if (event.fields[i].is_string &&
-    event.fields[i].is_dynamic)
+    event.fields[i].is_dynamic) {
     pos += snprintf(buf + pos, LEN_OR_ZERO,
     ", __get_str(%s)", event.fields[i].name);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: event->fields[i]->is_stack) -> else {
-    else if (event.fields[i].is_stack)
+    }
+
+    else if (event.fields[i].is_stack) {
     pos += snprintf(buf + pos, LEN_OR_ZERO,
     ", __get_stacktrace(%s)", event.fields[i].name);
-    else
+    }
+    else {
     pos += snprintf(buf + pos, LEN_OR_ZERO,
     ", REC.%s", event.fields[i].name);
+    }
     }
 
 // return the length of print_fmt
@@ -697,16 +938,15 @@ pub unsafe extern "C" fn if(_arg: event->fields[i]->is_stack) -> else {
     }
 #[no_mangle]
 unsafe extern "C" fn set_synth_event_print_fmt(call: *mut trace_event_call) -> c_int {
-    static int set_synth_event_print_fmt(struct trace_event_call *call)
-    {
-    struct synth_event *event = call.data;
-    char *print_fmt;
-    int len;
+    let mut event = call.data;
+pub static mut print_fmt: *mut c_void = core::ptr::null_mut();
+    let mut len = 0;
 // First: called with 0 length to calculate the needed length
     len = __set_synth_event_print_fmt(event, core::ptr::null_mut(), 0);
     print_fmt = kmalloc(len + 1, GFP_KERNEL);
-    if (!print_fmt)
+    if (!print_fmt) {
     return -ENOMEM;
+    }
 // Second: actually write the @print_fmt
     __set_synth_event_print_fmt(event, print_fmt, len + 1);
     call.print_fmt = print_fmt;
@@ -714,15 +954,12 @@ unsafe extern "C" fn set_synth_event_print_fmt(call: *mut trace_event_call) -> c
     }
 #[no_mangle]
 unsafe extern "C" fn free_synth_field(field: *mut synth_field) {
-    static void free_synth_field(struct synth_field *field)
-    {
     kfree(field.type);
     kfree(field.name);
     kfree(field);
     }
-    static int check_field_version(const char *prefix, const char *field_type,
-    const char *field_name)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn check_field_version(prefix: *mut c_char, field_type: *mut c_char, field_name: *mut c_char) -> c_int {
 //
 // For backward compatibility, the old synthetic event command
 // format did not require semicolons, and in order to not
@@ -736,14 +973,13 @@ unsafe extern "C" fn free_synth_field(field: *mut synth_field) {
 //
     return 1;
     }
-    static struct synth_field *parse_synth_field(int argc, char **argv,
-    int *consumed, int *field_version)
-    {
-    const char *prefix = core::ptr::null_mut(), *field_type = argv[0], *field_name, *array;
-    struct synth_field *field;
+#[no_mangle]
+pub unsafe extern "C" fn parse_synth_field(argc: c_int, argv: *mut *mut c_char, consumed: *mut c_int, field_version: *mut c_int) -> *mut c_void {
+    let mut prefix = core::ptr::null_mut(), *field_type = argv[0], *field_name, *array;
+pub static mut field: *mut c_void = core::ptr::null_mut();
     int len, ret = -ENOMEM;
-    struct seq_buf s;
-    ssize_t size;
+pub static mut s: usize = 0;
+    let mut size = 0;
     if (!strcmp(field_type, "unsigned")) {
     if (argc < 3) {
     synth_err(SYNTH_ERR_INCOMPLETE_TYPE, errpos(field_type));
@@ -763,101 +999,114 @@ unsafe extern "C" fn free_synth_field(field: *mut synth_field) {
     }
 // field_version = check_field_version(prefix, field_type, field_name);
     field = kzalloc_obj(*field);
-    if (!field)
+    if (!field) {
     return ERR_PTR(-ENOMEM);
+    }
     len = strlen(field_name);
     array = strchr(field_name, '[');
-    if (array)
+    if (array) {
     len -= strlen(array);
+    }
     field.name = kmemdup_nul(field_name, len, GFP_KERNEL);
-    if (!field.name)
-    goto free;
+    if (!field.name) {
+// goto;
+    }
     if (!is_good_name(field.name)) {
     synth_err(SYNTH_ERR_BAD_NAME, errpos(field_name));
     ret = -EINVAL;
-    goto free;
+// goto;
     }
     len = strlen(field_type) + 1;
-    if (array)
+    if (array) {
     len += strlen(array);
-    if (prefix)
+    }
+    if (prefix) {
     len += strlen(prefix);
+    }
     field.type = kzalloc(len, GFP_KERNEL);
-    if (!field.type)
-    goto free;
+    if (!field.type) {
+// goto;
+    }
     seq_buf_init(&s, field.type, len);
-    if (prefix)
+    if (prefix) {
     seq_buf_puts(&s, prefix);
+    }
     seq_buf_puts(&s, field_type);
-    if (array)
+    if (array) {
     seq_buf_puts(&s, array);
-    if (WARN_ON_ONCE(!seq_buf_buffer_left(&s)))
-    goto free;
+    }
+    if (WARN_ON_ONCE!(!seq_buf_buffer_left(&s))) {
+// goto;
+    }
     s.buffer[s.len] = '\0';
     size = synth_field_size(field.type);
     if (size < 0) {
-    if (array)
+    if (array) {
     synth_err(SYNTH_ERR_INVALID_ARRAY_SPEC, errpos(field_name));
-    else
+    }
+    else {
     synth_err(SYNTH_ERR_INVALID_TYPE, errpos(field_type));
+    }
     ret = -EINVAL;
-    goto free;
+// goto;
     } else if (size == 0) {
     if (synth_field_is_string(field.type) ||
     synth_field_is_stack(field.type)) {
-    char *type;
-    len = sizeof("__data_loc ") + strlen(field.type) + 1;
+pub static mut type: *mut c_void = core::ptr::null_mut();
+    len = sizeof!("__data_loc ") + strlen(field.type) + 1;
     type = kzalloc(len, GFP_KERNEL);
-    if (!type)
-    goto free;
+    if (!type) {
+// goto;
+    }
     seq_buf_init(&s, type, len);
     seq_buf_puts(&s, "__data_loc ");
     seq_buf_puts(&s, field.type);
-    if (WARN_ON_ONCE(!seq_buf_buffer_left(&s))) {
+    if (WARN_ON_ONCE!(!seq_buf_buffer_left(&s))) {
     kfree(type);
-    goto free;
+// goto;
     }
     s.buffer[s.len] = '\0';
     kfree(field.type);
     field.type = type;
     field.is_dynamic = true;
-    size = sizeof(u64);
+    size = sizeof!(u64);
     } else {
     synth_err(SYNTH_ERR_INVALID_TYPE, errpos(field_type));
     ret = -EINVAL;
-    goto free;
+// goto;
     }
     }
     field.size = size;
-    if (synth_field_is_string(field.type))
+    if (synth_field_is_string(field.type)) {
     field.is_string = true;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: synth_field_is_stack(field->type)) -> else {
-    else if (synth_field_is_stack(field.type))
+    }
+
+    else if (synth_field_is_stack(field.type)) {
     field.is_stack = true;
+    }
     field.is_signed = synth_field_signed(field.type);
-    out:
+// label;
     return field;
-    free:
+// label;
     free_synth_field(field);
     field = ERR_PTR(ret);
-    goto out;
+// goto;
     }
 #[no_mangle]
 unsafe extern "C" fn free_synth_tracepoint(tp: *mut tracepoint) {
-    static void free_synth_tracepoint(struct tracepoint *tp)
-    {
-    if (!tp)
+    if (!tp) {
     return;
+    }
     kfree(tp.name);
     kfree(tp);
     }
-    static struct tracepoint *alloc_synth_tracepoint(char *name)
-    {
-    struct tracepoint *tp;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_synth_tracepoint(name: *mut c_char) -> *mut c_void {
+pub static mut tp: *mut c_void = core::ptr::null_mut();
     tp = kzalloc_obj(*tp);
-    if (!tp)
+    if (!tp) {
     return ERR_PTR(-ENOMEM);
+    }
     tp.name = kstrdup(name, GFP_KERNEL);
     if (!tp.name) {
     kfree(tp);
@@ -865,69 +1114,71 @@ unsafe extern "C" fn free_synth_tracepoint(tp: *mut tracepoint) {
     }
     return tp;
     }
-    struct synth_event *find_synth_event(const char *name)
-    {
-    struct dyn_event *pos;
-    struct synth_event *event;
+#[no_mangle]
+pub unsafe extern "C" fn find_synth_event(name: *mut c_char) -> *mut c_void {
+pub static mut pos: *mut c_void = core::ptr::null_mut();
+pub static mut event: *mut c_void = core::ptr::null_mut();
     for_each_dyn_event(pos) {
-    if (!is_synth_event(pos))
+    if (!is_synth_event(pos)) {
     continue;
+    }
     event = to_synth_event(pos);
-    if (strcmp(event.name, name) == 0)
+    if (strcmp(event.name, name) == 0) {
     return event;
+    }
     }
     return core::ptr::null_mut();
     }
-    static struct trace_event_fields synth_event_fields_array[] = {
-    { .type = TRACE_FUNCTION_TYPE,
-    .define_fields = synth_event_define_fields },
-    {}
-    };
-    static int synth_event_reg(struct trace_event_call *call,
-    enum trace_reg type, void *data)
-    {
-    struct synth_event *event = container_of(call, struct synth_event, call);
-    switch (type) {
+pub static mut trace_event_fields: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn synth_event_reg(call: *mut trace_event_call, type: trace_reg, data: *mut c_void) -> c_int {
+    let mut event = container_of!(call, synth_event, call);
+    match (type) {
 
-    case TRACE_REG_PERF_REGISTER:
+    TRACE_REG_PERF_REGISTER => {
 
-    case TRACE_REG_REGISTER:
-    if (!try_module_get(event.mod))
-    return -EBUSY;
-    break;
-    default:
-    break;
     }
-    let mut ret: c_int = trace_event_reg(call, type, data);
-    switch (type) {
+    TRACE_REG_REGISTER => {
+    if (!try_module_get(event.mod)) {
+    return -EBUSY;
+    }
+    // break;
+    }
+    _ => {
+    // break;
+    }
+    }
+pub static mut ret: c_int = 0;
+    match (type) {
 
-    case TRACE_REG_PERF_UNREGISTER:
+    TRACE_REG_PERF_UNREGISTER => {
 
-    case TRACE_REG_UNREGISTER:
-    module_put(event.mod);
-    break;
-    default:
-    break;
+    }
+    TRACE_REG_UNREGISTER => {
+    module_put!(event.mod);
+    // break;
+    }
+    _ => {
+    // break;
+    }
     }
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn register_synth_event(event: *mut synth_event) -> c_int {
-    static int register_synth_event(struct synth_event *event)
-    {
-    struct trace_event_call *call = &event.call;
-    let mut ret: c_int = 0;
+    let mut call = &event.call;
+pub static mut ret: c_int = 0;
     event.call.class = &event.class;
     event.class.system = kstrdup(SYNTH_SYSTEM, GFP_KERNEL);
     if (!event.class.system) {
     ret = -ENOMEM;
-    goto out;
+// goto;
     }
     event.tp = alloc_synth_tracepoint(event.name);
     if (IS_ERR(event.tp)) {
     ret = PTR_ERR(event.tp);
     event.tp = core::ptr::null_mut();
-    goto out;
+// goto;
     }
     INIT_LIST_HEAD(&call.class.fields);
     call.event.funcs = &synth_event_funcs;
@@ -935,7 +1186,7 @@ unsafe extern "C" fn register_synth_event(event: *mut synth_event) -> c_int {
     ret = register_trace_event(&call.event);
     if (!ret) {
     ret = -ENODEV;
-    goto out;
+// goto;
     }
     call.flags = TRACE_EVENT_FL_TRACEPOINT;
     call.class.reg = synth_event_reg;
@@ -947,38 +1198,37 @@ unsafe extern "C" fn register_synth_event(event: *mut synth_event) -> c_int {
     call.tp = event.tp;
     ret = trace_add_event_call(call);
     if (ret) {
-    pr_warn("Failed to register synthetic event: %s\n",
+    pr_warn!("Failed to register synthetic event: %s\n",
     trace_event_name(call));
-    goto err;
+// goto;
     }
     ret = set_synth_event_print_fmt(call);
 // unregister_trace_event() will be called inside
-    if (ret < 0)
+    if (ret < 0) {
     trace_remove_event_call(call);
-    out:
+    }
+// label;
     return ret;
-    err:
+// label;
     unregister_trace_event(&call.event);
-    goto out;
+// goto;
     }
 #[no_mangle]
 unsafe extern "C" fn unregister_synth_event(event: *mut synth_event) -> c_int {
-    static int unregister_synth_event(struct synth_event *event)
-    {
-    struct trace_event_call *call = &event.call;
-    int ret;
+    let mut call = &event.call;
+    let mut ret = 0;
     ret = trace_remove_event_call(call);
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn free_synth_event(event: *mut synth_event) {
-    static void free_synth_event(struct synth_event *event)
-    {
-    unsigned int i;
-    if (!event)
+    let mut i = 0;
+    if (!event) {
     return;
-    for (i = 0; i < event.n_fields; i++)
+    }
+    for (i = 0; i < event.n_fields; i++) {
     free_synth_field(event.fields[i]);
+    }
     kfree(event.fields);
     kfree(event.dynamic_fields);
     kfree(event.name);
@@ -987,62 +1237,62 @@ unsafe extern "C" fn free_synth_event(event: *mut synth_event) {
     free_synth_event_print_fmt(&event.call);
     kfree(event);
     }
-    static struct synth_event *alloc_synth_event(const char *name, int n_fields,
-    struct synth_field **fields)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn alloc_synth_event(name: *mut c_char, n_fields: c_int, fields: *mut *mut synth_field) -> *mut c_void {
     unsigned int i, j, n_dynamic_fields = 0;
-    struct synth_event *event;
+pub static mut event: *mut c_void = core::ptr::null_mut();
     event = kzalloc_obj(*event);
     if (!event) {
     event = ERR_PTR(-ENOMEM);
-    goto out;
+// goto;
     }
     event.name = kstrdup(name, GFP_KERNEL);
     if (!event.name) {
     kfree(event);
     event = ERR_PTR(-ENOMEM);
-    goto out;
+// goto;
     }
     event.fields = kzalloc_objs(*event.fields, n_fields);
     if (!event.fields) {
     free_synth_event(event);
     event = ERR_PTR(-ENOMEM);
-    goto out;
+// goto;
     }
-    for (i = 0; i < n_fields; i++)
+    for (i = 0; i < n_fields; i++) {
     if (fields[i].is_dynamic)
-    n_dynamic_fields++;
+    n_dynamic_fields += 1;
+    }
     if (n_dynamic_fields) {
     event.dynamic_fields = kzalloc_objs(*event.dynamic_fields,
     n_dynamic_fields);
     if (!event.dynamic_fields) {
     free_synth_event(event);
     event = ERR_PTR(-ENOMEM);
-    goto out;
+// goto;
     }
     }
     dyn_event_init(&event.devent, &synth_event_ops);
-    for (i = 0, j = 0; i < n_fields; i++) {
+    while (i < n_fields) {
     fields[i].field_pos = i;
     event.fields[i] = fields[i];
-    if (fields[i].is_dynamic)
+    if (fields[i].is_dynamic) {
     event.dynamic_fields[j++] = fields[i];
+    }
     }
     event.n_dynamic_fields = j;
     event.n_fields = n_fields;
-    out:
+// label;
     return event;
     }
 #[no_mangle]
 unsafe extern "C" fn synth_event_check_arg_fn(data: *mut c_void) -> c_int {
-    static int synth_event_check_arg_fn(void *data)
-    {
-    struct dynevent_arg_pair *arg_pair = data;
-    int size;
-    size = synth_field_size((char *)arg_pair.lhs);
+    let mut arg_pair = data;
+    let mut size = 0;
+    size = synth_field_size(arg_pair.lhs);
     if (size == 0) {
-    if (strstr((char *)arg_pair.lhs, "["))
+    if (strstr(arg_pair.lhs, "[")) {
     return 0;
+    }
     }
     return size ? 0 : -EINVAL;
     }
@@ -1060,23 +1310,26 @@ unsafe extern "C" fn synth_event_check_arg_fn(data: *mut c_void) -> c_int {
 //
 // Return: 0 if successful, error otherwise.
 //
-    int synth_event_add_field(struct dynevent_cmd *cmd, const char *type,
-    const char *name)
-    {
-    struct dynevent_arg_pair arg_pair;
-    int ret;
-    if (cmd.type != DYNEVENT_TYPE_SYNTH)
+#[no_mangle]
+pub unsafe extern "C" fn synth_event_add_field(cmd: *mut dynevent_cmd, type: *mut c_char, name: *mut c_char) -> c_int {
+pub static mut arg_pair: usize = 0;
+    let mut ret = 0;
+    if (cmd.type != DYNEVENT_TYPE_SYNTH) {
     return -EINVAL;
-    if (!type || !name)
+    }
+    if (!type || !name) {
     return -EINVAL;
+    }
     dynevent_arg_pair_init(&arg_pair, 0, ';');
     arg_pair.lhs = type;
     arg_pair.rhs = name;
     ret = dynevent_arg_pair_add(cmd, &arg_pair, synth_event_check_arg_fn);
-    if (ret)
+    if (ret) {
     return ret;
-    if (++cmd.n_fields > SYNTH_FIELDS_MAX)
+    }
+    if (++cmd.n_fields > SYNTH_FIELDS_MAX) {
     ret = -EINVAL;
+    }
     return ret;
     }
     EXPORT_SYMBOL_GPL(synth_event_add_field);
@@ -1098,21 +1351,23 @@ unsafe extern "C" fn synth_event_check_arg_fn(data: *mut c_void) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn synth_event_add_field_str(cmd: *mut dynevent_cmd, type_name: *const c_char) -> c_int {
-    int synth_event_add_field_str(struct dynevent_cmd *cmd, const char *type_name)
-    {
-    struct dynevent_arg arg;
-    int ret;
-    if (cmd.type != DYNEVENT_TYPE_SYNTH)
+pub static mut arg: usize = 0;
+    let mut ret = 0;
+    if (cmd.type != DYNEVENT_TYPE_SYNTH) {
     return -EINVAL;
-    if (!type_name)
+    }
+    if (!type_name) {
     return -EINVAL;
+    }
     dynevent_arg_init(&arg, ';');
     arg.str = type_name;
     ret = dynevent_arg_add(cmd, &arg, core::ptr::null_mut());
-    if (ret)
+    if (ret) {
     return ret;
-    if (++cmd.n_fields > SYNTH_FIELDS_MAX)
+    }
+    if (++cmd.n_fields > SYNTH_FIELDS_MAX) {
     ret = -EINVAL;
+    }
     return ret;
     }
     EXPORT_SYMBOL_GPL(synth_event_add_field_str);
@@ -1133,20 +1388,19 @@ pub unsafe extern "C" fn synth_event_add_field_str(cmd: *mut dynevent_cmd, type_
 //
 // Return: 0 if successful, error otherwise.
 //
-    int synth_event_add_fields(struct dynevent_cmd *cmd,
-    struct synth_field_desc *fields,
-    unsigned int n_fields)
-    {
-    unsigned int i;
-    let mut ret: c_int = 0;
-    for (i = 0; i < n_fields; i++) {
+#[no_mangle]
+pub unsafe extern "C" fn synth_event_add_fields(cmd: *mut dynevent_cmd, fields: *mut synth_field_desc, n_fields: c_uint) -> c_int {
+    let mut i = 0;
+pub static mut ret: c_int = 0;
+    while (i < n_fields) {
     if (fields[i].type == core::ptr::null_mut() || fields[i].name == core::ptr::null_mut()) {
     ret = -EINVAL;
     break;
     }
     ret = synth_event_add_field(cmd, fields[i].type, fields[i].name);
-    if (ret)
+    if (ret) {
     break;
+    }
     }
     return ret;
     }
@@ -1179,37 +1433,42 @@ pub unsafe extern "C" fn synth_event_add_field_str(cmd: *mut dynevent_cmd, type_
 //
 // Return: 0 if successful, error otherwise.
 //
-    int __synth_event_gen_cmd_start(struct dynevent_cmd *cmd, const char *name,
-    struct module *mod, ...)
-    {
-    struct dynevent_arg arg;
-    va_list args;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn __synth_event_gen_cmd_start(cmd: *mut dynevent_cmd, name: *mut c_char, mod: *mut module) -> c_int {
+pub static mut arg: usize = 0;
+    let mut args;
+    let mut ret = 0;
     cmd.event_name = name;
     cmd.private_data = mod;
-    if (cmd.type != DYNEVENT_TYPE_SYNTH)
+    if (cmd.type != DYNEVENT_TYPE_SYNTH) {
     return -EINVAL;
+    }
     dynevent_arg_init(&arg, 0);
     arg.str = name;
     ret = dynevent_arg_add(cmd, &arg, core::ptr::null_mut());
-    if (ret)
+    if (ret) {
     return ret;
+    }
     va_start(args, mod);
     for (;;) {
-    const char *type, *name;
+    let mut type = core::ptr::null_mut();
+    let mut name = core::ptr::null_mut();
     type = va_arg(args, const char *);
-    if (!type)
+    if (!type) {
     break;
+    }
     name = va_arg(args, const char *);
-    if (!name)
+    if (!name) {
     break;
+    }
     if (++cmd.n_fields > SYNTH_FIELDS_MAX) {
     ret = -EINVAL;
     break;
     }
     ret = synth_event_add_field(cmd, type, name);
-    if (ret)
+    if (ret) {
     break;
+    }
     }
     va_end(args);
     return ret;
@@ -1240,44 +1499,44 @@ pub unsafe extern "C" fn synth_event_add_field_str(cmd: *mut dynevent_cmd, type_
 //
 // Return: 0 if successful, error otherwise.
 //
-    int synth_event_gen_cmd_array_start(struct dynevent_cmd *cmd, const char *name,
-    struct module *mod,
-    struct synth_field_desc *fields,
-    unsigned int n_fields)
-    {
-    struct dynevent_arg arg;
-    unsigned int i;
-    let mut ret: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn synth_event_gen_cmd_array_start(cmd: *mut dynevent_cmd, name: *mut c_char, mod: *mut module, fields: *mut synth_field_desc, n_fields: c_uint) -> c_int {
+pub static mut arg: usize = 0;
+    let mut i = 0;
+pub static mut ret: c_int = 0;
     cmd.event_name = name;
     cmd.private_data = mod;
-    if (cmd.type != DYNEVENT_TYPE_SYNTH)
+    if (cmd.type != DYNEVENT_TYPE_SYNTH) {
     return -EINVAL;
-    if (n_fields > SYNTH_FIELDS_MAX)
+    }
+    if (n_fields > SYNTH_FIELDS_MAX) {
     return -EINVAL;
+    }
     dynevent_arg_init(&arg, 0);
     arg.str = name;
     ret = dynevent_arg_add(cmd, &arg, core::ptr::null_mut());
-    if (ret)
+    if (ret) {
     return ret;
-    for (i = 0; i < n_fields; i++) {
-    if (fields[i].type == core::ptr::null_mut() || fields[i].name == core::ptr::null_mut())
+    }
+    while (i < n_fields) {
+    if (fields[i].type == core::ptr::null_mut() || fields[i].name == core::ptr::null_mut()) {
     return -EINVAL;
+    }
     ret = synth_event_add_field(cmd, fields[i].type, fields[i].name);
-    if (ret)
+    if (ret) {
     break;
+    }
     }
     return ret;
     }
     EXPORT_SYMBOL_GPL(synth_event_gen_cmd_array_start);
 #[no_mangle]
 unsafe extern "C" fn __create_synth_event(name: *const c_char, raw_fields: *const c_char) -> c_int {
-    static int __create_synth_event(const char *name, const char *raw_fields)
-    {
     char **argv, *field_str, *tmp_fields, *saved_fields = core::ptr::null_mut();
     struct synth_field *field, *fields[SYNTH_FIELDS_MAX];
     int consumed, cmd_version = 1, n_fields_this_loop;
     int i, argc, n_fields = 0, ret = 0;
-    struct synth_event *event = core::ptr::null_mut();
+    let mut event = core::ptr::null_mut();
 //
 // Argument syntax:
 // - Add synthetic event: <event_name> field[;field] ...
@@ -1297,18 +1556,18 @@ unsafe extern "C" fn __create_synth_event(name: *const c_char, raw_fields: *cons
     if (event) {
     synth_err(SYNTH_ERR_EVENT_EXISTS, errpos(name));
     ret = -EEXIST;
-    goto err;
+// goto;
     }
     tmp_fields = saved_fields = kstrdup(raw_fields, GFP_KERNEL);
     if (!tmp_fields) {
     ret = -ENOMEM;
-    goto err;
+// goto;
     }
     while ((field_str = strsep(&tmp_fields, ";")) != core::ptr::null_mut()) {
     argv = argv_split(GFP_KERNEL, field_str, &argc);
     if (!argv) {
     ret = -ENOMEM;
-    goto err;
+// goto;
     }
     if (!argc) {
     argv_free(argv);
@@ -1317,20 +1576,21 @@ unsafe extern "C" fn __create_synth_event(name: *const c_char, raw_fields: *cons
     n_fields_this_loop = 0;
     consumed = 0;
     while (argc > consumed) {
-    int field_version;
+    let mut field_version = 0;
     field = parse_synth_field(argc - consumed,
     argv + consumed, &consumed,
     &field_version);
     if (IS_ERR(field)) {
     ret = PTR_ERR(field);
-    goto err_free_arg;
+// goto;
     }
 //
 // Track the highest version of any field we
 // found in the command.
 //
-    if (field_version > cmd_version)
+    if (field_version > cmd_version) {
     cmd_version = field_version;
+    }
 //
 // Now sort out what is and isn't valid for
 // each supported version.
@@ -1344,51 +1604,54 @@ unsafe extern "C" fn __create_synth_event(name: *const c_char, raw_fields: *cons
     if (cmd_version > 1 && n_fields_this_loop >= 1) {
     synth_err(SYNTH_ERR_INVALID_CMD, errpos(field_str));
     ret = -EINVAL;
-    goto err_free_field;
+// goto;
     }
     if (n_fields == SYNTH_FIELDS_MAX) {
     synth_err(SYNTH_ERR_TOO_MANY_FIELDS, 0);
     ret = -EINVAL;
-    goto err_free_field;
+// goto;
     }
     fields[n_fields++] = field;
-    n_fields_this_loop++;
+    n_fields_this_loop += 1;
     }
     argv_free(argv);
     if (consumed < argc) {
     synth_err(SYNTH_ERR_INVALID_CMD, 0);
     ret = -EINVAL;
-    goto err;
+// goto;
     }
     }
     if (n_fields == 0) {
     synth_err(SYNTH_ERR_INVALID_CMD, 0);
     ret = -EINVAL;
-    goto err;
+// goto;
     }
     event = alloc_synth_event(name, n_fields, fields);
     if (IS_ERR(event)) {
     ret = PTR_ERR(event);
     event = core::ptr::null_mut();
-    goto err;
+// goto;
     }
     ret = register_synth_event(event);
-    if (!ret)
+    if (!ret) {
     dyn_event_add(&event.devent, &event.call);
-    else
+    }
+    else {
     free_synth_event(event);
-    out:
+    }
+// label;
     mutex_unlock(&event_mutex);
     kfree(saved_fields);
     return ret;
-    err_free_field:
+// label;
     free_synth_field(field);
-    err_free_arg:
+// label;
     argv_free(argv);
-    err:
-    for (i = 0; i < n_fields; i++)
+// label;
+    for (i = 0; i < n_fields; i++) {
     free_synth_field(fields[i]);
-    goto out;
+    }
+// goto;
     }
 //
 // synth_event_create - Create a new synthetic event
@@ -1414,35 +1677,36 @@ unsafe extern "C" fn __create_synth_event(name: *const c_char, raw_fields: *cons
 //
 // Return: 0 if successful, error otherwise.
 //
-    int synth_event_create(const char *name, struct synth_field_desc *fields,
-    unsigned int n_fields, struct module *mod)
-    {
-    struct dynevent_cmd cmd;
-    char *buf;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn synth_event_create(name: *mut c_char, fields: *mut synth_field_desc, n_fields: c_uint, mod: *mut module) -> c_int {
+pub static mut cmd: usize = 0;
+pub static mut buf: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     buf = kzalloc(MAX_DYNEVENT_CMD_LEN, GFP_KERNEL);
-    if (!buf)
+    if (!buf) {
     return -ENOMEM;
+    }
     synth_event_cmd_init(&cmd, buf, MAX_DYNEVENT_CMD_LEN);
     ret = synth_event_gen_cmd_array_start(&cmd, name, mod,
     fields, n_fields);
-    if (ret)
-    goto out;
+    if (ret) {
+// goto;
+    }
     ret = synth_event_gen_cmd_end(&cmd);
-    out:
+// label;
     kfree(buf);
     return ret;
     }
     EXPORT_SYMBOL_GPL(synth_event_create);
 #[no_mangle]
 unsafe extern "C" fn destroy_synth_event(se: *mut synth_event) -> c_int {
-    static int destroy_synth_event(struct synth_event *se)
-    {
-    int ret;
-    if (se.ref)
+    let mut ret = 0;
+    if (se.ref) {
     return -EBUSY;
-    if (trace_event_dyn_busy(&se.call))
+    }
+    if (trace_event_dyn_busy(&se.call)) {
     return -EBUSY;
+    }
     ret = unregister_synth_event(se);
     if (!ret) {
     dyn_event_remove(&se.devent);
@@ -1460,11 +1724,9 @@ unsafe extern "C" fn destroy_synth_event(se: *mut synth_event) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn synth_event_delete(event_name: *const c_char) -> c_int {
-    int synth_event_delete(const char *event_name)
-    {
-    struct synth_event *se = core::ptr::null_mut();
-    struct module *mod = core::ptr::null_mut();
-    let mut ret: c_int = -ENOENT;
+    let mut se = core::ptr::null_mut();
+    let mut mod = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     mutex_lock(&event_mutex);
     se = find_synth_event(event_name);
     if (se) {
@@ -1490,41 +1752,41 @@ pub unsafe extern "C" fn synth_event_delete(event_name: *const c_char) -> c_int 
     EXPORT_SYMBOL_GPL(synth_event_delete);
 #[no_mangle]
 unsafe extern "C" fn check_command(raw_command: *const c_char) -> c_int {
-    static int check_command(const char *raw_command)
-    {
-    char **argv = core::ptr::null_mut(), *cmd, *saved_cmd, *name_and_field;
+    let mut argv = core::ptr::null_mut(), *cmd, *saved_cmd, *name_and_field;
     int argc, ret = 0;
     cmd = saved_cmd = kstrdup(raw_command, GFP_KERNEL);
-    if (!cmd)
+    if (!cmd) {
     return -ENOMEM;
+    }
     name_and_field = strsep(&cmd, ";");
     if (!name_and_field) {
     ret = -EINVAL;
-    goto free;
+// goto;
     }
-    if (name_and_field[0] == '!')
-    goto free;
+    if (name_and_field[0] == '!') {
+// goto;
+    }
     argv = argv_split(GFP_KERNEL, name_and_field, &argc);
     if (!argv) {
     ret = -ENOMEM;
-    goto free;
+// goto;
     }
     argv_free(argv);
-    if (argc < 3)
+    if (argc < 3) {
     ret = -EINVAL;
-    free:
+    }
+// label;
     kfree(saved_cmd);
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn create_or_delete_synth_event(raw_command: *const c_char) -> c_int {
-    static int create_or_delete_synth_event(const char *raw_command)
-    {
-    char *name = core::ptr::null_mut(), *fields, *p;
-    let mut ret: c_int = 0;
+    let mut name = core::ptr::null_mut(), *fields, *p;
+pub static mut ret: c_int = 0;
     raw_command = skip_spaces(raw_command);
-    if (raw_command[0] == '\0')
+    if (raw_command[0] == '\0') {
     return ret;
+    }
     last_cmd_set(raw_command);
     ret = check_command(raw_command);
     if (ret) {
@@ -1535,33 +1797,34 @@ unsafe extern "C" fn create_or_delete_synth_event(raw_command: *const c_char) ->
     if (!p && raw_command[0] != '!') {
     synth_err(SYNTH_ERR_INVALID_CMD, 0);
     ret = -EINVAL;
-    goto free;
+// goto;
     }
     name = kmemdup_nul(raw_command, p ? p - raw_command : strlen(raw_command), GFP_KERNEL);
-    if (!name)
+    if (!name) {
     return -ENOMEM;
+    }
     if (name[0] == '!') {
     ret = synth_event_delete(name + 1);
-    goto free;
+// goto;
     }
     fields = skip_spaces(p);
     ret = __create_synth_event(name, fields);
-    free:
+// label;
     kfree(name);
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn synth_event_run_command(cmd: *mut dynevent_cmd) -> c_int {
-    static int synth_event_run_command(struct dynevent_cmd *cmd)
-    {
-    struct synth_event *se;
-    int ret;
+pub static mut se: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     ret = create_or_delete_synth_event(cmd.seq.buffer);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     se = find_synth_event(cmd.event_name);
-    if (WARN_ON(!se))
+    if (WARN_ON!(!se)) {
     return -ENOENT;
+    }
     se.mod = cmd.private_data;
     return ret;
     }
@@ -1576,18 +1839,14 @@ unsafe extern "C" fn synth_event_run_command(cmd: *mut dynevent_cmd) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn synth_event_cmd_init(cmd: *mut dynevent_cmd, buf: *mut c_char, maxlen: c_int) {
-    void synth_event_cmd_init(struct dynevent_cmd *cmd, char *buf, int maxlen)
-    {
     dynevent_cmd_init(cmd, buf, maxlen, DYNEVENT_TYPE_SYNTH,
     synth_event_run_command);
     }
     EXPORT_SYMBOL_GPL(synth_event_cmd_init);
-    static inline int
-    __synth_event_trace_init(struct trace_event_file *file,
-    struct synth_event_trace_state *trace_state)
-    {
-    let mut ret: c_int = 0;
-    memset(trace_state, '\0', sizeof(*trace_state));
+#[no_mangle]
+pub unsafe extern "C" fn __synth_event_trace_init(file: *mut trace_event_file, trace_state: *mut synth_event_trace_state) -> c_int {
+pub static mut ret: c_int = 0;
+    memset(trace_state, '\0', sizeof!(*trace_state));
 //
 // Normal event tracing doesn't get called at all unless the
 // ENABLED bit is set (which attaches the probe thus allowing
@@ -1601,20 +1860,17 @@ pub unsafe extern "C" fn synth_event_cmd_init(cmd: *mut dynevent_cmd, buf: *mut 
     trace_trigger_soft_disabled(file)) {
     trace_state.disabled = true;
     ret = -ENOENT;
-    goto out;
+// goto;
     }
     trace_state.event = file.event_call.data;
-    out:
+// label;
     return ret;
     }
-    static inline int
-    __synth_event_trace_start(struct trace_event_file *file,
-    struct synth_event_trace_state *trace_state,
-    int dynamic_fields_size)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __synth_event_trace_start(file: *mut trace_event_file, trace_state: *mut synth_event_trace_state, dynamic_fields_size: c_int) -> c_int {
     int entry_size, fields_size = 0;
-    let mut ret: c_int = 0;
-    fields_size = trace_state.event.n_u64 * sizeof(u64);
+pub static mut ret: c_int = 0;
+    fields_size = trace_state.event.n_u64 * sizeof!(u64);
     fields_size += dynamic_fields_size;
 //
 // Avoid ring buffer recursion detection, as this event
@@ -1622,7 +1878,7 @@ pub unsafe extern "C" fn synth_event_cmd_init(cmd: *mut dynevent_cmd, buf: *mut 
 //
     trace_state.buffer = file.tr.array_buffer.buffer;
     ring_buffer_nest_start(trace_state.buffer);
-    entry_size = sizeof(*trace_state.entry) + fields_size;
+    entry_size = sizeof!(*trace_state.entry) + fields_size;
     trace_state.entry = trace_event_buffer_reserve(&trace_state.fbuffer,
     file,
     entry_size);
@@ -1632,9 +1888,8 @@ pub unsafe extern "C" fn synth_event_cmd_init(cmd: *mut dynevent_cmd, buf: *mut 
     }
     return ret;
     }
-    static inline void
-    __synth_event_trace_end(struct synth_event_trace_state *trace_state)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __synth_event_trace_end(trace_state: *mut synth_event_trace_state) {
     trace_event_buffer_commit(&trace_state.fbuffer);
     ring_buffer_nest_end(trace_state.buffer);
     }
@@ -1659,69 +1914,73 @@ pub unsafe extern "C" fn synth_event_cmd_init(cmd: *mut dynevent_cmd, buf: *mut 
 //
 #[no_mangle]
 pub unsafe extern "C" fn synth_event_trace(file: *mut trace_event_file, n_vals: c_uint, ...) -> c_int {
-    int synth_event_trace(struct trace_event_file *file, unsigned int n_vals, ...)
-    {
     unsigned int i, n_u64, len, data_size = 0;
-    struct synth_event_trace_state state;
-    va_list args;
-    int ret;
+pub static mut state: usize = 0;
+    let mut args;
+    let mut ret = 0;
     ret = __synth_event_trace_init(file, &state);
     if (ret) {
-    if (ret == -ENOENT)
+    if (ret == -ENOENT) {
     ret = 0; /* just disabled, not really an error */
+    }
     return ret;
     }
     if (state.event.n_dynamic_fields) {
     va_start(args, n_vals);
-    for (i = 0; i < state.event.n_fields; i++) {
-    let mut val: u64 = va_arg(args, u64);
+    while (i < state.event.n_fields) {
+pub static mut val: u64 = 0;
     if (state.event.fields[i].is_string &&
     state.event.fields[i].is_dynamic) {
-    char *str_val = (char *)(long)val;
+    let mut str_val = (long)val;
     data_size += strlen(str_val) + 1;
     }
     }
     va_end(args);
     }
     ret = __synth_event_trace_start(file, &state, data_size);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     if (n_vals != state.event.n_fields) {
     ret = -EINVAL;
-    goto out;
+// goto;
     }
     data_size = 0;
     va_start(args, n_vals);
-    for (i = 0, n_u64 = 0; i < state.event.n_fields; i++) {
-    u64 val;
+    while (i < state.event.n_fields) {
+    let mut val = 0;
     val = va_arg(args, u64);
     if (state.event.fields[i].is_string) {
-    char *str_val = (char *)(long)val;
+    let mut str_val = (long)val;
     len = trace_string(state.entry, state.event, str_val,
     state.event.fields[i].is_dynamic,
     data_size, &n_u64);
     data_size += len; /* only dynamic string increments */
     } else {
-    struct synth_field *field = state.event.fields[i];
-    switch (field.size) {
-    case 1:
+    let mut field = state.event.fields[i];
+    match (field.size) {
+    1 => {
     state.entry.fields[n_u64].as_u8 = (u8)val;
-    break;
-    case 2:
-    state.entry.fields[n_u64].as_u16 = (u16)val;
-    break;
-    case 4:
-    state.entry.fields[n_u64].as_u32 = (u32)val;
-    break;
-    default:
-    state.entry.fields[n_u64].as_u64 = val;
-    break;
+    // break;
     }
-    n_u64++;
+    2 => {
+    state.entry.fields[n_u64].as_u16 = (u16)val;
+    // break;
+    }
+    4 => {
+    state.entry.fields[n_u64].as_u32 = (u32)val;
+    // break;
+    }
+    _ => {
+    state.entry.fields[n_u64].as_u64 = val;
+    // break;
+    }
+    }
+    n_u64 += 1;
     }
     }
     va_end(args);
-    out:
+// label;
     __synth_event_trace_end(&state);
     return ret;
     }
@@ -1744,63 +2003,68 @@ pub unsafe extern "C" fn synth_event_trace(file: *mut trace_event_file, n_vals: 
 //
 // Return: 0 on success, err otherwise.
 //
-    int synth_event_trace_array(struct trace_event_file *file, u64 *vals,
-    unsigned int n_vals)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn synth_event_trace_array(file: *mut trace_event_file, vals: *mut u64, n_vals: c_uint) -> c_int {
     unsigned int i, n_u64, field_pos, len, data_size = 0;
-    struct synth_event_trace_state state;
-    char *str_val;
-    int ret;
+pub static mut state: usize = 0;
+pub static mut str_val: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     ret = __synth_event_trace_init(file, &state);
     if (ret) {
-    if (ret == -ENOENT)
+    if (ret == -ENOENT) {
     ret = 0; /* just disabled, not really an error */
+    }
     return ret;
     }
     if (state.event.n_dynamic_fields) {
-    for (i = 0; i < state.event.n_dynamic_fields; i++) {
+    while (i < state.event.n_dynamic_fields) {
     field_pos = state.event.dynamic_fields[i].field_pos;
-    str_val = (char *)(long)vals[field_pos];
+    str_val = (long)vals[field_pos];
     len = strlen(str_val) + 1;
     data_size += len;
     }
     }
     ret = __synth_event_trace_start(file, &state, data_size);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     if (n_vals != state.event.n_fields) {
     ret = -EINVAL;
-    goto out;
+// goto;
     }
     data_size = 0;
-    for (i = 0, n_u64 = 0; i < state.event.n_fields; i++) {
+    while (i < state.event.n_fields) {
     if (state.event.fields[i].is_string) {
-    char *str_val = (char *)(long)vals[i];
+    let mut str_val = (long)vals[i];
     len = trace_string(state.entry, state.event, str_val,
     state.event.fields[i].is_dynamic,
     data_size, &n_u64);
     data_size += len; /* only dynamic string increments */
     } else {
-    struct synth_field *field = state.event.fields[i];
-    let mut val: u64 = vals[i];
-    switch (field.size) {
-    case 1:
+    let mut field = state.event.fields[i];
+pub static mut val: u64 = 0;
+    match (field.size) {
+    1 => {
     state.entry.fields[n_u64].as_u8 = (u8)val;
-    break;
-    case 2:
+    // break;
+    }
+    2 => {
     state.entry.fields[n_u64].as_u16 = (u16)val;
-    break;
-    case 4:
+    // break;
+    }
+    4 => {
     state.entry.fields[n_u64].as_u32 = (u32)val;
-    break;
-    default:
+    // break;
+    }
+    _ => {
     state.entry.fields[n_u64].as_u64 = val;
-    break;
-    }
-    n_u64++;
+    // break;
     }
     }
-    out:
+    n_u64 += 1;
+    }
+    }
+// label;
     __synth_event_trace_end(&state);
     return ret;
     }
@@ -1833,100 +2097,108 @@ pub unsafe extern "C" fn synth_event_trace(file: *mut trace_event_file, n_vals: 
 //
 // Return: 0 on success, err otherwise.
 //
-    int synth_event_trace_start(struct trace_event_file *file,
-    struct synth_event_trace_state *trace_state)
-    {
-    int ret;
-    if (!trace_state)
+#[no_mangle]
+pub unsafe extern "C" fn synth_event_trace_start(file: *mut trace_event_file, trace_state: *mut synth_event_trace_state) -> c_int {
+    let mut ret = 0;
+    if (!trace_state) {
     return -EINVAL;
+    }
     ret = __synth_event_trace_init(file, trace_state);
     if (ret) {
-    if (ret == -ENOENT)
+    if (ret == -ENOENT) {
     ret = 0; /* just disabled, not really an error */
+    }
     return ret;
     }
-    if (trace_state.event.n_dynamic_fields)
+    if (trace_state.event.n_dynamic_fields) {
     return -ENOTSUPP;
+    }
     ret = __synth_event_trace_start(file, trace_state, 0);
     return ret;
     }
     EXPORT_SYMBOL_GPL(synth_event_trace_start);
-    static int __synth_event_add_val(const char *field_name, u64 val,
-    struct synth_event_trace_state *trace_state)
-    {
-    struct synth_field *field = core::ptr::null_mut();
-    struct synth_trace_event *entry;
-    struct synth_event *event;
+#[no_mangle]
+pub unsafe extern "C" fn __synth_event_add_val(field_name: *mut c_char, val: u64, trace_state: *mut synth_event_trace_state) -> c_int {
+    let mut field = core::ptr::null_mut();
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut event: *mut c_void = core::ptr::null_mut();
     int i, ret = 0;
     if (!trace_state) {
     ret = -EINVAL;
-    goto out;
+// goto;
     }
 // can't mix add_next_synth_val() with add_synth_val()
     if (field_name) {
     if (trace_state.add_next) {
     ret = -EINVAL;
-    goto out;
+// goto;
     }
     trace_state.add_name = true;
     } else {
     if (trace_state.add_name) {
     ret = -EINVAL;
-    goto out;
+// goto;
     }
     trace_state.add_next = true;
     }
-    if (trace_state.disabled)
-    goto out;
+    if (trace_state.disabled) {
+// goto;
+    }
     event = trace_state.event;
     if (trace_state.add_name) {
-    for (i = 0; i < event.n_fields; i++) {
+    while (i < event.n_fields) {
     field = event.fields[i];
-    if (strcmp(field.name, field_name) == 0)
+    if (strcmp(field.name, field_name) == 0) {
     break;
+    }
     }
     if (!field) {
     ret = -EINVAL;
-    goto out;
+// goto;
     }
     } else {
     if (trace_state.cur_field >= event.n_fields) {
     ret = -EINVAL;
-    goto out;
+// goto;
     }
     field = event.fields[trace_state.cur_field++];
     }
     entry = trace_state.entry;
     if (field.is_string) {
-    char *str_val = (char *)(long)val;
-    char *str_field;
-    if (field.is_dynamic) { /* add_val can't do dynamic strings */
+    let mut str_val = (long)val;
+pub static mut str_field: *mut c_void = core::ptr::null_mut();
+    if (field.is_dynamic) { /* add_val can't do dynamic strings */ {
     ret = -EINVAL;
-    goto out;
+    }
+// goto;
     }
     if (!str_val) {
     ret = -EINVAL;
-    goto out;
+// goto;
     }
-    str_field = (char *)&entry.fields[field.offset];
+    str_field = &entry.fields[field.offset];
     strscpy(str_field, str_val, STR_VAR_LEN_MAX);
     } else {
-    switch (field.size) {
-    case 1:
+    match (field.size) {
+    1 => {
     trace_state.entry.fields[field.offset].as_u8 = (u8)val;
-    break;
-    case 2:
+    // break;
+    }
+    2 => {
     trace_state.entry.fields[field.offset].as_u16 = (u16)val;
-    break;
-    case 4:
+    // break;
+    }
+    4 => {
     trace_state.entry.fields[field.offset].as_u32 = (u32)val;
-    break;
-    default:
+    // break;
+    }
+    _ => {
     trace_state.entry.fields[field.offset].as_u64 = val;
-    break;
+    // break;
     }
     }
-    out:
+    }
+// label;
     return ret;
     }
 //
@@ -1957,9 +2229,8 @@ pub unsafe extern "C" fn synth_event_trace(file: *mut trace_event_file, n_vals: 
 //
 // Return: 0 on success, err otherwise.
 //
-    int synth_event_add_next_val(u64 val,
-    struct synth_event_trace_state *trace_state)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn synth_event_add_next_val(val: u64, trace_state: *mut synth_event_trace_state) -> c_int {
     return __synth_event_add_val(core::ptr::null_mut(), val, trace_state);
     }
     EXPORT_SYMBOL_GPL(synth_event_add_next_val);
@@ -1991,9 +2262,8 @@ pub unsafe extern "C" fn synth_event_trace(file: *mut trace_event_file, n_vals: 
 //
 // Return: 0 on success, err otherwise.
 //
-    int synth_event_add_val(const char *field_name, u64 val,
-    struct synth_event_trace_state *trace_state)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn synth_event_add_val(field_name: *mut c_char, val: u64, trace_state: *mut synth_event_trace_state) -> c_int {
     return __synth_event_add_val(field_name, val, trace_state);
     }
     EXPORT_SYMBOL_GPL(synth_event_add_val);
@@ -2019,29 +2289,29 @@ pub unsafe extern "C" fn synth_event_trace(file: *mut trace_event_file, n_vals: 
 //
 #[no_mangle]
 pub unsafe extern "C" fn synth_event_trace_end(trace_state: *mut synth_event_trace_state) -> c_int {
-    int synth_event_trace_end(struct synth_event_trace_state *trace_state)
-    {
-    if (!trace_state)
+    if (!trace_state) {
     return -EINVAL;
+    }
     __synth_event_trace_end(trace_state);
     return 0;
     }
     EXPORT_SYMBOL_GPL(synth_event_trace_end);
 #[no_mangle]
 unsafe extern "C" fn create_synth_event(raw_command: *const c_char) -> c_int {
-    static int create_synth_event(const char *raw_command)
-    {
-    char *fields, *p;
-    const char *name;
+    let mut fields = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
+pub static mut name: *mut c_void = core::ptr::null_mut();
     int len, ret = 0;
     raw_command = skip_spaces(raw_command);
-    if (raw_command[0] == '\0')
+    if (raw_command[0] == '\0') {
     return ret;
+    }
     last_cmd_set(raw_command);
     name = raw_command;
 // Don't try to process if not our system
-    if (name[0] != 's' || name[1] != ':')
+    if (name[0] != 's' || name[1] != ':') {
     return -ECANCELED;
+    }
     name += 2;
     p = strpbrk(raw_command, " \t");
     if (!p) {
@@ -2065,43 +2335,45 @@ unsafe extern "C" fn create_synth_event(raw_command: *const c_char) -> c_int {
     return ret;
     }
     name = kmemdup_nul(raw_command + len, p - raw_command - len, GFP_KERNEL);
-    if (!name)
+    if (!name) {
     return -ENOMEM;
+    }
     ret = __create_synth_event(name, fields);
     kfree(name);
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn synth_event_release(ev: *mut dyn_event) -> c_int {
-    static int synth_event_release(struct dyn_event *ev)
-    {
-    struct synth_event *event = to_synth_event(ev);
-    int ret;
-    if (event.ref)
+    let mut event = to_synth_event(ev);
+    let mut ret = 0;
+    if (event.ref) {
     return -EBUSY;
-    if (trace_event_dyn_busy(&event.call))
+    }
+    if (trace_event_dyn_busy(&event.call)) {
     return -EBUSY;
+    }
     ret = unregister_synth_event(event);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     dyn_event_remove(ev);
     free_synth_event(event);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn __synth_event_show(m: *mut seq_file, event: *mut synth_event) -> c_int {
-    static int __synth_event_show(struct seq_file *m, struct synth_event *event)
-    {
-    struct synth_field *field;
-    unsigned int i;
-    char *type, *t;
+pub static mut field: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    let mut type = core::ptr::null_mut();
+    let mut t = core::ptr::null_mut();
     seq_printf(m, "%s\t", event.name);
-    for (i = 0; i < event.n_fields; i++) {
+    while (i < event.n_fields) {
     field = event.fields[i];
     type = field.type;
     t = strstr(type, "__data_loc");
-    if (t) { /* __data_loc belongs in format but not event desc */
-    t += sizeof("__data_loc");
+    if (t) { /* __data_loc belongs in format but not event desc */ {
+    t += sizeof!("__data_loc");
+    }
     type = t;
     }
 // parameter values
@@ -2113,89 +2385,71 @@ unsafe extern "C" fn __synth_event_show(m: *mut seq_file, event: *mut synth_even
     }
 #[no_mangle]
 unsafe extern "C" fn synth_event_show(m: *mut seq_file, ev: *mut dyn_event) -> c_int {
-    static int synth_event_show(struct seq_file *m, struct dyn_event *ev)
-    {
-    struct synth_event *event = to_synth_event(ev);
+    let mut event = to_synth_event(ev);
     seq_printf(m, "s:%s/", event.class.system);
     return __synth_event_show(m, event);
     }
 #[no_mangle]
 unsafe extern "C" fn synth_events_seq_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int synth_events_seq_show(struct seq_file *m, void *v)
-    {
-    struct dyn_event *ev = v;
-    if (!is_synth_event(ev))
+    let mut ev = v;
+    if (!is_synth_event(ev)) {
     return 0;
+    }
     return __synth_event_show(m, to_synth_event(ev));
     }
-    static const struct seq_operations synth_events_seq_op = {
-    .start	= dyn_event_seq_start,
-    .next	= dyn_event_seq_next,
-    .stop	= dyn_event_seq_stop,
-    .show	= synth_events_seq_show,
-    };
+pub static mut seq_operations: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn synth_events_open(inode: *mut inode, file: *mut file) -> c_int {
-    static int synth_events_open(struct inode *inode, struct file *file)
-    {
-    int ret;
+    let mut ret = 0;
     ret = security_locked_down(LOCKDOWN_TRACEFS);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     if ((file.f_mode & FMODE_WRITE) && (file.f_flags & O_TRUNC)) {
     ret = dyn_events_release_all(&synth_event_ops);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     }
     return seq_open(file, &synth_events_seq_op);
     }
-    static ssize_t synth_events_write(struct file *file,
-    const char __user *buffer,
-    size_t count, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn synth_events_write(file: *mut file, buffer: *mut c_char, count: size_t, ppos: *mut loff_t) -> ssize_t {
     return trace_parse_run_command(file, buffer, count, ppos,
     create_or_delete_synth_event);
     }
-    static const struct file_operations synth_events_fops = {
-    .open           = synth_events_open,
-    .write		= synth_events_write,
-    .read           = seq_read,
-    .llseek         = seq_lseek,
-    .release        = seq_release,
-    };
+pub static mut file_operations: usize = 0;
 //
 // Register dynevent at core_initcall. This allows kernel to setup kprobe
 // events in postcore_initcall without tracefs.
 //
 #[no_mangle]
 unsafe extern "C" fn trace_events_synth_init_early() -> __init int {
-    static __init int trace_events_synth_init_early(void)
-    {
-    let mut err: c_int = 0;
+pub static mut err: c_int = 0;
     err = dyn_event_register(&synth_event_ops);
-    if (err)
-    pr_warn("Could not register synth_event_ops\n");
+    if (err) {
+    pr_warn!("Could not register synth_event_ops\n");
+    }
     return err;
     }
-    core_initcall(trace_events_synth_init_early);
+    core_initcall!(trace_events_synth_init_early);
 #[no_mangle]
 unsafe extern "C" fn trace_events_synth_init() -> __init int {
-    static __init int trace_events_synth_init(void)
-    {
-    struct dentry *entry = core::ptr::null_mut();
-    let mut err: c_int = 0;
+    let mut entry = core::ptr::null_mut();
+pub static mut err: c_int = 0;
     err = tracing_init_dentry();
-    if (err)
-    goto err;
+    if (err) {
+// goto;
+    }
     entry = tracefs_create_file("synthetic_events", TRACE_MODE_WRITE,
     core::ptr::null_mut(), core::ptr::null_mut(), &synth_events_fops);
     if (!entry) {
     err = -ENODEV;
-    goto err;
+// goto;
     }
     return err;
-    err:
-    pr_warn("Could not create tracefs 'synthetic_events' entry\n");
+// label;
+    pr_warn!("Could not create tracefs 'synthetic_events' entry\n");
     return err;
     }
-    fs_initcall(trace_events_synth_init);
+    fs_initcall!(trace_events_synth_init);

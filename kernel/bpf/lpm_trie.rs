@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -46,21 +296,21 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
 // Intermediate node
 
-    struct lpm_trie_node;
+    let mut lpm_trie_node;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct lpm_trie_node {
-    pub child: [*mut lpm_trie_node __rcu; 2],
+    pub child: [*mut lpm_trie_node ; 2],
     pub prefixlen: u32,
     pub flags: u32,
-    pub data: [u8; ],
+    pub data: [u8; 0],
 }
 
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct lpm_trie {
     pub map: bpf_map,
-    pub root: *mut lpm_trie_node __rcu,
+    pub root: *mut lpm_trie_node ,
     pub ma: bpf_mem_alloc,
     pub n_entries: usize,
     pub max_prefixlen: usize,
@@ -180,8 +430,6 @@ pub struct lpm_trie {
 //
 #[no_mangle]
 pub unsafe extern "C" fn extract_bit(data: *const u8, index: usize) -> c_int {
-    static inline int extract_bit(const u8 *data, size_t index)
-    {
     return !!(data[index / 8] & (1 << (7 - (index % 8))));
     }
 //
@@ -193,75 +441,78 @@ pub unsafe extern "C" fn extract_bit(data: *const u8, index: usize) -> c_int {
 // Determine the longest prefix of @node that matches the bits in @key.
 //
     static __always_inline
-    size_t __longest_prefix_match(const struct lpm_trie *trie,
-    const struct lpm_trie_node *node,
-    const struct bpf_lpm_trie_key_u8 *key)
-    {
-    let mut limit: u32 = min(node.prefixlen, key.prefixlen);
-    let mut prefixlen: u32 = 0, i = 0;
-    BUILD_BUG_ON(offsetof(struct lpm_trie_node, data) % sizeof(u32));
-    BUILD_BUG_ON(offsetof(struct bpf_lpm_trie_key_u8, data) % sizeof(u32));
+#[no_mangle]
+pub unsafe extern "C" fn __longest_prefix_match(trie: *mut lpm_trie, node: *mut lpm_trie_node, key: *mut bpf_lpm_trie_key_u8) -> size_t {
+pub static mut limit: u32 = 0;
+pub static mut prefixlen: u32 = 0;
+    BUILD_BUG_ON!(offsetof(lpm_trie_node, data) % sizeof!(u32));
+    BUILD_BUG_ON!(offsetof(bpf_lpm_trie_key_u8, data) % sizeof!(u32));
 
 // data_size >= 16 has very small probability.
 // We do not use a loop for optimal code generation.
 //
     if (trie.data_size >= 8) {
-    u64 diff = be64_to_cpu(*(__be64 *)node.data ^
-// (__be64 *)key->data);
+    u64 diff = be64_to_cpu(*node.data ^
+// key->data);
     prefixlen = 64 - fls64(diff);
-    if (prefixlen >= limit)
+    if (prefixlen >= limit) {
     return limit;
-    if (diff)
+    }
+    if (diff) {
     return prefixlen;
+    }
     i = 8;
     }
 
     while (trie.data_size >= i + 4) {
-    u32 diff = be32_to_cpu(*(__be32 *)&node.data[i] ^
-// (__be32 *)&key->data[i]);
+    u32 diff = be32_to_cpu(*&node.data[i] ^
+// &key->data[i]);
     prefixlen += 32 - fls(diff);
-    if (prefixlen >= limit)
+    if (prefixlen >= limit) {
     return limit;
-    if (diff)
+    }
+    if (diff) {
     return prefixlen;
+    }
     i += 4;
     }
     if (trie.data_size >= i + 2) {
-    u16 diff = be16_to_cpu(*(__be16 *)&node.data[i] ^
-// (__be16 *)&key->data[i]);
+    u16 diff = be16_to_cpu(*&node.data[i] ^
+// &key->data[i]);
     prefixlen += 16 - fls(diff);
-    if (prefixlen >= limit)
+    if (prefixlen >= limit) {
     return limit;
-    if (diff)
+    }
+    if (diff) {
     return prefixlen;
+    }
     i += 2;
     }
     if (trie.data_size >= i + 1) {
     prefixlen += 8 - fls(node.data[i] ^ key.data[i]);
-    if (prefixlen >= limit)
+    if (prefixlen >= limit) {
     return limit;
+    }
     }
     return prefixlen;
     }
-    static size_t longest_prefix_match(const struct lpm_trie *trie,
-    const struct lpm_trie_node *node,
-    const struct bpf_lpm_trie_key_u8 *key)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn longest_prefix_match(trie: *mut lpm_trie, node: *mut lpm_trie_node, key: *mut bpf_lpm_trie_key_u8) -> size_t {
     return __longest_prefix_match(trie, node, key);
     }
 // Called from syscall or from eBPF program
-    static void *trie_lookup_elem(struct bpf_map *map, void *_key)
-    {
-    struct lpm_trie *trie = container_of(map, struct lpm_trie, map);
+#[no_mangle]
+pub unsafe extern "C" fn trie_lookup_elem(map: *mut bpf_map, _key: *mut c_void) -> *mut c_void {
+    let mut trie = container_of!(map, lpm_trie, map);
     struct lpm_trie_node *node, *found = core::ptr::null_mut();
-    struct bpf_lpm_trie_key_u8 *key = _key;
-    if (key.prefixlen > trie.max_prefixlen)
+    let mut key = _key;
+    if (key.prefixlen > trie.max_prefixlen) {
     return core::ptr::null_mut();
+    }
 // Start walking the trie from the root node ...
-    for (node = rcu_dereference_check(trie.root, bpf_rcu_lock_held());
-    node;) {
-    unsigned int next_bit;
-    size_t matchlen;
+    while (node) {
+    let mut next_bit = 0;
+    let mut matchlen = 0;
 // Determine the longest prefix of @node that matches @key.
 // If it's the maximum possible prefix for this trie, we have
 // an exact match and can return it directly.
@@ -275,13 +526,15 @@ pub unsafe extern "C" fn extract_bit(data: *const u8, index: usize) -> c_int {
 // length of @node, bail out and return the node we have seen
 // last in the traversal (ie, the parent).
 //
-    if (matchlen < node.prefixlen)
+    if (matchlen < node.prefixlen) {
     break;
+    }
 // Consider this node as return candidate unless it is an
 // artificially added intermediate one.
 //
-    if (!(node.flags & LPM_TREE_NODE_FLAG_IM))
+    if (!(node.flags & LPM_TREE_NODE_FLAG_IM)) {
     found = node;
+    }
 // If the node match is fully satisfied, let's see if we can
 // become more specific. Determine the next bit in the key and
 // traverse down.
@@ -290,58 +543,65 @@ pub unsafe extern "C" fn extract_bit(data: *const u8, index: usize) -> c_int {
     node = rcu_dereference_check(node.child[next_bit],
     bpf_rcu_lock_held());
     }
-    if (!found)
+    if (!found) {
     return core::ptr::null_mut();
+    }
     return found.data + trie.data_size;
     }
-    static struct lpm_trie_node *lpm_trie_node_alloc(struct lpm_trie *trie,
-    const void *value)
-    {
-    struct lpm_trie_node *node;
+#[no_mangle]
+pub unsafe extern "C" fn lpm_trie_node_alloc(trie: *mut lpm_trie, value: *mut c_void) -> *mut c_void {
+pub static mut node: *mut c_void = core::ptr::null_mut();
     node = bpf_mem_cache_alloc(&trie.ma);
-    if (!node)
+    if (!node) {
     return core::ptr::null_mut();
+    }
     node.flags = 0;
-    if (value)
+    if (value) {
     memcpy(node.data + trie.data_size, value,
     trie.map.value_size);
+    }
     return node;
     }
 #[no_mangle]
 unsafe extern "C" fn trie_check_add_elem(trie: *mut lpm_trie, flags: u64) -> c_int {
-    static int trie_check_add_elem(struct lpm_trie *trie, u64 flags)
-    {
-    if (flags == BPF_EXIST)
+    if (flags == BPF_EXIST) {
     return -ENOENT;
-    if (trie.n_entries == trie.map.max_entries)
+    }
+    if (trie.n_entries == trie.map.max_entries) {
     return -ENOSPC;
-    trie.n_entries++;
+    }
+    trie.n_entries += 1;
     return 0;
     }
 // Called from syscall or from eBPF program
-    static long trie_update_elem(struct bpf_map *map,
-    void *_key, void *value, u64 flags)
-    {
-    struct lpm_trie *trie = container_of(map, struct lpm_trie, map);
-    struct lpm_trie_node *node, *im_node, *new_node;
-    struct lpm_trie_node *free_node = core::ptr::null_mut();
-    struct lpm_trie_node __rcu **slot;
-    struct bpf_lpm_trie_key_u8 *key = _key;
-    unsigned long irq_flags;
-    unsigned int next_bit;
-    let mut matchlen: usize = 0;
-    let mut ret: c_int = 0;
-    if (unlikely(flags > BPF_EXIST))
+#[no_mangle]
+pub unsafe extern "C" fn trie_update_elem(map: *mut bpf_map, _key: *mut c_void, value: *mut c_void, flags: u64) -> c_long {
+    let mut trie = container_of!(map, lpm_trie, map);
+    let mut node = core::ptr::null_mut();
+    let mut im_node = core::ptr::null_mut();
+    let mut new_node = core::ptr::null_mut();
+    let mut free_node = core::ptr::null_mut();
+    let mut slot = core::ptr::null_mut();
+    let mut key = _key;
+    let mut irq_flags = 0;
+    let mut next_bit = 0;
+pub static mut matchlen: usize = 0;
+pub static mut ret: c_int = 0;
+    if (unlikely(flags > BPF_EXIST)) {
     return -EINVAL;
-    if (key.prefixlen > trie.max_prefixlen)
+    }
+    if (key.prefixlen > trie.max_prefixlen) {
     return -EINVAL;
+    }
 // Allocate and fill a new node
     new_node = lpm_trie_node_alloc(trie, value);
-    if (!new_node)
+    if (!new_node) {
     return -ENOMEM;
+    }
     ret = raw_res_spin_lock_irqsave(&trie.lock, irq_flags);
-    if (ret)
-    goto out_free;
+    if (ret) {
+// goto;
+    }
     new_node.prefixlen = key.prefixlen;
     RCU_INIT_POINTER(new_node.child[0], core::ptr::null_mut());
     RCU_INIT_POINTER(new_node.child[1], core::ptr::null_mut());
@@ -355,8 +615,9 @@ unsafe extern "C" fn trie_check_add_elem(trie: *mut lpm_trie, flags: u64) -> c_i
     while ((node = rcu_dereference_protected(*slot, 1))) {
     matchlen = longest_prefix_match(trie, node, key);
     if (node.prefixlen != matchlen ||
-    node.prefixlen == key.prefixlen)
+    node.prefixlen == key.prefixlen) {
     break;
+    }
     next_bit = extract_bit(key.data, node.prefixlen);
     slot = &node.child[next_bit];
     }
@@ -365,10 +626,11 @@ unsafe extern "C" fn trie_check_add_elem(trie: *mut lpm_trie, flags: u64) -> c_i
 //
     if (!node) {
     ret = trie_check_add_elem(trie, flags);
-    if (ret)
-    goto out;
+    if (ret) {
+// goto;
+    }
     rcu_assign_pointer(*slot, new_node);
-    goto out;
+// goto;
     }
 // If the slot we picked already exists, replace it with @new_node
 // which already has the correct data array set.
@@ -377,22 +639,24 @@ unsafe extern "C" fn trie_check_add_elem(trie: *mut lpm_trie, flags: u64) -> c_i
     if (!(node.flags & LPM_TREE_NODE_FLAG_IM)) {
     if (flags == BPF_NOEXIST) {
     ret = -EEXIST;
-    goto out;
+// goto;
     }
     } else {
     ret = trie_check_add_elem(trie, flags);
-    if (ret)
-    goto out;
+    if (ret) {
+// goto;
+    }
     }
     new_node.child[0] = node.child[0];
     new_node.child[1] = node.child[1];
     rcu_assign_pointer(*slot, new_node);
     free_node = node;
-    goto out;
+// goto;
     }
     ret = trie_check_add_elem(trie, flags);
-    if (ret)
-    goto out;
+    if (ret) {
+// goto;
+    }
 // If the new node matches the prefix completely, it must be inserted
 // as an ancestor. Simply insert it between @node and *@slot.
 //
@@ -400,13 +664,13 @@ unsafe extern "C" fn trie_check_add_elem(trie: *mut lpm_trie, flags: u64) -> c_i
     next_bit = extract_bit(node.data, matchlen);
     rcu_assign_pointer(new_node.child[next_bit], node);
     rcu_assign_pointer(*slot, new_node);
-    goto out;
+// goto;
     }
     im_node = lpm_trie_node_alloc(trie, core::ptr::null_mut());
     if (!im_node) {
-    trie.n_entries--;
+    trie.n_entries -= 1;
     ret = -ENOMEM;
-    goto out;
+// goto;
     }
     im_node.prefixlen = matchlen;
     im_node.flags |= LPM_TREE_NODE_FLAG_IM;
@@ -421,33 +685,36 @@ unsafe extern "C" fn trie_check_add_elem(trie: *mut lpm_trie, flags: u64) -> c_i
     }
 // Finally, assign the intermediate node to the determined slot
     rcu_assign_pointer(*slot, im_node);
-    out:
+// label;
     raw_res_spin_unlock_irqrestore(&trie.lock, irq_flags);
-    out_free:
-    if (ret)
+// label;
+    if (ret) {
     bpf_mem_cache_free(&trie.ma, new_node);
+    }
     bpf_mem_cache_free_rcu(&trie.ma, free_node);
     return ret;
     }
 // Called from syscall or from eBPF program
 #[no_mangle]
 unsafe extern "C" fn trie_delete_elem(map: *mut bpf_map, _key: *mut c_void) -> c_long {
-    static long trie_delete_elem(struct bpf_map *map, void *_key)
-    {
-    struct lpm_trie *trie = container_of(map, struct lpm_trie, map);
-    struct lpm_trie_node *free_node = core::ptr::null_mut(), *free_parent = core::ptr::null_mut();
-    struct bpf_lpm_trie_key_u8 *key = _key;
-    struct lpm_trie_node __rcu **trim, **trim2;
-    struct lpm_trie_node *node, *parent;
-    unsigned long irq_flags;
-    unsigned int next_bit;
-    let mut matchlen: usize = 0;
-    let mut ret: c_int = 0;
-    if (key.prefixlen > trie.max_prefixlen)
+    let mut trie = container_of!(map, lpm_trie, map);
+    let mut free_node = core::ptr::null_mut(), *free_parent = core::ptr::null_mut();
+    let mut key = _key;
+    let mut trim = core::ptr::null_mut();
+    let mut trim2 = core::ptr::null_mut();
+    let mut node = core::ptr::null_mut();
+    let mut parent = core::ptr::null_mut();
+    let mut irq_flags = 0;
+    let mut next_bit = 0;
+pub static mut matchlen: usize = 0;
+pub static mut ret: c_int = 0;
+    if (key.prefixlen > trie.max_prefixlen) {
     return -EINVAL;
+    }
     ret = raw_res_spin_lock_irqsave(&trie.lock, irq_flags);
-    if (ret)
+    if (ret) {
     return ret;
+    }
 // Walk the tree looking for an exact key/length match and keeping
 // track of the path we traverse.  We will need to know the node
 // we wish to delete, and the slot that points to the node we want
@@ -460,8 +727,9 @@ unsafe extern "C" fn trie_delete_elem(map: *mut bpf_map, _key: *mut c_void) -> c
     while ((node = rcu_dereference_protected(*trim, 1))) {
     matchlen = longest_prefix_match(trie, node, key);
     if (node.prefixlen != matchlen ||
-    node.prefixlen == key.prefixlen)
+    node.prefixlen == key.prefixlen) {
     break;
+    }
     parent = node;
     trim2 = trim;
     next_bit = extract_bit(key.data, node.prefixlen);
@@ -471,16 +739,16 @@ unsafe extern "C" fn trie_delete_elem(map: *mut bpf_map, _key: *mut c_void) -> c
     node.prefixlen != matchlen ||
     (node.flags & LPM_TREE_NODE_FLAG_IM)) {
     ret = -ENOENT;
-    goto out;
+// goto;
     }
-    trie.n_entries--;
+    trie.n_entries -= 1;
 // If the node we are removing has two children, simply mark it
 // as intermediate and we are done.
 //
     if (rcu_access_pointer(node.child[0]) &&
     rcu_access_pointer(node.child[1])) {
     node.flags |= LPM_TREE_NODE_FLAG_IM;
-    goto out;
+// goto;
     }
 // If the parent of the node we are about to delete is an intermediate
 // node, and the deleted node doesn't have any children, we can delete
@@ -491,30 +759,34 @@ unsafe extern "C" fn trie_delete_elem(map: *mut bpf_map, _key: *mut c_void) -> c
 //
     if (parent && (parent.flags & LPM_TREE_NODE_FLAG_IM) &&
     !node.child[0] && !node.child[1]) {
-    if (node == rcu_access_pointer(parent.child[0]))
+    if (node == rcu_access_pointer(parent.child[0])) {
     rcu_assign_pointer(
 // trim2, rcu_access_pointer(parent->child[1]));
-    else
+    }
+    else {
     rcu_assign_pointer(
 // trim2, rcu_access_pointer(parent->child[0]));
+    }
     free_parent = parent;
     free_node = node;
-    goto out;
+// goto;
     }
 // The node we are removing has either zero or one child. If there
 // is a child, move it into the removed node's slot then delete
 // the node.  Otherwise just clear the slot and delete the node.
 //
-    if (node.child[0])
+    if (node.child[0]) {
     rcu_assign_pointer(*trim, rcu_access_pointer(node.child[0]));
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: node->child[1]) -> else {
-    else if (node.child[1])
+    }
+
+    else if (node.child[1]) {
     rcu_assign_pointer(*trim, rcu_access_pointer(node.child[1]));
-    else
+    }
+    else {
     RCU_INIT_POINTER(*trim, core::ptr::null_mut());
+    }
     free_node = node;
-    out:
+// label;
     raw_res_spin_unlock_irqrestore(&trie.lock, irq_flags);
     bpf_mem_cache_free_rcu(&trie.ma, free_parent);
     bpf_mem_cache_free_rcu(&trie.ma, free_node);
@@ -523,15 +795,15 @@ pub unsafe extern "C" fn if(_arg: node->child[1]) -> else {
 pub const LPM_DATA_SIZE_MAX: c_int = 256;
 pub const LPM_DATA_SIZE_MIN: c_int = 1;
 
-    sizeof(struct lpm_trie_node))
+    sizeof!(lpm_trie_node))
 pub const LPM_VAL_SIZE_MIN: c_int = 1;
 
     BPF_F_ACCESS_MASK)
-    static struct bpf_map *trie_alloc(union bpf_attr *attr)
-    {
-    struct lpm_trie *trie;
-    size_t leaf_size;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn trie_alloc(attr: *mut union bpf_attr) -> *mut c_void {
+pub static mut trie: *mut c_void = core::ptr::null_mut();
+    let mut leaf_size = 0;
+    let mut err = 0;
 // check sanity of attributes
     if (attr.max_entries == 0 ||
     !(attr.map_flags & BPF_F_NO_PREALLOC) ||
@@ -540,35 +812,36 @@ pub const LPM_VAL_SIZE_MIN: c_int = 1;
     attr.key_size < LPM_KEY_SIZE_MIN ||
     attr.key_size > LPM_KEY_SIZE_MAX ||
     attr.value_size < LPM_VAL_SIZE_MIN ||
-    attr.value_size > LPM_VAL_SIZE_MAX)
+    attr.value_size > LPM_VAL_SIZE_MAX) {
     return ERR_PTR(-EINVAL);
-    trie = bpf_map_area_alloc(sizeof(*trie), NUMA_NO_NODE);
-    if (!trie)
+    }
+    trie = bpf_map_area_alloc(sizeof!(*trie), NUMA_NO_NODE);
+    if (!trie) {
     return ERR_PTR(-ENOMEM);
+    }
 // copy mandatory map attributes
     bpf_map_init_from_attr(&trie.map, attr);
     trie.data_size = attr.key_size -
-    offsetof(struct bpf_lpm_trie_key_u8, data);
+    offsetof(bpf_lpm_trie_key_u8, data);
     trie.max_prefixlen = trie.data_size * 8;
     raw_res_spin_lock_init(&trie.lock);
 // Allocate intermediate and leaf nodes from the same allocator
-    leaf_size = sizeof(struct lpm_trie_node) + trie.data_size +
+    leaf_size = sizeof!(lpm_trie_node) + trie.data_size +
     trie.map.value_size;
     err = bpf_mem_alloc_init(&trie.ma, leaf_size, false);
-    if (err)
-    goto free_out;
+    if (err) {
+// goto;
+    }
     return &trie.map;
-    free_out:
+// label;
     bpf_map_area_free(trie);
     return ERR_PTR(err);
     }
 #[no_mangle]
 unsafe extern "C" fn trie_free(map: *mut bpf_map) {
-    static void trie_free(struct bpf_map *map)
-    {
-    struct lpm_trie *trie = container_of(map, struct lpm_trie, map);
-    struct lpm_trie_node __rcu **slot;
-    struct lpm_trie_node *node;
+    let mut trie = container_of!(map, lpm_trie, map);
+    let mut slot = core::ptr::null_mut();
+pub static mut node: *mut c_void = core::ptr::null_mut();
 // Always start at the root and walk down to a node that has no
 // children. Then free that node, nullify its reference in the parent
 // and start over.
@@ -577,8 +850,9 @@ unsafe extern "C" fn trie_free(map: *mut bpf_map) {
     slot = &trie.root;
     for (;;) {
     node = rcu_dereference_protected(*slot, 1);
-    if (!node)
-    goto out;
+    if (!node) {
+// goto;
+    }
     if (rcu_access_pointer(node.child[0])) {
     slot = &node.child[0];
     continue;
@@ -595,21 +869,19 @@ unsafe extern "C" fn trie_free(map: *mut bpf_map) {
     break;
     }
     }
-    out:
+// label;
     bpf_mem_alloc_destroy(&trie.ma);
     bpf_map_area_free(trie);
     }
 #[no_mangle]
 unsafe extern "C" fn trie_get_next_key(map: *mut bpf_map, _key: *mut c_void, _next_key: *mut c_void) -> c_int {
-    static int trie_get_next_key(struct bpf_map *map, void *_key, void *_next_key)
-    {
     struct lpm_trie_node *node, *next_node = core::ptr::null_mut(), *parent, *search_root;
-    struct lpm_trie *trie = container_of(map, struct lpm_trie, map);
-    struct bpf_lpm_trie_key_u8 *key = _key, *next_key = _next_key;
-    struct lpm_trie_node **node_stack = core::ptr::null_mut();
-    let mut err: c_int = 0, stack_ptr = -1;
-    unsigned int next_bit;
-    let mut matchlen: usize = 0;
+    let mut trie = container_of!(map, lpm_trie, map);
+    let mut key = _key, *next_key = _next_key;
+    let mut node_stack = core::ptr::null_mut();
+pub static mut err: c_int = 0;
+    let mut next_bit = 0;
+pub static mut matchlen: usize = 0;
 // The get_next_key follows postorder. For the 4 node example in
 // the top of this file, the trie_get_next_key() returns the following
 // one after another:
@@ -622,29 +894,34 @@ unsafe extern "C" fn trie_get_next_key(map: *mut bpf_map, _key: *mut c_void, _ne
 //
 // Empty trie
     search_root = rcu_dereference(trie.root);
-    if (!search_root)
+    if (!search_root) {
     return -ENOENT;
+    }
 // For invalid key, find the leftmost node in the trie
-    if (!key || key.prefixlen > trie.max_prefixlen)
-    goto find_leftmost;
-    node_stack = kmalloc_objs(struct lpm_trie_node *,
+    if (!key || key.prefixlen > trie.max_prefixlen) {
+// goto;
+    }
+    node_stack = kmalloc_objs(lpm_trie_node *,
     trie.max_prefixlen + 1,
     GFP_ATOMIC | __GFP_NOWARN);
-    if (!node_stack)
+    if (!node_stack) {
     return -ENOMEM;
+    }
 // Try to find the exact node for the given key
-    for (node = search_root; node;) {
+    while (node) {
     node_stack[++stack_ptr] = node;
     matchlen = longest_prefix_match(trie, node, key);
     if (node.prefixlen != matchlen ||
-    node.prefixlen == key.prefixlen)
+    node.prefixlen == key.prefixlen) {
     break;
+    }
     next_bit = extract_bit(key.data, node.prefixlen);
     node = rcu_dereference(node.child[next_bit]);
     }
     if (!node || node.prefixlen != matchlen ||
-    (node.flags & LPM_TREE_NODE_FLAG_IM))
-    goto find_leftmost;
+    (node.flags & LPM_TREE_NODE_FLAG_IM)) {
+// goto;
+    }
 // The node with the exactly-matching key has been found,
 // find the first node in postorder after the matched node.
 //
@@ -653,73 +930,56 @@ unsafe extern "C" fn trie_get_next_key(map: *mut bpf_map, _key: *mut c_void, _ne
     parent = node_stack[stack_ptr - 1];
     if (rcu_dereference(parent.child[0]) == node) {
     search_root = rcu_dereference(parent.child[1]);
-    if (search_root)
-    goto find_leftmost;
+    if (search_root) {
+// goto;
+    }
     }
     if (!(parent.flags & LPM_TREE_NODE_FLAG_IM)) {
     next_node = parent;
-    goto do_copy;
+// goto;
     }
     node = parent;
-    stack_ptr--;
+    stack_ptr -= 1;
     }
 // did not find anything
     err = -ENOENT;
-    goto free_stack;
-    find_leftmost:
+// goto;
+// label;
 // Find the leftmost non-intermediate node, all intermediate nodes
 // have exact two children, so this function will never return NULL.
 //
-    for (node = search_root; node;) {
+    while (node) {
     if (node.flags & LPM_TREE_NODE_FLAG_IM) {
     node = rcu_dereference(node.child[0]);
     } else {
     next_node = node;
     node = rcu_dereference(node.child[0]);
-    if (!node)
+    if (!node) {
     node = rcu_dereference(next_node.child[1]);
     }
     }
-    do_copy:
+    }
+// label;
     next_key.prefixlen = next_node.prefixlen;
-    memcpy((void *)next_key + offsetof(struct bpf_lpm_trie_key_u8, data),
+    memcpy(next_key + offsetof(bpf_lpm_trie_key_u8, data),
     next_node.data, trie.data_size);
-    free_stack:
+// label;
     kfree(node_stack);
     return err;
     }
-    static int trie_check_btf(struct bpf_map *map,
-    const struct btf *btf,
-    const struct btf_type *key_type,
-    const struct btf_type *value_type)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn trie_check_btf(map: *mut bpf_map, btf: *mut btf, key_type: *mut btf_type, value_type: *mut btf_type) -> c_int {
 // Keys must have struct bpf_lpm_trie_key_u8 embedded.
     return BTF_INFO_KIND(key_type.info) != BTF_KIND_STRUCT ?
     -EINVAL : 0;
     }
 #[no_mangle]
 unsafe extern "C" fn trie_mem_usage(map: *const bpf_map) -> u64 {
-    static u64 trie_mem_usage(const struct bpf_map *map)
-    {
-    struct lpm_trie *trie = container_of(map, struct lpm_trie, map);
-    u64 elem_size;
-    elem_size = sizeof(struct lpm_trie_node) + trie.data_size +
+    let mut trie = container_of!(map, lpm_trie, map);
+    let mut elem_size = 0;
+    elem_size = sizeof!(lpm_trie_node) + trie.data_size +
     trie.map.value_size;
     return elem_size * READ_ONCE(trie.n_entries);
     }
     BTF_ID_LIST_SINGLE(trie_map_btf_ids, struct, lpm_trie)
-    const struct bpf_map_ops trie_map_ops = {
-    .map_meta_equal = bpf_map_meta_equal,
-    .map_alloc = trie_alloc,
-    .map_free = trie_free,
-    .map_get_next_key = trie_get_next_key,
-    .map_lookup_elem = trie_lookup_elem,
-    .map_update_elem = trie_update_elem,
-    .map_delete_elem = trie_delete_elem,
-    .map_lookup_batch = generic_map_lookup_batch,
-    .map_update_batch = generic_map_update_batch,
-    .map_delete_batch = generic_map_delete_batch,
-    .map_check_btf = trie_check_btf,
-    .map_mem_usage = trie_mem_usage,
-    .map_btf_id = &trie_map_btf_ids[0],
-    };
+pub static mut bpf_map_ops: usize = 0;

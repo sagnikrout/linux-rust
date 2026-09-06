@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -43,19 +293,16 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
 #[no_mangle]
 unsafe extern "C" fn bfq_stat_init(stat: *mut bfq_stat, gfp: gfp_t) -> c_int {
-    static int bfq_stat_init(struct bfq_stat *stat, gfp_t gfp)
-    {
-    int ret;
+    let mut ret = 0;
     ret = percpu_counter_init(&stat.cpu_cnt, 0, gfp);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     atomic64_set(&stat.aux_cnt, 0);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn bfq_stat_exit(stat: *mut bfq_stat) {
-    static void bfq_stat_exit(struct bfq_stat *stat)
-    {
     percpu_counter_destroy(&stat.cpu_cnt);
     }
 //
@@ -68,8 +315,6 @@ unsafe extern "C" fn bfq_stat_exit(stat: *mut bfq_stat) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn bfq_stat_add(stat: *mut bfq_stat, val: u64) {
-    static inline void bfq_stat_add(struct bfq_stat *stat, uint64_t val)
-    {
     percpu_counter_add_batch(&stat.cpu_cnt, val, BLKG_STAT_CPU_BATCH);
     }
 //
@@ -78,8 +323,6 @@ pub unsafe extern "C" fn bfq_stat_add(stat: *mut bfq_stat, val: u64) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn bfq_stat_read(stat: *mut bfq_stat) -> u64 {
-    static inline uint64_t bfq_stat_read(struct bfq_stat *stat)
-    {
     return percpu_counter_sum_positive(&stat.cpu_cnt);
     }
 //
@@ -88,8 +331,6 @@ pub unsafe extern "C" fn bfq_stat_read(stat: *mut bfq_stat) -> u64 {
 //
 #[no_mangle]
 pub unsafe extern "C" fn bfq_stat_reset(stat: *mut bfq_stat) {
-    static inline void bfq_stat_reset(struct bfq_stat *stat)
-    {
     percpu_counter_set(&stat.cpu_cnt, 0);
     atomic64_set(&stat.aux_cnt, 0);
     }
@@ -100,9 +341,8 @@ pub unsafe extern "C" fn bfq_stat_reset(stat: *mut bfq_stat) {
 //
 // Add @from's count including the aux one to @to's aux count.
 //
-    static inline void bfq_stat_add_aux(struct bfq_stat *to,
-    struct bfq_stat *from)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn bfq_stat_add_aux(to: *mut bfq_stat, from: *mut bfq_stat) {
     atomic64_add(bfq_stat_read(from) + atomic64_read(&from.aux_cnt),
     &to.aux_cnt);
     }
@@ -114,10 +354,9 @@ pub unsafe extern "C" fn bfq_stat_reset(stat: *mut bfq_stat) {
 //
 // prfill callback for printing a bfq_stat.
 //
-    static u64 blkg_prfill_stat(struct seq_file *sf, struct blkg_policy_data *pd,
-    int off)
-    {
-    return __blkg_prfill_u64(sf, pd, bfq_stat_read((void *)pd + off));
+#[no_mangle]
+pub unsafe extern "C" fn blkg_prfill_stat(sf: *mut seq_file, pd: *mut blkg_policy_data, off: c_int) -> u64 {
+    return __blkg_prfill_u64(sf, pd, bfq_stat_read(pd + off));
     }
 // bfqg stats flags
     enum bfqg_stats_flags {
@@ -126,18 +365,18 @@ pub unsafe extern "C" fn bfq_stat_reset(stat: *mut bfq_stat) {
     BFQG_stats_empty,
     };
 
-    static void bfqg_stats_mark_##name(struct bfqg_stats *stats)	\
-    {									\
-    stats.flags |= (1 << BFQG_stats_##name);			\
-    }									\
-    static void bfqg_stats_clear_##name(struct bfqg_stats *stats)	\
-    {									\
-    stats.flags &= ~(1 << BFQG_stats_##name);			\
-    }									\
-    static int bfqg_stats_##name(struct bfqg_stats *stats)		\
-    {									\
-    return (stats.flags & (1 << BFQG_stats_##name)) != 0;		\
-    }									\
+    static void bfqg_stats_mark_##name(bfqg_stats *stats)	
+    {									
+    stats.flags |= (1 << BFQG_stats_##name);			
+    }									
+    static void bfqg_stats_clear_##name(bfqg_stats *stats)	
+    {									
+    stats.flags &= ~(1 << BFQG_stats_##name);			
+    }									
+    static int bfqg_stats_##name(bfqg_stats *stats)		
+    {									
+    return (stats.flags & (1 << BFQG_stats_##name)) != 0;		
+    }									
     BFQG_FLAG_FNS(waiting)
     BFQG_FLAG_FNS(idling)
     BFQG_FLAG_FNS(empty)
@@ -145,152 +384,157 @@ pub unsafe extern "C" fn bfq_stat_reset(stat: *mut bfq_stat) {
 // This should be called with the scheduler lock held.
 #[no_mangle]
 unsafe extern "C" fn bfqg_stats_update_group_wait_time(stats: *mut bfqg_stats) {
-    static void bfqg_stats_update_group_wait_time(struct bfqg_stats *stats)
-    {
-    u64 now;
-    if (!bfqg_stats_waiting(stats))
+    let mut now = 0;
+    if (!bfqg_stats_waiting(stats)) {
     return;
+    }
     now = blk_time_get_ns();
-    if (now > stats.start_group_wait_time)
+    if (now > stats.start_group_wait_time) {
     bfq_stat_add(&stats.group_wait_time,
     now - stats.start_group_wait_time);
+    }
     bfqg_stats_clear_waiting(stats);
     }
 // This should be called with the scheduler lock held.
-    static void bfqg_stats_set_start_group_wait_time(struct bfq_group *bfqg,
-    struct bfq_group *curr_bfqg)
-    {
-    struct bfqg_stats *stats = &bfqg.stats;
-    if (bfqg_stats_waiting(stats))
+#[no_mangle]
+pub unsafe extern "C" fn bfqg_stats_set_start_group_wait_time(bfqg: *mut bfq_group, curr_bfqg: *mut bfq_group) {
+    let mut stats = &bfqg.stats;
+    if (bfqg_stats_waiting(stats)) {
     return;
-    if (bfqg == curr_bfqg)
+    }
+    if (bfqg == curr_bfqg) {
     return;
+    }
     stats.start_group_wait_time = blk_time_get_ns();
     bfqg_stats_mark_waiting(stats);
     }
 // This should be called with the scheduler lock held.
 #[no_mangle]
 unsafe extern "C" fn bfqg_stats_end_empty_time(stats: *mut bfqg_stats) {
-    static void bfqg_stats_end_empty_time(struct bfqg_stats *stats)
-    {
-    u64 now;
-    if (!bfqg_stats_empty(stats))
+    let mut now = 0;
+    if (!bfqg_stats_empty(stats)) {
     return;
+    }
     now = blk_time_get_ns();
-    if (now > stats.start_empty_time)
+    if (now > stats.start_empty_time) {
     bfq_stat_add(&stats.empty_time,
     now - stats.start_empty_time);
+    }
     bfqg_stats_clear_empty(stats);
     }
 #[no_mangle]
 pub unsafe extern "C" fn bfqg_stats_update_dequeue(bfqg: *mut bfq_group) {
-    void bfqg_stats_update_dequeue(struct bfq_group *bfqg)
-    {
     bfq_stat_add(&bfqg.stats.dequeue, 1);
     }
 #[no_mangle]
 pub unsafe extern "C" fn bfqg_stats_set_start_empty_time(bfqg: *mut bfq_group) {
-    void bfqg_stats_set_start_empty_time(struct bfq_group *bfqg)
-    {
-    struct bfqg_stats *stats = &bfqg.stats;
-    if (blkg_rwstat_total(&stats.queued))
+    let mut stats = &bfqg.stats;
+    if (blkg_rwstat_total(&stats.queued)) {
     return;
+    }
 //
 // group is already marked empty. This can happen if bfqq got new
 // request in parent group and moved to this group while being added
 // to service tree. Just ignore the event and move on.
 //
-    if (bfqg_stats_empty(stats))
+    if (bfqg_stats_empty(stats)) {
     return;
+    }
     stats.start_empty_time = blk_time_get_ns();
     bfqg_stats_mark_empty(stats);
     }
 #[no_mangle]
 pub unsafe extern "C" fn bfqg_stats_update_idle_time(bfqg: *mut bfq_group) {
-    void bfqg_stats_update_idle_time(struct bfq_group *bfqg)
-    {
-    struct bfqg_stats *stats = &bfqg.stats;
+    let mut stats = &bfqg.stats;
     if (bfqg_stats_idling(stats)) {
-    let mut now: u64 = blk_time_get_ns();
-    if (now > stats.start_idle_time)
+pub static mut now: u64 = 0;
+    if (now > stats.start_idle_time) {
     bfq_stat_add(&stats.idle_time,
     now - stats.start_idle_time);
+    }
     bfqg_stats_clear_idling(stats);
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn bfqg_stats_set_start_idle_time(bfqg: *mut bfq_group) {
-    void bfqg_stats_set_start_idle_time(struct bfq_group *bfqg)
-    {
-    struct bfqg_stats *stats = &bfqg.stats;
+    let mut stats = &bfqg.stats;
     stats.start_idle_time = blk_time_get_ns();
     bfqg_stats_mark_idling(stats);
     }
 #[no_mangle]
 pub unsafe extern "C" fn bfqg_stats_update_avg_queue_size(bfqg: *mut bfq_group) {
-    void bfqg_stats_update_avg_queue_size(struct bfq_group *bfqg)
-    {
-    struct bfqg_stats *stats = &bfqg.stats;
+    let mut stats = &bfqg.stats;
     bfq_stat_add(&stats.avg_queue_size_sum,
     blkg_rwstat_total(&stats.queued));
     bfq_stat_add(&stats.avg_queue_size_samples, 1);
     bfqg_stats_update_group_wait_time(stats);
     }
-    void bfqg_stats_update_io_add(struct bfq_group *bfqg, struct bfq_queue *bfqq,
-    blk_opf_t opf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn bfqg_stats_update_io_add(bfqg: *mut bfq_group, bfqq: *mut bfq_queue, opf: blk_opf_t) {
     blkg_rwstat_add(&bfqg.stats.queued, opf, 1);
     bfqg_stats_end_empty_time(&bfqg.stats);
-    if (!(bfqq == bfqg.bfqd.in_service_queue))
+    if (!(bfqq == bfqg.bfqd.in_service_queue)) {
     bfqg_stats_set_start_group_wait_time(bfqg, bfqq_group(bfqq));
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn bfqg_stats_update_io_remove(bfqg: *mut bfq_group, opf: blk_opf_t) {
-    void bfqg_stats_update_io_remove(struct bfq_group *bfqg, blk_opf_t opf)
-    {
     blkg_rwstat_add(&bfqg.stats.queued, opf, -1);
     }
 #[no_mangle]
 pub unsafe extern "C" fn bfqg_stats_update_io_merged(bfqg: *mut bfq_group, opf: blk_opf_t) {
-    void bfqg_stats_update_io_merged(struct bfq_group *bfqg, blk_opf_t opf)
-    {
     blkg_rwstat_add(&bfqg.stats.merged, opf, 1);
     }
-    void bfqg_stats_update_completion(struct bfq_group *bfqg, u64 start_time_ns,
-    u64 io_start_time_ns, blk_opf_t opf)
-    {
-    struct bfqg_stats *stats = &bfqg.stats;
-    let mut now: u64 = blk_time_get_ns();
-    if (now > io_start_time_ns)
+#[no_mangle]
+pub unsafe extern "C" fn bfqg_stats_update_completion(bfqg: *mut bfq_group, start_time_ns: u64, io_start_time_ns: u64, opf: blk_opf_t) {
+    let mut stats = &bfqg.stats;
+pub static mut now: u64 = 0;
+    if (now > io_start_time_ns) {
     blkg_rwstat_add(&stats.service_time, opf,
     now - io_start_time_ns);
-    if (io_start_time_ns > start_time_ns)
+    }
+    if (io_start_time_ns > start_time_ns) {
     blkg_rwstat_add(&stats.wait_time, opf,
     io_start_time_ns - start_time_ns);
     }
+    }
 
-    void bfqg_stats_update_io_remove(struct bfq_group *bfqg, blk_opf_t opf) { }
-    void bfqg_stats_update_io_merged(struct bfq_group *bfqg, blk_opf_t opf) { }
-    void bfqg_stats_update_completion(struct bfq_group *bfqg, u64 start_time_ns,
-    u64 io_start_time_ns, blk_opf_t opf) { }
-    void bfqg_stats_update_dequeue(struct bfq_group *bfqg) { }
-    void bfqg_stats_set_start_idle_time(struct bfq_group *bfqg) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: bfqg_stats_update_io_remove
+pub unsafe extern "C" fn bfqg_stats_update_io_remove_dup(bfqg: *mut bfq_group, opf: blk_opf_t) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: bfqg_stats_update_io_merged
+pub unsafe extern "C" fn bfqg_stats_update_io_merged_dup(bfqg: *mut bfq_group, opf: blk_opf_t) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: bfqg_stats_update_completion
+pub unsafe extern "C" fn bfqg_stats_update_completion_dup(bfqg: *mut bfq_group, start_time_ns: u64, io_start_time_ns: u64, opf: blk_opf_t) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: bfqg_stats_update_dequeue
+pub unsafe extern "C" fn bfqg_stats_update_dequeue_dup(bfqg: *mut bfq_group) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: bfqg_stats_set_start_idle_time
+pub unsafe extern "C" fn bfqg_stats_set_start_idle_time_dup(bfqg: *mut bfq_group) { }
 
 //
 // blk-cgroup policy-related handlers
 // The following functions help in converting between blk-cgroup
 // internal structures and BFQ-specific structures.
 //
-    static struct bfq_group *pd_to_bfqg(struct blkg_policy_data *pd)
-    {
-    return pd ? container_of(pd, struct bfq_group, pd) : core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn pd_to_bfqg(pd: *mut blkg_policy_data) -> *mut c_void {
+    return pd ? container_of!(pd, bfq_group, pd) : core::ptr::null_mut();
     }
-    struct blkcg_gq *bfqg_to_blkg(struct bfq_group *bfqg)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn bfqg_to_blkg(bfqg: *mut bfq_group) -> *mut c_void {
     return pd_to_blkg(&bfqg.pd);
     }
-    static struct bfq_group *blkg_to_bfqg(struct blkcg_gq *blkg)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn blkg_to_bfqg(blkg: *mut blkcg_gq) -> *mut c_void {
     return pd_to_bfqg(blkg_to_pd(blkg, &blkcg_policy_bfq));
     }
 //
@@ -299,15 +543,13 @@ pub unsafe extern "C" fn bfqg_stats_update_io_merged(bfqg: *mut bfq_group, opf: 
 // by allowing to find the parent of a bfq_group or the bfq_group
 // associated to a bfq_queue.
 //
-    static struct bfq_group *bfqg_parent(struct bfq_group *bfqg)
-    {
-    struct blkcg_gq *pblkg = bfqg_to_blkg(bfqg).parent;
+#[no_mangle]
+pub unsafe extern "C" fn bfqg_parent(bfqg: *mut bfq_group) -> *mut c_void {
+    let mut pblkg = bfqg_to_blkg(bfqg).parent;
     return pblkg ? blkg_to_bfqg(pblkg) : core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn bfqg_stats_exit(stats: *mut bfqg_stats) {
-    static void bfqg_stats_exit(struct bfqg_stats *stats)
-    {
     blkg_rwstat_exit(&stats.bytes);
     blkg_rwstat_exit(&stats.ios);
 
@@ -324,10 +566,10 @@ unsafe extern "C" fn bfqg_stats_exit(stats: *mut bfqg_stats) {
     bfq_stat_exit(&stats.empty_time);
 
     }
-    struct bfq_group *bfqq_group(struct bfq_queue *bfqq)
-    {
-    struct bfq_entity *group_entity = bfqq.entity.parent;
-    return group_entity ? container_of(group_entity, struct bfq_group,
+#[no_mangle]
+pub unsafe extern "C" fn bfqq_group(bfqq: *mut bfq_queue) -> *mut c_void {
+    let mut group_entity = bfqq.entity.parent;
+    return group_entity ? container_of!(group_entity, bfq_group,
     entity) :
     bfqq.bfqd.root_group;
     }
@@ -337,14 +579,10 @@ unsafe extern "C" fn bfqg_stats_exit(stats: *mut bfqg_stats) {
 //
 #[no_mangle]
 unsafe extern "C" fn bfqg_get(bfqg: *mut bfq_group) {
-    static void bfqg_get(struct bfq_group *bfqg)
-    {
     refcount_inc(&bfqg.ref);
     }
 #[no_mangle]
 unsafe extern "C" fn bfqg_put(bfqg: *mut bfq_group) {
-    static void bfqg_put(struct bfq_group *bfqg)
-    {
     if (refcount_dec_and_test(&bfqg.ref)) {
     bfqg_stats_exit(&bfqg.stats);
     kfree(bfqg);
@@ -352,34 +590,27 @@ unsafe extern "C" fn bfqg_put(bfqg: *mut bfq_group) {
     }
 #[no_mangle]
 unsafe extern "C" fn bfqg_and_blkg_get(bfqg: *mut bfq_group) {
-    static void bfqg_and_blkg_get(struct bfq_group *bfqg)
-    {
 // see comments in bfq_bic_update_cgroup for why refcounting bfqg
     bfqg_get(bfqg);
     blkg_get(bfqg_to_blkg(bfqg));
     }
 #[no_mangle]
 pub unsafe extern "C" fn bfqg_and_blkg_put(bfqg: *mut bfq_group) {
-    void bfqg_and_blkg_put(struct bfq_group *bfqg)
-    {
     blkg_put(bfqg_to_blkg(bfqg));
     bfqg_put(bfqg);
     }
 #[no_mangle]
 pub unsafe extern "C" fn bfqg_stats_update_legacy_io(q: *mut request_queue, rq: *mut request) {
-    void bfqg_stats_update_legacy_io(struct request_queue *q, struct request *rq)
-    {
-    struct bfq_group *bfqg = blkg_to_bfqg(rq.bio.bi_blkg);
-    if (!bfqg)
+    let mut bfqg = blkg_to_bfqg(rq.bio.bi_blkg);
+    if (!bfqg) {
     return;
+    }
     blkg_rwstat_add(&bfqg.stats.bytes, rq.cmd_flags, blk_rq_bytes(rq));
     blkg_rwstat_add(&bfqg.stats.ios, rq.cmd_flags, 1);
     }
 // @stats = 0
 #[no_mangle]
 unsafe extern "C" fn bfqg_stats_reset(stats: *mut bfqg_stats) {
-    static void bfqg_stats_reset(struct bfqg_stats *stats)
-    {
 
 // queued stats shouldn't be cleared
     blkg_rwstat_reset(&stats.merged);
@@ -397,10 +628,9 @@ unsafe extern "C" fn bfqg_stats_reset(stats: *mut bfqg_stats) {
 // @to += @from
 #[no_mangle]
 unsafe extern "C" fn bfqg_stats_add_aux(to: *mut bfqg_stats, from: *mut bfqg_stats) {
-    static void bfqg_stats_add_aux(struct bfqg_stats *to, struct bfqg_stats *from)
-    {
-    if (!to || !from)
+    if (!to || !from) {
     return;
+    }
 
 // queued stats shouldn't be cleared
     blkg_rwstat_add_aux(&to.merged, &from.merged);
@@ -423,23 +653,21 @@ unsafe extern "C" fn bfqg_stats_add_aux(to: *mut bfqg_stats, from: *mut bfqg_sta
 //
 #[no_mangle]
 unsafe extern "C" fn bfqg_stats_xfer_dead(bfqg: *mut bfq_group) {
-    static void bfqg_stats_xfer_dead(struct bfq_group *bfqg)
-    {
-    struct bfq_group *parent;
-    if (!bfqg) /* root_group */
+pub static mut parent: *mut c_void = core::ptr::null_mut();
+    if (!bfqg) /* root_group */ {
     return;
+    }
     parent = bfqg_parent(bfqg);
     lockdep_assert_held(&bfqg_to_blkg(bfqg).q.queue_lock);
-    if (unlikely(!parent))
+    if (unlikely(!parent)) {
     return;
+    }
     bfqg_stats_add_aux(&parent.stats, &bfqg.stats);
     bfqg_stats_reset(&bfqg.stats);
     }
 #[no_mangle]
 pub unsafe extern "C" fn bfq_init_entity(entity: *mut bfq_entity, bfqg: *mut bfq_group) {
-    void bfq_init_entity(struct bfq_entity *entity, struct bfq_group *bfqg)
-    {
-    struct bfq_queue *bfqq = bfq_entity_to_bfqq(entity);
+    let mut bfqq = bfq_entity_to_bfqq(entity);
     entity.weight = entity.new_weight;
     entity.orig_weight = entity.new_weight;
     if (bfqq) {
@@ -456,11 +684,10 @@ pub unsafe extern "C" fn bfq_init_entity(entity: *mut bfq_entity, bfqg: *mut bfq
     }
 #[no_mangle]
 unsafe extern "C" fn bfqg_stats_init(stats: *mut bfqg_stats, gfp: gfp_t) -> c_int {
-    static int bfqg_stats_init(struct bfqg_stats *stats, gfp_t gfp)
-    {
     if (blkg_rwstat_init(&stats.bytes, gfp) ||
-    blkg_rwstat_init(&stats.ios, gfp))
-    goto error;
+    blkg_rwstat_init(&stats.ios, gfp)) {
+// goto;
+    }
 
     if (blkg_rwstat_init(&stats.merged, gfp) ||
     blkg_rwstat_init(&stats.service_time, gfp) ||
@@ -472,44 +699,44 @@ unsafe extern "C" fn bfqg_stats_init(stats: *mut bfqg_stats, gfp: gfp_t) -> c_in
     bfq_stat_init(&stats.dequeue, gfp) ||
     bfq_stat_init(&stats.group_wait_time, gfp) ||
     bfq_stat_init(&stats.idle_time, gfp) ||
-    bfq_stat_init(&stats.empty_time, gfp))
-    goto error;
+    bfq_stat_init(&stats.empty_time, gfp)) {
+// goto;
+    }
 
     return 0;
-    error:
+// label;
     bfqg_stats_exit(stats);
     return -ENOMEM;
     }
-    static struct bfq_group_data *cpd_to_bfqgd(struct blkcg_policy_data *cpd)
-    {
-    return cpd ? container_of(cpd, struct bfq_group_data, pd) : core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn cpd_to_bfqgd(cpd: *mut blkcg_policy_data) -> *mut c_void {
+    return cpd ? container_of!(cpd, bfq_group_data, pd) : core::ptr::null_mut();
     }
-    static struct bfq_group_data *blkcg_to_bfqgd(struct blkcg *blkcg)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn blkcg_to_bfqgd(blkcg: *mut blkcg) -> *mut c_void {
     return cpd_to_bfqgd(blkcg_to_cpd(blkcg, &blkcg_policy_bfq));
     }
-    static struct blkcg_policy_data *bfq_cpd_alloc(gfp_t gfp)
-    {
-    struct bfq_group_data *bgd;
+#[no_mangle]
+pub unsafe extern "C" fn bfq_cpd_alloc(gfp: gfp_t) -> *mut c_void {
+pub static mut bgd: *mut c_void = core::ptr::null_mut();
     bgd = kzalloc_obj(*bgd, gfp);
-    if (!bgd)
+    if (!bgd) {
     return core::ptr::null_mut();
+    }
     bgd.weight = CGROUP_WEIGHT_DFL;
     return &bgd.pd;
     }
 #[no_mangle]
 unsafe extern "C" fn bfq_cpd_free(cpd: *mut blkcg_policy_data) {
-    static void bfq_cpd_free(struct blkcg_policy_data *cpd)
-    {
     kfree(cpd_to_bfqgd(cpd));
     }
-    static struct blkg_policy_data *bfq_pd_alloc(struct gendisk *disk,
-    struct blkcg *blkcg, gfp_t gfp)
-    {
-    struct bfq_group *bfqg;
-    bfqg = kzalloc_node(sizeof(*bfqg), gfp, disk.node_id);
-    if (!bfqg)
+#[no_mangle]
+pub unsafe extern "C" fn bfq_pd_alloc(disk: *mut gendisk, blkcg: *mut blkcg, gfp: gfp_t) -> *mut c_void {
+pub static mut bfqg: *mut c_void = core::ptr::null_mut();
+    bfqg = kzalloc_node(sizeof!(*bfqg), gfp, disk.node_id);
+    if (!bfqg) {
     return core::ptr::null_mut();
+    }
     if (bfqg_stats_init(&bfqg.stats, gfp)) {
     kfree(bfqg);
     return core::ptr::null_mut();
@@ -520,17 +747,15 @@ unsafe extern "C" fn bfq_cpd_free(cpd: *mut blkcg_policy_data) {
     }
 #[no_mangle]
 unsafe extern "C" fn bfq_pd_init(pd: *mut blkg_policy_data) {
-    static void bfq_pd_init(struct blkg_policy_data *pd)
-    {
-    struct blkcg_gq *blkg = pd_to_blkg(pd);
-    struct bfq_group *bfqg = blkg_to_bfqg(blkg);
-    struct bfq_data *bfqd = blkg.q.elevator.elevator_data;
-    struct bfq_entity *entity = &bfqg.entity;
-    struct bfq_group_data *d = blkcg_to_bfqgd(blkg.blkcg);
+    let mut blkg = pd_to_blkg(pd);
+    let mut bfqg = blkg_to_bfqg(blkg);
+    let mut bfqd = blkg.q.elevator.elevator_data;
+    let mut entity = &bfqg.entity;
+    let mut d = blkcg_to_bfqgd(blkg.blkcg);
     entity.orig_weight = entity.weight = entity.new_weight = d.weight;
     entity.my_sched_data = &bfqg.sched_data;
     entity.last_bfqq_created = core::ptr::null_mut();
-    bfqg.my_entity = entity; /*
+    bfqg.my_entity = entity; //
 // the root_group's will be set to NULL
 // in bfq_init_queue()
 //
@@ -541,40 +766,30 @@ unsafe extern "C" fn bfq_pd_init(pd: *mut blkg_policy_data) {
     }
 #[no_mangle]
 unsafe extern "C" fn bfqg_release(rcu: *mut rcu_head) {
-    static void bfqg_release(struct rcu_head *rcu)
-    {
-    struct blkg_policy_data *pd =
-    container_of(rcu, struct blkg_policy_data, rcu_head);
-    struct bfq_group *bfqg = pd_to_bfqg(pd);
+    let mut pd = container_of!(rcu, blkg_policy_data, rcu_head);
+    let mut bfqg = pd_to_bfqg(pd);
     bfqg_put(bfqg);
     }
 #[no_mangle]
 unsafe extern "C" fn bfq_pd_free(pd: *mut blkg_policy_data) {
-    static void bfq_pd_free(struct blkg_policy_data *pd)
-    {
     call_rcu(&pd.rcu_head, bfqg_release);
     }
 #[no_mangle]
 unsafe extern "C" fn bfq_pd_reset_stats(pd: *mut blkg_policy_data) {
-    static void bfq_pd_reset_stats(struct blkg_policy_data *pd)
-    {
-    struct bfq_group *bfqg = pd_to_bfqg(pd);
+    let mut bfqg = pd_to_bfqg(pd);
     bfqg_stats_reset(&bfqg.stats);
     }
-    static void bfq_group_set_parent(struct bfq_group *bfqg,
-    struct bfq_group *parent)
-    {
-    struct bfq_entity *entity;
+#[no_mangle]
+pub unsafe extern "C" fn bfq_group_set_parent(bfqg: *mut bfq_group, parent: *mut bfq_group) {
+pub static mut entity: *mut c_void = core::ptr::null_mut();
     entity = &bfqg.entity;
     entity.parent = parent.my_entity;
     entity.sched_data = &parent.sched_data;
     }
 #[no_mangle]
 unsafe extern "C" fn bfq_link_bfqg(bfqd: *mut bfq_data, bfqg: *mut bfq_group) {
-    static void bfq_link_bfqg(struct bfq_data *bfqd, struct bfq_group *bfqg)
-    {
-    struct bfq_group *parent;
-    struct bfq_entity *entity;
+pub static mut parent: *mut c_void = core::ptr::null_mut();
+pub static mut entity: *mut c_void = core::ptr::null_mut();
 //
 // Update chain of bfq_groups as we might be handling a leaf group
 // which, along with some of its relatives, has not been hooked yet
@@ -582,20 +797,20 @@ unsafe extern "C" fn bfq_link_bfqg(bfqd: *mut bfq_data, bfqg: *mut bfq_group) {
 //
     entity = &bfqg.entity;
     for_each_entity(entity) {
-    struct bfq_group *curr_bfqg = container_of(entity,
-    struct bfq_group, entity);
+    let mut curr_bfqg = container_of!(entity, bfq_group, entity);
     if (curr_bfqg != bfqd.root_group) {
     parent = bfqg_parent(curr_bfqg);
-    if (!parent)
+    if (!parent) {
     parent = bfqd.root_group;
+    }
     bfq_group_set_parent(curr_bfqg, parent);
     }
     }
     }
-    struct bfq_group *bfq_bio_bfqg(struct bfq_data *bfqd, struct bio *bio)
-    {
-    struct blkcg_gq *blkg = bio.bi_blkg;
-    struct bfq_group *bfqg;
+#[no_mangle]
+pub unsafe extern "C" fn bfq_bio_bfqg(bfqd: *mut bfq_data, bio: *mut bio) -> *mut c_void {
+    let mut blkg = bio.bi_blkg;
+pub static mut bfqg: *mut c_void = core::ptr::null_mut();
     while (blkg) {
     if (!data_race(blkg.online)) {
     blkg = blkg.parent;
@@ -626,29 +841,30 @@ unsafe extern "C" fn bfq_link_bfqg(bfqd: *mut bfq_data, bfqg: *mut bfq_group) {
 // bfq_bic_update_cgroup on guaranteeing the consistency of blkg
 // objects).
 //
-    void bfq_bfqq_move(struct bfq_data *bfqd, struct bfq_queue *bfqq,
-    struct bfq_group *bfqg)
-    {
-    struct bfq_entity *entity = &bfqq.entity;
-    struct bfq_group *old_parent = bfqq_group(bfqq);
-    let mut has_pending_reqs: bool = false;
+#[no_mangle]
+pub unsafe extern "C" fn bfq_bfqq_move(bfqd: *mut bfq_data, bfqq: *mut bfq_queue, bfqg: *mut bfq_group) {
+    let mut entity = &bfqq.entity;
+    let mut old_parent = bfqq_group(bfqq);
+pub static mut has_pending_reqs: bool = false;
 //
 // No point to move bfqq to the same group, which can happen when
 // root group is offlined
 //
-    if (old_parent == bfqg)
+    if (old_parent == bfqg) {
     return;
+    }
 //
 // oom_bfqq is not allowed to move, oom_bfqq will hold ref to root_group
 // until elevator exit.
 //
-    if (bfqq == &bfqd.oom_bfqq)
+    if (bfqq == &bfqd.oom_bfqq) {
     return;
+    }
 //
 // Get extra reference to prevent bfqq from being freed in
 // next possible expire or deactivate.
 //
-    bfqq.ref++;
+    bfqq.ref += 1;
     if (entity.in_groups_with_pending_reqs) {
     has_pending_reqs = true;
     bfq_del_bfqq_in_groups_with_pending_reqs(bfqq);
@@ -659,44 +875,46 @@ unsafe extern "C" fn bfq_link_bfqg(bfqd: *mut bfq_data, bfqg: *mut bfq_group) {
 // need to remove bfqq explicitly with bfq_deactivate_bfqq, as
 // we do below.
 //
-    if (bfqq == bfqd.in_service_queue)
+    if (bfqq == bfqd.in_service_queue) {
     bfq_bfqq_expire(bfqd, bfqd.in_service_queue,
     false, BFQQE_PREEMPTED);
-    if (bfq_bfqq_busy(bfqq))
+    }
+    if (bfq_bfqq_busy(bfqq)) {
     bfq_deactivate_bfqq(bfqd, bfqq, false, false);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: entity->on_st_or_in_serv) -> else {
-    else if (entity.on_st_or_in_serv)
+    }
+
+    else if (entity.on_st_or_in_serv) {
     bfq_put_idle_entity(bfq_entity_service_tree(entity), entity);
+    }
     bfqg_and_blkg_put(old_parent);
     bfq_reassign_last_bfqq(bfqq, core::ptr::null_mut());
     entity.parent = bfqg.my_entity;
     entity.sched_data = &bfqg.sched_data;
 // pin down bfqg and its associated blkg
     bfqg_and_blkg_get(bfqg);
-    if (has_pending_reqs)
+    if (has_pending_reqs) {
     bfq_add_bfqq_in_groups_with_pending_reqs(bfqq);
+    }
     if (bfq_bfqq_busy(bfqq)) {
-    if (unlikely(!bfqd.nonrot_with_queueing))
+    if (unlikely(!bfqd.nonrot_with_queueing)) {
     bfq_pos_tree_add_move(bfqd, bfqq);
+    }
     bfq_activate_bfqq(bfqd, bfqq);
     }
-    if (!bfqd.in_service_queue && !bfqd.tot_rq_in_driver)
+    if (!bfqd.in_service_queue && !bfqd.tot_rq_in_driver) {
     bfq_schedule_dispatch(bfqd);
+    }
 // release extra ref taken above, bfqq may happen to be freed now
     bfq_put_queue(bfqq);
     }
-    static void bfq_sync_bfqq_move(struct bfq_data *bfqd,
-    struct bfq_queue *sync_bfqq,
-    struct bfq_io_cq *bic,
-    struct bfq_group *bfqg,
-    unsigned int act_idx)
-    {
-    struct bfq_queue *bfqq;
+#[no_mangle]
+pub unsafe extern "C" fn bfq_sync_bfqq_move(bfqd: *mut bfq_data, sync_bfqq: *mut bfq_queue, bic: *mut bfq_io_cq, bfqg: *mut bfq_group, act_idx: c_uint) {
+pub static mut bfqq: *mut c_void = core::ptr::null_mut();
     if (!sync_bfqq.new_bfqq && !bfq_bfqq_coop(sync_bfqq)) {
 // We are the only user of this bfqq, just move it
-    if (sync_bfqq.entity.sched_data != &bfqg.sched_data)
+    if (sync_bfqq.entity.sched_data != &bfqg.sched_data) {
     bfq_bfqq_move(bfqd, sync_bfqq, bfqg);
+    }
     return;
     }
 //
@@ -704,9 +922,10 @@ pub unsafe extern "C" fn if(_arg: entity->on_st_or_in_serv) -> else {
 // that the merge chain still belongs to the same
 // cgroup.
 //
-    for (bfqq = sync_bfqq; bfqq; bfqq = bfqq.new_bfqq)
+    for (bfqq = sync_bfqq; bfqq; bfqq = bfqq.new_bfqq) {
     if (bfqq.entity.sched_data != &bfqg.sched_data)
     break;
+    }
     if (bfqq) {
 //
 // Some queue changed cgroup so the merge is not valid
@@ -733,37 +952,35 @@ pub unsafe extern "C" fn if(_arg: entity->on_st_or_in_serv) -> else {
 // sure that the reference to cgroup is valid across the call (see
 // comments in bfq_bic_update_cgroup on this issue)
 //
-    static void __bfq_bic_change_cgroup(struct bfq_data *bfqd,
-    struct bfq_io_cq *bic,
-    struct bfq_group *bfqg)
-    {
-    unsigned int act_idx;
-    for (act_idx = 0; act_idx < bfqd.num_actuators; act_idx++) {
-    struct bfq_queue *async_bfqq = bic_to_bfqq(bic, false, act_idx);
-    struct bfq_queue *sync_bfqq = bic_to_bfqq(bic, true, act_idx);
+#[no_mangle]
+pub unsafe extern "C" fn __bfq_bic_change_cgroup(bfqd: *mut bfq_data, bic: *mut bfq_io_cq, bfqg: *mut bfq_group) {
+    let mut act_idx = 0;
+    while (act_idx < bfqd.num_actuators) {
+    let mut async_bfqq = bic_to_bfqq(bic, false, act_idx);
+    let mut sync_bfqq = bic_to_bfqq(bic, true, act_idx);
     if (async_bfqq &&
     async_bfqq.entity.sched_data != &bfqg.sched_data) {
     bic_set_bfqq(bic, core::ptr::null_mut(), false, act_idx);
     bfq_release_process_ref(bfqd, async_bfqq);
     }
-    if (sync_bfqq)
+    if (sync_bfqq) {
     bfq_sync_bfqq_move(bfqd, sync_bfqq, bic, bfqg, act_idx);
+    }
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn bfq_bic_update_cgroup(bic: *mut bfq_io_cq, bio: *mut bio) {
-    void bfq_bic_update_cgroup(struct bfq_io_cq *bic, struct bio *bio)
-    {
-    struct bfq_data *bfqd = bic_to_bfqd(bic);
-    struct bfq_group *bfqg = bfq_bio_bfqg(bfqd, bio);
-    uint64_t serial_nr;
+    let mut bfqd = bic_to_bfqd(bic);
+    let mut bfqg = bfq_bio_bfqg(bfqd, bio);
+    let mut serial_nr;
     serial_nr = bfqg_to_blkg(bfqg).blkcg.css.serial_nr;
 //
 // Check whether blkcg has changed.  The condition may trigger
 // spuriously on a newly created cic but there's no harm.
 //
-    if (unlikely(!bfqd) || likely(bic.blkcg_serial_nr == serial_nr))
+    if (unlikely(!bfqd) || likely(bic.blkcg_serial_nr == serial_nr)) {
     return;
+    }
 //
 // New cgroup for this process. Make sure it is linked to bfq internal
 // cgroup hierarchy.
@@ -778,11 +995,10 @@ pub unsafe extern "C" fn bfq_bic_update_cgroup(bic: *mut bfq_io_cq, bio: *mut bi
 //
 #[no_mangle]
 unsafe extern "C" fn bfq_flush_idle_tree(st: *mut bfq_service_tree) {
-    static void bfq_flush_idle_tree(struct bfq_service_tree *st)
-    {
-    struct bfq_entity *entity = st.first_idle;
-    for (; entity ; entity = st.first_idle)
+    let mut entity = st.first_idle;
+    for (; entity ; entity = st.first_idle) {
     __bfq_deactivate_entity(entity, false);
+    }
     }
 //
 // bfq_reparent_leaf_entity - move leaf entity to the root_group.
@@ -791,20 +1007,20 @@ unsafe extern "C" fn bfq_flush_idle_tree(st: *mut bfq_service_tree) {
 // of an active leaf entity to move, if entity is not a leaf.
 // @ioprio_class: I/O priority class to reparent.
 //
-    static void bfq_reparent_leaf_entity(struct bfq_data *bfqd,
-    struct bfq_entity *entity,
-    int ioprio_class)
-    {
-    struct bfq_queue *bfqq;
-    struct bfq_entity *child_entity = entity;
-    while (child_entity.my_sched_data) { /* leaf not reached yet */
-    struct bfq_sched_data *child_sd = child_entity.my_sched_data;
-    struct bfq_service_tree *child_st = child_sd.service_tree +
+#[no_mangle]
+pub unsafe extern "C" fn bfq_reparent_leaf_entity(bfqd: *mut bfq_data, entity: *mut bfq_entity, ioprio_class: c_int) {
+pub static mut bfqq: *mut c_void = core::ptr::null_mut();
+    let mut child_entity = entity;
+    while (child_entity.my_sched_data) { /* leaf not reached yet */ {
+    let mut child_sd = child_entity.my_sched_data;
+    }
+    let mut child_st = child_sd.service_tree +
     ioprio_class;
-    struct rb_root *child_active = &child_st.active;
+    let mut child_active = &child_st.active;
     child_entity = bfq_entity_of(rb_first(child_active));
-    if (!child_entity)
+    if (!child_entity) {
     child_entity = child_sd.in_service_entity;
+    }
     }
     bfqq = bfq_entity_to_bfqq(child_entity);
     bfq_bfqq_move(bfqd, bfqq, bfqd.root_group);
@@ -816,19 +1032,18 @@ unsafe extern "C" fn bfq_flush_idle_tree(st: *mut bfq_service_tree) {
 // @st: the service tree to start the search from.
 // @ioprio_class: I/O priority class to reparent.
 //
-    static void bfq_reparent_active_queues(struct bfq_data *bfqd,
-    struct bfq_group *bfqg,
-    struct bfq_service_tree *st,
-    int ioprio_class)
-    {
-    struct rb_root *active = &st.active;
-    struct bfq_entity *entity;
-    while ((entity = bfq_entity_of(rb_first(active))))
+#[no_mangle]
+pub unsafe extern "C" fn bfq_reparent_active_queues(bfqd: *mut bfq_data, bfqg: *mut bfq_group, st: *mut bfq_service_tree, ioprio_class: c_int) {
+    let mut active = &st.active;
+pub static mut entity: *mut c_void = core::ptr::null_mut();
+    while ((entity = bfq_entity_of(rb_first(active)))) {
     bfq_reparent_leaf_entity(bfqd, entity, ioprio_class);
-    if (bfqg.sched_data.in_service_entity)
+    }
+    if (bfqg.sched_data.in_service_entity) {
     bfq_reparent_leaf_entity(bfqd,
     bfqg.sched_data.in_service_entity,
     ioprio_class);
+    }
     }
 //
 // bfq_pd_offline - deactivate the entity associated with @pd,
@@ -840,22 +1055,21 @@ unsafe extern "C" fn bfq_flush_idle_tree(st: *mut bfq_service_tree) {
 //
 #[no_mangle]
 unsafe extern "C" fn bfq_pd_offline(pd: *mut blkg_policy_data) {
-    static void bfq_pd_offline(struct blkg_policy_data *pd)
-    {
-    struct bfq_service_tree *st;
-    struct bfq_group *bfqg = pd_to_bfqg(pd);
-    struct bfq_data *bfqd = bfqg.bfqd;
-    struct bfq_entity *entity = bfqg.my_entity;
-    unsigned long flags;
-    int i;
+pub static mut st: *mut c_void = core::ptr::null_mut();
+    let mut bfqg = pd_to_bfqg(pd);
+    let mut bfqd = bfqg.bfqd;
+    let mut entity = bfqg.my_entity;
+    let mut flags = 0;
+    let mut i = 0;
     spin_lock_irqsave(&bfqd.lock, flags);
-    if (!entity) /* root group */
-    goto put_async_queues;
+    if (!entity) /* root group */ {
+// goto;
+    }
 //
 // Empty all service_trees belonging to this group before
 // deactivating the group itself.
 //
-    for (i = 0; i < BFQ_IOPRIO_CLASSES; i++) {
+    while (i < BFQ_IOPRIO_CLASSES) {
     st = bfqg.sched_data.service_tree + i;
 //
 // It may happen that some queues are still active
@@ -884,7 +1098,7 @@ unsafe extern "C" fn bfq_pd_offline(pd: *mut blkg_policy_data) {
     bfq_flush_idle_tree(st);
     }
     __bfq_deactivate_entity(entity, false);
-    put_async_queues:
+// label;
     bfq_put_async_queues(bfqd, bfqg);
     spin_unlock_irqrestore(&bfqd.lock, flags);
 //
@@ -897,15 +1111,13 @@ unsafe extern "C" fn bfq_pd_offline(pd: *mut blkg_policy_data) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn bfq_end_wr_async(bfqd: *mut bfq_data) {
-    void bfq_end_wr_async(struct bfq_data *bfqd)
-    {
-    struct request_queue *q = bfqd.queue;
-    struct blkcg_gq *blkg;
+    let mut q = bfqd.queue;
+pub static mut blkg: *mut c_void = core::ptr::null_mut();
     mutex_lock(&q.blkcg_mutex);
     spin_lock_irq(&q.queue_lock);
     spin_lock(&bfqd.lock);
     list_for_each_entry(blkg, &q.blkg_list, q_node) {
-    struct bfq_group *bfqg = blkg_to_bfqg(blkg);
+    let mut bfqg = blkg_to_bfqg(blkg);
     bfq_end_wr_async_queues(bfqd, bfqg);
     }
     bfq_end_wr_async_queues(bfqd, bfqd.root_group);
@@ -915,30 +1127,27 @@ pub unsafe extern "C" fn bfq_end_wr_async(bfqd: *mut bfq_data) {
     }
 #[no_mangle]
 unsafe extern "C" fn bfq_io_show_weight_legacy(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int bfq_io_show_weight_legacy(struct seq_file *sf, void *v)
-    {
-    struct blkcg *blkcg = css_to_blkcg(seq_css(sf));
-    struct bfq_group_data *bfqgd = blkcg_to_bfqgd(blkcg);
-    let mut val: c_uint = 0;
-    if (bfqgd)
+    let mut blkcg = css_to_blkcg(seq_css(sf));
+    let mut bfqgd = blkcg_to_bfqgd(blkcg);
+pub static mut val: c_uint = 0;
+    if (bfqgd) {
     val = bfqgd.weight;
+    }
     seq_printf(sf, "%u\n", val);
     return 0;
     }
-    static u64 bfqg_prfill_weight_device(struct seq_file *sf,
-    struct blkg_policy_data *pd, int off)
-    {
-    struct bfq_group *bfqg = pd_to_bfqg(pd);
-    if (!bfqg.entity.dev_weight)
+#[no_mangle]
+pub unsafe extern "C" fn bfqg_prfill_weight_device(sf: *mut seq_file, pd: *mut blkg_policy_data, off: c_int) -> u64 {
+    let mut bfqg = pd_to_bfqg(pd);
+    if (!bfqg.entity.dev_weight) {
     return 0;
+    }
     return __blkg_prfill_u64(sf, pd, bfqg.entity.dev_weight);
     }
 #[no_mangle]
 unsafe extern "C" fn bfq_io_show_weight(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int bfq_io_show_weight(struct seq_file *sf, void *v)
-    {
-    struct blkcg *blkcg = css_to_blkcg(seq_css(sf));
-    struct bfq_group_data *bfqgd = blkcg_to_bfqgd(blkcg);
+    let mut blkcg = css_to_blkcg(seq_css(sf));
+    let mut bfqgd = blkcg_to_bfqgd(blkcg);
     seq_printf(sf, "default %u\n", bfqgd.weight);
     blkcg_print_blkgs(sf, blkcg, bfqg_prfill_weight_device,
     &blkcg_policy_bfq, 0, false);
@@ -946,8 +1155,6 @@ unsafe extern "C" fn bfq_io_show_weight(sf: *mut seq_file, v: *mut c_void) -> c_
     }
 #[no_mangle]
 unsafe extern "C" fn bfq_group_set_weight(bfqg: *mut bfq_group, weight: u64, dev_weight: u64) {
-    static void bfq_group_set_weight(struct bfq_group *bfqg, u64 weight, u64 dev_weight)
-    {
     weight = dev_weight ?: weight;
     bfqg.entity.dev_weight = dev_weight;
 //
@@ -977,53 +1184,54 @@ unsafe extern "C" fn bfq_group_set_weight(bfqg: *mut bfq_group, weight: u64, dev
     bfqg.entity.prio_changed = 1;
     }
     }
-    static int bfq_io_set_weight_legacy(struct cgroup_subsys_state *css,
-    struct cftype *cftype,
-    u64 val)
-    {
-    struct blkcg *blkcg = css_to_blkcg(css);
-    struct bfq_group_data *bfqgd = blkcg_to_bfqgd(blkcg);
-    struct blkcg_gq *blkg;
-    let mut ret: c_int = -ERANGE;
-    if (val < BFQ_MIN_WEIGHT || val > BFQ_MAX_WEIGHT)
+#[no_mangle]
+pub unsafe extern "C" fn bfq_io_set_weight_legacy(css: *mut cgroup_subsys_state, cftype: *mut cftype, val: u64) -> c_int {
+    let mut blkcg = css_to_blkcg(css);
+    let mut bfqgd = blkcg_to_bfqgd(blkcg);
+pub static mut blkg: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
+    if (val < BFQ_MIN_WEIGHT || val > BFQ_MAX_WEIGHT) {
     return ret;
+    }
     ret = 0;
     spin_lock_irq(&blkcg.lock);
     bfqgd.weight = (unsigned short)val;
     hlist_for_each_entry(blkg, &blkcg.blkg_list, blkcg_node) {
-    struct bfq_group *bfqg = blkg_to_bfqg(blkg);
-    if (bfqg)
+    let mut bfqg = blkg_to_bfqg(blkg);
+    if (bfqg) {
     bfq_group_set_weight(bfqg, val, 0);
+    }
     }
     spin_unlock_irq(&blkcg.lock);
     return ret;
     }
-    static ssize_t bfq_io_set_device_weight(struct kernfs_open_file *of,
-    char *buf, size_t nbytes,
-    loff_t off)
-    {
-    int ret;
-    struct blkg_conf_ctx ctx;
-    struct blkcg *blkcg = css_to_blkcg(of_css(of));
-    struct bfq_group *bfqg;
-    u64 v;
+#[no_mangle]
+pub unsafe extern "C" fn bfq_io_set_device_weight(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+    let mut ret = 0;
+pub static mut ctx: usize = 0;
+    let mut blkcg = css_to_blkcg(of_css(of));
+pub static mut bfqg: *mut c_void = core::ptr::null_mut();
+    let mut v = 0;
     blkg_conf_init(&ctx, buf);
     ret = blkg_conf_open_bdev(&ctx);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     ret = blkg_conf_prep(blkcg, &blkcg_policy_bfq, &ctx);
-    if (ret)
-    goto close_bdev;
+    if (ret) {
+// goto;
+    }
     if (sscanf(ctx.body, "%llu", &v) == 1) {
 // require "default" on dfl
     ret = -ERANGE;
-    if (!v)
-    goto out;
+    if (!v) {
+// goto;
+    }
     } else if (!strcmp(strim(ctx.body), "default")) {
     v = 0;
     } else {
     ret = -EINVAL;
-    goto out;
+// goto;
     }
     bfqg = blkg_to_bfqg(ctx.blkg);
     ret = -ERANGE;
@@ -1031,19 +1239,17 @@ unsafe extern "C" fn bfq_group_set_weight(bfqg: *mut bfq_group, weight: u64, dev
     bfq_group_set_weight(bfqg, bfqg.entity.weight, v);
     ret = 0;
     }
-    out:
+// label;
     blkg_conf_unprep(&ctx);
-    close_bdev:
+// label;
     blkg_conf_close_bdev(&ctx);
     return ret ?: nbytes;
     }
-    static ssize_t bfq_io_set_weight(struct kernfs_open_file *of,
-    char *buf, size_t nbytes,
-    loff_t off)
-    {
-    char *endp;
-    int ret;
-    u64 v;
+#[no_mangle]
+pub unsafe extern "C" fn bfq_io_set_weight(of: *mut kernfs_open_file, buf: *mut c_char, nbytes: size_t, off: loff_t) -> ssize_t {
+pub static mut endp: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    let mut v = 0;
     buf = strim(buf);
 // "WEIGHT" or "default WEIGHT" sets the default weight
     v = simple_strtoull(buf, &endp, 0);
@@ -1055,23 +1261,18 @@ unsafe extern "C" fn bfq_group_set_weight(bfqg: *mut bfq_group, weight: u64, dev
     }
 #[no_mangle]
 unsafe extern "C" fn bfqg_print_rwstat(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int bfqg_print_rwstat(struct seq_file *sf, void *v)
-    {
     blkcg_print_blkgs(sf, css_to_blkcg(seq_css(sf)), blkg_prfill_rwstat,
     &blkcg_policy_bfq, seq_cft(sf).private, true);
     return 0;
     }
-    static u64 bfqg_prfill_rwstat_recursive(struct seq_file *sf,
-    struct blkg_policy_data *pd, int off)
-    {
-    struct blkg_rwstat_sample sum;
+#[no_mangle]
+pub unsafe extern "C" fn bfqg_prfill_rwstat_recursive(sf: *mut seq_file, pd: *mut blkg_policy_data, off: c_int) -> u64 {
+pub static mut sum: usize = 0;
     blkg_rwstat_recursive_sum(pd_to_blkg(pd), &blkcg_policy_bfq, off, &sum);
     return __blkg_prfill_rwstat(sf, pd, &sum);
     }
 #[no_mangle]
 unsafe extern "C" fn bfqg_print_rwstat_recursive(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int bfqg_print_rwstat_recursive(struct seq_file *sf, void *v)
-    {
     blkcg_print_blkgs(sf, css_to_blkcg(seq_css(sf)),
     bfqg_prfill_rwstat_recursive, &blkcg_policy_bfq,
     seq_cft(sf).private, true);
@@ -1080,29 +1281,28 @@ unsafe extern "C" fn bfqg_print_rwstat_recursive(sf: *mut seq_file, v: *mut c_vo
 
 #[no_mangle]
 unsafe extern "C" fn bfqg_print_stat(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int bfqg_print_stat(struct seq_file *sf, void *v)
-    {
     blkcg_print_blkgs(sf, css_to_blkcg(seq_css(sf)), blkg_prfill_stat,
     &blkcg_policy_bfq, seq_cft(sf).private, false);
     return 0;
     }
-    static u64 bfqg_prfill_stat_recursive(struct seq_file *sf,
-    struct blkg_policy_data *pd, int off)
-    {
-    struct blkcg_gq *blkg = pd_to_blkg(pd);
-    struct blkcg_gq *pos_blkg;
-    struct cgroup_subsys_state *pos_css;
-    let mut sum: u64 = 0;
+#[no_mangle]
+pub unsafe extern "C" fn bfqg_prfill_stat_recursive(sf: *mut seq_file, pd: *mut blkg_policy_data, off: c_int) -> u64 {
+    let mut blkg = pd_to_blkg(pd);
+pub static mut pos_blkg: *mut c_void = core::ptr::null_mut();
+pub static mut pos_css: *mut c_void = core::ptr::null_mut();
+pub static mut sum: u64 = 0;
     rcu_read_lock();
     blkg_for_each_descendant_pre(pos_blkg, pos_css, blkg) {
-    struct blkg_policy_data *pd;
-    struct bfq_stat *stat;
-    if (!data_race(pos_blkg.online))
+pub static mut pd: *mut c_void = core::ptr::null_mut();
+pub static mut stat: *mut c_void = core::ptr::null_mut();
+    if (!data_race(pos_blkg.online)) {
     continue;
+    }
     pd = blkg_to_pd(pos_blkg, &blkcg_policy_bfq);
-    if (!pd)
+    if (!pd) {
     continue;
-    stat = (void *)pd + off;
+    }
+    stat = pd + off;
     sum += bfq_stat_read(stat) + atomic64_read(&stat.aux_cnt);
     }
     rcu_read_unlock();
@@ -1110,52 +1310,43 @@ unsafe extern "C" fn bfqg_print_stat(sf: *mut seq_file, v: *mut c_void) -> c_int
     }
 #[no_mangle]
 unsafe extern "C" fn bfqg_print_stat_recursive(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int bfqg_print_stat_recursive(struct seq_file *sf, void *v)
-    {
     blkcg_print_blkgs(sf, css_to_blkcg(seq_css(sf)),
     bfqg_prfill_stat_recursive, &blkcg_policy_bfq,
     seq_cft(sf).private, false);
     return 0;
     }
-    static u64 bfqg_prfill_sectors(struct seq_file *sf, struct blkg_policy_data *pd,
-    int off)
-    {
-    struct bfq_group *bfqg = blkg_to_bfqg(pd.blkg);
-    let mut sum: u64 = blkg_rwstat_total(&bfqg.stats.bytes);
+#[no_mangle]
+pub unsafe extern "C" fn bfqg_prfill_sectors(sf: *mut seq_file, pd: *mut blkg_policy_data, off: c_int) -> u64 {
+    let mut bfqg = blkg_to_bfqg(pd.blkg);
+pub static mut sum: u64 = 0;
     return __blkg_prfill_u64(sf, pd, sum >> 9);
     }
 #[no_mangle]
 unsafe extern "C" fn bfqg_print_stat_sectors(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int bfqg_print_stat_sectors(struct seq_file *sf, void *v)
-    {
     blkcg_print_blkgs(sf, css_to_blkcg(seq_css(sf)),
     bfqg_prfill_sectors, &blkcg_policy_bfq, 0, false);
     return 0;
     }
-    static u64 bfqg_prfill_sectors_recursive(struct seq_file *sf,
-    struct blkg_policy_data *pd, int off)
-    {
-    struct blkg_rwstat_sample tmp;
+#[no_mangle]
+pub unsafe extern "C" fn bfqg_prfill_sectors_recursive(sf: *mut seq_file, pd: *mut blkg_policy_data, off: c_int) -> u64 {
+pub static mut tmp: usize = 0;
     blkg_rwstat_recursive_sum(pd.blkg, &blkcg_policy_bfq,
-    offsetof(struct bfq_group, stats.bytes), &tmp);
+    offsetof(bfq_group, stats.bytes), &tmp);
     return __blkg_prfill_u64(sf, pd,
     (tmp.cnt[BLKG_RWSTAT_READ] + tmp.cnt[BLKG_RWSTAT_WRITE]) >> 9);
     }
 #[no_mangle]
 unsafe extern "C" fn bfqg_print_stat_sectors_recursive(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int bfqg_print_stat_sectors_recursive(struct seq_file *sf, void *v)
-    {
     blkcg_print_blkgs(sf, css_to_blkcg(seq_css(sf)),
     bfqg_prfill_sectors_recursive, &blkcg_policy_bfq, 0,
     false);
     return 0;
     }
-    static u64 bfqg_prfill_avg_queue_size(struct seq_file *sf,
-    struct blkg_policy_data *pd, int off)
-    {
-    struct bfq_group *bfqg = pd_to_bfqg(pd);
-    let mut samples: u64 = bfq_stat_read(&bfqg.stats.avg_queue_size_samples);
-    let mut v: u64 = 0;
+#[no_mangle]
+pub unsafe extern "C" fn bfqg_prfill_avg_queue_size(sf: *mut seq_file, pd: *mut blkg_policy_data, off: c_int) -> u64 {
+    let mut bfqg = pd_to_bfqg(pd);
+pub static mut samples: u64 = 0;
+pub static mut v: u64 = 0;
     if (samples) {
     v = bfq_stat_read(&bfqg.stats.avg_queue_size_sum);
     v = div64_u64(v, samples);
@@ -1166,173 +1357,34 @@ unsafe extern "C" fn bfqg_print_stat_sectors_recursive(sf: *mut seq_file, v: *mu
 // print avg_queue_size
 #[no_mangle]
 unsafe extern "C" fn bfqg_print_avg_queue_size(sf: *mut seq_file, v: *mut c_void) -> c_int {
-    static int bfqg_print_avg_queue_size(struct seq_file *sf, void *v)
-    {
     blkcg_print_blkgs(sf, css_to_blkcg(seq_css(sf)),
     bfqg_prfill_avg_queue_size, &blkcg_policy_bfq,
     0, false);
     return 0;
     }
 
-    struct bfq_group *bfq_create_group_hierarchy(struct bfq_data *bfqd, int node)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn bfq_create_group_hierarchy(bfqd: *mut bfq_data, node: c_int) -> *mut c_void {
+    let mut ret = 0;
     ret = blkcg_activate_policy(bfqd.queue.disk, &blkcg_policy_bfq);
-    if (ret)
+    if (ret) {
     return core::ptr::null_mut();
+    }
     return blkg_to_bfqg(bfqd.queue.root_blkg);
     }
-    struct blkcg_policy blkcg_policy_bfq = {
-    .dfl_cftypes		= bfq_blkg_files,
-    .legacy_cftypes		= bfq_blkcg_legacy_files,
-    .cpd_alloc_fn		= bfq_cpd_alloc,
-    .cpd_free_fn		= bfq_cpd_free,
-    .pd_alloc_fn		= bfq_pd_alloc,
-    .pd_init_fn		= bfq_pd_init,
-    .pd_offline_fn		= bfq_pd_offline,
-    .pd_free_fn		= bfq_pd_free,
-    .pd_reset_stats_fn	= bfq_pd_reset_stats,
-    };
-    struct cftype bfq_blkcg_legacy_files[] = {
-    {
-    .name = "bfq.weight",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .seq_show = bfq_io_show_weight_legacy,
-    .write_u64 = bfq_io_set_weight_legacy,
-    },
-    {
-    .name = "bfq.weight_device",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .seq_show = bfq_io_show_weight,
-    .write = bfq_io_set_weight,
-    },
-// statistics, covers only the tasks in the bfqg
-    {
-    .name = "bfq.io_service_bytes",
-    .private = offsetof(struct bfq_group, stats.bytes),
-    .seq_show = bfqg_print_rwstat,
-    },
-    {
-    .name = "bfq.io_serviced",
-    .private = offsetof(struct bfq_group, stats.ios),
-    .seq_show = bfqg_print_rwstat,
-    },
+pub static mut blkcg_policy: usize = 0;
+pub static mut cftype: usize = 0;
+pub static mut cftype: usize = 0;
 
-    {
-    .name = "bfq.time",
-    .private = offsetof(struct bfq_group, stats.time),
-    .seq_show = bfqg_print_stat,
-    },
-    {
-    .name = "bfq.sectors",
-    .seq_show = bfqg_print_stat_sectors,
-    },
-    {
-    .name = "bfq.io_service_time",
-    .private = offsetof(struct bfq_group, stats.service_time),
-    .seq_show = bfqg_print_rwstat,
-    },
-    {
-    .name = "bfq.io_wait_time",
-    .private = offsetof(struct bfq_group, stats.wait_time),
-    .seq_show = bfqg_print_rwstat,
-    },
-    {
-    .name = "bfq.io_merged",
-    .private = offsetof(struct bfq_group, stats.merged),
-    .seq_show = bfqg_print_rwstat,
-    },
-    {
-    .name = "bfq.io_queued",
-    .private = offsetof(struct bfq_group, stats.queued),
-    .seq_show = bfqg_print_rwstat,
-    },
-
-// the same statistics which cover the bfqg and its descendants
-    {
-    .name = "bfq.io_service_bytes_recursive",
-    .private = offsetof(struct bfq_group, stats.bytes),
-    .seq_show = bfqg_print_rwstat_recursive,
-    },
-    {
-    .name = "bfq.io_serviced_recursive",
-    .private = offsetof(struct bfq_group, stats.ios),
-    .seq_show = bfqg_print_rwstat_recursive,
-    },
-
-    {
-    .name = "bfq.time_recursive",
-    .private = offsetof(struct bfq_group, stats.time),
-    .seq_show = bfqg_print_stat_recursive,
-    },
-    {
-    .name = "bfq.sectors_recursive",
-    .seq_show = bfqg_print_stat_sectors_recursive,
-    },
-    {
-    .name = "bfq.io_service_time_recursive",
-    .private = offsetof(struct bfq_group, stats.service_time),
-    .seq_show = bfqg_print_rwstat_recursive,
-    },
-    {
-    .name = "bfq.io_wait_time_recursive",
-    .private = offsetof(struct bfq_group, stats.wait_time),
-    .seq_show = bfqg_print_rwstat_recursive,
-    },
-    {
-    .name = "bfq.io_merged_recursive",
-    .private = offsetof(struct bfq_group, stats.merged),
-    .seq_show = bfqg_print_rwstat_recursive,
-    },
-    {
-    .name = "bfq.io_queued_recursive",
-    .private = offsetof(struct bfq_group, stats.queued),
-    .seq_show = bfqg_print_rwstat_recursive,
-    },
-    {
-    .name = "bfq.avg_queue_size",
-    .seq_show = bfqg_print_avg_queue_size,
-    },
-    {
-    .name = "bfq.group_wait_time",
-    .private = offsetof(struct bfq_group, stats.group_wait_time),
-    .seq_show = bfqg_print_stat,
-    },
-    {
-    .name = "bfq.idle_time",
-    .private = offsetof(struct bfq_group, stats.idle_time),
-    .seq_show = bfqg_print_stat,
-    },
-    {
-    .name = "bfq.empty_time",
-    .private = offsetof(struct bfq_group, stats.empty_time),
-    .seq_show = bfqg_print_stat,
-    },
-    {
-    .name = "bfq.dequeue",
-    .private = offsetof(struct bfq_group, stats.dequeue),
-    .seq_show = bfqg_print_stat,
-    },
-
-    { }	/* terminate */
-    };
-    struct cftype bfq_blkg_files[] = {
-    {
-    .name = "bfq.weight",
-    .flags = CFTYPE_NOT_ON_ROOT,
-    .seq_show = bfq_io_show_weight,
-    .write = bfq_io_set_weight,
-    },
-    {} /* terminate */
-    };
-
-    void bfq_bfqq_move(struct bfq_data *bfqd, struct bfq_queue *bfqq,
-    struct bfq_group *bfqg) {}
 #[no_mangle]
-pub unsafe extern "C" fn bfq_init_entity(entity: *mut bfq_entity, bfqg: *mut bfq_group) {
-    void bfq_init_entity(struct bfq_entity *entity, struct bfq_group *bfqg)
-    {
-    struct bfq_queue *bfqq = bfq_entity_to_bfqq(entity);
+#[no_mangle]
+// duplicate fn: bfq_bfqq_move
+pub unsafe extern "C" fn bfq_bfqq_move_dup(bfqd: *mut bfq_data, bfqq: *mut bfq_queue, bfqg: *mut bfq_group) {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: bfq_init_entity
+pub unsafe extern "C" fn bfq_init_entity_dup(entity: *mut bfq_entity, bfqg: *mut bfq_group) {
+    let mut bfqq = bfq_entity_to_bfqq(entity);
     entity.weight = entity.new_weight;
     entity.orig_weight = entity.new_weight;
     if (bfqq) {
@@ -1341,32 +1393,46 @@ pub unsafe extern "C" fn bfq_init_entity(entity: *mut bfq_entity, bfqg: *mut bfq
     }
     entity.sched_data = &bfqg.sched_data;
     }
-    void bfq_bic_update_cgroup(struct bfq_io_cq *bic, struct bio *bio) {}
 #[no_mangle]
-pub unsafe extern "C" fn bfq_end_wr_async(bfqd: *mut bfq_data) {
-    void bfq_end_wr_async(struct bfq_data *bfqd)
-    {
+#[no_mangle]
+// duplicate fn: bfq_bic_update_cgroup
+pub unsafe extern "C" fn bfq_bic_update_cgroup_dup(bic: *mut bfq_io_cq, bio: *mut bio) {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: bfq_end_wr_async
+pub unsafe extern "C" fn bfq_end_wr_async_dup(bfqd: *mut bfq_data) {
     spin_lock_irq(&bfqd.lock);
     bfq_end_wr_async_queues(bfqd, bfqd.root_group);
     spin_unlock_irq(&bfqd.lock);
     }
-    struct bfq_group *bfq_bio_bfqg(struct bfq_data *bfqd, struct bio *bio)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: bfq_bio_bfqg
+pub unsafe extern "C" fn bfq_bio_bfqg_dup(bfqd: *mut bfq_data, bio: *mut bio) -> *mut c_void {
     return bfqd.root_group;
     }
-    struct bfq_group *bfqq_group(struct bfq_queue *bfqq)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: bfqq_group
+pub unsafe extern "C" fn bfqq_group_dup(bfqq: *mut bfq_queue) -> *mut c_void {
     return bfqq.bfqd.root_group;
     }
-    void bfqg_and_blkg_put(struct bfq_group *bfqg) {}
-    struct bfq_group *bfq_create_group_hierarchy(struct bfq_data *bfqd, int node)
-    {
-    struct bfq_group *bfqg;
-    int i;
-    bfqg = kmalloc_node(sizeof(*bfqg), GFP_KERNEL | __GFP_ZERO, node);
-    if (!bfqg)
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: bfqg_and_blkg_put
+pub unsafe extern "C" fn bfqg_and_blkg_put_dup(bfqg: *mut bfq_group) {}
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: bfq_create_group_hierarchy
+pub unsafe extern "C" fn bfq_create_group_hierarchy_dup(bfqd: *mut bfq_data, node: c_int) -> *mut c_void {
+pub static mut bfqg: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    bfqg = kmalloc_node(sizeof!(*bfqg), GFP_KERNEL | __GFP_ZERO, node);
+    if (!bfqg) {
     return core::ptr::null_mut();
-    for (i = 0; i < BFQ_IOPRIO_CLASSES; i++)
+    }
+    for (i = 0; i < BFQ_IOPRIO_CLASSES; i++) {
     bfqg.sched_data.service_tree[i] = BFQ_SERVICE_TREE_INIT;
+    }
     return bfqg;
     }

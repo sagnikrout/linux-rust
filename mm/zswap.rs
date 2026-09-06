@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -53,9 +303,9 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // statistics
 //
 // The number of pages currently stored in zswap
-    let mut zswap_stored_pages: atomic_long_t = ATOMIC_LONG_INIT(0);
+pub static mut zswap_stored_pages: atomic_long_t = 0;
 // The number of incompressible pages currently stored in zswap
-    let mut zswap_stored_incompressible_pages: static atomic_long_t = ATOMIC_LONG_INIT(0);
+pub static mut zswap_stored_incompressible_pages: atomic_long_t = 0;
 //
 // The statistics below are not protected from concurrent access for
 // performance reasons so they may not be a 100% accurate.  However,
@@ -79,56 +329,43 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Store failed because the entry metadata could not be allocated (rare)
     static u64 zswap_reject_kmemcache_fail;
 // Shrinker work queue
-    static struct workqueue_struct *shrink_wq;
+pub static mut shrink_wq: *mut c_void = core::ptr::null_mut();
 // Pool limit was hit, we need to calm down
     static bool zswap_pool_reached_full;
 //
 // tunables
 //
 
-    static int zswap_setup(void);
+// forward_decl: zswap_setup;
 // Enable/disable zswap
-    static DEFINE_STATIC_KEY_MAYBE(CONFIG_ZSWAP_DEFAULT_ON, zswap_ever_enabled);
-    let mut zswap_enabled: static bool = IS_ENABLED(CONFIG_ZSWAP_DEFAULT_ON);
-    static int zswap_enabled_param_set(const char *,
-    const struct kernel_param *);
-    static const struct kernel_param_ops zswap_enabled_param_ops = {
-    .set =		zswap_enabled_param_set,
-    .get =		param_get_bool,
-    };
-    module_param_cb(enabled, &zswap_enabled_param_ops, &zswap_enabled, 0644);
+pub static mut CONFIG_ZSWAP_DEFAULT_ON: usize = 0;
+pub static mut zswap_enabled: bool = false;
+// forward_decl: zswap_enabled_param_set;
+pub static mut kernel_param_ops: usize = 0;
+    module_param_cb!(enabled, &zswap_enabled_param_ops, &zswap_enabled, 0644);
 // Crypto compressor to use
     static char *zswap_compressor = CONFIG_ZSWAP_COMPRESSOR_DEFAULT;
-    static int zswap_compressor_param_set(const char *,
-    const struct kernel_param *);
-    static const struct kernel_param_ops zswap_compressor_param_ops = {
-    .set =		zswap_compressor_param_set,
-    .get =		param_get_charp,
-    .free =		param_free_charp,
-    };
-    module_param_cb(compressor, &zswap_compressor_param_ops,
+// forward_decl: zswap_compressor_param_set;
+pub static mut kernel_param_ops: usize = 0;
+    module_param_cb!(compressor, &zswap_compressor_param_ops,
     &zswap_compressor, 0644);
 // The maximum percentage of memory that the compressed pool can occupy
-    let mut zswap_max_pool_percent: static unsigned int = 20;
-    module_param_named(max_pool_percent, zswap_max_pool_percent, uint, 0644);
+pub static mut zswap_max_pool_percent: unsigned int = 20;
+    module_param_named!(max_pool_percent, zswap_max_pool_percent, uint, 0644);
 // The threshold for accepting new pages after the max_pool_percent was hit
     static unsigned int zswap_accept_thr_percent = 90; /* of max pool size */
-    module_param_named(accept_threshold_percent, zswap_accept_thr_percent,
+    module_param_named!(accept_threshold_percent, zswap_accept_thr_percent,
     uint, 0644);
 // Enable/disable memory pressure-based shrinker.
-    static bool zswap_shrinker_enabled = IS_ENABLED(
+    static bool zswap_shrinker_enabled = IS_ENABLED!(
     CONFIG_ZSWAP_SHRINKER_DEFAULT_ON);
-    module_param_named(shrinker_enabled, zswap_shrinker_enabled, bool, 0644);
+    module_param_named!(shrinker_enabled, zswap_shrinker_enabled, bool, 0644);
 #[no_mangle]
 pub unsafe extern "C" fn zswap_is_enabled() -> bool {
-    bool zswap_is_enabled(void)
-    {
     return zswap_enabled;
     }
 #[no_mangle]
 pub unsafe extern "C" fn zswap_never_enabled() -> bool {
-    bool zswap_never_enabled(void)
-    {
     return !static_branch_maybe(CONFIG_ZSWAP_DEFAULT_ON, &zswap_ever_enabled);
     }
 //
@@ -154,7 +391,7 @@ pub struct crypto_acomp_ctx {
 #[derive(Copy, Clone)]
 pub struct zswap_pool {
     pub zs_pool: *mut zs_pool,
-    pub acomp_ctx: *mut crypto_acomp_ctx __percpu,
+    pub acomp_ctx: *mut crypto_acomp_ctx ,
     pub ref: percpu_ref,
     pub list: list_head,
     pub release_work: work_struct,
@@ -163,12 +400,12 @@ pub struct zswap_pool {
 }
 
 // Global LRU lists shared by all zswap pools.
-    static struct list_lru zswap_list_lru;
+pub static mut zswap_list_lru: usize = 0;
 // The lock protects zswap_next_shrink updates.
-    static DEFINE_SPINLOCK(zswap_shrink_lock);
-    static struct mem_cgroup *zswap_next_shrink;
-    static struct work_struct zswap_shrink_work;
-    static struct shrinker *zswap_shrinker;
+pub static mut zswap_shrink_lock: usize = 0;
+pub static mut zswap_next_shrink: *mut c_void = core::ptr::null_mut();
+pub static mut zswap_shrink_work: usize = 0;
+pub static mut zswap_shrinker: *mut c_void = core::ptr::null_mut();
 //
 // struct zswap_entry
 //
@@ -202,11 +439,11 @@ pub struct zswap_entry {
     static struct xarray *zswap_trees[MAX_SWAPFILES];
     static unsigned int nr_zswap_trees[MAX_SWAPFILES];
 // RCU-protected iteration
-    static LIST_HEAD(zswap_pools);
+pub static mut zswap_pools: usize = 0;
 // protects zswap_pools list modification
-    static DEFINE_SPINLOCK(zswap_pools_lock);
+pub static mut zswap_pools_lock: usize = 0;
 // pool counter to provide unique names to zsmalloc
-    let mut zswap_pools_count: static atomic_t = ATOMIC_INIT(0);
+pub static mut zswap_pools_count: atomic_t = 0;
     enum zswap_init_type {
     ZSWAP_UNINIT,
     ZSWAP_INIT_SUCCEED,
@@ -214,7 +451,7 @@ pub struct zswap_entry {
     };
     static enum zswap_init_type zswap_init_state;
 // used to ensure the integrity of initialization
-    static DEFINE_MUTEX(zswap_init_lock);
+pub static mut zswap_init_lock: usize = 0;
 // init completed, but couldn't create the initial pool
     static bool zswap_has_pool;
 //
@@ -223,63 +460,68 @@ pub struct zswap_entry {
 // One swap address space for each 64M swap space
 pub const ZSWAP_ADDRESS_SPACE_SHIFT: c_int = 14;
 
-    static inline struct xarray *swap_zswap_tree(swp_entry_t swp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn swap_zswap_tree(swp: swp_entry_t) -> *mut c_void {
     return &zswap_trees[swp_type(swp)][swp_offset(swp)
     >> ZSWAP_ADDRESS_SPACE_SHIFT];
     }
 
-    pr_debug("%s pool %s\n", msg, (p).tfm_name)
+    pr_debug!("%s pool %s\n", msg, (p).tfm_name)
 //
 // pool functions
 //
-    static void __zswap_pool_empty(struct percpu_ref *ref);
+// forward_decl: __zswap_pool_empty;
 #[no_mangle]
 unsafe extern "C" fn acomp_ctx_free(acomp_ctx: *mut crypto_acomp_ctx) {
-    static void acomp_ctx_free(struct crypto_acomp_ctx *acomp_ctx)
-    {
-    if (!acomp_ctx)
+    if (!acomp_ctx) {
     return;
+    }
 //
 // If there was an error in allocating @acomp_ctx->req, it
 // would be set to NULL.
 //
-    if (acomp_ctx.req)
+    if (acomp_ctx.req) {
     acomp_request_free(acomp_ctx.req);
+    }
     acomp_ctx.req = core::ptr::null_mut();
 //
 // We have to handle both cases here: an error pointer return from
 // crypto_alloc_acomp_node(); and a) NULL initialization by zswap, or
 // b) NULL assignment done in a previous call to acomp_ctx_free().
 //
-    if (!IS_ERR_OR_NULL(acomp_ctx.acomp))
+    if (!IS_ERR_OR_NULL(acomp_ctx.acomp)) {
     crypto_free_acomp(acomp_ctx.acomp);
+    }
     acomp_ctx.acomp = core::ptr::null_mut();
     kfree(acomp_ctx.buffer);
     acomp_ctx.buffer = core::ptr::null_mut();
     }
-    static struct zswap_pool *zswap_pool_create(char *compressor)
-    {
-    struct zswap_pool *pool;
+#[no_mangle]
+pub unsafe extern "C" fn zswap_pool_create(compressor: *mut c_char) -> *mut c_void {
+pub static mut pool: *mut c_void = core::ptr::null_mut();
     char name[38]; /* 'zswap' + 32 char (max) num + \0 */
-    int ret, cpu;
-    if (!zswap_has_pool && !strcmp(compressor, ZSWAP_PARAM_UNSET))
+    let mut ret = 0;
+    let mut cpu = 0;
+    if (!zswap_has_pool && !strcmp(compressor, ZSWAP_PARAM_UNSET)) {
     return core::ptr::null_mut();
+    }
     pool = kzalloc_obj(*pool);
-    if (!pool)
+    if (!pool) {
     return core::ptr::null_mut();
+    }
 // unique name for each pool specifically required by zsmalloc
     snprintf(name, 38, "zswap%x", atomic_inc_return(&zswap_pools_count));
     pool.zs_pool = zs_create_pool(name);
-    if (!pool.zs_pool)
-    goto error;
-    strscpy(pool.tfm_name, compressor, sizeof(pool.tfm_name));
+    if (!pool.zs_pool) {
+// goto;
+    }
+    strscpy(pool.tfm_name, compressor, sizeof!(pool.tfm_name));
 // Many things rely on the zero-initialization.
     pool.acomp_ctx = alloc_percpu_gfp(*pool.acomp_ctx,
     GFP_KERNEL | __GFP_ZERO);
     if (!pool.acomp_ctx) {
-    pr_err("percpu alloc failed\n");
-    goto error;
+    pr_err!("percpu alloc failed\n");
+// goto;
     }
 //
 // This is serialized against CPU hotplug operations. Hence, cores
@@ -291,42 +533,47 @@ unsafe extern "C" fn acomp_ctx_free(acomp_ctx: *mut crypto_acomp_ctx) {
 // cpuhp_state_add_instance() will not cleanup on failure since
 // we don't register a hotunplug callback.
 //
-    if (ret)
-    goto cpuhp_add_fail;
+    if (ret) {
+// goto;
+    }
 // being the current pool takes 1 ref; this func expects the
 // caller to always add the new pool as the current pool
 //
     ret = percpu_ref_init(&pool.ref, __zswap_pool_empty,
     PERCPU_REF_ALLOW_REINIT, GFP_KERNEL);
-    if (ret)
-    goto ref_fail;
+    if (ret) {
+// goto;
+    }
     INIT_LIST_HEAD(&pool.list);
     zswap_pool_debug("created", pool);
     return pool;
-    ref_fail:
+// label;
     cpuhp_state_remove_instance(CPUHP_MM_ZSWP_POOL_PREPARE, &pool.node);
-    cpuhp_add_fail:
-    for_each_possible_cpu(cpu)
+// label;
+    for_each_possible_cpu(cpu) {
     acomp_ctx_free(per_cpu_ptr(pool.acomp_ctx, cpu));
-    error:
-    if (pool.acomp_ctx)
+    }
+// label;
+    if (pool.acomp_ctx) {
     free_percpu(pool.acomp_ctx);
-    if (pool.zs_pool)
+    }
+    if (pool.zs_pool) {
     zs_destroy_pool(pool.zs_pool);
+    }
     kfree(pool);
     return core::ptr::null_mut();
     }
-    static struct zswap_pool *__zswap_pool_create_fallback(void)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __zswap_pool_create_fallback() -> *mut c_void {
     if (!crypto_has_acomp(zswap_compressor, 0, 0) &&
     strcmp(zswap_compressor, CONFIG_ZSWAP_COMPRESSOR_DEFAULT)) {
-    pr_err("compressor %s not available, using default %s\n",
+    pr_err!("compressor %s not available, using default %s\n",
     zswap_compressor, CONFIG_ZSWAP_COMPRESSOR_DEFAULT);
     param_free_charp(&zswap_compressor);
     zswap_compressor = CONFIG_ZSWAP_COMPRESSOR_DEFAULT;
     }
 // Default compressor should be available. Kconfig bug?
-    if (WARN_ON_ONCE(!crypto_has_acomp(zswap_compressor, 0, 0))) {
+    if (WARN_ON_ONCE!(!crypto_has_acomp(zswap_compressor, 0, 0))) {
     zswap_compressor = ZSWAP_PARAM_UNSET;
     return core::ptr::null_mut();
     }
@@ -334,39 +581,34 @@ unsafe extern "C" fn acomp_ctx_free(acomp_ctx: *mut crypto_acomp_ctx) {
     }
 #[no_mangle]
 unsafe extern "C" fn zswap_pool_destroy(pool: *mut zswap_pool) {
-    static void zswap_pool_destroy(struct zswap_pool *pool)
-    {
-    int cpu;
+    let mut cpu = 0;
     zswap_pool_debug("destroying", pool);
     cpuhp_state_remove_instance(CPUHP_MM_ZSWP_POOL_PREPARE, &pool.node);
-    for_each_possible_cpu(cpu)
+    for_each_possible_cpu(cpu) {
     acomp_ctx_free(per_cpu_ptr(pool.acomp_ctx, cpu));
+    }
     free_percpu(pool.acomp_ctx);
     zs_destroy_pool(pool.zs_pool);
     kfree(pool);
     }
 #[no_mangle]
 unsafe extern "C" fn __zswap_pool_release(work: *mut work_struct) {
-    static void __zswap_pool_release(struct work_struct *work)
-    {
-    struct zswap_pool *pool = container_of(work, typeof(*pool),
+    let mut pool = container_of!(work, typeof(*pool),
     release_work);
     synchronize_rcu();
 // nobody should have been able to get a ref...
-    WARN_ON(!percpu_ref_is_zero(&pool.ref));
+    WARN_ON!(!percpu_ref_is_zero(&pool.ref));
     percpu_ref_exit(&pool.ref);
 // pool is now off zswap_pools list and has no references.
     zswap_pool_destroy(pool);
     }
-    static struct zswap_pool *zswap_pool_current(void);
+// forward_decl: zswap_pool_current;
 #[no_mangle]
 unsafe extern "C" fn __zswap_pool_empty(ref: *mut percpu_ref) {
-    static void __zswap_pool_empty(struct percpu_ref *ref)
-    {
-    struct zswap_pool *pool;
-    pool = container_of(ref, typeof(*pool), ref);
+pub static mut pool: *mut c_void = core::ptr::null_mut();
+    pool = container_of!(ref, typeof(*pool), ref);
     spin_lock_bh(&zswap_pools_lock);
-    WARN_ON(pool == zswap_pool_current());
+    WARN_ON!(pool == zswap_pool_current());
     list_del_rcu(&pool.list);
     INIT_WORK(&pool.release_work, __zswap_pool_release);
     schedule_work(&pool.release_work);
@@ -374,95 +616,86 @@ unsafe extern "C" fn __zswap_pool_empty(ref: *mut percpu_ref) {
     }
 #[no_mangle]
 unsafe extern "C" fn zswap_pool_tryget(pool: *mut zswap_pool) -> int __must_check {
-    static int __must_check zswap_pool_tryget(struct zswap_pool *pool)
-    {
-    if (!pool)
+    if (!pool) {
     return 0;
+    }
     return percpu_ref_tryget(&pool.ref);
     }
 // The caller must already have a reference.
 #[no_mangle]
 unsafe extern "C" fn zswap_pool_get(pool: *mut zswap_pool) {
-    static void zswap_pool_get(struct zswap_pool *pool)
-    {
     percpu_ref_get(&pool.ref);
     }
 #[no_mangle]
 unsafe extern "C" fn zswap_pool_put(pool: *mut zswap_pool) {
-    static void zswap_pool_put(struct zswap_pool *pool)
-    {
     percpu_ref_put(&pool.ref);
     }
-    static struct zswap_pool *__zswap_pool_current(void)
-    {
-    struct zswap_pool *pool;
+#[no_mangle]
+pub unsafe extern "C" fn __zswap_pool_current() -> *mut c_void {
+pub static mut pool: *mut c_void = core::ptr::null_mut();
     pool = list_first_or_null_rcu(&zswap_pools, typeof(*pool), list);
     WARN_ONCE(!pool && zswap_has_pool,
     "%s: no page storage pool!\n", __func__);
     return pool;
     }
-    static struct zswap_pool *zswap_pool_current(void)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn zswap_pool_current() -> *mut c_void {
     assert_spin_locked(&zswap_pools_lock);
     return __zswap_pool_current();
     }
-    static struct zswap_pool *zswap_pool_current_get(void)
-    {
-    struct zswap_pool *pool;
+#[no_mangle]
+pub unsafe extern "C" fn zswap_pool_current_get() -> *mut c_void {
+pub static mut pool: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     pool = __zswap_pool_current();
-    if (!zswap_pool_tryget(pool))
+    if (!zswap_pool_tryget(pool)) {
     pool = core::ptr::null_mut();
+    }
     rcu_read_unlock();
     return pool;
     }
 // type and compressor must be null-terminated
-    static struct zswap_pool *zswap_pool_find_get(char *compressor)
-    {
-    struct zswap_pool *pool;
+#[no_mangle]
+pub unsafe extern "C" fn zswap_pool_find_get(compressor: *mut c_char) -> *mut c_void {
+pub static mut pool: *mut c_void = core::ptr::null_mut();
     assert_spin_locked(&zswap_pools_lock);
     list_for_each_entry_rcu(pool, &zswap_pools, list) {
-    if (strcmp(pool.tfm_name, compressor))
+    if (strcmp(pool.tfm_name, compressor)) {
     continue;
+    }
 // if we can't get it, it's about to be destroyed
-    if (!zswap_pool_tryget(pool))
+    if (!zswap_pool_tryget(pool)) {
     continue;
+    }
     return pool;
     }
     return core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn zswap_max_pages() -> c_ulong {
-    static unsigned long zswap_max_pages(void)
-    {
     return totalram_pages() * zswap_max_pool_percent / 100;
     }
 #[no_mangle]
 unsafe extern "C" fn zswap_accept_thr_pages() -> c_ulong {
-    static unsigned long zswap_accept_thr_pages(void)
-    {
     return zswap_max_pages() * zswap_accept_thr_percent / 100;
     }
 #[no_mangle]
 pub unsafe extern "C" fn zswap_total_pages() -> c_ulong {
-    unsigned long zswap_total_pages(void)
-    {
-    struct zswap_pool *pool;
-    let mut total: c_ulong = 0;
+pub static mut pool: *mut c_void = core::ptr::null_mut();
+pub static mut total: c_ulong = 0;
     rcu_read_lock();
-    list_for_each_entry_rcu(pool, &zswap_pools, list)
+    list_for_each_entry_rcu(pool, &zswap_pools, list) {
     total += zs_get_total_pages(pool.zs_pool);
+    }
     rcu_read_unlock();
     return total;
     }
 #[no_mangle]
 unsafe extern "C" fn zswap_check_limits() -> bool {
-    static bool zswap_check_limits(void)
-    {
-    let mut cur_pages: c_ulong = zswap_total_pages();
-    let mut max_pages: c_ulong = zswap_max_pages();
+pub static mut cur_pages: c_ulong = 0;
+pub static mut max_pages: c_ulong = 0;
     if (cur_pages >= max_pages) {
-    zswap_pool_limit_hit++;
+    zswap_pool_limit_hit += 1;
     zswap_pool_reached_full = true;
     } else if (zswap_pool_reached_full &&
     cur_pages <= zswap_accept_thr_pages()) {
@@ -475,43 +708,47 @@ unsafe extern "C" fn zswap_check_limits() -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn zswap_compressor_param_set(val: *const c_char, kp: *const kernel_param) -> c_int {
-    static int zswap_compressor_param_set(const char *val, const struct kernel_param *kp)
-    {
     struct zswap_pool *pool, *put_pool = core::ptr::null_mut();
-    char *s = strstrip((char *)val);
-    let mut create_pool: bool = false;
-    let mut ret: c_int = 0;
+    let mut s = strstrip(val);
+pub static mut create_pool: bool = false;
+pub static mut ret: c_int = 0;
     mutex_lock(&zswap_init_lock);
-    switch (zswap_init_state) {
-    case ZSWAP_UNINIT:
+    match (zswap_init_state) {
+    ZSWAP_UNINIT => {
 // Handled in zswap_setup()
     ret = param_set_charp(s, kp);
-    break;
-    case ZSWAP_INIT_SUCCEED:
-    if (!zswap_has_pool || strcmp(s, *(char **)kp.arg))
+    // break;
+    }
+    ZSWAP_INIT_SUCCEED => {
+    if (!zswap_has_pool || strcmp(s, *kp.arg)) {
     create_pool = true;
-    break;
-    case ZSWAP_INIT_FAILED:
-    pr_err("can't set param, initialization failed\n");
+    }
+    // break;
+    }
+    ZSWAP_INIT_FAILED => {
+    pr_err!("can't set param, initialization failed\n");
     ret = -ENODEV;
     }
+    }
     mutex_unlock(&zswap_init_lock);
-    if (!create_pool)
+    if (!create_pool) {
     return ret;
+    }
     if (!crypto_has_acomp(s, 0, 0)) {
-    pr_err("compressor %s not available\n", s);
+    pr_err!("compressor %s not available\n", s);
     return -ENOENT;
     }
     spin_lock_bh(&zswap_pools_lock);
     pool = zswap_pool_find_get(s);
     if (pool) {
     zswap_pool_debug("using existing", pool);
-    WARN_ON(pool == zswap_pool_current());
+    WARN_ON!(pool == zswap_pool_current());
     list_del_rcu(&pool.list);
     }
     spin_unlock_bh(&zswap_pools_lock);
-    if (!pool)
+    if (!pool) {
     pool = zswap_pool_create(s);
+    }
     else {
 //
 // Restore the initial ref dropped by percpu_ref_kill()
@@ -522,10 +759,12 @@ unsafe extern "C" fn zswap_compressor_param_set(val: *const c_char, kp: *const k
 // Drop the ref from zswap_pool_find_get().
     zswap_pool_put(pool);
     }
-    if (pool)
+    if (pool) {
     ret = param_set_charp(s, kp);
-    else
+    }
+    else {
     ret = -EINVAL;
+    }
     spin_lock_bh(&zswap_pools_lock);
     if (!ret) {
     put_pool = zswap_pool_current();
@@ -545,31 +784,38 @@ unsafe extern "C" fn zswap_compressor_param_set(val: *const c_char, kp: *const k
 // Drop the ref from either the old current pool,
 // or the new pool we failed to add
 //
-    if (put_pool)
+    if (put_pool) {
     percpu_ref_kill(&put_pool.ref);
+    }
     return ret;
     }
-    static int zswap_enabled_param_set(const char *val,
-    const struct kernel_param *kp)
-    {
-    let mut ret: c_int = -ENODEV;
+#[no_mangle]
+pub unsafe extern "C" fn zswap_enabled_param_set(val: *mut c_char, kp: *mut kernel_param) -> c_int {
+pub static mut ret: c_int = 0;
 // if this is load-time (pre-init) param setting, only set param.
-    if (system_state != SYSTEM_RUNNING)
+    if (system_state != SYSTEM_RUNNING) {
     return param_set_bool(val, kp);
+    }
     mutex_lock(&zswap_init_lock);
-    switch (zswap_init_state) {
-    case ZSWAP_UNINIT:
-    if (zswap_setup())
-    break;
+    match (zswap_init_state) {
+    ZSWAP_UNINIT => {
+    if (zswap_setup()) {
+    // break;
+    }
     fallthrough;
-    case ZSWAP_INIT_SUCCEED:
-    if (!zswap_has_pool)
-    pr_err("can't enable, no pool configured\n");
-    else
+    }
+    ZSWAP_INIT_SUCCEED => {
+    if (!zswap_has_pool) {
+    pr_err!("can't enable, no pool configured\n");
+    }
+    else {
     ret = param_set_bool(val, kp);
-    break;
-    case ZSWAP_INIT_FAILED:
-    pr_err("can't enable, initialization failed\n");
+    }
+    // break;
+    }
+    ZSWAP_INIT_FAILED => {
+    pr_err!("can't enable, initialization failed\n");
+    }
     }
     mutex_unlock(&zswap_init_lock);
     return ret;
@@ -579,28 +825,26 @@ unsafe extern "C" fn zswap_compressor_param_set(val: *const c_char, kp: *const k
 //
 // should be called under RCU
 
-    static inline struct mem_cgroup *mem_cgroup_from_entry(struct zswap_entry *entry)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn mem_cgroup_from_entry(entry: *mut zswap_entry) -> *mut c_void {
     return entry.objcg ? obj_cgroup_memcg(entry.objcg) : core::ptr::null_mut();
     }
 
-    static inline struct mem_cgroup *mem_cgroup_from_entry(struct zswap_entry *entry)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: mem_cgroup_from_entry
+pub unsafe extern "C" fn mem_cgroup_from_entry_dup(entry: *mut zswap_entry) -> *mut c_void {
     return core::ptr::null_mut();
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn entry_to_nid(entry: *mut zswap_entry) -> c_int {
-    static inline int entry_to_nid(struct zswap_entry *entry)
-    {
     return page_to_nid(virt_to_page(entry));
     }
 #[no_mangle]
 unsafe extern "C" fn zswap_lru_add(entry: *mut zswap_entry) {
-    static void zswap_lru_add(struct zswap_entry *entry)
-    {
-    let mut nid: c_int = entry_to_nid(entry);
-    struct mem_cgroup *memcg;
+pub static mut nid: c_int = 0;
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
 //
 // Note that it is safe to use rcu_read_lock() here, even in the face of
 // concurrent memcg offlining:
@@ -620,10 +864,8 @@ unsafe extern "C" fn zswap_lru_add(entry: *mut zswap_entry) {
     }
 #[no_mangle]
 unsafe extern "C" fn zswap_lru_del(entry: *mut zswap_entry) {
-    static void zswap_lru_del(struct zswap_entry *entry)
-    {
-    let mut nid: c_int = entry_to_nid(entry);
-    struct mem_cgroup *memcg;
+pub static mut nid: c_int = 0;
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     memcg = mem_cgroup_from_entry(entry);
 // will always succeed
@@ -632,15 +874,11 @@ unsafe extern "C" fn zswap_lru_del(entry: *mut zswap_entry) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn zswap_lruvec_state_init(lruvec: *mut lruvec) {
-    void zswap_lruvec_state_init(struct lruvec *lruvec)
-    {
     atomic_long_set(&lruvec.zswap_lruvec_state.nr_disk_swapins, 0);
     }
 #[no_mangle]
 pub unsafe extern "C" fn zswap_folio_swapin(folio: *mut folio) {
-    void zswap_folio_swapin(struct folio *folio)
-    {
-    struct lruvec *lruvec;
+pub static mut lruvec: *mut c_void = core::ptr::null_mut();
     if (folio) {
     rcu_read_lock();
     lruvec = folio_lruvec(folio);
@@ -660,8 +898,6 @@ pub unsafe extern "C" fn zswap_folio_swapin(folio: *mut folio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn zswap_memcg_offline_cleanup(memcg: *mut mem_cgroup) {
-    void zswap_memcg_offline_cleanup(struct mem_cgroup *memcg)
-    {
 // lock out zswap shrinker walking memcg tree
     spin_lock(&zswap_shrink_lock);
     if (zswap_next_shrink == memcg) {
@@ -674,19 +910,18 @@ pub unsafe extern "C" fn zswap_memcg_offline_cleanup(memcg: *mut mem_cgroup) {
 //
 // zswap entry functions
 //
-    static struct kmem_cache *zswap_entry_cache;
-    static struct zswap_entry *zswap_entry_cache_alloc(gfp_t gfp, int nid)
-    {
-    struct zswap_entry *entry;
+pub static mut zswap_entry_cache: *mut c_void = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn zswap_entry_cache_alloc(gfp: gfp_t, nid: c_int) -> *mut c_void {
+pub static mut entry: *mut c_void = core::ptr::null_mut();
     entry = kmem_cache_alloc_node(zswap_entry_cache, gfp, nid);
-    if (!entry)
+    if (!entry) {
     return core::ptr::null_mut();
+    }
     return entry;
     }
 #[no_mangle]
 unsafe extern "C" fn zswap_entry_cache_free(entry: *mut zswap_entry) {
-    static void zswap_entry_cache_free(struct zswap_entry *entry)
-    {
     kmem_cache_free(zswap_entry_cache, entry);
     }
 //
@@ -695,8 +930,6 @@ unsafe extern "C" fn zswap_entry_cache_free(entry: *mut zswap_entry) {
 //
 #[no_mangle]
 unsafe extern "C" fn zswap_entry_free(entry: *mut zswap_entry) {
-    static void zswap_entry_free(struct zswap_entry *entry)
-    {
     zswap_lru_del(entry);
     zs_free(entry.pool.zs_pool, entry.handle);
     zswap_pool_put(entry.pool);
@@ -704,8 +937,9 @@ unsafe extern "C" fn zswap_entry_free(entry: *mut zswap_entry) {
     obj_cgroup_uncharge_zswap(entry.objcg, entry.length);
     obj_cgroup_put(entry.objcg);
     }
-    if (entry.length == PAGE_SIZE)
+    if (entry.length == PAGE_SIZE) {
     atomic_long_dec(&zswap_stored_incompressible_pages);
+    }
     zswap_entry_cache_free(entry);
     atomic_long_dec(&zswap_stored_pages);
     }
@@ -714,39 +948,38 @@ unsafe extern "C" fn zswap_entry_free(entry: *mut zswap_entry) {
 //
 #[no_mangle]
 unsafe extern "C" fn zswap_cpu_comp_prepare(cpu: c_uint, node: *mut hlist_node) -> c_int {
-    static int zswap_cpu_comp_prepare(unsigned int cpu, struct hlist_node *node)
-    {
-    struct zswap_pool *pool = hlist_entry(node, struct zswap_pool, node);
-    struct crypto_acomp_ctx *acomp_ctx = per_cpu_ptr(pool.acomp_ctx, cpu);
-    let mut ret: c_int = -ENOMEM;
+    let mut pool = hlist_entry(node, zswap_pool, node);
+    let mut acomp_ctx = per_cpu_ptr(pool.acomp_ctx, cpu);
+pub static mut ret: c_int = 0;
 //
 // To handle cases where the CPU goes through online-offline-online
 // transitions, we return if the acomp_ctx has already been initialized.
 //
     if (acomp_ctx.acomp) {
-    WARN_ON_ONCE(IS_ERR(acomp_ctx.acomp));
+    WARN_ON_ONCE!(IS_ERR(acomp_ctx.acomp));
     return 0;
     }
     acomp_ctx.buffer = kmalloc_node(PAGE_SIZE, GFP_KERNEL, cpu_to_node(cpu));
-    if (!acomp_ctx.buffer)
+    if (!acomp_ctx.buffer) {
     return ret;
+    }
 //
 // In case of an error, crypto_alloc_acomp_node() returns an
 // error pointer, never NULL.
 //
     acomp_ctx.acomp = crypto_alloc_acomp_node(pool.tfm_name, 0, 0, cpu_to_node(cpu));
     if (IS_ERR(acomp_ctx.acomp)) {
-    pr_err("could not alloc crypto acomp %s : %pe\n",
+    pr_err!("could not alloc crypto acomp %s : %pe\n",
     pool.tfm_name, acomp_ctx.acomp);
     ret = PTR_ERR(acomp_ctx.acomp);
-    goto fail;
+// goto;
     }
 // acomp_request_alloc() returns NULL in case of an error.
     acomp_ctx.req = acomp_request_alloc(acomp_ctx.acomp);
     if (!acomp_ctx.req) {
-    pr_err("could not alloc crypto acomp_request %s\n",
+    pr_err!("could not alloc crypto acomp_request %s\n",
     pool.tfm_name);
-    goto fail;
+// goto;
     }
     crypto_init_wait(&acomp_ctx.wait);
 //
@@ -758,21 +991,20 @@ unsafe extern "C" fn zswap_cpu_comp_prepare(cpu: c_uint, node: *mut hlist_node) 
     crypto_req_done, &acomp_ctx.wait);
     mutex_init(&acomp_ctx.mutex);
     return 0;
-    fail:
+// label;
     acomp_ctx_free(acomp_ctx);
     return ret;
     }
-    static bool zswap_compress(struct page *page, struct zswap_entry *entry,
-    struct zswap_pool *pool)
-    {
-    struct crypto_acomp_ctx *acomp_ctx;
+#[no_mangle]
+pub unsafe extern "C" fn zswap_compress(page: *mut page, entry: *mut zswap_entry, pool: *mut zswap_pool) -> bool {
+pub static mut acomp_ctx: *mut c_void = core::ptr::null_mut();
     struct scatterlist input, output;
-    let mut comp_ret: c_int = 0, alloc_ret = 0;
-    let mut dlen: c_uint = PAGE_SIZE;
-    unsigned long handle;
-    gfp_t gfp;
-    u8 *dst;
-    let mut mapped: bool = false;
+pub static mut comp_ret: c_int = 0;
+pub static mut dlen: c_uint = 0;
+    let mut handle = 0;
+    let mut gfp;
+pub static mut dst: *mut c_void = core::ptr::null_mut();
+pub static mut mapped: bool = false;
     acomp_ctx = raw_cpu_ptr(pool.acomp_ctx);
     mutex_lock(&acomp_ctx.mutex);
     dst = acomp_ctx.buffer;
@@ -807,7 +1039,7 @@ unsafe extern "C" fn zswap_cpu_comp_prepare(cpu: c_uint, node: *mut hlist_node) 
     folio_memcg(page_folio(page)))) {
     rcu_read_unlock();
     comp_ret = comp_ret ? comp_ret : -EINVAL;
-    goto unlock;
+// goto;
     }
     rcu_read_unlock();
     comp_ret = 0;
@@ -818,44 +1050,44 @@ unsafe extern "C" fn zswap_cpu_comp_prepare(cpu: c_uint, node: *mut hlist_node) 
     gfp = GFP_NOWAIT | __GFP_NORETRY | __GFP_HIGHMEM | __GFP_MOVABLE;
     handle = zs_malloc(pool.zs_pool, dlen, gfp, page_to_nid(page));
     if (IS_ERR_VALUE(handle)) {
-    alloc_ret = PTR_ERR((void *)handle);
-    goto unlock;
+    alloc_ret = PTR_ERR(handle);
+// goto;
     }
     zs_obj_write(pool.zs_pool, handle, dst, dlen);
     entry.handle = handle;
     entry.length = dlen;
-    unlock:
-    if (mapped)
+// label;
+    if (mapped) {
     kunmap_local(dst);
-    if (comp_ret == -ENOSPC || alloc_ret == -ENOSPC)
-    zswap_reject_compress_poor++;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: comp_ret) -> else {
-    else if (comp_ret)
-    zswap_reject_compress_fail++;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: alloc_ret) -> else {
-    else if (alloc_ret)
-    zswap_reject_alloc_fail++;
+    }
+    if (comp_ret == -ENOSPC || alloc_ret == -ENOSPC) {
+    zswap_reject_compress_poor += 1;
+    }
+
+    else if (comp_ret) {
+    zswap_reject_compress_fail += 1;
+    }
+
+    else if (alloc_ret) {
+    zswap_reject_alloc_fail += 1;
+    }
     mutex_unlock(&acomp_ctx.mutex);
-    let mut comp_ret: return = = 0 && alloc_ret == 0;
+pub static mut comp_ret: return = 0;
     }
 #[no_mangle]
 unsafe extern "C" fn zswap_decompress(entry: *mut zswap_entry, folio: *mut folio) -> bool {
-    static bool zswap_decompress(struct zswap_entry *entry, struct folio *folio)
-    {
-    struct zswap_pool *pool = entry.pool;
+    let mut pool = entry.pool;
     struct scatterlist input[2]; /* zsmalloc returns an SG list 1-2 entries */
-    struct scatterlist output;
-    struct crypto_acomp_ctx *acomp_ctx;
-    let mut ret: c_int = 0, dlen;
+pub static mut output: usize = 0;
+pub static mut acomp_ctx: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     acomp_ctx = raw_cpu_ptr(pool.acomp_ctx);
     mutex_lock(&acomp_ctx.mutex);
     zs_obj_read_sg_begin(pool.zs_pool, entry.handle, input, entry.length);
 // zswap entries of length PAGE_SIZE are not compressed.
     if (entry.length == PAGE_SIZE) {
-    void *dst;
-    WARN_ON_ONCE(input.length != PAGE_SIZE);
+pub static mut dst: *mut c_void = core::ptr::null_mut();
+    WARN_ON_ONCE!(input.length != PAGE_SIZE);
     dst = kmap_local_folio(folio, 0);
     memcpy_from_sglist(dst, input, 0, PAGE_SIZE);
     dlen = PAGE_SIZE;
@@ -872,9 +1104,10 @@ unsafe extern "C" fn zswap_decompress(entry: *mut zswap_entry, folio: *mut folio
     }
     zs_obj_read_sg_end(pool.zs_pool, entry.handle);
     mutex_unlock(&acomp_ctx.mutex);
-    if (!ret && dlen == PAGE_SIZE)
+    if (!ret && dlen == PAGE_SIZE) {
     return true;
-    zswap_decompress_fail++;
+    }
+    zswap_decompress_fail += 1;
     pr_alert_ratelimited("Decompression error from zswap (%d:%lu %s %u.%d)\n",
     swp_type(entry.swpentry),
     swp_offset(entry.swpentry),
@@ -896,20 +1129,20 @@ unsafe extern "C" fn zswap_decompress(entry: *mut zswap_entry, folio: *mut folio
 // the swap cache, the compressed version stored by zswap can be
 // freed.
 //
-    static int zswap_writeback_entry(struct zswap_entry *entry,
-    swp_entry_t swpentry)
-    {
-    struct xarray *tree;
-    let mut offset: pgoff_t = swp_offset(swpentry);
-    struct folio *folio;
-    struct mempolicy *mpol;
-    struct swap_info_struct *si;
-    let mut ctx: swap_io_ctx = {};
-    let mut ret: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn zswap_writeback_entry(entry: *mut zswap_entry, swpentry: swp_entry_t) -> c_int {
+pub static mut tree: *mut c_void = core::ptr::null_mut();
+pub static mut offset: pgoff_t = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut mpol: *mut c_void = core::ptr::null_mut();
+pub static mut si: *mut c_void = core::ptr::null_mut();
+pub static mut ctx: swap_io_ctx = 0;
+pub static mut ret: c_int = 0;
 // try to allocate swap cache folio
     si = get_swap_device(swpentry);
-    if (!si)
+    if (!si) {
     return -EEXIST;
+    }
     mpol = get_task_policy(current);
     folio = swap_cache_alloc_folio(swpentry, GFP_KERNEL, BIT(0), core::ptr::null_mut(), mpol,
     NO_INTERLEAVE_INDEX);
@@ -921,8 +1154,9 @@ unsafe extern "C" fn zswap_decompress(entry: *mut zswap_entry, folio: *mut folio
 // hot, so skip it. For the unlikely concurrent shrinker case,
 // it will be unlinked and freed when invalidated anyway.
 //
-    if (IS_ERR(folio))
+    if (IS_ERR(folio)) {
     return PTR_ERR(folio);
+    }
 //
 // folio is locked, and the swapcache is now secured against
 // concurrent swapping to and from the slot, and concurrent
@@ -935,16 +1169,17 @@ unsafe extern "C" fn zswap_decompress(entry: *mut zswap_entry, folio: *mut folio
     tree = swap_zswap_tree(swpentry);
     if (entry != xa_load(tree, offset)) {
     ret = -ENOMEM;
-    goto out;
+// goto;
     }
     if (!zswap_decompress(entry, folio)) {
     ret = -EIO;
-    goto out;
+// goto;
     }
     xa_erase(tree, offset);
     count_vm_event(ZSWPWB);
-    if (entry.objcg)
+    if (entry.objcg) {
     count_objcg_events(entry.objcg, ZSWPWB, 1);
+    }
     zswap_entry_free(entry);
 // folio is up to date
     folio_mark_uptodate(folio);
@@ -953,7 +1188,7 @@ unsafe extern "C" fn zswap_decompress(entry: *mut zswap_entry, folio: *mut folio
 // start writeback
     __swap_writepage(&ctx, folio);
     swap_write_submit(&ctx);
-    out:
+// label;
     if (ret) {
     swap_cache_del_folio(folio);
     folio_unlock(folio);
@@ -985,14 +1220,14 @@ unsafe extern "C" fn zswap_decompress(entry: *mut zswap_entry, folio: *mut folio
 // can expect from writeback. We scale down the number of objects available
 // for reclaim by this ratio.
 //
-    static enum lru_status shrink_memcg_cb(struct list_head *item, struct list_lru_one *l,
+    static enum lru_status shrink_memcg_cb(list_head *item, list_lru_one *l,
     void *arg)
     {
-    struct zswap_entry *entry = container_of(item, struct zswap_entry, lru);
-    bool *encountered_page_in_swapcache = (bool *)arg;
-    swp_entry_t swpentry;
-    let mut ret: enum lru_status = LRU_REMOVED_RETRY;
-    int writeback_result;
+    let mut entry = container_of!(item, zswap_entry, lru);
+    let mut encountered_page_in_swapcache = arg;
+    let mut swpentry;
+pub static mut ret: lru_status = 0;
+    let mut writeback_result = 0;
 //
 // Second chance algorithm: if the entry has its referenced bit set, give it
 // a second chance. Only clear the referenced bit and rotate it in the
@@ -1041,7 +1276,7 @@ unsafe extern "C" fn zswap_decompress(entry: *mut zswap_entry, folio: *mut folio
     spin_unlock(&l.lock);
     writeback_result = zswap_writeback_entry(entry, swpentry);
     if (writeback_result) {
-    zswap_reject_reclaim_fail++;
+    zswap_reject_reclaim_fail += 1;
     ret = LRU_RETRY;
 //
 // Encountering a page already in swap cache is a sign that we are shrinking
@@ -1053,15 +1288,14 @@ unsafe extern "C" fn zswap_decompress(entry: *mut zswap_entry, folio: *mut folio
 // encountered_page_in_swapcache = true;
     }
     } else {
-    zswap_written_back_pages++;
+    zswap_written_back_pages += 1;
     }
     return ret;
     }
-    static unsigned long zswap_shrinker_scan(struct shrinker *shrinker,
-    struct shrink_control *sc)
-    {
-    unsigned long shrink_ret;
-    let mut encountered_page_in_swapcache: bool = false;
+#[no_mangle]
+pub unsafe extern "C" fn zswap_shrinker_scan(shrinker: *mut shrinker, sc: *mut shrink_control) -> c_ulong {
+    let mut shrink_ret = 0;
+pub static mut encountered_page_in_swapcache: bool = false;
     if (!zswap_shrinker_enabled ||
     !mem_cgroup_zswap_writeback_enabled(sc.memcg)) {
     sc.nr_scanned = 0;
@@ -1069,28 +1303,29 @@ unsafe extern "C" fn zswap_decompress(entry: *mut zswap_entry, folio: *mut folio
     }
     shrink_ret = list_lru_shrink_walk(&zswap_list_lru, sc, &shrink_memcg_cb,
     &encountered_page_in_swapcache);
-    if (encountered_page_in_swapcache)
+    if (encountered_page_in_swapcache) {
     return SHRINK_STOP;
+    }
     return shrink_ret ? shrink_ret : SHRINK_STOP;
     }
-    static unsigned long zswap_shrinker_count(struct shrinker *shrinker,
-    struct shrink_control *sc)
-    {
-    struct mem_cgroup *memcg = sc.memcg;
-    struct lruvec *lruvec = mem_cgroup_lruvec(memcg, NODE_DATA(sc.nid));
-    atomic_long_t *nr_disk_swapins =
-    &lruvec.zswap_lruvec_state.nr_disk_swapins;
+#[no_mangle]
+pub unsafe extern "C" fn zswap_shrinker_count(shrinker: *mut shrinker, sc: *mut shrink_control) -> c_ulong {
+    let mut memcg = sc.memcg;
+    let mut lruvec = mem_cgroup_lruvec(memcg, NODE_DATA(sc.nid));
+    let mut nr_disk_swapins = &lruvec.zswap_lruvec_state.nr_disk_swapins;
     unsigned long nr_backing, nr_stored, nr_freeable, nr_disk_swapins_cur,
     nr_remain;
-    if (!zswap_shrinker_enabled || !mem_cgroup_zswap_writeback_enabled(memcg))
+    if (!zswap_shrinker_enabled || !mem_cgroup_zswap_writeback_enabled(memcg)) {
     return 0;
+    }
 //
 // The shrinker resumes swap writeback, which will enter block
 // and may enter fs. XXX: Harmonize with vmscan.c __GFP_FS
 // rules (may_enter_fs()), which apply on a per-folio basis.
 //
-    if (!gfp_has_io_fs(sc.gfp_mask))
+    if (!gfp_has_io_fs(sc.gfp_mask)) {
     return 0;
+    }
 //
 // For memcg, use the cgroup-wide ZSWAP stats since we don't
 // have them per-node and thus per-lruvec. Careful if memcg is
@@ -1107,11 +1342,13 @@ unsafe extern "C" fn zswap_decompress(entry: *mut zswap_entry, folio: *mut folio
     nr_backing = zswap_total_pages();
     nr_stored = atomic_long_read(&zswap_stored_pages);
     }
-    if (!nr_stored)
+    if (!nr_stored) {
     return 0;
+    }
     nr_freeable = list_lru_shrink_count(&zswap_list_lru, sc);
-    if (!nr_freeable)
+    if (!nr_freeable) {
     return 0;
+    }
 //
 // Subtract from the lru size the number of pages that are recently swapped
 // in from disk. The idea is that had we protect the zswap's LRU by this
@@ -1119,15 +1356,18 @@ unsafe extern "C" fn zswap_decompress(entry: *mut zswap_entry, folio: *mut folio
 //
     nr_disk_swapins_cur = atomic_long_read(nr_disk_swapins);
     do {
-    if (nr_freeable >= nr_disk_swapins_cur)
+    if (nr_freeable >= nr_disk_swapins_cur) {
     nr_remain = 0;
-    else
+    }
+    else {
     nr_remain = nr_disk_swapins_cur - nr_freeable;
+    }
     } while (!atomic_long_try_cmpxchg(
     nr_disk_swapins, &nr_disk_swapins_cur, nr_remain));
     nr_freeable -= nr_disk_swapins_cur - nr_remain;
-    if (!nr_freeable)
+    if (!nr_freeable) {
     return 0;
+    }
 //
 // Scale the number of freeable pages by the memory saving factor.
 // This ensures that the better zswap compresses memory, the fewer
@@ -1136,13 +1376,14 @@ unsafe extern "C" fn zswap_decompress(entry: *mut zswap_entry, folio: *mut folio
 //
     return mult_frac(nr_freeable, nr_backing, nr_stored);
     }
-    static struct shrinker *zswap_alloc_shrinker(void)
-    {
-    struct shrinker *shrinker;
+#[no_mangle]
+pub unsafe extern "C" fn zswap_alloc_shrinker() -> *mut c_void {
+pub static mut shrinker: *mut c_void = core::ptr::null_mut();
     shrinker =
     shrinker_alloc(SHRINKER_NUMA_AWARE | SHRINKER_MEMCG_AWARE, "mm-zswap");
-    if (!shrinker)
+    if (!shrinker) {
     return core::ptr::null_mut();
+    }
     shrinker.scan_objects = zswap_shrinker_scan;
     shrinker.count_objects = zswap_shrinker_count;
     shrinker.batch = 0;
@@ -1159,35 +1400,34 @@ unsafe extern "C" fn zswap_decompress(entry: *mut zswap_entry, folio: *mut folio
 //
 #[no_mangle]
 unsafe extern "C" fn shrink_memcg(memcg: *mut mem_cgroup) -> c_int {
-    static int shrink_memcg(struct mem_cgroup *memcg)
-    {
     int nid, shrunk = 0, scanned = 0;
-    if (!mem_cgroup_zswap_writeback_enabled(memcg))
+    if (!mem_cgroup_zswap_writeback_enabled(memcg)) {
     return -ENOENT;
+    }
 //
 // Skip zombies because their LRUs are reparented and we would be
 // reclaiming from the parent instead of the dead memcg.
 //
-    if (memcg && !mem_cgroup_online(memcg))
+    if (memcg && !mem_cgroup_online(memcg)) {
     return -ENOENT;
+    }
     for_each_node_state(nid, N_NORMAL_MEMORY) {
-    let mut nr_to_walk: c_ulong = SWAP_CLUSTER_MAX;
+pub static mut nr_to_walk: c_ulong = 0;
     shrunk += list_lru_walk_one(&zswap_list_lru, nid, memcg,
     &shrink_memcg_cb, core::ptr::null_mut(), &nr_to_walk);
     scanned += SWAP_CLUSTER_MAX - nr_to_walk;
     }
 // Nothing was scanned: every LRU under @memcg was empty.
-    if (!scanned)
+    if (!scanned) {
     return -ENOENT;
+    }
     return shrunk ? 0 : -EAGAIN;
     }
 #[no_mangle]
 unsafe extern "C" fn shrink_worker(w: *mut work_struct) {
-    static void shrink_worker(struct work_struct *w)
-    {
-    struct mem_cgroup *memcg;
+pub static mut memcg: *mut c_void = core::ptr::null_mut();
     int ret, failures = 0, attempts = 0;
-    unsigned long thr;
+    let mut thr = 0;
 // Reclaim down to the accept threshold
     thr = zswap_accept_thr_pages();
 //
@@ -1239,10 +1479,11 @@ unsafe extern "C" fn shrink_worker(w: *mut work_struct) {
 // Count a failure only if the last pass found no candidates.
 //
     if (!memcg && !mem_cgroup_disabled()) {
-    if (!attempts && ++failures == MAX_RECLAIM_RETRIES)
+    if (!attempts && ++failures == MAX_RECLAIM_RETRIES) {
     break;
+    }
     attempts = 0;
-    goto resched;
+// goto;
     }
     ret = shrink_memcg(memcg);
 // drop the extra reference
@@ -1253,48 +1494,51 @@ unsafe extern "C" fn shrink_worker(w: *mut work_struct) {
 // with pages in zswap. Skip this without incrementing attempts
 // and failures.
 //
-    if (ret == -ENOENT)
-    goto resched;
-    ++attempts;
-    if (ret && ++failures == MAX_RECLAIM_RETRIES)
+    if (ret == -ENOENT) {
+// goto;
+    }
+    attempts += 1;
+    if (ret && ++failures == MAX_RECLAIM_RETRIES) {
     break;
-    resched:
+    }
+// label;
     cond_resched();
     } while (zswap_total_pages() > thr);
     }
 //
 // main API
 //
-    static bool zswap_store_page(struct page *page,
-    struct obj_cgroup *objcg,
-    struct zswap_pool *pool)
-    {
-    let mut page_swpentry: swp_entry_t = page_swap_entry(page);
-    struct zswap_entry *entry, *old;
+#[no_mangle]
+pub unsafe extern "C" fn zswap_store_page(page: *mut page, objcg: *mut obj_cgroup, pool: *mut zswap_pool) -> bool {
+pub static mut page_swpentry: swp_entry_t = 0;
+    let mut entry = core::ptr::null_mut();
+    let mut old = core::ptr::null_mut();
 // allocate entry
     entry = zswap_entry_cache_alloc(GFP_KERNEL, page_to_nid(page));
     if (!entry) {
-    zswap_reject_kmemcache_fail++;
+    zswap_reject_kmemcache_fail += 1;
     return false;
     }
-    if (!zswap_compress(page, entry, pool))
-    goto compress_failed;
+    if (!zswap_compress(page, entry, pool)) {
+// goto;
+    }
     old = xa_store(swap_zswap_tree(page_swpentry),
     swp_offset(page_swpentry),
     entry, GFP_KERNEL);
     if (xa_is_err(old)) {
-    let mut err: c_int = xa_err(old);
+pub static mut err: c_int = 0;
     WARN_ONCE(err != -ENOMEM, "unexpected xarray error: %d\n", err);
-    zswap_reject_alloc_fail++;
-    goto store_failed;
+    zswap_reject_alloc_fail += 1;
+// goto;
     }
 //
 // We may have had an existing entry that became stale when
 // the folio was redirtied and now the new version is being
 // swapped out. Get rid of the old.
 //
-    if (old)
+    if (old) {
     zswap_entry_free(old);
+    }
 //
 // The entry is successfully compressed and stored in the tree, there is
 // no further possibility of failure. Grab refs to the pool and objcg,
@@ -1308,8 +1552,9 @@ unsafe extern "C" fn shrink_worker(w: *mut work_struct) {
     obj_cgroup_charge_zswap(objcg, entry.length);
     }
     atomic_long_inc(&zswap_stored_pages);
-    if (entry.length == PAGE_SIZE)
+    if (entry.length == PAGE_SIZE) {
     atomic_long_inc(&zswap_stored_incompressible_pages);
+    }
 //
 // We finish initializing the entry while it's already in xarray.
 // This is safe because:
@@ -1329,65 +1574,69 @@ unsafe extern "C" fn shrink_worker(w: *mut work_struct) {
     zswap_lru_add(entry);
     }
     return true;
-    store_failed:
+// label;
     zs_free(pool.zs_pool, entry.handle);
-    compress_failed:
+// label;
     zswap_entry_cache_free(entry);
     return false;
     }
 #[no_mangle]
 pub unsafe extern "C" fn zswap_store(folio: *mut folio) -> bool {
-    bool zswap_store(struct folio *folio)
-    {
-    let mut nr_pages: c_long = folio_nr_pages(folio);
-    let mut swp: swp_entry_t = folio.swap;
-    struct obj_cgroup *objcg = core::ptr::null_mut();
-    struct mem_cgroup *memcg = core::ptr::null_mut();
-    struct zswap_pool *pool;
-    let mut ret: bool = false;
-    long index;
+pub static mut nr_pages: c_long = 0;
+pub static mut swp: swp_entry_t = 0;
+    let mut objcg = core::ptr::null_mut();
+    let mut memcg = core::ptr::null_mut();
+pub static mut pool: *mut c_void = core::ptr::null_mut();
+pub static mut ret: bool = false;
+    let mut index = 0;
     VM_WARN_ON_ONCE(!folio_test_locked(folio));
     VM_WARN_ON_ONCE(!folio_test_swapcache(folio));
-    if (!zswap_enabled)
-    goto check_old;
+    if (!zswap_enabled) {
+// goto;
+    }
     objcg = get_obj_cgroup_from_folio(folio);
     if (objcg && !obj_cgroup_may_zswap(objcg)) {
     memcg = get_mem_cgroup_from_objcg(objcg);
     if (shrink_memcg(memcg)) {
     mem_cgroup_put(memcg);
-    goto put_objcg;
+// goto;
     }
     mem_cgroup_put(memcg);
     }
-    if (zswap_check_limits())
-    goto put_objcg;
+    if (zswap_check_limits()) {
+// goto;
+    }
     pool = zswap_pool_current_get();
-    if (!pool)
-    goto put_objcg;
+    if (!pool) {
+// goto;
+    }
     if (objcg) {
     memcg = get_mem_cgroup_from_objcg(objcg);
     if (memcg_list_lru_alloc(memcg, &zswap_list_lru, GFP_KERNEL)) {
     mem_cgroup_put(memcg);
-    goto put_pool;
+// goto;
     }
     mem_cgroup_put(memcg);
     }
-    for (index = 0; index < nr_pages; ++index) {
-    struct page *page = folio_page(folio, index);
-    if (!zswap_store_page(page, objcg, pool))
-    goto put_pool;
+    while (index < nr_pages) {
+    let mut page = folio_page(folio, index);
+    if (!zswap_store_page(page, objcg, pool)) {
+// goto;
     }
-    if (objcg)
+    }
+    if (objcg) {
     count_objcg_events(objcg, ZSWPOUT, nr_pages);
+    }
     count_vm_events(ZSWPOUT, nr_pages);
     ret = true;
-    put_pool:
+// label;
     zswap_pool_put(pool);
-    put_objcg:
+// label;
     obj_cgroup_put(objcg);
-    if (!ret && zswap_pool_reached_full)
+    if (!ret && zswap_pool_reached_full) {
     queue_work(shrink_wq, &zswap_shrink_work);
-    check_old:
+    }
+// label;
 //
 // If the zswap store fails or zswap is disabled, we must invalidate
 // the possibly stale entries which were previously stored at the
@@ -1395,15 +1644,16 @@ pub unsafe extern "C" fn zswap_store(folio: *mut folio) -> bool {
 // writeback could overwrite the new data in the swapfile.
 //
     if (!ret) {
-    let mut type: unsigned = swp_type(swp);
-    let mut offset: pgoff_t = swp_offset(swp);
-    struct zswap_entry *entry;
-    struct xarray *tree;
-    for (index = 0; index < nr_pages; ++index) {
+pub static mut type: unsigned = 0;
+pub static mut offset: pgoff_t = 0;
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut tree: *mut c_void = core::ptr::null_mut();
+    while (index < nr_pages) {
     tree = swap_zswap_tree(swp_entry(type, offset + index));
     entry = xa_erase(tree, offset + index);
-    if (entry)
+    if (entry) {
     zswap_entry_free(entry);
+    }
     }
     }
     return ret;
@@ -1430,36 +1680,37 @@ pub unsafe extern "C" fn zswap_store(folio: *mut folio) -> bool {
 //
 #[no_mangle]
 pub unsafe extern "C" fn zswap_load(folio: *mut folio) -> c_int {
-    int zswap_load(struct folio *folio)
-    {
-    let mut swp: swp_entry_t = folio.swap;
-    let mut offset: pgoff_t = swp_offset(swp);
-    struct xarray *tree = swap_zswap_tree(swp);
-    struct zswap_entry *entry;
+pub static mut swp: swp_entry_t = 0;
+pub static mut offset: pgoff_t = 0;
+    let mut tree = swap_zswap_tree(swp);
+pub static mut entry: *mut c_void = core::ptr::null_mut();
     VM_WARN_ON_ONCE(!folio_test_locked(folio));
     VM_WARN_ON_ONCE(!folio_test_swapcache(folio));
-    if (zswap_never_enabled())
+    if (zswap_never_enabled()) {
     return -ENOENT;
+    }
 //
 // Large folios should not be swapped in while zswap is being used, as
 // they are not properly handled. Zswap does not properly load large
 // folios, and a large folio may only be partially in zswap.
 //
-    if (WARN_ON_ONCE(folio_test_large(folio))) {
+    if (WARN_ON_ONCE!(folio_test_large(folio))) {
     folio_unlock(folio);
     return -EINVAL;
     }
     entry = xa_load(tree, offset);
-    if (!entry)
+    if (!entry) {
     return -ENOENT;
+    }
     if (!zswap_decompress(entry, folio)) {
     folio_unlock(folio);
     return -EIO;
     }
     folio_mark_uptodate(folio);
     count_vm_event(ZSWPIN);
-    if (entry.objcg)
+    if (entry.objcg) {
     count_objcg_events(entry.objcg, ZSWPIN, 1);
+    }
 //
 // We are reading into the swapcache, invalidate zswap entry.
 // The swapcache is the authoritative owner of the page and
@@ -1475,46 +1726,47 @@ pub unsafe extern "C" fn zswap_load(folio: *mut folio) -> c_int {
     }
 #[no_mangle]
 pub unsafe extern "C" fn zswap_invalidate(swp: swp_entry_t) {
-    void zswap_invalidate(swp_entry_t swp)
-    {
-    let mut offset: pgoff_t = swp_offset(swp);
-    struct xarray *tree = swap_zswap_tree(swp);
-    struct zswap_entry *entry;
-    if (xa_empty(tree))
+pub static mut offset: pgoff_t = 0;
+    let mut tree = swap_zswap_tree(swp);
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+    if (xa_empty(tree)) {
     return;
+    }
     entry = xa_erase(tree, offset);
-    if (entry)
+    if (entry) {
     zswap_entry_free(entry);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn zswap_swapon(type: c_int, nr_pages: c_ulong) -> c_int {
-    int zswap_swapon(int type, unsigned long nr_pages)
-    {
-    struct xarray *trees, *tree;
-    unsigned int nr, i;
+    let mut trees = core::ptr::null_mut();
+    let mut tree = core::ptr::null_mut();
+    let mut nr = 0;
+    let mut i = 0;
     nr = DIV_ROUND_UP(nr_pages, ZSWAP_ADDRESS_SPACE_PAGES);
     trees = kvzalloc_objs(*tree, nr);
     if (!trees) {
-    pr_err("alloc failed, zswap disabled for swap type %d\n", type);
+    pr_err!("alloc failed, zswap disabled for swap type %d\n", type);
     return -ENOMEM;
     }
-    for (i = 0; i < nr; i++)
+    for (i = 0; i < nr; i++) {
     xa_init(trees + i);
+    }
     nr_zswap_trees[type] = nr;
     zswap_trees[type] = trees;
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn zswap_swapoff(type: c_int) {
-    void zswap_swapoff(int type)
-    {
-    struct xarray *trees = zswap_trees[type];
-    unsigned int i;
-    if (!trees)
+    let mut trees = zswap_trees[type];
+    let mut i = 0;
+    if (!trees) {
     return;
+    }
 // try_to_unuse() invalidated all the entries already
-    for (i = 0; i < nr_zswap_trees[type]; i++)
-    WARN_ON_ONCE(!xa_empty(trees + i));
+    for (i = 0; i < nr_zswap_trees[type]; i++) {
+    WARN_ON_ONCE!(!xa_empty(trees + i));
+    }
     kvfree(trees);
     nr_zswap_trees[type] = 0;
     zswap_trees[type] = core::ptr::null_mut();
@@ -1523,27 +1775,21 @@ pub unsafe extern "C" fn zswap_swapoff(type: c_int) {
 // debugfs functions
 //
 
-    static struct dentry *zswap_debugfs_root;
+pub static mut zswap_debugfs_root: *mut c_void = core::ptr::null_mut();
 #[no_mangle]
 unsafe extern "C" fn debugfs_get_total_size(data: *mut c_void, val: *mut u64) -> c_int {
-    static int debugfs_get_total_size(void *data, u64 *val)
-    {
 // val = zswap_total_pages() * PAGE_SIZE;
     return 0;
     }
     DEFINE_DEBUGFS_ATTRIBUTE(total_size_fops, debugfs_get_total_size, core::ptr::null_mut(), "%llu\n");
 #[no_mangle]
 unsafe extern "C" fn debugfs_get_stored_pages(data: *mut c_void, val: *mut u64) -> c_int {
-    static int debugfs_get_stored_pages(void *data, u64 *val)
-    {
 // val = atomic_long_read(&zswap_stored_pages);
     return 0;
     }
     DEFINE_DEBUGFS_ATTRIBUTE(stored_pages_fops, debugfs_get_stored_pages, core::ptr::null_mut(), "%llu\n");
 #[no_mangle]
 unsafe extern "C" fn debugfs_get_stored_incompressible_pages(data: *mut c_void, val: *mut u64) -> c_int {
-    static int debugfs_get_stored_incompressible_pages(void *data, u64 *val)
-    {
 // val = atomic_long_read(&zswap_stored_incompressible_pages);
     return 0;
     }
@@ -1551,10 +1797,9 @@ unsafe extern "C" fn debugfs_get_stored_incompressible_pages(data: *mut c_void, 
     debugfs_get_stored_incompressible_pages, core::ptr::null_mut(), "%llu\n");
 #[no_mangle]
 unsafe extern "C" fn zswap_debugfs_init() -> c_int {
-    static int zswap_debugfs_init(void)
-    {
-    if (!debugfs_initialized())
+    if (!debugfs_initialized()) {
     return -ENODEV;
+    }
     zswap_debugfs_root = debugfs_create_dir("zswap", core::ptr::null_mut());
     debugfs_create_u64("pool_limit_hit", 0444,
     zswap_debugfs_root, &zswap_pool_limit_hit);
@@ -1584,8 +1829,6 @@ unsafe extern "C" fn zswap_debugfs_init() -> c_int {
 
 #[no_mangle]
 unsafe extern "C" fn zswap_debugfs_init() -> c_int {
-    static int zswap_debugfs_init(void)
-    {
     return 0;
     }
 
@@ -1594,69 +1837,71 @@ unsafe extern "C" fn zswap_debugfs_init() -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn zswap_setup() -> c_int {
-    static int zswap_setup(void)
-    {
-    struct zswap_pool *pool;
-    int ret;
+pub static mut pool: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     zswap_entry_cache = KMEM_CACHE(zswap_entry, 0);
     if (!zswap_entry_cache) {
-    pr_err("entry cache creation failed\n");
-    goto cache_fail;
+    pr_err!("entry cache creation failed\n");
+// goto;
     }
     ret = cpuhp_setup_state_multi(CPUHP_MM_ZSWP_POOL_PREPARE,
     "mm/zswap_pool:prepare",
     zswap_cpu_comp_prepare,
     core::ptr::null_mut());
-    if (ret)
-    goto hp_fail;
+    if (ret) {
+// goto;
+    }
     shrink_wq = alloc_workqueue("zswap-shrink",
     WQ_UNBOUND|WQ_MEM_RECLAIM, 1);
-    if (!shrink_wq)
-    goto shrink_wq_fail;
+    if (!shrink_wq) {
+// goto;
+    }
     zswap_shrinker = zswap_alloc_shrinker();
-    if (!zswap_shrinker)
-    goto shrinker_fail;
-    if (list_lru_init_memcg(&zswap_list_lru, zswap_shrinker))
-    goto lru_fail;
+    if (!zswap_shrinker) {
+// goto;
+    }
+    if (list_lru_init_memcg(&zswap_list_lru, zswap_shrinker)) {
+// goto;
+    }
     shrinker_register(zswap_shrinker);
     INIT_WORK(&zswap_shrink_work, shrink_worker);
     pool = __zswap_pool_create_fallback();
     if (pool) {
-    pr_info("loaded using pool %s\n", pool.tfm_name);
+    pr_info!("loaded using pool %s\n", pool.tfm_name);
     list_add(&pool.list, &zswap_pools);
     zswap_has_pool = true;
     static_branch_enable(&zswap_ever_enabled);
     } else {
-    pr_err("pool creation failed\n");
+    pr_err!("pool creation failed\n");
     zswap_enabled = false;
     }
-    if (zswap_debugfs_init())
-    pr_warn("debugfs initialization failed\n");
+    if (zswap_debugfs_init()) {
+    pr_warn!("debugfs initialization failed\n");
+    }
     zswap_init_state = ZSWAP_INIT_SUCCEED;
     return 0;
-    lru_fail:
+// label;
     shrinker_free(zswap_shrinker);
-    shrinker_fail:
+// label;
     destroy_workqueue(shrink_wq);
-    shrink_wq_fail:
+// label;
     cpuhp_remove_multi_state(CPUHP_MM_ZSWP_POOL_PREPARE);
-    hp_fail:
+// label;
     kmem_cache_destroy(zswap_entry_cache);
-    cache_fail:
+// label;
 // if built-in, we aren't unloaded on failure; don't allow use
     zswap_init_state = ZSWAP_INIT_FAILED;
     zswap_enabled = false;
     return -ENOMEM;
     }
 #[no_mangle]
-unsafe extern "C" fn zswap_init() -> int __init {
-    static int __init zswap_init(void)
-    {
-    if (!zswap_enabled)
+unsafe extern "C" fn zswap_init() -> c_int {
+    if (!zswap_enabled) {
     return 0;
+    }
     return zswap_setup();
     }
 // must be late so crypto has time to come up
-    late_initcall(zswap_init);
+    late_initcall!(zswap_init);
     MODULE_AUTHOR("Seth Jennings <sjennings@variantweb.net>");
     MODULE_DESCRIPTION("Compressed cache for swap pages");

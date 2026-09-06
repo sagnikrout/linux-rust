@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -99,13 +349,11 @@ pub struct blk_zone_wplug {
     pub flags: c_uint,
     pub zone_no: c_uint,
     pub wp_offset: c_uint,
-    pub cond: enum blk_zone_cond,
+    pub cond: blk_zone_cond,
 }
 
 #[no_mangle]
 pub unsafe extern "C" fn disk_need_zone_resources(disk: *mut gendisk) -> bool {
-    static inline bool disk_need_zone_resources(struct gendisk *disk)
-    {
 //
 // All request-based zoned devices need zone resources so that the
 // block layer can automatically handle write BIO plugging. BIO-based
@@ -118,8 +366,6 @@ pub unsafe extern "C" fn disk_need_zone_resources(disk: *mut gendisk) -> bool {
     }
 #[no_mangle]
 pub unsafe extern "C" fn disk_zone_wplugs_hash_size(disk: *mut gendisk) -> c_uint {
-    static inline unsigned int disk_zone_wplugs_hash_size(struct gendisk *disk)
-    {
     return 1U << disk.zone_wplugs_hash_bits;
     }
 //
@@ -149,53 +395,66 @@ pub unsafe extern "C" fn disk_zone_wplugs_hash_size(disk: *mut gendisk) -> c_uin
     const char *blk_zone_cond_str(enum blk_zone_cond zone_cond)
     {
     static const char *zone_cond_str = "UNKNOWN";
-    if (zone_cond < ARRAY_SIZE(zone_cond_name) && zone_cond_name[zone_cond])
+    if (zone_cond < ARRAY_SIZE!(zone_cond_name) && zone_cond_name[zone_cond]) {
     zone_cond_str = zone_cond_name[zone_cond];
+    }
     return zone_cond_str;
     }
     EXPORT_SYMBOL_GPL(blk_zone_cond_str);
-    static void blk_zone_set_cond(u8 *zones_cond, unsigned int zno,
-    enum blk_zone_cond cond)
-    {
-    if (!zones_cond)
+#[no_mangle]
+pub unsafe extern "C" fn blk_zone_set_cond(zones_cond: *mut u8, zno: c_uint, cond: blk_zone_cond) {
+    if (!zones_cond) {
     return;
-    switch (cond) {
-    case BLK_ZONE_COND_IMP_OPEN:
-    case BLK_ZONE_COND_EXP_OPEN:
-    case BLK_ZONE_COND_CLOSED:
+    }
+    match (cond) {
+    BLK_ZONE_COND_IMP_OPEN => {
+    }
+    BLK_ZONE_COND_EXP_OPEN => {
+    }
+    BLK_ZONE_COND_CLOSED => {
     zones_cond[zno] = BLK_ZONE_COND_ACTIVE;
     return;
-    case BLK_ZONE_COND_NOT_WP:
-    case BLK_ZONE_COND_EMPTY:
-    case BLK_ZONE_COND_FULL:
-    case BLK_ZONE_COND_OFFLINE:
-    case BLK_ZONE_COND_READONLY:
-    default:
+    }
+    BLK_ZONE_COND_NOT_WP => {
+    }
+    BLK_ZONE_COND_EMPTY => {
+    }
+    BLK_ZONE_COND_FULL => {
+    }
+    BLK_ZONE_COND_OFFLINE => {
+    }
+    BLK_ZONE_COND_READONLY => {
+    }
+    _ => {
     zones_cond[zno] = cond;
     return;
     }
     }
-    static void disk_zone_set_cond(struct gendisk *disk, sector_t sector,
-    enum blk_zone_cond cond)
-    {
-    u8 *zones_cond;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn disk_zone_set_cond(disk: *mut gendisk, sector: sector_t, cond: blk_zone_cond) {
+pub static mut zones_cond: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     zones_cond = rcu_dereference(disk.zones_cond);
     if (zones_cond) {
-    let mut zno: c_uint = disk_zone_no(disk, sector);
+pub static mut zno: c_uint = 0;
 //
 // The condition of a conventional, readonly and offline zones
 // never changes, so do nothing if the target zone is in one of
 // these conditions.
 //
-    switch (zones_cond[zno]) {
-    case BLK_ZONE_COND_NOT_WP:
-    case BLK_ZONE_COND_READONLY:
-    case BLK_ZONE_COND_OFFLINE:
-    break;
-    default:
+    match (zones_cond[zno]) {
+    BLK_ZONE_COND_NOT_WP => {
+    }
+    BLK_ZONE_COND_READONLY => {
+    }
+    BLK_ZONE_COND_OFFLINE => {
+    // break;
+    }
+    _ => {
     blk_zone_set_cond(zones_cond, zno, cond);
-    break;
+    // break;
+    }
     }
     }
     rcu_read_unlock();
@@ -209,18 +468,18 @@ pub unsafe extern "C" fn disk_zone_wplugs_hash_size(disk: *mut gendisk) -> c_uin
 //
 #[no_mangle]
 pub unsafe extern "C" fn bdev_zone_is_seq(bdev: *mut block_device, sector: sector_t) -> bool {
-    bool bdev_zone_is_seq(struct block_device *bdev, sector_t sector)
-    {
-    struct gendisk *disk = bdev.bd_disk;
-    let mut zno: c_uint = disk_zone_no(disk, sector);
-    let mut is_seq: bool = false;
-    u8 *zones_cond;
-    if (!bdev_is_zoned(bdev))
+    let mut disk = bdev.bd_disk;
+pub static mut zno: c_uint = 0;
+pub static mut is_seq: bool = false;
+pub static mut zones_cond: *mut c_void = core::ptr::null_mut();
+    if (!bdev_is_zoned(bdev)) {
     return false;
+    }
     rcu_read_lock();
     zones_cond = rcu_dereference(disk.zones_cond);
-    if (zones_cond && zno < disk.nr_zones)
+    if (zones_cond && zno < disk.nr_zones) {
     is_seq = zones_cond[zno] != BLK_ZONE_COND_NOT_WP;
+    }
     rcu_read_unlock();
     return is_seq;
     }
@@ -238,15 +497,15 @@ pub struct blk_report_zones_args {
     pub report_active: bool,
 }
 
-    static int blkdev_do_report_zones(struct block_device *bdev, sector_t sector,
-    unsigned int nr_zones,
-    struct blk_report_zones_args *args)
-    {
-    struct gendisk *disk = bdev.bd_disk;
-    if (!bdev_is_zoned(bdev) || WARN_ON_ONCE(!disk.fops.report_zones))
+#[no_mangle]
+pub unsafe extern "C" fn blkdev_do_report_zones(bdev: *mut block_device, sector: sector_t, nr_zones: c_uint, args: *mut blk_report_zones_args) -> c_int {
+    let mut disk = bdev.bd_disk;
+    if (!bdev_is_zoned(bdev) || WARN_ON_ONCE!(!disk.fops.report_zones)) {
     return -EOPNOTSUPP;
-    if (!nr_zones || sector >= get_capacity(disk))
+    }
+    if (!nr_zones || sector >= get_capacity(disk)) {
     return 0;
+    }
     return disk.fops.report_zones(disk, sector, nr_zones, args);
     }
 //
@@ -268,21 +527,15 @@ pub struct blk_report_zones_args {
 // Note: The caller must use memalloc_noXX_save/restore() calls to control
 // memory allocations done within this function.
 //
-    int blkdev_report_zones(struct block_device *bdev, sector_t sector,
-    unsigned int nr_zones, report_zones_cb cb, void *data)
-    {
-    struct blk_report_zones_args args = {
-    .cb = cb,
-    .data = data,
-    };
+#[no_mangle]
+pub unsafe extern "C" fn blkdev_report_zones(bdev: *mut block_device, sector: sector_t, nr_zones: c_uint, cb: report_zones_cb, data: *mut c_void) -> c_int {
+pub static mut blk_report_zones_args: usize = 0;
     return blkdev_do_report_zones(bdev, sector, nr_zones, &args);
     }
     EXPORT_SYMBOL_GPL(blkdev_report_zones);
 #[no_mangle]
 unsafe extern "C" fn blkdev_zone_reset_all(bdev: *mut block_device) -> c_int {
-    static int blkdev_zone_reset_all(struct block_device *bdev)
-    {
-    struct bio bio;
+pub static mut bio: usize = 0;
     bio_init(&bio, bdev, core::ptr::null_mut(), 0, REQ_OP_ZONE_RESET_ALL | REQ_SYNC);
     trace_blkdev_zone_mgmt(&bio, 0);
     return submit_bio_wait(&bio);
@@ -302,34 +555,40 @@ unsafe extern "C" fn blkdev_zone_reset_all(bdev: *mut block_device) -> c_int {
 // The operation to execute on each zone can be a zone reset, open, close
 // or finish request.
 //
-    int blkdev_zone_mgmt(struct block_device *bdev, enum req_op op,
-    sector_t sector, sector_t nr_sectors)
-    {
-    let mut zone_sectors: sector_t = bdev_zone_sectors(bdev);
-    let mut capacity: sector_t = bdev_nr_sectors(bdev);
-    let mut end_sector: sector_t = sector + nr_sectors;
-    struct bio *bio = core::ptr::null_mut();
-    let mut ret: c_int = 0;
-    if (!bdev_is_zoned(bdev))
+#[no_mangle]
+pub unsafe extern "C" fn blkdev_zone_mgmt(bdev: *mut block_device, op: req_op, sector: sector_t, nr_sectors: sector_t) -> c_int {
+pub static mut zone_sectors: sector_t = 0;
+pub static mut capacity: sector_t = 0;
+pub static mut end_sector: sector_t = 0;
+    let mut bio = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
+    if (!bdev_is_zoned(bdev)) {
     return -EOPNOTSUPP;
-    if (bdev_read_only(bdev))
+    }
+    if (bdev_read_only(bdev)) {
     return -EPERM;
-    if (!op_is_zone_mgmt(op))
+    }
+    if (!op_is_zone_mgmt(op)) {
     return -EOPNOTSUPP;
-    if (end_sector <= sector || end_sector > capacity)
+    }
+    if (end_sector <= sector || end_sector > capacity) {
 // Out of range
     return -EINVAL;
+    }
 // Check alignment (handle eventual smaller last zone)
-    if (!bdev_is_zone_start(bdev, sector))
+    if (!bdev_is_zone_start(bdev, sector)) {
     return -EINVAL;
-    if (!bdev_is_zone_start(bdev, nr_sectors) && end_sector != capacity)
+    }
+    if (!bdev_is_zone_start(bdev, nr_sectors) && end_sector != capacity) {
     return -EINVAL;
+    }
 //
 // In the case of a zone reset operation over all zones, use
 // REQ_OP_ZONE_RESET_ALL.
 //
-    if (op == REQ_OP_ZONE_RESET && sector == 0 && nr_sectors == capacity)
+    if (op == REQ_OP_ZONE_RESET && sector == 0 && nr_sectors == capacity) {
     return blkdev_zone_reset_all(bdev);
+    }
     while (sector < end_sector) {
     bio = blk_next_bio(bio, bdev, 0, op | REQ_SYNC, GFP_KERNEL);
     bio.bi_iter.bi_sector = sector;
@@ -346,15 +605,15 @@ unsafe extern "C" fn blkdev_zone_reset_all(bdev: *mut block_device) -> c_int {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct zone_report_args {
-    pub zones: *mut blk_zone __user,
+    pub zones: *mut blk_zone ,
 }
 
-    static int blkdev_copy_zone_to_user(struct blk_zone *zone, unsigned int idx,
-    void *data)
-    {
-    struct zone_report_args *args = data;
-    if (copy_to_user(&args.zones[idx], zone, sizeof(struct blk_zone)))
+#[no_mangle]
+pub unsafe extern "C" fn blkdev_copy_zone_to_user(zone: *mut blk_zone, idx: c_uint, data: *mut c_void) -> c_int {
+    let mut args = data;
+    if (copy_to_user(&args.zones[idx], zone, sizeof!(blk_zone))) {
     return -EFAULT;
+    }
     return 0;
     }
 //
@@ -365,63 +624,73 @@ pub struct zone_report_args {
 // BLKREPORTZONE and BLKREPORTZONEV2 ioctl processing.
 // Called from blkdev_ioctl.
 //
-    int blkdev_report_zones_ioctl(struct block_device *bdev, unsigned int cmd,
-    unsigned long arg)
-    {
-    void __user *argp = (void __user *)arg;
-    struct zone_report_args args;
-    struct blk_zone_report rep;
-    int ret;
-    if (!argp)
+#[no_mangle]
+pub unsafe extern "C" fn blkdev_report_zones_ioctl(bdev: *mut block_device, cmd: c_uint, arg: c_ulong) -> c_int {
+    let mut argp = arg;
+pub static mut args: usize = 0;
+pub static mut rep: usize = 0;
+    let mut ret = 0;
+    if (!argp) {
     return -EINVAL;
-    if (!bdev_is_zoned(bdev))
+    }
+    if (!bdev_is_zoned(bdev)) {
     return -ENOTTY;
-    if (copy_from_user(&rep, argp, sizeof(struct blk_zone_report)))
+    }
+    if (copy_from_user(&rep, argp, sizeof!(blk_zone_report))) {
     return -EFAULT;
-    if (!rep.nr_zones)
+    }
+    if (!rep.nr_zones) {
     return -EINVAL;
-    args.zones = argp + sizeof(struct blk_zone_report);
-    switch (cmd) {
-    case BLKREPORTZONE:
+    }
+    args.zones = argp + sizeof!(blk_zone_report);
+    match (cmd) {
+    BLKREPORTZONE => {
     ret = blkdev_report_zones(bdev, rep.sector, rep.nr_zones,
     blkdev_copy_zone_to_user, &args);
-    break;
-    case BLKREPORTZONEV2:
-    if (rep.flags & ~BLK_ZONE_REPV2_INPUT_FLAGS)
+    // break;
+    }
+    BLKREPORTZONEV2 => {
+    if (rep.flags & ~BLK_ZONE_REPV2_INPUT_FLAGS) {
     return -EINVAL;
+    }
     ret = blkdev_report_zones_cached(bdev, rep.sector, rep.nr_zones,
     blkdev_copy_zone_to_user, &args);
-    break;
-    default:
+    // break;
+    }
+    _ => {
     return -EINVAL;
     }
-    if (ret < 0)
+    }
+    if (ret < 0) {
     return ret;
+    }
     rep.nr_zones = ret;
     rep.flags = BLK_ZONE_REP_CAPACITY;
-    if (copy_to_user(argp, &rep, sizeof(struct blk_zone_report)))
+    if (copy_to_user(argp, &rep, sizeof!(blk_zone_report))) {
     return -EFAULT;
+    }
     return 0;
     }
-    static int blkdev_reset_zone(struct block_device *bdev, blk_mode_t mode,
-    struct blk_zone_range *zrange)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn blkdev_reset_zone(bdev: *mut block_device, mode: blk_mode_t, zrange: *mut blk_zone_range) -> c_int {
     loff_t start, end;
-    let mut ret: c_int = -EINVAL;
+pub static mut ret: c_int = 0;
     inode_lock(bdev.bd_mapping.host);
     filemap_invalidate_lock(bdev.bd_mapping);
     if (zrange.sector + zrange.nr_sectors <= zrange.sector ||
-    zrange.sector + zrange.nr_sectors > get_capacity(bdev.bd_disk))
+    zrange.sector + zrange.nr_sectors > get_capacity(bdev.bd_disk)) {
 // Out of range
-    goto out_unlock;
+// goto;
+    }
     start = zrange.sector << SECTOR_SHIFT;
     end = ((zrange.sector + zrange.nr_sectors) << SECTOR_SHIFT) - 1;
     ret = truncate_bdev_range(bdev, mode, start, end);
-    if (ret)
-    goto out_unlock;
+    if (ret) {
+// goto;
+    }
     ret = blkdev_zone_mgmt(bdev, REQ_OP_ZONE_RESET, zrange.sector,
     zrange.nr_sectors);
-    out_unlock:
+// label;
     filemap_invalidate_unlock(bdev.bd_mapping);
     inode_unlock(bdev.bd_mapping.host);
     return ret;
@@ -430,58 +699,62 @@ pub struct zone_report_args {
 // BLKRESETZONE, BLKOPENZONE, BLKCLOSEZONE and BLKFINISHZONE ioctl processing.
 // Called from blkdev_ioctl.
 //
-    int blkdev_zone_mgmt_ioctl(struct block_device *bdev, blk_mode_t mode,
-    unsigned int cmd, unsigned long arg)
-    {
-    void __user *argp = (void __user *)arg;
-    struct blk_zone_range zrange;
+#[no_mangle]
+pub unsafe extern "C" fn blkdev_zone_mgmt_ioctl(bdev: *mut block_device, mode: blk_mode_t, cmd: c_uint, arg: c_ulong) -> c_int {
+    let mut argp = arg;
+pub static mut zrange: usize = 0;
     enum req_op op;
-    if (!argp)
+    if (!argp) {
     return -EINVAL;
-    if (!bdev_is_zoned(bdev))
+    }
+    if (!bdev_is_zoned(bdev)) {
     return -ENOTTY;
-    if (!(mode & BLK_OPEN_WRITE))
+    }
+    if (!(mode & BLK_OPEN_WRITE)) {
     return -EBADF;
-    if (copy_from_user(&zrange, argp, sizeof(struct blk_zone_range)))
+    }
+    if (copy_from_user(&zrange, argp, sizeof!(blk_zone_range))) {
     return -EFAULT;
-    switch (cmd) {
-    case BLKRESETZONE:
+    }
+    match (cmd) {
+    BLKRESETZONE => {
     return blkdev_reset_zone(bdev, mode, &zrange);
-    case BLKOPENZONE:
+    }
+    BLKOPENZONE => {
     op = REQ_OP_ZONE_OPEN;
-    break;
-    case BLKCLOSEZONE:
+    // break;
+    }
+    BLKCLOSEZONE => {
     op = REQ_OP_ZONE_CLOSE;
-    break;
-    case BLKFINISHZONE:
+    // break;
+    }
+    BLKFINISHZONE => {
     op = REQ_OP_ZONE_FINISH;
-    break;
-    default:
+    // break;
+    }
+    _ => {
     return -ENOTTY;
+    }
     }
     return blkdev_zone_mgmt(bdev, op, zrange.sector, zrange.nr_sectors);
     }
 #[no_mangle]
 unsafe extern "C" fn disk_zone_is_last(disk: *mut gendisk, zone: *mut blk_zone) -> bool {
-    static bool disk_zone_is_last(struct gendisk *disk, struct blk_zone *zone)
-    {
     return zone.start + zone.len >= get_capacity(disk);
     }
-    static bool disk_zone_wplug_is_full(struct gendisk *disk,
-    struct blk_zone_wplug *zwplug)
-    {
-    if (zwplug.zone_no < disk.nr_zones - 1)
+#[no_mangle]
+pub unsafe extern "C" fn disk_zone_wplug_is_full(disk: *mut gendisk, zwplug: *mut blk_zone_wplug) -> bool {
+    if (zwplug.zone_no < disk.nr_zones - 1) {
     return zwplug.wp_offset >= disk.zone_capacity;
+    }
     return zwplug.wp_offset >= disk.last_zone_capacity;
     }
-    static bool disk_insert_zone_wplug(struct gendisk *disk,
-    struct blk_zone_wplug *zwplug)
-    {
-    struct blk_zone_wplug *zwplg;
-    unsigned long flags;
-    u8 *zones_cond;
-    unsigned int idx =
-    hash_32(zwplug.zone_no, disk.zone_wplugs_hash_bits);
+#[no_mangle]
+pub unsafe extern "C" fn disk_insert_zone_wplug(disk: *mut gendisk, zwplug: *mut blk_zone_wplug) -> bool {
+pub static mut zwplg: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+pub static mut zones_cond: *mut c_void = core::ptr::null_mut();
+    let mut idx = hash_32(zwplug.zone_no, disk.zone_wplugs_hash_bits);
 //
 // Add the new zone write plug to the hash table, but carefully as we
 // are racing with other submission context, so we may already have a
@@ -503,21 +776,22 @@ unsafe extern "C" fn disk_zone_is_last(disk: *mut gendisk, zone: *mut blk_zone) 
 //
     zones_cond = rcu_dereference_check(disk.zones_cond,
     lockdep_is_held(&disk.zone_wplugs_hash_lock));
-    if (zones_cond)
+    if (zones_cond) {
     zwplug.cond = zones_cond[zwplug.zone_no];
-    else
+    }
+    else {
     zwplug.cond = BLK_ZONE_COND_ACTIVE;
+    }
     hlist_add_head_rcu(&zwplug.node, &disk.zone_wplugs_hash[idx]);
     atomic_inc(&disk.nr_zone_wplugs);
     spin_unlock_irqrestore(&disk.zone_wplugs_hash_lock, flags);
     return true;
     }
-    static struct blk_zone_wplug *disk_get_hashed_zone_wplug(struct gendisk *disk,
-    sector_t sector)
-    {
-    let mut zno: c_uint = disk_zone_no(disk, sector);
-    let mut idx: c_uint = hash_32(zno, disk.zone_wplugs_hash_bits);
-    struct blk_zone_wplug *zwplug;
+#[no_mangle]
+pub unsafe extern "C" fn disk_get_hashed_zone_wplug(disk: *mut gendisk, sector: sector_t) -> *mut c_void {
+pub static mut zno: c_uint = 0;
+pub static mut idx: c_uint = 0;
+pub static mut zwplug: *mut c_void = core::ptr::null_mut();
     rcu_read_lock();
     hlist_for_each_entry_rcu(zwplug, &disk.zone_wplugs_hash[idx], node) {
     if (zwplug.zone_no == zno &&
@@ -529,30 +803,25 @@ unsafe extern "C" fn disk_zone_is_last(disk: *mut gendisk, zone: *mut blk_zone) 
     rcu_read_unlock();
     return core::ptr::null_mut();
     }
-    static inline struct blk_zone_wplug *disk_get_zone_wplug(struct gendisk *disk,
-    sector_t sector)
-    {
-    if (!atomic_read(&disk.nr_zone_wplugs))
+#[no_mangle]
+pub unsafe extern "C" fn disk_get_zone_wplug(disk: *mut gendisk, sector: sector_t) -> *mut c_void {
+    if (!atomic_read(&disk.nr_zone_wplugs)) {
     return core::ptr::null_mut();
+    }
     return disk_get_hashed_zone_wplug(disk, sector);
     }
 #[no_mangle]
 unsafe extern "C" fn disk_free_zone_wplug_rcu(rcu_head: *mut rcu_head) {
-    static void disk_free_zone_wplug_rcu(struct rcu_head *rcu_head)
-    {
-    struct blk_zone_wplug *zwplug =
-    container_of(rcu_head, struct blk_zone_wplug, rcu_head);
+    let mut zwplug = container_of!(rcu_head, blk_zone_wplug, rcu_head);
     mempool_free(zwplug, zwplug.disk.zone_wplugs_pool);
     }
 #[no_mangle]
 unsafe extern "C" fn disk_free_zone_wplug(zwplug: *mut blk_zone_wplug) {
-    static void disk_free_zone_wplug(struct blk_zone_wplug *zwplug)
-    {
-    struct gendisk *disk = zwplug.disk;
-    unsigned long flags;
-    WARN_ON_ONCE(!(zwplug.flags & BLK_ZONE_WPLUG_DEAD));
-    WARN_ON_ONCE(zwplug.flags & BLK_ZONE_WPLUG_PLUGGED);
-    WARN_ON_ONCE(!bio_list_empty(&zwplug.bio_list));
+    let mut disk = zwplug.disk;
+    let mut flags = 0;
+    WARN_ON_ONCE!(!(zwplug.flags & BLK_ZONE_WPLUG_DEAD));
+    WARN_ON_ONCE!(zwplug.flags & BLK_ZONE_WPLUG_PLUGGED);
+    WARN_ON_ONCE!(!bio_list_empty(&zwplug.bio_list));
     spin_lock_irqsave(&disk.zone_wplugs_hash_lock, flags);
     blk_zone_set_cond(rcu_dereference_check(disk.zones_cond,
     lockdep_is_held(&disk.zone_wplugs_hash_lock)),
@@ -564,10 +833,9 @@ unsafe extern "C" fn disk_free_zone_wplug(zwplug: *mut blk_zone_wplug) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn disk_put_zone_wplug(zwplug: *mut blk_zone_wplug) {
-    static inline void disk_put_zone_wplug(struct blk_zone_wplug *zwplug)
-    {
-    if (refcount_dec_and_test(&zwplug.ref))
+    if (refcount_dec_and_test(&zwplug.ref)) {
     disk_free_zone_wplug(zwplug);
+    }
     }
 //
 // Flag the zone write plug as dead and drop the initial reference we got when
@@ -576,8 +844,6 @@ pub unsafe extern "C" fn disk_put_zone_wplug(zwplug: *mut blk_zone_wplug) {
 //
 #[no_mangle]
 unsafe extern "C" fn disk_mark_zone_wplug_dead(zwplug: *mut blk_zone_wplug) {
-    static void disk_mark_zone_wplug_dead(struct blk_zone_wplug *zwplug)
-    {
     lockdep_assert_held(&zwplug.lock);
     if (!(zwplug.flags & BLK_ZONE_WPLUG_DEAD)) {
     zwplug.flags |= BLK_ZONE_WPLUG_DEAD;
@@ -586,10 +852,9 @@ unsafe extern "C" fn disk_mark_zone_wplug_dead(zwplug: *mut blk_zone_wplug) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn disk_check_zone_wplug_dead(zwplug: *mut blk_zone_wplug) -> bool {
-    static inline bool disk_check_zone_wplug_dead(struct blk_zone_wplug *zwplug)
-    {
-    if (!(zwplug.flags & BLK_ZONE_WPLUG_DEAD))
+    if (!(zwplug.flags & BLK_ZONE_WPLUG_DEAD)) {
     return false;
+    }
 //
 // If a new write is received right after a zone reset completes and
 // while the disk_zone_wplugs_worker() thread has not yet released the
@@ -605,14 +870,10 @@ pub unsafe extern "C" fn disk_check_zone_wplug_dead(zwplug: *mut blk_zone_wplug)
     }
     return true;
     }
-    static bool disk_zone_wplug_submit_bio(struct gendisk *disk,
-    struct blk_zone_wplug *zwplug);
+// forward_decl: disk_zone_wplug_submit_bio;
 #[no_mangle]
 unsafe extern "C" fn blk_zone_wplug_bio_work(work: *mut work_struct) {
-    static void blk_zone_wplug_bio_work(struct work_struct *work)
-    {
-    struct blk_zone_wplug *zwplug =
-    container_of(work, struct blk_zone_wplug, bio_work);
+    let mut zwplug = container_of!(work, blk_zone_wplug, bio_work);
     disk_zone_wplug_submit_bio(zwplug.disk, zwplug);
 // Drop the reference we took in disk_zone_wplug_schedule_work().
     disk_put_zone_wplug(zwplug);
@@ -622,23 +883,24 @@ unsafe extern "C" fn blk_zone_wplug_bio_work(work: *mut work_struct) {
 // If the plug does not exist, it is allocated and inserted in the disk hash
 // table.
 //
-    static struct blk_zone_wplug *disk_get_or_alloc_zone_wplug(struct gendisk *disk,
-    sector_t sector, gfp_t gfp_mask)
-    {
-    let mut zno: c_uint = disk_zone_no(disk, sector);
-    struct blk_zone_wplug *zwplug;
-    again:
+#[no_mangle]
+pub unsafe extern "C" fn disk_get_or_alloc_zone_wplug(disk: *mut gendisk, sector: sector_t, gfp_mask: gfp_t) -> *mut c_void {
+pub static mut zno: c_uint = 0;
+pub static mut zwplug: *mut c_void = core::ptr::null_mut();
+// label;
     zwplug = disk_get_zone_wplug(disk, sector);
-    if (zwplug)
+    if (zwplug) {
     return zwplug;
+    }
 //
 // Allocate and initialize a zone write plug with an extra reference
 // so that it is not freed when the zone write plug becomes idle without
 // the zone being full.
 //
     zwplug = mempool_alloc(disk.zone_wplugs_pool, gfp_mask);
-    if (!zwplug)
+    if (!zwplug) {
     return core::ptr::null_mut();
+    }
     INIT_HLIST_NODE(&zwplug.node);
     refcount_set(&zwplug.ref, 2);
     spin_lock_init(&zwplug.lock);
@@ -656,14 +918,13 @@ unsafe extern "C" fn blk_zone_wplug_bio_work(work: *mut work_struct) {
 //
     if (!disk_insert_zone_wplug(disk, zwplug)) {
     mempool_free(zwplug, disk.zone_wplugs_pool);
-    goto again;
+// goto;
     }
     return zwplug;
     }
-    static inline void blk_zone_wplug_bio_io_error(struct blk_zone_wplug *zwplug,
-    struct bio *bio)
-    {
-    struct request_queue *q = zwplug.disk.queue;
+#[no_mangle]
+pub unsafe extern "C" fn blk_zone_wplug_bio_io_error(zwplug: *mut blk_zone_wplug, bio: *mut bio) {
+    let mut q = zwplug.disk.queue;
     bio_clear_flag(bio, BIO_ZONE_WRITE_PLUGGING);
     bio_io_error(bio);
     disk_put_zone_wplug(zwplug);
@@ -675,17 +936,17 @@ unsafe extern "C" fn blk_zone_wplug_bio_work(work: *mut work_struct) {
 //
 #[no_mangle]
 unsafe extern "C" fn disk_zone_wplug_abort(zwplug: *mut blk_zone_wplug) {
-    static void disk_zone_wplug_abort(struct blk_zone_wplug *zwplug)
-    {
-    struct gendisk *disk = zwplug.disk;
-    struct bio *bio;
+    let mut disk = zwplug.disk;
+pub static mut bio: *mut c_void = core::ptr::null_mut();
     lockdep_assert_held(&zwplug.lock);
-    if (bio_list_empty(&zwplug.bio_list))
+    if (bio_list_empty(&zwplug.bio_list)) {
     return;
+    }
     pr_warn_ratelimited("%s: zone %u: Aborting plugged BIOs\n",
     zwplug.disk.disk_name, zwplug.zone_no);
-    while ((bio = bio_list_pop(&zwplug.bio_list)))
+    while ((bio = bio_list_pop(&zwplug.bio_list))) {
     blk_zone_wplug_bio_io_error(zwplug, bio);
+    }
     zwplug.flags &= ~BLK_ZONE_WPLUG_PLUGGED;
 //
 // If we are using the per disk zone write plugs worker thread, remove
@@ -704,18 +965,19 @@ unsafe extern "C" fn disk_zone_wplug_abort(zwplug: *mut blk_zone_wplug) {
 //
 // Update a zone write plug condition based on the write pointer offset.
 //
-    static void disk_zone_wplug_update_cond(struct gendisk *disk,
-    struct blk_zone_wplug *zwplug)
-    {
-    lockdep_assert_held(&zwplug.lock);
-    if (disk_zone_wplug_is_full(disk, zwplug))
-    zwplug.cond = BLK_ZONE_COND_FULL;
 #[no_mangle]
-pub unsafe extern "C" fn if(_arg: !zwplug->wp_offset) -> else {
-    else if (!zwplug.wp_offset)
+pub unsafe extern "C" fn disk_zone_wplug_update_cond(disk: *mut gendisk, zwplug: *mut blk_zone_wplug) {
+    lockdep_assert_held(&zwplug.lock);
+    if (disk_zone_wplug_is_full(disk, zwplug)) {
+    zwplug.cond = BLK_ZONE_COND_FULL;
+    }
+
+    else if (!zwplug.wp_offset) {
     zwplug.cond = BLK_ZONE_COND_EMPTY;
-    else
+    }
+    else {
     zwplug.cond = BLK_ZONE_COND_ACTIVE;
+    }
     }
 //
 // Set a zone write plug write pointer offset to the specified value.
@@ -723,36 +985,42 @@ pub unsafe extern "C" fn if(_arg: !zwplug->wp_offset) -> else {
 // a zone reset operation, a zone finish operation or if the zone needs a wp
 // update from a report zone after a write error.
 //
-    static void disk_zone_wplug_set_wp_offset(struct gendisk *disk,
-    struct blk_zone_wplug *zwplug,
-    unsigned int wp_offset)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn disk_zone_wplug_set_wp_offset(disk: *mut gendisk, zwplug: *mut blk_zone_wplug, wp_offset: c_uint) {
     lockdep_assert_held(&zwplug.lock);
 // Update the zone write pointer and abort all plugged BIOs.
     zwplug.flags &= ~BLK_ZONE_WPLUG_NEED_WP_UPDATE;
     zwplug.wp_offset = wp_offset;
     disk_zone_wplug_update_cond(disk, zwplug);
     disk_zone_wplug_abort(zwplug);
-    if (!zwplug.wp_offset || disk_zone_wplug_is_full(disk, zwplug))
+    if (!zwplug.wp_offset || disk_zone_wplug_is_full(disk, zwplug)) {
     disk_mark_zone_wplug_dead(zwplug);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn blk_zone_wp_offset(zone: *mut blk_zone) -> c_uint {
-    static unsigned int blk_zone_wp_offset(struct blk_zone *zone)
-    {
-    switch (zone.cond) {
-    case BLK_ZONE_COND_IMP_OPEN:
-    case BLK_ZONE_COND_EXP_OPEN:
-    case BLK_ZONE_COND_CLOSED:
-    case BLK_ZONE_COND_ACTIVE:
+    match (zone.cond) {
+    BLK_ZONE_COND_IMP_OPEN => {
+    }
+    BLK_ZONE_COND_EXP_OPEN => {
+    }
+    BLK_ZONE_COND_CLOSED => {
+    }
+    BLK_ZONE_COND_ACTIVE => {
     return zone.wp - zone.start;
-    case BLK_ZONE_COND_EMPTY:
+    }
+    BLK_ZONE_COND_EMPTY => {
     return 0;
-    case BLK_ZONE_COND_FULL:
-    case BLK_ZONE_COND_NOT_WP:
-    case BLK_ZONE_COND_OFFLINE:
-    case BLK_ZONE_COND_READONLY:
-    default:
+    }
+    BLK_ZONE_COND_FULL => {
+    }
+    BLK_ZONE_COND_NOT_WP => {
+    }
+    BLK_ZONE_COND_OFFLINE => {
+    }
+    BLK_ZONE_COND_READONLY => {
+    }
+    _ => {
 //
 // Conventional, full, offline and read-only zones do not have
 // a valid write pointer.
@@ -760,17 +1028,18 @@ unsafe extern "C" fn blk_zone_wp_offset(zone: *mut blk_zone) -> c_uint {
     return UINT_MAX;
     }
     }
-    static unsigned int disk_zone_wplug_sync_wp_offset(struct gendisk *disk,
-    struct blk_zone *zone)
-    {
-    struct blk_zone_wplug *zwplug;
-    let mut wp_offset: c_uint = blk_zone_wp_offset(zone);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn disk_zone_wplug_sync_wp_offset(disk: *mut gendisk, zone: *mut blk_zone) -> c_uint {
+pub static mut zwplug: *mut c_void = core::ptr::null_mut();
+pub static mut wp_offset: c_uint = 0;
     zwplug = disk_get_zone_wplug(disk, zone.start);
     if (zwplug) {
-    unsigned long flags;
+    let mut flags = 0;
     spin_lock_irqsave(&zwplug.lock, flags);
-    if (zwplug.flags & BLK_ZONE_WPLUG_NEED_WP_UPDATE)
+    if (zwplug.flags & BLK_ZONE_WPLUG_NEED_WP_UPDATE) {
     disk_zone_wplug_set_wp_offset(disk, zwplug, wp_offset);
+    }
     spin_unlock_irqrestore(&zwplug.lock, flags);
     disk_put_zone_wplug(zwplug);
     }
@@ -790,52 +1059,53 @@ unsafe extern "C" fn blk_zone_wp_offset(zone: *mut blk_zone) -> c_uint {
 // information for the zone. If @args specifies a user callback function,
 // this callback is executed.
 //
-    int disk_report_zone(struct gendisk *disk, struct blk_zone *zone,
-    unsigned int idx, struct blk_report_zones_args *args)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn disk_report_zone(disk: *mut gendisk, zone: *mut blk_zone, idx: c_uint, args: *mut blk_report_zones_args) -> c_int {
     if (args && args.report_active) {
 //
 // If we come here, then this is a report zones as a fallback
 // for a cached report. So collapse the implicit open, explicit
 // open and closed conditions into the active zone condition.
 //
-    switch (zone.cond) {
-    case BLK_ZONE_COND_IMP_OPEN:
-    case BLK_ZONE_COND_EXP_OPEN:
-    case BLK_ZONE_COND_CLOSED:
+    match (zone.cond) {
+    BLK_ZONE_COND_IMP_OPEN => {
+    }
+    BLK_ZONE_COND_EXP_OPEN => {
+    }
+    BLK_ZONE_COND_CLOSED => {
     zone.cond = BLK_ZONE_COND_ACTIVE;
-    break;
-    default:
-    break;
+    // break;
+    }
+    _ => {
+    // break;
     }
     }
-    if (disk.zone_wplugs_hash)
+    }
+    if (disk.zone_wplugs_hash) {
     disk_zone_wplug_sync_wp_offset(disk, zone);
-    if (args && args.cb)
+    }
+    if (args && args.cb) {
     return args.cb(zone, idx, args.data);
+    }
     return 0;
     }
     EXPORT_SYMBOL_GPL(disk_report_zone);
-    static int blkdev_report_zone_cb(struct blk_zone *zone, unsigned int idx,
-    void *data)
-    {
-    memcpy(data, zone, sizeof(struct blk_zone));
+#[no_mangle]
+pub unsafe extern "C" fn blkdev_report_zone_cb(zone: *mut blk_zone, idx: c_uint, data: *mut c_void) -> c_int {
+    memcpy(data, zone, sizeof!(blk_zone));
     return 0;
     }
-    static int blkdev_report_zone_fallback(struct block_device *bdev,
-    sector_t sector, struct blk_zone *zone)
-    {
-    struct blk_report_zones_args args = {
-    .cb = blkdev_report_zone_cb,
-    .data = zone,
-    .report_active = true,
-    };
-    int error;
+#[no_mangle]
+pub unsafe extern "C" fn blkdev_report_zone_fallback(bdev: *mut block_device, sector: sector_t, zone: *mut blk_zone) -> c_int {
+pub static mut blk_report_zones_args: usize = 0;
+    let mut error = 0;
     error = blkdev_do_report_zones(bdev, sector, 1, &args);
-    if (error < 0)
+    if (error < 0) {
     return error;
-    if (error == 0)
+    }
+    if (error == 0) {
     return -EIO;
+    }
     return 0;
     }
 //
@@ -846,8 +1116,6 @@ unsafe extern "C" fn blk_zone_wp_offset(zone: *mut blk_zone) -> c_uint {
 //
 #[no_mangle]
 pub unsafe extern "C" fn blkdev_has_cached_report_zones(bdev: *mut block_device) -> bool {
-    static inline bool blkdev_has_cached_report_zones(struct block_device *bdev)
-    {
     return disk_need_zone_resources(bdev.bd_disk) &&
     (bdev_emulates_zone_append(bdev) ||
     !test_bit(GD_ZONE_APPEND_USED, &bdev.bd_disk.state));
@@ -867,22 +1135,24 @@ pub unsafe extern "C" fn blkdev_has_cached_report_zones(bdev: *mut block_device)
 //
 // Returns 0 on success and a negative error code on failure.
 //
-    int blkdev_get_zone_info(struct block_device *bdev, sector_t sector,
-    struct blk_zone *zone)
-    {
-    struct gendisk *disk = bdev.bd_disk;
-    let mut zone_sectors: sector_t = bdev_zone_sectors(bdev);
-    struct blk_zone_wplug *zwplug;
-    unsigned long flags;
-    u8 *zones_cond;
-    if (!bdev_is_zoned(bdev))
+#[no_mangle]
+pub unsafe extern "C" fn blkdev_get_zone_info(bdev: *mut block_device, sector: sector_t, zone: *mut blk_zone) -> c_int {
+    let mut disk = bdev.bd_disk;
+pub static mut zone_sectors: sector_t = 0;
+pub static mut zwplug: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+pub static mut zones_cond: *mut c_void = core::ptr::null_mut();
+    if (!bdev_is_zoned(bdev)) {
     return -EOPNOTSUPP;
-    if (sector >= get_capacity(disk))
+    }
+    if (sector >= get_capacity(disk)) {
     return -EINVAL;
-    memset(zone, 0, sizeof(*zone));
+    }
+    memset(zone, 0, sizeof!(*zone));
     sector = bdev_zone_start(bdev, sector);
-    if (!blkdev_has_cached_report_zones(bdev))
+    if (!blkdev_has_cached_report_zones(bdev)) {
     return blkdev_report_zone_fallback(bdev, sector, zone);
+    }
     rcu_read_lock();
     zones_cond = rcu_dereference(disk.zones_cond);
     if (!disk.zone_wplugs_hash || !zones_cond) {
@@ -909,10 +1179,12 @@ pub unsafe extern "C" fn blkdev_has_cached_report_zones(bdev: *mut block_device)
 // report the zone.
 //
     zone.type = BLK_ZONE_TYPE_SEQWRITE_REQ;
-    if (disk_zone_is_last(disk, zone))
+    if (disk_zone_is_last(disk, zone)) {
     zone.capacity = disk.last_zone_capacity;
-    else
+    }
+    else {
     zone.capacity = disk.zone_capacity;
+    }
     if (zone.cond == BLK_ZONE_COND_READONLY ||
     zone.cond == BLK_ZONE_COND_OFFLINE) {
     zone.wp = ULLONG_MAX;
@@ -926,10 +1198,12 @@ pub unsafe extern "C" fn blkdev_has_cached_report_zones(bdev: *mut block_device)
 //
     zwplug = disk_get_zone_wplug(disk, sector);
     if (!zwplug) {
-    if (zone.cond == BLK_ZONE_COND_FULL)
+    if (zone.cond == BLK_ZONE_COND_FULL) {
     zone.wp = ULLONG_MAX;
-    else
+    }
+    else {
     zone.wp = sector;
+    }
     return 0;
     }
     spin_lock_irqsave(&zwplug.lock, flags);
@@ -960,48 +1234,43 @@ pub unsafe extern "C" fn blkdev_has_cached_report_zones(bdev: *mut block_device)
 // plugs and zones condition array. Since calling this function without a
 // callback does not make sense, @cb must be specified.
 //
-    int blkdev_report_zones_cached(struct block_device *bdev, sector_t sector,
-    unsigned int nr_zones, report_zones_cb cb, void *data)
-    {
-    struct gendisk *disk = bdev.bd_disk;
-    let mut capacity: sector_t = get_capacity(disk);
-    let mut zone_sectors: sector_t = bdev_zone_sectors(bdev);
-    let mut idx: c_uint = 0;
-    struct blk_zone zone;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn blkdev_report_zones_cached(bdev: *mut block_device, sector: sector_t, nr_zones: c_uint, cb: report_zones_cb, data: *mut c_void) -> c_int {
+    let mut disk = bdev.bd_disk;
+pub static mut capacity: sector_t = 0;
+pub static mut zone_sectors: sector_t = 0;
+pub static mut idx: c_uint = 0;
+pub static mut zone: usize = 0;
+    let mut ret = 0;
     if (!cb || !bdev_is_zoned(bdev) ||
-    WARN_ON_ONCE(!disk.fops.report_zones))
+    WARN_ON_ONCE!(!disk.fops.report_zones)) {
     return -EOPNOTSUPP;
-    if (!nr_zones || sector >= capacity)
+    }
+    if (!nr_zones || sector >= capacity) {
     return 0;
+    }
     if (!blkdev_has_cached_report_zones(bdev)) {
-    struct blk_report_zones_args args = {
-    .cb = cb,
-    .data = data,
-    .report_active = true,
-    };
+pub static mut blk_report_zones_args: usize = 0;
     return blkdev_do_report_zones(bdev, sector, nr_zones, &args);
     }
-    for (sector = bdev_zone_start(bdev, sector);
-    sector < capacity && idx < nr_zones;
-    sector += zone_sectors, idx++) {
+    while (sector < capacity && idx < nr_zones) {
     ret = blkdev_get_zone_info(bdev, sector, &zone);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     ret = cb(&zone, idx, data);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     }
     return idx;
     }
     EXPORT_SYMBOL_GPL(blkdev_report_zones_cached);
 #[no_mangle]
 unsafe extern "C" fn blk_zone_reset_bio_endio(bio: *mut bio) {
-    static void blk_zone_reset_bio_endio(struct bio *bio)
-    {
-    struct gendisk *disk = bio.bi_bdev.bd_disk;
-    let mut sector: sector_t = bio.bi_iter.bi_sector;
-    struct blk_zone_wplug *zwplug;
+    let mut disk = bio.bi_bdev.bd_disk;
+pub static mut sector: sector_t = 0;
+pub static mut zwplug: *mut c_void = core::ptr::null_mut();
 //
 // If we have a zone write plug, set its write pointer offset to 0.
 // This will abort all BIOs plugged for the target zone. It is fine as
@@ -1010,7 +1279,7 @@ unsafe extern "C" fn blk_zone_reset_bio_endio(bio: *mut bio) {
 //
     zwplug = disk_get_zone_wplug(disk, sector);
     if (zwplug) {
-    unsigned long flags;
+    let mut flags = 0;
     spin_lock_irqsave(&zwplug.lock, flags);
     disk_zone_wplug_set_wp_offset(disk, zwplug, 0);
     spin_unlock_irqrestore(&zwplug.lock, flags);
@@ -1021,18 +1290,16 @@ unsafe extern "C" fn blk_zone_reset_bio_endio(bio: *mut bio) {
     }
 #[no_mangle]
 unsafe extern "C" fn blk_zone_reset_all_bio_endio(bio: *mut bio) {
-    static void blk_zone_reset_all_bio_endio(struct bio *bio)
-    {
-    struct gendisk *disk = bio.bi_bdev.bd_disk;
-    let mut capacity: sector_t = get_capacity(disk);
-    struct blk_zone_wplug *zwplug;
-    unsigned long flags;
-    sector_t sector;
-    unsigned int i;
+    let mut disk = bio.bi_bdev.bd_disk;
+pub static mut capacity: sector_t = 0;
+pub static mut zwplug: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    let mut sector;
+    let mut i = 0;
     if (atomic_read(&disk.nr_zone_wplugs)) {
 // Update the condition of all zone write plugs.
     rcu_read_lock();
-    for (i = 0; i < disk_zone_wplugs_hash_size(disk); i++) {
+    while (i < disk_zone_wplugs_hash_size(disk)) {
     hlist_for_each_entry_rcu(zwplug,
     &disk.zone_wplugs_hash[i],
     node) {
@@ -1045,18 +1312,17 @@ unsafe extern "C" fn blk_zone_reset_all_bio_endio(bio: *mut bio) {
     }
 // Update the cached zone conditions.
     for (sector = 0; sector < capacity;
-    sector += bdev_zone_sectors(bio.bi_bdev))
+    sector += bdev_zone_sectors(bio.bi_bdev)) {
     disk_zone_set_cond(disk, sector, BLK_ZONE_COND_EMPTY);
+    }
     clear_bit(GD_ZONE_APPEND_USED, &disk.state);
     }
 #[no_mangle]
 unsafe extern "C" fn blk_zone_finish_bio_endio(bio: *mut bio) {
-    static void blk_zone_finish_bio_endio(struct bio *bio)
-    {
-    struct block_device *bdev = bio.bi_bdev;
-    struct gendisk *disk = bdev.bd_disk;
-    let mut sector: sector_t = bio.bi_iter.bi_sector;
-    struct blk_zone_wplug *zwplug;
+    let mut bdev = bio.bi_bdev;
+    let mut disk = bdev.bd_disk;
+pub static mut sector: sector_t = 0;
+pub static mut zwplug: *mut c_void = core::ptr::null_mut();
 //
 // If we have a zone write plug, set its write pointer offset to the
 // zone size. This will abort all BIOs plugged for the target zone. It
@@ -1065,7 +1331,7 @@ unsafe extern "C" fn blk_zone_finish_bio_endio(bio: *mut bio) {
 //
     zwplug = disk_get_zone_wplug(disk, sector);
     if (zwplug) {
-    unsigned long flags;
+    let mut flags = 0;
     spin_lock_irqsave(&zwplug.lock, flags);
     disk_zone_wplug_set_wp_offset(disk, zwplug,
     bdev_zone_sectors(bdev));
@@ -1077,11 +1343,10 @@ unsafe extern "C" fn blk_zone_finish_bio_endio(bio: *mut bio) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn blk_zone_mgmt_bio_endio(bio: *mut bio) {
-    void blk_zone_mgmt_bio_endio(struct bio *bio)
-    {
 // If the BIO failed, we have nothing to do.
-    if (bio.bi_status != BLK_STS_OK)
+    if (bio.bi_status != BLK_STS_OK) {
     return;
+    }
     switch (bio_op(bio)) {
     case REQ_OP_ZONE_RESET:
     blk_zone_reset_bio_endio(bio);
@@ -1092,13 +1357,12 @@ pub unsafe extern "C" fn blk_zone_mgmt_bio_endio(bio: *mut bio) {
     case REQ_OP_ZONE_FINISH:
     blk_zone_finish_bio_endio(bio);
     return;
-    default:
+// label;
     return;
     }
     }
-    static void disk_zone_wplug_schedule_work(struct gendisk *disk,
-    struct blk_zone_wplug *zwplug)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn disk_zone_wplug_schedule_work(disk: *mut gendisk, zwplug: *mut blk_zone_wplug) {
     lockdep_assert_held(&zwplug.lock);
 //
 // Schedule the submission of the next plugged BIO. Taking a reference
@@ -1108,16 +1372,15 @@ pub unsafe extern "C" fn blk_zone_mgmt_bio_endio(bio: *mut bio) {
 // blk_zone_wplug_bio_work() will release the reference we take here,
 // and we also drop this reference if the work is already scheduled.
 //
-    WARN_ON_ONCE(!(zwplug.flags & BLK_ZONE_WPLUG_PLUGGED));
-    WARN_ON_ONCE(blk_queue_zoned_qd1_writes(disk.queue));
+    WARN_ON_ONCE!(!(zwplug.flags & BLK_ZONE_WPLUG_PLUGGED));
+    WARN_ON_ONCE!(blk_queue_zoned_qd1_writes(disk.queue));
     refcount_inc(&zwplug.ref);
-    if (!queue_work(disk.zone_wplugs_wq, &zwplug.bio_work))
+    if (!queue_work(disk.zone_wplugs_wq, &zwplug.bio_work)) {
     disk_put_zone_wplug(zwplug);
     }
-    static inline void disk_zone_wplug_add_bio(struct gendisk *disk,
-    struct blk_zone_wplug *zwplug,
-    struct bio *bio, unsigned int nr_segs)
-    {
+    }
+#[no_mangle]
+pub unsafe extern "C" fn disk_zone_wplug_add_bio(disk: *mut gendisk, zwplug: *mut blk_zone_wplug, bio: *mut bio, nr_segs: c_uint) {
 //
 // Grab an extra reference on the BIO request queue usage counter.
 // This reference will be reused to submit a request for the BIO for
@@ -1166,11 +1429,9 @@ pub unsafe extern "C" fn blk_zone_mgmt_bio_endio(bio: *mut bio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn blk_zone_write_plug_bio_merged(bio: *mut bio) {
-    void blk_zone_write_plug_bio_merged(struct bio *bio)
-    {
-    struct gendisk *disk = bio.bi_bdev.bd_disk;
-    struct blk_zone_wplug *zwplug;
-    unsigned long flags;
+    let mut disk = bio.bi_bdev.bd_disk;
+pub static mut zwplug: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
 //
 // If the BIO was already plugged, then we were called through
 // blk_zone_write_plug_init_request() -> blk_attempt_bio_merge().
@@ -1178,8 +1439,9 @@ pub unsafe extern "C" fn blk_zone_write_plug_bio_merged(bio: *mut bio) {
 // the BIO and blk_zone_write_plug_init_request() will handle the
 // zone write pointer offset update.
 //
-    if (bio_flagged(bio, BIO_ZONE_WRITE_PLUGGING))
+    if (bio_flagged(bio, BIO_ZONE_WRITE_PLUGGING)) {
     return;
+    }
     bio_set_flag(bio, BIO_ZONE_WRITE_PLUGGING);
 //
 // Get a reference on the zone write plug of the target zone and advance
@@ -1188,8 +1450,9 @@ pub unsafe extern "C" fn blk_zone_write_plug_bio_merged(bio: *mut bio) {
 // plug. So this should not fail.
 //
     zwplug = disk_get_zone_wplug(disk, bio.bi_iter.bi_sector);
-    if (WARN_ON_ONCE(!zwplug))
+    if (WARN_ON_ONCE!(!zwplug)) {
     return;
+    }
     spin_lock_irqsave(&zwplug.lock, flags);
     zwplug.wp_offset += bio_sectors(bio);
     disk_zone_wplug_update_cond(disk, zwplug);
@@ -1202,25 +1465,24 @@ pub unsafe extern "C" fn blk_zone_write_plug_bio_merged(bio: *mut bio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn blk_zone_write_plug_init_request(req: *mut request) {
-    void blk_zone_write_plug_init_request(struct request *req)
-    {
-    let mut req_back_sector: sector_t = blk_rq_pos(req) + blk_rq_sectors(req);
-    struct request_queue *q = req.q;
-    struct gendisk *disk = q.disk;
-    struct blk_zone_wplug *zwplug =
-    disk_get_zone_wplug(disk, blk_rq_pos(req));
-    unsigned long flags;
-    struct bio *bio;
-    if (WARN_ON_ONCE(!zwplug))
+pub static mut req_back_sector: sector_t = 0;
+    let mut q = req.q;
+    let mut disk = q.disk;
+    let mut zwplug = disk_get_zone_wplug(disk, blk_rq_pos(req));
+    let mut flags = 0;
+pub static mut bio: *mut c_void = core::ptr::null_mut();
+    if (WARN_ON_ONCE!(!zwplug)) {
     return;
+    }
 //
 // Indicate that completion of this request needs to be handled with
 // blk_zone_write_plug_finish_request(), which will drop the reference
 // on the zone write plug we took above on entry to this function.
 //
     req.rq_flags |= RQF_ZONE_WRITE_PLUGGING;
-    if (blk_queue_nomerges(q))
+    if (blk_queue_nomerges(q)) {
     return;
+    }
 //
 // Walk through the list of plugged BIOs to check if they can be merged
 // into the back of the request.
@@ -1228,12 +1490,14 @@ pub unsafe extern "C" fn blk_zone_write_plug_init_request(req: *mut request) {
     spin_lock_irqsave(&zwplug.lock, flags);
     while (!disk_zone_wplug_is_full(disk, zwplug)) {
     bio = bio_list_peek(&zwplug.bio_list);
-    if (!bio)
+    if (!bio) {
     break;
+    }
     if (bio.bi_iter.bi_sector != req_back_sector ||
-    !blk_rq_merge_ok(req, bio))
+    !blk_rq_merge_ok(req, bio)) {
     break;
-    WARN_ON_ONCE(bio_op(bio) != REQ_OP_WRITE_ZEROES &&
+    }
+    WARN_ON_ONCE!(bio_op(bio) != REQ_OP_WRITE_ZEROES &&
     !bio.__bi_nr_segments);
     bio_list_pop(&zwplug.bio_list);
     if (bio_attempt_back_merge(req, bio, bio.__bi_nr_segments) !=
@@ -1254,10 +1518,9 @@ pub unsafe extern "C" fn blk_zone_write_plug_init_request(req: *mut request) {
 // offset of its zone write plug and changing zone append operations into
 // regular write when zone append emulation is needed.
 //
-    static bool blk_zone_wplug_prepare_bio(struct blk_zone_wplug *zwplug,
-    struct bio *bio)
-    {
-    struct gendisk *disk = bio.bi_bdev.bd_disk;
+#[no_mangle]
+pub unsafe extern "C" fn blk_zone_wplug_prepare_bio(zwplug: *mut blk_zone_wplug, bio: *mut bio) -> bool {
+    let mut disk = bio.bi_bdev.bd_disk;
     lockdep_assert_held(&zwplug.lock);
 //
 // If we lost track of the zone write pointer due to a write error,
@@ -1266,15 +1529,17 @@ pub unsafe extern "C" fn blk_zone_write_plug_init_request(req: *mut request) {
 // user did not do that as we cannot handle emulated zone append
 // otherwise.
 //
-    if (zwplug.flags & BLK_ZONE_WPLUG_NEED_WP_UPDATE)
+    if (zwplug.flags & BLK_ZONE_WPLUG_NEED_WP_UPDATE) {
     return false;
+    }
 //
 // Check that the user is not attempting to write to a full zone.
 // We know such BIO will fail, and that would potentially overflow our
 // write pointer offset beyond the end of the zone.
 //
-    if (disk_zone_wplug_is_full(disk, zwplug))
+    if (disk_zone_wplug_is_full(disk, zwplug)) {
     return false;
+    }
     if (bio_op(bio) == REQ_OP_ZONE_APPEND) {
 //
 // Use a regular write starting at the current write pointer.
@@ -1295,8 +1560,9 @@ pub unsafe extern "C" fn blk_zone_write_plug_init_request(req: *mut request) {
 // with a start sector not unaligned to the zone write pointer
 // will fail.
 //
-    if (bio_offset_from_zone_start(bio) != zwplug.wp_offset)
+    if (bio_offset_from_zone_start(bio) != zwplug.wp_offset) {
     return false;
+    }
     }
 // Advance the zone write pointer offset.
     zwplug.wp_offset += bio_sectors(bio);
@@ -1305,13 +1571,11 @@ pub unsafe extern "C" fn blk_zone_write_plug_init_request(req: *mut request) {
     }
 #[no_mangle]
 unsafe extern "C" fn blk_zone_wplug_handle_write(bio: *mut bio, nr_segs: c_uint) -> bool {
-    static bool blk_zone_wplug_handle_write(struct bio *bio, unsigned int nr_segs)
-    {
-    struct gendisk *disk = bio.bi_bdev.bd_disk;
-    let mut sector: sector_t = bio.bi_iter.bi_sector;
-    struct blk_zone_wplug *zwplug;
-    let mut gfp_mask: gfp_t = GFP_NOIO;
-    unsigned long flags;
+    let mut disk = bio.bi_bdev.bd_disk;
+pub static mut sector: sector_t = 0;
+pub static mut zwplug: *mut c_void = core::ptr::null_mut();
+pub static mut gfp_mask: gfp_t = 0;
+    let mut flags = 0;
 //
 // BIOs must be fully contained within a zone so that we use the correct
 // zone write plug for the entire BIO. For blk-mq devices, the block
@@ -1320,7 +1584,7 @@ unsafe extern "C" fn blk_zone_wplug_handle_write(bio: *mut bio, nr_segs: c_uint)
 // BIO-based devices, it is the responsibility of the driver to split
 // the bio before submitting it.
 //
-    if (WARN_ON_ONCE(bio_straddles_zones(bio))) {
+    if (WARN_ON_ONCE!(bio_straddles_zones(bio))) {
     bio_io_error(bio);
     return true;
     }
@@ -1333,14 +1597,17 @@ unsafe extern "C" fn blk_zone_wplug_handle_write(bio: *mut bio, nr_segs: c_uint)
     }
     return false;
     }
-    if (bio.bi_opf & REQ_NOWAIT)
+    if (bio.bi_opf & REQ_NOWAIT) {
     gfp_mask = GFP_NOWAIT;
+    }
     zwplug = disk_get_or_alloc_zone_wplug(disk, sector, gfp_mask);
     if (!zwplug) {
-    if (bio.bi_opf & REQ_NOWAIT)
+    if (bio.bi_opf & REQ_NOWAIT) {
     bio_wouldblock_error(bio);
-    else
+    }
+    else {
     bio_io_error(bio);
+    }
     return true;
     }
     spin_lock_irqsave(&zwplug.lock, flags);
@@ -1364,17 +1631,19 @@ unsafe extern "C" fn blk_zone_wplug_handle_write(bio: *mut bio, nr_segs: c_uint)
 //
     if (bio.bi_opf & REQ_NOWAIT) {
     bio.bi_opf &= ~REQ_NOWAIT;
-    goto queue_bio;
+// goto;
     }
 //
 // For rotational devices, we will use the gendisk zone write plugs
 // work instead of the per zone write plug BIO work, so queue the BIO.
 //
-    if (blk_queue_zoned_qd1_writes(disk.queue))
-    goto queue_bio;
+    if (blk_queue_zoned_qd1_writes(disk.queue)) {
+// goto;
+    }
 // If the zone is already plugged, add the BIO to the BIO plug list.
-    if (zwplug.flags & BLK_ZONE_WPLUG_PLUGGED)
-    goto queue_bio;
+    if (zwplug.flags & BLK_ZONE_WPLUG_PLUGGED) {
+// goto;
+    }
     if (!blk_zone_wplug_prepare_bio(zwplug, bio)) {
     spin_unlock_irqrestore(&zwplug.lock, flags);
     bio_io_error(bio);
@@ -1384,27 +1653,28 @@ unsafe extern "C" fn blk_zone_wplug_handle_write(bio: *mut bio, nr_segs: c_uint)
     zwplug.flags |= BLK_ZONE_WPLUG_PLUGGED;
     spin_unlock_irqrestore(&zwplug.lock, flags);
     return false;
-    queue_bio:
+// label;
     disk_zone_wplug_add_bio(disk, zwplug, bio, nr_segs);
     if (!(zwplug.flags & BLK_ZONE_WPLUG_PLUGGED)) {
     zwplug.flags |= BLK_ZONE_WPLUG_PLUGGED;
-    if (blk_queue_zoned_qd1_writes(disk.queue))
+    if (blk_queue_zoned_qd1_writes(disk.queue)) {
     wake_up_process(disk.zone_wplugs_worker);
-    else
+    }
+    else {
     disk_zone_wplug_schedule_work(disk, zwplug);
+    }
     }
     spin_unlock_irqrestore(&zwplug.lock, flags);
     return true;
     }
 #[no_mangle]
 unsafe extern "C" fn blk_zone_wplug_handle_native_zone_append(bio: *mut bio) {
-    static void blk_zone_wplug_handle_native_zone_append(struct bio *bio)
-    {
-    struct gendisk *disk = bio.bi_bdev.bd_disk;
-    struct blk_zone_wplug *zwplug;
-    unsigned long flags;
-    if (!test_bit(GD_ZONE_APPEND_USED, &disk.state))
+    let mut disk = bio.bi_bdev.bd_disk;
+pub static mut zwplug: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+    if (!test_bit(GD_ZONE_APPEND_USED, &disk.state)) {
     set_bit(GD_ZONE_APPEND_USED, &disk.state);
+    }
 //
 // We have native support for zone append operations, so we are not
 // going to handle @bio through plugging. However, we may already have a
@@ -1414,8 +1684,9 @@ unsafe extern "C" fn blk_zone_wplug_handle_native_zone_append(bio: *mut bio) {
 // zone append operations. Avoid this by removing the zone write plug.
 //
     zwplug = disk_get_zone_wplug(disk, bio.bi_iter.bi_sector);
-    if (likely(!zwplug))
+    if (likely(!zwplug)) {
     return;
+    }
     spin_lock_irqsave(&zwplug.lock, flags);
 //
 // We are about to remove the zone write plug. But if the user
@@ -1450,11 +1721,10 @@ unsafe extern "C" fn blk_zone_wplug_handle_native_zone_append(bio: *mut bio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn blk_zone_plug_bio(bio: *mut bio, nr_segs: c_uint) -> bool {
-    bool blk_zone_plug_bio(struct bio *bio, unsigned int nr_segs)
-    {
-    struct block_device *bdev = bio.bi_bdev;
-    if (WARN_ON_ONCE(!bdev.bd_disk.zone_wplugs_hash))
+    let mut bdev = bio.bi_bdev;
+    if (WARN_ON_ONCE!(!bdev.bd_disk.zone_wplugs_hash)) {
     return false;
+    }
 //
 // Regular writes and write zeroes need to be handled through the target
 // zone write plug. This includes writes with REQ_FUA | REQ_PREFLUSH
@@ -1482,37 +1752,37 @@ pub unsafe extern "C" fn blk_zone_plug_bio(bio: *mut bio, nr_segs: c_uint) -> bo
     case REQ_OP_WRITE:
     case REQ_OP_WRITE_ZEROES:
     return blk_zone_wplug_handle_write(bio, nr_segs);
-    default:
+// label;
     return false;
     }
     }
     EXPORT_SYMBOL_GPL(blk_zone_plug_bio);
-    static void disk_zone_wplug_unplug_bio(struct gendisk *disk,
-    struct blk_zone_wplug *zwplug)
-    {
-    unsigned long flags;
+#[no_mangle]
+pub unsafe extern "C" fn disk_zone_wplug_unplug_bio(disk: *mut gendisk, zwplug: *mut blk_zone_wplug) {
+    let mut flags = 0;
     spin_lock_irqsave(&zwplug.lock, flags);
 //
 // For rotational devices, signal the BIO completion to the zone write
 // plug work. Otherwise, schedule submission of the next plugged BIO
 // if we have one.
 //
-    if (bio_list_empty(&zwplug.bio_list))
+    if (bio_list_empty(&zwplug.bio_list)) {
     zwplug.flags &= ~BLK_ZONE_WPLUG_PLUGGED;
-    if (blk_queue_zoned_qd1_writes(disk.queue))
+    }
+    if (blk_queue_zoned_qd1_writes(disk.queue)) {
     complete(&disk.zone_wplugs_worker_bio_done);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !bio_list_empty(&zwplug->bio_list)) -> else {
-    else if (!bio_list_empty(&zwplug.bio_list))
+    }
+
+    else if (!bio_list_empty(&zwplug.bio_list)) {
     disk_zone_wplug_schedule_work(disk, zwplug);
-    if (!zwplug.wp_offset || disk_zone_wplug_is_full(disk, zwplug))
+    }
+    if (!zwplug.wp_offset || disk_zone_wplug_is_full(disk, zwplug)) {
     disk_mark_zone_wplug_dead(zwplug);
+    }
     spin_unlock_irqrestore(&zwplug.lock, flags);
     }
 #[no_mangle]
 pub unsafe extern "C" fn blk_zone_append_update_request_bio(rq: *mut request, bio: *mut bio) {
-    void blk_zone_append_update_request_bio(struct request *rq, struct bio *bio)
-    {
 //
 // For zone append requests, the request sector indicates the location
 // at which the BIO data was written. Return this value to the BIO
@@ -1526,14 +1796,12 @@ pub unsafe extern "C" fn blk_zone_append_update_request_bio(rq: *mut request, bi
     }
 #[no_mangle]
 pub unsafe extern "C" fn blk_zone_write_plug_bio_endio(bio: *mut bio) {
-    void blk_zone_write_plug_bio_endio(struct bio *bio)
-    {
-    struct gendisk *disk = bio.bi_bdev.bd_disk;
-    struct blk_zone_wplug *zwplug =
-    disk_get_zone_wplug(disk, bio.bi_iter.bi_sector);
-    unsigned long flags;
-    if (WARN_ON_ONCE(!zwplug))
+    let mut disk = bio.bi_bdev.bd_disk;
+    let mut zwplug = disk_get_zone_wplug(disk, bio.bi_iter.bi_sector);
+    let mut flags = 0;
+    if (WARN_ON_ONCE!(!zwplug)) {
     return;
+    }
 // Make sure we do not see this BIO again by clearing the plug flag.
     bio_clear_flag(bio, BIO_ZONE_WRITE_PLUGGING);
 //
@@ -1562,20 +1830,20 @@ pub unsafe extern "C" fn blk_zone_write_plug_bio_endio(bio: *mut bio) {
 // is not called. So we need to schedule execution of the next
 // plugged BIO here.
 //
-    if (bdev_test_flag(bio.bi_bdev, BD_HAS_SUBMIT_BIO))
+    if (bdev_test_flag(bio.bi_bdev, BD_HAS_SUBMIT_BIO)) {
     disk_zone_wplug_unplug_bio(disk, zwplug);
+    }
 // Drop the reference we took when entering this function.
     disk_put_zone_wplug(zwplug);
     }
 #[no_mangle]
 pub unsafe extern "C" fn blk_zone_write_plug_finish_request(req: *mut request) {
-    void blk_zone_write_plug_finish_request(struct request *req)
-    {
-    struct gendisk *disk = req.q.disk;
-    struct blk_zone_wplug *zwplug;
+    let mut disk = req.q.disk;
+pub static mut zwplug: *mut c_void = core::ptr::null_mut();
     zwplug = disk_get_zone_wplug(disk, req.__sector);
-    if (WARN_ON_ONCE(!zwplug))
+    if (WARN_ON_ONCE!(!zwplug)) {
     return;
+    }
     req.rq_flags &= ~RQF_ZONE_WRITE_PLUGGING;
 //
 // Drop the reference we took when the request was initialized in
@@ -1586,18 +1854,17 @@ pub unsafe extern "C" fn blk_zone_write_plug_finish_request(req: *mut request) {
 // Drop the reference we took when entering this function.
     disk_put_zone_wplug(zwplug);
     }
-    static bool disk_zone_wplug_submit_bio(struct gendisk *disk,
-    struct blk_zone_wplug *zwplug)
-    {
-    struct block_device *bdev;
-    unsigned long flags;
-    struct bio *bio;
-    bool prepared;
+#[no_mangle]
+pub unsafe extern "C" fn disk_zone_wplug_submit_bio(disk: *mut gendisk, zwplug: *mut blk_zone_wplug) -> bool {
+pub static mut bdev: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
+pub static mut bio: *mut c_void = core::ptr::null_mut();
+    let mut prepared = 0;
 //
 // Submit the next plugged BIO. If we do not have any, clear
 // the plugged flag.
 //
-    again:
+// label;
     spin_lock_irqsave(&zwplug.lock, flags);
     bio = bio_list_pop(&zwplug.bio_list);
     if (!bio) {
@@ -1611,7 +1878,7 @@ pub unsafe extern "C" fn blk_zone_write_plug_finish_request(req: *mut request) {
     spin_unlock_irqrestore(&zwplug.lock, flags);
     if (!prepared) {
     blk_zone_wplug_bio_io_error(zwplug, bio);
-    goto again;
+// goto;
     }
 //
 // blk-mq devices will reuse the extra reference on the request queue
@@ -1619,8 +1886,9 @@ pub unsafe extern "C" fn blk_zone_write_plug_finish_request(req: *mut request) {
 // path for BIO-based devices will not do that. So drop this extra
 // reference here.
 //
-    if (blk_queue_zoned_qd1_writes(disk.queue))
+    if (blk_queue_zoned_qd1_writes(disk.queue)) {
     reinit_completion(&disk.zone_wplugs_worker_bio_done);
+    }
     bdev = bio.bi_bdev;
     if (bdev_test_flag(bdev, BD_HAS_SUBMIT_BIO)) {
     bdev.bd_disk.fops.submit_bio(bio);
@@ -1630,24 +1898,22 @@ pub unsafe extern "C" fn blk_zone_write_plug_finish_request(req: *mut request) {
     }
     return true;
     }
-    static struct blk_zone_wplug *disk_get_zone_wplugs_work(struct gendisk *disk)
-    {
-    struct blk_zone_wplug *zwplug;
+#[no_mangle]
+pub unsafe extern "C" fn disk_get_zone_wplugs_work(disk: *mut gendisk) -> *mut c_void {
+pub static mut zwplug: *mut c_void = core::ptr::null_mut();
     spin_lock_irq(&disk.zone_wplugs_list_lock);
-    zwplug = list_first_entry_or_null(&disk.zone_wplugs_list,
-    struct blk_zone_wplug, entry);
-    if (zwplug)
+    zwplug = list_first_entry_or_null(&disk.zone_wplugs_list, blk_zone_wplug, entry);
+    if (zwplug) {
     list_del_init(&zwplug.entry);
+    }
     spin_unlock_irq(&disk.zone_wplugs_list_lock);
     return zwplug;
     }
 #[no_mangle]
 unsafe extern "C" fn disk_zone_wplugs_worker(data: *mut c_void) -> c_int {
-    static int disk_zone_wplugs_worker(void *data)
-    {
-    struct gendisk *disk = data;
-    struct blk_zone_wplug *zwplug;
-    unsigned int noio_flag;
+    let mut disk = data;
+pub static mut zwplug: *mut c_void = core::ptr::null_mut();
+    let mut noio_flag = 0;
     noio_flag = memalloc_noio_save();
     set_user_nice(current, MIN_NICE);
     set_freezable();
@@ -1661,8 +1927,9 @@ unsafe extern "C" fn disk_zone_wplugs_worker(data: *mut c_void) -> c_int {
 // plug to the active list.
 //
     set_current_state(TASK_RUNNING);
-    while (disk_zone_wplug_submit_bio(disk, zwplug))
+    while (disk_zone_wplug_submit_bio(disk, zwplug)) {
     blk_wait_io(&disk.zone_wplugs_worker_bio_done);
+    }
     disk_put_zone_wplug(zwplug);
     continue;
     }
@@ -1681,14 +1948,12 @@ unsafe extern "C" fn disk_zone_wplugs_worker(data: *mut c_void) -> c_int {
     schedule();
     }
     }
-    WARN_ON_ONCE(!list_empty(&disk.zone_wplugs_list));
+    WARN_ON_ONCE!(!list_empty(&disk.zone_wplugs_list));
     memalloc_noio_restore(noio_flag);
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn disk_init_zone_resources(disk: *mut gendisk) {
-    void disk_init_zone_resources(struct gendisk *disk)
-    {
     spin_lock_init(&disk.zone_wplugs_hash_lock);
     spin_lock_init(&disk.zone_wplugs_list_lock);
     INIT_LIST_HEAD(&disk.zone_wplugs_list);
@@ -1702,25 +1967,27 @@ pub unsafe extern "C" fn disk_init_zone_resources(disk: *mut gendisk) {
 //
 pub const BLK_ZONE_WPLUG_MAX_HASH_BITS: c_int = 9;
 pub const BLK_ZONE_WPLUG_DEFAULT_POOL_SIZE: c_int = 128;
-    static int disk_alloc_zone_resources(struct gendisk *disk,
-    unsigned int pool_size)
-    {
-    unsigned int i;
-    let mut ret: c_int = -ENOMEM;
+#[no_mangle]
+pub unsafe extern "C" fn disk_alloc_zone_resources(disk: *mut gendisk, pool_size: c_uint) -> c_int {
+    let mut i = 0;
+pub static mut ret: c_int = 0;
     atomic_set(&disk.nr_zone_wplugs, 0);
     disk.zone_wplugs_hash_bits =
     min(ilog2(pool_size) + 1, BLK_ZONE_WPLUG_MAX_HASH_BITS);
     disk.zone_wplugs_hash =
-    kzalloc_objs(struct hlist_head,
+    kzalloc_objs(hlist_head,
     disk_zone_wplugs_hash_size(disk));
-    if (!disk.zone_wplugs_hash)
+    if (!disk.zone_wplugs_hash) {
     return -ENOMEM;
-    for (i = 0; i < disk_zone_wplugs_hash_size(disk); i++)
+    }
+    for (i = 0; i < disk_zone_wplugs_hash_size(disk); i++) {
     INIT_HLIST_HEAD(&disk.zone_wplugs_hash[i]);
+    }
     disk.zone_wplugs_pool = mempool_create_kmalloc_pool(pool_size,
-    sizeof(struct blk_zone_wplug));
-    if (!disk.zone_wplugs_pool)
-    goto free_hash;
+    sizeof!(blk_zone_wplug));
+    if (!disk.zone_wplugs_pool) {
+// goto;
+    }
 //
 // We may already have a zone write plug workqueue as this function may
 // be called after disk_free_zone_resources(), which does not destroy
@@ -1732,8 +1999,9 @@ pub const BLK_ZONE_WPLUG_DEFAULT_POOL_SIZE: c_int = 128;
     alloc_workqueue("%s_zwplugs",
     WQ_MEM_RECLAIM | WQ_HIGHPRI | WQ_PERCPU,
     pool_size, disk.disk_name);
-    if (!disk.zone_wplugs_wq)
-    goto destroy_pool;
+    if (!disk.zone_wplugs_wq) {
+// goto;
+    }
     }
     disk.zone_wplugs_worker =
     kthread_create(disk_zone_wplugs_worker, disk,
@@ -1741,14 +2009,14 @@ pub const BLK_ZONE_WPLUG_DEFAULT_POOL_SIZE: c_int = 128;
     if (IS_ERR(disk.zone_wplugs_worker)) {
     ret = PTR_ERR(disk.zone_wplugs_worker);
     disk.zone_wplugs_worker = core::ptr::null_mut();
-    goto destroy_pool;
+// goto;
     }
     wake_up_process(disk.zone_wplugs_worker);
     return 0;
-    destroy_pool:
+// label;
     mempool_destroy(disk.zone_wplugs_pool);
     disk.zone_wplugs_pool = core::ptr::null_mut();
-    free_hash:
+// label;
     kfree(disk.zone_wplugs_hash);
     disk.zone_wplugs_hash = core::ptr::null_mut();
     disk.zone_wplugs_hash_bits = 0;
@@ -1756,23 +2024,21 @@ pub const BLK_ZONE_WPLUG_DEFAULT_POOL_SIZE: c_int = 128;
     }
 #[no_mangle]
 unsafe extern "C" fn disk_destroy_zone_wplugs_hash_table(disk: *mut gendisk) {
-    static void disk_destroy_zone_wplugs_hash_table(struct gendisk *disk)
-    {
-    struct blk_zone_wplug *zwplug;
-    unsigned int i;
-    if (!disk.zone_wplugs_hash)
+pub static mut zwplug: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    if (!disk.zone_wplugs_hash) {
     return;
+    }
 // Free all the zone write plugs we have.
-    for (i = 0; i < disk_zone_wplugs_hash_size(disk); i++) {
+    while (i < disk_zone_wplugs_hash_size(disk)) {
     while (!hlist_empty(&disk.zone_wplugs_hash[i])) {
-    zwplug = hlist_entry(disk.zone_wplugs_hash[i].first,
-    struct blk_zone_wplug, node);
+    zwplug = hlist_entry(disk.zone_wplugs_hash[i].first, blk_zone_wplug, node);
     spin_lock_irq(&zwplug.lock);
     disk_mark_zone_wplug_dead(zwplug);
     spin_unlock_irq(&zwplug.lock);
     }
     }
-    WARN_ON_ONCE(atomic_read(&disk.nr_zone_wplugs));
+    WARN_ON_ONCE!(atomic_read(&disk.nr_zone_wplugs));
     kfree(disk.zone_wplugs_hash);
     disk.zone_wplugs_hash = core::ptr::null_mut();
     disk.zone_wplugs_hash_bits = 0;
@@ -1786,9 +2052,7 @@ unsafe extern "C" fn disk_destroy_zone_wplugs_hash_table(disk: *mut gendisk) {
     }
 #[no_mangle]
 unsafe extern "C" fn disk_set_zones_cond_array(disk: *mut gendisk, zones_cond: *mut u8) {
-    static void disk_set_zones_cond_array(struct gendisk *disk, u8 *zones_cond)
-    {
-    unsigned long flags;
+    let mut flags = 0;
     spin_lock_irqsave(&disk.zone_wplugs_hash_lock, flags);
     zones_cond = rcu_replace_pointer(disk.zones_cond, zones_cond,
     lockdep_is_held(&disk.zone_wplugs_hash_lock));
@@ -1797,15 +2061,14 @@ unsafe extern "C" fn disk_set_zones_cond_array(disk: *mut gendisk, zones_cond: *
     }
 #[no_mangle]
 unsafe extern "C" fn disk_free_zone_resources(disk: *mut gendisk) {
-    static void disk_free_zone_resources(struct gendisk *disk)
-    {
     if (disk.zone_wplugs_worker) {
     kthread_stop(disk.zone_wplugs_worker);
     disk.zone_wplugs_worker = core::ptr::null_mut();
     }
-    WARN_ON_ONCE(!list_empty(&disk.zone_wplugs_list));
-    if (disk.zone_wplugs_wq)
+    WARN_ON_ONCE!(!list_empty(&disk.zone_wplugs_list));
+    if (disk.zone_wplugs_wq) {
     drain_workqueue(disk.zone_wplugs_wq);
+    }
     disk_destroy_zone_wplugs_hash_table(disk);
     disk_set_zones_cond_array(disk, core::ptr::null_mut());
     disk.zone_capacity = 0;
@@ -1814,8 +2077,6 @@ unsafe extern "C" fn disk_free_zone_resources(disk: *mut gendisk) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn disk_release_zone_resources(disk: *mut gendisk) {
-    void disk_release_zone_resources(struct gendisk *disk)
-    {
     if (disk.zone_wplugs_wq) {
     destroy_workqueue(disk.zone_wplugs_wq);
     disk.zone_wplugs_wq = core::ptr::null_mut();
@@ -1834,33 +2095,36 @@ pub struct blk_revalidate_zone_args {
     pub sector: sector_t,
 }
 
-    static int disk_revalidate_zone_resources(struct gendisk *disk,
-    struct blk_revalidate_zone_args *args)
-    {
-    struct queue_limits *lim = &disk.queue.limits;
-    unsigned int pool_size;
-    let mut ret: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn disk_revalidate_zone_resources(disk: *mut gendisk, args: *mut blk_revalidate_zone_args) -> c_int {
+    let mut lim = &disk.queue.limits;
+    let mut pool_size = 0;
+pub static mut ret: c_int = 0;
     args.disk = disk;
     args.nr_zones =
     DIV_ROUND_UP_ULL(get_capacity(disk), lim.chunk_sectors);
 // Cached zone conditions: 1 byte per zone
     args.zones_cond = kzalloc(args.nr_zones, GFP_NOIO);
-    if (!args.zones_cond)
+    if (!args.zones_cond) {
     return -ENOMEM;
-    if (!disk_need_zone_resources(disk))
+    }
+    if (!disk_need_zone_resources(disk)) {
     return 0;
+    }
 //
 // If the device has no limit on the maximum number of open and active
 // zones, use BLK_ZONE_WPLUG_DEFAULT_POOL_SIZE.
 //
     pool_size = max(lim.max_open_zones, lim.max_active_zones);
-    if (!pool_size)
+    if (!pool_size) {
     pool_size =
     min(BLK_ZONE_WPLUG_DEFAULT_POOL_SIZE, args.nr_zones);
+    }
     if (!disk.zone_wplugs_hash) {
     ret = disk_alloc_zone_resources(disk, pool_size);
-    if (ret)
+    if (ret) {
     kfree(args.zones_cond);
+    }
     }
     return ret;
     }
@@ -1868,23 +2132,23 @@ pub struct blk_revalidate_zone_args {
 // Update the disk zone resources information and device queue limits.
 // The disk queue is frozen when this is executed.
 //
-    static int disk_update_zone_resources(struct gendisk *disk,
-    struct blk_revalidate_zone_args *args)
-    {
-    struct request_queue *q = disk.queue;
-    unsigned int nr_seq_zones;
-    unsigned int pool_size, memflags;
-    struct queue_limits lim;
-    let mut ret: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn disk_update_zone_resources(disk: *mut gendisk, args: *mut blk_revalidate_zone_args) -> c_int {
+    let mut q = disk.queue;
+    let mut nr_seq_zones = 0;
+    let mut pool_size = 0;
+    let mut memflags = 0;
+pub static mut lim: usize = 0;
+pub static mut ret: c_int = 0;
     lim = queue_limits_start_update(q);
     memflags = blk_mq_freeze_queue(q);
     disk.nr_zones = args.nr_zones;
     if (args.nr_conv_zones >= disk.nr_zones) {
     queue_limits_cancel_update(q);
-    pr_warn("%s: Invalid number of conventional zones %u / %u\n",
+    pr_warn!("%s: Invalid number of conventional zones %u / %u\n",
     disk.disk_name, args.nr_conv_zones, disk.nr_zones);
     ret = -ENODEV;
-    goto unfreeze;
+// goto;
     }
     disk.zone_capacity = args.zone_capacity;
     disk.last_zone_capacity = args.last_zone_capacity;
@@ -1897,12 +2161,15 @@ pub struct blk_revalidate_zone_args {
 // no zone resource limits.
 //
     nr_seq_zones = disk.nr_zones - args.nr_conv_zones;
-    if (lim.max_open_zones >= nr_seq_zones)
+    if (lim.max_open_zones >= nr_seq_zones) {
     lim.max_open_zones = 0;
-    if (lim.max_active_zones >= nr_seq_zones)
+    }
+    if (lim.max_active_zones >= nr_seq_zones) {
     lim.max_active_zones = 0;
-    if (!disk.zone_wplugs_pool)
-    goto commit;
+    }
+    if (!disk.zone_wplugs_pool) {
+// goto;
+    }
 //
 // If the device has no limit on the maximum number of open and active
 // zones, set its max open zone limit to the mempool size to indicate
@@ -1911,84 +2178,97 @@ pub struct blk_revalidate_zone_args {
 // more zones than the size of the mempool.
 //
     pool_size = max(lim.max_open_zones, lim.max_active_zones);
-    if (!pool_size)
+    if (!pool_size) {
     pool_size = min(BLK_ZONE_WPLUG_DEFAULT_POOL_SIZE, nr_seq_zones);
+    }
     mempool_resize(disk.zone_wplugs_pool, pool_size);
     if (!lim.max_open_zones && !lim.max_active_zones) {
-    if (pool_size < nr_seq_zones)
+    if (pool_size < nr_seq_zones) {
     lim.max_open_zones = pool_size;
-    else
+    }
+    else {
     lim.max_open_zones = 0;
     }
-    commit:
+    }
+// label;
     ret = queue_limits_commit_update(q, &lim);
-    unfreeze:
+// label;
     blk_mq_unfreeze_queue(q, memflags);
     return ret;
     }
-    static int blk_revalidate_zone_cond(struct blk_zone *zone, unsigned int idx,
-    struct blk_revalidate_zone_args *args)
-    {
-    let mut cond: enum blk_zone_cond = zone.cond;
+#[no_mangle]
+pub unsafe extern "C" fn blk_revalidate_zone_cond(zone: *mut blk_zone, idx: c_uint, args: *mut blk_revalidate_zone_args) -> c_int {
+pub static mut cond: blk_zone_cond = 0;
 // Check that the zone condition is consistent with the zone type.
-    switch (cond) {
-    case BLK_ZONE_COND_NOT_WP:
-    if (zone.type != BLK_ZONE_TYPE_CONVENTIONAL)
-    goto invalid_condition;
-    break;
-    case BLK_ZONE_COND_IMP_OPEN:
-    case BLK_ZONE_COND_EXP_OPEN:
-    case BLK_ZONE_COND_CLOSED:
-    case BLK_ZONE_COND_EMPTY:
-    case BLK_ZONE_COND_FULL:
-    case BLK_ZONE_COND_OFFLINE:
-    case BLK_ZONE_COND_READONLY:
-    if (zone.type != BLK_ZONE_TYPE_SEQWRITE_REQ)
-    goto invalid_condition;
-    break;
-    default:
-    pr_warn("%s: Invalid zone condition 0x%X\n",
+    match (cond) {
+    BLK_ZONE_COND_NOT_WP => {
+    if (zone.type != BLK_ZONE_TYPE_CONVENTIONAL) {
+// goto;
+    }
+    // break;
+    }
+    BLK_ZONE_COND_IMP_OPEN => {
+    }
+    BLK_ZONE_COND_EXP_OPEN => {
+    }
+    BLK_ZONE_COND_CLOSED => {
+    }
+    BLK_ZONE_COND_EMPTY => {
+    }
+    BLK_ZONE_COND_FULL => {
+    }
+    BLK_ZONE_COND_OFFLINE => {
+    }
+    BLK_ZONE_COND_READONLY => {
+    if (zone.type != BLK_ZONE_TYPE_SEQWRITE_REQ) {
+// goto;
+    }
+    // break;
+    }
+    _ => {
+    pr_warn!("%s: Invalid zone condition 0x%X\n",
     args.disk.disk_name, cond);
     return -ENODEV;
     }
+    }
     blk_zone_set_cond(args.zones_cond, idx, cond);
     return 0;
-    invalid_condition:
-    pr_warn("%s: Invalid zone condition 0x%x for type 0x%x\n",
+// label;
+    pr_warn!("%s: Invalid zone condition 0x%x for type 0x%x\n",
     args.disk.disk_name, cond, zone.type);
     return -ENODEV;
     }
-    static int blk_revalidate_conv_zone(struct blk_zone *zone, unsigned int idx,
-    struct blk_revalidate_zone_args *args)
-    {
-    struct gendisk *disk = args.disk;
+#[no_mangle]
+pub unsafe extern "C" fn blk_revalidate_conv_zone(zone: *mut blk_zone, idx: c_uint, args: *mut blk_revalidate_zone_args) -> c_int {
+    let mut disk = args.disk;
     if (zone.capacity != zone.len) {
-    pr_warn("%s: Invalid conventional zone capacity\n",
+    pr_warn!("%s: Invalid conventional zone capacity\n",
     disk.disk_name);
     return -ENODEV;
     }
-    if (disk_zone_is_last(disk, zone))
+    if (disk_zone_is_last(disk, zone)) {
     args.last_zone_capacity = zone.capacity;
-    args.nr_conv_zones++;
+    }
+    args.nr_conv_zones += 1;
     return 0;
     }
-    static int blk_revalidate_seq_zone(struct blk_zone *zone, unsigned int idx,
-    struct blk_revalidate_zone_args *args)
-    {
-    struct gendisk *disk = args.disk;
-    struct blk_zone_wplug *zwplug;
-    unsigned int wp_offset;
+#[no_mangle]
+pub unsafe extern "C" fn blk_revalidate_seq_zone(zone: *mut blk_zone, idx: c_uint, args: *mut blk_revalidate_zone_args) -> c_int {
+    let mut disk = args.disk;
+pub static mut zwplug: *mut c_void = core::ptr::null_mut();
+    let mut wp_offset = 0;
 //
 // Remember the capacity of the first sequential zone and check
 // if it is constant for all zones, ignoring the last zone as it can be
 // smaller.
 //
-    if (!args.zone_capacity)
+    if (!args.zone_capacity) {
     args.zone_capacity = zone.capacity;
+    }
     if (disk_zone_is_last(disk, zone)) {
     args.last_zone_capacity = zone.capacity;
     } else if (zone.capacity != args.zone_capacity) {
-    pr_warn("%s: Invalid variable zone capacity\n",
+    pr_warn!("%s: Invalid variable zone capacity\n",
     disk.disk_name);
     return -ENODEV;
     }
@@ -1998,35 +2278,37 @@ pub struct blk_revalidate_zone_args {
 // we have a zone write plug for such zone if the device has a zone
 // write plug hash table.
 //
-    if (!disk.zone_wplugs_hash)
+    if (!disk.zone_wplugs_hash) {
     return 0;
+    }
     wp_offset = disk_zone_wplug_sync_wp_offset(disk, zone);
-    if (!wp_offset || wp_offset >= zone.capacity)
+    if (!wp_offset || wp_offset >= zone.capacity) {
     return 0;
+    }
     zwplug = disk_get_or_alloc_zone_wplug(disk, zone.wp, GFP_NOIO);
-    if (!zwplug)
+    if (!zwplug) {
     return -ENOMEM;
+    }
     disk_put_zone_wplug(zwplug);
     return 0;
     }
 //
 // Helper function to check the validity of zones of a zoned block device.
 //
-    static int blk_revalidate_zone_cb(struct blk_zone *zone, unsigned int idx,
-    void *data)
-    {
-    struct blk_revalidate_zone_args *args = data;
-    struct gendisk *disk = args.disk;
-    let mut zone_sectors: sector_t = disk.queue.limits.chunk_sectors;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn blk_revalidate_zone_cb(zone: *mut blk_zone, idx: c_uint, data: *mut c_void) -> c_int {
+    let mut args = data;
+    let mut disk = args.disk;
+pub static mut zone_sectors: sector_t = 0;
+    let mut ret = 0;
 // Check for bad zones and holes in the zone report
     if (zone.start != args.sector) {
-    pr_warn("%s: Zone gap at sectors %llu..%llu\n",
+    pr_warn!("%s: Zone gap at sectors %llu..%llu\n",
     disk.disk_name, args.sector, zone.start);
     return -ENODEV;
     }
     if (zone.start >= get_capacity(disk) || !zone.len) {
-    pr_warn("%s: Invalid zone start %llu, length %llu\n",
+    pr_warn!("%s: Invalid zone start %llu, length %llu\n",
     disk.disk_name, zone.start, zone.len);
     return -ENODEV;
     }
@@ -2036,40 +2318,46 @@ pub struct blk_revalidate_zone_args {
 //
     if (!disk_zone_is_last(disk, zone)) {
     if (zone.len != zone_sectors) {
-    pr_warn("%s: Invalid zoned device with non constant zone size\n",
+    pr_warn!("%s: Invalid zoned device with non constant zone size\n",
     disk.disk_name);
     return -ENODEV;
     }
     } else if (zone.len > zone_sectors) {
-    pr_warn("%s: Invalid zoned device with larger last zone size\n",
+    pr_warn!("%s: Invalid zoned device with larger last zone size\n",
     disk.disk_name);
     return -ENODEV;
     }
     if (!zone.capacity || zone.capacity > zone.len) {
-    pr_warn("%s: Invalid zone capacity\n",
+    pr_warn!("%s: Invalid zone capacity\n",
     disk.disk_name);
     return -ENODEV;
     }
 // Check zone condition
     ret = blk_revalidate_zone_cond(zone, idx, args);
-    if (ret)
+    if (ret) {
     return ret;
+    }
 // Check zone type
-    switch (zone.type) {
-    case BLK_ZONE_TYPE_CONVENTIONAL:
+    match (zone.type) {
+    BLK_ZONE_TYPE_CONVENTIONAL => {
     ret = blk_revalidate_conv_zone(zone, idx, args);
-    break;
-    case BLK_ZONE_TYPE_SEQWRITE_REQ:
+    // break;
+    }
+    BLK_ZONE_TYPE_SEQWRITE_REQ => {
     ret = blk_revalidate_seq_zone(zone, idx, args);
-    break;
-    case BLK_ZONE_TYPE_SEQWRITE_PREF:
-    default:
-    pr_warn("%s: Invalid zone type 0x%x at sectors %llu\n",
+    // break;
+    }
+    BLK_ZONE_TYPE_SEQWRITE_PREF => {
+    }
+    _ => {
+    pr_warn!("%s: Invalid zone type 0x%x at sectors %llu\n",
     disk.disk_name, (int)zone.type, zone.start);
     ret = -ENODEV;
     }
-    if (!ret)
+    }
+    if (!ret) {
     args.sector += zone.len;
+    }
     return ret;
     }
 //
@@ -2087,28 +2375,26 @@ pub struct blk_revalidate_zone_args {
 //
 #[no_mangle]
 pub unsafe extern "C" fn blk_revalidate_disk_zones(disk: *mut gendisk) -> c_int {
-    int blk_revalidate_disk_zones(struct gendisk *disk)
-    {
-    struct request_queue *q = disk.queue;
-    let mut zone_sectors: sector_t = q.limits.chunk_sectors;
-    let mut capacity: sector_t = get_capacity(disk);
-    let mut args: blk_revalidate_zone_args = { };
-    unsigned int memflags, noio_flag;
-    struct blk_report_zones_args rep_args = {
-    .cb = blk_revalidate_zone_cb,
-    .data = &args,
-    };
-    let mut ret: c_int = -ENOMEM;
-    if (WARN_ON_ONCE(!blk_queue_is_zoned(q)))
+    let mut q = disk.queue;
+pub static mut zone_sectors: sector_t = 0;
+pub static mut capacity: sector_t = 0;
+pub static mut args: blk_revalidate_zone_args = 0;
+    let mut memflags = 0;
+    let mut noio_flag = 0;
+pub static mut blk_report_zones_args: usize = 0;
+pub static mut ret: c_int = 0;
+    if (WARN_ON_ONCE!(!blk_queue_is_zoned(q))) {
     return -EIO;
-    if (!capacity)
+    }
+    if (!capacity) {
     return -ENODEV;
+    }
 //
 // Checks that the device driver indicated a valid zone size and that
 // the max zone append limit is set.
 //
     if (!zone_sectors || !is_power_of_2(zone_sectors)) {
-    pr_warn("%s: Invalid non power of two zone size (%llu)\n",
+    pr_warn!("%s: Invalid non power of two zone size (%llu)\n",
     disk.disk_name, zone_sectors);
     return -ENODEV;
     }
@@ -2124,28 +2410,30 @@ pub unsafe extern "C" fn blk_revalidate_disk_zones(disk: *mut gendisk) -> c_int 
     }
     ret = disk.fops.report_zones(disk, 0, UINT_MAX, &rep_args);
     if (!ret) {
-    pr_warn("%s: No zones reported\n", disk.disk_name);
+    pr_warn!("%s: No zones reported\n", disk.disk_name);
     ret = -ENODEV;
     }
     memalloc_noio_restore(noio_flag);
-    if (ret <= 0)
-    goto free_resources;
+    if (ret <= 0) {
+// goto;
+    }
 //
 // If zones where reported, make sure that the entire disk capacity
 // has been checked.
 //
     if (args.sector != capacity) {
-    pr_warn("%s: Missing zones from sector %llu\n",
+    pr_warn!("%s: Missing zones from sector %llu\n",
     disk.disk_name, args.sector);
     ret = -ENODEV;
-    goto free_resources;
+// goto;
     }
     ret = disk_update_zone_resources(disk, &args);
-    if (ret)
-    goto free_resources;
+    if (ret) {
+// goto;
+    }
     return 0;
-    free_resources:
-    pr_warn("%s: failed to revalidate zones\n", disk.disk_name);
+// label;
+    pr_warn!("%s: failed to revalidate zones\n", disk.disk_name);
     kfree(args.zones_cond);
     memflags = blk_mq_freeze_queue(q);
     disk_free_zone_resources(disk);
@@ -2165,25 +2453,27 @@ pub unsafe extern "C" fn blk_revalidate_disk_zones(disk: *mut gendisk) -> c_int 
 // pointer), handling potential errors due to the (initially unknown) lack of
 // hardware offload (See blkdev_issue_zeroout()).
 //
-    int blk_zone_issue_zeroout(struct block_device *bdev, sector_t sector,
-    sector_t nr_sects, gfp_t gfp_mask)
-    {
-    struct gendisk *disk = bdev.bd_disk;
-    int ret;
-    if (WARN_ON_ONCE(!bdev_is_zoned(bdev)))
+#[no_mangle]
+pub unsafe extern "C" fn blk_zone_issue_zeroout(bdev: *mut block_device, sector: sector_t, nr_sects: sector_t, gfp_mask: gfp_t) -> c_int {
+    let mut disk = bdev.bd_disk;
+    let mut ret = 0;
+    if (WARN_ON_ONCE!(!bdev_is_zoned(bdev))) {
     return -EIO;
+    }
     ret = blkdev_issue_zeroout(bdev, sector, nr_sects, gfp_mask,
     BLKDEV_ZERO_NOFALLBACK);
-    if (ret != -EOPNOTSUPP)
+    if (ret != -EOPNOTSUPP) {
     return ret;
+    }
 //
 // The failed call to blkdev_issue_zeroout() advanced the zone write
 // pointer. Undo this using a report zone to update the zone write
 // pointer to the correct current value.
 //
     ret = disk.fops.report_zones(disk, sector, 1, core::ptr::null_mut());
-    if (ret != 1)
+    if (ret != 1) {
     return ret < 0 ? ret : -EIO;
+    }
 //
 // Retry without BLKDEV_ZERO_NOFALLBACK to force the fallback to a
 // regular write with zero-pages.
@@ -2192,14 +2482,15 @@ pub unsafe extern "C" fn blk_revalidate_disk_zones(disk: *mut gendisk) -> c_int 
     }
     EXPORT_SYMBOL_GPL(blk_zone_issue_zeroout);
 
-    static void queue_zone_wplug_show(struct blk_zone_wplug *zwplug,
-    struct seq_file *m)
-    {
-    unsigned int zwp_wp_offset, zwp_flags;
-    unsigned int zwp_zone_no, zwp_ref;
-    unsigned int zwp_bio_list_size;
+#[no_mangle]
+pub unsafe extern "C" fn queue_zone_wplug_show(zwplug: *mut blk_zone_wplug, m: *mut seq_file) {
+    let mut zwp_wp_offset = 0;
+    let mut zwp_flags = 0;
+    let mut zwp_zone_no = 0;
+    let mut zwp_ref = 0;
+    let mut zwp_bio_list_size = 0;
     enum blk_zone_cond zwp_cond;
-    unsigned long flags;
+    let mut flags = 0;
     spin_lock_irqsave(&zwplug.lock, flags);
     zwp_zone_no = zwplug.zone_no;
     zwp_flags = zwplug.flags;
@@ -2215,19 +2506,19 @@ pub unsafe extern "C" fn blk_revalidate_disk_zones(disk: *mut gendisk) -> c_int 
     }
 #[no_mangle]
 pub unsafe extern "C" fn queue_zone_wplugs_show(data: *mut c_void, m: *mut seq_file) -> c_int {
-    int queue_zone_wplugs_show(void *data, struct seq_file *m)
-    {
-    struct request_queue *q = data;
-    struct gendisk *disk = q.disk;
-    struct blk_zone_wplug *zwplug;
-    unsigned int i;
-    if (!disk.zone_wplugs_hash)
+    let mut q = data;
+    let mut disk = q.disk;
+pub static mut zwplug: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    if (!disk.zone_wplugs_hash) {
     return 0;
+    }
     rcu_read_lock();
-    for (i = 0; i < disk_zone_wplugs_hash_size(disk); i++)
+    for (i = 0; i < disk_zone_wplugs_hash_size(disk); i++) {
     hlist_for_each_entry_rcu(zwplug, &disk.zone_wplugs_hash[i],
     node)
     queue_zone_wplug_show(zwplug, m);
+    }
     rcu_read_unlock();
     return 0;
     }

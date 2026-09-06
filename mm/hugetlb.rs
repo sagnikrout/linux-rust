@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -42,8 +292,8 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // (C) Nadia Yvette Chambers, April 2004
 //
 
-    int hugetlb_max_hstate __read_mostly;
-    unsigned int default_hstate_idx;
+    let mut hugetlb_max_hstate = 0;
+    let mut default_hstate_idx = 0;
     struct hstate hstates[HUGE_MAX_HSTATE];
     __initdata nodemask_t hugetlb_bootmem_nodes;
     __initdata struct list_head huge_boot_pages[MAX_NUMNODES];
@@ -69,7 +319,7 @@ pub struct hugetlb_cmdline {
 // for command line parsing
     static struct hstate * __initdata parsed_hstate;
     static unsigned long __initdata default_hstate_max_huge_pages;
-    let mut parsed_valid_hugepagesz: static bool __initdata = true;
+pub static mut parsed_valid_hugepagesz: bool __initdata = true;
     static bool __initdata parsed_default_hugepagesz;
     static unsigned int default_hugepages_in_node[MAX_NUMNODES] __initdata;
     static unsigned long hugepage_allocation_threads __initdata;
@@ -77,14 +327,14 @@ pub struct hugetlb_cmdline {
     static int hstate_cmdline_index __initdata;
     static struct hugetlb_cmdline hugetlb_params[HUGE_MAX_CMDLINE_ARGS] __initdata;
     static int hugetlb_param_index __initdata;
-    static __init int hugetlb_add_param(char *s, int (*setup)(char *val));
-    static __init void hugetlb_parse_params(void);
+// forward_decl: hugetlb_add_param;
+// forward_decl: hugetlb_parse_params;
 
-    static __init int func##args(char *s) \
-    { \
-    return hugetlb_add_param(s, func); \
-    } \
-    early_param(str, func##args)
+    static __init int func##args(char *s) 
+    { 
+    return hugetlb_add_param(s, func); 
+    } 
+    early_param!(str, func##args)
 //
 // Protects updates to hugepage_freelists, hugepage_activelist, nr_huge_pages,
 // free_huge_pages, and surplus_huge_pages.
@@ -95,52 +345,50 @@ pub struct hugetlb_cmdline {
 // prevent spurious OOMs when the hugepage pool is fully utilized.
 //
     static int num_fault_mutexes __ro_after_init;
-    struct mutex *hugetlb_fault_mutex_table __ro_after_init;
+pub static mut hugetlb_fault_mutex_table: *mut c_void = core::ptr::null_mut();
 // Forward declaration
-    static int hugetlb_acct_memory(struct hstate *h, long delta);
-    static void hugetlb_vma_lock_free(struct vm_area_struct *vma);
-    static void hugetlb_vma_lock_alloc(struct vm_area_struct *vma);
-    static void __hugetlb_vma_unlock_write_free(struct vm_area_struct *vma);
-    static int __huge_pmd_unshare(struct mmu_gather *tlb,
-    struct vm_area_struct *vma, unsigned long addr, pte_t *ptep,
-    bool check_locks);
-    static void hugetlb_unshare_pmds(struct vm_area_struct *vma,
-    unsigned long start, unsigned long end, bool take_locks);
-    static struct resv_map *vma_resv_map(struct vm_area_struct *vma);
+// forward_decl: hugetlb_acct_memory;
+// forward_decl: hugetlb_vma_lock_free;
+// forward_decl: hugetlb_vma_lock_alloc;
+// forward_decl: __hugetlb_vma_unlock_write_free;
+// forward_decl: __huge_pmd_unshare;
+// forward_decl: hugetlb_unshare_pmds;
+// forward_decl: vma_resv_map;
 #[no_mangle]
 pub unsafe extern "C" fn subpool_is_free(spool: *mut hugepage_subpool) -> bool {
-    static inline bool subpool_is_free(struct hugepage_subpool *spool)
-    {
-    if (spool.count)
+    if (spool.count) {
     return false;
-    if (spool.max_hpages != -1)
+    }
+    if (spool.max_hpages != -1) {
     return spool.used_hpages == 0;
-    if (spool.min_hpages != -1)
+    }
+    if (spool.min_hpages != -1) {
     return spool.rsv_hpages == spool.min_hpages;
+    }
     return true;
     }
-    static inline void unlock_or_release_subpool(struct hugepage_subpool *spool,
-    unsigned long irq_flags)
-    {
-    let mut free_subpool: bool = subpool_is_free(spool);
+#[no_mangle]
+pub unsafe extern "C" fn unlock_or_release_subpool(spool: *mut hugepage_subpool, irq_flags: c_ulong) {
+pub static mut free_subpool: bool = false;
 // If no pages are used, and no other handles to the subpool
 // remain, give up any reservations based on minimum size and
 // free the subpool
     spin_unlock_irqrestore(&spool.lock, irq_flags);
     if (free_subpool) {
-    if (spool.min_hpages != -1)
+    if (spool.min_hpages != -1) {
     hugetlb_acct_memory(spool.hstate,
     -spool.min_hpages);
+    }
     kfree(spool);
     }
     }
-    struct hugepage_subpool *hugepage_new_subpool(struct hstate *h, long max_hpages,
-    long min_hpages)
-    {
-    struct hugepage_subpool *spool;
+#[no_mangle]
+pub unsafe extern "C" fn hugepage_new_subpool(h: *mut hstate, max_hpages: c_long, min_hpages: c_long) -> *mut c_void {
+pub static mut spool: *mut c_void = core::ptr::null_mut();
     spool = kzalloc_obj(*spool);
-    if (!spool)
+    if (!spool) {
     return core::ptr::null_mut();
+    }
     spin_lock_init(&spool.lock);
     spool.count = 1;
     spool.max_hpages = max_hpages;
@@ -155,14 +403,13 @@ pub unsafe extern "C" fn subpool_is_free(spool: *mut hugepage_subpool) -> bool {
     }
 #[no_mangle]
 pub unsafe extern "C" fn hugepage_put_subpool(spool: *mut hugepage_subpool) {
-    void hugepage_put_subpool(struct hugepage_subpool *spool)
-    {
-    unsigned long flags;
-    if (!spool)
+    let mut flags = 0;
+    if (!spool) {
     return;
+    }
     spin_lock_irqsave(&spool.lock, flags);
-    BUG_ON(!spool.count);
-    spool.count--;
+    BUG_ON!(!spool.count);
+    spool.count -= 1;
     unlock_or_release_subpool(spool, flags);
     }
 //
@@ -173,19 +420,20 @@ pub unsafe extern "C" fn hugepage_put_subpool(spool: *mut hugepage_subpool) {
 // only be different than the passed value (delta) in the case where
 // a subpool minimum size must be maintained.
 //
-    static long hugepage_subpool_get_pages(struct hugepage_subpool *spool,
-    long delta)
-    {
-    let mut ret: c_long = delta;
-    if (!spool)
+#[no_mangle]
+pub unsafe extern "C" fn hugepage_subpool_get_pages(spool: *mut hugepage_subpool, delta: c_long) -> c_long {
+pub static mut ret: c_long = 0;
+    if (!spool) {
     return ret;
+    }
     spin_lock_irq(&spool.lock);
-    if (spool.max_hpages != -1) {		/* maximum size accounting */
+    if (spool.max_hpages != -1) {		/* maximum size accounting */ {
     if ((spool.used_hpages + delta) <= spool.max_hpages)
     spool.used_hpages += delta;
+    }
     else {
     ret = -ENOMEM;
-    goto unlock_ret;
+// goto;
     }
     }
 // minimum size accounting
@@ -202,7 +450,7 @@ pub unsafe extern "C" fn hugepage_put_subpool(spool: *mut hugepage_subpool) {
     spool.rsv_hpages -= delta;
     }
     }
-    unlock_ret:
+// label;
     spin_unlock_irq(&spool.lock);
     return ret;
     }
@@ -212,25 +460,29 @@ pub unsafe extern "C" fn hugepage_put_subpool(spool: *mut hugepage_subpool) {
 // The return value may only be different than the passed value (delta)
 // in the case where a subpool minimum size must be maintained.
 //
-    static long hugepage_subpool_put_pages(struct hugepage_subpool *spool,
-    long delta)
-    {
-    let mut ret: c_long = delta;
-    unsigned long flags;
-    if (!spool)
+#[no_mangle]
+pub unsafe extern "C" fn hugepage_subpool_put_pages(spool: *mut hugepage_subpool, delta: c_long) -> c_long {
+pub static mut ret: c_long = 0;
+    let mut flags = 0;
+    if (!spool) {
     return delta;
+    }
     spin_lock_irqsave(&spool.lock, flags);
-    if (spool.max_hpages != -1)		/* maximum size accounting */
+    if (spool.max_hpages != -1)		/* maximum size accounting */ {
     spool.used_hpages -= delta;
+    }
 // minimum size accounting
     if (spool.min_hpages != -1 && spool.used_hpages < spool.min_hpages) {
-    if (spool.rsv_hpages + delta <= spool.min_hpages)
+    if (spool.rsv_hpages + delta <= spool.min_hpages) {
     ret = 0;
-    else
+    }
+    else {
     ret = spool.rsv_hpages + delta - spool.min_hpages;
+    }
     spool.rsv_hpages += delta;
-    if (spool.rsv_hpages > spool.min_hpages)
+    if (spool.rsv_hpages > spool.min_hpages) {
     spool.rsv_hpages = spool.min_hpages;
+    }
     }
 //
 // If hugetlbfs_put_super couldn't free spool due to an outstanding
@@ -239,8 +491,8 @@ pub unsafe extern "C" fn hugepage_put_subpool(spool: *mut hugepage_subpool) {
     unlock_or_release_subpool(spool, flags);
     return ret;
     }
-    static inline struct hugepage_subpool *subpool_vma(struct vm_area_struct *vma)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn subpool_vma(vma: *mut vm_area_struct) -> *mut c_void {
     return subpool_inode(file_inode(vma.vm_file));
     }
 //
@@ -248,90 +500,73 @@ pub unsafe extern "C" fn hugepage_put_subpool(spool: *mut hugepage_subpool) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn hugetlb_vma_lock_read(vma: *mut vm_area_struct) {
-    void hugetlb_vma_lock_read(struct vm_area_struct *vma)
-    {
     if (__vma_shareable_lock(vma)) {
-    struct hugetlb_vma_lock *vma_lock = vma.vm_private_data;
+    let mut vma_lock = vma.vm_private_data;
     down_read(&vma_lock.rw_sema);
     } else if (__vma_private_lock(vma)) {
-    struct resv_map *resv_map = vma_resv_map(vma);
+    let mut resv_map = vma_resv_map(vma);
     down_read(&resv_map.rw_sema);
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn hugetlb_vma_unlock_read(vma: *mut vm_area_struct) {
-    void hugetlb_vma_unlock_read(struct vm_area_struct *vma)
-    {
     if (__vma_shareable_lock(vma)) {
-    struct hugetlb_vma_lock *vma_lock = vma.vm_private_data;
+    let mut vma_lock = vma.vm_private_data;
     up_read(&vma_lock.rw_sema);
     } else if (__vma_private_lock(vma)) {
-    struct resv_map *resv_map = vma_resv_map(vma);
+    let mut resv_map = vma_resv_map(vma);
     up_read(&resv_map.rw_sema);
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn hugetlb_vma_lock_write(vma: *mut vm_area_struct) {
-    void hugetlb_vma_lock_write(struct vm_area_struct *vma)
-    {
     if (__vma_shareable_lock(vma)) {
-    struct hugetlb_vma_lock *vma_lock = vma.vm_private_data;
+    let mut vma_lock = vma.vm_private_data;
     down_write(&vma_lock.rw_sema);
     } else if (__vma_private_lock(vma)) {
-    struct resv_map *resv_map = vma_resv_map(vma);
+    let mut resv_map = vma_resv_map(vma);
     down_write(&resv_map.rw_sema);
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn hugetlb_vma_unlock_write(vma: *mut vm_area_struct) {
-    void hugetlb_vma_unlock_write(struct vm_area_struct *vma)
-    {
     if (__vma_shareable_lock(vma)) {
-    struct hugetlb_vma_lock *vma_lock = vma.vm_private_data;
+    let mut vma_lock = vma.vm_private_data;
     up_write(&vma_lock.rw_sema);
     } else if (__vma_private_lock(vma)) {
-    struct resv_map *resv_map = vma_resv_map(vma);
+    let mut resv_map = vma_resv_map(vma);
     up_write(&resv_map.rw_sema);
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn hugetlb_vma_trylock_write(vma: *mut vm_area_struct) -> c_int {
-    int hugetlb_vma_trylock_write(struct vm_area_struct *vma)
-    {
     if (__vma_shareable_lock(vma)) {
-    struct hugetlb_vma_lock *vma_lock = vma.vm_private_data;
+    let mut vma_lock = vma.vm_private_data;
     return down_write_trylock(&vma_lock.rw_sema);
     } else if (__vma_private_lock(vma)) {
-    struct resv_map *resv_map = vma_resv_map(vma);
+    let mut resv_map = vma_resv_map(vma);
     return down_write_trylock(&resv_map.rw_sema);
     }
     return 1;
     }
 #[no_mangle]
 pub unsafe extern "C" fn hugetlb_vma_assert_locked(vma: *mut vm_area_struct) {
-    void hugetlb_vma_assert_locked(struct vm_area_struct *vma)
-    {
     if (__vma_shareable_lock(vma)) {
-    struct hugetlb_vma_lock *vma_lock = vma.vm_private_data;
+    let mut vma_lock = vma.vm_private_data;
     lockdep_assert_held(&vma_lock.rw_sema);
     } else if (__vma_private_lock(vma)) {
-    struct resv_map *resv_map = vma_resv_map(vma);
+    let mut resv_map = vma_resv_map(vma);
     lockdep_assert_held(&resv_map.rw_sema);
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn hugetlb_vma_lock_release(kref: *mut kref) {
-    void hugetlb_vma_lock_release(struct kref *kref)
-    {
-    struct hugetlb_vma_lock *vma_lock = container_of(kref,
-    struct hugetlb_vma_lock, refs);
+    let mut vma_lock = container_of!(kref, hugetlb_vma_lock, refs);
     kfree(vma_lock);
     }
 #[no_mangle]
 unsafe extern "C" fn __hugetlb_vma_unlock_write_put(vma_lock: *mut hugetlb_vma_lock) {
-    static void __hugetlb_vma_unlock_write_put(struct hugetlb_vma_lock *vma_lock)
-    {
-    struct vm_area_struct *vma = vma_lock.vma;
+    let mut vma = vma_lock.vma;
 //
 // vma_lock structure may or not be released as a result of put,
 // it certainly will no longer be attached to vma so clear pointer.
@@ -344,43 +579,40 @@ unsafe extern "C" fn __hugetlb_vma_unlock_write_put(vma_lock: *mut hugetlb_vma_l
     }
 #[no_mangle]
 unsafe extern "C" fn __hugetlb_vma_unlock_write_free(vma: *mut vm_area_struct) {
-    static void __hugetlb_vma_unlock_write_free(struct vm_area_struct *vma)
-    {
     if (__vma_shareable_lock(vma)) {
-    struct hugetlb_vma_lock *vma_lock = vma.vm_private_data;
+    let mut vma_lock = vma.vm_private_data;
     __hugetlb_vma_unlock_write_put(vma_lock);
     } else if (__vma_private_lock(vma)) {
-    struct resv_map *resv_map = vma_resv_map(vma);
+    let mut resv_map = vma_resv_map(vma);
 // no free for anon vmas, but still need to unlock
     up_write(&resv_map.rw_sema);
     }
     }
 #[no_mangle]
 unsafe extern "C" fn hugetlb_vma_lock_free(vma: *mut vm_area_struct) {
-    static void hugetlb_vma_lock_free(struct vm_area_struct *vma)
-    {
 //
 // Only present in sharable vmas.
 //
-    if (!vma || !__vma_shareable_lock(vma))
+    if (!vma || !__vma_shareable_lock(vma)) {
     return;
+    }
     if (vma.vm_private_data) {
-    struct hugetlb_vma_lock *vma_lock = vma.vm_private_data;
+    let mut vma_lock = vma.vm_private_data;
     down_write(&vma_lock.rw_sema);
     __hugetlb_vma_unlock_write_put(vma_lock);
     }
     }
 #[no_mangle]
 unsafe extern "C" fn hugetlb_vma_lock_alloc(vma: *mut vm_area_struct) {
-    static void hugetlb_vma_lock_alloc(struct vm_area_struct *vma)
-    {
-    struct hugetlb_vma_lock *vma_lock;
+pub static mut vma_lock: *mut c_void = core::ptr::null_mut();
 // Only establish in (flags) sharable vmas
-    if (!vma || !(vma.vm_flags & VM_MAYSHARE))
+    if (!vma || !(vma.vm_flags & VM_MAYSHARE)) {
     return;
+    }
 // Should never get here with non-NULL vm_private_data
-    if (vma.vm_private_data)
+    if (vma.vm_private_data) {
     return;
+    }
     vma_lock = kmalloc_obj(*vma_lock);
     if (!vma_lock) {
 //
@@ -404,34 +636,30 @@ unsafe extern "C" fn hugetlb_vma_lock_alloc(vma: *mut vm_area_struct) {
 // Helper that removes a struct file_region from the resv_map cache and returns
 // it for use.
 //
-    static struct file_region *
-    get_file_region_entry_from_cache(struct resv_map *resv, long from, long to)
-    {
-    struct file_region *nrg;
+#[no_mangle]
+pub unsafe extern "C" fn get_file_region_entry_from_cache(resv: *mut resv_map, from: c_long, to: c_long) -> *mut c_void {
+pub static mut nrg: *mut c_void = core::ptr::null_mut();
     VM_BUG_ON(resv.region_cache_count <= 0);
-    resv.region_cache_count--;
-    nrg = list_first_entry(&resv.region_cache, struct file_region, link);
+    resv.region_cache_count -= 1;
+    nrg = list_first_entry(&resv.region_cache, file_region, link);
     list_del(&nrg.link);
     nrg.from = from;
     nrg.to = to;
     return nrg;
     }
-    static void copy_hugetlb_cgroup_uncharge_info(struct file_region *nrg,
-    struct file_region *rg)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn copy_hugetlb_cgroup_uncharge_info(nrg: *mut file_region, rg: *mut file_region) {
 
     nrg.reservation_counter = rg.reservation_counter;
     nrg.css = rg.css;
-    if (rg.css)
+    if (rg.css) {
     css_get(rg.css);
+    }
 
     }
 // Helper that records hugetlb_cgroup uncharge info.
-    static void record_hugetlb_cgroup_uncharge_info(struct hugetlb_cgroup *h_cg,
-    struct hstate *h,
-    struct resv_map *resv,
-    struct file_region *nrg)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn record_hugetlb_cgroup_uncharge_info(h_cg: *mut hugetlb_cgroup, h: *mut hstate, resv: *mut resv_map, nrg: *mut file_region) {
 
     if (h_cg) {
     nrg.reservation_counter =
@@ -448,8 +676,9 @@ unsafe extern "C" fn hugetlb_vma_lock_alloc(vma: *mut vm_area_struct) {
 // untouched.
 //
     css_get(&h_cg.css);
-    if (!resv.pages_per_hpage)
+    if (!resv.pages_per_hpage) {
     resv.pages_per_hpage = pages_per_huge_page(h);
+    }
 // pages_per_hpage should be the same for all entries in
 // a resv_map.
 //
@@ -462,16 +691,14 @@ unsafe extern "C" fn hugetlb_vma_lock_alloc(vma: *mut vm_area_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn put_uncharge_info(rg: *mut file_region) {
-    static void put_uncharge_info(struct file_region *rg)
-    {
 
-    if (rg.css)
+    if (rg.css) {
     css_put(rg.css);
+    }
 
     }
-    static bool has_same_uncharge_info(struct file_region *rg,
-    struct file_region *org)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn has_same_uncharge_info(rg: *mut file_region, org: *mut file_region) -> bool {
 
     return rg.reservation_counter == org.reservation_counter &&
     rg.css == org.css;
@@ -481,9 +708,8 @@ unsafe extern "C" fn put_uncharge_info(rg: *mut file_region) {
     }
 #[no_mangle]
 unsafe extern "C" fn coalesce_file_region(resv: *mut resv_map, rg: *mut file_region) {
-    static void coalesce_file_region(struct resv_map *resv, struct file_region *rg)
-    {
-    struct file_region *nrg, *prg;
+    let mut nrg = core::ptr::null_mut();
+    let mut prg = core::ptr::null_mut();
     prg = list_prev_entry(rg, link);
     if (&prg.link != &resv.regions && prg.to == rg.from &&
     has_same_uncharge_info(prg, rg)) {
@@ -502,12 +728,9 @@ unsafe extern "C" fn coalesce_file_region(resv: *mut resv_map, rg: *mut file_reg
     kfree(rg);
     }
     }
-    static inline long
-    hugetlb_resv_map_add(struct resv_map *map, struct list_head *rg, long from,
-    long to, struct hstate *h, struct hugetlb_cgroup *cg,
-    long *regions_needed)
-    {
-    struct file_region *nrg;
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_resv_map_add(map: *mut resv_map, rg: *mut list_head, from: c_long, to: c_long, h: *mut hstate, cg: *mut hugetlb_cgroup, regions_needed: *mut c_long) -> c_long {
+pub static mut nrg: *mut c_void = core::ptr::null_mut();
     if (!regions_needed) {
     nrg = get_file_region_entry_from_cache(map, from, to);
     record_hugetlb_cgroup_uncharge_info(cg, h, map, nrg);
@@ -526,17 +749,16 @@ unsafe extern "C" fn coalesce_file_region(resv: *mut resv_map, rg: *mut file_reg
 // indicate the number of file_regions needed in the cache to carry out to add
 // the regions for this range.
 //
-    static long add_reservation_in_range(struct resv_map *resv, long f, long t,
-    struct hugetlb_cgroup *h_cg,
-    struct hstate *h, long *regions_needed)
-    {
-    let mut add: c_long = 0;
-    struct list_head *head = &resv.regions;
-    let mut last_accounted_offset: c_long = f;
+#[no_mangle]
+pub unsafe extern "C" fn add_reservation_in_range(resv: *mut resv_map, f: c_long, t: c_long, h_cg: *mut hugetlb_cgroup, h: *mut hstate, regions_needed: *mut c_long) -> c_long {
+pub static mut add: c_long = 0;
+    let mut head = &resv.regions;
+pub static mut last_accounted_offset: c_long = 0;
     struct file_region *iter, *trg = core::ptr::null_mut();
-    struct list_head *rg = core::ptr::null_mut();
-    if (regions_needed)
+    let mut rg = core::ptr::null_mut();
+    if (regions_needed) {
 // regions_needed = 0;
+    }
 // In this loop, we essentially handle an entry for the range
 // [last_accounted_offset, iter->from), at every iteration, with some
 // bounds checking.
@@ -547,8 +769,9 @@ unsafe extern "C" fn coalesce_file_region(resv: *mut resv_map, rg: *mut file_reg
 // If this region ends after the last accounted offset,
 // then we need to update last_accounted_offset.
 //
-    if (iter.to > last_accounted_offset)
+    if (iter.to > last_accounted_offset) {
     last_accounted_offset = iter.to;
+    }
     continue;
     }
 // When we find a region that starts beyond our range, we've
@@ -561,32 +784,34 @@ unsafe extern "C" fn coalesce_file_region(resv: *mut resv_map, rg: *mut file_reg
 // Add an entry for last_accounted_offset -> iter->from, and
 // update last_accounted_offset.
 //
-    if (iter.from > last_accounted_offset)
+    if (iter.from > last_accounted_offset) {
     add += hugetlb_resv_map_add(resv, iter.link.prev,
     last_accounted_offset,
     iter.from, h, h_cg,
     regions_needed);
+    }
     last_accounted_offset = iter.to;
     }
 // Handle the case where our range extends beyond
 // last_accounted_offset.
 //
-    if (!rg)
+    if (!rg) {
     rg = head.prev;
-    if (last_accounted_offset < t)
+    }
+    if (last_accounted_offset < t) {
     add += hugetlb_resv_map_add(resv, rg, last_accounted_offset,
     t, h, h_cg, regions_needed);
+    }
     return add;
     }
 // Must be called with resv->lock acquired. Will drop lock to allocate entries.
 //
-    static int allocate_file_region_entries(struct resv_map *resv,
-    int regions_needed)
-    __must_hold(&resv.lock)
-    {
-    LIST_HEAD(allocated_regions);
-    let mut to_allocate: c_int = 0, i = 0;
-    struct file_region *trg = core::ptr::null_mut(), *rg = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn allocate_file_region_entries(resv: *mut resv_map, lock: int regions_needed)
+    __must_hold(&resv.) -> c_int {
+pub static mut allocated_regions: usize = 0;
+pub static mut to_allocate: c_int = 0;
+    let mut trg = core::ptr::null_mut(), *rg = core::ptr::null_mut();
     VM_BUG_ON(regions_needed < 0);
 //
 // Check for sufficient descriptors in the cache to accommodate
@@ -607,10 +832,11 @@ unsafe extern "C" fn coalesce_file_region(resv: *mut resv_map, rg: *mut file_reg
 //
     VM_BUG_ON(resv.region_cache_count < resv.adds_in_progress);
     spin_unlock(&resv.lock);
-    for (i = 0; i < to_allocate; i++) {
+    while (i < to_allocate) {
     trg = kmalloc_obj(*trg);
-    if (!trg)
-    goto out_of_memory;
+    if (!trg) {
+// goto;
+    }
     list_add(&trg.link, &allocated_regions);
     }
     spin_lock(&resv.lock);
@@ -618,7 +844,7 @@ unsafe extern "C" fn coalesce_file_region(resv: *mut resv_map, rg: *mut file_reg
     resv.region_cache_count += to_allocate;
     }
     return 0;
-    out_of_memory:
+// label;
     list_for_each_entry_safe(rg, trg, &allocated_regions, link) {
     list_del(&rg.link);
     kfree(rg);
@@ -642,13 +868,11 @@ unsafe extern "C" fn coalesce_file_region(resv: *mut resv_map, rg: *mut file_reg
 // fail; region_chg will always allocate at least 1 entry and a region_add for
 // 1 page will only require at most 1 entry.
 //
-    static long region_add(struct resv_map *resv, long f, long t,
-    long in_regions_needed, struct hstate *h,
-    struct hugetlb_cgroup *h_cg)
-    {
-    let mut add: c_long = 0, actual_regions_needed = 0;
+#[no_mangle]
+pub unsafe extern "C" fn region_add(resv: *mut resv_map, f: c_long, t: c_long, in_regions_needed: c_long, h: *mut hstate, h_cg: *mut hugetlb_cgroup) -> c_long {
+pub static mut add: c_long = 0;
     spin_lock(&resv.lock);
-    retry:
+// label;
 // Count how many regions are actually needed to execute this add.
     add_reservation_in_range(resv, f, t, core::ptr::null_mut(), core::ptr::null_mut(),
     &actual_regions_needed);
@@ -673,7 +897,7 @@ unsafe extern "C" fn coalesce_file_region(resv: *mut resv_map, rg: *mut file_reg
     resv, actual_regions_needed - in_regions_needed)) {
     return -ENOMEM;
     }
-    goto retry;
+// goto;
     }
     add = add_reservation_in_range(resv, f, t, h_cg, h, core::ptr::null_mut());
     resv.adds_in_progress -= in_regions_needed;
@@ -700,18 +924,19 @@ unsafe extern "C" fn coalesce_file_region(resv: *mut resv_map, rg: *mut file_reg
 // zero.  -ENOMEM is returned if a new file_region structure or cache entry
 // is needed and can not be allocated.
 //
-    static long region_chg(struct resv_map *resv, long f, long t,
-    long *out_regions_needed)
-    {
-    let mut chg: c_long = 0;
+#[no_mangle]
+pub unsafe extern "C" fn region_chg(resv: *mut resv_map, f: c_long, t: c_long, out_regions_needed: *mut c_long) -> c_long {
+pub static mut chg: c_long = 0;
     spin_lock(&resv.lock);
 // Count how many hugepages in this range are NOT represented.
     chg = add_reservation_in_range(resv, f, t, core::ptr::null_mut(), core::ptr::null_mut(),
     out_regions_needed);
-    if (*out_regions_needed == 0)
+    if (*out_regions_needed == 0) {
 // out_regions_needed = 1;
-    if (allocate_file_region_entries(resv, *out_regions_needed))
+    }
+    if (allocate_file_region_entries(resv, *out_regions_needed)) {
     return -ENOMEM;
+    }
     resv.adds_in_progress += *out_regions_needed;
     spin_unlock(&resv.lock);
     return chg;
@@ -729,9 +954,8 @@ unsafe extern "C" fn coalesce_file_region(resv: *mut resv_map, rg: *mut file_reg
 // routine.  They are kept to make reading the calling code easier as
 // arguments will match the associated region_chg call.
 //
-    static void region_abort(struct resv_map *resv, long f, long t,
-    long regions_needed)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn region_abort(resv: *mut resv_map, f: c_long, t: c_long, regions_needed: c_long) {
     spin_lock(&resv.lock);
     VM_BUG_ON(!resv.region_cache_count);
     resv.adds_in_progress -= regions_needed;
@@ -753,13 +977,12 @@ unsafe extern "C" fn coalesce_file_region(resv: *mut resv_map, rg: *mut file_reg
 //
 #[no_mangle]
 unsafe extern "C" fn region_del(resv: *mut resv_map, f: c_long, t: c_long) -> c_long {
-    static long region_del(struct resv_map *resv, long f, long t)
-    {
-    struct list_head *head = &resv.regions;
-    struct file_region *rg, *trg;
-    struct file_region *nrg = core::ptr::null_mut();
-    let mut del: c_long = 0;
-    retry:
+    let mut head = &resv.regions;
+    let mut rg = core::ptr::null_mut();
+    let mut trg = core::ptr::null_mut();
+    let mut nrg = core::ptr::null_mut();
+pub static mut del: c_long = 0;
+// label;
     spin_lock(&resv.lock);
     list_for_each_entry_safe(rg, trg, head, link) {
 //
@@ -769,29 +992,32 @@ unsafe extern "C" fn region_del(resv: *mut resv_map, f: c_long, t: c_long) -> c_
 // (from, to) with from == to.  Check for placeholder entries
 // at the beginning of the range to be deleted.
 //
-    if (rg.to <= f && (rg.to != rg.from || rg.to != f))
+    if (rg.to <= f && (rg.to != rg.from || rg.to != f)) {
     continue;
-    if (rg.from >= t)
+    }
+    if (rg.from >= t) {
     break;
-    if (f > rg.from && t < rg.to) { /* Must split region */
+    }
+    if (f > rg.from && t < rg.to) { /* Must split region */ {
 //
 // Check for an entry in the cache before dropping
 // lock and attempting allocation.
 //
     if (!nrg &&
     resv.region_cache_count > resv.adds_in_progress) {
-    nrg = list_first_entry(&resv.region_cache,
-    struct file_region,
+    }
+    nrg = list_first_entry(&resv.region_cache, file_region,
     link);
     list_del(&nrg.link);
-    resv.region_cache_count--;
+    resv.region_cache_count -= 1;
     }
     if (!nrg) {
     spin_unlock(&resv.lock);
     nrg = kmalloc_obj(*nrg);
-    if (!nrg)
+    if (!nrg) {
     return -ENOMEM;
-    goto retry;
+    }
+// goto;
     }
     del += t - f;
     hugetlb_cgroup_uncharge_file_region(
@@ -807,17 +1033,19 @@ unsafe extern "C" fn region_del(resv: *mut resv_map, f: c_long, t: c_long) -> c_
     nrg = core::ptr::null_mut();
     break;
     }
-    if (f <= rg.from && t >= rg.to) { /* Remove entire region */
+    if (f <= rg.from && t >= rg.to) { /* Remove entire region */ {
     del += rg.to - rg.from;
+    }
     hugetlb_cgroup_uncharge_file_region(resv, rg,
     rg.to - rg.from, true);
     list_del(&rg.link);
     kfree(rg);
     continue;
     }
-    if (f <= rg.from) {	/* Trim beginning of region */
+    if (f <= rg.from) {	/* Trim beginning of region */ {
     hugetlb_cgroup_uncharge_file_region(resv, rg,
     t - rg.from, false);
+    }
     del += t - rg.from;
     rg.from = t;
     } else {		/* Trim end of region */
@@ -842,21 +1070,21 @@ unsafe extern "C" fn region_del(resv: *mut resv_map, f: c_long, t: c_long) -> c_
 //
 #[no_mangle]
 pub unsafe extern "C" fn hugetlb_fix_reserve_counts(inode: *mut inode) {
-    void hugetlb_fix_reserve_counts(struct inode *inode)
-    {
-    struct hugepage_subpool *spool = subpool_inode(inode);
-    long rsv_adjust;
-    let mut reserved: bool = false;
+    let mut spool = subpool_inode(inode);
+    let mut rsv_adjust = 0;
+pub static mut reserved: bool = false;
     rsv_adjust = hugepage_subpool_get_pages(spool, 1);
     if (rsv_adjust > 0) {
-    struct hstate *h = hstate_inode(inode);
-    if (!hugetlb_acct_memory(h, 1))
+    let mut h = hstate_inode(inode);
+    if (!hugetlb_acct_memory(h, 1)) {
     reserved = true;
+    }
     } else if (!rsv_adjust) {
     reserved = true;
     }
-    if (!reserved)
-    pr_warn("hugetlb: Huge Page Reserved count may go negative.\n");
+    if (!reserved) {
+    pr_warn!("hugetlb: Huge Page Reserved count may go negative.\n");
+    }
     }
 //
 // Count and return the number of huge pages in the reserve map
@@ -864,20 +1092,20 @@ pub unsafe extern "C" fn hugetlb_fix_reserve_counts(inode: *mut inode) {
 //
 #[no_mangle]
 unsafe extern "C" fn region_count(resv: *mut resv_map, f: c_long, t: c_long) -> c_long {
-    static long region_count(struct resv_map *resv, long f, long t)
-    {
-    struct list_head *head = &resv.regions;
-    struct file_region *rg;
-    let mut chg: c_long = 0;
+    let mut head = &resv.regions;
+pub static mut rg: *mut c_void = core::ptr::null_mut();
+pub static mut chg: c_long = 0;
     spin_lock(&resv.lock);
 // Locate each segment we overlap with, and count that overlap.
     list_for_each_entry(rg, head, link) {
-    long seg_from;
-    long seg_to;
-    if (rg.to <= f)
+    let mut seg_from = 0;
+    let mut seg_to = 0;
+    if (rg.to <= f) {
     continue;
-    if (rg.from >= t)
+    }
+    if (rg.from >= t) {
     break;
+    }
     seg_from = max(rg.from, f);
     seg_to = min(rg.to, t);
     chg += seg_to - seg_from;
@@ -889,8 +1117,7 @@ unsafe extern "C" fn region_count(resv: *mut resv_map, f: c_long, t: c_long) -> 
 // Convert the address within this vma to the page offset within
 // the mapping, huge page units here.
 //
-    static pgoff_t vma_hugecache_offset(struct hstate *h,
-    struct vm_area_struct *vma, unsigned long address)
+    static pgoff_t vma_hugecache_offset(hstate *h, vm_area_struct *vma, unsigned long address)
     {
     return linear_page_index(vma, address) >> huge_page_order(h);
     }
@@ -921,20 +1148,14 @@ unsafe extern "C" fn region_count(resv: *mut resv_map, f: c_long, t: c_long) -> 
 //
 #[no_mangle]
 unsafe extern "C" fn get_vma_private_data(vma: *mut vm_area_struct) -> c_ulong {
-    static unsigned long get_vma_private_data(struct vm_area_struct *vma)
-    {
     return (unsigned long)vma.vm_private_data;
     }
-    static void set_vma_private_data(struct vm_area_struct *vma,
-    unsigned long value)
-    {
-    vma.vm_private_data = (void *)value;
+#[no_mangle]
+pub unsafe extern "C" fn set_vma_private_data(vma: *mut vm_area_struct, value: c_ulong) {
+    vma.vm_private_data = value;
     }
-    static void
-    resv_map_set_hugetlb_cgroup_uncharge_info(struct resv_map *resv_map,
-    struct hugetlb_cgroup *h_cg,
-    struct hstate *h)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn resv_map_set_hugetlb_cgroup_uncharge_info(resv_map: *mut resv_map, h_cg: *mut hugetlb_cgroup, h: *mut hstate) {
 
     if (!h_cg || !h) {
     resv_map.reservation_counter = core::ptr::null_mut();
@@ -948,10 +1169,10 @@ unsafe extern "C" fn get_vma_private_data(vma: *mut vm_area_struct) -> c_ulong {
     }
 
     }
-    struct resv_map *resv_map_alloc(void)
-    {
-    struct resv_map *resv_map = kmalloc_obj(*resv_map);
-    struct file_region *rg = kmalloc_obj(*rg);
+#[no_mangle]
+pub unsafe extern "C" fn resv_map_alloc() -> *mut c_void {
+    let mut resv_map = kmalloc_obj(*resv_map);
+    let mut rg = kmalloc_obj(*rg);
     if (!resv_map || !rg) {
     kfree(resv_map);
     kfree(rg);
@@ -976,11 +1197,10 @@ unsafe extern "C" fn get_vma_private_data(vma: *mut vm_area_struct) -> c_ulong {
     }
 #[no_mangle]
 pub unsafe extern "C" fn resv_map_release(ref: *mut kref) {
-    void resv_map_release(struct kref *ref)
-    {
-    struct resv_map *resv_map = container_of(ref, struct resv_map, refs);
-    struct list_head *head = &resv_map.region_cache;
-    struct file_region *rg, *trg;
+    let mut resv_map = container_of!(ref, resv_map, refs);
+    let mut head = &resv_map.region_cache;
+    let mut rg = core::ptr::null_mut();
+    let mut trg = core::ptr::null_mut();
 // Clear out any active regions before we release the map.
     region_del(resv_map, 0, LONG_MAX);
 // ... and any entries left in the cache
@@ -991,57 +1211,47 @@ pub unsafe extern "C" fn resv_map_release(ref: *mut kref) {
     VM_BUG_ON(resv_map.adds_in_progress);
     kfree(resv_map);
     }
-    static inline struct resv_map *inode_resv_map(struct inode *inode)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn inode_resv_map(inode: *mut inode) -> *mut c_void {
     return HUGETLBFS_I(inode).resv_map;
     }
-    static struct resv_map *vma_resv_map(struct vm_area_struct *vma)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn vma_resv_map(vma: *mut vm_area_struct) -> *mut c_void {
     VM_BUG_ON_VMA(!is_vm_hugetlb_page(vma), vma);
     if (vma.vm_flags & VM_MAYSHARE) {
-    struct address_space *mapping = vma.vm_file.f_mapping;
-    struct inode *inode = mapping.host;
+    let mut mapping = vma.vm_file.f_mapping;
+    let mut inode = mapping.host;
     return inode_resv_map(inode);
     } else {
-    return (struct resv_map *)(get_vma_private_data(vma) &
+    return (get_vma_private_data(vma) &
     ~HPAGE_RESV_MASK);
     }
     }
 #[no_mangle]
 unsafe extern "C" fn set_vma_resv_map(vma: *mut vm_area_struct, map: *mut resv_map) {
-    static void set_vma_resv_map(struct vm_area_struct *vma, struct resv_map *map)
-    {
     VM_WARN_ON_ONCE_VMA(!is_vm_hugetlb_page(vma), vma);
     VM_WARN_ON_ONCE_VMA(vma_test(vma, VMA_MAYSHARE_BIT), vma);
     set_vma_private_data(vma, (unsigned long)map);
     }
 #[no_mangle]
 unsafe extern "C" fn set_vma_resv_flags(vma: *mut vm_area_struct, flags: c_ulong) {
-    static void set_vma_resv_flags(struct vm_area_struct *vma, unsigned long flags)
-    {
     VM_WARN_ON_ONCE_VMA(!is_vm_hugetlb_page(vma), vma);
     VM_WARN_ON_ONCE_VMA(vma_test(vma, VMA_MAYSHARE_BIT), vma);
     set_vma_private_data(vma, get_vma_private_data(vma) | flags);
     }
 #[no_mangle]
 unsafe extern "C" fn is_vma_resv_set(vma: *mut vm_area_struct, flag: c_ulong) -> c_int {
-    static int is_vma_resv_set(struct vm_area_struct *vma, unsigned long flag)
-    {
     VM_BUG_ON_VMA(!is_vm_hugetlb_page(vma), vma);
     return (get_vma_private_data(vma) & flag) != 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn __vma_private_lock(vma: *mut vm_area_struct) -> bool {
-    bool __vma_private_lock(struct vm_area_struct *vma)
-    {
     return !(vma.vm_flags & VM_MAYSHARE) &&
     get_vma_private_data(vma) & ~HPAGE_RESV_MASK &&
     is_vma_resv_set(vma, HPAGE_RESV_OWNER);
     }
 #[no_mangle]
 pub unsafe extern "C" fn hugetlb_dup_vma_private(vma: *mut vm_area_struct) {
-    void hugetlb_dup_vma_private(struct vm_area_struct *vma)
-    {
     VM_BUG_ON_VMA(!is_vm_hugetlb_page(vma), vma);
 //
 // Clear vm_private_data
@@ -1056,9 +1266,10 @@ pub unsafe extern "C" fn hugetlb_dup_vma_private(vma: *mut vm_area_struct) {
 // not guaranteed to succeed, even if read-only.
 //
     if (vma.vm_flags & VM_MAYSHARE) {
-    struct hugetlb_vma_lock *vma_lock = vma.vm_private_data;
-    if (vma_lock && vma_lock.vma != vma)
+    let mut vma_lock = vma.vm_private_data;
+    if (vma_lock && vma_lock.vma != vma) {
     vma.vm_private_data = core::ptr::null_mut();
+    }
     } else {
     vma.vm_private_data = core::ptr::null_mut();
     }
@@ -1072,8 +1283,6 @@ pub unsafe extern "C" fn hugetlb_dup_vma_private(vma: *mut vm_area_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn clear_vma_resv_huge_pages(vma: *mut vm_area_struct) {
-    void clear_vma_resv_huge_pages(struct vm_area_struct *vma)
-    {
 //
 // Clear the old hugetlb private page reservation.
 // It has already been transferred to new_vma.
@@ -1086,7 +1295,7 @@ pub unsafe extern "C" fn clear_vma_resv_huge_pages(vma: *mut vm_area_struct) {
 // the reservation still lives on in new_vma, so simply decrement the
 // ref here and remove the resv_map reference from this vma.
 //
-    struct resv_map *reservations = vma_resv_map(vma);
+    let mut reservations = vma_resv_map(vma);
     if (reservations && is_vma_resv_set(vma, HPAGE_RESV_OWNER)) {
     resv_map_put_hugetlb_cgroup_uncharge_info(reservations);
     kref_put(&reservations.refs, resv_map_release);
@@ -1095,82 +1304,83 @@ pub unsafe extern "C" fn clear_vma_resv_huge_pages(vma: *mut vm_area_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn enqueue_hugetlb_folio(h: *mut hstate, folio: *mut folio) {
-    static void enqueue_hugetlb_folio(struct hstate *h, struct folio *folio)
-    {
-    let mut nid: c_int = folio_nid(folio);
+pub static mut nid: c_int = 0;
     lockdep_assert_held(&hugetlb_lock);
     VM_BUG_ON_FOLIO(folio_ref_count(folio), folio);
     list_move(&folio.lru, &h.hugepage_freelists[nid]);
-    h.free_huge_pages++;
+    h.free_huge_pages += 1;
     h.free_huge_pages_node[nid]++;
     folio_set_hugetlb_freed(folio);
     }
-    static struct folio *dequeue_hugetlb_folio_node_exact(struct hstate *h,
-    int nid)
-    {
-    struct folio *folio;
-    let mut pin: bool = !!(current.flags & PF_MEMALLOC_PIN);
+#[no_mangle]
+pub unsafe extern "C" fn dequeue_hugetlb_folio_node_exact(h: *mut hstate, nid: c_int) -> *mut c_void {
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut pin: bool = false;
     lockdep_assert_held(&hugetlb_lock);
     list_for_each_entry(folio, &h.hugepage_freelists[nid], lru) {
-    if (pin && !folio_is_longterm_pinnable(folio))
+    if (pin && !folio_is_longterm_pinnable(folio)) {
     continue;
-    if (folio_test_hwpoison(folio))
+    }
+    if (folio_test_hwpoison(folio)) {
     continue;
-    if (is_migrate_isolate_page(&folio.page))
+    }
+    if (is_migrate_isolate_page(&folio.page)) {
     continue;
+    }
     list_move(&folio.lru, &h.hugepage_activelist);
     folio_ref_unfreeze(folio, 1);
     folio_clear_hugetlb_freed(folio);
-    h.free_huge_pages--;
+    h.free_huge_pages -= 1;
     h.free_huge_pages_node[nid]--;
     return folio;
     }
     return core::ptr::null_mut();
     }
-    static struct folio *dequeue_hugetlb_folio_nodemask(struct hstate *h, gfp_t gfp_mask,
-    int nid, nodemask_t *nmask)
-    {
-    unsigned int cpuset_mems_cookie;
-    struct zonelist *zonelist;
-    struct zone *zone;
-    struct zoneref *z;
-    let mut node: c_int = NUMA_NO_NODE;
+#[no_mangle]
+pub unsafe extern "C" fn dequeue_hugetlb_folio_nodemask(h: *mut hstate, gfp_mask: gfp_t, nid: c_int, nmask: *mut nodemask_t) -> *mut c_void {
+    let mut cpuset_mems_cookie = 0;
+pub static mut zonelist: *mut c_void = core::ptr::null_mut();
+pub static mut zone: *mut c_void = core::ptr::null_mut();
+pub static mut z: *mut c_void = core::ptr::null_mut();
+pub static mut node: c_int = 0;
 // 'nid' should not be NUMA_NO_NODE. Try to catch any misuse of it and rectifiy.
-    if (nid == NUMA_NO_NODE)
+    if (nid == NUMA_NO_NODE) {
     nid = numa_node_id();
+    }
     zonelist = node_zonelist(nid, gfp_mask);
-    retry_cpuset:
+// label;
     cpuset_mems_cookie = read_mems_allowed_begin();
     for_each_zone_zonelist_nodemask(zone, z, zonelist, gfp_zone(gfp_mask), nmask) {
-    struct folio *folio;
-    if (!cpuset_zone_allowed(zone, gfp_mask))
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    if (!cpuset_zone_allowed(zone, gfp_mask)) {
     continue;
+    }
 //
 // no need to ask again on the same node. Pool is node rather than
 // zone aware
 //
-    if (zone_to_nid(zone) == node)
+    if (zone_to_nid(zone) == node) {
     continue;
+    }
     node = zone_to_nid(zone);
     folio = dequeue_hugetlb_folio_node_exact(h, node);
-    if (folio)
+    if (folio) {
     return folio;
     }
-    if (unlikely(read_mems_allowed_retry(cpuset_mems_cookie)))
-    goto retry_cpuset;
+    }
+    if (unlikely(read_mems_allowed_retry(cpuset_mems_cookie))) {
+// goto;
+    }
     return core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn available_huge_pages(h: *mut hstate) -> c_ulong {
-    static unsigned long available_huge_pages(struct hstate *h)
-    {
     return h.free_huge_pages - h.resv_huge_pages;
     }
-    static struct folio *dequeue_hugetlb_folio(struct hstate *h, gfp_t gfp_mask,
-    struct mempolicy_interpreted *mpoli)
-    {
-    nodemask_t *nodemask = mpoli.nodemask;
-    struct folio *folio = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn dequeue_hugetlb_folio(h: *mut hstate, gfp_mask: gfp_t, mpoli: *mut mempolicy_interpreted) -> *mut c_void {
+    let mut nodemask = mpoli.nodemask;
+    let mut folio = core::ptr::null_mut();
     if (mpoli.mode == MPOL_PREFERRED_MANY) {
     folio = dequeue_hugetlb_folio_nodemask(h, gfp_mask,
     mpoli.nid,
@@ -1186,23 +1396,25 @@ unsafe extern "C" fn available_huge_pages(h: *mut hstate) -> c_ulong {
     return folio;
     }
 
-    static struct folio *alloc_gigantic_frozen_folio(int order, gfp_t gfp_mask,
-    int nid, nodemask_t *nodemask)
-    {
-    struct folio *folio;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_gigantic_frozen_folio(order: c_int, gfp_mask: gfp_t, nid: c_int, nodemask: *mut nodemask_t) -> *mut c_void {
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     folio = hugetlb_cma_alloc_frozen_folio(order, gfp_mask, nid, nodemask);
-    if (folio)
+    if (folio) {
     return folio;
-    if (hugetlb_cma_exclusive_alloc())
+    }
+    if (hugetlb_cma_exclusive_alloc()) {
     return core::ptr::null_mut();
-    folio = (struct folio *)alloc_contig_frozen_pages(1 << order, gfp_mask,
+    }
+    folio = alloc_contig_frozen_pages(1 << order, gfp_mask,
     nid, nodemask);
     return folio;
     }
 
-    static struct folio *alloc_gigantic_frozen_folio(int order, gfp_t gfp_mask, int nid,
-    nodemask_t *nodemask)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: alloc_gigantic_frozen_folio
+pub unsafe extern "C" fn alloc_gigantic_frozen_folio_dup(order: c_int, gfp_mask: gfp_t, nid: c_int, nodemask: *mut nodemask_t) -> *mut c_void {
     return core::ptr::null_mut();
     }
 
@@ -1214,23 +1426,23 @@ unsafe extern "C" fn available_huge_pages(h: *mut hstate) -> c_ulong {
 //
 // Must be called with hugetlb lock held.
 //
-    void remove_hugetlb_folio(struct hstate *h, struct folio *folio,
-    bool adjust_surplus)
-    {
-    let mut nid: c_int = folio_nid(folio);
+#[no_mangle]
+pub unsafe extern "C" fn remove_hugetlb_folio(h: *mut hstate, folio: *mut folio, adjust_surplus: bool) {
+pub static mut nid: c_int = 0;
     VM_BUG_ON_FOLIO(hugetlb_cgroup_from_folio(folio), folio);
     VM_BUG_ON_FOLIO(hugetlb_cgroup_from_folio_rsvd(folio), folio);
     lockdep_assert_held(&hugetlb_lock);
-    if (hstate_is_gigantic_no_runtime(h))
+    if (hstate_is_gigantic_no_runtime(h)) {
     return;
+    }
     list_del(&folio.lru);
     if (folio_test_hugetlb_freed(folio)) {
     folio_clear_hugetlb_freed(folio);
-    h.free_huge_pages--;
+    h.free_huge_pages -= 1;
     h.free_huge_pages_node[nid]--;
     }
     if (adjust_surplus) {
-    h.surplus_huge_pages--;
+    h.surplus_huge_pages -= 1;
     h.surplus_huge_pages_node[nid]--;
     }
 //
@@ -1238,22 +1450,22 @@ unsafe extern "C" fn available_huge_pages(h: *mut hstate) -> c_ulong {
 // pages.  Otherwise, someone (memory error handling) may try to write
 // to tail struct pages.
 //
-    if (!folio_test_hugetlb_vmemmap_optimized(folio))
+    if (!folio_test_hugetlb_vmemmap_optimized(folio)) {
     __folio_clear_hugetlb(folio);
-    h.nr_huge_pages--;
+    }
+    h.nr_huge_pages -= 1;
     h.nr_huge_pages_node[nid]--;
     }
-    void add_hugetlb_folio(struct hstate *h, struct folio *folio,
-    bool adjust_surplus)
-    {
-    let mut nid: c_int = folio_nid(folio);
+#[no_mangle]
+pub unsafe extern "C" fn add_hugetlb_folio(h: *mut hstate, folio: *mut folio, adjust_surplus: bool) {
+pub static mut nid: c_int = 0;
     VM_BUG_ON_FOLIO(!folio_test_hugetlb_vmemmap_optimized(folio), folio);
     lockdep_assert_held(&hugetlb_lock);
     INIT_LIST_HEAD(&folio.lru);
-    h.nr_huge_pages++;
+    h.nr_huge_pages += 1;
     h.nr_huge_pages_node[nid]++;
     if (adjust_surplus) {
-    h.surplus_huge_pages++;
+    h.surplus_huge_pages += 1;
     h.surplus_huge_pages_node[nid]++;
     }
     __folio_set_hugetlb(folio);
@@ -1266,18 +1478,19 @@ unsafe extern "C" fn available_huge_pages(h: *mut hstate) -> c_ulong {
     arch_clear_hugetlb_flags(folio);
     enqueue_hugetlb_folio(h, folio);
     }
-    static void __update_and_free_hugetlb_folio(struct hstate *h,
-    struct folio *folio)
-    {
-    let mut clear_flag: bool = folio_test_hugetlb_vmemmap_optimized(folio);
-    if (hstate_is_gigantic_no_runtime(h))
+#[no_mangle]
+pub unsafe extern "C" fn __update_and_free_hugetlb_folio(h: *mut hstate, folio: *mut folio) {
+pub static mut clear_flag: bool = false;
+    if (hstate_is_gigantic_no_runtime(h)) {
     return;
+    }
 //
 // If we don't know which subpages are hwpoisoned, we can't free
 // the hugepage, so it's leaked intentionally.
 //
-    if (folio_test_hugetlb_raw_hwp_unreliable(folio))
+    if (folio_test_hugetlb_raw_hwp_unreliable(folio)) {
     return;
+    }
 //
 // If folio is not vmemmap optimized (!clear_flag), then the folio
 // is no longer identified as a hugetlb page.  hugetlb_vmemmap_restore_folio
@@ -1307,13 +1520,16 @@ unsafe extern "C" fn available_huge_pages(h: *mut hstate) -> c_ulong {
 // Move PageHWPoison flag from head page to the raw error pages,
 // which makes any healthy subpages reusable.
 //
-    if (unlikely(folio_test_hwpoison(folio)))
+    if (unlikely(folio_test_hwpoison(folio))) {
     folio_clear_hugetlb_hwpoison(folio);
+    }
     VM_BUG_ON_FOLIO(folio_ref_count(folio), folio);
-    if (folio_test_hugetlb_cma(folio))
+    if (folio_test_hugetlb_cma(folio)) {
     hugetlb_cma_free_frozen_folio(folio);
-    else
+    }
+    else {
     free_frozen_pages(&folio.page, folio_order(folio));
+    }
     }
 //
 // As update_and_free_hugetlb_folio() can be called under any context, so we cannot
@@ -1326,18 +1542,15 @@ unsafe extern "C" fn available_huge_pages(h: *mut hstate) -> c_ulong {
 // to be cleared in free_hpage_workfn() anyway, it is reused as the llist_node
 // structure of a lockless linked list of huge pages to be freed.
 //
-    static LLIST_HEAD(hpage_freelist);
+pub static mut hpage_freelist: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn free_hpage_workfn(work: *mut work_struct) {
-    static void free_hpage_workfn(struct work_struct *work)
-    {
-    struct llist_node *node;
+pub static mut node: *mut c_void = core::ptr::null_mut();
     node = llist_del_all(&hpage_freelist);
     while (node) {
-    struct folio *folio;
-    struct hstate *h;
-    folio = container_of((struct address_space **)node,
-    struct folio, mapping);
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut h: *mut c_void = core::ptr::null_mut();
+    folio = container_of!(node, folio, mapping);
     node = node.next;
     folio.mapping = core::ptr::null_mut();
 //
@@ -1351,17 +1564,15 @@ unsafe extern "C" fn free_hpage_workfn(work: *mut work_struct) {
     cond_resched();
     }
     }
-    static DECLARE_WORK(free_hpage_work, free_hpage_workfn);
+pub static mut free_hpage_work: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn flush_free_hpage_work(h: *mut hstate) {
-    static inline void flush_free_hpage_work(struct hstate *h)
-    {
-    if (hugetlb_vmemmap_optimizable(h))
+    if (hugetlb_vmemmap_optimizable(h)) {
     flush_work(&free_hpage_work);
     }
-    static void update_and_free_hugetlb_folio(struct hstate *h, struct folio *folio,
-    bool atomic)
-    {
+    }
+#[no_mangle]
+pub unsafe extern "C" fn update_and_free_hugetlb_folio(h: *mut hstate, folio: *mut folio, atomic: bool) {
     if (!folio_test_hugetlb_vmemmap_optimized(folio) || !atomic) {
     __update_and_free_hugetlb_folio(h, folio);
     return;
@@ -1373,14 +1584,14 @@ pub unsafe extern "C" fn flush_free_hpage_work(h: *mut hstate) {
 // empty. Otherwise, schedule_work() had been called but the workfn
 // hasn't retrieved the list yet.
 //
-    if (llist_add((struct llist_node *)&folio.mapping, &hpage_freelist))
+    if (llist_add(&folio.mapping, &hpage_freelist)) {
     schedule_work(&free_hpage_work);
     }
-    static void bulk_vmemmap_restore_error(struct hstate *h,
-    struct list_head *folio_list,
-    struct list_head *non_hvo_folios)
-    {
-    struct folio *folio, *t_folio;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn bulk_vmemmap_restore_error(h: *mut hstate, folio_list: *mut list_head, non_hvo_folios: *mut list_head) {
+    let mut folio = core::ptr::null_mut();
+    let mut t_folio = core::ptr::null_mut();
     if (!list_empty(non_hvo_folios)) {
 //
 // Free any restored hugetlb pages so that restore of the
@@ -1408,8 +1619,9 @@ pub unsafe extern "C" fn flush_free_hpage_work(h: *mut hstate) {
 // If are able to restore vmemmap and free one hugetlb page, we
 // quit processing the list to retry the bulk operation.
 //
-    list_for_each_entry_safe(folio, t_folio, folio_list, lru)
+    list_for_each_entry_safe(folio, t_folio, folio_list, lru) {
     if (hugetlb_vmemmap_restore_folio(h, folio)) {
+    }
     list_del(&folio.lru);
     spin_lock_irq(&hugetlb_lock);
     add_hugetlb_folio(h, folio, true);
@@ -1425,22 +1637,22 @@ pub unsafe extern "C" fn flush_free_hpage_work(h: *mut hstate) {
     }
     }
     }
-    static void update_and_free_pages_bulk(struct hstate *h,
-    struct list_head *folio_list)
-    {
-    long ret;
-    struct folio *folio, *t_folio;
-    LIST_HEAD(non_hvo_folios);
+#[no_mangle]
+pub unsafe extern "C" fn update_and_free_pages_bulk(h: *mut hstate, folio_list: *mut list_head) {
+    let mut ret = 0;
+    let mut folio = core::ptr::null_mut();
+    let mut t_folio = core::ptr::null_mut();
+pub static mut non_hvo_folios: usize = 0;
 //
 // First allocate required vmemmmap (if necessary) for all folios.
 // Carefully handle errors and free up any available hugetlb pages
 // in an effort to make forward progress.
 //
-    retry:
+// label;
     ret = hugetlb_vmemmap_restore_folios(h, folio_list, &non_hvo_folios);
     if (ret < 0) {
     bulk_vmemmap_restore_error(h, folio_list, &non_hvo_folios);
-    goto retry;
+// goto;
     }
 //
 // At this point, list should be empty, ret should be >= 0 and there
@@ -1453,8 +1665,9 @@ pub unsafe extern "C" fn flush_free_hpage_work(h: *mut hstate) {
     VM_WARN_ON(ret < 0);
     if (!list_empty(&non_hvo_folios) && ret) {
     spin_lock_irq(&hugetlb_lock);
-    list_for_each_entry(folio, &non_hvo_folios, lru)
+    list_for_each_entry(folio, &non_hvo_folios, lru) {
     __folio_clear_hugetlb(folio);
+    }
     spin_unlock_irq(&hugetlb_lock);
     }
     list_for_each_entry_safe(folio, t_folio, &non_hvo_folios, lru) {
@@ -1462,33 +1675,33 @@ pub unsafe extern "C" fn flush_free_hpage_work(h: *mut hstate) {
     cond_resched();
     }
     }
-    struct hstate *size_to_hstate(unsigned long size)
-    {
-    struct hstate *h;
+#[no_mangle]
+pub unsafe extern "C" fn size_to_hstate(size: c_ulong) -> *mut c_void {
+pub static mut h: *mut c_void = core::ptr::null_mut();
     for_each_hstate(h) {
-    if (huge_page_size(h) == size)
+    if (huge_page_size(h) == size) {
     return h;
+    }
     }
     return core::ptr::null_mut();
     }
 #[no_mangle]
 pub unsafe extern "C" fn free_huge_folio(folio: *mut folio) {
-    void free_huge_folio(struct folio *folio)
-    {
 //
 // Can't pass hstate in here because it is called from the
 // generic mm code.
 //
-    struct hstate *h = folio_hstate(folio);
-    let mut nid: c_int = folio_nid(folio);
-    struct hugepage_subpool *spool = hugetlb_folio_subpool(folio);
-    bool restore_reserve;
-    unsigned long flags;
+    let mut h = folio_hstate(folio);
+pub static mut nid: c_int = 0;
+    let mut spool = hugetlb_folio_subpool(folio);
+    let mut restore_reserve = 0;
+    let mut flags = 0;
     VM_BUG_ON_FOLIO(folio_ref_count(folio), folio);
     VM_BUG_ON_FOLIO(folio_mapcount(folio), folio);
     hugetlb_set_folio_subpool(folio, core::ptr::null_mut());
-    if (folio_test_anon(folio))
+    if (folio_test_anon(folio)) {
     __ClearPageAnonExclusive(&folio.page);
+    }
     folio.mapping = core::ptr::null_mut();
     restore_reserve = folio_test_hugetlb_restore_reserve(folio);
     folio_clear_hugetlb_restore_reserve(folio);
@@ -1507,8 +1720,9 @@ pub unsafe extern "C" fn free_huge_folio(folio: *mut folio) {
 // after page is free.  Therefore, force restore_reserve
 // operation.
 //
-    if (hugepage_subpool_put_pages(spool, 1) == 0)
+    if (hugepage_subpool_put_pages(spool, 1) == 0) {
     restore_reserve = true;
+    }
     }
     spin_lock_irqsave(&hugetlb_lock, flags);
     folio_clear_hugetlb_migratable(folio);
@@ -1518,8 +1732,9 @@ pub unsafe extern "C" fn free_huge_folio(folio: *mut folio) {
     pages_per_huge_page(h), folio);
     lruvec_stat_mod_folio(folio, NR_HUGETLB, -pages_per_huge_page(h));
     mem_cgroup_uncharge(folio);
-    if (restore_reserve)
-    h.resv_huge_pages++;
+    if (restore_reserve) {
+    h.resv_huge_pages += 1;
+    }
     if (folio_test_hugetlb_temporary(folio)) {
     remove_hugetlb_folio(h, folio, false);
     spin_unlock_irqrestore(&hugetlb_lock, flags);
@@ -1540,16 +1755,12 @@ pub unsafe extern "C" fn free_huge_folio(folio: *mut folio) {
 //
 #[no_mangle]
 unsafe extern "C" fn account_new_hugetlb_folio(h: *mut hstate, folio: *mut folio) {
-    static void account_new_hugetlb_folio(struct hstate *h, struct folio *folio)
-    {
     lockdep_assert_held(&hugetlb_lock);
-    h.nr_huge_pages++;
+    h.nr_huge_pages += 1;
     h.nr_huge_pages_node[folio_nid(folio)]++;
     }
 #[no_mangle]
 pub unsafe extern "C" fn init_new_hugetlb_folio(folio: *mut folio) {
-    void init_new_hugetlb_folio(struct folio *folio)
-    {
     __folio_set_hugetlb(folio);
     INIT_LIST_HEAD(&folio.lru);
     hugetlb_set_folio_subpool(folio, core::ptr::null_mut());
@@ -1563,20 +1774,21 @@ pub unsafe extern "C" fn init_new_hugetlb_folio(folio: *mut folio) {
 // stable.  Due to locking order, we can only trylock_write.  If we can
 // not get the lock, simply return NULL to caller.
 //
-    struct address_space *hugetlb_folio_mapping_lock_write(struct folio *folio)
-    {
-    struct address_space *mapping = folio_mapping(folio);
-    if (!mapping)
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_folio_mapping_lock_write(folio: *mut folio) -> *mut c_void {
+    let mut mapping = folio_mapping(folio);
+    if (!mapping) {
     return mapping;
-    if (i_mmap_trylock_write(mapping))
+    }
+    if (i_mmap_trylock_write(mapping)) {
     return mapping;
+    }
     return core::ptr::null_mut();
     }
-    static struct folio *alloc_buddy_frozen_folio(int order, gfp_t gfp_mask,
-    int nid, nodemask_t *nmask, nodemask_t *node_alloc_noretry)
-    {
-    struct folio *folio;
-    let mut alloc_try_hard: bool = true;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_buddy_frozen_folio(order: c_int, gfp_mask: gfp_t, nid: c_int, nmask: *mut nodemask_t, node_alloc_noretry: *mut nodemask_t) -> *mut c_void {
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut alloc_try_hard: bool = true;
 //
 // By default we always try hard to allocate the folio with
 // __GFP_RETRY_MAYFAIL flag.  However, if we are allocating folios in
@@ -1584,26 +1796,30 @@ pub unsafe extern "C" fn init_new_hugetlb_folio(folio: *mut folio) {
 // failed, do not continue to try hard on the same node.  Use the
 // node_alloc_noretry bitmap to manage this state information.
 //
-    if (node_alloc_noretry && node_isset(nid, *node_alloc_noretry))
+    if (node_alloc_noretry && node_isset(nid, *node_alloc_noretry)) {
     alloc_try_hard = false;
-    if (alloc_try_hard)
+    }
+    if (alloc_try_hard) {
     gfp_mask |= __GFP_RETRY_MAYFAIL;
-    folio = (struct folio *)__alloc_frozen_pages(gfp_mask, order, nid, nmask,
+    }
+    folio = __alloc_frozen_pages(gfp_mask, order, nid, nmask,
     ALLOC_DEFAULT);
 //
 // If we did not specify __GFP_RETRY_MAYFAIL, but still got a
 // folio this indicates an overall state change.  Clear bit so
 // that we resume normal 'try hard' allocations.
 //
-    if (node_alloc_noretry && folio && !alloc_try_hard)
+    if (node_alloc_noretry && folio && !alloc_try_hard) {
     node_clear(nid, *node_alloc_noretry);
+    }
 //
 // If we tried hard to get a folio but failed, set bit so that
 // subsequent attempts will not try as hard until there is an
 // overall state change.
 //
-    if (node_alloc_noretry && !folio && alloc_try_hard)
+    if (node_alloc_noretry && !folio && alloc_try_hard) {
     node_set(nid, *node_alloc_noretry);
+    }
     if (!folio) {
     __count_vm_event(HTLB_BUDDY_PGALLOC_FAIL);
     return core::ptr::null_mut();
@@ -1611,21 +1827,23 @@ pub unsafe extern "C" fn init_new_hugetlb_folio(folio: *mut folio) {
     __count_vm_event(HTLB_BUDDY_PGALLOC);
     return folio;
     }
-    static struct folio *only_alloc_fresh_hugetlb_folio(struct hstate *h,
-    gfp_t gfp_mask, int nid, nodemask_t *nmask,
-    nodemask_t *node_alloc_noretry)
-    {
-    struct folio *folio;
-    let mut order: c_int = huge_page_order(h);
-    if (nid == NUMA_NO_NODE)
+#[no_mangle]
+pub unsafe extern "C" fn only_alloc_fresh_hugetlb_folio(h: *mut hstate, gfp_mask: gfp_t, nid: c_int, nmask: *mut nodemask_t, node_alloc_noretry: *mut nodemask_t) -> *mut c_void {
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut order: c_int = 0;
+    if (nid == NUMA_NO_NODE) {
     nid = numa_mem_id();
-    if (order_is_gigantic(order))
+    }
+    if (order_is_gigantic(order)) {
     folio = alloc_gigantic_frozen_folio(order, gfp_mask, nid, nmask);
-    else
+    }
+    else {
     folio = alloc_buddy_frozen_folio(order, gfp_mask, nid, nmask,
     node_alloc_noretry);
-    if (folio)
+    }
+    if (folio) {
     init_new_hugetlb_folio(folio);
+    }
     return folio;
     }
 //
@@ -1635,20 +1853,20 @@ pub unsafe extern "C" fn init_new_hugetlb_folio(folio: *mut folio) {
 // Note that returned folio is 'frozen':  ref count of head page and all tail
 // pages is zero, and the accounting must be done in the caller.
 //
-    static struct folio *alloc_fresh_hugetlb_folio(struct hstate *h,
-    gfp_t gfp_mask, int nid, nodemask_t *nmask)
-    {
-    struct folio *folio;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_fresh_hugetlb_folio(h: *mut hstate, gfp_mask: gfp_t, nid: c_int, nmask: *mut nodemask_t) -> *mut c_void {
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     folio = only_alloc_fresh_hugetlb_folio(h, gfp_mask, nid, nmask, core::ptr::null_mut());
-    if (folio)
+    if (folio) {
     hugetlb_vmemmap_optimize_folio(h, folio);
+    }
     return folio;
     }
-    void prep_and_add_allocated_folios(struct hstate *h,
-    struct list_head *folio_list)
-    {
-    unsigned long flags;
-    struct folio *folio, *tmp_f;
+#[no_mangle]
+pub unsafe extern "C" fn prep_and_add_allocated_folios(h: *mut hstate, folio_list: *mut list_head) {
+    let mut flags = 0;
+    let mut folio = core::ptr::null_mut();
+    let mut tmp_f = core::ptr::null_mut();
 // Send list for bulk vmemmap optimization processing
     hugetlb_vmemmap_optimize_folios(h, folio_list);
 // Add all new pool pages to free lists in one lock cycle
@@ -1663,19 +1881,18 @@ pub unsafe extern "C" fn init_new_hugetlb_folio(folio: *mut folio) {
 // Allocates a fresh hugetlb page in a node interleaved manner.  The page
 // will later be added to the appropriate hugetlb pool.
 //
-    static struct folio *alloc_pool_huge_folio(struct hstate *h,
-    nodemask_t *nodes_allowed,
-    nodemask_t *node_alloc_noretry,
-    int *next_node)
-    {
-    let mut gfp_mask: gfp_t = htlb_alloc_mask(h) | __GFP_THISNODE;
-    int nr_nodes, node;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_pool_huge_folio(h: *mut hstate, nodes_allowed: *mut nodemask_t, node_alloc_noretry: *mut nodemask_t, next_node: *mut c_int) -> *mut c_void {
+pub static mut gfp_mask: gfp_t = 0;
+    let mut nr_nodes = 0;
+    let mut node = 0;
     for_each_node_mask_to_alloc(next_node, nr_nodes, node, nodes_allowed) {
-    struct folio *folio;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     folio = only_alloc_fresh_hugetlb_folio(h, gfp_mask, node,
     nodes_allowed, node_alloc_noretry);
-    if (folio)
+    if (folio) {
     return folio;
+    }
     }
     return core::ptr::null_mut();
     }
@@ -1686,11 +1903,11 @@ pub unsafe extern "C" fn init_new_hugetlb_folio(folio: *mut folio) {
 // an additional call to free the page to low level allocators.
 // Called with hugetlb_lock locked.
 //
-    static struct folio *remove_pool_hugetlb_folio(struct hstate *h,
-    nodemask_t *nodes_allowed, bool acct_surplus)
-    {
-    int nr_nodes, node;
-    struct folio *folio = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn remove_pool_hugetlb_folio(h: *mut hstate, nodes_allowed: *mut nodemask_t, acct_surplus: bool) -> *mut c_void {
+    let mut nr_nodes = 0;
+    let mut node = 0;
+    let mut folio = core::ptr::null_mut();
     lockdep_assert_held(&hugetlb_lock);
     for_each_node_mask_to_free(h, nr_nodes, node, nodes_allowed) {
 //
@@ -1699,8 +1916,7 @@ pub unsafe extern "C" fn init_new_hugetlb_folio(folio: *mut folio) {
 //
     if ((!acct_surplus || h.surplus_huge_pages_node[node]) &&
     !list_empty(&h.hugepage_freelists[node])) {
-    folio = list_entry(h.hugepage_freelists[node].next,
-    struct folio, lru);
+    folio = list_entry(h.hugepage_freelists[node].next, folio, lru);
     remove_hugetlb_folio(h, folio, acct_surplus);
     break;
     }
@@ -1723,23 +1939,23 @@ pub unsafe extern "C" fn init_new_hugetlb_folio(folio: *mut folio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn dissolve_free_hugetlb_folio(folio: *mut folio) -> c_int {
-    int dissolve_free_hugetlb_folio(struct folio *folio)
-    {
-    let mut rc: c_int = -EBUSY;
-    retry:
+pub static mut rc: c_int = 0;
+// label;
 // Not to disrupt normal path by vainly holding hugetlb_lock
-    if (!folio_test_hugetlb(folio))
+    if (!folio_test_hugetlb(folio)) {
     return 0;
+    }
     spin_lock_irq(&hugetlb_lock);
     if (!folio_test_hugetlb(folio)) {
     rc = 0;
-    goto out;
+// goto;
     }
     if (!folio_ref_count(folio)) {
-    struct hstate *h = folio_hstate(folio);
-    let mut adjust_surplus: bool = false;
-    if (!available_huge_pages(h))
-    goto out;
+    let mut h = folio_hstate(folio);
+pub static mut adjust_surplus: bool = false;
+    if (!available_huge_pages(h)) {
+// goto;
+    }
 //
 // We should make sure that the page is already on the free list
 // when it is dissolved.
@@ -1755,13 +1971,15 @@ pub unsafe extern "C" fn dissolve_free_hugetlb_folio(folio: *mut folio) -> c_int
 // If we seize this opportunity, it is an optimization
 // for increasing the success rate of dissolving page.
 //
-    goto retry;
+// goto;
     }
-    if (h.surplus_huge_pages_node[folio_nid(folio)])
+    if (h.surplus_huge_pages_node[folio_nid(folio)]) {
     adjust_surplus = true;
+    }
     remove_hugetlb_folio(h, folio, adjust_surplus);
-    if (!adjust_surplus)
-    h.max_huge_pages--;
+    if (!adjust_surplus) {
+    h.max_huge_pages -= 1;
+    }
     spin_unlock_irq(&hugetlb_lock);
 //
 // Normally update_and_free_hugtlb_folio will allocate required vmemmmap
@@ -1780,9 +1998,10 @@ pub unsafe extern "C" fn dissolve_free_hugetlb_folio(folio: *mut folio) -> c_int
     if (rc) {
     spin_lock_irq(&hugetlb_lock);
     add_hugetlb_folio(h, folio, adjust_surplus);
-    if (!adjust_surplus)
-    h.max_huge_pages++;
-    goto out;
+    if (!adjust_surplus) {
+    h.max_huge_pages += 1;
+    }
+// goto;
     }
     } else {
     rc = 0;
@@ -1790,7 +2009,7 @@ pub unsafe extern "C" fn dissolve_free_hugetlb_folio(folio: *mut folio) -> c_int
     update_and_free_hugetlb_folio(h, folio, false);
     return rc;
     }
-    out:
+// label;
     spin_unlock_irq(&hugetlb_lock);
     return rc;
     }
@@ -1804,42 +2023,45 @@ pub unsafe extern "C" fn dissolve_free_hugetlb_folio(folio: *mut folio) -> c_int
 //
 #[no_mangle]
 pub unsafe extern "C" fn dissolve_free_hugetlb_folios(start_pfn: c_ulong, end_pfn: c_ulong) -> c_int {
-    int dissolve_free_hugetlb_folios(unsigned long start_pfn, unsigned long end_pfn)
-    {
-    unsigned long pfn;
-    struct folio *folio;
-    let mut rc: c_int = 0;
-    unsigned int order;
-    struct hstate *h;
-    if (!hugepages_supported())
+    let mut pfn = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut rc: c_int = 0;
+    let mut order = 0;
+pub static mut h: *mut c_void = core::ptr::null_mut();
+    if (!hugepages_supported()) {
     return rc;
+    }
     order = huge_page_order(&default_hstate);
-    for_each_hstate(h)
+    for_each_hstate(h) {
     order = min(order, huge_page_order(h));
-    for (pfn = start_pfn; pfn < end_pfn; pfn += 1 << order) {
+    }
+    while (pfn < end_pfn) {
     folio = pfn_folio(pfn);
     rc = dissolve_free_hugetlb_folio(folio);
-    if (rc)
+    if (rc) {
     break;
+    }
     }
     return rc;
     }
 //
 // Allocates a fresh surplus page from the page allocator.
 //
-    static struct folio *alloc_surplus_hugetlb_folio(struct hstate *h,
-    gfp_t gfp_mask,	int nid, nodemask_t *nmask)
-    {
-    struct folio *folio = core::ptr::null_mut();
-    if (hstate_is_gigantic_no_runtime(h))
+#[no_mangle]
+pub unsafe extern "C" fn alloc_surplus_hugetlb_folio(h: *mut hstate, gfp_mask: gfp_t, nid: c_int, nmask: *mut nodemask_t) -> *mut c_void {
+    let mut folio = core::ptr::null_mut();
+    if (hstate_is_gigantic_no_runtime(h)) {
     return core::ptr::null_mut();
+    }
     spin_lock_irq(&hugetlb_lock);
-    if (h.surplus_huge_pages >= h.nr_overcommit_huge_pages)
-    goto out_unlock;
+    if (h.surplus_huge_pages >= h.nr_overcommit_huge_pages) {
+// goto;
+    }
     spin_unlock_irq(&hugetlb_lock);
     folio = alloc_fresh_hugetlb_folio(h, gfp_mask, nid, nmask);
-    if (!folio)
+    if (!folio) {
     return core::ptr::null_mut();
+    }
     spin_lock_irq(&hugetlb_lock);
 //
 // nr_huge_pages needs to be adjusted within the same lock cycle
@@ -1860,21 +2082,22 @@ pub unsafe extern "C" fn dissolve_free_hugetlb_folios(start_pfn: c_ulong, end_pf
     free_huge_folio(folio);
     return core::ptr::null_mut();
     }
-    h.surplus_huge_pages++;
+    h.surplus_huge_pages += 1;
     h.surplus_huge_pages_node[folio_nid(folio)]++;
-    out_unlock:
+// label;
     spin_unlock_irq(&hugetlb_lock);
     return folio;
     }
-    static struct folio *alloc_migrate_hugetlb_folio(struct hstate *h, gfp_t gfp_mask,
-    int nid, nodemask_t *nmask)
-    {
-    struct folio *folio;
-    if (hstate_is_gigantic(h))
+#[no_mangle]
+pub unsafe extern "C" fn alloc_migrate_hugetlb_folio(h: *mut hstate, gfp_mask: gfp_t, nid: c_int, nmask: *mut nodemask_t) -> *mut c_void {
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    if (hstate_is_gigantic(h)) {
     return core::ptr::null_mut();
+    }
     folio = alloc_fresh_hugetlb_folio(h, gfp_mask, nid, nmask);
-    if (!folio)
+    if (!folio) {
     return core::ptr::null_mut();
+    }
     spin_lock_irq(&hugetlb_lock);
     account_new_hugetlb_folio(h, folio);
     spin_unlock_irq(&hugetlb_lock);
@@ -1887,14 +2110,12 @@ pub unsafe extern "C" fn dissolve_free_hugetlb_folios(start_pfn: c_ulong, end_pf
     folio_set_hugetlb_temporary(folio);
     return folio;
     }
-    static
-    struct folio *alloc_buddy_hugetlb_folio(struct hstate *h,
-    gfp_t gfp_mask, struct mempolicy_interpreted *mpoli)
-    {
-    struct folio *folio = core::ptr::null_mut();
-    nodemask_t *nodemask = mpoli.nodemask;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_buddy_hugetlb_folio(h: *mut hstate, gfp_mask: gfp_t, mpoli: *mut mempolicy_interpreted) -> *mut c_void {
+    let mut folio = core::ptr::null_mut();
+    let mut nodemask = mpoli.nodemask;
     if (mpoli.mode == MPOL_PREFERRED_MANY) {
-    let mut gfp: gfp_t = gfp_mask & ~(__GFP_DIRECT_RECLAIM | __GFP_NOFAIL);
+pub static mut gfp: gfp_t = 0;
     folio = alloc_surplus_hugetlb_folio(h, gfp, mpoli.nid,
     nodemask);
 // Fallback to all nodes if page==NULL
@@ -1906,10 +2127,9 @@ pub unsafe extern "C" fn dissolve_free_hugetlb_folios(start_pfn: c_ulong, end_pf
     }
     return folio;
     }
-    struct folio *alloc_hugetlb_folio_reserve(struct hstate *h, int preferred_nid,
-    nodemask_t *nmask, gfp_t gfp_mask)
-    {
-    struct folio *folio;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_hugetlb_folio_reserve(h: *mut hstate, preferred_nid: c_int, nmask: *mut nodemask_t, gfp_mask: gfp_t) -> *mut c_void {
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     spin_lock_irq(&hugetlb_lock);
     if (!h.resv_huge_pages) {
     spin_unlock_irq(&hugetlb_lock);
@@ -1917,18 +2137,18 @@ pub unsafe extern "C" fn dissolve_free_hugetlb_folios(start_pfn: c_ulong, end_pf
     }
     folio = dequeue_hugetlb_folio_nodemask(h, gfp_mask, preferred_nid,
     nmask);
-    if (folio)
-    h.resv_huge_pages--;
+    if (folio) {
+    h.resv_huge_pages -= 1;
+    }
     spin_unlock_irq(&hugetlb_lock);
     return folio;
     }
 // folio migration callback function
-    struct folio *alloc_hugetlb_folio_nodemask(struct hstate *h, int preferred_nid,
-    nodemask_t *nmask, gfp_t gfp_mask, bool allow_alloc_fallback)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn alloc_hugetlb_folio_nodemask(h: *mut hstate, preferred_nid: c_int, nmask: *mut nodemask_t, gfp_mask: gfp_t, allow_alloc_fallback: bool) -> *mut c_void {
     spin_lock_irq(&hugetlb_lock);
     if (available_huge_pages(h)) {
-    struct folio *folio;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     folio = dequeue_hugetlb_folio_nodemask(h, gfp_mask,
     preferred_nid, nmask);
     if (folio) {
@@ -1938,22 +2158,24 @@ pub unsafe extern "C" fn dissolve_free_hugetlb_folios(start_pfn: c_ulong, end_pf
     }
     spin_unlock_irq(&hugetlb_lock);
 // We cannot fallback to other nodes, as we could break the per-node pool.
-    if (!allow_alloc_fallback)
+    if (!allow_alloc_fallback) {
     gfp_mask |= __GFP_THISNODE;
+    }
     return alloc_migrate_hugetlb_folio(h, gfp_mask, preferred_nid, nmask);
     }
     static nodemask_t *policy_mbind_nodemask(gfp_t gfp)
     {
 
-    struct mempolicy *mpol = get_task_policy(current);
+    let mut mpol = get_task_policy(current);
 //
 // Only enforce MPOL_BIND policy which overlaps with cpuset policy
 // (from policy_nodemask) specifically for hugetlb case
 //
     if (mpol.mode == MPOL_BIND &&
     (apply_policy_zone(mpol, gfp_zone(gfp)) &&
-    cpuset_nodemask_valid_mems_allowed(&mpol.nodes)))
+    cpuset_nodemask_valid_mems_allowed(&mpol.nodes))) {
     return &mpol.nodes;
+    }
 
     return core::ptr::null_mut();
     }
@@ -1963,21 +2185,22 @@ pub unsafe extern "C" fn dissolve_free_hugetlb_folios(start_pfn: c_ulong, end_pf
 //
 #[no_mangle]
 unsafe extern "C" fn gather_surplus_pages(h: *mut hstate, delta: c_long) -> c_int {
-    static int gather_surplus_pages(struct hstate *h, long delta)
-    __must_hold(&hugetlb_lock)
-    {
-    LIST_HEAD(surplus_list);
-    struct folio *folio, *tmp;
-    int ret;
-    long i;
-    long needed, allocated;
-    let mut alloc_ok: bool = true;
+pub static mut surplus_list: usize = 0;
+    let mut folio = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
+    let mut ret = 0;
+    let mut i = 0;
+    let mut needed = 0;
+    let mut allocated = 0;
+pub static mut alloc_ok: bool = true;
     nodemask_t *mbind_nodemask, alloc_nodemask;
     mbind_nodemask = policy_mbind_nodemask(htlb_alloc_mask(h));
-    if (mbind_nodemask)
+    if (mbind_nodemask) {
     nodes_and(alloc_nodemask, *mbind_nodemask, cpuset_current_mems_allowed);
-    else
+    }
+    else {
     alloc_nodemask = cpuset_current_mems_allowed;
+    }
     lockdep_assert_held(&hugetlb_lock);
     needed = (h.resv_huge_pages + delta) - h.free_huge_pages;
     if (needed <= 0) {
@@ -1986,9 +2209,9 @@ unsafe extern "C" fn gather_surplus_pages(h: *mut hstate, delta: c_long) -> c_in
     }
     allocated = 0;
     ret = -ENOMEM;
-    retry:
+// label;
     spin_unlock_irq(&hugetlb_lock);
-    for (i = 0; i < needed; i++) {
+    while (i < needed) {
     folio = core::ptr::null_mut();
 //
 // It is okay to use NUMA_NO_NODE because we use numa_mem_id()
@@ -2012,14 +2235,15 @@ unsafe extern "C" fn gather_surplus_pages(h: *mut hstate, delta: c_long) -> c_in
     needed = (h.resv_huge_pages + delta) -
     (h.free_huge_pages + allocated);
     if (needed > 0) {
-    if (alloc_ok)
-    goto retry;
+    if (alloc_ok) {
+// goto;
+    }
 //
 // We were not able to allocate enough pages to
 // satisfy the entire reservation so we free what
 // we've allocated so far.
 //
-    goto free;
+// goto;
     }
 //
 // The surplus_list now contains _at_least_ the number of extra pages
@@ -2034,19 +2258,21 @@ unsafe extern "C" fn gather_surplus_pages(h: *mut hstate, delta: c_long) -> c_in
     ret = 0;
 // Free the needed pages to the hugetlb pool
     list_for_each_entry_safe(folio, tmp, &surplus_list, lru) {
-    if ((--needed) < 0)
+    if ((--needed) < 0) {
     break;
+    }
 // Add the page to the hugetlb allocator
     enqueue_hugetlb_folio(h, folio);
     }
-    free:
+// label;
     spin_unlock_irq(&hugetlb_lock);
 //
 // Free unnecessary surplus pages to the buddy allocator.
 // Pages have no ref count, call free_huge_folio directly.
 //
-    list_for_each_entry_safe(folio, tmp, &surplus_list, lru)
+    list_for_each_entry_safe(folio, tmp, &surplus_list, lru) {
     free_huge_folio(folio);
+    }
     spin_lock_irq(&hugetlb_lock);
     return ret;
     }
@@ -2058,16 +2284,16 @@ unsafe extern "C" fn gather_surplus_pages(h: *mut hstate, delta: c_long) -> c_in
 // 2) Free any unused surplus pages that may have been allocated to satisfy
 // the reservation.  As many as unused_resv_pages may be freed.
 //
-    static void return_unused_surplus_pages(struct hstate *h,
-    unsigned long unused_resv_pages)
-    {
-    unsigned long nr_pages;
-    LIST_HEAD(page_list);
+#[no_mangle]
+pub unsafe extern "C" fn return_unused_surplus_pages(h: *mut hstate, unused_resv_pages: c_ulong) {
+    let mut nr_pages = 0;
+pub static mut page_list: usize = 0;
     lockdep_assert_held(&hugetlb_lock);
 // Uncommit the reservation
     h.resv_huge_pages -= unused_resv_pages;
-    if (hstate_is_gigantic_no_runtime(h))
-    goto out;
+    if (hstate_is_gigantic_no_runtime(h)) {
+// goto;
+    }
 //
 // Part (or even all) of the reservation could have been backed
 // by pre-allocated pages. Only free surplus pages.
@@ -2082,13 +2308,14 @@ unsafe extern "C" fn gather_surplus_pages(h: *mut hstate, delta: c_long) -> c_in
 // on-line nodes with memory and will handle the hstate accounting.
 //
     while (nr_pages--) {
-    struct folio *folio;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     folio = remove_pool_hugetlb_folio(h, &node_states[N_MEMORY], 1);
-    if (!folio)
-    goto out;
+    if (!folio) {
+// goto;
+    }
     list_add(&folio.lru, &page_list);
     }
-    out:
+// label;
     spin_unlock_irq(&hugetlb_lock);
     update_and_free_pages_bulk(h, &page_list);
     spin_lock_irq(&hugetlb_lock);
@@ -2129,37 +2356,39 @@ unsafe extern "C" fn gather_surplus_pages(h: *mut hstate, delta: c_long) -> c_in
     VMA_ADD_RESV,
     VMA_DEL_RESV,
     };
-    static long __vma_reservation_common(struct hstate *h,
-    struct vm_area_struct *vma, unsigned long addr,
-    enum vma_resv_mode mode)
-    {
-    struct resv_map *resv;
-    pgoff_t idx;
-    long ret;
-    long dummy_out_regions_needed;
+#[no_mangle]
+pub unsafe extern "C" fn __vma_reservation_common(h: *mut hstate, vma: *mut vm_area_struct, addr: c_ulong, mode: vma_resv_mode) -> c_long {
+pub static mut resv: *mut c_void = core::ptr::null_mut();
+    let mut idx;
+    let mut ret = 0;
+    let mut dummy_out_regions_needed = 0;
     resv = vma_resv_map(vma);
-    if (!resv)
+    if (!resv) {
     return 1;
+    }
     idx = vma_hugecache_offset(h, vma, addr);
-    switch (mode) {
-    case VMA_NEEDS_RESV:
+    match (mode) {
+    VMA_NEEDS_RESV => {
     ret = region_chg(resv, idx, idx + 1, &dummy_out_regions_needed);
 // We assume that vma_reservation_* routines always operate on
 // 1 page, and that adding to resv map a 1 page entry can only
 // ever require 1 region.
 //
     VM_BUG_ON(dummy_out_regions_needed != 1);
-    break;
-    case VMA_COMMIT_RESV:
+    // break;
+    }
+    VMA_COMMIT_RESV => {
     ret = region_add(resv, idx, idx + 1, 1, core::ptr::null_mut(), core::ptr::null_mut());
 // region_add calls of range 1 should never fail.
     VM_BUG_ON(ret < 0);
-    break;
-    case VMA_END_RESV:
+    // break;
+    }
+    VMA_END_RESV => {
     region_abort(resv, idx, idx + 1, 1);
     ret = 0;
-    break;
-    case VMA_ADD_RESV:
+    // break;
+    }
+    VMA_ADD_RESV => {
     if (vma.vm_flags & VM_MAYSHARE) {
     ret = region_add(resv, idx, idx + 1, 1, core::ptr::null_mut(), core::ptr::null_mut());
 // region_add calls of range 1 should never fail.
@@ -2168,8 +2397,9 @@ unsafe extern "C" fn gather_surplus_pages(h: *mut hstate, delta: c_long) -> c_in
     region_abort(resv, idx, idx + 1, 1);
     ret = region_del(resv, idx, idx + 1);
     }
-    break;
-    case VMA_DEL_RESV:
+    // break;
+    }
+    VMA_DEL_RESV => {
     if (vma.vm_flags & VM_MAYSHARE) {
     region_abort(resv, idx, idx + 1, 1);
     ret = region_del(resv, idx, idx + 1);
@@ -2178,12 +2408,15 @@ unsafe extern "C" fn gather_surplus_pages(h: *mut hstate, delta: c_long) -> c_in
 // region_add calls of range 1 should never fail.
     VM_BUG_ON(ret < 0);
     }
-    break;
-    default:
+    // break;
+    }
+    _ => {
     BUG();
     }
-    if (vma.vm_flags & VM_MAYSHARE || mode == VMA_DEL_RESV)
+    }
+    if (vma.vm_flags & VM_MAYSHARE || mode == VMA_DEL_RESV) {
     return ret;
+    }
 //
 // We know private mapping must have HPAGE_RESV_OWNER set.
 //
@@ -2199,35 +2432,32 @@ unsafe extern "C" fn gather_surplus_pages(h: *mut hstate, delta: c_long) -> c_in
 // return value of this routine is the opposite of the
 // value returned from reserve map manipulation routines above.
 //
-    if (ret > 0)
+    if (ret > 0) {
     return 0;
-    if (ret == 0)
+    }
+    if (ret == 0) {
     return 1;
+    }
     return ret;
     }
-    static long vma_needs_reservation(struct hstate *h,
-    struct vm_area_struct *vma, unsigned long addr)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn vma_needs_reservation(h: *mut hstate, vma: *mut vm_area_struct, addr: c_ulong) -> c_long {
     return __vma_reservation_common(h, vma, addr, VMA_NEEDS_RESV);
     }
-    static long vma_commit_reservation(struct hstate *h,
-    struct vm_area_struct *vma, unsigned long addr)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn vma_commit_reservation(h: *mut hstate, vma: *mut vm_area_struct, addr: c_ulong) -> c_long {
     return __vma_reservation_common(h, vma, addr, VMA_COMMIT_RESV);
     }
-    static void vma_end_reservation(struct hstate *h,
-    struct vm_area_struct *vma, unsigned long addr)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn vma_end_reservation(h: *mut hstate, vma: *mut vm_area_struct, addr: c_ulong) {
     (void)__vma_reservation_common(h, vma, addr, VMA_END_RESV);
     }
-    static long vma_add_reservation(struct hstate *h,
-    struct vm_area_struct *vma, unsigned long addr)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn vma_add_reservation(h: *mut hstate, vma: *mut vm_area_struct, addr: c_ulong) -> c_long {
     return __vma_reservation_common(h, vma, addr, VMA_ADD_RESV);
     }
-    static long vma_del_reservation(struct hstate *h,
-    struct vm_area_struct *vma, unsigned long addr)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn vma_del_reservation(h: *mut hstate, vma: *mut vm_area_struct, addr: c_ulong) -> c_long {
     return __vma_reservation_common(h, vma, addr, VMA_DEL_RESV);
     }
 //
@@ -2250,12 +2480,11 @@ unsafe extern "C" fn gather_surplus_pages(h: *mut hstate, delta: c_long) -> c_in
 //
 // In case 2, simply undo reserve map modifications done by alloc_hugetlb_folio.
 //
-    void restore_reserve_on_error(struct hstate *h, struct vm_area_struct *vma,
-    unsigned long address, struct folio *folio)
-    {
-    let mut rc: c_long = vma_needs_reservation(h, vma, address);
+#[no_mangle]
+pub unsafe extern "C" fn restore_reserve_on_error(h: *mut hstate, vma: *mut vm_area_struct, address: c_ulong, folio: *mut folio) {
+pub static mut rc: c_long = 0;
     if (folio_test_hugetlb_restore_reserve(folio)) {
-    if (unlikely(rc < 0))
+    if (unlikely(rc < 0)) {
 //
 // Rare out of memory condition in reserve map
 // manipulation.  Clear hugetlb_restore_reserve so
@@ -2268,12 +2497,14 @@ unsafe extern "C" fn gather_surplus_pages(h: *mut hstate, delta: c_long) -> c_in
 // accounting of reserve counts.
 //
     folio_clear_hugetlb_restore_reserve(folio);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: rc) -> else {
-    else if (rc)
+    }
+
+    else if (rc) {
     (void)vma_add_reservation(h, vma, address);
-    else
+    }
+    else {
     vma_end_reservation(h, vma, address);
+    }
     } else {
     if (!rc) {
 //
@@ -2285,7 +2516,7 @@ pub unsafe extern "C" fn if(_arg: rc) -> else {
 // does not consume a reservation.
 //
     rc = vma_del_reservation(h, vma, address);
-    if (rc < 0)
+    if (rc < 0) {
 //
 // VERY rare out of memory condition.  Since
 // we can not delete the entry, set
@@ -2295,6 +2526,7 @@ pub unsafe extern "C" fn if(_arg: rc) -> else {
 // on a subsequent allocation.
 //
     folio_set_hugetlb_restore_reserve(folio);
+    }
     } else if (rc < 0) {
 //
 // Rare out of memory condition from
@@ -2306,7 +2538,7 @@ pub unsafe extern "C" fn if(_arg: rc) -> else {
 // For shared mappings, no entry in the map indicates
 // no reservation.  We are done.
 //
-    if (!(vma.vm_flags & VM_MAYSHARE))
+    if (!(vma.vm_flags & VM_MAYSHARE)) {
 //
 // For private mappings, no entry indicates
 // a reservation is present.  Since we can
@@ -2316,6 +2548,7 @@ pub unsafe extern "C" fn if(_arg: rc) -> else {
 // be consumed on a subsequent allocation.
 //
     folio_set_hugetlb_restore_reserve(folio);
+    }
     } else {
 //
 // No reservation present, do nothing
@@ -2331,15 +2564,14 @@ pub unsafe extern "C" fn if(_arg: rc) -> else {
 // @list: List to isolate the page in case we need to
 // Returns 0 on success, otherwise negated error.
 //
-    static int alloc_and_dissolve_hugetlb_folio(struct folio *old_folio,
-    struct list_head *list)
-    {
-    gfp_t gfp_mask;
-    struct hstate *h;
-    let mut nid: c_int = folio_nid(old_folio);
-    struct folio *new_folio = core::ptr::null_mut();
-    let mut ret: c_int = 0;
-    retry:
+#[no_mangle]
+pub unsafe extern "C" fn alloc_and_dissolve_hugetlb_folio(old_folio: *mut folio, list: *mut list_head) -> c_int {
+    let mut gfp_mask;
+pub static mut h: *mut c_void = core::ptr::null_mut();
+pub static mut nid: c_int = 0;
+    let mut new_folio = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
+// label;
 //
 // The old_folio might have been dissolved from under our feet, so make sure
 // to carefully check the state under the lock.
@@ -2349,9 +2581,9 @@ pub unsafe extern "C" fn if(_arg: rc) -> else {
 //
 // Freed from under us. Drop new_folio too.
 //
-    goto free_new;
+// goto;
     } else if (folio_ref_count(old_folio)) {
-    bool isolated;
+    let mut isolated = 0;
 //
 // Someone has grabbed the folio, try to isolate it here.
 // Fail with -EBUSY if not possible.
@@ -2360,7 +2592,7 @@ pub unsafe extern "C" fn if(_arg: rc) -> else {
     isolated = folio_isolate_hugetlb(old_folio, list);
     ret = isolated ? 0 : -EBUSY;
     spin_lock_irq(&hugetlb_lock);
-    goto free_new;
+// goto;
     } else if (!folio_test_hugetlb_freed(old_folio)) {
 //
 // Folio's refcount is 0 but it has not been enqueued in the
@@ -2369,7 +2601,7 @@ pub unsafe extern "C" fn if(_arg: rc) -> else {
 //
     spin_unlock_irq(&hugetlb_lock);
     cond_resched();
-    goto retry;
+// goto;
     } else {
     h = folio_hstate(old_folio);
     if (!new_folio) {
@@ -2377,9 +2609,10 @@ pub unsafe extern "C" fn if(_arg: rc) -> else {
     gfp_mask = htlb_alloc_mask(h) | __GFP_THISNODE;
     new_folio = alloc_fresh_hugetlb_folio(h, gfp_mask,
     nid, core::ptr::null_mut());
-    if (!new_folio)
+    if (!new_folio) {
     return -ENOMEM;
-    goto retry;
+    }
+// goto;
     }
 //
 // Ok, old_folio is still a genuine free hugepage. Remove it from
@@ -2402,33 +2635,35 @@ pub unsafe extern "C" fn if(_arg: rc) -> else {
     update_and_free_hugetlb_folio(h, old_folio, false);
     }
     return ret;
-    free_new:
+// label;
     spin_unlock_irq(&hugetlb_lock);
-    if (new_folio)
+    if (new_folio) {
     update_and_free_hugetlb_folio(h, new_folio, false);
+    }
     return ret;
     }
 #[no_mangle]
 pub unsafe extern "C" fn isolate_or_dissolve_huge_folio(folio: *mut folio, list: *mut list_head) -> c_int {
-    int isolate_or_dissolve_huge_folio(struct folio *folio, struct list_head *list)
-    {
-    let mut ret: c_int = -EBUSY;
+pub static mut ret: c_int = 0;
 // Not to disrupt normal path by vainly holding hugetlb_lock
-    if (!folio_test_hugetlb(folio))
+    if (!folio_test_hugetlb(folio)) {
     return 0;
+    }
 //
 // Fence off gigantic pages as there is a cyclic dependency between
 // alloc_contig_range and them. Return -ENOMEM as this has the effect
 // of bailing out right away without further retrying.
 //
-    if (order_is_gigantic(folio_order(folio)))
+    if (order_is_gigantic(folio_order(folio))) {
     return -ENOMEM;
-    if (folio_ref_count(folio) && folio_isolate_hugetlb(folio, list))
+    }
+    if (folio_ref_count(folio) && folio_isolate_hugetlb(folio, list)) {
     ret = 0;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !folio_ref_count(folio)) -> else {
-    else if (!folio_ref_count(folio))
+    }
+
+    else if (!folio_ref_count(folio)) {
     ret = alloc_and_dissolve_hugetlb_folio(folio, list);
+    }
     return ret;
     }
 //
@@ -2440,28 +2675,29 @@ pub unsafe extern "C" fn if(_arg: !folio_ref_count(folio)) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn replace_free_hugepage_folios(start_pfn: c_ulong, end_pfn: c_ulong) -> c_int {
-    int replace_free_hugepage_folios(unsigned long start_pfn, unsigned long end_pfn)
-    {
-    let mut nr: c_ulong = 0;
-    struct page *page;
-    struct hstate *h;
-    LIST_HEAD(list);
-    let mut ret: c_int = 0;
+pub static mut nr: c_ulong = 0;
+pub static mut page: *mut c_void = core::ptr::null_mut();
+pub static mut h: *mut c_void = core::ptr::null_mut();
+pub static mut list: usize = 0;
+pub static mut ret: c_int = 0;
 // Avoid pfn iterations if no free non-gigantic huge pages
     for_each_hstate(h) {
-    if (hstate_is_gigantic(h))
+    if (hstate_is_gigantic(h)) {
     continue;
+    }
     nr += h.free_huge_pages;
-    if (nr)
+    if (nr) {
     break;
     }
-    if (!nr)
+    }
+    if (!nr) {
     return 0;
+    }
     while (start_pfn < end_pfn) {
     page = pfn_to_page(start_pfn);
     nr = 1;
     if (PageHuge(page) || PageCompound(page)) {
-    struct folio *folio = page_folio(page);
+    let mut folio = page_folio(page);
     nr = folio_nr_pages(folio) - folio_page_idx(folio, page);
 //
 // Don't disrupt normal path by vainly holding
@@ -2473,8 +2709,9 @@ pub unsafe extern "C" fn replace_free_hugepage_folios(start_pfn: c_ulong, end_pf
     break;
     }
     ret = alloc_and_dissolve_hugetlb_folio(folio, &list);
-    if (ret)
+    if (ret) {
     break;
+    }
     putback_movable_pages(&list);
     }
     } else if (PageBuddy(page)) {
@@ -2483,9 +2720,10 @@ pub unsafe extern "C" fn replace_free_hugepage_folios(start_pfn: c_ulong, end_pf
 // the order is maybe invalid, but race should be
 // small, and the worst thing is skipping free hugetlb.
 //
-    let mut order: c_uint = buddy_order_unsafe(page);
-    if (order <= MAX_PAGE_ORDER)
+pub static mut order: c_uint = 0;
+    if (order <= MAX_PAGE_ORDER) {
     nr = 1UL << order;
+    }
     }
     start_pfn += nr;
     }
@@ -2493,10 +2731,9 @@ pub unsafe extern "C" fn replace_free_hugepage_folios(start_pfn: c_ulong, end_pf
     }
 #[no_mangle]
 pub unsafe extern "C" fn wait_for_freed_hugetlb_folios() {
-    void wait_for_freed_hugetlb_folios(void)
-    {
-    if (llist_empty(&hpage_freelist))
+    if (llist_empty(&hpage_freelist)) {
     return;
+    }
     flush_work(&free_hpage_work);
     }
 //
@@ -2512,37 +2749,38 @@ pub unsafe extern "C" fn wait_for_freed_hugetlb_folios() {
 // -ENOSPC if cgroup charging fails or no folio is available.
 // -ENOMEM if mem cgroup charging fails.
 //
-    struct folio *hugetlb_alloc_folio(struct hstate *h,
-    struct mempolicy_interpreted *mpoli, u8 alloc_flags)
-    {
-    bool charge_hugetlb_cgroup_rsvd = alloc_flags &
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_alloc_folio(h: *mut hstate, mpoli: *mut mempolicy_interpreted, alloc_flags: u8) -> *mut c_void {
+    let mut charge_hugetlb_cgroup_rsvd = alloc_flags &
     HUGETLB_ALLOC_CHARG_CGROUP_RSVD;
-    bool use_global_reservation = alloc_flags &
+    let mut use_global_reservation = alloc_flags &
     HUGETLB_ALLOC_USE_GLOBAL_RESERVATIONS;
-    let mut nr_pages: usize = pages_per_huge_page(h);
-    struct hugetlb_cgroup *h_cg_rsvd = core::ptr::null_mut();
-    struct hugetlb_cgroup *h_cg = core::ptr::null_mut();
-    let mut gfp: gfp_t = htlb_alloc_mask(h);
-    let mut idx: c_int = hstate_index(h);
-    struct folio *folio;
-    int ret;
+pub static mut nr_pages: usize = 0;
+    let mut h_cg_rsvd = core::ptr::null_mut();
+    let mut h_cg = core::ptr::null_mut();
+pub static mut gfp: gfp_t = 0;
+pub static mut idx: c_int = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     if (charge_hugetlb_cgroup_rsvd &&
-    hugetlb_cgroup_charge_cgroup_rsvd(idx, nr_pages, &h_cg_rsvd))
+    hugetlb_cgroup_charge_cgroup_rsvd(idx, nr_pages, &h_cg_rsvd)) {
     return ERR_PTR(-ENOSPC);
+    }
     if (hugetlb_cgroup_charge_cgroup(idx, nr_pages, &h_cg)) {
     ret = -ENOSPC;
-    goto err_uncharge_hugetlb_cgroup_rsvd;
+// goto;
     }
     spin_lock_irq(&hugetlb_lock);
     folio = core::ptr::null_mut();
-    if (use_global_reservation || available_huge_pages(h))
+    if (use_global_reservation || available_huge_pages(h)) {
     folio = dequeue_hugetlb_folio(h, gfp, mpoli);
+    }
     if (!folio) {
     spin_unlock_irq(&hugetlb_lock);
     folio = alloc_buddy_hugetlb_folio(h, gfp, mpoli);
     if (!folio) {
     ret = -ENOSPC;
-    goto err_uncharge_hugetlb_cgroup;
+// goto;
     }
     spin_lock_irq(&hugetlb_lock);
     list_add(&folio.lru, &h.hugepage_activelist);
@@ -2550,7 +2788,7 @@ pub unsafe extern "C" fn wait_for_freed_hugetlb_folios() {
     }
     if (use_global_reservation) {
     folio_set_hugetlb_restore_reserve(folio);
-    h.resv_huge_pages--;
+    h.resv_huge_pages -= 1;
     }
     hugetlb_cgroup_commit_charge(idx, nr_pages, h_cg, folio);
     if (charge_hugetlb_cgroup_rsvd) {
@@ -2575,11 +2813,12 @@ pub unsafe extern "C" fn wait_for_freed_hugetlb_folios() {
     return ERR_PTR(ret);
     }
     return folio;
-    err_uncharge_hugetlb_cgroup:
+// label;
     hugetlb_cgroup_uncharge_cgroup(idx, nr_pages, h_cg);
-    err_uncharge_hugetlb_cgroup_rsvd:
-    if (charge_hugetlb_cgroup_rsvd)
+// label;
+    if (charge_hugetlb_cgroup_rsvd) {
     hugetlb_cgroup_uncharge_cgroup_rsvd(idx, nr_pages, h_cg_rsvd);
+    }
     return ERR_PTR(ret);
     }
     typedef enum {
@@ -2607,21 +2846,22 @@ pub unsafe extern "C" fn wait_for_freed_hugetlb_folios() {
 // allocation).  New call sites should (probably) never set it to true!!
 // When it's set, the allocation will bypass all vma level reservations.
 //
-    struct folio *alloc_hugetlb_folio(struct vm_area_struct *vma,
-    unsigned long addr, bool cow_from_owner)
-    {
-    struct hugepage_subpool *spool = subpool_vma(vma);
-    struct hstate *h = hstate_vma(vma);
-    struct folio *folio;
-    long retval, gbl_chg, gbl_reserve;
-    map_chg_state map_chg;
-    struct mempolicy_interpreted mpoli;
-    let mut gfp: gfp_t = htlb_alloc_mask(h);
-    struct mempolicy *mpol;
-    nodemask_t *nodemask;
-    let mut alloc_flags: u8 = 0;
-    int nid;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_hugetlb_folio(vma: *mut vm_area_struct, addr: c_ulong, cow_from_owner: bool) -> *mut c_void {
+    let mut spool = subpool_vma(vma);
+    let mut h = hstate_vma(vma);
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut retval = 0;
+    let mut gbl_chg = 0;
+    let mut gbl_reserve = 0;
+    let mut map_chg;
+pub static mut mpoli: usize = 0;
+pub static mut gfp: gfp_t = 0;
+pub static mut mpol: *mut c_void = core::ptr::null_mut();
+pub static mut nodemask: *mut c_void = core::ptr::null_mut();
+pub static mut alloc_flags: u8 = 0;
+    let mut nid = 0;
+    let mut ret = 0;
 // Whether we need a separate per-vma reservation?
     if (cow_from_owner) {
 //
@@ -2637,8 +2877,9 @@ pub unsafe extern "C" fn wait_for_freed_hugetlb_folios() {
 // code of zero indicates a reservation exists (no change).
 //
     retval = vma_needs_reservation(h, vma, addr);
-    if (retval < 0)
+    if (retval < 0) {
     return ERR_PTR(-ENOMEM);
+    }
     map_chg = retval ? MAP_CHG_NEEDED : MAP_CHG_REUSE;
     }
 //
@@ -2653,7 +2894,7 @@ pub unsafe extern "C" fn wait_for_freed_hugetlb_folios() {
     gbl_chg = hugepage_subpool_get_pages(spool, 1);
     if (gbl_chg < 0) {
     ret = -ENOSPC;
-    goto out_end_reservation;
+// goto;
     }
     } else {
 //
@@ -2666,17 +2907,19 @@ pub unsafe extern "C" fn wait_for_freed_hugetlb_folios() {
 // If allocation doesn't reuse a reservation in the resv_map,
 // charge for the reservation.
 //
-    if (map_chg != MAP_CHG_REUSE)
+    if (map_chg != MAP_CHG_REUSE) {
     alloc_flags |= HUGETLB_ALLOC_CHARG_CGROUP_RSVD;
+    }
 //
 // gbl_chg == 0 indicates a reservation exists for this
 // allocation, so try to use it.
 //
-    if (gbl_chg == 0)
+    if (gbl_chg == 0) {
     alloc_flags |= HUGETLB_ALLOC_USE_GLOBAL_RESERVATIONS;
+    }
 // Takes reference on mpol.
     nid = huge_node(vma, addr, gfp, &mpol, &nodemask);
-    mpoli = (struct mempolicy_interpreted){
+    mpoli = (mempolicy_interpreted){
     .nid = nid,
 
     .mode = mpol ? mpol.mode : MPOL_DEFAULT,
@@ -2689,7 +2932,7 @@ pub unsafe extern "C" fn wait_for_freed_hugetlb_folios() {
     mpol_cond_put(mpol);
     if (IS_ERR(folio)) {
     ret = PTR_ERR(folio);
-    goto out_subpool_put;
+// goto;
     }
     hugetlb_set_folio_subpool(folio, spool);
     if (map_chg != MAP_CHG_ENFORCED) {
@@ -2706,7 +2949,7 @@ pub unsafe extern "C" fn wait_for_freed_hugetlb_folios() {
 // no longer applies.
 //
     if (unlikely(map_chg == MAP_CHG_NEEDED && retval == 0)) {
-    long rsv_adjust;
+    let mut rsv_adjust = 0;
     rsv_adjust = hugepage_subpool_put_pages(spool, 1);
     hugetlb_acct_memory(h, -rsv_adjust);
     spin_lock_irq(&hugetlb_lock);
@@ -2716,7 +2959,7 @@ pub unsafe extern "C" fn wait_for_freed_hugetlb_folios() {
     }
     }
     return folio;
-    out_subpool_put:
+// label;
 //
 // put page to subpool iff the quota of subpool's rsv_hpages is used
 // during hugepage_subpool_get_pages.
@@ -2725,44 +2968,45 @@ pub unsafe extern "C" fn wait_for_freed_hugetlb_folios() {
     gbl_reserve = hugepage_subpool_put_pages(spool, 1);
     hugetlb_acct_memory(h, -gbl_reserve);
     }
-    out_end_reservation:
-    if (map_chg != MAP_CHG_ENFORCED)
+// label;
+    if (map_chg != MAP_CHG_ENFORCED) {
     vma_end_reservation(h, vma, addr);
+    }
     return ERR_PTR(ret);
     }
-    static __init void *alloc_bootmem(struct hstate *h, int nid, bool node_exact)
-    {
-    if (hugetlb_early_cma(h))
+#[no_mangle]
+pub unsafe extern "C" fn alloc_bootmem(h: *mut hstate, nid: c_int, node_exact: bool) -> *mut c_void {
+    if (hugetlb_early_cma(h)) {
     return hugetlb_cma_alloc_bootmem(h, nid, node_exact);
+    }
     return memblock_alloc_hugetlb(huge_page_size(h), nid, node_exact);
     }
 #[no_mangle]
-pub unsafe extern "C" fn arch_alloc_bootmem_huge_page(h: *mut hstate, nid: c_int) -> *mut void __init {
-    void *__init arch_alloc_bootmem_huge_page(struct hstate *h, int nid)
+pub unsafe extern "C" fn arch_alloc_bootmem_huge_page(h: *mut hstate, nid: c_int) -> *mut c_void {
+    void *__init arch_alloc_bootmem_huge_page(hstate *h, int nid)
     __attribute__ ((weak, alias("__alloc_bootmem_huge_page")));
 #[no_mangle]
-pub unsafe extern "C" fn __alloc_bootmem_huge_page(h: *mut hstate, nid: c_int) -> *mut void __init {
-    void *__init __alloc_bootmem_huge_page(struct hstate *h, int nid)
-    {
+pub unsafe extern "C" fn __alloc_bootmem_huge_page(h: *mut hstate, nid: c_int) -> *mut c_void {
     int nr_nodes, node = nid;
 // do node specific alloc
-    if (nid != NUMA_NO_NODE)
+    if (nid != NUMA_NO_NODE) {
     return alloc_bootmem(h, node, true);
+    }
 // allocate from next node when distributing huge pages
     for_each_node_mask_to_alloc(&h.next_nid_to_alloc, nr_nodes, node,
-    &hugetlb_bootmem_nodes)
+    &hugetlb_bootmem_nodes) {
     return alloc_bootmem(h, node, false);
+    }
     return core::ptr::null_mut();
     }
 #[no_mangle]
 unsafe extern "C" fn alloc_bootmem_huge_page(h: *mut hstate, nid: c_int) -> bool __init {
-    static bool __init alloc_bootmem_huge_page(struct hstate *h, int nid)
-    {
-    unsigned long pfn;
-    let mut nid_request: c_uint = nid;
-    struct huge_bootmem_page *m = arch_alloc_bootmem_huge_page(h, nid);
-    if (!m)
+    let mut pfn = 0;
+pub static mut nid_request: c_uint = 0;
+    let mut m = arch_alloc_bootmem_huge_page(h, nid);
+    if (!m) {
     return false;
+    }
     pfn = PHYS_PFN(__pa(m));
     nid = early_pfn_to_nid(pfn);
 //
@@ -2783,10 +3027,12 @@ unsafe extern "C" fn alloc_bootmem_huge_page(h: *mut hstate, nid: c_int) -> bool
 // because hugetlb_free_cross_zone_pages() only frees cross-zone
 // pages belonging to the requested node.
 //
-    if (WARN_ON_ONCE(nid_request != NUMA_NO_NODE && nid != nid_request))
+    if (WARN_ON_ONCE!(nid_request != NUMA_NO_NODE && nid != nid_request)) {
     list_add(&m.list, &huge_boot_pages[nid_request]);
-    else
+    }
+    else {
     list_add(&m.list, &huge_boot_pages[nid]);
+    }
     } else {
     list_add_tail(&m.list, &huge_boot_pages[nid]);
     m.flags |= HUGE_BOOTMEM_ZONES_VALID;
@@ -2797,38 +3043,36 @@ unsafe extern "C" fn alloc_bootmem_huge_page(h: *mut hstate, nid: c_int) -> bool
 // The head struct page is used to get folio information by the HugeTLB
 // subsystem like zone id and node id.
 //
-    memblock_reserved_mark_noinit(__pa((void *)m + PAGE_SIZE),
+    memblock_reserved_mark_noinit(__pa(m + PAGE_SIZE),
     huge_page_size(h) - PAGE_SIZE);
     }
     return true;
     }
 // Initialize [start_page:end_page_number] tail struct pages of a hugepage
-    static void __init hugetlb_folio_init_tail_vmemmap(struct folio *folio,
-    struct hstate *h,
+    static void __init hugetlb_folio_init_tail_vmemmap(folio *folio, hstate *h,
     unsigned long start_page_number,
     unsigned long end_page_number)
     {
-    let mut zone: enum zone_type = folio_zonenum(folio);
-    let mut nid: c_int = folio_nid(folio);
-    struct page *page = folio_page(folio, start_page_number);
-    let mut head_pfn: c_ulong = folio_pfn(folio);
+pub static mut zone: zone_type = 0;
+pub static mut nid: c_int = 0;
+    let mut page = folio_page(folio, start_page_number);
+pub static mut head_pfn: c_ulong = 0;
     unsigned long pfn, end_pfn = head_pfn + end_page_number;
-    let mut order: c_uint = huge_page_order(h);
+pub static mut order: c_uint = 0;
 //
 // As we marked all tail pages with memblock_reserved_mark_noinit(),
 // we must initialize them ourselves here.
 //
-    for (pfn = head_pfn + start_page_number; pfn < end_pfn; page++, pfn++) {
+    while (pfn < end_pfn) {
     __init_single_page(page, pfn, zone, nid);
     prep_compound_tail(page, &folio.page, order);
     set_page_count(page, 0);
     }
     }
-    static void __init hugetlb_folio_init_vmemmap(struct folio *folio,
-    struct hstate *h,
+    static void __init hugetlb_folio_init_vmemmap(folio *folio, hstate *h,
     unsigned long nr_pages)
     {
-    int ret;
+    let mut ret = 0;
 //
 // This is an open-coded prep_compound_page() whereby we avoid
 // walking pages twice by initializing/preparing+freezing them in the
@@ -2843,14 +3087,10 @@ unsafe extern "C" fn alloc_bootmem_huge_page(h: *mut hstate, nid: c_int) -> bool
     }
 #[no_mangle]
 unsafe extern "C" fn hugetlb_bootmem_page_prehvo(m: *mut huge_bootmem_page) -> bool __init {
-    static bool __init hugetlb_bootmem_page_prehvo(struct huge_bootmem_page *m)
-    {
     return m.flags & HUGE_BOOTMEM_HVO;
     }
 #[no_mangle]
 unsafe extern "C" fn hugetlb_bootmem_page_earlycma(m: *mut huge_bootmem_page) -> bool __init {
-    static bool __init hugetlb_bootmem_page_earlycma(struct huge_bootmem_page *m)
-    {
     return m.flags & HUGE_BOOTMEM_CMA;
     }
 //
@@ -2863,24 +3103,25 @@ unsafe extern "C" fn hugetlb_bootmem_page_earlycma(m: *mut huge_bootmem_page) ->
 // read-only, but that's ok - for sparse vmemmap this does not write to
 // the page structure.
 //
-    static void __init hugetlb_bootmem_init_migratetype(struct folio *folio,
-    struct hstate *h)
+    static void __init hugetlb_bootmem_init_migratetype(folio *folio, hstate *h)
     {
-    let mut nr_pages: c_ulong = pages_per_huge_page(h), i;
-    WARN_ON_ONCE(!pageblock_aligned(folio_pfn(folio)));
-    for (i = 0; i < nr_pages; i += pageblock_nr_pages) {
-    if (folio_test_hugetlb_cma(folio))
+pub static mut nr_pages: c_ulong = 0;
+    WARN_ON_ONCE!(!pageblock_aligned(folio_pfn(folio)));
+    while (i < nr_pages) {
+    if (folio_test_hugetlb_cma(folio)) {
     init_cma_pageblock(folio_page(folio, i));
-    else
+    }
+    else {
     init_pageblock_migratetype(folio_page(folio, i),
     MIGRATE_MOVABLE, false);
     }
     }
-    static void __init prep_and_add_bootmem_folios(struct hstate *h,
-    struct list_head *folio_list)
+    }
+    static void __init prep_and_add_bootmem_folios(hstate *h, list_head *folio_list)
     {
-    unsigned long flags;
-    struct folio *folio, *tmp_f;
+    let mut flags = 0;
+    let mut folio = core::ptr::null_mut();
+    let mut tmp_f = core::ptr::null_mut();
 // Send list for bulk vmemmap optimization processing
     hugetlb_vmemmap_optimize_bootmem_folios(h, folio_list);
     list_for_each_entry_safe(folio, tmp_f, folio_list, lru) {
@@ -2908,37 +3149,39 @@ unsafe extern "C" fn hugetlb_bootmem_page_earlycma(m: *mut huge_bootmem_page) ->
 // Note: This only applies to gigantic (order > MAX_PAGE_ORDER) pages.
 //
 #[no_mangle]
-unsafe extern "C" fn gather_bootmem_prealloc_node(nid: c_ulong) -> void __init {
-    static void __init gather_bootmem_prealloc_node(unsigned long nid)
-    {
-    LIST_HEAD(folio_list);
-    struct huge_bootmem_page *m, *tm;
-    struct hstate *h = core::ptr::null_mut(), *prev_h = core::ptr::null_mut();
+unsafe extern "C" fn gather_bootmem_prealloc_node(nid: c_ulong)  {
+pub static mut folio_list: usize = 0;
+    let mut m = core::ptr::null_mut();
+    let mut tm = core::ptr::null_mut();
+    let mut h = core::ptr::null_mut(), *prev_h = core::ptr::null_mut();
     list_for_each_entry_safe(m, tm, &huge_boot_pages[nid], list) {
-    struct page *page = virt_to_page(m);
-    struct folio *folio = (void *)page;
+    let mut page = virt_to_page(m);
+    let mut folio = page;
     h = m.hstate;
 //
 // It is possible to have multiple huge page sizes (hstates)
 // in this list.  If so, process each size separately.
 //
-    if (h != prev_h && prev_h != core::ptr::null_mut())
+    if (h != prev_h && prev_h != core::ptr::null_mut()) {
     prep_and_add_bootmem_folios(prev_h, &folio_list);
+    }
     prev_h = h;
     VM_BUG_ON(!hstate_is_gigantic(h));
-    WARN_ON(folio_ref_count(folio) != 1);
+    WARN_ON!(folio_ref_count(folio) != 1);
     hugetlb_folio_init_vmemmap(folio, h,
     HUGETLB_VMEMMAP_RESERVE_PAGES);
     init_new_hugetlb_folio(folio);
-    if (hugetlb_bootmem_page_prehvo(m))
+    if (hugetlb_bootmem_page_prehvo(m)) {
 //
 // If pre-HVO was done, just set the
 // flag, the HVO code will then skip
 // this folio.
 //
     folio_set_hugetlb_vmemmap_optimized(folio);
-    if (hugetlb_bootmem_page_earlycma(m))
+    }
+    if (hugetlb_bootmem_page_earlycma(m)) {
     folio_set_hugetlb_cma(folio);
+    }
     list_add(&folio.lru, &folio_list);
 //
 // We need to restore the 'stolen' pages to totalram_pages
@@ -2948,8 +3191,9 @@ unsafe extern "C" fn gather_bootmem_prealloc_node(nid: c_ulong) -> void __init {
 // For CMA pages, this is done in init_cma_pageblock
 // (via hugetlb_bootmem_init_migratetype), so skip it here.
 //
-    if (!folio_test_hugetlb_cma(folio))
+    if (!folio_test_hugetlb_cma(folio)) {
     adjust_managed_page_count(page, pages_per_huge_page(h));
+    }
     cond_resched();
     }
     prep_and_add_bootmem_folios(h, &folio_list);
@@ -2957,33 +3201,25 @@ unsafe extern "C" fn gather_bootmem_prealloc_node(nid: c_ulong) -> void __init {
     static void __init gather_bootmem_prealloc_parallel(unsigned long start,
     unsigned long end, void *arg)
     {
-    int nid;
-    for (nid = start; nid < end; nid++)
+    let mut nid = 0;
+    for (nid = start; nid < end; nid++) {
     gather_bootmem_prealloc_node(nid);
     }
+    }
 #[no_mangle]
-pub unsafe extern "C" fn hugetlb_bootmem_struct_page_init() -> void __init {
-    void __init hugetlb_bootmem_struct_page_init(void)
-    {
-    struct padata_mt_job job = {
-    .thread_fn	= gather_bootmem_prealloc_parallel,
-    .fn_arg		= core::ptr::null_mut(),
-    .start		= 0,
-    .size		= nr_node_ids,
-    .align		= 1,
-    .min_chunk	= 1,
-    .max_threads	= num_node_state(N_MEMORY),
-    .numa_aware	= true,
-    };
+pub unsafe extern "C" fn hugetlb_bootmem_struct_page_init()  {
+pub static mut padata_mt_job: usize = 0;
 
-    struct zone *zone;
+pub static mut zone: *mut c_void = core::ptr::null_mut();
     for_each_zone(zone) {
-    for (int i = 0; i < NR_VMEMMAP_TAILS; i++) {
-    struct page *tail, *p;
-    unsigned int order;
+    while (i < NR_VMEMMAP_TAILS) {
+    let mut tail = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
+    let mut order = 0;
     tail = zone.vmemmap_tails[i];
-    if (!tail)
+    if (!tail) {
     continue;
+    }
     order = i + VMEMMAP_TAIL_MIN_ORDER;
     p = page_to_virt(tail);
 //
@@ -2992,8 +3228,9 @@ pub unsafe extern "C" fn hugetlb_bootmem_struct_page_init() -> void __init {
 // shared tail struct pages here before bootmem folios
 // start using them.
 //
-    for (int j = 0; j < PAGE_SIZE / sizeof(struct page); j++)
+    for (int j = 0; j < PAGE_SIZE / sizeof!(page); j++) {
     init_compound_tail(p + j, core::ptr::null_mut(), order, zone);
+    }
     }
     }
 
@@ -3001,41 +3238,41 @@ pub unsafe extern "C" fn hugetlb_bootmem_struct_page_init() -> void __init {
     }
 #[no_mangle]
 unsafe extern "C" fn hugetlb_free_cross_zone_pages(h: *mut hstate, nid: c_int) -> unsigned long __init {
-    static unsigned long __init hugetlb_free_cross_zone_pages(struct hstate *h, int nid)
-    {
-    let mut freed: c_ulong = 0;
-    struct huge_bootmem_page *m, *tmp;
-    if (!hstate_is_gigantic(h))
+pub static mut freed: c_ulong = 0;
+    let mut m = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
+    if (!hstate_is_gigantic(h)) {
     return freed;
+    }
     list_for_each_entry_safe(m, tmp, &huge_boot_pages[nid], list) {
-    if (m.flags & HUGE_BOOTMEM_ZONES_VALID)
+    if (m.flags & HUGE_BOOTMEM_ZONES_VALID) {
     break;
+    }
     list_del(&m.list);
     memblock_free(m, huge_page_size(h));
-    freed++;
+    freed += 1;
     }
     if (freed) {
     char buf[32];
-    string_get_size(huge_page_size(h), 1, STRING_UNITS_2, buf, sizeof(buf));
-    pr_warn("HugeTLB: freed %lu cross-zone hugepages of size %s on node %d.\n",
+    string_get_size(huge_page_size(h), 1, STRING_UNITS_2, buf, sizeof!(buf));
+    pr_warn!("HugeTLB: freed %lu cross-zone hugepages of size %s on node %d.\n",
     freed, buf, nid);
     }
     return freed;
     }
 #[no_mangle]
-unsafe extern "C" fn hugetlb_hstate_alloc_pages_onenode(h: *mut hstate, nid: c_int) -> void __init {
-    static void __init hugetlb_hstate_alloc_pages_onenode(struct hstate *h, int nid)
-    {
-    unsigned long i;
+unsafe extern "C" fn hugetlb_hstate_alloc_pages_onenode(h: *mut hstate, nid: c_int)  {
+    let mut i = 0;
     char buf[32];
-    LIST_HEAD(folio_list);
-    for (i = 0; i < h.max_huge_pages_node[nid]; ++i) {
+pub static mut folio_list: usize = 0;
+    while (i < h.max_huge_pages_node[nid]) {
     if (hstate_is_gigantic(h)) {
-    if (!alloc_bootmem_huge_page(h, nid))
+    if (!alloc_bootmem_huge_page(h, nid)) {
     break;
+    }
     } else {
-    struct folio *folio;
-    let mut gfp_mask: gfp_t = htlb_alloc_mask(h) | __GFP_THISNODE;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut gfp_mask: gfp_t = 0;
     folio = only_alloc_fresh_hugetlb_folio(h, gfp_mask, nid,
     &node_states[N_MEMORY], core::ptr::null_mut());
     if (!folio && !list_empty(&folio_list) &&
@@ -3045,29 +3282,30 @@ unsafe extern "C" fn hugetlb_hstate_alloc_pages_onenode(h: *mut hstate, nid: c_i
     folio = only_alloc_fresh_hugetlb_folio(h, gfp_mask, nid,
     &node_states[N_MEMORY], core::ptr::null_mut());
     }
-    if (!folio)
+    if (!folio) {
     break;
+    }
     list_add(&folio.lru, &folio_list);
     }
     cond_resched();
     }
     i -= hugetlb_free_cross_zone_pages(h, nid);
-    if (!list_empty(&folio_list))
+    if (!list_empty(&folio_list)) {
     prep_and_add_allocated_folios(h, &folio_list);
-    if (i == h.max_huge_pages_node[nid])
+    }
+    if (i == h.max_huge_pages_node[nid]) {
     return;
+    }
     string_get_size(huge_page_size(h), 1, STRING_UNITS_2, buf, 32);
-    pr_warn("HugeTLB: allocating %u of page size %s failed node%d.  Only allocated %lu hugepages.\n",
+    pr_warn!("HugeTLB: allocating %u of page size %s failed node%d.  Only allocated %lu hugepages.\n",
     h.max_huge_pages_node[nid], buf, nid, i);
     h.max_huge_pages -= (h.max_huge_pages_node[nid] - i);
     h.max_huge_pages_node[nid] = i;
     }
 #[no_mangle]
 unsafe extern "C" fn hugetlb_hstate_alloc_pages_specific_nodes(h: *mut hstate) -> bool __init {
-    static bool __init hugetlb_hstate_alloc_pages_specific_nodes(struct hstate *h)
-    {
-    int i;
-    let mut node_specific_alloc: bool = false;
+    let mut i = 0;
+pub static mut node_specific_alloc: bool = false;
     for_each_online_node(i) {
     if (h.max_huge_pages_node[i] > 0) {
     hugetlb_hstate_alloc_pages_onenode(h, i);
@@ -3077,30 +3315,26 @@ unsafe extern "C" fn hugetlb_hstate_alloc_pages_specific_nodes(h: *mut hstate) -
     return node_specific_alloc;
     }
 #[no_mangle]
-unsafe extern "C" fn hugetlb_hstate_alloc_pages_errcheck(allocated: c_ulong, h: *mut hstate) -> void __init {
-    static void __init hugetlb_hstate_alloc_pages_errcheck(unsigned long allocated, struct hstate *h)
-    {
+unsafe extern "C" fn hugetlb_hstate_alloc_pages_errcheck(allocated: c_ulong, h: *mut hstate)  {
     if (allocated < h.max_huge_pages) {
     char buf[32];
     string_get_size(huge_page_size(h), 1, STRING_UNITS_2, buf, 32);
-    pr_warn("HugeTLB: allocating %lu of page size %s failed.  Only allocated %lu hugepages.\n",
+    pr_warn!("HugeTLB: allocating %lu of page size %s failed.  Only allocated %lu hugepages.\n",
     h.max_huge_pages, buf, allocated);
     h.max_huge_pages = allocated;
     }
     }
 #[no_mangle]
-unsafe extern "C" fn hugetlb_pages_alloc_boot_node(start: c_ulong, end: c_ulong, arg: *mut c_void) -> void __init {
-    static void __init hugetlb_pages_alloc_boot_node(unsigned long start, unsigned long end, void *arg)
-    {
-    struct hstate *h = (struct hstate *)arg;
+unsafe extern "C" fn hugetlb_pages_alloc_boot_node(start: c_ulong, end: c_ulong, arg: *mut c_void)  {
+    let mut h = arg;
     int i, num = end - start;
-    nodemask_t node_alloc_noretry;
-    LIST_HEAD(folio_list);
-    let mut next_node: c_int = first_online_node;
+    let mut node_alloc_noretry;
+pub static mut folio_list: usize = 0;
+pub static mut next_node: c_int = 0;
 // Bit mask controlling how hard we retry per-node allocations.
     nodes_clear(node_alloc_noretry);
-    for (i = 0; i < num; ++i) {
-    struct folio *folio;
+    while (i < num) {
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     if (hugetlb_vmemmap_optimizable_size(h) &&
     (si_mem_available() == 0) && !list_empty(&folio_list)) {
     prep_and_add_allocated_folios(h, &folio_list);
@@ -3108,8 +3342,9 @@ unsafe extern "C" fn hugetlb_pages_alloc_boot_node(start: c_ulong, end: c_ulong,
     }
     folio = alloc_pool_huge_folio(h, &node_states[N_MEMORY],
     &node_alloc_noretry, &next_node);
-    if (!folio)
+    if (!folio) {
     break;
+    }
     list_move(&folio.lru, &folio_list);
     cond_resched();
     }
@@ -3117,31 +3352,25 @@ unsafe extern "C" fn hugetlb_pages_alloc_boot_node(start: c_ulong, end: c_ulong,
     }
 #[no_mangle]
 unsafe extern "C" fn hugetlb_gigantic_pages_alloc_boot(h: *mut hstate) -> unsigned long __init {
-    static unsigned long __init hugetlb_gigantic_pages_alloc_boot(struct hstate *h)
-    {
-    int nid;
-    unsigned long i;
-    for (i = 0; i < h.max_huge_pages; ++i) {
-    if (!alloc_bootmem_huge_page(h, NUMA_NO_NODE))
+    let mut nid = 0;
+    let mut i = 0;
+    while (i < h.max_huge_pages) {
+    if (!alloc_bootmem_huge_page(h, NUMA_NO_NODE)) {
     break;
+    }
     cond_resched();
     }
-    for_each_node(nid)
+    for_each_node(nid) {
     i -= hugetlb_free_cross_zone_pages(h, nid);
+    }
     return i;
     }
 #[no_mangle]
 unsafe extern "C" fn hugetlb_pages_alloc_boot(h: *mut hstate) -> unsigned long __init {
-    static unsigned long __init hugetlb_pages_alloc_boot(struct hstate *h)
-    {
-    struct padata_mt_job job = {
-    .fn_arg		= h,
-    .align		= 1,
-    .numa_aware	= true
-    };
-    unsigned long jiffies_start;
-    unsigned long jiffies_end;
-    unsigned long remaining;
+pub static mut padata_mt_job: usize = 0;
+    let mut jiffies_start = 0;
+    let mut jiffies_end = 0;
+    let mut remaining = 0;
     job.thread_fn	= hugetlb_pages_alloc_boot_node;
 //
 // job.max_threads is 25% of the available cpu threads by default.
@@ -3171,18 +3400,20 @@ unsafe extern "C" fn hugetlb_pages_alloc_boot(h: *mut hstate) -> unsigned long _
     job.size      = remaining;
     job.min_chunk = remaining / hugepage_allocation_threads;
     padata_do_multithreaded(&job);
-    if (h.nr_huge_pages == h.max_huge_pages)
+    if (h.nr_huge_pages == h.max_huge_pages) {
     break;
+    }
 //
 // Retry only if the vmemmap optimization might have been able to free
 // some memory back to the system.
 //
-    if (!hugetlb_vmemmap_optimizable(h))
+    if (!hugetlb_vmemmap_optimizable(h)) {
     break;
+    }
 // Continue if progress was made in last iteration
     } while (remaining != (h.max_huge_pages - h.nr_huge_pages));
     jiffies_end = jiffies;
-    pr_info("HugeTLB: allocation took %dms with hugepage_allocation_threads=%ld\n",
+    pr_info!("HugeTLB: allocation took %dms with hugepage_allocation_threads=%ld\n",
     jiffies_to_msecs(jiffies_end - jiffies_start),
     hugepage_allocation_threads);
     return h.nr_huge_pages;
@@ -3199,10 +3430,8 @@ unsafe extern "C" fn hugetlb_pages_alloc_boot(h: *mut hstate) -> unsigned long _
 // then added to hugetlb pools.
 //
 #[no_mangle]
-unsafe extern "C" fn hugetlb_hstate_alloc_pages(h: *mut hstate) -> void __init {
-    static void __init hugetlb_hstate_alloc_pages(struct hstate *h)
-    {
-    unsigned long allocated;
+unsafe extern "C" fn hugetlb_hstate_alloc_pages(h: *mut hstate)  {
+    let mut allocated = 0;
 //
 // Skip gigantic hugepages allocation if early CMA
 // reservations are not available.
@@ -3212,23 +3441,26 @@ unsafe extern "C" fn hugetlb_hstate_alloc_pages(h: *mut hstate) -> void __init {
     pr_warn_once("HugeTLB: hugetlb_cma is enabled, skip boot time allocation\n");
     return;
     }
-    if (!h.max_huge_pages)
+    if (!h.max_huge_pages) {
     return;
+    }
 // do node specific alloc
-    if (hugetlb_hstate_alloc_pages_specific_nodes(h))
+    if (hugetlb_hstate_alloc_pages_specific_nodes(h)) {
     return;
+    }
 // below will do all node balanced alloc
-    if (hstate_is_gigantic(h))
+    if (hstate_is_gigantic(h)) {
     allocated = hugetlb_gigantic_pages_alloc_boot(h);
-    else
+    }
+    else {
     allocated = hugetlb_pages_alloc_boot(h);
+    }
     hugetlb_hstate_alloc_pages_errcheck(allocated, h);
     }
 #[no_mangle]
-unsafe extern "C" fn hugetlb_init_hstates() -> void __init {
-    static void __init hugetlb_init_hstates(void)
-    {
-    struct hstate *h, *h2;
+unsafe extern "C" fn hugetlb_init_hstates()  {
+    let mut h = core::ptr::null_mut();
+    let mut h2 = core::ptr::null_mut();
     for_each_hstate(h) {
 //
 // Always reset to first_memory_node here, even if
@@ -3239,8 +3471,9 @@ unsafe extern "C" fn hugetlb_init_hstates() -> void __init {
     h.next_nid_to_alloc = first_memory_node;
     h.next_nid_to_free = first_memory_node;
 // oversize hugepages were init'ed in early boot
-    if (!hstate_is_gigantic(h))
+    if (!hstate_is_gigantic(h)) {
     hugetlb_hstate_alloc_pages(h);
+    }
 //
 // Set demote order for each hstate.  Note that
 // h->demote_order is initially 0.
@@ -3249,66 +3482,72 @@ unsafe extern "C" fn hugetlb_init_hstates() -> void __init {
 // - If CMA allocation is possible, we can not demote
 // HUGETLB_PAGE_ORDER or smaller size pages.
 //
-    if (hstate_is_gigantic_no_runtime(h))
+    if (hstate_is_gigantic_no_runtime(h)) {
     continue;
-    if (hugetlb_cma_total_size() && h.order <= HUGETLB_PAGE_ORDER)
+    }
+    if (hugetlb_cma_total_size() && h.order <= HUGETLB_PAGE_ORDER) {
     continue;
+    }
     for_each_hstate(h2) {
-    if (h2 == h)
+    if (h2 == h) {
     continue;
+    }
     if (h2.order < h.order &&
-    h2.order > h.demote_order)
+    h2.order > h.demote_order) {
     h.demote_order = h2.order;
     }
     }
     }
+    }
 #[no_mangle]
-unsafe extern "C" fn report_hugepages() -> void __init {
-    static void __init report_hugepages(void)
-    {
-    struct hstate *h;
+unsafe extern "C" fn report_hugepages()  {
+pub static mut h: *mut c_void = core::ptr::null_mut();
     for_each_hstate(h) {
     char buf[32];
     string_get_size(huge_page_size(h), 1, STRING_UNITS_2, buf, 32);
-    pr_info("HugeTLB: registered %s page size, pre-allocated %ld pages\n",
+    pr_info!("HugeTLB: registered %s page size, pre-allocated %ld pages\n",
     buf, h.nr_huge_pages);
-    pr_info("HugeTLB: %d KiB vmemmap can be freed for a %s page\n",
+    pr_info!("HugeTLB: %d KiB vmemmap can be freed for a %s page\n",
     hugetlb_vmemmap_optimizable_size(h) / SZ_1K, buf);
     }
     }
 
-    static void try_to_free_low(struct hstate *h, unsigned long count,
-    nodemask_t *nodes_allowed)
-    {
-    int i;
-    LIST_HEAD(page_list);
+#[no_mangle]
+pub unsafe extern "C" fn try_to_free_low(h: *mut hstate, count: c_ulong, nodes_allowed: *mut nodemask_t) {
+    let mut i = 0;
+pub static mut page_list: usize = 0;
     lockdep_assert_held(&hugetlb_lock);
-    if (hstate_is_gigantic(h))
+    if (hstate_is_gigantic(h)) {
     return;
+    }
 //
 // Collect pages to be freed on a list, and free after dropping lock
 //
     for_each_node_mask(i, *nodes_allowed) {
-    struct folio *folio, *next;
-    struct list_head *freel = &h.hugepage_freelists[i];
+    let mut folio = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+    let mut freel = &h.hugepage_freelists[i];
     list_for_each_entry_safe(folio, next, freel, lru) {
-    if (count >= h.nr_huge_pages)
-    goto out;
-    if (folio_test_highmem(folio))
+    if (count >= h.nr_huge_pages) {
+// goto;
+    }
+    if (folio_test_highmem(folio)) {
     continue;
+    }
     remove_hugetlb_folio(h, folio, false);
     list_add(&folio.lru, &page_list);
     }
     }
-    out:
+// label;
     spin_unlock_irq(&hugetlb_lock);
     update_and_free_pages_bulk(h, &page_list);
     spin_lock_irq(&hugetlb_lock);
     }
 
-    static inline void try_to_free_low(struct hstate *h, unsigned long count,
-    nodemask_t *nodes_allowed)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: try_to_free_low
+pub unsafe extern "C" fn try_to_free_low_dup(h: *mut hstate, count: c_ulong, nodes_allowed: *mut nodemask_t) {
     }
 
 //
@@ -3316,49 +3555,52 @@ unsafe extern "C" fn report_hugepages() -> void __init {
 // balanced by operating on them in a round-robin fashion.
 // Returns 1 if an adjustment was made.
 //
-    static int adjust_pool_surplus(struct hstate *h, nodemask_t *nodes_allowed,
-    int delta)
-    {
-    int nr_nodes, node;
+#[no_mangle]
+pub unsafe extern "C" fn adjust_pool_surplus(h: *mut hstate, nodes_allowed: *mut nodemask_t, delta: c_int) -> c_int {
+    let mut nr_nodes = 0;
+    let mut node = 0;
     lockdep_assert_held(&hugetlb_lock);
     VM_BUG_ON(delta != -1 && delta != 1);
     if (delta < 0) {
     for_each_node_mask_to_alloc(&h.next_nid_to_alloc, nr_nodes, node, nodes_allowed) {
-    if (h.surplus_huge_pages_node[node])
-    goto found;
+    if (h.surplus_huge_pages_node[node]) {
+// goto;
+    }
     }
     } else {
     for_each_node_mask_to_free(h, nr_nodes, node, nodes_allowed) {
     if (h.surplus_huge_pages_node[node] <
-    h.nr_huge_pages_node[node])
-    goto found;
+    h.nr_huge_pages_node[node]) {
+// goto;
+    }
     }
     }
     return 0;
-    found:
+// label;
     h.surplus_huge_pages += delta;
     h.surplus_huge_pages_node[node] += delta;
     return 1;
     }
 
-    static int set_max_huge_pages(struct hstate *h, unsigned long count, int nid,
-    nodemask_t *nodes_allowed)
-    {
-    unsigned long persistent_free_count;
-    unsigned long min_count;
-    unsigned long allocated;
-    struct folio *folio;
-    LIST_HEAD(page_list);
+#[no_mangle]
+pub unsafe extern "C" fn set_max_huge_pages(h: *mut hstate, count: c_ulong, nid: c_int, nodes_allowed: *mut nodemask_t) -> c_int {
+    let mut persistent_free_count = 0;
+    let mut min_count = 0;
+    let mut allocated = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut page_list: usize = 0;
     NODEMASK_ALLOC(nodemask_t, node_alloc_noretry, GFP_KERNEL);
 //
 // Bit mask controlling how hard we retry per-node allocations.
 // If we can not allocate the bit mask, do not attempt to allocate
 // the requested huge pages.
 //
-    if (node_alloc_noretry)
+    if (node_alloc_noretry) {
     nodes_clear(*node_alloc_noretry);
-    else
+    }
+    else {
     return -ENOMEM;
+    }
 //
 // resize_lock mutex prevents concurrent adjustments to number of
 // pages in hstate via the proc/sysfs interfaces.
@@ -3373,7 +3615,7 @@ unsafe extern "C" fn report_hugepages() -> void __init {
 // (nodes_allowed) will restrict alloc/free to the specified node.
 //
     if (nid != NUMA_NO_NODE) {
-    let mut old_count: c_ulong = count;
+pub static mut old_count: c_ulong = 0;
     count += persistent_huge_pages(h) -
     (h.nr_huge_pages_node[nid] -
     h.surplus_huge_pages_node[nid]);
@@ -3383,8 +3625,9 @@ unsafe extern "C" fn report_hugepages() -> void __init {
 // to allocate as many huge pages as possible.  Set count to
 // largest possible value to align with their intention.
 //
-    if (count < old_count)
+    if (count < old_count) {
     count = ULONG_MAX;
+    }
     }
 //
 // Gigantic pages runtime allocation depend on the capability for large
@@ -3393,7 +3636,7 @@ unsafe extern "C" fn report_hugepages() -> void __init {
 // the user tries to allocate gigantic pages but let the user free the
 // boottime allocated gigantic pages.
 //
-    if (hstate_is_gigantic(h) && !IS_ENABLED(CONFIG_CONTIG_ALLOC)) {
+    if (hstate_is_gigantic(h) && !IS_ENABLED!(CONFIG_CONTIG_ALLOC)) {
     if (count > persistent_huge_pages(h)) {
     spin_unlock_irq(&hugetlb_lock);
     mutex_unlock(&h.resize_lock);
@@ -3414,8 +3657,9 @@ unsafe extern "C" fn report_hugepages() -> void __init {
 // within all the constraints specified by the sysctls.
 //
     while (h.surplus_huge_pages && count > persistent_huge_pages(h)) {
-    if (!adjust_pool_surplus(h, nodes_allowed, -1))
+    if (!adjust_pool_surplus(h, nodes_allowed, -1)) {
     break;
+    }
     }
     allocated = 0;
     while (count > (persistent_huge_pages(h) + allocated)) {
@@ -3433,15 +3677,15 @@ unsafe extern "C" fn report_hugepages() -> void __init {
     if (!folio) {
     prep_and_add_allocated_folios(h, &page_list);
     spin_lock_irq(&hugetlb_lock);
-    goto out;
+// goto;
     }
     list_add(&folio.lru, &page_list);
-    allocated++;
+    allocated += 1;
 // Bail for signals. Probably ctrl-c from user
     if (signal_pending(current)) {
     prep_and_add_allocated_folios(h, &page_list);
     spin_lock_irq(&hugetlb_lock);
-    goto out;
+// goto;
     }
     spin_lock_irq(&hugetlb_lock);
     }
@@ -3477,10 +3721,12 @@ unsafe extern "C" fn report_hugepages() -> void __init {
 //
     persistent_free_count = h.free_huge_pages;
     if (h.free_huge_pages > persistent_huge_pages(h)) {
-    if (h.free_huge_pages > h.surplus_huge_pages)
+    if (h.free_huge_pages > h.surplus_huge_pages) {
     persistent_free_count -= h.surplus_huge_pages;
-    else
+    }
+    else {
     persistent_free_count = 0;
+    }
     }
     min_count = h.resv_huge_pages + persistent_huge_pages(h) - persistent_free_count;
     min_count = max(count, min_count);
@@ -3490,8 +3736,9 @@ unsafe extern "C" fn report_hugepages() -> void __init {
 //
     while (min_count < persistent_huge_pages(h)) {
     folio = remove_pool_hugetlb_folio(h, nodes_allowed, 0);
-    if (!folio)
+    if (!folio) {
     break;
+    }
     list_add(&folio.lru, &page_list);
     }
 // free the pages after dropping lock
@@ -3500,23 +3747,24 @@ unsafe extern "C" fn report_hugepages() -> void __init {
     flush_free_hpage_work(h);
     spin_lock_irq(&hugetlb_lock);
     while (count < persistent_huge_pages(h)) {
-    if (!adjust_pool_surplus(h, nodes_allowed, 1))
+    if (!adjust_pool_surplus(h, nodes_allowed, 1)) {
     break;
     }
-    out:
+    }
+// label;
     h.max_huge_pages = persistent_huge_pages(h);
     spin_unlock_irq(&hugetlb_lock);
     mutex_unlock(&h.resize_lock);
     NODEMASK_FREE(node_alloc_noretry);
     return 0;
     }
-    static long demote_free_hugetlb_folios(struct hstate *src, struct hstate *dst,
-    struct list_head *src_list)
-    {
-    long rc;
-    struct folio *folio, *next;
-    LIST_HEAD(dst_list);
-    LIST_HEAD(ret_list);
+#[no_mangle]
+pub unsafe extern "C" fn demote_free_hugetlb_folios(src: *mut hstate, dst: *mut hstate, src_list: *mut list_head) -> c_long {
+    let mut rc = 0;
+    let mut folio = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
+pub static mut dst_list: usize = 0;
+pub static mut ret_list: usize = 0;
     rc = hugetlb_vmemmap_restore_folios(src, src_list, &ret_list);
     list_splice_init(&ret_list, src_list);
 //
@@ -3529,25 +3777,27 @@ unsafe extern "C" fn report_hugepages() -> void __init {
 //
     mutex_lock(&dst.resize_lock);
     list_for_each_entry_safe(folio, next, src_list, lru) {
-    int i;
-    bool cma;
-    if (folio_test_hugetlb_vmemmap_optimized(folio))
+    let mut i = 0;
+    let mut cma = 0;
+    if (folio_test_hugetlb_vmemmap_optimized(folio)) {
     continue;
+    }
     cma = folio_test_hugetlb_cma(folio);
     list_del(&folio.lru);
     split_page_owner(&folio.page, huge_page_order(src), huge_page_order(dst));
     pgalloc_tag_split(folio, huge_page_order(src), huge_page_order(dst));
     for (i = 0; i < pages_per_huge_page(src); i += pages_per_huge_page(dst)) {
-    struct page *page = folio_page(folio, i);
+    let mut page = folio_page(folio, i);
 // Careful: see __split_huge_page_tail()
-    struct folio *new_folio = (struct folio *)page;
+    let mut new_folio = page;
     clear_compound_head(page);
     prep_compound_page(page, dst.order);
     new_folio.mapping = core::ptr::null_mut();
     init_new_hugetlb_folio(new_folio);
 // Copy the CMA flag so that it is freed correctly
-    if (cma)
+    if (cma) {
     folio_set_hugetlb_cma(new_folio);
+    }
     list_add(&new_folio.lru, &dst_list);
     }
     }
@@ -3555,31 +3805,34 @@ unsafe extern "C" fn report_hugepages() -> void __init {
     mutex_unlock(&dst.resize_lock);
     return rc;
     }
-    long demote_pool_huge_page(struct hstate *src, nodemask_t *nodes_allowed,
-    unsigned long nr_to_demote)
-    __must_hold(&hugetlb_lock)
-    {
-    int nr_nodes, node;
-    struct hstate *dst;
-    let mut rc: c_long = 0;
-    let mut nr_demoted: c_long = 0;
+#[no_mangle]
+pub unsafe extern "C" fn demote_pool_huge_page(src: *mut hstate, nodes_allowed: *mut nodemask_t, hugetlb_lock: unsigned long nr_to_demote)
+    __must_hold(&) -> c_long {
+    let mut nr_nodes = 0;
+    let mut node = 0;
+pub static mut dst: *mut c_void = core::ptr::null_mut();
+pub static mut rc: c_long = 0;
+pub static mut nr_demoted: c_long = 0;
     lockdep_assert_held(&hugetlb_lock);
 // We should never get here if no demote order
     if (!src.demote_order) {
-    pr_warn("HugeTLB: core::ptr::null_mut() demote order passed to demote_pool_huge_page.\n");
+    pr_warn!("HugeTLB: core::ptr::null_mut() demote order passed to demote_pool_huge_page.\n");
     return -EINVAL;		/* internal error */
     }
     dst = size_to_hstate(PAGE_SIZE << src.demote_order);
     for_each_node_mask_to_free(src, nr_nodes, node, nodes_allowed) {
-    LIST_HEAD(list);
-    struct folio *folio, *next;
+pub static mut list: usize = 0;
+    let mut folio = core::ptr::null_mut();
+    let mut next = core::ptr::null_mut();
     list_for_each_entry_safe(folio, next, &src.hugepage_freelists[node], lru) {
-    if (folio_test_hwpoison(folio))
+    if (folio_test_hwpoison(folio)) {
     continue;
+    }
     remove_hugetlb_folio(src, folio, false);
     list_add(&folio.lru, &list);
-    if (++nr_demoted == nr_to_demote)
+    if (++nr_demoted == nr_to_demote) {
     break;
+    }
     }
     spin_unlock_irq(&hugetlb_lock);
     rc = demote_free_hugetlb_folios(src, dst, &list);
@@ -3587,10 +3840,11 @@ unsafe extern "C" fn report_hugepages() -> void __init {
     list_for_each_entry_safe(folio, next, &list, lru) {
     list_del(&folio.lru);
     add_hugetlb_folio(src, folio, false);
-    nr_demoted--;
+    nr_demoted -= 1;
     }
-    if (rc < 0 || nr_demoted == nr_to_demote)
+    if (rc < 0 || nr_demoted == nr_to_demote) {
     break;
+    }
     }
 //
 // Not absolutely necessary, but for consistency update max_huge_pages
@@ -3598,33 +3852,36 @@ unsafe extern "C" fn report_hugepages() -> void __init {
 //
     src.max_huge_pages -= nr_demoted;
     dst.max_huge_pages += nr_demoted << (huge_page_order(src) - huge_page_order(dst));
-    if (rc < 0)
+    if (rc < 0) {
     return rc;
-    if (nr_demoted)
+    }
+    if (nr_demoted) {
     return nr_demoted;
+    }
 //
 // Only way to get here is if all pages on free lists are poisoned.
 // Return -EBUSY so that caller will not retry.
 //
     return -EBUSY;
     }
-    ssize_t __nr_hugepages_store_common(bool obey_mempolicy,
-    struct hstate *h, int nid,
-    unsigned long count, size_t len)
-    {
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn __nr_hugepages_store_common(obey_mempolicy: bool, h: *mut hstate, nid: c_int, count: c_ulong, len: size_t) -> ssize_t {
+    let mut err = 0;
     nodemask_t nodes_allowed, *n_mask;
-    if (hstate_is_gigantic_no_runtime(h))
+    if (hstate_is_gigantic_no_runtime(h)) {
     return -EINVAL;
+    }
     if (nid == NUMA_NO_NODE) {
 //
 // global hstate attribute
 //
     if (!(obey_mempolicy &&
-    init_nodemask_of_mempolicy(&nodes_allowed)))
+    init_nodemask_of_mempolicy(&nodes_allowed))) {
     n_mask = &node_states[N_MEMORY];
-    else
+    }
+    else {
     n_mask = &nodes_allowed;
+    }
     } else {
 //
 // Node specific request.  count adjustment happens in
@@ -3637,16 +3894,15 @@ unsafe extern "C" fn report_hugepages() -> void __init {
     return err ? err : len;
     }
 #[no_mangle]
-unsafe extern "C" fn hugetlb_init() -> int __init {
-    static int __init hugetlb_init(void)
-    {
-    int i;
-    BUILD_BUG_ON(sizeof_field(struct page, private) * BITS_PER_BYTE <
+unsafe extern "C" fn hugetlb_init() -> c_int {
+    let mut i = 0;
+    BUILD_BUG_ON!(sizeof_field(page, private) * BITS_PER_BYTE <
     __NR_HPAGEFLAGS);
     BUILD_BUG_ON_INVALID(HUGETLB_PAGE_ORDER > MAX_FOLIO_ORDER);
     if (!hugepages_supported()) {
-    if (hugetlb_max_hstate || default_hstate_max_huge_pages)
-    pr_warn("HugeTLB: huge pages not supported, ignoring associated command-line parameters\n");
+    if (hugetlb_max_hstate || default_hstate_max_huge_pages) {
+    pr_warn!("HugeTLB: huge pages not supported, ignoring associated command-line parameters\n");
+    }
     return 0;
     }
 //
@@ -3669,16 +3925,17 @@ unsafe extern "C" fn hugetlb_init() -> int __init {
     char buf[32];
     string_get_size(huge_page_size(&default_hstate),
     1, STRING_UNITS_2, buf, 32);
-    pr_warn("HugeTLB: Ignoring hugepages=%lu associated with %s page size\n",
+    pr_warn!("HugeTLB: Ignoring hugepages=%lu associated with %s page size\n",
     default_hstate.max_huge_pages, buf);
-    pr_warn("HugeTLB: Using hugepages=%lu for number of default huge pages\n",
+    pr_warn!("HugeTLB: Using hugepages=%lu for number of default huge pages\n",
     default_hstate_max_huge_pages);
     }
     default_hstate.max_huge_pages =
     default_hstate_max_huge_pages;
-    for_each_online_node(i)
+    for_each_online_node(i) {
     default_hstate.max_huge_pages_node[i] =
     default_hugepages_in_node[i];
+    }
     }
     }
     hugetlb_init_hstates();
@@ -3692,38 +3949,38 @@ unsafe extern "C" fn hugetlb_init() -> int __init {
     num_fault_mutexes = 1;
 
     hugetlb_fault_mutex_table =
-    kmalloc_objs(struct mutex, num_fault_mutexes);
-    BUG_ON(!hugetlb_fault_mutex_table);
-    for (i = 0; i < num_fault_mutexes; i++)
+    kmalloc_objs(mutex, num_fault_mutexes);
+    BUG_ON!(!hugetlb_fault_mutex_table);
+    for (i = 0; i < num_fault_mutexes; i++) {
     mutex_init(&hugetlb_fault_mutex_table[i]);
+    }
     return 0;
     }
-    subsys_initcall(hugetlb_init);
+    subsys_initcall!(hugetlb_init);
 // Overwritten by architectures with more huge page sizes
 #[no_mangle]
 pub unsafe extern "C" fn __attribute(size: (weak)) arch_hugetlb_valid_size(unsigned long) -> bool __init {
     bool __init __attribute((weak)) arch_hugetlb_valid_size(unsigned long size)
     {
-    let mut size: return = = HPAGE_SIZE;
+pub static mut size: return = 0;
     }
 #[no_mangle]
-pub unsafe extern "C" fn hugetlb_add_hstate(order: c_uint) -> void __init {
-    void __init hugetlb_add_hstate(unsigned int order)
-    {
-    struct hstate *h;
-    unsigned long i;
+pub unsafe extern "C" fn hugetlb_add_hstate(order: c_uint)  {
+pub static mut h: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
     if (size_to_hstate(PAGE_SIZE << order)) {
     return;
     }
-    BUG_ON(hugetlb_max_hstate >= HUGE_MAX_HSTATE);
-    BUG_ON(order < order_base_2(__NR_USED_SUBPAGE));
-    WARN_ON(order > MAX_FOLIO_ORDER);
+    BUG_ON!(hugetlb_max_hstate >= HUGE_MAX_HSTATE);
+    BUG_ON!(order < order_base_2(__NR_USED_SUBPAGE));
+    WARN_ON!(order > MAX_FOLIO_ORDER);
     h = &hstates[hugetlb_max_hstate++];
     __mutex_init(&h.resize_lock, "resize mutex", &h.resize_key);
     h.order = order;
     h.mask = ~(huge_page_size(h) - 1);
-    for (i = 0; i < MAX_NUMNODES; ++i)
+    for (i = 0; i < MAX_NUMNODES; ++i) {
     INIT_LIST_HEAD(&h.hugepage_freelists[i]);
+    }
     INIT_LIST_HEAD(&h.hugepage_activelist);
     snprintf(h.name, HSTATE_NAME_LEN, "hugepages-%lukB",
     huge_page_size(h)/SZ_1K);
@@ -3731,52 +3988,49 @@ pub unsafe extern "C" fn hugetlb_add_hstate(order: c_uint) -> void __init {
     }
 #[no_mangle]
 pub unsafe extern "C" fn hugetlb_node_alloc_supported() -> bool __init __weak {
-    bool __init __weak hugetlb_node_alloc_supported(void)
-    {
     return true;
     }
 #[no_mangle]
-unsafe extern "C" fn hugepages_clear_pages_in_node() -> void __init {
-    static void __init hugepages_clear_pages_in_node(void)
-    {
+unsafe extern "C" fn hugepages_clear_pages_in_node()  {
     if (!hugetlb_max_hstate) {
     default_hstate_max_huge_pages = 0;
     memset(default_hugepages_in_node, 0,
-    sizeof(default_hugepages_in_node));
+    sizeof!(default_hugepages_in_node));
     } else {
     parsed_hstate.max_huge_pages = 0;
     memset(parsed_hstate.max_huge_pages_node, 0,
-    sizeof(parsed_hstate.max_huge_pages_node));
+    sizeof!(parsed_hstate.max_huge_pages_node));
     }
     }
 #[no_mangle]
 unsafe extern "C" fn hugetlb_add_param(s: *mut c_char, ): *mut *mut int (setup)(char) -> __init int {
-    static __init int hugetlb_add_param(char *s, int (*setup)(char *))
-    {
-    size_t len;
-    char *p;
-    if (!s)
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_add_param(s: *mut c_char) -> c_int {
+    let mut len = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    if (!s) {
     return -EINVAL;
-    if (hugetlb_param_index >= HUGE_MAX_CMDLINE_ARGS)
+    }
+    if (hugetlb_param_index >= HUGE_MAX_CMDLINE_ARGS) {
     return -EINVAL;
+    }
     len = strlen(s) + 1;
-    if (len + hstate_cmdline_index > sizeof(hstate_cmdline_buf))
+    if (len + hstate_cmdline_index > sizeof!(hstate_cmdline_buf)) {
     return -EINVAL;
+    }
     p = &hstate_cmdline_buf[hstate_cmdline_index];
     memcpy(p, s, len);
     hstate_cmdline_index += len;
     hugetlb_params[hugetlb_param_index].val = p;
     hugetlb_params[hugetlb_param_index].setup = setup;
-    hugetlb_param_index++;
+    hugetlb_param_index += 1;
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn hugetlb_parse_params() -> __init void {
-    static __init void hugetlb_parse_params(void)
-    {
-    int i;
-    struct hugetlb_cmdline *hcp;
-    for (i = 0; i < hugetlb_param_index; i++) {
+    let mut i = 0;
+pub static mut hcp: *mut c_void = core::ptr::null_mut();
+    while (i < hugetlb_param_index) {
     hcp = &hugetlb_params[i];
     hcp.setup(hcp.val);
     }
@@ -3790,21 +4044,19 @@ unsafe extern "C" fn hugetlb_parse_params() -> __init void {
 // specifies the number of huge pages for the default size.
 //
 #[no_mangle]
-unsafe extern "C" fn hugepages_setup(s: *mut c_char) -> int __init {
-    static int __init hugepages_setup(char *s)
-    {
-    unsigned long *mhp;
-    static unsigned long *last_mhp;
-    let mut node: c_int = NUMA_NO_NODE;
-    int count;
-    unsigned long tmp;
-    char *p = s;
+unsafe extern "C" fn hugepages_setup(s: *mut c_char) -> c_int {
+pub static mut mhp: *mut c_void = core::ptr::null_mut();
+pub static mut last_mhp: *mut c_void = core::ptr::null_mut();
+pub static mut node: c_int = 0;
+    let mut count = 0;
+    let mut tmp = 0;
+    let mut p = s;
     if (!hugepages_supported()) {
-    pr_warn("HugeTLB: hugepages unsupported, ignoring hugepages=%s cmdline\n", s);
+    pr_warn!("HugeTLB: hugepages unsupported, ignoring hugepages=%s cmdline\n", s);
     return 0;
     }
     if (!parsed_valid_hugepagesz) {
-    pr_warn("HugeTLB: hugepages=%s does not follow a valid hugepagesz, ignoring\n", s);
+    pr_warn!("HugeTLB: hugepages=%s does not follow a valid hugepagesz, ignoring\n", s);
     parsed_valid_hugepagesz = true;
     return -EINVAL;
     }
@@ -3814,54 +4066,63 @@ unsafe extern "C" fn hugepages_setup(s: *mut c_char) -> int __init {
 // Otherwise, it goes with the previously parsed hugepagesz or
 // default_hugepagesz.
 //
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: !hugetlb_max_hstate) -> else {
-    else if (!hugetlb_max_hstate)
+
+    else if (!hugetlb_max_hstate) {
     mhp = &default_hstate_max_huge_pages;
-    else
+    }
+    else {
     mhp = &parsed_hstate.max_huge_pages;
+    }
     if (mhp == last_mhp) {
-    pr_warn("HugeTLB: hugepages= specified twice without interleaving hugepagesz=, ignoring hugepages=%s\n", s);
+    pr_warn!("HugeTLB: hugepages= specified twice without interleaving hugepagesz=, ignoring hugepages=%s\n", s);
     return 1;
     }
     while (*p) {
     count = 0;
-    if (sscanf(p, "%lu%n", &tmp, &count) != 1)
-    goto invalid;
+    if (sscanf(p, "%lu%n", &tmp, &count) != 1) {
+// goto;
+    }
 // Parameter is node format
     if (p[count] == ':') {
     if (!hugetlb_node_alloc_supported()) {
-    pr_warn("HugeTLB: architecture can't support node specific alloc, ignoring!\n");
+    pr_warn!("HugeTLB: architecture can't support node specific alloc, ignoring!\n");
     return 1;
     }
-    if (tmp >= MAX_NUMNODES || !node_online(tmp))
-    goto invalid;
+    if (tmp >= MAX_NUMNODES || !node_online(tmp)) {
+// goto;
+    }
     node = array_index_nospec(tmp, MAX_NUMNODES);
     p += count + 1;
 // Parse hugepages
-    if (sscanf(p, "%lu%n", &tmp, &count) != 1)
-    goto invalid;
-    if (!hugetlb_max_hstate)
+    if (sscanf(p, "%lu%n", &tmp, &count) != 1) {
+// goto;
+    }
+    if (!hugetlb_max_hstate) {
     default_hugepages_in_node[node] = tmp;
-    else
+    }
+    else {
     parsed_hstate.max_huge_pages_node[node] = tmp;
+    }
 // mhp += tmp;
 // Go to parse next node
-    if (p[count] == ',')
+    if (p[count] == ',') {
     p += count + 1;
-    else
+    }
+    else {
     break;
+    }
     } else {
-    if (p != s)
-    goto invalid;
+    if (p != s) {
+// goto;
+    }
 // mhp = tmp;
     break;
     }
     }
     last_mhp = mhp;
     return 0;
-    invalid:
-    pr_warn("HugeTLB: Invalid hugepages parameter %s\n", p);
+// label;
+    pr_warn!("HugeTLB: Invalid hugepages parameter %s\n", p);
     hugepages_clear_pages_in_node();
     return -EINVAL;
     }
@@ -3874,19 +4135,17 @@ pub unsafe extern "C" fn if(_arg: !hugetlb_max_hstate) -> else {
 // hugepagesz argument was valid.
 //
 #[no_mangle]
-unsafe extern "C" fn hugepagesz_setup(s: *mut c_char) -> int __init {
-    static int __init hugepagesz_setup(char *s)
-    {
-    unsigned long size;
-    struct hstate *h;
+unsafe extern "C" fn hugepagesz_setup(s: *mut c_char) -> c_int {
+    let mut size = 0;
+pub static mut h: *mut c_void = core::ptr::null_mut();
     if (!hugepages_supported()) {
-    pr_warn("HugeTLB: hugepages unsupported, ignoring hugepagesz=%s cmdline\n", s);
+    pr_warn!("HugeTLB: hugepages unsupported, ignoring hugepagesz=%s cmdline\n", s);
     return 0;
     }
     parsed_valid_hugepagesz = false;
     size = (unsigned long)memparse(s, core::ptr::null_mut());
     if (!arch_hugetlb_valid_size(size)) {
-    pr_err("HugeTLB: unsupported hugepagesz=%s\n", s);
+    pr_err!("HugeTLB: unsupported hugepagesz=%s\n", s);
     return -EINVAL;
     }
     h = size_to_hstate(size);
@@ -3900,7 +4159,7 @@ unsafe extern "C" fn hugepagesz_setup(s: *mut c_char) -> int __init {
 //
     if (!parsed_default_hugepagesz ||  h != &default_hstate ||
     default_hstate.max_huge_pages) {
-    pr_warn("HugeTLB: hugepagesz=%s specified twice, ignoring\n", s);
+    pr_warn!("HugeTLB: hugepagesz=%s specified twice, ignoring\n", s);
     return -EINVAL;
     }
 //
@@ -3922,24 +4181,22 @@ unsafe extern "C" fn hugepagesz_setup(s: *mut c_char) -> int __init {
 // Only one instance of default_hugepagesz allowed on command line.
 //
 #[no_mangle]
-unsafe extern "C" fn default_hugepagesz_setup(s: *mut c_char) -> int __init {
-    static int __init default_hugepagesz_setup(char *s)
-    {
-    unsigned long size;
-    int i;
+unsafe extern "C" fn default_hugepagesz_setup(s: *mut c_char) -> c_int {
+    let mut size = 0;
+    let mut i = 0;
     if (!hugepages_supported()) {
-    pr_warn("HugeTLB: hugepages unsupported, ignoring default_hugepagesz=%s cmdline\n",
+    pr_warn!("HugeTLB: hugepages unsupported, ignoring default_hugepagesz=%s cmdline\n",
     s);
     return 0;
     }
     parsed_valid_hugepagesz = false;
     if (parsed_default_hugepagesz) {
-    pr_err("HugeTLB: default_hugepagesz previously specified, ignoring %s\n", s);
+    pr_err!("HugeTLB: default_hugepagesz previously specified, ignoring %s\n", s);
     return -EINVAL;
     }
     size = (unsigned long)memparse(s, core::ptr::null_mut());
     if (!arch_hugetlb_valid_size(size)) {
-    pr_err("HugeTLB: unsupported default_hugepagesz=%s\n", s);
+    pr_err!("HugeTLB: unsupported default_hugepagesz=%s\n", s);
     return -EINVAL;
     }
     hugetlb_add_hstate(ilog2(size) - PAGE_SHIFT);
@@ -3959,10 +4216,11 @@ unsafe extern "C" fn default_hugepagesz_setup(s: *mut c_char) -> int __init {
 // Since this is an early parameter, we can't check
 // NUMA node state yet, so loop through MAX_NUMNODES.
 //
-    for (i = 0; i < MAX_NUMNODES; i++) {
-    if (default_hugepages_in_node[i] != 0)
+    while (i < MAX_NUMNODES) {
+    if (default_hugepages_in_node[i] != 0) {
     default_hstate.max_huge_pages_node[i] =
     default_hugepages_in_node[i];
+    }
     }
     default_hstate_max_huge_pages = 0;
     }
@@ -3970,29 +4228,30 @@ unsafe extern "C" fn default_hugepagesz_setup(s: *mut c_char) -> int __init {
     }
     hugetlb_early_param("default_hugepagesz", default_hugepagesz_setup);
 #[no_mangle]
-pub unsafe extern "C" fn hugetlb_bootmem_set_nodes() -> void __init {
-    void __init hugetlb_bootmem_set_nodes(void)
-    {
-    int i, nid;
-    if (!nodes_empty(hugetlb_bootmem_nodes))
+pub unsafe extern "C" fn hugetlb_bootmem_set_nodes()  {
+    let mut i = 0;
+    let mut nid = 0;
+    if (!nodes_empty(hugetlb_bootmem_nodes)) {
     return;
-    for_each_mem_pfn_range(i, MAX_NUMNODES, core::ptr::null_mut(), core::ptr::null_mut(), &nid)
+    }
+    for_each_mem_pfn_range(i, MAX_NUMNODES, core::ptr::null_mut(), core::ptr::null_mut(), &nid) {
     node_set(nid, hugetlb_bootmem_nodes);
     }
+    }
 #[no_mangle]
-pub unsafe extern "C" fn hugetlb_bootmem_alloc() -> void __init {
-    void __init hugetlb_bootmem_alloc(void)
-    {
-    struct hstate *h;
-    int i;
+pub unsafe extern "C" fn hugetlb_bootmem_alloc()  {
+pub static mut h: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
     hugetlb_bootmem_set_nodes();
-    for (i = 0; i < MAX_NUMNODES; i++)
+    for (i = 0; i < MAX_NUMNODES; i++) {
     INIT_LIST_HEAD(&huge_boot_pages[i]);
+    }
     hugetlb_parse_params();
     for_each_hstate(h) {
     h.next_nid_to_alloc = first_online_node;
-    if (hstate_is_gigantic(h))
+    if (hstate_is_gigantic(h)) {
     hugetlb_hstate_alloc_pages(h);
+    }
     }
     }
 //
@@ -4002,46 +4261,44 @@ pub unsafe extern "C" fn hugetlb_bootmem_alloc() -> void __init {
 // allocation of hugepages.
 //
 #[no_mangle]
-unsafe extern "C" fn hugepage_alloc_threads_setup(s: *mut c_char) -> int __init {
-    static int __init hugepage_alloc_threads_setup(char *s)
-    {
-    unsigned long allocation_threads;
-    if (kstrtoul(s, 0, &allocation_threads) != 0)
+unsafe extern "C" fn hugepage_alloc_threads_setup(s: *mut c_char) -> c_int {
+    let mut allocation_threads = 0;
+    if (kstrtoul(s, 0, &allocation_threads) != 0) {
     return 1;
-    if (allocation_threads == 0)
+    }
+    if (allocation_threads == 0) {
     return 1;
+    }
     hugepage_allocation_threads = allocation_threads;
     return 1;
     }
-    __setup("hugepage_alloc_threads=", hugepage_alloc_threads_setup);
+    __setup!("hugepage_alloc_threads=", hugepage_alloc_threads_setup);
 #[no_mangle]
 unsafe extern "C" fn allowed_mems_nr(h: *mut hstate) -> c_uint {
-    static unsigned int allowed_mems_nr(struct hstate *h)
-    {
-    int node;
-    let mut nr: c_uint = 0;
-    nodemask_t *mbind_nodemask;
-    unsigned int *array = h.free_huge_pages_node;
-    let mut gfp_mask: gfp_t = htlb_alloc_mask(h);
+    let mut node = 0;
+pub static mut nr: c_uint = 0;
+pub static mut mbind_nodemask: *mut c_void = core::ptr::null_mut();
+    let mut array = h.free_huge_pages_node;
+pub static mut gfp_mask: gfp_t = 0;
     mbind_nodemask = policy_mbind_nodemask(gfp_mask);
     for_each_node_mask(node, cpuset_current_mems_allowed) {
-    if (!mbind_nodemask || node_isset(node, *mbind_nodemask))
+    if (!mbind_nodemask || node_isset(node, *mbind_nodemask)) {
     nr += array[node];
+    }
     }
     return nr;
     }
 #[no_mangle]
 pub unsafe extern "C" fn hugetlb_report_meminfo(m: *mut seq_file) {
-    void hugetlb_report_meminfo(struct seq_file *m)
-    {
-    struct hstate *h;
-    let mut total: c_ulong = 0;
-    if (!hugepages_supported())
+pub static mut h: *mut c_void = core::ptr::null_mut();
+pub static mut total: c_ulong = 0;
+    if (!hugepages_supported()) {
     return;
+    }
     for_each_hstate(h) {
-    let mut count: c_ulong = h.nr_huge_pages;
+pub static mut count: c_ulong = 0;
     total += huge_page_size(h) * count;
-    if (h == &default_hstate)
+    if (h == &default_hstate) {
     seq_printf(m,
     "HugePages_Total:   %5lu\n"
     "HugePages_Free:    %5lu\n"
@@ -4054,15 +4311,15 @@ pub unsafe extern "C" fn hugetlb_report_meminfo(m: *mut seq_file) {
     h.surplus_huge_pages,
     huge_page_size(h) / SZ_1K);
     }
+    }
     seq_printf(m, "Hugetlb:        %8lu kB\n", total / SZ_1K);
     }
 #[no_mangle]
 pub unsafe extern "C" fn hugetlb_report_node_meminfo(buf: *mut c_char, len: c_int, nid: c_int) -> c_int {
-    int hugetlb_report_node_meminfo(char *buf, int len, int nid)
-    {
-    struct hstate *h = &default_hstate;
-    if (!hugepages_supported())
+    let mut h = &default_hstate;
+    if (!hugepages_supported()) {
     return 0;
+    }
     return sysfs_emit_at(buf, len,
     "Node %d HugePages_Total: %5u\n"
     "Node %d HugePages_Free:  %5u\n"
@@ -4073,12 +4330,11 @@ pub unsafe extern "C" fn hugetlb_report_node_meminfo(buf: *mut c_char, len: c_in
     }
 #[no_mangle]
 pub unsafe extern "C" fn hugetlb_show_meminfo_node(nid: c_int) {
-    void hugetlb_show_meminfo_node(int nid)
-    {
-    struct hstate *h;
-    if (!hugepages_supported())
+pub static mut h: *mut c_void = core::ptr::null_mut();
+    if (!hugepages_supported()) {
     return;
-    for_each_hstate(h)
+    }
+    for_each_hstate(h) {
     printk("Node %d hugepages_total=%u hugepages_free=%u hugepages_surp=%u hugepages_size=%lukB\n",
     nid,
     h.nr_huge_pages_node[nid],
@@ -4086,31 +4342,28 @@ pub unsafe extern "C" fn hugetlb_show_meminfo_node(nid: c_int) {
     h.surplus_huge_pages_node[nid],
     huge_page_size(h) / SZ_1K);
     }
+    }
 #[no_mangle]
 pub unsafe extern "C" fn hugetlb_report_usage(m: *mut seq_file, mm: *mut mm_struct) {
-    void hugetlb_report_usage(struct seq_file *m, struct mm_struct *mm)
-    {
     seq_printf(m, "HugetlbPages:\t%8lu kB\n",
     K(atomic_long_read(&mm.hugetlb_usage)));
     }
 // Return the number pages of memory we physically have, in PAGE_SIZE units.
 #[no_mangle]
 pub unsafe extern "C" fn hugetlb_total_pages() -> c_ulong {
-    unsigned long hugetlb_total_pages(void)
-    {
-    struct hstate *h;
-    let mut nr_total_pages: c_ulong = 0;
-    for_each_hstate(h)
+pub static mut h: *mut c_void = core::ptr::null_mut();
+pub static mut nr_total_pages: c_ulong = 0;
+    for_each_hstate(h) {
     nr_total_pages += h.nr_huge_pages * pages_per_huge_page(h);
+    }
     return nr_total_pages;
     }
 #[no_mangle]
 unsafe extern "C" fn hugetlb_acct_memory(h: *mut hstate, delta: c_long) -> c_int {
-    static int hugetlb_acct_memory(struct hstate *h, long delta)
-    {
-    let mut ret: c_int = -ENOMEM;
-    if (!delta)
+pub static mut ret: c_int = 0;
+    if (!delta) {
     return 0;
+    }
     spin_lock_irq(&hugetlb_lock);
 //
 // When cpuset is configured, it breaks the strict hugetlb page
@@ -4136,25 +4389,25 @@ unsafe extern "C" fn hugetlb_acct_memory(h: *mut hstate, delta: c_long) -> c_int
 // above.
 //
     if (delta > 0) {
-    if (gather_surplus_pages(h, delta) < 0)
-    goto out;
+    if (gather_surplus_pages(h, delta) < 0) {
+// goto;
+    }
     if (delta > allowed_mems_nr(h)) {
     return_unused_surplus_pages(h, delta);
-    goto out;
+// goto;
     }
     }
     ret = 0;
-    if (delta < 0)
+    if (delta < 0) {
     return_unused_surplus_pages(h, (unsigned long) -delta);
-    out:
+    }
+// label;
     spin_unlock_irq(&hugetlb_lock);
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn hugetlb_vm_op_open(vma: *mut vm_area_struct) {
-    static void hugetlb_vm_op_open(struct vm_area_struct *vma)
-    {
-    struct resv_map *resv = vma_resv_map(vma);
+    let mut resv = vma_resv_map(vma);
 //
 // HPAGE_RESV_OWNER indicates a private mapping.
 // This new VMA should share its siblings reservation map if present.
@@ -4175,13 +4428,13 @@ unsafe extern "C" fn hugetlb_vm_op_open(vma: *mut vm_area_struct) {
 // for this vma.
 //
     if (vma.vm_flags & VM_MAYSHARE) {
-    struct hugetlb_vma_lock *vma_lock = vma.vm_private_data;
+    let mut vma_lock = vma.vm_private_data;
     if (vma_lock) {
     if (vma_lock.vma != vma) {
     vma.vm_private_data = core::ptr::null_mut();
     hugetlb_vma_lock_alloc(vma);
     } else {
-    pr_warn("HugeTLB: vma_lock already exists in %s.\n", __func__);
+    pr_warn!("HugeTLB: vma_lock already exists in %s.\n", __func__);
     }
     } else {
     hugetlb_vma_lock_alloc(vma);
@@ -4190,17 +4443,16 @@ unsafe extern "C" fn hugetlb_vm_op_open(vma: *mut vm_area_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn hugetlb_vm_op_close(vma: *mut vm_area_struct) {
-    static void hugetlb_vm_op_close(struct vm_area_struct *vma)
-    {
-    struct hstate *h = hstate_vma(vma);
-    struct resv_map *resv;
-    struct hugepage_subpool *spool = subpool_vma(vma);
+    let mut h = hstate_vma(vma);
+pub static mut resv: *mut c_void = core::ptr::null_mut();
+    let mut spool = subpool_vma(vma);
     unsigned long reserve, start, end;
-    long gbl_reserve;
+    let mut gbl_reserve = 0;
     hugetlb_vma_lock_free(vma);
     resv = vma_resv_map(vma);
-    if (!resv || !is_vma_resv_set(vma, HPAGE_RESV_OWNER))
+    if (!resv || !is_vma_resv_set(vma, HPAGE_RESV_OWNER)) {
     return;
+    }
     start = vma_hugecache_offset(h, vma, vma.vm_start);
     end = vma_hugecache_offset(h, vma, vma.vm_end);
     reserve = (end - start) - region_count(resv, start, end);
@@ -4217,16 +4469,13 @@ unsafe extern "C" fn hugetlb_vm_op_close(vma: *mut vm_area_struct) {
     }
 #[no_mangle]
 unsafe extern "C" fn hugetlb_vm_op_split(vma: *mut vm_area_struct, addr: c_ulong) -> c_int {
-    static int hugetlb_vm_op_split(struct vm_area_struct *vma, unsigned long addr)
-    {
-    if (addr & ~(huge_page_mask(hstate_vma(vma))))
+    if (addr & ~(huge_page_mask(hstate_vma(vma)))) {
     return -EINVAL;
+    }
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn hugetlb_split(vma: *mut vm_area_struct, addr: c_ulong) {
-    void hugetlb_split(struct vm_area_struct *vma, unsigned long addr)
-    {
 //
 // PMD sharing is only possible for PUD_SIZE-aligned address ranges
 // in HugeTLB VMAs. If we will lose PUD_SIZE alignment due to this
@@ -4238,8 +4487,8 @@ pub unsafe extern "C" fn hugetlb_split(vma: *mut vm_area_struct, addr: c_ulong) 
     vma_assert_write_locked(vma);
     i_mmap_assert_write_locked(vma.vm_file.f_mapping);
     if (addr & ~PUD_MASK) {
-    let mut floor: c_ulong = addr & PUD_MASK;
-    let mut ceil: c_ulong = floor + PUD_SIZE;
+pub static mut floor: c_ulong = 0;
+pub static mut ceil: c_ulong = 0;
     if (floor >= vma.vm_start && ceil <= vma.vm_end) {
 //
 // Locking:
@@ -4257,8 +4506,6 @@ pub unsafe extern "C" fn hugetlb_split(vma: *mut vm_area_struct, addr: c_ulong) 
     }
 #[no_mangle]
 unsafe extern "C" fn hugetlb_vm_op_pagesize(vma: *mut vm_area_struct) -> c_ulong {
-    static unsigned long hugetlb_vm_op_pagesize(struct vm_area_struct *vma)
-    {
     return huge_page_size(hstate_vma(vma));
     }
 //
@@ -4269,20 +4516,15 @@ unsafe extern "C" fn hugetlb_vm_op_pagesize(vma: *mut vm_area_struct) -> c_ulong
 //
 #[no_mangle]
 unsafe extern "C" fn hugetlb_vm_op_fault(vmf: *mut vm_fault) -> vm_fault_t {
-    static vm_fault_t hugetlb_vm_op_fault(struct vm_fault *vmf)
-    {
     BUG();
     return 0;
     }
 
-    static bool hugetlb_can_userfault(struct vm_area_struct *vma,
-    vm_flags_t vm_flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_can_userfault(vma: *mut vm_area_struct, vm_flags: vm_flags_t) -> bool {
     return true;
     }
-    static const struct vm_uffd_ops hugetlb_uffd_ops = {
-    .can_userfault = hugetlb_can_userfault,
-    };
+pub static mut vm_uffd_ops: usize = 0;
 
 //
 // When a new function is introduced to vm_operations_struct and added
@@ -4291,21 +4533,12 @@ unsafe extern "C" fn hugetlb_vm_op_fault(vmf: *mut vm_fault) -> vm_fault_t {
 // shmget/shmat with "huge page" specified are backed by hugetlbfs files,
 // their original vm_ops are overwritten with shm_vm_ops.
 //
-    const struct vm_operations_struct hugetlb_vm_ops = {
-    .fault = hugetlb_vm_op_fault,
-    .open = hugetlb_vm_op_open,
-    .close = hugetlb_vm_op_close,
-    .may_split = hugetlb_vm_op_split,
-    .pagesize = hugetlb_vm_op_pagesize,
-
-    .uffd_ops = &hugetlb_uffd_ops,
-
-    };
-    static pte_t make_huge_pte(struct vm_area_struct *vma, struct folio *folio,
+pub static mut vm_operations_struct: usize = 0;
+    static pte_t make_huge_pte(vm_area_struct *vma, folio *folio,
     bool try_mkwrite)
     {
-    let mut entry: pte_t = folio_mk_pte(folio, vma.vm_page_prot);
-    let mut shift: c_uint = huge_page_shift(hstate_vma(vma));
+pub static mut entry: pte_t = 0;
+pub static mut shift: c_uint = 0;
     if (try_mkwrite && (vma.vm_flags & VM_WRITE)) {
     entry = pte_mkwrite_novma(pte_mkdirty(entry));
     } else {
@@ -4315,32 +4548,30 @@ unsafe extern "C" fn hugetlb_vm_op_fault(vmf: *mut vm_fault) -> vm_fault_t {
     entry = arch_make_huge_pte(entry, shift, vma.vm_flags);
     return entry;
     }
-    static void set_huge_ptep_writable(struct vm_area_struct *vma,
-    unsigned long address, pte_t *ptep)
-    {
-    pte_t entry;
+#[no_mangle]
+pub unsafe extern "C" fn set_huge_ptep_writable(vma: *mut vm_area_struct, address: c_ulong, ptep: *mut pte_t) {
+    let mut entry;
     entry = huge_pte_mkwrite(huge_pte_mkdirty(huge_ptep_get(vma.vm_mm, address, ptep)));
-    if (huge_ptep_set_access_flags(vma, address, ptep, entry, 1))
+    if (huge_ptep_set_access_flags(vma, address, ptep, entry, 1)) {
     update_mmu_cache(vma, address, ptep);
     }
-    static void set_huge_ptep_maybe_writable(struct vm_area_struct *vma,
-    unsigned long address, pte_t *ptep)
-    {
-    if (vma.vm_flags & VM_WRITE)
+    }
+#[no_mangle]
+pub unsafe extern "C" fn set_huge_ptep_maybe_writable(vma: *mut vm_area_struct, address: c_ulong, ptep: *mut pte_t) {
+    if (vma.vm_flags & VM_WRITE) {
     set_huge_ptep_writable(vma, address, ptep);
     }
-    static void
-    hugetlb_install_folio(struct vm_area_struct *vma, pte_t *ptep, unsigned long addr,
-    struct folio *new_folio, pte_t old, unsigned long sz)
-    {
-    let mut newpte: pte_t = make_huge_pte(vma, new_folio, true);
+    }
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_install_folio(vma: *mut vm_area_struct, ptep: *mut pte_t, addr: c_ulong, new_folio: *mut folio, old: pte_t, sz: c_ulong) {
+pub static mut newpte: pte_t = 0;
     __folio_mark_uptodate(new_folio);
     hugetlb_add_new_anon_rmap(new_folio, vma, addr);
     if (userfaultfd_protected(vma) && huge_pte_uffd(old)) {
     newpte = huge_pte_mkuffd(newpte);
 // Restore PAGE_NONE so the RWP marker keeps trapping.
     if (userfaultfd_rwp(vma)) {
-    let mut shift: c_uint = huge_page_shift(hstate_vma(vma));
+pub static mut shift: c_uint = 0;
     newpte = huge_pte_modify(newpte, PAGE_NONE);
     newpte = arch_make_huge_pte(newpte, shift, vma.vm_flags);
     }
@@ -4349,21 +4580,19 @@ unsafe extern "C" fn hugetlb_vm_op_fault(vmf: *mut vm_fault) -> vm_fault_t {
     hugetlb_count_add(pages_per_huge_page(hstate_vma(vma)), vma.vm_mm);
     folio_set_hugetlb_migratable(new_folio);
     }
-    int copy_hugetlb_page_range(struct mm_struct *dst, struct mm_struct *src,
-    struct vm_area_struct *dst_vma,
-    struct vm_area_struct *src_vma)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn copy_hugetlb_page_range(dst: *mut mm_struct, src: *mut mm_struct, dst_vma: *mut vm_area_struct, src_vma: *mut vm_area_struct) -> c_int {
     pte_t *src_pte, *dst_pte, entry;
-    struct folio *pte_folio;
-    unsigned long addr;
-    let mut cow: bool = vma_is_cow_mapping(src_vma);
-    struct hstate *h = hstate_vma(src_vma);
-    let mut sz: c_ulong = huge_page_size(h);
-    let mut npages: c_ulong = pages_per_huge_page(h);
-    struct mmu_notifier_range range;
-    unsigned long last_addr_mask;
-    softleaf_t softleaf;
-    let mut ret: c_int = 0;
+pub static mut pte_folio: *mut c_void = core::ptr::null_mut();
+    let mut addr = 0;
+pub static mut cow: bool = false;
+    let mut h = hstate_vma(src_vma);
+pub static mut sz: c_ulong = 0;
+pub static mut npages: c_ulong = 0;
+pub static mut range: usize = 0;
+    let mut last_addr_mask = 0;
+    let mut softleaf;
+pub static mut ret: c_int = 0;
     if (cow) {
     mmu_notifier_range_init(&range, MMU_NOTIFY_CLEAR, 0, src,
     src_vma.vm_start,
@@ -4381,8 +4610,9 @@ unsafe extern "C" fn hugetlb_vm_op_fault(vmf: *mut vm_fault) -> vm_fault_t {
     hugetlb_vma_lock_read(src_vma);
     }
     last_addr_mask = hugetlb_mask_last_page(h);
-    for (addr = src_vma.vm_start; addr < src_vma.vm_end; addr += sz) {
-    spinlock_t *src_ptl, *dst_ptl;
+    while (addr < src_vma.vm_end) {
+    let mut src_ptl = core::ptr::null_mut();
+    let mut dst_ptl = core::ptr::null_mut();
     src_pte = hugetlb_walk(src_vma, addr, sz);
     if (!src_pte) {
     addr |= last_addr_mask;
@@ -4404,10 +4634,10 @@ unsafe extern "C" fn hugetlb_vm_op_fault(vmf: *mut vm_fault) -> vm_fault_t {
     src_ptl = huge_pte_lockptr(h, src, src_pte);
     spin_lock_nested(src_ptl, SINGLE_DEPTH_NESTING);
     entry = huge_ptep_get(src_vma.vm_mm, addr, src_pte);
-    again:
+// label;
     if (huge_pte_none(entry)) {
 // Skip if src entry none.
-    goto next;
+// goto;
     }
     softleaf = softleaf_from_pte(entry);
     if (unlikely(softleaf_is_hwpoison(softleaf))) {
@@ -4419,7 +4649,7 @@ unsafe extern "C" fn hugetlb_vm_op_fault(vmf: *mut vm_fault) -> vm_fault_t {
 //
     set_huge_pte_at(dst, addr, dst_pte, entry, sz);
     } else if (unlikely(softleaf_is_migration(softleaf))) {
-    let mut uffd: bool = pte_swp_uffd(entry);
+pub static mut uffd: bool = false;
     if (!softleaf_is_migration_read(softleaf) && cow) {
 //
 // COW mappings require pages in both
@@ -4428,18 +4658,21 @@ unsafe extern "C" fn hugetlb_vm_op_fault(vmf: *mut vm_fault) -> vm_fault_t {
     softleaf = make_readable_migration_entry(
     swp_offset(softleaf));
     entry = swp_entry_to_pte(softleaf);
-    if (userfaultfd_protected(src_vma) && uffd)
+    if (userfaultfd_protected(src_vma) && uffd) {
     entry = pte_swp_mkuffd(entry);
+    }
     set_huge_pte_at(src, addr, src_pte, entry, sz);
     }
-    if (!userfaultfd_protected(dst_vma))
+    if (!userfaultfd_protected(dst_vma)) {
     entry = pte_swp_clear_uffd(entry);
+    }
     set_huge_pte_at(dst, addr, dst_pte, entry, sz);
     } else if (unlikely(pte_is_marker(entry))) {
-    let mut marker: pte_marker = copy_pte_marker(softleaf, dst_vma);
-    if (marker)
+pub static mut marker: pte_marker = 0;
+    if (marker) {
     set_huge_pte_at(dst, addr, dst_pte,
     make_pte_marker(marker), sz);
+    }
     } else {
     entry = huge_ptep_get(src_vma.vm_mm, addr, src_pte);
     pte_folio = page_folio(pte_page(entry));
@@ -4457,8 +4690,8 @@ unsafe extern "C" fn hugetlb_vm_op_fault(vmf: *mut vm_fault) -> vm_fault_t {
     if (!folio_test_anon(pte_folio)) {
     hugetlb_add_file_rmap(pte_folio);
     } else if (hugetlb_try_dup_anon_rmap(pte_folio, src_vma)) {
-    let mut src_pte_old: pte_t = entry;
-    struct folio *new_folio;
+pub static mut src_pte_old: pte_t = 0;
+pub static mut new_folio: *mut c_void = core::ptr::null_mut();
     spin_unlock(src_ptl);
     spin_unlock(dst_ptl);
 // Do not use reserve as it's private owned
@@ -4486,11 +4719,11 @@ unsafe extern "C" fn hugetlb_vm_op_fault(vmf: *mut vm_fault) -> vm_fault_t {
     new_folio);
     folio_put(new_folio);
 // huge_ptep of dst_pte won't change as in child
-    goto again;
+// goto;
     }
     hugetlb_install_folio(dst_vma, dst_pte, addr,
     new_folio, src_pte_old, sz);
-    goto next;
+// goto;
     }
 // See __copy_present_ptes(): restore accessible protection.
     if (!userfaultfd_protected(dst_vma)) {
@@ -4515,7 +4748,7 @@ unsafe extern "C" fn hugetlb_vm_op_fault(vmf: *mut vm_fault) -> vm_fault_t {
     set_huge_pte_at(dst, addr, dst_pte, entry, sz);
     hugetlb_count_add(npages, dst);
     }
-    next:
+// label;
     spin_unlock(src_ptl);
     spin_unlock(dst_ptl);
     }
@@ -4527,23 +4760,23 @@ unsafe extern "C" fn hugetlb_vm_op_fault(vmf: *mut vm_fault) -> vm_fault_t {
     }
     return ret;
     }
-    static void move_huge_pte(struct vm_area_struct *vma, unsigned long old_addr,
-    unsigned long new_addr, pte_t *src_pte, pte_t *dst_pte,
-    unsigned long sz)
-    {
-    let mut need_clear_uffd_wp: bool = vma_has_uffd_without_event_remap(vma);
-    struct hstate *h = hstate_vma(vma);
-    struct mm_struct *mm = vma.vm_mm;
-    spinlock_t *src_ptl, *dst_ptl;
-    pte_t pte;
+#[no_mangle]
+pub unsafe extern "C" fn move_huge_pte(vma: *mut vm_area_struct, old_addr: c_ulong, new_addr: c_ulong, src_pte: *mut pte_t, dst_pte: *mut pte_t, sz: c_ulong) {
+pub static mut need_clear_uffd_wp: bool = false;
+    let mut h = hstate_vma(vma);
+    let mut mm = vma.vm_mm;
+    let mut src_ptl = core::ptr::null_mut();
+    let mut dst_ptl = core::ptr::null_mut();
+    let mut pte;
     dst_ptl = huge_pte_lock(h, mm, dst_pte);
     src_ptl = huge_pte_lockptr(h, mm, src_pte);
 //
 // We don't have to worry about the ordering of src and dst ptlocks
 // because exclusive mmap_lock (or the i_mmap_lock) prevents deadlock.
 //
-    if (src_ptl != dst_ptl)
+    if (src_ptl != dst_ptl) {
     spin_lock_nested(src_ptl, SINGLE_DEPTH_NESTING);
+    }
     pte = huge_ptep_get_and_clear(mm, old_addr, src_pte, sz);
     if (need_clear_uffd_wp && pte_is_uffd_wp_marker(pte)) {
     huge_pte_clear(mm, new_addr, dst_pte, sz);
@@ -4569,24 +4802,23 @@ unsafe extern "C" fn hugetlb_vm_op_fault(vmf: *mut vm_fault) -> vm_fault_t {
     }
     set_huge_pte_at(mm, new_addr, dst_pte, pte, sz);
     }
-    if (src_ptl != dst_ptl)
+    if (src_ptl != dst_ptl) {
     spin_unlock(src_ptl);
+    }
     spin_unlock(dst_ptl);
     }
-    int move_hugetlb_page_tables(struct vm_area_struct *vma,
-    struct vm_area_struct *new_vma,
-    unsigned long old_addr, unsigned long new_addr,
-    unsigned long len)
-    {
-    struct hstate *h = hstate_vma(vma);
-    struct address_space *mapping = vma.vm_file.f_mapping;
-    let mut sz: c_ulong = huge_page_size(h);
-    struct mm_struct *mm = vma.vm_mm;
-    let mut old_end: c_ulong = old_addr + len;
-    unsigned long last_addr_mask;
-    pte_t *src_pte, *dst_pte;
-    struct mmu_notifier_range range;
-    struct mmu_gather tlb;
+#[no_mangle]
+pub unsafe extern "C" fn move_hugetlb_page_tables(vma: *mut vm_area_struct, new_vma: *mut vm_area_struct, old_addr: c_ulong, new_addr: c_ulong, len: c_ulong) -> c_int {
+    let mut h = hstate_vma(vma);
+    let mut mapping = vma.vm_file.f_mapping;
+pub static mut sz: c_ulong = 0;
+    let mut mm = vma.vm_mm;
+pub static mut old_end: c_ulong = 0;
+    let mut last_addr_mask = 0;
+    let mut src_pte = core::ptr::null_mut();
+    let mut dst_pte = core::ptr::null_mut();
+pub static mut range: usize = 0;
+pub static mut tlb: usize = 0;
     mmu_notifier_range_init(&range, MMU_NOTIFY_CLEAR, 0, mm, old_addr,
     old_end);
     adjust_range_if_pmd_sharing_possible(vma, &range.start, &range.end);
@@ -4601,23 +4833,25 @@ unsafe extern "C" fn hugetlb_vm_op_fault(vmf: *mut vm_fault) -> vm_fault_t {
 // Prevent race with file truncation
     hugetlb_vma_lock_write(vma);
     i_mmap_lock_write(mapping);
-    for (; old_addr < old_end; old_addr += sz, new_addr += sz) {
+    while (old_addr < old_end) {
     src_pte = hugetlb_walk(vma, old_addr, sz);
     if (!src_pte) {
     old_addr |= last_addr_mask;
     new_addr |= last_addr_mask;
     continue;
     }
-    if (huge_pte_none(huge_ptep_get(mm, old_addr, src_pte)))
+    if (huge_pte_none(huge_ptep_get(mm, old_addr, src_pte))) {
     continue;
+    }
     if (huge_pmd_unshare(&tlb, vma, old_addr, src_pte)) {
     old_addr |= last_addr_mask;
     new_addr |= last_addr_mask;
     continue;
     }
     dst_pte = huge_pte_alloc(mm, new_vma, new_addr, sz);
-    if (!dst_pte)
+    if (!dst_pte) {
     break;
+    }
     move_huge_pte(vma, old_addr, new_addr, src_pte, dst_pte, sz);
     tlb_remove_huge_tlb_entry(h, &tlb, src_pte, old_addr);
     }
@@ -4629,24 +4863,22 @@ unsafe extern "C" fn hugetlb_vm_op_fault(vmf: *mut vm_fault) -> vm_fault_t {
     tlb_finish_mmu(&tlb);
     return len + old_addr - old_end;
     }
-    void __unmap_hugepage_range(struct mmu_gather *tlb, struct vm_area_struct *vma,
-    unsigned long start, unsigned long end,
-    struct folio *folio, zap_flags_t zap_flags)
-    {
-    struct mm_struct *mm = vma.vm_mm;
-    let mut folio_provided: bool = !!folio;
-    unsigned long address;
-    pte_t *ptep;
-    pte_t pte;
-    spinlock_t *ptl;
-    struct hstate *h = hstate_vma(vma);
-    let mut sz: c_ulong = huge_page_size(h);
-    bool adjust_reservation;
-    unsigned long last_addr_mask;
+#[no_mangle]
+pub unsafe extern "C" fn __unmap_hugepage_range(tlb: *mut mmu_gather, vma: *mut vm_area_struct, start: c_ulong, end: c_ulong, folio: *mut folio, zap_flags: zap_flags_t) {
+    let mut mm = vma.vm_mm;
+pub static mut folio_provided: bool = false;
+    let mut address = 0;
+pub static mut ptep: *mut c_void = core::ptr::null_mut();
+    let mut pte;
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
+    let mut h = hstate_vma(vma);
+pub static mut sz: c_ulong = 0;
+    let mut adjust_reservation = 0;
+    let mut last_addr_mask = 0;
     i_mmap_assert_write_locked(vma.vm_file.f_mapping);
-    WARN_ON(!is_vm_hugetlb_page(vma));
-    BUG_ON(start & ~huge_page_mask(h));
-    BUG_ON(end & ~huge_page_mask(h));
+    WARN_ON!(!is_vm_hugetlb_page(vma));
+    BUG_ON!(start & ~huge_page_mask(h));
+    BUG_ON!(end & ~huge_page_mask(h));
 //
 // This is a hugetlb vma, all the pte entries should point
 // to huge page.
@@ -4655,7 +4887,7 @@ unsafe extern "C" fn hugetlb_vm_op_fault(vmf: *mut vm_fault) -> vm_fault_t {
     tlb_start_vma(tlb, vma);
     last_addr_mask = hugetlb_mask_last_page(h);
     address = start;
-    for (; address < end; address += sz) {
+    while (address < end) {
     ptep = hugetlb_walk(vma, address, sz);
     if (!ptep) {
     address |= last_addr_mask;
@@ -4684,12 +4916,14 @@ unsafe extern "C" fn hugetlb_vm_op_fault(vmf: *mut vm_fault) -> vm_fault_t {
 // pte with a marker.
 //
     if (pte_swp_uffd_any(pte) &&
-    !(zap_flags & ZAP_FLAG_DROP_MARKER))
+    !(zap_flags & ZAP_FLAG_DROP_MARKER)) {
     set_huge_pte_at(mm, address, ptep,
     make_pte_marker(PTE_MARKER_UFFD_WP),
     sz);
-    else
+    }
+    else {
     huge_pte_clear(mm, address, ptep, sz);
+    }
     spin_unlock(ptl);
     continue;
     }
@@ -4714,14 +4948,16 @@ unsafe extern "C" fn hugetlb_vm_op_fault(vmf: *mut vm_fault) -> vm_fault_t {
     }
     pte = huge_ptep_get_and_clear(mm, address, ptep, sz);
     tlb_remove_huge_tlb_entry(h, tlb, ptep, address);
-    if (huge_pte_dirty(pte))
+    if (huge_pte_dirty(pte)) {
     folio_mark_dirty(folio);
+    }
 // Leave a uffd-wp pte marker if needed
     if (huge_pte_uffd(pte) &&
-    !(zap_flags & ZAP_FLAG_DROP_MARKER))
+    !(zap_flags & ZAP_FLAG_DROP_MARKER)) {
     set_huge_pte_at(mm, address, ptep,
     make_pte_marker(PTE_MARKER_UFFD_WP),
     sz);
+    }
     hugetlb_count_sub(pages_per_huge_page(h), mm);
     hugetlb_remove_rmap(folio);
     spin_unlock(ptl);
@@ -4751,8 +4987,8 @@ unsafe extern "C" fn hugetlb_vm_op_fault(vmf: *mut vm_fault) -> vm_fault_t {
 // forever.
 //
     if (adjust_reservation) {
-    let mut rc: c_int = vma_needs_reservation(h, vma, address);
-    if (rc < 0)
+pub static mut rc: c_int = 0;
+    if (rc < 0) {
 // Pressumably allocate_file_region_entries failed
 // to allocate a file_region struct. Clear
 // hugetlb_restore_reserve so that global reserve
@@ -4760,39 +4996,42 @@ unsafe extern "C" fn hugetlb_vm_op_fault(vmf: *mut vm_fault) -> vm_fault_t {
 // Act as if we consumed the reservation.
 //
     folio_clear_hugetlb_restore_reserve(folio);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: rc) -> else {
-    else if (rc)
+    }
+
+    else if (rc) {
     vma_add_reservation(h, vma, address);
+    }
     }
     tlb_remove_page_size(tlb, folio_page(folio, 0),
     folio_size(folio));
 //
 // If we were instructed to unmap a specific folio, we're done.
 //
-    if (folio_provided)
+    if (folio_provided) {
     break;
+    }
     }
     tlb_end_vma(tlb, vma);
     huge_pmd_unshare_flush(tlb, vma);
     }
-    void __hugetlb_zap_begin(struct vm_area_struct *vma,
-    unsigned long *start, unsigned long *end)
-    {
-    if (!vma.vm_file)	/* hugetlbfs_file_mmap error */
+#[no_mangle]
+pub unsafe extern "C" fn __hugetlb_zap_begin(vma: *mut vm_area_struct, start: *mut c_ulong, end: *mut c_ulong) {
+    if (!vma.vm_file)	/* hugetlbfs_file_mmap error */ {
     return;
+    }
     adjust_range_if_pmd_sharing_possible(vma, start, end);
     hugetlb_vma_lock_write(vma);
-    if (vma.vm_file)
+    if (vma.vm_file) {
     i_mmap_lock_write(vma.vm_file.f_mapping);
     }
-    void __hugetlb_zap_end(struct vm_area_struct *vma,
-    struct zap_details *details)
-    {
-    let mut zap_flags: zap_flags_t = details ? details.zap_flags : 0;
-    if (!vma.vm_file)	/* hugetlbfs_file_mmap error */
+    }
+#[no_mangle]
+pub unsafe extern "C" fn __hugetlb_zap_end(vma: *mut vm_area_struct, details: *mut zap_details) {
+pub static mut zap_flags: zap_flags_t = 0;
+    if (!vma.vm_file)	/* hugetlbfs_file_mmap error */ {
     return;
-    if (zap_flags & ZAP_FLAG_UNMAP) {	/* final unmap */
+    }
+    if (zap_flags & ZAP_FLAG_UNMAP) {	/* final unmap */ {
 //
 // Unlock and free the vma lock before releasing i_mmap_rwsem.
 // When the vma_lock is freed, this makes the vma ineligible
@@ -4803,18 +5042,18 @@ pub unsafe extern "C" fn if(_arg: rc) -> else {
 // someone else.
 //
     __hugetlb_vma_unlock_write_free(vma);
+    }
     } else {
     hugetlb_vma_unlock_write(vma);
     }
-    if (vma.vm_file)
+    if (vma.vm_file) {
     i_mmap_unlock_write(vma.vm_file.f_mapping);
     }
-    void unmap_hugepage_range(struct vm_area_struct *vma, unsigned long start,
-    unsigned long end, struct folio *folio,
-    zap_flags_t zap_flags)
-    {
-    struct mmu_notifier_range range;
-    struct mmu_gather tlb;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn unmap_hugepage_range(vma: *mut vm_area_struct, start: c_ulong, end: c_ulong, folio: *mut folio, zap_flags: zap_flags_t) {
+pub static mut range: usize = 0;
+pub static mut tlb: usize = 0;
     mmu_notifier_range_init(&range, MMU_NOTIFY_CLEAR, 0, vma.vm_mm,
     start, end);
     adjust_range_if_pmd_sharing_possible(vma, &range.start, &range.end);
@@ -4831,13 +5070,12 @@ pub unsafe extern "C" fn if(_arg: rc) -> else {
 // from other VMAs and let the children be SIGKILLed if they are faulting the
 // same region.
 //
-    static void unmap_ref_private(struct mm_struct *mm, struct vm_area_struct *vma,
-    struct folio *folio, unsigned long address)
-    {
-    struct hstate *h = hstate_vma(vma);
-    struct vm_area_struct *iter_vma;
-    struct address_space *mapping;
-    pgoff_t pgoff;
+#[no_mangle]
+pub unsafe extern "C" fn unmap_ref_private(mm: *mut mm_struct, vma: *mut vm_area_struct, folio: *mut folio, address: c_ulong) {
+    let mut h = hstate_vma(vma);
+pub static mut iter_vma: *mut c_void = core::ptr::null_mut();
+pub static mut mapping: *mut c_void = core::ptr::null_mut();
+    let mut pgoff;
 //
 // vm_pgoff is in PAGE_SIZE units, hence the different calculation
 // from page cache lookup which is in HPAGE_SIZE units.
@@ -4853,15 +5091,17 @@ pub unsafe extern "C" fn if(_arg: rc) -> else {
     i_mmap_lock_write(mapping);
     mapping_rmap_tree_foreach(iter_vma, mapping, pgoff, pgoff) {
 // Do not unmap the current VMA
-    if (iter_vma == vma)
+    if (iter_vma == vma) {
     continue;
+    }
 //
 // Shared VMAs have their own reserves and do not affect
 // MAP_PRIVATE accounting but it is possible that a shared
 // VMA is using the same page so check and skip such VMAs.
 //
-    if (iter_vma.vm_flags & VM_MAYSHARE)
+    if (iter_vma.vm_flags & VM_MAYSHARE) {
     continue;
+    }
 //
 // Unmap the page from other VMAs without their own reserves.
 // They get marked to be SIGKILLed if they fault in these
@@ -4869,10 +5109,11 @@ pub unsafe extern "C" fn if(_arg: rc) -> else {
 // could insert a zeroed page instead of the data existing
 // from the time of fork. This would look like data corruption
 //
-    if (!is_vma_resv_set(iter_vma, HPAGE_RESV_OWNER))
+    if (!is_vma_resv_set(iter_vma, HPAGE_RESV_OWNER)) {
     unmap_hugepage_range(iter_vma, address,
     address + huge_page_size(h),
     folio, 0);
+    }
     }
     i_mmap_unlock_write(mapping);
     }
@@ -4884,18 +5125,16 @@ pub unsafe extern "C" fn if(_arg: rc) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn hugetlb_wp(vmf: *mut vm_fault) -> vm_fault_t {
-    static vm_fault_t hugetlb_wp(struct vm_fault *vmf)
-    {
-    struct vm_area_struct *vma = vmf.vma;
-    struct mm_struct *mm = vma.vm_mm;
-    let mut unshare: bool = vmf.flags & FAULT_FLAG_UNSHARE;
-    let mut pte: pte_t = huge_ptep_get(mm, vmf.address, vmf.pte);
-    struct hstate *h = hstate_vma(vma);
-    struct folio *old_folio;
-    struct folio *new_folio;
-    let mut cow_from_owner: bool = 0;
-    let mut ret: vm_fault_t = 0;
-    struct mmu_notifier_range range;
+    let mut vma = vmf.vma;
+    let mut mm = vma.vm_mm;
+pub static mut unshare: bool = false;
+pub static mut pte: pte_t = 0;
+    let mut h = hstate_vma(vma);
+pub static mut old_folio: *mut c_void = core::ptr::null_mut();
+pub static mut new_folio: *mut c_void = core::ptr::null_mut();
+pub static mut cow_from_owner: bool = 0;
+pub static mut ret: vm_fault_t = 0;
+pub static mut range: usize = 0;
 //
 // Never handle CoW for uffd-wp protected pages.  It should be only
 // handled when the uffd-wp protection is removed.
@@ -4904,8 +5143,9 @@ unsafe extern "C" fn hugetlb_wp(vmf: *mut vm_fault) -> vm_fault_t {
 // can trigger this, because hugetlb_fault() will always resolve
 // uffd-wp bit first.
 //
-    if (!unshare && huge_pte_uffd(pte))
+    if (!unshare && huge_pte_uffd(pte)) {
     return 0;
+    }
 // Let's take out MAP_SHARED mappings first.
     if (vma.vm_flags & VM_MAYSHARE) {
     set_huge_ptep_writable(vma, vmf.address, vmf.pte);
@@ -4913,7 +5153,7 @@ unsafe extern "C" fn hugetlb_wp(vmf: *mut vm_fault) -> vm_fault_t {
     }
     old_folio = page_folio(pte_page(pte));
     delayacct_wpcopy_start();
-    retry_avoidcopy:
+// label;
 //
 // If no-one else is actually using this page, we're the exclusive
 // owner and can reuse this page.
@@ -4930,9 +5170,10 @@ unsafe extern "C" fn hugetlb_wp(vmf: *mut vm_fault) -> vm_fault_t {
     folio_move_anon_rmap(old_folio, vma);
     SetPageAnonExclusive(&old_folio.page);
     }
-    if (likely(!unshare))
+    if (likely(!unshare)) {
     set_huge_ptep_maybe_writable(vma, vmf.address,
     vmf.pte);
+    }
     delayacct_wpcopy_end();
     return 0;
     }
@@ -4949,8 +5190,9 @@ unsafe extern "C" fn hugetlb_wp(vmf: *mut vm_fault) -> vm_fault_t {
 // on COW instead of the full address range.
 //
     if (is_vma_resv_set(vma, HPAGE_RESV_OWNER) &&
-    folio_test_anon(old_folio))
+    folio_test_anon(old_folio)) {
     cow_from_owner = true;
+    }
     folio_get(old_folio);
 //
 // Drop page table lock as buddy allocator may be called. It will
@@ -4967,9 +5209,9 @@ unsafe extern "C" fn hugetlb_wp(vmf: *mut vm_fault) -> vm_fault_t {
 // may get SIGKILLed if it later faults.
 //
     if (cow_from_owner) {
-    struct address_space *mapping = vma.vm_file.f_mapping;
-    pgoff_t idx;
-    u32 hash;
+    let mut mapping = vma.vm_file.f_mapping;
+    let mut idx;
+    let mut hash = 0;
     folio_put(old_folio);
 //
 // Drop hugetlb_fault_mutex and vma_lock before
@@ -4991,8 +5233,9 @@ unsafe extern "C" fn hugetlb_wp(vmf: *mut vm_fault) -> vm_fault_t {
     vmf.pte = hugetlb_walk(vma, vmf.address,
     huge_page_size(h));
     if (likely(vmf.pte &&
-    pte_same(huge_ptep_get(mm, vmf.address, vmf.pte), pte)))
-    goto retry_avoidcopy;
+    pte_same(huge_ptep_get(mm, vmf.address, vmf.pte), pte))) {
+// goto;
+    }
 //
 // race occurs while re-acquiring page table
 // lock, and our job is done.
@@ -5001,18 +5244,19 @@ unsafe extern "C" fn hugetlb_wp(vmf: *mut vm_fault) -> vm_fault_t {
     return 0;
     }
     ret = vmf_error(PTR_ERR(new_folio));
-    goto out_release_old;
+// goto;
     }
 //
 // When the original hugepage is shared one, it does not have
 // anon_vma prepared.
 //
     ret = __vmf_anon_prepare(vmf);
-    if (unlikely(ret))
-    goto out_release_all;
+    if (unlikely(ret)) {
+// goto;
+    }
     if (copy_user_large_folio(new_folio, old_folio, vmf.real_address, vma)) {
     ret = VM_FAULT_HWPOISON_LARGE | VM_FAULT_SET_HINDEX(hstate_index(h));
-    goto out_release_all;
+// goto;
     }
     __folio_mark_uptodate(new_folio);
     mmu_notifier_range_init(&range, MMU_NOTIFY_CLEAR, 0, mm, vmf.address,
@@ -5025,13 +5269,14 @@ unsafe extern "C" fn hugetlb_wp(vmf: *mut vm_fault) -> vm_fault_t {
     spin_lock(vmf.ptl);
     vmf.pte = hugetlb_walk(vma, vmf.address, huge_page_size(h));
     if (likely(vmf.pte && pte_same(huge_ptep_get(mm, vmf.address, vmf.pte), pte))) {
-    let mut newpte: pte_t = make_huge_pte(vma, new_folio, !unshare);
+pub static mut newpte: pte_t = 0;
 // Break COW or unshare
     huge_ptep_clear_flush(vma, vmf.address, vmf.pte);
     hugetlb_remove_rmap(old_folio);
     hugetlb_add_new_anon_rmap(new_folio, vma, vmf.address);
-    if (huge_pte_uffd(pte))
+    if (huge_pte_uffd(pte)) {
     newpte = huge_pte_mkuffd(newpte);
+    }
     set_huge_pte_at(mm, vmf.address, vmf.pte, newpte,
     huge_page_size(h));
     folio_set_hugetlb_migratable(new_folio);
@@ -5040,15 +5285,16 @@ unsafe extern "C" fn hugetlb_wp(vmf: *mut vm_fault) -> vm_fault_t {
     }
     spin_unlock(vmf.ptl);
     mmu_notifier_invalidate_range_end(&range);
-    out_release_all:
+// label;
 //
 // No restore in case of successful pagetable update (Break COW or
 // unshare)
 //
-    if (new_folio != old_folio)
+    if (new_folio != old_folio) {
     restore_reserve_on_error(h, vma, vmf.address, new_folio);
+    }
     folio_put(new_folio);
-    out_release_old:
+// label;
     folio_put(old_folio);
     spin_lock(vmf.ptl); /* Caller expects lock to be held */
     delayacct_wpcopy_end();
@@ -5057,24 +5303,23 @@ unsafe extern "C" fn hugetlb_wp(vmf: *mut vm_fault) -> vm_fault_t {
 //
 // Return whether there is a pagecache page to back given address within VMA.
 //
-    bool hugetlbfs_pagecache_present(struct hstate *h,
-    struct vm_area_struct *vma, unsigned long address)
-    {
-    struct address_space *mapping = vma.vm_file.f_mapping;
-    let mut idx: pgoff_t = linear_page_index(vma, address);
-    struct folio *folio;
+#[no_mangle]
+pub unsafe extern "C" fn hugetlbfs_pagecache_present(h: *mut hstate, vma: *mut vm_area_struct, address: c_ulong) -> bool {
+    let mut mapping = vma.vm_file.f_mapping;
+pub static mut idx: pgoff_t = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
     folio = filemap_get_folio(mapping, idx);
-    if (IS_ERR(folio))
+    if (IS_ERR(folio)) {
     return false;
+    }
     folio_put(folio);
     return true;
     }
-    int hugetlb_add_to_page_cache(struct folio *folio, struct address_space *mapping,
-    pgoff_t idx)
-    {
-    struct inode *inode = mapping.host;
-    struct hstate *h = hstate_inode(inode);
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_add_to_page_cache(folio: *mut folio, mapping: *mut address_space, idx: pgoff_t) -> c_int {
+    let mut inode = mapping.host;
+    let mut h = hstate_inode(inode);
+    let mut err = 0;
     idx <<= huge_page_order(h);
     __folio_set_locked(folio);
     err = __filemap_add_folio(mapping, folio, idx, GFP_KERNEL, core::ptr::null_mut());
@@ -5093,11 +5338,10 @@ unsafe extern "C" fn hugetlb_wp(vmf: *mut vm_fault) -> vm_fault_t {
     spin_unlock(&inode.i_lock);
     return 0;
     }
-    static inline vm_fault_t hugetlb_handle_userfault(struct vm_fault *vmf,
-    struct address_space *mapping,
+    static inline vm_fault_t hugetlb_handle_userfault(vm_fault *vmf, address_space *mapping,
     unsigned long reason)
     {
-    u32 hash;
+    let mut hash = 0;
 //
 // vma_lock and hugetlb_fault_mutex must be dropped before handling
 // userfault. Also mmap_lock could be dropped due to handling
@@ -5112,29 +5356,27 @@ unsafe extern "C" fn hugetlb_wp(vmf: *mut vm_fault) -> vm_fault_t {
 // Recheck pte with pgtable lock.  Returns true if pte didn't change, or
 // false if pte changed or is changing.
 //
-    static bool hugetlb_pte_stable(struct hstate *h, struct mm_struct *mm, unsigned long addr,
-    pte_t *ptep, pte_t old_pte)
-    {
-    spinlock_t *ptl;
-    bool same;
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_pte_stable(h: *mut hstate, mm: *mut mm_struct, addr: c_ulong, ptep: *mut pte_t, old_pte: pte_t) -> bool {
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
+    let mut same = 0;
     ptl = huge_pte_lock(h, mm, ptep);
     same = pte_same(huge_ptep_get(mm, addr, ptep), old_pte);
     spin_unlock(ptl);
     return same;
     }
-    static vm_fault_t hugetlb_no_page(struct address_space *mapping,
-    struct vm_fault *vmf)
+    static vm_fault_t hugetlb_no_page(address_space *mapping, vm_fault *vmf)
     {
-    let mut hash: u32 = hugetlb_fault_mutex_hash(mapping, vmf.pgoff);
+pub static mut hash: u32 = 0;
     bool new_folio, new_anon_folio = false;
-    struct vm_area_struct *vma = vmf.vma;
-    struct mm_struct *mm = vma.vm_mm;
-    struct hstate *h = hstate_vma(vma);
-    let mut ret: vm_fault_t = VM_FAULT_SIGBUS;
-    let mut folio_locked: bool = true;
-    struct folio *folio;
-    unsigned long size;
-    pte_t new_pte;
+    let mut vma = vmf.vma;
+    let mut mm = vma.vm_mm;
+    let mut h = hstate_vma(vma);
+pub static mut ret: vm_fault_t = 0;
+pub static mut folio_locked: bool = true;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut size = 0;
+    let mut new_pte;
 //
 // Currently, we are forced to kill the process in the event the
 // original mapper has unmapped pages from the child due to a failed
@@ -5144,7 +5386,7 @@ unsafe extern "C" fn hugetlb_wp(vmf: *mut vm_fault) -> vm_fault_t {
     if (is_vma_resv_set(vma, HPAGE_RESV_UNMAPPED)) {
     pr_warn_ratelimited("PID %d killed due to inadequate hugepage pool\n",
     current.pid);
-    goto out;
+// goto;
     }
 //
 // Use page lock to guard against racing truncation
@@ -5154,8 +5396,9 @@ unsafe extern "C" fn hugetlb_wp(vmf: *mut vm_fault) -> vm_fault_t {
     folio = filemap_lock_hugetlb_folio(h, mapping, vmf.pgoff);
     if (IS_ERR(folio)) {
     size = i_size_read(mapping.host) >> huge_page_shift(h);
-    if (vmf.pgoff >= size)
-    goto out;
+    if (vmf.pgoff >= size) {
+// goto;
+    }
 // Check for page in userfault range
     if (userfaultfd_missing(vma)) {
 //
@@ -5177,15 +5420,16 @@ unsafe extern "C" fn hugetlb_wp(vmf: *mut vm_fault) -> vm_fault_t {
 //
     if (!hugetlb_pte_stable(h, mm, vmf.address, vmf.pte, vmf.orig_pte)) {
     ret = 0;
-    goto out;
+// goto;
     }
     return hugetlb_handle_userfault(vmf, mapping,
     VM_UFFD_MISSING);
     }
     if (!(vma.vm_flags & VM_MAYSHARE)) {
     ret = __vmf_anon_prepare(vmf);
-    if (unlikely(ret))
-    goto out;
+    if (unlikely(ret)) {
+// goto;
+    }
     }
     folio = alloc_hugetlb_folio(vma, vmf.address, false);
     if (IS_ERR(folio)) {
@@ -5201,17 +5445,19 @@ unsafe extern "C" fn hugetlb_wp(vmf: *mut vm_fault) -> vm_fault_t {
 // here.  Before returning error, get ptl and make
 // sure there really is no pte entry.
 //
-    if (hugetlb_pte_stable(h, mm, vmf.address, vmf.pte, vmf.orig_pte))
+    if (hugetlb_pte_stable(h, mm, vmf.address, vmf.pte, vmf.orig_pte)) {
     ret = vmf_error(PTR_ERR(folio));
-    else
+    }
+    else {
     ret = 0;
-    goto out;
+    }
+// goto;
     }
     folio_zero_user(folio, vmf.real_address);
     __folio_mark_uptodate(folio);
     new_folio = true;
     if (vma.vm_flags & VM_MAYSHARE) {
-    int err = hugetlb_add_to_page_cache(folio, mapping,
+    let mut err = hugetlb_add_to_page_cache(folio, mapping,
     vmf.pgoff);
     if (err) {
 //
@@ -5225,7 +5471,7 @@ unsafe extern "C" fn hugetlb_wp(vmf: *mut vm_fault) -> vm_fault_t {
     folio);
     folio_put(folio);
     ret = VM_FAULT_SIGBUS;
-    goto out;
+// goto;
     }
     } else {
     new_anon_folio = true;
@@ -5240,7 +5486,7 @@ unsafe extern "C" fn hugetlb_wp(vmf: *mut vm_fault) -> vm_fault_t {
     if (unlikely(folio_test_hwpoison(folio))) {
     ret = VM_FAULT_HWPOISON_LARGE |
     VM_FAULT_SET_HINDEX(hstate_index(h));
-    goto backout_unlocked;
+// goto;
     }
 // Check for page in userfault range.
     if (userfaultfd_minor(vma)) {
@@ -5249,7 +5495,7 @@ unsafe extern "C" fn hugetlb_wp(vmf: *mut vm_fault) -> vm_fault_t {
 // See comment in userfaultfd_missing() block above
     if (!hugetlb_pte_stable(h, mm, vmf.address, vmf.pte, vmf.orig_pte)) {
     ret = 0;
-    goto out;
+// goto;
     }
     return hugetlb_handle_userfault(vmf, mapping,
     VM_UFFD_MINOR);
@@ -5264,7 +5510,7 @@ unsafe extern "C" fn hugetlb_wp(vmf: *mut vm_fault) -> vm_fault_t {
     if ((vmf.flags & FAULT_FLAG_WRITE) && !(vma.vm_flags & VM_SHARED)) {
     if (vma_needs_reservation(h, vma, vmf.address) < 0) {
     ret = VM_FAULT_OOM;
-    goto backout_unlocked;
+// goto;
     }
 // Just decrements count, does not deallocate
     vma_end_reservation(h, vma, vmf.address);
@@ -5272,19 +5518,23 @@ unsafe extern "C" fn hugetlb_wp(vmf: *mut vm_fault) -> vm_fault_t {
     vmf.ptl = huge_pte_lock(h, mm, vmf.pte);
     ret = 0;
 // If pte changed from under us, retry
-    if (!pte_same(huge_ptep_get(mm, vmf.address, vmf.pte), vmf.orig_pte))
-    goto backout;
-    if (new_anon_folio)
+    if (!pte_same(huge_ptep_get(mm, vmf.address, vmf.pte), vmf.orig_pte)) {
+// goto;
+    }
+    if (new_anon_folio) {
     hugetlb_add_new_anon_rmap(folio, vma, vmf.address);
-    else
+    }
+    else {
     hugetlb_add_file_rmap(folio);
+    }
     new_pte = make_huge_pte(vma, folio, vma.vm_flags & VM_SHARED);
 //
 // If this pte was previously wr-protected, keep it wr-protected even
 // if populated.
 //
-    if (unlikely(pte_is_uffd_wp_marker(vmf.orig_pte)))
+    if (unlikely(pte_is_uffd_wp_marker(vmf.orig_pte))) {
     new_pte = huge_pte_mkuffd(new_pte);
+    }
     set_huge_pte_at(mm, vmf.address, vmf.pte, new_pte, huge_page_size(h));
     hugetlb_count_add(pages_per_huge_page(h), mm);
     if ((vmf.flags & FAULT_FLAG_WRITE) && !(vma.vm_flags & VM_SHARED)) {
@@ -5305,40 +5555,42 @@ unsafe extern "C" fn hugetlb_wp(vmf: *mut vm_fault) -> vm_fault_t {
 // found in the pagecache may not have hugetlb_migratable if they have
 // been isolated for migration.
 //
-    if (new_folio)
+    if (new_folio) {
     folio_set_hugetlb_migratable(folio);
-    if (folio_locked)
+    }
+    if (folio_locked) {
     folio_unlock(folio);
-    out:
+    }
+// label;
     hugetlb_vma_unlock_read(vma);
 //
 // We must check to release the per-VMA lock. __vmf_anon_prepare() is
 // the only way ret can be set to VM_FAULT_RETRY.
 //
-    if (unlikely(ret & VM_FAULT_RETRY))
+    if (unlikely(ret & VM_FAULT_RETRY)) {
     vma_end_read(vma);
+    }
     mutex_unlock(&hugetlb_fault_mutex_table[hash]);
     return ret;
-    backout:
+// label;
     spin_unlock(vmf.ptl);
-    backout_unlocked:
+// label;
 // We only need to restore reservations for private mappings
-    if (new_anon_folio)
+    if (new_anon_folio) {
     restore_reserve_on_error(h, vma, vmf.address, folio);
+    }
     folio_unlock(folio);
     folio_put(folio);
-    goto out;
+// goto;
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn hugetlb_fault_mutex_hash(mapping: *mut address_space, idx: pgoff_t) -> u32 {
-    u32 hugetlb_fault_mutex_hash(struct address_space *mapping, pgoff_t idx)
-    {
     unsigned long key[2];
-    u32 hash;
+    let mut hash = 0;
     key[0] = (unsigned long) mapping;
     key[1] = idx;
-    hash = jhash2((u32 *)&key, sizeof(key)/(sizeof(u32)), 0);
+    hash = jhash2(&key, sizeof!(key)/(sizeof!(u32)), 0);
     return hash & (num_fault_mutexes - 1);
     }
 
@@ -5347,34 +5599,22 @@ pub unsafe extern "C" fn hugetlb_fault_mutex_hash(mapping: *mut address_space, i
 // return 0 and avoid the hashing overhead.
 //
 #[no_mangle]
-pub unsafe extern "C" fn hugetlb_fault_mutex_hash(mapping: *mut address_space, idx: pgoff_t) -> u32 {
-    u32 hugetlb_fault_mutex_hash(struct address_space *mapping, pgoff_t idx)
-    {
+#[no_mangle]
+// duplicate fn: hugetlb_fault_mutex_hash
+pub unsafe extern "C" fn hugetlb_fault_mutex_hash_dup(mapping: *mut address_space, idx: pgoff_t) -> u32 {
     return 0;
     }
 
-    vm_fault_t hugetlb_fault(struct mm_struct *mm, struct vm_area_struct *vma,
+    vm_fault_t hugetlb_fault(mm_struct *mm, vm_area_struct *vma,
     unsigned long address, unsigned int flags)
     {
-    vm_fault_t ret;
-    u32 hash;
-    struct folio *folio = core::ptr::null_mut();
-    struct hstate *h = hstate_vma(vma);
-    struct address_space *mapping;
-    let mut need_wait_lock: bool = false;
-    struct vm_fault vmf = {
-    .vma = vma,
-    .address = address & huge_page_mask(h),
-    .real_address = address,
-    .flags = flags,
-    .pgoff = vma_hugecache_offset(h, vma,
-    address & huge_page_mask(h)),
-// TODO: Track hugetlb faults using vm_fault
-//
-// Some fields may not be initialized, be careful as it may
-// be hard to debug if called functions make assumptions
-//
-    };
+    let mut ret;
+    let mut hash = 0;
+    let mut folio = core::ptr::null_mut();
+    let mut h = hstate_vma(vma);
+pub static mut mapping: *mut c_void = core::ptr::null_mut();
+pub static mut need_wait_lock: bool = false;
+pub static mut vm_fault: usize = 0;
 //
 // Serialize hugepage allocation and instantiation, so that we don't
 // get spurious allocation failures if two CPUs race to instantiate
@@ -5396,30 +5636,31 @@ pub unsafe extern "C" fn hugetlb_fault_mutex_hash(mapping: *mut address_space, i
     return VM_FAULT_OOM;
     }
     vmf.orig_pte = huge_ptep_get(mm, vmf.address, vmf.pte);
-    if (huge_pte_none(vmf.orig_pte))
+    if (huge_pte_none(vmf.orig_pte)) {
 //
 // hugetlb_no_page will drop vma lock and hugetlb fault
 // mutex internally, which make us return immediately.
 //
     return hugetlb_no_page(mapping, &vmf);
+    }
     if (pte_is_marker(vmf.orig_pte)) {
     const pte_marker marker =
     softleaf_to_marker(softleaf_from_pte(vmf.orig_pte));
     if (marker & PTE_MARKER_POISONED) {
     ret = VM_FAULT_HWPOISON_LARGE |
     VM_FAULT_SET_HINDEX(hstate_index(h));
-    goto out_mutex;
-    } else if (WARN_ON_ONCE(marker & PTE_MARKER_GUARD)) {
+// goto;
+    } else if (WARN_ON_ONCE!(marker & PTE_MARKER_GUARD)) {
 // This isn't supported in hugetlb.
     ret = VM_FAULT_SIGSEGV;
-    goto out_mutex;
+// goto;
     }
     return hugetlb_no_page(mapping, &vmf);
     }
     ret = 0;
 // Not present, either a migration or a hwpoisoned entry
     if (!pte_present(vmf.orig_pte) && !huge_pte_none(vmf.orig_pte)) {
-    let mut softleaf: softleaf_t = softleaf_from_pte(vmf.orig_pte);
+pub static mut softleaf: softleaf_t = 0;
     if (softleaf_is_migration(softleaf)) {
 //
 // Release the hugetlb fault lock now, but retain
@@ -5436,7 +5677,7 @@ pub unsafe extern "C" fn hugetlb_fault_mutex_hash(mapping: *mut address_space, i
     ret = VM_FAULT_HWPOISON_LARGE |
     VM_FAULT_SET_HINDEX(hstate_index(h));
     }
-    goto out_mutex;
+// goto;
     }
 //
 // Protnone hugetlb PTEs with the uffd bit are used by
@@ -5446,15 +5687,16 @@ pub unsafe extern "C" fn hugetlb_fault_mutex_hash(mapping: *mut address_space, i
 //
     if (pte_protnone(vmf.orig_pte) && vma_is_accessible(vma) &&
     userfaultfd_rwp(vma) && huge_pte_uffd(vmf.orig_pte)) {
-    spinlock_t *ptl;
-    pte_t pte;
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
+    let mut pte;
 // Sync: drop hugetlb locks before blocking in handle_userfault()
-    if (!userfaultfd_rwp_async(vma))
+    if (!userfaultfd_rwp_async(vma)) {
     return hugetlb_handle_userfault(&vmf, mapping, VM_UFFD_RWP);
+    }
     ptl = huge_pte_lock(h, mm, vmf.pte);
     pte = huge_ptep_get(mm, vmf.address, vmf.pte);
     if (pte_protnone(pte) && huge_pte_uffd(pte)) {
-    let mut shift: c_uint = huge_page_shift(h);
+pub static mut shift: c_uint = 0;
     pte = huge_pte_modify(pte, vma.vm_page_prot);
     pte = arch_make_huge_pte(pte, shift, vma.vm_flags);
 // huge_pte_modify() preserves _PAGE_UFFD; drop it on resolution
@@ -5473,7 +5715,7 @@ pub unsafe extern "C" fn hugetlb_fault_mutex_hash(mapping: *mut address_space, i
     }
     spin_unlock(ptl);
     ret = 0;
-    goto out_mutex;
+// goto;
     }
 //
 // If we are going to COW/unshare the mapping later, we examine the
@@ -5485,15 +5727,16 @@ pub unsafe extern "C" fn hugetlb_fault_mutex_hash(mapping: *mut address_space, i
     !(vma.vm_flags & VM_MAYSHARE) && !huge_pte_write(vmf.orig_pte)) {
     if (vma_needs_reservation(h, vma, vmf.address) < 0) {
     ret = VM_FAULT_OOM;
-    goto out_mutex;
+// goto;
     }
 // Just decrements count, does not deallocate
     vma_end_reservation(h, vma, vmf.address);
     }
     vmf.ptl = huge_pte_lock(h, mm, vmf.pte);
 // Check for a racing update before calling hugetlb_wp()
-    if (unlikely(!pte_same(vmf.orig_pte, huge_ptep_get(mm, vmf.address, vmf.pte))))
-    goto out_ptl;
+    if (unlikely(!pte_same(vmf.orig_pte, huge_ptep_get(mm, vmf.address, vmf.pte)))) {
+// goto;
+    }
 // Handle userfault-wp first, before trying to lock more pages
     if (userfaultfd_wp(vma) && huge_pte_uffd(huge_ptep_get(mm, vmf.address, vmf.pte)) &&
     (flags & FAULT_FLAG_WRITE) && !huge_pte_write(vmf.orig_pte)) {
@@ -5518,32 +5761,35 @@ pub unsafe extern "C" fn hugetlb_fault_mutex_hash(mapping: *mut address_space, i
     folio = page_folio(pte_page(vmf.orig_pte));
     if (folio_test_anon(folio) && !folio_trylock(folio)) {
     need_wait_lock = true;
-    goto out_ptl;
+// goto;
     }
     folio_get(folio);
     ret = hugetlb_wp(&vmf);
-    if (folio_test_anon(folio))
+    if (folio_test_anon(folio)) {
     folio_unlock(folio);
+    }
     folio_put(folio);
-    goto out_ptl;
+// goto;
     } else if (likely(flags & FAULT_FLAG_WRITE)) {
     vmf.orig_pte = huge_pte_mkdirty(vmf.orig_pte);
     }
     }
     vmf.orig_pte = pte_mkyoung(vmf.orig_pte);
     if (huge_ptep_set_access_flags(vma, vmf.address, vmf.pte, vmf.orig_pte,
-    flags & FAULT_FLAG_WRITE))
+    flags & FAULT_FLAG_WRITE)) {
     update_mmu_cache(vma, vmf.address, vmf.pte);
-    out_ptl:
+    }
+// label;
     spin_unlock(vmf.ptl);
-    out_mutex:
+// label;
     hugetlb_vma_unlock_read(vma);
 //
 // We must check to release the per-VMA lock. __vmf_anon_prepare() in
 // hugetlb_wp() is the only way ret can be set to VM_FAULT_RETRY.
 //
-    if (unlikely(ret & VM_FAULT_RETRY))
+    if (unlikely(ret & VM_FAULT_RETRY)) {
     vma_end_read(vma);
+    }
     mutex_unlock(&hugetlb_fault_mutex_table[hash]);
 //
 // hugetlb_wp drops all the locks, but the folio lock, before trying to
@@ -5557,22 +5803,22 @@ pub unsafe extern "C" fn hugetlb_fault_mutex_hash(mapping: *mut address_space, i
 // wait for it to become unlocked, so hopefully next fault successes on
 // the trylock.
 //
-    if (need_wait_lock)
+    if (need_wait_lock) {
     folio_wait_locked(folio);
+    }
     return ret;
     }
 
 //
 // Can probably be eliminated, but still used by hugetlb_mfill_atomic_pte().
 //
-    static struct folio *alloc_hugetlb_folio_vma(struct hstate *h,
-    struct vm_area_struct *vma, unsigned long address)
-    {
-    struct mempolicy *mpol;
-    nodemask_t *nodemask;
-    struct folio *folio;
-    gfp_t gfp_mask;
-    int node;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_hugetlb_folio_vma(h: *mut hstate, vma: *mut vm_area_struct, address: c_ulong) -> *mut c_void {
+pub static mut mpol: *mut c_void = core::ptr::null_mut();
+pub static mut nodemask: *mut c_void = core::ptr::null_mut();
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+    let mut gfp_mask;
+    let mut node = 0;
     gfp_mask = htlb_alloc_mask(h);
     node = huge_node(vma, address, gfp_mask, &mpol, &nodemask);
 //
@@ -5589,27 +5835,22 @@ pub unsafe extern "C" fn hugetlb_fault_mutex_hash(mapping: *mut address_space, i
 // Used by userfaultfd UFFDIO_* ioctls. Based on userfaultfd's mfill_atomic_pte
 // with modifications for hugetlb pages.
 //
-    int hugetlb_mfill_atomic_pte(pte_t *dst_pte,
-    struct vm_area_struct *dst_vma,
-    unsigned long dst_addr,
-    unsigned long src_addr,
-    uffd_flags_t flags,
-    struct folio **foliop)
-    {
-    struct mm_struct *dst_mm = dst_vma.vm_mm;
-    let mut is_continue: bool = uffd_flags_mode_is(flags, MFILL_ATOMIC_CONTINUE);
-    let mut wp_enabled: bool = (flags & MFILL_ATOMIC_WP);
-    struct hstate *h = hstate_vma(dst_vma);
-    struct address_space *mapping = dst_vma.vm_file.f_mapping;
-    let mut idx: pgoff_t = vma_hugecache_offset(h, dst_vma, dst_addr);
-    let mut size: c_ulong = huge_page_size(h);
-    let mut vm_shared: c_int = dst_vma.vm_flags & VM_SHARED;
-    pte_t _dst_pte;
-    spinlock_t *ptl;
-    let mut ret: c_int = -ENOMEM;
-    struct folio *folio;
-    let mut folio_in_pagecache: bool = false;
-    pte_t dst_ptep;
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_mfill_atomic_pte(dst_pte: *mut pte_t, dst_vma: *mut vm_area_struct, dst_addr: c_ulong, src_addr: c_ulong, flags: uffd_flags_t, foliop: *mut *mut folio) -> c_int {
+    let mut dst_mm = dst_vma.vm_mm;
+pub static mut is_continue: bool = false;
+pub static mut wp_enabled: bool = false;
+    let mut h = hstate_vma(dst_vma);
+    let mut mapping = dst_vma.vm_file.f_mapping;
+pub static mut idx: pgoff_t = 0;
+pub static mut size: c_ulong = 0;
+pub static mut vm_shared: c_int = 0;
+    let mut _dst_pte;
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
+pub static mut folio: *mut c_void = core::ptr::null_mut();
+pub static mut folio_in_pagecache: bool = false;
+    let mut dst_ptep;
     if (uffd_flags_mode_is(flags, MFILL_ATOMIC_POISON)) {
     ptl = huge_pte_lock(h, dst_mm, dst_pte);
 // Don't overwrite any existing PTEs (even markers)
@@ -5627,8 +5868,9 @@ pub unsafe extern "C" fn hugetlb_fault_mutex_hash(mapping: *mut address_space, i
     if (is_continue) {
     ret = -EFAULT;
     folio = filemap_lock_hugetlb_folio(h, mapping, idx);
-    if (IS_ERR(folio))
-    goto out;
+    if (IS_ERR(folio)) {
+// goto;
+    }
     folio_in_pagecache = true;
     } else if (!*foliop) {
 // If a folio already exists, then it's UFFDIO_COPY for
@@ -5637,19 +5879,19 @@ pub unsafe extern "C" fn hugetlb_fault_mutex_hash(mapping: *mut address_space, i
     if (vm_shared &&
     hugetlbfs_pagecache_present(h, dst_vma, dst_addr)) {
     ret = -EEXIST;
-    goto out;
+// goto;
     }
     folio = alloc_hugetlb_folio(dst_vma, dst_addr, false);
     if (IS_ERR(folio)) {
-    pte_t *actual_pte = hugetlb_walk(dst_vma, dst_addr, PMD_SIZE);
+    let mut actual_pte = hugetlb_walk(dst_vma, dst_addr, PMD_SIZE);
     if (actual_pte) {
     ret = -EEXIST;
-    goto out;
+// goto;
     }
     ret = -ENOMEM;
-    goto out;
+// goto;
     }
-    ret = copy_folio_from_user(folio, (const void __user *) src_addr,
+    ret = copy_folio_from_user(folio,  src_addr,
     false);
 // fallback to copy_from_user outside mmap_lock
     if (unlikely(ret)) {
@@ -5665,14 +5907,14 @@ pub unsafe extern "C" fn hugetlb_fault_mutex_hash(mapping: *mut address_space, i
     folio = alloc_hugetlb_folio_vma(h, dst_vma, dst_addr);
     if (!folio) {
     ret = -ENOMEM;
-    goto out;
+// goto;
     }
 // foliop = folio;
 // Set the outparam foliop and return to the caller to
 // copy the contents outside the lock. Don't free the
 // folio.
 //
-    goto out;
+// goto;
     }
     } else {
     if (vm_shared &&
@@ -5680,14 +5922,14 @@ pub unsafe extern "C" fn hugetlb_fault_mutex_hash(mapping: *mut address_space, i
     folio_put(*foliop);
     ret = -EEXIST;
 // foliop = NULL;
-    goto out;
+// goto;
     }
     folio = alloc_hugetlb_folio(dst_vma, dst_addr, false);
     if (IS_ERR(folio)) {
     folio_put(*foliop);
     ret = -ENOMEM;
 // foliop = NULL;
-    goto out;
+// goto;
     }
     ret = copy_user_large_folio(folio, *foliop, dst_addr, dst_vma);
     folio_put(*foliop);
@@ -5695,7 +5937,7 @@ pub unsafe extern "C" fn hugetlb_fault_mutex_hash(mapping: *mut address_space, i
     if (ret) {
     restore_reserve_on_error(h, dst_vma, dst_addr, folio);
     folio_put(folio);
-    goto out;
+// goto;
     }
     }
 //
@@ -5709,15 +5951,18 @@ pub unsafe extern "C" fn hugetlb_fault_mutex_hash(mapping: *mut address_space, i
 // an earlier smp_wmb() to ensure that prior stores will be visible
 // before the set_pte_at() write.
 //
-    if (!is_continue)
+    if (!is_continue) {
     __folio_mark_uptodate(folio);
-    else
-    WARN_ON_ONCE(!folio_test_uptodate(folio));
+    }
+    else {
+    WARN_ON_ONCE!(!folio_test_uptodate(folio));
+    }
 // Add shared, newly allocated pages to the page cache.
     if (vm_shared && !is_continue) {
     ret = -EFAULT;
-    if (idx >= (i_size_read(mapping.host) >> huge_page_shift(h)))
-    goto out_release_nounlock;
+    if (idx >= (i_size_read(mapping.host) >> huge_page_shift(h))) {
+// goto;
+    }
 //
 // Serialization between remove_inode_hugepages() and
 // hugetlb_add_to_page_cache() below happens through the
@@ -5725,26 +5970,31 @@ pub unsafe extern "C" fn hugetlb_fault_mutex_hash(mapping: *mut address_space, i
 // the caller.
 //
     ret = hugetlb_add_to_page_cache(folio, mapping, idx);
-    if (ret)
-    goto out_release_nounlock;
+    if (ret) {
+// goto;
+    }
     folio_in_pagecache = true;
     }
     ptl = huge_pte_lock(h, dst_mm, dst_pte);
     ret = -EIO;
-    if (folio_test_hwpoison(folio))
-    goto out_release_unlock;
+    if (folio_test_hwpoison(folio)) {
+// goto;
+    }
     ret = -EEXIST;
     dst_ptep = huge_ptep_get(dst_mm, dst_addr, dst_pte);
 //
 // See comment about UFFD marker overwriting in
 // mfill_atomic_install_pte().
 //
-    if (!huge_pte_none(dst_ptep) && !pte_is_uffd_marker(dst_ptep))
-    goto out_release_unlock;
-    if (folio_in_pagecache)
+    if (!huge_pte_none(dst_ptep) && !pte_is_uffd_marker(dst_ptep)) {
+// goto;
+    }
+    if (folio_in_pagecache) {
     hugetlb_add_file_rmap(folio);
-    else
+    }
+    else {
     hugetlb_add_new_anon_rmap(folio, dst_vma, dst_addr);
+    }
 //
 // For either: (1) CONTINUE on a non-shared VMA, or (2) UFFDIO_COPY
 // with wp flag set, don't set pte write bit.
@@ -5759,48 +6009,51 @@ pub unsafe extern "C" fn hugetlb_fault_mutex_hash(mapping: *mut address_space, i
 //
     _dst_pte = huge_pte_mkdirty(_dst_pte);
     _dst_pte = pte_mkyoung(_dst_pte);
-    if (wp_enabled)
+    if (wp_enabled) {
     _dst_pte = huge_pte_mkuffd(_dst_pte);
+    }
     set_huge_pte_at(dst_mm, dst_addr, dst_pte, _dst_pte, size);
     hugetlb_count_add(pages_per_huge_page(h), dst_mm);
 // No need to invalidate - it was non-present before
     update_mmu_cache(dst_vma, dst_addr, dst_pte);
     spin_unlock(ptl);
-    if (!is_continue)
+    if (!is_continue) {
     folio_set_hugetlb_migratable(folio);
-    if (vm_shared || is_continue)
+    }
+    if (vm_shared || is_continue) {
     folio_unlock(folio);
+    }
     ret = 0;
-    out:
+// label;
     return ret;
-    out_release_unlock:
+// label;
     spin_unlock(ptl);
-    if (vm_shared || is_continue)
+    if (vm_shared || is_continue) {
     folio_unlock(folio);
-    out_release_nounlock:
-    if (!folio_in_pagecache)
+    }
+// label;
+    if (!folio_in_pagecache) {
     restore_reserve_on_error(h, dst_vma, dst_addr, folio);
+    }
     folio_put(folio);
-    goto out;
+// goto;
     }
 
-    long hugetlb_change_protection(struct vm_area_struct *vma,
-    unsigned long address, unsigned long end,
-    pgprot_t newprot, unsigned long cp_flags)
-    {
-    struct mm_struct *mm = vma.vm_mm;
-    let mut start: c_ulong = address;
-    pte_t *ptep;
-    pte_t pte;
-    struct hstate *h = hstate_vma(vma);
-    let mut pages: c_long = 0, psize = huge_page_size(h);
-    struct mmu_notifier_range range;
-    unsigned long last_addr_mask;
-    let mut uffd_wp: bool = cp_flags & MM_CP_UFFD_WP;
-    let mut uffd_wp_resolve: bool = cp_flags & MM_CP_UFFD_WP_RESOLVE;
-    let mut uffd_rwp: bool = cp_flags & MM_CP_UFFD_RWP;
-    let mut uffd_rwp_resolve: bool = cp_flags & MM_CP_UFFD_RWP_RESOLVE;
-    struct mmu_gather tlb;
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_change_protection(vma: *mut vm_area_struct, address: c_ulong, end: c_ulong, newprot: pgprot_t, cp_flags: c_ulong) -> c_long {
+    let mut mm = vma.vm_mm;
+pub static mut start: c_ulong = 0;
+pub static mut ptep: *mut c_void = core::ptr::null_mut();
+    let mut pte;
+    let mut h = hstate_vma(vma);
+pub static mut pages: c_long = 0;
+pub static mut range: usize = 0;
+    let mut last_addr_mask = 0;
+pub static mut uffd_wp: bool = false;
+pub static mut uffd_wp_resolve: bool = false;
+pub static mut uffd_rwp: bool = false;
+pub static mut uffd_rwp_resolve: bool = false;
+pub static mut tlb: usize = 0;
 //
 // In the case of shared PMDs, the area to flush could be beyond
 // start/end.  Set range.start/range.end to cover the maximum possible
@@ -5809,16 +6062,16 @@ pub unsafe extern "C" fn hugetlb_fault_mutex_hash(mapping: *mut address_space, i
     mmu_notifier_range_init(&range, MMU_NOTIFY_PROTECTION_VMA,
     0, mm, start, end);
     adjust_range_if_pmd_sharing_possible(vma, &range.start, &range.end);
-    BUG_ON(address >= end);
+    BUG_ON!(address >= end);
     flush_cache_range(vma, range.start, range.end);
     tlb_gather_mmu_vma(&tlb, vma);
     mmu_notifier_invalidate_range_start(&range);
     hugetlb_vma_lock_write(vma);
     i_mmap_lock_write(vma.vm_file.f_mapping);
     last_addr_mask = hugetlb_mask_last_page(h);
-    for (; address < end; address += psize) {
-    softleaf_t entry;
-    spinlock_t *ptl;
+    while (address < end) {
+    let mut entry;
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
     ptep = hugetlb_walk(vma, address, psize);
     if (!ptep) {
 //
@@ -5847,46 +6100,51 @@ pub unsafe extern "C" fn hugetlb_fault_mutex_hash(mapping: *mut address_space, i
 // shouldn't happen at all.  Warn about it if it
 // happened due to some reason.
 //
-    WARN_ON_ONCE(uffd_wp || uffd_wp_resolve ||
+    WARN_ON_ONCE!(uffd_wp || uffd_wp_resolve ||
     uffd_rwp || uffd_rwp_resolve);
-    pages++;
+    pages += 1;
     spin_unlock(ptl);
     address |= last_addr_mask;
     continue;
     }
     pte = huge_ptep_get(mm, address, ptep);
     if (huge_pte_none(pte)) {
-    if (unlikely(uffd_wp))
+    if (unlikely(uffd_wp)) {
 // Safe to modify directly (none->non-present).
     set_huge_pte_at(mm, address, ptep,
     make_pte_marker(PTE_MARKER_UFFD_WP),
     psize);
-    goto next;
+    }
+// goto;
     }
     entry = softleaf_from_pte(pte);
     if (unlikely(softleaf_is_hwpoison(entry))) {
 // Nothing to do.
     } else if (unlikely(softleaf_is_migration(entry))) {
-    struct folio *folio = softleaf_to_folio(entry);
-    let mut newpte: pte_t = pte;
+    let mut folio = softleaf_to_folio(entry);
+pub static mut newpte: pte_t = 0;
     if (softleaf_is_migration_write(entry)) {
-    if (folio_test_anon(folio))
+    if (folio_test_anon(folio)) {
     entry = make_readable_exclusive_migration_entry(
     swp_offset(entry));
-    else
+    }
+    else {
     entry = make_readable_migration_entry(
     swp_offset(entry));
-    newpte = swp_entry_to_pte(entry);
-    pages++;
     }
-    if (uffd_wp || uffd_rwp)
+    newpte = swp_entry_to_pte(entry);
+    pages += 1;
+    }
+    if (uffd_wp || uffd_rwp) {
     newpte = pte_swp_mkuffd(newpte);
-#[no_mangle]
-pub unsafe extern "C" fn if(uffd_rwp_resolve: uffd_wp_resolve ||) -> else {
-    else if (uffd_wp_resolve || uffd_rwp_resolve)
+    }
+
+    else if (uffd_wp_resolve || uffd_rwp_resolve) {
     newpte = pte_swp_clear_uffd(newpte);
-    if (!pte_same(pte, newpte))
+    }
+    if (!pte_same(pte, newpte)) {
     set_huge_pte_at(mm, address, ptep, newpte, psize);
+    }
     } else if (unlikely(pte_is_marker(pte))) {
 //
 // Do nothing on a poison marker; page is
@@ -5895,34 +6153,37 @@ pub unsafe extern "C" fn if(uffd_rwp_resolve: uffd_wp_resolve ||) -> else {
 // because they're mutual exclusive.
 //
     if (pte_is_uffd_wp_marker(pte) &&
-    (uffd_wp_resolve || uffd_rwp_resolve))
+    (uffd_wp_resolve || uffd_rwp_resolve)) {
 // Safe to modify directly (non-present->none).
     huge_pte_clear(mm, address, ptep, psize);
+    }
     } else {
-    pte_t old_pte;
-    let mut shift: c_uint = huge_page_shift(hstate_vma(vma));
+    let mut old_pte;
+pub static mut shift: c_uint = 0;
 // Already protnone with uffd bit set? Nothing to do.
-    if (uffd_rwp && pte_protnone(pte) && huge_pte_uffd(pte))
-    goto next;
+    if (uffd_rwp && pte_protnone(pte) && huge_pte_uffd(pte)) {
+// goto;
+    }
     old_pte = huge_ptep_modify_prot_start(vma, address, ptep);
     pte = huge_pte_modify(old_pte, newprot);
     pte = arch_make_huge_pte(pte, shift, vma.vm_flags);
-    if (uffd_wp || uffd_rwp)
+    if (uffd_wp || uffd_rwp) {
     pte = huge_pte_mkuffd(pte);
-#[no_mangle]
-pub unsafe extern "C" fn if(uffd_rwp_resolve: uffd_wp_resolve ||) -> else {
-    else if (uffd_wp_resolve || uffd_rwp_resolve)
+    }
+
+    else if (uffd_wp_resolve || uffd_rwp_resolve) {
     pte = huge_pte_clear_uffd(pte);
+    }
 // Preserve RWP protection across mprotect()
     if (userfaultfd_rwp(vma) && huge_pte_uffd(pte)) {
     pte = huge_pte_modify(pte, PAGE_NONE);
     pte = arch_make_huge_pte(pte, shift, vma.vm_flags);
     }
     huge_ptep_modify_prot_commit(vma, address, ptep, old_pte, pte);
-    pages++;
+    pages += 1;
     tlb_remove_huge_tlb_entry(h, &tlb, ptep, address);
     }
-    next:
+// label;
     spin_unlock(ptl);
     cond_resched();
     }
@@ -5948,18 +6209,15 @@ pub unsafe extern "C" fn if(uffd_rwp_resolve: uffd_wp_resolve ||) -> else {
 // associated with the range [from, to].  This number is greater or equal to
 // zero. -EINVAL or -ENOMEM is returned in case of any errors.
 //
-    long hugetlb_reserve_pages(struct inode *inode,
-    long from, long to,
-    struct vm_area_struct *vma,
-    vma_flags_t vma_flags)
-    {
-    let mut chg: c_long = -1, add = -1, spool_resv, gbl_resv;
-    struct hstate *h = hstate_inode(inode);
-    struct hugepage_subpool *spool = subpool_inode(inode);
-    struct resv_map *resv_map;
-    struct hugetlb_cgroup *h_cg = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_reserve_pages(inode: *mut inode, from: c_long, to: c_long, vma: *mut vm_area_struct, vma_flags: vma_flags_t) -> c_long {
+pub static mut chg: c_long = 0;
+    let mut h = hstate_inode(inode);
+    let mut spool = subpool_inode(inode);
+pub static mut resv_map: *mut c_void = core::ptr::null_mut();
+    let mut h_cg = core::ptr::null_mut();
     long gbl_reserve, regions_needed = 0;
-    int err;
+    let mut err = 0;
 // This should never happen
     if (from > to) {
     VM_WARN(1, "%s called with a negative range\n", __func__);
@@ -5975,8 +6233,9 @@ pub unsafe extern "C" fn if(uffd_rwp_resolve: uffd_wp_resolve ||) -> else {
 // attempt will be made for VM_NORESERVE to allocate a page
 // without using reserves
 //
-    if (vma_flags_test(&vma_flags, VMA_NORESERVE_BIT))
+    if (vma_flags_test(&vma_flags, VMA_NORESERVE_BIT)) {
     return 0;
+    }
 //
 // Shared mappings base their reservation on the number of pages that
 // are already allocated on behalf of the file. Private mappings need
@@ -5996,7 +6255,7 @@ pub unsafe extern "C" fn if(uffd_rwp_resolve: uffd_wp_resolve ||) -> else {
     resv_map = resv_map_alloc();
     if (!resv_map) {
     err = -ENOMEM;
-    goto out_err;
+// goto;
     }
     chg = to - from;
     set_vma_resv_map(vma, resv_map);
@@ -6005,12 +6264,13 @@ pub unsafe extern "C" fn if(uffd_rwp_resolve: uffd_wp_resolve ||) -> else {
     if (chg < 0) {
 // region_chg() above can return -ENOMEM
     err = (chg == -ENOMEM) ? -ENOMEM : -EINVAL;
-    goto out_err;
+// goto;
     }
     err = hugetlb_cgroup_charge_cgroup_rsvd(hstate_index(h),
     chg * pages_per_huge_page(h), &h_cg);
-    if (err < 0)
-    goto out_err;
+    if (err < 0) {
+// goto;
+    }
     if (vma && !vma_test(vma, VMA_MAYSHARE_BIT) && h_cg) {
 // For private mappings, the hugetlb_cgroup uncharge info hangs
 // of the resv_map.
@@ -6025,15 +6285,16 @@ pub unsafe extern "C" fn if(uffd_rwp_resolve: uffd_wp_resolve ||) -> else {
     gbl_reserve = hugepage_subpool_get_pages(spool, chg);
     if (gbl_reserve < 0) {
     err = gbl_reserve;
-    goto out_uncharge_cgroup;
+// goto;
     }
 //
 // Check enough hugepages are available for the reservation.
 // Hand the pages back to the subpool if there are not
 //
     err = hugetlb_acct_memory(h, gbl_reserve);
-    if (err < 0)
-    goto out_put_pages;
+    if (err < 0) {
+// goto;
+    }
 //
 // Account for the reservations made. Shared mappings record regions
 // that have reservations as they are shared by multiple VMAs.
@@ -6050,7 +6311,7 @@ pub unsafe extern "C" fn if(uffd_rwp_resolve: uffd_wp_resolve ||) -> else {
     if (unlikely(add < 0)) {
     hugetlb_acct_memory(h, -gbl_reserve);
     err = add;
-    goto out_put_pages;
+// goto;
     } else if (unlikely(chg > add)) {
 //
 // pages in this range were added to the reserve
@@ -6059,7 +6320,7 @@ pub unsafe extern "C" fn if(uffd_rwp_resolve: uffd_wp_resolve ||) -> else {
 // the subpool and reserve counts modified above
 // based on the difference.
 //
-    long rsv_adjust;
+    let mut rsv_adjust = 0;
 //
 // hugetlb_cgroup_uncharge_cgroup_rsvd() will put the
 // reference to h_cg->css. See comment below for detail.
@@ -6081,7 +6342,7 @@ pub unsafe extern "C" fn if(uffd_rwp_resolve: uffd_wp_resolve ||) -> else {
     }
     }
     return chg;
-    out_put_pages:
+// label;
     spool_resv = chg - gbl_reserve;
     if (spool_resv) {
 // put sub pool's reservation back, chg - gbl_reserve
@@ -6094,37 +6355,38 @@ pub unsafe extern "C" fn if(uffd_rwp_resolve: uffd_wp_resolve ||) -> else {
     }
 // Restore used_hpages for pages that failed global reservation
     if (gbl_reserve && spool) {
-    unsigned long flags;
+    let mut flags = 0;
     spin_lock_irqsave(&spool.lock, flags);
-    if (spool.max_hpages != -1)
+    if (spool.max_hpages != -1) {
     spool.used_hpages -= gbl_reserve;
+    }
     unlock_or_release_subpool(spool, flags);
     }
-    out_uncharge_cgroup:
+// label;
     hugetlb_cgroup_uncharge_cgroup_rsvd(hstate_index(h),
     chg * pages_per_huge_page(h), h_cg);
-    out_err:
+// label;
     hugetlb_vma_lock_free(vma);
-    if (!vma || vma_test(vma, VMA_MAYSHARE_BIT))
+    if (!vma || vma_test(vma, VMA_MAYSHARE_BIT)) {
 // Only call region_abort if the region_chg succeeded but the
 // region_add failed or didn't run.
 //
     if (chg >= 0 && add < 0)
     region_abort(resv_map, from, to, regions_needed);
+    }
     if (vma && is_vma_resv_set(vma, HPAGE_RESV_OWNER)) {
     kref_put(&resv_map.refs, resv_map_release);
     set_vma_resv_map(vma, core::ptr::null_mut());
     }
     return err;
     }
-    long hugetlb_unreserve_pages(struct inode *inode, long start, long end,
-    long freed)
-    {
-    struct hstate *h = hstate_inode(inode);
-    struct resv_map *resv_map = inode_resv_map(inode);
-    let mut chg: c_long = 0;
-    struct hugepage_subpool *spool = subpool_inode(inode);
-    long gbl_reserve;
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_unreserve_pages(inode: *mut inode, start: c_long, end: c_long, freed: c_long) -> c_long {
+    let mut h = hstate_inode(inode);
+    let mut resv_map = inode_resv_map(inode);
+pub static mut chg: c_long = 0;
+    let mut spool = subpool_inode(inode);
+    let mut gbl_reserve = 0;
 //
 // Since this routine can be called in the evict inode path for all
 // hugetlbfs inodes, resv_map could be NULL.
@@ -6136,8 +6398,9 @@ pub unsafe extern "C" fn if(uffd_rwp_resolve: uffd_wp_resolve ||) -> else {
 // must be split and another region descriptor can not be
 // allocated.  If end == LONG_MAX, it will not fail.
 //
-    if (chg < 0)
+    if (chg < 0) {
     return chg;
+    }
     }
     spin_lock(&inode.i_lock);
     inode.i_blocks -= (blocks_per_huge_page(h) * freed);
@@ -6154,17 +6417,15 @@ pub unsafe extern "C" fn if(uffd_rwp_resolve: uffd_wp_resolve ||) -> else {
     return 0;
     }
 
-    static unsigned long page_table_shareable(struct vm_area_struct *svma,
-    struct vm_area_struct *vma,
-    unsigned long addr, pgoff_t idx)
-    {
-    unsigned long saddr = ((idx - vma_start_pgoff(svma)) << PAGE_SHIFT) +
+#[no_mangle]
+pub unsafe extern "C" fn page_table_shareable(svma: *mut vm_area_struct, vma: *mut vm_area_struct, addr: c_ulong, idx: pgoff_t) -> c_ulong {
+    let mut saddr = ((idx - vma_start_pgoff(svma)) << PAGE_SHIFT) +
     svma.vm_start;
-    let mut sbase: c_ulong = saddr & PUD_MASK;
-    let mut s_end: c_ulong = sbase + PUD_SIZE;
+pub static mut sbase: c_ulong = 0;
+pub static mut s_end: c_ulong = 0;
 // Allow segments to share if only one is marked locked
-    let mut vm_flags: vm_flags_t = vma.vm_flags & ~VM_LOCKED_MASK;
-    let mut svm_flags: vm_flags_t = svma.vm_flags & ~VM_LOCKED_MASK;
+pub static mut vm_flags: vm_flags_t = 0;
+pub static mut svm_flags: vm_flags_t = 0;
 //
 // match the virtual addresses, permission and the alignment of the
 // page table page.
@@ -6174,29 +6435,32 @@ pub unsafe extern "C" fn if(uffd_rwp_resolve: uffd_wp_resolve ||) -> else {
     if (pmd_index(addr) != pmd_index(saddr) ||
     vm_flags != svm_flags ||
     !range_in_vma(svma, sbase, s_end) ||
-    !svma.vm_private_data)
+    !svma.vm_private_data) {
     return 0;
+    }
     return saddr;
     }
 #[no_mangle]
 pub unsafe extern "C" fn want_pmd_share(vma: *mut vm_area_struct, addr: c_ulong) -> bool {
-    bool want_pmd_share(struct vm_area_struct *vma, unsigned long addr)
-    {
-    let mut start: c_ulong = addr & PUD_MASK;
-    let mut end: c_ulong = start + PUD_SIZE;
+pub static mut start: c_ulong = 0;
+pub static mut end: c_ulong = 0;
 
-    if (uffd_disable_huge_pmd_share(vma))
+    if (uffd_disable_huge_pmd_share(vma)) {
     return false;
+    }
 
 //
 // check on proper vm_flags and page table alignment
 //
-    if (!(vma.vm_flags & VM_MAYSHARE))
+    if (!(vma.vm_flags & VM_MAYSHARE)) {
     return false;
-    if (!vma.vm_private_data)	/* vma lock required for sharing */
+    }
+    if (!vma.vm_private_data)	/* vma lock required for sharing */ {
     return false;
-    if (!range_in_vma(vma, start, end))
+    }
+    if (!range_in_vma(vma, start, end)) {
     return false;
+    }
     return true;
     }
 //
@@ -6204,23 +6468,25 @@ pub unsafe extern "C" fn want_pmd_share(vma: *mut vm_area_struct, addr: c_ulong)
 // If yes, adjust start and end to cover range associated with possible
 // shared pmd mappings.
 //
-    void adjust_range_if_pmd_sharing_possible(struct vm_area_struct *vma,
-    unsigned long *start, unsigned long *end)
-    {
-    unsigned long v_start = ALIGN(vma.vm_start, PUD_SIZE),
+#[no_mangle]
+pub unsafe extern "C" fn adjust_range_if_pmd_sharing_possible(vma: *mut vm_area_struct, start: *mut c_ulong, end: *mut c_ulong) {
+    let mut v_start = ALIGN(vma.vm_start, PUD_SIZE),
     v_end = ALIGN_DOWN(vma.vm_end, PUD_SIZE);
 //
 // vma needs to span at least one aligned PUD size, and the range
 // must be at least partially within in.
 //
     if (!(vma.vm_flags & VM_MAYSHARE) || !(v_end > v_start) ||
-    (*end <= v_start) || (*start >= v_end))
+    (*end <= v_start) || (*start >= v_end)) {
     return;
+    }
 // Extend the range to be PUD aligned for a worst case scenario
-    if (*start > v_start)
+    if (*start > v_start) {
 // start = ALIGN_DOWN(*start, PUD_SIZE);
-    if (*end < v_end)
+    }
+    if (*end < v_end) {
 // end = ALIGN(*end, PUD_SIZE);
+    }
     }
 //
 // Search for a shareable pmd page for hugetlb. In any case calls pmd_alloc()
@@ -6231,19 +6497,20 @@ pub unsafe extern "C" fn want_pmd_share(vma: *mut vm_area_struct, addr: c_ulong)
 // racing tasks could either miss the sharing (see huge_pte_offset) or select a
 // bad pmd for sharing.
 //
-    pte_t *huge_pmd_share(struct mm_struct *mm, struct vm_area_struct *vma,
+    pte_t *huge_pmd_share(mm_struct *mm, vm_area_struct *vma,
     unsigned long addr, pud_t *pud)
     {
-    struct address_space *mapping = vma.vm_file.f_mapping;
-    let mut idx: pgoff_t = linear_page_index(vma, addr);
-    struct vm_area_struct *svma;
-    unsigned long saddr;
-    pte_t *spte = core::ptr::null_mut();
-    pte_t *pte;
+    let mut mapping = vma.vm_file.f_mapping;
+pub static mut idx: pgoff_t = 0;
+pub static mut svma: *mut c_void = core::ptr::null_mut();
+    let mut saddr = 0;
+    let mut spte = core::ptr::null_mut();
+pub static mut pte: *mut c_void = core::ptr::null_mut();
     i_mmap_lock_read(mapping);
     mapping_rmap_tree_foreach(svma, mapping, idx, idx) {
-    if (svma == vma)
+    if (svma == vma) {
     continue;
+    }
     saddr = page_table_shareable(svma, vma, addr, idx);
     if (saddr) {
     spte = hugetlb_walk(svma, saddr,
@@ -6254,38 +6521,40 @@ pub unsafe extern "C" fn want_pmd_share(vma: *mut vm_area_struct, addr: c_ulong)
     }
     }
     }
-    if (!spte)
-    goto out;
+    if (!spte) {
+// goto;
+    }
     spin_lock(&mm.page_table_lock);
     if (pud_none(*pud)) {
     pud_populate(mm, pud,
-    (pmd_t *)((unsigned long)spte & PAGE_MASK));
+    ((unsigned long)spte & PAGE_MASK));
     mm_inc_nr_pmds(mm);
     } else {
     ptdesc_pmd_pts_dec(virt_to_ptdesc(spte));
     }
     spin_unlock(&mm.page_table_lock);
-    out:
-    pte = (pte_t *)pmd_alloc(mm, pud, addr);
+// label;
+    pte = pmd_alloc(mm, pud, addr);
     i_mmap_unlock_read(mapping);
     return pte;
     }
-    static int __huge_pmd_unshare(struct mmu_gather *tlb,
-    struct vm_area_struct *vma, unsigned long addr, pte_t *ptep,
-    bool check_locks)
-    {
-    let mut sz: c_ulong = huge_page_size(hstate_vma(vma));
-    struct mm_struct *mm = vma.vm_mm;
-    pgd_t *pgd = pgd_offset(mm, addr);
-    p4d_t *p4d = p4d_offset(pgd, addr);
-    pud_t *pud = pud_offset(p4d, addr);
-    if (sz != PMD_SIZE)
+#[no_mangle]
+pub unsafe extern "C" fn __huge_pmd_unshare(tlb: *mut mmu_gather, vma: *mut vm_area_struct, addr: c_ulong, ptep: *mut pte_t, check_locks: bool) -> c_int {
+pub static mut sz: c_ulong = 0;
+    let mut mm = vma.vm_mm;
+    let mut pgd = pgd_offset(mm, addr);
+    let mut p4d = p4d_offset(pgd, addr);
+    let mut pud = pud_offset(p4d, addr);
+    if (sz != PMD_SIZE) {
     return 0;
-    if (!ptdesc_pmd_is_shared(virt_to_ptdesc(ptep)))
+    }
+    if (!ptdesc_pmd_is_shared(virt_to_ptdesc(ptep))) {
     return 0;
+    }
     i_mmap_assert_write_locked(vma.vm_file.f_mapping);
-    if (check_locks)
+    if (check_locks) {
     hugetlb_vma_assert_locked(vma);
+    }
     pud_clear(pud);
     tlb_unshare_pmd_ptdesc(tlb, virt_to_ptdesc(ptep), addr);
     mm_dec_nr_pmds(mm);
@@ -6307,9 +6576,8 @@ pub unsafe extern "C" fn want_pmd_share(vma: *mut vm_area_struct, addr: c_ulong)
 // Returns: 1 if it was a shared PMD table and it got unmapped, or 0 if it
 // was not a shared PMD table.
 //
-    int huge_pmd_unshare(struct mmu_gather *tlb, struct vm_area_struct *vma,
-    unsigned long addr, pte_t *ptep)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn huge_pmd_unshare(tlb: *mut mmu_gather, vma: *mut vm_area_struct, addr: c_ulong, ptep: *mut pte_t) -> c_int {
     return __huge_pmd_unshare(tlb, vma, addr, ptep, /*check_locks=*/true);
     }
 //
@@ -6325,8 +6593,6 @@ pub unsafe extern "C" fn want_pmd_share(vma: *mut vm_area_struct, addr: c_ulong)
 //
 #[no_mangle]
 pub unsafe extern "C" fn huge_pmd_unshare_flush(tlb: *mut mmu_gather, vma: *mut vm_area_struct) {
-    void huge_pmd_unshare_flush(struct mmu_gather *tlb, struct vm_area_struct *vma)
-    {
 //
 // We must synchronize page table unsharing such that nobody will
 // try reusing a previously-shared page table while it might still
@@ -6336,64 +6602,69 @@ pub unsafe extern "C" fn huge_pmd_unshare_flush(tlb: *mut mmu_gather, vma: *mut 
     tlb_flush_unshared_tables(tlb);
     }
 
-    pte_t *huge_pmd_share(struct mm_struct *mm, struct vm_area_struct *vma,
+    pte_t *huge_pmd_share(mm_struct *mm, vm_area_struct *vma,
     unsigned long addr, pud_t *pud)
     {
     return core::ptr::null_mut();
     }
-    static int __huge_pmd_unshare(struct mmu_gather *tlb,
-    struct vm_area_struct *vma, unsigned long addr, pte_t *ptep,
-    bool check_locks)
-    {
-    return 0;
-    }
-    int huge_pmd_unshare(struct mmu_gather *tlb, struct vm_area_struct *vma,
-    unsigned long addr, pte_t *ptep)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: __huge_pmd_unshare
+pub unsafe extern "C" fn __huge_pmd_unshare_dup(tlb: *mut mmu_gather, vma: *mut vm_area_struct, addr: c_ulong, ptep: *mut pte_t, check_locks: bool) -> c_int {
     return 0;
     }
 #[no_mangle]
-pub unsafe extern "C" fn huge_pmd_unshare_flush(tlb: *mut mmu_gather, vma: *mut vm_area_struct) {
-    void huge_pmd_unshare_flush(struct mmu_gather *tlb, struct vm_area_struct *vma)
-    {
-    }
-    void adjust_range_if_pmd_sharing_possible(struct vm_area_struct *vma,
-    unsigned long *start, unsigned long *end)
-    {
+#[no_mangle]
+// duplicate fn: huge_pmd_unshare
+pub unsafe extern "C" fn huge_pmd_unshare_dup(tlb: *mut mmu_gather, vma: *mut vm_area_struct, addr: c_ulong, ptep: *mut pte_t) -> c_int {
+    return 0;
     }
 #[no_mangle]
-pub unsafe extern "C" fn want_pmd_share(vma: *mut vm_area_struct, addr: c_ulong) -> bool {
-    bool want_pmd_share(struct vm_area_struct *vma, unsigned long addr)
-    {
+#[no_mangle]
+// duplicate fn: huge_pmd_unshare_flush
+pub unsafe extern "C" fn huge_pmd_unshare_flush_dup(tlb: *mut mmu_gather, vma: *mut vm_area_struct) {
+    }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: adjust_range_if_pmd_sharing_possible
+pub unsafe extern "C" fn adjust_range_if_pmd_sharing_possible_dup(vma: *mut vm_area_struct, start: *mut c_ulong, end: *mut c_ulong) {
+    }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: want_pmd_share
+pub unsafe extern "C" fn want_pmd_share_dup(vma: *mut vm_area_struct, addr: c_ulong) -> bool {
     return false;
     }
 
-    pte_t *huge_pte_alloc(struct mm_struct *mm, struct vm_area_struct *vma,
+    pte_t *huge_pte_alloc(mm_struct *mm, vm_area_struct *vma,
     unsigned long addr, unsigned long sz)
     {
-    pgd_t *pgd;
-    p4d_t *p4d;
-    pud_t *pud;
-    pte_t *pte = core::ptr::null_mut();
+pub static mut pgd: *mut c_void = core::ptr::null_mut();
+pub static mut p4d: *mut c_void = core::ptr::null_mut();
+pub static mut pud: *mut c_void = core::ptr::null_mut();
+    let mut pte = core::ptr::null_mut();
     pgd = pgd_offset(mm, addr);
     p4d = p4d_alloc(mm, pgd, addr);
-    if (!p4d)
+    if (!p4d) {
     return core::ptr::null_mut();
+    }
     pud = pud_alloc(mm, p4d, addr);
     if (pud) {
     if (sz == PUD_SIZE) {
-    pte = (pte_t *)pud;
+    pte = pud;
     } else {
-    BUG_ON(sz != PMD_SIZE);
-    if (want_pmd_share(vma, addr) && pud_none(*pud))
+    BUG_ON!(sz != PMD_SIZE);
+    if (want_pmd_share(vma, addr) && pud_none(*pud)) {
     pte = huge_pmd_share(mm, vma, addr, pud);
-    else
-    pte = (pte_t *)pmd_alloc(mm, pud, addr);
+    }
+    else {
+    pte = pmd_alloc(mm, pud, addr);
+    }
     }
     }
     if (pte) {
-    let mut pteval: pte_t = ptep_get_lockless(pte);
-    BUG_ON(pte_present(pteval) && !pte_huge(pteval));
+pub static mut pteval: pte_t = 0;
+    BUG_ON!(pte_present(pteval) && !pte_huge(pteval));
     }
     return pte;
     }
@@ -6406,29 +6677,33 @@ pub unsafe extern "C" fn want_pmd_share(vma: *mut vm_area_struct, addr: c_ulong)
 // size @sz doesn't match the hugepage size at this level of the page
 // table.
 //
-    pte_t *huge_pte_offset(struct mm_struct *mm,
+    pte_t *huge_pte_offset(mm_struct *mm,
     unsigned long addr, unsigned long sz)
     {
-    pgd_t *pgd;
-    p4d_t *p4d;
-    pud_t *pud;
-    pmd_t *pmd;
+pub static mut pgd: *mut c_void = core::ptr::null_mut();
+pub static mut p4d: *mut c_void = core::ptr::null_mut();
+pub static mut pud: *mut c_void = core::ptr::null_mut();
+pub static mut pmd: *mut c_void = core::ptr::null_mut();
     pgd = pgd_offset(mm, addr);
-    if (!pgd_present(*pgd))
+    if (!pgd_present(*pgd)) {
     return core::ptr::null_mut();
+    }
     p4d = p4d_offset(pgd, addr);
-    if (!p4d_present(*p4d))
+    if (!p4d_present(*p4d)) {
     return core::ptr::null_mut();
+    }
     pud = pud_offset(p4d, addr);
-    if (sz == PUD_SIZE)
+    if (sz == PUD_SIZE) {
 // must be pud huge, non-present or none
-    return (pte_t *)pud;
-    if (!pud_present(*pud))
+    return pud;
+    }
+    if (!pud_present(*pud)) {
     return core::ptr::null_mut();
+    }
 // must have a valid entry and size to go further
     pmd = pmd_offset(pud, addr);
 // must be pmd huge, non-present or none
-    return (pte_t *)pmd;
+    return pmd;
     }
 //
 // Return a mask that can be used to update an address to the last huge
@@ -6439,27 +6714,28 @@ pub unsafe extern "C" fn want_pmd_share(vma: *mut vm_area_struct, addr: c_ulong)
 //
 #[no_mangle]
 pub unsafe extern "C" fn hugetlb_mask_last_page(h: *mut hstate) -> c_ulong {
-    unsigned long hugetlb_mask_last_page(struct hstate *h)
-    {
-    let mut hp_size: c_ulong = huge_page_size(h);
-    if (hp_size == PUD_SIZE)
+pub static mut hp_size: c_ulong = 0;
+    if (hp_size == PUD_SIZE) {
     return P4D_SIZE - PUD_SIZE;
-#[no_mangle]
-pub unsafe extern "C" fn if(PMD_SIZE: hp_size ==) -> else {
-    else if (hp_size == PMD_SIZE)
+    }
+
+    else if (hp_size == PMD_SIZE) {
     return PUD_SIZE - PMD_SIZE;
-    else
+    }
+    else {
     return 0UL;
+    }
     }
 
 // See description above.  Architectures can provide their own version.
 #[no_mangle]
-pub unsafe extern "C" fn hugetlb_mask_last_page(h: *mut hstate) -> __weak unsigned long {
-    __weak unsigned long hugetlb_mask_last_page(struct hstate *h)
-    {
+#[no_mangle]
+// duplicate fn: hugetlb_mask_last_page
+pub unsafe extern "C" fn hugetlb_mask_last_page_dup(h: *mut hstate) -> __weak unsigned long {
 
-    if (huge_page_size(h) == PMD_SIZE)
+    if (huge_page_size(h) == PMD_SIZE) {
     return PUD_SIZE - PMD_SIZE;
+    }
 
     return 0UL;
     }
@@ -6483,39 +6759,37 @@ pub unsafe extern "C" fn hugetlb_mask_last_page(h: *mut hstate) -> __weak unsign
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_isolate_hugetlb(folio: *mut folio, list: *mut list_head) -> bool {
-    bool folio_isolate_hugetlb(struct folio *folio, struct list_head *list)
-    {
-    let mut ret: bool = true;
+pub static mut ret: bool = true;
     spin_lock_irq(&hugetlb_lock);
     if (!folio_test_hugetlb(folio) ||
     !folio_test_hugetlb_migratable(folio) ||
     !folio_try_get(folio)) {
     ret = false;
-    goto unlock;
+// goto;
     }
     folio_clear_hugetlb_migratable(folio);
     list_move_tail(&folio.lru, list);
-    unlock:
+// label;
     spin_unlock_irq(&hugetlb_lock);
     return ret;
     }
 #[no_mangle]
 pub unsafe extern "C" fn get_hwpoison_hugetlb_folio(folio: *mut folio, hugetlb: *mut bool, unpoison: bool) -> c_int {
-    int get_hwpoison_hugetlb_folio(struct folio *folio, bool *hugetlb, bool unpoison)
-    {
-    let mut ret: c_int = 0;
+pub static mut ret: c_int = 0;
 // hugetlb = false;
     spin_lock_irq(&hugetlb_lock);
     if (folio_test_hugetlb(folio)) {
 // hugetlb = true;
-    if (folio_test_hugetlb_freed(folio))
+    if (folio_test_hugetlb_freed(folio)) {
     ret = 0;
-#[no_mangle]
-pub unsafe extern "C" fn if(unpoison: folio_test_hugetlb_migratable(folio) ||) -> else {
-    else if (folio_test_hugetlb_migratable(folio) || unpoison)
+    }
+
+    else if (folio_test_hugetlb_migratable(folio) || unpoison) {
     ret = folio_try_get(folio);
-    else
+    }
+    else {
     ret = -EBUSY;
+    }
     }
     spin_unlock_irq(&hugetlb_lock);
     return ret;
@@ -6533,18 +6807,15 @@ pub unsafe extern "C" fn if(unpoison: folio_test_hugetlb_migratable(folio) ||) -
 //
 #[no_mangle]
 pub unsafe extern "C" fn folio_putback_hugetlb(folio: *mut folio) {
-    void folio_putback_hugetlb(struct folio *folio)
-    {
     spin_lock_irq(&hugetlb_lock);
     folio_set_hugetlb_migratable(folio);
     list_move_tail(&folio.lru, &(folio_hstate(folio)).hugepage_activelist);
     spin_unlock_irq(&hugetlb_lock);
     folio_put(folio);
     }
-    void move_hugetlb_state(struct folio *old_folio, struct folio *new_folio,
-    enum migrate_reason reason)
-    {
-    struct hstate *h = folio_hstate(old_folio);
+#[no_mangle]
+pub unsafe extern "C" fn move_hugetlb_state(old_folio: *mut folio, new_folio: *mut folio, reason: migrate_reason) {
+    let mut h = folio_hstate(old_folio);
     hugetlb_cgroup_migrate(old_folio, new_folio);
     folio_set_owner_migrate_reason(new_folio, reason);
 //
@@ -6558,8 +6829,8 @@ pub unsafe extern "C" fn folio_putback_hugetlb(folio: *mut folio) {
 // the per-node's.
 //
     if (folio_test_hugetlb_temporary(new_folio)) {
-    let mut old_nid: c_int = folio_nid(old_folio);
-    let mut new_nid: c_int = folio_nid(new_folio);
+pub static mut old_nid: c_int = 0;
+pub static mut new_nid: c_int = 0;
     folio_set_hugetlb_temporary(old_folio);
     folio_clear_hugetlb_temporary(new_folio);
 //
@@ -6591,23 +6862,22 @@ pub unsafe extern "C" fn folio_putback_hugetlb(folio: *mut folio) {
 // If @take_locks is true, we take the hugetlb VMA lock (to lock out things like
 // concurrent page fault handling) and the file rmap lock.
 //
-    static void hugetlb_unshare_pmds(struct vm_area_struct *vma,
-    unsigned long start,
-    unsigned long end,
-    bool take_locks)
-    {
-    struct hstate *h = hstate_vma(vma);
-    let mut sz: c_ulong = huge_page_size(h);
-    struct mm_struct *mm = vma.vm_mm;
-    struct mmu_notifier_range range;
-    struct mmu_gather tlb;
-    unsigned long address;
-    spinlock_t *ptl;
-    pte_t *ptep;
-    if (!(vma.vm_flags & VM_MAYSHARE))
+#[no_mangle]
+pub unsafe extern "C" fn hugetlb_unshare_pmds(vma: *mut vm_area_struct, start: c_ulong, end: c_ulong, take_locks: bool) {
+    let mut h = hstate_vma(vma);
+pub static mut sz: c_ulong = 0;
+    let mut mm = vma.vm_mm;
+pub static mut range: usize = 0;
+pub static mut tlb: usize = 0;
+    let mut address = 0;
+pub static mut ptl: *mut c_void = core::ptr::null_mut();
+pub static mut ptep: *mut c_void = core::ptr::null_mut();
+    if (!(vma.vm_flags & VM_MAYSHARE)) {
     return;
-    if (start >= end)
+    }
+    if (start >= end) {
     return;
+    }
     flush_cache_range(vma, start, end);
     tlb_gather_mmu_vma(&tlb, vma);
 //
@@ -6623,10 +6893,11 @@ pub unsafe extern "C" fn folio_putback_hugetlb(folio: *mut folio) {
     } else {
     i_mmap_assert_write_locked(vma.vm_file.f_mapping);
     }
-    for (address = start; address < end; address += PUD_SIZE) {
+    while (address < end) {
     ptep = hugetlb_walk(vma, address, sz);
-    if (!ptep)
+    if (!ptep) {
     continue;
+    }
     ptl = huge_pte_lock(h, mm, ptep);
     __huge_pmd_unshare(&tlb, vma, address, ptep, take_locks);
     spin_unlock(ptl);
@@ -6649,8 +6920,6 @@ pub unsafe extern "C" fn folio_putback_hugetlb(folio: *mut folio) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn hugetlb_unshare_all_pmds(vma: *mut vm_area_struct) {
-    void hugetlb_unshare_all_pmds(struct vm_area_struct *vma)
-    {
     hugetlb_unshare_pmds(vma, ALIGN(vma.vm_start, PUD_SIZE),
     ALIGN_DOWN(vma.vm_end, PUD_SIZE),
 // take_locks = */ true);
@@ -6665,8 +6934,10 @@ pub unsafe extern "C" fn hugetlb_unshare_all_pmds(vma: *mut vm_area_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn fixup_hugetlb_reservations(vma: *mut vm_area_struct) {
-    void fixup_hugetlb_reservations(struct vm_area_struct *vma)
-    {
-    if (is_vm_hugetlb_page(vma))
+    if (is_vm_hugetlb_page(vma)) {
     clear_vma_resv_huge_pages(vma);
     }
+    }
+}
+}
+}

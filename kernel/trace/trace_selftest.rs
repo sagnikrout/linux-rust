@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -41,29 +291,34 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
 #[no_mangle]
 pub unsafe extern "C" fn trace_valid_entry(entry: *mut trace_entry) -> c_int {
-    static inline int trace_valid_entry(struct trace_entry *entry)
-    {
-    switch (entry.type) {
-    case TRACE_FN:
-    case TRACE_CTX:
-    case TRACE_WAKE:
-    case TRACE_STACK:
-    case TRACE_PRINT:
-    case TRACE_BRANCH:
-    case TRACE_GRAPH_ENT:
-    case TRACE_GRAPH_RETADDR_ENT:
-    case TRACE_GRAPH_RET:
+    match (entry.type) {
+    TRACE_FN => {
+    }
+    TRACE_CTX => {
+    }
+    TRACE_WAKE => {
+    }
+    TRACE_STACK => {
+    }
+    TRACE_PRINT => {
+    }
+    TRACE_BRANCH => {
+    }
+    TRACE_GRAPH_ENT => {
+    }
+    TRACE_GRAPH_RETADDR_ENT => {
+    }
+    TRACE_GRAPH_RET => {
     return 1;
+    }
     }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn trace_test_buffer_cpu(buf: *mut array_buffer, cpu: c_int) -> c_int {
-    static int trace_test_buffer_cpu(struct array_buffer *buf, int cpu)
-    {
-    struct ring_buffer_event *event;
-    struct trace_entry *entry;
-    let mut loops: c_uint = 0;
+pub static mut event: *mut c_void = core::ptr::null_mut();
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut loops: c_uint = 0;
     while ((event = ring_buffer_consume(buf.buffer, cpu, core::ptr::null_mut(), core::ptr::null_mut()))) {
     entry = ring_buffer_event_data(event);
 //
@@ -72,20 +327,20 @@ unsafe extern "C" fn trace_test_buffer_cpu(buf: *mut array_buffer, cpu: c_int) -
 // with the ring buffer.
 //
     if (loops++ > trace_buf_size) {
-    printk(KERN_CONT ".. bad ring buffer ");
-    goto failed;
+    printk(".. bad ring buffer ");
+// goto;
     }
     if (!trace_valid_entry(entry)) {
-    printk(KERN_CONT ".. invalid entry %d ",
+    printk(".. invalid entry %d ",
     entry.type);
-    goto failed;
+// goto;
     }
     }
     return 0;
-    failed:
+// label;
 // disable tracing
     tracing_disabled = 1;
-    printk(KERN_CONT ".. corrupted trace buffer .. ");
+    printk(".. corrupted trace buffer .. ");
     return -1;
     }
 //
@@ -94,8 +349,6 @@ unsafe extern "C" fn trace_test_buffer_cpu(buf: *mut array_buffer, cpu: c_int) -
 //
 #[no_mangle]
 unsafe extern "C" fn trace_test_buffer(buf: *mut array_buffer, count: *mut c_ulong) -> int __maybe_unused {
-    static int __maybe_unused trace_test_buffer(struct array_buffer *buf, unsigned long *count)
-    {
     unsigned long flags, cnt = 0;
     int cpu, ret = 0;
 // Don't allow flipping of max traces now
@@ -112,77 +365,54 @@ unsafe extern "C" fn trace_test_buffer(buf: *mut array_buffer, count: *mut c_ulo
     tracing_off();
     for_each_possible_cpu(cpu) {
     ret = trace_test_buffer_cpu(buf, cpu);
-    if (ret)
+    if (ret) {
     break;
+    }
     }
     tracing_on();
     arch_spin_unlock(&buf.tr.max_lock);
     local_irq_restore(flags);
-    if (count)
+    if (count) {
 // count = cnt;
+    }
     return ret;
     }
 #[no_mangle]
 pub unsafe extern "C" fn warn_failed_init_tracer(trace: *mut tracer, init_ret: c_int) {
-    static inline void warn_failed_init_tracer(struct tracer *trace, int init_ret)
-    {
-    printk(KERN_WARNING "Failed to init %s tracer, init returned %d\n",
+    printk("Failed to init %s tracer, init returned %d\n",
     trace.name, init_ret);
     }
 
     static int trace_selftest_test_probe1_cnt;
-    static void trace_selftest_test_probe1_func(unsigned long ip,
-    unsigned long pip,
-    struct ftrace_ops *op,
-    struct ftrace_regs *fregs)
-    {
-    trace_selftest_test_probe1_cnt++;
+#[no_mangle]
+pub unsafe extern "C" fn trace_selftest_test_probe1_func(ip: c_ulong, pip: c_ulong, op: *mut ftrace_ops, fregs: *mut ftrace_regs) {
+    trace_selftest_test_probe1_cnt += 1;
     }
     static int trace_selftest_test_probe2_cnt;
-    static void trace_selftest_test_probe2_func(unsigned long ip,
-    unsigned long pip,
-    struct ftrace_ops *op,
-    struct ftrace_regs *fregs)
-    {
-    trace_selftest_test_probe2_cnt++;
+#[no_mangle]
+pub unsafe extern "C" fn trace_selftest_test_probe2_func(ip: c_ulong, pip: c_ulong, op: *mut ftrace_ops, fregs: *mut ftrace_regs) {
+    trace_selftest_test_probe2_cnt += 1;
     }
     static int trace_selftest_test_probe3_cnt;
-    static void trace_selftest_test_probe3_func(unsigned long ip,
-    unsigned long pip,
-    struct ftrace_ops *op,
-    struct ftrace_regs *fregs)
-    {
-    trace_selftest_test_probe3_cnt++;
+#[no_mangle]
+pub unsafe extern "C" fn trace_selftest_test_probe3_func(ip: c_ulong, pip: c_ulong, op: *mut ftrace_ops, fregs: *mut ftrace_regs) {
+    trace_selftest_test_probe3_cnt += 1;
     }
     static int trace_selftest_test_global_cnt;
-    static void trace_selftest_test_global_func(unsigned long ip,
-    unsigned long pip,
-    struct ftrace_ops *op,
-    struct ftrace_regs *fregs)
-    {
-    trace_selftest_test_global_cnt++;
+#[no_mangle]
+pub unsafe extern "C" fn trace_selftest_test_global_func(ip: c_ulong, pip: c_ulong, op: *mut ftrace_ops, fregs: *mut ftrace_regs) {
+    trace_selftest_test_global_cnt += 1;
     }
     static int trace_selftest_test_dyn_cnt;
-    static void trace_selftest_test_dyn_func(unsigned long ip,
-    unsigned long pip,
-    struct ftrace_ops *op,
-    struct ftrace_regs *fregs)
-    {
-    trace_selftest_test_dyn_cnt++;
+#[no_mangle]
+pub unsafe extern "C" fn trace_selftest_test_dyn_func(ip: c_ulong, pip: c_ulong, op: *mut ftrace_ops, fregs: *mut ftrace_regs) {
+    trace_selftest_test_dyn_cnt += 1;
     }
-    static struct ftrace_ops test_probe1 = {
-    .func			= trace_selftest_test_probe1_func,
-    };
-    static struct ftrace_ops test_probe2 = {
-    .func			= trace_selftest_test_probe2_func,
-    };
-    static struct ftrace_ops test_probe3 = {
-    .func			= trace_selftest_test_probe3_func,
-    };
+pub static mut ftrace_ops: usize = 0;
+pub static mut ftrace_ops: usize = 0;
+pub static mut ftrace_ops: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn print_counts() {
-    static void print_counts(void)
-    {
     printk("(%d %d %d %d %d) ",
     trace_selftest_test_probe1_cnt,
     trace_selftest_test_probe2_cnt,
@@ -192,8 +422,6 @@ unsafe extern "C" fn print_counts() {
     }
 #[no_mangle]
 unsafe extern "C" fn reset_counts() {
-    static void reset_counts(void)
-    {
     trace_selftest_test_probe1_cnt = 0;
     trace_selftest_test_probe2_cnt = 0;
     trace_selftest_test_probe3_cnt = 0;
@@ -202,17 +430,15 @@ unsafe extern "C" fn reset_counts() {
     }
 #[no_mangle]
 unsafe extern "C" fn trace_selftest_ops(tr: *mut trace_array, cnt: c_int) -> c_int {
-    static int trace_selftest_ops(struct trace_array *tr, int cnt)
-    {
-    let mut save_ftrace_enabled: c_int = ftrace_enabled;
-    struct ftrace_ops *dyn_ops;
-    char *func1_name;
-    char *func2_name;
-    int len1;
-    int len2;
-    let mut ret: c_int = -1;
-    printk(KERN_CONT "PASSED\n");
-    pr_info("Testing dynamic ftrace ops #%d: ", cnt);
+pub static mut save_ftrace_enabled: c_int = 0;
+pub static mut dyn_ops: *mut c_void = core::ptr::null_mut();
+pub static mut func1_name: *mut c_void = core::ptr::null_mut();
+pub static mut func2_name: *mut c_void = core::ptr::null_mut();
+    let mut len1 = 0;
+    let mut len2 = 0;
+pub static mut ret: c_int = 0;
+    printk("PASSED\n");
+    pr_info!("Testing dynamic ftrace ops #%d: ", cnt);
     ftrace_enabled = 1;
     reset_counts();
 // Handle PPC64 '.' name
@@ -239,92 +465,116 @@ unsafe extern "C" fn trace_selftest_ops(tr: *mut trace_array, cnt: c_int) -> c_i
     }
     DYN_FTRACE_TEST_NAME();
     print_counts();
-    if (trace_selftest_test_probe1_cnt != 1)
-    goto out;
-    if (trace_selftest_test_probe2_cnt != 0)
-    goto out;
-    if (trace_selftest_test_probe3_cnt != 1)
-    goto out;
+    if (trace_selftest_test_probe1_cnt != 1) {
+// goto;
+    }
+    if (trace_selftest_test_probe2_cnt != 0) {
+// goto;
+    }
+    if (trace_selftest_test_probe3_cnt != 1) {
+// goto;
+    }
     if (cnt > 1) {
-    if (trace_selftest_test_global_cnt == 0)
-    goto out;
+    if (trace_selftest_test_global_cnt == 0) {
+// goto;
+    }
     }
     DYN_FTRACE_TEST_NAME2();
     print_counts();
-    if (trace_selftest_test_probe1_cnt != 1)
-    goto out;
-    if (trace_selftest_test_probe2_cnt != 1)
-    goto out;
-    if (trace_selftest_test_probe3_cnt != 2)
-    goto out;
+    if (trace_selftest_test_probe1_cnt != 1) {
+// goto;
+    }
+    if (trace_selftest_test_probe2_cnt != 1) {
+// goto;
+    }
+    if (trace_selftest_test_probe3_cnt != 2) {
+// goto;
+    }
 // Add a dynamic probe
     dyn_ops = kzalloc_obj(*dyn_ops);
     if (!dyn_ops) {
     printk("MEMORY ERROR ");
-    goto out;
+// goto;
     }
     dyn_ops.func = trace_selftest_test_dyn_func;
     register_ftrace_function(dyn_ops);
     trace_selftest_test_global_cnt = 0;
     DYN_FTRACE_TEST_NAME();
     print_counts();
-    if (trace_selftest_test_probe1_cnt != 2)
-    goto out_free;
-    if (trace_selftest_test_probe2_cnt != 1)
-    goto out_free;
-    if (trace_selftest_test_probe3_cnt != 3)
-    goto out_free;
-    if (cnt > 1) {
-    if (trace_selftest_test_global_cnt == 0)
-    goto out_free;
+    if (trace_selftest_test_probe1_cnt != 2) {
+// goto;
     }
-    if (trace_selftest_test_dyn_cnt == 0)
-    goto out_free;
+    if (trace_selftest_test_probe2_cnt != 1) {
+// goto;
+    }
+    if (trace_selftest_test_probe3_cnt != 3) {
+// goto;
+    }
+    if (cnt > 1) {
+    if (trace_selftest_test_global_cnt == 0) {
+// goto;
+    }
+    }
+    if (trace_selftest_test_dyn_cnt == 0) {
+// goto;
+    }
     DYN_FTRACE_TEST_NAME2();
     print_counts();
-    if (trace_selftest_test_probe1_cnt != 2)
-    goto out_free;
-    if (trace_selftest_test_probe2_cnt != 2)
-    goto out_free;
-    if (trace_selftest_test_probe3_cnt != 4)
-    goto out_free;
+    if (trace_selftest_test_probe1_cnt != 2) {
+// goto;
+    }
+    if (trace_selftest_test_probe2_cnt != 2) {
+// goto;
+    }
+    if (trace_selftest_test_probe3_cnt != 4) {
+// goto;
+    }
 // Remove trace function from probe 3
     func1_name = "!" __stringify(DYN_FTRACE_TEST_NAME);
     len1 = strlen(func1_name);
     ftrace_set_filter(&test_probe3, func1_name, len1, 0);
     DYN_FTRACE_TEST_NAME();
     print_counts();
-    if (trace_selftest_test_probe1_cnt != 3)
-    goto out_free;
-    if (trace_selftest_test_probe2_cnt != 2)
-    goto out_free;
-    if (trace_selftest_test_probe3_cnt != 4)
-    goto out_free;
-    if (cnt > 1) {
-    if (trace_selftest_test_global_cnt == 0)
-    goto out_free;
+    if (trace_selftest_test_probe1_cnt != 3) {
+// goto;
     }
-    if (trace_selftest_test_dyn_cnt == 0)
-    goto out_free;
+    if (trace_selftest_test_probe2_cnt != 2) {
+// goto;
+    }
+    if (trace_selftest_test_probe3_cnt != 4) {
+// goto;
+    }
+    if (cnt > 1) {
+    if (trace_selftest_test_global_cnt == 0) {
+// goto;
+    }
+    }
+    if (trace_selftest_test_dyn_cnt == 0) {
+// goto;
+    }
     DYN_FTRACE_TEST_NAME2();
     print_counts();
-    if (trace_selftest_test_probe1_cnt != 3)
-    goto out_free;
-    if (trace_selftest_test_probe2_cnt != 3)
-    goto out_free;
-    if (trace_selftest_test_probe3_cnt != 5)
-    goto out_free;
+    if (trace_selftest_test_probe1_cnt != 3) {
+// goto;
+    }
+    if (trace_selftest_test_probe2_cnt != 3) {
+// goto;
+    }
+    if (trace_selftest_test_probe3_cnt != 5) {
+// goto;
+    }
     ret = 0;
-    out_free:
+// label;
     unregister_ftrace_function(dyn_ops);
     kfree(dyn_ops);
-    out:
+// label;
 // Purposely unregister in the same order
     unregister_ftrace_function(&test_probe1);
     unregister_ftrace_function(&test_probe2);
     unregister_ftrace_function(&test_probe3);
-    if (cnt > 1)
+    if (cnt > 1) {
     unregister_ftrace_function(tr.ops);
+    }
     ftrace_reset_array_ops(tr);
 // Make sure everything is off
     reset_counts();
@@ -334,23 +584,22 @@ unsafe extern "C" fn trace_selftest_ops(tr: *mut trace_array, cnt: c_int) -> c_i
     trace_selftest_test_probe2_cnt ||
     trace_selftest_test_probe3_cnt ||
     trace_selftest_test_global_cnt ||
-    trace_selftest_test_dyn_cnt)
+    trace_selftest_test_dyn_cnt) {
     ret = -1;
+    }
     ftrace_enabled = save_ftrace_enabled;
     return ret;
     }
 // Test dynamic code modification and ftrace filters
-    static int trace_selftest_startup_dynamic_tracing(struct tracer *trace,
-    struct trace_array *tr,
-    int (*func)(void))
-    {
-    let mut save_ftrace_enabled: c_int = ftrace_enabled;
-    unsigned long count;
-    char *func_name;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn trace_selftest_startup_dynamic_tracing(trace: *mut tracer, tr: *mut trace_array) -> c_int {
+pub static mut save_ftrace_enabled: c_int = 0;
+    let mut count = 0;
+pub static mut func_name: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
 // The ftrace test PASSED
-    printk(KERN_CONT "PASSED\n");
-    pr_info("Testing dynamic ftrace: ");
+    printk("PASSED\n");
+    pr_info!("Testing dynamic ftrace: ");
 // enable tracing, and record the filter function
     ftrace_enabled = 1;
 // passed in by parameter to fool gcc from optimizing
@@ -367,18 +616,19 @@ unsafe extern "C" fn trace_selftest_ops(tr: *mut trace_array, cnt: c_int) -> c_i
     ret = tracer_init(trace, tr);
     if (ret) {
     warn_failed_init_tracer(trace, ret);
-    goto out;
+// goto;
     }
 // Sleep for a 1/10 of a second
     msleep(100);
 // we should have nothing in the buffer
     ret = trace_test_buffer(&tr.array_buffer, &count);
-    if (ret)
-    goto out;
+    if (ret) {
+// goto;
+    }
     if (count) {
     ret = -1;
-    printk(KERN_CONT ".. filter did not filter .. ");
-    goto out;
+    printk(".. filter did not filter .. ");
+// goto;
     }
 // call our function again
     func();
@@ -394,42 +644,38 @@ unsafe extern "C" fn trace_selftest_ops(tr: *mut trace_array, cnt: c_int) -> c_i
 // we should only have one item
     if (!ret && count != 1) {
     trace.reset(tr);
-    printk(KERN_CONT ".. filter failed count=%ld ..", count);
+    printk(".. filter failed count=%ld ..", count);
     ret = -1;
-    goto out;
+// goto;
     }
 // Test the ops with global tracing running
     ret = trace_selftest_ops(tr, 1);
     trace.reset(tr);
-    out:
+// label;
     ftrace_enabled = save_ftrace_enabled;
 // Enable tracing on all functions again
     ftrace_set_global_filter(core::ptr::null_mut(), 0, 1);
 // Test the ops with global tracing off
-    if (!ret)
+    if (!ret) {
     ret = trace_selftest_ops(tr, 2);
+    }
     return ret;
     }
     static int trace_selftest_recursion_cnt;
-    static void trace_selftest_test_recursion_func(unsigned long ip,
-    unsigned long pip,
-    struct ftrace_ops *op,
-    struct ftrace_regs *fregs)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn trace_selftest_test_recursion_func(ip: c_ulong, pip: c_ulong, op: *mut ftrace_ops, fregs: *mut ftrace_regs) {
 //
 // This function is registered without the recursion safe flag.
 // The ftrace infrastructure should provide the recursion
 // protection. If not, this will crash the kernel!
 //
-    if (trace_selftest_recursion_cnt++ > 10)
+    if (trace_selftest_recursion_cnt++ > 10) {
     return;
+    }
     DYN_FTRACE_TEST_NAME();
     }
-    static void trace_selftest_test_recursion_safe_func(unsigned long ip,
-    unsigned long pip,
-    struct ftrace_ops *op,
-    struct ftrace_regs *fregs)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn trace_selftest_test_recursion_safe_func(ip: c_ulong, pip: c_ulong, op: *mut ftrace_ops, fregs: *mut ftrace_regs) {
 //
 // We said we would provide our own recursion. By calling
 // this function again, we should recurse back into this function
@@ -437,27 +683,22 @@ unsafe extern "C" fn trace_selftest_ops(tr: *mut trace_array, cnt: c_int) -> c_i
 // all of ftrace features and nothing else is using the function
 // tracing utility.
 //
-    if (trace_selftest_recursion_cnt++)
+    if (trace_selftest_recursion_cnt++) {
     return;
+    }
     DYN_FTRACE_TEST_NAME();
     }
-    static struct ftrace_ops test_rec_probe = {
-    .func			= trace_selftest_test_recursion_func,
-    .flags			= FTRACE_OPS_FL_RECURSION,
-    };
-    static struct ftrace_ops test_recsafe_probe = {
-    .func			= trace_selftest_test_recursion_safe_func,
-    };
-    static int
-    trace_selftest_function_recursion(void)
-    {
-    let mut save_ftrace_enabled: c_int = ftrace_enabled;
-    char *func_name;
-    int len;
-    int ret;
+pub static mut ftrace_ops: usize = 0;
+pub static mut ftrace_ops: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn trace_selftest_function_recursion() -> c_int {
+pub static mut save_ftrace_enabled: c_int = 0;
+pub static mut func_name: *mut c_void = core::ptr::null_mut();
+    let mut len = 0;
+    let mut ret = 0;
 // The previous test PASSED
     pr_cont("PASSED\n");
-    pr_info("Testing ftrace recursion: ");
+    pr_info!("Testing ftrace recursion: ");
 // enable tracing, and record the filter function
     ftrace_enabled = 1;
 // Handle PPC64 '.' name
@@ -466,12 +707,12 @@ unsafe extern "C" fn trace_selftest_ops(tr: *mut trace_array, cnt: c_int) -> c_i
     ret = ftrace_set_filter(&test_rec_probe, func_name, len, 1);
     if (ret) {
     pr_cont("*Could not set filter* ");
-    goto out;
+// goto;
     }
     ret = register_ftrace_function(&test_rec_probe);
     if (ret) {
     pr_cont("*could not register callback* ");
-    goto out;
+// goto;
     }
     DYN_FTRACE_TEST_NAME();
     unregister_ftrace_function(&test_rec_probe);
@@ -484,20 +725,20 @@ unsafe extern "C" fn trace_selftest_ops(tr: *mut trace_array, cnt: c_int) -> c_i
     trace_selftest_recursion_cnt != 2) {
     pr_cont("*callback not called once (or twice) (%d)* ",
     trace_selftest_recursion_cnt);
-    goto out;
+// goto;
     }
     trace_selftest_recursion_cnt = 1;
     pr_cont("PASSED\n");
-    pr_info("Testing ftrace recursion safe: ");
+    pr_info!("Testing ftrace recursion safe: ");
     ret = ftrace_set_filter(&test_recsafe_probe, func_name, len, 1);
     if (ret) {
     pr_cont("*Could not set filter* ");
-    goto out;
+// goto;
     }
     ret = register_ftrace_function(&test_recsafe_probe);
     if (ret) {
     pr_cont("*could not register callback* ");
-    goto out;
+// goto;
     }
     DYN_FTRACE_TEST_NAME();
     unregister_ftrace_function(&test_recsafe_probe);
@@ -505,10 +746,10 @@ unsafe extern "C" fn trace_selftest_ops(tr: *mut trace_array, cnt: c_int) -> c_i
     if (trace_selftest_recursion_cnt != 2) {
     pr_cont("*callback not called expected 2 times (%d)* ",
     trace_selftest_recursion_cnt);
-    goto out;
+// goto;
     }
     ret = 0;
-    out:
+// label;
     ftrace_enabled = save_ftrace_enabled;
     return ret;
     }
@@ -518,35 +759,30 @@ unsafe extern "C" fn trace_selftest_ops(tr: *mut trace_array, cnt: c_int) -> c_i
     TRACE_SELFTEST_REGS_FOUND,
     TRACE_SELFTEST_REGS_NOT_FOUND,
     } trace_selftest_regs_stat;
-    static void trace_selftest_test_regs_func(unsigned long ip,
-    unsigned long pip,
-    struct ftrace_ops *op,
-    struct ftrace_regs *fregs)
-    {
-    struct pt_regs *regs = ftrace_get_regs(fregs);
-    if (regs)
+#[no_mangle]
+pub unsafe extern "C" fn trace_selftest_test_regs_func(ip: c_ulong, pip: c_ulong, op: *mut ftrace_ops, fregs: *mut ftrace_regs) {
+    let mut regs = ftrace_get_regs(fregs);
+    if (regs) {
     trace_selftest_regs_stat = TRACE_SELFTEST_REGS_FOUND;
-    else
+    }
+    else {
     trace_selftest_regs_stat = TRACE_SELFTEST_REGS_NOT_FOUND;
     }
-    static struct ftrace_ops test_regs_probe = {
-    .func		= trace_selftest_test_regs_func,
-    .flags		= FTRACE_OPS_FL_SAVE_REGS,
-    };
-    static int
-    trace_selftest_function_regs(void)
-    {
-    let mut save_ftrace_enabled: c_int = ftrace_enabled;
-    char *func_name;
-    int len;
-    int ret;
-    let mut supported: c_int = 0;
+    }
+pub static mut ftrace_ops: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn trace_selftest_function_regs() -> c_int {
+pub static mut save_ftrace_enabled: c_int = 0;
+pub static mut func_name: *mut c_void = core::ptr::null_mut();
+    let mut len = 0;
+    let mut ret = 0;
+pub static mut supported: c_int = 0;
 
     supported = 1;
 
 // The previous test PASSED
     pr_cont("PASSED\n");
-    pr_info("Testing ftrace regs%s: ",
+    pr_info!("Testing ftrace regs%s: ",
     !supported ? "(no arch support)" : "");
 // enable tracing, and record the filter function
     ftrace_enabled = 1;
@@ -560,7 +796,7 @@ unsafe extern "C" fn trace_selftest_ops(tr: *mut trace_array, cnt: c_int) -> c_i
 //
     if (ret && ret != -ENODEV) {
     pr_cont("*Could not set filter* ");
-    goto out;
+// goto;
     }
     ret = register_ftrace_function(&test_regs_probe);
 //
@@ -570,35 +806,40 @@ unsafe extern "C" fn trace_selftest_ops(tr: *mut trace_array, cnt: c_int) -> c_i
     if (!supported) {
     if (!ret) {
     pr_cont("*registered save-regs without arch support* ");
-    goto out;
+// goto;
     }
     test_regs_probe.flags |= FTRACE_OPS_FL_SAVE_REGS_IF_SUPPORTED;
     ret = register_ftrace_function(&test_regs_probe);
     }
     if (ret) {
     pr_cont("*could not register callback* ");
-    goto out;
+// goto;
     }
     DYN_FTRACE_TEST_NAME();
     unregister_ftrace_function(&test_regs_probe);
     ret = -1;
-    switch (trace_selftest_regs_stat) {
-    case TRACE_SELFTEST_REGS_START:
+    match (trace_selftest_regs_stat) {
+    TRACE_SELFTEST_REGS_START => {
     pr_cont("*callback never called* ");
-    goto out;
-    case TRACE_SELFTEST_REGS_FOUND:
-    if (supported)
-    break;
+// goto;
+    }
+    TRACE_SELFTEST_REGS_FOUND => {
+    if (supported) {
+    // break;
+    }
     pr_cont("*callback received regs without arch support* ");
-    goto out;
-    case TRACE_SELFTEST_REGS_NOT_FOUND:
-    if (!supported)
-    break;
+// goto;
+    }
+    TRACE_SELFTEST_REGS_NOT_FOUND => {
+    if (!supported) {
+    // break;
+    }
     pr_cont("*callback received core::ptr::null_mut() regs* ");
-    goto out;
+// goto;
+    }
     }
     ret = 0;
-    out:
+// label;
     ftrace_enabled = save_ftrace_enabled;
     return ret;
     }
@@ -607,15 +848,14 @@ unsafe extern "C" fn trace_selftest_ops(tr: *mut trace_array, cnt: c_int) -> c_i
 // Enable ftrace, sleep 1/10 second, and then read the trace
 // buffer to see if all is in order.
 //
-    __init int
-    trace_selftest_startup_function(struct tracer *trace, struct trace_array *tr)
-    {
-    let mut save_ftrace_enabled: c_int = ftrace_enabled;
-    unsigned long count;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn trace_selftest_startup_function(trace: *mut tracer, tr: *mut trace_array) -> c_int {
+pub static mut save_ftrace_enabled: c_int = 0;
+    let mut count = 0;
+    let mut ret = 0;
 
     if (ftrace_filter_param) {
-    printk(KERN_CONT " ... kernel command line filter set: force PASS ... ");
+    printk(" ... kernel command line filter set: force PASS ... ");
     return 0;
     }
 
@@ -626,7 +866,7 @@ unsafe extern "C" fn trace_selftest_ops(tr: *mut trace_array, cnt: c_int) -> c_i
     ret = tracer_init(trace, tr);
     if (ret) {
     warn_failed_init_tracer(trace, ret);
-    goto out;
+// goto;
     }
 // Sleep for a 1/10 of a second
     msleep(100);
@@ -639,23 +879,26 @@ unsafe extern "C" fn trace_selftest_ops(tr: *mut trace_array, cnt: c_int) -> c_i
     trace.reset(tr);
     tracing_start();
     if (!ret && !count) {
-    printk(KERN_CONT ".. no entries found ..");
+    printk(".. no entries found ..");
     ret = -1;
-    goto out;
+// goto;
     }
     ret = trace_selftest_startup_dynamic_tracing(trace, tr,
     DYN_FTRACE_TEST_NAME);
-    if (ret)
-    goto out;
+    if (ret) {
+// goto;
+    }
     ret = trace_selftest_function_recursion();
-    if (ret)
-    goto out;
+    if (ret) {
+// goto;
+    }
     ret = trace_selftest_function_regs();
-    out:
+// label;
     ftrace_enabled = save_ftrace_enabled;
 // kill ftrace totally if we failed
-    if (ret)
+    if (ret) {
     ftrace_kill();
+    }
     return ret;
     }
 
@@ -674,46 +917,46 @@ pub struct fgraph_fixture {
     pub error_str: *mut c_char,
 }
 
-    static __init int store_entry(struct ftrace_graph_ent *trace,
-    struct fgraph_ops *gops,
-    struct ftrace_regs *fregs)
-    {
-    struct fgraph_fixture *fixture = container_of(gops, struct fgraph_fixture, gops);
-    const char *type = fixture.store_type_name;
-    let mut size: c_int = fixture.store_size;
-    void *p;
+#[no_mangle]
+pub unsafe extern "C" fn store_entry(trace: *mut ftrace_graph_ent, gops: *mut fgraph_ops, fregs: *mut ftrace_regs) -> c_int {
+    let mut fixture = container_of!(gops, fgraph_fixture, gops);
+    let mut type = fixture.store_type_name;
+pub static mut size: c_int = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
     p = fgraph_reserve_data(gops.idx, size);
     if (!p) {
     snprintf(fixture.error_str_buf, ERRSTR_BUFLEN,
     "Failed to reserve %s\n", type);
     return 0;
     }
-    switch (size) {
-    case 1:
-// (char *)p = CHAR_NUMBER;
-    break;
-    case 2:
-// (short *)p = SHORT_NUMBER;
-    break;
-    case 4:
-// (int *)p = WORD_NUMBER;
-    break;
-    case 8:
-// (long long *)p = LONG_NUMBER;
-    break;
+    match (size) {
+    1 => {
+// p = CHAR_NUMBER;
+    // break;
+    }
+    2 => {
+// p = SHORT_NUMBER;
+    // break;
+    }
+    4 => {
+// p = WORD_NUMBER;
+    // break;
+    }
+    8 => {
+// p = LONG_NUMBER;
+    // break;
+    }
     }
     return 1;
     }
-    static __init void store_return(struct ftrace_graph_ret *trace,
-    struct fgraph_ops *gops,
-    struct ftrace_regs *fregs)
-    {
-    struct fgraph_fixture *fixture = container_of(gops, struct fgraph_fixture, gops);
-    const char *type = fixture.store_type_name;
-    let mut expect: c_longlong = 0;
-    let mut found: c_longlong = -1;
-    int size;
-    char *p;
+#[no_mangle]
+pub unsafe extern "C" fn store_return(trace: *mut ftrace_graph_ret, gops: *mut fgraph_ops, fregs: *mut ftrace_regs) {
+    let mut fixture = container_of!(gops, fgraph_fixture, gops);
+    let mut type = fixture.store_type_name;
+pub static mut expect: c_longlong = 0;
+pub static mut found: c_longlong = 0;
+    let mut size = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
     p = fgraph_retrieve_data(gops.idx, &size);
     if (!p) {
     snprintf(fixture.error_str_buf, ERRSTR_BUFLEN,
@@ -726,23 +969,27 @@ pub struct fgraph_fixture {
     size, (int)fixture.store_size);
     return;
     }
-    switch (fixture.store_size) {
-    case 1:
+    match (fixture.store_size) {
+    1 => {
     expect = CHAR_NUMBER;
-    found = *(char *)p;
-    break;
-    case 2:
+    found = *p;
+    // break;
+    }
+    2 => {
     expect = SHORT_NUMBER;
-    found = *(short *)p;
-    break;
-    case 4:
+    found = *p;
+    // break;
+    }
+    4 => {
     expect = WORD_NUMBER;
-    found = *(int *)p;
-    break;
-    case 8:
+    found = *p;
+    // break;
+    }
+    8 => {
     expect = LONG_NUMBER;
-    found = *(long long *)p;
-    break;
+    found = *p;
+    // break;
+    }
     }
     if (found != expect) {
     snprintf(fixture.error_str_buf, ERRSTR_BUFLEN,
@@ -752,11 +999,9 @@ pub struct fgraph_fixture {
     fixture.error_str = core::ptr::null_mut();
     }
 #[no_mangle]
-unsafe extern "C" fn init_fgraph_fixture(fixture: *mut fgraph_fixture) -> int __init {
-    static int __init init_fgraph_fixture(struct fgraph_fixture *fixture)
-    {
-    char *func_name;
-    int len;
+unsafe extern "C" fn init_fgraph_fixture(fixture: *mut fgraph_fixture) -> c_int {
+pub static mut func_name: *mut c_void = core::ptr::null_mut();
+    let mut len = 0;
     snprintf(fixture.error_str_buf, ERRSTR_BUFLEN,
     "Failed to execute storage %s\n", fixture.store_type_name);
     fixture.error_str = fixture.error_str_buf;
@@ -766,13 +1011,11 @@ unsafe extern "C" fn init_fgraph_fixture(fixture: *mut fgraph_fixture) -> int __
     }
 // Test fgraph storage for each size
 #[no_mangle]
-unsafe extern "C" fn test_graph_storage_single(fixture: *mut fgraph_fixture) -> int __init {
-    static int __init test_graph_storage_single(struct fgraph_fixture *fixture)
-    {
-    let mut size: c_int = fixture.store_size;
-    int ret;
+unsafe extern "C" fn test_graph_storage_single(fixture: *mut fgraph_fixture) -> c_int {
+pub static mut size: c_int = 0;
+    let mut ret = 0;
     pr_cont("PASSED\n");
-    pr_info("Testing fgraph storage of %d byte%s: ", size, str_plural(size));
+    pr_info!("Testing fgraph storage of %d byte%s: ", size, str_plural(size));
     ret = init_fgraph_fixture(fixture);
     if (ret && ret != -ENODEV) {
     pr_cont("*Could not set filter* ");
@@ -780,7 +1023,7 @@ unsafe extern "C" fn test_graph_storage_single(fixture: *mut fgraph_fixture) -> 
     }
     ret = register_ftrace_graph(&fixture.gops);
     if (ret) {
-    pr_warn("Failed to init store_bytes fgraph tracing\n");
+    pr_warn!("Failed to init store_bytes fgraph tracing\n");
     return -1;
     }
     DYN_FTRACE_TEST_NAME();
@@ -827,33 +1070,33 @@ unsafe extern "C" fn test_graph_storage_single(fixture: *mut fgraph_fixture) -> 
     };
 #[no_mangle]
 unsafe extern "C" fn test_graph_storage_multi() -> __init int {
-    static __init int test_graph_storage_multi(void)
-    {
-    struct fgraph_fixture *fixture;
-    let mut printed: bool = false;
-    int i, j, ret;
+pub static mut fixture: *mut c_void = core::ptr::null_mut();
+pub static mut printed: bool = false;
+    let mut i = 0;
+    let mut j = 0;
+    let mut ret = 0;
     pr_cont("PASSED\n");
-    pr_info("Testing multiple fgraph storage on a function: ");
-    for (i = 0; i < ARRAY_SIZE(store_bytes); i++) {
+    pr_info!("Testing multiple fgraph storage on a function: ");
+    while (i < ARRAY_SIZE!(store_bytes)) {
     fixture = &store_bytes[i];
     ret = init_fgraph_fixture(fixture);
     if (ret && ret != -ENODEV) {
     pr_cont("*Could not set filter* ");
     printed = true;
-    goto out2;
+// goto;
     }
     }
-    for (j = 0; j < ARRAY_SIZE(store_bytes); j++) {
+    while (j < ARRAY_SIZE!(store_bytes)) {
     fixture = &store_bytes[j];
     ret = register_ftrace_graph(&fixture.gops);
     if (ret) {
-    pr_warn("Failed to init store_bytes fgraph tracing\n");
+    pr_warn!("Failed to init store_bytes fgraph tracing\n");
     printed = true;
-    goto out1;
+// goto;
     }
     }
     DYN_FTRACE_TEST_NAME();
-    out1:
+// label;
     while (--j >= 0) {
     fixture = &store_bytes[j];
     unregister_ftrace_graph(&fixture.gops);
@@ -862,7 +1105,7 @@ unsafe extern "C" fn test_graph_storage_multi() -> __init int {
     printed = true;
     }
     }
-    out2:
+// label;
     while (--i >= 0) {
     fixture = &store_bytes[i];
     ftrace_free_filter(&fixture.gops.ops);
@@ -876,41 +1119,43 @@ unsafe extern "C" fn test_graph_storage_multi() -> __init int {
 // Test the storage passed across function_graph entry and return
 #[no_mangle]
 unsafe extern "C" fn test_graph_storage() -> __init int {
-    static __init int test_graph_storage(void)
-    {
-    int ret;
+    let mut ret = 0;
     ret = test_graph_storage_single(&store_bytes[0]);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     ret = test_graph_storage_single(&store_bytes[1]);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     ret = test_graph_storage_single(&store_bytes[2]);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     ret = test_graph_storage_single(&store_bytes[3]);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     ret = test_graph_storage_multi();
-    if (ret)
+    if (ret) {
     return ret;
+    }
     return 0;
     }
 
-    static inline int test_graph_storage(void) { return 0; }
+#[no_mangle]
+pub unsafe extern "C" fn test_graph_storage() -> c_int { return 0; }
 
 // Maximum number of functions to trace before diagnosing a hang
 pub const GRAPH_MAX_FUNC_TEST: c_int = 100000000;
     static unsigned int graph_hang_thresh;
 // Wrap the real function entry probe to avoid possible hanging
-    static int trace_graph_entry_watchdog(struct ftrace_graph_ent *trace,
-    struct fgraph_ops *gops,
-    struct ftrace_regs *fregs)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn trace_graph_entry_watchdog(trace: *mut ftrace_graph_ent, gops: *mut fgraph_ops, fregs: *mut ftrace_regs) -> c_int {
 // This is harmlessly racy, we want to approximately detect a hang
     if (unlikely(++graph_hang_thresh > GRAPH_MAX_FUNC_TEST)) {
     ftrace_graph_stop();
-    printk(KERN_WARNING "BUG: Function graph tracer hang!\n");
+    printk("BUG: Function graph tracer hang!\n");
     if (ftrace_dump_on_oops_enabled()) {
     ftrace_dump(DUMP_ALL);
 // ftrace_dump() disables tracing
@@ -925,22 +1170,20 @@ pub const GRAPH_MAX_FUNC_TEST: c_int = 100000000;
     .retfunc		= &trace_graph_return,
     };
 
-    static struct ftrace_ops direct;
+pub static mut direct: usize = 0;
 
 //
 // Pretty much the same than for the function tracer from which the selftest
 // has been borrowed.
 //
-    __init int
-    trace_selftest_startup_function_graph(struct tracer *trace,
-    struct trace_array *tr)
-    {
-    int ret;
-    unsigned long count;
-    char *func_name __maybe_unused;
+#[no_mangle]
+pub unsafe extern "C" fn trace_selftest_startup_function_graph(trace: *mut tracer, tr: *mut trace_array) -> c_int {
+    let mut ret = 0;
+    let mut count = 0;
+pub static mut func_name: *mut c_void = core::ptr::null_mut();
 
     if (ftrace_filter_param) {
-    printk(KERN_CONT " ... kernel command line filter set: force PASS ... ");
+    printk(" ... kernel command line filter set: force PASS ... ");
     return 0;
     }
 
@@ -953,7 +1196,7 @@ pub const GRAPH_MAX_FUNC_TEST: c_int = 100000000;
     ret = register_ftrace_graph(&fgraph_ops);
     if (ret) {
     warn_failed_init_tracer(trace, ret);
-    goto out;
+// goto;
     }
     tracing_start_cmdline_record();
 // Sleep for a 1/10 of a second
@@ -962,7 +1205,7 @@ pub const GRAPH_MAX_FUNC_TEST: c_int = 100000000;
     if (graph_hang_thresh > GRAPH_MAX_FUNC_TEST) {
     disable_tracing_selftest("recovering from a hang");
     ret = -1;
-    goto out;
+// goto;
     }
     tracing_stop();
 // check the trace buffer
@@ -972,9 +1215,9 @@ pub const GRAPH_MAX_FUNC_TEST: c_int = 100000000;
     unregister_ftrace_graph(&fgraph_ops);
     tracing_start();
     if (!ret && !count) {
-    printk(KERN_CONT ".. no entries found ..");
+    printk(".. no entries found ..");
     ret = -1;
-    goto out;
+// goto;
     }
 
 //
@@ -998,13 +1241,14 @@ pub const GRAPH_MAX_FUNC_TEST: c_int = 100000000;
     ftrace_set_filter_ip(&direct, (unsigned long)DYN_FTRACE_TEST_NAME, 0, 0);
     ret = register_ftrace_direct(&direct,
     (unsigned long)ftrace_stub_direct_tramp);
-    if (ret)
-    goto out;
+    if (ret) {
+// goto;
+    }
     cond_resched();
     ret = register_ftrace_graph(&fgraph_ops);
     if (ret) {
     warn_failed_init_tracer(trace, ret);
-    goto out;
+// goto;
     }
     DYN_FTRACE_TEST_NAME();
     count = 0;
@@ -1015,32 +1259,33 @@ pub const GRAPH_MAX_FUNC_TEST: c_int = 100000000;
     ret = unregister_ftrace_direct(&direct,
     (unsigned long)ftrace_stub_direct_tramp,
     true);
-    if (ret)
-    goto out;
+    if (ret) {
+// goto;
+    }
     cond_resched();
     tracing_start();
     if (!ret && !count) {
     ret = -1;
-    goto out;
+// goto;
     }
 // Enable tracing on all functions again
     ftrace_set_global_filter(core::ptr::null_mut(), 0, 1);
 
     ret = test_graph_storage();
 // Don't test dynamic tracing, the function tracer already did
-    out:
+// label;
 // Stop it if we failed
-    if (ret)
+    if (ret) {
     ftrace_graph_stop();
+    }
     return ret;
     }
 
-    int
-    trace_selftest_startup_irqsoff(struct tracer *trace, struct trace_array *tr)
-    {
-    let mut save_max: c_ulong = tr.max_latency;
-    unsigned long count;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn trace_selftest_startup_irqsoff(trace: *mut tracer, tr: *mut trace_array) -> c_int {
+pub static mut save_max: c_ulong = 0;
+    let mut count = 0;
+    let mut ret = 0;
 // start the tracing
     ret = tracer_init(trace, tr);
     if (ret) {
@@ -1064,24 +1309,24 @@ pub const GRAPH_MAX_FUNC_TEST: c_int = 100000000;
     tracing_stop();
 // check both trace buffers
     ret = trace_test_buffer(&tr.array_buffer, core::ptr::null_mut());
-    if (!ret)
+    if (!ret) {
     ret = trace_test_buffer(&tr.snapshot_buffer, &count);
+    }
     trace.reset(tr);
     tracing_start();
     if (!ret && !count) {
-    printk(KERN_CONT ".. no entries found ..");
+    printk(".. no entries found ..");
     ret = -1;
     }
     tr.max_latency = save_max;
     return ret;
     }
 
-    int
-    trace_selftest_startup_preemptoff(struct tracer *trace, struct trace_array *tr)
-    {
-    let mut save_max: c_ulong = tr.max_latency;
-    unsigned long count;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn trace_selftest_startup_preemptoff(trace: *mut tracer, tr: *mut trace_array) -> c_int {
+pub static mut save_max: c_ulong = 0;
+    let mut count = 0;
+    let mut ret = 0;
 //
 // Now that the big kernel lock is no longer preemptible,
 // and this is called with the BKL held, it will always
@@ -1091,7 +1336,7 @@ pub const GRAPH_MAX_FUNC_TEST: c_int = 100000000;
 // so keep it in.
 //
     if (preempt_count()) {
-    printk(KERN_CONT "can not test ... force ");
+    printk("can not test ... force ");
     return 0;
     }
 // start the tracing
@@ -1117,24 +1362,24 @@ pub const GRAPH_MAX_FUNC_TEST: c_int = 100000000;
     tracing_stop();
 // check both trace buffers
     ret = trace_test_buffer(&tr.array_buffer, core::ptr::null_mut());
-    if (!ret)
+    if (!ret) {
     ret = trace_test_buffer(&tr.snapshot_buffer, &count);
+    }
     trace.reset(tr);
     tracing_start();
     if (!ret && !count) {
-    printk(KERN_CONT ".. no entries found ..");
+    printk(".. no entries found ..");
     ret = -1;
     }
     tr.max_latency = save_max;
     return ret;
     }
 
-    int
-    trace_selftest_startup_preemptirqsoff(struct tracer *trace, struct trace_array *tr)
-    {
-    let mut save_max: c_ulong = tr.max_latency;
-    unsigned long count;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn trace_selftest_startup_preemptirqsoff(trace: *mut tracer, tr: *mut trace_array) -> c_int {
+pub static mut save_max: c_ulong = 0;
+    let mut count = 0;
+    let mut ret = 0;
 //
 // Now that the big kernel lock is no longer preemptible,
 // and this is called with the BKL held, it will always
@@ -1144,14 +1389,14 @@ pub const GRAPH_MAX_FUNC_TEST: c_int = 100000000;
 // so keep it in.
 //
     if (preempt_count()) {
-    printk(KERN_CONT "can not test ... force ");
+    printk("can not test ... force ");
     return 0;
     }
 // start the tracing
     ret = tracer_init(trace, tr);
     if (ret) {
     warn_failed_init_tracer(trace, ret);
-    goto out_no_start;
+// goto;
     }
 // reset the max latency
     tr.max_latency = 0;
@@ -1173,15 +1418,17 @@ pub const GRAPH_MAX_FUNC_TEST: c_int = 100000000;
     tracing_stop();
 // check both trace buffers
     ret = trace_test_buffer(&tr.array_buffer, core::ptr::null_mut());
-    if (ret)
-    goto out;
+    if (ret) {
+// goto;
+    }
     ret = trace_test_buffer(&tr.snapshot_buffer, &count);
-    if (ret)
-    goto out;
+    if (ret) {
+// goto;
+    }
     if (!ret && !count) {
-    printk(KERN_CONT ".. no entries found ..");
+    printk(".. no entries found ..");
     ret = -1;
-    goto out;
+// goto;
     }
 // do the test by disabling interrupts first this time
     tr.max_latency = 0;
@@ -1198,25 +1445,25 @@ pub const GRAPH_MAX_FUNC_TEST: c_int = 100000000;
     tracing_stop();
 // check both trace buffers
     ret = trace_test_buffer(&tr.array_buffer, core::ptr::null_mut());
-    if (ret)
-    goto out;
+    if (ret) {
+// goto;
+    }
     ret = trace_test_buffer(&tr.snapshot_buffer, &count);
     if (!ret && !count) {
-    printk(KERN_CONT ".. no entries found ..");
+    printk(".. no entries found ..");
     ret = -1;
-    goto out;
+// goto;
     }
-    out:
+// label;
     tracing_start();
-    out_no_start:
+// label;
     trace.reset(tr);
     tr.max_latency = save_max;
     return ret;
     }
 
-    int
-    trace_selftest_startup_nop(struct tracer *trace, struct trace_array *tr)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn trace_selftest_startup_nop(trace: *mut tracer, tr: *mut trace_array) -> c_int {
 // What could possibly go wrong?
     return 0;
     }
@@ -1230,16 +1477,9 @@ pub struct wakeup_test_data {
 
 #[no_mangle]
 unsafe extern "C" fn trace_wakeup_test_thread(data: *mut c_void) -> c_int {
-    static int trace_wakeup_test_thread(void *data)
-    {
 // Make this a -deadline thread
-    static const struct sched_attr attr = {
-    .sched_policy = SCHED_DEADLINE,
-    .sched_runtime = 100000ULL,
-    .sched_deadline = 10000000ULL,
-    .sched_period = 10000000ULL
-    };
-    struct wakeup_test_data *x = data;
+pub static mut sched_attr: usize = 0;
+    let mut x = data;
     sched_setattr(current, &attr);
 // Make it know we have a new prio
     complete(&x.is_ready);
@@ -1259,20 +1499,19 @@ unsafe extern "C" fn trace_wakeup_test_thread(data: *mut c_void) -> c_int {
     __set_current_state(TASK_RUNNING);
     return 0;
     }
-    int
-    trace_selftest_startup_wakeup(struct tracer *trace, struct trace_array *tr)
-    {
-    let mut save_max: c_ulong = tr.max_latency;
-    struct task_struct *p;
-    struct wakeup_test_data data;
-    unsigned long count;
-    int ret;
-    memset(&data, 0, sizeof(data));
+#[no_mangle]
+pub unsafe extern "C" fn trace_selftest_startup_wakeup(trace: *mut tracer, tr: *mut trace_array) -> c_int {
+pub static mut save_max: c_ulong = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+pub static mut data: usize = 0;
+    let mut count = 0;
+    let mut ret = 0;
+    memset(&data, 0, sizeof!(data));
     init_completion(&data.is_ready);
 // create a -deadline thread
     p = kthread_run(trace_wakeup_test_thread, &data, "ftrace-test");
     if (IS_ERR(p)) {
-    printk(KERN_CONT "Failed to create ftrace wakeup test thread ");
+    printk("Failed to create ftrace wakeup test thread ");
     return -1;
     }
 // make sure the thread is running at -deadline policy
@@ -1303,25 +1542,25 @@ unsafe extern "C" fn trace_wakeup_test_thread(data: *mut c_void) -> c_int {
     tracing_stop();
 // check both trace buffers
     ret = trace_test_buffer(&tr.array_buffer, core::ptr::null_mut());
-    if (!ret)
+    if (!ret) {
     ret = trace_test_buffer(&tr.snapshot_buffer, &count);
+    }
     trace.reset(tr);
     tracing_start();
     tr.max_latency = save_max;
 // kill the thread
     kthread_stop(p);
     if (!ret && !count) {
-    printk(KERN_CONT ".. no entries found ..");
+    printk(".. no entries found ..");
     ret = -1;
     }
     return ret;
     }
 
-    int
-    trace_selftest_startup_branch(struct tracer *trace, struct trace_array *tr)
-    {
-    unsigned long count;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn trace_selftest_startup_branch(trace: *mut tracer, tr: *mut trace_array) -> c_int {
+    let mut count = 0;
+    let mut ret = 0;
 // start the tracing
     ret = tracer_init(trace, tr);
     if (ret) {
@@ -1337,7 +1576,7 @@ unsafe extern "C" fn trace_wakeup_test_thread(data: *mut c_void) -> c_int {
     trace.reset(tr);
     tracing_start();
     if (!ret && !count) {
-    printk(KERN_CONT ".. no entries found ..");
+    printk(".. no entries found ..");
     ret = -1;
     }
     return ret;

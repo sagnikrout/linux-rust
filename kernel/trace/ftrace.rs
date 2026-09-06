@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -56,24 +306,26 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
     FTRACE_FL_MODIFIED)
 
-    ({					\
-    int ___r = cond;		\
-    if (WARN_ON(___r))		\
-    ftrace_kill();		\
-    ___r;				\
+    ({					
+    let mut ___r = cond;		
+    if (WARN_ON!(___r))		 {
+    ftrace_kill();		
+    }
+    ___r;				
     })
 
-    ({					\
-    int ___r = cond;		\
-    if (WARN_ON_ONCE(___r))		\
-    ftrace_kill();		\
-    ___r;				\
+    ({					
+    let mut ___r = cond;		
+    if (WARN_ON_ONCE!(___r))		 {
+    ftrace_kill();		
+    }
+    ___r;				
     })
 // hash bits for specific function selection
 pub const FTRACE_HASH_MAX_BITS: c_int = 12;
 
-    .func_hash		= &opsname.local_hash,			\
-    .local_hash.regex_lock	= __MUTEX_INITIALIZER(opsname.local_hash.regex_lock), \
+    .func_hash		= &opsname.local_hash,			
+    .local_hash.regex_lock	= __MUTEX_INITIALIZER(opsname.local_hash.regex_lock), 
     .subop_list		= LIST_HEAD_INIT(opsname.subop_list),
 
 // Macro flag: #define INIT_OPS_HASH(opsname)
@@ -82,53 +334,46 @@ pub const FTRACE_HASH_MAX_BITS: c_int = 12;
     FTRACE_MODIFY_ENABLE_FL		= (1 << 0),
     FTRACE_MODIFY_MAY_SLEEP_FL	= (1 << 1),
     };
-    struct ftrace_ops ftrace_list_end __read_mostly = {
+    struct ftrace_ops ftrace_list_end  = {
     .func		= ftrace_stub,
     .flags		= FTRACE_OPS_FL_STUB,
     INIT_OPS_HASH(ftrace_list_end)
     };
 // ftrace_enabled is a method to turn ftrace on or off
-    int ftrace_enabled __read_mostly;
+    let mut ftrace_enabled = 0;
     static int __maybe_unused last_ftrace_enabled;
 // Current function tracing op
-    let mut __read_mostly: *mut ftrace_ops function_trace_op = &ftrace_list_end;
+pub static mut : *mut ftrace_ops function_trace_op = core::ptr::null_mut();
 // What to set function_trace_op to
-    static struct ftrace_ops *set_function_trace_op;
+pub static mut set_function_trace_op: *mut c_void = core::ptr::null_mut();
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_pids_enabled(ops: *mut ftrace_ops) -> bool {
-    bool ftrace_pids_enabled(struct ftrace_ops *ops)
-    {
-    struct trace_array *tr;
-    if (!(ops.flags & FTRACE_OPS_FL_PID) || !ops.private)
+pub static mut tr: *mut c_void = core::ptr::null_mut();
+    if (!(ops.flags & FTRACE_OPS_FL_PID) || !ops.private) {
     return false;
+    }
     tr = ops.private;
     return tr.function_pids != core::ptr::null_mut() || tr.function_no_pids != core::ptr::null_mut();
     }
-    static void ftrace_update_trampoline(struct ftrace_ops *ops);
+// forward_decl: ftrace_update_trampoline;
 //
 // ftrace_disabled is set when an anomaly is discovered.
 // ftrace_disabled is much stronger than ftrace_enabled.
 //
-    static int ftrace_disabled __read_mostly;
-    DEFINE_MUTEX(ftrace_lock);
-    let mut __read_mostly: *mut ftrace_ops __rcu ftrace_ops_list = (struct ftrace_ops __rcu *)&ftrace_list_end;
-    let mut __read_mostly: ftrace_func_t ftrace_trace_function = ftrace_stub;
-    struct ftrace_ops global_ops;
+    static int ftrace_disabled ;
+pub static mut ftrace_lock: usize = 0;
+pub static mut : *mut ftrace_ops  ftrace_ops_list = core::ptr::null_mut();
+pub static mut : ftrace_func_t ftrace_trace_function = 0;
+pub static mut global_ops: usize = 0;
 // Defined by vmlinux.lds.h see the comment above arch_ftrace_ops_list_func for details
-    void ftrace_ops_list_func(unsigned long ip, unsigned long parent_ip,
-    struct ftrace_ops *op, struct ftrace_regs *fregs);
+// forward_decl: ftrace_ops_list_func;
 
 //
 // Stub used to invoke the list ops without requiring a separate trampoline.
 //
-    const struct ftrace_ops ftrace_list_ops = {
-    .func	= ftrace_ops_list_func,
-    .flags	= FTRACE_OPS_FL_STUB,
-    };
-    static void ftrace_ops_nop_func(unsigned long ip, unsigned long parent_ip,
-    struct ftrace_ops *op,
-    struct ftrace_regs *fregs)
-    {
+pub static mut ftrace_ops: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_ops_nop_func(ip: c_ulong, parent_ip: c_ulong, op: *mut ftrace_ops, fregs: *mut ftrace_regs) {
 // do nothing
     }
 //
@@ -136,15 +381,10 @@ pub unsafe extern "C" fn ftrace_pids_enabled(ops: *mut ftrace_ops) -> bool {
 // which have made it into ftrace_caller but haven't yet recovered the ops at
 // the point the call site is disabled.
 //
-    const struct ftrace_ops ftrace_nop_ops = {
-    .func	= ftrace_ops_nop_func,
-    .flags  = FTRACE_OPS_FL_STUB,
-    };
+pub static mut ftrace_ops: usize = 0;
 
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_ops_init(ops: *mut ftrace_ops) {
-    static inline void ftrace_ops_init(struct ftrace_ops *ops)
-    {
 
     if (!(ops.flags & FTRACE_OPS_FL_INITIALIZED)) {
     mutex_init(&ops.local_hash.regex_lock);
@@ -155,46 +395,42 @@ pub unsafe extern "C" fn ftrace_ops_init(ops: *mut ftrace_ops) {
 
     }
 // Call this function for when a callback filters on set_ftrace_pid
-    static void ftrace_pid_func(unsigned long ip, unsigned long parent_ip,
-    struct ftrace_ops *op, struct ftrace_regs *fregs)
-    {
-    struct trace_array *tr = op.private;
-    int pid;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_pid_func(ip: c_ulong, parent_ip: c_ulong, op: *mut ftrace_ops, fregs: *mut ftrace_regs) {
+    let mut tr = op.private;
+    let mut pid = 0;
     if (tr) {
     pid = this_cpu_read(tr.array_buffer.data.ftrace_ignore_pid);
-    if (pid == FTRACE_PID_IGNORE)
+    if (pid == FTRACE_PID_IGNORE) {
     return;
+    }
     if (pid != FTRACE_PID_TRACE &&
-    pid != current.pid)
+    pid != current.pid) {
     return;
+    }
     }
     op.saved_func(ip, parent_ip, op, fregs);
     }
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_sync_ipi(data: *mut c_void) {
-    void ftrace_sync_ipi(void *data)
-    {
 // Probably not needed, but do it anyway
     smp_rmb();
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_ops_get_list_func(ops: *mut ftrace_ops) -> ftrace_func_t {
-    static ftrace_func_t ftrace_ops_get_list_func(struct ftrace_ops *ops)
-    {
 //
 // If this is a dynamic or RCU ops, or we force list func,
 // then it needs to call the list anyway.
 //
     if (ops.flags & (FTRACE_OPS_FL_DYNAMIC | FTRACE_OPS_FL_RCU) ||
-    FTRACE_FORCE_LIST_FUNC)
+    FTRACE_FORCE_LIST_FUNC) {
     return ftrace_ops_list_func;
+    }
     return ftrace_ops_get_func(ops);
     }
 #[no_mangle]
 unsafe extern "C" fn update_ftrace_function() {
-    static void update_ftrace_function(void)
-    {
-    ftrace_func_t func;
+    let mut func;
 //
 // Prepare the ftrace_ops that the arch callback will use.
 // If there's only one ftrace_ops registered, the ftrace_ops_list
@@ -219,8 +455,9 @@ unsafe extern "C" fn update_ftrace_function() {
     func = ftrace_ops_list_func;
     }
 // If there's no change, then do nothing more here
-    if (ftrace_trace_function == func)
+    if (ftrace_trace_function == func) {
     return;
+    }
 //
 // If we are using the list function, it doesn't care
 // about the function_trace_ops.
@@ -260,9 +497,8 @@ unsafe extern "C" fn update_ftrace_function() {
 
     ftrace_trace_function = func;
     }
-    static void add_ftrace_ops(struct ftrace_ops __rcu **list,
-    struct ftrace_ops *ops)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn add_ftrace_ops(list: *mut *mut ftrace_ops, ops: *mut ftrace_ops) {
     rcu_assign_pointer(ops.next, *list);
 //
 // We are entering ops into the list but another
@@ -272,10 +508,9 @@ unsafe extern "C" fn update_ftrace_function() {
 //
     rcu_assign_pointer(*list, ops);
     }
-    static int remove_ftrace_ops(struct ftrace_ops __rcu **list,
-    struct ftrace_ops *ops)
-    {
-    struct ftrace_ops **p;
+#[no_mangle]
+pub unsafe extern "C" fn remove_ftrace_ops(list: *mut *mut ftrace_ops, ops: *mut ftrace_ops) -> c_int {
+pub static mut p: *mut c_void = core::ptr::null_mut();
 //
 // If we are removing the last function, then simply point
 // to the ftrace_stub.
@@ -287,23 +522,25 @@ unsafe extern "C" fn update_ftrace_function() {
     rcu_assign_pointer(*list, &ftrace_list_end);
     return 0;
     }
-    for (p = list; *p != &ftrace_list_end; p = &(*p).next)
+    for (p = list; *p != &ftrace_list_end; p = &(*p).next) {
     if (*p == ops)
     break;
-    if (*p != ops)
+    }
+    if (*p != ops) {
     return -1;
+    }
 // p = (*p)->next;
     return 0;
     }
-    static void ftrace_update_trampoline(struct ftrace_ops *ops);
+// forward_decl: ftrace_update_trampoline;
 #[no_mangle]
 pub unsafe extern "C" fn __register_ftrace_function(ops: *mut ftrace_ops) -> c_int {
-    int __register_ftrace_function(struct ftrace_ops *ops)
-    {
-    if (ops.flags & FTRACE_OPS_FL_DELETED)
+    if (ops.flags & FTRACE_OPS_FL_DELETED) {
     return -EINVAL;
-    if (WARN_ON(ops.flags & FTRACE_OPS_FL_ENABLED))
+    }
+    if (WARN_ON!(ops.flags & FTRACE_OPS_FL_ENABLED)) {
     return -EBUSY;
+    }
 
 //
 // If the ftrace_ops specifies SAVE_REGS, then it only can be used
@@ -311,48 +548,54 @@ pub unsafe extern "C" fn __register_ftrace_function(ops: *mut ftrace_ops) -> c_i
 // Setting SAVE_REGS_IF_SUPPORTED makes SAVE_REGS irrelevant.
 //
     if (ops.flags & FTRACE_OPS_FL_SAVE_REGS &&
-    !(ops.flags & FTRACE_OPS_FL_SAVE_REGS_IF_SUPPORTED))
+    !(ops.flags & FTRACE_OPS_FL_SAVE_REGS_IF_SUPPORTED)) {
     return -EINVAL;
-    if (ops.flags & FTRACE_OPS_FL_SAVE_REGS_IF_SUPPORTED)
+    }
+    if (ops.flags & FTRACE_OPS_FL_SAVE_REGS_IF_SUPPORTED) {
     ops.flags |= FTRACE_OPS_FL_SAVE_REGS;
+    }
 
-    if (!ftrace_enabled && (ops.flags & FTRACE_OPS_FL_PERMANENT))
+    if (!ftrace_enabled && (ops.flags & FTRACE_OPS_FL_PERMANENT)) {
     return -EBUSY;
-    if (!is_kernel_core_data((unsigned long)ops))
+    }
+    if (!is_kernel_core_data((unsigned long)ops)) {
     ops.flags |= FTRACE_OPS_FL_DYNAMIC;
+    }
     add_ftrace_ops(&ftrace_ops_list, ops);
 // Always save the function, and reset at unregistering
     ops.saved_func = ops.func;
-    if (ftrace_pids_enabled(ops))
+    if (ftrace_pids_enabled(ops)) {
     ops.func = ftrace_pid_func;
+    }
     ftrace_update_trampoline(ops);
-    if (ftrace_enabled)
+    if (ftrace_enabled) {
     update_ftrace_function();
+    }
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn __unregister_ftrace_function(ops: *mut ftrace_ops) -> c_int {
-    int __unregister_ftrace_function(struct ftrace_ops *ops)
-    {
-    int ret;
-    if (WARN_ON(!(ops.flags & FTRACE_OPS_FL_ENABLED)))
+    let mut ret = 0;
+    if (WARN_ON!(!(ops.flags & FTRACE_OPS_FL_ENABLED))) {
     return -EBUSY;
+    }
     ret = remove_ftrace_ops(&ftrace_ops_list, ops);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
-    if (ftrace_enabled)
+    }
+    if (ftrace_enabled) {
     update_ftrace_function();
+    }
     ops.func = ops.saved_func;
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_update_pid_func() {
-    static void ftrace_update_pid_func(void)
-    {
-    struct ftrace_ops *op;
+pub static mut op: *mut c_void = core::ptr::null_mut();
 // Only do something if we are tracing something
-    if (ftrace_trace_function == ftrace_stub)
+    if (ftrace_trace_function == ftrace_stub) {
     return;
+    }
     do_for_each_ftrace_op(op, ftrace_ops_list) {
     if (op.flags & FTRACE_OPS_FL_PID) {
     op.func = ftrace_pids_enabled(op) ?
@@ -381,7 +624,7 @@ pub struct ftrace_profile {
 pub struct ftrace_profile_page {
     pub next: *mut ftrace_profile_page,
     pub index: c_ulong,
-    pub records: [ftrace_profile; ],
+    pub records: [ftrace_profile; 0],
 }
 
 #[repr(C)]
@@ -394,77 +637,79 @@ pub struct ftrace_profile_stat {
     pub stat: tracer_stat,
 }
 
-    (PAGE_SIZE - offsetof(struct ftrace_profile_page, records))
+    (PAGE_SIZE - offsetof(ftrace_profile_page, records))
 
-    (PROFILE_RECORDS_SIZE / sizeof(struct ftrace_profile))
-    static int ftrace_profile_enabled __read_mostly;
+    (PROFILE_RECORDS_SIZE / sizeof!(ftrace_profile))
+    static int ftrace_profile_enabled ;
 // ftrace_profile_lock - synchronize the enable and disable of the profiler
-    static DEFINE_MUTEX(ftrace_profile_lock);
-    static DEFINE_PER_CPU(struct ftrace_profile_stat, ftrace_profile_stats);
+pub static mut ftrace_profile_lock: usize = 0;
+pub static mut struct ftrace_profile_stat: usize = 0;
 pub const FTRACE_PROFILE_HASH_BITS: c_int = 10;
 
-    static void *
-    function_stat_next(void *v, int idx)
-    {
-    struct ftrace_profile *rec = v;
-    struct ftrace_profile_page *pg;
-    pg = (struct ftrace_profile_page *)((unsigned long)rec & PAGE_MASK);
-    again:
-    if (idx != 0)
-    rec++;
-    if ((void *)rec >= (void *)&pg.records[pg.index]) {
+#[no_mangle]
+pub unsafe extern "C" fn function_stat_next(v: *mut c_void, idx: c_int) -> *mut c_void {
+    let mut rec = v;
+pub static mut pg: *mut c_void = core::ptr::null_mut();
+    pg = ((unsigned long)rec & PAGE_MASK);
+// label;
+    if (idx != 0) {
+    rec += 1;
+    }
+    if (rec >= &pg.records[pg.index]) {
     pg = pg.next;
-    if (!pg)
+    if (!pg) {
     return core::ptr::null_mut();
+    }
     rec = &pg.records[0];
-    if (!rec.counter)
-    goto again;
+    if (!rec.counter) {
+// goto;
+    }
     }
     return rec;
     }
-    static void *function_stat_start(struct tracer_stat *trace)
-    {
-    struct ftrace_profile_stat *stat =
-    container_of(trace, struct ftrace_profile_stat, stat);
-    if (!stat || !stat.start)
+#[no_mangle]
+pub unsafe extern "C" fn function_stat_start(trace: *mut tracer_stat) -> *mut c_void {
+    let mut stat = container_of!(trace, ftrace_profile_stat, stat);
+    if (!stat || !stat.start) {
     return core::ptr::null_mut();
+    }
     return function_stat_next(&stat.start.records[0], 0);
     }
 
 // function graph compares on total time
 #[no_mangle]
 unsafe extern "C" fn function_stat_cmp(p1: *const c_void, p2: *const c_void) -> c_int {
-    static int function_stat_cmp(const void *p1, const void *p2)
-    {
-    const struct ftrace_profile *a = p1;
-    const struct ftrace_profile *b = p2;
-    if (a.time < b.time)
+    let mut a = p1;
+    let mut b = p2;
+    if (a.time < b.time) {
     return -1;
-    if (a.time > b.time)
+    }
+    if (a.time > b.time) {
     return 1;
-    else
+    }
+    else {
     return 0;
+    }
     }
 
 // not function graph compares against hits
 #[no_mangle]
 unsafe extern "C" fn function_stat_cmp(p1: *const c_void, p2: *const c_void) -> c_int {
-    static int function_stat_cmp(const void *p1, const void *p2)
-    {
-    const struct ftrace_profile *a = p1;
-    const struct ftrace_profile *b = p2;
-    if (a.counter < b.counter)
+    let mut a = p1;
+    let mut b = p2;
+    if (a.counter < b.counter) {
     return -1;
-    if (a.counter > b.counter)
+    }
+    if (a.counter > b.counter) {
     return 1;
-    else
+    }
+    else {
     return 0;
+    }
     }
 
 #[no_mangle]
 unsafe extern "C" fn function_stat_headers(m: *mut seq_file) -> c_int {
-    static int function_stat_headers(struct seq_file *m)
-    {
 
     seq_puts(m, "  Function                               "
     "Hit    Time            Avg             s^2\n"
@@ -478,34 +723,34 @@ unsafe extern "C" fn function_stat_headers(m: *mut seq_file) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn function_stat_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int function_stat_show(struct seq_file *m, void *v)
-    {
-    struct trace_array *tr = trace_get_global_array();
-    struct ftrace_profile *rec = v;
-    const char *refsymbol = core::ptr::null_mut();
+    let mut tr = trace_get_global_array();
+    let mut rec = v;
+    let mut refsymbol = core::ptr::null_mut();
     char str[KSYM_SYMBOL_LEN];
 
-    static struct trace_seq s;
+pub static mut s: usize = 0;
     unsigned long long avg;
     unsigned long long stddev;
     unsigned long long stddev_denom;
 
     guard(mutex)(&ftrace_profile_lock);
 // we raced with function_profile_reset()
-    if (unlikely(rec.counter == 0))
+    if (unlikely(rec.counter == 0)) {
     return -EBUSY;
+    }
 
     avg = div64_ul(rec.time, rec.counter);
-    if (tracing_thresh && (avg < tracing_thresh))
+    if (tracing_thresh && (avg < tracing_thresh)) {
     return 0;
+    }
 
     if (tr.trace_flags & TRACE_ITER(PROF_TEXT_OFFSET)) {
-    unsigned long offset;
+    let mut offset = 0;
     if (core_kernel_text(rec.ip)) {
     refsymbol = "_text";
     offset = rec.ip - (unsigned long)_text;
     } else {
-    struct module *mod;
+pub static mut mod: *mut c_void = core::ptr::null_mut();
     guard(rcu)();
     mod = __module_text_address(rec.ip);
     if (mod) {
@@ -514,11 +759,13 @@ unsafe extern "C" fn function_stat_show(m: *mut seq_file, v: *mut c_void) -> c_i
     offset = rec.ip - (unsigned long)mod.mem[MOD_TEXT].base;
     }
     }
-    if (refsymbol)
-    snprintf(str, sizeof(str), "  %s+%#lx", refsymbol, offset);
+    if (refsymbol) {
+    snprintf(str, sizeof!(str), "  %s+%#lx", refsymbol, offset);
     }
-    if (!refsymbol)
+    }
+    if (!refsymbol) {
     kallsyms_lookup(rec.ip, core::ptr::null_mut(), core::ptr::null_mut(), core::ptr::null_mut(), str);
+    }
     seq_printf(m, "  %-30.30s  %10lu", str, rec.counter);
 
     seq_puts(m, "    ");
@@ -549,9 +796,7 @@ unsafe extern "C" fn function_stat_show(m: *mut seq_file, v: *mut c_void) -> c_i
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_profile_reset(stat: *mut ftrace_profile_stat) {
-    static void ftrace_profile_reset(struct ftrace_profile_stat *stat)
-    {
-    struct ftrace_profile_page *pg;
+pub static mut pg: *mut c_void = core::ptr::null_mut();
     pg = stat.pages = stat.start;
     while (pg) {
     memset(pg.records, 0, PROFILE_RECORDS_SIZE);
@@ -559,22 +804,22 @@ unsafe extern "C" fn ftrace_profile_reset(stat: *mut ftrace_profile_stat) {
     pg = pg.next;
     }
     memset(stat.hash, 0,
-    FTRACE_PROFILE_HASH_SIZE * sizeof(struct hlist_head));
+    FTRACE_PROFILE_HASH_SIZE * sizeof!(hlist_head));
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_profile_pages_init(stat: *mut ftrace_profile_stat) -> c_int {
-    static int ftrace_profile_pages_init(struct ftrace_profile_stat *stat)
-    {
-    struct ftrace_profile_page *pg;
-    int functions;
-    int pages;
-    int i;
+pub static mut pg: *mut c_void = core::ptr::null_mut();
+    let mut functions = 0;
+    let mut pages = 0;
+    let mut i = 0;
 // If we already allocated, do nothing
-    if (stat.pages)
+    if (stat.pages) {
     return 0;
-    stat.pages = (void *)get_zeroed_page(GFP_KERNEL);
-    if (!stat.pages)
+    }
+    stat.pages = get_zeroed_page(GFP_KERNEL);
+    if (!stat.pages) {
     return -ENOMEM;
+    }
 
     functions = ftrace_update_tot_cnt;
 
@@ -589,17 +834,18 @@ unsafe extern "C" fn ftrace_profile_pages_init(stat: *mut ftrace_profile_stat) -
 
     pg = stat.start = stat.pages;
     pages = DIV_ROUND_UP(functions, PROFILES_PER_PAGE);
-    for (i = 1; i < pages; i++) {
-    pg.next = (void *)get_zeroed_page(GFP_KERNEL);
-    if (!pg.next)
-    goto out_free;
+    while (i < pages) {
+    pg.next = get_zeroed_page(GFP_KERNEL);
+    if (!pg.next) {
+// goto;
+    }
     pg = pg.next;
     }
     return 0;
-    out_free:
+// label;
     pg = stat.start;
     while (pg) {
-    let mut tmp: c_ulong = (unsigned long)pg;
+pub static mut tmp: c_ulong = 0;
     pg = pg.next;
     free_page(tmp);
     }
@@ -609,10 +855,8 @@ unsafe extern "C" fn ftrace_profile_pages_init(stat: *mut ftrace_profile_stat) -
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_profile_init_cpu(cpu: c_int) -> c_int {
-    static int ftrace_profile_init_cpu(int cpu)
-    {
-    struct ftrace_profile_stat *stat;
-    int size;
+pub static mut stat: *mut c_void = core::ptr::null_mut();
+    let mut size = 0;
     stat = &per_cpu(ftrace_profile_stats, cpu);
     if (stat.hash) {
 // If the profile is already created, simply reset it
@@ -624,9 +868,10 @@ unsafe extern "C" fn ftrace_profile_init_cpu(cpu: c_int) -> c_int {
 // functions are hit. We'll make a hash of 1024 items.
 //
     size = FTRACE_PROFILE_HASH_SIZE;
-    stat.hash = kzalloc_objs(struct hlist_head, size);
-    if (!stat.hash)
+    stat.hash = kzalloc_objs(hlist_head, size);
+    if (!stat.hash) {
     return -ENOMEM;
+    }
 // Preallocate the function profiling pages
     if (ftrace_profile_pages_init(stat) < 0) {
     kfree(stat.hash);
@@ -637,96 +882,96 @@ unsafe extern "C" fn ftrace_profile_init_cpu(cpu: c_int) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_profile_init() -> c_int {
-    static int ftrace_profile_init(void)
-    {
-    int cpu;
-    let mut ret: c_int = 0;
+    let mut cpu = 0;
+pub static mut ret: c_int = 0;
     for_each_possible_cpu(cpu) {
     ret = ftrace_profile_init_cpu(cpu);
-    if (ret)
+    if (ret) {
     break;
+    }
     }
     return ret;
     }
 // interrupts must be disabled
-    static struct ftrace_profile *
-    ftrace_find_profiled_func(struct ftrace_profile_stat *stat, unsigned long ip)
-    {
-    struct ftrace_profile *rec;
-    struct hlist_head *hhd;
-    unsigned long key;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_find_profiled_func(stat: *mut ftrace_profile_stat, ip: c_ulong) -> *mut c_void {
+pub static mut rec: *mut c_void = core::ptr::null_mut();
+pub static mut hhd: *mut c_void = core::ptr::null_mut();
+    let mut key = 0;
     key = hash_long(ip, FTRACE_PROFILE_HASH_BITS);
     hhd = &stat.hash[key];
-    if (hlist_empty(hhd))
+    if (hlist_empty(hhd)) {
     return core::ptr::null_mut();
+    }
     hlist_for_each_entry_rcu_notrace(rec, hhd, node) {
-    if (rec.ip == ip)
+    if (rec.ip == ip) {
     return rec;
     }
+    }
     return core::ptr::null_mut();
     }
-    static void ftrace_add_profile(struct ftrace_profile_stat *stat,
-    struct ftrace_profile *rec)
-    {
-    unsigned long key;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_add_profile(stat: *mut ftrace_profile_stat, rec: *mut ftrace_profile) {
+    let mut key = 0;
     key = hash_long(rec.ip, FTRACE_PROFILE_HASH_BITS);
     hlist_add_head_rcu(&rec.node, &stat.hash[key]);
     }
 //
 // The memory is already allocated, this simply finds a new record to use.
 //
-    static struct ftrace_profile *
-    ftrace_profile_alloc(struct ftrace_profile_stat *stat, unsigned long ip)
-    {
-    struct ftrace_profile *rec = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_profile_alloc(stat: *mut ftrace_profile_stat, ip: c_ulong) -> *mut c_void {
+    let mut rec = core::ptr::null_mut();
 // prevent recursion (from NMIs)
-    if (atomic_inc_return(&stat.disabled) != 1)
-    goto out;
+    if (atomic_inc_return(&stat.disabled) != 1) {
+// goto;
+    }
 //
 // Try to find the function again since an NMI
 // could have added it
 //
     rec = ftrace_find_profiled_func(stat, ip);
-    if (rec)
-    goto out;
+    if (rec) {
+// goto;
+    }
     if (stat.pages.index == PROFILES_PER_PAGE) {
-    if (!stat.pages.next)
-    goto out;
+    if (!stat.pages.next) {
+// goto;
+    }
     stat.pages = stat.pages.next;
     }
     rec = &stat.pages.records[stat.pages.index++];
     rec.ip = ip;
     ftrace_add_profile(stat, rec);
-    out:
+// label;
     atomic_dec(&stat.disabled);
     return rec;
     }
-    static void
-    function_profile_call(unsigned long ip, unsigned long parent_ip,
-    struct ftrace_ops *ops, struct ftrace_regs *fregs)
-    {
-    struct ftrace_profile_stat *stat;
-    struct ftrace_profile *rec;
-    if (!ftrace_profile_enabled)
+#[no_mangle]
+pub unsafe extern "C" fn function_profile_call(ip: c_ulong, parent_ip: c_ulong, ops: *mut ftrace_ops, fregs: *mut ftrace_regs) {
+pub static mut stat: *mut c_void = core::ptr::null_mut();
+pub static mut rec: *mut c_void = core::ptr::null_mut();
+    if (!ftrace_profile_enabled) {
     return;
+    }
     guard(preempt_notrace)();
     stat = this_cpu_ptr(&ftrace_profile_stats);
-    if (!stat.hash || !ftrace_profile_enabled)
+    if (!stat.hash || !ftrace_profile_enabled) {
     return;
+    }
     rec = ftrace_find_profiled_func(stat, ip);
     if (!rec) {
     rec = ftrace_profile_alloc(stat, ip);
-    if (!rec)
+    if (!rec) {
     return;
     }
-    rec.counter++;
+    }
+    rec.counter += 1;
     }
 
-    let mut fgraph_graph_time: static bool = true;
+pub static mut fgraph_graph_time: bool = true;
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_graph_graph_time_control(enable: bool) {
-    void ftrace_graph_graph_time_control(bool enable)
-    {
     fgraph_graph_time = enable;
     }
 #[repr(C)]
@@ -737,57 +982,61 @@ pub struct profile_fgraph_data {
     pub sleeptime: c_ulonglong,
 }
 
-    static int profile_graph_entry(struct ftrace_graph_ent *trace,
-    struct fgraph_ops *gops,
-    struct ftrace_regs *fregs)
-    {
-    struct profile_fgraph_data *profile_data;
+#[no_mangle]
+pub unsafe extern "C" fn profile_graph_entry(trace: *mut ftrace_graph_ent, gops: *mut fgraph_ops, fregs: *mut ftrace_regs) -> c_int {
+pub static mut profile_data: *mut c_void = core::ptr::null_mut();
     function_profile_call(trace.func, 0, core::ptr::null_mut(), core::ptr::null_mut());
 // If function graph is shutting down, ret_stack can be NULL
-    if (!current.ret_stack)
+    if (!current.ret_stack) {
     return 0;
-    profile_data = fgraph_reserve_data(gops.idx, sizeof(*profile_data));
-    if (!profile_data)
+    }
+    profile_data = fgraph_reserve_data(gops.idx, sizeof!(*profile_data));
+    if (!profile_data) {
     return 0;
+    }
     profile_data.subtime = 0;
     profile_data.sleeptime = current.ftrace_sleeptime;
     profile_data.calltime = trace_clock_local();
     return 1;
     }
-    bool fprofile_no_sleep_time;
-    static void profile_graph_return(struct ftrace_graph_ret *trace,
-    struct fgraph_ops *gops,
-    struct ftrace_regs *fregs)
-    {
-    struct profile_fgraph_data *profile_data;
-    struct ftrace_profile_stat *stat;
+    let mut fprofile_no_sleep_time = 0;
+#[no_mangle]
+pub unsafe extern "C" fn profile_graph_return(trace: *mut ftrace_graph_ret, gops: *mut fgraph_ops, fregs: *mut ftrace_regs) {
+pub static mut profile_data: *mut c_void = core::ptr::null_mut();
+pub static mut stat: *mut c_void = core::ptr::null_mut();
     unsigned long long calltime;
-    let mut rettime: c_ulonglong = trace_clock_local();
-    struct ftrace_profile *rec;
-    int size;
+pub static mut rettime: c_ulonglong = 0;
+pub static mut rec: *mut c_void = core::ptr::null_mut();
+    let mut size = 0;
     guard(preempt_notrace)();
     stat = this_cpu_ptr(&ftrace_profile_stats);
-    if (!stat.hash || !ftrace_profile_enabled)
+    if (!stat.hash || !ftrace_profile_enabled) {
     return;
+    }
     profile_data = fgraph_retrieve_data(gops.idx, &size);
 // If the calltime was zero'd ignore it
-    if (!profile_data || !profile_data.calltime)
+    if (!profile_data || !profile_data.calltime) {
     return;
+    }
     calltime = rettime - profile_data.calltime;
     if (fprofile_no_sleep_time) {
-    if (current.ftrace_sleeptime)
+    if (current.ftrace_sleeptime) {
     calltime -= current.ftrace_sleeptime - profile_data.sleeptime;
     }
+    }
     if (!fgraph_graph_time) {
-    struct profile_fgraph_data *parent_data;
+pub static mut parent_data: *mut c_void = core::ptr::null_mut();
 // Append this call time to the parent time to subtract
     parent_data = fgraph_retrieve_parent_data(gops.idx, &size, 1);
-    if (parent_data)
+    if (parent_data) {
     parent_data.subtime += calltime;
-    if (profile_data.subtime && profile_data.subtime < calltime)
+    }
+    if (profile_data.subtime && profile_data.subtime < calltime) {
     calltime -= profile_data.subtime;
-    else
+    }
+    else {
     calltime = 0;
+    }
     }
     rec = ftrace_find_profiled_func(stat, trace.func);
     if (rec) {
@@ -795,60 +1044,50 @@ pub struct profile_fgraph_data {
     rec.time_squared += calltime * calltime;
     }
     }
-    static struct fgraph_ops fprofiler_ops = {
-    .entryfunc = &profile_graph_entry,
-    .retfunc = &profile_graph_return,
-    };
+pub static mut fgraph_ops: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn register_ftrace_profiler() -> c_int {
-    static int register_ftrace_profiler(void)
-    {
     ftrace_ops_set_global_filter(&fprofiler_ops.ops);
     return register_ftrace_graph(&fprofiler_ops);
     }
 #[no_mangle]
 unsafe extern "C" fn unregister_ftrace_profiler() {
-    static void unregister_ftrace_profiler(void)
-    {
     unregister_ftrace_graph(&fprofiler_ops);
     }
 
-    static struct ftrace_ops ftrace_profile_ops __read_mostly = {
+    static struct ftrace_ops ftrace_profile_ops  = {
     .func		= function_profile_call,
     };
 #[no_mangle]
 unsafe extern "C" fn register_ftrace_profiler() -> c_int {
-    static int register_ftrace_profiler(void)
-    {
     ftrace_ops_set_global_filter(&ftrace_profile_ops);
     return register_ftrace_function(&ftrace_profile_ops);
     }
 #[no_mangle]
 unsafe extern "C" fn unregister_ftrace_profiler() {
-    static void unregister_ftrace_profiler(void)
-    {
     unregister_ftrace_function(&ftrace_profile_ops);
     }
 
-    static ssize_t
-    ftrace_profile_write(struct file *filp, const char __user *ubuf,
-    size_t cnt, loff_t *ppos)
-    {
-    unsigned long val;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_profile_write(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
+    let mut val = 0;
+    let mut ret = 0;
     ret = kstrtoul_from_user(ubuf, cnt, 10, &val);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     val = !!val;
     guard(mutex)(&ftrace_profile_lock);
     if (ftrace_profile_enabled ^ val) {
     if (val) {
     ret = ftrace_profile_init();
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     ret = register_ftrace_profiler();
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     ftrace_profile_enabled = 1;
     } else {
     ftrace_profile_enabled = 0;
@@ -862,21 +1101,14 @@ unsafe extern "C" fn unregister_ftrace_profiler() {
 // ppos += cnt;
     return cnt;
     }
-    static ssize_t
-    ftrace_profile_read(struct file *filp, char __user *ubuf,
-    size_t cnt, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_profile_read(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
     char buf[64];		/* big enough to hold a number */
-    int r;
+    let mut r = 0;
     r = sprintf(buf, "%u\n", ftrace_profile_enabled);
     return simple_read_from_buffer(ubuf, cnt, ppos, buf, r);
     }
-    static const struct file_operations ftrace_profile_fops = {
-    .open		= tracing_open_generic,
-    .read		= ftrace_profile_read,
-    .write		= ftrace_profile_write,
-    .llseek		= default_llseek,
-    };
+pub static mut file_operations: usize = 0;
 // used to initialize the real stat files
     static struct tracer_stat function_stats __initdata = {
     .name		= "functions",
@@ -888,12 +1120,10 @@ unsafe extern "C" fn unregister_ftrace_profiler() {
     };
 #[no_mangle]
 unsafe extern "C" fn ftrace_profile_tracefs(d_tracer: *mut dentry) -> __init void {
-    static __init void ftrace_profile_tracefs(struct dentry *d_tracer)
-    {
-    struct ftrace_profile_stat *stat;
-    char *name;
-    int ret;
-    int cpu;
+pub static mut stat: *mut c_void = core::ptr::null_mut();
+pub static mut name: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    let mut cpu = 0;
     for_each_possible_cpu(cpu) {
     stat = &per_cpu(ftrace_profile_stats, cpu);
     name = kasprintf(GFP_KERNEL, "function%d", cpu);
@@ -925,11 +1155,9 @@ unsafe extern "C" fn ftrace_profile_tracefs(d_tracer: *mut dentry) -> __init voi
 
 #[no_mangle]
 unsafe extern "C" fn ftrace_profile_tracefs(d_tracer: *mut dentry) -> __init void {
-    static __init void ftrace_profile_tracefs(struct dentry *d_tracer)
-    {
     }
 
-    static struct ftrace_ops *removed_ops;
+pub static mut removed_ops: *mut c_void = core::ptr::null_mut();
 //
 // Set when doing a global update, like enabling all recs or disabling them.
 // It is not set when just updating a single ftrace_ops.
@@ -953,29 +1181,20 @@ pub struct ftrace_func_probe {
 // anyone does try to modify it, it will cause an exception.
 //
     static const struct hlist_head empty_buckets[1];
-    static const struct ftrace_hash empty_hash = {
-    .buckets = (struct hlist_head *)empty_buckets,
-    };
+pub static mut ftrace_hash: usize = 0;
 
-    struct ftrace_ops global_ops = {
-    .func				= ftrace_stub,
-    .local_hash.notrace_hash	= EMPTY_HASH,
-    .local_hash.filter_hash		= EMPTY_HASH,
-    INIT_OPS_HASH(global_ops)
-    .flags				= FTRACE_OPS_FL_INITIALIZED |
-    FTRACE_OPS_FL_PID,
-    };
+pub static mut ftrace_ops: usize = 0;
 //
 // parser_lock - Protects trace_parser state against concurrent operations.
 // Held across trace_get_user() and subsequent buffer parsing to prevent races.
 //
-    static DEFINE_MUTEX(parser_lock);
+pub static mut parser_lock: usize = 0;
 //
 // Used by the stack unwinder to know about dynamic ftrace trampolines.
 //
-    struct ftrace_ops *ftrace_ops_trampoline(unsigned long addr)
-    {
-    struct ftrace_ops *op = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_ops_trampoline(addr: c_ulong) -> *mut c_void {
+    let mut op = core::ptr::null_mut();
 //
 // Some of the ops may be dynamically allocated,
 // they are freed after a synchronize_rcu().
@@ -987,9 +1206,10 @@ pub struct ftrace_func_probe {
 // Trampolines that are in kernel text will have
 // core_kernel_text() return true.
 //
-    if (op.trampoline && op.trampoline_size)
+    if (op.trampoline && op.trampoline_size) {
     if (addr >= op.trampoline &&
     addr < op.trampoline + op.trampoline_size) {
+    }
     preempt_enable_notrace();
     return op;
     }
@@ -1005,8 +1225,6 @@ pub struct ftrace_func_probe {
 //
 #[no_mangle]
 pub unsafe extern "C" fn is_ftrace_trampoline(addr: c_ulong) -> bool {
-    bool is_ftrace_trampoline(unsigned long addr)
-    {
     return ftrace_ops_trampoline(addr) != core::ptr::null_mut();
     }
 #[repr(C)]
@@ -1018,27 +1236,29 @@ pub struct ftrace_page {
     pub order: c_int,
 }
 
-    static struct ftrace_page	*ftrace_pages_start;
-    static struct ftrace_page	*ftrace_pages;
+pub static mut ftrace_pages_start: *mut c_void = core::ptr::null_mut();
+pub static mut ftrace_pages: *mut c_void = core::ptr::null_mut();
     static __always_inline unsigned long
-    ftrace_hash_key(struct ftrace_hash *hash, unsigned long ip)
+    ftrace_hash_key(ftrace_hash *hash, unsigned long ip)
     {
-    if (hash.size_bits > 0)
+    if (hash.size_bits > 0) {
     return hash_long(ip, hash.size_bits);
+    }
     return 0;
     }
 // Only use this function if ftrace_hash_empty() has already been tested
     static __always_inline struct ftrace_func_entry *
-    __ftrace_lookup_ip(struct ftrace_hash *hash, unsigned long ip)
+    __ftrace_lookup_ip(ftrace_hash *hash, unsigned long ip)
     {
-    unsigned long key;
-    struct ftrace_func_entry *entry;
-    struct hlist_head *hhd;
+    let mut key = 0;
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut hhd: *mut c_void = core::ptr::null_mut();
     key = ftrace_hash_key(hash, ip);
     hhd = &hash.buckets[key];
     hlist_for_each_entry_rcu_notrace(entry, hhd, hlist) {
-    if (entry.ip == ip)
+    if (entry.ip == ip) {
     return entry;
+    }
     }
     return core::ptr::null_mut();
     }
@@ -1052,69 +1272,61 @@ pub struct ftrace_page {
 //
 // Returns: the entry that holds the @ip if found. NULL otherwise.
 //
-    struct ftrace_func_entry *
-    ftrace_lookup_ip(struct ftrace_hash *hash, unsigned long ip)
-    {
-    if (ftrace_hash_empty(hash))
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_lookup_ip(hash: *mut ftrace_hash, ip: c_ulong) -> *mut c_void {
+    if (ftrace_hash_empty(hash)) {
     return core::ptr::null_mut();
+    }
     return __ftrace_lookup_ip(hash, ip);
     }
 #[no_mangle]
 pub unsafe extern "C" fn add_ftrace_hash_entry(hash: *mut ftrace_hash, entry: *mut ftrace_func_entry) {
-    void add_ftrace_hash_entry(struct ftrace_hash *hash, struct ftrace_func_entry *entry)
-    {
-    struct hlist_head *hhd;
-    unsigned long key;
+pub static mut hhd: *mut c_void = core::ptr::null_mut();
+    let mut key = 0;
     key = ftrace_hash_key(hash, entry.ip);
     hhd = &hash.buckets[key];
     hlist_add_head(&entry.hlist, hhd);
-    hash.count++;
+    hash.count += 1;
     }
-    struct ftrace_func_entry *
-    add_ftrace_hash_entry_direct(struct ftrace_hash *hash, unsigned long ip, unsigned long direct)
-    {
-    struct ftrace_func_entry *entry;
+#[no_mangle]
+pub unsafe extern "C" fn add_ftrace_hash_entry_direct(hash: *mut ftrace_hash, ip: c_ulong, direct: c_ulong) -> *mut c_void {
+pub static mut entry: *mut c_void = core::ptr::null_mut();
     entry = kmalloc_obj(*entry);
-    if (!entry)
+    if (!entry) {
     return core::ptr::null_mut();
+    }
     entry.ip = ip;
     entry.direct = direct;
     add_ftrace_hash_entry(hash, entry);
     return entry;
     }
-    static struct ftrace_func_entry *
-    add_hash_entry(struct ftrace_hash *hash, unsigned long ip)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn add_hash_entry(hash: *mut ftrace_hash, ip: c_ulong) -> *mut c_void {
     return add_ftrace_hash_entry_direct(hash, ip, 0);
     }
-    static void
-    free_hash_entry(struct ftrace_hash *hash,
-    struct ftrace_func_entry *entry)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn free_hash_entry(hash: *mut ftrace_hash, entry: *mut ftrace_func_entry) {
     hlist_del(&entry.hlist);
     kfree(entry);
-    hash.count--;
+    hash.count -= 1;
     }
-    static void
-    remove_hash_entry(struct ftrace_hash *hash,
-    struct ftrace_func_entry *entry)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn remove_hash_entry(hash: *mut ftrace_hash, entry: *mut ftrace_func_entry) {
     hlist_del_rcu(&entry.hlist);
-    hash.count--;
+    hash.count -= 1;
     }
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_hash_remove(hash: *mut ftrace_hash) {
-    void ftrace_hash_remove(struct ftrace_hash *hash)
-    {
-    struct ftrace_func_entry *entry;
-    struct hlist_head *hhd;
-    struct hlist_node *tn;
-    int size;
-    int i;
-    if (!hash || !hash.count)
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut hhd: *mut c_void = core::ptr::null_mut();
+pub static mut tn: *mut c_void = core::ptr::null_mut();
+    let mut size = 0;
+    let mut i = 0;
+    if (!hash || !hash.count) {
     return;
+    }
     size = 1 << hash.size_bits;
-    for (i = 0; i < size; i++) {
+    while (i < size) {
     hhd = &hash.buckets[i];
     hlist_for_each_entry_safe(entry, tn, hhd, hlist)
     remove_hash_entry(hash, entry);
@@ -1123,16 +1335,15 @@ pub unsafe extern "C" fn ftrace_hash_remove(hash: *mut ftrace_hash) {
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_hash_clear(hash: *mut ftrace_hash) {
-    static void ftrace_hash_clear(struct ftrace_hash *hash)
-    {
-    struct hlist_head *hhd;
-    struct hlist_node *tn;
-    struct ftrace_func_entry *entry;
-    let mut size: c_int = 1 << hash.size_bits;
-    int i;
-    if (!hash.count)
+pub static mut hhd: *mut c_void = core::ptr::null_mut();
+pub static mut tn: *mut c_void = core::ptr::null_mut();
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut size: c_int = 0;
+    let mut i = 0;
+    if (!hash.count) {
     return;
-    for (i = 0; i < size; i++) {
+    }
+    while (i < size) {
     hhd = &hash.buckets[i];
     hlist_for_each_entry_safe(entry, tn, hhd, hlist)
     free_hash_entry(hash, entry);
@@ -1141,8 +1352,6 @@ unsafe extern "C" fn ftrace_hash_clear(hash: *mut ftrace_hash) {
     }
 #[no_mangle]
 unsafe extern "C" fn free_ftrace_mod(ftrace_mod: *mut ftrace_mod_load) {
-    static void free_ftrace_mod(struct ftrace_mod_load *ftrace_mod)
-    {
     list_del(&ftrace_mod.list);
     kfree(ftrace_mod.module);
     kfree(ftrace_mod.func);
@@ -1150,41 +1359,38 @@ unsafe extern "C" fn free_ftrace_mod(ftrace_mod: *mut ftrace_mod_load) {
     }
 #[no_mangle]
 unsafe extern "C" fn clear_ftrace_mod_list(head: *mut list_head) {
-    static void clear_ftrace_mod_list(struct list_head *head)
-    {
-    struct ftrace_mod_load *p, *n;
+    let mut p = core::ptr::null_mut();
+    let mut n = core::ptr::null_mut();
 // stack tracer isn't supported yet
-    if (!head)
+    if (!head) {
     return;
+    }
     mutex_lock(&ftrace_lock);
-    list_for_each_entry_safe(p, n, head, list)
+    list_for_each_entry_safe(p, n, head, list) {
     free_ftrace_mod(p);
+    }
     mutex_unlock(&ftrace_lock);
     }
 #[no_mangle]
 pub unsafe extern "C" fn free_ftrace_hash(hash: *mut ftrace_hash) {
-    void free_ftrace_hash(struct ftrace_hash *hash)
-    {
-    if (!hash || hash == EMPTY_HASH)
+    if (!hash || hash == EMPTY_HASH) {
     return;
+    }
     ftrace_hash_clear(hash);
     kfree(hash.buckets);
     kfree(hash);
     }
 #[no_mangle]
 unsafe extern "C" fn __free_ftrace_hash_rcu(rcu: *mut rcu_head) {
-    static void __free_ftrace_hash_rcu(struct rcu_head *rcu)
-    {
-    struct ftrace_hash *hash;
-    hash = container_of(rcu, struct ftrace_hash, rcu);
+pub static mut hash: *mut c_void = core::ptr::null_mut();
+    hash = container_of!(rcu, ftrace_hash, rcu);
     free_ftrace_hash(hash);
     }
 #[no_mangle]
 unsafe extern "C" fn free_ftrace_hash_rcu(hash: *mut ftrace_hash) {
-    static void free_ftrace_hash_rcu(struct ftrace_hash *hash)
-    {
-    if (!hash || hash == EMPTY_HASH)
+    if (!hash || hash == EMPTY_HASH) {
     return;
+    }
     call_rcu(&hash.rcu, __free_ftrace_hash_rcu);
     }
 //
@@ -1193,24 +1399,24 @@ unsafe extern "C" fn free_ftrace_hash_rcu(hash: *mut ftrace_hash) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_free_filter(ops: *mut ftrace_ops) {
-    void ftrace_free_filter(struct ftrace_ops *ops)
-    {
     ftrace_ops_init(ops);
-    if (WARN_ON(ops.flags & FTRACE_OPS_FL_ENABLED))
+    if (WARN_ON!(ops.flags & FTRACE_OPS_FL_ENABLED)) {
     return;
+    }
     free_ftrace_hash(ops.func_hash.filter_hash);
     free_ftrace_hash(ops.func_hash.notrace_hash);
     ops.func_hash.filter_hash = EMPTY_HASH;
     ops.func_hash.notrace_hash = EMPTY_HASH;
     }
     EXPORT_SYMBOL_GPL(ftrace_free_filter);
-    struct ftrace_hash *alloc_ftrace_hash(int size_bits)
-    {
-    struct ftrace_hash *hash;
-    int size;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_ftrace_hash(size_bits: c_int) -> *mut c_void {
+pub static mut hash: *mut c_void = core::ptr::null_mut();
+    let mut size = 0;
     hash = kzalloc_obj(*hash);
-    if (!hash)
+    if (!hash) {
     return core::ptr::null_mut();
+    }
     size = 1 << size_bits;
     hash.buckets = kzalloc_objs(*hash.buckets, size);
     if (!hash.buckets) {
@@ -1221,85 +1427,89 @@ pub unsafe extern "C" fn ftrace_free_filter(ops: *mut ftrace_ops) {
     return hash;
     }
 // Used to save filters on functions for modules not loaded yet
-    static int ftrace_add_mod(struct trace_array *tr,
-    const char *func, const char *module,
-    int enable)
-    {
-    struct ftrace_mod_load *ftrace_mod;
-    struct list_head *mod_head = enable ? &tr.mod_trace : &tr.mod_notrace;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_add_mod(tr: *mut trace_array, func: *mut c_char, module: *mut c_char, enable: c_int) -> c_int {
+pub static mut ftrace_mod: *mut c_void = core::ptr::null_mut();
+    let mut mod_head = enable ? &tr.mod_trace : &tr.mod_notrace;
     ftrace_mod = kzalloc_obj(*ftrace_mod);
-    if (!ftrace_mod)
+    if (!ftrace_mod) {
     return -ENOMEM;
+    }
     INIT_LIST_HEAD(&ftrace_mod.list);
     ftrace_mod.func = kstrdup(func, GFP_KERNEL);
     ftrace_mod.module = kstrdup(module, GFP_KERNEL);
     ftrace_mod.enable = enable;
-    if (!ftrace_mod.func || !ftrace_mod.module)
-    goto out_free;
+    if (!ftrace_mod.func || !ftrace_mod.module) {
+// goto;
+    }
     list_add(&ftrace_mod.list, mod_head);
     return 0;
-    out_free:
+// label;
     free_ftrace_mod(ftrace_mod);
     return -ENOMEM;
     }
-    static struct ftrace_hash *
-    alloc_and_copy_ftrace_hash(int size_bits, struct ftrace_hash *hash)
-    {
-    struct ftrace_func_entry *entry;
-    struct ftrace_hash *new_hash;
-    int size;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn alloc_and_copy_ftrace_hash(size_bits: c_int, hash: *mut ftrace_hash) -> *mut c_void {
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut new_hash: *mut c_void = core::ptr::null_mut();
+    let mut size = 0;
+    let mut i = 0;
     new_hash = alloc_ftrace_hash(size_bits);
-    if (!new_hash)
+    if (!new_hash) {
     return core::ptr::null_mut();
-    if (hash)
+    }
+    if (hash) {
     new_hash.flags = hash.flags;
+    }
 // Empty hash?
-    if (ftrace_hash_empty(hash))
+    if (ftrace_hash_empty(hash)) {
     return new_hash;
+    }
     size = 1 << hash.size_bits;
-    for (i = 0; i < size; i++) {
+    while (i < size) {
     hlist_for_each_entry(entry, &hash.buckets[i], hlist) {
-    if (add_ftrace_hash_entry_direct(new_hash, entry.ip, entry.direct) == core::ptr::null_mut())
-    goto free_hash;
+    if (add_ftrace_hash_entry_direct(new_hash, entry.ip, entry.direct) == core::ptr::null_mut()) {
+// goto;
+    }
     }
     }
     FTRACE_WARN_ON(new_hash.count != hash.count);
     return new_hash;
-    free_hash:
+// label;
     free_ftrace_hash(new_hash);
     return core::ptr::null_mut();
     }
-    static void ftrace_hash_rec_disable_modify(struct ftrace_ops *ops);
-    static void ftrace_hash_rec_enable_modify(struct ftrace_ops *ops);
-    static int ftrace_hash_ipmodify_update(struct ftrace_ops *ops,
-    struct ftrace_hash *new_hash);
+// forward_decl: ftrace_hash_rec_disable_modify;
+// forward_decl: ftrace_hash_rec_enable_modify;
+// forward_decl: ftrace_hash_ipmodify_update;
 //
 // Allocate a new hash and remove entries from @src and move them to the new hash.
 // On success, the @src hash will be empty and should be freed.
 //
-    static struct ftrace_hash *__move_hash(struct ftrace_hash *src, int size)
-    {
-    struct ftrace_func_entry *entry;
-    struct ftrace_hash *new_hash;
-    struct hlist_head *hhd;
-    struct hlist_node *tn;
-    let mut bits: c_int = 0;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn __move_hash(src: *mut ftrace_hash, size: c_int) -> *mut c_void {
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut new_hash: *mut c_void = core::ptr::null_mut();
+pub static mut hhd: *mut c_void = core::ptr::null_mut();
+pub static mut tn: *mut c_void = core::ptr::null_mut();
+pub static mut bits: c_int = 0;
+    let mut i = 0;
 //
 // Use around half the size (max bit of it), but
 // a minimum of 2 is fine (as size of 0 or 1 both give 1 for bits).
 //
     bits = fls(size / 2);
 // Don't allocate too much
-    if (bits > FTRACE_HASH_MAX_BITS)
+    if (bits > FTRACE_HASH_MAX_BITS) {
     bits = FTRACE_HASH_MAX_BITS;
+    }
     new_hash = alloc_ftrace_hash(bits);
-    if (!new_hash)
+    if (!new_hash) {
     return core::ptr::null_mut();
+    }
     new_hash.flags = src.flags;
     size = 1 << src.size_bits;
-    for (i = 0; i < size; i++) {
+    while (i < size) {
     hhd = &src.buckets[i];
     hlist_for_each_entry_safe(entry, tn, hhd, hlist) {
     remove_hash_entry(src, entry);
@@ -1309,15 +1519,15 @@ pub unsafe extern "C" fn ftrace_free_filter(ops: *mut ftrace_ops) {
     return new_hash;
     }
 // Move the @src entries to a newly allocated hash
-    static struct ftrace_hash *
-    __ftrace_hash_move(struct ftrace_hash *src)
-    {
-    let mut size: c_int = src.count;
+#[no_mangle]
+pub unsafe extern "C" fn __ftrace_hash_move(src: *mut ftrace_hash) -> *mut c_void {
+pub static mut size: c_int = 0;
 //
 // If the new source is empty, just return the empty_hash.
 //
-    if (ftrace_hash_empty(src))
+    if (ftrace_hash_empty(src)) {
     return EMPTY_HASH;
+    }
     return __move_hash(src, size);
     }
 //
@@ -1340,18 +1550,18 @@ pub unsafe extern "C" fn ftrace_free_filter(ops: *mut ftrace_ops) {
 //
 // Regardless of return type, @src should be freed with free_ftrace_hash().
 //
-    static int
-    ftrace_hash_move(struct ftrace_ops *ops, int enable,
-    struct ftrace_hash **dst, struct ftrace_hash *src)
-    {
-    struct ftrace_hash *new_hash;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_hash_move(ops: *mut ftrace_ops, enable: c_int, dst: *mut *mut ftrace_hash, src: *mut ftrace_hash) -> c_int {
+pub static mut new_hash: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
 // Reject setting notrace hash on IPMODIFY ftrace_ops
-    if (ops.flags & FTRACE_OPS_FL_IPMODIFY && !enable)
+    if (ops.flags & FTRACE_OPS_FL_IPMODIFY && !enable) {
     return -EINVAL;
+    }
     new_hash = __ftrace_hash_move(src);
-    if (!new_hash)
+    if (!new_hash) {
     return -ENOMEM;
+    }
 // Make sure this can be applied if it is IPMODIFY ftrace_ops
     if (enable) {
 // IPMODIFY should be updated only when filter_hash updating
@@ -1370,9 +1580,8 @@ pub unsafe extern "C" fn ftrace_free_filter(ops: *mut ftrace_ops) {
     ftrace_hash_rec_enable_modify(ops);
     return 0;
     }
-    static bool hash_contains_ip(unsigned long ip,
-    struct ftrace_ops_hash *hash)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn hash_contains_ip(ip: c_ulong, hash: *mut ftrace_ops_hash) -> bool {
 //
 // The function record is a match if it exists in the filter
 // hash and not in the notrace hash. Note, an empty hash is
@@ -1396,26 +1605,28 @@ pub unsafe extern "C" fn ftrace_free_filter(ops: *mut ftrace_ops) {
 // This needs to be called with preemption disabled as
 // the hashes are freed with call_rcu().
 //
-    int
-    ftrace_ops_test(struct ftrace_ops *ops, unsigned long ip, void *regs)
-    {
-    struct ftrace_ops_hash hash;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_ops_test(ops: *mut ftrace_ops, ip: c_ulong, regs: *mut c_void) -> c_int {
+pub static mut hash: usize = 0;
+    let mut ret = 0;
 
 //
 // There's a small race when adding ops that the ftrace handler
 // that wants regs, may be called without them. We can not
 // allow that handler to be called if regs is NULL.
 //
-    if (regs == core::ptr::null_mut() && (ops.flags & FTRACE_OPS_FL_SAVE_REGS))
+    if (regs == core::ptr::null_mut() && (ops.flags & FTRACE_OPS_FL_SAVE_REGS)) {
     return 0;
+    }
 
     rcu_assign_pointer(hash.filter_hash, ops.func_hash.filter_hash);
     rcu_assign_pointer(hash.notrace_hash, ops.func_hash.notrace_hash);
-    if (hash_contains_ip(ip, &hash))
+    if (hash_contains_ip(ip, &hash)) {
     ret = 1;
-    else
+    }
+    else {
     ret = 0;
+    }
     return ret;
     }
 //
@@ -1423,42 +1634,44 @@ pub unsafe extern "C" fn ftrace_free_filter(ops: *mut ftrace_ops) {
 // you must use a goto.
 //
 
-    for (pg = ftrace_pages_start; pg; pg = pg.next) {		\
-    int _____i;						\
-    for (_____i = 0; _____i < pg.index; _____i++) {	\
+    while (pg) {		
+    let mut _____i = 0;						
+    while (_____i < pg.index) {	
     rec = &pg.records[_____i];
 
-    }				\
+    }				
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_cmp_recs(a: *const c_void, b: *const c_void) -> c_int {
-    static int ftrace_cmp_recs(const void *a, const void *b)
-    {
-    const struct dyn_ftrace *key = a;
-    const struct dyn_ftrace *rec = b;
-    if (key.flags < rec.ip)
+    let mut key = a;
+    let mut rec = b;
+    if (key.flags < rec.ip) {
     return -1;
-    if (key.ip >= rec.ip + MCOUNT_INSN_SIZE)
+    }
+    if (key.ip >= rec.ip + MCOUNT_INSN_SIZE) {
     return 1;
+    }
     return 0;
     }
-    static struct dyn_ftrace *lookup_rec(unsigned long start, unsigned long end)
-    {
-    struct ftrace_page *pg;
-    struct dyn_ftrace *rec = core::ptr::null_mut();
-    struct dyn_ftrace key;
+#[no_mangle]
+pub unsafe extern "C" fn lookup_rec(start: c_ulong, end: c_ulong) -> *mut c_void {
+pub static mut pg: *mut c_void = core::ptr::null_mut();
+    let mut rec = core::ptr::null_mut();
+pub static mut key: usize = 0;
     key.ip = start;
     key.flags = end;	/* overload flags, as it is unsigned long */
-    for (pg = ftrace_pages_start; pg; pg = pg.next) {
+    while (pg) {
     if (pg.index == 0 ||
     end < pg.records[0].ip ||
-    start >= (pg.records[pg.index - 1].ip + MCOUNT_INSN_SIZE))
+    start >= (pg.records[pg.index - 1].ip + MCOUNT_INSN_SIZE)) {
     continue;
+    }
     rec = bsearch(&key, pg.records, pg.index,
-    sizeof(struct dyn_ftrace),
+    sizeof!(dyn_ftrace),
     ftrace_cmp_recs);
-    if (rec)
+    if (rec) {
     break;
+    }
     }
     return rec;
     }
@@ -1476,14 +1689,13 @@ unsafe extern "C" fn ftrace_cmp_recs(a: *const c_void, b: *const c_void) -> c_in
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_location_range(start: c_ulong, end: c_ulong) -> c_ulong {
-    unsigned long ftrace_location_range(unsigned long start, unsigned long end)
-    {
-    struct dyn_ftrace *rec;
-    let mut ip: c_ulong = 0;
+pub static mut rec: *mut c_void = core::ptr::null_mut();
+pub static mut ip: c_ulong = 0;
     rcu_read_lock();
     rec = lookup_rec(start, end);
-    if (rec)
+    if (rec) {
     ip = rec.ip;
+    }
     rcu_read_unlock();
     return ip;
     }
@@ -1498,18 +1710,18 @@ pub unsafe extern "C" fn ftrace_location_range(start: c_ulong, end: c_ulong) -> 
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_location(ip: c_ulong) -> c_ulong {
-    unsigned long ftrace_location(unsigned long ip)
-    {
-    unsigned long loc;
-    unsigned long offset;
-    unsigned long size;
+    let mut loc = 0;
+    let mut offset = 0;
+    let mut size = 0;
     loc = ftrace_location_range(ip, ip);
     if (!loc) {
-    if (!kallsyms_lookup_size_offset(ip, &size, &offset))
+    if (!kallsyms_lookup_size_offset(ip, &size, &offset)) {
     return 0;
+    }
 // map sym+0 to __fentry__
-    if (!offset)
+    if (!offset) {
     loc = ftrace_location_range(ip, ip + size - 1);
+    }
     }
     return loc;
     }
@@ -1525,9 +1737,7 @@ pub unsafe extern "C" fn ftrace_location(ip: c_ulong) -> c_ulong {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_text_reserved(start: *const c_void, end: *const c_void) -> c_int {
-    int ftrace_text_reserved(const void *start, const void *end)
-    {
-    unsigned long ret;
+    let mut ret = 0;
     ret = ftrace_location_range((unsigned long)start,
     (unsigned long)end);
     return (int)!!ret;
@@ -1535,12 +1745,9 @@ pub unsafe extern "C" fn ftrace_text_reserved(start: *const c_void, end: *const 
 // Test if ops registered to this rec needs regs
 #[no_mangle]
 unsafe extern "C" fn test_rec_ops_needs_regs(rec: *mut dyn_ftrace) -> bool {
-    static bool test_rec_ops_needs_regs(struct dyn_ftrace *rec)
-    {
-    struct ftrace_ops *ops;
-    let mut keep_regs: bool = false;
-    for (ops = ftrace_ops_list;
-    ops != &ftrace_list_end; ops = ops.next) {
+pub static mut ops: *mut c_void = core::ptr::null_mut();
+pub static mut keep_regs: bool = false;
+    while (ops != &ftrace_list_end) {
 // pass rec in as regs to have non-NULL val
     if (ftrace_ops_test(ops, rec.ip, rec)) {
     if (ops.flags & FTRACE_OPS_FL_SAVE_REGS) {
@@ -1551,16 +1758,11 @@ unsafe extern "C" fn test_rec_ops_needs_regs(rec: *mut dyn_ftrace) -> bool {
     }
     return  keep_regs;
     }
-    static struct ftrace_ops *
-    ftrace_find_tramp_ops_any(struct dyn_ftrace *rec);
-    static struct ftrace_ops *
-    ftrace_find_tramp_ops_any_other(struct dyn_ftrace *rec, struct ftrace_ops *op_exclude);
-    static struct ftrace_ops *
-    ftrace_find_tramp_ops_next(struct dyn_ftrace *rec, struct ftrace_ops *ops);
+// forward_decl: ftrace_find_tramp_ops_any;
+// forward_decl: ftrace_find_tramp_ops_any_other;
+// forward_decl: ftrace_find_tramp_ops_next;
 #[no_mangle]
 unsafe extern "C" fn skip_record(rec: *mut dyn_ftrace) -> bool {
-    static bool skip_record(struct dyn_ftrace *rec)
-    {
 //
 // At boot up, weak functions are set to disable. Function tracing
 // can be enabled before they are, and they still need to be disabled now.
@@ -1580,40 +1782,43 @@ unsafe extern "C" fn skip_record(rec: *mut dyn_ftrace) -> bool {
 // @inc: If true, the functions associated to @ops are added to
 // the dyn_ftrace records, otherwise they are removed.
 //
-    static bool __ftrace_hash_rec_update(struct ftrace_ops *ops,
-    bool inc)
-    {
-    struct ftrace_hash *hash;
-    struct ftrace_hash *notrace_hash;
-    struct ftrace_page *pg;
-    struct dyn_ftrace *rec;
-    let mut update: bool = false;
-    let mut count: c_int = 0;
-    let mut all: c_int = false;
+#[no_mangle]
+pub unsafe extern "C" fn __ftrace_hash_rec_update(ops: *mut ftrace_ops, inc: bool) -> bool {
+pub static mut hash: *mut c_void = core::ptr::null_mut();
+pub static mut notrace_hash: *mut c_void = core::ptr::null_mut();
+pub static mut pg: *mut c_void = core::ptr::null_mut();
+pub static mut rec: *mut c_void = core::ptr::null_mut();
+pub static mut update: bool = false;
+pub static mut count: c_int = 0;
+pub static mut all: c_int = false;
 // Only update if the ops has been registered
-    if (!(ops.flags & FTRACE_OPS_FL_ENABLED))
+    if (!(ops.flags & FTRACE_OPS_FL_ENABLED)) {
     return false;
+    }
 //
 // If the count is zero, we update all records.
 // Otherwise we just update the items in the hash.
 //
     hash = ops.func_hash.filter_hash;
     notrace_hash = ops.func_hash.notrace_hash;
-    if (ftrace_hash_empty(hash))
+    if (ftrace_hash_empty(hash)) {
     all = true;
+    }
     do_for_each_ftrace_rec(pg, rec) {
-    let mut in_notrace_hash: c_int = 0;
-    let mut in_hash: c_int = 0;
-    let mut match: c_int = 0;
-    if (skip_record(rec))
+pub static mut in_notrace_hash: c_int = 0;
+pub static mut in_hash: c_int = 0;
+pub static mut match: c_int = 0;
+    if (skip_record(rec)) {
     continue;
+    }
     if (all) {
 //
 // Only the filter_hash affects all records.
 // Update if the record is not in the notrace hash.
 //
-    if (!notrace_hash || !ftrace_lookup_ip(notrace_hash, rec.ip))
+    if (!notrace_hash || !ftrace_lookup_ip(notrace_hash, rec.ip)) {
     match = 1;
+    }
     } else {
     in_hash = !!ftrace_lookup_ip(hash, rec.ip);
     in_notrace_hash = !!ftrace_lookup_ip(notrace_hash, rec.ip);
@@ -1621,25 +1826,30 @@ unsafe extern "C" fn skip_record(rec: *mut dyn_ftrace) -> bool {
 // We want to match all functions that are in the hash but
 // not in the other hash.
 //
-    if (in_hash && !in_notrace_hash)
+    if (in_hash && !in_notrace_hash) {
     match = 1;
     }
-    if (!match)
+    }
+    if (!match) {
     continue;
+    }
     if (inc) {
-    rec.flags++;
-    if (FTRACE_WARN_ON(ftrace_rec_count(rec) == FTRACE_REF_MAX))
+    rec.flags += 1;
+    if (FTRACE_WARN_ON(ftrace_rec_count(rec) == FTRACE_REF_MAX)) {
     return false;
-    if (ops.flags & FTRACE_OPS_FL_DIRECT)
+    }
+    if (ops.flags & FTRACE_OPS_FL_DIRECT) {
     rec.flags |= FTRACE_FL_DIRECT;
+    }
 //
 // If there's only a single callback registered to a
 // function, and the ops has a trampoline registered
 // for it, then we can call it directly.
 //
-    if (ftrace_rec_count(rec) == 1 && ops.trampoline)
+    if (ftrace_rec_count(rec) == 1 && ops.trampoline) {
     rec.flags |= FTRACE_FL_TRAMP;
-    else
+    }
+    else {
 //
 // If we are adding another function callback
 // to this function, and the previous had a
@@ -1647,24 +1857,28 @@ unsafe extern "C" fn skip_record(rec: *mut dyn_ftrace) -> bool {
 // back to the default trampoline.
 //
     rec.flags &= ~FTRACE_FL_TRAMP;
+    }
 //
 // If any ops wants regs saved for this function
 // then all ops will get saved regs.
 //
-    if (ops.flags & FTRACE_OPS_FL_SAVE_REGS)
+    if (ops.flags & FTRACE_OPS_FL_SAVE_REGS) {
     rec.flags |= FTRACE_FL_REGS;
+    }
     } else {
-    if (FTRACE_WARN_ON(ftrace_rec_count(rec) == 0))
+    if (FTRACE_WARN_ON(ftrace_rec_count(rec) == 0)) {
     return false;
-    rec.flags--;
+    }
+    rec.flags -= 1;
 //
 // Only the internal direct_ops should have the
 // DIRECT flag set. Thus, if it is removing a
 // function, then that function should no longer
 // be direct.
 //
-    if (ops.flags & FTRACE_OPS_FL_DIRECT)
+    if (ops.flags & FTRACE_OPS_FL_DIRECT) {
     rec.flags &= ~FTRACE_FL_DIRECT;
+    }
 //
 // If the rec had REGS enabled and the ops that is
 // being removed had REGS set, then see if there is
@@ -1674,8 +1888,9 @@ unsafe extern "C" fn skip_record(rec: *mut dyn_ftrace) -> bool {
     if (ftrace_rec_count(rec) > 0 &&
     rec.flags & FTRACE_FL_REGS &&
     ops.flags & FTRACE_OPS_FL_SAVE_REGS) {
-    if (!test_rec_ops_needs_regs(rec))
+    if (!test_rec_ops_needs_regs(rec)) {
     rec.flags &= ~FTRACE_FL_REGS;
+    }
     }
 //
 // The TRAMP needs to be set only if rec count
@@ -1685,10 +1900,12 @@ unsafe extern "C" fn skip_record(rec: *mut dyn_ftrace) -> bool {
 // to it.
 //
     if (ftrace_rec_count(rec) == 1 &&
-    ftrace_find_tramp_ops_any_other(rec, ops))
+    ftrace_find_tramp_ops_any_other(rec, ops)) {
     rec.flags |= FTRACE_FL_TRAMP;
-    else
+    }
+    else {
     rec.flags &= ~FTRACE_FL_TRAMP;
+    }
 //
 // flags will be cleared in ftrace_check_record()
 // if rec count is zero.
@@ -1698,18 +1915,21 @@ unsafe extern "C" fn skip_record(rec: *mut dyn_ftrace) -> bool {
 // If the rec has a single associated ops, and ops->func can be
 // called directly, allow the call site to call via the ops.
 //
-    if (IS_ENABLED(CONFIG_DYNAMIC_FTRACE_WITH_CALL_OPS) &&
+    if (IS_ENABLED!(CONFIG_DYNAMIC_FTRACE_WITH_CALL_OPS) &&
     ftrace_rec_count(rec) == 1 &&
-    ftrace_ops_get_func(ops) == ops.func)
+    ftrace_ops_get_func(ops) == ops.func) {
     rec.flags |= FTRACE_FL_CALL_OPS;
-    else
+    }
+    else {
     rec.flags &= ~FTRACE_FL_CALL_OPS;
-    count++;
+    }
+    count += 1;
 // Must match FTRACE_UPDATE_CALLS in ftrace_modify_all_code()
     update |= ftrace_test_record(rec, true) != FTRACE_UPDATE_IGNORE;
 // Shortcut, if we handled all records, we are done.
-    if (!all && count == hash.count)
+    if (!all && count == hash.count) {
     return update;
+    }
     } while_for_each_ftrace_rec();
     return update;
     }
@@ -1720,8 +1940,6 @@ unsafe extern "C" fn skip_record(rec: *mut dyn_ftrace) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn ftrace_hash_rec_disable(ops: *mut ftrace_ops) -> bool {
-    static bool ftrace_hash_rec_disable(struct ftrace_ops *ops)
-    {
     return __ftrace_hash_rec_update(ops, false);
     }
 //
@@ -1731,8 +1949,6 @@ unsafe extern "C" fn ftrace_hash_rec_disable(ops: *mut ftrace_ops) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn ftrace_hash_rec_enable(ops: *mut ftrace_ops) -> bool {
-    static bool ftrace_hash_rec_enable(struct ftrace_ops *ops)
-    {
     return __ftrace_hash_rec_update(ops, true);
     }
 //
@@ -1754,34 +1970,31 @@ unsafe extern "C" fn ftrace_hash_rec_enable(ops: *mut ftrace_ops) -> bool {
 //
 #[no_mangle]
 unsafe extern "C" fn ftrace_hash_rec_update_modify(ops: *mut ftrace_ops, inc: bool) {
-    static void ftrace_hash_rec_update_modify(struct ftrace_ops *ops, bool inc)
-    {
-    struct ftrace_ops *op;
+pub static mut op: *mut c_void = core::ptr::null_mut();
     __ftrace_hash_rec_update(ops, inc);
-    if (ops.func_hash != &global_ops.local_hash)
+    if (ops.func_hash != &global_ops.local_hash) {
     return;
+    }
 //
 // If the ops shares the global_ops hash, then we need to update
 // all ops that are enabled and use this hash.
 //
     do_for_each_ftrace_op(op, ftrace_ops_list) {
 // Already done
-    if (op == ops)
+    if (op == ops) {
     continue;
-    if (op.func_hash == &global_ops.local_hash)
+    }
+    if (op.func_hash == &global_ops.local_hash) {
     __ftrace_hash_rec_update(op, inc);
+    }
     } while_for_each_ftrace_op(op);
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_hash_rec_disable_modify(ops: *mut ftrace_ops) {
-    static void ftrace_hash_rec_disable_modify(struct ftrace_ops *ops)
-    {
     ftrace_hash_rec_update_modify(ops, false);
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_hash_rec_enable_modify(ops: *mut ftrace_ops) {
-    static void ftrace_hash_rec_enable_modify(struct ftrace_ops *ops)
-    {
     ftrace_hash_rec_update_modify(ops, true);
     }
 //
@@ -1800,50 +2013,56 @@ unsafe extern "C" fn ftrace_hash_rec_enable_modify(ops: *mut ftrace_ops) {
 // the return value to the caller and eventually to the owner of the DIRECT
 // ops.
 //
-    static int __ftrace_hash_update_ipmodify(struct ftrace_ops *ops,
-    struct ftrace_hash *old_hash,
-    struct ftrace_hash *new_hash,
-    bool update_target)
-    {
-    struct ftrace_page *pg;
+#[no_mangle]
+pub unsafe extern "C" fn __ftrace_hash_update_ipmodify(ops: *mut ftrace_ops, old_hash: *mut ftrace_hash, new_hash: *mut ftrace_hash, update_target: bool) -> c_int {
+pub static mut pg: *mut c_void = core::ptr::null_mut();
     struct dyn_ftrace *rec, *end = core::ptr::null_mut();
-    int in_old, in_new;
-    bool is_ipmodify, is_direct;
+    let mut in_old = 0;
+    let mut in_new = 0;
+    let mut is_ipmodify = 0;
+    let mut is_direct = 0;
 // Only update if the ops has been registered
-    if (!(ops.flags & FTRACE_OPS_FL_ENABLED))
+    if (!(ops.flags & FTRACE_OPS_FL_ENABLED)) {
     return 0;
+    }
     is_ipmodify = ops.flags & FTRACE_OPS_FL_IPMODIFY;
     is_direct = ops.flags & FTRACE_OPS_FL_DIRECT;
 // neither IPMODIFY nor DIRECT, skip
-    if (!is_ipmodify && !is_direct)
+    if (!is_ipmodify && !is_direct) {
     return 0;
-    if (WARN_ON_ONCE(is_ipmodify && is_direct))
+    }
+    if (WARN_ON_ONCE!(is_ipmodify && is_direct)) {
     return 0;
+    }
 //
 // Since the IPMODIFY and DIRECT are very address sensitive
 // actions, we do not allow ftrace_ops to set all functions to new
 // hash.
 //
-    if (!new_hash || !old_hash)
+    if (!new_hash || !old_hash) {
     return -EINVAL;
+    }
 // Update rec->flags
     do_for_each_ftrace_rec(pg, rec) {
-    if (rec.flags & FTRACE_FL_DISABLED)
+    if (rec.flags & FTRACE_FL_DISABLED) {
     continue;
+    }
 //
 // Unless we are updating the target of a direct function,
 // we only need to update differences of filter_hash
 //
     in_old = !!ftrace_lookup_ip(old_hash, rec.ip);
     in_new = !!ftrace_lookup_ip(new_hash, rec.ip);
-    if (!update_target && (in_old == in_new))
+    if (!update_target && (in_old == in_new)) {
     continue;
+    }
     if (in_new) {
     if (rec.flags & FTRACE_FL_IPMODIFY) {
-    int ret;
+    let mut ret = 0;
 // Cannot have two ipmodify on same rec
-    if (is_ipmodify)
-    goto rollback;
+    if (is_ipmodify) {
+// goto;
+    }
 //
 // If this is called by __modify_ftrace_direct()
 // then it is only changing where the direct
@@ -1860,11 +2079,13 @@ unsafe extern "C" fn ftrace_hash_rec_enable_modify(ops: *mut ftrace_ops) {
 // ops. Run SHARE_IPMODIFY_SELF, to check
 // whether sharing is supported.
 //
-    if (!ops.ops_func)
+    if (!ops.ops_func) {
     return -EBUSY;
+    }
     ret = ops.ops_func(ops, rec.ip, FTRACE_OPS_CMD_ENABLE_SHARE_IPMODIFY_SELF);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     } else if (is_ipmodify) {
     rec.flags |= FTRACE_FL_IPMODIFY;
     }
@@ -1873,87 +2094,92 @@ unsafe extern "C" fn ftrace_hash_rec_enable_modify(ops: *mut ftrace_ops) {
     }
     } while_for_each_ftrace_rec();
     return 0;
-    rollback:
+// label;
     end = rec;
 // Roll back what we did above
     do_for_each_ftrace_rec(pg, rec) {
-    if (rec.flags & FTRACE_FL_DISABLED)
+    if (rec.flags & FTRACE_FL_DISABLED) {
     continue;
-    if (rec == end)
+    }
+    if (rec == end) {
     return -EBUSY;
+    }
     in_old = !!ftrace_lookup_ip(old_hash, rec.ip);
     in_new = !!ftrace_lookup_ip(new_hash, rec.ip);
-    if (in_old == in_new)
+    if (in_old == in_new) {
     continue;
-    if (in_new)
+    }
+    if (in_new) {
     rec.flags &= ~FTRACE_FL_IPMODIFY;
-    else
+    }
+    else {
     rec.flags |= FTRACE_FL_IPMODIFY;
+    }
     } while_for_each_ftrace_rec();
     return -EBUSY;
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_hash_ipmodify_enable(ops: *mut ftrace_ops) -> c_int {
-    static int ftrace_hash_ipmodify_enable(struct ftrace_ops *ops)
-    {
-    struct ftrace_hash *hash = ops.func_hash.filter_hash;
-    if (ftrace_hash_empty(hash))
+    let mut hash = ops.func_hash.filter_hash;
+    if (ftrace_hash_empty(hash)) {
     hash = core::ptr::null_mut();
+    }
     return __ftrace_hash_update_ipmodify(ops, EMPTY_HASH, hash, false);
     }
 // Disabling always succeeds
 #[no_mangle]
 unsafe extern "C" fn ftrace_hash_ipmodify_disable(ops: *mut ftrace_ops) {
-    static void ftrace_hash_ipmodify_disable(struct ftrace_ops *ops)
-    {
-    struct ftrace_hash *hash = ops.func_hash.filter_hash;
-    if (ftrace_hash_empty(hash))
+    let mut hash = ops.func_hash.filter_hash;
+    if (ftrace_hash_empty(hash)) {
     hash = core::ptr::null_mut();
+    }
     __ftrace_hash_update_ipmodify(ops, hash, EMPTY_HASH, false);
     }
-    static int ftrace_hash_ipmodify_update(struct ftrace_ops *ops,
-    struct ftrace_hash *new_hash)
-    {
-    struct ftrace_hash *old_hash = ops.func_hash.filter_hash;
-    if (ftrace_hash_empty(old_hash))
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_hash_ipmodify_update(ops: *mut ftrace_ops, new_hash: *mut ftrace_hash) -> c_int {
+    let mut old_hash = ops.func_hash.filter_hash;
+    if (ftrace_hash_empty(old_hash)) {
     old_hash = core::ptr::null_mut();
-    if (ftrace_hash_empty(new_hash))
+    }
+    if (ftrace_hash_empty(new_hash)) {
     new_hash = core::ptr::null_mut();
+    }
     return __ftrace_hash_update_ipmodify(ops, old_hash, new_hash, false);
     }
 #[no_mangle]
 unsafe extern "C" fn print_ip_ins(fmt: *const c_char, p: *const c_uchar) {
-    static void print_ip_ins(const char *fmt, const unsigned char *p)
-    {
     char ins[MCOUNT_INSN_SIZE];
     if (copy_from_kernel_nofault(ins, p, MCOUNT_INSN_SIZE)) {
-    printk(KERN_CONT "%s[FAULT] %px\n", fmt, p);
+    printk("%s[FAULT] %px\n", fmt, p);
     return;
     }
-    printk(KERN_CONT "%s", fmt);
+    printk("%s", fmt);
     pr_cont("%*phC", MCOUNT_INSN_SIZE, ins);
     }
     enum ftrace_bug_type ftrace_bug_type;
-    const void *ftrace_expected;
+pub static mut ftrace_expected: *mut c_void = core::ptr::null_mut();
 #[no_mangle]
 unsafe extern "C" fn print_bug_type() {
-    static void print_bug_type(void)
-    {
-    switch (ftrace_bug_type) {
-    case FTRACE_BUG_UNKNOWN:
-    break;
-    case FTRACE_BUG_INIT:
-    pr_info("Initializing ftrace call sites\n");
-    break;
-    case FTRACE_BUG_NOP:
-    pr_info("Setting ftrace call site to NOP\n");
-    break;
-    case FTRACE_BUG_CALL:
-    pr_info("Setting ftrace call site to call ftrace function\n");
-    break;
-    case FTRACE_BUG_UPDATE:
-    pr_info("Updating ftrace call site to call a different ftrace function\n");
-    break;
+    match (ftrace_bug_type) {
+    FTRACE_BUG_UNKNOWN => {
+    // break;
+    }
+    FTRACE_BUG_INIT => {
+    pr_info!("Initializing ftrace call sites\n");
+    // break;
+    }
+    FTRACE_BUG_NOP => {
+    pr_info!("Setting ftrace call site to NOP\n");
+    // break;
+    }
+    FTRACE_BUG_CALL => {
+    pr_info!("Setting ftrace call site to call ftrace function\n");
+    // break;
+    }
+    FTRACE_BUG_UPDATE => {
+    pr_info!("Updating ftrace call site to call a different ftrace function\n");
+    // break;
+    }
     }
     }
 //
@@ -1970,37 +2196,39 @@ unsafe extern "C" fn print_bug_type() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_bug(failed: c_int, rec: *mut dyn_ftrace) {
-    void ftrace_bug(int failed, struct dyn_ftrace *rec)
-    {
-    let mut ip: c_ulong = rec ? rec.ip : 0;
-    pr_info("------------[ ftrace bug ]------------\n");
-    switch (failed) {
-    case -EFAULT:
-    pr_info("ftrace faulted on modifying ");
+pub static mut ip: c_ulong = 0;
+    pr_info!("------------[ ftrace bug ]------------\n");
+    match (failed) {
+    -EFAULT => {
+    pr_info!("ftrace faulted on modifying ");
     print_ip_sym(KERN_INFO, ip);
-    break;
-    case -EINVAL:
-    pr_info("ftrace failed to modify ");
+    // break;
+    }
+    -EINVAL => {
+    pr_info!("ftrace failed to modify ");
     print_ip_sym(KERN_INFO, ip);
-    print_ip_ins(" actual:   ", (unsigned char *)ip);
+    print_ip_ins(" actual:   ", ip);
     pr_cont("\n");
     if (ftrace_expected) {
     print_ip_ins(" expected: ", ftrace_expected);
     pr_cont("\n");
     }
-    break;
-    case -EPERM:
-    pr_info("ftrace faulted on writing ");
+    // break;
+    }
+    -EPERM => {
+    pr_info!("ftrace faulted on writing ");
     print_ip_sym(KERN_INFO, ip);
-    break;
-    default:
-    pr_info("ftrace faulted on unknown error ");
+    // break;
+    }
+    _ => {
+    pr_info!("ftrace faulted on unknown error ");
     print_ip_sym(KERN_INFO, ip);
+    }
     }
     print_bug_type();
     if (rec) {
-    struct ftrace_ops *ops = core::ptr::null_mut();
-    pr_info("ftrace record flags: %lx\n", rec.flags);
+    let mut ops = core::ptr::null_mut();
+    pr_info!("ftrace record flags: %lx\n", rec.flags);
     pr_cont(" (%ld)%s%s", ftrace_rec_count(rec),
     rec.flags & FTRACE_FL_REGS ? " R" : "  ",
     rec.flags & FTRACE_FL_CALL_OPS ? " O" : "  ");
@@ -2009,12 +2237,13 @@ pub unsafe extern "C" fn ftrace_bug(failed: c_int, rec: *mut dyn_ftrace) {
     if (ops) {
     do {
     pr_cont("\ttramp: %pS (%pS)",
-    (void *)ops.trampoline,
-    (void *)ops.func);
+    ops.trampoline,
+    ops.func);
     ops = ftrace_find_tramp_ops_next(rec, ops);
     } while (ops);
-    } else
+    } else {
     pr_cont("\ttramp: ERROR!");
+    }
     }
     ip = ftrace_get_addr_curr(rec);
     pr_cont("\n expected tramp: %lx\n", ip);
@@ -2023,12 +2252,11 @@ pub unsafe extern "C" fn ftrace_bug(failed: c_int, rec: *mut dyn_ftrace) {
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_check_record(rec: *mut dyn_ftrace, enable: bool, update: bool) -> c_int {
-    static int ftrace_check_record(struct dyn_ftrace *rec, bool enable, bool update)
-    {
-    let mut flag: c_ulong = 0UL;
+pub static mut flag: c_ulong = 0;
     ftrace_bug_type = FTRACE_BUG_UNKNOWN;
-    if (skip_record(rec))
+    if (skip_record(rec)) {
     return FTRACE_UPDATE_IGNORE;
+    }
 //
 // If we are updating calls:
 //
@@ -2040,8 +2268,9 @@ unsafe extern "C" fn ftrace_check_record(rec: *mut dyn_ftrace, enable: bool, upd
 // If we are disabling calls, then disable all records that
 // are enabled.
 //
-    if (enable && ftrace_rec_count(rec))
+    if (enable && ftrace_rec_count(rec)) {
     flag = FTRACE_FL_ENABLED;
+    }
 //
 // If enabling and the REGS flag does not match the REGS_EN, or
 // the TRAMP flag doesn't match the TRAMP_EN, then do not ignore
@@ -2050,11 +2279,13 @@ unsafe extern "C" fn ftrace_check_record(rec: *mut dyn_ftrace, enable: bool, upd
 //
     if (flag) {
     if (!(rec.flags & FTRACE_FL_REGS) !=
-    !(rec.flags & FTRACE_FL_REGS_EN))
+    !(rec.flags & FTRACE_FL_REGS_EN)) {
     flag |= FTRACE_FL_REGS;
+    }
     if (!(rec.flags & FTRACE_FL_TRAMP) !=
-    !(rec.flags & FTRACE_FL_TRAMP_EN))
+    !(rec.flags & FTRACE_FL_TRAMP_EN)) {
     flag |= FTRACE_FL_TRAMP;
+    }
 //
 // Direct calls are special, as count matters.
 // We must test the record for direct, if the
@@ -2067,8 +2298,9 @@ unsafe extern "C" fn ftrace_check_record(rec: *mut dyn_ftrace, enable: bool, upd
 //
     if (ftrace_rec_count(rec) == 1) {
     if (!(rec.flags & FTRACE_FL_DIRECT) !=
-    !(rec.flags & FTRACE_FL_DIRECT_EN))
+    !(rec.flags & FTRACE_FL_DIRECT_EN)) {
     flag |= FTRACE_FL_DIRECT;
+    }
     } else if (rec.flags & FTRACE_FL_DIRECT_EN) {
     flag |= FTRACE_FL_DIRECT;
     }
@@ -2079,35 +2311,42 @@ unsafe extern "C" fn ftrace_check_record(rec: *mut dyn_ftrace, enable: bool, upd
 //
     if (ftrace_rec_count(rec) == 1) {
     if (!(rec.flags & FTRACE_FL_CALL_OPS) !=
-    !(rec.flags & FTRACE_FL_CALL_OPS_EN))
+    !(rec.flags & FTRACE_FL_CALL_OPS_EN)) {
     flag |= FTRACE_FL_CALL_OPS;
+    }
     } else if (rec.flags & FTRACE_FL_CALL_OPS_EN) {
     flag |= FTRACE_FL_CALL_OPS;
     }
     }
 // If the state of this record hasn't changed, then do nothing
-    if ((rec.flags & FTRACE_FL_ENABLED) == flag)
+    if ((rec.flags & FTRACE_FL_ENABLED) == flag) {
     return FTRACE_UPDATE_IGNORE;
+    }
     if (flag) {
 // Save off if rec is being enabled (for return value)
     flag ^= rec.flags & FTRACE_FL_ENABLED;
     if (update) {
     rec.flags |= FTRACE_FL_ENABLED | FTRACE_FL_TOUCHED;
     if (flag & FTRACE_FL_REGS) {
-    if (rec.flags & FTRACE_FL_REGS)
+    if (rec.flags & FTRACE_FL_REGS) {
     rec.flags |= FTRACE_FL_REGS_EN;
-    else
+    }
+    else {
     rec.flags &= ~FTRACE_FL_REGS_EN;
     }
+    }
     if (flag & FTRACE_FL_TRAMP) {
-    if (rec.flags & FTRACE_FL_TRAMP)
+    if (rec.flags & FTRACE_FL_TRAMP) {
     rec.flags |= FTRACE_FL_TRAMP_EN;
-    else
+    }
+    else {
     rec.flags &= ~FTRACE_FL_TRAMP_EN;
     }
+    }
 // Keep track of anything that modifies the function
-    if (rec.flags & (FTRACE_FL_DIRECT | FTRACE_FL_IPMODIFY))
+    if (rec.flags & (FTRACE_FL_DIRECT | FTRACE_FL_IPMODIFY)) {
     rec.flags |= FTRACE_FL_MODIFIED;
+    }
     if (flag & FTRACE_FL_DIRECT) {
 //
 // If there's only one user (direct_ops helper)
@@ -2115,10 +2354,12 @@ unsafe extern "C" fn ftrace_check_record(rec: *mut dyn_ftrace, enable: bool, upd
 // directly (no ftrace trampoline).
 //
     if (ftrace_rec_count(rec) == 1) {
-    if (rec.flags & FTRACE_FL_DIRECT)
+    if (rec.flags & FTRACE_FL_DIRECT) {
     rec.flags |= FTRACE_FL_DIRECT_EN;
-    else
+    }
+    else {
     rec.flags &= ~FTRACE_FL_DIRECT_EN;
+    }
     } else {
 //
 // Can only call directly if there's
@@ -2129,10 +2370,12 @@ unsafe extern "C" fn ftrace_check_record(rec: *mut dyn_ftrace, enable: bool, upd
     }
     if (flag & FTRACE_FL_CALL_OPS) {
     if (ftrace_rec_count(rec) == 1) {
-    if (rec.flags & FTRACE_FL_CALL_OPS)
+    if (rec.flags & FTRACE_FL_CALL_OPS) {
     rec.flags |= FTRACE_FL_CALL_OPS_EN;
-    else
+    }
+    else {
     rec.flags &= ~FTRACE_FL_CALL_OPS_EN;
+    }
     } else {
 //
 // Can only call directly if there's
@@ -2159,9 +2402,10 @@ unsafe extern "C" fn ftrace_check_record(rec: *mut dyn_ftrace, enable: bool, upd
     }
     if (update) {
 // If there's no more users, clear all flags
-    if (!ftrace_rec_count(rec))
+    if (!ftrace_rec_count(rec)) {
     rec.flags &= FTRACE_NOCLEAR_FLAGS;
-    else
+    }
+    else {
 //
 // Just disable the record, but keep the ops TRAMP
 // and REGS states. The _EN flags must be disabled though.
@@ -2169,6 +2413,7 @@ unsafe extern "C" fn ftrace_check_record(rec: *mut dyn_ftrace, enable: bool, upd
     rec.flags &= ~(FTRACE_FL_ENABLED | FTRACE_FL_TRAMP_EN |
     FTRACE_FL_REGS_EN | FTRACE_FL_DIRECT_EN |
     FTRACE_FL_CALL_OPS_EN);
+    }
     }
     ftrace_bug_type = FTRACE_BUG_NOP;
     return FTRACE_UPDATE_MAKE_NOP;
@@ -2183,8 +2428,6 @@ unsafe extern "C" fn ftrace_check_record(rec: *mut dyn_ftrace, enable: bool, upd
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_update_record(rec: *mut dyn_ftrace, enable: bool) -> c_int {
-    int ftrace_update_record(struct dyn_ftrace *rec, bool enable)
-    {
     return ftrace_check_record(rec, enable, true);
     }
 //
@@ -2198,54 +2441,53 @@ pub unsafe extern "C" fn ftrace_update_record(rec: *mut dyn_ftrace, enable: bool
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_test_record(rec: *mut dyn_ftrace, enable: bool) -> c_int {
-    int ftrace_test_record(struct dyn_ftrace *rec, bool enable)
-    {
     return ftrace_check_record(rec, enable, false);
     }
-    static struct ftrace_ops *
-    ftrace_find_tramp_ops_any(struct dyn_ftrace *rec)
-    {
-    struct ftrace_ops *op;
-    let mut ip: c_ulong = rec.ip;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_find_tramp_ops_any(rec: *mut dyn_ftrace) -> *mut c_void {
+pub static mut op: *mut c_void = core::ptr::null_mut();
+pub static mut ip: c_ulong = 0;
     do_for_each_ftrace_op(op, ftrace_ops_list) {
-    if (!op.trampoline)
+    if (!op.trampoline) {
     continue;
-    if (hash_contains_ip(ip, op.func_hash))
+    }
+    if (hash_contains_ip(ip, op.func_hash)) {
     return op;
+    }
     } while_for_each_ftrace_op(op);
     return core::ptr::null_mut();
     }
-    static struct ftrace_ops *
-    ftrace_find_tramp_ops_any_other(struct dyn_ftrace *rec, struct ftrace_ops *op_exclude)
-    {
-    struct ftrace_ops *op;
-    let mut ip: c_ulong = rec.ip;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_find_tramp_ops_any_other(rec: *mut dyn_ftrace, op_exclude: *mut ftrace_ops) -> *mut c_void {
+pub static mut op: *mut c_void = core::ptr::null_mut();
+pub static mut ip: c_ulong = 0;
     do_for_each_ftrace_op(op, ftrace_ops_list) {
-    if (op == op_exclude || !op.trampoline)
+    if (op == op_exclude || !op.trampoline) {
     continue;
-    if (hash_contains_ip(ip, op.func_hash))
+    }
+    if (hash_contains_ip(ip, op.func_hash)) {
     return op;
+    }
     } while_for_each_ftrace_op(op);
     return core::ptr::null_mut();
     }
-    static struct ftrace_ops *
-    ftrace_find_tramp_ops_next(struct dyn_ftrace *rec,
-    struct ftrace_ops *op)
-    {
-    let mut ip: c_ulong = rec.ip;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_find_tramp_ops_next(rec: *mut dyn_ftrace, op: *mut ftrace_ops) -> *mut c_void {
+pub static mut ip: c_ulong = 0;
     while_for_each_ftrace_op(op) {
-    if (!op.trampoline)
+    if (!op.trampoline) {
     continue;
-    if (hash_contains_ip(ip, op.func_hash))
+    }
+    if (hash_contains_ip(ip, op.func_hash)) {
     return op;
+    }
     }
     return core::ptr::null_mut();
     }
-    static struct ftrace_ops *
-    ftrace_find_tramp_ops_curr(struct dyn_ftrace *rec)
-    {
-    struct ftrace_ops *op;
-    let mut ip: c_ulong = rec.ip;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_find_tramp_ops_curr(rec: *mut dyn_ftrace) -> *mut c_void {
+pub static mut op: *mut c_void = core::ptr::null_mut();
+pub static mut ip: c_ulong = 0;
 //
 // Need to check removed ops first.
 // If they are being removed, and this rec has a tramp,
@@ -2253,8 +2495,9 @@ pub unsafe extern "C" fn ftrace_test_record(rec: *mut dyn_ftrace, enable: bool) 
 // one with the tramp.
 //
     if (removed_ops) {
-    if (hash_contains_ip(ip, &removed_ops.old_hash))
+    if (hash_contains_ip(ip, &removed_ops.old_hash)) {
     return removed_ops;
+    }
     }
 //
 // Need to find the current trampoline for a rec.
@@ -2275,54 +2518,58 @@ pub unsafe extern "C" fn ftrace_test_record(rec: *mut dyn_ftrace, enable: bool) 
 // modified also needs to be checked.
 //
     do_for_each_ftrace_op(op, ftrace_ops_list) {
-    if (!op.trampoline)
+    if (!op.trampoline) {
     continue;
+    }
 //
 // If the ops is being added, it hasn't gotten to
 // the point to be removed from this tree yet.
 //
-    if (op.flags & FTRACE_OPS_FL_ADDING)
+    if (op.flags & FTRACE_OPS_FL_ADDING) {
     continue;
+    }
 //
 // If the ops is being modified and is in the old
 // hash, then it is probably being removed from this
 // function.
 //
     if ((op.flags & FTRACE_OPS_FL_MODIFYING) &&
-    hash_contains_ip(ip, &op.old_hash))
+    hash_contains_ip(ip, &op.old_hash)) {
     return op;
+    }
 //
 // If the ops is not being added or modified, and it's
 // in its normal filter hash, then this must be the one
 // we want!
 //
     if (!(op.flags & FTRACE_OPS_FL_MODIFYING) &&
-    hash_contains_ip(ip, op.func_hash))
+    hash_contains_ip(ip, op.func_hash)) {
     return op;
+    }
     } while_for_each_ftrace_op(op);
     return core::ptr::null_mut();
     }
-    static struct ftrace_ops *
-    ftrace_find_tramp_ops_new(struct dyn_ftrace *rec)
-    {
-    struct ftrace_ops *op;
-    let mut ip: c_ulong = rec.ip;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_find_tramp_ops_new(rec: *mut dyn_ftrace) -> *mut c_void {
+pub static mut op: *mut c_void = core::ptr::null_mut();
+pub static mut ip: c_ulong = 0;
     do_for_each_ftrace_op(op, ftrace_ops_list) {
 // pass rec in as regs to have non-NULL val
-    if (hash_contains_ip(ip, op.func_hash))
+    if (hash_contains_ip(ip, op.func_hash)) {
     return op;
+    }
     } while_for_each_ftrace_op(op);
     return core::ptr::null_mut();
     }
-    struct ftrace_ops *
-    ftrace_find_unique_ops(struct dyn_ftrace *rec)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_find_unique_ops(rec: *mut dyn_ftrace) -> *mut c_void {
     struct ftrace_ops *op, *found = core::ptr::null_mut();
-    let mut ip: c_ulong = rec.ip;
+pub static mut ip: c_ulong = 0;
     do_for_each_ftrace_op(op, ftrace_ops_list) {
     if (hash_contains_ip(ip, op.func_hash)) {
-    if (found)
+    if (found) {
     return core::ptr::null_mut();
+    }
     found = op;
     }
     } while_for_each_ftrace_op(op);
@@ -2330,34 +2577,33 @@ pub unsafe extern "C" fn ftrace_test_record(rec: *mut dyn_ftrace, enable: bool) 
     }
 
 // Protected by rcu_tasks for reading, and direct_mutex for writing
-    static struct ftrace_hash __rcu *direct_functions = EMPTY_HASH;
-    static DEFINE_MUTEX(direct_mutex);
+    static struct ftrace_hash  *direct_functions = EMPTY_HASH;
+pub static mut direct_mutex: usize = 0;
 //
 // Search the direct_functions hash to see if the given instruction pointer
 // has a direct caller attached to it.
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_find_rec_direct(ip: c_ulong) -> c_ulong {
-    unsigned long ftrace_find_rec_direct(unsigned long ip)
-    {
-    struct ftrace_func_entry *entry;
+pub static mut entry: *mut c_void = core::ptr::null_mut();
     guard(preempt_notrace)();
     entry = __ftrace_lookup_ip(rcu_dereference_sched(direct_functions), ip);
-    if (!entry)
+    if (!entry) {
     return 0;
+    }
     return entry.direct;
     }
-    static void call_direct_funcs(unsigned long ip, unsigned long pip,
-    struct ftrace_ops *ops, struct ftrace_regs *fregs)
-    {
-    unsigned long addr;
+#[no_mangle]
+pub unsafe extern "C" fn call_direct_funcs(ip: c_ulong, pip: c_ulong, ops: *mut ftrace_ops, fregs: *mut ftrace_regs) {
+    let mut addr = 0;
 
     addr = ftrace_find_rec_direct(ip);
 
     addr = READ_ONCE(ops.direct_call);
 
-    if (!addr)
+    if (!addr) {
     return;
+    }
     arch_ftrace_set_direct_caller(fregs, addr);
     }
 
@@ -2373,32 +2619,33 @@ pub unsafe extern "C" fn ftrace_find_rec_direct(ip: c_ulong) -> c_ulong {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_get_addr_new(rec: *mut dyn_ftrace) -> c_ulong {
-    unsigned long ftrace_get_addr_new(struct dyn_ftrace *rec)
-    {
-    struct ftrace_ops *ops;
-    unsigned long addr;
+pub static mut ops: *mut c_void = core::ptr::null_mut();
+    let mut addr = 0;
     if ((rec.flags & FTRACE_FL_DIRECT) &&
     (ftrace_rec_count(rec) == 1)) {
     addr = ftrace_find_rec_direct(rec.ip);
-    if (addr)
+    if (addr) {
     return addr;
-    WARN_ON_ONCE(1);
+    }
+    WARN_ON_ONCE!(1);
     }
 // Trampolines take precedence over regs
     if (rec.flags & FTRACE_FL_TRAMP) {
     ops = ftrace_find_tramp_ops_new(rec);
     if (FTRACE_WARN_ON(!ops || !ops.trampoline)) {
-    pr_warn("Bad trampoline accounting at: %p (%pS) (%lx)\n",
-    (void *)rec.ip, (void *)rec.ip, rec.flags);
+    pr_warn!("Bad trampoline accounting at: %p (%pS) (%lx)\n",
+    rec.ip, rec.ip, rec.flags);
 // Ftrace is shutting down, return anything
     return (unsigned long)FTRACE_ADDR;
     }
     return ops.trampoline;
     }
-    if (rec.flags & FTRACE_FL_REGS)
+    if (rec.flags & FTRACE_FL_REGS) {
     return (unsigned long)FTRACE_REGS_ADDR;
-    else
+    }
+    else {
     return (unsigned long)FTRACE_ADDR;
+    }
     }
 //
 // ftrace_get_addr_curr - Get the call address that is already there
@@ -2412,81 +2659,86 @@ pub unsafe extern "C" fn ftrace_get_addr_new(rec: *mut dyn_ftrace) -> c_ulong {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_get_addr_curr(rec: *mut dyn_ftrace) -> c_ulong {
-    unsigned long ftrace_get_addr_curr(struct dyn_ftrace *rec)
-    {
-    struct ftrace_ops *ops;
-    unsigned long addr;
+pub static mut ops: *mut c_void = core::ptr::null_mut();
+    let mut addr = 0;
 // Direct calls take precedence over trampolines
     if (rec.flags & FTRACE_FL_DIRECT_EN) {
     addr = ftrace_find_rec_direct(rec.ip);
-    if (addr)
+    if (addr) {
     return addr;
-    WARN_ON_ONCE(1);
+    }
+    WARN_ON_ONCE!(1);
     }
 // Trampolines take precedence over regs
     if (rec.flags & FTRACE_FL_TRAMP_EN) {
     ops = ftrace_find_tramp_ops_curr(rec);
     if (FTRACE_WARN_ON(!ops)) {
-    pr_warn("Bad trampoline accounting at: %p (%pS)\n",
-    (void *)rec.ip, (void *)rec.ip);
+    pr_warn!("Bad trampoline accounting at: %p (%pS)\n",
+    rec.ip, rec.ip);
 // Ftrace is shutting down, return anything
     return (unsigned long)FTRACE_ADDR;
     }
     return ops.trampoline;
     }
-    if (rec.flags & FTRACE_FL_REGS_EN)
+    if (rec.flags & FTRACE_FL_REGS_EN) {
     return (unsigned long)FTRACE_REGS_ADDR;
-    else
+    }
+    else {
     return (unsigned long)FTRACE_ADDR;
     }
-    static int
-    __ftrace_replace_code(struct dyn_ftrace *rec, bool enable)
-    {
-    unsigned long ftrace_old_addr;
-    unsigned long ftrace_addr;
-    int ret;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn __ftrace_replace_code(rec: *mut dyn_ftrace, enable: bool) -> c_int {
+    let mut ftrace_old_addr = 0;
+    let mut ftrace_addr = 0;
+    let mut ret = 0;
     ftrace_addr = ftrace_get_addr_new(rec);
 // This needs to be done before we call ftrace_update_record
     ftrace_old_addr = ftrace_get_addr_curr(rec);
     ret = ftrace_update_record(rec, enable);
     ftrace_bug_type = FTRACE_BUG_UNKNOWN;
-    switch (ret) {
-    case FTRACE_UPDATE_IGNORE:
+    match (ret) {
+    FTRACE_UPDATE_IGNORE => {
     return 0;
-    case FTRACE_UPDATE_MAKE_CALL:
+    }
+    FTRACE_UPDATE_MAKE_CALL => {
     ftrace_bug_type = FTRACE_BUG_CALL;
     return ftrace_make_call(rec, ftrace_addr);
-    case FTRACE_UPDATE_MAKE_NOP:
+    }
+    FTRACE_UPDATE_MAKE_NOP => {
     ftrace_bug_type = FTRACE_BUG_NOP;
     return ftrace_make_nop(core::ptr::null_mut(), rec, ftrace_old_addr);
-    case FTRACE_UPDATE_MODIFY_CALL:
+    }
+    FTRACE_UPDATE_MODIFY_CALL => {
     ftrace_bug_type = FTRACE_BUG_UPDATE;
     return ftrace_modify_call(rec, ftrace_old_addr, ftrace_addr);
+    }
     }
     return -1; /* unknown ftrace bug */
     }
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_replace_code(mod_flags: c_int) -> void __weak {
-    void __weak ftrace_replace_code(int mod_flags)
-    {
-    struct dyn_ftrace *rec;
-    struct ftrace_page *pg;
-    let mut enable: bool = mod_flags & FTRACE_MODIFY_ENABLE_FL;
-    let mut schedulable: c_int = mod_flags & FTRACE_MODIFY_MAY_SLEEP_FL;
-    int failed;
-    if (unlikely(ftrace_disabled))
+pub static mut rec: *mut c_void = core::ptr::null_mut();
+pub static mut pg: *mut c_void = core::ptr::null_mut();
+pub static mut enable: bool = false;
+pub static mut schedulable: c_int = 0;
+    let mut failed = 0;
+    if (unlikely(ftrace_disabled)) {
     return;
+    }
     do_for_each_ftrace_rec(pg, rec) {
-    if (skip_record(rec))
+    if (skip_record(rec)) {
     continue;
+    }
     failed = __ftrace_replace_code(rec, enable);
     if (failed) {
     ftrace_bug(failed, rec);
 // Stop processing
     return;
     }
-    if (schedulable)
+    if (schedulable) {
     cond_resched();
+    }
     } while_for_each_ftrace_rec();
     }
 #[repr(C)]
@@ -2505,21 +2757,23 @@ pub struct ftrace_rec_iter {
 //
 // May return NULL if no records are available.
 //
-    struct ftrace_rec_iter *ftrace_rec_iter_start(void)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_rec_iter_start() -> *mut c_void {
 //
 // We only use a single iterator.
 // Protected by the ftrace_lock mutex.
 //
-    static struct ftrace_rec_iter ftrace_rec_iter;
-    struct ftrace_rec_iter *iter = &ftrace_rec_iter;
+pub static mut ftrace_rec_iter: usize = 0;
+    let mut iter = &ftrace_rec_iter;
     iter.pg = ftrace_pages_start;
     iter.index = 0;
 // Could have empty pages
-    while (iter.pg && !iter.pg.index)
+    while (iter.pg && !iter.pg.index) {
     iter.pg = iter.pg.next;
-    if (!iter.pg)
+    }
+    if (!iter.pg) {
     return core::ptr::null_mut();
+    }
     return iter;
     }
 //
@@ -2528,18 +2782,20 @@ pub struct ftrace_rec_iter {
 //
 // Returns: the next iterator after the given iterator @iter.
 //
-    struct ftrace_rec_iter *ftrace_rec_iter_next(struct ftrace_rec_iter *iter)
-    {
-    iter.index++;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_rec_iter_next(iter: *mut ftrace_rec_iter) -> *mut c_void {
+    iter.index += 1;
     if (iter.index >= iter.pg.index) {
     iter.pg = iter.pg.next;
     iter.index = 0;
 // Could have empty pages
-    while (iter.pg && !iter.pg.index)
+    while (iter.pg && !iter.pg.index) {
     iter.pg = iter.pg.next;
     }
-    if (!iter.pg)
+    }
+    if (!iter.pg) {
     return core::ptr::null_mut();
+    }
     return iter;
     }
 //
@@ -2548,16 +2804,16 @@ pub struct ftrace_rec_iter {
 //
 // Returns: the record that the current @iter is at.
 //
-    struct dyn_ftrace *ftrace_rec_iter_record(struct ftrace_rec_iter *iter)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_rec_iter_record(iter: *mut ftrace_rec_iter) -> *mut c_void {
     return &iter.pg.records[iter.index];
     }
-    static int
-    ftrace_nop_initialize(struct module *mod, struct dyn_ftrace *rec)
-    {
-    int ret;
-    if (unlikely(ftrace_disabled))
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_nop_initialize(mod: *mut module, rec: *mut dyn_ftrace) -> c_int {
+    let mut ret = 0;
+    if (unlikely(ftrace_disabled)) {
     return 0;
+    }
     ret = ftrace_init_nop(mod, rec);
     if (ret) {
     ftrace_bug_type = FTRACE_BUG_INIT;
@@ -2572,8 +2828,6 @@ pub struct ftrace_rec_iter {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_arch_code_modify_prepare() -> void __weak {
-    void __weak ftrace_arch_code_modify_prepare(void)
-    {
     }
 //
 // archs can override this function if they must do something
@@ -2581,29 +2835,25 @@ pub unsafe extern "C" fn ftrace_arch_code_modify_prepare() -> void __weak {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_arch_code_modify_post_process() -> void __weak {
-    void __weak ftrace_arch_code_modify_post_process(void)
-    {
     }
 #[no_mangle]
 unsafe extern "C" fn update_ftrace_func(func: ftrace_func_t) -> c_int {
-    static int update_ftrace_func(ftrace_func_t func)
-    {
     static ftrace_func_t save_func;
 // Avoid updating if it hasn't changed
-    if (func == save_func)
+    if (func == save_func) {
     return 0;
+    }
     save_func = func;
     return ftrace_update_ftrace_func(func);
     }
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_modify_all_code(command: c_int) {
-    void ftrace_modify_all_code(int command)
-    {
-    let mut update: c_int = command & FTRACE_UPDATE_TRACE_FUNC;
-    let mut mod_flags: c_int = 0;
-    let mut err: c_int = 0;
-    if (command & FTRACE_MAY_SLEEP)
+pub static mut update: c_int = 0;
+pub static mut mod_flags: c_int = 0;
+pub static mut err: c_int = 0;
+    if (command & FTRACE_MAY_SLEEP) {
     mod_flags = FTRACE_MODIFY_MAY_SLEEP_FL;
+    }
 //
 // If the ftrace_caller calls a ftrace_ops func directly,
 // we need to make sure that it only traces functions it
@@ -2616,38 +2866,41 @@ pub unsafe extern "C" fn ftrace_modify_all_code(command: c_int) {
 //
     if (update) {
     err = update_ftrace_func(ftrace_ops_list_func);
-    if (FTRACE_WARN_ON(err))
+    if (FTRACE_WARN_ON(err)) {
     return;
     }
-    if (command & FTRACE_UPDATE_CALLS)
+    }
+    if (command & FTRACE_UPDATE_CALLS) {
     ftrace_replace_code(mod_flags | FTRACE_MODIFY_ENABLE_FL);
-#[no_mangle]
-pub unsafe extern "C" fn if(FTRACE_DISABLE_CALLS: command &) -> else {
-    else if (command & FTRACE_DISABLE_CALLS)
+    }
+
+    else if (command & FTRACE_DISABLE_CALLS) {
     ftrace_replace_code(mod_flags);
+    }
     if (update && ftrace_trace_function != ftrace_ops_list_func) {
     function_trace_op = set_function_trace_op;
     smp_wmb();
 // If irqs are disabled, we are in stop machine
-    if (!irqs_disabled())
+    if (!irqs_disabled()) {
     smp_call_function(ftrace_sync_ipi, core::ptr::null_mut(), 1);
+    }
     err = update_ftrace_func(ftrace_trace_function);
-    if (FTRACE_WARN_ON(err))
+    if (FTRACE_WARN_ON(err)) {
     return;
     }
-    if (command & FTRACE_START_FUNC_RET)
+    }
+    if (command & FTRACE_START_FUNC_RET) {
     err = ftrace_enable_ftrace_graph_caller();
-#[no_mangle]
-pub unsafe extern "C" fn if(FTRACE_STOP_FUNC_RET: command &) -> else {
-    else if (command & FTRACE_STOP_FUNC_RET)
+    }
+
+    else if (command & FTRACE_STOP_FUNC_RET) {
     err = ftrace_disable_ftrace_graph_caller();
+    }
     FTRACE_WARN_ON(err);
     }
 #[no_mangle]
 unsafe extern "C" fn __ftrace_modify_code(data: *mut c_void) -> c_int {
-    static int __ftrace_modify_code(void *data)
-    {
-    int *command = data;
+    let mut command = data;
     ftrace_modify_all_code(*command);
     return 0;
     }
@@ -2660,8 +2913,6 @@ unsafe extern "C" fn __ftrace_modify_code(data: *mut c_void) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_run_stop_machine(command: c_int) {
-    void ftrace_run_stop_machine(int command)
-    {
     stop_machine(__ftrace_modify_code, &command, core::ptr::null_mut());
     }
 //
@@ -2673,14 +2924,10 @@ pub unsafe extern "C" fn ftrace_run_stop_machine(command: c_int) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn arch_ftrace_update_code(command: c_int) -> void __weak {
-    void __weak arch_ftrace_update_code(int command)
-    {
     ftrace_run_stop_machine(command);
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_run_update_code(command: c_int) {
-    static void ftrace_run_update_code(int command)
-    {
     ftrace_arch_code_modify_prepare();
 //
 // By default we use stop_machine() to modify the code.
@@ -2691,9 +2938,8 @@ unsafe extern "C" fn ftrace_run_update_code(command: c_int) {
     arch_ftrace_update_code(command);
     ftrace_arch_code_modify_post_process();
     }
-    static void ftrace_run_modify_code(struct ftrace_ops *ops, int command,
-    struct ftrace_ops_hash *old_hash)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_run_modify_code(ops: *mut ftrace_ops, command: c_int, old_hash: *mut ftrace_ops_hash) {
     ops.flags |= FTRACE_OPS_FL_MODIFYING;
     ops.old_hash.filter_hash = old_hash.filter_hash;
     ops.old_hash.notrace_hash = old_hash.notrace_hash;
@@ -2706,22 +2952,16 @@ unsafe extern "C" fn ftrace_run_update_code(command: c_int) {
     static int ftrace_start_up;
 #[no_mangle]
 pub unsafe extern "C" fn arch_ftrace_trampoline_free(ops: *mut ftrace_ops) -> void __weak {
-    void __weak arch_ftrace_trampoline_free(struct ftrace_ops *ops)
-    {
     }
 // List of trace_ops that have allocated trampolines
-    static LIST_HEAD(ftrace_ops_trampoline_list);
+pub static mut ftrace_ops_trampoline_list: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn ftrace_add_trampoline_to_kallsyms(ops: *mut ftrace_ops) {
-    static void ftrace_add_trampoline_to_kallsyms(struct ftrace_ops *ops)
-    {
     lockdep_assert_held(&ftrace_lock);
     list_add_rcu(&ops.list, &ftrace_ops_trampoline_list);
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_remove_trampoline_from_kallsyms(ops: *mut ftrace_ops) {
-    static void ftrace_remove_trampoline_from_kallsyms(struct ftrace_ops *ops)
-    {
     lockdep_assert_held(&ftrace_lock);
     list_del_rcu(&ops.list);
     synchronize_rcu();
@@ -2734,16 +2974,14 @@ unsafe extern "C" fn ftrace_remove_trampoline_from_kallsyms(ops: *mut ftrace_ops
 
 #[no_mangle]
 unsafe extern "C" fn ftrace_trampoline_free(ops: *mut ftrace_ops) {
-    static void ftrace_trampoline_free(struct ftrace_ops *ops)
-    {
     if (ops && (ops.flags & FTRACE_OPS_FL_ALLOC_TRAMP) &&
     ops.trampoline) {
 //
 // Record the text poke event before the ksymbol unregister
 // event.
 //
-    perf_event_text_poke((void *)ops.trampoline,
-    (void *)ops.trampoline,
+    perf_event_text_poke(ops.trampoline,
+    ops.trampoline,
     ops.trampoline_size, core::ptr::null_mut(), 0);
     perf_event_ksymbol(PERF_RECORD_KSYMBOL_TYPE_OOL,
     ops.trampoline, ops.trampoline_size,
@@ -2755,35 +2993,32 @@ unsafe extern "C" fn ftrace_trampoline_free(ops: *mut ftrace_ops) {
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_startup_enable(command: c_int) {
-    static void ftrace_startup_enable(int command)
-    {
     if (saved_ftrace_func != ftrace_trace_function) {
     saved_ftrace_func = ftrace_trace_function;
     command |= FTRACE_UPDATE_TRACE_FUNC;
     }
-    if (!command || !ftrace_enabled)
+    if (!command || !ftrace_enabled) {
     return;
+    }
     ftrace_run_update_code(command);
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_startup_all(command: c_int) {
-    static void ftrace_startup_all(int command)
-    {
     update_all_ops = true;
     ftrace_startup_enable(command);
     update_all_ops = false;
     }
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_startup(ops: *mut ftrace_ops, command: c_int) -> c_int {
-    int ftrace_startup(struct ftrace_ops *ops, int command)
-    {
-    int ret;
-    if (unlikely(ftrace_disabled))
+    let mut ret = 0;
+    if (unlikely(ftrace_disabled)) {
     return -ENODEV;
+    }
     ret = __register_ftrace_function(ops);
-    if (ret)
+    if (ret) {
     return ret;
-    ftrace_start_up++;
+    }
+    ftrace_start_up += 1;
 //
 // Note that ftrace probes uses this to start up
 // and modify functions it will probe. But we still
@@ -2797,14 +3032,16 @@ pub unsafe extern "C" fn ftrace_startup(ops: *mut ftrace_ops, command: c_int) ->
     if (ret < 0) {
 // Rollback registration process
     __unregister_ftrace_function(ops);
-    ftrace_start_up--;
+    ftrace_start_up -= 1;
     ops.flags &= ~FTRACE_OPS_FL_ENABLED;
-    if (ops.flags & FTRACE_OPS_FL_DYNAMIC)
+    if (ops.flags & FTRACE_OPS_FL_DYNAMIC) {
     ftrace_trampoline_free(ops);
+    }
     return ret;
     }
-    if (ftrace_hash_rec_enable(ops))
+    if (ftrace_hash_rec_enable(ops)) {
     command |= FTRACE_UPDATE_CALLS;
+    }
     ftrace_startup_enable(command);
 //
 // If ftrace is in an undefined state, we just remove ops from list
@@ -2820,32 +3057,34 @@ pub unsafe extern "C" fn ftrace_startup(ops: *mut ftrace_ops, command: c_int) ->
     }
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_shutdown(ops: *mut ftrace_ops, command: c_int) -> c_int {
-    int ftrace_shutdown(struct ftrace_ops *ops, int command)
-    {
-    int ret;
-    if (unlikely(ftrace_disabled))
+    let mut ret = 0;
+    if (unlikely(ftrace_disabled)) {
     return -ENODEV;
+    }
     ret = __unregister_ftrace_function(ops);
-    if (ret)
+    if (ret) {
     return ret;
-    ftrace_start_up--;
+    }
+    ftrace_start_up -= 1;
 //
 // Just warn in case of unbalance, no need to kill ftrace, it's not
 // critical but the ftrace_call callers may be never nopped again after
 // further ftrace uses.
 //
-    WARN_ON_ONCE(ftrace_start_up < 0);
+    WARN_ON_ONCE!(ftrace_start_up < 0);
 // Disabling ipmodify never fails
     ftrace_hash_ipmodify_disable(ops);
-    if (ftrace_hash_rec_disable(ops))
+    if (ftrace_hash_rec_disable(ops)) {
     command |= FTRACE_UPDATE_CALLS;
+    }
     ops.flags &= ~FTRACE_OPS_FL_ENABLED;
     if (saved_ftrace_func != ftrace_trace_function) {
     saved_ftrace_func = ftrace_trace_function;
     command |= FTRACE_UPDATE_TRACE_FUNC;
     }
-    if (!command || !ftrace_enabled)
-    goto out;
+    if (!command || !ftrace_enabled) {
+// goto;
+    }
 //
 // If the ops uses a trampoline, then it needs to be
 // tested first on update.
@@ -2862,19 +3101,20 @@ pub unsafe extern "C" fn ftrace_shutdown(ops: *mut ftrace_ops, command: c_int) -
 //
     if (rcu_dereference_protected(ftrace_ops_list,
     lockdep_is_held(&ftrace_lock)) == &ftrace_list_end) {
-    struct ftrace_page *pg;
-    struct dyn_ftrace *rec;
+pub static mut pg: *mut c_void = core::ptr::null_mut();
+pub static mut rec: *mut c_void = core::ptr::null_mut();
     do_for_each_ftrace_rec(pg, rec) {
-    if (FTRACE_WARN_ON_ONCE(rec.flags & ~FTRACE_NOCLEAR_FLAGS))
-    pr_warn("  %pS flags:%lx\n",
-    (void *)rec.ip, rec.flags);
+    if (FTRACE_WARN_ON_ONCE(rec.flags & ~FTRACE_NOCLEAR_FLAGS)) {
+    pr_warn!("  %pS flags:%lx\n",
+    rec.ip, rec.flags);
+    }
     } while_for_each_ftrace_rec();
     }
     ops.old_hash.filter_hash = core::ptr::null_mut();
     ops.old_hash.notrace_hash = core::ptr::null_mut();
     removed_ops = core::ptr::null_mut();
     ops.flags &= ~FTRACE_OPS_FL_REMOVING;
-    out:
+// label;
 //
 // Dynamic ops may be freed, we must make sure that all
 // callers are done before leaving this function.
@@ -2902,10 +3142,11 @@ pub unsafe extern "C" fn ftrace_shutdown(ops: *mut ftrace_ops, command: c_int) -
     return 0;
     }
 // Simply make a copy of @src and return it
-    static struct ftrace_hash *copy_hash(struct ftrace_hash *src)
-    {
-    if (ftrace_hash_empty(src))
+#[no_mangle]
+pub unsafe extern "C" fn copy_hash(src: *mut ftrace_hash) -> *mut c_void {
+    if (ftrace_hash_empty(src)) {
     return EMPTY_HASH;
+    }
     return alloc_and_copy_ftrace_hash(src.size_bits, src);
     }
 //
@@ -2923,20 +3164,21 @@ pub unsafe extern "C" fn ftrace_shutdown(ops: *mut ftrace_ops, command: c_int) -
 // The filter_hash updates uses just the append_hash() function
 // and the notrace_hash does not.
 //
-    static int append_hash(struct ftrace_hash **hash, struct ftrace_hash *new_hash,
-    int size_bits)
-    {
-    struct ftrace_func_entry *entry;
-    int size;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn append_hash(hash: *mut *mut ftrace_hash, new_hash: *mut ftrace_hash, size_bits: c_int) -> c_int {
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+    let mut size = 0;
+    let mut i = 0;
     if (*hash) {
 // An empty hash does everything
-    if (ftrace_hash_empty(*hash))
+    if (ftrace_hash_empty(*hash)) {
     return 0;
+    }
     } else {
 // hash = alloc_ftrace_hash(size_bits);
-    if (!*hash)
+    if (!*hash) {
     return -ENOMEM;
+    }
     }
 // If new_hash has everything make hash have everything
     if (ftrace_hash_empty(new_hash)) {
@@ -2945,12 +3187,13 @@ pub unsafe extern "C" fn ftrace_shutdown(ops: *mut ftrace_ops, command: c_int) -
     return 0;
     }
     size = 1 << new_hash.size_bits;
-    for (i = 0; i < size; i++) {
+    while (i < size) {
     hlist_for_each_entry(entry, &new_hash.buckets[i], hlist) {
 // Only add if not already in hash
     if (!__ftrace_lookup_ip(*hash, entry.ip) &&
-    add_hash_entry(*hash, entry.ip) == core::ptr::null_mut())
+    add_hash_entry(*hash, entry.ip) == core::ptr::null_mut()) {
     return -ENOMEM;
+    }
     }
     }
     return 0;
@@ -2960,20 +3203,20 @@ pub unsafe extern "C" fn ftrace_shutdown(ops: *mut ftrace_ops, command: c_int) -
 //
 #[no_mangle]
 unsafe extern "C" fn remove_hash(hash: *mut ftrace_hash, notrace_hash: *mut ftrace_hash) {
-    static void remove_hash(struct ftrace_hash *hash, struct ftrace_hash *notrace_hash)
-    {
-    struct ftrace_func_entry *entry;
-    struct hlist_node *tmp;
-    int size;
-    int i;
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut tmp: *mut c_void = core::ptr::null_mut();
+    let mut size = 0;
+    let mut i = 0;
 // If the notrace hash is empty, there's nothing to do
-    if (ftrace_hash_empty(notrace_hash))
+    if (ftrace_hash_empty(notrace_hash)) {
     return;
+    }
     size = 1 << hash.size_bits;
-    for (i = 0; i < size; i++) {
+    while (i < size) {
     hlist_for_each_entry_safe(entry, tmp, &hash.buckets[i], hlist) {
-    if (!__ftrace_lookup_ip(notrace_hash, entry.ip))
+    if (!__ftrace_lookup_ip(notrace_hash, entry.ip)) {
     continue;
+    }
     remove_hash_entry(hash, entry);
     kfree(entry);
     }
@@ -2985,12 +3228,11 @@ unsafe extern "C" fn remove_hash(hash: *mut ftrace_hash, notrace_hash: *mut ftra
 // The notrace_hash updates uses just the intersect_hash() function
 // and the filter_hash does not.
 //
-    static int intersect_hash(struct ftrace_hash **hash, struct ftrace_hash *new_hash1,
-    struct ftrace_hash *new_hash2)
-    {
-    struct ftrace_func_entry *entry;
-    int size;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn intersect_hash(hash: *mut *mut ftrace_hash, new_hash1: *mut ftrace_hash, new_hash2: *mut ftrace_hash) -> c_int {
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+    let mut size = 0;
+    let mut i = 0;
 //
 // If new_hash1 or new_hash2 is the EMPTY_HASH then make the hash
 // empty as well as empty for notrace means none are notraced.
@@ -3001,12 +3243,13 @@ unsafe extern "C" fn remove_hash(hash: *mut ftrace_hash, notrace_hash: *mut ftra
     return 0;
     }
     size = 1 << new_hash1.size_bits;
-    for (i = 0; i < size; i++) {
+    while (i < size) {
     hlist_for_each_entry(entry, &new_hash1.buckets[i], hlist) {
 // Only add if in both @new_hash1 and @new_hash2
     if (__ftrace_lookup_ip(new_hash2, entry.ip) &&
-    add_hash_entry(*hash, entry.ip) == core::ptr::null_mut())
+    add_hash_entry(*hash, entry.ip) == core::ptr::null_mut()) {
     return -ENOMEM;
+    }
     }
     }
 // If nothing intersects, make it the empty set
@@ -3018,36 +3261,34 @@ unsafe extern "C" fn remove_hash(hash: *mut ftrace_hash, notrace_hash: *mut ftra
     }
 #[no_mangle]
 unsafe extern "C" fn ops_equal(A: *mut ftrace_hash, B: *mut ftrace_hash) -> bool {
-    static bool ops_equal(struct ftrace_hash *A, struct ftrace_hash *B)
-    {
-    struct ftrace_func_entry *entry;
-    int size;
-    int i;
-    if (ftrace_hash_empty(A))
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+    let mut size = 0;
+    let mut i = 0;
+    if (ftrace_hash_empty(A)) {
     return ftrace_hash_empty(B);
-    if (ftrace_hash_empty(B))
+    }
+    if (ftrace_hash_empty(B)) {
     return ftrace_hash_empty(A);
-    if (A.count != B.count)
+    }
+    if (A.count != B.count) {
     return false;
+    }
     size = 1 << A.size_bits;
-    for (i = 0; i < size; i++) {
+    while (i < size) {
     hlist_for_each_entry(entry, &A.buckets[i], hlist) {
-    if (!__ftrace_lookup_ip(B, entry.ip))
+    if (!__ftrace_lookup_ip(B, entry.ip)) {
     return false;
+    }
     }
     }
     return true;
     }
-    static void ftrace_ops_update_code(struct ftrace_ops *ops,
-    struct ftrace_ops_hash *old_hash);
-    static int __ftrace_hash_move_and_update_ops(struct ftrace_ops *ops,
-    struct ftrace_hash **orig_hash,
-    struct ftrace_hash *hash,
-    int enable)
-    {
-    struct ftrace_ops_hash old_hash_ops;
-    struct ftrace_hash *old_hash;
-    int ret;
+// forward_decl: ftrace_ops_update_code;
+#[no_mangle]
+pub unsafe extern "C" fn __ftrace_hash_move_and_update_ops(ops: *mut ftrace_ops, orig_hash: *mut *mut ftrace_hash, hash: *mut ftrace_hash, enable: c_int) -> c_int {
+pub static mut old_hash_ops: usize = 0;
+pub static mut old_hash: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     old_hash = *orig_hash;
     old_hash_ops.filter_hash = ops.func_hash.filter_hash;
     old_hash_ops.notrace_hash = ops.func_hash.notrace_hash;
@@ -3058,47 +3299,48 @@ unsafe extern "C" fn ops_equal(A: *mut ftrace_hash, B: *mut ftrace_hash) -> bool
     }
     return ret;
     }
-    static int ftrace_update_ops(struct ftrace_ops *ops, struct ftrace_hash *filter_hash,
-    struct ftrace_hash *notrace_hash)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_update_ops(ops: *mut ftrace_ops, filter_hash: *mut ftrace_hash, notrace_hash: *mut ftrace_hash) -> c_int {
+    let mut ret = 0;
     if (!ops_equal(filter_hash, ops.func_hash.filter_hash)) {
     ret = __ftrace_hash_move_and_update_ops(ops, &ops.func_hash.filter_hash,
     filter_hash, 1);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     }
     if (!ops_equal(notrace_hash, ops.func_hash.notrace_hash)) {
     ret = __ftrace_hash_move_and_update_ops(ops, &ops.func_hash.notrace_hash,
     notrace_hash, 0);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     }
     return 0;
     }
-    static int add_first_hash(struct ftrace_hash **filter_hash, struct ftrace_hash **notrace_hash,
-    struct ftrace_ops_hash *func_hash)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn add_first_hash(filter_hash: *mut *mut ftrace_hash, notrace_hash: *mut *mut ftrace_hash, func_hash: *mut ftrace_ops_hash) -> c_int {
 // If the filter hash is not empty, simply remove the nohash from it
     if (!ftrace_hash_empty(func_hash.filter_hash)) {
 // filter_hash = copy_hash(func_hash->filter_hash);
-    if (!*filter_hash)
+    if (!*filter_hash) {
     return -ENOMEM;
+    }
     remove_hash(*filter_hash, func_hash.notrace_hash);
 // notrace_hash = EMPTY_HASH;
     } else {
 // notrace_hash = copy_hash(func_hash->notrace_hash);
-    if (!*notrace_hash)
+    if (!*notrace_hash) {
     return -ENOMEM;
+    }
 // filter_hash = EMPTY_HASH;
     }
     return 0;
     }
-    static int add_next_hash(struct ftrace_hash **filter_hash, struct ftrace_hash **notrace_hash,
-    struct ftrace_ops_hash *ops_hash, struct ftrace_ops_hash *subops_hash)
-    {
-    int size_bits;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn add_next_hash(filter_hash: *mut *mut ftrace_hash, notrace_hash: *mut *mut ftrace_hash, ops_hash: *mut ftrace_ops_hash, subops_hash: *mut ftrace_ops_hash) -> c_int {
+    let mut size_bits = 0;
+    let mut ret = 0;
 // If the subops trace all functions so must the main ops
     if (ftrace_hash_empty(ops_hash.filter_hash) ||
     ftrace_hash_empty(subops_hash.filter_hash)) {
@@ -3109,13 +3351,14 @@ unsafe extern "C" fn ops_equal(A: *mut ftrace_hash, B: *mut ftrace_hash) -> bool
 // notrace_hash had better be, as the notrace hash
 // is only used for empty main filter hashes.
 //
-    WARN_ON_ONCE(!ftrace_hash_empty(ops_hash.notrace_hash));
+    WARN_ON_ONCE!(!ftrace_hash_empty(ops_hash.notrace_hash));
     size_bits = max(ops_hash.filter_hash.size_bits,
     subops_hash.filter_hash.size_bits);
 // Copy the subops hash
 // filter_hash = alloc_and_copy_ftrace_hash(size_bits, subops_hash->filter_hash);
-    if (!*filter_hash)
+    if (!*filter_hash) {
     return -ENOMEM;
+    }
 // Remove any notrace functions from the copy
     remove_hash(*filter_hash, subops_hash.notrace_hash);
     ret = append_hash(filter_hash, ops_hash.filter_hash,
@@ -3144,8 +3387,9 @@ unsafe extern "C" fn ops_equal(A: *mut ftrace_hash, B: *mut ftrace_hash) -> bool
     size_bits = max(ops_hash.notrace_hash.size_bits,
     subops_hash.notrace_hash.size_bits);
 // notrace_hash = alloc_ftrace_hash(size_bits);
-    if (!*notrace_hash)
+    if (!*notrace_hash) {
     return -ENOMEM;
+    }
     ret = intersect_hash(notrace_hash, ops_hash.notrace_hash,
     subops_hash.notrace_hash);
     if (ret < 0) {
@@ -3168,36 +3412,41 @@ unsafe extern "C" fn ops_equal(A: *mut ftrace_hash, B: *mut ftrace_hash) -> bool
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_startup_subops(ops: *mut ftrace_ops, subops: *mut ftrace_ops, command: c_int) -> c_int {
-    int ftrace_startup_subops(struct ftrace_ops *ops, struct ftrace_ops *subops, int command)
-    {
-    struct ftrace_hash *filter_hash = EMPTY_HASH;
-    struct ftrace_hash *notrace_hash = EMPTY_HASH;
-    struct ftrace_hash *save_filter_hash;
-    struct ftrace_hash *save_notrace_hash;
-    int ret;
-    if (unlikely(ftrace_disabled))
+    let mut filter_hash = EMPTY_HASH;
+    let mut notrace_hash = EMPTY_HASH;
+pub static mut save_filter_hash: *mut c_void = core::ptr::null_mut();
+pub static mut save_notrace_hash: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (unlikely(ftrace_disabled)) {
     return -ENODEV;
+    }
     ftrace_ops_init(ops);
     ftrace_ops_init(subops);
-    if (WARN_ON_ONCE(subops.flags & FTRACE_OPS_FL_ENABLED))
+    if (WARN_ON_ONCE!(subops.flags & FTRACE_OPS_FL_ENABLED)) {
     return -EBUSY;
+    }
 // Make everything canonical (Just in case!)
-    if (!ops.func_hash.filter_hash)
+    if (!ops.func_hash.filter_hash) {
     ops.func_hash.filter_hash = EMPTY_HASH;
-    if (!ops.func_hash.notrace_hash)
+    }
+    if (!ops.func_hash.notrace_hash) {
     ops.func_hash.notrace_hash = EMPTY_HASH;
-    if (!subops.func_hash.filter_hash)
+    }
+    if (!subops.func_hash.filter_hash) {
     subops.func_hash.filter_hash = EMPTY_HASH;
-    if (!subops.func_hash.notrace_hash)
+    }
+    if (!subops.func_hash.notrace_hash) {
     subops.func_hash.notrace_hash = EMPTY_HASH;
+    }
 // For the first subops to ops just enable it normally
     if (list_empty(&ops.subop_list)) {
 // The ops was empty, should have empty hashes
-    WARN_ON_ONCE(!ftrace_hash_empty(ops.func_hash.filter_hash));
-    WARN_ON_ONCE(!ftrace_hash_empty(ops.func_hash.notrace_hash));
+    WARN_ON_ONCE!(!ftrace_hash_empty(ops.func_hash.filter_hash));
+    WARN_ON_ONCE!(!ftrace_hash_empty(ops.func_hash.notrace_hash));
     ret = add_first_hash(&filter_hash, &notrace_hash, subops.func_hash);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     save_filter_hash = ops.func_hash.filter_hash;
     save_notrace_hash = ops.func_hash.notrace_hash;
     ops.func_hash.filter_hash = filter_hash;
@@ -3227,8 +3476,9 @@ pub unsafe extern "C" fn ftrace_startup_subops(ops: *mut ftrace_ops, subops: *mu
 // o Remove any of these functions from the main notrace hash
 //
     ret = add_next_hash(&filter_hash, &notrace_hash, ops.func_hash, subops.func_hash);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     list_add(&subops.list, &ops.subop_list);
     ret = ftrace_update_ops(ops, filter_hash, notrace_hash);
     free_ftrace_hash(filter_hash);
@@ -3241,13 +3491,12 @@ pub unsafe extern "C" fn ftrace_startup_subops(ops: *mut ftrace_ops, subops: *mu
     }
     return ret;
     }
-    static int rebuild_hashes(struct ftrace_hash **filter_hash, struct ftrace_hash **notrace_hash,
-    struct ftrace_ops *ops)
-    {
-    struct ftrace_ops_hash temp_hash;
-    struct ftrace_ops *subops;
-    let mut first: bool = true;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn rebuild_hashes(filter_hash: *mut *mut ftrace_hash, notrace_hash: *mut *mut ftrace_hash, ops: *mut ftrace_ops) -> c_int {
+pub static mut temp_hash: usize = 0;
+pub static mut subops: *mut c_void = core::ptr::null_mut();
+pub static mut first: bool = true;
+    let mut ret = 0;
     temp_hash.filter_hash = EMPTY_HASH;
     temp_hash.notrace_hash = EMPTY_HASH;
     list_for_each_entry(subops, &ops.subop_list, list) {
@@ -3255,8 +3504,9 @@ pub unsafe extern "C" fn ftrace_startup_subops(ops: *mut ftrace_ops, subops: *mu
 // notrace_hash = EMPTY_HASH;
     if (first) {
     ret = add_first_hash(filter_hash, notrace_hash, subops.func_hash);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     first = false;
     } else {
     ret = add_next_hash(filter_hash, notrace_hash,
@@ -3288,15 +3538,15 @@ pub unsafe extern "C" fn ftrace_startup_subops(ops: *mut ftrace_ops, subops: *mu
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_shutdown_subops(ops: *mut ftrace_ops, subops: *mut ftrace_ops, command: c_int) -> c_int {
-    int ftrace_shutdown_subops(struct ftrace_ops *ops, struct ftrace_ops *subops, int command)
-    {
-    struct ftrace_hash *filter_hash = EMPTY_HASH;
-    struct ftrace_hash *notrace_hash = EMPTY_HASH;
-    int ret;
-    if (unlikely(ftrace_disabled))
+    let mut filter_hash = EMPTY_HASH;
+    let mut notrace_hash = EMPTY_HASH;
+    let mut ret = 0;
+    if (unlikely(ftrace_disabled)) {
     return -ENODEV;
-    if (WARN_ON_ONCE(!(subops.flags & FTRACE_OPS_FL_ENABLED)))
+    }
+    if (WARN_ON_ONCE!(!(subops.flags & FTRACE_OPS_FL_ENABLED))) {
     return -EINVAL;
+    }
     list_del(&subops.list);
     if (list_empty(&ops.subop_list)) {
 // Last one, just disable the current ops
@@ -3316,8 +3566,9 @@ pub unsafe extern "C" fn ftrace_shutdown_subops(ops: *mut ftrace_ops, subops: *m
     }
 // Rebuild the hashes without subops
     ret = rebuild_hashes(&filter_hash, &notrace_hash, ops);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     ret = ftrace_update_ops(ops, filter_hash, notrace_hash);
     if (ret < 0) {
     list_add(&subops.list, &ops.subop_list);
@@ -3329,19 +3580,18 @@ pub unsafe extern "C" fn ftrace_shutdown_subops(ops: *mut ftrace_ops, subops: *m
     free_ftrace_hash(notrace_hash);
     return ret;
     }
-    static int ftrace_hash_move_and_update_subops(struct ftrace_ops *subops,
-    struct ftrace_hash **orig_subhash,
-    struct ftrace_hash *hash)
-    {
-    struct ftrace_ops *ops = subops.managed;
-    struct ftrace_hash *notrace_hash;
-    struct ftrace_hash *filter_hash;
-    struct ftrace_hash *save_hash;
-    struct ftrace_hash *new_hash;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_hash_move_and_update_subops(subops: *mut ftrace_ops, orig_subhash: *mut *mut ftrace_hash, hash: *mut ftrace_hash) -> c_int {
+    let mut ops = subops.managed;
+pub static mut notrace_hash: *mut c_void = core::ptr::null_mut();
+pub static mut filter_hash: *mut c_void = core::ptr::null_mut();
+pub static mut save_hash: *mut c_void = core::ptr::null_mut();
+pub static mut new_hash: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
 // Manager ops can not be subops (yet)
-    if (WARN_ON_ONCE(!ops || ops.flags & FTRACE_OPS_FL_SUBOP))
+    if (WARN_ON_ONCE!(!ops || ops.flags & FTRACE_OPS_FL_SUBOP)) {
     return -EINVAL;
+    }
 // Move the new hash over to the subops hash
     save_hash = *orig_subhash;
 // orig_subhash = __ftrace_hash_move(hash);
@@ -3365,15 +3615,13 @@ pub unsafe extern "C" fn ftrace_shutdown_subops(ops: *mut ftrace_ops, subops: *m
     }
     return ret;
     }
-    u64			ftrace_update_time;
-    u64			ftrace_total_mod_time;
-    unsigned long		ftrace_update_tot_cnt;
-    unsigned long		ftrace_number_of_pages;
-    unsigned long		ftrace_number_of_groups;
+    let mut ftrace_update_time = 0;
+    let mut ftrace_total_mod_time = 0;
+    let mut ftrace_update_tot_cnt = 0;
+    let mut ftrace_number_of_pages = 0;
+    let mut ftrace_number_of_groups = 0;
 #[no_mangle]
 pub unsafe extern "C" fn ops_traces_mod(ops: *mut ftrace_ops) -> c_int {
-    static inline int ops_traces_mod(struct ftrace_ops *ops)
-    {
 //
 // Filter_hash being empty will default to trace module.
 // But notrace hash requires a test of individual module functions.
@@ -3383,15 +3631,13 @@ pub unsafe extern "C" fn ops_traces_mod(ops: *mut ftrace_ops) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_update_code(mod: *mut module, new_pgs: *mut ftrace_page) -> c_int {
-    static int ftrace_update_code(struct module *mod, struct ftrace_page *new_pgs)
-    {
-    let mut init_nop: bool = ftrace_need_init_nop();
-    struct ftrace_page *pg;
-    struct dyn_ftrace *p;
+pub static mut init_nop: bool = false;
+pub static mut pg: *mut c_void = core::ptr::null_mut();
+pub static mut p: *mut c_void = core::ptr::null_mut();
     u64 start, stop, update_time;
-    let mut update_cnt: c_ulong = 0;
-    let mut rec_flags: c_ulong = 0;
-    int i;
+pub static mut update_cnt: c_ulong = 0;
+pub static mut rec_flags: c_ulong = 0;
+    let mut i = 0;
     start = ftrace_now(raw_smp_processor_id());
 //
 // When a module is loaded, this function is called to convert
@@ -3404,67 +3650,72 @@ unsafe extern "C" fn ftrace_update_code(mod: *mut module, new_pgs: *mut ftrace_p
 // and will be enabled after the call to set the module's text
 // to read-only.
 //
-    if (mod)
+    if (mod) {
     rec_flags |= FTRACE_FL_DISABLED;
-    for (pg = new_pgs; pg; pg = pg.next) {
-    for (i = 0; i < pg.index; i++) {
+    }
+    while (pg) {
+    while (i < pg.index) {
 // If something went wrong, bail without enabling anything
-    if (unlikely(ftrace_disabled))
+    if (unlikely(ftrace_disabled)) {
     return -1;
+    }
     p = &pg.records[i];
     p.flags = rec_flags;
 //
 // Do the initial record conversion from mcount jump
 // to the NOP instructions.
 //
-    if (init_nop && !ftrace_nop_initialize(mod, p))
+    if (init_nop && !ftrace_nop_initialize(mod, p)) {
     break;
-    update_cnt++;
+    }
+    update_cnt += 1;
     }
     }
     stop = ftrace_now(raw_smp_processor_id());
     update_time = stop - start;
-    if (mod)
+    if (mod) {
     ftrace_total_mod_time += update_time;
-    else
+    }
+    else {
     ftrace_update_time = update_time;
+    }
     ftrace_update_tot_cnt += update_cnt;
     return 0;
     }
-    static int ftrace_allocate_records(struct ftrace_page *pg, int count,
-    unsigned long *num_pages)
-    {
-    int order;
-    int pages;
-    int cnt;
-    if (WARN_ON(!count))
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_allocate_records(pg: *mut ftrace_page, count: c_int, num_pages: *mut c_ulong) -> c_int {
+    let mut order = 0;
+    let mut pages = 0;
+    let mut cnt = 0;
+    if (WARN_ON!(!count)) {
     return -EINVAL;
+    }
 // We want to fill as much as possible, with no empty pages
     pages = DIV_ROUND_UP(count * ENTRY_SIZE, PAGE_SIZE);
     order = fls(pages) - 1;
-    again:
-    pg.records = (void *)__get_free_pages(GFP_KERNEL | __GFP_ZERO, order);
+// label;
+    pg.records = __get_free_pages(GFP_KERNEL | __GFP_ZERO, order);
     if (!pg.records) {
 // if we can't allocate this size, try something smaller
-    if (!order)
+    if (!order) {
     return -ENOMEM;
-    order--;
-    goto again;
+    }
+    order -= 1;
+// goto;
     }
     ftrace_number_of_pages += 1 << order;
 // num_pages += 1 << order;
-    ftrace_number_of_groups++;
+    ftrace_number_of_groups += 1;
     cnt = ENTRIES_PER_PAGE_GROUP(order);
     pg.order = order;
-    if (cnt > count)
+    if (cnt > count) {
     cnt = count;
+    }
     return cnt;
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_free_pages(pages: *mut ftrace_page) {
-    static void ftrace_free_pages(struct ftrace_page *pages)
-    {
-    struct ftrace_page *pg = pages;
+    let mut pg = pages;
     while (pg) {
     if (pg.records) {
     free_pages((unsigned long)pg.records, pg.order);
@@ -3473,21 +3724,22 @@ unsafe extern "C" fn ftrace_free_pages(pages: *mut ftrace_page) {
     pages = pg.next;
     kfree(pg);
     pg = pages;
-    ftrace_number_of_groups--;
+    ftrace_number_of_groups -= 1;
     }
     }
-    static struct ftrace_page *
-    ftrace_allocate_pages(unsigned long num_to_init, unsigned long *num_pages)
-    {
-    struct ftrace_page *start_pg;
-    struct ftrace_page *pg;
-    int cnt;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_allocate_pages(num_to_init: c_ulong, num_pages: *mut c_ulong) -> *mut c_void {
+pub static mut start_pg: *mut c_void = core::ptr::null_mut();
+pub static mut pg: *mut c_void = core::ptr::null_mut();
+    let mut cnt = 0;
 // num_pages = 0;
-    if (!num_to_init)
+    if (!num_to_init) {
     return core::ptr::null_mut();
+    }
     start_pg = pg = kzalloc_obj(*pg);
-    if (!pg)
+    if (!pg) {
     return core::ptr::null_mut();
+    }
 //
 // Try to allocate as much as possible in one continues
 // location that fills in all of the space. We want to
@@ -3495,20 +3747,23 @@ unsafe extern "C" fn ftrace_free_pages(pages: *mut ftrace_page) {
 //
     for (;;) {
     cnt = ftrace_allocate_records(pg, num_to_init, num_pages);
-    if (cnt < 0)
-    goto free_pages;
+    if (cnt < 0) {
+// goto;
+    }
     num_to_init -= cnt;
-    if (!num_to_init)
+    if (!num_to_init) {
     break;
+    }
     pg.next = kzalloc_obj(*pg);
-    if (!pg.next)
-    goto free_pages;
+    if (!pg.next) {
+// goto;
+    }
     pg = pg.next;
     }
     return start_pg;
-    free_pages:
+// label;
     ftrace_free_pages(start_pg);
-    pr_info("ftrace: FAILED to allocate memory for functions\n");
+    pr_info!("ftrace: FAILED to allocate memory for functions\n");
     return core::ptr::null_mut();
     }
 
@@ -3532,113 +3787,123 @@ pub struct ftrace_iterator {
     pub flags: unsigned,
 }
 
-    static void *
-    t_probe_next(struct seq_file *m, loff_t *pos)
-    {
-    struct ftrace_iterator *iter = m.private;
-    struct trace_array *tr = iter.ops.private;
-    struct list_head *func_probes;
-    struct ftrace_hash *hash;
-    struct list_head *next;
-    struct hlist_node *hnd = core::ptr::null_mut();
-    struct hlist_head *hhd;
-    int size;
+#[no_mangle]
+pub unsafe extern "C" fn t_probe_next(m: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
+    let mut iter = m.private;
+    let mut tr = iter.ops.private;
+pub static mut func_probes: *mut c_void = core::ptr::null_mut();
+pub static mut hash: *mut c_void = core::ptr::null_mut();
+pub static mut next: *mut c_void = core::ptr::null_mut();
+    let mut hnd = core::ptr::null_mut();
+pub static mut hhd: *mut c_void = core::ptr::null_mut();
+    let mut size = 0;
     (*pos)++;
     iter.pos = *pos;
-    if (!tr)
+    if (!tr) {
     return core::ptr::null_mut();
+    }
     func_probes = &tr.func_probes;
-    if (list_empty(func_probes))
+    if (list_empty(func_probes)) {
     return core::ptr::null_mut();
+    }
     if (!iter.probe) {
     next = func_probes.next;
-    iter.probe = list_entry(next, struct ftrace_func_probe, list);
+    iter.probe = list_entry(next, ftrace_func_probe, list);
     }
-    if (iter.probe_entry)
+    if (iter.probe_entry) {
     hnd = &iter.probe_entry.hlist;
+    }
     hash = iter.probe.ops.func_hash.filter_hash;
 //
 // A probe being registered may temporarily have an empty hash
 // and it's at the end of the func_probes list.
 //
-    if (!hash || hash == EMPTY_HASH)
+    if (!hash || hash == EMPTY_HASH) {
     return core::ptr::null_mut();
+    }
     size = 1 << hash.size_bits;
-    retry:
+// label;
     if (iter.pidx >= size) {
-    if (iter.probe.list.next == func_probes)
+    if (iter.probe.list.next == func_probes) {
     return core::ptr::null_mut();
+    }
     next = iter.probe.list.next;
-    iter.probe = list_entry(next, struct ftrace_func_probe, list);
+    iter.probe = list_entry(next, ftrace_func_probe, list);
     hash = iter.probe.ops.func_hash.filter_hash;
     size = 1 << hash.size_bits;
     iter.pidx = 0;
     }
     hhd = &hash.buckets[iter.pidx];
     if (hlist_empty(hhd)) {
-    iter.pidx++;
+    iter.pidx += 1;
     hnd = core::ptr::null_mut();
-    goto retry;
+// goto;
     }
-    if (!hnd)
+    if (!hnd) {
     hnd = hhd.first;
+    }
     else {
     hnd = hnd.next;
     if (!hnd) {
-    iter.pidx++;
-    goto retry;
+    iter.pidx += 1;
+// goto;
     }
     }
-    if (WARN_ON_ONCE(!hnd))
+    if (WARN_ON_ONCE!(!hnd)) {
     return core::ptr::null_mut();
-    iter.probe_entry = hlist_entry(hnd, struct ftrace_func_entry, hlist);
+    }
+    iter.probe_entry = hlist_entry(hnd, ftrace_func_entry, hlist);
     return iter;
     }
-    static void *t_probe_start(struct seq_file *m, loff_t *pos)
-    {
-    struct ftrace_iterator *iter = m.private;
-    void *p = core::ptr::null_mut();
-    loff_t l;
-    if (!(iter.flags & FTRACE_ITER_DO_PROBES))
+#[no_mangle]
+pub unsafe extern "C" fn t_probe_start(m: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
+    let mut iter = m.private;
+    let mut p = core::ptr::null_mut();
+    let mut l = 0;
+    if (!(iter.flags & FTRACE_ITER_DO_PROBES)) {
     return core::ptr::null_mut();
-    if (iter.mod_pos > *pos)
+    }
+    if (iter.mod_pos > *pos) {
     return core::ptr::null_mut();
+    }
     iter.probe = core::ptr::null_mut();
     iter.probe_entry = core::ptr::null_mut();
     iter.pidx = 0;
-    for (l = 0; l <= (*pos - iter.mod_pos); ) {
+    while (l <= (*pos - iter.mod_pos)) {
     p = t_probe_next(m, &l);
-    if (!p)
+    if (!p) {
     break;
     }
-    if (!p)
+    }
+    if (!p) {
     return core::ptr::null_mut();
+    }
 // Only set this if we have an item
     iter.flags |= FTRACE_ITER_PROBE;
     return iter;
     }
-    static int
-    t_probe_show(struct seq_file *m, struct ftrace_iterator *iter)
-    {
-    struct ftrace_func_entry *probe_entry;
-    struct ftrace_probe_ops *probe_ops;
-    struct ftrace_func_probe *probe;
+#[no_mangle]
+pub unsafe extern "C" fn t_probe_show(m: *mut seq_file, iter: *mut ftrace_iterator) -> c_int {
+pub static mut probe_entry: *mut c_void = core::ptr::null_mut();
+pub static mut probe_ops: *mut c_void = core::ptr::null_mut();
+pub static mut probe: *mut c_void = core::ptr::null_mut();
     probe = iter.probe;
     probe_entry = iter.probe_entry;
-    if (WARN_ON_ONCE(!probe || !probe_entry))
+    if (WARN_ON_ONCE!(!probe || !probe_entry)) {
     return -EIO;
+    }
     probe_ops = probe.probe_ops;
-    if (probe_ops.print)
+    if (probe_ops.print) {
     return probe_ops.print(m, probe_entry.ip, probe_ops, probe.data);
-    seq_printf(m, "%ps:%ps\n", (void *)probe_entry.ip,
-    (void *)probe_ops.func);
+    }
+    seq_printf(m, "%ps:%ps\n", probe_entry.ip,
+    probe_ops.func);
     return 0;
     }
-    static void *
-    t_mod_next(struct seq_file *m, loff_t *pos)
-    {
-    struct ftrace_iterator *iter = m.private;
-    struct trace_array *tr = iter.tr;
+#[no_mangle]
+pub unsafe extern "C" fn t_mod_next(m: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
+    let mut iter = m.private;
+    let mut tr = iter.tr;
     (*pos)++;
     iter.pos = *pos;
     iter.mod_list = iter.mod_list.next;
@@ -3650,21 +3915,24 @@ pub struct ftrace_iterator {
     iter.mod_pos = *pos;
     return iter;
     }
-    static void *t_mod_start(struct seq_file *m, loff_t *pos)
-    {
-    struct ftrace_iterator *iter = m.private;
-    void *p = core::ptr::null_mut();
-    loff_t l;
-    if (iter.func_pos > *pos)
+#[no_mangle]
+pub unsafe extern "C" fn t_mod_start(m: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
+    let mut iter = m.private;
+    let mut p = core::ptr::null_mut();
+    let mut l = 0;
+    if (iter.func_pos > *pos) {
     return core::ptr::null_mut();
+    }
     iter.mod_pos = iter.func_pos;
 // probes are only available if tr is set
-    if (!iter.tr)
+    if (!iter.tr) {
     return core::ptr::null_mut();
-    for (l = 0; l <= (*pos - iter.func_pos); ) {
+    }
+    while (l <= (*pos - iter.func_pos)) {
     p = t_mod_next(m, &l);
-    if (!p)
+    if (!p) {
     break;
+    }
     }
     if (!p) {
     iter.flags &= ~FTRACE_ITER_MOD;
@@ -3674,35 +3942,36 @@ pub struct ftrace_iterator {
     iter.flags |= FTRACE_ITER_MOD;
     return iter;
     }
-    static int
-    t_mod_show(struct seq_file *m, struct ftrace_iterator *iter)
-    {
-    struct ftrace_mod_load *ftrace_mod;
-    struct trace_array *tr = iter.tr;
-    if (WARN_ON_ONCE(!iter.mod_list) ||
+#[no_mangle]
+pub unsafe extern "C" fn t_mod_show(m: *mut seq_file, iter: *mut ftrace_iterator) -> c_int {
+pub static mut ftrace_mod: *mut c_void = core::ptr::null_mut();
+    let mut tr = iter.tr;
+    if (WARN_ON_ONCE!(!iter.mod_list) ||
     iter.mod_list == &tr.mod_trace ||
-    iter.mod_list == &tr.mod_notrace)
+    iter.mod_list == &tr.mod_notrace) {
     return -EIO;
-    ftrace_mod = list_entry(iter.mod_list, struct ftrace_mod_load, list);
-    if (ftrace_mod.func)
+    }
+    ftrace_mod = list_entry(iter.mod_list, ftrace_mod_load, list);
+    if (ftrace_mod.func) {
     seq_printf(m, "%s", ftrace_mod.func);
-    else
+    }
+    else {
     seq_putc(m, '*');
+    }
     seq_printf(m, ":mod:%s\n", ftrace_mod.module);
     return 0;
     }
-    static void *
-    t_func_next(struct seq_file *m, loff_t *pos)
-    {
-    struct ftrace_iterator *iter = m.private;
-    struct dyn_ftrace *rec = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn t_func_next(m: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
+    let mut iter = m.private;
+    let mut rec = core::ptr::null_mut();
     (*pos)++;
-    retry:
+// label;
     if (iter.idx >= iter.pg.index) {
     if (iter.pg.next) {
     iter.pg = iter.pg.next;
     iter.idx = 0;
-    goto retry;
+// goto;
     }
     } else {
     rec = &iter.pg.records[iter.idx++];
@@ -3713,58 +3982,62 @@ pub struct ftrace_iterator {
     ((iter.flags & FTRACE_ITER_TOUCHED) &&
     !(rec.flags & FTRACE_FL_TOUCHED))) {
     rec = core::ptr::null_mut();
-    goto retry;
+// goto;
     }
     }
-    if (!rec)
+    if (!rec) {
     return core::ptr::null_mut();
+    }
     iter.pos = iter.func_pos = *pos;
     iter.func = rec;
     return iter;
     }
-    static void *
-    t_next(struct seq_file *m, void *v, loff_t *pos)
-    {
-    struct ftrace_iterator *iter = m.private;
+#[no_mangle]
+pub unsafe extern "C" fn t_next(m: *mut seq_file, v: *mut c_void, pos: *mut loff_t) -> *mut c_void {
+    let mut iter = m.private;
     loff_t l = *pos; /* t_probe_start() must use original pos */
-    void *ret;
-    if (unlikely(ftrace_disabled))
+pub static mut ret: *mut c_void = core::ptr::null_mut();
+    if (unlikely(ftrace_disabled)) {
     return core::ptr::null_mut();
-    if (iter.flags & FTRACE_ITER_PROBE)
+    }
+    if (iter.flags & FTRACE_ITER_PROBE) {
     return t_probe_next(m, pos);
-    if (iter.flags & FTRACE_ITER_MOD)
+    }
+    if (iter.flags & FTRACE_ITER_MOD) {
     return t_mod_next(m, pos);
+    }
     if (iter.flags & FTRACE_ITER_PRINTALL) {
 // next must increment pos, and t_probe_start does not
     (*pos)++;
     return t_mod_start(m, &l);
     }
     ret = t_func_next(m, pos);
-    if (!ret)
+    if (!ret) {
     return t_mod_start(m, &l);
+    }
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn reset_iter_read(iter: *mut ftrace_iterator) {
-    static void reset_iter_read(struct ftrace_iterator *iter)
-    {
     iter.pos = 0;
     iter.func_pos = 0;
     iter.flags &= ~(FTRACE_ITER_PRINTALL | FTRACE_ITER_PROBE | FTRACE_ITER_MOD);
     }
-    static void *t_start(struct seq_file *m, loff_t *pos)
-    {
-    struct ftrace_iterator *iter = m.private;
-    void *p = core::ptr::null_mut();
-    loff_t l;
+#[no_mangle]
+pub unsafe extern "C" fn t_start(m: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
+    let mut iter = m.private;
+    let mut p = core::ptr::null_mut();
+    let mut l = 0;
     mutex_lock(&ftrace_lock);
-    if (unlikely(ftrace_disabled))
+    if (unlikely(ftrace_disabled)) {
     return core::ptr::null_mut();
+    }
 //
 // If an lseek was done, then reset and start from beginning.
 //
-    if (*pos < iter.pos)
+    if (*pos < iter.pos) {
     reset_iter_read(iter);
+    }
 //
 // For set_ftrace_filter reading, if we have the filter
 // off, we can short cut and just print out that all
@@ -3773,15 +4046,17 @@ unsafe extern "C" fn reset_iter_read(iter: *mut ftrace_iterator) {
     if ((iter.flags & (FTRACE_ITER_FILTER | FTRACE_ITER_NOTRACE)) &&
     ftrace_hash_empty(iter.hash)) {
     iter.func_pos = 1; /* Account for the message */
-    if (*pos > 0)
+    if (*pos > 0) {
     return t_mod_start(m, pos);
+    }
     iter.flags |= FTRACE_ITER_PRINTALL;
 // reset in case of seek/pread
     iter.flags &= ~FTRACE_ITER_PROBE;
     return iter;
     }
-    if (iter.flags & FTRACE_ITER_MOD)
+    if (iter.flags & FTRACE_ITER_MOD) {
     return t_mod_start(m, pos);
+    }
 //
 // Unfortunately, we need to restart at ftrace_pages_start
 // every time we let go of the ftrace_mutex. This is because
@@ -3789,33 +4064,33 @@ unsafe extern "C" fn reset_iter_read(iter: *mut ftrace_iterator) {
 //
     iter.pg = ftrace_pages_start;
     iter.idx = 0;
-    for (l = 0; l <= *pos; ) {
+    while (l <= *pos) {
     p = t_func_next(m, &l);
-    if (!p)
+    if (!p) {
     break;
     }
-    if (!p)
+    }
+    if (!p) {
     return t_mod_start(m, pos);
+    }
     return iter;
     }
 #[no_mangle]
 unsafe extern "C" fn t_stop(m: *mut seq_file, p: *mut c_void) {
-    static void t_stop(struct seq_file *m, void *p)
-    {
     mutex_unlock(&ftrace_lock);
     }
     void * __weak
-    arch_ftrace_trampoline_func(struct ftrace_ops *ops, struct dyn_ftrace *rec)
+    arch_ftrace_trampoline_func(ftrace_ops *ops, dyn_ftrace *rec)
     {
     return core::ptr::null_mut();
     }
-    static void add_trampoline_func(struct seq_file *m, struct ftrace_ops *ops,
-    struct dyn_ftrace *rec)
-    {
-    void *ptr;
+#[no_mangle]
+pub unsafe extern "C" fn add_trampoline_func(m: *mut seq_file, ops: *mut ftrace_ops, rec: *mut dyn_ftrace) {
+pub static mut ptr: *mut c_void = core::ptr::null_mut();
     ptr = arch_ftrace_trampoline_func(ops, rec);
-    if (ptr)
+    if (ptr) {
     seq_printf(m, " .%pS", ptr);
+    }
     }
 
 //
@@ -3830,11 +4105,9 @@ unsafe extern "C" fn t_stop(m: *mut seq_file, p: *mut c_void) {
 //
 #[no_mangle]
 unsafe extern "C" fn test_for_valid_rec(rec: *mut dyn_ftrace) -> c_int {
-    static int test_for_valid_rec(struct dyn_ftrace *rec)
-    {
     char str[KSYM_SYMBOL_LEN];
-    unsigned long offset;
-    const char *ret;
+    let mut offset = 0;
+pub static mut ret: *mut c_void = core::ptr::null_mut();
     ret = kallsyms_lookup(rec.ip, core::ptr::null_mut(), &offset, core::ptr::null_mut(), str);
 // Weak functions can cause invalid addresses
     if (!ret || offset > FTRACE_MCOUNT_MAX_OFFSET) {
@@ -3843,17 +4116,15 @@ unsafe extern "C" fn test_for_valid_rec(rec: *mut dyn_ftrace) -> c_int {
     }
     return 1;
     }
-    static struct workqueue_struct *ftrace_check_wq __initdata;
+pub static mut ftrace_check_wq: *mut c_void = core::ptr::null_mut();
     static struct work_struct ftrace_check_work __initdata;
 //
 // Scan all the mcount/fentry entries to make sure they are valid.
 //
 #[no_mangle]
 unsafe extern "C" fn ftrace_check_work_func(work: *mut work_struct) -> __init void {
-    static __init void ftrace_check_work_func(struct work_struct *work)
-    {
-    struct ftrace_page *pg;
-    struct dyn_ftrace *rec;
+pub static mut pg: *mut c_void = core::ptr::null_mut();
+pub static mut rec: *mut c_void = core::ptr::null_mut();
     mutex_lock(&ftrace_lock);
     do_for_each_ftrace_rec(pg, rec) {
     test_for_valid_rec(rec);
@@ -3861,33 +4132,28 @@ unsafe extern "C" fn ftrace_check_work_func(work: *mut work_struct) -> __init vo
     mutex_unlock(&ftrace_lock);
     }
 #[no_mangle]
-unsafe extern "C" fn ftrace_check_for_weak_functions() -> int __init {
-    static int __init ftrace_check_for_weak_functions(void)
-    {
+unsafe extern "C" fn ftrace_check_for_weak_functions() -> c_int {
     INIT_WORK(&ftrace_check_work, ftrace_check_work_func);
     ftrace_check_wq = alloc_workqueue("ftrace_check_wq", WQ_UNBOUND, 0);
     queue_work(ftrace_check_wq, &ftrace_check_work);
     return 0;
     }
 #[no_mangle]
-unsafe extern "C" fn ftrace_check_sync() -> int __init {
-    static int __init ftrace_check_sync(void)
-    {
+unsafe extern "C" fn ftrace_check_sync() -> c_int {
 // Make sure the ftrace_check updates are finished
-    if (ftrace_check_wq)
+    if (ftrace_check_wq) {
     destroy_workqueue(ftrace_check_wq);
+    }
     return 0;
     }
-    late_initcall_sync(ftrace_check_sync);
-    subsys_initcall(ftrace_check_for_weak_functions);
+    late_initcall_sync!(ftrace_check_sync);
+    subsys_initcall!(ftrace_check_for_weak_functions);
 #[no_mangle]
 unsafe extern "C" fn print_rec(m: *mut seq_file, ip: c_ulong) -> c_int {
-    static int print_rec(struct seq_file *m, unsigned long ip)
-    {
-    unsigned long offset;
+    let mut offset = 0;
     char str[KSYM_SYMBOL_LEN];
-    char *modname;
-    const char *ret;
+pub static mut modname: *mut c_void = core::ptr::null_mut();
+pub static mut ret: *mut c_void = core::ptr::null_mut();
     ret = kallsyms_lookup(ip, core::ptr::null_mut(), &offset, &modname, str);
 // Weak functions can cause invalid addresses
     if (!ret || offset > FTRACE_MCOUNT_MAX_OFFSET) {
@@ -3896,90 +4162,90 @@ unsafe extern "C" fn print_rec(m: *mut seq_file, ip: c_ulong) -> c_int {
     ret = core::ptr::null_mut();
     }
     seq_puts(m, str);
-    if (modname)
+    if (modname) {
     seq_printf(m, " [%s]", modname);
-    let mut ret: return = = core::ptr::null_mut() ? -1 : 0;
+    }
+pub static mut ret: return = 0;
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn test_for_valid_rec(rec: *mut dyn_ftrace) -> c_int {
-    static inline int test_for_valid_rec(struct dyn_ftrace *rec)
-    {
     return 1;
     }
 #[no_mangle]
 pub unsafe extern "C" fn print_rec(m: *mut seq_file, ip: c_ulong) -> c_int {
-    static inline int print_rec(struct seq_file *m, unsigned long ip)
-    {
-    seq_printf(m, "%ps", (void *)ip);
+    seq_printf(m, "%ps", ip);
     return 0;
     }
 
 #[no_mangle]
 unsafe extern "C" fn print_subops(m: *mut seq_file, ops: *mut ftrace_ops, rec: *mut dyn_ftrace) {
-    static void print_subops(struct seq_file *m, struct ftrace_ops *ops, struct dyn_ftrace *rec)
-    {
-    struct ftrace_ops *subops;
-    let mut first: bool = true;
+pub static mut subops: *mut c_void = core::ptr::null_mut();
+pub static mut first: bool = true;
     list_for_each_entry(subops, &ops.subop_list, list) {
     if (!((subops.flags & FTRACE_OPS_FL_ENABLED) &&
-    hash_contains_ip(rec.ip, subops.func_hash)))
+    hash_contains_ip(rec.ip, subops.func_hash))) {
     continue;
+    }
     if (first) {
     seq_printf(m, "\tsubops:");
     first = false;
     }
 
     if (subops.flags & FTRACE_OPS_FL_GRAPH) {
-    struct fgraph_ops *gops;
-    gops = container_of(subops, struct fgraph_ops, ops);
+pub static mut gops: *mut c_void = core::ptr::null_mut();
+    gops = container_of!(subops, fgraph_ops, ops);
     seq_printf(m, " {ent:%pS ret:%pS}",
-    (void *)gops.entryfunc,
-    (void *)gops.retfunc);
+    gops.entryfunc,
+    gops.retfunc);
     continue;
     }
 
     if (subops.trampoline) {
     seq_printf(m, " {%pS (%pS)}",
-    (void *)subops.trampoline,
-    (void *)subops.func);
+    subops.trampoline,
+    subops.func);
     add_trampoline_func(m, subops, rec);
     } else {
     seq_printf(m, " {%pS}",
-    (void *)subops.func);
+    subops.func);
     }
     }
     }
 #[no_mangle]
 unsafe extern "C" fn t_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int t_show(struct seq_file *m, void *v)
-    {
-    struct ftrace_iterator *iter = m.private;
-    struct dyn_ftrace *rec;
-    if (iter.flags & FTRACE_ITER_PROBE)
+    let mut iter = m.private;
+pub static mut rec: *mut c_void = core::ptr::null_mut();
+    if (iter.flags & FTRACE_ITER_PROBE) {
     return t_probe_show(m, iter);
-    if (iter.flags & FTRACE_ITER_MOD)
+    }
+    if (iter.flags & FTRACE_ITER_MOD) {
     return t_mod_show(m, iter);
+    }
     if (iter.flags & FTRACE_ITER_PRINTALL) {
-    if (iter.flags & FTRACE_ITER_NOTRACE)
+    if (iter.flags & FTRACE_ITER_NOTRACE) {
     seq_puts(m, "#### no functions disabled ####\n");
-    else
+    }
+    else {
     seq_puts(m, "#### all functions enabled ####\n");
+    }
     return 0;
     }
     rec = iter.func;
-    if (!rec)
+    if (!rec) {
     return 0;
-    if (iter.flags & FTRACE_ITER_ADDRS)
+    }
+    if (iter.flags & FTRACE_ITER_ADDRS) {
     seq_printf(m, "%lx ", rec.ip);
+    }
     if (print_rec(m, rec.ip)) {
 // This should only happen when a rec is disabled
-    WARN_ON_ONCE(!(rec.flags & FTRACE_FL_DISABLED));
+    WARN_ON_ONCE!(!(rec.flags & FTRACE_FL_DISABLED));
     seq_putc(m, '\n');
     return 0;
     }
     if (iter.flags & (FTRACE_ITER_ENABLED | FTRACE_ITER_TOUCHED)) {
-    struct ftrace_ops *ops;
+pub static mut ops: *mut c_void = core::ptr::null_mut();
     seq_printf(m, " (%ld)%s%s%s%s%s",
     ftrace_rec_count(rec),
     rec.flags & FTRACE_FL_REGS ? " R" : "  ",
@@ -3992,14 +4258,15 @@ unsafe extern "C" fn t_show(m: *mut seq_file, v: *mut c_void) -> c_int {
     if (ops) {
     do {
     seq_printf(m, "\ttramp: %pS (%pS)",
-    (void *)ops.trampoline,
-    (void *)ops.func);
+    ops.trampoline,
+    ops.func);
     add_trampoline_func(m, ops, rec);
     print_subops(m, ops, rec);
     ops = ftrace_find_tramp_ops_next(rec, ops);
     } while (ops);
-    } else
+    } else {
     seq_puts(m, "\ttramp: ERROR!");
+    }
     } else {
     add_trampoline_func(m, core::ptr::null_mut(), rec);
     }
@@ -4014,45 +4281,41 @@ unsafe extern "C" fn t_show(m: *mut seq_file, v: *mut c_void) -> c_int {
     }
     }
     if (rec.flags & FTRACE_FL_DIRECT) {
-    unsigned long direct;
+    let mut direct = 0;
     direct = ftrace_find_rec_direct(rec.ip);
     if (direct) {
     seq_printf(m, "\n\tdirect%s-.%pS",
     ftrace_is_jmp(direct) ? "(jmp)" : "",
-    (void *)ftrace_jmp_get(direct));
+    ftrace_jmp_get(direct));
     }
     }
     }
     seq_putc(m, '\n');
     return 0;
     }
-    static const struct seq_operations show_ftrace_seq_ops = {
-    .start = t_start,
-    .next = t_next,
-    .stop = t_stop,
-    .show = t_show,
-    };
-    static int
-    ftrace_avail_open(struct inode *inode, struct file *file)
-    {
-    struct ftrace_iterator *iter;
-    int ret;
+pub static mut seq_operations: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_avail_open(inode: *mut inode, file: *mut file) -> c_int {
+pub static mut iter: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     ret = security_locked_down(LOCKDOWN_TRACEFS);
-    if (ret)
+    if (ret) {
     return ret;
-    if (unlikely(ftrace_disabled))
+    }
+    if (unlikely(ftrace_disabled)) {
     return -ENODEV;
-    iter = __seq_open_private(file, &show_ftrace_seq_ops, sizeof(*iter));
-    if (!iter)
+    }
+    iter = __seq_open_private(file, &show_ftrace_seq_ops, sizeof!(*iter));
+    if (!iter) {
     return -ENOMEM;
+    }
     iter.pg = ftrace_pages_start;
     iter.ops = &global_ops;
     return 0;
     }
-    static int
-    ftrace_enabled_open(struct inode *inode, struct file *file)
-    {
-    struct ftrace_iterator *iter;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_enabled_open(inode: *mut inode, file: *mut file) -> c_int {
+pub static mut iter: *mut c_void = core::ptr::null_mut();
 //
 // This shows us what functions are currently being
 // traced and by what. Not sure if we want lockdown
@@ -4061,18 +4324,18 @@ unsafe extern "C" fn t_show(m: *mut seq_file, v: *mut c_void) -> c_int {
 // want people to see, but if something is tracing
 // something, we probably want to know about it.
 //
-    iter = __seq_open_private(file, &show_ftrace_seq_ops, sizeof(*iter));
-    if (!iter)
+    iter = __seq_open_private(file, &show_ftrace_seq_ops, sizeof!(*iter));
+    if (!iter) {
     return -ENOMEM;
+    }
     iter.pg = ftrace_pages_start;
     iter.flags = FTRACE_ITER_ENABLED;
     iter.ops = &global_ops;
     return 0;
     }
-    static int
-    ftrace_touched_open(struct inode *inode, struct file *file)
-    {
-    struct ftrace_iterator *iter;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_touched_open(inode: *mut inode, file: *mut file) -> c_int {
+pub static mut iter: *mut c_void = core::ptr::null_mut();
 //
 // This shows us what functions have ever been enabled
 // (traced, direct, patched, etc). Not sure if we want lockdown
@@ -4081,27 +4344,30 @@ unsafe extern "C" fn t_show(m: *mut seq_file, v: *mut c_void) -> c_int {
 // want people to see, but if something had traced
 // something, we probably want to know about it.
 //
-    iter = __seq_open_private(file, &show_ftrace_seq_ops, sizeof(*iter));
-    if (!iter)
+    iter = __seq_open_private(file, &show_ftrace_seq_ops, sizeof!(*iter));
+    if (!iter) {
     return -ENOMEM;
+    }
     iter.pg = ftrace_pages_start;
     iter.flags = FTRACE_ITER_TOUCHED;
     iter.ops = &global_ops;
     return 0;
     }
-    static int
-    ftrace_avail_addrs_open(struct inode *inode, struct file *file)
-    {
-    struct ftrace_iterator *iter;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_avail_addrs_open(inode: *mut inode, file: *mut file) -> c_int {
+pub static mut iter: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     ret = security_locked_down(LOCKDOWN_TRACEFS);
-    if (ret)
+    if (ret) {
     return ret;
-    if (unlikely(ftrace_disabled))
+    }
+    if (unlikely(ftrace_disabled)) {
     return -ENODEV;
-    iter = __seq_open_private(file, &show_ftrace_seq_ops, sizeof(*iter));
-    if (!iter)
+    }
+    iter = __seq_open_private(file, &show_ftrace_seq_ops, sizeof!(*iter));
+    if (!iter) {
     return -ENOMEM;
+    }
     iter.pg = ftrace_pages_start;
     iter.flags = FTRACE_ITER_ADDRS;
     iter.ops = &global_ops;
@@ -4125,25 +4391,27 @@ unsafe extern "C" fn t_show(m: *mut seq_file, v: *mut c_void) -> c_int {
 //
 // Returns: 0 on success or a negative errno value on failure
 //
-    int
-    ftrace_regex_open(struct ftrace_ops *ops, int flag,
-    struct inode *inode, struct file *file)
-    {
-    struct ftrace_iterator *iter;
-    struct ftrace_hash *hash;
-    struct list_head *mod_head;
-    struct trace_array *tr = ops.private;
-    let mut ret: c_int = -ENOMEM;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_regex_open(ops: *mut ftrace_ops, flag: c_int, inode: *mut inode, file: *mut file) -> c_int {
+pub static mut iter: *mut c_void = core::ptr::null_mut();
+pub static mut hash: *mut c_void = core::ptr::null_mut();
+pub static mut mod_head: *mut c_void = core::ptr::null_mut();
+    let mut tr = ops.private;
+pub static mut ret: c_int = 0;
     ftrace_ops_init(ops);
-    if (unlikely(ftrace_disabled))
+    if (unlikely(ftrace_disabled)) {
     return -ENODEV;
-    if (tracing_check_open_get_tr(tr))
+    }
+    if (tracing_check_open_get_tr(tr)) {
     return -ENODEV;
+    }
     iter = kzalloc_obj(*iter);
-    if (!iter)
-    goto out;
-    if (trace_parser_get_init(&iter.parser, FTRACE_BUFF_MAX))
-    goto out;
+    if (!iter) {
+// goto;
+    }
+    if (trace_parser_get_init(&iter.parser, FTRACE_BUFF_MAX)) {
+// goto;
+    }
     iter.ops = ops;
     iter.flags = flag;
     iter.tr = tr;
@@ -4157,7 +4425,7 @@ unsafe extern "C" fn t_show(m: *mut seq_file, v: *mut c_void) -> c_int {
     }
     iter.mod_list = mod_head;
     if (file.f_mode & FMODE_WRITE) {
-    let mut size_bits: c_int = FTRACE_HASH_DEFAULT_BITS;
+pub static mut size_bits: c_int = 0;
     if (file.f_flags & O_TRUNC) {
     iter.hash = alloc_ftrace_hash(size_bits);
     clear_ftrace_mod_list(mod_head);
@@ -4165,52 +4433,54 @@ unsafe extern "C" fn t_show(m: *mut seq_file, v: *mut c_void) -> c_int {
     iter.hash = alloc_and_copy_ftrace_hash(size_bits, hash);
     }
     } else {
-    if (hash)
+    if (hash) {
     iter.hash = alloc_and_copy_ftrace_hash(hash.size_bits, hash);
-    else
+    }
+    else {
     iter.hash = EMPTY_HASH;
+    }
     }
     if (!iter.hash) {
     trace_parser_put(&iter.parser);
-    goto out_unlock;
+// goto;
     }
     ret = 0;
     if (file.f_mode & FMODE_READ) {
     iter.pg = ftrace_pages_start;
     ret = seq_open(file, &show_ftrace_seq_ops);
     if (!ret) {
-    struct seq_file *m = file.private_data;
+    let mut m = file.private_data;
     m.private = iter;
     } else {
 // Failed
     free_ftrace_hash(iter.hash);
     trace_parser_put(&iter.parser);
     }
-    } else
+    } else {
     file.private_data = iter;
-    out_unlock:
+    }
+// label;
     mutex_unlock(&ops.func_hash.regex_lock);
-    out:
+// label;
     if (ret) {
     kfree(iter);
-    if (tr)
+    if (tr) {
     trace_array_put(tr);
+    }
     }
     return ret;
     }
-    static int
-    ftrace_filter_open(struct inode *inode, struct file *file)
-    {
-    struct ftrace_ops *ops = inode.i_private;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_filter_open(inode: *mut inode, file: *mut file) -> c_int {
+    let mut ops = inode.i_private;
 // Checks for tracefs lockdown
     return ftrace_regex_open(ops,
     FTRACE_ITER_FILTER | FTRACE_ITER_DO_PROBES,
     inode, file);
     }
-    static int
-    ftrace_notrace_open(struct inode *inode, struct file *file)
-    {
-    struct ftrace_ops *ops = inode.i_private;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_notrace_open(inode: *mut inode, file: *mut file) -> c_int {
+    let mut ops = inode.i_private;
 // Checks for tracefs lockdown
     return ftrace_regex_open(ops, FTRACE_ITER_NOTRACE,
     inode, file);
@@ -4231,73 +4501,80 @@ pub struct ftrace_glob {
 //
 #[no_mangle]
 pub unsafe extern "C" fn arch_ftrace_match_adjust(str: *mut c_char, search: *const c_char) -> *mut char  __weak {
-    char * __weak arch_ftrace_match_adjust(char *str, const char *search)
-    {
     return str;
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_match(str: *mut c_char, g: *mut ftrace_glob) -> c_int {
-    static int ftrace_match(char *str, struct ftrace_glob *g)
-    {
-    let mut matched: c_int = 0;
-    int slen;
+pub static mut matched: c_int = 0;
+    let mut slen = 0;
     str = arch_ftrace_match_adjust(str, g.search);
-    switch (g.type) {
-    case MATCH_FULL:
-    if (strcmp(str, g.search) == 0)
+    match (g.type) {
+    MATCH_FULL => {
+    if (strcmp(str, g.search) == 0) {
     matched = 1;
-    break;
-    case MATCH_FRONT_ONLY:
-    if (strncmp(str, g.search, g.len) == 0)
+    }
+    // break;
+    }
+    MATCH_FRONT_ONLY => {
+    if (strncmp(str, g.search, g.len) == 0) {
     matched = 1;
-    break;
-    case MATCH_MIDDLE_ONLY:
-    if (strstr(str, g.search))
+    }
+    // break;
+    }
+    MATCH_MIDDLE_ONLY => {
+    if (strstr(str, g.search)) {
     matched = 1;
-    break;
-    case MATCH_END_ONLY:
+    }
+    // break;
+    }
+    MATCH_END_ONLY => {
     slen = strlen(str);
     if (slen >= g.len &&
-    memcmp(str + slen - g.len, g.search, g.len) == 0)
+    memcmp(str + slen - g.len, g.search, g.len) == 0) {
     matched = 1;
-    break;
-    case MATCH_GLOB:
-    if (glob_match(g.search, str))
+    }
+    // break;
+    }
+    MATCH_GLOB => {
+    if (glob_match(g.search, str)) {
     matched = 1;
-    break;
+    }
+    // break;
+    }
     }
     return matched;
     }
-    static int
-    enter_record(struct ftrace_hash *hash, struct dyn_ftrace *rec, int clear_filter)
-    {
-    struct ftrace_func_entry *entry;
-    let mut ret: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn enter_record(hash: *mut ftrace_hash, rec: *mut dyn_ftrace, clear_filter: c_int) -> c_int {
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     entry = ftrace_lookup_ip(hash, rec.ip);
     if (clear_filter) {
 // Do nothing if it doesn't exist
-    if (!entry)
+    if (!entry) {
     return 0;
+    }
     free_hash_entry(hash, entry);
     } else {
 // Do nothing if it exists
-    if (entry)
+    if (entry) {
     return 0;
-    if (add_hash_entry(hash, rec.ip) == core::ptr::null_mut())
+    }
+    if (add_hash_entry(hash, rec.ip) == core::ptr::null_mut()) {
     ret = -ENOMEM;
+    }
     }
     return ret;
     }
-    static int
-    add_rec_by_index(struct ftrace_hash *hash, struct ftrace_glob *func_g,
-    int clear_filter)
-    {
-    long index;
-    struct ftrace_page *pg;
-    struct dyn_ftrace *rec;
+#[no_mangle]
+pub unsafe extern "C" fn add_rec_by_index(hash: *mut ftrace_hash, func_g: *mut ftrace_glob, clear_filter: c_int) -> c_int {
+    let mut index = 0;
+pub static mut pg: *mut c_void = core::ptr::null_mut();
+pub static mut rec: *mut c_void = core::ptr::null_mut();
 // The index starts at 1
-    if (kstrtoul(func_g.search, 0, &index) || --index < 0)
+    if (kstrtoul(func_g.search, 0, &index) || --index < 0) {
     return 0;
+    }
     do_for_each_ftrace_rec(pg, rec) {
     if (pg.index <= index) {
     index -= pg.index;
@@ -4313,42 +4590,38 @@ unsafe extern "C" fn ftrace_match(str: *mut c_char, g: *mut ftrace_glob) -> c_in
 
 #[no_mangle]
 unsafe extern "C" fn lookup_ip(ip: c_ulong, modname: *mut c_char, str: *mut c_char) -> c_int {
-    static int lookup_ip(unsigned long ip, char **modname, char *str)
-    {
-    unsigned long offset;
+    let mut offset = 0;
     kallsyms_lookup(ip, core::ptr::null_mut(), &offset, modname, str);
-    if (offset > FTRACE_MCOUNT_MAX_OFFSET)
+    if (offset > FTRACE_MCOUNT_MAX_OFFSET) {
     return -1;
+    }
     return 0;
     }
 
 #[no_mangle]
 unsafe extern "C" fn lookup_ip(ip: c_ulong, modname: *mut c_char, str: *mut c_char) -> c_int {
-    static int lookup_ip(unsigned long ip, char **modname, char *str)
-    {
     kallsyms_lookup(ip, core::ptr::null_mut(), core::ptr::null_mut(), modname, str);
     return 0;
     }
 
-    static int
-    ftrace_match_record(struct dyn_ftrace *rec, struct ftrace_glob *func_g,
-    struct ftrace_glob *mod_g, int exclude_mod)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_match_record(rec: *mut dyn_ftrace, func_g: *mut ftrace_glob, mod_g: *mut ftrace_glob, exclude_mod: c_int) -> c_int {
     char str[KSYM_SYMBOL_LEN];
-    char *modname;
+pub static mut modname: *mut c_void = core::ptr::null_mut();
     if (lookup_ip(rec.ip, &modname, str)) {
 // This should only happen when a rec is disabled
-    WARN_ON_ONCE(system_state == SYSTEM_RUNNING &&
+    WARN_ON_ONCE!(system_state == SYSTEM_RUNNING &&
     !(rec.flags & FTRACE_FL_DISABLED));
     return 0;
     }
     if (mod_g) {
-    let mut mod_matches: c_int = (modname) ? ftrace_match(modname, mod_g) : 0;
+pub static mut mod_matches: c_int = 0;
 // blank module name to match all modules
     if (!mod_g.len) {
 // blank module globbing: modname xor exclude_mod
-    if (!exclude_mod != !modname)
-    goto func_match;
+    if (!exclude_mod != !modname) {
+// goto;
+    }
     return 0;
     }
 //
@@ -4358,27 +4631,28 @@ unsafe extern "C" fn lookup_ip(ip: c_ulong, modname: *mut c_char, str: *mut c_ch
 // also return 0. Otherwise, check the function to see if
 // that matches.
 //
-    if (!mod_matches == !exclude_mod)
+    if (!mod_matches == !exclude_mod) {
     return 0;
-    func_match:
+    }
+// label;
 // blank search means to match all funcs in the mod
-    if (!func_g.len)
+    if (!func_g.len) {
     return 1;
+    }
     }
     return ftrace_match(str, func_g);
     }
-    static int
-    match_records(struct ftrace_hash *hash, char *func, int len, char *mod)
-    {
-    struct ftrace_page *pg;
-    struct dyn_ftrace *rec;
-    let mut func_g: ftrace_glob = { .type = MATCH_FULL };
-    let mut mod_g: ftrace_glob = { .type = MATCH_FULL };
-    struct ftrace_glob *mod_match = (mod) ? &mod_g : core::ptr::null_mut();
-    let mut exclude_mod: c_int = 0;
-    let mut found: c_int = 0;
-    int ret;
-    let mut clear_filter: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn match_records(hash: *mut ftrace_hash, func: *mut c_char, len: c_int, mod: *mut c_char) -> c_int {
+pub static mut pg: *mut c_void = core::ptr::null_mut();
+pub static mut rec: *mut c_void = core::ptr::null_mut();
+pub static mut func_g: ftrace_glob = 0;
+pub static mut mod_g: ftrace_glob = 0;
+    let mut mod_match = (mod) ? &mod_g : core::ptr::null_mut();
+pub static mut exclude_mod: c_int = 0;
+pub static mut found: c_int = 0;
+    let mut ret = 0;
+pub static mut clear_filter: c_int = 0;
     if (func) {
     func_g.type = filter_parse_regex(func, len, &func_g.search,
     &clear_filter);
@@ -4390,34 +4664,37 @@ unsafe extern "C" fn lookup_ip(ip: c_ulong, modname: *mut c_char, str: *mut c_ch
     mod_g.len = strlen(mod_g.search);
     }
     guard(mutex)(&ftrace_lock);
-    if (unlikely(ftrace_disabled))
+    if (unlikely(ftrace_disabled)) {
     return 0;
-    if (func_g.type == MATCH_INDEX)
+    }
+    if (func_g.type == MATCH_INDEX) {
     return add_rec_by_index(hash, &func_g, clear_filter);
+    }
     do_for_each_ftrace_rec(pg, rec) {
-    if (rec.flags & FTRACE_FL_DISABLED)
+    if (rec.flags & FTRACE_FL_DISABLED) {
     continue;
+    }
     if (ftrace_match_record(rec, &func_g, mod_match, exclude_mod)) {
     ret = enter_record(hash, rec, clear_filter);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     found = 1;
     }
     cond_resched();
     } while_for_each_ftrace_rec();
     return found;
     }
-    static int
-    ftrace_match_records(struct ftrace_hash *hash, char *buff, int len)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_match_records(hash: *mut ftrace_hash, buff: *mut c_char, len: c_int) -> c_int {
     return match_records(hash, buff, len, core::ptr::null_mut());
     }
-    static void ftrace_ops_update_code(struct ftrace_ops *ops,
-    struct ftrace_ops_hash *old_hash)
-    {
-    struct ftrace_ops *op;
-    if (!ftrace_enabled)
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_ops_update_code(ops: *mut ftrace_ops, old_hash: *mut ftrace_ops_hash) {
+pub static mut op: *mut c_void = core::ptr::null_mut();
+    if (!ftrace_enabled) {
     return;
+    }
     if (ops.flags & FTRACE_OPS_FL_ENABLED) {
     ftrace_run_modify_code(ops, FTRACE_UPDATE_CALLS, old_hash);
     return;
@@ -4427,8 +4704,9 @@ unsafe extern "C" fn lookup_ip(ip: c_ulong, modname: *mut c_char, str: *mut c_ch
 // check if there is another ops that shares it, is enabled.
 // If so, we still need to run the modify code.
 //
-    if (ops.func_hash != &global_ops.local_hash)
+    if (ops.func_hash != &global_ops.local_hash) {
     return;
+    }
     do_for_each_ftrace_op(op, ftrace_ops_list) {
     if (op.func_hash == &global_ops.local_hash &&
     op.flags & FTRACE_OPS_FL_ENABLED) {
@@ -4438,13 +4716,11 @@ unsafe extern "C" fn lookup_ip(ip: c_ulong, modname: *mut c_char, str: *mut c_ch
     }
     } while_for_each_ftrace_op(op);
     }
-    static int ftrace_hash_move_and_update_ops(struct ftrace_ops *ops,
-    struct ftrace_hash **orig_hash,
-    struct ftrace_hash *hash,
-    int enable)
-    {
-    if (ops.flags & FTRACE_OPS_FL_SUBOP)
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_hash_move_and_update_ops(ops: *mut ftrace_ops, orig_hash: *mut *mut ftrace_hash, hash: *mut ftrace_hash, enable: c_int) -> c_int {
+    if (ops.flags & FTRACE_OPS_FL_SUBOP) {
     return ftrace_hash_move_and_update_subops(ops, orig_hash, hash);
+    }
 //
 // If this ops is not enabled, it could be sharing its filters
 // with a subop. If that's the case, update the subop instead of
@@ -4453,10 +4729,10 @@ unsafe extern "C" fn lookup_ip(ip: c_ulong, modname: *mut c_char, str: *mut c_ch
 // it will not affect subops that share it.
 //
     if (!(ops.flags & FTRACE_OPS_FL_ENABLED)) {
-    struct ftrace_ops *op;
+pub static mut op: *mut c_void = core::ptr::null_mut();
 // Check if any other manager subops maps to this hash
     do_for_each_ftrace_op(op, ftrace_ops_list) {
-    struct ftrace_ops *subops;
+pub static mut subops: *mut c_void = core::ptr::null_mut();
     list_for_each_entry(subops, &op.subop_list, list) {
     if ((subops.flags & FTRACE_OPS_FL_ENABLED) &&
     subops.func_hash == ops.func_hash) {
@@ -4467,20 +4743,21 @@ unsafe extern "C" fn lookup_ip(ip: c_ulong, modname: *mut c_char, str: *mut c_ch
     }
     return __ftrace_hash_move_and_update_ops(ops, orig_hash, hash, enable);
     }
-    static int cache_mod(struct trace_array *tr,
-    const char *func, char *module, int enable)
-    {
-    struct ftrace_mod_load *ftrace_mod, *n;
-    struct list_head *head = enable ? &tr.mod_trace : &tr.mod_notrace;
+#[no_mangle]
+pub unsafe extern "C" fn cache_mod(tr: *mut trace_array, func: *mut c_char, module: *mut c_char, enable: c_int) -> c_int {
+    let mut ftrace_mod = core::ptr::null_mut();
+    let mut n = core::ptr::null_mut();
+    let mut head = enable ? &tr.mod_trace : &tr.mod_notrace;
     guard(mutex)(&ftrace_lock);
 // We do not cache inverse filters
     if (func[0] == '!') {
-    let mut ret: c_int = -EINVAL;
-    func++;
+pub static mut ret: c_int = 0;
+    func += 1;
 // Look to remove this hash
     list_for_each_entry_safe(ftrace_mod, n, head, list) {
-    if (strcmp(ftrace_mod.module, module) != 0)
+    if (strcmp(ftrace_mod.module, module) != 0) {
     continue;
+    }
 // no func matches all
     if (strcmp(func, "*") == 0 ||
     (ftrace_mod.func &&
@@ -4493,38 +4770,47 @@ unsafe extern "C" fn lookup_ip(ip: c_ulong, modname: *mut c_char, str: *mut c_ch
     return ret;
     }
 // We only care about modules that have not been loaded yet
-    if (module_exists(module))
+    if (module_exists!(module)) {
     return -EINVAL;
+    }
 // Save this string off, and execute it when the module is loaded
     return ftrace_add_mod(tr, func, module, enable);
     }
 
-    static void process_mod_list(struct list_head *head, struct ftrace_ops *ops,
-    char *mod, bool enable)
-    {
-    struct ftrace_mod_load *ftrace_mod, *n;
-    struct ftrace_hash **orig_hash, *new_hash;
-    LIST_HEAD(process_mods);
-    char *func;
+#[no_mangle]
+pub unsafe extern "C" fn process_mod_list(head: *mut list_head, ops: *mut ftrace_ops, mod: *mut c_char, enable: bool) {
+    let mut ftrace_mod = core::ptr::null_mut();
+    let mut n = core::ptr::null_mut();
+    let mut orig_hash = core::ptr::null_mut();
+    let mut new_hash = core::ptr::null_mut();
+pub static mut process_mods: usize = 0;
+pub static mut func: *mut c_void = core::ptr::null_mut();
     mutex_lock(&ops.func_hash.regex_lock);
-    if (enable)
+    if (enable) {
     orig_hash = &ops.func_hash.filter_hash;
-    else
+    }
+    else {
     orig_hash = &ops.func_hash.notrace_hash;
+    }
     new_hash = alloc_and_copy_ftrace_hash(FTRACE_HASH_DEFAULT_BITS,
 // orig_hash);
-    if (!new_hash)
-    goto out; /* warn? */
+    if (!new_hash) {
+// goto; /* warn? */
+    }
     mutex_lock(&ftrace_lock);
     list_for_each_entry_safe(ftrace_mod, n, head, list) {
-    if (strcmp(ftrace_mod.module, mod) != 0)
+    if (strcmp(ftrace_mod.module, mod) != 0) {
     continue;
-    if (ftrace_mod.func)
+    }
+    if (ftrace_mod.func) {
     func = kstrdup(ftrace_mod.func, GFP_KERNEL);
-    else
+    }
+    else {
     func = kstrdup("*", GFP_KERNEL);
-    if (!func) /* warn? */
+    }
+    if (!func) /* warn? */ {
     continue;
+    }
     list_move(&ftrace_mod.list, &process_mods);
 // Use the newly allocated func, as it may be "*"
     kfree(ftrace_mod.func);
@@ -4537,31 +4823,33 @@ unsafe extern "C" fn lookup_ip(ip: c_ulong, modname: *mut c_char, str: *mut c_ch
     match_records(new_hash, func, strlen(func), mod);
     free_ftrace_mod(ftrace_mod);
     }
-    if (enable && list_empty(head))
+    if (enable && list_empty(head)) {
     new_hash.flags &= ~FTRACE_HASH_FL_MOD;
+    }
     mutex_lock(&ftrace_lock);
     ftrace_hash_move_and_update_ops(ops, orig_hash,
     new_hash, enable);
     mutex_unlock(&ftrace_lock);
-    out:
+// label;
     mutex_unlock(&ops.func_hash.regex_lock);
     free_ftrace_hash(new_hash);
     }
 #[no_mangle]
 unsafe extern "C" fn process_cached_mods(mod_name: *const c_char) {
-    static void process_cached_mods(const char *mod_name)
-    {
-    struct trace_array *tr;
-    char *mod;
+pub static mut tr: *mut c_void = core::ptr::null_mut();
+pub static mut mod: *mut c_void = core::ptr::null_mut();
     mod = kstrdup(mod_name, GFP_KERNEL);
-    if (!mod)
+    if (!mod) {
     return;
+    }
     mutex_lock(&trace_types_lock);
     list_for_each_entry(tr, &ftrace_trace_arrays, list) {
-    if (!list_empty(&tr.mod_trace))
+    if (!list_empty(&tr.mod_trace)) {
     process_mod_list(&tr.mod_trace, tr.ops, mod, true);
-    if (!list_empty(&tr.mod_notrace))
+    }
+    if (!list_empty(&tr.mod_notrace)) {
     process_mod_list(&tr.mod_notrace, tr.ops, mod, false);
+    }
     }
     mutex_unlock(&trace_types_lock);
     kfree(mod);
@@ -4571,18 +4859,18 @@ unsafe extern "C" fn process_cached_mods(mod_name: *const c_char) {
 // We register the module command as a template to show others how
 // to register the a command as well.
 //
-    static int
-    ftrace_mod_callback(struct trace_array *tr, struct ftrace_hash *hash,
-    char *func_orig, char *cmd, char *module, int enable)
-    {
-    char *func;
-    int ret;
-    if (!tr)
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_mod_callback(tr: *mut trace_array, hash: *mut ftrace_hash, func_orig: *mut c_char, cmd: *mut c_char, module: *mut c_char, enable: c_int) -> c_int {
+pub static mut func: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (!tr) {
     return -ENODEV;
+    }
 // match_records() modifies func, and we need the original
     func = kstrdup(func_orig, GFP_KERNEL);
-    if (!func)
+    if (!func) {
     return -ENOMEM;
+    }
 //
 // cmd == 'mod' because we only registered this func
 // for the 'mod' ftrace_func_command.
@@ -4592,29 +4880,25 @@ unsafe extern "C" fn process_cached_mods(mod_name: *const c_char) {
 //
     ret = match_records(hash, func, strlen(func), module);
     kfree(func);
-    if (!ret)
+    if (!ret) {
     return cache_mod(tr, func_orig, module, enable);
-    if (ret < 0)
+    }
+    if (ret < 0) {
     return ret;
+    }
     return 0;
     }
-    static struct ftrace_func_command ftrace_mod_cmd = {
-    .name			= "mod",
-    .func			= ftrace_mod_callback,
-    };
+pub static mut ftrace_func_command: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn ftrace_mod_cmd_init() -> int __init {
-    static int __init ftrace_mod_cmd_init(void)
-    {
+unsafe extern "C" fn ftrace_mod_cmd_init() -> c_int {
     return register_ftrace_command(&ftrace_mod_cmd);
     }
-    core_initcall(ftrace_mod_cmd_init);
-    static void function_trace_probe_call(unsigned long ip, unsigned long parent_ip,
-    struct ftrace_ops *op, struct ftrace_regs *fregs)
-    {
-    struct ftrace_probe_ops *probe_ops;
-    struct ftrace_func_probe *probe;
-    probe = container_of(op, struct ftrace_func_probe, ops);
+    core_initcall!(ftrace_mod_cmd_init);
+#[no_mangle]
+pub unsafe extern "C" fn function_trace_probe_call(ip: c_ulong, parent_ip: c_ulong, op: *mut ftrace_ops, fregs: *mut ftrace_regs) {
+pub static mut probe_ops: *mut c_void = core::ptr::null_mut();
+pub static mut probe: *mut c_void = core::ptr::null_mut();
+    probe = container_of!(op, ftrace_func_probe, ops);
     probe_ops = probe.probe_ops;
 //
 // Disable preemption for these calls to prevent a RCU grace
@@ -4639,7 +4923,7 @@ pub struct ftrace_func_map {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct ftrace_func_mapper {
-    pub /: *mut *mut ftrace_hash hash; / Must be first!,
+//     pub /: *mut *mut ftrace_hash hash; / Must be first!,
 }
 
 //
@@ -4647,16 +4931,16 @@ pub struct ftrace_func_mapper {
 //
 // Returns: a ftrace_func_mapper descriptor that can be used to map ips to data.
 //
-    struct ftrace_func_mapper *allocate_ftrace_func_mapper(void)
-    {
-    struct ftrace_hash *hash;
+#[no_mangle]
+pub unsafe extern "C" fn allocate_ftrace_func_mapper() -> *mut c_void {
+pub static mut hash: *mut c_void = core::ptr::null_mut();
 //
 // The mapper is simply a ftrace_hash, but since the entries
 // in the hash are not ftrace_func_entry type, we define it
 // as a separate structure.
 //
     hash = alloc_ftrace_hash(FTRACE_HASH_DEFAULT_BITS);
-    return (struct ftrace_func_mapper *)hash;
+    return hash;
     }
 //
 // ftrace_func_mapper_find_ip - Find some data mapped to an ip
@@ -4669,15 +4953,16 @@ pub struct ftrace_func_mapper {
 // the user can use the data pointer as its data instead of having to
 // allocate more memory for the reference.
 //
-    void **ftrace_func_mapper_find_ip(struct ftrace_func_mapper *mapper,
+    void **ftrace_func_mapper_find_ip(ftrace_func_mapper *mapper,
     unsigned long ip)
     {
-    struct ftrace_func_entry *entry;
-    struct ftrace_func_map *map;
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut map: *mut c_void = core::ptr::null_mut();
     entry = ftrace_lookup_ip(&mapper.hash, ip);
-    if (!entry)
+    if (!entry) {
     return core::ptr::null_mut();
-    map = (struct ftrace_func_map *)entry;
+    }
+    map = entry;
     return &map.data;
     }
 //
@@ -4688,17 +4973,18 @@ pub struct ftrace_func_mapper {
 //
 // Returns: 0 on success otherwise an error.
 //
-    int ftrace_func_mapper_add_ip(struct ftrace_func_mapper *mapper,
-    unsigned long ip, void *data)
-    {
-    struct ftrace_func_entry *entry;
-    struct ftrace_func_map *map;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_func_mapper_add_ip(mapper: *mut ftrace_func_mapper, ip: c_ulong, data: *mut c_void) -> c_int {
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut map: *mut c_void = core::ptr::null_mut();
     entry = ftrace_lookup_ip(&mapper.hash, ip);
-    if (entry)
+    if (entry) {
     return -EBUSY;
+    }
     map = kmalloc_obj(*map);
-    if (!map)
+    if (!map) {
     return -ENOMEM;
+    }
     map.entry.ip = ip;
     map.data = data;
     add_ftrace_hash_entry(&mapper.hash, &map.entry);
@@ -4714,16 +5000,16 @@ pub struct ftrace_func_mapper {
 // ftrace_func_mapper_find_ip(), then the return value may be meaningless,
 // if the data pointer was set to zero.
 //
-    void *ftrace_func_mapper_remove_ip(struct ftrace_func_mapper *mapper,
-    unsigned long ip)
-    {
-    struct ftrace_func_entry *entry;
-    struct ftrace_func_map *map;
-    void *data;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_func_mapper_remove_ip(mapper: *mut ftrace_func_mapper, ip: c_ulong) -> *mut c_void {
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut map: *mut c_void = core::ptr::null_mut();
+pub static mut data: *mut c_void = core::ptr::null_mut();
     entry = ftrace_lookup_ip(&mapper.hash, ip);
-    if (!entry)
+    if (!entry) {
     return core::ptr::null_mut();
-    map = (struct ftrace_func_map *)entry;
+    }
+    map = entry;
     data = map.data;
     remove_hash_entry(&mapper.hash, entry);
     kfree(entry);
@@ -4737,21 +5023,22 @@ pub struct ftrace_func_mapper {
 // This is used to free the function mapper. The @free_func is optional
 // and can be used if the data needs to be freed as well.
 //
-    void free_ftrace_func_mapper(struct ftrace_func_mapper *mapper,
-    ftrace_mapper_func free_func)
-    {
-    struct ftrace_func_entry *entry;
-    struct ftrace_func_map *map;
-    struct hlist_head *hhd;
-    int size, i;
-    if (!mapper)
+#[no_mangle]
+pub unsafe extern "C" fn free_ftrace_func_mapper(mapper: *mut ftrace_func_mapper, free_func: ftrace_mapper_func) {
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut map: *mut c_void = core::ptr::null_mut();
+pub static mut hhd: *mut c_void = core::ptr::null_mut();
+    let mut size = 0;
+    let mut i = 0;
+    if (!mapper) {
     return;
+    }
     if (free_func && mapper.hash.count) {
     size = 1 << mapper.hash.size_bits;
-    for (i = 0; i < size; i++) {
+    while (i < size) {
     hhd = &mapper.hash.buckets[i];
     hlist_for_each_entry(entry, hhd, hlist) {
-    map = (struct ftrace_func_map *)entry;
+    map = entry;
     free_func(map);
     }
     }
@@ -4761,54 +5048,50 @@ pub struct ftrace_func_mapper {
     }
 #[no_mangle]
 unsafe extern "C" fn release_probe(probe: *mut ftrace_func_probe) {
-    static void release_probe(struct ftrace_func_probe *probe)
-    {
-    struct ftrace_probe_ops *probe_ops;
+pub static mut probe_ops: *mut c_void = core::ptr::null_mut();
     guard(mutex)(&ftrace_lock);
-    WARN_ON(probe.ref <= 0);
+    WARN_ON!(probe.ref <= 0);
 // Subtract the ref that was used to protect this instance
-    probe.ref--;
+    probe.ref -= 1;
     if (!probe.ref) {
     probe_ops = probe.probe_ops;
 //
 // Sending zero as ip tells probe_ops to free
 // the probe->data itself
 //
-    if (probe_ops.free)
+    if (probe_ops.free) {
     probe_ops.free(probe_ops, probe.tr, 0, probe.data);
+    }
     list_del(&probe.list);
     kfree(probe);
     }
     }
 #[no_mangle]
 unsafe extern "C" fn acquire_probe_locked(probe: *mut ftrace_func_probe) {
-    static void acquire_probe_locked(struct ftrace_func_probe *probe)
-    {
 //
 // Add one ref to keep it from being freed when releasing the
 // ftrace_lock mutex.
 //
-    probe.ref++;
+    probe.ref += 1;
     }
-    int
-    register_ftrace_function_probe(char *glob, struct trace_array *tr,
-    struct ftrace_probe_ops *probe_ops,
-    void *data)
-    {
-    struct ftrace_func_probe *probe = core::ptr::null_mut(), *iter;
-    struct ftrace_func_entry *entry;
-    struct ftrace_hash **orig_hash;
-    struct ftrace_hash *old_hash;
-    struct ftrace_hash *hash;
-    let mut count: c_int = 0;
-    int size;
-    int ret;
-    int i;
-    if (WARN_ON(!tr))
+#[no_mangle]
+pub unsafe extern "C" fn register_ftrace_function_probe(glob: *mut c_char, tr: *mut trace_array, probe_ops: *mut ftrace_probe_ops, data: *mut c_void) -> c_int {
+    let mut probe = core::ptr::null_mut(), *iter;
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut orig_hash: *mut c_void = core::ptr::null_mut();
+pub static mut old_hash: *mut c_void = core::ptr::null_mut();
+pub static mut hash: *mut c_void = core::ptr::null_mut();
+pub static mut count: c_int = 0;
+    let mut size = 0;
+    let mut ret = 0;
+    let mut i = 0;
+    if (WARN_ON!(!tr)) {
     return -EINVAL;
+    }
 // We do not support '!' for function probes
-    if (WARN_ON(glob[0] == '!'))
+    if (WARN_ON!(glob[0] == '!')) {
     return -EINVAL;
+    }
     mutex_lock(&ftrace_lock);
 // Check if the probe_ops is already registered
     list_for_each_entry(iter, &tr.func_probes, list) {
@@ -4841,19 +5124,22 @@ unsafe extern "C" fn acquire_probe_locked(probe: *mut ftrace_func_probe) {
     hash = alloc_and_copy_ftrace_hash(FTRACE_HASH_DEFAULT_BITS, old_hash);
     if (!hash) {
     ret = -ENOMEM;
-    goto out;
+// goto;
     }
     ret = ftrace_match_records(hash, glob, strlen(glob));
 // Nothing found?
-    if (!ret)
+    if (!ret) {
     ret = -EINVAL;
-    if (ret < 0)
-    goto out;
+    }
+    if (ret < 0) {
+// goto;
+    }
     size = 1 << hash.size_bits;
-    for (i = 0; i < size; i++) {
+    while (i < size) {
     hlist_for_each_entry(entry, &hash.buckets[i], hlist) {
-    if (ftrace_lookup_ip(old_hash, entry.ip))
+    if (ftrace_lookup_ip(old_hash, entry.ip)) {
     continue;
+    }
 //
 // The caller might want to do something special
 // for each function we find. We call the callback
@@ -4864,79 +5150,85 @@ unsafe extern "C" fn acquire_probe_locked(probe: *mut ftrace_func_probe) {
     entry.ip, data,
     &probe.data);
     if (ret < 0) {
-    if (probe_ops.free && count)
+    if (probe_ops.free && count) {
     probe_ops.free(probe_ops, tr,
     0, probe.data);
+    }
     probe.data = core::ptr::null_mut();
-    goto out;
+// goto;
     }
     }
-    count++;
+    count += 1;
     }
     }
     mutex_lock(&ftrace_lock);
     if (!count) {
 // Nothing was added?
     ret = -EINVAL;
-    goto out_unlock;
+// goto;
     }
     ret = ftrace_hash_move_and_update_ops(&probe.ops, orig_hash,
     hash, 1);
-    if (ret < 0)
-    goto err_unlock;
+    if (ret < 0) {
+// goto;
+    }
 // One ref for each new function traced
     probe.ref += count;
-    if (!(probe.ops.flags & FTRACE_OPS_FL_ENABLED))
+    if (!(probe.ops.flags & FTRACE_OPS_FL_ENABLED)) {
     ret = ftrace_startup(&probe.ops, 0);
-    out_unlock:
+    }
+// label;
     mutex_unlock(&ftrace_lock);
-    if (!ret)
+    if (!ret) {
     ret = count;
-    out:
+    }
+// label;
     mutex_unlock(&probe.ops.func_hash.regex_lock);
     free_ftrace_hash(hash);
     release_probe(probe);
     return ret;
-    err_unlock:
-    if (!probe_ops.free || !count)
-    goto out_unlock;
+// label;
+    if (!probe_ops.free || !count) {
+// goto;
+    }
 // Failed to do the move, need to call the free functions
-    for (i = 0; i < size; i++) {
+    while (i < size) {
     hlist_for_each_entry(entry, &hash.buckets[i], hlist) {
-    if (ftrace_lookup_ip(old_hash, entry.ip))
+    if (ftrace_lookup_ip(old_hash, entry.ip)) {
     continue;
+    }
     probe_ops.free(probe_ops, tr, entry.ip, probe.data);
     }
     }
-    goto out_unlock;
+// goto;
     }
-    int
-    unregister_ftrace_function_probe_func(char *glob, struct trace_array *tr,
-    struct ftrace_probe_ops *probe_ops)
-    {
-    struct ftrace_func_probe *probe = core::ptr::null_mut(), *iter;
-    struct ftrace_ops_hash old_hash_ops;
-    struct ftrace_func_entry *entry;
-    struct ftrace_glob func_g;
-    struct ftrace_hash **orig_hash;
-    struct ftrace_hash *old_hash;
-    struct ftrace_hash *hash = core::ptr::null_mut();
-    struct hlist_node *tmp;
-    struct hlist_head hhd;
+#[no_mangle]
+pub unsafe extern "C" fn unregister_ftrace_function_probe_func(glob: *mut c_char, tr: *mut trace_array, probe_ops: *mut ftrace_probe_ops) -> c_int {
+    let mut probe = core::ptr::null_mut(), *iter;
+pub static mut old_hash_ops: usize = 0;
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut func_g: usize = 0;
+pub static mut orig_hash: *mut c_void = core::ptr::null_mut();
+pub static mut old_hash: *mut c_void = core::ptr::null_mut();
+    let mut hash = core::ptr::null_mut();
+pub static mut tmp: *mut c_void = core::ptr::null_mut();
+pub static mut hhd: usize = 0;
     char str[KSYM_SYMBOL_LEN];
-    let mut count: c_int = 0;
+pub static mut count: c_int = 0;
     int i, ret = -ENODEV;
-    int size;
-    if (!glob || !strlen(glob) || !strcmp(glob, "*"))
+    let mut size = 0;
+    if (!glob || !strlen(glob) || !strcmp(glob, "*")) {
     func_g.search = core::ptr::null_mut();
+    }
     else {
-    int not;
+    let mut not = 0;
     func_g.type = filter_parse_regex(glob, strlen(glob),
     &func_g.search, &not);
     func_g.len = strlen(func_g.search);
 // we do not support '!' for function probes
-    if (WARN_ON(not))
+    if (WARN_ON!(not)) {
     return -EINVAL;
+    }
     }
     mutex_lock(&ftrace_lock);
 // Check if the probe_ops is already registered
@@ -4946,36 +5238,41 @@ unsafe extern "C" fn acquire_probe_locked(probe: *mut ftrace_func_probe) {
     break;
     }
     }
-    if (!probe)
-    goto err_unlock_ftrace;
+    if (!probe) {
+// goto;
+    }
     ret = -EINVAL;
-    if (!(probe.ops.flags & FTRACE_OPS_FL_INITIALIZED))
-    goto err_unlock_ftrace;
+    if (!(probe.ops.flags & FTRACE_OPS_FL_INITIALIZED)) {
+// goto;
+    }
     acquire_probe_locked(probe);
     mutex_unlock(&ftrace_lock);
     mutex_lock(&probe.ops.func_hash.regex_lock);
     orig_hash = &probe.ops.func_hash.filter_hash;
     old_hash = *orig_hash;
-    if (ftrace_hash_empty(old_hash))
-    goto out_unlock;
+    if (ftrace_hash_empty(old_hash)) {
+// goto;
+    }
     old_hash_ops.filter_hash = old_hash;
 // Probes only have filters
     old_hash_ops.notrace_hash = core::ptr::null_mut();
     ret = -ENOMEM;
     hash = alloc_and_copy_ftrace_hash(FTRACE_HASH_DEFAULT_BITS, old_hash);
-    if (!hash)
-    goto out_unlock;
+    if (!hash) {
+// goto;
+    }
     INIT_HLIST_HEAD(&hhd);
     size = 1 << hash.size_bits;
-    for (i = 0; i < size; i++) {
+    while (i < size) {
     hlist_for_each_entry_safe(entry, tmp, &hash.buckets[i], hlist) {
     if (func_g.search) {
     kallsyms_lookup(entry.ip, core::ptr::null_mut(), core::ptr::null_mut(),
     core::ptr::null_mut(), str);
-    if (!ftrace_match(str, &func_g))
+    if (!ftrace_match(str, &func_g)) {
     continue;
     }
-    count++;
+    }
+    count += 1;
     remove_hash_entry(hash, entry);
     hlist_add_head(&entry.hlist, &hhd);
     }
@@ -4983,59 +5280,61 @@ unsafe extern "C" fn acquire_probe_locked(probe: *mut ftrace_func_probe) {
 // Nothing found?
     if (!count) {
     ret = -EINVAL;
-    goto out_unlock;
+// goto;
     }
     mutex_lock(&ftrace_lock);
-    WARN_ON(probe.ref < count);
+    WARN_ON!(probe.ref < count);
     probe.ref -= count;
-    if (ftrace_hash_empty(hash))
+    if (ftrace_hash_empty(hash)) {
     ftrace_shutdown(&probe.ops, 0);
+    }
     ret = ftrace_hash_move_and_update_ops(&probe.ops, orig_hash,
     hash, 1);
 // still need to update the function call sites
-    if (ftrace_enabled && !ftrace_hash_empty(hash))
+    if (ftrace_enabled && !ftrace_hash_empty(hash)) {
     ftrace_run_modify_code(&probe.ops, FTRACE_UPDATE_CALLS,
     &old_hash_ops);
+    }
     synchronize_rcu();
     hlist_for_each_entry_safe(entry, tmp, &hhd, hlist) {
     hlist_del(&entry.hlist);
-    if (probe_ops.free)
+    if (probe_ops.free) {
     probe_ops.free(probe_ops, tr, entry.ip, probe.data);
+    }
     kfree(entry);
     }
     mutex_unlock(&ftrace_lock);
-    out_unlock:
+// label;
     mutex_unlock(&probe.ops.func_hash.regex_lock);
     free_ftrace_hash(hash);
     release_probe(probe);
     return ret;
-    err_unlock_ftrace:
+// label;
     mutex_unlock(&ftrace_lock);
     return ret;
     }
 #[no_mangle]
 pub unsafe extern "C" fn clear_ftrace_function_probes(tr: *mut trace_array) {
-    void clear_ftrace_function_probes(struct trace_array *tr)
-    {
-    struct ftrace_func_probe *probe, *n;
-    list_for_each_entry_safe(probe, n, &tr.func_probes, list)
+    let mut probe = core::ptr::null_mut();
+    let mut n = core::ptr::null_mut();
+    list_for_each_entry_safe(probe, n, &tr.func_probes, list) {
     unregister_ftrace_function_probe_func(core::ptr::null_mut(), tr, probe.probe_ops);
     }
-    static LIST_HEAD(ftrace_commands);
-    static DEFINE_MUTEX(ftrace_cmd_mutex);
+    }
+pub static mut ftrace_commands: usize = 0;
+pub static mut ftrace_cmd_mutex: usize = 0;
 //
 // Currently we only register ftrace commands from __init, so mark this
 // __init too.
 //
 #[no_mangle]
 pub unsafe extern "C" fn register_ftrace_command(cmd: *mut ftrace_func_command) -> __init int {
-    __init int register_ftrace_command(struct ftrace_func_command *cmd)
-    {
-    struct ftrace_func_command *p;
+pub static mut p: *mut c_void = core::ptr::null_mut();
     guard(mutex)(&ftrace_cmd_mutex);
     list_for_each_entry(p, &ftrace_commands, list) {
-    if (strcmp(cmd.name, p.name) == 0)
+    if (strcmp(cmd.name, p.name) == 0) {
     return -EBUSY;
+    }
     }
     list_add(&cmd.list, &ftrace_commands);
     return 0;
@@ -5046,9 +5345,8 @@ pub unsafe extern "C" fn register_ftrace_command(cmd: *mut ftrace_func_command) 
 //
 #[no_mangle]
 pub unsafe extern "C" fn unregister_ftrace_command(cmd: *mut ftrace_func_command) -> __init int {
-    __init int unregister_ftrace_command(struct ftrace_func_command *cmd)
-    {
-    struct ftrace_func_command *p, *n;
+    let mut p = core::ptr::null_mut();
+    let mut n = core::ptr::null_mut();
     guard(mutex)(&ftrace_cmd_mutex);
     list_for_each_entry_safe(p, n, &ftrace_commands, list) {
     if (strcmp(cmd.name, p.name) == 0) {
@@ -5058,48 +5356,51 @@ pub unsafe extern "C" fn unregister_ftrace_command(cmd: *mut ftrace_func_command
     }
     return -ENODEV;
     }
-    static int ftrace_process_regex(struct ftrace_iterator *iter,
-    char *buff, int len, int enable)
-    {
-    struct ftrace_hash *hash = iter.hash;
-    struct trace_array *tr = iter.ops.private;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_process_regex(iter: *mut ftrace_iterator, buff: *mut c_char, len: c_int, enable: c_int) -> c_int {
+    let mut hash = iter.hash;
+    let mut tr = iter.ops.private;
     char *func, *command, *next = buff;
-    struct ftrace_func_command *p;
-    int ret;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     func = strsep(&next, ":");
     if (!next) {
     ret = ftrace_match_records(hash, func, len);
-    if (!ret)
+    if (!ret) {
     ret = -EINVAL;
-    if (ret < 0)
+    }
+    if (ret < 0) {
     return ret;
+    }
     return 0;
     }
 // command found
     command = strsep(&next, ":");
     guard(mutex)(&ftrace_cmd_mutex);
     list_for_each_entry(p, &ftrace_commands, list) {
-    if (strcmp(p.name, command) == 0)
+    if (strcmp(p.name, command) == 0) {
     return p.func(tr, hash, func, command, next, enable);
+    }
     }
     return -EINVAL;
     }
-    static ssize_t
-    ftrace_regex_write(struct file *file, const char __user *ubuf,
-    size_t cnt, loff_t *ppos, int enable)
-    {
-    struct ftrace_iterator *iter;
-    struct trace_parser *parser;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_regex_write(file: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t, enable: c_int) -> ssize_t {
+pub static mut iter: *mut c_void = core::ptr::null_mut();
+pub static mut parser: *mut c_void = core::ptr::null_mut();
     ssize_t ret, read;
-    if (!cnt)
+    if (!cnt) {
     return 0;
+    }
     if (file.f_mode & FMODE_READ) {
-    struct seq_file *m = file.private_data;
+    let mut m = file.private_data;
     iter = m.private;
-    } else
+    } else {
     iter = file.private_data;
-    if (unlikely(ftrace_disabled))
+    }
+    if (unlikely(ftrace_disabled)) {
     return -ENODEV;
+    }
 // iter->hash is a local copy, so we don't need regex_lock
     parser = &iter.parser;
     guard(mutex)(&parser_lock);
@@ -5109,34 +5410,32 @@ pub unsafe extern "C" fn unregister_ftrace_command(cmd: *mut ftrace_func_command
     ret = ftrace_process_regex(iter, parser.buffer,
     parser.idx, enable);
     trace_parser_clear(parser);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
     }
     return read;
     }
-    ssize_t
-    ftrace_filter_write(struct file *file, const char __user *ubuf,
-    size_t cnt, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_filter_write(file: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
     return ftrace_regex_write(file, ubuf, cnt, ppos, 1);
     }
-    ssize_t
-    ftrace_notrace_write(struct file *file, const char __user *ubuf,
-    size_t cnt, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_notrace_write(file: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
     return ftrace_regex_write(file, ubuf, cnt, ppos, 0);
     }
-    static int
-    __ftrace_match_addr(struct ftrace_hash *hash, unsigned long ip, int remove)
-    {
-    struct ftrace_func_entry *entry;
+#[no_mangle]
+pub unsafe extern "C" fn __ftrace_match_addr(hash: *mut ftrace_hash, ip: c_ulong, remove: c_int) -> c_int {
+pub static mut entry: *mut c_void = core::ptr::null_mut();
     ip = ftrace_location(ip);
-    if (!ip)
+    if (!ip) {
     return -EINVAL;
+    }
     if (remove) {
     entry = ftrace_lookup_ip(hash, ip);
-    if (!entry)
+    if (!entry) {
     return -ENOENT;
+    }
     free_hash_entry(hash, entry);
     return 0;
     } else if (__ftrace_lookup_ip(hash, ip) != core::ptr::null_mut()) {
@@ -5146,13 +5445,11 @@ pub unsafe extern "C" fn unregister_ftrace_command(cmd: *mut ftrace_func_command
     entry = add_hash_entry(hash, ip);
     return entry ? 0 :  -ENOMEM;
     }
-    static int
-    ftrace_match_addr(struct ftrace_hash *hash, unsigned long *ips,
-    unsigned int cnt, int remove)
-    {
-    unsigned int i;
-    int err;
-    for (i = 0; i < cnt; i++) {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_match_addr(hash: *mut ftrace_hash, ips: *mut c_ulong, cnt: c_uint, remove: c_int) -> c_int {
+    let mut i = 0;
+    let mut err = 0;
+    while (i < cnt) {
     err = __ftrace_match_addr(hash, ips[i], remove);
     if (err) {
 //
@@ -5164,61 +5461,63 @@ pub unsafe extern "C" fn unregister_ftrace_command(cmd: *mut ftrace_func_command
     }
     return 0;
     }
-    static int
-    ftrace_set_hash(struct ftrace_ops *ops, unsigned char *buf, int len,
-    unsigned long *ips, unsigned int cnt,
-    int remove, int reset, int enable, char *mod)
-    {
-    struct ftrace_hash **orig_hash;
-    struct ftrace_hash *hash;
-    int ret;
-    if (unlikely(ftrace_disabled))
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_set_hash(ops: *mut ftrace_ops, buf: *mut c_uchar, len: c_int, ips: *mut c_ulong, cnt: c_uint, remove: c_int, reset: c_int, enable: c_int, mod: *mut c_char) -> c_int {
+pub static mut orig_hash: *mut c_void = core::ptr::null_mut();
+pub static mut hash: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (unlikely(ftrace_disabled)) {
     return -ENODEV;
+    }
     mutex_lock(&ops.func_hash.regex_lock);
-    if (enable)
+    if (enable) {
     orig_hash = &ops.func_hash.filter_hash;
-    else
+    }
+    else {
     orig_hash = &ops.func_hash.notrace_hash;
-    if (reset)
+    }
+    if (reset) {
     hash = alloc_ftrace_hash(FTRACE_HASH_DEFAULT_BITS);
-    else
+    }
+    else {
     hash = alloc_and_copy_ftrace_hash(FTRACE_HASH_DEFAULT_BITS, *orig_hash);
+    }
     if (!hash) {
     ret = -ENOMEM;
-    goto out_regex_unlock;
+// goto;
     }
     if (buf && !match_records(hash, buf, len, mod)) {
 // If this was for a module and nothing was enabled, flag it
-    if (mod)
+    if (mod) {
     (*orig_hash).flags |= FTRACE_HASH_FL_MOD;
+    }
 //
 // Even if it is a mod, return error to let caller know
 // nothing was added
 //
     ret = -EINVAL;
-    goto out_regex_unlock;
+// goto;
     }
     if (ips) {
     ret = ftrace_match_addr(hash, ips, cnt, remove);
-    if (ret < 0)
-    goto out_regex_unlock;
+    if (ret < 0) {
+// goto;
+    }
     }
     mutex_lock(&ftrace_lock);
     ret = ftrace_hash_move_and_update_ops(ops, orig_hash, hash, enable);
     mutex_unlock(&ftrace_lock);
-    out_regex_unlock:
+// label;
     mutex_unlock(&ops.func_hash.regex_lock);
     free_ftrace_hash(hash);
     return ret;
     }
-    static int
-    ftrace_set_addr(struct ftrace_ops *ops, unsigned long *ips, unsigned int cnt,
-    int remove, int reset, int enable)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_set_addr(ops: *mut ftrace_ops, ips: *mut c_ulong, cnt: c_uint, remove: c_int, reset: c_int, enable: c_int) -> c_int {
     return ftrace_set_hash(ops, core::ptr::null_mut(), 0, ips, cnt, remove, reset, enable, core::ptr::null_mut());
     }
 
-    static int register_ftrace_function_nolock(struct ftrace_ops *ops);
+// forward_decl: register_ftrace_function_nolock;
 //
 // If there are multiple ftrace_ops, use SAVE_REGS by default, so that direct
 // call will be jumped from ftrace_regs_caller. Only if the architecture does
@@ -5228,22 +5527,22 @@ pub unsafe extern "C" fn unregister_ftrace_command(cmd: *mut ftrace_func_command
 
 #[no_mangle]
 unsafe extern "C" fn check_direct_multi(ops: *mut ftrace_ops) -> c_int {
-    static int check_direct_multi(struct ftrace_ops *ops)
-    {
-    if (!(ops.flags & FTRACE_OPS_FL_INITIALIZED))
+    if (!(ops.flags & FTRACE_OPS_FL_INITIALIZED)) {
     return -EINVAL;
-    if ((ops.flags & MULTI_FLAGS) != MULTI_FLAGS)
+    }
+    if ((ops.flags & MULTI_FLAGS) != MULTI_FLAGS) {
     return -EINVAL;
+    }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn remove_direct_functions_hash(hash: *mut ftrace_hash, addr: c_ulong) {
-    static void remove_direct_functions_hash(struct ftrace_hash *hash, unsigned long addr)
-    {
-    struct ftrace_func_entry *entry, *del;
-    int size, i;
+    let mut entry = core::ptr::null_mut();
+    let mut del = core::ptr::null_mut();
+    let mut size = 0;
+    let mut i = 0;
     size = 1 << hash.size_bits;
-    for (i = 0; i < size; i++) {
+    while (i < size) {
     hlist_for_each_entry(entry, &hash.buckets[i], hlist) {
     del = __ftrace_lookup_ip(direct_functions, entry.ip);
     if (del && ftrace_jmp_get(del.direct) ==
@@ -5256,16 +5555,12 @@ unsafe extern "C" fn remove_direct_functions_hash(hash: *mut ftrace_hash, addr: 
     }
 #[no_mangle]
 unsafe extern "C" fn register_ftrace_direct_cb(rhp: *mut rcu_head) {
-    static void register_ftrace_direct_cb(struct rcu_head *rhp)
-    {
-    struct ftrace_hash *fhp = container_of(rhp, struct ftrace_hash, rcu);
+    let mut fhp = container_of!(rhp, ftrace_hash, rcu);
     free_ftrace_hash(fhp);
     }
 #[no_mangle]
 unsafe extern "C" fn reset_direct(ops: *mut ftrace_ops, addr: c_ulong) {
-    static void reset_direct(struct ftrace_ops *ops, unsigned long addr)
-    {
-    struct ftrace_hash *hash = ops.func_hash.filter_hash;
+    let mut hash = ops.func_hash.filter_hash;
     remove_direct_functions_hash(hash, addr);
 // cleanup for possible another register call
     ops.func = core::ptr::null_mut();
@@ -5295,55 +5590,63 @@ unsafe extern "C" fn reset_direct(ops: *mut ftrace_ops, addr: c_ulong) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn register_ftrace_direct(ops: *mut ftrace_ops, addr: c_ulong) -> c_int {
-    int register_ftrace_direct(struct ftrace_ops *ops, unsigned long addr)
-    {
     struct ftrace_hash *hash, *new_hash = core::ptr::null_mut(), *free_hash = core::ptr::null_mut();
-    struct ftrace_func_entry *entry, *new;
-    let mut err: c_int = -EBUSY, size, i;
-    if (ops.func || ops.trampoline)
+    let mut entry = core::ptr::null_mut();
+    let mut new = core::ptr::null_mut();
+pub static mut err: c_int = 0;
+    if (ops.func || ops.trampoline) {
     return -EINVAL;
-    if (!(ops.flags & FTRACE_OPS_FL_INITIALIZED))
+    }
+    if (!(ops.flags & FTRACE_OPS_FL_INITIALIZED)) {
     return -EINVAL;
-    if (ops.flags & FTRACE_OPS_FL_ENABLED)
+    }
+    if (ops.flags & FTRACE_OPS_FL_ENABLED) {
     return -EINVAL;
+    }
     hash = ops.func_hash.filter_hash;
-    if (ftrace_hash_empty(hash))
+    if (ftrace_hash_empty(hash)) {
     return -EINVAL;
+    }
     mutex_lock(&direct_mutex);
 // Make sure requested entries are not already registered..
     size = 1 << hash.size_bits;
-    for (i = 0; i < size; i++) {
+    while (i < size) {
     hlist_for_each_entry(entry, &hash.buckets[i], hlist) {
-    if (ftrace_find_rec_direct(entry.ip))
-    goto out_unlock;
+    if (ftrace_find_rec_direct(entry.ip)) {
+// goto;
+    }
     }
     }
     err = -ENOMEM;
 // Make a copy hash to place the new and the old entries in
     size = hash.count + direct_functions.count;
     size = fls(size);
-    if (size > FTRACE_HASH_MAX_BITS)
+    if (size > FTRACE_HASH_MAX_BITS) {
     size = FTRACE_HASH_MAX_BITS;
+    }
     new_hash = alloc_ftrace_hash(size);
-    if (!new_hash)
-    goto out_unlock;
+    if (!new_hash) {
+// goto;
+    }
 // Now copy over the existing direct entries
     size = 1 << direct_functions.size_bits;
-    for (i = 0; i < size; i++) {
+    while (i < size) {
     hlist_for_each_entry(entry, &direct_functions.buckets[i], hlist) {
     new = add_hash_entry(new_hash, entry.ip);
-    if (!new)
-    goto out_unlock;
+    if (!new) {
+// goto;
+    }
     new.direct = entry.direct;
     }
     }
 // ... and add the new entries
     size = 1 << hash.size_bits;
-    for (i = 0; i < size; i++) {
+    while (i < size) {
     hlist_for_each_entry(entry, &hash.buckets[i], hlist) {
     new = add_hash_entry(new_hash, entry.ip);
-    if (!new)
-    goto out_unlock;
+    if (!new) {
+// goto;
+    }
 // Update both the copy and the hash entry
     new.direct = addr;
     entry.direct = addr;
@@ -5357,14 +5660,17 @@ pub unsafe extern "C" fn register_ftrace_direct(ops: *mut ftrace_ops, addr: c_ul
     ops.trampoline = FTRACE_REGS_ADDR;
     ops.direct_call = addr;
     err = register_ftrace_function_nolock(ops);
-    if (err)
+    if (err) {
     reset_direct(ops, addr);
-    out_unlock:
+    }
+// label;
     mutex_unlock(&direct_mutex);
-    if (free_hash && free_hash != EMPTY_HASH)
+    if (free_hash && free_hash != EMPTY_HASH) {
     call_rcu_tasks(&free_hash.rcu, register_ftrace_direct_cb);
-    if (new_hash)
+    }
+    if (new_hash) {
     free_ftrace_hash(new_hash);
+    }
     return err;
     }
     EXPORT_SYMBOL_GPL(register_ftrace_direct);
@@ -5383,68 +5689,71 @@ pub unsafe extern "C" fn register_ftrace_direct(ops: *mut ftrace_ops, addr: c_ul
 // 0 on success
 // -EINVAL - The @ops object was not properly registered.
 //
-    int unregister_ftrace_direct(struct ftrace_ops *ops, unsigned long addr,
-    bool free_filters)
-    {
-    int err;
-    if (check_direct_multi(ops))
+#[no_mangle]
+pub unsafe extern "C" fn unregister_ftrace_direct(ops: *mut ftrace_ops, addr: c_ulong, free_filters: bool) -> c_int {
+    let mut err = 0;
+    if (check_direct_multi(ops)) {
     return -EINVAL;
-    if (!(ops.flags & FTRACE_OPS_FL_ENABLED))
+    }
+    if (!(ops.flags & FTRACE_OPS_FL_ENABLED)) {
     return -EINVAL;
+    }
     mutex_lock(&direct_mutex);
     err = unregister_ftrace_function(ops);
     reset_direct(ops, addr);
     mutex_unlock(&direct_mutex);
-    if (free_filters)
+    if (free_filters) {
     ftrace_free_filter(ops);
+    }
     return err;
     }
     EXPORT_SYMBOL_GPL(unregister_ftrace_direct);
-    static int
-    __modify_ftrace_direct(struct ftrace_ops *ops, unsigned long addr)
-    {
-    struct ftrace_hash *hash = ops.func_hash.filter_hash;
-    struct ftrace_func_entry *entry, *iter;
-    static struct ftrace_ops tmp_ops = {
-    .func		= ftrace_stub,
-    .flags		= FTRACE_OPS_FL_STUB,
-    };
-    int i, size;
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn __modify_ftrace_direct(ops: *mut ftrace_ops, addr: c_ulong) -> c_int {
+    let mut hash = ops.func_hash.filter_hash;
+    let mut entry = core::ptr::null_mut();
+    let mut iter = core::ptr::null_mut();
+pub static mut ftrace_ops: usize = 0;
+    let mut i = 0;
+    let mut size = 0;
+    let mut err = 0;
     lockdep_assert_held_once(&direct_mutex);
 // Enable the tmp_ops to have the same functions as the direct ops
     ftrace_ops_init(&tmp_ops);
     tmp_ops.func_hash = ops.func_hash;
     tmp_ops.direct_call = addr;
     err = register_ftrace_function_nolock(&tmp_ops);
-    if (err)
+    if (err) {
     return err;
+    }
 //
 // Call __ftrace_hash_update_ipmodify() here, so that we can call
 // ops->ops_func for the ops. This is needed because the above
 // register_ftrace_function_nolock() worked on tmp_ops.
 //
     err = __ftrace_hash_update_ipmodify(ops, hash, hash, true);
-    if (err)
-    goto out;
+    if (err) {
+// goto;
+    }
 //
 // Now the ftrace_ops_list_func() is called to do the direct callers.
 // We can safely change the direct functions attached to each entry.
 //
     mutex_lock(&ftrace_lock);
     size = 1 << hash.size_bits;
-    for (i = 0; i < size; i++) {
+    while (i < size) {
     hlist_for_each_entry(iter, &hash.buckets[i], hlist) {
     entry = __ftrace_lookup_ip(direct_functions, iter.ip);
-    if (!entry)
+    if (!entry) {
     continue;
+    }
     entry.direct = addr;
     }
     }
 // Prevent store tearing if a trampoline concurrently accesses the value
     WRITE_ONCE(ops.direct_call, addr);
     mutex_unlock(&ftrace_lock);
-    out:
+// label;
 // Removing the tmp_ops will add the updated direct callers to the functions
     unregister_ftrace_function(&tmp_ops);
     return err;
@@ -5469,12 +5778,12 @@ pub unsafe extern "C" fn register_ftrace_direct(ops: *mut ftrace_ops, addr: c_ul
 //
 #[no_mangle]
 pub unsafe extern "C" fn modify_ftrace_direct_nolock(ops: *mut ftrace_ops, addr: c_ulong) -> c_int {
-    int modify_ftrace_direct_nolock(struct ftrace_ops *ops, unsigned long addr)
-    {
-    if (check_direct_multi(ops))
+    if (check_direct_multi(ops)) {
     return -EINVAL;
-    if (!(ops.flags & FTRACE_OPS_FL_ENABLED))
+    }
+    if (!(ops.flags & FTRACE_OPS_FL_ENABLED)) {
     return -EINVAL;
+    }
     return __modify_ftrace_direct(ops, addr);
     }
     EXPORT_SYMBOL_GPL(modify_ftrace_direct_nolock);
@@ -5495,13 +5804,13 @@ pub unsafe extern "C" fn modify_ftrace_direct_nolock(ops: *mut ftrace_ops, addr:
 //
 #[no_mangle]
 pub unsafe extern "C" fn modify_ftrace_direct(ops: *mut ftrace_ops, addr: c_ulong) -> c_int {
-    int modify_ftrace_direct(struct ftrace_ops *ops, unsigned long addr)
-    {
-    int err;
-    if (check_direct_multi(ops))
+    let mut err = 0;
+    if (check_direct_multi(ops)) {
     return -EINVAL;
-    if (!(ops.flags & FTRACE_OPS_FL_ENABLED))
+    }
+    if (!(ops.flags & FTRACE_OPS_FL_ENABLED)) {
     return -EINVAL;
+    }
     mutex_lock(&direct_mutex);
     err = __modify_ftrace_direct(ops, addr);
     mutex_unlock(&direct_mutex);
@@ -5510,36 +5819,34 @@ pub unsafe extern "C" fn modify_ftrace_direct(ops: *mut ftrace_ops, addr: c_ulon
     EXPORT_SYMBOL_GPL(modify_ftrace_direct);
 #[no_mangle]
 pub unsafe extern "C" fn hash_count(hash: *mut ftrace_hash) -> c_ulong {
-    static inline unsigned long hash_count(struct ftrace_hash *hash)
-    {
     return hash ? hash.count : 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_hash_count(hash: *mut ftrace_hash) -> c_ulong {
-    unsigned long ftrace_hash_count(struct ftrace_hash *hash)
-    {
     return hash_count(hash);
     }
 //
 // hash_add - adds two struct ftrace_hash and returns the result
-// @a: struct ftrace_hash object
-// @b: struct ftrace_hash object
+// @a: ftrace_hash object
+// @b: ftrace_hash object
 //
 // Returns struct ftrace_hash object on success, NULL on error.
 //
-    static struct ftrace_hash *hash_add(struct ftrace_hash *a, struct ftrace_hash *b)
-    {
-    struct ftrace_func_entry *entry;
-    struct ftrace_hash *add;
-    int size;
+#[no_mangle]
+pub unsafe extern "C" fn hash_add(a: *mut ftrace_hash, b: *mut ftrace_hash) -> *mut c_void {
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut add: *mut c_void = core::ptr::null_mut();
+    let mut size = 0;
     size = hash_count(a) + hash_count(b);
-    if (size > 32)
+    if (size > 32) {
     size = 32;
+    }
     add = alloc_and_copy_ftrace_hash(fls(size), a);
-    if (!add)
+    if (!add) {
     return core::ptr::null_mut();
+    }
     size = 1 << b.size_bits;
-    for (int i = 0; i < size; i++) {
+    while (i < size) {
     hlist_for_each_entry(entry, &b.buckets[i], hlist) {
     if (add_ftrace_hash_entry_direct(add, entry.ip, entry.direct) == core::ptr::null_mut()) {
     free_ftrace_hash(add);
@@ -5563,43 +5870,47 @@ pub unsafe extern "C" fn ftrace_hash_count(hash: *mut ftrace_hash) -> c_ulong {
 //
 #[no_mangle]
 pub unsafe extern "C" fn update_ftrace_direct_add(ops: *mut ftrace_ops, hash: *mut ftrace_hash) -> c_int {
-    int update_ftrace_direct_add(struct ftrace_ops *ops, struct ftrace_hash *hash)
-    {
-    struct ftrace_hash *old_direct_functions = core::ptr::null_mut();
-    struct ftrace_hash *new_direct_functions;
-    struct ftrace_hash *old_filter_hash;
-    struct ftrace_hash *new_filter_hash = core::ptr::null_mut();
-    struct ftrace_func_entry *entry;
-    let mut err: c_int = -EINVAL;
-    int size;
-    bool reg;
-    if (!hash_count(hash))
+    let mut old_direct_functions = core::ptr::null_mut();
+pub static mut new_direct_functions: *mut c_void = core::ptr::null_mut();
+pub static mut old_filter_hash: *mut c_void = core::ptr::null_mut();
+    let mut new_filter_hash = core::ptr::null_mut();
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut err: c_int = 0;
+    let mut size = 0;
+    let mut reg = 0;
+    if (!hash_count(hash)) {
     return -EINVAL;
+    }
     mutex_lock(&direct_mutex);
 // Make sure requested entries are not already registered.
     size = 1 << hash.size_bits;
-    for (int i = 0; i < size; i++) {
+    while (i < size) {
     hlist_for_each_entry(entry, &hash.buckets[i], hlist) {
-    if (__ftrace_lookup_ip(direct_functions, entry.ip))
-    goto out_unlock;
+    if (__ftrace_lookup_ip(direct_functions, entry.ip)) {
+// goto;
+    }
     }
     }
     old_filter_hash = ops.func_hash ? ops.func_hash.filter_hash : core::ptr::null_mut();
 // If there's nothing in filter_hash we need to register the ops.
     reg = hash_count(old_filter_hash) == 0;
     if (reg) {
-    if (ops.func || ops.trampoline)
-    goto out_unlock;
-    if (ops.flags & FTRACE_OPS_FL_ENABLED)
-    goto out_unlock;
+    if (ops.func || ops.trampoline) {
+// goto;
+    }
+    if (ops.flags & FTRACE_OPS_FL_ENABLED) {
+// goto;
+    }
     }
     err = -ENOMEM;
     new_filter_hash = hash_add(old_filter_hash, hash);
-    if (!new_filter_hash)
-    goto out_unlock;
+    if (!new_filter_hash) {
+// goto;
+    }
     new_direct_functions = hash_add(direct_functions, hash);
-    if (!new_direct_functions)
-    goto out_unlock;
+    if (!new_direct_functions) {
+// goto;
+    }
     old_direct_functions = direct_functions;
     rcu_assign_pointer(direct_functions, new_direct_functions);
     if (reg) {
@@ -5630,33 +5941,36 @@ pub unsafe extern "C" fn update_ftrace_direct_add(ops: *mut ftrace_ops, hash: *m
     rcu_assign_pointer(direct_functions, old_direct_functions);
     old_direct_functions = new_direct_functions;
     }
-    out_unlock:
+// label;
     mutex_unlock(&direct_mutex);
-    if (old_direct_functions && old_direct_functions != EMPTY_HASH)
+    if (old_direct_functions && old_direct_functions != EMPTY_HASH) {
     call_rcu_tasks(&old_direct_functions.rcu, register_ftrace_direct_cb);
+    }
     free_ftrace_hash(new_filter_hash);
     return err;
     }
 //
 // hash_sub - substracts @b from @a and returns the result
-// @a: struct ftrace_hash object
-// @b: struct ftrace_hash object
+// @a: ftrace_hash object
+// @b: ftrace_hash object
 //
 // Returns struct ftrace_hash object on success, NULL on error.
 //
-    static struct ftrace_hash *hash_sub(struct ftrace_hash *a, struct ftrace_hash *b)
-    {
-    struct ftrace_func_entry *entry, *del;
-    struct ftrace_hash *sub;
-    int size;
+#[no_mangle]
+pub unsafe extern "C" fn hash_sub(a: *mut ftrace_hash, b: *mut ftrace_hash) -> *mut c_void {
+    let mut entry = core::ptr::null_mut();
+    let mut del = core::ptr::null_mut();
+pub static mut sub: *mut c_void = core::ptr::null_mut();
+    let mut size = 0;
     sub = alloc_and_copy_ftrace_hash(a.size_bits, a);
-    if (!sub)
+    if (!sub) {
     return core::ptr::null_mut();
+    }
     size = 1 << b.size_bits;
-    for (int i = 0; i < size; i++) {
+    while (i < size) {
     hlist_for_each_entry(entry, &b.buckets[i], hlist) {
     del = __ftrace_lookup_ip(sub, entry.ip);
-    if (WARN_ON_ONCE(!del)) {
+    if (WARN_ON_ONCE!(!del)) {
     free_ftrace_hash(sub);
     return core::ptr::null_mut();
     }
@@ -5682,46 +5996,52 @@ pub unsafe extern "C" fn update_ftrace_direct_add(ops: *mut ftrace_ops, hash: *m
 //
 #[no_mangle]
 pub unsafe extern "C" fn update_ftrace_direct_del(ops: *mut ftrace_ops, hash: *mut ftrace_hash) -> c_int {
-    int update_ftrace_direct_del(struct ftrace_ops *ops, struct ftrace_hash *hash)
-    {
-    struct ftrace_hash *old_direct_functions = core::ptr::null_mut();
-    struct ftrace_hash *new_direct_functions;
-    struct ftrace_hash *new_filter_hash = core::ptr::null_mut();
-    struct ftrace_hash *old_filter_hash;
-    struct ftrace_hash *direct_hash;
-    struct ftrace_func_entry *entry;
-    struct ftrace_func_entry *del;
-    unsigned long size;
-    let mut err: c_int = -EINVAL;
-    if (!hash_count(hash))
+    let mut old_direct_functions = core::ptr::null_mut();
+pub static mut new_direct_functions: *mut c_void = core::ptr::null_mut();
+    let mut new_filter_hash = core::ptr::null_mut();
+pub static mut old_filter_hash: *mut c_void = core::ptr::null_mut();
+pub static mut direct_hash: *mut c_void = core::ptr::null_mut();
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut del: *mut c_void = core::ptr::null_mut();
+    let mut size = 0;
+pub static mut err: c_int = 0;
+    if (!hash_count(hash)) {
     return -EINVAL;
-    if (check_direct_multi(ops))
+    }
+    if (check_direct_multi(ops)) {
     return -EINVAL;
-    if (!(ops.flags & FTRACE_OPS_FL_ENABLED))
+    }
+    if (!(ops.flags & FTRACE_OPS_FL_ENABLED)) {
     return -EINVAL;
+    }
     mutex_lock(&direct_mutex);
     direct_hash = rcu_dereference_protected(direct_functions, lockdep_is_held(&direct_mutex));
-    if (direct_hash == EMPTY_HASH)
-    goto out_unlock;
+    if (direct_hash == EMPTY_HASH) {
+// goto;
+    }
     old_filter_hash = ops.func_hash ? ops.func_hash.filter_hash : core::ptr::null_mut();
-    if (!hash_count(old_filter_hash))
-    goto out_unlock;
+    if (!hash_count(old_filter_hash)) {
+// goto;
+    }
 // Make sure requested entries are already registered.
     size = 1 << hash.size_bits;
-    for (int i = 0; i < size; i++) {
+    while (i < size) {
     hlist_for_each_entry(entry, &hash.buckets[i], hlist) {
     del = __ftrace_lookup_ip(direct_hash, entry.ip);
-    if (!del || del.direct != entry.direct)
-    goto out_unlock;
+    if (!del || del.direct != entry.direct) {
+// goto;
+    }
     }
     }
     err = -ENOMEM;
     new_filter_hash = hash_sub(old_filter_hash, hash);
-    if (!new_filter_hash)
-    goto out_unlock;
+    if (!new_filter_hash) {
+// goto;
+    }
     new_direct_functions = hash_sub(direct_hash, hash);
-    if (!new_direct_functions)
-    goto out_unlock;
+    if (!new_direct_functions) {
+// goto;
+    }
 // If there's nothing left, we need to unregister the ops.
     if (ftrace_hash_empty(new_filter_hash)) {
     err = unregister_ftrace_function(ops);
@@ -5747,10 +6067,11 @@ pub unsafe extern "C" fn update_ftrace_direct_del(ops: *mut ftrace_ops, hash: *m
     old_direct_functions = direct_hash;
     rcu_assign_pointer(direct_functions, new_direct_functions);
     }
-    out_unlock:
+// label;
     mutex_unlock(&direct_mutex);
-    if (old_direct_functions && old_direct_functions != EMPTY_HASH)
+    if (old_direct_functions && old_direct_functions != EMPTY_HASH) {
     call_rcu_tasks(&old_direct_functions.rcu, register_ftrace_direct_cb);
+    }
     free_ftrace_hash(new_filter_hash);
     return err;
     }
@@ -5774,72 +6095,79 @@ pub unsafe extern "C" fn update_ftrace_direct_del(ops: *mut ftrace_ops, hash: *m
 //
 #[no_mangle]
 pub unsafe extern "C" fn update_ftrace_direct_mod(ops: *mut ftrace_ops, hash: *mut ftrace_hash, do_direct_lock: bool) -> c_int {
-    int update_ftrace_direct_mod(struct ftrace_ops *ops, struct ftrace_hash *hash, bool do_direct_lock)
-    {
-    struct ftrace_func_entry *entry, *tmp;
-    static struct ftrace_ops tmp_ops = {
-    .func		= ftrace_stub,
-    .flags		= FTRACE_OPS_FL_STUB,
-    };
-    struct ftrace_hash *direct_hash;
-    struct ftrace_hash *orig_hash;
+    let mut entry = core::ptr::null_mut();
+    let mut tmp = core::ptr::null_mut();
+pub static mut ftrace_ops: usize = 0;
+pub static mut direct_hash: *mut c_void = core::ptr::null_mut();
+pub static mut orig_hash: *mut c_void = core::ptr::null_mut();
     unsigned long size, i;
-    let mut err: c_int = -EINVAL;
-    if (!hash_count(hash))
+pub static mut err: c_int = 0;
+    if (!hash_count(hash)) {
     return -EINVAL;
-    if (check_direct_multi(ops))
+    }
+    if (check_direct_multi(ops)) {
     return -EINVAL;
-    if (!(ops.flags & FTRACE_OPS_FL_ENABLED))
+    }
+    if (!(ops.flags & FTRACE_OPS_FL_ENABLED)) {
     return -EINVAL;
+    }
 //
 // We can be called from within ops_func callback with direct_mutex
 // already taken.
 //
-    if (do_direct_lock)
+    if (do_direct_lock) {
     mutex_lock(&direct_mutex);
-    else
+    }
+    else {
     lockdep_assert_held_once(&direct_mutex);
+    }
     direct_hash = rcu_dereference_protected(direct_functions, lockdep_is_held(&direct_mutex));
-    if (direct_hash == EMPTY_HASH)
-    goto unlock;
+    if (direct_hash == EMPTY_HASH) {
+// goto;
+    }
     orig_hash = ops.func_hash ? ops.func_hash.filter_hash : core::ptr::null_mut();
-    if (!orig_hash)
-    goto unlock;
+    if (!orig_hash) {
+// goto;
+    }
 // Enable the tmp_ops to have the same functions as the hash object.
     ftrace_ops_init(&tmp_ops);
     tmp_ops.func_hash.filter_hash = hash;
     err = register_ftrace_function_nolock(&tmp_ops);
-    if (err)
-    goto unlock;
+    if (err) {
+// goto;
+    }
 //
 // Call __ftrace_hash_update_ipmodify() here, so that we can call
 // ops->ops_func for the ops. This is needed because the above
 // register_ftrace_function_nolock() worked on tmp_ops.
 //
     err = __ftrace_hash_update_ipmodify(ops, orig_hash, orig_hash, true);
-    if (err)
-    goto out;
+    if (err) {
+// goto;
+    }
 //
 // Now the ftrace_ops_list_func() is called to do the direct callers.
 // We can safely change the direct functions attached to each entry.
 //
     mutex_lock(&ftrace_lock);
     size = 1 << hash.size_bits;
-    for (i = 0; i < size; i++) {
+    while (i < size) {
     hlist_for_each_entry(entry, &hash.buckets[i], hlist) {
     tmp = __ftrace_lookup_ip(direct_hash, entry.ip);
-    if (!tmp)
+    if (!tmp) {
     continue;
+    }
     tmp.direct = entry.direct;
     }
     }
     mutex_unlock(&ftrace_lock);
-    out:
+// label;
 // Removing the tmp_ops will add the updated direct callers to the functions
     unregister_ftrace_function(&tmp_ops);
-    unlock:
-    if (do_direct_lock)
+// label;
+    if (do_direct_lock) {
     mutex_unlock(&direct_mutex);
+    }
     return err;
     }
 
@@ -5857,9 +6185,8 @@ pub unsafe extern "C" fn update_ftrace_direct_mod(ops: *mut ftrace_ops, hash: *m
 // either by removing each filtered addr or by using
 // ftrace_free_filter(@ops).
 //
-    int ftrace_set_filter_ip(struct ftrace_ops *ops, unsigned long ip,
-    int remove, int reset)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_set_filter_ip(ops: *mut ftrace_ops, ip: c_ulong, remove: c_int, reset: c_int) -> c_int {
     ftrace_ops_init(ops);
     return ftrace_set_addr(ops, &ip, 1, remove, reset, 1);
     }
@@ -5879,9 +6206,8 @@ pub unsafe extern "C" fn update_ftrace_direct_mod(ops: *mut ftrace_ops, hash: *m
 // either by removing each filtered addr or by using
 // ftrace_free_filter(@ops).
 //
-    int ftrace_set_filter_ips(struct ftrace_ops *ops, unsigned long *ips,
-    unsigned int cnt, int remove, int reset)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_set_filter_ips(ops: *mut ftrace_ops, ips: *mut c_ulong, cnt: c_uint, remove: c_int, reset: c_int) -> c_int {
     ftrace_ops_init(ops);
     return ftrace_set_addr(ops, ips, cnt, remove, reset, 1);
     }
@@ -5895,30 +6221,29 @@ pub unsafe extern "C" fn update_ftrace_direct_mod(ops: *mut ftrace_ops, hash: *m
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_ops_set_global_filter(ops: *mut ftrace_ops) {
-    void ftrace_ops_set_global_filter(struct ftrace_ops *ops)
-    {
-    if (ops.flags & FTRACE_OPS_FL_INITIALIZED)
+    if (ops.flags & FTRACE_OPS_FL_INITIALIZED) {
     return;
+    }
     ftrace_ops_init(ops);
     ops.func_hash = &global_ops.local_hash;
     }
     EXPORT_SYMBOL_GPL(ftrace_ops_set_global_filter);
-    static int
-    ftrace_set_regex(struct ftrace_ops *ops, unsigned char *buf, int len,
-    int reset, int enable)
-    {
-    char *mod = core::ptr::null_mut(), *func, *command, *next = buf;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_set_regex(ops: *mut ftrace_ops, buf: *mut c_uchar, len: c_int, reset: c_int, enable: c_int) -> c_int {
+    let mut mod = core::ptr::null_mut(), *func, *command, *next = buf;
     char *tmp __free(kfree) = core::ptr::null_mut();
-    struct trace_array *tr = ops.private;
-    int ret;
+    let mut tr = ops.private;
+    let mut ret = 0;
     func = strsep(&next, ":");
 // This can also handle :mod: parsing
     if (next) {
-    if (!tr)
+    if (!tr) {
     return -EINVAL;
+    }
     command = strsep(&next, ":");
-    if (strcmp(command, "mod") != 0)
+    if (strcmp(command, "mod") != 0) {
     return -EINVAL;
+    }
     mod = next;
     len = command - func;
 // Save the original func as ftrace_set_hash() can modify it
@@ -5927,8 +6252,9 @@ pub unsafe extern "C" fn ftrace_ops_set_global_filter(ops: *mut ftrace_ops) {
     ret = ftrace_set_hash(ops, func, len, core::ptr::null_mut(), 0, 0, reset, enable, mod);
     if (tr && mod && ret < 0) {
 // Did tmp fail to allocate?
-    if (!tmp)
+    if (!tmp) {
     return -ENOMEM;
+    }
     ret = cache_mod(tr, tmp, mod, enable);
     }
     return ret;
@@ -5947,9 +6273,8 @@ pub unsafe extern "C" fn ftrace_ops_set_global_filter(ops: *mut ftrace_ops) {
 // either by removing each filtered addr or by using
 // ftrace_free_filter(@ops).
 //
-    int ftrace_set_filter(struct ftrace_ops *ops, unsigned char *buf,
-    int len, int reset)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_set_filter(ops: *mut ftrace_ops, buf: *mut c_uchar, len: c_int, reset: c_int) -> c_int {
     ftrace_ops_init(ops);
     return ftrace_set_regex(ops, buf, len, reset, 1);
     }
@@ -5969,9 +6294,8 @@ pub unsafe extern "C" fn ftrace_ops_set_global_filter(ops: *mut ftrace_ops) {
 // either by removing each filtered addr or by using
 // ftrace_free_filter(@ops).
 //
-    int ftrace_set_notrace(struct ftrace_ops *ops, unsigned char *buf,
-    int len, int reset)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_set_notrace(ops: *mut ftrace_ops, buf: *mut c_uchar, len: c_int, reset: c_int) -> c_int {
     ftrace_ops_init(ops);
     return ftrace_set_regex(ops, buf, len, reset, 0);
     }
@@ -5987,8 +6311,6 @@ pub unsafe extern "C" fn ftrace_ops_set_global_filter(ops: *mut ftrace_ops) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_set_global_filter(buf: *mut c_uchar, len: c_int, reset: c_int) {
-    void ftrace_set_global_filter(unsigned char *buf, int len, int reset)
-    {
     ftrace_set_regex(&global_ops, buf, len, reset, 1);
     }
     EXPORT_SYMBOL_GPL(ftrace_set_global_filter);
@@ -6004,8 +6326,6 @@ pub unsafe extern "C" fn ftrace_set_global_filter(buf: *mut c_uchar, len: c_int,
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_set_global_notrace(buf: *mut c_uchar, len: c_int, reset: c_int) {
-    void ftrace_set_global_notrace(unsigned char *buf, int len, int reset)
-    {
     ftrace_set_regex(&global_ops, buf, len, reset, 0);
     }
     EXPORT_SYMBOL_GPL(ftrace_set_global_notrace);
@@ -6018,88 +6338,81 @@ pub unsafe extern "C" fn ftrace_set_global_notrace(buf: *mut c_uchar, len: c_int
 // Used by function selftest to not test if filter is set
     bool ftrace_filter_param __initdata;
 #[no_mangle]
-unsafe extern "C" fn set_ftrace_notrace(str: *mut c_char) -> int __init {
-    static int __init set_ftrace_notrace(char *str)
-    {
+unsafe extern "C" fn set_ftrace_notrace(str: *mut c_char) -> c_int {
     ftrace_filter_param = true;
     trace_append_boot_param(ftrace_notrace_buf, str, ',',
     FTRACE_FILTER_SIZE);
     return 1;
     }
-    __setup("ftrace_notrace=", set_ftrace_notrace);
+    __setup!("ftrace_notrace=", set_ftrace_notrace);
 #[no_mangle]
-unsafe extern "C" fn set_ftrace_filter(str: *mut c_char) -> int __init {
-    static int __init set_ftrace_filter(char *str)
-    {
+unsafe extern "C" fn set_ftrace_filter(str: *mut c_char) -> c_int {
     ftrace_filter_param = true;
     trace_append_boot_param(ftrace_filter_buf, str, ',',
     FTRACE_FILTER_SIZE);
     return 1;
     }
-    __setup("ftrace_filter=", set_ftrace_filter);
+    __setup!("ftrace_filter=", set_ftrace_filter);
 
     static char ftrace_graph_buf[FTRACE_FILTER_SIZE] __initdata;
     static char ftrace_graph_notrace_buf[FTRACE_FILTER_SIZE] __initdata;
-    static int ftrace_graph_set_hash(struct ftrace_hash *hash, char *buffer);
+// forward_decl: ftrace_graph_set_hash;
 #[no_mangle]
-unsafe extern "C" fn set_graph_function(str: *mut c_char) -> int __init {
-    static int __init set_graph_function(char *str)
-    {
+unsafe extern "C" fn set_graph_function(str: *mut c_char) -> c_int {
     trace_append_boot_param(ftrace_graph_buf, str, ',',
     FTRACE_FILTER_SIZE);
     return 1;
     }
-    __setup("ftrace_graph_filter=", set_graph_function);
+    __setup!("ftrace_graph_filter=", set_graph_function);
 #[no_mangle]
-unsafe extern "C" fn set_graph_notrace_function(str: *mut c_char) -> int __init {
-    static int __init set_graph_notrace_function(char *str)
-    {
+unsafe extern "C" fn set_graph_notrace_function(str: *mut c_char) -> c_int {
     trace_append_boot_param(ftrace_graph_notrace_buf, str, ',',
     FTRACE_FILTER_SIZE);
     return 1;
     }
-    __setup("ftrace_graph_notrace=", set_graph_notrace_function);
+    __setup!("ftrace_graph_notrace=", set_graph_notrace_function);
 #[no_mangle]
-unsafe extern "C" fn set_graph_max_depth_function(str: *mut c_char) -> int __init {
-    static int __init set_graph_max_depth_function(char *str)
-    {
-    if (!str || kstrtouint(str, 0, &fgraph_max_depth))
+unsafe extern "C" fn set_graph_max_depth_function(str: *mut c_char) -> c_int {
+    if (!str || kstrtouint(str, 0, &fgraph_max_depth)) {
     return 0;
+    }
     return 1;
     }
-    __setup("ftrace_graph_max_depth=", set_graph_max_depth_function);
+    __setup!("ftrace_graph_max_depth=", set_graph_max_depth_function);
 #[no_mangle]
-unsafe extern "C" fn set_ftrace_early_graph(buf: *mut c_char, enable: c_int) -> void __init {
-    static void __init set_ftrace_early_graph(char *buf, int enable)
-    {
-    int ret;
-    char *func;
-    struct ftrace_hash *hash;
+unsafe extern "C" fn set_ftrace_early_graph(buf: *mut c_char, enable: c_int)  {
+    let mut ret = 0;
+pub static mut func: *mut c_void = core::ptr::null_mut();
+pub static mut hash: *mut c_void = core::ptr::null_mut();
     hash = alloc_ftrace_hash(FTRACE_HASH_DEFAULT_BITS);
-    if (MEM_FAIL(!hash, "Failed to allocate hash\n"))
+    if (MEM_FAIL(!hash, "Failed to allocate hash\n")) {
     return;
+    }
     while (buf) {
     func = strsep(&buf, ",");
 // we allow only one expression at a time
     ret = ftrace_graph_set_hash(hash, func);
-    if (ret)
-    printk(KERN_DEBUG "ftrace: function %s not "
+    if (ret) {
+    printk("ftrace: function %s not "
     "traceable\n", func);
     }
-    if (enable)
+    }
+    if (enable) {
     ftrace_graph_hash = hash;
-    else
+    }
+    else {
     ftrace_graph_notrace_hash = hash;
+    }
     }
 
     void __init
-    ftrace_set_early_filter(struct ftrace_ops *ops, char *buf, int enable)
+    ftrace_set_early_filter(ftrace_ops *ops, char *buf, int enable)
     {
-    char *func;
+pub static mut func: *mut c_void = core::ptr::null_mut();
     ftrace_ops_init(ops);
 // The trace_array is needed for caching module function filters
     if (!ops.private) {
-    struct trace_array *tr = trace_get_global_array();
+    let mut tr = trace_get_global_array();
     ops.private = tr;
     ftrace_init_trace_array(tr);
     }
@@ -6109,38 +6422,39 @@ unsafe extern "C" fn set_ftrace_early_graph(buf: *mut c_char, enable: c_int) -> 
     }
     }
 #[no_mangle]
-unsafe extern "C" fn set_ftrace_early_filters() -> void __init {
-    static void __init set_ftrace_early_filters(void)
-    {
-    if (ftrace_filter_buf[0])
+unsafe extern "C" fn set_ftrace_early_filters()  {
+    if (ftrace_filter_buf[0]) {
     ftrace_set_early_filter(&global_ops, ftrace_filter_buf, 1);
-    if (ftrace_notrace_buf[0])
+    }
+    if (ftrace_notrace_buf[0]) {
     ftrace_set_early_filter(&global_ops, ftrace_notrace_buf, 0);
+    }
 
-    if (ftrace_graph_buf[0])
+    if (ftrace_graph_buf[0]) {
     set_ftrace_early_graph(ftrace_graph_buf, 1);
-    if (ftrace_graph_notrace_buf[0])
+    }
+    if (ftrace_graph_notrace_buf[0]) {
     set_ftrace_early_graph(ftrace_graph_notrace_buf, 0);
+    }
 
     }
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_regex_release(inode: *mut inode, file: *mut file) -> c_int {
-    int ftrace_regex_release(struct inode *inode, struct file *file)
-    {
-    struct seq_file *m = (struct seq_file *)file.private_data;
-    struct ftrace_iterator *iter;
-    struct ftrace_hash **orig_hash;
-    struct trace_parser *parser;
-    int filter_hash;
+    let mut m = file.private_data;
+pub static mut iter: *mut c_void = core::ptr::null_mut();
+pub static mut orig_hash: *mut c_void = core::ptr::null_mut();
+pub static mut parser: *mut c_void = core::ptr::null_mut();
+    let mut filter_hash = 0;
     if (file.f_mode & FMODE_READ) {
     iter = m.private;
     seq_release(inode, file);
-    } else
+    } else {
     iter = file.private_data;
+    }
     parser = &iter.parser;
     mutex_lock(&parser_lock);
     if (trace_parser_loaded(parser)) {
-    let mut enable: c_int = !(iter.flags & FTRACE_ITER_NOTRACE);
+pub static mut enable: c_int = 0;
     ftrace_process_regex(iter, parser.buffer,
     parser.idx, enable);
     }
@@ -6152,13 +6466,16 @@ pub unsafe extern "C" fn ftrace_regex_release(inode: *mut inode, file: *mut file
     if (filter_hash) {
     orig_hash = &iter.ops.func_hash.filter_hash;
     if (iter.tr) {
-    if (list_empty(&iter.tr.mod_trace))
+    if (list_empty(&iter.tr.mod_trace)) {
     iter.hash.flags &= ~FTRACE_HASH_FL_MOD;
-    else
+    }
+    else {
     iter.hash.flags |= FTRACE_HASH_FL_MOD;
     }
-    } else
+    }
+    } else {
     orig_hash = &iter.ops.func_hash.notrace_hash;
+    }
     mutex_lock(&ftrace_lock);
     ftrace_hash_move_and_update_ops(iter.ops, orig_hash,
     iter.hash, filter_hash);
@@ -6166,53 +6483,22 @@ pub unsafe extern "C" fn ftrace_regex_release(inode: *mut inode, file: *mut file
     }
     mutex_unlock(&iter.ops.func_hash.regex_lock);
     free_ftrace_hash(iter.hash);
-    if (iter.tr)
+    if (iter.tr) {
     trace_array_put(iter.tr);
+    }
     kfree(iter);
     return 0;
     }
-    static const struct file_operations ftrace_avail_fops = {
-    .open = ftrace_avail_open,
-    .read = seq_read,
-    .llseek = seq_lseek,
-    .release = seq_release_private,
-    };
-    static const struct file_operations ftrace_enabled_fops = {
-    .open = ftrace_enabled_open,
-    .read = seq_read,
-    .llseek = seq_lseek,
-    .release = seq_release_private,
-    };
-    static const struct file_operations ftrace_touched_fops = {
-    .open = ftrace_touched_open,
-    .read = seq_read,
-    .llseek = seq_lseek,
-    .release = seq_release_private,
-    };
-    static const struct file_operations ftrace_avail_addrs_fops = {
-    .open = ftrace_avail_addrs_open,
-    .read = seq_read,
-    .llseek = seq_lseek,
-    .release = seq_release_private,
-    };
-    static const struct file_operations ftrace_filter_fops = {
-    .open = ftrace_filter_open,
-    .read = seq_read,
-    .write = ftrace_filter_write,
-    .llseek = tracing_lseek,
-    .release = ftrace_regex_release,
-    };
-    static const struct file_operations ftrace_notrace_fops = {
-    .open = ftrace_notrace_open,
-    .read = seq_read,
-    .write = ftrace_notrace_write,
-    .llseek = tracing_lseek,
-    .release = ftrace_regex_release,
-    };
+pub static mut file_operations: usize = 0;
+pub static mut file_operations: usize = 0;
+pub static mut file_operations: usize = 0;
+pub static mut file_operations: usize = 0;
+pub static mut file_operations: usize = 0;
+pub static mut file_operations: usize = 0;
 
-    static DEFINE_MUTEX(graph_lock);
-    struct ftrace_hash __rcu *ftrace_graph_hash = EMPTY_HASH;
-    struct ftrace_hash __rcu *ftrace_graph_notrace_hash = EMPTY_HASH;
+pub static mut graph_lock: usize = 0;
+    let mut ftrace_graph_hash = EMPTY_HASH;
+    let mut ftrace_graph_notrace_hash = EMPTY_HASH;
     enum graph_filter_type {
     GRAPH_FILTER_NOTRACE	= 0,
     GRAPH_FILTER_FUNCTION,
@@ -6223,30 +6509,30 @@ pub unsafe extern "C" fn ftrace_regex_release(inode: *mut inode, file: *mut file
 pub struct ftrace_graph_data {
     pub hash: *mut ftrace_hash,
     pub entry: *mut ftrace_func_entry,
-    pub /: *mut *mut int idx; / for hash table iteration,
-    pub type: enum graph_filter_type,
+//     pub /: *mut *mut int idx; / for hash table iteration,
+    pub type: graph_filter_type,
     pub new_hash: *mut ftrace_hash,
     pub seq_ops: *const seq_operations,
     pub parser: trace_parser,
 }
 
-    static void *
-    __g_next(struct seq_file *m, loff_t *pos)
-    {
-    struct ftrace_graph_data *fgd = m.private;
-    struct ftrace_func_entry *entry = fgd.entry;
-    struct hlist_head *head;
+#[no_mangle]
+pub unsafe extern "C" fn __g_next(m: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
+    let mut fgd = m.private;
+    let mut entry = fgd.entry;
+pub static mut head: *mut c_void = core::ptr::null_mut();
     int i, idx = fgd.idx;
-    if (*pos >= fgd.hash.count)
+    if (*pos >= fgd.hash.count) {
     return core::ptr::null_mut();
+    }
     if (entry) {
     hlist_for_each_entry_continue(entry, hlist) {
     fgd.entry = entry;
     return entry;
     }
-    idx++;
+    idx += 1;
     }
-    for (i = idx; i < 1 << fgd.hash.size_bits; i++) {
+    while (i < 1 << fgd.hash.size_bits) {
     head = &fgd.hash.buckets[i];
     hlist_for_each_entry(entry, head, hlist) {
     fgd.entry = entry;
@@ -6256,97 +6542,97 @@ pub struct ftrace_graph_data {
     }
     return core::ptr::null_mut();
     }
-    static void *
-    g_next(struct seq_file *m, void *v, loff_t *pos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn g_next(m: *mut seq_file, v: *mut c_void, pos: *mut loff_t) -> *mut c_void {
     (*pos)++;
     return __g_next(m, pos);
     }
-    static void *g_start(struct seq_file *m, loff_t *pos)
-    {
-    struct ftrace_graph_data *fgd = m.private;
+#[no_mangle]
+pub unsafe extern "C" fn g_start(m: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
+    let mut fgd = m.private;
     mutex_lock(&graph_lock);
-    if (fgd.type == GRAPH_FILTER_FUNCTION)
+    if (fgd.type == GRAPH_FILTER_FUNCTION) {
     fgd.hash = rcu_dereference_protected(ftrace_graph_hash,
     lockdep_is_held(&graph_lock));
-    else
+    }
+    else {
     fgd.hash = rcu_dereference_protected(ftrace_graph_notrace_hash,
     lockdep_is_held(&graph_lock));
+    }
 // Nothing, tell g_show to print all functions are enabled
-    if (ftrace_hash_empty(fgd.hash) && !*pos)
+    if (ftrace_hash_empty(fgd.hash) && !*pos) {
     return FTRACE_GRAPH_EMPTY;
+    }
     fgd.idx = 0;
     fgd.entry = core::ptr::null_mut();
     return __g_next(m, pos);
     }
 #[no_mangle]
 unsafe extern "C" fn g_stop(m: *mut seq_file, p: *mut c_void) {
-    static void g_stop(struct seq_file *m, void *p)
-    {
     mutex_unlock(&graph_lock);
     }
 #[no_mangle]
 unsafe extern "C" fn g_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int g_show(struct seq_file *m, void *v)
-    {
-    struct ftrace_func_entry *entry = v;
-    if (!entry)
+    let mut entry = v;
+    if (!entry) {
     return 0;
+    }
     if (entry == FTRACE_GRAPH_EMPTY) {
-    struct ftrace_graph_data *fgd = m.private;
-    if (fgd.type == GRAPH_FILTER_FUNCTION)
+    let mut fgd = m.private;
+    if (fgd.type == GRAPH_FILTER_FUNCTION) {
     seq_puts(m, "#### all functions enabled ####\n");
-    else
+    }
+    else {
     seq_puts(m, "#### no functions disabled ####\n");
+    }
     return 0;
     }
-    seq_printf(m, "%ps\n", (void *)entry.ip);
+    seq_printf(m, "%ps\n", entry.ip);
     return 0;
     }
-    static const struct seq_operations ftrace_graph_seq_ops = {
-    .start = g_start,
-    .next = g_next,
-    .stop = g_stop,
-    .show = g_show,
-    };
-    static int
-    __ftrace_graph_open(struct inode *inode, struct file *file,
-    struct ftrace_graph_data *fgd)
-    {
-    int ret;
-    struct ftrace_hash *new_hash = core::ptr::null_mut();
+pub static mut seq_operations: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn __ftrace_graph_open(inode: *mut inode, file: *mut file, fgd: *mut ftrace_graph_data) -> c_int {
+    let mut ret = 0;
+    let mut new_hash = core::ptr::null_mut();
     ret = security_locked_down(LOCKDOWN_TRACEFS);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     if (file.f_mode & FMODE_WRITE) {
-    let mut size_bits: c_int = FTRACE_HASH_DEFAULT_BITS;
-    if (trace_parser_get_init(&fgd.parser, FTRACE_BUFF_MAX))
+pub static mut size_bits: c_int = 0;
+    if (trace_parser_get_init(&fgd.parser, FTRACE_BUFF_MAX)) {
     return -ENOMEM;
-    if (file.f_flags & O_TRUNC)
+    }
+    if (file.f_flags & O_TRUNC) {
     new_hash = alloc_ftrace_hash(size_bits);
-    else
+    }
+    else {
     new_hash = alloc_and_copy_ftrace_hash(size_bits,
     fgd.hash);
+    }
     if (!new_hash) {
     ret = -ENOMEM;
-    goto out;
+// goto;
     }
     }
     if (file.f_mode & FMODE_READ) {
     ret = seq_open(file, &ftrace_graph_seq_ops);
     if (!ret) {
-    struct seq_file *m = file.private_data;
+    let mut m = file.private_data;
     m.private = fgd;
     } else {
 // Failed
     free_ftrace_hash(new_hash);
     new_hash = core::ptr::null_mut();
     }
-    } else
+    } else {
     file.private_data = fgd;
-    out:
-    if (ret < 0 && file.f_mode & FMODE_WRITE)
+    }
+// label;
+    if (ret < 0 && file.f_mode & FMODE_WRITE) {
     trace_parser_put(&fgd.parser);
+    }
     fgd.new_hash = new_hash;
 //
 // All uses of fgd->hash must be taken with the graph_lock
@@ -6356,57 +6642,61 @@ unsafe extern "C" fn g_show(m: *mut seq_file, v: *mut c_void) -> c_int {
     fgd.hash = core::ptr::null_mut();
     return ret;
     }
-    static int
-    ftrace_graph_open(struct inode *inode, struct file *file)
-    {
-    struct ftrace_graph_data *fgd;
-    int ret;
-    if (unlikely(ftrace_disabled))
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_graph_open(inode: *mut inode, file: *mut file) -> c_int {
+pub static mut fgd: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (unlikely(ftrace_disabled)) {
     return -ENODEV;
+    }
     fgd = kmalloc_obj(*fgd);
-    if (fgd == core::ptr::null_mut())
+    if (fgd == core::ptr::null_mut()) {
     return -ENOMEM;
+    }
     mutex_lock(&graph_lock);
     fgd.hash = rcu_dereference_protected(ftrace_graph_hash,
     lockdep_is_held(&graph_lock));
     fgd.type = GRAPH_FILTER_FUNCTION;
     fgd.seq_ops = &ftrace_graph_seq_ops;
     ret = __ftrace_graph_open(inode, file, fgd);
-    if (ret < 0)
+    if (ret < 0) {
     kfree(fgd);
+    }
     mutex_unlock(&graph_lock);
     return ret;
     }
-    static int
-    ftrace_graph_notrace_open(struct inode *inode, struct file *file)
-    {
-    struct ftrace_graph_data *fgd;
-    int ret;
-    if (unlikely(ftrace_disabled))
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_graph_notrace_open(inode: *mut inode, file: *mut file) -> c_int {
+pub static mut fgd: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (unlikely(ftrace_disabled)) {
     return -ENODEV;
+    }
     fgd = kmalloc_obj(*fgd);
-    if (fgd == core::ptr::null_mut())
+    if (fgd == core::ptr::null_mut()) {
     return -ENOMEM;
+    }
     mutex_lock(&graph_lock);
     fgd.hash = rcu_dereference_protected(ftrace_graph_notrace_hash,
     lockdep_is_held(&graph_lock));
     fgd.type = GRAPH_FILTER_NOTRACE;
     fgd.seq_ops = &ftrace_graph_seq_ops;
     ret = __ftrace_graph_open(inode, file, fgd);
-    if (ret < 0)
+    if (ret < 0) {
     kfree(fgd);
+    }
     mutex_unlock(&graph_lock);
     return ret;
     }
-    static int
-    ftrace_graph_release(struct inode *inode, struct file *file)
-    {
-    struct ftrace_graph_data *fgd;
-    struct ftrace_hash *old_hash, *new_hash;
-    struct trace_parser *parser;
-    let mut ret: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_graph_release(inode: *mut inode, file: *mut file) -> c_int {
+pub static mut fgd: *mut c_void = core::ptr::null_mut();
+    let mut old_hash = core::ptr::null_mut();
+    let mut new_hash = core::ptr::null_mut();
+pub static mut parser: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     if (file.f_mode & FMODE_READ) {
-    struct seq_file *m = file.private_data;
+    let mut m = file.private_data;
     fgd = m.private;
     seq_release(inode, file);
     } else {
@@ -6424,7 +6714,7 @@ unsafe extern "C" fn g_show(m: *mut seq_file, v: *mut c_void) -> c_int {
     new_hash = __ftrace_hash_move(fgd.new_hash);
     if (!new_hash) {
     ret = -ENOMEM;
-    goto out;
+// goto;
     }
     mutex_lock(&graph_lock);
     if (fgd.type == GRAPH_FILTER_FUNCTION) {
@@ -6445,42 +6735,46 @@ unsafe extern "C" fn g_show(m: *mut seq_file, v: *mut c_void) -> c_int {
 // infrastructure to do the synchronization, thus we must do it
 // ourselves.
 //
-    if (old_hash != EMPTY_HASH)
+    if (old_hash != EMPTY_HASH) {
     synchronize_rcu_tasks_rude();
+    }
     free_ftrace_hash(old_hash);
     }
-    out:
+// label;
     free_ftrace_hash(fgd.new_hash);
     kfree(fgd);
     return ret;
     }
-    static int
-    ftrace_graph_set_hash(struct ftrace_hash *hash, char *buffer)
-    {
-    struct ftrace_glob func_g;
-    struct dyn_ftrace *rec;
-    struct ftrace_page *pg;
-    struct ftrace_func_entry *entry;
-    let mut fail: c_int = 1;
-    int not;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_graph_set_hash(hash: *mut ftrace_hash, buffer: *mut c_char) -> c_int {
+pub static mut func_g: usize = 0;
+pub static mut rec: *mut c_void = core::ptr::null_mut();
+pub static mut pg: *mut c_void = core::ptr::null_mut();
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut fail: c_int = 1;
+    let mut not = 0;
 // decode regex
     func_g.type = filter_parse_regex(buffer, strlen(buffer),
     &func_g.search, &not);
     func_g.len = strlen(func_g.search);
     guard(mutex)(&ftrace_lock);
-    if (unlikely(ftrace_disabled))
+    if (unlikely(ftrace_disabled)) {
     return -ENODEV;
+    }
     do_for_each_ftrace_rec(pg, rec) {
-    if (rec.flags & FTRACE_FL_DISABLED)
+    if (rec.flags & FTRACE_FL_DISABLED) {
     continue;
+    }
     if (ftrace_match_record(rec, &func_g, core::ptr::null_mut(), 0)) {
     entry = ftrace_lookup_ip(hash, rec.ip);
     if (!not) {
     fail = 0;
-    if (entry)
+    if (entry) {
     continue;
-    if (add_hash_entry(hash, rec.ip) == core::ptr::null_mut())
+    }
+    if (add_hash_entry(hash, rec.ip) == core::ptr::null_mut()) {
     return 0;
+    }
     } else {
     if (entry) {
     free_hash_entry(hash, entry);
@@ -6492,18 +6786,17 @@ unsafe extern "C" fn g_show(m: *mut seq_file, v: *mut c_void) -> c_int {
     } while_for_each_ftrace_rec();
     return fail ? -EINVAL : 0;
     }
-    static ssize_t
-    ftrace_graph_write(struct file *file, const char __user *ubuf,
-    size_t cnt, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_graph_write(file: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
     ssize_t read, ret = 0;
-    struct ftrace_graph_data *fgd = file.private_data;
-    struct trace_parser *parser;
-    if (!cnt)
+    let mut fgd = file.private_data;
+pub static mut parser: *mut c_void = core::ptr::null_mut();
+    if (!cnt) {
     return 0;
+    }
 // Read mode uses seq functions
     if (file.f_mode & FMODE_READ) {
-    struct seq_file *m = file.private_data;
+    let mut m = file.private_data;
     fgd = m.private;
     }
     parser = &fgd.parser;
@@ -6515,28 +6808,16 @@ unsafe extern "C" fn g_show(m: *mut seq_file, v: *mut c_void) -> c_int {
     parser.buffer);
     trace_parser_clear(parser);
     }
-    if (!ret)
+    if (!ret) {
     ret = read;
+    }
     return ret;
     }
-    static const struct file_operations ftrace_graph_fops = {
-    .open		= ftrace_graph_open,
-    .read		= seq_read,
-    .write		= ftrace_graph_write,
-    .llseek		= tracing_lseek,
-    .release	= ftrace_graph_release,
-    };
-    static const struct file_operations ftrace_graph_notrace_fops = {
-    .open		= ftrace_graph_notrace_open,
-    .read		= seq_read,
-    .write		= ftrace_graph_write,
-    .llseek		= tracing_lseek,
-    .release	= ftrace_graph_release,
-    };
+pub static mut file_operations: usize = 0;
+pub static mut file_operations: usize = 0;
 
-    void ftrace_create_filter_files(struct ftrace_ops *ops,
-    struct dentry *parent)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_create_filter_files(ops: *mut ftrace_ops, parent: *mut dentry) {
     trace_create_file("set_ftrace_filter", TRACE_MODE_WRITE, parent,
     ops, &ftrace_filter_fops);
     trace_create_file("set_ftrace_notrace", TRACE_MODE_WRITE, parent,
@@ -6554,19 +6835,16 @@ unsafe extern "C" fn g_show(m: *mut seq_file, v: *mut c_void) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_destroy_filter_files(ops: *mut ftrace_ops) {
-    void ftrace_destroy_filter_files(struct ftrace_ops *ops)
-    {
     mutex_lock(&ftrace_lock);
-    if (ops.flags & FTRACE_OPS_FL_ENABLED)
+    if (ops.flags & FTRACE_OPS_FL_ENABLED) {
     ftrace_shutdown(ops, 0);
+    }
     ops.flags |= FTRACE_OPS_FL_DELETED;
     ftrace_free_filter(ops);
     mutex_unlock(&ftrace_lock);
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_init_dyn_tracefs(d_tracer: *mut dentry) -> __init int {
-    static __init int ftrace_init_dyn_tracefs(struct dentry *d_tracer)
-    {
     trace_create_file("available_filter_functions", TRACE_MODE_READ,
     d_tracer, core::ptr::null_mut(), &ftrace_avail_fops);
     trace_create_file("available_filter_functions_addrs", TRACE_MODE_READ,
@@ -6588,71 +6866,69 @@ unsafe extern "C" fn ftrace_init_dyn_tracefs(d_tracer: *mut dentry) -> __init in
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_cmp_ips(a: *const c_void, b: *const c_void) -> c_int {
-    static int ftrace_cmp_ips(const void *a, const void *b)
-    {
-    const unsigned long *ipa = a;
-    const unsigned long *ipb = b;
-    if (*ipa > *ipb)
+    let mut ipa = a;
+    let mut ipb = b;
+    if (*ipa > *ipb) {
     return 1;
-    if (*ipa < *ipb)
+    }
+    if (*ipa < *ipb) {
     return -1;
+    }
     return 0;
     }
 
 #[no_mangle]
 unsafe extern "C" fn test_is_sorted(start: *mut c_ulong, count: c_ulong) {
-    static void test_is_sorted(unsigned long *start, unsigned long count)
-    {
-    int i;
-    for (i = 1; i < count; i++) {
+    let mut i = 0;
+    while (i < count) {
     if (WARN(start[i - 1] > start[i],
     "[%d] %pS at %lx is not sorted with %pS at %lx\n", i,
-    (void *)start[i - 1], start[i - 1],
-    (void *)start[i], start[i]))
+    start[i - 1], start[i - 1],
+    start[i], start[i])) {
     break;
     }
-    if (i == count)
-    pr_info("ftrace section at %px sorted properly\n", start);
+    }
+    if (i == count) {
+    pr_info!("ftrace section at %px sorted properly\n", start);
+    }
     }
 
 #[no_mangle]
 unsafe extern "C" fn test_is_sorted(start: *mut c_ulong, count: c_ulong) {
-    static void test_is_sorted(unsigned long *start, unsigned long count)
-    {
     }
 
-    static int ftrace_process_locs(struct module *mod,
-    unsigned long *start,
-    unsigned long *end)
-    {
-    struct ftrace_page *pg_unuse = core::ptr::null_mut();
-    struct ftrace_page *start_pg;
-    struct ftrace_page *pg;
-    struct dyn_ftrace *rec;
-    let mut skipped: c_ulong = 0;
-    unsigned long count;
-    unsigned long *p;
-    unsigned long addr;
-    unsigned long flags = 0; /* Shut up gcc */
-    unsigned long pages;
-    let mut ret: c_int = -ENOMEM;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_process_locs(mod: *mut module, start: *mut c_ulong, end: *mut c_ulong) -> c_int {
+    let mut pg_unuse = core::ptr::null_mut();
+pub static mut start_pg: *mut c_void = core::ptr::null_mut();
+pub static mut pg: *mut c_void = core::ptr::null_mut();
+pub static mut rec: *mut c_void = core::ptr::null_mut();
+pub static mut skipped: c_ulong = 0;
+    let mut count = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    let mut addr = 0;
+    let mut flags = 0; /* Shut up gcc */
+    let mut pages = 0;
+pub static mut ret: c_int = 0;
     count = end - start;
-    if (!count)
+    if (!count) {
     return 0;
+    }
 //
 // Sorting mcount in vmlinux at build time depend on
 // CONFIG_BUILDTIME_MCOUNT_SORT, while mcount loc in
 // modules can not be sorted at build time.
 //
-    if (!IS_ENABLED(CONFIG_BUILDTIME_MCOUNT_SORT) || mod) {
-    sort(start, count, sizeof(*start),
+    if (!IS_ENABLED!(CONFIG_BUILDTIME_MCOUNT_SORT) || mod) {
+    sort(start, count, sizeof!(*start),
     ftrace_cmp_ips, core::ptr::null_mut());
     } else {
     test_is_sorted(start, count);
     }
     start_pg = ftrace_allocate_pages(count, &pages);
-    if (!start_pg)
+    if (!start_pg) {
     return -ENOMEM;
+    }
     mutex_lock(&ftrace_lock);
 //
 // Core and each module needs their own pages, as
@@ -6660,24 +6936,26 @@ unsafe extern "C" fn test_is_sorted(start: *mut c_ulong, count: c_ulong) {
 // Force a new page to be allocated for modules.
 //
     if (!mod) {
-    WARN_ON(ftrace_pages || ftrace_pages_start);
+    WARN_ON!(ftrace_pages || ftrace_pages_start);
 // First initialization
     ftrace_pages = ftrace_pages_start = start_pg;
     } else {
-    if (!ftrace_pages)
-    goto out;
-    if (WARN_ON(ftrace_pages.next)) {
+    if (!ftrace_pages) {
+// goto;
+    }
+    if (WARN_ON!(ftrace_pages.next)) {
 // Hmm, we have free pages?
-    while (ftrace_pages.next)
+    while (ftrace_pages.next) {
     ftrace_pages = ftrace_pages.next;
+    }
     }
     ftrace_pages.next = start_pg;
     }
     p = start;
     pg = start_pg;
     while (p < end) {
-    unsigned long end_offset;
-    addr = *p++;
+    let mut end_offset = 0;
+    addr = *p += 1;
 //
 // Some architecture linkers will pad between
 // the different mcount_loc sections of different
@@ -6685,7 +6963,7 @@ unsafe extern "C" fn test_is_sorted(start: *mut c_ulong, count: c_ulong) {
 // Skip any NULL pointers.
 //
     if (!addr) {
-    skipped++;
+    skipped += 1;
     continue;
     }
 //
@@ -6695,15 +6973,16 @@ unsafe extern "C" fn test_is_sorted(start: *mut c_ulong, count: c_ulong) {
 // move it to an area where kernel text is.
 //
     if (!mod && !(is_kernel_text(addr) || is_kernel_inittext(addr))) {
-    skipped++;
+    skipped += 1;
     continue;
     }
     addr = ftrace_call_adjust(addr);
-    end_offset = (pg.index+1) * sizeof(pg.records[0]);
+    end_offset = (pg.index+1) * sizeof!(pg.records[0]);
     if (end_offset > PAGE_SIZE << pg.order) {
 // We should have allocated enough
-    if (WARN_ON(!pg.next))
+    if (WARN_ON!(!pg.next)) {
     break;
+    }
     pg = pg.next;
     }
     rec = &pg.records[pg.index++];
@@ -6723,23 +7002,25 @@ unsafe extern "C" fn test_is_sorted(start: *mut c_ulong, count: c_ulong) {
 // until we are finished with it, and there's no
 // reason to cause large interrupt latencies while we do it.
 //
-    if (!mod)
+    if (!mod) {
     local_irq_save(flags);
+    }
     ftrace_update_code(mod, start_pg);
-    if (!mod)
+    if (!mod) {
     local_irq_restore(flags);
+    }
     ret = 0;
-    out:
+// label;
     mutex_unlock(&ftrace_lock);
 // We should have used all pages unless we skipped some
     if (pg_unuse) {
     unsigned long pg_remaining, remaining = 0;
-    long skip;
+    let mut skip = 0;
 // Count the number of entries unused and compare it to skipped.
     pg_remaining = ENTRIES_PER_PAGE_GROUP(pg.order) - pg.index;
     if (!WARN(skipped < pg_remaining, "Extra allocated pages for ftrace")) {
     skip = skipped - pg_remaining;
-    for (pg = pg_unuse; pg && skip > 0; pg = pg.next) {
+    while (pg && skip > 0) {
     remaining += 1 << pg.order;
     skip -= ENTRIES_PER_PAGE_GROUP(pg.order);
     }
@@ -6757,7 +7038,7 @@ unsafe extern "C" fn test_is_sorted(start: *mut c_ulong, count: c_ulong) {
     }
     if (!mod) {
     count -= skipped;
-    pr_info("ftrace: allocating %ld entries in %ld pages\n",
+    pr_info!("ftrace: allocating %ld entries in %ld pages\n",
     count, pages);
     }
     return ret;
@@ -6783,15 +7064,13 @@ pub struct ftrace_mod_map {
     pub num_funcs: c_uint,
 }
 
-    static int ftrace_get_trampoline_kallsym(unsigned int symnum,
-    unsigned long *value, char *type,
-    char *name, char *module_name,
-    int *exported)
-    {
-    struct ftrace_ops *op;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_get_trampoline_kallsym(symnum: c_uint, value: *mut c_ulong, type: *mut c_char, name: *mut c_char, module_name: *mut c_char, exported: *mut c_int) -> c_int {
+pub static mut op: *mut c_void = core::ptr::null_mut();
     list_for_each_entry_rcu(op, &ftrace_ops_trampoline_list, list) {
-    if (!op.trampoline || symnum--)
+    if (!op.trampoline || symnum--) {
     continue;
+    }
 // value = op->trampoline;
 // type = 't';
     strscpy(name, FTRACE_TRAMPOLINE_SYM, KSYM_NAME_LEN);
@@ -6809,58 +7088,64 @@ pub struct ftrace_mod_map {
 // If the ops does not trace the current record function, skip it.
 // If the ops ignores the function via notrace filter, skip it.
 //
-    static bool
-    ops_references_ip(struct ftrace_ops *ops, unsigned long ip)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ops_references_ip(ops: *mut ftrace_ops, ip: c_ulong) -> bool {
 // If ops isn't enabled, ignore it
-    if (!(ops.flags & FTRACE_OPS_FL_ENABLED))
+    if (!(ops.flags & FTRACE_OPS_FL_ENABLED)) {
     return false;
+    }
 // If ops traces all then it includes this function
-    if (ops_traces_mod(ops))
+    if (ops_traces_mod(ops)) {
     return true;
+    }
 // The function must be in the filter
     if (!ftrace_hash_empty(ops.func_hash.filter_hash) &&
-    !__ftrace_lookup_ip(ops.func_hash.filter_hash, ip))
+    !__ftrace_lookup_ip(ops.func_hash.filter_hash, ip)) {
     return false;
+    }
 // If in notrace hash, we ignore it too
-    if (ftrace_lookup_ip(ops.func_hash.notrace_hash, ip))
+    if (ftrace_lookup_ip(ops.func_hash.notrace_hash, ip)) {
     return false;
+    }
     return true;
     }
 
-    static LIST_HEAD(ftrace_mod_maps);
+pub static mut ftrace_mod_maps: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn referenced_filters(rec: *mut dyn_ftrace) -> c_int {
-    static int referenced_filters(struct dyn_ftrace *rec)
-    {
-    struct ftrace_ops *ops;
-    let mut cnt: c_int = 0;
-    for (ops = ftrace_ops_list; ops != &ftrace_list_end; ops = ops.next) {
+pub static mut ops: *mut c_void = core::ptr::null_mut();
+pub static mut cnt: c_int = 0;
+    while (ops != &ftrace_list_end) {
     if (ops_references_ip(ops, rec.ip)) {
-    if (WARN_ON_ONCE(ops.flags & FTRACE_OPS_FL_DIRECT))
+    if (WARN_ON_ONCE!(ops.flags & FTRACE_OPS_FL_DIRECT)) {
     continue;
-    if (WARN_ON_ONCE(ops.flags & FTRACE_OPS_FL_IPMODIFY))
+    }
+    if (WARN_ON_ONCE!(ops.flags & FTRACE_OPS_FL_IPMODIFY)) {
     continue;
-    cnt++;
-    if (ops.flags & FTRACE_OPS_FL_SAVE_REGS)
+    }
+    cnt += 1;
+    if (ops.flags & FTRACE_OPS_FL_SAVE_REGS) {
     rec.flags |= FTRACE_FL_REGS;
-    if (cnt == 1 && ops.trampoline)
+    }
+    if (cnt == 1 && ops.trampoline) {
     rec.flags |= FTRACE_FL_TRAMP;
-    else
+    }
+    else {
     rec.flags &= ~FTRACE_FL_TRAMP;
+    }
     }
     }
     return cnt;
     }
-    static void
-    clear_mod_from_hash(struct ftrace_page *pg, struct ftrace_hash *hash)
-    {
-    struct ftrace_func_entry *entry;
-    struct dyn_ftrace *rec;
-    int i;
-    if (ftrace_hash_empty(hash))
+#[no_mangle]
+pub unsafe extern "C" fn clear_mod_from_hash(pg: *mut ftrace_page, hash: *mut ftrace_hash) {
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut rec: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    if (ftrace_hash_empty(hash)) {
     return;
-    for (i = 0; i < pg.index; i++) {
+    }
+    while (i < pg.index) {
     rec = &pg.records[i];
     entry = __ftrace_lookup_ip(hash, rec.ip);
 //
@@ -6868,20 +7153,20 @@ unsafe extern "C" fn referenced_filters(rec: *mut dyn_ftrace) -> c_int {
 // Yeah, it may waste some memory, but will be removed
 // if/when the hash is modified again.
 //
-    if (entry)
+    if (entry) {
     entry.ip = 0;
+    }
     }
     }
 // Clear any records from hashes
 #[no_mangle]
 unsafe extern "C" fn clear_mod_from_hashes(pg: *mut ftrace_page) {
-    static void clear_mod_from_hashes(struct ftrace_page *pg)
-    {
-    struct trace_array *tr;
+pub static mut tr: *mut c_void = core::ptr::null_mut();
     mutex_lock(&trace_types_lock);
     list_for_each_entry(tr, &ftrace_trace_arrays, list) {
-    if (!tr.ops || !tr.ops.func_hash)
+    if (!tr.ops || !tr.ops.func_hash) {
     continue;
+    }
     mutex_lock(&tr.ops.func_hash.regex_lock);
     clear_mod_from_hash(pg, tr.ops.func_hash.filter_hash);
     clear_mod_from_hash(pg, tr.ops.func_hash.notrace_hash);
@@ -6891,11 +7176,9 @@ unsafe extern "C" fn clear_mod_from_hashes(pg: *mut ftrace_page) {
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_free_mod_map(rcu: *mut rcu_head) {
-    static void ftrace_free_mod_map(struct rcu_head *rcu)
-    {
-    struct ftrace_mod_map *mod_map = container_of(rcu, struct ftrace_mod_map, rcu);
-    struct ftrace_mod_func *mod_func;
-    struct ftrace_mod_func *n;
+    let mut mod_map = container_of!(rcu, ftrace_mod_map, rcu);
+pub static mut mod_func: *mut c_void = core::ptr::null_mut();
+pub static mut n: *mut c_void = core::ptr::null_mut();
 // All the contents of mod_map are now not visible to readers
     list_for_each_entry_safe(mod_func, n, &mod_map.funcs, list) {
     kfree(mod_func.name);
@@ -6906,14 +7189,12 @@ unsafe extern "C" fn ftrace_free_mod_map(rcu: *mut rcu_head) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_release_mod(mod: *mut module) {
-    void ftrace_release_mod(struct module *mod)
-    {
-    struct ftrace_mod_map *mod_map;
-    struct ftrace_mod_map *n;
-    struct dyn_ftrace *rec;
-    struct ftrace_page **last_pg;
-    struct ftrace_page *tmp_page = core::ptr::null_mut();
-    struct ftrace_page *pg;
+pub static mut mod_map: *mut c_void = core::ptr::null_mut();
+pub static mut n: *mut c_void = core::ptr::null_mut();
+pub static mut rec: *mut c_void = core::ptr::null_mut();
+pub static mut last_pg: *mut c_void = core::ptr::null_mut();
+    let mut tmp_page = core::ptr::null_mut();
+pub static mut pg: *mut c_void = core::ptr::null_mut();
     mutex_lock(&ftrace_lock);
 //
 // To avoid the UAF problem after the module is unloaded, the
@@ -6926,38 +7207,43 @@ pub unsafe extern "C" fn ftrace_release_mod(mod: *mut module) {
     break;
     }
     }
-    if (ftrace_disabled)
-    goto out_unlock;
+    if (ftrace_disabled) {
+// goto;
+    }
 //
 // Each module has its own ftrace_pages, remove
 // them from the list.
 //
     last_pg = &ftrace_pages_start;
-    for (pg = ftrace_pages_start; pg; pg = *last_pg) {
+    while (pg) {
     rec = &pg.records[0];
     if (within_module(rec.ip, mod)) {
 //
 // As core pages are first, the first
 // page should never be a module page.
 //
-    if (WARN_ON(pg == ftrace_pages_start))
-    goto out_unlock;
+    if (WARN_ON!(pg == ftrace_pages_start)) {
+// goto;
+    }
 // Check if we are deleting the last page
-    if (pg == ftrace_pages)
+    if (pg == ftrace_pages) {
     ftrace_pages = next_to_ftrace_page(last_pg);
+    }
     ftrace_update_tot_cnt -= pg.index;
 // last_pg = pg->next;
     pg.next = tmp_page;
     tmp_page = pg;
-    } else
+    } else {
     last_pg = &pg.next;
     }
-    out_unlock:
+    }
+// label;
     mutex_unlock(&ftrace_lock);
 // Need to synchronize with ftrace_location_range()
-    if (tmp_page)
+    if (tmp_page) {
     synchronize_rcu();
-    for (pg = tmp_page; pg; pg = tmp_page) {
+    }
+    while (pg) {
 // Needs to be called outside of ftrace_lock
     clear_mod_from_hashes(pg);
     if (pg.records) {
@@ -6966,18 +7252,17 @@ pub unsafe extern "C" fn ftrace_release_mod(mod: *mut module) {
     }
     tmp_page = pg.next;
     kfree(pg);
-    ftrace_number_of_groups--;
+    ftrace_number_of_groups -= 1;
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_module_enable(mod: *mut module) {
-    void ftrace_module_enable(struct module *mod)
-    {
-    struct dyn_ftrace *rec;
-    struct ftrace_page *pg;
+pub static mut rec: *mut c_void = core::ptr::null_mut();
+pub static mut pg: *mut c_void = core::ptr::null_mut();
     mutex_lock(&ftrace_lock);
-    if (ftrace_disabled)
-    goto out_unlock;
+    if (ftrace_disabled) {
+// goto;
+    }
 //
 // If the tracing is enabled, go ahead and enable the record.
 //
@@ -6991,18 +7276,20 @@ pub unsafe extern "C" fn ftrace_module_enable(mod: *mut module) {
 // text to read-only, as we now need to set it back to read-write
 // so that we can modify the text.
 //
-    if (ftrace_start_up)
+    if (ftrace_start_up) {
     ftrace_arch_code_modify_prepare();
+    }
     do_for_each_ftrace_rec(pg, rec) {
-    int cnt;
+    let mut cnt = 0;
 //
 // do_for_each_ftrace_rec() is a double loop.
 // module text shares the pg. If a record is
 // not part of this module, then skip this pg,
 // which the "break" will do.
 //
-    if (!within_module(rec.ip, mod))
+    if (!within_module(rec.ip, mod)) {
     break;
+    }
     cond_resched();
 // Weak functions should still be ignored
     if (!test_for_valid_rec(rec)) {
@@ -7017,53 +7304,56 @@ pub unsafe extern "C" fn ftrace_module_enable(mod: *mut module) {
 // we need to enable the module functions as well as update the
 // reference counts for those function records.
 //
-    if (ftrace_start_up)
+    if (ftrace_start_up) {
     cnt += referenced_filters(rec);
+    }
     rec.flags &= ~FTRACE_FL_DISABLED;
     rec.flags += cnt;
     if (ftrace_start_up && cnt) {
-    let mut failed: c_int = __ftrace_replace_code(rec, 1);
+pub static mut failed: c_int = 0;
     if (failed) {
     ftrace_bug(failed, rec);
-    goto out_loop;
+// goto;
     }
     }
     } while_for_each_ftrace_rec();
-    out_loop:
-    if (ftrace_start_up)
+// label;
+    if (ftrace_start_up) {
     ftrace_arch_code_modify_post_process();
-    out_unlock:
+    }
+// label;
     mutex_unlock(&ftrace_lock);
     process_cached_mods(mod.name);
     }
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_module_init(mod: *mut module) {
-    void ftrace_module_init(struct module *mod)
-    {
-    int ret;
-    if (ftrace_disabled || !mod.num_ftrace_callsites)
+    let mut ret = 0;
+    if (ftrace_disabled || !mod.num_ftrace_callsites) {
     return;
+    }
     ret = ftrace_process_locs(mod, mod.ftrace_callsites,
     mod.ftrace_callsites + mod.num_ftrace_callsites);
-    if (ret)
-    pr_warn("ftrace: failed to allocate entries for module '%s' functions\n",
+    if (ret) {
+    pr_warn!("ftrace: failed to allocate entries for module '%s' functions\n",
     mod.name);
     }
-    static void save_ftrace_mod_rec(struct ftrace_mod_map *mod_map,
-    struct dyn_ftrace *rec)
-    {
-    struct ftrace_mod_func *mod_func;
-    unsigned long symsize;
-    unsigned long offset;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn save_ftrace_mod_rec(mod_map: *mut ftrace_mod_map, rec: *mut dyn_ftrace) {
+pub static mut mod_func: *mut c_void = core::ptr::null_mut();
+    let mut symsize = 0;
+    let mut offset = 0;
     char str[KSYM_SYMBOL_LEN];
-    char *modname;
-    const char *ret;
+pub static mut modname: *mut c_void = core::ptr::null_mut();
+pub static mut ret: *mut c_void = core::ptr::null_mut();
     ret = kallsyms_lookup(rec.ip, &symsize, &offset, &modname, str);
-    if (!ret)
+    if (!ret) {
     return;
+    }
     mod_func = kmalloc_obj(*mod_func);
-    if (!mod_func)
+    if (!mod_func) {
     return;
+    }
     mod_func.name = kstrdup(str, GFP_KERNEL);
     if (!mod_func.name) {
     kfree(mod_func);
@@ -7071,19 +7361,19 @@ pub unsafe extern "C" fn ftrace_module_init(mod: *mut module) {
     }
     mod_func.ip = rec.ip - offset;
     mod_func.size = symsize;
-    mod_map.num_funcs++;
+    mod_map.num_funcs += 1;
     list_add_rcu(&mod_func.list, &mod_map.funcs);
     }
-    static struct ftrace_mod_map *
-    allocate_ftrace_mod_map(struct module *mod,
-    unsigned long start, unsigned long end)
-    {
-    struct ftrace_mod_map *mod_map;
-    if (ftrace_disabled)
+#[no_mangle]
+pub unsafe extern "C" fn allocate_ftrace_mod_map(mod: *mut module, start: c_ulong, end: c_ulong) -> *mut c_void {
+pub static mut mod_map: *mut c_void = core::ptr::null_mut();
+    if (ftrace_disabled) {
     return core::ptr::null_mut();
+    }
     mod_map = kmalloc_obj(*mod_map);
-    if (!mod_map)
+    if (!mod_map) {
     return core::ptr::null_mut();
+    }
     mod_map.mod = mod;
     mod_map.start_addr = start;
     mod_map.end_addr = end;
@@ -7092,13 +7382,10 @@ pub unsafe extern "C" fn ftrace_module_init(mod: *mut module) {
     list_add_rcu(&mod_map.list, &ftrace_mod_maps);
     return mod_map;
     }
-    static int
-    ftrace_func_address_lookup(struct ftrace_mod_map *mod_map,
-    unsigned long addr, unsigned long *size,
-    unsigned long *off, char *sym)
-    {
-    struct ftrace_mod_func *found_func =  core::ptr::null_mut();
-    struct ftrace_mod_func *mod_func;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_func_address_lookup(mod_map: *mut ftrace_mod_map, addr: c_ulong, size: *mut c_ulong, off: *mut c_ulong, sym: *mut c_char) -> c_int {
+    let mut found_func = core::ptr::null_mut();
+pub static mut mod_func: *mut c_void = core::ptr::null_mut();
     list_for_each_entry_rcu(mod_func, &mod_map.funcs, list) {
     if (addr >= mod_func.ip &&
     addr < mod_func.ip + mod_func.size) {
@@ -7107,43 +7394,42 @@ pub unsafe extern "C" fn ftrace_module_init(mod: *mut module) {
     }
     }
     if (found_func) {
-    if (size)
+    if (size) {
 // size = found_func->size;
-    if (off)
+    }
+    if (off) {
 // off = addr - found_func->ip;
+    }
     return strscpy(sym, found_func.name, KSYM_NAME_LEN);
     }
     return 0;
     }
-    int
-    ftrace_mod_address_lookup(unsigned long addr, unsigned long *size,
-    unsigned long *off, char **modname,
-    const unsigned char **modbuildid, char *sym)
-    {
-    struct ftrace_mod_map *mod_map;
-    let mut ret: c_int = 0;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_mod_address_lookup(addr: c_ulong, size: *mut c_ulong, off: *mut c_ulong, modname: *mut *mut c_char, modbuildid: *mut *mut c_uchar, sym: *mut c_char) -> c_int {
+pub static mut mod_map: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
 // mod_map is freed via call_rcu()
     preempt_disable();
     list_for_each_entry_rcu(mod_map, &ftrace_mod_maps, list) {
     ret = ftrace_func_address_lookup(mod_map, addr, size, off, sym);
     if (ret) {
-    if (modname)
+    if (modname) {
 // modname = mod_map->mod->name;
-    if (modbuildid)
-// modbuildid = module_buildid(mod_map->mod);
+    }
+    if (modbuildid) {
+// modbuildid = module_buildid!(mod_map->mod);
+    }
     break;
     }
     }
     preempt_enable();
     return ret;
     }
-    int ftrace_mod_get_kallsym(unsigned int symnum, unsigned long *value,
-    char *type, char *name,
-    char *module_name, int *exported)
-    {
-    struct ftrace_mod_map *mod_map;
-    struct ftrace_mod_func *mod_func;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_mod_get_kallsym(symnum: c_uint, value: *mut c_ulong, type: *mut c_char, name: *mut c_char, module_name: *mut c_char, exported: *mut c_int) -> c_int {
+pub static mut mod_map: *mut c_void = core::ptr::null_mut();
+pub static mut mod_func: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
     preempt_disable();
     list_for_each_entry_rcu(mod_map, &ftrace_mod_maps, list) {
     if (symnum >= mod_map.num_funcs) {
@@ -7152,7 +7438,7 @@ pub unsafe extern "C" fn ftrace_module_init(mod: *mut module) {
     }
     list_for_each_entry_rcu(mod_func, &mod_map.funcs, list) {
     if (symnum > 1) {
-    symnum--;
+    symnum -= 1;
     continue;
     }
 // value = mod_func->ip;
@@ -7163,7 +7449,7 @@ pub unsafe extern "C" fn ftrace_module_init(mod: *mut module) {
     preempt_enable();
     return 0;
     }
-    WARN_ON(1);
+    WARN_ON!(1);
     break;
     }
     ret = ftrace_get_trampoline_kallsym(symnum, value, type, name,
@@ -7172,19 +7458,21 @@ pub unsafe extern "C" fn ftrace_module_init(mod: *mut module) {
     return ret;
     }
 
-    static void save_ftrace_mod_rec(struct ftrace_mod_map *mod_map,
-    struct dyn_ftrace *rec) { }
-    static inline struct ftrace_mod_map *
-    allocate_ftrace_mod_map(struct module *mod,
-    unsigned long start, unsigned long end)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: save_ftrace_mod_rec
+pub unsafe extern "C" fn save_ftrace_mod_rec_dup(mod_map: *mut ftrace_mod_map, rec: *mut dyn_ftrace) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: allocate_ftrace_mod_map
+pub unsafe extern "C" fn allocate_ftrace_mod_map_dup(mod: *mut module, start: c_ulong, end: c_ulong) -> *mut c_void {
     return core::ptr::null_mut();
     }
-    int ftrace_mod_get_kallsym(unsigned int symnum, unsigned long *value,
-    char *type, char *name, char *module_name,
-    int *exported)
-    {
-    int ret;
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: ftrace_mod_get_kallsym
+pub unsafe extern "C" fn ftrace_mod_get_kallsym_dup(symnum: c_uint, value: *mut c_ulong, type: *mut c_char, name: *mut c_char, module_name: *mut c_char, exported: *mut c_int) -> c_int {
+    let mut ret = 0;
     preempt_disable();
     ret = ftrace_get_trampoline_kallsym(symnum, value, type, name,
     module_name, exported);
@@ -7200,27 +7488,27 @@ pub struct ftrace_init_func {
 }
 
 // Clear any init ips from hashes
-    static void
-    clear_func_from_hash(struct ftrace_init_func *func, struct ftrace_hash *hash)
-    {
-    struct ftrace_func_entry *entry;
+#[no_mangle]
+pub unsafe extern "C" fn clear_func_from_hash(func: *mut ftrace_init_func, hash: *mut ftrace_hash) {
+pub static mut entry: *mut c_void = core::ptr::null_mut();
     entry = ftrace_lookup_ip(hash, func.ip);
 //
 // Do not allow this rec to match again.
 // Yeah, it may waste some memory, but will be removed
 // if/when the hash is modified again.
 //
-    if (entry)
+    if (entry) {
     entry.ip = 0;
     }
-    static void
-    clear_func_from_hashes(struct ftrace_init_func *func)
-    {
-    struct trace_array *tr;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn clear_func_from_hashes(func: *mut ftrace_init_func) {
+pub static mut tr: *mut c_void = core::ptr::null_mut();
     mutex_lock(&trace_types_lock);
     list_for_each_entry(tr, &ftrace_trace_arrays, list) {
-    if (!tr.ops || !tr.ops.func_hash)
+    if (!tr.ops || !tr.ops.func_hash) {
     continue;
+    }
     mutex_lock(&tr.ops.func_hash.regex_lock);
     clear_func_from_hash(func, tr.ops.func_hash.filter_hash);
     clear_func_from_hash(func, tr.ops.func_hash.notrace_hash);
@@ -7228,10 +7516,9 @@ pub struct ftrace_init_func {
     }
     mutex_unlock(&trace_types_lock);
     }
-    static void add_to_clear_hash_list(struct list_head *clear_list,
-    struct dyn_ftrace *rec)
-    {
-    struct ftrace_init_func *func;
+#[no_mangle]
+pub unsafe extern "C" fn add_to_clear_hash_list(clear_list: *mut list_head, rec: *mut dyn_ftrace) {
+pub static mut func: *mut c_void = core::ptr::null_mut();
     func = kmalloc_obj(*func);
     if (!func) {
     MEM_FAIL(1, "alloc failure, ftrace filter could be stale\n");
@@ -7242,21 +7529,21 @@ pub struct ftrace_init_func {
     }
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_free_mem(mod: *mut module, start_ptr: *mut c_void, end_ptr: *mut c_void) {
-    void ftrace_free_mem(struct module *mod, void *start_ptr, void *end_ptr)
-    {
-    let mut start: c_ulong = (unsigned long)(start_ptr);
+pub static mut start: c_ulong = 0;
 // end is inclusive and end_ptr is exclusive
-    let mut end: c_ulong = (unsigned long)(end_ptr) - 1;
-    struct ftrace_page **last_pg = &ftrace_pages_start;
-    struct ftrace_page *tmp_page = core::ptr::null_mut();
-    struct ftrace_page *pg;
-    struct dyn_ftrace *rec;
-    struct dyn_ftrace key;
-    struct ftrace_mod_map *mod_map = core::ptr::null_mut();
-    struct ftrace_init_func *func, *func_next;
-    LIST_HEAD(clear_hash);
-    if (start_ptr >= end_ptr)
+pub static mut end: c_ulong = 0;
+    let mut last_pg = &ftrace_pages_start;
+    let mut tmp_page = core::ptr::null_mut();
+pub static mut pg: *mut c_void = core::ptr::null_mut();
+pub static mut rec: *mut c_void = core::ptr::null_mut();
+pub static mut key: usize = 0;
+    let mut mod_map = core::ptr::null_mut();
+    let mut func = core::ptr::null_mut();
+    let mut func_next = core::ptr::null_mut();
+pub static mut clear_hash: usize = 0;
+    if (start_ptr >= end_ptr) {
     return;
+    }
     key.ip = start;
     key.flags = end;	/* overload flags, as it is unsigned long */
     mutex_lock(&ftrace_lock);
@@ -7265,37 +7552,42 @@ pub unsafe extern "C" fn ftrace_free_mem(mod: *mut module, start_ptr: *mut c_voi
 // any tracer is active. If so, we need to save a mapping of
 // the module functions being freed with the address.
 //
-    if (mod && ftrace_ops_list != &ftrace_list_end)
+    if (mod && ftrace_ops_list != &ftrace_list_end) {
     mod_map = allocate_ftrace_mod_map(mod, start, end);
-    for (pg = ftrace_pages_start; pg; last_pg = &pg.next, pg = *last_pg) {
+    }
+    while (pg) {
     if (end < pg.records[0].ip ||
-    start >= (pg.records[pg.index - 1].ip + MCOUNT_INSN_SIZE))
+    start >= (pg.records[pg.index - 1].ip + MCOUNT_INSN_SIZE)) {
     continue;
-    again:
+    }
+// label;
     rec = bsearch(&key, pg.records, pg.index,
-    sizeof(struct dyn_ftrace),
+    sizeof!(dyn_ftrace),
     ftrace_cmp_recs);
-    if (!rec)
+    if (!rec) {
     continue;
+    }
 // rec will be cleared from hashes after ftrace_lock unlock
     add_to_clear_hash_list(&clear_hash, rec);
-    if (mod_map)
+    if (mod_map) {
     save_ftrace_mod_rec(mod_map, rec);
-    pg.index--;
-    ftrace_update_tot_cnt--;
+    }
+    pg.index -= 1;
+    ftrace_update_tot_cnt -= 1;
     if (!pg.index) {
 // last_pg = pg->next;
     pg.next = tmp_page;
     tmp_page = pg;
-    pg = container_of(last_pg, struct ftrace_page, next);
-    if (!(*last_pg))
+    pg = container_of!(last_pg, ftrace_page, next);
+    if (!(*last_pg)) {
     ftrace_pages = pg;
+    }
     continue;
     }
     memmove(rec, rec + 1,
-    (pg.index - (rec - pg.records)) * sizeof(*rec));
+    (pg.index - (rec - pg.records)) * sizeof!(*rec));
 // More than one function may be in this block
-    goto again;
+// goto;
     }
     mutex_unlock(&ftrace_lock);
     list_for_each_entry_safe(func, func_next, &clear_hash, list) {
@@ -7309,64 +7601,55 @@ pub unsafe extern "C" fn ftrace_free_mem(mod: *mut module, start_ptr: *mut c_voi
     }
     }
 #[no_mangle]
-pub unsafe extern "C" fn ftrace_free_init_mem() -> void __init {
-    void __init ftrace_free_init_mem(void)
-    {
-    void *start = (void *)(&__init_begin);
-    void *end = (void *)(&__init_end);
+pub unsafe extern "C" fn ftrace_free_init_mem()  {
+    let mut start = (&__init_begin);
+    let mut end = (&__init_end);
     ftrace_boot_snapshot();
     ftrace_free_mem(core::ptr::null_mut(), start, end);
     }
 #[no_mangle]
-pub unsafe extern "C" fn ftrace_dyn_arch_init() -> int __init __weak {
-    int __init __weak ftrace_dyn_arch_init(void)
-    {
+pub unsafe extern "C" fn ftrace_dyn_arch_init() -> c_int __weak {
     return 0;
     }
 #[no_mangle]
-pub unsafe extern "C" fn ftrace_init() -> void __init {
-    void __init ftrace_init(void)
-    {
+pub unsafe extern "C" fn ftrace_init()  {
     extern unsigned long __start_mcount_loc[];
     extern unsigned long __stop_mcount_loc[];
     unsigned long count, flags;
-    int ret;
+    let mut ret = 0;
     local_irq_save(flags);
     ret = ftrace_dyn_arch_init();
     local_irq_restore(flags);
-    if (ret)
-    goto failed;
+    if (ret) {
+// goto;
+    }
     count = __stop_mcount_loc - __start_mcount_loc;
     if (!count) {
-    pr_info("ftrace: No functions to be traced?\n");
-    goto failed;
+    pr_info!("ftrace: No functions to be traced?\n");
+// goto;
     }
     ret = ftrace_process_locs(core::ptr::null_mut(),
     __start_mcount_loc,
     __stop_mcount_loc);
     if (ret) {
-    pr_warn("ftrace: failed to allocate entries for functions\n");
-    goto failed;
+    pr_warn!("ftrace: failed to allocate entries for functions\n");
+// goto;
     }
-    pr_info("ftrace: allocated %ld pages with %ld groups\n",
+    pr_info!("ftrace: allocated %ld pages with %ld groups\n",
     ftrace_number_of_pages, ftrace_number_of_groups);
     last_ftrace_enabled = ftrace_enabled = 1;
     set_ftrace_early_filters();
     return;
-    failed:
+// label;
     ftrace_disabled = 1;
     }
 // Do nothing if arch does not support this
 #[no_mangle]
 pub unsafe extern "C" fn arch_ftrace_update_trampoline(ops: *mut ftrace_ops) -> void __weak {
-    void __weak arch_ftrace_update_trampoline(struct ftrace_ops *ops)
-    {
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_update_trampoline(ops: *mut ftrace_ops) {
-    static void ftrace_update_trampoline(struct ftrace_ops *ops)
-    {
-    let mut trampoline: c_ulong = ops.trampoline;
+pub static mut trampoline: c_ulong = 0;
     arch_ftrace_update_trampoline(ops);
     if (ops.trampoline && ops.trampoline != trampoline &&
     (ops.flags & FTRACE_OPS_FL_ALLOC_TRAMP)) {
@@ -7379,92 +7662,82 @@ unsafe extern "C" fn ftrace_update_trampoline(ops: *mut ftrace_ops) {
 // Record the perf text poke event after the ksymbol register
 // event.
 //
-    perf_event_text_poke((void *)ops.trampoline, core::ptr::null_mut(), 0,
-    (void *)ops.trampoline,
+    perf_event_text_poke(ops.trampoline, core::ptr::null_mut(), 0,
+    ops.trampoline,
     ops.trampoline_size);
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_init_trace_array(tr: *mut trace_array) {
-    void ftrace_init_trace_array(struct trace_array *tr)
-    {
-    if (tr.flags & TRACE_ARRAY_FL_MOD_INIT)
+    if (tr.flags & TRACE_ARRAY_FL_MOD_INIT) {
     return;
+    }
     INIT_LIST_HEAD(&tr.func_probes);
     INIT_LIST_HEAD(&tr.mod_trace);
     INIT_LIST_HEAD(&tr.mod_notrace);
     tr.flags |= TRACE_ARRAY_FL_MOD_INIT;
     }
 
-    struct ftrace_ops global_ops = {
-    .func			= ftrace_stub,
-    .flags			= FTRACE_OPS_FL_INITIALIZED |
-    FTRACE_OPS_FL_PID,
-    };
+pub static mut ftrace_ops: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn ftrace_nodyn_init() -> int __init {
-    static int __init ftrace_nodyn_init(void)
-    {
+unsafe extern "C" fn ftrace_nodyn_init() -> c_int {
     ftrace_enabled = 1;
     return 0;
     }
-    core_initcall(ftrace_nodyn_init);
-    static inline int ftrace_init_dyn_tracefs(struct dentry *d_tracer) { return 0; }
-    static inline void ftrace_startup_all(int command) { }
+    core_initcall!(ftrace_nodyn_init);
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_init_dyn_tracefs(d_tracer: *mut dentry) -> c_int { return 0; }
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_startup_all(command: c_int) { }
 #[no_mangle]
 unsafe extern "C" fn ftrace_update_trampoline(ops: *mut ftrace_ops) {
-    static void ftrace_update_trampoline(struct ftrace_ops *ops)
-    {
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_init_global_array_ops(tr: *mut trace_array) -> __init void {
-    __init void ftrace_init_global_array_ops(struct trace_array *tr)
-    {
     tr.ops = &global_ops;
-    if (!global_ops.private)
+    if (!global_ops.private) {
     global_ops.private = tr;
+    }
     ftrace_init_trace_array(tr);
     init_array_fgraph_ops(tr, tr.ops);
     }
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_init_array_ops(tr: *mut trace_array, func: ftrace_func_t) {
-    void ftrace_init_array_ops(struct trace_array *tr, ftrace_func_t func)
-    {
 // If we filter on pids, update to use the pid function
     if (tr.flags & TRACE_ARRAY_FL_GLOBAL) {
-    if (WARN_ON(tr.ops.func != ftrace_stub))
+    if (WARN_ON!(tr.ops.func != ftrace_stub)) {
     printk("ftrace ops had %pS for function\n",
     tr.ops.func);
+    }
     }
     tr.ops.func = func;
     tr.ops.private = tr;
     }
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_reset_array_ops(tr: *mut trace_array) {
-    void ftrace_reset_array_ops(struct trace_array *tr)
-    {
     tr.ops.func = ftrace_stub;
     }
     static nokprobe_inline void
-    __ftrace_ops_list_func(unsigned long ip, unsigned long parent_ip,
-    struct ftrace_ops *ignored, struct ftrace_regs *fregs)
+    __ftrace_ops_list_func(unsigned long ip, unsigned long parent_ip, ftrace_ops *ignored, ftrace_regs *fregs)
     {
-    struct pt_regs *regs = ftrace_get_regs(fregs);
-    struct ftrace_ops *op;
-    int bit;
+    let mut regs = ftrace_get_regs(fregs);
+pub static mut op: *mut c_void = core::ptr::null_mut();
+    let mut bit = 0;
 //
 // The ftrace_test_and_set_recursion() will disable preemption,
 // which is required since some of the ops may be dynamically
 // allocated, they must be freed after a synchronize_rcu().
 //
     bit = trace_test_and_set_recursion(ip, parent_ip, TRACE_LIST_START);
-    if (bit < 0)
+    if (bit < 0) {
     return;
+    }
     do_for_each_ftrace_op(op, ftrace_ops_list) {
 // Stub functions don't need to be called nor tested
-    if (op.flags & FTRACE_OPS_FL_STUB)
+    if (op.flags & FTRACE_OPS_FL_STUB) {
     continue;
+    }
 //
 // Check the following for each ops before calling their func:
 // if RCU flag is set, then rcu_is_watching() must be true
@@ -7475,13 +7748,13 @@ pub unsafe extern "C" fn ftrace_reset_array_ops(tr: *mut trace_array) {
     if ((!(op.flags & FTRACE_OPS_FL_RCU) || rcu_is_watching()) &&
     ftrace_ops_test(op, ip, regs)) {
     if (FTRACE_WARN_ON(!op.func)) {
-    pr_warn("op=%p %pS\n", op, op);
-    goto out;
+    pr_warn!("op=%p %pS\n", op, op);
+// goto;
     }
     op.func(ip, parent_ip, op, fregs);
     }
     } while_for_each_ftrace_op(op);
-    out:
+// label;
     trace_clear_recursion(bit);
     }
 //
@@ -7501,17 +7774,16 @@ pub unsafe extern "C" fn ftrace_reset_array_ops(tr: *mut trace_array) {
 // arch_ftrace_ops_list_func.
 //
 
-    void arch_ftrace_ops_list_func(unsigned long ip, unsigned long parent_ip,
-    struct ftrace_ops *op, struct ftrace_regs *fregs)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn arch_ftrace_ops_list_func(ip: c_ulong, parent_ip: c_ulong, op: *mut ftrace_ops, fregs: *mut ftrace_regs) {
     kmsan_unpoison_memory(fregs, ftrace_regs_size());
     __ftrace_ops_list_func(ip, parent_ip, core::ptr::null_mut(), fregs);
     }
 
 #[no_mangle]
-pub unsafe extern "C" fn arch_ftrace_ops_list_func(ip: c_ulong, parent_ip: c_ulong) {
-    void arch_ftrace_ops_list_func(unsigned long ip, unsigned long parent_ip)
-    {
+#[no_mangle]
+// duplicate fn: arch_ftrace_ops_list_func
+pub unsafe extern "C" fn arch_ftrace_ops_list_func_dup(ip: c_ulong, parent_ip: c_ulong) {
     __ftrace_ops_list_func(ip, parent_ip, core::ptr::null_mut(), core::ptr::null_mut());
     }
 
@@ -7521,15 +7793,16 @@ pub unsafe extern "C" fn arch_ftrace_ops_list_func(ip: c_ulong, parent_ip: c_ulo
 // recursion, needs RCU protection, then this function will be called
 // by the mcount trampoline.
 //
-    static void ftrace_ops_assist_func(unsigned long ip, unsigned long parent_ip,
-    struct ftrace_ops *op, struct ftrace_regs *fregs)
-    {
-    int bit;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_ops_assist_func(ip: c_ulong, parent_ip: c_ulong, op: *mut ftrace_ops, fregs: *mut ftrace_regs) {
+    let mut bit = 0;
     bit = trace_test_and_set_recursion(ip, parent_ip, TRACE_LIST_START);
-    if (bit < 0)
+    if (bit < 0) {
     return;
-    if (!(op.flags & FTRACE_OPS_FL_RCU) || rcu_is_watching())
+    }
+    if (!(op.flags & FTRACE_OPS_FL_RCU) || rcu_is_watching()) {
     op.func(ip, parent_ip, op, fregs);
+    }
     trace_clear_recursion(bit);
     }
     NOKPROBE_SYMBOL(ftrace_ops_assist_func);
@@ -7546,53 +7819,46 @@ pub unsafe extern "C" fn arch_ftrace_ops_list_func(ip: c_ulong, parent_ip: c_ulo
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_ops_get_func(ops: *mut ftrace_ops) -> ftrace_func_t {
-    ftrace_func_t ftrace_ops_get_func(struct ftrace_ops *ops)
-    {
 //
 // If the function does not handle recursion or needs to be RCU safe,
 // then we need to call the assist handler.
 //
     if (ops.flags & (FTRACE_OPS_FL_RECURSION |
-    FTRACE_OPS_FL_RCU))
+    FTRACE_OPS_FL_RCU)) {
     return ftrace_ops_assist_func;
+    }
     return ops.func;
     }
-    static void
-    ftrace_filter_pid_sched_switch_probe(void *data, bool preempt,
-    struct task_struct *prev,
-    struct task_struct *next,
-    unsigned int prev_state)
-    {
-    struct trace_array *tr = data;
-    struct trace_pid_list *pid_list;
-    struct trace_pid_list *no_pid_list;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_filter_pid_sched_switch_probe(data: *mut c_void, preempt: bool, prev: *mut task_struct, next: *mut task_struct, prev_state: c_uint) {
+    let mut tr = data;
+pub static mut pid_list: *mut c_void = core::ptr::null_mut();
+pub static mut no_pid_list: *mut c_void = core::ptr::null_mut();
     pid_list = rcu_dereference_sched(tr.function_pids);
     no_pid_list = rcu_dereference_sched(tr.function_no_pids);
-    if (trace_ignore_this_task(pid_list, no_pid_list, next))
+    if (trace_ignore_this_task(pid_list, no_pid_list, next)) {
     this_cpu_write(tr.array_buffer.data.ftrace_ignore_pid,
     FTRACE_PID_IGNORE);
-    else
+    }
+    else {
     this_cpu_write(tr.array_buffer.data.ftrace_ignore_pid,
     next.pid);
     }
-    static void
-    ftrace_pid_follow_sched_process_fork(void *data,
-    struct task_struct *self,
-    struct task_struct *task)
-    {
-    struct trace_pid_list *pid_list;
-    struct trace_array *tr = data;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_pid_follow_sched_process_fork(data: *mut c_void, self: *mut task_struct, task: *mut task_struct) {
+pub static mut pid_list: *mut c_void = core::ptr::null_mut();
+    let mut tr = data;
     guard(preempt)();
     pid_list = rcu_dereference_sched(tr.function_pids);
     trace_filter_add_remove_task(pid_list, self, task);
     pid_list = rcu_dereference_sched(tr.function_no_pids);
     trace_filter_add_remove_task(pid_list, self, task);
     }
-    static void
-    ftrace_pid_follow_sched_process_exit(void *data, struct task_struct *task)
-    {
-    struct trace_pid_list *pid_list;
-    struct trace_array *tr = data;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_pid_follow_sched_process_exit(data: *mut c_void, task: *mut task_struct) {
+pub static mut pid_list: *mut c_void = core::ptr::null_mut();
+    let mut tr = data;
     guard(preempt)();
     pid_list = rcu_dereference_sched(tr.function_pids);
     trace_filter_add_remove_task(pid_list, core::ptr::null_mut(), task);
@@ -7601,8 +7867,6 @@ pub unsafe extern "C" fn ftrace_ops_get_func(ops: *mut ftrace_ops) -> ftrace_fun
     }
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_pid_follow_fork(tr: *mut trace_array, enable: bool) {
-    void ftrace_pid_follow_fork(struct trace_array *tr, bool enable)
-    {
     if (enable) {
     register_trace_sched_process_fork(ftrace_pid_follow_sched_process_fork,
     tr);
@@ -7617,47 +7881,47 @@ pub unsafe extern "C" fn ftrace_pid_follow_fork(tr: *mut trace_array, enable: bo
     }
 #[no_mangle]
 unsafe extern "C" fn clear_ftrace_pids(tr: *mut trace_array, type: c_int) {
-    static void clear_ftrace_pids(struct trace_array *tr, int type)
-    {
-    struct trace_pid_list *pid_list;
-    struct trace_pid_list *no_pid_list;
-    int cpu;
+pub static mut pid_list: *mut c_void = core::ptr::null_mut();
+pub static mut no_pid_list: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
     pid_list = rcu_dereference_protected(tr.function_pids,
     lockdep_is_held(&ftrace_lock));
     no_pid_list = rcu_dereference_protected(tr.function_no_pids,
     lockdep_is_held(&ftrace_lock));
 // Make sure there's something to do
-    if (!pid_type_enabled(type, pid_list, no_pid_list))
+    if (!pid_type_enabled(type, pid_list, no_pid_list)) {
     return;
+    }
 // See if the pids still need to be checked after this
     if (!still_need_pid_events(type, pid_list, no_pid_list)) {
     unregister_trace_sched_switch(ftrace_filter_pid_sched_switch_probe, tr);
-    for_each_possible_cpu(cpu)
+    for_each_possible_cpu(cpu) {
     per_cpu_ptr(tr.array_buffer.data, cpu).ftrace_ignore_pid = FTRACE_PID_TRACE;
     }
-    if (type & TRACE_PIDS)
+    }
+    if (type & TRACE_PIDS) {
     rcu_assign_pointer(tr.function_pids, core::ptr::null_mut());
-    if (type & TRACE_NO_PIDS)
+    }
+    if (type & TRACE_NO_PIDS) {
     rcu_assign_pointer(tr.function_no_pids, core::ptr::null_mut());
+    }
 // Wait till all users are no longer using pid filtering
     synchronize_rcu();
-    if ((type & TRACE_PIDS) && pid_list)
+    if ((type & TRACE_PIDS) && pid_list) {
     trace_pid_list_free(pid_list);
-    if ((type & TRACE_NO_PIDS) && no_pid_list)
+    }
+    if ((type & TRACE_NO_PIDS) && no_pid_list) {
     trace_pid_list_free(no_pid_list);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_clear_pids(tr: *mut trace_array) {
-    void ftrace_clear_pids(struct trace_array *tr)
-    {
     mutex_lock(&ftrace_lock);
     clear_ftrace_pids(tr, TRACE_PIDS | TRACE_NO_PIDS);
     mutex_unlock(&ftrace_lock);
     }
 #[no_mangle]
 unsafe extern "C" fn ftrace_pid_reset(tr: *mut trace_array, type: c_int) {
-    static void ftrace_pid_reset(struct trace_array *tr, int type)
-    {
     mutex_lock(&ftrace_lock);
     clear_ftrace_pids(tr, type);
     ftrace_update_pid_func();
@@ -7666,22 +7930,23 @@ unsafe extern "C" fn ftrace_pid_reset(tr: *mut trace_array, type: c_int) {
     }
 // Greater than any max PID
 
-    static void *fpid_start(struct seq_file *m, loff_t *pos)
-    __acquires(RCU)
-    {
-    struct trace_pid_list *pid_list;
-    struct trace_array *tr = m.private;
+#[no_mangle]
+pub unsafe extern "C" fn fpid_start(m: *mut seq_file, RCU: *mut loff_tpos)
+    __acquires() -> *mut c_void {
+pub static mut pid_list: *mut c_void = core::ptr::null_mut();
+    let mut tr = m.private;
     mutex_lock(&ftrace_lock);
     rcu_read_lock_sched();
     pid_list = rcu_dereference_sched(tr.function_pids);
-    if (!pid_list)
+    if (!pid_list) {
     return !(*pos) ? FTRACE_NO_PIDS : core::ptr::null_mut();
+    }
     return trace_pid_start(pid_list, pos);
     }
-    static void *fpid_next(struct seq_file *m, void *v, loff_t *pos)
-    {
-    struct trace_array *tr = m.private;
-    struct trace_pid_list *pid_list = rcu_dereference_sched(tr.function_pids);
+#[no_mangle]
+pub unsafe extern "C" fn fpid_next(m: *mut seq_file, v: *mut c_void, pos: *mut loff_t) -> *mut c_void {
+    let mut tr = m.private;
+    let mut pid_list = rcu_dereference_sched(tr.function_pids);
     if (v == FTRACE_NO_PIDS) {
     (*pos)++;
     return core::ptr::null_mut();
@@ -7690,81 +7955,70 @@ unsafe extern "C" fn ftrace_pid_reset(tr: *mut trace_array, type: c_int) {
     }
 #[no_mangle]
 unsafe extern "C" fn fpid_stop(m: *mut seq_file, p: *mut c_void) {
-    static void fpid_stop(struct seq_file *m, void *p)
-    __releases(RCU)
-    {
     rcu_read_unlock_sched();
     mutex_unlock(&ftrace_lock);
     }
 #[no_mangle]
 unsafe extern "C" fn fpid_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int fpid_show(struct seq_file *m, void *v)
-    {
     if (v == FTRACE_NO_PIDS) {
     seq_puts(m, "no pid\n");
     return 0;
     }
     return trace_pid_show(m, v);
     }
-    static const struct seq_operations ftrace_pid_sops = {
-    .start = fpid_start,
-    .next = fpid_next,
-    .stop = fpid_stop,
-    .show = fpid_show,
-    };
-    static void *fnpid_start(struct seq_file *m, loff_t *pos)
-    __acquires(RCU)
-    {
-    struct trace_pid_list *pid_list;
-    struct trace_array *tr = m.private;
+pub static mut seq_operations: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn fnpid_start(m: *mut seq_file, RCU: *mut loff_tpos)
+    __acquires() -> *mut c_void {
+pub static mut pid_list: *mut c_void = core::ptr::null_mut();
+    let mut tr = m.private;
     mutex_lock(&ftrace_lock);
     rcu_read_lock_sched();
     pid_list = rcu_dereference_sched(tr.function_no_pids);
-    if (!pid_list)
+    if (!pid_list) {
     return !(*pos) ? FTRACE_NO_PIDS : core::ptr::null_mut();
+    }
     return trace_pid_start(pid_list, pos);
     }
-    static void *fnpid_next(struct seq_file *m, void *v, loff_t *pos)
-    {
-    struct trace_array *tr = m.private;
-    struct trace_pid_list *pid_list = rcu_dereference_sched(tr.function_no_pids);
+#[no_mangle]
+pub unsafe extern "C" fn fnpid_next(m: *mut seq_file, v: *mut c_void, pos: *mut loff_t) -> *mut c_void {
+    let mut tr = m.private;
+    let mut pid_list = rcu_dereference_sched(tr.function_no_pids);
     if (v == FTRACE_NO_PIDS) {
     (*pos)++;
     return core::ptr::null_mut();
     }
     return trace_pid_next(pid_list, v, pos);
     }
-    static const struct seq_operations ftrace_no_pid_sops = {
-    .start = fnpid_start,
-    .next = fnpid_next,
-    .stop = fpid_stop,
-    .show = fpid_show,
-    };
+pub static mut seq_operations: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn pid_open(inode: *mut inode, file: *mut file, type: c_int) -> c_int {
-    static int pid_open(struct inode *inode, struct file *file, int type)
-    {
-    const struct seq_operations *seq_ops;
-    struct trace_array *tr = inode.i_private;
-    struct seq_file *m;
-    let mut ret: c_int = 0;
+pub static mut seq_ops: *mut c_void = core::ptr::null_mut();
+    let mut tr = inode.i_private;
+pub static mut m: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
     ret = tracing_check_open_get_tr(tr);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     if ((file.f_mode & FMODE_WRITE) &&
-    (file.f_flags & O_TRUNC))
+    (file.f_flags & O_TRUNC)) {
     ftrace_pid_reset(tr, type);
-    switch (type) {
-    case TRACE_PIDS:
+    }
+    match (type) {
+    TRACE_PIDS => {
     seq_ops = &ftrace_pid_sops;
-    break;
-    case TRACE_NO_PIDS:
+    // break;
+    }
+    TRACE_NO_PIDS => {
     seq_ops = &ftrace_no_pid_sops;
-    break;
-    default:
+    // break;
+    }
+    _ => {
     trace_array_put(tr);
-    WARN_ON_ONCE(1);
+    WARN_ON_ONCE!(1);
     return -EINVAL;
+    }
     }
     ret = seq_open(file, seq_ops);
     if (ret < 0) {
@@ -7776,23 +8030,19 @@ unsafe extern "C" fn pid_open(inode: *mut inode, file: *mut file, type: c_int) -
     }
     return ret;
     }
-    static int
-    ftrace_pid_open(struct inode *inode, struct file *file)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_pid_open(inode: *mut inode, file: *mut file) -> c_int {
     return pid_open(inode, file, TRACE_PIDS);
     }
-    static int
-    ftrace_no_pid_open(struct inode *inode, struct file *file)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_no_pid_open(inode: *mut inode, file: *mut file) -> c_int {
     return pid_open(inode, file, TRACE_NO_PIDS);
     }
 #[no_mangle]
 unsafe extern "C" fn ignore_task_cpu(data: *mut c_void) {
-    static void ignore_task_cpu(void *data)
-    {
-    struct trace_array *tr = data;
-    struct trace_pid_list *pid_list;
-    struct trace_pid_list *no_pid_list;
+    let mut tr = data;
+pub static mut pid_list: *mut c_void = core::ptr::null_mut();
+pub static mut no_pid_list: *mut c_void = core::ptr::null_mut();
 //
 // This function is called by on_each_cpu() while the
 // event_mutex is held.
@@ -7801,53 +8051,60 @@ unsafe extern "C" fn ignore_task_cpu(data: *mut c_void) {
     mutex_is_locked(&ftrace_lock));
     no_pid_list = rcu_dereference_protected(tr.function_no_pids,
     mutex_is_locked(&ftrace_lock));
-    if (trace_ignore_this_task(pid_list, no_pid_list, current))
+    if (trace_ignore_this_task(pid_list, no_pid_list, current)) {
     this_cpu_write(tr.array_buffer.data.ftrace_ignore_pid,
     FTRACE_PID_IGNORE);
-    else
+    }
+    else {
     this_cpu_write(tr.array_buffer.data.ftrace_ignore_pid,
     current.pid);
     }
-    static ssize_t
-    pid_write(struct file *filp, const char __user *ubuf,
-    size_t cnt, loff_t *ppos, int type)
-    {
-    struct seq_file *m = filp.private_data;
-    struct trace_array *tr = m.private;
-    struct trace_pid_list *filtered_pids;
-    struct trace_pid_list *other_pids;
-    struct trace_pid_list *pid_list;
-    ssize_t ret;
-    if (!cnt)
+    }
+#[no_mangle]
+pub unsafe extern "C" fn pid_write(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t, type: c_int) -> ssize_t {
+    let mut m = filp.private_data;
+    let mut tr = m.private;
+pub static mut filtered_pids: *mut c_void = core::ptr::null_mut();
+pub static mut other_pids: *mut c_void = core::ptr::null_mut();
+pub static mut pid_list: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    if (!cnt) {
     return 0;
+    }
     guard(mutex)(&ftrace_lock);
-    switch (type) {
-    case TRACE_PIDS:
+    match (type) {
+    TRACE_PIDS => {
     filtered_pids = rcu_dereference_protected(tr.function_pids,
     lockdep_is_held(&ftrace_lock));
     other_pids = rcu_dereference_protected(tr.function_no_pids,
     lockdep_is_held(&ftrace_lock));
-    break;
-    case TRACE_NO_PIDS:
+    // break;
+    }
+    TRACE_NO_PIDS => {
     filtered_pids = rcu_dereference_protected(tr.function_no_pids,
     lockdep_is_held(&ftrace_lock));
     other_pids = rcu_dereference_protected(tr.function_pids,
     lockdep_is_held(&ftrace_lock));
-    break;
-    default:
-    WARN_ON_ONCE(1);
+    // break;
+    }
+    _ => {
+    WARN_ON_ONCE!(1);
     return -EINVAL;
     }
+    }
     ret = trace_pid_write(filtered_pids, &pid_list, ubuf, cnt);
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
-    switch (type) {
-    case TRACE_PIDS:
+    }
+    match (type) {
+    TRACE_PIDS => {
     rcu_assign_pointer(tr.function_pids, pid_list);
-    break;
-    case TRACE_NO_PIDS:
+    // break;
+    }
+    TRACE_NO_PIDS => {
     rcu_assign_pointer(tr.function_no_pids, pid_list);
-    break;
+    // break;
+    }
     }
     if (filtered_pids) {
     synchronize_rcu();
@@ -7867,53 +8124,33 @@ unsafe extern "C" fn ignore_task_cpu(data: *mut c_void) {
 // ppos += ret;
     return ret;
     }
-    static ssize_t
-    ftrace_pid_write(struct file *filp, const char __user *ubuf,
-    size_t cnt, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_pid_write(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
     return pid_write(filp, ubuf, cnt, ppos, TRACE_PIDS);
     }
-    static ssize_t
-    ftrace_no_pid_write(struct file *filp, const char __user *ubuf,
-    size_t cnt, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_no_pid_write(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
     return pid_write(filp, ubuf, cnt, ppos, TRACE_NO_PIDS);
     }
-    static int
-    ftrace_pid_release(struct inode *inode, struct file *file)
-    {
-    struct trace_array *tr = inode.i_private;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_pid_release(inode: *mut inode, file: *mut file) -> c_int {
+    let mut tr = inode.i_private;
     trace_array_put(tr);
     return seq_release(inode, file);
     }
-    static const struct file_operations ftrace_pid_fops = {
-    .open		= ftrace_pid_open,
-    .write		= ftrace_pid_write,
-    .read		= seq_read,
-    .llseek		= tracing_lseek,
-    .release	= ftrace_pid_release,
-    };
-    static const struct file_operations ftrace_no_pid_fops = {
-    .open		= ftrace_no_pid_open,
-    .write		= ftrace_no_pid_write,
-    .read		= seq_read,
-    .llseek		= tracing_lseek,
-    .release	= ftrace_pid_release,
-    };
+pub static mut file_operations: usize = 0;
+pub static mut file_operations: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_init_tracefs(tr: *mut trace_array, d_tracer: *mut dentry) {
-    void ftrace_init_tracefs(struct trace_array *tr, struct dentry *d_tracer)
-    {
     trace_create_file("set_ftrace_pid", TRACE_MODE_WRITE, d_tracer,
     tr, &ftrace_pid_fops);
     trace_create_file("set_ftrace_notrace_pid", TRACE_MODE_WRITE,
     d_tracer, tr, &ftrace_no_pid_fops);
     }
-    void __init ftrace_init_tracefs_toplevel(struct trace_array *tr,
-    struct dentry *d_tracer)
+    void __init ftrace_init_tracefs_toplevel(trace_array *tr, dentry *d_tracer)
     {
 // Only the top level directory has the dyn_tracefs and profile
-    WARN_ON(!(tr.flags & TRACE_ARRAY_FL_GLOBAL));
+    WARN_ON!(!(tr.flags & TRACE_ARRAY_FL_GLOBAL));
     ftrace_init_dyn_tracefs(d_tracer);
     ftrace_profile_tracefs(d_tracer);
     }
@@ -7926,8 +8163,6 @@ pub unsafe extern "C" fn ftrace_init_tracefs(tr: *mut trace_array, d_tracer: *mu
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_kill() {
-    void ftrace_kill(void)
-    {
     ftrace_disabled = 1;
     ftrace_enabled = 0;
     ftrace_trace_function = ftrace_stub;
@@ -7940,8 +8175,6 @@ pub unsafe extern "C" fn ftrace_kill() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_is_dead() -> c_int {
-    int ftrace_is_dead(void)
-    {
     return ftrace_disabled;
     }
 
@@ -7959,25 +8192,27 @@ pub unsafe extern "C" fn ftrace_is_dead() -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn prepare_direct_functions_for_ipmodify(ops: *mut ftrace_ops) -> c_int {
-    static int prepare_direct_functions_for_ipmodify(struct ftrace_ops *ops)
-    {
-    struct ftrace_func_entry *entry;
-    struct ftrace_hash *hash;
-    struct ftrace_ops *op;
-    int size, i, ret;
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut hash: *mut c_void = core::ptr::null_mut();
+pub static mut op: *mut c_void = core::ptr::null_mut();
+    let mut size = 0;
+    let mut i = 0;
+    let mut ret = 0;
     lockdep_assert_held_once(&direct_mutex);
-    if (!(ops.flags & FTRACE_OPS_FL_IPMODIFY))
+    if (!(ops.flags & FTRACE_OPS_FL_IPMODIFY)) {
     return 0;
+    }
     hash = ops.func_hash.filter_hash;
     size = 1 << hash.size_bits;
-    for (i = 0; i < size; i++) {
+    while (i < size) {
     hlist_for_each_entry(entry, &hash.buckets[i], hlist) {
-    let mut ip: c_ulong = entry.ip;
-    let mut found_op: bool = false;
+pub static mut ip: c_ulong = 0;
+pub static mut found_op: bool = false;
     mutex_lock(&ftrace_lock);
     do_for_each_ftrace_op(op, ftrace_ops_list) {
-    if (!(op.flags & FTRACE_OPS_FL_DIRECT))
+    if (!(op.flags & FTRACE_OPS_FL_DIRECT)) {
     continue;
+    }
     if (ops_references_ip(op, ip)) {
     found_op = true;
     break;
@@ -7985,11 +8220,13 @@ unsafe extern "C" fn prepare_direct_functions_for_ipmodify(ops: *mut ftrace_ops)
     } while_for_each_ftrace_op(op);
     mutex_unlock(&ftrace_lock);
     if (found_op) {
-    if (!op.ops_func)
+    if (!op.ops_func) {
     return -EBUSY;
+    }
     ret = op.ops_func(op, ip, FTRACE_OPS_CMD_ENABLE_SHARE_IPMODIFY_PEER);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     }
     }
     }
@@ -8002,25 +8239,26 @@ unsafe extern "C" fn prepare_direct_functions_for_ipmodify(ops: *mut ftrace_ops)
 //
 #[no_mangle]
 unsafe extern "C" fn cleanup_direct_functions_after_ipmodify(ops: *mut ftrace_ops) {
-    static void cleanup_direct_functions_after_ipmodify(struct ftrace_ops *ops)
-    {
-    struct ftrace_func_entry *entry;
-    struct ftrace_hash *hash;
-    struct ftrace_ops *op;
-    int size, i;
-    if (!(ops.flags & FTRACE_OPS_FL_IPMODIFY))
+pub static mut entry: *mut c_void = core::ptr::null_mut();
+pub static mut hash: *mut c_void = core::ptr::null_mut();
+pub static mut op: *mut c_void = core::ptr::null_mut();
+    let mut size = 0;
+    let mut i = 0;
+    if (!(ops.flags & FTRACE_OPS_FL_IPMODIFY)) {
     return;
+    }
     mutex_lock(&direct_mutex);
     hash = ops.func_hash.filter_hash;
     size = 1 << hash.size_bits;
-    for (i = 0; i < size; i++) {
+    while (i < size) {
     hlist_for_each_entry(entry, &hash.buckets[i], hlist) {
-    let mut ip: c_ulong = entry.ip;
-    let mut found_op: bool = false;
+pub static mut ip: c_ulong = 0;
+pub static mut found_op: bool = false;
     mutex_lock(&ftrace_lock);
     do_for_each_ftrace_op(op, ftrace_ops_list) {
-    if (!(op.flags & FTRACE_OPS_FL_DIRECT))
+    if (!(op.flags & FTRACE_OPS_FL_DIRECT)) {
     continue;
+    }
     if (ops_references_ip(op, ip)) {
     found_op = true;
     break;
@@ -8028,8 +8266,9 @@ unsafe extern "C" fn cleanup_direct_functions_after_ipmodify(ops: *mut ftrace_op
     } while_for_each_ftrace_op(op);
     mutex_unlock(&ftrace_lock);
 // The cleanup is optional, ignore any errors
-    if (found_op && op.ops_func)
+    if (found_op && op.ops_func) {
     op.ops_func(op, ip, FTRACE_OPS_CMD_DISABLE_SHARE_IPMODIFY_PEER);
+    }
     }
     }
     mutex_unlock(&direct_mutex);
@@ -8037,14 +8276,10 @@ unsafe extern "C" fn cleanup_direct_functions_after_ipmodify(ops: *mut ftrace_op
 
 #[no_mangle]
 unsafe extern "C" fn prepare_direct_functions_for_ipmodify(ops: *mut ftrace_ops) -> c_int {
-    static int prepare_direct_functions_for_ipmodify(struct ftrace_ops *ops)
-    {
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn cleanup_direct_functions_after_ipmodify(ops: *mut ftrace_ops) {
-    static void cleanup_direct_functions_after_ipmodify(struct ftrace_ops *ops)
-    {
     }
 
 //
@@ -8052,9 +8287,7 @@ unsafe extern "C" fn cleanup_direct_functions_after_ipmodify(ops: *mut ftrace_op
 //
 #[no_mangle]
 unsafe extern "C" fn register_ftrace_function_nolock(ops: *mut ftrace_ops) -> c_int {
-    static int register_ftrace_function_nolock(struct ftrace_ops *ops)
-    {
-    int ret;
+    let mut ret = 0;
     ftrace_ops_init(ops);
     mutex_lock(&ftrace_lock);
     ret = ftrace_startup(ops, 0);
@@ -8074,15 +8307,14 @@ unsafe extern "C" fn register_ftrace_function_nolock(ops: *mut ftrace_ops) -> c_
 //
 #[no_mangle]
 pub unsafe extern "C" fn register_ftrace_function(ops: *mut ftrace_ops) -> c_int {
-    int register_ftrace_function(struct ftrace_ops *ops)
-    {
-    int ret;
+    let mut ret = 0;
     lock_direct_mutex();
     ret = prepare_direct_functions_for_ipmodify(ops);
-    if (ret < 0)
-    goto out_unlock;
+    if (ret < 0) {
+// goto;
+    }
     ret = register_ftrace_function_nolock(ops);
-    out_unlock:
+// label;
     unlock_direct_mutex();
     return ret;
     }
@@ -8095,9 +8327,7 @@ pub unsafe extern "C" fn register_ftrace_function(ops: *mut ftrace_ops) -> c_int
 //
 #[no_mangle]
 pub unsafe extern "C" fn unregister_ftrace_function(ops: *mut ftrace_ops) -> c_int {
-    int unregister_ftrace_function(struct ftrace_ops *ops)
-    {
-    int ret;
+    let mut ret = 0;
     mutex_lock(&ftrace_lock);
     ret = ftrace_shutdown(ops, 0);
     mutex_unlock(&ftrace_lock);
@@ -8107,10 +8337,8 @@ pub unsafe extern "C" fn unregister_ftrace_function(ops: *mut ftrace_ops) -> c_i
     EXPORT_SYMBOL_GPL(unregister_ftrace_function);
 #[no_mangle]
 unsafe extern "C" fn symbols_cmp(a: *const c_void, b: *const c_void) -> c_int {
-    static int symbols_cmp(const void *a, const void *b)
-    {
-    const char **str_a = (const char **) a;
-    const char **str_b = (const char **) b;
+    let mut str_a =  a;
+    let mut str_b =  b;
     return strcmp(*str_a, *str_b);
     }
 #[repr(C)]
@@ -8128,21 +8356,22 @@ pub struct kallsyms_data {
 //
 #[no_mangle]
 unsafe extern "C" fn kallsyms_callback(data: *mut c_void, name: *const c_char, addr: c_ulong) -> c_int {
-    static int kallsyms_callback(void *data, const char *name, unsigned long addr)
-    {
-    struct kallsyms_data *args = data;
-    const char **sym;
-    int idx;
-    sym = bsearch(&name, args.syms, args.cnt, sizeof(*args.syms), symbols_cmp);
-    if (!sym)
+    let mut args = data;
+pub static mut sym: *mut c_void = core::ptr::null_mut();
+    let mut idx = 0;
+    sym = bsearch(&name, args.syms, args.cnt, sizeof!(*args.syms), symbols_cmp);
+    if (!sym) {
     return 0;
+    }
     idx = sym - args.syms;
-    if (args.addrs[idx])
+    if (args.addrs[idx]) {
     return 0;
-    if (!ftrace_location(addr))
+    }
+    if (!ftrace_location(addr)) {
     return 0;
+    }
     args.addrs[idx] = addr;
-    args.found++;
+    args.found += 1;
     return args.found == args.cnt ? 1 : 0;
     }
 //
@@ -8171,15 +8400,14 @@ unsafe extern "C" fn kallsyms_callback(data: *mut c_void, name: *const c_char, a
 //
 #[no_mangle]
 pub unsafe extern "C" fn ftrace_lookup_symbols(sorted_syms: *const c_char, cnt: usize, addrs: *mut c_ulong) -> c_int {
-    int ftrace_lookup_symbols(const char **sorted_syms, size_t cnt, unsigned long *addrs)
-    {
-    struct kallsyms_data args;
-    int found_all;
+pub static mut args: usize = 0;
+    let mut found_all = 0;
 // Fast path: single symbol uses O(log N) binary search
     if (cnt == 1) {
     addrs[0] = kallsyms_lookup_name(sorted_syms[0]);
-    if (addrs[0] && ftrace_location(addrs[0]))
+    if (addrs[0] && ftrace_location(addrs[0])) {
     return 0;
+    }
 //
 // Binary lookup can fail for duplicate symbol names
 // where the first match is not ftrace-instrumented.
@@ -8187,52 +8415,54 @@ pub unsafe extern "C" fn ftrace_lookup_symbols(sorted_syms: *const c_char, cnt: 
 //
     }
 // Batch path: single-pass O(N) linear scan
-    memset(addrs, 0, sizeof(*addrs) * cnt);
+    memset(addrs, 0, sizeof!(*addrs) * cnt);
     args.addrs = addrs;
     args.syms = sorted_syms;
     args.cnt = cnt;
     args.found = 0;
     found_all = kallsyms_on_each_symbol(kallsyms_callback, &args);
-    if (found_all)
+    if (found_all) {
     return 0;
-    found_all = module_kallsyms_on_each_symbol(core::ptr::null_mut(), kallsyms_callback, &args);
+    }
+    found_all = module_kallsyms_on_each_symbol!(core::ptr::null_mut(), kallsyms_callback, &args);
     return found_all ? 0 : -ESRCH;
     }
 
 #[no_mangle]
 unsafe extern "C" fn ftrace_startup_sysctl() {
-    static void ftrace_startup_sysctl(void)
-    {
-    int command;
-    if (unlikely(ftrace_disabled))
+    let mut command = 0;
+    if (unlikely(ftrace_disabled)) {
     return;
+    }
 // Force update next time
     saved_ftrace_func = core::ptr::null_mut();
 // ftrace_start_up is true if we want ftrace running
     if (ftrace_start_up) {
     command = FTRACE_UPDATE_CALLS;
-    if (ftrace_graph_active)
+    if (ftrace_graph_active) {
     command |= FTRACE_START_FUNC_RET;
+    }
     ftrace_startup_enable(command);
     }
     }
 
-    static int
-    ftrace_enable_sysctl(const struct ctl_table *table, int write,
-    void *buffer, size_t *lenp, loff_t *ppos)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn ftrace_enable_sysctl(table: *mut ctl_table, write: c_int, buffer: *mut c_void, lenp: *mut size_t, ppos: *mut loff_t) -> c_int {
+    let mut ret = 0;
     guard(mutex)(&ftrace_lock);
-    if (unlikely(ftrace_disabled))
+    if (unlikely(ftrace_disabled)) {
     return -ENODEV;
+    }
     ret = proc_dointvec(table, write, buffer, lenp, ppos);
-    if (ret || !write || (last_ftrace_enabled == !!ftrace_enabled))
+    if (ret || !write || (last_ftrace_enabled == !!ftrace_enabled)) {
     return ret;
+    }
     if (ftrace_enabled) {
 // we are starting ftrace again
     if (rcu_dereference_protected(ftrace_ops_list,
-    lockdep_is_held(&ftrace_lock)) != &ftrace_list_end)
+    lockdep_is_held(&ftrace_lock)) != &ftrace_list_end) {
     update_ftrace_function();
+    }
     ftrace_startup_sysctl();
     } else {
 //
@@ -8245,20 +8475,10 @@ unsafe extern "C" fn ftrace_startup_sysctl() {
     last_ftrace_enabled = !!ftrace_enabled;
     return 0;
     }
-    static const struct ctl_table ftrace_sysctls[] = {
-    {
-    .procname       = "ftrace_enabled",
-    .data           = &ftrace_enabled,
-    .maxlen         = sizeof(int),
-    .mode           = 0644,
-    .proc_handler   = ftrace_enable_sysctl,
-    },
-    };
+pub static mut ctl_table: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn ftrace_sysctl_init() -> int __init {
-    static int __init ftrace_sysctl_init(void)
-    {
+unsafe extern "C" fn ftrace_sysctl_init() -> c_int {
     register_sysctl_init("kernel", ftrace_sysctls);
     return 0;
     }
-    late_initcall(ftrace_sysctl_init);
+    late_initcall!(ftrace_sysctl_init);

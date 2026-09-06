@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -49,29 +299,26 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Mutex serializing the registrations of performance domains and letting
 // callbacks defined by drivers sleep.
 //
-    static DEFINE_MUTEX(em_pd_mutex);
+pub static mut em_pd_mutex: usize = 0;
 //
 // Manage performance domains with IDs. One can iterate the performance domains
 // through the list and pick one with their associated ID. The mutex serializes
 // the list access. When holding em_pd_list_mutex, em_pd_mutex should not be
 // taken to avoid potential deadlock.
 //
-    static DEFINE_IDA(em_pd_ida);
-    static LIST_HEAD(em_pd_list);
-    static DEFINE_MUTEX(em_pd_list_mutex);
-    static void em_cpufreq_update_efficiencies(struct device *dev,
-    struct em_perf_state *table);
-    static void em_check_capacity_update(void);
-    static void em_update_workfn(struct work_struct *work);
-    static DECLARE_DELAYED_WORK(em_update_work, em_update_workfn);
+pub static mut em_pd_ida: usize = 0;
+pub static mut em_pd_list: usize = 0;
+pub static mut em_pd_list_mutex: usize = 0;
+// forward_decl: em_cpufreq_update_efficiencies;
+// forward_decl: em_check_capacity_update;
+// forward_decl: em_update_workfn;
+pub static mut em_update_work: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn _is_cpu_device(dev: *mut device) -> bool {
-    static bool _is_cpu_device(struct device *dev)
-    {
     return (dev.bus == &cpu_subsys);
     }
 
-    static struct dentry *rootdir;
+pub static mut rootdir: *mut c_void = core::ptr::null_mut();
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct em_dbg_info {
@@ -79,33 +326,31 @@ pub struct em_dbg_info {
     pub ps_id: c_int,
 }
 
-    static int em_debug_##fname##_show(struct seq_file *s, void *unused)	\
-    {									\
-    struct em_dbg_info *em_dbg = s.private;			\
-    struct em_perf_state *table;					\
-    unsigned long val;						\
-    \
-    rcu_read_lock();						\
-    table = em_perf_state_from_pd(em_dbg.pd);			\
-    val = table[em_dbg.ps_id].name;				\
-    rcu_read_unlock();						\
-    \
-    seq_printf(s, "%lu\n", val);					\
-    return 0;							\
-    }									\
+    static int em_debug_##fname##_show(seq_file *s, void *unused)	
+    {									
+    let mut em_dbg = s.private;			
+pub static mut table: *mut c_void = core::ptr::null_mut();					
+    let mut val = 0;						
+    
+    rcu_read_lock();						
+    table = em_perf_state_from_pd(em_dbg.pd);			
+    val = table[em_dbg.ps_id].name;				
+    rcu_read_unlock();						
+    
+    seq_printf(s, "%lu\n", val);					
+    return 0;							
+    }									
     DEFINE_SHOW_ATTRIBUTE(em_debug_##fname)
-    DEFINE_EM_DBG_SHOW(frequency, frequency);
-    DEFINE_EM_DBG_SHOW(power, power);
-    DEFINE_EM_DBG_SHOW(cost, cost);
-    DEFINE_EM_DBG_SHOW(performance, performance);
-    DEFINE_EM_DBG_SHOW(flags, inefficiency);
-    static void em_debug_create_ps(struct em_perf_domain *em_pd,
-    struct em_dbg_info *em_dbg, int i,
-    struct dentry *pd)
-    {
-    struct em_perf_state *table;
-    unsigned long freq;
-    struct dentry *d;
+pub static mut frequency: usize = 0;
+pub static mut power: usize = 0;
+pub static mut cost: usize = 0;
+pub static mut performance: usize = 0;
+pub static mut flags: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn em_debug_create_ps(em_pd: *mut em_perf_domain, em_dbg: *mut em_dbg_info, i: c_int, pd: *mut dentry) {
+pub static mut table: *mut c_void = core::ptr::null_mut();
+    let mut freq = 0;
+pub static mut d: *mut c_void = core::ptr::null_mut();
     char name[24];
     em_dbg[i].pd = em_pd;
     em_dbg[i].ps_id = i;
@@ -113,7 +358,7 @@ pub struct em_dbg_info {
     table = em_perf_state_from_pd(em_pd);
     freq = table[i].frequency;
     rcu_read_unlock();
-    snprintf(name, sizeof(name), "ps:%lu", freq);
+    snprintf(name, sizeof!(name), "ps:%lu", freq);
 // Create per-ps directory
     d = debugfs_create_dir(name, pd);
     debugfs_create_file("frequency", 0444, d, &em_dbg[i],
@@ -129,78 +374,69 @@ pub struct em_dbg_info {
     }
 #[no_mangle]
 unsafe extern "C" fn em_debug_cpus_show(s: *mut seq_file, unused: *mut c_void) -> c_int {
-    static int em_debug_cpus_show(struct seq_file *s, void *unused)
-    {
     seq_printf(s, "%*pbl\n", cpumask_pr_args(to_cpumask(s.private)));
     return 0;
     }
-    DEFINE_SHOW_ATTRIBUTE(em_debug_cpus);
+pub static mut em_debug_cpus: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn em_debug_flags_show(s: *mut seq_file, unused: *mut c_void) -> c_int {
-    static int em_debug_flags_show(struct seq_file *s, void *unused)
-    {
-    struct em_perf_domain *pd = s.private;
+    let mut pd = s.private;
     seq_printf(s, "%#lx\n", pd.flags);
     return 0;
     }
-    DEFINE_SHOW_ATTRIBUTE(em_debug_flags);
+pub static mut em_debug_flags: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn em_debug_id_show(s: *mut seq_file, unused: *mut c_void) -> c_int {
-    static int em_debug_id_show(struct seq_file *s, void *unused)
-    {
-    struct em_perf_domain *pd = s.private;
+    let mut pd = s.private;
     seq_printf(s, "%d\n", pd.id);
     return 0;
     }
-    DEFINE_SHOW_ATTRIBUTE(em_debug_id);
+pub static mut em_debug_id: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn em_debug_create_pd(dev: *mut device) {
-    static void em_debug_create_pd(struct device *dev)
-    {
-    struct em_dbg_info *em_dbg;
-    struct dentry *d;
-    int i;
+pub static mut em_dbg: *mut c_void = core::ptr::null_mut();
+pub static mut d: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
 // Create the directory of the performance domain
     d = debugfs_create_dir(dev_name(dev), rootdir);
-    if (_is_cpu_device(dev))
+    if (_is_cpu_device(dev)) {
     debugfs_create_file("cpus", 0444, d, dev.em_pd.cpus,
     &em_debug_cpus_fops);
+    }
     debugfs_create_file("flags", 0444, d, dev.em_pd,
     &em_debug_flags_fops);
     debugfs_create_file("id", 0444, d, dev.em_pd, &em_debug_id_fops);
     em_dbg = devm_kcalloc(dev, dev.em_pd.nr_perf_states,
-    sizeof(*em_dbg), GFP_KERNEL);
-    if (!em_dbg)
+    sizeof!(*em_dbg), GFP_KERNEL);
+    if (!em_dbg) {
     return;
+    }
 // Create a sub-directory for each performance state
-    for (i = 0; i < dev.em_pd.nr_perf_states; i++)
+    for (i = 0; i < dev.em_pd.nr_perf_states; i++) {
     em_debug_create_ps(dev.em_pd, em_dbg, i, d);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn em_debug_remove_pd(dev: *mut device) {
-    static void em_debug_remove_pd(struct device *dev)
-    {
     debugfs_lookup_and_remove(dev_name(dev), rootdir);
     }
 #[no_mangle]
-unsafe extern "C" fn em_debug_init() -> int __init {
-    static int __init em_debug_init(void)
-    {
+unsafe extern "C" fn em_debug_init() -> c_int {
 // Create /sys/kernel/debug/energy_model directory
     rootdir = debugfs_create_dir("energy_model", core::ptr::null_mut());
     return 0;
     }
-    fs_initcall(em_debug_init);
+    fs_initcall!(em_debug_init);
 
-    static void em_debug_create_pd(struct device *dev) {}
-    static void em_debug_remove_pd(struct device *dev) {}
+#[no_mangle]
+pub unsafe extern "C" fn em_debug_create_pd(dev: *mut device) {}
+#[no_mangle]
+pub unsafe extern "C" fn em_debug_remove_pd(dev: *mut device) {}
 
 #[no_mangle]
 unsafe extern "C" fn em_release_table_kref(kref: *mut kref) {
-    static void em_release_table_kref(struct kref *kref)
-    {
 // It was the last owner of this table so we can free
-    kfree_rcu(container_of(kref, struct em_perf_table, kref), rcu);
+    kfree_rcu(container_of!(kref, em_perf_table, kref), rcu);
     }
 //
 // em_table_free() - Handles safe free of the EM table when needed
@@ -210,8 +446,6 @@ unsafe extern "C" fn em_release_table_kref(kref: *mut kref) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn em_table_free(table: *mut em_perf_table) {
-    void em_table_free(struct em_perf_table *table)
-    {
     kref_put(&table.kref, em_release_table_kref);
     }
 //
@@ -222,25 +456,27 @@ pub unsafe extern "C" fn em_table_free(table: *mut em_perf_table) {
 // has a user.
 // Returns allocated table or NULL.
 //
-    struct em_perf_table *em_table_alloc(struct em_perf_domain *pd)
-    {
-    struct em_perf_table *table;
-    int table_size;
-    table_size = sizeof(struct em_perf_state) * pd.nr_perf_states;
-    table = kzalloc(sizeof(*table) + table_size, GFP_KERNEL);
-    if (!table)
+#[no_mangle]
+pub unsafe extern "C" fn em_table_alloc(pd: *mut em_perf_domain) -> *mut c_void {
+pub static mut table: *mut c_void = core::ptr::null_mut();
+    let mut table_size = 0;
+    table_size = sizeof!(em_perf_state) * pd.nr_perf_states;
+    table = kzalloc(sizeof!(*table) + table_size, GFP_KERNEL);
+    if (!table) {
     return core::ptr::null_mut();
+    }
     kref_init(&table.kref);
     return table;
     }
-    static void em_init_performance(struct device *dev, struct em_perf_domain *pd,
-    struct em_perf_state *table, int nr_states)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn em_init_performance(dev: *mut device, pd: *mut em_perf_domain, table: *mut em_perf_state, nr_states: c_int) {
     u64 fmax, max_cap;
-    int i, cpu;
+    let mut i = 0;
+    let mut cpu = 0;
 // This is needed only for CPUs and EAS skip other devices
-    if (!_is_cpu_device(dev))
+    if (!_is_cpu_device(dev)) {
     return;
+    }
     cpu = cpumask_first(em_span_cpus(pd));
 //
 // Calculate the performance value for each frequency with
@@ -249,21 +485,22 @@ pub unsafe extern "C" fn em_table_free(table: *mut em_perf_table) {
 //
     fmax = (u64) table[nr_states - 1].frequency;
     max_cap = (u64) arch_scale_cpu_capacity(cpu);
-    for (i = 0; i < nr_states; i++)
+    for (i = 0; i < nr_states; i++) {
     table[i].performance = div64_u64(max_cap * table[i].frequency,
     fmax);
     }
-    static int em_compute_costs(struct device *dev, struct em_perf_state *table,
-    const struct em_data_callback *cb, int nr_states,
-    unsigned long flags)
-    {
-    let mut prev_cost: c_ulong = ULONG_MAX;
-    int i, ret;
+    }
+#[no_mangle]
+pub unsafe extern "C" fn em_compute_costs(dev: *mut device, table: *mut em_perf_state, cb: *mut em_data_callback, nr_states: c_int, flags: c_ulong) -> c_int {
+pub static mut prev_cost: c_ulong = 0;
+    let mut i = 0;
+    let mut ret = 0;
 // This is needed only for CPUs and EAS skip other devices
-    if (!_is_cpu_device(dev))
+    if (!_is_cpu_device(dev)) {
     return 0;
+    }
 // Compute the cost of each performance state.
-    for (i = nr_states - 1; i >= 0; i--) {
+    while (i >= 0) {
     unsigned long power_res, cost;
     if ((flags & EM_PERF_DOMAIN_ARTIFICIAL) && cb.get_cost) {
     ret = cb.get_cost(dev, table[i].frequency, &cost);
@@ -301,9 +538,8 @@ pub unsafe extern "C" fn em_table_free(table: *mut em_perf_table) {
 //
 // Return 0 on success or a proper error in case of failure.
 //
-    int em_dev_compute_costs(struct device *dev, struct em_perf_state *table,
-    int nr_states)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn em_dev_compute_costs(dev: *mut device, table: *mut em_perf_state, nr_states: c_int) -> c_int {
     return em_compute_costs(dev, table, core::ptr::null_mut(), nr_states, 0);
     }
 //
@@ -318,13 +554,13 @@ pub unsafe extern "C" fn em_table_free(table: *mut em_perf_table) {
 //
 // Return 0 on success or an error code on failure.
 //
-    int em_dev_update_perf_domain(struct device *dev,
-    struct em_perf_table *new_table)
-    {
-    struct em_perf_table *old_table;
-    struct em_perf_domain *pd;
-    if (!dev)
+#[no_mangle]
+pub unsafe extern "C" fn em_dev_update_perf_domain(dev: *mut device, new_table: *mut em_perf_table) -> c_int {
+pub static mut old_table: *mut c_void = core::ptr::null_mut();
+pub static mut pd: *mut c_void = core::ptr::null_mut();
+    if (!dev) {
     return -EINVAL;
+    }
 // Serialize update/unregister or concurrent updates
     mutex_lock(&em_pd_mutex);
     if (!dev.em_pd) {
@@ -343,16 +579,14 @@ pub unsafe extern "C" fn em_table_free(table: *mut em_perf_table) {
     return 0;
     }
     EXPORT_SYMBOL_GPL(em_dev_update_perf_domain);
-    static int em_create_perf_table(struct device *dev, struct em_perf_domain *pd,
-    struct em_perf_state *table,
-    const struct em_data_callback *cb,
-    unsigned long flags)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn em_create_perf_table(dev: *mut device, pd: *mut em_perf_domain, table: *mut em_perf_state, cb: *mut em_data_callback, flags: c_ulong) -> c_int {
     unsigned long power, freq, prev_freq = 0;
-    let mut nr_states: c_int = pd.nr_perf_states;
-    int i, ret;
+pub static mut nr_states: c_int = 0;
+    let mut i = 0;
+    let mut ret = 0;
 // Build the list of performance states for this performance domain
-    for (i = 0, freq = 0; i < nr_states; i++, freq++) {
+    while (i < nr_states) {
 //
 // active_power() is a driver callback which ceils 'freq' to
 // lowest performance state of 'dev' above 'freq' and updates
@@ -387,19 +621,20 @@ pub unsafe extern "C" fn em_table_free(table: *mut em_perf_table) {
     }
     em_init_performance(dev, pd, table, nr_states);
     ret = em_compute_costs(dev, table, cb, nr_states, flags);
-    if (ret)
+    if (ret) {
     return -EINVAL;
+    }
     return 0;
     }
-    static int em_create_pd(struct device *dev, int nr_states,
-    const struct em_data_callback *cb,
-    const cpumask_t *cpus,
-    unsigned long flags)
-    {
-    struct em_perf_table *em_table;
-    struct em_perf_domain *pd;
-    struct device *cpu_dev;
-    int cpu, ret, num_cpus, id;
+#[no_mangle]
+pub unsafe extern "C" fn em_create_pd(dev: *mut device, nr_states: c_int, cb: *mut em_data_callback, cpus: *mut cpumask_t, flags: c_ulong) -> c_int {
+pub static mut em_table: *mut c_void = core::ptr::null_mut();
+pub static mut pd: *mut c_void = core::ptr::null_mut();
+pub static mut cpu_dev: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
+    let mut ret = 0;
+    let mut num_cpus = 0;
+    let mut id = 0;
     if (_is_cpu_device(dev)) {
     num_cpus = cpumask_weight(cpus);
 // Prevent max possible energy calculation to not overflow
@@ -407,14 +642,16 @@ pub unsafe extern "C" fn em_table_free(table: *mut em_perf_table) {
     dev_err(dev, "EM: too many CPUs, overflow possible\n");
     return -EINVAL;
     }
-    pd = kzalloc(sizeof(*pd) + cpumask_size(), GFP_KERNEL);
-    if (!pd)
+    pd = kzalloc(sizeof!(*pd) + cpumask_size(), GFP_KERNEL);
+    if (!pd) {
     return -ENOMEM;
+    }
     cpumask_copy(em_span_cpus(pd), cpus);
     } else {
     pd = kzalloc_obj(*pd);
-    if (!pd)
+    if (!pd) {
     return -ENOMEM;
+    }
     }
     pd.nr_perf_states = nr_states;
     INIT_LIST_HEAD(&pd.node);
@@ -425,35 +662,39 @@ pub unsafe extern "C" fn em_table_free(table: *mut em_perf_table) {
     }
     pd.id = id;
     em_table = em_table_alloc(pd);
-    if (!em_table)
-    goto free_pd;
+    if (!em_table) {
+// goto;
+    }
     ret = em_create_perf_table(dev, pd, em_table.state, cb, flags);
-    if (ret)
-    goto free_pd_table;
+    if (ret) {
+// goto;
+    }
     rcu_assign_pointer(pd.em_table, em_table);
-    if (_is_cpu_device(dev))
+    if (_is_cpu_device(dev)) {
     for_each_cpu(cpu, cpus) {
+    }
     cpu_dev = get_cpu_device(cpu);
     cpu_dev.em_pd = pd;
     }
     dev.em_pd = pd;
     return 0;
-    free_pd_table:
+// label;
     kfree(em_table);
-    free_pd:
+// label;
     kfree(pd);
     ida_free(&em_pd_ida, id);
     return -EINVAL;
     }
-    static void
-    em_cpufreq_update_efficiencies(struct device *dev, struct em_perf_state *table)
-    {
-    struct em_perf_domain *pd = dev.em_pd;
-    struct cpufreq_policy *policy;
-    let mut found: c_int = 0;
-    int i, cpu;
-    if (!_is_cpu_device(dev))
+#[no_mangle]
+pub unsafe extern "C" fn em_cpufreq_update_efficiencies(dev: *mut device, table: *mut em_perf_state) {
+    let mut pd = dev.em_pd;
+pub static mut policy: *mut c_void = core::ptr::null_mut();
+pub static mut found: c_int = 0;
+    let mut i = 0;
+    let mut cpu = 0;
+    if (!_is_cpu_device(dev)) {
     return;
+    }
 // Try to get a CPU which is active and in this PD
     cpu = cpumask_first_and(em_span_cpus(pd), cpu_active_mask);
     if (cpu >= nr_cpu_ids) {
@@ -465,15 +706,18 @@ pub unsafe extern "C" fn em_table_free(table: *mut em_perf_table) {
     dev_warn(dev, "EM: Access to CPUFreq policy failed\n");
     return;
     }
-    for (i = 0; i < pd.nr_perf_states; i++) {
-    if (!(table[i].flags & EM_PERF_STATE_INEFFICIENT))
+    while (i < pd.nr_perf_states) {
+    if (!(table[i].flags & EM_PERF_STATE_INEFFICIENT)) {
     continue;
-    if (!cpufreq_table_set_inefficient(policy, table[i].frequency))
-    found++;
+    }
+    if (!cpufreq_table_set_inefficient(policy, table[i].frequency)) {
+    found += 1;
+    }
     }
     cpufreq_cpu_put(policy);
-    if (!found)
+    if (!found) {
     return;
+    }
 //
 // Efficiencies have been installed in CPUFreq, inefficient frequencies
 // will be skipped. The EM can do the same.
@@ -487,10 +731,11 @@ pub unsafe extern "C" fn em_table_free(table: *mut em_perf_table) {
 // Returns the performance domain to which @dev belongs, or NULL if it doesn't
 // exist.
 //
-    struct em_perf_domain *em_pd_get(struct device *dev)
-    {
-    if (IS_ERR_OR_NULL(dev))
+#[no_mangle]
+pub unsafe extern "C" fn em_pd_get(dev: *mut device) -> *mut c_void {
+    if (IS_ERR_OR_NULL(dev)) {
     return core::ptr::null_mut();
+    }
     return dev.em_pd;
     }
     EXPORT_SYMBOL_GPL(em_pd_get);
@@ -501,12 +746,13 @@ pub unsafe extern "C" fn em_table_free(table: *mut em_perf_table) {
 // Returns the performance domain to which @cpu belongs, or NULL if it doesn't
 // exist.
 //
-    struct em_perf_domain *em_cpu_get(int cpu)
-    {
-    struct device *cpu_dev;
+#[no_mangle]
+pub unsafe extern "C" fn em_cpu_get(cpu: c_int) -> *mut c_void {
+pub static mut cpu_dev: *mut c_void = core::ptr::null_mut();
     cpu_dev = get_cpu_device(cpu);
-    if (!cpu_dev)
+    if (!cpu_dev) {
     return core::ptr::null_mut();
+    }
     return em_pd_get(cpu_dev);
     }
     EXPORT_SYMBOL_GPL(em_cpu_get);
@@ -533,13 +779,12 @@ pub unsafe extern "C" fn em_table_free(table: *mut em_perf_table) {
 //
 // Return 0 on success
 //
-    int em_dev_register_perf_domain(struct device *dev, unsigned int nr_states,
-    const struct em_data_callback *cb,
-    const cpumask_t *cpus, bool microwatts)
-    {
-    let mut ret: c_int = em_dev_register_pd_no_update(dev, nr_states, cb, cpus, microwatts);
-    if (_is_cpu_device(dev))
+#[no_mangle]
+pub unsafe extern "C" fn em_dev_register_perf_domain(dev: *mut device, nr_states: c_uint, cb: *mut em_data_callback, cpus: *mut cpumask_t, microwatts: bool) -> c_int {
+pub static mut ret: c_int = 0;
+    if (_is_cpu_device(dev)) {
     em_check_capacity_update();
+    }
     return ret;
     }
     EXPORT_SYMBOL_GPL(em_dev_register_perf_domain);
@@ -554,16 +799,16 @@ pub unsafe extern "C" fn em_table_free(table: *mut em_perf_table) {
 // Like em_dev_register_perf_domain(), but does not trigger a CPU capacity
 // update after registering the PD, even if @dev is a CPU device.
 //
-    int em_dev_register_pd_no_update(struct device *dev, unsigned int nr_states,
-    const struct em_data_callback *cb,
-    const cpumask_t *cpus, bool microwatts)
-    {
-    struct em_perf_table *em_table;
+#[no_mangle]
+pub unsafe extern "C" fn em_dev_register_pd_no_update(dev: *mut device, nr_states: c_uint, cb: *mut em_data_callback, cpus: *mut cpumask_t, microwatts: bool) -> c_int {
+pub static mut em_table: *mut c_void = core::ptr::null_mut();
     unsigned long cap, prev_cap = 0;
-    let mut flags: c_ulong = 0;
-    int cpu, ret;
-    if (!dev || !nr_states || !cb)
+pub static mut flags: c_ulong = 0;
+    let mut cpu = 0;
+    let mut ret = 0;
+    if (!dev || !nr_states || !cb) {
     return -EINVAL;
+    }
 //
 // Use a mutex to serialize the registration of performance domains and
 // let the driver-defined callback functions sleep.
@@ -571,19 +816,19 @@ pub unsafe extern "C" fn em_table_free(table: *mut em_perf_table) {
     mutex_lock(&em_pd_mutex);
     if (dev.em_pd) {
     ret = -EEXIST;
-    goto unlock;
+// goto;
     }
     if (_is_cpu_device(dev)) {
     if (!cpus) {
     dev_err(dev, "EM: invalid CPU mask\n");
     ret = -EINVAL;
-    goto unlock;
+// goto;
     }
     for_each_cpu(cpu, cpus) {
     if (em_cpu_get(cpu)) {
     dev_err(dev, "EM: exists for CPU%d\n", cpu);
     ret = -EEXIST;
-    goto unlock;
+// goto;
     }
 //
 // All CPUs of a domain must have the same
@@ -595,17 +840,18 @@ pub unsafe extern "C" fn em_table_free(table: *mut em_perf_table) {
     dev_err(dev, "EM: CPUs of %*pbl must have the same capacity\n",
     cpumask_pr_args(cpus));
     ret = -EINVAL;
-    goto unlock;
+// goto;
     }
     prev_cap = cap;
     }
     }
-    if (microwatts)
+    if (microwatts) {
     flags |= EM_PERF_DOMAIN_MICROWATTS;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: cb->get_cost) -> else {
-    else if (cb.get_cost)
+    }
+
+    else if (cb.get_cost) {
     flags |= EM_PERF_DOMAIN_ARTIFICIAL;
+    }
 //
 // EM only supports uW (exception is artificial EM).
 // Therefore, check and force the drivers to provide
@@ -614,11 +860,12 @@ pub unsafe extern "C" fn if(_arg: cb->get_cost) -> else {
     if (!microwatts && !(flags & EM_PERF_DOMAIN_ARTIFICIAL)) {
     dev_err(dev, "EM: only supports uW power values\n");
     ret = -EINVAL;
-    goto unlock;
+// goto;
     }
     ret = em_create_pd(dev, nr_states, cb, cpus, flags);
-    if (ret)
-    goto unlock;
+    if (ret) {
+// goto;
+    }
     dev.em_pd.flags |= flags;
     dev.em_pd.min_perf_state = 0;
     dev.em_pd.max_perf_state = nr_states - 1;
@@ -627,10 +874,11 @@ pub unsafe extern "C" fn if(_arg: cb->get_cost) -> else {
     em_cpufreq_update_efficiencies(dev, em_table.state);
     em_debug_create_pd(dev);
     dev_info(dev, "EM: created perf domain\n");
-    unlock:
+// label;
     mutex_unlock(&em_pd_mutex);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     mutex_lock(&em_pd_list_mutex);
     list_add_tail(&dev.em_pd.node, &em_pd_list);
     mutex_unlock(&em_pd_list_mutex);
@@ -646,12 +894,12 @@ pub unsafe extern "C" fn if(_arg: cb->get_cost) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn em_dev_unregister_perf_domain(dev: *mut device) {
-    void em_dev_unregister_perf_domain(struct device *dev)
-    {
-    if (IS_ERR_OR_NULL(dev) || !dev.em_pd)
+    if (IS_ERR_OR_NULL(dev) || !dev.em_pd) {
     return;
-    if (_is_cpu_device(dev))
+    }
+    if (_is_cpu_device(dev)) {
     return;
+    }
     mutex_lock(&em_pd_list_mutex);
     list_del_init(&dev.em_pd.node);
     mutex_unlock(&em_pd_list_mutex);
@@ -671,42 +919,45 @@ pub unsafe extern "C" fn em_dev_unregister_perf_domain(dev: *mut device) {
     mutex_unlock(&em_pd_mutex);
     }
     EXPORT_SYMBOL_GPL(em_dev_unregister_perf_domain);
-    static struct em_perf_table *em_table_dup(struct em_perf_domain *pd)
-    {
-    struct em_perf_table *em_table;
-    struct em_perf_state *ps, *new_ps;
-    int ps_size;
+#[no_mangle]
+pub unsafe extern "C" fn em_table_dup(pd: *mut em_perf_domain) -> *mut c_void {
+pub static mut em_table: *mut c_void = core::ptr::null_mut();
+    let mut ps = core::ptr::null_mut();
+    let mut new_ps = core::ptr::null_mut();
+    let mut ps_size = 0;
     em_table = em_table_alloc(pd);
-    if (!em_table)
+    if (!em_table) {
     return core::ptr::null_mut();
+    }
     new_ps = em_table.state;
     rcu_read_lock();
     ps = em_perf_state_from_pd(pd);
 // Initialize data based on old table
-    ps_size = sizeof(struct em_perf_state) * pd.nr_perf_states;
+    ps_size = sizeof!(em_perf_state) * pd.nr_perf_states;
     memcpy(new_ps, ps, ps_size);
     rcu_read_unlock();
     return em_table;
     }
-    static int em_recalc_and_update(struct device *dev, struct em_perf_domain *pd,
-    struct em_perf_table *em_table)
-    {
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn em_recalc_and_update(dev: *mut device, pd: *mut em_perf_domain, em_table: *mut em_perf_table) -> c_int {
+    let mut ret = 0;
     if (!em_is_artificial(pd)) {
     ret = em_compute_costs(dev, em_table.state, core::ptr::null_mut(),
     pd.nr_perf_states, pd.flags);
-    if (ret)
-    goto free_em_table;
+    if (ret) {
+// goto;
+    }
     }
     ret = em_dev_update_perf_domain(dev, em_table);
-    if (ret)
-    goto free_em_table;
+    if (ret) {
+// goto;
+    }
 //
 // This is one-time-update, so give up the ownership in this updater.
 // The EM framework has incremented the usage counter and from now
 // will keep the reference (then free the memory when needed).
 //
-    free_em_table:
+// label;
     em_table_free(em_table);
     return ret;
     }
@@ -714,20 +965,20 @@ pub unsafe extern "C" fn em_dev_unregister_perf_domain(dev: *mut device) {
 // Adjustment of CPU performance values after boot, when all CPUs capacites
 // are correctly calculated.
 //
-    static void em_adjust_new_capacity(unsigned int cpu, struct device *dev,
-    struct em_perf_domain *pd)
-    {
-    let mut cpu_capacity: c_ulong = arch_scale_cpu_capacity(cpu);
-    struct em_perf_table *em_table;
-    struct em_perf_state *table;
-    unsigned long em_max_perf;
+#[no_mangle]
+pub unsafe extern "C" fn em_adjust_new_capacity(cpu: c_uint, dev: *mut device, pd: *mut em_perf_domain) {
+pub static mut cpu_capacity: c_ulong = 0;
+pub static mut em_table: *mut c_void = core::ptr::null_mut();
+pub static mut table: *mut c_void = core::ptr::null_mut();
+    let mut em_max_perf = 0;
     rcu_read_lock();
     table = em_perf_state_from_pd(pd);
     em_max_perf = table[pd.nr_perf_states - 1].performance;
     rcu_read_unlock();
-    if (em_max_perf == cpu_capacity)
+    if (em_max_perf == cpu_capacity) {
     return;
-    pr_debug("updating cpu%d cpu_cap=%lu old capacity=%lu\n", cpu,
+    }
+    pr_debug!("updating cpu%d cpu_cap=%lu old capacity=%lu\n", cpu,
     cpu_capacity, em_max_perf);
     em_table = em_table_dup(pd);
     if (!em_table) {
@@ -747,53 +998,51 @@ pub unsafe extern "C" fn em_dev_unregister_perf_domain(dev: *mut device) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn em_adjust_cpu_capacity(cpu: c_uint) {
-    void em_adjust_cpu_capacity(unsigned int cpu)
-    {
-    struct device *dev = get_cpu_device(cpu);
-    struct em_perf_domain *pd;
+    let mut dev = get_cpu_device(cpu);
+pub static mut pd: *mut c_void = core::ptr::null_mut();
     pd = em_pd_get(dev);
-    if (pd)
+    if (pd) {
     em_adjust_new_capacity(cpu, dev, pd);
+    }
     }
 #[no_mangle]
 unsafe extern "C" fn em_check_capacity_update() {
-    static void em_check_capacity_update(void)
-    {
-    cpumask_var_t cpu_done_mask;
+    let mut cpu_done_mask;
     int cpu, failed_cpus = 0;
     if (!zalloc_cpumask_var(&cpu_done_mask, GFP_KERNEL)) {
-    pr_warn("no free memory\n");
+    pr_warn!("no free memory\n");
     return;
     }
 // Check if CPUs capacity has changed than update EM
     for_each_possible_cpu(cpu) {
-    struct cpufreq_policy *policy;
-    struct em_perf_domain *pd;
-    struct device *dev;
-    if (cpumask_test_cpu(cpu, cpu_done_mask))
+pub static mut policy: *mut c_void = core::ptr::null_mut();
+pub static mut pd: *mut c_void = core::ptr::null_mut();
+pub static mut dev: *mut c_void = core::ptr::null_mut();
+    if (cpumask_test_cpu(cpu, cpu_done_mask)) {
     continue;
+    }
     policy = cpufreq_cpu_get(cpu);
     if (!policy) {
-    failed_cpus++;
+    failed_cpus += 1;
     continue;
     }
     cpufreq_cpu_put(policy);
     dev = get_cpu_device(cpu);
     pd = em_pd_get(dev);
-    if (!pd || em_is_artificial(pd))
+    if (!pd || em_is_artificial(pd)) {
     continue;
+    }
     cpumask_or(cpu_done_mask, cpu_done_mask,
     em_span_cpus(pd));
     em_adjust_new_capacity(cpu, dev, pd);
     }
-    if (failed_cpus)
+    if (failed_cpus) {
     schedule_delayed_work(&em_update_work, msecs_to_jiffies(1000));
+    }
     free_cpumask_var(cpu_done_mask);
     }
 #[no_mangle]
 unsafe extern "C" fn em_update_workfn(work: *mut work_struct) {
-    static void em_update_workfn(struct work_struct *work)
-    {
     em_check_capacity_update();
     }
 //
@@ -807,13 +1056,13 @@ unsafe extern "C" fn em_update_workfn(work: *mut work_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn em_dev_update_chip_binning(dev: *mut device) -> c_int {
-    int em_dev_update_chip_binning(struct device *dev)
-    {
-    struct em_perf_table *em_table;
-    struct em_perf_domain *pd;
-    int i, ret;
-    if (IS_ERR_OR_NULL(dev))
+pub static mut em_table: *mut c_void = core::ptr::null_mut();
+pub static mut pd: *mut c_void = core::ptr::null_mut();
+    let mut i = 0;
+    let mut ret = 0;
+    if (IS_ERR_OR_NULL(dev)) {
     return -EINVAL;
+    }
     pd = em_pd_get(dev);
     if (!pd) {
     dev_warn(dev, "Couldn't find Energy Model\n");
@@ -825,9 +1074,9 @@ pub unsafe extern "C" fn em_dev_update_chip_binning(dev: *mut device) -> c_int {
     return -ENOMEM;
     }
 // Update power values which might change due to new voltage in OPPs
-    for (i = 0; i < pd.nr_perf_states; i++) {
-    let mut freq: c_ulong = em_table.state[i].frequency;
-    unsigned long power;
+    while (i < pd.nr_perf_states) {
+pub static mut freq: c_ulong = 0;
+    let mut power = 0;
     ret = dev_pm_opp_calc_power(dev, &power, &freq);
     if (ret) {
     em_table_free(em_table);
@@ -850,27 +1099,30 @@ pub unsafe extern "C" fn em_dev_update_chip_binning(dev: *mut device) -> c_int {
 // and does internal translation to performance levels.
 // Returns 0 on success or -EINVAL when failed.
 //
-    int em_update_performance_limits(struct em_perf_domain *pd,
-    unsigned long freq_min_khz, unsigned long freq_max_khz)
-    {
-    struct em_perf_state *table;
-    let mut min_ps: c_int = -1;
-    let mut max_ps: c_int = -1;
-    int i;
-    if (!pd)
+#[no_mangle]
+pub unsafe extern "C" fn em_update_performance_limits(pd: *mut em_perf_domain, freq_min_khz: c_ulong, freq_max_khz: c_ulong) -> c_int {
+pub static mut table: *mut c_void = core::ptr::null_mut();
+pub static mut min_ps: c_int = 0;
+pub static mut max_ps: c_int = 0;
+    let mut i = 0;
+    if (!pd) {
     return -EINVAL;
+    }
     rcu_read_lock();
     table = em_perf_state_from_pd(pd);
-    for (i = 0; i < pd.nr_perf_states; i++) {
-    if (freq_min_khz == table[i].frequency)
+    while (i < pd.nr_perf_states) {
+    if (freq_min_khz == table[i].frequency) {
     min_ps = i;
-    if (freq_max_khz == table[i].frequency)
+    }
+    if (freq_max_khz == table[i].frequency) {
     max_ps = i;
+    }
     }
     rcu_read_unlock();
 // Only update when both are found and sane
-    if (min_ps < 0 || max_ps < 0 || max_ps < min_ps)
+    if (min_ps < 0 || max_ps < 0 || max_ps < min_ps) {
     return -EINVAL;
+    }
 // Guard simultaneous updates and make them atomic
     mutex_lock(&em_pd_mutex);
     pd.min_perf_state = min_ps;
@@ -881,15 +1133,11 @@ pub unsafe extern "C" fn em_dev_update_chip_binning(dev: *mut device) -> c_int {
     EXPORT_SYMBOL_GPL(em_update_performance_limits);
 #[no_mangle]
 unsafe extern "C" fn rebuild_sd_workfn(work: *mut work_struct) {
-    static void rebuild_sd_workfn(struct work_struct *work)
-    {
     rebuild_sched_domains_energy();
     }
 #[no_mangle]
 pub unsafe extern "C" fn em_rebuild_sched_domains() {
-    void em_rebuild_sched_domains(void)
-    {
-    static DECLARE_WORK(rebuild_sd_work, rebuild_sd_workfn);
+pub static mut rebuild_sd_work: usize = 0;
 //
 // When called from the cpufreq_register_driver() path, the
 // cpu_hotplug_lock is already held, so use a work item to
@@ -898,28 +1146,29 @@ pub unsafe extern "C" fn em_rebuild_sched_domains() {
     schedule_work(&rebuild_sd_work);
     }
 
-    int for_each_em_perf_domain(int (*cb)(struct em_perf_domain*, void *),
-    void *data)
-    {
-    struct em_perf_domain *pd;
+#[no_mangle]
+pub unsafe extern "C" fn for_each_em_perf_domain(data: *mut c_void) -> c_int {
+pub static mut pd: *mut c_void = core::ptr::null_mut();
     lockdep_assert_not_held(&em_pd_mutex);
     guard(mutex)(&em_pd_list_mutex);
     list_for_each_entry(pd, &em_pd_list, node) {
-    int ret;
+    let mut ret = 0;
     ret = cb(pd, data);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     }
     return 0;
     }
-    struct em_perf_domain *em_perf_domain_get_by_id(int id)
-    {
-    struct em_perf_domain *pd;
+#[no_mangle]
+pub unsafe extern "C" fn em_perf_domain_get_by_id(id: c_int) -> *mut c_void {
+pub static mut pd: *mut c_void = core::ptr::null_mut();
     lockdep_assert_not_held(&em_pd_mutex);
     guard(mutex)(&em_pd_list_mutex);
     list_for_each_entry(pd, &em_pd_list, node) {
-    if (pd.id == id)
+    if (pd.id == id) {
     return pd;
+    }
     }
     return core::ptr::null_mut();
     }

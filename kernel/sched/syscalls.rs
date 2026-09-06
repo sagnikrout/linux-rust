@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -48,17 +298,17 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 
 #[no_mangle]
 pub unsafe extern "C" fn __normal_prio(policy: c_int, rt_prio: c_int, nice: c_int) -> c_int {
-    static inline int __normal_prio(int policy, int rt_prio, int nice)
-    {
-    int prio;
-    if (dl_policy(policy))
+    let mut prio = 0;
+    if (dl_policy(policy)) {
     prio = MAX_DL_PRIO - 1;
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: rt_policy(policy)) -> else {
-    else if (rt_policy(policy))
+    }
+
+    else if (rt_policy(policy)) {
     prio = MAX_RT_PRIO - 1 - rt_prio;
-    else
+    }
+    else {
     prio = NICE_TO_PRIO(nice);
+    }
     return prio;
     }
 //
@@ -70,8 +320,6 @@ pub unsafe extern "C" fn if(_arg: rt_policy(policy)) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn normal_prio(p: *mut task_struct) -> c_int {
-    static inline int normal_prio(struct task_struct *p)
-    {
     return __normal_prio(p.policy, p.rt_priority, PRIO_TO_NICE(p.static_prio));
     }
 //
@@ -83,25 +331,23 @@ pub unsafe extern "C" fn normal_prio(p: *mut task_struct) -> c_int {
 //
 #[no_mangle]
 unsafe extern "C" fn effective_prio(p: *mut task_struct) -> c_int {
-    static int effective_prio(struct task_struct *p)
-    {
     p.normal_prio = normal_prio(p);
 //
 // If we are RT tasks or we were boosted to RT priority,
 // keep the priority unchanged. Otherwise, update priority
 // to the normal priority:
 //
-    if (!rt_or_dl_prio(p.prio))
+    if (!rt_or_dl_prio(p.prio)) {
     return p.normal_prio;
+    }
     return p.prio;
     }
 #[no_mangle]
 pub unsafe extern "C" fn set_user_nice(p: *mut task_struct, nice: c_long) {
-    void set_user_nice(struct task_struct *p, long nice)
-    {
-    int old_prio;
-    if (task_nice(p) == nice || nice < MIN_NICE || nice > MAX_NICE)
+    let mut old_prio = 0;
+    if (task_nice(p) == nice || nice < MIN_NICE || nice > MAX_NICE) {
     return;
+    }
 //
 // We have to be careful, if called from sys_setpriority(),
 // the task might be in the middle of scheduling on another CPU.
@@ -135,10 +381,8 @@ pub unsafe extern "C" fn set_user_nice(p: *mut task_struct, nice: c_long) {
 //
 #[no_mangle]
 unsafe extern "C" fn is_nice_reduction(p: *const task_struct, nice: c_int) -> bool {
-    static bool is_nice_reduction(const struct task_struct *p, const int nice)
-    {
 // Convert nice value [19,-20] to rlimit style value [1,40]:
-    let mut nice_rlim: c_int = nice_to_rlimit(nice);
+pub static mut nice_rlim: c_int = 0;
     return (nice_rlim <= task_rlimit(p, RLIMIT_NICE));
     }
 //
@@ -148,8 +392,6 @@ unsafe extern "C" fn is_nice_reduction(p: *const task_struct, nice: c_int) -> bo
 //
 #[no_mangle]
 pub unsafe extern "C" fn can_nice(p: *const task_struct, nice: c_int) -> c_int {
-    int can_nice(const struct task_struct *p, const int nice)
-    {
     return is_nice_reduction(p, nice) || capable(CAP_SYS_NICE);
     }
 
@@ -160,9 +402,10 @@ pub unsafe extern "C" fn can_nice(p: *const task_struct, nice: c_int) -> c_int {
 // sys_setpriority is a more generic, but much slower function that
 // does similar things.
 //
-    SYSCALL_DEFINE1(nice, int, increment)
-    {
-    long nice, retval;
+#[no_mangle]
+pub unsafe extern "C" fn sys_nice(increment: usize) -> c_long {
+    let mut nice = 0;
+    let mut retval = 0;
 //
 // Setpriority might change our priority at the same moment.
 // We don't have to worry. Conceptually one call occurs first
@@ -171,11 +414,13 @@ pub unsafe extern "C" fn can_nice(p: *const task_struct, nice: c_int) -> c_int {
     increment = clamp(increment, -NICE_WIDTH, NICE_WIDTH);
     nice = task_nice(current) + increment;
     nice = clamp_val(nice, MIN_NICE, MAX_NICE);
-    if (increment < 0 && !can_nice(current, nice))
+    if (increment < 0 && !can_nice(current, nice)) {
     return -EPERM;
+    }
     retval = security_task_setnice(current, nice);
-    if (retval)
+    if (retval) {
     return retval;
+    }
     set_user_nice(current, nice);
     return 0;
     }
@@ -194,8 +439,6 @@ pub unsafe extern "C" fn can_nice(p: *const task_struct, nice: c_int) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn task_prio(p: *const task_struct) -> c_int {
-    int task_prio(const struct task_struct *p)
-    {
     return p.prio - MAX_RT_PRIO;
     }
 //
@@ -206,8 +449,6 @@ pub unsafe extern "C" fn task_prio(p: *const task_struct) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn idle_cpu(cpu: c_int) -> c_int {
-    int idle_cpu(int cpu)
-    {
     return idle_rq(cpu_rq(cpu));
     }
 //
@@ -216,18 +457,17 @@ pub unsafe extern "C" fn idle_cpu(cpu: c_int) -> c_int {
 //
 // Return: The idle task for the CPU @cpu.
 //
-    struct task_struct *idle_task(int cpu)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn idle_task(cpu: c_int) -> *mut c_void {
     return cpu_rq(cpu).idle;
     }
 
 #[no_mangle]
 pub unsafe extern "C" fn sched_core_idle_cpu(cpu: c_int) -> c_int {
-    int sched_core_idle_cpu(int cpu)
-    {
-    struct rq *rq = cpu_rq(cpu);
-    if (sched_core_enabled(rq) && rq.curr == rq.idle)
+    let mut rq = cpu_rq(cpu);
+    if (sched_core_enabled(rq) && rq.curr == rq.idle) {
     return 1;
+    }
     return idle_cpu(cpu);
     }
 
@@ -237,39 +477,41 @@ pub unsafe extern "C" fn sched_core_idle_cpu(cpu: c_int) -> c_int {
 //
 // The task of @pid, if found. %NULL otherwise.
 //
-    static struct task_struct *find_process_by_pid(pid_t pid)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn find_process_by_pid(pid: pid_t) -> *mut c_void {
     return pid ? find_task_by_vpid(pid) : current;
     }
-    static struct task_struct *find_get_task(pid_t pid)
-    {
-    struct task_struct *p;
+#[no_mangle]
+pub unsafe extern "C" fn find_get_task(pid: pid_t) -> *mut c_void {
+pub static mut p: *mut c_void = core::ptr::null_mut();
     guard(rcu)();
     p = find_process_by_pid(pid);
-    if (likely(p))
+    if (likely(p)) {
     get_task_struct(p);
+    }
     return p;
     }
-    DEFINE_CLASS(find_get_task, struct task_struct *, if (_T) put_task_struct(_T),
+    DEFINE_CLASS(find_get_task, task_struct *, if (_T) put_task_struct(_T),
     find_get_task(pid), pid_t pid)
 //
 // sched_setparam() passes in -1 for its policy, to let the functions
 // it calls know not to change it.
 //
 
-    static void __setscheduler_params(struct task_struct *p,
-    const struct sched_attr *attr)
-    {
-    let mut policy: c_int = attr.sched_policy;
-    if (policy == SETPARAM_POLICY)
-    policy = p.policy;
-    p.policy = policy;
-    if (dl_policy(policy))
-    __setparam_dl(p, attr);
 #[no_mangle]
-pub unsafe extern "C" fn if(_arg: fair_policy(policy)) -> else {
-    else if (fair_policy(policy))
+pub unsafe extern "C" fn __setscheduler_params(p: *mut task_struct, attr: *mut sched_attr) {
+pub static mut policy: c_int = 0;
+    if (policy == SETPARAM_POLICY) {
+    policy = p.policy;
+    }
+    p.policy = policy;
+    if (dl_policy(policy)) {
+    __setparam_dl(p, attr);
+    }
+
+    else if (fair_policy(policy)) {
     __setparam_fair(p, attr);
+    }
 // rt-policy tasks do not have a timerslack
     if (rt_or_dl_task_policy(p)) {
     p.timer_slack_ns = 0;
@@ -291,19 +533,15 @@ pub unsafe extern "C" fn if(_arg: fair_policy(policy)) -> else {
 //
 #[no_mangle]
 unsafe extern "C" fn check_same_owner(p: *mut task_struct) -> bool {
-    static bool check_same_owner(struct task_struct *p)
-    {
-    const struct cred *cred = current_cred(), *pcred;
+    let mut cred = current_cred(), *pcred;
     guard(rcu)();
     pcred = __task_cred(p);
     return (uid_eq(cred.euid, pcred.euid) ||
     uid_eq(cred.euid, pcred.uid));
     }
 
-    static inline void __setscheduler_dl_pi(int newprio, int policy,
-    struct task_struct *p,
-    struct sched_change_ctx *scope)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __setscheduler_dl_pi(newprio: c_int, policy: c_int, p: *mut task_struct, scope: *mut sched_change_ctx) {
 //
 // In case a DEADLINE task (either proper or boosted) gets
 // setscheduled to a lower priority class, check if it neeeds to
@@ -311,7 +549,7 @@ unsafe extern "C" fn check_same_owner(p: *mut task_struct) -> bool {
 // sure replenishment happens with the next enqueue.
 //
     if (dl_prio(newprio) && !dl_policy(policy)) {
-    struct task_struct *pi_task = rt_mutex_get_top_task(p);
+    let mut pi_task = rt_mutex_get_top_task(p);
     if (pi_task) {
     p.dl.pi_se = pi_task.dl.pi_se;
     scope.flags |= ENQUEUE_REPLENISH;
@@ -319,29 +557,31 @@ unsafe extern "C" fn check_same_owner(p: *mut task_struct) -> bool {
     }
     }
 
-    static inline void __setscheduler_dl_pi(int newprio, int policy,
-    struct task_struct *p,
-    struct sched_change_ctx *scope)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: __setscheduler_dl_pi
+pub unsafe extern "C" fn __setscheduler_dl_pi_dup(newprio: c_int, policy: c_int, p: *mut task_struct, scope: *mut sched_change_ctx) {
     }
 
-    static int uclamp_validate(struct task_struct *p,
-    const struct sched_attr *attr)
-    {
-    let mut util_min: c_int = p.uclamp_req[UCLAMP_MIN].value;
-    let mut util_max: c_int = p.uclamp_req[UCLAMP_MAX].value;
+#[no_mangle]
+pub unsafe extern "C" fn uclamp_validate(p: *mut task_struct, attr: *mut sched_attr) -> c_int {
+pub static mut util_min: c_int = 0;
+pub static mut util_max: c_int = 0;
     if (attr.sched_flags & SCHED_FLAG_UTIL_CLAMP_MIN) {
     util_min = attr.sched_util_min;
-    if (util_min + 1 > SCHED_CAPACITY_SCALE + 1)
+    if (util_min + 1 > SCHED_CAPACITY_SCALE + 1) {
     return -EINVAL;
+    }
     }
     if (attr.sched_flags & SCHED_FLAG_UTIL_CLAMP_MAX) {
     util_max = attr.sched_util_max;
-    if (util_max + 1 > SCHED_CAPACITY_SCALE + 1)
+    if (util_max + 1 > SCHED_CAPACITY_SCALE + 1) {
     return -EINVAL;
     }
-    if (util_min != -1 && util_max != -1 && util_min > util_max)
+    }
+    if (util_min != -1 && util_max != -1 && util_min > util_max) {
     return -EINVAL;
+    }
 //
 // We have valid uclamp attributes; make sure uclamp is enabled.
 //
@@ -352,14 +592,13 @@ unsafe extern "C" fn check_same_owner(p: *mut task_struct) -> bool {
     sched_uclamp_enable();
     return 0;
     }
-    static bool uclamp_reset(const struct sched_attr *attr,
-    enum uclamp_id clamp_id,
-    struct uclamp_se *uc_se)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn uclamp_reset(attr: *mut sched_attr, clamp_id: uclamp_id, uc_se: *mut uclamp_se) -> bool {
 // Reset on sched class change for a non user-defined clamp value.
     if (likely(!(attr.sched_flags & SCHED_FLAG_UTIL_CLAMP)) &&
-    !uc_se.user_defined)
+    !uc_se.user_defined) {
     return true;
+    }
 // Reset on sched_util_{min,max} == -1.
     if (clamp_id == UCLAMP_MIN &&
     attr.sched_flags & SCHED_FLAG_UTIL_CLAMP_MIN &&
@@ -373,27 +612,30 @@ unsafe extern "C" fn check_same_owner(p: *mut task_struct) -> bool {
     }
     return false;
     }
-    static void __setscheduler_uclamp(struct task_struct *p,
-    const struct sched_attr *attr)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn __setscheduler_uclamp(p: *mut task_struct, attr: *mut sched_attr) {
     enum uclamp_id clamp_id;
     for_each_clamp_id(clamp_id) {
-    struct uclamp_se *uc_se = &p.uclamp_req[clamp_id];
-    unsigned int value;
-    if (!uclamp_reset(attr, clamp_id, uc_se))
+    let mut uc_se = &p.uclamp_req[clamp_id];
+    let mut value = 0;
+    if (!uclamp_reset(attr, clamp_id, uc_se)) {
     continue;
+    }
 //
 // RT by default have a 100% boost value that could be modified
 // at runtime.
 //
-    if (unlikely(rt_task(p) && clamp_id == UCLAMP_MIN))
+    if (unlikely(rt_task(p) && clamp_id == UCLAMP_MIN)) {
     value = sysctl_sched_uclamp_util_min_rt_default;
-    else
+    }
+    else {
     value = uclamp_none(clamp_id);
+    }
     uclamp_se_set(uc_se, value, false);
     }
-    if (likely(!(attr.sched_flags & SCHED_FLAG_UTIL_CLAMP)))
+    if (likely(!(attr.sched_flags & SCHED_FLAG_UTIL_CLAMP))) {
     return;
+    }
     if (attr.sched_flags & SCHED_FLAG_UTIL_CLAMP_MIN &&
     attr.sched_util_min != -1) {
     uclamp_se_set(&p.uclamp_req[UCLAMP_MIN],
@@ -406,37 +648,41 @@ unsafe extern "C" fn check_same_owner(p: *mut task_struct) -> bool {
     }
     }
 
-    static inline int uclamp_validate(struct task_struct *p,
-    const struct sched_attr *attr)
-    {
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: uclamp_validate
+pub unsafe extern "C" fn uclamp_validate_dup(p: *mut task_struct, attr: *mut sched_attr) -> c_int {
     return -EOPNOTSUPP;
     }
-    static void __setscheduler_uclamp(struct task_struct *p,
-    const struct sched_attr *attr) { }
+#[no_mangle]
+#[no_mangle]
+// duplicate fn: __setscheduler_uclamp
+pub unsafe extern "C" fn __setscheduler_uclamp_dup(p: *mut task_struct, attr: *mut sched_attr) { }
 
 //
 // Allow unprivileged RT tasks to decrease priority.
 // Only issue a capable test if needed and only once to avoid an audit
 // event on permitted non-privileged operations:
 //
-    static int user_check_sched_setscheduler(struct task_struct *p,
-    const struct sched_attr *attr,
-    int policy, int reset_on_fork)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn user_check_sched_setscheduler(p: *mut task_struct, attr: *mut sched_attr, policy: c_int, reset_on_fork: c_int) -> c_int {
     if (fair_policy(policy)) {
     if (attr.sched_nice < task_nice(p) &&
-    !is_nice_reduction(p, attr.sched_nice))
-    goto req_priv;
+    !is_nice_reduction(p, attr.sched_nice)) {
+// goto;
+    }
     }
     if (rt_policy(policy)) {
-    let mut rlim_rtprio: c_ulong = task_rlimit(p, RLIMIT_RTPRIO);
+pub static mut rlim_rtprio: c_ulong = 0;
 // Can't set/change the rt policy:
-    if (policy != p.policy && !rlim_rtprio)
-    goto req_priv;
+    if (policy != p.policy && !rlim_rtprio) {
+// goto;
+    }
 // Can't increase priority:
     if (attr.sched_priority > p.rt_priority &&
-    attr.sched_priority > rlim_rtprio)
-    goto req_priv;
+    attr.sched_priority > rlim_rtprio) {
+// goto;
+    }
     }
 //
 // Can't set/change SCHED_DEADLINE policy at all for now
@@ -444,80 +690,94 @@ unsafe extern "C" fn check_same_owner(p: *mut task_struct) -> bool {
 // unprivileged DL tasks to increase their relative deadline
 // or reduce their runtime (both ways reducing utilization)
 //
-    if (dl_policy(policy))
-    goto req_priv;
+    if (dl_policy(policy)) {
+// goto;
+    }
 //
 // Treat SCHED_IDLE as nice 20. Only allow a switch to
 // SCHED_NORMAL if the RLIMIT_NICE would normally permit it.
 //
     if (task_has_idle_policy(p) && !idle_policy(policy)) {
-    if (!is_nice_reduction(p, task_nice(p)))
-    goto req_priv;
+    if (!is_nice_reduction(p, task_nice(p))) {
+// goto;
+    }
     }
 // Can't change other user's priorities:
-    if (!check_same_owner(p))
-    goto req_priv;
+    if (!check_same_owner(p)) {
+// goto;
+    }
 // Normal users shall not reset the sched_reset_on_fork flag:
-    if (p.sched_reset_on_fork && !reset_on_fork)
-    goto req_priv;
+    if (p.sched_reset_on_fork && !reset_on_fork) {
+// goto;
+    }
     return 0;
-    req_priv:
-    if (!capable(CAP_SYS_NICE))
+// label;
+    if (!capable(CAP_SYS_NICE)) {
     return -EPERM;
+    }
     return 0;
     }
-    int __sched_setscheduler(struct task_struct *p,
-    const struct sched_attr *attr,
-    bool user, bool pi)
-    {
-    let mut oldpolicy: c_int = -1, policy = attr.sched_policy;
-    int retval, oldprio, newprio;
-    const struct sched_class *prev_class, *next_class;
-    struct balance_callback *head;
-    struct rq_flags rf;
-    int reset_on_fork;
-    let mut queue_flags: c_int = DEQUEUE_SAVE | DEQUEUE_MOVE | DEQUEUE_NOCLOCK;
-    struct rq *rq;
-    let mut cpuset_locked: bool = false;
+#[no_mangle]
+pub unsafe extern "C" fn __sched_setscheduler(p: *mut task_struct, attr: *mut sched_attr, user: bool, pi: bool) -> c_int {
+pub static mut oldpolicy: c_int = 0;
+    let mut retval = 0;
+    let mut oldprio = 0;
+    let mut newprio = 0;
+    let mut prev_class = core::ptr::null_mut();
+    let mut next_class = core::ptr::null_mut();
+pub static mut head: *mut c_void = core::ptr::null_mut();
+pub static mut rf: usize = 0;
+    let mut reset_on_fork = 0;
+pub static mut queue_flags: c_int = 0;
+pub static mut rq: *mut c_void = core::ptr::null_mut();
+pub static mut cpuset_locked: bool = false;
 // The pi code expects interrupts enabled
-    BUG_ON(pi && in_interrupt());
-    recheck:
+    BUG_ON!(pi && in_interrupt());
+// label;
 // Double check policy once rq lock held:
     if (policy < 0) {
     reset_on_fork = p.sched_reset_on_fork;
     policy = oldpolicy = p.policy;
     } else {
     reset_on_fork = !!(attr.sched_flags & SCHED_FLAG_RESET_ON_FORK);
-    if (!valid_policy(policy))
+    if (!valid_policy(policy)) {
     return -EINVAL;
     }
-    if (attr.sched_flags & ~(SCHED_FLAG_ALL | SCHED_FLAG_SUGOV))
+    }
+    if (attr.sched_flags & ~(SCHED_FLAG_ALL | SCHED_FLAG_SUGOV)) {
     return -EINVAL;
+    }
 //
 // Valid priorities for SCHED_FIFO and SCHED_RR are
 // 1..MAX_RT_PRIO-1, valid priority for SCHED_NORMAL,
 // SCHED_BATCH and SCHED_IDLE is 0.
 //
-    if (attr.sched_priority > MAX_RT_PRIO-1)
+    if (attr.sched_priority > MAX_RT_PRIO-1) {
     return -EINVAL;
+    }
     if ((dl_policy(policy) && !__checkparam_dl(attr)) ||
-    (rt_policy(policy) != (attr.sched_priority != 0)))
+    (rt_policy(policy) != (attr.sched_priority != 0))) {
     return -EINVAL;
+    }
     if (user) {
     retval = user_check_sched_setscheduler(p, attr, policy, reset_on_fork);
-    if (retval)
+    if (retval) {
     return retval;
-    if (attr.sched_flags & SCHED_FLAG_SUGOV)
+    }
+    if (attr.sched_flags & SCHED_FLAG_SUGOV) {
     return -EINVAL;
+    }
     retval = security_task_setscheduler(p);
-    if (retval)
+    if (retval) {
     return retval;
+    }
     }
 // Update task specific "requested" clamps
     if (attr.sched_flags & SCHED_FLAG_UTIL_CLAMP) {
     retval = uclamp_validate(p, attr);
-    if (retval)
+    if (retval) {
     return retval;
+    }
     }
 //
 // SCHED_DEADLINE bandwidth accounting relies on stable cpusets
@@ -541,11 +801,12 @@ unsafe extern "C" fn check_same_owner(p: *mut task_struct) -> bool {
 //
     if (p == rq.stop) {
     retval = -EINVAL;
-    goto unlock;
+// goto;
     }
     retval = scx_check_setscheduler(p, policy);
-    if (retval)
-    goto unlock;
+    if (retval) {
+// goto;
+    }
 //
 // If not changing anything there's no need to proceed further,
 // but store a possible modification of reset_on_fork.
@@ -553,19 +814,23 @@ unsafe extern "C" fn check_same_owner(p: *mut task_struct) -> bool {
     if (unlikely(policy == p.policy)) {
     if (fair_policy(policy) &&
     (attr.sched_nice != task_nice(p) ||
-    (attr.sched_runtime != p.se.slice)))
-    goto change;
-    if (rt_policy(policy) && attr.sched_priority != p.rt_priority)
-    goto change;
-    if (dl_policy(policy) && dl_param_changed(p, attr))
-    goto change;
-    if (attr.sched_flags & SCHED_FLAG_UTIL_CLAMP)
-    goto change;
+    (attr.sched_runtime != p.se.slice))) {
+// goto;
+    }
+    if (rt_policy(policy) && attr.sched_priority != p.rt_priority) {
+// goto;
+    }
+    if (dl_policy(policy) && dl_param_changed(p, attr)) {
+// goto;
+    }
+    if (attr.sched_flags & SCHED_FLAG_UTIL_CLAMP) {
+// goto;
+    }
     p.sched_reset_on_fork = reset_on_fork;
     retval = 0;
-    goto unlock;
+// goto;
     }
-    change:
+// label;
     if (user) {
 
 //
@@ -577,12 +842,12 @@ unsafe extern "C" fn check_same_owner(p: *mut task_struct) -> bool {
     task_group(p).rt_bandwidth.rt_runtime == 0 &&
     !task_group_is_autogroup(task_group(p))) {
     retval = -EPERM;
-    goto unlock;
+// goto;
     }
 
     if (dl_bandwidth_enabled() && dl_policy(policy) &&
     !(attr.sched_flags & SCHED_FLAG_SUGOV)) {
-    cpumask_t *span = rq.rd.span;
+    let mut span = rq.rd.span;
 //
 // Don't allow tasks with an affinity mask smaller than
 // the entire root_domain to become SCHED_DEADLINE. We
@@ -591,7 +856,7 @@ unsafe extern "C" fn check_same_owner(p: *mut task_struct) -> bool {
     if (!cpumask_subset(span, p.cpus_ptr) ||
     rq.rd.dl_bw.bw == 0) {
     retval = -EPERM;
-    goto unlock;
+// goto;
     }
     }
     }
@@ -599,9 +864,10 @@ unsafe extern "C" fn check_same_owner(p: *mut task_struct) -> bool {
     if (unlikely(oldpolicy != -1 && oldpolicy != p.policy)) {
     policy = oldpolicy = -1;
     task_rq_unlock(rq, p, &rf);
-    if (cpuset_locked)
+    if (cpuset_locked) {
     cpuset_unlock();
-    goto recheck;
+    }
+// goto;
     }
 //
 // If setscheduling to SCHED_DEADLINE (or changing the parameters
@@ -610,7 +876,7 @@ unsafe extern "C" fn check_same_owner(p: *mut task_struct) -> bool {
 //
     if ((dl_policy(policy) || dl_task(p)) && sched_dl_overflow(p, policy, attr)) {
     retval = -EBUSY;
-    goto unlock;
+// goto;
     }
     p.sched_reset_on_fork = reset_on_fork;
     oldprio = p.prio;
@@ -624,13 +890,15 @@ unsafe extern "C" fn check_same_owner(p: *mut task_struct) -> bool {
 // itself.
 //
     newprio = rt_effective_prio(p, newprio);
-    if (newprio == oldprio && !dl_prio(newprio))
+    if (newprio == oldprio && !dl_prio(newprio)) {
     queue_flags &= ~DEQUEUE_MOVE;
+    }
     }
     prev_class = p.sched_class;
     next_class = __setscheduler_class(policy, newprio);
-    if (prev_class != next_class)
+    if (prev_class != next_class) {
     queue_flags |= DEQUEUE_CLASS;
+    }
     scoped_guard (sched_change, p, queue_flags) {
     if (!(attr.sched_flags & SCHED_FLAG_KEEP_PARAMS)) {
     __setscheduler_params(p, attr);
@@ -644,8 +912,9 @@ unsafe extern "C" fn check_same_owner(p: *mut task_struct) -> bool {
 // We enqueue to tail when the priority of a task is
 // increased (user space view).
 //
-    if (oldprio < p.prio)
+    if (oldprio < p.prio) {
     scope.flags |= ENQUEUE_HEAD;
+    }
     }
     }
 // Avoid rq from going away on us:
@@ -653,30 +922,28 @@ unsafe extern "C" fn check_same_owner(p: *mut task_struct) -> bool {
     head = splice_balance_callbacks(rq);
     task_rq_unlock(rq, p, &rf);
     if (pi) {
-    if (cpuset_locked)
+    if (cpuset_locked) {
     cpuset_unlock();
+    }
     rt_mutex_adjust_pi(p);
     }
 // Run balance callbacks after we've adjusted the PI chain:
     balance_callbacks(rq, head);
     preempt_enable();
     return 0;
-    unlock:
+// label;
     task_rq_unlock(rq, p, &rf);
-    if (cpuset_locked)
+    if (cpuset_locked) {
     cpuset_unlock();
+    }
     return retval;
     }
-    static int _sched_setscheduler(struct task_struct *p, int policy,
-    const struct sched_param *param, bool check)
-    {
-    struct sched_attr attr = {
-    .sched_policy   = policy,
-    .sched_priority = param.sched_priority,
-    .sched_nice	= PRIO_TO_NICE(p.static_prio),
-    };
-    if (p.se.custom_slice)
+#[no_mangle]
+pub unsafe extern "C" fn _sched_setscheduler(p: *mut task_struct, policy: c_int, param: *mut sched_param, check: bool) -> c_int {
+pub static mut sched_attr: usize = 0;
+    if (p.se.custom_slice) {
     attr.sched_runtime = p.se.slice;
+    }
 // Fixup the legacy SCHED_RESET_ON_FORK hack.
     if ((policy != SETPARAM_POLICY) && (policy & SCHED_RESET_ON_FORK)) {
     attr.sched_flags |= SCHED_FLAG_RESET_ON_FORK;
@@ -697,21 +964,16 @@ unsafe extern "C" fn check_same_owner(p: *mut task_struct) -> bool {
 //
 // NOTE that the task may be already dead.
 //
-    int sched_setscheduler(struct task_struct *p, int policy,
-    const struct sched_param *param)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sched_setscheduler(p: *mut task_struct, policy: c_int, param: *mut sched_param) -> c_int {
     return _sched_setscheduler(p, policy, param, true);
     }
 #[no_mangle]
 pub unsafe extern "C" fn sched_setattr(p: *mut task_struct, attr: *const sched_attr) -> c_int {
-    int sched_setattr(struct task_struct *p, const struct sched_attr *attr)
-    {
     return __sched_setscheduler(p, attr, true, true);
     }
 #[no_mangle]
 pub unsafe extern "C" fn sched_setattr_nocheck(p: *mut task_struct, attr: *const sched_attr) -> c_int {
-    int sched_setattr_nocheck(struct task_struct *p, const struct sched_attr *attr)
-    {
     return __sched_setscheduler(p, attr, false, true);
     }
     EXPORT_SYMBOL_GPL(sched_setattr_nocheck);
@@ -728,9 +990,8 @@ pub unsafe extern "C" fn sched_setattr_nocheck(p: *mut task_struct, attr: *const
 //
 // Return: 0 on success. An error code otherwise.
 //
-    int sched_setscheduler_nocheck(struct task_struct *p, int policy,
-    const struct sched_param *param)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sched_setscheduler_nocheck(p: *mut task_struct, policy: c_int, param: *mut sched_param) -> c_int {
     return _sched_setscheduler(p, policy, param, false);
     }
 //
@@ -753,10 +1014,8 @@ pub unsafe extern "C" fn sched_setattr_nocheck(p: *mut task_struct, attr: *const
 //
 #[no_mangle]
 pub unsafe extern "C" fn sched_set_fifo(p: *mut task_struct) {
-    void sched_set_fifo(struct task_struct *p)
-    {
-    let mut sp: sched_param = { .sched_priority = MAX_RT_PRIO / 2 };
-    WARN_ON_ONCE(sched_setscheduler_nocheck(p, SCHED_FIFO, &sp) != 0);
+pub static mut sp: sched_param = 0;
+    WARN_ON_ONCE!(sched_setscheduler_nocheck(p, SCHED_FIFO, &sp) != 0);
     }
     EXPORT_SYMBOL_GPL(sched_set_fifo);
 //
@@ -764,10 +1023,8 @@ pub unsafe extern "C" fn sched_set_fifo(p: *mut task_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn sched_set_fifo_low(p: *mut task_struct) {
-    void sched_set_fifo_low(struct task_struct *p)
-    {
-    let mut sp: sched_param = { .sched_priority = 1 };
-    WARN_ON_ONCE(sched_setscheduler_nocheck(p, SCHED_FIFO, &sp) != 0);
+pub static mut sp: sched_param = 0;
+    WARN_ON_ONCE!(sched_setscheduler_nocheck(p, SCHED_FIFO, &sp) != 0);
     }
     EXPORT_SYMBOL_GPL(sched_set_fifo_low);
 //
@@ -779,77 +1036,73 @@ pub unsafe extern "C" fn sched_set_fifo_low(p: *mut task_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn sched_set_fifo_secondary(p: *mut task_struct) {
-    void sched_set_fifo_secondary(struct task_struct *p)
-    {
-    let mut sp: sched_param = { .sched_priority = MAX_RT_PRIO / 2 - 1 };
-    WARN_ON_ONCE(sched_setscheduler_nocheck(p, SCHED_FIFO, &sp) != 0);
+pub static mut sp: sched_param = 0;
+    WARN_ON_ONCE!(sched_setscheduler_nocheck(p, SCHED_FIFO, &sp) != 0);
     }
 #[no_mangle]
 pub unsafe extern "C" fn sched_set_normal(p: *mut task_struct, nice: c_int) {
-    void sched_set_normal(struct task_struct *p, int nice)
-    {
-    struct sched_attr attr = {
-    .sched_policy = SCHED_NORMAL,
-    .sched_nice = nice,
-    };
-    WARN_ON_ONCE(sched_setattr_nocheck(p, &attr) != 0);
+pub static mut sched_attr: usize = 0;
+    WARN_ON_ONCE!(sched_setattr_nocheck(p, &attr) != 0);
     }
     EXPORT_SYMBOL_GPL(sched_set_normal);
-    static int
-    do_sched_setscheduler(pid_t pid, int policy, struct sched_param __user *param)
-    {
-    struct sched_param lparam;
-    if (unlikely(!param || pid < 0))
+#[no_mangle]
+pub unsafe extern "C" fn do_sched_setscheduler(pid: pid_t, policy: c_int, param: *mut sched_param) -> c_int {
+pub static mut lparam: usize = 0;
+    if (unlikely(!param || pid < 0)) {
     return -EINVAL;
-    if (copy_from_user(&lparam, param, sizeof(struct sched_param)))
+    }
+    if (copy_from_user(&lparam, param, sizeof!(sched_param))) {
     return -EFAULT;
+    }
     CLASS(find_get_task, p)(pid);
-    if (!p)
+    if (!p) {
     return -ESRCH;
+    }
     return sched_setscheduler(p, policy, &lparam);
     }
 //
 // Mimics kernel/events/core.c perf_copy_attr().
 //
 #[no_mangle]
-unsafe extern "C" fn sched_copy_attr(uattr: *mut sched_attr __user, attr: *mut sched_attr) -> c_int {
-    static int sched_copy_attr(struct sched_attr __user *uattr, struct sched_attr *attr)
-    {
-    u32 size;
-    int ret;
+unsafe extern "C" fn sched_copy_attr(uattr: *mut sched_attr , attr: *mut sched_attr) -> c_int {
+    let mut size = 0;
+    let mut ret = 0;
 // Zero the full structure, so that a short copy will be nice:
-    memset(attr, 0, sizeof(*attr));
+    memset(attr, 0, sizeof!(*attr));
     ret = get_user(size, &uattr.size);
-    if (ret)
-    return ret;
-// ABI compatibility quirk:
-    if (!size)
-    size = SCHED_ATTR_SIZE_VER0;
-    if (size < SCHED_ATTR_SIZE_VER0 || size > PAGE_SIZE)
-    goto err_size;
-    ret = copy_struct_from_user(attr, sizeof(*attr), uattr, size);
     if (ret) {
-    if (ret == -E2BIG)
-    goto err_size;
+    return ret;
+    }
+// ABI compatibility quirk:
+    if (!size) {
+    size = SCHED_ATTR_SIZE_VER0;
+    }
+    if (size < SCHED_ATTR_SIZE_VER0 || size > PAGE_SIZE) {
+// goto;
+    }
+    ret = copy_struct_from_user(attr, sizeof!(*attr), uattr, size);
+    if (ret) {
+    if (ret == -E2BIG) {
+// goto;
+    }
     return ret;
     }
     if ((attr.sched_flags & SCHED_FLAG_UTIL_CLAMP) &&
-    size < SCHED_ATTR_SIZE_VER1)
+    size < SCHED_ATTR_SIZE_VER1) {
     return -EINVAL;
+    }
 //
 // XXX: Do we want to be lenient like existing syscalls; or do we want
 // to be strict and return an error on out-of-bounds values?
 //
     attr.sched_nice = clamp(attr.sched_nice, MIN_NICE, MAX_NICE);
     return 0;
-    err_size:
-    put_user(sizeof(*attr), &uattr.size);
+// label;
+    put_user(sizeof!(*attr), &uattr.size);
     return -E2BIG;
     }
 #[no_mangle]
 unsafe extern "C" fn get_params(p: *mut task_struct, attr: *mut sched_attr, flags: c_uint) {
-    static void get_params(struct task_struct *p, struct sched_attr *attr, unsigned int flags)
-    {
     if (task_has_dl_policy(p)) {
     __getparam_dl(p, attr, flags);
     } else if (task_has_rt_policy(p)) {
@@ -867,10 +1120,11 @@ unsafe extern "C" fn get_params(p: *mut task_struct, attr: *mut sched_attr, flag
 //
 // Return: 0 on success. An error code otherwise.
 //
-    SYSCALL_DEFINE3(sched_setscheduler, pid_t, pid, int, policy, struct sched_param __user *, param)
-    {
-    if (policy < 0)
+#[no_mangle]
+pub unsafe extern "C" fn sys_sched_setscheduler(pid: usize, policy: usize, param: usize) -> c_long {
+    if (policy < 0) {
     return -EINVAL;
+    }
     return do_sched_setscheduler(pid, policy, param);
     }
 //
@@ -880,8 +1134,8 @@ unsafe extern "C" fn get_params(p: *mut task_struct, attr: *mut sched_attr, flag
 //
 // Return: 0 on success. An error code otherwise.
 //
-    SYSCALL_DEFINE2(sched_setparam, pid_t, pid, struct sched_param __user *, param)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_sched_setparam(pid: usize, param: usize) -> c_long {
     return do_sched_setscheduler(pid, SETPARAM_POLICY, param);
     }
 //
@@ -890,25 +1144,30 @@ unsafe extern "C" fn get_params(p: *mut task_struct, attr: *mut sched_attr, flag
 // @uattr: structure containing the extended parameters.
 // @flags: for future extension.
 //
-    SYSCALL_DEFINE3(sched_setattr, pid_t, pid, struct sched_attr __user *, uattr,
-    unsigned int, flags)
-    {
-    struct sched_attr attr;
-    int retval;
-    if (unlikely(!uattr || pid < 0 || flags))
+#[no_mangle]
+pub unsafe extern "C" fn sys_sched_setattr(pid: usize, uattr: usize, flags: usize) -> c_long {
+pub static mut attr: usize = 0;
+    let mut retval = 0;
+    if (unlikely(!uattr || pid < 0 || flags)) {
     return -EINVAL;
+    }
     retval = sched_copy_attr(uattr, &attr);
-    if (retval)
+    if (retval) {
     return retval;
-    if ((int)attr.sched_policy < 0)
+    }
+    if ((int)attr.sched_policy < 0) {
     return -EINVAL;
-    if (attr.sched_flags & SCHED_FLAG_KEEP_POLICY)
+    }
+    if (attr.sched_flags & SCHED_FLAG_KEEP_POLICY) {
     attr.sched_policy = SETPARAM_POLICY;
+    }
     CLASS(find_get_task, p)(pid);
-    if (!p)
+    if (!p) {
     return -ESRCH;
-    if (attr.sched_flags & SCHED_FLAG_KEEP_PARAMS)
+    }
+    if (attr.sched_flags & SCHED_FLAG_KEEP_PARAMS) {
     get_params(p, &attr, 0);
+    }
     return sched_setattr(p, &attr);
     }
 //
@@ -918,21 +1177,24 @@ unsafe extern "C" fn get_params(p: *mut task_struct, attr: *mut sched_attr, flag
 // Return: On success, the policy of the thread. Otherwise, a negative error
 // code.
 //
-    SYSCALL_DEFINE1(sched_getscheduler, pid_t, pid)
-    {
-    struct task_struct *p;
-    int retval;
-    if (pid < 0)
+#[no_mangle]
+pub unsafe extern "C" fn sys_sched_getscheduler(pid: usize) -> c_long {
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    let mut retval = 0;
+    if (pid < 0) {
     return -EINVAL;
+    }
     guard(rcu)();
     p = find_process_by_pid(pid);
-    if (!p)
+    if (!p) {
     return -ESRCH;
+    }
     retval = security_task_getscheduler(p);
     if (!retval) {
     retval = p.policy;
-    if (p.sched_reset_on_fork)
+    if (p.sched_reset_on_fork) {
     retval |= SCHED_RESET_ON_FORK;
+    }
     }
     return retval;
     }
@@ -944,59 +1206,67 @@ unsafe extern "C" fn get_params(p: *mut task_struct, attr: *mut sched_attr, flag
 // Return: On success, 0 and the RT priority is in @param. Otherwise, an error
 // code.
 //
-    SYSCALL_DEFINE2(sched_getparam, pid_t, pid, struct sched_param __user *, param)
-    {
-    let mut lp: sched_param = { .sched_priority = 0 };
-    struct task_struct *p;
-    int retval;
-    if (unlikely(!param || pid < 0))
+#[no_mangle]
+pub unsafe extern "C" fn sys_sched_getparam(pid: usize, param: usize) -> c_long {
+pub static mut lp: sched_param = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    let mut retval = 0;
+    if (unlikely(!param || pid < 0)) {
     return -EINVAL;
+    }
     scoped_guard (rcu) {
     p = find_process_by_pid(pid);
-    if (!p)
+    if (!p) {
     return -ESRCH;
+    }
     retval = security_task_getscheduler(p);
-    if (retval)
+    if (retval) {
     return retval;
-    if (task_has_rt_policy(p))
+    }
+    if (task_has_rt_policy(p)) {
     lp.sched_priority = p.rt_priority;
+    }
     }
 //
 // This one might sleep, we cannot do it with a spinlock held ...
 //
-    return copy_to_user(param, &lp, sizeof(*param)) ? -EFAULT : 0;
+    return copy_to_user(param, &lp, sizeof!(*param)) ? -EFAULT : 0;
     }
 //
 // sys_sched_getattr - similar to sched_getparam, but with sched_attr
 // @pid: the pid in question.
 // @uattr: structure containing the extended parameters.
-// @usize: sizeof(attr) for fwd/bwd comp.
+// @usize: sizeof!(attr) for fwd/bwd comp.
 // @flags: for future extension.
 //
-    SYSCALL_DEFINE4(sched_getattr, pid_t, pid, struct sched_attr __user *, uattr,
-    unsigned int, usize, unsigned int, flags)
-    {
-    let mut kattr: sched_attr = { };
-    struct task_struct *p;
-    int retval;
+#[no_mangle]
+pub unsafe extern "C" fn sys_sched_getattr(pid: usize, uattr: usize, usize: usize, flags: usize) -> c_long {
+pub static mut kattr: sched_attr = 0;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    let mut retval = 0;
     if (unlikely(!uattr || pid < 0 || usize > PAGE_SIZE ||
-    usize < SCHED_ATTR_SIZE_VER0))
-    return -EINVAL;
-    scoped_guard (rcu) {
-    p = find_process_by_pid(pid);
-    if (!p)
-    return -ESRCH;
-    if (flags) {
-    if (!task_has_dl_policy(p) ||
-    flags != SCHED_GETATTR_FLAG_DL_DYNAMIC)
+    usize < SCHED_ATTR_SIZE_VER0)) {
     return -EINVAL;
     }
+    scoped_guard (rcu) {
+    p = find_process_by_pid(pid);
+    if (!p) {
+    return -ESRCH;
+    }
+    if (flags) {
+    if (!task_has_dl_policy(p) ||
+    flags != SCHED_GETATTR_FLAG_DL_DYNAMIC) {
+    return -EINVAL;
+    }
+    }
     retval = security_task_getscheduler(p);
-    if (retval)
+    if (retval) {
     return retval;
+    }
     kattr.sched_policy = p.policy;
-    if (p.sched_reset_on_fork)
+    if (p.sched_reset_on_fork) {
     kattr.sched_flags |= SCHED_FLAG_RESET_ON_FORK;
+    }
     get_params(p, &kattr, flags);
     kattr.sched_flags &= SCHED_FLAG_ALL;
 
@@ -1009,25 +1279,25 @@ unsafe extern "C" fn get_params(p: *mut task_struct, attr: *mut sched_attr, flag
     kattr.sched_util_max = p.uclamp_req[UCLAMP_MAX].value;
 
     }
-    kattr.size = min(usize, sizeof(kattr));
-    return copy_struct_to_user(uattr, usize, &kattr, sizeof(kattr), core::ptr::null_mut());
+    kattr.size = min(usize, sizeof!(kattr));
+    return copy_struct_to_user(uattr, usize, &kattr, sizeof!(kattr), core::ptr::null_mut());
     }
 #[no_mangle]
 pub unsafe extern "C" fn dl_task_check_affinity(p: *mut task_struct, mask: *const cpumask) -> c_int {
-    int dl_task_check_affinity(struct task_struct *p, const struct cpumask *mask)
-    {
 //
 // If the task isn't a deadline task or admission control is
 // disabled then we don't care about affinity changes.
 //
-    if (!task_has_dl_policy(p) || !dl_bandwidth_enabled())
+    if (!task_has_dl_policy(p) || !dl_bandwidth_enabled()) {
     return 0;
+    }
 //
 // The special/sugov task isn't part of regular bandwidth/admission
 // control so let userspace change affinities.
 //
-    if (dl_entity_is_special(&p.dl))
+    if (dl_entity_is_special(&p.dl)) {
     return 0;
+    }
 //
 // Since bandwidth control happens on root_domain basis,
 // if admission test is enabled, we only admit -deadline
@@ -1035,32 +1305,34 @@ pub unsafe extern "C" fn dl_task_check_affinity(p: *mut task_struct, mask: *cons
 // root_domain.
 //
     guard(rcu)();
-    if (!cpumask_subset(task_rq(p).rd.span, mask))
+    if (!cpumask_subset(task_rq(p).rd.span, mask)) {
     return -EBUSY;
+    }
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn __sched_setaffinity(p: *mut task_struct, ctx: *mut affinity_context) -> c_int {
-    int __sched_setaffinity(struct task_struct *p, struct affinity_context *ctx)
-    {
-    int retval;
+    let mut retval = 0;
     cpumask_var_t cpus_allowed, new_mask;
-    if (!alloc_cpumask_var(&cpus_allowed, GFP_KERNEL))
+    if (!alloc_cpumask_var(&cpus_allowed, GFP_KERNEL)) {
     return -ENOMEM;
+    }
     if (!alloc_cpumask_var(&new_mask, GFP_KERNEL)) {
     retval = -ENOMEM;
-    goto out_free_cpus_allowed;
+// goto;
     }
     cpuset_cpus_allowed(p, cpus_allowed);
     cpumask_and(new_mask, ctx.new_mask, cpus_allowed);
     ctx.new_mask = new_mask;
     ctx.flags |= SCA_CHECK;
     retval = dl_task_check_affinity(p, new_mask);
-    if (retval)
-    goto out_free_new_mask;
+    if (retval) {
+// goto;
+    }
     retval = __set_cpus_allowed_ptr(p, ctx);
-    if (retval)
-    goto out_free_new_mask;
+    if (retval) {
+// goto;
+    }
     cpuset_cpus_allowed(p, cpus_allowed);
     if (!cpumask_subset(new_mask, cpus_allowed)) {
 //
@@ -1077,40 +1349,43 @@ pub unsafe extern "C" fn __sched_setaffinity(p: *mut task_struct, ctx: *mut affi
 // by that old user_cpus_ptr.
 //
     if (unlikely((ctx.flags & SCA_USER) && ctx.user_mask)) {
-    bool empty = !cpumask_and(new_mask, new_mask,
+    let mut empty = !cpumask_and(new_mask, new_mask,
     ctx.user_mask);
-    if (empty)
+    if (empty) {
     cpumask_copy(new_mask, cpus_allowed);
+    }
     }
     __set_cpus_allowed_ptr(p, ctx);
     retval = -EINVAL;
     }
-    out_free_new_mask:
+// label;
     free_cpumask_var(new_mask);
-    out_free_cpus_allowed:
+// label;
     free_cpumask_var(cpus_allowed);
     return retval;
     }
 #[no_mangle]
 pub unsafe extern "C" fn sched_setaffinity(pid: pid_t, in_mask: *const cpumask) -> c_long {
-    long sched_setaffinity(pid_t pid, const struct cpumask *in_mask)
-    {
-    struct affinity_context ac;
-    struct cpumask *user_mask;
-    int retval;
+pub static mut ac: usize = 0;
+pub static mut user_mask: *mut c_void = core::ptr::null_mut();
+    let mut retval = 0;
     CLASS(find_get_task, p)(pid);
-    if (!p)
+    if (!p) {
     return -ESRCH;
-    if (p.flags & PF_NO_SETAFFINITY)
+    }
+    if (p.flags & PF_NO_SETAFFINITY) {
     return -EINVAL;
+    }
     if (!check_same_owner(p)) {
     guard(rcu)();
-    if (!ns_capable(__task_cred(p).user_ns, CAP_SYS_NICE))
+    if (!ns_capable(__task_cred(p).user_ns, CAP_SYS_NICE)) {
     return -EPERM;
     }
+    }
     retval = security_task_setscheduler(p);
-    if (retval)
+    if (retval) {
     return retval;
+    }
 //
 // With non-SMP configs, user_cpus_ptr/user_mask isn't used and
 // alloc_user_cpus_ptr() returns NULL.
@@ -1121,7 +1396,7 @@ pub unsafe extern "C" fn sched_setaffinity(pid: pid_t, in_mask: *const cpumask) 
     } else {
     return -ENOMEM;
     }
-    ac = (struct affinity_context){
+    ac = (affinity_context){
     .new_mask  = in_mask,
     .user_mask = user_mask,
     .flags     = SCA_USER,
@@ -1130,15 +1405,15 @@ pub unsafe extern "C" fn sched_setaffinity(pid: pid_t, in_mask: *const cpumask) 
     kfree(ac.user_mask);
     return retval;
     }
-    static int get_user_cpu_mask(unsigned long __user *user_mask_ptr, unsigned len,
-    struct cpumask *new_mask)
-    {
-    if (len < cpumask_size())
-    cpumask_clear(new_mask);
 #[no_mangle]
-pub unsafe extern "C" fn if(cpumask_size(): len >) -> else {
-    else if (len > cpumask_size())
+pub unsafe extern "C" fn get_user_cpu_mask(user_mask_ptr: *mut c_ulong, len: c_uint, new_mask: *mut cpumask) -> c_int {
+    if (len < cpumask_size()) {
+    cpumask_clear(new_mask);
+    }
+
+    else if (len > cpumask_size()) {
     len = cpumask_size();
+    }
     return copy_from_user(new_mask, user_mask_ptr, len) ? -EFAULT : 0;
     }
 //
@@ -1149,32 +1424,33 @@ pub unsafe extern "C" fn if(cpumask_size(): len >) -> else {
 //
 // Return: 0 on success. An error code otherwise.
 //
-    SYSCALL_DEFINE3(sched_setaffinity, pid_t, pid, unsigned int, len,
-    unsigned long __user *, user_mask_ptr)
-    {
-    cpumask_var_t new_mask;
-    int retval;
-    if (!alloc_cpumask_var(&new_mask, GFP_KERNEL))
+#[no_mangle]
+pub unsafe extern "C" fn sys_sched_setaffinity(pid: usize, len: usize, user_mask_ptr: usize) -> c_long {
+    let mut new_mask;
+    let mut retval = 0;
+    if (!alloc_cpumask_var(&new_mask, GFP_KERNEL)) {
     return -ENOMEM;
+    }
     retval = get_user_cpu_mask(user_mask_ptr, len, new_mask);
-    if (retval == 0)
+    if (retval == 0) {
     retval = sched_setaffinity(pid, new_mask);
+    }
     free_cpumask_var(new_mask);
     return retval;
     }
 #[no_mangle]
 pub unsafe extern "C" fn sched_getaffinity(pid: pid_t, mask: *mut cpumask) -> c_long {
-    long sched_getaffinity(pid_t pid, struct cpumask *mask)
-    {
-    struct task_struct *p;
-    int retval;
+pub static mut p: *mut c_void = core::ptr::null_mut();
+    let mut retval = 0;
     guard(rcu)();
     p = find_process_by_pid(pid);
-    if (!p)
+    if (!p) {
     return -ESRCH;
+    }
     retval = security_task_getscheduler(p);
-    if (retval)
+    if (retval) {
     return retval;
+    }
     guard(raw_spinlock_irqsave)(&p.pi_lock);
     cpumask_and(mask, &p.cpus_mask, cpu_active_mask);
     return 0;
@@ -1188,34 +1464,36 @@ pub unsafe extern "C" fn sched_getaffinity(pid: pid_t, mask: *mut cpumask) -> c_
 // Return: size of CPU mask copied to user_mask_ptr on success. An
 // error code otherwise.
 //
-    SYSCALL_DEFINE3(sched_getaffinity, pid_t, pid, unsigned int, len,
-    unsigned long __user *, user_mask_ptr)
-    {
-    int ret;
-    cpumask_var_t mask;
-    if ((len * BITS_PER_BYTE) < nr_cpu_ids)
+#[no_mangle]
+pub unsafe extern "C" fn sys_sched_getaffinity(pid: usize, len: usize, user_mask_ptr: usize) -> c_long {
+    let mut ret = 0;
+    let mut mask;
+    if ((len * BITS_PER_BYTE) < nr_cpu_ids) {
     return -EINVAL;
-    if (len & (sizeof(unsigned long)-1))
+    }
+    if (len & (sizeof!(unsigned long)-1)) {
     return -EINVAL;
-    if (!zalloc_cpumask_var(&mask, GFP_KERNEL))
+    }
+    if (!zalloc_cpumask_var(&mask, GFP_KERNEL)) {
     return -ENOMEM;
+    }
     ret = sched_getaffinity(pid, mask);
     if (ret == 0) {
-    let mut retlen: c_uint = min(len, cpumask_size());
-    if (copy_to_user(user_mask_ptr, cpumask_bits(mask), retlen))
+pub static mut retlen: c_uint = 0;
+    if (copy_to_user(user_mask_ptr, cpumask_bits(mask), retlen)) {
     ret = -EFAULT;
-    else
+    }
+    else {
     ret = retlen;
+    }
     }
     free_cpumask_var(mask);
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn do_sched_yield() {
-    static void do_sched_yield(void)
-    {
-    struct rq_flags rf;
-    struct rq *rq;
+pub static mut rf: usize = 0;
+pub static mut rq: *mut c_void = core::ptr::null_mut();
     rq = this_rq_lock_irq(&rf);
     schedstat_inc(rq.yld_count);
     rq.donor.sched_class.yield_task(rq);
@@ -1232,8 +1510,8 @@ unsafe extern "C" fn do_sched_yield() {
 //
 // Return: 0.
 //
-    SYSCALL_DEFINE0(sched_yield)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sys_sched_yield() -> c_long {
     do_sched_yield();
     return 0;
     }
@@ -1261,8 +1539,6 @@ unsafe extern "C" fn do_sched_yield() {
 //
 #[no_mangle]
 pub unsafe extern "C" fn yield() -> void __sched {
-    void __sched yield(void)
-    {
     set_current_state(TASK_RUNNING);
     do_sched_yield();
     }
@@ -1284,31 +1560,35 @@ pub unsafe extern "C" fn yield() -> void __sched {
 //
 #[no_mangle]
 pub unsafe extern "C" fn yield_to(p: *mut task_struct, preempt: bool) -> int __sched {
-    int __sched yield_to(struct task_struct *p, bool preempt)
-    {
-    struct task_struct *curr;
-    struct rq *rq, *p_rq;
-    let mut yielded: c_int = 0;
+pub static mut curr: *mut c_void = core::ptr::null_mut();
+    let mut rq = core::ptr::null_mut();
+    let mut p_rq = core::ptr::null_mut();
+pub static mut yielded: c_int = 0;
     scoped_guard (raw_spinlock_irqsave, &p.pi_lock) {
     rq = this_rq();
     curr = rq.donor;
-    again:
+// label;
     p_rq = task_rq(p);
 //
 // If we're the only runnable task on the rq and target rq also
 // has only one task, there's absolutely no point in yielding.
 //
-    if (rq.nr_running == 1 && p_rq.nr_running == 1)
+    if (rq.nr_running == 1 && p_rq.nr_running == 1) {
     return -ESRCH;
+    }
     guard(double_rq_lock)(rq, p_rq);
-    if (task_rq(p) != p_rq)
-    goto again;
-    if (!curr.sched_class.yield_to_task)
+    if (task_rq(p) != p_rq) {
+// goto;
+    }
+    if (!curr.sched_class.yield_to_task) {
     return 0;
-    if (curr.sched_class != p.sched_class)
+    }
+    if (curr.sched_class != p.sched_class) {
     return 0;
-    if (task_on_cpu(p_rq, p) || !task_is_running(p))
+    }
+    if (task_on_cpu(p_rq, p) || !task_is_running(p)) {
     return 0;
+    }
     yielded = curr.sched_class.yield_to_task(rq, p);
     if (yielded) {
     schedstat_inc(rq.yld_count);
@@ -1316,12 +1596,14 @@ pub unsafe extern "C" fn yield_to(p: *mut task_struct, preempt: bool) -> int __s
 // Make p's CPU reschedule; pick_next_entity
 // takes care of fairness.
 //
-    if (preempt && rq != p_rq)
+    if (preempt && rq != p_rq) {
     resched_curr(p_rq);
     }
     }
-    if (yielded)
+    }
+    if (yielded) {
     schedule();
+    }
     return yielded;
     }
     EXPORT_SYMBOL_GPL(yield_to);
@@ -1333,21 +1615,28 @@ pub unsafe extern "C" fn yield_to(p: *mut task_struct, preempt: bool) -> int __s
 // rt_priority that can be used by a given scheduling class.
 // On failure, a negative error code is returned.
 //
-    SYSCALL_DEFINE1(sched_get_priority_max, int, policy)
-    {
-    let mut ret: c_int = -EINVAL;
-    switch (policy) {
-    case SCHED_FIFO:
-    case SCHED_RR:
+#[no_mangle]
+pub unsafe extern "C" fn sys_sched_get_priority_max(policy: usize) -> c_long {
+pub static mut ret: c_int = 0;
+    match (policy) {
+    SCHED_FIFO => {
+    }
+    SCHED_RR => {
     ret = MAX_RT_PRIO-1;
-    break;
-    case SCHED_DEADLINE:
-    case SCHED_NORMAL:
-    case SCHED_BATCH:
-    case SCHED_IDLE:
-    case SCHED_EXT:
+    // break;
+    }
+    SCHED_DEADLINE => {
+    }
+    SCHED_NORMAL => {
+    }
+    SCHED_BATCH => {
+    }
+    SCHED_IDLE => {
+    }
+    SCHED_EXT => {
     ret = 0;
-    break;
+    // break;
+    }
     }
     return ret;
     }
@@ -1359,42 +1648,51 @@ pub unsafe extern "C" fn yield_to(p: *mut task_struct, preempt: bool) -> int __s
 // rt_priority that can be used by a given scheduling class.
 // On failure, a negative error code is returned.
 //
-    SYSCALL_DEFINE1(sched_get_priority_min, int, policy)
-    {
-    let mut ret: c_int = -EINVAL;
-    switch (policy) {
-    case SCHED_FIFO:
-    case SCHED_RR:
+#[no_mangle]
+pub unsafe extern "C" fn sys_sched_get_priority_min(policy: usize) -> c_long {
+pub static mut ret: c_int = 0;
+    match (policy) {
+    SCHED_FIFO => {
+    }
+    SCHED_RR => {
     ret = 1;
-    break;
-    case SCHED_DEADLINE:
-    case SCHED_NORMAL:
-    case SCHED_BATCH:
-    case SCHED_IDLE:
-    case SCHED_EXT:
+    // break;
+    }
+    SCHED_DEADLINE => {
+    }
+    SCHED_NORMAL => {
+    }
+    SCHED_BATCH => {
+    }
+    SCHED_IDLE => {
+    }
+    SCHED_EXT => {
     ret = 0;
+    }
     }
     return ret;
     }
 #[no_mangle]
 unsafe extern "C" fn sched_rr_get_interval(pid: pid_t, t: *mut timespec64) -> c_int {
-    static int sched_rr_get_interval(pid_t pid, struct timespec64 *t)
-    {
-    let mut time_slice: c_uint = 0;
-    int retval;
-    if (pid < 0)
+pub static mut time_slice: c_uint = 0;
+    let mut retval = 0;
+    if (pid < 0) {
     return -EINVAL;
+    }
     scoped_guard (rcu) {
-    struct task_struct *p = find_process_by_pid(pid);
-    if (!p)
+    let mut p = find_process_by_pid(pid);
+    if (!p) {
     return -ESRCH;
+    }
     retval = security_task_getscheduler(p);
-    if (retval)
+    if (retval) {
     return retval;
+    }
     scoped_guard (task_rq_lock, p) {
-    struct rq *rq = scope.rq;
-    if (p.sched_class.get_rr_interval)
+    let mut rq = scope.rq;
+    if (p.sched_class.get_rr_interval) {
     time_slice = p.sched_class.get_rr_interval(rq, p);
+    }
     }
     }
     jiffies_to_timespec64(time_slice, t);
@@ -1411,22 +1709,22 @@ unsafe extern "C" fn sched_rr_get_interval(pid: pid_t, t: *mut timespec64) -> c_
 // Return: On success, 0 and the time-slice is in @interval. Otherwise,
 // an error code.
 //
-    SYSCALL_DEFINE2(sched_rr_get_interval, pid_t, pid,
-    struct __kernel_timespec __user *, interval)
-    {
-    struct timespec64 t;
-    let mut retval: c_int = sched_rr_get_interval(pid, &t);
-    if (retval == 0)
+#[no_mangle]
+pub unsafe extern "C" fn sys_sched_rr_get_interval(pid: usize, interval: usize) -> c_long {
+pub static mut t: usize = 0;
+pub static mut retval: c_int = 0;
+    if (retval == 0) {
     retval = put_timespec64(&t, interval);
+    }
     return retval;
     }
 
-    SYSCALL_DEFINE2(sched_rr_get_interval_time32, pid_t, pid,
-    struct old_timespec32 __user *, interval)
-    {
-    struct timespec64 t;
-    let mut retval: c_int = sched_rr_get_interval(pid, &t);
-    if (retval == 0)
+#[no_mangle]
+pub unsafe extern "C" fn sys_sched_rr_get_interval_time32(pid: usize, interval: usize) -> c_long {
+pub static mut t: usize = 0;
+pub static mut retval: c_int = 0;
+    if (retval == 0) {
     retval = put_old_timespec32(&t, interval);
+    }
     return retval;
     }

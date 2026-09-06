@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0+
@@ -46,16 +296,14 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Author: Paul McKenney <paulmck@linux.ibm.com>
 //
 
-    int rcu_scheduler_active __read_mostly;
+    let mut rcu_scheduler_active = 0;
 
-    extern int rcu_scheduler_active;
+extern "C" { pub static mut rcu_scheduler_active: usize; }
 
-    static LIST_HEAD(srcu_boot_list);
+pub static mut srcu_boot_list: usize = 0;
     static bool srcu_init_done;
 #[no_mangle]
 unsafe extern "C" fn init_srcu_struct_fields(ssp: *mut srcu_struct) -> c_int {
-    static int init_srcu_struct_fields(struct srcu_struct *ssp)
-    {
     ssp.srcu_lock_nesting[0] = 0;
     ssp.srcu_lock_nesting[1] = 0;
     init_swait_queue_head(&ssp.srcu_wq);
@@ -71,11 +319,10 @@ unsafe extern "C" fn init_srcu_struct_fields(ssp: *mut srcu_struct) -> c_int {
     return 0;
     }
 
-    int init_srcu_struct_lockdep(struct srcu_struct *ssp, const char *name,
-    struct lock_class_key *key)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn init_srcu_struct_lockdep(ssp: *mut srcu_struct, name: *mut c_char, key: *mut lock_class_key) -> c_int {
 // Don't re-initialize a lock while it is held.
-    debug_check_no_locks_freed((void *)ssp, sizeof(*ssp));
+    debug_check_no_locks_freed(ssp, sizeof!(*ssp));
     lockdep_init_map(&ssp.dep_map, name, key, 0);
     return init_srcu_struct_fields(ssp);
     }
@@ -91,8 +338,6 @@ unsafe extern "C" fn init_srcu_struct_fields(ssp: *mut srcu_struct) -> c_int {
 //
 #[no_mangle]
 pub unsafe extern "C" fn init_srcu_struct_generic(ssp: *mut srcu_struct) -> c_int {
-    int init_srcu_struct_generic(struct srcu_struct *ssp)
-    {
     return init_srcu_struct_fields(ssp);
     }
     EXPORT_SYMBOL_GPL(init_srcu_struct_generic);
@@ -106,17 +351,15 @@ pub unsafe extern "C" fn init_srcu_struct_generic(ssp: *mut srcu_struct) -> c_in
 //
 #[no_mangle]
 pub unsafe extern "C" fn cleanup_srcu_struct(ssp: *mut srcu_struct) {
-    void cleanup_srcu_struct(struct srcu_struct *ssp)
-    {
-    WARN_ON(srcu_readers_active(ssp));
+    WARN_ON!(srcu_readers_active(ssp));
     irq_work_sync(&ssp.srcu_irq_work);
     flush_work(&ssp.srcu_work);
-    WARN_ON(ssp.srcu_gp_running);
-    WARN_ON(ssp.srcu_gp_waiting);
-    WARN_ON(ssp.srcu_cb_head);
-    WARN_ON(&ssp.srcu_cb_head != ssp.srcu_cb_tail);
-    WARN_ON(ssp.srcu_idx != ssp.srcu_idx_max);
-    WARN_ON(ssp.srcu_idx & 0x1);
+    WARN_ON!(ssp.srcu_gp_running);
+    WARN_ON!(ssp.srcu_gp_waiting);
+    WARN_ON!(ssp.srcu_cb_head);
+    WARN_ON!(&ssp.srcu_cb_head != ssp.srcu_cb_tail);
+    WARN_ON!(ssp.srcu_idx != ssp.srcu_idx_max);
+    WARN_ON!(ssp.srcu_idx & 0x1);
     }
     EXPORT_SYMBOL_GPL(cleanup_srcu_struct);
 //
@@ -125,15 +368,14 @@ pub unsafe extern "C" fn cleanup_srcu_struct(ssp: *mut srcu_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn __srcu_read_unlock(ssp: *mut srcu_struct, idx: c_int) {
-    void __srcu_read_unlock(struct srcu_struct *ssp, int idx)
-    {
-    int newval;
+    let mut newval = 0;
     preempt_disable();  // Needed for PREEMPT_LAZY
     newval = READ_ONCE(ssp.srcu_lock_nesting[idx]) - 1;
     WRITE_ONCE(ssp.srcu_lock_nesting[idx], newval);
     preempt_enable();
-    if (!newval && READ_ONCE(ssp.srcu_gp_waiting) && in_task() && !irqs_disabled())
+    if (!newval && READ_ONCE(ssp.srcu_gp_waiting) && in_task() && !irqs_disabled()) {
     swake_up_one(&ssp.srcu_wq);
+    }
     }
     EXPORT_SYMBOL_GPL(__srcu_read_unlock);
 //
@@ -143,13 +385,11 @@ pub unsafe extern "C" fn __srcu_read_unlock(ssp: *mut srcu_struct, idx: c_int) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn srcu_drive_gp(wp: *mut work_struct) {
-    void srcu_drive_gp(struct work_struct *wp)
-    {
-    int idx;
-    struct rcu_head *lh;
-    struct rcu_head *rhp;
-    struct srcu_struct *ssp;
-    ssp = container_of(wp, struct srcu_struct, srcu_work);
+    let mut idx = 0;
+pub static mut lh: *mut c_void = core::ptr::null_mut();
+pub static mut rhp: *mut c_void = core::ptr::null_mut();
+pub static mut ssp: *mut c_void = core::ptr::null_mut();
+    ssp = container_of!(wp, srcu_struct, srcu_work);
     preempt_disable();  // Needed for PREEMPT_LAZY
     if (ssp.srcu_gp_running || ULONG_CMP_GE(ssp.srcu_idx, READ_ONCE(ssp.srcu_idx_max))) {
     preempt_enable();
@@ -187,7 +427,7 @@ pub unsafe extern "C" fn srcu_drive_gp(wp: *mut work_struct) {
     }
 //
 // Enable rescheduling, and if there are more callbacks,
-// reschedule ourselves.  This can race with a call_srcu()
+reschedule ourselves.  This can race with a call_srcu()
 // at interrupt level, but the ->srcu_gp_running checks will
 // straighten that out.
 //
@@ -195,8 +435,9 @@ pub unsafe extern "C" fn srcu_drive_gp(wp: *mut work_struct) {
     WRITE_ONCE(ssp.srcu_gp_running, false);
     idx = ULONG_CMP_LT(ssp.srcu_idx, READ_ONCE(ssp.srcu_idx_max));
     preempt_enable();
-    if (idx)
+    if (idx) {
     schedule_work(&ssp.srcu_work);
+    }
     }
     EXPORT_SYMBOL_GPL(srcu_drive_gp);
 //
@@ -206,18 +447,14 @@ pub unsafe extern "C" fn srcu_drive_gp(wp: *mut work_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn srcu_tiny_irq_work(irq_work: *mut irq_work) {
-    void srcu_tiny_irq_work(struct irq_work *irq_work)
-    {
-    struct srcu_struct *ssp;
-    ssp = container_of(irq_work, struct srcu_struct, srcu_irq_work);
+pub static mut ssp: *mut c_void = core::ptr::null_mut();
+    ssp = container_of!(irq_work, srcu_struct, srcu_irq_work);
     schedule_work(&ssp.srcu_work);
     }
     EXPORT_SYMBOL_GPL(srcu_tiny_irq_work);
 #[no_mangle]
 unsafe extern "C" fn srcu_gp_start_if_needed(ssp: *mut srcu_struct) {
-    static void srcu_gp_start_if_needed(struct srcu_struct *ssp)
-    {
-    unsigned long cookie;
+    let mut cookie = 0;
     lockdep_assert_preemption_disabled(); // Needed for PREEMPT_LAZY
     cookie = get_state_synchronize_srcu(ssp);
     if (ULONG_CMP_GE(READ_ONCE(ssp.srcu_idx_max), cookie)) {
@@ -225,22 +462,22 @@ unsafe extern "C" fn srcu_gp_start_if_needed(ssp: *mut srcu_struct) {
     }
     WRITE_ONCE(ssp.srcu_idx_max, cookie);
     if (!READ_ONCE(ssp.srcu_gp_running)) {
-    if (likely(srcu_init_done))
+    if (likely(srcu_init_done)) {
     irq_work_queue(&ssp.srcu_irq_work);
-#[no_mangle]
-pub unsafe extern "C" fn if(_arg: list_empty(&ssp->srcu_work.entry)) -> else {
-    else if (list_empty(&ssp.srcu_work.entry))
+    }
+
+    else if (list_empty(&ssp.srcu_work.entry)) {
     list_add(&ssp.srcu_work.entry, &srcu_boot_list);
+    }
     }
     }
 //
 // Enqueue an SRCU callback on the specified srcu_struct structure,
 // initiating grace-period processing if it is not already running.
 //
-    void call_srcu(struct srcu_struct *ssp, struct rcu_head *rhp,
-    rcu_callback_t func)
-    {
-    unsigned long flags;
+#[no_mangle]
+pub unsafe extern "C" fn call_srcu(ssp: *mut srcu_struct, rhp: *mut rcu_head, func: rcu_callback_t) {
+    let mut flags = 0;
     rhp.func = func;
     rhp.next = core::ptr::null_mut();
     preempt_disable();  // Needed for PREEMPT_LAZY
@@ -257,17 +494,16 @@ pub unsafe extern "C" fn if(_arg: list_empty(&ssp->srcu_work.entry)) -> else {
 //
 #[no_mangle]
 pub unsafe extern "C" fn synchronize_srcu(ssp: *mut srcu_struct) {
-    void synchronize_srcu(struct srcu_struct *ssp)
-    {
-    struct rcu_synchronize rs;
+pub static mut rs: usize = 0;
     srcu_lock_sync(&ssp.dep_map);
     RCU_LOCKDEP_WARN(lockdep_is_held(ssp) ||
     lock_is_held(&rcu_bh_lock_map) ||
     lock_is_held(&rcu_lock_map) ||
     lock_is_held(&rcu_sched_lock_map),
     "Illegal synchronize_srcu() in same-type SRCU (or in RCU) read-side critical section");
-    if (rcu_scheduler_active == RCU_SCHEDULER_INACTIVE)
+    if (rcu_scheduler_active == RCU_SCHEDULER_INACTIVE) {
     return;
+    }
     might_sleep();
     init_rcu_head_on_stack(&rs.head);
     init_completion(&rs.completion);
@@ -281,9 +517,7 @@ pub unsafe extern "C" fn synchronize_srcu(ssp: *mut srcu_struct) {
 //
 #[no_mangle]
 pub unsafe extern "C" fn get_state_synchronize_srcu(ssp: *mut srcu_struct) -> c_ulong {
-    unsigned long get_state_synchronize_srcu(struct srcu_struct *ssp)
-    {
-    unsigned long ret;
+    let mut ret = 0;
     barrier();
     ret = (READ_ONCE(ssp.srcu_idx) + 3) & ~0x1;
     barrier();
@@ -299,9 +533,7 @@ pub unsafe extern "C" fn get_state_synchronize_srcu(ssp: *mut srcu_struct) -> c_
 //
 #[no_mangle]
 pub unsafe extern "C" fn start_poll_synchronize_srcu(ssp: *mut srcu_struct) -> c_ulong {
-    unsigned long start_poll_synchronize_srcu(struct srcu_struct *ssp)
-    {
-    unsigned long ret;
+    let mut ret = 0;
     preempt_disable();  // Needed for PREEMPT_LAZY
     ret = get_state_synchronize_srcu(ssp);
     srcu_gp_start_if_needed(ssp);
@@ -314,9 +546,7 @@ pub unsafe extern "C" fn start_poll_synchronize_srcu(ssp: *mut srcu_struct) -> c
 //
 #[no_mangle]
 pub unsafe extern "C" fn poll_state_synchronize_srcu(ssp: *mut srcu_struct, cookie: c_ulong) -> bool {
-    bool poll_state_synchronize_srcu(struct srcu_struct *ssp, unsigned long cookie)
-    {
-    let mut cur_s: c_ulong = READ_ONCE(ssp.srcu_idx);
+pub static mut cur_s: c_ulong = 0;
     barrier();
     return cookie == SRCU_GET_STATE_COMPLETED ||
     ULONG_CMP_GE(cur_s, cookie) || ULONG_CMP_LT(cur_s, cookie - 3);
@@ -325,9 +555,7 @@ pub unsafe extern "C" fn poll_state_synchronize_srcu(ssp: *mut srcu_struct, cook
 
 // Lockdep diagnostics.
 #[no_mangle]
-pub unsafe extern "C" fn rcu_scheduler_starting() -> void __init {
-    void __init rcu_scheduler_starting(void)
-    {
+pub unsafe extern "C" fn rcu_scheduler_starting()  {
     rcu_scheduler_active = RCU_SCHEDULER_RUNNING;
     }
 
@@ -337,14 +565,11 @@ pub unsafe extern "C" fn rcu_scheduler_starting() -> void __init {
 // phase that takes place after the scheduler starts.
 //
 #[no_mangle]
-pub unsafe extern "C" fn srcu_init() -> void __init {
-    void __init srcu_init(void)
-    {
-    struct srcu_struct *ssp;
+pub unsafe extern "C" fn srcu_init()  {
+pub static mut ssp: *mut c_void = core::ptr::null_mut();
     srcu_init_done = true;
     while (!list_empty(&srcu_boot_list)) {
-    ssp = list_first_entry(&srcu_boot_list,
-    struct srcu_struct, srcu_work.entry);
+    ssp = list_first_entry(&srcu_boot_list, srcu_struct, srcu_work.entry);
     list_del_init(&ssp.srcu_work.entry);
     schedule_work(&ssp.srcu_work);
     }

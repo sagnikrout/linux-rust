@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -47,12 +297,11 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // This is the default chunk allocator.
 //
 
-    static struct page *pcpu_chunk_page(struct pcpu_chunk *chunk,
-    unsigned int cpu, int page_idx)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_chunk_page(chunk: *mut pcpu_chunk, cpu: c_uint, page_idx: c_int) -> *mut c_void {
 // must not be used on pre-mapped chunk
-    WARN_ON(chunk.immutable);
-    return vmalloc_to_page((void *)pcpu_chunk_addr(chunk, cpu, page_idx));
+    WARN_ON!(chunk.immutable);
+    return vmalloc_to_page(pcpu_chunk_addr(chunk, cpu, page_idx));
     }
 //
 // pcpu_get_pages - get temp pages array
@@ -68,11 +317,12 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
     static struct page **pcpu_get_pages(gfp_t gfp)
     {
-    static struct page **pages;
-    let mut pages_size: usize = pcpu_nr_units * pcpu_unit_pages * sizeof(pages[0]);
+pub static mut pages: *mut c_void = core::ptr::null_mut();
+pub static mut pages_size: usize = 0;
     lockdep_assert_held(&pcpu_alloc_mutex);
-    if (!pages && gfp)
+    if (!pages && gfp) {
     pages = pcpu_mem_zalloc(pages_size, gfp);
+    }
     return pages;
     }
     static struct page **pcpu_get_pages_cached(void)
@@ -89,16 +339,16 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // Free pages [@page_start and @page_end) in @pages for all units.
 // The pages were allocated for @chunk.
 //
-    static void pcpu_free_pages(struct pcpu_chunk *chunk,
-    struct page **pages, int page_start, int page_end)
-    {
-    unsigned int cpu;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_free_pages(chunk: *mut pcpu_chunk, pages: *mut *mut page, page_start: c_int, page_end: c_int) {
+    let mut cpu = 0;
+    let mut i = 0;
     for_each_possible_cpu(cpu) {
-    for (i = page_start; i < page_end; i++) {
-    struct page *page = pages[pcpu_page_idx(cpu, i)];
-    if (page)
+    while (i < page_end) {
+    let mut page = pages[pcpu_page_idx(cpu, i)];
+    if (page) {
     __free_page(page);
+    }
     }
     }
     }
@@ -114,30 +364,33 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // The allocation is for @chunk.  Percpu core doesn't care about the
 // content of @pages and will pass it verbatim to pcpu_map_pages().
 //
-    static int pcpu_alloc_pages(struct pcpu_chunk *chunk,
-    struct page **pages, int page_start, int page_end,
-    gfp_t gfp)
-    {
-    unsigned int cpu, tcpu;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_alloc_pages(chunk: *mut pcpu_chunk, pages: *mut *mut page, page_start: c_int, page_end: c_int, gfp: gfp_t) -> c_int {
+    let mut cpu = 0;
+    let mut tcpu = 0;
+    let mut i = 0;
     gfp |= __GFP_HIGHMEM;
     for_each_possible_cpu(cpu) {
-    for (i = page_start; i < page_end; i++) {
-    struct page **pagep = &pages[pcpu_page_idx(cpu, i)];
+    while (i < page_end) {
+    let mut pagep = &pages[pcpu_page_idx(cpu, i)];
 // pagep = alloc_pages_node(cpu_to_node(cpu), gfp, 0);
-    if (!*pagep)
-    goto err;
+    if (!*pagep) {
+// goto;
+    }
     }
     }
     return 0;
-    err:
-    while (--i >= page_start)
+// label;
+    while (--i >= page_start) {
     __free_page(pages[pcpu_page_idx(cpu, i)]);
+    }
     for_each_possible_cpu(tcpu) {
-    if (tcpu == cpu)
+    if (tcpu == cpu) {
     break;
-    for (i = page_start; i < page_end; i++)
+    }
+    for (i = page_start; i < page_end; i++) {
     __free_page(pages[pcpu_page_idx(tcpu, i)]);
+    }
     }
     return -ENOMEM;
     }
@@ -153,17 +406,14 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // doing it for each cpu.  This could be an overkill but is more
 // scalable.
 //
-    static void pcpu_pre_unmap_flush(struct pcpu_chunk *chunk,
-    int page_start, int page_end)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_pre_unmap_flush(chunk: *mut pcpu_chunk, page_start: c_int, page_end: c_int) {
     flush_cache_vunmap(
     pcpu_chunk_addr(chunk, pcpu_low_unit_cpu, page_start),
     pcpu_chunk_addr(chunk, pcpu_high_unit_cpu, page_end));
     }
 #[no_mangle]
 unsafe extern "C" fn __pcpu_unmap_pages(addr: c_ulong, nr_pages: c_int) {
-    static void __pcpu_unmap_pages(unsigned long addr, int nr_pages)
-    {
     vunmap_range_noflush(addr, addr + (nr_pages << PAGE_SHIFT));
     }
 //
@@ -179,16 +429,15 @@ unsafe extern "C" fn __pcpu_unmap_pages(addr: c_ulong, nr_pages: c_int) {
 // called after all unmaps are finished.  The caller should call
 // proper pre/post flush functions.
 //
-    static void pcpu_unmap_pages(struct pcpu_chunk *chunk,
-    struct page **pages, int page_start, int page_end)
-    {
-    unsigned int cpu;
-    int i;
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_unmap_pages(chunk: *mut pcpu_chunk, pages: *mut *mut page, page_start: c_int, page_end: c_int) {
+    let mut cpu = 0;
+    let mut i = 0;
     for_each_possible_cpu(cpu) {
-    for (i = page_start; i < page_end; i++) {
-    struct page *page;
+    while (i < page_end) {
+pub static mut page: *mut c_void = core::ptr::null_mut();
     page = pcpu_chunk_page(chunk, cpu, i);
-    WARN_ON(!page);
+    WARN_ON!(!page);
     pages[pcpu_page_idx(cpu, i)] = page;
     }
     __pcpu_unmap_pages(pcpu_chunk_addr(chunk, cpu, page_start),
@@ -208,18 +457,16 @@ unsafe extern "C" fn __pcpu_unmap_pages(addr: c_ulong, nr_pages: c_int) {
 // As with pcpu_pre_unmap_flush(), TLB flushing also is done at once
 // for the whole region.
 //
-    static void pcpu_post_unmap_tlb_flush(struct pcpu_chunk *chunk,
-    int page_start, int page_end)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_post_unmap_tlb_flush(chunk: *mut pcpu_chunk, page_start: c_int, page_end: c_int) {
     flush_tlb_kernel_range(
     pcpu_chunk_addr(chunk, pcpu_low_unit_cpu, page_start),
     pcpu_chunk_addr(chunk, pcpu_high_unit_cpu, page_end));
     }
-    static int __pcpu_map_pages(unsigned long addr, struct page **pages,
-    int nr_pages, gfp_t gfp)
-    {
-    unsigned int flags;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn __pcpu_map_pages(addr: c_ulong, pages: *mut *mut page, nr_pages: c_int, gfp: gfp_t) -> c_int {
+    let mut flags = 0;
+    let mut ret = 0;
 //
 // The vmalloc page table allocation path does not pass @gfp down
 // explicitly.  Apply the corresponding memalloc scope so implicit
@@ -246,28 +493,32 @@ unsafe extern "C" fn __pcpu_unmap_pages(addr: c_ulong, nr_pages: c_int) {
 // This function is responsible for setting up whatever is necessary for
 // reverse lookup (addr -> chunk).
 //
-    static int pcpu_map_pages(struct pcpu_chunk *chunk, struct page **pages,
-    int page_start, int page_end, gfp_t gfp)
-    {
-    unsigned int cpu, tcpu;
-    int i, err;
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_map_pages(chunk: *mut pcpu_chunk, pages: *mut *mut page, page_start: c_int, page_end: c_int, gfp: gfp_t) -> c_int {
+    let mut cpu = 0;
+    let mut tcpu = 0;
+    let mut i = 0;
+    let mut err = 0;
     for_each_possible_cpu(cpu) {
     err = __pcpu_map_pages(pcpu_chunk_addr(chunk, cpu, page_start),
     &pages[pcpu_page_idx(cpu, page_start)],
     page_end - page_start, gfp);
-    if (err < 0)
-    goto err;
-    for (i = page_start; i < page_end; i++)
+    if (err < 0) {
+// goto;
+    }
+    for (i = page_start; i < page_end; i++) {
     pcpu_set_page_chunk(pages[pcpu_page_idx(cpu, i)],
     chunk);
     }
+    }
     return 0;
-    err:
+// label;
     for_each_possible_cpu(tcpu) {
     __pcpu_unmap_pages(pcpu_chunk_addr(chunk, tcpu, page_start),
     page_end - page_start);
-    if (tcpu == cpu)
+    if (tcpu == cpu) {
     break;
+    }
     }
     pcpu_post_unmap_tlb_flush(chunk, page_start, page_end);
     return err;
@@ -284,9 +535,8 @@ unsafe extern "C" fn __pcpu_unmap_pages(addr: c_ulong, nr_pages: c_int) {
 // As with pcpu_pre_unmap_flush(), TLB flushing also is done at once
 // for the whole region.
 //
-    static void pcpu_post_map_flush(struct pcpu_chunk *chunk,
-    int page_start, int page_end)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_post_map_flush(chunk: *mut pcpu_chunk, page_start: c_int, page_end: c_int) {
     flush_cache_vmap(
     pcpu_chunk_addr(chunk, pcpu_low_unit_cpu, page_start),
     pcpu_chunk_addr(chunk, pcpu_high_unit_cpu, page_end));
@@ -304,15 +554,16 @@ unsafe extern "C" fn __pcpu_unmap_pages(addr: c_ulong, nr_pages: c_int) {
 // CONTEXT:
 // pcpu_alloc_mutex, does @gfp allocation.
 //
-    static int pcpu_populate_chunk(struct pcpu_chunk *chunk,
-    int page_start, int page_end, gfp_t gfp)
-    {
-    struct page **pages;
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_populate_chunk(chunk: *mut pcpu_chunk, page_start: c_int, page_end: c_int, gfp: gfp_t) -> c_int {
+pub static mut pages: *mut c_void = core::ptr::null_mut();
     pages = pcpu_get_pages(gfp);
-    if (!pages)
+    if (!pages) {
     return -ENOMEM;
-    if (pcpu_alloc_pages(chunk, pages, page_start, page_end, gfp))
+    }
+    if (pcpu_alloc_pages(chunk, pages, page_start, page_end, gfp)) {
     return -ENOMEM;
+    }
     if (pcpu_map_pages(chunk, pages, page_start, page_end, gfp)) {
     pcpu_free_pages(chunk, pages, page_start, page_end);
     return -ENOMEM;
@@ -335,29 +586,29 @@ unsafe extern "C" fn __pcpu_unmap_pages(addr: c_ulong, nr_pages: c_int) {
 // CONTEXT:
 // pcpu_alloc_mutex.
 //
-    static void pcpu_depopulate_chunk(struct pcpu_chunk *chunk,
-    int page_start, int page_end)
-    {
-    struct page **pages;
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_depopulate_chunk(chunk: *mut pcpu_chunk, page_start: c_int, page_end: c_int) {
+pub static mut pages: *mut c_void = core::ptr::null_mut();
 //
 // If control reaches here, there must have been at least one
 // successful population attempt so the temp pages array must
 // be available now.
 //
     pages = pcpu_get_pages_cached();
-    BUG_ON(!pages);
+    BUG_ON!(!pages);
 // unmap and free
     pcpu_pre_unmap_flush(chunk, page_start, page_end);
     pcpu_unmap_pages(chunk, pages, page_start, page_end);
     pcpu_free_pages(chunk, pages, page_start, page_end);
     }
-    static struct pcpu_chunk *pcpu_create_chunk(gfp_t gfp)
-    {
-    struct pcpu_chunk *chunk;
-    struct vm_struct **vms;
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_create_chunk(gfp: gfp_t) -> *mut c_void {
+pub static mut chunk: *mut c_void = core::ptr::null_mut();
+pub static mut vms: *mut c_void = core::ptr::null_mut();
     chunk = pcpu_alloc_chunk(gfp);
-    if (!chunk)
+    if (!chunk) {
     return core::ptr::null_mut();
+    }
     vms = pcpu_get_vm_areas(pcpu_group_offsets, pcpu_group_sizes,
     pcpu_nr_groups, pcpu_atom_size, gfp);
     if (!vms) {
@@ -372,24 +623,22 @@ unsafe extern "C" fn __pcpu_unmap_pages(addr: c_ulong, nr_pages: c_int) {
     }
 #[no_mangle]
 unsafe extern "C" fn pcpu_destroy_chunk(chunk: *mut pcpu_chunk) {
-    static void pcpu_destroy_chunk(struct pcpu_chunk *chunk)
-    {
-    if (!chunk)
+    if (!chunk) {
     return;
+    }
     pcpu_stats_chunk_dealloc();
     trace_percpu_destroy_chunk(chunk.base_addr);
-    if (chunk.data)
+    if (chunk.data) {
     pcpu_free_vm_areas(chunk.data, pcpu_nr_groups);
+    }
     pcpu_free_chunk(chunk);
     }
-    static struct page *pcpu_addr_to_page(void *addr)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn pcpu_addr_to_page(addr: *mut c_void) -> *mut c_void {
     return vmalloc_to_page(addr);
     }
 #[no_mangle]
-unsafe extern "C" fn pcpu_verify_alloc_info(ai: *const pcpu_alloc_info) -> int __init {
-    static int __init pcpu_verify_alloc_info(const struct pcpu_alloc_info *ai)
-    {
+unsafe extern "C" fn pcpu_verify_alloc_info(ai: *const pcpu_alloc_info) -> c_int {
 // no extra restriction
     return 0;
     }
@@ -407,11 +656,10 @@ unsafe extern "C" fn pcpu_verify_alloc_info(ai: *const pcpu_alloc_info) -> int _
 //
 #[no_mangle]
 unsafe extern "C" fn pcpu_should_reclaim_chunk(chunk: *mut pcpu_chunk) -> bool {
-    static bool pcpu_should_reclaim_chunk(struct pcpu_chunk *chunk)
-    {
 // do not reclaim either the first chunk or reserved chunk
-    if (chunk == pcpu_first_chunk || chunk == pcpu_reserved_chunk)
+    if (chunk == pcpu_first_chunk || chunk == pcpu_reserved_chunk) {
     return false;
+    }
 //
 // If it is isolated, it may be on the sidelined list so move it back to
 // the to_depopulate list.  If we hit at least 1/4 pages empty pages AND

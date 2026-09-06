@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -43,11 +293,11 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 
 // vmcoreinfo stuff
-    unsigned char *vmcoreinfo_data;
-    size_t vmcoreinfo_size;
-    u32 *vmcoreinfo_note;
+pub static mut vmcoreinfo_data: *mut c_void = core::ptr::null_mut();
+    let mut vmcoreinfo_size = 0;
+pub static mut vmcoreinfo_note: *mut c_void = core::ptr::null_mut();
 // trusted vmcoreinfo, e.g. we can make a copy in the crash memory
-    static unsigned char *vmcoreinfo_data_safecopy;
+pub static mut vmcoreinfo_data_safecopy: *mut c_void = core::ptr::null_mut();
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct hwerr_info {
@@ -63,63 +313,57 @@ pub struct hwerr_info {
     Elf_Word *append_elf_note(Elf_Word *buf, char *name, unsigned int type,
     void *data, size_t data_len)
     {
-    struct elf_note *note = (struct elf_note *)buf;
+    let mut note = buf;
     note.n_namesz = strlen(name) + 1;
     note.n_descsz = data_len;
     note.n_type   = type;
-    buf += DIV_ROUND_UP(sizeof(*note), sizeof(Elf_Word));
+    buf += DIV_ROUND_UP(sizeof!(*note), sizeof!(Elf_Word));
     memcpy(buf, name, note.n_namesz);
-    buf += DIV_ROUND_UP(note.n_namesz, sizeof(Elf_Word));
+    buf += DIV_ROUND_UP(note.n_namesz, sizeof!(Elf_Word));
     memcpy(buf, data, data_len);
-    buf += DIV_ROUND_UP(data_len, sizeof(Elf_Word));
+    buf += DIV_ROUND_UP(data_len, sizeof!(Elf_Word));
     return buf;
     }
 #[no_mangle]
 pub unsafe extern "C" fn final_note(buf: *mut Elf_Word) {
-    void final_note(Elf_Word *buf)
-    {
-    memset(buf, 0, sizeof(struct elf_note));
+    memset(buf, 0, sizeof!(elf_note));
     }
 #[no_mangle]
 unsafe extern "C" fn update_vmcoreinfo_note() {
-    static void update_vmcoreinfo_note(void)
-    {
-    u32 *buf = vmcoreinfo_note;
-    if (!vmcoreinfo_size)
+    let mut buf = vmcoreinfo_note;
+    if (!vmcoreinfo_size) {
     return;
+    }
     buf = append_elf_note(buf, VMCOREINFO_NOTE_NAME, 0, vmcoreinfo_data,
     vmcoreinfo_size);
     final_note(buf);
     }
 #[no_mangle]
 pub unsafe extern "C" fn crash_update_vmcoreinfo_safecopy(ptr: *mut c_void) {
-    void crash_update_vmcoreinfo_safecopy(void *ptr)
-    {
-    if (ptr)
+    if (ptr) {
     memcpy(ptr, vmcoreinfo_data, vmcoreinfo_size);
+    }
     vmcoreinfo_data_safecopy = ptr;
     }
 #[no_mangle]
 pub unsafe extern "C" fn crash_save_vmcoreinfo() {
-    void crash_save_vmcoreinfo(void)
-    {
-    if (!vmcoreinfo_note)
+    if (!vmcoreinfo_note) {
     return;
+    }
 // Use the safe copy to generate vmcoreinfo note if have
-    if (vmcoreinfo_data_safecopy)
+    if (vmcoreinfo_data_safecopy) {
     vmcoreinfo_data = vmcoreinfo_data_safecopy;
+    }
     vmcoreinfo_append_str("CRASHTIME=%lld\n", ktime_get_real_seconds());
     update_vmcoreinfo_note();
     }
 #[no_mangle]
 pub unsafe extern "C" fn vmcoreinfo_append_str(fmt: *const c_char, ...) {
-    void vmcoreinfo_append_str(const char *fmt, ...)
-    {
-    va_list args;
+    let mut args;
     char buf[0x50];
-    size_t r;
+    let mut r = 0;
     va_start(args, fmt);
-    r = vscnprintf(buf, sizeof(buf), fmt, args);
+    r = vscnprintf(buf, sizeof!(buf), fmt, args);
     va_end(args);
     r = min(r, (size_t)VMCOREINFO_BYTES - vmcoreinfo_size);
     memcpy(&vmcoreinfo_data[vmcoreinfo_size], buf, r);
@@ -132,35 +376,28 @@ pub unsafe extern "C" fn vmcoreinfo_append_str(fmt: *const c_char, ...) {
 // code may override this
 //
 #[no_mangle]
-pub unsafe extern "C" fn arch_crash_save_vmcoreinfo() -> void __weak {
-    void __weak arch_crash_save_vmcoreinfo(void)
-    {}
+pub unsafe extern "C" fn arch_crash_save_vmcoreinfo() -> void __weak {}
 #[no_mangle]
 pub unsafe extern "C" fn paddr_vmcoreinfo_note() -> phys_addr_t __weak {
-    phys_addr_t __weak paddr_vmcoreinfo_note(void)
-    {
     return __pa(vmcoreinfo_note);
     }
     EXPORT_SYMBOL(paddr_vmcoreinfo_note);
 #[no_mangle]
-pub unsafe extern "C" fn hwerr_log_error_type(src: enum hwerr_error_type) {
-    void hwerr_log_error_type(enum hwerr_error_type src)
-    {
-    if (src < 0 || src >= HWERR_RECOV_MAX)
+pub unsafe extern "C" fn hwerr_log_error_type(src: hwerr_error_type) {
+    if (src < 0 || src >= HWERR_RECOV_MAX) {
     return;
+    }
     atomic_inc(&hwerr_data[src].count);
     WRITE_ONCE(hwerr_data[src].timestamp, ktime_get_real_seconds());
     }
     EXPORT_SYMBOL_GPL(hwerr_log_error_type);
 #[no_mangle]
-unsafe extern "C" fn crash_save_vmcoreinfo_init() -> int __init {
-    static int __init crash_save_vmcoreinfo_init(void)
-    {
-    int order;
+unsafe extern "C" fn crash_save_vmcoreinfo_init() -> c_int {
+    let mut order = 0;
     order = get_order(VMCOREINFO_BYTES);
-    vmcoreinfo_data = (unsigned char *)__get_free_pages(GFP_KERNEL | __GFP_ZERO, order);
+    vmcoreinfo_data = __get_free_pages(GFP_KERNEL | __GFP_ZERO, order);
     if (!vmcoreinfo_data) {
-    pr_warn("Memory allocation for vmcoreinfo_data failed\n");
+    pr_warn!("Memory allocation for vmcoreinfo_data failed\n");
     return -ENOMEM;
     }
     vmcoreinfo_note = alloc_pages_exact(VMCOREINFO_NOTE_SIZE,
@@ -168,7 +405,7 @@ unsafe extern "C" fn crash_save_vmcoreinfo_init() -> int __init {
     if (!vmcoreinfo_note) {
     free_pages((unsigned long)vmcoreinfo_data, order);
     vmcoreinfo_data = core::ptr::null_mut();
-    pr_warn("Memory allocation for vmcoreinfo_note failed\n");
+    pr_warn!("Memory allocation for vmcoreinfo_note failed\n");
     return -ENOMEM;
     }
     VMCOREINFO_OSRELEASE(init_uts_ns.name.release);
@@ -255,4 +492,4 @@ unsafe extern "C" fn crash_save_vmcoreinfo_init() -> int __init {
     update_vmcoreinfo_note();
     return 0;
     }
-    subsys_initcall(crash_save_vmcoreinfo_init);
+    subsys_initcall!(crash_save_vmcoreinfo_init);

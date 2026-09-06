@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -48,7 +298,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 #[derive(Copy, Clone)]
 pub struct bpf_iter_seq_task_common {
     pub ns: *mut pid_namespace,
-    pub type: enum bpf_iter_task_type,
+    pub type: bpf_iter_task_type,
     pub pid: u32,
     pub pid_visiting: u32,
 }
@@ -63,19 +313,18 @@ pub struct bpf_iter_seq_task_info {
     pub tid: u32,
 }
 
-    static struct task_struct *task_group_seq_get_next(struct bpf_iter_seq_task_common *common,
-    u32 *tid,
-    bool skip_if_dup_files)
-    {
-    struct task_struct *task;
-    struct pid *pid;
-    u32 next_tid;
+#[no_mangle]
+pub unsafe extern "C" fn task_group_seq_get_next(common: *mut bpf_iter_seq_task_common, tid: *mut u32, skip_if_dup_files: bool) -> *mut c_void {
+pub static mut task: *mut c_void = core::ptr::null_mut();
+pub static mut pid: *mut c_void = core::ptr::null_mut();
+    let mut next_tid = 0;
     if (!*tid) {
 // The first time, the iterator calls this function.
     pid = find_pid_ns(common.pid, common.ns);
     task = get_pid_task(pid, PIDTYPE_TGID);
-    if (!task)
+    if (!task) {
     return core::ptr::null_mut();
+    }
 // tid = common->pid;
     common.pid_visiting = common.pid;
     return task;
@@ -90,30 +339,33 @@ pub struct bpf_iter_seq_task_info {
     return task;
     }
     task = find_task_by_pid_ns(common.pid_visiting, common.ns);
-    if (!task)
+    if (!task) {
     return core::ptr::null_mut();
-    retry:
+    }
+// label;
     task = __next_thread(task);
-    if (!task)
+    if (!task) {
     return core::ptr::null_mut();
+    }
     next_tid = __task_pid_nr_ns(task, PIDTYPE_PID, common.ns);
-    if (!next_tid)
-    goto retry;
-    if (skip_if_dup_files && task.files == task.group_leader.files)
-    goto retry;
+    if (!next_tid) {
+// goto;
+    }
+    if (skip_if_dup_files && task.files == task.group_leader.files) {
+// goto;
+    }
 // tid = common->pid_visiting = next_tid;
     get_task_struct(task);
     return task;
     }
-    static struct task_struct *task_seq_get_next(struct bpf_iter_seq_task_common *common,
-    u32 *tid,
-    bool skip_if_dup_files)
-    {
-    struct task_struct *task = core::ptr::null_mut();
-    struct pid *pid;
+#[no_mangle]
+pub unsafe extern "C" fn task_seq_get_next(common: *mut bpf_iter_seq_task_common, tid: *mut u32, skip_if_dup_files: bool) -> *mut c_void {
+    let mut task = core::ptr::null_mut();
+pub static mut pid: *mut c_void = core::ptr::null_mut();
     if (common.type == BPF_TASK_ITER_TID) {
-    if (*tid && *tid != common.pid)
+    if (*tid && *tid != common.pid) {
     return core::ptr::null_mut();
+    }
     rcu_read_lock();
     pid = find_pid_ns(common.pid, common.ns);
     if (pid) {
@@ -130,94 +382,94 @@ pub struct bpf_iter_seq_task_info {
     return task;
     }
     rcu_read_lock();
-    retry:
+// label;
     pid = find_ge_pid(*tid, common.ns);
     if (pid) {
 // tid = pid_nr_ns(pid, common->ns);
     task = get_pid_task(pid, PIDTYPE_PID);
     if (!task) {
     ++*tid;
-    goto retry;
+// goto;
     } else if (skip_if_dup_files && !thread_group_leader(task) &&
     task.files == task.group_leader.files) {
     put_task_struct(task);
     task = core::ptr::null_mut();
     ++*tid;
-    goto retry;
+// goto;
     }
     }
     rcu_read_unlock();
     return task;
     }
-    static void *task_seq_start(struct seq_file *seq, loff_t *pos)
-    {
-    struct bpf_iter_seq_task_info *info = seq.private;
-    struct task_struct *task;
+#[no_mangle]
+pub unsafe extern "C" fn task_seq_start(seq: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
+    let mut info = seq.private;
+pub static mut task: *mut c_void = core::ptr::null_mut();
     task = task_seq_get_next(&info.common, &info.tid, false);
-    if (!task)
+    if (!task) {
     return core::ptr::null_mut();
-    if (*pos == 0)
+    }
+    if (*pos == 0) {
     ++*pos;
+    }
     return task;
     }
-    static void *task_seq_next(struct seq_file *seq, void *v, loff_t *pos)
-    {
-    struct bpf_iter_seq_task_info *info = seq.private;
-    struct task_struct *task;
+#[no_mangle]
+pub unsafe extern "C" fn task_seq_next(seq: *mut seq_file, v: *mut c_void, pos: *mut loff_t) -> *mut c_void {
+    let mut info = seq.private;
+pub static mut task: *mut c_void = core::ptr::null_mut();
     ++*pos;
     ++info.tid;
-    put_task_struct((struct task_struct *)v);
+    put_task_struct(v);
     task = task_seq_get_next(&info.common, &info.tid, false);
-    if (!task)
+    if (!task) {
     return core::ptr::null_mut();
+    }
     return task;
     }
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct bpf_iter__task {
-    pub meta): *mut *mut __bpf_md_ptr(struct bpf_iter_meta ,,
-    pub task): *mut *mut __bpf_md_ptr(struct task_struct ,,
+    pub meta): *mut *mut __bpf_md_ptr(bpf_iter_meta ,,
+    pub task): *mut *mut __bpf_md_ptr(task_struct ,,
 }
 
-    DEFINE_BPF_ITER_FUNC(task, struct bpf_iter_meta *meta, struct task_struct *task)
-    static int __task_seq_show(struct seq_file *seq, struct task_struct *task,
-    bool in_stop)
-    {
-    struct bpf_iter_meta meta;
-    struct bpf_iter__task ctx;
-    struct bpf_prog *prog;
+    DEFINE_BPF_ITER_FUNC(task, bpf_iter_meta *meta, task_struct *task)
+#[no_mangle]
+pub unsafe extern "C" fn __task_seq_show(seq: *mut seq_file, task: *mut task_struct, in_stop: bool) -> c_int {
+pub static mut meta: usize = 0;
+pub static mut ctx: usize = 0;
+pub static mut prog: *mut c_void = core::ptr::null_mut();
     meta.seq = seq;
     prog = bpf_iter_get_info(&meta, in_stop);
-    if (!prog)
+    if (!prog) {
     return 0;
+    }
     ctx.meta = &meta;
     ctx.task = task;
     return bpf_iter_run_prog(prog, &ctx);
     }
 #[no_mangle]
 unsafe extern "C" fn task_seq_show(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int task_seq_show(struct seq_file *seq, void *v)
-    {
     return __task_seq_show(seq, v, false);
     }
 #[no_mangle]
 unsafe extern "C" fn task_seq_stop(seq: *mut seq_file, v: *mut c_void) {
-    static void task_seq_stop(struct seq_file *seq, void *v)
-    {
-    if (!v)
+    if (!v) {
     (void)__task_seq_show(seq, v, true);
-    else
-    put_task_struct((struct task_struct *)v);
     }
-    static int bpf_iter_attach_task(struct bpf_prog *prog,
-    union bpf_iter_link_info *linfo,
-    struct bpf_iter_aux_info *aux)
-    {
-    unsigned int flags;
-    struct pid *pid;
-    pid_t tgid;
-    if ((!!linfo.task.tid + !!linfo.task.pid + !!linfo.task.pid_fd) > 1)
+    else {
+    put_task_struct(v);
+    }
+    }
+#[no_mangle]
+pub unsafe extern "C" fn bpf_iter_attach_task(prog: *mut bpf_prog, linfo: *mut union bpf_iter_link_info, aux: *mut bpf_iter_aux_info) -> c_int {
+    let mut flags = 0;
+pub static mut pid: *mut c_void = core::ptr::null_mut();
+    let mut tgid = 0;
+    if ((!!linfo.task.tid + !!linfo.task.pid + !!linfo.task.pid_fd) > 1) {
     return -EINVAL;
+    }
     aux.task.type = BPF_TASK_ITER_ALL;
     if (linfo.task.tid != 0) {
     aux.task.type = BPF_TASK_ITER_TID;
@@ -230,20 +482,16 @@ unsafe extern "C" fn task_seq_stop(seq: *mut seq_file, v: *mut c_void) {
     if (linfo.task.pid_fd != 0) {
     aux.task.type = BPF_TASK_ITER_TGID;
     pid = pidfd_get_pid(linfo.task.pid_fd, &flags);
-    if (IS_ERR(pid))
+    if (IS_ERR(pid)) {
     return PTR_ERR(pid);
+    }
     tgid = pid_nr_ns(pid, task_active_pid_ns(current));
     aux.task.pid = tgid;
     put_pid(pid);
     }
     return 0;
     }
-    static const struct seq_operations task_seq_ops = {
-    .start	= task_seq_start,
-    .next	= task_seq_next,
-    .stop	= task_seq_stop,
-    .show	= task_seq_show,
-    };
+pub static mut seq_operations: usize = 0;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct bpf_iter_seq_task_file_info {
@@ -256,18 +504,17 @@ pub struct bpf_iter_seq_task_file_info {
     pub fd: u32,
 }
 
-    static struct file *
-    task_file_seq_get_next(struct bpf_iter_seq_task_file_info *info)
-    {
-    let mut saved_tid: u32 = info.tid;
-    struct task_struct *curr_task;
-    let mut curr_fd: c_uint = info.fd;
-    struct file *f;
+#[no_mangle]
+pub unsafe extern "C" fn task_file_seq_get_next(info: *mut bpf_iter_seq_task_file_info) -> *mut c_void {
+pub static mut saved_tid: u32 = 0;
+pub static mut curr_task: *mut c_void = core::ptr::null_mut();
+pub static mut curr_fd: c_uint = 0;
+pub static mut f: *mut c_void = core::ptr::null_mut();
 // If this function returns a non-NULL file object,
 // it held a reference to the task/file.
 // Otherwise, it does not hold any reference.
 //
-    again:
+// label;
     if (info.task) {
     curr_task = info.task;
     curr_fd = info.fd;
@@ -279,10 +526,12 @@ pub struct bpf_iter_seq_task_file_info {
     }
 // set info->task
     info.task = curr_task;
-    if (saved_tid == info.tid)
+    if (saved_tid == info.tid) {
     curr_fd = info.fd;
-    else
+    }
+    else {
     curr_fd = 0;
+    }
     }
     f = fget_task_next(curr_task, &curr_fd);
     if (f) {
@@ -299,49 +548,48 @@ pub struct bpf_iter_seq_task_file_info {
     info.task = core::ptr::null_mut();
     info.fd = 0;
     saved_tid = ++(info.tid);
-    goto again;
+// goto;
     }
-    static void *task_file_seq_start(struct seq_file *seq, loff_t *pos)
-    {
-    struct bpf_iter_seq_task_file_info *info = seq.private;
-    struct file *file;
+#[no_mangle]
+pub unsafe extern "C" fn task_file_seq_start(seq: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
+    let mut info = seq.private;
+pub static mut file: *mut c_void = core::ptr::null_mut();
     info.task = core::ptr::null_mut();
     file = task_file_seq_get_next(info);
-    if (file && *pos == 0)
+    if (file && *pos == 0) {
     ++*pos;
+    }
     return file;
     }
-    static void *task_file_seq_next(struct seq_file *seq, void *v, loff_t *pos)
-    {
-    struct bpf_iter_seq_task_file_info *info = seq.private;
+#[no_mangle]
+pub unsafe extern "C" fn task_file_seq_next(seq: *mut seq_file, v: *mut c_void, pos: *mut loff_t) -> *mut c_void {
+    let mut info = seq.private;
     ++*pos;
     ++info.fd;
-    fput((struct file *)v);
+    fput(v);
     return task_file_seq_get_next(info);
     }
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct bpf_iter__task_file {
-    pub meta): *mut *mut __bpf_md_ptr(struct bpf_iter_meta ,,
-    pub task): *mut *mut __bpf_md_ptr(struct task_struct ,,
+    pub meta): *mut *mut __bpf_md_ptr(bpf_iter_meta ,,
+    pub task): *mut *mut __bpf_md_ptr(task_struct ,,
     pub __aligned(8): u32 fd,
-    pub file): *mut *mut __bpf_md_ptr(struct file ,,
+    pub file): *mut *mut __bpf_md_ptr(file ,,
 }
 
-    DEFINE_BPF_ITER_FUNC(task_file, struct bpf_iter_meta *meta,
-    struct task_struct *task, u32 fd,
-    struct file *file)
-    static int __task_file_seq_show(struct seq_file *seq, struct file *file,
-    bool in_stop)
-    {
-    struct bpf_iter_seq_task_file_info *info = seq.private;
-    struct bpf_iter__task_file ctx;
-    struct bpf_iter_meta meta;
-    struct bpf_prog *prog;
+    DEFINE_BPF_ITER_FUNC(task_file, bpf_iter_meta *meta, task_struct *task, u32 fd, file *file)
+#[no_mangle]
+pub unsafe extern "C" fn __task_file_seq_show(seq: *mut seq_file, file: *mut file, in_stop: bool) -> c_int {
+    let mut info = seq.private;
+pub static mut ctx: usize = 0;
+pub static mut meta: usize = 0;
+pub static mut prog: *mut c_void = core::ptr::null_mut();
     meta.seq = seq;
     prog = bpf_iter_get_info(&meta, in_stop);
-    if (!prog)
+    if (!prog) {
     return 0;
+    }
     ctx.meta = &meta;
     ctx.task = info.task;
     ctx.fd = info.fd;
@@ -350,28 +598,22 @@ pub struct bpf_iter__task_file {
     }
 #[no_mangle]
 unsafe extern "C" fn task_file_seq_show(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int task_file_seq_show(struct seq_file *seq, void *v)
-    {
     return __task_file_seq_show(seq, v, false);
     }
 #[no_mangle]
 unsafe extern "C" fn task_file_seq_stop(seq: *mut seq_file, v: *mut c_void) {
-    static void task_file_seq_stop(struct seq_file *seq, void *v)
-    {
-    struct bpf_iter_seq_task_file_info *info = seq.private;
+    let mut info = seq.private;
     if (!v) {
     (void)__task_file_seq_show(seq, v, true);
     } else {
-    fput((struct file *)v);
+    fput(v);
     put_task_struct(info.task);
     info.task = core::ptr::null_mut();
     }
     }
 #[no_mangle]
 unsafe extern "C" fn init_seq_pidns(priv_data: *mut c_void, aux: *mut bpf_iter_aux_info) -> c_int {
-    static int init_seq_pidns(void *priv_data, struct bpf_iter_aux_info *aux)
-    {
-    struct bpf_iter_seq_task_common *common = priv_data;
+    let mut common = priv_data;
     common.ns = get_pid_ns(task_active_pid_ns(current));
     common.type = aux.task.type;
     common.pid = aux.task.pid;
@@ -379,17 +621,10 @@ unsafe extern "C" fn init_seq_pidns(priv_data: *mut c_void, aux: *mut bpf_iter_a
     }
 #[no_mangle]
 unsafe extern "C" fn fini_seq_pidns(priv_data: *mut c_void) {
-    static void fini_seq_pidns(void *priv_data)
-    {
-    struct bpf_iter_seq_task_common *common = priv_data;
+    let mut common = priv_data;
     put_pid_ns(common.ns);
     }
-    static const struct seq_operations task_file_seq_ops = {
-    .start	= task_file_seq_start,
-    .next	= task_file_seq_next,
-    .stop	= task_file_seq_stop,
-    .show	= task_file_seq_show,
-    };
+pub static mut seq_operations: usize = 0;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct bpf_iter_seq_task_vma_info {
@@ -410,14 +645,13 @@ pub struct bpf_iter_seq_task_vma_info {
     task_vma_iter_next_vma,    /* use vma_next() with curr_vma */
     task_vma_iter_find_vma,    /* use find_vma() to find next vma */
     };
-    static struct vm_area_struct *
-    task_vma_seq_get_next(struct bpf_iter_seq_task_vma_info *info)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn task_vma_seq_get_next(info: *mut bpf_iter_seq_task_vma_info) -> *mut c_void {
     enum bpf_task_vma_iter_find_op op;
-    struct vm_area_struct *curr_vma;
-    struct task_struct *curr_task;
-    struct mm_struct *curr_mm;
-    let mut saved_tid: u32 = info.tid;
+pub static mut curr_vma: *mut c_void = core::ptr::null_mut();
+pub static mut curr_task: *mut c_void = core::ptr::null_mut();
+pub static mut curr_mm: *mut c_void = core::ptr::null_mut();
+pub static mut saved_tid: u32 = 0;
 // If this function returns a non-NULL vma, it holds a reference to
 // the task_struct, holds a refcount on mm->mm_users, and holds
 // read lock on vma->mm->mmap_lock.
@@ -473,17 +707,17 @@ pub struct bpf_iter_seq_task_vma_info {
     mmap_read_unlock(curr_mm);
     if (mmap_read_lock_killable(curr_mm)) {
     mmput(curr_mm);
-    goto finish;
+// goto;
     }
     } else {
     op = task_vma_iter_next_vma;
     }
     } else {
-    again:
+// label;
     curr_task = task_seq_get_next(&info.common, &info.tid, true);
     if (!curr_task) {
-    info.tid++;
-    goto finish;
+    info.tid += 1;
+// goto;
     }
     if (saved_tid != info.tid) {
 // new task, process the first vma
@@ -498,21 +732,24 @@ pub struct bpf_iter_seq_task_vma_info {
     op = task_vma_iter_find_vma;
     }
     curr_mm = get_task_mm(curr_task);
-    if (!curr_mm)
-    goto next_task;
+    if (!curr_mm) {
+// goto;
+    }
     if (mmap_read_lock_killable(curr_mm)) {
     mmput(curr_mm);
-    goto finish;
+// goto;
     }
     }
-    switch (op) {
-    case task_vma_iter_first_vma:
+    match (op) {
+    task_vma_iter_first_vma => {
     curr_vma = find_vma(curr_mm, 0);
-    break;
-    case task_vma_iter_next_vma:
+    // break;
+    }
+    task_vma_iter_next_vma => {
     curr_vma = find_vma(curr_mm, curr_vma.vm_end);
-    break;
-    case task_vma_iter_find_vma:
+    // break;
+    }
+    task_vma_iter_find_vma => {
 // We dropped mmap_lock so it is necessary to use find_vma
 // to find the next vma. This is similar to the  mechanism
 // in show_smaps_rollup().
@@ -522,73 +759,76 @@ pub struct bpf_iter_seq_task_vma_info {
 // check for case 2) or case 4.1) above
     if (curr_vma &&
     curr_vma.vm_start == info.prev_vm_start &&
-    curr_vma.vm_end == info.prev_vm_end)
+    curr_vma.vm_end == info.prev_vm_end) {
     curr_vma = find_vma(curr_mm, curr_vma.vm_end);
-    break;
+    }
+    // break;
+    }
     }
     if (!curr_vma) {
 // case 3) above, or case 2) 4.1) with vma->next == NULL
     mmap_read_unlock(curr_mm);
     mmput(curr_mm);
-    goto next_task;
+// goto;
     }
     info.task = curr_task;
     info.vma = curr_vma;
     info.mm = curr_mm;
     return curr_vma;
-    next_task:
-    if (info.common.type == BPF_TASK_ITER_TID)
-    goto finish;
+// label;
+    if (info.common.type == BPF_TASK_ITER_TID) {
+// goto;
+    }
     put_task_struct(curr_task);
     info.task = core::ptr::null_mut();
     info.mm = core::ptr::null_mut();
-    info.tid++;
-    goto again;
-    finish:
-    if (curr_task)
+    info.tid += 1;
+// goto;
+// label;
+    if (curr_task) {
     put_task_struct(curr_task);
+    }
     info.task = core::ptr::null_mut();
     info.vma = core::ptr::null_mut();
     info.mm = core::ptr::null_mut();
     return core::ptr::null_mut();
     }
-    static void *task_vma_seq_start(struct seq_file *seq, loff_t *pos)
-    {
-    struct bpf_iter_seq_task_vma_info *info = seq.private;
-    struct vm_area_struct *vma;
+#[no_mangle]
+pub unsafe extern "C" fn task_vma_seq_start(seq: *mut seq_file, pos: *mut loff_t) -> *mut c_void {
+    let mut info = seq.private;
+pub static mut vma: *mut c_void = core::ptr::null_mut();
     vma = task_vma_seq_get_next(info);
-    if (vma && *pos == 0)
+    if (vma && *pos == 0) {
     ++*pos;
+    }
     return vma;
     }
-    static void *task_vma_seq_next(struct seq_file *seq, void *v, loff_t *pos)
-    {
-    struct bpf_iter_seq_task_vma_info *info = seq.private;
+#[no_mangle]
+pub unsafe extern "C" fn task_vma_seq_next(seq: *mut seq_file, v: *mut c_void, pos: *mut loff_t) -> *mut c_void {
+    let mut info = seq.private;
     ++*pos;
     return task_vma_seq_get_next(info);
     }
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct bpf_iter__task_vma {
-    pub meta): *mut *mut __bpf_md_ptr(struct bpf_iter_meta ,,
-    pub task): *mut *mut __bpf_md_ptr(struct task_struct ,,
-    pub vma): *mut *mut __bpf_md_ptr(struct vm_area_struct ,,
+    pub meta): *mut *mut __bpf_md_ptr(bpf_iter_meta ,,
+    pub task): *mut *mut __bpf_md_ptr(task_struct ,,
+    pub vma): *mut *mut __bpf_md_ptr(vm_area_struct ,,
 }
 
-    DEFINE_BPF_ITER_FUNC(task_vma, struct bpf_iter_meta *meta,
-    struct task_struct *task, struct vm_area_struct *vma)
+    DEFINE_BPF_ITER_FUNC(task_vma, bpf_iter_meta *meta, task_struct *task, vm_area_struct *vma)
 #[no_mangle]
 unsafe extern "C" fn __task_vma_seq_show(seq: *mut seq_file, in_stop: bool) -> c_int {
-    static int __task_vma_seq_show(struct seq_file *seq, bool in_stop)
-    {
-    struct bpf_iter_seq_task_vma_info *info = seq.private;
-    struct bpf_iter__task_vma ctx;
-    struct bpf_iter_meta meta;
-    struct bpf_prog *prog;
+    let mut info = seq.private;
+pub static mut ctx: usize = 0;
+pub static mut meta: usize = 0;
+pub static mut prog: *mut c_void = core::ptr::null_mut();
     meta.seq = seq;
     prog = bpf_iter_get_info(&meta, in_stop);
-    if (!prog)
+    if (!prog) {
     return 0;
+    }
     ctx.meta = &meta;
     ctx.task = info.task;
     ctx.vma = info.vma;
@@ -596,15 +836,11 @@ unsafe extern "C" fn __task_vma_seq_show(seq: *mut seq_file, in_stop: bool) -> c
     }
 #[no_mangle]
 unsafe extern "C" fn task_vma_seq_show(seq: *mut seq_file, v: *mut c_void) -> c_int {
-    static int task_vma_seq_show(struct seq_file *seq, void *v)
-    {
     return __task_vma_seq_show(seq, false);
     }
 #[no_mangle]
 unsafe extern "C" fn task_vma_seq_stop(seq: *mut seq_file, v: *mut c_void) {
-    static void task_vma_seq_stop(struct seq_file *seq, void *v)
-    {
-    struct bpf_iter_seq_task_vma_info *info = seq.private;
+    let mut info = seq.private;
     if (!v) {
     (void)__task_vma_seq_show(seq, true);
     } else {
@@ -624,113 +860,55 @@ unsafe extern "C" fn task_vma_seq_stop(seq: *mut seq_file, v: *mut c_void) {
     info.task = core::ptr::null_mut();
     }
     }
-    static const struct seq_operations task_vma_seq_ops = {
-    .start	= task_vma_seq_start,
-    .next	= task_vma_seq_next,
-    .stop	= task_vma_seq_stop,
-    .show	= task_vma_seq_show,
-    };
-    static const struct bpf_iter_seq_info task_seq_info = {
-    .seq_ops		= &task_seq_ops,
-    .init_seq_private	= init_seq_pidns,
-    .fini_seq_private	= fini_seq_pidns,
-    .seq_priv_size		= sizeof(struct bpf_iter_seq_task_info),
-    };
+pub static mut seq_operations: usize = 0;
+pub static mut bpf_iter_seq_info: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn bpf_iter_fill_link_info(aux: *const bpf_iter_aux_info, info: *mut bpf_link_info) -> c_int {
-    static int bpf_iter_fill_link_info(const struct bpf_iter_aux_info *aux, struct bpf_link_info *info)
-    {
-    switch (aux.task.type) {
-    case BPF_TASK_ITER_TID:
+    match (aux.task.type) {
+    BPF_TASK_ITER_TID => {
     info.iter.task.tid = aux.task.pid;
-    break;
-    case BPF_TASK_ITER_TGID:
+    // break;
+    }
+    BPF_TASK_ITER_TGID => {
     info.iter.task.pid = aux.task.pid;
-    break;
-    default:
-    break;
+    // break;
+    }
+    _ => {
+    // break;
+    }
     }
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn bpf_iter_task_show_fdinfo(aux: *const bpf_iter_aux_info, seq: *mut seq_file) {
-    static void bpf_iter_task_show_fdinfo(const struct bpf_iter_aux_info *aux, struct seq_file *seq)
-    {
     seq_printf(seq, "task_type:\t%s\n", iter_task_type_names[aux.task.type]);
-    if (aux.task.type == BPF_TASK_ITER_TID)
+    if (aux.task.type == BPF_TASK_ITER_TID) {
     seq_printf(seq, "tid:\t%u\n", aux.task.pid);
-#[no_mangle]
-pub unsafe extern "C" fn if(BPF_TASK_ITER_TGID: aux->task.type ==) -> else {
-    else if (aux.task.type == BPF_TASK_ITER_TGID)
+    }
+
+    else if (aux.task.type == BPF_TASK_ITER_TGID) {
     seq_printf(seq, "pid:\t%u\n", aux.task.pid);
     }
-    static struct bpf_iter_reg task_reg_info = {
-    .target			= "task",
-    .attach_target		= bpf_iter_attach_task,
-    .feature		= BPF_ITER_RESCHED,
-    .ctx_arg_info_size	= 1,
-    .ctx_arg_info		= {
-    { offsetof(struct bpf_iter__task, task),
-    PTR_TO_BTF_ID_OR_NULL | PTR_TRUSTED },
-    },
-    .seq_info		= &task_seq_info,
-    .fill_link_info		= bpf_iter_fill_link_info,
-    .show_fdinfo		= bpf_iter_task_show_fdinfo,
-    };
-    static const struct bpf_iter_seq_info task_file_seq_info = {
-    .seq_ops		= &task_file_seq_ops,
-    .init_seq_private	= init_seq_pidns,
-    .fini_seq_private	= fini_seq_pidns,
-    .seq_priv_size		= sizeof(struct bpf_iter_seq_task_file_info),
-    };
-    static struct bpf_iter_reg task_file_reg_info = {
-    .target			= "task_file",
-    .attach_target		= bpf_iter_attach_task,
-    .feature		= BPF_ITER_RESCHED,
-    .ctx_arg_info_size	= 2,
-    .ctx_arg_info		= {
-    { offsetof(struct bpf_iter__task_file, task),
-    PTR_TO_BTF_ID_OR_NULL },
-    { offsetof(struct bpf_iter__task_file, file),
-    PTR_TO_BTF_ID_OR_NULL },
-    },
-    .seq_info		= &task_file_seq_info,
-    .fill_link_info		= bpf_iter_fill_link_info,
-    .show_fdinfo		= bpf_iter_task_show_fdinfo,
-    };
-    static const struct bpf_iter_seq_info task_vma_seq_info = {
-    .seq_ops		= &task_vma_seq_ops,
-    .init_seq_private	= init_seq_pidns,
-    .fini_seq_private	= fini_seq_pidns,
-    .seq_priv_size		= sizeof(struct bpf_iter_seq_task_vma_info),
-    };
-    static struct bpf_iter_reg task_vma_reg_info = {
-    .target			= "task_vma",
-    .attach_target		= bpf_iter_attach_task,
-    .feature		= BPF_ITER_RESCHED,
-    .ctx_arg_info_size	= 2,
-    .ctx_arg_info		= {
-    { offsetof(struct bpf_iter__task_vma, task),
-    PTR_TO_BTF_ID_OR_NULL },
-    { offsetof(struct bpf_iter__task_vma, vma),
-    PTR_TO_BTF_ID_OR_NULL },
-    },
-    .seq_info		= &task_vma_seq_info,
-    .fill_link_info		= bpf_iter_fill_link_info,
-    .show_fdinfo		= bpf_iter_task_show_fdinfo,
-    };
-    BPF_CALL_5(bpf_find_vma, struct task_struct *, task, u64, start,
+    }
+pub static mut bpf_iter_reg: usize = 0;
+pub static mut bpf_iter_seq_info: usize = 0;
+pub static mut bpf_iter_reg: usize = 0;
+pub static mut bpf_iter_seq_info: usize = 0;
+pub static mut bpf_iter_reg: usize = 0;
+    BPF_CALL_5(bpf_find_vma, task_struct *, task, u64, start,
     bpf_callback_t, callback_fn, void *, callback_ctx, u64, flags)
     {
-    struct mmap_unlock_irq_work *work;
-    struct vm_area_struct *vma;
-    let mut mmput_needed: bool __maybe_unused = false;
-    struct mm_struct *mm;
-    let mut ret: c_int = -ENOENT;
-    if (flags)
+pub static mut work: *mut c_void = core::ptr::null_mut();
+pub static mut vma: *mut c_void = core::ptr::null_mut();
+pub static mut mmput_needed: bool __maybe_unused = false;
+pub static mut mm: *mut c_void = core::ptr::null_mut();
+pub static mut ret: c_int = 0;
+    if (flags) {
     return -EINVAL;
-    if (!task)
+    }
+    if (!task) {
     return -ENOENT;
+    }
     if (task == current) {
     mm = task.mm;
     } else {
@@ -739,12 +917,15 @@ pub unsafe extern "C" fn if(BPF_TASK_ITER_TGID: aux->task.type ==) -> else {
 // Use trylock on alloc_lock instead of get_task_mm()'s
 // blocking task_lock() to avoid deadlocking the target task.
 //
-    if (!IS_ENABLED(CONFIG_MMU))
+    if (!IS_ENABLED!(CONFIG_MMU)) {
     return -EOPNOTSUPP;
-    if (irqs_disabled())
+    }
+    if (irqs_disabled()) {
     return -EBUSY;
-    if (!spin_trylock(&task.alloc_lock))
+    }
+    if (!spin_trylock(&task.alloc_lock)) {
     return -EBUSY;
+    }
     mm = task.mm;
     if (mm && !(task.flags & PF_KTHREAD)) {
     mmget(mm);
@@ -754,17 +935,18 @@ pub unsafe extern "C" fn if(BPF_TASK_ITER_TGID: aux->task.type ==) -> else {
     }
     spin_unlock(&task.alloc_lock);
     }
-    if (!mm)
+    if (!mm) {
     return -ENOENT;
+    }
     work = bpf_mmap_unlock_guard_get();
     if (IS_ERR(work)) {
     ret = PTR_ERR(work);
-    goto out;
+// goto;
     }
     if (!mmap_read_trylock(mm)) {
     bpf_mmap_unlock_guard_put(work);
     ret = -EBUSY;
-    goto out;
+// goto;
     }
     vma = find_vma(mm, start);
     if (vma && vma.vm_start <= start && vma.vm_end > start) {
@@ -773,27 +955,16 @@ pub unsafe extern "C" fn if(BPF_TASK_ITER_TGID: aux->task.type ==) -> else {
     ret = 0;
     }
     bpf_mmap_unlock_mm(work, mm);
-    out:
-
-    if (mmput_needed)
+// label;
+    if (mmput_needed) {
     mmput_async(mm);
+    }
 
     return ret;
     }
-    const struct bpf_func_proto bpf_find_vma_proto = {
-    .func		= bpf_find_vma,
-    .ret_type	= RET_INTEGER,
-    .arg1_type	= ARG_PTR_TO_BTF_ID,
-    .arg1_btf_id	= &btf_tracing_ids[BTF_TRACING_TYPE_TASK],
-    .arg2_type	= ARG_ANYTHING,
-    .arg3_type	= ARG_PTR_TO_FUNC,
-    .arg4_type	= ARG_PTR_TO_STACK_OR_NULL,
-    .arg5_type	= ARG_ANYTHING,
-    };
+pub static mut bpf_func_proto: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn bpf_iter_mmput_async(mm: *mut mm_struct) {
-    static inline void bpf_iter_mmput_async(struct mm_struct *mm)
-    {
 
     mmput_async(mm);
 
@@ -823,14 +994,13 @@ pub struct bpf_iter_task_vma {
 pub struct bpf_iter_task_vma_kern {
     pub data: *mut bpf_iter_task_vma_kern_data,
     pub __attribute__((aligned(8))): },
-    __bpf_kfunc int bpf_iter_task_vma_new(struct bpf_iter_task_vma *it,
-    struct task_struct *task, u64 addr)
+    __bpf_kfunc int bpf_iter_task_vma_new(bpf_iter_task_vma *it, task_struct *task, u64 addr)
     {
     pub )it: *mut *mut bpf_iter_task_vma_kern kit = (void,
     pub err: c_int,
-    pub bpf_iter_task_vma)): BUILD_BUG_ON(sizeof(struct bpf_iter_task_vma_kern) != sizeof(struct,
-    pub bpf_iter_task_vma)): BUILD_BUG_ON(__alignof__(struct bpf_iter_task_vma_kern) != __alignof__(struct,
-    if (!IS_ENABLED(CONFIG_PER_VMA_LOCK)) {
+    pub bpf_iter_task_vma)): BUILD_BUG_ON!(sizeof!(bpf_iter_task_vma_kern) != sizeof!(struct,
+    pub bpf_iter_task_vma)): BUILD_BUG_ON!(__alignof__(bpf_iter_task_vma_kern) != __alignof__(struct,
+    if (!IS_ENABLED!(CONFIG_PER_VMA_LOCK)) {
     pub NULL: kit->data =,
     pub -EOPNOTSUPP: return,
     }
@@ -849,8 +1019,8 @@ pub struct bpf_iter_task_vma_kern {
 // before, so non-NULL kit->data doesn't point to previously
 // bpf_mem_alloc'd bpf_iter_task_vma_kern_data
 //
-    pub bpf_iter_task_vma_kern_data)): kit->data = bpf_mem_alloc(&bpf_global_ma, sizeof(struct,
-    if (!kit.data)
+    pub bpf_iter_task_vma_kern_data)): kit->data = bpf_mem_alloc(&bpf_global_ma, sizeof!(struct,
+    if (!kit.data) {
     pub -ENOMEM: return,
     pub get_task_struct(task): kit->data->task =,
 //
@@ -863,21 +1033,23 @@ pub struct bpf_iter_task_vma_kern {
 // alloc_lock).
 //
     if (!spin_trylock(&task.alloc_lock)) {
+    }
     pub -EBUSY: err =,
     pub err_cleanup_iter: goto,
     }
     pub task->mm: kit->data->mm =,
-    if (kit.data.mm && !(task.flags & PF_KTHREAD))
+    if (kit.data.mm && !(task.flags & PF_KTHREAD)) {
     else
     pub NULL: kit->data->mm =,
     if (!kit.data.mm) {
+    }
     pub -ENOENT: err =,
     pub err_cleanup_iter: goto,
     }
     pub NULL: kit->data->snapshot.vm_file =,
     pub addr: kit->data->next_addr =,
     pub 0: return,
-    err_cleanup_iter:
+// label;
     pub kit->data): bpf_mem_free(&bpf_global_ma,,
 // NULL kit->data signals failed bpf_iter_task_vma initialization
     pub NULL: kit->data =,
@@ -896,13 +1068,12 @@ pub struct bpf_iter_task_vma_kern {
 // RCU walk. SLAB_TYPESAFE_BY_RCU can make vm_end stale, so fall back
 // to PAGE_SIZE advancement to guarantee forward progress.
 //
-    static struct vm_area_struct *
-    bpf_iter_task_vma_find_next(struct bpf_iter_task_vma_kern_data *data)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn bpf_iter_task_vma_find_next(data: *mut bpf_iter_task_vma_kern_data) -> *mut c_void {
     pub vma: *mut vm_area_struct,
     pub vmi: vma_iterator,
     pub end: unsigned long start,,
-    retry:
+// label;
     pub data->next_addr): vma_iter_init(&vmi, data->mm,,
     pub vma_next(&vmi): vma =,
     if (!vma) {
@@ -912,13 +1083,14 @@ pub struct bpf_iter_task_vma_kern {
     pub vma->vm_end: end =,
     pub start): vma = lock_vma_under_rcu(data->mm,,
     if (!vma) {
-    if (end <= data.next_addr)
+    if (end <= data.next_addr) {
     pub PAGE_SIZE: data->next_addr +=,
     else
     pub end: data->next_addr =,
     pub retry: goto,
     }
     if (unlikely(vma.vm_end <= data.next_addr)) {
+    }
     pub PAGE_SIZE: data->next_addr +=,
     pub retry: goto,
     }
@@ -926,38 +1098,36 @@ pub struct bpf_iter_task_vma_kern {
     }
 #[no_mangle]
 unsafe extern "C" fn bpf_iter_task_vma_snapshot_reset(snap: *mut vm_area_struct) {
-    static void bpf_iter_task_vma_snapshot_reset(struct vm_area_struct *snap)
-    {
     if (snap.vm_file) {
     pub NULL: snap->vm_file =,
     }
     }
-    __bpf_kfunc struct vm_area_struct *bpf_iter_task_vma_next(struct bpf_iter_task_vma *it)
+    __bpf_kfunc struct vm_area_struct *bpf_iter_task_vma_next(bpf_iter_task_vma *it)
     {
     pub )it: *mut *mut bpf_iter_task_vma_kern kit = (void,
     pub vma: *mut *mut vm_area_snap,,
-    if (!kit.data) /* bpf_iter_task_vma_new failed */
+    if (!kit.data) /* bpf_iter_task_vma_new failed */ {
     pub NULL: return,
     pub &kit->data->snapshot: snap =,
     pub bpf_iter_task_vma_find_next(kit->data): vma =,
     if (!vma)
     pub NULL: return,
-    pub sizeof(*snap)): *mut memcpy(snap, vma,,
+    pub sizeof!(*snap)): *mut memcpy(snap, vma,,
 //
 // The verifier only trusts vm_mm and vm_file (see
 // BTF_TYPE_SAFE_TRUSTED_OR_NULL in verifier.c). Take a reference
 // on vm_file; vm_mm is already correct because lock_vma_under_rcu()
+    }
 // verifies vma->vm_mm == mm. All other pointers are untrusted by
 // the verifier and left as-is.
 //
-    if (snap.vm_file)
+    if (snap.vm_file) {
     pub vma->vm_end: kit->data->next_addr =,
     pub snap: return,
     }
 #[no_mangle]
 pub unsafe extern "C" fn bpf_iter_task_vma_destroy(it: *mut bpf_iter_task_vma) -> __bpf_kfunc void {
-    __bpf_kfunc void bpf_iter_task_vma_destroy(struct bpf_iter_task_vma *it)
-    {
+    }
     pub )it: *mut *mut bpf_iter_task_vma_kern kit = (void,
     if (kit.data) {
     pub kit->data): bpf_mem_free(&bpf_global_ma,,
@@ -974,46 +1144,50 @@ pub struct bpf_iter_css_task {
 pub struct bpf_iter_css_task_kern {
     pub css_it: *mut css_task_iter,
     pub __attribute__((aligned(8))): },
-    __bpf_kfunc int bpf_iter_css_task_new(struct bpf_iter_css_task *it,
-    struct cgroup_subsys_state *css, unsigned int flags)
+    __bpf_kfunc int bpf_iter_css_task_new(bpf_iter_css_task *it, cgroup_subsys_state *css, unsigned int flags)
     {
     pub )it: *mut *mut bpf_iter_css_task_kern kit = (void,
-    pub bpf_iter_css_task)): BUILD_BUG_ON(sizeof(struct bpf_iter_css_task_kern) != sizeof(struct,
-    BUILD_BUG_ON(__alignof__(struct bpf_iter_css_task_kern) !=
+    pub bpf_iter_css_task)): BUILD_BUG_ON!(sizeof!(bpf_iter_css_task_kern) != sizeof!(struct,
+    BUILD_BUG_ON!(__alignof__(bpf_iter_css_task_kern) !=
     pub bpf_iter_css_task)): __alignof__(struct,
     pub NULL: kit->css_it =,
-    switch (flags) {
-    case CSS_TASK_ITER_PROCS | CSS_TASK_ITER_THREADED:
-    case CSS_TASK_ITER_PROCS:
-    case 0:
-    default:
+    match (flags) {
+    CSS_TASK_ITER_PROCS | CSS_TASK_ITER_THREADED => {
+    }
+    CSS_TASK_ITER_PROCS => {
+    }
+    0 => {
+    }
+    _ => {
     pub -EINVAL: return,
     }
-    pub css_task_iter)): kit->css_it = bpf_mem_alloc(&bpf_global_ma, sizeof(struct,
-    if (!kit.css_it)
+    }
+    pub css_task_iter)): kit->css_it = bpf_mem_alloc(&bpf_global_ma, sizeof!(struct,
+    if (!kit.css_it) {
     pub -ENOMEM: return,
     pub kit->css_it): css_task_iter_start(css, flags,,
     pub 0: return,
     }
-    __bpf_kfunc struct task_struct *bpf_iter_css_task_next(struct bpf_iter_css_task *it)
+    __bpf_kfunc struct task_struct *bpf_iter_css_task_next(bpf_iter_css_task *it)
     {
+    }
     pub )it: *mut *mut bpf_iter_css_task_kern kit = (void,
-    if (!kit.css_it)
+    if (!kit.css_it) {
     pub NULL: return,
     pub css_task_iter_next(kit->css_it): return,
     }
 #[no_mangle]
 pub unsafe extern "C" fn bpf_iter_css_task_destroy(it: *mut bpf_iter_css_task) -> __bpf_kfunc void {
-    __bpf_kfunc void bpf_iter_css_task_destroy(struct bpf_iter_css_task *it)
-    {
+    }
     pub )it: *mut *mut bpf_iter_css_task_kern kit = (void,
-    if (!kit.css_it)
+    if (!kit.css_it) {
     pub kit->css_it): bpf_mem_free(&bpf_global_ma,,
     }
 
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct bpf_iter_task {
+    }
     pub __opaque: [__u64; 3],
     pub __attribute__((aligned(8))): },
 #[repr(C)]
@@ -1033,95 +1207,104 @@ pub struct bpf_iter_task_kern {
 }
 
     __bpf_kfunc_start_defs();
-    __bpf_kfunc int bpf_iter_task_new(struct bpf_iter_task *it,
-    struct task_struct *task__nullable, unsigned int flags)
+    __bpf_kfunc int bpf_iter_task_new(bpf_iter_task *it, task_struct *task__nullable, unsigned int flags)
     {
-    struct bpf_iter_task_kern *kit = (void *)it;
-    BUILD_BUG_ON(sizeof(struct bpf_iter_task_kern) > sizeof(struct bpf_iter_task));
-    BUILD_BUG_ON(__alignof__(struct bpf_iter_task_kern) !=
-    __alignof__(struct bpf_iter_task));
+    let mut kit = it;
+    BUILD_BUG_ON!(sizeof!(bpf_iter_task_kern) > sizeof!(bpf_iter_task));
+    BUILD_BUG_ON!(__alignof__(bpf_iter_task_kern) !=
+    __alignof__(bpf_iter_task));
     kit.pos = core::ptr::null_mut();
-    switch (flags) {
-    case BPF_TASK_ITER_ALL_THREADS:
-    case BPF_TASK_ITER_ALL_PROCS:
-    break;
-    case BPF_TASK_ITER_PROC_THREADS:
-    if (!task__nullable)
-    return -EINVAL;
-    break;
-    default:
+    match (flags) {
+    BPF_TASK_ITER_ALL_THREADS => {
+    }
+    BPF_TASK_ITER_ALL_PROCS => {
+    // break;
+    }
+    BPF_TASK_ITER_PROC_THREADS => {
+    if (!task__nullable) {
     return -EINVAL;
     }
-    if (flags == BPF_TASK_ITER_PROC_THREADS)
+    // break;
+    }
+    _ => {
+    return -EINVAL;
+    }
+    }
+    if (flags == BPF_TASK_ITER_PROC_THREADS) {
     kit.task = task__nullable;
-    else
+    }
+    else {
     kit.task = &init_task;
+    }
     kit.pos = kit.task;
     kit.flags = flags;
     return 0;
     }
-    __bpf_kfunc struct task_struct *bpf_iter_task_next(struct bpf_iter_task *it)
+    __bpf_kfunc struct task_struct *bpf_iter_task_next(bpf_iter_task *it)
     {
-    struct bpf_iter_task_kern *kit = (void *)it;
-    struct task_struct *pos;
-    unsigned int flags;
+    let mut kit = it;
+pub static mut pos: *mut c_void = core::ptr::null_mut();
+    let mut flags = 0;
     flags = kit.flags;
     pos = kit.pos;
-    if (!pos)
+    if (!pos) {
     return pos;
-    if (flags == BPF_TASK_ITER_ALL_PROCS)
-    goto get_next_task;
+    }
+    if (flags == BPF_TASK_ITER_ALL_PROCS) {
+// goto;
+    }
     kit.pos = __next_thread(kit.pos);
-    if (kit.pos || flags == BPF_TASK_ITER_PROC_THREADS)
+    if (kit.pos || flags == BPF_TASK_ITER_PROC_THREADS) {
     return pos;
-    get_next_task:
+    }
+// label;
     kit.task = next_task(kit.task);
-    if (kit.task == &init_task)
+    if (kit.task == &init_task) {
     kit.pos = core::ptr::null_mut();
-    else
+    }
+    else {
     kit.pos = kit.task;
+    }
     return pos;
     }
 #[no_mangle]
 pub unsafe extern "C" fn bpf_iter_task_destroy(it: *mut bpf_iter_task) -> __bpf_kfunc void {
-    __bpf_kfunc void bpf_iter_task_destroy(struct bpf_iter_task *it)
-    {
     }
     __bpf_kfunc_end_defs();
-    DEFINE_PER_CPU(struct mmap_unlock_irq_work, mmap_unlock_work);
+pub static mut struct mmap_unlock_irq_work: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn do_mmap_read_unlock(entry: *mut irq_work) {
-    static void do_mmap_read_unlock(struct irq_work *entry)
-    {
-    struct mmap_unlock_irq_work *work;
-    if (WARN_ON_ONCE(IS_ENABLED(CONFIG_PREEMPT_RT)))
+pub static mut work: *mut c_void = core::ptr::null_mut();
+    if (WARN_ON_ONCE!(IS_ENABLED!(CONFIG_PREEMPT_RT))) {
     return;
-    work = container_of(entry, struct mmap_unlock_irq_work, irq_work);
+    }
+    work = container_of!(entry, mmap_unlock_irq_work, irq_work);
     mmap_read_unlock_non_owner(work.mm);
     work.mm = core::ptr::null_mut();
     bpf_mmap_unlock_guard_put(work);
     }
 #[no_mangle]
-unsafe extern "C" fn task_iter_init() -> int __init {
-    static int __init task_iter_init(void)
-    {
-    struct mmap_unlock_irq_work *work;
-    int ret, cpu;
+unsafe extern "C" fn task_iter_init() -> c_int {
+pub static mut work: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+    let mut cpu = 0;
     for_each_possible_cpu(cpu) {
     work = per_cpu_ptr(&mmap_unlock_work, cpu);
     init_irq_work(&work.irq_work, do_mmap_read_unlock);
     }
     task_reg_info.ctx_arg_info[0].btf_id = btf_tracing_ids[BTF_TRACING_TYPE_TASK];
     ret = bpf_iter_reg_target(&task_reg_info);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     task_file_reg_info.ctx_arg_info[0].btf_id = btf_tracing_ids[BTF_TRACING_TYPE_TASK];
     task_file_reg_info.ctx_arg_info[1].btf_id = btf_tracing_ids[BTF_TRACING_TYPE_FILE];
     ret =  bpf_iter_reg_target(&task_file_reg_info);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     task_vma_reg_info.ctx_arg_info[0].btf_id = btf_tracing_ids[BTF_TRACING_TYPE_TASK];
     task_vma_reg_info.ctx_arg_info[1].btf_id = btf_tracing_ids[BTF_TRACING_TYPE_VMA];
     return bpf_iter_reg_target(&task_vma_reg_info);
     }
-    late_initcall(task_iter_init);
+    late_initcall!(task_iter_init);

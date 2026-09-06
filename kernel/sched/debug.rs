@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0-only
@@ -50,19 +300,19 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // to the console
 //
 
-    do {						\
-    if (m)					\
-    seq_printf(m, x);		\
-    else					\
-    pr_cont(x);			\
+    do {						
+    if (m)					 {
+    seq_printf(m, x);		
+    }
+    else {
+    pr_cont(x);			
+    }
     } while (0)
 //
 // Ease the printing of nsec fields:
 //
 #[no_mangle]
 unsafe extern "C" fn nsec_high(nsec: c_ulonglong) -> c_longlong {
-    static long long nsec_high(unsigned long long nsec)
-    {
     if ((long long)nsec < 0) {
     nsec = -nsec;
     do_div(nsec, 1000000);
@@ -73,10 +323,9 @@ unsafe extern "C" fn nsec_high(nsec: c_ulonglong) -> c_longlong {
     }
 #[no_mangle]
 unsafe extern "C" fn nsec_low(nsec: c_ulonglong) -> c_ulong {
-    static unsigned long nsec_low(unsigned long long nsec)
-    {
-    if ((long long)nsec < 0)
+    if ((long long)nsec < 0) {
     nsec = -nsec;
+    }
     return do_div(nsec, 1000000);
     }
 
@@ -86,12 +335,11 @@ unsafe extern "C" fn nsec_low(nsec: c_ulonglong) -> c_ulong {
 
 #[no_mangle]
 unsafe extern "C" fn sched_feat_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int sched_feat_show(struct seq_file *m, void *v)
-    {
-    int i;
-    for (i = 0; i < __SCHED_FEAT_NR; i++) {
-    if (!(sysctl_sched_features & (1UL << i)))
+    let mut i = 0;
+    while (i < __SCHED_FEAT_NR) {
+    if (!(sysctl_sched_features & (1UL << i))) {
     seq_puts(m, "NO_");
+    }
     seq_printf(m, "%s ", sched_feat_names[i]);
     }
     seq_puts(m, "\n");
@@ -99,39 +347,34 @@ unsafe extern "C" fn sched_feat_show(m: *mut seq_file, v: *mut c_void) -> c_int 
     }
 
     jump_label_key__##enabled ,
-    struct static_key sched_feat_keys[__SCHED_FEAT_NR] = {
-
-    };
+pub static mut static_key: usize = 0;
 
 #[no_mangle]
 unsafe extern "C" fn sched_feat_disable(i: c_int) {
-    static void sched_feat_disable(int i)
-    {
     static_key_disable_cpuslocked(&sched_feat_keys[i]);
     }
 #[no_mangle]
 unsafe extern "C" fn sched_feat_enable(i: c_int) {
-    static void sched_feat_enable(int i)
-    {
     static_key_enable_cpuslocked(&sched_feat_keys[i]);
     }
 
-    static void sched_feat_disable(int i) { };
-    static void sched_feat_enable(int i) { };
+#[no_mangle]
+pub unsafe extern "C" fn sched_feat_disable(i: c_int) { };
+#[no_mangle]
+pub unsafe extern "C" fn sched_feat_enable(i: c_int) { };
 
 #[no_mangle]
 unsafe extern "C" fn sched_feat_set(cmp: *mut c_char) -> c_int {
-    static int sched_feat_set(char *cmp)
-    {
-    int i;
-    let mut neg: c_int = 0;
+    let mut i = 0;
+pub static mut neg: c_int = 0;
     if (strncmp(cmp, "NO_", 3) == 0) {
     neg = 1;
     cmp += 3;
     }
     i = match_string(sched_feat_names, __SCHED_FEAT_NR, cmp);
-    if (i < 0)
+    if (i < 0) {
     return i;
+    }
     if (neg) {
     sysctl_sched_features &= ~(1UL << i);
     sched_feat_disable(i);
@@ -141,18 +384,18 @@ unsafe extern "C" fn sched_feat_set(cmp: *mut c_char) -> c_int {
     }
     return 0;
     }
-    static ssize_t
-    sched_feat_write(struct file *filp, const char __user *ubuf,
-    size_t cnt, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sched_feat_write(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
     char buf[64];
-    char *cmp;
-    int ret;
-    struct inode *inode;
-    if (cnt > 63)
+pub static mut cmp: *mut c_void = core::ptr::null_mut();
+    let mut ret = 0;
+pub static mut inode: *mut c_void = core::ptr::null_mut();
+    if (cnt > 63) {
     cnt = 63;
-    if (copy_from_user(buf, ubuf, cnt))
+    }
+    if (copy_from_user(buf, ubuf, cnt)) {
     return -EFAULT;
+    }
     buf[cnt] = 0;
     cmp = strstrip(buf);
 // Ensure the static_key remains in a consistent state
@@ -162,70 +405,54 @@ unsafe extern "C" fn sched_feat_set(cmp: *mut c_char) -> c_int {
     ret = sched_feat_set(cmp);
     inode_unlock(inode);
     cpus_read_unlock();
-    if (ret < 0)
+    if (ret < 0) {
     return ret;
+    }
 // ppos += cnt;
     return cnt;
     }
 #[no_mangle]
 unsafe extern "C" fn sched_feat_open(inode: *mut inode, filp: *mut file) -> c_int {
-    static int sched_feat_open(struct inode *inode, struct file *filp)
-    {
     return single_open(filp, sched_feat_show, core::ptr::null_mut());
     }
-    static const struct file_operations sched_feat_fops = {
-    .open		= sched_feat_open,
-    .write		= sched_feat_write,
-    .read		= seq_read,
-    .llseek		= seq_lseek,
-    .release	= single_release,
-    };
-    static ssize_t sched_scaling_write(struct file *filp, const char __user *ubuf,
-    size_t cnt, loff_t *ppos)
-    {
-    unsigned int scaling;
-    int ret;
+pub static mut file_operations: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn sched_scaling_write(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
+    let mut scaling = 0;
+    let mut ret = 0;
     ret = kstrtouint_from_user(ubuf, cnt, 10, &scaling);
-    if (ret)
+    if (ret) {
     return ret;
-    if (scaling >= SCHED_TUNABLESCALING_END)
+    }
+    if (scaling >= SCHED_TUNABLESCALING_END) {
     return -EINVAL;
+    }
     sysctl_sched_tunable_scaling = scaling;
-    if (sched_update_scaling())
+    if (sched_update_scaling()) {
     return -EINVAL;
+    }
 // ppos += cnt;
     return cnt;
     }
 #[no_mangle]
 unsafe extern "C" fn sched_scaling_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int sched_scaling_show(struct seq_file *m, void *v)
-    {
     seq_printf(m, "%d\n", sysctl_sched_tunable_scaling);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn sched_scaling_open(inode: *mut inode, filp: *mut file) -> c_int {
-    static int sched_scaling_open(struct inode *inode, struct file *filp)
-    {
     return single_open(filp, sched_scaling_show, core::ptr::null_mut());
     }
-    static const struct file_operations sched_scaling_fops = {
-    .open		= sched_scaling_open,
-    .write		= sched_scaling_write,
-    .read		= seq_read,
-    .llseek		= seq_lseek,
-    .release	= single_release,
-    };
+pub static mut file_operations: usize = 0;
 
-    static ssize_t
-    sched_cache_enable_write(struct file *filp, const char __user *ubuf,
-    size_t cnt, loff_t *ppos)
-    {
-    bool val;
-    int ret;
+#[no_mangle]
+pub unsafe extern "C" fn sched_cache_enable_write(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
+    let mut val = 0;
+    let mut ret = 0;
     ret = kstrtobool_from_user(ubuf, cnt, &val);
-    if (ret)
+    if (ret) {
     return ret;
+    }
     sysctl_sched_cache_user = val;
     sched_cache_active_set();
 // ppos += cnt;
@@ -233,58 +460,52 @@ unsafe extern "C" fn sched_scaling_open(inode: *mut inode, filp: *mut file) -> c
     }
 #[no_mangle]
 unsafe extern "C" fn sched_cache_enable_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int sched_cache_enable_show(struct seq_file *m, void *v)
-    {
     seq_printf(m, "%d\n", sysctl_sched_cache_user);
     return 0;
     }
-    static int sched_cache_enable_open(struct inode *inode,
-    struct file *filp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sched_cache_enable_open(inode: *mut inode, filp: *mut file) -> c_int {
     return single_open(filp, sched_cache_enable_show, core::ptr::null_mut());
     }
-    static const struct file_operations sched_cache_enable_fops = {
-    .open           = sched_cache_enable_open,
-    .write          = sched_cache_enable_write,
-    .read           = seq_read,
-    .llseek         = seq_lseek,
-    .release        = single_release,
-    };
+pub static mut file_operations: usize = 0;
 
-    static ssize_t sched_dynamic_write(struct file *filp, const char __user *ubuf,
-    size_t cnt, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sched_dynamic_write(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
     char buf[16];
-    int mode;
-    if (cnt > 15)
+    let mut mode = 0;
+    if (cnt > 15) {
     cnt = 15;
-    if (copy_from_user(buf, ubuf, cnt))
+    }
+    if (copy_from_user(buf, ubuf, cnt)) {
     return -EFAULT;
+    }
     buf[cnt] = 0;
     mode = sched_dynamic_mode(strstrip(buf));
-    if (mode < 0)
+    if (mode < 0) {
     return mode;
+    }
     sched_dynamic_update(mode);
 // ppos += cnt;
     return cnt;
     }
 #[no_mangle]
 unsafe extern "C" fn sched_dynamic_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int sched_dynamic_show(struct seq_file *m, void *v)
-    {
-    let mut i: c_int = (IS_ENABLED(CONFIG_PREEMPT_RT) || IS_ENABLED(CONFIG_ARCH_HAS_PREEMPT_LAZY)) * 2;
-    let mut mode: c_int = READ_ONCE(preempt_dynamic_mode);
-    int j;
+pub static mut i: c_int = 0;
+pub static mut mode: c_int = 0;
+    let mut j = 0;
 // Count entries in NULL terminated preempt_modes
-    for (j = 0; preempt_modes[j]; j++)
+    for (j = 0; preempt_modes[j]; j++) {
     ;
-    j -= !IS_ENABLED(CONFIG_ARCH_HAS_PREEMPT_LAZY);
-    for (; i < j; i++) {
-    if (mode == i)
+    }
+    j -= !IS_ENABLED!(CONFIG_ARCH_HAS_PREEMPT_LAZY);
+    while (i < j) {
+    if (mode == i) {
     seq_puts(m, "(");
+    }
     seq_puts(m, preempt_modes[i]);
-    if (mode == i)
+    if (mode == i) {
     seq_puts(m, ")");
+    }
     seq_puts(m, " ");
     }
     seq_puts(m, "\n");
@@ -292,33 +513,24 @@ unsafe extern "C" fn sched_dynamic_show(m: *mut seq_file, v: *mut c_void) -> c_i
     }
 #[no_mangle]
 unsafe extern "C" fn sched_dynamic_open(inode: *mut inode, filp: *mut file) -> c_int {
-    static int sched_dynamic_open(struct inode *inode, struct file *filp)
-    {
     return single_open(filp, sched_dynamic_show, core::ptr::null_mut());
     }
-    static const struct file_operations sched_dynamic_fops = {
-    .open		= sched_dynamic_open,
-    .write		= sched_dynamic_write,
-    .read		= seq_read,
-    .llseek		= seq_lseek,
-    .release	= single_release,
-    };
+pub static mut file_operations: usize = 0;
 
-    __read_mostly bool sched_debug_verbose;
-    static struct dentry           *sd_dentry;
-    static ssize_t sched_verbose_write(struct file *filp, const char __user *ubuf,
-    size_t cnt, loff_t *ppos)
-    {
-    ssize_t result;
-    bool orig;
+    let mut sched_debug_verbose = 0;
+pub static mut sd_dentry: *mut c_void = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn sched_verbose_write(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
+    let mut result = 0;
+    let mut orig = 0;
     cpus_read_lock();
     sched_domains_mutex_lock();
     orig = sched_debug_verbose;
     result = debugfs_write_file_bool(filp, ubuf, cnt, ppos);
-    if (sched_debug_verbose && !orig)
+    if (sched_debug_verbose && !orig) {
     update_sched_domain_debugfs();
-#[no_mangle]
-pub unsafe extern "C" fn if(orig: !sched_debug_verbose &&) -> else {
+    }
+if true {
     debugfs_remove(sd_dentry);
     sd_dentry = core::ptr::null_mut();
     }
@@ -326,76 +538,69 @@ pub unsafe extern "C" fn if(orig: !sched_debug_verbose &&) -> else {
     cpus_read_unlock();
     return result;
     }
-    static const struct file_operations sched_verbose_fops = {
-    .read =         debugfs_read_file_bool,
-    .write =        sched_verbose_write,
-    .open =         simple_open,
-    .llseek =       default_llseek,
-    };
-    static const struct seq_operations sched_debug_sops;
+pub static mut file_operations: usize = 0;
+pub static mut sched_debug_sops: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn sched_debug_open(inode: *mut inode, filp: *mut file) -> c_int {
-    static int sched_debug_open(struct inode *inode, struct file *filp)
-    {
     return seq_open(filp, &sched_debug_sops);
     }
-    static const struct file_operations sched_debug_fops = {
-    .open		= sched_debug_open,
-    .read		= seq_read,
-    .llseek		= seq_lseek,
-    .release	= seq_release,
-    };
+pub static mut file_operations: usize = 0;
     enum dl_param {
     DL_RUNTIME = 0,
     DL_PERIOD,
     };
     static unsigned long dl_server_period_max = (1UL << 22) * NSEC_PER_USEC; /* ~4 seconds */
     static unsigned long dl_server_period_min = (100) * NSEC_PER_USEC;     /* 100 us */
-    static ssize_t sched_server_write_common(struct file *filp, const char __user *ubuf,
-    size_t cnt, loff_t *ppos, enum dl_param param,
-    void *server)
-    {
-    let mut cpu: c_long = (long) ((struct seq_file *) filp.private_data).private;
-    struct sched_dl_entity *dl_se = (struct sched_dl_entity *)server;
+#[no_mangle]
+pub unsafe extern "C" fn sched_server_write_common(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t, param: dl_param, server: *mut c_void) -> ssize_t {
+pub static mut cpu: c_long = 0;
+    let mut dl_se = server;
     u64 old_runtime, runtime, period;
-    struct rq *rq = cpu_rq(cpu);
-    let mut retval: c_int = 0;
-    size_t err;
-    u64 value;
+    let mut rq = cpu_rq(cpu);
+pub static mut retval: c_int = 0;
+    let mut err = 0;
+    let mut value = 0;
     err = kstrtoull_from_user(ubuf, cnt, 10, &value);
-    if (err)
+    if (err) {
     return err;
+    }
     scoped_guard (rq_lock_irqsave, rq) {
     old_runtime = runtime = dl_se.dl_runtime;
     period = dl_se.dl_period;
-    switch (param) {
-    case DL_RUNTIME:
-    if (runtime == value)
-    break;
+    match (param) {
+    DL_RUNTIME => {
+    if (runtime == value) {
+    // break;
+    }
     runtime = value;
-    break;
-    case DL_PERIOD:
-    if (value == period)
-    break;
+    // break;
+    }
+    DL_PERIOD => {
+    if (value == period) {
+    // break;
+    }
     period = value;
-    break;
+    // break;
+    }
     }
     if (runtime > period ||
     period > dl_server_period_max ||
     period < dl_server_period_min) {
     return  -EINVAL;
     }
-    if (!cpu_online(cpu_of(rq)))
+    if (!cpu_online(cpu_of(rq))) {
     return -EBUSY;
+    }
     update_rq_clock(rq);
     dl_server_stop(dl_se);
     retval = dl_server_apply_params(dl_se, runtime, period, 0);
     dl_server_start(dl_se);
-    if (retval < 0)
+    if (retval < 0) {
     return retval;
     }
+    }
     if (!!old_runtime ^ !!runtime) {
-    pr_info("%s server %sabled on CPU %d%s.\n",
+    pr_info!("%s server %sabled on CPU %d%s.\n",
     server == &rq.fair_server ? "Fair" : "Ext",
     runtime ? "en" : "dis",
     cpu_of(rq),
@@ -404,183 +609,134 @@ unsafe extern "C" fn sched_debug_open(inode: *mut inode, filp: *mut file) -> c_i
 // ppos += cnt;
     return cnt;
     }
-    static size_t sched_server_show_common(struct seq_file *m, void *v, enum dl_param param,
-    void *server)
-    {
-    struct sched_dl_entity *dl_se = (struct sched_dl_entity *)server;
-    u64 value;
-    switch (param) {
-    case DL_RUNTIME:
+#[no_mangle]
+pub unsafe extern "C" fn sched_server_show_common(m: *mut seq_file, v: *mut c_void, param: dl_param, server: *mut c_void) -> size_t {
+    let mut dl_se = server;
+    let mut value = 0;
+    match (param) {
+    DL_RUNTIME => {
     value = dl_se.dl_runtime;
-    break;
-    case DL_PERIOD:
+    // break;
+    }
+    DL_PERIOD => {
     value = dl_se.dl_period;
-    break;
+    // break;
+    }
     }
     seq_printf(m, "%llu\n", value);
     return 0;
     }
-    static ssize_t
-    sched_fair_server_runtime_write(struct file *filp, const char __user *ubuf,
-    size_t cnt, loff_t *ppos)
-    {
-    let mut cpu: c_long = (long) ((struct seq_file *) filp.private_data).private;
-    struct rq *rq = cpu_rq(cpu);
+#[no_mangle]
+pub unsafe extern "C" fn sched_fair_server_runtime_write(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
+pub static mut cpu: c_long = 0;
+    let mut rq = cpu_rq(cpu);
     return sched_server_write_common(filp, ubuf, cnt, ppos, DL_RUNTIME,
     &rq.fair_server);
     }
 #[no_mangle]
 unsafe extern "C" fn sched_fair_server_runtime_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int sched_fair_server_runtime_show(struct seq_file *m, void *v)
-    {
-    let mut cpu: c_ulong = (unsigned long) m.private;
-    struct rq *rq = cpu_rq(cpu);
+pub static mut cpu: c_ulong = 0;
+    let mut rq = cpu_rq(cpu);
     return sched_server_show_common(m, v, DL_RUNTIME, &rq.fair_server);
     }
 #[no_mangle]
 unsafe extern "C" fn sched_fair_server_runtime_open(inode: *mut inode, filp: *mut file) -> c_int {
-    static int sched_fair_server_runtime_open(struct inode *inode, struct file *filp)
-    {
     return single_open(filp, sched_fair_server_runtime_show, inode.i_private);
     }
-    static const struct file_operations fair_server_runtime_fops = {
-    .open		= sched_fair_server_runtime_open,
-    .write		= sched_fair_server_runtime_write,
-    .read		= seq_read,
-    .llseek		= seq_lseek,
-    .release	= single_release,
-    };
-    static struct dentry *debugfs_sched;
+pub static mut file_operations: usize = 0;
+pub static mut debugfs_sched: *mut c_void = core::ptr::null_mut();
 
-    static ssize_t
-    sched_ext_server_runtime_write(struct file *filp, const char __user *ubuf,
-    size_t cnt, loff_t *ppos)
-    {
-    let mut cpu: c_long = (long) ((struct seq_file *) filp.private_data).private;
-    struct rq *rq = cpu_rq(cpu);
+#[no_mangle]
+pub unsafe extern "C" fn sched_ext_server_runtime_write(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
+pub static mut cpu: c_long = 0;
+    let mut rq = cpu_rq(cpu);
     return sched_server_write_common(filp, ubuf, cnt, ppos, DL_RUNTIME,
     &rq.ext_server);
     }
 #[no_mangle]
 unsafe extern "C" fn sched_ext_server_runtime_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int sched_ext_server_runtime_show(struct seq_file *m, void *v)
-    {
-    let mut cpu: c_ulong = (unsigned long) m.private;
-    struct rq *rq = cpu_rq(cpu);
+pub static mut cpu: c_ulong = 0;
+    let mut rq = cpu_rq(cpu);
     return sched_server_show_common(m, v, DL_RUNTIME, &rq.ext_server);
     }
 #[no_mangle]
 unsafe extern "C" fn sched_ext_server_runtime_open(inode: *mut inode, filp: *mut file) -> c_int {
-    static int sched_ext_server_runtime_open(struct inode *inode, struct file *filp)
-    {
     return single_open(filp, sched_ext_server_runtime_show, inode.i_private);
     }
-    static const struct file_operations ext_server_runtime_fops = {
-    .open		= sched_ext_server_runtime_open,
-    .write		= sched_ext_server_runtime_write,
-    .read		= seq_read,
-    .llseek		= seq_lseek,
-    .release	= single_release,
-    };
-    static ssize_t
-    sched_ext_server_period_write(struct file *filp, const char __user *ubuf,
-    size_t cnt, loff_t *ppos)
-    {
-    let mut cpu: c_long = (long) ((struct seq_file *) filp.private_data).private;
-    struct rq *rq = cpu_rq(cpu);
+pub static mut file_operations: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn sched_ext_server_period_write(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
+pub static mut cpu: c_long = 0;
+    let mut rq = cpu_rq(cpu);
     return sched_server_write_common(filp, ubuf, cnt, ppos, DL_PERIOD,
     &rq.ext_server);
     }
 #[no_mangle]
 unsafe extern "C" fn sched_ext_server_period_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int sched_ext_server_period_show(struct seq_file *m, void *v)
-    {
-    let mut cpu: c_ulong = (unsigned long) m.private;
-    struct rq *rq = cpu_rq(cpu);
+pub static mut cpu: c_ulong = 0;
+    let mut rq = cpu_rq(cpu);
     return sched_server_show_common(m, v, DL_PERIOD, &rq.ext_server);
     }
 #[no_mangle]
 unsafe extern "C" fn sched_ext_server_period_open(inode: *mut inode, filp: *mut file) -> c_int {
-    static int sched_ext_server_period_open(struct inode *inode, struct file *filp)
-    {
     return single_open(filp, sched_ext_server_period_show, inode.i_private);
     }
-    static const struct file_operations ext_server_period_fops = {
-    .open		= sched_ext_server_period_open,
-    .write		= sched_ext_server_period_write,
-    .read		= seq_read,
-    .llseek		= seq_lseek,
-    .release	= single_release,
-    };
+pub static mut file_operations: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn debugfs_ext_server_init() {
-    static void debugfs_ext_server_init(void)
-    {
-    struct dentry *d_ext;
-    unsigned long cpu;
+pub static mut d_ext: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
     d_ext = debugfs_create_dir("ext_server", debugfs_sched);
-    if (!d_ext)
+    if (!d_ext) {
     return;
+    }
     for_each_possible_cpu(cpu) {
-    struct dentry *d_cpu;
+pub static mut d_cpu: *mut c_void = core::ptr::null_mut();
     char buf[32];
-    snprintf(buf, sizeof(buf), "cpu%lu", cpu);
+    snprintf(buf, sizeof!(buf), "cpu%lu", cpu);
     d_cpu = debugfs_create_dir(buf, d_ext);
-    debugfs_create_file("runtime", 0644, d_cpu, (void *) cpu, &ext_server_runtime_fops);
-    debugfs_create_file("period", 0644, d_cpu, (void *) cpu, &ext_server_period_fops);
+    debugfs_create_file("runtime", 0644, d_cpu,  cpu, &ext_server_runtime_fops);
+    debugfs_create_file("period", 0644, d_cpu,  cpu, &ext_server_period_fops);
     }
     }
 
-    static ssize_t
-    sched_fair_server_period_write(struct file *filp, const char __user *ubuf,
-    size_t cnt, loff_t *ppos)
-    {
-    let mut cpu: c_long = (long) ((struct seq_file *) filp.private_data).private;
-    struct rq *rq = cpu_rq(cpu);
+#[no_mangle]
+pub unsafe extern "C" fn sched_fair_server_period_write(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
+pub static mut cpu: c_long = 0;
+    let mut rq = cpu_rq(cpu);
     return sched_server_write_common(filp, ubuf, cnt, ppos, DL_PERIOD,
     &rq.fair_server);
     }
 #[no_mangle]
 unsafe extern "C" fn sched_fair_server_period_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int sched_fair_server_period_show(struct seq_file *m, void *v)
-    {
-    let mut cpu: c_ulong = (unsigned long) m.private;
-    struct rq *rq = cpu_rq(cpu);
+pub static mut cpu: c_ulong = 0;
+    let mut rq = cpu_rq(cpu);
     return sched_server_show_common(m, v, DL_PERIOD, &rq.fair_server);
     }
 #[no_mangle]
 unsafe extern "C" fn sched_fair_server_period_open(inode: *mut inode, filp: *mut file) -> c_int {
-    static int sched_fair_server_period_open(struct inode *inode, struct file *filp)
-    {
     return single_open(filp, sched_fair_server_period_show, inode.i_private);
     }
-    static const struct file_operations fair_server_period_fops = {
-    .open		= sched_fair_server_period_open,
-    .write		= sched_fair_server_period_write,
-    .read		= seq_read,
-    .llseek		= seq_lseek,
-    .release	= single_release,
-    };
+pub static mut file_operations: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn debugfs_fair_server_init() {
-    static void debugfs_fair_server_init(void)
-    {
-    struct dentry *d_fair;
-    unsigned long cpu;
+pub static mut d_fair: *mut c_void = core::ptr::null_mut();
+    let mut cpu = 0;
     d_fair = debugfs_create_dir("fair_server", debugfs_sched);
-    if (!d_fair)
+    if (!d_fair) {
     return;
+    }
     for_each_possible_cpu(cpu) {
-    struct dentry *d_cpu;
+pub static mut d_cpu: *mut c_void = core::ptr::null_mut();
     char buf[32];
-    snprintf(buf, sizeof(buf), "cpu%lu", cpu);
+    snprintf(buf, sizeof!(buf), "cpu%lu", cpu);
     d_cpu = debugfs_create_dir(buf, d_fair);
-    debugfs_create_file("runtime", 0644, d_cpu, (void *) cpu, &fair_server_runtime_fops);
-    debugfs_create_file("period", 0644, d_cpu, (void *) cpu, &fair_server_period_fops);
+    debugfs_create_file("runtime", 0644, d_cpu,  cpu, &fair_server_runtime_fops);
+    debugfs_create_file("period", 0644, d_cpu,  cpu, &fair_server_period_fops);
     }
     }
 
-    let mut cgroup_mode: static int = 2;
+pub static mut cgroup_mode: int = 2;
 // See __sched_cgroup_mode_update().
     static const char *cgroup_mode_str[] = {
     "up",
@@ -591,27 +747,28 @@ unsafe extern "C" fn debugfs_fair_server_init() {
     };
 #[no_mangle]
 unsafe extern "C" fn sched_cgroup_mode(str: *const c_char) -> c_int {
-    static int sched_cgroup_mode(const char *str)
-    {
-    for (int i = 0; i < ARRAY_SIZE(cgroup_mode_str); i++) {
-    if (!strcmp(str, cgroup_mode_str[i]))
+    while (i < ARRAY_SIZE!(cgroup_mode_str)) {
+    if (!strcmp(str, cgroup_mode_str[i])) {
     return i;
+    }
     }
     return -EINVAL;
     }
-    static ssize_t sched_cgroup_write(struct file *filp, const char __user *ubuf,
-    size_t cnt, loff_t *ppos)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sched_cgroup_write(filp: *mut file, ubuf: *mut c_char, cnt: size_t, ppos: *mut loff_t) -> ssize_t {
     char buf[16];
-    int mode;
-    if (cnt > 15)
+    let mut mode = 0;
+    if (cnt > 15) {
     cnt = 15;
-    if (copy_from_user(buf, ubuf, cnt))
+    }
+    if (copy_from_user(buf, ubuf, cnt)) {
     return -EFAULT;
+    }
     buf[cnt] = 0;
     mode = sched_cgroup_mode(strstrip(buf));
-    if (mode < 0)
+    if (mode < 0) {
     return mode;
+    }
     __sched_cgroup_mode_update(mode);
     WRITE_ONCE(cgroup_mode, mode);
 // ppos += cnt;
@@ -619,15 +776,15 @@ unsafe extern "C" fn sched_cgroup_mode(str: *const c_char) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn sched_cgroup_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int sched_cgroup_show(struct seq_file *m, void *v)
-    {
-    let mut mode: c_int = READ_ONCE(cgroup_mode);
-    for (int i = 0; i < ARRAY_SIZE(cgroup_mode_str); i++) {
-    if (mode == i)
+pub static mut mode: c_int = 0;
+    while (i < ARRAY_SIZE!(cgroup_mode_str)) {
+    if (mode == i) {
     seq_puts(m, "(");
+    }
     seq_puts(m, cgroup_mode_str[i]);
-    if (mode == i)
+    if (mode == i) {
     seq_puts(m, ")");
+    }
     seq_puts(m, " ");
     }
     seq_puts(m, "\n");
@@ -635,22 +792,12 @@ unsafe extern "C" fn sched_cgroup_show(m: *mut seq_file, v: *mut c_void) -> c_in
     }
 #[no_mangle]
 unsafe extern "C" fn sched_cgroup_open(inode: *mut inode, filp: *mut file) -> c_int {
-    static int sched_cgroup_open(struct inode *inode, struct file *filp)
-    {
     return single_open(filp, sched_cgroup_show, core::ptr::null_mut());
     }
-    static const struct file_operations sched_cgroup_fops = {
-    .open		= sched_cgroup_open,
-    .write		= sched_cgroup_write,
-    .read		= seq_read,
-    .llseek		= seq_lseek,
-    .release	= single_release,
-    };
+pub static mut file_operations: usize = 0;
 
 #[no_mangle]
 unsafe extern "C" fn sched_init_debug() -> __init int {
-    static __init int sched_init_debug(void)
-    {
     struct dentry __maybe_unused *numa, *llc;
     debugfs_sched = debugfs_create_dir("sched", core::ptr::null_mut());
     debugfs_create_file("features", 0644, debugfs_sched, core::ptr::null_mut(), &sched_feat_fops);
@@ -699,14 +846,12 @@ unsafe extern "C" fn sched_init_debug() -> __init int {
 
     return 0;
     }
-    late_initcall(sched_init_debug);
+    late_initcall!(sched_init_debug);
     static cpumask_var_t		sd_sysctl_cpus;
 #[no_mangle]
 unsafe extern "C" fn sd_flags_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int sd_flags_show(struct seq_file *m, void *v)
-    {
-    let mut flags: c_ulong = *(unsigned int *)m.private;
-    int idx;
+pub static mut flags: c_ulong = 0;
+    let mut idx = 0;
     for_each_set_bit(idx, &flags, __SD_FLAG_CNT) {
     seq_puts(m, sd_flag_debug[idx].name);
     seq_puts(m, " ");
@@ -716,20 +861,11 @@ unsafe extern "C" fn sd_flags_show(m: *mut seq_file, v: *mut c_void) -> c_int {
     }
 #[no_mangle]
 unsafe extern "C" fn sd_flags_open(inode: *mut inode, file: *mut file) -> c_int {
-    static int sd_flags_open(struct inode *inode, struct file *file)
-    {
     return single_open(file, sd_flags_show, inode.i_private);
     }
-    static const struct file_operations sd_flags_fops = {
-    .open		= sd_flags_open,
-    .read		= seq_read,
-    .llseek		= seq_lseek,
-    .release	= single_release,
-    };
+pub static mut file_operations: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn register_sd(sd: *mut sched_domain, parent: *mut dentry) {
-    static void register_sd(struct sched_domain *sd, struct dentry *parent)
-    {
 
     debugfs_create_##type(#member, mode, parent, &sd.member)
     SDM(ulong, 0644, min_interval);
@@ -742,74 +878,76 @@ unsafe extern "C" fn register_sd(sd: *mut sched_domain, parent: *mut dentry) {
 
     debugfs_create_file("flags", 0444, parent, &sd.flags, &sd_flags_fops);
     debugfs_create_file("groups_flags", 0444, parent, &sd.groups.flags, &sd_flags_fops);
-    debugfs_create_u32("level", 0444, parent, (u32 *)&sd.level);
-    if (sd.flags & SD_ASYM_PACKING)
+    debugfs_create_u32("level", 0444, parent, &sd.level);
+    if (sd.flags & SD_ASYM_PACKING) {
     debugfs_create_u32("group_asym_prefer_cpu", 0444, parent,
-    (u32 *)&sd.groups.asym_prefer_cpu);
+    &sd.groups.asym_prefer_cpu);
+    }
     }
 #[no_mangle]
 pub unsafe extern "C" fn update_sched_domain_debugfs() {
-    void update_sched_domain_debugfs(void)
-    {
-    int cpu, i;
+    let mut cpu = 0;
+    let mut i = 0;
 //
 // This can unfortunately be invoked before sched_debug_init() creates
 // the debug directory. Don't touch sd_sysctl_cpus until then.
 //
-    if (!debugfs_sched)
+    if (!debugfs_sched) {
     return;
-    if (!sched_debug_verbose)
+    }
+    if (!sched_debug_verbose) {
     return;
+    }
     if (!cpumask_available(sd_sysctl_cpus)) {
-    if (!alloc_cpumask_var(&sd_sysctl_cpus, GFP_KERNEL))
+    if (!alloc_cpumask_var(&sd_sysctl_cpus, GFP_KERNEL)) {
     return;
+    }
     cpumask_copy(sd_sysctl_cpus, cpu_possible_mask);
     }
     if (!sd_dentry) {
     sd_dentry = debugfs_create_dir("domains", debugfs_sched);
 // rebuild sd_sysctl_cpus if empty since it gets cleared below
-    if (cpumask_empty(sd_sysctl_cpus))
+    if (cpumask_empty(sd_sysctl_cpus)) {
     cpumask_copy(sd_sysctl_cpus, cpu_online_mask);
     }
+    }
     for_each_cpu(cpu, sd_sysctl_cpus) {
-    struct sched_domain *sd;
-    struct dentry *d_cpu;
+pub static mut sd: *mut c_void = core::ptr::null_mut();
+pub static mut d_cpu: *mut c_void = core::ptr::null_mut();
     char buf[32];
-    snprintf(buf, sizeof(buf), "cpu%d", cpu);
+    snprintf(buf, sizeof!(buf), "cpu%d", cpu);
     debugfs_lookup_and_remove(buf, sd_dentry);
     d_cpu = debugfs_create_dir(buf, sd_dentry);
     i = 0;
     for_each_domain(cpu, sd) {
-    struct dentry *d_sd;
-    snprintf(buf, sizeof(buf), "domain%d", i);
+pub static mut d_sd: *mut c_void = core::ptr::null_mut();
+    snprintf(buf, sizeof!(buf), "domain%d", i);
     d_sd = debugfs_create_dir(buf, d_cpu);
     register_sd(sd, d_sd);
-    i++;
+    i += 1;
     }
     __cpumask_clear_cpu(cpu, sd_sysctl_cpus);
     }
     }
 #[no_mangle]
 pub unsafe extern "C" fn dirty_sched_domain_sysctl(cpu: c_int) {
-    void dirty_sched_domain_sysctl(int cpu)
-    {
-    if (cpumask_available(sd_sysctl_cpus))
+    if (cpumask_available(sd_sysctl_cpus)) {
     __cpumask_set_cpu(cpu, sd_sysctl_cpus);
+    }
     }
 
 #[no_mangle]
 unsafe extern "C" fn print_cfs_group_stats(m: *mut seq_file, cpu: c_int, tg: *mut task_group) {
-    static void print_cfs_group_stats(struct seq_file *m, int cpu, struct task_group *tg)
-    {
-    struct sched_entity *se = tg_se(tg, cpu);
+    let mut se = tg_se(tg, cpu);
 
-    if (!se)
+    if (!se) {
     return;
+    }
     PN(se.exec_start);
     PN(se.vruntime);
     PN(se.sum_exec_runtime);
     if (schedstat_enabled()) {
-    struct sched_statistics *stats;
+pub static mut stats: *mut c_void = core::ptr::null_mut();
     stats = __schedstats_from_se(se);
     PN_SCHEDSTAT(wait_start);
     PN_SCHEDSTAT(sleep_start);
@@ -829,14 +967,13 @@ unsafe extern "C" fn print_cfs_group_stats(m: *mut seq_file, cpu: c_int, tg: *mu
 
     }
 
-    static DEFINE_SPINLOCK(sched_debug_lock);
+pub static mut sched_debug_lock: usize = 0;
     static char group_path[PATH_MAX];
 #[no_mangle]
 unsafe extern "C" fn task_group_path(tg: *mut task_group, path: *mut c_char, plen: c_int) {
-    static void task_group_path(struct task_group *tg, char *path, int plen)
-    {
-    if (autogroup_path(tg, path, plen))
+    if (autogroup_path(tg, path, plen)) {
     return;
+    }
     cgroup_path(tg.css.cgroup, path, plen);
     }
 //
@@ -847,27 +984,28 @@ unsafe extern "C" fn task_group_path(tg: *mut task_group, path: *mut c_char, ple
 // matches the given buffer size to indicate possible path name truncation.
 //
 
-    {									\
-    if (spin_trylock(&sched_debug_lock)) {				\
-    task_group_path(tg, group_path, sizeof(group_path));	\
-    SEQ_printf(m, fmt, group_path);				\
-    spin_unlock(&sched_debug_lock);				\
-    } else {							\
-    char buf[128];						\
-    char *bufend = buf + sizeof(buf) - 3;			\
-    task_group_path(tg, buf, bufend - buf);			\
-    strcpy(bufend - 1, "...");				\
-    SEQ_printf(m, fmt, buf);				\
-    }								\
+    {									
+    if (spin_trylock(&sched_debug_lock)) {				
+    task_group_path(tg, group_path, sizeof!(group_path));	
+    SEQ_printf(m, fmt, group_path);				
+    spin_unlock(&sched_debug_lock);				
+    } else {							
+    char buf[128];						
+    let mut bufend = buf + sizeof!(buf) - 3;			
+    task_group_path(tg, buf, bufend - buf);			
+    strcpy(bufend - 1, "...");				
+    SEQ_printf(m, fmt, buf);				
+    }								
     }
 
-    static void
-    print_task(struct seq_file *m, struct rq *rq, struct task_struct *p)
-    {
-    if (task_current(rq, p))
+#[no_mangle]
+pub unsafe extern "C" fn print_task(m: *mut seq_file, rq: *mut rq, p: *mut task_struct) {
+    if (task_current(rq, p)) {
     SEQ_printf(m, ">R");
-    else
+    }
+    else {
     SEQ_printf(m, " %c", task_state_to_char(p));
+    }
     SEQ_printf(m, " %15s %5d %10ld %9Ld.%06ld   %c   %9Ld.%06ld %c %9Ld.%06ld %9Ld.%06ld %9Ld   %5d ",
     p.comm, task_pid_nr(p),
     p.se.h_load.weight,
@@ -892,9 +1030,8 @@ unsafe extern "C" fn task_group_path(tg: *mut task_group, path: *mut c_char, ple
     }
 #[no_mangle]
 unsafe extern "C" fn print_rq(m: *mut seq_file, rq: *mut rq, rq_cpu: c_int) {
-    static void print_rq(struct seq_file *m, struct rq *rq, int rq_cpu)
-    {
-    struct task_struct *g, *p;
+    let mut g = core::ptr::null_mut();
+    let mut p = core::ptr::null_mut();
     SEQ_printf(m, "\n");
     SEQ_printf(m, "runnable tasks:\n");
     SEQ_printf(m, " S            task   PID     weight       vruntime   eligible    "
@@ -917,24 +1054,25 @@ unsafe extern "C" fn print_rq(m: *mut seq_file, rq: *mut rq, rq_cpu: c_int) {
     "\n");
     rcu_read_lock();
     for_each_process_thread(g, p) {
-    if (task_cpu(p) != rq_cpu)
+    if (task_cpu(p) != rq_cpu) {
     continue;
+    }
     print_task(m, rq, p);
     }
     rcu_read_unlock();
     }
 #[no_mangle]
 pub unsafe extern "C" fn print_cfs_rq(m: *mut seq_file, cpu: c_int, cfs_rq: *mut cfs_rq) {
-    void print_cfs_rq(struct seq_file *m, int cpu, struct cfs_rq *cfs_rq)
-    {
-    let mut left_vruntime: i64 = -1, right_vruntime = -1, left_deadline = -1, spread;
-    let mut zero_vruntime: i64 = -1, sum_w_vruntime = -1;
-    u64 avruntime;
-    struct sched_entity *last, *first, *root;
-    struct rq *rq = cpu_rq(cpu);
-    unsigned int sum_shift;
-    unsigned long flags;
-    u64 sum_weight;
+pub static mut left_vruntime: i64 = 0;
+pub static mut zero_vruntime: i64 = 0;
+    let mut avruntime = 0;
+    let mut last = core::ptr::null_mut();
+    let mut first = core::ptr::null_mut();
+    let mut root = core::ptr::null_mut();
+    let mut rq = cpu_rq(cpu);
+    let mut sum_shift = 0;
+    let mut flags = 0;
+    let mut sum_weight = 0;
 
     SEQ_printf(m, "\n");
     SEQ_printf_task_group_path(m, cfs_rq.tg, "cfs_rq[%d]:%s\n", cpu);
@@ -944,14 +1082,17 @@ pub unsafe extern "C" fn print_cfs_rq(m: *mut seq_file, cpu: c_int, cfs_rq: *mut
 
     raw_spin_rq_lock_irqsave(rq, flags);
     root = __pick_root_entity(cfs_rq);
-    if (root)
+    if (root) {
     left_vruntime = root.min_vruntime;
+    }
     first = __pick_first_entity(cfs_rq);
-    if (first)
+    if (first) {
     left_deadline = first.deadline;
+    }
     last = __pick_last_entity(cfs_rq);
-    if (last)
+    if (last) {
     right_vruntime = last.vruntime;
+    }
     zero_vruntime = cfs_rq.zero_vruntime;
     sum_w_vruntime = cfs_rq.sum_w_vruntime;
     sum_weight = cfs_rq.sum_weight;
@@ -1012,8 +1153,6 @@ pub unsafe extern "C" fn print_cfs_rq(m: *mut seq_file, cpu: c_int, cfs_rq: *mut
     }
 #[no_mangle]
 pub unsafe extern "C" fn print_rt_rq(m: *mut seq_file, cpu: c_int, rt_rq: *mut rt_rq) {
-    void print_rt_rq(struct seq_file *m, int cpu, struct rt_rq *rt_rq)
-    {
 
     SEQ_printf(m, "\n");
     SEQ_printf_task_group_path(m, rt_rq.tg, "rt_rq[%d]:%s\n", cpu);
@@ -1035,9 +1174,7 @@ pub unsafe extern "C" fn print_rt_rq(m: *mut seq_file, cpu: c_int, rt_rq: *mut r
     }
 #[no_mangle]
 pub unsafe extern "C" fn print_dl_rq(m: *mut seq_file, cpu: c_int, dl_rq: *mut dl_rq) {
-    void print_dl_rq(struct seq_file *m, int cpu, struct dl_rq *dl_rq)
-    {
-    struct dl_bw *dl_bw;
+pub static mut dl_bw: *mut c_void = core::ptr::null_mut();
     SEQ_printf(m, "\n");
     SEQ_printf(m, "dl_rq[%d]:\n", cpu);
 
@@ -1050,23 +1187,23 @@ pub unsafe extern "C" fn print_dl_rq(m: *mut seq_file, cpu: c_int, dl_rq: *mut d
     }
 #[no_mangle]
 unsafe extern "C" fn print_cpu(m: *mut seq_file, cpu: c_int) {
-    static void print_cpu(struct seq_file *m, int cpu)
-    {
-    struct rq *rq = cpu_rq(cpu);
+    let mut rq = cpu_rq(cpu);
 
     {
-    let mut freq: c_uint = cpu_khz ? : 1;
+pub static mut freq: c_uint = 0;
     SEQ_printf(m, "cpu#%d, %u.%03u MHz\n",
     cpu, freq / 1000, (freq % 1000));
     }
 
     SEQ_printf(m, "cpu#%d\n", cpu);
 
-    do {									\
-    if (sizeof(rq.x) == 4)						\
-    SEQ_printf(m, "  .%-30s: %d\n", #x, (int)(rq.x));	\
-    else								\
-    SEQ_printf(m, "  .%-30s: %Ld\n", #x, (long long)(rq.x));\
+    do {									
+    if (sizeof!(rq.x) == 4)						 {
+    SEQ_printf(m, "  .%-30s: %d\n", #x, (int)(rq.x));	
+    }
+    else {
+    SEQ_printf(m, "  .%-30s: %Ld\n", #x, (long long)(rq.x));
+    }
     } while (0)
 
     SEQ_printf(m, "  .%-30s: %Ld.%06ld\n", #x, SPLIT_NS(rq.x))
@@ -1102,10 +1239,8 @@ unsafe extern "C" fn print_cpu(m: *mut seq_file, cpu: c_int) {
     };
 #[no_mangle]
 unsafe extern "C" fn sched_debug_header(m: *mut seq_file) {
-    static void sched_debug_header(struct seq_file *m)
-    {
     u64 ktime, sched_clk, cpu_clk;
-    unsigned long flags;
+    let mut flags = 0;
     local_irq_save(flags);
     ktime = ktime_to_ns(ktime_get());
     sched_clk = sched_clock();
@@ -1143,20 +1278,18 @@ unsafe extern "C" fn sched_debug_header(m: *mut seq_file) {
     }
 #[no_mangle]
 unsafe extern "C" fn sched_debug_show(m: *mut seq_file, v: *mut c_void) -> c_int {
-    static int sched_debug_show(struct seq_file *m, void *v)
-    {
-    let mut cpu: c_int = (unsigned long)(v - 2);
-    if (cpu != -1)
+pub static mut cpu: c_int = 0;
+    if (cpu != -1) {
     print_cpu(m, cpu);
-    else
+    }
+    else {
     sched_debug_header(m);
+    }
     return 0;
     }
 #[no_mangle]
 pub unsafe extern "C" fn sysrq_sched_debug_show() {
-    void sysrq_sched_debug_show(void)
-    {
-    int cpu;
+    let mut cpu = 0;
     sched_debug_header(core::ptr::null_mut());
     for_each_online_cpu(cpu) {
 //
@@ -1176,41 +1309,37 @@ pub unsafe extern "C" fn sysrq_sched_debug_show() {
 // In a hotplugged system some CPUs, including CPU 0, may be missing so we have
 // to use cpumask_* to iterate over the CPUs.
 //
-    static void *sched_debug_start(struct seq_file *file, loff_t *offset)
-    {
-    let mut n: c_ulong = *offset;
-    if (n == 0)
-    return (void *) 1;
-    n--;
-    if (n > 0)
+#[no_mangle]
+pub unsafe extern "C" fn sched_debug_start(file: *mut seq_file, offset: *mut loff_t) -> *mut c_void {
+pub static mut n: c_ulong = 0;
+    if (n == 0) {
+    return  1;
+    }
+    n -= 1;
+    if (n > 0) {
     n = cpumask_next(n - 1, cpu_online_mask);
-    else
+    }
+    else {
     n = cpumask_first(cpu_online_mask);
+    }
 // offset = n + 1;
-    if (n < nr_cpu_ids)
-    return (void *)(unsigned long)(n + 2);
+    if (n < nr_cpu_ids) {
+    return (unsigned long)(n + 2);
+    }
     return core::ptr::null_mut();
     }
-    static void *sched_debug_next(struct seq_file *file, void *data, loff_t *offset)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn sched_debug_next(file: *mut seq_file, data: *mut c_void, offset: *mut loff_t) -> *mut c_void {
     (*offset)++;
     return sched_debug_start(file, offset);
     }
 #[no_mangle]
 unsafe extern "C" fn sched_debug_stop(file: *mut seq_file, data: *mut c_void) {
-    static void sched_debug_stop(struct seq_file *file, void *data)
-    {
     }
-    static const struct seq_operations sched_debug_sops = {
-    .start		= sched_debug_start,
-    .next		= sched_debug_next,
-    .stop		= sched_debug_stop,
-    .show		= sched_debug_show,
-    };
+pub static mut seq_operations: usize = 0;
 
-    void print_numa_stats(struct seq_file *m, int node, unsigned long tsf,
-    unsigned long tpf, unsigned long gsf, unsigned long gpf)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn print_numa_stats(m: *mut seq_file, node: c_int, tsf: c_ulong, tpf: c_ulong, gsf: c_ulong, gpf: c_ulong) {
     SEQ_printf(m, "numa_faults node=%d ", node);
     SEQ_printf(m, "task_private=%lu task_shared=%lu ", tpf, tsf);
     SEQ_printf(m, "group_private=%lu group_shared=%lu\n", gpf, gsf);
@@ -1218,11 +1347,10 @@ unsafe extern "C" fn sched_debug_stop(file: *mut seq_file, data: *mut c_void) {
 
 #[no_mangle]
 unsafe extern "C" fn sched_show_numa(p: *mut task_struct, m: *mut seq_file) {
-    static void sched_show_numa(struct task_struct *p, struct seq_file *m)
-    {
 
-    if (p.mm)
+    if (p.mm) {
     P(mm.numa_scan_seq);
+    }
     P(numa_pages_migrated);
     P(numa_preferred_nid);
     P(total_numa_faults);
@@ -1231,10 +1359,9 @@ unsafe extern "C" fn sched_show_numa(p: *mut task_struct, m: *mut seq_file) {
     show_numa_stats(p, m);
 
     }
-    void proc_sched_show_task(struct task_struct *p, struct pid_namespace *ns,
-    struct seq_file *m)
-    {
-    unsigned long nr_switches;
+#[no_mangle]
+pub unsafe extern "C" fn proc_sched_show_task(p: *mut task_struct, ns: *mut pid_namespace, m: *mut seq_file) {
+    let mut nr_switches = 0;
     SEQ_printf(m, "%s (%d, #threads: %d)\n", p.comm, task_pid_nr_ns(p, ns),
     get_nr_threads(p));
     SEQ_printf(m,
@@ -1274,10 +1401,12 @@ unsafe extern "C" fn sched_show_numa(p: *mut task_struct, m: *mut seq_file) {
     P_SCHEDSTAT(nr_wakeups_affine);
     P_SCHEDSTAT(nr_wakeups_affine_attempts);
     avg_atom = p.se.sum_exec_runtime;
-    if (nr_switches)
+    if (nr_switches) {
     avg_atom = div64_ul(avg_atom, nr_switches);
-    else
+    }
+    else {
     avg_atom = -1LL;
+    }
     avg_per_cpu = p.se.sum_exec_runtime;
     if (p.se.nr_migrations) {
     avg_per_cpu = div64_u64(avg_per_cpu,
@@ -1321,7 +1450,7 @@ unsafe extern "C" fn sched_show_numa(p: *mut task_struct, m: *mut seq_file) {
     __PS("ext.enabled", task_on_scx(p));
 
     {
-    let mut this_cpu: c_uint = raw_smp_processor_id();
+pub static mut this_cpu: c_uint = 0;
     u64 t0, t1;
     t0 = cpu_clock(this_cpu);
     t1 = cpu_clock(this_cpu);
@@ -1331,20 +1460,17 @@ unsafe extern "C" fn sched_show_numa(p: *mut task_struct, m: *mut seq_file) {
     }
 #[no_mangle]
 pub unsafe extern "C" fn proc_sched_set_task(p: *mut task_struct) {
-    void proc_sched_set_task(struct task_struct *p)
-    {
 
-    memset(&p.stats, 0, sizeof(p.stats));
+    memset(&p.stats, 0, sizeof!(p.stats));
 
     }
 #[no_mangle]
 pub unsafe extern "C" fn resched_latency_warn(cpu: c_int, latency: u64) {
-    void resched_latency_warn(int cpu, u64 latency)
-    {
-    static DEFINE_RATELIMIT_STATE(latency_check_ratelimit, 60 * 60 * HZ, 1);
-    if (likely(!__ratelimit(&latency_check_ratelimit)))
+pub static mut latency_check_ratelimit: usize = 0;
+    if (likely(!__ratelimit(&latency_check_ratelimit))) {
     return;
-    pr_err("sched: CPU %d need_resched set for > %llu ns (%d ticks) without schedule\n",
+    }
+    pr_err!("sched: CPU %d need_resched set for > %llu ns (%d ticks) without schedule\n",
     cpu, latency, cpu_rq(cpu).ticks_without_resched);
     dump_stack();
     }

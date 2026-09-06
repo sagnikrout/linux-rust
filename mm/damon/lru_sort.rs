@@ -34,6 +34,256 @@ pub type time64_t = i64;
 pub type atomic_t = core::sync::atomic::AtomicI32;
 pub type atomic64_t = core::sync::atomic::AtomicI64;
 // ---------------------------------------
+// === KERNEL_MACRO_PRELUDE_START ===
+macro_rules! EXPORT_SYMBOL { ($($tt:tt)*) => {}; }
+macro_rules! EXPORT_SYMBOL_GPL { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_LICENSE { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_AUTHOR { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_DESCRIPTION { ($($tt:tt)*) => {}; }
+macro_rules! MODULE_ALIAS { ($($tt:tt)*) => {}; }
+macro_rules! module_init { ($($tt:tt)*) => {}; }
+macro_rules! module_exit { ($($tt:tt)*) => {}; }
+macro_rules! early_initcall { ($($tt:tt)*) => {}; }
+macro_rules! core_initcall { ($($tt:tt)*) => {}; }
+macro_rules! postcore_initcall { ($($tt:tt)*) => {}; }
+macro_rules! arch_initcall { ($($tt:tt)*) => {}; }
+macro_rules! subsys_initcall { ($($tt:tt)*) => {}; }
+macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
+macro_rules! device_initcall { ($($tt:tt)*) => {}; }
+macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! __setup { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE { ($($tt:tt)*) => {}; }
+macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
+macro_rules! IS_ENABLED { ($($tt:tt)*) => { false }; }
+macro_rules! DECLARE_WORK { ($($tt:tt)*) => {}; }
+macro_rules! DEFINE_WAKE_Q { ($($tt:tt)*) => {}; }
+macro_rules! LLIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! LIST_HEAD { ($($tt:tt)*) => {}; }
+macro_rules! SET_UID { ($($tt:tt)*) => {}; }
+macro_rules! SET_GID { ($($tt:tt)*) => {}; }
+macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
+macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
+macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_info { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn { ($($tt:tt)*) => {}; }
+macro_rules! pr_err { ($($tt:tt)*) => {}; }
+macro_rules! pr_debug { ($($tt:tt)*) => {}; }
+macro_rules! early_param { ($($tt:tt)*) => {}; }
+macro_rules! BUILD_BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! WARN_ON { ($($tt:tt)*) => { false }; }
+macro_rules! WARN_ON_ONCE { ($($tt:tt)*) => { false }; }
+macro_rules! BUG_ON { ($($tt:tt)*) => {}; }
+macro_rules! BUG { () => {}; }
+macro_rules! IS_ERR { ($($tt:tt)*) => { false }; }
+macro_rules! PTR_ERR { ($($tt:tt)*) => { 0 }; }
+macro_rules! ERR_PTR { ($($tt:tt)*) => { core::ptr::null_mut() }; }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct seq_file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct task_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct user_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct cred { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct file { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct inode { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct notifier_block { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct raw_notifier_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_header { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_root { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ctl_table_set { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct proc_dir_entry { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_namespace { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct compat_ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_params { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_queue { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_msgseg { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_sender { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct msg_receiver { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sembuf { pub sem_num: u16, pub sem_op: i16, pub sem_flg: i16 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct sem_array { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shmid_kernel { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct shm_file_data { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct wake_q_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct work_struct { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct llist_head { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct list_head { pub _opaque: [u8; 0] }
+
+pub type pid_type = c_int;
+pub type cpu_pm_event = c_int;
+pub type spinlock_t = u32;
+pub type raw_spinlock_t = u32;
+pub type kernel_cap_t = u64;
+pub type cap_user_header_t = *mut c_void;
+pub type cap_user_data_t = *mut c_void;
+pub type async_cookie_t = u64;
+pub type atomic_long_t = core::sync::atomic::AtomicI64;
+pub type key_t = i32;
+pub type kuid_t = u32;
+pub type kgid_t = u32;
+pub type int = c_int;
+pub type uint = c_uint;
+pub type ulong = c_ulong;
+pub type long = c_long;
+pub type void = c_void;
+
+// Standard Linux Error Codes
+pub const EPERM: c_int = 1;
+pub const ENOENT: c_int = 2;
+pub const ESRCH: c_int = 3;
+pub const EINTR: c_int = 4;
+pub const EIO: c_int = 5;
+pub const ENXIO: c_int = 6;
+pub const E2BIG: c_int = 7;
+pub const ENOEXEC: c_int = 8;
+pub const EBADF: c_int = 9;
+pub const ECHILD: c_int = 10;
+pub const EAGAIN: c_int = 11;
+pub const ENOMEM: c_int = 12;
+pub const EACCES: c_int = 13;
+pub const EFAULT: c_int = 14;
+pub const EBUSY: c_int = 16;
+pub const EEXIST: c_int = 17;
+pub const EXDEV: c_int = 18;
+pub const ENODEV: c_int = 19;
+pub const ENOTDIR: c_int = 20;
+pub const EISDIR: c_int = 21;
+pub const EINVAL: c_int = 22;
+pub const ENFILE: c_int = 23;
+pub const EMFILE: c_int = 24;
+pub const ENOSPC: c_int = 28;
+pub const EROFS: c_int = 30;
+pub const EIDRM: c_int = 43;
+pub const EOPNOTSUPP: c_int = 95;
+pub const ENOTSUPP: c_int = 524;
+
+// Standard Memory Constants
+pub const PAGE_SHIFT: usize = 12;
+pub const PAGE_SIZE: usize = 1 << PAGE_SHIFT;
+pub const GFP_KERNEL: c_uint = 0xcc0;
+pub const GFP_ATOMIC: c_uint = 0x80000;
+pub const GFP_NOWAIT: c_uint = 0;
+
+// Standard Core Primitives
+extern "C" {
+    pub static current: *mut task_struct;
+    pub fn printk(fmt: *const c_char, ...) -> c_int;
+    pub fn rcu_read_lock();
+    pub fn rcu_read_unlock();
+    pub fn copy_from_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn copy_to_user(to: *mut c_void, from: *const c_void, n: usize) -> bool;
+    pub fn kmalloc(size: usize, flags: c_uint) -> *mut c_void;
+    pub fn kfree(ptr: *mut c_void);
+}
+// === KERNEL_MACRO_PRELUDE_END ===
 
 
 // SPDX-License-Identifier: GPL-2.0
@@ -50,7 +300,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // watermarks-based activation condition.  Refer to below descriptions for the
 // watermarks parameter for this.
 //
-    static bool enabled __read_mostly;
+    static bool enabled ;
 //
 // Make DAMON_LRU_SORT reads the input parameters again, except ``enabled``.
 //
@@ -60,7 +310,7 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // done, this parameter is set as ``N``.  If invalid parameters are found while
 // the re-reading, DAMON_LRU_SORT will be disabled.
 //
-    static bool commit_inputs __read_mostly;
+    static bool commit_inputs ;
 //
 // Desired active to [in]active memory ratio in bp (1/10,000).
 //
@@ -72,8 +322,8 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 // Disabled by default.
 //
-    static unsigned long active_mem_bp __read_mostly;
-    module_param(active_mem_bp, ulong, 0600);
+    static unsigned long active_mem_bp ;
+    module_param!(active_mem_bp, ulong, 0600);
 //
 // Auto-tune monitoring intervals.
 //
@@ -85,8 +335,8 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 // Disabled by default.
 //
-    static bool autotune_monitoring_intervals __read_mostly;
-    module_param(autotune_monitoring_intervals, bool, 0600);
+    static bool autotune_monitoring_intervals ;
+    module_param!(autotune_monitoring_intervals, bool, 0600);
 //
 // Filter [non-]young pages accordingly for LRU [de]prioritizations.
 //
@@ -99,8 +349,8 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 //
 // Disabled by default.
 //
-    static bool filter_young_pages __read_mostly;
-    module_param(filter_young_pages, bool, 0600);
+    static bool filter_young_pages ;
+    module_param!(filter_young_pages, bool, 0600);
 //
 // Access frequency threshold for hot memory regions identification in permil.
 //
@@ -109,8 +359,8 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // LRU list, so that it could not be reclaimed under memory pressure.  50% by
 // default.
 //
-    let mut hot_thres_access_freq: static unsigned long = 500;
-    module_param(hot_thres_access_freq, ulong, 0600);
+pub static mut hot_thres_access_freq: unsigned long = 500;
+    module_param!(hot_thres_access_freq, ulong, 0600);
 //
 // Time threshold for cold memory regions identification in microseconds.
 //
@@ -119,35 +369,14 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // that it could be reclaimed first under memory pressure.  120 seconds by
 // default.
 //
-    let mut __read_mostly: static unsigned long cold_min_age = 120000000;
-    module_param(cold_min_age, ulong, 0600);
-    static struct damos_quota damon_lru_sort_quota = {
-// Use up to 10 ms per 1 sec, by default
-    .ms = 10,
-    .sz = 0,
-    .reset_interval = 1000,
-// Within the quota, mark hotter regions accessed first.
-    .weight_sz = 0,
-    .weight_nr_accesses = 1,
-    .weight_age = 1,
-    };
-    DEFINE_DAMON_MODULES_DAMOS_TIME_QUOTA(damon_lru_sort_quota);
-    static struct damos_watermarks damon_lru_sort_wmarks = {
-    .metric = DAMOS_WMARK_FREE_MEM_RATE,
-    .interval = 5000000,	/* 5 seconds */
-    .high = 200,		/* 20 percent */
-    .mid = 150,		/* 15 percent */
-    .low = 50,		/* 5 percent */
-    };
-    DEFINE_DAMON_MODULES_WMARKS_PARAMS(damon_lru_sort_wmarks);
-    static struct damon_attrs damon_lru_sort_mon_attrs = {
-    .sample_interval = 5000,	/* 5 ms */
-    .aggr_interval = 100000,	/* 100 ms */
-    .ops_update_interval = 0,
-    .min_nr_regions = 10,
-    .max_nr_regions = 1000,
-    };
-    DEFINE_DAMON_MODULES_MON_ATTRS_PARAMS(damon_lru_sort_mon_attrs);
+pub static mut : unsigned long cold_min_age = 120000000;
+    module_param!(cold_min_age, ulong, 0600);
+pub static mut damos_quota: usize = 0;
+pub static mut damon_lru_sort_quota: usize = 0;
+pub static mut damos_watermarks: usize = 0;
+pub static mut damon_lru_sort_wmarks: usize = 0;
+pub static mut damon_attrs: usize = 0;
+pub static mut damon_lru_sort_mon_attrs: usize = 0;
 //
 // Start of the target memory region in physical address.
 //
@@ -155,8 +384,8 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // against.  By default, the system's entire physical memory is used as the
 // region.
 //
-    static unsigned long monitor_region_start __read_mostly;
-    module_param(monitor_region_start, ulong, 0600);
+    static unsigned long monitor_region_start ;
+    module_param!(monitor_region_start, ulong, 0600);
 //
 // End of the target memory region in physical address.
 //
@@ -164,39 +393,24 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
 // against.  By default, the system's entire physical memory is used as the
 // region.
 //
-    static unsigned long monitor_region_end __read_mostly;
-    module_param(monitor_region_end, ulong, 0600);
+    static unsigned long monitor_region_end ;
+    module_param!(monitor_region_end, ulong, 0600);
 //
 // Scale factor for DAMON_LRU_SORT to ops address conversion.
 //
 // This parameter must not be set to 0.
 //
-    let mut __read_mostly: static unsigned long addr_unit = 1;
-    static struct damos_stat damon_lru_sort_hot_stat;
-    DEFINE_DAMON_MODULES_DAMOS_STATS_PARAMS(damon_lru_sort_hot_stat,
-    lru_sort_tried_hot_regions, lru_sorted_hot_regions,
-    hot_quota_exceeds);
-    static struct damos_stat damon_lru_sort_cold_stat;
-    DEFINE_DAMON_MODULES_DAMOS_STATS_PARAMS(damon_lru_sort_cold_stat,
-    lru_sort_tried_cold_regions, lru_sorted_cold_regions,
-    cold_quota_exceeds);
-    static struct damos_access_pattern damon_lru_sort_stub_pattern = {
-// Find regions having PAGE_SIZE or larger size
-    .min_sz_region = PAGE_SIZE,
-    .max_sz_region = ULONG_MAX,
-// no matter its access frequency
-    .min_nr_accesses = 0,
-    .max_nr_accesses = UINT_MAX,
-// no matter its age
-    .min_age_region = 0,
-    .max_age_region = UINT_MAX,
-    };
-    static struct damon_ctx *ctx;
-    static struct damon_target *target;
-    static struct damos *damon_lru_sort_new_scheme(
-    struct damos_access_pattern *pattern, enum damos_action action)
-    {
-    let mut quota: damos_quota = damon_lru_sort_quota;
+pub static mut : unsigned long addr_unit = 1;
+pub static mut damon_lru_sort_hot_stat: usize = 0;
+pub static mut damon_lru_sort_hot_stat: usize = 0;
+pub static mut damon_lru_sort_cold_stat: usize = 0;
+pub static mut damon_lru_sort_cold_stat: usize = 0;
+pub static mut damos_access_pattern: usize = 0;
+pub static mut ctx: *mut c_void = core::ptr::null_mut();
+pub static mut target: *mut c_void = core::ptr::null_mut();
+#[no_mangle]
+pub unsafe extern "C" fn damon_lru_sort_new_scheme(pattern: *mut damos_access_pattern, action: damos_action) -> *mut c_void {
+pub static mut quota: damos_quota = 0;
 // Use half of total quota for hot/cold pages sorting
     quota.ms = quota.ms / 2;
     return damon_new_scheme(
@@ -213,76 +427,82 @@ pub type atomic64_t = core::sync::atomic::AtomicI64;
     NUMA_NO_NODE);
     }
 // Create a DAMON-based operation scheme for hot memory regions
-    static struct damos *damon_lru_sort_new_hot_scheme(unsigned int hot_thres)
-    {
-    let mut pattern: damos_access_pattern = damon_lru_sort_stub_pattern;
+#[no_mangle]
+pub unsafe extern "C" fn damon_lru_sort_new_hot_scheme(hot_thres: c_uint) -> *mut c_void {
+pub static mut pattern: damos_access_pattern = 0;
     pattern.min_nr_accesses = hot_thres;
     return damon_lru_sort_new_scheme(&pattern, DAMOS_LRU_PRIO);
     }
 // Create a DAMON-based operation scheme for cold memory regions
-    static struct damos *damon_lru_sort_new_cold_scheme(unsigned int cold_thres)
-    {
-    let mut pattern: damos_access_pattern = damon_lru_sort_stub_pattern;
+#[no_mangle]
+pub unsafe extern "C" fn damon_lru_sort_new_cold_scheme(cold_thres: c_uint) -> *mut c_void {
+pub static mut pattern: damos_access_pattern = 0;
     pattern.max_nr_accesses = 0;
     pattern.min_age_region = cold_thres;
     return damon_lru_sort_new_scheme(&pattern, DAMOS_LRU_DEPRIO);
     }
-    static int damon_lru_sort_add_quota_goals(struct damos *hot_scheme,
-    struct damos *cold_scheme)
-    {
-    struct damos_quota_goal *goal;
-    if (!active_mem_bp)
+#[no_mangle]
+pub unsafe extern "C" fn damon_lru_sort_add_quota_goals(hot_scheme: *mut damos, cold_scheme: *mut damos) -> c_int {
+pub static mut goal: *mut c_void = core::ptr::null_mut();
+    if (!active_mem_bp) {
     return 0;
-    if (10000 < active_mem_bp)
+    }
+    if (10000 < active_mem_bp) {
     return -EINVAL;
+    }
     goal = damos_new_quota_goal(DAMOS_QUOTA_ACTIVE_MEM_BP, active_mem_bp);
-    if (!goal)
+    if (!goal) {
     return -ENOMEM;
+    }
     damos_add_quota_goal(&hot_scheme.quota, goal);
 // aim 0.2 % goal conflict, to keep little ping pong
     goal = damos_new_quota_goal(DAMOS_QUOTA_INACTIVE_MEM_BP,
     10000 - active_mem_bp + 2);
-    if (!goal)
+    if (!goal) {
     return -ENOMEM;
+    }
     damos_add_quota_goal(&cold_scheme.quota, goal);
     return 0;
     }
-    static int damon_lru_sort_add_filters(struct damos *hot_scheme,
-    struct damos *cold_scheme)
-    {
-    struct damos_filter *filter;
-    if (!filter_young_pages)
+#[no_mangle]
+pub unsafe extern "C" fn damon_lru_sort_add_filters(hot_scheme: *mut damos, cold_scheme: *mut damos) -> c_int {
+pub static mut filter: *mut c_void = core::ptr::null_mut();
+    if (!filter_young_pages) {
     return 0;
+    }
 // disallow prioritizing not-young pages
     filter = damos_new_filter(DAMOS_FILTER_TYPE_YOUNG, false, false);
-    if (!filter)
+    if (!filter) {
     return -ENOMEM;
+    }
     damos_add_filter(hot_scheme, filter);
 // disabllow de-prioritizing young pages
     filter = damos_new_filter(DAMOS_FILTER_TYPE_YOUNG, true, false);
-    if (!filter)
+    if (!filter) {
     return -ENOMEM;
+    }
     damos_add_filter(cold_scheme, filter);
     return 0;
     }
 #[no_mangle]
 unsafe extern "C" fn damon_lru_sort_apply_parameters() -> c_int {
-    static int damon_lru_sort_apply_parameters(void)
-    {
-    struct damon_ctx *param_ctx;
-    struct damon_target *param_target;
-    struct damon_attrs attrs;
-    struct damos *hot_scheme, *cold_scheme;
-    unsigned int hot_thres, cold_thres;
-    int err;
+pub static mut param_ctx: *mut c_void = core::ptr::null_mut();
+pub static mut param_target: *mut c_void = core::ptr::null_mut();
+pub static mut attrs: usize = 0;
+    let mut hot_scheme = core::ptr::null_mut();
+    let mut cold_scheme = core::ptr::null_mut();
+    let mut hot_thres = 0;
+    let mut cold_thres = 0;
+    let mut err = 0;
     err = damon_modules_new_paddr_ctx_target(&param_ctx, &param_target);
-    if (err)
+    if (err) {
     return err;
+    }
     param_ctx.addr_unit = addr_unit;
     param_ctx.min_region_sz = max(DAMON_MIN_REGION_SZ / addr_unit, 1);
     if (!damon_lru_sort_mon_attrs.sample_interval) {
     err = -EINVAL;
-    goto out;
+// goto;
     }
     attrs = damon_lru_sort_mon_attrs;
     if (autotune_monitoring_intervals) {
@@ -294,222 +514,211 @@ unsafe extern "C" fn damon_lru_sort_apply_parameters() -> c_int {
     attrs.intervals_goal.max_sample_us = 10 * 1000 * 1000;
     }
     err = damon_set_attrs(param_ctx, &attrs);
-    if (err)
-    goto out;
+    if (err) {
+// goto;
+    }
     err = -ENOMEM;
     hot_thres = damon_nr_samples_per_aggr(&attrs) *
     hot_thres_access_freq / 1000;
     hot_scheme = damon_lru_sort_new_hot_scheme(hot_thres);
-    if (!hot_scheme)
-    goto out;
+    if (!hot_scheme) {
+// goto;
+    }
     cold_thres = cold_min_age / attrs.aggr_interval;
     cold_scheme = damon_lru_sort_new_cold_scheme(cold_thres);
     if (!cold_scheme) {
     damon_destroy_scheme(hot_scheme);
-    goto out;
+// goto;
     }
     damon_set_schemes(param_ctx, &hot_scheme, 1);
     damon_add_scheme(param_ctx, cold_scheme);
     err = damon_lru_sort_add_quota_goals(hot_scheme, cold_scheme);
-    if (err)
-    goto out;
+    if (err) {
+// goto;
+    }
     err = damon_lru_sort_add_filters(hot_scheme, cold_scheme);
-    if (err)
-    goto out;
+    if (err) {
+// goto;
+    }
     err = damon_set_region_system_rams_default(param_target,
     &monitor_region_start,
     &monitor_region_end,
     param_ctx.addr_unit,
     param_ctx.min_region_sz);
-    if (err)
-    goto out;
+    if (err) {
+// goto;
+    }
     err = damon_commit_ctx(ctx, param_ctx);
-    out:
+// label;
     damon_destroy_ctx(param_ctx);
     return err;
     }
 #[no_mangle]
 unsafe extern "C" fn damon_lru_sort_commit_inputs_fn(arg: *mut c_void) -> c_int {
-    static int damon_lru_sort_commit_inputs_fn(void *arg)
-    {
     return damon_lru_sort_apply_parameters();
     }
     static bool damon_lru_sort_damon_has_started;
-    static int damon_lru_sort_commit_inputs_store(const char *val,
-    const struct kernel_param *kp)
-    {
-    bool commit_inputs_request;
-    int err;
-    struct damon_call_control control = {
-    .fn = damon_lru_sort_commit_inputs_fn,
-    };
+#[no_mangle]
+pub unsafe extern "C" fn damon_lru_sort_commit_inputs_store(val: *mut c_char, kp: *mut kernel_param) -> c_int {
+    let mut commit_inputs_request = 0;
+    let mut err = 0;
+pub static mut damon_call_control: usize = 0;
     if (!val) {
     commit_inputs_request = true;
     } else {
     err = kstrtobool(val, &commit_inputs_request);
-    if (err)
+    if (err) {
     return err;
     }
-    if (!commit_inputs_request)
+    }
+    if (!commit_inputs_request) {
     return 0;
+    }
 // Skip damon_call() if ctx has not successfully started.
-    if (!damon_lru_sort_damon_has_started)
+    if (!damon_lru_sort_damon_has_started) {
     return -EINVAL;
+    }
     err = damon_call(ctx, &control);
     return err ? err : control.return_code;
     }
-    static const struct kernel_param_ops commit_inputs_param_ops = {
-    .flags = KERNEL_PARAM_OPS_FL_NOARG,
-    .set = damon_lru_sort_commit_inputs_store,
-    .get = param_get_bool,
-    };
-    module_param_cb(commit_inputs, &commit_inputs_param_ops, &commit_inputs, 0600);
+pub static mut kernel_param_ops: usize = 0;
+    module_param_cb!(commit_inputs, &commit_inputs_param_ops, &commit_inputs, 0600);
 #[no_mangle]
 unsafe extern "C" fn damon_lru_sort_damon_call_fn(arg: *mut c_void) -> c_int {
-    static int damon_lru_sort_damon_call_fn(void *arg)
-    {
-    struct damon_ctx *c = arg;
-    struct damos *s;
+    let mut c = arg;
+pub static mut s: *mut c_void = core::ptr::null_mut();
 // update the stats parameter
     damon_for_each_scheme(s, c) {
-    if (s.action == DAMOS_LRU_PRIO)
+    if (s.action == DAMOS_LRU_PRIO) {
     damon_lru_sort_hot_stat = s.stat;
-#[no_mangle]
-pub unsafe extern "C" fn if(DAMOS_LRU_DEPRIO: s->action ==) -> else {
-    else if (s.action == DAMOS_LRU_DEPRIO)
+    }
+
+    else if (s.action == DAMOS_LRU_DEPRIO) {
     damon_lru_sort_cold_stat = s.stat;
+    }
     }
     return 0;
     }
-    static struct damon_call_control call_control = {
-    .fn = damon_lru_sort_damon_call_fn,
-    .repeat = true,
-    };
+pub static mut damon_call_control: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn damon_lru_sort_turn(on: bool) -> c_int {
-    static int damon_lru_sort_turn(bool on)
-    {
-    int err;
+    let mut err = 0;
     if (!on) {
     damon_stop(&ctx, 1);
     return 0;
     }
     err = damon_lru_sort_apply_parameters();
-    if (err)
+    if (err) {
     return err;
+    }
     err = damon_start(&ctx, 1, true);
-    if (err)
+    if (err) {
     return err;
-    if (!damon_lru_sort_damon_has_started)
+    }
+    if (!damon_lru_sort_damon_has_started) {
     damon_lru_sort_damon_has_started = true;
+    }
     return damon_call(ctx, &call_control);
     }
-    static int damon_lru_sort_addr_unit_store(const char *val,
-    const struct kernel_param *kp)
-    {
-    unsigned long input_addr_unit;
-    let mut err: c_int = kstrtoul(val, 0, &input_addr_unit);
-    if (err)
+#[no_mangle]
+pub unsafe extern "C" fn damon_lru_sort_addr_unit_store(val: *mut c_char, kp: *mut kernel_param) -> c_int {
+    let mut input_addr_unit = 0;
+pub static mut err: c_int = 0;
+    if (err) {
     return err;
-    if (!input_addr_unit)
+    }
+    if (!input_addr_unit) {
     return -EINVAL;
+    }
     addr_unit = input_addr_unit;
     return 0;
     }
-    static const struct kernel_param_ops addr_unit_param_ops = {
-    .set = damon_lru_sort_addr_unit_store,
-    .get = param_get_ulong,
-    };
-    module_param_cb(addr_unit, &addr_unit_param_ops, &addr_unit, 0600);
+pub static mut kernel_param_ops: usize = 0;
+    module_param_cb!(addr_unit, &addr_unit_param_ops, &addr_unit, 0600);
     MODULE_PARM_DESC(addr_unit,
     "Scale factor for DAMON_LRU_SORT to ops address conversion (default: 1)");
 #[no_mangle]
 unsafe extern "C" fn damon_lru_sort_enabled() -> bool {
-    static bool damon_lru_sort_enabled(void)
-    {
-    if (!ctx)
+    if (!ctx) {
     return false;
+    }
     return damon_is_running(ctx);
     }
-    static int damon_lru_sort_enabled_store(const char *val,
-    const struct kernel_param *kp)
-    {
-    int err;
+#[no_mangle]
+pub unsafe extern "C" fn damon_lru_sort_enabled_store(val: *mut c_char, kp: *mut kernel_param) -> c_int {
+    let mut err = 0;
     err = kstrtobool(val, &enabled);
-    if (err)
+    if (err) {
     return err;
-    if (damon_lru_sort_enabled() == enabled)
+    }
+    if (damon_lru_sort_enabled() == enabled) {
     return 0;
+    }
 // Called before init function.  The function will handle this.
-    if (!damon_initialized())
+    if (!damon_initialized()) {
     return 0;
+    }
 // damon_modules_new_paddr_ctx_target() in the init function failed.
-    if (!ctx)
+    if (!ctx) {
     return -ENOMEM;
+    }
     return damon_lru_sort_turn(enabled);
     }
-    static int damon_lru_sort_enabled_load(char *buffer,
-    const struct kernel_param *kp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn damon_lru_sort_enabled_load(buffer: *mut c_char, kp: *mut kernel_param) -> c_int {
     return sprintf(buffer, "%c\n", damon_lru_sort_enabled() ? 'Y' : 'N');
     }
-    static const struct kernel_param_ops enabled_param_ops = {
-    .set = damon_lru_sort_enabled_store,
-    .get = damon_lru_sort_enabled_load,
-    };
-    module_param_cb(enabled, &enabled_param_ops, &enabled, 0600);
+pub static mut kernel_param_ops: usize = 0;
+    module_param_cb!(enabled, &enabled_param_ops, &enabled, 0600);
     MODULE_PARM_DESC(enabled,
     "Enable or disable DAMON_LRU_SORT (default: disabled)");
-    static int damon_lru_sort_kdamond_pid_store(const char *val,
-    const struct kernel_param *kp)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn damon_lru_sort_kdamond_pid_store(val: *mut c_char, kp: *mut kernel_param) -> c_int {
 //
 // kdamond_pid is read-only, but kernel command line could write it.
 // Do nothing here.
 //
     return 0;
     }
-    static int damon_lru_sort_kdamond_pid_load(char *buffer,
-    const struct kernel_param *kp)
-    {
-    let mut kdamond_pid: c_int = -1;
+#[no_mangle]
+pub unsafe extern "C" fn damon_lru_sort_kdamond_pid_load(buffer: *mut c_char, kp: *mut kernel_param) -> c_int {
+pub static mut kdamond_pid: c_int = 0;
     if (ctx) {
     kdamond_pid = damon_kdamond_pid(ctx);
-    if (kdamond_pid < 0)
+    if (kdamond_pid < 0) {
     kdamond_pid = -1;
+    }
     }
     return sprintf(buffer, "%d\n", kdamond_pid);
     }
-    static const struct kernel_param_ops kdamond_pid_param_ops = {
-    .set = damon_lru_sort_kdamond_pid_store,
-    .get = damon_lru_sort_kdamond_pid_load,
-    };
+pub static mut kernel_param_ops: usize = 0;
 //
 // PID of the DAMON thread
 //
 // If DAMON_LRU_SORT is enabled, this becomes the PID of the worker thread.
 // Else, -1.
 //
-    module_param_cb(kdamond_pid, &kdamond_pid_param_ops, core::ptr::null_mut(), 0400);
+    module_param_cb!(kdamond_pid, &kdamond_pid_param_ops, core::ptr::null_mut(), 0400);
 #[no_mangle]
-unsafe extern "C" fn damon_lru_sort_init() -> int __init {
-    static int __init damon_lru_sort_init(void)
-    {
-    int err;
+unsafe extern "C" fn damon_lru_sort_init() -> c_int {
+    let mut err = 0;
     if (!damon_initialized()) {
     err = -ENOMEM;
-    goto out;
+// goto;
     }
     err = damon_modules_new_paddr_ctx_target(&ctx, &target);
-    if (err)
-    goto out;
+    if (err) {
+// goto;
+    }
     call_control.data = ctx;
 // 'enabled' has set before this function, probably via command line
-    if (enabled)
+    if (enabled) {
     err = damon_lru_sort_turn(true);
-    out:
-    if (err && enabled)
+    }
+// label;
+    if (err && enabled) {
     enabled = false;
+    }
     return err;
     }
-    module_init(damon_lru_sort_init);
+    module_init!(damon_lru_sort_init);
